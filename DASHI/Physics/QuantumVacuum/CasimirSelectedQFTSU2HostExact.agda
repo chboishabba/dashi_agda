@@ -7,10 +7,20 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as QFT
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact as Pinned
+import DASHI.Physics.YangMills.YangMillsCompactSimpleGroupPromotionExact as Promotion
 import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport as Gauge
 import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1
 import DASHI.Physics.Closure.YMSprint105CompactSimpleGroupParameterTable as Table
+
+------------------------------------------------------------------------
+-- SELECTED QFT GROUP -> SOURCE-BACKED A1 / CONCRETE SU(2) HOST
+--
+-- Primary classification is now the compact-simple promotion owner's Dynkin
+-- family, not the finite Sprint105 display table.  Sprint105 SU2 remains only a
+-- secondary consistency tag.  The selected abstract QFT token must also map to
+-- the literal unit-quaternion GroupStructure used by the gauge stack.
+------------------------------------------------------------------------
 
 record CasimirSelectedQFTSU2Host
     (U : Weld.UnifiedCandidate)
@@ -19,6 +29,16 @@ record CasimirSelectedQFTSU2Host
     selectedGroupIsCompactSimple :
       QFT.IsCompactSimple (Weld.qftSemantics U) group
 
+    compactSimpleDataForGroup :
+      QFT.CompactSimpleGroup (Weld.qftCarriers U) →
+      Promotion.CompactSimpleYMData
+        (QFT.CompactSimpleGroup (Weld.qftCarriers U))
+
+    selectedGroupDynkinFamilyIsA1 :
+      Promotion.family (compactSimpleDataForGroup group)
+      ≡ Promotion.familyA 1
+
+    -- Secondary table cross-check only; not the primary classification proof.
     parameterTableClassifier :
       QFT.CompactSimpleGroup (Weld.qftCarriers U) →
       Table.CompactSimpleGroupEntry
@@ -37,9 +57,8 @@ record CasimirSelectedQFTSU2Host
 open CasimirSelectedQFTSU2Host public
 
 ------------------------------------------------------------------------
--- A pinned physical YM construction already owns compact simplicity for every
--- group token on the same qftCarriers/qftSemantics.  Therefore no second group
--- theorem is needed on that route: only supplying/attaching the pinned object.
+-- Pinned physical YM already supplies IsCompactSimple on the SAME carrier and
+-- semantics, so that leaf is compiler output whenever the pinned object exists.
 ------------------------------------------------------------------------
 
 compactSimpleFromPinnedYMConstruction :
@@ -60,18 +79,26 @@ hostFromPinnedYMConstruction :
         {C = Weld.qftCarriers U}
         (Weld.qftSemantics U))
     (group : QFT.CompactSimpleGroup (Weld.qftCarriers U))
-    (classifier :
+    (compactData :
       QFT.CompactSimpleGroup (Weld.qftCarriers U) →
-      Table.CompactSimpleGroupEntry) →
+      Promotion.CompactSimpleYMData
+        (QFT.CompactSimpleGroup (Weld.qftCarriers U))) →
+  Promotion.family (compactData group) ≡ Promotion.familyA 1 →
+  (classifier :
+    QFT.CompactSimpleGroup (Weld.qftCarriers U) →
+    Table.CompactSimpleGroupEntry) →
   classifier group ≡ Table.SU2 →
   (interpretation :
     QFT.CompactSimpleGroup (Weld.qftCarriers U) → Gauge.GroupStructure) →
   interpretation group ≡ SU2.su2QuaternionGroup →
   String →
   CasimirSelectedQFTSU2Host U group
-hostFromPinnedYMConstruction pinned group classifier classified interpretation interpreted reading = record
+hostFromPinnedYMConstruction
+    pinned group compactData familyA1 classifier classified interpretation interpreted reading = record
   { selectedGroupIsCompactSimple =
       compactSimpleFromPinnedYMConstruction pinned group
+  ; compactSimpleDataForGroup = compactData
+  ; selectedGroupDynkinFamilyIsA1 = familyA1
   ; parameterTableClassifier = classifier
   ; selectedGroupClassifiesAsSU2 = classified
   ; groupStructureInterpretation = interpretation
@@ -132,11 +159,14 @@ record CasimirSelectedQFTSU2HostBoundary : Set where
   field
     concreteQuaternionSU2GroupOwned : Bool
     sprint105SU2EntryOwned : Bool
+    compactSimpleYMDataInterfaceReused : Bool
     selectedQFTSU2HostInterfaceOwned : Bool
     literalU1InclusionCompilerOwnedAfterHost : Bool
     pinnedYMConstructionSuppliesCompactSimpleCompiler : Bool
+    sprint105ClassificationIsSecondaryConsistencyTag : Bool
 
     selectedGroupCompactSimpleWitnessPaid : Bool
+    selectedGroupDynkinA1ClassificationPaid : Bool
     selectedGroupClassifiedAsSprint105SU2Paid : Bool
     selectedGroupInterpretedAsQuaternionSU2Paid : Bool
     brownMaclayStressIdentifiedByHostAlone : Bool
@@ -147,9 +177,9 @@ canonicalCasimirSelectedQFTSU2HostBoundary :
   CasimirSelectedQFTSU2HostBoundary
 canonicalCasimirSelectedQFTSU2HostBoundary =
   casimir-selected-qft-su2-host-boundary
-    true true true true true
-    false false false false
+    true true true true true true true
+    false false false false false
 
 casimirSelectedQFTSU2HostReading : String
 casimirSelectedQFTSU2HostReading =
-  "The repository owns the literal unit-quaternion SU(2), the Sprint105 SU2 table entry, and a compiler taking compact simplicity directly from any pinned physical YM construction on the same qftCarriers/qftSemantics. Thus a pinned route needs no second compact-simple theorem. For a generic UnifiedCandidate without such a pinned object, the selected token still requires its IsCompactSimple witness, Sprint105 SU2 classification, and GroupStructure identification with su2QuaternionGroup. After those receipts the existing U1 torus inclusion transports into the selected carrier; none of this identifies Brown-Maclay stress."
+  "The selected Casimir QFT host now uses the source-backed compact-simple promotion vocabulary: the exact selected token must be IsCompactSimple, carry CompactSimpleYMData whose Dynkin family is A1, and interpret to the repository's literal unit-quaternion su2QuaternionGroup. Sprint105 SU2 is retained only as a secondary finite-table consistency tag. A pinned physical YM construction on the same qftCarriers/qftSemantics supplies IsCompactSimple without a second theorem. After the host receipts, the existing U1 torus inclusion transports into the selected carrier. None of this identifies Brown-Maclay stress."
