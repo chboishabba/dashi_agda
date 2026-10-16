@@ -54,12 +54,12 @@ leanEisensteinUniversalReceipt =
     "chboishabba/dashi_lean4"
     "PR #69"
     "agent/eisenstein-lattice-counting-maxcut-20261012"
-    "2c4ae66609ac8b9f37615e33f2fef382c1ea55a4"
+    "c9c0b2718c08aa9294e6b8872c2e0e8a0a3bbc0f"
     "Integration/EisensteinGeometricRepresentationFormulaExact.lean"
     "geometricNormShell_eq_signedDivisorShell"
     "Integration/EisensteinDirichletSeriesExact.lean"
     "eisensteinGeometricLSeries_factorization"
-    "SOURCE-WRITTEN / MATHLIB-API-AUDITED / KERNEL-PENDING"
+    "SOURCE-WRITTEN / PINNED-MATHLIB-4.28-API-AUDITED / KERNEL-PENDING"
     Attribution.leanFormalReconstruction
 
 leanEisensteinClaimOrigin : Attribution.ClaimOrigin
@@ -92,11 +92,6 @@ externalScientificSourceAcquiredByThisReceipt = false
 
 ------------------------------------------------------------------------
 -- Typed donor bundle.
---
--- This is the lawful cross-pollination edge: Agda contributes its own exact
--- proof that the mod-3 phase observer is sufficient for the chi_-3 consumer;
--- the Lean theorem source is carried beside it as provenance.  Neither side is
--- silently re-labelled as proof authority for the other prover.
 ------------------------------------------------------------------------
 
 record EisensteinObserverLeanDonorBundle : Set where
@@ -120,12 +115,6 @@ canonicalObserverLeanDonorBundle =
 
 ------------------------------------------------------------------------
 -- Cross-pollination boundary.
---
--- The local Agda C3/chi_-3 observer theorems may be combined with this receipt
--- in roadmaps, provenance tables and downstream experiment design.  The
--- receipt cannot itself supply the missing Agda universal coefficient or
--- analytic theorem and cannot transfer authorship/authority from an external
--- source because no external source is acquired here.
 ------------------------------------------------------------------------
 
 record EisensteinCrossProverAttributionBoundary : Set where
