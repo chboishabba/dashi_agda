@@ -32,3 +32,8 @@ privacyAndOpenKnowledgeRemainDistinct :
   Subject.openKnowledgeCancelsIndividualPrivacy
     Subject.canonicalOccupyDeclaredRealizedBoundary ≡ false
 privacyAndOpenKnowledgeRemainDistinct = refl
+
+declaredPurposeCannotCertifyRealizedControl :
+  Subject.DeclaredPurposeDeterminesRealizedControl → ⊥
+declaredPurposeCannotCertifyRealizedControl =
+  Subject.declaredPurposeDoesNotDetermineRealizedControl
