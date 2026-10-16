@@ -2,9 +2,11 @@ module DASHI.Cognition.VilyaGodsEyeAntiPanopticonWeldExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.List using (List)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Interop.GodsEyeViewProofCarryingWorldOntologyExact as GEV
 import DASHI.Interop.GodsEyeViewWorldOntologyCrossDomainExact as GEVCross
+import DASHI.Interop.SensibLawOntologyTopology as Sensib
 import DASHI.Cognition.ProtectiveSpatialIntelligenceExact as Protective
 import DASHI.Cognition.VilyaProtectionSourceAtlasExact as Vilya
 
@@ -13,8 +15,8 @@ import DASHI.Cognition.VilyaProtectionSourceAtlasExact as Vilya
 --
 -- Shared spatial primitives do not imply identical systems or authority.
 -- God's Eye View supplies the generic proof-carrying observation/resolution/
--- presentation seam.  VILYA supplies a vendor-described protective-operations
--- workflow over spatial data.  The same resolved world state can feed both a
+-- presentation seam. VILYA supplies a vendor-described protective-operations
+-- workflow over spatial data. The same resolved world state can feed both a
 -- public/exploratory presentation and a protective consumer without authority
 -- transferring between them.
 ------------------------------------------------------------------------
@@ -25,10 +27,10 @@ record SharedSpatialProtectiveProjection : Set where
     worldState : GEV.ResolvedWorldState
     presentation : GEV.PresentationContext
     protectiveConsumer : Protective.ProtectiveConsumer
-    protectiveDecisionReference : Agda.Builtin.String.String
-    sameObjectReference : Agda.Builtin.String.String
-    purposeBindingReference : Agda.Builtin.String.String
-    authorityReference : Agda.Builtin.String.String
+    protectiveDecisionReference : String
+    sameObjectReference : String
+    purposeBindingReference : String
+    authorityReference : String
 
 open SharedSpatialProtectiveProjection public
 
@@ -50,7 +52,7 @@ sharedObservationCreatesProtectiveDecision = false
 privacyAndNonDominationRemainProtected : Bool
 privacyAndNonDominationRemainProtected = true
 
-protectedInterestAnchor : List DASHI.Interop.SensibLawOntologyTopology.InterestModality
+protectedInterestAnchor : List Sensib.InterestModality
 protectedInterestAnchor = GEVCross.antiPanopticonProtectedInterests
 
 antiPanopticonAnchor : GEV.AntiPanopticonBoundary
