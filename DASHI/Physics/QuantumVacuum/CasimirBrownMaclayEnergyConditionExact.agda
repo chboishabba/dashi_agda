@@ -4,7 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _+_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Foundations.RecursiveRadixHypervoxel as HyperBase
@@ -16,23 +16,6 @@ import DASHI.Physics.QuantumVacuum.CasimirSO3StressContractionMaxCutExact as Str
 
 ------------------------------------------------------------------------
 -- BROWN-MACLAY PARALLEL-PLATE STRESS -> LOCAL ENERGY CONDITIONS
---
--- Work in units of the positive Casimir scale
---
---   C = pi^2 hbar c / (720 d^4) > 0.
---
--- The renormalized ideal-plate stress fingerprint is represented by
---
---   rho = -C
---   p_t1 = +C
---   p_t2 = +C
---   p_n  = -3C.
---
--- The spatial part therefore lives literally on the SO(3)-style 3x3 operator
--- sheet introduced by CasimirSO3StressContractionMaxCutExact.  Normalization
--- by C is deliberate: this file proves the exact coefficient/sign geometry;
--- a same-object map into an arbitrary CasimirScalarModel remains an explicit
--- weld below rather than being manufactured by rational arithmetic.
 ------------------------------------------------------------------------
 
 normalizedEnergyDensity : ℚ
@@ -113,6 +96,17 @@ activeStressCombination =
       (Stress.plateTangentTwoAxis , Stress.plateTangentTwoAxis)
   + Stress.normalPressure brownMaclayNormalizedSpatialStress
 
+-- Four-dimensional electromagnetic stress is traceless.  In the chosen
+-- orthonormal sign convention this is -rho + p1 + p2 + pn = 0.
+lorentzTraceCombination : ℚ
+lorentzTraceCombination =
+  (- normalizedEnergyDensity)
+  + brownMaclayNormalizedSpatialStress
+      (Stress.plateTangentOneAxis , Stress.plateTangentOneAxis)
+  + brownMaclayNormalizedSpatialStress
+      (Stress.plateTangentTwoAxis , Stress.plateTangentTwoAxis)
+  + Stress.normalPressure brownMaclayNormalizedSpatialStress
+
 tangentNullCombinationIsZero :
   tangentNullCombination ≡ 0ℚ
 tangentNullCombinationIsZero = solve []
@@ -125,13 +119,34 @@ activeStressCombinationIsNegativeTwo :
   activeStressCombination ≡ - (Int.+ 2 / 1)
 activeStressCombinationIsNegativeTwo = solve []
 
+lorentzTraceCombinationIsZero :
+  lorentzTraceCombination ≡ 0ℚ
+lorentzTraceCombinationIsZero = solve []
+
+------------------------------------------------------------------------
+-- Arbitrary null direction.
+--
+-- Let normalWeight denote n_perp^2 for a unit spatial direction.  The two
+-- tangential squared components then sum to 1-normalWeight.  Substitution into
+-- rho + sum_i p_i n_i^2 gives exactly -4 normalWeight on the normalized scale.
+-- Positivity/nonzero of normalWeight is an order-theoretic input, not inferred
+-- from bare rational algebra here.
+------------------------------------------------------------------------
+
+normalizedNullContractionFromNormalWeight : ℚ → ℚ
+normalizedNullContractionFromNormalWeight normalWeight =
+  normalizedEnergyDensity
+  + (1ℚ + (- normalWeight))
+  + ((- (Int.+ 3 / 1)) * normalWeight)
+
+nullContractionIsNegativeFourTimesNormalWeight :
+  (normalWeight : ℚ) →
+  normalizedNullContractionFromNormalWeight normalWeight
+  ≡ - ((Int.+ 4 / 1) * normalWeight)
+nullContractionIsNegativeFourTimesNormalWeight normalWeight = solve []
+
 ------------------------------------------------------------------------
 -- Direction-sensitive condition verdicts.
---
--- Tangential null directions saturate NEC.  A null direction normal to the
--- plates has rho+p_n = -4C < 0, so the pointwise NEC fails.  The static
--- observer already sees rho=-C<0, so WEC fails.  The active SEC combination
--- is -2C, and DEC fails already because rho is negative (also |p_n|>|rho|).
 ------------------------------------------------------------------------
 
 data LocalEnergyConditionVerdict : Set where
@@ -170,10 +185,6 @@ tangentTwoNECSaturationWitness = refl
 
 ------------------------------------------------------------------------
 -- Source-bounded reconstruction receipt.
---
--- Brown-Maclay remains the source authority for the finite ideal conducting-
--- plate vacuum stress.  DASHI owns this normalized coefficient realization
--- and its operator-sheet / energy-condition composition.
 ------------------------------------------------------------------------
 
 record BrownMaclayNormalizedStressWitness : Set₁ where
@@ -221,11 +232,6 @@ canonicalBrownMaclayNormalizedStressWitness =
 
 ------------------------------------------------------------------------
 -- Same-object bridge to the existing arbitrary Casimir scalar kernel.
---
--- The normalized rational fingerprint is not silently identified with an
--- arbitrary Scalar.  A concrete instance must provide the scale map and prove
--- that the normal-normal component is exactly the kernel pressure at the same
--- separation on the same ideal-plate system.
 ------------------------------------------------------------------------
 
 record BrownMaclayKernelPressureWeld
@@ -291,6 +297,8 @@ record CasimirBrownMaclayEnergyConditionBoundary : Set where
     normalPressureMinusThreeOwned : Bool
     tangentialPressurePlusOneOwned : Bool
     offDiagonalNormalTractionZeroOwned : Bool
+    lorentzTracelessnessOwned : Bool
+    arbitraryNullDirectionFormulaOwned : Bool
     tangentialNECSaturationOwned : Bool
     normalNECViolationOwned : Bool
     WECViolationOwned : Bool
@@ -310,9 +318,9 @@ canonicalCasimirBrownMaclayEnergyConditionBoundary :
   CasimirBrownMaclayEnergyConditionBoundary
 canonicalCasimirBrownMaclayEnergyConditionBoundary =
   casimir-brown-maclay-energy-condition-boundary
-    true true true true true true true true true true true
+    true true true true true true true true true true true true true
     false false false false false
 
 casimirBrownMaclayEnergyConditionReading : String
 casimirBrownMaclayEnergyConditionReading =
-  "On the normalized positive Casimir scale C, the ideal parallel-plate vacuum has rho=-C, tangential pressures +C,+C and normal pressure -3C on the same 3x3 spatial operator sheet. Tangential null directions saturate NEC while the normal null direction gives rho+p_n=-4C and violates NEC. WEC, SEC and DEC also fail locally. These QFT stress statements do not by themselves settle ANEC, construct macroscopic exotic matter, measure gravitational backreaction, or imply null defocusing without a same-object semiclassical Einstein-equation weld."
+  "On the normalized positive Casimir scale C, the ideal parallel-plate vacuum has rho=-C, tangential pressures +C,+C and normal pressure -3C on the same 3x3 spatial operator sheet. The four-dimensional stress is traceless. For an arbitrary null direction with normal squared weight w, T(k,k)=-4 C w: exactly parallel directions saturate NEC, while any positive normal component violates it. WEC, SEC and DEC also fail locally. These QFT stress statements do not by themselves settle ANEC, construct macroscopic exotic matter, measure gravitational backreaction, or imply null defocusing without a same-object semiclassical Einstein-equation weld."
