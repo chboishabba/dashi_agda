@@ -58,6 +58,12 @@ record Boundary : Set where
     nextResidual : String
 open Boundary public
 
+-- Historical downstream name retained as an alias.  Its semantics are now
+-- explicitly the ACTUAL Monster instantiation of the generic classifier,
+-- never the availability of the generic classification theorem itself.
+actualSimpleTypeClassifier : Boundary → Bool
+actualSimpleTypeClassifier = actualSimpleTypeClassifierInstantiation
+
 canonicalBoundary : Boundary
 canonicalBoundary = boundary
   (Classifier.nonzeroSimpleSourceClassificationWritten Classifier.canonicalBoundary)
