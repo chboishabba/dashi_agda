@@ -79,11 +79,41 @@ sourceSeedNonIdentifiabilityClosed :
   ≡ true
 sourceSeedNonIdentifiabilityClosed = refl
 
+rigorousZeroAttributionClosed :
+  Status.rigorousZeroSourceAttributionClosed
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+rigorousZeroAttributionClosed = refl
+
+exactDyadicCheckerClosed :
+  Status.exactDyadicPhaseCellCheckerClosed
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+exactDyadicCheckerClosed = refl
+
+flintProducerSourceWritten :
+  Status.flintArbProducerImplementationSourceWritten
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+flintProducerSourceWritten = refl
+
+dyadicBundleVerifierSourceWritten :
+  Status.exactDyadicBundleVerifierSourceWritten
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+dyadicBundleVerifierSourceWritten = refl
+
 concreteBishopGlobalPhaseStillOpen :
   Status.concreteBishopGlobalLogPiPhaseClosed
     Status.canonicalClimbingGymTerminalStatus
   ≡ false
 concreteBishopGlobalPhaseStillOpen = refl
+
+rigorousBundleExecutionStillOpen :
+  Status.rigorousExternalBundleExecuted
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ false
+rigorousBundleExecutionStillOpen = refl
 
 actualZeroPhaseCellsStillOpen :
   Status.actualZeroPhaseCellCertificatesClosed
