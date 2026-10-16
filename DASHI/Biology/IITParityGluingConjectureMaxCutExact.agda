@@ -109,6 +109,8 @@ record ParityGluingConjectureStatus : Set where
     pairwiseBoundaryTriadicNonDescentKernelPaid : Bool
     faceAwareTriadicTPMPairKernelPaid : Bool
     faceAwareSystemPhiDiscriminationNumericallyPaid : Bool
+    faceAwareScalarPhiSeparatesSomeStates : Bool
+    faceAwareScalarPhiStillCollidesSomeStates : Bool
     parityAloneCarriesInputOrder : Bool
     antisymmetricF3ChannelCarriesSwapOrientation : Bool
     torqueSiblingAuthorityImported : Bool
@@ -132,7 +134,7 @@ canonicalParityGluingConjectureStatus =
   parity-gluing-conjecture-status
     true true false
     true true true true false
-    true true true false true false
+    true true true true true false true false
     true true true
     false true false true true false false
 
