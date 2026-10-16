@@ -54,13 +54,15 @@ import DASHI.Reasoning.TrialecticRelationalSiteTransportEnrichmentFrontierExact
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
 import DASHI.Reasoning.Trialectic369FullBoundaryNerveComparisonExact
 
--- Current post-ledger wave-phase promotion surface.
+-- Current post-ledger wave-phase / hyperdescent promotion surface.
 import DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact
 import DASHI.Reasoning.TrialecticWavePhaseEffectiveStackDescentExact
 import DASHI.Reasoning.TrialecticWavePhasePseudofunctorCoherenceExact
 import DASHI.Reasoning.TrialecticWavePhaseTwoCellCocycleExact
 import DASHI.Reasoning.TrialecticPolicyIndexedAllDepthIterationExact
 import DASHI.Reasoning.TrialecticWavePhaseHigherStackExact
+import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafExact
+import DASHI.Reasoning.TrialecticFiniteHypercover369CechCrosswalkExact
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionExact
 import DASHI.Reasoning.TrialecticHypersheafHypercoverFrontierExact
 
