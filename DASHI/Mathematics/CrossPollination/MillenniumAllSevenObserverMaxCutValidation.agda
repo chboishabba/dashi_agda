@@ -128,6 +128,22 @@ leanInertLocalEulerShapeRecorded :
   LeanInert.inertLocalEulerShapeObserved ≡ true
 leanInertLocalEulerShapeRecorded = refl
 
+leanCubicJacobiCompilerRecorded :
+  LeanInert.genericCubicJacobiCompilerObserved ≡ true
+leanCubicJacobiCompilerRecorded = refl
+
+leanOrderThreeMulCharExistenceRecorded :
+  LeanInert.mathlibOrderThreeMulCharExistenceObserved ≡ true
+leanOrderThreeMulCharExistenceRecorded = refl
+
+cubeFibreCertificateStillSeparate :
+  LeanInert.canonicalCubeFibreCharacterCertificateObserved ≡ false
+cubeFibreCertificateStillSeparate = refl
+
+jacobiEisensteinEvaluationStillSeparate :
+  LeanInert.jacobiSumEisensteinPrimeEvaluationObserved ≡ false
+jacobiEisensteinEvaluationStillSeparate = refl
+
 leanInertReceiptDoesNotCollapseLocalFactors :
   LeanInert.dirichletLocalFactorIdentifiedWithEllipticEulerFactor ≡ false
 leanInertReceiptDoesNotCollapseLocalFactors = refl
