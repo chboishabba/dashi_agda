@@ -38,6 +38,10 @@ effectiveStack = refl
 higherStack : Max.certifiedHigherStackPaid boundary ≡ true
 higherStack = refl
 
+siteNerveDepthTwo :
+  Max.siteNondegenerateNerveDimensionAtMostTwoPaid boundary ≡ true
+siteNerveDepthTwo = refl
+
 finiteHyperdescent : Max.finiteOneTruncatedHyperdescentPaid boundary ≡ true
 finiteHyperdescent = refl
 
