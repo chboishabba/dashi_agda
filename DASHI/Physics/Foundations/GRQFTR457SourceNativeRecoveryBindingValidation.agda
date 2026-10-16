@@ -12,6 +12,10 @@ noSecondContinuumConstruction :
   B.additionalContinuumConstructionNeededForGRQFTRecoverQFT ≡ false
 noSecondContinuumConstruction = refl
 
-legacyProjectionStillLive :
-  B.legacyProjectionCompatibilityStillRequired ≡ true
-legacyProjectionStillLive = refl
+formalLegacyProjectionRetired :
+  B.legacyProjectionCompatibilityStillRequired ≡ false
+formalLegacyProjectionRetired = refl
+
+r457SameObjectAttachmentStillLive :
+  B.r457LegacyRecoverySameObjectAttachmentStillRequired ≡ true
+r457SameObjectAttachmentStillLive = refl
