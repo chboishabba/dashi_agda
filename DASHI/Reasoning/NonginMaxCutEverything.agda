@@ -36,8 +36,19 @@ import DASHI.Reasoning.TrialecticPolicyIndexedAllDepthIterationExact
 import DASHI.Reasoning.TrialecticWavePhaseHigherStackExact
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionExact
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionValidation
+
+-- The exact relational topology has only maximal covers plus the distinguished
+-- triadic global cover; non-global pullbacks are maximal.  This pays finite
+-- one-truncated hyperdescent and keeps arbitrary infinity-hypercovers separate.
+import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafExact
+import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafValidation
 import DASHI.Reasoning.TrialecticHypersheafHypercoverFrontierExact
 import DASHI.Reasoning.TrialecticHypersheafHypercoverFrontierValidation
+
+-- Independent Base369 6/12/8 Cech geometry is cross-pollinated as a second
+-- finite 2-skeleton descent donor without erasing the full-boundary rank no-go.
+import DASHI.Reasoning.TrialecticFiniteHypercover369CechCrosswalkExact
+import DASHI.Reasoning.TrialecticFiniteHypercover369CechCrosswalkValidation
 
 -- Historical compatibility/status surfaces remain imported; the additive
 -- post-ledger max-cut above records which old false flags are superseded.
