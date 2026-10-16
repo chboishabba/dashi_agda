@@ -57,11 +57,11 @@ iaccExposureArtifact =
 sameObjectBH4Experiment : AcquisitionTarget
 sameObjectBH4Experiment =
   acquisitionTarget
-    "same-object BH4 allocation experiment"
-    "very high: directly targets the live central causal edge"
-    "not an attribution target; closes scientific mechanism debt"
-    "primary interventional experiment with calibrated molecular/cellular/circuit readouts"
-    "high experimental cost"
+    "multi-branch same-object BH4 allocation experiment beyond paid hepatic PAH-iNOS precedent"
+    "very high: directly targets the remaining live central causal edge after Pastor et al. 1996 partially pays a same-system two-branch discriminator"
+    "not an attribution target; closes scientific mechanism debt only if it extends beyond the paid rat-hepatic context"
+    "primary interventional experiment with calibrated BH4/BH2 + NAD(P)H + PAH/TH/TPH/NOS/AGMO molecular/cellular/circuit readouts"
+    "high experimental cost; historical hepatic PAH-iNOS precedent reduces design uncertainty but not the remaining acquisition burden"
     Discovery.experimentalDesign
     false refl
 
@@ -86,6 +86,12 @@ record ParetoAcquisitionFrontier : Set where
     frontierRankIsTruthRankIsFalse : frontierRankIsTruthRank ≡ false
     selectionCreatesEvidence : Bool
     selectionCreatesEvidenceIsFalse : selectionCreatesEvidence ≡ false
+    historicalDirectDiscriminatorChangesTargetDefinition : Bool
+    historicalDirectDiscriminatorChangesTargetDefinitionIsTrue :
+      historicalDirectDiscriminatorChangesTargetDefinition ≡ true
+    historicalDirectDiscriminatorClosesWholeTarget : Bool
+    historicalDirectDiscriminatorClosesWholeTargetIsFalse :
+      historicalDirectDiscriminatorClosesWholeTarget ≡ false
     reading : String
 
 open ParetoAcquisitionFrontier public
@@ -102,4 +108,6 @@ canonicalKitzerowAcquisitionFrontier =
     false refl
     false refl
     false refl
-    "Pareto frontier preserves evidentiary impact, provenance closure, primary authority and acquisition cost as distinct dimensions; selection is a work queue, not a truth or plagiarism ranking."
+    true refl
+    false refl
+    "Pareto frontier preserves evidentiary impact, provenance closure, primary authority and acquisition cost as distinct dimensions. Pastor et al. 1996 changes the scientific target from generic same-object BH4 competition to cross-context multi-branch allocation; selection remains a work queue, not a truth or plagiarism ranking."
