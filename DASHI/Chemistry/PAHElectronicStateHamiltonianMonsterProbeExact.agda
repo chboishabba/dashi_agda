@@ -5,7 +5,6 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Chemistry.LineageAcquiredPrimaryEvidenceExact as Evidence
 import DASHI.Chemistry.PAHMechanismStatePromotionExact as PAH
 
@@ -13,26 +12,13 @@ import DASHI.Chemistry.PAHMechanismStatePromotionExact as PAH
 -- PAH ELECTRONIC-STATE / HAMILTONIAN / MONSTER PROMOTION PROBE
 --
 -- This deliberately mirrors the successful NH3 escalation, but does not copy
--- its conclusions.  We construct a literal finite catalytic-state carrier and
--- ask what the PAH sources actually pay.  They pay source-bounded structural
+-- its conclusions. We construct a literal finite catalytic-state carrier and
+-- ask what the PAH sources actually pay. They pay source-bounded structural
 -- Fe(II) states, a source-bounded high-spin Fe(IV) catalytic intermediate in a
--- bacterial PheH experiment, and kinetic transitions.  They do not currently
+-- bacterial PheH experiment, and kinetic transitions. They do not currently
 -- pay a numerical human-PAH electronic Hamiltonian, wavefunction coefficients,
 -- or a same-object C3 coordinate from which a Monster-3B action could follow.
 ------------------------------------------------------------------------
-
-panayEtAl2011Ferryl : Source.AttributedSource
-panayEtAl2011Ferryl =
-  Source.mkDOISource
-    "Aram Joel Panay; Michael Lee; Carsten Krebs; J. Martin Bollinger Jr.; Paul F. Fitzpatrick"
-    "Evidence for a High-Spin Fe(IV) Species in the Catalytic Cycle of a Bacterial Phenylalanine Hydroxylase"
-    "Biochemistry 50(11):1928-1933"
-    "2011"
-    "10.1021/bi1019868"
-    "https://pmc.ncbi.nlm.nih.gov/articles/PMC3059337/"
-    Source.academicArticleSource
-    "Primary rapid-freeze-quench/Mossbauer study of Chromobacterium violaceum PheH. Pays a kinetically competent high-spin Fe(IV) intermediate and source-conditioned rate constants; it does not establish that the identical numerical electronic state occurs in full-length human PAH or provide a released Hamiltonian/eigenvector."
-    Source.publicAttribution
 
 data PAHCatalyticElectronicState : Set where
   humanFeIIBH4StructuralState : PAHCatalyticElectronicState
@@ -71,7 +57,7 @@ bacterialFerrylReceipt =
     bacterialHighSpinFeIVHydroxylatingState
     "Chromobacterium violaceum phenylalanine hydroxylase"
     "high-spin Fe(IV), assigned as Fe(IV)=O by spectroscopic/kinetic comparison"
-    "Panay et al. 2011 DOI 10.1021/bi1019868; rapid-freeze-quench 57Fe Mossbauer"
+    "LineageAcquiredPrimaryEvidenceExact.pahFerrylIntermediate2011; rapid-freeze-quench 57Fe Mossbauer"
     "Fe(IV) formation 19 mM^-1 s^-1; hydroxylation 42 s^-1; product release 6 s^-1 at 5 C in the reported model"
     false
     true refl
@@ -113,7 +99,7 @@ canonicalPAHFiniteHamiltonianProbe =
 -- MONSTER / C3 PROMOTION ATTEMPT
 --
 -- Full-length hPAH:BH4 PDB 6HYC is an author-defined homotetramer with D2
--- global assembly symmetry.  That does not provide the same-object C3 phase
+-- global assembly symmetry. That does not provide the same-object C3 phase
 -- coordinate that made the NH3 <-> Monster-3B probe meaningful.
 ------------------------------------------------------------------------
 
