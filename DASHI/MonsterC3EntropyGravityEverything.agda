@@ -16,8 +16,6 @@ import DASHI.Reasoning.Trialectic369Selected3BSemanticProjectedCompletionExact
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
 import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 
--- Published chemistry sources, author-released artifacts, and DASHI
--- reconstructions remain distinct attribution objects.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
 import DASHI.Physics.Chemistry.Atomic369Kernel6HeisenbergBridgeExact
 import DASHI.Physics.Chemistry.Atomic369Kernel6HeisenbergBridgeValidation
@@ -63,6 +61,8 @@ import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact
 import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleValidation
 import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleExact
 import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleValidation
+import DASHI.Physics.Closure.MonsterC3Native369ConsumerSufficiencyExact
+import DASHI.Physics.Closure.MonsterC3Native369ConsumerSufficiencyValidation
 import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact
 import DASHI.Unified.GRQuantumCrossPollinationBridge
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations
