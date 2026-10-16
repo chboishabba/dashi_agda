@@ -8,16 +8,17 @@ import DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftIngestionStatusExact a
 import DASHI.Physics.Closure.BothwellYe2022AuthorCorrespondenceReceiptExact as Correspondence
 import DASHI.Physics.Closure.ZhengKolkowitz2023PublicDataReceiptExact as Zheng
 import DASHI.Physics.Closure.CGPM2026OpticalSecondRelativisticBridgeExact as CGPM
+import DASHI.Physics.Closure.OpticalClockChronometricGeodesySOTA2026Exact as SOTA
 import DASHI.Physics.Closure.QuantumClockMetricResponseDiscriminatorCompilerExact as Metric
 
 ------------------------------------------------------------------------
 -- CURRENT REVISABLE STATUS — 2026-10-16
 --
--- This is a later status event, not a rewrite of the earlier acquisition
--- packet or ingestion snapshot. It composes the provider-backed send receipt,
--- an adjacent public-data experiment suitable for ingestion rehearsal, the
--- newly adopted CGPM metrology-policy state, and the metric-clock consumer
--- boundary while leaving unavailable Bothwell/Ye evidence fail-closed.
+-- This later status event does not rewrite earlier receipts. It composes the
+-- provider-backed send event, adjacent public-data experiment, current CGPM
+-- policy state, orthogonal chronometric-geodesy/deployment/transfer SOTA, and
+-- the metric-clock consumer boundary while unavailable Bothwell/Ye evidence
+-- remains fail-closed.
 ------------------------------------------------------------------------
 
 record EmpiricalRedshiftCurrentStatus : Set₁ where
@@ -36,6 +37,10 @@ record EmpiricalRedshiftCurrentStatus : Set₁ where
     metrologyPolicy : CGPM.CGPM2026OpticalSecondRelativisticBridge
     metrologyPolicyIsCanonical :
       metrologyPolicy ≡ CGPM.canonicalCGPM2026OpticalSecondRelativisticBridge
+
+    sotaAtlas : SOTA.OpticalClockChronometricGeodesySOTAAtlas
+    sotaAtlasIsCanonical :
+      sotaAtlas ≡ SOTA.canonicalOpticalClockChronometricGeodesySOTAAtlas
 
     metricDiscriminator : Metric.MetricClockDiscriminatorBoundary
     metricDiscriminatorIsCanonical :
@@ -56,6 +61,9 @@ record EmpiricalRedshiftCurrentStatus : Set₁ where
     cgpm2026MetrologyAuthorityAvailable : Bool
     cgpm2026MetrologyAuthorityAvailableIsTrue :
       cgpm2026MetrologyAuthorityAvailable ≡ true
+
+    orthogonalSOTAAtlasAvailable : Bool
+    orthogonalSOTAAtlasAvailableIsTrue : orthogonalSOTAAtlasAvailable ≡ true
 
     bothwellYeRawReplayCompleted : Bool
     bothwellYeRawReplayCompletedIsFalse : bothwellYeRawReplayCompleted ≡ false
@@ -83,6 +91,8 @@ canonicalEmpiricalRedshiftCurrentStatus = record
   ; adjacentPublicDataIsCanonical = refl
   ; metrologyPolicy = CGPM.canonicalCGPM2026OpticalSecondRelativisticBridge
   ; metrologyPolicyIsCanonical = refl
+  ; sotaAtlas = SOTA.canonicalOpticalClockChronometricGeodesySOTAAtlas
+  ; sotaAtlasIsCanonical = refl
   ; metricDiscriminator = Metric.canonicalMetricClockDiscriminatorBoundary
   ; metricDiscriminatorIsCanonical = refl
   ; authorRequestSent = true
@@ -95,6 +105,8 @@ canonicalEmpiricalRedshiftCurrentStatus = record
   ; zhengReplayCompletedIsFalse = refl
   ; cgpm2026MetrologyAuthorityAvailable = true
   ; cgpm2026MetrologyAuthorityAvailableIsTrue = refl
+  ; orthogonalSOTAAtlasAvailable = true
+  ; orthogonalSOTAAtlasAvailableIsTrue = refl
   ; bothwellYeRawReplayCompleted = false
   ; bothwellYeRawReplayCompletedIsFalse = refl
   ; bothwellYeAuthorEvidenceAcquired = false
@@ -105,14 +117,16 @@ canonicalEmpiricalRedshiftCurrentStatus = record
       "wait for, ingest and checksum any Bothwell/Ye author-supplied dataset/code response; sent correspondence alone is not evidence receipt"
       ∷ "materialise the Zheng/Kolkowitz Zenodo CSV bytes and verify their source-published MD5 values before declaring an executable public-data replay"
       ∷ "replay a declared published observable from those public bytes and keep that rehearsal separate from Bothwell/Ye evidence"
-      ∷ "for future optical-clock SI comparisons, attach comparison-specific transfer and geopotential receipts rather than treating CGPM policy as a calibration"
+      ∷ "for future optical-clock SI comparisons, attach comparison-specific frequency-transfer and geopotential receipts rather than treating CGPM policy as calibration"
+      ∷ "keep deployment robustness, transfer reproducibility, clock uncertainty, geopotential knowledge and geodetic height uncertainty as separate evidence coordinates"
       ∷ "for candidate metric-response models, require same-object experimental evidence before any mechanism-level promotion"
       ∷ []
   ; reading =
       "The Bothwell/Ye acquisition lane has moved from request construction to provider-verified outbound correspondence while reply/data/code state remains false."
       ∷ "Zheng/Kolkowitz 2023 supplies an independently attributed public process-data manifest that can exercise the ingestion architecture without filling missing Bothwell/Ye rows."
-      ∷ "CGPM 2026 now provides current institutional authority for continued work toward a future optical definition of the second; DASHI does not attribute its relativistic crosswalk to the CGPM."
-      ∷ "The productive GR/QFT handoff is an observable compiler: candidate metric/potential prediction to clock residual, with ordinary gravity as a reference and model validation still evidence-gated."
+      ∷ "CGPM 2026 supplies current institutional authority for continued work toward a future optical definition of the second; DASHI's relativistic crosswalk remains repository-owned."
+      ∷ "Grotti 2024, Hilton 2025 and Vishwakarma et al. 2026 occupy distinct long-baseline-geodesy, deployed-robustness and transportable-comparison coordinates rather than one scalar maturity grade."
+      ∷ "The productive GR/QFT handoff is an observable compiler: candidate metric/potential prediction to clock residual, with ordinary gravity as reference and model validation still evidence-gated."
       ∷ []
   }
 
