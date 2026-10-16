@@ -6,6 +6,7 @@ module DASHI.Moonshine.MonsterClimbingGymEverything where
 
 import DASHI.Foundations.NatRadialTreeCodecExact
 import DASHI.Analysis.BishopRadixCellQuantisationExact
+import DASHI.Analysis.DyadicPhaseCellCertificateExact
 import DASHI.Moonshine.OggSSPSignedRadixClimbingGymExact
 import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact
 import DASHI.Moonshine.OggSSPSignedRadixInverseLimitExact
@@ -16,6 +17,8 @@ import DASHI.Moonshine.OggSSPClimbingGymExactHoleAnalyticBridge
 import DASHI.Moonshine.OggSSPClimbingGymBishopPhaseCellExact
 import DASHI.Moonshine.OggSSPClimbingGymPhaseControlExact
 import DASHI.Moonshine.OggSSPClimbingGymSourceAttributionExact
+import DASHI.Moonshine.OggSSPClimbingGymRigorousSourceAttributionExact
+import DASHI.Moonshine.OggSSPClimbingGymRigorousCertificateExact
 import DASHI.Moonshine.OggSSPClimbingGymConsumerDescentExact
 import DASHI.Analysis.RiemannSSP15ProducerMarkedClimbingGymBridgeExact
 import DASHI.Moonshine.OggSSPClimbingGymMaxCutValidation
@@ -26,5 +29,6 @@ import DASHI.Moonshine.OggSSPClimbingGymExactHoleRadixValidation
 import DASHI.Moonshine.OggSSPClimbingGymBishopCellValidation
 import DASHI.Moonshine.OggSSPClimbingGymExactHoleAnalyticBridgeValidation
 import DASHI.Moonshine.OggSSPClimbingGymBishopPhaseCellValidation
+import DASHI.Moonshine.OggSSPClimbingGymRigorousCertificateValidation
 import DASHI.Moonshine.OggSSPClimbingGymTerminalStatusExact
 import DASHI.Moonshine.OggSSPClimbingGymTerminalStatusValidation
