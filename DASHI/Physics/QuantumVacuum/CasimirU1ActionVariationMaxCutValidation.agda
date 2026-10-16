@@ -20,13 +20,21 @@ independentKillingDecompositionNotRequiredRegression :
   M.independentKillingDecompositionRequired M.canonicalCasimirU1ActionVariationBoundary ≡ false
 independentKillingDecompositionNotRequiredRegression = refl
 
+curvatureReductionCompilerConsumedRegression :
+  M.cartesianCurvatureReductionCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
+curvatureReductionCompilerConsumedRegression = refl
+
+secondAbelianBracketProofNotRequiredRegression :
+  M.secondAbelianBracketProofRequired M.canonicalCasimirU1ActionVariationBoundary ≡ false
+secondAbelianBracketProofNotRequiredRegression = refl
+
 physicalCouplingNormalizationSeparatedRegression :
   M.physicalChargeCouplingNormalizationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
 physicalCouplingNormalizationSeparatedRegression = refl
 
-fieldStrengthRestrictionSeparatedRegression :
-  M.fieldStrengthRestrictionSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
-fieldStrengthRestrictionSeparatedRegression = refl
+fieldStrengthAttachmentSeparatedRegression :
+  M.nondegenerateCurvatureAttachmentSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+fieldStrengthAttachmentSeparatedRegression = refl
 
 actionEqualitySeparatedRegression :
   M.actionEqualitySeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
@@ -45,7 +53,7 @@ firstActionBlockerRegression :
 firstActionBlockerRegression = refl
 
 secondActionBlockerRegression :
-  M.secondActionRestrictionBlocker ≡ M.missingSameRestrictedFieldStrengthIdentification
+  M.secondActionRestrictionBlocker ≡ M.missingSameObjectNondegenerateCurvatureFormulaAttachment
 secondActionBlockerRegression = refl
 
 thirdActionBlockerRegression :
