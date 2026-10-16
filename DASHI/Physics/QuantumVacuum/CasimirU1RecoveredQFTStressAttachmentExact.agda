@@ -28,8 +28,6 @@ record CasimirU1RecoveredQFTStressAttachment
 
     selectedGroup : QFT.CompactSimpleGroup (Weld.qftCarriers U)
 
-    -- Concrete host receipt: the selected abstract group token must classify as
-    -- Sprint105 SU2 and interpret to the literal unit-quaternion SU(2) group.
     selectedSU2Host :
       SU2Host.CasimirSelectedQFTSU2Host U selectedGroup
 
@@ -37,9 +35,6 @@ record CasimirU1RecoveredQFTStressAttachment
       Cut.CMP119RationalStressComponentEvaluator
         (QFT.StressTensor (Weld.qftCarriers U))
 
-    -- The physical stress equality is paid on the same actual selected QFT
-    -- stress object.  Coordinate symmetry reduces the independent equations
-    -- from sixteen to ten; the lower triangle is compiler output.
     symmetricBrownMaclayPayment :
       Reduction.CasimirBrownMaclaySymmetricTenComponentPayment
         stressEvaluator
@@ -53,10 +48,6 @@ record CasimirU1RecoveredQFTStressAttachment
     reading : String
 
 open CasimirU1RecoveredQFTStressAttachment public
-
-------------------------------------------------------------------------
--- Recovered construction = selected QFT target on the declared overlap regime.
-------------------------------------------------------------------------
 
 recoveredQFTConstructionIsSelectedTarget :
   ∀ {U : Weld.UnifiedCandidate} →
@@ -83,6 +74,21 @@ selectedGroupHostReceipt :
   (attachment : CasimirU1RecoveredQFTStressAttachment U) →
   SU2Host.CasimirSelectedQFTSU2Host U (selectedGroup attachment)
 selectedGroupHostReceipt = selectedSU2Host
+
+selectedQFTStressSymmetryReceipt :
+  ∀ {U : Weld.UnifiedCandidate} →
+  (attachment : CasimirU1RecoveredQFTStressAttachment U) →
+  let stress =
+        Weld.actualQFTStressTensor U
+          (Weld.coarseGrain U
+            (candidate attachment)
+            (regime attachment))
+          (selectedGroup attachment)
+  in
+  DASHI.Physics.Foundations.CMP119SymmetricStressComponentReductionExact.PairingComponentSymmetry
+    (stressEvaluator attachment) stress
+selectedQFTStressSymmetryReceipt attachment =
+  Reduction.symmetry (symmetricBrownMaclayPayment attachment)
 
 actualSelectedQFTStress :
   ∀ {U : Weld.UnifiedCandidate} →
@@ -125,10 +131,6 @@ actualSelectedQFTSectorShared {U} attachment =
       (regime attachment))
     (selectedGroup attachment)
 
-------------------------------------------------------------------------
--- Existing U(1) architectural authority is consumed, not redefined.
-------------------------------------------------------------------------
-
 u1YangMillsArchitectureWitness : U1YM.U1SU2PromotionBoundary
 u1YangMillsArchitectureWitness = U1YM.canonicalU1SU2PromotionBoundary
 
@@ -139,10 +141,6 @@ u1AbelianRestrictionAvailable = refl
 u1StillNotWholeNonAbelianSU2 :
   U1YM.u1EqualsWholeSU2Theory u1YangMillsArchitectureWitness ≡ false
 u1StillNotWholeNonAbelianSU2 = refl
-
-------------------------------------------------------------------------
--- Promotion firewalls.
-------------------------------------------------------------------------
 
 data U1GaugeArchitectureAutomaticallyIdentifiesBrownMaclayWithSelectedQFTStress : Set where
 data SelectedSectorStressEqualityAutomaticallyPaysAllSectorAggregation : Set where
@@ -165,10 +163,6 @@ selectedSectorStressDoesNotPromoteUnifiedQG :
   SelectedSectorStressEqualityAutomaticallyPromotesUnifiedQuantumGravity → ⊥
 selectedSectorStressDoesNotPromoteUnifiedQG ()
 
-------------------------------------------------------------------------
--- Machine-readable first-leaf boundary.
-------------------------------------------------------------------------
-
 record CasimirU1RecoveredQFTStressAttachmentBoundary : Set where
   constructor casimir-u1-recovered-qft-stress-attachment-boundary
   field
@@ -182,6 +176,8 @@ record CasimirU1RecoveredQFTStressAttachmentBoundary : Set where
     actualSelectedSectorSharedTransportAlreadyExists : Bool
 
     concreteSelectedGroupHostsCanonicalU1Paid : Bool
+    selectedQFTStressCoordinateSymmetryPaid : Bool
+    brownMaclayTenIndependentComponentValuesPaid : Bool
     actualSelectedQFTSectorEqualsBrownMaclayPaid : Bool
     allSectorStressAggregationPaid : Bool
     commonActionVariationPaid : Bool
@@ -194,8 +190,8 @@ canonicalCasimirU1RecoveredQFTStressAttachmentBoundary :
 canonicalCasimirU1RecoveredQFTStressAttachmentBoundary =
   casimir-u1-recovered-qft-stress-attachment-boundary
     true true true true true true false true
-    false false false false false
+    false false false false false false false
 
 casimirU1RecoveredQFTStressAttachmentReading : String
 casimirU1RecoveredQFTStressAttachmentReading =
-  "The first Casimir GR/QFT unification stress attachment is now explicit and minimized. On an already-declared QFT overlap regime, QFT recovery commutes to the selected target; the selected compact-simple group must carry a CasimirSelectedQFTSU2Host receipt identifying its group interpretation with the repository's concrete unit-quaternion SU(2) and classifying it as Sprint105 SU2. A rational evaluator for the same actual selected QFT stress then supplies the Brown-Maclay equality through the symmetric ten-component receipt 00,01,02,03,11,12,13,22,23,33; the six lower-triangular equations are compiler output from coordinate symmetry. Existing qftSectorStressToShared handles selected-sector transport after that. The attachment does not pay all-sector aggregation, common-action variation, GR stress equality, backreaction, or unified-QG promotion."
+  "The first Casimir GR/QFT unification stress attachment is explicit and minimized. QFT recovery commutes to the selected target. The group-host payment is a concrete CasimirSelectedQFTSU2Host receipt. The stress payment then separates into coordinate symmetry for the same actual selected QFT stress plus ten independent Brown-Maclay component values 00,01,02,03,11,12,13,22,23,33; six lower-triangular equations are compiler output. Existing qftSectorStressToShared handles selected-sector transport after full equality. None of these selected-sector payments imply all-sector aggregation, common-action variation, GR equality, backreaction, or unified-QG promotion."
