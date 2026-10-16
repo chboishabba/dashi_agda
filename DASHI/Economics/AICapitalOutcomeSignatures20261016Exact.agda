@@ -58,7 +58,7 @@ currentOutcomePromotionReady = false
 
 data SnapshotSelectsOutcomePermission : Set where
 data OneMetricSelectsOutcomePermission : Set where
-\data PolicyProposalSelectsMoatPermission : Set where
+data PolicyProposalSelectsMoatPermission : Set where
 
 snapshotDoesNotSelectOutcome : SnapshotSelectsOutcomePermission → ⊥
 snapshotDoesNotSelectOutcome ()
