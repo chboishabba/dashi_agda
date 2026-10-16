@@ -26,12 +26,24 @@ import DASHI.Reasoning.TrialecticC3EdgeResidualRepairValidation
 import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyExact
 import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyValidation
 
--- Exact carrier ladder.  The mature structured boundary is T^18; the new graph
+-- Exact carrier ladder.  The mature structured boundary is T^18; the graph
 -- extension recharts it as two T^9 chunks and embeds it into ambient T^27 once
--- an explicit third-face completion policy is supplied.  No bare-T^18
--- canonical completion is manufactured.
+-- an explicit third-face completion policy is supplied.  The completed graph
+-- is then transported through the actual Grothendieck sheaf, full site
+-- presheaf, non-discrete wave-phase groupoid, effective stack and finite
+-- hypersheaf.  No bare-T^18 canonical completion is manufactured.
 import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionExact
 import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionValidation
+import DASHI.Reasoning.TrialecticT27GraphGrothendieckSheafExact
+import DASHI.Reasoning.TrialecticT27GraphGrothendieckSheafValidation
+import DASHI.Reasoning.TrialecticT27GraphSitePresheafExact
+import DASHI.Reasoning.TrialecticT27GraphSitePresheafValidation
+import DASHI.Reasoning.TrialecticT27WavePhaseGroupoidPresheafExact
+import DASHI.Reasoning.TrialecticT27WavePhaseGroupoidPresheafValidation
+import DASHI.Reasoning.TrialecticT27EffectiveStackDescentExact
+import DASHI.Reasoning.TrialecticT27EffectiveStackDescentValidation
+import DASHI.Reasoning.TrialecticT27FiniteTriadicHypersheafExact
+import DASHI.Reasoning.TrialecticT27FiniteTriadicHypersheafValidation
 
 -- 369-wave cross-pollination closes the stale groupoid/pseudofunctor/stack
 -- frontier while retaining chart rotation as a separate equivariant symmetry.
@@ -67,8 +79,11 @@ import DASHI.Reasoning.TrialecticHigherPromotionSupersessionValidation
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutValidation
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
 
--- Core Nongin closure remains paid, while higher-stack/hyperfabric,
--- exceptional and physical-promotion programmes remain attached descendants.
+-- Core Nongin closure remains paid.  The additive current T27 status owner
+-- records the stronger graph-completed carrier without breaking the older
+-- compatibility record consumed elsewhere.
+import DASHI.Philosophy.NonginCurrentMaxCutT27Exact
+import DASHI.Philosophy.NonginCurrentMaxCutT27Validation
 import DASHI.Philosophy.NonginRoadmapClosureExact
 import DASHI.Philosophy.NonginRoadmapClosureValidation
 import DASHI.Philosophy.NonginAttachedDescendantProgrammesExact
