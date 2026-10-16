@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Structural audit for the Monster/C3/369 chemistry/entropy/gravity max-cut.
 
-This is not an Agda typecheck and not physical validation.  It checks exact
-finite arithmetic plus the presence of the terminal proof/promotion markers.
+This is not an Agda typecheck and not physical validation. It checks exact
+finite arithmetic plus the presence of terminal proof/promotion markers.
 """
 from pathlib import Path
 
@@ -10,29 +10,33 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def require(path: str, *needles: str) -> None:
+    """Require every marker string to occur in one repository file."""
     text = (ROOT / path).read_text(encoding="utf-8")
     for needle in needles:
         if needle not in text:
             raise AssertionError(f"missing {needle!r} in {path}")
 
 
+def check(name: str, condition: bool) -> None:
+    """Raise explicitly when a finite arithmetic regression fails, even under -O."""
+    if not condition:
+        raise AssertionError(f"failed arithmetic check: {name}")
+
+
 def main() -> None:
-    # Ternary / Monster arithmetic.
-    assert (3 + 3) * 9 - 1 == 53
-    assert (3 + 3 + 2) * 9 - 1 == 71
-    assert 53 + 3 * 65610 == 196883 == 47 * 59 * 71
-    assert 729 * 90 == 65610
-    assert 3 * 65610 == 196830
-    assert 196830 + 53 == 196883
+    """Run finite arithmetic and structural-marker regression checks."""
+    check("ternary residual 53", (3 + 3) * 9 - 1 == 53)
+    check("extended ternary 71", (3 + 3 + 2) * 9 - 1 == 71)
+    check("Monster degree two ways", 53 + 3 * 65610 == 196883 == 47 * 59 * 71)
+    check("zeta model dimension", 729 * 90 == 65610)
+    check("three regular fibres", 3 * 65610 == 196830)
+    check("regular plus residual", 196830 + 53 == 196883)
 
-    # Chemistry / reaction fixtures.
-    assert 8536 - 4223 == 4313
-    assert 555245 - 554554 == 691
-    assert 55517555010 / 1_000_000_000 == 55.51755501
-    assert 55519414318 / 1_000_000_000 == 55.519414318
-
-    # Native-zeta mathematical counting ensemble.
-    assert 1 * 65610 == 65610
+    check("proton-affinity difference", 8536 - 4223 == 4313)
+    check("published STO-3G FCI-HF gap", 555245 - 554554 == 691)
+    check("released SCI energy encoding", 55517555010 / 1_000_000_000 == 55.51755501)
+    check("released FCI-run energy encoding", 55519414318 / 1_000_000_000 == 55.519414318)
+    check("native-zeta normalization numerator", 1 * 65610 == 65610)
 
     require(
         "DASHI/Physics/Chemistry/AmmoniaC3RegularRepresentationExact.agda",
@@ -94,8 +98,22 @@ def main() -> None:
     )
     require(
         "DASHI/Physics/Chemistry/AmmoniaHamiltonianWavefunctionExact.agda",
+        "sameObjectSymbolicHamiltonianExpressionPaid",
+        "energyValuedHamiltonianOperatorPaid",
         "literalOccupationBasisStatePaid",
         "numericRealSpaceWavefunctionCoefficientsPaid",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AmmoniaGroundStateC3ActionExact.agda",
+        "foldOccupiedPhase",
+        "determinantPhaseComputedFromOccupiedCarrier",
+        "trivialGroundConfigurationC3RepresentationPaid",
+        "nontrivialRealSpaceWavefunctionC3ActionPaid",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AmmoniaHydrogenAbstraction369HyperfibreExact.agda",
+        "atomic369InventoryEndpointsPaid",
+        "individualAtomIdentityTransportPaid",
     )
     require(
         "DASHI/Physics/Chemistry/AmmoniaSTO3GFCIExact.agda",
@@ -141,6 +159,8 @@ def main() -> None:
     print("phase quotient: exact for phase consumers, non-sufficient for fine-state consumers")
     print("Monster zeta model: native369 Kernel6 x (Completed10 x T^2), 65610 microstates")
     print("physical NH3->native369 state assignment remains explicitly unpaid")
+    print("hydrogen-abstraction 369 endpoint inventory is paid; individual atom identity is not")
+    print("symbolic Hamiltonian expression is paid; evaluated energy operator is not")
     print("published benchmark and author-released CI artifacts remain distinct")
     print("independent matrix rediagonalization remains explicitly unpaid")
 
