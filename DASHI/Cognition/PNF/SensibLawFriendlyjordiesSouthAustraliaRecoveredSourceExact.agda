@@ -18,14 +18,6 @@ import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedWorldEvidenceExact as
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCausalIdentificationMaxCutExact as Causal
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedCausalIdentificationExact as ReviewedCausal
 
-------------------------------------------------------------------------
--- Recovered archive source payment.
---
--- SensibLaw PR #499 pins the previously producer-only archive units. These
--- statements pay what the Friendlyjordies narrative lane says. They do not pay
--- the external energy statistic or the asserted Labor-governance causation.
-------------------------------------------------------------------------
-
 sensibLawSouthAustraliaRevision : String
 sensibLawSouthAustraliaRevision =
   "SensibLaw/agent/friendlyjordies-south-australia-source-20261016 24aa97c0a596f01aca7630ea621bcc4525a90f9a"
@@ -57,7 +49,7 @@ mkRecoveredTrace statementRef exactSpanRef literalText observationRef claimRef d
         sensibLawSouthAustraliaRevision
         exactSpanRef
         literalText)
-      ("pnf:" <> statementRef)
+      statementRef
       observationRef
       (Trace.parser-run-identity
         "parser-run:friendlyjordies:south-australia-recovered"
@@ -156,11 +148,6 @@ southAustraliaRootedPayment =
     refl
     false refl
 
-------------------------------------------------------------------------
--- A reviewed world premise can now attach to the paid SA source case. The
--- source receipt itself still supplies no causal premise.
-------------------------------------------------------------------------
-
 southAustraliaWorldTransitionEvidenceFromReviewedDecision :
   Reviewed.ReviewedWorldEvidenceDecision
     March.southAustraliaRenewables
@@ -190,10 +177,6 @@ record SouthAustraliaRecoveredReviewedIdentificationGate : Set₂ where
         Causal.southAustraliaCausalEstimandDemand
 
 open SouthAustraliaRecoveredReviewedIdentificationGate public
-
-------------------------------------------------------------------------
--- Non-promotion firewalls.
-------------------------------------------------------------------------
 
 data ArchiveSourcePaymentCreatesWorldTruth : Set where
 data ArchiveSourcePaymentIdentifiesGovernanceCause : Set where
