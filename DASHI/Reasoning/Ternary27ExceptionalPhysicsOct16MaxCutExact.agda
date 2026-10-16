@@ -14,19 +14,9 @@ import DASHI.Physics.Closure.E6HyperformH3H2InvariantPotentialNoGoExact as Onsit
 import DASHI.Physics.Closure.E6HyperformH3H2IncidenceGroundStateExact as Ground
 import DASHI.Physics.Closure.E6HyperformH3H2CommonActionBridgeExact as CommonAction
 
-------------------------------------------------------------------------
--- OCT-16 EXCEPTIONAL PHYSICS MAX-CUT
---
--- This owner records only promotions that materially supersede the Oct-14
--- status.  It does not convert source-written Agda into kernel authority, local
--- numerical eigensystems into physical masses, or a finite incidence model into
--- a continuum gravity theory.
-------------------------------------------------------------------------
-
 record Oct16ExceptionalPhysicsMaxCut : Set where
   constructor oct16-exceptional-physics-max-cut
   field
-    -- Proof-relevant split first-Tits progress.
     firstTitsCommutativityTermSourceWritten : Bool
     firstTitsTwoSidedUnitTermSourceWritten : Bool
     firstTitsCubicUnitTermSourceWritten : Bool
@@ -37,7 +27,6 @@ record Oct16ExceptionalPhysicsMaxCut : Set where
     firstTitsPaidLawPackageKernelInhabited : Bool
     classicalGlobalE6F4ApplicationKernelPaid : Bool
 
-    -- Gauge / trinification vacuum structure.
     twoVEVLowEnergySMStabilizerPaidLocally : Bool
     twoVEVBrokenGaugeMassRank12PaidLocally : Bool
     twoVEVHessianKernelEqualsGaugeOrbitLocally : Bool
@@ -52,7 +41,6 @@ record Oct16ExceptionalPhysicsMaxCut : Set where
     dhrToSMHomomorphismPaid : Bool
     dhrCarrierFunctorMatchPaid : Bool
 
-    -- Gravity / finite section dynamics.
     h3H2InvariantQuadraticKernelClassificationPaidLocally : Bool
     h3H2LocalKineticOperatorUniqueUpToScalePaidLocally : Bool
     invariantOnsiteSelectionPotentialNoGoSourceWritten : Bool
@@ -89,7 +77,7 @@ currentOct16MaxCut =
     true true true true true true true true true false true true
     false false false false false false false
     "Commutativity, two-sided unit and N(1)=1 now have literal source-written terms on the exact rational first-Tits M3(Q)^3 definitions, using the repository rational solver and no external Albert theorem to create local laws. The remaining proof-relevant algebra wall is full bilinearity, cubic homogeneity and the Jordan identity, then an exact-head Agda receipt and construction of the complete PaidRationalFirstTitsLaws package before applying the classical Albert E6/F4 theorem in-kernel."
-    "The two-neutral-27 candidate now has the correct local SM stabilizer, rank-12 broken-gauge mass form, a Hessian nullspace numerically identical to the actual broken gauge-orbit tangent, no additional observed local flat modes, and an explicit six-coefficient strict stability cone. This constrains but does not derive the physical Higgs sector. Remaining work is source/physics justification of scalar content and coefficients, VEV scale, gauge couplings and measured masses; DHR remains independently blocked on arbitrary-sector extension, compact-group reconstruction, a concrete G_DHR->G_SM homomorphism and carrier-functor match."
+    "The two-neutral-27 candidate now has the correct local SM stabilizer, rank-12 broken-gauge mass form, a Hessian nullspace numerically identical to the actual broken gauge-orbit tangent, no additional observed local flat modes, and an explicit six-coefficient strict stability cone. This constrains but does not derive the physical Higgs sector. Remaining work is source/physics justification of scalar content and coefficients, VEV scale, gauge couplings and measured masses; DHR remains independently blocked on complement/localisation/transport/statistics/tensor-category reconstruction, compact-group construction and a same-action/isomorphism weld to the explicit low-energy SM carrier."
     "The H3-H2 bundle now has a symmetry-forced local kinetic operator shape, and a generic theorem rules out fully symmetric nonconstant onsite selection. The incidence-only relational candidate has agreement maximum 180, 6642 exact-cover vacua in four W(E6) orbits, and dimensionless defect gap 3. The same nine-state fibre already inhabits the canonical LocalActionSystem and reuses master history additivity. Remaining physical work is to derive the interaction coefficient/section dynamics and continuum scaling, then inhabit CommonEffectiveActionVariation, EinsteinTensorVariationReceipt and QFTVariationIdentification on the same candidate before any Einstein-matter equality can be promoted."
     "External/classical literature remains source authority, not kernel proof. Unmerged sibling PRs are navigation/donor hints only unless a result is independently reproduced on this branch. Python enumeration/eigensystems are local computation receipts, not Agda theorems. Equal numerical gaps are not same-operator recognition. Finite action is not stress-energy, and candidate scalar/gauge spectra are not observed particle masses."
 
@@ -108,8 +96,8 @@ vevLocalStability = VEVLocal.canonicalTwoVEVLocalStabilityComputationReceipt
 vevStabilityCone : VEVCone.TwoVEVStabilityConeComputationReceipt
 vevStabilityCone = VEVCone.canonicalTwoVEVStabilityConeComputationReceipt
 
-dhrBoundary : DHR.TrinificationDHRMaxCutBoundary
-dhrBoundary = DHR.canonicalTrinificationDHRMaxCutBoundary
+dhrBoundary : DHR.TrinificationDHRMaxCut
+dhrBoundary = DHR.currentTrinificationDHRMaxCut
 
 fibreDynamicsReceipt : FibreDynamics.H3H2InvariantQuadraticDynamicsLocalReceipt
 fibreDynamicsReceipt = FibreDynamics.canonicalH3H2InvariantQuadraticDynamicsLocalReceipt
