@@ -21,6 +21,9 @@ discrete-thf-producer-remains-open = refl
 qtm-instrument-calibration-is-source-paid : A.qtmInstrumentSampleCalibration A.currentTerminalExecutionAddendum ≡ T.sourcePaid
 qtm-instrument-calibration-is-source-paid = refl
 
+qtm-resolution-aware-forward-observer-executed : A.qtmResolutionAwareForwardObserver A.currentTerminalExecutionAddendum ≡ T.numericallyExecuted
+qtm-resolution-aware-forward-observer-executed = refl
+
 qtm-public-routes-source-paid : A.qtmPublicAcquisitionRoutes A.currentTerminalExecutionAddendum ≡ T.sourcePaid
 qtm-public-routes-source-paid = refl
 
@@ -41,6 +44,9 @@ availability-is-not-replay = refl
 
 instrument-calibration-is-not-intensity-replay : A.qtmInstrumentCalibrationCountsAsIntensityReplay A.currentTerminalExecutionAddendum ≡ false
 instrument-calibration-is-not-intensity-replay = refl
+
+synthetic-qtm-forward-observer-is-not-experimental-fit : A.qtmSyntheticForwardObserverCountsAsExperimentalFit A.currentTerminalExecutionAddendum ≡ false
+synthetic-qtm-forward-observer-is-not-experimental-fit = refl
 
 route-is-not-byte-acquisition : A.acquisitionRouteCountsAsByteAcquisition A.currentTerminalExecutionAddendum ≡ false
 route-is-not-byte-acquisition = refl
