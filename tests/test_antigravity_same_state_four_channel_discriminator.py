@@ -23,7 +23,7 @@ def test_same_metric_state_feeds_all_four_observables():
         assert needle in s
 
 
-def test_exact_nambu_kottler_fixture_is_reused_without_tt_promotion():
+def test_exact_fixture_regression_and_preferred_single_vacuum_route_are_distinct():
     s = text()
     for needle in (
         "fixtureOutwardFreeFall",
@@ -32,6 +32,10 @@ def test_exact_nambu_kottler_fixture_is_reused_without_tt_promotion():
         "fixtureInteriorLapseRoot",
         "fixtureMetricDelta",
         "fixtureMetricDeltaIsFourThirdsDeltaLambda",
+        "preferredSingleVacuumFixtureRadius",
+        "preferredSingleVacuumFixtureLambda",
+        "preferredSingleVacuumOutwardScaled",
+        "olderNambuFixtureIsRegressionNotPreferredSourceRoute",
         "scalarMetricPerturbationIsNotTTMode",
     ):
         assert needle in s
