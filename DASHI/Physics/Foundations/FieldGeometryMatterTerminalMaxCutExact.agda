@@ -17,6 +17,7 @@ import DASHI.Physics.CondensedMatter.MATBGInteractingTHFLiteralMatricesExact as 
 import DASHI.Physics.CondensedMatter.MATBGTHFHubbardIAtomicReplayReceiptExact as THFAtomic
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorics2026Exact as Entropy
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorialReplayReceiptExact as EntropyReplay
+import DASHI.Physics.CondensedMatter.MATBGGeometryCaloricUpperBoundReceiptExact as GeometryCaloric
 import DASHI.Physics.Foundations.GeneralizedCaloricCycleExact as Caloric
 import DASHI.Physics.Foundations.QuantumStressEnergyEngineeringBridgeExact as QuantumStress
 import DASHI.Physics.Foundations.QuantumStressEnergySourceWeldExact as QuantumStressSource
@@ -73,6 +74,7 @@ record FieldGeometryMatterTerminalFrontier : Set where
     entropyCombinatorialNumericalReplay : FrontierStatus
 
     generalizedCaloricFiniteContract : FrontierStatus
+    geometryCaloricUpperBoundNumericalReplay : FrontierStatus
     generalizedCaloricUsefulCycle : FrontierStatus
     geometryCaloricPhysicalCycle : FrontierStatus
 
@@ -137,7 +139,7 @@ currentTerminalFrontier =
     numericallyExecuted openSameObjectPayment
     structurallyPaid numericallyExecuted numericallyExecuted
 
-    structurallyPaid externalOnly externalOnly
+    structurallyPaid numericallyExecuted externalOnly externalOnly
 
     externalOnly externalOnly
     blockedByUnmergedSibling blockedByUnmergedSibling blockedByUnmergedSibling
@@ -170,6 +172,7 @@ record MaxCutPaidSurface : Set where
     thfAtomicReplayBoundary : THFAtomic.THFHubbardIAtomicReplayBoundary
     entropyBoundary : Entropy.EntropyCombinatoricsBoundary
     entropyReplayBoundary : EntropyReplay.EntropyCombinatorialReplayBoundary
+    geometryCaloricBoundary : GeometryCaloric.GeometryCaloricUpperBoundBoundary
     caloricBoundary : Caloric.GeneralizedCaloricBoundary
     quantumStressBoundary : QuantumStress.QuantumStressEngineeringBoundary
     quantumStressSourceBoundary : QuantumStressSource.QuantumStressSourceBoundary
@@ -199,6 +202,7 @@ canonicalMaxCutPaidSurface =
     THFAtomic.canonicalTHFHubbardIAtomicReplayBoundary
     Entropy.canonicalEntropyCombinatoricsBoundary
     EntropyReplay.canonicalEntropyCombinatorialReplayBoundary
+    GeometryCaloric.canonicalGeometryCaloricUpperBoundBoundary
     Caloric.canonicalGeneralizedCaloricBoundary
     QuantumStress.canonicalQuantumStressBoundary
     QuantumStressSource.canonicalQuantumStressSourceBoundary
