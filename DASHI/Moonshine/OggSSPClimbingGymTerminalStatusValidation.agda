@@ -28,6 +28,11 @@ attributionCutClosed :
   ≡ true
 attributionCutClosed = refl
 
+cacheArtifactIntegrityCutClosed :
+  Status.zeroCacheArtifactIntegrityClosed Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+cacheArtifactIntegrityCutClosed = refl
+
 canonicalConsumerDescentCutClosed :
   Status.canonicalConsumerDescentWeldClosed Status.canonicalClimbingGymTerminalStatus
   ≡ true
@@ -56,11 +61,29 @@ certifiedBishopCellCompilerClosed :
   ≡ true
 certifiedBishopCellCompilerClosed = refl
 
+concreteBishopCarrierAvailable :
+  Status.concreteBishopSetoidCarrierAvailable
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+concreteBishopCarrierAvailable = refl
+
 sourceSeedNonIdentifiabilityClosed :
   Status.sourceShiftSeedNonIdentifiabilityClosed
     Status.canonicalClimbingGymTerminalStatus
   ≡ true
 sourceSeedNonIdentifiabilityClosed = refl
+
+concreteBishopGlobalPhaseStillOpen :
+  Status.concreteBishopGlobalLogPiPhaseClosed
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ false
+concreteBishopGlobalPhaseStillOpen = refl
+
+bishopSetoidNotCollapsedToPropositionalEquality :
+  Status.bishopSetoidEqualityCollapsedToPropositionalEquality
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ false
+bishopSetoidNotCollapsedToPropositionalEquality = refl
 
 analyticTotalFloorStillOpen :
   Status.constructiveRealToFiniteRadixQuantiserClosed
