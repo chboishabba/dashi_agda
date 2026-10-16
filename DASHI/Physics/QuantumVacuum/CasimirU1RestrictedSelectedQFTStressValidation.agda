@@ -16,13 +16,21 @@ gaugeEmbeddingInsufficientRegression :
   R.u1GaugeEmbeddingAloneClosesStressRestriction R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
 gaugeEmbeddingInsufficientRegression = refl
 
+fieldImageReceiptInterfaceOwnedRegression :
+  R.canonicalCartanU1FieldImageReceiptOwned R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
+fieldImageReceiptInterfaceOwnedRegression = refl
+
+commutatorCompilerOwnedRegression :
+  R.restrictedFieldBracketZeroCompilerOwned R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
+commutatorCompilerOwnedRegression = refl
+
+independentCommutatorPaymentNotRequiredRegression :
+  R.independentCommutatorPaymentRequiredAfterFieldImage R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+independentCommutatorPaymentNotRequiredRegression = refl
+
 fieldRestrictionStillOpenRegression :
   R.cartanU1FieldRestrictionPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
 fieldRestrictionStillOpenRegression = refl
-
-commutatorRestrictionStillOpenRegression :
-  R.nonAbelianCommutatorRestrictionPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
-commutatorRestrictionStillOpenRegression = refl
 
 actionRestrictionStillOpenRegression :
   R.yangMillsActionToMaxwellRestrictionPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
@@ -45,24 +53,20 @@ firstRestrictionBlockerRegression :
 firstRestrictionBlockerRegression = refl
 
 secondRestrictionBlockerRegression :
-  R.secondU1RestrictionBlocker ≡ R.missingRestrictedFieldNonAbelianCommutatorVanishing
+  R.secondU1RestrictionBlocker ≡ R.missingYangMillsActionToMaxwellRestriction
 secondRestrictionBlockerRegression = refl
 
 thirdRestrictionBlockerRegression :
-  R.thirdU1RestrictionBlocker ≡ R.missingYangMillsActionToMaxwellRestriction
+  R.thirdU1RestrictionBlocker ≡ R.missingMetricVariationStressRestriction
 thirdRestrictionBlockerRegression = refl
 
 fourthRestrictionBlockerRegression :
-  R.fourthU1RestrictionBlocker ≡ R.missingMetricVariationStressRestriction
+  R.fourthU1RestrictionBlocker ≡ R.missingRestrictedQuantumStressMaxwellIdentification
 fourthRestrictionBlockerRegression = refl
 
 fifthRestrictionBlockerRegression :
-  R.fifthU1RestrictionBlocker ≡ R.missingRestrictedQuantumStressMaxwellIdentification
+  R.fifthU1RestrictionBlocker ≡ R.missingSamePlateBoundaryRenormalization
 fifthRestrictionBlockerRegression = refl
-
-sixthRestrictionBlockerRegression :
-  R.sixthU1RestrictionBlocker ≡ R.missingSamePlateBoundaryRenormalization
-sixthRestrictionBlockerRegression = refl
 
 fullStressEqualityFirewallRegression :
   R.FullSelectedSU2StressAutomaticallyEqualsBrownMaclay → ⊥
