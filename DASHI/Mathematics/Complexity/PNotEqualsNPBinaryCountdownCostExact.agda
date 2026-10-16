@@ -108,8 +108,18 @@ decrementFourWork = refl
 
 -- Keep the semantic owner visibly attached: these are the same fixtures whose
 -- output values are proved by the XOR/ripple semantics module.
+decrementOneSemanticReceipt :
+  XOR.countdownOne (true ∷ []) ≡ (false ∷ []) , false
 decrementOneSemanticReceipt = XOR.decrementOne
+
+decrementTwoSemanticReceipt :
+  XOR.countdownOne (false ∷ true ∷ [])
+    ≡ (true ∷ false ∷ []) , false
 decrementTwoSemanticReceipt = XOR.decrementTwo
+
+decrementFourSemanticReceipt :
+  XOR.countdownOne (false ∷ false ∷ true ∷ [])
+    ≡ (true ∷ true ∷ false ∷ []) , false
 decrementFourSemanticReceipt = XOR.decrementFour
 
 ------------------------------------------------------------------------
