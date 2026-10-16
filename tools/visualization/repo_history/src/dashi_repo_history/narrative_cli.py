@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import argparse
-import json
+from dataclasses import replace
 from pathlib import Path
+import sqlite3
 import subprocess
 from typing import Any, Iterable
 
@@ -13,76 +14,155 @@ from .narrative import (
     stale_frontiers,
 )
 from .narrative_git import read_commit_narrative_events
-from .narrative_index import attach_pr_semantic_context, link_events_to_history
-from .pr_events import PullRequestEvent, collect_pr_events
+from .narrative_index import attach_pr_semantic_context
+from .pr_events import collect_pr_events
 
 
-def _load_history(path: str | None) -> dict[str, Any] | None:
-    if not path:
-        return None
-    return json.loads(Path(path).read_text(encoding="utf-8"))
+def _store_api():
+    """Load the repository-intelligence store lazily.
+
+    repo-history is now a frontend of the shared repository-intelligence
+    product. Keeping this import lazy allows pure narrative classification
+    helpers to remain importable in isolation.
+    """
+
+    try:
+        from agda_preflight.repository_store import (
+            DEFAULT_REPOSITORY_DB,
+            ensure_repository_schema,
+            load_narrative_events,
+            replace_narrative_events,
+            replace_pull_requests,
+        )
+    except ImportError as error:  # pragma: no cover - packaging guard
+        raise SystemExit(
+            "dashi-repo-narrative requires the repository-intelligence core; "
+            "install tools/agda_preflight in the same environment"
+        ) from error
+    return (
+        DEFAULT_REPOSITORY_DB,
+        ensure_repository_schema,
+        load_narrative_events,
+        replace_narrative_events,
+        replace_pull_requests,
+    )
 
 
-def _cached_pr_events(history: dict[str, Any] | None) -> list[PullRequestEvent]:
-    if history is None:
-        return []
-    result: list[PullRequestEvent] = []
-    for item in history.get("pull_requests", []):
-        if isinstance(item, dict):
-            try:
-                result.append(PullRequestEvent.from_dict(item))
-            except (KeyError, TypeError, ValueError):
-                continue
+def _database_path(repo: Path, value: Path | None) -> Path:
+    default, *_ = _store_api()
+    chosen = value or default
+    return chosen if chosen.is_absolute() else repo.resolve() / chosen
+
+
+def _connect_database(repo: Path, value: Path | None) -> sqlite3.Connection:
+    path = _database_path(repo, value)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    conn = sqlite3.connect(path)
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA journal_mode=WAL")
+    conn.execute("PRAGMA synchronous=NORMAL")
+    conn.execute("PRAGMA foreign_keys=ON")
+    conn.execute("PRAGMA busy_timeout=5000")
+    _default, ensure_schema, *_rest = _store_api()
+    ensure_schema(conn)
+    return conn
+
+
+def _event_from_record(item: dict[str, Any]) -> NarrativeEvent:
+    return NarrativeEvent(
+        event_id=str(item["event_id"]),
+        timestamp=int(item.get("timestamp", 0) or 0),
+        kind=str(item.get("kind", "unknown")),
+        title=str(item.get("title", "")),
+        text=str(item.get("text", "")),
+        commit=item.get("commit"),
+        pull_request=item.get("pull_request"),
+        url=item.get("url"),
+        touched_paths=tuple(str(value) for value in item.get("touched_paths", ())),
+        touched_objects=tuple(str(value) for value in item.get("touched_objects", ())),
+        introduced_objects=tuple(str(value) for value in item.get("introduced_objects", ())),
+        removed_objects=tuple(str(value) for value in item.get("removed_objects", ())),
+        authority=str(item.get("authority", "development-narrative")),
+        may_guide_discovery=bool(item.get("may_guide_discovery", True)),
+        may_explain_intent=bool(item.get("may_explain_intent", True)),
+        may_establish_formal_fact=bool(item.get("may_establish_formal_fact", False)),
+        may_establish_empirical_fact=bool(item.get("may_establish_empirical_fact", False)),
+    )
+
+
+def _attach_current_objects(
+    conn: sqlite3.Connection,
+    events: Iterable[NarrativeEvent],
+) -> list[NarrativeEvent]:
+    """Attach mechanically known current objects for touched source paths.
+
+    This does not infer historical identity. Historical add/remove identity is
+    supplied only by revision semantic deltas when those are materialized.
+    """
+
+    by_path: dict[str, tuple[str, ...]] = {}
+    result: list[NarrativeEvent] = []
+    for event in events:
+        objects = set(event.touched_objects)
+        for path in event.touched_paths:
+            cached = by_path.get(path)
+            if cached is None:
+                try:
+                    rows = conn.execute(
+                        "SELECT symbol_id FROM repo_symbols WHERE file=? ORDER BY symbol_id",
+                        (path,),
+                    ).fetchall()
+                except sqlite3.DatabaseError:
+                    rows = []
+                cached = tuple(str(row[0]) for row in rows)
+                by_path[path] = cached
+            objects.update(cached)
+        result.append(replace(event, touched_objects=tuple(sorted(objects))))
     return result
 
 
 def collect_narrative_events(
     repo: Path,
     *,
-    history_path: str | None = None,
     github_repository: str | None = None,
     max_commits: int | None = None,
+    connection: sqlite3.Connection | None = None,
 ) -> tuple[list[NarrativeEvent], dict[str, Any]]:
     commit_events = read_commit_narrative_events(
         repo,
         refs=("HEAD",),
         max_commits=max_commits,
     )
-    history = _load_history(history_path)
-    if history is not None:
-        commit_events = link_events_to_history(commit_events, history)
+    if connection is not None:
+        commit_events = _attach_current_objects(connection, commit_events)
 
     events = list(commit_events)
-    cached_prs = _cached_pr_events(history)
     source_status: dict[str, Any] = {
         "git_commits": len(commit_events),
         "commit_history_complete": max_commits is None,
-        "semantic_history_linked": history is not None,
-        "cached_prs": len(cached_prs),
+        "semantic_history_linked": connection is not None,
         "github_prs_requested": bool(github_repository),
         "github_prs_available": False,
         "github_prs": 0,
     }
-
-    prs_by_number = {pr.number: pr for pr in cached_prs}
     if github_repository:
         try:
-            live_prs = collect_pr_events(github_repository)
-        except (OSError, subprocess.CalledProcessError, json.JSONDecodeError) as exc:
+            prs = collect_pr_events(github_repository)
+        except (OSError, subprocess.CalledProcessError) as exc:
             source_status["github_prs_error"] = type(exc).__name__
         else:
-            prs_by_number.update({pr.number: pr for pr in live_prs})
+            pr_events = [attach_pr_semantic_context(pr, commit_events) for pr in prs]
+            events.extend(pr_events)
             source_status["github_prs_available"] = True
-            source_status["github_prs"] = len(live_prs)
-
-    pr_events = [
-        attach_pr_semantic_context(pr, commit_events)
-        for _, pr in sorted(prs_by_number.items())
-    ]
-    events.extend(pr_events)
+            source_status["github_prs"] = len(pr_events)
 
     events.sort(key=lambda event: (event.timestamp, event.event_id))
     return events, source_status
+
+
+def _load_database_events(conn: sqlite3.Connection) -> list[NarrativeEvent]:
+    _default, _ensure, load_events, *_rest = _store_api()
+    return [_event_from_record(item) for item in load_events(conn)]
 
 
 def _ranked_payload(items: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -90,7 +170,7 @@ def _ranked_payload(items: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
     for item in items:
         payload.append(
             {
-                "event": item["event"].to_dict(),
+                "event": item["event"],
                 "score": item["score"],
                 "reasons": item["reasons"],
             }
@@ -120,7 +200,7 @@ def build_explanation(events: Iterable[NarrativeEvent], query: str) -> dict[str,
         "may_explain_intent": True,
         "may_establish_formal_fact": False,
         "may_establish_empirical_fact": False,
-        "latest_event": latest.to_dict() if latest is not None else None,
+        "latest_event": latest,
         "current_frontier": current_frontier,
         "frontier_genealogy": genealogy,
         "potentially_stale_frontiers": stale,
@@ -128,108 +208,123 @@ def build_explanation(events: Iterable[NarrativeEvent], query: str) -> dict[str,
     }
 
 
-def _add_source_args(parser: argparse.ArgumentParser) -> None:
+def _add_database_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("repo", help="local Git repository")
-    parser.add_argument("--history", help="repo-history JSON used to attach semantic deltas and cached PRs")
-    parser.add_argument("--github-prs", help="owner/repo for optional live PR narrative enrichment via gh")
-    parser.add_argument("--max-commits", type=int, default=None)
-    parser.add_argument("--json", action="store_true")
+    parser.add_argument(
+        "--database",
+        type=Path,
+        help="repository-intelligence SQLite DB; defaults to .dashi/repository.sqlite3",
+    )
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="dashi-repo-narrative",
-        description="Query commit/PR narrative context without promoting it to theorem authority.",
+        description="Query commit/PR context stored in the DASHI repository-intelligence database.",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
     for name in ("history", "explain", "frontier", "stale", "archaeology"):
         command = sub.add_parser(name)
-        _add_source_args(command)
+        _add_database_args(command)
         command.add_argument("query")
         command.add_argument("--limit", type=int, default=40)
 
     harvest = sub.add_parser("harvest")
-    _add_source_args(harvest)
-    harvest.add_argument("-o", "--output")
+    _add_database_args(harvest)
+    harvest.add_argument("--github-prs", help="owner/repo for optional PR enrichment via gh")
+    harvest.add_argument("--max-commits", type=int, default=None)
     return parser
 
 
-def _print(payload: Any, *, as_json: bool) -> None:
-    if as_json:
-        print(json.dumps(payload, indent=2, ensure_ascii=False))
-        return
-    if isinstance(payload, dict) and "events" in payload:
-        for event in payload["events"]:
-            print(f"{event['timestamp']} {event['event_id']} {event['title']}")
-        return
-    print(json.dumps(payload, indent=2, ensure_ascii=False))
+def _print_event(event: NarrativeEvent) -> None:
+    print(f"{event.timestamp}\t{event.event_id}\t{event.title}")
+
+
+def _print_explanation(payload: dict[str, Any]) -> None:
+    latest = payload.get("latest_event")
+    if latest is not None:
+        print(f"latest\t{latest.event_id}\t{latest.title}")
+    for item in payload.get("current_frontier", ()):
+        print(f"frontier\t{item}")
+    for item in payload.get("potentially_stale_frontiers", ()):
+        print(
+            "stale\t{}\t{}\t{}".format(
+                item["event_id"],
+                item["potentially_superseded_by"],
+                item["frontier"],
+            )
+        )
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    events, source_status = collect_narrative_events(
-        Path(args.repo),
-        history_path=args.history,
-        github_repository=args.github_prs,
-        max_commits=args.max_commits,
-    )
+    repo = Path(args.repo).resolve()
+    conn = _connect_database(repo, args.database)
+    try:
+        if args.command == "harvest":
+            events, source_status = collect_narrative_events(
+                repo,
+                github_repository=args.github_prs,
+                max_commits=args.max_commits,
+                connection=conn,
+            )
+            _default, _ensure, _load, replace_events, replace_prs = _store_api()
+            replace_events(
+                conn,
+                events=[event.to_dict() for event in events],
+                source_status=source_status,
+            )
+            if args.github_prs and source_status.get("github_prs_available"):
+                prs = collect_pr_events(args.github_prs)
+                replace_prs(conn, [pr.to_dict() for pr in prs])
+            print(
+                "database={} events={} complete={} prs={}".format(
+                    _database_path(repo, args.database),
+                    len(events),
+                    source_status["commit_history_complete"],
+                    source_status.get("github_prs", 0),
+                )
+            )
+            return 0
 
-    if args.command == "harvest":
-        payload = {
-            "schema": "dashi.repo-narrative.v1",
-            "authority": "development-narrative",
-            "source_status": source_status,
-            "events": [event.to_dict() for event in events],
-        }
-        rendered = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
-        if args.output:
-            Path(args.output).write_text(rendered, encoding="utf-8")
-            print(args.output)
-        else:
-            print(rendered, end="")
+        events = _load_database_events(conn)
+        query = args.query
+        if args.command == "archaeology":
+            for item in archaeology(events, query, limit=args.limit):
+                event = item["event"]
+                print(f"{item['score']:.3f}\t{event.event_id}\t{event.title}")
+        elif args.command == "frontier":
+            for row in frontier_genealogy(events, query, limit=args.limit):
+                for statement in row["frontier"]:
+                    print(f"{row['timestamp']}\t{row['event_id']}\tfrontier\t{statement}")
+                for statement in row["claimed_delta"]:
+                    print(f"{row['timestamp']}\t{row['event_id']}\tdelta\t{statement}")
+                for statement in row["nonclaims"]:
+                    print(f"{row['timestamp']}\t{row['event_id']}\tnonclaim\t{statement}")
+        elif args.command == "stale":
+            for row in stale_frontiers(events, query, limit=args.limit):
+                print(
+                    "{}\t{}\t{}\t{}".format(
+                        row["event_id"],
+                        row["potentially_superseded_by"],
+                        row["overlap_score"],
+                        row["frontier"],
+                    )
+                )
+        elif args.command == "explain":
+            _print_explanation(build_explanation(events, query))
+        elif args.command == "history":
+            ranked = archaeology(events, query, limit=max(args.limit * 3, 60))
+            selected = [item["event"] for item in ranked[: args.limit]]
+            selected.sort(key=lambda event: (event.timestamp, event.event_id))
+            for event in selected:
+                _print_event(event)
+        else:  # pragma: no cover
+            raise AssertionError(args.command)
         return 0
-
-    query = args.query
-    if args.command == "archaeology":
-        payload = {
-            "query": query,
-            "source_status": source_status,
-            "authority": "development-narrative",
-            "matches": _ranked_payload(archaeology(events, query, limit=args.limit)),
-        }
-    elif args.command == "frontier":
-        payload = {
-            "query": query,
-            "source_status": source_status,
-            "authority": "development-narrative",
-            "genealogy": frontier_genealogy(events, query, limit=args.limit),
-        }
-    elif args.command == "stale":
-        payload = {
-            "query": query,
-            "source_status": source_status,
-            "authority": "development-narrative-heuristic",
-            "potentially_stale_frontiers": stale_frontiers(events, query, limit=args.limit),
-        }
-    elif args.command == "explain":
-        payload = build_explanation(events, query)
-        payload["source_status"] = source_status
-    elif args.command == "history":
-        ranked = archaeology(events, query, limit=max(args.limit * 3, 60))
-        selected = [item["event"] for item in ranked[: args.limit]]
-        selected.sort(key=lambda event: (event.timestamp, event.event_id))
-        payload = {
-            "query": query,
-            "source_status": source_status,
-            "authority": "development-narrative",
-            "events": [event.to_dict() for event in selected],
-        }
-    else:  # pragma: no cover
-        raise AssertionError(args.command)
-
-    _print(payload, as_json=args.json)
-    return 0
+    finally:
+        conn.close()
 
 
 if __name__ == "__main__":
