@@ -25,6 +25,7 @@ import DASHI.Biology.IITCubeDiagonalStabilizerExact as Stabilizer
 import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact as Broken
 import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact as FullFace
 import DASHI.Biology.IITFaceAwareTriadicCausalPairExact as FaceAware
+import DASHI.Biology.IITXORGridSynthesisFabricExact as GridFabric
 import DASHI.Reasoning.LILACubeEmpiricalSameObjectReceiptExact as Lila
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
@@ -87,6 +88,18 @@ fullStructureCannotRecoverHiddenFace = FullFace.pairwiseIITOutputDoesNotDetermin
 faceAwareTriadicCausalPair : FaceAware.FaceMatchedTriadicCausalPair
 faceAwareTriadicCausalPair = FaceAware.canonicalFaceMatchedTriadicCausalPair
 
+gridWideXorSynthesisBoundary : GridFabric.XORGridSynthesisFabricBoundary
+gridWideXorSynthesisBoundary = GridFabric.canonicalXORGridSynthesisFabricBoundary
+
+gridWideXorIgnoresInputSwap :
+  {Site : Set} →
+  (fabric : GridFabric.TwoInputFabric Site) →
+  (state : GridFabric.BoolField Site) →
+  (target : Site) →
+  GridFabric.xorFabricStep (GridFabric.swapFabricInputs fabric) state target
+  ≡ GridFabric.xorFabricStep fabric state target
+gridWideXorIgnoresInputSwap = GridFabric.xorStepIgnoresLocalInputOrder
+
 exceptionalHandoffBoundary : Exceptional.ExceptionalCubeHandoffBoundary
 exceptionalHandoffBoundary = Exceptional.canonicalExceptionalCubeHandoffBoundary
 
@@ -99,6 +112,11 @@ record ParityGluingConjectureStatus : Set where
     booleanBipermutativeClassifiedAsXorXnor : Bool
     booleanAllStatePositiveIITUniquenessNumericallyPaid : Bool
     booleanAllStatePositiveIITUniquenessKernelPaid : Bool
+    binaryGridEverySiteTwoInputOneOutputKernelPaid : Bool
+    binaryGridGlobalStepFactorsThroughLocalSynthesisKernelPaid : Bool
+    binaryGridNamedInputOrderingRetainedByFabricKernelPaid : Bool
+    binaryXorQuotientsInputOrderingKernelPaid : Bool
+    higherOrderGridOrganizationRequiresHigherArityLocalGate : Bool
 
     ternaryAffineEssentialClassifiedTwelve : Bool
     ternaryAffineEssentialEqualsBipermutative : Bool
@@ -134,6 +152,7 @@ canonicalParityGluingConjectureStatus =
   parity-gluing-conjecture-status
     true true false
     true true true true false
+    true true true true false
     true true true true true false true false
     true true true
     false true false true true false false
@@ -142,6 +161,7 @@ record ParityGluingMaxCutFrontier : Set where
   constructor parity-gluing-max-cut-frontier
   field
     remainingBooleanWorkIsMoreTruthTableEnumeration : Bool
+    remainingBinaryGridWorkIsMoreLocalCellEnumeration : Bool
     remainingTernaryWorkIsMoreAffineEnumeration : Bool
     remainingCubeWorkIsConcreteSameObjectOperatorProof : Bool
     remainingIITWorkIsFullCESMatchedHigherGluingEvaluation : Bool
@@ -151,4 +171,4 @@ record ParityGluingMaxCutFrontier : Set where
 canonicalParityGluingMaxCutFrontier : ParityGluingMaxCutFrontier
 canonicalParityGluingMaxCutFrontier =
   parity-gluing-max-cut-frontier
-    false false false true false true
+    false false false false true false true
