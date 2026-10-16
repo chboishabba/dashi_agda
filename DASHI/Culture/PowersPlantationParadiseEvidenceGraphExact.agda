@@ -3,6 +3,8 @@ module DASHI.Culture.PowersPlantationParadiseEvidenceGraphExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Culture.PowersPlantationParadiseArchiveModalityExact as Modality
 import DASHI.Culture.PowersPlantationParadiseEmpiricalProgrammeExact as Empirical
 import DASHI.Culture.PowersPlantationParadiseMinetteMicrohistoryExact as Minette
 import DASHI.Culture.PowersPlantationParadisePerformerComparisonExact as Comparison
@@ -10,12 +12,50 @@ import DASHI.Culture.PowersPlantationParadiseEnslavedDistributionEvidenceExact a
 import DASHI.Culture.PowersPlantationParadiseMinetteChronologyContestationExact as Chronology
 
 ------------------------------------------------------------------------
--- SOURCE-ROOTED HISTORICAL EVIDENCE GRAPH
+-- SOURCE-ROOTED HISTORICAL EVIDENCE GRAPH V2
 --
 -- This is a graph of receipted coordinates, not an ontology of historical
--- reality.  Edges preserve the relation actually paid by the cited receipt;
+-- reality. Edges preserve the relation actually paid by the cited receipt;
 -- graph reachability never manufactures identity, causation or missing facts.
+-- V2 additionally retains the source-generating process because silence in a
+-- theatre advertisement is not equivalent to silence in a coercive sale notice.
 ------------------------------------------------------------------------
+
+SourceGenre : Set
+SourceGenre = Modality.SourceGenre
+
+SourceProductionContext : Set
+SourceProductionContext = Modality.SourceProductionContext
+
+sourceContext : SourceGenre → SourceProductionContext
+sourceContext Modality.theatreAnnouncement = Modality.theatreAnnouncementContext
+sourceContext Modality.runawaySaleAdvertisement = Modality.runawaySaleAdvertisementContext
+sourceContext Modality.notarialWill = Modality.notarialWillContext
+sourceContext Modality.policeOrTheatreRule = Modality.policeRuleContext
+sourceContext Modality.courtOrLegalRecord =
+  Modality.source-production-context
+    Modality.courtOrLegalRecord
+    Modality.courtOfficial
+    Modality.recordProceedingOrDispute
+    "procedural event, allegation, judgment or contestation may be visible"
+    "the record remains institutionally produced and does not exhaust lived experience"
+    false false refl
+sourceContext Modality.architecturalPlan =
+  Modality.source-production-context
+    Modality.architecturalPlan
+    Modality.architectOrSurveyor
+    Modality.recordSpatialConfiguration
+    "sourced spatial geometry and labelled allocation may be visible"
+    "actual occupancy, enforcement and sensory experience remain distinct"
+    false false refl
+sourceContext Modality.retrospectiveNarrative =
+  Modality.source-production-context
+    Modality.retrospectiveNarrative
+    Modality.retrospectiveAuthor
+    Modality.narrateOrDescribe
+    "retrospective chronology and description may preserve otherwise lost events"
+    "memory, selection and retrospective framing remain separate from contemporaneous manifestation"
+    false false refl
 
 data EvidenceNodeKind : Set where
   sourceManifestationNode : EvidenceNodeKind
@@ -49,6 +89,7 @@ data EvidenceEdgeKind : Set where
   sourceRecordsCoerciveStatus : EvidenceEdgeKind
   claimsSameIncidentDifferentAccount : EvidenceEdgeKind
   descriptiveSiblingRelation : EvidenceEdgeKind
+  manifestationHasProductionContext : EvidenceEdgeKind
 
 record EvidenceEdge : Set where
   constructor evidence-edge
@@ -98,6 +139,20 @@ july1Claim = evidence-node "chronology:minette-notice-1790-07-01" chronologyClai
 
 july17Claim : EvidenceNode
 july17Claim = evidence-node "chronology:minette-notice-1790-07-17" chronologyClaimNode "Laméca date: 17 July 1790"
+
+julienSaleNoticeManifestation : EvidenceNode
+julienSaleNoticeManifestation =
+  evidence-node
+    "source:affiches-1781-11-13-julien-sale-notice"
+    sourceManifestationNode
+    "Affiches américaines sale notice, 13 November 1781"
+
+minetteWillManifestation : EvidenceNode
+minetteWillManifestation =
+  evidence-node
+    "source:anom-notaire-michel-1784-06-09-saint-martin-will"
+    sourceManifestationNode
+    "Saint-Martin testament, Notaire Michel, 9 June 1784"
 
 minetteContractEdge : EvidenceEdge
 minetteContractEdge =
@@ -170,7 +225,7 @@ july1790ContestationEdge =
     false refl
 
 ------------------------------------------------------------------------
--- Exact existing receipt anchors.  The graph cannot outrun these owners.
+-- Exact existing receipt anchors. The graph cannot outrun these owners.
 ------------------------------------------------------------------------
 
 minetteSalaryAnchor : Minette.MinetteSalaryNonpaymentReceipt
@@ -189,6 +244,11 @@ july1790ContestationAnchor :
   Chronology.minette1790NoticeContestationRelation
   ≡ Chronology.minette1790NoticeContestationRelation
 july1790ContestationAnchor = refl
+
+sourceSilenceDoesNotCollapseAcrossGenres :
+  INF.FactorsThrough Modality.observedSilence Modality.productionClassCode → ⊥
+sourceSilenceDoesNotCollapseAcrossGenres =
+  Modality.sameSilenceDifferentProductionContext
 
 data GraphReachabilityCreatesHistoricalIdentity : Set where
 
@@ -210,6 +270,9 @@ record PowersEvidenceGraphBoundary : Set where
     sourceSpeakerAndHistoricalSubjectMayDiffer : Bool
     sourceSpeakerAndHistoricalSubjectMayDifferIsTrue :
       sourceSpeakerAndHistoricalSubjectMayDiffer ≡ true
+    sourceGenerationContextPreserved : Bool
+    sourceGenerationContextPreservedIsTrue :
+      sourceGenerationContextPreserved ≡ true
     graphReachabilityCreatesIdentity : Bool
     graphReachabilityCreatesIdentityIsFalse : graphReachabilityCreatesIdentity ≡ false
     graphReachabilityCreatesCausation : Bool
@@ -220,6 +283,7 @@ record PowersEvidenceGraphBoundary : Set where
 canonicalPowersEvidenceGraphBoundary : PowersEvidenceGraphBoundary
 canonicalPowersEvidenceGraphBoundary =
   powers-evidence-graph-boundary
+    true refl
     true refl
     true refl
     false refl
