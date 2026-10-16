@@ -13,16 +13,12 @@ import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierE
 import DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact as RocketTerminal
 import DASHI.Physics.Propulsion.Rocketdyne1974HotSectionQualificationFrontierExact as RocketQual
 import DASHI.Physics.Propulsion.Rocketdyne1974DigitalThreadExperimentParetoExact as RocketThread
+import DASHI.Physics.Propulsion.Rocketdyne1974InspectionCapabilityPODExact as RocketPOD
+import DASHI.Physics.Propulsion.Rocketdyne1974ModelCredibilityValidationExact as RocketCred
 import DASHI.Physics.Propulsion.QualifiedHotSectionManufacturingBidiExact as Hot
 
 ------------------------------------------------------------------------
 -- FUSION PROPULSION x MATERIAL SURVIVABILITY
---
--- This owner preserves a real cross-domain engineering intersection without
--- collapsing distinct propulsion environments.  Reza/Jacinto/Hardwick address
--- oxygen-rich chemical-rocket combustion.  NASA fusion-propulsion concepts use
--- magnetized plasma, lithium/metal propellant, magnetic nozzles, FRCs and HTS
--- coils.  Both create material-survivability consumers, but not the same one.
 ------------------------------------------------------------------------
 
 data PropulsionMaterialEnvironment : Set where
@@ -144,6 +140,12 @@ rocketdyneQualificationReverseFrontier = RocketQual.rocketdyneQualificationRever
 rocketdyneDigitalThreadFrontier : RocketThread.RocketdyneDigitalThreadExperimentFrontier
 rocketdyneDigitalThreadFrontier = RocketThread.rocketdyneDigitalThreadExperimentFrontier
 
+rocketdyneInspectionCapabilityFrontier : RocketPOD.InspectionCapabilityFrontier
+rocketdyneInspectionCapabilityFrontier = RocketPOD.canonicalInspectionCapabilityFrontier
+
+rocketdyneModelCredibilityFrontier : RocketCred.Test052CredibilityFrontier
+rocketdyneModelCredibilityFrontier = RocketCred.test052CredibilityFrontier
+
 canonicalHotSectionQualificationBoundary : Hot.CanonicalQualificationBoundary
 canonicalHotSectionQualificationBoundary = Hot.canonicalQualificationBoundary
 
@@ -156,6 +158,18 @@ fusionMayReuseDigitalThreadGrammar = true
 rocketdyneAcquisitionScoresTransferToFusion : Bool
 rocketdyneAcquisitionScoresTransferToFusion = false
 
+fusionMayReuseInspectionCapabilityGrammar : Bool
+fusionMayReuseInspectionCapabilityGrammar = true
+
+rocketdynePODTransfersToFusion : Bool
+rocketdynePODTransfersToFusion = false
+
+fusionMayReuseModelCredibilityGrammar : Bool
+fusionMayReuseModelCredibilityGrammar = true
+
+rocketdyneValidationResidualTransfersToFusion : Bool
+rocketdyneValidationResidualTransfersToFusion = false
+
 record MaterialDiscriminatorTransferBoundary : Set where
   constructor material-discriminator-transfer-boundary
   field
@@ -167,10 +181,15 @@ record MaterialDiscriminatorTransferBoundary : Set where
     rocketdyneQualificationReceiptPaysFusionQualification : Bool
     digitalThreadGrammarReusable : Bool
     rocketdyneParetoCalibrationTransfersToFusion : Bool
+    inspectionCapabilityGrammarReusable : Bool
+    rocketdynePODNumericallyTransfersToFusion : Bool
+    modelCredibilityGrammarReusable : Bool
+    rocketdyneValidationResidualTransfersToFusion : Bool
 
 canonicalMaterialDiscriminatorTransferBoundary : MaterialDiscriminatorTransferBoundary
 canonicalMaterialDiscriminatorTransferBoundary =
-  material-discriminator-transfer-boundary true true false true true false true false
+  material-discriminator-transfer-boundary
+    true true false true true false true false true false true false
 
 ------------------------------------------------------------------------
 -- Named firewalls.
