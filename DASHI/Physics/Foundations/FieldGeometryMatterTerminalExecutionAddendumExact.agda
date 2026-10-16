@@ -6,6 +6,7 @@ import DASHI.Physics.Foundations.FieldGeometryMatterTerminalMaxCutExact as Termi
 import DASHI.Physics.CondensedMatter.MATBGTHFSelfConsistencyObstructionReceiptExact as THFObstruction
 import DASHI.Physics.CondensedMatter.MATBG2026SourceDataAvailabilityExact as SourceData
 import DASHI.Physics.Foundations.ScientistFrontierSiblingHandoffExact as ScientistHandoff
+import DASHI.Physics.Foundations.FieldGeometryMatterSiblingAuthorityHandoffExact as SiblingHandoff
 
 record TerminalExecutionAddendum : Set where
   constructor terminal-execution-addendum
@@ -21,9 +22,13 @@ record TerminalExecutionAddendum : Set where
     crossStudySameSampleIdentity : Terminal.FrontierStatus
     scientistFrontierDedicatedAcquisitionOwner : Terminal.FrontierStatus
     scientistFrontierCrossObjectPromotion : Terminal.FrontierStatus
+    magnetocaloricDedicatedSiblingOwner : Terminal.FrontierStatus
+    fusionPropulsionDedicatedSiblingOwner : Terminal.FrontierStatus
+    rocketdyneDedicatedSiblingOwner : Terminal.FrontierStatus
     obstructionReplayCountsAsSolvedTHF : Bool
     sourceDataAvailabilityCountsAsReplay : Bool
     scientistTechnicalAdjacencyCountsAsTargeting : Bool
+    openSiblingReferenceCountsAsAuthorityImport : Bool
 
 open TerminalExecutionAddendum public
 
@@ -41,7 +46,10 @@ currentTerminalExecutionAddendum =
     Terminal.externalOnly
     Terminal.blockedByUnmergedSibling
     Terminal.openSameObjectPayment
-    false false false
+    Terminal.blockedByUnmergedSibling
+    Terminal.blockedByUnmergedSibling
+    Terminal.blockedByUnmergedSibling
+    false false false false
 
 record TerminalExecutionAddendumBoundary : Set where
   constructor terminal-execution-addendum-boundary
@@ -49,6 +57,7 @@ record TerminalExecutionAddendumBoundary : Set where
     obstructionReceiptImported : THFObstruction.THFSelfConsistencyObstructionBoundary
     sourceDataBoundaryImported : SourceData.MATBGSourceDataAvailabilityBoundary
     scientistHandoffBoundaryImported : ScientistHandoff.ScientistFrontierHandoffBoundary
+    siblingAuthorityHandoffBoundaryImported : SiblingHandoff.SiblingAuthorityHandoffBoundary
     noGenericAbstractionPromotesRemainingLeaves : Bool
 
 open TerminalExecutionAddendumBoundary public
@@ -59,4 +68,5 @@ canonicalTerminalExecutionAddendumBoundary =
     THFObstruction.canonicalTHFSelfConsistencyObstructionBoundary
     SourceData.canonicalMATBGSourceDataAvailabilityBoundary
     ScientistHandoff.canonicalScientistFrontierHandoffBoundary
+    SiblingHandoff.canonicalSiblingAuthorityHandoffBoundary
     true
