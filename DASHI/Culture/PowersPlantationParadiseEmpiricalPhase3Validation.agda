@@ -8,6 +8,7 @@ import DASHI.Culture.PowersPlantationParadiseHistoricalDiscriminatorExact as Dis
 import DASHI.Culture.ColonialTheatreSensoryAccessExact as Sensory
 import DASHI.Culture.PowersPlantationParadiseEvidenceGraphExact as Graph
 import DASHI.Culture.PowersPlantationParadiseResearchThroughPerformanceExact as PerformanceProbe
+import DASHI.Culture.PowersPlantationParadiseEmpiricalRoadmapExact as Roadmap
 
 _methodology-boundary-paid : Methodology.PowersMethodologySourceBoundary
 _methodology-boundary-paid = Methodology.canonicalPowersMethodologySourceBoundary
@@ -26,3 +27,6 @@ _evidence-graph-boundary-paid = Graph.canonicalPowersEvidenceGraphBoundary
 
 _performance-probe-boundary-paid : PerformanceProbe.PowersResearchThroughPerformanceBoundary
 _performance-probe-boundary-paid = PerformanceProbe.canonicalPowersResearchThroughPerformanceBoundary
+
+_roadmap-boundary-paid : Roadmap.PowersEmpiricalRoadmapBoundary
+_roadmap-boundary-paid = Roadmap.canonicalPowersEmpiricalRoadmapBoundary
