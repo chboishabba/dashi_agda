@@ -1,0 +1,49 @@
+module DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact as M
+
+fieldImageCompilerConsumedRegression :
+  M.cartesianU1FieldImageAndBracketCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
+fieldImageCompilerConsumedRegression = refl
+
+maxwellSectorRestrictionScopeReusedRegression :
+  M.maxwellSectorRestrictionScopeReused M.canonicalCasimirU1ActionVariationBoundary ≡ true
+maxwellSectorRestrictionScopeReusedRegression = refl
+
+killingNormalizationSeparatedRegression :
+  M.killingNormalizationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+killingNormalizationSeparatedRegression = refl
+
+fieldStrengthRestrictionSeparatedRegression :
+  M.fieldStrengthRestrictionSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+fieldStrengthRestrictionSeparatedRegression = refl
+
+actionEqualitySeparatedRegression :
+  M.actionEqualitySeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+actionEqualitySeparatedRegression = refl
+
+metricVariationSeparatedRegression :
+  M.metricVariationCommutationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+metricVariationSeparatedRegression = refl
+
+zeroProbeCannotPayPhysicalActionRegression :
+  M.zeroProbeActionSurfacePaysPhysicalRestriction M.canonicalCasimirU1ActionVariationBoundary ≡ false
+zeroProbeCannotPayPhysicalActionRegression = refl
+
+firstActionBlockerRegression :
+  M.firstActionRestrictionBlocker ≡ M.missingKillingFormAndChargeNormalization
+firstActionBlockerRegression = refl
+
+secondActionBlockerRegression :
+  M.secondActionRestrictionBlocker ≡ M.missingSameRestrictedFieldStrengthIdentification
+secondActionBlockerRegression = refl
+
+thirdActionBlockerRegression :
+  M.thirdActionRestrictionBlocker ≡ M.missingRestrictedYMMaxwellActionEquality
+thirdActionBlockerRegression = refl
+
+fourthActionBlockerRegression :
+  M.fourthActionRestrictionBlocker ≡ M.missingMetricVariationRestrictionCommutation
+fourthActionBlockerRegression = refl
