@@ -29,6 +29,9 @@ groupoidPaid = refl
 effectiveStackPaid : Current.completedT27EffectiveStackPaid boundary ≡ true
 effectiveStackPaid = refl
 
+higherStackPaid : Current.completedT27HigherStackPaid boundary ≡ true
+higherStackPaid = refl
+
 finiteHypersheafPaid : Current.completedT27FiniteHypersheafPaid boundary ≡ true
 finiteHypersheafPaid = refl
 
