@@ -14,23 +14,6 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact as P
 
 ------------------------------------------------------------------------
 -- ROUND131 RECOVERED CONSTRUCTION + PINNED IDENTITY -> PINNED RECOVERY
---
--- The source-native host used to retain a separate
--- PinnedSourceNativeRecoverySelection payment after the Round131 recovered-QFT
--- attachment.  That duplicates the same equality once the literal R457
--- construction Y is identified with the pinned physical construction.
---
--- Inputs:
---   Y = recoverQFT(microscopicState(coarseGrain candidate regime))
---   Y = asLiteralYangMillsConstruction pinned
---
--- Compiler outputs:
---   asLiteralYangMillsConstruction pinned = recoverQFT(...)
---   PinnedYangMillsRecoveredQFTAttachment U pinned
---   PinnedSourceNativeRecoverySelection on the canonical formal projection.
---
--- Hence the real second payment is the same-object identity Y = pinned, not an
--- additional recovery-selection theorem.
 ------------------------------------------------------------------------
 
 record R457LiteralPinnedConstructionIdentity
@@ -73,14 +56,21 @@ round131AndPinnedIdentityBuildSourceNativeSelection :
   R457LiteralPinnedConstructionIdentity U Y pinned →
   Recovery.PinnedSourceNativeRecoverySelection
     U pinned Recovery.canonicalFormalLegacyProjectionCompatibility
-round131AndPinnedIdentityBuildSourceNativeSelection attachment identity = record
+round131AndPinnedIdentityBuildSourceNativeSelection
+    {U = U} attachment identity = record
   { Recovery.PinnedSourceNativeRecoverySelection.enrichedMicroscopicStateIsPinned =
       λ candidate regime qftAtRegime →
+        let joint = Weld.microscopicState U (Weld.coarseGrain U candidate regime)
+        in
         trans
           (sym
-            (Round131.literalConstructionIsRecoveredQFT
-              attachment candidate regime qftAtRegime))
-          (r457LiteralIsPinned identity)
+            (Recovery.legacyRecoverAgreesWithSourceNative
+              Recovery.canonicalFormalLegacyProjectionCompatibility joint))
+          (trans
+            (sym
+              (Round131.literalConstructionIsRecoveredQFT
+                attachment candidate regime qftAtRegime))
+            (r457LiteralIsPinned identity))
   }
 
 round131AndPinnedIdentityBuildSelectedTargetEquality :
@@ -132,4 +122,4 @@ canonicalRound131PinnedRecoveryBoundary =
 
 casimirRound131PinnedRecoveryReading : String
 casimirRound131PinnedRecoveryReading =
-  "Once the existing Round131RecoveredQFTAttachment is instantiated on the literal R457 construction Y, a single same-object identity Y = asLiteralYangMillsConstruction pinned compiles both the pinned recovered-QFT attachment and the former PinnedSourceNativeRecoverySelection. Therefore pinned source-native selection is not an independent host theorem. The live payments are the Round131 recovered-QFT attachment itself and identification of that SAME R457 literal construction with the existing pinned physical Yang-Mills construction."
+  "Once the existing Round131RecoveredQFTAttachment is instantiated on the literal R457 construction Y, a single same-object identity Y = asLiteralYangMillsConstruction pinned compiles both the pinned recovered-QFT attachment and the former PinnedSourceNativeRecoverySelection. The source-native selection proof now traverses the explicit canonical legacy/source-native compatibility theorem rather than relying on definitional unfolding. Therefore pinned source-native selection is not an independent host theorem."
