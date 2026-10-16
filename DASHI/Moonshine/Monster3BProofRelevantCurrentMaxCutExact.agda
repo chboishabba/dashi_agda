@@ -9,44 +9,31 @@ import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact as HZetaCom
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as RecognitionHardening
 import DASHI.Moonshine.Monster3BSuzukiProofRelevantOccurrenceHardeningExact as SuzukiHardening
 import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact as IsotypicAssembly
+import DASHI.Moonshine.Monster3BTwoIsotypicBlockAssemblyLeanReceiptExact as TwoBlockAssembly
 import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact as Prior
 
 ------------------------------------------------------------------------
 -- POST-CHARACTER / POST-PROOF-RELEVANCE MONSTER 3B MAX-CUT
 --
--- H_zeta model side is now exhausted much further:
---   * explicit Schrodinger action;
---   * unconditional irreducibility;
---   * all 729 modulation sums checked;
---   * all 3^13 Heisenberg coordinates classified;
---   * literal character matches the canonical nonlinear zeta signature at the
---     exact executable-receipt level;
---   * a fixed-phase character compiler turns two concretely packaged simple
---     representations in one common theory into the required equivariant iso;
---   * generic semisimple/isotypic assembly from a proof-relevant classifier is
---     source-written on companion Lean #47 using pinned mathlib v4.28.0
---     `IsIsotypicOfType.linearEquiv_fun`;
---   * a separate post-recognition finrank-cancellation theorem source-writes the
---     lawful step from an ACTUAL W_zeta ~= H_zeta^n equivalence plus actual
---     finranks 65610 and 729 to n=90.
+-- H_zeta model side:
+--   * explicit Schrodinger action, irreducibility and exhaustive literal
+--     character arithmetic are paid at their stated authority levels;
+--   * generic semisimple/isotypic assembly is source-written on companion Lean
+--     #47 using pinned mathlib `IsIsotypicOfType.linearEquiv_fun`;
+--   * post-recognition finrank cancellation is separately source-written, so
+--     actual finranks 65610/729 can pin n=90 only AFTER the same-object
+--     W_zeta ~= H_zeta^n equivalence exists.
 --
--- Therefore literal enumeration of ninety irreducible W_zeta|E constituents is
--- no longer the canonical H_zeta route. It remains a valid fallback/audit route.
--- The shortest route is:
+-- Thus literal enumeration of ninety irreducible W_zeta|E constituents is a
+-- fallback/audit route, not the canonical generic assembly.
 --
---   actual whole W_zeta|E representation + whole character
---     -> SAME-object simple-submodule classifier to H_zeta
---     -> generic isotypic assembly
---     -> finite copies H_zeta^n
---     -> post-recognition finrank cancellation pins n=90.
---
--- Crucially, 65610=729*90 is still forbidden from creating representation
--- identity. It becomes admissible only after the same-object isotypic theorem
--- has already produced the actual finite-copy equivalence.
---
--- S_zeta uses the existing full-character GAP/CTblLib chain, with promotion
--- proof-relevant at every layer. External GAP booleans/table coordinates remain
--- execution evidence rather than Agda inhabitants.
+-- S_zeta now also has a generic final assembler on Lean #47. Once the ACTUAL
+-- 12-family and 78-family submodules have been recognized on the same S_zeta,
+-- proved complementary, and supplied with proof-relevant simple-type
+-- classifiers, standard `Submodule.prodEquivOfIsCompl` plus the one-type
+-- isotypic compiler produces the two finite-copy blocks automatically.
+-- Character-table labels/degrees do not create those actual submodules,
+-- complementarity, occurrence or zeta orientation.
 ------------------------------------------------------------------------
 
 record CurrentMonster3BMaxCut : Set where
@@ -77,9 +64,12 @@ record CurrentMonster3BMaxCut : Set where
 
     suzukiFullCharacterMatcherWritten : Bool
     suzukiProofRelevantOccurrenceGateAvailable : Bool
+    complementaryTwoBlockAssemblySourceWritten : Bool
+    twoBlockAssemblyLeanKernelObserved : Bool
     suzukiMatcherExecutedHere : Bool
     suzukiPairFamilyOccurrencePaidInAgda : Bool
     suzukiIndividualZetaOrientationPaidInAgda : Bool
+    actualTwelveSeventyEightComplementarityPaid : Bool
     externalGapBooleanCreatesAgdaProof : Bool
 
     actualHomEvaluationPaid : Bool
@@ -110,11 +100,13 @@ currentMonster3BMaxCut = current-monster-3b-max-cut
   false false false false
   true
   (SuzukiHardening.paidWholeSameObjectWrapperAvailable SuzukiHardening.canonicalBoundary)
-  false false false
+  (TwoBlockAssembly.complementaryTwoBlockLinearAssemblySourceWritten TwoBlockAssembly.canonicalBoundary)
+  (TwoBlockAssembly.leanKernelReceiptObserved TwoBlockAssembly.canonicalBoundary)
+  false false false false
   (SuzukiHardening.externalGapResultCreatesAgdaProof SuzukiHardening.canonicalBoundary)
   false false
-  "Use the whole-character route first. Bind the SAME actual W_zeta|E restricted representation and explicit Schrodinger H_zeta into one finite-group representation/module theory, then prove the proof-relevant simple-submodule classifier on that actual sector. The companion Lean assembly makes W_zeta ~= H_zeta^n a compiler consequence; only after that use the source-written finrank cancellation with actual 65610/729 dimensions to pin n=90. Literal ninety-constituent enumeration is fallback/audit only."
-  "Run/source-bind the already-written CTblLib 6.Suz -> 6.Suz.2 -> quotient -> MN3B -> Monster full-character matcher, inhabit the proof-relevant pair-family occurrence obligations and separately orient zeta. Then instantiate the actual inverse-cocycle inertia representation on S_zeta = Hom_E(H_zeta,W_zeta), and consume generic semisimple/isotypic machinery for the source-paid 12+78 character. Fin90 remains only an optional later basis coordinate."
+  "Use the whole-character route first. Bind the SAME actual W_zeta|E restricted representation and explicit Schrodinger H_zeta into one finite-group representation/module theory, then prove the proof-relevant simple-submodule classifier on that actual sector. Lean #47 makes W_zeta ~= H_zeta^n a compiler consequence; only after that use post-recognition finrank cancellation with actual 65610/729 dimensions to pin n=90. Literal ninety-constituent enumeration is fallback/audit only."
+  "Source-bind the already-written CTblLib 6.Suz -> 6.Suz.2 -> quotient -> MN3B -> Monster matcher, pay the actual 12-family/78-family occurrence on the SAME S_zeta and separately orient zeta. Prove the resulting two actual isotypic submodules are complementary; Lean #47 then assembles their finite-copy direct sum automatically. Instantiate the inverse-cocycle Hom evaluation/recovery. Fin90 remains only an optional later basis coordinate."
 
 priorBoundary : Prior.CorrectedWZetaMaxCutBoundary
 priorBoundary = Prior.canonicalBoundary
