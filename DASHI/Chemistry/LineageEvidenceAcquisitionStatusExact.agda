@@ -8,9 +8,10 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact as Acquired
 import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact as Frontier
+import DASHI.Chemistry.PAHMechanismStatePromotionExact as PAH
 
 ------------------------------------------------------------------------
--- ACQUISITION STATUS AFTER PRIMARY/DIRECT WEB PASS
+-- ACQUISITION STATUS AFTER PRIMARY/DIRECT WEB + MECHANISTIC PROMOTION PASS
 ------------------------------------------------------------------------
 
 data PaymentStatus : Set where
@@ -49,10 +50,21 @@ pahKineticsStatus =
   acquisitionStatusReceipt
     "A3 BH4 enzyme kinetic calibration set"
     partiallyPaid
-    "pahHumanPhenylalanineKmPayment + pahHuman7BH4KmPayment"
-    "two source-bounded apparent Km coordinates for recombinant human PAH are paid"
+    "pahHumanPhenylalanineKmPayment + pahHuman7BH4KmPayment + PAHMechanismStatePromotionExact source-backed single-turnover mechanism"
+    "two source-bounded apparent Km coordinates and a source-backed ordered single-turnover mechanism are paid"
     "network-wide GCH1/PTPS/SPR/DHPR/TH/TPH/NOS/AGMO kinetics and matched contexts remain unpaid"
-    "Kowlessur/Citron/Kaufman 1996 retain experimental ownership"
+    "Kowlessur/Citron/Kaufman 1996 and Fitzpatrick et al. 2013 retain experimental ownership"
+    false refl
+
+pahMechanisticReplayStatus : AcquisitionStatusReceipt
+pahMechanisticReplayStatus =
+  acquisitionStatusReceipt
+    "A7 PAH structure/QM-MM independent mechanistic replay"
+    partiallyPaid
+    "PAHMechanismStatePromotionExact.canonicalPAHMechanisticPromotion"
+    "reaction identity, partial isotope lineage, 1J8U/6HYC released structural coordinate artifacts, source-backed kinetic mechanism and source-backed QM/MM reaction-path/energetics model are paid"
+    "independent DASHI numerical replay of the structure-to-QM/MM path, complete atom map, electronic Hamiltonian matrix, real-space wavefunction/eigenvector coefficients and independent numerical artifact remain unpaid"
+    "Andersen/Flatmark/Hough; Flydal et al.; Ishida et al.; Fitzpatrick et al. retain external source ownership; wwPDB artifacts retain artifact identity; DASHI owns only the promotion composition"
     false refl
 
 pbCaTargetStatus : AcquisitionStatusReceipt
@@ -82,10 +94,10 @@ bh4FluxStatus =
   acquisitionStatusReceipt
     "A1 BH4 same-system flux discriminator dataset"
     unpaid
-    "none acquired in this pass"
+    "none acquired; PAH mechanistic promotion is orthogonal"
     "no same-system branch-allocation coordinate promoted"
     "controlled BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO perturbation dataset remains the decisive payment"
-    "nearby pathway/mechanism sources remain attributed but cannot substitute for the missing same-object flux experiment"
+    "nearby pathway/mechanism/structure/QM-MM sources remain attributed but cannot substitute for the missing same-object flux experiment"
     false refl
 
 chlorCalibrationStatus : AcquisitionStatusReceipt
@@ -137,9 +149,10 @@ canonicalAcquisitionStatuses =
   bh4FluxStatus
   ∷ pahAtomMappingStatus
   ∷ pahKineticsStatus
-  ∷ chlorCalibrationStatus
   ∷ pbCaTargetStatus
   ∷ carbonSiliconStatus
+  ∷ chlorCalibrationStatus
+  ∷ pahMechanisticReplayStatus
   ∷ stanfordContactStatus
   ∷ brazilContactStatus
   ∷ iaccContactStatus
@@ -154,6 +167,8 @@ record EvidenceAcquisitionStatusBoundary : Set where
     publicLinkEqualsAuthenticatedArtifactIsFalse : publicLinkEqualsAuthenticatedArtifact ≡ false
     nearbyEvidenceSubstitutesForSameObjectFlux : Bool
     nearbyEvidenceSubstitutesForSameObjectFluxIsFalse : nearbyEvidenceSubstitutesForSameObjectFlux ≡ false
+    mechanisticPromotionClosesFluxTarget : Bool
+    mechanisticPromotionClosesFluxTargetIsFalse : mechanisticPromotionClosesFluxTarget ≡ false
     unresolvedTargetRemainsTyped : Bool
     unresolvedTargetRemainsTypedIsTrue : unresolvedTargetRemainsTyped ≡ true
 
@@ -161,4 +176,4 @@ open EvidenceAcquisitionStatusBoundary public
 
 canonicalEvidenceAcquisitionStatusBoundary : EvidenceAcquisitionStatusBoundary
 canonicalEvidenceAcquisitionStatusBoundary =
-  evidenceAcquisitionStatusBoundary false refl false refl false refl true refl
+  evidenceAcquisitionStatusBoundary false refl false refl false refl false refl true refl
