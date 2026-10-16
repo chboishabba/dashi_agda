@@ -97,6 +97,10 @@ import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 -- once the explicit Schrodinger rep and one actual selected constituent are
 -- transported into the same representation theory, the equivariant H_zeta iso
 -- fills both recognition and action-intertwiner witnesses automatically.
+-- The Suzuki 12+78 occurrence/orientation chain is hardened in the same way:
+-- external GAP/CTblLib execution remains evidence, while Agda promotion requires
+-- inhabitants for pair restriction, main split, quotient descent, actual
+-- Monster occurrence, same-object identity and individual zeta orientation.
 import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
 import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact
 import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact
@@ -122,6 +126,10 @@ import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningValidation
 import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact
 import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerValidation
+import DASHI.Moonshine.Monster3BSuzukiProofRelevantOccurrenceHardeningExact
+import DASHI.Moonshine.Monster3BSuzukiProofRelevantOccurrenceHardeningValidation
+import DASHI.Moonshine.Monster3BProofRelevantCurrentMaxCutExact
+import DASHI.Moonshine.Monster3BProofRelevantCurrentMaxCutValidation
 import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
 import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact
 import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutValidation
