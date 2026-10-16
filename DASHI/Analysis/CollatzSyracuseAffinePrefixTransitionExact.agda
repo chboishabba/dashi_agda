@@ -87,19 +87,19 @@ affineTermAppendOne :
   (word : Binary.BinaryWord m) →
   Affine.affineAdditiveTerm (appendOne word)
   ≡ 3 * Affine.affineAdditiveTerm word + Affine.powNat 2 m
-affineTermAppendOne Binary.end = refl
-affineTermAppendOne (Binary.bit0 tail)
+affineTermAppendOne {m = zero} Binary.end = refl
+affineTermAppendOne {m = suc m} (Binary.bit0 tail)
   rewrite affineTermAppendOne tail =
   evenAppendOneCorrectionNormalize
     (Affine.affineAdditiveTerm tail)
-    (Affine.powNat 2 _)
-affineTermAppendOne (Binary.bit1 tail)
+    (Affine.powNat 2 m)
+affineTermAppendOne {m = suc m} (Binary.bit1 tail)
   rewrite parityCountAppendOne tail
         | affineTermAppendOne tail =
   oddAppendOneCorrectionNormalize
     (Affine.powNat 3 (Affine.parityCount tail))
     (Affine.affineAdditiveTerm tail)
-    (Affine.powNat 2 _)
+    (Affine.powNat 2 m)
 
 multiplierAppendOne :
   {m : Nat} →
@@ -212,16 +212,21 @@ oddSafeGapKeepsContracting {m} word coefficient safe =
       < 2 * multiplier + 2 * gap
     shifted = NatP.+-monoˡ-< (2 * multiplier) safe
 
-    threeBelowDoubleSplit :
-      3 * multiplier < 2 * (multiplier + gap)
-    threeBelowDoubleSplit =
+    leftNormalized :
+      3 * multiplier < 2 * multiplier + 2 * gap
+    leftNormalized =
       subst
         (λ left → left < 2 * multiplier + 2 * gap)
         (threeMultiplierNormalize multiplier)
         shifted
-      |> subst
+
+    threeBelowDoubleSplit :
+      3 * multiplier < 2 * (multiplier + gap)
+    threeBelowDoubleSplit =
+      subst
         (λ right → 3 * multiplier < right)
         (doubleSplitNormalize multiplier gap)
+        leftNormalized
 
     threeBelowDoubleDenominator :
       3 * multiplier < 2 * denominator
@@ -245,10 +250,6 @@ oddSafeGapKeepsContracting {m} word coefficient safe =
       Affine.powNat 3 (Affine.parityCount (appendOne word)) < right)
     (sym (denominatorAppendOne m))
     actualMultiplierBelow
-  where
-  infixl 0 _|>_
-  _|>_ : {A B : Set} → A → (A → B) → B
-  value |> f = f value
 
 ------------------------------------------------------------------------
 -- Promotion boundary.
