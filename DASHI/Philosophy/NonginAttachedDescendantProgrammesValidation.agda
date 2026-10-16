@@ -35,8 +35,12 @@ effectiveStackPaid = refl
 higherStackPaid : Attached.higherStackPaid boundary ≡ true
 higherStackPaid = refl
 
-arbitraryHypercoverHypersheafStillOpen : Attached.arbitraryHypercoverHypersheafStillOpen boundary ≡ true
-arbitraryHypercoverHypersheafStillOpen = refl
+finiteTriadicHypersheafPaid : Attached.finiteTriadicHypersheafPaid boundary ≡ true
+finiteTriadicHypersheafPaid = refl
+
+arbitraryInfinityHypersheafStillOpen :
+  Attached.arbitraryInfinityHypersheafStillOpen boundary ≡ true
+arbitraryInfinityHypersheafStillOpen = refl
 
 physicalPromotionRemainsSeparate : Attached.attachmentClaimsPhysicalLawAlreadyPromoted boundary ≡ false
 physicalPromotionRemainsSeparate = refl
