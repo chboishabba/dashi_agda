@@ -21,8 +21,11 @@ import DASHI.Biology.IITCubeTwoFaceQ9SelfIndexingWeldExact as Q9
 import DASHI.Biology.IITCubeTwoFaceImageRecognitionExact as Cube
 import DASHI.Biology.IITCubeExceptionalGeometryHandoffExact as Exceptional
 import DASHI.Biology.IITCubeConcreteTorusImageExact as Concrete
+import DASHI.Biology.IITCubeDiagonalStabilizerExact as Stabilizer
 import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact as Broken
 import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact as FullFace
+import DASHI.Biology.IITFaceAwareTriadicCausalPairExact as FaceAware
+import DASHI.Reasoning.LILACubeEmpiricalSameObjectReceiptExact as Lila
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
 booleanParityWitness : BoolParity.ParityOrComplement BoolParity.xorGate
@@ -66,6 +69,11 @@ cubeGraphBoundary = Cube.canonicalCubeImageRecognitionBoundary
 concreteCubeImageWitness : (source : Concrete.CubeFaces) → Concrete.GraphLaw (Concrete.cubeStep source)
 concreteCubeImageWitness = Concrete.stepGraphLaw
 
+diagonalStabilizerCharacterization :
+  (T : Stabilizer.FaceLinearEndo) →
+  Stabilizer.DiagonalGraphStabilizerCharacterization T
+diagonalStabilizerCharacterization = Stabilizer.diagonalStabilizerIffCentralizer
+
 exceptionalSymmetryBreakingWitness :
   Broken.sectorZ Broken.transformedState ≡ Broken.requiredTransformedThird → ⊥
 exceptionalSymmetryBreakingWitness = Broken.selectedTrinificationShearBreaksCubeGraph
@@ -76,8 +84,14 @@ fullStructureCannotRecoverHiddenFace :
   Descent.FactorsThrough (FullFace.pairwiseIITObservation observe) Triadic.triadicFaceConsumer → ⊥
 fullStructureCannotRecoverHiddenFace = FullFace.pairwiseIITOutputDoesNotDetermineTriadicFace
 
+faceAwareTriadicCausalPair : FaceAware.FaceMatchedTriadicCausalPair
+faceAwareTriadicCausalPair = FaceAware.canonicalFaceMatchedTriadicCausalPair
+
 exceptionalHandoffBoundary : Exceptional.ExceptionalCubeHandoffBoundary
 exceptionalHandoffBoundary = Exceptional.canonicalExceptionalCubeHandoffBoundary
+
+lilaEmpiricalReceiptBoundary : Lila.LILACubeEmpiricalPaymentBoundary
+lilaEmpiricalReceiptBoundary = Lila.canonicalLILACubeEmpiricalPaymentBoundary
 
 record ParityGluingConjectureStatus : Set where
   constructor parity-gluing-conjecture-status
@@ -93,6 +107,8 @@ record ParityGluingConjectureStatus : Set where
     ternaryAllStatePositiveIITKernelPaid : Bool
 
     pairwiseBoundaryTriadicNonDescentKernelPaid : Bool
+    faceAwareTriadicTPMPairKernelPaid : Bool
+    faceAwareSystemPhiDiscriminationNumericallyPaid : Bool
     parityAloneCarriesInputOrder : Bool
     antisymmetricF3ChannelCarriesSwapOrientation : Bool
     torqueSiblingAuthorityImported : Bool
@@ -102,8 +118,10 @@ record ParityGluingConjectureStatus : Set where
     concreteTorusImageEqualsGraphKernelPaid : Bool
 
     fullIITDistinctionRelationPhiDiscriminatesHigherGluing : Bool
+    diagonalCubeStabilizerCharacterizedKernelPaid : Bool
     exceptionalActionPreservesCubeImageKernelPaid : Bool
     exceptionalActionBreaksSelectedCubeImageKernelPaid : Bool
+    lilaEmpiricalReceiptInterfacePaid : Bool
     lilaHiddenStateCubeIntertwinerPaid : Bool
     heldOutLilaConsumerPaymentPaid : Bool
 
@@ -114,9 +132,9 @@ canonicalParityGluingConjectureStatus =
   parity-gluing-conjecture-status
     true true false
     true true true true false
-    true false true false
+    true true true false true false
     true true true
-    false false true false false
+    false true false true true false false
 
 record ParityGluingMaxCutFrontier : Set where
   constructor parity-gluing-max-cut-frontier
