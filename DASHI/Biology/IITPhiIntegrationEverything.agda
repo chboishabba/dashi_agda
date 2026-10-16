@@ -19,6 +19,7 @@ import DASHI.Biology.IITXORGridAdversarialExact
 import DASHI.Biology.IITXORGridFibreCircuitBridgeExact
 import DASHI.Biology.IITXORGridSynthesisFabricExact
 import DASHI.Biology.IITXORGridOrientationLiftExact
+import DASHI.Biology.IITXORGridLoopHolonomyExact
 import DASHI.Biology.IITXORGridFibreCalibrationExact
 import DASHI.Biology.IITXORProbabilityReceiptExact
 import DASHI.Biology.IITXOREffectCutReceiptExact
@@ -29,6 +30,7 @@ import DASHI.Biology.IITBinaryTernaryParityTorqueLiftExact
 import DASHI.Biology.IITHigherOrderGluingDiscriminationExact
 import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact
 import DASHI.Biology.IITFaceAwareTriadicCausalPairExact
+import DASHI.Biology.IITFaceAwareTriadicGridSynthesisWeldExact
 import DASHI.Biology.IITCyclotomicFourierObserverExact
 import DASHI.Biology.IITBalancedTernary369HierarchyExact
 import DASHI.Biology.IIT369PantsGluingBridgeExact
