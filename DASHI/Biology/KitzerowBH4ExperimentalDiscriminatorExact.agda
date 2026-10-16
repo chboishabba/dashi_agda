@@ -6,6 +6,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.KitzerowBH4CascadeExact as Cascade
+import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact as Hepatic
 import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 import DASHI.Reasoning.BlockedImplicationExperimentBackpropExact as Backprop
 
@@ -47,14 +48,37 @@ canonicalCentralBH4Discriminator =
       ∷ Cone.causalIdentificationSlot
       ∷ Cone.mechanismIdentificationSlot
       ∷ [])
-    "perturb GCH1/BH4 availability or redox-dependent BH4 allocation with temporally controlled intervention while measuring branch-specific flux rather than only terminal phenotype"
-    "matched stress/allostasis condition with BH4 allocation held or rescued independently; include interventions on downstream NOS/mTOR and parallel stress pathways"
-    "same-object BH4/BH2/GCH1 state, NOS coupling, AAAH flux, AGMO/ether-lipid flux, redox state, mTOR/TSC2, cell-type and circuit readouts with calibrated timing"
-    "identify whether manipulating BH4 allocation changes multiple proposed branches before downstream phenotype and whether rescue follows the predicted mediation path"
-    "explicitly compare models in which BH4 is upstream organiser versus downstream marker, parallel compensatory response, or subgroup-specific correlate"
-    "central edge closes only if same-object intervention plus mediation/temporal evidence discriminates the BH4-upstream architecture from declared alternatives"
+    "extend the Pastor-et-al hepatic precedent: perturb GCH1/BH4 availability or redox-dependent BH4 allocation with temporally controlled intervention while measuring multiple branch-specific fluxes, not only terminal phenotype"
+    "matched stress/allostasis condition with BH4 allocation held or rescued independently; preserve the historical phenylalanine/DAHP/BH4 logic while adding orthogonal redox and downstream controls"
+    "same-object BH4/BH2/GCH1 and NAD(P)H state, NOS coupling, PAH/TH/TPH flux, AGMO/ether-lipid flux, redox state, mTOR/TSC2, compartment/cell-type and circuit readouts with calibrated timing"
+    "test whether the conditional supply-limited competition seen in rat PAH-iNOS generalizes, disappears, or changes sign across declared human/neural/subgroup contexts; identify mediation and temporal order"
+    "explicitly compare adaptive allocator, downstream marker, parallel redox response and subgroup/context-specific models; reject a naive fixed-pool model where adaptive BH4 synthesis buffers demand"
+    "central edge closes only if new same-object intervention plus mediation/temporal evidence extends beyond the paid hepatic PAH-iNOS subgraph and discriminates the declared whole-model alternatives"
     false refl
     false refl
+
+------------------------------------------------------------------------
+-- Historical discriminator payment consumed by the forward design.
+------------------------------------------------------------------------
+
+historicalSameObjectConstraint : Hepatic.HepaticCompetitionDiscriminator
+historicalSameObjectConstraint = Hepatic.canonicalHepaticCompetitionDiscriminator
+
+historicalTwoBranchConstraintPaid : Bool
+historicalTwoBranchConstraintPaid = true
+
+historicalTwoBranchConstraintPaidIsTrue : historicalTwoBranchConstraintPaid ≡ true
+historicalTwoBranchConstraintPaidIsTrue = refl
+
+historicalConstraintClosesCentralEdge : Bool
+historicalConstraintClosesCentralEdge = false
+
+historicalConstraintClosesCentralEdgeIsFalse : historicalConstraintClosesCentralEdge ≡ false
+historicalConstraintClosesCentralEdgeIsFalse = refl
+
+remainingExperimentalResidual : String
+remainingExperimentalResidual =
+  "human/neural or otherwise target-relevant same-object multi-branch perturbation measuring BH4/BH2, NAD(P)H and PAH/TH/TPH/NOS/AGMO flux with compartment, timing and subgroup controls; the rat hepatic PAH-iNOS result is a direct constraint, not whole-model closure"
 
 backpropBoundaryConsumed : Backprop.BlockedImplicationBackpropBoundary
 backpropBoundaryConsumed = Backprop.canonicalBlockedImplicationBackpropBoundary
