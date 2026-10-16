@@ -33,6 +33,59 @@ externalReductionSavesOneFraction :
 externalReductionSavesOneFraction = refl
 
 ------------------------------------------------------------------------
+-- Exact success-path microstep accounting from Mike's two published rule sets.
+--
+-- Goldbach30 success branch:
+--   NT_B*f -> SA                                      (1 dispatch)
+--   SA*a -> SB*b*c ; SB -> SA                        (2 per unit of a)
+--   SA*c -> RA_A*a^2*d^2*f                           (1 finish)
+-- hence 2*a + 2 microsteps.
+--
+-- Goldbach29 success branch:
+--   NT_B*f*a -> SB*b*c ; SB -> NT_B*f                (2 per unit of a)
+--   NT_B*f -> NT2_B*a*b ; NT2_B -> NT_B              (2 staging)
+--   NT_B*b*c -> RA_A*a*d^2*f                         (1 reused finish)
+-- hence 2*a + 3 microsteps.
+--
+-- We encode the recurrence rather than importing upstream code.  This is a
+-- DASHI-owned reconstruction of the attributed rule-count consequence.
+------------------------------------------------------------------------
+
+oldSuccessExecutionLength : Nat → Nat
+oldSuccessExecutionLength zero = 2
+oldSuccessExecutionLength (suc a) =
+  suc (suc (oldSuccessExecutionLength a))
+
+newSuccessExecutionLength : Nat → Nat
+newSuccessExecutionLength zero = 3
+newSuccessExecutionLength (suc a) =
+  suc (suc (newSuccessExecutionLength a))
+
+newSuccessExecutionLengthIsOneMore :
+  (a : Nat) →
+  newSuccessExecutionLength a ≡ suc (oldSuccessExecutionLength a)
+newSuccessExecutionLengthIsOneMore zero = refl
+newSuccessExecutionLengthIsOneMore (suc a)
+  rewrite newSuccessExecutionLengthIsOneMore a = refl
+
+signedSSPAlreadySeparatesProgramFromExecution :
+  Signed.shortestProgramLengthEqualsExecutionLength
+    Signed.canonicalSignedSSPWeaveBoundary
+  ≡ false
+signedSSPAlreadySeparatesProgramFromExecution =
+  Signed.shortestProgramLengthEqualsExecutionLengthIsFalse
+    Signed.canonicalSignedSSPWeaveBoundary
+
+staticReductionCanIncreaseSuccessExecutionLength :
+  (a : Nat) →
+  (suc externalGoldbach29FractionCount ≡ externalGoldbach30FractionCount)
+  ×
+  (newSuccessExecutionLength a ≡ suc (oldSuccessExecutionLength a))
+staticReductionCanIncreaseSuccessExecutionLength a =
+  externalReductionSavesOneFraction
+  , newSuccessExecutionLengthIsOneMore a
+
+------------------------------------------------------------------------
 -- Existing signed-369 theorem reused as the semantic law.
 --
 -- A coarse observer collision is not state identity.  The canonical virtual
@@ -73,6 +126,7 @@ record GoldbachReductionConsumerBoundary : Set where
     mikeOwnsGoldbach29Construction : Bool
     dashiOwnsObserverTranslation : Bool
     fractionCountReducedThirtyToTwentyNine : Bool
+    successPathExecutionLengthAlsoReduced : Bool
     literalFineStateIdentityRequired : Bool
     consumerRelativeAdequacyRequired : Bool
     weakOrStutteringSimulationIsNaturalTarget : Bool
@@ -88,6 +142,7 @@ canonicalGoldbachReductionConsumerBoundary =
     true
     true
     true
+    false
     false
     true
     true
