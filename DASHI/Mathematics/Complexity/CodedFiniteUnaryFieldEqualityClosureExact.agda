@@ -13,6 +13,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Maybe using (nothing)
 import Data.Fin.Base as Fin
 
+import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
@@ -23,6 +24,16 @@ import DASHI.Mathematics.Complexity.CodedFiniteUnaryFieldEqualityDeterminismExac
 -- 1. Reuse the canonical deterministic coded machine; no duplicate authority.
 ------------------------------------------------------------------------
 
+fieldEqualityDispatchUnique :
+  ∀ {left right :
+      Local.TapeRule
+        (Fin.Fin Equality.stateCount)
+        (Fin.Fin Equality.symbolCount)} →
+  Local.RuleOccurs left Equality.rules →
+  Local.RuleOccurs right Equality.rules →
+  Local.sourceState left ≡ Local.sourceState right →
+  Local.readSymbol left ≡ Local.readSymbol right →
+  left ≡ right
 fieldEqualityDispatchUnique = Determinism.dispatchUnique
 
 fieldEqualityCode : Coded.CodedFiniteStandardTM
