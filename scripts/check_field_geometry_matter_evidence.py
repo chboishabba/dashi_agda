@@ -6,8 +6,8 @@ For each registered producer this checker verifies:
 2. the producer exits successfully and emits JSON;
 3. every generated field equals the corresponding evidence field.
 
-Evidence may contain bookkeeping-only `script` and `script_sha256` fields that
-older producers do not emit. No scientific field may be absent or changed.
+Evidence may contain bookkeeping-only fields not emitted by older producers.
+No generated scientific field may be absent or changed.
 """
 
 from __future__ import annotations
@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PAIRS = [
     ("scripts/matbg_bm_plane_wave_replay.py", "Docs/evidence/matbg_bm_plane_wave_replay_2026-10-16.json"),
     ("scripts/matbg_bm_quantum_geometry.py", "Docs/evidence/matbg_bm_quantum_geometry_2026-10-16.json"),
+    ("scripts/matbg_qtm_matrix_element_observer.py", "Docs/evidence/matbg_qtm_matrix_element_observer_2026-10-16.json"),
     ("scripts/matbg_geometry_caloric_upper_bound.py", "Docs/evidence/matbg_geometry_caloric_upper_bound_2026-10-16.json"),
     ("scripts/matbg_thf_hubbard_i_atomic_reference.py", "Docs/evidence/matbg_thf_hubbard_i_atomic_reference_2026-10-16.json"),
     ("scripts/matbg_entropy_combinatorial_replay.py", "Docs/evidence/matbg_entropy_combinatorial_replay_2026-10-16.json"),
