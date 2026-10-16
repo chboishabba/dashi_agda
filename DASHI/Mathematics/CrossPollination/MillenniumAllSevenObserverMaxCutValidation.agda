@@ -9,6 +9,8 @@ import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientE
 import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientValidation
 import DASHI.Mathematics.CrossPollination.EisensteinLeanUniversalRepresentationReceiptExact as LeanReceipt
 import DASHI.Mathematics.CrossPollination.EisensteinLeanUniversalRepresentationReceiptValidation
+import DASHI.Mathematics.CrossPollination.EisensteinLeanJZeroCMOrderActionReceiptExact as LeanCM
+import DASHI.Mathematics.CrossPollination.EisensteinLeanJZeroCMOrderActionReceiptValidation
 import DASHI.Physics.ThreeBody.EisensteinC3FourierExact as ThreeBody
 import DASHI.Physics.ThreeBody.EisensteinC3FourierValidation
 import DASHI.Mathematics.Arithmetic.EisensteinJZeroCubicSymmetryExact as Cubic
@@ -96,10 +98,30 @@ concreteAZeroCurveHasJExpressionZero :
   ConcreteAZero.concreteJExpressionZeroPaid ConcreteAZero.canonicalBoundary ≡ true
 concreteAZeroCurveHasJExpressionZero = refl
 
-cmAuthorityStillSeparate :
-  ConcreteAZero.fullCMEndomorphismRingPaid ConcreteAZero.canonicalBoundary ≡ false
-cmAuthorityStillSeparate = refl
+leanNativePointGroupCMEndomorphismRecorded :
+  LeanCM.leanNativePointGroupEndomorphismSourceObserved ≡ true
+leanNativePointGroupCMEndomorphismRecorded = refl
+
+leanEisensteinQuadraticRelationRecorded :
+  LeanCM.leanEisensteinQuadraticRelationSourceObserved ≡ true
+leanEisensteinQuadraticRelationRecorded = refl
+
+leanSameCarrierOrderActionRecorded :
+  LeanCM.leanEisensteinOrderActionSourceObserved ≡ true
+leanSameCarrierOrderActionRecorded = refl
+
+leanCMReceiptDoesNotImportKernelAuthority :
+  LeanCM.leanProofObjectImportedIntoAgda ≡ false
+leanCMReceiptDoesNotImportKernelAuthority = refl
+
+cmFaithfulnessStillSeparate :
+  LeanCM.leanFaithfulGeometricCMEmbeddingObserved ≡ false
+cmFaithfulnessStillSeparate = refl
 
 heckeAuthorityStillSeparate :
-  ConcreteAZero.heckeCharacterPaid ConcreteAZero.canonicalBoundary ≡ false
+  LeanCM.leanHeckeCharacterObserved ≡ false
 heckeAuthorityStillSeparate = refl
+
+ellipticLSeriesAuthorityStillSeparate :
+  LeanCM.leanEllipticLSeriesAgreementObserved ≡ false
+ellipticLSeriesAuthorityStillSeparate = refl
