@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Economics.AICapitalSOTAReconciliation20261016Exact as SOTA
 import DASHI.Economics.AICapitalOutcomeSignatures20261016Exact as Outcome
+import DASHI.Economics.AICapitalPhase2Acquisition20261016Exact as Acquisition
 
 data PhaseState : Set where
   structurallyPaid currentAcquisition longitudinalIdentification causalAttribution outcomeValidation : PhaseState
@@ -36,25 +37,25 @@ phase1EmpiricalCoordinates : PhaseDeliverable
 phase1EmpiricalCoordinates = phase-deliverable
   "Phase 1 — same-object empirical coordinate acquisition"
   currentAcquisition
-  "aggregate CoreWeave customer cash; capital-spread lower bound; capacity-vintage and three-clock surfaces; current multi-generation rental ladder; commercial secondary-market residual-value envelope; provider segment costs; MI355X purchase/depreciation envelope; 37bp AI-linked credit spread cross-section; demand/distress SOTA surface"
-  "named payer cash; workload-normalised provider serving cost; exact owned-node finance/PUE/operations; CoreWeave-owned realised residual/resale receipts; serial GPU generations/refresh; realised generation ASP/utilisation; enacted regulatory obligations and realised compliance costs"
-  "each previously-open coordinate is populated from the same economic object and same declared horizon/basis, or explicitly bounded as unobservable; commercial market proxies remain separate from CoreWeave realised ledgers"
+  "aggregate CoreWeave customer cash; capital-spread lower bound; capacity-vintage and three-clock surfaces; current multi-generation rental ladder; commercial secondary-market residual-value envelope; provider segment costs; MI355X purchase/depreciation envelope; 37bp AI-linked credit spread cross-section; demand/distress SOTA surface; OpenAI reported multi-year negative-FCF/external-financing dependence; current Australian operative-policy baseline"
+  "named payer cash; workload-normalised provider serving cost; exact owned-node finance/PUE/operations; CoreWeave-owned realised residual/resale receipts; serial GPU generations/refresh; realised generation ASP/utilisation; realised enacted-obligation compliance costs"
+  "each previously-open coordinate is populated from the same economic object and same declared horizon/basis, or explicitly bounded as unobservable; commercial/private-reporting proxies remain separate from audited realised ledgers"
   false
 
 phase2Longitudinal : PhaseDeliverable
 phase2Longitudinal = phase-deliverable
   "Phase 2 — longitudinal identification"
   longitudinalIdentification
-  "dated state machinery, fixed-basket market series, open-weight production trajectory, debt/vintage exposure calendars"
-  "repeat X_t under identical producer definitions; issuer-level spread/refinancing histories; same-generation price/utilisation/resale decay; customer-cash and contract-realisation histories"
-  "at least two comparable later state points with unchanged measurement contracts, permitting trend/persistence rather than snapshot inference"
+  "dated state machinery, fixed-basket market series, open-weight production trajectory, debt/vintage exposure calendars, and a first same-issuer CoreWeave credit deterioration observation: reported five-year CDS-implied default probability ~30 percent one year earlier versus ~64 percent now, CDS above 1100bp and selected bond yields near 16 percent"
+  "repeat the full X_t under identical producer definitions; issuer-level refinancing outcomes/defaults and spread histories; same-generation price/utilisation/resale decay; named customer-cash and contract-realisation histories"
+  "at least two comparable later state points across each promoted consumer with unchanged measurement contracts, permitting persistence/regime inference rather than one stressed issuer coordinate"
   false
 
 phase3CausalPolicy : PhaseDeliverable
 phase3CausalPolicy = phase-deliverable
   "Phase 3 — causal/policy attribution"
   causalAttribution
-  "typed estimands, identification-family gates, exact review binding, Australian proposal chronology plus negative/control withdrawal observation"
+  "typed estimands, identification-family gates, exact review binding, proposal chronology, proposal withdrawal/control observation, and current baseline of existing-law regulation plus AI Safety Institute/guidance rather than the abandoned general mandatory-guardrail proposal"
   "measure enacted obligation -> actor-class realised cost -> entry/open-weight/concentration response with comparator/control and reviewed same-object identification receipt"
   "causal bridge is inhabited without chronology, correlation, review or policy salience substituting for identification; motive/capture remains a separate evidential claim"
   false
@@ -76,6 +77,9 @@ allNewGenericAbstractionFlagsFalse :
   (newGenericAbstractionNeeded phase4OutcomeValidation ≡ false)
 allNewGenericAbstractionFlagsFalse = refl , refl , refl , refl , refl
 
+phase2AcquisitionCoordinatesPaid : Acquisition.issuerCreditTrajectoryPaid Acquisition.currentPhase2AcquisitionState ≡ true
+phase2AcquisitionCoordinatesPaid = refl
+
 sotaBubbleStillOpen : SOTA.bubbleEstablished SOTA.currentSOTAReconciliation ≡ false
 sotaBubbleStillOpen = SOTA.bubbleStillNotEstablished
 
@@ -84,4 +88,4 @@ outcomePromotionStillOpen = refl
 
 boundary : String
 boundary =
-  "The roadmap is measurement-first. Phase 0 generic architecture is paid. Phase 1 is the current max-cut: same-object cash/cost/hardware/policy coordinates, with secondary-market residual value now bounded only as a commercial proxy rather than a CoreWeave realised ledger. Phase 2 requires comparable repeated measurements before trajectory claims. Phase 3 permits causal policy claims only after realised obligations/costs/responses plus identification and review. Phase 4 has rival outcome signatures fixed in advance; the remaining payment is longitudinal discrimination, not another narrative score."
+  "The roadmap is now past generic architecture and moving from coordinate acquisition into longitudinal identification. Phase 1 has added a reported OpenAI negative-free-cash-flow/external-financing boundary and the current Australian operative-policy baseline. Phase 2 now has a first same-issuer CoreWeave credit deterioration coordinate, but persistence/regime promotion still requires repeated full-state measurements and realised refinancing/default outcomes. Commercial residual values and private-company projections remain proxy/secondary authority, not audited same-object cash ledgers. Phase 3 begins only from actually operative obligations and realised costs. Phase 4 keeps all rival outcomes unpromoted until longitudinal discrimination is paid."
