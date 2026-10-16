@@ -2,8 +2,11 @@ module DASHI.Physics.Chemistry.AmmoniaMonster3BNative369FineCarrierExact where
 
 open import DASHI.Core.Prelude
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Moonshine.Monster3BFiniteProjectorModelExact as Model
+import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Actual
+import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact as Base369
 import DASHI.Moonshine.Base369Monster3BMultiplicityCompletedTenTritSquareCompilerExact as Multiplicity369
 import DASHI.Moonshine.Base369CompletedTenTritSquareMultiplicityBidiExact as Completed
 import DASHI.Physics.Chemistry.Atomic369Kernel6HeisenbergBridgeExact as Kernel369
@@ -79,6 +82,57 @@ canonicalNative369FineCarrierIsomorphism =
     model369RoundTrip
 
 ------------------------------------------------------------------------
+-- Any already-owned literal zeta recognition now gives a compiler from the
+-- native-369 fine coordinate directly into that literal recognized sector.
+------------------------------------------------------------------------
+
+native369ToActualZeta :
+  ∀ {ActualSector : Set} →
+  Actual.ActualZetaSectorRecognition ActualSector →
+  Native369ZetaCoordinate → ActualSector
+native369ToActualZeta recognition native =
+  Actual.fromModel recognition (native369ToModel native)
+
+actualZetaToNative369 :
+  ∀ {ActualSector : Set} →
+  Actual.ActualZetaSectorRecognition ActualSector →
+  ActualSector → Native369ZetaCoordinate
+actualZetaToNative369 recognition state =
+  modelToNative369 (Actual.toModel recognition state)
+
+native369ActualRoundTrip :
+  ∀ {ActualSector : Set}
+    (recognition : Actual.ActualZetaSectorRecognition ActualSector) →
+    (native : Native369ZetaCoordinate) →
+  actualZetaToNative369 recognition (native369ToActualZeta recognition native)
+  ≡ native
+native369ActualRoundTrip recognition native =
+  let modelEq = Actual.toAfterFrom recognition (native369ToModel native)
+  in
+  trans
+    (cong modelToNative369 modelEq)
+    (native369RoundTrip native)
+
+actualNative369RoundTrip :
+  ∀ {ActualSector : Set}
+    (recognition : Actual.ActualZetaSectorRecognition ActualSector) →
+    (state : ActualSector) →
+  native369ToActualZeta recognition (actualZetaToNative369 recognition state)
+  ≡ state
+actualNative369RoundTrip recognition state =
+  let modelRound = model369RoundTrip (Actual.toModel recognition state)
+  in
+  trans
+    (cong (Actual.fromModel recognition) modelRound)
+    (Actual.fromAfterTo recognition state)
+
+actualRecognitionToBase369 :
+  ∀ {ActualSector : Set} →
+  Actual.ActualZetaSectorRecognition ActualSector →
+  Base369.ActualBase369SectorRecognition ActualSector
+actualRecognitionToBase369 = Base369.composeActualRecognitionWithBase369
+
+------------------------------------------------------------------------
 -- A physical chemistry attachment, deliberately left proof-relevant.
 ------------------------------------------------------------------------
 
@@ -99,18 +153,26 @@ compilePhysicalCoordinateToMonsterModel :
 compilePhysicalCoordinateToMonsterModel attachment state =
   native369ToModel (coordinate attachment state)
 
+compilePhysicalCoordinateToActualZeta :
+  ∀ {NH3State ActualSector : Set} →
+  Actual.ActualZetaSectorRecognition ActualSector →
+  PhysicalNH3Native369FineCoordinate NH3State →
+  NH3State → ActualSector
+compilePhysicalCoordinateToActualZeta recognition attachment state =
+  native369ToActualZeta recognition (coordinate attachment state)
+
 record Native369FineCarrierBoundary : Set where
   constructor native369FineCarrierBoundary
   field
     atomicKernel6ToHeisenbergX6Paid : Bool
-    atomicKernel6ToHeisenbergX6PaidIsTrue :
-      atomicKernel6ToHeisenbergX6Paid ≡ true
+    atomicKernel6ToHeisenbergX6PaidIsTrue : atomicKernel6ToHeisenbergX6Paid ≡ true
     fin90ToCompletedTenTritSquarePaid : Bool
-    fin90ToCompletedTenTritSquarePaidIsTrue :
-      fin90ToCompletedTenTritSquarePaid ≡ true
+    fin90ToCompletedTenTritSquarePaidIsTrue : fin90ToCompletedTenTritSquarePaid ≡ true
     fullMonsterZetaModelHasNative369CarrierChart : Bool
-    fullMonsterZetaModelHasNative369CarrierChartIsTrue :
-      fullMonsterZetaModelHasNative369CarrierChart ≡ true
+    fullMonsterZetaModelHasNative369CarrierChartIsTrue : fullMonsterZetaModelHasNative369CarrierChart ≡ true
+    actualZetaRecognitionComposesWithNative369Chart : Bool
+    actualZetaRecognitionComposesWithNative369ChartIsTrue :
+      actualZetaRecognitionComposesWithNative369Chart ≡ true
     physicalNH3StateToNative369FineCoordinatePaid : Bool
     physicalNH3StateToNative369FineCoordinatePaidIsFalse :
       physicalNH3StateToNative369FineCoordinatePaid ≡ false
@@ -127,6 +189,7 @@ canonicalNative369FineCarrierBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
-    "The full Monster-zeta finite model basis is exactly charted by native 369 carriers Kernel6 x (Completed10 x T^2). What remains is physical same-object assignment/equivariance, not a missing finite coordinate system."
+    "The full Monster-zeta finite model basis is exactly charted by native 369 carriers Kernel6 x (Completed10 x T^2), and any existing ActualZetaSectorRecognition composes with this chart by exact two-sided round trips. What remains is physical same-object assignment/equivariance, not a missing finite coordinate system."
