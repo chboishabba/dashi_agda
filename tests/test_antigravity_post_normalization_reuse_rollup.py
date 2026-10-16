@@ -21,6 +21,7 @@ def test_reuse_rollup_imports_new_r136_tt_si_experiment_and_four_channel_frontie
         "AntigravitySICalibrationDonorMaxCutExact",
         "AntigravityMatchedControlExperimentDonorMaxCutExact",
         "AntigravitySameStateFourChannelDiscriminatorExact",
+        "AntigravityExperimentPortfolioExact",
     ):
         assert token in text
 
