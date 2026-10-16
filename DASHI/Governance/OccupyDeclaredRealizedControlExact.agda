@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.OperationalSystemBehaviourSemanticsExact as POSIWID
 import DASHI.Governance.OccupyRealizedControlAcquisitionExact as Realized
 import DASHI.Governance.BoloBoloOWSSpokesPrimaryLocatorAtlasExact as Spokes
@@ -86,6 +87,62 @@ canonicalDeclaredCommitments =
   ∷ antiHierarchyReflection
   ∷ collectiveAutonomy
   ∷ []
+
+------------------------------------------------------------------------
+-- Exact non-factorability fixture.
+--
+-- This is a finite DASHI witness, not an empirical assertion that either
+-- synthetic world describes OWS. It proves the information-theoretic point:
+-- identical declared commitments can coexist with distinct realised-control
+-- states, therefore declaration alone is not consumer-sufficient for realised
+-- control.
+------------------------------------------------------------------------
+
+data OccupyControlWorld : Set where
+  sameDeclarationDispersedControl : OccupyControlWorld
+  sameDeclarationConcentratedControl : OccupyControlWorld
+
+data DeclaredPurposeCode : Set where
+  adoptedLeaderlessParticipatoryCommitments : DeclaredPurposeCode
+
+data RealizedControlCode : Set where
+  dispersedReopenableControl : RealizedControlCode
+  concentratedRestrictedControl : RealizedControlCode
+
+declaredOccupyProjection : OccupyControlWorld → DeclaredPurposeCode
+declaredOccupyProjection sameDeclarationDispersedControl =
+  adoptedLeaderlessParticipatoryCommitments
+declaredOccupyProjection sameDeclarationConcentratedControl =
+  adoptedLeaderlessParticipatoryCommitments
+
+realizedOccupyProjection : OccupyControlWorld → RealizedControlCode
+realizedOccupyProjection sameDeclarationDispersedControl =
+  dispersedReopenableControl
+realizedOccupyProjection sameDeclarationConcentratedControl =
+  concentratedRestrictedControl
+
+realizedControlCodesDiffer :
+  realizedOccupyProjection sameDeclarationDispersedControl ≡
+  realizedOccupyProjection sameDeclarationConcentratedControl → ⊥
+realizedControlCodesDiffer ()
+
+declaredRealizedNonFactorabilityWitness :
+  INF.NonFactorabilityWitness declaredOccupyProjection realizedOccupyProjection
+declaredRealizedNonFactorabilityWitness =
+  INF.nonFactorabilityWitness
+    sameDeclarationDispersedControl
+    sameDeclarationConcentratedControl
+    refl
+    realizedControlCodesDiffer
+
+DeclaredPurposeDeterminesRealizedControl : Set
+DeclaredPurposeDeterminesRealizedControl =
+  INF.FactorsThrough declaredOccupyProjection realizedOccupyProjection
+
+declaredPurposeDoesNotDetermineRealizedControl :
+  DeclaredPurposeDeterminesRealizedControl → ⊥
+declaredPurposeDoesNotDetermineRealizedControl =
+  INF.witnessRulesOutEveryFlatFactorisation declaredRealizedNonFactorabilityWitness
 
 ------------------------------------------------------------------------
 -- Existing owners retained as exact anchors.
@@ -176,7 +233,7 @@ canonicalOccupyDeclaredRealizedReceipt =
   GenericReceipt.mkNonPromotingReceipt
     "OWS primary declared-purpose / realised-control boundary"
     "DASHI.Governance.OccupyDeclaredRealizedControlExact"
-    "canonicalOccupyDeclaredRealizedBoundary"
-    "pins the adopted 2011 Principles of Solidarity and Statement of Autonomy from the OccupyWallStreet NYCGA document repository as primary declared-purpose evidence, then routes realised leadership, correction, influence and authority questions to the existing POSIWID and realised-control acquisition owners"
-    "leaderless/participatory/transparent/dissent-friendly self-description does not establish the realised authority graph; secondary reconstruction and archival locator identity do not pay missing primary Spokes-minute content; open knowledge does not cancel the separately declared privacy commitment"
+    "canonicalOccupyDeclaredRealizedBoundary / declaredPurposeDoesNotDetermineRealizedControl"
+    "pins the adopted 2011 Principles of Solidarity and Statement of Autonomy from the OccupyWallStreet NYCGA document repository as primary declared-purpose evidence, then proves by an exact finite non-factorability witness that identical declared commitments cannot determine the realised-control consumer"
+    "the finite collision is synthetic and creates no empirical OWS control result; leaderless/participatory/transparent/dissent-friendly self-description does not establish the realised authority graph; secondary reconstruction and archival locator identity do not pay missing primary Spokes-minute content"
     "agda -i . DASHI/Governance/OccupyDeclaredRealizedControlRegression.agda"
