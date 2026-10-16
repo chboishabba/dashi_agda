@@ -11,20 +11,17 @@ import DASHI.Core.ITIRInvestigationAcquisitionParetoExact as Pareto
 import DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact as Physical
 import DASHI.Physics.Propulsion.Rocketdyne1974OperationsReliabilityFrontierExact as OpsRel
 import DASHI.Physics.Propulsion.Rocketdyne1974ContemporaryQualificationPHMSourceAtlasExact as SOTA
+import DASHI.Physics.Propulsion.Rocketdyne1974InspectionCapabilityPODExact as POD
+import DASHI.Physics.Propulsion.Rocketdyne1974ModelCredibilityValidationExact as Cred
 
 ------------------------------------------------------------------------
 -- DIGITAL THREAD
---
--- The same article/revision must remain traceable from requirement and
--- fabrication through inspection, test, anomaly/disposition, serviceability
--- and population reliability.  Shared labels or adjacent programme lineage do
--- not manufacture this same-object thread.
 ------------------------------------------------------------------------
 
 data ThreadCoordinate : Set where
   requirement articleIdentity materialAndCoating processHistory geometry
-  inspection testCondition measuredResponse anomalyDisposition
-  approvedRevision serviceability populationReliability : ThreadCoordinate
+  inspection inspectionCapability modelCredibility testCondition measuredResponse
+  anomalyDisposition approvedRevision serviceability populationReliability : ThreadCoordinate
 
 record DigitalThreadBoundary : Set where
   constructor digital-thread-boundary
@@ -37,6 +34,12 @@ record DigitalThreadBoundary : Set where
     qualificationImpliesServiceabilityIsFalse : qualificationImpliesServiceability ≡ false
     serviceabilityImpliesFleetReliability : Bool
     serviceabilityImpliesFleetReliabilityIsFalse : serviceabilityImpliesFleetReliability ≡ false
+    inspectionPresenceImpliesQuantitativeDetectionCapability : Bool
+    inspectionPresenceImpliesQuantitativeDetectionCapabilityIsFalse :
+      inspectionPresenceImpliesQuantitativeDetectionCapability ≡ false
+    sourceReportedModelAgreementImpliesOffDesignPredictiveAdequacy : Bool
+    sourceReportedModelAgreementImpliesOffDesignPredictiveAdequacyIsFalse :
+      sourceReportedModelAgreementImpliesOffDesignPredictiveAdequacy ≡ false
     adjacentProgrammeImpliesTechnologyTransfer : Bool
     adjacentProgrammeImpliesTechnologyTransferIsFalse : adjacentProgrammeImpliesTechnologyTransfer ≡ false
     digitalThreadCreatesHistoricalTruth : Bool
@@ -51,14 +54,12 @@ digitalThreadBoundary = digital-thread-boundary
   false refl
   false refl
   false refl
-  "A digital thread is an evidence-preserving same-object join, not a truth generator or a substitute for missing source records."
+  false refl
+  false refl
+  "A digital thread is an evidence-preserving same-object join, not a truth generator or a substitute for missing source records, inspection capability, or model-validation evidence."
 
 ------------------------------------------------------------------------
 -- NON-SCALAR ACQUISITION PORTFOLIO
---
--- Axis values are DASHI routing calibration only.  They rank neither truth nor
--- scientific authority.  The canonical mixed Pareto orientation comes from
--- ITIRInvestigationAcquisitionParetoExact on current master.
 ------------------------------------------------------------------------
 
 wallGaugeAndContour : Pareto.InvestigationCandidate
@@ -74,13 +75,13 @@ wallGaugeAndContour = Pareto.investigation-candidate
 
 test052ThermalField : Pareto.InvestigationCandidate
 test052ThermalField = Pareto.investigation-candidate
-  "rocketdyne:test052-thermal-field"
-  "recover numerical temperature/heat-flux calibration target"
-  "thermal-analysis appendix / thermocouple table / original analysis package"
+  "rocketdyne:test052-thermal-validation-package"
+  "recover numerical prediction/measurement arrays, heat-flux/temperature field, comparison criterion and uncertainty needed to validate the reconstructed thermal model"
+  "thermal-analysis appendix / thermocouple table / original model package / calibration and uncertainty records"
   "public archive first; lawful archival request if not located"
-  "R-9557 source-correlated Test 052 model"
-  "routing calibration: closes thermal-model reconstruction"
-  10 9 8 9 6
+  "R-9557 source-correlated Test 052 model and referent"
+  "routing calibration: model reconstruction + verification/validation/uncertainty closure"
+  10 10 10 10 6
   true refl false refl false refl
 
 fabricationTraveler : Pareto.InvestigationCandidate
@@ -96,13 +97,13 @@ fabricationTraveler = Pareto.investigation-candidate
 
 inspectionNDEHistory : Pareto.InvestigationCandidate
 inspectionNDEHistory = Pareto.investigation-candidate
-  "rocketdyne:inspection-nde-history"
-  "recover pre/post-test defect observability and acceptance state"
-  "radiography/dye penetrant/dimensional/NDE inspection and disposition records"
+  "rocketdyne:inspection-nde-capability-history"
+  "recover pre/post-test defect observability, method/coverage, defect class, quantitative sensitivity or POD basis, acceptance threshold and chronology"
+  "radiography/dye penetrant/dimensional/NDE inspection, calibration and disposition records"
   "public archive / programme records / lawful request"
   "exact article and revision"
-  "routing calibration: damage-tolerance and qualification closure"
-  9 9 9 10 7
+  "routing calibration: quantitative damage-tolerance and qualification closure"
+  9 10 10 10 7
   true refl false refl false refl
 
 constitutiveData : Pareto.InvestigationCandidate
@@ -178,11 +179,15 @@ record RocketdyneDigitalThreadExperimentFrontier : Set where
     physicalFrontier : Physical.TerminalFrontier
     operationsReliabilityFrontier : OpsRel.RocketdyneOperationsReliabilityFrontier
     sourceAtlasBoundary : SOTA.ContemporarySourceAtlasBoundary
+    inspectionCapabilityFrontier : POD.InspectionCapabilityFrontier
+    modelCredibilityFrontier : Cred.Test052CredibilityFrontier
     threadBoundary : DigitalThreadBoundary
     acquisitionPortfolio : AcquisitionPortfolio
     firstPhysicsProducer : String
     firstQualificationProducer : String
     firstReliabilityProducer : String
+    sourceVisibleSiblingExperimentRouter : String
+    unmergedSiblingIsTheoremAuthority : Bool
     stoppingRule : String
 
 rocketdyneDigitalThreadExperimentFrontier : RocketdyneDigitalThreadExperimentFrontier
@@ -190,9 +195,13 @@ rocketdyneDigitalThreadExperimentFrontier = rocketdyne-digital-thread-experiment
   Physical.currentTerminalFrontier
   OpsRel.rocketdyneOperationsReliabilityFrontier
   SOTA.contemporarySourceAtlasBoundary
+  POD.canonicalInspectionCapabilityFrontier
+  Cred.test052CredibilityFrontier
   digitalThreadBoundary
   rocketdyneAcquisitionPortfolio
-  "Recover local wall gauge/contour plus Test-052 numerical thermal field, then instantiate one same-model Haynes/WC103 thermo-structural discriminator."
-  "Recover fabrication/process + inspection/NDE + formal disposition/approval on the exact article revision."
+  "Recover local wall gauge/contour plus Test-052 numerical prediction/measurement and uncertainty package; validate/freeze one model before the two-material discriminator."
+  "Recover fabrication/process + quantitative inspection capability + formal disposition/approval on the exact article revision."
   "Recover a homogeneous serial/lot/revision population with complete exposure/failure/repair/removal/return-to-service counts."
-  "If the required same-object producers cannot be recovered, retain empirical discrimination and non-identifiability rather than manufacturing unique stress, lifetime, qualification or fleet reliability."
+  "Field-Geometry-Matter PR #1163 is a source-visible design donor for non-scalar external-producer routing; this branch uses the already-merged ITIR acquisition-Pareto owner instead of importing #1163 theorem authority."
+  false
+  "If the required same-object producers cannot be recovered, retain empirical discrimination and non-identifiability rather than manufacturing unique stress, lifetime, model credibility, inspection capability, qualification or fleet reliability."
