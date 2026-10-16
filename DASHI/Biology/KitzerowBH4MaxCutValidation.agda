@@ -15,14 +15,15 @@ import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorExact as Neural
 import DASHI.Biology.KitzerowBH4RedoxSpatialDiscriminatorExact as RedoxSpatial
 import DASHI.Biology.KitzerowBH4TransportCarrierProbeExact as TransportProbe
 import DASHI.Biology.KitzerowBH4TransportAcquisitionStatusExact as TransportStatus
+import DASHI.Biology.KitzerowBH4NeuralInVivoRouteStateProbeExact as RouteState
+import DASHI.Biology.KitzerowBH4NeuralRouteStateAcquisitionStatusExact as RouteStateStatus
 import DASHI.Biology.KitzerowBH4ConvergentEvidenceExact as Evidence
 import DASHI.Biology.KitzerowPriorityAttributionExact as Attribution
 import DASHI.Biology.KitzerowBH4PriorArtSubtractionExact as PriorArt
 import DASHI.Biology.KitzerowBH4ExperimentalDiscriminatorExact as Experiment
 import DASHI.Biology.KitzerowBH4ParetoAcquisitionExact as Pareto
 
-candidateGraphDoesNotClaimWholeModelConfirmation :
-  Cascade.wholeModelConfirmed Cascade.canonicalKitzerowBH4Cascade ≡ false
+candidateGraphDoesNotClaimWholeModelConfirmation : Cascade.wholeModelConfirmed Cascade.canonicalKitzerowBH4Cascade ≡ false
 candidateGraphDoesNotClaimWholeModelConfirmation = refl
 
 repoIntegrationConsumesBiologyBrainChemistry :
@@ -47,8 +48,7 @@ reactionChemistryKeepsQuantitativePromotionClosed :
   × ReactionChem.wetLabValidationPromoted ReactionChem.canonicalBH4ReactionChemistryBoundary ≡ false
 reactionChemistryKeepsQuantitativePromotionClosed = refl , (refl , refl)
 
-atomic369DoesNotDetermineBH4ReactionPath :
-  ReactionChem.atomic369DeterminesReactionPath ReactionChem.canonicalBH4ReactionChemistryBoundary ≡ false
+atomic369DoesNotDetermineBH4ReactionPath : ReactionChem.atomic369DeterminesReactionPath ReactionChem.canonicalBH4ReactionChemistryBoundary ≡ false
 atomic369DoesNotDetermineBH4ReactionPath = refl
 
 sharedBH4PoolIsLiteralButFluxClaimRemainsOpen :
@@ -88,22 +88,6 @@ redoxSpatialEvidenceRejectsWellMixedScalarPool :
   × RedoxSpatial.redoxSpatialEvidenceClosesWholeAllocator RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
 redoxSpatialEvidenceRejectsWellMixedScalarPool = refl , (refl , (refl , refl))
 
-uptakeAndCocultureArePaidWithoutQuantitativeTransferPromotion :
-  RedoxSpatial.cellularBH4UptakeDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
-  × RedoxSpatial.functionalCocultureCrossTalkSupported RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
-  × RedoxSpatial.specificMembraneCarrierRequiredByUptakeStudy RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
-  × RedoxSpatial.intercellBH4TransferDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
-uptakeAndCocultureArePaidWithoutQuantitativeTransferPromotion =
-  refl , (refl , (refl , refl))
-
-topologyResolvedBalanceIsRequiredButNumericalEdgesRemainOpen :
-  RedoxSpatial.topologyResolvedStateRequired RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ true
-  × RedoxSpatial.scalarProjectionIsLossy RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ true
-  × RedoxSpatial.numericEdgeFluxesPaid RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ false
-  × RedoxSpatial.directTransferFluxPaid RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ false
-topologyResolvedBalanceIsRequiredButNumericalEdgesRemainOpen =
-  refl , (refl , (refl , refl))
-
 carrierQuestionIsContextSpecificNotUniversal :
   TransportProbe.specificTransportersExistInSomeContexts TransportProbe.canonicalTransportCarrierBoundary ≡ true
   × TransportProbe.singleUniversalNeuralBH4CarrierEstablished TransportProbe.canonicalTransportCarrierBoundary ≡ false
@@ -118,29 +102,30 @@ quantitativeTranscellularRateDoesNotPayTargetNeuralEdge :
   × TransportStatus.neuralDonorRecipientRatePaid TransportStatus.canonicalTransportAcquisitionStatus ≡ false
 quantitativeTranscellularRateDoesNotPayTargetNeuralEdge = refl , (refl , (refl , refl))
 
-releaseUptakeCocultureChainStillDoesNotYieldMolecularTransferRate :
-  TransportProbe.catecholaminergicBH4ReleaseObserved TransportProbe.canonicalTransportCarrierBoundary ≡ true
-  × TransportProbe.recipientBH4UptakeObserved TransportProbe.canonicalTransportCarrierBoundary ≡ true
-  × TransportProbe.functionalCocultureCrossTalkObserved TransportProbe.canonicalTransportCarrierBoundary ≡ true
-  × TransportProbe.releaseUptakeCocultureSufficesForQuantitativeTransfer TransportProbe.canonicalTransportCarrierBoundary ≡ false
-  × TransportProbe.transportProbeClosesWholeAllocator TransportProbe.canonicalTransportCarrierBoundary ≡ false
-releaseUptakeCocultureChainStillDoesNotYieldMolecularTransferRate =
-  refl , (refl , (refl , (refl , refl)))
+routeStateEvidenceRejectsTotalPoolAndGenericExposureSufficiency :
+  RouteState.totalTissueBiopterinSufficesForMonoamineOutput RouteState.canonicalNeuralRouteStateBoundary ≡ false
+  × RouteState.intracellularAndExtracellularBH4AreMechanisticallyEquivalent RouteState.canonicalNeuralRouteStateBoundary ≡ false
+  × RouteState.peripheralBH4CanActivateTHInVivo RouteState.canonicalNeuralRouteStateBoundary ≡ true
+  × RouteState.peripheralBH4CanActivateTPHInVivo RouteState.canonicalNeuralRouteStateBoundary ≡ true
+  × RouteState.sameObjectSimultaneousMultiBranchAllocationPaid RouteState.canonicalNeuralRouteStateBoundary ≡ false
+routeStateEvidenceRejectsTotalPoolAndGenericExposureSufficiency = refl , (refl , (refl , (refl , refl)))
 
-allCurrentEvidenceReceiptsRejectWholeModelConfirmation :
-  Evidence.allCanonicalEvidenceReceiptsRejectWholeModelConfirmation ≡ true
+routeStateAcquisitionIsPaidWithoutWholeClosure :
+  RouteStateStatus.routeStateCoordinatePaid RouteStateStatus.canonicalNeuralRouteStateAcquisitionStatus ≡ true
+  × RouteStateStatus.simultaneousAllocationCoordinatePaid RouteStateStatus.canonicalNeuralRouteStateAcquisitionStatus ≡ false
+  × RouteStateStatus.wholeAllocatorClosed RouteStateStatus.canonicalNeuralRouteStateAcquisitionStatus ≡ false
+routeStateAcquisitionIsPaidWithoutWholeClosure = refl , (refl , refl)
+
+allCurrentEvidenceReceiptsRejectWholeModelConfirmation : Evidence.allCanonicalEvidenceReceiptsRejectWholeModelConfirmation ≡ true
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation = refl
 
-stanfordContactIsNotSilentlyVerified :
-  Attribution.stanfordDirectContactVerified Attribution.canonicalStanfordAttribution ≡ false
+stanfordContactIsNotSilentlyVerified : Attribution.stanfordDirectContactVerified Attribution.canonicalStanfordAttribution ≡ false
 stanfordContactIsNotSilentlyVerified = refl
 
-japanBoundedIndependenceIsRetained :
-  Attribution.derivation Attribution.canonicalNomuraAttribution ≡ Attribution.independentDerivationSupported
+japanBoundedIndependenceIsRetained : Attribution.derivation Attribution.canonicalNomuraAttribution ≡ Attribution.independentDerivationSupported
 japanBoundedIndependenceIsRetained = refl
 
-priorArtPartitionSeparatesInheritedBiology :
-  PriorArt.inheritedPriorBiologyRetained PriorArt.canonicalNomuraPriorArtPartition ≡ true
+priorArtPartitionSeparatesInheritedBiology : PriorArt.inheritedPriorBiologyRetained PriorArt.canonicalNomuraPriorArtPartition ≡ true
 priorArtPartitionSeparatesInheritedBiology = refl
 
 centralBH4AllocationRemainsExperimentallyOpen :
@@ -149,9 +134,9 @@ centralBH4AllocationRemainsExperimentallyOpen :
   × Experiment.historicalNeuralContextConstraintPaid ≡ true
   × Experiment.historicalRedoxSpatialConstraintPaid ≡ true
   × Experiment.historicalTransportCarrierConstraintPaid ≡ true
+  × Experiment.historicalRouteStateConstraintPaid ≡ true
   × Experiment.historicalConstraintsCloseCentralEdge ≡ false
-centralBH4AllocationRemainsExperimentallyOpen =
-  refl , (refl , (refl , (refl , (refl , refl))))
+centralBH4AllocationRemainsExperimentallyOpen = refl , (refl , (refl , (refl , (refl , (refl , refl)))))
 
 paretoFrontierIsNotTruthRanking :
   Pareto.frontierRankIsTruthRank Pareto.canonicalKitzerowAcquisitionFrontier ≡ false
