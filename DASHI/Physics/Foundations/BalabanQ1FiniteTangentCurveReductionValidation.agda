@@ -19,3 +19,7 @@ metricTangentConstructionNotSecondLeaf = refl
 remainingLeafIsOneTangentCurveRealisation :
   Cut.remainingQ1LeafIsTangentCurveSourceSemantics ≡ true
 remainingLeafIsOneTangentCurveRealisation = refl
+
+cmp109GaugeBPathNotSilentlyMetricStressPath :
+  Cut.cmp109GaugeBPathIsNotMetricStressCurveByNotation ≡ true
+cmp109GaugeBPathNotSilentlyMetricStressPath = refl
