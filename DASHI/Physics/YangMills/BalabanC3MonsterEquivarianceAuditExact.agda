@@ -10,6 +10,7 @@ import DASHI.Physics.YangMills.BalabanCMP109SpatialC3ActionExact as CMP109C3
 import DASHI.Physics.YangMills.BalabanUnifiedRecoveryC3TransportExact as UnifiedC3
 import DASHI.Physics.Foundations.BalabanR144SpatialC3StressRestrictionExact as R144C3
 import DASHI.Physics.Foundations.BalabanA1InvariantPathSourceReductionExact as A1Cut
+import DASHI.Physics.Foundations.BalabanQ1FiniteTangentCurveReductionExact as Q1Cut
 import DASHI.Physics.Foundations.BalabanP1PresentCutSpatialC3CompilerExact as P1C3
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
 
@@ -27,14 +28,18 @@ import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 --   * the P1 invariant-path theorem proves signed B4 covariance from invariant
 --     potential + equivariant signed source path + ordinary derivative semantics;
 --   * the present-cut P1 compiler transports that theorem to the exact finite
---     localized D1 and the new spatial-C3 compiler restricts it to swap23 ;
---     swap12 without charging another C3 receipt.
+--     localized D1 and the spatial-C3 compiler restricts it to swap23 ; swap12;
+--   * Q1's free per-component sourcePath is now eliminated: every component path
+--     is generated from the SAME tangent->curve realization applied to the exact
+--     present-cut finite Tangent carrier, which is definitionally the ten-slot
+--     symmetric tensor carrier and is already reused by the R144 metric lane.
 --
--- Consequently the remaining shortest-path payment is Q1 source evidence:
--- identify/construct the literal present-cut path, prove its B4 equivariance and
--- ordinary derivative semantics.  A separate exact-rational R144 readout
--- identification remains a representation payment only for consumers that need
--- that rational carrier specifically.
+-- Consequently the remaining shortest-path payment is one source construction:
+-- realize a curve from the exact Background and finite Tangent, prove its B4
+-- naturality on the ten selected tangents, and identify BC2.firstVariation with
+-- the ordinary derivative of the selected effective potential along that curve.
+-- A separate exact-rational R144 readout identification remains a representation
+-- payment only for consumers that need that rational carrier specifically.
 ------------------------------------------------------------------------
 
 monster369ExactC3TemplateAvailable : Bool
@@ -71,15 +76,34 @@ balabanPresentCutSpatialC3NeedsIndependentPhysicalReceipt = false
 balabanPrimitiveSignedB4CovarianceStillSourceLeaf : Bool
 balabanPrimitiveSignedB4CovarianceStillSourceLeaf = false
 
+balabanQ1FreePerComponentSourcePathStillPrimitive : Bool
+balabanQ1FreePerComponentSourcePathStillPrimitive =
+  Q1Cut.freePerComponentSourcePathIsPrimitive
+
+balabanQ1UsesExactPresentCutFiniteTangent : Bool
+balabanQ1UsesExactPresentCutFiniteTangent =
+  Q1Cut.q1CurveUsesExactPresentCutFiniteTangent
+
+balabanQ1NeedsIndependentMetricTangentConstruction : Bool
+balabanQ1NeedsIndependentMetricTangentConstruction =
+  Q1Cut.independentMetricTangentConstructionRequired
+
+balabanQ1TangentCurveSourceSemanticsStillSourceLeaf : Bool
+balabanQ1TangentCurveSourceSemanticsStillSourceLeaf =
+  Q1Cut.remainingQ1LeafIsTangentCurveSourceSemantics
+
 balabanQ1PathSemanticsAndEquivarianceStillSourceLeaf : Bool
 balabanQ1PathSemanticsAndEquivarianceStillSourceLeaf =
   Q.q1IsPathDerivativeSemanticsAndEquivariance
+
+balabanCMP109GaugeBPathMayBeIdentifiedWithMetricStressCurveByNotation : Bool
+balabanCMP109GaugeBPathMayBeIdentifiedWithMetricStressCurveByNotation = false
 
 balabanTerminalR144CovarianceInterfaceRecovered : Bool
 balabanTerminalR144CovarianceInterfaceRecovered = true
 
 -- No literal Q1 source inhabitant is fabricated here.  This remains false until
--- the source path/equivariance/ordinary-derivative package is inhabited.
+-- the tangent->curve/naturality/ordinary-derivative package is inhabited.
 balabanTerminalR144CovarianceInhabitantRecovered : Bool
 balabanTerminalR144CovarianceInhabitantRecovered = false
 
@@ -107,6 +131,10 @@ balabanP1InvariantPathCompilerRecoveredIsTrue = refl
 balabanPresentCutSpatialC3IsCompilerOutputFromQ1IsTrue :
   balabanPresentCutSpatialC3IsCompilerOutputFromQ1 ≡ true
 balabanPresentCutSpatialC3IsCompilerOutputFromQ1IsTrue = refl
+
+balabanQ1UsesExactPresentCutFiniteTangentIsTrue :
+  balabanQ1UsesExactPresentCutFiniteTangent ≡ true
+balabanQ1UsesExactPresentCutFiniteTangentIsTrue = refl
 
 record BalabanLiteralC3Realisation : Set₁ where
   field
@@ -153,6 +181,12 @@ primitiveR144B4CovarianceIsTerminalFrontier = false
 independentSpatialC3CovarianceIsTerminalFrontier : Bool
 independentSpatialC3CovarianceIsTerminalFrontier = false
 
+freePerComponentQ1PathIsTerminalFrontier : Bool
+freePerComponentQ1PathIsTerminalFrontier = false
+
+independentMetricTangentConstructionIsTerminalFrontier : Bool
+independentMetricTangentConstructionIsTerminalFrontier = false
+
 highestAlphaYM369Question : String
 highestAlphaYM369Question =
-  "Pay Q1 on the literal CMP109/116 present-cut object: construct the selected one-parameter metric/stress source path, prove B4 path equivariance with reflection signs represented by t -> -t, and prove BC2.firstVariation is its ordinary derivative. P1 then compiles signed finite-D1 B4 covariance and the spatial-C3 theorem follows from swap23 ; swap12. Only pay an additional rational-R144 identification for consumers that specifically require the exact rational readout carrier."
+  "Pay the one remaining Q1 source construction on the literal CMP109/116 present-cut object: realize curveFromFiniteTangent : Background -> Tangent -> R -> Background on the exact ten-slot finite Tangent carrier, prove its B4 naturality (reflection signs by t -> -t), and prove BC2.firstVariation is the ordinary derivative of the selected effective potential along that curve. The exact finite tangent already compiles into the R144 canonical metric perturbation; do not introduce a second metric basis. CMP109 Eq.(5.1)'s B -> U_j(exp iB) is the gauge-background vacuum-polarization path and must not be silently substituted for the metric/stress curve."
