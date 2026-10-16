@@ -1,7 +1,7 @@
 {
   "script": "scripts/matbg_geometry_caloric_upper_bound.py",
-  "script_sha256": "67cbebb5467e818083d2a3df7979dbec625c2b9c6973f97588a24e2e52823ee6",
-  "execution_environment": "ChatGPT analysis Python runtime",
+  "script_sha256": "263011eaecf0135634a087f4f8c0b1e47d247143fc347db5cb4138f3b71a60f7",
+  "execution_environment": "Python standard library",
   "source": "10.1038/s41467-026-76179-y",
   "interpretation": "equilibrium combinatorial entropy-swing scale only",
   "fillings": {
