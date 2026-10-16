@@ -27,6 +27,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Foundations.Base369TriTruthField as Tri
 import DASHI.Foundations.StageTwelveGrothendieckRelationHyperformExact as Stage12
 import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Site
 import DASHI.Foundations.RelationalStageTwelveSiteExact as RelSheaf
@@ -173,15 +174,15 @@ triadicMorphismHyperdescent = Stack.gluePhaseMorphisms
 triadicTwoSkeletonCocycle :
   ∀ {source target : RelSheaf.TriadicLocals Cell.CellDialectic} →
   (morphisms : Stack.TriadicPhaseMorphisms source target) →
-  DASHI.Foundations.Base369TriTruthField.triAdd
+  Tri.triAdd
     (Phase.equalityPhase (Stack.morphismAB morphisms))
-    (DASHI.Foundations.Base369TriTruthField.triAdd
+    (Tri.triAdd
       (Phase.equalityPhase (Stack.morphismBC morphisms))
       (Phase.equalityPhase (Stack.morphismCA morphisms)))
   ≡
-  DASHI.Foundations.Base369TriTruthField.triAdd
+  Tri.triAdd
     (Phase.equalityPhase (Stack.morphismAB morphisms))
-    (DASHI.Foundations.Base369TriTruthField.triAdd
+    (Tri.triAdd
       (Phase.equalityPhase (Stack.morphismAB morphisms))
       (Phase.equalityPhase (Stack.morphismAB morphisms)))
 triadicTwoSkeletonCocycle = Two.triadicPhaseCycleCloses
@@ -227,6 +228,26 @@ record FiniteTriadicHyperdescentReceipt : Set₁ where
       Site.RelIsMaximal
         (Stage12.pullbackSieve
           Site.relationalPatchCategory Site.caToGlobal Site.triadicRelationalSieve)
+    pullbackAMaximal :
+      Site.RelIsMaximal
+        (Stage12.pullbackSieve
+          Site.relationalPatchCategory Site.aToGlobal Site.triadicRelationalSieve)
+    pullbackBMaximal :
+      Site.RelIsMaximal
+        (Stage12.pullbackSieve
+          Site.relationalPatchCategory Site.bToGlobal Site.triadicRelationalSieve)
+    pullbackCMaximal :
+      Site.RelIsMaximal
+        (Stage12.pullbackSieve
+          Site.relationalPatchCategory Site.cToGlobal Site.triadicRelationalSieve)
+
+    maximalPullbackStable :
+      ∀ {U V : Site.RelObj} →
+      (arrow : Site.RelHom V U) →
+      (sieve : Stage12.Sieve Site.relationalPatchCategory U) →
+      Site.RelIsMaximal sieve →
+      Site.RelIsMaximal
+        (Stage12.pullbackSieve Site.relationalPatchCategory arrow sieve)
 
     objectDescent :
       (locals : RelSheaf.TriadicLocals Cell.CellDialectic) →
@@ -244,6 +265,21 @@ record FiniteTriadicHyperdescentReceipt : Set₁ where
       Phase.GlobalPhaseHom
         (Descent.glueStructured source sourceCompatibility)
         (Descent.glueStructured target targetCompatibility)
+
+    twoSkeletonCocycle :
+      ∀ {source target : RelSheaf.TriadicLocals Cell.CellDialectic} →
+      (morphisms : Stack.TriadicPhaseMorphisms source target) →
+      Tri.triAdd
+        (Phase.equalityPhase (Stack.morphismAB morphisms))
+        (Tri.triAdd
+          (Phase.equalityPhase (Stack.morphismBC morphisms))
+          (Phase.equalityPhase (Stack.morphismCA morphisms)))
+      ≡
+      Tri.triAdd
+        (Phase.equalityPhase (Stack.morphismAB morphisms))
+        (Tri.triAdd
+          (Phase.equalityPhase (Stack.morphismAB morphisms))
+          (Phase.equalityPhase (Stack.morphismAB morphisms)))
 
     maximalObjectIdentity :
       ∀ {U : Site.RelObj} →
@@ -263,8 +299,13 @@ canonicalFiniteTriadicHyperdescentReceipt = record
   ; pullbackABMaximal = abPullbackMaximal
   ; pullbackBCMaximal = bcPullbackMaximal
   ; pullbackCAMaximal = caPullbackMaximal
+  ; pullbackAMaximal = aPullbackMaximal
+  ; pullbackBMaximal = bPullbackMaximal
+  ; pullbackCMaximal = cPullbackMaximal
+  ; maximalPullbackStable = maximalPullbacksRemainMaximal
   ; objectDescent = triadicObjectHyperdescent
   ; morphismDescent = triadicMorphismHyperdescent
+  ; twoSkeletonCocycle = triadicTwoSkeletonCocycle
   ; maximalObjectIdentity = maximalObjectDescent
   ; maximalMorphismIdentity = maximalMorphismDescent
   }
