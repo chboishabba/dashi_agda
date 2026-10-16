@@ -1,0 +1,33 @@
+{
+  "basis_order": [
+    "m=-1",
+    "m=0",
+    "m=+1"
+  ],
+  "charge_K_order3_residual": 0.0,
+  "spatial_Rz_order3_residual": 1.1226435567921847e-15,
+  "same_basis_K_minus_Rz_norm": 2.449489742783178,
+  "same_basis_commutator_norm": 3.0,
+  "fourier_unitarity_residual": 5.460640770981247e-16,
+  "fourier_diagonalization_residual": 6.0688913233106775e-16,
+  "wedge2_order3_residual": 0.0,
+  "wedge3_value": [
+    1.0,
+    0.0
+  ],
+  "wedge3_order3_residual": 0.0,
+  "hydrogenic_p_triplet_commutator_norm": 0.0,
+  "hydrogenic_wedge2_commutator_norm": 0.0,
+  "hydrogenic_wedge3_commutator_norm": 0.0,
+  "nondegenerate_control_commutator_norm": 0.14849242404917498,
+  "boundaries": {
+    "fourier_equivalent_not_same_matrix": true,
+    "exterior_basis_action_paid": true,
+    "hydrogenic_restricted_shell_commutation_paid": true,
+    "electron_electron_interacting_p_shell_hamiltonian_paid": false,
+    "li_be_scf_same_carrier_as_p_triplet": false,
+    "ammonia_hamiltonian_same_carrier_as_atomic_p_triplet": false,
+    "material_hamiltonian_same_carrier_as_atomic_p_triplet": false,
+    "full_atom_369_identity_paid": false
+  }
+}
