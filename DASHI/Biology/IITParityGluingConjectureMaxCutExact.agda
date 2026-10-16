@@ -4,8 +4,8 @@ module DASHI.Biology.IITParityGluingConjectureMaxCutExact where
 -- TERMINAL CONJECTURE CAPSTONE
 --
 -- local synthesis       : bipermutative Boolean/F3 parity channels
--- ordered gluing        : orientation, handedness, C3 phase
--- higher-order gluing   : triadic face / cocycle non-descent
+-- ordered gluing        : orientation, handedness, C3 phase / loop holonomy
+-- higher-order gluing   : recurrent binary fabric vs explicit ABC interaction
 -- global geometry       : image/kernel structure of the glued transition map
 ------------------------------------------------------------------------
 
@@ -25,8 +25,10 @@ import DASHI.Biology.IITCubeDiagonalStabilizerExact as Stabilizer
 import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact as Broken
 import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact as FullFace
 import DASHI.Biology.IITFaceAwareTriadicCausalPairExact as FaceAware
+import DASHI.Biology.IITFaceAwareTriadicGridSynthesisWeldExact as FaceWeld
 import DASHI.Biology.IITXORGridSynthesisFabricExact as GridFabric
 import DASHI.Biology.IITXORGridOrientationLiftExact as GridOrientation
+import DASHI.Biology.IITXORGridLoopHolonomyExact as GridHolonomy
 import DASHI.Reasoning.LILACubeEmpiricalSameObjectReceiptExact as Lila
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
@@ -89,6 +91,20 @@ fullStructureCannotRecoverHiddenFace = FullFace.pairwiseIITOutputDoesNotDetermin
 faceAwareTriadicCausalPair : FaceAware.FaceMatchedTriadicCausalPair
 faceAwareTriadicCausalPair = FaceAware.canonicalFaceMatchedTriadicCausalPair
 
+faceAwarePairwiseIsBinarySynthesisFabric :
+  (state : FaceAware.BitTriple) →
+  (site : FaceWeld.TriSite) →
+  FaceWeld.pairwiseOutputField state site
+  ≡ GridFabric.xorFabricStep FaceWeld.triangleFabric (FaceWeld.tripleField state) site
+faceAwarePairwiseIsBinarySynthesisFabric =
+  FaceWeld.pairwiseIsExactlyThreeBinarySynthesisCells
+
+faceAwareTriadicIsSameFabricPlusABC :
+  (state : FaceAware.BitTriple) →
+  (site : FaceWeld.TriSite) →
+  FaceWeld.triadicOutputField state site ≡ FaceWeld.triadicFabricStep state site
+faceAwareTriadicIsSameFabricPlusABC = FaceWeld.triadicIsPairwiseFabricPlusABC
+
 gridWideXorSynthesisBoundary : GridFabric.XORGridSynthesisFabricBoundary
 gridWideXorSynthesisBoundary = GridFabric.canonicalXORGridSynthesisFabricBoundary
 
@@ -111,6 +127,16 @@ gridWideTernaryDifferenceConsumesInputOrder :
 gridWideTernaryDifferenceConsumesInputOrder =
   GridOrientation.triDiffStepSwapNegatesPointwise
 
+gridLoopHolonomyBoundary : GridHolonomy.GridLoopHolonomyBoundary
+gridLoopHolonomyBoundary = GridHolonomy.canonicalGridLoopHolonomyBoundary
+
+gridSocketSwapConjugatesHolonomy :
+  (path : GridHolonomy.SocketPath) →
+  GridHolonomy.phaseHolonomy (GridHolonomy.swapSocketPath path)
+  ≡ DASHI.Moonshine.C3FourierConjugationExact.inversePhase
+      (GridHolonomy.phaseHolonomy path)
+gridSocketSwapConjugatesHolonomy = GridHolonomy.swapPathConjugatesHolonomy
+
 exceptionalHandoffBoundary : Exceptional.ExceptionalCubeHandoffBoundary
 exceptionalHandoffBoundary = Exceptional.canonicalExceptionalCubeHandoffBoundary
 
@@ -129,6 +155,9 @@ record ParityGluingConjectureStatus : Set where
     binaryXorQuotientsInputOrderingKernelPaid : Bool
     sameGridFabricSupportsOrientationSensitiveTernaryChannelKernelPaid : Bool
     ternaryDifferenceGridSwapNegatesKernelPaid : Bool
+    gridSocketC3HolonomySourceWritten : Bool
+    gridSocketSwapConjugatesHolonomySourceWritten : Bool
+    socketC3ChartIsPhysicalTorqueByDefinition : Bool
     higherOrderGridOrganizationRequiresHigherArityLocalGate : Bool
 
     ternaryAffineEssentialClassifiedTwelve : Bool
@@ -139,6 +168,8 @@ record ParityGluingConjectureStatus : Set where
 
     pairwiseBoundaryTriadicNonDescentKernelPaid : Bool
     faceAwareTriadicTPMPairKernelPaid : Bool
+    faceAwarePairwiseIsBinarySynthesisFabricSourceWritten : Bool
+    faceAwareTriadicIsSameFabricPlusABCSourceWritten : Bool
     faceAwareSystemPhiDiscriminationNumericallyPaid : Bool
     faceAwareScalarPhiSeparatesSomeStates : Bool
     faceAwareScalarPhiStillCollidesSomeStates : Bool
@@ -149,6 +180,9 @@ record ParityGluingConjectureStatus : Set where
     twoFineFacesWeldToQ9FieldKernelPaid : Bool
     cubeImageGraphOverTwoFacesSourceWritten : Bool
     concreteTorusImageEqualsGraphKernelPaid : Bool
+    cubeCentralizerJordan333NumericallyPaid : Bool
+    cubeCentralizerDimension27NumericallyPaid : Bool
+    cubeCentralizerM3TruncatedPolynomialAlgebraNumericallyPaid : Bool
 
     fullIITDistinctionRelationPhiDiscriminatesHigherGluing : Bool
     diagonalCubeStabilizerCharacterizedKernelPaid : Bool
@@ -164,10 +198,10 @@ canonicalParityGluingConjectureStatus : ParityGluingConjectureStatus
 canonicalParityGluingConjectureStatus =
   parity-gluing-conjecture-status
     true true false
-    true true true true true true false
+    true true true true true true true true false false
     true true true true false
-    true true true true true false true false
-    true true true
+    true true true true true true true false true false
+    true true true true true true
     false true false true true false false
 
 record ParityGluingMaxCutFrontier : Set where
@@ -176,8 +210,11 @@ record ParityGluingMaxCutFrontier : Set where
     remainingBooleanWorkIsMoreTruthTableEnumeration : Bool
     remainingBinaryGridWorkIsMoreLocalCellEnumeration : Bool
     remainingBinaryTernaryGridWorkIsMoreSocketRecharting : Bool
+    remainingHigherOrderWorkIsAnotherMatchedFixture : Bool
+    remainingHolonomyWorkIsPhysicalSameObjectTorquePromotion : Bool
     remainingTernaryWorkIsMoreAffineEnumeration : Bool
     remainingCubeWorkIsConcreteSameObjectOperatorProof : Bool
+    remainingCubeWorkIsMoreCentralizerDimensionCounting : Bool
     remainingIITWorkIsFullCESMatchedHigherGluingEvaluation : Bool
     remainingExceptionalWorkIsActionPreservationIntertwiner : Bool
     remainingLilaWorkIsActualHiddenTrajectoryAndHeldOutConsumer : Bool
@@ -185,4 +222,4 @@ record ParityGluingMaxCutFrontier : Set where
 canonicalParityGluingMaxCutFrontier : ParityGluingMaxCutFrontier
 canonicalParityGluingMaxCutFrontier =
   parity-gluing-max-cut-frontier
-    false false false false false true false true
+    false false false false true false false false true false true
