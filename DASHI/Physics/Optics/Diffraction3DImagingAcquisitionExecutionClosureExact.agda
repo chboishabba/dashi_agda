@@ -16,10 +16,14 @@ import DASHI.Physics.Optics.BerkeleyDiffuserCamDepthConditioningExact as Conditi
 -- TERMINAL EXECUTION / ACQUISITION CLOSURE
 --
 -- This owner records the strongest current optics cut after actual local/public
--- data execution.  It is intentionally thin over the existing owners.
+-- data execution. It is intentionally thin over the existing owners.
 --
 -- PAID:
 --   * exact DiffuserCam source-H/compiler + synthetic exhaustive execution;
+--   * exact pinned Waller example_psfs.mat bytes executed through the real
+--     same-H depth + radius-1 translated-column audit;
+--   * finite k=1 same-H Gershgorin/gain/restricted-kappa receipt;
+--   * real PSF claim-scale planner through first unsafe radius under 5 GiB;
 --   * live public 0..255 photon-transfer stimulus bytes executed locally;
 --   * source-executed DN -> estimated detected-photon calibration;
 --   * real public RML/diffuser system-characterization TIFFs executed through
@@ -32,14 +36,14 @@ import DASHI.Physics.Optics.BerkeleyDiffuserCamDepthConditioningExact as Conditi
 --   * source-saved full-precision slope/intercept npy blobs.
 --
 -- GENUINE REMAINING PHYSICAL / EXECUTION LEAVES:
---   P1: materialise Waller example_psfs.mat and execute the real same-H audit;
 --   P2: recover a same-run archive metadata.json (or equivalent run manifest)
 --       tying released PLD bytes to exposure configuration;
 --   P3: recover/measure same-object incident/source normalization and optical
 --       throughput needed for a matched incident-photon comparison;
 --   K1: exact-head Agda/kernel execution.
 --
--- No generic optics abstraction is counted as payment for P1--P3.
+-- The finite radius-1 receipt is not an all-resolution RIP theorem. Optional
+-- FZP comparison remains downstream and is not a blocker.
 ------------------------------------------------------------------------
 
 rmlFullPrecisionFitBlob : String
@@ -133,7 +137,5 @@ currentDiffraction3DImagingAcquisitionExecutionClosure = record
   ; kernelReceipt = agdaKernelPaid
   }
 
--- The original calibration artifact remains pinned even though its binary payload
--- cannot be transported through the current GitHub text connector.
 realPSFArtifactIdentityPinned : Bool
 realPSFArtifactIdentityPinned = DiffuserCalibration.publicCalibrationArtifactPinned
