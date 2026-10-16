@@ -2,12 +2,6 @@ module DASHI.Physics.Foundations.ContinuousSO3Torque369BridgeExact where
 
 ------------------------------------------------------------------------
 -- CONTINUOUS SO(3) / TORQUE HANDOFF FOR THE 369 ORIENTATION TRANCHE
---
--- The repository already owns continuous three-coordinate su(2) Lie-algebra
--- data, an exact bracket [X,Y]=2 X×Y, and a right-trivialised SO(3) Jacobian
--- convention.  This module does not invent another continuous mechanics stack.
--- It records the handoff from the finite 369 orientation address to those
--- existing continuous carriers and keeps the normalization explicit.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -15,6 +9,7 @@ open import DASHI.Core.Prelude
 import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 import DASHI.Physics.Closure.SU2SO3369HypervoxelBridge as SO3
 import DASHI.Physics.Foundations.OrientedThreeAxisBracket369Exact as Finite
+import DASHI.Physics.Foundations.R3HodgeCrossExact as Hodge3
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as V3
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Lie
 import DASHI.Physics.YangMills.BalabanP33SU2EuclideanGeometryExact as Euclidean
@@ -88,15 +83,17 @@ finiteC3PhaseIsSO3GroupElement = false
 finiteAxisChartEmbedsIntoContinuousBasis : Bool
 finiteAxisChartEmbedsIntoContinuousBasis = true
 
--- GaugeInteractionLaws already supplies continuous differential-form/Hodge
--- interfaces (Maxwell OneForm/TwoForm/ThreeForm and hodgeStar).  We record that
--- existing infrastructure without pretending this file proves the dedicated
--- R^3 bivector-Hodge-cross isomorphism.
 repoHasContinuousHodgeLawInterface : Bool
 repoHasContinuousHodgeLawInterface = true
 
 r3BivectorHodgeCrossIdentificationClosedHere : Bool
-r3BivectorHodgeCrossIdentificationClosedHere = false
+r3BivectorHodgeCrossIdentificationClosedHere =
+  Hodge3.r3HodgeWedgeCrossClosed
+
+r3TorqueAsHodgeWedge : ∀ position force →
+  Hodge3.hodgeStar3 (Hodge3.wedge3 position force)
+  ≡ Hodge3.cross3 position force
+r3TorqueAsHodgeWedge = Hodge3.hodgeWedgeEqualsCross
 
 record ContinuousSO3Torque369Boundary : Set where
   constructor continuous-so3-torque-369-boundary
@@ -114,4 +111,4 @@ record ContinuousSO3Torque369Boundary : Set where
 canonicalContinuousSO3Torque369Boundary : ContinuousSO3Torque369Boundary
 canonicalContinuousSO3Torque369Boundary =
   continuous-so3-torque-369-boundary
-    true true true true true false false true false
+    true true true true true false false true true
