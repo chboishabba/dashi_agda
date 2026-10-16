@@ -1,14 +1,14 @@
 from pathlib import Path
 import subprocess
 
-from dashi_repo_history.git_history import enrich_commit_messages, read_commit_dag
+from dashi_repo_history.narrative_git import read_commit_narrative_events
 
 
 def _git(repo: Path, *args: str) -> str:
     return subprocess.check_output(["git", *args], cwd=repo, text=True).strip()
 
 
-def test_enrich_commit_messages_retains_subject_and_body(tmp_path: Path):
+def test_read_commit_narrative_events_retains_subject_body_and_changed_paths(tmp_path: Path):
     _git(tmp_path, "init")
     _git(tmp_path, "config", "user.email", "test@example.com")
     _git(tmp_path, "config", "user.name", "Test")
@@ -16,8 +16,10 @@ def test_enrich_commit_messages_retains_subject_and_body(tmp_path: Path):
     _git(tmp_path, "add", "x.txt")
     _git(tmp_path, "commit", "-m", "Recover C3 owner", "-m", "Actual remaining leaf: A1 covariance.\nKERNEL-PENDING.")
 
-    records = read_commit_dag(tmp_path)
-    enriched = enrich_commit_messages(tmp_path, records)
-    assert enriched[-1].subject == "Recover C3 owner"
-    assert "remaining leaf" in enriched[-1].body
-    assert "KERNEL-PENDING" in enriched[-1].body
+    events = read_commit_narrative_events(tmp_path, refs=("HEAD",))
+    event = events[-1]
+    assert event.title == "Recover C3 owner"
+    assert "remaining leaf" in event.text
+    assert "KERNEL-PENDING" in event.text
+    assert event.touched_paths == ("x.txt",)
+    assert event.authority == "development-narrative"
