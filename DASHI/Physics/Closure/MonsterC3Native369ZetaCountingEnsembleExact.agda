@@ -4,30 +4,37 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.Chemistry.AmmoniaMonster3BNative369FineCarrierExact as Native
 import DASHI.Moonshine.Base369Monster3BMultiplicityTenByNineBidiExact as Ninety
+import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact as BasisCorrection
 import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact as Uniform
 import DASHI.Physics.Laws.ThermodynamicStatisticalLaws as Thermo
 
 ------------------------------------------------------------------------
--- NATIVE-369 MICROSTATE COUNTING ENSEMBLE FOR THE ZETA SECTOR
+-- NATIVE-369 FINITE BASIS-LABEL COUNTING ENSEMBLE FOR THE ZETA MODEL
 --
--- Previous counting used anonymous Fin carriers.  The chemistry/Monster
--- cross-pollination now owns an exact model chart
+-- Native369ZetaCoordinate is exactly a finite model/basis-label carrier:
 --
---   Native369ZetaCoordinate
---     = Kernel6 x (Completed10 x T^2)
---     <-> X6 x Fin90
+--   Kernel6 x (Completed10 x T^2) <-> X6 x Fin90.
 --
--- and the existing multiplicity arithmetic gives 729 * 90 = 65610.
--- We may therefore instantiate the mathematical counting ensemble directly on
--- the native-369 microstate carrier.  This still does not assert a physical
--- Hamiltonian, temperature, equiprobability, thermodynamic entropy or gravity.
+-- Hence 729 * 90 = 65610 counts those finite labels.  It does NOT count every
+-- vector of the literal linear W_zeta eigenspace.  A future
+-- ActualZetaBasisRecognition may identify these labels with an actual
+-- representation-native basis, while the linear H_zeta/S_zeta same-object weld
+-- remains separately required.
+--
+-- The uniform distribution below is a mathematical counting measure only.  It
+-- is not a physical Hamiltonian ensemble, density matrix, temperature,
+-- thermodynamic/von-Neumann entropy or gravitational source.
 ------------------------------------------------------------------------
 
+zetaBasisLabelCount : Nat
+zetaBasisLabelCount = 65610
+
+-- Backwards-compatible name; semantics are narrowed by this owner.
 zetaStateCount : Nat
-zetaStateCount = 65610
+zetaStateCount = zetaBasisLabelCount
 
 zetaCountAgreesWith729Times90 :
-  Ninety.heisenbergTimesTenByNineDimension ≡ zetaStateCount
+  Ninety.heisenbergTimesTenByNineDimension ≡ zetaBasisLabelCount
 zetaCountAgreesWith729Times90 = Ninety.heisenbergTimesTenByNineIs65610
 
 zetaWeightNumerator : Nat
@@ -40,11 +47,11 @@ zetaUniformWeight : Uniform.UniformProbability
 zetaUniformWeight = Uniform.uniformProbability zetaWeightNumerator zetaWeightDenominator
 
 zetaNormalization :
-  zetaWeightNumerator * zetaStateCount ≡ zetaWeightDenominator
+  zetaWeightNumerator * zetaBasisLabelCount ≡ zetaWeightDenominator
 zetaNormalization = refl
 
 data NativeZetaMacrostate : Set where
-  completeNativeZetaCarrier : NativeZetaMacrostate
+  completeNativeZetaBasisLabelCarrier : NativeZetaMacrostate
 
 native369ZetaCountingEnsemble : Thermo.StatisticalEnsemble
 native369ZetaCountingEnsemble = record
@@ -56,10 +63,10 @@ native369ZetaCountingEnsemble = record
   ; PartitionValue = Nat
   ; Observable = ⊤
   ; Expectation = ⊤
-  ; macrostate = λ _ → completeNativeZetaCarrier
+  ; macrostate = λ _ → completeNativeZetaBasisLabelCarrier
   ; probability = λ _ _ → zetaUniformWeight
   ; microEnergy = λ _ → tt
-  ; partitionFunction = λ _ → zetaStateCount
+  ; partitionFunction = λ _ → zetaBasisLabelCount
   ; expectation = λ _ _ → tt
   ; Normalised = λ _ → zetaNormalization
   ; EnsembleAdmissible = λ _ → ⊤
@@ -68,12 +75,20 @@ native369ZetaCountingEnsemble = record
 record NativeZetaEnsembleBoundary : Set where
   constructor nativeZetaEnsembleBoundary
   field
-    native369MicrostateCarrierPaid : Bool
-    native369MicrostateCarrierPaidIsTrue : native369MicrostateCarrierPaid ≡ true
-    zetaCardinality65610Paid : Bool
-    zetaCardinality65610PaidIsTrue : zetaCardinality65610Paid ≡ true
+    native369FiniteBasisLabelCarrierPaid : Bool
+    native369FiniteBasisLabelCarrierPaidIsTrue :
+      native369FiniteBasisLabelCarrierPaid ≡ true
+    zetaBasisLabelCardinality65610Paid : Bool
+    zetaBasisLabelCardinality65610PaidIsTrue :
+      zetaBasisLabelCardinality65610Paid ≡ true
     normalizedUniformCountingPaid : Bool
     normalizedUniformCountingPaidIsTrue : normalizedUniformCountingPaid ≡ true
+    finiteBasisLabelsAreAllLinearWZetaStates : Bool
+    finiteBasisLabelsAreAllLinearWZetaStatesIsFalse :
+      finiteBasisLabelsAreAllLinearWZetaStates ≡ false
+    actualRepresentationNativeBasisRecognitionPaidHere : Bool
+    actualRepresentationNativeBasisRecognitionPaidHereIsFalse :
+      actualRepresentationNativeBasisRecognitionPaidHere ≡ false
     nativeUniformCountingIsPhysicalThermalEnsemble : Bool
     nativeUniformCountingIsPhysicalThermalEnsembleIsFalse :
       nativeUniformCountingIsPhysicalThermalEnsemble ≡ false
@@ -100,4 +115,13 @@ canonicalNativeZetaEnsembleBoundary =
     false refl
     false refl
     false refl
-    "The Monster zeta-sector counting measure is now carried by the exact native-369 fine coordinate rather than an anonymous Fin carrier. This is a mathematical finite counting ensemble only; physical probabilities, Hamiltonian/density matrix and entropy-gravity interpretation remain separate payments."
+    false refl
+    false refl
+    "729*90=65610 is the exact cardinality of the native-369 finite Monster-zeta basis-label model. It is not the cardinality of all vectors in the linear W_zeta eigenspace. Uniform weight 1/65610 is therefore a mathematical counting measure on finite labels only; an actual representation-native basis, physical probabilities/density matrix, Hamiltonian, entropy functional and entropy-gravity interpretation remain separate payments."
+
+-- Backwards-compatible projections used by earlier validation/status owners.
+native369MicrostateCarrierPaid : NativeZetaEnsembleBoundary → Bool
+native369MicrostateCarrierPaid = NativeZetaEnsembleBoundary.native369FiniteBasisLabelCarrierPaid
+
+zetaCardinality65610Paid : NativeZetaEnsembleBoundary → Bool
+zetaCardinality65610Paid = NativeZetaEnsembleBoundary.zetaBasisLabelCardinality65610Paid
