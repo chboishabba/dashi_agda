@@ -23,6 +23,10 @@ module DASHI.Physics.Foundations.CMP119GRQFTPreferredQ123TraceReconciliationExac
 -- the classical Wilson/Gibbs lane, but it is NOT an additional terminal debt of
 -- the scoped preferred Q1/Q2/Q3 source route.  Nor is there a free quantum trace
 -- scalar: Q2 names the trace of the actual stress object.
+--
+-- On the finite side, Wilson DS[h] and F^2 are now compiled from exactly one
+-- FiniteCurvatureSixFamily, so Q3 does not get to select an unrelated curvature
+-- family merely because it is consumed by an anomaly observable.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -30,17 +34,26 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
+import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as Latest
 import DASHI.Physics.Foundations.CMP119CosmologyP2HilbertTraceAnomalyExact as P2
 import DASHI.Physics.Foundations.CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitExact as P3
 import DASHI.Physics.Foundations.CMP119R144CurvatureTraceSectorNoGoExact as TraceNoGo
 import DASHI.Physics.Foundations.CMP119R144PartitionInsertionTrivialityExact as Partition
 import DASHI.Physics.Foundations.CMP119CurvatureWilsonSelectedInsertionCompilerExact as CurvatureWilson
+import DASHI.Physics.Foundations.CMP119CurvatureWilsonF2SingleFamilyCompilerExact as SingleF2
 
 preferredSourcePackageCount : Nat
 preferredSourcePackageCount = Q.remainingPreferredSourcePackageCount
 
 preferredFrontierRemainsQ1Q2Q3 : Bool
 preferredFrontierRemainsQ1Q2Q3 = true
+
+preferredRouteRemainingAdapterDebt : Nat
+preferredRouteRemainingAdapterDebt = Latest.remainingAdapterDebt
+
+preferredRemainingWorkIsSourceConstructionOrSourceTheorems : Bool
+preferredRemainingWorkIsSourceConstructionOrSourceTheorems =
+  Latest.remainingWorkIsSourceConstructionOrSourceTheorems
 
 q1IsPresentCutPathDerivativeSemantics : Bool
 q1IsPresentCutPathDerivativeSemantics =
@@ -100,6 +113,14 @@ classicalCurvatureSameObjectWeldRequiredByPreferredQ123Route = false
 classicalCurvatureSameObjectWeldStillUsefulForWilsonGibbsLane : Bool
 classicalCurvatureSameObjectWeldStillUsefulForWilsonGibbsLane = true
 
+independentFiniteF2CurvatureFamilyRequired : Bool
+independentFiniteF2CurvatureFamilyRequired =
+  SingleF2.independentFiniteF2CurvatureFamilyRequired
+
+sameFiniteCurvatureFamilyPaysClassicalDSAndF2 : Bool
+sameFiniteCurvatureFamilyPaysClassicalDSAndF2 =
+  SingleF2.sameCurvatureFamilyPaysWilsonTenSlotDSAndF2
+
 ------------------------------------------------------------------------
 -- The R144 partition-stress lane also does not reopen inserted-observable data.
 ------------------------------------------------------------------------
@@ -131,3 +152,11 @@ q3UsesPointwiseCommonFiniteF2SequenceIsTrue = refl
 wholeGeneratedActionMayCollapseToClassicalCurvatureIsFalse :
   wholeGeneratedActionMayCollapseToClassicalCurvature ≡ false
 wholeGeneratedActionMayCollapseToClassicalCurvatureIsFalse = refl
+
+independentFiniteF2CurvatureFamilyRequiredIsFalse :
+  independentFiniteF2CurvatureFamilyRequired ≡ false
+independentFiniteF2CurvatureFamilyRequiredIsFalse = refl
+
+sameFiniteCurvatureFamilyPaysClassicalDSAndF2IsTrue :
+  sameFiniteCurvatureFamilyPaysClassicalDSAndF2 ≡ true
+sameFiniteCurvatureFamilyPaysClassicalDSAndF2IsTrue = refl
