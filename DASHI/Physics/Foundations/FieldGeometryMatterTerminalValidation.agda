@@ -48,9 +48,29 @@ thfAtomicReplayWasExecuted :
   Terminal.thfHubbardIAtomicReplay Terminal.currentTerminalFrontier ≡ Terminal.numericallyExecuted
 thfAtomicReplayWasExecuted = refl
 
+thfSelfConsistencyEquationsAreSourcePaid :
+  Terminal.thfSelfConsistencyEquationSourceContract Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
+thfSelfConsistencyEquationsAreSourcePaid = refl
+
+qtmGoldenRuleObserverIsSourcePaid :
+  Terminal.qtmGoldenRuleObserverSourceContract Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
+qtmGoldenRuleObserverIsSourcePaid = refl
+
+qtmElectrostaticsIsSourcePaid :
+  Terminal.qtmElectrostaticsSourceContract Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
+qtmElectrostaticsIsSourcePaid = refl
+
+qtmWavefunctionObserverWasExecuted :
+  Terminal.qtmWavefunctionObserverNumericalReplay Terminal.currentTerminalFrontier ≡ Terminal.numericallyExecuted
+qtmWavefunctionObserverWasExecuted = refl
+
 thfSelfConsistentSolveStillOpen :
   Terminal.thfSelfConsistentInteractingSolve Terminal.currentTerminalFrontier ≡ Terminal.openCalibrationOrExecution
 thfSelfConsistentSolveStillOpen = refl
+
+qtmExperimentalReplayStillNeedsSameObjectData :
+  Terminal.qtmExperimentalDataReplay Terminal.currentTerminalFrontier ≡ Terminal.openSameObjectPayment
+qtmExperimentalReplayStillNeedsSameObjectData = refl
 
 entropyCombinatoricsIsStructurallyPaid :
   Terminal.entropyExactCombinatorialCounts Terminal.currentTerminalFrontier ≡ Terminal.structurallyPaid
