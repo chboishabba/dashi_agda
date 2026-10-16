@@ -10,13 +10,14 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPBehavioralSpecializerFrontierVal
 --     -> self-delimiting quote
 --     -> executable raw parse/dispatch/tape semantics
 --     -> typed-standard fidelity on every actual exact run
+--     -> literal parser/scanner/equality compiler primitives
 --     -> abstract specialization/diagonal fixed-point theorem
 --     -> explicit timing Pareto (phase expansion vs compact XOR counter)
---     -> still-unpaid literal specializer/interpreter compiler
+--     -> still-unpaid full literal specializer/interpreter assembly
 --     -> still-unpaid final same-object resource fixed point.
 --
 -- Attribution boundary: the XOR/IIT sibling motivates one implementation
--- option only.  No IIT theorem or phi quantity is imported here as complexity
+-- option only. No IIT theorem or phi quantity is imported here as complexity
 -- or lower-bound authority.
 ------------------------------------------------------------------------
 
@@ -34,6 +35,15 @@ open import DASHI.Mathematics.Complexity.CodedFiniteStandardRawInterpreterFideli
     ; rawIterateFollowsStandardRun
     ; selfDelimitedInterpreterFollowsStandardRun
     )
+
+open import DASHI.Mathematics.Complexity.CodedFiniteUnaryDelimiterScannerExact
+  using (scannerCode; scannerMachine; doneStateHasNoResidentRule)
+
+open import DASHI.Mathematics.Complexity.CodedFiniteUnaryFieldEqualityDeterminismExact
+  using (dispatchUnique; equalityCode)
+
+open import DASHI.Mathematics.Complexity.CodedFiniteUnaryFieldEqualityClosureExact
+  using (fieldEqualityMachine; equalSinkQuiescent; unequalSinkQuiescent)
 
 open import DASHI.Mathematics.Complexity.PNotEqualsNPKleeneSpecializationFixedPointExact
   using (fixedPointProgram; fixedPointProgramCorrect; fixedPointProgramSizeBound)
@@ -56,9 +66,12 @@ record BehavioralSpecializerFrontierBoundary : Set where
     selfDelimitingQuotePaid : Bool
     rawInterpreterPaid : Bool
     typedRawToStandardFidelityPaid : Bool
+    delimiterScannerCodedPaid : Bool
+    unaryEqualityCodedPaid : Bool
     abstractBehavioralFixedPointPaid : Bool
     timingResourceParetoPaid : Bool
-    literalCodedSpecializerCompilerStillRequired : Bool
+    unaryEqualityRunCorrectnessStillRequired : Bool
+    literalCodedSpecializerAssemblyStillRequired : Bool
     quotedCodeMustActuallyBeConsumed : Bool
     finalSameObjectResourceFixedPointStillRequired : Bool
     rawCodeEqualityRequired : Bool
@@ -70,6 +83,6 @@ canonicalBehavioralSpecializerFrontierBoundary :
   BehavioralSpecializerFrontierBoundary
 canonicalBehavioralSpecializerFrontierBoundary =
   behavioral-specializer-frontier-boundary
-    true true true true true
-    true true true
+    true true true true true true true
+    true true true true
     false false
