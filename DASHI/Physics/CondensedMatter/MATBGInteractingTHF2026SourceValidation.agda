@@ -9,7 +9,7 @@ import DASHI.Physics.CondensedMatter.MATBGInteractingTHF2026SourceExact as THF
 qtmOnSiteUIs60meV : THF.uMeV THF.xiao2026THFParameters ≡ 60
 qtmOnSiteUIs60meV = refl
 
-qtmHybridizationMagnitudeIs70meV : THF.gammaMagnitudeMeV THF.xiao2026THFParameters ≡ 70
+qtmHybridizationMagnitudeIs70meV : THF.magnitude (THF.gammaMeV THF.xiao2026THFParameters) ≡ 70
 qtmHybridizationMagnitudeIs70meV = refl
 
 qtmLifetimeBroadeningIs1meV : THF.inverseLifetimeMeV THF.xiao2026THFParameters ≡ 1
