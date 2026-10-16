@@ -27,6 +27,7 @@ data ClinicEvidenceRole : Set where
   discriminationCausalMetaAnalysis : ClinicEvidenceRole
   familyMediationLongitudinalTrialAnalysis : ClinicEvidenceRole
   politicizedHealingQualitativeStudy : ClinicEvidenceRole
+  counselingGroundedTheoryStudy : ClinicEvidenceRole
 
 data ClinicEvidenceCeiling : Set where
   theoryFrameworkOnly : ClinicEvidenceCeiling
@@ -72,14 +73,14 @@ kirkbrideEtAl2024 = Source.mkDOISource
 
 pauling2023 : Source.AttributedSource
 pauling2023 = Source.mkDOISource
-  "Lauren Pauling"
+  "Naomi Pauling"
   "Addressing social determinants of mental health in therapy: A thematic synthesis"
   "Counselling and Psychotherapy Research 23(4):982-994"
   "2023"
   "10.1002/capr.12672"
   "https://onlinelibrary.wiley.com/doi/10.1002/capr.12672"
   Source.academicArticleSource
-  "Qualitative systematic/thematic synthesis addressing what attention to social determinants can involve in therapy and therapist training. Does not prove a universal treatment effect or political mechanism."
+  "Qualitative systematic/thematic synthesis of practice research addressing social determinants in therapy. It identified a small evidence base and themes around therapeutic relationship, adapting to client context, and community as a resource; it does not prove a universal treatment effect or political mechanism."
   Source.publicAttribution
 
 aggarwal2024 : Source.AttributedSource
@@ -166,6 +167,18 @@ pattersonMarkowitz2025 = Source.mkDOISource
   "Qualitative study of politicized-healing frameworks and practices, including the tension that healing can support collective transformation while also risking re-individualization and obscuring state responsibility. Qualitative/practice evidence only; not a causal psychotherapy trial."
   Source.publicAttribution
 
+boydHaysJones2025 : Source.AttributedSource
+boydHaysJones2025 = Source.mkDOISource
+  "Danielle Pester Boyd, Danica G. Hays, Laura K. Jones"
+  "Assessing and Addressing Social Determinants of Mental Health in Counseling: A Grounded Theory Investigation"
+  "Journal of Counseling & Development 103(4):469-483"
+  "2025"
+  "10.1002/jcad.70003"
+  "https://onlinelibrary.wiley.com/doi/10.1002/jcad.70003"
+  Source.academicArticleSource
+  "Grounded-theory study of 20 professional counselors self-identifying with SDMH expertise. Produces a practice model including broaching SDMH, cultural competence, contextualizing interventions, client self-advocacy and community-embedded resources. Qualitative model-building evidence, not comparative efficacy or causal outcome proof."
+  Source.publicAttribution
+
 clinicSOTASources : List Source.AttributedSource
 clinicSOTASources =
   sheehi2026 ∷
@@ -177,7 +190,8 @@ clinicSOTASources =
   drozdzowiczGrodniewicz2025 ∷
   emmerDornMata2024 ∷
   burkinaFamilyStress2025 ∷
-  pattersonMarkowitz2025 ∷ []
+  pattersonMarkowitz2025 ∷
+  boydHaysJones2025 ∷ []
 
 sotaSourceCount : Nat
 sotaSourceCount = Source.sourceCount clinicSOTASources
@@ -193,14 +207,15 @@ clinicEvidenceEntries : List ClinicEvidenceEntry
 clinicEvidenceEntries =
   clinic-evidence-entry sheehi2026 revolutionaryPsychoanalyticTheory theoryFrameworkOnly "Sheehi theoretical programme" ∷
   clinic-evidence-entry kirkbrideEtAl2024 structuralDeterminantsReview reviewLevelEmpiricalPrior "structural/social determinants -> mental-health prior" ∷
-  clinic-evidence-entry pauling2023 therapyPracticeSynthesis reviewLevelEmpiricalPrior "addressing social determinants in therapy/practice" ∷
+  clinic-evidence-entry pauling2023 therapyPracticeSynthesis reviewLevelEmpiricalPrior "addressing social determinants in therapy/practice synthesis" ∷
   clinic-evidence-entry aggarwal2024 clinicalFormulationReview clinicalUsefulnessReview "contextual information -> formulation/diagnostic/treatment-planning use" ∷
   clinic-evidence-entry weissEtAl2024 socioculturalFormulationFramework theoryFrameworkOnly "structural context in sociocultural formulation" ∷
   clinic-evidence-entry morrillComasDiaz2025 criticalLiberationFramework theoryFrameworkOnly "critical-liberation psychotherapy framework" ∷
   clinic-evidence-entry drozdzowiczGrodniewicz2025 epistemicInjusticeAnalysis theoryFrameworkOnly "epistemic injustice risks in psychotherapy" ∷
   clinic-evidence-entry emmerDornMata2024 discriminationCausalMetaAnalysis immediateExperimentalEffect "manipulated discrimination -> immediate mental-health effects" ∷
   clinic-evidence-entry burkinaFamilyStress2025 familyMediationLongitudinalTrialAnalysis longitudinalMediationSpecific "poverty/intervention -> family mediator -> child mental-health pathway" ∷
-  clinic-evidence-entry pattersonMarkowitz2025 politicizedHealingQualitativeStudy qualitativePracticeEvidence "politicized healing and individualization/collective-justice tension" ∷ []
+  clinic-evidence-entry pattersonMarkowitz2025 politicizedHealingQualitativeStudy qualitativePracticeEvidence "politicized healing and individualization/collective-justice tension" ∷
+  clinic-evidence-entry boydHaysJones2025 counselingGroundedTheoryStudy qualitativePracticeEvidence "SDMH assessment/contextualization/self-advocacy/community-resource practice model" ∷ []
 
 ------------------------------------------------------------------------
 -- Existing empirical/situated boundaries reused rather than reimplemented.
@@ -222,12 +237,14 @@ record ClinicSOTABoundary : Set where
     familyMediationEvidenceRetainedAtOwnObject : Bool
     liberationSourcesRetainedAsFrameworkEvidence : Bool
     epistemicInjusticeRetainedAsConceptualAnalysis : Bool
+    counselingPracticeEvidenceRetainedAsQualitativeModel : Bool
     traumaNarrativeEvidenceBoundaryReused : Bool
     situatedObserverBoundaryReused : Bool
     sheehiTheoryEstablishesEmpiricalCounterinsurgency : Bool
     structuralDeterminantsEvidenceEstablishesTherapyCounterinsurgency : Bool
     liberationFrameworkEstablishesComparativeEfficacy : Bool
     qualitativePoliticizedHealingEstablishesCausalTreatmentEffect : Bool
+    counselingGroundedTheoryEstablishesComparativeEfficacy : Bool
     narrativeClarityCreatesTruth : Bool
     narrativeFragmentationCreatesFalsity : Bool
     confusionCreatesManipulationFinding : Bool
@@ -238,8 +255,8 @@ open ClinicSOTABoundary public
 canonicalClinicSOTABoundary : ClinicSOTABoundary
 canonicalClinicSOTABoundary =
   clinic-sota-boundary
-    true true true true true true true true true
-    false false false false false false false false
+    true true true true true true true true true true
+    false false false false false false false false false
 
 ------------------------------------------------------------------------
 -- Explicit bad-promotion propositions.
@@ -249,6 +266,7 @@ data SheehiTheoryProvesEmpiricalCounterinsurgency : Set where
 data StructuralDeterminantsProveTherapyCounterinsurgency : Set where
 data LiberationFrameworkProvesComparativeEfficacy : Set where
 data QualitativeHealingProvesCausalTreatmentEffect : Set where
+data CounselingGroundedTheoryProvesComparativeEfficacy : Set where
 data NarrativeClarityProvesTruth : Set where
 data ConfusionProvesManipulation : Set where
 
@@ -267,6 +285,10 @@ liberationFrameworkDoesNotProveComparativeEfficacy ()
 qualitativeHealingDoesNotProveCausalTreatmentEffect :
   QualitativeHealingProvesCausalTreatmentEffect → ⊥
 qualitativeHealingDoesNotProveCausalTreatmentEffect ()
+
+counselingGroundedTheoryDoesNotProveComparativeEfficacy :
+  CounselingGroundedTheoryProvesComparativeEfficacy → ⊥
+counselingGroundedTheoryDoesNotProveComparativeEfficacy ()
 
 narrativeClarityDoesNotProveTruth : NarrativeClarityProvesTruth → ⊥
 narrativeClarityDoesNotProveTruth ()
