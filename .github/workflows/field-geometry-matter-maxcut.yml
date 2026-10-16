@@ -10,9 +10,14 @@ on:
       - 'DASHI/Physics/Foundations/GeneralizedCaloricCycle*.agda'
       - 'DASHI/Physics/Foundations/PrecisionThrustClosure*.agda'
       - 'DASHI/Physics/Foundations/QuantumStressEnergy*.agda'
+      - 'DASHI/Physics/Foundations/Casimir*.agda'
       - 'DASHI/Physics/Foundations/CausalTransportFTL*.agda'
       - 'DASHI/Physics/CondensedMatter/MATBG*.agda'
       - 'scripts/check_field_geometry_matter_maxcut.sh'
+      - 'scripts/matbg_*.py'
+      - 'scripts/casimir_*.py'
+      - 'Docs/evidence/matbg_*.json'
+      - 'Docs/evidence/casimir_*.json'
       - '.github/workflows/field-geometry-matter-maxcut.yml'
   workflow_dispatch:
 
