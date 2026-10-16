@@ -34,6 +34,18 @@ casimirUnitWeightActiveMassRegression :
   X.casimirUnitWeightActiveMassDiagnostic ≡ X.negativeTwo
 casimirUnitWeightActiveMassRegression = X.casimirUnitWeightActiveMassIsNegativeTwo
 
+u1GaugeArchitectureRegression :
+  X.u1GaugeArchitectureHandoffPaid X.canonicalCasimirGRQFTCrossPollinationBoundary ≡ true
+u1GaugeArchitectureRegression = refl
+
+u1DoesNotPayNonabelianStressAggregationRegression :
+  X.u1RestrictionPaysNonAbelianQFTStressAggregation X.canonicalCasimirGRQFTCrossPollinationBoundary ≡ false
+u1DoesNotPayNonabelianStressAggregationRegression = refl
+
+clayDoesNotProveCasimirRegression :
+  X.nonAbelianClayMassGapProvesCasimirPhysics X.canonicalCasimirGRQFTCrossPollinationBoundary ≡ false
+clayDoesNotProveCasimirRegression = refl
+
 sameActiveProjectionDoesNotIdentifyTensorRegression :
   X.sameActiveProjectionIdentifiesStressTensor X.canonicalCasimirGRQFTCrossPollinationBoundary ≡ false
 sameActiveProjectionDoesNotIdentifyTensorRegression = refl
