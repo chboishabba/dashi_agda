@@ -16,6 +16,14 @@ hostInterfaceOwnedRegression :
   H.selectedQFTSU2HostInterfaceOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
 hostInterfaceOwnedRegression = refl
 
+pinnedCompactSimpleCompilerOwnedRegression :
+  H.pinnedYMConstructionSuppliesCompactSimpleCompiler H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+pinnedCompactSimpleCompilerOwnedRegression = refl
+
+selectedCompactSimpleStillOpenRegression :
+  H.selectedGroupCompactSimpleWitnessPaid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+selectedCompactSimpleStillOpenRegression = refl
+
 selectedCarrierInterpretationStillOpenRegression :
   H.selectedGroupInterpretedAsQuaternionSU2Paid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
 selectedCarrierInterpretationStillOpenRegression = refl
