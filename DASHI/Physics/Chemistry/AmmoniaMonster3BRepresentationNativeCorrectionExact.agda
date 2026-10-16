@@ -16,6 +16,7 @@ module DASHI.Physics.Chemistry.AmmoniaMonster3BRepresentationNativeCorrectionExa
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Primitive using (Set₁)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -81,6 +82,44 @@ basisChartToNative :
 basisChartToNative chart = actualBasisToNative369 (recognition chart)
 
 ------------------------------------------------------------------------
+-- Physical promotion is a one-way same-object attachment plus action
+-- equivariance.  A physical NH3 carrier need not be cardinality-equal to the
+-- whole Monster basis, so no artificial bijection is demanded here.
+------------------------------------------------------------------------
+
+record PhysicalNH3MonsterBasisAttachment
+    (NH3State LiteralZetaSector : Set) : Set₁ where
+  field
+    basisChart : Native369ActualBasisChart LiteralZetaSector
+    nh3ToMonsterBasis :
+      NH3State → Basis.ActualBasisLabel (recognition basisChart)
+
+    Action : Set
+    nh3Action : Action → NH3State → NH3State
+    monsterBasisAction :
+      Action →
+      Basis.ActualBasisLabel (recognition basisChart) →
+      Basis.ActualBasisLabel (recognition basisChart)
+
+    actionIntertwines :
+      (action : Action) →
+      (state : NH3State) →
+      nh3ToMonsterBasis (nh3Action action state)
+      ≡ monsterBasisAction action (nh3ToMonsterBasis state)
+
+    PhysicalSameObjectAuthority : Set
+    physicalSameObjectAuthorityWitness : PhysicalSameObjectAuthority
+
+open PhysicalNH3MonsterBasisAttachment public
+
+physicalNH3ToNative369 :
+  ∀ {NH3State LiteralZetaSector : Set} →
+  (attachment : PhysicalNH3MonsterBasisAttachment NH3State LiteralZetaSector) →
+  NH3State → Native369.Native369ZetaCoordinate
+physicalNH3ToNative369 attachment state =
+  basisChartToNative (basisChart attachment) (nh3ToMonsterBasis attachment state)
+
+------------------------------------------------------------------------
 -- Wrong-type firewalls.
 ------------------------------------------------------------------------
 
@@ -88,6 +127,7 @@ data FiniteNative369ChartCreatesWholeVOAStateBijection : Set where
 data C3PhaseCreatesMonsterModuleIntertwiner : Set where
 data BasisRecognitionCreatesHZetaSameObjectRecognition : Set where
 data CharacterCompilerCreatesConcreteCharacterTransport : Set where
+data PhaseBijectionCreatesPhysicalNH3BasisAttachment : Set where
 
 finiteChartDoesNotCreateWholeVOAStateBijection :
   FiniteNative369ChartCreatesWholeVOAStateBijection → ⊥
@@ -105,6 +145,10 @@ characterCompilerDoesNotCreateConcreteTransport :
   CharacterCompilerCreatesConcreteCharacterTransport → ⊥
 characterCompilerDoesNotCreateConcreteTransport ()
 
+phaseBijectionDoesNotCreatePhysicalAttachment :
+  PhaseBijectionCreatesPhysicalNH3BasisAttachment → ⊥
+phaseBijectionDoesNotCreatePhysicalAttachment ()
+
 ------------------------------------------------------------------------
 -- Machine-readable current status.
 ------------------------------------------------------------------------
@@ -119,6 +163,7 @@ record RepresentationNativeCorrectionBoundary : Set where
     proofRelevantBasisRecognitionWrapperAvailable : Bool
     proofRelevantHZetaRecognitionWrapperAvailable : Bool
     hZetaCharacterTransportCompilerAvailable : Bool
+    proofRelevantPhysicalNH3BasisAttachmentTyped : Bool
     actualHZetaSameObjectRecognitionPaid : Bool
     actualLinearHomSpacePaid : Bool
     physicalNH3ToMonsterLinearStatePaid : Bool
@@ -133,6 +178,7 @@ canonicalRepresentationNativeCorrectionBoundary =
     false
     true
     false
+    true
     true
     true
     true
