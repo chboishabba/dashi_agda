@@ -3,10 +3,10 @@ module DASHI.Moonshine.Monster3BWholeCharacterIsotypicEverything where
 ------------------------------------------------------------------------
 -- Focused rollup for the proof-relevant Monster 3B representation tail.
 --
--- Generic restriction/character/isotypic/copy-count/Schur-coordinate machinery
--- is collected here together with the actual-input terminal compiler. Missing
--- literal Monster same-object bindings remain explicit and are not manufactured
--- by the rollup.
+-- Generic restriction/character/Schur/isotypic/copy-count/multiplicity
+-- machinery is collected here together with the actual-input terminal
+-- compiler. Missing literal Monster same-object bindings remain explicit and
+-- are not manufactured by the rollup.
 ------------------------------------------------------------------------
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact
@@ -19,6 +19,8 @@ import DASHI.Moonshine.Monster3BInvariantRestrictionLeanReceiptExact
 import DASHI.Moonshine.Monster3BInvariantRestrictionLeanReceiptValidation
 import DASHI.Moonshine.Monster3BLinearEigenspaceRestrictionLeanReceiptExact
 import DASHI.Moonshine.Monster3BLinearEigenspaceRestrictionLeanReceiptValidation
+import DASHI.Moonshine.Monster3BSchurFromSimpleFDRepLeanReceiptExact
+import DASHI.Moonshine.Monster3BSchurFromSimpleFDRepLeanReceiptValidation
 import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact
 import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptValidation
 import DASHI.Moonshine.Monster3BTwoIsotypicBlockAssemblyLeanReceiptExact
