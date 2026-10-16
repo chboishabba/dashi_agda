@@ -18,6 +18,7 @@ import DASHI.Reasoning.TrialecticWavePhaseEffectiveStackDescentExact as Stack
 import DASHI.Reasoning.TrialecticWavePhaseTwoCellCocycleExact as Two
 import DASHI.Reasoning.TrialecticPolicyIndexedAllDepthIterationExact as Depth
 import DASHI.Reasoning.TrialecticWavePhaseHigherStackExact as Higher
+import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafExact as FiniteHyper
 
 historicalBoundary : Historical.TrialecticHigherDescentPromotionBoundary
 historicalBoundary = Historical.canonicalTrialecticHigherDescentPromotionBoundary
@@ -40,6 +41,9 @@ depthBoundary = Depth.canonicalTrialecticPolicyIndexedAllDepthBoundary
 higherBoundary : Higher.TrialecticWavePhaseHigherStackBoundary
 higherBoundary = Higher.canonicalTrialecticWavePhaseHigherStackBoundary
 
+finiteHyperBoundary : FiniteHyper.TrialecticFiniteTriadicHypersheafBoundary
+finiteHyperBoundary = FiniteHyper.canonicalTrialecticFiniteTriadicHypersheafBoundary
+
 record TrialecticHigherDescentMaxCutBoundary : Set where
   constructor trialectic-higher-descent-max-cut-boundary
   field
@@ -56,11 +60,14 @@ record TrialecticHigherDescentMaxCutBoundary : Set where
     certifiedPrestackPaid : Bool
     certifiedEffectiveStackPaid : Bool
     certifiedHigherStackPaid : Bool
-    arbitraryHypercoverDescentPaid : Bool
-    certifiedHypersheafPaid : Bool
+    finiteOneTruncatedHyperdescentPaid : Bool
+    certifiedFiniteTriadicHypersheafPaid : Bool
+    arbitraryInfinityHypercoverDescentPaid : Bool
+    certifiedArbitraryInfinityHypersheafPaid : Bool
     oldGroupoidPresheafFalseFlagIsSuperseded : Bool
     oldEffectiveStackFalseFlagIsSuperseded : Bool
     oldAllDepthFalseFlagMeansAutomaticOnly : Bool
+    oldHypersheafFalseFlagMeansArbitraryInfinityOnly : Bool
 
 open TrialecticHigherDescentMaxCutBoundary public
 
@@ -81,8 +88,11 @@ canonicalTrialecticHigherDescentMaxCutBoundary =
     true
     true
     true
+    true
+    true
     false
     false
+    true
     true
     true
     true
@@ -103,6 +113,10 @@ higherStackReceipt :
   certifiedHigherStackPaid canonicalTrialecticHigherDescentMaxCutBoundary ≡ true
 higherStackReceipt = refl
 
-hypersheafStillRequiresArbitraryHypercoverReceipt :
-  certifiedHypersheafPaid canonicalTrialecticHigherDescentMaxCutBoundary ≡ false
-hypersheafStillRequiresArbitraryHypercoverReceipt = refl
+finiteHypersheafReceipt :
+  certifiedFiniteTriadicHypersheafPaid canonicalTrialecticHigherDescentMaxCutBoundary ≡ true
+finiteHypersheafReceipt = refl
+
+arbitraryInfinityHypersheafStillSeparate :
+  certifiedArbitraryInfinityHypersheafPaid canonicalTrialecticHigherDescentMaxCutBoundary ≡ false
+arbitraryInfinityHypersheafStillSeparate = refl
