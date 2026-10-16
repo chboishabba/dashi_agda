@@ -13,10 +13,10 @@ import DASHI.Biology.KitzerowBH4FluxCausalModelsExact as Flux
 -- REDOX / SPATIAL / ROUTE DISCRIMINATOR
 --
 -- The acquired evidence rules out a single well-mixed scalar BH4 pool as a
--- sufficient physical description.  Supply, binding/turnover, intracellular
--- versus extracellular exposure, redox regeneration and cell topology are
--- independent coordinates.  None of these local results closes the whole
--- Kitzerow causal architecture.
+-- sufficient physical description. Supply, binding/turnover, cellular uptake,
+-- intracellular versus extracellular exposure, redox regeneration and cell
+-- topology are independent coordinates. None of these local results closes the
+-- whole Kitzerow causal architecture.
 ------------------------------------------------------------------------
 
 data BH4PoolNodeKind : Set where
@@ -54,7 +54,7 @@ nNOSSpatialNode =
     nosConsumerNode
     "rat cortex/striatum/cerebellum/olfactory bulb source context"
     "KitzerowBH4NeuralContextSourceAtlasExact.hwangEtAl1998Localization"
-    "lack of GTPCH/nNOS colocalization paid; exact BH4 import route/flux unpaid"
+    "lack of GTPCH/nNOS colocalization paid; exact donor-to-recipient BH4 flux unpaid"
 
 nosBoundRedoxNode : BH4PoolNode
 nosBoundRedoxNode =
@@ -83,6 +83,24 @@ striatalExtracellularNode =
     "KitzerowBH4NeuralContextSourceAtlasExact.liangKaufman1998Striatum"
     "large dopamine-release effect paid; effect largely independent of TH/NOS inhibition and strongly ROS-sensitive"
 
+cellularUptakeNode : BH4PoolNode
+cellularUptakeNode =
+  bh4PoolNode
+    "exogenous BH4 cellular uptake"
+    intracellularFreePoolNode
+    "rat brain synaptosomes, PC12 cells and rat striatum after peripheral administration"
+    "KitzerowBH4NeuralContextSourceAtlasExact.anastasiadisKuhnLevine1994Uptake"
+    "linear concentration-dependent uptake paid; studied uptake did not require sodium/glucose and was interpreted as passive diffusion rather than a specific carrier"
+
+humanNnosRecipientNode : BH4PoolNode
+humanNnosRecipientNode =
+  bh4PoolNode
+    "human nNOS neuroblastoma recipient pool"
+    nosConsumerNode
+    "TGW-I-nu nNOS-expressing human neuroblastoma cells"
+    "KitzerowBH4NeuralContextSourceAtlasExact.choiEtAl2003HumanNnosUptake"
+    "dose-dependent exogenous BH4 uptake with increased NO production paid; physiological in-vivo transfer magnitude unpaid"
+
 canonicalBH4PoolTopologyNodes : List BH4PoolNode
 canonicalBH4PoolTopologyNodes =
   monoamineSynthesisNode
@@ -90,11 +108,14 @@ canonicalBH4PoolTopologyNodes =
   ∷ nosBoundRedoxNode
   ∷ striatalIntracellularNode
   ∷ striatalExtracellularNode
+  ∷ cellularUptakeNode
+  ∷ humanNnosRecipientNode
   ∷ []
 
 data BH4PoolEdgeStatus : Set where
   directlyMeasuredEdge : BH4PoolEdgeStatus
   sourceSupportedMechanisticEdge : BH4PoolEdgeStatus
+  functionalCrossTalkEdge : BH4PoolEdgeStatus
   sourceProposedUnmeasuredEdge : BH4PoolEdgeStatus
   unresolvedEdge : BH4PoolEdgeStatus
 
@@ -120,15 +141,35 @@ nosReductiveRegenerationEdge =
     "Witteveen/Giovanelli/Kaufman 1999"
     "NOS-bound BH4 redox state reflects oxidation plus reductive regeneration; this pays redox coupling but not a quantitative cell-wide NADPH allocation coefficient"
 
+exogenousBH4UptakeEdge : BH4PoolEdge
+exogenousBH4UptakeEdge =
+  bh4PoolEdge
+    "extracellular BH4 uptake into neural/catecholaminergic preparations"
+    "extracellular BH4"
+    "synaptosome/PC12 intracellular BH4 pool"
+    directlyMeasuredEdge
+    "Anastasiadis/Kuhn/Levine 1994"
+    "linear concentration-dependent cellular accumulation is directly measured; the studied uptake was interpreted as passive diffusion rather than a dedicated membrane carrier"
+
+catecholaminergicToNnosFunctionalCrossTalk : BH4PoolEdge
+catecholaminergicToNnosFunctionalCrossTalk =
+  bh4PoolEdge
+    "catecholaminergic donor to nNOS-recipient functional BH4 crosstalk"
+    "CATH.a catecholaminergic coculture"
+    "TGW-I-nu human nNOS neuroblastoma NO output"
+    functionalCrossTalkEdge
+    "Choi et al. 2003"
+    "coculture increases NO production in recipient nNOS cells and exogenous BH4 is taken up dose-dependently; supports functional extracellular/intercellular supply but does not directly quantify donor-derived BH4 molecular flux"
+
 monoamineToNnosTransferHypothesis : BH4PoolEdge
 monoamineToNnosTransferHypothesis =
   bh4PoolEdge
     "monoamine-cell BH4 supply to nNOS cells"
     "GTPCH-positive monoaminergic cells/processes or systemic source"
     "nNOS-positive cells lacking GTPCH colocalization"
-    sourceProposedUnmeasuredEdge
-    "Hwang et al. 1998 localization plus authors' proposed supply routes"
-    "spatial separation is measured; direct intercellular BH4 transfer magnitude/direction is not"
+    sourceSupportedMechanisticEdge
+    "Hwang 1998 localization + Anastasiadis 1994 uptake + Choi 2003 uptake/coculture"
+    "spatial separation, cellular uptake and functional coculture crosstalk are paid; direct quantitative donor-to-recipient BH4 flux in vivo remains unpaid"
 
 intracellularBH4ToDopamineRelease : BH4PoolEdge
 intracellularBH4ToDopamineRelease =
@@ -153,6 +194,8 @@ extracellularBH4ToDopamineRelease =
 canonicalBH4PoolTopologyEdges : List BH4PoolEdge
 canonicalBH4PoolTopologyEdges =
   nosReductiveRegenerationEdge
+  ∷ exogenousBH4UptakeEdge
+  ∷ catecholaminergicToNnosFunctionalCrossTalk
   ∷ monoamineToNnosTransferHypothesis
   ∷ intracellularBH4ToDopamineRelease
   ∷ extracellularBH4ToDopamineRelease
@@ -167,6 +210,7 @@ record RedoxSpatialDiscriminator : Set where
     paidRedoxCoordinate : String
     paidSpatialCoordinate : String
     paidRouteCoordinate : String
+    paidUptakeCrossTalkCoordinate : String
     liveIntercellTransferResidual : String
     liveMultiBranchResidual : String
     nextExperimentReference : String
@@ -182,9 +226,10 @@ canonicalRedoxSpatialDiscriminator =
     "NOS-bound BH4 is dynamically oxidized/regenerated; reductive regeneration is observed in an NADPH-regenerating context"
     "GTPCH is colocalized with monoaminergic TH/TPH cells in studied regions but not with nNOS-positive cells"
     "intracellular and extracellular BH4 manipulations produce separable dopamine-release mechanisms in rat striatum slices"
-    "measure BH4 movement/supply between synthesis-positive and nNOS-positive cells rather than inferring transport from adjacency/localization"
-    "resolve BH4/BH2 + NAD(P)H + branch flux by cell/region/compartment and exposure route under one perturbation"
-    "extend A1 with route-resolved, compartment-resolved, multi-branch measurements and explicit redox-regeneration readouts"
+    "exogenous BH4 uptake is directly measured in neural/catecholaminergic preparations, and human nNOS-recipient cells show BH4 uptake/NO response plus functional catecholaminergic coculture crosstalk"
+    "quantify donor-to-recipient BH4 molecular transfer, direction and rate in target-relevant intact neural systems rather than inferring physiological flux from uptake/coculture function"
+    "resolve BH4/BH2 + NAD(P)H + branch flux by cell/region/compartment, exposure route and transfer topology under one perturbation"
+    "extend A1 with route-resolved, transfer-resolved, compartment-resolved multi-branch measurements and explicit redox-regeneration readouts"
 
 record RedoxSpatialBoundary : Set where
   constructor redoxSpatialBoundary
@@ -194,6 +239,13 @@ record RedoxSpatialBoundary : Set where
     intracellularExtracellularRouteDistinctionPaid : Bool
     intracellularExtracellularRouteDistinctionPaidIsTrue :
       intracellularExtracellularRouteDistinctionPaid ≡ true
+    cellularBH4UptakeDirectlyMeasured : Bool
+    cellularBH4UptakeDirectlyMeasuredIsTrue : cellularBH4UptakeDirectlyMeasured ≡ true
+    specificMembraneCarrierRequiredByUptakeStudy : Bool
+    specificMembraneCarrierRequiredByUptakeStudyIsFalse :
+      specificMembraneCarrierRequiredByUptakeStudy ≡ false
+    functionalCocultureCrossTalkSupported : Bool
+    functionalCocultureCrossTalkSupportedIsTrue : functionalCocultureCrossTalkSupported ≡ true
     scalarWellMixedPoolSufficient : Bool
     scalarWellMixedPoolSufficientIsFalse : scalarWellMixedPoolSufficient ≡ false
     gtpchAndNnosMustBeSameCell : Bool
@@ -213,6 +265,9 @@ canonicalRedoxSpatialBoundary : RedoxSpatialBoundary
 canonicalRedoxSpatialBoundary =
   redoxSpatialBoundary
     true refl
+    true refl
+    true refl
+    false refl
     true refl
     false refl
     false refl
