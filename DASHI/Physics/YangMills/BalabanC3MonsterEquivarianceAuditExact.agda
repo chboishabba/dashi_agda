@@ -6,21 +6,34 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.ThreeChannelC3EquivarianceGateExact as C3
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Monster369
 import DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact as Source
+import DASHI.Physics.YangMills.BalabanCMP109SpatialC3ActionExact as CMP109C3
 
 ------------------------------------------------------------------------
 -- YM / BASE369-MONSTER C3 AUDIT
 --
--- The Monster/Base369 lane owns literal C3 actions on its own carriers.  The
--- Balaban frontier currently owns a collection of source-recovery seams, but no
--- source-exact cyclic action on those seams or on the physical field variables
--- is asserted here.  Therefore Fourier/C3 machinery is gated, not imported.
+-- Updated after recovering a literal source-backed order-three action from
+-- Balaban CMP109 coordinate-permutation covariance.  The old categorical
+-- statement "Balaban has no literal C3 action" is no longer correct.
+--
+-- What is now paid:
+--   * an exact order-three spatial action on the literal generated CMP109 grid;
+--   * same-grid scalar-projection equivariance under the source symmetry.
+--
+-- What remains unpaid:
+--   * transport of that action through the later density -> repository state ->
+--     BC1/BC2 action -> localized D1 -> stress -> Schwinger recovery spine;
+--   * a C3 action on the full physical gauge-field variables of that compiler;
+--   * dexp/stress equivariance on those same objects.
 ------------------------------------------------------------------------
 
 monster369ExactC3TemplateAvailable : Bool
 monster369ExactC3TemplateAvailable = true
 
 balabanLiteralC3ActionRecovered : Bool
-balabanLiteralC3ActionRecovered = false
+balabanLiteralC3ActionRecovered = CMP109C3.cmp109LiteralSpatialC3Recovered
+
+balabanCMP109SpatialSourceC3Recovered : Bool
+balabanCMP109SpatialSourceC3Recovered = CMP109C3.cmp109LiteralSpatialC3Recovered
 
 balabanC3ActionOnSourceSeamsRecovered : Bool
 balabanC3ActionOnSourceSeamsRecovered = false
@@ -31,8 +44,12 @@ balabanC3ActionOnPhysicalFieldsRecovered = false
 balabanC3EquivarianceOfDexpOrStressRecovered : Bool
 balabanC3EquivarianceOfDexpOrStressRecovered = false
 
-balabanLiteralC3ActionRecoveredIsFalse : balabanLiteralC3ActionRecovered ≡ false
-balabanLiteralC3ActionRecoveredIsFalse = refl
+balabanLiteralC3ActionRecoveredIsTrue : balabanLiteralC3ActionRecovered ≡ true
+balabanLiteralC3ActionRecoveredIsTrue = refl
+
+balabanUnifiedRecoveryC3TransportStillOpen :
+  CMP109C3.unifiedRecoveryC3TransportClosed ≡ false
+balabanUnifiedRecoveryC3TransportStillOpen = refl
 
 record BalabanLiteralC3Realisation : Set₁ where
   field
@@ -58,8 +75,9 @@ record BalabanLiteralC3Realisation : Set₁ where
 open BalabanLiteralC3Realisation public
 
 ------------------------------------------------------------------------
--- The active source discriminator remains the correct present mechanism.  A C3
--- route becomes admissible only after source inspection produces the action.
+-- Source discrimination remains necessary for the still-unpaid transport
+-- seams.  The recovered CMP109 action removes one blocker; it does not let an
+-- analogy substitute for proving the remaining intertwiners.
 ------------------------------------------------------------------------
 
 sourceDiscriminationAlreadyAvailable : Bool
@@ -74,4 +92,4 @@ c3AnalogyMayReplaceSourceDiscriminationIsFalse = refl
 
 highestAlphaYM369Question : String
 highestAlphaYM369Question =
-  "Search the literal Balaban source for an actual order-three action on the same physical/source objects consumed by the current recovery compiler. Admit C3/Fourier decomposition only if that action and the recovery intertwiners are source-exact; otherwise retain Monster/Base369 as a non-transporting template."
+  "Transport the now-recovered CMP109 source-backed spatial C3 action along the literal same-object density/action/stress/Schwinger recovery compiler. Prove each recovery map intertwines that action; separately recover the action on the physical gauge-field variables and dexp/stress before importing Fourier/C3 decomposition there."
