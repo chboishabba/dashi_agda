@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.ExoticGravity.AntigravityPostNormalizationReuseMaxCutExact as Reuse
+import DASHI.Physics.ExoticGravity.AntigravityPostNormalizationDirectStressMaxCutExact as DirectStress
 import DASHI.Physics.ExoticGravity.AntigravityDifferentialTTDonorMaxCutExact as TT
 import DASHI.Physics.ExoticGravity.AntigravitySICalibrationDonorMaxCutExact as SI
 import DASHI.Physics.ExoticGravity.AntigravityMatchedControlExperimentDonorMaxCutExact as Experiment
@@ -25,28 +26,29 @@ import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStatic
 --       A2  the opaque Round109 source-native stress pair denotes the canonical
 --           Local-C encoded Wilson-admissible stress cylinder observable.
 --
---       Current master ALREADY chooses that observable and obtains its
+--       Current master already chooses that observable and obtains its
 --       positive-time and gauge-invariance proofs from the published Wilson OS
 --       application.  Those are not independent leaves.  The bare Round109
 --       pair has no observable evaluator, so A2 remains a genuine same-object
 --       source-semantic theorem rather than presentation plumbing.
 --
---       No arbitrary meaning predicate, all-stress encoding family, separate
---       E4 observable/decay theorem, primitive E1 covariance project, B0/B3
---       antigravity-specific bridge, or downstream rest/boost/trace law is
---       independently scheduled.
+--   P2. one common gravitational calibration/renormalization package.  On the
+--       PREFERRED typed-stress route the Local-C/Wightman terminal rho feeds
+--       normalized static/differential geometry directly.  Therefore an affine
+--       source-normalization -> rho map is NOT mandatory.  The two remaining
+--       P2 physical leaves are:
 --
---   P2. one common gravitational calibration/renormalization package
---       (affine source->rho map, cosmological convention, and the
---        consumer-relevant source/device stress*length^2 scale).  Accepted
---       measured G is already paid by the attributed CODATA-2022 admission.
+--         * one cosmological renormalization convention shared by the relevant
+--           endpoint stress(es);
+--         * the consumer-relevant same-apparatus stress*length^2 scale.
 --
---   P3. one matched experimental package.  The repository-internal experiment
---       compiler is now paid: one selected source compiles to one stress, one
---       metric and four consumers (weight, free-fall, clock, optical);
---       mechanism-signature templates are separated and nuisance closure is
---       candidate-bound.  What remains is physical: a real source switch, a
---       numerical systematic floor, and replication.
+--       Accepted measured G is already paid by the attributed CODATA-2022
+--       admission.  The older affine scalar-normalization route remains an
+--       optional source-coordinate attribution path.
+--
+--   P3. one matched experimental package.  Repository-internal experiment
+--       structure is paid; a real source switch, numerical systematic floor and
+--       replication remain physical.
 --
 -- Optional only for a propagating Schuetzhold/GW claim:
 --
@@ -72,12 +74,10 @@ independentPinnedBoostTraceSplitRequired =
 ------------------------------------------------------------------------
 
 p1OpaqueAnalyticEstimateCount : Nat
-p1OpaqueAnalyticEstimateCount =
-  P1.remainingOpaqueAnalyticEstimateCount
+p1OpaqueAnalyticEstimateCount = P1.remainingOpaqueAnalyticEstimateCount
 
 p1RemainingSameObjectResidualCount : Nat
-p1RemainingSameObjectResidualCount =
-  P1.remainingAntigravitySpecificP1ResidualCount
+p1RemainingSameObjectResidualCount = P1.remainingAntigravitySpecificP1ResidualCount
 
 p1Q1PathDerivativeSemanticsAndEquivarianceStillRequired : Bool
 p1Q1PathDerivativeSemanticsAndEquivarianceStillRequired =
@@ -86,21 +86,17 @@ p1Q1PathDerivativeSemanticsAndEquivarianceStillRequired =
 p1PrimitiveE1DerivativeEquivarianceProjectRequired : Bool
 p1PrimitiveE1DerivativeEquivarianceProjectRequired = false
 
--- Compatibility flag retained to make the retired scheduling visible.
 p1E24ObservableAndTwoAdmissibilityProofsStillRequired : Bool
 p1E24ObservableAndTwoAdmissibilityProofsStillRequired = false
 
 p1E24SelectedObservableChoiceStillRequired : Bool
-p1E24SelectedObservableChoiceStillRequired =
-  P1.e24SelectedObservableChoiceStillRequired
+p1E24SelectedObservableChoiceStillRequired = P1.e24SelectedObservableChoiceStillRequired
 
 p1E24PositiveTimeAdmissibilityStillRequired : Bool
-p1E24PositiveTimeAdmissibilityStillRequired =
-  P1.e24PositiveTimeAdmissibilityStillRequired
+p1E24PositiveTimeAdmissibilityStillRequired = P1.e24PositiveTimeAdmissibilityStillRequired
 
 p1E24GaugeInvariantAdmissibilityStillRequired : Bool
-p1E24GaugeInvariantAdmissibilityStillRequired =
-  P1.e24GaugeInvariantAdmissibilityStillRequired
+p1E24GaugeInvariantAdmissibilityStillRequired = P1.e24GaugeInvariantAdmissibilityStillRequired
 
 p1E24PairToCanonicalObservableSemanticsStillRequired : Bool
 p1E24PairToCanonicalObservableSemanticsStillRequired =
@@ -122,22 +118,35 @@ p1IndependentTerminalLawProjectsRequired : Bool
 p1IndependentTerminalLawProjectsRequired = false
 
 ------------------------------------------------------------------------
--- P2 calibration frontier.
+-- P2 calibration frontier: preferred DIRECT STRESS route.
 ------------------------------------------------------------------------
+
+preferredP2ConsumesTypedStressDirectly : Bool
+preferredP2ConsumesTypedStressDirectly =
+  DirectStress.preferredRouteConsumesTypedLocalCWightmanStressDirectly
+
+preferredP2AffineSourceNormalizationCalibrationRequired : Bool
+preferredP2AffineSourceNormalizationCalibrationRequired =
+  DirectStress.affineSourceNormalizationCalibrationRequiredForPreferredRoute
+
+preferredP2CommonCosmologicalRenormalizationStillRequired : Bool
+preferredP2CommonCosmologicalRenormalizationStillRequired =
+  DirectStress.commonCosmologicalRenormalizationStillRequired
+
+preferredP2PhysicalLeafCount : Nat
+preferredP2PhysicalLeafCount = DirectStress.remainingPreferredP2PhysicalLeafCount
 
 commonGravityCalibrationPackageStillRequired : Bool
 commonGravityCalibrationPackageStillRequired = true
 
 acceptedMeasuredGAuthorityStillOpen : Bool
-acceptedMeasuredGAuthorityStillOpen =
-  SI.acceptedMeasuredGAuthorityStillRequired
+acceptedMeasuredGAuthorityStillOpen = SI.acceptedMeasuredGAuthorityStillRequired
 
 acceptedMeasuredGAuthorityPaid : Bool
 acceptedMeasuredGAuthorityPaid = true
 
 stressLengthSquaredScaleStillOpen : Bool
-stressLengthSquaredScaleStillOpen =
-  SI.sourceStressLengthSquaredScaleStillRequired
+stressLengthSquaredScaleStillOpen = SI.sourceStressLengthSquaredScaleStillRequired
 
 gravityCalibrationInternallyNeedsAcceptedGAndStressLengthSquared : Bool
 gravityCalibrationInternallyNeedsAcceptedGAndStressLengthSquared = false
@@ -165,23 +174,19 @@ fourChannelStructureDoesNotPayExperiment : Bool
 fourChannelStructureDoesNotPayExperiment = true
 
 physicalMatchedSourceSwitchStillOpen : Bool
-physicalMatchedSourceSwitchStillOpen =
-  Experiment.physicalMatchedSourceSwitchStillRequired
+physicalMatchedSourceSwitchStillOpen = Experiment.physicalMatchedSourceSwitchStillRequired
 
 numericalSystematicsBudgetStillOpen : Bool
-numericalSystematicsBudgetStillOpen =
-  Experiment.numericalSystematicsBudgetStillRequired
+numericalSystematicsBudgetStillOpen = Experiment.numericalSystematicsBudgetStillRequired
 
 empiricalReplicationStillOpen : Bool
-empiricalReplicationStillOpen =
-  Experiment.empiricalReplicationStillRequired
+empiricalReplicationStillOpen = Experiment.empiricalReplicationStillRequired
 
 matchedExperimentPackageStillRequired : Bool
 matchedExperimentPackageStillRequired = true
 
 matchedExperimentInternallyNeedsPhysicalSwitchAndSystematics : Bool
-matchedExperimentInternallyNeedsPhysicalSwitchAndSystematics =
-  physicalMatchedSourceSwitchStillOpen
+matchedExperimentInternallyNeedsPhysicalSwitchAndSystematics = physicalMatchedSourceSwitchStillOpen
 
 ------------------------------------------------------------------------
 -- P4 optional propagating-wave package.
@@ -194,8 +199,7 @@ ttDevicePackageRequiredWhenPropagatingGWRouteSelected : Bool
 ttDevicePackageRequiredWhenPropagatingGWRouteSelected = true
 
 ttPackageInternallyNeedsThreeSameObjectWelds : Bool
-ttPackageInternallyNeedsThreeSameObjectWelds =
-  TT.sameGWMetricTangentStillRequired
+ttPackageInternallyNeedsThreeSameObjectWelds = TT.sameGWMetricTangentStillRequired
 
 ------------------------------------------------------------------------
 -- Reuse firewalls.
@@ -210,12 +214,10 @@ independentDifferentialSameObjectTheoremStillRequired =
   Reuse.independentDeltaSameObjectTheoremRequiredAfterCommonR136Pair
 
 r109SignMachineryRequiredForResponseReuse : Bool
-r109SignMachineryRequiredForResponseReuse =
-  Reuse.r136FiniteAnchorTailRequiredForStaticResponseReuse
+r109SignMachineryRequiredForResponseReuse = Reuse.r136FiniteAnchorTailRequiredForStaticResponseReuse
 
 representationOnlyAdapterDebtRemains : Bool
-representationOnlyAdapterDebtRemains =
-  Reuse.representationOnlyPromotionDebtRemainsAfterR136Reuse
+representationOnlyAdapterDebtRemains = Reuse.representationOnlyPromotionDebtRemainsAfterR136Reuse
 
 typedTerminalInternallyNeedsBoostAndTraceContinuation : Bool
 typedTerminalInternallyNeedsBoostAndTraceContinuation = true
@@ -262,13 +264,10 @@ canonicalTerminalPhysicalPackageFrontier =
     true true false false true true true true true true false true false false false false
     3 3 4
 
-acceptedMeasuredGAuthorityStillOpenIsFalse :
-  acceptedMeasuredGAuthorityStillOpen ≡ false
-acceptedMeasuredGAuthorityStillOpenIsFalse =
-  SI.acceptedMeasuredGAuthorityStillRequiredIsFalse
+acceptedMeasuredGAuthorityStillOpenIsFalse : acceptedMeasuredGAuthorityStillOpen ≡ false
+acceptedMeasuredGAuthorityStillOpenIsFalse = SI.acceptedMeasuredGAuthorityStillRequiredIsFalse
 
-independentPinnedBoostTraceSplitRequiredIsFalse :
-  independentPinnedBoostTraceSplitRequired ≡ false
+independentPinnedBoostTraceSplitRequiredIsFalse : independentPinnedBoostTraceSplitRequired ≡ false
 independentPinnedBoostTraceSplitRequiredIsFalse = refl
 
 independentStaticMetricResponseTheoremStillRequiredIsFalse :
@@ -279,17 +278,14 @@ independentDifferentialSameObjectTheoremStillRequiredIsFalse :
   independentDifferentialSameObjectTheoremStillRequired ≡ false
 independentDifferentialSameObjectTheoremStillRequiredIsFalse = refl
 
-r109SignMachineryRequiredForResponseReuseIsFalse :
-  r109SignMachineryRequiredForResponseReuse ≡ false
+r109SignMachineryRequiredForResponseReuseIsFalse : r109SignMachineryRequiredForResponseReuse ≡ false
 r109SignMachineryRequiredForResponseReuseIsFalse = refl
 
-representationOnlyAdapterDebtRemainsIsFalse :
-  representationOnlyAdapterDebtRemains ≡ false
+representationOnlyAdapterDebtRemainsIsFalse : representationOnlyAdapterDebtRemains ≡ false
 representationOnlyAdapterDebtRemainsIsFalse = refl
 
 weightOnlyMetricPromotionBlocked : Bool
 weightOnlyMetricPromotionBlocked = FourChannel.weightOnlyCannotPromoteMetricClaim
 
 scalarMetricToTTDirectPromotionBlocked : Bool
-scalarMetricToTTDirectPromotionBlocked =
-  FourChannel.scalarMetricPerturbationIsNotTTMode
+scalarMetricToTTDirectPromotionBlocked = FourChannel.scalarMetricPerturbationIsNotTTMode
