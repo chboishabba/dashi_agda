@@ -6,7 +6,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSParetoFrontierExact as Pareto
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressSelectedSemanticsExact as Selected
-import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE1DifferentiatedCovarianceExact as E1
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE2CylinderEmbeddingExact as E2
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE4ClusteringExact as E4
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSMaxCutRootExact as Root
@@ -20,11 +20,18 @@ import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSMaxCutRootExact as
 --
 -- Current master owns a stronger source-facing max-cut.  Those terminal laws
 -- are consequences of ONE marked Local-C stress reconstruction root.  After
--- the E1/E2/E4 reductions and the selected B0/B3 semantics, no new opaque
--- analytic estimate is charged.  The remaining antigravity-specific P1 work is
--- exactly three same-object/semantic residuals:
+-- the marked-OS reductions and the selected B0/B3 semantics, no new opaque
+-- analytic estimate is charged.
 --
---   E1  source/stress derivative equivariance under the SAME Euclidean action;
+-- E1 is also no longer scheduled as a primitive covariance/equivariance
+-- theorem.  Overlay Q derives signed R144 covariance by differentiating the
+-- invariant scalar potential along the SAME selected B4-equivariant source
+-- path, with reflection sign carried by t -> -t.  The source-facing payment is
+-- therefore Q1 ordinary path-derivative semantics + path equivariance.
+--
+-- The remaining antigravity-specific P1 packages are exactly:
+--
+--   Q1  actual BC2 source-path derivative semantics + B4-equivariant path;
 --   E2  embedding of the SAME selected stress mark into the reflected
 --       positive-time/gauge-invariant cylinder algebra;
 --   E4  selection of the SAME stress source in the quantitative two-source
@@ -48,9 +55,20 @@ remainingOpaqueAnalyticEstimateCount = 0
 remainingAntigravitySpecificP1ResidualCount : Nat
 remainingAntigravitySpecificP1ResidualCount = 3
 
-e1DerivativeEquivarianceStillRequired : Bool
-e1DerivativeEquivarianceStillRequired =
-  E1.markedE1ResidualIsDerivativeEquivariance
+q1PathDerivativeSemanticsAndEquivarianceStillRequired : Bool
+q1PathDerivativeSemanticsAndEquivarianceStillRequired =
+  Q.q1IsPathDerivativeSemanticsAndEquivariance
+
+primitiveE1DerivativeEquivarianceProjectRequired : Bool
+primitiveE1DerivativeEquivarianceProjectRequired = false
+
+signedR144CovarianceCompilerOwnedFromQ1 : Bool
+signedR144CovarianceCompilerOwnedFromQ1 =
+  Q.signedCovarianceDerivedFromInvariantPathCalculus
+
+potentialCovarianceNeedsNoD1CovariancePremise : Bool
+potentialCovarianceNeedsNoD1CovariancePremise =
+  Q.potentialCovarianceDoesNotNeedD1Covariance
 
 e2StressCylinderEmbeddingStillRequired : Bool
 e2StressCylinderEmbeddingStillRequired =
