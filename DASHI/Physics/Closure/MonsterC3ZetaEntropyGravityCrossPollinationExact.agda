@@ -5,6 +5,8 @@ open import DASHI.Core.Prelude
 import DASHI.Wikimedia.IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact as Existing
 import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact as Literal
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as Single
+import DASHI.Physics.Chemistry.AmmoniaMonster3BC3QuotientLiftExact as NH3MonsterC3
+import DASHI.Physics.Chemistry.AmmoniaMonster3BPhaseQuotientNonFactorabilityExact as PhaseNF
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as StateCount
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
@@ -19,9 +21,14 @@ import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physica
 --   * zeta-sector recognition as an existing leaf;
 --   * phase-resolution compilation from a single literal action producer.
 --
--- Still unpaid is an inhabited single producer on the target physical object,
--- plus the fixed-sector 65610 regular block and complementary 53 residual as
--- stable same-action subspaces.  Entropy and gravity remain downstream.
+-- This branch now also pays a chemistry-side theorem: the NH3 electronic C3
+-- phase coordinate and Monster-3B central phase coordinate form an exact C3
+-- quotient representation isomorphism preserving multiplication, inversion
+-- and Fourier rows.  Separating pairs in the 729 x 90 Monster zeta model prove
+-- that this exact quotient is nevertheless insufficient to recover fine state,
+-- Heisenberg weight, or multiplicity.  Therefore the correspondence is strong
+-- enough for phase/character consumers but cannot be promoted to entropy/state
+-- counting, a Monster state map, or gravity without the missing refinements.
 ------------------------------------------------------------------------
 
 record ZetaEntropyGravityCrossPollinationReceipt : Set where
@@ -58,6 +65,18 @@ record ZetaEntropyGravityCrossPollinationReceipt : Set where
     phaseResolutionCompilerFromSingleProducerPaid : Bool
     phaseResolutionCompilerFromSingleProducerPaidIsTrue :
       phaseResolutionCompilerFromSingleProducerPaid ≡ true
+
+    nh3MonsterExactC3QuotientRepresentationPaid : Bool
+    nh3MonsterExactC3QuotientRepresentationPaidIsTrue :
+      nh3MonsterExactC3QuotientRepresentationPaid ≡ true
+
+    phaseQuotientCannotRecoverFineMonsterStatePaid : Bool
+    phaseQuotientCannotRecoverFineMonsterStatePaidIsTrue :
+      phaseQuotientCannotRecoverFineMonsterStatePaid ≡ true
+
+    phaseQuotientCannotRecoverMultiplicityPaid : Bool
+    phaseQuotientCannotRecoverMultiplicityPaidIsTrue :
+      phaseQuotientCannotRecoverMultiplicityPaid ≡ true
 
     actualSingleProducerInhabited : Bool
     actualSingleProducerInhabitedIsFalse :
@@ -107,6 +126,9 @@ canonicalZetaEntropyGravityCrossPollinationReceipt =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
@@ -115,7 +137,7 @@ canonicalZetaEntropyGravityCrossPollinationReceipt =
     false refl
     false refl
     false refl
-    "inhabit the one remaining ActualMonster3BSingleActionProducer on the literal target eigenspace, construct the action-stable fixed-sector 65610 regular block plus residual-53 complement and zeta-squared recognition/transport; then attach physical entropy and Lorentzian-gravity adapters before any 3+1D promotion"
+    "refine the exact NH3/Monster C3 quotient by the missing F3^6/Base369 weight and Fin90 multiplicity coordinates, inhabit the literal target action/sector producer and fixed 65610+53 split, then attach same-object physical ensemble/entropy and Lorentzian-gravity adapters before any 3+1D promotion"
 
 ------------------------------------------------------------------------
 -- Direct reuse witnesses from the older zeta frontier.
@@ -145,8 +167,7 @@ priorOwnerPaysConformal196884And54 :
 priorOwnerPaysConformal196884And54 = refl
 
 ------------------------------------------------------------------------
--- Newer literal-action frontier: these facts supersede the older wording that
--- the literal phase carrier itself was missing.
+-- Newer literal-action frontier.
 ------------------------------------------------------------------------
 
 literalThreePhaseBoundary : Literal.LiteralThreePhaseResidualBoundary
@@ -179,6 +200,30 @@ phaseResolutionIsCompilerOutput = refl
 actualSingleProducerNotInhabitedHere :
   Single.actualSingleProducerInhabitedHere singleActionProducerBoundary ≡ false
 actualSingleProducerNotInhabitedHere = refl
+
+------------------------------------------------------------------------
+-- Chemistry <-> Monster phase quotient payment and its exact insufficiency.
+------------------------------------------------------------------------
+
+nh3MonsterC3GroupLawIntertwines :
+  NH3MonsterC3.C3QuotientLiftBoundary.c3GroupLawIntertwiningPaid
+    NH3MonsterC3.canonicalC3QuotientLiftBoundary ≡ true
+nh3MonsterC3GroupLawIntertwines = refl
+
+nh3MonsterC3FourierRowsIntertwine :
+  NH3MonsterC3.C3QuotientLiftBoundary.fourierCharacterIntertwiningPaid
+    NH3MonsterC3.canonicalC3QuotientLiftBoundary ≡ true
+nh3MonsterC3FourierRowsIntertwine = refl
+
+phaseDoesNotRecoverFineMonsterState :
+  PhaseNF.PhaseQuotientNonFactorabilityBoundary.phaseQuotientFineStateNonfactorabilityPaid
+    PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
+phaseDoesNotRecoverFineMonsterState = refl
+
+phaseDoesNotRecoverMonsterMultiplicity :
+  PhaseNF.PhaseQuotientNonFactorabilityBoundary.phaseQuotientMultiplicityNonfactorabilityPaid
+    PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
+phaseDoesNotRecoverMonsterMultiplicity = refl
 
 stateCountBoundaryStillNonPromoting :
   StateCount.StateCountingEntropyBoundary.degeneracyDeterminesProbabilityDistribution
