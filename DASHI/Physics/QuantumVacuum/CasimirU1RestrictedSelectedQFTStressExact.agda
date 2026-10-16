@@ -13,11 +13,6 @@ import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostExact as Host
 
 ------------------------------------------------------------------------
 -- CANONICAL CARTAN-U(1) FIELD IMAGE RECEIPT
---
--- Once a selected Lie-algebra-valued field is proved pointwise to lie in the
--- existing U(1) Cartan image, the non-abelian bracket term vanishes by the
--- already-proved U1AsSU2AbelianRestrictionExact theorem.  No independent
--- commutator-vanishing theorem is then admissible.
 ------------------------------------------------------------------------
 
 record CanonicalCartanU1FieldImageReceipt
@@ -48,7 +43,54 @@ restrictedFieldBracketZero receipt left right =
       (phase receipt right))
 
 ------------------------------------------------------------------------
+-- SAME-OBJECT SELECTED-QFT FIELD REALIZATION
+--
+-- The field-image theorem above is intentionally generic mathematics.  It does
+-- not identify a caller-supplied field with the field of the selected recovered
+-- QFT sector.  The current physical payment is therefore indexed by the same
+-- unified candidate/candidate/regime/group/host and explicitly carries a
+-- same-object witness before the Cartan image receipt may be consumed.
+------------------------------------------------------------------------
+
+record SelectedQFTCartanFieldRealization
+    (U : Weld.UnifiedCandidate)
+    (candidate : Weld.Candidate U)
+    (regime : Weld.Regime U)
+    (group : QFT.CompactSimpleGroup (Weld.qftCarriers U))
+    (host : Host.CasimirSelectedQFTSU2Host U group) : Set₁ where
+  field
+    SelectedField : Set
+    selectedLieValue : SelectedField → SU2Lie.SU2LieAlgebra
+
+    SameSelectedQFTField : Set
+    sameSelectedQFTField : SameSelectedQFTField
+
+    cartanImage :
+      CanonicalCartanU1FieldImageReceipt SelectedField selectedLieValue
+
+    reading : String
+
+open SelectedQFTCartanFieldRealization public
+
+selectedQFTFieldBracketZero :
+  ∀ {U candidate regime group host} →
+  (realization :
+    SelectedQFTCartanFieldRealization U candidate regime group host) →
+  ∀ left right →
+  Bracket.lieBracket
+    (selectedLieValue realization left)
+    (selectedLieValue realization right)
+  ≡ SU2Lie.lieZero
+selectedQFTFieldBracketZero realization =
+  restrictedFieldBracketZero (cartanImage realization)
+
+------------------------------------------------------------------------
 -- U(1)-RESTRICTED SELECTED-QFT STRESS
+--
+-- Compatibility record retained for older downstream consumers.  Its opaque
+-- action/variation/boundary Set sockets are no longer the authoritative
+-- max-cut: dedicated theorem-bearing action, variation, stress-readout and
+-- mode-renormalization owners supersede them.
 ------------------------------------------------------------------------
 
 record CasimirCanonicalU1StressRestriction
@@ -109,13 +151,23 @@ u1RestrictedSelectedQFTStress restriction =
 data FullSelectedSU2StressAutomaticallyEqualsBrownMaclay : Set where
 data U1GaugeArchitectureAutomaticallyClosesStressRestriction : Set where
 data VanishingLieBracketAutomaticallyProvesActionRestriction : Set where
+data ArbitraryCartanReceiptAutomaticallyIdentifiesSelectedQFTField : Set where
 
-fullSelectedSU2StressDoesNotAutomaticallyEqualBrownMaclay : FullSelectedSU2StressAutomaticallyEqualsBrownMaclay → ⊥
+fullSelectedSU2StressDoesNotAutomaticallyEqualBrownMaclay :
+  FullSelectedSU2StressAutomaticallyEqualsBrownMaclay → ⊥
 fullSelectedSU2StressDoesNotAutomaticallyEqualBrownMaclay ()
-u1GaugeEmbeddingDoesNotCloseStressRestriction : U1GaugeArchitectureAutomaticallyClosesStressRestriction → ⊥
+
+u1GaugeEmbeddingDoesNotCloseStressRestriction :
+  U1GaugeArchitectureAutomaticallyClosesStressRestriction → ⊥
 u1GaugeEmbeddingDoesNotCloseStressRestriction ()
-vanishingLieBracketDoesNotProveActionRestriction : VanishingLieBracketAutomaticallyProvesActionRestriction → ⊥
+
+vanishingLieBracketDoesNotProveActionRestriction :
+  VanishingLieBracketAutomaticallyProvesActionRestriction → ⊥
 vanishingLieBracketDoesNotProveActionRestriction ()
+
+arbitraryCartanReceiptDoesNotIdentifySelectedQFTField :
+  ArbitraryCartanReceiptAutomaticallyIdentifiesSelectedQFTField → ⊥
+arbitraryCartanReceiptDoesNotIdentifySelectedQFTField ()
 
 record CasimirU1RestrictedSelectedQFTStressBoundary : Set where
   constructor casimir-u1-restricted-selected-qft-stress-boundary
@@ -125,9 +177,16 @@ record CasimirU1RestrictedSelectedQFTStressBoundary : Set where
     u1GaugeEmbeddingAloneClosesStressRestriction : Bool
 
     canonicalCartanU1FieldImageReceiptOwned : Bool
+    selectedQFTCartanFieldRealizationInterfaceOwned : Bool
     restrictedFieldBracketZeroCompilerOwned : Bool
     independentCommutatorPaymentRequiredAfterFieldImage : Bool
 
+    legacyOpaqueActionStressSocketsAreAuthoritative : Bool
+    dedicatedActionVariationCompilerPreferred : Bool
+
+    selectedQFTCartanFieldRealizationPaid : Bool
+
+    -- Compatibility status retained for older readers.
     cartanU1FieldRestrictionPaid : Bool
     nonAbelianCommutatorRestrictionPaid : Bool
     yangMillsActionToMaxwellRestrictionPaid : Bool
@@ -137,14 +196,21 @@ record CasimirU1RestrictedSelectedQFTStressBoundary : Set where
 
 open CasimirU1RestrictedSelectedQFTStressBoundary public
 
-canonicalCasimirU1RestrictedSelectedQFTStressBoundary : CasimirU1RestrictedSelectedQFTStressBoundary
+canonicalCasimirU1RestrictedSelectedQFTStressBoundary :
+  CasimirU1RestrictedSelectedQFTStressBoundary
 canonicalCasimirU1RestrictedSelectedQFTStressBoundary =
   casimir-u1-restricted-selected-qft-stress-boundary
     true false false
-    true true false
+    true true true false
+    false true
+    false
     false false false false false false
 
 data RemainingCanonicalU1StressRestrictionBlocker : Set where
+  missingSelectedQFTCartanFieldRealization : RemainingCanonicalU1StressRestrictionBlocker
+
+  -- Legacy compatibility constructors: downstream theorem-bearing owners now
+  -- refine these names, so they are not the authoritative ordering here.
   missingCanonicalCartanU1FieldRestriction : RemainingCanonicalU1StressRestrictionBlocker
   missingYangMillsActionToMaxwellRestriction : RemainingCanonicalU1StressRestrictionBlocker
   missingMetricVariationStressRestriction : RemainingCanonicalU1StressRestrictionBlocker
@@ -152,16 +218,8 @@ data RemainingCanonicalU1StressRestrictionBlocker : Set where
   missingSamePlateBoundaryRenormalization : RemainingCanonicalU1StressRestrictionBlocker
 
 firstU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
-firstU1RestrictionBlocker = missingCanonicalCartanU1FieldRestriction
-secondU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
-secondU1RestrictionBlocker = missingYangMillsActionToMaxwellRestriction
-thirdU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
-thirdU1RestrictionBlocker = missingMetricVariationStressRestriction
-fourthU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
-fourthU1RestrictionBlocker = missingRestrictedQuantumStressMaxwellIdentification
-fifthU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
-fifthU1RestrictionBlocker = missingSamePlateBoundaryRenormalization
+firstU1RestrictionBlocker = missingSelectedQFTCartanFieldRealization
 
 casimirU1RestrictedSelectedQFTStressReading : String
 casimirU1RestrictedSelectedQFTStressReading =
-  "Brown-Maclay targets the canonical electromagnetic U(1)-restricted stress, not the full selected SU(2) stress. The first leaf is now a pointwise same-object field-image receipt into the existing Cartan U(1) embedding. Once that receipt is paid, the existing u1EmbeddedLieBracketZero theorem automatically proves vanishing of the non-abelian bracket on the SAME restricted field; no second commutator theorem is required. The remaining independent restriction leaves are YM-action -> Maxwell, commutation of restriction with metric variation/stress construction, restricted quantum stress -> Maxwell stress, and the same conducting-plate boundary/renormalization weld."
+  "The Cartan field-image theorem is generic algebra, not by itself a selected-QFT field theorem. The live payment is now SelectedQFTCartanFieldRealization, indexed by the same unified candidate/candidate/regime/group/host and carrying an explicit same-object witness plus the existing Cartan image receipt. Once supplied, bracket-zero compiles automatically. The older opaque action/variation/stress/boundary Set sockets remain compatibility-only; dedicated action-density, metric-variation, selected-stress-readout and mode-renormalization owners are authoritative."
