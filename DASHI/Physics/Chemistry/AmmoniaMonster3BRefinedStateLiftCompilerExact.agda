@@ -2,6 +2,7 @@ module DASHI.Physics.Chemistry.AmmoniaMonster3BRefinedStateLiftCompilerExact whe
 
 open import DASHI.Core.Prelude
 open import Data.Fin.Base using (Fin)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Monster3BFiniteProjectorModelExact as Model
@@ -137,9 +138,8 @@ actualLiftRecoversBase369Coordinate :
     (toActualZetaState recognition r s)
   ≡ toBase369Coordinate r s
 actualLiftRecoversBase369Coordinate recognition r s =
-  let modelEquality = actualLiftRecoversModelCoordinate recognition r s
-  in
-  cong Base369.modelToBase369 modelEquality
+  cong Base369.modelToBase369
+    (actualLiftRecoversModelCoordinate recognition r s)
 
 ------------------------------------------------------------------------
 -- Consumer contract: this is now a compiler problem, not a dimension guess.
