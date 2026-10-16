@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_)
 
 import DASHI.Biology.KitzerowAttributionEvidenceLineageExact as Lineage
+import DASHI.Biology.KitzerowAttributionProvenanceSOTAExact as SOTA
 
 republicationAndReportMultiplicityDoNotCreateIndependence :
   Lineage.downstreamPublicationMultiplicityCreatesIndependentEvidence Lineage.canonicalKitzerowAttributionLineageBoundary ≡ false
@@ -32,3 +33,13 @@ brazilPostPublicationContactCannotPayEarlierExposure = refl , refl
 originatorContactReportsRemainOneProvenanceRoot :
   Lineage.contactReportMultiplicityInflatesIndependence Lineage.canonicalKitzerowContactIndependenceReceipt ≡ false
 originatorContactReportsRemainOneProvenanceRoot = refl
+
+surroundingSOTAConstrainsVocabularyWithoutAdjudicatingCase :
+  SOTA.oriVocabularyIncludesIdeasProcessesResultsWords SOTA.canonicalAttributionProvenanceSOTABoundary ≡ true
+  × SOTA.cochraneSeparatesReportsFromStudyUnits SOTA.canonicalAttributionProvenanceSOTABoundary ≡ true
+  × SOTA.w3cSeparatesDerivationRevisionQuotationRelations SOTA.canonicalAttributionProvenanceSOTABoundary ≡ true
+  × SOTA.copeTreatsDocumentaryEvidenceAsInvestigationInput SOTA.canonicalAttributionProvenanceSOTABoundary ≡ true
+  × SOTA.guidanceAutomaticallyAdjudicatesKitzerowClaim SOTA.canonicalAttributionProvenanceSOTABoundary ≡ false
+  × SOTA.institutionalGuidanceCreatesLegalConclusion SOTA.canonicalAttributionProvenanceSOTABoundary ≡ false
+surroundingSOTAConstrainsVocabularyWithoutAdjudicatingCase =
+  refl , (refl , (refl , (refl , (refl , refl))))
