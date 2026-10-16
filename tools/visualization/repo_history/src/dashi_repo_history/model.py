@@ -160,6 +160,7 @@ class CommitRecord:
     parents: tuple[str, ...]
     refs: tuple[str, ...] = ()
     subject: str = ""
+    body: str = ""
 
     @property
     def shape(self) -> str:
