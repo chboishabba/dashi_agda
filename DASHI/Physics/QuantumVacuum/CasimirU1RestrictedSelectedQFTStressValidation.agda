@@ -20,6 +20,15 @@ fieldImageReceiptInterfaceOwnedRegression :
   R.canonicalCartanU1FieldImageReceiptOwned R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
 fieldImageReceiptInterfaceOwnedRegression = refl
 
+selectedQFTFieldRealizationOwnedRegression :
+  R.selectedQFTCartanFieldRealizationInterfaceOwned R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
+selectedQFTFieldRealizationOwnedRegression = refl
+
+arbitraryCartanReceiptNotSelectedFieldRegression :
+  R.ArbitraryCartanReceiptAutomaticallyIdentifiesSelectedQFTField → ⊥
+arbitraryCartanReceiptNotSelectedFieldRegression =
+  R.arbitraryCartanReceiptDoesNotIdentifySelectedQFTField
+
 commutatorCompilerOwnedRegression :
   R.restrictedFieldBracketZeroCompilerOwned R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
 commutatorCompilerOwnedRegression = refl
@@ -28,45 +37,21 @@ independentCommutatorPaymentNotRequiredRegression :
   R.independentCommutatorPaymentRequiredAfterFieldImage R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
 independentCommutatorPaymentNotRequiredRegression = refl
 
-fieldRestrictionStillOpenRegression :
-  R.cartanU1FieldRestrictionPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
-fieldRestrictionStillOpenRegression = refl
+legacyOpaqueSocketsNotAuthoritativeRegression :
+  R.legacyOpaqueActionStressSocketsAreAuthoritative R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+legacyOpaqueSocketsNotAuthoritativeRegression = refl
 
-actionRestrictionStillOpenRegression :
-  R.yangMillsActionToMaxwellRestrictionPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
-actionRestrictionStillOpenRegression = refl
+dedicatedActionVariationCompilerPreferredRegression :
+  R.dedicatedActionVariationCompilerPreferred R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
+dedicatedActionVariationCompilerPreferredRegression = refl
 
-stressVariationRestrictionStillOpenRegression :
-  R.metricVariationStressRestrictionPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
-stressVariationRestrictionStillOpenRegression = refl
-
-maxwellStressIdentificationStillOpenRegression :
-  R.restrictedStressIsMaxwellStressPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
-maxwellStressIdentificationStillOpenRegression = refl
-
-boundaryRenormalizationStillOpenRegression :
-  R.sameBoundaryRenormalizedU1StressPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
-boundaryRenormalizationStillOpenRegression = refl
+selectedFieldRealizationStillOpenRegression :
+  R.selectedQFTCartanFieldRealizationPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+selectedFieldRealizationStillOpenRegression = refl
 
 firstRestrictionBlockerRegression :
-  R.firstU1RestrictionBlocker ≡ R.missingCanonicalCartanU1FieldRestriction
+  R.firstU1RestrictionBlocker ≡ R.missingSelectedQFTCartanFieldRealization
 firstRestrictionBlockerRegression = refl
-
-secondRestrictionBlockerRegression :
-  R.secondU1RestrictionBlocker ≡ R.missingYangMillsActionToMaxwellRestriction
-secondRestrictionBlockerRegression = refl
-
-thirdRestrictionBlockerRegression :
-  R.thirdU1RestrictionBlocker ≡ R.missingMetricVariationStressRestriction
-thirdRestrictionBlockerRegression = refl
-
-fourthRestrictionBlockerRegression :
-  R.fourthU1RestrictionBlocker ≡ R.missingRestrictedQuantumStressMaxwellIdentification
-fourthRestrictionBlockerRegression = refl
-
-fifthRestrictionBlockerRegression :
-  R.fifthU1RestrictionBlocker ≡ R.missingSamePlateBoundaryRenormalization
-fifthRestrictionBlockerRegression = refl
 
 fullStressEqualityFirewallRegression :
   R.FullSelectedSU2StressAutomaticallyEqualsBrownMaclay → ⊥
