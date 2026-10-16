@@ -12,9 +12,17 @@ maxwellSectorRestrictionScopeReusedRegression :
   M.maxwellSectorRestrictionScopeReused M.canonicalCasimirU1ActionVariationBoundary ≡ true
 maxwellSectorRestrictionScopeReusedRegression = refl
 
-killingNormalizationSeparatedRegression :
-  M.killingNormalizationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
-killingNormalizationSeparatedRegression = refl
+invariantPairingRestrictionConsumedRegression :
+  M.invariantPairingRestrictionConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
+invariantPairingRestrictionConsumedRegression = refl
+
+independentKillingDecompositionNotRequiredRegression :
+  M.independentKillingDecompositionRequired M.canonicalCasimirU1ActionVariationBoundary ≡ false
+independentKillingDecompositionNotRequiredRegression = refl
+
+physicalCouplingNormalizationSeparatedRegression :
+  M.physicalChargeCouplingNormalizationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+physicalCouplingNormalizationSeparatedRegression = refl
 
 fieldStrengthRestrictionSeparatedRegression :
   M.fieldStrengthRestrictionSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
@@ -33,7 +41,7 @@ zeroProbeCannotPayPhysicalActionRegression :
 zeroProbeCannotPayPhysicalActionRegression = refl
 
 firstActionBlockerRegression :
-  M.firstActionRestrictionBlocker ≡ M.missingKillingFormAndChargeNormalization
+  M.firstActionRestrictionBlocker ≡ M.missingPhysicalChargeCouplingNormalization
 firstActionBlockerRegression = refl
 
 secondActionBlockerRegression :
