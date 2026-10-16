@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.ComputerScience.Goldbach29Signed369VendorBridgeExact as Bridge
 import DASHI.ComputerScience.Goldbach30To29SuccessMacroExact as Macro
+import DASHI.ComputerScience.Goldbach29ExternalHaltingSemanticsExact as Semantics
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 
 ------------------------------------------------------------------------
@@ -54,6 +55,10 @@ programLengthAndExecutionLengthRemainDifferentConsumers =
   Signed.shortestProgramLengthEqualsExecutionLengthIsFalse
     Signed.canonicalSignedSSPWeaveBoundary
 
+externalGoldbach29HaltingSemanticsSourcePaid : Bool
+externalGoldbach29HaltingSemanticsSourcePaid =
+  Semantics.externalGoldbach29HaltingSemanticsSourcePaid
+
 ------------------------------------------------------------------------
 -- Paid Pareto point.
 --
@@ -63,8 +68,9 @@ programLengthAndExecutionLengthRemainDifferentConsumers =
 --   - the same success-macro terminal register consumer;
 --   - one MORE microstep on that success macro.
 --
--- Thus static machine compression and dynamic execution cost are genuinely
--- distinct coordinates on an actual attributed FRACTRAN reduction.
+-- The later attributed Lean source additionally pays the Goldbach29 halting
+-- consumer at imported-formal-source authority.  It does not provide an Agda
+-- proof and does not by itself identify Goldbach30 with Goldbach29.
 ------------------------------------------------------------------------
 
 record Goldbach30To29ReductionReceipt : Set where
@@ -78,9 +84,11 @@ record Goldbach30To29ReductionReceipt : Set where
     successConsumerPreservationPaidFlag : Bool
     successExecutionPenaltyPaidFlag : Bool
     programLengthEqualsExecutionLength : Bool
+    externalGoldbach29HaltingSemanticsSourcePaidFlag : Bool
+    agdaGoldbach29HaltingSemanticsPaidFlag : Bool
     wholeMachineReachableWeakBisimulationPaidFlag : Bool
     wholeMachineHaltingEquivalencePaidFlag : Bool
-    conjectureLevelGoldbachSemanticsPaidFlag : Bool
+    goldbachConjectureProvedFlag : Bool
 
 open Goldbach30To29ReductionReceipt public
 
@@ -89,6 +97,7 @@ canonicalGoldbach30To29ReductionReceipt =
   goldbach30To29ReductionReceipt
     true true true true true
     true true false
+    true false
     false false false
 
 wholeMachineReachableWeakBisimulationPaid : Bool
@@ -96,9 +105,6 @@ wholeMachineReachableWeakBisimulationPaid = false
 
 wholeMachineHaltingEquivalencePaid : Bool
 wholeMachineHaltingEquivalencePaid = false
-
-conjectureLevelGoldbachSemanticsPaid : Bool
-conjectureLevelGoldbachSemanticsPaid = false
 
 ------------------------------------------------------------------------
 -- Terminal max-cut status.
@@ -112,15 +118,18 @@ record Goldbach30To29TerminalMaxCut : Set where
     exactSuccessMacroConsumerEqualityPaid : Bool
     exactSuccessMacroCostDeltaPaid : Bool
     signed369StaticDynamicSeparationReused : Bool
-    sharedPrefixRequiresReproof : Bool
+    goldbach29ExternalHaltingSemanticsSourcePaid : Bool
+    goldbach29AgdaHaltingSemanticsPaid : Bool
+    sharedPrefixRequiresFurtherAbstractReproof : Bool
     successTailRequiresFurtherMacroProof : Bool
     literalWholeMachineReachabilityRelationRequired : Bool
-    literalHaltingConsumerRequired : Bool
-    externalGoldbachTheoremAttachmentRequired : Bool
+    goldbach30HaltingConsumerAttachmentRequired : Bool
+    externalGoldbach29TheoremAttachmentRequired : Bool
 
 canonicalGoldbach30To29TerminalMaxCut : Goldbach30To29TerminalMaxCut
 canonicalGoldbach30To29TerminalMaxCut =
   goldbach30To29TerminalMaxCut
     true true true true true
+    true false
     false false
-    true true true
+    true true false
