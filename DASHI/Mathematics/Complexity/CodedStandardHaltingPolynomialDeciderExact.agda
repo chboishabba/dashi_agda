@@ -2,26 +2,18 @@ module DASHI.Mathematics.Complexity.CodedStandardHaltingPolynomialDeciderExact w
 
 ------------------------------------------------------------------------
 -- ACTUAL-HALTING CODED STANDARD POLYNOMIAL DECIDER
---
--- The earlier coded carrier padded every formula to the full polynomial budget.
--- That is stronger than P and creates an artificial self-clock obstruction.
---
--- Here runtime is an actual quiescent execution from the canonical minimal
--- standard input, with only an upper polynomial bound.  Cook guard padding is
--- represented separately by `GuardedExecutionReceipt` after the actual runtime
--- has already been fixed operationally.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Maybe using (nothing; just)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Nat.Base using (_≤_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
-import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.CodedStandardPolynomialDeciderExact as InputCodec
 import DASHI.Mathematics.Complexity.CodedStandardCanonicalInputExact as CanonicalInput
@@ -30,10 +22,6 @@ import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Prese
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact as Language
-
-------------------------------------------------------------------------
--- Generic deterministic halting-time uniqueness.
-------------------------------------------------------------------------
 
 justInjective : ∀ {A : Set} {x y : A} → just x ≡ just y → x ≡ y
 justInjective refl = refl
@@ -67,31 +55,22 @@ haltingExactRunLengthUnique
     (Run.standardRunStep rightEdge rightRest) rightHalt
   with justInjective (trans (sym leftEdge) rightEdge)
 ... | refl =
-  congSuc
-    (haltingExactRunLengthUnique
-      leftRest leftHalt rightRest rightHalt)
-  where
-    congSuc : ∀ {m n : Nat} → m ≡ n → suc m ≡ suc n
-    congSuc refl = refl
-
-------------------------------------------------------------------------
--- Machine-bearing polynomial-time decider using actual halting runtime.
-------------------------------------------------------------------------
+  cong Nat.suc
+    (haltingExactRunLengthUnique leftRest leftHalt rightRest rightHalt)
 
 record CodedStandardHaltingPolynomialDecider
     (decider : Cook.BooleanFormula → Bool) : Set where
   field
     code : Coded.CodedFiniteStandardTM
 
-    zeroSymbol : Data.Fin.Base.Fin (Coded.symbolCount code)
-    oneSymbol : Data.Fin.Base.Fin (Coded.symbolCount code)
+    zeroSymbol : Fin.Fin (Coded.symbolCount code)
+    oneSymbol : Fin.Fin (Coded.symbolCount code)
     binarySymbolsDistinct : zeroSymbol ≡ oneSymbol → ⊥
     zeroSymbolNotBlank : zeroSymbol ≡ Coded.blank code → ⊥
     oneSymbolNotBlank : oneSymbol ≡ Coded.blank code → ⊥
 
     clockCoefficient : Nat
     clockDegree : Nat
-
     actualSteps : Cook.BooleanFormula → Nat
 
     finish :
@@ -121,8 +100,7 @@ record CodedStandardHaltingPolynomialDecider
     actualStepsPolynomialBound :
       (formula : Cook.BooleanFormula) →
       actualSteps formula
-      ≤ Clock.formulaPolynomialBudget
-          clockCoefficient clockDegree formula
+      ≤ Clock.formulaPolynomialBudget clockCoefficient clockDegree formula
 
     decisionExact :
       (formula : Cook.BooleanFormula) →
@@ -166,10 +144,7 @@ actualStepsOperationallyUnique witness formula otherSteps otherFinish otherRun o
     otherHalt
 
 ------------------------------------------------------------------------
--- Downstream Cook padding transport.
---
--- This receipt does not choose the runtime.  It must realize the already-fixed
--- `actualSteps` from the guarded representation used by Cook--Levin.
+-- Downstream guarded representation receipt.
 ------------------------------------------------------------------------
 
 record GuardedExecutionReceipt
@@ -209,9 +184,7 @@ open GuardedExecutionReceipt public
 ------------------------------------------------------------------------
 -- BOUNDARY
 --
--- * actualSteps is tied to a unique quiescent run from one canonical input;
--- * only an upper polynomial bound is required;
--- * guarded padding is downstream and cannot select a different runtime;
--- * deriving GuardedExecutionReceipt generically is now an explicit ordinary
---   blank-padding/model-transport theorem rather than a timing oracle.
+-- Runtime is tied to one canonical input and a quiescent finish; only an upper
+-- polynomial bound is required. Cook guard padding is downstream and cannot
+-- choose a different time budget.
 ------------------------------------------------------------------------
