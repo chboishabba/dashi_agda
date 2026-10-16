@@ -22,7 +22,7 @@ module DASHI.Physics.Foundations.BalabanQ1FiniteTangentCurveReductionExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact as Present10
@@ -86,8 +86,7 @@ module _
       -- A source curve is genuinely based at the selected background.
       curveAtZero :
         ∀ background tangent →
-        curveFromFiniteTangent background tangent
-          (DASHI.Foundations.RealAnalysisAxioms.0ℝ)
+        curveFromFiniteTangent background tangent 0ℝ
         ≡ background
 
       -- Naturality is charged once, on the exact symmetric tangent basis.
@@ -134,8 +133,7 @@ module _
   sourcePathAtZero :
     (data : PresentCutFiniteTangentCurveRealization) →
     ∀ background component →
-    sourcePath data background component
-      (DASHI.Foundations.RealAnalysisAxioms.0ℝ)
+    sourcePath data background component 0ℝ
     ≡ background
   sourcePathAtZero data background component =
     curveAtZero data background (exactFiniteTangent component)
