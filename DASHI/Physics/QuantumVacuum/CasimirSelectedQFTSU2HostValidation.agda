@@ -12,6 +12,10 @@ parameterTableSU2OwnedRegression :
   H.sprint105SU2EntryOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
 parameterTableSU2OwnedRegression = refl
 
+compactSimpleDataInterfaceReusedRegression :
+  H.compactSimpleYMDataInterfaceReused H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+compactSimpleDataInterfaceReusedRegression = refl
+
 hostInterfaceOwnedRegression :
   H.selectedQFTSU2HostInterfaceOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
 hostInterfaceOwnedRegression = refl
@@ -24,6 +28,10 @@ selectedCompactSimpleStillOpenRegression :
   H.selectedGroupCompactSimpleWitnessPaid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
 selectedCompactSimpleStillOpenRegression = refl
 
+selectedDynkinA1StillOpenRegression :
+  H.selectedGroupDynkinA1ClassificationPaid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+selectedDynkinA1StillOpenRegression = refl
+
 selectedCarrierInterpretationStillOpenRegression :
   H.selectedGroupInterpretedAsQuaternionSU2Paid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
 selectedCarrierInterpretationStillOpenRegression = refl
@@ -31,6 +39,10 @@ selectedCarrierInterpretationStillOpenRegression = refl
 selectedTableClassificationStillOpenRegression :
   H.selectedGroupClassifiedAsSprint105SU2Paid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
 selectedTableClassificationStillOpenRegression = refl
+
+sprint105TagIsSecondaryRegression :
+  H.sprint105ClassificationIsSecondaryConsistencyTag H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+sprint105TagIsSecondaryRegression = refl
 
 hostDoesNotCreateStressEqualityRegression :
   H.SelectedSU2HostAutomaticallyIdentifiesBrownMaclayStress → ⊥
