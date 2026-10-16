@@ -12,6 +12,7 @@ open import Agda.Builtin.Nat using (Nat)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
+import DASHI.Mathematics.Complexity.CodedFiniteStandardSelfDelimitingCodeExact as MachineCode
 import DASHI.Mathematics.Complexity.CodedFiniteStandardRawInterpreterFidelityExact as Fidelity
 import DASHI.Mathematics.Complexity.CodedFiniteStandardUniversalQuotedInputExact as Universal
 import DASHI.Mathematics.Complexity.CodedStandardCanonicalInputExact as CanonicalInput
@@ -42,7 +43,7 @@ rawQuotedStartExact :
   (zeroSymbol oneSymbol : Fin.Fin (Coded.symbolCount body))
   (bits : List Bool) →
   Universal.rawStartOnQuote
-    (DASHI.Mathematics.Complexity.CodedFiniteStandardSelfDelimitingCodeExact.rawMachineView body)
+    (MachineCode.rawMachineView body)
     (Fin.toℕ zeroSymbol)
     (Fin.toℕ oneSymbol)
     bits
@@ -80,8 +81,6 @@ canonicalUniversalInputFollowsTypedRun body zeroSymbol oneSymbol run
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- The single canonical universal input and the typed p-on-q computation are now
--- literally the same simulated run after the explicit Fin->Nat erasure.  A
--- standard-TM implementation U of the raw interpreter therefore needs no extra
--- semantic adapter between its decoded input and the Clay-facing body run.
+-- The single canonical universal input and typed p-on-q run are the same
+-- simulated computation after explicit Fin->Nat erasure.
 ------------------------------------------------------------------------
