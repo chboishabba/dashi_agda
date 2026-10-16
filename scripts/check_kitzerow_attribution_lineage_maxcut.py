@@ -7,6 +7,7 @@ paths = {
     "public_claim": "DASHI/Core/AttributedPublicClaimExact.agda",
     "kernel": "DASHI/Core/ReopenableConsumerInterventionKernelExact.agda",
     "republication": "DASHI/Law/SolomonIslandsDefeatMotionRepublicationIndependenceExact.agda",
+    "relational": "DASHI/Culture/WitchRelationalAttributionDialogueBidiExact.agda",
     "systematic": "DASHI/Wikimedia/IbrahimSnowballSystematicReviewMetaAnalysisPublicationBiasBidiExact.agda",
     "priority": "DASHI/Biology/KitzerowPriorityAttributionExact.agda",
     "sota": "DASHI/Biology/KitzerowAttributionProvenanceSOTAExact.agda",
@@ -43,6 +44,12 @@ for needle in [
     assert needle in text["republication"], f"republication owner missing {needle}"
 
 for needle in [
+    "initialProvenancePreserved", "responseCreatesNewProvenance",
+    "targetResponseErasesInitialProvenance", "relationalModeRequiresIndependentCoordinates",
+]:
+    assert needle in text["relational"], f"relational attribution owner missing {needle}"
+
+for needle in [
     "duplicateManifestationsSeparatedFromIndependentEvidence",
     "includedCountSeparatedFromIndependentEvidenceUnits",
     "moreStudiesDoNotCreateIndependentEvidence",
@@ -57,7 +64,9 @@ for needle in [
 
 for needle in [
     "oriResearchMisconductDefinition", "copePlagiarismFlowchart", "copeRedundantPublicationFlowchart",
-    "cochraneMultipleReports", "w3cProvPrimer", "guidanceAutomaticallyAdjudicatesKitzerowClaim",
+    "cochraneMultipleReports", "w3cProvPrimer", "crossrefSimilarityInterpretation",
+    "similarityToolDeterminesPlagiarism", "similarityThresholdAutomaticallyAdjudicatesReuse",
+    "guidanceAutomaticallyAdjudicatesKitzerowClaim",
     "10.24318/cope.2019.2.2", "10.24318/cope.2019.2.13",
 ]:
     assert needle in text["sota"], f"attribution SOTA atlas missing {needle}"
@@ -68,10 +77,13 @@ for needle in [
     "downstreamPublicationMultiplicityCreatesIndependentEvidence",
     "sameProvenanceRootMayBeCountedRepeatedlyAsIndependent",
     "contactOrExposureAloneProvesDerivation", "postPublicationContactProvesPrePublicationExposure",
+    "laterResponseRewritesEarlierProvenance",
     "authenticatedPrePublicationExposureAloneProvesDerivation",
     "citationAbsenceAloneProvesPlagiarism", "structuralSimilarityAloneProvesPlagiarism",
     "ideaProcessResultReuseCanBeRelevantToPlagiarism", "documentedDirectUseCanUpgradeDerivation",
     "canonicalBrazilDirectionalProvenance", "brazilNeedsEarlierExposureOrManuscriptHistory",
+    "responseCreatesNewProvenanceWithoutRewritingEarlierManifestation",
+    "relationalAttributionBoundary",
 ]:
     assert needle in text["lineage"], f"Kitzerow lineage owner missing {needle}"
 
@@ -80,6 +92,7 @@ for needle in [
     "contactChronologyDoesNotCollapseIntoDerivation",
     "plagiarismEvidenceKindsRemainDistinct",
     "brazilPostPublicationContactCannotPayEarlierExposure",
+    "similarityToolsAreDiscoveryInputsNotAdjudicators",
     "surroundingSOTAConstrainsVocabularyWithoutAdjudicatingCase",
 ]:
     assert needle in text["lineage_v"], f"Kitzerow lineage validation missing {needle}"
@@ -119,4 +132,4 @@ for needle in [
 ]:
     assert needle in text["global_v"], f"global attribution validation missing {needle}"
 
-print("Kitzerow attribution provenance-lineage / independence / temporal-direction max-cut static contract: PASS")
+print("Kitzerow attribution provenance-lineage / independence / temporal-direction / similarity-tool max-cut static contract: PASS")
