@@ -12,6 +12,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Analysis.BishopRadixCellQuantisationExact as BishopCell
+import DASHI.Analysis.DyadicPhaseCellCertificateExact as Dyadic
 import DASHI.Moonshine.OggSSPClimbingGymAnalyticRadixAdapterExact as Analytic
 import DASHI.Moonshine.OggSSPClimbingGymBishopPhaseCellExact as BishopPhase
 import DASHI.Moonshine.OggSSPClimbingGymEmpiricalReplayExact as Replay
@@ -20,6 +21,8 @@ import DASHI.Moonshine.OggSSPClimbingGymExactHoleRadixCodec as Hole
 import DASHI.Moonshine.OggSSPClimbingGymPhaseControlExact as Phase
 import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact as Figure
 import DASHI.Moonshine.OggSSPClimbingGymSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPClimbingGymRigorousSourceAttributionExact as RigorousSource
+import DASHI.Moonshine.OggSSPClimbingGymRigorousCertificateExact as Rigorous
 import DASHI.Moonshine.OggSSPSignedRadixClimbingGymExact as Gym
 import DASHI.Moonshine.OggSSPSignedRadixInverseLimitExact as Limit
 
@@ -50,8 +53,16 @@ record ClimbingGymTerminalStatus : Set where
     concreteBishopSetoidCarrierAvailable : Bool
     sourceShiftSeedNonIdentifiabilityClosed : Bool
 
-    -- Remaining same-object analytic frontier.
+    -- New rigorous producer/checker cut.  Source implementation and exact
+    -- dyadic cell arithmetic are paid; actual external execution is separate.
+    rigorousZeroSourceAttributionClosed : Bool
+    exactDyadicPhaseCellCheckerClosed : Bool
+    flintArbProducerImplementationSourceWritten : Bool
+    exactDyadicBundleVerifierSourceWritten : Bool
+
+    -- Remaining same-object analytic / external-execution frontier.
     concreteBishopGlobalLogPiPhaseClosed : Bool
+    rigorousExternalBundleExecuted : Bool
     actualZeroPhaseCellCertificatesClosed : Bool
     bishopSetoidEqualityCollapsedToPropositionalEquality : Bool
 
@@ -96,8 +107,14 @@ canonicalClimbingGymTerminalStatus =
     true   -- concrete git-pinned Bishop setoid carrier exists on master
     true   -- rounded source summaries cannot uniquely recover a random sample
 
+    true   -- FLINT/Johansson/Platt-Trudgian/LMFDB roles attributed claim-relatively
+    true   -- exact dyadic interval -> strict native radix cell checker constructed
+    true   -- FLINT acb_dirichlet/Arb external producer source written
+    true   -- exact Fraction-based NDJSON bundle verifier source written
+
     false  -- Bishop global log + trigonometric-pi + actual phase weld not closed
-    false  -- no certified cells yet for actual numerical zero phases
+    false  -- FLINT/Arb is not installed/executed in this environment on the bundle
+    false  -- no externally produced rigorous cells yet for the actual 849 zeros
     false  -- Bishop setoid equality is deliberately not identified with Agda ≡
 
     false  -- no globally total arbitrary-real floor/frac -> Fin is claimed
@@ -145,6 +162,24 @@ terminalActualZeroPhaseCertificatesRemainOpen :
     BishopPhase.canonicalBishopPhaseCellBoundary
   ≡ false
 terminalActualZeroPhaseCertificatesRemainOpen = refl
+
+terminalDyadicCheckerDoesNotCreateProducerTruth :
+  Dyadic.producerEnclosureTruthCreatedByChecker
+    Dyadic.canonicalDyadicPhaseCellBoundary
+  ≡ false
+terminalDyadicCheckerDoesNotCreateProducerTruth = refl
+
+terminalExternalRigorousProducerIsNotKernelProof :
+  Rigorous.externalRigorousProducerIsAgdaKernelProof
+    Rigorous.canonicalRigorousClimbingGymCertificateBoundary
+  ≡ false
+terminalExternalRigorousProducerIsNotKernelProof = refl
+
+terminalFlintCitationDoesNotImportProof :
+  RigorousSource.flintCitationImportsProof
+    RigorousSource.canonicalRigorousZeroSourceBoundary
+  ≡ false
+terminalFlintCitationDoesNotImportProof = refl
 
 terminalExactHoleObserverUsesNatCodec :
   HoleBridge.holeAddressUsesExactNatRadixCodec
