@@ -38,10 +38,15 @@ fixedPointProgramNotPrimitiveLeaf machine equality =
 ------------------------------------------------------------------------
 -- MAX-CUT CONSEQUENCE
 --
--- `headMachine`/recovered-description pays primitive-body identity only.  The
--- whole fixed-point syntax is provably a distinct object.  A Clay-facing Cook
--- weld must therefore first compile the COMPLETE specialized/diagonalized syntax
--- into ordinary coded standard-TM syntax, prove behavioural preservation, and
--- form the guarded Cook description of that compiled code.  No placeholder
--- compiler interface is introduced here.
+-- `headMachine` is only the primitive-body projection; q and p are genuinely
+-- distinct syntax.  But a Clay-facing realization does NOT have to compile q
+-- into a separate machine code if it literally realizes the Kleene equation
+--
+--     run1 q x = runPrimitive2 p q x.
+--
+-- It is enough to run the binary body machine p on a self-delimiting tape quote
+-- of the WHOLE q, or to run one fixed universal interpreter on `(code(p),q)` and
+-- prove that execution equivalent.  Cook--Levin must then describe that same
+-- literal machine+quote computation.  Head projection alone remains invalid,
+-- while a separately compiled q-machine is optional rather than mandatory.
 ------------------------------------------------------------------------
