@@ -50,71 +50,72 @@ def install_mcp_adapter_semantic_extension(adapter_cls: type) -> None:
     adapter_cls._semantic_discovery_installed = True
 
 
+def register_repository_mcp_tools(server, tools) -> None:
+    """Add repository-intelligence tools to an already-created MCP server."""
+
+    @server.tool()
+    async def symbol_search(
+        query: str,
+        include_history: bool = False,
+        limit: int = 50,
+    ) -> dict[str, Any]:
+        """Search repository symbols; numbered Round snapshots are hidden by default."""
+        return tools.symbol_search(query, include_history=include_history, limit=limit)
+
+    @server.tool()
+    async def related_symbols(
+        symbol: str,
+        include_history: bool = False,
+        limit: int = 50,
+    ) -> dict[str, Any]:
+        """Return exact, signature-equivalent and structurally similar symbols."""
+        return tools.related_symbols(symbol, include_history=include_history, limit=limit)
+
+    @server.tool()
+    async def object_detail(symbol_id: str) -> dict[str, Any]:
+        """Return one indexed object with source/status/requirements and references."""
+        return tools.object_detail(symbol_id)
+
+    @server.tool()
+    async def narrative_archaeology(query: str, limit: int = 50) -> dict[str, Any]:
+        """Search PR/commit development narrative without promoting it to truth authority."""
+        return tools.narrative_archaeology(query, limit=limit)
+
+    @server.tool()
+    async def narrative_history(query: str, limit: int = 50) -> dict[str, Any]:
+        """Return time-ordered development events relevant to an object/concept."""
+        return tools.narrative_history(query, limit=limit)
+
+    @server.tool()
+    async def narrative_frontier(query: str, limit: int = 100) -> dict[str, Any]:
+        """Return paid/open/nonclaim frontier genealogy from development history."""
+        return tools.narrative_frontier(query, limit=limit)
+
+    @server.tool()
+    async def narrative_stale(query: str, limit: int = 100) -> dict[str, Any]:
+        """Return heuristic older frontier statements potentially superseded later."""
+        return tools.narrative_stale(query, limit=limit)
+
+    @server.tool()
+    async def narrative_explain(query: str, limit: int = 50) -> dict[str, Any]:
+        """Return bounded plain-language development context and current frontier."""
+        return tools.narrative_explain(query, limit=limit)
+
+    @server.tool()
+    async def discover(query: str, limit: int = 50) -> dict[str, Any]:
+        """Return fail-closed semantic + narrative discovery/absence receipt."""
+        return tools.discover(query, limit=limit)
+
+    @server.tool()
+    async def round_lineage(prefix: Optional[str] = None) -> dict[str, Any]:
+        """Report read-only RoundNNN lineage, novelty and snapshot-noise ratios."""
+        return tools.round_lineage(prefix=prefix)
+
+
 def install_mcp_server_semantic_extension(module) -> None:
-    if getattr(module, "_semantic_discovery_installed", False):
+    """Expose the additive registry without mutating legacy register_mcp_tools."""
+
+    if getattr(module, "_repository_intelligence_tools_installed", False):
         return
-    original = module.register_mcp_tools
-
-    def register_mcp_tools(server, tools):
-        original(server, tools)
-
-        @server.tool()
-        async def symbol_search(
-            query: str,
-            include_history: bool = False,
-            limit: int = 50,
-        ) -> dict[str, Any]:
-            """Search repository symbols; numbered Round snapshots are hidden by default."""
-            return tools.symbol_search(query, include_history=include_history, limit=limit)
-
-        @server.tool()
-        async def related_symbols(
-            symbol: str,
-            include_history: bool = False,
-            limit: int = 50,
-        ) -> dict[str, Any]:
-            """Return exact, signature-equivalent and structurally similar symbols."""
-            return tools.related_symbols(symbol, include_history=include_history, limit=limit)
-
-        @server.tool()
-        async def object_detail(symbol_id: str) -> dict[str, Any]:
-            """Return one indexed object with source/status/requirements and references."""
-            return tools.object_detail(symbol_id)
-
-        @server.tool()
-        async def narrative_archaeology(query: str, limit: int = 50) -> dict[str, Any]:
-            """Search PR/commit development narrative without promoting it to truth authority."""
-            return tools.narrative_archaeology(query, limit=limit)
-
-        @server.tool()
-        async def narrative_history(query: str, limit: int = 50) -> dict[str, Any]:
-            """Return time-ordered development events relevant to an object/concept."""
-            return tools.narrative_history(query, limit=limit)
-
-        @server.tool()
-        async def narrative_frontier(query: str, limit: int = 100) -> dict[str, Any]:
-            """Return paid/open/nonclaim frontier genealogy from development history."""
-            return tools.narrative_frontier(query, limit=limit)
-
-        @server.tool()
-        async def narrative_stale(query: str, limit: int = 100) -> dict[str, Any]:
-            """Return heuristic older frontier statements potentially superseded later."""
-            return tools.narrative_stale(query, limit=limit)
-
-        @server.tool()
-        async def narrative_explain(query: str, limit: int = 50) -> dict[str, Any]:
-            """Return bounded plain-language development context and current frontier."""
-            return tools.narrative_explain(query, limit=limit)
-
-        @server.tool()
-        async def discover(query: str, limit: int = 50) -> dict[str, Any]:
-            """Return fail-closed semantic + narrative discovery/absence receipt."""
-            return tools.discover(query, limit=limit)
-
-        @server.tool()
-        async def round_lineage(prefix: Optional[str] = None) -> dict[str, Any]:
-            """Report read-only RoundNNN lineage, novelty and snapshot-noise ratios."""
-            return tools.round_lineage(prefix=prefix)
-
-    module.register_mcp_tools = register_mcp_tools
-    module._semantic_discovery_installed = True
+    module.register_repository_mcp_tools = register_repository_mcp_tools
+    module._repository_intelligence_tools_installed = True
