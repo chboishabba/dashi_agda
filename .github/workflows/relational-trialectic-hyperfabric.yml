@@ -116,6 +116,10 @@ jobs:
               DASHI/EverythingRelationalTrialecticHyperfabric.agda
               DASHI/Reasoning/NonginMaxCutEverything.agda
               DASHI/Reasoning/TrialecticHigherDescentMaxCutPromotionValidation.agda
+              DASHI/Reasoning/TrialecticFiniteTriadicHypersheafValidation.agda
+              DASHI/Reasoning/TrialecticFiniteHypercover369CechCrosswalkValidation.agda
+              DASHI/Reasoning/TrialecticHypersheafHypercoverFrontierValidation.agda
+              DASHI/Philosophy/NonginCurrentMaxCutValidation.agda
               DASHI/Philosophy/NonginRoadmapClosureValidation.agda
               DASHI/Philosophy/NonginExtendedRoadmapValidation.agda
             )
