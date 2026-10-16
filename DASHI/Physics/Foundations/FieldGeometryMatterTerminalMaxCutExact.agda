@@ -15,6 +15,8 @@ import DASHI.Physics.CondensedMatter.MATBGQuantumGeometryReplayReceiptExact as Q
 import DASHI.Physics.CondensedMatter.MATBGInteractingTHF2026SourceExact as THF
 import DASHI.Physics.CondensedMatter.MATBGInteractingTHFLiteralMatricesExact as THFMatrix
 import DASHI.Physics.CondensedMatter.MATBGTHFHubbardIAtomicReplayReceiptExact as THFAtomic
+import DASHI.Physics.CondensedMatter.MATBGTHFSelfConsistencyQTMExact as THFQTM
+import DASHI.Physics.CondensedMatter.MATBGQTMMatrixElementObserverReceiptExact as QTMObserver
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorics2026Exact as Entropy
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorialReplayReceiptExact as EntropyReplay
 import DASHI.Physics.CondensedMatter.MATBGGeometryCaloricUpperBoundReceiptExact as GeometryCaloric
@@ -61,17 +63,21 @@ record FieldGeometryMatterTerminalFrontier : Set where
     bmReciprocalLatticePlaneWaveReplay : FrontierStatus
     bmSampleAbsoluteTunnellingCalibration : FrontierStatus
     thfHubbardI2026SourceContract : FrontierStatus
+    thfLiteralHcHcfMatrices : FrontierStatus
+    thfHubbardIAtomicReplay : FrontierStatus
+    thfSelfConsistencyEquationSourceContract : FrontierStatus
+    qtmGoldenRuleObserverSourceContract : FrontierStatus
+    qtmElectrostaticsSourceContract : FrontierStatus
+    qtmWavefunctionObserverNumericalReplay : FrontierStatus
     thfSelfConsistentInteractingSolve : FrontierStatus
     qtmExperimentalDataReplay : FrontierStatus
     entropyExactCombinatorialCounts : FrontierStatus
     entropyMaxwellAtomicLimitSourceContract : FrontierStatus
+    entropyCombinatorialNumericalReplay : FrontierStatus
     entropyExperimentalDataReplay : FrontierStatus
     sameSampleQTMEntropyReplay : FrontierStatus
     matbgQuantumGeometryNumericalReplay : FrontierStatus
     matbgQuantumMetricExperimentalCalibration : FrontierStatus
-    thfLiteralHcHcfMatrices : FrontierStatus
-    thfHubbardIAtomicReplay : FrontierStatus
-    entropyCombinatorialNumericalReplay : FrontierStatus
 
     generalizedCaloricFiniteContract : FrontierStatus
     geometryCaloricUpperBoundNumericalReplay : FrontierStatus
@@ -134,10 +140,11 @@ currentTerminalFrontier =
     structurallyPaid structurallyPaid sourcePaid
     numericallyExecuted numericallyExecuted
     openCalibrationOrExecution
-    sourcePaid openCalibrationOrExecution openSameObjectPayment
-    structurallyPaid sourcePaid openSameObjectPayment externalOnly
+    sourcePaid structurallyPaid numericallyExecuted
+    sourcePaid sourcePaid sourcePaid numericallyExecuted
+    openCalibrationOrExecution openSameObjectPayment
+    structurallyPaid sourcePaid numericallyExecuted openSameObjectPayment externalOnly
     numericallyExecuted openSameObjectPayment
-    structurallyPaid numericallyExecuted numericallyExecuted
 
     structurallyPaid numericallyExecuted externalOnly externalOnly
 
@@ -170,6 +177,8 @@ record MaxCutPaidSurface : Set where
     thfBoundary : THF.MATBGInteractingTHF2026Boundary
     thfLiteralMatrixBoundary : THFMatrix.THFLiteralMatrixBoundary
     thfAtomicReplayBoundary : THFAtomic.THFHubbardIAtomicReplayBoundary
+    thfSelfConsistencyQTMBoundary : THFQTM.THFSelfConsistencyQTMBoundary
+    qtmObserverBoundary : QTMObserver.QTMMatrixElementObserverBoundary
     entropyBoundary : Entropy.EntropyCombinatoricsBoundary
     entropyReplayBoundary : EntropyReplay.EntropyCombinatorialReplayBoundary
     geometryCaloricBoundary : GeometryCaloric.GeometryCaloricUpperBoundBoundary
@@ -200,6 +209,8 @@ canonicalMaxCutPaidSurface =
     THF.canonicalTHF2026Boundary
     THFMatrix.canonicalTHFLiteralMatrixBoundary
     THFAtomic.canonicalTHFHubbardIAtomicReplayBoundary
+    THFQTM.canonicalTHFSelfConsistencyQTMBoundary
+    QTMObserver.canonicalQTMMatrixElementObserverBoundary
     Entropy.canonicalEntropyCombinatoricsBoundary
     EntropyReplay.canonicalEntropyCombinatorialReplayBoundary
     GeometryCaloric.canonicalGeometryCaloricUpperBoundBoundary
