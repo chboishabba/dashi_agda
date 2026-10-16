@@ -33,6 +33,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Product using (_,_)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPXORCountdownMicrocodeExact as XOR
 
