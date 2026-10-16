@@ -16,6 +16,10 @@ import DASHI.Reasoning.Trialectic369Selected3BSemanticProjectedCompletionExact
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
 import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 
+-- Jack Daniel's natural-recognition / exceptional-geometry tranche.
+import DASHI.Moonshine.JackDanielsNaturalMonsterRecognitionMaxCutExact
+import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact
+
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
 import DASHI.Physics.Chemistry.Atomic369Kernel6HeisenbergBridgeExact
 import DASHI.Physics.Chemistry.Atomic369Kernel6HeisenbergBridgeValidation
@@ -74,3 +78,7 @@ import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact
 import DASHI.Physics.Closure.MonsterC3EntropyGravityMaxCutExact
 import DASHI.Physics.Closure.MonsterC3EntropyGravityValidation
+
+-- Same-object exceptional -> entropy/stress -> CMP119 cosmology compiler.
+import DASHI.Physics.Closure.MonsterExceptionalEntropyGravityCompilerExact
+import DASHI.Physics.Closure.JackDanielsExceptionalGravityValidation
