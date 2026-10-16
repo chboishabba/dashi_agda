@@ -42,8 +42,8 @@ monsterZetaLinear : Row
 monsterZetaLinear = row
   "literal zeta-restricted Monster representation"
   "Monster3BRepresentationNativeCurrentMaxCutExact"
-  "fixed-phase H_zeta equivariant-isomorphism compilation, generic semisimple/isotypic assembly and post-recognition copy-count compilation are already available; selected-phase 12+78 character-family data are already paid"
-  "inhabit the proof-relevant full weight-two linear bridge and SAME literal zeta restriction, prove the actual simple-type classifier, consume isotypic assembly to obtain W_zeta|E ~= H_zeta^n, then derive n=90 and construct S_zeta=Hom_E(H_zeta,W_zeta) evaluation/recovery plus the actual normalizer action"
+  "fixed-phase H_zeta recognition, the generic nonzero-simple-source classifier, generic semisimple/isotypic assembly and post-recognition copy-count compilation are already available; selected-phase 12+78 character-family data are already paid"
+  "inhabit the proof-relevant full weight-two bridge and SAME literal zeta restriction; instantiate the generic classifier with the actual whole-character/simple/nonzero-inclusion data; consume isotypic assembly to obtain W_zeta|E ~= H_zeta^n; then derive n=90 and construct S_zeta=Hom_E(H_zeta,W_zeta) evaluation/recovery plus the actual normalizer action"
   open
 
 monsterLiteralOtherPhases : Row
@@ -127,20 +127,16 @@ monster4DRow = row
   open
 
 rows : List Row
-rows =
-  monsterGlobalLinear ∷ monsterZetaLinear ∷ monsterLiteralOtherPhases ∷
-  nh3Hamiltonian ∷ nh3ReleasedMatrix ∷ nh3C3Quotient ∷ native369Basis ∷
-  nh3MonsterLinearLift ∷ h3Reaction ∷ entropyRow ∷ gravityRow ∷ monster4DRow ∷ []
+rows = monsterGlobalLinear ∷ monsterZetaLinear ∷ monsterLiteralOtherPhases ∷ nh3Hamiltonian ∷ nh3ReleasedMatrix ∷ nh3C3Quotient ∷ native369Basis ∷ nh3MonsterLinearLift ∷ h3Reaction ∷ entropyRow ∷ gravityRow ∷ monster4DRow ∷ []
 
 record Receipt : Set where
   constructor receipt
   field
     ternaryAndMonsterC3Paid : Bool
-
     selected3BGlobalCompletionCompilerAvailable : Bool
     selected3BLinearRetractionPaid : Bool
     selected3BProjectedActionPaid : Bool
-
+    genericSimpleSubobjectClassifierSourceWritten : Bool
     genericIsotypicAssemblySourceWritten : Bool
     postRecognitionCopyCountCompilerSourceWritten : Bool
     proofRelevantWeightTwoWrapperAvailable : Bool
@@ -148,30 +144,25 @@ record Receipt : Set where
     hzetaCharacterIsoCompilerAvailable : Bool
     actualPaidWeightTwoLinearBridge : Bool
     actualPaidLinearZetaRestriction : Bool
-    actualSimpleTypeClassifier : Bool
+    actualSimpleTypeClassifierInstantiation : Bool
     actualWholeSectorIsotypicEquivalence : Bool
     actualCopyCountNinetyAfterRecognition : Bool
     actualMultiplicityHomEvaluation : Bool
-
     literalFixedRegularResidualSplitPaid : Bool
-
     ammoniaHamiltonianSkeletonPaid : Bool
     ammoniaOccupationWavefunctionCarrierPaid : Bool
     ammoniaPublishedFCIDiagonalizationPaid : Bool
     authorReleasedSelectedCIMatrixIdentityPaid : Bool
     authorReleasedMatrixRediagonalizedByDASHI : Bool
-
     ammoniaA1PlusERegularC3Paid : Bool
     ammoniaMonsterC3QuotientRepresentationPaid : Bool
     phaseQuotientFineStateNonfactorabilityPaid : Bool
-
     native369ZetaBasisLabelChartPaid : Bool
     actualZetaBasisRecognitionCompilerAvailable : Bool
     native369WholeLinearWZetaStateBijectionPaid : Bool
     physicalNH3Native369BasisCoordinatePaid : Bool
     physicalNH3ToMonsterLinearStatePaid : Bool
     nontrivialPhysicalMonsterActionOnAmmoniaPaid : Bool
-
     h3ProofRelevantC3ReactionPaid : Bool
     normalizedCountingProbabilityPaid : Bool
     native369ZetaBasisCountingEnsemblePaid : Bool
@@ -185,104 +176,69 @@ canonicalReceipt : Receipt
 canonicalReceipt = receipt
   true
   true false false
-  true true true true true false false false false false false
+  true true true true true true false false false false false false
   false
   true true true true false
   true true true
   true true false false false false
   true true true false false false false
 
-selected3BGlobalCompilerAvailable :
-  MonsterNative.Boundary.selected3BGlobalCompletionCompilerAvailable
-    MonsterNative.canonicalBoundary ≡ true
+selected3BGlobalCompilerAvailable : MonsterNative.Boundary.selected3BGlobalCompletionCompilerAvailable MonsterNative.canonicalBoundary ≡ true
 selected3BGlobalCompilerAvailable = refl
 
-genericIsotypicAssemblyAlreadyAvailable :
-  MonsterNative.Boundary.genericIsotypicAssemblySourceWritten
-    MonsterNative.canonicalBoundary ≡ true
+genericSimpleClassifierAlreadyAvailable : MonsterNative.Boundary.genericSimpleSubobjectClassifierSourceWritten MonsterNative.canonicalBoundary ≡ true
+genericSimpleClassifierAlreadyAvailable = refl
+
+genericIsotypicAssemblyAlreadyAvailable : MonsterNative.Boundary.genericIsotypicAssemblySourceWritten MonsterNative.canonicalBoundary ≡ true
 genericIsotypicAssemblyAlreadyAvailable = refl
 
-actualLinearZetaRestrictionStillOpen :
-  MonsterNative.Boundary.actualPaidLinearZetaRestriction
-    MonsterNative.canonicalBoundary ≡ false
+actualLinearZetaRestrictionStillOpen : MonsterNative.Boundary.actualPaidLinearZetaRestriction MonsterNative.canonicalBoundary ≡ false
 actualLinearZetaRestrictionStillOpen = refl
 
-actualSimpleTypeClassifierStillOpen :
-  MonsterNative.Boundary.actualSimpleTypeClassifier
-    MonsterNative.canonicalBoundary ≡ false
-actualSimpleTypeClassifierStillOpen = refl
+actualSimpleClassifierInstantiationStillOpen : MonsterNative.Boundary.actualSimpleTypeClassifierInstantiation MonsterNative.canonicalBoundary ≡ false
+actualSimpleClassifierInstantiationStillOpen = refl
 
-literalFixedRegularResidualStillOpen :
-  Literal3B.LiteralThreePhaseResidualBoundary.fixedResidual53ComplementIsLive
-    Literal3B.canonicalLiteralThreePhaseResidualBoundary ≡ true
+literalFixedRegularResidualStillOpen : Literal3B.LiteralThreePhaseResidualBoundary.fixedResidual53ComplementIsLive Literal3B.canonicalLiteralThreePhaseResidualBoundary ≡ true
 literalFixedRegularResidualStillOpen = refl
 
-publishedFCIIsPaid :
-  NH3FCI.STO3GFCIBoundary.sourceBackedFCIDiagonalizationPaid
-    NH3FCI.canonicalSTO3GFCIBoundary ≡ true
+publishedFCIIsPaid : NH3FCI.STO3GFCIBoundary.sourceBackedFCIDiagonalizationPaid NH3FCI.canonicalSTO3GFCIBoundary ≡ true
 publishedFCIIsPaid = refl
 
-releasedMatrixIdentityIsPaid :
-  SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid
-    SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
+releasedMatrixIdentityIsPaid : SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
 releasedMatrixIdentityIsPaid = refl
 
-nh3RegularC3BlockIsPaid :
-  NH3Regular.RegularC3CrossDomainBoundary.nh3A1PlusERestrictsToOneRegularC3
-    NH3Regular.canonicalRegularC3CrossDomainBoundary ≡ true
+nh3RegularC3BlockIsPaid : NH3Regular.RegularC3CrossDomainBoundary.nh3A1PlusERestrictsToOneRegularC3 NH3Regular.canonicalRegularC3CrossDomainBoundary ≡ true
 nh3RegularC3BlockIsPaid = refl
 
-c3QuotientRepresentationIsPaid :
-  NH3MonsterC3.C3QuotientLiftBoundary.c3GroupLawIntertwiningPaid
-    NH3MonsterC3.canonicalC3QuotientLiftBoundary ≡ true
+c3QuotientRepresentationIsPaid : NH3MonsterC3.C3QuotientLiftBoundary.c3GroupLawIntertwiningPaid NH3MonsterC3.canonicalC3QuotientLiftBoundary ≡ true
 c3QuotientRepresentationIsPaid = refl
 
-phaseFineStateNonfactorabilityIsPaid :
-  PhaseNF.PhaseQuotientNonFactorabilityBoundary.phaseQuotientFineStateNonfactorabilityPaid
-    PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
+phaseFineStateNonfactorabilityIsPaid : PhaseNF.PhaseQuotientNonFactorabilityBoundary.phaseQuotientFineStateNonfactorabilityPaid PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
 phaseFineStateNonfactorabilityIsPaid = refl
 
-native369BasisChartIsPaid :
-  Native369.Native369FineCarrierBoundary.native369FiniteChartIsBasisLabelChart
-    Native369.canonicalNative369FineCarrierBoundary ≡ true
+native369BasisChartIsPaid : Native369.Native369FineCarrierBoundary.native369FiniteChartIsBasisLabelChart Native369.canonicalNative369FineCarrierBoundary ≡ true
 native369BasisChartIsPaid = refl
 
-native369WholeStateBijectionIsBlocked :
-  Native369.Native369FineCarrierBoundary.native369FiniteChartIsWholeVOAStateBijection
-    Native369.canonicalNative369FineCarrierBoundary ≡ false
+native369WholeStateBijectionIsBlocked : Native369.Native369FineCarrierBoundary.native369FiniteChartIsWholeVOAStateBijection Native369.canonicalNative369FineCarrierBoundary ≡ false
 native369WholeStateBijectionIsBlocked = refl
 
-actualBasisRecognitionCompilerAvailable :
-  NativeCorrection.RepresentationNativeCorrectionBoundary.actualBasisRecognitionComposesWithNative369
-    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ true
+actualBasisRecognitionCompilerAvailable : NativeCorrection.RepresentationNativeCorrectionBoundary.actualBasisRecognitionComposesWithNative369 NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ true
 actualBasisRecognitionCompilerAvailable = refl
 
-physicalNH3LinearMonsterStateStillOpen :
-  NativeCorrection.RepresentationNativeCorrectionBoundary.physicalNH3ToMonsterLinearStatePaid
-    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ false
+physicalNH3LinearMonsterStateStillOpen : NativeCorrection.RepresentationNativeCorrectionBoundary.physicalNH3ToMonsterLinearStatePaid NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ false
 physicalNH3LinearMonsterStateStillOpen = refl
 
-nontrivialMonsterActionStillOpen :
-  NH3MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid
-    NH3MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
+nontrivialMonsterActionStillOpen : NH3MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid NH3MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
 nontrivialMonsterActionStillOpen = refl
 
-native369BasisCountingEnsembleIsPaid :
-  NativeEnsemble.NativeZetaEnsembleBoundary.native369MicrostateCarrierPaid
-    NativeEnsemble.canonicalNativeZetaEnsembleBoundary ≡ true
+native369BasisCountingEnsembleIsPaid : NativeEnsemble.NativeZetaEnsembleBoundary.native369MicrostateCarrierPaid NativeEnsemble.canonicalNativeZetaEnsembleBoundary ≡ true
 native369BasisCountingEnsembleIsPaid = refl
 
-physicalEntropyStillOpen :
-  Uniform.CountingEnsembleBoundary.uniformCountingMeasureIsPhysicalThermalEnsemble
-    Uniform.canonicalCountingEnsembleBoundary ≡ false
+physicalEntropyStillOpen : Uniform.CountingEnsembleBoundary.uniformCountingMeasureIsPhysicalThermalEnsemble Uniform.canonicalCountingEnsembleBoundary ≡ false
 physicalEntropyStillOpen = refl
 
-gravityStillNeedsAdapter :
-  Gravity.EntropyGravityPromotionBoundary.entropyObservableAloneDerivesEinsteinDynamics
-    Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
+gravityStillNeedsAdapter : Gravity.EntropyGravityPromotionBoundary.entropyObservableAloneDerivesEinsteinDynamics Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
 gravityStillNeedsAdapter = refl
 
-observedMonsterStillOpen :
-  Physical.Monster3Plus1PhysicalSymmetryReceipt.monsterIsSymmetryOfObserved3Plus1Universe
-    Physical.canonicalMonster3Plus1PhysicalSymmetryReceipt ≡ false
+observedMonsterStillOpen : Physical.Monster3Plus1PhysicalSymmetryReceipt.monsterIsSymmetryOfObserved3Plus1Universe Physical.canonicalMonster3Plus1PhysicalSymmetryReceipt ≡ false
 observedMonsterStillOpen = refl
