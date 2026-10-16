@@ -1,0 +1,28 @@
+upstream_repository: meta-introspector/aok
+upstream_commit: c168223e96f7acc6179044f2a365a92db2e350c3
+upstream_path: 1fcb5ebe-bbab-4c12-bc38-4f1cd4739c1b/code/Cryptids/Goldbach29/Program.lean
+upstream_author: Mike Dupont / meta-introspector
+upstream_license: AGPL-3.0
+upstream_title: Goldbach29 29-fraction FRACTRAN construction
+
+attribution_boundary:
+  Mike Dupont / meta-introspector owns the upstream Goldbach29 construction,
+  its 30-to-29 fraction reduction, abstract machine, FRACTRAN program, and
+  Lean proof fstep_enc at the pinned commit.
+  DASHI owns only this immutable provenance receipt plus its independent
+  observer/fibre translation and any DASHI-native theorems built from that
+  explicitly attributed external fact surface.
+
+external_facts_used:
+  - the reduced program has 29 fractions
+  - it is derived from the author's 30-fraction Goldbach machine
+  - the SA control state is removed and the successful transfer loop is
+    rerouted through NT.B/SB
+  - the upstream file proves one encoded FRACTRAN step matches one abstract
+    astep step (fstep_enc)
+
+non_claims:
+  - this receipt does not vendor-copy AGPL source into DASHI
+  - this receipt does not claim DASHI authorship of Goldbach29
+  - this receipt does not prove 30/29 full reachable-state weak bisimulation
+  - this receipt does not prove Goldbach's conjecture
