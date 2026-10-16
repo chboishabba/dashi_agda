@@ -12,34 +12,29 @@ import DASHI.Physics.Foundations.BalabanR144SpatialC3StressRestrictionExact as R
 import DASHI.Physics.Foundations.BalabanA1InvariantPathSourceReductionExact as A1Cut
 import DASHI.Physics.Foundations.BalabanQ1FiniteTangentCurveReductionExact as Q1Cut
 import DASHI.Physics.Foundations.BalabanP1PresentCutSpatialC3CompilerExact as P1C3
+import DASHI.Physics.Foundations.CMP119ClassicalCurvatureSpatialC3CovarianceExact as ClassicalC3
+import DASHI.Physics.Foundations.CMP119FlatSide4SpatialC3FieldCovarianceExact as FlatC3
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
 
 ------------------------------------------------------------------------
 -- YM / BASE369-MONSTER C3 AUDIT
 --
 -- The old categorical statement "Balaban has no literal C3 action" is stale.
--- The source/stress lineage is now sharper:
+-- We now have the same physically aligned spatial xyz C3 at four distinct,
+-- non-collapsed levels:
 --
---   * CMP109 has source-backed Euclidean C3 actions from literal coordinate
---     permutation covariance;
---   * the Lorentzian-spatial subgroup is the 1,2,3 cycle fixing axis 0;
---   * R144 already uses the SAME B4 generator family on the actual ten-slot
---     finite-D1 stress readout;
---   * the P1 invariant-path theorem proves signed B4 covariance from invariant
---     potential + equivariant signed source path + ordinary derivative semantics;
---   * the present-cut P1 compiler transports that theorem to the exact finite
---     localized D1 and the spatial-C3 compiler restricts it to swap23 ; swap12;
---   * Q1's free per-component sourcePath is now eliminated: every component path
---     is generated from the SAME tangent->curve realization applied to the exact
---     present-cut finite Tangent carrier, which is definitionally the ten-slot
---     symmetric tensor carrier and is already reused by the R144 metric lane.
+--   * CMP109 source coordinate permutation covariance;
+--   * the exact classical d=4 YM curvature two-form and ten stress components;
+--   * the literal side-four SU(2) positive-bond field, whose pulled-back curl
+--     induces exactly that curvature action;
+--   * the R144/present-cut finite-D1 stress tensor action, conditionally
+--     inhabited by Q1 source-path semantics for the full generated action.
 --
--- Consequently the remaining shortest-path payment is one source construction:
--- realize a curve from the exact Background and finite Tangent, prove its B4
--- naturality on the ten selected tangents, and identify BC2.firstVariation with
--- the ordinary derivative of the selected effective potential along that curve.
--- A separate exact-rational R144 readout identification remains a representation
--- payment only for consumers that need that rational carrier specifically.
+-- The classical and flat/tangent field results are now direct theorems.  They do
+-- NOT identify the selected nonlinear CMP109/116 generated-action background
+-- with the flat side-four tangent field.  That same-object/source continuation
+-- is the remaining promotion boundary; Q1 remains the route for the full
+-- generated-action D1 unless that nonlinear identification is paid directly.
 ------------------------------------------------------------------------
 
 monster369ExactC3TemplateAvailable : Bool
@@ -54,6 +49,26 @@ balabanCMP109SpatialXYZSourceC3Recovered = CMP109C3.cmp109Spatial123C3Recovered
 balabanCMP109ReachableC3TransportRecovered : Bool
 balabanCMP109ReachableC3TransportRecovered =
   UnifiedC3.cmp109ReachableFibreC3TransportClosed
+
+balabanClassicalCurvatureSpatialC3Recovered : Bool
+balabanClassicalCurvatureSpatialC3Recovered =
+  ClassicalC3.classicalCurvatureSpatialC3Recovered
+
+balabanClassicalStressSpatialC3Recovered : Bool
+balabanClassicalStressSpatialC3Recovered =
+  ClassicalC3.classicalStressSpatialC3Recovered
+
+balabanLiteralSide4FieldSpatialC3Recovered : Bool
+balabanLiteralSide4FieldSpatialC3Recovered =
+  FlatC3.literalSide4FieldSpatialC3Recovered
+
+balabanLiteralSide4CurlSpatialC3Recovered : Bool
+balabanLiteralSide4CurlSpatialC3Recovered =
+  FlatC3.literalSide4CurlSpatialC3Recovered
+
+balabanLiteralSide4StressSpatialC3Recovered : Bool
+balabanLiteralSide4StressSpatialC3Recovered =
+  FlatC3.literalSide4StressSpatialC3Recovered
 
 balabanR144SpatialStressTensorC3ActionRecovered : Bool
 balabanR144SpatialStressTensorC3ActionRecovered =
@@ -96,14 +111,24 @@ balabanQ1PathSemanticsAndEquivarianceStillSourceLeaf : Bool
 balabanQ1PathSemanticsAndEquivarianceStillSourceLeaf =
   Q.q1IsPathDerivativeSemanticsAndEquivariance
 
+balabanClassicalC3ClosesFullGeneratedActionQ1 : Bool
+balabanClassicalC3ClosesFullGeneratedActionQ1 =
+  ClassicalC3.classicalCurvatureC3ClosesFullGeneratedActionQ1
+
+balabanFlatSide4C3ClosesFullGeneratedActionQ1 : Bool
+balabanFlatSide4C3ClosesFullGeneratedActionQ1 =
+  FlatC3.literalSide4FieldC3ClosesFullGeneratedActionQ1
+
 balabanCMP109GaugeBPathMayBeIdentifiedWithMetricStressCurveByNotation : Bool
 balabanCMP109GaugeBPathMayBeIdentifiedWithMetricStressCurveByNotation = false
 
 balabanTerminalR144CovarianceInterfaceRecovered : Bool
 balabanTerminalR144CovarianceInterfaceRecovered = true
 
--- No literal Q1 source inhabitant is fabricated here.  This remains false until
--- the tangent->curve/naturality/ordinary-derivative package is inhabited.
+-- The classical/flat physical C3 action is now inhabited.  The full nonlinear
+-- generated-action R144 inhabitant remains gated by Q1 or an equivalent exact
+-- same-object identification of the selected nonlinear source with that field
+-- realization.
 balabanTerminalR144CovarianceInhabitantRecovered : Bool
 balabanTerminalR144CovarianceInhabitantRecovered = false
 
@@ -119,6 +144,14 @@ balabanLiteralC3ActionRecoveredIsTrue = refl
 balabanCMP109SpatialXYZSourceC3RecoveredIsTrue :
   balabanCMP109SpatialXYZSourceC3Recovered ≡ true
 balabanCMP109SpatialXYZSourceC3RecoveredIsTrue = refl
+
+balabanClassicalStressSpatialC3RecoveredIsTrue :
+  balabanClassicalStressSpatialC3Recovered ≡ true
+balabanClassicalStressSpatialC3RecoveredIsTrue = refl
+
+balabanLiteralSide4StressSpatialC3RecoveredIsTrue :
+  balabanLiteralSide4StressSpatialC3Recovered ≡ true
+balabanLiteralSide4StressSpatialC3RecoveredIsTrue = refl
 
 balabanR144SpatialStressTensorC3ActionRecoveredIsTrue :
   balabanR144SpatialStressTensorC3ActionRecovered ≡ true
@@ -187,6 +220,9 @@ freePerComponentQ1PathIsTerminalFrontier = false
 independentMetricTangentConstructionIsTerminalFrontier : Bool
 independentMetricTangentConstructionIsTerminalFrontier = false
 
+classicalOrFlatFieldSpatialC3IsTerminalFrontier : Bool
+classicalOrFlatFieldSpatialC3IsTerminalFrontier = false
+
 highestAlphaYM369Question : String
 highestAlphaYM369Question =
-  "Pay the one remaining Q1 source construction on the literal CMP109/116 present-cut object: realize curveFromFiniteTangent : Background -> Tangent -> R -> Background on the exact ten-slot finite Tangent carrier, prove its B4 naturality (reflection signs by t -> -t), and prove BC2.firstVariation is the ordinary derivative of the selected effective potential along that curve. The exact finite tangent already compiles into the R144 canonical metric perturbation; do not introduce a second metric basis. CMP109 Eq.(5.1)'s B -> U_j(exp iB) is the gauge-background vacuum-polarization path and must not be silently substituted for the metric/stress curve."
+  "The spatial C3 action is now explicit on CMP109 coordinates, the classical CurvatureSix stress tensor, and the literal side-four SU2 bond field/curl. The remaining promotion problem is same-object/nonlinear: either realize Q1 curveFromFiniteTangent on the selected CMP109/116 present-cut Background and identify BC2.firstVariation with its ordinary derivative, or directly identify the selected nonlinear generated-action stress source with the literal curvature/field realization. Do not substitute CMP109 Eq.(5.1)'s gauge B -> U_j(exp iB) vacuum-polarization path for the metric/stress curve, and do not reintroduce a second metric basis or independent C3 covariance receipt."
