@@ -86,6 +86,14 @@ redoxSpatialEvidenceRejectsWellMixedScalarPool :
   × RedoxSpatial.redoxSpatialEvidenceClosesWholeAllocator RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
 redoxSpatialEvidenceRejectsWellMixedScalarPool = refl , (refl , (refl , refl))
 
+uptakeAndCocultureArePaidWithoutQuantitativeTransferPromotion :
+  RedoxSpatial.cellularBH4UptakeDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
+  × RedoxSpatial.functionalCocultureCrossTalkSupported RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
+  × RedoxSpatial.specificMembraneCarrierRequiredByUptakeStudy RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
+  × RedoxSpatial.intercellBH4TransferDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
+uptakeAndCocultureArePaidWithoutQuantitativeTransferPromotion =
+  refl , (refl , (refl , refl))
+
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation :
   Evidence.allCanonicalEvidenceReceiptsRejectWholeModelConfirmation ≡ true
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation = refl
