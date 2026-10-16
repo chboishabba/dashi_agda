@@ -28,6 +28,7 @@ import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Site
 import DASHI.Foundations.RelationalStageTwelveSiteExact as RelSheaf
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
 import DASHI.Reasoning.TrialecticGrothendieckThreeCellDescentExact as OldDescent
+import DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact as OldPhase
 import DASHI.Reasoning.TrialecticWavePhaseEffectiveStackDescentExact as OldStack
 import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafExact as OldHyper
 import DASHI.Reasoning.TrialecticRelationalSiteDepthTwoExact as Depth
@@ -37,15 +38,7 @@ import DASHI.Reasoning.TrialecticT27WavePhaseGroupoidPresheafExact as GraphPhase
 import DASHI.Reasoning.TrialecticT27EffectiveStackDescentExact as Stack27
 
 ------------------------------------------------------------------------
--- 1. Site-cover classifier and depth are reused literally.
-------------------------------------------------------------------------
-
-classifyEveryCover = OldHyper.classifyEveryCover
-
-noStrictThreeArrowChain = Depth.noStrictThreeArrowChain
-
-------------------------------------------------------------------------
--- 2. Completed-T27 hyperdescent receipt.  The topology is Set1-valued through
+-- 1. Completed-T27 hyperdescent receipt.  The topology is Set1-valued through
 --    sieves, hence this receipt belongs in Set2 just like the old one.
 ------------------------------------------------------------------------
 
@@ -114,22 +107,16 @@ record T27FiniteHyperdescentReceipt
       ∀ {source target : RelSheaf.TriadicLocals Cell.CellDialectic} →
       (morphisms : OldStack.TriadicPhaseMorphisms source target) →
       Tri.triAdd
-        (DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact.equalityPhase
-          (OldStack.morphismAB morphisms))
+        (OldPhase.equalityPhase (OldStack.morphismAB morphisms))
         (Tri.triAdd
-          (DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact.equalityPhase
-            (OldStack.morphismBC morphisms))
-          (DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact.equalityPhase
-            (OldStack.morphismCA morphisms)))
+          (OldPhase.equalityPhase (OldStack.morphismBC morphisms))
+          (OldPhase.equalityPhase (OldStack.morphismCA morphisms)))
       ≡
       Tri.triAdd
-        (DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact.equalityPhase
-          (OldStack.morphismAB morphisms))
+        (OldPhase.equalityPhase (OldStack.morphismAB morphisms))
         (Tri.triAdd
-          (DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact.equalityPhase
-            (OldStack.morphismAB morphisms))
-          (DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact.equalityPhase
-            (OldStack.morphismAB morphisms)))
+          (OldPhase.equalityPhase (OldStack.morphismAB morphisms))
+          (OldPhase.equalityPhase (OldStack.morphismAB morphisms)))
 
     maximalObjectIdentity :
       ∀ {U : Site.RelObj} →
@@ -172,7 +159,7 @@ canonicalT27FiniteHyperdescentReceipt policy = record
   }
 
 ------------------------------------------------------------------------
--- 3. One certificate for every covering sieve.
+-- 2. One certificate for every covering sieve.
 ------------------------------------------------------------------------
 
 record T27CoverHyperdescentCertificate
@@ -198,7 +185,7 @@ t27HyperdescentForEveryCover policy cover = record
   }
 
 ------------------------------------------------------------------------
--- 4. Promotion boundary.
+-- 3. Promotion boundary.
 ------------------------------------------------------------------------
 
 record TrialecticT27FiniteTriadicHypersheafBoundary : Set where
