@@ -21,6 +21,13 @@ import DASHI.Culture.PowersPlantationParadiseEmpiricalAcquisitionParetoExact as 
 import DASHI.Culture.PowersPlantationParadisePerformerComparisonExact as PerformerComparison
 import DASHI.Culture.PowersPlantationParadiseComparativeVenueEvidenceExact as ComparativeVenue
 import DASHI.Culture.PowersPlantationParadiseEnslavedDistributionEvidenceExact as EnslavedEvidence
+import DASHI.Culture.PowersPlantationParadiseMethodologySourceAtlasExact as Methodology
+import DASHI.Culture.PowersPlantationParadiseInvestigationParetoExact as InvestigationRouting
+import DASHI.Culture.PowersPlantationParadiseHistoricalDiscriminatorExact as Discriminator
+import DASHI.Culture.ColonialTheatreSensoryAccessExact as Sensory
+import DASHI.Culture.PowersPlantationParadiseEvidenceGraphExact as EvidenceGraph
+import DASHI.Culture.PowersPlantationParadiseResearchThroughPerformanceExact as PerformanceProbe
+import DASHI.Culture.PowersPlantationParadiseEmpiricalRoadmapExact as Roadmap
 
 ------------------------------------------------------------------------
 -- POWERS PLANTATION -> PARADISE? SYNTHESIS
@@ -129,6 +136,27 @@ comparativeVenueEvidenceBoundary = ComparativeVenue.canonicalPowersComparativeVe
 
 enslavedDistributionEvidenceBoundary : EnslavedEvidence.PowersEnslavedDistributionEvidenceBoundary
 enslavedDistributionEvidenceBoundary = EnslavedEvidence.canonicalPowersEnslavedDistributionEvidenceBoundary
+
+methodologySourceBoundary : Methodology.PowersMethodologySourceBoundary
+methodologySourceBoundary = Methodology.canonicalPowersMethodologySourceBoundary
+
+investigationRoutingBoundary : InvestigationRouting.PowersInvestigationRoutingBoundary
+investigationRoutingBoundary = InvestigationRouting.canonicalPowersInvestigationRoutingBoundary
+
+historicalDiscriminatorBoundary : Discriminator.PowersHistoricalDiscriminatorBoundary
+historicalDiscriminatorBoundary = Discriminator.canonicalPowersHistoricalDiscriminatorBoundary
+
+sensoryAccessBoundary : Sensory.ColonialTheatreSensoryAccessBoundary
+sensoryAccessBoundary = Sensory.canonicalColonialTheatreSensoryAccessBoundary
+
+evidenceGraphBoundary : EvidenceGraph.PowersEvidenceGraphBoundary
+evidenceGraphBoundary = EvidenceGraph.canonicalPowersEvidenceGraphBoundary
+
+researchThroughPerformanceBoundary : PerformanceProbe.PowersResearchThroughPerformanceBoundary
+researchThroughPerformanceBoundary = PerformanceProbe.canonicalPowersResearchThroughPerformanceBoundary
+
+empiricalRoadmapBoundary : Roadmap.PowersEmpiricalRoadmapBoundary
+empiricalRoadmapBoundary = Roadmap.canonicalPowersEmpiricalRoadmapBoundary
 
 record PowersPlantationParadiseBoundary : Set where
   constructor powers-plantation-paradise-boundary
