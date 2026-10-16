@@ -1,5 +1,6 @@
 module DASHI.Biology.AutismVaccineAttributionRuleConformanceRegression where
 
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_)
 
