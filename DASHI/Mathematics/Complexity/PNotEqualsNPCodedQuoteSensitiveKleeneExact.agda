@@ -2,14 +2,11 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCodedQuoteSensitiveKleeneExact w
 
 ------------------------------------------------------------------------
 -- CODED STANDARD-TM LEAVES INSIDE THE EXISTING FINITE KLEENE SYNTAX
---
--- The old Q2 primitive erased its quoted-program operand.  That erasure is not
--- forced by the repository's finite specialization/diagonalization syntax.
--- Here the primitive carrier is the ACTUAL low-universe coded standard machine,
--- and the primitive body observes finite data of the quoted syntax itself.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; nothing; just)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Unit using (⊤; tt)
@@ -18,9 +15,11 @@ import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.CodedFiniteStandardStaticQuotationExact as StaticQuote
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 
-------------------------------------------------------------------------
--- Finite quotation observables.
-------------------------------------------------------------------------
+append :
+  ∀ {A : Set} →
+  List A → List A → List A
+append [] ys = ys
+append (x ∷ xs) ys = x ∷ append xs ys
 
 quotedSyntaxNodeCount :
   Code.Program Coded.CodedFiniteStandardTM → Nat
@@ -35,11 +34,22 @@ quotedMachinePayloadWidth (Code.specialized program static) =
 quotedMachinePayloadWidth (Code.diagonalized program) =
   quotedMachinePayloadWidth program
 
+quotedMachinePayload :
+  Code.Program Coded.CodedFiniteStandardTM →
+  List Bool
+quotedMachinePayload (Code.primitive machine) =
+  StaticQuote.codedStaticProgramList machine
+quotedMachinePayload (Code.specialized program static) =
+  append (quotedMachinePayload program) (quotedMachinePayload static)
+quotedMachinePayload (Code.diagonalized program) =
+  quotedMachinePayload program
+
 record CodedQuoteObservation : Set where
   constructor coded-quote-observation
   field
     syntaxNodes : Nat
     machinePayloadBits : Nat
+    literalMachinePayload : List Bool
 
 open CodedQuoteObservation public
 
@@ -50,12 +60,10 @@ observeQuotedProgram quoted =
   coded-quote-observation
     (quotedSyntaxNodeCount quoted)
     (quotedMachinePayloadWidth quoted)
+    (quotedMachinePayload quoted)
 
 ------------------------------------------------------------------------
 -- Quote-sensitive primitive semantics.
---
--- Unary primitive execution is intentionally absent: this primitive is the
--- binary body consumed by the Kleene fixed-point construction.
 ------------------------------------------------------------------------
 
 codedQuoteSensitiveSemantics :
@@ -89,7 +97,7 @@ codedFixedPointObservesOwnQuotation machine = refl
 
 ------------------------------------------------------------------------
 -- Exact feedback: the fixed syntax contains two diagonalized copies of the
--- primitive body, so its machine-leaf payload is duplicated exactly.
+-- primitive body.  Both the width and the literal Boolean payload duplicate.
 ------------------------------------------------------------------------
 
 codedFixedPointPayloadWidthExact :
@@ -100,6 +108,16 @@ codedFixedPointPayloadWidthExact :
   StaticQuote.codedStaticProgramWidth machine
     + StaticQuote.codedStaticProgramWidth machine
 codedFixedPointPayloadWidthExact machine = refl
+
+codedFixedPointLiteralPayloadExact :
+  (machine : Coded.CodedFiniteStandardTM) →
+  quotedMachinePayload
+    (codedQuoteSensitiveFixedPoint machine)
+  ≡
+  append
+    (StaticQuote.codedStaticProgramList machine)
+    (StaticQuote.codedStaticProgramList machine)
+codedFixedPointLiteralPayloadExact machine = refl
 
 codedFixedPointSyntaxNodesExact :
   (machine : Coded.CodedFiniteStandardTM) →
@@ -112,14 +130,12 @@ codedFixedPointSyntaxNodesExact machine =
 ------------------------------------------------------------------------
 -- MAX-CUT CONSEQUENCE
 --
--- Behavioural self-reference with genuine quote consumption is now inhabited on
--- a finite syntax whose primitive leaves are actual CodedFiniteStandardTM data.
--- Therefore `q2PrimitiveExecutionErasesQuotedProgram` is a property of the old
--- Q2 primitive, not a no-go for the Kleene construction.
+-- Behavioural self-reference with genuine quote consumption is inhabited on a
+-- finite syntax whose primitive leaves are actual CodedFiniteStandardTM data.
+-- The observation now contains the literal static-program Boolean payload, not
+-- merely its size.  Thus old-Q2 quote erasure is not intrinsic to Kleene syntax.
 --
--- Still unpaid, deliberately:
---   * interpreting the quoted machine/program syntax by an ordinary standard TM;
---   * making the quote-sensitive body stream the guarded Cook behaviour of that
---     exact quoted code rather than merely inspect finite quotation observables;
---   * runtime/program-size closure of that compiled body.
+-- Still unpaid: literal standard-TM execution of this quote-sensitive body and
+-- replacement of the diagnostic observation by streamed guarded-Cook behaviour
+-- for the exact quoted code.
 ------------------------------------------------------------------------
