@@ -131,8 +131,8 @@ record Goldbach30To29TerminalMaxCut : Set where
     exactSuccessMacroConsumerEqualityPaid : Bool
     exactSuccessMacroCostDeltaPaid : Bool
     signed369StaticDynamicSeparationReused : Bool
-    goldbach29ExternalHaltingSemanticsSourcePaid : Bool
-    sameCounterexampleHaltingCompilerPaid : Bool
+    goldbach29ExternalHaltingSemanticsSourcePaidTerminalFlag : Bool
+    sameCounterexampleHaltingCompilerPaidTerminalFlag : Bool
     goldbach29AgdaHaltingSemanticsPaid : Bool
     sharedPrefixRequiresFurtherAbstractReproof : Bool
     successTailRequiresFurtherMacroProof : Bool
