@@ -1,0 +1,37 @@
+module DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as R
+
+restrictionInterfaceOwnedRegression :
+  R.u1RestrictedSelectedQFTStressInterfaceOwned R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
+restrictionInterfaceOwnedRegression = refl
+
+fullSU2StressNotBrownMaclayTargetRegression :
+  R.fullSelectedSU2StressIsBrownMaclayTarget R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+fullSU2StressNotBrownMaclayTargetRegression = refl
+
+gaugeEmbeddingInsufficientRegression :
+  R.u1GaugeEmbeddingAloneClosesStressRestriction R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+gaugeEmbeddingInsufficientRegression = refl
+
+fieldRestrictionStillOpenRegression :
+  R.cartanU1FieldRestrictionPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+fieldRestrictionStillOpenRegression = refl
+
+actionRestrictionStillOpenRegression :
+  R.yangMillsActionToMaxwellRestrictionPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+actionRestrictionStillOpenRegression = refl
+
+stressVariationRestrictionStillOpenRegression :
+  R.metricVariationStressRestrictionPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+stressVariationRestrictionStillOpenRegression = refl
+
+boundaryRenormalizationStillOpenRegression :
+  R.sameBoundaryRenormalizedU1StressPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+boundaryRenormalizationStillOpenRegression = refl
+
+fullStressEqualityFirewallRegression :
+  R.FullSelectedSU2StressAutomaticallyEqualsBrownMaclay → ⊥
+fullStressEqualityFirewallRegression = R.fullSelectedSU2StressDoesNotAutomaticallyEqualBrownMaclay
