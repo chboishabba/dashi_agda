@@ -33,7 +33,6 @@ open import Relation.Nullary using (¬_)
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
 import DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact as Itinerary
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact as Affine
-import DASHI.NumberTheory.Collatz.SyracuseAffineDescentMarginExact as Margin
 import DASHI.Analysis.CollatzSyracuseExactAffineTerminalExact as Terminal
 import DASHI.Analysis.CollatzSyracuseParadoxicalPrefixExact as Paradox
 
@@ -51,26 +50,19 @@ contractingGapImpliesCoefficientContracts :
   {x : Syracuse.PositiveNat} {m : Nat} →
   Paradox.ContractingCoefficientGap (Itinerary.parityWord m x) →
   CoefficientContractsAt x m
-contractingGapImpliesCoefficientContracts coefficient =
+contractingGapImpliesCoefficientContracts {x} {m} coefficient =
   let
     multiplier =
       Affine.powNat 3
-        (Affine.parityCount (Itinerary.parityWord _ _))
+        (Affine.parityCount (Itinerary.parityWord m x))
     positiveGap = Paradox.gapPositive coefficient
 
     multiplierBelowSplit :
-      Affine.powNat 3
-        (Affine.parityCount (Itinerary.parityWord _ _))
-      <
-      Affine.powNat 3
-        (Affine.parityCount (Itinerary.parityWord _ _))
-      + Paradox.gap coefficient
+      multiplier < multiplier + Paradox.gap coefficient
     multiplierBelowSplit = NatP.m<m+n multiplier positiveGap
   in
   subst
-    (λ right →
-      Affine.powNat 3
-        (Affine.parityCount (Itinerary.parityWord _ _)) < right)
+    (λ right → multiplier < right)
     (sym (Paradox.denominatorSplit coefficient))
     multiplierBelowSplit
 
