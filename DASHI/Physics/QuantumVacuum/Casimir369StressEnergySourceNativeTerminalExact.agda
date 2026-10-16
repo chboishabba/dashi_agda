@@ -96,7 +96,7 @@ canonicalSourceNativeTerminalBoundary =
   casimir-source-native-terminal-boundary
     true false true false
     true true true true false true false true false true false false
-    false false false false false false false false false false false false false false false false false false
+    false false false false false false false false false false false false false false false false false
 
 data RemainingSourceNativeCasimirBlocker : Set where
   missingLegacyQFTRecoveryProjectionCompatibility : RemainingSourceNativeCasimirBlocker
