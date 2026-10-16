@@ -144,12 +144,12 @@ emmerDornMata2024 = Source.mkDOISource
 
 burkinaFamilyStress2025 : Source.AttributedSource
 burkinaFamilyStress2025 = Source.mkDOISource
-  "Burkina Faso family-stress trial analysis authors"
+  "Leyla Karimli, Leyla Ismayilova, Christine R. Wells"
   "Pathways From Poverty to Child Mental Health in Burkina Faso: Longitudinal Mediation Analyses in a Cluster-Randomized Clinical Trial"
   "Journal of Adolescent Health 76(3):415-428"
   "2025"
   "10.1016/j.jadohealth.2024.10.030"
-  "https://doi.org/10.1016/j.jadohealth.2024.10.030"
+  "https://pubmed.ncbi.nlm.nih.gov/39692681/"
   Source.academicArticleSource
   "Longitudinal mediation analysis in a cluster-randomized trial examining family-level pathways linking poverty-reduction intervention and child mental-health outcomes. Supports the empirical legitimacy of a structural/exposure -> family mediator -> mental-health causal shape in this specific study, not a universal family mechanism."
   Source.publicAttribution
