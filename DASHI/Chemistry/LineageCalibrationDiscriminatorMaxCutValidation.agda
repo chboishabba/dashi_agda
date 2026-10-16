@@ -9,6 +9,7 @@ import DASHI.Biology.LeadCalciumEndToEndReplayExact as PbCa
 import DASHI.Biology.KitzerowBH4FluxCausalModelsExact as BH4
 import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact as Hepatic
 import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorExact as Neural
+import DASHI.Biology.KitzerowBH4RedoxSpatialDiscriminatorExact as RedoxSpatial
 import DASHI.Chemistry.LineageEvidenceAcquisitionStatusExact as Status
 import DASHI.Chemistry.LineageBidiDiscriminatorSynthesisExact as Disc
 import DASHI.Biology.CarbonSiliconReachableChemistryBenchmarkExact as Carbon
@@ -34,13 +35,25 @@ bh4DirectDiscriminatorsPaySubcoordinatesWithoutWholeClosure :
   × Hepatic.hepaticTwoBranchResultProvesWholeBH4AllocatorModel Hepatic.canonicalHepaticCompetitionBoundary ≡ false
   × Neural.simpleCurrentPoolSufficiencySupported Neural.canonicalNeuralContextBoundary ≡ false
   × Neural.neuralEvidenceProvesWholeKitzerowModel Neural.canonicalNeuralContextBoundary ≡ false
-bh4DirectDiscriminatorsPaySubcoordinatesWithoutWholeClosure = refl , (refl , (refl , refl))
+  × RedoxSpatial.scalarWellMixedPoolSufficient RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
+  × RedoxSpatial.redoxSpatialEvidenceClosesWholeAllocator RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
+bh4DirectDiscriminatorsPaySubcoordinatesWithoutWholeClosure =
+  refl , (refl , (refl , (refl , (refl , refl))))
+
+bh4RedoxSpatialCoordinateIsPaidWithoutInventingTransfer :
+  RedoxSpatial.nadphRegenerationRelevant RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
+  × RedoxSpatial.intracellularExtracellularRouteDistinctionPaid RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
+  × RedoxSpatial.intercellBH4TransferDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
+bh4RedoxSpatialCoordinateIsPaidWithoutInventingTransfer = refl , (refl , refl)
 
 bh4AcquisitionStateIsPartialNotClosed :
   Status.directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial Status.canonicalEvidenceAcquisitionStatusBoundary ≡ true
   × Status.hepaticTwoBranchPaymentClosesWholeMultiBranchTarget Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
   × Status.currentPoolRestorationGuaranteesFunctionalRescue Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
-bh4AcquisitionStateIsPartialNotClosed = refl , (refl , refl)
+  × Status.scalarWellMixedPoolSufficient Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
+  × Status.directIntercellularTransferAlreadyPaid Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
+bh4AcquisitionStateIsPartialNotClosed =
+  refl , (refl , (refl , (refl , refl)))
 
 discriminatorSynthesisDoesNotCreateTruth :
   Disc.generatedCandidateCreatesTruth Disc.canonicalLineageBidiSynthesisBoundary ≡ false
