@@ -77,6 +77,18 @@ w3cProvPrimer =
     "Provenance vocabulary distinguishes derivation, revision and quotation relations between entities; used here as a conceptual source-lineage reference, not as proof that a particular derivation occurred."
     Source.publicAttribution
 
+crossrefSimilarityInterpretation : Source.AttributedSource
+crossrefSimilarityInterpretation =
+  Source.mkNoDOISource
+    "Crossref"
+    "Understanding your Similarity Report"
+    "Crossref Similarity Check / iThenticate documentation"
+    "current documentation inspected 2026"
+    "https://www.crossref.org/documentation/similarity-check/similarity-report-understand/"
+    Source.institutionalSource
+    "Crossref states that iThenticate checks textual similarity rather than determining plagiarism and warns against automatic threshold adjudication; similarity output is a discovery/review input, not a provenance, intent or misconduct conclusion."
+    Source.publicAttribution
+
 canonicalAttributionProvenanceSOTASources : List Source.AttributedSource
 canonicalAttributionProvenanceSOTASources =
   oriResearchMisconductDefinition
@@ -84,6 +96,7 @@ canonicalAttributionProvenanceSOTASources =
   ∷ copeRedundantPublicationFlowchart
   ∷ cochraneMultipleReports
   ∷ w3cProvPrimer
+  ∷ crossrefSimilarityInterpretation
   ∷ []
 
 canonicalAttributionProvenanceSOTAAtlas : Source.AttributedSourceAtlas
@@ -92,7 +105,7 @@ canonicalAttributionProvenanceSOTAAtlas =
     "Kitzerow attribution/provenance surrounding SOTA"
     "DASHI.Biology.KitzerowAttributionProvenanceSOTAExact"
     canonicalAttributionProvenanceSOTASources
-    "Vocabulary and evidence-handling guidance for plagiarism/reuse, duplicate manifestations, independent evidence units and derivation provenance. External institutions own their guidance; DASHI owns only the typed cross-domain composition."
+    "Vocabulary and evidence-handling guidance for plagiarism/reuse, duplicate manifestations, independent evidence units, derivation provenance and similarity-tool interpretation. External institutions own their guidance; DASHI owns only the typed cross-domain composition."
 
 record AttributionProvenanceSOTABoundary : Set where
   constructor attributionProvenanceSOTABoundary
@@ -109,6 +122,11 @@ record AttributionProvenanceSOTABoundary : Set where
     copeTreatsDocumentaryEvidenceAsInvestigationInput : Bool
     copeTreatsDocumentaryEvidenceAsInvestigationInputIsTrue :
       copeTreatsDocumentaryEvidenceAsInvestigationInput ≡ true
+    similarityToolDeterminesPlagiarism : Bool
+    similarityToolDeterminesPlagiarismIsFalse : similarityToolDeterminesPlagiarism ≡ false
+    similarityThresholdAutomaticallyAdjudicatesReuse : Bool
+    similarityThresholdAutomaticallyAdjudicatesReuseIsFalse :
+      similarityThresholdAutomaticallyAdjudicatesReuse ≡ false
     guidanceAutomaticallyAdjudicatesKitzerowClaim : Bool
     guidanceAutomaticallyAdjudicatesKitzerowClaimIsFalse :
       guidanceAutomaticallyAdjudicatesKitzerowClaim ≡ false
@@ -125,5 +143,7 @@ canonicalAttributionProvenanceSOTABoundary =
     true refl
     true refl
     true refl
+    false refl
+    false refl
     false refl
     false refl
