@@ -17,6 +17,12 @@ _ = refl
 _ : R.residual53StateEmbeddingInjective R.canonicalFiniteLinearRealizationBoundary ≡ true
 _ = refl
 
+_ : R.finiteShapeProductIntertwinesAlbertJordan R.canonicalFiniteLinearRealizationBoundary ≡ true
+_ = refl
+
+_ : R.finiteShapeCubicIntertwinesAlbertCubic R.canonicalFiniteLinearRealizationBoundary ≡ true
+_ = refl
+
 _ : R.removedShapeScalarMapsToAlbertZero R.canonicalFiniteLinearRealizationBoundary ≡ true
 _ = refl
 
@@ -24,6 +30,11 @@ _ : R.leftPositiveCornerMapsToAlbertUnit R.canonicalFiniteLinearRealizationBound
 _ = refl
 
 _ : R.removedShapeScalarMapsToAlbertUnit R.canonicalFiniteLinearRealizationBoundary ≡ false
+_ = refl
+
+-- The finite shape's named ScalarLine is a carrier partition, not the actual
+-- scalar/unit summand of the literal Albert algebra under this realization.
+_ : R.shapeScalarSummandMatchesActualAlbertScalarUnit R.canonicalFiniteLinearRealizationBoundary ≡ false
 _ = refl
 
 _ : R.finiteActionLiftToLinearAlbertPaid R.canonicalFiniteLinearRealizationBoundary ≡ false
