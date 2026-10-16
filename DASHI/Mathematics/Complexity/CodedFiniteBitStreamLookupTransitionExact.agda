@@ -6,8 +6,9 @@ module DASHI.Mathematics.Complexity.CodedFiniteBitStreamLookupTransitionExact wh
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (just)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -20,14 +21,10 @@ import DASHI.Mathematics.Complexity.CodedFiniteBitStreamLookupExact as Lookup
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 
-------------------------------------------------------------------------
--- Append-occurrence constructors for the link extension table.
-------------------------------------------------------------------------
-
 linkAppendLeftOccurs :
   ∀ {State Symbol : Set}
     {rule : Local.TapeRule State Symbol}
-    {left right : Agda.Builtin.List.List (Local.TapeRule State Symbol)} →
+    {left right : List (Local.TapeRule State Symbol)} →
   Local.RuleOccurs rule left →
   Local.RuleOccurs rule (Link.append left right)
 linkAppendLeftOccurs Local.ruleHere = Local.ruleHere
@@ -37,17 +34,13 @@ linkAppendLeftOccurs (Local.ruleThere occurs) =
 linkAppendRightOccurs :
   ∀ {State Symbol : Set}
     {rule : Local.TapeRule State Symbol}
-    (left : Agda.Builtin.List.List (Local.TapeRule State Symbol))
-    {right : Agda.Builtin.List.List (Local.TapeRule State Symbol)} →
+    (left : List (Local.TapeRule State Symbol))
+    {right : List (Local.TapeRule State Symbol)} →
   Local.RuleOccurs rule right →
   Local.RuleOccurs rule (Link.append left right)
-linkAppendRightOccurs Agda.Builtin.List.[] occurs = occurs
-linkAppendRightOccurs (x Agda.Builtin.List.∷ left) occurs =
+linkAppendRightOccurs [] occurs = occurs
+linkAppendRightOccurs (x ∷ left) occurs =
   Local.ruleThere (linkAppendRightOccurs left occurs)
-
-------------------------------------------------------------------------
--- Named rule occurrences in the final closed lookup code.
-------------------------------------------------------------------------
 
 validStopOccursInLookup :
   ∀ {n : Nat}
@@ -97,10 +90,6 @@ cursorMoreOccursInLookup :
     (Coded.rules (Lookup.lookupCode n bits))
 cursorMoreOccursInLookup {n} bits phase =
   linkAppendLeftOccurs (cursorMoreOccursInBase phase)
-
-------------------------------------------------------------------------
--- Standard transition laws selected by the ordinary first-match interpreter.
-------------------------------------------------------------------------
 
 validMoreTransition :
   ∀ {n : Nat}
@@ -170,10 +159,6 @@ overflowStopTransition {n} bits
     refl refl
 ... | matched , fetchExact , transitionExact = transitionExact
 
-------------------------------------------------------------------------
--- Sink meaning is literal control-state meaning.
-------------------------------------------------------------------------
-
 trueSinkIsAccepting :
   (n : Nat) → (bits : Fin.Fin n → Bool) →
   Lookup.trueSink n ≡ Coded.acceptingState (Lookup.lookupCode n bits)
@@ -182,9 +167,7 @@ trueSinkIsAccepting n bits = refl
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- The fixed-stream compiler now has literal operational semantics:
---   more : phase k -> k+1, one standard edge;
---   stop at k<n -> sink(bits k), one standard edge;
---   stop at overflow -> none, one standard edge.
--- No extensional lookup function participates in machine execution.
+-- more : phase k -> k+1, one standard edge;
+-- stop at k<n -> sink(bits k), one standard edge;
+-- stop at overflow -> none, one standard edge.
 ------------------------------------------------------------------------
