@@ -15,6 +15,7 @@ open import Data.Fin.Properties using (remQuot-combine)
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleTableInterpreterExact as Interpreter
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
+import DASHI.Mathematics.Complexity.CodedFiniteStandardModeSumExact as Mode
 import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact as Phase
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
@@ -59,7 +60,7 @@ shiftLiftRuleExact :
     (rule : Local.TapeRule
       (Fin.Fin (Coded.stateCount source))
       (Fin.Fin (Coded.symbolCount source))) →
-  DASHI.Mathematics.Complexity.CodedFiniteStandardModeSumExact.mapStateRule
+  Mode.mapStateRule
       (shiftPhaseState source steps)
       (Phase.liftRuleAt phase rule)
     ≡ Phase.liftRuleAt (Fin.suc phase) rule
@@ -83,7 +84,7 @@ shiftFetchedRuleOccurs :
       q a
       (Phase.phaseLiftRules source steps)) →
   Local.RuleOccurs
-    (DASHI.Mathematics.Complexity.CodedFiniteStandardModeSumExact.mapStateRule
+    (Mode.mapStateRule
       (shiftPhaseState source steps)
       (Interpreter.rule matched))
     (Phase.phaseLiftRules source (suc steps))
