@@ -18,6 +18,7 @@ import DASHI.Physics.CondensedMatter.MATBGTHFHubbardIAtomicReplayReceiptExact as
 import DASHI.Physics.CondensedMatter.MATBGTHFCoupledGreenReplayReceiptExact as THFCoupled
 import DASHI.Physics.CondensedMatter.MATBGTHFSelfConsistencyQTMExact as THFQTM
 import DASHI.Physics.CondensedMatter.MATBGQTMMatrixElementObserverReceiptExact as QTMObserver
+import DASHI.Physics.CondensedMatter.MATBGQTMElectrostaticsReplayReceiptExact as QTMElectrostatics
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorics2026Exact as Entropy
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorialReplayReceiptExact as EntropyReplay
 import DASHI.Physics.CondensedMatter.MATBGGeometryCaloricUpperBoundReceiptExact as GeometryCaloric
@@ -70,6 +71,7 @@ record FieldGeometryMatterTerminalFrontier : Set where
     thfSelfConsistencyEquationSourceContract : FrontierStatus
     qtmGoldenRuleObserverSourceContract : FrontierStatus
     qtmElectrostaticsSourceContract : FrontierStatus
+    qtmElectrostaticsNumericalReplay : FrontierStatus
     qtmWavefunctionObserverNumericalReplay : FrontierStatus
     thfSelfConsistentInteractingSolve : FrontierStatus
     qtmExperimentalDataReplay : FrontierStatus
@@ -143,7 +145,7 @@ currentTerminalFrontier =
     numericallyExecuted numericallyExecuted
     openCalibrationOrExecution
     sourcePaid structurallyPaid numericallyExecuted numericallyExecuted
-    sourcePaid sourcePaid sourcePaid numericallyExecuted
+    sourcePaid sourcePaid sourcePaid numericallyExecuted numericallyExecuted
     openCalibrationOrExecution openSameObjectPayment
     structurallyPaid sourcePaid numericallyExecuted openSameObjectPayment externalOnly
     numericallyExecuted openSameObjectPayment
@@ -182,6 +184,7 @@ record MaxCutPaidSurface : Set where
     thfCoupledGreenBoundary : THFCoupled.THFCoupledGreenReplayBoundary
     thfSelfConsistencyQTMBoundary : THFQTM.THFSelfConsistencyQTMBoundary
     qtmObserverBoundary : QTMObserver.QTMMatrixElementObserverBoundary
+    qtmElectrostaticsBoundary : QTMElectrostatics.QTMElectrostaticsReplayBoundary
     entropyBoundary : Entropy.EntropyCombinatoricsBoundary
     entropyReplayBoundary : EntropyReplay.EntropyCombinatorialReplayBoundary
     geometryCaloricBoundary : GeometryCaloric.GeometryCaloricUpperBoundBoundary
@@ -215,6 +218,7 @@ canonicalMaxCutPaidSurface =
     THFCoupled.canonicalTHFCoupledGreenReplayBoundary
     THFQTM.canonicalTHFSelfConsistencyQTMBoundary
     QTMObserver.canonicalQTMMatrixElementObserverBoundary
+    QTMElectrostatics.canonicalQTMElectrostaticsReplayBoundary
     Entropy.canonicalEntropyCombinatoricsBoundary
     EntropyReplay.canonicalEntropyCombinatorialReplayBoundary
     GeometryCaloric.canonicalGeometryCaloricUpperBoundBoundary
