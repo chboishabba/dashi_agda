@@ -1,10 +1,13 @@
-name: Goldbach29 signed-369 vendor weld
+name: Goldbach30-to-29 signed-369 reduction weld
 
 on:
   push:
     paths:
       - 'vendor/meta-introspector-aok-goldbach29.VENDOR'
       - 'DASHI/ComputerScience/Goldbach29Signed369VendorBridgeExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29SuccessMacroExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29ReductionReceiptExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29VisualizationConsumerExact.agda'
       - 'DASHI/EverythingGoldbach29Signed369VendorExact.agda'
       - 'scripts/test_goldbach29_signed369_vendor.py'
       - '.github/workflows/goldbach29-signed369-vendor.yml'
@@ -12,6 +15,9 @@ on:
     paths:
       - 'vendor/meta-introspector-aok-goldbach29.VENDOR'
       - 'DASHI/ComputerScience/Goldbach29Signed369VendorBridgeExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29SuccessMacroExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29ReductionReceiptExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29VisualizationConsumerExact.agda'
       - 'DASHI/EverythingGoldbach29Signed369VendorExact.agda'
       - 'scripts/test_goldbach29_signed369_vendor.py'
       - '.github/workflows/goldbach29-signed369-vendor.yml'
@@ -22,14 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify vendor attribution and boundary regression
+      - name: Verify vendor attribution and max-cut regression
         run: python scripts/test_goldbach29_signed369_vendor.py
       - name: Install Agda + stdlib
         uses: wenkokke/setup-agda@v2
         with:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
-      - name: Check Goldbach29 signed-369 aggregate
+      - name: Check Goldbach30-to-29 signed-369 aggregate
         run: >-
           agda -i . -i DCHoTT-Agda -i cubical -l standard-library
           DASHI/EverythingGoldbach29Signed369VendorExact.agda
