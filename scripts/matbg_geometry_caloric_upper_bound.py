@@ -11,7 +11,10 @@ cycle, reversibility, adiabatic temperature change, useful cooling, COP,
 hysteresis closure, or same-sample QTM/caloric operation.
 """
 from __future__ import annotations
-import json, math
+import hashlib
+import json
+import math
+from pathlib import Path
 
 KB_MEV_PER_K = 8.617333262e-2
 HIGH_COUNTS = {0: 70, 1: 56, 2: 28, 3: 8}
@@ -23,21 +26,29 @@ def row(nu: int):
     ratio = HIGH_COUNTS[nu] / LOW_COUNTS[nu]
     delta_s_over_kb = math.log(ratio)
     return {
-        "filling": nu,
-        "high_microstates": HIGH_COUNTS[nu],
-        "low_microstates": LOW_COUNTS[nu],
+        "high": HIGH_COUNTS[nu],
+        "low": LOW_COUNTS[nu],
         "delta_s_over_kB": delta_s_over_kb,
-        "T_delta_S_meV_per_cell": {
-            str(int(t)): KB_MEV_PER_K * t * delta_s_over_kb for t in TEMPERATURES_K
-        },
+        "TDeltaS_15K_meV_per_cell": KB_MEV_PER_K * 15.0 * delta_s_over_kb,
     }
 
 
 def main():
+    fillings = {str(nu): row(nu) for nu in range(4)}
+    assert fillings["1"]["high"] == 56
+    assert fillings["1"]["low"] == 4
+    assert abs(fillings["1"]["delta_s_over_kB"] - math.log(14.0)) < 1e-14
+    assert all(r["delta_s_over_kB"] > 0 for r in fillings.values())
+
+    script_path = Path(__file__)
     receipt = {
+        "script": "scripts/matbg_geometry_caloric_upper_bound.py",
+        "script_sha256": hashlib.sha256(script_path.read_bytes()).hexdigest(),
+        "execution_environment": "Python standard library",
         "source": "10.1038/s41467-026-76179-y",
         "interpretation": "equilibrium combinatorial entropy-swing scale only",
-        "fillings": [row(nu) for nu in range(4)],
+        "fillings": fillings,
+        "assertions_passed": True,
         "promotion_boundaries": {
             "controlled_geometry_or_strain_cycle": False,
             "reversible_cycle": False,
@@ -46,12 +57,9 @@ def main():
             "cop": False,
             "hysteresis_and_relaxation_closure": False,
             "same_sample_qtm_entropy_cycle": False,
+            "agda_kernel_receipt": False,
         },
     }
-    assert receipt["fillings"][1]["high_microstates"] == 56
-    assert receipt["fillings"][1]["low_microstates"] == 4
-    assert abs(receipt["fillings"][1]["delta_s_over_kB"] - math.log(14.0)) < 1e-14
-    assert all(r["delta_s_over_kB"] > 0 for r in receipt["fillings"])
     print(json.dumps(receipt, indent=2, sort_keys=True))
 
 
