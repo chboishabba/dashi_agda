@@ -12,7 +12,6 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Analysis.BishopRadixCellQuantisationExact as BishopCell
-import DASHI.Foundations.NatRadialTreeCodecExact as NatRadix
 import DASHI.Moonshine.OggSSPClimbingGymAnalyticRadixAdapterExact as Analytic
 import DASHI.Moonshine.OggSSPClimbingGymEmpiricalReplayExact as Replay
 import DASHI.Moonshine.OggSSPClimbingGymExactHoleAnalyticBridge as HoleBridge
@@ -20,7 +19,6 @@ import DASHI.Moonshine.OggSSPClimbingGymExactHoleRadixCodec as Hole
 import DASHI.Moonshine.OggSSPClimbingGymPhaseControlExact as Phase
 import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact as Figure
 import DASHI.Moonshine.OggSSPClimbingGymSourceAttributionExact as Attribution
-import DASHI.Moonshine.OggSSPClimbingGymConsumerDescentExact as Consumer
 import DASHI.Moonshine.OggSSPSignedRadixClimbingGymExact as Gym
 import DASHI.Moonshine.OggSSPSignedRadixInverseLimitExact as Limit
 
@@ -34,15 +32,25 @@ record ClimbingGymTerminalStatus : Set where
     deterministicShiftNullClosed : Bool
     signedObservationNoGoClosed : Bool
     phaseControlMaxCutClosed : Bool
+
+    -- The older adapter is an abstract same-carrier formula surface over the
+    -- propositional-equality ConstructiveRealSpine.  It is not by itself a
+    -- concrete Bishop instantiation.
     analyticFormulaAdapterClosed : Bool
     acquiredSourceAttributionClosed : Bool
+    zeroCacheArtifactIntegrityClosed : Bool
     canonicalConsumerDescentWeldClosed : Bool
 
     exactNatToRadialTreeCodecClosed : Bool
     exactHoleAddressWithoutRealFloorClosed : Bool
     exactHoleAnalyticAgreementSurfaceClosed : Bool
     certifiedBishopOpenCellToRadixClosed : Bool
+    concreteBishopSetoidCarrierAvailable : Bool
     sourceShiftSeedNonIdentifiabilityClosed : Bool
+
+    -- Remaining same-object analytic frontier.
+    concreteBishopGlobalLogPiPhaseClosed : Bool
+    bishopSetoidEqualityCollapsedToPropositionalEquality : Bool
 
     -- Compatibility flag for the old monolithic frontier.  It now means a
     -- globally total arbitrary-real floor/frac -> finite-address operation,
@@ -71,15 +79,21 @@ canonicalClimbingGymTerminalStatus =
     true   -- deterministic one-period phase-grid shift null implemented
     true   -- unsigned observation cannot recover signed orientation
     true   -- exhaustive C(20,5) phase-sensitive control implemented
-    true   -- log/pi/hole/phase same-carrier adapter surface constructed
+
+    true   -- abstract log/pi/hole/phase same-carrier adapter surface constructed
     true   -- supplied figure, mpmath docs and LMFDB reference typed separately
+    true   -- exact cache path/blob metadata + fail-closed loader contract
     true   -- local collisions inhabit canonical ConsumerNonDescentWitness
 
     true   -- generic Nat quotient/remainder -> existing RadialTreeAddress
     true   -- m/p^a hole vertex address is compiled directly from natural m
     true   -- analytic hole-height observer can target that exact finite address
     true   -- strict Bishop open-cell certificate compiles to finite address
+    true   -- concrete git-pinned Bishop setoid carrier exists on master
     true   -- rounded source summaries cannot uniquely recover a random sample
+
+    false  -- Bishop global log + trigonometric-pi + actual phase weld not closed
+    false  -- Bishop setoid equality is deliberately not identified with Agda ≡
 
     false  -- no globally total arbitrary-real floor/frac -> Fin is claimed
     false  -- source finite random shift list / RNG seed not supplied or recovered
@@ -93,8 +107,8 @@ canonicalClimbingGymTerminalStatus =
     false  -- live sibling PRs are design donors only unless merged
 
 ------------------------------------------------------------------------
--- Cross-owner consistency spot checks: the terminal booleans agree with the
--- source owners rather than silently upgrading their boundaries.
+-- Cross-owner consistency spot checks: terminal booleans agree with source
+-- owners rather than silently upgrading their boundaries.
 ------------------------------------------------------------------------
 
 terminalDoesNotClaimGlobalFloorQuantiser :
@@ -120,6 +134,12 @@ terminalExactHoleObserverUsesNatCodec :
     HoleBridge.canonicalExactHoleAnalyticBridgeBoundary
   ≡ true
 terminalExactHoleObserverUsesNatCodec = refl
+
+terminalCacheArtifactPinned :
+  Attribution.exactCacheRepositoryArtifactPinned
+    Attribution.canonicalClimbingGymSourceAttributionBoundary
+  ≡ true
+terminalCacheArtifactPinned = refl
 
 terminalDoesNotRecoverSourceSeed :
   Replay.reportedShiftControlSeedRecovered
