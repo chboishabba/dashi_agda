@@ -8,11 +8,10 @@ module DASHI.Physics.YangMills.SU2Bracket369OrientationBridgeExact where
 --
 --   [X,Y] = 2 (X cross Y).
 --
--- This bridge records that its coordinate orientation therefore uses the same
--- three-axis antisymmetric skeleton as the generic 369 bracket.  It does NOT
--- promote the finite C3/zeta orientation chart into a source-exact cyclic
--- action on Balaban physical fields or recovery seams; that existing gate is
--- deliberately preserved.
+-- The Balaban audit has now also recovered a source-backed spatial C3 subgroup
+-- on the literal CMP109 generated-grid/vacuum-polarization carrier.  That C3
+-- action is distinct from the finite 369 zeta chart and still has to be
+-- transported through the later unified recovery compiler.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -24,11 +23,6 @@ import DASHI.Physics.Foundations.OrientedThreeAxisBracket369Exact as Bracket369
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Lie
 import DASHI.Physics.YangMills.BalabanP33SU2EuclideanGeometryExact as Geometry
 import DASHI.Physics.YangMills.BalabanC3MonsterEquivarianceAuditExact as Audit
-
-------------------------------------------------------------------------
--- 1. Literal coordinate normalization: the bracket components are exactly
--- twice the ordinary three-dimensional cross-product minors.
-------------------------------------------------------------------------
 
 su2Bracket1IsTwoCrossMinor :
   ∀ y₁ z₁ y₂ z₂ →
@@ -48,11 +42,6 @@ su2Bracket3IsTwoCrossMinor :
   ≡ Lie.twoR *R ((x₁ *R y₂) +R (-R (y₁ *R x₂)))
 su2Bracket3IsTwoCrossMinor x₁ y₁ x₂ y₂ = refl
 
-------------------------------------------------------------------------
--- 2. Reuse the machine-checked Euclidean normalization owner rather than
--- restating an unproved physical identification.
-------------------------------------------------------------------------
-
 su2BracketUses369OrientationSkeleton : Bool
 su2BracketUses369OrientationSkeleton = true
 
@@ -65,16 +54,10 @@ su2GramGeometryAlreadyMachineChecked = true
 su2ThreeAxisBracketVoxel : Set
 su2ThreeAxisBracketVoxel = Bracket369.BracketVoxel
 
-------------------------------------------------------------------------
--- 3. Critical non-promotion boundary.  The finite orientation chart is useful
--- here because the coordinate bracket is antisymmetric.  It is NOT evidence
--- that the Balaban source owns the repository's cyclic C3 action.
-------------------------------------------------------------------------
-
-balabanLiteralC3ActionStillGated :
-  Audit.balabanLiteralC3ActionRecovered ≡ false
-balabanLiteralC3ActionStillGated =
-  Audit.balabanLiteralC3ActionRecoveredIsFalse
+balabanLiteralC3ActionRecovered :
+  Audit.balabanLiteralC3ActionRecovered ≡ true
+balabanLiteralC3ActionRecovered =
+  Audit.balabanLiteralC3ActionRecoveredIsTrue
 
 balabanPhysicalFieldC3StillGated : Bool
 balabanPhysicalFieldC3StillGated =
@@ -84,22 +67,19 @@ balabanRecoveryC3StillGated : Bool
 balabanRecoveryC3StillGated =
   Audit.balabanC3ActionOnSourceSeamsRecovered
 
-------------------------------------------------------------------------
--- 4. Authority boundary.
-------------------------------------------------------------------------
-
 record SU2Bracket369OrientationBoundary : Set where
   constructor su2-bracket-369-orientation-boundary
   field
     literalSU2BracketIsTwoCrossCoordinatewise : Bool
     sharedAntisymmetricThreeAxisSkeletonReused : Bool
     machineCheckedSU2EuclideanGeometryReused : Bool
-    genericC3OrientationIsBalabanPhysicalC3Action : Bool
-    sourceDiscriminationStillRequired : Bool
+    sourceBackedBalabanCMP109C3Recovered : Bool
+    generic369C3IdentifiedWithBalabanCMP109C3 : Bool
+    unifiedRecoveryC3TransportStillRequired : Bool
     torqueEMNSMechanismsIdentifiedWithYangMills : Bool
 
 canonicalSU2Bracket369OrientationBoundary :
   SU2Bracket369OrientationBoundary
 canonicalSU2Bracket369OrientationBoundary =
   su2-bracket-369-orientation-boundary
-    true true true false true false
+    true true true true false true false
