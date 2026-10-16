@@ -1,0 +1,5 @@
+module DASHI.Moonshine.Monster3BLinearIsotypicCurrentMaxCutValidation where
+
+import DASHI.Moonshine.Monster3BLinearIsotypicCurrentMaxCutExact as Cut
+
+boundary = Cut.canonicalBoundary
