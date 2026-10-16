@@ -18,6 +18,7 @@ open import DASHI.Physics.Optics.BerkeleyDiffuserCamDepthConditioningExact publi
 open import DASHI.Physics.Optics.DiffuserCamLocalExecutionReceiptExact public
 open import DASHI.Physics.Optics.BerkeleyLenslessInformationDesignSourceExact public
 open import DASHI.Physics.Optics.BerkeleyPhotonTransferCalibrationExact public
+open import DASHI.Physics.Optics.BerkeleyPhotonTransferStimulusExecutionExact public
 open import DASHI.Physics.Optics.BerkeleyPhotonTransferLocalExecutionReceiptExact public
 open import DASHI.Physics.Optics.BerkeleySystemCharacterizationDetectedPhotonExact public
 open import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact public
