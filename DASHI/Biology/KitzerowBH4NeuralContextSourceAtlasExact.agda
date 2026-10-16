@@ -6,11 +6,11 @@ open import Agda.Builtin.List using (List; []; _∷_)
 import DASHI.Core.AttributedSourceCore as Source
 
 ------------------------------------------------------------------------
--- PRIMARY NEURAL/DEVELOPMENTAL BH4 CONTEXT SOURCES
+-- PRIMARY NEURAL/DEVELOPMENTAL/REDOX-SPATIAL BH4 CONTEXT SOURCES
 --
--- These sources constrain current-pool versus developmental/state-history
--- interpretations of BH4 deficiency and rescue. They do not inherit DASHI's
--- causal synthesis or Kitzerow-model attribution.
+-- These sources constrain current-pool versus developmental/state-history,
+-- redox-regeneration, cell-topology and route-of-exposure interpretations.
+-- They do not inherit DASHI's causal synthesis or Kitzerow-model attribution.
 ------------------------------------------------------------------------
 
 hylandEtAl1996Hph1 : Source.AttributedSource
@@ -24,6 +24,45 @@ hylandEtAl1996Hph1 =
     "https://pubmed.ncbi.nlm.nih.gov/8764604/"
     Source.academicArticleSource
     "Primary hph-1 mouse study of GTP cyclohydrolase-I/BH4 deficiency, brain monoamine metabolism and chronic BH4 supplementation. Pays source-bounded findings that BH4 deficiency co-occurs with reduced dopamine/norepinephrine/serotonin and reduced in-vivo TH/TPH activities, while chronic BH4 raises brain BH4 above control without restoring monoamine metabolism. It does not prove the whole DASHI/Kitzerow causal architecture."
+    Source.publicAttribution
+
+hwangEtAl1998Localization : Source.AttributedSource
+hwangEtAl1998Localization =
+  Source.mkDOISource
+    "O. Hwang; H. Baker; S. S. Gross; T. H. Joh"
+    "Localization of GTP cyclohydrolase in monoaminergic but not nitric oxide-producing cells"
+    "Synapse 28(2):140-153"
+    "1998"
+    "10.1002/(SICI)1098-2396(199802)28:2<140::AID-SYN4>3.0.CO;2-B"
+    "https://pubmed.ncbi.nlm.nih.gov/9450514/"
+    Source.academicArticleSource
+    "Primary rat-brain/adrenal immunohistochemistry and in-situ-hybridization study. Pays colocalization of GTPCH with TH/TPH monoaminergic cells and lack of GTPCH colocalization with nNOS-positive cells in the studied regions. The authors propose possible intercellular/extracellular biopterin supply to nNOS cells; that proposed transfer route is not itself a directly measured BH4 flux."
+    Source.publicAttribution
+
+liangKaufman1998Striatum : Source.AttributedSource
+liangKaufman1998Striatum =
+  Source.mkDOISource
+    "L. P. Liang; Seymour Kaufman"
+    "The regulation of dopamine release from striatum slices by tetrahydrobiopterin and L-arginine-derived nitric oxide"
+    "Brain Research 800(2):181-186"
+    "1998"
+    "10.1016/S0006-8993(98)00452-1"
+    "https://pubmed.ncbi.nlm.nih.gov/9685635/"
+    Source.academicArticleSource
+    "Primary rat-striatum-slice superfusion study. Pays source-conditioned evidence that arginine-driven dopamine release is reduced by NOS or BH4-synthesis inhibition and substantially restored after intracellular BH4 repletion, while direct extracellular BH4 evokes a much larger dopamine-release effect that is largely insensitive to TH/NOS inhibition and strongly reduced by superoxide dismutase/catalase. Route and compartment therefore remain mechanistically distinct."
+    Source.publicAttribution
+
+witteveenGiovanelliKaufman1999NOSRedox : Source.AttributedSource
+witteveenGiovanelliKaufman1999NOSRedox =
+  Source.mkDOISource
+    "C. F. Witteveen; J. Giovanelli; Seymour Kaufman"
+    "Reactivity of tetrahydrobiopterin bound to nitric-oxide synthase"
+    "Journal of Biological Chemistry 274(42):29755-29762"
+    "1999"
+    "10.1074/jbc.274.42.29755"
+    "https://pubmed.ncbi.nlm.nih.gov/10514451/"
+    Source.academicArticleSource
+    "Primary NOS-bound BH4 turnover study. Pays a source-bounded redox-regeneration coordinate: NOS-bound BH4 is dynamically oxidized and regenerated across turnover, with the measured steady redox state depending on oxidation conditions and reductive regeneration in an NADPH-regenerating system. It does not provide a whole-cell NADPH-to-multi-branch flux map."
     Source.publicAttribution
 
 sumiIchinoseEtAl2001PtsKO : Source.AttributedSource
@@ -54,15 +93,21 @@ jiangEtAl2024Gch1Therapy =
 
 canonicalNeuralContextSources : List Source.AttributedSource
 canonicalNeuralContextSources =
-  hylandEtAl1996Hph1 ∷ sumiIchinoseEtAl2001PtsKO ∷ jiangEtAl2024Gch1Therapy ∷ []
+  hylandEtAl1996Hph1
+  ∷ hwangEtAl1998Localization
+  ∷ liangKaufman1998Striatum
+  ∷ witteveenGiovanelliKaufman1999NOSRedox
+  ∷ sumiIchinoseEtAl2001PtsKO
+  ∷ jiangEtAl2024Gch1Therapy
+  ∷ []
 
 canonicalNeuralContextSourceAtlas : Source.AttributedSourceAtlas
 canonicalNeuralContextSourceAtlas =
   Source.mkSourceAtlas
-    "Kitzerow BH4 neural/developmental context source atlas"
+    "Kitzerow BH4 neural/developmental/redox-spatial context source atlas"
     "DASHI.Biology.KitzerowBH4NeuralContextSourceAtlasExact"
     canonicalNeuralContextSources
-    "External sources retain experimental authorship. DASHI owns only the cross-study causal-alternative projection: present BH4 pool, developmental history, enzyme abundance, region and branch context remain distinct coordinates."
+    "External sources retain experimental authorship. DASHI owns only the cross-study causal-alternative projection: present BH4 pool, developmental history, enzyme abundance, region, cell topology, exposure route, redox regeneration and branch context remain distinct coordinates."
 
 canonicalNeuralContextAtlasNonPromoting :
   Source.atlasCreatesAuthority canonicalNeuralContextSourceAtlas ≡ false
