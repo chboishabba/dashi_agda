@@ -17,17 +17,23 @@ module DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Maybe using (nothing; just)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
-open import Data.Empty using (⊥)
-open import Data.Product using (Σ; _,_; proj₁; proj₂)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Product using (Σ; ∃; _×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import Data.Fin.Base as Fin
 open import Data.Fin.Properties using (remQuot-combine)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
+import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.CodedFiniteStandardModeSumExact as Mode
 import DASHI.Mathematics.Complexity.CodedFiniteStandardSingletonLinkExact as Singleton
+import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleKeyDeterminismExact as Determinism
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleTableInterpreterExact as Interpreter
+import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 
 ------------------------------------------------------------------------
 -- Fin n embeds as the nonterminal phases of Fin (suc n).
@@ -200,6 +206,60 @@ phaseTablePreimage (phase ∷ phases) {rules = rules} occurs
 ... | later , original , originalOccurs , exact =
   later , original , originalOccurs , exact
 
+appendLeftRuleOccurs :
+  ∀ {State Symbol : Set}
+    {rule : Local.TapeRule State Symbol}
+    {left right : List (Local.TapeRule State Symbol)} →
+  Local.RuleOccurs rule left →
+  Local.RuleOccurs rule (Mode.append left right)
+appendLeftRuleOccurs Local.ruleHere = Local.ruleHere
+appendLeftRuleOccurs (Local.ruleThere occurs) =
+  Local.ruleThere (appendLeftRuleOccurs occurs)
+
+appendRightRuleOccurs :
+  ∀ {State Symbol : Set}
+    {rule : Local.TapeRule State Symbol}
+    (left : List (Local.TapeRule State Symbol))
+    {right : List (Local.TapeRule State Symbol)} →
+  Local.RuleOccurs rule right →
+  Local.RuleOccurs rule (Mode.append left right)
+appendRightRuleOccurs [] occurs = occurs
+appendRightRuleOccurs (_ ∷ left) occurs =
+  Local.ruleThere (appendRightRuleOccurs left occurs)
+
+compiledRuleOccursFromMember :
+  ∀ {states symbols steps : Nat}
+    {phase : Fin.Fin steps}
+    {phases : List (Fin.Fin steps)}
+    {rule : Local.TapeRule (Fin.Fin states) (Fin.Fin symbols)}
+    {rules : List (Local.TapeRule (Fin.Fin states) (Fin.Fin symbols))} →
+  Canonical.Member phase phases →
+  Local.RuleOccurs rule rules →
+  Local.RuleOccurs (liftRuleAt phase rule) (compilePhases phases rules)
+compiledRuleOccursFromMember Canonical.here ruleOccurs =
+  appendLeftRuleOccurs (mapPhaseRuleOccurs ruleOccurs)
+compiledRuleOccursFromMember
+    {rules = rules}
+    (Canonical.there {y = earlier} member)
+    ruleOccurs =
+  appendRightRuleOccurs
+    (mapPhaseRules earlier rules)
+    (compiledRuleOccursFromMember member ruleOccurs)
+
+phaseLiftRuleOccurs :
+  (source : Coded.CodedFiniteStandardTM) →
+  ∀ {steps : Nat}
+    (phase : Fin.Fin steps)
+    {rule : Local.TapeRule
+      (Fin.Fin (Coded.stateCount source))
+      (Fin.Fin (Coded.symbolCount source))} →
+  Local.RuleOccurs rule (Coded.rules source) →
+  Local.RuleOccurs (liftRuleAt phase rule) (phaseLiftRules source steps)
+phaseLiftRuleOccurs source phase ruleOccurs =
+  compiledRuleOccursFromMember
+    (Coded.allFinMember phase)
+    ruleOccurs
+
 phaseLiftRules :
   (source : Coded.CodedFiniteStandardTM) →
   (steps : Nat) →
@@ -318,6 +378,56 @@ phaseLiftAcceptingStateExact :
     ≡ phaseTerminalState source steps (Coded.acceptingState source)
 phaseLiftAcceptingStateExact source steps = refl
 
+phaseLiftConcreteMachine :
+  (source : Coded.CodedFiniteStandardTM) →
+  (steps : Nat) →
+  Local.ConcreteTapeMachine
+phaseLiftConcreteMachine source steps =
+  Presented.finitePresentedStandardToConcrete
+    (Coded.decodeCodedStandardTM (phaseLiftCode source steps))
+
+phaseLiftConcreteDeterministic :
+  (source : Coded.CodedFiniteStandardTM) →
+  (steps : Nat) →
+  Determinism.RuleKeyDeterministic (phaseLiftConcreteMachine source steps)
+phaseLiftConcreteDeterministic source steps =
+  phaseLiftDispatchUnique source steps
+
+------------------------------------------------------------------------
+-- Every listed source rule is selected at every nonterminal phase and advances
+-- the phase exactly once while preserving write symbol/direction.
+------------------------------------------------------------------------
+
+phaseLiftListedRuleDeterminesStandardTransition :
+  (source : Coded.CodedFiniteStandardTM) →
+  ∀ {steps : Nat}
+    (phase : Fin.Fin steps)
+    {wanted : Local.TapeRule
+      (Fin.Fin (Coded.stateCount source))
+      (Fin.Fin (Coded.symbolCount source))} →
+  Local.RuleOccurs wanted (Coded.rules source) →
+  ∃ λ matched →
+    Interpreter.fetchConcreteRule
+      (phaseLiftConcreteMachine source steps)
+      (phaseSourceState source (Local.sourceState wanted) phase)
+      (Local.readSymbol wanted)
+      ≡ just matched
+    × Standard.concreteControlTransition
+        (phaseLiftConcreteMachine source steps)
+        (phaseSourceState source (Local.sourceState wanted) phase)
+        (Local.readSymbol wanted)
+      ≡ just
+          (Standard.standard-transition
+            (phaseTargetState source (Local.targetState wanted) phase)
+            (Local.writeSymbol wanted)
+            (Local.direction wanted))
+phaseLiftListedRuleDeterminesStandardTransition source phase wantedOccurs =
+  Standard.listedRuleDeterminesStandardTransition
+    (phaseLiftConcreteDeterministic source _)
+    (phaseLiftRuleOccurs source phase wantedOccurs)
+    refl
+    refl
+
 ------------------------------------------------------------------------
 -- THE KEY RETURN-BOUNDARY THEOREM:
 -- no copied candidate rule has a source state in terminal phase T.
@@ -362,14 +472,52 @@ terminalResidentKeyFresh source steps q symbol residentOccurs sourceEq readEq =
   terminalDispatchKeyFresh
     source steps residentOccurs q symbol sourceEq readEq
 
+terminalFetchNothing :
+  (source : Coded.CodedFiniteStandardTM) →
+  (steps : Nat) →
+  (q : Fin.Fin (Coded.stateCount source)) →
+  (symbol : Fin.Fin (Coded.symbolCount source)) →
+  Interpreter.fetchConcreteRule
+    (phaseLiftConcreteMachine source steps)
+    (phaseTerminalState source steps q)
+    symbol
+  ≡ nothing
+terminalFetchNothing source steps q symbol
+  with Interpreter.fetchConcreteRule
+    (phaseLiftConcreteMachine source steps)
+    (phaseTerminalState source steps q)
+    symbol
+... | nothing = refl
+... | just matched =
+  ⊥-elim
+    (noResidentRuleAtTerminalPhase
+      source steps
+      (Interpreter.occurs matched)
+      q
+      (Interpreter.sourceExact matched))
+
+terminalStandardTransitionNothing :
+  (source : Coded.CodedFiniteStandardTM) →
+  (steps : Nat) →
+  (q : Fin.Fin (Coded.stateCount source)) →
+  (symbol : Fin.Fin (Coded.symbolCount source)) →
+  Standard.concreteControlTransition
+    (phaseLiftConcreteMachine source steps)
+    (phaseTerminalState source steps q)
+    symbol
+  ≡ nothing
+terminalStandardTransitionNothing source steps q symbol
+  rewrite terminalFetchNothing source steps q symbol = refl
+
 ------------------------------------------------------------------------
 -- MAX-CUT CONSEQUENCE
 --
 -- The old exact-T return obstruction is no longer an architectural blocker.
 -- For one fixed budget T, the candidate is compiled into a literal coded
--- finite machine with T+1 phase slices.  The terminal slice has no resident
--- rules at all, so `singletonSafeLinkExtension` can attach a return/opposite
--- edge there after choosing its target/write/direction.  What remains is the
--- exact whole-run lift into this phase-indexed code and integration with the
--- generator/opposite modes.
+-- finite machine with T+1 phase slices.  Every source rule is operationally
+-- selected at each k<T; the terminal slice has no resident rule for ANY scanned
+-- symbol, and its standard transition is literally `nothing`.  A safe return
+-- link can therefore be attached there without overriding candidate semantics.
+-- Remaining work is whole-run induction and integration with generator/opposite
+-- modes, not endpoint quiescence.
 ------------------------------------------------------------------------
