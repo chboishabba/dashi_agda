@@ -11,6 +11,8 @@ import DASHI.Mathematics.CrossPollination.EisensteinLeanUniversalRepresentationR
 import DASHI.Mathematics.CrossPollination.EisensteinLeanUniversalRepresentationReceiptValidation
 import DASHI.Mathematics.CrossPollination.EisensteinLeanJZeroCMOrderActionReceiptExact as LeanCM
 import DASHI.Mathematics.CrossPollination.EisensteinLeanJZeroCMOrderActionReceiptValidation
+import DASHI.Mathematics.CrossPollination.EisensteinLeanInertPrimeLocalFactorReceiptExact as LeanInert
+import DASHI.Mathematics.CrossPollination.EisensteinLeanInertPrimeLocalFactorReceiptValidation
 import DASHI.Physics.ThreeBody.EisensteinC3FourierExact as ThreeBody
 import DASHI.Physics.ThreeBody.EisensteinC3FourierValidation
 import DASHI.Mathematics.Arithmetic.EisensteinJZeroCubicSymmetryExact as Cubic
@@ -114,9 +116,29 @@ leanCMReceiptDoesNotImportKernelAuthority :
   LeanCM.leanProofObjectImportedIntoAgda ≡ false
 leanCMReceiptDoesNotImportKernelAuthority = refl
 
+leanInertSamePrimeWeldRecorded :
+  LeanInert.samePrimeWeldObserved ≡ true
+leanInertSamePrimeWeldRecorded = refl
+
+leanInertTraceZeroRecorded :
+  LeanInert.inertTraceZeroObserved ≡ true
+leanInertTraceZeroRecorded = refl
+
+leanInertLocalEulerShapeRecorded :
+  LeanInert.inertLocalEulerShapeObserved ≡ true
+leanInertLocalEulerShapeRecorded = refl
+
+leanInertReceiptDoesNotCollapseLocalFactors :
+  LeanInert.dirichletLocalFactorIdentifiedWithEllipticEulerFactor ≡ false
+leanInertReceiptDoesNotCollapseLocalFactors = refl
+
 cmFaithfulnessStillSeparate :
   LeanCM.leanFaithfulGeometricCMEmbeddingObserved ≡ false
 cmFaithfulnessStillSeparate = refl
+
+splitPrimeTraceStillSeparate :
+  LeanInert.splitPrimeTraceObserved ≡ false
+splitPrimeTraceStillSeparate = refl
 
 heckeAuthorityStillSeparate :
   LeanCM.leanHeckeCharacterObserved ≡ false
