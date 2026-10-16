@@ -3,7 +3,6 @@ module DASHI.Physics.QuantumVacuum.CasimirSetoidFullStressSameObjectExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
-import Data.Rational.Base as Rat
 open import Data.Rational.Base using (ℚ; 0ℚ)
 
 import DASHI.Analysis.ConstructedRealBackendSpineExact as Spine
@@ -243,9 +242,6 @@ fullStressNormalPressureAgreesWithAnalyticPressure reconstruction =
 data SourceBackedStressAutomaticallyIsMeasuredStress : Set where
 data SetoidQFTStressAutomaticallySolvesSemiclassicalGR : Set where
 data SetoidStressAutomaticallySuppliesLegacyQuotient : Set where
-
-aourceBackedStressIsNotMeasuredStressTypoGuard : Set
-aourceBackedStressIsNotMeasuredStressTypoGuard = ⊤
 
 sourceBackedStressIsNotMeasuredStress :
   SourceBackedStressAutomaticallyIsMeasuredStress → ⊥
