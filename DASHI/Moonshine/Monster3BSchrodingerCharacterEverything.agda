@@ -20,3 +20,8 @@ import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptExact
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact
 import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact
 import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerValidation
+
+-- Exact adapter shape for putting the literal model and the actual selected
+-- W_zeta|E constituent in one common representation/character theory.
+import DASHI.Moonshine.Monster3BCommonRepresentationTransportExact
+import DASHI.Moonshine.Monster3BCommonRepresentationTransportValidation
