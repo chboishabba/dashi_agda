@@ -15,6 +15,7 @@ import DASHI.Cognition.OpenCivilianSpatialDefenseBostonDynamicsControlExact as B
 import DASHI.Cognition.OpenCivilianSpatialDefenseConsumerSufficiencyExact as Sufficiency
 import DASHI.Cognition.OpenCivilianSpatialDefenseMobilityEnvelopeExact as Envelope
 import DASHI.Cognition.OpenCivilianSpatialDefenseCapabilityEscalationExact as Escalation
+import DASHI.Cognition.OpenCivilianSpatialDefenseTerminalMaxCutExact as Terminal
 
 gevObservationDoesNotCreateProtectiveAuthority :
   Core.observationCreatesProtectiveAuthority ≡ false
@@ -155,3 +156,19 @@ autonomousLocomotionDoesNotPromoteToTargetNomination = refl
 capabilityGraphHasNoAutomaticEscalation :
   Escalation.capabilityStageAutomaticallyPromotesToNext ≡ false
 capabilityGraphHasNoAutomaticEscalation = refl
+
+terminalStructuralTranchePaid :
+  Terminal.structuralCivilianDefenseTranchePaid ≡ true
+terminalStructuralTranchePaid = refl
+
+terminalEmpiricalRobotEmitterJoinStillOpen :
+  Terminal.realRobotEmitterSameObjectJoinPaid ≡ false
+terminalEmpiricalRobotEmitterJoinStillOpen = refl
+
+terminalCivilianOutcomeValidationStillOpen :
+  Terminal.civilianProtectionOutcomeValidationPaid ≡ false
+terminalCivilianOutcomeValidationStillOpen = refl
+
+terminalKernelReceiptStillOpen :
+  Terminal.exactHeadKernelReceiptPaid ≡ false
+terminalKernelReceiptStillOpen = refl
