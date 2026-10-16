@@ -16,13 +16,14 @@ module DASHI.Physics.Closure.MonsterExceptionalEntropyGravityCompilerExact where
 --   * the CMP119 Local-C/Wightman terminal stress consumer and trace->expansion
 --     infrastructure.
 --
--- The missing arrows are therefore physical/same-object arrows, not more
--- finite cardinality decompositions.
+-- All new scientific obligations below are proof-relevant: whenever the
+-- repository lacks a concrete proposition vocabulary, the record carries both
+-- a witness TYPE and an inhabitant of that type rather than merely a Set-valued
+-- label.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -30,14 +31,13 @@ import DASHI.Physics.Chemistry.AmmoniaMonster3BNative369FineCarrierExact as Nati
 import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleExact as Counting
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as EntropyGR
 import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact as AlbertWeld
+import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact as F4
 import DASHI.Physics.Foundations.CMP119CosmologyLocalCWightmanTerminalMaxCutExact as Wightman
 import DASHI.Physics.Foundations.CMP119CosmologyRealTraceToExpansionMaxCutExact as Expansion
 
 ------------------------------------------------------------------------
 -- 1. Physical ensemble/density-state promotion on the SAME native microstate
---    carrier.  The mathematical uniform counting ensemble is available, but
---    physical equiprobability/Hamiltonian/density-state interpretation is not
---    silently inherited from it.
+--    carrier.
 ------------------------------------------------------------------------
 
 record Native369PhysicalEnsemblePayment : Set₁ where
@@ -52,61 +52,111 @@ record Native369PhysicalEnsemblePayment : Set₁ where
     nativeMicrostateToPhysicalState :
       Native.Native369ZetaCoordinate → PhysicalState
     physicalStateToDensityState : PhysicalState → DensityState
-    hamiltonianActsOnSamePhysicalState : Set
-    densityStateNormalizedPositive : Set
-    probabilityLawDerivedFromPhysicalState : Set
-    entropyDerivedFromSameDensityState : Set
-    countingCarrierCompatibility : Set
+
+    HamiltonianSameStateWitness : Set
+    hamiltonianSameState : HamiltonianSameStateWitness
+
+    DensityNormalizedPositiveWitness : Set
+    densityNormalizedPositive : DensityNormalizedPositiveWitness
+
+    PhysicalProbabilityLawWitness : Set
+    physicalProbabilityLaw : PhysicalProbabilityLawWitness
+
+    SameDensityEntropyWitness : Set
+    sameDensityEntropy : SameDensityEntropyWitness
+
+    CountingCarrierCompatibilityWitness : Set
+    countingCarrierCompatibility : CountingCarrierCompatibilityWitness
+
+open Native369PhysicalEnsemblePayment public
 
 ------------------------------------------------------------------------
 -- 2. Same-object exceptional/state weld.
---
--- An F4 recognition is not required to define a density state, and a density
--- state is not evidence for F4.  To claim both describe one object, this
--- receipt explicitly carries the commuting state map/action law.
 ------------------------------------------------------------------------
 
 record MonsterAlbertStateIntertwiner : Set₁ where
   constructor monster-albert-state-intertwiner
   field
-    exceptionalRecognition : AlbertWeld.MonsterAlbertF4SameActionRecognition
+    exceptionalRecognition : F4.ProofRelevantMonsterAlbertF4Recognition
     physicalEnsemble : Native369PhysicalEnsemblePayment
 
     ExceptionalState : Set
     exceptionalStateToPhysicalState :
-      ExceptionalState →
-      Native369PhysicalEnsemblePayment.PhysicalState physicalEnsemble
+      ExceptionalState → PhysicalState physicalEnsemble
 
-    monsterStateToExceptionalState : Set
-    actionEquivarianceOnSameState : Set
-    exceptionalObservableFactorsThroughDensityState : Set
+    MonsterStateToExceptionalWitness : Set
+    monsterStateToExceptional : MonsterStateToExceptionalWitness
+
+    ActionEquivarianceWitness : Set
+    actionEquivarianceOnSameState : ActionEquivarianceWitness
+
+    ExceptionalObservableDensityFactorWitness : Set
+    exceptionalObservableFactorsThroughDensityState :
+      ExceptionalObservableDensityFactorWitness
+
+open MonsterAlbertStateIntertwiner public
 
 ------------------------------------------------------------------------
--- 3. Handoff into the already-existing entropy/GR and CMP119 stress lanes.
+-- 3. Make the older entropy->GR terminal contract genuinely proof-relevant.
+------------------------------------------------------------------------
+
+record ProofRelevantEntropyGravityPayment : Set₁ where
+  constructor proof-relevant-entropy-gravity-payment
+  field
+    legacyPayment : EntropyGR.EntropyGravityPhysicalPayment
+
+    continuumManifoldWitness : EntropyGR.continuumManifoldPaid legacyPayment
+    lorentzianMetricWitness : EntropyGR.lorentzianMetricPaid legacyPayment
+    tensorSourceWitness : EntropyGR.tensorSourcePaid legacyPayment
+    bianchiWitness : EntropyGR.bianchiPaid legacyPayment
+    covariantConservationWitness : EntropyGR.covariantConservationPaid legacyPayment
+    equivalencePrincipleWitness : EntropyGR.equivalencePrinciplePaid legacyPayment
+    geodesicLimitWitness : EntropyGR.geodesicLimitPaid legacyPayment
+    gravitationalRadiationWitness : EntropyGR.gravitationalRadiationPaid legacyPayment
+    einsteinDynamicsWitness : EntropyGR.einsteinDynamicsPaid legacyPayment
+    controlledCorrectionWitness : EntropyGR.controlledCorrectionPaid legacyPayment
+    empiricalOrSameObjectWitness :
+      EntropyGR.empiricalOrSameObjectValidation legacyPayment
+
+open ProofRelevantEntropyGravityPayment public
+
+------------------------------------------------------------------------
+-- 4. Handoff into the already-existing CMP119 stress lane.
 ------------------------------------------------------------------------
 
 record MonsterExceptionalStressHandoff : Set₁ where
   constructor monster-exceptional-stress-handoff
   field
     stateIntertwiner : MonsterAlbertStateIntertwiner
-    entropyGravityPayment : EntropyGR.EntropyGravityPhysicalPayment
+    entropyGravityPayment : ProofRelevantEntropyGravityPayment
 
     SelectedStressObject : Set
     densityStateToSelectedStress :
-      Native369PhysicalEnsemblePayment.DensityState
-        (MonsterAlbertStateIntertwiner.physicalEnsemble stateIntertwiner)
-      → SelectedStressObject
+      DensityState (physicalEnsemble stateIntertwiner) → SelectedStressObject
 
-    entropyTensorSourceIsSelectedStress : Set
-    selectedStressIsCMP119LocalCObject : Set
-    selectedStressUsesSameLorentzianContinuation : Set
-    selectedStressUsesSameRenormalizationConvention : Set
-    selectedStressConservedOnSameState : Set
+    EntropyTensorSourceIdentityWitness : Set
+    entropyTensorSourceIsSelectedStress : EntropyTensorSourceIdentityWitness
+
+    CMP119LocalCIdentityWitness : Set
+    selectedStressIsCMP119LocalCObject : CMP119LocalCIdentityWitness
+
+    SameLorentzianContinuationWitness : Set
+    selectedStressUsesSameLorentzianContinuation :
+      SameLorentzianContinuationWitness
+
+    SameRenormalizationConventionWitness : Set
+    selectedStressUsesSameRenormalizationConvention :
+      SameRenormalizationConventionWitness
+
+    SameStateConservationWitness : Set
+    selectedStressConservedOnSameState : SameStateConservationWitness
+
+open MonsterExceptionalStressHandoff public
 
 ------------------------------------------------------------------------
--- 4. Full pipeline target.  Existing Wightman/Expansion modules are imported
---    as the downstream consumers to be inhabited, not as evidence that the
---    Monster state has already been welded to their selected stress operator.
+-- 5. Full pipeline target.  Existing Wightman/Expansion modules are imported
+--    as downstream consumers, not evidence that the Monster source is already
+--    their selected stress object.
 ------------------------------------------------------------------------
 
 record MonsterExceptionalCosmologyRecognition : Set₁ where
@@ -116,15 +166,24 @@ record MonsterExceptionalCosmologyRecognition : Set₁ where
 
     CosmologicalState : Set
     expansionObservable : CosmologicalState → Set
-    selectedStressToCosmologicalState : Set
 
-    sameStateLocalCWightmanTerminalPaid : Set
-    sameStateTraceToExpansionPaid : Set
-    parameterFreePrediction : Set
-    heldOutEmpiricalValidation : Set
+    SelectedStressToCosmologyWitness : Set
+    selectedStressToCosmologicalState : SelectedStressToCosmologyWitness
+
+    LocalCWightmanTerminalWitness : Set
+    sameStateLocalCWightmanTerminal : LocalCWightmanTerminalWitness
+
+    TraceToExpansionWitness : Set
+    sameStateTraceToExpansion : TraceToExpansionWitness
+
+    ParameterFreePredictionWitness : Set
+    parameterFreePrediction : ParameterFreePredictionWitness
+
+    HeldOutEmpiricalValidationWitness : Set
+    heldOutEmpiricalValidation : HeldOutEmpiricalValidationWitness
 
 ------------------------------------------------------------------------
--- 5. Explicit wrong-type exclusions.
+-- 6. Explicit wrong-type exclusions.
 ------------------------------------------------------------------------
 
 data CountingMeasureCreatesPhysicalDensityMatrix : Set where
@@ -146,7 +205,7 @@ cmp119ConsumerDoesNotCreateMonsterSource : CMP119ConsumerCreatesMonsterSource �
 cmp119ConsumerDoesNotCreateMonsterSource ()
 
 ------------------------------------------------------------------------
--- 6. Current terminal status.
+-- 7. Current terminal status.
 ------------------------------------------------------------------------
 
 record MonsterExceptionalEntropyGravityBoundary : Set where
@@ -157,6 +216,7 @@ record MonsterExceptionalEntropyGravityBoundary : Set where
     proofRelevantAlbertCarrierDeletionPaid : Bool
     actualMonsterActionToAlbertTransportCompilerPaid : Bool
     entropyGravityPhysicalContractAvailable : Bool
+    entropyGravityLegacyContractHardenedProofRelevant : Bool
     cmp119LocalCWightmanConsumerAvailable : Bool
     cmp119TraceToExpansionConsumerAvailable : Bool
 
@@ -173,16 +233,17 @@ canonicalMonsterExceptionalEntropyGravityBoundary :
   MonsterExceptionalEntropyGravityBoundary
 canonicalMonsterExceptionalEntropyGravityBoundary =
   monster-exceptional-entropy-gravity-boundary
-    true true true true true true true
+    true true true true true true true true
     false false false false false false false
-    "The proof graph now runs continuously from the native Monster-zeta microstate carrier through the proof-relevant Albert 54->53 geometry into the existing entropy/GR and CMP119 Local-C/Wightman/expansion consumers. The remaining payments are same-object action/physics payments: actual Monster<->F4 action, physical density state, density->selected stress, the exact Local-C/Wightman stress identification, trace->expansion on that same state, then a parameter-free observable and held-out validation."
+    "The proof graph now runs continuously from the native Monster-zeta microstate carrier through the proof-relevant Albert 54->53 geometry into proof-relevant entropy/GR payment and the existing CMP119 Local-C/Wightman/expansion consumers. The remaining payments are same-object action/physics payments: actual Monster<->F4 action, physical density state, density->selected stress, the exact Local-C/Wightman stress identification, trace->expansion on that same state, then a parameter-free observable and held-out validation."
 
 ------------------------------------------------------------------------
--- 7. Donor objects are reached explicitly so future refactors cannot replace
+-- 8. Donor objects are reached explicitly so future refactors cannot replace
 --    this with a prose-only cross-pollination.
 ------------------------------------------------------------------------
 
 nativeCountingEnsemble = Counting.native369ZetaCountingEnsemble
 proofRelevantAlbertDeletion =
   AlbertWeld.canonicalProofRelevantBaseZetaAlbertDeletionWeld
+proofRelevantF4Boundary = F4.canonicalProofRelevantMonsterAlbertF4Boundary
 entropyGravityBoundary = EntropyGR.canonicalEntropyGravityPromotionBoundary
