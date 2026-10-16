@@ -217,9 +217,17 @@ higherStackNowPaid :
   Higher.certifiedHigherStackPaid higherBoundary ≡ true
 higherStackNowPaid = refl
 
-hypersheafStillAtHypercoverFrontier :
-  Hypercover.hypersheafPromotionNowHasSingleTypedFrontier hypercoverBoundary ≡ true
-hypersheafStillAtHypercoverFrontier = refl
+finiteTriadicHypersheafNowPaid :
+  Higher.certifiedFiniteTriadicHypersheafPaid higherBoundary ≡ true
+finiteTriadicHypersheafNowPaid = refl
+
+arbitraryInfinityHypersheafStillSeparate :
+  Higher.certifiedArbitraryInfinityHypersheafPaid higherBoundary ≡ false
+arbitraryInfinityHypersheafStillSeparate = refl
+
+finiteHypercoverFrontierClosed :
+  Hypercover.finiteOneTruncatedHypersheafCertified hypercoverBoundary ≡ true
+finiteHypercoverFrontierClosed = refl
 
 record NonginCurrentMaxCutBoundary : Set where
   field
@@ -256,7 +264,8 @@ record NonginCurrentMaxCutBoundary : Set where
     universalRicherRepresentationAdvantagePromoted : Bool
     fullBoundaryNerveEquivalencePaid : Bool
     certifiedHigherStackPaid : Bool
-    certifiedHypersheafPaid : Bool
+    certifiedFiniteTriadicHypersheafPaid : Bool
+    certifiedArbitraryInfinityHypersheafPaid : Bool
     exceptionalGroupRealizationRequiredForNongin : Bool
     physicalLawPromotionPaid : Bool
 
@@ -297,7 +306,8 @@ canonicalNonginCurrentMaxCutBoundary = record
   ; universalRicherRepresentationAdvantagePromoted = false
   ; fullBoundaryNerveEquivalencePaid = false
   ; certifiedHigherStackPaid = true
-  ; certifiedHypersheafPaid = false
+  ; certifiedFiniteTriadicHypersheafPaid = true
+  ; certifiedArbitraryInfinityHypersheafPaid = false
   ; exceptionalGroupRealizationRequiredForNongin = false
   ; physicalLawPromotionPaid = false
   }
