@@ -13,14 +13,22 @@ DEFAULT_WALLS=((2,1),(3,1),(5,1),(7,1),(11,1),(2,2),(3,2),(2,3),(13,1),(71,1))
 NON_OGG_CONTROLS=(37,43,53,61,67)
 SOURCE_COUNTS={(2,1):(271,270),(3,1):(644,581),(5,1):(1571,820),(7,1):(2660,845),(11,1):(5151,849),(2,2):(542,513),(3,2):(1931,841),(2,3):(1083,773),(13,1):(6511,849),(71,1):(59099,849)}
 SOURCE_SHIFT_SUMMARIES={(2,1):(270.3,0.9),(3,1):(594.0,8.4),(5,1):(825.4,3.2),(7,1):(845.7,0.9),(11,1):(848.5,0.6),(2,2):(519.3,4.3),(3,2):(837.4,2.5),(2,3):(771.3,3.9),(13,1):(848.7,0.5),(71,1):(849.0,0.0)}
+CACHE_SCHEMA_VERSION="1.0.0"
+CACHE_GENERATOR="mpmath.zetazero"
 
 
 def load_zero_cache(path:Path)->list[float]:
     p=json.loads(path.read_text())
-    if "ordinates" in p: z=[float(x) for x in p["ordinates"]]
+    if p.get("schema_version")!=CACHE_SCHEMA_VERSION: raise ValueError("unsupported zero-cache schema")
+    if p.get("generator")!=CACHE_GENERATOR: raise ValueError("unexpected zero-cache generator label")
+    scale=int(p["scale"])
+    if scale<=0: raise ValueError("invalid zero-cache scale")
+    if "ordinates" in p:
+        z=[float(x) for x in p["ordinates"]]
     else:
-        scale=int(p["scale"]); enc=[int(x) for x in p["first_plus_deltas"]]; z=[]; cur=0
+        enc=[int(x) for x in p["first_plus_deltas"]]; z=[]; cur=0
         for i,v in enumerate(enc): cur=v if i==0 else cur+v; z.append(cur/scale)
+    if int(p.get("count",-1))!=len(z): raise ValueError("zero-cache count metadata mismatch")
     if not z or any(x<=0 for x in z) or any(a>=b for a,b in zip(z,z[1:])): raise ValueError("invalid zero cache")
     return z
 
