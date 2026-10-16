@@ -3,26 +3,21 @@ module DASHI.Moonshine.Monster3BActualLinearIsotypicTerminalCompilerExact where
 ------------------------------------------------------------------------
 -- ACTUAL MONSTER LINEAR / ISOTYPIC TERMINAL COMPILER
 --
--- The reusable representation-theory tail is no longer the research frontier.
--- This owner collapses the surviving Monster 3B debt into one proof-relevant
--- packet of SAME literal inputs.  In particular it consumes:
+-- Reusable restriction, character, Schur, isotypic, copy-count and multiplicity
+-- coordinate mathematics is no longer the Monster-specific frontier.
 --
---   * a paid full weight-two linear bridge;
---   * a paid linear restriction to the SAME literal zeta eigensector;
---   * the literal Schrodinger model and one actual W_zeta|E constituent inside
---     one common irreducible-character theory;
---   * explicit whole-sector classifier/semisimplicity/finrank/Schur hypotheses
---     needed by the generic Lean isotypic and multiplicity compilers.
+-- The Agda-native compatibility path below still accepts the historical paid
+-- weight-two/zeta-linear wrappers, because Agda cannot import Lean theorem
+-- authority.  Companion Lean now proves that, once the SAME actual invariant
+-- linear subspaces / central linear operator are attached, restriction
+-- linearity and inclusion intertwiners are compiler outputs.  Mathlib also
+-- supplies Schur automatically once the SAME H_zeta is attached as a simple
+-- finite-dimensional representation over the algebraically closed coefficient
+-- field.
 --
--- Once the common-theory attachments are present, H_zeta recognition and the
--- action intertwiner are compiled immediately by the existing Agda theorem.
--- Whole-sector finite-copy assembly, n=90, Schur Hom coordinates and coordinate
--- evaluation/recovery are already generic companion-Lean compilers; this file
--- records their availability but does not import Lean source as Agda proof.
---
--- The actual 6.Suz/normalizer action on S_zeta, absolute zeta orientation and a
--- tensor evaluation equivalence remain actual representation data rather than
--- consequences of cardinality or character-family occurrence.
+-- Therefore this packet no longer requests a free-standing Monster Schur
+-- certificate.  It requests the more fundamental same-object simple-FDRep
+-- attachment from which the companion theorem derives Schur.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
@@ -36,6 +31,9 @@ import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannUniquenessBidiExact as Uniq
 import DASHI.Moonshine.Monster3BCommonRepresentationTransportExact as Common
 import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact as HCompiler
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as Recognition
+import DASHI.Moonshine.Monster3BInvariantRestrictionLeanReceiptExact as Restriction
+import DASHI.Moonshine.Monster3BLinearEigenspaceRestrictionLeanReceiptExact as Eigenspace
+import DASHI.Moonshine.Monster3BSchurFromSimpleFDRepLeanReceiptExact as SimpleSchur
 import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact as Isotypic
 import DASHI.Moonshine.Monster3BTwoIsotypicBlockAssemblyLeanReceiptExact as TwoBlock
 import DASHI.Moonshine.Monster3BMultiplicitySchurCoordinatesLeanReceiptExact as Schur
@@ -52,6 +50,9 @@ record ActualMonsterLinearInputPacket
     (theory : Uniqueness.IrreducibleCharacterDetermination)
     : Setω where
   field
+    -- Agda-native proof authority for the historical APIs.  On the companion
+    -- Lean path their zero/add/scalar restriction laws are compiler outputs from
+    -- actual invariant-subspace data rather than independent mathematics.
     paidWeightTwoLinearBridge :
       Hardening.PaidWeightTwoLinearActionBridge weightLegacy
 
@@ -79,8 +80,13 @@ record ActualMonsterLinearInputPacket
     ActualHZetaFinrank729 : Set
     actualHZetaFinrank729Witness : ActualHZetaFinrank729
 
-    SameHZetaSchurScalarCertificate : Set
-    sameHZetaSchurScalarCertificateWitness : SameHZetaSchurScalarCertificate
+    -- Fundamental cross-kernel same-object attachment.  Once this is paid on
+    -- the companion Lean representation, Mathlib's Schur theorem supplies the
+    -- rank-one/scalar self-intertwiner fact; no separate scientific Schur input
+    -- is required.
+    ActualHZetaSimpleComplexFDRepSameObject : Set
+    actualHZetaSimpleComplexFDRepSameObjectWitness :
+      ActualHZetaSimpleComplexFDRepSameObject
 
 open ActualMonsterLinearInputPacket public
 
@@ -132,6 +138,7 @@ open ActualMultiplicityActionPayment public
 data CharacterFamilyCreatesActualInputPacket : Set where
 data FinrankCreatesSimpleTypeClassifier : Set where
 data SchurCoordinatesCreateNormalizerAction : Set where
+data SourceRestrictionCompilerCreatesActualInvariantSubspace : Set where
 
 characterFamilyDoesNotCreateActualInputPacket :
   CharacterFamilyCreatesActualInputPacket → ⊥
@@ -145,6 +152,10 @@ schurCoordinatesDoNotCreateNormalizerAction :
   SchurCoordinatesCreateNormalizerAction → ⊥
 schurCoordinatesDoNotCreateNormalizerAction ()
 
+sourceRestrictionCompilerDoesNotCreateActualInvariantSubspace :
+  SourceRestrictionCompilerCreatesActualInvariantSubspace → ⊥
+sourceRestrictionCompilerDoesNotCreateActualInvariantSubspace ()
+
 ------------------------------------------------------------------------
 -- 5. Machine-readable terminal boundary.
 ------------------------------------------------------------------------
@@ -154,6 +165,11 @@ record Boundary : Set where
   field
     proofRelevantWeightTwoWrapperAvailable : Bool
     proofRelevantZetaLinearWrapperAvailable : Bool
+    invariantRestrictionCompilerSourceWritten : Bool
+    linearEigenspaceCompilerSourceWritten : Bool
+    restrictionLinearityIsCompilerOutputOnLeanPath : Bool
+    simpleFDRepSchurSourceWritten : Bool
+    schurRemainsIndependentMonsterInput : Bool
     commonTheoryHZetaCompilerAvailable : Bool
     hZetaRecognitionCompilerClosesAfterPacket : Bool
     genericIsotypicTailSourceWritten : Bool
@@ -174,7 +190,13 @@ open Boundary public
 
 canonicalBoundary : Boundary
 canonicalBoundary = boundary
-  true true true true
+  true true
+  (Restriction.restrictedRepresentationCompilerSourceWritten Restriction.canonicalBoundary)
+  (Eigenspace.literalLinearEigenspaceCompilerSourceWritten Eigenspace.canonicalBoundary)
+  true
+  (SimpleSchur.simpleFDRepEndRankOneSourceWritten SimpleSchur.canonicalBoundary)
+  false
+  true true
   (Isotypic.classifierToIsotypicAssemblySourceWritten Isotypic.canonicalBoundary)
   (Isotypic.postRecognitionCopyCountCompilerSourceWritten Isotypic.canonicalBoundary)
   (TwoBlock.complementaryTwoBlockLinearAssemblySourceWritten TwoBlock.canonicalBoundary)
