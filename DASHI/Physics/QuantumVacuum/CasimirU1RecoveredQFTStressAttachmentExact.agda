@@ -14,28 +14,6 @@ import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationExact 
 
 ------------------------------------------------------------------------
 -- CASIMIR U(1) -> ACTUAL RECOVERED-QFT SELECTED-SECTOR STRESS ATTACHMENT
---
--- The pinned-YM GR/QFT max-cut established the correct theorem shape:
--- first identify one literal/recovered QFT construction, then its stress is the
--- actual selected QFT stress; only after that does all-sector aggregation enter.
---
--- Casimir is an electromagnetic U(1) effect.  The live donor already pays the
--- group/Lie-algebra architectural statement that U(1) is an abelian restriction
--- inside the repository SU(2)/Yang-Mills architecture.  That does NOT identify
--- a particular compact-simple QFT sector in an arbitrary UnifiedCandidate and
--- does NOT identify its actual recovered stress with Brown-Maclay.
---
--- This owner therefore makes the first real same-object unification payment
--- literal and componentwise:
---
---   actual selected QFT sector stress
---      -- rational component evaluator --> T_ab
---      == normalized Brown-Maclay T_ab  for every Axis4 pair.
---
--- Once this attachment is inhabited, the existing qftSectorStressToShared map
--- can transport that already-selected actual QFT stress into the shared carrier.
--- It still does not pay total all-sector aggregation, common-action variation,
--- the GR stress equality, backreaction, or physical promotion.
 ------------------------------------------------------------------------
 
 record CasimirU1RecoveredQFTStressAttachment
@@ -71,6 +49,30 @@ record CasimirU1RecoveredQFTStressAttachment
     reading : String
 
 open CasimirU1RecoveredQFTStressAttachment public
+
+------------------------------------------------------------------------
+-- Recovered construction = selected QFT target on the declared overlap regime.
+------------------------------------------------------------------------
+
+recoveredQFTConstructionIsSelectedTarget :
+  ∀ {U : Weld.UnifiedCandidate} →
+  (attachment : CasimirU1RecoveredQFTStressAttachment U) →
+  Weld.recoverQFT U
+    (Weld.microscopicState U
+      (Weld.coarseGrain U
+        (candidate attachment)
+        (regime attachment)))
+  ≡
+  Weld.qftTarget U
+    (Weld.coarseGrain U
+      (candidate attachment)
+      (regime attachment))
+recoveredQFTConstructionIsSelectedTarget {U} attachment =
+  Weld.qftRecoveryAfterCoarseGrainingCommutes
+    (qftRecovery attachment)
+    (candidate attachment)
+    (regime attachment)
+    (qftAtRegime attachment)
 
 actualSelectedQFTStress :
   ∀ {U : Weld.UnifiedCandidate} →
@@ -161,6 +163,7 @@ record CasimirU1RecoveredQFTStressAttachmentBoundary : Set where
   field
     u1YangMillsGaugeArchitectureAvailable : Bool
     selectedQFTSectorStressAttachmentInterfaceOwned : Bool
+    recoveredQFTCommutationConsumed : Bool
     componentwiseBrownMaclayEqualityTargetOwned : Bool
     actualSelectedSectorSharedTransportAlreadyExists : Bool
 
@@ -176,9 +179,9 @@ canonicalCasimirU1RecoveredQFTStressAttachmentBoundary :
   CasimirU1RecoveredQFTStressAttachmentBoundary
 canonicalCasimirU1RecoveredQFTStressAttachmentBoundary =
   casimir-u1-recovered-qft-stress-attachment-boundary
-    true true true true
+    true true true true true
     false false false false false
 
 casimirU1RecoveredQFTStressAttachmentReading : String
 casimirU1RecoveredQFTStressAttachmentReading =
-  "The first Casimir GR/QFT unification stress leaf is now explicit: choose the actual recovered-QFT compact-simple sector that hosts the canonical electromagnetic U(1) restriction, provide a rational evaluator for its actual selected QFT stress, and prove every Axis4 component equals the normalized Brown-Maclay tensor on the same boundary/renormalization object. The existing qftSectorStressToShared map then transports that selected stress into the shared carrier. This attachment does not pay all-sector aggregation, common-action variation, GR stress equality, backreaction, or unified-QG promotion."
+  "The first Casimir GR/QFT unification stress leaf is now explicit: on an already-declared QFT overlap regime, QFT recovery commutes to the selected target; choose the actual compact-simple sector that hosts the canonical electromagnetic U(1) restriction, provide a rational evaluator for its actual selected QFT stress, and prove every Axis4 component equals the normalized Brown-Maclay tensor on the same boundary/renormalization object. The existing qftSectorStressToShared map then transports that selected stress into the shared carrier. This attachment does not pay all-sector aggregation, common-action variation, GR stress equality, backreaction, or unified-QG promotion."
