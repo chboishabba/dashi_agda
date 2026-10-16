@@ -16,6 +16,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Moonshine.JackDanielsNaturalMonsterRecognitionMaxCutExact as JD
 import DASHI.Moonshine.JackDanielsJCoarseFineNaturalRecognitionExact as JCF
 import DASHI.Moonshine.JackDanielsCoarseJFrickeSensitivityNoGoExact as JCFNoGo
+import DASHI.Moonshine.JackDanielsSmallPrimeJCoarseFineTerminalMaxCutExact as JSP
 import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact as Albert
 import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact as F4
 import DASHI.Moonshine.MonsterExceptionalActorScopedMaxCutExact as ActorScoped
@@ -71,6 +72,18 @@ JCF1 = research-deliverable
   "JCF1" false
   "DASHI.Moonshine.JackDanielsJCoarseFineNaturalRecognitionExact.JCoarseFineMonsterFactorization"
   "after J3 is inhabited, identify its ModularDatum two-sidedly with the literal FinePoint and prove whether the Monster consumer factors through the full finite jCoarse/jFine observation; coarse-only selection is already ruled out for Fricke-sensitive consumers"
+
+JSP0 : ResearchDeliverable
+JSP0 = research-deliverable
+  "JSP0" true
+  "DASHI.Moonshine.JackDanielsSmallPrimeJCoarseFineTerminalMaxCutExact"
+  "p=2,3 finite recognition/JCoarse/JFine/generalized-moonshine/bad-level inputs have been consolidated into one attribution-preserving terminal cut; do not reopen finite-code or scalar-matching searches"
+
+JSP1 : ResearchDeliverable
+JSP1 = research-deliverable
+  "JSP1" false
+  "DASHI.Moonshine.JackDanielsSmallPrimeJCoarseFineTerminalMaxCutExact.SmallPrimeNaturalRecognitionTerminalAuthority"
+  "inhabit one same bad-level Aricheta-Igusa object carrying the Monster-centralizer/Fricke description and the corrected twisted-trace valuation, then prove compatibility with the full JCoarse/JFine fine-point observer and independent-369 recognition"
 
 E0 : ResearchDeliverable
 E0 = research-deliverable
@@ -128,8 +141,8 @@ X1 = research-deliverable
 
 allDeliverables : List ResearchDeliverable
 allDeliverables =
-  J0 ∷ J1 ∷ J2 ∷ J3 ∷ JCF0 ∷ JCFN ∷ JCF1 ∷ E0 ∷ EA ∷ E1C3 ∷ E1N ∷
-  S1 ∷ G1 ∷ G2 ∷ C1 ∷ X1 ∷ []
+  J0 ∷ J1 ∷ J2 ∷ J3 ∷ JCF0 ∷ JCFN ∷ JCF1 ∷ JSP0 ∷ JSP1 ∷
+  E0 ∷ EA ∷ E1C3 ∷ E1N ∷ S1 ∷ G1 ∷ G2 ∷ C1 ∷ X1 ∷ []
 
 record TerminalMaxCutBoundary : Set where
   constructor terminal-max-cut-boundary
@@ -137,6 +150,8 @@ record TerminalMaxCutBoundary : Set where
     finiteJackDanielsSupportPaid : Bool
     jCoarseFineObserverIntegrationPaid : Bool
     coarseJFrickeSensitivityNoGoPaid : Bool
+    smallPrimeTerminalLocalizationPaid : Bool
+    smallPrimeSameObjectBadLevelAuthorityStillLive : Bool
     jCoarseFineMonsterFactorizationStillLive : Bool
     proofRelevantAlbertCarrierPaid : Bool
     exceptionalActorScopingPaid : Bool
@@ -152,4 +167,4 @@ record TerminalMaxCutBoundary : Set where
 
 canonicalTerminalMaxCutBoundary : TerminalMaxCutBoundary
 canonicalTerminalMaxCutBoundary = terminal-max-cut-boundary
-  true true true true true true false true true true true true true true true
+  true true true true true true true true false true true true true true true true true
