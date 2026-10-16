@@ -46,7 +46,23 @@ def test_conditioning_acquisition_script_is_exact_artifact_scoped_and_builds_sam
     assert "certificate_scope" in text
 
 
-def test_conditioning_owner_separates_same_source_h_executable_audit_from_unobserved_numeric_receipt():
+def test_real_conditioning_owner_records_verified_execution_and_preserves_scope_boundary():
+    p = ROOT / "DASHI/Physics/Optics/BerkeleyDiffuserCamRealConditioningExecutionExact.agda"
+    text = p.read_text()
+    assert "db59065bdaf44fe771a6d3fbe22ae3c703527b5f" in text
+    assert "fdbc8b2c7a8753f146e1b270a3f0ae2d0f70cb2c4ff49aef4a926670c0f7c906" in text
+    assert "verifiedArtifactBytes = 10823885" in text
+    assert "numericalRank = 44" in text
+    assert "selectedColumnCount = 396" in text
+    assert "maxSceneSparsityPositiveBound = 1" in text
+    assert "depthOnlyNumericalReceiptCaptured = true" in text
+    assert "translatedColumnNumericalReceiptCaptured = true" in text
+    assert "finiteSelectedFamilyRestrictedKappaPaid = true" in text
+    assert "allResolutionCameraRIPPaid = false" in text
+    assert "matchedPhotonComparisonPaid = false" in text
+
+
+def test_conditioning_owner_consumes_real_receipt_without_promoting_all_resolution_rip():
     p = ROOT / "DASHI/Physics/Optics/BerkeleyDiffuserCamDepthConditioningExact.agda"
     text = p.read_text()
     assert "publishedPSFArtifactUsed = true" in text
@@ -54,9 +70,10 @@ def test_conditioning_owner_separates_same_source_h_executable_audit_from_unobse
     assert "sourceOperatorSelectedGridColumnCompilerPaid = true" in text
     assert "translatedColumnRestrictedAuditExecutable = true" in text
     assert "coherenceToSparseLowerBoundCompilerPaid = true" in text
-    assert "depthOnlyNumericalReceiptCaptured = false" in text
-    assert "translatedColumnNumericalReceiptCaptured = false" in text
-    assert "globalSparseRestrictedKappaPaid = false" in text
+    assert "depthOnlyNumericalReceiptCaptured = RealExecution.depthOnlyNumericalReceiptCaptured" in text
+    assert "translatedColumnNumericalReceiptCaptured = RealExecution.translatedColumnNumericalReceiptCaptured" in text
+    assert "globalSparseRestrictedKappaPaid = RealExecution.finiteSelectedFamilyRestrictedKappaPaid" in text
+    assert "allResolutionCameraRIPPaid = RealExecution.allResolutionCameraRIPPaid" in text
 
 
 def test_convrml_parallel_comparator_pays_hardware_capture_coordinates_and_preserves_exposure_provenance_mismatch():
@@ -101,10 +118,11 @@ def test_pld_exposure_provenance_collision_reuses_experimental_coordinate_design
     assert "exactDatasetExposureProvenancePaid = false" in text
 
 
-def test_optics_rollup_and_acquisition_maxcut_include_same_source_h_audit_and_capture_provenance_without_duplicate_source_owners():
+def test_optics_rollup_and_acquisition_maxcut_include_real_execution_without_duplicate_source_owners():
     rollup = (ROOT / "DASHI/Physics/Optics/Everything.agda").read_text()
     assert "BerkeleyDiffuserCamPublicCalibrationExact" in rollup
     assert "BerkeleyDiffuserCamSourceOperatorExact" in rollup
+    assert "BerkeleyDiffuserCamRealConditioningExecutionExact" in rollup
     assert "BerkeleyDiffuserCamDepthConditioningExact" in rollup
     assert "BerkeleyConvRMLParallelComparatorExact" in rollup
     assert "BerkeleyPLDExposureProvenanceCoordinateExact" in rollup
@@ -122,9 +140,9 @@ def test_optics_rollup_and_acquisition_maxcut_include_same_source_h_audit_and_ca
     assert "parallelExposureCalibrationPinned = true" in maxcut
     assert "releasedCaptureGainAndFormatPinned = true" in maxcut
     assert "exposureProvenanceCollisionFormalised = true" in maxcut
-    assert "parallelExposureProvenanceReconciled = false" in maxcut
-    assert "berkeleyNumericPSFArrayIngested = false" in maxcut
-    assert "translatedColumnNumericalReceiptCaptured = false" in maxcut
-    assert "sameHRestrictedConditionNumberMeasured = false" in maxcut
+    assert "parallelExposureProvenanceReconciled = ExposureProvenance.exactDatasetExposureProvenancePaid" in maxcut
+    assert "berkeleyNumericPSFArrayIngested = RealConditioning.realPSFArtifactIdentityVerified" in maxcut
+    assert "translatedColumnNumericalReceiptCaptured = Conditioning.translatedColumnNumericalReceiptCaptured" in maxcut
+    assert "sameHRestrictedConditionNumberMeasured = Conditioning.globalSparseRestrictedKappaPaid" in maxcut
     assert "matchedPhotonAcrossParallelSystems = false" in maxcut
     assert "focusedLensDiffuserFZPMatchedPhotonReceipt = false" in maxcut
