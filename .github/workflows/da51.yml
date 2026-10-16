@@ -1,0 +1,26 @@
+name: DA51
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/DA51/**'
+      - 'DASHI/HME/Trace.agda'
+      - '.github/workflows/da51.yml'
+  workflow_dispatch:
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and standard library
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y agda agda-stdlib
+      - name: Check DA51 core
+        run: agda -i . -i /usr/share/agda-stdlib DASHI/DA51/Core.agda
+      - name: Check DA51 atlas codec and fixtures
+        run: agda -i . -i /usr/share/agda-stdlib DASHI/DA51/Fixtures.agda
+      - name: Check typed HME boundary
+        run: agda -i . -i /usr/share/agda-stdlib DASHI/HME/Trace.agda
