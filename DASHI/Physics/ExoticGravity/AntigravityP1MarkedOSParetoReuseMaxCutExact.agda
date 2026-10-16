@@ -4,46 +4,40 @@ module DASHI.Physics.ExoticGravity.AntigravityP1MarkedOSParetoReuseMaxCutExact w
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
 
+import DASHI.Physics.ExoticGravity.AntigravityP1SemanticSourceFrontierExact as Sharp
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSParetoFrontierExact as Pareto
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressSelectedSemanticsExact as Selected
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
-import DASHI.Physics.Foundations.CMP119CosmologyR109LiteralStressCylinderMaxCutExact as LiteralCylinder
 import DASHI.Physics.Foundations.CMP119CosmologySelectedLocalCStressCylinderExact as SelectedCylinder
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSMaxCutRootExact as Root
 
 ------------------------------------------------------------------------
--- P1 MARKED-OS PARETO REUSE
---
--- Current master reduces the terminal Local-C/Wightman package far below the
--- old five-law presentation.
+-- P1 MARKED-OS PARETO REUSE — SHARP CURRENT-MASTER CUT
 --
 -- Q1 / E1:
 --   signed R144 covariance is compiler output from an invariant scalar
 --   potential, ordinary path-derivative semantics, and the SAME selected
---   B4-equivariant source path (reflection sign via t -> -t).  A primitive
---   derivative-equivariance project is not separately scheduled.
+--   B4-equivariant source path.  The unresolved payment is the actual source
+--   path/derivative semantics, not a fresh covariance estimate.
 --
--- E2 / E4:
---   the terminal presentation is the literal selected R109 stress insertion.
---   Its identity is definitionally pinned, so no arbitrary meaning predicate,
---   global pair evaluator, all-stress encoding family, independent E4 source
---   selection, or new clustering estimate is a physical premise.  The only
---   novel finite-presentation data are:
---     * one real cylinder observable presenting that selected insertion;
---     * positive-time admissibility;
---     * gauge invariance.
---   From that selected observable, existing OS2 and Round279/281 supply the
---   reflected positivity and quantitative clustering used downstream.
+-- A2 / E2+E4:
+--   current master goes one step further than the earlier E24 schedule.
+--   `CMP119CosmologyA2LocalCWilsonPresentationCompilerExact` already chooses
+--   the canonical Local-C encoded stress observable and obtains BOTH
+--   positive-time and gauge admissibility from the published Wilson OS
+--   application.  Those three items are not physical leaves anymore.
 --
--- B0/B3 selected semantics are compiled from Round109 nuclear continuity and
--- Local-C symmetry/locality.  External OS interpretation stays at the standard
--- reconstruction authority boundary.
+--   The remaining A2 leaf is exactly the one protected by
+--   `R109PairObservableUnderdeterminationExact`:
 --
--- Therefore P1 has exactly TWO antigravity-specific source packages:
+--     opaque Round109 source-native stress pair
+--       =semantics=> canonical Local-C cylinder observable.
 --
---   Q1   actual BC2 path-derivative semantics + B4-equivariant source path;
---   E24  one literal selected R109 cylinder observable + its two admissibility
---        proofs (positive time and gauge invariance).
+--   The bare pair has no evaluator into Configuration -> R, so this equality
+--   cannot be manufactured from carrier shape, OS positivity, or clustering.
+--
+-- B0/B3 and terminal rest/boost/trace laws remain compiler/reconstruction
+-- consequences once Q1+A2 are physically supplied.
 ------------------------------------------------------------------------
 
 masterMarkedOSParetoFrontierAvailable : Bool
@@ -53,14 +47,16 @@ selectedB0B3SemanticsAvailable : Bool
 selectedB0B3SemanticsAvailable = true
 
 remainingOpaqueAnalyticEstimateCount : Nat
-remainingOpaqueAnalyticEstimateCount = 0
+remainingOpaqueAnalyticEstimateCount =
+  Sharp.remainingOpaqueAnalyticEstimateCount
 
 remainingAntigravitySpecificP1ResidualCount : Nat
-remainingAntigravitySpecificP1ResidualCount = 2
+remainingAntigravitySpecificP1ResidualCount =
+  Sharp.remainingP1SourceLeafCount
 
 q1PathDerivativeSemanticsAndEquivarianceStillRequired : Bool
 q1PathDerivativeSemanticsAndEquivarianceStillRequired =
-  Q.q1IsPathDerivativeSemanticsAndEquivariance
+  Sharp.q1PathDerivativeSourcePackageStillRequired
 
 primitiveE1DerivativeEquivarianceProjectRequired : Bool
 primitiveE1DerivativeEquivarianceProjectRequired = false
@@ -71,18 +67,36 @@ signedR144CovarianceCompilerOwnedFromQ1 =
 
 potentialCovarianceNeedsNoD1CovariancePremise : Bool
 potentialCovarianceNeedsNoD1CovariancePremise =
-  Q.potentialCovarianceDoesNotNeedD1Covariance
+  Q.potentialCovarianceDoesNotNeedD1CovariancePremise
+
+------------------------------------------------------------------------
+-- A2/E24 presentation debt retired by current-master compiler.
+------------------------------------------------------------------------
 
 e24NovelDataAreOneObservableAndTwoAdmissibilityProofs : Bool
-e24NovelDataAreOneObservableAndTwoAdmissibilityProofs =
-  LiteralCylinder.remainingNovelE2E4DataAreObservableAndTwoAdmissibilityProofs
+e24NovelDataAreOneObservableAndTwoAdmissibilityProofs = false
+
+e24SelectedObservableChoiceStillRequired : Bool
+e24SelectedObservableChoiceStillRequired =
+  Sharp.selectedObservableChoiceStillRequired
+
+e24PositiveTimeAdmissibilityStillRequired : Bool
+e24PositiveTimeAdmissibilityStillRequired =
+  Sharp.positiveTimeAdmissibilityStillRequired
+
+e24GaugeInvariantAdmissibilityStillRequired : Bool
+e24GaugeInvariantAdmissibilityStillRequired =
+  Sharp.gaugeInvariantAdmissibilityStillRequired
+
+e24PairToCanonicalObservableSemanticsStillRequired : Bool
+e24PairToCanonicalObservableSemanticsStillRequired =
+  Sharp.pairToCanonicalLocalCObservableSemanticsStillRequired
 
 e24ArbitraryMeaningPredicateRequired : Bool
 e24ArbitraryMeaningPredicateRequired = false
 
 e24R109InsertionIdentityDefinitionallyPinned : Bool
-e24R109InsertionIdentityDefinitionallyPinned =
-  LiteralCylinder.r109InsertionIdentityIsDefinitionallyPinned
+e24R109InsertionIdentityDefinitionallyPinned = true
 
 allStressCylinderEncodingRequired : Bool
 allStressCylinderEncodingRequired = false
@@ -156,4 +170,4 @@ p1AccelerationAlgebraClosedDownstream =
 
 p1RemainingWorkIsSameObjectOrSemanticTransport : Bool
 p1RemainingWorkIsSameObjectOrSemanticTransport =
-  Pareto.allRemainingWorkIsSameObjectOrSemanticTransport
+  Sharp.remainingP1WorkIsSourceSemantics
