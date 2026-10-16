@@ -24,6 +24,10 @@ pinnedCompactSimpleCompilerOwnedRegression :
   H.pinnedYMConstructionSuppliesCompactSimpleCompiler H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
 pinnedCompactSimpleCompilerOwnedRegression = refl
 
+structuralBaseCompactSimpleCompilerOwnedRegression :
+  H.literalClayStructuralBaseSuppliesCompactSimpleCompiler H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+structuralBaseCompactSimpleCompilerOwnedRegression = refl
+
 selectedCompactSimpleStillOpenRegression :
   H.selectedGroupCompactSimpleWitnessPaid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
 selectedCompactSimpleStillOpenRegression = refl
