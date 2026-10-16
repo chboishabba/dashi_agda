@@ -4,6 +4,10 @@ open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.Monster3BRepresentationNativeCurrentMaxCutExact as Cut
 
+genericSimpleSubobjectClassifierAlreadySourceWritten :
+  Cut.Boundary.genericSimpleSubobjectClassifierSourceWritten Cut.canonicalBoundary ≡ true
+genericSimpleSubobjectClassifierAlreadySourceWritten = refl
+
 genericIsotypicAssemblyAlreadySourceWritten :
   Cut.Boundary.genericIsotypicAssemblySourceWritten Cut.canonicalBoundary ≡ true
 genericIsotypicAssemblyAlreadySourceWritten = refl
@@ -36,9 +40,9 @@ actualLinearZetaRestrictionStillUnpaid :
   Cut.Boundary.actualPaidLinearZetaRestriction Cut.canonicalBoundary ≡ false
 actualLinearZetaRestrictionStillUnpaid = refl
 
-actualSimpleTypeClassifierStillUnpaid :
-  Cut.Boundary.actualSimpleTypeClassifier Cut.canonicalBoundary ≡ false
-actualSimpleTypeClassifierStillUnpaid = refl
+actualSimpleTypeClassifierInstantiationStillUnpaid :
+  Cut.Boundary.actualSimpleTypeClassifierInstantiation Cut.canonicalBoundary ≡ false
+actualSimpleTypeClassifierInstantiationStillUnpaid = refl
 
 actualIsotypicEquivalenceStillUnpaid :
   Cut.Boundary.actualWholeSectorIsotypicEquivalence Cut.canonicalBoundary ≡ false
