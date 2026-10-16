@@ -12,6 +12,12 @@ obstruction-is-numerical-not-solved = refl
 full-thf-remains-open : A.thfSourceFaithfulSelfConsistentSolve A.currentTerminalExecutionAddendum ≡ T.openCalibrationOrExecution
 full-thf-remains-open = refl
 
+qtm-public-routes-source-paid : A.qtmPublicAcquisitionRoutes A.currentTerminalExecutionAddendum ≡ T.sourcePaid
+qtm-public-routes-source-paid = refl
+
+entropy-public-routes-source-paid : A.entropyPublicAcquisitionRoutes A.currentTerminalExecutionAddendum ≡ T.sourcePaid
+entropy-public-routes-source-paid = refl
+
 entropy-maxwell-kernel-executed : A.entropyMaxwellReplayKernel A.currentTerminalExecutionAddendum ≡ T.numericallyExecuted
 entropy-maxwell-kernel-executed = refl
 
@@ -20,6 +26,9 @@ entropy-bytes-still-open = refl
 
 availability-is-not-replay : A.sourceDataAvailabilityCountsAsReplay A.currentTerminalExecutionAddendum ≡ false
 availability-is-not-replay = refl
+
+route-is-not-byte-acquisition : A.acquisitionRouteCountsAsByteAcquisition A.currentTerminalExecutionAddendum ≡ false
+route-is-not-byte-acquisition = refl
 
 synthetic-maxwell-is-not-measured-replay : A.entropyMaxwellSyntheticFixtureCountsAsMeasuredReplay A.currentTerminalExecutionAddendum ≡ false
 synthetic-maxwell-is-not-measured-replay = refl
