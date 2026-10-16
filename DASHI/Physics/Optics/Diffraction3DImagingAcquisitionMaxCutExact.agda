@@ -6,6 +6,7 @@ import DASHI.Physics.Optics.Diffraction3DImagingPhysicalMaxCutExact as Physical
 import DASHI.Physics.Optics.BerkeleyDiffuserCamPublicCalibrationExact as Calibration
 import DASHI.Physics.Optics.BerkeleyDiffuserCamSourceOperatorExact as SourceOperator
 import DASHI.Physics.Optics.BerkeleyDiffuserCamDepthConditioningExact as Conditioning
+import DASHI.Physics.Optics.BerkeleyDiffuserCamRealConditioningExecutionExact as RealConditioning
 import DASHI.Physics.Optics.DiffuserCamLocalExecutionReceiptExact as LocalExecution
 import DASHI.Physics.Optics.BerkeleyLenslessInformationDesignSourceExact as InfoSource
 import DASHI.Physics.Optics.BerkeleyPhotonTransferCalibrationExact as PhotonTransfer
@@ -22,17 +23,19 @@ import DASHI.Physics.Optics.BerkeleyPLD100kReleaseProvenanceExact as Release100k
 -- information-design experiment, the ConvRML comparator, source-executed
 -- detector photon-transfer calibration, and publication-level provenance for
 -- the synchronized 100k PLD. Local execution pays synthetic source-H / finite-
--- support / memory-planner / photon-transfer compiler receipts plus a real-data
--- execution over 15 matched RML/diffuser characterization TIFF positions.
+-- support / memory-planner / photon-transfer compiler receipts, real measured
+-- characterization, and now the exact pinned Waller example_psfs.mat same-H
+-- conditioning execution.
 --
 -- Important non-collapse boundaries:
+--   * real Waller PSF bytes + finite same-H radius-1 receipt: PAID;
+--   * all-resolution camera RIP or k>=2 coherence guarantee: UNPAID;
 --   * published 100k acquisition exposure identity: PAID (80/50/4 ms);
 --   * exact released-archive run-log identity: UNPAID;
 --   * detected DN -> photon-count calibration: PAID;
 --   * real measured characterization in detected-photon units: PAID;
 --   * characterization exposure-normalized response: UNPAID;
---   * incident-photon optical throughput / matched input flux: UNPAID;
---   * real Waller example_psfs.mat same-H numerical receipt: UNPAID.
+--   * incident-photon optical throughput / matched input flux: UNPAID.
 ------------------------------------------------------------------------
 
 record Diffraction3DImagingAcquisitionMaxCut : Set where
@@ -95,7 +98,7 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; localSyntheticOperatorReceiptCaptured = LocalExecution.syntheticOperatorReceiptCaptured
   ; localExhaustiveFiniteSupportReceiptCaptured = LocalExecution.exhaustiveFiniteSupportReceiptCaptured
   ; claimScaleMemoryPlannerExecutable = true
-  ; localClaimScalePlannerReceiptCaptured = LocalExecution.claimScalePlannerReceiptCaptured
+  ; localClaimScalePlannerReceiptCaptured = RealConditioning.realClaimScalePlannerReceiptCaptured
   ; localFocusedReceiptPytestCaptured = LocalExecution.focusedReceiptContractPytestCaptured
   ; fullRepositoryPytestCaptured = LocalExecution.fullRepositoryPytestCaptured
   ; agdaKernelReceiptCaptured = LocalExecution.agdaKernelReceiptCaptured
@@ -103,10 +106,10 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; depthConditioningAuditExecutable = true
   ; translatedColumnRestrictedAuditExecutable = true
   ; coherenceSparseLowerBoundCompilerPaid = true
-  ; berkeleyNumericPSFArrayIngested = false
-  ; depthOnlyNumericalReceiptCaptured = false
-  ; translatedColumnNumericalReceiptCaptured = false
-  ; sameHRestrictedConditionNumberMeasured = false
+  ; berkeleyNumericPSFArrayIngested = RealConditioning.realPSFArtifactIdentityVerified
+  ; depthOnlyNumericalReceiptCaptured = Conditioning.depthOnlyNumericalReceiptCaptured
+  ; translatedColumnNumericalReceiptCaptured = Conditioning.translatedColumnNumericalReceiptCaptured
+  ; sameHRestrictedConditionNumberMeasured = Conditioning.globalSparseRestrictedKappaPaid
   ; publishedInformationDesignExperimentPinned = true
   ; matchedAnalysisPhotonNormalizationPinned = true
   ; sourceExecutedPhotonTransferCalibrationPinned = true
@@ -139,7 +142,7 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
 calibrationArtifactSourceStatus : Bool
 calibrationArtifactSourceStatus = Calibration.publicCalibrationArtifactPinned
 numericPSFSourceStatus : Bool
-numericPSFSourceStatus = Calibration.numericPSFArrayIngested
+numericPSFSourceStatus = RealConditioning.realPSFArtifactIdentityVerified
 sourceOperatorMaterialisationStatus : Bool
 sourceOperatorMaterialisationStatus = SourceOperator.numericOperatorMatrixMaterialised
 offlineSyntheticSelfTestStatus : Bool
@@ -151,7 +154,7 @@ localExhaustiveSupportReceiptStatus = LocalExecution.exhaustiveFiniteSupportRece
 claimScaleMemoryPlannerStatus : Bool
 claimScaleMemoryPlannerStatus = Conditioning.claimScaleMemoryPlannerExecutable
 localClaimScaleReceiptStatus : Bool
-localClaimScaleReceiptStatus = LocalExecution.claimScalePlannerReceiptCaptured
+localClaimScaleReceiptStatus = RealConditioning.realClaimScalePlannerReceiptCaptured
 localFocusedPytestReceiptStatus : Bool
 localFocusedPytestReceiptStatus = LocalExecution.focusedReceiptContractPytestCaptured
 fullRepositoryPytestReceiptStatus : Bool
