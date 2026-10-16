@@ -8,6 +8,7 @@ import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoBlochRepresentationBoundary
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPublishedMaterialProducerExact as Material
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoWannierSpectralProducerExact as Wannier
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoWannierBNSCovarianceExact as WannierBNS
+import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoWannier3DResponseExact as Response3D
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPublishedARPESConstraintsExact as PublishedARPES
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoKzCalibrationCrossPollinationExact as Kz
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoIndependentTheoryCrossValidationExact as Independent
@@ -30,6 +31,7 @@ record CoQuarterTaSeTwoMaxCutStatus : Set where
     wannierProducerRouteFixed : Bool
     wannierFormatConsumerImplemented : Bool
     materialBasisBNSCovarianceConsumerImplemented : Bool
+    wannier3DResponseConsumerImplemented : Bool
     publishedARPESSummaryConstraintsFixed : Bool
     kzCalibrationRouteFixed : Bool
     rawIgorObserverConsumerImplemented : Bool
@@ -39,6 +41,9 @@ record CoQuarterTaSeTwoMaxCutStatus : Set where
     forwardFitConsumerImplemented : Bool
     materialHamiltonianClosed : Bool
     materialBasisCovarianceClosed : Bool
+    co3DSpinTextureClosed : Bool
+    coBerryTopologyClosed : Bool
+    coSOCContinuationClosed : Bool
     rawARPESPayloadPresent : Bool
     exactSpectralObserverClosed : Bool
     quantitativeFitClosed : Bool
@@ -48,10 +53,10 @@ canonicalCoQuarterTaSeTwoMaxCutStatus : CoQuarterTaSeTwoMaxCutStatus
 canonicalCoQuarterTaSeTwoMaxCutStatus =
   co-quarter-tase-two-max-cut-status
     true true true true true true
-    true true true true true
+    true true true true true true
     true true true
     true true true true
-    false false false false false
+    false false false false false false false false
     true
 
 existingBNSStatus : BNS.OperationSameObjectStatus
@@ -68,6 +73,9 @@ existingWannierProducerStatus = Wannier.canonicalWannierProducerStatus
 
 existingMaterialBasisCovarianceStatus : WannierBNS.MaterialBasisCovarianceStatus
 existingMaterialBasisCovarianceStatus = WannierBNS.canonicalMaterialBasisCovarianceStatus
+
+existingWannier3DResponseStatus : Response3D.Wannier3DResponseStatus
+existingWannier3DResponseStatus = Response3D.canonicalWannier3DResponseStatus
 
 existingPublishedARPESStatus : PublishedARPES.PublishedTargetStatus
 existingPublishedARPESStatus = PublishedARPES.canonicalPublishedTargetStatus
@@ -95,13 +103,15 @@ record IrreduciblePhysicalResidual : Set where
   field
     exactElectronicStructureArtifactNeeded : Bool
     sameBasisMaterialSewingArtifactNeeded : Bool
+    sameBasisSpinOperatorArtifactNeeded : Bool
     materialSOCExchangeHamiltonianNeeded : Bool
     rawSpinARPESPayloadNeeded : Bool
     rawARPESCalibrationManifestNeeded : Bool
     calibratedSpectralObserverNeeded : Bool
+    co3DResponseExecutionNeeded : Bool
     quantitativeForwardFitNeeded : Bool
     furtherAbstractToyLayerNeeded : Bool
 
 canonicalIrreduciblePhysicalResidual : IrreduciblePhysicalResidual
 canonicalIrreduciblePhysicalResidual =
-  irreducible-physical-residual true true true true true true true false
+  irreducible-physical-residual true true true true true true true true true false
