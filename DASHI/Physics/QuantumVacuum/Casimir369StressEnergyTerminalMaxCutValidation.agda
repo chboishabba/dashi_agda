@@ -4,12 +4,10 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.Casimir369StressEnergyTerminalMaxCutExact as Terminal
 import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationValidation
+import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostValidation
+import DASHI.Physics.QuantumVacuum.CasimirBrownMaclaySymmetricStressReductionValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1RecoveredQFTStressAttachmentValidation
 import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact as Round131
-
-------------------------------------------------------------------------
--- RED-first terminal regression surface.
-------------------------------------------------------------------------
 
 finiteStructurePaidRegression :
   Terminal.finite369StructurePaid Terminal.canonicalTerminalBoundary ≡ true
@@ -43,6 +41,18 @@ u1YangMillsArchitecturePaidRegression :
   Terminal.u1YangMillsGaugeArchitectureHandoffPaid Terminal.canonicalTerminalBoundary ≡ true
 u1YangMillsArchitecturePaidRegression = refl
 
+selectedQFTSU2HostInterfacePaidRegression :
+  Terminal.selectedQFTSU2HostInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
+selectedQFTSU2HostInterfacePaidRegression = refl
+
+brownMaclayTenComponentReductionPaidRegression :
+  Terminal.brownMaclayTenComponentReductionPaid Terminal.canonicalTerminalBoundary ≡ true
+brownMaclayTenComponentReductionPaidRegression = refl
+
+sixteenBrownMaclayPaymentsNotRequiredRegression :
+  Terminal.sixteenIndependentBrownMaclayComponentsRequired Terminal.canonicalTerminalBoundary ≡ false
+sixteenBrownMaclayPaymentsNotRequiredRegression = refl
+
 selectedSectorAttachmentInterfacePaidRegression :
   Terminal.casimirSelectedRecoveredQFTSectorAttachmentInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
 selectedSectorAttachmentInterfacePaidRegression = refl
@@ -55,9 +65,25 @@ concreteScaleStillOpenRegression :
   Terminal.concreteCanonicalSetoidScaleWitnessPaid Terminal.canonicalTerminalBoundary ≡ false
 concreteScaleStillOpenRegression = refl
 
-selectedGroupHostStillOpenRegression :
-  Terminal.casimirSelectedQFTGroupHostsCanonicalU1Paid Terminal.canonicalTerminalBoundary ≡ false
-selectedGroupHostStillOpenRegression = refl
+selectedGroupCompactSimpleStillOpenRegression :
+  Terminal.selectedQFTGroupCompactSimpleWitnessPaid Terminal.canonicalTerminalBoundary ≡ false
+selectedGroupCompactSimpleStillOpenRegression = refl
+
+selectedGroupSprint105SU2StillOpenRegression :
+  Terminal.selectedQFTGroupSprint105SU2ClassificationPaid Terminal.canonicalTerminalBoundary ≡ false
+selectedGroupSprint105SU2StillOpenRegression = refl
+
+selectedGroupQuaternionSU2StillOpenRegression :
+  Terminal.selectedQFTGroupQuaternionSU2InterpretationPaid Terminal.canonicalTerminalBoundary ≡ false
+selectedGroupQuaternionSU2StillOpenRegression = refl
+
+selectedStressSymmetryStillOpenRegression :
+  Terminal.selectedQFTStressCoordinateSymmetryPaid Terminal.canonicalTerminalBoundary ≡ false
+selectedStressSymmetryStillOpenRegression = refl
+
+brownMaclayTenValuesStillOpenRegression :
+  Terminal.brownMaclayTenIndependentComponentValuesPaid Terminal.canonicalTerminalBoundary ≡ false
+brownMaclayTenValuesStillOpenRegression = refl
 
 selectedSectorBrownMaclayEqualityStillOpenRegression :
   Terminal.casimirSelectedQFTSectorBrownMaclayEqualityPaid Terminal.canonicalTerminalBoundary ≡ false
@@ -103,15 +129,39 @@ unifiedQGStillClosedRegression :
   Terminal.unifiedQuantumGravityPromoted Terminal.canonicalTerminalBoundary ≡ false
 unifiedQGStillClosedRegression = refl
 
+independentBrownMaclayComponentCountRegression :
+  Terminal.selectedBrownMaclayIndependentComponentCount ≡ 10
+independentBrownMaclayComponentCountRegression = refl
+
 firstUnificationBlockerRegression :
   Terminal.firstUnificationBlocker
-  ≡ Terminal.missingConcreteSelectedQFTGroupHostingCanonicalU1Restriction
+  ≡ Terminal.missingSelectedQFTGroupCompactSimpleWitness
 firstUnificationBlockerRegression = refl
 
 secondUnificationBlockerRegression :
   Terminal.secondUnificationBlocker
-  ≡ Terminal.missingActualSelectedQFTSectorBrownMaclayComponentEquality
+  ≡ Terminal.missingSelectedQFTGroupSprint105SU2Classification
 secondUnificationBlockerRegression = refl
+
+thirdUnificationBlockerRegression :
+  Terminal.thirdUnificationBlocker
+  ≡ Terminal.missingSelectedQFTGroupQuaternionSU2Interpretation
+thirdUnificationBlockerRegression = refl
+
+fourthUnificationBlockerRegression :
+  Terminal.fourthUnificationBlocker
+  ≡ Terminal.missingSelectedQFTStressCoordinateSymmetry
+fourthUnificationBlockerRegression = refl
+
+fifthUnificationBlockerRegression :
+  Terminal.fifthUnificationBlocker
+  ≡ Terminal.missingBrownMaclayTenIndependentComponentValues
+fifthUnificationBlockerRegression = refl
+
+sixthUnificationBlockerRegression :
+  Terminal.sixthUnificationBlocker
+  ≡ Terminal.missingRound131AllSectorAssembly
+sixthUnificationBlockerRegression = refl
 
 firstAllSectorAssemblyLeafRegression :
   Terminal.firstAllSectorAssemblyLeaf
