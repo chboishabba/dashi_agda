@@ -13,7 +13,7 @@ module DASHI.Physics.Foundations.CMP119CurvatureWilsonF2SingleFamilyCompilerExac
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119ClassicalCurvatureTenMetricVariationExact as Curvature
@@ -104,9 +104,7 @@ f2ObservablePointwiseNonnegative :
   ∀ {Configuration}
     (source : CurvatureWilsonF2Source Configuration)
     configuration →
-  Data.Rational.Base.0ℚ
-  Data.Rational.Base.≤
-  F2.fieldStrengthSquare (asFiniteF2Family source) configuration
+  0ℚ ≤ F2.fieldStrengthSquare (asFiniteF2Family source) configuration
 f2ObservablePointwiseNonnegative source =
   F2.fieldStrengthSquareNonnegative (asFiniteF2Family source)
 
