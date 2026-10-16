@@ -9,7 +9,8 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import Data.List.Base using ([]; _∷_)
 import Tactic.RingSolver as Solver
 
-import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as R
+open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
+  ( _+R_; _*R_; -R_; realSolverRing )
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as V3
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Lie
 import DASHI.Physics.YangMills.BalabanP33SU2EuclideanGeometryExact as Euclidean
@@ -26,8 +27,8 @@ wedge3 u v =
   bivector3
     (Euclidean.minorXY u v)
     (Euclidean.minorYZ u v)
-    ((V3.zComponent u R.*R V3.xComponent v)
-      R.+R (R.-R (V3.xComponent u R.*R V3.zComponent v)))
+    ((V3.zComponent u *R V3.xComponent v)
+      +R (-R (V3.xComponent u *R V3.zComponent v)))
 
 hodgeStar3 : Bivector3 → V3.SU2LieAlgebra
 hodgeStar3 omega =
@@ -37,8 +38,8 @@ cross3 : V3.SU2LieAlgebra → V3.SU2LieAlgebra → V3.SU2LieAlgebra
 cross3 u v =
   V3.su2Lie
     (Euclidean.minorYZ u v)
-    ((V3.zComponent u R.*R V3.xComponent v)
-      R.+R (R.-R (V3.xComponent u R.*R V3.zComponent v)))
+    ((V3.zComponent u *R V3.xComponent v)
+      +R (-R (V3.xComponent u *R V3.zComponent v)))
     (Euclidean.minorXY u v)
 
 hodgeWedgeEqualsCross : ∀ u v →
@@ -50,9 +51,9 @@ crossSwapNegates : ∀ u v →
 crossSwapNegates
   (V3.su2Lie x1 y1 z1) (V3.su2Lie x2 y2 z2) =
   V3.su2LieExt
-    (Solver.solve (x1 ∷ y1 ∷ z1 ∷ x2 ∷ y2 ∷ z2 ∷ []) R.realSolverRing)
-    (Solver.solve (x1 ∷ y1 ∷ z1 ∷ x2 ∷ y2 ∷ z2 ∷ []) R.realSolverRing)
-    (Solver.solve (x1 ∷ y1 ∷ z1 ∷ x2 ∷ y2 ∷ z2 ∷ []) R.realSolverRing)
+    (Solver.solve (x1 ∷ y1 ∷ z1 ∷ x2 ∷ y2 ∷ z2 ∷ []) realSolverRing)
+    (Solver.solve (x1 ∷ y1 ∷ z1 ∷ x2 ∷ y2 ∷ z2 ∷ []) realSolverRing)
+    (Solver.solve (x1 ∷ y1 ∷ z1 ∷ x2 ∷ y2 ∷ z2 ∷ []) realSolverRing)
 
 -- Repository normalization: the literal su(2) commutator is twice this cross.
 lieBracketIsTwoCross : ∀ u v →
