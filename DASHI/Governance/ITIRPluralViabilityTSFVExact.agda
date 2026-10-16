@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Core.HistoryConditionedChoiceExact as History
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Governance.FederatedSubsidiarityGovernanceExact as Base
 import DASHI.Governance.FederatedViabilityTransitionExact as Viability
 import DASHI.Governance.CyberneticClinicalInstitutionalRepairBridge as Cyber
@@ -15,7 +16,7 @@ import DASHI.Physics.Closure.SU2SO3369HypervoxelBridge as Hyper
 -- PLURAL VIABILITY OVER THE EXISTING FEDERATED TRANSITION SPINE
 --
 -- The existing viability envelope already keeps governance, ecology, resources
--- and basic-needs access distinct.  This owner adds only the governance
+-- and basic-needs access distinct. This owner adds only the governance
 -- coordinates needed by the present thread: non-domination, affected-party
 -- voice and institutional revisability.
 ------------------------------------------------------------------------
@@ -75,7 +76,7 @@ reachablePreservesPluralViability preservation
 --
 -- Two institutional histories can have the same coarse present label while
 -- retaining different continuation spaces for a non-domination/revisability
--- consumer.  This is a consumer-relative future-sufficiency result, not a
+-- consumer. This is a consumer-relative future-sufficiency result, not a
 -- prediction and not a signal propagating backwards from the future.
 ------------------------------------------------------------------------
 
@@ -114,7 +115,7 @@ pluralFutureConeWitness = record
   }
 
 coarsePresentCannotDeterminePluralFutureCone :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  NonFactor.FactorsThrough
     (History.observeFutureHistory pluralFutureConeSurface)
     (History.futureCone pluralFutureConeSurface) → ⊥
 coarsePresentCannotDeterminePluralFutureCone =
@@ -143,7 +144,7 @@ tsfvMechanismNotImported :
   TSFV.historyChoiceBridgeValidatesTSFVMechanism tsfvBoundaryAnchor ≡ false
 tsfvMechanismNotImported = refl
 
--- 3/6/9/18/27 is a representation-size / carrier precedent only.  The counts
+-- 3/6/9/18/27 is a representation-size / carrier precedent only. The counts
 -- are imported exactly; no political ontology, authority or normative weight
 -- is inferred from them.
 axisCountAnchor : Hyper.axisCarrierCount ≡ 3
