@@ -3,6 +3,8 @@ module DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutValid
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutExact as M
+import DASHI.Physics.Foundations.GRQFTSourceNativeQFTRecoveryProjectionCompatibilityValidation
+import DASHI.Physics.Foundations.GRQFTR457SourceNativeRecoveryBindingValidation
 
 sourceNativeRecoveryCompilerOwnedRegression :
   M.sourceNativePinnedRecoveryAttachmentCompilerOwned M.canonicalSourceNativeHostBoundary ≡ true
@@ -20,9 +22,17 @@ independentCompactSimpleNotRequiredRegression :
   M.independentSelectedCompactSimplePaymentRequired M.canonicalSourceNativeHostBoundary ≡ false
 independentCompactSimpleNotRequiredRegression = refl
 
-legacyProjectionCompatibilityStillRequiredRegression :
-  M.legacyProjectionCompatibilityRequired M.canonicalSourceNativeHostBoundary ≡ true
-legacyProjectionCompatibilityStillRequiredRegression = refl
+formalProjectionCompatibilityCompilerPaidRegression :
+  M.formalProjectionCompatibilityCompilerPaid M.canonicalSourceNativeHostBoundary ≡ true
+formalProjectionCompatibilityCompilerPaidRegression = refl
+
+independentProjectionCompatibilityNotRequiredRegression :
+  M.independentProjectionCompatibilityPaymentRequired M.canonicalSourceNativeHostBoundary ≡ false
+independentProjectionCompatibilityNotRequiredRegression = refl
+
+r457SameObjectAttachmentStillRequiredRegression :
+  M.r457LegacyRecoverySameObjectAttachmentRequired M.canonicalSourceNativeHostBoundary ≡ true
+r457SameObjectAttachmentStillRequiredRegression = refl
 
 pinnedSelectionStillRequiredRegression :
   M.pinnedSourceNativeSelectionRequired M.canonicalSourceNativeHostBoundary ≡ true
@@ -33,7 +43,7 @@ quaternionInterpretationStillRequiredRegression :
 quaternionInterpretationStillRequiredRegression = refl
 
 firstSourceNativeHostBlockerRegression :
-  M.firstSourceNativeHostBlocker ≡ M.missingLegacyQFTRecoveryProjectionCompatibility
+  M.firstSourceNativeHostBlocker ≡ M.missingR457LegacyRecoverySameObjectAttachment
 firstSourceNativeHostBlockerRegression = refl
 
 secondSourceNativeHostBlockerRegression :
