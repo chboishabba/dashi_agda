@@ -1,5 +1,6 @@
 module DASHI.Reasoning.TrialecticT27WavePhaseGroupoidPresheafValidation where
 
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
