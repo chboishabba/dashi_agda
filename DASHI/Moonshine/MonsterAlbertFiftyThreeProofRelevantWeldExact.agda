@@ -30,6 +30,7 @@ import DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact as Exceptiona
 import DASHI.Moonshine.Base369MonsterFiftyFourFiveModeResidualActionBidiExact as Base
 import DASHI.Wikimedia.IbrahimZeta54AlbertPair53SnowballAttributionBidiExact as Albert
 import DASHI.Wikimedia.IbrahimZetaBase53ExceptionalSkeletonCompletionExact as Completion
+import DASHI.Wikimedia.IbrahimZetaSixByNineFiveMode54CarrierSnowballExact as Chart
 
 ------------------------------------------------------------------------
 -- 1. Proof-bearing finite carrier/deletion certificate.
@@ -58,7 +59,7 @@ record ProofRelevantBaseZetaAlbertDeletionWeld : Set where
 
     baseResidualReallyCommutesWithZetaInclusion :
       (s : Base.ResidualCell53) →
-      Completion.Chart.zeta54ToBase54
+      Chart.zeta54ToBase54
         (Albert.includeZetaResidual53 (Completion.base53ToZeta53 s))
       ≡ Base.includeResidual53 s
 
@@ -96,11 +97,10 @@ record TransportedMonsterAlbertAction : Set₁ where
   field
     recognition : Base.ActualFiftyFourFiveModeResidualActionRecognition
 
-    Actor : Set
-    Actor = Base.Actor recognition
-
-    actAlbert54 : Actor → Albert.CubeAlbertPair54 → Albert.CubeAlbertPair54
-    actAlbert53 : Actor → Albert.CubeReducedAlbert53 → Albert.CubeReducedAlbert53
+    actAlbert54 :
+      Base.Actor recognition → Albert.CubeAlbertPair54 → Albert.CubeAlbertPair54
+    actAlbert53 :
+      Base.Actor recognition → Albert.CubeReducedAlbert53 → Albert.CubeReducedAlbert53
 
     actual54ToAlbert54 :
       Base.Actual54 recognition → Albert.CubeAlbertPair54
@@ -182,7 +182,7 @@ record MonsterAlbertF4SameActionRecognition : Set₁ where
     jordanProductIsSameAlbertCarrier : Set
     classicalF4ActionPreservesJordanProduct : Set
     monsterActorToF4Actor :
-      Actor transportedMonsterAction → F4Actor
+      Base.Actor (recognition transportedMonsterAction) → F4Actor
     same54ActionIntertwiner : Set
     same53ActionIntertwiner : Set
     sameRemovedInvariant : Set
