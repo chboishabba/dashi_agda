@@ -1,5 +1,8 @@
 module DASHI.Moonshine.Monster3BCommonRepresentationTransportValidation where
 
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
 import DASHI.Moonshine.Monster3BCommonRepresentationTransportExact as Target
 
 open Target
