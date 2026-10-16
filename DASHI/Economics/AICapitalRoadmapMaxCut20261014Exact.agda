@@ -15,6 +15,8 @@ import DASHI.Economics.AICoreWeaveAggregateCustomerCashRealisation20261014Exact 
 import DASHI.Economics.AICoreWeaveFleetAgeOSINTMaxCut20261014Exact as Fleet
 import DASHI.Economics.AICoreWeaveGenerationPriceLadder20261014Exact as Price
 import DASHI.Economics.AICoreWeaveThreeClockCapitalRecovery20261014Exact as ThreeClock
+import DASHI.Economics.AICoreWeaveSameObjectFinancingClock20261016Exact as SameObjectClock
+import DASHI.Economics.AICoreWeaveSameObjectFinancingMaxCut20261016Exact as FinancingMax
 import DASHI.Economics.AICoreWeaveNamedFacilityDelivery20261014Exact as Facility
 import DASHI.Economics.AIAustraliaRegulatoryCostMeasurementBoundary20261014Exact as Regulation
 import DASHI.Economics.AIPolicyReviewedCausalAttribution20261014Exact as Review
@@ -58,20 +60,20 @@ providerMarginalServingCostEmpirical = roadmap-lane
 terminalPayerGraphPartial : RoadmapLane
 terminalPayerGraphPartial = roadmap-lane
   "terminal payer graph" partial
-  "aggregate customer-cash collection is source-paid; Microsoft and Meta external-cash-capacity edges, OpenAI contract/revenue-scale edge and CoreWeave contract-finance mechanism remain separately typed"
-  "named-payer cash attribution, OpenAI external/operating cash provenance, realised named contract flows, anonymous current top-customer identities and residual financing/counterparty edges" false
+  "aggregate customer-cash collection is source-paid; historical Microsoft named recognised revenue, Microsoft/Meta external-cash-capacity edges, OpenAI named contract/cash-control architecture and CoreWeave contract-finance mechanisms remain separately typed"
+  "public named current-payer cash attribution, OpenAI customer-cash versus CRR-cure decomposition, realised named contract flows, anonymous current top-customer identities and residual financing/counterparty edges" false
 
 replacementEconomicsEmpirical : RoadmapLane
 replacementEconomicsEmpirical = roadmap-lane
   "replacement and economic-obsolescence burden" empirical
-  "aggregate-capex non-identifiability; 72-month accounting life vs 36-48 month generic lender horizon; public capacity-vintage distribution with June-2026 median 6-12 months and mean interval about 7.48-14.70 months; book-stock youth proxy; H100/H200/GB200/GB300/Rubin frontier cadence; current multi-generation commercial coexistence; selected current A100/H100/H200/B200/GB200 per-GPU listed-price ladder; 36/48-month vintage exposure wall; named Core Scientific delivery layer"
-  "serial-level GPU ages/generation shares, actual in-place refresh and retirement history, longitudinal same-generation utilisation/ASP/price decay, same-object residual-value/economic-life calibration, and growth-vs-replacement capitalisation" false
+  "aggregate-capex non-identifiability; public capacity-vintage distribution with June-2026 median 6-12 months and mean interval about 7.48-14.70 months; book-stock youth proxy; H100/H200/GB200/GB300/Rubin frontier cadence; current multi-generation commercial coexistence; selected current A100/H100/H200/B200/GB200 per-GPU listed-price ladder; selected 36/48-month generic-market scenario wall; named Core Scientific delivery layer; primary CoreWeave GPU-backed agreements showing same-object contractual depreciation about 66-78 months and commonly six years"
+  "public serial-level GPU ages/generation shares, actual in-place refresh and retirement history, longitudinal same-generation utilisation/ASP/price decay, same-object residual-value/economic-life calibration, and growth-vs-replacement capitalisation" false
 
 threeClockCapitalRecoveryPartial : RoadmapLane
 threeClockCapitalRecoveryPartial = roadmap-lane
   "asset/contract/financing clock alignment" partial
-  "selected ordering: generic lender GPU collateral horizon 36-48 months < CoreWeave weighted-average committed-contract duration about 60 months < 72-month accounting useful life; through-2028 calendar also contains 42.23 percent of June-2026 debt principal and 56.66 percent of selected capacity in the 36-month vintage window"
-  "same-asset mapping among debt facilities, customer contracts and hardware cohorts; realised contract cash; actual refinance/refresh decisions and economic retirement dates" false
+  "generic market 36-48 month GPU-collateral horizon is retained only as a cross-object stress scenario; primary CoreWeave financing pays same-object contractual GPU depreciation around 66-78 months/common 72 months, while committed-contract duration is about 60 months and accounting technology-equipment life is 72 months"
+  "same-asset mapping among debt facilities, customer contracts and hardware cohorts; realised contract cash, customer-cash versus equity-cure decomposition, actual refinance/refresh decisions and economic retirement dates" false
 
 regulatoryBurdenEmpirical : RoadmapLane
 regulatoryBurdenEmpirical = roadmap-lane
@@ -82,8 +84,8 @@ regulatoryBurdenEmpirical = roadmap-lane
 financingConditionsHeterogeneous : RoadmapLane
 financingConditionsHeterogeneous = roadmap-lane
   "AI infrastructure financing conditions" partial
-  "Firmus failed IPO plus IMF/Goldman stress observations coexist with successful Tencent debt issuance; a contemporaneous secondary-market cross-section reports roughly 115 bp average AI-linked spread versus 78 bp broader IG, a 37 bp premium"
-  "issuer-matched longitudinal spread/yield panel, refinancing outcomes, defaults/restructurings, causal attribution of the premium and realised investment returns" false
+  "Firmus failed IPO plus IMF/Goldman stress observations coexist with successful Tencent debt issuance; reported 115bp AI-linked versus 78bp broader-IG cross-section; CoreWeave project DDTLs carry materially different contract/customer-specific SOFR margins and its 9.625-percent 2032 notes later yielded above 15 percent"
+  "repeated same-instrument spread/yield panel, realised refinancing/default/restructuring, causal attribution of sector premia and realised project/investment returns" false
 
 landlordLayerReturnPaid : RoadmapLane
 landlordLayerReturnPaid = roadmap-lane
@@ -100,7 +102,7 @@ stackLayerNonCollapsePaid = roadmap-lane
 kernelReceiptIntegration : RoadmapLane
 kernelReceiptIntegration = roadmap-lane
   "formal verification receipt" integration
-  "source-written owners, RED-first/static regression surfaces, base-current branch topology and dedicated focused workflows"
+  "source-written owners and RED-first/static regression surfaces"
   "successful exact-head Agda kernel/typecheck and runtime-suite receipts" false
 
 additionalGenericAbstractionScheduledIsFalse : additionalGenericAbstractionScheduled capitalReturnMagnitudeBounded ≡ false
@@ -141,6 +143,15 @@ threeClockOrderingPaid :
   (ThreeClock.contractBelowBook ThreeClock.coreWeaveThreeClockWedge ≡ true)
 threeClockOrderingPaid = ThreeClock.selectedClockOrderingPaid
 
+generic36To48MonthClockNotSameObject : SameObjectClock.generic36To48MonthHorizonSameObject SameObjectClock.coreWeaveSameObjectFinancingClock ≡ false
+generic36To48MonthClockNotSameObject = SameObjectClock.generic36To48MonthHorizonIsNotSameObject
+
+sameObjectFinancingClockNowPaid : FinancingMax.sameObjectDepreciationClock FinancingMax.coreWeaveSameObjectFinancingStatus ≡ true
+sameObjectFinancingClockNowPaid = FinancingMax.sameObjectDepreciationClockPaid
+
+contractRealisationCureNonDescentPaid : FinancingMax.covenantComplianceInsufficientForCustomerCash FinancingMax.coreWeaveSameObjectFinancingStatus ≡ true
+contractRealisationCureNonDescentPaid = FinancingMax.covenantComplianceInsufficientForCustomerCashPaid
+
 namedFacilityBillingFloorPaid : Facility.namedBillingFloorMW Facility.coreScientificCoreWeaveDelivery ≡ 430
 namedFacilityBillingFloorPaid = Facility.namedBillingFloorMWIs430
 
@@ -169,4 +180,4 @@ stackLayerCoexistencePaid = Stack.landlordRecognisedRevenueAndTenantNegativeSpre
 
 boundary : String
 boundary =
-  "The October-14 AI-capital programme is no longer missing a generic theory layer. CoreWeave fleet-age OSINT now pays capacity-vintage intervals, independent book-stock youth, frontier-generation cadence, multi-generation commercial coexistence, a selected current generation price ladder, and a selected 36/48-month exposure calendar; canonical non-descent retains exact hardware age/refresh as a separate residual. A three-clock wedge separates lender collateral horizon, customer-contract duration and accounting life, and records their calendar overlap with the debt maturity wall without identifying the same financed assets. Current price coexistence supports a tiered commercial-value model rather than a hard retirement cliff, but longitudinal price decay/utilisation and realised residual values remain empirical. Aggregate customer cash is paid while named-payer independence remains partial. Provider-side economics includes actual Cerebras segment costs but pure-inference marginal cost remains open. Replacement cash burden, same-asset clock mapping and realised regulatory-burden causality remain empirical."
+  "The October AI-capital programme is measurement-first. Fleet-age OSINT pays capacity-vintage intervals, book-stock youth, generation cadence and scenario calendars while canonical non-descent retains exact public hardware identity as a separate residual. Primary CoreWeave credit agreements supersede the earlier implication that a generic 36-48 month lender horizon represented CoreWeave's financing life: same-object contractual GPU depreciation is about 66-78 months and commonly six years. Project/customer-specific financing, customer-credit coupling, a finance-to-site SPV join, OpenAI/Phoenix 1 cash-control/private serial-reporting architecture and same-instrument bond repricing are now paid. OpenAI CRR equity cures additionally block covenant compliance from identifying terminal customer cash without a customer-cash-versus-cure decomposition. The remaining wall is realised/public cash, hardware, return, refinancing and causal-policy outcomes rather than missing generic structure."
