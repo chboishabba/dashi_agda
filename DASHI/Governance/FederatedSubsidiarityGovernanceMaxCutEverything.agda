@@ -47,3 +47,8 @@ import DASHI.Governance.OccupyRealizedControlAcquisitionExact
 
 -- RED-first integration regression for the cybernetic tranche.
 import DASHI.Governance.DeliberativeViableNonDominationLoopRegression
+
+-- Stronger terminal political-performance seam: persistent coordination
+-- advantage and proof-relevant non-domination remain separate payments and
+-- must be bound to the same target with realised-control/concentration audits.
+import DASHI.Governance.BoloBoloLongitudinalNonDominationEverything
