@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.QuantumVacuum.Casimir369StressEnergyTerminalMaxCutExact as Legacy
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutExact as SourceHost
+import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerExact as PinnedRecovery
 import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeExact as GroupLaw
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact as Action
 import DASHI.Physics.QuantumVacuum.CasimirU1SelectedStressReadoutAttachmentExact as StressReadout
@@ -15,16 +16,22 @@ import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact as Round
 ------------------------------------------------------------------------
 -- SOURCE-NATIVE TERMINAL RECUT
 --
--- Compiler-owned seams now removed from the physical cut:
--- formal recovery projection compatibility; the R457 reverse recovery equality
--- once Round131RecoveredQFTAttachment is paid; selected compact simplicity;
--- quaternion SU(2) group-law duplication; Cartan bracket/pairing/curvature
--- algebra; restricted YM=Maxwell action equality; same-path first-variation
--- equality; restricted-QFT=Maxwell readout equality; and duplicate plate/
--- renormalization objects.
+-- Compiler-owned seams removed from the physical cut now include:
 --
--- The first live recovery payment is therefore the canonical existing
--- Round131RecoveredQFTAttachment instantiated on the literal R457 construction.
+-- * formal recovery projection compatibility;
+-- * R457 reverse-recovery equality after Round131RecoveredQFTAttachment;
+-- * the old PinnedSourceNativeRecoverySelection after a SAME-construction
+--   identity between the R457 literal Y and the pinned physical construction;
+-- * selected compact simplicity;
+-- * quaternion SU(2) group-law duplication;
+-- * Cartan bracket/pairing/curvature algebra;
+-- * restricted YM=Maxwell action equality;
+-- * same-path first-variation equality;
+-- * restricted-QFT=Maxwell readout equality;
+-- * duplicate conducting-plate and renormalization objects.
+--
+-- The first two live recovery payments are therefore the canonical Round131
+-- recovered-QFT attachment on Y_R457 and Y_R457 = Y_pinned.
 ------------------------------------------------------------------------
 
 legacyTerminalBoundary : Legacy.Casimir369StressEnergyTerminalBoundary
@@ -32,6 +39,9 @@ legacyTerminalBoundary = Legacy.canonicalTerminalBoundary
 
 sourceNativeHostBoundary : SourceHost.CasimirSelectedQFTSourceNativeHostBoundary
 sourceNativeHostBoundary = SourceHost.canonicalSourceNativeHostBoundary
+
+pinnedRecoveryBoundary : PinnedRecovery.CasimirRound131PinnedRecoveryBoundary
+pinnedRecoveryBoundary = PinnedRecovery.canonicalRound131PinnedRecoveryBoundary
 
 quaternionGroupLawBoundary : GroupLaw.CasimirQuaternionSU2GroupLawBoundary
 quaternionGroupLawBoundary = GroupLaw.canonicalQuaternionSU2GroupLawBoundary
@@ -53,6 +63,8 @@ record CasimirSourceNativeTerminalBoundary : Set where
     independentProjectionCompatibilityPaymentRequired : Bool
     r457RecoveryEqualityCompilerPaid : Bool
     independentR457RecoveryEqualityRequired : Bool
+    pinnedSourceNativeSelectionCompilerPaid : Bool
+    independentPinnedSourceNativeSelectionRequired : Bool
     independentCompactSimplePaymentRequired : Bool
     quaternionSU2GroupLawBridgePaid : Bool
     selectedStructuralGroupQuaternionSU2IdentificationPaid : Bool
@@ -71,7 +83,7 @@ record CasimirSourceNativeTerminalBoundary : Set where
     secondRenormalizationPrescriptionRequired : Bool
 
     round131RecoveredQFTAttachmentForR457Paid : Bool
-    pinnedSourceNativeRecoverySelectionPaid : Bool
+    r457LiteralPinnedConstructionIdentityPaid : Bool
     canonicalCartanU1FieldRestrictionPaid : Bool
     physicalChargeCouplingNormalizationPaid : Bool
     sameObjectNondegenerateCurvatureFormulaPaid : Bool
@@ -93,13 +105,13 @@ open CasimirSourceNativeTerminalBoundary public
 canonicalSourceNativeTerminalBoundary : CasimirSourceNativeTerminalBoundary
 canonicalSourceNativeTerminalBoundary =
   casimir-source-native-terminal-boundary
-    true true false true false false true false
+    true true false true false true false false true false
     true true true true false true false true false true false false
     false false false false false false false false false false false false false false false false false
 
 data RemainingSourceNativeCasimirBlocker : Set where
   missingRound131RecoveredQFTAttachmentForR457 : RemainingSourceNativeCasimirBlocker
-  missingPinnedSourceNativeRecoverySelection : RemainingSourceNativeCasimirBlocker
+  missingR457LiteralPinnedConstructionIdentity : RemainingSourceNativeCasimirBlocker
   missingSelectedStructuralGroupQuaternionSU2Identification : RemainingSourceNativeCasimirBlocker
   missingCanonicalCartanU1FieldRestriction : RemainingSourceNativeCasimirBlocker
   missingPhysicalChargeCouplingNormalization : RemainingSourceNativeCasimirBlocker
@@ -123,7 +135,7 @@ data RemainingSourceNativeCasimirBlocker : Set where
 firstUnificationBlocker : RemainingSourceNativeCasimirBlocker
 firstUnificationBlocker = missingRound131RecoveredQFTAttachmentForR457
 secondUnificationBlocker : RemainingSourceNativeCasimirBlocker
-secondUnificationBlocker = missingPinnedSourceNativeRecoverySelection
+secondUnificationBlocker = missingR457LiteralPinnedConstructionIdentity
 thirdUnificationBlocker : RemainingSourceNativeCasimirBlocker
 thirdUnificationBlocker = missingSelectedStructuralGroupQuaternionSU2Identification
 fourthUnificationBlocker : RemainingSourceNativeCasimirBlocker
@@ -168,6 +180,7 @@ firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
 data RetiredProjectionCompatibilityBlockerAutomaticallyReturns : Set where
 data RetiredR457RecoveryEqualityBlockerAutomaticallyReturns : Set where
+data RetiredPinnedSourceNativeSelectionBlockerAutomaticallyReturns : Set where
 data RetiredCompactSimpleBlockerAutomaticallyReturns : Set where
 data RetiredActionEqualityBlockerAutomaticallyReturns : Set where
 data RetiredMetricVariationEqualityBlockerAutomaticallyReturns : Set where
@@ -177,6 +190,8 @@ retiredProjectionCompatibilityBlockerDoesNotReturn : RetiredProjectionCompatibil
 retiredProjectionCompatibilityBlockerDoesNotReturn ()
 retiredR457RecoveryEqualityBlockerDoesNotReturn : RetiredR457RecoveryEqualityBlockerAutomaticallyReturns → ⊥
 retiredR457RecoveryEqualityBlockerDoesNotReturn ()
+retiredPinnedSourceNativeSelectionBlockerDoesNotReturn : RetiredPinnedSourceNativeSelectionBlockerAutomaticallyReturns → ⊥
+retiredPinnedSourceNativeSelectionBlockerDoesNotReturn ()
 retiredCompactSimpleBlockerDoesNotReturn : RetiredCompactSimpleBlockerAutomaticallyReturns → ⊥
 retiredCompactSimpleBlockerDoesNotReturn ()
 retiredActionEqualityBlockerDoesNotReturn : RetiredActionEqualityBlockerAutomaticallyReturns → ⊥
@@ -188,4 +203,4 @@ retiredSecondRenormalizationBlockerDoesNotReturn ()
 
 sourceNativeTerminalReading : String
 sourceNativeTerminalReading =
-  "The source-native Casimir/GRQFT max-cut now reuses the canonical recovered-QFT seam. Formal projection compatibility is compiler-owned. R457's reverse legacy-recovery equality is compiler output from a Round131RecoveredQFTAttachment on the SAME R457 construction, so the first live recovery payment is that existing Round131 attachment, not a new R457 theorem. The pinned selection follows, while compact simplicity is compiler output from the pinned construction. Generic and legacy quaternionic SU(2) group laws are already bridged; only selected-structural-group same-object identification remains. Cartan bracket, invariant pairing, abelian curvature, restricted action equality, same-path metric variation, selected-QFT/Maxwell readout equality and duplicate plate/renormalization objects are all compiler-saturated. The remaining physical inputs proceed through field/coupling/curvature/action/path/stress attachment, ten Brown-Maclay component values, Round131 all-sector assembly and Einstein/common-action closure. Local Casimir stress still does not imply measured gravity or unified QG."
+  "The source-native Casimir/GRQFT max-cut is reduced to genuine same-object inputs. Formal projection compatibility is compiler-owned. R457's reverse recovery equality compiles from the canonical Round131RecoveredQFTAttachment on the SAME R457 construction. Given that attachment and one equality between the R457 literal construction and the existing pinned physical Yang-Mills construction, the former PinnedSourceNativeRecoverySelection, pinned recovered-QFT attachment and selected-target equality are compiler output. Compact simplicity is already a field of the pinned construction. The next host seam is selected structural group = concrete quaternionic SU(2). Cartan bracket, invariant pairing, abelian curvature, restricted action equality, same-path metric variation, selected-QFT/Maxwell readout equality and duplicate plate/renormalization objects remain compiler-saturated. Downstream physical inputs proceed through field/coupling/curvature/action/path/stress attachment, ten Brown-Maclay component values, Round131 all-sector assembly and Einstein/common-action closure. Local Casimir stress still does not imply measured gravity or unified QG."
