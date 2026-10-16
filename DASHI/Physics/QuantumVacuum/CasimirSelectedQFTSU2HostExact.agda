@@ -7,25 +7,12 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as QFT
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact as Pinned
+import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
 import DASHI.Physics.YangMills.YangMillsCompactSimpleGroupPromotionExact as Promotion
 import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport as Gauge
 import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1
 import DASHI.Physics.Closure.YMSprint105CompactSimpleGroupParameterTable as Table
-
-------------------------------------------------------------------------
--- SELECTED QFT GROUP -> SOURCE-BACKED A1 / CONCRETE SU(2) HOST
---
--- Required host data is exactly:
---   1. IsCompactSimple under the UnifiedCandidate semantics;
---   2. source-backed compact-simple data classifying the token as Dynkin A1;
---   3. interpretation of that exact token as the literal quaternionic SU(2)
---      GroupStructure used by the gauge stack.
---
--- Sprint105 SU2 remains a finite-table consistency reference only; it is not a
--- required classification field because the table does not faithfully interpret
--- UnifiedCandidate group tokens.
-------------------------------------------------------------------------
 
 record CasimirSelectedQFTSU2Host
     (U : Weld.UnifiedCandidate)
@@ -53,6 +40,10 @@ record CasimirSelectedQFTSU2Host
 
 open CasimirSelectedQFTSU2Host public
 
+------------------------------------------------------------------------
+-- Existing same-object routes that already own compact simplicity.
+------------------------------------------------------------------------
+
 compactSimpleFromPinnedYMConstruction :
   ∀ {U : Weld.UnifiedCandidate} →
   (pinned :
@@ -63,6 +54,15 @@ compactSimpleFromPinnedYMConstruction :
   QFT.IsCompactSimple (Weld.qftSemantics U) group
 compactSimpleFromPinnedYMConstruction pinned group =
   Pinned.compactSimple pinned group
+
+compactSimpleFromLiteralClayStructuralBase :
+  ∀ {U : Weld.UnifiedCandidate}
+    (candidate : Weld.Candidate U) →
+  Five.LiteralClayStructuralBase (Weld.qftTarget U candidate) →
+  (group : QFT.CompactSimpleGroup (Weld.qftCarriers U)) →
+  QFT.IsCompactSimple (Weld.qftSemantics U) group
+compactSimpleFromLiteralClayStructuralBase candidate structural group =
+  Five.compactSimple structural group
 
 hostFromPinnedYMConstruction :
   ∀ {U : Weld.UnifiedCandidate}
@@ -83,8 +83,33 @@ hostFromPinnedYMConstruction :
   CasimirSelectedQFTSU2Host U group
 hostFromPinnedYMConstruction
     pinned group compactData familyA1 interpretation interpreted reading = record
+  { selectedGroupIsCompactSimple = compactSimpleFromPinnedYMConstruction pinned group
+  ; compactSimpleDataForGroup = compactData
+  ; selectedGroupDynkinFamilyIsA1 = familyA1
+  ; groupStructureInterpretation = interpretation
+  ; selectedGroupStructureIsQuaternionSU2 = interpreted
+  ; reading = reading
+  }
+
+hostFromLiteralClayStructuralBase :
+  ∀ {U : Weld.UnifiedCandidate}
+    (candidate : Weld.Candidate U)
+    (structural : Five.LiteralClayStructuralBase (Weld.qftTarget U candidate))
+    (group : QFT.CompactSimpleGroup (Weld.qftCarriers U))
+    (compactData :
+      QFT.CompactSimpleGroup (Weld.qftCarriers U) →
+      Promotion.CompactSimpleYMData
+        (QFT.CompactSimpleGroup (Weld.qftCarriers U))) →
+  Promotion.family (compactData group) ≡ Promotion.familyA 1 →
+  (interpretation :
+    QFT.CompactSimpleGroup (Weld.qftCarriers U) → Gauge.GroupStructure) →
+  interpretation group ≡ SU2.su2QuaternionGroup →
+  String →
+  CasimirSelectedQFTSU2Host U group
+hostFromLiteralClayStructuralBase
+    candidate structural group compactData familyA1 interpretation interpreted reading = record
   { selectedGroupIsCompactSimple =
-      compactSimpleFromPinnedYMConstruction pinned group
+      compactSimpleFromLiteralClayStructuralBase candidate structural group
   ; compactSimpleDataForGroup = compactData
   ; selectedGroupDynkinFamilyIsA1 = familyA1
   ; groupStructureInterpretation = interpretation
@@ -149,6 +174,7 @@ record CasimirSelectedQFTSU2HostBoundary : Set where
     selectedQFTSU2HostInterfaceOwned : Bool
     literalU1InclusionCompilerOwnedAfterHost : Bool
     pinnedYMConstructionSuppliesCompactSimpleCompiler : Bool
+    literalClayStructuralBaseSuppliesCompactSimpleCompiler : Bool
     sprint105ClassificationIsSecondaryConsistencyTag : Bool
     sprint105ClassificationRequiredForHost : Bool
 
@@ -163,9 +189,9 @@ canonicalCasimirSelectedQFTSU2HostBoundary :
   CasimirSelectedQFTSU2HostBoundary
 canonicalCasimirSelectedQFTSU2HostBoundary =
   casimir-selected-qft-su2-host-boundary
-    true true true true true true true false
+    true true true true true true true true false
     false false false false
 
 casimirSelectedQFTSU2HostReading : String
 casimirSelectedQFTSU2HostReading =
-  "The selected Casimir QFT host is now exactly IsCompactSimple + source-backed Dynkin A1 data + literal quaternionic SU(2) GroupStructure interpretation. Sprint105 SU2 is a secondary finite-table consistency reference and is explicitly not required to inhabit the host. A pinned physical YM construction on the same qftCarriers/qftSemantics supplies IsCompactSimple without a second theorem. Once the three required host receipts are paid, the existing U1 torus inclusion transports into the selected carrier. None of this identifies Brown-Maclay stress."
+  "The required host is IsCompactSimple + source-backed Dynkin A1 data + literal quaternionic SU(2) GroupStructure interpretation. Compact simplicity itself needs no new mathematics once either an existing pinned physical YM construction on the same qftCarriers/qftSemantics or a same-object LiteralClayStructuralBase for the selected qftTarget is attached; both compile directly to IsCompactSimple. Sprint105 SU2 remains secondary and non-required. The genuinely Casimir-specific group work is therefore same-object attachment plus A1 classification and quaternionic SU(2) interpretation, after which the existing U1 torus inclusion transports into the selected carrier. None of this identifies Brown-Maclay stress."
