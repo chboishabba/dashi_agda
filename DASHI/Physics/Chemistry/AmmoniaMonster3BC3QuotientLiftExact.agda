@@ -69,6 +69,18 @@ nh3ToMonster p = commonToMonster (nh3ToCommon p)
 monsterToNH3 : Monster3B.CentralPhase3 → NH3.ElectronicC3Phase
 monsterToNH3 p = commonToNH3 (monsterToCommon p)
 
+nh3MonsterRoundTrip :
+  (p : NH3.ElectronicC3Phase) → monsterToNH3 (nh3ToMonster p) ≡ p
+nh3MonsterRoundTrip NH3.invariant = refl
+nh3MonsterRoundTrip NH3.zeta = refl
+nh3MonsterRoundTrip NH3.zetaSquared = refl
+
+monsterNH3RoundTrip :
+  (p : Monster3B.CentralPhase3) → nh3ToMonster (monsterToNH3 p) ≡ p
+monsterNH3RoundTrip Monster3B.phaseOne = refl
+monsterNH3RoundTrip Monster3B.phaseZeta = refl
+monsterNH3RoundTrip Monster3B.phaseZetaSquared = refl
+
 ------------------------------------------------------------------------
 -- Group law and inversion transported through the common quotient.
 ------------------------------------------------------------------------
@@ -124,13 +136,6 @@ nh3MonsterFourierRowsIntertwine NH3.zetaSquared = refl
 
 ------------------------------------------------------------------------
 -- Exact lift target into the already-owned literal Monster/Base369 sector.
---
--- ActualZetaSectorRecognition is the repository's proof-relevant owner of an
--- actual literal zeta sector.  Once such a recognition and a same-object NH3
--- state lift are supplied, the existing compiler transports the literal sector
--- into the Base369 multiplicity carrier and its Heisenberg observables.
---
--- We expose that target without manufacturing the missing state map.
 ------------------------------------------------------------------------
 
 record NH3ToActualMonsterZetaLift (NH3State ActualSector : Set) : Set₁ where
@@ -172,13 +177,15 @@ record C3QuotientRepresentationIntertwiner : Set where
       monsterFourierRow (forward a) ≡ NH3.phaseFourierRow a
     scope : String
 
+open C3QuotientRepresentationIntertwiner public
+
 canonicalC3QuotientRepresentationIntertwiner : C3QuotientRepresentationIntertwiner
 canonicalC3QuotientRepresentationIntertwiner =
   c3QuotientRepresentationIntertwiner
     nh3ToMonster
     monsterToNH3
-    monsterCommonRoundTrip
-    nh3CommonRoundTrip
+    monsterNH3RoundTrip
+    nh3MonsterRoundTrip
     nh3MonsterMultiplicationIntertwines
     nh3MonsterInversionIntertwines
     nh3MonsterFourierRowsIntertwine
@@ -192,15 +199,20 @@ record C3QuotientLiftBoundary : Set where
     c3GroupLawIntertwiningPaid : Bool
     c3GroupLawIntertwiningPaidIsTrue : c3GroupLawIntertwiningPaid ≡ true
     conjugationInversionIntertwiningPaid : Bool
-    conjugationInversionIntertwiningPaidIsTrue : conjugationInversionIntertwiningPaid ≡ true
+    conjugationInversionIntertwiningPaidIsTrue :
+      conjugationInversionIntertwiningPaid ≡ true
     fourierCharacterIntertwiningPaid : Bool
-    fourierCharacterIntertwiningPaidIsTrue : fourierCharacterIntertwiningPaid ≡ true
+    fourierCharacterIntertwiningPaidIsTrue :
+      fourierCharacterIntertwiningPaid ≡ true
     literalMonsterBase369LiftTargetExists : Bool
-    literalMonsterBase369LiftTargetExistsIsTrue : literalMonsterBase369LiftTargetExists ≡ true
+    literalMonsterBase369LiftTargetExistsIsTrue :
+      literalMonsterBase369LiftTargetExists ≡ true
     actualNH3StateToMonsterSectorLiftPaid : Bool
-    actualNH3StateToMonsterSectorLiftPaidIsFalse : actualNH3StateToMonsterSectorLiftPaid ≡ false
+    actualNH3StateToMonsterSectorLiftPaidIsFalse :
+      actualNH3StateToMonsterSectorLiftPaid ≡ false
     nontrivialPhysicalMonsterActionOnNH3Paid : Bool
-    nontrivialPhysicalMonsterActionOnNH3PaidIsFalse : nontrivialPhysicalMonsterActionOnNH3Paid ≡ false
+    nontrivialPhysicalMonsterActionOnNH3PaidIsFalse :
+      nontrivialPhysicalMonsterActionOnNH3Paid ≡ false
     quotientIntertwinerCreatesStateIntertwiner : Bool
     quotientIntertwinerCreatesStateIntertwinerIsFalse :
       quotientIntertwinerCreatesStateIntertwiner ≡ false
