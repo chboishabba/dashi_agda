@@ -2,6 +2,7 @@ module DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptValidation whe
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (_+_)
 
 import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptExact as Receipt
 
