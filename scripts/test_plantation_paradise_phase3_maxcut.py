@@ -39,6 +39,8 @@ EXPECTED = {
     ],
     "DASHI/Culture/PowersPlantationParadiseEvidenceGraphExact.agda": [
         "SourceGenre", "SourceProductionContext", "sourceContext",
+        "ManifestationContextReceipt", "julienSaleNoticeContextReceipt",
+        "minetteWillContextReceipt", "liseAnnouncementContextReceipt",
         "minetteSalaryAnchor", "liseEventAnchor", "julienContributionBurdenAnchor",
         "portAuPrinceSeatingAnchor", "july1790ContestationAnchor",
         "graphReachabilityDoesNotCreateHistoricalIdentity",
