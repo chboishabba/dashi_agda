@@ -24,14 +24,17 @@ def test_terminal_frontier_counts_packages_not_adapter_debt():
         assert needle in text
 
 
-def test_measured_g_is_paid_but_scale_product_remains_inside_calibration_package():
+def test_p2_prefers_direct_stress_and_has_two_physical_leaves():
     text = MODULE.read_text()
     for needle in (
+        "AntigravityPostNormalizationDirectStressMaxCutExact as DirectStress",
+        "preferredP2ConsumesTypedStressDirectly = true",
+        "preferredP2AffineSourceNormalizationCalibrationRequired = false",
+        "preferredP2CommonCosmologicalRenormalizationStillRequired = true",
+        "preferredP2PhysicalLeafCount = 2",
         "acceptedMeasuredGAuthorityStillOpen",
         "stressLengthSquaredScaleStillOpen",
         "acceptedMeasuredGAuthorityPaid",
-        "SI.acceptedMeasuredGAuthorityStillRequired",
-        "SI.sourceStressLengthSquaredScaleStillRequired",
         "acceptedMeasuredGAuthorityStillOpenIsFalse",
     ):
         assert needle in text
