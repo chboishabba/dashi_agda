@@ -117,6 +117,10 @@ fullBoundaryNerveStillFalse = refl
 higherStackPaid : Nongin.certifiedHigherStackPaid boundary ≡ true
 higherStackPaid = refl
 
-hypersheafStillAtHypercoverFrontier :
-  Nongin.certifiedHypersheafPaid boundary ≡ false
-hypersheafStillAtHypercoverFrontier = refl
+finiteTriadicHypersheafPaid :
+  Nongin.certifiedFiniteTriadicHypersheafPaid boundary ≡ true
+finiteTriadicHypersheafPaid = refl
+
+arbitraryInfinityHypersheafStillSeparate :
+  Nongin.certifiedArbitraryInfinityHypersheafPaid boundary ≡ false
+arbitraryInfinityHypersheafStillSeparate = refl
