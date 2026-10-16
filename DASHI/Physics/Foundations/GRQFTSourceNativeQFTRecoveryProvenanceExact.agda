@@ -70,8 +70,11 @@ forgetSourceNativeQFTRecoveryState =
 ------------------------------------------------------------------------
 -- LEGACY PROJECTION COMPATIBILITY
 --
--- This is now the exact seam: the legacy lossy recovery map must agree with the
--- construction retained by the enriched source-native state.
+-- This is the formal seam between the legacy lossy recovery map and an
+-- enriched state retaining a construction.  The interface by itself does not
+-- constrain the provenance payload, so it has a canonical definitional
+-- inhabitant which simply retains `recoverQFT U state`.  That inhabitant pays
+-- the projection equations, but NOT rich Balaban/R457 provenance.
 ------------------------------------------------------------------------
 
 record LegacyQFTRecoveryProjectionCompatibility
@@ -92,6 +95,38 @@ record LegacyQFTRecoveryProjectionCompatibility
       ≡ recoverQFTSourceNative (enrich state)
 
 open LegacyQFTRecoveryProjectionCompatibility public
+
+record FormalProjectionProvenance : Set₁ where
+  constructor formalProjectionProvenance
+
+formalProjectionEnrichment :
+  ∀ {U : Weld.UnifiedCandidate} →
+  Effective.JointMicroscopicState →
+  SourceNativeQFTRecoveryState U
+formalProjectionEnrichment {U} state =
+  sourceNativeQFTRecoveryState
+    state
+    (Weld.recoverQFT U state)
+    FormalProjectionProvenance
+    formalProjectionProvenance
+
+canonicalFormalLegacyProjectionCompatibility :
+  ∀ {U : Weld.UnifiedCandidate} →
+  LegacyQFTRecoveryProjectionCompatibility U
+canonicalFormalLegacyProjectionCompatibility {U} = record
+  { enrich = formalProjectionEnrichment
+  ; forgetAfterEnrich = λ state → refl
+  ; legacyRecoverAgreesWithSourceNative = λ state → refl
+  }
+
+formalLegacyProjectionCompatibilityCompilerOwned : Bool
+formalLegacyProjectionCompatibilityCompilerOwned = true
+
+formalLegacyProjectionCompatibilitySuppliesRichSourceNativeProvenance : Bool
+formalLegacyProjectionCompatibilitySuppliesRichSourceNativeProvenance = false
+
+projectionCompatibilityInterfaceIsIndependentPhysicalPayment : Bool
+projectionCompatibilityInterfaceIsIndependentPhysicalPayment = false
 
 sourceNativeConstructionIsLegacyRecovered :
   ∀ {U : Weld.UnifiedCandidate}
@@ -170,8 +205,11 @@ legacyJointMicroscopicStateRetainsSourceNativeYMProvenanceIsFalse :
 legacyJointMicroscopicStateRetainsSourceNativeYMProvenanceIsFalse = refl
 
 remainingQFTRecoverySeamIsProjectionCompatibility : Bool
-remainingQFTRecoverySeamIsProjectionCompatibility = true
+remainingQFTRecoverySeamIsProjectionCompatibility = false
 
-remainingQFTRecoverySeamIsProjectionCompatibilityIsTrue :
-  remainingQFTRecoverySeamIsProjectionCompatibility ≡ true
-remainingQFTRecoverySeamIsProjectionCompatibilityIsTrue = refl
+remainingQFTRecoverySeamIsProjectionCompatibilityIsFalse :
+  remainingQFTRecoverySeamIsProjectionCompatibility ≡ false
+remainingQFTRecoverySeamIsProjectionCompatibilityIsFalse = refl
+
+richSourceNativeProvenanceStillRequiresPhysicalAttachment : Bool
+richSourceNativeProvenanceStillRequiresPhysicalAttachment = true
