@@ -26,6 +26,8 @@ files=(
   DASHI/Analysis/CollatzSyracuseAffinePrefixTransitionValidation.agda
   DASHI/Analysis/CollatzSyracuseSharpBarrierTransitionExact.agda
   DASHI/Analysis/CollatzSyracuseSharpBarrierTransitionValidation.agda
+  DASHI/Analysis/CollatzSyracuseCoefficientStoppingBoundaryExact.agda
+  DASHI/Analysis/CollatzSyracuseCoefficientStoppingBoundaryValidation.agda
   DASHI/Analysis/CollatzSyracuseInfiniteSurvivorAffineObstructionExact.agda
   DASHI/Analysis/CollatzSyracuseInfiniteSurvivorAffineObstructionValidation.agda
   DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
@@ -85,6 +87,11 @@ grep -q 'appendOneContractingCoefficient' DASHI/Analysis/CollatzSyracuseAffinePr
 grep -q 'oddExtendedGap word coefficient' DASHI/Analysis/CollatzSyracuseAffinePrefixTransitionExact.agda
 grep -q 'trailingEvenSharpThresholdNonincreasing' DASHI/Analysis/CollatzSyracuseSharpBarrierTransitionExact.agda
 grep -q 'arbitraryTrailingEvenSharpThresholdNonincreasing' DASHI/Analysis/CollatzSyracuseSharpBarrierTransitionExact.agda
+
+grep -q 'descentImpliesCoefficientContracts' DASHI/Analysis/CollatzSyracuseCoefficientStoppingBoundaryExact.agda
+grep -q 'coefficientHorizonAtMostDescentHorizon' DASHI/Analysis/CollatzSyracuseCoefficientStoppingBoundaryExact.agda
+grep -q 'correctionFitAtCoefficientHorizonImpliesEquality' DASHI/Analysis/CollatzSyracuseCoefficientStoppingBoundaryExact.agda
+grep -q 'universalCoefficientStoppingEqualityPaid : Nat' DASHI/Analysis/CollatzSyracuseCoefficientStoppingBoundaryExact.agda
 
 grep -q 'contractingSurvivorForcesCorrectionDominance' DASHI/Analysis/CollatzSyracuseInfiniteSurvivorAffineObstructionExact.agda
 grep -q 'oneContractingCorrectionFitRefutesInfiniteSurvivor' DASHI/Analysis/CollatzSyracuseInfiniteSurvivorAffineObstructionExact.agda
