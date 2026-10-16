@@ -14,19 +14,6 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106E
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as QFT
 
-------------------------------------------------------------------------
--- SELECTED QFT STRESS -> CANONICAL SYMMETRIC METRIC BASIS
---
--- The generic Brown-Maclay attachment used to request a free component-symmetry
--- theorem for an arbitrary stress evaluator.  The canonical CMP119 route is
--- stronger: one symmetric ten-slot metric basis compiles the ordered-pair
--- evaluator, and its symmetry is theorem output.
---
--- The remaining physical input is therefore not symmetry itself.  It is the
--- same-object representation of the selected restricted QFT stress through
--- this canonical metric-basis readout.
-------------------------------------------------------------------------
-
 record SelectedStressMetricBasisRealization
     (U : Weld.UnifiedCandidate) : Set₁ where
   field
@@ -72,11 +59,16 @@ selectedStressMetricBasisIsSymmetric :
   Symmetry.PairingComponentSymmetry
     (selectedStressMetricBasisEvaluator realization)
     stress
-selectedStressMetricBasisIsSymmetric realization stress =
-  Symmetry.metricBasisEvaluatorIsComponentSymmetric
-    (symmetricBasis realization)
-    (rationalReadout realization)
-    (selectedStressToRepresentation realization stress)
+selectedStressMetricBasisIsSymmetric realization stress = record
+  { Symmetry.PairingComponentSymmetry.componentSymmetric =
+      λ a b →
+        Symmetry.PairingComponentSymmetry.componentSymmetric
+          (Symmetry.metricBasisEvaluatorIsComponentSymmetric
+            (symmetricBasis realization)
+            (rationalReadout realization)
+            (selectedStressToRepresentation realization stress))
+          a b
+  }
 
 ------------------------------------------------------------------------
 -- Fail-closed authority boundary.
@@ -103,4 +95,4 @@ canonicalSelectedStressMetricBasisBoundary =
 
 casimirSelectedStressMetricBasisReading : String
 casimirSelectedStressMetricBasisReading =
-  "Coordinate symmetry is compiler output once the selected restricted QFT stress is represented through the repository's canonical symmetric metric basis and rational stress-pairing readout. The remaining physics payment is the same-object attachment of that selected stress/readout to this metric-basis realization, not an independent T_mn=T_nm theorem. Brown-Maclay component values remain separate."
+  "Coordinate symmetry is compiler output once the selected restricted QFT stress is represented through the repository's canonical symmetric metric basis and rational stress-pairing readout. The carrier lift is explicit: the selected QFT stress is mapped to the existing canonical stress representation before the symmetric-basis theorem is consumed. The remaining physics payment is the same-object attachment of that selected stress/readout to this metric-basis realization, not an independent T_mn=T_nm theorem. Brown-Maclay component values remain separate."
