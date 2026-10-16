@@ -34,3 +34,15 @@ currentFrontierExact = refl
 priorityDoesNotPayEvidence :
   Frontier.paretoPriorityPaysEvidence Frontier.canonicalEmpiricalAcquisitionBoundary ≡ false
 priorityDoesNotPayEvidence = refl
+
+primaryDeclaredPurposeBaselinePaid :
+  Frontier.primaryDeclaredPurposeBaselinePaid Frontier.canonicalEmpiricalAcquisitionBoundary ≡ true
+primaryDeclaredPurposeBaselinePaid = refl
+
+intendedSpokesDesignSurfacePaid :
+  Frontier.intendedSpokesDesignSurfacePaid Frontier.canonicalEmpiricalAcquisitionBoundary ≡ true
+intendedSpokesDesignSurfacePaid = refl
+
+declarationAndDesignDoNotPayOperations :
+  Frontier.declarationOrDesignPaysRealizedSpokesControl Frontier.canonicalEmpiricalAcquisitionBoundary ≡ false
+declarationAndDesignDoNotPayOperations = refl
