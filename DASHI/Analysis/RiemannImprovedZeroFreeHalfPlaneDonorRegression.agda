@@ -1,0 +1,33 @@
+module DASHI.Analysis.RiemannImprovedZeroFreeHalfPlaneDonorRegression where
+
+import DASHI.Analysis.RiemannImprovedZeroFreeHalfPlaneDonorExact as Donor
+
+open import DASHI.Core.Prelude
+
+regressionExternalTheoremNotPromotedToRH :
+  Donor.ImprovedZeroFreeDonorBoundary.riemannHypothesisDerived
+    Donor.canonicalImprovedZeroFreeDonorBoundary ≡ false
+regressionExternalTheoremNotPromotedToRH =
+  Donor.ImprovedZeroFreeDonorBoundary.riemannHypothesisDerivedIsFalse
+    Donor.canonicalImprovedZeroFreeDonorBoundary
+
+regressionTargetWindowStrictlySharperThanSevenEighths :
+  Donor.ImprovedZeroFreeDonorBoundary.rationalTargetWindowStrictlySharperThanSevenEighths
+    Donor.canonicalImprovedZeroFreeDonorBoundary ≡ true
+regressionTargetWindowStrictlySharperThanSevenEighths =
+  Donor.ImprovedZeroFreeDonorBoundary.rationalTargetWindowStrictlySharperThanSevenEighthsIsTrue
+    Donor.canonicalImprovedZeroFreeDonorBoundary
+
+regressionG21HeightDomainCanConsumeImprovedBound :
+  Donor.ImprovedZeroFreeDonorBoundary.g21HeightDomainSharpeningAvailable
+    Donor.canonicalImprovedZeroFreeDonorBoundary ≡ true
+regressionG21HeightDomainCanConsumeImprovedBound =
+  Donor.ImprovedZeroFreeDonorBoundary.g21HeightDomainSharpeningAvailableIsTrue
+    Donor.canonicalImprovedZeroFreeDonorBoundary
+
+regressionSignedProducerStillRequired :
+  Donor.ImprovedZeroFreeDonorBoundary.signedA1A2BProducerPaidByDonor
+    Donor.canonicalImprovedZeroFreeDonorBoundary ≡ false
+regressionSignedProducerStillRequired =
+  Donor.ImprovedZeroFreeDonorBoundary.signedA1A2BProducerPaidByDonorIsFalse
+    Donor.canonicalImprovedZeroFreeDonorBoundary
