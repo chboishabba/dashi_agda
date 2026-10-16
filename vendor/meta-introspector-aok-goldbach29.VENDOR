@@ -3,21 +3,28 @@ construction_commit: c168223e96f7acc6179044f2a365a92db2e350c3
 construction_paths:
   goldbach29_commit_native: d3e01240-2567-46da-9224-8a1bc6668f6b/code/Cryptids/Goldbach29/Program.lean
   goldbach30_same_tree: 1fcb5ebe-bbab-4c12-bc38-4f1cd4739c1b/code/Cryptids/Goldbach30/Program.lean
-semantic_source_revision: 428e2366045cb0b728115777df8bef14318a3bcf
-semantic_source_path: d3e01240-2567-46da-9224-8a1bc6668f6b/code/Cryptids/Goldbach29/Main.lean
+goldbach29_semantic_source_revision: 428e2366045cb0b728115777df8bef14318a3bcf
+goldbach29_semantic_source_path: d3e01240-2567-46da-9224-8a1bc6668f6b/code/Cryptids/Goldbach29/Main.lean
+goldbach30_semantic_claim_revision: 7added5000a75226a834ba7aab08a7380f0c70b3
+goldbach30_semantic_claimed_path: Cryptids/Goldbach30/Main.lean
+goldbach30_audited_tree: 1ff3d6acbc46a2b01fc4663964eb031aca7635e4
+goldbach30_semantic_source_status: claimed in signed commit narrative, but Main.lean and Loops.lean absent from audited tree
 upstream_author: Mike Dupont / meta-introspector
 upstream_license: AGPL-3.0
-upstream_title: Goldbach30 / Goldbach29 FRACTRAN reduction pair and Goldbach29 halting semantics
+upstream_title: Goldbach30 / Goldbach29 FRACTRAN reduction pair and halting-semantics provenance
 
 attribution_boundary:
   Mike Dupont / meta-introspector owns the upstream Goldbach30 and Goldbach29
   constructions, their 30-to-29 fraction reduction, abstract machines,
-  FRACTRAN programs, Lean proofs fstep_enc, and the later source-visible Lean
-  theorem goldbachProg_halts_iff.
-  DASHI owns only this provenance receipt plus its independent observer/fibre
-  translation, exact arithmetic reconstruction of the success macro, and
-  DASHI-native consumer/cost theorems built from that explicitly attributed
-  external fact surface.
+  FRACTRAN programs, and Lean proofs fstep_enc. The later source-visible
+  Goldbach29 theorem goldbachProg_halts_iff remains Mike/meta-introspector's
+  formal authority. The Goldbach30 commit narrative also claims a matching
+  theorem, but DASHI does not promote that narrative to formal theorem authority
+  because its claimed Main.lean/Loops.lean files are absent from the audited
+  exact commit tree.
+  DASHI owns only this provenance/audit receipt plus its independent
+  observer/fibre translation, exact arithmetic reconstruction of the success
+  macro, and DASHI-native consumer/cost theorems.
 
 external_facts_used:
   - Goldbach30 has 30 fractions and 11 control states
@@ -27,11 +34,15 @@ external_facts_used:
   - Goldbach30 success uses NT.B -> SA, the SA/SB transfer loop, then SA -> RA.A
   - Goldbach29 success reroutes the transfer through NT.B/SB, stages through
     NT2.B, and reuses the existing NT.B b c -> RA.A transition
-  - each Program.lean proves one encoded FRACTRAN step matches one abstract
-    astep step (fstep_enc)
-  - at semantic_source_revision, Goldbach29/Main.lean contains theorem
-    goldbachProg_halts_iff: the 29-fraction program halts from N0 iff there is
-    an even n >= 4 with no representation as a sum of two primes
+  - each committed Program.lean proves one encoded FRACTRAN step matches one
+    abstract astep step (fstep_enc)
+  - at goldbach29_semantic_source_revision, Goldbach29/Main.lean contains
+    theorem goldbachProg_halts_iff: the 29-fraction program halts from N0 iff
+    there is an even n >= 4 with no representation as a sum of two primes
+  - Goldbach30 commit 7added5000a75226a834ba7aab08a7380f0c70b3 narratively
+    claims the corresponding Goldbach30 theorem and no-sorry build
+  - recursive tree audit of that exact commit finds no Goldbach30/Main.lean or
+    Goldbach30/Loops.lean, so that claim remains development-narrative evidence
 
 path_provenance_note:
   The construction commit itself records Goldbach29 under the d3e01240 UUID
@@ -42,6 +53,8 @@ non_claims:
   - this receipt does not vendor-copy AGPL source into DASHI
   - this receipt does not claim DASHI authorship of Goldbach30 or Goldbach29
   - imported Lean theorem authority is not an Agda proof
+  - a commit-message theorem claim without its source artifact is not imported
+    formal theorem authority
   - goldbachProg_halts_iff is an equivalence to a counterexample; it is not a
     proof that no counterexample exists and therefore does not prove Goldbach
   - this receipt alone does not prove Goldbach30/29 whole-machine weak bisimulation
