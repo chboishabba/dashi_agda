@@ -1,0 +1,21 @@
+{
+  "assertions_passed": true,
+  "fillings": [
+    {"A_minus_30_meV": 8.83948587014137e-05, "A_plus_30_meV": 0.3183098861837907, "lower_hubbard_weight": 0.0, "nu_f": -4, "upper_hubbard_weight": 1.0, "weight_sum": 1.0},
+    {"A_minus_30_meV": 0.03986608127433757, "A_plus_30_meV": 0.2785321997681546, "lower_hubbard_weight": 0.125, "nu_f": -3, "upper_hubbard_weight": 0.875, "weight_sum": 1.0},
+    {"A_minus_30_meV": 0.07964376768997374, "A_plus_30_meV": 0.23875451335251835, "lower_hubbard_weight": 0.25, "nu_f": -2, "upper_hubbard_weight": 0.75, "weight_sum": 1.0},
+    {"A_minus_30_meV": 0.11942145410560989, "A_plus_30_meV": 0.1989768269368822, "lower_hubbard_weight": 0.375, "nu_f": -1, "upper_hubbard_weight": 0.625, "weight_sum": 1.0},
+    {"A_minus_30_meV": 0.15919914052124606, "A_plus_30_meV": 0.15919914052124606, "lower_hubbard_weight": 0.5, "nu_f": 0, "upper_hubbard_weight": 0.5, "weight_sum": 1.0},
+    {"A_minus_30_meV": 0.1989768269368822, "A_plus_30_meV": 0.11942145410560989, "lower_hubbard_weight": 0.625, "nu_f": 1, "upper_hubbard_weight": 0.375, "weight_sum": 1.0},
+    {"A_minus_30_meV": 0.23875451335251835, "A_plus_30_meV": 0.07964376768997374, "lower_hubbard_weight": 0.75, "nu_f": 2, "upper_hubbard_weight": 0.25, "weight_sum": 1.0},
+    {"A_minus_30_meV": 0.2785321997681546, "A_plus_30_meV": 0.03986608127433757, "lower_hubbard_weight": 0.875, "nu_f": 3, "upper_hubbard_weight": 0.125, "weight_sum": 1.0},
+    {"A_minus_30_meV": 0.3183098861837907, "A_plus_30_meV": 8.83948587014137e-05, "lower_hubbard_weight": 1.0, "nu_f": 4, "upper_hubbard_weight": 0.0, "weight_sum": 1.0}
+  ],
+  "model": "Xiao-2026 non-hybridized f-electron Hubbard-I atomic reference",
+  "parameters": {"N": 8, "U_meV": 60.0, "delta_mu_meV_fixture": 0.0, "tau_inverse_meV": 1.0},
+  "pole_centres_meV": [-30.0, 30.0],
+  "promotion_boundaries": {"agda_kernel_receipt": false, "full_c_f_hybridization": false, "qtm_data_fit": false, "same_sample_entropy": false, "self_consistent_density_and_mu": false},
+  "script": "scripts/matbg_thf_hubbard_i_atomic_reference.py",
+  "script_sha256": "7633547ed9f4dd10af2088dd482cba0880220e3ea5294b0620f3398d63f54ce5",
+  "source_doi": "10.1038/s41586-026-10378-x"
+}
