@@ -3,6 +3,7 @@ module DASHI.ComputerScience.Goldbach29Signed369VendorBridgeExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Core.ConsumerFibreRepairExact as Repair
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.ComputerScience.FibreMachineFoundation369Exact as Fibre369
 
@@ -110,8 +111,9 @@ goldbachReductionConsumerBoundary = canonicalGoldbachReductionConsumerBoundary
 anyConsumerRepairMustSeparateKnown369Collision :
   ∀ {Refinement : Set}
     (refine : Signed.SignedSSPExecutionState → Refinement) →
-  Descent.ConsumerSufficient
-    (λ state → Fibre369.address369Observer state , refine state)
+  Repair.RefinementRepairs
+    Fibre369.address369Observer
+    refine
     Fibre369.executionLengthConsumer →
   refine Signed.canonicalVirtualFiftyThreeState
   ≡ refine Signed.canonicalGeometryFiftyThreeState →
