@@ -5,13 +5,13 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedPointOwnCookStreamingE
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Maybe using (Maybe)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (_≤_)
-open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
+import DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact as Query
 import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact as Semantics
 import DASHI.Mathematics.Complexity.GuardedCookStreamingBitExact as Stream
 import DASHI.Mathematics.Complexity.GuardedCookFixedDescriptionStreamingCostExact as Cost
@@ -88,7 +88,7 @@ recoveredOwnCookLinearInCanonicalInput :
   ≤
   Cost.fixedDescriptionLinearBudget
     (Own.fixedPointRecoveredDescription description)
-    (DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact.queryBitLength
+    (Query.queryBitLength
       (Description.atIndex description index))
 recoveredOwnCookLinearInCanonicalInput description index =
   Cost.fixedDescriptionBitWorkLinearInCanonicalInput
@@ -99,11 +99,8 @@ recoveredOwnCookLinearInCanonicalInput description index =
 -- MAX-CUT CONSEQUENCE
 --
 -- The behavioural fixed-point quotation now drives the already-owned list-free
--- guarded-Cook bit evaluator for the SAME coded machine.  Returned bits agree
+-- guarded-Cook bit evaluator for the SAME coded machine. Returned bits agree
 -- with canonical query semantics and carry the same fixed-description linear
--- semantic work bound.
---
--- The remaining implementation is operational rather than semantic: compile
--- this exact recovered-query recursion into one ordinary coded standard TM and
--- then close the fixed target's actual program-size/runtime/Cook budget.
+-- semantic work bound. Remaining work is operational compilation plus the final
+-- same-object program-size/runtime/Cook resource fixed point.
 ------------------------------------------------------------------------
