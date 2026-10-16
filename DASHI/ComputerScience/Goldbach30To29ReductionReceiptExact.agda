@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.ComputerScience.Goldbach29Signed369VendorBridgeExact as Bridge
 import DASHI.ComputerScience.Goldbach30To29SuccessMacroExact as Macro
 import DASHI.ComputerScience.Goldbach29ExternalHaltingSemanticsExact as Semantics
+import DASHI.ComputerScience.Goldbach30To29HaltingConsumerCompilerExact as Halting
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 
 ------------------------------------------------------------------------
@@ -59,6 +60,9 @@ externalGoldbach29HaltingSemanticsSourcePaid : Bool
 externalGoldbach29HaltingSemanticsSourcePaid =
   Semantics.externalGoldbach29HaltingSemanticsSourcePaid
 
+sameCounterexampleHaltingCompilerPaid : Bool
+sameCounterexampleHaltingCompilerPaid = true
+
 ------------------------------------------------------------------------
 -- Paid Pareto point.
 --
@@ -69,8 +73,11 @@ externalGoldbach29HaltingSemanticsSourcePaid =
 --   - one MORE microstep on that success macro.
 --
 -- The later attributed Lean source additionally pays the Goldbach29 halting
--- consumer at imported-formal-source authority.  It does not provide an Agda
--- proof and does not by itself identify Goldbach30 with Goldbach29.
+-- consumer at imported-formal-source authority.  DASHI now owns the generic
+-- same-counterexample-consumer -> halting-equivalence compiler.  Therefore the
+-- semantic leaf has narrowed to a Goldbach30 attachment to that same consumer
+-- (plus an accepted cross-prover transport if the comparison is to live inside
+-- Agda).  Fine-state bisimulation is no longer logically required for halting.
 ------------------------------------------------------------------------
 
 record Goldbach30To29ReductionReceipt : Set where
@@ -85,7 +92,9 @@ record Goldbach30To29ReductionReceipt : Set where
     successExecutionPenaltyPaidFlag : Bool
     programLengthEqualsExecutionLength : Bool
     externalGoldbach29HaltingSemanticsSourcePaidFlag : Bool
+    sameCounterexampleHaltingCompilerPaidFlag : Bool
     agdaGoldbach29HaltingSemanticsPaidFlag : Bool
+    goldbach30HaltingAttachmentPaidFlag : Bool
     wholeMachineReachableWeakBisimulationPaidFlag : Bool
     wholeMachineHaltingEquivalencePaidFlag : Bool
     goldbachConjectureProvedFlag : Bool
@@ -97,7 +106,8 @@ canonicalGoldbach30To29ReductionReceipt =
   goldbach30To29ReductionReceipt
     true true true true true
     true true false
-    true false
+    true true
+    false false
     false false false
 
 wholeMachineReachableWeakBisimulationPaid : Bool
@@ -105,6 +115,9 @@ wholeMachineReachableWeakBisimulationPaid = false
 
 wholeMachineHaltingEquivalencePaid : Bool
 wholeMachineHaltingEquivalencePaid = false
+
+goldbach30HaltingAttachmentPaid : Bool
+goldbach30HaltingAttachmentPaid = Halting.goldbach30HaltingAttachmentPaid
 
 ------------------------------------------------------------------------
 -- Terminal max-cut status.
@@ -119,10 +132,11 @@ record Goldbach30To29TerminalMaxCut : Set where
     exactSuccessMacroCostDeltaPaid : Bool
     signed369StaticDynamicSeparationReused : Bool
     goldbach29ExternalHaltingSemanticsSourcePaid : Bool
+    sameCounterexampleHaltingCompilerPaid : Bool
     goldbach29AgdaHaltingSemanticsPaid : Bool
     sharedPrefixRequiresFurtherAbstractReproof : Bool
     successTailRequiresFurtherMacroProof : Bool
-    literalWholeMachineReachabilityRelationRequired : Bool
+    weakBisimulationRequiredForHaltingEquivalence : Bool
     goldbach30HaltingConsumerAttachmentRequired : Bool
     externalGoldbach29TheoremAttachmentRequired : Bool
 
@@ -130,6 +144,6 @@ canonicalGoldbach30To29TerminalMaxCut : Goldbach30To29TerminalMaxCut
 canonicalGoldbach30To29TerminalMaxCut =
   goldbach30To29TerminalMaxCut
     true true true true true
-    true false
-    false false
     true true false
+    false false false
+    true false
