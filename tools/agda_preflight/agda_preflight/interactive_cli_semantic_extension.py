@@ -35,6 +35,11 @@ def build_semantic_parser() -> argparse.ArgumentParser:
     obj.add_argument("symbol_id")
     _common(obj)
 
+    archaeology = sub.add_parser("archaeology", help="search cached PR/commit development narrative")
+    archaeology.add_argument("query")
+    archaeology.add_argument("--limit", type=int, default=50)
+    _common(archaeology)
+
     discover = sub.add_parser("discover", help="produce a fail-closed repository discovery/absence receipt")
     discover.add_argument("query")
     discover.add_argument("--limit", type=int, default=50)
@@ -81,6 +86,8 @@ def run_semantic_command(argv) -> int:
             )
         elif args.command == "object":
             payload = service.object_detail(args.symbol_id)
+        elif args.command == "archaeology":
+            payload = service.narrative_archaeology(args.query, limit=args.limit)
         elif args.command == "discover":
             payload = service.discover(args.query, limit=args.limit)
         elif args.command == "lineage":
@@ -95,7 +102,7 @@ def install_interactive_cli_semantic_extension(module) -> None:
     if getattr(module, "_semantic_discovery_installed", False):
         return
     original = module.main
-    semantic_commands = {"symbol", "related", "object", "discover", "lineage"}
+    semantic_commands = {"symbol", "related", "object", "archaeology", "discover", "lineage"}
 
     def main(argv=None) -> int:
         import sys
