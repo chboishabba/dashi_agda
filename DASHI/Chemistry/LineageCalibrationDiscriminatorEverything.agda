@@ -29,6 +29,14 @@ import DASHI.Chemistry.MolecularMechanisticPromotionLadderExact
 import DASHI.Chemistry.PAHMechanismStatePromotionExact
 import DASHI.Chemistry.LineageMechanisticPromotionMaxCutValidation
 
+-- Attempt the next two promotion rungs rather than assuming them: PAH now has
+-- a source-backed catalytic electronic-state carrier including the bacterial
+-- high-spin Fe(IV) intermediate, but no source-paid numerical electronic
+-- Hamiltonian/eigenvector. Full-length hPAH:BH4 is D2, so no same-object C3
+-- coordinate currently supports the NH3-style Monster-3B intertwiner.
+import DASHI.Chemistry.PAHElectronicStateHamiltonianMonsterProbeExact
+import DASHI.Chemistry.PAHElectronicStateHamiltonianMonsterProbeValidation
+
 -- Numeric calibration is fail-closed: locator, units, context, method and
 -- uncertainty are independent obligations; an unpaid coordinate is not zero.
 import DASHI.Chemistry.LineageQuantitativeCalibrationLedgerExact
