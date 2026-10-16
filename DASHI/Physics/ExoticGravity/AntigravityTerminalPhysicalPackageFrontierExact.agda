@@ -19,15 +19,20 @@ import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStatic
 -- Mandatory for static and scalar differential response:
 --
 --   P1. one typed Local-C/Wightman terminal package.  Current master reduces
---       its antigravity-specific source content to TWO subpackages:
+--       its antigravity-specific source content to exactly TWO source leaves:
 --
 --       Q1  actual BC2 path-derivative semantics + B4-equivariant path;
---       E24 one literal selected R109 real cylinder observable together with
---           positive-time and gauge-invariance proofs.
+--       A2  the opaque Round109 source-native stress pair denotes the canonical
+--           Local-C encoded Wilson-admissible stress cylinder observable.
 --
---       The selected R109 insertion identity is definitionally pinned.  No
---       arbitrary meaning predicate, all-stress encoding family, separate E4
---       observable/decay theorem, primitive E1 covariance project, B0/B3
+--       Current master ALREADY chooses that observable and obtains its
+--       positive-time and gauge-invariance proofs from the published Wilson OS
+--       application.  Those are not independent leaves.  The bare Round109
+--       pair has no observable evaluator, so A2 remains a genuine same-object
+--       source-semantic theorem rather than presentation plumbing.
+--
+--       No arbitrary meaning predicate, all-stress encoding family, separate
+--       E4 observable/decay theorem, primitive E1 covariance project, B0/B3
 --       antigravity-specific bridge, or downstream rest/boost/trace law is
 --       independently scheduled.
 --
@@ -81,9 +86,25 @@ p1Q1PathDerivativeSemanticsAndEquivarianceStillRequired =
 p1PrimitiveE1DerivativeEquivarianceProjectRequired : Bool
 p1PrimitiveE1DerivativeEquivarianceProjectRequired = false
 
+-- Compatibility flag retained to make the retired scheduling visible.
 p1E24ObservableAndTwoAdmissibilityProofsStillRequired : Bool
-p1E24ObservableAndTwoAdmissibilityProofsStillRequired =
-  P1.e24NovelDataAreOneObservableAndTwoAdmissibilityProofs
+p1E24ObservableAndTwoAdmissibilityProofsStillRequired = false
+
+p1E24SelectedObservableChoiceStillRequired : Bool
+p1E24SelectedObservableChoiceStillRequired =
+  P1.e24SelectedObservableChoiceStillRequired
+
+p1E24PositiveTimeAdmissibilityStillRequired : Bool
+p1E24PositiveTimeAdmissibilityStillRequired =
+  P1.e24PositiveTimeAdmissibilityStillRequired
+
+p1E24GaugeInvariantAdmissibilityStillRequired : Bool
+p1E24GaugeInvariantAdmissibilityStillRequired =
+  P1.e24GaugeInvariantAdmissibilityStillRequired
+
+p1E24PairToCanonicalObservableSemanticsStillRequired : Bool
+p1E24PairToCanonicalObservableSemanticsStillRequired =
+  P1.e24PairToCanonicalObservableSemanticsStillRequired
 
 p1E24ArbitraryMeaningPredicateRequired : Bool
 p1E24ArbitraryMeaningPredicateRequired = false
