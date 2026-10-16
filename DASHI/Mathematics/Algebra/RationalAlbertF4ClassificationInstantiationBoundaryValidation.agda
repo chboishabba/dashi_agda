@@ -9,6 +9,18 @@ allLocalExceptionalHypothesesOwned :
   C.allConcreteExceptionalHypothesesOwned C.canonicalBoundary ≡ true
 allLocalExceptionalHypothesesOwned = refl
 
+modernRingLevelClassificationSourceLocated :
+  C.modernRingLevelClassificationSourceLocated C.canonicalBoundary ≡ true
+modernRingLevelClassificationSourceLocated = refl
+
+classificationNoLongerSourceDiscovery :
+  C.remainingClassificationIsSourceDiscovery C.canonicalBoundary ≡ false
+classificationNoLongerSourceDiscovery = refl
+
+classificationStillQFormAndGroupLevel :
+  C.remainingClassificationIsQFormAndGroupLevel C.canonicalBoundary ≡ true
+classificationStillQFormAndGroupLevel = refl
+
 normUnitRigidityLocatedCrossKernel :
   C.normUnitRigiditySourceWrittenCrossKernel C.canonicalBoundary ≡ true
 normUnitRigidityLocatedCrossKernel = refl
