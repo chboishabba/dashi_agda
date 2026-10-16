@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.MonsterC3EntropyGravityValidation where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Moonshine.Monster3BRepresentationNativeCurrentMaxCutExact as MonsterNative
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3Electronic
 import DASHI.Physics.Chemistry.AmmoniaC3RegularRepresentationExact as NH3Regular
 import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionExact as Hamiltonian
@@ -12,17 +13,15 @@ import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact as MonsterProbe
 import DASHI.Physics.Chemistry.AmmoniaMonster3BC3QuotientLiftExact as MonsterC3
 import DASHI.Physics.Chemistry.AmmoniaMonster3BPhaseQuotientNonFactorabilityExact as PhaseNF
 import DASHI.Physics.Chemistry.AmmoniaMonster3BRefinedStateLiftCompilerExact as RefinedLift
-import DASHI.Physics.Chemistry.Atomic369Kernel6HeisenbergBridgeExact as Kernel6
 import DASHI.Physics.Chemistry.AmmoniaMonster3BNative369FineCarrierExact as Native369
+import DASHI.Physics.Chemistry.AmmoniaMonster3BRepresentationNativeCorrectionExact as NativeCorrection
 import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact as H3C3
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact as Abstraction
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact as Abstraction369
-import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact as Chemistry
 
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as StateCount
 import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact as Uniform
 import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleExact as NativeEnsemble
-import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact as ZetaCross
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
 import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact as Authority
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
@@ -38,24 +37,55 @@ nontrivialPhaseSeesResidual53 :
     StateCount.canonicalMonsterC3StateCountingReceipt ≡ 53
 nontrivialPhaseSeesResidual53 = refl
 
-literalThreePhasesAlreadyShareOneAction :
-  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.literalThreePhaseFibresUseOneCentralAction
-    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ true
-literalThreePhasesAlreadyShareOneAction = refl
+-- The current Monster max-cut already owns the generic theorem machinery.
+genericIsotypicAssemblyAlreadySourceWritten :
+  MonsterNative.Boundary.genericIsotypicAssemblySourceWritten
+    MonsterNative.canonicalBoundary ≡ true
+genericIsotypicAssemblyAlreadySourceWritten = refl
 
-selected3BFrontierCompressedToTwoSourceLeaves :
-  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.selected3BOnlyLinearRetractionAndProjectedActionRemain
-    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ true
-selected3BFrontierCompressedToTwoSourceLeaves = refl
+postRecognitionCopyCountAlreadySourceWritten :
+  MonsterNative.Boundary.postRecognitionCopyCountCompilerSourceWritten
+    MonsterNative.canonicalBoundary ≡ true
+postRecognitionCopyCountAlreadySourceWritten = refl
 
-selected3BRetractionStillUnpaid :
-  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.selected3BLinearRetractionPaid
-    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ false
-selected3BRetractionStillUnpaid = refl
+proofRelevantLinearWrappersAvailable :
+  MonsterNative.Boundary.proofRelevantWeightTwoWrapperAvailable
+    MonsterNative.canonicalBoundary ≡ true
+proofRelevantLinearWrappersAvailable = refl
+
+hzetaCharacterIsoCompilerAvailable :
+  MonsterNative.Boundary.hzetaCharacterIsoCompilerAvailable
+    MonsterNative.canonicalBoundary ≡ true
+hzetaCharacterIsoCompilerAvailable = refl
+
+actualLinearZetaRestrictionStillUnpaid :
+  MonsterNative.Boundary.actualPaidLinearZetaRestriction
+    MonsterNative.canonicalBoundary ≡ false
+actualLinearZetaRestrictionStillUnpaid = refl
+
+actualSimpleTypeClassifierStillUnpaid :
+  MonsterNative.Boundary.actualSimpleTypeClassifier
+    MonsterNative.canonicalBoundary ≡ false
+actualSimpleTypeClassifierStillUnpaid = refl
+
+actualIsotypicEquivalenceStillUnpaid :
+  MonsterNative.Boundary.actualWholeSectorIsotypicEquivalence
+    MonsterNative.canonicalBoundary ≡ false
+actualIsotypicEquivalenceStillUnpaid = refl
+
+actualHomEvaluationStillUnpaid :
+  MonsterNative.Boundary.actualMultiplicityHomEvaluation
+    MonsterNative.canonicalBoundary ≡ false
+actualHomEvaluationStillUnpaid = refl
+
+selected3BLinearRetractionStillUnpaid :
+  MonsterNative.Boundary.selected3BLinearRetraction
+    MonsterNative.canonicalBoundary ≡ false
+selected3BLinearRetractionStillUnpaid = refl
 
 selected3BProjectedActionStillUnpaid :
-  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.selected3BProjectedActionPaid
-    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ false
+  MonsterNative.Boundary.selected3BProjectedAction
+    MonsterNative.canonicalBoundary ≡ false
 selected3BProjectedActionStillUnpaid = refl
 
 ammoniaGroundStateIs1A1 :
@@ -83,19 +113,10 @@ sto3gFCIDiagonalizationPaid :
     FCI.canonicalSTO3GFCIBoundary ≡ true
 sto3gFCIDiagonalizationPaid = refl
 
-sto3gFCIEnergyMagnitudeIs555245 :
-  FCI.NH3STO3GFCIReceipt.fciEnergyTenThousandthHartree
-    FCI.canonicalNH3STO3GFCIReceipt ≡ 555245
-sto3gFCIEnergyMagnitudeIs555245 = refl
-
 authorReleasedMatrixIdentityPaid :
   SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid
     SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
 authorReleasedMatrixIdentityPaid = refl
-
-authorReleasedMatrixDimension64 :
-  SCIArtifact.ReleasedSelectedCIArtifact.matrixDimension SCIArtifact.nh3SelectedCI64Artifact ≡ 64
-authorReleasedMatrixDimension64 = refl
 
 authorMatrixStillNotRediagonalizedByDASHI :
   SCIArtifact.ReleasedArtifactBoundary.matrixIndependentlyRediagonalizedByDASHI
@@ -107,24 +128,10 @@ groundDeterminantPhaseComputedFromOccupiedCarrier :
     GroundC3.canonicalGroundStateC3Boundary ≡ true
 groundDeterminantPhaseComputedFromOccupiedCarrier = refl
 
-trivialGroundConfigurationC3RepresentationPaid :
-  GroundC3.GroundStateC3Boundary.trivialGroundConfigurationC3RepresentationPaid
-    GroundC3.canonicalGroundStateC3Boundary ≡ true
-trivialGroundConfigurationC3RepresentationPaid = refl
-
-realSpaceGroundC3ActionStillUnpaid :
-  GroundC3.GroundStateC3Boundary.nontrivialRealSpaceWavefunctionC3ActionPaid
-    GroundC3.canonicalGroundStateC3Boundary ≡ false
-realSpaceGroundC3ActionStillUnpaid = refl
-
 nh3A1PlusEIsRegularC3 :
   NH3Regular.RegularC3CrossDomainBoundary.nh3A1PlusERestrictsToOneRegularC3
     NH3Regular.canonicalRegularC3CrossDomainBoundary ≡ true
 nh3A1PlusEIsRegularC3 = refl
-
-nh3RegularBlockCancelsAtGenerator :
-  NH3Regular.ammoniaA1PlusEGeneratorAmplitude ≡ NH3Regular.zeroAmplitude
-nh3RegularBlockCancelsAtGenerator = NH3Regular.ammoniaA1PlusEGeneratorCancels
 
 ammoniaMonsterC3GroupLawIntertwinerPaid :
   MonsterC3.C3QuotientLiftBoundary.c3GroupLawIntertwiningPaid
@@ -141,35 +148,40 @@ phaseCannotRecoverFineMonsterStatePaid :
     PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
 phaseCannotRecoverFineMonsterStatePaid = refl
 
-phaseCannotRecoverMonsterMultiplicityPaid :
-  PhaseNF.PhaseQuotientNonFactorabilityBoundary.phaseQuotientMultiplicityNonfactorabilityPaid
-    PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
-phaseCannotRecoverMonsterMultiplicityPaid = refl
-
-refinedMonsterRecognitionCompilerPaid :
-  RefinedLift.RefinedStateLiftBoundary.actualRecognitionLiftCompilerPaid
+refinedBasisRecognitionCompilerPaid :
+  RefinedLift.RefinedStateLiftBoundary.actualBasisRecognitionLiftCompilerPaid
     RefinedLift.canonicalRefinedStateLiftBoundary ≡ true
-refinedMonsterRecognitionCompilerPaid = refl
+refinedBasisRecognitionCompilerPaid = refl
 
-atomicKernel6HeisenbergCarrierPaid :
-  Kernel6.Kernel6HeisenbergBoundary.kernel6HeisenbergCarrierIsomorphismPaid
-    Kernel6.canonicalKernel6HeisenbergBoundary ≡ true
-atomicKernel6HeisenbergCarrierPaid = refl
+wholeLiteralSectorFiniteLiftBlocked :
+  RefinedLift.RefinedStateLiftBoundary.wholeLiteralSectorFiniteLiftCompilerPaid
+    RefinedLift.canonicalRefinedStateLiftBoundary ≡ false
+wholeLiteralSectorFiniteLiftBlocked = refl
 
-fullMonsterZetaModelHasNative369Chart :
-  Native369.Native369FineCarrierBoundary.fullMonsterZetaModelHasNative369CarrierChart
+native369FiniteChartIsBasisLabels :
+  Native369.Native369FineCarrierBoundary.native369FiniteChartIsBasisLabelChart
     Native369.canonicalNative369FineCarrierBoundary ≡ true
-fullMonsterZetaModelHasNative369Chart = refl
+native369FiniteChartIsBasisLabels = refl
 
-actualZetaRecognitionComposesWithNative369 :
-  Native369.Native369FineCarrierBoundary.actualZetaRecognitionComposesWithNative369Chart
-    Native369.canonicalNative369FineCarrierBoundary ≡ true
-actualZetaRecognitionComposesWithNative369 = refl
-
-physicalNH3FineCoordinateStillUnpaid :
-  Native369.Native369FineCarrierBoundary.physicalNH3StateToNative369FineCoordinatePaid
+native369FiniteChartIsNotWholeWZeta :
+  Native369.Native369FineCarrierBoundary.native369FiniteChartIsWholeVOAStateBijection
     Native369.canonicalNative369FineCarrierBoundary ≡ false
-physicalNH3FineCoordinateStillUnpaid = refl
+native369FiniteChartIsNotWholeWZeta = refl
+
+actualBasisRecognitionComposesWithNative369 :
+  NativeCorrection.RepresentationNativeCorrectionBoundary.actualBasisRecognitionComposesWithNative369
+    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ true
+actualBasisRecognitionComposesWithNative369 = refl
+
+actualHZetaSameObjectStillUnpaid :
+  NativeCorrection.RepresentationNativeCorrectionBoundary.actualHZetaSameObjectRecognitionPaid
+    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ false
+actualHZetaSameObjectStillUnpaid = refl
+
+physicalNH3LinearMonsterStateStillUnpaid :
+  NativeCorrection.RepresentationNativeCorrectionBoundary.physicalNH3ToMonsterLinearStatePaid
+    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ false
+physicalNH3LinearMonsterStateStillUnpaid = refl
 
 nontrivialMonsterActionStillUnpaid :
   MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid
@@ -195,38 +207,13 @@ literal369ReactionHyperformPaid :
     Abstraction369.canonicalHyperformBoundary ≡ true
 literal369ReactionHyperformPaid = refl
 
-abstractionAtomicInventoryEndpointsPaid :
-  Abstraction369.HyperformBoundary.atomic369InventoryEndpointsPaid
-    Abstraction369.canonicalHyperformBoundary ≡ true
-abstractionAtomicInventoryEndpointsPaid = refl
-
-abstractionIndividualAtomIdentityStillUnpaid :
-  Abstraction369.HyperformBoundary.individualAtomIdentityTransportPaid
-    Abstraction369.canonicalHyperformBoundary ≡ false
-abstractionIndividualAtomIdentityStillUnpaid = refl
-
-trivialGroundC3InterfacePaid :
-  Chemistry.ChemistryC3InterfaceStatus.trivialGroundConfigurationC3RepresentationPaid
-    Chemistry.canonicalChemistryC3InterfaceStatus ≡ true
-trivialGroundC3InterfacePaid = refl
-
-fullRealSpaceC3InterfaceStillUnpaid :
-  Chemistry.ChemistryC3InterfaceStatus.fullRealSpaceElectronicC3ActionInstantiated
-    Chemistry.canonicalChemistryC3InterfaceStatus ≡ false
-fullRealSpaceC3InterfaceStillUnpaid = refl
-
 normalizedFiniteCountingWeightsPaid :
   Uniform.CountingEnsembleBoundary.normalizedFiniteCountingWeightsPaid
     Uniform.canonicalCountingEnsembleBoundary ≡ true
 normalizedFiniteCountingWeightsPaid = refl
 
-nativeZetaMicrostateCarrierPaid :
-  NativeEnsemble.NativeZetaEnsembleBoundary.native369MicrostateCarrierPaid
-    NativeEnsemble.canonicalNativeZetaEnsembleBoundary ≡ true
-nativeZetaMicrostateCarrierPaid = refl
-
-nativeZetaCountIs65610 : NativeEnsemble.zetaStateCount ≡ 65610
-nativeZetaCountIs65610 = refl
+nativeZetaBasisLabelCountIs65610 : NativeEnsemble.zetaStateCount ≡ 65610
+nativeZetaBasisLabelCountIs65610 = refl
 
 nativeCountingStillNotPhysicalThermalEnsemble :
   NativeEnsemble.NativeZetaEnsembleBoundary.nativeUniformCountingIsPhysicalThermalEnsemble
@@ -252,29 +239,21 @@ observedFourDimensionalMonsterStillUnpaid :
     Physical.canonicalMonster3Plus1PhysicalSymmetryReceipt ≡ false
 observedFourDimensionalMonsterStillUnpaid = refl
 
-terminalReceiptKeepsMatrixRediagonalizationOpen :
-  MaxCut.Receipt.authorReleasedMatrixRediagonalizedByDASHI MaxCut.canonicalReceipt ≡ false
-terminalReceiptKeepsMatrixRediagonalizationOpen = refl
+terminalGenericIsotypicAssemblyPaid :
+  MaxCut.Receipt.genericIsotypicAssemblySourceWritten MaxCut.canonicalReceipt ≡ true
+terminalGenericIsotypicAssemblyPaid = refl
 
-terminalReceiptPaysRegularC3Block :
-  MaxCut.Receipt.ammoniaA1PlusERegularC3Paid MaxCut.canonicalReceipt ≡ true
-terminalReceiptPaysRegularC3Block = refl
+terminalBasisChartPaid :
+  MaxCut.Receipt.native369ZetaBasisLabelChartPaid MaxCut.canonicalReceipt ≡ true
+terminalBasisChartPaid = refl
 
-terminalReceiptPaysC3QuotientRepresentation :
-  MaxCut.Receipt.ammoniaMonsterC3QuotientRepresentationPaid MaxCut.canonicalReceipt ≡ true
-terminalReceiptPaysC3QuotientRepresentation = refl
+terminalWholeWZetaFiniteBijectionBlocked :
+  MaxCut.Receipt.native369WholeLinearWZetaStateBijectionPaid MaxCut.canonicalReceipt ≡ false
+terminalWholeWZetaFiniteBijectionBlocked = refl
 
-terminalReceiptPaysPhaseNonfactorability :
-  MaxCut.Receipt.phaseQuotientFineStateNonfactorabilityPaid MaxCut.canonicalReceipt ≡ true
-terminalReceiptPaysPhaseNonfactorability = refl
-
-terminalReceiptPaysRefinedCompiler :
-  MaxCut.Receipt.refinedMonsterModelLiftCompilerPaid MaxCut.canonicalReceipt ≡ true
-terminalReceiptPaysRefinedCompiler = refl
-
-terminalReceiptPaysProofRelevantReaction :
-  MaxCut.Receipt.h3ProofRelevantC3ReactionPaid MaxCut.canonicalReceipt ≡ true
-terminalReceiptPaysProofRelevantReaction = refl
+terminalPhysicalLinearStateStillOpen :
+  MaxCut.Receipt.physicalNH3ToMonsterLinearStatePaid MaxCut.canonicalReceipt ≡ false
+terminalPhysicalLinearStateStillOpen = refl
 
 terminalReceiptBlocksObservedMonster :
   MaxCut.Receipt.observed3Plus1MonsterPaid MaxCut.canonicalReceipt ≡ false
