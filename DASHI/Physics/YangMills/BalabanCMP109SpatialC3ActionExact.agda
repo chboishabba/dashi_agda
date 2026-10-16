@@ -68,17 +68,15 @@ cmp109ContributionC3Equivariant symmetry = record
 cmp109ThreeChannelC3Weld : ∀ {contribution}
   (symmetry : Source.CMP109ScalarEuclideanSymmetry contribution) →
   C3.ThreeChannelC3Weld Grid.GridCell4 Grid.GridCell4 ℚ
-cmp109ThreeChannelC3Weld symmetry = record
+cmp109ThreeChannelC3Weld {contribution} symmetry = record
   { inputAction = cmp109SpatialC3Action
   ; midAction = cmp109SpatialC3Action
   ; outputAction = identityRationalC3Action
   ; forward = λ cell → cell
-  ; consumer = _
+  ; consumer = contribution
   ; forwardEquivariant = identityGridC3Equivariant
   ; consumerEquivariant = cmp109ContributionC3Equivariant symmetry
   }
-  where
-  contribution = Source.CMP109ScalarEuclideanSymmetry.contribution symmetry
 
 cmp109LiteralSpatialC3Recovered : Bool
 cmp109LiteralSpatialC3Recovered = true
