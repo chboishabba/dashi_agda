@@ -22,9 +22,10 @@ record LeanJZeroCMFormalSourceReceipt : Set where
     pointOwner : String
     pointEndomorphismTheorem : String
     orderThreeTheorem : String
-    localEulerOwner : String
-    inertTraceTheorem : String
-    localFactorTheorem : String
+    inertEulerOwner : String
+    inertFamilyTheorem : String
+    splitBoundaryOwner : String
+    splitBoundaryTheorem : String
     verificationStatus : String
     origin : Attribution.ClaimOrigin
 
@@ -36,13 +37,14 @@ leanJZeroCMReceipt =
     "chboishabba/dashi_lean4"
     "PR #73"
     "agent/eisenstein-cm-point-endomorphism-maxcut-20261016"
-    "87819b7a86e10eda590996cde0ba2c0f09dbfa41"
+    "039bced5d4773b8b360aebfc9619cfc529277586"
     "Integration/EisensteinJZeroPointCMExact.lean"
     "omegaPoint_add / omegaPointEndomorphism"
     "omegaPointEndomorphism_order_three"
-    "Integration/EisensteinJZeroLocalEulerExact.lean"
-    "inertFiveTraceZero"
-    "inertFiveLocalFactor"
+    "Integration/EisensteinJZeroInertPrimeEulerExact.lean"
+    "localEulerPolynomial_inert"
+    "Integration/EisensteinJZeroSplitSevenExact.lean"
+    "normSevenDoesNotDetermineTrace / normalizedSevenMatchesFrobeniusTrace"
     "SOURCE-WRITTEN / PINNED-MATHLIB-API-AUDITED / KERNEL-PENDING"
     Attribution.leanFormalReconstruction
 
@@ -62,8 +64,17 @@ leanSameCurveGroupEndomorphismSourceObserved = true
 leanOrderThreeEndomorphismSourceObserved : Bool
 leanOrderThreeEndomorphismSourceObserved = true
 
-leanLiteralInertFiveEulerRowObserved : Bool
-leanLiteralInertFiveEulerRowObserved = true
+leanAllInertPrimeTraceZeroSourceObserved : Bool
+leanAllInertPrimeTraceZeroSourceObserved = true
+
+leanAllInertPrimeLocalEulerSourceObserved : Bool
+leanAllInertPrimeLocalEulerSourceObserved = true
+
+leanSplitSevenNormalizationBoundaryObserved : Bool
+leanSplitSevenNormalizationBoundaryObserved = true
+
+leanNormAloneInsufficientForSplitTraceObserved : Bool
+leanNormAloneInsufficientForSplitTraceObserved = true
 
 leanProofObjectImportedIntoAgda : Bool
 leanProofObjectImportedIntoAgda = false
@@ -80,8 +91,8 @@ fullCMEndomorphismRingIdentified = false
 heckeCharacterConstructed : Bool
 heckeCharacterConstructed = false
 
-allLocalEulerFactorsIdentified : Bool
-allLocalEulerFactorsIdentified = false
+allSplitPrimeEulerFactorsIdentified : Bool
+allSplitPrimeEulerFactorsIdentified = false
 
 ------------------------------------------------------------------------
 -- Promotion boundary.
@@ -91,16 +102,18 @@ record EisensteinJZeroCMCrossProverBoundary : Set where
   constructor eisenstein-jzero-cm-cross-prover-boundary
   field
     leanPointEndomorphismSourceRecorded : Bool
-    leanLocalEulerSourceRecorded : Bool
+    leanAllInertEulerSourceRecorded : Bool
+    leanSplitNormalizationBoundaryRecorded : Bool
     agdaKernelAuthorityImported : Bool
     agdaPointEndomorphismManufactured : Bool
     fullCMRingManufactured : Bool
     heckeCharacterManufactured : Bool
-    allEulerFactorsManufactured : Bool
+    allSplitEulerFactorsManufactured : Bool
 
 canonicalBoundary : EisensteinJZeroCMCrossProverBoundary
 canonicalBoundary =
   eisenstein-jzero-cm-cross-prover-boundary
+    true
     true
     true
     false
