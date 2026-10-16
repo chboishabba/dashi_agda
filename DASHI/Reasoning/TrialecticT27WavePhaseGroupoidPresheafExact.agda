@@ -24,11 +24,6 @@ import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionExact as Tower
 import DASHI.Reasoning.TrialecticT27GraphSitePresheafExact as Graph
 import DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact as OldPhase
 
-------------------------------------------------------------------------
--- 1. Homs are the already-paid phase homs on the exactly corresponding old
---    section payloads.
-------------------------------------------------------------------------
-
 GraphFibreHom :
   (policy : Tower.T27CompletionPolicy) →
   {U : Site.RelObj} →
@@ -57,10 +52,6 @@ graphHomEquivalent :
   Set
 graphHomEquivalent policy f g =
   graphPhaseOf policy f ≡ graphPhaseOf policy g
-
-------------------------------------------------------------------------
--- 2. Groupoid operations transport directly.
-------------------------------------------------------------------------
 
 graphIdentityHom :
   (policy : Tower.T27CompletionPolicy) →
@@ -139,11 +130,6 @@ graphForwardAfterInverse :
     (graphIdentityHom policy y)
 graphForwardAfterInverse policy f = OldPhase.forwardAfterInverse f
 
-------------------------------------------------------------------------
--- 3. Restriction on morphisms.  The object-level graph restriction was chosen
---    precisely so forgetting it is definitionally the old restriction payload.
-------------------------------------------------------------------------
-
 graphRestrictHom :
   (policy : Tower.T27CompletionPolicy) →
   ∀ {U V : Site.RelObj}
@@ -199,9 +185,9 @@ graphRestrictPreservesIdentity :
   graphHomEquivalent policy
     (graphRestrictHom policy arrow (graphIdentityHom policy x))
     (graphIdentityHom policy (Graph.graphRestrict policy arrow x))
-graphRestrictPreservesIdentity policy arrow x =
+graphRestrictPreservesIdentity policy {V = V} arrow x =
   OldPhase.restrictPreservesIdentity arrow
-    (Graph.graphSectionToOld policy _ x)
+    (Graph.graphSectionToOld policy V x)
 
 graphRestrictPreservesComposition :
   (policy : Tower.T27CompletionPolicy) →
@@ -217,11 +203,6 @@ graphRestrictPreservesComposition :
       (graphRestrictHom policy arrow f))
 graphRestrictPreservesComposition policy arrow g f =
   OldPhase.restrictPreservesComposition arrow g f
-
-------------------------------------------------------------------------
--- 4. Non-discrete phase automorphism survives at the completed T^27 global
---    object and all unchanged local objects.
-------------------------------------------------------------------------
 
 graphPositivePhaseAutomorphism :
   (policy : Tower.T27CompletionPolicy) →
@@ -243,10 +224,6 @@ graphPositivePhaseDiffersFromIdentity :
 graphPositivePhaseDiffersFromIdentity policy {U} x =
   OldPhase.positivePhaseDiffersFromIdentity
     (Graph.graphSectionToOld policy U x)
-
-------------------------------------------------------------------------
--- 5. Boundary.
-------------------------------------------------------------------------
 
 record TrialecticT27WavePhaseGroupoidPresheafBoundary : Set where
   constructor trialectic-t27-wave-phase-groupoid-presheaf-boundary
