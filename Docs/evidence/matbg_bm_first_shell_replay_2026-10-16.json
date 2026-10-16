@@ -1,0 +1,34 @@
+{
+  "script": "scripts/matbg_bm_first_shell_replay.py",
+  "script_sha256": "684d5530d79a1441166a821c1459041c55cd80027e8f41793960632305486489",
+  "execution_environment": "ChatGPT analysis Python runtime, numpy eigvalsh",
+  "model": "BM first-shell 8-band dimensionless reconstruction",
+  "sources": {
+    "bm2011": "10.1073/pnas.1108174108",
+    "xiao2026_qtm_ratio": "10.1038/s41586-026-10378-x"
+  },
+  "inputs": {
+    "alpha_magic": 0.5773502691896258,
+    "finite_difference_dk": 1e-06,
+    "qtm_w0_over_w1": 0.6
+  },
+  "checks": {
+    "analytic_numeric_abs_error": 8.583708743792329e-11,
+    "analytic_velocity_ratio_alpha_0p45": 0.17720090293453725,
+    "hermiticity_error_qtm_ratio": 0.0,
+    "numeric_magic_velocity_ratio_equal": 3.3374763554324673e-07,
+    "numeric_magic_velocity_ratio_qtm_ratio": 1.52754935854381e-07,
+    "numeric_velocity_ratio_alpha_0p45": 0.17720090284870016,
+    "zero_mode_error_equal": 3.892417595082818e-16,
+    "zero_mode_error_qtm_ratio": 5.36771454185332e-16
+  },
+  "assertions_passed": true,
+  "promotion_boundaries": {
+    "full_plane_wave_convergence": false,
+    "absolute_sample_tunnelling_scale": false,
+    "interacting_self_energy": false,
+    "qtm_data_replay": false,
+    "same_sample_entropy": false,
+    "agda_kernel_receipt": false
+  }
+}
