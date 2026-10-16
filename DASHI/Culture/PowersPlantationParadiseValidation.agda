@@ -102,8 +102,8 @@ _martinique-comparative-seating-paid = ComparativeVenue.saintPierre1786PlannedSe
 _martinique-not-saint-domingue-rule-paid : ComparativeVenue.MartiniqueEvidenceTransportsSaintDomingueRule → ⊥
 _martinique-not-saint-domingue-rule-paid = ComparativeVenue.martiniqueEvidenceDoesNotTransportSaintDomingueRule
 
-_phase3-validation-reachable : Phase3.Roadmap.PowersEmpiricalRoadmapBoundary
-_phase3-validation-reachable = Phase3.Roadmap.canonicalPowersEmpiricalRoadmapBoundary
+_phase3-validation-reachable : Roadmap.PowersEmpiricalRoadmapBoundary
+_phase3-validation-reachable = Phase3.roadmapBoundary
 
 _roadmap-boundary-paid : Roadmap.PowersEmpiricalRoadmapBoundary
 _roadmap-boundary-paid = Roadmap.canonicalPowersEmpiricalRoadmapBoundary
