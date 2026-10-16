@@ -1,0 +1,75 @@
+name: IRIS Dena max-cut Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Governance/IRISDena*.agda'
+      - 'DASHI/Governance/AUKUS*.agda'
+      - 'DASHI/Governance/OriginalThreadParetoMaxCut20261008Exact.agda'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/iris-dena-maxcut-agda.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: iris-dena-maxcut-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check US PEP authority envelope
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Governance/AUKUSUSPersonnelExchangeAuthorityEnvelopeExact.agda
+
+      - name: Type-check bunk-claim revision boundary
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Governance/IRISDenaBunkClaimRevisionConflictExact.agda
+
+      - name: Type-check correction-aware exact review gate
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Governance/IRISDenaCorrectionAwareReviewGateExact.agda
+
+      - name: Type-check observer hierarchy non-descent
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Governance/IRISDenaObserverHierarchyNonDescentExact.agda
+
+      - name: Type-check current Pareto max-cut
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Governance/OriginalThreadParetoMaxCut20261008Exact.agda
+
+      - name: Type-check certification regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Governance/IRISDenaMaxCutCertificationRegression.agda
+
+      - name: Type-check focused IRIS rollup
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Governance/IRISDenaMaxCutEverything.agda
