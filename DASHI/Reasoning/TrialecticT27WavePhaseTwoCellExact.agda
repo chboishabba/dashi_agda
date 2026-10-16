@@ -17,6 +17,7 @@ import DASHI.Foundations.Base369TriTruthField as Tri
 import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Site
 import DASHI.Foundations.RelationalStageTwelveSiteExact as RelSheaf
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
+import DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact as OldPhase
 import DASHI.Reasoning.TrialecticWavePhaseEffectiveStackDescentExact as OldStack
 import DASHI.Reasoning.TrialecticWavePhaseTwoCellCocycleExact as OldTwo
 import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionExact as Tower
@@ -122,12 +123,18 @@ graphRestrict2Cell {policy} arrow {f = f} {g = g} alpha =
 graphTriadicPhaseCycleCloses :
   ∀ {source target : RelSheaf.TriadicLocals Cell.CellDialectic} →
   (morphisms : OldStack.TriadicPhaseMorphisms source target) →
-  OldTwo.Phase2Cell
-    (OldStack.morphismAB morphisms)
-    (OldStack.morphismAB morphisms)
-graphTriadicPhaseCycleCloses morphisms = refl
-
-triadicCocycleEquation = OldTwo.triadicPhaseCycleCloses
+  Tri.triAdd
+    (OldPhase.equalityPhase (OldStack.morphismAB morphisms))
+    (Tri.triAdd
+      (OldPhase.equalityPhase (OldStack.morphismBC morphisms))
+      (OldPhase.equalityPhase (OldStack.morphismCA morphisms)))
+  ≡
+  Tri.triAdd
+    (OldPhase.equalityPhase (OldStack.morphismAB morphisms))
+    (Tri.triAdd
+      (OldPhase.equalityPhase (OldStack.morphismAB morphisms))
+      (OldPhase.equalityPhase (OldStack.morphismAB morphisms)))
+graphTriadicPhaseCycleCloses = OldTwo.triadicPhaseCycleCloses
 
 record TrialecticT27WavePhaseTwoCellBoundary : Set where
   constructor trialectic-t27-wave-phase-two-cell-boundary
