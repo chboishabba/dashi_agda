@@ -1,8 +1,7 @@
 module DASHI.DA51.Fixtures where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Maybe using (just)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Maybe using (just; nothing)
 open import DASHI.DA51.Core
 open import DASHI.DA51.Atlas
 
@@ -12,28 +11,51 @@ open import DASHI.DA51.Atlas
 -- addresses shown in comments.
 ------------------------------------------------------------------------
 
+c00 : AtlasCoord
 c00 = coord delta0 moonshineHighlands provedTrue 0
+c01 : AtlasCoord
 c01 = coord delta0 moonshineHighlands provedTrue 1
+c02 : AtlasCoord
 c02 = coord delta0 moonshineHighlands provedTrue 2
+c03 : AtlasCoord
 c03 = coord delta0 haltingPens provedTrue 3
+c04 : AtlasCoord
 c04 = coord pi1 haltingPens openStatus 4
+c05 : AtlasCoord
 c05 = coord pi1 eisensteinPlains provedTrue 5
+c06 : AtlasCoord
 c06 = coord pi1 bridgeMarsh openStatus 6
+c07 : AtlasCoord
 c07 = coord pi1 bridgeMarsh falseInLiterature 7
+c08 : AtlasCoord
 c08 = coord pi2 eisensteinPlains provedTrue 8
+c09 : AtlasCoord
 c09 = coord pi2 haltingPens openStatus 9
+c10 : AtlasCoord
 c10 = coord lean bridgeMarsh openStatus 10
+c11 : AtlasCoord
 c11 = coord lean bridgeMarsh openStatus 11
+c12 : AtlasCoord
 c12 = coord lean spectralSea openStatus 12
+c13 : AtlasCoord
 c13 = coord lean eisensteinPlains provedTrue 13
+c14 : AtlasCoord
 c14 = coord lean eisensteinPlains provedTrue 14
+c15 : AtlasCoord
 c15 = coord lean spectralSea provedTrue 15
+c16 : AtlasCoord
 c16 = coord lean spectralSea provedTrue 16
+c17 : AtlasCoord
 c17 = coord lean spectralSea provedTrue 17
+c18 : AtlasCoord
 c18 = coord lean moonshineHighlands provedTrue 18
+c19 : AtlasCoord
 c19 = coord lean moonshineHighlands provedTrue 19
+c20 : AtlasCoord
 c20 = coord lean moonshineHighlands provedTrue 20
+c21 : AtlasCoord
 c21 = coord lean moonshineHighlands trueInLiterature 21
+c22 : AtlasCoord
 c22 = coord lean moonshineHighlands trueInLiterature 22
 
 -- 0xDA51800100000000
