@@ -15,17 +15,10 @@ module DASHI.Biology.IITCubeTwoFaceImageRecognitionExact where
 --
 --   B^3 = (Sx + Sy)^3 = Sx^3 + Sy^3 = 2 I = -I.
 --
--- Eliminating the source therefore gives the exact graph law
---
---   y2 = B y1 - B^2 y0.
---
--- Conversely arbitrary y0,y1 are realized by u0=0, u1=y0,
--- u2=y1-B y0.  Thus the reachable image is exactly a graph over two faces.
---
--- This module kernelizes the GRAPH / TWO-FACE equivalence abstractly over the
--- already-paid two-face carrier.  Instantiating B with the concrete toroidal
--- face operator still requires the explicit B^3=-I same-object witness; that
--- obligation is carried separately and cannot be manufactured from rank 18.
+-- Eliminating the source gives y2 = B y1 - B^2 y0.  Conversely arbitrary
+-- y0,y1 are realized by u0=0, u1=y0, u2=y1-B y0.  Thus the selected image is
+-- a graph over two faces.  This owner proves the graph/two-face compiler and
+-- makes the remaining concrete torus payment proof-relevant.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -34,9 +27,7 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 import DASHI.Biology.IITCubeTwoFaceQ9SelfIndexingWeldExact as Q9Weld
 
 ------------------------------------------------------------------------
--- 1. Abstract face endomorphism interface.  Only the recovery expression is
--- needed to define the graph; the concrete toroidal realization pays the
--- characteristic-three shift identity separately.
+-- 1. Abstract face structure.
 ------------------------------------------------------------------------
 
 record FaceRecoveryStructure (Face : Set) : Set₁ where
@@ -55,6 +46,9 @@ subFace structure x y = addFace structure x (negFace structure y)
 B2 : ∀ {Face} → FaceRecoveryStructure Face → Face → Face
 B2 structure x = B structure (B structure x)
 
+B3 : ∀ {Face} → FaceRecoveryStructure Face → Face → Face
+B3 structure x = B structure (B2 structure x)
+
 thirdFaceFromTwo :
   ∀ {Face} → FaceRecoveryStructure Face → Face → Face → Face
 thirdFaceFromTwo structure first second =
@@ -63,7 +57,7 @@ thirdFaceFromTwo structure first second =
     (B2 structure first)
 
 ------------------------------------------------------------------------
--- 2. The exact graph carrier of reachable outputs.
+-- 2. Exact graph carrier.
 ------------------------------------------------------------------------
 
 record TwoFaceImageGraph {Face : Set}
@@ -73,8 +67,7 @@ record TwoFaceImageGraph {Face : Set}
     face0 : Face
     face1 : Face
     face2 : Face
-    face2Law :
-      face2 ≡ thirdFaceFromTwo structure face0 face1
+    face2Law : face2 ≡ thirdFaceFromTwo structure face0 face1
 
 open TwoFaceImageGraph public
 
@@ -95,18 +88,10 @@ twoFacesToGraph structure (first , second) =
 twoFacesAfterGraph :
   ∀ {Face} {structure : FaceRecoveryStructure Face} →
   (graph : TwoFaceImageGraph structure) →
-  graphToTwoFaces graphToTwoFacesDummy ≡ graphToTwoFaces graph
-  where
-    graphToTwoFacesDummy : TwoFaceImageGraph structure
-    graphToTwoFacesDummy = twoFacesToGraph structure (graphToTwoFaces graph)
+  graphToTwoFaces
+    (twoFacesToGraph structure (graphToTwoFaces graph))
+  ≡ graphToTwoFaces graph
 twoFacesAfterGraph graph = refl
-
-------------------------------------------------------------------------
--- 3. Pointwise graph reconstruction: because face2 is proof-relevant equality,
--- full record equality is left to the concrete extensional carrier.  The
--- computational content needed for the weld is exact: first and second faces
--- are preserved and the third is definitionally reconstructed from them.
-------------------------------------------------------------------------
 
 reconstructedFace0 :
   ∀ {Face} (structure : FaceRecoveryStructure Face) (faces : Face × Face) →
@@ -125,7 +110,7 @@ reconstructedFace2 :
 reconstructedFace2 structure (first , second) = refl
 
 ------------------------------------------------------------------------
--- 4. Concrete same-object payment interface for the toroidal cube.
+-- 3. Concrete same-object recognition is a genuine equivalence receipt.
 ------------------------------------------------------------------------
 
 record ToroidalCubeImageRecognition
@@ -144,9 +129,21 @@ record ToroidalCubeImageRecognition
 open ToroidalCubeImageRecognition public
 
 ------------------------------------------------------------------------
--- 5. Once the concrete face is the existing PhaseFineField, the already-paid
--- two-face weld compiles immediately to Q9 -> Q9.  We keep the final concrete
--- cube-image recognition as an explicit dependent input.
+-- 4. Concrete characteristic-three cancellation must be paid by equality
+-- witnesses, not proposition-valued Set fields.
+------------------------------------------------------------------------
+
+record BCubedNegativeIdentity
+    (Face : Set)
+    (structure : FaceRecoveryStructure Face) : Set₁ where
+  field
+    bCubedIsNegativeIdentity :
+      (x : Face) → B3 structure x ≡ negFace structure x
+
+open BCubedNegativeIdentity public
+
+------------------------------------------------------------------------
+-- 5. Existing two-face Q9 weld.
 ------------------------------------------------------------------------
 
 record CubeImageToQ9FieldRecognition (CubeImage : Set) : Set₁ where
@@ -176,23 +173,6 @@ q9FieldToCube :
 q9FieldToCube recognition field =
   twoFacesToCube recognition (Q9Weld.q9FieldToFaces field)
 
-------------------------------------------------------------------------
--- 6. Characteristic-three derivation obligation.  This is the exact missing
--- same-object weld from the abstract graph theorem to the selected toroidal
--- face operator, not a cardinality check.
-------------------------------------------------------------------------
-
-record ConcreteTorusFaceOperatorPayment (Face : Set)
-    (structure : FaceRecoveryStructure Face) : Set₁ where
-  field
-    sxCubedIsIdentity : Set
-    syCubedIsIdentity : Set
-    sxSyCommute : Set
-    characteristicThreeFreshmansDreamPaid : Set
-    bCubedIsNegativeIdentity : Set
-    actualCubeStepHasThreeLayerEquations : Set
-    actualCubeImageEqualsGraphCarrier : Set
-
 record CubeImageRecognitionBoundary : Set where
   constructor cube-image-recognition-boundary
   field
@@ -200,9 +180,10 @@ record CubeImageRecognitionBoundary : Set where
     twoFineFacesExactlyWeldToQ9Field : Bool
     numericalRank18AlonePaysConcreteCubeImageEquality : Bool
     bCubedIdentityIsTheAlgebraicReasonForCancellation : Bool
+    propositionValuedSetFieldCountsAsPayment : Bool
     equalNinePowerCardinalityIsUsedAsProof : Bool
 
 canonicalCubeImageRecognitionBoundary : CubeImageRecognitionBoundary
 canonicalCubeImageRecognitionBoundary =
   cube-image-recognition-boundary
-    true true false true false
+    true true false true false false
