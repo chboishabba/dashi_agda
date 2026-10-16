@@ -56,6 +56,7 @@ import DASHI.Cognition.EpsteinHighProfileHubAcquisitionExact
 import DASHI.Cognition.EpsteinGlobalSciencePatronageValidation
 import DASHI.Cognition.LLMGeometricPriorEvaluationPoliticalEconomyExact
 import DASHI.Cognition.EpsteinPsychedelicNetworkValidation
+import DASHI.Cognition.VilyaProtectiveSpatialEverything
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
