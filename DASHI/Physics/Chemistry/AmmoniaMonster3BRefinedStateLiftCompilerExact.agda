@@ -2,24 +2,24 @@ module DASHI.Physics.Chemistry.AmmoniaMonster3BRefinedStateLiftCompilerExact whe
 
 open import DASHI.Core.Prelude
 open import Data.Fin.Base using (Fin)
-open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Monster3BFiniteProjectorModelExact as Model
-import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Actual
+import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact as Basis
 import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact as Base369
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3
 
 ------------------------------------------------------------------------
 -- MINIMAL REFINEMENT OF THE EXACT C3 QUOTIENT
 --
--- The non-factorability owner proves that phase alone cannot recover either
--- fine Monster-zeta coordinate.  The existing model says exactly what is
--- missing: one F3^6 Heisenberg/Base369 weight and one Fin 90 multiplicity.
--- This module proves that those two coordinates are sufficient on the model
--- side, then compiles them through any already-paid ActualZetaSectorRecognition.
+-- Phase alone cannot recover a finite Monster-zeta basis label.  The finite
+-- model says exactly what is missing: one F3^6/Base369 weight and one Fin90
+-- multiplicity coordinate.  Those coordinates reconstruct a MODEL BASIS LABEL.
 --
--- No physical meaning for an NH3 -> F3^6 or NH3 -> Fin90 assignment is invented.
+-- Correct representation-native promotion then uses an
+-- `ActualZetaBasisRecognition` to identify that model coordinate with an
+-- actual basis label included in the literal linear W_zeta carrier.  No finite
+-- coordinate is promoted to an arbitrary W_zeta vector.
 ------------------------------------------------------------------------
 
 ModelBasis : Set
@@ -30,7 +30,6 @@ record ZetaRefinedCoordinate : Set where
   field
     weight : H.X6
     multiplicity : Fin 90
-
 open ZetaRefinedCoordinate public
 
 refinedToModel : ZetaRefinedCoordinate → ModelBasis
@@ -48,12 +47,6 @@ modelRefinedRoundTrip :
   (b : ModelBasis) → refinedToModel (modelToRefined b) ≡ b
 modelRefinedRoundTrip (Model.zetaBasis w m) = refl
 
-------------------------------------------------------------------------
--- An NH3 refinement input.  `allZeta` deliberately scopes this compiler to a
--- selected NH3 zeta-sector carrier; invariant and zeta^2 states use their own
--- phase fibres rather than being silently coerced into W_zeta.
-------------------------------------------------------------------------
-
 record NH3ZetaRefinement : Set₁ where
   constructor nh3ZetaRefinement
   field
@@ -62,9 +55,10 @@ record NH3ZetaRefinement : Set₁ where
     allZeta : (s : State) → phaseOf s ≡ NH3.zeta
     base369Weight : State → H.X6
     multiplicityCoordinate : State → Fin 90
-    physicalWeightIdentification : Set
-    physicalMultiplicityIdentification : Set
-
+    PhysicalWeightIdentification : Set
+    physicalWeightIdentificationWitness : PhysicalWeightIdentification
+    PhysicalMultiplicityIdentification : Set
+    physicalMultiplicityIdentificationWitness : PhysicalMultiplicityIdentification
 open NH3ZetaRefinement public
 
 toRefinedCoordinate :
@@ -72,78 +66,75 @@ toRefinedCoordinate :
 toRefinedCoordinate r s =
   zetaRefinedCoordinate (base369Weight r s) (multiplicityCoordinate r s)
 
-toModelState :
+toModelBasis :
   (r : NH3ZetaRefinement) → State r → ModelBasis
-toModelState r s = refinedToModel (toRefinedCoordinate r s)
+toModelBasis r s = refinedToModel (toRefinedCoordinate r s)
 
 modelWeightRecoversAssignedWeight :
   (r : NH3ZetaRefinement) → (s : State r) →
-  Model.weightPosition (toModelState r s) ≡ base369Weight r s
+  Model.weightPosition (toModelBasis r s) ≡ base369Weight r s
 modelWeightRecoversAssignedWeight r s = refl
 
 modelMultiplicityRecoversAssignedMultiplicity :
   (r : NH3ZetaRefinement) → (s : State r) →
-  Model.multiplicityCoordinate (toModelState r s)
+  Model.multiplicityCoordinate (toModelBasis r s)
   ≡ multiplicityCoordinate r s
 modelMultiplicityRecoversAssignedMultiplicity r s = refl
 
-------------------------------------------------------------------------
--- Existing Base369 chart: once refined, the same model point has an exact
--- Base369 multiplicity coordinate representation.
-------------------------------------------------------------------------
-
 toBase369Coordinate :
   (r : NH3ZetaRefinement) → State r → Base369.Base369MultiplicityBasis
-toBase369Coordinate r s = Base369.modelToBase369 (toModelState r s)
+toBase369Coordinate r s = Base369.modelToBase369 (toModelBasis r s)
 
 base369CoordinateReturnsSameModel :
   (r : NH3ZetaRefinement) → (s : State r) →
-  Base369.base369ToModel (toBase369Coordinate r s) ≡ toModelState r s
+  Base369.base369ToModel (toBase369Coordinate r s) ≡ toModelBasis r s
 base369CoordinateReturnsSameModel r s =
-  Base369.modelBase369RoundTrip (toModelState r s)
+  Base369.modelBase369RoundTrip (toModelBasis r s)
 
 ------------------------------------------------------------------------
--- Conditional literal-sector compiler.
---
--- This is stronger than a phase map but still correctly conditional on an
--- ActualZetaSectorRecognition.  If recognition is supplied, `fromModel` turns
--- the refined chemistry coordinate into a state of that literal recognized
--- sector, and `toModel` recovers the exact selected model point.
+-- Representation-native basis compiler.
 ------------------------------------------------------------------------
 
-toActualZetaState :
-  ∀ {ActualSector : Set} →
-  Actual.ActualZetaSectorRecognition ActualSector →
+toActualZetaBasisLabel :
+  ∀ {LiteralZetaSector : Set} →
+  (recognition : Basis.ActualZetaBasisRecognition LiteralZetaSector) →
   (r : NH3ZetaRefinement) →
-  State r → ActualSector
-toActualZetaState recognition r s =
-  Actual.fromModel recognition (toModelState r s)
+  State r → Basis.ActualBasisLabel recognition
+toActualZetaBasisLabel recognition r s =
+  Basis.fromModelBasis recognition (toModelBasis r s)
 
-actualLiftRecoversModelCoordinate :
-  ∀ {ActualSector : Set}
-    (recognition : Actual.ActualZetaSectorRecognition ActualSector) →
+actualBasisLiftRecoversModelCoordinate :
+  ∀ {LiteralZetaSector : Set}
+    (recognition : Basis.ActualZetaBasisRecognition LiteralZetaSector) →
     (r : NH3ZetaRefinement) →
     (s : State r) →
-  Actual.toModel recognition (toActualZetaState recognition r s)
-  ≡ toModelState r s
-actualLiftRecoversModelCoordinate recognition r s =
-  Actual.toAfterFrom recognition (toModelState r s)
+  Basis.toModelBasis recognition (toActualZetaBasisLabel recognition r s)
+  ≡ toModelBasis r s
+actualBasisLiftRecoversModelCoordinate recognition r s =
+  Basis.toAfterFrom recognition (toModelBasis r s)
 
-actualLiftRecoversBase369Coordinate :
-  ∀ {ActualSector : Set}
-    (recognition : Actual.ActualZetaSectorRecognition ActualSector) →
-    (r : NH3ZetaRefinement) →
-    (s : State r) →
-  Base369.toBase369 (Base369.composeActualRecognitionWithBase369 recognition)
-    (toActualZetaState recognition r s)
-  ≡ toBase369Coordinate r s
-actualLiftRecoversBase369Coordinate recognition r s =
-  cong Base369.modelToBase369
-    (actualLiftRecoversModelCoordinate recognition r s)
+includedActualZetaBasisVector :
+  ∀ {LiteralZetaSector : Set} →
+  (recognition : Basis.ActualZetaBasisRecognition LiteralZetaSector) →
+  (r : NH3ZetaRefinement) →
+  State r → LiteralZetaSector
+includedActualZetaBasisVector recognition r s =
+  Basis.includeBasis recognition (toActualZetaBasisLabel recognition r s)
 
 ------------------------------------------------------------------------
--- Consumer contract: this is now a compiler problem, not a dimension guess.
+-- Wrong-type firewalls.
 ------------------------------------------------------------------------
+
+data BasisLabelCompilerCreatesArbitraryWZetaState : Set where
+data PhaseOrDimensionCreatesPhysicalRefinement : Set where
+
+basisLabelCompilerDoesNotCreateArbitraryWZetaState :
+  BasisLabelCompilerCreatesArbitraryWZetaState → ⊥
+basisLabelCompilerDoesNotCreateArbitraryWZetaState ()
+
+phaseOrDimensionDoesNotCreatePhysicalRefinement :
+  PhaseOrDimensionCreatesPhysicalRefinement → ⊥
+phaseOrDimensionDoesNotCreatePhysicalRefinement ()
 
 record RefinedStateLiftBoundary : Set where
   constructor refinedStateLiftBoundary
@@ -153,26 +144,31 @@ record RefinedStateLiftBoundary : Set where
       exactModelRefinementRoundTripPaid ≡ true
     base369CoordinateCompilerPaid : Bool
     base369CoordinateCompilerPaidIsTrue : base369CoordinateCompilerPaid ≡ true
-    refinedCoordinateToMonsterModelCompilerPaid : Bool
-    refinedCoordinateToMonsterModelCompilerPaidIsTrue :
-      refinedCoordinateToMonsterModelCompilerPaid ≡ true
-    actualRecognitionLiftCompilerPaid : Bool
-    actualRecognitionLiftCompilerPaidIsTrue :
-      actualRecognitionLiftCompilerPaid ≡ true
+    refinedCoordinateToMonsterModelBasisCompilerPaid : Bool
+    refinedCoordinateToMonsterModelBasisCompilerPaidIsTrue :
+      refinedCoordinateToMonsterModelBasisCompilerPaid ≡ true
+    actualBasisRecognitionLiftCompilerPaid : Bool
+    actualBasisRecognitionLiftCompilerPaidIsTrue :
+      actualBasisRecognitionLiftCompilerPaid ≡ true
+    wholeLiteralSectorFiniteLiftCompilerPaid : Bool
+    wholeLiteralSectorFiniteLiftCompilerPaidIsFalse :
+      wholeLiteralSectorFiniteLiftCompilerPaid ≡ false
     physicalNH3Base369WeightIdentificationPaid : Bool
     physicalNH3Base369WeightIdentificationPaidIsFalse :
       physicalNH3Base369WeightIdentificationPaid ≡ false
     physicalNH3MultiplicityIdentificationPaid : Bool
     physicalNH3MultiplicityIdentificationPaidIsFalse :
       physicalNH3MultiplicityIdentificationPaid ≡ false
-    literalActualMonsterStateLiftInhabitedHere : Bool
-    literalActualMonsterStateLiftInhabitedHereIsFalse :
-      literalActualMonsterStateLiftInhabitedHere ≡ false
+    literalMonsterBasisAttachmentInhabitedHere : Bool
+    literalMonsterBasisAttachmentInhabitedHereIsFalse :
+      literalMonsterBasisAttachmentInhabitedHere ≡ false
+    linearWZetaSameObjectRecognitionPaidHere : Bool
+    linearWZetaSameObjectRecognitionPaidHereIsFalse :
+      linearWZetaSameObjectRecognitionPaidHere ≡ false
     dimensionOrPhaseAloneCreatesRefinement : Bool
     dimensionOrPhaseAloneCreatesRefinementIsFalse :
       dimensionOrPhaseAloneCreatesRefinement ≡ false
     nextPayment : String
-
 open RefinedStateLiftBoundary public
 
 canonicalRefinedStateLiftBoundary : RefinedStateLiftBoundary
@@ -186,4 +182,6 @@ canonicalRefinedStateLiftBoundary =
     false refl
     false refl
     false refl
-    "identify physically meaningful NH3-state -> F3^6/Base369 weight and NH3-state -> Fin90 multiplicity maps on a selected zeta-sector carrier, then attach an actual recognized Monster zeta sector and prove any additional action equivariance required by the downstream physical consumer"
+    false refl
+    false refl
+    "supply source-backed NH3-state -> F3^6/Base369 weight and NH3-state -> Fin90 multiplicity assignments, then an actual proof-relevant Monster zeta BASIS recognition and action equivariance. Promotion from included basis vectors to the full linear W_zeta state space additionally requires the independent H_zeta x S_zeta <-> W_zeta same-object representation route."
