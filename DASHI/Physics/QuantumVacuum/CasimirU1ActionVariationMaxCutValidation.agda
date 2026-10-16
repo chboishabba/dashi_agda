@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact as M
 import DASHI.Physics.QuantumVacuum.CasimirU1QuadraticActionDensityValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1MetricVariationTransportValidation
+import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationValidation
 
 fieldImageCompilerConsumedRegression :
   M.cartesianU1FieldImageAndBracketCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
@@ -34,6 +35,14 @@ metricVariationTransportCompilerConsumedRegression :
   M.metricVariationTransportCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
 metricVariationTransportCompilerConsumedRegression = refl
 
+freeMaxwellNormalizationInterfaceConsumedRegression :
+  M.freeMaxwellActionNormalizationInterfaceConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
+freeMaxwellNormalizationInterfaceConsumedRegression = refl
+
+measuredAlphaNotRequiredForIdealKernelRegression :
+  M.measuredAlphaEMRequiredForIdealCasimirActionWeld M.canonicalCasimirU1ActionVariationBoundary ≡ false
+measuredAlphaNotRequiredForIdealKernelRegression = refl
+
 secondAbelianBracketProofNotRequiredRegression :
   M.secondAbelianBracketProofRequired M.canonicalCasimirU1ActionVariationBoundary ≡ false
 secondAbelianBracketProofNotRequiredRegression = refl
@@ -46,9 +55,13 @@ independentMetricVariationEqualityNotRequiredAfterInputsRegression :
   M.independentMetricVariationEqualityRequiredAfterSamePathActionEquality M.canonicalCasimirU1ActionVariationBoundary ≡ false
 independentMetricVariationEqualityNotRequiredAfterInputsRegression = refl
 
-physicalCouplingNormalizationSeparatedRegression :
-  M.physicalChargeCouplingNormalizationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
-physicalCouplingNormalizationSeparatedRegression = refl
+freeFieldNormalizationSeparatedRegression :
+  M.freeMaxwellNormalizationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+freeFieldNormalizationSeparatedRegression = refl
+
+empiricalCouplingCalibrationSeparateRegression :
+  M.empiricalChargeCouplingCalibrationSeparate M.canonicalCasimirU1ActionVariationBoundary ≡ true
+empiricalCouplingCalibrationSeparateRegression = refl
 
 fieldStrengthAttachmentSeparatedRegression :
   M.nondegenerateCurvatureAttachmentSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
@@ -75,7 +88,7 @@ zeroProbeCannotPayPhysicalActionRegression :
 zeroProbeCannotPayPhysicalActionRegression = refl
 
 firstActionBlockerRegression :
-  M.firstActionRestrictionBlocker ≡ M.missingPhysicalChargeCouplingNormalization
+  M.firstActionRestrictionBlocker ≡ M.missingFreeMaxwellActionNormalization
 firstActionBlockerRegression = refl
 
 secondActionBlockerRegression :
