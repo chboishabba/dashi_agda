@@ -10,23 +10,24 @@ module DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoun
 -- root-datum recognition.
 --
 -- Companion Lean #52 source-writes cubic/adjoint recovery, nondegenerate trace
--- pairing and norm+unit rigidity on the same literal rational carrier.  Agda
+-- pairing and norm+unit rigidity on the same literal rational carrier. Agda
 -- records this only as a cross-prover receipt: no Lean proof authority is
 -- silently transferred.
 --
--- A new exact rational producer also evaluates the represented derivation
--- algebra at the real place: G_ij = -tr_27(D_i D_j) has rank 52 with exact
--- positive LDL diagonal and the represented center has dimension zero.  This
--- strongly selects the compact real completion as the correct target, but the
--- receipt deliberately does NOT classify the real form or the global Q-form.
+-- Exact rational real-place diagnostics additionally give rank-52 positive
+-- -tr_27(D_iD_j) with represented center 0. This strongly selects the compact
+-- real completion as the target but does not classify the global Q-form.
 --
--- Consequently:
---   * Stab_{Isom(N)}(1)=Aut(J) is structurally reduced by norm+unit rigidity;
---   * the real-place target is sharply constrained by exact invariant-form
---     diagnostics;
---   * the remaining terminal theorem is still original-Q-form/algebraic-group
---     classification: Der(J), Aut(J) and Isom(N) as the appropriate F4/E6
---     forms, instantiated proof-relevantly on this same object.
+-- Source acquisition is now intentionally CLOSED as a separate problem:
+-- Petersson/Chevalley-Schafer/Springer-Veldkamp provide the characteristic-zero
+-- field classification, while Alsaody's modern ring-level theorem and the
+-- Garibaldi-Petersson-Racine ring-level work provide Aut(A) type F4, cubic norm
+-- isometry type E6, Aut(A)=Stab(1), and split group-scheme provenance.
+--
+-- Consequently the remaining terminal theorem is formal instantiation on this
+-- exact original-Q object, not literature discovery:
+--   Der(J), Aut(J), Isom(N) as the appropriate F4/E6 forms, plus the global
+--   Q-form/group-scheme identification proof-relevantly on the same carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -105,6 +106,8 @@ record Boundary : Set where
     exactRootGradingProducerPaid : Bool
     splitQIRootDatumTypeF4Recognized : Bool
     literatureClassificationSourceLocated : Bool
+    modernRingLevelClassificationSourceLocated : Bool
+    remainingClassificationIsSourceDiscovery : Bool
     remainingClassificationIsQFormAndGroupLevel : Bool
     normUnitRigiditySourceWrittenCrossKernel : Bool
     unitStabilizerJordanEqualityStructurallyReduced : Bool
@@ -125,6 +128,8 @@ canonicalBoundary =
     Grading.canonicalBoundary.localF4RootGradedLieStructurePaidByProducer
     SplitF4.canonicalBoundary.splitLieRootDatumTypeF4Recognized
     Sources.canonicalClassicalExceptionalSourceReceipt.peterssonDerivationTheoremLocated
+    Sources.canonicalClassicalExceptionalSourceReceipt.modernRingLevelAlbertClassificationLocated
+    Sources.canonicalClassicalExceptionalSourceReceipt.remainingClassificationIsSourceDiscovery
     true
     Rigidity.canonicalBoundary.normUnitRigiditySourceWritten
     Rigidity.canonicalBoundary.unitStabilizerJordanEqualityStructurallyReduced
@@ -138,4 +143,4 @@ canonicalBoundary =
 
 classificationSourceNote : String
 classificationSourceNote =
-  "Chevalley-Schafer / Petersson / Springer-Veldkamp provide characteristic-zero Albert/F4/E6 classification provenance. Companion Lean locally reduces unit-fixing cubic symmetry to Jordan automorphism on the native rational carrier. Exact rational trace-form diagnostics strongly select the compact real completion, but neither the Lean source nor the real-place computation is Agda/global-Q classification authority. The unpaid endpoint is the original-Q-form/full algebraic-group classification and its proof-relevant instantiation on this same object."
+  "Petersson/Chevalley-Schafer/Springer-Veldkamp plus the modern Alsaody ring-level theorem and Garibaldi-Petersson-Racine ring-level group-scheme work now close source discovery for the abstract Albert/F4/E6 classification target. Companion Lean locally reduces unit-fixing cubic symmetry to Jordan automorphism on the native rational carrier, and exact rational trace-form diagnostics select the compact real-place target. Neither source text, Lean source nor the real-place computation is Agda/global-Q proof authority. The unpaid endpoint is proof-relevant original-Q-form/full algebraic-group instantiation on this same object."
