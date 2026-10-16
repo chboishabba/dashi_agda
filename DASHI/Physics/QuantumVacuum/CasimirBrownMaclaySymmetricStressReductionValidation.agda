@@ -4,6 +4,14 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.CasimirBrownMaclaySymmetricStressReductionExact as R
 
+tenIndependentValuesRecordOwnedRegression :
+  R.tenIndependentValuesRecordOwned R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ true
+tenIndependentValuesRecordOwnedRegression = refl
+
+symmetryAndValuesCompilerOwnedRegression :
+  R.symmetryAndTenValuesCompilerOwned R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ true
+symmetryAndValuesCompilerOwnedRegression = refl
+
 symmetricTenComponentCompilerOwnedRegression :
   R.symmetricTenComponentCompilerOwned R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ true
 symmetricTenComponentCompilerOwnedRegression = refl
@@ -14,6 +22,14 @@ sixteenIndependentPaymentsNotRequiredRegression = refl
 
 independentPaymentCountRegression : R.independentBrownMaclayComponentPayments ≡ 10
 independentPaymentCountRegression = refl
+
+actualSymmetryStillOpenRegression :
+  R.actualSelectedQFTSymmetryPaid R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ false
+actualSymmetryStillOpenRegression = refl
+
+actualTenComponentValuesStillOpenRegression :
+  R.actualSelectedQFTTenComponentValuesPaid R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ false
+actualTenComponentValuesStillOpenRegression = refl
 
 actualTenComponentPaymentStillOpenRegression :
   R.actualSelectedQFTTenComponentPaymentPaid R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ false
