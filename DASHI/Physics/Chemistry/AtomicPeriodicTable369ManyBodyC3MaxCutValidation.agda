@@ -7,6 +7,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3FourierSpatialRestriction
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ExteriorC3RepresentationExact as Exterior
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369HamiltonianC3IntertwinerExact as Hamiltonian
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369HamiltonianCarrierAuditExact as Audit
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369CentralCoulombC3CompilerExact as Coulomb
 
 ------------------------------------------------------------------------
 -- Fourier / representation-equivalence regression.
@@ -55,6 +56,28 @@ interactingHamiltonianStillOpen :
     Hamiltonian.canonicalHamiltonianC3Boundary
   ≡ false
 interactingHamiltonianStillOpen = refl
+
+------------------------------------------------------------------------
+-- Central/pair-potential compiler regression.
+------------------------------------------------------------------------
+
+centralPotentialCompilerPaid :
+  Coulomb.CentralCoulombC3Boundary.radiusPreservingActionImpliesCentralPotentialInvariant
+    Coulomb.canonicalCentralCoulombC3Boundary
+  ≡ true
+centralPotentialCompilerPaid = refl
+
+pairPotentialCompilerPaid :
+  Coulomb.CentralCoulombC3Boundary.separationPreservingActionImpliesPairPotentialInvariant
+    Coulomb.canonicalCentralCoulombC3Boundary
+  ≡ true
+pairPotentialCompilerPaid = refl
+
+finiteChargeNotSpatialByDefinition :
+  Coulomb.CentralCoulombC3Boundary.finiteChargeTransportIsSpatialRotationByDefinition
+    Coulomb.canonicalCentralCoulombC3Boundary
+  ≡ false
+finiteChargeNotSpatialByDefinition = refl
 
 ------------------------------------------------------------------------
 -- Surrounding-Hamiltonian same-carrier firewall.
