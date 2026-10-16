@@ -2,20 +2,9 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPHaltingResourceClosingTerminalEx
 
 ------------------------------------------------------------------------
 -- ACTUAL-HALTING CODED SAT CANDIDATE -> TERMINAL RESOURCE-CLOSING CUT
---
--- This owner removes all now-mechanical adapters from the terminal theorem.
--- Starting from one actual-halting coded SAT candidate:
---   * guarded Cook execution is constructed automatically;
---   * the legacy standard/polynomially-clocked candidate is derived automatically;
---   * the legacy candidate-code socket is bound to the literal actual machine;
---   * one ResourceClosingFixedProgramCompilation is then sufficient for a
---     concrete SATDecisionFailure and therefore the existing P != NP closure.
---
--- The remaining premise is intentionally strong and honest: it is the real
--- fixed-target prefix/setup + candidate + suffix + exact resource closure.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -23,12 +12,13 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Dire
 import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 import DASHI.Mathematics.Complexity.CodedStandardHaltingPolynomialDeciderExact as Halting
 import DASHI.Mathematics.Complexity.PNotEqualsNPHaltingCodedCandidateBridgeExact as HaltingBridge
-import DASHI.Mathematics.Complexity.PNotEqualsNPHaltingCandidateCodeRealizationExact as CodeBinding
+import DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedStandardCandidateExact as Clocked
+import DASHI.Mathematics.Complexity.PNotEqualsNPStandardFiniteCandidateCodeExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingStandardCompilerExact as Resource
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedProgramStandardCompilerExact as Compiler
 
 ------------------------------------------------------------------------
--- 1. One actual-halting witness determines the legacy clocked candidate.
+-- 1. One actual-halting witness determines the existing clocked candidate.
 ------------------------------------------------------------------------
 
 haltingClockedCandidate :
@@ -36,13 +26,12 @@ haltingClockedCandidate :
     {candidate : Direct.PolynomialSATDeciderCandidate cost} →
   Halting.CodedStandardHaltingPolynomialDecider
     (Direct.decide candidate) →
-  DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedStandardCandidateExact.PolynomiallyClockedStandardCandidate
-    candidate
+  Clocked.PolynomiallyClockedStandardCandidate candidate
 haltingClockedCandidate =
   HaltingBridge.haltingWitnessToPolynomiallyClockedCandidateAutomatic
 
 ------------------------------------------------------------------------
--- 2. Terminal resource compiler -> SAT decision failure.
+-- 2. Terminal resource compiler -> concrete SAT decision failure.
 ------------------------------------------------------------------------
 
 haltingResourceCompilationGivesDecisionFailure :
@@ -55,17 +44,15 @@ haltingResourceCompilationGivesDecisionFailure :
     (haltingClockedCandidate witness) →
   Direct.SATDecisionFailure candidate
 haltingResourceCompilationGivesDecisionFailure
-    {candidate = candidate}
     witness
     resource =
   Compiler.fixedProgramCompilationGivesDecisionFailure
-    (DASHI.Mathematics.Complexity.PNotEqualsNPStandardFiniteCandidateCodeExact.standardCandidateToCodeRealization
-      (DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedStandardCandidateExact.standard
-        (haltingClockedCandidate witness)))
+    (Candidate.standardCandidateToCodeRealization
+      (Clocked.standard (haltingClockedCandidate witness)))
     (Resource.resourceClosingToFixedProgramCompilation resource)
 
 ------------------------------------------------------------------------
--- 3. Universal actual-halting producer -> existing Clay-level core.
+-- 3. Universal actual-halting producer -> existing universal SAT failure.
 ------------------------------------------------------------------------
 
 record UniversalHaltingResourceCompiler
@@ -92,12 +79,22 @@ universalHaltingResourceGivesUniversalFailure producer candidate =
     (codedCandidate producer candidate)
     (resourceCompilation producer candidate)
 
-haltingResourceCompilationGivesPNotEqualsNP :
+universalHaltingResourceGivesSATLowerBoundProducer :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
   UniversalHaltingResourceCompiler cost →
-  Clay.PNotEqualsNP
-haltingResourceCompilationGivesPNotEqualsNP producer =
-  Clay.satLowerBoundProducerClosesClayCore
+  Clay.SATLowerBoundProducer cost
+universalHaltingResourceGivesSATLowerBoundProducer producer =
+  Direct.universalDecisionFailureGivesSATLowerBoundProducer
+    (universalHaltingResourceGivesUniversalFailure producer)
+
+haltingResourceCompilationGivesPNotEqualsNP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
+  Clay.PNotEqualsNPEstablishedBackground cost →
+  UniversalHaltingResourceCompiler cost →
+  Clay.PNotEqualsNP cost
+haltingResourceCompilationGivesPNotEqualsNP background producer =
+  Direct.universalDecisionFailureClosesPNotEqualsNP
+    background
     (universalHaltingResourceGivesUniversalFailure producer)
 
 ------------------------------------------------------------------------
@@ -123,7 +120,7 @@ canonicalHaltingResourceTerminalBoundary =
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- The P != NP programme no longer has independent candidate-code, guarded-input,
+-- The programme no longer has independent candidate-code, guarded-input,
 -- Cook-semantic, endpoint-negation or terminal-logic leaves.  The singular live
 -- construction is `ResourceClosingFixedProgramCompilation` for the automatically
 -- derived actual-halting candidate: construct the fixed target prefix/setup,
