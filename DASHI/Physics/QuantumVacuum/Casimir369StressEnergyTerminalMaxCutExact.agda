@@ -11,6 +11,7 @@ import DASHI.Physics.QuantumVacuum.CasimirSetoidFullStressSameObjectExact as Str
 import DASHI.Physics.QuantumVacuum.CasimirQuantumInequalityBoundaryExact as QI
 import DASHI.Physics.QuantumVacuum.CasimirGRNullFocusingBridgeExact as GR
 import DASHI.Physics.QuantumVacuum.CasimirSetoidAnalyticScalarExact as Setoid
+import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Kernel
 import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
 
 ------------------------------------------------------------------------
@@ -55,10 +56,10 @@ open SameObjectANECApplication public
 
 record SameObjectSemiclassicalGravityPayment : Set₁ where
   field
-    LegacyKernel : Set
-    gravitationalWeld : LegacyKernel
+    kernel : Kernel.CasimirScalarModel
+    separation : Q.Length
+    gravitationalWeld : GR.CasimirSemiclassicalGravityWeld kernel separation
     fullRenormalizedStressSameObject : Set
-    semiclassicalEinsteinAndConservation : Set
     metricOrCurvatureResponse : Set
     calibratedBackreaction : Set
     reading : String
