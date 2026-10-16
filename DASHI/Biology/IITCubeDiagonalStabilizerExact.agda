@@ -17,6 +17,7 @@ module DASHI.Biology.IITCubeDiagonalStabilizerExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.IITCubeConcreteTorusImageExact as Cube
+import DASHI.Biology.JFinePhaseQuotientFieldExact as Fine
 
 record FaceLinearEndo : Set where
   constructor face-linear-endo
@@ -119,3 +120,48 @@ identityCommutesWithB f = refl
 
 identityPreservesGraph : PreservesGraph identityFaceEndo
 identityPreservesGraph = centralizerPreservesGraph identityFaceEndo identityCommutesWithB
+
+------------------------------------------------------------------------
+-- Explicit nontrivial centralizer subgroup: the two cyclic translations of
+-- the 3x3 face.  Each has period three and they commute with B by construction.
+------------------------------------------------------------------------
+
+rowShift : Cube.Face9 → Cube.Face9
+rowShift f = Fine.phaseFineTable9
+  (Fine.q10 f) (Fine.q11 f) (Fine.q12 f)
+  (Fine.q20 f) (Fine.q21 f) (Fine.q22 f)
+  (Fine.q00 f) (Fine.q01 f) (Fine.q02 f)
+
+columnShift : Cube.Face9 → Cube.Face9
+columnShift f = Fine.phaseFineTable9
+  (Fine.q01 f) (Fine.q02 f) (Fine.q00 f)
+  (Fine.q11 f) (Fine.q12 f) (Fine.q10 f)
+  (Fine.q21 f) (Fine.q22 f) (Fine.q20 f)
+
+rowShiftEndo : FaceLinearEndo
+rowShiftEndo = face-linear-endo rowShift refl (λ x y → refl)
+
+columnShiftEndo : FaceLinearEndo
+columnShiftEndo = face-linear-endo columnShift refl (λ x y → refl)
+
+rowShiftCommutesWithB : CommutesWithB rowShiftEndo
+rowShiftCommutesWithB f = refl
+
+columnShiftCommutesWithB : CommutesWithB columnShiftEndo
+columnShiftCommutesWithB f = refl
+
+rowShiftPreservesGraph : PreservesGraph rowShiftEndo
+rowShiftPreservesGraph = centralizerPreservesGraph rowShiftEndo rowShiftCommutesWithB
+
+columnShiftPreservesGraph : PreservesGraph columnShiftEndo
+columnShiftPreservesGraph = centralizerPreservesGraph columnShiftEndo columnShiftCommutesWithB
+
+rowShiftOrderThree : (f : Cube.Face9) → rowShift (rowShift (rowShift f)) ≡ f
+rowShiftOrderThree f = refl
+
+columnShiftOrderThree : (f : Cube.Face9) → columnShift (columnShift (columnShift f)) ≡ f
+columnShiftOrderThree f = refl
+
+rowColumnCommute : (f : Cube.Face9) →
+  rowShift (columnShift f) ≡ columnShift (rowShift f)
+rowColumnCommute f = refl
