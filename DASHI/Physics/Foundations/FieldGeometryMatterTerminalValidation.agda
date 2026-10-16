@@ -1,6 +1,6 @@
 module DASHI.Physics.Foundations.FieldGeometryMatterTerminalValidation where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Foundations.FieldGeometryMatterTerminalMaxCutExact as Terminal
@@ -9,111 +9,111 @@ terminalFrontierExists : Terminal.FieldGeometryMatterTerminalFrontier
 terminalFrontierExists = Terminal.currentTerminalFrontier
 
 matbgQTMSourceIsPaid :
-  Terminal.matbg2026QTMSourceVertical Terminal.currentTerminalFrontier
-    ≡ Terminal.sourcePaid
+  Terminal.matbg2026QTMSourceVertical Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
 matbgQTMSourceIsPaid = refl
 
 matbgEntropySourceIsPaid :
-  Terminal.matbg2026EntropySourceVertical Terminal.currentTerminalFrontier
-    ≡ Terminal.sourcePaid
+  Terminal.matbg2026EntropySourceVertical Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
 matbgEntropySourceIsPaid = refl
 
-matbgValleyC3SourceRoleIsPaid :
-  Terminal.literalMATBGValleyC3Weld Terminal.currentTerminalFrontier
-    ≡ Terminal.sourcePaid
-matbgValleyC3SourceRoleIsPaid = refl
-
-bmSymbolicMatrixC3IsStructurallyPaid :
-  Terminal.bmFirstHarmonicSymbolicMatrixC3 Terminal.currentTerminalFrontier
-    ≡ Terminal.structurallyPaid
-bmSymbolicMatrixC3IsStructurallyPaid = refl
-
 bmExactEisensteinEvaluationIsStructurallyPaid :
-  Terminal.bmExactEisensteinMatrixEvaluation Terminal.currentTerminalFrontier
-    ≡ Terminal.structurallyPaid
+  Terminal.bmExactEisensteinMatrixEvaluation Terminal.currentTerminalFrontier ≡ Terminal.structurallyPaid
 bmExactEisensteinEvaluationIsStructurallyPaid = refl
 
-bmSampleCalibrationStillOpen :
-  Terminal.bmSampleW0W1Calibration Terminal.currentTerminalFrontier
-    ≡ Terminal.openCalibrationOrExecution
-bmSampleCalibrationStillOpen = refl
+bmSourceRatioIsPaid :
+  Terminal.bmSourceNormalizedW0W1Ratio Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
+bmSourceRatioIsPaid = refl
 
-bmContinuumExecutionStillNeedsCalibration :
-  Terminal.bmContinuumMomentumLatticeExecution Terminal.currentTerminalFrontier
-    ≡ Terminal.openCalibrationOrExecution
-bmContinuumExecutionStillNeedsCalibration = refl
+bmFirstShellWasActuallyExecuted :
+  Terminal.bmFirstShellNumericalReplay Terminal.currentTerminalFrontier ≡ Terminal.numericallyExecuted
+bmFirstShellWasActuallyExecuted = refl
+
+bmPlaneWaveWasActuallyExecuted :
+  Terminal.bmReciprocalLatticePlaneWaveReplay Terminal.currentTerminalFrontier ≡ Terminal.numericallyExecuted
+bmPlaneWaveWasActuallyExecuted = refl
+
+absoluteSampleScaleStillRequiresCalibration :
+  Terminal.bmSampleAbsoluteTunnellingCalibration Terminal.currentTerminalFrontier ≡ Terminal.openCalibrationOrExecution
+absoluteSampleScaleStillRequiresCalibration = refl
+
+thfSourceContractIsPaid :
+  Terminal.thfHubbardI2026SourceContract Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
+thfSourceContractIsPaid = refl
+
+thfSelfConsistentSolveStillOpen :
+  Terminal.thfSelfConsistentInteractingSolve Terminal.currentTerminalFrontier ≡ Terminal.openCalibrationOrExecution
+thfSelfConsistentSolveStillOpen = refl
+
+entropyCombinatoricsIsStructurallyPaid :
+  Terminal.entropyExactCombinatorialCounts Terminal.currentTerminalFrontier ≡ Terminal.structurallyPaid
+entropyCombinatoricsIsStructurallyPaid = refl
+
+entropyExtractionAndAtomicLimitAreSourcePaid :
+  Terminal.entropyMaxwellAtomicLimitSourceContract Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
+entropyExtractionAndAtomicLimitAreSourcePaid = refl
 
 sameSampleQTMEntropyRemainsExternal :
-  Terminal.sameSampleQTMEntropyReplay Terminal.currentTerminalFrontier
-    ≡ Terminal.externalOnly
+  Terminal.sameSampleQTMEntropyReplay Terminal.currentTerminalFrontier ≡ Terminal.externalOnly
 sameSampleQTMEntropyRemainsExternal = refl
 
+quantumGeometryWasNumericallyExecuted :
+  Terminal.matbgQuantumGeometryNumericalReplay Terminal.currentTerminalFrontier ≡ Terminal.numericallyExecuted
+quantumGeometryWasNumericallyExecuted = refl
+
+experimentalQuantumMetricStillRequiresPayment :
+  Terminal.matbgQuantumMetricExperimentalCalibration Terminal.currentTerminalFrontier ≡ Terminal.openSameObjectPayment
+experimentalQuantumMetricStillRequiresPayment = refl
+
 generalizedCaloricContractIsPaid :
-  Terminal.generalizedCaloricFiniteContract Terminal.currentTerminalFrontier
-    ≡ Terminal.structurallyPaid
+  Terminal.generalizedCaloricFiniteContract Terminal.currentTerminalFrontier ≡ Terminal.structurallyPaid
 generalizedCaloricContractIsPaid = refl
 
 geometryCaloricCycleRemainsExternal :
-  Terminal.geometryCaloricPhysicalCycle Terminal.currentTerminalFrontier
-    ≡ Terminal.externalOnly
+  Terminal.geometryCaloricPhysicalCycle Terminal.currentTerminalFrontier ≡ Terminal.externalOnly
 geometryCaloricCycleRemainsExternal = refl
 
 brownMaclayTheoryIsSourcePaid :
-  Terminal.brownMaclayRenormalizedStressTheory Terminal.currentTerminalFrontier
-    ≡ Terminal.sourcePaid
+  Terminal.brownMaclayRenormalizedStressTheory Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
 brownMaclayTheoryIsSourcePaid = refl
 
 measuredGravityBackreactionStillRequiresExperiment :
-  Terminal.quantumStressMeasuredGRBackreaction Terminal.currentTerminalFrontier
-    ≡ Terminal.requiresIndependentExperiment
+  Terminal.quantumStressMeasuredGRBackreaction Terminal.currentTerminalFrontier ≡ Terminal.requiresIndependentExperiment
 measuredGravityBackreactionStillRequiresExperiment = refl
 
-experimentPortfolioIsStructurallyPaid :
-  Terminal.fiveDomainExperimentPortfolio Terminal.currentTerminalFrontier
-    ≡ Terminal.structurallyPaid
-experimentPortfolioIsStructurallyPaid = refl
-
 monolithicRollupIntegrationIsPaid :
-  Terminal.monolithicFoundationsEverythingIntegration Terminal.currentTerminalFrontier
-    ≡ Terminal.structurallyPaid
+  Terminal.monolithicFoundationsEverythingIntegration Terminal.currentTerminalFrontier ≡ Terminal.structurallyPaid
 monolithicRollupIntegrationIsPaid = refl
 
-exactHeadKernelReceiptIsExplicit : Terminal.FrontierStatus
-exactHeadKernelReceiptIsExplicit =
-  Terminal.exactHeadAgdaKernelReceipt Terminal.currentTerminalFrontier
-
 moreGenericAbstractionDoesNotClosePhysics :
-  Terminal.moreGenericAbstractionCountsAsPhysicalClosure
-    Terminal.currentTerminalFrontier ≡ false
+  Terminal.moreGenericAbstractionCountsAsPhysicalClosure Terminal.currentTerminalFrontier ≡ false
 moreGenericAbstractionDoesNotClosePhysics = refl
 
 sameMaterialClassDoesNotBecomeSameSample :
-  Terminal.sameMaterialClassCountsAsSameSample Terminal.currentTerminalFrontier
-    ≡ false
+  Terminal.sameMaterialClassCountsAsSameSample Terminal.currentTerminalFrontier ≡ false
 sameMaterialClassDoesNotBecomeSameSample = refl
 
-symbolicBMMatrixDoesNotBecomeCalibratedHamiltonian :
-  Terminal.symbolicBMMatrixCountsAsCalibratedComplexHamiltonian
-    Terminal.currentTerminalFrontier ≡ false
-symbolicBMMatrixDoesNotBecomeCalibratedHamiltonian = refl
+numericalBMDoesNotBecomeExperiment :
+  Terminal.numericalBMExecutionCountsAsExperiment Terminal.currentTerminalFrontier ≡ false
+numericalBMDoesNotBecomeExperiment = refl
 
-exactEisensteinEvaluationDoesNotBecomeSampleCalibration :
-  Terminal.exactEisensteinEvaluationCountsAsSampleCalibration
-    Terminal.currentTerminalFrontier ≡ false
-exactEisensteinEvaluationDoesNotBecomeSampleCalibration = refl
+sourceTHFParametersDoNotBecomeSolvedSelfConsistency :
+  Terminal.sourceTHFParametersCountAsSolvedSelfConsistency Terminal.currentTerminalFrontier ≡ false
+sourceTHFParametersDoNotBecomeSolvedSelfConsistency = refl
 
-crossPollinatedEisensteinCarrierDoesNotTransferBiologyMechanism :
-  Terminal.biologyEisensteinCarrierTransfersBiologyMechanism
-    Terminal.currentTerminalFrontier ≡ false
-crossPollinatedEisensteinCarrierDoesNotTransferBiologyMechanism = refl
+entropyCombinatoricsDoesNotBecomeMeasuredEntropy :
+  Terminal.entropyCombinatoricsCountAsMeasuredEntropy Terminal.currentTerminalFrontier ≡ false
+entropyCombinatoricsDoesNotBecomeMeasuredEntropy = refl
+
+numericalQuantumMetricDoesNotBecomeExperimentalCalibration :
+  Terminal.numericalQuantumMetricCountsAsExperimentalCalibration Terminal.currentTerminalFrontier ≡ false
+numericalQuantumMetricDoesNotBecomeExperimentalCalibration = refl
 
 residualDoesNotBecomeAntigravity :
   Terminal.residualCountsAsAntigravity Terminal.currentTerminalFrontier ≡ false
 residualDoesNotBecomeAntigravity = refl
 
 energyConditionViolationDoesNotBecomeWarpCapability :
-  Terminal.energyConditionViolationCountsAsWarpCapability
-    Terminal.currentTerminalFrontier ≡ false
+  Terminal.energyConditionViolationCountsAsWarpCapability Terminal.currentTerminalFrontier ≡ false
 energyConditionViolationDoesNotBecomeWarpCapability = refl
 
 teleportationDoesNotBecomeFTL :
