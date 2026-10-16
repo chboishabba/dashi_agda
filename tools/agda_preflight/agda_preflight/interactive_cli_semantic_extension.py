@@ -4,13 +4,15 @@ import argparse
 import json
 from pathlib import Path
 
+from .repository_store import DEFAULT_REPOSITORY_DB
+
 
 def _common(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--root", type=Path, default=Path.cwd())
     parser.add_argument(
         "--index",
         type=Path,
-        default=Path(".cache/agda_preflight/source-index.sqlite3"),
+        default=DEFAULT_REPOSITORY_DB,
     )
     parser.add_argument("--json", action="store_true")
 
@@ -35,7 +37,7 @@ def build_semantic_parser() -> argparse.ArgumentParser:
     obj.add_argument("symbol_id")
     _common(obj)
 
-    archaeology = sub.add_parser("archaeology", help="search cached PR/commit development narrative")
+    archaeology = sub.add_parser("archaeology", help="search PR/commit development narrative")
     archaeology.add_argument("query")
     archaeology.add_argument("--limit", type=int, default=50)
     _common(archaeology)
@@ -64,6 +66,8 @@ def _print_payload(payload: dict, *, as_json: bool) -> None:
         if not payload["results"]:
             print("dashi-agda: no matching symbols")
         return
+    # Legacy compatibility command. The canonical dashi-repo CLI uses tabular
+    # human output; JSON remains only as this opt-in compatibility renderer.
     print(json.dumps(payload, indent=2, sort_keys=True))
 
 
