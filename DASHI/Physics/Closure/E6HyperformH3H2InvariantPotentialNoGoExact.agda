@@ -73,12 +73,11 @@ translationInvariantPotentialIsConstant :
   TranslationInvariant V →
   (x y : Nine.PhaseAffineCoordinate) → V x ≡ V y
 translationInvariantPotentialIsConstant V invariant x y =
-  sym (
-    trans
-      (cong V (translationHits x y))
-      (invariant
-        (subCoeff (proj₁ x) (proj₁ y) , subCoeff (proj₂ x) (proj₂ y))
-        y))
+  trans
+    (sym (cong V (translationHits x y)))
+    (invariant
+      (subCoeff (proj₁ x) (proj₁ y) , subCoeff (proj₂ x) (proj₂ y))
+      y)
 
 record H3H2InvariantPotentialBoundary : Set where
   constructor h3-h2-invariant-potential-boundary
