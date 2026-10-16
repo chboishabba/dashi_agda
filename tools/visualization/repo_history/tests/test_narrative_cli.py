@@ -2,9 +2,9 @@ from dashi_repo_history.narrative import NarrativeEvent
 from dashi_repo_history.narrative_cli import build_explanation, build_parser
 
 
-def test_parser_exposes_history_explain_frontier_archaeology_and_harvest():
+def test_parser_exposes_history_explain_frontier_stale_archaeology_and_harvest():
     parser = build_parser()
-    for command in ("history", "explain", "frontier", "archaeology", "harvest"):
+    for command in ("history", "explain", "frontier", "stale", "archaeology", "harvest"):
         argv = [command, "."]
         if command != "harvest":
             argv.append("C3")
@@ -37,3 +37,4 @@ def test_explanation_keeps_narrative_authority_explicit_and_surfaces_current_fro
     assert payload["may_establish_formal_fact"] is False
     assert payload["latest_event"]["event_id"] == "pr:2"
     assert any("A1 covariance" in item for item in payload["current_frontier"])
+    assert payload["potentially_stale_frontiers"][0]["event_id"] == "commit:1"
