@@ -8,7 +8,7 @@ open import Data.Rational.Solver using (module +-*-Solver)
 import Data.Rational.Properties as Rₚ
 
 open +-*-Solver using (solve; _:+_; _:-_; _:*_; con; _:=_)
-open import DASHI.Core.Q using (ℚ; _*ℚ_; zeroℚ; oneℚ)
+open import DASHI.Core.Q using (ℚ; _-ℚ_; _*ℚ_; zeroℚ; oneℚ)
 import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsCarrierExact as R
 import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsLawObligationsExact as Laws
 
@@ -88,9 +88,9 @@ bulletM-comm : (A B : R.QMatrix3) → R.bulletM A B ≡ R.bulletM B A
 bulletM-comm A B = cong (R.scaleM R.halfℚ) (addM-comm (R.mulM A B) (R.mulM B A))
 
 crossCoefficientComm : (A B : R.QMatrix3) →
-  R.halfℚ *ℚ ((R.traceM A *ℚ R.traceM B) R.-ℚ R.traceM (R.bulletM A B))
+  R.halfℚ *ℚ ((R.traceM A *ℚ R.traceM B) -ℚ R.traceM (R.bulletM A B))
   ≡
-  R.halfℚ *ℚ ((R.traceM B *ℚ R.traceM A) R.-ℚ R.traceM (R.bulletM B A))
+  R.halfℚ *ℚ ((R.traceM B *ℚ R.traceM A) -ℚ R.traceM (R.bulletM B A))
 crossCoefficientComm A B
   rewrite traceM-cong (bulletM-comm A B) =
   solve 3
@@ -156,13 +156,14 @@ record BasicLawBoundary : Set where
   constructor basic-law-boundary
   field
     rationalSolverReused : Bool
-    commutativityKernelWitnessSourceWritten : Bool
-    cubicUnitKernelWitnessSourceWritten : Bool
-    twoSidedUnitKernelWitnessPaid : Bool
-    bilinearityKernelWitnessPaid : Bool
-    cubicHomogeneityKernelWitnessPaid : Bool
-    jordanIdentityKernelWitnessPaid : Bool
+    commutativityProofTermSourceWritten : Bool
+    cubicUnitProofTermSourceWritten : Bool
+    twoSidedUnitProofTermsSourceWritten : Bool
+    bilinearityProofTermsSourceWritten : Bool
+    cubicHomogeneityProofTermSourceWritten : Bool
+    jordanIdentityProofTermSourceWritten : Bool
     fullPaidLawPackageInhabited : Bool
+    exactHeadAgdaKernelReceiptPresent : Bool
     externalAlbertClassificationUsedForTheseWitnesses : Bool
     boundary : String
 open BasicLawBoundary public
@@ -170,5 +171,5 @@ open BasicLawBoundary public
 canonicalBasicLawBoundary : BasicLawBoundary
 canonicalBasicLawBoundary =
   basic-law-boundary
-    true true true false false false false false false
-    "This owner source-writes literal proof terms for product commutativity and cubic(unit)=1 using the repository's existing Data.Rational.Solver route on the exact M3(Q)^3 definitions. Because this exact head has not been Agda-checked here, these are SOURCE-WRITTEN proof terms rather than claimed kernel-green receipts. Unit, bilinearity, cubic homogeneity, Jordan identity and the full PaidRationalFirstTitsLaws package remain open; no external Albert classification theorem is used to manufacture the local witnesses."
+    true true true false false false false false false false
+    "This owner source-writes literal proof terms for product commutativity and cubic(unit)=1 using the repository's existing Data.Rational.Solver route on the exact M3(Q)^3 definitions. The scalar subtraction is imported from its actual Core.Q owner rather than assumed to be re-exported by the carrier module. Unit, bilinearity, cubic homogeneity, Jordan identity and the full PaidRationalFirstTitsLaws package remain open. No exact-head Agda kernel receipt is claimed and no external Albert classification theorem is used to manufacture these local witnesses."
