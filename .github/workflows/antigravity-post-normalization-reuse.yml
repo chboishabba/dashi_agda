@@ -8,7 +8,9 @@ on:
     paths:
       - 'DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuse*.agda'
       - 'DASHI/Physics/ExoticGravity/AntigravityTerminalPhysicalPackageFrontierExact.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravityP1MarkedOSParetoReuseMaxCutExact.agda'
       - 'DASHI/Physics/ExoticGravity/AntigravityDifferentialTTDonorMaxCutExact.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravityStressLengthSquaredTargetIntervalExact.agda'
       - 'DASHI/Physics/ExoticGravity/AntigravitySICalibrationDonorMaxCutExact.agda'
       - 'DASHI/Physics/ExoticGravity/AntigravityMatchedControlExperimentDonorMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119AntigravityR136ToStaticVacuumPromotionExact.agda'
@@ -18,9 +20,11 @@ on:
       - 'DASHI/Physics/Foundations/CMP119AntigravityPostScalarR136ReuseMaxCutExact.agda'
       - 'tests/test_antigravity_local_c_wightman_static_reuse.py'
       - 'tests/test_antigravity_terminal_physical_package_frontier.py'
+      - 'tests/test_antigravity_p1_marked_os_pareto_reuse.py'
       - 'tests/test_antigravity_r136_static_differential_reuse.py'
       - 'tests/test_antigravity_pinned_local_c_static_promotion.py'
       - 'tests/test_antigravity_differential_tt_donor_maxcut.py'
+      - 'tests/test_antigravity_stress_length_squared_target_interval.py'
       - 'tests/test_antigravity_si_calibration_donor_maxcut.py'
       - 'tests/test_antigravity_matched_control_experiment_donor.py'
       - 'tests/test_antigravity_post_normalization_reuse_rollup.py'
@@ -47,9 +51,11 @@ jobs:
           pytest -q \
             tests/test_antigravity_local_c_wightman_static_reuse.py \
             tests/test_antigravity_terminal_physical_package_frontier.py \
+            tests/test_antigravity_p1_marked_os_pareto_reuse.py \
             tests/test_antigravity_r136_static_differential_reuse.py \
             tests/test_antigravity_pinned_local_c_static_promotion.py \
             tests/test_antigravity_differential_tt_donor_maxcut.py \
+            tests/test_antigravity_stress_length_squared_target_interval.py \
             tests/test_antigravity_si_calibration_donor_maxcut.py \
             tests/test_antigravity_matched_control_experiment_donor.py \
             tests/test_antigravity_post_normalization_reuse_rollup.py \
@@ -63,6 +69,8 @@ jobs:
           nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityLocalCWightmanTerminalToStaticExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityPostScalarR136ReuseMaxCutExact.agda
           nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuseMaxCutExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityP1MarkedOSParetoReuseMaxCutExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityStressLengthSquaredTargetIntervalExact.agda
           nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityTerminalPhysicalPackageFrontierExact.agda
           nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityDifferentialTTDonorMaxCutExact.agda
           nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravitySICalibrationDonorMaxCutExact.agda
