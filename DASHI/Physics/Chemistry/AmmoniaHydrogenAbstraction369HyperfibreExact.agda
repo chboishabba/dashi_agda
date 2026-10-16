@@ -8,6 +8,10 @@ import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact as Mecha
 
 ------------------------------------------------------------------------
 -- CONCRETE 369 HYPERFIBRE FOR 14NH3 + 1H -> 14NH2 + 1H2
+--
+-- This fixture carries source/target atomic inventories using the 369 AtomicIndex
+-- type.  It does NOT attach persistent individual atom IDs across the reaction;
+-- therefore inventory conservation is paid while atom-identity transport is not.
 ------------------------------------------------------------------------
 
 data ReactionTime : Set where
@@ -80,7 +84,7 @@ targetFibre =
     refl
     (refl , refl)
     refl
-    "same 14N + four 1H AtomicIndex inventory"
+    "same isotope/species inventory: 14N + four 1H AtomicIndex entries"
     "NH2 + H2 target molecular state"
     "target state for PES-2009 abstraction path"
     "not industrial"
@@ -89,7 +93,7 @@ abstractionTransport : Fibre.ChemistryFibreTransport sourceFibre targetFibre
 abstractionTransport =
   Fibre.chemistryFibreTransport
     "separatedReactants -> entranceApproach -> saddleRegion -> exitSeparation -> separatedProducts"
-    "same literal 14N + four 1H AtomicIndex inventory; atom identities conserved while bonding changes"
+    "source and target have matching 14N + four 1H AtomicIndex inventories; no persistent per-atom identity map is asserted"
     "NH3 + H -> NH2 + H2 molecular identity transport"
     "Espinosa-Garcia/Corchado PES-2009 reaction path plus 2011 quantum-dynamics consumer"
     "no industrial/process promotion"
@@ -104,8 +108,10 @@ record HyperformBoundary : Set where
       literalChemistryHyperfibreInhabited ≡ true
     sourceBackedMechanismAttached : Bool
     sourceBackedMechanismAttachedIsTrue : sourceBackedMechanismAttached ≡ true
-    atomicIdentityTransportPaid : Bool
-    atomicIdentityTransportPaidIsTrue : atomicIdentityTransportPaid ≡ true
+    atomic369InventoryEndpointsPaid : Bool
+    atomic369InventoryEndpointsPaidIsTrue : atomic369InventoryEndpointsPaid ≡ true
+    individualAtomIdentityTransportPaid : Bool
+    individualAtomIdentityTransportPaidIsFalse : individualAtomIdentityTransportPaid ≡ false
     molecularBondRearrangementPaid : Bool
     molecularBondRearrangementPaidIsTrue : molecularBondRearrangementPaid ≡ true
     fibreCreatesExactQuantumTrajectory : Bool
@@ -121,6 +127,7 @@ canonicalHyperformBoundary =
     true refl
     true refl
     true refl
+    false refl
     true refl
     false refl
     false refl
