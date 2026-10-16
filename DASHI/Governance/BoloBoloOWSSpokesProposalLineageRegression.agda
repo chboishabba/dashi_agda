@@ -23,3 +23,8 @@ designDoesNotProveImplementation = refl
 mirrorDoesNotBecomeOriginal :
   Subject.preservedMirrorEqualsOriginalNYCGAPage Subject.canonicalSpokesProposalLineageBoundary ≡ false
 mirrorDoesNotBecomeOriginal = refl
+
+intendedDesignCannotCertifyRealizedControl :
+  Subject.IntendedDesignDeterminesRealizedControl → ⊥
+intendedDesignCannotCertifyRealizedControl =
+  Subject.intendedDesignDoesNotDetermineRealizedControl
