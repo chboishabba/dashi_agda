@@ -12,6 +12,14 @@ coverTopologyExhausted :
   Hyper.everyCoverIsMaximalOrTriadic boundary ≡ true
 coverTopologyExhausted = refl
 
+everyCoverHasCertificate :
+  Hyper.everyCoverHasHyperdescentCertificate boundary ≡ true
+everyCoverHasCertificate = refl
+
+siteHasNoStrictThreeChain :
+  Hyper.siteHasNoStrictThreeArrowChain boundary ≡ true
+siteHasNoStrictThreeChain = refl
+
 triadicPullbacksMaximal :
   Hyper.triadicNonGlobalPullbacksAreMaximal boundary ≡ true
 triadicPullbacksMaximal = refl
