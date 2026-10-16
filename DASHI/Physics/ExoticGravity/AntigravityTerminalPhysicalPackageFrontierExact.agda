@@ -37,10 +37,11 @@ import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStatic
 --       measured G is already paid by the attributed CODATA-2022 admission.
 --
 --   P3. one matched experimental package.  The repository-internal experiment
---       compiler is now paid: one metric state feeds weight, free-fall, clock
---       and optical consumers, mechanism-signature templates are separated,
---       and nuisance closure is candidate-bound.  What remains is physical:
---       a real source switch, a numerical systematic floor, and replication.
+--       compiler is now paid: one selected source compiles to one stress, one
+--       metric and four consumers (weight, free-fall, clock, optical);
+--       mechanism-signature templates are separated and nuisance closure is
+--       candidate-bound.  What remains is physical: a real source switch, a
+--       numerical systematic floor, and replication.
 --
 -- Optional only for a propagating Schuetzhold/GW claim:
 --
@@ -126,6 +127,9 @@ gravityCalibrationInternallyNeedsAcceptedGAndStressLengthSquared = false
 
 sameStateFourChannelCompilerConstructed : Bool
 sameStateFourChannelCompilerConstructed = true
+
+sameSourceStressMetricChainConstructed : Bool
+sameSourceStressMetricChainConstructed = true
 
 mechanismSignatureTemplatesConstructed : Bool
 mechanismSignatureTemplatesConstructed = true
@@ -218,6 +222,7 @@ record TerminalPhysicalPackageFrontier : Set where
     stressLengthSquaredProductOpen : Bool
     commonGravityCalibrationOpen : Bool
     fourChannelCompilerPaid : Bool
+    sourceStressMetricChainPaid : Bool
     candidateBoundNuisanceContractPaid : Bool
     matchedExperimentOpen : Bool
     ttPackageOpenForScalarRoute : Bool
@@ -233,7 +238,7 @@ record TerminalPhysicalPackageFrontier : Set where
 canonicalTerminalPhysicalPackageFrontier : TerminalPhysicalPackageFrontier
 canonicalTerminalPhysicalPackageFrontier =
   terminal-physical-package-frontier
-    true true false false true true true true true false true false false false false
+    true true false false true true true true true true false true false false false false
     3 3 4
 
 acceptedMeasuredGAuthorityStillOpenIsFalse :
