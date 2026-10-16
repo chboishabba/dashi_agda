@@ -9,6 +9,7 @@ import DASHI.Physics.ExoticGravity.AntigravityPostNormalizationReuseMaxCutExact 
 import DASHI.Physics.ExoticGravity.AntigravityDifferentialTTDonorMaxCutExact as TT
 import DASHI.Physics.ExoticGravity.AntigravitySICalibrationDonorMaxCutExact as SI
 import DASHI.Physics.ExoticGravity.AntigravityMatchedControlExperimentDonorMaxCutExact as Experiment
+import DASHI.Physics.ExoticGravity.AntigravityP1MarkedOSParetoReuseMaxCutExact as P1
 import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStaticExact as Wightman
 
 ------------------------------------------------------------------------
@@ -20,9 +21,14 @@ import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStatic
 --
 -- Mandatory for static and scalar differential response:
 --
---   P1. one typed Local-C/Wightman terminal package
---       (one continued selected operator on one reconstructed vacuum carrying
---        covariance and E->L trace continuation);
+--   P1. one typed Local-C/Wightman terminal package.
+--       Current master Pareto-reduces this package to three source-facing
+--       marked-OS same-object residuals:
+--         E1 derivative equivariance,
+--         E2 reflected-cylinder stress embedding,
+--         E4 stress-source selection + OS4 semantics.
+--       B0/B3 selected semantics and the downstream rest/boost/trace laws are
+--       not separately recharged.
 --
 --   P2. one common gravitational calibration/renormalization package
 --       (affine source->rho map, cosmological convention, and the
@@ -45,6 +51,8 @@ import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStatic
 --
 -- What is NOT independently recharged after these packages are supplied:
 --   * a split pinned boost-record + trace-record representation;
+--   * the five downstream P1 terminal laws once the marked-OS root is paid;
+--   * B0/B3 as antigravity-specific topology/locality projects;
 --   * accepted G authority already paid by the source-attributed admission;
 --   * another static metric-response theorem;
 --   * another Delta same-object theorem for a common calibrated pair;
@@ -64,6 +72,33 @@ preferredSharedWightmanTerminalAvailable =
 independentPinnedBoostTraceSplitRequired : Bool
 independentPinnedBoostTraceSplitRequired =
   Wightman.independentPinnedBoostTraceSplitRequired
+
+------------------------------------------------------------------------
+-- P1 current-master Pareto detail.
+------------------------------------------------------------------------
+
+p1OpaqueAnalyticEstimateCount : Nat
+p1OpaqueAnalyticEstimateCount =
+  P1.remainingOpaqueAnalyticEstimateCount
+
+p1RemainingSameObjectResidualCount : Nat
+p1RemainingSameObjectResidualCount =
+  P1.remainingAntigravitySpecificP1ResidualCount
+
+p1E1DerivativeEquivarianceStillRequired : Bool
+p1E1DerivativeEquivarianceStillRequired =
+  P1.e1DerivativeEquivarianceStillRequired
+
+p1E2StressCylinderEmbeddingStillRequired : Bool
+p1E2StressCylinderEmbeddingStillRequired =
+  P1.e2StressCylinderEmbeddingStillRequired
+
+p1E4StressSourceSelectionAndOS4SemanticsStillRequired : Bool
+p1E4StressSourceSelectionAndOS4SemanticsStillRequired =
+  P1.e4StressSourceSelectionAndOS4SemanticsStillRequired
+
+p1IndependentTerminalLawProjectsRequired : Bool
+p1IndependentTerminalLawProjectsRequired = false
 
 commonGravityCalibrationPackageStillRequired : Bool
 commonGravityCalibrationPackageStillRequired = true
