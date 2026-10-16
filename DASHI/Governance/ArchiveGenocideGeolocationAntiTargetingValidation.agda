@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Consumer
 import DASHI.Governance.ArchiveGenocideGeolocationAntiTargetingExact as G
+import DASHI.Governance.ArchiveGenocideGeolocationPrecisionDisclosureExact as P
 
 rivalFineAgreementValidated : G.coarsen G.siteA ≡ G.coarsen G.siteB
 rivalFineAgreementValidated = G.rivalFineClaimsAgreeCoarsely
@@ -51,3 +52,34 @@ antiTargetingBoundaryValidated :
 antiTargetingBoundaryValidated =
   G.operationalTargetingIsEvidenceConsumerIsFalse
     G.archiveGenocideGeolocationMaxCutBoundary
+
+precisionTransitivityValidated :
+  P.PrecisionRefines G.exactCoordinate G.townOrCity
+precisionTransitivityValidated =
+  P.precisionRefinesTrans
+    P.exactRefinesBuilding
+    P.buildingRefinesTown
+
+reviewDoesNotDeterminePrecisionValidated :
+  proj₁ P.reviewedExact ≡ proj₁ P.reviewedTown
+reviewDoesNotDeterminePrecisionValidated = P.sameReviewDifferentPrecision
+
+reviewedPrecisionsRemainDistinctValidated :
+  proj₂ P.reviewedExact ≡ proj₂ P.reviewedTown → ⊥
+reviewedPrecisionsRemainDistinctValidated =
+  P.reviewedExactPrecisionDiffersFromReviewedTown
+
+thirdPartyCreditSeparationValidated :
+  proj₁ P.thirdPartyReviewed ≡ proj₁ P.archiveReviewed → ⊥
+thirdPartyCreditSeparationValidated = P.thirdPartyOriginRemainsDistinct
+
+minimumDisclosurePreservesProvenanceValidated :
+  ∀ (evidence : G.GeolocationEvidence)
+    (refinement :
+      P.PrecisionRefines
+        (G.statedPrecision evidence)
+        G.neighbourhoodOrCamp) →
+  P.provenanceReference (P.minimumNeighbourhoodDisclosure evidence refinement)
+    ≡ G.provenanceReference evidence
+minimumDisclosurePreservesProvenanceValidated =
+  P.provenanceSurvivesMinimumDisclosure
