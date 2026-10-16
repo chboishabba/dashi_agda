@@ -3,17 +3,10 @@ module DASHI.Biology.IITParityGluingConjectureMaxCutExact where
 ------------------------------------------------------------------------
 -- TERMINAL CONJECTURE CAPSTONE
 --
--- The conjecture has been refined into three distinct layers:
---
---   local synthesis       : Boolean parity / affine F3 channels
---   ordered gluing        : orientation, handedness, C3 phase
---   higher-order gluing   : triadic face / cocycle information that does not
---                            descend to pairwise observers
---
--- The cube programme adds a fourth coordinate: global image/kernel geometry.
--- This owner collects the strongest paid theorem surfaces without promoting
--- numerical IIT receipts, sibling PR source state, or matching dimensions into
--- kernel theorem authority.
+-- local synthesis       : Boolean parity / affine F3 channels
+-- ordered gluing        : orientation, handedness, C3 phase
+-- higher-order gluing   : triadic face / cocycle non-descent
+-- global geometry       : image/kernel structure of the glued transition map
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -23,13 +16,11 @@ import DASHI.Biology.IITTernaryAffineMinimalSufficiencyExact as F3Parity
 import DASHI.Biology.IITBinaryTernaryParityTorqueLiftExact as Lift
 import DASHI.Biology.IITParityTorqueGluingBoundaryExact as Torque
 import DASHI.Biology.IITHigherOrderGluingDiscriminationExact as Higher
+import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact as Triadic
 import DASHI.Biology.IITCubeTwoFaceQ9SelfIndexingWeldExact as Q9
 import DASHI.Biology.IITCubeTwoFaceImageRecognitionExact as Cube
 import DASHI.Biology.IITCubeExceptionalGeometryHandoffExact as Exceptional
-
-------------------------------------------------------------------------
--- 1. Exact paid structural witnesses.
-------------------------------------------------------------------------
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
 booleanParityWitness : BoolParity.ParityOrComplement BoolParity.xorGate
 booleanParityWitness = BoolParity.xorParity
@@ -42,9 +33,9 @@ ternaryAntisymmetricWitness :
 ternaryAntisymmetricWitness = F3Parity.triDifferenceIsAntisymmetric
 
 higherOrderNonDescentWitness :
-  DASHI.Core.ConsumerDescentMinimalObserverExact.FactorsThrough
-    DASHI.Biology.IITPointedTernary27TriadicNonDescentExact.selectedCubiesObserver
-    DASHI.Biology.IITPointedTernary27TriadicNonDescentExact.triadicFaceConsumer
+  Descent.FactorsThrough
+    Triadic.selectedCubiesObserver
+    Triadic.triadicFaceConsumer
   → ⊥
 higherOrderNonDescentWitness = Higher.pairwiseSelectedCubiesDoNotRecoverTriadicFace
 
@@ -56,10 +47,6 @@ cubeGraphBoundary = Cube.canonicalCubeImageRecognitionBoundary
 
 exceptionalHandoffBoundary : Exceptional.ExceptionalCubeHandoffBoundary
 exceptionalHandoffBoundary = Exceptional.canonicalExceptionalCubeHandoffBoundary
-
-------------------------------------------------------------------------
--- 2. Terminal payment ledger.
-------------------------------------------------------------------------
 
 record ParityGluingConjectureStatus : Set where
   constructor parity-gluing-conjecture-status
@@ -97,10 +84,6 @@ canonicalParityGluingConjectureStatus =
     true false true false
     true true false
     false false false false
-
-------------------------------------------------------------------------
--- 3. Stopping rule: what remains is no longer generic architecture.
-------------------------------------------------------------------------
 
 record ParityGluingMaxCutFrontier : Set where
   constructor parity-gluing-max-cut-frontier
