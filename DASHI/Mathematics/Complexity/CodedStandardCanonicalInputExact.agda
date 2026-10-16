@@ -3,38 +3,44 @@ module DASHI.Mathematics.Complexity.CodedStandardCanonicalInputExact where
 ------------------------------------------------------------------------
 -- CANONICAL STANDARD INPUT CONFIGURATION INDEPENDENT OF ANY TIME BUDGET
 --
--- Polynomial machine execution should not be defined from a tape whose finite
--- blank margin is itself parameterised by the claimed runtime.  The ordinary
--- initial row already has a unique interior head, so project that minimal row to
--- the standard split-tape carrier once and for all.  Cook guard padding remains
--- a downstream representation/quotation concern.
+-- Conventional split-tape semantics already interprets an empty side list as
+-- an infinite blank tail.  Therefore operational input should not inherit the
+-- concrete Cook row's explicit boundary blanks:
+--
+--   []       -> ([], q0, blank, [])
+--   a :: xs  -> ([], q0, a, xs)
+--
+-- Cook's finite guarded row is a downstream representation of this same tape,
+-- not part of the definition of polynomial runtime.
 ------------------------------------------------------------------------
 
-import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
-import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
-import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Character
-import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
-import DASHI.Mathematics.Complexity.ConcreteTapeStandardCanonicalProjectionExact as Canonical
-import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
+open import Agda.Builtin.List using ([]; _∷_)
 
-initialUnique :
-  ∀ {machine : Local.ConcreteTapeMachine}
-    (input : Input.InputWord machine) →
-  WF.ExactlyOneHead (Local.cells (Input.initialInputRow input))
-initialUnique input =
-  Character.interiorHeadIsUnique (Input.initialInputInterior input)
+import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
+import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
+import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 
 canonicalStandardStart :
   ∀ {machine : Local.ConcreteTapeMachine}
     (input : Input.InputWord machine) →
   Standard.StandardConfiguration (Standard.standardControlOfConcrete machine)
-canonicalStandardStart input =
-  Canonical.canonicalProjection (initialUnique input)
+canonicalStandardStart {machine} [] =
+  Standard.standard-configuration
+    []
+    (Local.initialState machine)
+    (Local.blank machine)
+    []
+canonicalStandardStart {machine} (symbol ∷ rest) =
+  Standard.standard-configuration
+    []
+    (Local.initialState machine)
+    symbol
+    rest
 
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- Runtime witnesses can now be tied to one input configuration independent of
--- their own step count. GuardedStandardStart(input,T) is reserved for the later
--- Cook--Levin representation of an already-fixed T-step execution.
+-- Runtime now starts from the standard mathematical tape representation with
+-- implicit blank tails. Any finite explicit margin used by Cook--Levin must be
+-- connected through blank-tail equivalence, not treated as part of runtime.
 ------------------------------------------------------------------------
