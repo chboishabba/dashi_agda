@@ -53,7 +53,7 @@ phase2Longitudinal = phase-deliverable
   "Phase 2 — longitudinal identification"
   longitudinalIdentification
   "dated state machinery, fixed-basket market series, open-weight production trajectory, debt/vintage scenario calendars, same-issuer CoreWeave CDS deterioration, and same-instrument 9.625-percent 2032 note repricing from issue coupon to above-15-percent October yield"
-  "repeat full X_t under identical producer definitions; repeat same-instrument bond/CDS observations plus realised refinancing/default/restructuring; customer-cash-versus-cure histories; same-generation price/utilisation/resale decay; named contract-realisation histories"
+  "repeat full X_t under identical producer definitions; repeat same-instrument bond/CDS observations plus realised refinancing/default/restructuring; customer-cash-versus-cure histories; same-generation price/utilisation/resale decay; named contract-realisation histories; repeat Vercel model/provider shares under the same published methodology"
   "at least two comparable later state points across each promoted consumer with unchanged measurement contracts, permitting persistence/regime inference rather than one stressed issuer/instrument coordinate"
   false
 
@@ -70,8 +70,8 @@ phase4OutcomeValidation : PhaseDeliverable
 phase4OutcomeValidation = phase-deliverable
   "Phase 4 — real-world outcome / thesis falsification"
   outcomeValidation
-  "predeclared rival signatures plus current compatibility surface: refinancing-stress and commoditisation-with-volume-growth have the strongest selected-coordinate support, while orderly capital rotation remains materially compatible and no terminal regime is selected"
-  "populate missing signature coordinates longitudinally and discriminate among rivals only when same-basis realised returns, funding/refinancing outcomes, scarcity-rent trajectories, utilisation, customer-cash decomposition and market-structure observations are available"
+  "predeclared rival signatures plus current compatibility surface: refinancing stress remains strongly compatible; commoditisation-with-volume-growth remains strongly compatible; orderly capital rotation is now co-leading on selected coordinates because open-weight expansion coexists with closed-model spend growth and provider intermediation; Anthropic's reported adjusted profitability is a bounded durable-rent counterweight; no terminal regime is selected"
+  "populate missing signature coordinates longitudinally and discriminate among rivals only when same-basis realised returns, funding/refinancing outcomes, provider-layer rent trajectories, scarcity-rent trajectories, utilisation, customer-cash decomposition and market-structure observations are available"
   "one or more hypotheses are discriminated without post-hoc redefining the consumer; currentOutcomePromotionReady and anyTerminalRegimeSelected remain false until those longitudinal payments exist"
   false
 
@@ -113,6 +113,9 @@ australianPolicyLocusShiftPaid = AUInfraPolicy.policyLocusShiftPaid
 australianDataCentreEnactmentStillOpen : AUInfraPolicy.newMandatoryDataCentreDutyEnacted AUInfraPolicy.currentPolicyShift ≡ false
 australianDataCentreEnactmentStillOpen = AUInfraPolicy.enactmentStillOpen
 
+orderlyRotationCounterweightPaid : Fit.supportedCoordinates Fit.orderlyCapitalRotationFit ≡ 6
+orderlyRotationCounterweightPaid = Fit.orderlyRotationNowCoLeadingOnSelectedCoordinates
+
 sotaBubbleStillOpen : SOTA.bubbleEstablished SOTA.currentSOTAReconciliation ≡ false
 sotaBubbleStillOpen = SOTA.bubbleStillNotEstablished
 
@@ -124,4 +127,4 @@ compatibilityDoesNotSelectRegime = refl
 
 boundary : String
 boundary =
-  "The roadmap is measurement-first and now materially more same-object. Phase 1 has corrected generic financing-life shortcuts using CoreWeave filed GPU-backed agreements and identified a private lender measurement surface for OpenAI/Phoenix 1 customer cash, contract realization and GPU serials. Phase 2 contains both same-issuer CDS deterioration and same-instrument 2032-note repricing while realised refinancing/default outcomes remain open. Phase 3 is now split by regulatory locus: Australia has withdrawn the earlier general mandatory model/deployment guardrail proposal, while current Data Centre Expectations influence project prioritisation and government has separately announced future mandatory infrastructure obligations for large data centres. Those infrastructure announcements are not promoted to enacted duties, realised costs or a model/open-weight moat. Phase 4 still selects no terminal regime until realised longitudinal cash, asset, financing and market-structure outcomes discriminate the predeclared rivals."
+  "The roadmap is measurement-first and now materially more same-object. Phase 1 has identified private lender measurement surfaces for named OpenAI/Phoenix 1 customer cash, contract realization and GPU serials rather than merely hypothesizing missing variables. Phase 2 contains same-issuer CDS deterioration and same-instrument bond repricing and now explicitly requires repeated Vercel/provider-share observations under versioned methodology. Phase 3 is split by regulatory locus: model/deployment rules and data-centre infrastructure externality rules are different consumers. Phase 4 no longer treats orderly capital rotation as a weak fallback: Vercel's simultaneous open/closed spending and US-provider intermediation of Chinese-origin models plus Anthropic's reported adjusted profitability materially strengthen rotation/frontier-rent counterweights. Refinancing stress, commoditisation and orderly rotation are all live; no terminal regime is selected until realised longitudinal cash, asset, financing, provider-rent and market-structure outcomes discriminate them."
