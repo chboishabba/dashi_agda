@@ -6,7 +6,7 @@ from pathlib import Path
 from .repository_store import DEFAULT_REPOSITORY_DB
 from .service import DashiAgdaService
 from .mcp_adapter import DashiAgdaMcpTools
-from .mcp_server import create_mcp_server
+from .mcp_server import create_mcp_server, register_repository_mcp_tools
 
 
 def main(argv=None) -> int:
@@ -33,6 +33,7 @@ def main(argv=None) -> int:
     try:
         with DashiAgdaService(root, database, jobs=args.jobs) as service:
             server = create_mcp_server(service)
+            register_repository_mcp_tools(server, DashiAgdaMcpTools(service))
             server.run(transport=args.transport)
     except ImportError as error:
         raise SystemExit(
