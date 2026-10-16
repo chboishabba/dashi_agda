@@ -66,13 +66,14 @@ maxwellStressReadoutInSelectedQFTCarrier :
     {variation : Action.CasimirRestrictedMetricVariationPayment} →
   SelectedQFTMetricVariationReadoutAttachment U selected variation →
   QFT.StressTensor (Weld.qftCarriers U)
-maxwellStressReadoutInSelectedQFTCarrier attachment =
+maxwellStressReadoutInSelectedQFTCarrier
+    {variation = variation} attachment =
   readoutToSelectedQFTStress attachment
     (MetricTransport.stressFromFirstVariation
-      (Action.commonStressReadout _)
+      (Action.commonStressReadout variation)
       (MetricTransport.maxwellMetricFirstVariation
-        (Action.derivativeLaws _)
-        (Action.metricActionFamily _)
+        (Action.derivativeLaws variation)
+        (Action.metricActionFamily variation)
         (background attachment)
         (perturbation attachment)))
 
