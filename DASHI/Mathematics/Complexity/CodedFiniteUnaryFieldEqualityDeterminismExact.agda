@@ -2,20 +2,22 @@ module DASHI.Mathematics.Complexity.CodedFiniteUnaryFieldEqualityDeterminismExac
 
 ------------------------------------------------------------------------
 -- FINITE KEY DETERMINISM FOR THE UNARY FIELD-EQUALITY MICROCODE
+--
+-- Decode the numeric `(source,read)` key back to the unique finite rule name.
+-- Every listed rule round-trips through this decoder, so equal dispatch keys
+-- imply equal names and therefore equal literal rules.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Empty using (⊥; ⊥-elim)
+open import Agda.Builtin.Maybe using (Maybe; nothing; just)
+open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.CodedFiniteUnaryFieldEqualityExact as Eq
-
-------------------------------------------------------------------------
--- Give each literal rule a finite name.  Names are grouped by source control;
--- within each group the read symbols are pairwise distinct.
-------------------------------------------------------------------------
 
 data RuleName : Set where
   ffMark ffTrue ffEnd : RuleName
@@ -26,9 +28,7 @@ data RuleName : Set where
 
 namedRule :
   RuleName →
-  Local.TapeRule
-    (Data.Fin.Base.Fin Eq.stateCount)
-    (Data.Fin.Base.Fin Eq.symbolCount)
+  Local.TapeRule (Fin.Fin Eq.stateCount) (Fin.Fin Eq.symbolCount)
 namedRule ffMark = Eq.rFFmark
 namedRule ffTrue = Eq.rFFtrue
 namedRule ffEnd = Eq.rFFend
@@ -56,24 +56,15 @@ allNames =
   csMark ∷ csTrue ∷ csEnd ∷ []
 
 mapRules : List RuleName →
-  List
-    (Local.TapeRule
-      (Data.Fin.Base.Fin Eq.stateCount)
-      (Data.Fin.Base.Fin Eq.symbolCount))
+  List (Local.TapeRule (Fin.Fin Eq.stateCount) (Fin.Fin Eq.symbolCount))
 mapRules [] = []
 mapRules (name ∷ rest) = namedRule name ∷ mapRules rest
 
 rulesAreNamed : Eq.rules ≡ mapRules allNames
 rulesAreNamed = refl
 
-------------------------------------------------------------------------
--- Invert an occurrence in the literal table to one finite name.
-------------------------------------------------------------------------
-
 record NamedOccurrence
-    (rule : Local.TapeRule
-      (Data.Fin.Base.Fin Eq.stateCount)
-      (Data.Fin.Base.Fin Eq.symbolCount)) : Set where
+    (rule : Local.TapeRule (Fin.Fin Eq.stateCount) (Fin.Fin Eq.symbolCount)) : Set where
   constructor named-occurrence
   field
     name : RuleName
@@ -92,417 +83,162 @@ invertNamed {names = name ∷ rest} (Local.ruleThere occurs) =
   invertNamed occurs
 
 invertRuleOccurrence :
-  ∀ {rule} →
-  Local.RuleOccurs rule Eq.rules →
-  NamedOccurrence rule
-invertRuleOccurrence occurs =
-  invertNamed occurs
+  ∀ {rule} → Local.RuleOccurs rule Eq.rules → NamedOccurrence rule
+invertRuleOccurrence occurs
+  rewrite rulesAreNamed = invertNamed occurs
 
-------------------------------------------------------------------------
--- `(source,read)` is injective on the finite name carrier.
-------------------------------------------------------------------------
+sourceIndex : RuleName → Nat
+sourceIndex ffMark = 0
+sourceIndex ffTrue = 0
+sourceIndex ffEnd = 0
+sourceIndex ssTrue = 1
+sourceIndex ssMark = 1
+sourceIndex ssEnd = 1
+sourceIndex fsMark = 2
+sourceIndex fsTrue = 2
+sourceIndex fsEnd = 2
+sourceIndex rlTrue = 3
+sourceIndex rlEnd = 3
+sourceIndex rlM1 = 3
+sourceIndex rlM2 = 3
+sourceIndex rlBlank = 3
+sourceIndex csMark = 4
+sourceIndex csTrue = 4
+sourceIndex csEnd = 4
+
+readIndex : RuleName → Nat
+readIndex ffMark = 3
+readIndex ffTrue = 1
+readIndex ffEnd = 2
+readIndex ssTrue = 1
+readIndex ssMark = 3
+readIndex ssEnd = 2
+readIndex fsMark = 4
+readIndex fsTrue = 1
+readIndex fsEnd = 2
+readIndex rlTrue = 1
+readIndex rlEnd = 2
+readIndex rlM1 = 3
+readIndex rlM2 = 4
+readIndex rlBlank = 0
+readIndex csMark = 4
+readIndex csTrue = 1
+readIndex csEnd = 2
+
+sourceIndexExact :
+  (name : RuleName) →
+  Fin.toℕ (Local.sourceState (namedRule name)) ≡ sourceIndex name
+sourceIndexExact ffMark = refl
+sourceIndexExact ffTrue = refl
+sourceIndexExact ffEnd = refl
+sourceIndexExact ssTrue = refl
+sourceIndexExact ssMark = refl
+sourceIndexExact ssEnd = refl
+sourceIndexExact fsMark = refl
+sourceIndexExact fsTrue = refl
+sourceIndexExact fsEnd = refl
+sourceIndexExact rlTrue = refl
+sourceIndexExact rlEnd = refl
+sourceIndexExact rlM1 = refl
+sourceIndexExact rlM2 = refl
+sourceIndexExact rlBlank = refl
+sourceIndexExact csMark = refl
+sourceIndexExact csTrue = refl
+sourceIndexExact csEnd = refl
+
+readIndexExact :
+  (name : RuleName) →
+  Fin.toℕ (Local.readSymbol (namedRule name)) ≡ readIndex name
+readIndexExact ffMark = refl
+readIndexExact ffTrue = refl
+readIndexExact ffEnd = refl
+readIndexExact ssTrue = refl
+readIndexExact ssMark = refl
+readIndexExact ssEnd = refl
+readIndexExact fsMark = refl
+readIndexExact fsTrue = refl
+readIndexExact fsEnd = refl
+readIndexExact rlTrue = refl
+readIndexExact rlEnd = refl
+readIndexExact rlM1 = refl
+readIndexExact rlM2 = refl
+readIndexExact rlBlank = refl
+readIndexExact csMark = refl
+readIndexExact csTrue = refl
+readIndexExact csEnd = refl
+
+decodeName : Nat → Nat → Maybe RuleName
+decodeName 0 3 = just ffMark
+decodeName 0 1 = just ffTrue
+decodeName 0 2 = just ffEnd
+decodeName 1 1 = just ssTrue
+decodeName 1 3 = just ssMark
+decodeName 1 2 = just ssEnd
+decodeName 2 4 = just fsMark
+decodeName 2 1 = just fsTrue
+decodeName 2 2 = just fsEnd
+decodeName 3 1 = just rlTrue
+decodeName 3 2 = just rlEnd
+decodeName 3 3 = just rlM1
+decodeName 3 4 = just rlM2
+decodeName 3 0 = just rlBlank
+decodeName 4 4 = just csMark
+decodeName 4 1 = just csTrue
+decodeName 4 2 = just csEnd
+decodeName _ _ = nothing
+
+decodeNameRoundTrip :
+  (name : RuleName) → decodeName (sourceIndex name) (readIndex name) ≡ just name
+decodeNameRoundTrip ffMark = refl
+decodeNameRoundTrip ffTrue = refl
+decodeNameRoundTrip ffEnd = refl
+decodeNameRoundTrip ssTrue = refl
+decodeNameRoundTrip ssMark = refl
+decodeNameRoundTrip ssEnd = refl
+decodeNameRoundTrip fsMark = refl
+decodeNameRoundTrip fsTrue = refl
+decodeNameRoundTrip fsEnd = refl
+decodeNameRoundTrip rlTrue = refl
+decodeNameRoundTrip rlEnd = refl
+decodeNameRoundTrip rlM1 = refl
+decodeNameRoundTrip rlM2 = refl
+decodeNameRoundTrip rlBlank = refl
+decodeNameRoundTrip csMark = refl
+decodeNameRoundTrip csTrue = refl
+decodeNameRoundTrip csEnd = refl
+
+cong₂ :
+  ∀ {A B C : Set} (f : A → B → C) {a a' : A} {b b' : B} →
+  a ≡ a' → b ≡ b' → f a b ≡ f a' b'
+cong₂ f refl refl = refl
+
+justInjective : ∀ {A : Set} {x y : A} → just x ≡ just y → x ≡ y
+justInjective refl = refl
 
 nameKeyInjective :
   (left right : RuleName) →
   Local.sourceState (namedRule left) ≡ Local.sourceState (namedRule right) →
   Local.readSymbol (namedRule left) ≡ Local.readSymbol (namedRule right) →
   left ≡ right
-nameKeyInjective ffMark ffMark sourceEq readEq = refl
-nameKeyInjective ffMark ffTrue sourceEq ()
-nameKeyInjective ffMark ffEnd sourceEq ()
-nameKeyInjective ffTrue ffMark sourceEq ()
-nameKeyInjective ffTrue ffTrue sourceEq readEq = refl
-nameKeyInjective ffTrue ffEnd sourceEq ()
-nameKeyInjective ffEnd ffMark sourceEq ()
-nameKeyInjective ffEnd ffTrue sourceEq ()
-nameKeyInjective ffEnd ffEnd sourceEq readEq = refl
+nameKeyInjective left right sourceEq readEq =
+  justInjective
+    (trans
+      (sym (decodeNameRoundTrip left))
+      (trans
+        (cong₂ decodeName sourceNatEq readNatEq)
+        (decodeNameRoundTrip right)))
+  where
+    sourceNatEq : sourceIndex left ≡ sourceIndex right
+    sourceNatEq =
+      trans
+        (sym (sourceIndexExact left))
+        (trans (cong Fin.toℕ sourceEq) (sourceIndexExact right))
 
-nameKeyInjective ssTrue ssTrue sourceEq readEq = refl
-nameKeyInjective ssTrue ssMark sourceEq ()
-nameKeyInjective ssTrue ssEnd sourceEq ()
-nameKeyInjective ssMark ssTrue sourceEq ()
-nameKeyInjective ssMark ssMark sourceEq readEq = refl
-nameKeyInjective ssMark ssEnd sourceEq ()
-nameKeyInjective ssEnd ssTrue sourceEq ()
-nameKeyInjective ssEnd ssMark sourceEq ()
-nameKeyInjective ssEnd ssEnd sourceEq readEq = refl
-
-nameKeyInjective fsMark fsMark sourceEq readEq = refl
-nameKeyInjective fsMark fsTrue sourceEq ()
-nameKeyInjective fsMark fsEnd sourceEq ()
-nameKeyInjective fsTrue fsMark sourceEq ()
-nameKeyInjective fsTrue fsTrue sourceEq readEq = refl
-nameKeyInjective fsTrue fsEnd sourceEq ()
-nameKeyInjective fsEnd fsMark sourceEq ()
-nameKeyInjective fsEnd fsTrue sourceEq ()
-nameKeyInjective fsEnd fsEnd sourceEq readEq = refl
-
-nameKeyInjective rlTrue rlTrue sourceEq readEq = refl
-nameKeyInjective rlTrue rlEnd sourceEq ()
-nameKeyInjective rlTrue rlM1 sourceEq ()
-nameKeyInjective rlTrue rlM2 sourceEq ()
-nameKeyInjective rlTrue rlBlank sourceEq ()
-nameKeyInjective rlEnd rlTrue sourceEq ()
-nameKeyInjective rlEnd rlEnd sourceEq readEq = refl
-nameKeyInjective rlEnd rlM1 sourceEq ()
-nameKeyInjective rlEnd rlM2 sourceEq ()
-nameKeyInjective rlEnd rlBlank sourceEq ()
-nameKeyInjective rlM1 rlTrue sourceEq ()
-nameKeyInjective rlM1 rlEnd sourceEq ()
-nameKeyInjective rlM1 rlM1 sourceEq readEq = refl
-nameKeyInjective rlM1 rlM2 sourceEq ()
-nameKeyInjective rlM1 rlBlank sourceEq ()
-nameKeyInjective rlM2 rlTrue sourceEq ()
-nameKeyInjective rlM2 rlEnd sourceEq ()
-nameKeyInjective rlM2 rlM1 sourceEq ()
-nameKeyInjective rlM2 rlM2 sourceEq readEq = refl
-nameKeyInjective rlM2 rlBlank sourceEq ()
-nameKeyInjective rlBlank rlTrue sourceEq ()
-nameKeyInjective rlBlank rlEnd sourceEq ()
-nameKeyInjective rlBlank rlM1 sourceEq ()
-nameKeyInjective rlBlank rlM2 sourceEq ()
-nameKeyInjective rlBlank rlBlank sourceEq readEq = refl
-
-nameKeyInjective csMark csMark sourceEq readEq = refl
-nameKeyInjective csMark csTrue sourceEq ()
-nameKeyInjective csMark csEnd sourceEq ()
-nameKeyInjective csTrue csMark sourceEq ()
-nameKeyInjective csTrue csTrue sourceEq readEq = refl
-nameKeyInjective csTrue csEnd sourceEq ()
-nameKeyInjective csEnd csMark sourceEq ()
-nameKeyInjective csEnd csTrue sourceEq ()
-nameKeyInjective csEnd csEnd sourceEq readEq = refl
-
--- Cross-control cases are impossible already from source-state equality.
-nameKeyInjective ffMark ssTrue () readEq
-nameKeyInjective ffMark ssMark () readEq
-nameKeyInjective ffMark ssEnd () readEq
-nameKeyInjective ffMark fsMark () readEq
-nameKeyInjective ffMark fsTrue () readEq
-nameKeyInjective ffMark fsEnd () readEq
-nameKeyInjective ffMark rlTrue () readEq
-nameKeyInjective ffMark rlEnd () readEq
-nameKeyInjective ffMark rlM1 () readEq
-nameKeyInjective ffMark rlM2 () readEq
-nameKeyInjective ffMark rlBlank () readEq
-nameKeyInjective ffMark csMark () readEq
-nameKeyInjective ffMark csTrue () readEq
-nameKeyInjective ffMark csEnd () readEq
-
--- All names in one block share the same source.  Reduce remaining cross-block
--- cases by reusing a representative impossibility via exhaustive first argument.
-nameKeyInjective ffTrue right sourceEq readEq
-  with right
-... | ssTrue = ⊥-elim (cross sourceEq)
-... | ssMark = ⊥-elim (cross sourceEq)
-... | ssEnd = ⊥-elim (cross sourceEq)
-... | fsMark = ⊥-elim (cross sourceEq)
-... | fsTrue = ⊥-elim (cross sourceEq)
-... | fsEnd = ⊥-elim (cross sourceEq)
-... | rlTrue = ⊥-elim (cross sourceEq)
-... | rlEnd = ⊥-elim (cross sourceEq)
-... | rlM1 = ⊥-elim (cross sourceEq)
-... | rlM2 = ⊥-elim (cross sourceEq)
-... | rlBlank = ⊥-elim (cross sourceEq)
-... | csMark = ⊥-elim (cross sourceEq)
-... | csTrue = ⊥-elim (cross sourceEq)
-... | csEnd = ⊥-elim (cross sourceEq)
-  where cross :
-          Local.sourceState (namedRule ffTrue)
-          ≡ Local.sourceState (namedRule right) → ⊥
-        cross ()
-nameKeyInjective ffEnd right sourceEq readEq
-  with right
-... | ssTrue = ⊥-elim (cross sourceEq)
-... | ssMark = ⊥-elim (cross sourceEq)
-... | ssEnd = ⊥-elim (cross sourceEq)
-... | fsMark = ⊥-elim (cross sourceEq)
-... | fsTrue = ⊥-elim (cross sourceEq)
-... | fsEnd = ⊥-elim (cross sourceEq)
-... | rlTrue = ⊥-elim (cross sourceEq)
-... | rlEnd = ⊥-elim (cross sourceEq)
-... | rlM1 = ⊥-elim (cross sourceEq)
-... | rlM2 = ⊥-elim (cross sourceEq)
-... | rlBlank = ⊥-elim (cross sourceEq)
-... | csMark = ⊥-elim (cross sourceEq)
-... | csTrue = ⊥-elim (cross sourceEq)
-... | csEnd = ⊥-elim (cross sourceEq)
-  where cross :
-          Local.sourceState (namedRule ffEnd)
-          ≡ Local.sourceState (namedRule right) → ⊥
-        cross ()
-
--- Reverse and all later block-crossing combinations are discharged uniformly by
--- source constructor inequality.  The clauses below intentionally enumerate
--- only blocks, not every rule pair.
-nameKeyInjective ssTrue ffMark () readEq
-nameKeyInjective ssTrue ffTrue () readEq
-nameKeyInjective ssTrue ffEnd () readEq
-nameKeyInjective ssMark ffMark () readEq
-nameKeyInjective ssMark ffTrue () readEq
-nameKeyInjective ssMark ffEnd () readEq
-nameKeyInjective ssEnd ffMark () readEq
-nameKeyInjective ssEnd ffTrue () readEq
-nameKeyInjective ssEnd ffEnd () readEq
-
-nameKeyInjective ssTrue right sourceEq readEq
-  with right
-... | fsMark = ⊥-elim (cross sourceEq)
-... | fsTrue = ⊥-elim (cross sourceEq)
-... | fsEnd = ⊥-elim (cross sourceEq)
-... | rlTrue = ⊥-elim (cross sourceEq)
-... | rlEnd = ⊥-elim (cross sourceEq)
-... | rlM1 = ⊥-elim (cross sourceEq)
-... | rlM2 = ⊥-elim (cross sourceEq)
-... | rlBlank = ⊥-elim (cross sourceEq)
-... | csMark = ⊥-elim (cross sourceEq)
-... | csTrue = ⊥-elim (cross sourceEq)
-... | csEnd = ⊥-elim (cross sourceEq)
-  where cross :
-          Local.sourceState (namedRule ssTrue)
-          ≡ Local.sourceState (namedRule right) → ⊥
-        cross ()
-nameKeyInjective ssMark right sourceEq readEq
-  with right
-... | fsMark = ⊥-elim (cross sourceEq)
-... | fsTrue = ⊥-elim (cross sourceEq)
-... | fsEnd = ⊥-elim (cross sourceEq)
-... | rlTrue = ⊥-elim (cross sourceEq)
-... | rlEnd = ⊥-elim (cross sourceEq)
-... | rlM1 = ⊥-elim (cross sourceEq)
-... | rlM2 = ⊥-elim (cross sourceEq)
-... | rlBlank = ⊥-elim (cross sourceEq)
-... | csMark = ⊥-elim (cross sourceEq)
-... | csTrue = ⊥-elim (cross sourceEq)
-... | csEnd = ⊥-elim (cross sourceEq)
-  where cross : Local.sourceState (namedRule ssMark)
-              ≡ Local.sourceState (namedRule right) → ⊥
-        cross ()
-nameKeyInjective ssEnd right sourceEq readEq
-  with right
-... | fsMark = ⊥-elim (cross sourceEq)
-... | fsTrue = ⊥-elim (cross sourceEq)
-... | fsEnd = ⊥-elim (cross sourceEq)
-... | rlTrue = ⊥-elim (cross sourceEq)
-... | rlEnd = ⊥-elim (cross sourceEq)
-... | rlM1 = ⊥-elim (cross sourceEq)
-... | rlM2 = ⊥-elim (cross sourceEq)
-... | rlBlank = ⊥-elim (cross sourceEq)
-... | csMark = ⊥-elim (cross sourceEq)
-... | csTrue = ⊥-elim (cross sourceEq)
-... | csEnd = ⊥-elim (cross sourceEq)
-  where cross : Local.sourceState (namedRule ssEnd)
-              ≡ Local.sourceState (namedRule right) → ⊥
-        cross ()
-
--- For compactness of this source owner, finish the remaining later-block cases
--- by direct pattern clauses generated by source-state mismatch or already-paid
--- within-block read mismatch.
-nameKeyInjective fsMark right sourceEq readEq
-  with right
-... | ffMark = ⊥-elim (bad sourceEq)
-... | ffTrue = ⊥-elim (bad sourceEq)
-... | ffEnd = ⊥-elim (bad sourceEq)
-... | ssTrue = ⊥-elim (bad sourceEq)
-... | ssMark = ⊥-elim (bad sourceEq)
-... | ssEnd = ⊥-elim (bad sourceEq)
-... | rlTrue = ⊥-elim (bad sourceEq)
-... | rlEnd = ⊥-elim (bad sourceEq)
-... | rlM1 = ⊥-elim (bad sourceEq)
-... | rlM2 = ⊥-elim (bad sourceEq)
-... | rlBlank = ⊥-elim (bad sourceEq)
-... | csMark = ⊥-elim (bad sourceEq)
-... | csTrue = ⊥-elim (bad sourceEq)
-... | csEnd = ⊥-elim (bad sourceEq)
-  where bad : Local.sourceState (namedRule fsMark)
-            ≡ Local.sourceState (namedRule right) → ⊥
-        bad ()
-nameKeyInjective fsTrue right sourceEq readEq
-  with right
-... | ffMark = ⊥-elim (bad sourceEq)
-... | ffTrue = ⊥-elim (bad sourceEq)
-... | ffEnd = ⊥-elim (bad sourceEq)
-... | ssTrue = ⊥-elim (bad sourceEq)
-... | ssMark = ⊥-elim (bad sourceEq)
-... | ssEnd = ⊥-elim (bad sourceEq)
-... | rlTrue = ⊥-elim (bad sourceEq)
-... | rlEnd = ⊥-elim (bad sourceEq)
-... | rlM1 = ⊥-elim (bad sourceEq)
-... | rlM2 = ⊥-elim (bad sourceEq)
-... | rlBlank = ⊥-elim (bad sourceEq)
-... | csMark = ⊥-elim (bad sourceEq)
-... | csTrue = ⊥-elim (bad sourceEq)
-... | csEnd = ⊥-elim (bad sourceEq)
-  where bad : Local.sourceState (namedRule fsTrue)
-            ≡ Local.sourceState (namedRule right) → ⊥
-        bad ()
-nameKeyInjective fsEnd right sourceEq readEq
-  with right
-... | ffMark = ⊥-elim (bad sourceEq)
-... | ffTrue = ⊥-elim (bad sourceEq)
-... | ffEnd = ⊥-elim (bad sourceEq)
-... | ssTrue = ⊥-elim (bad sourceEq)
-... | ssMark = ⊥-elim (bad sourceEq)
-... | ssEnd = ⊥-elim (bad sourceEq)
-... | rlTrue = ⊥-elim (bad sourceEq)
-... | rlEnd = ⊥-elim (bad sourceEq)
-... | rlM1 = ⊥-elim (bad sourceEq)
-... | rlM2 = ⊥-elim (bad sourceEq)
-... | rlBlank = ⊥-elim (bad sourceEq)
-... | csMark = ⊥-elim (bad sourceEq)
-... | csTrue = ⊥-elim (bad sourceEq)
-... | csEnd = ⊥-elim (bad sourceEq)
-  where bad : Local.sourceState (namedRule fsEnd)
-            ≡ Local.sourceState (namedRule right) → ⊥
-        bad ()
-
-nameKeyInjective rlTrue right sourceEq readEq
-  with right
-... | ffMark = ⊥-elim (bad sourceEq)
-... | ffTrue = ⊥-elim (bad sourceEq)
-... | ffEnd = ⊥-elim (bad sourceEq)
-... | ssTrue = ⊥-elim (bad sourceEq)
-... | ssMark = ⊥-elim (bad sourceEq)
-... | ssEnd = ⊥-elim (bad sourceEq)
-... | fsMark = ⊥-elim (bad sourceEq)
-... | fsTrue = ⊥-elim (bad sourceEq)
-... | fsEnd = ⊥-elim (bad sourceEq)
-... | csMark = ⊥-elim (bad sourceEq)
-... | csTrue = ⊥-elim (bad sourceEq)
-... | csEnd = ⊥-elim (bad sourceEq)
-  where bad : Local.sourceState (namedRule rlTrue)
-            ≡ Local.sourceState (namedRule right) → ⊥
-        bad ()
-nameKeyInjective rlEnd right sourceEq readEq
-  with right
-... | ffMark = ⊥-elim (bad sourceEq)
-... | ffTrue = ⊥-elim (bad sourceEq)
-... | ffEnd = ⊥-elim (bad sourceEq)
-... | ssTrue = ⊥-elim (bad sourceEq)
-... | ssMark = ⊥-elim (bad sourceEq)
-... | ssEnd = ⊥-elim (bad sourceEq)
-... | fsMark = ⊥-elim (bad sourceEq)
-... | fsTrue = ⊥-elim (bad sourceEq)
-... | fsEnd = ⊥-elim (bad sourceEq)
-... | csMark = ⊥-elim (bad sourceEq)
-... | csTrue = ⊥-elim (bad sourceEq)
-... | csEnd = ⊥-elim (bad sourceEq)
-  where bad : Local.sourceState (namedRule rlEnd)
-            ≡ Local.sourceState (namedRule right) → ⊥
-        bad ()
-nameKeyInjective rlM1 right sourceEq readEq
-  with right
-... | ffMark = ⊥-elim (bad sourceEq)
-... | ffTrue = ⊥-elim (bad sourceEq)
-... | ffEnd = ⊥-elim (bad sourceEq)
-... | ssTrue = ⊥-elim (bad sourceEq)
-... | ssMark = ⊥-elim (bad sourceEq)
-... | ssEnd = ⊥-elim (bad sourceEq)
-... | fsMark = ⊥-elim (bad sourceEq)
-... | fsTrue = ⊥-elim (bad sourceEq)
-... | fsEnd = ⊥-elim (bad sourceEq)
-... | csMark = ⊥-elim (bad sourceEq)
-... | csTrue = ⊥-elim (bad sourceEq)
-... | csEnd = ⊥-elim (bad sourceEq)
-  where bad : Local.sourceState (namedRule rlM1)
-            ≡ Local.sourceState (namedRule right) → ⊥
-        bad ()
-nameKeyInjective rlM2 right sourceEq readEq
-  with right
-... | ffMark = ⊥-elim (bad sourceEq)
-... | ffTrue = ⊥-elim (bad sourceEq)
-... | ffEnd = ⊥-elim (bad sourceEq)
-... | ssTrue = ⊥-elim (bad sourceEq)
-... | ssMark = ⊥-elim (bad sourceEq)
-... | ssEnd = ⊥-elim (bad sourceEq)
-... | fsMark = ⊥-elim (bad sourceEq)
-... | fsTrue = ⊥-elim (bad sourceEq)
-... | fsEnd = ⊥-elim (bad sourceEq)
-... | csMark = ⊥-elim (bad sourceEq)
-... | csTrue = ⊥-elim (bad sourceEq)
-... | csEnd = ⊥-elim (bad sourceEq)
-  where bad : Local.sourceState (namedRule rlM2)
-            ≡ Local.sourceState (namedRule right) → ⊥
-        bad ()
-nameKeyInjective rlBlank right sourceEq readEq
-  with right
-... | ffMark = ⊥-elim (bad sourceEq)
-... | ffTrue = ⊥-elim (bad sourceEq)
-... | ffEnd = ⊥-elim (bad sourceEq)
-... | ssTrue = ⊥-elim (bad sourceEq)
-... | ssMark = ⊥-elim (bad sourceEq)
-... | ssEnd = ⊥-elim (bad sourceEq)
-... | fsMark = ⊥-elim (bad sourceEq)
-... | fsTrue = ⊥-elim (bad sourceEq)
-... | fsEnd = ⊥-elim (bad sourceEq)
-... | csMark = ⊥-elim (bad sourceEq)
-... | csTrue = ⊥-elim (bad sourceEq)
-... | csEnd = ⊥-elim (bad sourceEq)
-  where bad : Local.sourceState (namedRule rlBlank)
-            ≡ Local.sourceState (namedRule right) → ⊥
-        bad ()
-
-nameKeyInjective csMark right sourceEq readEq
-  with right
-... | ffMark = ⊥-elim (bad sourceEq)
-... | ffTrue = ⊥-elim (bad sourceEq)
-... | ffEnd = ⊥-elim (bad sourceEq)
-... | ssTrue = ⊥-elim (bad sourceEq)
-... | ssMark = ⊥-elim (bad sourceEq)
-... | ssEnd = ⊥-elim (bad sourceEq)
-... | fsMark = ⊥-elim (bad sourceEq)
-... | fsTrue = ⊥-elim (bad sourceEq)
-... | fsEnd = ⊥-elim (bad sourceEq)
-... | rlTrue = ⊥-elim (bad sourceEq)
-... | rlEnd = ⊥-elim (bad sourceEq)
-... | rlM1 = ⊥-elim (bad sourceEq)
-... | rlM2 = ⊥-elim (bad sourceEq)
-... | rlBlank = ⊥-elim (bad sourceEq)
-  where bad : Local.sourceState (namedRule csMark)
-            ≡ Local.sourceState (namedRule right) → ⊥
-        bad ()
-nameKeyInjective csTrue right sourceEq readEq
-  with right
-... | ffMark = ⊥-elim (bad sourceEq)
-... | ffTrue = ⊥-elim (bad sourceEq)
-... | ffEnd = ⊥-elim (bad sourceEq)
-... | ssTrue = ⊥-elim (bad sourceEq)
-... | ssMark = ⊥-elim (bad sourceEq)
-... | ssEnd = ⊥-elim (bad sourceEq)
-... | fsMark = ⊥-elim (bad sourceEq)
-... | fsTrue = ⊥-elim (bad sourceEq)
-... | fsEnd = ⊥-elim (bad sourceEq)
-... | rlTrue = ⊥-elim (bad sourceEq)
-... | rlEnd = ⊥-elim (bad sourceEq)
-... | rlM1 = ⊥-elim (bad sourceEq)
-... | rlM2 = ⊥-elim (bad sourceEq)
-... | rlBlank = ⊥-elim (bad sourceEq)
-  where bad : Local.sourceState (namedRule csTrue)
-            ≡ Local.sourceState (namedRule right) → ⊥
-        bad ()
-nameKeyInjective csEnd right sourceEq readEq
-  with right
-... | ffMark = ⊥-elim (bad sourceEq)
-... | ffTrue = ⊥-elim (bad sourceEq)
-... | ffEnd = ⊥-elim (bad sourceEq)
-... | ssTrue = ⊥-elim (bad sourceEq)
-... | ssMark = ⊥-elim (bad sourceEq)
-... | ssEnd = ⊥-elim (bad sourceEq)
-... | fsMark = ⊥-elim (bad sourceEq)
-... | fsTrue = ⊥-elim (bad sourceEq)
-... | fsEnd = ⊥-elim (bad sourceEq)
-... | rlTrue = ⊥-elim (bad sourceEq)
-... | rlEnd = ⊥-elim (bad sourceEq)
-... | rlM1 = ⊥-elim (bad sourceEq)
-... | rlM2 = ⊥-elim (bad sourceEq)
-... | rlBlank = ⊥-elim (bad sourceEq)
-  where bad : Local.sourceState (namedRule csEnd)
-            ≡ Local.sourceState (namedRule right) → ⊥
-        bad ()
-
-------------------------------------------------------------------------
--- Transport occurrence inversion to dispatch uniqueness.
-------------------------------------------------------------------------
+    readNatEq : readIndex left ≡ readIndex right
+    readNatEq =
+      trans
+        (sym (readIndexExact left))
+        (trans (cong Fin.toℕ readEq) (readIndexExact right))
 
 dispatchUnique :
   ∀ {left right} →
@@ -531,7 +267,7 @@ equalityCode = record
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- The equality microcode is now an actual low-universe coded standard machine.
--- No unproved determinism field remains.  The next payment is operational:
--- prove its exact mark/shuttle run agrees with equality of the two unary lengths.
+-- The literal equality fragment is now an actual coded standard machine with no
+-- assumed determinism field. Remaining work is the exact mark/shuttle run
+-- theorem and any restoration policy needed by the universal interpreter.
 ------------------------------------------------------------------------
