@@ -8,7 +8,7 @@ module DASHI.Moonshine.JackDanielsJCoarseFineNaturalRecognitionExact where
 -- Existing source authority remains where it already lives:
 --   * Katz--Mazur / Ogg / Duncan--Ono own the literal modular-curve / Fricke /
 --     supersingular mathematics imported through ModularCurveJFrickeInterface;
---   * the Monster/McKay--Thompson/Hauptmodul authority remains in the existing
+--   * Monster/McKay--Thompson/Hauptmodul authority remains in the existing
 --     Moonshine owners;
 --   * DASHI owns the finite jCoarse/jFine observer, its Fricke transport, and
 --     the consumer-relative coarse/fine bookkeeping.
@@ -19,7 +19,7 @@ module DASHI.Moonshine.JackDanielsJCoarseFineNaturalRecognitionExact where
 --
 --   supersingular j
 --      -> full modular datum
---      -> literal fine modular point
+--      <-> literal fine modular point
 --      -> finite jCoarse/jFine observation
 --
 -- while the Monster datum continues to be computed from the FULL modular datum.
@@ -34,15 +34,13 @@ open import Data.Empty using (⊥)
 import DASHI.Moonshine.JackDanielsNaturalMonsterRecognitionMaxCutExact as JD
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact as Modular
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact as Chart
+import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as Finite
 import DASHI.Moonshine.JInvariantAnalyticJCoarseFineObserverExact as Observer
 import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact as Consumer
 
 ------------------------------------------------------------------------
--- 1. Adapter from the generic J3 ModularDatum to a literal fine modular point.
---
--- J3 deliberately leaves ModularDatum abstract.  jCoarse/jFine already knows
--- how to observe a ModularJFrickeSystem.FinePoint, so the only legitimate weld
--- is an explicit same-object adapter.
+-- 1. Same-object adapter from the generic J3 ModularDatum to a literal fine
+--    modular point, including the Fricke action.
 ------------------------------------------------------------------------
 
 record JCoarseFineModularDatumAdapter
@@ -55,12 +53,22 @@ record JCoarseFineModularDatumAdapter
 
     modularDatumToFinePoint :
       JD.ModularDatum recognition -> Modular.FinePoint modularSystem
+    finePointToModularDatum :
+      Modular.FinePoint modularSystem -> JD.ModularDatum recognition
 
-    FinePointSameObjectWitness : Set
-    finePointSameObject : FinePointSameObjectWitness
+    datumAfterFinePoint :
+      (datum : JD.ModularDatum recognition) ->
+      finePointToModularDatum (modularDatumToFinePoint datum) ≡ datum
+    finePointAfterDatum :
+      (point : Modular.FinePoint modularSystem) ->
+      modularDatumToFinePoint (finePointToModularDatum point) ≡ point
 
-    FrickeCompatibilityWitness : Set
-    frickeCompatibility : FrickeCompatibilityWitness
+    modularFricke :
+      JD.ModularDatum recognition -> JD.ModularDatum recognition
+    modularFrickeIntertwinesFinePoint :
+      (datum : JD.ModularDatum recognition) ->
+      modularDatumToFinePoint (modularFricke datum)
+      ≡ Modular.fricke modularSystem (modularDatumToFinePoint datum)
 
 open JCoarseFineModularDatumAdapter public
 
@@ -139,10 +147,30 @@ frickeCarriesSupersingularObserverFibre :
   Observer.ObserverFibre (structuredObserver adapter) state point ->
   Observer.ObserverFibre
     (structuredObserver adapter)
-    (Observer.Finite.transportedFiniteFricke state)
+    (Finite.transportedFiniteFricke state)
     (Modular.fricke (modularSystem adapter) point)
 frickeCarriesSupersingularObserverFibre adapter =
   Observer.frickeCarriesObserverFibre (structuredObserver adapter)
+
+modularFrickeObservedAsFiniteFricke :
+  ∀ {p : Nat}
+    {recognition : JD.SupersingularMonsterRecognition p}
+    (adapter : JCoarseFineModularDatumAdapter recognition)
+    (datum : JD.ModularDatum recognition) ->
+  Observer.observe
+    (structuredObserver adapter)
+    (modularDatumToFinePoint adapter (modularFricke adapter datum))
+  ≡ Finite.transportedFiniteFricke
+      (Observer.observe
+        (structuredObserver adapter)
+        (modularDatumToFinePoint adapter datum))
+modularFrickeObservedAsFiniteFricke adapter datum =
+  trans
+    (cong (Observer.observe (structuredObserver adapter))
+      (modularFrickeIntertwinesFinePoint adapter datum))
+    (Observer.frickeIntertwines
+      (structuredObserver adapter)
+      (modularDatumToFinePoint adapter datum))
 
 ------------------------------------------------------------------------
 -- 4. Stronger sufficiency theorem: when, and only when, the Monster consumer
@@ -197,7 +225,6 @@ sameJCoarseFineObservationForcesSameMonsterDatum factorization left right sameOb
 data FiniteJObservationIsLiteralModularPoint : Set where
 data JCoarseAloneSelectsMonsterClass : Set where
 data ObserverFibreCanBeDiscardedWithoutConsumerFactorization : Set where
-
 data CardinalityThreePowerElevenCreatesMonsterRecognition : Set where
 
 finiteObservationIsNotLiteralModularPoint :
@@ -233,7 +260,8 @@ record JackDanielsJCoarseFineBoundary : Set where
     analyticObserverArchitectureAlreadyPaid : Bool
     frickeObserverFibreTransportAlreadyPaid : Bool
     coarseFineConsumerReductionDisciplineAlreadyPaid : Bool
-    j3ToFinePointAdapterSpecified : Bool
+    j3FinePointSameObjectAdapterSpecified : Bool
+    j3FrickeActionAdapterSpecified : Bool
     supersingularReceiptCompilerPaidConditionalOnJ3AndAdapter : Bool
     finiteObservationMonsterFactorizationSpecified : Bool
 
@@ -245,5 +273,5 @@ record JackDanielsJCoarseFineBoundary : Set where
 canonicalJackDanielsJCoarseFineBoundary : JackDanielsJCoarseFineBoundary
 canonicalJackDanielsJCoarseFineBoundary =
   jack-daniels-jcoarse-jfine-boundary
-    true true true true true true
+    true true true true true true true
     false false false false
