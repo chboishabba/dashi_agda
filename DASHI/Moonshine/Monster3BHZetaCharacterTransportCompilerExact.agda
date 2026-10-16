@@ -9,13 +9,18 @@ module DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact where
 -- phase and characters matching the canonical nonlinear signature, are
 -- equivariantly isomorphic.
 --
--- This owner turns that theorem into the exact hardened H_zeta target.  It does
--- NOT package the concrete Monster or Schrodinger representations itself.  The
--- remaining external/same-object payment is therefore explicit:
+-- This owner turns that theorem into the exact hardened H_zeta target. It does
+-- NOT package the concrete Monster or Schrodinger representations itself. The
+-- literal Schrodinger monomial action now has an independent executable
+-- character derivation over all 3^13 coordinates; what remains on the model
+-- side is the narrower SAME-object transport into the common representation
+-- theory consumed here.
+--
+-- Remaining external/same-object payment:
 --
 --   * put the explicit Schrodinger action in the common Representation type;
 --   * put one actual W_zeta|E irreducible constituent in that same type;
---   * prove their class characters are the canonical selected-phase signature;
+--   * transport the already-derived DASHI class character into that theory;
 --   * bind those abstract representation objects to the literal source/model
 --     carriers with proof-relevant same-object witnesses.
 --
@@ -29,6 +34,7 @@ open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannUniquenessBidiExact as Uniqueness
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as Hardening
+import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptExact as LiteralCharacter
 import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZeta
 
 ------------------------------------------------------------------------
@@ -84,7 +90,7 @@ compiledEquivariantIso theory transport =
 
 ------------------------------------------------------------------------
 -- 3. Compile directly to the historical H_zeta socket and its new
---    proof-relevant wrapper.  Both historical proposition types are chosen to
+--    proof-relevant wrapper. Both historical proposition types are chosen to
 --    be the exact equivariant-isomorphism type because an equivariant iso is
 --    simultaneously the recognition and action-intertwining payment here.
 ------------------------------------------------------------------------
@@ -116,6 +122,10 @@ compiledPaidHZetaRecognition theory transport = record
 
 ------------------------------------------------------------------------
 -- 4. Machine-readable max-cut boundary.
+--
+-- Character DERIVATION and representation-theory TRANSPORT are deliberately
+-- separate. The literal action now pays the former executably; no flag below
+-- turns that receipt into a Mathlib FDRep or actual-Monster same-object proof.
 ------------------------------------------------------------------------
 
 record Boundary : Set where
@@ -123,6 +133,10 @@ record Boundary : Set where
   field
     fixedPhaseIsoCompilerAvailable : Bool
     paidHZetaRecognitionCompilerAvailable : Bool
+
+    literalSchrodingerCharacterDerivedExecutable : Bool
+    literalSchrodingerCharacterMatchesCanonicalSignatureExecutable : Bool
+
     concreteSchrodingerRepresentationTransportPaidHere : Bool
     concreteActualConstituentTransportPaidHere : Bool
     concreteDashiToTheoryCharacterTransportPaidHere : Bool
@@ -132,4 +146,8 @@ open Boundary public
 canonicalBoundary : Boundary
 canonicalBoundary = boundary
   true true
+  (LiteralCharacter.all1594323HeisenbergCoordinatesClassified
+    LiteralCharacter.canonicalBoundary)
+  (LiteralCharacter.literalCharacterMatchesCanonicalHeisenbergSignatureExecutable
+    LiteralCharacter.canonicalBoundary)
   false false false false
