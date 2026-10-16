@@ -1,0 +1,20 @@
+module DASHI.Governance.BoloBoloExternalEpistemicAuthorityRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloExternalEpistemicAuthorityExact as X
+
+separateAudit : X.epistemicAndFormalAuthorityAuditedSeparately X.canonicalExternalEpistemicAuthorityBoundary ≡ true
+separateAudit = refl
+
+framingDoesNotPayAuthority : X.epistemicFramingPaysFormalAuthority X.canonicalExternalEpistemicAuthorityBoundary ≡ false
+framingDoesNotPayAuthority = refl
+
+authorityDoesNotPayFraming : X.formalAuthorityPaysEpistemicFraming X.canonicalExternalEpistemicAuthorityBoundary ≡ false
+authorityDoesNotPayFraming = refl
+
+platformDoesNotPayFramingEffect : X.platformLegibilityCapabilityPaysObservedFramingEffect X.canonicalExternalEpistemicAuthorityBoundary ≡ false
+platformDoesNotPayFramingEffect = refl
+
+investorCommunicationDoesNotPayControl : X.investorExpectationDocumentPaysTargetControl X.canonicalExternalEpistemicAuthorityBoundary ≡ false
+investorCommunicationDoesNotPayControl = refl
