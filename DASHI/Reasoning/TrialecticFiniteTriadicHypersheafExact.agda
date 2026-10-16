@@ -206,9 +206,13 @@ maximalMorphismDescent = Phase.restrictIdentityHom
 
 ------------------------------------------------------------------------
 -- 7. Concrete finite 1-truncated hyperdescent receipt.
+--
+-- Sieve is Set1, so a record quantifying over arbitrary sieves belongs in
+-- Set2.  Keeping this universe explicit avoids hiding a future elaboration
+-- failure behind the finite nature of the object carrier.
 ------------------------------------------------------------------------
 
-record FiniteTriadicHyperdescentReceipt : Set₁ where
+record FiniteTriadicHyperdescentReceipt : Set₂ where
   field
     classifyCover :
       ∀ {U : Site.RelObj}
@@ -311,6 +315,34 @@ canonicalFiniteTriadicHyperdescentReceipt = record
   }
 
 ------------------------------------------------------------------------
+-- 7b. One theorem quantified over every covering sieve of the topology.
+--
+-- The certificate carries both the exhaustive constructor case for the given
+-- cover and the site-wide hyperdescent receipt above.  Therefore consumers do
+-- not need to rediscover that RelCover has only the two supported cases.
+------------------------------------------------------------------------
+
+record CoverHyperdescentCertificate
+    {U : Site.RelObj}
+    {sieve : Stage12.Sieve Site.relationalPatchCategory U}
+    (cover : Site.RelCover sieve) : Set₂ where
+  field
+    coverCase : ExhaustiveCoverCase cover
+    hyperdescent : FiniteTriadicHyperdescentReceipt
+
+open CoverHyperdescentCertificate public
+
+hyperdescentForEveryCover :
+  ∀ {U : Site.RelObj}
+    {sieve : Stage12.Sieve Site.relationalPatchCategory U} →
+  (cover : Site.RelCover sieve) →
+  CoverHyperdescentCertificate cover
+hyperdescentForEveryCover cover = record
+  { coverCase = classifyEveryCover cover
+  ; hyperdescent = canonicalFiniteTriadicHyperdescentReceipt
+  }
+
+------------------------------------------------------------------------
 -- 8. Promotion boundary.
 --
 -- "hypersheaf" here is deliberately qualified: finite, concrete site,
@@ -322,6 +354,7 @@ record TrialecticFiniteTriadicHypersheafBoundary : Set where
   constructor trialectic-finite-triadic-hypersheaf-boundary
   field
     everyCoverIsMaximalOrTriadic : Bool
+    everyCoverHasHyperdescentCertificate : Bool
     triadicNonGlobalPullbacksAreMaximal : Bool
     maximalPullbacksStayMaximal : Bool
     objectHyperdescentPaid : Bool
@@ -338,4 +371,4 @@ canonicalTrialecticFiniteTriadicHypersheafBoundary :
   TrialecticFiniteTriadicHypersheafBoundary
 canonicalTrialecticFiniteTriadicHypersheafBoundary =
   trialectic-finite-triadic-hypersheaf-boundary
-    true true true true true true true true true false
+    true true true true true true true true true true false
