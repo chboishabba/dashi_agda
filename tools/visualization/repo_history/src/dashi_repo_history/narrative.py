@@ -201,3 +201,46 @@ def frontier_genealogy(events: Iterable[NarrativeEvent], query: str, *, limit: i
         )
     rows.sort(key=lambda item: (item["timestamp"], item["event_id"]))
     return rows[-limit:]
+
+
+def stale_frontiers(events: Iterable[NarrativeEvent], query: str, *, limit: int = 100) -> list[dict[str, Any]]:
+    """Identify earlier frontier prose potentially superseded by later delta prose.
+
+    This is deliberately heuristic. It is a prompt to re-check the formal
+    object, not an automatic status mutation.
+    """
+
+    ordered = sorted(events, key=lambda event: (event.timestamp, event.event_id))
+    q = _tokens(query)
+    rows: list[dict[str, Any]] = []
+    for index, event in enumerate(ordered):
+        classified = classify_narrative("\n".join((event.title, event.text)))
+        for frontier in classified["frontier"]:
+            frontier_tokens = _tokens(frontier)
+            if q and not (q & frontier_tokens):
+                continue
+            best = None
+            best_overlap = 0.0
+            for later in ordered[index + 1 :]:
+                later_classified = classify_narrative("\n".join((later.title, later.text)))
+                for delta in later_classified["claimed_delta"]:
+                    delta_tokens = _tokens(delta)
+                    denominator = len(frontier_tokens | q) or 1
+                    overlap = len((frontier_tokens | q) & delta_tokens) / denominator
+                    if overlap > best_overlap:
+                        best_overlap = overlap
+                        best = later
+            if best is not None and best_overlap >= 0.20:
+                rows.append(
+                    {
+                        "event_id": event.event_id,
+                        "timestamp": event.timestamp,
+                        "frontier": frontier,
+                        "potentially_superseded_by": best.event_id,
+                        "overlap_score": best_overlap,
+                        "authority": "development-narrative-heuristic",
+                        "may_establish_formal_fact": False,
+                    }
+                )
+    rows.sort(key=lambda item: (item["timestamp"], item["event_id"]))
+    return rows[-limit:]
