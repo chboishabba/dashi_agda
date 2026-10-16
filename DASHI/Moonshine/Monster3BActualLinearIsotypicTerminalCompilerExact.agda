@@ -4,22 +4,26 @@ module DASHI.Moonshine.Monster3BActualLinearIsotypicTerminalCompilerExact where
 -- ACTUAL MONSTER LINEAR / ISOTYPIC TERMINAL COMPILER
 --
 -- Reusable restriction, character, Schur, Maschke, isotypic, copy-count,
--- multiplicity-coordinate, tensor, and two-simple character-determination
--- mathematics is no longer the Monster-specific frontier.
+-- multiplicity-coordinate, tensor, two-simple character determination and the
+-- underlying normalizer action on equivariant Hom are no longer independent
+-- Monster-specific mathematics.
 --
 -- The live H_zeta/W_zeta character payment is one SAME-object transport:
 --
 --   chi(W_zeta|E) = 90 * chi(H_zeta)
 --
--- on the actual linear FDRep objects.  Companion Lean then supplies the generic
--- isotypic/multiplicity consequences.
+-- on the actual linear FDRep objects.
 --
--- Likewise, once an actual 6.Suz/normalizer multiplicity action exists, the
--- historical `12+78` action decomposition does not require a separately
--- postulated intertwiner: the live two-simple character compiler derives its
--- representation multiplicities from a SAME-object selected-phase character
--- identity.  The actual normalizer action, absolute zeta orientation and that
--- same-object character transport remain the scientific inputs.
+-- For the multiplicity representation, companion Lean now source-writes the
+-- canonical normalizer action on Hom_E(H_zeta,W_zeta):
+--
+--   n.f = rho_W(n) o f o rho_H(n)^(-1).
+--
+-- Therefore one should not separately postulate an action on a third S_zeta
+-- carrier.  The remaining actual inputs are the same-object normalizer lifts on
+-- H_zeta and W_zeta, their projective/cocycle compatibility, absolute zeta
+-- orientation, and transport of the source-paid selected-phase 12+78 character
+-- onto that induced Hom action.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
@@ -42,10 +46,7 @@ import DASHI.Moonshine.Monster3BTwoIsotypicBlockAssemblyLeanReceiptExact as TwoB
 import DASHI.Moonshine.Monster3BMultiplicitySchurCoordinatesLeanReceiptExact as Schur
 import DASHI.Moonshine.Monster3BTensorFiniteCopiesLeanReceiptExact as Tensor
 import DASHI.Moonshine.Monster3BCharacterDeterminationLiveLeanReceiptExact as Character12Plus78
-
-------------------------------------------------------------------------
--- 1. One exact actual-input packet.
-------------------------------------------------------------------------
+import DASHI.Moonshine.Monster3BNormalizerHomActionLeanReceiptExact as HomAction
 
 record ActualMonsterLinearInputPacket
     {Monster K : Set}
@@ -57,36 +58,23 @@ record ActualMonsterLinearInputPacket
   field
     paidWeightTwoLinearBridge :
       Hardening.PaidWeightTwoLinearActionBridge weightLegacy
-
     paidLiteralZetaLinearRestriction :
       Hardening.PaidLinearSingleActionProducer zetaLegacy
-
     literalSchrodingerAttachment :
       Common.LiteralSchrodingerCommonTheoryAttachment theory
-
     actualSelectedConstituentAttachment :
       Common.ActualHZetaConstituentCommonTheoryAttachment theory
 
     ActualWholeWZetaRestrictedFDRepSameObject : Set
     actualWholeWZetaRestrictedFDRepSameObjectWitness :
       ActualWholeWZetaRestrictedFDRepSameObject
-
     ActualHZetaSimpleComplexFDRepSameObject : Set
     actualHZetaSimpleComplexFDRepSameObjectWitness :
       ActualHZetaSimpleComplexFDRepSameObject
-
-    -- The true H_zeta/W_zeta character seam. The actual-kernel/class side owns
-    -- the ninety-Heisenberg character statement; this witness transports that
-    -- statement onto the SAME actual linear W_zeta|E and H_zeta FDReps.
     ActualKernelNinetyCharacterIsSameLinearWholeCharacter : Set
     actualKernelNinetyCharacterIsSameLinearWholeCharacterWitness :
       ActualKernelNinetyCharacterIsSameLinearWholeCharacter
-
 open ActualMonsterLinearInputPacket public
-
-------------------------------------------------------------------------
--- 2. H_zeta recognition is no longer an independent leaf after the packet.
-------------------------------------------------------------------------
 
 compileActualPaidHZetaRecognition :
   ∀ {Monster K bridge}
@@ -106,57 +94,46 @@ compileActualPaidHZetaRecognition weightLegacy zetaLegacy theory packet =
     (actualSelectedConstituentAttachment packet)
 
 ------------------------------------------------------------------------
--- 3. Remaining actual multiplicity-action payload.
---
--- Tensor evaluation and the abstract 12+78 representation decomposition are
--- compiler consequences after the same-object action/character inputs.  The
--- remaining payload is therefore the actual multiplicity action itself, phase
--- orientation, and transport of the source-paid selected-phase 12+78 character
--- onto that SAME action.
+-- Remaining actual multiplicity-action payload.
 ------------------------------------------------------------------------
 
 record ActualMultiplicityActionPayment : Set where
   field
-    ActualSuzukiNormalizerActionOnSZeta : Set
+    ActualNormalizerLiftsOnHZetaAndWZeta : Set
+    ActualProjectiveCocycleLawsOnSameLifts : Set
     AbsoluteZetaOrientation : Set
-    ActualSelectedPhaseTwelveSeventyEightCharacterIsSameMultiplicityAction : Set
+    ActualSelectedPhaseTwelveSeventyEightCharacterIsSameInducedHomAction : Set
 
-    actualSuzukiNormalizerActionOnSZetaWitness :
-      ActualSuzukiNormalizerActionOnSZeta
+    actualNormalizerLiftsOnHZetaAndWZetaWitness :
+      ActualNormalizerLiftsOnHZetaAndWZeta
+    actualProjectiveCocycleLawsOnSameLiftsWitness :
+      ActualProjectiveCocycleLawsOnSameLifts
     absoluteZetaOrientationWitness : AbsoluteZetaOrientation
-    actualSelectedPhaseTwelveSeventyEightCharacterIsSameMultiplicityActionWitness :
-      ActualSelectedPhaseTwelveSeventyEightCharacterIsSameMultiplicityAction
-
+    actualSelectedPhaseTwelveSeventyEightCharacterIsSameInducedHomActionWitness :
+      ActualSelectedPhaseTwelveSeventyEightCharacterIsSameInducedHomAction
 open ActualMultiplicityActionPayment public
 
 ------------------------------------------------------------------------
--- 4. Non-promotion boundaries.
+-- Non-promotion boundaries.
 ------------------------------------------------------------------------
 
 data CharacterFamilyCreatesActualInputPacket : Set where
 data KernelCharacterCreatesLinearCharacterTransport : Set where
-data CharacterOccurrenceCreatesMultiplicityAction : Set where
-data SourceRestrictionCompilerCreatesActualInvariantSubspace : Set where
+data CharacterOccurrenceCreatesNormalizerLifts : Set where
+data SourceHomCompilerCreatesActualNormalizerLifts : Set where
 
 characterFamilyDoesNotCreateActualInputPacket :
   CharacterFamilyCreatesActualInputPacket → ⊥
 characterFamilyDoesNotCreateActualInputPacket ()
-
 kernelCharacterDoesNotCreateLinearCharacterTransport :
   KernelCharacterCreatesLinearCharacterTransport → ⊥
 kernelCharacterDoesNotCreateLinearCharacterTransport ()
-
-characterOccurrenceDoesNotCreateMultiplicityAction :
-  CharacterOccurrenceCreatesMultiplicityAction → ⊥
-characterOccurrenceDoesNotCreateMultiplicityAction ()
-
-sourceRestrictionCompilerDoesNotCreateActualInvariantSubspace :
-  SourceRestrictionCompilerCreatesActualInvariantSubspace → ⊥
-sourceRestrictionCompilerDoesNotCreateActualInvariantSubspace ()
-
-------------------------------------------------------------------------
--- 5. Machine-readable terminal boundary.
-------------------------------------------------------------------------
+characterOccurrenceDoesNotCreateNormalizerLifts :
+  CharacterOccurrenceCreatesNormalizerLifts → ⊥
+characterOccurrenceDoesNotCreateNormalizerLifts ()
+sourceHomCompilerDoesNotCreateActualNormalizerLifts :
+  SourceHomCompilerCreatesActualNormalizerLifts → ⊥
+sourceHomCompilerDoesNotCreateActualNormalizerLifts ()
 
 record Boundary : Set where
   constructor boundary
@@ -186,12 +163,15 @@ record Boundary : Set where
     tensorEquivalenceRemainsIndependentMonsterInput : Bool
     twoSimpleCharacterMultiplicitySourceWritten : Bool
     twelveSeventyEightIntertwinerRemainsIndependentMonsterInput : Bool
+    inducedHomNormalizerActionSourceWritten : Bool
+    independentMultiplicityNormalizerActionRemainsInput : Bool
 
     actualMonsterLinearInputPacketInhabitedHere : Bool
     actualWholeCharacterSameObjectTransportPaidHere : Bool
     actualWholeSectorIsotypicEquivalencePaidHere : Bool
     actualCopyCountNinetyPaidHere : Bool
-    actualSuzukiNormalizerActionPaidHere : Bool
+    actualNormalizerLiftsPaidHere : Bool
+    actualProjectiveCocycleLawsPaidHere : Bool
     absoluteZetaOrientationPaidHere : Bool
     actualSuzukiMultiplicityCharacterTransportPaidHere : Bool
 open Boundary public
@@ -219,4 +199,6 @@ canonicalBoundary = boundary
   false
   (Character12Plus78.twoSimpleCharacterMultiplicitySourceWritten Character12Plus78.canonicalBoundary)
   false
-  false false false false false false false
+  (HomAction.inducedHomNormalizerActionSourceWritten HomAction.canonicalBoundary)
+  false
+  false false false false false false false false
