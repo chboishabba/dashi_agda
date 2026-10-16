@@ -20,14 +20,19 @@ import DASHI.Physics.Closure.Ternary27TrinificationTwoNeutralVEVBreakingExact as
 --
 --   0^12, 4^6, 6^8, 8^10.
 --
--- The twelve zero modes equal the previously computed dimension of the broken
--- gauge orbit: dim(SU3_L x SU3_R) - dim(SU2_L x U1_Y) = 16 - 4 = 12.
--- Hence this candidate has no additional local flat directions in the tested
--- model, while all 24 transverse modes are positive.
+-- The stronger replay does not rely on 12=12.  It explicitly constructs the
+-- sixteen infinitesimal SU(3)_L x SU(3)_R tangent vectors on the SAME ordered
+-- pair (Phi,Chi). Their real span has rank 12, the Hessian annihilates that
+-- span, and comparison of orthonormal bases by principal angles gives twelve
+-- unit singular values.  Thus, numerically on this candidate,
 --
--- These eigenvalues are LOCAL COMPUTATION RECEIPTS, not kernel theorems and
--- not measured Higgs masses.  Their numerical values depend on the explicitly
--- selected unit coefficients/field normalisation.
+--   ker(H_V) = T_v (G . v)
+--
+-- as the same subspace.  There are no additional observed local flat modes.
+--
+-- These are LOCAL COMPUTATION RECEIPTS, not Agda-kernel spectral theorems and
+-- not measured Higgs masses. Numerical eigenvalues depend on the selected unit
+-- coefficients and field/generator normalisation.
 ------------------------------------------------------------------------
 
 realFieldDimension : Nat
@@ -35,6 +40,9 @@ realFieldDimension = 36
 
 brokenGaugeOrbitDimension : Nat
 brokenGaugeOrbitDimension = 12
+
+gaugeOrbitTangentRank : Nat
+gaugeOrbitTangentRank = 12
 
 hessianZeroModeCount : Nat
 hessianZeroModeCount = 12
@@ -51,9 +59,14 @@ record TwoVEVLocalStabilityComputationReceipt : Set where
     sameCandidatePotentialUsed : Bool
     sameE32E33VacuumUsed : Bool
     fullThirtySixRealCoordinatesUsed : Bool
+    fullSixteenLRInfinitesimalGeneratorsUsed : Bool
+    gaugeOrbitTangentRankTwelveObserved : Bool
     twelveZeroModesObserved : Bool
     twentyFourPositiveModesObserved : Bool
     zeroModeCountEqualsBrokenGaugeOrbitDimension : Bool
+    gaugeOrbitTangentAnnihilatedByHessian : Bool
+    principalAngleSameSubspaceCheckPassed : Bool
+    hessianKernelEqualsGaugeOrbitTangentLocally : Bool
     noAdditionalLocalFlatDirectionsObserved : Bool
     positiveTransverseHessianObserved : Bool
     numericalSpectrumReplayedLocally : Bool
@@ -68,9 +81,9 @@ canonicalTwoVEVLocalStabilityComputationReceipt :
   TwoVEVLocalStabilityComputationReceipt
 canonicalTwoVEVLocalStabilityComputationReceipt =
   two-vev-local-stability-computation-receipt
-    true true true true true true true true true
+    true true true true true true true true true true true true true true
     false false false false
-    "The selected comparison potential is locally stable modulo exactly the twelve broken gauge directions in a fresh 36-real-coordinate numerical Hessian replay. The 0/4/6/8 eigenvalues are unit-normalisation computation receipts only: they are not Agda-kernel eigenvalues, physical Higgs masses, a derived VEV scale, or empirical recovery."
+    "The selected comparison potential is locally stable modulo the actual broken gauge-orbit tangent: a fresh 36-real-coordinate replay gives spectrum 0^12,4^6,6^8,8^10, the sixteen infinitesimal L/R generators span rank 12, the Hessian annihilates that span, and principal-angle comparison identifies it with the Hessian kernel. This is a local numerical same-subspace receipt only, not an Agda-kernel eigenspace theorem, a physical Higgs potential, a VEV scale, or measured masses."
 
 potentialReceipt : Potential.TrinificationInvariantTwoVEVPotentialLocalReceipt
 potentialReceipt = Potential.canonicalTrinificationInvariantTwoVEVPotentialLocalReceipt
