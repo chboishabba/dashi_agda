@@ -23,6 +23,22 @@ def test_same_metric_state_feeds_all_four_observables():
         assert needle in s
 
 
+def test_same_source_stress_metric_chain_is_literal_not_projection_only():
+    s = text()
+    for needle in (
+        "SameStateStressMetricFourChannelChain",
+        "SourceState",
+        "StressState",
+        "sourceToStress",
+        "stressToMetric",
+        "selectedPrediction",
+        "predictionMetricIsSameStressDerivedMetric",
+        "sameSourceStressMetricChainRequired",
+        "sharedProjectionDoesNotIdentifyFullStress",
+    ):
+        assert needle in s
+
+
 def test_exact_fixture_regression_and_preferred_single_vacuum_route_are_distinct():
     s = text()
     for needle in (
