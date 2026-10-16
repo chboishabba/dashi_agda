@@ -11,14 +11,15 @@ def test_p1_reuses_master_marked_os_pareto_frontier():
         "CMP119CosmologyMarkedStressOSParetoFrontierExact",
         "CMP119CosmologyMarkedStressSelectedSemanticsExact",
         "CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact",
-        "CMP119CosmologyMarkedStressE2CylinderEmbeddingExact",
-        "CMP119CosmologyMarkedStressE4ClusteringExact",
+        "CMP119CosmologyMarkedStressE2PinnedOSAlgebraExact",
+        "CMP119CosmologyMarkedStressE2E4SharedPinnedObservableExact",
         "remainingOpaqueAnalyticEstimateCount = 0",
-        "remainingAntigravitySpecificP1ResidualCount = 3",
+        "remainingAntigravitySpecificP1ResidualCount = 2",
         "q1PathDerivativeSemanticsAndEquivarianceStillRequired = true",
         "primitiveE1DerivativeEquivarianceProjectRequired = false",
-        "e2StressCylinderEmbeddingStillRequired = true",
-        "e4StressSourceSelectionAndOS4SemanticsStillRequired = true",
+        "sharedE2E4StressCylinderEncodingStillRequired = true",
+        "independentE4StressSelectionRequired = false",
+        "independentE4DecayEstimateRequired = false",
     ):
         assert needle in text
 
