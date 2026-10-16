@@ -3,6 +3,7 @@ module DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutValid
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutExact as M
+import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerValidation
 import DASHI.Physics.Foundations.GRQFTSourceNativeQFTRecoveryProjectionCompatibilityValidation
 import DASHI.Physics.Foundations.GRQFTR457SourceNativeRecoveryBindingValidation
 
@@ -38,9 +39,20 @@ round131RecoveredAttachmentRequiredRegression :
   M.round131RecoveredQFTAttachmentForR457Required M.canonicalSourceNativeHostBoundary ≡ true
 round131RecoveredAttachmentRequiredRegression = refl
 
-pinnedSelectionStillRequiredRegression :
-  M.pinnedSourceNativeSelectionRequired M.canonicalSourceNativeHostBoundary ≡ true
-pinnedSelectionStillRequiredRegression = refl
+pinnedSelectionCompilerOwnedRegression :
+  M.pinnedSourceNativeSelectionCompiledFromRound131AndPinnedIdentity
+    M.canonicalSourceNativeHostBoundary ≡ true
+pinnedSelectionCompilerOwnedRegression = refl
+
+independentPinnedSelectionNotRequiredRegression :
+  M.independentPinnedSourceNativeSelectionRequired
+    M.canonicalSourceNativeHostBoundary ≡ false
+independentPinnedSelectionNotRequiredRegression = refl
+
+r457PinnedIdentityStillRequiredRegression :
+  M.r457LiteralPinnedConstructionIdentityRequired
+    M.canonicalSourceNativeHostBoundary ≡ true
+r457PinnedIdentityStillRequiredRegression = refl
 
 quaternionInterpretationStillRequiredRegression :
   M.selectedQuaternionSU2InterpretationRequired M.canonicalSourceNativeHostBoundary ≡ true
@@ -51,7 +63,7 @@ firstSourceNativeHostBlockerRegression :
 firstSourceNativeHostBlockerRegression = refl
 
 secondSourceNativeHostBlockerRegression :
-  M.secondSourceNativeHostBlocker ≡ M.missingPinnedSourceNativeRecoverySelection
+  M.secondSourceNativeHostBlocker ≡ M.missingR457LiteralPinnedConstructionIdentity
 secondSourceNativeHostBlockerRegression = refl
 
 thirdSourceNativeHostBlockerRegression :
