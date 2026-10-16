@@ -121,7 +121,7 @@ digitalToPhotonFormula : String
 digitalToPhotonFormula = "(image - intercept) / slope"
 
 photonConversionFormula : String
-photonConversionFormula = digitalToPhotonFormula
+photonConversionFormula = "clip((image - intercept) / slope, 0, infinity)"
 
 simultaneousThreeCameraSweepPinned : Bool
 simultaneousThreeCameraSweepPinned = true
@@ -197,7 +197,7 @@ berkeleyPhotonTransferCalibrationReceipt = record
   ; diffuserInterceptDisplayed = diffuserDisplayedIntercept
   ; lensSlopeDisplayed = lensDisplayedSlope
   ; lensInterceptDisplayed = lensDisplayedIntercept
-  ; conversion = digitalToPhotonFormula
+  ; conversion = photonConversionFormula
   ; simultaneousSweep = simultaneousThreeCameraSweepPinned
   ; sourceExecutedCalibration = sourceExecutedPhotonTransferCalibrationPaid
   ; detectedPhotonConversion = sourceDigitalToEstimatedPhotonConversionPaid
