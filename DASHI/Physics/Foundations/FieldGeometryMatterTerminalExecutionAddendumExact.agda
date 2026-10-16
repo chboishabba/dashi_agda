@@ -10,6 +10,7 @@ import DASHI.Physics.CondensedMatter.MATBG2026PublicAcquisitionRouteExact as Pub
 import DASHI.Physics.CondensedMatter.MATBGQTMInstrumentCalibration2026Exact as QTMCalibration
 import DASHI.Physics.CondensedMatter.MATBGQTMResolutionAwareForwardObserverReceiptExact as QTMForward
 import DASHI.Physics.CondensedMatter.MATBGEntropyMaxwellReplayContractExact as EntropyMaxwell
+import DASHI.Physics.Foundations.CasimirIdealSheetScalingCeilingReceiptExact as CasimirCeiling
 import DASHI.Physics.Foundations.ScientistFrontierSiblingHandoffExact as ScientistHandoff
 import DASHI.Physics.Foundations.FieldGeometryMatterSiblingAuthorityHandoffExact as SiblingHandoff
 
@@ -31,6 +32,7 @@ record TerminalExecutionAddendum : Set where
     qtmSourceDataBytes : Terminal.FrontierStatus
     entropySourceDataBytes : Terminal.FrontierStatus
     crossStudySameSampleIdentity : Terminal.FrontierStatus
+    casimirIdealSheetScalingCeiling : Terminal.FrontierStatus
     scientistFrontierDedicatedAcquisitionOwner : Terminal.FrontierStatus
     scientistFrontierCrossObjectPromotion : Terminal.FrontierStatus
     magnetocaloricDedicatedSiblingOwner : Terminal.FrontierStatus
@@ -43,6 +45,7 @@ record TerminalExecutionAddendum : Set where
     qtmSyntheticForwardObserverCountsAsExperimentalFit : Bool
     acquisitionRouteCountsAsByteAcquisition : Bool
     entropyMaxwellSyntheticFixtureCountsAsMeasuredReplay : Bool
+    idealSheetScalingCountsAsPhysicalMacroscopicScaling : Bool
     scientistTechnicalAdjacencyCountsAsTargeting : Bool
     openSiblingReferenceCountsAsAuthorityImport : Bool
 
@@ -66,12 +69,13 @@ currentTerminalExecutionAddendum =
     Terminal.openSameObjectPayment
     Terminal.openSameObjectPayment
     Terminal.externalOnly
+    Terminal.numericallyExecuted
     Terminal.blockedByUnmergedSibling
     Terminal.openSameObjectPayment
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
-    false false false false false false false false false
+    false false false false false false false false false false
 
 record TerminalExecutionAddendumBoundary : Set where
   constructor terminal-execution-addendum-boundary
@@ -83,6 +87,7 @@ record TerminalExecutionAddendumBoundary : Set where
     qtmCalibrationBoundaryImported : QTMCalibration.QTMInstrumentCalibrationBoundary
     qtmForwardObserverBoundaryImported : QTMForward.QTMResolutionAwareForwardObserverBoundary
     entropyMaxwellBoundaryImported : EntropyMaxwell.EntropyMaxwellReplayBoundary
+    casimirScalingBoundaryImported : CasimirCeiling.CasimirIdealSheetScalingBoundary
     scientistHandoffBoundaryImported : ScientistHandoff.ScientistFrontierHandoffBoundary
     siblingAuthorityHandoffBoundaryImported : SiblingHandoff.SiblingAuthorityHandoffBoundary
     noGenericAbstractionPromotesRemainingLeaves : Bool
@@ -99,6 +104,7 @@ canonicalTerminalExecutionAddendumBoundary =
     QTMCalibration.canonicalQTMInstrumentCalibrationBoundary
     QTMForward.canonicalQTMResolutionAwareForwardObserverBoundary
     EntropyMaxwell.canonicalEntropyMaxwellReplayBoundary
+    CasimirCeiling.canonicalCasimirIdealSheetScalingBoundary
     ScientistHandoff.canonicalScientistFrontierHandoffBoundary
     SiblingHandoff.canonicalSiblingAuthorityHandoffBoundary
     true
