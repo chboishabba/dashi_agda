@@ -14,6 +14,8 @@ import DASHI.Physics.Foundations.FieldGeometryMatterConsumersValidation
 
 import DASHI.Physics.CondensedMatter.MATBG2026VerticalSliceExact
 import DASHI.Physics.CondensedMatter.MATBG2026VerticalSliceValidation
+import DASHI.Physics.CondensedMatter.MATBG2026SourceDataAvailabilityExact
+import DASHI.Physics.CondensedMatter.MATBG2026SourceDataAvailabilityValidation
 import DASHI.Physics.CondensedMatter.MATBGBMFirstHarmonicC3Exact
 import DASHI.Physics.CondensedMatter.MATBGBMFirstHarmonicC3Validation
 import DASHI.Physics.CondensedMatter.MATBGBMEisensteinMatrixExact
