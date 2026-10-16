@@ -116,7 +116,11 @@ record MonsterPrimeElementOccurrence (p : Nat) : Set₁ where
     element : MonsterCarrier
     elementOrder : MonsterCarrier → Nat
     elementHasPrimeOrder : elementOrder element ≡ p
-    actualMonsterIdentification : Set
+
+    ActualMonsterIdentificationWitness : Set
+    actualMonsterIdentification : ActualMonsterIdentificationWitness
+
+open MonsterPrimeElementOccurrence public
 
 record FrickeMonsterLocalRecognition (p : Nat) : Set₁ where
   constructor fricke-monster-local-recognition
@@ -128,12 +132,25 @@ record FrickeMonsterLocalRecognition (p : Nat) : Set₁ where
     McKayThompsonDatum : Set
     HauptmodulDatum : Set
 
-    elementInDistinguishedClass : Set
-    centralizerIsSameElementCentralizer : Set
-    localNormalizerIsSameCyclicSubgroupNormalizer : Set
-    mcKayThompsonUsesSameElement : Set
-    frickeGroupIsGamma0PlusP : Set
-    hauptmodulIsSameMcKayThompsonFunction : Set
+    DistinguishedClassWitness : Set
+    elementInDistinguishedClass : DistinguishedClassWitness
+
+    SameElementCentralizerWitness : Set
+    centralizerIsSameElementCentralizer : SameElementCentralizerWitness
+
+    SameCyclicNormalizerWitness : Set
+    localNormalizerIsSameCyclicSubgroupNormalizer : SameCyclicNormalizerWitness
+
+    SameElementMcKayThompsonWitness : Set
+    mcKayThompsonUsesSameElement : SameElementMcKayThompsonWitness
+
+    FrickeGamma0PlusPWitness : Set
+    frickeGroupIsGamma0PlusP : FrickeGamma0PlusPWitness
+
+    SameHauptmodulWitness : Set
+    hauptmodulIsSameMcKayThompsonFunction : SameHauptmodulWitness
+
+open FrickeMonsterLocalRecognition public
 
 record SupersingularMonsterRecognition (p : Nat) : Set₁ where
   constructor supersingular-monster-recognition
@@ -145,12 +162,23 @@ record SupersingularMonsterRecognition (p : Nat) : Set₁ where
 
     supersingularToModular : SupersingularJ → ModularDatum
     modularToMonster : ModularDatum → MonsterDatum
-    monsterDatumReadsLocalRecognition : Set
 
-    samePrime : Set
-    exceptionalJValuesHandled : Set
-    correspondenceRecoversSupersingularLocus : Set
-    correspondenceRespectsMonsterActionStructure : Set
+    LocalRecognitionReadoutWitness : Set
+    monsterDatumReadsLocalRecognition : LocalRecognitionReadoutWitness
+
+    SamePrimeWitness : Set
+    samePrime : SamePrimeWitness
+
+    ExceptionalJValuesWitness : Set
+    exceptionalJValuesHandled : ExceptionalJValuesWitness
+
+    SupersingularRecoveryWitness : Set
+    correspondenceRecoversSupersingularLocus : SupersingularRecoveryWitness
+
+    MonsterActionStructureWitness : Set
+    correspondenceRespectsMonsterActionStructure : MonsterActionStructureWitness
+
+open SupersingularMonsterRecognition public
 
 ------------------------------------------------------------------------
 -- 3. Wrong-type firewalls.
@@ -182,6 +210,7 @@ record JackDanielsNaturalRecognitionBoundary : Set where
     externalOggLabelUsedInFiniteComparison : Bool
     MonsterPrimeLaneUsedInFiniteComparison : Bool
     orderPElementOccurrenceSeparatedFromSupport : Bool
+    naturalRecognitionTargetsProofRelevant : Bool
     distinguishedFrickeClassRecognitionPaid : Bool
     supersingularToMonsterNaturalMapPaid : Bool
     groupStructureVisibleInCorrespondencePaid : Bool
@@ -190,5 +219,5 @@ record JackDanielsNaturalRecognitionBoundary : Set where
 canonicalJackDanielsNaturalRecognitionBoundary : JackDanielsNaturalRecognitionBoundary
 canonicalJackDanielsNaturalRecognitionBoundary =
   jack-daniels-natural-recognition-boundary
-    true false false true false false false
-    "Finite closure equals literal Monster-order support on all twenty controls without the Ogg label. The remaining Jack Daniel's theorem is natural recognition: inhabit a same-prime Monster element/class/local-action object and then a supersingular/modular -> McKay-Thompson/Monster correspondence. Mere divisibility or Cauchy occurrence is not charged as the conceptual endpoint."
+    true false false true true false false false
+    "Finite closure equals literal Monster-order support on all twenty controls without the Ogg label. The remaining Jack Daniel's theorem is natural recognition: inhabit a same-prime Monster element/class/local-action object and then a supersingular/modular -> McKay-Thompson/Monster correspondence. All promotion obligations are witness-bearing; mere divisibility or Cauchy occurrence is not charged as the conceptual endpoint."
