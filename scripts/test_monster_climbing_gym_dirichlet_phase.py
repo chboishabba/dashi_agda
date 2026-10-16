@@ -16,8 +16,16 @@ class MonsterClimbingGymDirichletPhaseTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.discovery = phase.load_zero_cache(DISCOVERY)
         cls.held_out = phase.load_zero_cache(HELD_OUT)
-        cls.discovery_result = phase.analyse_window(cls.discovery, window_label="zeros-1-849")
-        cls.held_out_result = phase.analyse_window(cls.held_out, window_label="zeros-850-1698")
+        cls.discovery_result = phase.analyse_window(
+            cls.discovery,
+            window_label="zeros-1-849",
+            lower_height=0.0,
+        )
+        cls.held_out_result = phase.analyse_window(
+            cls.held_out,
+            window_label="zeros-850-1698",
+            lower_height=cls.discovery[-1],
+        )
 
     def test_discovery_raw_reproduces_existing_phase_control(self) -> None:
         raw = self.discovery_result["raw"]
@@ -40,11 +48,12 @@ class MonsterClimbingGymDirichletPhaseTest(unittest.TestCase):
         self.assertEqual(raw["coherence_upper_or_equal_count"], 1067)
         self.assertGreater(raw["coherence_upper_tail_fraction"], 0.06)
 
-    def test_held_out_residual_tail_is_exploratory_not_confirmation(self) -> None:
+    def test_held_out_landau_residual_does_not_replicate_discovery_tail(self) -> None:
         residual = self.held_out_result["landau_prime_main_residual"]
-        self.assertAlmostEqual(residual["actual_mean_vector_magnitude"], 0.28837665, places=6)
-        self.assertEqual(residual["coherence_upper_or_equal_count"], 661)
-        self.assertGreater(residual["coherence_upper_tail_fraction"], 0.04)
+        self.assertAlmostEqual(residual["actual_mean_vector_magnitude"], 0.01525212, places=6)
+        self.assertEqual(residual["coherence_upper_or_equal_count"], 7367)
+        self.assertGreater(residual["coherence_upper_tail_fraction"], 0.47)
+        self.assertLess(residual["coherence_upper_tail_fraction"], 0.48)
         self.assertFalse(self.held_out_result["replicated_monster_specific_anomaly_claimed"])
 
     def test_moments_expose_twenty_channels_and_hermitian_kernel(self) -> None:
