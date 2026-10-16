@@ -22,3 +22,5 @@ import DASHI.Cognition.ClinicToStreetsConsumerCrosswalkExact
 import DASHI.Cognition.ClinicToStreetsConsumerCrosswalkValidation
 import DASHI.Cognition.ClinicToStreetsMultiArmImplementationExact
 import DASHI.Cognition.ClinicToStreetsMultiArmImplementationValidation
+import DASHI.Cognition.ClinicToStreetsPromotionChainExact
+import DASHI.Cognition.ClinicToStreetsPromotionChainValidation
