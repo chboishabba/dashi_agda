@@ -81,6 +81,7 @@ data ProvenanceAcquisitionKind : Set where
   correspondenceThreadArtifact : ProvenanceAcquisitionKind
   manuscriptHistoryArtifact : ProvenanceAcquisitionKind
   institutionalRoleTimeline : ProvenanceAcquisitionKind
+  derivationTraceArtifact : ProvenanceAcquisitionKind
 
 data ProvenanceStatus : Set where
   originatorReportedOnly : ProvenanceStatus
@@ -109,16 +110,56 @@ record ProvenanceAcquisitionItem : Set where
 open ProvenanceAcquisitionItem public
 
 stanfordContactArtifact : ProvenanceAcquisitionItem
-stanfordContactArtifact = provenanceAcquisitionItem "P1 Stanford contact provenance" contactMessageArtifact "Kitzerow priority/attribution: Stanford" "claimed 27 Nov 2023 Stanford Neurodiversity Project contact requesting model information" "underlying email/message export with sender, recipient, timestamp and substantive content" "metadata/context sufficient to authenticate communication and chronology" "may upgrade originator-reported contact to authenticated exposure evidence only" originatorReportedOnly 3 10 0 0 true refl
+stanfordContactArtifact = provenanceAcquisitionItem
+  "P1 Stanford contact provenance"
+  contactMessageArtifact
+  "Kitzerow priority/attribution: Stanford"
+  "claimed 27 Nov 2023 Stanford Neurodiversity Project contact requesting model information"
+  "underlying email/message export with sender, recipient, timestamp and substantive content"
+  "metadata/context sufficient to authenticate sender/recipient, communication content and temporal relation to the comparison work"
+  "may upgrade originator-reported contact to authenticated exposure evidence only; even authenticated pre-publication exposure does not by itself establish derivation or plagiarism"
+  originatorReportedOnly 3 10 0 0 true refl
 
 brazilCorrespondenceArtifact : ProvenanceAcquisitionItem
-brazilCorrespondenceArtifact = provenanceAcquisitionItem "P2 Brazil/MDPI correspondence provenance" correspondenceThreadArtifact "Kitzerow priority/attribution: BH4 systematic review" "claimed MDPI/Latini correspondence after attribution concern" "underlying correspondence plus manuscript/publication timeline records" "message/export authenticity and chronology against manuscript versions" "may resolve who communicated what and when; does not by itself establish derivation/copying" originatorReportedOnly 4 10 0 0 true refl
+brazilCorrespondenceArtifact = provenanceAcquisitionItem
+  "P2 Brazil/MDPI post-publication correspondence provenance"
+  correspondenceThreadArtifact
+  "Kitzerow priority/attribution: BH4 systematic review"
+  "originator-reported journal/author correspondence after publication/attribution concern"
+  "underlying correspondence with complete thread metadata and exact message contents"
+  "authenticate participants, timestamps and whether the correspondence is post-publication as currently described"
+  "can upgrade the later-response/contact chronology; a post-publication artifact cannot pay pre-publication exposure or derivation of the already-published manuscript"
+  originatorReportedOnly 3 8 0 0 true refl
 
 iaccMedMapsContactArtifact : ProvenanceAcquisitionItem
-iaccMedMapsContactArtifact = provenanceAcquisitionItem "P3 IACC/MedMaps contact provenance" contactMessageArtifact "Kitzerow priority/attribution: IACC developmental-systems framework" "claimed 2024 MedMaps/Honey Rinicella awareness/contact before later IACC role" "underlying message/export with date, participants and substantive content" "communication metadata plus institutional-role chronology" "may upgrade awareness/exposure evidence; scientific convergence and derivation remain separate" originatorReportedOnly 4 10 0 0 true refl
+iaccMedMapsContactArtifact = provenanceAcquisitionItem
+  "P3 IACC/MedMaps contact provenance"
+  contactMessageArtifact
+  "Kitzerow priority/attribution: IACC developmental-systems framework"
+  "claimed 2024 MedMaps/Honey Rinicella awareness/contact before later IACC role"
+  "underlying message/export with date, participants and substantive content"
+  "communication metadata plus institutional-role chronology sufficient to establish the temporal exposure coordinate"
+  "may upgrade awareness/exposure evidence only; scientific convergence, direct use and derivation remain separately typed"
+  originatorReportedOnly 4 9 0 0 true refl
+
+comparisonManuscriptHistoryArtifact : ProvenanceAcquisitionItem
+comparisonManuscriptHistoryArtifact = provenanceAcquisitionItem
+  "P4 disputed-comparison pre-publication manuscript/exposure lineage"
+  derivationTraceArtifact
+  "Kitzerow attribution comparisons with derivation undetermined"
+  "whether an independently authenticated pre-publication exposure event or traceable manuscript/version change connects Kitzerow material to the comparison manifestation"
+  "versioned preprints/manuscripts/drafts, archived submission history, correspondence predating the relevant manuscript state, or other primary trace connecting a source manifestation to a later text/idea/process/result use"
+  "exact timestamped manifestations and upstream roots; distinguish quotation/revision/derivation from mere chronology, public availability, structural similarity or later correspondence"
+  "may upgrade derivationUndetermined only at the coordinate directly documented by the trace; exact/near-text, idea/process/result reuse and legal/misconduct conclusions remain separately adjudicated"
+  originatorReportedOnly 5 10 0 0 true refl
 
 canonicalContactProvenanceItems : List ProvenanceAcquisitionItem
-canonicalContactProvenanceItems = stanfordContactArtifact ∷ brazilCorrespondenceArtifact ∷ iaccMedMapsContactArtifact ∷ []
+canonicalContactProvenanceItems =
+  stanfordContactArtifact
+  ∷ brazilCorrespondenceArtifact
+  ∷ iaccMedMapsContactArtifact
+  ∷ comparisonManuscriptHistoryArtifact
+  ∷ []
 
 record LineageAttributionAcquisitionFrontier : Set where
   constructor lineageAttributionAcquisitionFrontier
@@ -150,10 +191,26 @@ record LineageAttributionAcquisitionFrontier : Set where
     acquisitionCreatesAuthority : Bool
     acquisitionCreatesAuthorityIsFalse : acquisitionCreatesAuthority ≡ false
     causalDiscriminatorCanOutrankDeeperMechanisticReplay : Bool
-    causalDiscriminatorCanOutrankDeeperMechanisticReplayIsTrue : causalDiscriminatorCanOutrankDeeperMechanisticReplay ≡ true
+    causalDiscriminatorCanOutrankDeeperMechanisticReplayIsTrue :
+      causalDiscriminatorCanOutrankDeeperMechanisticReplay ≡ true
+    publicationMultiplicitySeparateFromEvidenceIndependence : Bool
+    publicationMultiplicitySeparateFromEvidenceIndependenceIsTrue :
+      publicationMultiplicitySeparateFromEvidenceIndependence ≡ true
+    postPublicationContactCannotPayEarlierExposure : Bool
+    postPublicationContactCannotPayEarlierExposureIsTrue :
+      postPublicationContactCannotPayEarlierExposure ≡ true
+    directUseRequiresTraceableArtifactOrManifestation : Bool
+    directUseRequiresTraceableArtifactOrManifestationIsTrue :
+      directUseRequiresTraceableArtifactOrManifestation ≡ true
 
 open LineageAttributionAcquisitionFrontier public
 
 canonicalLineageAttributionAcquisitionFrontier : LineageAttributionAcquisitionFrontier
 canonicalLineageAttributionAcquisitionFrontier =
-  lineageAttributionAcquisitionFrontier canonicalScientificAcquisitionItems canonicalContactProvenanceItems true refl true refl true refl true refl true refl false refl false refl false refl false refl false refl true refl false refl true refl
+  lineageAttributionAcquisitionFrontier
+    canonicalScientificAcquisitionItems
+    canonicalContactProvenanceItems
+    true refl true refl true refl true refl true refl
+    false refl false refl false refl false refl
+    false refl true refl false refl true refl
+    true refl true refl true refl
