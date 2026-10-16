@@ -15,15 +15,18 @@ module DASHI.Cognition.Teleodynamics.MonsterAlbertF4FiniteLinearRealizationExact
 --      code inside the literal rational Albert algebra.
 --
 -- The result is an injective state realization of the finite 54/53 shape into
--- TWO copies of the literal rational Albert state carrier.  It is not a linear
--- span equivalence and it does not extend the transported Monster permutation
--- action to a rational-linear Albert automorphism.
+-- TWO copies of the literal rational Albert state carrier.  Transporting the
+-- ternary product/cubic through the exact 27-point shape makes this realization
+-- an exact finite-image Jordan/cubic intertwiner.
+--
+-- It is NOT a linear-span equivalence and it does not extend the transported
+-- Monster permutation action to a rational-linear Albert automorphism.
 --
 -- Crucially, the distinguished `ScalarLine` point of the finite SHAPE is the
 -- ternary ORIGIN.  Under the canonical diagonal codebook it maps to Albert ZERO.
--- The Albert UNIT is instead the positive ternary corner (1,1,1).
--- Therefore the #1179 removed-point invariant is not automatically the
--- distinguished unit used by the native F4 = unit-stabilizer rigidity lane.
+-- The Albert UNIT is instead the positive ternary corner (1,1,1).  Thus the
+-- finite shape label `ScalarLine` is a carrier partition, not the actual
+-- scalar/unit summand of H_3(O_Q) under this product-preserving realization.
 --
 -- Historical/source attribution remains with the existing Albert/F4 sources;
 -- this finite-to-linear embedding is a DASHI composition of repo-native maps.
@@ -34,6 +37,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Rational.Base using (ℚ)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -77,7 +81,42 @@ encodeAlbertShapeInjective {left} {right} equality =
       (Shape.toAfterFrom right))
 
 ------------------------------------------------------------------------
--- 3. Full 54-state embedding and injection.
+-- 3. Transport the finite product/cubic through the exact 27-point shape.
+------------------------------------------------------------------------
+
+shapeProduct : Shape.CubeAlbert27 → Shape.CubeAlbert27 → Shape.CubeAlbert27
+shapeProduct left right =
+  Shape.toAlbertShape
+    (Codebook.pointMul
+      (Shape.fromAlbertShape left)
+      (Shape.fromAlbertShape right))
+
+shapeCubicCode : Shape.CubeAlbert27 → ℚ
+shapeCubicCode shape =
+  Codebook.ternaryCubicCode (Shape.fromAlbertShape shape)
+
+encodeAlbertShapePreservesProduct : (left right : Shape.CubeAlbert27) →
+  Albert.jordanProduct (encodeAlbertShape left) (encodeAlbertShape right)
+  ≡ encodeAlbertShape (shapeProduct left right)
+encodeAlbertShapePreservesProduct left right =
+  trans
+    (Codebook.encodePreservesProduct
+      (Shape.fromAlbertShape left)
+      (Shape.fromAlbertShape right))
+    (cong Codebook.encodePoint
+      (sym
+        (Shape.fromAfterTo
+          (Codebook.pointMul
+            (Shape.fromAlbertShape left)
+            (Shape.fromAlbertShape right)))))
+
+encodeAlbertShapePreservesCubic : (shape : Shape.CubeAlbert27) →
+  Albert.cubicNorm (encodeAlbertShape shape) ≡ shapeCubicCode shape
+encodeAlbertShapePreservesCubic shape =
+  Codebook.encodePreservesCubicNorm (Shape.fromAlbertShape shape)
+
+------------------------------------------------------------------------
+-- 4. Full 54-state embedding and injection.
 ------------------------------------------------------------------------
 
 encodePair54 : CubeAlbertPair54 → RationalAlbertPair
@@ -104,7 +143,7 @@ encodePair54Injective {inj₂ left} {inj₂ right} equality =
     (encodeAlbertShapeInjective (cong rightAlbertOrZero equality))
 
 ------------------------------------------------------------------------
--- 4. Residual 53-state embedding and injection.
+-- 5. Residual 53-state embedding and injection.
 ------------------------------------------------------------------------
 
 encodeResidual53 : CubeReducedAlbert53 → RationalAlbertPair
@@ -130,7 +169,7 @@ encodeResidual53Injective {inj₂ left} {inj₂ right} equality =
     (encodeAlbertShapeInjective (cong rightAlbertOrZero equality))
 
 ------------------------------------------------------------------------
--- 5. Distinguished-point audit: removed shape scalar -> zero, unit elsewhere.
+-- 6. Distinguished-point audit: removed shape scalar -> zero, unit elsewhere.
 ------------------------------------------------------------------------
 
 removedShapeScalar54 : CubeAlbertPair54
@@ -148,7 +187,7 @@ leftPositiveCornerMapsToUnit :
 leftPositiveCornerMapsToUnit = cong inj₁ Codebook.positiveCornerToUnit
 
 ------------------------------------------------------------------------
--- 6. What is and is not paid.
+-- 7. What is and is not paid.
 ------------------------------------------------------------------------
 
 record FiniteLinearRealizationBoundary : Set where
@@ -158,9 +197,12 @@ record FiniteLinearRealizationBoundary : Set where
     finite54StateEmbeddingInjective : Bool
     residual53StateEmbeddingPaid : Bool
     residual53StateEmbeddingInjective : Bool
+    finiteShapeProductIntertwinesAlbertJordan : Bool
+    finiteShapeCubicIntertwinesAlbertCubic : Bool
     removedShapeScalarMapsToAlbertZero : Bool
     leftPositiveCornerMapsToAlbertUnit : Bool
     removedShapeScalarMapsToAlbertUnit : Bool
+    shapeScalarSummandMatchesActualAlbertScalarUnit : Bool
     finiteImageEqualsWholeAlbertVectorSpace : Bool
     finiteActionLiftToLinearAlbertPaid : Bool
     cubicUnitRigidityApplicableToTransportedFiniteAction : Bool
@@ -170,17 +212,20 @@ open FiniteLinearRealizationBoundary public
 canonicalFiniteLinearRealizationBoundary : FiniteLinearRealizationBoundary
 canonicalFiniteLinearRealizationBoundary =
   finite-linear-realization-boundary
-    true true true true true true
-    false false false false
-    "state-carrier realization is now paid: each finite 27-point shape embeds injectively into the literal rational Albert algebra, hence the pair54/residual53 embed into two rational-Albert state copies. The removed shape scalar is the ternary origin and maps to Albert zero, while the Albert unit is the positive corner. The live action theorem is therefore to extend/lift the transported finite Monster action and an independent classical-F4 comparator to SAME-OBJECT rational-linear Albert actions, with cubic-norm preservation and actual-unit fixation. Only after that action lift can the existing norm+unit rigidity compiler discharge Jordan compatibility. Do not identify the removed-point stabilizer with the Albert-unit stabilizer."
+    true true true true
+    true true
+    true true
+    false false false false false
+    "state-carrier realization is paid and the transported finite pointwise product/cubic agree exactly with the literal Albert Jordan product/cubic on the diagonal finite image. But the named finite Shape ScalarLine is the ternary origin, hence maps to Albert zero; the actual Albert unit is the positive corner. The current 1+26 SHAPE partition is therefore not the native scalar/unit + traceless decomposition under this algebra-preserving realization. The live action theorem is to extend/lift the transported finite Monster action and an independent classical-F4 comparator to same-object rational-linear Albert actions, with cubic-norm preservation, actual-unit fixation, and an explicit sheet action. Only after that can norm+unit rigidity discharge Jordan compatibility. Do not identify the removed-point stabilizer with the Albert-unit stabilizer."
 
 ------------------------------------------------------------------------
--- 7. Explicit non-promotions.
+-- 8. Explicit non-promotions.
 ------------------------------------------------------------------------
 
 data FiniteStateEmbeddingCreatesLinearAction : Set where
 data FiniteImageCreatesWholeAlbertSpace : Set where
 data RemovedShapeScalarCreatesAlbertUnit : Set where
+data ShapeScalarLabelCreatesNativeScalarDecomposition : Set where
 data StateEmbeddingCreatesClassicalF4Recognition : Set where
 
 aStateEmbeddingDoesNotCreateLinearAction :
@@ -194,6 +239,10 @@ finiteImageDoesNotCreateWholeAlbertSpace ()
 removedShapeScalarDoesNotCreateAlbertUnit :
   RemovedShapeScalarCreatesAlbertUnit → ⊥
 removedShapeScalarDoesNotCreateAlbertUnit ()
+
+shapeScalarLabelDoesNotCreateNativeScalarDecomposition :
+  ShapeScalarLabelCreatesNativeScalarDecomposition → ⊥
+shapeScalarLabelDoesNotCreateNativeScalarDecomposition ()
 
 stateEmbeddingDoesNotCreateClassicalF4Recognition :
   StateEmbeddingCreatesClassicalF4Recognition → ⊥
