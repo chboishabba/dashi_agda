@@ -26,3 +26,4 @@ open import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact pu
 open import DASHI.Physics.Optics.BerkeleyPLD100kReleaseProvenanceExact public
 open import DASHI.Physics.Optics.BerkeleyPLDArchiveRunMetadataBoundaryExact public
 open import DASHI.Physics.Optics.Diffraction3DImagingAcquisitionMaxCutExact public
+open import DASHI.Physics.Optics.Diffraction3DImagingAcquisitionExecutionClosureExact public
