@@ -12,6 +12,7 @@ import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact 
 import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierExact as RocketFals
 import DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact as RocketTerminal
 import DASHI.Physics.Propulsion.Rocketdyne1974HotSectionQualificationFrontierExact as RocketQual
+import DASHI.Physics.Propulsion.Rocketdyne1974DigitalThreadExperimentParetoExact as RocketThread
 import DASHI.Physics.Propulsion.QualifiedHotSectionManufacturingBidiExact as Hot
 
 ------------------------------------------------------------------------
@@ -127,11 +128,8 @@ existingAntigravityBoundary : Anti.AntigravityPromotionBoundary
 existingAntigravityBoundary = Anti.canonicalAntigravityPromotionBoundary
 
 ------------------------------------------------------------------------
--- Rocketdyne provides a reusable experimental-design grammar:
--- same reported thermal observation + different documented material/hardware
--- state + opposite outcome => temperature-only observation is insufficient.
--- This grammar may guide fusion/material qualification experiments, but the
--- historical chemical-rocket result is not itself fusion-plasma evidence.
+-- Rocketdyne provides reusable experimental-design / acquisition grammar.
+-- Historical chemical-rocket values do not themselves become fusion evidence.
 ------------------------------------------------------------------------
 
 rocketdyneMaterialDependenceBoundary : RocketFals.MaterialDependenceBoundary
@@ -143,11 +141,20 @@ rocketdyneTerminalFrontier = RocketTerminal.currentTerminalFrontier
 rocketdyneQualificationReverseFrontier : RocketQual.RocketdyneQualificationReverseFrontier
 rocketdyneQualificationReverseFrontier = RocketQual.rocketdyneQualificationReverseFrontier
 
+rocketdyneDigitalThreadFrontier : RocketThread.RocketdyneDigitalThreadExperimentFrontier
+rocketdyneDigitalThreadFrontier = RocketThread.rocketdyneDigitalThreadExperimentFrontier
+
 canonicalHotSectionQualificationBoundary : Hot.CanonicalQualificationBoundary
 canonicalHotSectionQualificationBoundary = Hot.canonicalQualificationBoundary
 
 fusionQualificationNeedsOwnSameObjectPayment : Bool
 fusionQualificationNeedsOwnSameObjectPayment = true
+
+fusionMayReuseDigitalThreadGrammar : Bool
+fusionMayReuseDigitalThreadGrammar = true
+
+rocketdyneAcquisitionScoresTransferToFusion : Bool
+rocketdyneAcquisitionScoresTransferToFusion = false
 
 record MaterialDiscriminatorTransferBoundary : Set where
   constructor material-discriminator-transfer-boundary
@@ -158,10 +165,12 @@ record MaterialDiscriminatorTransferBoundary : Set where
     matchedEnvironmentGeometryAndConstitutiveDataStillRequired : Bool
     canonicalQualificationGrammarReusable : Bool
     rocketdyneQualificationReceiptPaysFusionQualification : Bool
+    digitalThreadGrammarReusable : Bool
+    rocketdyneParetoCalibrationTransfersToFusion : Bool
 
 canonicalMaterialDiscriminatorTransferBoundary : MaterialDiscriminatorTransferBoundary
 canonicalMaterialDiscriminatorTransferBoundary =
-  material-discriminator-transfer-boundary true true false true true false
+  material-discriminator-transfer-boundary true true false true true false true false
 
 ------------------------------------------------------------------------
 -- Named firewalls.
