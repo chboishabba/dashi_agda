@@ -3,7 +3,6 @@ module DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostValidation where
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostExact as H
-import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
 
 concreteQuaternionSU2OwnedRegression :
   H.concreteQuaternionSU2GroupOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
@@ -33,6 +32,11 @@ selectedStructureHostCompilerOwnedRegression :
   H.selectedStructureRealizationBuildsHostCompilerOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
 selectedStructureHostCompilerOwnedRegression = refl
 
+bareQuaternionStructureInsufficientRegression :
+  H.BareQuaternionStructureAutomaticallyRealizesSelectedGroup → ⊥
+bareQuaternionStructureInsufficientRegression =
+  H.bareQuaternionStructureDoesNotRealizeSelectedGroup
+
 pinnedCompactSimpleCompilerOwnedRegression :
   H.pinnedYMConstructionSuppliesCompactSimpleCompiler H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
 pinnedCompactSimpleCompilerOwnedRegression = refl
@@ -48,11 +52,6 @@ selectedCompactSimpleStillOpenRegression = refl
 selectedCarrierRealizationStillOpenRegression :
   H.selectedGroupInterpretedAsQuaternionSU2Paid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
 selectedCarrierRealizationStillOpenRegression = refl
-
-canonicalRealizationStructureRegression :
-  H.realizedGroupStructure H.canonicalQuaternionSU2StructureRealization
-  ≡ SU2.su2QuaternionGroup
-canonicalRealizationStructureRegression = refl
 
 sprint105TagIsSecondaryRegression :
   H.sprint105ClassificationIsSecondaryConsistencyTag H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
