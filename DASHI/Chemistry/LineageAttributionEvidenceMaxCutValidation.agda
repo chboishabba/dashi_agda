@@ -12,6 +12,9 @@ import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact as Pareto
 import DASHI.Chemistry.LineageAcquiredPrimaryEvidenceExact as AcquiredSources
 import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact as Acquired
 import DASHI.Chemistry.LineageEvidenceAcquisitionStatusExact as Status
+import DASHI.Biology.KitzerowAttributionEvidenceLineageExact as KitLineage
+import DASHI.Biology.KitzerowAttributionAcquisitionStatusExact as KitStatus
+import DASHI.Biology.KitzerowAttributionProvenanceSOTAExact as KitSOTA
 
 sourceAtlasDoesNotCreateAuthority :
   Sources.atlasCreatesAuthority Sources.canonicalLineageCalibrationSourceAtlas ≡ false
@@ -92,3 +95,37 @@ paretoAcquisitionIsNotTruthRanking :
   Pareto.frontierRankIsTruthRank Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ false
   × Pareto.acquisitionCreatesAuthority Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ false
 paretoAcquisitionIsNotTruthRanking = refl , refl
+
+provenanceQueueIsDirectionAndIndependenceAware :
+  Pareto.publicationMultiplicitySeparateFromEvidenceIndependence Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ true
+  × Pareto.postPublicationContactCannotPayEarlierExposure Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ true
+  × Pareto.directUseRequiresTraceableArtifactOrManifestation Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ true
+provenanceQueueIsDirectionAndIndependenceAware = refl , (refl , refl)
+
+kitzerowContactReportsDoNotInflateIndependentEvidence :
+  KitLineage.contactReportMultiplicityInflatesIndependence KitLineage.canonicalKitzerowContactIndependenceReceipt ≡ false
+  × KitLineage.downstreamPublicationMultiplicityCreatesIndependentEvidence KitLineage.canonicalKitzerowAttributionLineageBoundary ≡ false
+kitzerowContactReportsDoNotInflateIndependentEvidence = refl , refl
+
+kitzerowExposureStillDoesNotCollapseIntoDerivationOrPlagiarism :
+  KitLineage.contactOrExposureAloneProvesDerivation KitLineage.canonicalKitzerowAttributionLineageBoundary ≡ false
+  × KitLineage.authenticatedPrePublicationExposureAloneProvesDerivation KitLineage.canonicalKitzerowAttributionLineageBoundary ≡ false
+  × KitLineage.citationAbsenceAloneProvesPlagiarism KitLineage.canonicalKitzerowAttributionLineageBoundary ≡ false
+  × KitLineage.structuralSimilarityAloneProvesPlagiarism KitLineage.canonicalKitzerowAttributionLineageBoundary ≡ false
+kitzerowExposureStillDoesNotCollapseIntoDerivationOrPlagiarism =
+  refl , (refl , (refl , refl))
+
+brazilLaterContactDoesNotPayEarlierExposure :
+  KitStatus.laterCorrespondenceCanEstablishEarlierExposure KitStatus.canonicalKitzerowAttributionAcquisitionBoundary ≡ false
+  × KitLineage.brazilNeedsEarlierExposureOrManuscriptHistory KitLineage.canonicalBrazilDirectionalProvenance ≡ true
+brazilLaterContactDoesNotPayEarlierExposure = refl , refl
+
+traceableDerivationCanUpgradeWithoutAdjudicatingPlagiarism :
+  KitStatus.exactVersionedTraceCanUpgradeDerivationCoordinate KitStatus.canonicalKitzerowAttributionAcquisitionBoundary ≡ true
+  × KitStatus.derivationUpgradeAutomaticallyProvesPlagiarismOrLegalInfringement KitStatus.canonicalKitzerowAttributionAcquisitionBoundary ≡ false
+traceableDerivationCanUpgradeWithoutAdjudicatingPlagiarism = refl , refl
+
+sotaGuidanceDoesNotAdjudicateTheCase :
+  KitSOTA.guidanceAutomaticallyAdjudicatesKitzerowClaim KitSOTA.canonicalAttributionProvenanceSOTABoundary ≡ false
+  × KitSOTA.institutionalGuidanceCreatesLegalConclusion KitSOTA.canonicalAttributionProvenanceSOTABoundary ≡ false
+sotaGuidanceDoesNotAdjudicateTheCase = refl , refl
