@@ -12,11 +12,17 @@ obstruction-is-numerical-not-solved = refl
 full-thf-remains-open : A.thfSourceFaithfulSelfConsistentSolve A.currentTerminalExecutionAddendum ≡ T.openCalibrationOrExecution
 full-thf-remains-open = refl
 
+entropy-maxwell-kernel-executed : A.entropyMaxwellReplayKernel A.currentTerminalExecutionAddendum ≡ T.numericallyExecuted
+entropy-maxwell-kernel-executed = refl
+
 entropy-bytes-still-open : A.entropySourceDataBytes A.currentTerminalExecutionAddendum ≡ T.openSameObjectPayment
 entropy-bytes-still-open = refl
 
 availability-is-not-replay : A.sourceDataAvailabilityCountsAsReplay A.currentTerminalExecutionAddendum ≡ false
 availability-is-not-replay = refl
+
+synthetic-maxwell-is-not-measured-replay : A.entropyMaxwellSyntheticFixtureCountsAsMeasuredReplay A.currentTerminalExecutionAddendum ≡ false
+synthetic-maxwell-is-not-measured-replay = refl
 
 scientist-acquisition-is-sibling-owned : A.scientistFrontierDedicatedAcquisitionOwner A.currentTerminalExecutionAddendum ≡ T.blockedByUnmergedSibling
 scientist-acquisition-is-sibling-owned = refl
