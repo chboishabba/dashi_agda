@@ -75,6 +75,13 @@ native369ZetaCountingEnsemble = record
 record NativeZetaEnsembleBoundary : Set where
   constructor nativeZetaEnsembleBoundary
   field
+    -- Historical projection retained for downstream compatibility.  "Microstate"
+    -- here means the finite model microstate/basis-label coordinate only.
+    native369MicrostateCarrierPaid : Bool
+    native369MicrostateCarrierPaidIsTrue : native369MicrostateCarrierPaid ≡ true
+    zetaCardinality65610Paid : Bool
+    zetaCardinality65610PaidIsTrue : zetaCardinality65610Paid ≡ true
+
     native369FiniteBasisLabelCarrierPaid : Bool
     native369FiniteBasisLabelCarrierPaidIsTrue :
       native369FiniteBasisLabelCarrierPaid ≡ true
@@ -111,17 +118,12 @@ canonicalNativeZetaEnsembleBoundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
     false refl
     false refl
     false refl
-    "729*90=65610 is the exact cardinality of the native-369 finite Monster-zeta basis-label model. It is not the cardinality of all vectors in the linear W_zeta eigenspace. Uniform weight 1/65610 is therefore a mathematical counting measure on finite labels only; an actual representation-native basis, physical probabilities/density matrix, Hamiltonian, entropy functional and entropy-gravity interpretation remain separate payments."
-
--- Backwards-compatible projections used by earlier validation/status owners.
-native369MicrostateCarrierPaid : NativeZetaEnsembleBoundary → Bool
-native369MicrostateCarrierPaid = NativeZetaEnsembleBoundary.native369FiniteBasisLabelCarrierPaid
-
-zetaCardinality65610Paid : NativeZetaEnsembleBoundary → Bool
-zetaCardinality65610Paid = NativeZetaEnsembleBoundary.zetaBasisLabelCardinality65610Paid
+    "729*90=65610 is the exact cardinality of the native-369 finite Monster-zeta basis-label model. The historical `microstate` wording is retained only as a compatibility name for that finite model coordinate; it is not the cardinality of all vectors in the linear W_zeta eigenspace. Uniform weight 1/65610 is therefore a mathematical counting measure on finite labels only; an actual representation-native basis, physical probabilities/density matrix, Hamiltonian, entropy functional and entropy-gravity interpretation remain separate payments."
