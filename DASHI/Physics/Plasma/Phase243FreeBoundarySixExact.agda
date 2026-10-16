@@ -144,7 +144,7 @@ record SolvedFreeBoundaryCase (candidate : Candidate6) : Set₁ where
 
 open SolvedFreeBoundaryCase public
 
-record RejectedFreeBoundaryCase (candidate : Candidate6) : Set where
+record RejectedFreeBoundaryCase (candidate : Candidate6) : Set₁ where
   constructor rejected-free-boundary-case
   field
     reason : FreeBoundaryFailureReason
