@@ -17,7 +17,10 @@ wAB=0.11 eV reference scale. It is NOT a same-sample Xiao calibration.
 """
 
 from __future__ import annotations
-import json, math
+import hashlib
+import json
+import math
+from pathlib import Path
 import numpy as np
 
 A_NM = 0.246
@@ -138,6 +141,14 @@ def central_bandwidth(theta_deg: float, shells: int, w_ab: float,
     }
 
 
+def compact_convergence(result):
+    return {
+        "bandwidth_eV": result["bandwidth_eV"],
+        "dimension": result["dimension"],
+        "hermiticity_error": result["hermiticity_error"],
+    }
+
+
 def main():
     xiao_convergence = {
         str(n): central_bandwidth(1.08, n, 0.11, 0.6)
@@ -151,20 +162,31 @@ def main():
     ]
     best_theta, best_result = min(sweep, key=lambda item: item[1]["bandwidth_eV"])
 
+    assert all(v["hermiticity_error"] < 1e-12 for v in xiao_convergence.values())
+    assert abs(xiao_convergence["4"]["bandwidth_eV"]
+               - xiao_convergence["3"]["bandwidth_eV"]) < 1e-4
+    assert abs(best_theta - 1.085) < 0.006
+
+    script_path = Path(__file__)
     receipt = {
+        "script": "scripts/matbg_bm_plane_wave_replay.py",
+        "script_sha256": hashlib.sha256(script_path.read_bytes()).hexdigest(),
+        "execution_environment": "Python with numpy.linalg.eigvalsh",
         "model": "independent BM reciprocal-lattice plane-wave reconstruction",
         "sources": {
             "bm2011": "10.1073/pnas.1108174108",
             "xiao2026_ratio": "10.1038/s41586-026-10378-x",
-            "external_implementation_crosscheck":
-                "https://github.com/R-Carrasco/tbg-simulator (MIT)",
+            "external_implementation_crosscheck": "R-Carrasco/tbg-simulator (MIT)",
         },
         "xiao_ratio_reference_fixture": {
             "theta_deg": 1.08,
             "wAB_eV_generic_reference": 0.11,
             "wAA_over_wAB": 0.6,
             "same_sample_absolute_calibration": False,
-            "convergence": xiao_convergence,
+            "convergence": {
+                key: compact_convergence(value)
+                for key, value in xiao_convergence.items()
+            },
         },
         "relaxed_reference_crosscheck": {
             "wAA_eV": 0.0797,
@@ -174,18 +196,15 @@ def main():
             "minimum_theta_deg": best_theta,
             "minimum_bandwidth_eV": best_result["bandwidth_eV"],
         },
+        "assertions_passed": True,
         "promotion_boundaries": {
             "interacting_self_energy": False,
             "qtm_data_replay": False,
             "same_sample_entropy": False,
             "xiao_absolute_sample_calibration": False,
+            "agda_kernel_receipt": False,
         },
     }
-
-    assert all(v["hermiticity_error"] < 1e-12 for v in xiao_convergence.values())
-    assert abs(xiao_convergence["4"]["bandwidth_eV"]
-               - xiao_convergence["3"]["bandwidth_eV"]) < 1e-4
-    assert abs(best_theta - 1.085) < 0.006
     print(json.dumps(receipt, indent=2, sort_keys=True))
 
 
