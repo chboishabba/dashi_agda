@@ -7,6 +7,9 @@ open import Agda.Builtin.Bool using (false; true)
 import DASHI.Quantum.QuantumMereologyMaxCutExact as MaxCut
 import DASHI.Quantum.QuantumMereologyFiniteQuantumProducerAuthorityExact as Finite
 import DASHI.Quantum.QuantumMereologyTripartiteInformationAtlasAuthorityExact as Tripartite
+import DASHI.Quantum.QuantumMereologyFiniteNChartedAtlasAuthorityExact as FiniteN
+import DASHI.Quantum.QuantumMereologyPointerObjectivity2026Exact as Pointer2026
+import DASHI.Quantum.QuantumMereologySelectionConvergence2026Exact as Selection2026
 
 source-written-producer-does-not-create-selection :
   MaxCut.sourceWrittenProducerCreatesSelection
@@ -134,6 +137,27 @@ tripartite-atlas-does-not-create-general-n-factor-atlas =
   Tripartite.TripartiteAtlasCreatesGeneralNFactorAtlasIsFalse
     Tripartite.canonicalTripartiteInformationAtlasStatus
 
+finite-n-charted-pair-extraction-source-written :
+  FiniteN.ChartedFiniteNPairExtractionSourceWritten
+    FiniteN.canonicalFiniteNChartedAtlasStatus ≡ true
+finite-n-charted-pair-extraction-source-written =
+  FiniteN.ChartedFiniteNPairExtractionSourceWrittenIsTrue
+    FiniteN.canonicalFiniteNChartedAtlasStatus
+
+finite-n-charted-pair-density-source-written :
+  FiniteN.ChartedPairMarginalDensitySourceWritten
+    FiniteN.canonicalFiniteNChartedAtlasStatus ≡ true
+finite-n-charted-pair-density-source-written =
+  FiniteN.ChartedPairMarginalDensitySourceWrittenIsTrue
+    FiniteN.canonicalFiniteNChartedAtlasStatus
+
+finite-n-charted-atlas-does-not-create-physical-selected-tps-atlas :
+  FiniteN.ChartedAtlasCreatesHeterogeneousSelectedTPSAtlas
+    FiniteN.canonicalFiniteNChartedAtlasStatus ≡ false
+finite-n-charted-atlas-does-not-create-physical-selected-tps-atlas =
+  FiniteN.ChartedAtlasCreatesHeterogeneousSelectedTPSAtlasIsFalse
+    FiniteN.canonicalFiniteNChartedAtlasStatus
+
 ccm-distance-ansatz-does-not-create-metric :
   Finite.CCMDistanceAnsatzCreatesMetric
     Finite.canonicalFiniteQuantumProducerStatus ≡ false
@@ -161,3 +185,31 @@ arbitrary-selected-cpo-eigenbasis-remains-open :
 arbitrary-selected-cpo-eigenbasis-remains-open =
   Finite.ArbitrarySelectedCPOEigenbasisPaidIsFalse
     Finite.canonicalFiniteQuantumProducerStatus
+
+commuting-pointer-criterion-agreement-is-source-attributed :
+  Pointer2026.CommutingSourceReportsCriterionAgreement
+    Pointer2026.canonicalPointerObjectivity2026Status ≡ true
+commuting-pointer-criterion-agreement-is-source-attributed =
+  Pointer2026.CommutingSourceReportsCriterionAgreementIsTrue
+    Pointer2026.canonicalPointerObjectivity2026Status
+
+noncommuting-pointer-identification-remains-explicit :
+  Pointer2026.NoncommutingDynamicsCreatesAutomaticPointerIdentification
+    Pointer2026.canonicalPointerObjectivity2026Status ≡ false
+noncommuting-pointer-identification-remains-explicit =
+  Pointer2026.NoncommutingDynamicsCreatesAutomaticPointerIdentificationIsFalse
+    Pointer2026.canonicalPointerObjectivity2026Status
+
+cross-objective-selection-agreement-requires-witness :
+  Selection2026.CrossObjectiveAgreementRequiresExplicitWitness
+    Selection2026.canonicalSelectionConvergence2026Status ≡ true
+cross-objective-selection-agreement-requires-witness =
+  Selection2026.CrossObjectiveAgreementRequiresExplicitWitnessIsTrue
+    Selection2026.canonicalSelectionConvergence2026Status
+
+shared-candidate-carrier-does-not-create-same-preferred-tps :
+  Selection2026.SharedCandidateCarrierCreatesSamePreferredTPS
+    Selection2026.canonicalSelectionConvergence2026Status ≡ false
+shared-candidate-carrier-does-not-create-same-preferred-tps =
+  Selection2026.SharedCandidateCarrierCreatesSamePreferredTPSIsFalse
+    Selection2026.canonicalSelectionConvergence2026Status
