@@ -29,6 +29,10 @@ files=(
   DASHI/Physics/CondensedMatter/MATBGInteractingTHFLiteralMatricesValidation.agda
   DASHI/Physics/CondensedMatter/MATBGTHFHubbardIAtomicReplayReceiptExact.agda
   DASHI/Physics/CondensedMatter/MATBGTHFHubbardIAtomicReplayValidation.agda
+  DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMExact.agda
+  DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMValidation.agda
+  DASHI/Physics/CondensedMatter/MATBGQTMMatrixElementObserverReceiptExact.agda
+  DASHI/Physics/CondensedMatter/MATBGQTMMatrixElementObserverValidation.agda
   DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorics2026Exact.agda
   DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorics2026Validation.agda
   DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorialReplayReceiptExact.agda
@@ -72,6 +76,8 @@ for artifact in \
   Docs/evidence/matbg_bm_plane_wave_replay_2026-10-16.json \
   scripts/matbg_bm_quantum_geometry.py \
   Docs/evidence/matbg_bm_quantum_geometry_2026-10-16.json \
+  scripts/matbg_qtm_matrix_element_observer.py \
+  Docs/evidence/matbg_qtm_matrix_element_observer_2026-10-16.json \
   scripts/matbg_thf_hubbard_i_atomic_reference.py \
   Docs/evidence/matbg_thf_hubbard_i_atomic_reference_2026-10-16.json \
   scripts/matbg_entropy_combinatorial_replay.py \
@@ -98,6 +104,9 @@ grep -q 'projectorGeometryExecutionPaid' DASHI/Physics/CondensedMatter/MATBGQuan
 grep -q 'xiao2026THFParameters' DASHI/Physics/CondensedMatter/MATBGInteractingTHF2026SourceExact.agda
 grep -q 'hcKPrime' DASHI/Physics/CondensedMatter/MATBGInteractingTHFLiteralMatricesExact.agda
 grep -q 'atomicReferenceExecutionPaid' DASHI/Physics/CondensedMatter/MATBGTHFHubbardIAtomicReplayReceiptExact.agda
+grep -q 'selfConsistencyEquationsSourcePaid' DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMExact.agda
+grep -q 'qtmElectrostaticsSourcePaid' DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMExact.agda
+grep -q 'wavefunctionObserverExecutionPaid' DASHI/Physics/CondensedMatter/MATBGQTMMatrixElementObserverReceiptExact.agda
 grep -q 'highTemperatureMicrostates' DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorics2026Exact.agda
 grep -q 'combinatorialLogarithmReplayPaid' DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorialReplayReceiptExact.agda
 grep -q 'entropySwingExecutionPaid' DASHI/Physics/CondensedMatter/MATBGGeometryCaloricUpperBoundReceiptExact.agda
