@@ -5,7 +5,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPHaltingCodedCandidateExactPhaseB
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Maybe using (nothing)
 open import Data.Product using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (cong)
@@ -13,12 +13,14 @@ import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
+import DASHI.Mathematics.Complexity.CodedStandardPolynomialDeciderExact as InputCodec
 import DASHI.Mathematics.Complexity.CodedStandardHaltingPolynomialDeciderExact as Halting
 import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact as Phase
 import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseRunExact as PhaseRun
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
+import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact as Language
 
 candidatePhaseCode :
   ∀ {decider : Cook.BooleanFormula → Bool}
@@ -32,38 +34,21 @@ candidatePhaseCode witness formula =
 candidatePhaseStart :
   ∀ {decider : Cook.BooleanFormula → Bool}
     (witness : Halting.CodedStandardHaltingPolynomialDecider decider)
-    (guarded : Halting.GuardedExecutionReceipt witness)
     (formula : Cook.BooleanFormula) →
   Standard.StandardConfiguration
     (Presented.finitePresentedStandardMachine
       (Coded.decodeCodedStandardTM (candidatePhaseCode witness formula)))
-candidatePhaseStart witness guarded formula =
+candidatePhaseStart witness formula =
   PhaseRun.phaseEmbedAt
     (Halting.code witness)
     Fin.zero
-    (Halting.CodedStandardHaltingPolynomialDecider.code witness
-      `dummy` formula)
-  where
-    infix 0 _`dummy`_
-    _`dummy`_ :
-      Coded.CodedFiniteStandardTM → Cook.BooleanFormula →
-      Standard.StandardConfiguration
-        (Presented.finitePresentedStandardMachine
-          (Coded.decodeCodedStandardTM (Halting.code witness)))
-    code `dummy` φ =
-      let run = Halting.guardedExecution guarded φ in
-      startOf run
-
-    startOf :
-      ∀ {steps start finish} →
-      Run.StandardExactRun
-        (Presented.finitePresentedStandardMachine
-          (Coded.decodeCodedStandardTM (Halting.code witness)))
-        steps start finish →
-      Standard.StandardConfiguration
-        (Presented.finitePresentedStandardMachine
-          (Coded.decodeCodedStandardTM (Halting.code witness)))
-    startOf {start = start} run = start
+    (Language.guardedStandardStart
+      (InputCodec.formulaInput
+        (Halting.code witness)
+        (Halting.zeroSymbol witness)
+        (Halting.oneSymbol witness)
+        formula)
+      (Halting.actualSteps witness formula))
 
 candidatePhaseFinish :
   ∀ {decider : Cook.BooleanFormula → Bool}
@@ -88,7 +73,7 @@ candidatePhaseExecution :
     (Presented.finitePresentedStandardMachine
       (Coded.decodeCodedStandardTM (candidatePhaseCode witness formula)))
     (Halting.actualSteps witness formula)
-    (candidatePhaseStart witness guarded formula)
+    (candidatePhaseStart witness formula)
     (candidatePhaseFinish witness guarded formula)
 candidatePhaseExecution witness guarded formula =
   PhaseRun.phaseLiftExactRun (Halting.guardedExecution guarded formula)
@@ -160,7 +145,6 @@ candidatePhaseEndpointTransitionNothing witness guarded formula =
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- Exact-T return freshness now uses the machine's actual operational halting
--- runtime, not the polynomial upper bound.  The phase wrapper changes only
--- finite control and preserves the exact guarded candidate run edge-for-edge.
+-- Exact return freshness is indexed by the machine's actual operational
+-- halting runtime, not by its polynomial upper bound.
 ------------------------------------------------------------------------
