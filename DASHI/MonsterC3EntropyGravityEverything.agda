@@ -81,4 +81,5 @@ import DASHI.Physics.Closure.MonsterC3EntropyGravityValidation
 
 -- Same-object exceptional -> entropy/stress -> CMP119 cosmology compiler.
 import DASHI.Physics.Closure.MonsterExceptionalEntropyGravityCompilerExact
+import DASHI.Physics.Closure.JackDanielsExceptionalGravityTerminalMaxCutExact
 import DASHI.Physics.Closure.JackDanielsExceptionalGravityValidation
