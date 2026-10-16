@@ -3,6 +3,7 @@ module DASHI.Physics.QuantumVacuum.Casimir369StressEnergyTerminalMaxCutValidatio
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.Casimir369StressEnergyTerminalMaxCutExact as Terminal
+import DASHI.Physics.QuantumVacuum.Casimir369StressEnergySourceNativeTerminalValidation
 import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationValidation
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressValidation
