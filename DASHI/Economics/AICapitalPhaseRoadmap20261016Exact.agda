@@ -14,6 +14,7 @@ import DASHI.Economics.AICoreWeaveSameObjectFinancingClock20261016Exact as Finan
 import DASHI.Economics.AICoreWeave2032BondRepricing20261016Exact as Bond
 import DASHI.Economics.AICoreWeaveMicrosoftHistoricalRevenue20261016Exact as MicrosoftRevenue
 import DASHI.Economics.AIAustraliaDataCentrePolicyShift20261016Exact as AUInfraPolicy
+import DASHI.Economics.AIContractBackedFinancingReplication20261016Exact as FinancingReplication
 
 data PhaseState : Set where
   structurallyPaid currentAcquisition longitudinalIdentification causalAttribution outcomeValidation : PhaseState
@@ -43,18 +44,18 @@ phase1EmpiricalCoordinates : PhaseDeliverable
 phase1EmpiricalCoordinates = phase-deliverable
   "Phase 1 — same-object empirical coordinate acquisition"
   currentAcquisition
-  "aggregate CoreWeave customer cash; historical Microsoft named recognised revenue; capacity-vintage surfaces; same-object CoreWeave contractual GPU depreciation 66-78 months with common six-year basis; project/customer-specific DDTL financing spreads; customer-credit-to-financing coupling; DDTL4 borrower-SPV to Polaris Forge 1 site mapping; DDTL3 named OpenAI/Phoenix 1 cash-control architecture, contract-realisation metric and private GPU-rack serial reporting; CRR equity-cure mechanism plus non-descent of covenant compliance to customer cash; current multi-generation rental ladder; commercial secondary-market residual-value envelope; provider segment costs and owned-node acquisition/depreciation envelopes"
+  "aggregate CoreWeave customer cash; historical Microsoft named recognised revenue; capacity-vintage surfaces; same-object CoreWeave contractual GPU depreciation 66-78 months with common six-year basis; project/customer-specific DDTL financing spreads; customer-credit-to-financing coupling; DDTL4 borrower-SPV to Polaris Forge 1 site mapping; DDTL3 named OpenAI/Phoenix 1 cash-control architecture, contract-realisation metric and private GPU-rack serial reporting; CRR equity-cure mechanism plus non-descent of covenant compliance to customer cash; current multi-generation rental ladder; commercial secondary-market residual-value envelope; provider segment costs and owned-node acquisition/depreciation envelopes; cross-company replication through Nebius GPU/contract-cash-backed secured debt and IREN Microsoft prepayment-before-delivery"
   "public OpenAI customer-cash versus CRR-cure decomposition; public contract-realisation ratio; public GPU serial/generation inventory; exact financed MW/count; workload-normalised provider serving cost; exact owned-node PUE/operations; CoreWeave-owned realised residual/resale receipts; serial refresh/retirement; realised generation ASP/utilisation; realised enacted-obligation compliance costs"
-  "each previously-open coordinate is populated from the same economic object and same declared horizon/basis, or explicitly classified as privately measured but publicly unobserved; covenant/equity-cure values must not be collapsed into customer cash"
+  "each previously-open coordinate is populated from the same economic object and same declared horizon/basis, or explicitly classified as privately measured but publicly unobserved; covenant/equity-cure values must not be collapsed into customer cash; common financing mechanisms must not be promoted to common realised returns"
   false
 
 phase2Longitudinal : PhaseDeliverable
 phase2Longitudinal = phase-deliverable
   "Phase 2 — longitudinal identification"
   longitudinalIdentification
-  "dated state machinery, fixed-basket market series, open-weight production trajectory, debt/vintage scenario calendars, same-issuer CoreWeave CDS deterioration, and same-instrument 9.625-percent 2032 note repricing from issue coupon to above-15-percent October yield"
-  "repeat full X_t under identical producer definitions; repeat same-instrument bond/CDS observations plus realised refinancing/default/restructuring; customer-cash-versus-cure histories; same-generation price/utilisation/resale decay; named contract-realisation histories; repeat Vercel model/provider shares under the same published methodology"
-  "at least two comparable later state points across each promoted consumer with unchanged measurement contracts, permitting persistence/regime inference rather than one stressed issuer/instrument coordinate"
+  "dated state machinery, fixed-basket market series, open-weight production trajectory, debt/vintage scenario calendars, same-issuer CoreWeave CDS deterioration, same-instrument 9.625-percent 2032 note repricing, and a first cross-company financing cohort with CoreWeave, Nebius and IREN"
+  "repeat full X_t under identical producer definitions; compare realised financing/refinancing/project-return outcomes across the CoreWeave/Nebius/IREN cohort; repeat same-instrument bond/CDS observations plus realised refinancing/default/restructuring; customer-cash-versus-cure histories; same-generation price/utilisation/resale decay; named contract-realisation histories; repeat Vercel model/provider shares under the same published methodology"
+  "at least two comparable later state points across each promoted consumer and multiple financing subjects under unchanged measurement contracts, permitting persistence/regime inference rather than one stressed issuer or one financing design"
   false
 
 phase3CausalPolicy : PhaseDeliverable
@@ -70,8 +71,8 @@ phase4OutcomeValidation : PhaseDeliverable
 phase4OutcomeValidation = phase-deliverable
   "Phase 4 — real-world outcome / thesis falsification"
   outcomeValidation
-  "predeclared rival signatures plus current compatibility surface: refinancing stress remains strongly compatible; commoditisation-with-volume-growth remains strongly compatible; orderly capital rotation is now co-leading on selected coordinates because open-weight expansion coexists with closed-model spend growth and provider intermediation; Anthropic's reported adjusted profitability is a bounded durable-rent counterweight; no terminal regime is selected"
-  "populate missing signature coordinates longitudinally and discriminate among rivals only when same-basis realised returns, funding/refinancing outcomes, provider-layer rent trajectories, scarcity-rent trajectories, utilisation, customer-cash decomposition and market-structure observations are available"
+  "predeclared rival signatures plus current compatibility surface: refinancing stress remains strongly compatible; commoditisation-with-volume-growth remains strongly compatible; orderly capital rotation is now co-leading on selected coordinates because open-weight expansion coexists with closed-model spend growth and provider intermediation; Anthropic's reported adjusted profitability is a bounded durable-rent counterweight; contract-backed infrastructure financing is replicated across multiple firms; no terminal regime is selected"
+  "populate missing signature coordinates longitudinally and discriminate among rivals only when same-basis realised returns, cross-company financing/refinancing outcomes, provider-layer rent trajectories, scarcity-rent trajectories, utilisation, customer-cash decomposition and market-structure observations are available"
   "one or more hypotheses are discriminated without post-hoc redefining the consumer; currentOutcomePromotionReady and anyTerminalRegimeSelected remain false until those longitudinal payments exist"
   false
 
@@ -113,6 +114,9 @@ australianPolicyLocusShiftPaid = AUInfraPolicy.policyLocusShiftPaid
 australianDataCentreEnactmentStillOpen : AUInfraPolicy.newMandatoryDataCentreDutyEnacted AUInfraPolicy.currentPolicyShift ≡ false
 australianDataCentreEnactmentStillOpen = AUInfraPolicy.enactmentStillOpen
 
+crossCompanyFinancingReplicationPaid : FinancingReplication.crossCompanyMechanismReplication ≡ true
+crossCompanyFinancingReplicationPaid = FinancingReplication.crossCompanyReplicationPaid
+
 orderlyRotationCounterweightPaid : Fit.supportedCoordinates Fit.orderlyCapitalRotationFit ≡ 6
 orderlyRotationCounterweightPaid = Fit.orderlyRotationNowCoLeadingOnSelectedCoordinates
 
@@ -127,4 +131,4 @@ compatibilityDoesNotSelectRegime = refl
 
 boundary : String
 boundary =
-  "The roadmap is measurement-first and now materially more same-object. Phase 1 has identified private lender measurement surfaces for named OpenAI/Phoenix 1 customer cash, contract realization and GPU serials rather than merely hypothesizing missing variables. Phase 2 contains same-issuer CDS deterioration and same-instrument bond repricing and now explicitly requires repeated Vercel/provider-share observations under versioned methodology. Phase 3 is split by regulatory locus: model/deployment rules and data-centre infrastructure externality rules are different consumers. Phase 4 no longer treats orderly capital rotation as a weak fallback: Vercel's simultaneous open/closed spending and US-provider intermediation of Chinese-origin models plus Anthropic's reported adjusted profitability materially strengthen rotation/frontier-rent counterweights. Refinancing stress, commoditisation and orderly rotation are all live; no terminal regime is selected until realised longitudinal cash, asset, financing, provider-rent and market-structure outcomes discriminate them."
+  "The roadmap is measurement-first and now materially more same-object. Phase 1 has identified private lender measurement surfaces for named OpenAI/Phoenix 1 customer cash, contract realization and GPU serials and has replicated customer/contract-linked financing across Nebius and IREN rather than treating CoreWeave as the sole mechanism specimen. Phase 2 therefore shifts from mechanism discovery to cross-company realised outcomes: compare refinancing, project return and persistence under different debt/prepayment structures while repeating Vercel/provider-share observations under versioned methodology. Phase 3 is split by regulatory locus: model/deployment rules and data-centre infrastructure externality rules are different consumers. Phase 4 keeps refinancing stress, commoditisation and orderly capital rotation simultaneously live; common contract-backed financing does not select any of them without realised returns and cash-flow outcomes."
