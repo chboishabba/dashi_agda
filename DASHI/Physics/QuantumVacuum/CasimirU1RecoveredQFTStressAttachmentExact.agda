@@ -24,16 +24,21 @@ record CasimirU1RecoveredQFTStressAttachment
     qftRecovery : Weld.QFTRecoveryReceipt U
 
     selectedGroup : QFT.CompactSimpleGroup (Weld.qftCarriers U)
-
-    selectedSU2Host :
-      SU2Host.CasimirSelectedQFTSU2Host U selectedGroup
+    selectedSU2Host : SU2Host.CasimirSelectedQFTSU2Host U selectedGroup
 
     stressEvaluator :
       Cut.CMP119RationalStressComponentEvaluator
         (QFT.StressTensor (Weld.qftCarriers U))
 
-    symmetricBrownMaclayPayment :
-      Reduction.CasimirBrownMaclaySymmetricTenComponentPayment
+    selectedStressCoordinateSymmetry :
+      Sym.PairingComponentSymmetry
+        stressEvaluator
+        (Weld.actualQFTStressTensor U
+          (Weld.coarseGrain U candidate regime)
+          selectedGroup)
+
+    brownMaclayTenValues :
+      Reduction.CasimirBrownMaclayTenIndependentValues
         stressEvaluator
         (Weld.actualQFTStressTensor U
           (Weld.coarseGrain U candidate regime)
@@ -41,7 +46,6 @@ record CasimirU1RecoveredQFTStressAttachment
 
     sameElectromagneticBoundaryObject : Set
     sameRenormalizedStressConvention : Set
-
     reading : String
 
 open CasimirU1RecoveredQFTStressAttachment public
@@ -72,21 +76,6 @@ selectedGroupHostReceipt :
   SU2Host.CasimirSelectedQFTSU2Host U (selectedGroup attachment)
 selectedGroupHostReceipt = selectedSU2Host
 
-selectedQFTStressSymmetryReceipt :
-  ∀ {U : Weld.UnifiedCandidate} →
-  (attachment : CasimirU1RecoveredQFTStressAttachment U) →
-  let stress =
-        Weld.actualQFTStressTensor U
-          (Weld.coarseGrain U
-            (candidate attachment)
-            (regime attachment))
-          (selectedGroup attachment)
-  in
-  Sym.PairingComponentSymmetry
-    (stressEvaluator attachment) stress
-selectedQFTStressSymmetryReceipt attachment =
-  Reduction.symmetry (symmetricBrownMaclayPayment attachment)
-
 actualSelectedQFTStress :
   ∀ {U : Weld.UnifiedCandidate} →
   CasimirU1RecoveredQFTStressAttachment U →
@@ -97,6 +86,33 @@ actualSelectedQFTStress {U} attachment =
       (candidate attachment)
       (regime attachment))
     (selectedGroup attachment)
+
+selectedQFTStressSymmetryReceipt :
+  ∀ {U : Weld.UnifiedCandidate} →
+  (attachment : CasimirU1RecoveredQFTStressAttachment U) →
+  Sym.PairingComponentSymmetry
+    (stressEvaluator attachment)
+    (actualSelectedQFTStress attachment)
+selectedQFTStressSymmetryReceipt = selectedStressCoordinateSymmetry
+
+selectedQFTBrownMaclayTenValuesReceipt :
+  ∀ {U : Weld.UnifiedCandidate} →
+  (attachment : CasimirU1RecoveredQFTStressAttachment U) →
+  Reduction.CasimirBrownMaclayTenIndependentValues
+    (stressEvaluator attachment)
+    (actualSelectedQFTStress attachment)
+selectedQFTBrownMaclayTenValuesReceipt = brownMaclayTenValues
+
+compiledSymmetricBrownMaclayPayment :
+  ∀ {U : Weld.UnifiedCandidate} →
+  (attachment : CasimirU1RecoveredQFTStressAttachment U) →
+  Reduction.CasimirBrownMaclaySymmetricTenComponentPayment
+    (stressEvaluator attachment)
+    (actualSelectedQFTStress attachment)
+compiledSymmetricBrownMaclayPayment attachment =
+  Reduction.compileSymmetryAndTenValues
+    (selectedStressCoordinateSymmetry attachment)
+    (brownMaclayTenValues attachment)
 
 actualSelectedQFTStressComponent :
   ∀ {U : Weld.UnifiedCandidate} →
@@ -115,7 +131,7 @@ actualSelectedQFTStressComponentIsBrownMaclay :
   ≡ CasimirGRQFT.casimirNormalizedRationalTensor4 a b
 actualSelectedQFTStressComponentIsBrownMaclay attachment =
   Reduction.casimirTenComponentsCompileToTensorEquality
-    (symmetricBrownMaclayPayment attachment)
+    (compiledSymmetricBrownMaclayPayment attachment)
 
 actualSelectedQFTSectorShared :
   ∀ {U : Weld.UnifiedCandidate} →
@@ -167,6 +183,7 @@ record CasimirU1RecoveredQFTStressAttachmentBoundary : Set where
     selectedQFTSectorStressAttachmentInterfaceOwned : Bool
     recoveredQFTCommutationConsumed : Bool
     concreteSU2HostReceiptRequired : Bool
+    symmetryAndTenValuesSeparatedInAttachment : Bool
     symmetricTenComponentBrownMaclayCompilerConsumed : Bool
     componentwiseBrownMaclayEqualityTargetOwned : Bool
     sixteenIndependentBrownMaclayComponentsRequired : Bool
@@ -186,9 +203,9 @@ canonicalCasimirU1RecoveredQFTStressAttachmentBoundary :
   CasimirU1RecoveredQFTStressAttachmentBoundary
 canonicalCasimirU1RecoveredQFTStressAttachmentBoundary =
   casimir-u1-recovered-qft-stress-attachment-boundary
-    true true true true true true false true
+    true true true true true true true false true
     false false false false false false false
 
 casimirU1RecoveredQFTStressAttachmentReading : String
 casimirU1RecoveredQFTStressAttachmentReading =
-  "The first Casimir GR/QFT unification stress attachment is explicit and minimized. QFT recovery commutes to the selected target. The group-host payment is a concrete CasimirSelectedQFTSU2Host receipt. The stress payment then separates into coordinate symmetry for the same actual selected QFT stress plus ten independent Brown-Maclay component values 00,01,02,03,11,12,13,22,23,33; six lower-triangular equations are compiler output. Existing qftSectorStressToShared handles selected-sector transport after full equality. None of these selected-sector payments imply all-sector aggregation, common-action variation, GR equality, backreaction, or unified-QG promotion."
+  "The selected-QFT Casimir attachment now exposes the terminal cut literally: selected SU(2) host, coordinate symmetry on the same actual recovered selected-QFT stress/evaluator, and ten independent Brown-Maclay values are separate fields. Symmetry plus ten values compile internally to all sixteen component equalities; no bundled receipt can hide either unpaid coordinate. Existing qftSectorStressToShared then handles selected-sector transport. None of these selected-sector payments imply all-sector aggregation, common-action variation, GR equality, backreaction, or unified-QG promotion."
