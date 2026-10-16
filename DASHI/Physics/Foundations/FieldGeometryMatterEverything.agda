@@ -71,6 +71,8 @@ import DASHI.Physics.Foundations.CasimirGravityScalingReceiptExact
 import DASHI.Physics.Foundations.CasimirGravityScalingValidation
 import DASHI.Physics.Foundations.CasimirFiniteDiskGravityProxyReceiptExact
 import DASHI.Physics.Foundations.CasimirFiniteDiskGravityProxyValidation
+import DASHI.Physics.Foundations.CasimirIdealSheetScalingCeilingReceiptExact
+import DASHI.Physics.Foundations.CasimirIdealSheetScalingCeilingValidation
 
 import DASHI.Physics.Foundations.PrecisionThrustClosureExact
 import DASHI.Physics.Foundations.PrecisionThrustClosureValidation
