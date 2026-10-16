@@ -51,12 +51,12 @@ open ScientificAcquisitionItem public
 bh4FluxDataset : ScientificAcquisitionItem
 bh4FluxDataset =
   scientificAcquisitionItem
-    "A1 BH4 same-system flux discriminator dataset" fluxDataset
-    "Kitzerow BH4 flux causal models"
-    "BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO under controlled perturbation"
-    "primary experimental dataset with exact methods/sample context"
-    "dataset/table/supplement locator plus assay calibration"
-    "separates symbolic pool balance from measured branch allocation and discriminates H1/H2/H3/H4"
+    "A1 target-relevant multi-branch BH4 allocation discriminator beyond paid hepatic/neural constraints" fluxDataset
+    "Kitzerow BH4 flux causal models + hepatic competition + neural state-history discriminators"
+    "BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO plus enzyme abundance/localization, compartment, region/cell type, developmental history and timing under controlled perturbation"
+    "primary target-relevant interventional dataset with exact methods/sample/context and same-object branch readouts"
+    "dataset/table/supplement locator plus assay calibration; must preserve region/cell/compartment/time rather than collapse to total BH4"
+    "extends the paid rat-hepatic PAH-iNOS conditional-competition result and mouse neural current-pool-rescue counterexamples to discriminate adaptive allocator, downstream consequence, parallel-redox and context/state-history alternatives"
     independentPrimaryMeasurement 5 10 10 8 0 true refl
 
 pahAtomMap : ScientificAcquisitionItem
@@ -196,6 +196,7 @@ brazilCorrespondenceArtifact =
     originatorReportedOnly 4 10 0 0 true refl
 
 iaccMedMapsContactArtifact : ProvenanceAcquisitionItem
+  
 iaccMedMapsContactArtifact =
   provenanceAcquisitionItem
     "P3 IACC/MedMaps contact provenance" contactMessageArtifact
