@@ -52,3 +52,9 @@ import DASHI.Governance.DeliberativeViableNonDominationLoopRegression
 -- advantage and proof-relevant non-domination remain separate payments and
 -- must be bound to the same target with realised-control/concentration audits.
 import DASHI.Governance.BoloBoloLongitudinalNonDominationEverything
+
+-- Consumer-relative information-loss theorem for non-domination measurement:
+-- identical burden/capacity/backlog can hide different agenda/delegation/
+-- reopening control; every adequate realised-control observer must refine the
+-- declared control consumer.
+import DASHI.Governance.BoloBoloNonDominationObserverSufficiencyEverything
