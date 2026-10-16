@@ -30,6 +30,15 @@ def test_bridge_reuses_signed369_and_descent_owners():
     assert "goldbachReductionConsumerBoundary" in text
 
 
+def test_success_path_exposes_static_dynamic_tradeoff():
+    text = BRIDGE.read_text()
+    assert "oldSuccessExecutionLength" in text
+    assert "newSuccessExecutionLength" in text
+    assert "newSuccessExecutionLengthIsOneMore" in text
+    assert "staticReductionCanIncreaseSuccessExecutionLength" in text
+    assert "shortestProgramLengthEqualsExecutionLengthIsFalse" in text
+
+
 def test_no_unpaid_full_bisimulation_claim():
     text = BRIDGE.read_text()
     assert "fullReachableWeakBisimulationPaid" in text
