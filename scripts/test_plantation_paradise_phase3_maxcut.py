@@ -13,6 +13,8 @@ EXPECTED = {
         "primaryCorpusCandidate", "actorDistributionCandidate",
         "compensationSettlementCandidate", "seatingRuleCandidate",
         "causalIdentificationCandidate", "canonicalITIRBoundary",
+        "PrimaryIssueChronologyReopening", "primaryIssueReopensChronology",
+        "primaryIssueReopensEventLedger", "actorCompensationReopensDistribution",
         "canonicalPowersInvestigationRoutingBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseHistoricalDiscriminatorExact.agda": [
@@ -47,9 +49,15 @@ EXPECTED = {
     ],
     "DASHI/Culture/PowersPlantationParadiseEmpiricalPhase3Validation.agda": [
         "_methodology-boundary-paid", "_five-axis-routing-paid",
-        "_discriminator-boundary-paid", "_sensory-access-gap-paid",
-        "_evidence-graph-boundary-paid", "_performance-probe-boundary-paid",
-        "_roadmap-boundary-paid", "roadmapBoundary",
+        "_selective-reopening-paid", "_discriminator-boundary-paid",
+        "_sensory-access-gap-paid", "_evidence-graph-boundary-paid",
+        "_performance-probe-boundary-paid", "_roadmap-boundary-paid", "roadmapBoundary",
+    ],
+    "DASHI/Culture/PowersPlantationParadiseSynthesisExact.agda": [
+        "methodologySourceBoundary", "investigationRoutingBoundary",
+        "historicalDiscriminatorBoundary", "sensoryAccessBoundary",
+        "evidenceGraphBoundary", "researchThroughPerformanceBoundary",
+        "empiricalRoadmapBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseValidation.agda": [
         "PowersPlantationParadiseEmpiricalPhase3Validation",
