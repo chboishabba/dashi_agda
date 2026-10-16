@@ -24,18 +24,26 @@ twoCellCocycleReady = refl
 policyDepthReady : Frontier.policyIndexedDepthReady boundary ≡ true
 policyDepthReady = refl
 
-directHypercoverApiNotYetFound :
-  Frontier.directHypercoverAPIAlreadyFoundInRepo boundary ≡ false
-directHypercoverApiNotYetFound = refl
+finiteTriadicHypercoverApiPaid :
+  Frontier.finiteTriadicHypercoverAPIConstructed boundary ≡ true
+finiteTriadicHypercoverApiPaid = refl
 
-truncationHypercompleteWeldNotYetPaid :
-  Frontier.truncationHypercompleteTheoremAlreadyWelded boundary ≡ false
-truncationHypercompleteWeldNotYetPaid = refl
+finiteHypersheafPaid :
+  Frontier.finiteOneTruncatedHypersheafCertified boundary ≡ true
+finiteHypersheafPaid = refl
 
-allOtherPrerequisitesPaid :
-  Frontier.allNonHypercoverPrerequisitesPaid boundary ≡ true
-allOtherPrerequisitesPaid = refl
+arbitraryInfinityHypercoverNotYetOwned :
+  Frontier.arbitraryInfinityHypercoverAPIAlreadyFoundInRepo boundary ≡ false
+arbitraryInfinityHypercoverNotYetOwned = refl
 
-singleTypedFrontier :
-  Frontier.hypersheafPromotionNowHasSingleTypedFrontier boundary ≡ true
-singleTypedFrontier = refl
+arbitraryHypercompleteTheoremNotYetOwned :
+  Frontier.arbitraryTruncationHypercompleteTheoremAlreadyWelded boundary ≡ false
+arbitraryHypercompleteTheoremNotYetOwned = refl
+
+allFinitePrerequisitesPaid :
+  Frontier.allFiniteTriadicHypersheafPrerequisitesPaid boundary ≡ true
+allFinitePrerequisitesPaid = refl
+
+onlyInfinityHyperdescentRemains :
+  Frontier.remainingFrontierIsOnlyArbitraryInfinityHyperdescent boundary ≡ true
+onlyInfinityHyperdescentRemains = refl
