@@ -10,7 +10,7 @@ REQUIRED = {
     ],
     "DASHI/Physics/Optics/DiffuserPhysicalForwardWeldExact.agda": [
         "record PhysicalDiffuserForwardWeld",
-        "cameraModel",
+        "Camera.DiffuserForwardModel",
         "encodeIsPhysicalIntensity",
         "depthPSFIsPhysical",
     ],
