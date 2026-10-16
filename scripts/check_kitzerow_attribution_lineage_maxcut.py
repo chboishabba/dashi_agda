@@ -90,6 +90,7 @@ for needle in [
 for needle in [
     "republicationAndReportMultiplicityDoNotCreateIndependence",
     "contactChronologyDoesNotCollapseIntoDerivation",
+    "laterReplyCreatesNewProvenanceWithoutRewritingEarlierHistory",
     "plagiarismEvidenceKindsRemainDistinct",
     "brazilPostPublicationContactCannotPayEarlierExposure",
     "similarityToolsAreDiscoveryInputsNotAdjudicators",
