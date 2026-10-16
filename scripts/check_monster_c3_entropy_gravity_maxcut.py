@@ -2,7 +2,8 @@
 """Structural audit for the Monster/C3/369 chemistry/entropy/gravity max-cut.
 
 This is not an Agda typecheck and not physical validation. It checks exact
-finite arithmetic plus the presence of terminal proof/promotion markers.
+finite arithmetic plus the presence of the current representation-native
+promotion markers.
 """
 from pathlib import Path
 
@@ -28,7 +29,7 @@ def main() -> None:
     check("ternary residual 53", (3 + 3) * 9 - 1 == 53)
     check("extended ternary 71", (3 + 3 + 2) * 9 - 1 == 71)
     check("Monster degree two ways", 53 + 3 * 65610 == 196883 == 47 * 59 * 71)
-    check("zeta model dimension", 729 * 90 == 65610)
+    check("zeta finite basis-label dimension", 729 * 90 == 65610)
     check("three regular fibres", 3 * 65610 == 196830)
     check("regular plus residual", 196830 + 53 == 196883)
 
@@ -53,6 +54,36 @@ def main() -> None:
         "nh3MonsterInversionIntertwines",
         "nh3MonsterFourierRowsIntertwine",
         "quotientIntertwinerCreatesStateIntertwiner",
+    )
+    require(
+        "DASHI/Moonshine/Monster3BWZetaBasisVectorRecognitionCorrectionExact.agda",
+        "ActualZetaBasisRecognition",
+        "ActualMultiplicityBasisRecognition",
+        "finiteBasisLabelsDoNotBecomeAllVOAStates",
+        "wholeLiteralSectorBijectionToFiniteLabelsRequired",
+    )
+    require(
+        "DASHI/Moonshine/Monster3BProofRelevantRecognitionHardeningExact.agda",
+        "PaidSchrodingerIsActualHZeta",
+        "PaidActualLinearMultiplicityHomSpace",
+        "PaidActualZetaBasisRecognition",
+        "typedObligationDoesNotCreateRecognitionWitness",
+    )
+    require(
+        "DASHI/Moonshine/Monster3BHZetaCharacterTransportCompilerExact.agda",
+        "HZetaCharacterTransport",
+        "compiledEquivariantIso",
+        "compiledPaidHZetaRecognition",
+        "actualHZetaSameObjectInhabitedHere",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AmmoniaMonster3BRepresentationNativeCorrectionExact.agda",
+        "Native369ActualBasisChart",
+        "PhysicalNH3MonsterBasisAttachment",
+        "actualBasisToNative369",
+        "native369ToActualBasis",
+        "finiteChartDoesNotCreateWholeVOAStateBijection",
+        "phaseBijectionDoesNotCreatePhysicalAttachment",
     )
     require(
         "DASHI/Physics/Chemistry/AmmoniaMonster3BPhaseQuotientNonFactorabilityExact.agda",
@@ -82,71 +113,37 @@ def main() -> None:
     )
     require(
         "DASHI/Physics/Closure/MonsterC3Native369ConsumerSufficiencyExact.agda",
-        "phaseObserverSufficientForPhase",
-        "phaseObserverNotSufficientForWeight",
-        "phaseObserverNotSufficientForMultiplicity",
-        "phaseObserverNotSufficientForFineState",
-        "native369ObserverSufficientForFineState",
-        "phaseFineStateDoesNotFactor",
+        "BasisLabelState",
+        "phaseObserverNotSufficientForBasisLabel",
+        "native369ObserverSufficientForBasisLabel",
+        "finiteBasisLabelConsumerIsWholeLinearVOAStateConsumer",
     )
     require(
         "DASHI/Physics/Closure/MonsterC3Native369ZetaCountingEnsembleExact.agda",
-        "zetaStateCount",
+        "zetaBasisLabelCount",
         "65610",
         "native369ZetaCountingEnsemble",
+        "finiteBasisLabelsAreAllLinearWZetaStates",
         "nativeUniformCountingIsPhysicalThermalEnsemble",
     )
     require(
-        "DASHI/Physics/Chemistry/AmmoniaHamiltonianWavefunctionExact.agda",
-        "sameObjectSymbolicHamiltonianExpressionPaid",
-        "energyValuedHamiltonianOperatorPaid",
-        "literalOccupationBasisStatePaid",
-        "numericRealSpaceWavefunctionCoefficientsPaid",
+        "DASHI/Reasoning/Trialectic369Selected3BProjectionChoiceIndependenceExact.agda",
+        "projectedActionIndependentOfRetraction",
+        "SelectedEqualsIntrinsicConstituentAction",
+        "actualSourceRetractionConstructedHere",
+        "actualMonsterSameActionConstructedHere",
     )
     require(
-        "DASHI/Physics/Chemistry/AmmoniaGroundStateC3ActionExact.agda",
-        "foldOccupiedPhase",
-        "determinantPhaseComputedFromOccupiedCarrier",
-        "trivialGroundConfigurationC3RepresentationPaid",
-        "nontrivialRealSpaceWavefunctionC3ActionPaid",
-    )
-    require(
-        "DASHI/Physics/Chemistry/AmmoniaHydrogenAbstraction369HyperfibreExact.agda",
-        "atomic369InventoryEndpointsPaid",
-        "individualAtomIdentityTransportPaid",
-    )
-    require(
-        "DASHI/Physics/Chemistry/AmmoniaSTO3GFCIExact.agda",
-        "10.1088/2058-9565/ad7d32",
-        "sourceBackedFCIDiagonalizationPaid",
-    )
-    require(
-        "DASHI/Physics/Chemistry/AmmoniaSCIReleasedArtifactExact.agda",
-        "07541705a0305e75dab1de5bc1b8324d66fee778",
-        "55517555010",
-        "55519414318",
-        "paperBenchmarkAndArtifactAreSameNumericalObject",
-        "matrixIndependentlyRediagonalizedByDASHI",
-    )
-    require(
-        "DASHI/Physics/Chemistry/AmmoniaH3PlusC3ResolvedReactionExact.agda",
-        "fullProofRelevantC3ResolvedReactionTransitionPaid",
-        "4313",
-        "selectedC3EqualsFullProductPointGroup",
-    )
-    require(
-        "DASHI/Reasoning/Trialectic369Selected3BSemanticProjectedCompletionExact.agda",
-        "onlyLinearRetractionAndProjectedActionRemain",
-        "actualLinearRetractionInhabitedHere",
-        "projectedActionInputInhabitedHere",
-    )
-    require(
-        "DASHI/Physics/Closure/MonsterC3EntropyGravityMaxCutExact.agda",
-        "fullMonsterZetaNative369FineCarrierPaid",
-        "actualZetaRecognitionNative369CompilerPaid",
-        "physicalNH3Native369FineCoordinatePaid",
-        "native369ZetaCountingEnsemblePaid",
-        "observed3Plus1MonsterPaid",
+        "DASHI/Physics/Closure/MonsterC3RepresentationNativeTerminalMaxCutExact.agda",
+        "native369FiniteCarrierScopedToBasisLabels",
+        "native369FiniteCarrierIsWholeVOAStateCarrier",
+        "hZetaFixedPhaseRecognitionCompilerPaid",
+        "sZetaHomSpaceTargetTyped",
+        "selected3BProjectionChoiceIsIndependentBlocker",
+        "count65610IsFiniteBasisLabelCount",
+        "countingMeasureIsPhysicalEntropy",
+        "scalarEntropyDensityDeterminesEinsteinSource",
+        "monsterSymmetryOfObserved3Plus1UniversePaid",
     )
     require(
         "DASHI/Physics/Closure/EntropyGravityIntertwinerBoundaryExact.agda",
@@ -156,13 +153,14 @@ def main() -> None:
 
     print("monster/C3/369 chemistry/entropy/gravity structural audit: ok")
     print("NH3 A1+E = one regular-C3 block; Monster bulk uses 65610 blocks + residual 53")
-    print("phase quotient: exact for phase consumers, non-sufficient for fine-state consumers")
-    print("Monster zeta model: native369 Kernel6 x (Completed10 x T^2), 65610 microstates")
-    print("physical NH3->native369 state assignment remains explicitly unpaid")
-    print("hydrogen-abstraction 369 endpoint inventory is paid; individual atom identity is not")
-    print("symbolic Hamiltonian expression is paid; evaluated energy operator is not")
-    print("published benchmark and author-released CI artifacts remain distinct")
-    print("independent matrix rediagonalization remains explicitly unpaid")
+    print("phase quotient: exact for phase consumers, non-sufficient for finite basis-label identity")
+    print("native369 <-> X6 x Fin90 is a 65610 finite basis-label chart, not all W_zeta vectors")
+    print("representation-native target: H_zeta x Hom_E(H_zeta,W_zeta) <-> W_zeta")
+    print("fixed-phase H_zeta compiler and proof-relevant wrappers are present; same-object inputs remain gated")
+    print("selected-3B projection choice is no longer an independent blocker")
+    print("uniform 1/65610 counting is mathematical only; physical ensemble/entropy remains unpaid")
+    print("scalar entropy density remains insufficient for tensor-source/Einstein promotion")
+    print("observed 3+1D Monster symmetry remains explicitly unpaid")
 
 
 if __name__ == "__main__":
