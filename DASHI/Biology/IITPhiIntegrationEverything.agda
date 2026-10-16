@@ -20,6 +20,7 @@ import DASHI.Biology.IITXORGridFibreCircuitBridgeExact
 import DASHI.Biology.IITXORGridSynthesisFabricExact
 import DASHI.Biology.IITXORGridOrientationLiftExact
 import DASHI.Biology.IITXORGridLoopHolonomyExact
+import DASHI.Biology.IITGridTorqueC3HolonomyHandoffExact
 import DASHI.Biology.IITXORGridFibreCalibrationExact
 import DASHI.Biology.IITXORProbabilityReceiptExact
 import DASHI.Biology.IITXOREffectCutReceiptExact
