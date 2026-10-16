@@ -25,6 +25,7 @@ import DASHI.Biology.IITTernaryAffineMinimalSufficiencyExact
 import DASHI.Biology.IITParityTorqueGluingBoundaryExact
 import DASHI.Biology.IITBinaryTernaryParityTorqueLiftExact
 import DASHI.Biology.IITHigherOrderGluingDiscriminationExact
+import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact
 import DASHI.Biology.IITCyclotomicFourierObserverExact
 import DASHI.Biology.IITBalancedTernary369HierarchyExact
 import DASHI.Biology.IIT369PantsGluingBridgeExact
@@ -35,7 +36,9 @@ import DASHI.Biology.IIT369MatchedAlgebraControlExact
 import DASHI.Biology.IITTernaryLatticeStateSpaceScalingExact
 import DASHI.Biology.IITCubeTwoFaceQ9SelfIndexingWeldExact
 import DASHI.Biology.IITCubeTwoFaceImageRecognitionExact
+import DASHI.Biology.IITCubeConcreteTorusImageExact
 import DASHI.Biology.IITCubeExceptionalGeometryHandoffExact
+import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact
 import DASHI.Biology.IITHyperfabricCausalCellNetworkExact
 import DASHI.Biology.IITPointedTernary27FaceGluingExact
 import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact
