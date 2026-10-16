@@ -23,3 +23,22 @@ import DASHI.Governance.BoloBoloCapacityConsumerSufficiencyEverything
 -- current acquisition routes using DASHI scheduling values without upgrading
 -- source authority, truth or causal status.
 import DASHI.Governance.BoloBoloEmpiricalAcquisitionEverything
+
+-- Leadership / anti-leadership SOTA and the Freeman/Levine tension are retained
+-- as source-bounded evidence rather than converted into a universal organising
+-- prescription.
+import DASHI.Governance.AnarchistAntiLeadershipSourceAtlasExact
+
+-- Non-domination / reappropriation keeps facilitation, expertise and revocable
+-- delegation distinct from durable arbitrary command and reuses the existing
+-- proof-carrying anti-panopticon boundary.
+import DASHI.Governance.ITIRNonDominationReappropriationExact
+
+-- Plural viability extends the existing independent viability envelope with
+-- non-domination, affected voice and revisability, then reuses generic
+-- history-conditioned future-cone non-descent. TSFV, Cybersyn and 3/9/18/27
+-- enter only as explicitly bounded structural precedents.
+import DASHI.Governance.ITIRPluralViabilityTSFVExact
+
+-- RED-first regression surface for this tranche.
+import DASHI.Governance.AnarchistLeadershipNonDominationTSFVRegression
