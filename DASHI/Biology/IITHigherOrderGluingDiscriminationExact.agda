@@ -2,21 +2,11 @@ module DASHI.Biology.IITHigherOrderGluingDiscriminationExact where
 
 ------------------------------------------------------------------------
 -- HIGHER-ORDER GLUING DISCRIMINATION
---
--- The max-cut conjecture now has three logically distinct layers:
---
---   1. minimal local synthesis (Boolean parity / affine F3 channels),
---   2. ordered orientation / phase carried by gluing,
---   3. irreducible triadic face data that does not descend to pairwise/local
---      observations.
---
--- Existing non-descent already supplies a same-boundary/different-face witness.
--- This owner packages that exact witness beside the parity/torque algebra while
--- refusing to identify any one layer with IIT big-Phi or physical torque.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
+import Base369
 import DASHI.Biology.IITBooleanParityMinimalSufficiencyExact as BooleanParity
 import DASHI.Biology.IITTernaryAffineMinimalSufficiencyExact as TernaryAffine
 import DASHI.Biology.IITBinaryTernaryParityTorqueLiftExact as ParityTorque
@@ -25,7 +15,7 @@ import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Trialectic
 
 ------------------------------------------------------------------------
--- 1. Re-export the exact higher-order obstruction in the conjecture vocabulary.
+-- 1. Exact higher-order obstruction.
 ------------------------------------------------------------------------
 
 pairwiseSelectedCubiesDoNotRecoverTriadicFace :
@@ -47,7 +37,7 @@ differentHigherFaceWitness :
 differentHigherFaceWitness = Triadic.differentTriadicFace
 
 ------------------------------------------------------------------------
--- 2. The local algebraic carriers are exact but have different roles.
+-- 2. Local algebraic carriers have distinct roles.
 ------------------------------------------------------------------------
 
 booleanMinimalParityWitness :
