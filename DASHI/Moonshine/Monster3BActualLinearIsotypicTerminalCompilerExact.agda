@@ -3,28 +3,24 @@ module DASHI.Moonshine.Monster3BActualLinearIsotypicTerminalCompilerExact where
 ------------------------------------------------------------------------
 -- ACTUAL MONSTER LINEAR / ISOTYPIC TERMINAL COMPILER
 --
--- Reusable restriction, character, Schur, Maschke, isotypic, copy-count and
--- multiplicity-coordinate mathematics is no longer the Monster-specific
--- frontier.
+-- Reusable restriction, character, Schur, Maschke, isotypic, copy-count,
+-- multiplicity-coordinate and finite-copy tensor mathematics is no longer the
+-- Monster-specific frontier.
 --
--- Companion Lean #47 now also owns the FDRep/group-algebra adapter, the
--- whole-character simple-source classifier, Maschke semisimplicity and the
--- character-at-identity -> dimension-ratio compiler.  Thus the older packet
--- fields "simple-type classifier", "semisimple/finite" and separate 65610/729
--- finrank facts were charging generic consequences as if they were independent
--- Monster inputs.
---
--- The live character/isotypy payment is instead one SAME-object transport:
--- attach the actual linear W_zeta|E sector and H_zeta to the common finite-
--- dimensional representation theory and prove that the already certified
--- actual-kernel character identity is literally
+-- The live character/isotypy payment is one SAME-object transport: attach the
+-- actual linear W_zeta|E sector and H_zeta to the common finite-dimensional
+-- representation theory and prove that the already certified actual-kernel
+-- character identity is literally
 --
 --   chi(W_zeta|E) = 90 * chi(H_zeta)
 --
 -- on those SAME linear representation objects.
 --
--- Agda-native historical linear wrappers remain explicit because Lean theorem
--- authority is not imported across kernels.
+-- Companion Lean then supplies the generic FDRep/module adapter, simple-source
+-- classifier, Maschke semisimplicity, dimension ratio, isotypic finite-copy
+-- assembly, Schur multiplicity coordinates and the canonical post-isotypy
+-- tensor equivalence. Agda-native historical linear wrappers remain explicit
+-- because Lean theorem authority is not imported across kernels.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
@@ -45,6 +41,7 @@ import DASHI.Moonshine.Monster3BWholeCharacterLiveTailLeanReceiptExact as WholeC
 import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact as Isotypic
 import DASHI.Moonshine.Monster3BTwoIsotypicBlockAssemblyLeanReceiptExact as TwoBlock
 import DASHI.Moonshine.Monster3BMultiplicitySchurCoordinatesLeanReceiptExact as Schur
+import DASHI.Moonshine.Monster3BTensorFiniteCopiesLeanReceiptExact as Tensor
 
 ------------------------------------------------------------------------
 -- 1. One exact actual-input packet.
@@ -58,9 +55,6 @@ record ActualMonsterLinearInputPacket
     (theory : Uniqueness.IrreducibleCharacterDetermination)
     : Setω where
   field
-    -- Agda-native proof authority for the historical APIs. On the companion
-    -- Lean path their restriction linearity is a compiler consequence of the
-    -- actual invariant subspace / central linear operator.
     paidWeightTwoLinearBridge :
       Hardening.PaidWeightTwoLinearActionBridge weightLegacy
 
@@ -73,8 +67,6 @@ record ActualMonsterLinearInputPacket
     actualSelectedConstituentAttachment :
       Common.ActualHZetaConstituentCommonTheoryAttachment theory
 
-    -- Same-object FDRep attachments used by the companion whole-character,
-    -- Maschke and Schur compilers.
     ActualWholeWZetaRestrictedFDRepSameObject : Set
     actualWholeWZetaRestrictedFDRepSameObjectWitness :
       ActualWholeWZetaRestrictedFDRepSameObject
@@ -83,10 +75,9 @@ record ActualMonsterLinearInputPacket
     actualHZetaSimpleComplexFDRepSameObjectWitness :
       ActualHZetaSimpleComplexFDRepSameObject
 
-    -- The true character/isotypy seam.  The actual-kernel/class side already
-    -- owns the ninety-Heisenberg character statement; this witness says that
-    -- statement is the character of the SAME actual linear W_zeta|E and H_zeta
-    -- representations consumed by the Lean compilers.
+    -- The true character/isotypy seam. The actual-kernel/class side already
+    -- owns the ninety-Heisenberg character statement; this witness transports
+    -- that statement onto the SAME actual linear W_zeta|E and H_zeta FDReps.
     ActualKernelNinetyCharacterIsSameLinearWholeCharacter : Set
     actualKernelNinetyCharacterIsSameLinearWholeCharacterWitness :
       ActualKernelNinetyCharacterIsSameLinearWholeCharacter
@@ -116,6 +107,10 @@ compileActualPaidHZetaRecognition weightLegacy zetaLegacy theory packet =
 
 ------------------------------------------------------------------------
 -- 3. Remaining actual post-recognition representation payload.
+--
+-- Tensor evaluation has been removed from this packet: after actual isotypy and
+-- Schur multiplicity coordinates, companion Lean derives the canonical tensor
+-- finite-copy equivalence using mathlib `TensorProduct.piScalarRight`.
 ------------------------------------------------------------------------
 
 record ActualMultiplicityActionPayment : Set where
@@ -123,14 +118,12 @@ record ActualMultiplicityActionPayment : Set where
     ActualSuzukiNormalizerActionOnSZeta : Set
     AbsoluteZetaOrientation : Set
     ActualTwelveSeventyEightActionIntertwiner : Set
-    ActualTensorEvaluationEquivalence : Set
 
     actualSuzukiNormalizerActionOnSZetaWitness :
       ActualSuzukiNormalizerActionOnSZeta
     absoluteZetaOrientationWitness : AbsoluteZetaOrientation
     actualTwelveSeventyEightActionIntertwinerWitness :
       ActualTwelveSeventyEightActionIntertwiner
-    actualTensorEvaluationEquivalenceWitness : ActualTensorEvaluationEquivalence
 
 open ActualMultiplicityActionPayment public
 
@@ -187,6 +180,8 @@ record Boundary : Set where
     complementaryTwelveSeventyEightTailSourceWritten : Bool
     genericSchurMultiplicityTailSourceWritten : Bool
     genericCoordinateEvaluationRecoverySourceWritten : Bool
+    postIsotypyTensorEquivalenceSourceWritten : Bool
+    tensorEquivalenceRemainsIndependentMonsterInput : Bool
 
     actualMonsterLinearInputPacketInhabitedHere : Bool
     actualWholeCharacterSameObjectTransportPaidHere : Bool
@@ -195,7 +190,6 @@ record Boundary : Set where
     actualSuzukiNormalizerActionPaidHere : Bool
     absoluteZetaOrientationPaidHere : Bool
     actualTwelveSeventyEightActionIntertwinerPaidHere : Bool
-    actualTensorEvaluationEquivalencePaidHere : Bool
 open Boundary public
 
 canonicalBoundary : Boundary
@@ -217,4 +211,6 @@ canonicalBoundary = boundary
   (TwoBlock.complementaryTwoBlockLinearAssemblySourceWritten TwoBlock.canonicalBoundary)
   (Schur.genericSchurCoordinateCompilerSourceWritten Schur.canonicalBoundary)
   (Schur.coordinateEvaluationRecoverySourceWritten Schur.canonicalBoundary)
-  false false false false false false false false
+  (Tensor.postIsotypyTensorEquivalenceSourceWritten Tensor.canonicalBoundary)
+  false
+  false false false false false false false
