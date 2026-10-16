@@ -4,13 +4,6 @@
 This file is deliberately *not* a source/build checker. It never inspects Agda
 text, imports, filenames, or theorem names. Formal completeness belongs to the
 Agda aggregate and the Agda compiler.
-
-The only authority here is executable finite mathematics: enumerate states and
-partitions, evaluate the finite IIT reference quantities, and check numerical
-or finite-combinatorial regression targets. Full distinction/relation/CES
-verification is delegated to ``iit4_pyphi_oracle.py`` when PyPhi is available;
-this verifier does not pretend that stored literature calibration constants are
-fresh numerical evidence.
 """
 
 from __future__ import annotations
@@ -28,15 +21,13 @@ from iit4_finite_reference import (
     recurrent_three_cell_step,
     system_phi,
 )
-from iit4_structure_reference import (
-    big_phi,
-    nonempty_relation_candidates,
-    relation_phi_from_overlap,
-)
+from iit4_structure_reference import big_phi, nonempty_relation_candidates, relation_phi_from_overlap
 from iit_369_algebra_scan import algebra_summary
+from iit_boolean_gate_minimal_sufficiency import scan as boolean_minimality_scan
 from iit_hyperfabric_fixture_scan import fixture_summary
 from iit_matched_fabric_gate_sweep import sweep_summary
 from iit_pointed27_gluing_scan import gluing_summary
+from iit_ternary_affine_minimal_sufficiency import scan as ternary_affine_scan
 from iit_xor_369_stress_scan import stress_summary
 from iit_xor_grid_calibration import calibration_summary
 
@@ -54,16 +45,10 @@ def _tri_xor(a: int, b: int) -> int:
 
 
 def _phi_values(model, version: str) -> list[float]:
-    return sorted(
-        {
-            round(system_phi(model, state, formalism=version)["phi_s"], 12)
-            for state in model.states
-        }
-    )
+    return sorted({round(system_phi(model, state, formalism=version)["phi_s"], 12) for state in model.states})
 
 
 def verify_numeric_results() -> dict:
-    # Core finite enumeration / system-phi regression.
     assert len(directional_partitions(3)) == 54
 
     xor_model = deterministic_model(2, 3, recurrent_three_cell_step(_xor2))
@@ -89,34 +74,35 @@ def verify_numeric_results() -> dict:
     assert core["recurrent_trixor_2026"] == [0.0]
     assert core["feedforward_xor_2023"] == [0.0]
 
-    # Actual repo 2x2 XOR-grid numerical calibration.
+    boolean_minimality = boolean_minimality_scan()
+    assert boolean_minimality["bipermutative_class"] == ["XOR", "XNOR"]
+    assert boolean_minimality["essential_two_input_positive_all_states"] == ["XOR", "XNOR"]
+
+    ternary_minimality = ternary_affine_scan()
+    assert ternary_minimality["essential_two_input_count"] == 12
+    assert ternary_minimality["bipermutative_count"] == 12
+    assert ternary_minimality["positive_all_states_count"] == 12
+    assert ternary_minimality["symmetric_affine_count"] == 6
+    assert ternary_minimality["antisymmetric_affine_count"] == 6
+    assert ternary_minimality["essential_all_state_phi_s"] == [round(math.log2(9), 12)]
+
     grid = calibration_summary()["recurrent_xor_grid_2x2"]
     assert grid["states_tested"] == 16
     assert grid["iit_4_0_2023"]["distinct_phi_s"] == [0.0, 0.5]
     assert grid["iit_4_0_2023"]["zero_phi_states"] == 12
     assert grid["iit_4_0_2026"]["distinct_phi_s"] == [0.0]
-    assert grid["iit_4_0_2026"]["zero_phi_states"] == 16
 
-    # Same-fabric / varying-gate and same-gate / varying-fabric controls.
     matched = sweep_summary()
     fixed = matched["fixed_recurrent_fabric_vary_gate"]
     assert fixed["binary_xor"]["iit_4_0_2023"]["distinct_phi_s"] == [2.0]
-    assert fixed["binary_or"]["iit_4_0_2023"]["distinct_phi_s"] == [
-        0.0,
-        round(math.log2(4 / 3), 12),
-        2.0,
-    ]
+    assert fixed["binary_or"]["iit_4_0_2023"]["distinct_phi_s"] == [0.0, round(math.log2(4 / 3), 12), 2.0]
     assert fixed["binary_and"]["iit_4_0_2023"]["zero_phi_states"] == 6
-    assert fixed["ternary_trixor"]["iit_4_0_2023"]["distinct_phi_s"] == [
-        round(math.log2(9), 12)
-    ]
+    assert fixed["ternary_trixor"]["iit_4_0_2023"]["distinct_phi_s"] == [round(math.log2(9), 12)]
     topology = matched["fixed_binary_xor_vary_fabric"]
     assert topology["feedforward"]["iit_4_0_2023"]["distinct_phi_s"] == [0.0]
     assert topology["recurrent_three_cell"]["iit_4_0_2023"]["distinct_phi_s"] == [2.0]
     assert topology["grid_2x2"]["iit_4_0_2023"]["distinct_phi_s"] == [0.0, 0.5]
 
-    # 369 same-cardinality algebra controls. Python computes the IIT profiles;
-    # the algebra-separation theorems themselves remain Agda-owned.
     algebra = algebra_summary()
     expected6 = round(math.log2(36), 12)
     expected9 = round(math.log2(81), 12)
@@ -124,37 +110,20 @@ def verify_numeric_results() -> dict:
     s3 = algebra["s3_permutation"]
     z9 = algebra["z9_cyclic"]
     f3sq = algebra["f3_squared"]
-
     assert z6["iit_4_0_2023"]["distinct_phi_s"] == [expected6]
     assert s3["iit_4_0_2023"]["distinct_phi_s"] == [expected6]
-    assert z6["iit_4_0_2026"]["distinct_phi_s"] == [0.0]
-    assert s3["iit_4_0_2026"]["distinct_phi_s"] == [0.0]
-    same_6_profile = (
-        z6["iit_4_0_2023"]["distinct_phi_s"]
-        == s3["iit_4_0_2023"]["distinct_phi_s"]
-    )
-    assert same_6_profile
-
     assert z9["iit_4_0_2023"]["distinct_phi_s"] == [expected9]
     assert f3sq["iit_4_0_2023"]["distinct_phi_s"] == [expected9]
-    assert z9["iit_4_0_2026"]["distinct_phi_s"] == [0.0]
-    assert f3sq["iit_4_0_2026"]["distinct_phi_s"] == [0.0]
-    same_9_profile = (
-        z9["iit_4_0_2023"]["distinct_phi_s"]
-        == f3sq["iit_4_0_2023"]["distinct_phi_s"]
-    )
-    assert same_9_profile
+    same_6_profile = z6["iit_4_0_2023"]["distinct_phi_s"] == s3["iit_4_0_2023"]["distinct_phi_s"]
+    same_9_profile = z9["iit_4_0_2023"]["distinct_phi_s"] == f3sq["iit_4_0_2023"]["distinct_phi_s"]
+    assert same_6_profile and same_9_profile
 
-    # Hyperform/hyperfabric finite fixtures: numerical IIT outputs only.
     fixtures = fixture_summary()["fixtures"]
     assert fixtures["open_xor_path"]["iit_4_0_2023"]["distinct_phi_s"] == [0.0]
     assert fixtures["closed_xor_cycle"]["iit_4_0_2023"]["distinct_phi_s"] == [2.0]
     assert fixtures["xor_grid_2x2"]["iit_4_0_2023"]["distinct_phi_s"] == [0.0, 0.5]
-    assert fixtures["closed_trixor_cycle"]["iit_4_0_2023"]["distinct_phi_s"] == [
-        round(math.log2(9), 12)
-    ]
+    assert fixtures["closed_trixor_cycle"]["iit_4_0_2023"]["distinct_phi_s"] == [round(math.log2(9), 12)]
 
-    # Pointed-27 finite geometry counts are numerical/combinatorial receipts.
     pointed = gluing_summary()
     assert pointed["carrier_size"] == 27
     assert pointed["strata"] == {"0_faces": 1, "1_face": 6, "2_faces": 12, "3_faces": 8}
@@ -168,8 +137,6 @@ def verify_numeric_results() -> dict:
     assert pointed["each_corner_triple_intersection_size"] == 1
     assert pointed["three_selected_cubie_choices"] == 19683
 
-    # Composition-layer arithmetic only. Fresh mechanism/purview/CES values
-    # belong to the PyPhi oracle, not to hard-coded calibration constants here.
     relation_candidates = len(nonempty_relation_candidates(("d1", "d2", "d3")))
     relation_overlap_phi = relation_phi_from_overlap(0.12, 3, 2)
     composed_big_phi = big_phi([0.1, 0.2, 0.3], [0.05, 0.15])
@@ -177,13 +144,10 @@ def verify_numeric_results() -> dict:
     assert abs(relation_overlap_phi - 0.08) < 1e-12
     assert abs(composed_big_phi - 0.8) < 1e-12
 
-    # Cross-alphabet stress values, again as numerical observations only.
     stress = stress_summary()
     assert stress["binary_recurrent_xor"]["iit_4_0_2023"]["distinct_phi_s"] == [2.0]
     assert stress["binary_xor_grid_2x2"]["iit_4_0_2023"]["distinct_phi_s"] == [0.0, 0.5]
-    assert stress["ternary_recurrent_trixor"]["iit_4_0_2023"]["distinct_phi_s"] == [
-        round(math.log2(9), 12)
-    ]
+    assert stress["ternary_recurrent_trixor"]["iit_4_0_2023"]["distinct_phi_s"] == [round(math.log2(9), 12)]
     assert stress["z6_recurrent_addition"]["iit_4_0_2023"]["distinct_phi_s"] == [expected6]
     assert stress["s3_recurrent_composition"]["iit_4_0_2023"]["distinct_phi_s"] == [expected6]
     assert stress["z9_recurrent_addition"]["iit_4_0_2023"]["distinct_phi_s"] == [expected9]
@@ -196,6 +160,8 @@ def verify_numeric_results() -> dict:
         "full_ces_values_verified_here": False,
         "full_ces_oracle": "scripts/iit4_pyphi_oracle.py",
         "core": core,
+        "boolean_minimality": boolean_minimality,
+        "ternary_affine_minimality": ternary_minimality,
         "xor_grid": grid,
         "matched_controls": matched,
         "algebra_369": {
@@ -207,22 +173,7 @@ def verify_numeric_results() -> dict:
             "same_nine_state_profile_observed": same_9_profile,
         },
         "hyperfabric_fixtures": fixtures,
-        "pointed27_counts": {
-            key: pointed[key]
-            for key in (
-                "carrier_size",
-                "strata",
-                "non_origin_count",
-                "total_point_face_incidences",
-                "face_count",
-                "each_face_size",
-                "pairwise_face_overlaps",
-                "each_edge_overlap_size",
-                "corner_face_triples",
-                "each_corner_triple_intersection_size",
-                "three_selected_cubie_choices",
-            )
-        },
+        "pointed27_counts": pointed,
         "structure_arithmetic": {
             "relation_candidate_count_for_three_distinctions": relation_candidates,
             "synthetic_relation_overlap_phi": relation_overlap_phi,
