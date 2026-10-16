@@ -82,11 +82,11 @@ transportableRatioFractionalUncertaintyE18Tenths = 43
 transportableResultIsPreprint : Bool
 transportableResultIsPreprint = true
 
-deploymentRobustnessIsNotChronometricAccuracy : Bool
-deploymentRobustnessIsNotChronometricAccuracy = true
+sourceDeploymentRobustnessNonCollapse : Bool
+sourceDeploymentRobustnessNonCollapse = true
 
-frequencyTransferIsNotGeopotentialKnowledge : Bool
-frequencyTransferIsNotGeopotentialKnowledge = true
+sourceFrequencyTransferNonCollapse : Bool
+sourceFrequencyTransferNonCollapse = true
 
 record OpticalClockChronometricGeodesySOTAAtlas : Set where
   field
@@ -129,9 +129,9 @@ canonicalOpticalClockChronometricGeodesySOTAAtlas = record
   ; autonomousDeployedOpticalClockOperationObservedIsTrue = refl
   ; transportableE18ClassComparisonReported = true
   ; transportableE18ClassComparisonReportedIsTrue = refl
-  ; deploymentRobustnessIsNotChronometricAccuracy = true
+  ; deploymentRobustnessIsNotChronometricAccuracy = sourceDeploymentRobustnessNonCollapse
   ; deploymentRobustnessIsNotChronometricAccuracyIsTrue = refl
-  ; frequencyTransferIsNotGeopotentialKnowledge = true
+  ; frequencyTransferIsNotGeopotentialKnowledge = sourceFrequencyTransferNonCollapse
   ; frequencyTransferIsNotGeopotentialKnowledgeIsTrue = refl
   ; crossStudySameObjectIdentity = false
   ; crossStudySameObjectIdentityIsFalse = refl
