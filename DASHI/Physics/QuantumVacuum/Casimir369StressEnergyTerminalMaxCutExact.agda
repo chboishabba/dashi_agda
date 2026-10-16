@@ -86,6 +86,7 @@ record Casimir369StressEnergyTerminalBoundary : Set where
     u1YangMillsGaugeArchitectureHandoffPaid : Bool
     selectedQFTSU2HostInterfacePaid : Bool
     selectedQFTCompactSimpleCompilerRoutesPaid : Bool
+    selectedQFTDynkinA1ClassificationRequiredForHost : Bool
     u1RestrictedSelectedQFTStressInterfacePaid : Bool
     canonicalCartanU1FieldImageReceiptInterfacePaid : Bool
     u1FieldImageToBracketZeroCompilerPaid : Bool
@@ -153,6 +154,7 @@ canonicalTerminalBoundary = record
   ; u1YangMillsGaugeArchitectureHandoffPaid = true
   ; selectedQFTSU2HostInterfacePaid = true
   ; selectedQFTCompactSimpleCompilerRoutesPaid = true
+  ; selectedQFTDynkinA1ClassificationRequiredForHost = false
   ; u1RestrictedSelectedQFTStressInterfacePaid = true
   ; canonicalCartanU1FieldImageReceiptInterfacePaid = true
   ; u1FieldImageToBracketZeroCompilerPaid = true
@@ -263,7 +265,6 @@ data RemainingCasimirStressEnergyBlocker : Set where
   missingSpecifiedANECApplication : RemainingCasimirStressEnergyBlocker
 
   missingSelectedQFTCompactSimpleEvidenceAttachment : RemainingCasimirStressEnergyBlocker
-  missingSelectedQFTGroupDynkinA1Classification : RemainingCasimirStressEnergyBlocker
   missingSelectedQFTGroupQuaternionSU2Interpretation : RemainingCasimirStressEnergyBlocker
 
   missingCanonicalCartanU1FieldRestriction : RemainingCasimirStressEnergyBlocker
@@ -291,31 +292,29 @@ firstAveragedConditionBlocker = missingSpecifiedQISamplingApplication
 firstUnificationBlocker : RemainingCasimirStressEnergyBlocker
 firstUnificationBlocker = missingSelectedQFTCompactSimpleEvidenceAttachment
 secondUnificationBlocker : RemainingCasimirStressEnergyBlocker
-secondUnificationBlocker = missingSelectedQFTGroupDynkinA1Classification
+secondUnificationBlocker = missingSelectedQFTGroupQuaternionSU2Interpretation
 thirdUnificationBlocker : RemainingCasimirStressEnergyBlocker
-thirdUnificationBlocker = missingSelectedQFTGroupQuaternionSU2Interpretation
+thirdUnificationBlocker = missingCanonicalCartanU1FieldRestriction
 fourthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-fourthUnificationBlocker = missingCanonicalCartanU1FieldRestriction
+fourthUnificationBlocker = missingYangMillsActionToMaxwellRestriction
 fifthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-fifthUnificationBlocker = missingYangMillsActionToMaxwellRestriction
+fifthUnificationBlocker = missingMetricVariationStressRestriction
 sixthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-sixthUnificationBlocker = missingMetricVariationStressRestriction
+sixthUnificationBlocker = missingRestrictedQuantumStressMaxwellIdentification
 seventhUnificationBlocker : RemainingCasimirStressEnergyBlocker
-seventhUnificationBlocker = missingRestrictedQuantumStressMaxwellIdentification
+seventhUnificationBlocker = missingSamePlateBoundaryRenormalization
 eighthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-eighthUnificationBlocker = missingSamePlateBoundaryRenormalization
+eighthUnificationBlocker = missingU1RestrictedQFTStressCoordinateSymmetry
 ninthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-ninthUnificationBlocker = missingU1RestrictedQFTStressCoordinateSymmetry
+ninthUnificationBlocker = missingBrownMaclayTenIndependentComponentValues
 tenthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-tenthUnificationBlocker = missingBrownMaclayTenIndependentComponentValues
+tenthUnificationBlocker = missingRound131AllSectorAssembly
 eleventhUnificationBlocker : RemainingCasimirStressEnergyBlocker
-eleventhUnificationBlocker = missingRound131AllSectorAssembly
+eleventhUnificationBlocker = missingEinsteinCommonMetricVariation
 twelfthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-twelfthUnificationBlocker = missingEinsteinCommonMetricVariation
+twelfthUnificationBlocker = missingCommonMetricProducerLanguage
 thirteenthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-thirteenthUnificationBlocker = missingCommonMetricProducerLanguage
-fourteenthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-fourteenthUnificationBlocker = missingCasimirCommonActionVariationIdentification
+thirteenthUnificationBlocker = missingCasimirCommonActionVariationIdentification
 
 firstGravityBlocker : RemainingCasimirStressEnergyBlocker
 firstGravityBlocker = missingSemiclassicalGravitySameObjectWeld
@@ -324,4 +323,4 @@ firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
 terminalReading : String
 terminalReading =
-  "The selected-QFT Casimir max-cut is decomposed to the first physical same-object seams. Existing compiler routes can supply compact simplicity once a pinned YM construction or LiteralClayStructuralBase is attached to the same qftTarget; the selected group still needs Dynkin-A1 and literal quaternionic-SU2 interpretation. Brown-Maclay is never equated with the full SU2 stress. The electromagnetic restriction now has five independent leaves rather than six: first prove the selected field lies pointwise in the canonical Cartan-U1 image; the existing U1 bracket theorem then compiles bracket-zero automatically, so no second commutator theorem is required. Remaining leaves are YM action -> Maxwell, metric-variation/stress restriction, restricted quantum stress = Maxwell stress, and same conducting-plate boundary/renormalization. Coordinate symmetry plus ten independent Brown-Maclay components then compile all sixteen restricted-stress components. After that, the existing Round131 all-sector aggregation and common metric/action/GR lanes resume. Further carrier/cardinality analogy is not payment."
+  "The selected-QFT Casimir max-cut is decomposed to the first physical same-object seams. Existing compiler routes can supply compact simplicity once a pinned YM construction or LiteralClayStructuralBase is attached to the same qftTarget. The load-bearing host then needs only literal interpretation as the repository quaternionic-SU2 GroupStructure; Dynkin-A1 and Sprint105 SU2 labels are optional consistency metadata, not independent host payments. Brown-Maclay is never equated with the full SU2 stress. The electromagnetic restriction has five independent leaves: prove the selected field lies pointwise in the canonical Cartan-U1 image; the existing U1 bracket theorem then compiles bracket-zero automatically; prove YM action -> Maxwell; prove metric-variation/stress restriction; identify restricted quantum stress with Maxwell stress; and weld the same conducting-plate boundary/renormalization. Coordinate symmetry plus ten independent Brown-Maclay components then compile all sixteen restricted-stress components. After that, the existing Round131 all-sector aggregation and common metric/action/GR lanes resume. Further carrier/cardinality analogy is not payment."
