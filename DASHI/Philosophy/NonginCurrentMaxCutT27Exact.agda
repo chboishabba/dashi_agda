@@ -25,6 +25,7 @@ import DASHI.Reasoning.TrialecticT27GraphGrothendieckSheafExact as GraphSheaf
 import DASHI.Reasoning.TrialecticT27GraphSitePresheafExact as GraphPresheaf
 import DASHI.Reasoning.TrialecticT27WavePhaseGroupoidPresheafExact as GraphGroupoid
 import DASHI.Reasoning.TrialecticT27EffectiveStackDescentExact as GraphStack
+import DASHI.Reasoning.TrialecticT27WavePhaseHigherStackExact as GraphHigher
 import DASHI.Reasoning.TrialecticT27FiniteTriadicHypersheafExact as GraphHyper
 
 previousBoundary : Previous.NonginCurrentMaxCutBoundary
@@ -44,6 +45,9 @@ graphGroupoidBoundary = GraphGroupoid.canonicalTrialecticT27WavePhaseGroupoidPre
 
 graphStackBoundary : GraphStack.TrialecticT27EffectiveStackBoundary
 graphStackBoundary = GraphStack.canonicalTrialecticT27EffectiveStackBoundary
+
+graphHigherBoundary : GraphHigher.TrialecticT27WavePhaseHigherStackBoundary
+graphHigherBoundary = GraphHigher.canonicalTrialecticT27WavePhaseHigherStackBoundary
 
 graphHyperBoundary : GraphHyper.TrialecticT27FiniteTriadicHypersheafBoundary
 graphHyperBoundary = GraphHyper.canonicalTrialecticT27FiniteTriadicHypersheafBoundary
@@ -84,6 +88,10 @@ completedEffectiveStackReceipt :
   GraphStack.completedT27MorphismDescentPaid graphStackBoundary ≡ true
 completedEffectiveStackReceipt = refl
 
+completedHigherStackReceipt :
+  GraphHigher.certifiedCompletedT27HigherStack graphHigherBoundary ≡ true
+completedHigherStackReceipt = refl
+
 completedFiniteHypersheafReceipt :
   GraphHyper.certifiedCompletedT27FiniteHypersheaf graphHyperBoundary ≡ true
 completedFiniteHypersheafReceipt = refl
@@ -110,6 +118,7 @@ record NonginCurrentMaxCutT27Boundary : Set where
     completedT27FullSitePresheafPaid : Bool
     completedT27WavePhaseGroupoidPaid : Bool
     completedT27EffectiveStackPaid : Bool
+    completedT27HigherStackPaid : Bool
     completedT27FiniteHypersheafPaid : Bool
     completedT27FreeDataIsT18 : Bool
     bareT18DeterminesCanonicalT27 : Bool
@@ -122,6 +131,7 @@ open NonginCurrentMaxCutT27Boundary public
 canonicalNonginCurrentMaxCutT27Boundary : NonginCurrentMaxCutT27Boundary
 canonicalNonginCurrentMaxCutT27Boundary =
   nongin-current-max-cut-t27-boundary
+    true
     true
     true
     true
