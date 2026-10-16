@@ -24,4 +24,5 @@ open import DASHI.Physics.Optics.BerkeleySystemCharacterizationDetectedPhotonExa
 open import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact public
 open import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact public
 open import DASHI.Physics.Optics.BerkeleyPLD100kReleaseProvenanceExact public
+open import DASHI.Physics.Optics.BerkeleyPLDArchiveRunMetadataBoundaryExact public
 open import DASHI.Physics.Optics.Diffraction3DImagingAcquisitionMaxCutExact public
