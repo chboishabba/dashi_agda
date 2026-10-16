@@ -14,6 +14,7 @@ import DASHI.Physics.Foundations.BalabanQ1FiniteTangentCurveReductionExact as Q1
 import DASHI.Physics.Foundations.BalabanP1PresentCutSpatialC3CompilerExact as P1C3
 import DASHI.Physics.Foundations.CMP119ClassicalCurvatureSpatialC3CovarianceExact as ClassicalC3
 import DASHI.Physics.Foundations.CMP119FlatSide4SpatialC3FieldCovarianceExact as FlatC3
+import DASHI.Physics.Foundations.CMP119CurvatureWilsonSelectedInsertionCompilerExact as CurvatureWilson
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
 
 ------------------------------------------------------------------------
@@ -30,11 +31,15 @@ import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 --   * the R144/present-cut finite-D1 stress tensor action, conditionally
 --     inhabited by Q1 source-path semantics for the full generated action.
 --
--- The classical and flat/tangent field results are now direct theorems.  They do
--- NOT identify the selected nonlinear CMP109/116 generated-action background
--- with the flat side-four tangent field.  That same-object/source continuation
--- is the remaining promotion boundary; Q1 remains the route for the full
--- generated-action D1 unless that nonlinear identification is paid directly.
+-- The classical and flat/tangent field results are now direct theorems.  One
+-- CurvatureSix family also compiles all ten classical DS[h] action variations
+-- into the canonical Wilson/Gibbs selected-insertion package; ten independent
+-- DS callbacks are therefore retired.  They do NOT identify the selected
+-- nonlinear CMP109/116 generated-action background with the flat side-four
+-- tangent field.  That same-object/source continuation plus the selected O and
+-- DO[h] data is the remaining physical promotion boundary; Q1 remains the route
+-- for the full generated-action D1 unless that nonlinear identification is paid
+-- directly.
 ------------------------------------------------------------------------
 
 monster369ExactC3TemplateAvailable : Bool
@@ -69,6 +74,22 @@ balabanLiteralSide4CurlSpatialC3Recovered =
 balabanLiteralSide4StressSpatialC3Recovered : Bool
 balabanLiteralSide4StressSpatialC3Recovered =
   FlatC3.literalSide4StressSpatialC3Recovered
+
+balabanTenIndependentClassicalActionVariationCallbacksRequired : Bool
+balabanTenIndependentClassicalActionVariationCallbacksRequired =
+  CurvatureWilson.tenIndependentActionVariationCallbacksRequired
+
+balabanCurvatureSixPaysWholeClassicalActionMetricVariation : Bool
+balabanCurvatureSixPaysWholeClassicalActionMetricVariation =
+  CurvatureWilson.curvatureSixPaysWholeClassicalActionMetricVariation
+
+balabanSelectedInsertionObservableAndDOStillRequired : Bool
+balabanSelectedInsertionObservableAndDOStillRequired =
+  CurvatureWilson.selectedInsertionObservableAndMetricVariationStillRequired
+
+balabanSelectedNonlinearCurvatureRealizationStillRequired : Bool
+balabanSelectedNonlinearCurvatureRealizationStillRequired =
+  CurvatureWilson.selectedNonlinearCurvatureRealizationStillRequired
 
 balabanR144SpatialStressTensorC3ActionRecovered : Bool
 balabanR144SpatialStressTensorC3ActionRecovered =
@@ -153,6 +174,10 @@ balabanLiteralSide4StressSpatialC3RecoveredIsTrue :
   balabanLiteralSide4StressSpatialC3Recovered ≡ true
 balabanLiteralSide4StressSpatialC3RecoveredIsTrue = refl
 
+balabanCurvatureSixPaysWholeClassicalActionMetricVariationIsTrue :
+  balabanCurvatureSixPaysWholeClassicalActionMetricVariation ≡ true
+balabanCurvatureSixPaysWholeClassicalActionMetricVariationIsTrue = refl
+
 balabanR144SpatialStressTensorC3ActionRecoveredIsTrue :
   balabanR144SpatialStressTensorC3ActionRecovered ≡ true
 balabanR144SpatialStressTensorC3ActionRecoveredIsTrue = refl
@@ -223,6 +248,9 @@ independentMetricTangentConstructionIsTerminalFrontier = false
 classicalOrFlatFieldSpatialC3IsTerminalFrontier : Bool
 classicalOrFlatFieldSpatialC3IsTerminalFrontier = false
 
+tenIndependentClassicalDSCallbacksAreTerminalFrontier : Bool
+tenIndependentClassicalDSCallbacksAreTerminalFrontier = false
+
 highestAlphaYM369Question : String
 highestAlphaYM369Question =
-  "The spatial C3 action is now explicit on CMP109 coordinates, the classical CurvatureSix stress tensor, and the literal side-four SU2 bond field/curl. The remaining promotion problem is same-object/nonlinear: either realize Q1 curveFromFiniteTangent on the selected CMP109/116 present-cut Background and identify BC2.firstVariation with its ordinary derivative, or directly identify the selected nonlinear generated-action stress source with the literal curvature/field realization. Do not substitute CMP109 Eq.(5.1)'s gauge B -> U_j(exp iB) vacuum-polarization path for the metric/stress curve, and do not reintroduce a second metric basis or independent C3 covariance receipt."
+  "The spatial C3 action is explicit on CMP109 coordinates, the classical CurvatureSix stress tensor, and the literal side-four SU2 bond field/curl. CurvatureSix also supplies all ten classical DS[h] values to the canonical Wilson/Gibbs lane. The remaining promotion problem is same-object/nonlinear plus selected insertion data: identify the selected nonlinear CMP119/116 finite source with a CurvatureSix family, identify the selected insertion O and DO[h], and then either realize Q1 curveFromFiniteTangent/ordinary derivative semantics or prove the equivalent generated-action stress identification directly. Do not substitute CMP109 Eq.(5.1)'s gauge B -> U_j(exp iB) vacuum-polarization path for the metric/stress curve, and do not reintroduce a second metric basis, ten DS callbacks, or an independent C3 covariance receipt."
