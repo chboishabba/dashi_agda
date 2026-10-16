@@ -8,6 +8,7 @@ import DASHI.Quantum.QuantumMereologySourceAtlasExact as Sources
 import DASHI.Quantum.QuantumMereologyHeterogeneousFiniteAtlasAuthorityExact as Atlas
 import DASHI.Quantum.QuantumMereologyGTPSShortTime2026AuthorityExact as GTPS
 import DASHI.Quantum.QuantumMereologyGTPSProjectionProducerAuthorityExact as Projector
+import DASHI.Quantum.QuantumMereologyGTPSUnitaryMetric2026AuthorityExact as Metric
 
 record SelectedAtlasTerminalStatus : Set where
   field
@@ -47,6 +48,10 @@ record SelectedAtlasTerminalStatus : Set where
     FiniteSourceGTPSScoreAndDistanceInstantiatedIsTrue :
       FiniteSourceGTPSScoreAndDistanceInstantiated ≡ true
 
+    SourceUnitaryFamilyMetricFormulaPaid : Bool
+    SourceUnitaryFamilyMetricFormulaPaidIsTrue :
+      SourceUnitaryFamilyMetricFormulaPaid ≡ true
+
     NestedMarginalCoherencePaid : Bool
     NestedMarginalCoherencePaidIsFalse :
       NestedMarginalCoherencePaid ≡ false
@@ -75,13 +80,21 @@ record SelectedAtlasTerminalStatus : Set where
     PhysicalPointerWeldPaidIsFalse :
       PhysicalPointerWeldPaid ≡ false
 
-    SourceRiemannianPullbackPaid : Bool
-    SourceRiemannianPullbackPaidIsFalse :
-      SourceRiemannianPullbackPaid ≡ false
+    MinimizerMapPullbackDifferentiated : Bool
+    MinimizerMapPullbackDifferentiatedIsFalse :
+      MinimizerMapPullbackDifferentiated ≡ false
+
+    HamiltonianParameterMetricPaid : Bool
+    HamiltonianParameterMetricPaidIsFalse :
+      HamiltonianParameterMetricPaid ≡ false
 
     SourceAlgebraSusceptibilityPaid : Bool
     SourceAlgebraSusceptibilityPaidIsFalse :
       SourceAlgebraSusceptibilityPaid ≡ false
+
+    ThermodynamicLimitMQPTPaid : Bool
+    ThermodynamicLimitMQPTPaidIsFalse :
+      ThermodynamicLimitMQPTPaid ≡ false
 
     QuantumMutualInformationInequalityPackagePaid : Bool
     QuantumMutualInformationInequalityPackagePaidIsFalse :
@@ -119,6 +132,8 @@ canonicalSelectedAtlasTerminalStatus = record
   ; FiniteSourceProjectorProducerPaidIsTrue = refl
   ; FiniteSourceGTPSScoreAndDistanceInstantiated = true
   ; FiniteSourceGTPSScoreAndDistanceInstantiatedIsTrue = refl
+  ; SourceUnitaryFamilyMetricFormulaPaid = true
+  ; SourceUnitaryFamilyMetricFormulaPaidIsTrue = refl
   ; NestedMarginalCoherencePaid = false
   ; NestedMarginalCoherencePaidIsFalse = refl
   ; ArbitraryRetainedCoordinateChartIndependencePaid = false
@@ -133,10 +148,14 @@ canonicalSelectedAtlasTerminalStatus = record
   ; PhysicalHamiltonianAttachmentPaidIsFalse = refl
   ; PhysicalPointerWeldPaid = false
   ; PhysicalPointerWeldPaidIsFalse = refl
-  ; SourceRiemannianPullbackPaid = false
-  ; SourceRiemannianPullbackPaidIsFalse = refl
+  ; MinimizerMapPullbackDifferentiated = false
+  ; MinimizerMapPullbackDifferentiatedIsFalse = refl
+  ; HamiltonianParameterMetricPaid = false
+  ; HamiltonianParameterMetricPaidIsFalse = refl
   ; SourceAlgebraSusceptibilityPaid = false
   ; SourceAlgebraSusceptibilityPaidIsFalse = refl
+  ; ThermodynamicLimitMQPTPaid = false
+  ; ThermodynamicLimitMQPTPaidIsFalse = refl
   ; QuantumMutualInformationInequalityPackagePaid = false
   ; QuantumMutualInformationInequalityPackagePaidIsFalse = refl
   ; MDSSpatialRealizationPaid = false
@@ -152,4 +171,4 @@ dashiSelectedAtlasTerminalReceipt =
   Sources.attribution-receipt
     Sources.crossModuleInference
     "DASHI Agda"
-    "Combines the imported Lean-source heterogeneous finite atlas, product partial-trace associativity, environment-relabeling invariance, source-facing g-TPS formulas, and later finite Hilbert--Schmidt projector producer into one fail-closed phase boundary. Finite mathematical projector existence is now paid by the later formal owner; physical source-algebra/Hamiltonian identification, nested coherence, geometry, holography and spacetime remain separate unpaid obligations."
+    "Combines the imported Lean-source heterogeneous finite atlas, product partial-trace associativity, environment-relabeling invariance, source-facing g-TPS formulas, finite Hilbert--Schmidt projector producer and source unitary-family infinitesimal metric formula into one fail-closed phase boundary. Finite projector/metric-formula existence is paid by formal owners; physical source-algebra/Hamiltonian identification, minimizer-map pullback/susceptibility, nested coherence, MI geometry, holography and spacetime remain separate unpaid obligations."
