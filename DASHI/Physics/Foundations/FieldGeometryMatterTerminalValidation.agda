@@ -80,6 +80,10 @@ generalizedCaloricContractIsPaid :
   Terminal.generalizedCaloricFiniteContract Terminal.currentTerminalFrontier ≡ Terminal.structurallyPaid
 generalizedCaloricContractIsPaid = refl
 
+geometryCaloricUpperBoundWasExecuted :
+  Terminal.geometryCaloricUpperBoundNumericalReplay Terminal.currentTerminalFrontier ≡ Terminal.numericallyExecuted
+geometryCaloricUpperBoundWasExecuted = refl
+
 geometryCaloricCycleRemainsExternal :
   Terminal.geometryCaloricPhysicalCycle Terminal.currentTerminalFrontier ≡ Terminal.externalOnly
 geometryCaloricCycleRemainsExternal = refl
