@@ -8,9 +8,9 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- CONTEMPORARY SOURCE ATLAS — STRUCTURAL COMPARATORS ONLY
 --
--- These sources illuminate modern qualification/PHM coordinates.  They do
--- not retroactively impose modern standards on the 1974 Rocketdyne programme
--- and do not supply historical same-object constitutive or reliability data.
+-- These sources illuminate modern qualification/PHM/model-credibility
+-- coordinates. They do not retroactively impose modern standards on the 1974
+-- Rocketdyne programme and do not supply historical same-object data.
 ------------------------------------------------------------------------
 
 data SourceRole : Set where
@@ -55,6 +55,51 @@ nasaSTD5023 = contemporary-source
   "modern valve-qualification comparator; does not identify the Moog 54X107A historical failure population"
   "NASA Technical Standards System: https://standards.nasa.gov/standard/NASA/NASA-STD-5023"
 
+nasaSTD5012C : ContemporarySource
+nasaSTD5012C = contemporary-source
+  "NASA-STD-5012C, Strength and Life Assessment Requirements for Liquid-Fueled Space Propulsion System Engines"
+  2025 activeStandard
+  "defines propulsion-engine structural life in fatigue/creep terms and requires analyses plus tests for structural qualification; hot-fire success alone is not the structural qualification argument"
+  false false
+  "supports separating observed firing survival from structural strength/life qualification; transfers no 1974 acceptance criterion"
+  "NASA Technical Standards System node 250; C update dated 2025-12-31: https://standards.nasa.gov/node/250"
+
+nasaSTD5009C : ContemporarySource
+nasaSTD5009C = contemporary-source
+  "NASA-STD-5009C, Nondestructive Evaluation Requirements for Fracture Critical Metallic Components"
+  2023 activeStandard
+  "requires quantitative probability-of-detection support where fracture control relies on NDE"
+  false false
+  "supports refining inspection from presence/absence to method, coverage, defect class, detection capability/POD and acceptance threshold"
+  "NASA Technical Standards System: https://standards.nasa.gov/standard/nasa/nasa-std-5009"
+
+nasaSTD5019AChange4 : ContemporarySource
+nasaSTD5019AChange4 = contemporary-source
+  "NASA-STD-5019A Change 4, Fracture Control Requirements for Spaceflight Hardware"
+  2024 activeStandard
+  "treats fracture control as a programme of design, analysis, testing, NDE and tracking of fracture-critical hardware under an approved fracture-control plan"
+  false false
+  "supports keeping defect state, inspection, article tracking and life disposition explicit; does not retroactively classify R-9557 hardware"
+  "NASA Technical Standards System: https://standards.nasa.gov/node/253"
+
+nasaSTD7009B : ContemporarySource
+nasaSTD7009B = contemporary-source
+  "NASA-STD-7009B, Standard for Models and Simulations"
+  2024 activeStandard
+  "establishes lifecycle modeling/simulation credibility practices including verification, validation, uncertainty and program-defined acceptance criteria"
+  false false
+  "supports an explicit model-credibility contract around reconstructed Test-052 physics; does not create historical model adequacy"
+  "NASA Technical Standards System: https://standards.nasa.gov/standard/NASA/NASA-STD-7009"
+
+nasaHDBK7009B : ContemporarySource
+nasaHDBK7009B = contemporary-source
+  "NASA-HDBK-7009B, NASA Handbook for Models and Simulations"
+  2026 handbook
+  "guides empirical validation against real-world referents across normal/off-design/test/non-operational environments and requires uncertainty to be understood"
+  false false
+  "supports freezing a validated declared-use model before extrapolating from Test 052 to Tests 768/870-2; no numerical Rocketdyne validation metric is supplied"
+  "NASA Technical Standards System: https://standards.nasa.gov/standard/NASA/NASA-HDBK-7009"
+
 raambo : ContemporarySource
 raambo = contemporary-source
   "NASA TechPort 147003, RAMPT-RAAMBO"
@@ -88,19 +133,24 @@ record ContemporarySourceAtlasBoundary : Set where
     modernQualificationGrammarRelevant : Bool
     processHistoryRelevant : Bool
     inspectionAndNDERelevant : Bool
+    quantitativePODRelevant : Bool
+    strengthLifeQualificationRelevant : Bool
+    fractureControlTrackingRelevant : Bool
+    modelCredibilityRelevant : Bool
     serviceHistoryAndPHMRelevant : Bool
     modernSourcesPay1974Geometry : Bool
     modernSourcesPay1974ConstitutiveLaw : Bool
     modernSourcesPay1974ReliabilityPopulation : Bool
+    modernSourcesPay1974ValidationResidual : Bool
     modernStandardsApplyRetroactively : Bool
     boundary : String
 
 contemporarySourceAtlasBoundary : ContemporarySourceAtlasBoundary
 contemporarySourceAtlasBoundary = contemporary-source-atlas-boundary
-  true true true true
-  false false false false
-  "Contemporary sources guide acquisition/model structure only. Historical claims remain source-owned and same-object gated."
+  true true true true true true true true
+  false false false false false
+  "Contemporary sources guide acquisition, qualification and model-credibility structure only. Historical claims remain source-owned and same-object gated."
 
 attributionFirewall : String
 attributionFirewall =
-  "NASA/author sources own reported requirements/results; DASHI owns only the formal crosswalk, acquisition routing and non-promotion boundaries."
+  "NASA/author sources own reported requirements/results; DASHI owns only the formal crosswalk, acquisition routing, derived structural distinctions and non-promotion boundaries."
