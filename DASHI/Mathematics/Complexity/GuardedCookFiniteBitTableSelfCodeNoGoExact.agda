@@ -2,46 +2,29 @@ module DASHI.Mathematics.Complexity.GuardedCookFiniteBitTableSelfCodeNoGoExact w
 
 ------------------------------------------------------------------------
 -- FULL-TABLE-BAKED OWN-COOK GENERATOR CANNOT BE ITS OWN DESCRIBED MACHINE
---
--- Let n be the binary length of the fixed guarded Cook formula.  The literal
--- lookup compiler needs n+1 cursor controls plus three output sinks, so its
--- coded state count is strictly greater than n.  But every guarded Cook binary
--- quotation is at least the one-hot StateWidth of the very machine it describes.
--- If the generated lookup code were literally the description code, this would
--- force
---
---   n < stateCount(lookup) <= n,
---
--- a contradiction.
---
--- Thus the table-baked baseline is a real finite generator for a FIXED external
--- description, but it cannot close the same-object own-code equation.  The live
--- self-reference route must retain compact/streamed generation.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
+import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
+import DASHI.Mathematics.Complexity.CodedFiniteUnaryCursorExact as Cursor
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
 import DASHI.Mathematics.Complexity.GuardedCookFiniteBitTableGeneratorExact as Table
 import DASHI.Mathematics.Complexity.CodedFiniteBitStreamLookupExact as Lookup
-import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinStateWidthLowerExact as StateLower
 
-------------------------------------------------------------------------
--- Coded Fin state width is exactly the declared state cardinality.
-------------------------------------------------------------------------
-
 mapFinSucLength :
-  ∀ {n : Nat} (xs : Agda.Builtin.List.List (Data.Fin.Base.Fin n)) →
+  ∀ {n : Nat} (xs : List (Fin.Fin n)) →
   Canonical.listLength (Coded.mapFinSuc xs) ≡ Canonical.listLength xs
 mapFinSucLength [] = refl
 mapFinSucLength (x ∷ xs)
@@ -62,20 +45,17 @@ codedStateWidthExact :
   ≡ Coded.stateCount code
 codedStateWidthExact code = allFinLength (Coded.stateCount code)
 
-------------------------------------------------------------------------
--- The table lookup compiler has strictly more controls than table bits.
-------------------------------------------------------------------------
-
 lookupStateCountExact :
   (n : Nat) →
-  (bits : Data.Fin.Base.Fin n → Agda.Builtin.Bool.Bool) →
+  (bits : Fin.Fin n → Bool) →
   Coded.stateCount (Lookup.lookupCode n bits)
   ≡ suc n + suc (suc (suc zero))
-lookupStateCountExact n bits = refl
+lookupStateCountExact n bits
+  rewrite NatP.*-identityˡ (suc n) = refl
 
 bitCountStrictlyBelowLookupStateCount :
   (n : Nat) →
-  (bits : Data.Fin.Base.Fin n → Agda.Builtin.Bool.Bool) →
+  (bits : Fin.Fin n → Bool) →
   n < Coded.stateCount (Lookup.lookupCode n bits)
 bitCountStrictlyBelowLookupStateCount n bits
   rewrite lookupStateCountExact n bits =
@@ -84,11 +64,6 @@ bitCountStrictlyBelowLookupStateCount n bits
     (NatP.m≤m+n
       (suc n)
       (suc (suc (suc zero))))
-
-------------------------------------------------------------------------
--- Every fixed description already bounds its coded state count by its own Cook
--- binary quotation length.
-------------------------------------------------------------------------
 
 descriptionStateCountBelowCookBitCount :
   (description : Description.GuardedCookFormulaDescription) →
@@ -107,10 +82,6 @@ descriptionStateCountBelowCookBitCount description =
     transportLeft :
       ∀ {a b c : Nat} → a ≡ b → a ≤ c → b ≤ c
     transportLeft refl proof = proof
-
-------------------------------------------------------------------------
--- Main same-object no-go.
-------------------------------------------------------------------------
 
 tableBakedGeneratorCannotBeDescriptionCode :
   (description : Description.GuardedCookFormulaDescription) →
@@ -154,9 +125,7 @@ noFixedTableGeneratorBoundary description boundary =
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- Full bit-table baking is now closed as a same-object dead end, not merely
--- deemed inefficient.  The successful fixed-description generator must compute
--- Cook bits from a compact representation whose control/state width does not
--- itself contain one state per output bit.  This validates the branch's streamed
--- clause/token/index architecture as the live route.
+-- Full bit-table baking is a same-object dead end.  The live generator must use
+-- a compact streamed representation: one control state per output bit makes the
+-- machine's own one-hot state width larger than the quotation being generated.
 ------------------------------------------------------------------------
