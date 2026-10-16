@@ -46,6 +46,8 @@ class Symbol:
         scope: str | None = None,
         fingerprint: str | None = None,
     ) -> "Symbol":
+        # Scope participates in semantic identity so local binders with the same
+        # name in different declarations remain distinct nodes.
         symbol_id = stable_hash(
             {
                 "module": module,
