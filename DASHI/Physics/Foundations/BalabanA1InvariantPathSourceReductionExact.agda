@@ -93,9 +93,7 @@ cmp109VacuumPolarizationScalarSymmetryDoesNotByItselfPayA1PathNaturality = true
 
 preferredFrontierAlreadyCompilerSaturated : Bool
 preferredFrontierAlreadyCompilerSaturated =
-  Preferred.remainingAdapterDebtInScopedPreferredRoute == 0
-  where
-  open import Agda.Builtin.Nat using (_==_)
+  Preferred.newMathHasReplacedPresentationEqualities
 
 cmp109HypercubicSourceSymmetryCompilerAlreadyMachineChecked : Bool
 cmp109HypercubicSourceSymmetryCompilerAlreadyMachineChecked = true
