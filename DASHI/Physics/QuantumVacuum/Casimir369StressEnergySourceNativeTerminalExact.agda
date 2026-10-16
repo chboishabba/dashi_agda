@@ -8,6 +8,7 @@ import DASHI.Physics.QuantumVacuum.Casimir369StressEnergyTerminalMaxCutExact as 
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutExact as SourceHost
 import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerExact as PinnedRecovery
 import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeExact as GroupLaw
+import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Stress
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact as Action
 import DASHI.Physics.QuantumVacuum.CasimirU1SelectedStressReadoutAttachmentExact as StressReadout
 import DASHI.Physics.QuantumVacuum.CasimirU1ModeRenormalizedStressAttachmentExact as ModeStress
@@ -20,14 +21,10 @@ import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact as Round
 -- projection compatibility, R457 reverse recovery after Round131 attachment,
 -- the old pinned-selection receipt, selected compact simplicity, duplicate SU2
 -- group-law construction, the arbitrary all-groups interpretation callback,
--- Cartan bracket/pairing/curvature algebra, restricted action equality,
--- same-path variation equality, selected-QFT/Maxwell readout equality, and
--- duplicate conducting-plate/renormalization objects.
---
--- The first three live host payments are therefore:
---   Round131 recovery of Y_R457;
---   Y_R457 = Y_pinned;
---   indexed realization of the selected group as concrete quaternionic SU(2).
+-- bracket-zero after a selected Cartan-field realization, invariant-pairing /
+-- abelian-curvature algebra, restricted action equality, same-path variation
+-- equality, selected-QFT/Maxwell readout equality, and duplicate plate/
+-- renormalization objects.
 ------------------------------------------------------------------------
 
 legacyTerminalBoundary : Legacy.Casimir369StressEnergyTerminalBoundary
@@ -41,6 +38,9 @@ pinnedRecoveryBoundary = PinnedRecovery.canonicalRound131PinnedRecoveryBoundary
 
 quaternionGroupLawBoundary : GroupLaw.CasimirQuaternionSU2GroupLawBoundary
 quaternionGroupLawBoundary = GroupLaw.canonicalQuaternionSU2GroupLawBoundary
+
+selectedQFTCartanFieldBoundary : U1Stress.CasimirU1RestrictedSelectedQFTStressBoundary
+selectedQFTCartanFieldBoundary = U1Stress.canonicalCasimirU1RestrictedSelectedQFTStressBoundary
 
 actionVariationBoundary : Action.CasimirU1ActionVariationBoundary
 actionVariationBoundary = Action.canonicalCasimirU1ActionVariationBoundary
@@ -65,6 +65,7 @@ record CasimirSourceNativeTerminalBoundary : Set where
     quaternionSU2GroupLawBridgePaid : Bool
     selectedGroupStructureRealizationCompilerPaid : Bool
     independentAllGroupsStructureInterpretationRequired : Bool
+    selectedQFTCartanFieldRealizationInterfacePaid : Bool
 
     cartanFieldBracketCompilerPaid : Bool
     invariantPairingCompilerPaid : Bool
@@ -82,7 +83,7 @@ record CasimirSourceNativeTerminalBoundary : Set where
     round131RecoveredQFTAttachmentForR457Paid : Bool
     r457LiteralPinnedConstructionIdentityPaid : Bool
     selectedGroupQuaternionSU2RealizationPaid : Bool
-    canonicalCartanU1FieldRestrictionPaid : Bool
+    selectedQFTCartanFieldRealizationPaid : Bool
     physicalChargeCouplingNormalizationPaid : Bool
     sameObjectNondegenerateCurvatureFormulaPaid : Bool
     exteriorFieldStrengthCartanImagePaid : Bool
@@ -103,7 +104,7 @@ open CasimirSourceNativeTerminalBoundary public
 canonicalSourceNativeTerminalBoundary : CasimirSourceNativeTerminalBoundary
 canonicalSourceNativeTerminalBoundary =
   casimir-source-native-terminal-boundary
-    true true false true false true false false true true false
+    true true false true false true false false true true false true
     true true true true false true false true false true false false
     false false false false false false false false false false false false false false false false false false
 
@@ -111,7 +112,7 @@ data RemainingSourceNativeCasimirBlocker : Set where
   missingRound131RecoveredQFTAttachmentForR457 : RemainingSourceNativeCasimirBlocker
   missingR457LiteralPinnedConstructionIdentity : RemainingSourceNativeCasimirBlocker
   missingSelectedGroupQuaternionSU2Realization : RemainingSourceNativeCasimirBlocker
-  missingCanonicalCartanU1FieldRestriction : RemainingSourceNativeCasimirBlocker
+  missingSelectedQFTCartanFieldRealization : RemainingSourceNativeCasimirBlocker
   missingPhysicalChargeCouplingNormalization : RemainingSourceNativeCasimirBlocker
   missingSameObjectNondegenerateCurvatureFormulaAttachment : RemainingSourceNativeCasimirBlocker
   missingExteriorFieldStrengthCartanImage : RemainingSourceNativeCasimirBlocker
@@ -137,7 +138,7 @@ secondUnificationBlocker = missingR457LiteralPinnedConstructionIdentity
 thirdUnificationBlocker : RemainingSourceNativeCasimirBlocker
 thirdUnificationBlocker = missingSelectedGroupQuaternionSU2Realization
 fourthUnificationBlocker : RemainingSourceNativeCasimirBlocker
-fourthUnificationBlocker = missingCanonicalCartanU1FieldRestriction
+fourthUnificationBlocker = missingSelectedQFTCartanFieldRealization
 fifthUnificationBlocker : RemainingSourceNativeCasimirBlocker
 fifthUnificationBlocker = missingPhysicalChargeCouplingNormalization
 sixthUnificationBlocker : RemainingSourceNativeCasimirBlocker
@@ -180,6 +181,7 @@ data RetiredProjectionCompatibilityBlockerAutomaticallyReturns : Set where
 data RetiredR457RecoveryEqualityBlockerAutomaticallyReturns : Set where
 data RetiredPinnedSourceNativeSelectionBlockerAutomaticallyReturns : Set where
 data RetiredAllGroupsInterpretationBlockerAutomaticallyReturns : Set where
+data RetiredArbitraryCartanFieldBlockerAutomaticallyReturns : Set where
 data RetiredCompactSimpleBlockerAutomaticallyReturns : Set where
 data RetiredActionEqualityBlockerAutomaticallyReturns : Set where
 data RetiredMetricVariationEqualityBlockerAutomaticallyReturns : Set where
@@ -193,6 +195,8 @@ retiredPinnedSourceNativeSelectionBlockerDoesNotReturn : RetiredPinnedSourceNati
 retiredPinnedSourceNativeSelectionBlockerDoesNotReturn ()
 retiredAllGroupsInterpretationBlockerDoesNotReturn : RetiredAllGroupsInterpretationBlockerAutomaticallyReturns → ⊥
 retiredAllGroupsInterpretationBlockerDoesNotReturn ()
+retiredArbitraryCartanFieldBlockerDoesNotReturn : RetiredArbitraryCartanFieldBlockerAutomaticallyReturns → ⊥
+retiredArbitraryCartanFieldBlockerDoesNotReturn ()
 retiredCompactSimpleBlockerDoesNotReturn : RetiredCompactSimpleBlockerAutomaticallyReturns → ⊥
 retiredCompactSimpleBlockerDoesNotReturn ()
 retiredActionEqualityBlockerDoesNotReturn : RetiredActionEqualityBlockerAutomaticallyReturns → ⊥
@@ -204,4 +208,4 @@ retiredSecondRenormalizationBlockerDoesNotReturn ()
 
 sourceNativeTerminalReading : String
 sourceNativeTerminalReading =
-  "The source-native Casimir/GRQFT max-cut is reduced to genuine same-object inputs. Round131 recovery of the literal R457 construction is first. Equality of that same construction with the pinned physical Yang-Mills construction is second; together these compile the old pinned-selection receipt and selected-target equality, while compact simplicity is already pinned. Third is an indexed SelectedGroupStructureRealization proving the chosen compact-simple token is realized by the concrete quaternionic SU(2); a bare SU2 law or arbitrary all-groups interpretation is insufficient. Cartan bracket, invariant pairing, abelian curvature, restricted action equality, same-path metric variation, selected-QFT/Maxwell readout equality and duplicate plate/renormalization objects remain compiler-saturated. Downstream physical inputs proceed through field/coupling/curvature/action/path/stress attachment, ten Brown-Maclay component values, Round131 all-sector assembly and Einstein/common-action closure. Local Casimir stress still does not imply measured gravity or unified QG."
+  "The source-native Casimir/GRQFT max-cut is reduced to genuine same-object inputs. Round131 recovery of the literal R457 construction is first. Equality of that construction with the pinned physical Yang-Mills construction is second. Third is an indexed realization of the chosen compact-simple token as concrete quaternionic SU(2). Fourth is a SelectedQFTCartanFieldRealization tying the actual selected recovered-QFT field to the existing Cartan U(1) image; an arbitrary Cartan-valued callback does not count. Once that is supplied, bracket-zero compiles. Invariant pairing, abelian curvature algebra, restricted action equality, same-path metric variation, selected-QFT/Maxwell readout equality and duplicate plate/renormalization objects remain compiler-saturated. Downstream physical inputs proceed through coupling/curvature/action/path/stress attachment, ten Brown-Maclay component values, Round131 all-sector assembly and Einstein/common-action closure."
