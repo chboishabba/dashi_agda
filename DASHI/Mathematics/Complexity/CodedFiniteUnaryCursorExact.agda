@@ -2,19 +2,6 @@ module DASHI.Mathematics.Complexity.CodedFiniteUnaryCursorExact where
 
 ------------------------------------------------------------------------
 -- LITERAL UNARY-INDEX CURSOR AS A CODED FINITE STANDARD TM
---
--- Symbols:
---   0 = blank
---   1 = more
---   2 = stop
---
--- The source machine has one control state and one resident rule:
---
---   q --more/more,R--> q.
---
--- Its exact n-phase lift therefore gives n+1 cursor states. Reading each
--- `more` advances exactly one phase. Phase n is quiescent by the generic phase
--- compiler. Stop/output links are added separately.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -94,6 +81,18 @@ cursorTerminalStateExact :
     ≡ cursorState n (Phase.lastPhase n)
 cursorTerminalStateExact n = refl
 
+cursorResidentReadsMore :
+  (n : Nat) →
+  ∀ {resident} →
+  Local.RuleOccurs resident (Mode.rules (cursorFragment n)) →
+  Local.readSymbol resident ≡ moreSymbol
+cursorResidentReadsMore n residentOccurs
+  with Phase.phaseTablePreimage (Coded.allFin n) residentOccurs
+... | phase , original , originalOccurs , exact
+  with originalOccurs
+... | Local.ruleHere rewrite exact = refl
+... | Local.ruleThere ()
+
 cursorStopKeyFresh :
   (n : Nat) →
   (phase : Fin.Fin (suc n)) →
@@ -102,14 +101,22 @@ cursorStopKeyFresh :
   Local.sourceState resident ≡ cursorState n phase →
   Local.readSymbol resident ≡ stopSymbol →
   ⊥
-cursorStopKeyFresh n phase residentOccurs sourceEq readEq
-  with Phase.phaseTablePreimage (Coded.allFin n) residentOccurs
-... | residentPhase , original , originalOccurs , exact
-  rewrite exact = moreNotStop readEq
+cursorStopKeyFresh n phase residentOccurs sourceEq readEq =
+  moreNotStop
+    (transRead residentOccurs readEq)
+  where
+    transRead :
+      ∀ {resident} →
+      Local.RuleOccurs resident (Coded.rules (cursorCode n)) →
+      Local.readSymbol resident ≡ stopSymbol →
+      moreSymbol ≡ stopSymbol
+    transRead occurs equality
+      rewrite cursorResidentReadsMore n occurs = equality
 
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- The runtime unary counter is literal finite standard-TM syntax. It consumes
--- one `more` symbol per standard edge and has a fresh `stop` key at every phase.
+-- The unary counter is literal finite standard-TM syntax. It consumes one
+-- `more` per edge, and every `stop` dispatch key is disjoint from all resident
+-- cursor rules, at every phase including overflow.
 ------------------------------------------------------------------------
