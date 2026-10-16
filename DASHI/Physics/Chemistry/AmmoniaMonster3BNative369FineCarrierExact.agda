@@ -2,7 +2,7 @@ module DASHI.Physics.Chemistry.AmmoniaMonster3BNative369FineCarrierExact where
 
 open import DASHI.Core.Prelude
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Moonshine.Monster3BFiniteProjectorModelExact as Model
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Actual
@@ -10,24 +10,6 @@ import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact as Base3
 import DASHI.Moonshine.Base369Monster3BMultiplicityCompletedTenTritSquareCompilerExact as Multiplicity369
 import DASHI.Moonshine.Base369CompletedTenTritSquareMultiplicityBidiExact as Completed
 import DASHI.Physics.Chemistry.Atomic369Kernel6HeisenbergBridgeExact as Kernel369
-
-------------------------------------------------------------------------
--- FULL MONSTER-ZETA MODEL BASIS ON NATIVE 369 CARRIERS
---
--- Existing owners pay both coordinate charts independently:
---
---   atomic/triadic Kernel 6 <-> F3^6 / Heisenberg X6,
---   Fin 90 <-> Completed10 x T^2.
---
--- Their product therefore gives an exact finite-carrier chart
---
---   ZetaModelBasis
---     = X6 x Fin90
---     <-> Kernel6 x CompletedTenTritSquare.
---
--- This removes a structural-coordinate gap.  It does NOT identify any physical
--- NH3 state with a particular point of the native-369 product.
-------------------------------------------------------------------------
 
 MonsterZetaModelBasis : Set
 MonsterZetaModelBasis = Model.ZetaModelBasis
@@ -76,15 +58,7 @@ open Native369FineCarrierIsomorphism public
 canonicalNative369FineCarrierIsomorphism : Native369FineCarrierIsomorphism
 canonicalNative369FineCarrierIsomorphism =
   native369FineCarrierIsomorphism
-    native369ToModel
-    modelToNative369
-    native369RoundTrip
-    model369RoundTrip
-
-------------------------------------------------------------------------
--- Any already-owned literal zeta recognition now gives a compiler from the
--- native-369 fine coordinate directly into that literal recognized sector.
-------------------------------------------------------------------------
+    native369ToModel modelToNative369 native369RoundTrip model369RoundTrip
 
 native369ToActualZeta :
   ∀ {ActualSector : Set} →
@@ -107,10 +81,9 @@ native369ActualRoundTrip :
   actualZetaToNative369 recognition (native369ToActualZeta recognition native)
   ≡ native
 native369ActualRoundTrip recognition native =
-  let modelEq = Actual.toAfterFrom recognition (native369ToModel native)
-  in
   trans
-    (cong modelToNative369 modelEq)
+    (cong modelToNative369
+      (Actual.toAfterFrom recognition (native369ToModel native)))
     (native369RoundTrip native)
 
 actualNative369RoundTrip :
@@ -120,10 +93,9 @@ actualNative369RoundTrip :
   native369ToActualZeta recognition (actualZetaToNative369 recognition state)
   ≡ state
 actualNative369RoundTrip recognition state =
-  let modelRound = model369RoundTrip (Actual.toModel recognition state)
-  in
   trans
-    (cong (Actual.fromModel recognition) modelRound)
+    (cong (Actual.fromModel recognition)
+      (model369RoundTrip (Actual.toModel recognition state)))
     (Actual.fromAfterTo recognition state)
 
 actualRecognitionToBase369 :
@@ -131,10 +103,6 @@ actualRecognitionToBase369 :
   Actual.ActualZetaSectorRecognition ActualSector →
   Base369.ActualBase369SectorRecognition ActualSector
 actualRecognitionToBase369 = Base369.composeActualRecognitionWithBase369
-
-------------------------------------------------------------------------
--- A physical chemistry attachment, deliberately left proof-relevant.
-------------------------------------------------------------------------
 
 record PhysicalNH3Native369FineCoordinate (NH3State : Set) : Set₁ where
   constructor physicalNH3Native369FineCoordinate
@@ -186,10 +154,5 @@ open Native369FineCarrierBoundary public
 canonicalNative369FineCarrierBoundary : Native369FineCarrierBoundary
 canonicalNative369FineCarrierBoundary =
   native369FineCarrierBoundary
-    true refl
-    true refl
-    true refl
-    true refl
-    false refl
-    false refl
+    true refl true refl true refl true refl false refl false refl
     "The full Monster-zeta finite model basis is exactly charted by native 369 carriers Kernel6 x (Completed10 x T^2), and any existing ActualZetaSectorRecognition composes with this chart by exact two-sided round trips. What remains is physical same-object assignment/equivariance, not a missing finite coordinate system."
