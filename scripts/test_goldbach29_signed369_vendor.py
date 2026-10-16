@@ -8,6 +8,7 @@ MACRO = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29SuccessMacroExact.ag
 RECEIPT = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29ReductionReceiptExact.agda"
 SEMANTICS = ROOT / "DASHI" / "ComputerScience" / "Goldbach29ExternalHaltingSemanticsExact.agda"
 HALTING = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29HaltingConsumerCompilerExact.agda"
+SOTA = ROOT / "DASHI" / "ComputerScience" / "GoldbachMachineReductionSOTAExact.agda"
 VIS = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29VisualizationConsumerExact.agda"
 AGGREGATE = ROOT / "DASHI" / "EverythingGoldbach29Signed369VendorExact.agda"
 WORKFLOW = ROOT / ".github" / "workflows" / "goldbach29-signed369-vendor.yml"
@@ -77,6 +78,17 @@ def test_halting_compiler_reduces_final_leaf_to_goldbach30_attachment():
     assert "goldbach30HaltingAttachmentPaid = false" in text
 
 
+def test_sota_attribution_keeps_deepmind_as_external_precedent():
+    text = SOTA.read_text()
+    assert "google-deepmind/cryptids" in text
+    assert "f5d4559a82df052b2297be3349eccbf58b2c5a1d" in text
+    assert "goldbach_25" in text and "goldbach_21" in text
+    assert "339411" in text and "170966" in text
+    assert "externalFormalReductionPrecedent" in text
+    assert "deepMindResultProvesDashiFractranReduction = false" in text
+    assert "staticCompressionCanIncreaseRuntimeHasIndependentPrecedent = true" in text
+
+
 def test_reduction_receipt_records_pareto_cut():
     text = RECEIPT.read_text()
     assert "Goldbach30To29ReductionReceipt" in text
@@ -114,6 +126,7 @@ def test_aggregate_and_workflow_own_the_new_surface():
     assert "Goldbach30To29ReductionReceiptExact" in aggregate
     assert "Goldbach29ExternalHaltingSemanticsExact" in aggregate
     assert "Goldbach30To29HaltingConsumerCompilerExact" in aggregate
+    assert "GoldbachMachineReductionSOTAExact" in aggregate
     assert "Goldbach30To29VisualizationConsumerExact" in aggregate
     assert "test_goldbach29_signed369_vendor.py" in workflow
     assert "EverythingGoldbach29Signed369VendorExact.agda" in workflow
