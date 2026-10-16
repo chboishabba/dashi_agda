@@ -47,27 +47,22 @@ selectedB0B3SemanticsAvailable : Bool
 selectedB0B3SemanticsAvailable = true
 
 remainingOpaqueAnalyticEstimateCount : Nat
-remainingOpaqueAnalyticEstimateCount =
-  Sharp.remainingOpaqueAnalyticEstimateCount
+remainingOpaqueAnalyticEstimateCount = Sharp.remainingOpaqueAnalyticEstimateCount
 
 remainingAntigravitySpecificP1ResidualCount : Nat
-remainingAntigravitySpecificP1ResidualCount =
-  Sharp.remainingP1SourceLeafCount
+remainingAntigravitySpecificP1ResidualCount = Sharp.remainingP1SourceLeafCount
 
 q1PathDerivativeSemanticsAndEquivarianceStillRequired : Bool
-q1PathDerivativeSemanticsAndEquivarianceStillRequired =
-  Sharp.q1PathDerivativeSourcePackageStillRequired
+q1PathDerivativeSemanticsAndEquivarianceStillRequired = Sharp.q1PathDerivativeSourcePackageStillRequired
 
 primitiveE1DerivativeEquivarianceProjectRequired : Bool
 primitiveE1DerivativeEquivarianceProjectRequired = false
 
 signedR144CovarianceCompilerOwnedFromQ1 : Bool
-signedR144CovarianceCompilerOwnedFromQ1 =
-  Q.signedCovarianceDerivedFromInvariantPathCalculus
+signedR144CovarianceCompilerOwnedFromQ1 = Q.signedCovarianceDerivedFromInvariantPathCalculus
 
 potentialCovarianceNeedsNoD1CovariancePremise : Bool
-potentialCovarianceNeedsNoD1CovariancePremise =
-  Q.potentialCovarianceDoesNotNeedD1CovariancePremise
+potentialCovarianceNeedsNoD1CovariancePremise = Q.potentialCovarianceDoesNotNeedD1Covariance
 
 ------------------------------------------------------------------------
 -- A2/E24 presentation debt retired by current-master compiler.
@@ -77,16 +72,13 @@ e24NovelDataAreOneObservableAndTwoAdmissibilityProofs : Bool
 e24NovelDataAreOneObservableAndTwoAdmissibilityProofs = false
 
 e24SelectedObservableChoiceStillRequired : Bool
-e24SelectedObservableChoiceStillRequired =
-  Sharp.selectedObservableChoiceStillRequired
+e24SelectedObservableChoiceStillRequired = Sharp.selectedObservableChoiceStillRequired
 
 e24PositiveTimeAdmissibilityStillRequired : Bool
-e24PositiveTimeAdmissibilityStillRequired =
-  Sharp.positiveTimeAdmissibilityStillRequired
+e24PositiveTimeAdmissibilityStillRequired = Sharp.positiveTimeAdmissibilityStillRequired
 
 e24GaugeInvariantAdmissibilityStillRequired : Bool
-e24GaugeInvariantAdmissibilityStillRequired =
-  Sharp.gaugeInvariantAdmissibilityStillRequired
+e24GaugeInvariantAdmissibilityStillRequired = Sharp.gaugeInvariantAdmissibilityStillRequired
 
 e24PairToCanonicalObservableSemanticsStillRequired : Bool
 e24PairToCanonicalObservableSemanticsStillRequired =
@@ -108,12 +100,10 @@ independentE4DecayEstimateRequired : Bool
 independentE4DecayEstimateRequired = false
 
 selectedStressOnlySufficesForE2 : Bool
-selectedStressOnlySufficesForE2 =
-  SelectedCylinder.selectedStressOnlySufficesForE2
+selectedStressOnlySufficesForE2 = SelectedCylinder.selectedStressOnlySufficesForE2
 
 selectedStressOnlySufficesForE4 : Bool
-selectedStressOnlySufficesForE4 =
-  SelectedCylinder.selectedStressOnlySufficesForE4
+selectedStressOnlySufficesForE4 = SelectedCylinder.selectedStressOnlySufficesForE4
 
 b0TopologyBridgeChargedAsAntigravitySpecificLeaf : Bool
 b0TopologyBridgeChargedAsAntigravitySpecificLeaf = false
@@ -137,37 +127,28 @@ independentR136TraceContinuationLawRequired : Bool
 independentR136TraceContinuationLawRequired = false
 
 baseO4CovarianceReused : Bool
-baseO4CovarianceReused =
-  Pareto.baseO4SchwingerCovarianceAlreadyAvailable
+baseO4CovarianceReused = Pareto.baseO4SchwingerCovarianceAlreadyAvailable
 
 baseOS2PositivityReused : Bool
-baseOS2PositivityReused =
-  Pareto.baseContinuumOS2AlreadyAvailable
+baseOS2PositivityReused = Pareto.baseContinuumOS2AlreadyAvailable
 
 baseTwoSourceClusteringReused : Bool
-baseTwoSourceClusteringReused =
-  Pareto.baseTwoSourceClusteringAlreadyAvailable
+baseTwoSourceClusteringReused = Pareto.baseTwoSourceClusteringAlreadyAvailable
 
 round109NuclearStressReused : Bool
-round109NuclearStressReused =
-  Pareto.round109NuclearStressAlreadyAvailable
+round109NuclearStressReused = Pareto.round109NuclearStressAlreadyAvailable
 
 localCStressSymmetryLocalityReused : Bool
-localCStressSymmetryLocalityReused =
-  Pareto.localCStressSymmetryLocalityAlreadyAvailable
+localCStressSymmetryLocalityReused = Pareto.localCStressSymmetryLocalityAlreadyAvailable
 
 selectedB0BridgeInternallyCompiled : Bool
-selectedB0BridgeInternallyCompiled =
-  Selected.b0BridgeNoLongerArbitraryPhysicalInput
+selectedB0BridgeInternallyCompiled = Selected.b0BridgeNoLongerArbitraryPhysicalInput
 
 selectedB3BridgeInternallyCompiled : Bool
-selectedB3BridgeInternallyCompiled =
-  Selected.b3BridgeNoLongerArbitraryPhysicalInput
+selectedB3BridgeInternallyCompiled = Selected.b3BridgeNoLongerArbitraryPhysicalInput
 
 p1AccelerationAlgebraClosedDownstream : Bool
-p1AccelerationAlgebraClosedDownstream =
-  Root.accelerationAlgebraClosedDownstream
+p1AccelerationAlgebraClosedDownstream = Root.accelerationAlgebraClosedDownstream
 
 p1RemainingWorkIsSameObjectOrSemanticTransport : Bool
-p1RemainingWorkIsSameObjectOrSemanticTransport =
-  Sharp.remainingP1WorkIsSourceSemantics
+p1RemainingWorkIsSameObjectOrSemanticTransport = Sharp.remainingP1WorkIsSourceSemantics
