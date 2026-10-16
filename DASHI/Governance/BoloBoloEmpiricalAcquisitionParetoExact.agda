@@ -5,33 +5,38 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
 import DASHI.Governance.BoloBoloOWSSpokesPrimaryLocatorAtlasExact as Spokes
+import DASHI.Governance.OccupyDeclaredRealizedControlExact as Declared
+import DASHI.Governance.BoloBoloOWSSpokesProposalLineageExact as Proposal
 
 ------------------------------------------------------------------------
 -- EMPIRICAL ACQUISITION PARETO FRONTIER
 --
 -- DASHI routing only. This owner does not grade truth, politics, source
--- credibility, or causal effect. It asks a narrower operational question:
--- among currently admissible acquisitions for the declared historical /
--- comparator calibration consumer, which cells are non-dominated in a small
--- cost-versus-certified-information-gain routing calibration?
+-- credibility, or causal effect. It asks which currently admissible
+-- acquisitions are non-dominated for the declared historical/comparator
+-- calibration consumer.
 --
 -- The Nat cost/gain values below are DASHI scheduling values only. They are
 -- not money, person-hours, probabilities, evidence strength, effect sizes, or
 -- source-author claims.
 --
--- This calibration was recomputed after acquiring:
---   * official current Porto Alegre process observations;
---   * MONDRAGON corporation/governance-capacity observations;
---   * the anarchist/horizontal leadership-tension SOTA atlas;
---   * the Cybersyn/VSM + POSIWID source boundary;
---   * the realised-control acquisition surface.
+-- Current OWS source ladder after the latest acquisition pass:
 --
--- The primary OWS/Spokes consumer is therefore no longer generic "minutes".
--- It seeks source-paid realised-control coordinates: issue surfacing, framing,
--- facilitation, role rotation, delegation, block/advance events, reportback,
--- repeated influence, correction handling and reopening/appeal.  These are
--- descriptive/control-topology observables only; they do not themselves pay
--- domination, legitimacy or causal-effect claims.
+--   PRIMARY CONSTITUTIONAL DECLARATION      paid
+--     Principles of Solidarity + Statement of Autonomy
+--
+--   INTENDED SPOKES DESIGN                  paid as source-bounded lineage
+--     original locator + contemporaneous linked presentation + preserved
+--     mirror + archival finding aid + later scholarship; rotation/recall/
+--     observer/operational design coordinates retained
+--
+--   REALISED SPOKES OPERATION               unpaid at primary-minute level
+--     exact 7/9/14 Nov archival locators known, 11 Nov exact page unresolved,
+--     primary minute bodies not materialised in this environment
+--
+-- Therefore more normative/design-source acquisition is not the live max-cut.
+-- Primary operational minutes and comparator realised-control/capacity data
+-- remain the non-dominated source-acquisition routes.
 ------------------------------------------------------------------------
 
 data AcquisitionRequirement : Set where
@@ -48,7 +53,7 @@ primarySpokesMinutesCell =
     recoverPrimarySpokesMinutes
     true true true true
     1 8
-    "recover primary NYCGA Spokes minute content at the known archival locators and code any source-paid issue-surfacing, framing, facilitation, role-rotation, delegation, block/advance, reportback, repeated-influence, correction-handling and reopening/appeal coordinates; locator identity alone pays none of that content"
+    "recover primary NYCGA Spokes minute content at the known archival locators and code any source-paid issue-surfacing, framing, facilitation, role-rotation, delegation, block/advance, reportback, repeated-influence, correction-handling and reopening/appeal coordinates; constitutional declarations and intended-design documents are already paid and do not substitute for operation"
 
 comparatorWorkloadCell : Pareto.RequirementCandidate AcquisitionRequirement
 comparatorWorkloadCell =
@@ -64,7 +69,7 @@ secondaryExpansionCell =
     expandSecondarySpokesRetrospectives
     true true true true
     2 2
-    "expand secondary retrospective discussion of Spokes; useful context but lower current discriminatory gain than recovering the cited primary minutes"
+    "expand secondary retrospective discussion of Spokes; useful context but lower current discriminatory gain than recovering the cited primary operational minutes"
 
 protectedHoldoutCell : Pareto.RequirementCandidate AcquisitionRequirement
 protectedHoldoutCell =
@@ -126,6 +131,12 @@ currentParetoFrontierExact = refl
 locatorBoundary : Spokes.SpokesPrimaryLocatorBoundary
 locatorBoundary = Spokes.canonicalSpokesPrimaryLocatorBoundary
 
+declaredBoundary : Declared.OccupyDeclaredRealizedBoundary
+declaredBoundary = Declared.canonicalOccupyDeclaredRealizedBoundary
+
+proposalBoundary : Proposal.SpokesProposalLineageBoundary
+proposalBoundary = Proposal.canonicalSpokesProposalLineageBoundary
+
 record EmpiricalAcquisitionBoundary : Set where
   constructor empirical-acquisition-boundary
   field
@@ -139,6 +150,11 @@ record EmpiricalAcquisitionBoundary : Set where
     offFrontierRequirementIsDeleted : Bool
     recomputeFrontierAfterNewAcquisition : Bool
 
+    primaryDeclaredPurposeBaselinePaid : Bool
+    intendedSpokesDesignSurfacePaid : Bool
+    declarationOrDesignPaysRealizedSpokesControl : Bool
+    primaryOperationalSpokesMinutesStillRequired : Bool
+
 open EmpiricalAcquisitionBoundary public
 
 canonicalEmpiricalAcquisitionBoundary : EmpiricalAcquisitionBoundary
@@ -147,3 +163,4 @@ canonicalEmpiricalAcquisitionBoundary =
     true
     false false false false false false false
     true
+    true true false true
