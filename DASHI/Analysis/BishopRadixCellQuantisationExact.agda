@@ -24,10 +24,11 @@ module DASHI.Analysis.BishopRadixCellQuantisationExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.String using (String)
 open import Data.Integer.Base using (+_)
 open import Data.Nat.Base using (NonZero)
 open import Data.Nat using (_<_)
-open import Data.Rational.Unnormalised using (ℚᵘ; _/_)
+open import Data.Rational.Unnormalised using (_/_)
 
 import Real as BishopReal
 
