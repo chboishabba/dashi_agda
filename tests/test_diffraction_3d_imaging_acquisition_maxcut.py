@@ -10,6 +10,17 @@ REQUIRED = {
         "publicCalibrationArtifactPinned",
         "numericPSFArrayIngested",
     ],
+    "DASHI/Physics/Optics/BerkeleyDiffuserCamRealConditioningExecutionExact.agda": [
+        "realConditioningReceiptPath",
+        "realClaimScaleReceiptPath",
+        "verifiedArtifactGitBlobSHA",
+        "verifiedArtifactSHA256",
+        "realPSFArtifactIdentityVerified = true",
+        "depthOnlyNumericalReceiptCaptured = true",
+        "translatedColumnNumericalReceiptCaptured = true",
+        "finiteSelectedFamilyRestrictedKappaPaid = true",
+        "allResolutionCameraRIPPaid = false",
+    ],
     "DASHI/Physics/Optics/BerkeleyDiffuserCamSourceOperatorExact.agda": [
         "record BerkeleyDiffuserCamSourceOperatorReceipt",
         "psfBias",
@@ -30,6 +41,7 @@ REQUIRED = {
         "depthOnlyNumericalReceiptCaptured",
         "translatedColumnNumericalReceiptCaptured",
         "globalSparseRestrictedKappaPaid",
+        "allResolutionCameraRIPPaid",
     ],
     "DASHI/Physics/Optics/BerkeleyLenslessInformationDesignSourceExact.agda": [
         "lenslessInfoDesignDOI",
@@ -129,18 +141,18 @@ def test_convrml_same_scene_parallel_comparator_is_pinned_but_photon_and_fzp_cla
     assert "fresnelZonePlateArmPaid = false" in text
 
 
-def test_acquisition_maxcut_keeps_only_numerical_physical_and_optional_fzp_leaves_open():
+def test_acquisition_maxcut_closes_real_psf_execution_but_keeps_physical_comparison_leaves_open():
     text = (ROOT / "DASHI/Physics/Optics/Diffraction3DImagingAcquisitionMaxCutExact.agda").read_text(encoding="utf-8")
     assert "offlineSyntheticOperatorSelfTestExecutable = true" in text
     assert "claimScaleMemoryPlannerExecutable = true" in text
-    assert "berkeleyNumericPSFArrayIngested = false" in text
-    assert "depthOnlyNumericalReceiptCaptured = false" in text
-    assert "translatedColumnNumericalReceiptCaptured = false" in text
-    assert "sameHRestrictedConditionNumberMeasured = false" in text
+    assert "berkeleyNumericPSFArrayIngested = RealConditioning.realPSFArtifactIdentityVerified" in text
+    assert "depthOnlyNumericalReceiptCaptured = Conditioning.depthOnlyNumericalReceiptCaptured" in text
+    assert "translatedColumnNumericalReceiptCaptured = Conditioning.translatedColumnNumericalReceiptCaptured" in text
+    assert "sameHRestrictedConditionNumberMeasured = Conditioning.globalSparseRestrictedKappaPaid" in text
     assert "matchedAnalysisPhotonNormalizationPinned = true" in text
-    assert "physicalAcquisitionPhotonCalibrationPinned = false" in text
+    assert "physicalAcquisitionPhotonCalibrationPinned = InfoSource.physicalAcquisitionPhotonCalibrationPaid" in text
     assert "exposureProvenanceCollisionFormalised = true" in text
-    assert "parallelExposureProvenanceReconciled = false" in text
+    assert "parallelExposureProvenanceReconciled = ExposureProvenance.exactDatasetExposureProvenancePaid" in text
     assert "matchedPhotonAcrossParallelSystems = false" in text
     assert "focusedLensDiffuserFZPMatchedPhotonReceipt = false" in text
     assert "publicBerkeleyCalibrationArtifactPinned = true" in text
@@ -153,11 +165,12 @@ def test_acquisition_maxcut_keeps_only_numerical_physical_and_optional_fzp_leave
     assert "parallelLensDiffuserRMLAcquisitionPinned = true" in text
 
 
-def test_rollup_exports_acquisition_maxcut():
+def test_rollup_exports_acquisition_maxcut_and_real_execution_owner():
     text = (ROOT / "DASHI/Physics/Optics/Everything.agda").read_text(encoding="utf-8")
     for owner in (
         "BerkeleyDiffuserCamPublicCalibrationExact",
         "BerkeleyDiffuserCamSourceOperatorExact",
+        "BerkeleyDiffuserCamRealConditioningExecutionExact",
         "BerkeleyDiffuserCamDepthConditioningExact",
         "BerkeleyLenslessInformationDesignSourceExact",
         "BerkeleyConvRMLParallelComparatorExact",
