@@ -6,7 +6,7 @@ module DASHI.Biology.IITParityGluingConjectureMaxCutExact where
 -- local synthesis       : bipermutative Boolean/F3 parity channels
 -- ordered gluing        : orientation, handedness, C3 phase / loop holonomy
 -- higher-order gluing   : recurrent binary fabric vs explicit ABC interaction
--- global geometry       : image/kernel structure of the glued transition map
+-- global geometry       : image/kernel structure and residual stabilizer
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -29,6 +29,7 @@ import DASHI.Biology.IITFaceAwareTriadicGridSynthesisWeldExact as FaceWeld
 import DASHI.Biology.IITXORGridSynthesisFabricExact as GridFabric
 import DASHI.Biology.IITXORGridOrientationLiftExact as GridOrientation
 import DASHI.Biology.IITXORGridLoopHolonomyExact as GridHolonomy
+import DASHI.Biology.IITGridTorqueC3HolonomyHandoffExact as GridTorque
 import DASHI.Moonshine.C3FourierConjugationExact as Fourier
 import DASHI.Reasoning.LILACubeEmpiricalSameObjectReceiptExact as Lila
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
@@ -78,6 +79,15 @@ diagonalStabilizerCharacterization :
   (T : Stabilizer.FaceLinearEndo) →
   Stabilizer.DiagonalGraphStabilizerCharacterization T
 diagonalStabilizerCharacterization = Stabilizer.diagonalStabilizerIffCentralizer
+
+transposeStabilizesCubeGraph : Stabilizer.PreservesGraph Stabilizer.transposeEndo
+transposeStabilizesCubeGraph = Stabilizer.transposePreservesGraph
+
+transposeConjugatesRowToColumn :
+  (f : Concrete.Face9) →
+  Stabilizer.transposeFace (Stabilizer.rowShift f)
+  ≡ Stabilizer.columnShift (Stabilizer.transposeFace f)
+transposeConjugatesRowToColumn = Stabilizer.transposeRowToColumn
 
 exceptionalSymmetryBreakingWitness :
   Broken.sectorZ Broken.transformedState ≡ Broken.requiredTransformedThird → ⊥
@@ -137,6 +147,15 @@ gridSocketSwapConjugatesHolonomy :
   ≡ Fourier.inversePhase (GridHolonomy.phaseHolonomy path)
 gridSocketSwapConjugatesHolonomy = GridHolonomy.swapPathConjugatesHolonomy
 
+gridTorqueFinitePhaseHandoffBoundary : GridTorque.GridTorqueHolonomyHandoffBoundary
+gridTorqueFinitePhaseHandoffBoundary = GridTorque.canonicalGridTorqueHolonomyHandoffBoundary
+
+actualGridTorquePathPhaseIntertwiner :
+  (path : GridHolonomy.SocketPath) →
+  GridHolonomy.phaseHolonomy path
+  ≡ GridTorque.bracketPathHolonomy GridTorque.actualTorqueBracketPhaseInterface path
+actualGridTorquePathPhaseIntertwiner = GridTorque.actualPathHolonomyIntertwiner
+
 exceptionalHandoffBoundary : Exceptional.ExceptionalCubeHandoffBoundary
 exceptionalHandoffBoundary = Exceptional.canonicalExceptionalCubeHandoffBoundary
 
@@ -157,7 +176,9 @@ record ParityGluingConjectureStatus : Set where
     ternaryDifferenceGridSwapNegatesKernelPaid : Bool
     gridSocketC3HolonomySourceWritten : Bool
     gridSocketSwapConjugatesHolonomySourceWritten : Bool
-    socketC3ChartIsPhysicalTorqueByDefinition : Bool
+    gridTorqueFinitePhaseIntertwinerSourceWritten : Bool
+    gridTorqueWholePathIntertwinerSourceWritten : Bool
+    gridTorqueAmplitudeIdentified : Bool
     higherOrderGridOrganizationRequiresHigherArityLocalGate : Bool
 
     ternaryAffineEssentialClassifiedTwelve : Bool
@@ -175,11 +196,13 @@ record ParityGluingConjectureStatus : Set where
     faceAwareScalarPhiStillCollidesSomeStates : Bool
     parityAloneCarriesInputOrder : Bool
     antisymmetricF3ChannelCarriesSwapOrientation : Bool
-    torqueSiblingAuthorityImported : Bool
+    torqueFiniteDonorSourceSynchronized : Bool
 
     twoFineFacesWeldToQ9FieldKernelPaid : Bool
     cubeImageGraphOverTwoFacesSourceWritten : Bool
     concreteTorusImageEqualsGraphKernelPaid : Bool
+    cubePermutationTransposeStabilizerSourceWritten : Bool
+    cubePermutationTranslationReflectionRelationsSourceWritten : Bool
     cubeCentralizerJordan333NumericallyPaid : Bool
     cubeCentralizerDimension27NumericallyPaid : Bool
     cubeCentralizerM3TruncatedPolynomialAlgebraNumericallyPaid : Bool
@@ -198,10 +221,10 @@ canonicalParityGluingConjectureStatus : ParityGluingConjectureStatus
 canonicalParityGluingConjectureStatus =
   parity-gluing-conjecture-status
     true true false
-    true true true true true true true true false false
+    true true true true true true true true true true false false
     true true true true false
-    true true true true true true true false true false
-    true true true true true true
+    true true true true true true true false true true
+    true true true true true true true true
     false true false true true false false
 
 record ParityGluingMaxCutFrontier : Set where
@@ -211,7 +234,8 @@ record ParityGluingMaxCutFrontier : Set where
     remainingBinaryGridWorkIsMoreLocalCellEnumeration : Bool
     remainingBinaryTernaryGridWorkIsMoreSocketRecharting : Bool
     remainingHigherOrderWorkIsAnotherMatchedFixture : Bool
-    remainingHolonomyWorkIsPhysicalSameObjectTorquePromotion : Bool
+    remainingHolonomyWorkIsMoreFinitePhaseRecharting : Bool
+    remainingHolonomyWorkRequiresAmplitudeIdentification : Bool
     remainingTernaryWorkIsMoreAffineEnumeration : Bool
     remainingCubeWorkIsConcreteSameObjectOperatorProof : Bool
     remainingCubeWorkIsMoreCentralizerDimensionCounting : Bool
@@ -222,4 +246,4 @@ record ParityGluingMaxCutFrontier : Set where
 canonicalParityGluingMaxCutFrontier : ParityGluingMaxCutFrontier
 canonicalParityGluingMaxCutFrontier =
   parity-gluing-max-cut-frontier
-    false false false false true false false false true false true
+    false false false false false false false false false true false true
