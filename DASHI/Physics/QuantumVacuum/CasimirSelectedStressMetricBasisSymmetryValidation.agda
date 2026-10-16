@@ -1,0 +1,25 @@
+module DASHI.Physics.QuantumVacuum.CasimirSelectedStressMetricBasisSymmetryValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirSelectedStressMetricBasisSymmetryExact as M
+
+metricBasisSymmetryCompilerOwnedRegression :
+  M.selectedStressMetricBasisSymmetryCompilerOwned
+    M.canonicalSelectedStressMetricBasisBoundary ≡ true
+metricBasisSymmetryCompilerOwnedRegression = refl
+
+independentSymmetryNotRequiredRegression :
+  M.independentRestrictedStressSymmetryPaymentRequired
+    M.canonicalSelectedStressMetricBasisBoundary ≡ false
+independentSymmetryNotRequiredRegression = refl
+
+metricBasisSameObjectAttachmentRequiredRegression :
+  M.selectedStressMetricBasisSameObjectAttachmentRequired
+    M.canonicalSelectedStressMetricBasisBoundary ≡ true
+metricBasisSameObjectAttachmentRequiredRegression = refl
+
+abstractSymmetryDoesNotPayMetricBasisRegression :
+  M.AbstractStressSymmetryAutomaticallyIdentifiesMetricBasisReadout → ⊥
+abstractSymmetryDoesNotPayMetricBasisRegression =
+  M.abstractSymmetryDoesNotIdentifyMetricBasisReadout
