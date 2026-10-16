@@ -21,9 +21,11 @@ open import DASHI.Core.Prelude
 import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact as Basis
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as Hardening
 import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact as HZeta
+import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact as Literal3B
 import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
 import DASHI.Physics.Chemistry.AmmoniaMonster3BRepresentationNativeCorrectionExact as NativeCorrection
 import DASHI.Physics.Chemistry.AmmoniaMonster3BC3QuotientLiftExact as NH3C3
+import DASHI.Physics.Chemistry.AmmoniaSCIReleasedArtifactExact as SCIArtifact
 import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleExact as Counting
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
@@ -46,6 +48,8 @@ record Receipt : Set where
     actualHZetaSameObjectPaid : Bool
     actualSZetaHomEvaluationPaid : Bool
     concreteCommonCharacterTransportPaid : Bool
+    literalPhaseOneRegularResidualSplitPaid : Bool
+    zetaSquaredLiteralRecognitionTransportPaid : Bool
 
     -- Selected-3B projection recut.
     selected3BProjectionChoiceIsIndependentBlocker : Bool
@@ -57,6 +61,10 @@ record Receipt : Set where
     nh3C3IsomorphismIsMonsterStateIdentity : Bool
     physicalNH3ToMonsterLinearStatePaid : Bool
     physicalNH3MonsterActionEquivariancePaid : Bool
+
+    -- Independent computational execution leaf.
+    authorReleasedSelectedCIMatrixIdentityPaid : Bool
+    authorReleasedSelectedCIMatrixRediagonalizedByDASHI : Bool
 
     -- Counting/stat-mech semantics.
     count65610IsFiniteBasisLabelCount : Bool
@@ -88,6 +96,8 @@ canonicalReceipt = receipt
   false
   false
   false
+  false
+  false
 
   false
   false
@@ -96,6 +106,9 @@ canonicalReceipt = receipt
   true
   false
   false
+  false
+
+  true
   false
 
   true
@@ -146,10 +159,25 @@ projectionIntrinsicSameActionStillOpen :
     Projection.canonicalSelected3BProjectionChoiceIndependenceBoundary ≡ false
 projectionIntrinsicSameActionStillOpen = refl
 
+literalPhaseOneRegularResidualStillOpen :
+  Literal3B.LiteralThreePhaseResidualBoundary.fixedResidual53ComplementIsLive
+    Literal3B.canonicalLiteralThreePhaseResidualBoundary ≡ true
+literalPhaseOneRegularResidualStillOpen = refl
+
 nh3C3RepresentationIsomorphismPaid :
   NH3C3.C3QuotientLiftBoundary.c3GroupLawIntertwiningPaid
     NH3C3.canonicalC3QuotientLiftBoundary ≡ true
 nh3C3RepresentationIsomorphismPaid = refl
+
+releasedMatrixIdentityPaid :
+  SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid
+    SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
+releasedMatrixIdentityPaid = refl
+
+releasedMatrixRediagonalizationStillOpen :
+  SCIArtifact.ReleasedArtifactBoundary.matrixIndependentlyRediagonalizedByDASHI
+    SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
+releasedMatrixRediagonalizationStillOpen = refl
 
 countingIsMathematicalNotThermal :
   Counting.NativeZetaEnsembleBoundary.nativeUniformCountingIsPhysicalThermalEnsemble
@@ -174,8 +202,10 @@ data RemainingPayment : Set where
   actualRepresentationNativeBasisAttachment : RemainingPayment
   concreteHZetaCommonRepresentationCharacterTransport : RemainingPayment
   actualSZetaHomEvaluationIntertwiner : RemainingPayment
+  literalThreePhaseRegularResidualAndZetaSquaredCompletion : RemainingPayment
   selected3BActualRetractionAndIntrinsicSameAction : RemainingPayment
   physicalNH3ToMonsterStateAndDynamics : RemainingPayment
+  authorReleasedCIRediagonalizationAndConfigurationLabelling : RemainingPayment
   physicalStatisticalEnsembleOrDensityMatrix : RemainingPayment
   physicalEntropyRegionMeasureAndRegime : RemainingPayment
   lorentzianTensorEntropyGravityIntertwiner : RemainingPayment
@@ -187,8 +217,10 @@ remainingPayments =
   actualRepresentationNativeBasisAttachment ∷
   concreteHZetaCommonRepresentationCharacterTransport ∷
   actualSZetaHomEvaluationIntertwiner ∷
+  literalThreePhaseRegularResidualAndZetaSquaredCompletion ∷
   selected3BActualRetractionAndIntrinsicSameAction ∷
   physicalNH3ToMonsterStateAndDynamics ∷
+  authorReleasedCIRediagonalizationAndConfigurationLabelling ∷
   physicalStatisticalEnsembleOrDensityMatrix ∷
   physicalEntropyRegionMeasureAndRegime ∷
   lorentzianTensorEntropyGravityIntertwiner ∷
@@ -216,4 +248,4 @@ canonicalFrontierBoundary = frontier-boundary
   false
   false
   true
-  "Current max-cut: retain X6 x Fin90/native369 as an exact finite basis-label chart; attach it proof-relevantly to an actual W_zeta basis if available; separately pay H_zeta same-object character transport and S_zeta=Hom_E(H_zeta,W_zeta) evaluation/intertwining; only then can a physical NH3 state/action, physical ensemble/entropy, Lorentzian tensor gravity route, and observed-3+1D Monster prediction be promoted. Projection choice itself is already eliminated as an independent selected-3B blocker."
+  "Current max-cut: retain X6 x Fin90/native369 as an exact finite basis-label chart; attach it proof-relevantly to an actual W_zeta basis if available; separately pay H_zeta same-object character transport and S_zeta=Hom_E(H_zeta,W_zeta) evaluation/intertwining; retain the independent literal phase-one regular/residual plus zeta-squared completion and selected-3B intrinsic-action leaves; only then can a physical NH3 state/action, physical ensemble/entropy, Lorentzian tensor gravity route, and observed-3+1D Monster prediction be promoted. The author-released NH3 CI matrix rediagonalization remains an independent execution leaf. Projection choice itself is already eliminated as an independent selected-3B blocker."
