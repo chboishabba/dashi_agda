@@ -75,6 +75,19 @@ sabee2024ReviewSource =
     "review-level source highlighting mitigated aural/visual spectatorship, revolutionary change and post-Saint-Domingue comparison to New Orleans and Charleston; comparative prompt, not automatic transport authority"
     Source.publicAttribution
 
+prest2025DisabilitySource : Source.AttributedSource
+prest2025DisabilitySource =
+  Source.mkDOISource
+    "Julia Prest"
+    "Performing Disability in French Court Ballet"
+    "Early Modern French Studies 47(1), 70-96"
+    "2025"
+    "10.1080/20563035.2025.2481036"
+    "https://doi.org/10.1080/20563035.2025.2481036"
+    Source.academicArticleSource
+    "peer-reviewed methodological authority for Disability Studies questions in early-modern French performance, including sensory/physical disability, ableist performance conventions and embodied knowledge; seventeenth-century French court ballet, not Saint-Domingue evidence"
+    Source.publicAttribution
+
 freedomOnTheMoveSource : Source.AttributedSource
 freedomOnTheMoveSource =
   Source.mkNoDOISource
@@ -94,6 +107,7 @@ allPowersMethodologySources =
   ∷ prest2024ResponseSource
   ∷ row2024ReviewSource
   ∷ sabee2024ReviewSource
+  ∷ prest2025DisabilitySource
   ∷ freedomOnTheMoveSource
   ∷ []
 
@@ -103,7 +117,7 @@ powersMethodologySourceAtlas =
     "Powers empirical-methodology and digital-history source atlas"
     "DASHI.Culture.PowersPlantationParadiseMethodologySourceAtlasExact"
     allPowersMethodologySources
-    "bounded method/source roles for archive reconstruction, enslaved-theatre research, sensory access, trans-colonial comparison and coercive-advertisement data modelling"
+    "bounded method/source roles for archive reconstruction, enslaved-theatre research, sensory access, disability questions, trans-colonial comparison and coercive-advertisement data modelling"
 
 powersMethodologySourceAtlasReceipt : Receipt.GenericReceipt
 powersMethodologySourceAtlasReceipt =
@@ -124,6 +138,9 @@ record PowersMethodologySourceBoundary : Set where
     methodologicalPrecedentCreatesSaintDomingueFact : Bool
     methodologicalPrecedentCreatesSaintDomingueFactIsFalse :
       methodologicalPrecedentCreatesSaintDomingueFact ≡ false
+    disabilityMethodCreatesSaintDomingueAccessFact : Bool
+    disabilityMethodCreatesSaintDomingueAccessFactIsFalse :
+      disabilityMethodCreatesSaintDomingueAccessFact ≡ false
     coerciveAdvertisementEqualsNeutralBiography : Bool
     coerciveAdvertisementEqualsNeutralBiographyIsFalse :
       coerciveAdvertisementEqualsNeutralBiography ≡ false
@@ -134,6 +151,7 @@ record PowersMethodologySourceBoundary : Set where
 canonicalPowersMethodologySourceBoundary : PowersMethodologySourceBoundary
 canonicalPowersMethodologySourceBoundary =
   powers-methodology-source-boundary
+    false refl
     false refl
     false refl
     false refl
