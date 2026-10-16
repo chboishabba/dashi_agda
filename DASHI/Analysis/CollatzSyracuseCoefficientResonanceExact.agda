@@ -18,6 +18,8 @@ module DASHI.Analysis.CollatzSyracuseCoefficientResonanceExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat using (_≤_)
+open import Relation.Nullary using (_≢_)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact as Affine
