@@ -3,6 +3,7 @@ module DASHI.Reasoning.TrialecticT27EffectiveStackDescentValidation where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Foundations.RelationalStageTwelveSiteExact as RelSheaf
 import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionExact as Tower
 import DASHI.Reasoning.TrialecticT27EffectiveStackDescentExact as Stack27
 import DASHI.Reasoning.TrialecticGrothendieckThreeCellDescentExact as OldDescent
@@ -29,7 +30,11 @@ uniqueUpToIsoPaid = refl
 ambientNotPromoted : Stack27.unconstrainedAmbientT27EffectiveStackClaimed boundary ≡ false
 ambientNotPromoted = refl
 
+locals : RelSheaf.TriadicLocals Cell.CellDialectic
 locals = OldDescent.structuredLocals Cell.canonicalCompatibleThreeCellBoundary
+
+compatibility :
+  RelSheaf.CompatibleOnTriadicCover OldDescent.cellOverlapSystem locals
 compatibility = OldDescent.structuredCompatibility Cell.canonicalCompatibleThreeCellBoundary
 
 canonicalRealization : Stack27.GraphGlobalRealization policy locals
