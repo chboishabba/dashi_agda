@@ -1,0 +1,25 @@
+module DASHI.Physics.QuantumVacuum.CasimirU1QuadraticActionDensityValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirU1QuadraticActionDensityExact as M
+
+quadraticDensityCompilerOwnedRegression :
+  M.quadraticYMDensityToMaxwellDensityCompilerOwned M.canonicalU1QuadraticDensityBoundary ≡ true
+quadraticDensityCompilerOwnedRegression = refl
+
+curvatureAttachmentStillRequiredRegression :
+  M.sameObjectNondegenerateCurvatureStillRequired M.canonicalU1QuadraticDensityBoundary ≡ true
+curvatureAttachmentStillRequiredRegression = refl
+
+exteriorCartanImageStillRequiredRegression :
+  M.exteriorFieldStrengthCartanImageStillRequired M.canonicalU1QuadraticDensityBoundary ≡ true
+exteriorCartanImageStillRequiredRegression = refl
+
+physicalPrefactorStillRequiredRegression :
+  M.physicalActionPrefactorStillRequired M.canonicalU1QuadraticDensityBoundary ≡ true
+physicalPrefactorStillRequiredRegression = refl
+
+integrationStillRequiredRegression :
+  M.actionIntegrationStillRequired M.canonicalU1QuadraticDensityBoundary ≡ true
+integrationStillRequiredRegression = refl
