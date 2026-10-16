@@ -3,18 +3,20 @@ module DASHI.Moonshine.Monster3BLinearIsotypicCurrentMaxCutExact where
 ------------------------------------------------------------------------
 -- CURRENT MONSTER 3B LINEAR / ISOTYPIC MAX-CUT
 --
--- Reusable representation-theory plumbing is now separated from the actual
--- Monster same-object inputs.  The generic tail includes:
+-- The reusable mathematics is now source-written through:
 --
---   * semisimple one-type isotypic assembly;
---   * post-recognition copy-count cancellation;
---   * complementary 12/78 block assembly;
---   * Schur multiplicity coordinates Hom_G(H,H^n) ~= k^n;
---   * exact finite-copy coordinate evaluation/recovery.
+-- * invariant-subspace and literal central-eigenspace restriction;
+-- * FDRep/group-algebra same-action transport;
+-- * whole-character simple-source classification;
+-- * Maschke semisimplicity and character-at-identity dimension ratios;
+-- * Schur scalar self-intertwiners;
+-- * one-type isotypy, n=90 and Hom coordinates;
+-- * tensor finite-copy evaluation;
+-- * two-simple (12+78) character multiplicity determination;
+-- * canonical normalizer action on Hom_E(H,W).
 --
--- None of those generic compilers constructs the literal Monster W_zeta/H_zeta
--- attachment, the actual simple-type classifier, the 6.Suz/normalizer action,
--- absolute zeta orientation or the 12+78 action intertwiner.
+-- The remaining Monster frontier is therefore same-object SOURCE/ACTION
+-- attachment, not more abstract representation plumbing.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -22,13 +24,8 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact as Irr
 import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptExact as Character
-import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact as Isotypic
-import DASHI.Moonshine.Monster3BTwoIsotypicBlockAssemblyLeanReceiptExact as TwoBlock
-import DASHI.Moonshine.Monster3BMultiplicitySchurCoordinatesLeanReceiptExact as Schur
 import DASHI.Moonshine.Monster3BActualLinearIsotypicTerminalCompilerExact as Terminal
-import DASHI.Moonshine.Monster3BLinearActionProofRelevantHardeningExact as LinearHardening
 import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact as Phase1278
-import DASHI.Wikimedia.IbrahimMonster3BLinearZetaSectorRestrictionExact as LinearZeta
 
 record Boundary : Set where
   constructor boundary
@@ -36,57 +33,52 @@ record Boundary : Set where
     schrodingerActionOwned : Bool
     schrodingerIrreducibilityPaid : Bool
     schrodingerLiteralCharacterExecutablePaid : Bool
-    genericIsotypicAssemblySourceWritten : Bool
-    postRecognitionCopyCountCompilerSourceWritten : Bool
-    genericTwoBlockAssemblySourceWritten : Bool
-    genericSchurMultiplicityCoordinatesSourceWritten : Bool
-    genericCoordinateEvaluationRecoverySourceWritten : Bool
-    actualInputPacketTyped : Bool
-    hZetaRecognitionClosesAfterActualPacket : Bool
+
+    genericRestrictionTailSourceWritten : Bool
+    genericWholeCharacterTailSourceWritten : Bool
+    genericMaschkeSchurTailSourceWritten : Bool
+    genericIsotypicNinetyHomTailSourceWritten : Bool
+    genericTensorTailSourceWritten : Bool
+    genericTwelveSeventyEightCharacterTailSourceWritten : Bool
+    genericNormalizerHomActionSourceWritten : Bool
+
+    arbitrarySimpleClassifierStillIndependentInput : Bool
+    semisimplicityStillIndependentInput : Bool
+    separateFinrankRatioStillIndependentInput : Bool
+    schurStillIndependentInput : Bool
+    tensorEvaluationStillIndependentInput : Bool
+    twelveSeventyEightIntertwinerStillIndependentInput : Bool
+    multiplicityNormalizerActionStillIndependentThirdCarrierInput : Bool
 
     selectedPhaseTwelveCharacterFamilyPaid : Bool
     selectedPhaseSeventyEightCharacterFamilyPaid : Bool
     selectedPhaseTotalDegree65610Paid : Bool
-    weightTwoProofRelevantWrapperAvailable : Bool
-    zetaLinearProofRelevantWrapperAvailable : Bool
 
-    actualPaidWeightTwoLinearBridgeInhabited : Bool
-    actualPaidLinearZetaRestrictionInhabited : Bool
-    actualMonsterSimpleTypeClassifierPaid : Bool
-    actualWholeSectorIsotypicLinearEquivalencePaid : Bool
-    actualCopyCountNinetyPaidAfterRecognition : Bool
-    actualMultiplicityHomEvaluationPaid : Bool
-    actualSuzukiNormalizerActionPaid : Bool
-    actualTwelveSeventyEightActionIntertwinerPaid : Bool
+    actualMonsterLinearInputPacketInhabited : Bool
+    actualWZetaHZetaFDRepAttachmentsPaid : Bool
+    actualKernelNinetyCharacterTransportPaid : Bool
+    actualWholeSectorIsotypicEquivalencePaid : Bool
+    actualCopyCountNinetyPaid : Bool
+    actualNormalizerLiftsOnHZetaWZetaPaid : Bool
+    actualProjectiveCocycleLawsPaid : Bool
     absoluteZetaOrientationPaid : Bool
-    actualTensorEvaluationEquivalencePaid : Bool
-    fin90BasisNeededBeforeRepresentationRecognition : Bool
+    actualSelectedPhaseTwelveSeventyEightCharacterTransportPaid : Bool
 
+    fin90BasisNeededBeforeRepresentationRecognition : Bool
     nextResidual : String
 open Boundary public
 
 canonicalBoundary : Boundary
 canonicalBoundary = boundary
-  true
-  true
-  true
-  (Isotypic.classifierToIsotypicAssemblySourceWritten Isotypic.canonicalBoundary)
-  (Isotypic.postRecognitionCopyCountCompilerSourceWritten Isotypic.canonicalBoundary)
-  (TwoBlock.complementaryTwoBlockLinearAssemblySourceWritten TwoBlock.canonicalBoundary)
-  (Schur.genericSchurCoordinateCompilerSourceWritten Schur.canonicalBoundary)
-  (Schur.coordinateEvaluationRecoverySourceWritten Schur.canonicalBoundary)
-  true
-  (Terminal.hZetaRecognitionCompilerClosesAfterPacket Terminal.canonicalBoundary)
+  true true true
+  true true true true true true true
+  false false false false false false false
   (Phase1278.selectedPhase8748CharacterFamilyPaid Phase1278.currentPhaseCharacterWeldFrontier)
   (Phase1278.selectedPhase56862CharacterFamilyPaid Phase1278.currentPhaseCharacterWeldFrontier)
   (Phase1278.selectedPhase65610DegreePaid Phase1278.currentPhaseCharacterWeldFrontier)
-  (LinearHardening.paidWeightTwoWrapperAvailable LinearHardening.canonicalBoundary)
-  (LinearHardening.paidLinearZetaWrapperAvailable LinearHardening.canonicalBoundary)
-  false false false false false false false false false false false
-  "The reusable tail is exhausted at source level. Supply one ActualMonsterLinearInputPacket: a paid full weight-two linear bridge, the SAME literal zeta-sector linear restriction, common-theory attachments for the literal Schrodinger model and an actual W_zeta|E constituent, and proof-relevant whole-sector classifier/semisimplicity/finrank/Schur inputs. The existing Agda compiler then closes H_zeta recognition/action intertwining; companion Lean compilers assemble W_zeta|E ~= H_zeta^n, force n=90 post-recognition, and identify the multiplicity Hom with 90 scalar coordinates with exact coordinate recovery. Remaining actual representation data are the 6.Suz/normalizer action on S_zeta, absolute zeta orientation, the 12+78 action intertwiner and any desired tensor evaluation equivalence. Fin90 remains downstream coordinates, never a pre-recognition representation surrogate."
-
-linearZetaFrontier : LinearZeta.LinearZetaSectorFrontier
-linearZetaFrontier = LinearZeta.currentLinearZetaSectorFrontier
+  false false false false false false false false false
+  false
+  "The abstract representation tail is exhausted at source level. The H_zeta/W_zeta seam is now one same-object linear attachment plus transport of the certified actual-kernel identity chi(W_zeta|E)=90 chi(H_zeta) onto those exact FDRep objects. That makes classifier, Maschke, n=90, Schur multiplicity coordinates and tensor evaluation downstream compilers. For the multiplicity action, do not postulate an independent S_zeta action: supply the actual normalizer/projective lifts on H_zeta and W_zeta with their conjugation/cocycle laws; the Hom action is canonical. Then transport the already-paid selected-phase 12+78 character onto that induced Hom action and orient zeta. The generic character compiler determines the 12+78 representation decomposition. Fin90 remains downstream coordinates only."
 
 irreducibilityBoundary : Irr.Boundary
 irreducibilityBoundary = Irr.canonicalBoundary
