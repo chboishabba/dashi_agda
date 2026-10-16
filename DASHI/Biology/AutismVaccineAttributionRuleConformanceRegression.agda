@@ -5,6 +5,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_)
 
 import DASHI.Biology.AutismVaccineAttributionRuleConformanceExact as C
+import DASHI.Biology.AutismVaccineClaimPromotionAuditExact as Audit
+import DASHI.Biology.AutismVaccineStrictBindingInstantiationExact as Binding
 
 citationAndSourceIdentityDoNotCreateAuthorityRegression :
   C.citationCreatesProof C.canonicalAutismVaccineAttributionRuleBoundary ≡ false
@@ -29,3 +31,11 @@ unknownAndUnpaidDoNotBecomeZeroRegression = refl , refl
 sourceAndDASHISynthesisRemainSeparateRegression :
   C.externalSourceOwnsDASHISynthesis C.canonicalAutismVaccineAttributionRuleBoundary ≡ false
 sourceAndDASHISynthesisRemainSeparateRegression = refl
+
+hviidTypedClaimPaymentIsActuallyConsumed :
+  Binding.EvidencePaysClaim Audit.hviid2019Receipt Audit.hbombMMRNoLinkClaim
+hviidTypedClaimPaymentIsActuallyConsumed = C.canonicalHviidEvidenceClaimWitness
+
+hviidTypedEstimandMatchIsActuallyConsumed :
+  Binding.EvidenceMatchesEstimand Audit.hviid2019Receipt Binding.mmrAutismPopulationEstimand
+hviidTypedEstimandMatchIsActuallyConsumed = C.canonicalHviidEstimandWitness
