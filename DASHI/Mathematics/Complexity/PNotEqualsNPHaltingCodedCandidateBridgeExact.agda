@@ -12,6 +12,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Dire
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.CodedStandardPolynomialDeciderExact as InputCodec
 import DASHI.Mathematics.Complexity.CodedStandardHaltingPolynomialDeciderExact as Halting
+import DASHI.Mathematics.Complexity.CodedStandardGuardedExecutionCompilerExact as GuardedCompiler
 import DASHI.Mathematics.Complexity.PNotEqualsNPStandardFiniteCandidateCodeExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedStandardCandidateExact as Clocked
 
@@ -58,10 +59,48 @@ haltingWitnessToPolynomiallyClockedCandidate witness guarded = record
   }
 
 ------------------------------------------------------------------------
+-- Guarded representation is now compiler-owned, so the normal constructors no
+-- longer need it as a user-supplied premise.
+------------------------------------------------------------------------
+
+automaticGuardedExecutionReceipt :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (witness :
+      Halting.CodedStandardHaltingPolynomialDecider
+        (Direct.decide candidate)) →
+  Halting.GuardedExecutionReceipt witness
+automaticGuardedExecutionReceipt =
+  GuardedCompiler.guardedExecutionReceiptOfHaltingWitness
+
+haltingWitnessToStandardCandidateAutomatic :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (witness :
+      Halting.CodedStandardHaltingPolynomialDecider
+        (Direct.decide candidate)) →
+  Candidate.StandardFiniteCandidateCode candidate
+haltingWitnessToStandardCandidateAutomatic witness =
+  haltingWitnessToStandardCandidate
+    witness
+    (automaticGuardedExecutionReceipt witness)
+
+haltingWitnessToPolynomiallyClockedCandidateAutomatic :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (witness :
+      Halting.CodedStandardHaltingPolynomialDecider
+        (Direct.decide candidate)) →
+  Clocked.PolynomiallyClockedStandardCandidate candidate
+haltingWitnessToPolynomiallyClockedCandidateAutomatic witness =
+  haltingWitnessToPolynomiallyClockedCandidate
+    witness
+    (automaticGuardedExecutionReceipt witness)
+
+------------------------------------------------------------------------
 -- CONSEQUENCE
 --
 -- Every theorem downstream of `PolynomiallyClockedStandardCandidate` can now be
--- reused without identifying actual runtime with the polynomial upper bound.
--- The only extra machine-representation payment is `GuardedExecutionReceipt`,
--- i.e. transport of the already-fixed actual run onto the blank-padded Cook row.
+-- reused from one actual-halting coded witness alone.  The Cook guard padding is
+-- a representation compiler and no longer a separate proof/mathematics input.
 ------------------------------------------------------------------------
