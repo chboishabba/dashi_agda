@@ -1,7 +1,7 @@
 module DASHI.Physics.Foundations.FieldGeometryMatterEverything where
 
 -- Focused compilation root for the field–geometry–matter max-cut.
--- No unsafe Agda options are enabled.  This rollup is intentionally ordinary
+-- No unsafe Agda options are enabled. This rollup is intentionally ordinary
 -- rather than `--safe` because it imports source-atlas owners that are not
 -- themselves declared `--safe`.
 
@@ -36,6 +36,8 @@ import DASHI.Physics.CondensedMatter.MATBGTHFSelfConsistencyQTMExact
 import DASHI.Physics.CondensedMatter.MATBGTHFSelfConsistencyQTMValidation
 import DASHI.Physics.CondensedMatter.MATBGQTMMatrixElementObserverReceiptExact
 import DASHI.Physics.CondensedMatter.MATBGQTMMatrixElementObserverValidation
+import DASHI.Physics.CondensedMatter.MATBGQTMElectrostaticsReplayReceiptExact
+import DASHI.Physics.CondensedMatter.MATBGQTMElectrostaticsReplayValidation
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorics2026Exact
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorics2026Validation
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorialReplayReceiptExact
