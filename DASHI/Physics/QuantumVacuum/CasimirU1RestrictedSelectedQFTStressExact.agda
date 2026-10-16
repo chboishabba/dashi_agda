@@ -6,7 +6,50 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as QFT
+import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as SU2Lie
+import DASHI.Physics.YangMills.BalabanSU2LieBracket as Bracket
+import DASHI.Physics.Electromagnetism.U1AsSU2AbelianRestrictionExact as U1YM
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostExact as Host
+
+------------------------------------------------------------------------
+-- CANONICAL CARTAN-U(1) FIELD IMAGE RECEIPT
+--
+-- Once a selected Lie-algebra-valued field is proved pointwise to lie in the
+-- existing U(1) Cartan image, the non-abelian bracket term vanishes by the
+-- already-proved U1AsSU2AbelianRestrictionExact theorem.  No independent
+-- commutator-vanishing theorem is then admissible.
+------------------------------------------------------------------------
+
+record CanonicalCartanU1FieldImageReceipt
+    (SelectedField : Set)
+    (selectedLieValue : SelectedField → SU2Lie.SU2LieAlgebra) : Set₁ where
+  field
+    phase : SelectedField → U1YM.U1LieAlgebra
+    selectedLieValueIsEmbedded :
+      ∀ field →
+      selectedLieValue field ≡ U1YM.embedU1Lie (phase field)
+
+open CanonicalCartanU1FieldImageReceipt public
+
+restrictedFieldBracketZero :
+  ∀ {SelectedField : Set}
+    {selectedLieValue : SelectedField → SU2Lie.SU2LieAlgebra} →
+  (receipt : CanonicalCartanU1FieldImageReceipt SelectedField selectedLieValue) →
+  ∀ left right →
+  Bracket.lieBracket (selectedLieValue left) (selectedLieValue right)
+  ≡ SU2Lie.lieZero
+restrictedFieldBracketZero receipt left right =
+  trans
+    (cong₂ Bracket.lieBracket
+      (selectedLieValueIsEmbedded receipt left)
+      (selectedLieValueIsEmbedded receipt right))
+    (U1YM.u1EmbeddedLieBracketZero
+      (phase receipt left)
+      (phase receipt right))
+
+------------------------------------------------------------------------
+-- U(1)-RESTRICTED SELECTED-QFT STRESS
+------------------------------------------------------------------------
 
 record CasimirCanonicalU1StressRestriction
     (U : Weld.UnifiedCandidate)
@@ -21,10 +64,6 @@ record CasimirCanonicalU1StressRestriction
 
     CanonicalCartanU1FieldRestriction : Set
     canonicalCartanU1FieldRestriction : CanonicalCartanU1FieldRestriction
-
-    NonAbelianCommutatorVanishesOnRestrictedField : Set
-    nonAbelianCommutatorVanishesOnRestrictedField :
-      NonAbelianCommutatorVanishesOnRestrictedField
 
     YangMillsActionRestrictsToMaxwellAction : Set
     yangMillsActionRestrictsToMaxwellAction : YangMillsActionRestrictsToMaxwellAction
@@ -68,12 +107,12 @@ u1RestrictedSelectedQFTStress restriction =
   restrictStressToCanonicalU1 restriction (fullSelectedQFTStress restriction)
 
 data FullSelectedSU2StressAutomaticallyEqualsBrownMaclay : Set where
-data U1GaugeEmbeddingAutomaticallyClosesStressRestriction : Set where
+data U1GaugeArchitectureAutomaticallyClosesStressRestriction : Set where
 data VanishingLieBracketAutomaticallyProvesActionRestriction : Set where
 
 fullSelectedSU2StressDoesNotAutomaticallyEqualBrownMaclay : FullSelectedSU2StressAutomaticallyEqualsBrownMaclay → ⊥
 fullSelectedSU2StressDoesNotAutomaticallyEqualBrownMaclay ()
-u1GaugeEmbeddingDoesNotCloseStressRestriction : U1GaugeEmbeddingAutomaticallyClosesStressRestriction → ⊥
+u1GaugeEmbeddingDoesNotCloseStressRestriction : U1GaugeArchitectureAutomaticallyClosesStressRestriction → ⊥
 u1GaugeEmbeddingDoesNotCloseStressRestriction ()
 vanishingLieBracketDoesNotProveActionRestriction : VanishingLieBracketAutomaticallyProvesActionRestriction → ⊥
 vanishingLieBracketDoesNotProveActionRestriction ()
@@ -84,6 +123,10 @@ record CasimirU1RestrictedSelectedQFTStressBoundary : Set where
     u1RestrictedSelectedQFTStressInterfaceOwned : Bool
     fullSelectedSU2StressIsBrownMaclayTarget : Bool
     u1GaugeEmbeddingAloneClosesStressRestriction : Bool
+
+    canonicalCartanU1FieldImageReceiptOwned : Bool
+    restrictedFieldBracketZeroCompilerOwned : Bool
+    independentCommutatorPaymentRequiredAfterFieldImage : Bool
 
     cartanU1FieldRestrictionPaid : Bool
     nonAbelianCommutatorRestrictionPaid : Bool
@@ -98,11 +141,11 @@ canonicalCasimirU1RestrictedSelectedQFTStressBoundary : CasimirU1RestrictedSelec
 canonicalCasimirU1RestrictedSelectedQFTStressBoundary =
   casimir-u1-restricted-selected-qft-stress-boundary
     true false false
+    true true false
     false false false false false false
 
 data RemainingCanonicalU1StressRestrictionBlocker : Set where
   missingCanonicalCartanU1FieldRestriction : RemainingCanonicalU1StressRestrictionBlocker
-  missingRestrictedFieldNonAbelianCommutatorVanishing : RemainingCanonicalU1StressRestrictionBlocker
   missingYangMillsActionToMaxwellRestriction : RemainingCanonicalU1StressRestrictionBlocker
   missingMetricVariationStressRestriction : RemainingCanonicalU1StressRestrictionBlocker
   missingRestrictedQuantumStressMaxwellIdentification : RemainingCanonicalU1StressRestrictionBlocker
@@ -111,16 +154,14 @@ data RemainingCanonicalU1StressRestrictionBlocker : Set where
 firstU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
 firstU1RestrictionBlocker = missingCanonicalCartanU1FieldRestriction
 secondU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
-secondU1RestrictionBlocker = missingRestrictedFieldNonAbelianCommutatorVanishing
+secondU1RestrictionBlocker = missingYangMillsActionToMaxwellRestriction
 thirdU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
-thirdU1RestrictionBlocker = missingYangMillsActionToMaxwellRestriction
+thirdU1RestrictionBlocker = missingMetricVariationStressRestriction
 fourthU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
-fourthU1RestrictionBlocker = missingMetricVariationStressRestriction
+fourthU1RestrictionBlocker = missingRestrictedQuantumStressMaxwellIdentification
 fifthU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
-fifthU1RestrictionBlocker = missingRestrictedQuantumStressMaxwellIdentification
-sixthU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
-sixthU1RestrictionBlocker = missingSamePlateBoundaryRenormalization
+fifthU1RestrictionBlocker = missingSamePlateBoundaryRenormalization
 
 casimirU1RestrictedSelectedQFTStressReading : String
 casimirU1RestrictedSelectedQFTStressReading =
-  "Brown-Maclay targets the canonical electromagnetic U(1)-restricted stress, not the full selected SU(2) stress. The restriction max-cut is now explicit: first identify the selected continuum field/configuration as the canonical Cartan-U(1) field; then prove the non-abelian commutator contribution vanishes on that SAME restricted field; prove the selected YM action restricts to Maxwell; prove restriction commutes with metric variation/stress construction; identify the resulting restricted quantum stress as Maxwell stress; and finally weld the same conducting-plate boundary and renormalization prescription. Only after those six payments can Brown-Maclay component values be a same-object target."
+  "Brown-Maclay targets the canonical electromagnetic U(1)-restricted stress, not the full selected SU(2) stress. The first leaf is now a pointwise same-object field-image receipt into the existing Cartan U(1) embedding. Once that receipt is paid, the existing u1EmbeddedLieBracketZero theorem automatically proves vanishing of the non-abelian bracket on the SAME restricted field; no second commutator theorem is required. The remaining independent restriction leaves are YM-action -> Maxwell, commutation of restriction with metric variation/stress construction, restricted quantum stress -> Maxwell stress, and the same conducting-plate boundary/renormalization weld."
