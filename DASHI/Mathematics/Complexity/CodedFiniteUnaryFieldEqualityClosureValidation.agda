@@ -1,13 +1,15 @@
 module DASHI.Mathematics.Complexity.CodedFiniteUnaryFieldEqualityClosureValidation where
 
 ------------------------------------------------------------------------
--- RED-FIRST VALIDATION: close unary-field equality microcode into coded TM.
+-- RED-FIRST VALIDATION: canonical deterministic unary-field equality closure.
 ------------------------------------------------------------------------
+
+open import DASHI.Mathematics.Complexity.CodedFiniteUnaryFieldEqualityDeterminismExact
+  using (dispatchUnique; equalityCode)
 
 open import DASHI.Mathematics.Complexity.CodedFiniteUnaryFieldEqualityClosureExact
   using
-    ( fieldEqualityKeyUnique
-    ; fieldEqualityDispatchUnique
+    ( fieldEqualityDispatchUnique
     ; fieldEqualityCode
     ; fieldEqualityMachine
     ; equalSinkQuiescent
