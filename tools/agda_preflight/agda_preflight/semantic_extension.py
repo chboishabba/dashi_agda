@@ -66,7 +66,6 @@ def install_source_index_semantic_extension(source_index_cls: type) -> None:
             connection=self.connection,
         ).search(query, limit=limit)
 
-    @staticmethod
     def _candidate_exists(receipt: dict) -> bool:
         related = receipt.get("related", {})
         return bool(
