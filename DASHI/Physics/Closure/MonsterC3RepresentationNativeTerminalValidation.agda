@@ -24,20 +24,65 @@ proofRelevantWrappersPaid :
     Terminal.canonicalReceipt ≡ true
 proofRelevantWrappersPaid = refl
 
-projectionChoiceNoLongerBlocker :
-  Terminal.Receipt.selected3BProjectionChoiceIsIndependentBlocker
-    Terminal.canonicalReceipt ≡ false
-projectionChoiceNoLongerBlocker = refl
+genericIsotypicAssemblyAlreadyWritten :
+  Terminal.Receipt.genericIsotypicAssemblySourceWritten
+    Terminal.canonicalReceipt ≡ true
+genericIsotypicAssemblyAlreadyWritten = refl
 
-actualHZetaStillOpen :
-  Terminal.Receipt.actualHZetaSameObjectPaid
+postRecognitionCopyCountAlreadyWritten :
+  Terminal.Receipt.postRecognitionCopyCountCompilerSourceWritten
+    Terminal.canonicalReceipt ≡ true
+postRecognitionCopyCountAlreadyWritten = refl
+
+weightTwoWrapperAvailable :
+  Terminal.Receipt.proofRelevantWeightTwoWrapperAvailable
+    Terminal.canonicalReceipt ≡ true
+weightTwoWrapperAvailable = refl
+
+zetaRestrictionWrapperAvailable :
+  Terminal.Receipt.proofRelevantZetaRestrictionWrapperAvailable
+    Terminal.canonicalReceipt ≡ true
+zetaRestrictionWrapperAvailable = refl
+
+actualWeightTwoBridgeStillOpen :
+  Terminal.Receipt.actualPaidWeightTwoLinearBridge
     Terminal.canonicalReceipt ≡ false
-actualHZetaStillOpen = refl
+actualWeightTwoBridgeStillOpen = refl
+
+actualZetaRestrictionStillOpen :
+  Terminal.Receipt.actualPaidLinearZetaRestriction
+    Terminal.canonicalReceipt ≡ false
+actualZetaRestrictionStillOpen = refl
+
+actualSimpleTypeClassifierStillOpen :
+  Terminal.Receipt.actualMonsterSimpleTypeClassifierPaid
+    Terminal.canonicalReceipt ≡ false
+actualSimpleTypeClassifierStillOpen = refl
+
+actualIsotypicEquivalenceStillOpen :
+  Terminal.Receipt.actualWholeSectorIsotypicEquivalencePaid
+    Terminal.canonicalReceipt ≡ false
+actualIsotypicEquivalenceStillOpen = refl
+
+copyCountNinetyWaitsForRecognition :
+  Terminal.Receipt.actualCopyCountNinetyPaidAfterRecognition
+    Terminal.canonicalReceipt ≡ false
+copyCountNinetyWaitsForRecognition = refl
 
 actualSHomStillOpen :
   Terminal.Receipt.actualSZetaHomEvaluationPaid
     Terminal.canonicalReceipt ≡ false
 actualSHomStillOpen = refl
+
+projectionChoiceNoLongerBlocker :
+  Terminal.Receipt.selected3BProjectionChoiceIsIndependentBlocker
+    Terminal.canonicalReceipt ≡ false
+projectionChoiceNoLongerBlocker = refl
+
+selected3BCompilerAvailable :
+  Terminal.Receipt.selected3BGlobalCompletionCompilerAvailable
+    Terminal.canonicalReceipt ≡ true
+selected3BCompilerAvailable = refl
 
 literalPhaseOneSplitStillOpen :
   Terminal.Receipt.literalPhaseOneRegularResidualSplitPaid
@@ -63,6 +108,11 @@ countingIsBasisLabelCounting :
   Terminal.Receipt.count65610IsFiniteBasisLabelCount
     Terminal.canonicalReceipt ≡ true
 countingIsBasisLabelCounting = refl
+
+countingIsNotAllLinearStates :
+  Terminal.Receipt.count65610IsCardinalityOfAllLinearWZetaStates
+    Terminal.canonicalReceipt ≡ false
+countingIsNotAllLinearStates = refl
 
 countingIsNotPhysicalEntropy :
   Terminal.Receipt.countingMeasureIsPhysicalEntropy
