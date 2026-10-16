@@ -10,36 +10,18 @@ import DASHI.Physics.Chemistry.AmmoniaC3RegularRepresentationExact as NH3Regular
 import DASHI.Physics.Chemistry.AmmoniaMonster3BC3QuotientLiftExact as NH3MonsterC3
 import DASHI.Physics.Chemistry.AmmoniaMonster3BPhaseQuotientNonFactorabilityExact as PhaseNF
 import DASHI.Physics.Chemistry.AmmoniaMonster3BRefinedStateLiftCompilerExact as RefinedLift
+import DASHI.Physics.Chemistry.AmmoniaMonster3BNative369FineCarrierExact as Native369
+import DASHI.Physics.Closure.MonsterC3Native369ConsumerSufficiencyExact as Sufficiency
+import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleExact as NativeEnsemble
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as StateCount
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
-
-------------------------------------------------------------------------
--- Strongest current common seam.
---
--- Monster side already owns exact 1+zeta+zeta^2 cancellation, 65610 copies of
--- the regular C3 block, residual trace 53, literal one/zeta/zeta2 eigenspaces,
--- and Base369/Heisenberg recognition machinery.
---
--- Chemistry side now pays three increasingly strong statements:
---   (1) (A1+E)|C3 is exactly one Reg(C3) block;
---   (2) NH3 electronic phase <-> Monster-3B central phase is an exact C3
---       quotient representation isomorphism preserving product, inversion and
---       Fourier rows;
---   (3) phase + F3^6/Base369 weight + Fin90 multiplicity compiles exactly to
---       the Monster zeta model and through any ActualZetaSectorRecognition.
---
--- Separating pairs prove why (2) alone is not enough: phase cannot recover the
--- fine Monster state, weight or multiplicity.  Therefore entropy/state-count
--- and gravity consumers cannot silently factor through the phase quotient.
-------------------------------------------------------------------------
 
 record ZetaEntropyGravityCrossPollinationReceipt : Set where
   constructor zetaEntropyGravityCrossPollinationReceipt
   field
     exactOnePlusZetaPlusZetaSquaredZeroPaid : Bool
-    exactOnePlusZetaPlusZetaSquaredZeroPaidIsTrue :
-      exactOnePlusZetaPlusZetaSquaredZeroPaid ≡ true
+    exactOnePlusZetaPlusZetaSquaredZeroPaidIsTrue : exactOnePlusZetaPlusZetaSquaredZeroPaid ≡ true
     exact65610ZetaCancellationPaid : Bool
     exact65610ZetaCancellationPaidIsTrue : exact65610ZetaCancellationPaid ≡ true
     residual53RepresentationTracePaid : Bool
@@ -63,18 +45,26 @@ record ZetaEntropyGravityCrossPollinationReceipt : Set where
     phaseQuotientCannotRecoverFineMonsterStatePaidIsTrue : phaseQuotientCannotRecoverFineMonsterStatePaid ≡ true
     phaseQuotientCannotRecoverMultiplicityPaid : Bool
     phaseQuotientCannotRecoverMultiplicityPaidIsTrue : phaseQuotientCannotRecoverMultiplicityPaid ≡ true
+    phaseSufficientForPhaseConsumersPaid : Bool
+    phaseSufficientForPhaseConsumersPaidIsTrue : phaseSufficientForPhaseConsumersPaid ≡ true
+    phaseInsufficientForFineStateConsumersPaid : Bool
+    phaseInsufficientForFineStateConsumersPaidIsTrue : phaseInsufficientForFineStateConsumersPaid ≡ true
+
     refinedCoordinateToMonsterModelCompilerPaid : Bool
     refinedCoordinateToMonsterModelCompilerPaidIsTrue : refinedCoordinateToMonsterModelCompilerPaid ≡ true
     actualRecognitionLiftCompilerPaid : Bool
     actualRecognitionLiftCompilerPaidIsTrue : actualRecognitionLiftCompilerPaid ≡ true
-    physicalNH3Base369WeightIdentificationPaid : Bool
-    physicalNH3Base369WeightIdentificationPaidIsFalse : physicalNH3Base369WeightIdentificationPaid ≡ false
-    physicalNH3MultiplicityIdentificationPaid : Bool
-    physicalNH3MultiplicityIdentificationPaidIsFalse : physicalNH3MultiplicityIdentificationPaid ≡ false
+    fullMonsterZetaNative369FineCarrierPaid : Bool
+    fullMonsterZetaNative369FineCarrierPaidIsTrue : fullMonsterZetaNative369FineCarrierPaid ≡ true
+    actualRecognitionNative369CompilerPaid : Bool
+    actualRecognitionNative369CompilerPaidIsTrue : actualRecognitionNative369CompilerPaid ≡ true
+    native369FineCoordinateSufficientForFineStatePaid : Bool
+    native369FineCoordinateSufficientForFineStatePaidIsTrue : native369FineCoordinateSufficientForFineStatePaid ≡ true
+    physicalNH3Native369FineCoordinatePaid : Bool
+    physicalNH3Native369FineCoordinatePaidIsFalse : physicalNH3Native369FineCoordinatePaid ≡ false
 
     selected3BOnlyLinearRetractionAndProjectedActionRemain : Bool
-    selected3BOnlyLinearRetractionAndProjectedActionRemainIsTrue :
-      selected3BOnlyLinearRetractionAndProjectedActionRemain ≡ true
+    selected3BOnlyLinearRetractionAndProjectedActionRemainIsTrue : selected3BOnlyLinearRetractionAndProjectedActionRemain ≡ true
     selected3BLinearRetractionPaid : Bool
     selected3BLinearRetractionPaidIsFalse : selected3BLinearRetractionPaid ≡ false
     selected3BProjectedActionPaid : Bool
@@ -84,8 +74,8 @@ record ZetaEntropyGravityCrossPollinationReceipt : Set where
     zetaSquaredRecognitionOrTransportPaid : Bool
     zetaSquaredRecognitionOrTransportPaidIsFalse : zetaSquaredRecognitionOrTransportPaid ≡ false
 
-    fineStateCountEntropyAdapterPaid : Bool
-    fineStateCountEntropyAdapterPaidIsTrue : fineStateCountEntropyAdapterPaid ≡ true
+    native369ZetaCountingEnsemblePaid : Bool
+    native369ZetaCountingEnsemblePaidIsTrue : native369ZetaCountingEnsemblePaid ≡ true
     physicalEntropyIdentificationPaid : Bool
     physicalEntropyIdentificationPaidIsFalse : physicalEntropyIdentificationPaid ≡ false
     entropyToGravityIntertwinerPaid : Bool
@@ -101,13 +91,12 @@ open ZetaEntropyGravityCrossPollinationReceipt public
 canonicalZetaEntropyGravityCrossPollinationReceipt : ZetaEntropyGravityCrossPollinationReceipt
 canonicalZetaEntropyGravityCrossPollinationReceipt =
   zetaEntropyGravityCrossPollinationReceipt
-    true refl true refl true refl true refl
-    true refl true refl true refl true refl
+    true refl true refl true refl true refl true refl true refl true refl true refl
     true refl true refl true refl true refl true refl true refl
-    false refl false refl
+    true refl true refl true refl true refl true refl false refl
     true refl false refl false refl false refl false refl
     true refl false refl false refl false refl false refl
-    "chemistry: physically identify NH3-state -> F3^6/Base369 weight and -> Fin90 multiplicity; Monster: pay the actual 196883 linear retraction plus selected=projected-full-grade action equation and the separate literal fixed 65610+53 phase-one split/zeta2 transport; only then attempt same-object ensemble/entropy and Lorentzian-gravity promotion"
+    "chemistry: the finite C3/native-369/recognized-zeta compiler chain is paid; acquire a same-object physical NH3 electronic/vibronic state -> native369 fine-coordinate assignment and test dynamics/action equivariance. Monster: pay the genuine 196883 linear constituent retraction plus selected=projected-full-grade action equation and the separate literal phase-one 65610+53 stable split/zeta2 transport. Only after a physical ensemble/density matrix and entropy/region identification may the Lorentzian-gravity and observed-3+1D promotion gates be tested."
 
 existingZetaFrontier : Existing.ZetaBidiFrontier
 existingZetaFrontier = Existing.currentZetaBidiFrontier
@@ -147,56 +136,57 @@ phaseResolutionIsCompilerOutput :
 phaseResolutionIsCompilerOutput = refl
 
 nh3OneRegularBlockPaid :
-  NH3Regular.RegularC3CrossDomainBoundary.nh3A1PlusERestrictsToOneRegularC3
-    NH3Regular.canonicalRegularC3CrossDomainBoundary ≡ true
+  NH3Regular.RegularC3CrossDomainBoundary.nh3A1PlusERestrictsToOneRegularC3 NH3Regular.canonicalRegularC3CrossDomainBoundary ≡ true
 nh3OneRegularBlockPaid = refl
 
 nh3MonsterC3GroupLawIntertwines :
-  NH3MonsterC3.C3QuotientLiftBoundary.c3GroupLawIntertwiningPaid
-    NH3MonsterC3.canonicalC3QuotientLiftBoundary ≡ true
+  NH3MonsterC3.C3QuotientLiftBoundary.c3GroupLawIntertwiningPaid NH3MonsterC3.canonicalC3QuotientLiftBoundary ≡ true
 nh3MonsterC3GroupLawIntertwines = refl
 
-nh3MonsterC3FourierRowsIntertwine :
-  NH3MonsterC3.C3QuotientLiftBoundary.fourierCharacterIntertwiningPaid
-    NH3MonsterC3.canonicalC3QuotientLiftBoundary ≡ true
-nh3MonsterC3FourierRowsIntertwine = refl
-
 phaseDoesNotRecoverFineMonsterState :
-  PhaseNF.PhaseQuotientNonFactorabilityBoundary.phaseQuotientFineStateNonfactorabilityPaid
-    PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
+  PhaseNF.PhaseQuotientNonFactorabilityBoundary.phaseQuotientFineStateNonfactorabilityPaid PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
 phaseDoesNotRecoverFineMonsterState = refl
 
-phaseDoesNotRecoverMonsterMultiplicity :
-  PhaseNF.PhaseQuotientNonFactorabilityBoundary.phaseQuotientMultiplicityNonfactorabilityPaid
-    PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
-phaseDoesNotRecoverMonsterMultiplicity = refl
+phaseSufficiencyIsConsumerRelative :
+  Sufficiency.ConsumerSufficiencyBoundary.phaseSufficientForPhaseConsumers Sufficiency.canonicalConsumerSufficiencyBoundary ≡ true
+phaseSufficiencyIsConsumerRelative = refl
+
+phaseFineStateInsufficiencyPaid :
+  Sufficiency.ConsumerSufficiencyBoundary.phaseSufficientForFineStateConsumers Sufficiency.canonicalConsumerSufficiencyBoundary ≡ false
+phaseFineStateInsufficiencyPaid = refl
 
 refinedModelCompilerPaid :
-  RefinedLift.RefinedStateLiftBoundary.refinedCoordinateToMonsterModelCompilerPaid
-    RefinedLift.canonicalRefinedStateLiftBoundary ≡ true
+  RefinedLift.RefinedStateLiftBoundary.refinedCoordinateToMonsterModelCompilerPaid RefinedLift.canonicalRefinedStateLiftBoundary ≡ true
 refinedModelCompilerPaid = refl
 
 actualRecognitionCompilerPaid :
-  RefinedLift.RefinedStateLiftBoundary.actualRecognitionLiftCompilerPaid
-    RefinedLift.canonicalRefinedStateLiftBoundary ≡ true
+  RefinedLift.RefinedStateLiftBoundary.actualRecognitionLiftCompilerPaid RefinedLift.canonicalRefinedStateLiftBoundary ≡ true
 actualRecognitionCompilerPaid = refl
 
+native369FineCarrierPaid :
+  Native369.Native369FineCarrierBoundary.fullMonsterZetaModelHasNative369CarrierChart Native369.canonicalNative369FineCarrierBoundary ≡ true
+native369FineCarrierPaid = refl
+
+native369ActualRecognitionCompilerPaid :
+  Native369.Native369FineCarrierBoundary.actualZetaRecognitionComposesWithNative369Chart Native369.canonicalNative369FineCarrierBoundary ≡ true
+native369ActualRecognitionCompilerPaid = refl
+
 selected3BTwoLeafFrontierPaid :
-  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.onlyLinearRetractionAndProjectedActionRemain
-    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ true
+  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.onlyLinearRetractionAndProjectedActionRemain Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ true
 selected3BTwoLeafFrontierPaid = refl
 
+native369CountingMicrostatesPaid :
+  NativeEnsemble.NativeZetaEnsembleBoundary.native369MicrostateCarrierPaid NativeEnsemble.canonicalNativeZetaEnsembleBoundary ≡ true
+native369CountingMicrostatesPaid = refl
+
 stateCountBoundaryStillNonPromoting :
-  StateCount.StateCountingEntropyBoundary.degeneracyDeterminesProbabilityDistribution
-    StateCount.canonicalStateCountingEntropyBoundary ≡ false
+  StateCount.StateCountingEntropyBoundary.degeneracyDeterminesProbabilityDistribution StateCount.canonicalStateCountingEntropyBoundary ≡ false
 stateCountBoundaryStillNonPromoting = refl
 
 entropyGravityBoundaryStillNonPromoting :
-  Gravity.EntropyGravityPromotionBoundary.entropyObservableAloneDerivesEinsteinDynamics
-    Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
+  Gravity.EntropyGravityPromotionBoundary.entropyObservableAloneDerivesEinsteinDynamics Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
 entropyGravityBoundaryStillNonPromoting = refl
 
 observedThreePlusOneStillUnpaid :
-  Physical.Monster3Plus1PhysicalSymmetryReceipt.monsterIsSymmetryOfObserved3Plus1Universe
-    Physical.canonicalMonster3Plus1PhysicalSymmetryReceipt ≡ false
+  Physical.Monster3Plus1PhysicalSymmetryReceipt.monsterIsSymmetryOfObserved3Plus1Universe Physical.canonicalMonster3Plus1PhysicalSymmetryReceipt ≡ false
 observedThreePlusOneStillUnpaid = refl
