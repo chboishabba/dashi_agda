@@ -9,9 +9,23 @@ import DASHI.Core.AttributedSourceCore as Source
 -- PRIMARY NEURAL/DEVELOPMENTAL/REDOX-SPATIAL BH4 CONTEXT SOURCES
 --
 -- These sources constrain current-pool versus developmental/state-history,
--- redox-regeneration, cell-topology and route-of-exposure interpretations.
--- They do not inherit DASHI's causal synthesis or Kitzerow-model attribution.
+-- redox-regeneration, cell-topology, uptake and route-of-exposure
+-- interpretations. They do not inherit DASHI's causal synthesis or
+-- Kitzerow-model attribution.
 ------------------------------------------------------------------------
+
+anastasiadisKuhnLevine1994Uptake : Source.AttributedSource
+anastasiadisKuhnLevine1994Uptake =
+  Source.mkDOISource
+    "P. Z. Anastasiadis; D. M. Kuhn; R. A. Levine"
+    "Tetrahydrobiopterin uptake into rat brain synaptosomes, cultured PC12 cells, and rat striatum"
+    "Brain Research 665(1):77-84"
+    "1994"
+    "10.1016/0006-8993(94)91154-1"
+    "https://pubmed.ncbi.nlm.nih.gov/7882022/"
+    Source.academicArticleSource
+    "Primary uptake study. Pays linear concentration-dependent intracellular accumulation of exogenous BH4 in rat brain synaptosomes and PC12 cells plus uptake into rat striatum after peripheral administration. In the studied systems uptake was not sodium/glucose dependent and was interpreted as not requiring a specific membrane carrier. It does not quantify physiological intercellular donor-to-recipient BH4 flux."
+    Source.publicAttribution
 
 hylandEtAl1996Hph1 : Source.AttributedSource
 hylandEtAl1996Hph1 =
@@ -78,6 +92,19 @@ sumiIchinoseEtAl2001PtsKO =
     "Primary PTS-knockout mouse study paying severe neonatal brain BH4/biopterin deficiency with markedly reduced catecholamines and serotonin, plus differential BH4 dependence across catecholaminergic, serotonergic and NO systems and BH4-dependent TH protein abundance. It does not establish uniform branch allocation or human disease causation."
     Source.publicAttribution
 
+choiEtAl2003HumanNnosUptake : Source.AttributedSource
+choiEtAl2003HumanNnosUptake =
+  Source.mkDOISource
+    "Hyun Jin Choi; Seong Who Kim; Joo Hyuk Im; Seong-Gene Lee; MiJung Kim; Onyou Hwang"
+    "Utilization of exogenous tetrahydrobiopterin in nitric oxide synthesis in human neuroblastoma cell line"
+    "Neuroscience Letters 352(2):89-92"
+    "2003"
+    "10.1016/j.neulet.2003.08.032"
+    "https://pubmed.ncbi.nlm.nih.gov/14625030/"
+    Source.academicArticleSource
+    "Primary human nNOS-expressing neuroblastoma study. Pays linear dose-dependent uptake of exogenous BH4 with increased NO production and a functional coculture result in which catecholaminergic CATH.a cells increase NO production in the nNOS-expressing cells. This supports extracellular/intercellular BH4 supply as a functional route in that model but does not directly quantify donor-to-recipient BH4 molecular flux in vivo."
+    Source.publicAttribution
+
 jiangEtAl2024Gch1Therapy : Source.AttributedSource
 jiangEtAl2024Gch1Therapy =
   Source.mkDOISource
@@ -93,11 +120,13 @@ jiangEtAl2024Gch1Therapy =
 
 canonicalNeuralContextSources : List Source.AttributedSource
 canonicalNeuralContextSources =
-  hylandEtAl1996Hph1
+  anastasiadisKuhnLevine1994Uptake
+  ∷ hylandEtAl1996Hph1
   ∷ hwangEtAl1998Localization
   ∷ liangKaufman1998Striatum
   ∷ witteveenGiovanelliKaufman1999NOSRedox
   ∷ sumiIchinoseEtAl2001PtsKO
+  ∷ choiEtAl2003HumanNnosUptake
   ∷ jiangEtAl2024Gch1Therapy
   ∷ []
 
@@ -107,7 +136,7 @@ canonicalNeuralContextSourceAtlas =
     "Kitzerow BH4 neural/developmental/redox-spatial context source atlas"
     "DASHI.Biology.KitzerowBH4NeuralContextSourceAtlasExact"
     canonicalNeuralContextSources
-    "External sources retain experimental authorship. DASHI owns only the cross-study causal-alternative projection: present BH4 pool, developmental history, enzyme abundance, region, cell topology, exposure route, redox regeneration and branch context remain distinct coordinates."
+    "External sources retain experimental authorship. DASHI owns only the cross-study causal-alternative projection: present BH4 pool, developmental history, enzyme abundance, region, cell topology, cellular uptake, exposure route, redox regeneration and branch context remain distinct coordinates."
 
 canonicalNeuralContextAtlasNonPromoting :
   Source.atlasCreatesAuthority canonicalNeuralContextSourceAtlas ≡ false
