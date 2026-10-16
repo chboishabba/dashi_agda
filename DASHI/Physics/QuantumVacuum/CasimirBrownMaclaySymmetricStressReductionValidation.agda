@@ -1,0 +1,20 @@
+module DASHI.Physics.QuantumVacuum.CasimirBrownMaclaySymmetricStressReductionValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirBrownMaclaySymmetricStressReductionExact as R
+
+symmetricTenComponentCompilerOwnedRegression :
+  R.symmetricTenComponentCompilerOwned R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ true
+symmetricTenComponentCompilerOwnedRegression = refl
+
+sixteenIndependentPaymentsNotRequiredRegression :
+  R.sixteenIndependentComponentPaymentsRequired R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ false
+sixteenIndependentPaymentsNotRequiredRegression = refl
+
+independentPaymentCountRegression : R.independentBrownMaclayComponentPayments ≡ 10
+independentPaymentCountRegression = refl
+
+actualTenComponentPaymentStillOpenRegression :
+  R.actualSelectedQFTTenComponentPaymentPaid R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ false
+actualTenComponentPaymentStillOpenRegression = refl
