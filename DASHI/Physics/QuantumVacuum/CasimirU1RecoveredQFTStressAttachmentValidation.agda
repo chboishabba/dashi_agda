@@ -20,6 +20,10 @@ recoveredQFTCommutationConsumedRegression :
   A.recoveredQFTCommutationConsumed A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
 recoveredQFTCommutationConsumedRegression = refl
 
+concreteSU2HostReceiptConsumedRegression :
+  A.concreteSU2HostReceiptRequired A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
+concreteSU2HostReceiptConsumedRegression = refl
+
 componentwiseBrownMaclayTargetOwnedRegression :
   A.componentwiseBrownMaclayEqualityTargetOwned A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
 componentwiseBrownMaclayTargetOwnedRegression = refl
