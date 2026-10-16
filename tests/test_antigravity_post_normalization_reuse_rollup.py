@@ -9,10 +9,13 @@ def read(rel: str) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
-def test_reuse_rollup_imports_new_r136_tt_si_experiment_and_p1_semantic_frontiers():
+def test_reuse_rollup_imports_direct_stress_p1_r136_tt_si_and_experiment_frontiers():
     text = read("DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuseEverything.agda")
     for token in (
         "AntigravityPostNormalizationReuseMaxCutExact",
+        "AntigravityPostNormalizationDirectStressMaxCutExact",
+        "CMP119AntigravityLocalCWightmanDirectStressGeometryExact",
+        "CMP119AntigravityLocalCWightmanDirectStressDifferentialExact",
         "CMP119AntigravityPostScalarR136ReuseMaxCutExact",
         "CMP119AntigravityR136ToStaticVacuumPromotionExact",
         "CMP119AntigravityR136StaticPairToDifferentialExact",
@@ -22,6 +25,7 @@ def test_reuse_rollup_imports_new_r136_tt_si_experiment_and_p1_semantic_frontier
         "AntigravityMatchedControlExperimentDonorMaxCutExact",
         "AntigravitySameStateFourChannelDiscriminatorExact",
         "AntigravityExperimentPortfolioExact",
+        "AntigravityP1A2CertifiedStressCylinderExact",
         "AntigravityP1SemanticSourceFrontierExact",
     ):
         assert token in text
