@@ -19,21 +19,19 @@ import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkedStructuralSimulatio
 open import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkedRunSimulationExact
   using (simulateLinkedExactRun; simulateCodedCandidateExecution; appendLinkedCandidatePhase)
 
--- Exact candidate phase boundary and its static-size payment.
 import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact
 import DASHI.Mathematics.Complexity.CodedFiniteStandardPhaseShiftSimulationExact
 import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseRunExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedCandidateExactPhaseBoundaryExact
 import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseSizeValidation
 
--- Literal fixed-description generator baseline.
 import DASHI.Mathematics.Complexity.CodedFiniteUnaryCursorExact
 import DASHI.Mathematics.Complexity.CodedFiniteBitStreamLookupExact
 import DASHI.Mathematics.Complexity.CodedFiniteBitStreamLookupTransitionExact
 import DASHI.Mathematics.Complexity.GuardedCookFiniteBitTableGeneratorExact
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinStateWidthLowerExact
+import DASHI.Mathematics.Complexity.GuardedCookFiniteBitTableSelfCodeNoGoExact
 
--- Behavioural self-reference and literal-materialisation firewalls.
 import DASHI.Mathematics.Complexity.PNotEqualsNPKleeneSpecializationFixedPointExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPLiteralSelfCodeGrowthNoGoExact
@@ -42,7 +40,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeProgramCodeExact
 
 -- XOR-grid cross-pollination remains bounded to local compiler structure.  All
 -- Boolean facts needed by the complexity lane are reproved locally; no IIT phi
--- value or sibling theorem is imported as lower-bound authority.
+-- value or sibling-branch theorem is imported as lower-bound authority.
 open import DASHI.Mathematics.Complexity.PNotEqualsNPXORCountdownMicrocodeValidation
   using
     ( xorRecoverLeft
@@ -92,38 +90,41 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownRuleFragmentValid
 -- 5. LITERAL FIXED-DESCRIPTION BITSTREAM LOOKUP BASELINE
 --    * unary cursor traversal is actual finite standard-TM syntax;
 --    * a fixed finite Cook bitstream is compiled into literal stop/output rules;
---    * `GuardedCookFiniteBitTableGeneratorExact.cookBitAtQueryAnswerExact`
---      proves every in-range compiled bit is the SAME canonical queryAnswer;
---    * `fixedCookValidStopTransition` pays ordinary standard transition semantics;
+--    * every in-range compiled bit is the SAME canonical queryAnswer;
+--    * ordinary standard stop/output transition semantics are paid;
 --    * no higher-order predicate is called at runtime.
 --
--- 6. SELF-DESCRIPTION FEEDBACK IS NOW EXPLICIT
---    `ConcreteTapeCookLevinStateWidthLowerExact` proves the actual guarded Cook
---    binary quotation is at least the machine's one-hot state width.  Static
---    generated-machine size therefore feeds back into the formula being quoted.
+-- 6. FULL-TABLE SAME-CODE SELF-FIX IS EXACTLY CLOSED
+--    `ConcreteTapeCookLevinStateWidthLowerExact` proves the guarded Cook binary
+--    quotation is at least the described machine's one-hot state width.
+--    `GuardedCookFiniteBitTableSelfCodeNoGoExact` then proves the stronger
+--    same-object result:
 --
--- 7. LITERAL RAW SELF-MATERIALISATION REMAINS CLOSED
---    * strict code growth rules out raw data fixed points when the constructor
---      genuinely grows its representation;
---    * the anchored literal structural resource compiler already collapses to
---      zero budget/zero clock and contradicts known SAT true/false anchors.
---    Therefore full-table self-baking is a diagnostic baseline, NOT the final
---    Clay-critical self-reference architecture.
+--      fixedCookLookupCode description = Description.code description -> bottom.
 --
--- 8. BEHAVIOURAL KLEENE SELF-REFERENCE IS THE CORRECT TARGET
---    `PNotEqualsNPKleeneSpecializationFixedPointExact` already constructs a
---    behavioural fixed point from executable specialization + diagonalization.
---    But `PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact` proves the
---    old concrete Q2 primitive erases its quoted program, so that old instance
---    cannot be used to claim the current coded SAT candidate is self-instantiated.
+--    The lookup code needs strictly more states than its bit-table width, while
+--    the described code's state count is bounded by that same Cook bit count.
+--    Therefore full-table self-baking is formally dead, not merely inefficient.
+--
+-- 7. THE OLDER LITERAL RESOURCE ROUTE IS ALSO CLOSED
+--    * strict raw-code growth blocks syntactic fixed points when representation
+--      genuinely expands;
+--    * the anchored literal structural resource compiler collapses to zero
+--      budget/zero clock and contradicts known SAT true/false anchors.
+--
+-- 8. BEHAVIOURAL KLEENE SELF-REFERENCE IS THE SURVIVING TARGET
+--    `PNotEqualsNPKleeneSpecializationFixedPointExact` constructs a behavioural
+--    fixed point from executable specialization + diagonalization.  But
+--    `PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact` proves the old
+--    concrete Q2 primitive erases its quoted program, so that old instance cannot
+--    identify the current coded SAT candidate with its own generated behaviour.
 --
 -- 9. XOR / RIPPLE-COUNTDOWN CROSS-POLLINATION -- BOUNDED AND ATTRIBUTION-SAFE
 --    * binary countdown data update is `bit XOR borrowIn`;
 --    * XOR is recoverable in either coordinate;
---    * outgoing borrow is separate and provably does not factor through parity;
---    * finite ripple semantics and a literal three-rule decrement fragment exist;
---    * this can serve as a compact control/timer implementation if the final
---      resource Pareto cut prefers runtime work to O(T) static phase expansion;
+--    * outgoing borrow is separate and does not factor through parity alone;
+--    * finite ripple semantics and a literal decrement fragment exist;
+--    * these are compact control implementation donors only;
 --    * IIT phi is explicitly NOT complexity hardness evidence.
 --
 -- LIVE CONSTRUCTIVE WALL AFTER THIS CUT:
@@ -131,26 +132,25 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownRuleFragmentValid
 -- A. CODED-STANDARD BEHAVIOURAL SELF-SPECIALIZER
 --    Lower the already-proved Kleene specialization/diagonal construction onto
 --    the ACTUAL `CodedFiniteStandardTM` program-code carrier.  The binary body
---    must consume the quoted candidate code and generate/stream the guarded Cook
---    behaviour for that same code.  Do not demand literal equality between the
---    generated helper machine and the fixed-point program; demand the correct
---    behavioural fixed-point equation.
+--    must consume the quoted candidate code and stream/generate the guarded Cook
+--    behaviour for that same code.  Do NOT require literal helper-code equality;
+--    require the behavioural fixed-point equation.
 --
 -- B. REPRESENTATION / RESOURCE PARETO CUT
---    Choose honestly between finite-control phase expansion and compact runtime
---    control (including the XOR/borrow donor where useful).  Static code size and
---    runtime work must both feed the same target accounting.
+--    Compare finite-control phase expansion against compact runtime control.  The
+--    XOR/borrow donor is relevant only to the latter.  Both static code size and
+--    runtime work must feed the same target accounting.
 --
 -- C. FINAL SAME-OBJECT RESOURCE FIXED POINT
---    Construct one final target code and exact budget T* such that the same code
---    is the object described by its guarded Cook formula and the total execution
---    cost of specialization/generation/control/candidate/suffix fits that same T*.
---    This is now the principal Clay-critical wall.
+--    Construct one final target code and exact budget T* such that this SAME code
+--    is described by the guarded Cook formula and total specialization/generation/
+--    control/candidate/suffix execution fits that SAME T*.  This is the principal
+--    Clay-critical wall.
 --
 -- D. TERMINAL CONTRADICTION + BARRIER AUDIT
 --    Only after A-C may the existing Cook iff/opposite endpoint route produce
---    `SATDecisionFailure -> SATNotInP -> PNotEqualsNP`.  Any successful closure
---    must then be checked explicitly against relativisation, algebrisation and
+--    `SATDecisionFailure -> SATNotInP -> PNotEqualsNP`.  A successful closure
+--    must be checked explicitly against relativisation, algebrisation and
 --    natural-proof barriers; diagonal syntax alone receives no exemption.
 --
 -- SOURCE STATUS: source-written/static-audited only.  No exact-head Agda kernel
