@@ -115,6 +115,32 @@ pahSingleTurnoverMechanism2013 =
     "Primary single-turnover study on PheHDelta117 paying ordered substrate-binding/intermediate/product-release kinetic mechanism and source-conditioned intrinsic constants; truncated enzyme context does not become full-length human in-vivo flux."
     Source.publicAttribution
 
+pahFerrylIntermediate2011 : Source.AttributedSource
+pahFerrylIntermediate2011 =
+  Source.mkDOISource
+    "Aram Joel Panay; Michael Lee; Carsten Krebs; J. Martin Bollinger Jr.; Paul F. Fitzpatrick"
+    "Evidence for a High-Spin Fe(IV) Species in the Catalytic Cycle of a Bacterial Phenylalanine Hydroxylase"
+    "Biochemistry 50(11):1928-1933"
+    "2011"
+    "10.1021/bi1019868"
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC3059337/"
+    Source.academicArticleSource
+    "Primary rapid-freeze-quench/Mossbauer study of Chromobacterium violaceum PheH; pays a kinetically competent high-spin Fe(IV) catalytic intermediate and source-conditioned rate constants, not identity with full-length human PAH electronic states or a released Hamiltonian/eigenvector."
+    Source.publicAttribution
+
+bh4HepaticCompetition1996 : Source.AttributedSource
+bh4HepaticCompetition1996 =
+  Source.mkDOISource
+    "Catherine M. Pastor; Debra Williams; Toshie Yoneyama; Kazuyuki Hatakeyama; Scott Singleton; Edwin Naylor; Timothy R. Billiar"
+    "Competition for Tetrahydrobiopterin between Phenylalanine Hydroxylase and Nitric Oxide Synthase in Rat Liver"
+    "Journal of Biological Chemistry 271(40):24534-24538"
+    "1996"
+    "10.1074/jbc.271.40.24534"
+    "https://www.sciencedirect.com/science/article/pii/S0021925818400373"
+    Source.academicArticleSource
+    "Primary same-system rat-hepatocyte/perfused-liver experiment explicitly testing BH4 competition between PAH and induced NOS. It pays source-conditioned PAH output, NOx output, cellular BH4/biopterin measurements and perturbations of phenylalanine, arginine, DAHP and exogenous BH4. It constrains a hepatic PAH-iNOS allocator hypothesis but does not settle TH/TPH/AGMO, human neurobiology, autism causation or a universal BH4 allocator model."
+    Source.publicAttribution
+
 pbCaCalmodulin2000 : Source.AttributedSource
 pbCaCalmodulin2000 =
   Source.mkNoDOISource
@@ -188,6 +214,8 @@ canonicalAcquiredPrimarySources =
   ∷ pahFullLengthBH4PDB6HYC
   ∷ pahQMMPES2004
   ∷ pahSingleTurnoverMechanism2013
+  ∷ pahFerrylIntermediate2011
+  ∷ bh4HepaticCompetition1996
   ∷ pbCaCalmodulin2000
   ∷ pbCaCalmodulinESIMS2009
   ∷ siliconBiochemistryAssessment2020
