@@ -57,6 +57,13 @@ import DASHI.Governance.OccupyDeclaredRealizedControlRegression
 import DASHI.Governance.BoloBoloOWSSpokesProposalLineageExact
 import DASHI.Governance.BoloBoloOWSSpokesProposalLineageRegression
 
+-- Current Porto Alegre realised-control comparator: official 2025/2026 event
+-- reports pay bounded proposal/vote, question/response, community speech,
+-- election and representative-to-government flows without promoting official
+-- process description into equal influence or non-domination.
+import DASHI.Governance.BoloBoloPortoAlegreRealizedControlExact
+import DASHI.Governance.BoloBoloPortoAlegreRealizedControlRegression
+
 -- RED-first integration regression for the cybernetic tranche.
 import DASHI.Governance.DeliberativeViableNonDominationLoopRegression
 
