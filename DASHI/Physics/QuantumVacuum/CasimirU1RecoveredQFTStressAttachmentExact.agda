@@ -11,6 +11,7 @@ import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Cut
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as QFT
 import DASHI.Physics.Electromagnetism.U1AsSU2AbelianRestrictionExact as U1YM
 import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationExact as CasimirGRQFT
+import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostExact as SU2Host
 
 ------------------------------------------------------------------------
 -- CASIMIR U(1) -> ACTUAL RECOVERED-QFT SELECTED-SECTOR STRESS ATTACHMENT
@@ -26,9 +27,11 @@ record CasimirU1RecoveredQFTStressAttachment
 
     selectedGroup : QFT.CompactSimpleGroup (Weld.qftCarriers U)
 
-    SelectedGroupHostsCanonicalU1Restriction : Set
-    selectedGroupHostsCanonicalU1Restriction :
-      SelectedGroupHostsCanonicalU1Restriction
+    -- The group-host obligation is no longer an opaque Set.  It must identify
+    -- the selected abstract QFT-group token with the repository's concrete
+    -- unit-quaternion SU(2), while also classifying that token as Sprint105 SU2.
+    selectedSU2Host :
+      SU2Host.CasimirSelectedQFTSU2Host U selectedGroup
 
     stressEvaluator :
       Cut.CMP119RationalStressComponentEvaluator
@@ -73,6 +76,12 @@ recoveredQFTConstructionIsSelectedTarget {U} attachment =
     (candidate attachment)
     (regime attachment)
     (qftAtRegime attachment)
+
+selectedGroupHostReceipt :
+  ∀ {U : Weld.UnifiedCandidate} →
+  (attachment : CasimirU1RecoveredQFTStressAttachment U) →
+  SU2Host.CasimirSelectedQFTSU2Host U (selectedGroup attachment)
+selectedGroupHostReceipt = selectedSU2Host
 
 actualSelectedQFTStress :
   ∀ {U : Weld.UnifiedCandidate} →
@@ -164,6 +173,7 @@ record CasimirU1RecoveredQFTStressAttachmentBoundary : Set where
     u1YangMillsGaugeArchitectureAvailable : Bool
     selectedQFTSectorStressAttachmentInterfaceOwned : Bool
     recoveredQFTCommutationConsumed : Bool
+    concreteSU2HostReceiptRequired : Bool
     componentwiseBrownMaclayEqualityTargetOwned : Bool
     actualSelectedSectorSharedTransportAlreadyExists : Bool
 
@@ -179,9 +189,9 @@ canonicalCasimirU1RecoveredQFTStressAttachmentBoundary :
   CasimirU1RecoveredQFTStressAttachmentBoundary
 canonicalCasimirU1RecoveredQFTStressAttachmentBoundary =
   casimir-u1-recovered-qft-stress-attachment-boundary
-    true true true true true
+    true true true true true true
     false false false false false
 
 casimirU1RecoveredQFTStressAttachmentReading : String
 casimirU1RecoveredQFTStressAttachmentReading =
-  "The first Casimir GR/QFT unification stress leaf is now explicit: on an already-declared QFT overlap regime, QFT recovery commutes to the selected target; choose the actual compact-simple sector that hosts the canonical electromagnetic U(1) restriction, provide a rational evaluator for its actual selected QFT stress, and prove every Axis4 component equals the normalized Brown-Maclay tensor on the same boundary/renormalization object. The existing qftSectorStressToShared map then transports that selected stress into the shared carrier. This attachment does not pay all-sector aggregation, common-action variation, GR stress equality, backreaction, or unified-QG promotion."
+  "The first Casimir GR/QFT unification stress attachment is now explicit and non-opaque. On an already-declared QFT overlap regime, QFT recovery commutes to the selected target; the selected compact-simple group must carry a CasimirSelectedQFTSU2Host receipt identifying its group interpretation with the repository's concrete unit-quaternion SU(2) and classifying it as Sprint105 SU2. Then a rational evaluator for the actual selected QFT stress must prove every Axis4 component equals the normalized Brown-Maclay tensor on the same boundary/renormalization object. Existing qftSectorStressToShared handles selected-sector transport after that. The attachment does not pay all-sector aggregation, common-action variation, GR stress equality, backreaction, or unified-QG promotion."
