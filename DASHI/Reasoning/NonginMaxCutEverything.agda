@@ -30,8 +30,9 @@ import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyValidation
 -- extension recharts it as two T^9 chunks and embeds it into ambient T^27 once
 -- an explicit third-face completion policy is supplied.  The completed graph
 -- is then transported through the actual Grothendieck sheaf, full site
--- presheaf, non-discrete wave-phase groupoid, effective stack and finite
--- hypersheaf.  No bare-T^18 canonical completion is manufactured.
+-- presheaf, non-discrete wave-phase groupoid, phase 2-cell calculus, effective
+-- stack, setoid-truncated higher stack and finite hypersheaf.  No bare-T^18
+-- canonical completion is manufactured.
 import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionExact
 import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionValidation
 import DASHI.Reasoning.TrialecticT27GraphGrothendieckSheafExact
@@ -40,8 +41,12 @@ import DASHI.Reasoning.TrialecticT27GraphSitePresheafExact
 import DASHI.Reasoning.TrialecticT27GraphSitePresheafValidation
 import DASHI.Reasoning.TrialecticT27WavePhaseGroupoidPresheafExact
 import DASHI.Reasoning.TrialecticT27WavePhaseGroupoidPresheafValidation
+import DASHI.Reasoning.TrialecticT27WavePhaseTwoCellExact
+import DASHI.Reasoning.TrialecticT27WavePhaseTwoCellValidation
 import DASHI.Reasoning.TrialecticT27EffectiveStackDescentExact
 import DASHI.Reasoning.TrialecticT27EffectiveStackDescentValidation
+import DASHI.Reasoning.TrialecticT27WavePhaseHigherStackExact
+import DASHI.Reasoning.TrialecticT27WavePhaseHigherStackValidation
 import DASHI.Reasoning.TrialecticT27FiniteTriadicHypersheafExact
 import DASHI.Reasoning.TrialecticT27FiniteTriadicHypersheafValidation
 
