@@ -12,6 +12,8 @@ paths = {
     "neural_sources": "DASHI/Biology/KitzerowBH4NeuralContextSourceAtlasExact.agda",
     "neural": "DASHI/Biology/KitzerowBH4NeuralContextDiscriminatorExact.agda",
     "neural_validation": "DASHI/Biology/KitzerowBH4NeuralContextDiscriminatorValidation.agda",
+    "redox_spatial": "DASHI/Biology/KitzerowBH4RedoxSpatialDiscriminatorExact.agda",
+    "redox_spatial_validation": "DASHI/Biology/KitzerowBH4RedoxSpatialDiscriminatorValidation.agda",
     "bh4_experiment": "DASHI/Biology/KitzerowBH4ExperimentalDiscriminatorExact.agda",
     "bh4_pareto": "DASHI/Biology/KitzerowBH4ParetoAcquisitionExact.agda",
     "bidi": "DASHI/Chemistry/LineageBidiDiscriminatorSynthesisExact.agda",
@@ -60,11 +62,13 @@ for needle in [
     assert needle in text["acquired_sources"], f"acquired source atlas missing {needle}"
 
 for needle in [
-    "hylandEtAl1996Hph1", "sumiIchinoseEtAl2001PtsKO", "jiangEtAl2024Gch1Therapy",
-    "10.1046/j.1471-4159.1996.67020752.x", "10.1074/jbc.M102237200",
-    "10.1016/j.ejphar.2024.176379", "canonicalNeuralContextAtlasNonPromoting",
+    "hylandEtAl1996Hph1", "hwangEtAl1998Localization", "liangKaufman1998Striatum",
+    "witteveenGiovanelliKaufman1999NOSRedox", "sumiIchinoseEtAl2001PtsKO",
+    "jiangEtAl2024Gch1Therapy", "10.1002/(SICI)1098-2396(199802)28:2<140::AID-SYN4>3.0.CO;2-B",
+    "10.1016/S0006-8993(98)00452-1", "10.1074/jbc.274.42.29755",
+    "canonicalNeuralContextAtlasNonPromoting",
 ]:
-    assert needle in text["neural_sources"], f"neural source atlas missing {needle}"
+    assert needle in text["neural_sources"], f"neural/redox source atlas missing {needle}"
 
 for needle in [
     "basalOutput", "pheOutput", "dahpOutput", "pheDahpOutput", "pheBh4DahpOutput",
@@ -100,16 +104,38 @@ for needle in [
     assert needle in text["neural_validation"], f"neural validation missing {needle}"
 
 for needle in [
+    "BH4PoolNodeKind", "monoamineSynthesisNode", "nNOSSpatialNode", "nosBoundRedoxNode",
+    "striatalIntracellularNode", "striatalExtracellularNode", "nosReductiveRegenerationEdge",
+    "monoamineToNnosTransferHypothesis", "intracellularBH4ToDopamineRelease",
+    "extracellularBH4ToDopamineRelease", "canonicalRedoxSpatialDiscriminator",
+    "nadphRegenerationRelevant", "intracellularExtracellularRouteDistinctionPaid",
+    "scalarWellMixedPoolSufficient", "intercellBH4TransferDirectlyMeasured",
+    "exogenousBH4EffectRequiresTHOrNOS", "redoxSpatialEvidenceClosesWholeAllocator",
+]:
+    assert needle in text["redox_spatial"], f"redox/spatial discriminator missing {needle}"
+
+for needle in [
+    "redoxRegenerationAndSpatialTopologyArePaidWithoutScalarPoolPromotion",
+    "neuralSupplyAndConsumptionNeedNotBeColocalized",
+    "striatalRouteAmbiguityBlocksNaiveCofactorInterpretation",
+    "redoxSpatialEvidenceDoesNotCloseWholeAllocator",
+]:
+    assert needle in text["redox_spatial_validation"], f"redox/spatial validation missing {needle}"
+
+for needle in [
     "historicalSameObjectConstraint", "historicalNeuralContextConstraint",
-    "historicalTwoBranchConstraintPaid", "historicalNeuralContextConstraintPaid",
+    "historicalRedoxSpatialConstraint", "historicalTwoBranchConstraintPaid",
+    "historicalNeuralContextConstraintPaid", "historicalRedoxSpatialConstraintPaid",
     "historicalConstraintsCloseCentralEdge", "remainingExperimentalResidual",
+    "intracellular versus extracellular route", "NOS-bound BH4 redox/coupling",
 ]:
     assert needle in text["bh4_experiment"], f"BH4 experiment owner missing {needle}"
 
 for needle in [
     "historicalDirectDiscriminatorChangesTargetDefinition",
     "historicalDirectDiscriminatorClosesWholeTarget",
-    "target-relevant multi-branch BH4 allocation experiment beyond paid hepatic and neural precedents",
+    "route-resolved multi-branch BH4 allocation experiment",
+    "NOS-bound BH4 redox/coupling",
 ]:
     assert needle in text["bh4_pareto"], f"BH4 pareto owner missing {needle}"
 
@@ -152,8 +178,8 @@ for needle in [
     assert needle in text["electronic_validation"], f"PAH electronic validation missing {needle}"
 
 for needle in [
-    "A1 target-relevant multi-branch BH4 allocation discriminator beyond paid hepatic/neural constraints",
-    "BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO",
+    "A1 target-relevant route/compartment-resolved multi-branch BH4 allocation discriminator beyond paid hepatic/neural/redox-spatial constraints",
+    "NOS-bound BH4 redox/coupling", "intracellular/extracellular route", "transfer/supply topology",
     "pahIndependentMechanisticReplay", "causalDiscriminatorCanOutrankDeeperMechanisticReplay",
     "stanfordContactArtifact", "brazilCorrespondenceArtifact", "iaccMedMapsContactArtifact",
     "scientificSupportSeparateFromContactProvenance", "contactEvidenceAutomaticallyProvesDerivation",
@@ -165,9 +191,10 @@ for needle in [
 assert "LineageAttributionAcquisitionParetoExact" not in text["acquisition"]
 
 for needle in [
-    "bh4FluxStatus", "partiallyPaid", "bh4NeuralContextStatus", "paidForDeclaredCoordinate",
-    "hepaticTwoBranchPaymentClosesWholeMultiBranchTarget", "currentPoolRestorationGuaranteesFunctionalRescue",
-    "directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial",
+    "bh4FluxStatus", "partiallyPaid", "bh4NeuralContextStatus", "bh4RedoxSpatialStatus",
+    "paidForDeclaredCoordinate", "hepaticTwoBranchPaymentClosesWholeMultiBranchTarget",
+    "currentPoolRestorationGuaranteesFunctionalRescue", "scalarWellMixedPoolSufficient",
+    "directIntercellularTransferAlreadyPaid", "directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial",
     "pahMechanisticReplayStatus", "pahElectronicHamiltonianMonsterStatus",
     "mechanisticPromotionClosesFluxTarget", "failedMonsterProbeCreatesAcquisitionPriority",
 ]:
@@ -176,6 +203,7 @@ for needle in [
 for needle in [
     "KitzerowBH4HepaticCompetitionDiscriminatorExact",
     "KitzerowBH4NeuralContextSourceAtlasExact", "KitzerowBH4NeuralContextDiscriminatorExact",
+    "KitzerowBH4RedoxSpatialDiscriminatorExact", "KitzerowBH4RedoxSpatialDiscriminatorValidation",
     "MolecularMechanisticPromotionLadderExact", "PAHMechanismStatePromotionExact",
     "LineageMechanisticPromotionMaxCutValidation", "PAHElectronicStateHamiltonianMonsterProbeExact",
     "PAHElectronicStateHamiltonianMonsterProbeValidation", "LineageAttributionAcquisitionFrontierExact",
@@ -184,6 +212,7 @@ for needle in [
 
 for needle in [
     "bh4DirectDiscriminatorsPaySubcoordinatesWithoutWholeClosure",
+    "bh4RedoxSpatialCoordinateIsPaidWithoutInventingTransfer",
     "bh4AcquisitionStateIsPartialNotClosed",
     "contactDoesNotProvePlagiarism", "scientificSupportDoesNotProvePriority",
     "priorityDoesNotProveCorrectness",
@@ -203,7 +232,8 @@ kit = (ROOT / "DASHI/Biology/KitzerowBH4Everything.agda").read_text()
 for needle in [
     "KitzerowBH4FluxCausalModelsExact", "KitzerowBH4HepaticCompetitionDiscriminatorExact",
     "KitzerowBH4NeuralContextSourceAtlasExact", "KitzerowBH4NeuralContextDiscriminatorExact",
+    "KitzerowBH4RedoxSpatialDiscriminatorExact", "KitzerowBH4RedoxSpatialDiscriminatorValidation",
 ]:
     assert needle in kit, f"Kitzerow BH4 rollup missing {needle}"
 
-print("lineage/BH4 causal acquisition + attribution + mechanistic/electronic promotion max-cut static contract: PASS")
+print("lineage/BH4 causal acquisition + redox/spatial topology + attribution + mechanistic/electronic promotion max-cut static contract: PASS")
