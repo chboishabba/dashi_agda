@@ -18,9 +18,11 @@ module DASHI.Analysis.CollatzSyracuseInfiniteSurvivorAffineObstructionExact wher
 -- a new proof of universal Collatz stopping.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_<_; _≤_)
 open import Data.Empty using (⊥)
+open import Data.Product using (Σ)
 
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
 import DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact as Itinerary
@@ -71,10 +73,14 @@ oneContractingCorrectionFitRefutesInfiniteSurvivor :
     < Paradox.gap coefficient * Syracuse.toNat x →
   Inverse.AllHorizonSurvivor x →
   ⊥
-oneContractingCorrectionFitRefutesInfiniteSurvivor coefficient correctionFits survives =
-  survives _
+oneContractingCorrectionFitRefutesInfiniteSurvivor {x} {m} coefficient correctionFits survives =
+  survives m
     (Paradox.contractingCorrectionFitImpliesLiteralDescent
-      _ coefficient _ correctionFits Agda.Builtin.Equality.refl)
+      (Itinerary.parityWord m x)
+      coefficient
+      x
+      correctionFits
+      refl)
 
 ------------------------------------------------------------------------
 -- Exact universal source interface for the unresolved arithmetic leaf.
