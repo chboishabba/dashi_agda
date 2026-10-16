@@ -9,6 +9,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact as Acquired
 import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact as Frontier
 import DASHI.Chemistry.PAHMechanismStatePromotionExact as PAH
+import DASHI.Chemistry.PAHElectronicStateHamiltonianMonsterProbeExact as ElectronicProbe
 
 ------------------------------------------------------------------------
 -- ACQUISITION STATUS AFTER PRIMARY/DIRECT WEB + MECHANISTIC PROMOTION PASS
@@ -67,6 +68,17 @@ pahMechanisticReplayStatus =
     "Andersen/Flatmark/Hough; Flydal et al.; Ishida et al.; Fitzpatrick et al. retain external source ownership; wwPDB artifacts retain artifact identity; DASHI owns only the promotion composition"
     false refl
 
+pahElectronicHamiltonianMonsterStatus : AcquisitionStatusReceipt
+pahElectronicHamiltonianMonsterStatus =
+  acquisitionStatusReceipt
+    "PAH attempted Hamiltonian/state/Monster promotion"
+    partiallyPaid
+    "PAHElectronicStateHamiltonianMonsterProbeExact"
+    "literal finite catalytic-state carrier plus source-backed human Fe(II):BH4 structural state and bacterial high-spin Fe(IV) catalytic intermediate are paid"
+    "human same-object Fe(IV) spectroscopy, numerical electronic Hamiltonian matrix, diagonalization/eigenvector coefficients and any nontrivial PAH-to-Monster representation remain unpaid; full-length 6HYC D2 symmetry supplies no same-object C3 coordinate"
+    "Panay et al. 2011 retain bacterial ferryl evidence; human PAH structural sources retain human Fe(II):BH4 geometry; DASHI owns only the finite-state/probe construction and negative promotion receipts"
+    false refl
+
 pbCaTargetStatus : AcquisitionStatusReceipt
 pbCaTargetStatus =
   acquisitionStatusReceipt
@@ -94,10 +106,10 @@ bh4FluxStatus =
   acquisitionStatusReceipt
     "A1 BH4 same-system flux discriminator dataset"
     unpaid
-    "none acquired; PAH mechanistic promotion is orthogonal"
+    "none acquired; PAH mechanistic/electronic promotion is orthogonal"
     "no same-system branch-allocation coordinate promoted"
     "controlled BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO perturbation dataset remains the decisive payment"
-    "nearby pathway/mechanism/structure/QM-MM sources remain attributed but cannot substitute for the missing same-object flux experiment"
+    "nearby pathway/mechanism/structure/QM-MM/electronic-state sources remain attributed but cannot substitute for the missing same-object flux experiment"
     false refl
 
 chlorCalibrationStatus : AcquisitionStatusReceipt
@@ -153,6 +165,7 @@ canonicalAcquisitionStatuses =
   ∷ carbonSiliconStatus
   ∷ chlorCalibrationStatus
   ∷ pahMechanisticReplayStatus
+  ∷ pahElectronicHamiltonianMonsterStatus
   ∷ stanfordContactStatus
   ∷ brazilContactStatus
   ∷ iaccContactStatus
@@ -169,6 +182,8 @@ record EvidenceAcquisitionStatusBoundary : Set where
     nearbyEvidenceSubstitutesForSameObjectFluxIsFalse : nearbyEvidenceSubstitutesForSameObjectFlux ≡ false
     mechanisticPromotionClosesFluxTarget : Bool
     mechanisticPromotionClosesFluxTargetIsFalse : mechanisticPromotionClosesFluxTarget ≡ false
+    failedMonsterProbeCreatesAcquisitionPriority : Bool
+    failedMonsterProbeCreatesAcquisitionPriorityIsFalse : failedMonsterProbeCreatesAcquisitionPriority ≡ false
     unresolvedTargetRemainsTyped : Bool
     unresolvedTargetRemainsTypedIsTrue : unresolvedTargetRemainsTyped ≡ true
 
@@ -176,4 +191,4 @@ open EvidenceAcquisitionStatusBoundary public
 
 canonicalEvidenceAcquisitionStatusBoundary : EvidenceAcquisitionStatusBoundary
 canonicalEvidenceAcquisitionStatusBoundary =
-  evidenceAcquisitionStatusBoundary false refl false refl false refl false refl true refl
+  evidenceAcquisitionStatusBoundary false refl false refl false refl false refl false refl true refl
