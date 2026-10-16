@@ -17,19 +17,6 @@ import DASHI.Interop.GodsEyeViewProofCarryingWorldOntologyExact as GodsEye
 -- DELIBERATIVE + VIABLE + NON-DOMINATING CYBERNETIC ACTION GATE
 ------------------------------------------------------------------------
 
-record AdmittedNonDominatingPhysicalAction
-    (fibre : BaseLoop.LiveResidualFibre) : Set₁ where
-  constructor admitted-non-dominating-physical-action
-  field
-    physicalAction : BaseLoop.PhysicalActionMoveReceipt fibre
-    nonDomination : NonDom.NonDominationOperationalReceipt
-    affectedPartyDeliberationReference : String
-    pluralViabilityReference : String
-    evidencePathReference : String
-    correctionAndAppealReference : String
-
-open AdmittedNonDominatingPhysicalAction public
-
 record DeliberativeControlCheckpoint
     (fibre : BaseLoop.LiveResidualFibre) : Set₁ where
   constructor deliberative-control-checkpoint
@@ -41,6 +28,25 @@ record DeliberativeControlCheckpoint
     unresolvedResidualReference : String
 
 open DeliberativeControlCheckpoint public
+
+record AdmittedNonDominatingPhysicalAction
+    (fibre : BaseLoop.LiveResidualFibre) : Set₁ where
+  constructor admitted-non-dominating-physical-action
+  field
+    physicalAction : BaseLoop.PhysicalActionMoveReceipt fibre
+    deliberativeCheckpoint : DeliberativeControlCheckpoint fibre
+    worldQueryAdmission : GodsEye.WorldQueryAdmission
+    nonDomination : NonDom.NonDominationOperationalReceipt
+    pluralViabilityReference : String
+    correctionAndAppealReference : String
+
+open AdmittedNonDominatingPhysicalAction public
+
+-- There is intentionally no coercion from observation, deliberation, political
+-- identity, VSM role, model prediction, or a God’s-Eye view to this record.
+-- The action package itself must contain an already-admitted physical action,
+-- a deliberative checkpoint on the same live residual fibre, a real world-query
+-- admission and the proof-relevant non-domination receipt.
 
 record CyberneticRoleSpine : Set where
   constructor cybernetic-role-spine
@@ -130,6 +136,8 @@ record DeliberativeViableNonDominationBoundary : Set where
     futureViabilityIsRetrocausalCommand : Bool
 
     sameActionCarriesNonDominationReceipt : Bool
+    sameResidualCarriesDeliberativeCheckpoint : Bool
+    actionCarriesWorldQueryAdmission : Bool
     realizedBehaviourRetained : Bool
     correctionResponseRetained : Bool
     affectedVoiceRetained : Bool
@@ -146,7 +154,7 @@ canonicalDeliberativeViableNonDominationBoundary :
 canonicalDeliberativeViableNonDominationBoundary =
   deliberative-viable-nondomination-boundary
     false false false false false false false false false
-    true true true true true true true true true
+    true true true true true true true true true true true
 
 canonicalDeliberativeViableNonDominationReceipt : GenericReceipt.GenericReceipt
 canonicalDeliberativeViableNonDominationReceipt =
@@ -154,6 +162,6 @@ canonicalDeliberativeViableNonDominationReceipt =
     "deliberative viable non-domination action loop"
     "DASHI.Governance.DeliberativeViableNonDominationLoopExact"
     "canonicalDeliberativeViableNonDominationBoundary"
-    "welds the existing history-indexed proof/experiment/action controller, ask/listen/deliberate extension, Beer/POSIWID realised-operation semantics, God’s-Eye evidence inspectability, proof-relevant non-domination receipt and plural viability/TSFV boundary at one physical-action gate"
+    "welds the existing history-indexed proof/experiment/action controller, ask/listen/deliberate extension, Beer/POSIWID realised-operation semantics, God’s-Eye query admission/evidence inspectability, proof-relevant non-domination receipt and plural viability/TSFV boundary at one physical-action gate"
     "observation, deliberation, controller identity/ideology, VSM role, model prediction and declared purpose do not authorise action; future viability is a constraint on admissible continuation rather than prediction or retrocausal command; no unique political telos is manufactured"
     "agda -i . DASHI/Governance/DeliberativeViableNonDominationLoopRegression.agda"
