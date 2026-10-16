@@ -19,6 +19,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPBehavioralSpecializerFrontierVal
 -- or lower-bound authority.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
+
 open import DASHI.Mathematics.Complexity.CodedFiniteStandardSelfDelimitingCodeExact
   using (selfDelimitingMachineCode; selfDelimitingRoundTrip)
 
