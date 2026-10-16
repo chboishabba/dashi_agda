@@ -17,6 +17,10 @@ files=(
   DASHI/Physics/CondensedMatter/MATBG2026SourceDataAvailabilityValidation.agda
   DASHI/Physics/CondensedMatter/MATBG2026PublicAcquisitionRouteExact.agda
   DASHI/Physics/CondensedMatter/MATBG2026PublicAcquisitionRouteValidation.agda
+  DASHI/Physics/CondensedMatter/MATBGQTMInstrumentCalibration2026Exact.agda
+  DASHI/Physics/CondensedMatter/MATBGQTMInstrumentCalibration2026Validation.agda
+  DASHI/Physics/CondensedMatter/MATBGQTMResolutionKernelReceiptExact.agda
+  DASHI/Physics/CondensedMatter/MATBGQTMResolutionKernelValidation.agda
   DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Exact.agda
   DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Validation.agda
   DASHI/Physics/CondensedMatter/MATBGBMEisensteinMatrixExact.agda
@@ -98,6 +102,8 @@ for artifact in \
   Docs/evidence/matbg_bm_quantum_geometry_2026-10-16.json \
   scripts/matbg_qtm_matrix_element_observer.py \
   Docs/evidence/matbg_qtm_matrix_element_observer_2026-10-16.json \
+  scripts/matbg_qtm_resolution_kernel.py \
+  Docs/evidence/matbg_qtm_resolution_kernel_2026-10-16.json \
   scripts/matbg_thf_hubbard_i_atomic_reference.py \
   Docs/evidence/matbg_thf_hubbard_i_atomic_reference_2026-10-16.json \
   scripts/matbg_thf_coupled_green_reference.py \
@@ -124,6 +130,8 @@ grep -q 'sameBodyForceFormDoesNotIdentifyMechanism' DASHI/Physics/Foundations/Fi
 grep -q 'qtmBestFitW0W1Hundredths' DASHI/Physics/CondensedMatter/MATBG2026VerticalSliceExact.agda
 grep -q 'publisherVisibleWorkbookCount' DASHI/Physics/CondensedMatter/MATBG2026SourceDataAvailabilityExact.agda
 grep -q 'xiaoNIMSMDRRoute' DASHI/Physics/CondensedMatter/MATBG2026PublicAcquisitionRouteExact.agda
+grep -q 'sampleGeometrySourcePaid' DASHI/Physics/CondensedMatter/MATBGQTMInstrumentCalibration2026Exact.agda
+grep -q 'normalizedSyntheticKernelExecuted' DASHI/Physics/CondensedMatter/MATBGQTMResolutionKernelReceiptExact.agda
 grep -q 'tunnellingMatrixC3Covariance' DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Exact.agda
 grep -q 'qtmNormalizedTunnellingMatrix' DASHI/Physics/CondensedMatter/MATBGBMEisensteinMatrixExact.agda
 grep -q 'firstShellNumericalExecutionPaid' DASHI/Physics/CondensedMatter/MATBGBMFirstShellReplayReceiptExact.agda
@@ -157,6 +165,7 @@ grep -q 'externalSourceDoesNotOwnDASHISynthesis' DASHI/Physics/Foundations/Field
 grep -q 'numericallyExecuted' DASHI/Physics/Foundations/FieldGeometryMatterTerminalMaxCutExact.agda
 grep -q 'thfContinuousBZMeasure' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 grep -q 'thfDiscreteBZDomainMeshCutoffProducer' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
+grep -q 'qtmInstrumentSampleCalibration' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 grep -q 'qtmPublicAcquisitionRoutes' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 grep -q 'numericalBMDoesNotBecomeExperiment' DASHI/Physics/Foundations/FieldGeometryMatterTerminalValidation.agda
 
