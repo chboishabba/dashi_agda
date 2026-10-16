@@ -87,8 +87,10 @@ import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 --
 -- The literal VOA W_zeta VECTOR carrier is distinct from its finite basis-label
 -- surface. Constructive 729-state witness extraction closes the explicit
--- Schrodinger irreducibility leaf. Companion Lean source-writes the generic
--- equal-character-simple-representation isomorphism theorem.
+-- Schrodinger irreducibility leaf. The literal monomial action now also has an
+-- exhaustive executable character derivation over all 3^13 Heisenberg
+-- coordinates and all 729 additive-character sums. Companion Lean source-writes
+-- the generic equal-character-simple-representation isomorphism theorem.
 --
 -- Promotion is proof-relevant: legacy Set-valued fields name proposition types
 -- but do not count as proofs. The fixed-phase character compiler now shows that
@@ -112,6 +114,8 @@ import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact
 import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionValidation
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureValidation
+import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptExact
+import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptValidation
 import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptExact
 import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptValidation
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact
