@@ -9,18 +9,14 @@ commutativitySourceWritten :
   Basic.commutativityProofTermSourceWritten Basic.canonicalBasicLawBoundary ≡ true
 commutativitySourceWritten = refl
 
-twoSidedUnitSourceWritten :
-  Basic.twoSidedUnitProofTermsSourceWritten Basic.canonicalBasicLawBoundary ≡ true
-twoSidedUnitSourceWritten = refl
-
 cubicUnitSourceWritten :
   Basic.cubicUnitProofTermSourceWritten Basic.canonicalBasicLawBoundary ≡ true
 cubicUnitSourceWritten = refl
 
+fullPackageStillOpen :
+  Basic.fullPaidLawPackageInhabited Basic.canonicalBasicLawBoundary ≡ false
+fullPackageStillOpen = refl
+
 kernelReceiptStillPending :
   Basic.exactHeadAgdaKernelReceiptPresent Basic.canonicalBasicLawBoundary ≡ false
 kernelReceiptStillPending = refl
-
-jordanIdentityStillOpen :
-  Basic.jordanIdentityProofTermSourceWritten Basic.canonicalBasicLawBoundary ≡ false
-jordanIdentityStillOpen = refl
