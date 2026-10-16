@@ -94,5 +94,3 @@ canonicalBoundary : Boundary
 canonicalBoundary = boundary
   true true true true true true true true
   false false false false
-
-end DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptExact
