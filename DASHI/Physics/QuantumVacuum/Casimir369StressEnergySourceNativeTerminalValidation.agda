@@ -8,6 +8,7 @@ import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerValidati
 import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressValidation
 import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationValidation
+import DASHI.Physics.QuantumVacuum.CasimirSide4CartanCurvatureClosureValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1SelectedStressReadoutAttachmentValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1ModeRenormalizedStressAttachmentValidation
@@ -38,6 +39,10 @@ freeMaxwellNormalizationInterfacePaidRegression : T.freeMaxwellActionNormalizati
 freeMaxwellNormalizationInterfacePaidRegression = refl
 measuredAlphaNotRequiredRegression : T.measuredAlphaEMRequiredForIdealCasimirActionWeld T.canonicalSourceNativeTerminalBoundary ≡ false
 measuredAlphaNotRequiredRegression = refl
+side4CartanCurlCompilerPaidRegression : T.side4CartanCurlClosureCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
+side4CartanCurlCompilerPaidRegression = refl
+independentFiniteCartanCurlNotRequiredRegression : T.independentFiniteCartanCurlClosurePaymentRequired T.canonicalSourceNativeTerminalBoundary ≡ false
+independentFiniteCartanCurlNotRequiredRegression = refl
 actionEqualityNotIndependentRegression : T.independentRestrictedYMMaxwellActionEqualityRequired T.canonicalSourceNativeTerminalBoundary ≡ false
 actionEqualityNotIndependentRegression = refl
 metricVariationEqualityNotIndependentRegression : T.independentMetricVariationEqualityRequired T.canonicalSourceNativeTerminalBoundary ≡ false
@@ -59,6 +64,8 @@ selectedCartanFieldStillOpenRegression : T.selectedQFTCartanFieldRealizationPaid
 selectedCartanFieldStillOpenRegression = refl
 freeMaxwellNormalizationStillOpenRegression : T.freeMaxwellActionNormalizationPaid T.canonicalSourceNativeTerminalBoundary ≡ false
 freeMaxwellNormalizationStillOpenRegression = refl
+selectedNonlinearCurvatureTransportStillOpenRegression : T.selectedNonlinearExteriorCartanTransportPaid T.canonicalSourceNativeTerminalBoundary ≡ false
+selectedNonlinearCurvatureTransportStillOpenRegression = refl
 
 firstBlockerRegression : T.firstUnificationBlocker ≡ T.missingRound131RecoveredQFTAttachmentForR457
 firstBlockerRegression = refl
@@ -72,7 +79,7 @@ fifthBlockerRegression : T.fifthUnificationBlocker ≡ T.missingFreeMaxwellActio
 fifthBlockerRegression = refl
 sixthBlockerRegression : T.sixthUnificationBlocker ≡ T.missingSameObjectNondegenerateCurvatureFormulaAttachment
 sixthBlockerRegression = refl
-seventhBlockerRegression : T.seventhUnificationBlocker ≡ T.missingExteriorFieldStrengthCartanImage
+seventhBlockerRegression : T.seventhUnificationBlocker ≡ T.missingSelectedNonlinearExteriorCartanTransport
 seventhBlockerRegression = refl
 eighthBlockerRegression : T.eighthUnificationBlocker ≡ T.missingSameObjectActionDensityFunctional
 eighthBlockerRegression = refl
