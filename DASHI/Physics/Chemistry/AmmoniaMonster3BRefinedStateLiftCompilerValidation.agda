@@ -13,15 +13,20 @@ modelRoundTripPaid :
   R.refinedToModel (R.modelToRefined b) ≡ b
 modelRoundTripPaid = R.modelRefinedRoundTrip
 
-compilerPaid :
-  R.RefinedStateLiftBoundary.refinedCoordinateToMonsterModelCompilerPaid
+modelBasisCompilerPaid :
+  R.RefinedStateLiftBoundary.refinedCoordinateToMonsterModelBasisCompilerPaid
     R.canonicalRefinedStateLiftBoundary ≡ true
-compilerPaid = refl
+modelBasisCompilerPaid = refl
 
-actualRecognitionAdapterPaid :
-  R.RefinedStateLiftBoundary.actualRecognitionLiftCompilerPaid
+actualBasisRecognitionAdapterPaid :
+  R.RefinedStateLiftBoundary.actualBasisRecognitionLiftCompilerPaid
     R.canonicalRefinedStateLiftBoundary ≡ true
-actualRecognitionAdapterPaid = refl
+actualBasisRecognitionAdapterPaid = refl
+
+wholeLiteralSectorFiniteLiftBlocked :
+  R.RefinedStateLiftBoundary.wholeLiteralSectorFiniteLiftCompilerPaid
+    R.canonicalRefinedStateLiftBoundary ≡ false
+wholeLiteralSectorFiniteLiftBlocked = refl
 
 physicalWeightAssignmentStillOpen :
   R.RefinedStateLiftBoundary.physicalNH3Base369WeightIdentificationPaid
@@ -32,3 +37,18 @@ physicalMultiplicityAssignmentStillOpen :
   R.RefinedStateLiftBoundary.physicalNH3MultiplicityIdentificationPaid
     R.canonicalRefinedStateLiftBoundary ≡ false
 physicalMultiplicityAssignmentStillOpen = refl
+
+literalBasisAttachmentStillOpen :
+  R.RefinedStateLiftBoundary.literalMonsterBasisAttachmentInhabitedHere
+    R.canonicalRefinedStateLiftBoundary ≡ false
+literalBasisAttachmentStillOpen = refl
+
+linearWZetaRecognitionStillOpen :
+  R.RefinedStateLiftBoundary.linearWZetaSameObjectRecognitionPaidHere
+    R.canonicalRefinedStateLiftBoundary ≡ false
+linearWZetaRecognitionStillOpen = refl
+
+dimensionOrPhaseAloneCannotCreateRefinement :
+  R.RefinedStateLiftBoundary.dimensionOrPhaseAloneCreatesRefinement
+    R.canonicalRefinedStateLiftBoundary ≡ false
+dimensionOrPhaseAloneCannotCreateRefinement = refl
