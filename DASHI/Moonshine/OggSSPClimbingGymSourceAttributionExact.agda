@@ -19,6 +19,7 @@ module DASHI.Moonshine.OggSSPClimbingGymSourceAttributionExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Source
 
@@ -69,6 +70,29 @@ climbingGymSourceAtlas =
       ∷ [])
     "bounded provenance for the supplied figure, the numerical zero generator documentation, and one independent external zero-data reference"
 
+------------------------------------------------------------------------
+-- Exact repository artifact coordinate for the diagnostic cache.
+--
+-- The blob id is repository integrity metadata for the bytes observed on this
+-- branch.  It is not a mathematical checksum theorem about the truth of the
+-- ordinates.  The executable loader separately checks schema/generator/scale,
+-- declared count, positivity and strict ordering before replay.
+------------------------------------------------------------------------
+
+zeroCacheRepositoryPath : String
+zeroCacheRepositoryPath =
+  "scripts/data/monster_climbing_gym_first_849_zeros.json"
+
+zeroCacheObservedGitBlob : String
+zeroCacheObservedGitBlob =
+  "f2df3e2bfade9cac1ea948bcb848d13a3927e4f4"
+
+zeroCacheSchemaVersion : String
+zeroCacheSchemaVersion = "1.0.0"
+
+zeroCacheDeclaredGenerator : String
+zeroCacheDeclaredGenerator = "mpmath.zetazero"
+
 record ClimbingGymSourceAttributionBoundary : Set where
   constructor climbing-gym-source-attribution-boundary
   field
@@ -76,6 +100,8 @@ record ClimbingGymSourceAttributionBoundary : Set where
     mpmathGeneratorDocumentationTypedAsSource : Bool
     lmfdbReferenceTypedAsSource : Bool
     mpmathDocumentationReleaseIs130 : Bool
+    exactCacheRepositoryArtifactPinned : Bool
+    executableCacheMetadataValidationPresent : Bool
 
     exactRuntimePackageVersionIndependentlyReceipted : Bool
     cacheValuesImportedFromLMFDB : Bool
@@ -96,6 +122,8 @@ canonicalClimbingGymSourceAttributionBoundary =
     true   -- mpmath docs are explicitly attributed
     true   -- LMFDB external reference is explicitly attributed
     true   -- the cited official documentation is Release 1.3.0
+    true   -- exact branch cache path and observed git blob are recorded
+    true   -- executable loader validates schema/generator/scale/count/order
     false  -- this source owner does not manufacture a runtime environment receipt
     false  -- cache was generated with mpmath, not copied from LMFDB
     false  -- no complete cache-wide LMFDB equality check is claimed
