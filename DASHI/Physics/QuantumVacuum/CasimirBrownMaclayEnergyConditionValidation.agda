@@ -2,7 +2,7 @@ module DASHI.Physics.QuantumVacuum.CasimirBrownMaclayEnergyConditionValidation w
 
 open import DASHI.Core.Prelude
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (0ℚ; 1ℚ; _/_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _*_; -_)
 
 import DASHI.Physics.QuantumVacuum.CasimirBrownMaclayEnergyConditionExact as CasimirEC
 import DASHI.Physics.QuantumVacuum.CasimirSO3StressContractionMaxCutExact as Stress
@@ -61,6 +61,17 @@ normalNullViolatesRegression = CasimirEC.normalNullCombinationIsNegativeFour
 activeStressRegression :
   CasimirEC.activeStressCombination ≡ - (Int.+ 2 / 1)
 activeStressRegression = CasimirEC.activeStressCombinationIsNegativeTwo
+
+lorentzTraceRegression :
+  CasimirEC.lorentzTraceCombination ≡ 0ℚ
+lorentzTraceRegression = CasimirEC.lorentzTraceCombinationIsZero
+
+arbitraryNullDirectionRegression :
+  (normalWeight : ℚ) →
+  CasimirEC.normalizedNullContractionFromNormalWeight normalWeight
+  ≡ - ((Int.+ 4 / 1) * normalWeight)
+arbitraryNullDirectionRegression =
+  CasimirEC.nullContractionIsNegativeFourTimesNormalWeight
 
 necDirectionRegression :
   CasimirEC.directionalNEC Stress.normal
