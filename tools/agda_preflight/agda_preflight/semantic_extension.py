@@ -5,6 +5,7 @@ from typing import Any, Optional
 from . import discovery_catalog
 from .narrative_cache import NarrativeCache, apply_narrative_gate
 from .repo_index_bridge import RepoIndexReader
+from .repository_store import ensure_repository_schema, sync_legacy_repo_index
 from .unified_discovery import UnifiedDiscovery
 
 
@@ -16,11 +17,17 @@ def install_source_index_semantic_extension(source_index_cls: type) -> None:
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         original_init(self, *args, **kwargs)
+        ensure_repository_schema(self.connection)
+        sync_legacy_repo_index(self.root, self.connection)
         discovery_catalog.ensure_catalog_schema(self.connection)
         self.connection.commit()
 
     def _unified(self) -> UnifiedDiscovery:
-        return UnifiedDiscovery(self.root, self, RepoIndexReader(self.root))
+        return UnifiedDiscovery(
+            self.root,
+            self,
+            RepoIndexReader(self.root, connection=self.connection),
+        )
 
     def refresh_semantic_catalog(self) -> int:
         return discovery_catalog.refresh_catalog(self.connection)
@@ -48,7 +55,10 @@ def install_source_index_semantic_extension(source_index_cls: type) -> None:
             discovery.repo_index.close()
 
     def narrative_archaeology(self, query: str, *, limit: int = 50) -> dict:
-        return NarrativeCache(self.root).search(query, limit=limit)
+        return NarrativeCache(
+            self.root,
+            connection=self.connection,
+        ).search(query, limit=limit)
 
     def discovery_receipt(self, query: str, *, limit: int = 50) -> dict:
         discovery = _unified(self)
