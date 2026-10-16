@@ -22,12 +22,20 @@ import DASHI.Chemistry.LineageAcquiredPrimaryEvidenceExact
 import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact
 import DASHI.Chemistry.LineageEvidenceAcquisitionStatusExact
 
+-- NH3-inspired but molecule-neutral promotion ladder: source-backed structure,
+-- state/Hamiltonian-or-PES, dynamics and released numerical artifacts remain
+-- distinct from independent numerical replay and from causal/flux evidence.
+import DASHI.Chemistry.MolecularMechanisticPromotionLadderExact
+import DASHI.Chemistry.PAHMechanismStatePromotionExact
+import DASHI.Chemistry.LineageMechanisticPromotionMaxCutValidation
+
 -- Numeric calibration is fail-closed: locator, units, context, method and
 -- uncertainty are independent obligations; an unpaid coordinate is not zero.
 import DASHI.Chemistry.LineageQuantitativeCalibrationLedgerExact
 
--- Canonical Pareto acquisition frontier includes scientific calibration and
--- Kitzerow contact/exposure provenance while keeping truth rank unavailable.
+-- Canonical Pareto acquisition frontier includes scientific calibration,
+-- mechanistic replay and Kitzerow contact/exposure provenance while keeping
+-- causal value, attribution value, mechanistic depth and truth rank distinct.
 import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact
 
 import DASHI.Chemistry.LineageCalibrationDiscriminatorMaxCutValidation
