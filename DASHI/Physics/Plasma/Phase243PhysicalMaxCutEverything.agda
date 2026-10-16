@@ -11,3 +11,8 @@ import DASHI.Physics.Plasma.Phase243PeriodicConsumerQuotientExact
 import DASHI.Physics.Plasma.Phase243ConsumerKernelCrossPollinationExact
 import DASHI.Physics.Plasma.Phase243Core54ParetoCoilExact
 import DASHI.Physics.Plasma.Phase243CoilPlasmaFreeBoundaryMaxCutExact
+import DASHI.Physics.Plasma.Phase243FreeBoundarySixExact
+import DASHI.Physics.Plasma.Phase243ProducedFieldOrbitAtlasExact
+import DASHI.Physics.Plasma.Phase243SOTABenchmarkAtlasExact
+import DASHI.Physics.Plasma.Phase243ReactorReopeningExact
+import DASHI.Physics.Plasma.Phase243PhysicalRoadmapStatusExact
