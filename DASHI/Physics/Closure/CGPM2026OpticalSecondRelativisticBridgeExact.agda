@@ -18,9 +18,6 @@ import DASHI.Promotion.SIMetreFromSecondAndCAdapter as Metre
 --     performance-context summary used here.
 --   * Bothwell/Ye 2022 owns its experiment only.
 --   * DASHI owns this crosswalk to the existing proper-time/SI machinery.
---
--- Nothing in this module attributes DASHI's redshift/geodesy synthesis to the
--- CGPM or makes Bothwell/Ye responsible for CGPM policy.
 ------------------------------------------------------------------------
 
 resolutionDOI : String
@@ -32,11 +29,11 @@ resolutionTitle = "On the future definition of the second"
 resolutionAdoptionDate : String
 resolutionAdoptionDate = "2026-10-15"
 
-proposalTargetMeeting : String
-proposalTargetMeeting = "29th CGPM (2030)"
+sourceProposalTargetMeeting : String
+sourceProposalTargetMeeting = "29th CGPM (2030)"
 
-targetComparisonUncertaintyOrder : String
-targetComparisonUncertaintyOrder = "approaching 1e-18"
+sourceTargetComparisonUncertaintyOrder : String
+sourceTargetComparisonUncertaintyOrder = "approaching 1e-18"
 
 currentSISecondReference : String
 currentSISecondReference = "SI second remains based on the fixed caesium-133 hyperfine frequency at this stage"
@@ -96,8 +93,8 @@ canonicalCGPM2026OpticalSecondRelativisticBridge = record
   ; metreAdapterIsCanonical = refl
   ; cgpmResolutionDOI = resolutionDOI
   ; adoptionDate = resolutionAdoptionDate
-  ; proposalTargetMeeting = "29th CGPM (2030)"
-  ; targetComparisonUncertaintyOrder = "approaching 1e-18"
+  ; proposalTargetMeeting = sourceProposalTargetMeeting
+  ; targetComparisonUncertaintyOrder = sourceTargetComparisonUncertaintyOrder
   ; cgpmPolicyAuthorityIngested = true
   ; cgpmPolicyAuthorityIngestedIsTrue = refl
   ; opticalStandardsOutperformCurrentPrimaryRealization = true
