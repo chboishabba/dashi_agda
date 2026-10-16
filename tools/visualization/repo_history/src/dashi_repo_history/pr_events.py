@@ -30,7 +30,7 @@ class PullRequestEvent(_CorePullRequestEvent):
 
 
 def _compat(event: _CorePullRequestEvent) -> PullRequestEvent:
-    return PullRequestEvent(**event.as_record())
+    return PullRequestEvent.from_dict(event.as_record())
 
 
 def parse_pr_records(records: list[dict[str, Any]]) -> list[PullRequestEvent]:
