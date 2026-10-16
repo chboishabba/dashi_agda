@@ -10,6 +10,7 @@ import DASHI.Economics.AICoreWeaveContractBackedFinancingSurface20261016Exact as
 import DASHI.Economics.AICoreWeaveCustomerCreditFinancingCoupling20261016Exact as Coupling
 import DASHI.Economics.AICoreWeaveDDTL4PolarisForgeMapping20261016Exact as Mapping
 import DASHI.Economics.AICoreWeave2032BondRepricing20261016Exact as Repricing
+import DASHI.Economics.AICoreWeaveOpenAIDDTL3CashHardwareWeld20261016Exact as OpenAIWeld
 
 record SameObjectFinancingStatus : Set where
   constructor same-object-financing-status
@@ -19,19 +20,22 @@ record SameObjectFinancingStatus : Set where
     customerCreditFinancingCoupling : Bool
     sameSPVFinanceToSiteMapping : Bool
     sameInstrumentCreditRepricing : Bool
+    namedOpenAIContractCashArchitecture : Bool
+    privateGPUIdentifierReportingRequired : Bool
     exactFinancedGPUCohort : Bool
     exactFinancedMW : Bool
     financedCustomerIdentity : Bool
     realisedProjectReturn : Bool
     realisedRefinancingTransaction : Bool
     namedTerminalCash : Bool
+    publicSerialInventory : Bool
 
 open SameObjectFinancingStatus public
 
 coreWeaveSameObjectFinancingStatus : SameObjectFinancingStatus
 coreWeaveSameObjectFinancingStatus = same-object-financing-status
-  true true true true true
-  false false false false false false
+  true true true true true true true
+  false false false false false false false
 
 sameObjectDepreciationClockPaid : sameObjectDepreciationClock coreWeaveSameObjectFinancingStatus ≡ true
 sameObjectDepreciationClockPaid = refl
@@ -48,6 +52,12 @@ sameSPVFinanceToSiteMappingPaid = refl
 sameInstrumentCreditRepricingPaid : sameInstrumentCreditRepricing coreWeaveSameObjectFinancingStatus ≡ true
 sameInstrumentCreditRepricingPaid = refl
 
+namedOpenAIContractCashArchitecturePaid : namedOpenAIContractCashArchitecture coreWeaveSameObjectFinancingStatus ≡ true
+namedOpenAIContractCashArchitecturePaid = refl
+
+privateGPUIdentifierReportingRequired : SameObjectFinancingStatus.privateGPUIdentifierReportingRequired coreWeaveSameObjectFinancingStatus ≡ true
+privateGPUIdentifierReportingRequired = refl
+
 exactFinancedGPUCohortStillOpen : exactFinancedGPUCohort coreWeaveSameObjectFinancingStatus ≡ false
 exactFinancedGPUCohortStillOpen = refl
 
@@ -56,6 +66,12 @@ realisedProjectReturnStillOpen = refl
 
 namedTerminalCashStillOpen : namedTerminalCash coreWeaveSameObjectFinancingStatus ≡ false
 namedTerminalCashStillOpen = refl
+
+publicRealisedNamedCashStillOpen : namedTerminalCash coreWeaveSameObjectFinancingStatus ≡ false
+publicRealisedNamedCashStillOpen = refl
+
+publicSerialInventoryStillOpen : publicSerialInventory coreWeaveSameObjectFinancingStatus ≡ false
+publicSerialInventoryStillOpen = refl
 
 clockCorrectionPinned : Clock.old24To36MonthMismatchPromotable Clock.coreWeaveSameObjectFinancingClock ≡ false
 clockCorrectionPinned = Clock.old24To36MonthMismatchNotPromotable
@@ -76,6 +92,12 @@ sameSiteSPVPinned = Mapping.sameBorrowerSPVIsPaid
 sameInstrumentRepricingPinned : Repricing.sameInstrumentLongitudinalRepricing Repricing.coreWeave2032BondRepricing ≡ true
 sameInstrumentRepricingPinned = Repricing.sameInstrumentLongitudinalRepricingPaid
 
+openAINamedMSAPinned : OpenAIWeld.openAIPhoenix1NamedMSA OpenAIWeld.coreWeaveOpenAIDDTL3CashHardwareWeld ≡ true
+openAINamedMSAPinned = OpenAIWeld.openAIPhoenix1NamedMSAPaid
+
+privateSerialReportingPinned : OpenAIWeld.gpuRackSerialReportingRequirement OpenAIWeld.coreWeaveOpenAIDDTL3CashHardwareWeld ≡ true
+privateSerialReportingPinned = OpenAIWeld.gpuRackSerialReportingRequirementPaid
+
 boundary : String
 boundary =
-  "The CoreWeave financing max-cut has moved from company-level proxies to several same-object joins. Primary credit agreements pay contractual GPU depreciation of roughly 66-78 months rather than a CoreWeave-specific 36-48 month life; disclosed DDTLs pay project/customer-specific spread terms; DDTL 2.0 and 4.0 expose direct customer-credit/capex-to-financing mechanics; the DDTL 4.0 borrower SPV is source-joined to identified Polaris Forge 1 lease space; and the 9.625 percent 2032 notes have a same-instrument October secondary-market repricing above 15 percent. The remaining authority wall is narrower: exact financed GPU generation/count/MW, associated customer identity, realised project return, realised refinancing transactions and named terminal customer cash. None of the paid structural/market coordinates creates those missing cash-return facts."
+  "The CoreWeave financing max-cut has moved from company-level proxies to several same-object joins. Primary credit agreements pay contractual GPU depreciation of roughly 66-78 months rather than a CoreWeave-specific 36-48 month life; disclosed DDTLs pay project/customer-specific spread terms; DDTL 2.0 and 4.0 expose direct customer-credit/capex-to-financing mechanics; the DDTL 4.0 borrower SPV is source-joined to identified Polaris Forge 1 lease space; and the 9.625 percent 2032 notes have a same-instrument October secondary-market repricing above 15 percent. DDTL 3.0 additionally identifies OpenAI/Phoenix 1, places actual customer cash/MSA payment rights inside the financing cash-control surface, defines a contract-realisation ratio and requires GPU-rack serial reporting to lenders. Therefore exact cash and hardware identifiers are not simply undefined: for this facility they are contractually measured/reported, but the public filing does not disclose their realised values. The remaining authority wall is public realised named cash, public serial/GPU inventory, exact financed MW/generation/count, realised project return and realised refinancing outcomes. None of the paid structural/private-reporting requirements creates those missing public cash-return facts."
