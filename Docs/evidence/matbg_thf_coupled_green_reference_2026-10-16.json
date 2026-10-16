@@ -1,0 +1,32 @@
+{
+  "assertions_passed": true,
+  "dominant_f_peak": {"A_f": 0.3183045832271799, "omega_meV": -76.15},
+  "fixture": {
+    "M_meV": 3.7,
+    "U_meV": 60.0,
+    "delta_mu_meV": 0.0,
+    "gamma_meV": -70.0,
+    "k_nm_inverse": [0.0, 0.0],
+    "mu_c_meV": 0.0,
+    "mu_f_meV": 0.0,
+    "mu_meV": 0.0,
+    "nu_f": 0,
+    "tau_inverse_meV": 1.0
+  },
+  "low_energy_c_peak": {"A_c": 0.33083652833056876, "omega_meV": -3.6999999999999886},
+  "matrix_dimension": 6,
+  "max_inverse_residual": 1.0307899139003352e-14,
+  "neutrality_omega_zero": {"A_c": 0.14221548917743945, "A_f": 0.00010974310849294629},
+  "positive_energy_c_peak": {"A_c": 0.2690400708391195, "omega_meV": 76.15},
+  "promotion_boundaries": {
+    "agda_kernel_receipt": false,
+    "bz_cutoff_calibrated": false,
+    "density_integrals": false,
+    "qtm_data_fit": false,
+    "same_sample_entropy": false,
+    "self_consistent_mu_nf_nc": false
+  },
+  "script": "scripts/matbg_thf_coupled_green_reference.py",
+  "script_sha256": "bf0a98a086d4fa2dc3667eba5182f9f522c18b3ceac7fce24f8aba672cb59823",
+  "source_doi": "10.1038/s41586-026-10378-x"
+}
