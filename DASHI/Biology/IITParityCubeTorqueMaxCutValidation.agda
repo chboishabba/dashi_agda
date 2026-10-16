@@ -33,3 +33,7 @@ import DASHI.Biology.IITXORGridLoopHolonomyExact
 -- The matched face-aware pair must also be recognized as three ordinary binary
 -- XOR synthesis cells versus the same fabric plus one genuine ABC interior term.
 import DASHI.Biology.IITFaceAwareTriadicGridSynthesisWeldExact
+
+-- Concrete permutation-stabilizer relations: transpose is an involutive graph
+-- symmetry and conjugates row translation to column translation.
+import DASHI.Biology.IITCubePermutationStabilizerRegression
