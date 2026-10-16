@@ -11,12 +11,14 @@ from .repository_annotations import (
     restore_repository_annotations,
 )
 from .repository_cli import main as repository_main
-from .repository_git_store import replace_git_history
+from .repository_coverage import repository_inventory_coverage
+from .repository_git_store import git_history_status, replace_git_history
 from .repository_inventory import refresh_repository_inventory
 from .repository_store import (
     DEFAULT_REPOSITORY_DB,
     ensure_repository_schema,
     load_narrative_events,
+    narrative_coverage,
 )
 
 
@@ -31,6 +33,56 @@ def _connect(root: Path, database: Path) -> sqlite3.Connection:
     conn.execute("PRAGMA busy_timeout=5000")
     ensure_repository_schema(conn)
     return conn
+
+
+def _status(argv) -> int:
+    parser = argparse.ArgumentParser(
+        prog="dashi-repo status",
+        description="Report coverage of the unified repository-intelligence database.",
+    )
+    parser.add_argument("--root", type=Path, default=Path.cwd())
+    parser.add_argument("--database", type=Path, default=DEFAULT_REPOSITORY_DB)
+    args = parser.parse_args(argv)
+    root = args.root.resolve()
+    database = args.database if args.database.is_absolute() else root / args.database
+    with _connect(root, args.database) as conn:
+        semantic = repository_inventory_coverage(root, conn)
+        narrative = narrative_coverage(conn)
+        git = git_history_status(conn)
+        counts = {}
+        for table in (
+            "modules",
+            "repo_files",
+            "repo_symbols",
+            "repo_symbol_signatures",
+            "narrative_events",
+            "pull_requests",
+            "git_commits",
+            "git_commit_parents",
+            "git_refs",
+            "promotion_receipts",
+        ):
+            try:
+                counts[table] = int(
+                    conn.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
+                )
+            except sqlite3.DatabaseError:
+                counts[table] = 0
+    print(f"database\t{database}")
+    print(f"semantic_available\t{semantic.get('available', False)}")
+    print(f"semantic_complete\t{semantic.get('complete', False)}")
+    print(f"semantic_producer\t{semantic.get('producer')}")
+    print(f"semantic_missing\t{len(semantic.get('missing', ()))}")
+    print(f"semantic_stale\t{len(semantic.get('stale', ()))}")
+    print(f"semantic_parse_errors\t{len(semantic.get('parse_errors', ()))}")
+    print(f"narrative_available\t{narrative.get('available', False)}")
+    print(f"narrative_complete\t{narrative.get('complete', False)}")
+    print(f"git_complete\t{git.get('complete', False)}")
+    for key in ("commits", "parent_edges", "refs", "commit_paths"):
+        print(f"git_{key}\t{git[key]}")
+    for table, count in counts.items():
+        print(f"table_{table}\t{count}")
+    return 0
 
 
 def _index(argv) -> int:
@@ -127,6 +179,8 @@ def _bootstrap(argv) -> int:
 
 def main(argv=None) -> int:
     actual = list(sys.argv[1:] if argv is None else argv)
+    if actual and actual[0] == "status":
+        return _status(actual[1:])
     if actual and actual[0] == "index":
         return _index(actual[1:])
     if actual and actual[0] == "harvest":
