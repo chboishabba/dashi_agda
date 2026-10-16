@@ -74,8 +74,8 @@ fig4 = record
 canonicalPublicProcessDataFiles : List PublicProcessDataFile
 canonicalPublicProcessDataFiles = fig1 ∷ fig2 ∷ fig3 ∷ fig4 ∷ []
 
-fiveEnsembleClockNetwork : Bool
-fiveEnsembleClockNetwork = true
+sourceFiveEnsembleClockNetwork : Bool
+sourceFiveEnsembleClockNetwork = true
 
 totalVerticalSpanMillimetres : Nat
 totalVerticalSpanMillimetres = 10
@@ -165,7 +165,7 @@ canonicalZhengKolkowitz2023PublicDataReceipt = record
   { sourceArticleDOI = articleDOI
   ; publicDataDOI = zenodoDOI
   ; publicFiles = canonicalPublicProcessDataFiles
-  ; fiveEnsembleClockNetwork = true
+  ; fiveEnsembleClockNetwork = sourceFiveEnsembleClockNetwork
   ; fiveEnsembleClockNetworkIsTrue = refl
   ; publicProcessDataManifestIngested = true
   ; publicProcessDataManifestIngestedIsTrue = refl
