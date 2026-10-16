@@ -40,9 +40,10 @@ record CivilianRFObservationReceipt : Set where
 open CivilianRFObservationReceipt public
 
 ------------------------------------------------------------------------
--- Same-object fusion is explicit.  Merely having an RF bearing that happens
--- to overlap a visual/spatial track does not identify the emitter, robot,
--- operator, mission, payload, or legal status.
+-- Same-object fusion is proof-relevant.  Merely having an RF bearing that
+-- overlaps a visual/spatial track does not identify the emitter, robot,
+-- operator, mission, payload, or legal status.  The fusion receipt therefore
+-- carries literal world-object equality in addition to review/evidence refs.
 ------------------------------------------------------------------------
 
 record RFVisualSameObjectFusionReceipt : Set where
@@ -50,6 +51,9 @@ record RFVisualSameObjectFusionReceipt : Set where
   field
     rfObservation : CivilianRFObservationReceipt
     visualWorldState : GEV.ResolvedWorldState
+    rfSubjectIsVisualSubject :
+      GEV.objectId (worldSubject rfObservation)
+      ≡ GEV.objectId (GEV.resolvedSubject visualWorldState)
     temporalCompatibilityReference : String
     spatialCompatibilityReference : String
     identityEvidenceReference : String
