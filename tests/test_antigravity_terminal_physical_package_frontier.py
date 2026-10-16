@@ -37,15 +37,17 @@ def test_measured_g_is_paid_but_scale_product_remains_inside_calibration_package
         assert needle in text
 
 
-def test_p1_is_scheduled_at_marked_os_pareto_residuals_not_terminal_laws():
+def test_p1_is_two_source_packages_not_terminal_laws():
     text = MODULE.read_text()
     for needle in (
         "AntigravityP1MarkedOSParetoReuseMaxCutExact as P1",
         "p1OpaqueAnalyticEstimateCount",
         "p1RemainingSameObjectResidualCount",
-        "p1E1DerivativeEquivarianceStillRequired",
-        "p1E2StressCylinderEmbeddingStillRequired",
-        "p1E4StressSourceSelectionAndOS4SemanticsStillRequired",
+        "p1Q1PathDerivativeSemanticsAndEquivarianceStillRequired",
+        "p1PrimitiveE1DerivativeEquivarianceProjectRequired = false",
+        "p1SharedE2E4StressCylinderEncodingStillRequired",
+        "p1IndependentE4StressSelectionRequired = false",
+        "p1IndependentE4DecayEstimateRequired = false",
         "p1IndependentTerminalLawProjectsRequired = false",
     ):
         assert needle in text
