@@ -1,0 +1,34 @@
+{
+  "scope": "hydrogenic Z=1 2p^2 common-spin antisymmetric orbital sector",
+  "basis": [
+    "m=-1 wedge m=0",
+    "m=-1 wedge m=+1",
+    "m=0 wedge m=+1"
+  ],
+  "radial_slater_integrals": {
+    "F0": "93/512",
+    "F2": "45/512"
+  },
+  "projected_coulomb_matrix": [
+    ["21/128", "0", "0"],
+    ["0", "21/128", "0"],
+    ["0", "0", "21/128"]
+  ],
+  "induced_wedge2_c3_matrix": [
+    ["0", "-1", "0"],
+    ["0", "0", "-1"],
+    ["1", "0", "0"]
+  ],
+  "commutator": [
+    ["0", "0", "0"],
+    ["0", "0", "0"],
+    ["0", "0", "0"]
+  ],
+  "exact_result": "V_ee = (21/128) I_3",
+  "attribution": {
+    "hydrogenic_radial_source_role": "NIST DLMF role inherited from parent atomic tranche",
+    "gaunt_coulomb_composition": "DASHI exact symbolic reconstruction using standard multipole/Gaunt algebra",
+    "experimental_authority": false,
+    "full_atom_369_identity": false
+  }
+}
