@@ -16,10 +16,15 @@ import DASHI.Physics.Closure.YMSprint105CompactSimpleGroupParameterTable as Tabl
 ------------------------------------------------------------------------
 -- SELECTED QFT GROUP -> SOURCE-BACKED A1 / CONCRETE SU(2) HOST
 --
--- Primary classification is now the compact-simple promotion owner's Dynkin
--- family, not the finite Sprint105 display table.  Sprint105 SU2 remains only a
--- secondary consistency tag.  The selected abstract QFT token must also map to
--- the literal unit-quaternion GroupStructure used by the gauge stack.
+-- Required host data is exactly:
+--   1. IsCompactSimple under the UnifiedCandidate semantics;
+--   2. source-backed compact-simple data classifying the token as Dynkin A1;
+--   3. interpretation of that exact token as the literal quaternionic SU(2)
+--      GroupStructure used by the gauge stack.
+--
+-- Sprint105 SU2 remains a finite-table consistency reference only; it is not a
+-- required classification field because the table does not faithfully interpret
+-- UnifiedCandidate group tokens.
 ------------------------------------------------------------------------
 
 record CasimirSelectedQFTSU2Host
@@ -38,14 +43,6 @@ record CasimirSelectedQFTSU2Host
       Promotion.family (compactSimpleDataForGroup group)
       ≡ Promotion.familyA 1
 
-    -- Secondary table cross-check only; not the primary classification proof.
-    parameterTableClassifier :
-      QFT.CompactSimpleGroup (Weld.qftCarriers U) →
-      Table.CompactSimpleGroupEntry
-
-    selectedGroupClassifiesAsSU2 :
-      parameterTableClassifier group ≡ Table.SU2
-
     groupStructureInterpretation :
       QFT.CompactSimpleGroup (Weld.qftCarriers U) → Gauge.GroupStructure
 
@@ -55,11 +52,6 @@ record CasimirSelectedQFTSU2Host
     reading : String
 
 open CasimirSelectedQFTSU2Host public
-
-------------------------------------------------------------------------
--- Pinned physical YM already supplies IsCompactSimple on the SAME carrier and
--- semantics, so that leaf is compiler output whenever the pinned object exists.
-------------------------------------------------------------------------
 
 compactSimpleFromPinnedYMConstruction :
   ∀ {U : Weld.UnifiedCandidate} →
@@ -84,23 +76,17 @@ hostFromPinnedYMConstruction :
       Promotion.CompactSimpleYMData
         (QFT.CompactSimpleGroup (Weld.qftCarriers U))) →
   Promotion.family (compactData group) ≡ Promotion.familyA 1 →
-  (classifier :
-    QFT.CompactSimpleGroup (Weld.qftCarriers U) →
-    Table.CompactSimpleGroupEntry) →
-  classifier group ≡ Table.SU2 →
   (interpretation :
     QFT.CompactSimpleGroup (Weld.qftCarriers U) → Gauge.GroupStructure) →
   interpretation group ≡ SU2.su2QuaternionGroup →
   String →
   CasimirSelectedQFTSU2Host U group
 hostFromPinnedYMConstruction
-    pinned group compactData familyA1 classifier classified interpretation interpreted reading = record
+    pinned group compactData familyA1 interpretation interpreted reading = record
   { selectedGroupIsCompactSimple =
       compactSimpleFromPinnedYMConstruction pinned group
   ; compactSimpleDataForGroup = compactData
   ; selectedGroupDynkinFamilyIsA1 = familyA1
-  ; parameterTableClassifier = classifier
-  ; selectedGroupClassifiesAsSU2 = classified
   ; groupStructureInterpretation = interpretation
   ; selectedGroupStructureIsQuaternionSU2 = interpreted
   ; reading = reading
@@ -164,10 +150,10 @@ record CasimirSelectedQFTSU2HostBoundary : Set where
     literalU1InclusionCompilerOwnedAfterHost : Bool
     pinnedYMConstructionSuppliesCompactSimpleCompiler : Bool
     sprint105ClassificationIsSecondaryConsistencyTag : Bool
+    sprint105ClassificationRequiredForHost : Bool
 
     selectedGroupCompactSimpleWitnessPaid : Bool
     selectedGroupDynkinA1ClassificationPaid : Bool
-    selectedGroupClassifiedAsSprint105SU2Paid : Bool
     selectedGroupInterpretedAsQuaternionSU2Paid : Bool
     brownMaclayStressIdentifiedByHostAlone : Bool
 
@@ -177,9 +163,9 @@ canonicalCasimirSelectedQFTSU2HostBoundary :
   CasimirSelectedQFTSU2HostBoundary
 canonicalCasimirSelectedQFTSU2HostBoundary =
   casimir-selected-qft-su2-host-boundary
-    true true true true true true true
-    false false false false false
+    true true true true true true true false
+    false false false false
 
 casimirSelectedQFTSU2HostReading : String
 casimirSelectedQFTSU2HostReading =
-  "The selected Casimir QFT host now uses the source-backed compact-simple promotion vocabulary: the exact selected token must be IsCompactSimple, carry CompactSimpleYMData whose Dynkin family is A1, and interpret to the repository's literal unit-quaternion su2QuaternionGroup. Sprint105 SU2 is retained only as a secondary finite-table consistency tag. A pinned physical YM construction on the same qftCarriers/qftSemantics supplies IsCompactSimple without a second theorem. After the host receipts, the existing U1 torus inclusion transports into the selected carrier. None of this identifies Brown-Maclay stress."
+  "The selected Casimir QFT host is now exactly IsCompactSimple + source-backed Dynkin A1 data + literal quaternionic SU(2) GroupStructure interpretation. Sprint105 SU2 is a secondary finite-table consistency reference and is explicitly not required to inhabit the host. A pinned physical YM construction on the same qftCarriers/qftSemantics supplies IsCompactSimple without a second theorem. Once the three required host receipts are paid, the existing U1 torus inclusion transports into the selected carrier. None of this identifies Brown-Maclay stress."
