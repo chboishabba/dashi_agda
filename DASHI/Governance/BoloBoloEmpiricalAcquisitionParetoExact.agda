@@ -20,20 +20,18 @@ import DASHI.Governance.BoloBoloOWSSpokesPrimaryLocatorAtlasExact as Spokes
 -- source-author claims.
 --
 -- This calibration was recomputed after acquiring:
---   * an official current Porto Alegre three-hour COP meeting observation;
---   * an official current Porto cycle participation-scale observation;
---   * official MONDRAGON corporation-wide Congress/governing-body/training and
---     monthly-governance coordinates;
---   * a provenance split between corporation/cooperative governance and the
---     separate Mondragon University faculty Social Council cadence;
---   * the anarchist/horizontal leadership-tension SOTA atlas, which sharpens
---     the PRIMARY OWS minute consumer: recover not only duration/incidence but
---     facilitation, role rotation, delegation, blocking/advancement, reportback,
---     repeated influence and tacit coordination where the primary record pays
---     those coordinates.
--- Remaining comparator gain is therefore concentrated in attendance/duration,
--- boundary-demand, interface-capacity/backlog, matched reportback workload and
--- observable authority/coordination-role structure.
+--   * official current Porto Alegre process observations;
+--   * MONDRAGON corporation/governance-capacity observations;
+--   * the anarchist/horizontal leadership-tension SOTA atlas;
+--   * the Cybersyn/VSM + POSIWID source boundary;
+--   * the realised-control acquisition surface.
+--
+-- The primary OWS/Spokes consumer is therefore no longer generic "minutes".
+-- It seeks source-paid realised-control coordinates: issue surfacing, framing,
+-- facilitation, role rotation, delegation, block/advance events, reportback,
+-- repeated influence, correction handling and reopening/appeal.  These are
+-- descriptive/control-topology observables only; they do not themselves pay
+-- domination, legitimacy or causal-effect claims.
 ------------------------------------------------------------------------
 
 data AcquisitionRequirement : Set where
@@ -50,7 +48,7 @@ primarySpokesMinutesCell =
     recoverPrimarySpokesMinutes
     true true true true
     1 8
-    "recover the primary NYCGA Spokes minutes at the known archival locators and code any source-paid facilitation, role-rotation, delegation, blocking/advancement, reportback, repeated-influence and coordination-role coordinates; locator identity alone pays none of that content"
+    "recover primary NYCGA Spokes minute content at the known archival locators and code any source-paid issue-surfacing, framing, facilitation, role-rotation, delegation, block/advance, reportback, repeated-influence, correction-handling and reopening/appeal coordinates; locator identity alone pays none of that content"
 
 comparatorWorkloadCell : Pareto.RequirementCandidate AcquisitionRequirement
 comparatorWorkloadCell =
@@ -58,7 +56,7 @@ comparatorWorkloadCell =
     enrichComparatorInterfaceWorkload
     true true true true
     3 6
-    "after current Porto and MONDRAGON source gains, acquire remaining attendance/duration, boundary-demand, interface-capacity/backlog, matched reportback workload and observable authority/role-rotation coordinates with institutional-version provenance"
+    "acquire remaining comparator attendance/duration, boundary-demand, interface-capacity/backlog, matched reportback workload and observable realised-control coordinates with institutional-version provenance"
 
 secondaryExpansionCell : Pareto.RequirementCandidate AcquisitionRequirement
 secondaryExpansionCell =
@@ -68,10 +66,6 @@ secondaryExpansionCell =
     2 2
     "expand secondary retrospective discussion of Spokes; useful context but lower current discriminatory gain than recovering the cited primary minutes"
 
--- The holdout remains important for prospective validation but is not required
--- for the CURRENT acquisition consumer because the development gate has not
--- earned its use. Exclusion here is protocol preservation, not a claim that
--- the held-out source lacks authority.
 protectedHoldoutCell : Pareto.RequirementCandidate AcquisitionRequirement
 protectedHoldoutCell =
   Pareto.requirement-candidate
@@ -80,9 +74,6 @@ protectedHoldoutCell =
     1 9
     "prospective GA holdout: retained but excluded from current acquisition frontier until the development/promotion gate earns access"
 
--- Target-pilot outcomes belong to a later direct-study route rather than the
--- present historical/comparator SOURCE-acquisition consumer. Their acquisition
--- also requires independently paid participant/admissibility receipts.
 targetPilotDataCell : Pareto.RequirementCandidate AcquisitionRequirement
 targetPilotDataCell =
   Pareto.requirement-candidate
@@ -131,10 +122,6 @@ currentParetoFrontierExact :
   Pareto.paretoFrontier currentPortfolio ≡
     primarySpokesMinutesCell ∷ comparatorWorkloadCell ∷ []
 currentParetoFrontierExact = refl
-
-------------------------------------------------------------------------
--- Attribution / routing boundary.
-------------------------------------------------------------------------
 
 locatorBoundary : Spokes.SpokesPrimaryLocatorBoundary
 locatorBoundary = Spokes.canonicalSpokesPrimaryLocatorBoundary
