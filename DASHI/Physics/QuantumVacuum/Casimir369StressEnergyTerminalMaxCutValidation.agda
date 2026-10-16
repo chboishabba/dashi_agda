@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.Casimir369StressEnergyTerminalMaxCutExact as Terminal
 import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationValidation
+import DASHI.Physics.QuantumVacuum.CasimirU1RecoveredQFTStressAttachmentValidation
 
 ------------------------------------------------------------------------
 -- RED-first terminal regression surface.
@@ -41,6 +42,10 @@ u1YangMillsArchitecturePaidRegression :
   Terminal.u1YangMillsGaugeArchitectureHandoffPaid Terminal.canonicalTerminalBoundary ≡ true
 u1YangMillsArchitecturePaidRegression = refl
 
+selectedSectorAttachmentInterfacePaidRegression :
+  Terminal.casimirSelectedRecoveredQFTSectorAttachmentInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
+selectedSectorAttachmentInterfacePaidRegression = refl
+
 sameCandidateHandoffInterfacePaidRegression :
   Terminal.sameCandidateUnificationHandoffInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
 sameCandidateHandoffInterfacePaidRegression = refl
@@ -48,6 +53,10 @@ sameCandidateHandoffInterfacePaidRegression = refl
 concreteScaleStillOpenRegression :
   Terminal.concreteCanonicalSetoidScaleWitnessPaid Terminal.canonicalTerminalBoundary ≡ false
 concreteScaleStillOpenRegression = refl
+
+selectedSectorStressAttachmentStillOpenRegression :
+  Terminal.casimirSelectedRecoveredQFTSectorStressAttachmentPaid Terminal.canonicalTerminalBoundary ≡ false
+selectedSectorStressAttachmentStillOpenRegression = refl
 
 nonAbelianAggregationStillOpenRegression :
   Terminal.nonAbelianQFTStressAggregationFromCasimirPaid Terminal.canonicalTerminalBoundary ≡ false
@@ -57,9 +66,17 @@ clayDoesNotPromoteCasimirRegression :
   Terminal.clayMassGapPromotesCasimirPhysics Terminal.canonicalTerminalBoundary ≡ false
 clayDoesNotPromoteCasimirRegression = refl
 
-sameCandidateStressIdentificationStillOpenRegression :
-  Terminal.casimirSharedStressIdentificationPaid Terminal.canonicalTerminalBoundary ≡ false
-sameCandidateStressIdentificationStillOpenRegression = refl
+allSectorCommonVariationStillOpenRegression :
+  Terminal.allSectorAggregationAndCommonVariationPaid Terminal.canonicalTerminalBoundary ≡ false
+allSectorCommonVariationStillOpenRegression = refl
+
+einsteinCommonMetricVariationStillOpenRegression :
+  Terminal.einsteinCommonMetricVariationPaid Terminal.canonicalTerminalBoundary ≡ false
+einsteinCommonMetricVariationStillOpenRegression = refl
+
+commonMetricProducerLanguageStillOpenRegression :
+  Terminal.commonMetricProducerLanguagePaid Terminal.canonicalTerminalBoundary ≡ false
+commonMetricProducerLanguageStillOpenRegression = refl
 
 commonActionIdentificationStillOpenRegression :
   Terminal.casimirCommonActionIdentificationPaid Terminal.canonicalTerminalBoundary ≡ false
@@ -79,8 +96,13 @@ unifiedQGStillClosedRegression = refl
 
 firstUnificationBlockerRegression :
   Terminal.firstUnificationBlocker
-  ≡ Terminal.missingCasimirSharedStressIdentificationInUnifiedCandidate
+  ≡ Terminal.missingCasimirU1RestrictedSelectedQFTStressAttachment
 firstUnificationBlockerRegression = refl
+
+secondUnificationBlockerRegression :
+  Terminal.secondUnificationBlocker
+  ≡ Terminal.missingAllSectorAggregationAndCommonVariation
+secondUnificationBlockerRegression = refl
 
 noMoreCardinalityPaymentRegression :
   Terminal.FurtherCardinalityFactorisationCountsAsPhysicalPayment → ⊥
