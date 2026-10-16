@@ -6,7 +6,7 @@ import DASHI.Cognition.ClinicToStreetsSOTAEvidenceAtlasExact as SOTA
 import DASHI.Cognition.ClinicToStreetsFormulationExperimentExact as Experiment
 
 sotaSourceCountRegression :
-  SOTA.sotaSourceCount ≡ 10
+  SOTA.sotaSourceCount ≡ 11
 sotaSourceCountRegression = refl
 
 sheehiTheoryNotEmpiricalClosureRegression :
