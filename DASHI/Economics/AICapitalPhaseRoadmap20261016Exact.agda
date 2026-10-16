@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Economics.AICapitalSOTAReconciliation20261016Exact as SOTA
 import DASHI.Economics.AICapitalOutcomeSignatures20261016Exact as Outcome
+import DASHI.Economics.AICapitalOutcomeCompatibility20261016Exact as Fit
 import DASHI.Economics.AICapitalPhase2Acquisition20261016Exact as Acquisition
 
 data PhaseState : Set where
@@ -64,9 +65,9 @@ phase4OutcomeValidation : PhaseDeliverable
 phase4OutcomeValidation = phase-deliverable
   "Phase 4 — real-world outcome / thesis falsification"
   outcomeValidation
-  "explicit coexistence tests plus predeclared rival signatures for durable-rent expansion, commoditisation-with-volume-growth, refinancing stress, orderly capital rotation and policy/compliance moat"
-  "populate the signature coordinates longitudinally and discriminate among rivals only when same-basis realised returns, funding/refinancing outcomes, scarcity-rent trajectories, utilisation and market-structure observations are available"
-  "one or more hypotheses are discriminated without post-hoc redefining the consumer; currentOutcomePromotionReady remains false until those longitudinal payments exist"
+  "predeclared rival signatures plus a current compatibility surface: selected coordinates most strongly support refinancing-stress and commoditisation-with-volume-growth, while orderly capital rotation remains materially compatible and no terminal regime is selected"
+  "populate the missing signature coordinates longitudinally and discriminate among rivals only when same-basis realised returns, funding/refinancing outcomes, scarcity-rent trajectories, utilisation and market-structure observations are available"
+  "one or more hypotheses are discriminated without post-hoc redefining the consumer; currentOutcomePromotionReady and anyTerminalRegimeSelected remain false until those longitudinal payments exist"
   false
 
 allNewGenericAbstractionFlagsFalse :
@@ -86,6 +87,9 @@ sotaBubbleStillOpen = SOTA.bubbleStillNotEstablished
 outcomePromotionStillOpen : Outcome.currentOutcomePromotionReady ≡ false
 outcomePromotionStillOpen = refl
 
+compatibilityDoesNotSelectRegime : Fit.anyTerminalRegimeSelected ≡ false
+compatibilityDoesNotSelectRegime = refl
+
 boundary : String
 boundary =
-  "The roadmap is now past generic architecture and moving from coordinate acquisition into longitudinal identification. Phase 1 has added a reported OpenAI negative-free-cash-flow/external-financing boundary and the current Australian operative-policy baseline. Phase 2 now has a first same-issuer CoreWeave credit deterioration coordinate, but persistence/regime promotion still requires repeated full-state measurements and realised refinancing/default outcomes. Commercial residual values and private-company projections remain proxy/secondary authority, not audited same-object cash ledgers. Phase 3 begins only from actually operative obligations and realised costs. Phase 4 keeps all rival outcomes unpromoted until longitudinal discrimination is paid."
+  "The roadmap is now past generic architecture and moving from coordinate acquisition into longitudinal identification. Phase 1 has added a reported OpenAI negative-free-cash-flow/external-financing boundary and the current Australian operative-policy baseline. Phase 2 now has a first same-issuer CoreWeave credit deterioration coordinate, but persistence/regime promotion still requires repeated full-state measurements and realised refinancing/default outcomes. Phase 4 now evaluates the predeclared rivals against current evidence: refinancing stress and commoditisation-with-volume-growth have the strongest selected-coordinate support, while orderly capital rotation remains materially compatible. No terminal regime is promoted because commercial residual values, private-company projections and market-implied credit measures are not substitutes for audited longitudinal cash/return/refinancing outcomes."
