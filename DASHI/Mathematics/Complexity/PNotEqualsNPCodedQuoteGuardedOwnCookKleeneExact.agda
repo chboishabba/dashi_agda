@@ -2,12 +2,6 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCodedQuoteGuardedOwnCookKleeneEx
 
 ------------------------------------------------------------------------
 -- QUOTE-GUARDED BEHAVIOURAL FIXED POINT FOR ONE OWN-COOK DESCRIPTION
---
--- A fixed description D supplies the candidate machine/input/T.  The binary
--- primitive does not blindly use D: it first inspects the quoted finite Kleene
--- syntax, recovers its primitive coded machine, and compares the literal static
--- program bits with D's actual machine quotation.  Only a matching quotation is
--- allowed to answer the requested streamed Cook bit.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -19,12 +13,14 @@ open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (trans)
 
+import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.CodedFiniteStandardStaticQuotationExact as Quote
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
 import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact as Semantics
 import DASHI.Mathematics.Complexity.GuardedCookFixedDescriptionStreamingCostExact as Cost
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedQuoteSensitiveKleeneExact as Kleene
+import DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedPointOwnCookDescriptionExact as OwnDescription
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedPointOwnCookStreamingExact as OwnStream
 
 boolEqual : Bool → Bool → Bool
@@ -59,7 +55,7 @@ listLength (_ ∷ rest) = suc (listLength rest)
 
 quoteMatchesDescription :
   (description : Description.GuardedCookFormulaDescription) →
-  Code.Program DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact.CodedFiniteStandardTM →
+  Code.Program Coded.CodedFiniteStandardTM →
   Bool
 quoteMatchesDescription description quoted =
   sameBoolList
@@ -74,7 +70,7 @@ selectQuotedCookBit true answer = answer
 guardedOwnCookSemantics :
   (description : Description.GuardedCookFormulaDescription) →
   Code.PrimitiveSemantics
-    DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact.CodedFiniteStandardTM
+    Coded.CodedFiniteStandardTM
     Nat
     Bool
 guardedOwnCookSemantics description = record
@@ -87,7 +83,7 @@ guardedOwnCookSemantics description = record
 
 guardedOwnCookFixedPoint :
   (description : Description.GuardedCookFormulaDescription) →
-  Code.Program DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact.CodedFiniteStandardTM
+  Code.Program Coded.CodedFiniteStandardTM
 guardedOwnCookFixedPoint description =
   Code.primitiveBodyFixedPoint (Description.code description)
 
@@ -125,11 +121,6 @@ guardedOwnCookFixedPointSemanticExact description index =
     (guardedOwnCookFixedPointRunExact description index)
     (OwnStream.recoveredOwnCookBitExact description index)
 
-------------------------------------------------------------------------
--- Semantic work envelope: the static quotation guard is a description constant;
--- the varying indexed Cook work keeps the already-proved linear bound.
-------------------------------------------------------------------------
-
 quoteGuardWork :
   Description.GuardedCookFormulaDescription → Nat
 quoteGuardWork description =
@@ -148,22 +139,19 @@ guardedSemanticWorkBound :
   ≤
   quoteGuardWork description
   + Cost.fixedDescriptionIndexBudget
-      (DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedPointOwnCookDescriptionExact.fixedPointRecoveredDescription description)
+      (OwnDescription.fixedPointRecoveredDescription description)
       index
 guardedSemanticWorkBound description index =
-  NatP.+-monoʳ-≤
-    (quoteGuardWork description)
+  NatP.+-mono-≤
+    (NatP.≤-refl (quoteGuardWork description))
     (OwnStream.recoveredOwnCookWorkByIndex description index)
 
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- The surviving self-reference route now has an actual quote-dependent finite
--- Kleene body: changing the quoted static program bits can suppress execution,
--- while its constructed fixed point passes the quotation guard and returns the
--- canonical streamed bit of its own guarded Cook formula.
---
--- This is still semantic execution in Agda. The next and now singular compiler
--- obligation is to realize this guard + streamed recursion as literal
--- `CodedFiniteStandardTM` execution with a proved resource coefficient.
+-- The surviving route now has an actual quote-dependent finite Kleene body:
+-- changing the quoted static program bits can suppress execution, while its
+-- constructed fixed point passes the quotation guard and returns the canonical
+-- streamed bit of its own guarded Cook formula.  The remaining singular compiler
+-- obligation is literal standard-TM realization of this guard+stream recursion.
 ------------------------------------------------------------------------
