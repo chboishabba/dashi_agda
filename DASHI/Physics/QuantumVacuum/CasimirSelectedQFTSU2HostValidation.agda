@@ -32,10 +32,6 @@ selectedCompactSimpleStillOpenRegression :
   H.selectedGroupCompactSimpleWitnessPaid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
 selectedCompactSimpleStillOpenRegression = refl
 
-selectedDynkinA1StillOpenRegression :
-  H.selectedGroupDynkinA1ClassificationPaid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
-selectedDynkinA1StillOpenRegression = refl
-
 selectedCarrierInterpretationStillOpenRegression :
   H.selectedGroupInterpretedAsQuaternionSU2Paid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
 selectedCarrierInterpretationStillOpenRegression = refl
@@ -47,6 +43,14 @@ sprint105TagIsSecondaryRegression = refl
 sprint105TagNotRequiredForHostRegression :
   H.sprint105ClassificationRequiredForHost H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
 sprint105TagNotRequiredForHostRegression = refl
+
+dynkinA1NotRequiredForHostRegression :
+  H.dynkinA1ClassificationRequiredForHost H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+dynkinA1NotRequiredForHostRegression = refl
+
+selectedDynkinA1OptionalConsistencyStillOpenRegression :
+  H.selectedGroupDynkinA1ClassificationPaid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+selectedDynkinA1OptionalConsistencyStillOpenRegression = refl
 
 hostDoesNotCreateStressEqualityRegression :
   H.SelectedSU2HostAutomaticallyIdentifiesBrownMaclayStress → ⊥
