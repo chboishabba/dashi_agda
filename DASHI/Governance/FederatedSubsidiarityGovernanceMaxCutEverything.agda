@@ -50,6 +50,13 @@ import DASHI.Governance.OccupyRealizedControlAcquisitionExact
 import DASHI.Governance.OccupyDeclaredRealizedControlExact
 import DASHI.Governance.OccupyDeclaredRealizedControlRegression
 
+-- Intended Spokes design/source lineage: original NYCGA locator,
+-- contemporaneous People’s Library linked presentation, preserved document
+-- mirror, NYU finding aid and later scholarship. Rotation/recall/observer
+-- access/design aims remain distinct from implementation and realised control.
+import DASHI.Governance.BoloBoloOWSSpokesProposalLineageExact
+import DASHI.Governance.BoloBoloOWSSpokesProposalLineageRegression
+
 -- RED-first integration regression for the cybernetic tranche.
 import DASHI.Governance.DeliberativeViableNonDominationLoopRegression
 
