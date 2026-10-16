@@ -1,3 +1,4 @@
+# synchronized after base-branch workflow bootstrap 2026-10-16
 name: IRIS Dena max-cut Agda
 
 on:
