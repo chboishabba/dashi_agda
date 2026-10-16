@@ -18,14 +18,6 @@ import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
 
 ------------------------------------------------------------------------
 -- TERMINAL CASIMIR / 369 / STRESS-ENERGY / GRQFT MAX-CUT
---
--- This is a status/consumer owner, not another physical mechanism.  It marks
--- which internal structural and QFT theorem families are now owned and names
--- the first genuinely same-object payments that remain.
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- 1. Typed terminal witnesses for each still-live external/same-object cut.
 ------------------------------------------------------------------------
 
 record CanonicalSetoidScalePayment : Set₁ where
@@ -79,10 +71,6 @@ record SameCandidateGRQFTUnificationPayment : Set₂ where
 
 open SameCandidateGRQFTUnificationPayment public
 
-------------------------------------------------------------------------
--- 2. Terminal boundary: what is actually paid now.
-------------------------------------------------------------------------
-
 record Casimir369StressEnergyTerminalBoundary : Set where
   constructor casimir-369-stress-energy-terminal-boundary
   field
@@ -102,12 +90,15 @@ record Casimir369StressEnergyTerminalBoundary : Set where
     activeStressProjectionCrossPollinationPaid : Bool
     conditionalGRDiagnosticCompilerReusePaid : Bool
     vacuumLambdaDiscriminatorPaid : Bool
+    u1YangMillsGaugeArchitectureHandoffPaid : Bool
     sameCandidateUnificationHandoffInterfacePaid : Bool
 
     concreteCanonicalSetoidScaleWitnessPaid : Bool
     legacyPropositionalQuotientPaid : Bool
     sameObjectQuantumInequalityPaid : Bool
     sameObjectANECApplicationPaid : Bool
+    nonAbelianQFTStressAggregationFromCasimirPaid : Bool
+    clayMassGapPromotesCasimirPhysics : Bool
     casimirSharedStressIdentificationPaid : Bool
     casimirCommonActionIdentificationPaid : Bool
     semiclassicalGravityBackreactionPaid : Bool
@@ -121,12 +112,8 @@ canonicalTerminalBoundary : Casimir369StressEnergyTerminalBoundary
 canonicalTerminalBoundary =
   casimir-369-stress-energy-terminal-boundary
     true true true true true true true true true true true
-    true true true true true
-    false false false false false false false false false false
-
-------------------------------------------------------------------------
--- 3. Existing owners witness the paid side rather than booleans floating free.
-------------------------------------------------------------------------
+    true true true true true true
+    false false false false false false false false false false false false
 
 hyperfabricBoundaryWitness : Hyper.Casimir369HyperfabricBoundary
 hyperfabricBoundaryWitness = Hyper.canonicalCasimir369HyperfabricBoundary
@@ -151,16 +138,13 @@ grqftCrossPollinationBoundaryWitness :
 grqftCrossPollinationBoundaryWitness =
   GRQFTX.canonicalCasimirGRQFTCrossPollinationBoundary
 
-------------------------------------------------------------------------
--- 4. No more numerology or projection collapse as payment.
-------------------------------------------------------------------------
-
 data FurtherCardinalityFactorisationCountsAsPhysicalPayment : Set where
 data PointwiseViolationCountsAsAveragedViolationPayment : Set where
 data TheoryStressCountsAsMeasuredGravityPayment : Set where
 data SharedActiveProjectionCountsAsSameStressEnergyWeld : Set where
-
 data ConditionalRicciDiagnosticCountsAsSolvedCasimirGeometry : Set where
+
+data U1GaugeEmbeddingCountsAsNonAbelianStressAggregation : Set where
 
 furtherCardinalityIsNotPayment :
   FurtherCardinalityFactorisationCountsAsPhysicalPayment → ⊥
@@ -182,9 +166,9 @@ conditionalRicciDiagnosticIsNotSolvedGeometry :
   ConditionalRicciDiagnosticCountsAsSolvedCasimirGeometry → ⊥
 conditionalRicciDiagnosticIsNotSolvedGeometry ()
 
-------------------------------------------------------------------------
--- 5. Machine-readable first-blocker ordering.
-------------------------------------------------------------------------
+u1GaugeEmbeddingIsNotNonAbelianAggregation :
+  U1GaugeEmbeddingCountsAsNonAbelianStressAggregation → ⊥
+u1GaugeEmbeddingIsNotNonAbelianAggregation ()
 
 data RemainingCasimirStressEnergyBlocker : Set where
   missingConcreteCanonicalSetoidAuthorityAndScaleWitness : RemainingCasimirStressEnergyBlocker
@@ -216,4 +200,4 @@ firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
 terminalReading : String
 terminalReading =
-  "The internal finite 369/SO3 carrier work, spatial 9->3->1 stress contraction, Brown-Maclay normalized 4x4 stress fingerprint, arbitrary-direction pointwise NEC formula, local WEC/SEC/DEC verdicts, setoid-native full-stress interface, Ford-Roman QI provenance and GR NEC/null-convergence firewall are paid. GRQFT cross-pollination now also puts the normalized Casimir tensor on the existing RationalTensor4 carrier, proves that Casimir and the finite GR fixture share active projection -2 while having different trace/component fingerprints, reuses the normalized trace-reversal/Raychaudhuri compilers conditionally, and uses the isotropic vacuum-Lambda ray as a discriminator. The first Casimir-local mathematical payment remains an inhabited BishopCasimirSetoidAuthority plus positive scale witness. The first unification payment is then literal identification of that same Casimir stress inside a UnifiedCandidate SharedStressEnergy carrier, followed by a common-action/source identification and overlap/backreaction/correction evidence. QI/ANEC require explicit averaging prescriptions; semiclassical gravity requires a same-object Einstein/conservation/geometry solution; experiment requires direct stress/gravity measurement. Further 3/6/9/18/27 factorisation, shared active projection, or a conditional Ricci diagnostic is not payment."
+  "The internal finite 369/SO3 carrier work, spatial 9->3->1 stress contraction, Brown-Maclay normalized 4x4 stress fingerprint, arbitrary-direction pointwise NEC formula, local WEC/SEC/DEC verdicts, setoid-native full-stress interface, Ford-Roman QI provenance and GR NEC/null-convergence firewall are paid. GRQFT cross-pollination puts the normalized Casimir tensor on the existing RationalTensor4 carrier, proves that Casimir and the finite GR fixture share active projection -2 while retaining different trace/component fingerprints, reuses the normalized trace-reversal/Raychaudhuri compilers conditionally, and uses the isotropic vacuum-Lambda ray as a discriminator. The electromagnetic U(1) lane also enters the repo SU(2)/Yang-Mills gauge architecture through the exact abelian restriction, but this does not pay non-abelian QFT sector-stress aggregation and does not let the Clay mass-gap lane prove Casimir physics. The first Casimir-local mathematical payment remains an inhabited BishopCasimirSetoidAuthority plus positive scale witness. The first unification payment is literal identification of that same Casimir stress inside a UnifiedCandidate SharedStressEnergy carrier, followed by common-action/source identification and overlap/backreaction/correction evidence. QI/ANEC require explicit averaging prescriptions; semiclassical gravity requires a same-object Einstein/conservation/geometry solution; experiment requires direct stress/gravity measurement. Further 3/6/9/18/27 factorisation, shared active projection, a conditional Ricci diagnostic, or U(1) gauge embedding is not physical unification payment."
