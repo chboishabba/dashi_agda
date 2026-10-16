@@ -2,12 +2,6 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCodedKleeneWholeProgramBoundaryE
 
 ------------------------------------------------------------------------
 -- PRIMITIVE HEAD != WHOLE BEHAVIOURAL FIXED-POINT PROGRAM
---
--- Kleene self-reference gives a whole specialized/diagonalized syntax tree.
--- Recovering the leftmost primitive coded machine is useful for quote-sensitive
--- diagnostics, but it is not a compiler for that whole tree.  The Cook object
--- in a Clay-facing self-application must describe the machine obtained by
--- compiling the ENTIRE fixed-point program.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -42,28 +36,12 @@ fixedPointProgramNotPrimitiveLeaf machine equality =
         (primitiveProgramSize machine)))
 
 ------------------------------------------------------------------------
--- Compiler target.
---
--- This is deliberately a proposition about an ACTUAL compiler output, not a
--- replacement self-reference calculus.  An inhabitant must map the complete
--- finite Kleene syntax to ordinary coded standard-TM syntax and preserve run
--- behaviour.  Merely projecting `headMachine` cannot inhabit it.
-------------------------------------------------------------------------
-
-record WholeProgramCompilation
-    (program : Code.Program Coded.CodedFiniteStandardTM) : Set₁ where
-  field
-    compiledCode : Coded.CodedFiniteStandardTM
-
-open WholeProgramCompilation public
-
-------------------------------------------------------------------------
 -- MAX-CUT CONSEQUENCE
 --
--- The previous `headMachine`/recovered-description results pay only primitive
--- body identity and quote sensitivity.  They must not be used as the final
--- same-object Cook weld.  The next Clay-critical construction is now exact:
--- compile the entire specialized/diagonalized finite Program into a literal
--- coded standard TM, prove semantic preservation, and only then form the guarded
--- Cook description of THAT compiled code.
+-- `headMachine`/recovered-description pays primitive-body identity only.  The
+-- whole fixed-point syntax is provably a distinct object.  A Clay-facing Cook
+-- weld must therefore first compile the COMPLETE specialized/diagonalized syntax
+-- into ordinary coded standard-TM syntax, prove behavioural preservation, and
+-- form the guarded Cook description of that compiled code.  No placeholder
+-- compiler interface is introduced here.
 ------------------------------------------------------------------------
