@@ -41,6 +41,7 @@ import DASHI.Biology.SignedSSPWeaveDerivedLengthDynamicsExact as Derived
 import DASHI.Biology.SignedSSPWeaveAddressNeutralDynamicsExact as Neutral
 import DASHI.Biology.SignedSSPWeaveRefineAt369FixedDepthNoGoExact as RefineNoGo
 import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
+import DASHI.Geometry.SSP369Ultrametric as SSP
 
 legacyCanonicalAddressTransportPaid :
   Legacy.address369 Legacy.thirdCanonicalTransfer
@@ -87,11 +88,9 @@ refineAt369AddressDynamicsStillOpen :
 refineAt369AddressDynamicsStillOpen = refl
 
 fixedDepthRichStepCannotIncreaseDepth :
-  (step : DASHI.Geometry.SSP369Ultrametric.Address 3 →
-          DASHI.Geometry.SSP369Ultrametric.Address 3) →
-  (address : DASHI.Geometry.SSP369Ultrametric.Address 3) →
-  DASHI.Geometry.SSP369Ultrametric.addressDepth (step address)
-  ≡ DASHI.Geometry.SSP369Ultrametric.addressDepth address
+  (step : SSP.Address 3 → SSP.Address 3) →
+  (address : SSP.Address 3) →
+  SSP.addressDepth (step address) ≡ SSP.addressDepth address
 fixedDepthRichStepCannotIncreaseDepth =
   RefineNoGo.fixedDepthThreeStepPreservesAddressDepth
 
