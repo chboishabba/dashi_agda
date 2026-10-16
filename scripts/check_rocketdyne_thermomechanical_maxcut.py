@@ -25,7 +25,7 @@ EXPECT = {
     "DASHI/Physics/Propulsion/Rocketdyne1974DigitalThreadExperimentParetoExact.agda": ["digitalThreadBoundary", "wallGaugeAndContour", "test052ThermalField", "fabricationTraveler", "inspectionNDEHistory", "constitutiveData", "maintenanceFRACAS", "populationLedger", "sourceSelectionRecords", "rocketdyneAcquisitionPortfolio", "rocketdyneDigitalThreadExperimentFrontier"],
     "DASHI/Physics/Propulsion/Rocketdyne1974DigitalThreadExperimentParetoValidation.agda": ["frontierExists", "paretoBundleExists", "digitalThreadBoundaryExists"],
     "DASHI/Physics/Materials/RocketdyneMaterialSurvivabilityCrossPollinationExact.agda": ["flightC103ManufacturingLesson", "manufacturingProcessCoordinateRequired"],
-    "DASHI/Physics/Materials/FusionPropulsionMaterialSurvivabilityCrossPollinationExact.agda": ["rocketdyneQualificationReverseFrontier", "canonicalHotSectionQualificationBoundary", "fusionQualificationNeedsOwnSameObjectPayment"],
+    "DASHI/Physics/Materials/FusionPropulsionMaterialSurvivabilityCrossPollinationExact.agda": ["rocketdyneQualificationReverseFrontier", "canonicalHotSectionQualificationBoundary", "fusionQualificationNeedsOwnSameObjectPayment", "rocketdyneDigitalThreadFrontier", "fusionMayReuseDigitalThreadGrammar", "rocketdyneAcquisitionScoresTransferToFusion"],
 }
 
 def main() -> int:
