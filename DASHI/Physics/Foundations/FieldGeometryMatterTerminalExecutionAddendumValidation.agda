@@ -9,8 +9,14 @@ import DASHI.Physics.Foundations.FieldGeometryMatterTerminalMaxCutExact as T
 obstruction-is-numerical-not-solved : A.thfFiniteQuadratureObstructionReplay A.currentTerminalExecutionAddendum ≡ T.numericallyExecuted
 obstruction-is-numerical-not-solved = refl
 
+continuous-bz-measure-is-source-paid : A.thfContinuousBZMeasure A.currentTerminalExecutionAddendum ≡ T.sourcePaid
+continuous-bz-measure-is-source-paid = refl
+
 full-thf-remains-open : A.thfSourceFaithfulSelfConsistentSolve A.currentTerminalExecutionAddendum ≡ T.openCalibrationOrExecution
 full-thf-remains-open = refl
+
+discrete-thf-producer-remains-open : A.thfDiscreteBZDomainMeshCutoffProducer A.currentTerminalExecutionAddendum ≡ T.openSameObjectPayment
+discrete-thf-producer-remains-open = refl
 
 qtm-public-routes-source-paid : A.qtmPublicAcquisitionRoutes A.currentTerminalExecutionAddendum ≡ T.sourcePaid
 qtm-public-routes-source-paid = refl
@@ -23,6 +29,9 @@ entropy-maxwell-kernel-executed = refl
 
 entropy-bytes-still-open : A.entropySourceDataBytes A.currentTerminalExecutionAddendum ≡ T.openSameObjectPayment
 entropy-bytes-still-open = refl
+
+continuous-measure-is-not-discrete-producer : A.continuousMeasureCountsAsDiscreteProducer A.currentTerminalExecutionAddendum ≡ false
+continuous-measure-is-not-discrete-producer = refl
 
 availability-is-not-replay : A.sourceDataAvailabilityCountsAsReplay A.currentTerminalExecutionAddendum ≡ false
 availability-is-not-replay = refl
