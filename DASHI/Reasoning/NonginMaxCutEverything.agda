@@ -26,6 +26,13 @@ import DASHI.Reasoning.TrialecticC3EdgeResidualRepairValidation
 import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyExact
 import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyValidation
 
+-- Exact carrier ladder.  The mature structured boundary is T^18; the new graph
+-- extension recharts it as two T^9 chunks and embeds it into ambient T^27 once
+-- an explicit third-face completion policy is supplied.  No bare-T^18
+-- canonical completion is manufactured.
+import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionExact
+import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionValidation
+
 -- 369-wave cross-pollination closes the stale groupoid/pseudofunctor/stack
 -- frontier while retaining chart rotation as a separate equivariant symmetry.
 import DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact
