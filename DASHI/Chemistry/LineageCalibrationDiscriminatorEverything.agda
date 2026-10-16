@@ -8,6 +8,8 @@ import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorValidation
 import DASHI.Biology.KitzerowBH4NeuralContextSourceAtlasExact
 import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorExact
 import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorValidation
+import DASHI.Biology.KitzerowBH4RedoxSpatialDiscriminatorExact
+import DASHI.Biology.KitzerowBH4RedoxSpatialDiscriminatorValidation
 import DASHI.Chemistry.LineageBidiDiscriminatorSynthesisExact
 import DASHI.Biology.CarbonSiliconReachableChemistryBenchmarkExact
 
@@ -22,8 +24,8 @@ import DASHI.Chemistry.LineageSourceManifestationGuardExact
 
 -- Newly acquired primary/direct evidence is kept in attributed source owners
 -- and bounded payment layers so local payments cannot silently upgrade the
--- broader generic unpaid cells. Hepatic PAH-iNOS and neural rescue/context
--- results are direct causal-discriminator payments for the BH4 allocation lane.
+-- broader generic unpaid cells. Hepatic PAH-iNOS, neural state-history and
+-- redox/spatial/route results are direct causal-discriminator payments for A1.
 import DASHI.Chemistry.LineageAcquiredPrimaryEvidenceExact
 import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact
 import DASHI.Chemistry.LineageEvidenceAcquisitionStatusExact
