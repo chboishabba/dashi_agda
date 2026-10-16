@@ -11,8 +11,12 @@ module DASHI.Moonshine.OggSSPClimbingGymTerminalStatusExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 
+import DASHI.Analysis.BishopRadixCellQuantisationExact as BishopCell
+import DASHI.Foundations.NatRadialTreeCodecExact as NatRadix
 import DASHI.Moonshine.OggSSPClimbingGymAnalyticRadixAdapterExact as Analytic
 import DASHI.Moonshine.OggSSPClimbingGymEmpiricalReplayExact as Replay
+import DASHI.Moonshine.OggSSPClimbingGymExactHoleAnalyticBridge as HoleBridge
+import DASHI.Moonshine.OggSSPClimbingGymExactHoleRadixCodec as Hole
 import DASHI.Moonshine.OggSSPClimbingGymPhaseControlExact as Phase
 import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact as Figure
 import DASHI.Moonshine.OggSSPClimbingGymSourceAttributionExact as Attribution
@@ -34,6 +38,15 @@ record ClimbingGymTerminalStatus : Set where
     acquiredSourceAttributionClosed : Bool
     canonicalConsumerDescentWeldClosed : Bool
 
+    exactNatToRadialTreeCodecClosed : Bool
+    exactHoleAddressWithoutRealFloorClosed : Bool
+    exactHoleAnalyticAgreementSurfaceClosed : Bool
+    certifiedBishopOpenCellToRadixClosed : Bool
+    sourceShiftSeedNonIdentifiabilityClosed : Bool
+
+    -- Compatibility flag for the old monolithic frontier.  It now means a
+    -- globally total arbitrary-real floor/frac -> finite-address operation,
+    -- not the paid exact-hole or certified-open-cell paths above.
     constructiveRealToFiniteRadixQuantiserClosed : Bool
     sourceRandomShiftSeedRecovered : Bool
     roundedShiftSummaryUniquelyIdentifiesSeed : Bool
@@ -61,7 +74,14 @@ canonicalClimbingGymTerminalStatus =
     true   -- log/pi/hole/phase same-carrier adapter surface constructed
     true   -- supplied figure, mpmath docs and LMFDB reference typed separately
     true   -- local collisions inhabit canonical ConsumerNonDescentWitness
-    false  -- current constructive-real spine still lacks concrete floor/frac -> Fin
+
+    true   -- generic Nat quotient/remainder -> existing RadialTreeAddress
+    true   -- m/p^a hole vertex address is compiled directly from natural m
+    true   -- analytic hole-height observer can target that exact finite address
+    true   -- strict Bishop open-cell certificate compiles to finite address
+    true   -- rounded source summaries cannot uniquely recover a random sample
+
+    false  -- no globally total arbitrary-real floor/frac -> Fin is claimed
     false  -- source finite random shift list / RNG seed not supplied or recovered
     false  -- rounded mean/SD summaries cannot uniquely determine that sample
     false  -- mpmath cache is diagnostic numerical data, not formal zero proof
@@ -77,11 +97,29 @@ canonicalClimbingGymTerminalStatus =
 -- source owners rather than silently upgrading their boundaries.
 ------------------------------------------------------------------------
 
-terminalDoesNotCloseMissingQuantiser :
+terminalDoesNotClaimGlobalFloorQuantiser :
   Analytic.floorQuantisationConstructedFromCurrentRealSpine
     Analytic.canonicalAnalyticRadixAdapterBoundary
   ≡ false
-terminalDoesNotCloseMissingQuantiser = refl
+terminalDoesNotClaimGlobalFloorQuantiser = refl
+
+terminalExactHoleNeedsNoRealFloor :
+  Hole.holeAddressNeedsConstructiveRealFloor
+    Hole.canonicalExactHoleRadixCodecBoundary
+  ≡ false
+terminalExactHoleNeedsNoRealFloor = refl
+
+terminalCertifiedBishopCellIsNotTotalFloor :
+  BishopCell.totalConstructiveRealFloorConstructed
+    BishopCell.canonicalBishopRadixCellQuantisationBoundary
+  ≡ false
+terminalCertifiedBishopCellIsNotTotalFloor = refl
+
+terminalExactHoleObserverUsesNatCodec :
+  HoleBridge.holeAddressUsesExactNatRadixCodec
+    HoleBridge.canonicalExactHoleAnalyticBridgeBoundary
+  ≡ true
+terminalExactHoleObserverUsesNatCodec = refl
 
 terminalDoesNotRecoverSourceSeed :
   Replay.reportedShiftControlSeedRecovered
