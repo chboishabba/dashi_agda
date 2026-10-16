@@ -10,10 +10,12 @@ def test_p1_frontier_retires_compiler_owned_e24_presentation_debt():
     for needle in (
         "CMP119CosmologyA2LocalCWilsonPresentationCompilerExact",
         "CMP119CosmologyR109PairObservableUnderdeterminationExact",
+        "AntigravityP1A2CertifiedStressCylinderExact",
         "selectedObservableChoiceStillRequired = false",
         "positiveTimeAdmissibilityStillRequired = false",
         "gaugeInvariantAdmissibilityStillRequired = false",
         "pairToCanonicalLocalCObservableSemanticsStillRequired = true",
+        "a2SameObjectReceiptCompilesCertifiedWilsonPresentation = true",
     ):
         assert needle in text
 
