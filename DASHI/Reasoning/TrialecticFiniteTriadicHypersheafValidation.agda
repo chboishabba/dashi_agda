@@ -4,9 +4,13 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafExact as Hyper
+import DASHI.Reasoning.TrialecticRelationalSiteDepthTwoExact as Depth
 
 boundary : Hyper.TrialecticFiniteTriadicHypersheafBoundary
 boundary = Hyper.canonicalTrialecticFiniteTriadicHypersheafBoundary
+
+depthBoundary : Depth.TrialecticRelationalSiteDepthBoundary
+depthBoundary = Depth.canonicalTrialecticRelationalSiteDepthBoundary
 
 coverTopologyExhausted :
   Hyper.everyCoverIsMaximalOrTriadic boundary ≡ true
@@ -17,8 +21,12 @@ everyCoverHasCertificate :
 everyCoverHasCertificate = refl
 
 siteHasNoStrictThreeChain :
-  Hyper.siteHasNoStrictThreeArrowChain boundary ≡ true
+  Depth.strictThreeArrowChainsExist depthBoundary ≡ false
 siteHasNoStrictThreeChain = refl
+
+siteNerveAtMostTwoDimensional :
+  Depth.nondegenerateNerveDimensionAtMostTwo depthBoundary ≡ true
+siteNerveAtMostTwoDimensional = refl
 
 triadicPullbacksMaximal :
   Hyper.triadicNonGlobalPullbacksAreMaximal boundary ≡ true
