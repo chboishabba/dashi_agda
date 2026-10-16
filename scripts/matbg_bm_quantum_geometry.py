@@ -13,7 +13,9 @@ DOI 10.1038/s41467-026-74848-6 concerns ATQG, not this MATBG sample.
 """
 
 from __future__ import annotations
+import hashlib
 import json
+from pathlib import Path
 import numpy as np
 import matbg_bm_plane_wave_replay as BM
 
@@ -66,6 +68,16 @@ def geometry_at(qx: float, qy: float, shells: int):
     }
 
 
+def compact_geometry(row):
+    return {
+        "gxx": row["gxx"],
+        "gyy": row["gyy"],
+        "gxy": row["gxy"],
+        "trace_metric": row["trace_metric"],
+        "traced_berry_curvature": row["traced_berry_curvature"],
+    }
+
+
 def main():
     point = {str(n): geometry_at(0.2, 0.15, n) for n in (2, 3, 4)}
 
@@ -76,29 +88,38 @@ def main():
     hottest = max(scan, key=lambda row: row["trace_metric"])
     coolest = min(scan, key=lambda row: row["trace_metric"])
 
+    assert max(v["projector_idempotence_error"] for v in point.values()) < 1e-12
+    assert abs(point["4"]["trace_metric"] - point["3"]["trace_metric"]) < 1e-3
+    assert abs(point["4"]["traced_berry_curvature"]) < 1e-8
+    assert hottest["trace_metric"] > 10.0 * coolest["trace_metric"]
+
+    script_path = Path(__file__)
     receipt = {
+        "script": "scripts/matbg_bm_quantum_geometry.py",
+        "script_sha256": hashlib.sha256(script_path.read_bytes()).hexdigest(),
+        "execution_environment": "Python with numpy.linalg.eigh",
         "model": "rank-two central-band projector geometry on BM plane-wave model",
         "source_model": "10.1073/pnas.1108174108",
         "sota_inspiration_not_same_object": "10.1038/s41467-026-74848-6",
         "coordinate": "dimensionless q=k/k_theta",
         "finite_difference_dq": DQ,
-        "reference_point_convergence": point,
-        "coarse_5x5_scan_shell3": {
-            "minimum_trace_metric": coolest,
-            "maximum_trace_metric": hottest,
+        "reference_point_q": [0.2, 0.15],
+        "shell_convergence": {key: compact_geometry(value) for key, value in point.items()},
+        "coarse_scan_shell3": {
+            "minimum_trace_metric": coolest["trace_metric"],
+            "minimum_at_q": [coolest["qx"], coolest["qy"]],
+            "maximum_trace_metric": hottest["trace_metric"],
+            "maximum_at_q": [hottest["qx"], hottest["qy"]],
         },
+        "assertions_passed": True,
         "promotion_boundaries": {
             "experimental_quantum_metric_calibration": False,
             "interacting_quantum_geometry": False,
             "same_sample_superconductivity": False,
             "chern_number_from_local_scan": False,
+            "agda_kernel_receipt": False,
         },
     }
-
-    assert max(v["projector_idempotence_error"] for v in point.values()) < 1e-12
-    assert abs(point["4"]["trace_metric"] - point["3"]["trace_metric"]) < 1e-3
-    assert abs(point["4"]["traced_berry_curvature"]) < 1e-8
-    assert hottest["trace_metric"] > 10.0 * coolest["trace_metric"]
     print(json.dumps(receipt, indent=2, sort_keys=True))
 
 
