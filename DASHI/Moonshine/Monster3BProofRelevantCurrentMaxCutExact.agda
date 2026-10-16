@@ -107,7 +107,7 @@ currentMonster3BMaxCut = current-monster-3b-max-cut
   (TwoBlockAssembly.complementaryTwoBlockLinearAssemblySourceWritten TwoBlockAssembly.canonicalBoundary)
   (TwoBlockAssembly.postRecognitionTwelveSeventyEightCountCompilerSourceWritten TwoBlockAssembly.canonicalBoundary)
   (TwoBlockAssembly.leanKernelReceiptObserved TwoBlockAssembly.canonicalBoundary)
-  false false false false false false
+  false false false false false
   (SuzukiHardening.externalGapResultCreatesAgdaProof SuzukiHardening.canonicalBoundary)
   false false
   "Use the whole-character route first. Bind the SAME actual W_zeta|E restricted representation and explicit Schrodinger H_zeta into one finite-group representation/module theory, then prove the proof-relevant simple-submodule classifier on that actual sector. Lean #47 makes W_zeta ~= H_zeta^n a compiler consequence; only after that use post-recognition finrank cancellation with actual 65610/729 dimensions to pin n=90. Literal ninety-constituent enumeration is fallback/audit only."
