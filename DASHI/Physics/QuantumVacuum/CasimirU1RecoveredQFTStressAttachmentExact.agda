@@ -3,6 +3,7 @@ module DASHI.Physics.QuantumVacuum.CasimirU1RecoveredQFTStressAttachmentExact wh
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+open import Data.Rational.Base using (ℚ)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
@@ -85,7 +86,7 @@ actualSelectedQFTStress {U} attachment =
 actualSelectedQFTStressComponent :
   ∀ {U : Weld.UnifiedCandidate} →
   (attachment : CasimirU1RecoveredQFTStressAttachment U) →
-  Flat.Axis4 → Flat.Axis4 → _
+  Flat.Axis4 → Flat.Axis4 → ℚ
 actualSelectedQFTStressComponent attachment a b =
   Cut.component (stressEvaluator attachment)
     (actualSelectedQFTStress attachment)
@@ -133,7 +134,6 @@ u1StillNotWholeNonAbelianSU2 = refl
 data U1GaugeArchitectureAutomaticallyIdentifiesBrownMaclayWithSelectedQFTStress : Set where
 data SelectedSectorStressEqualityAutomaticallyPaysAllSectorAggregation : Set where
 data SelectedSectorStressEqualityAutomaticallyPaysCommonActionVariation : Set where
-
 data SelectedSectorStressEqualityAutomaticallyPromotesUnifiedQuantumGravity : Set where
 
 u1GaugeArchitectureDoesNotIdentifySelectedQFTStress :
