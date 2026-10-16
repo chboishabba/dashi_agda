@@ -15,8 +15,10 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_; Σ; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
+import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
+import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
@@ -43,15 +45,14 @@ guardedExecutionReceiptOfHaltingWitness witness = record
   }
   where
     machine : Standard.StandardSingleTapeMachine
-      (Data.Fin.Base.Fin (Coded.stateCount (Halting.code witness)))
-      (Data.Fin.Base.Fin (Coded.symbolCount (Halting.code witness)))
+      (Fin.Fin (Coded.stateCount (Halting.code witness)))
+      (Fin.Fin (Coded.symbolCount (Halting.code witness)))
     machine =
       Presented.finitePresentedStandardMachine
         (Coded.decodeCodedStandardTM (Halting.code witness))
 
-    input :
-      Cook.BooleanFormula →
-      DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact.InputWord
+    input : Cook.BooleanFormula →
+      Input.InputWord
         (Presented.finitePresentedStandardToConcrete
           (Coded.decodeCodedStandardTM (Halting.code witness)))
     input formula =
