@@ -19,3 +19,8 @@ import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact
 -- orientation.  The 2x2 adversarial fixture must be recovered pointwise from
 -- the generic fabric rather than re-enumerated as a special case.
 import DASHI.Biology.IITXORGridSynthesisFabricExact
+
+-- Same grid fabric, different local algebra: Boolean XOR and symmetric F3 sum
+-- forget A/B handedness, while antisymmetric F3 difference negates under the
+-- identical global input-socket swap.  This is the grid-scale torque seam.
+import DASHI.Biology.IITXORGridOrientationLiftExact
