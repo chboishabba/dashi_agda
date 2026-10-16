@@ -13,6 +13,8 @@ import DASHI.Cognition.OpenCivilianSpatialDefenseRFObservationExact as RFDefense
 import DASHI.Cognition.OpenCivilianSpatialDefenseRobotHumanRightsExact as HumanRights
 import DASHI.Cognition.OpenCivilianSpatialDefenseBostonDynamicsControlExact as Boston
 import DASHI.Cognition.OpenCivilianSpatialDefenseConsumerSufficiencyExact as Sufficiency
+import DASHI.Cognition.OpenCivilianSpatialDefenseMobilityEnvelopeExact as Envelope
+import DASHI.Cognition.OpenCivilianSpatialDefenseCapabilityEscalationExact as Escalation
 
 gevObservationDoesNotCreateProtectiveAuthority :
   Core.observationCreatesProtectiveAuthority ≡ false
@@ -133,3 +135,23 @@ singleBearingConsumerNonDescentIsPaid = refl
 consumerRelativeMinimalityCoreIsReused :
   Sufficiency.consumerDescentMinimalObserverCoreReused ≡ true
 consumerRelativeMinimalityCoreIsReused = refl
+
+mobilityEnvelopeSupportsWarningAvoidance :
+  Envelope.mobilityEnvelopeSupportsWarningAndAvoidance ≡ true
+mobilityEnvelopeSupportsWarningAvoidance = refl
+
+mobilityEnvelopeDoesNotEstablishHostility :
+  Envelope.mobilityEnvelopeDeterminesHostility ≡ false
+mobilityEnvelopeDoesNotEstablishHostility = refl
+
+mobilityEnvelopeDoesNotCreateCountermeasureAuthority :
+  Envelope.mobilityEnvelopeCreatesInterferenceAuthority ≡ false
+mobilityEnvelopeDoesNotCreateCountermeasureAuthority = refl
+
+autonomousLocomotionDoesNotPromoteToTargetNomination :
+  Escalation.autonomousLocomotionImpliesTargetNomination ≡ false
+autonomousLocomotionDoesNotPromoteToTargetNomination = refl
+
+capabilityGraphHasNoAutomaticEscalation :
+  Escalation.capabilityStageAutomaticallyPromotesToNext ≡ false
+capabilityGraphHasNoAutomaticEscalation = refl
