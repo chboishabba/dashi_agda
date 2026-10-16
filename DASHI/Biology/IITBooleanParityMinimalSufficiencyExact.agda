@@ -3,31 +3,22 @@ module DASHI.Biology.IITBooleanParityMinimalSufficiencyExact where
 ------------------------------------------------------------------------
 -- BOOLEAN MINIMAL-SUFFICIENCY SPINE
 --
--- The numerical IIT experiment on the fixed recurrent fabric
+-- On the fixed recurrent fabric A'=C, B'=A, C'=mu(A,B), the independent
+-- numerical scan finds XOR/XNOR are exactly the genuinely two-input Boolean
+-- laws with positive 2023 system-phi in every state.
 --
---   A' = C,  B' = A,  C' = mu(A,B)
---
--- scans all sixteen two-input Boolean truth tables.  The executable result is
--- kept in scripts/iit_boolean_gate_minimal_sufficiency.py.  This Agda owner
--- pays the independent finite structural fact behind that observation:
--- among the sixteen Boolean laws, the only laws that are simultaneously
---
---   * balanced (two zero outputs and two one outputs), and
---   * essential in BOTH inputs,
---
--- are XOR and XNOR.
---
--- Thus the kernel theorem does not manufacture an IIT value.  It identifies
--- the exact parity class whose members the numerical scan finds to be the only
--- genuinely two-input laws with state-independent positive 2023 system-phi on
--- the selected recurrent fabric.
+-- The structural explanation is stronger than balanced+essential dependence:
+-- XOR/XNOR are exactly the BIPERMUTATIVE Boolean laws.  Fix either input and
+-- the remaining input is transported bijectively to the output.  AND/OR/etc.
+-- lose one input on at least one slice.  This is the exact local
+-- minimal-sufficiency property used by the conjecture; IIT values remain a
+-- separate numerical receipt.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 ------------------------------------------------------------------------
--- 1. All sixteen two-input Boolean truth tables.
--- Constructor bits are ordered (00,01,10,11).
+-- 1. All sixteen truth tables, bits ordered (00,01,10,11).
 ------------------------------------------------------------------------
 
 data BoolGate16 : Set where
@@ -43,7 +34,7 @@ xnorGate : BoolGate16
 xnorGate = g1001
 
 ------------------------------------------------------------------------
--- 2. Exact finite classifiers.
+-- 2. Coarse classifiers retained for compatibility.
 ------------------------------------------------------------------------
 
 balanced : BoolGate16 → Bool
@@ -101,7 +92,48 @@ dependsOnRight g1110 = true
 dependsOnRight g1111 = false
 
 ------------------------------------------------------------------------
--- 3. Parity/complement is the complete essential-balanced class.
+-- 3. Bipermutativity.  leftPermutative means that for EACH fixed right input,
+-- changing the left input flips output; rightPermutative is the dual property.
+------------------------------------------------------------------------
+
+leftPermutative : BoolGate16 → Bool
+leftPermutative g0000 = false
+leftPermutative g0001 = false
+leftPermutative g0010 = false
+leftPermutative g0011 = true
+leftPermutative g0100 = false
+leftPermutative g0101 = false
+leftPermutative g0110 = true
+leftPermutative g0111 = false
+leftPermutative g1000 = false
+leftPermutative g1001 = true
+leftPermutative g1010 = false
+leftPermutative g1011 = false
+leftPermutative g1100 = true
+leftPermutative g1101 = false
+leftPermutative g1110 = false
+leftPermutative g1111 = false
+
+rightPermutative : BoolGate16 → Bool
+rightPermutative g0000 = false
+rightPermutative g0001 = false
+rightPermutative g0010 = false
+rightPermutative g0011 = false
+rightPermutative g0100 = false
+rightPermutative g0101 = true
+rightPermutative g0110 = true
+rightPermutative g0111 = false
+rightPermutative g1000 = false
+rightPermutative g1001 = true
+rightPermutative g1010 = true
+rightPermutative g1011 = false
+rightPermutative g1100 = false
+rightPermutative g1101 = false
+rightPermutative g1110 = false
+rightPermutative g1111 = false
+
+------------------------------------------------------------------------
+-- 4. Parity/complement is the complete bipermutative Boolean class.
 ------------------------------------------------------------------------
 
 data ParityOrComplement : BoolGate16 → Set where
@@ -117,6 +149,12 @@ xorDependsOnLeft = refl
 xorDependsOnRight : dependsOnRight xorGate ≡ true
 xorDependsOnRight = refl
 
+xorIsLeftPermutative : leftPermutative xorGate ≡ true
+xorIsLeftPermutative = refl
+
+xorIsRightPermutative : rightPermutative xorGate ≡ true
+xorIsRightPermutative = refl
+
 xnorIsBalanced : balanced xnorGate ≡ true
 xnorIsBalanced = refl
 
@@ -125,6 +163,39 @@ xnorDependsOnLeft = refl
 
 xnorDependsOnRight : dependsOnRight xnorGate ≡ true
 xnorDependsOnRight = refl
+
+xnorIsLeftPermutative : leftPermutative xnorGate ≡ true
+xnorIsLeftPermutative = refl
+
+xnorIsRightPermutative : rightPermutative xnorGate ≡ true
+xnorIsRightPermutative = refl
+
+bipermutativeOnlyParity :
+  (gate : BoolGate16) →
+  leftPermutative gate ≡ true →
+  rightPermutative gate ≡ true →
+  ParityOrComplement gate
+bipermutativeOnlyParity g0000 () _
+bipermutativeOnlyParity g0001 () _
+bipermutativeOnlyParity g0010 () _
+bipermutativeOnlyParity g0011 _ ()
+bipermutativeOnlyParity g0100 () _
+bipermutativeOnlyParity g0101 () _
+bipermutativeOnlyParity g0110 _ _ = xorParity
+bipermutativeOnlyParity g0111 () _
+bipermutativeOnlyParity g1000 () _
+bipermutativeOnlyParity g1001 _ _ = xnorParity
+bipermutativeOnlyParity g1010 () _
+bipermutativeOnlyParity g1011 () _
+bipermutativeOnlyParity g1100 _ ()
+bipermutativeOnlyParity g1101 () _
+bipermutativeOnlyParity g1110 () _
+bipermutativeOnlyParity g1111 () _
+
+------------------------------------------------------------------------
+-- 5. Older equivalent finite characterization: balanced + essential in both
+-- inputs also isolates parity/complement on the Boolean alphabet.
+------------------------------------------------------------------------
 
 essentialBalancedOnlyParity :
   (gate : BoolGate16) →
@@ -149,16 +220,13 @@ essentialBalancedOnlyParity g1101 () _ _
 essentialBalancedOnlyParity g1110 () _ _
 essentialBalancedOnlyParity g1111 () _ _
 
-------------------------------------------------------------------------
--- 4. Authority boundary.
-------------------------------------------------------------------------
-
 record BooleanParityMinimalSufficiencyBoundary : Set where
   constructor boolean-parity-minimal-sufficiency-boundary
   field
     allSixteenTruthTablesRepresented : Bool
+    parityAndComplementAreBipermutative : Bool
+    anyOtherBipermutativeBooleanGateExists : Bool
     parityAndComplementAreEssentialBalanced : Bool
-    anyOtherEssentialBalancedBooleanGateExists : Bool
     kernelClassificationIsAnIITNumericalProof : Bool
     numericalIITReceiptRequiredSeparately : Bool
 
@@ -166,4 +234,4 @@ canonicalBooleanParityMinimalSufficiencyBoundary :
   BooleanParityMinimalSufficiencyBoundary
 canonicalBooleanParityMinimalSufficiencyBoundary =
   boolean-parity-minimal-sufficiency-boundary
-    true true false false true
+    true true false true false true
