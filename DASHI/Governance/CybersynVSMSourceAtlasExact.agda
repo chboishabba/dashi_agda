@@ -15,7 +15,7 @@ import DASHI.Core.OperationalSystemBehaviourSemanticsExact as POSIWID
 
 data CyberneticSourceRole : Set where
   beerVSMPrimary : CyberneticSourceRole
-  beerBookLineage : CyberneticSourceRole
+  beerBookSourceLineage : CyberneticSourceRole
   cybersynHistoricalReconstruction : CyberneticSourceRole
   contemporaryCriticalSynthesis : CyberneticSourceRole
 
@@ -45,15 +45,15 @@ beer1984VSM =
     "Beer's own synopsis of the Viable System Model, its methodology and five-system viability framework"
     "political legitimacy, empirical superiority of one political order, or a theorem that VSM implementation guarantees non-domination"
 
-beerBookLineage : CyberneticSource
-beerBookLineage =
+beerBooks : CyberneticSource
+beerBooks =
   cybernetic-source
     "Stafford Beer"
     "Brain of the Firm; The Heart of Enterprise; Diagnosing the System for Organizations"
     "book lineage"
     1972
     "1972/1979/1985 VSM book lineage"
-    beerBookLineage
+    beerBookSourceLineage
     "the historical development of recursive viable-system diagnosis, autonomy/coordination/control, outside-and-future intelligence and identity/policy functions"
     "a unique constitutional interpretation of Systems 1-5 or a proof that System 5 should be a sovereign executive"
 
@@ -84,7 +84,7 @@ contemporaryCybersynCritical =
 canonicalCyberneticSources : List CyberneticSource
 canonicalCyberneticSources =
   beer1984VSM
-  ∷ beerBookLineage
+  ∷ beerBooks
   ∷ medinaCybersyn
   ∷ contemporaryCybersynCritical
   ∷ []
