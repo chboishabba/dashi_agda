@@ -4,23 +4,22 @@ module DASHI.Moonshine.Monster3BActualLinearIsotypicTerminalCompilerExact where
 -- ACTUAL MONSTER LINEAR / ISOTYPIC TERMINAL COMPILER
 --
 -- Reusable restriction, character, Schur, Maschke, isotypic, copy-count,
--- multiplicity-coordinate and finite-copy tensor mathematics is no longer the
--- Monster-specific frontier.
+-- multiplicity-coordinate, tensor, and two-simple character-determination
+-- mathematics is no longer the Monster-specific frontier.
 --
--- The live character/isotypy payment is one SAME-object transport: attach the
--- actual linear W_zeta|E sector and H_zeta to the common finite-dimensional
--- representation theory and prove that the already certified actual-kernel
--- character identity is literally
+-- The live H_zeta/W_zeta character payment is one SAME-object transport:
 --
 --   chi(W_zeta|E) = 90 * chi(H_zeta)
 --
--- on those SAME linear representation objects.
+-- on the actual linear FDRep objects.  Companion Lean then supplies the generic
+-- isotypic/multiplicity consequences.
 --
--- Companion Lean then supplies the generic FDRep/module adapter, simple-source
--- classifier, Maschke semisimplicity, dimension ratio, isotypic finite-copy
--- assembly, Schur multiplicity coordinates and the canonical post-isotypy
--- tensor equivalence. Agda-native historical linear wrappers remain explicit
--- because Lean theorem authority is not imported across kernels.
+-- Likewise, once an actual 6.Suz/normalizer multiplicity action exists, the
+-- historical `12+78` action decomposition does not require a separately
+-- postulated intertwiner: the live two-simple character compiler derives its
+-- representation multiplicities from a SAME-object selected-phase character
+-- identity.  The actual normalizer action, absolute zeta orientation and that
+-- same-object character transport remain the scientific inputs.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
@@ -42,6 +41,7 @@ import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact a
 import DASHI.Moonshine.Monster3BTwoIsotypicBlockAssemblyLeanReceiptExact as TwoBlock
 import DASHI.Moonshine.Monster3BMultiplicitySchurCoordinatesLeanReceiptExact as Schur
 import DASHI.Moonshine.Monster3BTensorFiniteCopiesLeanReceiptExact as Tensor
+import DASHI.Moonshine.Monster3BCharacterDeterminationLiveLeanReceiptExact as Character12Plus78
 
 ------------------------------------------------------------------------
 -- 1. One exact actual-input packet.
@@ -75,9 +75,9 @@ record ActualMonsterLinearInputPacket
     actualHZetaSimpleComplexFDRepSameObjectWitness :
       ActualHZetaSimpleComplexFDRepSameObject
 
-    -- The true character/isotypy seam. The actual-kernel/class side already
-    -- owns the ninety-Heisenberg character statement; this witness transports
-    -- that statement onto the SAME actual linear W_zeta|E and H_zeta FDReps.
+    -- The true H_zeta/W_zeta character seam. The actual-kernel/class side owns
+    -- the ninety-Heisenberg character statement; this witness transports that
+    -- statement onto the SAME actual linear W_zeta|E and H_zeta FDReps.
     ActualKernelNinetyCharacterIsSameLinearWholeCharacter : Set
     actualKernelNinetyCharacterIsSameLinearWholeCharacterWitness :
       ActualKernelNinetyCharacterIsSameLinearWholeCharacter
@@ -106,24 +106,26 @@ compileActualPaidHZetaRecognition weightLegacy zetaLegacy theory packet =
     (actualSelectedConstituentAttachment packet)
 
 ------------------------------------------------------------------------
--- 3. Remaining actual post-recognition representation payload.
+-- 3. Remaining actual multiplicity-action payload.
 --
--- Tensor evaluation has been removed from this packet: after actual isotypy and
--- Schur multiplicity coordinates, companion Lean derives the canonical tensor
--- finite-copy equivalence using mathlib `TensorProduct.piScalarRight`.
+-- Tensor evaluation and the abstract 12+78 representation decomposition are
+-- compiler consequences after the same-object action/character inputs.  The
+-- remaining payload is therefore the actual multiplicity action itself, phase
+-- orientation, and transport of the source-paid selected-phase 12+78 character
+-- onto that SAME action.
 ------------------------------------------------------------------------
 
 record ActualMultiplicityActionPayment : Set where
   field
     ActualSuzukiNormalizerActionOnSZeta : Set
     AbsoluteZetaOrientation : Set
-    ActualTwelveSeventyEightActionIntertwiner : Set
+    ActualSelectedPhaseTwelveSeventyEightCharacterIsSameMultiplicityAction : Set
 
     actualSuzukiNormalizerActionOnSZetaWitness :
       ActualSuzukiNormalizerActionOnSZeta
     absoluteZetaOrientationWitness : AbsoluteZetaOrientation
-    actualTwelveSeventyEightActionIntertwinerWitness :
-      ActualTwelveSeventyEightActionIntertwiner
+    actualSelectedPhaseTwelveSeventyEightCharacterIsSameMultiplicityActionWitness :
+      ActualSelectedPhaseTwelveSeventyEightCharacterIsSameMultiplicityAction
 
 open ActualMultiplicityActionPayment public
 
@@ -133,7 +135,7 @@ open ActualMultiplicityActionPayment public
 
 data CharacterFamilyCreatesActualInputPacket : Set where
 data KernelCharacterCreatesLinearCharacterTransport : Set where
-data SchurCoordinatesCreateNormalizerAction : Set where
+data CharacterOccurrenceCreatesMultiplicityAction : Set where
 data SourceRestrictionCompilerCreatesActualInvariantSubspace : Set where
 
 characterFamilyDoesNotCreateActualInputPacket :
@@ -144,9 +146,9 @@ kernelCharacterDoesNotCreateLinearCharacterTransport :
   KernelCharacterCreatesLinearCharacterTransport → ⊥
 kernelCharacterDoesNotCreateLinearCharacterTransport ()
 
-schurCoordinatesDoNotCreateNormalizerAction :
-  SchurCoordinatesCreateNormalizerAction → ⊥
-schurCoordinatesDoNotCreateNormalizerAction ()
+characterOccurrenceDoesNotCreateMultiplicityAction :
+  CharacterOccurrenceCreatesMultiplicityAction → ⊥
+characterOccurrenceDoesNotCreateMultiplicityAction ()
 
 sourceRestrictionCompilerDoesNotCreateActualInvariantSubspace :
   SourceRestrictionCompilerCreatesActualInvariantSubspace → ⊥
@@ -182,6 +184,8 @@ record Boundary : Set where
     genericCoordinateEvaluationRecoverySourceWritten : Bool
     postIsotypyTensorEquivalenceSourceWritten : Bool
     tensorEquivalenceRemainsIndependentMonsterInput : Bool
+    twoSimpleCharacterMultiplicitySourceWritten : Bool
+    twelveSeventyEightIntertwinerRemainsIndependentMonsterInput : Bool
 
     actualMonsterLinearInputPacketInhabitedHere : Bool
     actualWholeCharacterSameObjectTransportPaidHere : Bool
@@ -189,7 +193,7 @@ record Boundary : Set where
     actualCopyCountNinetyPaidHere : Bool
     actualSuzukiNormalizerActionPaidHere : Bool
     absoluteZetaOrientationPaidHere : Bool
-    actualTwelveSeventyEightActionIntertwinerPaidHere : Bool
+    actualSuzukiMultiplicityCharacterTransportPaidHere : Bool
 open Boundary public
 
 canonicalBoundary : Boundary
@@ -212,5 +216,7 @@ canonicalBoundary = boundary
   (Schur.genericSchurCoordinateCompilerSourceWritten Schur.canonicalBoundary)
   (Schur.coordinateEvaluationRecoverySourceWritten Schur.canonicalBoundary)
   (Tensor.postIsotypyTensorEquivalenceSourceWritten Tensor.canonicalBoundary)
+  false
+  (Character12Plus78.twoSimpleCharacterMultiplicitySourceWritten Character12Plus78.canonicalBoundary)
   false
   false false false false false false false
