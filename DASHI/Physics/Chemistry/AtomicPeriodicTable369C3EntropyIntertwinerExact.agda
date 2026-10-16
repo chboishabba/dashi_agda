@@ -149,25 +149,29 @@ record ChemistryC3InterfaceStatus : Set where
     sourceBackedSameObjectC3GeometryFixturePaidIsTrue : sourceBackedSameObjectC3GeometryFixturePaid ≡ true
     sourceBackedElectronicIrrepCoordinatesPaid : Bool
     sourceBackedElectronicIrrepCoordinatesPaidIsTrue : sourceBackedElectronicIrrepCoordinatesPaid ≡ true
-    boundedGroundConfigurationElectronicC3ActionPaid : Bool
-    boundedGroundConfigurationElectronicC3ActionPaidIsTrue : boundedGroundConfigurationElectronicC3ActionPaid ≡ true
+    trivialGroundConfigurationC3RepresentationPaid : Bool
+    trivialGroundConfigurationC3RepresentationPaidIsTrue : trivialGroundConfigurationC3RepresentationPaid ≡ true
+    fullRealSpaceElectronicC3ActionInstantiated : Bool
+    fullRealSpaceElectronicC3ActionInstantiatedIsFalse : fullRealSpaceElectronicC3ActionInstantiated ≡ false
     productsByproductsReactionFixturePaid : Bool
     productsByproductsReactionFixturePaidIsTrue : productsByproductsReactionFixturePaid ≡ true
     sameReactionQuantitativeKineticsPaid : Bool
     sameReactionQuantitativeKineticsPaidIsTrue : sameReactionQuantitativeKineticsPaid ≡ true
     literal369ReactionHyperformInstantiated : Bool
     literal369ReactionHyperformInstantiatedIsTrue : literal369ReactionHyperformInstantiated ≡ true
+    individualAtomIdentityTransportInstantiated : Bool
+    individualAtomIdentityTransportInstantiatedIsFalse : individualAtomIdentityTransportInstantiated ≡ false
     sourceBackedReactionPathAndWavepacketPaid : Bool
     sourceBackedReactionPathAndWavepacketPaidIsTrue : sourceBackedReactionPathAndWavepacketPaid ≡ true
-    fullRealSpaceElectronicC3ActionInstantiated : Bool
-    fullRealSpaceElectronicC3ActionInstantiatedIsFalse : fullRealSpaceElectronicC3ActionInstantiated ≡ false
     universalElectronResolvedReactionEnergetics : Bool
     universalElectronResolvedReactionEnergeticsIsFalse : universalElectronResolvedReactionEnergetics ≡ false
 
 canonicalChemistryC3InterfaceStatus : ChemistryC3InterfaceStatus
 canonicalChemistryC3InterfaceStatus =
   chemistryC3InterfaceStatus
-    true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl false refl false refl
+    true refl true refl true refl true refl true refl
+    true refl false refl
+    true refl true refl true refl false refl true refl false refl
 
 ammoniaC3GeometryFixture : NH3.AmmoniaC3Fixture
 ammoniaC3GeometryFixture = NH3.canonicalAmmoniaC3Fixture
@@ -187,3 +191,11 @@ hydrogenAbstractionMechanism = Abstraction.canonicalAbstractionMechanism
 literal369HyperformWitness :
   Abstraction369.HyperformBoundary.literalChemistryHyperfibreInhabited Abstraction369.canonicalHyperformBoundary ≡ true
 literal369HyperformWitness = refl
+
+atomicInventoryEndpointsWitness :
+  Abstraction369.HyperformBoundary.atomic369InventoryEndpointsPaid Abstraction369.canonicalHyperformBoundary ≡ true
+atomicInventoryEndpointsWitness = refl
+
+individualAtomIdentityStillUnpaid :
+  Abstraction369.HyperformBoundary.individualAtomIdentityTransportPaid Abstraction369.canonicalHyperformBoundary ≡ false
+individualAtomIdentityStillUnpaid = refl
