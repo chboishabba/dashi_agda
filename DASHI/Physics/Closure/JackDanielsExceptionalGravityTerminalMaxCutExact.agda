@@ -14,6 +14,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Moonshine.JackDanielsNaturalMonsterRecognitionMaxCutExact as JD
 import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact as Albert
+import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact as F4
 import DASHI.Physics.Closure.MonsterExceptionalEntropyGravityCompilerExact as Gravity
 
 record ResearchDeliverable : Set where
@@ -64,8 +65,8 @@ E1 : ResearchDeliverable
 E1 = research-deliverable
   "E1"
   false
-  "DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact.MonsterAlbertF4SameActionRecognition"
-  "inhabit actual Monster 54/53 action recognition, then identify its transported action with the classical same-carrier Albert/F4 action"
+  "DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact.ProofRelevantMonsterAlbertF4Recognition"
+  "inhabit actual Monster 54/53 action recognition, then prove literal 54/53 intertwiners with the classical same-carrier Albert/F4 action, Jordan preservation, fixed scalar and residual restriction"
 
 S1 : ResearchDeliverable
 S1 = research-deliverable
