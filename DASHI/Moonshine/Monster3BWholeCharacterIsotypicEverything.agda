@@ -3,8 +3,10 @@ module DASHI.Moonshine.Monster3BWholeCharacterIsotypicEverything where
 ------------------------------------------------------------------------
 -- Focused rollup for the proof-relevant Monster 3B representation tail.
 --
--- This intentionally collects generic adapters/compilers and their provenance
--- receipts without claiming the missing actual-Monster same-object bindings.
+-- Generic character/isotypic/copy-count/Schur-coordinate machinery is collected
+-- here together with the actual-input terminal compiler.  Missing literal
+-- Monster same-object bindings remain explicit and are not manufactured by the
+-- rollup.
 ------------------------------------------------------------------------
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact
@@ -17,9 +19,13 @@ import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact
 import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptValidation
 import DASHI.Moonshine.Monster3BTwoIsotypicBlockAssemblyLeanReceiptExact
 import DASHI.Moonshine.Monster3BTwoIsotypicBlockAssemblyLeanReceiptValidation
+import DASHI.Moonshine.Monster3BMultiplicitySchurCoordinatesLeanReceiptExact
+import DASHI.Moonshine.Monster3BMultiplicitySchurCoordinatesLeanReceiptValidation
 
 import DASHI.Moonshine.Monster3BLinearActionProofRelevantHardeningExact
 import DASHI.Moonshine.Monster3BLinearActionProofRelevantHardeningValidation
+import DASHI.Moonshine.Monster3BActualLinearIsotypicTerminalCompilerExact
+import DASHI.Moonshine.Monster3BActualLinearIsotypicTerminalCompilerValidation
 import DASHI.Moonshine.Monster3BLinearIsotypicCurrentMaxCutExact
 import DASHI.Moonshine.Monster3BLinearIsotypicCurrentMaxCutValidation
 
