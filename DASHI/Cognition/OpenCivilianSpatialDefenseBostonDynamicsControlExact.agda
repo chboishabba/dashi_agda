@@ -2,6 +2,7 @@ module DASHI.Cognition.OpenCivilianSpatialDefenseBostonDynamicsControlExact wher
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Cognition.OpenCivilianSpatialDefenseSourceAtlasExact as Sources
 import DASHI.Cognition.OpenCivilianSpatialDefenseRobotHumanRightsExact as HumanRights
 
@@ -72,7 +73,10 @@ vendorPolicyProvesThirdPartyRobotsBenign = false
 vendorDescriptionCreatesIndependentSafetyValidation : Bool
 vendorDescriptionCreatesIndependentSafetyValidation = false
 
+bostonFAQSourceAnchor : Source.AttributedSource
 bostonFAQSourceAnchor = Sources.bostonDynamicsFAQ
+
+bostonOpenLetterSourceAnchor : Source.AttributedSource
 bostonOpenLetterSourceAnchor = Sources.bostonDynamicsAntiWeaponizationLetter
 
 ------------------------------------------------------------------------
