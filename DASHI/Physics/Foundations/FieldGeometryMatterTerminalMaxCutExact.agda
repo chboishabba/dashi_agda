@@ -15,6 +15,7 @@ import DASHI.Physics.CondensedMatter.MATBGQuantumGeometryReplayReceiptExact as Q
 import DASHI.Physics.CondensedMatter.MATBGInteractingTHF2026SourceExact as THF
 import DASHI.Physics.CondensedMatter.MATBGInteractingTHFLiteralMatricesExact as THFMatrix
 import DASHI.Physics.CondensedMatter.MATBGTHFHubbardIAtomicReplayReceiptExact as THFAtomic
+import DASHI.Physics.CondensedMatter.MATBGTHFCoupledGreenReplayReceiptExact as THFCoupled
 import DASHI.Physics.CondensedMatter.MATBGTHFSelfConsistencyQTMExact as THFQTM
 import DASHI.Physics.CondensedMatter.MATBGQTMMatrixElementObserverReceiptExact as QTMObserver
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorics2026Exact as Entropy
@@ -65,6 +66,7 @@ record FieldGeometryMatterTerminalFrontier : Set where
     thfHubbardI2026SourceContract : FrontierStatus
     thfLiteralHcHcfMatrices : FrontierStatus
     thfHubbardIAtomicReplay : FrontierStatus
+    thfCoupledGreenNumericalReplay : FrontierStatus
     thfSelfConsistencyEquationSourceContract : FrontierStatus
     qtmGoldenRuleObserverSourceContract : FrontierStatus
     qtmElectrostaticsSourceContract : FrontierStatus
@@ -140,7 +142,7 @@ currentTerminalFrontier =
     structurallyPaid structurallyPaid sourcePaid
     numericallyExecuted numericallyExecuted
     openCalibrationOrExecution
-    sourcePaid structurallyPaid numericallyExecuted
+    sourcePaid structurallyPaid numericallyExecuted numericallyExecuted
     sourcePaid sourcePaid sourcePaid numericallyExecuted
     openCalibrationOrExecution openSameObjectPayment
     structurallyPaid sourcePaid numericallyExecuted openSameObjectPayment externalOnly
@@ -177,6 +179,7 @@ record MaxCutPaidSurface : Set where
     thfBoundary : THF.MATBGInteractingTHF2026Boundary
     thfLiteralMatrixBoundary : THFMatrix.THFLiteralMatrixBoundary
     thfAtomicReplayBoundary : THFAtomic.THFHubbardIAtomicReplayBoundary
+    thfCoupledGreenBoundary : THFCoupled.THFCoupledGreenReplayBoundary
     thfSelfConsistencyQTMBoundary : THFQTM.THFSelfConsistencyQTMBoundary
     qtmObserverBoundary : QTMObserver.QTMMatrixElementObserverBoundary
     entropyBoundary : Entropy.EntropyCombinatoricsBoundary
@@ -209,6 +212,7 @@ canonicalMaxCutPaidSurface =
     THF.canonicalTHF2026Boundary
     THFMatrix.canonicalTHFLiteralMatrixBoundary
     THFAtomic.canonicalTHFHubbardIAtomicReplayBoundary
+    THFCoupled.canonicalTHFCoupledGreenReplayBoundary
     THFQTM.canonicalTHFSelfConsistencyQTMBoundary
     QTMObserver.canonicalQTMMatrixElementObserverBoundary
     Entropy.canonicalEntropyCombinatoricsBoundary
