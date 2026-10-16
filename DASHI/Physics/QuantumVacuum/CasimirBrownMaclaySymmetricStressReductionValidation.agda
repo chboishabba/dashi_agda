@@ -12,6 +12,10 @@ symmetryAndValuesCompilerOwnedRegression :
   R.symmetryAndTenValuesCompilerOwned R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ true
 symmetryAndValuesCompilerOwnedRegression = refl
 
+ymSymmetrySemanticBridgeCompilerOwnedRegression :
+  R.ymSymmetrySemanticBridgeCompilerOwned R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ true
+ymSymmetrySemanticBridgeCompilerOwnedRegression = refl
+
 symmetricTenComponentCompilerOwnedRegression :
   R.symmetricTenComponentCompilerOwned R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ true
 symmetricTenComponentCompilerOwnedRegression = refl
