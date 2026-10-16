@@ -166,8 +166,8 @@ antiPanopticonAnchor = GEV.canonicalAntiPanopticonBoundary
 
 protectedInterestAnchor = GEVCross.antiPanopticonProtectedInterests
 
-dualUseAnchor : DualUse.ProtectiveSpatialDualUseBoundary
-dualUseAnchor = DualUse.canonicalProtectiveSpatialDualUseBoundary
+dualUseAnchor : DualUse.ProtectiveUseOfForceBoundary
+dualUseAnchor = DualUse.canonicalProtectiveUseOfForceBoundary
 
 ------------------------------------------------------------------------
 -- Source-attribution boundaries.
