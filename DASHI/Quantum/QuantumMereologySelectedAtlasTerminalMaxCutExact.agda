@@ -18,6 +18,14 @@ record SelectedAtlasTerminalStatus : Set where
     ArbitraryFiniteSubsetMarginalsPaidIsTrue :
       ArbitraryFiniteSubsetMarginalsPaid ≡ true
 
+    IteratedProductPartialTraceAssociativityPaid : Bool
+    IteratedProductPartialTraceAssociativityPaidIsTrue :
+      IteratedProductPartialTraceAssociativityPaid ≡ true
+
+    EnvironmentRelabelingInvariancePaid : Bool
+    EnvironmentRelabelingInvariancePaidIsTrue :
+      EnvironmentRelabelingInvariancePaid ≡ true
+
     SourceGeneralGTPSCarrierPaid : Bool
     SourceGeneralGTPSCarrierPaidIsTrue :
       SourceGeneralGTPSCarrierPaid ≡ true
@@ -33,6 +41,14 @@ record SelectedAtlasTerminalStatus : Set where
     NestedMarginalCoherencePaid : Bool
     NestedMarginalCoherencePaidIsFalse :
       NestedMarginalCoherencePaid ≡ false
+
+    ArbitraryRetainedCoordinateChartIndependencePaid : Bool
+    ArbitraryRetainedCoordinateChartIndependencePaidIsFalse :
+      ArbitraryRetainedCoordinateChartIndependencePaid ≡ false
+
+    RetainedEnvironmentMixingChartIndependencePaid : Bool
+    RetainedEnvironmentMixingChartIndependencePaidIsFalse :
+      RetainedEnvironmentMixingChartIndependencePaid ≡ false
 
     ArbitrarySelectedHilbertTPSCoordinateAttachmentPaid : Bool
     ArbitrarySelectedHilbertTPSCoordinateAttachmentPaidIsFalse :
@@ -68,6 +84,10 @@ canonicalSelectedAtlasTerminalStatus = record
   ; HeterogeneousCanonicalPairChartsPaidIsTrue = refl
   ; ArbitraryFiniteSubsetMarginalsPaid = true
   ; ArbitraryFiniteSubsetMarginalsPaidIsTrue = refl
+  ; IteratedProductPartialTraceAssociativityPaid = true
+  ; IteratedProductPartialTraceAssociativityPaidIsTrue = refl
+  ; EnvironmentRelabelingInvariancePaid = true
+  ; EnvironmentRelabelingInvariancePaidIsTrue = refl
   ; SourceGeneralGTPSCarrierPaid = true
   ; SourceGeneralGTPSCarrierPaidIsTrue = refl
   ; SourceGTPSShortTimeFormulaPaid = true
@@ -76,6 +96,10 @@ canonicalSelectedAtlasTerminalStatus = record
   ; SourceGTPSAlgebraDistanceFormulaPaidIsTrue = refl
   ; NestedMarginalCoherencePaid = false
   ; NestedMarginalCoherencePaidIsFalse = refl
+  ; ArbitraryRetainedCoordinateChartIndependencePaid = false
+  ; ArbitraryRetainedCoordinateChartIndependencePaidIsFalse = refl
+  ; RetainedEnvironmentMixingChartIndependencePaid = false
+  ; RetainedEnvironmentMixingChartIndependencePaidIsFalse = refl
   ; ArbitrarySelectedHilbertTPSCoordinateAttachmentPaid = false
   ; ArbitrarySelectedHilbertTPSCoordinateAttachmentPaidIsFalse = refl
   ; SourceProjectorProducerPaid = false
@@ -97,4 +121,4 @@ dashiSelectedAtlasTerminalReceipt =
   Sources.attribution-receipt
     Sources.crossModuleInference
     "DASHI Agda"
-    "Combines the imported Lean-source heterogeneous finite atlas and source-facing g-TPS formula statuses into one fail-closed phase boundary. It does not promote Lean source text to Agda kernel proof, external scientific claims to local theorems, or finite coordinate structure to physical subsystem/geometry/gravity authority."
+    "Combines the imported Lean-source heterogeneous finite atlas, product partial-trace associativity, environment-relabeling invariance and source-facing g-TPS formula statuses into one fail-closed phase boundary. It does not promote Lean source text to Agda kernel proof, external scientific claims to local theorems, or finite coordinate structure to physical subsystem/geometry/gravity authority."
