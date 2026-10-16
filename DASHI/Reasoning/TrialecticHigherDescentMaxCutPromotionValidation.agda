@@ -38,8 +38,17 @@ effectiveStack = refl
 higherStack : Max.certifiedHigherStackPaid boundary ≡ true
 higherStack = refl
 
-arbitraryHypercoverStillOpen : Max.arbitraryHypercoverDescentPaid boundary ≡ false
-arbitraryHypercoverStillOpen = refl
+finiteHyperdescent : Max.finiteOneTruncatedHyperdescentPaid boundary ≡ true
+finiteHyperdescent = refl
 
-hypersheafStillOpen : Max.certifiedHypersheafPaid boundary ≡ false
-hypersheafStillOpen = refl
+finiteTriadicHypersheaf :
+  Max.certifiedFiniteTriadicHypersheafPaid boundary ≡ true
+finiteTriadicHypersheaf = refl
+
+arbitraryInfinityHypercoverStillSeparate :
+  Max.arbitraryInfinityHypercoverDescentPaid boundary ≡ false
+arbitraryInfinityHypercoverStillSeparate = refl
+
+arbitraryInfinityHypersheafStillSeparate :
+  Max.certifiedArbitraryInfinityHypersheafPaid boundary ≡ false
+arbitraryInfinityHypersheafStillSeparate = refl
