@@ -13,6 +13,8 @@ import DASHI.Biology.KitzerowBH4LineageRegressionExact as Lineage
 import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact as Hepatic
 import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorExact as Neural
 import DASHI.Biology.KitzerowBH4RedoxSpatialDiscriminatorExact as RedoxSpatial
+import DASHI.Biology.KitzerowBH4TransportCarrierProbeExact as TransportProbe
+import DASHI.Biology.KitzerowBH4TransportAcquisitionStatusExact as TransportStatus
 import DASHI.Biology.KitzerowBH4ConvergentEvidenceExact as Evidence
 import DASHI.Biology.KitzerowPriorityAttributionExact as Attribution
 import DASHI.Biology.KitzerowBH4PriorArtSubtractionExact as PriorArt
@@ -102,6 +104,29 @@ topologyResolvedBalanceIsRequiredButNumericalEdgesRemainOpen :
 topologyResolvedBalanceIsRequiredButNumericalEdgesRemainOpen =
   refl , (refl , (refl , refl))
 
+carrierQuestionIsContextSpecificNotUniversal :
+  TransportProbe.specificTransportersExistInSomeContexts TransportProbe.canonicalTransportCarrierBoundary ≡ true
+  × TransportProbe.singleUniversalNeuralBH4CarrierEstablished TransportProbe.canonicalTransportCarrierBoundary ≡ false
+  × TransportProbe.neuralPassiveDiffusionResultUniversalizesToAllTissues TransportProbe.canonicalTransportCarrierBoundary ≡ false
+  × TransportProbe.transporterDependenceIsTissueSpeciesSubstrateSpecific TransportProbe.canonicalTransportCarrierBoundary ≡ true
+carrierQuestionIsContextSpecificNotUniversal = refl , (refl , (refl , refl))
+
+quantitativeTranscellularRateDoesNotPayTargetNeuralEdge :
+  TransportProbe.quantitativeTranscellularBH4RatePaid TransportProbe.canonicalTransportCarrierBoundary ≡ true
+  × TransportProbe.quantitativeNeuralDonorRecipientFluxPaid TransportProbe.canonicalTransportCarrierBoundary ≡ false
+  × TransportStatus.nonNeuralTranscellularRatePaid TransportStatus.canonicalTransportAcquisitionStatus ≡ true
+  × TransportStatus.neuralDonorRecipientRatePaid TransportStatus.canonicalTransportAcquisitionStatus ≡ false
+quantitativeTranscellularRateDoesNotPayTargetNeuralEdge = refl , (refl , (refl , refl))
+
+releaseUptakeCocultureChainStillDoesNotYieldMolecularTransferRate :
+  TransportProbe.catecholaminergicBH4ReleaseObserved TransportProbe.canonicalTransportCarrierBoundary ≡ true
+  × TransportProbe.recipientBH4UptakeObserved TransportProbe.canonicalTransportCarrierBoundary ≡ true
+  × TransportProbe.functionalCocultureCrossTalkObserved TransportProbe.canonicalTransportCarrierBoundary ≡ true
+  × TransportProbe.releaseUptakeCocultureSufficesForQuantitativeTransfer TransportProbe.canonicalTransportCarrierBoundary ≡ false
+  × TransportProbe.transportProbeClosesWholeAllocator TransportProbe.canonicalTransportCarrierBoundary ≡ false
+releaseUptakeCocultureChainStillDoesNotYieldMolecularTransferRate =
+  refl , (refl , (refl , (refl , refl)))
+
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation :
   Evidence.allCanonicalEvidenceReceiptsRejectWholeModelConfirmation ≡ true
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation = refl
@@ -123,9 +148,10 @@ centralBH4AllocationRemainsExperimentallyOpen :
   × Experiment.historicalTwoBranchConstraintPaid ≡ true
   × Experiment.historicalNeuralContextConstraintPaid ≡ true
   × Experiment.historicalRedoxSpatialConstraintPaid ≡ true
+  × Experiment.historicalTransportCarrierConstraintPaid ≡ true
   × Experiment.historicalConstraintsCloseCentralEdge ≡ false
 centralBH4AllocationRemainsExperimentallyOpen =
-  refl , (refl , (refl , (refl , refl)))
+  refl , (refl , (refl , (refl , (refl , refl))))
 
 paretoFrontierIsNotTruthRanking :
   Pareto.frontierRankIsTruthRank Pareto.canonicalKitzerowAcquisitionFrontier ≡ false
