@@ -24,9 +24,17 @@ concreteSU2HostReceiptConsumedRegression :
   A.concreteSU2HostReceiptRequired A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
 concreteSU2HostReceiptConsumedRegression = refl
 
+symmetricTenComponentCompilerConsumedRegression :
+  A.symmetricTenComponentBrownMaclayCompilerConsumed A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
+symmetricTenComponentCompilerConsumedRegression = refl
+
 componentwiseBrownMaclayTargetOwnedRegression :
   A.componentwiseBrownMaclayEqualityTargetOwned A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
 componentwiseBrownMaclayTargetOwnedRegression = refl
+
+sixteenIndependentComponentsNotRequiredRegression :
+  A.sixteenIndependentBrownMaclayComponentsRequired A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
+sixteenIndependentComponentsNotRequiredRegression = refl
 
 concreteSelectedGroupHostStillOpenRegression :
   A.concreteSelectedGroupHostsCanonicalU1Paid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
