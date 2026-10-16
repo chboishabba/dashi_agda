@@ -70,13 +70,13 @@ affineTermAppendOneZero :
   (word : Binary.BinaryWord m) →
   Affine.affineAdditiveTerm (appendOneZero word)
   ≡ 3 * Affine.affineAdditiveTerm word + Affine.powNat 2 m
-affineTermAppendOneZero word =
+affineTermAppendOneZero {m} word =
   begin
     Affine.affineAdditiveTerm (appendOneZero word)
       ≡⟨ Zero.affineTermAppendZero (Prefix.appendOne word) ⟩
     Affine.affineAdditiveTerm (Prefix.appendOne word)
       ≡⟨ Prefix.affineTermAppendOne word ⟩
-    3 * Affine.affineAdditiveTerm word + Affine.powNat 2 _
+    3 * Affine.affineAdditiveTerm word + Affine.powNat 2 m
       ∎
 
 multiplierAppendOneZero :
@@ -119,16 +119,21 @@ oneZeroGapPositive word coefficient =
       (Paradox.gap coefficient)
       4
 
+  fourGapBelowPairGap :
+    4 * Paradox.gap coefficient
+    ≤ Affine.powNat 3 (Affine.parityCount word)
+      + 4 * Paradox.gap coefficient
+  fourGapBelowPairGap =
+    NatP.m≤n+m
+      (4 * Paradox.gap coefficient)
+      (Affine.powNat 3 (Affine.parityCount word))
+
   gapBelowPairGap :
     Paradox.gap coefficient
     ≤ Affine.powNat 3 (Affine.parityCount word)
       + 4 * Paradox.gap coefficient
   gapBelowPairGap =
-    NatP.≤-trans
-      gapBelowFourGap
-      (NatP.m≤n+m
-        (Affine.powNat 3 (Affine.parityCount word))
-        (4 * Paradox.gap coefficient))
+    NatP.≤-trans gapBelowFourGap fourGapBelowPairGap
 
 pairGapNormalize :
   (multiplier gap : Nat) →
@@ -200,6 +205,9 @@ oneZeroCorrectionFitsAtOldSharpThreshold {m} word coefficient =
     multiplier = Affine.powNat 3 (Affine.parityCount word)
     denominator = Affine.powNat 2 m
     gap = Paradox.gap coefficient
+    quotient =
+      Sharp.quotientByPositive
+        correction gap (Paradox.gapPositive coefficient)
     minimum = Sharp.sharpMinimumStart word coefficient
 
     oldFit : correction < gap * minimum
@@ -218,9 +226,7 @@ oneZeroCorrectionFitsAtOldSharpThreshold {m} word coefficient =
 
     denominatorAtMostScaled : denominator ≤ denominator * minimum
     denominatorAtMostScaled =
-      case minimum of λ where
-        zero → z≤n
-        (suc q) → baseTimesSuccessorLower denominator q
+      baseTimesSuccessorLower denominator quotient
 
     boundedRight :
       3 * (gap * minimum) + denominator
@@ -272,7 +278,7 @@ oneZeroCorrectionFitsAtOldSharpThreshold {m} word coefficient =
     (sym (affineTermAppendOneZero word))
     (subst
       (λ right → 3 * correction + denominator < right)
-      (scaledPairGap)
+      scaledPairGap
       (subst
         (λ right → 3 * correction + denominator < right)
         normalizeRight
