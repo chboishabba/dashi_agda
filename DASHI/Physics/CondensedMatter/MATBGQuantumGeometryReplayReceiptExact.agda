@@ -25,7 +25,7 @@ canonicalQuantumGeometryReplayReceipt =
   quantum-geometry-replay-receipt
     "scripts/matbg_bm_quantum_geometry.py"
     "Docs/evidence/matbg_bm_quantum_geometry_2026-10-16.json"
-    "4f7971e380611633f963218da0bd4239c09fa4d9f31ec4ae0ea0345935e62c85"
+    "6538c8628f3bcffe0adb19cc55ebd1e355b85e168200a6f4663061d6dd72c6dc"
     "10.1073/pnas.1108174108"
     "10.1038/s41467-026-74848-6"
     "2.9265860289675167"
