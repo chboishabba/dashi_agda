@@ -56,6 +56,7 @@ def collect_narrative_events(
     cached_prs = _cached_pr_events(history)
     source_status: dict[str, Any] = {
         "git_commits": len(commit_events),
+        "commit_history_complete": max_commits is None,
         "semantic_history_linked": history is not None,
         "cached_prs": len(cached_prs),
         "github_prs_requested": bool(github_repository),
