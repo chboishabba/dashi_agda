@@ -7,6 +7,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Quantum.QuantumMereologySourceAtlasExact as Sources
 import DASHI.Quantum.QuantumMereologyHeterogeneousFiniteAtlasAuthorityExact as Atlas
 import DASHI.Quantum.QuantumMereologyGTPSShortTime2026AuthorityExact as GTPS
+import DASHI.Quantum.QuantumMereologyGTPSProjectionProducerAuthorityExact as Projector
 
 record SelectedAtlasTerminalStatus : Set where
   field
@@ -38,6 +39,14 @@ record SelectedAtlasTerminalStatus : Set where
     SourceGTPSAlgebraDistanceFormulaPaidIsTrue :
       SourceGTPSAlgebraDistanceFormulaPaid ≡ true
 
+    FiniteSourceProjectorProducerPaid : Bool
+    FiniteSourceProjectorProducerPaidIsTrue :
+      FiniteSourceProjectorProducerPaid ≡ true
+
+    FiniteSourceGTPSScoreAndDistanceInstantiated : Bool
+    FiniteSourceGTPSScoreAndDistanceInstantiatedIsTrue :
+      FiniteSourceGTPSScoreAndDistanceInstantiated ≡ true
+
     NestedMarginalCoherencePaid : Bool
     NestedMarginalCoherencePaidIsFalse :
       NestedMarginalCoherencePaid ≡ false
@@ -54,13 +63,25 @@ record SelectedAtlasTerminalStatus : Set where
     ArbitrarySelectedHilbertTPSCoordinateAttachmentPaidIsFalse :
       ArbitrarySelectedHilbertTPSCoordinateAttachmentPaid ≡ false
 
-    SourceProjectorProducerPaid : Bool
-    SourceProjectorProducerPaidIsFalse :
-      SourceProjectorProducerPaid ≡ false
+    PhysicalSourceGTPSIdentificationPaid : Bool
+    PhysicalSourceGTPSIdentificationPaidIsFalse :
+      PhysicalSourceGTPSIdentificationPaid ≡ false
+
+    PhysicalHamiltonianAttachmentPaid : Bool
+    PhysicalHamiltonianAttachmentPaidIsFalse :
+      PhysicalHamiltonianAttachmentPaid ≡ false
 
     PhysicalPointerWeldPaid : Bool
     PhysicalPointerWeldPaidIsFalse :
       PhysicalPointerWeldPaid ≡ false
+
+    SourceRiemannianPullbackPaid : Bool
+    SourceRiemannianPullbackPaidIsFalse :
+      SourceRiemannianPullbackPaid ≡ false
+
+    SourceAlgebraSusceptibilityPaid : Bool
+    SourceAlgebraSusceptibilityPaidIsFalse :
+      SourceAlgebraSusceptibilityPaid ≡ false
 
     QuantumMutualInformationInequalityPackagePaid : Bool
     QuantumMutualInformationInequalityPackagePaidIsFalse :
@@ -94,6 +115,10 @@ canonicalSelectedAtlasTerminalStatus = record
   ; SourceGTPSShortTimeFormulaPaidIsTrue = refl
   ; SourceGTPSAlgebraDistanceFormulaPaid = true
   ; SourceGTPSAlgebraDistanceFormulaPaidIsTrue = refl
+  ; FiniteSourceProjectorProducerPaid = true
+  ; FiniteSourceProjectorProducerPaidIsTrue = refl
+  ; FiniteSourceGTPSScoreAndDistanceInstantiated = true
+  ; FiniteSourceGTPSScoreAndDistanceInstantiatedIsTrue = refl
   ; NestedMarginalCoherencePaid = false
   ; NestedMarginalCoherencePaidIsFalse = refl
   ; ArbitraryRetainedCoordinateChartIndependencePaid = false
@@ -102,10 +127,16 @@ canonicalSelectedAtlasTerminalStatus = record
   ; RetainedEnvironmentMixingChartIndependencePaidIsFalse = refl
   ; ArbitrarySelectedHilbertTPSCoordinateAttachmentPaid = false
   ; ArbitrarySelectedHilbertTPSCoordinateAttachmentPaidIsFalse = refl
-  ; SourceProjectorProducerPaid = false
-  ; SourceProjectorProducerPaidIsFalse = refl
+  ; PhysicalSourceGTPSIdentificationPaid = false
+  ; PhysicalSourceGTPSIdentificationPaidIsFalse = refl
+  ; PhysicalHamiltonianAttachmentPaid = false
+  ; PhysicalHamiltonianAttachmentPaidIsFalse = refl
   ; PhysicalPointerWeldPaid = false
   ; PhysicalPointerWeldPaidIsFalse = refl
+  ; SourceRiemannianPullbackPaid = false
+  ; SourceRiemannianPullbackPaidIsFalse = refl
+  ; SourceAlgebraSusceptibilityPaid = false
+  ; SourceAlgebraSusceptibilityPaidIsFalse = refl
   ; QuantumMutualInformationInequalityPackagePaid = false
   ; QuantumMutualInformationInequalityPackagePaidIsFalse = refl
   ; MDSSpatialRealizationPaid = false
@@ -121,4 +152,4 @@ dashiSelectedAtlasTerminalReceipt =
   Sources.attribution-receipt
     Sources.crossModuleInference
     "DASHI Agda"
-    "Combines the imported Lean-source heterogeneous finite atlas, product partial-trace associativity, environment-relabeling invariance and source-facing g-TPS formula statuses into one fail-closed phase boundary. It does not promote Lean source text to Agda kernel proof, external scientific claims to local theorems, or finite coordinate structure to physical subsystem/geometry/gravity authority."
+    "Combines the imported Lean-source heterogeneous finite atlas, product partial-trace associativity, environment-relabeling invariance, source-facing g-TPS formulas, and later finite Hilbert--Schmidt projector producer into one fail-closed phase boundary. Finite mathematical projector existence is now paid by the later formal owner; physical source-algebra/Hamiltonian identification, nested coherence, geometry, holography and spacetime remain separate unpaid obligations."
