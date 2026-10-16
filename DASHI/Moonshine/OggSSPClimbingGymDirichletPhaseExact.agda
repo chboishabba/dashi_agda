@@ -106,7 +106,7 @@ landau1911Source =
     "Mathematische Annalen 71, 548-564"
     "1911"
     "https://eudml.org/doc/158549"
-    Source.primarySource
+    Source.academicArticleSource
     "classical fixed-X sum over nontrivial zeta zeros with a von-Mangoldt prime-power main term; does not contain the DASHI Ogg contrast or held-out experiment"
     Source.publicAttribution
 
@@ -118,7 +118,7 @@ gonek1993Source =
     "Contemporary Mathematics 143, 395-413"
     "1993"
     "bibliographic source; AMS Contemporary Mathematics 143"
-    Source.primarySource
+    Source.academicChapterSource
     "uniform Landau-Gonek explicit-formula context; does not supply an Ogg/Monster interpretation"
     Source.publicAttribution
 
@@ -142,7 +142,7 @@ odlyzkoZeroTableSource =
     "official University of Minnesota zero tables"
     "public table; accessed 2026"
     "https://www-users.cse.umn.edu/~odlyzko/zeta_tables/"
-    Source.primarySource
+    (Source.namedSourceKind "numerical reference dataset")
     "independent numerical reference: zeros1 contains the first 100000 ordinates with stated accuracy within 3e-9; used here only to anchor the held-out cache provenance"
     Source.publicAttribution
 
