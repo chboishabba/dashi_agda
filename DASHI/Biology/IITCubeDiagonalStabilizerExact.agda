@@ -165,3 +165,39 @@ columnShiftOrderThree f = refl
 rowColumnCommute : (f : Cube.Face9) →
   rowShift (columnShift f) ≡ columnShift (rowShift f)
 rowColumnCommute f = refl
+
+------------------------------------------------------------------------
+-- Row/column reflection.  B = rowShift + columnShift is symmetric in the two
+-- directions, so table transpose belongs to the same diagonal graph stabilizer.
+-- Together with the commuting order-three translations this gives the exact
+-- generator relations of the expected C3^2 semidirect C2 permutation spine.
+-- This does NOT claim those permutation generators exhaust the full 27-
+-- dimensional linear centralizer found by the independent finite audit.
+------------------------------------------------------------------------
+
+transposeFace : Cube.Face9 → Cube.Face9
+transposeFace f = Fine.phaseFineTable9
+  (Fine.q00 f) (Fine.q10 f) (Fine.q20 f)
+  (Fine.q01 f) (Fine.q11 f) (Fine.q21 f)
+  (Fine.q02 f) (Fine.q12 f) (Fine.q22 f)
+
+transposeEndo : FaceLinearEndo
+transposeEndo = face-linear-endo transposeFace refl (λ x y → refl)
+
+transposeCommutesWithB : CommutesWithB transposeEndo
+transposeCommutesWithB f = refl
+
+transposePreservesGraph : PreservesGraph transposeEndo
+transposePreservesGraph =
+  centralizerPreservesGraph transposeEndo transposeCommutesWithB
+
+transposeInvolutive : (f : Cube.Face9) → transposeFace (transposeFace f) ≡ f
+transposeInvolutive f = refl
+
+transposeRowToColumn : (f : Cube.Face9) →
+  transposeFace (rowShift f) ≡ columnShift (transposeFace f)
+transposeRowToColumn f = refl
+
+transposeColumnToRow : (f : Cube.Face9) →
+  transposeFace (columnShift f) ≡ rowShift (transposeFace f)
+transposeColumnToRow f = refl
