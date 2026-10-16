@@ -3,7 +3,6 @@ module DASHI.Culture.ColonialTheatreSensoryAccessExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as INF
-import DASHI.Culture.PowersPlantationParadiseMethodologySourceAtlasExact as Methodology
 
 ------------------------------------------------------------------------
 -- COLONIAL THEATRE SENSORY / PARTICIPATORY ACCESS
@@ -72,9 +71,6 @@ entryDoesNotRecoverSensoryAccess =
       admittedMitigatedAural
       refl
       sensoryAccessDiffers)
-
-sabeeMethodologySource = Methodology.sabee2024ReviewSource
-rowMethodologySource = Methodology.row2024ReviewSource
 
 data EntryImpliesVisualEqualityPermission : Set where
 
