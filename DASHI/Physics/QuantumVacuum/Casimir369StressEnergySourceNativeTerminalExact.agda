@@ -10,6 +10,7 @@ import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerExact as
 import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeExact as GroupLaw
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Stress
 import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationExact as FreeNormalization
+import DASHI.Physics.QuantumVacuum.CasimirSide4CartanCurvatureClosureExact as Side4Cartan
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact as Action
 import DASHI.Physics.QuantumVacuum.CasimirU1SelectedStressReadoutAttachmentExact as StressReadout
 import DASHI.Physics.QuantumVacuum.CasimirU1ModeRenormalizedStressAttachmentExact as ModeStress
@@ -17,19 +18,6 @@ import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact as Round
 
 ------------------------------------------------------------------------
 -- SOURCE-NATIVE TERMINAL RECUT
---
--- Compiler-owned seams removed from the physical cut include formal recovery
--- projection compatibility, R457 reverse recovery after Round131 attachment,
--- the old pinned-selection receipt, selected compact simplicity, duplicate SU2
--- group-law construction, the arbitrary all-groups interpretation callback,
--- bracket-zero after a selected Cartan-field realization, invariant-pairing /
--- abelian-curvature algebra, restricted action equality, same-path variation
--- equality, selected-QFT/Maxwell readout equality, and duplicate plate/
--- renormalization objects.
---
--- Free-field normalization is separated from empirical alpha_EM calibration:
--- the ideal Casimir lane needs a common field/generator/action convention, not a
--- measured fine-structure payload.
 ------------------------------------------------------------------------
 
 legacyTerminalBoundary : Legacy.Casimir369StressEnergyTerminalBoundary
@@ -49,6 +37,9 @@ selectedQFTCartanFieldBoundary = U1Stress.canonicalCasimirU1RestrictedSelectedQF
 
 freeMaxwellNormalizationBoundary : FreeNormalization.CasimirFreeMaxwellNormalizationBoundary
 freeMaxwellNormalizationBoundary = FreeNormalization.canonicalFreeMaxwellNormalizationBoundary
+
+side4CartanCurvatureBoundary : Side4Cartan.CasimirSide4CartanCurvatureBoundary
+side4CartanCurvatureBoundary = Side4Cartan.canonicalSide4CartanCurvatureBoundary
 
 actionVariationBoundary : Action.CasimirU1ActionVariationBoundary
 actionVariationBoundary = Action.canonicalCasimirU1ActionVariationBoundary
@@ -76,6 +67,8 @@ record CasimirSourceNativeTerminalBoundary : Set where
     selectedQFTCartanFieldRealizationInterfacePaid : Bool
     freeMaxwellActionNormalizationInterfacePaid : Bool
     measuredAlphaEMRequiredForIdealCasimirActionWeld : Bool
+    side4CartanCurlClosureCompilerPaid : Bool
+    independentFiniteCartanCurlClosurePaymentRequired : Bool
 
     cartanFieldBracketCompilerPaid : Bool
     invariantPairingCompilerPaid : Bool
@@ -96,7 +89,7 @@ record CasimirSourceNativeTerminalBoundary : Set where
     selectedQFTCartanFieldRealizationPaid : Bool
     freeMaxwellActionNormalizationPaid : Bool
     sameObjectNondegenerateCurvatureFormulaPaid : Bool
-    exteriorFieldStrengthCartanImagePaid : Bool
+    selectedNonlinearExteriorCartanTransportPaid : Bool
     sameObjectActionDensityFunctionalPaid : Bool
     sameMetricPathActionFamilyPaid : Bool
     metricVariationStressReadoutPaid : Bool
@@ -114,7 +107,7 @@ open CasimirSourceNativeTerminalBoundary public
 canonicalSourceNativeTerminalBoundary : CasimirSourceNativeTerminalBoundary
 canonicalSourceNativeTerminalBoundary =
   casimir-source-native-terminal-boundary
-    true true false true false true false false true true false true true false
+    true true false true false true false false true true false true true false true false
     true true true true false true false true false true false false
     false false false false false false false false false false false false false false false false false false
 
@@ -125,7 +118,7 @@ data RemainingSourceNativeCasimirBlocker : Set where
   missingSelectedQFTCartanFieldRealization : RemainingSourceNativeCasimirBlocker
   missingFreeMaxwellActionNormalization : RemainingSourceNativeCasimirBlocker
   missingSameObjectNondegenerateCurvatureFormulaAttachment : RemainingSourceNativeCasimirBlocker
-  missingExteriorFieldStrengthCartanImage : RemainingSourceNativeCasimirBlocker
+  missingSelectedNonlinearExteriorCartanTransport : RemainingSourceNativeCasimirBlocker
   missingSameObjectActionDensityFunctional : RemainingSourceNativeCasimirBlocker
   missingSameMetricPathActionFamily : RemainingSourceNativeCasimirBlocker
   missingMetricVariationStressReadout : RemainingSourceNativeCasimirBlocker
@@ -154,7 +147,7 @@ fifthUnificationBlocker = missingFreeMaxwellActionNormalization
 sixthUnificationBlocker : RemainingSourceNativeCasimirBlocker
 sixthUnificationBlocker = missingSameObjectNondegenerateCurvatureFormulaAttachment
 seventhUnificationBlocker : RemainingSourceNativeCasimirBlocker
-seventhUnificationBlocker = missingExteriorFieldStrengthCartanImage
+seventhUnificationBlocker = missingSelectedNonlinearExteriorCartanTransport
 eighthUnificationBlocker : RemainingSourceNativeCasimirBlocker
 eighthUnificationBlocker = missingSameObjectActionDensityFunctional
 ninthUnificationBlocker : RemainingSourceNativeCasimirBlocker
@@ -193,6 +186,7 @@ data RetiredPinnedSourceNativeSelectionBlockerAutomaticallyReturns : Set where
 data RetiredAllGroupsInterpretationBlockerAutomaticallyReturns : Set where
 data RetiredArbitraryCartanFieldBlockerAutomaticallyReturns : Set where
 data RetiredMeasuredAlphaEMBlockerAutomaticallyReturns : Set where
+data RetiredFiniteCartanCurlBlockerAutomaticallyReturns : Set where
 data RetiredCompactSimpleBlockerAutomaticallyReturns : Set where
 data RetiredActionEqualityBlockerAutomaticallyReturns : Set where
 data RetiredMetricVariationEqualityBlockerAutomaticallyReturns : Set where
@@ -210,6 +204,8 @@ retiredArbitraryCartanFieldBlockerDoesNotReturn : RetiredArbitraryCartanFieldBlo
 retiredArbitraryCartanFieldBlockerDoesNotReturn ()
 retiredMeasuredAlphaEMBlockerDoesNotReturn : RetiredMeasuredAlphaEMBlockerAutomaticallyReturns → ⊥
 retiredMeasuredAlphaEMBlockerDoesNotReturn ()
+retiredFiniteCartanCurlBlockerDoesNotReturn : RetiredFiniteCartanCurlBlockerAutomaticallyReturns → ⊥
+retiredFiniteCartanCurlBlockerDoesNotReturn ()
 retiredCompactSimpleBlockerDoesNotReturn : RetiredCompactSimpleBlockerAutomaticallyReturns → ⊥
 retiredCompactSimpleBlockerDoesNotReturn ()
 retiredActionEqualityBlockerDoesNotReturn : RetiredActionEqualityBlockerAutomaticallyReturns → ⊥
@@ -221,4 +217,4 @@ retiredSecondRenormalizationBlockerDoesNotReturn ()
 
 sourceNativeTerminalReading : String
 sourceNativeTerminalReading =
-  "The source-native Casimir/GRQFT max-cut is reduced to genuine same-object inputs. Round131 recovery of Y_R457 is first; Y_R457 = Y_pinned second; selected-group quaternion-SU2 realization third; selected recovered-QFT Cartan field realization fourth. Fifth is now FreeMaxwellActionNormalization: same physical field normalization, generator/pairing convention and common action prefactor. A measured alpha_EM payload is explicitly not required for the ideal free-field Casimir kernel and remains separate phenomenology. The remaining curvature/action/path/stress attachments then lead to ten Brown-Maclay component values, Round131 all-sector assembly and Einstein/common-action closure."
+  "The source-native Casimir/GRQFT max-cut now charges only genuine same-object seams. The side-four physical field proves finite Cartan closure of the exterior curl, so an independent dA-in-Cartan calculation is retired. After the selected nondegenerate curvature producer, the remaining exterior-Cartan payment is same-object transport from that selected nonlinear curvature/exterior derivative to the concrete side-four Cartan-curvature realization. Free Maxwell normalization remains a convention payment rather than measured alpha_EM. The recovery/group/field seams remain ahead of these action/stress attachments."
