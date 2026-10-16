@@ -23,6 +23,7 @@ open import DASHI.Physics.YangMills.BalabanComputedPolynomialSolver using
 open RealPolynomialSolver using
   ( Polynomial; con; _:=_ )
 
+import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as R
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as SU2
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Bracket
 import DASHI.Physics.Laws.GaugeInteractionLaws as Gauge
@@ -31,32 +32,28 @@ import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
 zeroP : ∀ {n} → Polynomial n
 zeroP = con zeroCoefficient
 
-------------------------------------------------------------------------
--- 1. Literal Cartan-axis embedding u(1) -> su(2).
-------------------------------------------------------------------------
-
 U1LieAlgebra : Set
 U1LieAlgebra = ℝ
 
 embedU1Lie : U1LieAlgebra → SU2.SU2LieAlgebra
-embedU1Lie phase = SU2.su2Lie SU2.zeroR SU2.zeroR phase
+embedU1Lie phase = SU2.su2Lie R.zeroR R.zeroR phase
 
 u1BracketXZero : ∀ a b →
-  Bracket.bracket1R SU2.zeroR a SU2.zeroR b ≡ SU2.zeroR
+  Bracket.bracket1R R.zeroR a R.zeroR b ≡ R.zeroR
 u1BracketXZero =
   solveComputed 2
     (λ a b → Bracket.bracket1P zeroP a zeroP b := zeroP)
     computed
 
 u1BracketYZero : ∀ a b →
-  Bracket.bracket2R a SU2.zeroR b SU2.zeroR ≡ SU2.zeroR
+  Bracket.bracket2R a R.zeroR b R.zeroR ≡ R.zeroR
 u1BracketYZero =
   solveComputed 2
     (λ a b → Bracket.bracket2P a zeroP b zeroP := zeroP)
     computed
 
 u1BracketZZero : ∀ a b →
-  Bracket.bracket3R SU2.zeroR SU2.zeroR SU2.zeroR SU2.zeroR ≡ SU2.zeroR
+  Bracket.bracket3R R.zeroR R.zeroR R.zeroR R.zeroR ≡ R.zeroR
 u1BracketZZero =
   solveComputed 2
     (λ a b → Bracket.bracket3P zeroP zeroP zeroP zeroP := zeroP)
@@ -69,10 +66,6 @@ u1EmbeddedLieBracketZero a b =
     (u1BracketXZero a b)
     (u1BracketYZero a b)
     (u1BracketZZero a b)
-
-------------------------------------------------------------------------
--- 2. Structural promotion statement.
-------------------------------------------------------------------------
 
 record U1InsideSU2YangMills : Set₁ where
   constructor u1-inside-su2-yang-mills
@@ -94,10 +87,6 @@ u1IsSU2LieSubalgebra = true
 
 maxwellFitsGeneralGaugeFieldLawArchitecture : Bool
 maxwellFitsGeneralGaugeFieldLawArchitecture = true
-
-------------------------------------------------------------------------
--- 3. The previous firewall is refined, not discarded.
-------------------------------------------------------------------------
 
 clayMassGapAutomaticallyProvesMaxwell : Bool
 clayMassGapAutomaticallyProvesMaxwell = false
