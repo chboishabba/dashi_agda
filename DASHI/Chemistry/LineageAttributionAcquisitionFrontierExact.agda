@@ -51,12 +51,12 @@ open ScientificAcquisitionItem public
 bh4FluxDataset : ScientificAcquisitionItem
 bh4FluxDataset =
   scientificAcquisitionItem
-    "A1 target-relevant multi-branch BH4 allocation discriminator beyond paid hepatic/neural constraints" fluxDataset
-    "Kitzerow BH4 flux causal models + hepatic competition + neural state-history discriminators"
-    "BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO plus enzyme abundance/localization, compartment, region/cell type, developmental history and timing under controlled perturbation"
+    "A1 target-relevant route/compartment-resolved multi-branch BH4 allocation discriminator beyond paid hepatic/neural/redox-spatial constraints" fluxDataset
+    "Kitzerow BH4 flux causal models + hepatic competition + neural state-history + redox/spatial topology discriminators"
+    "BH4/BH2 + NAD(P)H + NOS-bound BH4 redox/coupling + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO plus enzyme abundance/localization, intracellular/extracellular route, transfer/supply topology, compartment, region/cell type, developmental history and timing under controlled perturbation"
     "primary target-relevant interventional dataset with exact methods/sample/context and same-object branch readouts"
-    "dataset/table/supplement locator plus assay calibration; must preserve region/cell/compartment/time rather than collapse to total BH4"
-    "extends the paid rat-hepatic PAH-iNOS conditional-competition result and mouse neural current-pool-rescue counterexamples to discriminate adaptive allocator, downstream consequence, parallel-redox and context/state-history alternatives"
+    "dataset/table/supplement locator plus assay calibration; must preserve route, region, cell, compartment, redox and time rather than collapse to total BH4"
+    "extends the paid rat-hepatic PAH-iNOS conditional-competition result, mouse neural current-pool-rescue counterexamples, NOS-bound redox-regeneration result, GTPCH/nNOS localization and rat-striatal route effects to discriminate adaptive spatial allocator, downstream consequence, parallel-redox and context/state-history alternatives"
     independentPrimaryMeasurement 5 10 10 8 0 true refl
 
 pahAtomMap : ScientificAcquisitionItem
@@ -196,7 +196,6 @@ brazilCorrespondenceArtifact =
     originatorReportedOnly 4 10 0 0 true refl
 
 iaccMedMapsContactArtifact : ProvenanceAcquisitionItem
-  
 iaccMedMapsContactArtifact =
   provenanceAcquisitionItem
     "P3 IACC/MedMaps contact provenance" contactMessageArtifact
