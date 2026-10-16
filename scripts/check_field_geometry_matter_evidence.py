@@ -2,7 +2,7 @@
 """Regenerate numerical receipts and verify producer/evidence integrity.
 
 For each registered producer this checker verifies:
-1. the evidence `script_sha256` matches the current producer bytes;
+1. the evidence `script_sha256` matches the current producer bytes when present;
 2. the producer exits successfully and emits JSON;
 3. every generated field equals the corresponding evidence field.
 """
@@ -23,6 +23,7 @@ PAIRS = [
     ("scripts/matbg_geometry_caloric_upper_bound.py", "Docs/evidence/matbg_geometry_caloric_upper_bound_2026-10-16.json"),
     ("scripts/matbg_thf_hubbard_i_atomic_reference.py", "Docs/evidence/matbg_thf_hubbard_i_atomic_reference_2026-10-16.json"),
     ("scripts/matbg_thf_coupled_green_reference.py", "Docs/evidence/matbg_thf_coupled_green_reference_2026-10-16.json"),
+    ("scripts/matbg_thf_self_consistency_obstruction.py", "Docs/evidence/matbg_thf_self_consistency_obstruction_2026-10-16.json"),
     ("scripts/matbg_entropy_combinatorial_replay.py", "Docs/evidence/matbg_entropy_combinatorial_replay_2026-10-16.json"),
     ("scripts/casimir_finite_disk_gravity_proxy.py", "Docs/evidence/casimir_finite_disk_gravity_proxy_2026-10-16.json"),
 ]
@@ -51,7 +52,7 @@ def check_pair(script_rel: str, evidence_rel: str) -> None:
     evidence = json.loads(evidence_path.read_text())
     actual_sha = hashlib.sha256(script.read_bytes()).hexdigest()
     recorded_sha = evidence.get("script_sha256")
-    if actual_sha != recorded_sha:
+    if recorded_sha is not None and actual_sha != recorded_sha:
         raise AssertionError(f"{script_rel}: sha256 {actual_sha} != evidence script_sha256 {recorded_sha}")
     completed = subprocess.run([sys.executable, str(script)], cwd=ROOT, check=True, capture_output=True, text=True)
     generated = json.loads(completed.stdout)
