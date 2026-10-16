@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Economics.AICapitalSOTAReconciliation20261016Exact as SOTA
+import DASHI.Economics.AICapitalOutcomeSignatures20261016Exact as Outcome
 
 data PhaseState : Set where
   structurallyPaid currentAcquisition longitudinalIdentification causalAttribution outcomeValidation : PhaseState
@@ -62,9 +63,9 @@ phase4OutcomeValidation : PhaseDeliverable
 phase4OutcomeValidation = phase-deliverable
   "Phase 4 — real-world outcome / thesis falsification"
   outcomeValidation
-  "explicit coexistence tests: demand with distress, spend growth with falling unit price, physical buildout with uncertain return, landlord revenue with tenant negative capital spread"
-  "predeclare rival outcome signatures for durable-rent, commoditisation-with-volume-growth, refinancing-stress, orderly capital rotation, and policy-moat hypotheses; score only after observations arrive"
-  "one or more hypotheses are discriminated by realised cash returns, refinancing/default outcomes, scarcity-rent trajectories and market structure without post-hoc redefining the consumer"
+  "explicit coexistence tests plus predeclared rival signatures for durable-rent expansion, commoditisation-with-volume-growth, refinancing stress, orderly capital rotation and policy/compliance moat"
+  "populate the signature coordinates longitudinally and discriminate among rivals only when same-basis realised returns, funding/refinancing outcomes, scarcity-rent trajectories, utilisation and market-structure observations are available"
+  "one or more hypotheses are discriminated without post-hoc redefining the consumer; currentOutcomePromotionReady remains false until those longitudinal payments exist"
   false
 
 allNewGenericAbstractionFlagsFalse :
@@ -78,6 +79,9 @@ allNewGenericAbstractionFlagsFalse = refl , refl , refl , refl , refl
 sotaBubbleStillOpen : SOTA.bubbleEstablished SOTA.currentSOTAReconciliation ≡ false
 sotaBubbleStillOpen = SOTA.bubbleStillNotEstablished
 
+outcomePromotionStillOpen : Outcome.currentOutcomePromotionReady ≡ false
+outcomePromotionStillOpen = refl
+
 boundary : String
 boundary =
-  "The roadmap is now measurement-first. Phase 0 generic architecture is paid. Phase 1 is the current max-cut: same-object cash/cost/hardware/policy coordinates. Phase 2 requires comparable repeated measurements before trajectory claims. Phase 3 permits causal policy claims only after realised obligations/costs/responses plus identification and review. Phase 4 is explicit thesis falsification against rival outcome signatures. No additional generic economic abstraction is scheduled as a substitute for these payments."
+  "The roadmap is measurement-first. Phase 0 generic architecture is paid. Phase 1 is the current max-cut: same-object cash/cost/hardware/policy coordinates. Phase 2 requires comparable repeated measurements before trajectory claims. Phase 3 permits causal policy claims only after realised obligations/costs/responses plus identification and review. Phase 4 now has rival outcome signatures fixed in advance; the remaining payment is longitudinal discrimination, not another narrative score."
