@@ -3,6 +3,7 @@ module DASHI.Physics.QuantumVacuum.Casimir369StressEnergyTerminalMaxCutValidatio
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.Casimir369StressEnergyTerminalMaxCutExact as Terminal
+import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationValidation
 
 ------------------------------------------------------------------------
 -- RED-first terminal regression surface.
@@ -36,6 +37,10 @@ vacuumLambdaDiscriminatorPaidRegression :
   Terminal.vacuumLambdaDiscriminatorPaid Terminal.canonicalTerminalBoundary ≡ true
 vacuumLambdaDiscriminatorPaidRegression = refl
 
+u1YangMillsArchitecturePaidRegression :
+  Terminal.u1YangMillsGaugeArchitectureHandoffPaid Terminal.canonicalTerminalBoundary ≡ true
+u1YangMillsArchitecturePaidRegression = refl
+
 sameCandidateHandoffInterfacePaidRegression :
   Terminal.sameCandidateUnificationHandoffInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
 sameCandidateHandoffInterfacePaidRegression = refl
@@ -43,6 +48,14 @@ sameCandidateHandoffInterfacePaidRegression = refl
 concreteScaleStillOpenRegression :
   Terminal.concreteCanonicalSetoidScaleWitnessPaid Terminal.canonicalTerminalBoundary ≡ false
 concreteScaleStillOpenRegression = refl
+
+nonAbelianAggregationStillOpenRegression :
+  Terminal.nonAbelianQFTStressAggregationFromCasimirPaid Terminal.canonicalTerminalBoundary ≡ false
+nonAbelianAggregationStillOpenRegression = refl
+
+clayDoesNotPromoteCasimirRegression :
+  Terminal.clayMassGapPromotesCasimirPhysics Terminal.canonicalTerminalBoundary ≡ false
+clayDoesNotPromoteCasimirRegression = refl
 
 sameCandidateStressIdentificationStillOpenRegression :
   Terminal.casimirSharedStressIdentificationPaid Terminal.canonicalTerminalBoundary ≡ false
