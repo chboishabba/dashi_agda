@@ -30,7 +30,7 @@ open import Data.Nat.DivMod using (m≡m%n+[m/n]*n; m%n<n; m/n*n≤m)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Relation.Nullary using (yes; no)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
@@ -98,7 +98,7 @@ quotientThresholdFits correction (suc gap) positive =
   in
   subst
     (λ left → left < suc gap * suc quotient)
-    (m≡m%n+[m/n]*n correction (suc gap))
+    (sym (m≡m%n+[m/n]*n correction (suc gap)))
     normalizedBelow
 
 quotientTimesGapBelowCorrection :
