@@ -40,6 +40,14 @@ thfSourceContractIsPaid :
   Terminal.thfHubbardI2026SourceContract Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
 thfSourceContractIsPaid = refl
 
+thfLiteralMatricesArePaid :
+  Terminal.thfLiteralHcHcfMatrices Terminal.currentTerminalFrontier ≡ Terminal.structurallyPaid
+thfLiteralMatricesArePaid = refl
+
+thfAtomicReplayWasExecuted :
+  Terminal.thfHubbardIAtomicReplay Terminal.currentTerminalFrontier ≡ Terminal.numericallyExecuted
+thfAtomicReplayWasExecuted = refl
+
 thfSelfConsistentSolveStillOpen :
   Terminal.thfSelfConsistentInteractingSolve Terminal.currentTerminalFrontier ≡ Terminal.openCalibrationOrExecution
 thfSelfConsistentSolveStillOpen = refl
@@ -51,6 +59,10 @@ entropyCombinatoricsIsStructurallyPaid = refl
 entropyExtractionAndAtomicLimitAreSourcePaid :
   Terminal.entropyMaxwellAtomicLimitSourceContract Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
 entropyExtractionAndAtomicLimitAreSourcePaid = refl
+
+entropyCombinatorialReplayWasExecuted :
+  Terminal.entropyCombinatorialNumericalReplay Terminal.currentTerminalFrontier ≡ Terminal.numericallyExecuted
+entropyCombinatorialReplayWasExecuted = refl
 
 sameSampleQTMEntropyRemainsExternal :
   Terminal.sameSampleQTMEntropyReplay Terminal.currentTerminalFrontier ≡ Terminal.externalOnly
@@ -75,6 +87,10 @@ geometryCaloricCycleRemainsExternal = refl
 brownMaclayTheoryIsSourcePaid :
   Terminal.brownMaclayRenormalizedStressTheory Terminal.currentTerminalFrontier ≡ Terminal.sourcePaid
 brownMaclayTheoryIsSourcePaid = refl
+
+finiteDiskCasimirProxyWasExecuted :
+  Terminal.casimirFiniteDiskWeakFieldProxy Terminal.currentTerminalFrontier ≡ Terminal.numericallyExecuted
+finiteDiskCasimirProxyWasExecuted = refl
 
 measuredGravityBackreactionStillRequiresExperiment :
   Terminal.quantumStressMeasuredGRBackreaction Terminal.currentTerminalFrontier ≡ Terminal.requiresIndependentExperiment
