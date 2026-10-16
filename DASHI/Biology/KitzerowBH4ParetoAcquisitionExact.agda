@@ -57,11 +57,11 @@ iaccExposureArtifact =
 sameObjectBH4Experiment : AcquisitionTarget
 sameObjectBH4Experiment =
   acquisitionTarget
-    "multi-branch same-object BH4 allocation experiment beyond paid hepatic PAH-iNOS precedent"
-    "very high: directly targets the remaining live central causal edge after Pastor et al. 1996 partially pays a same-system two-branch discriminator"
-    "not an attribution target; closes scientific mechanism debt only if it extends beyond the paid rat-hepatic context"
-    "primary interventional experiment with calibrated BH4/BH2 + NAD(P)H + PAH/TH/TPH/NOS/AGMO molecular/cellular/circuit readouts"
-    "high experimental cost; historical hepatic PAH-iNOS precedent reduces design uncertainty but not the remaining acquisition burden"
+    "target-relevant multi-branch BH4 allocation experiment beyond paid hepatic and neural precedents"
+    "very high: directly targets the remaining live central causal edge after Pastor 1996 constrains PAH-iNOS competition and Hyland/Jiang constrain current-pool rescue sufficiency"
+    "not an attribution target; closes scientific mechanism debt only if it extends beyond the paid rat-hepatic and mouse neural/developmental contexts"
+    "primary interventional experiment with calibrated BH4/BH2 + NAD(P)H + PAH/TH/TPH/NOS/AGMO flux and enzyme-state readouts resolved by compartment/cell type/region/time"
+    "high experimental cost; historical direct constraints reduce model/design uncertainty but not the remaining target-relevant acquisition burden"
     Discovery.experimentalDesign
     false refl
 
@@ -110,4 +110,4 @@ canonicalKitzerowAcquisitionFrontier =
     false refl
     true refl
     false refl
-    "Pareto frontier preserves evidentiary impact, provenance closure, primary authority and acquisition cost as distinct dimensions. Pastor et al. 1996 changes the scientific target from generic same-object BH4 competition to cross-context multi-branch allocation; selection remains a work queue, not a truth or plagiarism ranking."
+    "Pareto frontier preserves evidentiary impact, provenance closure, primary authority and acquisition cost as distinct dimensions. Existing hepatic competition and neural rescue/context counterexamples change the scientific target from generic BH4 competition to target-relevant cross-context multi-branch allocation with state-history resolution; selection remains a work queue, not a truth or plagiarism ranking."
