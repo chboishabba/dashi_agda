@@ -5,6 +5,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.MaxwellGaugeFieldEquationScope as Maxwell
+import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as SU2Lie
+import DASHI.Physics.YangMills.BalabanSU2LieBracket as Bracket
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Stress
 
 ------------------------------------------------------------------------
@@ -22,7 +24,7 @@ import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as 
 record CasimirRestrictedActionNormalizationPayment : Set₁ where
   field
     SelectedField : Set
-    selectedLieValue : SelectedField → _
+    selectedLieValue : SelectedField → SU2Lie.SU2LieAlgebra
 
     fieldImage :
       U1Stress.CanonicalCartanU1FieldImageReceipt SelectedField selectedLieValue
@@ -49,7 +51,10 @@ open CasimirRestrictedActionNormalizationPayment public
 restrictedFieldBracketZeroFromActionPayment :
   (payment : CasimirRestrictedActionNormalizationPayment) →
   ∀ left right →
-  _
+  Bracket.lieBracket
+    (selectedLieValue payment left)
+    (selectedLieValue payment right)
+  ≡ SU2Lie.lieZero
 restrictedFieldBracketZeroFromActionPayment payment =
   U1Stress.restrictedFieldBracketZero (fieldImage payment)
 
