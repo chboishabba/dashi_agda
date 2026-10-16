@@ -36,13 +36,13 @@ selectedCarrierInterpretationStillOpenRegression :
   H.selectedGroupInterpretedAsQuaternionSU2Paid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
 selectedCarrierInterpretationStillOpenRegression = refl
 
-selectedTableClassificationStillOpenRegression :
-  H.selectedGroupClassifiedAsSprint105SU2Paid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
-selectedTableClassificationStillOpenRegression = refl
-
 sprint105TagIsSecondaryRegression :
   H.sprint105ClassificationIsSecondaryConsistencyTag H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
 sprint105TagIsSecondaryRegression = refl
+
+sprint105TagNotRequiredForHostRegression :
+  H.sprint105ClassificationRequiredForHost H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+sprint105TagNotRequiredForHostRegression = refl
 
 hostDoesNotCreateStressEqualityRegression :
   H.SelectedSU2HostAutomaticallyIdentifiesBrownMaclayStress → ⊥
