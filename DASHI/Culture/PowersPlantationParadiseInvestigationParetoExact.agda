@@ -111,7 +111,7 @@ data PowersDepends : AcquisitionArtifact → AcquisitionArtifact → Set where
   issueReopensChronology : PowersDepends primaryIssueImage july1790ChronologyConsumer
   issueReopensEventLedger : PowersDepends primaryIssueImage performanceEventLedgerConsumer
   ruleInstrumentReopensSeating : PowersDepends seatingRuleInstrument seatingRuleConsumer
-  actorCompensationReopensDistribution : PowersDepends namedActorCompensationRecord actorDistributionConsumer
+  actorCompensationDependency : PowersDepends namedActorCompensationRecord actorDistributionConsumer
   estateRecordReopensSettlement : PowersDepends estateSettlementRecord compensationSettlementConsumer
 
 powersAcquisitionDependencyGraph :
@@ -152,7 +152,7 @@ ActorCompensationDistributionReopening =
 
 actorCompensationReopensDistribution : ActorCompensationDistributionReopening
 actorCompensationReopensDistribution =
-  Acquisition.oneEdgeAcquisitionReopening actorCompensationReopensDistribution
+  Acquisition.oneEdgeAcquisitionReopening actorCompensationDependency
 
 ------------------------------------------------------------------------
 -- Boundary.
