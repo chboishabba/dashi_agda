@@ -1,6 +1,7 @@
 module DASHI.Economics.AIOpenAIContractRealisationTerminalCashNonDescent20261016Exact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
@@ -73,7 +74,7 @@ everyRepairMustSeparateCustomerCashFromEquityCure refine repaired sameRefinement
     crrTerminalCashCollision repaired sameRefinement
 
 filedEquityCureMechanismPaid :
-  Cure.unlimitedEquityCuresBefore20261028 Cure.coreWeaveOpenAIContractRealisationCure ≡ Agda.Builtin.Bool.true
+  Cure.unlimitedEquityCuresBefore20261028 Cure.coreWeaveOpenAIContractRealisationCure ≡ true
 filedEquityCureMechanismPaid = Cure.unlimitedEquityCuresThrough20261027Paid
 
 boundary : String
