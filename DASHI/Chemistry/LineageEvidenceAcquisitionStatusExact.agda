@@ -10,9 +10,10 @@ import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact as Acquired
 import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact as Frontier
 import DASHI.Chemistry.PAHMechanismStatePromotionExact as PAH
 import DASHI.Chemistry.PAHElectronicStateHamiltonianMonsterProbeExact as ElectronicProbe
+import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact as Hepatic
 
 ------------------------------------------------------------------------
--- ACQUISITION STATUS AFTER PRIMARY/DIRECT WEB + MECHANISTIC PROMOTION PASS
+-- ACQUISITION STATUS AFTER PRIMARY/DIRECT WEB + MECHANISTIC/CAUSAL PASSES
 ------------------------------------------------------------------------
 
 data PaymentStatus : Set where
@@ -105,11 +106,11 @@ bh4FluxStatus : AcquisitionStatusReceipt
 bh4FluxStatus =
   acquisitionStatusReceipt
     "A1 BH4 same-system flux discriminator dataset"
-    unpaid
-    "none acquired; PAH mechanistic/electronic promotion is orthogonal"
-    "no same-system branch-allocation coordinate promoted"
-    "controlled BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO perturbation dataset remains the decisive payment"
-    "nearby pathway/mechanism/structure/QM-MM/electronic-state sources remain attributed but cannot substitute for the missing same-object flux experiment"
+    partiallyPaid
+    "KitzerowBH4HepaticCompetitionDiscriminatorExact.canonicalHepaticCompetitionDiscriminator"
+    "same-system rat hepatic PAH output, iNOS NOx output and cellular BH4/biopterin were jointly measured under phenylalanine/arginine/DAHP/BH4 perturbations; strong fixed-pool competition was weak with adequate synthesis but emerged when BH4 synthesis was constrained"
+    "extend from the PAH-iNOS hepatic subgraph to compartment/cell-type-resolved BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO measurements, especially human/neural and pre-specified subgroup contexts"
+    "Pastor et al. 1996 retain experimental ownership; this pays only the rat hepatic PAH-iNOS discriminator and does not establish a universal allocator, human neurobiology or autism causation"
     false refl
 
 chlorCalibrationStatus : AcquisitionStatusReceipt
@@ -146,6 +147,7 @@ brazilContactStatus =
     false refl
 
 iaccContactStatus : AcquisitionStatusReceipt
+  
 iaccContactStatus =
   acquisitionStatusReceipt
     "P3 IACC/MedMaps contact provenance"
@@ -184,6 +186,10 @@ record EvidenceAcquisitionStatusBoundary : Set where
     mechanisticPromotionClosesFluxTargetIsFalse : mechanisticPromotionClosesFluxTarget ≡ false
     failedMonsterProbeCreatesAcquisitionPriority : Bool
     failedMonsterProbeCreatesAcquisitionPriorityIsFalse : failedMonsterProbeCreatesAcquisitionPriority ≡ false
+    hepaticTwoBranchPaymentClosesWholeMultiBranchTarget : Bool
+    hepaticTwoBranchPaymentClosesWholeMultiBranchTargetIsFalse : hepaticTwoBranchPaymentClosesWholeMultiBranchTarget ≡ false
+    directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial : Bool
+    directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartialIsTrue : directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial ≡ true
     unresolvedTargetRemainsTyped : Bool
     unresolvedTargetRemainsTypedIsTrue : unresolvedTargetRemainsTyped ≡ true
 
@@ -191,4 +197,6 @@ open EvidenceAcquisitionStatusBoundary public
 
 canonicalEvidenceAcquisitionStatusBoundary : EvidenceAcquisitionStatusBoundary
 canonicalEvidenceAcquisitionStatusBoundary =
-  evidenceAcquisitionStatusBoundary false refl false refl false refl false refl false refl true refl
+  evidenceAcquisitionStatusBoundary
+    false refl false refl false refl false refl false refl
+    false refl true refl true refl
