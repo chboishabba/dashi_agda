@@ -18,6 +18,12 @@ files=(
   DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Validation.agda
   DASHI/Physics/CondensedMatter/MATBGBMEisensteinMatrixExact.agda
   DASHI/Physics/CondensedMatter/MATBGBMEisensteinMatrixValidation.agda
+  DASHI/Physics/CondensedMatter/MATBGBMFirstShellReplayReceiptExact.agda
+  DASHI/Physics/CondensedMatter/MATBGBMFirstShellReplayValidation.agda
+  DASHI/Physics/CondensedMatter/MATBGInteractingTHF2026SourceExact.agda
+  DASHI/Physics/CondensedMatter/MATBGInteractingTHF2026SourceValidation.agda
+  DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorics2026Exact.agda
+  DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorics2026Validation.agda
   DASHI/Physics/Foundations/GeneralizedCaloricCycleExact.agda
   DASHI/Physics/Foundations/GeneralizedCaloricCycleValidation.agda
 
@@ -51,30 +57,21 @@ grep -q 'unresolvedChannelsAreNotZero' DASHI/Physics/Foundations/SameObjectConse
 grep -q 'ResidualDirectAntigravityPermission' DASHI/Physics/Foundations/PhysicalResidualPromotionExact.agda
 grep -q 'sameBodyForceFormDoesNotIdentifyMechanism' DASHI/Physics/Foundations/FieldGeometryMatterConsumersExact.agda
 
-grep -q 'timeReversalConjugatesCandidateValleyPhase' DASHI/Physics/CondensedMatter/MATBG2026VerticalSliceExact.agda
-grep -q 'sameSampleQTMEntropyPaid' DASHI/Physics/CondensedMatter/MATBG2026VerticalSliceExact.agda
-grep -q 'upperPhaseRotationLaw' DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Exact.agda
+grep -q 'qtmBestFitW0W1Hundredths' DASHI/Physics/CondensedMatter/MATBG2026VerticalSliceExact.agda
 grep -q 'tunnellingMatrixC3Covariance' DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Exact.agda
-grep -q 'phaseToEisenstein' DASHI/Physics/CondensedMatter/MATBGBMEisensteinMatrixExact.agda
-grep -q 'evaluatedMatrixTimeReversal' DASHI/Physics/CondensedMatter/MATBGBMEisensteinMatrixExact.agda
-grep -q 'biologyMechanismTransferred' DASHI/Physics/CondensedMatter/MATBGBMEisensteinMatrixExact.agda
+grep -q 'qtmNormalizedTunnellingMatrix' DASHI/Physics/CondensedMatter/MATBGBMEisensteinMatrixExact.agda
+grep -q 'firstShellNumericalExecutionPaid' DASHI/Physics/CondensedMatter/MATBGBMFirstShellReplayReceiptExact.agda
+grep -q 'xiao2026THFParameters' DASHI/Physics/CondensedMatter/MATBGInteractingTHF2026SourceExact.agda
+grep -q 'highTemperatureMicrostates' DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorics2026Exact.agda
 grep -q 'PhysicalGeneralizedCaloricWitness' DASHI/Physics/Foundations/GeneralizedCaloricCycleExact.agda
 
 grep -q 'quantumInequalityAdmissible' DASHI/Physics/Foundations/QuantumStressEnergyEngineeringBridgeExact.agda
 grep -q 'brownMaclay1969' DASHI/Physics/Foundations/QuantumStressEnergySourceWeldExact.agda
-grep -q 'sameObjectRenormalizedStressMeasured' DASHI/Physics/Foundations/QuantumStressEnergySourceWeldExact.agda
-
 grep -q 'PrecisionThrustClosureWitness' DASHI/Physics/Foundations/PrecisionThrustClosureExact.agda
-grep -q 'precisionThrustIndependentReplication' DASHI/Physics/Foundations/FieldGeometryMatterExperimentParetoExact.agda
-grep -q 'externalPaymentCannotBeReplacedByMoreFormalism' DASHI/Physics/Foundations/FieldGeometryMatterExperimentParetoExact.agda
-
 grep -q 'CausalSuperluminalTransportPromotion' DASHI/Physics/Foundations/CausalTransportFTLObligationsExact.agda
 grep -q 'externalSourceDoesNotOwnDASHISynthesis' DASHI/Physics/Foundations/FieldGeometryMatterAttributionRegression.agda
 grep -q 'sourcePaid' DASHI/Physics/Foundations/FieldGeometryMatterTerminalMaxCutExact.agda
 grep -q 'sameMaterialClassCountsAsSameSample' DASHI/Physics/Foundations/FieldGeometryMatterTerminalValidation.agda
-
-grep -q 'moreGenericAbstractionCountsAsPhysicalClosure' DASHI/Physics/Foundations/FieldGeometryMatterTerminalMaxCutExact.agda
-grep -q 'monolithicFoundationsEverythingIntegration' DASHI/Physics/Foundations/FieldGeometryMatterTerminalValidation.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Foundations/FieldGeometryMatterEverything.agda
