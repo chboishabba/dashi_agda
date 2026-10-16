@@ -16,6 +16,9 @@ def install_mcp_adapter_semantic_extension(adapter_cls: type) -> None:
     def object_detail(self, symbol_id: str):
         return self.service.object_detail(symbol_id)
 
+    def narrative_archaeology(self, query: str, limit: int = 50):
+        return self.service.narrative_archaeology(query, limit=limit)
+
     def discover(self, query: str, limit: int = 50):
         return self.service.discover(query, limit=limit)
 
@@ -25,6 +28,7 @@ def install_mcp_adapter_semantic_extension(adapter_cls: type) -> None:
     adapter_cls.symbol_search = symbol_search
     adapter_cls.related_symbols = related_symbols
     adapter_cls.object_detail = object_detail
+    adapter_cls.narrative_archaeology = narrative_archaeology
     adapter_cls.discover = discover
     adapter_cls.round_lineage = round_lineage
     adapter_cls._semantic_discovery_installed = True
@@ -54,8 +58,13 @@ def install_mcp_server_semantic_extension(module) -> None:
             return tools.object_detail(symbol_id)
 
         @server.tool()
+        async def narrative_archaeology(query: str, limit: int = 50):
+            """Search cached PR/commit development narrative; results guide discovery but never establish theorem or empirical truth."""
+            return tools.narrative_archaeology(query, limit=limit)
+
+        @server.tool()
         async def discover(query: str, limit: int = 50):
-            """Return a discovery receipt; absence is fail-closed on stale/incomplete repo-index coverage."""
+            """Return a discovery receipt; absence is fail-closed on repo-index and narrative-archaeology completeness."""
             return tools.discover(query, limit=limit)
 
         @server.tool()
