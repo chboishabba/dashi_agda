@@ -37,6 +37,9 @@ metricClockDiscriminator = Anti.metricClockDiscriminator
 engineeredMetricResponse : Anti.AntigravityClaim
 engineeredMetricResponse = Anti.engineeredMetricResponse
 
+canonicalBothwellYe2022RedshiftComparison : Comparison.BothwellYe2022ComparisonReceipt
+canonicalBothwellYe2022RedshiftComparison = Comparison.canonicalBothwellYe2022ComparisonReceipt
+
 canonicalRequiredDiscriminatorForEngineeredMetricResponse :
   Anti.requiredDiscriminator engineeredMetricResponse ≡ metricClockDiscriminator
 canonicalRequiredDiscriminatorForEngineeredMetricResponse = refl
