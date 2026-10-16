@@ -16,6 +16,9 @@ import DASHI.Biology.KitzerowBH4TransportAcquisitionStatusExact
 import DASHI.Biology.KitzerowBH4NeuralInVivoRouteStateProbeExact
 import DASHI.Biology.KitzerowBH4NeuralInVivoRouteStateProbeValidation
 import DASHI.Biology.KitzerowBH4NeuralRouteStateAcquisitionStatusExact
+import DASHI.Biology.StrictEvidencePromotionBindingExact
+import DASHI.Biology.KitzerowBH4StrictEvidenceBindingExact
+import DASHI.Biology.KitzerowBH4StrictEvidenceBindingValidation
 import DASHI.Chemistry.LineageBidiDiscriminatorSynthesisExact
 import DASHI.Biology.CarbonSiliconReachableChemistryBenchmarkExact
 
@@ -33,6 +36,12 @@ import DASHI.Biology.KitzerowAttributionProvenanceSOTAExact
 import DASHI.Biology.KitzerowAttributionEvidenceLineageExact
 import DASHI.Biology.KitzerowAttributionEvidenceLineageValidation
 import DASHI.Biology.KitzerowAttributionAcquisitionStatusExact
+
+-- The autism/vaccine lane's strict promotion object is now reused directly:
+-- every positive BH4 promotion needs an exact evidence->claim and
+-- evidence->estimand witness. Shared BH4 subject matter or matching labels do
+-- not transport a Caco-2 rate into neural tissue or fuse separate TH/TPH studies
+-- into one simultaneous allocation experiment.
 
 -- A1 now carries bounded direct payments for hepatic competition, neural
 -- state-history, redox/spatial topology, context-specific carrier/transport
