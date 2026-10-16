@@ -13,6 +13,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Analysis.BishopRadixCellQuantisationExact as BishopCell
 import DASHI.Moonshine.OggSSPClimbingGymAnalyticRadixAdapterExact as Analytic
+import DASHI.Moonshine.OggSSPClimbingGymBishopPhaseCellExact as BishopPhase
 import DASHI.Moonshine.OggSSPClimbingGymEmpiricalReplayExact as Replay
 import DASHI.Moonshine.OggSSPClimbingGymExactHoleAnalyticBridge as HoleBridge
 import DASHI.Moonshine.OggSSPClimbingGymExactHoleRadixCodec as Hole
@@ -45,11 +46,13 @@ record ClimbingGymTerminalStatus : Set where
     exactHoleAddressWithoutRealFloorClosed : Bool
     exactHoleAnalyticAgreementSurfaceClosed : Bool
     certifiedBishopOpenCellToRadixClosed : Bool
+    certifiedBishopWallPhaseToRadixClosed : Bool
     concreteBishopSetoidCarrierAvailable : Bool
     sourceShiftSeedNonIdentifiabilityClosed : Bool
 
     -- Remaining same-object analytic frontier.
     concreteBishopGlobalLogPiPhaseClosed : Bool
+    actualZeroPhaseCellCertificatesClosed : Bool
     bishopSetoidEqualityCollapsedToPropositionalEquality : Bool
 
     -- Compatibility flag for the old monolithic frontier.  It now means a
@@ -89,10 +92,12 @@ canonicalClimbingGymTerminalStatus =
     true   -- m/p^a hole vertex address is compiled directly from natural m
     true   -- analytic hole-height observer can target that exact finite address
     true   -- strict Bishop open-cell certificate compiles to finite address
+    true   -- wall-specific certified Bishop phase compiles to native Ogg address
     true   -- concrete git-pinned Bishop setoid carrier exists on master
     true   -- rounded source summaries cannot uniquely recover a random sample
 
     false  -- Bishop global log + trigonometric-pi + actual phase weld not closed
+    false  -- no certified cells yet for actual numerical zero phases
     false  -- Bishop setoid equality is deliberately not identified with Agda ≡
 
     false  -- no globally total arbitrary-real floor/frac -> Fin is claimed
@@ -128,6 +133,18 @@ terminalCertifiedBishopCellIsNotTotalFloor :
     BishopCell.canonicalBishopRadixCellQuantisationBoundary
   ≡ false
 terminalCertifiedBishopCellIsNotTotalFloor = refl
+
+terminalCertifiedBishopWallPhaseIsNotTotalFloor :
+  BishopPhase.totalRealFloorRequired
+    BishopPhase.canonicalBishopPhaseCellBoundary
+  ≡ false
+terminalCertifiedBishopWallPhaseIsNotTotalFloor = refl
+
+terminalActualZeroPhaseCertificatesRemainOpen :
+  BishopPhase.actualZeroPhaseCellCertificatesConstructed
+    BishopPhase.canonicalBishopPhaseCellBoundary
+  ≡ false
+terminalActualZeroPhaseCertificatesRemainOpen = refl
 
 terminalExactHoleObserverUsesNatCodec :
   HoleBridge.holeAddressUsesExactNatRadixCodec
