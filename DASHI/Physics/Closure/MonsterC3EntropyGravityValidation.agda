@@ -28,10 +28,6 @@ import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact as Authori
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
 import DASHI.Physics.Closure.MonsterC3EntropyGravityMaxCutExact as MaxCut
 
-------------------------------------------------------------------------
--- Monster/C3 and state-count regressions.
-------------------------------------------------------------------------
-
 fineMonsterStatesRemainPresent :
   StateCount.MonsterC3StateCountingReceipt.identityVisibleStates
     StateCount.canonicalMonsterC3StateCountingReceipt ≡ 196883
@@ -62,19 +58,20 @@ selected3BProjectedActionStillUnpaid :
     ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ false
 selected3BProjectedActionStillUnpaid = refl
 
-------------------------------------------------------------------------
--- Chemistry Hamiltonian/state regressions.
-------------------------------------------------------------------------
-
 ammoniaGroundStateIs1A1 :
   NH3Electronic.NeutralElectronicReceipt.groundStateLabel
     NH3Electronic.canonicalNeutralElectronicReceipt ≡ "1A1"
 ammoniaGroundStateIs1A1 = refl
 
-sameObjectHamiltonianSkeletonPaid :
-  Hamiltonian.HamiltonianWavefunctionBoundary.sameObjectMolecularHamiltonianSkeletonPaid
+sameObjectSymbolicHamiltonianPaid :
+  Hamiltonian.HamiltonianWavefunctionBoundary.sameObjectSymbolicHamiltonianExpressionPaid
     Hamiltonian.canonicalHamiltonianWavefunctionBoundary ≡ true
-sameObjectHamiltonianSkeletonPaid = refl
+sameObjectSymbolicHamiltonianPaid = refl
+
+energyValuedHamiltonianStillUnpaid :
+  Hamiltonian.HamiltonianWavefunctionBoundary.energyValuedHamiltonianOperatorPaid
+    Hamiltonian.canonicalHamiltonianWavefunctionBoundary ≡ false
+energyValuedHamiltonianStillUnpaid = refl
 
 literalOccupationStateHasTenElectrons :
   Hamiltonian.NH3OccupationState.occupiedSpinOrbitalCount
@@ -97,8 +94,7 @@ authorReleasedMatrixIdentityPaid :
 authorReleasedMatrixIdentityPaid = refl
 
 authorReleasedMatrixDimension64 :
-  SCIArtifact.ReleasedSelectedCIArtifact.matrixDimension
-    SCIArtifact.nh3SelectedCI64Artifact ≡ 64
+  SCIArtifact.ReleasedSelectedCIArtifact.matrixDimension SCIArtifact.nh3SelectedCI64Artifact ≡ 64
 authorReleasedMatrixDimension64 = refl
 
 authorMatrixStillNotRediagonalizedByDASHI :
@@ -106,14 +102,20 @@ authorMatrixStillNotRediagonalizedByDASHI :
     SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
 authorMatrixStillNotRediagonalizedByDASHI = refl
 
-groundConfigurationC3ActionPaid :
-  GroundC3.GroundStateC3Boundary.literalGroundConfigurationC3ActionPaid
+groundDeterminantPhaseComputedFromOccupiedCarrier :
+  GroundC3.GroundStateC3Boundary.determinantPhaseComputedFromOccupiedCarrier
     GroundC3.canonicalGroundStateC3Boundary ≡ true
-groundConfigurationC3ActionPaid = refl
+groundDeterminantPhaseComputedFromOccupiedCarrier = refl
 
-------------------------------------------------------------------------
--- Exact NH3 <-> Monster quotient and native-369 refinement.
-------------------------------------------------------------------------
+trivialGroundConfigurationC3RepresentationPaid :
+  GroundC3.GroundStateC3Boundary.trivialGroundConfigurationC3RepresentationPaid
+    GroundC3.canonicalGroundStateC3Boundary ≡ true
+trivialGroundConfigurationC3RepresentationPaid = refl
+
+realSpaceGroundC3ActionStillUnpaid :
+  GroundC3.GroundStateC3Boundary.nontrivialRealSpaceWavefunctionC3ActionPaid
+    GroundC3.canonicalGroundStateC3Boundary ≡ false
+realSpaceGroundC3ActionStillUnpaid = refl
 
 nh3A1PlusEIsRegularC3 :
   NH3Regular.RegularC3CrossDomainBoundary.nh3A1PlusERestrictsToOneRegularC3
@@ -174,10 +176,6 @@ nontrivialMonsterActionStillUnpaid :
     MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
 nontrivialMonsterActionStillUnpaid = refl
 
-------------------------------------------------------------------------
--- Reaction regressions.
-------------------------------------------------------------------------
-
 proofRelevantC3ResolvedReactionPaid :
   H3C3.C3ResolvedH3AmmoniaBoundary.fullProofRelevantC3ResolvedReactionTransitionPaid
     H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
@@ -197,14 +195,25 @@ literal369ReactionHyperformPaid :
     Abstraction369.canonicalHyperformBoundary ≡ true
 literal369ReactionHyperformPaid = refl
 
-boundedGroundC3InterfacePaid :
-  Chemistry.ChemistryC3InterfaceStatus.boundedGroundConfigurationElectronicC3ActionPaid
-    Chemistry.canonicalChemistryC3InterfaceStatus ≡ true
-boundedGroundC3InterfacePaid = refl
+abstractionAtomicInventoryEndpointsPaid :
+  Abstraction369.HyperformBoundary.atomic369InventoryEndpointsPaid
+    Abstraction369.canonicalHyperformBoundary ≡ true
+abstractionAtomicInventoryEndpointsPaid = refl
 
-------------------------------------------------------------------------
--- Native microstate ensemble -> physical entropy/gravity boundary.
-------------------------------------------------------------------------
+abstractionIndividualAtomIdentityStillUnpaid :
+  Abstraction369.HyperformBoundary.individualAtomIdentityTransportPaid
+    Abstraction369.canonicalHyperformBoundary ≡ false
+abstractionIndividualAtomIdentityStillUnpaid = refl
+
+trivialGroundC3InterfacePaid :
+  Chemistry.ChemistryC3InterfaceStatus.trivialGroundConfigurationC3RepresentationPaid
+    Chemistry.canonicalChemistryC3InterfaceStatus ≡ true
+trivialGroundC3InterfacePaid = refl
+
+fullRealSpaceC3InterfaceStillUnpaid :
+  Chemistry.ChemistryC3InterfaceStatus.fullRealSpaceElectronicC3ActionInstantiated
+    Chemistry.canonicalChemistryC3InterfaceStatus ≡ false
+fullRealSpaceC3InterfaceStillUnpaid = refl
 
 normalizedFiniteCountingWeightsPaid :
   Uniform.CountingEnsembleBoundary.normalizedFiniteCountingWeightsPaid
@@ -242,10 +251,6 @@ observedFourDimensionalMonsterStillUnpaid :
   Physical.Monster3Plus1PhysicalSymmetryReceipt.monsterIsSymmetryOfObserved3Plus1Universe
     Physical.canonicalMonster3Plus1PhysicalSymmetryReceipt ≡ false
 observedFourDimensionalMonsterStillUnpaid = refl
-
-------------------------------------------------------------------------
--- Terminal receipt regressions.
-------------------------------------------------------------------------
 
 terminalReceiptKeepsMatrixRediagonalizationOpen :
   MaxCut.Receipt.authorReleasedMatrixRediagonalizedByDASHI MaxCut.canonicalReceipt ≡ false
