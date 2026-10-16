@@ -94,6 +94,14 @@ uptakeAndCocultureArePaidWithoutQuantitativeTransferPromotion :
 uptakeAndCocultureArePaidWithoutQuantitativeTransferPromotion =
   refl , (refl , (refl , refl))
 
+topologyResolvedBalanceIsRequiredButNumericalEdgesRemainOpen :
+  RedoxSpatial.topologyResolvedStateRequired RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ true
+  × RedoxSpatial.scalarProjectionIsLossy RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ true
+  × RedoxSpatial.numericEdgeFluxesPaid RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ false
+  × RedoxSpatial.directTransferFluxPaid RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ false
+topologyResolvedBalanceIsRequiredButNumericalEdgesRemainOpen =
+  refl , (refl , (refl , refl))
+
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation :
   Evidence.allCanonicalEvidenceReceiptsRejectWholeModelConfirmation ≡ true
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation = refl
