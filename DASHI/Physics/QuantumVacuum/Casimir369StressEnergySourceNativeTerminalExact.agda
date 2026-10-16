@@ -3,6 +3,7 @@ module DASHI.Physics.QuantumVacuum.Casimir369StressEnergySourceNativeTerminalExa
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 import DASHI.Physics.QuantumVacuum.Casimir369StressEnergyTerminalMaxCutExact as Legacy
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutExact as SourceHost
@@ -20,15 +21,6 @@ import DASHI.Physics.Foundations.BalabanQ1FiniteTangentCurveReductionExact as Q1
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
 import DASHI.Physics.YangMills.BalabanContinuumMetricStressPairingRound130Exact as R130
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact as R136
-
-------------------------------------------------------------------------
--- SOURCE-NATIVE TERMINAL RECUT
---
--- Generic callback-shaped action/path/readout sockets remain useful as local
--- compilers, but they are no longer the physical terminal.  The repository
--- already owns the concrete generated-action, finite-tangent-curve and metric-
--- stress representations.  Casimir must attach to those exact owners.
-------------------------------------------------------------------------
 
 legacyTerminalBoundary : Legacy.Casimir369StressEnergyTerminalBoundary
 legacyTerminalBoundary = Legacy.canonicalTerminalBoundary
@@ -79,11 +71,16 @@ round136GeneratedActionRecoveryOwner : String
 round136GeneratedActionRecoveryOwner =
   "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact"
 
--- Import anchors keep these exact existing owners in the terminal dependency
--- graph; no new generated action, source path or stress representation is made.
+round132CompilerLevel : ProofLevel
 round132CompilerLevel = R132.unifiedGeneratedActionDensityCompilerLevel
+
+q1UsesExactPresentCutTangent : Bool
 q1UsesExactPresentCutTangent = Q1.q1CurveUsesExactPresentCutFiniteTangent
+
+round130CompilerLevel : ProofLevel
 round130CompilerLevel = R130.continuumMetricStressPairingCompilerLevel
+
+round136CompilerLevel : ProofLevel
 round136CompilerLevel = R136.unifiedGeneratedActionRecoveryCompilerLevel
 
 record CasimirSourceNativeTerminalBoundary : Set where
@@ -105,7 +102,6 @@ record CasimirSourceNativeTerminalBoundary : Set where
     measuredAlphaEMRequiredForIdealCasimirActionWeld : Bool
     side4CartanCurlClosureCompilerPaid : Bool
     independentFiniteCartanCurlClosurePaymentRequired : Bool
-
     cartanFieldBracketCompilerPaid : Bool
     invariantPairingCompilerPaid : Bool
     abelianCurvatureCompilerPaid : Bool
@@ -118,13 +114,11 @@ record CasimirSourceNativeTerminalBoundary : Set where
     existingModeBoundaryRenormalizationWeldReused : Bool
     secondConductingPlateBoundaryRequired : Bool
     secondRenormalizationPrescriptionRequired : Bool
-
     round132SelectedGeneratedActionOwnerReused : Bool
     q1FiniteTangentCurveOwnerReused : Bool
     round130CanonicalMetricStressPairingOwnerReused : Bool
     metricBasisStressSymmetryCompilerPaid : Bool
     independentRestrictedStressSymmetryPaymentRequired : Bool
-
     round131RecoveredQFTAttachmentForR457Paid : Bool
     r457LiteralPinnedConstructionIdentityPaid : Bool
     selectedGroupQuaternionSU2RealizationPaid : Bool
@@ -212,7 +206,7 @@ sixteenthUnificationBlocker = missingEinsteinCommonMetricVariation
 seventeenthUnificationBlocker : RemainingSourceNativeCasimirBlocker
 seventeenthUnificationBlocker = missingCommonMetricProducerLanguage
 eighteenthUnificationBlocker : RemainingSourceNativeCasimirBlocker
-eighteenthUnificationBlocker = missingCasimirCommonActionVariationIdentification
+eseighteenthUnificationBlocker = missingCasimirCommonActionVariationIdentification
 
 firstAllSectorAssemblyLeaf : Round131.Round131AllSectorAssemblyLeaf
 firstAllSectorAssemblyLeaf = Round131.commonSectorMetricAndScalarConvention
