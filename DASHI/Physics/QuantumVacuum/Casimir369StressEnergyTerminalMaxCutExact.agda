@@ -11,6 +11,7 @@ import DASHI.Physics.QuantumVacuum.CasimirSetoidFullStressSameObjectExact as Str
 import DASHI.Physics.QuantumVacuum.CasimirQuantumInequalityBoundaryExact as QI
 import DASHI.Physics.QuantumVacuum.CasimirGRNullFocusingBridgeExact as GR
 import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationExact as GRQFTX
+import DASHI.Physics.QuantumVacuum.CasimirU1RecoveredQFTStressAttachmentExact as U1Attachment
 import DASHI.Physics.QuantumVacuum.CasimirSetoidAnalyticScalarExact as Setoid
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Kernel
 import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
@@ -65,6 +66,8 @@ open SameObjectSemiclassicalGravityPayment public
 record SameCandidateGRQFTUnificationPayment : Set₂ where
   field
     unifiedCandidate : Weld.UnifiedCandidate
+    selectedSectorStressAttachment :
+      U1Attachment.CasimirU1RecoveredQFTStressAttachment unifiedCandidate
     handoff :
       GRQFTX.CasimirSameCandidateGRQFTHandoff unifiedCandidate
     reading : String
@@ -91,15 +94,20 @@ record Casimir369StressEnergyTerminalBoundary : Set where
     conditionalGRDiagnosticCompilerReusePaid : Bool
     vacuumLambdaDiscriminatorPaid : Bool
     u1YangMillsGaugeArchitectureHandoffPaid : Bool
+    casimirSelectedRecoveredQFTSectorAttachmentInterfacePaid : Bool
     sameCandidateUnificationHandoffInterfacePaid : Bool
 
     concreteCanonicalSetoidScaleWitnessPaid : Bool
     legacyPropositionalQuotientPaid : Bool
     sameObjectQuantumInequalityPaid : Bool
     sameObjectANECApplicationPaid : Bool
+    casimirSelectedRecoveredQFTSectorStressAttachmentPaid : Bool
     nonAbelianQFTStressAggregationFromCasimirPaid : Bool
     clayMassGapPromotesCasimirPhysics : Bool
     casimirSharedStressIdentificationPaid : Bool
+    allSectorAggregationAndCommonVariationPaid : Bool
+    einsteinCommonMetricVariationPaid : Bool
+    commonMetricProducerLanguagePaid : Bool
     casimirCommonActionIdentificationPaid : Bool
     semiclassicalGravityBackreactionPaid : Bool
     directStressMeasurementPaid : Bool
@@ -112,8 +120,9 @@ canonicalTerminalBoundary : Casimir369StressEnergyTerminalBoundary
 canonicalTerminalBoundary =
   casimir-369-stress-energy-terminal-boundary
     true true true true true true true true true true true
-    true true true true true true
-    false false false false false false false false false false false false
+    true true true true true true true
+    false false false false false false false false
+    false false false false false false false false
 
 hyperfabricBoundaryWitness : Hyper.Casimir369HyperfabricBoundary
 hyperfabricBoundaryWitness = Hyper.canonicalCasimir369HyperfabricBoundary
@@ -138,13 +147,22 @@ grqftCrossPollinationBoundaryWitness :
 grqftCrossPollinationBoundaryWitness =
   GRQFTX.canonicalCasimirGRQFTCrossPollinationBoundary
 
+u1RecoveredQFTStressAttachmentBoundaryWitness :
+  U1Attachment.CasimirU1RecoveredQFTStressAttachmentBoundary
+u1RecoveredQFTStressAttachmentBoundaryWitness =
+  U1Attachment.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary
+
+------------------------------------------------------------------------
+-- No more numerology, projection collapse, or gauge-architecture collapse.
+------------------------------------------------------------------------
+
 data FurtherCardinalityFactorisationCountsAsPhysicalPayment : Set where
 data PointwiseViolationCountsAsAveragedViolationPayment : Set where
 data TheoryStressCountsAsMeasuredGravityPayment : Set where
 data SharedActiveProjectionCountsAsSameStressEnergyWeld : Set where
 data ConditionalRicciDiagnosticCountsAsSolvedCasimirGeometry : Set where
-
 data U1GaugeEmbeddingCountsAsNonAbelianStressAggregation : Set where
+data SelectedSectorStressAttachmentCountsAsAllSectorStressWeld : Set where
 
 furtherCardinalityIsNotPayment :
   FurtherCardinalityFactorisationCountsAsPhysicalPayment → ⊥
@@ -170,13 +188,26 @@ u1GaugeEmbeddingIsNotNonAbelianAggregation :
   U1GaugeEmbeddingCountsAsNonAbelianStressAggregation → ⊥
 u1GaugeEmbeddingIsNotNonAbelianAggregation ()
 
+selectedSectorAttachmentIsNotAllSectorStressWeld :
+  SelectedSectorStressAttachmentCountsAsAllSectorStressWeld → ⊥
+selectedSectorAttachmentIsNotAllSectorStressWeld ()
+
+------------------------------------------------------------------------
+-- Machine-readable first-blocker ordering.
+------------------------------------------------------------------------
+
 data RemainingCasimirStressEnergyBlocker : Set where
   missingConcreteCanonicalSetoidAuthorityAndScaleWitness : RemainingCasimirStressEnergyBlocker
   missingOptionalLegacyQuotient : RemainingCasimirStressEnergyBlocker
   missingSpecifiedQISamplingApplication : RemainingCasimirStressEnergyBlocker
   missingSpecifiedANECApplication : RemainingCasimirStressEnergyBlocker
-  missingCasimirSharedStressIdentificationInUnifiedCandidate : RemainingCasimirStressEnergyBlocker
+
+  missingCasimirU1RestrictedSelectedQFTStressAttachment : RemainingCasimirStressEnergyBlocker
+  missingAllSectorAggregationAndCommonVariation : RemainingCasimirStressEnergyBlocker
+  missingEinsteinCommonMetricVariation : RemainingCasimirStressEnergyBlocker
+  missingCommonMetricProducerLanguage : RemainingCasimirStressEnergyBlocker
   missingCasimirCommonActionVariationIdentification : RemainingCasimirStressEnergyBlocker
+
   missingSemiclassicalGravitySameObjectWeld : RemainingCasimirStressEnergyBlocker
   missingDirectStressOrGravityMeasurement : RemainingCasimirStressEnergyBlocker
   missingExactHeadKernelReceipt : RemainingCasimirStressEnergyBlocker
@@ -190,7 +221,19 @@ firstAveragedConditionBlocker = missingSpecifiedQISamplingApplication
 
 firstUnificationBlocker : RemainingCasimirStressEnergyBlocker
 firstUnificationBlocker =
-  missingCasimirSharedStressIdentificationInUnifiedCandidate
+  missingCasimirU1RestrictedSelectedQFTStressAttachment
+
+secondUnificationBlocker : RemainingCasimirStressEnergyBlocker
+secondUnificationBlocker =
+  missingAllSectorAggregationAndCommonVariation
+
+thirdUnificationBlocker : RemainingCasimirStressEnergyBlocker
+thirdUnificationBlocker =
+  missingEinsteinCommonMetricVariation
+
+fourthUnificationBlocker : RemainingCasimirStressEnergyBlocker
+fourthUnificationBlocker =
+  missingCommonMetricProducerLanguage
 
 firstGravityBlocker : RemainingCasimirStressEnergyBlocker
 firstGravityBlocker = missingSemiclassicalGravitySameObjectWeld
@@ -200,4 +243,4 @@ firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
 terminalReading : String
 terminalReading =
-  "The internal finite 369/SO3 carrier work, spatial 9->3->1 stress contraction, Brown-Maclay normalized 4x4 stress fingerprint, arbitrary-direction pointwise NEC formula, local WEC/SEC/DEC verdicts, setoid-native full-stress interface, Ford-Roman QI provenance and GR NEC/null-convergence firewall are paid. GRQFT cross-pollination puts the normalized Casimir tensor on the existing RationalTensor4 carrier, proves that Casimir and the finite GR fixture share active projection -2 while retaining different trace/component fingerprints, reuses the normalized trace-reversal/Raychaudhuri compilers conditionally, and uses the isotropic vacuum-Lambda ray as a discriminator. The electromagnetic U(1) lane also enters the repo SU(2)/Yang-Mills gauge architecture through the exact abelian restriction, but this does not pay non-abelian QFT sector-stress aggregation and does not let the Clay mass-gap lane prove Casimir physics. The first Casimir-local mathematical payment remains an inhabited BishopCasimirSetoidAuthority plus positive scale witness. The first unification payment is literal identification of that same Casimir stress inside a UnifiedCandidate SharedStressEnergy carrier, followed by common-action/source identification and overlap/backreaction/correction evidence. QI/ANEC require explicit averaging prescriptions; semiclassical gravity requires a same-object Einstein/conservation/geometry solution; experiment requires direct stress/gravity measurement. Further 3/6/9/18/27 factorisation, shared active projection, a conditional Ricci diagnostic, or U(1) gauge embedding is not physical unification payment."
+  "The internal finite 369/SO3 carrier work, spatial 9->3->1 stress contraction, Brown-Maclay normalized 4x4 stress fingerprint, arbitrary-direction pointwise NEC formula, local WEC/SEC/DEC verdicts, setoid-native full-stress interface, Ford-Roman QI provenance and GR NEC/null-convergence firewall are paid. GRQFT cross-pollination puts the normalized Casimir tensor on the existing RationalTensor4 carrier, proves that Casimir and the finite GR fixture share active projection -2 while retaining different trace/component fingerprints, conditionally reuses the normalized trace-reversal/Raychaudhuri compilers, and uses the isotropic vacuum-Lambda ray as a discriminator. The electromagnetic U(1) lane enters the repo SU(2)/Yang-Mills gauge architecture through the exact abelian restriction. The first Casimir unification stress payment is now sharper than a generic SharedStressEnergy token: choose the actual recovered-QFT compact-simple sector hosting that U(1) restriction and prove its evaluated actual selected stress equals Brown-Maclay componentwise on every Axis4 pair. Existing qftSectorStressToShared then handles selected-sector transport. The next leaves are the existing pinned-YM GRQFT leaves: all-sector aggregation/common variation, Einstein common metric variation, and common metric producer language; a selected-sector attachment is not a total stress weld. The first Casimir-local mathematical payment remains an inhabited BishopCasimirSetoidAuthority plus positive scale witness. QI/ANEC require explicit averaging prescriptions; semiclassical gravity requires a same-object Einstein/conservation/geometry solution; experiment requires direct stress/gravity measurement. Further 3/6/9/18/27 factorisation, shared active projection, a conditional Ricci diagnostic, or U(1) gauge embedding is not physical unification payment."
