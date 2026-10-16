@@ -35,7 +35,7 @@ on:
       - 'DASHI/Biology/TraumaRelationalLearningNonpromotionExact.agda'
       - 'DASHI/Biology/TriangulationParentificationSourceAtlasExact.agda'
       - 'DASHI/Biology/InterparentalThreatRelationalAdaptationSourceAtlasExact.agda'
-      - 'DASHI/TraumaRelationalPerspectiveHyperfabric.agda'
+      - 'DASHI/TraumaRelationalPerspectiveHyperfabricExact.agda'
       - 'DASHI/EverythingRelationalTrialecticHyperfabric.agda'
       - '.github/workflows/relational-trialectic-hyperfabric.yml'
   pull_request:
@@ -72,7 +72,7 @@ on:
       - 'DASHI/Biology/TraumaRelationalLearningNonpromotionExact.agda'
       - 'DASHI/Biology/TriangulationParentificationSourceAtlasExact.agda'
       - 'DASHI/Biology/InterparentalThreatRelationalAdaptationSourceAtlasExact.agda'
-      - 'DASHI/TraumaRelationalPerspectiveHyperfabric.agda'
+      - 'DASHI/TraumaRelationalPerspectiveHyperfabricExact.agda'
       - 'DASHI/EverythingRelationalTrialecticHyperfabric.agda'
       - '.github/workflows/relational-trialectic-hyperfabric.yml'
 
