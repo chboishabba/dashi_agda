@@ -5,14 +5,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsBasicLawWitnessesExact as Basic
 
-commutativityPaid : Basic.commutativityKernelWitnessPaid Basic.canonicalBasicLawBoundary ≡ true
+commutativityPaid : Basic.commutativityKernelWitnessSourceWritten Basic.canonicalBasicLawBoundary ≡ true
 commutativityPaid = refl
 
-twoSidedUnitPaid : Basic.twoSidedUnitKernelWitnessPaid Basic.canonicalBasicLawBoundary ≡ true
-twoSidedUnitPaid = refl
-
-cubicUnitPaid : Basic.cubicUnitKernelWitnessPaid Basic.canonicalBasicLawBoundary ≡ true
+cubicUnitPaid : Basic.cubicUnitKernelWitnessSourceWritten Basic.canonicalBasicLawBoundary ≡ true
 cubicUnitPaid = refl
+
+twoSidedUnitStillOpen : Basic.twoSidedUnitKernelWitnessPaid Basic.canonicalBasicLawBoundary ≡ false
+twoSidedUnitStillOpen = refl
 
 jordanIdentityStillOpen : Basic.jordanIdentityKernelWitnessPaid Basic.canonicalBasicLawBoundary ≡ false
 jordanIdentityStillOpen = refl
