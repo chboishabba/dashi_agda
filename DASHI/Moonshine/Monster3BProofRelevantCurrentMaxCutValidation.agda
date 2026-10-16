@@ -50,6 +50,12 @@ _ = refl
 _ : C.suzukiProofRelevantOccurrenceGateAvailable C.currentMonster3BMaxCut ≡ true
 _ = refl
 
+_ : C.complementaryTwoBlockAssemblySourceWritten C.currentMonster3BMaxCut ≡ true
+_ = refl
+
+_ : C.twoBlockAssemblyLeanKernelObserved C.currentMonster3BMaxCut ≡ false
+_ = refl
+
 _ : C.suzukiMatcherExecutedHere C.currentMonster3BMaxCut ≡ false
 _ = refl
 
@@ -57,6 +63,9 @@ _ : C.suzukiPairFamilyOccurrencePaidInAgda C.currentMonster3BMaxCut ≡ false
 _ = refl
 
 _ : C.suzukiIndividualZetaOrientationPaidInAgda C.currentMonster3BMaxCut ≡ false
+_ = refl
+
+_ : C.actualTwelveSeventyEightComplementarityPaid C.currentMonster3BMaxCut ≡ false
 _ = refl
 
 _ : C.externalGapBooleanCreatesAgdaProof C.currentMonster3BMaxCut ≡ false
