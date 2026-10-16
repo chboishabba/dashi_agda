@@ -25,14 +25,15 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (just)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Product using (Σ; _,_; proj₁; proj₂)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
 import DASHI.Mathematics.Complexity.CanonicalVirtualFormulaBitSourceExact as Canonical
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
 import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact as Semantics
+import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.CodedFiniteStaticBitLookupExact as Static
 
 ------------------------------------------------------------------------
@@ -53,9 +54,7 @@ formulaBitsShape :
   NonemptyBits (Binary.encodeFormulaBits formula)
 formulaBitsShape (Cook.variable index) =
   nonempty-bits false
-    (true ∷ false ∷ Binary.encodeTokenStream
-      (DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact.encodeNatInto
-        index []))
+    (true ∷ false ∷ Binary.encodeTokenStream (Prefix.encodeNatInto index []))
     refl
 formulaBitsShape (Cook.constant false) =
   nonempty-bits false (true ∷ true ∷ []) refl
@@ -132,7 +131,7 @@ formulaTable formula =
 
 formulaStaticLookupCode :
   (formula : Cook.BooleanFormula) →
-  DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact.CodedFiniteStandardTM
+  Coded.CodedFiniteStandardTM
 formulaStaticLookupCode formula =
   Static.staticLookupCode (formulaTable formula)
 
