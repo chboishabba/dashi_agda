@@ -67,7 +67,7 @@ coarse369NotSufficientForExecutionLength =
 ------------------------------------------------------------------------
 
 record GoldbachReductionConsumerBoundary : Set where
-  constructor goldbachReductionConsumerBoundary
+  constructor mkGoldbachReductionConsumerBoundary
   field
     mikeOwnsGoldbach29Construction : Bool
     dashiOwnsObserverTranslation : Bool
@@ -75,7 +75,7 @@ record GoldbachReductionConsumerBoundary : Set where
     literalFineStateIdentityRequired : Bool
     consumerRelativeAdequacyRequired : Bool
     weakOrStutteringSimulationIsNaturalTarget : Bool
-    fullReachableWeakBisimulationPaid : Bool
+    fullReachableWeakBisimulationPaidFlag : Bool
     goldbachConjectureSolvedByThisBridge : Bool
 
 open GoldbachReductionConsumerBoundary public
@@ -83,7 +83,7 @@ open GoldbachReductionConsumerBoundary public
 canonicalGoldbachReductionConsumerBoundary :
   GoldbachReductionConsumerBoundary
 canonicalGoldbachReductionConsumerBoundary =
-  goldbachReductionConsumerBoundary
+  mkGoldbachReductionConsumerBoundary
     true
     true
     true
@@ -92,16 +92,6 @@ canonicalGoldbachReductionConsumerBoundary =
     true
     false
     false
-
-mikeOwnsGoldbach29Construction :
-  GoldbachReductionConsumerBoundary → Bool
-mikeOwnsGoldbach29Construction =
-  GoldbachReductionConsumerBoundary.mikeOwnsGoldbach29Construction
-
-dashiOwnsObserverTranslation :
-  GoldbachReductionConsumerBoundary → Bool
-dashiOwnsObserverTranslation =
-  GoldbachReductionConsumerBoundary.dashiOwnsObserverTranslation
 
 fullReachableWeakBisimulationPaid : Bool
 fullReachableWeakBisimulationPaid = false
