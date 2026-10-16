@@ -93,11 +93,18 @@ import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 -- the generic equal-character-simple-representation isomorphism theorem.
 --
 -- Promotion is proof-relevant: legacy Set-valued fields name proposition types
--- but do not count as proofs. The fixed-phase character compiler now shows that
+-- but do not count as proofs. The fixed-phase character compiler shows that
 -- once the explicit Schrodinger rep and one actual selected constituent are
 -- transported into the same representation theory, the equivariant H_zeta iso
--- fills both recognition and action-intertwiner witnesses automatically.
--- The Suzuki 12+78 occurrence/orientation chain is hardened in the same way:
+-- fills both recognition/action witnesses. A second, shorter whole-character
+-- route is now source-written generically: after the SAME actual restricted
+-- sector has a proof-relevant classifier saying every simple submodule is
+-- H_zeta, pinned mathlib `IsIsotypicOfType.linearEquiv_fun` assembles finite
+-- H_zeta copies automatically. Literal ninety-constituent enumeration is thus
+-- a fallback rather than a mandatory generic assembly step. The classifier,
+-- Monster same-object bindings and copy count 90 remain independent payments.
+--
+-- The Suzuki 12+78 occurrence/orientation chain is hardened similarly:
 -- external GAP/CTblLib execution remains evidence, while Agda promotion requires
 -- inhabitants for pair restriction, main split, quotient descent, actual
 -- Monster occurrence, same-object identity and individual zeta orientation.
@@ -122,6 +129,8 @@ import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptExact
 import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptValidation
 import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptExact
 import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptValidation
+import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact
+import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptValidation
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningValidation
 import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact
