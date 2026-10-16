@@ -11,6 +11,7 @@ import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact as Frontier
 import DASHI.Chemistry.PAHMechanismStatePromotionExact as PAH
 import DASHI.Chemistry.PAHElectronicStateHamiltonianMonsterProbeExact as ElectronicProbe
 import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact as Hepatic
+import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorExact as Neural
 
 ------------------------------------------------------------------------
 -- ACQUISITION STATUS AFTER PRIMARY/DIRECT WEB + MECHANISTIC/CAUSAL PASSES
@@ -107,10 +108,21 @@ bh4FluxStatus =
   acquisitionStatusReceipt
     "A1 BH4 same-system flux discriminator dataset"
     partiallyPaid
-    "KitzerowBH4HepaticCompetitionDiscriminatorExact.canonicalHepaticCompetitionDiscriminator"
-    "same-system rat hepatic PAH output, iNOS NOx output and cellular BH4/biopterin were jointly measured under phenylalanine/arginine/DAHP/BH4 perturbations; strong fixed-pool competition was weak with adequate synthesis but emerged when BH4 synthesis was constrained"
-    "extend from the PAH-iNOS hepatic subgraph to compartment/cell-type-resolved BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO measurements, especially human/neural and pre-specified subgroup contexts"
-    "Pastor et al. 1996 retain experimental ownership; this pays only the rat hepatic PAH-iNOS discriminator and does not establish a universal allocator, human neurobiology or autism causation"
+    "KitzerowBH4HepaticCompetitionDiscriminatorExact + KitzerowBH4NeuralContextDiscriminatorExact"
+    "rat hepatic PAH/iNOS competition is directly constrained, and mouse neural studies directly show that restoring total brain BH4 need not restore monoamine/dopamine function; naive fixed-pool/current-pool-sufficiency readings are therefore already narrowed"
+    "target-relevant human/neural multi-branch BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO measurements with enzyme abundance/localization, compartment, region/cell type, timing and subgroup controls remain the decisive payment"
+    "Pastor 1996; Hyland et al. 1996; Sumi-Ichinose et al. 2001; Jiang et al. 2024 retain experimental ownership. DASHI owns only the cross-study discriminator composition; these studies do not establish autism causation or whole-model validity"
+    false refl
+
+bh4NeuralContextStatus : AcquisitionStatusReceipt
+bh4NeuralContextStatus =
+  acquisitionStatusReceipt
+    "A1-neural BH4 current-pool versus state-history discriminator"
+    paidForDeclaredCoordinate
+    "KitzerowBH4NeuralContextDiscriminatorExact.canonicalNeuralContextDiscriminator"
+    "current total brain BH4 alone is insufficient to identify downstream monoamine/dopamine recovery after chronic/developmental deficiency; enzyme abundance, anatomical region and developmental timing remain necessary coordinates"
+    "translate this state-history/region dependence into target-relevant human or organoid same-object branch-flux measurements and determine which refined architecture explains it"
+    "three primary mouse studies retain their individual claims; the declared coordinate is paid without transferring species/context or proving the broader causal model"
     false refl
 
 chlorCalibrationStatus : AcquisitionStatusReceipt
@@ -147,7 +159,6 @@ brazilContactStatus =
     false refl
 
 iaccContactStatus : AcquisitionStatusReceipt
-  
 iaccContactStatus =
   acquisitionStatusReceipt
     "P3 IACC/MedMaps contact provenance"
@@ -161,6 +172,7 @@ iaccContactStatus =
 canonicalAcquisitionStatuses : List AcquisitionStatusReceipt
 canonicalAcquisitionStatuses =
   bh4FluxStatus
+  ∷ bh4NeuralContextStatus
   ∷ pahAtomMappingStatus
   ∷ pahKineticsStatus
   ∷ pbCaTargetStatus
@@ -188,6 +200,8 @@ record EvidenceAcquisitionStatusBoundary : Set where
     failedMonsterProbeCreatesAcquisitionPriorityIsFalse : failedMonsterProbeCreatesAcquisitionPriority ≡ false
     hepaticTwoBranchPaymentClosesWholeMultiBranchTarget : Bool
     hepaticTwoBranchPaymentClosesWholeMultiBranchTargetIsFalse : hepaticTwoBranchPaymentClosesWholeMultiBranchTarget ≡ false
+    currentPoolRestorationGuaranteesFunctionalRescue : Bool
+    currentPoolRestorationGuaranteesFunctionalRescueIsFalse : currentPoolRestorationGuaranteesFunctionalRescue ≡ false
     directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial : Bool
     directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartialIsTrue : directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial ≡ true
     unresolvedTargetRemainsTyped : Bool
@@ -199,4 +213,4 @@ canonicalEvidenceAcquisitionStatusBoundary : EvidenceAcquisitionStatusBoundary
 canonicalEvidenceAcquisitionStatusBoundary =
   evidenceAcquisitionStatusBoundary
     false refl false refl false refl false refl false refl
-    false refl true refl true refl
+    false refl false refl true refl true refl
