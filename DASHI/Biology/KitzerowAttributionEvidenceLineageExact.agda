@@ -10,16 +10,18 @@ import DASHI.Core.ReopenableConsumerInterventionKernelExact as Kernel
 import DASHI.Core.AttributedPublicClaimExact as Public
 import DASHI.Wikimedia.IbrahimSnowballSystematicReviewMetaAnalysisPublicationBiasBidiExact as Systematic
 import DASHI.Law.SolomonIslandsDefeatMotionRepublicationIndependenceExact as Republication
+import DASHI.Culture.WitchRelationalAttributionDialogueBidiExact as Relational
 import DASHI.Biology.KitzerowPriorityAttributionExact as Priority
 
 ------------------------------------------------------------------------
 -- KITZEROW ATTRIBUTION EVIDENCE LINEAGE
 --
--- Cross-pollinates the repo's existing public-claim, republication and
--- evidence-independence machinery into the Kitzerow chronology/exposure lane.
--- Publication/report multiplicity is not evidence independence. Exposure is
--- not derivation. Post-publication contact cannot establish an earlier exposure
--- event. Exact text, near-text, idea/process/result reuse, generic structural
+-- Cross-pollinates the repo's existing public-claim, republication,
+-- relational-attribution and evidence-independence machinery into the Kitzerow
+-- chronology/exposure lane. Publication/report multiplicity is not evidence
+-- independence. Exposure is not derivation. A later reply/dispute creates a
+-- new provenance event and cannot rewrite the earlier manifestation's history.
+-- Exact text, near-text, idea/process/result reuse, generic structural
 -- similarity and documented direct use remain different evidence classes.
 ------------------------------------------------------------------------
 
@@ -160,7 +162,7 @@ canonicalKitzerowContactIndependenceReceipt =
     "Stanford, Brazil and IACC are distinct attribution questions but their currently canonical contact/exposure claims are not three independent authentications merely because they are separately narrated from the same originator provenance root"
 
 ------------------------------------------------------------------------
--- Temporal-direction receipts.
+-- Temporal-direction and dialogue/provenance receipts.
 ------------------------------------------------------------------------
 
 record DirectionalProvenance : Set where
@@ -174,6 +176,9 @@ record DirectionalProvenance : Set where
     brazilNeedsEarlierExposureOrManuscriptHistory : Bool
     brazilNeedsEarlierExposureOrManuscriptHistoryIsTrue :
       brazilNeedsEarlierExposureOrManuscriptHistory ≡ true
+    responseCreatesNewProvenanceWithoutRewritingEarlierManifestation : Bool
+    responseCreatesNewProvenanceWithoutRewritingEarlierManifestationIsTrue :
+      responseCreatesNewProvenanceWithoutRewritingEarlierManifestation ≡ true
     nextEvidence : String
 
 open DirectionalProvenance public
@@ -185,12 +190,11 @@ canonicalBrazilDirectionalProvenance =
     afterComparisonPublication
     false refl
     true refl
-    "to test derivation of the published review, acquire an authenticated exposure event that predates the relevant manuscript state and/or versioned manuscript/preprint history showing a traceable change; post-publication complaint/response correspondence can authenticate later interaction but cannot retroactively create earlier exposure"
+    true refl
+    "to test derivation of the published review, acquire an authenticated exposure event that predates the relevant manuscript state and/or versioned manuscript/preprint history showing a traceable change; post-publication complaint/response correspondence creates a later provenance event but cannot retroactively create or rewrite earlier exposure/derivation"
 
 ------------------------------------------------------------------------
--- Cross-domain no-collapse boundary. The normative interpretation aligns the
--- repo's pre-existing hbomberguy/republication intuition with its generic
--- evidence kernel and systematic-review independence machinery.
+-- Cross-domain no-collapse boundary.
 ------------------------------------------------------------------------
 
 record KitzerowAttributionLineageBoundary : Set where
@@ -208,6 +212,9 @@ record KitzerowAttributionLineageBoundary : Set where
     postPublicationContactProvesPrePublicationExposure : Bool
     postPublicationContactProvesPrePublicationExposureIsFalse :
       postPublicationContactProvesPrePublicationExposure ≡ false
+    laterResponseRewritesEarlierProvenance : Bool
+    laterResponseRewritesEarlierProvenanceIsFalse :
+      laterResponseRewritesEarlierProvenance ≡ false
     authenticatedPrePublicationExposureAloneProvesDerivation : Bool
     authenticatedPrePublicationExposureAloneProvesDerivationIsFalse :
       authenticatedPrePublicationExposureAloneProvesDerivation ≡ false
@@ -241,6 +248,7 @@ canonicalKitzerowAttributionLineageBoundary =
     false refl
     false refl
     false refl
+    false refl
     true refl
     true refl
     true refl
@@ -264,3 +272,6 @@ publicClaimBoundary = Public.canonicalPublicClaimBoundary
 
 republicationState : Republication.CurrentRepublicationState
 republicationState = Republication.currentRepublicationState
+
+relationalAttributionBoundary : Relational.WitchRelationalAttributionBoundary
+relationalAttributionBoundary = Relational.canonicalWitchRelationalAttributionBoundary
