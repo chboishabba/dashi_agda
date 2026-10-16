@@ -19,6 +19,22 @@ inertTraceZeroObserved = refl
 inertLocalEulerShapeObserved : Receipt.inertLocalEulerShapeObserved ≡ true
 inertLocalEulerShapeObserved = refl
 
+genericCubicJacobiCompilerObserved :
+  Receipt.genericCubicJacobiCompilerObserved ≡ true
+genericCubicJacobiCompilerObserved = refl
+
+mathlibOrderThreeCharacterExistenceObserved :
+  Receipt.mathlibOrderThreeMulCharExistenceObserved ≡ true
+mathlibOrderThreeCharacterExistenceObserved = refl
+
+cubeFibreCertificateStillUnpaid :
+  Receipt.canonicalCubeFibreCharacterCertificateObserved ≡ false
+cubeFibreCertificateStillUnpaid = refl
+
+jacobiEisensteinEvaluationStillUnpaid :
+  Receipt.jacobiSumEisensteinPrimeEvaluationObserved ≡ false
+jacobiEisensteinEvaluationStillUnpaid = refl
+
 splitPrimeTraceStillUnpaid : Receipt.splitPrimeTraceObserved ≡ false
 splitPrimeTraceStillUnpaid = refl
 
@@ -31,6 +47,10 @@ noDirichletEllipticFactorCollapse = refl
 
 noLeanProofObjectImported : Receipt.leanProofObjectImportedIntoAgda ≡ false
 noLeanProofObjectImported = refl
+
+noAgdaJacobiTheoremManufactured :
+  Receipt.agdaCubicJacobiTheoremInhabitedFromReceipt ≡ false
+noAgdaJacobiTheoremManufactured = refl
 
 noExternalScientificSourceAcquired :
   Receipt.externalScientificSourceAcquiredByThisReceipt ≡ false
