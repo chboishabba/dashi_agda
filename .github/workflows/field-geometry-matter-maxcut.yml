@@ -14,12 +14,16 @@ on:
       - 'DASHI/Physics/Foundations/CausalTransportFTL*.agda'
       - 'DASHI/Physics/CondensedMatter/MATBG*.agda'
       - 'scripts/check_field_geometry_matter_maxcut.sh'
+      - 'scripts/check_field_geometry_matter_evidence.py'
       - 'scripts/matbg_*.py'
       - 'scripts/casimir_*.py'
       - 'Docs/evidence/matbg_*.json'
       - 'Docs/evidence/casimir_*.json'
       - '.github/workflows/field-geometry-matter-maxcut.yml'
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
   group: dashi-global-${{ github.ref }}
@@ -33,7 +37,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+          persist-credentials: false
       - uses: cachix/install-nix-action@v27
       - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Check field-geometry-matter evidence reproduction
+        run: python3 scripts/check_field_geometry_matter_evidence.py
       - name: Check field-geometry-matter conservation, materials, thermodynamic, quantum-stress and causal boundaries
         run: nix develop --command bash scripts/check_field_geometry_matter_maxcut.sh
