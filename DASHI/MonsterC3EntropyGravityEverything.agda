@@ -61,6 +61,8 @@ import DASHI.Physics.Laws.ThermodynamicStatisticalLaws
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact
 import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact
 import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleValidation
+import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleExact
+import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleValidation
 import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact
 import DASHI.Unified.GRQuantumCrossPollinationBridge
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations
