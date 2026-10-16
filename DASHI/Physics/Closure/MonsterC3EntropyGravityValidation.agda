@@ -14,6 +14,8 @@ import DASHI.Physics.Chemistry.AmmoniaSTO3GFCIExact as FCI
 import DASHI.Physics.Chemistry.AmmoniaSCIReleasedArtifactExact as SCIArtifact
 import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact as GroundC3
 import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact as MonsterProbe
+import DASHI.Physics.Chemistry.AmmoniaMonster3BC3QuotientLiftExact as MonsterC3
+import DASHI.Physics.Chemistry.AmmoniaMonster3BPhaseQuotientNonFactorabilityExact as PhaseNF
 import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact as H3C3
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact as Abstraction
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact as Abstraction369
@@ -51,8 +53,30 @@ groundConfigurationC3ActionPaid : GroundC3.GroundStateC3Boundary.literalGroundCo
 groundConfigurationC3ActionPaid = refl
 groundDeterminantPhaseIsInvariant : GroundC3.groundDeterminantPhase ≡ NH3Electronic.invariant
 groundDeterminantPhaseIsInvariant = refl
+
 ammoniaMonsterPhaseCoordinateMapPaid : MonsterProbe.AmmoniaMonsterProbeBoundary.c3PhaseCoordinateMapPaid MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ true
 ammoniaMonsterPhaseCoordinateMapPaid = refl
+
+ammoniaMonsterC3GroupLawIntertwinerPaid :
+  MonsterC3.C3QuotientLiftBoundary.c3GroupLawIntertwiningPaid
+    MonsterC3.canonicalC3QuotientLiftBoundary ≡ true
+ammoniaMonsterC3GroupLawIntertwinerPaid = refl
+
+ammoniaMonsterC3FourierIntertwinerPaid :
+  MonsterC3.C3QuotientLiftBoundary.fourierCharacterIntertwiningPaid
+    MonsterC3.canonicalC3QuotientLiftBoundary ≡ true
+ammoniaMonsterC3FourierIntertwinerPaid = refl
+
+phaseCannotRecoverFineMonsterStatePaid :
+  PhaseNF.PhaseQuotientNonFactorabilityBoundary.phaseQuotientFineStateNonfactorabilityPaid
+    PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
+phaseCannotRecoverFineMonsterStatePaid = refl
+
+phaseCannotRecoverMonsterMultiplicityPaid :
+  PhaseNF.PhaseQuotientNonFactorabilityBoundary.phaseQuotientMultiplicityNonfactorabilityPaid
+    PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
+phaseCannotRecoverMonsterMultiplicityPaid = refl
+
 nontrivialMonsterActionStillUnpaid : MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
 nontrivialMonsterActionStillUnpaid = refl
 proofRelevantC3ResolvedReactionPaid : H3C3.C3ResolvedH3AmmoniaBoundary.fullProofRelevantC3ResolvedReactionTransitionPaid H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
@@ -86,6 +110,10 @@ observedFourDimensionalMonsterStillUnpaid = refl
 
 terminalReceiptKeepsMatrixRediagonalizationOpen : MaxCut.Receipt.authorReleasedMatrixRediagonalizedByDASHI MaxCut.canonicalReceipt ≡ false
 terminalReceiptKeepsMatrixRediagonalizationOpen = refl
+terminalReceiptPaysC3QuotientRepresentation : MaxCut.Receipt.ammoniaMonsterC3QuotientRepresentationPaid MaxCut.canonicalReceipt ≡ true
+terminalReceiptPaysC3QuotientRepresentation = refl
+terminalReceiptPaysPhaseNonfactorability : MaxCut.Receipt.phaseQuotientFineStateNonfactorabilityPaid MaxCut.canonicalReceipt ≡ true
+terminalReceiptPaysPhaseNonfactorability = refl
 terminalReceiptPaysProofRelevantReaction : MaxCut.Receipt.h3ProofRelevantC3ReactionPaid MaxCut.canonicalReceipt ≡ true
 terminalReceiptPaysProofRelevantReaction = refl
 terminalReceiptBlocksObservedMonster : MaxCut.Receipt.observed3Plus1MonsterPaid MaxCut.canonicalReceipt ≡ false
