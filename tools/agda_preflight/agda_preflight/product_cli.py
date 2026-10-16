@@ -68,7 +68,7 @@ def _index(argv) -> int:
 def _harvest(argv) -> int:
     parser = argparse.ArgumentParser(
         prog="dashi-repo harvest",
-        description="Persist complete Git/PR development history into the shared DB.",
+        description="Persist Git/PR development history into the shared DB.",
     )
     parser.add_argument("--root", type=Path, default=Path.cwd())
     parser.add_argument("--database", type=Path, default=DEFAULT_REPOSITORY_DB)
@@ -90,13 +90,19 @@ def _harvest(argv) -> int:
         forwarded.extend(["--max-commits", str(args.max_commits)])
     history_code = repository_main(forwarded)
 
+    complete = args.max_commits is None
     with _connect(root, args.database) as conn:
         events = [
             NarrativeEvent.from_record(item)
             for item in load_narrative_events(conn)
         ]
-        git_result = replace_git_history(conn, root, events)
-    for key in ("commits", "parent_edges", "refs", "commit_paths"):
+        git_result = replace_git_history(
+            conn,
+            root,
+            events,
+            complete=complete,
+        )
+    for key in ("commits", "parent_edges", "refs", "commit_paths", "complete"):
         print(f"git_{key}\t{git_result[key]}")
     return history_code
 
