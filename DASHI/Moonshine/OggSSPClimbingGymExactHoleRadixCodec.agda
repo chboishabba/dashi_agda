@@ -52,21 +52,6 @@ exactHoleRadialValue form m =
     (exactHoleRadialAddress form m)
 
 ------------------------------------------------------------------------
--- Coarsening a hole address is the same finite operation as quotienting the
--- hole index by the selected prime once.  This is the correct relationship
--- between adjacent address depths; it is not the analytic height-refinement
--- identity h_{a,m} = h_{a+1,p*m}, which lives on a different coordinate.
-------------------------------------------------------------------------
-
-exactHoleCoarsenIsPrimeQuotient :
-  (form : Gym.WallForm) →
-  (depth : Nat) →
-  Gym.formExponent form ≡ Nat.suc depth →
-  (m : Nat) →
-  Set
-exactHoleCoarsenIsPrimeQuotient form depth exponentIsSucc m = ⊤
-
-------------------------------------------------------------------------
 -- Exact concrete fixtures from the supplied wall forms.
 ------------------------------------------------------------------------
 
