@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.BoloBoloOWSContemporaneousSpokesWitnessExact as Contemporaneous
 
 ------------------------------------------------------------------------
@@ -19,7 +20,7 @@ import DASHI.Governance.BoloBoloOWSContemporaneousSpokesWitnessExact as Contempo
 -- * later scholarship citing the 2011 NYCGA proposal.
 --
 -- The preserved copy and later scholarship do not silently become the original
--- NYCGA page.  Proposal design also does not establish implementation fidelity
+-- NYCGA page. Proposal design also does not establish implementation fidelity
 -- or realised non-domination.
 ------------------------------------------------------------------------
 
@@ -97,11 +98,6 @@ canonicalProposalLineageSources =
 
 ------------------------------------------------------------------------
 -- Intended-design surface.
---
--- Rotation/recall/observer-access are paid by the contemporaneous Library
--- record of the Structure Working Group presentation.  They are therefore
--- typed as contemporaneously recorded intended rules, not retroactively as
--- observed behaviour of later Spokes meetings.
 ------------------------------------------------------------------------
 
 record IntendedSpokesDesign : Set where
@@ -122,6 +118,58 @@ canonicalIntendedSpokesDesign =
 
 contemporaneousBoundaryAnchor : Contemporaneous.ContemporaneousSpokesBoundary
 contemporaneousBoundaryAnchor = Contemporaneous.canonicalContemporaneousSpokesBoundary
+
+------------------------------------------------------------------------
+-- Intended design cannot determine realised control.
+--
+-- The fixture is synthetic and information-theoretic: two possible realised
+-- worlds share the exact same intended rotation/recall/observer design but
+-- differ in whether control remains dispersed/reopenable or concentrates in a
+-- restricted realised topology. It does not assert either world occurred at
+-- OWS; it blocks design documents from certifying implementation.
+------------------------------------------------------------------------
+
+data SpokesImplementationWorld : Set where
+  sameDesignDispersedImplementation : SpokesImplementationWorld
+  sameDesignConcentratedImplementation : SpokesImplementationWorld
+
+data IntendedDesignCode : Set where
+  rotationRecallObserverDesign : IntendedDesignCode
+
+data RealizedSpokesControlCode : Set where
+  dispersedReopenableSpokesControl : RealizedSpokesControlCode
+  concentratedRestrictedSpokesControl : RealizedSpokesControlCode
+
+intendedDesignProjection : SpokesImplementationWorld → IntendedDesignCode
+intendedDesignProjection sameDesignDispersedImplementation = rotationRecallObserverDesign
+intendedDesignProjection sameDesignConcentratedImplementation = rotationRecallObserverDesign
+
+realizedControlProjection : SpokesImplementationWorld → RealizedSpokesControlCode
+realizedControlProjection sameDesignDispersedImplementation = dispersedReopenableSpokesControl
+realizedControlProjection sameDesignConcentratedImplementation = concentratedRestrictedSpokesControl
+
+realizedSpokesControlCodesDiffer :
+  realizedControlProjection sameDesignDispersedImplementation ≡
+  realizedControlProjection sameDesignConcentratedImplementation → ⊥
+realizedSpokesControlCodesDiffer ()
+
+intendedDesignRealizedControlNonFactorability :
+  INF.NonFactorabilityWitness intendedDesignProjection realizedControlProjection
+intendedDesignRealizedControlNonFactorability =
+  INF.nonFactorabilityWitness
+    sameDesignDispersedImplementation
+    sameDesignConcentratedImplementation
+    refl
+    realizedSpokesControlCodesDiffer
+
+IntendedDesignDeterminesRealizedControl : Set
+IntendedDesignDeterminesRealizedControl =
+  INF.FactorsThrough intendedDesignProjection realizedControlProjection
+
+intendedDesignDoesNotDetermineRealizedControl :
+  IntendedDesignDeterminesRealizedControl → ⊥
+intendedDesignDoesNotDetermineRealizedControl =
+  INF.witnessRulesOutEveryFlatFactorisation intendedDesignRealizedControlNonFactorability
 
 ------------------------------------------------------------------------
 -- Promotion boundary.
@@ -165,7 +213,7 @@ canonicalSpokesProposalLineageReceipt =
   GenericReceipt.mkNonPromotingReceipt
     "OWS Spokes proposal artifact/source lineage"
     "DASHI.Governance.BoloBoloOWSSpokesProposalLineageExact"
-    "canonicalProposalLineageSources / canonicalIntendedSpokesDesign / canonicalSpokesProposalLineageBoundary"
-    "triangulates the Working Group & Caucus Spokes Council Proposal across the original NYCGA locator, a contemporaneous People’s Library linked presentation, a preserved document mirror, NYU archival finding-aid evidence and later scholarship; retains rotation, recall, observer access, operational coordination and horizontal/accountable/transparent aims as intended-design coordinates"
-    "the preserved mirror is not silently promoted to the original NYCGA page; intended design does not prove implementation fidelity, equal influence, effective recall, equal voice, non-domination, primary Spokes-minute content or causal effect"
+    "canonicalProposalLineageSources / canonicalIntendedSpokesDesign / intendedDesignDoesNotDetermineRealizedControl"
+    "triangulates the Working Group & Caucus Spokes Council Proposal across the original NYCGA locator, a contemporaneous People’s Library linked presentation, a preserved document mirror, NYU archival finding-aid evidence and later scholarship; retains rotation, recall, observer access, operational coordination and horizontal/accountable/transparent aims as intended-design coordinates and proves by a synthetic non-factorability witness that this design cannot determine the realised-control consumer"
+    "the preserved mirror is not silently promoted to the original NYCGA page; the synthetic collision creates no empirical OWS result; intended design does not prove implementation fidelity, equal influence, effective recall, equal voice, non-domination, primary Spokes-minute content or causal effect"
     "agda -i . DASHI/Governance/BoloBoloOWSSpokesProposalLineageRegression.agda"
