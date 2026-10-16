@@ -32,6 +32,9 @@ def install_service_semantic_extension(service_cls: type) -> None:
     def object_detail(self, symbol_id: str) -> dict:
         return self.index.object_detail(symbol_id)
 
+    def narrative_archaeology(self, query: str, *, limit: int = 50) -> dict:
+        return self.index.narrative_archaeology(query, limit=limit)
+
     def discover(self, query: str, *, limit: int = 50) -> dict:
         return self.index.discovery_receipt(query, limit=limit)
 
@@ -42,6 +45,7 @@ def install_service_semantic_extension(service_cls: type) -> None:
     service_cls.symbol_search = symbol_search
     service_cls.related_symbols = related_symbols
     service_cls.object_detail = object_detail
+    service_cls.narrative_archaeology = narrative_archaeology
     service_cls.discover = discover
     service_cls.round_lineage = round_lineage
     service_cls._semantic_discovery_installed = True
