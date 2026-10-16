@@ -12,6 +12,7 @@ import DASHI.Biology.KitzerowBH4ReactionCascadeBridgeExact as ReactionBridge
 import DASHI.Biology.KitzerowBH4LineageRegressionExact as Lineage
 import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact as Hepatic
 import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorExact as Neural
+import DASHI.Biology.KitzerowBH4RedoxSpatialDiscriminatorExact as RedoxSpatial
 import DASHI.Biology.KitzerowBH4ConvergentEvidenceExact as Evidence
 import DASHI.Biology.KitzerowPriorityAttributionExact as Attribution
 import DASHI.Biology.KitzerowBH4PriorArtSubtractionExact as PriorArt
@@ -78,6 +79,13 @@ neuralContextRejectsSimpleCurrentPoolSufficiency :
   × Neural.simpleCurrentPoolSufficiencySupported Neural.canonicalNeuralContextBoundary ≡ false
 neuralContextRejectsSimpleCurrentPoolSufficiency = refl , (refl , refl)
 
+redoxSpatialEvidenceRejectsWellMixedScalarPool :
+  RedoxSpatial.nadphRegenerationRelevant RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
+  × RedoxSpatial.intracellularExtracellularRouteDistinctionPaid RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
+  × RedoxSpatial.scalarWellMixedPoolSufficient RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
+  × RedoxSpatial.redoxSpatialEvidenceClosesWholeAllocator RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
+redoxSpatialEvidenceRejectsWellMixedScalarPool = refl , (refl , (refl , refl))
+
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation :
   Evidence.allCanonicalEvidenceReceiptsRejectWholeModelConfirmation ≡ true
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation = refl
@@ -98,8 +106,10 @@ centralBH4AllocationRemainsExperimentallyOpen :
   Experiment.centralBH4AllocationClosed Experiment.canonicalCentralBH4Discriminator ≡ false
   × Experiment.historicalTwoBranchConstraintPaid ≡ true
   × Experiment.historicalNeuralContextConstraintPaid ≡ true
+  × Experiment.historicalRedoxSpatialConstraintPaid ≡ true
   × Experiment.historicalConstraintsCloseCentralEdge ≡ false
-centralBH4AllocationRemainsExperimentallyOpen = refl , (refl , (refl , refl))
+centralBH4AllocationRemainsExperimentallyOpen =
+  refl , (refl , (refl , (refl , refl)))
 
 paretoFrontierIsNotTruthRanking :
   Pareto.frontierRankIsTruthRank Pareto.canonicalKitzerowAcquisitionFrontier ≡ false
