@@ -13,19 +13,16 @@ import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationExact 
 ------------------------------------------------------------------------
 -- BROWN-MACLAY-SPECIFIC TEN-COMPONENT REDUCTION
 --
--- The generic CMP119 owner already proves that coordinate symmetry reduces a
--- 4x4 stress tensor from sixteen component payments to ten.  This module uses
--- exactly that symmetry interface but targets the normalized Brown-Maclay
--- tensor rather than the finite-GR fixture used by the generic compiler.
+-- Coordinate symmetry and numerical Brown-Maclay values are different theorem
+-- obligations.  Keep them different in the type: ten upper-triangular values
+-- plus one symmetry receipt compile to the full sixteen-component equality.
 ------------------------------------------------------------------------
 
-record CasimirBrownMaclaySymmetricTenComponentPayment
+record CasimirBrownMaclayTenIndependentValues
     {StressTensor : Set}
     (evaluator : Cut.CMP119RationalStressComponentEvaluator StressTensor)
     (stress : StressTensor) : Set where
   field
-    symmetry : Sym.PairingComponentSymmetry evaluator stress
-
     qft00 : Cut.component evaluator stress Flat.timeAxis Flat.timeAxis
       ≡ Casimir.casimirNormalizedRationalTensor4 Flat.timeAxis Flat.timeAxis
     qft01 : Cut.component evaluator stress Flat.timeAxis Flat.xAxis
@@ -47,7 +44,29 @@ record CasimirBrownMaclaySymmetricTenComponentPayment
     qft33 : Cut.component evaluator stress Flat.zAxis Flat.zAxis
       ≡ Casimir.casimirNormalizedRationalTensor4 Flat.zAxis Flat.zAxis
 
+open CasimirBrownMaclayTenIndependentValues public
+
+record CasimirBrownMaclaySymmetricTenComponentPayment
+    {StressTensor : Set}
+    (evaluator : Cut.CMP119RationalStressComponentEvaluator StressTensor)
+    (stress : StressTensor) : Set where
+  field
+    symmetry : Sym.PairingComponentSymmetry evaluator stress
+    values : CasimirBrownMaclayTenIndependentValues evaluator stress
+
 open CasimirBrownMaclaySymmetricTenComponentPayment public
+
+compileSymmetryAndTenValues :
+  ∀ {StressTensor : Set}
+    {evaluator : Cut.CMP119RationalStressComponentEvaluator StressTensor}
+    {stress : StressTensor} →
+  Sym.PairingComponentSymmetry evaluator stress →
+  CasimirBrownMaclayTenIndependentValues evaluator stress →
+  CasimirBrownMaclaySymmetricTenComponentPayment evaluator stress
+compileSymmetryAndTenValues symmetryReceipt valueReceipt = record
+  { symmetry = symmetryReceipt
+  ; values = valueReceipt
+  }
 
 casimirTenComponentsCompileToTensorEquality :
   ∀ {StressTensor : Set}
@@ -57,40 +76,50 @@ casimirTenComponentsCompileToTensorEquality :
   ∀ a b →
   Cut.component evaluator stress a b
   ≡ Casimir.casimirNormalizedRationalTensor4 a b
-casimirTenComponentsCompileToTensorEquality payment Flat.timeAxis Flat.timeAxis = qft00 payment
-casimirTenComponentsCompileToTensorEquality payment Flat.timeAxis Flat.xAxis = qft01 payment
-casimirTenComponentsCompileToTensorEquality payment Flat.timeAxis Flat.yAxis = qft02 payment
-casimirTenComponentsCompileToTensorEquality payment Flat.timeAxis Flat.zAxis = qft03 payment
+casimirTenComponentsCompileToTensorEquality payment Flat.timeAxis Flat.timeAxis =
+  qft00 (values payment)
+casimirTenComponentsCompileToTensorEquality payment Flat.timeAxis Flat.xAxis =
+  qft01 (values payment)
+casimirTenComponentsCompileToTensorEquality payment Flat.timeAxis Flat.yAxis =
+  qft02 (values payment)
+casimirTenComponentsCompileToTensorEquality payment Flat.timeAxis Flat.zAxis =
+  qft03 (values payment)
 casimirTenComponentsCompileToTensorEquality payment Flat.xAxis Flat.timeAxis =
   trans
     (Sym.componentSymmetric (symmetry payment) Flat.xAxis Flat.timeAxis)
-    (qft01 payment)
-casimirTenComponentsCompileToTensorEquality payment Flat.xAxis Flat.xAxis = qft11 payment
-casimirTenComponentsCompileToTensorEquality payment Flat.xAxis Flat.yAxis = qft12 payment
-casimirTenComponentsCompileToTensorEquality payment Flat.xAxis Flat.zAxis = qft13 payment
+    (qft01 (values payment))
+casimirTenComponentsCompileToTensorEquality payment Flat.xAxis Flat.xAxis =
+  qft11 (values payment)
+casimirTenComponentsCompileToTensorEquality payment Flat.xAxis Flat.yAxis =
+  qft12 (values payment)
+casimirTenComponentsCompileToTensorEquality payment Flat.xAxis Flat.zAxis =
+  qft13 (values payment)
 casimirTenComponentsCompileToTensorEquality payment Flat.yAxis Flat.timeAxis =
   trans
     (Sym.componentSymmetric (symmetry payment) Flat.yAxis Flat.timeAxis)
-    (qft02 payment)
+    (qft02 (values payment))
 casimirTenComponentsCompileToTensorEquality payment Flat.yAxis Flat.xAxis =
   trans
     (Sym.componentSymmetric (symmetry payment) Flat.yAxis Flat.xAxis)
-    (qft12 payment)
-casimirTenComponentsCompileToTensorEquality payment Flat.yAxis Flat.yAxis = qft22 payment
-casimirTenComponentsCompileToTensorEquality payment Flat.yAxis Flat.zAxis = qft23 payment
+    (qft12 (values payment))
+casimirTenComponentsCompileToTensorEquality payment Flat.yAxis Flat.yAxis =
+  qft22 (values payment)
+casimirTenComponentsCompileToTensorEquality payment Flat.yAxis Flat.zAxis =
+  qft23 (values payment)
 casimirTenComponentsCompileToTensorEquality payment Flat.zAxis Flat.timeAxis =
   trans
     (Sym.componentSymmetric (symmetry payment) Flat.zAxis Flat.timeAxis)
-    (qft03 payment)
+    (qft03 (values payment))
 casimirTenComponentsCompileToTensorEquality payment Flat.zAxis Flat.xAxis =
   trans
     (Sym.componentSymmetric (symmetry payment) Flat.zAxis Flat.xAxis)
-    (qft13 payment)
+    (qft13 (values payment))
 casimirTenComponentsCompileToTensorEquality payment Flat.zAxis Flat.yAxis =
   trans
     (Sym.componentSymmetric (symmetry payment) Flat.zAxis Flat.yAxis)
-    (qft23 payment)
-casimirTenComponentsCompileToTensorEquality payment Flat.zAxis Flat.zAxis = qft33 payment
+    (qft23 (values payment))
+casimirTenComponentsCompileToTensorEquality payment Flat.zAxis Flat.zAxis =
+  qft33 (values payment)
 
 independentBrownMaclayComponentPayments : Nat
 independentBrownMaclayComponentPayments = 10
@@ -99,8 +128,12 @@ record CasimirBrownMaclaySymmetricReductionBoundary : Set where
   constructor casimir-brown-maclay-symmetric-reduction-boundary
   field
     genericCMP119SymmetryReductionReused : Bool
+    tenIndependentValuesRecordOwned : Bool
+    symmetryAndTenValuesCompilerOwned : Bool
     symmetricTenComponentCompilerOwned : Bool
     sixteenIndependentComponentPaymentsRequired : Bool
+    actualSelectedQFTSymmetryPaid : Bool
+    actualSelectedQFTTenComponentValuesPaid : Bool
     actualSelectedQFTTenComponentPaymentPaid : Bool
 
 open CasimirBrownMaclaySymmetricReductionBoundary public
@@ -109,8 +142,8 @@ canonicalCasimirBrownMaclaySymmetricReductionBoundary :
   CasimirBrownMaclaySymmetricReductionBoundary
 canonicalCasimirBrownMaclaySymmetricReductionBoundary =
   casimir-brown-maclay-symmetric-reduction-boundary
-    true true false false
+    true true true true false false false false
 
 casimirBrownMaclaySymmetricReductionReading : String
 casimirBrownMaclaySymmetricReductionReading =
-  "A symmetric actual selected-QFT stress needs ten independent Brown-Maclay component payments, not sixteen. The six lower-triangular components are compiled from the existing CMP119 PairingComponentSymmetry interface. The remaining ten payments are 00,01,02,03,11,12,13,22,23,33 on the same stress/evaluator; no Brown-Maclay physical equality is asserted until those ten equations and symmetry are inhabited."
+  "The Brown-Maclay selected-stress target is factored into two genuinely separate payments on one evaluator/stress object: PairingComponentSymmetry and ten independent values 00,01,02,03,11,12,13,22,23,33. Their compiler produces the full sixteen Axis4 equalities; the six lower-triangular values are not independent physical payments."
