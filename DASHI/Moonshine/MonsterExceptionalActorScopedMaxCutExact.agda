@@ -20,9 +20,6 @@ module DASHI.Moonshine.MonsterExceptionalActorScopedMaxCutExact where
 --
 --   full-normalizer lane:
 --       actual Fin90 inertia -> 12 + 78 -> E6 -> F4 + 26 target.
---
--- This owner makes that fork theorem-visible and prevents the invalid shortcut
--- "143 = 90 + 53, therefore 53 is a Suz-stable summand".
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -36,7 +33,6 @@ import DASHI.Moonshine.Base369MonsterFiftyFourFiveModeResidualActionBidiExact as
 import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact as F4
 import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact as Ninety
 import DASHI.Moonshine.Base369Monster3BSeventyEightExceptionalE6BidiExact as E6
-import DASHI.Moonshine.Monster3BMultiplicityTwelveSeventyEightRecognitionExact as Split90
 
 ------------------------------------------------------------------------
 -- 1. The source-backed actor split is executable, not prose.
@@ -70,11 +66,6 @@ suzukiCoverBlocksNaive53Split = refl
 
 ------------------------------------------------------------------------
 -- 2. Central-C3 / conformal-fixed-line target.
---
--- The already-paid 54->53 finite carrier chart is only promoted when an
--- actual action is supplied under an actor for which the deleted line and the
--- residual are invariant.  The strict F4 receipt then requires literal action
--- intertwiners on that same carrier.
 ------------------------------------------------------------------------
 
 record CentralResidualExceptionalRecognition : Set₁ where
@@ -120,14 +111,14 @@ record NormalizerE6F4Recognition {source}
       TracelessAlbert26 → TracelessAlbert26
 
     splitE6 :
-      E6.ActualSeventyEightE6Recognition.E6Carrier e6Recognition →
+      E6.E6Carrier e6Recognition →
       F4Carrier ⊎ TracelessAlbert26
     combineE6 :
       F4Carrier ⊎ TracelessAlbert26 →
-      E6.ActualSeventyEightE6Recognition.E6Carrier e6Recognition
+      E6.E6Carrier e6Recognition
 
     combineAfterSplit :
-      (state : E6.ActualSeventyEightE6Recognition.E6Carrier e6Recognition) →
+      (state : E6.E6Carrier e6Recognition) →
       combineE6 (splitE6 state) ≡ state
     splitAfterCombine :
       (state : F4Carrier ⊎ TracelessAlbert26) →
