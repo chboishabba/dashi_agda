@@ -34,7 +34,7 @@ canonicalGeometryCaloricUpperBoundReceipt =
     true
 
 record GeometryCaloricUpperBoundBoundary : Set where
-  constructor geometry-caloric-upper-boundary
+  constructor geometry-caloric-upper-bound-boundary
   field
     sourceCombinatorialEntropyUsed : Bool
     entropySwingExecutionPaid : Bool
@@ -51,7 +51,7 @@ open GeometryCaloricUpperBoundBoundary public
 
 canonicalGeometryCaloricUpperBoundBoundary : GeometryCaloricUpperBoundBoundary
 canonicalGeometryCaloricUpperBoundBoundary =
-  geometry-caloric-upper-boundary
+  geometry-caloric-upper-bound-boundary
     true true true false false false false false false false
 
 record GeometryCaloricAttributionBoundary : Set where
