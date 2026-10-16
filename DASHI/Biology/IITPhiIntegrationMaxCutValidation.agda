@@ -1,7 +1,6 @@
 module DASHI.Biology.IITPhiIntegrationMaxCutValidation where
 
--- RED-first integration contract for the IIT / phi max-cut.
--- Production owners are imported individually plus through the production rollup.
+-- Focused integration contract for the IIT / phi max-cut.
 
 import DASHI.Biology.IIT4FiniteCausalStructureExact
 import DASHI.Biology.IIT4FiniteProbabilityRepertoireExact
