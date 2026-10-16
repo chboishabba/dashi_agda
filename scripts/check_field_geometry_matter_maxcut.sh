@@ -76,12 +76,17 @@ for artifact in \
   Docs/evidence/matbg_thf_hubbard_i_atomic_reference_2026-10-16.json \
   scripts/matbg_entropy_combinatorial_replay.py \
   Docs/evidence/matbg_entropy_combinatorial_replay_2026-10-16.json \
+  scripts/matbg_geometry_caloric_upper_bound.py \
+  Docs/evidence/matbg_geometry_caloric_upper_bound_2026-10-16.json \
   scripts/casimir_gravity_scaling.py \
   Docs/evidence/casimir_gravity_scaling_2026-10-16.json \
   scripts/casimir_finite_disk_gravity_proxy.py \
-  Docs/evidence/casimir_finite_disk_gravity_proxy_2026-10-16.json; do
+  Docs/evidence/casimir_finite_disk_gravity_proxy_2026-10-16.json \
+  scripts/check_field_geometry_matter_evidence.py; do
   test -f "$artifact" || { echo "missing execution artifact: $artifact" >&2; exit 1; }
 done
+
+python3 scripts/check_field_geometry_matter_evidence.py
 
 grep -q 'unresolvedChannelsAreNotZero' DASHI/Physics/Foundations/SameObjectConservationLedgerExact.agda
 grep -q 'ResidualDirectAntigravityPermission' DASHI/Physics/Foundations/PhysicalResidualPromotionExact.agda
@@ -97,12 +102,15 @@ grep -q 'hcKPrime' DASHI/Physics/CondensedMatter/MATBGInteractingTHFLiteralMatri
 grep -q 'atomicReferenceExecutionPaid' DASHI/Physics/CondensedMatter/MATBGTHFHubbardIAtomicReplayReceiptExact.agda
 grep -q 'highTemperatureMicrostates' DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorics2026Exact.agda
 grep -q 'combinatorialLogarithmReplayPaid' DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorialReplayReceiptExact.agda
+grep -q 'entropySwingExecutionPaid' DASHI/Physics/CondensedMatter/MATBGGeometryCaloricUpperBoundReceiptExact.agda
+grep -q 'geometryCaloricUpperBoundNumericalReplay' DASHI/Physics/Foundations/FieldGeometryMatterTerminalMaxCutExact.agda
 grep -q 'PhysicalGeneralizedCaloricWitness' DASHI/Physics/Foundations/GeneralizedCaloricCycleExact.agda
 grep -q 'quantumInequalityAdmissible' DASHI/Physics/Foundations/QuantumStressEnergyEngineeringBridgeExact.agda
 grep -q 'brownMaclay1969' DASHI/Physics/Foundations/QuantumStressEnergySourceWeldExact.agda
 grep -q 'finiteDiskWeakFieldProxyPaid' DASHI/Physics/Foundations/CasimirFiniteDiskGravityProxyReceiptExact.agda
 grep -q 'PrecisionThrustClosureWitness' DASHI/Physics/Foundations/PrecisionThrustClosureExact.agda
 grep -q 'CausalSuperluminalTransportPromotion' DASHI/Physics/Foundations/CausalTransportFTLObligationsExact.agda
+grep -q 'metricClaimed' DASHI/Physics/Foundations/CausalTransportFTLObligationsExact.agda
 grep -q 'externalSourceDoesNotOwnDASHISynthesis' DASHI/Physics/Foundations/FieldGeometryMatterAttributionRegression.agda
 grep -q 'numericallyExecuted' DASHI/Physics/Foundations/FieldGeometryMatterTerminalMaxCutExact.agda
 grep -q 'numericalBMDoesNotBecomeExperiment' DASHI/Physics/Foundations/FieldGeometryMatterTerminalValidation.agda
