@@ -24,3 +24,12 @@ import DASHI.Biology.IITXORGridSynthesisFabricExact
 -- forget A/B handedness, while antisymmetric F3 difference negates under the
 -- identical global input-socket swap.  This is the grid-scale torque seam.
 import DASHI.Biology.IITXORGridOrientationLiftExact
+
+-- Closed routed paths now carry an explicit C3 socket-phase holonomy.  Swapping
+-- A/B conjugates the path holonomy while XOR dynamics stays unchanged.  This
+-- must remain a chosen orientation chart, not an automatic physical torque.
+import DASHI.Biology.IITXORGridLoopHolonomyExact
+
+-- The matched face-aware pair must also be recognized as three ordinary binary
+-- XOR synthesis cells versus the same fabric plus one genuine ABC interior term.
+import DASHI.Biology.IITFaceAwareTriadicGridSynthesisWeldExact
