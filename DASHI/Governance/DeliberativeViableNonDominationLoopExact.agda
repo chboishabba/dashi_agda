@@ -15,17 +15,6 @@ import DASHI.Interop.GodsEyeViewProofCarryingWorldOntologyExact as GodsEye
 
 ------------------------------------------------------------------------
 -- DELIBERATIVE + VIABLE + NON-DOMINATING CYBERNETIC ACTION GATE
---
--- Existing owners already supply:
---   * history-indexed think/look/test/act control;
---   * first-class ask/listen/deliberate moves;
---   * Beer/POSIWID realised-operation semantics;
---   * God’s-Eye provenance / anti-panopticon boundaries;
---   * proof-relevant non-domination receipts;
---   * plural viability / TSFV history-conditioned continuation constraints.
---
--- This owner welds them at the ACTION boundary.  It does not create a new
--- sovereign controller or a canonical political objective function.
 ------------------------------------------------------------------------
 
 record AdmittedNonDominatingPhysicalAction
@@ -41,11 +30,6 @@ record AdmittedNonDominatingPhysicalAction
 
 open AdmittedNonDominatingPhysicalAction public
 
--- There is intentionally no coercion from deliberation, observation, political
--- identity or VSM role to AdmittedNonDominatingPhysicalAction.  A physical
--- action already admitted by the base execution spine must additionally carry
--- the proof-relevant non-domination receipt on that action gate.
-
 record DeliberativeControlCheckpoint
     (fibre : BaseLoop.LiveResidualFibre) : Set₁ where
   constructor deliberative-control-checkpoint
@@ -57,15 +41,6 @@ record DeliberativeControlCheckpoint
     unresolvedResidualReference : String
 
 open DeliberativeControlCheckpoint public
-
-------------------------------------------------------------------------
--- Cybernetic role vocabulary anchor.
---
--- The existing generalized Cybersyn domain already distinguishes real,
--- sensed, modelled, decision and updated states and sense/normalize/simulate/
--- decide/intervene/feedback operators.  We retain those names without claiming
--- that the finite vocabulary itself proves a concrete institutional design.
-------------------------------------------------------------------------
 
 record CyberneticRoleSpine : Set where
   constructor cybernetic-role-spine
@@ -97,10 +72,6 @@ canonicalCyberneticRoleSpine =
     Roles.intervene
     Roles.feedback
 
-------------------------------------------------------------------------
--- Exact boundary anchors from existing owners.
-------------------------------------------------------------------------
-
 sourceBoundaryAnchor : Sources.CybersynVSMSourceBoundary
 sourceBoundaryAnchor = Sources.canonicalCybersynVSMSourceBoundary
 
@@ -123,11 +94,13 @@ antiPanopticonBoundaryAnchor : GodsEye.AntiPanopticonBoundary
 antiPanopticonBoundaryAnchor = GodsEye.canonicalAntiPanopticonBoundary
 
 baseObservationDoesNotAuthoriseAction :
-  BaseLoop.observationAutomaticallyAuthorisesAction baseActionBoundaryAnchor ≡ false
+  BaseLoop.ProofExperimentActionLoopBoundary.observationAutomaticallyAuthorisesAction
+    baseActionBoundaryAnchor ≡ false
 baseObservationDoesNotAuthoriseAction = refl
 
 deliberationDoesNotAuthoriseAction :
-  Delib.actionAuthorityStillSeparate deliberativeBoundaryAnchor ≡ true
+  Delib.DeliberativeCyberneticBoundary.actionAuthorityStillSeparate
+    deliberativeBoundaryAnchor ≡ true
 deliberationDoesNotAuthoriseAction = refl
 
 realizedOperationRetained :
@@ -139,12 +112,9 @@ declaredPurposeDoesNotOverrideRealizedEffect :
 declaredPurposeDoesNotOverrideRealizedEffect = refl
 
 antiPanopticonEvidenceRemainsInspectable :
-  GodsEye.evidencePathMustRemainInspectable antiPanopticonBoundaryAnchor ≡ true
+  GodsEye.AntiPanopticonBoundary.evidencePathMustRemainInspectable
+    antiPanopticonBoundaryAnchor ≡ true
 antiPanopticonEvidenceRemainsInspectable = refl
-
-------------------------------------------------------------------------
--- Terminal integration boundary.
-------------------------------------------------------------------------
 
 record DeliberativeViableNonDominationBoundary : Set where
   constructor deliberative-viable-nondomination-boundary
