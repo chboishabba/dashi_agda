@@ -9,6 +9,7 @@ def test_cli_registers_semantic_discovery_commands():
         ["symbol", "target"],
         ["related", "target"],
         ["object", "DASHI.Core.Foo.target"],
+        ["archaeology", "target"],
         ["discover", "target"],
         ["lineage"],
     ):
