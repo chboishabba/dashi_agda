@@ -2,24 +2,16 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPKleeneQuotedBodyCookDescriptionE
 
 ------------------------------------------------------------------------
 -- SAME-OBJECT COOK DESCRIPTION FOR THE BEHAVIOURAL KLEENE FIXED POINT
---
--- The finite Kleene theorem gives
---
---   run1(q,x) = runPrimitive2(p,q,x).
---
--- Therefore a literal binary realization may execute the fixed body machine p
--- on tape data containing quote(q).  Cook--Levin must describe THAT SAME
--- `(p, quote(q), T)` computation.  No compiled q-machine or raw code equality is
--- required.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Maybe using (Maybe)
+open import Agda.Builtin.List using (List; [])
+open import Agda.Builtin.Maybe using (Maybe; just)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Fin.Base as Fin
 
+import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
 import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
@@ -32,7 +24,7 @@ import DASHI.Mathematics.Complexity.FiniteSelfSpecializingProgramSelfDelimitingC
 
 bodyConcreteMachine :
   Coded.CodedFiniteStandardTM →
-  DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact.ConcreteTapeMachine
+  Local.ConcreteTapeMachine
 bodyConcreteMachine code =
   Presented.finitePresentedStandardToConcrete
     (Coded.decodeCodedStandardTM code)
@@ -98,9 +90,6 @@ kleeneBodyQuoteParsesExact :
   just
     (ProgramQuote.fixedPointRawView body , [])
 kleeneBodyQuoteParsesExact = ProgramQuote.fixedPointQuoteParsesExact
-  where
-    open import Agda.Builtin.List using ([])
-    open import Agda.Builtin.Maybe using (just)
 
 kleeneBodyStreamedBit :
   (body : Coded.CodedFiniteStandardTM)
@@ -138,10 +127,9 @@ kleeneBodyStreamedBitExact body nonemptyRules zeroSymbol oneSymbol steps index =
 ------------------------------------------------------------------------
 -- MAX-CUT CONSEQUENCE
 --
--- The correct behavioural self-object is now explicit: body machine p on the
--- literal self-delimiting quote of q(p).  The quote parser recovers the entire
--- five-node fixed-point syntax, including p, while Cook streaming describes the
--- same body p and same quote input.  Remaining work is to realize the binary body
--- machine that performs this parsing/streaming, simulates the SAT candidate over
--- the virtual Cook input, and negates its result within a closing resource T.
+-- The correct behavioural self-object is body machine p on the literal
+-- self-delimiting quote of q(p). The quote parser recovers the entire five-node
+-- fixed-point syntax, including p, while Cook streaming describes the same body
+-- p and same quote input. Remaining work is the literal binary body machine:
+-- parse/stream, virtually simulate the SAT candidate, negate, and close T.
 ------------------------------------------------------------------------
