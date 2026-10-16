@@ -9,169 +9,96 @@ import DASHI.Physics.QuantumVacuum.CasimirBrownMaclaySymmetricStressReductionVal
 import DASHI.Physics.QuantumVacuum.CasimirU1RecoveredQFTStressAttachmentValidation
 import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact as Round131
 
-finiteStructurePaidRegression :
-  Terminal.finite369StructurePaid Terminal.canonicalTerminalBoundary ≡ true
+finiteStructurePaidRegression : Terminal.finite369StructurePaid Terminal.canonicalTerminalBoundary ≡ true
 finiteStructurePaidRegression = refl
-
-localStressPaidRegression :
-  Terminal.localQFTStressPaid Terminal.canonicalTerminalBoundary ≡ true
+localStressPaidRegression : Terminal.localQFTStressPaid Terminal.canonicalTerminalBoundary ≡ true
 localStressPaidRegression = refl
-
-pointwiseEnergyConditionsPaidRegression :
-  Terminal.pointwiseEnergyConditionFingerprintPaid Terminal.canonicalTerminalBoundary ≡ true
+pointwiseEnergyConditionsPaidRegression : Terminal.pointwiseEnergyConditionFingerprintPaid Terminal.canonicalTerminalBoundary ≡ true
 pointwiseEnergyConditionsPaidRegression = refl
 
-grqftRationalCrosswalkPaidRegression :
-  Terminal.grqftRationalTensorCrosswalkPaid Terminal.canonicalTerminalBoundary ≡ true
+grqftRationalCrosswalkPaidRegression : Terminal.grqftRationalTensorCrosswalkPaid Terminal.canonicalTerminalBoundary ≡ true
 grqftRationalCrosswalkPaidRegression = refl
-
-activeProjectionCrossPollinationPaidRegression :
-  Terminal.activeStressProjectionCrossPollinationPaid Terminal.canonicalTerminalBoundary ≡ true
+activeProjectionCrossPollinationPaidRegression : Terminal.activeStressProjectionCrossPollinationPaid Terminal.canonicalTerminalBoundary ≡ true
 activeProjectionCrossPollinationPaidRegression = refl
-
-conditionalGRCompilerReusePaidRegression :
-  Terminal.conditionalGRDiagnosticCompilerReusePaid Terminal.canonicalTerminalBoundary ≡ true
+conditionalGRCompilerReusePaidRegression : Terminal.conditionalGRDiagnosticCompilerReusePaid Terminal.canonicalTerminalBoundary ≡ true
 conditionalGRCompilerReusePaidRegression = refl
-
-vacuumLambdaDiscriminatorPaidRegression :
-  Terminal.vacuumLambdaDiscriminatorPaid Terminal.canonicalTerminalBoundary ≡ true
+vacuumLambdaDiscriminatorPaidRegression : Terminal.vacuumLambdaDiscriminatorPaid Terminal.canonicalTerminalBoundary ≡ true
 vacuumLambdaDiscriminatorPaidRegression = refl
-
-u1YangMillsArchitecturePaidRegression :
-  Terminal.u1YangMillsGaugeArchitectureHandoffPaid Terminal.canonicalTerminalBoundary ≡ true
+u1YangMillsArchitecturePaidRegression : Terminal.u1YangMillsGaugeArchitectureHandoffPaid Terminal.canonicalTerminalBoundary ≡ true
 u1YangMillsArchitecturePaidRegression = refl
-
-selectedQFTSU2HostInterfacePaidRegression :
-  Terminal.selectedQFTSU2HostInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
+selectedQFTSU2HostInterfacePaidRegression : Terminal.selectedQFTSU2HostInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
 selectedQFTSU2HostInterfacePaidRegression = refl
-
-brownMaclayTenComponentReductionPaidRegression :
-  Terminal.brownMaclayTenComponentReductionPaid Terminal.canonicalTerminalBoundary ≡ true
+compactSimpleCompilerRoutesPaidRegression : Terminal.selectedQFTCompactSimpleCompilerRoutesPaid Terminal.canonicalTerminalBoundary ≡ true
+compactSimpleCompilerRoutesPaidRegression = refl
+brownMaclayTenComponentReductionPaidRegression : Terminal.brownMaclayTenComponentReductionPaid Terminal.canonicalTerminalBoundary ≡ true
 brownMaclayTenComponentReductionPaidRegression = refl
-
-sixteenBrownMaclayPaymentsNotRequiredRegression :
-  Terminal.sixteenIndependentBrownMaclayComponentsRequired Terminal.canonicalTerminalBoundary ≡ false
+sixteenBrownMaclayPaymentsNotRequiredRegression : Terminal.sixteenIndependentBrownMaclayComponentsRequired Terminal.canonicalTerminalBoundary ≡ false
 sixteenBrownMaclayPaymentsNotRequiredRegression = refl
-
-sprint105TagSecondaryRegression :
-  Terminal.sprint105SU2ClassificationIsSecondary Terminal.canonicalTerminalBoundary ≡ true
+sprint105TagSecondaryRegression : Terminal.sprint105SU2ClassificationIsSecondary Terminal.canonicalTerminalBoundary ≡ true
 sprint105TagSecondaryRegression = refl
-
-selectedSectorAttachmentInterfacePaidRegression :
-  Terminal.casimirSelectedRecoveredQFTSectorAttachmentInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
+selectedSectorAttachmentInterfacePaidRegression : Terminal.casimirSelectedRecoveredQFTSectorAttachmentInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
 selectedSectorAttachmentInterfacePaidRegression = refl
-
-sameCandidateHandoffInterfacePaidRegression :
-  Terminal.sameCandidateUnificationHandoffInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
+sameCandidateHandoffInterfacePaidRegression : Terminal.sameCandidateUnificationHandoffInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
 sameCandidateHandoffInterfacePaidRegression = refl
 
-concreteScaleStillOpenRegression :
-  Terminal.concreteCanonicalSetoidScaleWitnessPaid Terminal.canonicalTerminalBoundary ≡ false
+concreteScaleStillOpenRegression : Terminal.concreteCanonicalSetoidScaleWitnessPaid Terminal.canonicalTerminalBoundary ≡ false
 concreteScaleStillOpenRegression = refl
-
-selectedGroupCompactSimpleStillOpenRegression :
-  Terminal.selectedQFTGroupCompactSimpleWitnessPaid Terminal.canonicalTerminalBoundary ≡ false
-selectedGroupCompactSimpleStillOpenRegression = refl
-
-selectedGroupDynkinA1StillOpenRegression :
-  Terminal.selectedQFTGroupDynkinA1ClassificationPaid Terminal.canonicalTerminalBoundary ≡ false
+compactSimpleAttachmentStillOpenRegression : Terminal.selectedQFTCompactSimpleEvidenceAttachmentPaid Terminal.canonicalTerminalBoundary ≡ false
+compactSimpleAttachmentStillOpenRegression = refl
+selectedGroupDynkinA1StillOpenRegression : Terminal.selectedQFTGroupDynkinA1ClassificationPaid Terminal.canonicalTerminalBoundary ≡ false
 selectedGroupDynkinA1StillOpenRegression = refl
-
-selectedGroupQuaternionSU2StillOpenRegression :
-  Terminal.selectedQFTGroupQuaternionSU2InterpretationPaid Terminal.canonicalTerminalBoundary ≡ false
+selectedGroupQuaternionSU2StillOpenRegression : Terminal.selectedQFTGroupQuaternionSU2InterpretationPaid Terminal.canonicalTerminalBoundary ≡ false
 selectedGroupQuaternionSU2StillOpenRegression = refl
-
-selectedStressSymmetryStillOpenRegression :
-  Terminal.selectedQFTStressCoordinateSymmetryPaid Terminal.canonicalTerminalBoundary ≡ false
+selectedStressSymmetryStillOpenRegression : Terminal.selectedQFTStressCoordinateSymmetryPaid Terminal.canonicalTerminalBoundary ≡ false
 selectedStressSymmetryStillOpenRegression = refl
-
-brownMaclayTenValuesStillOpenRegression :
-  Terminal.brownMaclayTenIndependentComponentValuesPaid Terminal.canonicalTerminalBoundary ≡ false
+brownMaclayTenValuesStillOpenRegression : Terminal.brownMaclayTenIndependentComponentValuesPaid Terminal.canonicalTerminalBoundary ≡ false
 brownMaclayTenValuesStillOpenRegression = refl
-
-selectedSectorBrownMaclayEqualityStillOpenRegression :
-  Terminal.casimirSelectedQFTSectorBrownMaclayEqualityPaid Terminal.canonicalTerminalBoundary ≡ false
+selectedSectorBrownMaclayEqualityStillOpenRegression : Terminal.casimirSelectedQFTSectorBrownMaclayEqualityPaid Terminal.canonicalTerminalBoundary ≡ false
 selectedSectorBrownMaclayEqualityStillOpenRegression = refl
-
-selectedSectorStressAttachmentStillOpenRegression :
-  Terminal.casimirSelectedRecoveredQFTSectorStressAttachmentPaid Terminal.canonicalTerminalBoundary ≡ false
+selectedSectorStressAttachmentStillOpenRegression : Terminal.casimirSelectedRecoveredQFTSectorStressAttachmentPaid Terminal.canonicalTerminalBoundary ≡ false
 selectedSectorStressAttachmentStillOpenRegression = refl
-
-nonAbelianAggregationStillOpenRegression :
-  Terminal.nonAbelianQFTStressAggregationFromCasimirPaid Terminal.canonicalTerminalBoundary ≡ false
+nonAbelianAggregationStillOpenRegression : Terminal.nonAbelianQFTStressAggregationFromCasimirPaid Terminal.canonicalTerminalBoundary ≡ false
 nonAbelianAggregationStillOpenRegression = refl
-
-clayDoesNotPromoteCasimirRegression :
-  Terminal.clayMassGapPromotesCasimirPhysics Terminal.canonicalTerminalBoundary ≡ false
+clayDoesNotPromoteCasimirRegression : Terminal.clayMassGapPromotesCasimirPhysics Terminal.canonicalTerminalBoundary ≡ false
 clayDoesNotPromoteCasimirRegression = refl
-
-allSectorCommonVariationStillOpenRegression :
-  Terminal.allSectorAggregationAndCommonVariationPaid Terminal.canonicalTerminalBoundary ≡ false
+allSectorCommonVariationStillOpenRegression : Terminal.allSectorAggregationAndCommonVariationPaid Terminal.canonicalTerminalBoundary ≡ false
 allSectorCommonVariationStillOpenRegression = refl
-
-einsteinCommonMetricVariationStillOpenRegression :
-  Terminal.einsteinCommonMetricVariationPaid Terminal.canonicalTerminalBoundary ≡ false
+einsteinCommonMetricVariationStillOpenRegression : Terminal.einsteinCommonMetricVariationPaid Terminal.canonicalTerminalBoundary ≡ false
 einsteinCommonMetricVariationStillOpenRegression = refl
-
-commonMetricProducerLanguageStillOpenRegression :
-  Terminal.commonMetricProducerLanguagePaid Terminal.canonicalTerminalBoundary ≡ false
+commonMetricProducerLanguageStillOpenRegression : Terminal.commonMetricProducerLanguagePaid Terminal.canonicalTerminalBoundary ≡ false
 commonMetricProducerLanguageStillOpenRegression = refl
-
-commonActionIdentificationStillOpenRegression :
-  Terminal.casimirCommonActionIdentificationPaid Terminal.canonicalTerminalBoundary ≡ false
+commonActionIdentificationStillOpenRegression : Terminal.casimirCommonActionIdentificationPaid Terminal.canonicalTerminalBoundary ≡ false
 commonActionIdentificationStillOpenRegression = refl
-
-qiStillOpenRegression :
-  Terminal.sameObjectQuantumInequalityPaid Terminal.canonicalTerminalBoundary ≡ false
+qiStillOpenRegression : Terminal.sameObjectQuantumInequalityPaid Terminal.canonicalTerminalBoundary ≡ false
 qiStillOpenRegression = refl
-
-gravityStillOpenRegression :
-  Terminal.semiclassicalGravityBackreactionPaid Terminal.canonicalTerminalBoundary ≡ false
+gravityStillOpenRegression : Terminal.semiclassicalGravityBackreactionPaid Terminal.canonicalTerminalBoundary ≡ false
 gravityStillOpenRegression = refl
-
-unifiedQGStillClosedRegression :
-  Terminal.unifiedQuantumGravityPromoted Terminal.canonicalTerminalBoundary ≡ false
+unifiedQGStillClosedRegression : Terminal.unifiedQuantumGravityPromoted Terminal.canonicalTerminalBoundary ≡ false
 unifiedQGStillClosedRegression = refl
 
-independentBrownMaclayComponentCountRegression :
-  Terminal.selectedBrownMaclayIndependentComponentCount ≡ 10
+independentBrownMaclayComponentCountRegression : Terminal.selectedBrownMaclayIndependentComponentCount ≡ 10
 independentBrownMaclayComponentCountRegression = refl
 
 firstUnificationBlockerRegression :
-  Terminal.firstUnificationBlocker
-  ≡ Terminal.missingSelectedQFTGroupCompactSimpleWitness
+  Terminal.firstUnificationBlocker ≡ Terminal.missingSelectedQFTCompactSimpleEvidenceAttachment
 firstUnificationBlockerRegression = refl
-
 secondUnificationBlockerRegression :
-  Terminal.secondUnificationBlocker
-  ≡ Terminal.missingSelectedQFTGroupDynkinA1Classification
+  Terminal.secondUnificationBlocker ≡ Terminal.missingSelectedQFTGroupDynkinA1Classification
 secondUnificationBlockerRegression = refl
-
 thirdUnificationBlockerRegression :
-  Terminal.thirdUnificationBlocker
-  ≡ Terminal.missingSelectedQFTGroupQuaternionSU2Interpretation
+  Terminal.thirdUnificationBlocker ≡ Terminal.missingSelectedQFTGroupQuaternionSU2Interpretation
 thirdUnificationBlockerRegression = refl
-
 fourthUnificationBlockerRegression :
-  Terminal.fourthUnificationBlocker
-  ≡ Terminal.missingSelectedQFTStressCoordinateSymmetry
+  Terminal.fourthUnificationBlocker ≡ Terminal.missingSelectedQFTStressCoordinateSymmetry
 fourthUnificationBlockerRegression = refl
-
 fifthUnificationBlockerRegression :
-  Terminal.fifthUnificationBlocker
-  ≡ Terminal.missingBrownMaclayTenIndependentComponentValues
+  Terminal.fifthUnificationBlocker ≡ Terminal.missingBrownMaclayTenIndependentComponentValues
 fifthUnificationBlockerRegression = refl
-
 sixthUnificationBlockerRegression :
-  Terminal.sixthUnificationBlocker
-  ≡ Terminal.missingRound131AllSectorAssembly
+  Terminal.sixthUnificationBlocker ≡ Terminal.missingRound131AllSectorAssembly
 sixthUnificationBlockerRegression = refl
-
-firstAllSectorAssemblyLeafRegression :
-  Terminal.firstAllSectorAssemblyLeaf
-  ≡ Round131.commonSectorMetricAndScalarConvention
+firstAllSectorAssemblyLeafRegression : Terminal.firstAllSectorAssemblyLeaf ≡ Round131.commonSectorMetricAndScalarConvention
 firstAllSectorAssemblyLeafRegression = refl
 
-noMoreCardinalityPaymentRegression :
-  Terminal.FurtherCardinalityFactorisationCountsAsPhysicalPayment → ⊥
+noMoreCardinalityPaymentRegression : Terminal.FurtherCardinalityFactorisationCountsAsPhysicalPayment → ⊥
 noMoreCardinalityPaymentRegression = Terminal.furtherCardinalityIsNotPayment
