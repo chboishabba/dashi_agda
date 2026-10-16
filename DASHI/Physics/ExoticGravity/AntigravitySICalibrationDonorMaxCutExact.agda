@@ -7,6 +7,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Closure.EinsteinPhysicalCouplingCalibrationExact as Einstein
 import DASHI.Physics.ExoticGravity.AntigravityCODATA2022GAuthorityAdmissionExact as GAuthority
+import DASHI.Physics.ExoticGravity.AntigravityStressLengthSquaredTargetIntervalExact as ScaleTarget
 
 ------------------------------------------------------------------------
 -- SI / PHYSICAL CALIBRATION DONOR MAX-CUT
@@ -27,12 +28,17 @@ import DASHI.Physics.ExoticGravity.AntigravityCODATA2022GAuthorityAdmissionExact
 --     consumer-admission step;
 --   * G remains measured with retained uncertainty, never exact by fiat.
 --
--- Consequently accepted measured-G authority is no longer an open leaf for
--- this antigravity consumer.  The remaining physical SI package is the
--- source-native stress*length^2 scale seen by the Kottler consumer together
--- with the same-state source/device identification performed outside this SI
--- owner.  Separate stress and length identities are stronger than the consumer
--- requires and are not scheduled independently.
+-- The reciprocal/order algebra for the remaining source/device scale is also
+-- compiler-owned now.  For any rational diagnostic kappa point inside the
+-- accepted enclosure and positive source magnitude C, the required
+-- stress*length^2 product to hit target Lambda lies in
+--
+--   [ Lambda / (kappa_upper*C), Lambda / (kappa_lower*C) ].
+--
+-- This diagnostic theorem does NOT promote the measured physical kappa to an
+-- exact rational point.  It only removes residual interval arithmetic from P2.
+-- The one remaining physical SI package is therefore same-apparatus
+-- identification/measurement of the source-native stress*length^2 product.
 ------------------------------------------------------------------------
 
 vendoredCODATAEinsteinCouplingCandidateAvailable : Bool
@@ -57,8 +63,16 @@ acceptedPhysicalEinsteinCouplingAvailable : Bool
 acceptedPhysicalEinsteinCouplingAvailable =
   GAuthority.acceptedPhysicalEinsteinCouplingAvailable
 
+requiredStressLengthSquaredIntervalAlgebraOwned : Bool
+requiredStressLengthSquaredIntervalAlgebraOwned = true
+
+rationalPointDiagnosticPromotesMeasuredKappaToExact : Bool
+rationalPointDiagnosticPromotesMeasuredKappaToExact =
+  ScaleTarget.rationalPointDiagnosticPromotesMeasuredKappaToExact
+
 sourceStressLengthSquaredScaleStillRequired : Bool
-sourceStressLengthSquaredScaleStillRequired = true
+sourceStressLengthSquaredScaleStillRequired =
+  ScaleTarget.remainingP2DatumIsSameApparatusStressLengthSquaredProduct
 
 separateStressAndLengthIdentificationRequired : Bool
 separateStressAndLengthIdentificationRequired = false
@@ -85,6 +99,7 @@ record AntigravitySICalibrationFrontier : Set where
     exactCOpen : Bool
     newConventionOpen : Bool
     acceptedMeasuredGOpen : Bool
+    requiredScaleIntervalAlgebraOpen : Bool
     stressLengthSquaredProductOpen : Bool
     separateStressScaleOpen : Bool
     separateLengthScaleOpen : Bool
@@ -96,7 +111,7 @@ record AntigravitySICalibrationFrontier : Set where
 canonicalAntigravitySICalibrationFrontier : AntigravitySICalibrationFrontier
 canonicalAntigravitySICalibrationFrontier =
   antigravity-si-calibration-frontier
-    true false false false true false false true false false 1
+    true false false false false true false false true false false 1
 
 acceptedMeasuredGAuthorityStillRequiredIsFalse :
   acceptedMeasuredGAuthorityStillRequired ≡ false
@@ -106,6 +121,14 @@ acceptedMeasuredGAuthorityStillRequiredIsFalse =
 newEinsteinCouplingConventionRequiredIsFalse :
   newEinsteinCouplingConventionRequired ≡ false
 newEinsteinCouplingConventionRequiredIsFalse = refl
+
+requiredStressLengthSquaredIntervalAlgebraOwnedIsTrue :
+  requiredStressLengthSquaredIntervalAlgebraOwned ≡ true
+requiredStressLengthSquaredIntervalAlgebraOwnedIsTrue = refl
+
+rationalPointDiagnosticPromotesMeasuredKappaToExactIsFalse :
+  rationalPointDiagnosticPromotesMeasuredKappaToExact ≡ false
+rationalPointDiagnosticPromotesMeasuredKappaToExactIsFalse = refl
 
 separateStressAndLengthIdentificationRequiredIsFalse :
   separateStressAndLengthIdentificationRequired ≡ false
