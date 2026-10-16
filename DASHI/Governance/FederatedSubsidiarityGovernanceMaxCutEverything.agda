@@ -44,6 +44,12 @@ import DASHI.Governance.DeliberativeViableNonDominationLoopExact
 -- topology rather than treating horizontal self-description as realised power.
 import DASHI.Governance.OccupyRealizedControlAcquisitionExact
 
+-- Primary NYCGA constitutional baseline (Principles of Solidarity + Statement
+-- of Autonomy) versus realised-control/POSIWID audit. Declared leaderlessness,
+-- transparency, dissent and participatory purpose do not pay realised control.
+import DASHI.Governance.OccupyDeclaredRealizedControlExact
+import DASHI.Governance.OccupyDeclaredRealizedControlRegression
+
 -- RED-first integration regression for the cybernetic tranche.
 import DASHI.Governance.DeliberativeViableNonDominationLoopRegression
 
