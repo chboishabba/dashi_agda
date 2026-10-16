@@ -30,3 +30,6 @@ _performance-probe-boundary-paid = PerformanceProbe.canonicalPowersResearchThrou
 
 _roadmap-boundary-paid : Roadmap.PowersEmpiricalRoadmapBoundary
 _roadmap-boundary-paid = Roadmap.canonicalPowersEmpiricalRoadmapBoundary
+
+roadmapBoundary : Roadmap.PowersEmpiricalRoadmapBoundary
+roadmapBoundary = Roadmap.canonicalPowersEmpiricalRoadmapBoundary
