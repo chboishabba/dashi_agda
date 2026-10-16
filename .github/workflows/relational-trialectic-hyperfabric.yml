@@ -35,7 +35,7 @@ on:
       - 'DASHI/Biology/TraumaRelationalLearningNonpromotionExact.agda'
       - 'DASHI/Biology/TriangulationParentificationSourceAtlasExact.agda'
       - 'DASHI/Biology/InterparentalThreatRelationalAdaptationSourceAtlasExact.agda'
-      - 'DASHI/TraumaRelationalPerspectiveHyperfabricExact.agda'
+      - 'DASHI/TraumaRelationalPerspectiveHyperfabric.agda'
       - 'DASHI/EverythingRelationalTrialecticHyperfabric.agda'
       - '.github/workflows/relational-trialectic-hyperfabric.yml'
   pull_request:
@@ -72,7 +72,7 @@ on:
       - 'DASHI/Biology/TraumaRelationalLearningNonpromotionExact.agda'
       - 'DASHI/Biology/TriangulationParentificationSourceAtlasExact.agda'
       - 'DASHI/Biology/InterparentalThreatRelationalAdaptationSourceAtlasExact.agda'
-      - 'DASHI/TraumaRelationalPerspectiveHyperfabricExact.agda'
+      - 'DASHI/TraumaRelationalPerspectiveHyperfabric.agda'
       - 'DASHI/EverythingRelationalTrialecticHyperfabric.agda'
       - '.github/workflows/relational-trialectic-hyperfabric.yml'
 
@@ -119,7 +119,10 @@ jobs:
               DASHI/Reasoning/TrialecticFiniteTriadicHypersheafValidation.agda
               DASHI/Reasoning/TrialecticFiniteHypercover369CechCrosswalkValidation.agda
               DASHI/Reasoning/TrialecticHypersheafHypercoverFrontierValidation.agda
+              DASHI/Reasoning/TrialecticT27WavePhaseHigherStackValidation.agda
+              DASHI/Reasoning/TrialecticT27FiniteTriadicHypersheafValidation.agda
               DASHI/Philosophy/NonginCurrentMaxCutValidation.agda
+              DASHI/Philosophy/NonginCurrentMaxCutT27Validation.agda
               DASHI/Philosophy/NonginRoadmapClosureValidation.agda
               DASHI/Philosophy/NonginExtendedRoadmapValidation.agda
             )
