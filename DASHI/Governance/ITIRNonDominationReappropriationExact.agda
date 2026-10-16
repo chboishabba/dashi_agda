@@ -39,17 +39,34 @@ data AuthorityShape : Set where
   scopedMandate : AuthorityShape
   unilateralCommand : AuthorityShape
 
+-- Proof-relevant: every obligation is paired with an inhabitant. A bare Set
+-- naming an obligation is deliberately insufficient.
 record NonDominationOperationalReceipt : Set₁ where
   constructor non-domination-operational-receipt
   field
-    roleVisibility : Set
-    mandateScope : Set
-    revocability : Set
-    contestability : Set
-    affectedPartyVoice : Set
-    evidenceInspectability : Set
-    unilateralAuthorityBound : Set
-    exitOrAppealPath : Set
+    RoleVisibility : Set
+    roleVisibility : RoleVisibility
+
+    MandateScope : Set
+    mandateScope : MandateScope
+
+    Revocability : Set
+    revocability : Revocability
+
+    Contestability : Set
+    contestability : Contestability
+
+    AffectedPartyVoice : Set
+    affectedPartyVoice : AffectedPartyVoice
+
+    EvidenceInspectability : Set
+    evidenceInspectability : EvidenceInspectability
+
+    UnilateralAuthorityBound : Set
+    unilateralAuthorityBound : UnilateralAuthorityBound
+
+    ExitOrAppealPath : Set
+    exitOrAppealPath : ExitOrAppealPath
 
 open NonDominationOperationalReceipt public
 
@@ -143,6 +160,7 @@ record ReappropriationBoundary : Set where
     privateLifeIsDefaultSurveillanceTarget : Bool
     affectedVoiceAndContestabilityRemainRequired : Bool
     provenanceAndEvidenceInspectabilityRemainRequired : Bool
+    obligationTypesWithoutWitnessesCountAsPaid : Bool
 
 open ReappropriationBoundary public
 
@@ -150,7 +168,7 @@ canonicalReappropriationBoundary : ReappropriationBoundary
 canonicalReappropriationBoundary =
   reappropriation-boundary
     false false false false false false false false
-    true false false true true
+    true false false true true false
 
 canonicalITIRNonDominationReceipt : GenericReceipt.GenericReceipt
 canonicalITIRNonDominationReceipt =
@@ -158,6 +176,6 @@ canonicalITIRNonDominationReceipt =
     "ITIR non-domination / reappropriation bridge"
     "DASHI.Governance.ITIRNonDominationReappropriationExact"
     "canonicalReappropriationBoundary"
-    "separates facilitation, rotating expertise, scoped delegation and representation from durable arbitrary command; requires same-object transparency, revocability, contestability, affected-party voice and inspectable evidence before a reappropriated capability can be called non-dominating"
-    "controller identity or ideology does not pay non-domination; changing personnel does not by itself reappropriate an authority architecture; anti-panopticon accountability targets consequential power rather than making ordinary participants or private life default surveillance targets"
+    "separates facilitation, rotating expertise, scoped delegation and representation from durable arbitrary command; requires proof-relevant same-object transparency, revocability, contestability, affected-party voice, inspectable evidence, bounded unilateral authority and exit/appeal before a reappropriated capability can be called non-dominating"
+    "controller identity or ideology does not pay non-domination; changing personnel does not by itself reappropriate an authority architecture; bare obligation types do not count as witnesses; anti-panopticon accountability targets consequential power rather than making ordinary participants or private life default surveillance targets"
     "agda -i . DASHI/Governance/AnarchistLeadershipNonDominationTSFVRegression.agda"
