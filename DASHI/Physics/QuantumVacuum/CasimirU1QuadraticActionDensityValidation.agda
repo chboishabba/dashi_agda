@@ -3,6 +3,8 @@ module DASHI.Physics.QuantumVacuum.CasimirU1QuadraticActionDensityValidation whe
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.CasimirU1QuadraticActionDensityExact as M
+import DASHI.Physics.QuantumVacuum.CasimirSide4CartanCurvatureClosureValidation
+import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationValidation
 
 quadraticDensityCompilerOwnedRegression :
   M.quadraticYMDensityToMaxwellDensityCompilerOwned M.canonicalU1QuadraticDensityBoundary ≡ true
@@ -12,13 +14,25 @@ curvatureAttachmentStillRequiredRegression :
   M.sameObjectNondegenerateCurvatureStillRequired M.canonicalU1QuadraticDensityBoundary ≡ true
 curvatureAttachmentStillRequiredRegression = refl
 
-exteriorCartanImageStillRequiredRegression :
-  M.exteriorFieldStrengthCartanImageStillRequired M.canonicalU1QuadraticDensityBoundary ≡ true
-exteriorCartanImageStillRequiredRegression = refl
+side4CartanCurlCompilerAvailableRegression :
+  M.side4CartanCurlClosureCompilerAvailable M.canonicalU1QuadraticDensityBoundary ≡ true
+side4CartanCurlCompilerAvailableRegression = refl
 
-physicalPrefactorStillRequiredRegression :
-  M.physicalActionPrefactorStillRequired M.canonicalU1QuadraticDensityBoundary ≡ true
-physicalPrefactorStillRequiredRegression = refl
+independentFiniteCartanCurlNotRequiredRegression :
+  M.independentFiniteCartanCurlClosurePaymentRequired M.canonicalU1QuadraticDensityBoundary ≡ false
+independentFiniteCartanCurlNotRequiredRegression = refl
+
+selectedNonlinearExteriorTransportStillRequiredRegression :
+  M.selectedNonlinearExteriorCartanTransportStillRequired M.canonicalU1QuadraticDensityBoundary ≡ true
+selectedNonlinearExteriorTransportStillRequiredRegression = refl
+
+freeMaxwellNormalizationStillRequiredRegression :
+  M.freeMaxwellNormalizationStillRequired M.canonicalU1QuadraticDensityBoundary ≡ true
+freeMaxwellNormalizationStillRequiredRegression = refl
+
+measuredAlphaNotRequiredRegression :
+  M.measuredAlphaEMRequiredForIdealQuadraticDensity M.canonicalU1QuadraticDensityBoundary ≡ false
+measuredAlphaNotRequiredRegression = refl
 
 integrationStillRequiredRegression :
   M.actionIntegrationStillRequired M.canonicalU1QuadraticDensityBoundary ≡ true
