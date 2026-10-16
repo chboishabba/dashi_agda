@@ -9,6 +9,7 @@ import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutExact
 import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerExact as PinnedRecovery
 import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeExact as GroupLaw
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Stress
+import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationExact as FreeNormalization
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact as Action
 import DASHI.Physics.QuantumVacuum.CasimirU1SelectedStressReadoutAttachmentExact as StressReadout
 import DASHI.Physics.QuantumVacuum.CasimirU1ModeRenormalizedStressAttachmentExact as ModeStress
@@ -25,6 +26,10 @@ import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact as Round
 -- abelian-curvature algebra, restricted action equality, same-path variation
 -- equality, selected-QFT/Maxwell readout equality, and duplicate plate/
 -- renormalization objects.
+--
+-- Free-field normalization is separated from empirical alpha_EM calibration:
+-- the ideal Casimir lane needs a common field/generator/action convention, not a
+-- measured fine-structure payload.
 ------------------------------------------------------------------------
 
 legacyTerminalBoundary : Legacy.Casimir369StressEnergyTerminalBoundary
@@ -41,6 +46,9 @@ quaternionGroupLawBoundary = GroupLaw.canonicalQuaternionSU2GroupLawBoundary
 
 selectedQFTCartanFieldBoundary : U1Stress.CasimirU1RestrictedSelectedQFTStressBoundary
 selectedQFTCartanFieldBoundary = U1Stress.canonicalCasimirU1RestrictedSelectedQFTStressBoundary
+
+freeMaxwellNormalizationBoundary : FreeNormalization.CasimirFreeMaxwellNormalizationBoundary
+freeMaxwellNormalizationBoundary = FreeNormalization.canonicalFreeMaxwellNormalizationBoundary
 
 actionVariationBoundary : Action.CasimirU1ActionVariationBoundary
 actionVariationBoundary = Action.canonicalCasimirU1ActionVariationBoundary
@@ -66,6 +74,8 @@ record CasimirSourceNativeTerminalBoundary : Set where
     selectedGroupStructureRealizationCompilerPaid : Bool
     independentAllGroupsStructureInterpretationRequired : Bool
     selectedQFTCartanFieldRealizationInterfacePaid : Bool
+    freeMaxwellActionNormalizationInterfacePaid : Bool
+    measuredAlphaEMRequiredForIdealCasimirActionWeld : Bool
 
     cartanFieldBracketCompilerPaid : Bool
     invariantPairingCompilerPaid : Bool
@@ -84,7 +94,7 @@ record CasimirSourceNativeTerminalBoundary : Set where
     r457LiteralPinnedConstructionIdentityPaid : Bool
     selectedGroupQuaternionSU2RealizationPaid : Bool
     selectedQFTCartanFieldRealizationPaid : Bool
-    physicalChargeCouplingNormalizationPaid : Bool
+    freeMaxwellActionNormalizationPaid : Bool
     sameObjectNondegenerateCurvatureFormulaPaid : Bool
     exteriorFieldStrengthCartanImagePaid : Bool
     sameObjectActionDensityFunctionalPaid : Bool
@@ -104,7 +114,7 @@ open CasimirSourceNativeTerminalBoundary public
 canonicalSourceNativeTerminalBoundary : CasimirSourceNativeTerminalBoundary
 canonicalSourceNativeTerminalBoundary =
   casimir-source-native-terminal-boundary
-    true true false true false true false false true true false true
+    true true false true false true false false true true false true true false
     true true true true false true false true false true false false
     false false false false false false false false false false false false false false false false false false
 
@@ -113,7 +123,7 @@ data RemainingSourceNativeCasimirBlocker : Set where
   missingR457LiteralPinnedConstructionIdentity : RemainingSourceNativeCasimirBlocker
   missingSelectedGroupQuaternionSU2Realization : RemainingSourceNativeCasimirBlocker
   missingSelectedQFTCartanFieldRealization : RemainingSourceNativeCasimirBlocker
-  missingPhysicalChargeCouplingNormalization : RemainingSourceNativeCasimirBlocker
+  missingFreeMaxwellActionNormalization : RemainingSourceNativeCasimirBlocker
   missingSameObjectNondegenerateCurvatureFormulaAttachment : RemainingSourceNativeCasimirBlocker
   missingExteriorFieldStrengthCartanImage : RemainingSourceNativeCasimirBlocker
   missingSameObjectActionDensityFunctional : RemainingSourceNativeCasimirBlocker
@@ -140,7 +150,7 @@ thirdUnificationBlocker = missingSelectedGroupQuaternionSU2Realization
 fourthUnificationBlocker : RemainingSourceNativeCasimirBlocker
 fourthUnificationBlocker = missingSelectedQFTCartanFieldRealization
 fifthUnificationBlocker : RemainingSourceNativeCasimirBlocker
-fifthUnificationBlocker = missingPhysicalChargeCouplingNormalization
+fifthUnificationBlocker = missingFreeMaxwellActionNormalization
 sixthUnificationBlocker : RemainingSourceNativeCasimirBlocker
 sixthUnificationBlocker = missingSameObjectNondegenerateCurvatureFormulaAttachment
 seventhUnificationBlocker : RemainingSourceNativeCasimirBlocker
@@ -182,6 +192,7 @@ data RetiredR457RecoveryEqualityBlockerAutomaticallyReturns : Set where
 data RetiredPinnedSourceNativeSelectionBlockerAutomaticallyReturns : Set where
 data RetiredAllGroupsInterpretationBlockerAutomaticallyReturns : Set where
 data RetiredArbitraryCartanFieldBlockerAutomaticallyReturns : Set where
+data RetiredMeasuredAlphaEMBlockerAutomaticallyReturns : Set where
 data RetiredCompactSimpleBlockerAutomaticallyReturns : Set where
 data RetiredActionEqualityBlockerAutomaticallyReturns : Set where
 data RetiredMetricVariationEqualityBlockerAutomaticallyReturns : Set where
@@ -197,6 +208,8 @@ retiredAllGroupsInterpretationBlockerDoesNotReturn : RetiredAllGroupsInterpretat
 retiredAllGroupsInterpretationBlockerDoesNotReturn ()
 retiredArbitraryCartanFieldBlockerDoesNotReturn : RetiredArbitraryCartanFieldBlockerAutomaticallyReturns → ⊥
 retiredArbitraryCartanFieldBlockerDoesNotReturn ()
+retiredMeasuredAlphaEMBlockerDoesNotReturn : RetiredMeasuredAlphaEMBlockerAutomaticallyReturns → ⊥
+retiredMeasuredAlphaEMBlockerDoesNotReturn ()
 retiredCompactSimpleBlockerDoesNotReturn : RetiredCompactSimpleBlockerAutomaticallyReturns → ⊥
 retiredCompactSimpleBlockerDoesNotReturn ()
 retiredActionEqualityBlockerDoesNotReturn : RetiredActionEqualityBlockerAutomaticallyReturns → ⊥
@@ -208,4 +221,4 @@ retiredSecondRenormalizationBlockerDoesNotReturn ()
 
 sourceNativeTerminalReading : String
 sourceNativeTerminalReading =
-  "The source-native Casimir/GRQFT max-cut is reduced to genuine same-object inputs. Round131 recovery of the literal R457 construction is first. Equality of that construction with the pinned physical Yang-Mills construction is second. Third is an indexed realization of the chosen compact-simple token as concrete quaternionic SU(2). Fourth is a SelectedQFTCartanFieldRealization tying the actual selected recovered-QFT field to the existing Cartan U(1) image; an arbitrary Cartan-valued callback does not count. Once that is supplied, bracket-zero compiles. Invariant pairing, abelian curvature algebra, restricted action equality, same-path metric variation, selected-QFT/Maxwell readout equality and duplicate plate/renormalization objects remain compiler-saturated. Downstream physical inputs proceed through coupling/curvature/action/path/stress attachment, ten Brown-Maclay component values, Round131 all-sector assembly and Einstein/common-action closure."
+  "The source-native Casimir/GRQFT max-cut is reduced to genuine same-object inputs. Round131 recovery of Y_R457 is first; Y_R457 = Y_pinned second; selected-group quaternion-SU2 realization third; selected recovered-QFT Cartan field realization fourth. Fifth is now FreeMaxwellActionNormalization: same physical field normalization, generator/pairing convention and common action prefactor. A measured alpha_EM payload is explicitly not required for the ideal free-field Casimir kernel and remains separate phenomenology. The remaining curvature/action/path/stress attachments then lead to ten Brown-Maclay component values, Round131 all-sector assembly and Einstein/common-action closure."
