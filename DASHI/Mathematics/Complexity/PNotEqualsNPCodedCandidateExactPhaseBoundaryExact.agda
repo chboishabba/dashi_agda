@@ -6,9 +6,10 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCodedCandidateExactPhaseBoundary
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Maybe using (nothing)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (_×_; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -99,10 +100,6 @@ candidatePhaseFinishStateExact :
     (Standard.state (Decider.finish witness formula))
 candidatePhaseFinishStateExact witness formula = refl
 
-------------------------------------------------------------------------
--- Acceptance is preserved propositionally by the product-state codec.
-------------------------------------------------------------------------
-
 phaseAcceptingImpliesSourceAccepting :
   ∀ {decider : Cook.BooleanFormula → Bool}
     (witness : Decider.CodedStandardPolynomialDecider decider)
@@ -145,11 +142,6 @@ candidatePhaseAcceptanceIff :
 candidatePhaseAcceptanceIff witness formula =
   phaseAcceptingImpliesSourceAccepting witness formula ,
   sourceAcceptingImpliesPhaseAccepting witness formula
-
-------------------------------------------------------------------------
--- The exact endpoint reached by the candidate run is quiescent for its actual
--- scanned symbol (indeed Phase proves this for every symbol).
-------------------------------------------------------------------------
 
 candidatePhaseEndpointTransitionNothing :
   ∀ {decider : Cook.BooleanFormula → Bool}
