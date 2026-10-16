@@ -2,14 +2,12 @@ module DASHI.Physics.Foundations.R3HodgeCrossExact where
 
 ------------------------------------------------------------------------
 -- EXPLICIT 3D WEDGE / HODGE / CROSS IDENTIFICATION
---
--- The repository already owns the continuous three-coordinate su(2) carrier
--- and its Euclidean minors.  This module packages those minors as the three
--- coordinates of Lambda^2(R^3), applies the oriented 3D Hodge map, and proves
--- that the result is exactly the usual cross-product coordinate vector.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import Data.List.Base using ([]; _∷_)
+import Tactic.RingSolver as Solver
 
 import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as R
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as V3
@@ -19,7 +17,7 @@ import DASHI.Physics.YangMills.BalabanP33SU2EuclideanGeometryExact as Euclidean
 record Bivector3 : Set where
   constructor bivector3
   field
-    xy yz zx : R.ℝ
+    xy yz zx : ℝ
 
 open Bivector3 public
 
@@ -52,9 +50,9 @@ crossSwapNegates : ∀ u v →
 crossSwapNegates
   (V3.su2Lie x1 y1 z1) (V3.su2Lie x2 y2 z2) =
   V3.su2LieExt
-    (Lie.anti1 x1 y1 z1 x2 y2 z2)
-    (Lie.anti2 x1 y1 z1 x2 y2 z2)
-    (Lie.anti3 x1 y1 z1 x2 y2 z2)
+    (Solver.solve (x1 ∷ y1 ∷ z1 ∷ x2 ∷ y2 ∷ z2 ∷ []) R.realSolverRing)
+    (Solver.solve (x1 ∷ y1 ∷ z1 ∷ x2 ∷ y2 ∷ z2 ∷ []) R.realSolverRing)
+    (Solver.solve (x1 ∷ y1 ∷ z1 ∷ x2 ∷ y2 ∷ z2 ∷ []) R.realSolverRing)
 
 -- Repository normalization: the literal su(2) commutator is twice this cross.
 lieBracketIsTwoCross : ∀ u v →
@@ -80,9 +78,10 @@ record R3HodgeCrossBoundary : Set where
     explicitBivectorCoordinatesConstructed : Bool
     hodgeMapConstructed : Bool
     hodgeWedgeEqualsCrossProved : Bool
+    crossAntisymmetryProved : Bool
     su2BracketNormalizationConnected : Bool
     genericHigherDimensionalHodgeTheoryClaimed : Bool
 
 canonicalR3HodgeCrossBoundary : R3HodgeCrossBoundary
 canonicalR3HodgeCrossBoundary =
-  r3-hodge-cross-boundary true true true true false
+  r3-hodge-cross-boundary true true true true true false
