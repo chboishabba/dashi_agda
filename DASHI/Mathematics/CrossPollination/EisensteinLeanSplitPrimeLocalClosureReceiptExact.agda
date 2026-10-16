@@ -8,7 +8,8 @@ module DASHI.Mathematics.CrossPollination.EisensteinLeanSplitPrimeLocalClosureRe
 --
 -- Observed source chain on the SAME j=0 Eisenstein programme:
 --
---   order-3 multiplicative character
+--   exact order-3 multiplicative character
+--     -> cube subgroup = character kernel
 --     -> exact cube-fibre certificate
 --     -> Jacobi trace compiler
 --     -> J in Z[zeta_6], J*conj(J)=p
@@ -19,16 +20,23 @@ module DASHI.Mathematics.CrossPollination.EisensteinLeanSplitPrimeLocalClosureRe
 --     -> existing six-unit x split-choice normalization
 --     -> split/inert classification for every good prime p>3.
 --
--- At p=3 Lean also records literal singular-reduction facts and exact finite
--- counts, but it does NOT manufacture a Neron/Kodaira reduction type or the
--- bad-prime elliptic local L-factor.
+-- At p=2 and p=3 Lean also records literal singular-reduction facts and exact
+-- finite counts. It does NOT manufacture Neron/Kodaira reduction types or the
+-- bad-prime elliptic local L-factors.
+--
+-- Lean also records an EXTERNAL-SOURCE PROVENANCE receipt for the concrete
+-- curve metadata: Stein/Cremona-derived table label 36a1/conductor 36 and the
+-- PARI/GP short-Weierstrass discriminant formula / F2 singular example. That
+-- external metadata is not Lean proof authority and is not re-attributed to
+-- DASHI, Mathlib, or Agda.
 --
 -- Attribution boundary:
--- * Mathlib owns the imported generic finite-field, character, primitive-root,
+-- * Mathlib owns imported generic finite-field, character, primitive-root,
 --   Jacobi-sum, quadratic-algebra and complex-conjugation infrastructure.
--- * DASHI/Lean owns the specialization/composition on PR #69.
--- * This file is Agda provenance only: no cross-kernel proof authority, no
---   external scientific authority, and no local theorem is fabricated.
+-- * DASHI/Lean owns specialization/composition on PR #69.
+-- * Stein/Cremona and PARI metadata remain externally attributed.
+-- * This file is Agda provenance only: no cross-kernel proof authority and no
+--   local theorem is fabricated.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -44,12 +52,16 @@ record LeanSplitPrimeLocalClosureReceipt : Set where
     branch : String
     observedCommit : String
     cubicCharacterOwner : String
+    genericCharacterKernelOwner : String
     cyclotomicJacobiOwner : String
     literalEisensteinCarrierOwner : String
     unitNormalizationOwner : String
     allGoodPrimeOwner : String
+    badPrimeTwoOwner : String
     badPrimeThreeOwner : String
+    external36a1SourceReceiptOwner : String
     cubeFibreTheorem : String
+    genericKernelTheorem : String
     jacobiNormTheorem : String
     literalNormTheorem : String
     splitTraceTheorem : String
@@ -66,14 +78,18 @@ leanSplitPrimeLocalClosureReceipt =
     "chboishabba/dashi_lean4"
     "PR #69"
     "agent/eisenstein-lattice-counting-maxcut-20261012"
-    "ccb67b0f47bc05ac5c9befecad45f74abf2ef460"
+    "48168c6d8f24d741ac6401e6d75530d7e2dfc397"
     "Integration/EisensteinJZeroCanonicalCubicCharacterExact.lean"
+    "Integration/EisensteinJZeroCubicCharacterCertificateExact.lean"
     "Integration/EisensteinJZeroSplitJacobiCyclotomicExact.lean"
     "Integration/EisensteinJZeroSplitPrimeEisensteinCarrierExact.lean"
     "Integration/EisensteinJZeroSplitPrimeUnitNormalizationExact.lean"
     "Integration/EisensteinJZeroAllGoodPrimeLocalExact.lean"
+    "Integration/EisensteinJZeroBadPrimeTwoExact.lean"
     "Integration/EisensteinJZeroBadPrimeThreeExact.lean"
+    "Integration/EisensteinJZero36a1ExternalSourceReceipt.lean"
     "canonicalCubicCharacter_eq_one_iff_cube / canonicalCubicCharacter_cubeWeightedReindex"
+    "cubeSubgroup_eq_orderThreeCharacterKernel / cubeWeightedReindex_of_orderThree"
     "splitJacobiSum_mul_conj / splitJacobiSum_normSq"
     "splitJacobiEisensteinElement_norm"
     "splitPrime_jZero_trace_formula"
@@ -87,6 +103,9 @@ claimOrigin = origin leanSplitPrimeLocalClosureReceipt
 
 canonicalCubeFibreCertificateObserved : Bool
 canonicalCubeFibreCertificateObserved = true
+
+arbitraryOrderThreeKernelEqualsCubesObserved : Bool
+arbitraryOrderThreeKernelEqualsCubesObserved = true
 
 splitJacobiCyclotomicIntegralityObserved : Bool
 splitJacobiCyclotomicIntegralityObserved = true
@@ -109,11 +128,20 @@ sixUnitNormalizationObserved = true
 allGoodPrimeLocalClassificationObserved : Bool
 allGoodPrimeLocalClassificationObserved = true
 
+badPrimeTwoLiteralReductionObserved : Bool
+badPrimeTwoLiteralReductionObserved = true
+
 badPrimeThreeLiteralReductionObserved : Bool
 badPrimeThreeLiteralReductionObserved = true
 
-badPrimeThreeEllipticLocalFactorObserved : Bool
-badPrimeThreeEllipticLocalFactorObserved = false
+badPrimeEllipticLocalFactorsObserved : Bool
+badPrimeEllipticLocalFactorsObserved = false
+
+external36a1ProvenanceReceiptObserved : Bool
+external36a1ProvenanceReceiptObserved = true
+
+externalMetadataPromotedToProofAuthority : Bool
+externalMetadataPromotedToProofAuthority = false
 
 geometricEndomorphismDegreeNormObserved : Bool
 geometricEndomorphismDegreeNormObserved = false
@@ -141,6 +169,7 @@ record LeanSplitPrimeLocalClosureAttributionBoundary : Set where
   field
     mathlibGenericInfrastructureCredited : Bool
     dashiLeanSpecializationCredited : Bool
+    externalCurveMetadataCreditedExternally : Bool
     samePrimeFormalSourceRecorded : Bool
     crossKernelProofImported : Bool
     agdaTheoremManufacturedFromReceipt : Bool
@@ -152,4 +181,4 @@ record LeanSplitPrimeLocalClosureAttributionBoundary : Set where
 canonicalBoundary : LeanSplitPrimeLocalClosureAttributionBoundary
 canonicalBoundary =
   lean-split-prime-local-closure-attribution-boundary
-    true true true false false false false false false
+    true true true true false false false false false false
