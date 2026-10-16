@@ -4,38 +4,38 @@ module DASHI.Moonshine.MonsterExceptionalActorScopedMaxCutExact where
 -- ACTOR-SCOPED MONSTER -> EXCEPTIONAL MAX-CUT
 --
 -- The 53 residual and the 12+78 normalizer decomposition are not the same
--- representation-theoretic statement.  Current source-backed repo authority
+-- representation-theoretic statement. Current source-backed repo authority
 -- says:
 --
---   * under the central C3 observer the fixed sector is 65610 + 53;
---   * under the full N(3B)/Suz observer it is 65520 + 143, with the 143
---     published as irreducible at that level;
---   * 143 = 90 + 53 is therefore reconciliation arithmetic, not a stable
---     N(3B)/Suz direct sum.
+--   * central C3 observer:      65663 = 65610 + 53;
+--   * full N(3B)/Suz observer:  65663 = 65520 + 143;
+--   * the published 143 is irreducible at the latter level.
 --
--- Consequently the exceptional programme must fork by actor:
+-- Thus 143 = 90 + 53 is reconciliation arithmetic, not a normalizer-stable
+-- 90 ⊕ 53 theorem. The exceptional programme therefore forks by actor:
 --
---   central-C3 / conformal-fixed-line lane:
---       actual 53 residual -> reduced Albert/F4 same-action target;
+--   central-C3 / conformal-fixed-line:
+--       actual 53 residual -> reduced Albert/F4 same-action recognition;
 --
---   full-normalizer lane:
---       actual Fin90 inertia -> 12 + 78 -> E6 -> F4 + 26 target.
+--   full normalizer:
+--       actual Fin90 inertia -> 12 + 78 -> E6 -> F4 + 26 recognition.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Sum.Base using (_⊎_)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Data.Empty using (⊥)
 
 import DASHI.Wikimedia.IbrahimMonster53ActorRestrictionWilsonSnowballCorrectionExact as Actor53
 import DASHI.Moonshine.Base369MonsterFiftyFourFiveModeResidualActionBidiExact as Residual54
 import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact as F4
+import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact as Weld
 import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact as Ninety
 import DASHI.Moonshine.Base369Monster3BSeventyEightExceptionalE6BidiExact as E6
 
 ------------------------------------------------------------------------
--- 1. The source-backed actor split is executable, not prose.
+-- 1. Source-backed actor split.
 ------------------------------------------------------------------------
 
 data ExceptionalActorScope : Set where
@@ -66,6 +66,10 @@ suzukiCoverBlocksNaive53Split = refl
 
 ------------------------------------------------------------------------
 -- 2. Central-C3 / conformal-fixed-line target.
+--
+-- There is exactly ONE actual 54/53 action in this record: the one already
+-- embedded inside the strict Monster<->Albert/F4 recognition. No independent
+-- action field is allowed to drift away from it.
 ------------------------------------------------------------------------
 
 record CentralResidualExceptionalRecognition : Set₁ where
@@ -76,22 +80,28 @@ record CentralResidualExceptionalRecognition : Set₁ where
       (actorScope ≡ centralC3Scope) ⊎
       (actorScope ≡ conformalFixedLineScope)
 
-    actualResidualAction :
-      Residual54.ActualFiftyFourFiveModeResidualActionRecognition
-
     strictAlbertF4Recognition :
       F4.ProofRelevantMonsterAlbertF4Recognition
 
-    SameActualActionWitness : Set
-    sameActualAction : SameActualActionWitness
+    ActualActorScopeWitness : Set
+    actualActorReallyHasSelectedScope : ActualActorScopeWitness
 
 open CentralResidualExceptionalRecognition public
+
+centralActualResidualAction :
+  CentralResidualExceptionalRecognition →
+  Residual54.ActualFiftyFourFiveModeResidualActionRecognition
+centralActualResidualAction recognition =
+  Weld.recognition
+    (F4.transportedMonsterAction
+      (strictAlbertF4Recognition recognition))
 
 ------------------------------------------------------------------------
 -- 3. Full-normalizer exceptional target: 90 -> 12+78 -> E6 -> F4+26.
 --
--- This is the correct place for the normalizer-native exceptional comparison.
--- It never routes through a putative normalizer-stable 53 summand.
+-- The E6 owner already requires an actual 78-block intertwiner. Here the
+-- additional payment is a literal invariant F4 ⊕ 26 decomposition under that
+-- SAME inertia action; 78 = 52 + 26 by itself cannot inhabit this record.
 ------------------------------------------------------------------------
 
 record NormalizerE6F4Recognition {source}
@@ -124,11 +134,19 @@ record NormalizerE6F4Recognition {source}
       (state : F4Carrier ⊎ TracelessAlbert26) →
       splitE6 (combineE6 state) ≡ state
 
-    F4Plus26StabilityWitness : Set
-    f4Plus26StableUnderSameNormalizerAction : F4Plus26StabilityWitness
+    f4SummandStableUnderSameE6Action :
+      (inertia : Ninety.MultiplicityInertia attachment) →
+      (state : F4Carrier) →
+      splitE6
+        (E6.e6Action e6Recognition inertia (combineE6 (inj₁ state)))
+      ≡ inj₁ (f4Action inertia state)
 
-    SameE6ActionWitness : Set
-    sameE6Action : SameE6ActionWitness
+    traceless26StableUnderSameE6Action :
+      (inertia : Ninety.MultiplicityInertia attachment) →
+      (state : TracelessAlbert26) →
+      splitE6
+        (E6.e6Action e6Recognition inertia (combineE6 (inj₂ state)))
+      ≡ inj₂ (traceless26Action inertia state)
 
 open NormalizerE6F4Recognition public
 
@@ -139,6 +157,8 @@ open NormalizerE6F4Recognition public
 data Arithmetic143Equals90Plus53CreatesNormalizerSubmodules : Set where
 data CentralResidualCreatesSuzukiStableResidual : Set where
 data E6Dimension78CreatesE6ActionRecognition : Set where
+
+data NormalizerE6RecognitionCreatesCentralResidual53 : Set where
 
 arithmetic143DoesNotCreateNormalizerSplit :
   Arithmetic143Equals90Plus53CreatesNormalizerSubmodules → ⊥
@@ -152,9 +172,12 @@ e6DimensionDoesNotCreateAction :
   E6Dimension78CreatesE6ActionRecognition → ⊥
 e6DimensionDoesNotCreateAction ()
 
+normalizerE6DoesNotBackCreateCentral53 :
+  NormalizerE6RecognitionCreatesCentralResidual53 → ⊥
+normalizerE6DoesNotBackCreateCentral53 ()
+
 ------------------------------------------------------------------------
--- 5. Terminal status: actor scoping itself is paid; both actual action
---    recognitions remain proof obligations.
+-- 5. Terminal status.
 ------------------------------------------------------------------------
 
 record ActorScopedExceptionalBoundary : Set where
@@ -166,6 +189,8 @@ record ActorScopedExceptionalBoundary : Set where
     published143IrreducibilityRespected : Bool
     normalizerNative12Plus78TargetAvailable : Bool
     centralResidualAndNormalizer90Separated : Bool
+    centralLaneUsesSingleActualActionObject : Bool
+    normalizerF4Plus26RequiresLiteralStabilityEquations : Bool
 
     central53ActualActionPaid : Bool
     strictCentralMonsterF4IntertwinerPaid : Bool
@@ -176,5 +201,5 @@ record ActorScopedExceptionalBoundary : Set where
 canonicalActorScopedExceptionalBoundary : ActorScopedExceptionalBoundary
 canonicalActorScopedExceptionalBoundary =
   actor-scoped-exceptional-boundary
-    true true true true true true
+    true true true true true true true true
     false false false false false
