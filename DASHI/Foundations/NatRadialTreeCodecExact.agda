@@ -15,9 +15,9 @@ module DASHI.Foundations.NatRadialTreeCodecExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Fin.Base using (Fin; fromℕ<; toℕ)
-open import Data.Nat.DivMod using (_/_; _%_; m%n<n)
+open import Data.Nat.DivMod using (_/_; m%n<n)
 
 import DASHI.Foundations.RadixValuationStageBridge as Radix
 import DASHI.Foundations.RepresentationChartInvariant as Representation
@@ -40,14 +40,6 @@ radixLastDigit
   (Radix.radix-chart (suc base) Representation.positive origin label)
   value =
   fromℕ< (m%n<n value (suc base))
-
-radixLastDigitValue :
-  (chart : Radix.RadixChart) →
-  (value : Nat) →
-  toℕ (radixLastDigit chart value) ≡ value % Radix.radix chart
-radixLastDigitValue
-  (Radix.radix-chart (suc base) Representation.positive origin label)
-  value = refl
 
 ------------------------------------------------------------------------
 -- Recursive finite address.
