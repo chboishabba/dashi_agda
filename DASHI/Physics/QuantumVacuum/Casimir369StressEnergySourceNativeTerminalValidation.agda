@@ -13,6 +13,14 @@ sourceNativeHostCompilerPaidRegression :
   T.sourceNativeHostCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
 sourceNativeHostCompilerPaidRegression = refl
 
+formalProjectionCompilerPaidRegression :
+  T.formalProjectionCompatibilityCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
+formalProjectionCompilerPaidRegression = refl
+
+independentProjectionNotRequiredRegression :
+  T.independentProjectionCompatibilityPaymentRequired T.canonicalSourceNativeTerminalBoundary ≡ false
+independentProjectionNotRequiredRegression = refl
+
 compactSimpleNotIndependentRegression :
   T.independentCompactSimplePaymentRequired T.canonicalSourceNativeTerminalBoundary ≡ false
 compactSimpleNotIndependentRegression = refl
@@ -41,8 +49,12 @@ secondRenormalizationNotRequiredRegression :
   T.secondRenormalizationPrescriptionRequired T.canonicalSourceNativeTerminalBoundary ≡ false
 secondRenormalizationNotRequiredRegression = refl
 
+r457SameObjectStillOpenRegression :
+  T.r457LegacyRecoverySameObjectAttachmentPaid T.canonicalSourceNativeTerminalBoundary ≡ false
+r457SameObjectStillOpenRegression = refl
+
 firstBlockerRegression :
-  T.firstUnificationBlocker ≡ T.missingLegacyQFTRecoveryProjectionCompatibility
+  T.firstUnificationBlocker ≡ T.missingR457LegacyRecoverySameObjectAttachment
 firstBlockerRegression = refl
 
 secondBlockerRegression :
