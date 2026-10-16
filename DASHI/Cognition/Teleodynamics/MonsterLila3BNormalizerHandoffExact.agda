@@ -14,23 +14,33 @@ module DASHI.Cognition.Teleodynamics.MonsterLila3BNormalizerHandoffExact where
 --   * a generic Lean equal-character/simple-representation -> isomorphism
 --     theorem reported cross-kernel.
 --
--- Current master has sharpened the multiplicity target beyond the older
--- degree/permutation search.  The selected-phase 12+78 character-family
--- occurrence is already source-paid there; no further degree/occurrence search
--- counts as progress.  The canonical representation-native target is
+-- Current master has now removed another arbitrary choice.  It owns an
+-- explicit 729-dimensional Schrodinger function/Hilbert carrier, packages the
+-- full Heisenberg linear action and action law, and fixes that carrier as the
+-- canonical H_zeta CANDIDATE.  It also fixes the chosen W_zeta carrier to the
+-- selected linear zeta sector in the Hom compiler.  These are DASHI
+-- constructions/compilers; they are not, by themselves, source recognition of
+-- the actual Monster H_zeta constituent or its same-object action.
+--
+-- The selected-phase 12+78 character-family occurrence is already source-paid;
+-- no further degree/occurrence search counts as progress.  The remaining
+-- representation-native target is
 --
 --     S_zeta = Hom_E(H_zeta , W_zeta)
 --
--- with a proof-bearing linear evaluation/recovery
+-- with proof-bearing linear evaluation/recovery
 --
---     H_zeta x S_zeta  <->  W_zeta.
+--     H_zeta x S_zeta  <->  W_zeta,
 --
--- Current master also explicitly refutes the pure Fin-90 permutation route as
--- the actual multiplicity representation.  Fin 90 may be chosen later as a
--- basis coordinate only after the linear Hom-space representation is paid.
+-- together with source recognition/action intertwining for the fixed H_zeta
+-- candidate and an actual same-object cocycle-compensated multiplicity action.
+--
+-- Current master explicitly refutes the pure Fin-90 permutation route as the
+-- actual multiplicity representation.  Fin 90 may be chosen later as a basis
+-- coordinate only after the linear Hom-space representation is paid.
 --
 -- This is a cross-branch/current-master receipt and experiment handoff only.
--- It imports no external theorem authority into this branch.
+-- It imports no sibling theorem authority into this branch.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -60,6 +70,17 @@ record MonsterLila3BNormalizerHandoff : Set where
 
     siblingFiniteSchrodingerIrreducibilityPaid : Bool
     siblingGenericEqualCharacterSimpleIsoReported : Bool
+
+    -- Current-master DASHI construction state.  These fields deliberately
+    -- distinguish a fixed explicit candidate/action from source recognition.
+    siblingExplicitSchrodingerHZetaCandidateCarrierPaid : Bool
+    siblingExplicitSchrodingerHeisenbergActionPaid : Bool
+    siblingExplicitSchrodingerActionLawPaid : Bool
+    siblingSelectedLinearWZetaCarrierFixed : Bool
+    siblingHomCarrierBindingsCompilerOwned : Bool
+    siblingActualHZetaSourceRecognitionPaid : Bool
+    siblingActualHZetaActionIntertwinerPaid : Bool
+    siblingCanonicalHomWeldInhabited : Bool
     siblingConcreteHZetaFDRepTransportPaid : Bool
 
     siblingSuzukiMultiplicityHomSpaceTargetReported : Bool
@@ -96,14 +117,25 @@ canonicalMonsterLila3BNormalizerHandoff =
     (ML.literalComputationalHeuristicsRecorded ML.canonicalMonsterLilaBoundary)
     false
     1098
+    -- finite/source-action route
     true true true true true true true true true true
-    true true false
+    -- irreducibility / generic character theorem
+    true true
+    -- fixed Schrodinger H_zeta candidate + fixed selected-linear W_zeta carrier
+    true true true true true
+    -- actual source recognition/action / complete same-object H_zeta weld
+    false false false false
+    -- S_zeta linear Hom/multiplicity payload
     true true true false false false false false
+    -- full normalizer lift
     false false
+    -- empirical requirements
     true true true true true true
+    -- actual Monster-LILA fits
     false false
+    -- ontology/mechanism non-promotions
     false false false
-    "Monster-LILA's engineering permutation remains only a heuristic. The finite source/action comparator, Schrodinger irreducibility, and selected-phase 12+78 character-family occurrence are already paid beyond the PoC. Current master has refuted the pure Fin90 permutation route. The live representation theorem is the actual linear multiplicity Hom space S_zeta = Hom_E(H_zeta,W_zeta), with proof-bearing evaluation/recovery H_zeta x S_zeta <-> W_zeta and the existing projective-cocycle cancellation instantiated on those same carriers. Character occurrence, degree 90 arithmetic and Fin90 basis labels cannot create that linear representation or its action."
+    "Monster-LILA's engineering permutation remains only a heuristic. Current master now fixes the explicit Schrodinger function/Hilbert carrier as the canonical H_zeta candidate, packages its full Heisenberg linear action and action law, fixes the selected linear zeta sector as W_zeta in the Hom compiler, pays the selected-phase 12+78 character-family occurrence, and refutes the pure Fin90 permutation route. DASHI candidate construction is not source recognition: the live source-facing H_zeta leaves are recognition of this fixed Schrodinger representation as the actual constituent and an action intertwiner to the actual extraspecial-kernel action. The live multiplicity leaves are the actual equivariant S_zeta = Hom_E(H_zeta,W_zeta) carrier, two-sided linear evaluation/recovery, cocycle-compensated action instantiation, and same-object multiplicity/inertia representation. Character occurrence, degree 90 arithmetic, Fin90 labels, or a selected-word model fit cannot manufacture those representation-level witnesses."
 
 record MonsterLila3BEmpiricalAssay : Set where
   constructor monster-lila-3b-empirical-assay
@@ -135,6 +167,7 @@ inductive HeuristicPermutationCreatesCertified3BAction : Set where
 inductive SelectedWordFitCreatesHZetaFDRepRecognition : Set where
 inductive Fin90BasisCreatesSuzukiRepresentation : Set where
 inductive CharacterCreatesLinearHomEvaluation : Set where
+inductive SchrodingerCandidateCreatesMonsterHZetaRecognition : Set where
 inductive CertifiedActionFitCreatesMonsterOntology : Set where
 
 heuristicPermutationDoesNotCreateCertified3BAction :
@@ -152,6 +185,10 @@ fin90BasisDoesNotCreateSuzukiRepresentation ()
 characterDoesNotCreateLinearHomEvaluation :
   CharacterCreatesLinearHomEvaluation → ⊥
 characterDoesNotCreateLinearHomEvaluation ()
+
+schrodingerCandidateDoesNotCreateMonsterRecognition :
+  SchrodingerCandidateCreatesMonsterHZetaRecognition → ⊥
+schrodingerCandidateDoesNotCreateMonsterRecognition ()
 
 certifiedActionFitDoesNotCreateMonsterOntology :
   CertifiedActionFitCreatesMonsterOntology → ⊥
