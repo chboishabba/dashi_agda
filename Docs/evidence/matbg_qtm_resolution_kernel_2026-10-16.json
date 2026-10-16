@@ -1,0 +1,24 @@
+{
+  "assertions_passed": true,
+  "gaussian_model": {
+    "energy_kernel_integral": 0.9999999999999999,
+    "energy_sigma_meV": 4.2466090014400955,
+    "measured_energy_fwhm_meV": 10.0,
+    "measured_momentum_fwhm_inv_nm": 0.029849999999999988,
+    "momentum_kernel_integral": 1.0000000000000002,
+    "momentum_sigma_inv_nm": 0.012739827004320286
+  },
+  "promotion_boundaries": {
+    "experimental_intensity_arrays_used": false,
+    "gaussian_response_is_source_measured": false,
+    "interacting_qtm_fit_paid": false,
+    "measured_quantum_metric_paid": false
+  },
+  "script": "scripts/matbg_qtm_resolution_kernel.py",
+  "script_sha256": "536051affff1c9fba5aae07f28d30ac56897eb3d078f1755bb3f0a82feb44571",
+  "source_doi": "10.1038/s41586-026-10378-x",
+  "source_resolution": {
+    "energy_fwhm_upper_bound_meV": 10.0,
+    "momentum_fwhm_inv_nm": 0.03
+  }
+}
