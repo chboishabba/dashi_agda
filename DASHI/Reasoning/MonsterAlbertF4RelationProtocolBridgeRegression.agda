@@ -25,10 +25,19 @@ _ = refl
 _ : B.sameCarrierReceiptReused B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
 _ = refl
 
-_ : B.finiteToLinearAlbertRealizationRequired B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
+_ : B.finiteStateEmbeddingAlreadyPaid B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
 _ = refl
 
-_ : B.cubicUnitRigidityOnlyAfterLinearRealization B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
+_ : B.finiteActionLiftStillRequired B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
+_ = refl
+
+_ : B.actualUnitCompatibilityStillRequired B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
+_ = refl
+
+_ : B.removedPointCannotSubstituteForUnit B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
+_ = refl
+
+_ : B.cubicUnitRigidityOnlyAfterLinearActionLift B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
 _ = refl
 
 _ : B.actionFitCreatesClassicalF4Recognition B.canonicalMonsterAlbertF4ProtocolBoundary ≡ false
