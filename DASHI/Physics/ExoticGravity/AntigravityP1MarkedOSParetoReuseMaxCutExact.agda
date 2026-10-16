@@ -81,13 +81,7 @@ sharedE2E4StressCylinderEncodingStillRequired =
   E2.markedE2PhysicalLeafIsStressCylinderEncodingAndAdmissibility
 
 independentE4StressSelectionRequired : Bool
-independentE4StressSelectionRequired =
-  SharedE2E4.independentE4StressObservableChoiceEliminated
-  -- This master flag is true for elimination; antigravity's requirement is the
-  -- negation semantically, represented explicitly below.
-
-independentE4StressSelectionRequiredValue : Bool
-independentE4StressSelectionRequiredValue = false
+independentE4StressSelectionRequired = false
 
 independentE4DecayEstimateRequired : Bool
 independentE4DecayEstimateRequired = false
