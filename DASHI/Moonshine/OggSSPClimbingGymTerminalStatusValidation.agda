@@ -23,6 +23,31 @@ phaseControlCutClosed :
   ≡ true
 phaseControlCutClosed = refl
 
+dirichletPhaseMomentKernelCutClosed :
+  Status.dirichletPhaseMomentKernelClosed Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+dirichletPhaseMomentKernelCutClosed = refl
+
+landauResidualDiagnosticCutClosed :
+  Status.landauResidualDiagnosticClosed Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+landauResidualDiagnosticCutClosed = refl
+
+heldOutWindowControlCutClosed :
+  Status.heldOutWindowControlClosed Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+heldOutWindowControlCutClosed = refl
+
+heldOutNoReplicationCutClosed :
+  Status.heldOutNoReplicationClosed Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+heldOutNoReplicationCutClosed = refl
+
+odlyzkoHeldOutAnchorCutClosed :
+  Status.odlyzkoHeldOutAnchorClosed Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+odlyzkoHeldOutAnchorCutClosed = refl
+
 attributionCutClosed :
   Status.acquiredSourceAttributionClosed Status.canonicalClimbingGymTerminalStatus
   ≡ true
