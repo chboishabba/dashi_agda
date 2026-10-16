@@ -1,0 +1,1 @@
+Verification note: source-surface regression lives in scripts/check_gaba_phenotype_evidence.py. Kernel Agda typecheck must be run in an environment with Agda installed; this branch does not treat static surface verification as a substitute for kernel compilation.

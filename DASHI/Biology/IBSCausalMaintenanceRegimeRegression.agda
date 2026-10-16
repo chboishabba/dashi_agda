@@ -1,0 +1,30 @@
+module DASHI.Biology.IBSCausalMaintenanceRegimeRegression where
+
+open import DASHI.Core.Prelude using (⊥)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Biology.IBSCausalMaintenanceRegimeExact as Regime
+
+regimeAtlasRegression :
+  Regime.canonicalCandidateMaintenanceRegimeAtlas ≡ Regime.canonicalCandidateMaintenanceRegimeAtlas
+regimeAtlasRegression = refl
+
+observationPanelRegression :
+  Regime.canonicalRegimeDiscriminationPanel ≡ Regime.canonicalRegimeDiscriminationPanel
+observationPanelRegression = refl
+
+paretoFrontierRegression :
+  Regime.canonicalCausalMaintenanceParetoFrontier ≡ Regime.canonicalCausalMaintenanceParetoFrontier
+paretoFrontierRegression = refl
+
+symptomPatternDoesNotIdentifyRegimeRegression :
+  Regime.SymptomPatternIdentifiesMaintenanceRegimePermission → ⊥
+symptomPatternDoesNotIdentifyRegimeRegression = Regime.symptomPatternDoesNotIdentifyMaintenanceRegime
+
+singleInterventionDoesNotIdentifyUniqueRegimeRegression :
+  Regime.SingleInterventionResponseIdentifiesUniqueRegimePermission → ⊥
+singleInterventionDoesNotIdentifyUniqueRegimeRegression = Regime.singleInterventionResponseDoesNotIdentifyUniqueRegime
+
+biomarkerPanelDoesNotEqualCausalRegimeRegression :
+  Regime.BiomarkerPanelEqualsCausalRegimePermission → ⊥
+biomarkerPanelDoesNotEqualCausalRegimeRegression = Regime.biomarkerPanelDoesNotEqualCausalRegime

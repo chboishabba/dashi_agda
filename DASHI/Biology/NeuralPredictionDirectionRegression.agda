@@ -1,0 +1,37 @@
+module DASHI.Biology.NeuralPredictionDirectionRegression where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Biology.NeuralPredictionDirectionExact as P
+import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
+import DASHI.Reasoning.BlockedImplicationExperimentBackpropExact as Backprop
+
+encodingDirectionRegression : P.NeuralPredictionDirection
+encodingDirectionRegression = P.stimulusToBrainEncoding
+
+decodingDirectionRegression : P.NeuralPredictionDirection
+decodingDirectionRegression = P.brainToLanguageDecoding
+
+bciDirectionRegression : P.NeuralPredictionDirection
+bciDirectionRegression = P.brainToActionDecoding
+
+neuroforecastDirectionRegression : P.NeuralPredictionDirection
+neuroforecastDirectionRegression = P.brainResponseToPopulationOutcome
+
+metaBackpropMechanismBoundaryRegression : P.BrainModelMechanismBoundary
+metaBackpropMechanismBoundaryRegression = P.canonicalBrainModelMechanismBoundary
+
+neuralinkPrimarySecondarySplitRegression : P.NeuralinkProvenanceSplit
+neuralinkPrimarySecondarySplitRegression = P.canonicalNeuralinkProvenanceSplit
+
+peripheralCentralTransportSlotRegression : Cone.ExperimentalDesignSlot
+peripheralCentralTransportSlotRegression = P.peripheralCentralTransportSlot
+
+crossParticipantCalibrationSlotRegression : Cone.ExperimentalDesignSlot
+crossParticipantCalibrationSlotRegression = P.crossParticipantCalibrationSlot
+
+backpropOwnerRegression : Backprop.BlockedImplicationBackpropBoundary
+backpropOwnerRegression = Backprop.canonicalBlockedImplicationBackpropBoundary
+
+canonicalPredictionBoundaryRegression : P.NeuralPredictionDirectionBoundary
+canonicalPredictionBoundaryRegression = P.canonicalNeuralPredictionDirectionBoundary
