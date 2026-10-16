@@ -7,6 +7,7 @@ BRIDGE = ROOT / "DASHI" / "ComputerScience" / "Goldbach29Signed369VendorBridgeEx
 MACRO = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29SuccessMacroExact.agda"
 RECEIPT = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29ReductionReceiptExact.agda"
 SEMANTICS = ROOT / "DASHI" / "ComputerScience" / "Goldbach29ExternalHaltingSemanticsExact.agda"
+HALTING = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29HaltingConsumerCompilerExact.agda"
 VIS = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29VisualizationConsumerExact.agda"
 AGGREGATE = ROOT / "DASHI" / "EverythingGoldbach29Signed369VendorExact.agda"
 WORKFLOW = ROOT / ".github" / "workflows" / "goldbach29-signed369-vendor.yml"
@@ -67,6 +68,15 @@ def test_external_halting_semantics_is_cross_prover_only():
     assert "goldbachConjectureProvedByUpstreamTheorem = false" in text
 
 
+def test_halting_compiler_reduces_final_leaf_to_goldbach30_attachment():
+    text = HALTING.read_text()
+    assert "LogicalIff" in text
+    assert "HaltingConsumerAttachment" in text
+    assert "sameCounterexampleConsumerImpliesHaltingEquivalence" in text
+    assert "goldbach29ExternalSourceCanFillRightHandRole" in text
+    assert "goldbach30HaltingAttachmentPaid = false" in text
+
+
 def test_reduction_receipt_records_pareto_cut():
     text = RECEIPT.read_text()
     assert "Goldbach30To29ReductionReceipt" in text
@@ -103,6 +113,7 @@ def test_aggregate_and_workflow_own_the_new_surface():
     assert "Goldbach30To29SuccessMacroExact" in aggregate
     assert "Goldbach30To29ReductionReceiptExact" in aggregate
     assert "Goldbach29ExternalHaltingSemanticsExact" in aggregate
+    assert "Goldbach30To29HaltingConsumerCompilerExact" in aggregate
     assert "Goldbach30To29VisualizationConsumerExact" in aggregate
     assert "test_goldbach29_signed369_vendor.py" in workflow
     assert "EverythingGoldbach29Signed369VendorExact.agda" in workflow
