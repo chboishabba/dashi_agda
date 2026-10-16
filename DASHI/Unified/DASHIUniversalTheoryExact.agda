@@ -32,15 +32,13 @@ open DASHIUniversalTheory public
 
 record UniversalTheorySocket : Setω where
   field
-    Theory : Set₁
     candidate369Surface : Hyperfabric.PNFHyperfabric369Surface
     reading : String
 
 canonicalUniversalTheorySocket : UniversalTheorySocket
 canonicalUniversalTheorySocket =
   record
-    { Theory = DASHIUniversalTheory
-    ; candidate369Surface = Hyperfabric.canonicalPNFHyperfabric369Surface
+    { candidate369Surface = Hyperfabric.canonicalPNFHyperfabric369Surface
     ; reading =
         "DASHI is encoded as one candidate physical theory. The existing PNF/369 hyperfabric is consumed as the candidate universal refinement/orientation substrate; state, dynamics, action, observer, scale and causal structure remain theorem-facing carriers whose physical identifications are paid by sector realization maps rather than by cardinality or naming."
     }
