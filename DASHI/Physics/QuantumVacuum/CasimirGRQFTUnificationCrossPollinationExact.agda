@@ -22,6 +22,7 @@ import DASHI.Physics.Unification.QGFrontierLedger as QG
 import DASHI.Physics.Laws.PhysicalLawCore as Law
 import DASHI.Physics.Closure.CrossLaneCommutingTheoremSkeleton as G6
 import DASHI.Physics.Foundations.GRQFTPostMergeMaxCutExact as PostMerge
+import DASHI.Physics.Electromagnetism.U1AsSU2AbelianRestrictionExact as U1YM
 
 import DASHI.Physics.QuantumVacuum.CasimirBrownMaclayEnergyConditionExact as Casimir
 import DASHI.Physics.QuantumVacuum.CasimirSO3StressContractionMaxCutExact as CasimirStress
@@ -278,7 +279,33 @@ finiteGRIsNegativeMetricWitness :
 finiteGRIsNegativeMetricWitness = Vacuum.finiteGRStressIsNegativeMetric
 
 ------------------------------------------------------------------------
--- 6. Unification handoff.
+-- 6. U(1) electromagnetic gauge architecture -> Yang-Mills architecture.
+--
+-- Casimir is an electromagnetic/QFT effect.  The live donor already proves a
+-- literal Cartan-axis U(1) embedding into the repository SU(2) Lie carrier,
+-- with the inherited SU(2) bracket vanishing on the embedded U(1) image.
+-- This pays a gauge-architecture handoff only.  It does not manufacture the
+-- non-abelian compact-simple sector aggregation expected by UnifiedCandidate,
+-- nor does a non-abelian Clay mass-gap result prove Maxwell/Casimir physics.
+------------------------------------------------------------------------
+
+u1YangMillsBoundaryWitness : U1YM.U1SU2PromotionBoundary
+u1YangMillsBoundaryWitness = U1YM.canonicalU1SU2PromotionBoundary
+
+u1AbelianRestrictionPaid :
+  U1YM.abelianYangMillsRestrictionPaid u1YangMillsBoundaryWitness ≡ true
+u1AbelianRestrictionPaid = refl
+
+u1WholeSU2TheoryIsFalse :
+  U1YM.u1EqualsWholeSU2Theory u1YangMillsBoundaryWitness ≡ false
+u1WholeSU2TheoryIsFalse = refl
+
+nonAbelianClayDoesNotProveMaxwell :
+  U1YM.nonAbelianClayMassGapProvesMaxwell u1YangMillsBoundaryWitness ≡ false
+nonAbelianClayDoesNotProveMaxwell = refl
+
+------------------------------------------------------------------------
+-- 7. Unification handoff.
 --
 -- The existing same-candidate/common-action machinery remains the correct
 -- consumer.  A future Casimir promotion must explicitly identify this exact
@@ -331,7 +358,7 @@ postMergeGRQFTStillNotTerminallyPromoted =
   PostMerge.postMergeTerminalPromotionStillFalse
 
 ------------------------------------------------------------------------
--- 7. Promotion firewalls and machine-readable boundary.
+-- 8. Promotion firewalls and machine-readable boundary.
 ------------------------------------------------------------------------
 
 data SameActiveProjectionAutomaticallyIdentifiesStressTensor : Set where
@@ -371,11 +398,14 @@ record CasimirGRQFTCrossPollinationBoundary : Set where
     localizedUnitWeightActiveMassFunctionalReused : Bool
     vacuumLambdaRayUsedAsDiscriminator : Bool
     finiteGRDefocusingWitnessReusedAsComparison : Bool
+    u1GaugeArchitectureHandoffPaid : Bool
 
     sameActiveProjectionIdentifiesStressTensor : Bool
     casimirInheritsFiniteGRDefocusingFromSharedActiveProjection : Bool
     casimirAutomaticallyLiesOnIsotropicVacuumStressRay : Bool
     localizedSphericalAdapterAutomaticallyAppliesToCasimir : Bool
+    u1RestrictionPaysNonAbelianQFTStressAggregation : Bool
+    nonAbelianClayMassGapProvesCasimirPhysics : Bool
     sameCandidateQFTGRStressWeldStillRequired : Bool
     commonEffectiveActionIdentificationStillRequired : Bool
     g6GRSectionAutomaticallyPaid : Bool
@@ -387,9 +417,9 @@ canonicalCasimirGRQFTCrossPollinationBoundary :
   CasimirGRQFTCrossPollinationBoundary
 canonicalCasimirGRQFTCrossPollinationBoundary =
   casimir-grqft-cross-pollination-boundary
-    true true false true true true true true
-    false false false false true true false true
+    true true false true true true true true true
+    false false false false false false true true false true
 
 casimirGRQFTCrossPollinationReading : String
 casimirGRQFTCrossPollinationReading =
-  "Casimir and the existing finite GRQFT vacuum fixture share the normalized active-stress projection -2. Under the existing declared kappa=1, Lambda=0 trace-reversal compiler this yields the same conditional R_00=-1 and Raychaudhuri curvature contribution +1; the localized unit-weight active-mass functional also returns -2. These are consumer/projection equalities, not source identity. Casimir is diag(-1,+1,+1,-3) with Lorentz trace 0, whereas the finite GR vacuum fixture is diag(+1,-1,-1,-1) with trace -4 and lies on the isotropic T=-lambda g vacuum-stress ray. Therefore no finite-GR same-object defocusing solution, stationary spherical localized-source adapter, cosmological-Lambda interpretation, same-candidate QFT/GR weld, common-action variation, G6 GR section, or unified quantum-gravity promotion transfers by scalar/projection equality alone."
+  "Casimir and the existing finite GRQFT vacuum fixture share the normalized active-stress projection -2. Under the existing declared kappa=1, Lambda=0 trace-reversal compiler this yields the same conditional R_00=-1 and Raychaudhuri curvature contribution +1; the localized unit-weight active-mass functional also returns -2. These are consumer/projection equalities, not source identity. Casimir is diag(-1,+1,+1,-3) with Lorentz trace 0, whereas the finite GR vacuum fixture is diag(+1,-1,-1,-1) with trace -4 and lies on the isotropic T=-lambda g vacuum-stress ray. Electromagnetic U(1) also has an exact abelian restriction inside the repository SU(2)/Yang-Mills gauge architecture, but that does not pay non-abelian sector aggregation or transfer the Clay mass-gap result to Maxwell/Casimir. Therefore no finite-GR same-object defocusing solution, stationary spherical localized-source adapter, cosmological-Lambda interpretation, same-candidate QFT/GR weld, common-action variation, G6 GR section, or unified quantum-gravity promotion transfers by scalar/projection/gauge-architecture reuse alone."
