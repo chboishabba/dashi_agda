@@ -42,6 +42,36 @@ def _score(query: str, event: dict[str, Any]) -> float:
     return min(1.0, 0.45 * token_score + 0.25 * object_score + 0.20 * name_score + 0.10 * exact)
 
 
+def apply_narrative_gate(receipt: dict[str, Any], narrative: dict[str, Any]) -> dict[str, Any]:
+    """Fail closed unless semantic and narrative absence checks both complete.
+
+    Development narrative remains discovery evidence only. A narrative hit
+    blocks a categorical absence claim because it may point to a renamed,
+    superseded, partial, or historical object that requires formal inspection.
+    """
+
+    result = dict(receipt)
+    coverage = dict(result.get("coverage", {}))
+    coverage["narrative_archaeology_available"] = bool(narrative.get("available"))
+    coverage["narrative_archaeology_complete"] = bool(narrative.get("complete"))
+    coverage["narrative_archaeology_checked"] = bool(narrative.get("available"))
+    result["coverage"] = coverage
+    result["narrative_archaeology"] = narrative
+
+    matches = narrative.get("matches", [])
+    if matches:
+        result["absence_claim_permitted"] = False
+        result["absence_status"] = "historical_narrative_candidate_exists"
+        return result
+
+    if result.get("absence_claim_permitted") and not (
+        narrative.get("available") and narrative.get("complete")
+    ):
+        result["absence_claim_permitted"] = False
+        result["absence_status"] = "search_incomplete"
+    return result
+
+
 class NarrativeCache:
     """Read the repo-history development narrative cache, if available.
 
