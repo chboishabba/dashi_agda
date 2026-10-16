@@ -106,6 +106,19 @@ paradoxicalPrefixBlocksCorrectionFit {x} {m} paradoxical correctionFits =
       correctionFits
       refl)
 
+-- Because Nat order is decidable/linear, failure of the strict correction-fit
+-- inequality gives the exact reverse weak inequality.  This is the useful
+-- algebraic signature of a literal paradoxical prefix:
+--
+--     gap * x <= A(actual parity word).
+paradoxicalPrefixForcesCorrectionDominance :
+  {x : Syracuse.PositiveNat} {m : Nat} →
+  (paradoxical : ParadoxicalPrefix x m) →
+  gap (coefficientGap paradoxical) * Syracuse.toNat x
+  ≤ Affine.affineAdditiveTerm (Itinerary.parityWord m x)
+paradoxicalPrefixForcesCorrectionDominance paradoxical =
+  NatP.≮⇒≥ (paradoxicalPrefixBlocksCorrectionFit paradoxical)
+
 ------------------------------------------------------------------------
 -- Concrete non-factorability witness for odd-count-only reasoning.
 --
@@ -169,6 +182,7 @@ record ParadoxicalPrefixBoundary : Set where
     exactPositiveCoefficientGapPaid : Nat
     contractingCorrectionFitImpliesLiteralDescent : Nat
     paradoxicalPrefixForcesCorrectionFailure : Nat
+    paradoxicalPrefixForcesExactCorrectionDominance : Nat
     sameOddCountDoesNotDetermineAffineCorrection : Nat
     externalParadoxicalTheoremImported : Nat
     parityProportionAloneDeterminesStopping : Nat
@@ -176,4 +190,4 @@ record ParadoxicalPrefixBoundary : Set where
 
 canonicalParadoxicalPrefixBoundary : ParadoxicalPrefixBoundary
 canonicalParadoxicalPrefixBoundary =
-  paradoxicalPrefixBoundary 1 1 1 1 1 0 0 0
+  paradoxicalPrefixBoundary 1 1 1 1 1 1 0 0 0
