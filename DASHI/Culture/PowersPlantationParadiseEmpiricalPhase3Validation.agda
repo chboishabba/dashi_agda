@@ -16,6 +16,9 @@ _methodology-boundary-paid = Methodology.canonicalPowersMethodologySourceBoundar
 _five-axis-routing-paid : Routing.PowersInvestigationRoutingBoundary
 _five-axis-routing-paid = Routing.canonicalPowersInvestigationRoutingBoundary
 
+_selective-reopening-paid : Routing.PrimaryIssueChronologyReopening
+_selective-reopening-paid = Routing.primaryIssueReopensChronology
+
 _discriminator-boundary-paid : Discriminator.PowersHistoricalDiscriminatorBoundary
 _discriminator-boundary-paid = Discriminator.canonicalPowersHistoricalDiscriminatorBoundary
 
