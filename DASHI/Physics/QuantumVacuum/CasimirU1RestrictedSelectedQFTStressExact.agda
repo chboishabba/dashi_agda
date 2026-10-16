@@ -8,21 +8,6 @@ import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as QFT
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostExact as Host
 
-------------------------------------------------------------------------
--- SELECTED SU(2) QFT STRESS -> CANONICAL ELECTROMAGNETIC U(1) RESTRICTION
---
--- Brown-Maclay is an electromagnetic U(1) stress.  The full stress tensor of a
--- non-abelian selected SU(2) sector is therefore NOT the Brown-Maclay target.
--- The missing object is the stress obtained after restricting that SAME sector
--- to the canonical Cartan/U(1) electromagnetic subsector and commuting that
--- restriction through the action/metric-variation/renormalisation pipeline.
---
--- The current repository owns the group/Lie-algebra U(1) embedding and the
--- vanishing bracket on that image, but not a theorem that this restriction of
--- the quantum action/stress is Maxwell/Brown-Maclay.  This owner types exactly
--- that seam without manufacturing it.
-------------------------------------------------------------------------
-
 record CasimirCanonicalU1StressRestriction
     (U : Weld.UnifiedCandidate)
     (candidate : Weld.Candidate U)
@@ -34,7 +19,6 @@ record CasimirCanonicalU1StressRestriction
       QFT.StressTensor (Weld.qftCarriers U) →
       QFT.StressTensor (Weld.qftCarriers U)
 
-    -- Typed semantic payments.  The carrier map above alone is not physics.
     CanonicalCartanU1FieldRestriction : Set
     canonicalCartanU1FieldRestriction : CanonicalCartanU1FieldRestriction
 
@@ -43,12 +27,10 @@ record CasimirCanonicalU1StressRestriction
       NonAbelianCommutatorVanishesOnRestrictedField
 
     YangMillsActionRestrictsToMaxwellAction : Set
-    yangMillsActionRestrictsToMaxwellAction :
-      YangMillsActionRestrictsToMaxwellAction
+    yangMillsActionRestrictsToMaxwellAction : YangMillsActionRestrictsToMaxwellAction
 
     MetricVariationCommutesWithU1Restriction : Set
-    metricVariationCommutesWithU1Restriction :
-      MetricVariationCommutesWithU1Restriction
+    metricVariationCommutesWithU1Restriction : MetricVariationCommutesWithU1Restriction
 
     RestrictedStressIsMaxwellStress : Set
     restrictedStressIsMaxwellStress : RestrictedStressIsMaxwellStress
@@ -85,24 +67,15 @@ u1RestrictedSelectedQFTStress :
 u1RestrictedSelectedQFTStress restriction =
   restrictStressToCanonicalU1 restriction (fullSelectedQFTStress restriction)
 
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
-
 data FullSelectedSU2StressAutomaticallyEqualsBrownMaclay : Set where
 data U1GaugeEmbeddingAutomaticallyClosesStressRestriction : Set where
 data VanishingLieBracketAutomaticallyProvesActionRestriction : Set where
 
-fullSelectedSU2StressDoesNotAutomaticallyEqualBrownMaclay :
-  FullSelectedSU2StressAutomaticallyEqualsBrownMaclay → ⊥
+fullSelectedSU2StressDoesNotAutomaticallyEqualBrownMaclay : FullSelectedSU2StressAutomaticallyEqualsBrownMaclay → ⊥
 fullSelectedSU2StressDoesNotAutomaticallyEqualBrownMaclay ()
-
-u1GaugeEmbeddingDoesNotCloseStressRestriction :
-  U1GaugeEmbeddingAutomaticallyClosesStressRestriction → ⊥
+u1GaugeEmbeddingDoesNotCloseStressRestriction : U1GaugeEmbeddingAutomaticallyClosesStressRestriction → ⊥
 u1GaugeEmbeddingDoesNotCloseStressRestriction ()
-
-vanishingLieBracketDoesNotProveActionRestriction :
-  VanishingLieBracketAutomaticallyProvesActionRestriction → ⊥
+vanishingLieBracketDoesNotProveActionRestriction : VanishingLieBracketAutomaticallyProvesActionRestriction → ⊥
 vanishingLieBracketDoesNotProveActionRestriction ()
 
 record CasimirU1RestrictedSelectedQFTStressBoundary : Set where
@@ -121,13 +94,33 @@ record CasimirU1RestrictedSelectedQFTStressBoundary : Set where
 
 open CasimirU1RestrictedSelectedQFTStressBoundary public
 
-canonicalCasimirU1RestrictedSelectedQFTStressBoundary :
-  CasimirU1RestrictedSelectedQFTStressBoundary
+canonicalCasimirU1RestrictedSelectedQFTStressBoundary : CasimirU1RestrictedSelectedQFTStressBoundary
 canonicalCasimirU1RestrictedSelectedQFTStressBoundary =
   casimir-u1-restricted-selected-qft-stress-boundary
     true false false
     false false false false false false
 
+data RemainingCanonicalU1StressRestrictionBlocker : Set where
+  missingCanonicalCartanU1FieldRestriction : RemainingCanonicalU1StressRestrictionBlocker
+  missingRestrictedFieldNonAbelianCommutatorVanishing : RemainingCanonicalU1StressRestrictionBlocker
+  missingYangMillsActionToMaxwellRestriction : RemainingCanonicalU1StressRestrictionBlocker
+  missingMetricVariationStressRestriction : RemainingCanonicalU1StressRestrictionBlocker
+  missingRestrictedQuantumStressMaxwellIdentification : RemainingCanonicalU1StressRestrictionBlocker
+  missingSamePlateBoundaryRenormalization : RemainingCanonicalU1StressRestrictionBlocker
+
+firstU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
+firstU1RestrictionBlocker = missingCanonicalCartanU1FieldRestriction
+secondU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
+secondU1RestrictionBlocker = missingRestrictedFieldNonAbelianCommutatorVanishing
+thirdU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
+thirdU1RestrictionBlocker = missingYangMillsActionToMaxwellRestriction
+fourthU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
+fourthU1RestrictionBlocker = missingMetricVariationStressRestriction
+fifthU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
+fifthU1RestrictionBlocker = missingRestrictedQuantumStressMaxwellIdentification
+sixthU1RestrictionBlocker : RemainingCanonicalU1StressRestrictionBlocker
+sixthU1RestrictionBlocker = missingSamePlateBoundaryRenormalization
+
 casimirU1RestrictedSelectedQFTStressReading : String
 casimirU1RestrictedSelectedQFTStressReading =
-  "Brown-Maclay targets the canonical electromagnetic U(1)-restricted stress of the selected SU(2) QFT sector, not the full non-abelian SU(2) stress. The repo already owns the U(1) group/Lie-algebra embedding, but the physical restriction still requires the same Cartan field restriction, vanishing non-abelian contribution on that field, YM-action -> Maxwell-action restriction, commutation of restriction with metric variation/stress construction, identification of the restricted quantum stress as Maxwell stress, and the same conducting-plate boundary plus renormalization prescription. Only that restricted stress may subsequently be welded componentwise to Brown-Maclay."
+  "Brown-Maclay targets the canonical electromagnetic U(1)-restricted stress, not the full selected SU(2) stress. The restriction max-cut is now explicit: first identify the selected continuum field/configuration as the canonical Cartan-U(1) field; then prove the non-abelian commutator contribution vanishes on that SAME restricted field; prove the selected YM action restricts to Maxwell; prove restriction commutes with metric variation/stress construction; identify the resulting restricted quantum stress as Maxwell stress; and finally weld the same conducting-plate boundary and renormalization prescription. Only after those six payments can Brown-Maclay component values be a same-object target."
