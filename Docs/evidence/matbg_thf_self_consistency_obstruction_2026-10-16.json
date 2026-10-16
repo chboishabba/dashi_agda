@@ -1,5 +1,6 @@
 {
   "model": "finite-grid THF self-consistency obstruction replay",
+  "script_sha256": "532d92811cf27c5a3a7d423c3de361b2fe91f9da0061a0caab2a7b5cf08fef8d",
   "source_doi": "10.1038/s41586-026-10378-x",
   "target_total_filling": 0.5,
   "grid": {
