@@ -159,9 +159,13 @@ higherStackAdvancedAfterCoreClosure :
   Current.certifiedHigherStackPaid currentBoundary ≡ true
 higherStackAdvancedAfterCoreClosure = refl
 
-hypersheafStillAtHypercoverFrontier :
-  Current.certifiedHypersheafPaid currentBoundary ≡ false
-hypersheafStillAtHypercoverFrontier = refl
+finiteTriadicHypersheafAdvancedAfterCoreClosure :
+  Current.certifiedFiniteTriadicHypersheafPaid currentBoundary ≡ true
+finiteTriadicHypersheafAdvancedAfterCoreClosure = refl
+
+arbitraryInfinityHypersheafStillSeparate :
+  Current.certifiedArbitraryInfinityHypersheafPaid currentBoundary ≡ false
+arbitraryInfinityHypersheafStillSeparate = refl
 
 record NonginRoadmapClosureReceipt : Set where
   constructor nongin-roadmap-closure-receipt
