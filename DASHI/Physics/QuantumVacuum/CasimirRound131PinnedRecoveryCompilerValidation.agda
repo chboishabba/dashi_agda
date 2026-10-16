@@ -1,0 +1,30 @@
+module DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerExact as M
+
+round131PinnedAttachmentCompilerOwnedRegression :
+  M.round131AndPinnedIdentityBuildPinnedAttachmentCompilerOwned
+    M.canonicalRound131PinnedRecoveryBoundary ≡ true
+round131PinnedAttachmentCompilerOwnedRegression = refl
+
+sourceNativeSelectionCompilerOwnedRegression :
+  M.pinnedSourceNativeSelectionCompilerOwned
+    M.canonicalRound131PinnedRecoveryBoundary ≡ true
+sourceNativeSelectionCompilerOwnedRegression = refl
+
+independentPinnedSelectionRetiredRegression :
+  M.independentPinnedSourceNativeSelectionRequiredAfterInputs
+    M.canonicalRound131PinnedRecoveryBoundary ≡ false
+independentPinnedSelectionRetiredRegression = refl
+
+round131AttachmentStillRequiredRegression :
+  M.round131RecoveredQFTAttachmentStillRequired
+    M.canonicalRound131PinnedRecoveryBoundary ≡ true
+round131AttachmentStillRequiredRegression = refl
+
+r457LiteralPinnedIdentityStillRequiredRegression :
+  M.r457LiteralPinnedConstructionIdentityStillRequired
+    M.canonicalRound131PinnedRecoveryBoundary ≡ true
+r457LiteralPinnedIdentityStillRequiredRegression = refl
