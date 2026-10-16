@@ -8,6 +8,7 @@ import DASHI.Cognition.VilyaProtectionSourceAtlasExact as Vilya
 import DASHI.Cognition.ProtectiveSpatialDualUseAntiPanopticonExact as DualUse
 import DASHI.Cognition.KirkVilyaCounterfactualPreventionBoundaryExact as Kirk
 import DASHI.Cognition.VilyaGodsEyeAntiPanopticonWeldExact as Weld
+import DASHI.Cognition.SpatialIntelligenceAgentCrossPollinationExact as Agent
 
 gevObservationDoesNotCreateProtectiveAuthority :
   Core.observationCreatesProtectiveAuthority ≡ false
@@ -56,3 +57,15 @@ privacyAndNonDominationSurviveProtectiveProjection = refl
 publicObservationAndProtectiveOperationsRemainDistinct :
   Weld.godsEyeViewEqualsVilyaOperationalSystem ≡ false
 publicObservationAndProtectiveOperationsRemainDistinct = refl
+
+geospatialAgentCanOrchestrateSpatialTools :
+  Agent.geospatialReasoningAgentPatternPaid ≡ true
+geospatialAgentCanOrchestrateSpatialTools = refl
+
+reasoningAgentDoesNotCreateOperationalAuthority :
+  Agent.reasoningAgentCreatesProtectiveAuthority ≡ false
+reasoningAgentDoesNotCreateOperationalAuthority = refl
+
+reasoningAgentDoesNotCreateUseOfForceAuthority :
+  Agent.reasoningAgentCreatesUseOfForceAuthority ≡ false
+reasoningAgentDoesNotCreateUseOfForceAuthority = refl
