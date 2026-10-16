@@ -12,6 +12,14 @@ redoxRegenerationAndSpatialTopologyArePaidWithoutScalarPoolPromotion :
   × RedoxSpatial.scalarWellMixedPoolSufficient RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
 redoxRegenerationAndSpatialTopologyArePaidWithoutScalarPoolPromotion = refl , (refl , refl)
 
+cellularUptakeAndFunctionalCrossTalkArePaidWithoutInventingFlux :
+  RedoxSpatial.cellularBH4UptakeDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
+  × RedoxSpatial.specificMembraneCarrierRequiredByUptakeStudy RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
+  × RedoxSpatial.functionalCocultureCrossTalkSupported RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
+  × RedoxSpatial.intercellBH4TransferDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
+cellularUptakeAndFunctionalCrossTalkArePaidWithoutInventingFlux =
+  refl , (refl , (refl , refl))
+
 neuralSupplyAndConsumptionNeedNotBeColocalized :
   RedoxSpatial.gtpchAndNnosMustBeSameCell RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
   × RedoxSpatial.intercellBH4TransferDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
