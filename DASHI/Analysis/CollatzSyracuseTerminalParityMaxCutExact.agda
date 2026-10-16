@@ -6,31 +6,26 @@ module DASHI.Analysis.CollatzSyracuseTerminalParityMaxCutExact where
 -- This owner records the strongest current literal-Syracuse cut without
 -- rewriting the older coarse all-start audit.  The paid chain is:
 --
---   finite base 2..8
---   -> every even tail start
---   -> every odd/even prefix (10)
---   -> exact early leaves 1100, 11010, 11100
---   -> three residual literal prefix families 11011, 11101, 1111...
---   -> a residual-only finite-frontier compiler
---   -> generic fixed-word affine threshold certificates
---   -> arbitrary trailing-even certificate extension
---   -> attribution-safe current SOTA atlas
---   -> exact paradoxical-prefix correction seam
---   -> exact coefficient-resonance coordinate
---   -> every contracting word gets canonical threshold A(w)+1
---   -> residual word-certificate coverage -> strict-descent frontier
---   -> strictness guard rejecting globally bounded pseudo-frontiers
---   -> coherent all-horizon survivor histories as inverse-limit obstructions
---   -> contracting survivor forces gap*x <= A(w)
---   -> constructive finite-barrier search / explicit Markov extraction seam.
+--   finite base / literal parity cylinders / exact affine normal form
+--   -> residual literal prefix families and finite-frontier compilers
+--   -> generic word certificates + trailing-even compression
+--   -> attribution-safe SOTA / coefficient-stopping source atlas
+--   -> paradoxical correction seam + exact coefficient resonance
+--   -> safe A(w)+1 certificate for every contracting word
+--   -> SHARP floor(A/g)+1 threshold + minimality + paradoxical upper bound
+--   -> exact late-bit (A,s,2^m,3^s,g) transitions
+--   -> safe odd extension builds exact gap g' = 2g - 3^s
+--   -> trailing-even sharp barrier is nonincreasing
+--   -> residual certificate/frontier strictness
+--   -> inverse-limit and all-horizon affine survivor obstructions
+--   -> constructive finite-barrier search / explicit Markov extraction seam
+--   -> well-founded universal stopping compiler.
 --
 -- The residual producer is still theorem-strength.  Finite computation,
--- density decay, spectral mixing, affine cocycles, word surgery, near-resonance
+-- density decay, spectral mixing, coefficient stopping statistics,
+-- semiconvergent classification, affine word surgery, near-resonance
 -- classification, or merely negating an inverse-limit history do not by
--- themselves inhabit it.  A supplied finite same-object survivor barrier DOES
--- compile constructively to literal strict descent; global no-infinite-survivor
--- yields only double negation unless the explicit Nat-search Markov socket is
--- separately paid.
+-- themselves inhabit it.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -48,6 +43,9 @@ import DASHI.Analysis.CollatzSyracuseSOTA2026Exact as SOTA
 import DASHI.Analysis.CollatzSyracuseParadoxicalPrefixExact as Paradox
 import DASHI.Analysis.CollatzSyracuseCoefficientResonanceExact as Resonance
 import DASHI.Analysis.CollatzSyracuseContractingWordFamilyExact as ContractingFamily
+import DASHI.Analysis.CollatzSyracuseSharpBarrierThresholdExact as Sharp
+import DASHI.Analysis.CollatzSyracuseAffinePrefixTransitionExact as PrefixStep
+import DASHI.Analysis.CollatzSyracuseSharpBarrierTransitionExact as BarrierStep
 import DASHI.Analysis.CollatzSyracuseResidualWordCertificateFrontierExact as WordFrontier
 import DASHI.Analysis.CollatzSyracuseResidualFrontierStrictnessGuardExact as Strictness
 import DASHI.Analysis.CollatzSyracuseResidualInverseLimitObstructionExact as Inverse
@@ -72,9 +70,15 @@ record TerminalParityMaxCutBoundary : Set where
     uniformWordDescentCertificatePaid : Nat
     trailingZeroCertificateCompilerPaid : Nat
     sotaAttributionAtlasPaid : Nat
+    coefficientStoppingAttributionPaid : Nat
     paradoxicalAffineSeamPaid : Nat
     coefficientResonanceCoordinatePaid : Nat
     contractingWordFamilyCompilerPaid : Nat
+    sharpBarrierThresholdPaid : Nat
+    sharpBarrierMinimalityPaid : Nat
+    affinePrefixTransitionPaid : Nat
+    safeOddGapProducerPaid : Nat
+    trailingEvenSharpBarrierMonotonicityPaid : Nat
     residualWordCertificateFrontierPaid : Nat
     residualFrontierStrictnessGuardPaid : Nat
     residualInverseLimitObstructionPaid : Nat
@@ -105,7 +109,7 @@ record TerminalParityMaxCutBoundary : Set where
 canonicalTerminalParityMaxCutBoundary : TerminalParityMaxCutBoundary
 canonicalTerminalParityMaxCutBoundary =
   terminalParityMaxCutBoundary
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
     1 1 1
     0 0 0 0 0 0
     0 0 0 0 0 1
@@ -164,6 +168,12 @@ sotaAttributionAtlasPaid :
   ≡ 1
 sotaAttributionAtlasPaid = refl
 
+coefficientStoppingAttributionPaid :
+  SOTA.CollatzSOTA2026Boundary.coefficientStoppingHistoryAttributed
+    SOTA.canonicalCollatzSOTA2026Boundary
+  ≡ 1
+coefficientStoppingAttributionPaid = refl
+
 paradoxicalAffineSeamPaid :
   Paradox.ParadoxicalPrefixBoundary.paradoxicalPrefixStartBoundedByCorrectionPaid
     Paradox.canonicalParadoxicalPrefixBoundary
@@ -181,6 +191,36 @@ contractingWordFamilyCompilerPaid :
     ContractingFamily.canonicalContractingWordFamilyBoundary
   ≡ 1
 contractingWordFamilyCompilerPaid = refl
+
+sharpBarrierThresholdPaid :
+  Sharp.SharpBarrierThresholdBoundary.sharpQuotientThresholdPaid
+    Sharp.canonicalSharpBarrierThresholdBoundary
+  ≡ 1
+sharpBarrierThresholdPaid = refl
+
+sharpBarrierMinimalityPaid :
+  Sharp.SharpBarrierThresholdBoundary.sharpThresholdMinimalityPaid
+    Sharp.canonicalSharpBarrierThresholdBoundary
+  ≡ 1
+sharpBarrierMinimalityPaid = refl
+
+affinePrefixTransitionPaid :
+  PrefixStep.AffinePrefixTransitionBoundary.trailingOddTransitionPaid
+    PrefixStep.canonicalAffinePrefixTransitionBoundary
+  ≡ 1
+affinePrefixTransitionPaid = refl
+
+safeOddGapProducerPaid :
+  PrefixStep.AffinePrefixTransitionBoundary.safeOddConditionBuildsNewGapPaid
+    PrefixStep.canonicalAffinePrefixTransitionBoundary
+  ≡ 1
+safeOddGapProducerPaid = refl
+
+trailingEvenSharpBarrierMonotonicityPaid :
+  BarrierStep.SharpBarrierTransitionBoundary.arbitraryTrailingEvenSharpThresholdNonincreasingPaid
+    BarrierStep.canonicalSharpBarrierTransitionBoundary
+  ≡ 1
+trailingEvenSharpBarrierMonotonicityPaid = refl
 
 residualWordCertificateFrontierPaid :
   WordFrontier.ResidualWordCertificateFrontierBoundary.finiteCertificateCoverageCompilerPaid
