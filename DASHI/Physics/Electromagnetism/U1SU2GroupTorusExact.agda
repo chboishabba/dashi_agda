@@ -3,67 +3,158 @@ module DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact where
 ------------------------------------------------------------------------
 -- GROUP-LEVEL U(1) INSIDE THE EXISTING UNIT-QUATERNION SU(2)
 --
--- The Lie-algebra restriction is already paid in U1AsSU2AbelianRestrictionExact.
--- Here the corresponding group-level carrier is the unit circle in the
--- (q0,q3)-plane of the repository's concrete unit-quaternion SU(2).
+-- U(1) is realised as the unit circle in the (q0,q3)-plane of the repository's
+-- concrete unit-quaternion SU(2).  Multiplication and inversion are literal
+-- complex multiplication/conjugation, and the inclusion is proved to preserve
+-- the existing SU(2) operations.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import Data.List.Base using ([]; _∷_)
+import Tactic.RingSolver as Solver
 
+open import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport using (GroupStructure)
 import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
 
 record U1TorusElement : Set where
   constructor u1-torus
   field
-    realPart imagPart : SU2.ℝ
+    realPart imagPart : ℝ
     unitCircle :
-      SU2.normSquaredQ (SU2.quat realPart SU2.zeroR SU2.zeroR imagPart)
+      (realPart SU2.*R realPart) SU2.+R (imagPart SU2.*R imagPart)
       ≡ SU2.oneR
 
 open U1TorusElement public
+
+u1Ext : ∀ {u v : U1TorusElement} →
+  realPart u ≡ realPart v → imagPart u ≡ imagPart v → u ≡ v
+u1Ext {u1-torus a b p} {u1-torus .a .b q} refl refl =
+  cong (u1-torus a b) (SU2.unitNormProofIrrelevance p q)
 
 axisQuaternion : U1TorusElement → SU2.Quaternion
 axisQuaternion u =
   SU2.quat (realPart u) SU2.zeroR SU2.zeroR (imagPart u)
 
+axisNormSimplifies : ∀ a b →
+  SU2.normSquaredQ (SU2.quat a SU2.zeroR SU2.zeroR b)
+  ≡ (a SU2.*R a) SU2.+R (b SU2.*R b)
+axisNormSimplifies a b =
+  Solver.solve (a ∷ b ∷ []) SU2.realSolverRing
+
 includeU1InSU2 : U1TorusElement → SU2.SU2Quaternion
-includeU1InSU2 u = SU2.su2q (axisQuaternion u) (unitCircle u)
+includeU1InSU2 u =
+  SU2.su2q (axisQuaternion u)
+    (trans (axisNormSimplifies (realPart u) (imagPart u)) (unitCircle u))
 
--- The product of two axis quaternions has no q1/q2 component.  These are the
--- group-level counterparts of the vanishing embedded Lie bracket.
-record AxisProductClosure (u v : U1TorusElement) : Set where
-  constructor axis-product-closure
-  field
-    q1Zero :
-      SU2.q1 (SU2.axisProduct u v) ≡ SU2.zeroR
-    q2Zero :
-      SU2.q2 (SU2.axisProduct u v) ≡ SU2.zeroR
+complexNormMultiplicative : ∀ a b c d →
+  (((a SU2.*R c) SU2.+R (SU2.-R (b SU2.*R d))) SU2.*R
+    ((a SU2.*R c) SU2.+R (SU2.-R (b SU2.*R d))))
+  SU2.+R
+  (((a SU2.*R d) SU2.+R (b SU2.*R c)) SU2.*R
+    ((a SU2.*R d) SU2.+R (b SU2.*R c)))
+  ≡
+  ((a SU2.*R a) SU2.+R (b SU2.*R b)) SU2.*R
+  ((c SU2.*R c) SU2.+R (d SU2.*R d))
+complexNormMultiplicative a b c d =
+  Solver.solve (a ∷ b ∷ c ∷ d ∷ []) SU2.realSolverRing
 
--- A small local alias keeps the closure statement tied to the literal
--- quaternion product rather than to an independently invented U(1) law.
-axisProduct : U1TorusElement → U1TorusElement → SU2.Quaternion
-axisProduct u v = SU2.axisQuaternionPlaceholder
+u1Multiply : U1TorusElement → U1TorusElement → U1TorusElement
+u1Multiply (u1-torus a b abNorm) (u1-torus c d cdNorm) =
+  u1-torus
+    ((a SU2.*R c) SU2.+R (SU2.-R (b SU2.*R d)))
+    ((a SU2.*R d) SU2.+R (b SU2.*R c))
+    (trans
+      (complexNormMultiplicative a b c d)
+      (trans
+        (cong₂ SU2._*R_ abNorm cdNorm)
+        (SU2.*-identityˡ SU2.oneR)))
 
--- The repository does not expose a separate complex-number group owner here;
--- group-level promotion is therefore represented as the literal closed image
--- inside SU(2), with multiplication/inversion inherited from SU(2).
-record U1ClosedSubgroupImage : Set₁ where
-  constructor u1-closed-subgroup-image
-  field
-    Carrier : Set
-    include : Carrier → SU2.SU2Quaternion
-    multiply : Carrier → Carrier → Carrier
-    inverse : Carrier → Carrier
-    unit : Carrier
-    preservesMultiply : ∀ a b →
-      include (multiply a b) ≡ SU2.su2Multiply (include a) (include b)
-    preservesInverse : ∀ a →
-      include (inverse a) ≡ SU2.su2Inverse (include a)
-    preservesUnit : include unit ≡ SU2.su2Identity
+u1Identity : U1TorusElement
+u1Identity =
+  u1-torus SU2.oneR SU2.zeroR
+    (Solver.solve [] SU2.realSolverRing)
 
--- Production authority flags.  The exact operational carrier is the
--- q0/q3-unit-circle image; no claim is made that this proves the SM hypercharge
--- embedding or a Clay mass gap.
+u1Inverse : U1TorusElement → U1TorusElement
+u1Inverse (u1-torus a b norm) =
+  u1-torus a (SU2.-R b)
+    (trans (Solver.solve (a ∷ b ∷ []) SU2.realSolverRing) norm)
+
+u1MultiplyAssociative : ∀ a b c →
+  u1Multiply (u1Multiply a b) c ≡ u1Multiply a (u1Multiply b c)
+u1MultiplyAssociative
+  (u1-torus a b _)
+  (u1-torus c d _)
+  (u1-torus e f _) =
+  u1Ext
+    (Solver.solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ []) SU2.realSolverRing)
+    (Solver.solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ []) SU2.realSolverRing)
+
+u1IdentityLeft : ∀ u → u1Multiply u1Identity u ≡ u
+u1IdentityLeft (u1-torus a b _) =
+  u1Ext
+    (Solver.solve (a ∷ b ∷ []) SU2.realSolverRing)
+    (Solver.solve (a ∷ b ∷ []) SU2.realSolverRing)
+
+u1IdentityRight : ∀ u → u1Multiply u u1Identity ≡ u
+u1IdentityRight (u1-torus a b _) =
+  u1Ext
+    (Solver.solve (a ∷ b ∷ []) SU2.realSolverRing)
+    (Solver.solve (a ∷ b ∷ []) SU2.realSolverRing)
+
+u1InverseLeft : ∀ u → u1Multiply (u1Inverse u) u ≡ u1Identity
+u1InverseLeft (u1-torus a b norm) =
+  u1Ext
+    (trans (Solver.solve (a ∷ b ∷ []) SU2.realSolverRing) norm)
+    (Solver.solve (a ∷ b ∷ []) SU2.realSolverRing)
+
+u1InverseRight : ∀ u → u1Multiply u (u1Inverse u) ≡ u1Identity
+u1InverseRight (u1-torus a b norm) =
+  u1Ext
+    (trans (Solver.solve (a ∷ b ∷ []) SU2.realSolverRing) norm)
+    (Solver.solve (a ∷ b ∷ []) SU2.realSolverRing)
+
+u1InverseInvolutive : ∀ u → u1Inverse (u1Inverse u) ≡ u
+u1InverseInvolutive (u1-torus a b _) =
+  u1Ext refl (SU2.-‿involutive b)
+
+u1TorusGroup : GroupStructure
+u1TorusGroup = record
+  { Carrier = U1TorusElement
+  ; unit = u1Identity
+  ; multiply = u1Multiply
+  ; inverse = u1Inverse
+  ; multiplyAssoc = u1MultiplyAssociative
+  ; unitLeft = u1IdentityLeft
+  ; unitRight = u1IdentityRight
+  ; inverseLeft = u1InverseLeft
+  ; inverseRight = u1InverseRight
+  ; inverseInvolutive = u1InverseInvolutive
+  }
+
+includePreservesMultiply : ∀ u v →
+  includeU1InSU2 (u1Multiply u v)
+  ≡ SU2.su2Multiply (includeU1InSU2 u) (includeU1InSU2 v)
+includePreservesMultiply
+  (u1-torus a b _) (u1-torus c d _) =
+  SU2.su2QuaternionExt
+    (SU2.quaternionExt
+      (Solver.solve (a ∷ b ∷ c ∷ d ∷ []) SU2.realSolverRing)
+      (Solver.solve (a ∷ b ∷ c ∷ d ∷ []) SU2.realSolverRing)
+      (Solver.solve (a ∷ b ∷ c ∷ d ∷ []) SU2.realSolverRing)
+      (Solver.solve (a ∷ b ∷ c ∷ d ∷ []) SU2.realSolverRing))
+
+includePreservesInverse : ∀ u →
+  includeU1InSU2 (u1Inverse u) ≡ SU2.su2Inverse (includeU1InSU2 u)
+includePreservesInverse (u1-torus a b _) =
+  SU2.su2QuaternionExt
+    (SU2.quaternionExt refl refl refl refl)
+
+includePreservesIdentity :
+  includeU1InSU2 u1Identity ≡ SU2.su2Identity
+includePreservesIdentity =
+  SU2.su2QuaternionExt (SU2.quaternionExt refl refl refl refl)
+
 groupLevelU1SubgroupConstructed : Bool
 groupLevelU1SubgroupConstructed = true
 
@@ -86,9 +177,9 @@ record U1SU2GroupTorusBoundary : Set where
   constructor u1-su2-group-torus-boundary
   field
     concreteUnitQuaternionSU2Reused : Bool
-    q0q3UnitCircleIsGroupLevelU1Image : Bool
-    multiplicationInheritedFromSU2 : Bool
-    inversionInheritedFromSU2 : Bool
+    literalU1GroupConstructed : Bool
+    multiplicationInclusionTheoremPaid : Bool
+    inversionInclusionTheoremPaid : Bool
     smHyperchargeRepresentationAutomaticallyRecovered : Bool
     nonAbelianMassGapAutomaticallyInherited : Bool
 
