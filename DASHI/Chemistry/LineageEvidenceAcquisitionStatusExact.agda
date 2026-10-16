@@ -12,6 +12,7 @@ import DASHI.Chemistry.PAHMechanismStatePromotionExact as PAH
 import DASHI.Chemistry.PAHElectronicStateHamiltonianMonsterProbeExact as ElectronicProbe
 import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact as Hepatic
 import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorExact as Neural
+import DASHI.Biology.KitzerowBH4RedoxSpatialDiscriminatorExact as RedoxSpatial
 
 ------------------------------------------------------------------------
 -- ACQUISITION STATUS AFTER PRIMARY/DIRECT WEB + MECHANISTIC/CAUSAL PASSES
@@ -108,10 +109,10 @@ bh4FluxStatus =
   acquisitionStatusReceipt
     "A1 BH4 same-system flux discriminator dataset"
     partiallyPaid
-    "KitzerowBH4HepaticCompetitionDiscriminatorExact + KitzerowBH4NeuralContextDiscriminatorExact"
-    "rat hepatic PAH/iNOS competition is directly constrained, and mouse neural studies directly show that restoring total brain BH4 need not restore monoamine/dopamine function; naive fixed-pool/current-pool-sufficiency readings are therefore already narrowed"
-    "target-relevant human/neural multi-branch BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO measurements with enzyme abundance/localization, compartment, region/cell type, timing and subgroup controls remain the decisive payment"
-    "Pastor 1996; Hyland et al. 1996; Sumi-Ichinose et al. 2001; Jiang et al. 2024 retain experimental ownership. DASHI owns only the cross-study discriminator composition; these studies do not establish autism causation or whole-model validity"
+    "KitzerowBH4HepaticCompetitionDiscriminatorExact + KitzerowBH4NeuralContextDiscriminatorExact + KitzerowBH4RedoxSpatialDiscriminatorExact"
+    "rat hepatic PAH/iNOS competition, mouse neural state-history constraints, NOS-bound BH4 redox regeneration, cellular GTPCH/nNOS topology and intracellular-versus-extracellular striatal route effects are directly constrained; naive fixed/well-mixed/current-pool-sufficiency readings are therefore narrowed"
+    "target-relevant human/neural multi-branch BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO measurements with NOS-bound redox/coupling, enzyme abundance/localization, intracellular/extracellular route, compartment, region/cell type, timing, transfer/supply topology and subgroup controls remain the decisive payment"
+    "Pastor 1996; Hyland et al. 1996; Hwang et al. 1998; Liang/Kaufman 1998; Witteveen/Giovanelli/Kaufman 1999; Sumi-Ichinose et al. 2001; Jiang et al. 2024 retain experimental ownership. DASHI owns only the cross-study discriminator composition; these studies do not establish autism causation or whole-model validity"
     false refl
 
 bh4NeuralContextStatus : AcquisitionStatusReceipt
@@ -123,6 +124,17 @@ bh4NeuralContextStatus =
     "current total brain BH4 alone is insufficient to identify downstream monoamine/dopamine recovery after chronic/developmental deficiency; enzyme abundance, anatomical region and developmental timing remain necessary coordinates"
     "translate this state-history/region dependence into target-relevant human or organoid same-object branch-flux measurements and determine which refined architecture explains it"
     "three primary mouse studies retain their individual claims; the declared coordinate is paid without transferring species/context or proving the broader causal model"
+    false refl
+
+bh4RedoxSpatialStatus : AcquisitionStatusReceipt
+bh4RedoxSpatialStatus =
+  acquisitionStatusReceipt
+    "A1-redox-spatial BH4 pool-topology discriminator"
+    paidForDeclaredCoordinate
+    "KitzerowBH4RedoxSpatialDiscriminatorExact.canonicalRedoxSpatialDiscriminator"
+    "NOS-bound BH4 requires explicit oxidation/regeneration state, monoaminergic synthesis and nNOS consumption need not be colocalized, and intracellular versus extracellular BH4 routes produce distinct striatal dopamine-release mechanisms; a single well-mixed scalar pool is therefore insufficient for the declared coordinate"
+    "directly measure intercellular/compartmental BH4 transfer and integrate route-resolved BH4/BH2/NAD(P)H redox state with simultaneous multi-branch flux in the target-relevant system"
+    "Hwang 1998, Liang/Kaufman 1998 and Witteveen/Giovanelli/Kaufman 1999 retain their individual observations; intercellular transfer remains proposed/unmeasured and no whole allocator theorem is inferred"
     false refl
 
 chlorCalibrationStatus : AcquisitionStatusReceipt
@@ -173,6 +185,7 @@ canonicalAcquisitionStatuses : List AcquisitionStatusReceipt
 canonicalAcquisitionStatuses =
   bh4FluxStatus
   ∷ bh4NeuralContextStatus
+  ∷ bh4RedoxSpatialStatus
   ∷ pahAtomMappingStatus
   ∷ pahKineticsStatus
   ∷ pbCaTargetStatus
@@ -202,6 +215,10 @@ record EvidenceAcquisitionStatusBoundary : Set where
     hepaticTwoBranchPaymentClosesWholeMultiBranchTargetIsFalse : hepaticTwoBranchPaymentClosesWholeMultiBranchTarget ≡ false
     currentPoolRestorationGuaranteesFunctionalRescue : Bool
     currentPoolRestorationGuaranteesFunctionalRescueIsFalse : currentPoolRestorationGuaranteesFunctionalRescue ≡ false
+    scalarWellMixedPoolSufficient : Bool
+    scalarWellMixedPoolSufficientIsFalse : scalarWellMixedPoolSufficient ≡ false
+    directIntercellularTransferAlreadyPaid : Bool
+    directIntercellularTransferAlreadyPaidIsFalse : directIntercellularTransferAlreadyPaid ≡ false
     directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial : Bool
     directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartialIsTrue : directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial ≡ true
     unresolvedTargetRemainsTyped : Bool
@@ -213,4 +230,4 @@ canonicalEvidenceAcquisitionStatusBoundary : EvidenceAcquisitionStatusBoundary
 canonicalEvidenceAcquisitionStatusBoundary =
   evidenceAcquisitionStatusBoundary
     false refl false refl false refl false refl false refl
-    false refl false refl true refl true refl
+    false refl false refl false refl false refl true refl true refl
