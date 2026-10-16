@@ -60,6 +60,7 @@ def test_p3_compiler_structure_is_paid_but_physical_experiment_remains_open():
     for needle in (
         "AntigravitySameStateFourChannelDiscriminatorExact as FourChannel",
         "sameStateFourChannelCompilerConstructed",
+        "sameSourceStressMetricChainConstructed",
         "mechanismSignatureTemplatesConstructed",
         "candidateBoundNuisanceClosureContractConstructed",
         "preferredSingleVacuumFixtureFeedsDiscriminator",
