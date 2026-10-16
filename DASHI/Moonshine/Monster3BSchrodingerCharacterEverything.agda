@@ -1,0 +1,22 @@
+module DASHI.Moonshine.Monster3BSchrodingerCharacterEverything where
+
+-- Literal finite Schrodinger representation and full group action.
+import DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact
+import DASHI.Moonshine.Monster3BFiniteSchrodingerHeisenbergActionExact
+import DASHI.Moonshine.Monster3BFiniteSchrodingerFullActionLawExact
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact
+
+-- Exact cyclotomic/F3 cancellation core used by the character calculation.
+import DASHI.Moonshine.Monster3BSchrodingerAdditiveCharacterOrthogonalityExact
+import DASHI.Moonshine.Monster3BSchrodingerAdditiveCharacterOrthogonalityValidation
+
+-- Independent exhaustive executable audit of all 3^13 Heisenberg coordinates.
+import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptExact
+import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptValidation
+
+-- Canonical character signature and proof-relevant same-object consumer.
+import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact
+import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptExact
+import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact
+import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact
+import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerValidation
