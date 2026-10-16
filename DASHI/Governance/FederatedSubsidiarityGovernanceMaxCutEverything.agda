@@ -63,3 +63,9 @@ import DASHI.Governance.BoloBoloNonDominationObserverSufficiencyEverything
 -- estimands/identification receipts and are only conjoined after same-target
 -- binding and outcome-specific effect-direction payment.
 import DASHI.Governance.BoloBoloCausalJointPromotionEverything
+
+-- Target-pilot execution gate: causal design/result does not authorize
+-- intervention. Actual governance-arm assignment requires target-specific
+-- intervention consent/authority/withdrawal/externality/distribution and
+-- restoration receipts; generic initial-research consent cannot populate it.
+import DASHI.Governance.BoloBoloTargetPilotAdmissibilityEverything
