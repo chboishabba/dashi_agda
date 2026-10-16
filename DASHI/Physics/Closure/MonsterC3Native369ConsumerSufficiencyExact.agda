@@ -108,11 +108,28 @@ native369ObserverSufficientForBasisLabel left right sameNative =
       (cong Native369.native369ToModel sameNative)
       (Native369.model369RoundTrip right))
 
--- Backwards-compatible names, now explicitly scoped by the aliases above.
+------------------------------------------------------------------------
+-- Backwards-compatible names.  Their types now make the corrected scope
+-- explicit: historical "fine state" means the finite model basis label here.
+------------------------------------------------------------------------
+
+fineStateConsumer : BasisLabelState → BasisLabelState
 fineStateConsumer = basisLabelConsumer
+
+phaseFineStateNonDescent :
+  Consumer.ConsumerNonDescentWitness phaseObserver fineStateConsumer
 phaseFineStateNonDescent = phaseBasisLabelNonDescent
+
+phaseObserverNotSufficientForFineState :
+  Consumer.ConsumerSufficient phaseObserver fineStateConsumer → ⊥
 phaseObserverNotSufficientForFineState = phaseObserverNotSufficientForBasisLabel
+
+phaseFineStateDoesNotFactor :
+  Consumer.FactorsThrough phaseObserver fineStateConsumer → ⊥
 phaseFineStateDoesNotFactor = phaseBasisLabelDoesNotFactor
+
+native369ObserverSufficientForFineState :
+  Consumer.ConsumerSufficient native369Observer fineStateConsumer
 native369ObserverSufficientForFineState = native369ObserverSufficientForBasisLabel
 
 record ConsumerSufficiencyBoundary : Set where
@@ -124,6 +141,16 @@ record ConsumerSufficiencyBoundary : Set where
     phaseSufficientForWeightConsumersIsFalse : phaseSufficientForWeightConsumers ≡ false
     phaseSufficientForMultiplicityConsumers : Bool
     phaseSufficientForMultiplicityConsumersIsFalse : phaseSufficientForMultiplicityConsumers ≡ false
+
+    -- Historical projection names retained for downstream consumers.
+    phaseSufficientForFineStateConsumers : Bool
+    phaseSufficientForFineStateConsumersIsFalse :
+      phaseSufficientForFineStateConsumers ≡ false
+    native369FineCoordinateSufficientForFineState : Bool
+    native369FineCoordinateSufficientForFineStateIsTrue :
+      native369FineCoordinateSufficientForFineState ≡ true
+
+    -- Corrected representation-native names.
     phaseSufficientForFiniteBasisLabelConsumers : Bool
     phaseSufficientForFiniteBasisLabelConsumersIsFalse :
       phaseSufficientForFiniteBasisLabelConsumers ≡ false
@@ -143,5 +170,13 @@ open ConsumerSufficiencyBoundary public
 canonicalConsumerSufficiencyBoundary : ConsumerSufficiencyBoundary
 canonicalConsumerSufficiencyBoundary =
   consumerSufficiencyBoundary
-    true refl false refl false refl false refl true refl false refl false refl
-    "The exact NH3/Monster C3 quotient is sufficient for phase/character consumers and formally insufficient for weight, multiplicity and finite Monster basis-label identity. The native-369 coordinate is sufficient for the complete finite model basis label. This theorem does not identify those finite labels with every vector in the literal W_zeta eigenspace; representation-native W_zeta recognition is separately governed by ActualZetaBasisRecognition and H_zeta/S_zeta linear same-object receipts."
+    true refl
+    false refl
+    false refl
+    false refl
+    true refl
+    false refl
+    true refl
+    false refl
+    false refl
+    "The exact NH3/Monster C3 quotient is sufficient for phase/character consumers and formally insufficient for weight, multiplicity and finite Monster basis-label identity. The historical `fine state` names are retained only for that finite-model basis-label consumer. The native-369 coordinate is sufficient for the complete finite model basis label, not for every vector in the literal W_zeta eigenspace; representation-native W_zeta recognition is separately governed by ActualZetaBasisRecognition and H_zeta/S_zeta linear same-object receipts."
