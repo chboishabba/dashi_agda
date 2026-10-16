@@ -13,6 +13,15 @@ paidHZetaCompilerAvailable :
   Compiler.paidHZetaRecognitionCompilerAvailable Compiler.canonicalBoundary ≡ true
 paidHZetaCompilerAvailable = refl
 
+literalSchrodingerCharacterDerived :
+  Compiler.literalSchrodingerCharacterDerivedExecutable Compiler.canonicalBoundary ≡ true
+literalSchrodingerCharacterDerived = refl
+
+literalSchrodingerCharacterMatchesCanonicalSignature :
+  Compiler.literalSchrodingerCharacterMatchesCanonicalSignatureExecutable
+    Compiler.canonicalBoundary ≡ true
+literalSchrodingerCharacterMatchesCanonicalSignature = refl
+
 concreteSchrodingerRepresentationTransportStillOpen :
   Compiler.concreteSchrodingerRepresentationTransportPaidHere Compiler.canonicalBoundary ≡ false
 concreteSchrodingerRepresentationTransportStillOpen = refl
