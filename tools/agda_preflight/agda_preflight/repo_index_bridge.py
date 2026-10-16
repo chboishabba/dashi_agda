@@ -1,17 +1,17 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 import sqlite3
 from typing import Optional
 
 from .discovery import classify_surface_role
+from .repository_store import DEFAULT_REPOSITORY_DB, ensure_repository_schema
 
 
 EXPECTED_SCHEMA = "2.0.0"
-DEFAULT_PATH = Path(".repo-index/index.sqlite3")
+DEFAULT_PATH = DEFAULT_REPOSITORY_DB
 _IGNORED_PARTS = {
-    ".git", ".repo-index", ".pytest_cache", ".venv", ".venv-fluid",
+    ".git", ".repo-index", ".dashi", ".pytest_cache", ".venv", ".venv-fluid",
     ".codex_skill_work", "__pycache__", "build", "dist", "node_modules",
     "outputs", "monster", "cubical", "temp-DOWNLOADED",
 }
@@ -30,32 +30,43 @@ def _allowed(path: Path) -> bool:
     return path.suffix in {".agda", ".md"}
 
 
-def _json(value: str, default):
-    try:
-        return json.loads(value)
-    except (TypeError, ValueError, json.JSONDecodeError):
-        return default
-
-
 class RepoIndexReader:
-    """Read-only bridge to the existing repo-wide discovery index."""
+    """Read the normalized repo-wide inventory from the unified SQLite DB."""
 
-    def __init__(self, root: Path, path: Optional[Path] = None) -> None:
+    def __init__(
+        self,
+        root: Path,
+        path: Optional[Path] = None,
+        *,
+        connection: Optional[sqlite3.Connection] = None,
+    ) -> None:
         self.root = root.resolve()
-        chosen = path or DEFAULT_PATH
-        self.path = chosen if chosen.is_absolute() else self.root / chosen
-        self.connection = None
-        if self.path.exists():
-            uri = "file:{}?mode=ro".format(self.path.resolve().as_posix())
-            self.connection = sqlite3.connect(uri, uri=True)
-            self.connection.row_factory = sqlite3.Row
+        self._owns_connection = connection is None
+        if connection is not None:
+            self.connection = connection
+            self.path = Path("<shared-connection>")
+            ensure_repository_schema(self.connection)
+        else:
+            chosen = path or DEFAULT_PATH
+            self.path = chosen if chosen.is_absolute() else self.root / chosen
+            self.connection = None
+            if self.path.exists():
+                uri = "file:{}?mode=ro".format(self.path.resolve().as_posix())
+                self.connection = sqlite3.connect(uri, uri=True)
+                self.connection.row_factory = sqlite3.Row
 
     @property
     def available(self) -> bool:
-        return self.connection is not None
+        if self.connection is None:
+            return False
+        try:
+            row = self.connection.execute("SELECT count(*) FROM repo_files").fetchone()
+        except sqlite3.DatabaseError:
+            return False
+        return bool(row and int(row[0]) > 0)
 
     def close(self) -> None:
-        if self.connection is not None:
+        if self._owns_connection and self.connection is not None:
             self.connection.close()
             self.connection = None
 
@@ -70,17 +81,52 @@ class RepoIndexReader:
             return None
         try:
             row = self.connection.execute(
-                "SELECT value FROM meta WHERE key='schema_version'"
+                "SELECT value FROM repository_meta WHERE key='legacy_repo_index_schema'"
             ).fetchone()
         except sqlite3.DatabaseError:
             return None
-        return str(row["value"]) if row is not None else None
+        return str(row[0]) if row is not None else None
+
+    def _tags(self, symbol_id: str) -> list[str]:
+        if self.connection is None:
+            return []
+        return [
+            str(row[0])
+            for row in self.connection.execute(
+                "SELECT tag FROM repo_symbol_tags WHERE symbol_id=? ORDER BY tag",
+                (symbol_id,),
+            )
+        ]
+
+    def _requirements(self, symbol_id: str) -> dict:
+        if self.connection is None:
+            return {}
+        result: dict[str, list[dict[str, str]]] = {}
+        rows = self.connection.execute(
+            """
+            SELECT requirement_class, requirement_kind, required_symbol, source
+            FROM repo_requirements
+            WHERE symbol_id=?
+            ORDER BY requirement_class, requirement_kind, required_symbol, source
+            """,
+            (symbol_id,),
+        )
+        for row in rows:
+            result.setdefault(str(row[0]), []).append(
+                {
+                    "kind": str(row[1]),
+                    "symbol": str(row[2]),
+                    "source": str(row[3]),
+                }
+            )
+        return result
 
     def _row(self, row: sqlite3.Row) -> dict:
         module = row["module"] or ""
+        symbol_id = str(row["symbol_id"])
         return {
-            "symbol_id": row["symbol_id"],
-            "qualified_name": row["symbol_id"],
+            "symbol_id": symbol_id,
+            "qualified_name": symbol_id,
             "name": row["name"],
             "kind": row["kind"],
             "language": row["language"],
@@ -90,11 +136,16 @@ class RepoIndexReader:
             "file": row["file"],
             "line_start": int(row["line_start"]),
             "line_end": int(row["line_end"]),
-            "status": _json(row["status_json"], {}),
-            "tags": _json(row["tags_json"], []),
-            "requirements": _json(row["requirements_json"], {}),
-            "surface_role": classify_surface_role(module or row["symbol_id"]),
-            "inventory_source": "repo-index",
+            "status": {
+                "promotion": row["promotion"],
+                "authority": row["authority"],
+                "truth": row["truth"],
+                "source": row["source"],
+            },
+            "tags": self._tags(symbol_id),
+            "requirements": self._requirements(symbol_id),
+            "surface_role": classify_surface_role(module or symbol_id),
+            "inventory_source": "repository-db",
         }
 
     def search_symbols(
@@ -104,14 +155,14 @@ class RepoIndexReader:
         include_history: bool = False,
         limit: int = 50,
     ) -> list[dict]:
-        if self.connection is None or not query.strip():
+        if not self.available or not query.strip():
             return []
         q = query.strip()
         history_clause = "" if include_history else "AND module NOT GLOB '*Round[0-9]*'"
         try:
             rows = self.connection.execute(
                 """
-                SELECT * FROM symbols
+                SELECT * FROM repo_symbols
                 WHERE (symbol_id = ? OR name = ? OR symbol_id LIKE ? OR name LIKE ?)
                   AND language = 'agda'
                   {history_clause}
@@ -128,23 +179,23 @@ class RepoIndexReader:
         return [self._row(row) for row in rows]
 
     def all_agda_symbols(self, *, include_history: bool = True) -> list[dict]:
-        if self.connection is None:
+        if not self.available:
             return []
         clause = "" if include_history else "AND module NOT GLOB '*Round[0-9]*'"
         try:
             rows = self.connection.execute(
-                "SELECT * FROM symbols WHERE language='agda' {} ORDER BY symbol_id".format(clause)
+                "SELECT * FROM repo_symbols WHERE language='agda' {} ORDER BY symbol_id".format(clause)
             ).fetchall()
         except sqlite3.DatabaseError:
             return []
         return [self._row(row) for row in rows]
 
     def object_detail(self, symbol_id: str) -> dict:
-        if self.connection is None:
+        if not self.available:
             return {"symbol": None, "refs": []}
         try:
             row = self.connection.execute(
-                "SELECT * FROM symbols WHERE symbol_id = ? LIMIT 1", (symbol_id,)
+                "SELECT * FROM repo_symbols WHERE symbol_id = ? LIMIT 1", (symbol_id,)
             ).fetchone()
         except sqlite3.DatabaseError:
             return {"symbol": None, "refs": []}
@@ -154,7 +205,7 @@ class RepoIndexReader:
             refs = self.connection.execute(
                 """
                 SELECT from_symbol, to_symbol, ref_kind, file, line, snippet
-                FROM refs WHERE to_symbol = ? OR from_symbol = ?
+                FROM repo_refs WHERE to_symbol = ? OR from_symbol = ?
                 ORDER BY file, line LIMIT 200
                 """,
                 (symbol_id, symbol_id),
@@ -164,10 +215,10 @@ class RepoIndexReader:
         return {"symbol": self._row(row), "refs": [dict(item) for item in refs]}
 
     def coverage_status(self) -> dict:
-        if self.connection is None:
+        if not self.available:
             return {
                 "available": False,
-                "schema_version": None,
+                "schema_version": self._schema(),
                 "complete": False,
                 "state": "missing",
                 "missing": [],
@@ -176,7 +227,7 @@ class RepoIndexReader:
         schema = self._schema()
         try:
             indexed_rows = self.connection.execute(
-                "SELECT path, mtime_ns, size FROM files"
+                "SELECT path, mtime_ns, size FROM repo_files"
             ).fetchall()
         except sqlite3.DatabaseError:
             return {
