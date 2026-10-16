@@ -6,6 +6,7 @@ import DASHI.Physics.QuantumVacuum.Casimir369StressEnergySourceNativeTerminalExa
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutValidation
 import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerValidation
 import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeValidation
+import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1SelectedStressReadoutAttachmentValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1ModeRenormalizedStressAttachmentValidation
@@ -30,6 +31,8 @@ selectedGroupRealizationCompilerPaidRegression : T.selectedGroupStructureRealiza
 selectedGroupRealizationCompilerPaidRegression = refl
 allGroupsInterpretationNotRequiredRegression : T.independentAllGroupsStructureInterpretationRequired T.canonicalSourceNativeTerminalBoundary ≡ false
 allGroupsInterpretationNotRequiredRegression = refl
+selectedFieldRealizationInterfacePaidRegression : T.selectedQFTCartanFieldRealizationInterfacePaid T.canonicalSourceNativeTerminalBoundary ≡ true
+selectedFieldRealizationInterfacePaidRegression = refl
 actionEqualityNotIndependentRegression : T.independentRestrictedYMMaxwellActionEqualityRequired T.canonicalSourceNativeTerminalBoundary ≡ false
 actionEqualityNotIndependentRegression = refl
 metricVariationEqualityNotIndependentRegression : T.independentMetricVariationEqualityRequired T.canonicalSourceNativeTerminalBoundary ≡ false
@@ -47,6 +50,8 @@ r457PinnedIdentityStillOpenRegression : T.r457LiteralPinnedConstructionIdentityP
 r457PinnedIdentityStillOpenRegression = refl
 selectedGroupQuaternionRealizationStillOpenRegression : T.selectedGroupQuaternionSU2RealizationPaid T.canonicalSourceNativeTerminalBoundary ≡ false
 selectedGroupQuaternionRealizationStillOpenRegression = refl
+selectedCartanFieldStillOpenRegression : T.selectedQFTCartanFieldRealizationPaid T.canonicalSourceNativeTerminalBoundary ≡ false
+selectedCartanFieldStillOpenRegression = refl
 
 firstBlockerRegression : T.firstUnificationBlocker ≡ T.missingRound131RecoveredQFTAttachmentForR457
 firstBlockerRegression = refl
@@ -54,7 +59,7 @@ secondBlockerRegression : T.secondUnificationBlocker ≡ T.missingR457LiteralPin
 secondBlockerRegression = refl
 thirdBlockerRegression : T.thirdUnificationBlocker ≡ T.missingSelectedGroupQuaternionSU2Realization
 thirdBlockerRegression = refl
-fourthBlockerRegression : T.fourthUnificationBlocker ≡ T.missingCanonicalCartanU1FieldRestriction
+fourthBlockerRegression : T.fourthUnificationBlocker ≡ T.missingSelectedQFTCartanFieldRealization
 fourthBlockerRegression = refl
 fifthBlockerRegression : T.fifthUnificationBlocker ≡ T.missingPhysicalChargeCouplingNormalization
 fifthBlockerRegression = refl
