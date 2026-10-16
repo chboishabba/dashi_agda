@@ -4,36 +4,32 @@ module DASHI.Physics.Closure.MonsterC3RepresentationNativeTerminalMaxCutExact wh
 -- REPRESENTATION-NATIVE TERMINAL MAX-CUT
 --
 -- X6 x Fin90/native369 is a finite BASIS-LABEL chart, not the complete linear
--- W_zeta carrier.  The representation-native target is
+-- W_zeta carrier. The representation-native target is
 --
 --   H_zeta x S_zeta <-> W_zeta,
---   S_zeta = Hom_E(H_zeta,W_zeta),
+--   S_zeta = Hom_E(H_zeta,W_zeta).
 --
--- together with optional proof-relevant basis charts.  Repo archaeology also
--- shows that generic semisimple/isotypic assembly and post-recognition copy
--- count are already source-written; they are no longer roadmap discoveries.
+-- Generic fixed-phase recognition, the nonzero-simple-source classifier,
+-- semisimple/isotypic assembly and post-recognition copy-count are already
+-- source-written/theorem machinery. The live leaves are their actual same-
+-- object Monster instantiations and subsequent physical promotion.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact as Basis
-import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as Hardening
 import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact as HZeta
 import DASHI.Moonshine.Monster3BRepresentationNativeCurrentMaxCutExact as MonsterNative
 import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact as Literal3B
-import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
-import DASHI.Physics.Chemistry.AmmoniaMonster3BRepresentationNativeCorrectionExact as NativeCorrection
 import DASHI.Physics.Chemistry.AmmoniaMonster3BC3QuotientLiftExact as NH3C3
 import DASHI.Physics.Chemistry.AmmoniaSCIReleasedArtifactExact as SCIArtifact
 import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleExact as Counting
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
-import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
 import DASHI.Reasoning.Trialectic369Selected3BProjectionChoiceIndependenceExact as Projection
 
 record Receipt : Set where
   constructor receipt
   field
-    -- Corrected finite/linear semantics.
     native369FiniteCarrierScopedToBasisLabels : Bool
     native369FiniteCarrierIsWholeVOAStateCarrier : Bool
     actualZetaBasisRecognitionInterfaceAvailable : Bool
@@ -42,7 +38,7 @@ record Receipt : Set where
     hZetaFixedPhaseRecognitionCompilerPaid : Bool
     sZetaHomSpaceTargetTyped : Bool
 
-    -- Already-owned generic representation machinery recovered from repo.
+    genericSimpleSubobjectClassifierSourceWritten : Bool
     genericIsotypicAssemblySourceWritten : Bool
     postRecognitionCopyCountCompilerSourceWritten : Bool
     proofRelevantWeightTwoWrapperAvailable : Bool
@@ -51,7 +47,6 @@ record Receipt : Set where
     selectedPhaseSeventyEightCharacterFamilyPaid : Bool
     selectedPhaseTotalDegree65610Paid : Bool
 
-    -- Current same-object representation frontier.
     actualRepresentationNativeBasisRecognitionPaid : Bool
     actualPaidWeightTwoLinearBridge : Bool
     actualPaidLinearZetaRestriction : Bool
@@ -65,42 +60,34 @@ record Receipt : Set where
     literalPhaseOneRegularResidualSplitPaid : Bool
     zetaSquaredLiteralRecognitionTransportPaid : Bool
 
-    -- Selected-3B global projection recut.
     selected3BProjectionChoiceIsIndependentBlocker : Bool
     selected3BGlobalCompletionCompilerAvailable : Bool
     selected3BActualRetractionPaid : Bool
     selected3BIntrinsicSameActionPaid : Bool
 
-    -- NH3/C3 relationship.
     nh3MonsterExactC3RepresentationIsomorphismPaid : Bool
     nh3C3IsomorphismIsMonsterStateIdentity : Bool
     physicalNH3ToMonsterLinearStatePaid : Bool
     physicalNH3MonsterActionEquivariancePaid : Bool
 
-    -- Independent computational execution leaf.
     authorReleasedSelectedCIMatrixIdentityPaid : Bool
     authorReleasedSelectedCIMatrixRediagonalizedByDASHI : Bool
 
-    -- Counting/stat-mech semantics.
     count65610IsFiniteBasisLabelCount : Bool
     count65610IsCardinalityOfAllLinearWZetaStates : Bool
     mathematicalUniformCountingMeasurePaid : Bool
     physicalEnsembleOrDensityMatrixPaid : Bool
     countingMeasureIsPhysicalEntropy : Bool
 
-    -- Entropy/gravity semantics.
     scalarEntropyDensityDeterminesEinsteinSource : Bool
     entropyGravitySameObjectPhysicalPaymentPaid : Bool
-
-    -- Observed-universe promotion.
     monsterSymmetryOfObserved3Plus1UniversePaid : Bool
-
 open Receipt public
 
 canonicalReceipt : Receipt
 canonicalReceipt = receipt
   true false true true true true true
-  true true true true true true true
+  true true true true true true true true
   false false false false false false false false false false false false
   false true false false
   true false false false
@@ -108,10 +95,6 @@ canonicalReceipt = receipt
   true false true false false
   false false
   false
-
-------------------------------------------------------------------------
--- Direct theorem/status links.
-------------------------------------------------------------------------
 
 basisCorrectionSaysFiniteLabelsNotWholeStates :
   Basis.WZetaBasisVectorCorrectionBoundary.literalVOAStateCarrierIsBasisLabelCarrier
@@ -121,6 +104,11 @@ basisCorrectionSaysFiniteLabelsNotWholeStates = refl
 hZetaCompilerExists :
   HZeta.Boundary.paidHZetaRecognitionCompilerAvailable HZeta.canonicalBoundary ≡ true
 hZetaCompilerExists = refl
+
+genericSimpleClassifierAlreadySourceWritten :
+  MonsterNative.Boundary.genericSimpleSubobjectClassifierSourceWritten
+    MonsterNative.canonicalBoundary ≡ true
+genericSimpleClassifierAlreadySourceWritten = refl
 
 genericIsotypicAssemblyAlreadySourceWritten :
   MonsterNative.Boundary.genericIsotypicAssemblySourceWritten
@@ -137,10 +125,10 @@ actualZetaLinearRestrictionStillOpen :
     MonsterNative.canonicalBoundary ≡ false
 actualZetaLinearRestrictionStillOpen = refl
 
-actualSimpleTypeClassifierStillOpen :
-  MonsterNative.Boundary.actualSimpleTypeClassifier
+actualSimpleClassifierInstantiationStillOpen :
+  MonsterNative.Boundary.actualSimpleTypeClassifierInstantiation
     MonsterNative.canonicalBoundary ≡ false
-actualSimpleTypeClassifierStillOpen = refl
+actualSimpleClassifierInstantiationStillOpen = refl
 
 actualIsotypicEquivalenceStillOpen :
   MonsterNative.Boundary.actualWholeSectorIsotypicEquivalence
@@ -197,14 +185,10 @@ scalarEntropyDoesNotDetermineTensorSource :
     Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
 scalarEntropyDoesNotDetermineTensorSource = refl
 
-------------------------------------------------------------------------
--- Explicit remaining frontier.
-------------------------------------------------------------------------
-
 data RemainingPayment : Set where
   actualRepresentationNativeBasisAttachment : RemainingPayment
   actualPaidWeightTwoAndZetaLinearRestriction : RemainingPayment
-  actualMonsterSimpleTypeClassifier : RemainingPayment
+  actualMonsterSimpleClassifierInstantiation : RemainingPayment
   actualWholeSectorIsotypicEquivalenceThenCopyCount90 : RemainingPayment
   actualSZetaHomEvaluationAndNormalizerAction : RemainingPayment
   literalThreePhaseRegularResidualAndZetaSquaredCompletion : RemainingPayment
@@ -221,7 +205,7 @@ remainingPayments : List RemainingPayment
 remainingPayments =
   actualRepresentationNativeBasisAttachment ∷
   actualPaidWeightTwoAndZetaLinearRestriction ∷
-  actualMonsterSimpleTypeClassifier ∷
+  actualMonsterSimpleClassifierInstantiation ∷
   actualWholeSectorIsotypicEquivalenceThenCopyCount90 ∷
   actualSZetaHomEvaluationAndNormalizerAction ∷
   literalThreePhaseRegularResidualAndZetaSquaredCompletion ∷
@@ -237,6 +221,7 @@ remainingPayments =
 record FrontierBoundary : Set where
   constructor frontier-boundary
   field
+    genericSimpleClassifierIsStillAResearchLeaf : Bool
     genericIsotypicAssemblyIsStillAResearchLeaf : Bool
     furtherCardinalityMatchingCountsAsRepresentationPayment : Bool
     furtherC3PhaseMatchingCountsAsPhysicalPayment : Bool
@@ -247,5 +232,5 @@ open FrontierBoundary public
 
 canonicalFrontierBoundary : FrontierBoundary
 canonicalFrontierBoundary = frontier-boundary
-  false false false false true
-  "Current max-cut: generic fixed-phase H_zeta recognition compilation, semisimple/isotypic assembly, post-recognition copy-count logic and selected-phase 12+78 character-family occurrence are already available. Retain X6 x Fin90/native369 strictly as a basis-label chart. The live representation payments are proof-relevant weight-two and same-literal-zeta linear restrictions, the actual simple-type classifier, resulting W_zeta|E ~= H_zeta^n same-object equivalence followed by n=90, S_zeta=Hom_E(H_zeta,W_zeta) evaluation/normalizer action, literal phase-one regular/residual plus zeta-squared completion, and the selected3B retraction/intrinsic-same-action pair. Only after these may a physical NH3 state/action, physical ensemble/entropy, Lorentzian tensor gravity route and observed-3+1D Monster prediction be promoted."
+  false false false false false true
+  "Current max-cut: generic fixed-phase H_zeta recognition, the nonzero-simple-source classifier, semisimple/isotypic assembly, post-recognition copy-count logic and selected-phase 12+78 character-family occurrence are already available. Retain X6 x Fin90/native369 strictly as a basis-label chart. The live representation payments are proof-relevant weight-two and same-literal-zeta linear restrictions; actual instantiation of the generic classifier from whole-character/simple/nonzero-inclusion data; the resulting W_zeta|E ~= H_zeta^n same-object equivalence followed by n=90; S_zeta=Hom_E(H_zeta,W_zeta) evaluation/normalizer action; literal phase-one regular/residual plus zeta-squared completion; and the selected3B retraction/intrinsic-same-action pair. Only after these may a physical NH3 state/action, physical ensemble/entropy, Lorentzian tensor gravity route and observed-3+1D Monster prediction be promoted."
