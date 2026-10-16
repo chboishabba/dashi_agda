@@ -53,6 +53,10 @@ sixteenBrownMaclayPaymentsNotRequiredRegression :
   Terminal.sixteenIndependentBrownMaclayComponentsRequired Terminal.canonicalTerminalBoundary ≡ false
 sixteenBrownMaclayPaymentsNotRequiredRegression = refl
 
+sprint105TagSecondaryRegression :
+  Terminal.sprint105SU2ClassificationIsSecondary Terminal.canonicalTerminalBoundary ≡ true
+sprint105TagSecondaryRegression = refl
+
 selectedSectorAttachmentInterfacePaidRegression :
   Terminal.casimirSelectedRecoveredQFTSectorAttachmentInterfacePaid Terminal.canonicalTerminalBoundary ≡ true
 selectedSectorAttachmentInterfacePaidRegression = refl
@@ -72,14 +76,6 @@ selectedGroupCompactSimpleStillOpenRegression = refl
 selectedGroupDynkinA1StillOpenRegression :
   Terminal.selectedQFTGroupDynkinA1ClassificationPaid Terminal.canonicalTerminalBoundary ≡ false
 selectedGroupDynkinA1StillOpenRegression = refl
-
-selectedGroupSprint105TagStillOpenRegression :
-  Terminal.selectedQFTGroupSprint105SU2ClassificationPaid Terminal.canonicalTerminalBoundary ≡ false
-selectedGroupSprint105TagStillOpenRegression = refl
-
-sprint105TagSecondaryRegression :
-  Terminal.sprint105SU2ClassificationIsSecondary Terminal.canonicalTerminalBoundary ≡ true
-sprint105TagSecondaryRegression = refl
 
 selectedGroupQuaternionSU2StillOpenRegression :
   Terminal.selectedQFTGroupQuaternionSU2InterpretationPaid Terminal.canonicalTerminalBoundary ≡ false
