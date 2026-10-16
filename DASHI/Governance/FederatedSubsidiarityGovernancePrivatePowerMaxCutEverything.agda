@@ -4,3 +4,6 @@ import DASHI.Governance.FederatedSubsidiarityGovernanceExternalAutonomyEverythin
 
 import DASHI.Governance.BoloBoloExternalControlProvenanceWeldExact
 import DASHI.Governance.BoloBoloExternalControlProvenanceWeldRegression
+
+import DASHI.Governance.BoloBoloBlackRockBlackstoneIdentityBoundaryExact
+import DASHI.Governance.BoloBoloBlackRockBlackstoneIdentityBoundaryRegression
