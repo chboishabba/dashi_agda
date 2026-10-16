@@ -135,7 +135,9 @@ canonicalTraversableWormholeObligations =
 ------------------------------------------------------------------------
 -- Strongest target: an obligation record can be present while unpaid.  Actual
 -- promotion requires a separate proof-carrying witness that every required
--- receipt in the candidate is true.
+-- receipt in the candidate is true.  Stress-energy source evidence is
+-- conditional: it is mandatory only for candidates that claim literal metric
+-- engineering, not for a hypothetical non-metric causal-transport mechanism.
 ------------------------------------------------------------------------
 
 record CausalSuperluminalTransportPromotion : Set where
@@ -148,6 +150,7 @@ record CausalSuperluminalTransportPromotion : Set where
     independentEndpointClockReceipt : Bool
     signalFrontOrCausalReceipt : Bool
     metricOrCausalStructureReceipt : Bool
+    metricClaimed : Bool
     sourceStressEnergyReceiptIfMetricClaimed : Bool
     chronologyStatusResolved : Bool
     independentReplication : Bool
@@ -158,7 +161,7 @@ canonicalCausalSuperluminalTransportPromotion : CausalSuperluminalTransportPromo
 canonicalCausalSuperluminalTransportPromotion =
   causal-superluminal-transport-promotion
     "endpoint-A" "endpoint-B"
-    false false false false false false false false
+    false false false false false false false false false
 
 record CausalSuperluminalTransportWitness
     (candidate : CausalSuperluminalTransportPromotion) : Set where
@@ -174,7 +177,8 @@ record CausalSuperluminalTransportWitness
       signalFrontOrCausalReceipt candidate ≡ true
     metricCausalReceiptIsTrue :
       metricOrCausalStructureReceipt candidate ≡ true
-    sourceReceiptIfClaimedIsTrue :
+    sourceReceiptIfMetricClaimedIsTrue :
+      metricClaimed candidate ≡ true →
       sourceStressEnergyReceiptIfMetricClaimed candidate ≡ true
     chronologyReceiptIsTrue :
       chronologyStatusResolved candidate ≡ true
