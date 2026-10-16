@@ -28,8 +28,9 @@ import DASHI.Mathematics.Complexity.ConcreteTapeAcceptancePredicateCodeExact
 import DASHI.Mathematics.Complexity.FixedWidthPredicateDecisionTableExact
 import DASHI.Mathematics.Complexity.ConcreteTapeFixedLocalKernelTablesExact
 
--- The old XOR/borrow timer exploration remains a valid local microcode donor,
--- but is no longer required for the exact-T candidate return boundary.
+-- XOR-grid cross-pollination is bounded to local compiler structure.  The
+-- complexity branch reproves all needed Boolean facts locally; no IIT numerical
+-- quantity or sibling-branch theorem is imported as lower-bound authority.
 open import DASHI.Mathematics.Complexity.PNotEqualsNPXORCountdownMicrocodeValidation
   using
     ( xorRecoverLeft
@@ -37,15 +38,26 @@ open import DASHI.Mathematics.Complexity.PNotEqualsNPXORCountdownMicrocodeValida
     ; sameXorOutputDifferentBorrow
     ; countdownBitFalseBorrow
     ; countdownBitTrueBorrow
+    ; countdownBitsNoBorrow
+    ; decrementOne
+    ; decrementTwo
+    ; decrementFour
     ; canonicalXORCountdownBoundary
     )
+import DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownRuleFragmentValidation
 
--- Exact finite-control phase wrapper replacing the old direct-return/tape-timer
--- blocker on the Clay-critical path.
+-- Exact finite-control phase wrapper for candidate endpoint quiescence.
 import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact
 import DASHI.Mathematics.Complexity.CodedFiniteStandardPhaseShiftSimulationExact
 import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseRunExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedCandidateExactPhaseBoundaryExact
+
+-- Exact static-size audit of that wrapper.  Quiescence is paid, but the wrapper
+-- is not treated as free in the self-description fixed point.
+import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseSizeValidation
+
+-- First literal generator microprogram: unary index cursor as finite TM syntax.
+import DASHI.Mathematics.Complexity.CodedFiniteUnaryCursorExact
 
 ------------------------------------------------------------------------
 -- CURRENT EXACT TRUST BOUNDARY
@@ -82,66 +94,81 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPCodedCandidateExactPhaseBoundary
 --    * fixed local Boolean kernels are frozen into finite row/Bool tables;
 --    * runtime no longer requires an arbitrary higher-order predicate call.
 --
--- 6. EXACT-T CANDIDATE PHASE BOUNDARY -- NOW PAID
+-- 6. EXACT-T CANDIDATE PHASE BOUNDARY -- OPERATIONALLY PAID
+--    `CodedFiniteStandardExactPhaseLiftExact` expands finite control to
 --
---    `CodedFiniteStandardExactPhaseLiftExact` compiles a source code with fixed
---    budget T into the literal finite state space
+--        Fin (|Q| * (T+1))
 --
---        Fin (|Q| * (T+1)).
---
---    Every source rule is copied at each elapsed phase k<T and advances k->k+1.
---    There is NO resident rule at phase T for any source state or scanned symbol.
---    The terminal standard transition is therefore literally `nothing`.
---
---    `CodedFiniteStandardPhaseShiftSimulationExact` embeds the T-phase wrapper
---    into phases 1..T+1 of the (T+1)-phase wrapper with one edge preserved as
---    one edge.
---
---    `CodedFiniteStandardExactPhaseRunExact` then proves by induction:
---
---        source exact T-step run
---          -> phase-lifted exact T-step run
---
---    with the same tape evolution and terminal elapsed phase exactly T.
---
+--    and copies each source rule at each phase k<T.  There is no resident rule
+--    at terminal phase T.  `CodedFiniteStandardExactPhaseRunExact` transports an
+--    exact source T-run to an exact phase-lifted T-run, and
 --    `PNotEqualsNPCodedCandidateExactPhaseBoundaryExact` specializes this to the
---    actual `CodedStandardPolynomialDecider.execution` witness.  Hence the
---    candidate's polynomial step count is unchanged, its acceptance status is
---    preserved propositionally, and its exact endpoint is quiescent.
+--    actual coded polynomial candidate.  Acceptance is preserved and the final
+--    dispatch is quiescent.
 --
---    CONSEQUENCE: the old direct-return obstruction and the proposed runtime
---    tape timer are no longer Clay-critical blockers.  A return/opposite link
---    can leave the finite-control terminal slice without overriding a resident
---    candidate transition.
+-- 7. PHASE-LIFT SIZE FEEDBACK -- NOW EXPLICIT
+--    `CodedFiniteStandardExactPhaseSizeExact` proves exactly:
+--
+--        phase states = |Q| * (T+1)
+--        phase rules  = T * |R|.
+--
+--    Therefore the phase lift is a correct endpoint compiler but has O(T)
+--    static program-text growth.  In a self-Cook construction that code belongs
+--    to the described target, so the final resource fixed point must charge it.
+--    The compact XOR/borrow runtime-counter route remains a lawful competing
+--    implementation: it trades execution overhead for smaller static code.
+--
+-- 8. XOR / RIPPLE-COUNTDOWN CROSS-POLLINATION -- BOUNDED AND ATTRIBUTION-SAFE
+--    * binary countdown data update is `bit XOR borrowIn`;
+--    * XOR is recoverable in either coordinate;
+--    * borrow is a separate nonlinear coordinate and provably does not factor
+--      through XOR output alone;
+--    * finite little-endian ripple countdown semantics are executable;
+--    * a literal three-rule decrement fragment with quiescent resolved/underflow
+--      controls exists;
+--    * none of this identifies IIT phi with complexity hardness.
+--
+-- 9. FIRST LITERAL GENERATOR MICROPROGRAM -- UNARY CURSOR PAID
+--    `CodedFiniteUnaryCursorExact` compiles unary index traversal to actual
+--    finite standard-TM syntax.  Each `more` is one edge, exact phase control
+--    makes the terminal cursor phase quiescent, and `stop` is a fresh dispatch
+--    key at every phase.  Runtime unary-index traversal is therefore no longer
+--    an Agda Nat recursion.
 --
 -- LIVE CONSTRUCTIVE WALL AFTER THIS CUT:
 --
--- A. GENERATOR MICROPROGRAM
---    Build a literal `CodedFiniteStandardTM` fragment implementing the remaining
---    first-order fixed-description unary-index / coordinate / finite-table /
---    token-cursor operations.  Prove exact agreement with the already-costed
---    streamed own-Cook evaluator and expose the compiler coefficient.
+-- A. STATIC ANSWER-STREAM / OUTPUT MICROPROGRAM
+--    Compile the fixed-description Cook answer stream into literal finite
+--    stop/output rules over the paid unary cursor, then prove exact agreement
+--    with the already-costed streamed evaluator.  Coordinate/table/token-cursor
+--    helpers remain to be lowered only where the static lookup compiler cannot
+--    eliminate them at compile time.
 --
--- B. PHASED TARGET ASSEMBLY
---    Sum generator + EXACT PHASE-LIFTED candidate + opposite suffix and attach
---    generator/candidate/return/suffix links.  Candidate T-boundary freshness is
---    now supplied constructively by the phase wrapper.
+-- B. REPRESENTATION PARETO CUT FOR EXACT-T HANDOFF
+--    Compare two honest target architectures on the SAME described machine:
+--      (i) finite-control phase lift: zero runtime timer, O(T) static rules;
+--     (ii) compact tape/ripple timer: bounded static rules, charged runtime work.
+--    Do not choose by convenience.  Choose the route that can actually close
+--    the self-description / same-Cook-budget inequality after code size is fed
+--    back into the target formula.
 --
--- C. SURROUNDING EXACT RUNS
---    Construct the generator/call and return/opposite suffix runs.  Candidate
---    middle execution, exact phase boundary, and generic run composition are paid.
+-- C. TARGET ASSEMBLY + SURROUNDING RUNS
+--    Sum generator + chosen candidate clock representation + opposite suffix;
+--    attach call/return/suffix links; construct exact generator and suffix runs.
+--    Candidate execution and generic run composition are already paid.
 --
--- D. SAME-T SELF-CLOCK CLOSURE
---    Choose one final exact target budget T* paying generator + phase-lifted
---    candidate + suffix, where the SAME T* occurs in that target's guarded Cook
---    formula.  This is now the principal mathematical fixed-point/resource wall.
+-- D. SAME-T SELF-DESCRIPTION CLOSURE
+--    Choose one final exact target budget T* paying all generator/clock/candidate/
+--    suffix work AND describing that same final target code in the guarded Cook
+--    formula.  This fixed-point/resource inequality is now the principal live
+--    mathematical wall.
 --
 -- E. TERMINAL CONTRADICTION + BARRIER AUDIT
 --    Only after A-D, reuse the existing Cook iff/opposite endpoint route to obtain
 --    `SATDecisionFailure` and the existing same-model SATNotInP -> PNotEqualsNP
 --    compiler.  A successful closure must then be audited explicitly against
 --    relativisation/algebrisation/natural-proof barriers rather than assuming
---    that ordinary diagonal syntax escapes them.
+--    ordinary diagonal syntax escapes them.
 --
 -- SOURCE STATUS: source-written/static-audited only.  No exact-head Agda kernel
 -- receipt is asserted here, and no Clay-level completion is claimed.
