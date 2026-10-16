@@ -11,6 +11,9 @@ self-consistency-equations-paid = refl
 qtm-current-contract-paid : THFQTM.qtmGoldenRuleObserverSourcePaid THFQTM.canonicalTHFSelfConsistencyQTMBoundary ≡ true
 qtm-current-contract-paid = refl
 
+qtm-electrostatics-source-paid : THFQTM.qtmElectrostaticsSourcePaid THFQTM.canonicalTHFSelfConsistencyQTMBoundary ≡ true
+qtm-electrostatics-source-paid = refl
+
 full-solve-remains-open : THFQTM.fullSelfConsistentNumericalSolvePaid THFQTM.canonicalTHFSelfConsistencyQTMBoundary ≡ false
 full-solve-remains-open = refl
 
