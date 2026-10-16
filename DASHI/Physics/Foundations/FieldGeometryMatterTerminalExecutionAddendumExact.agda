@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Physics.Foundations.FieldGeometryMatterTerminalMaxCutExact as Terminal
 import DASHI.Physics.CondensedMatter.MATBGTHFSelfConsistencyObstructionReceiptExact as THFObstruction
+import DASHI.Physics.CondensedMatter.MATBGTHFSourceFaithfulDiscretizationObligationExact as THFDiscretization
 import DASHI.Physics.CondensedMatter.MATBG2026SourceDataAvailabilityExact as SourceData
 import DASHI.Physics.CondensedMatter.MATBG2026PublicAcquisitionRouteExact as PublicAcquisition
 import DASHI.Physics.CondensedMatter.MATBGEntropyMaxwellReplayContractExact as EntropyMaxwell
@@ -14,8 +15,9 @@ record TerminalExecutionAddendum : Set where
   constructor terminal-execution-addendum
   field
     thfFiniteQuadratureObstructionReplay : Terminal.FrontierStatus
+    thfContinuousBZMeasure : Terminal.FrontierStatus
     thfSourceFaithfulSelfConsistentSolve : Terminal.FrontierStatus
-    thfBZNormalizationAndCutoffProducer : Terminal.FrontierStatus
+    thfDiscreteBZDomainMeshCutoffProducer : Terminal.FrontierStatus
     thfVYNotationResolution : Terminal.FrontierStatus
     qtmSourceDataAvailability : Terminal.FrontierStatus
     entropySourceDataAvailability : Terminal.FrontierStatus
@@ -31,6 +33,7 @@ record TerminalExecutionAddendum : Set where
     fusionPropulsionDedicatedSiblingOwner : Terminal.FrontierStatus
     rocketdyneDedicatedSiblingOwner : Terminal.FrontierStatus
     obstructionReplayCountsAsSolvedTHF : Bool
+    continuousMeasureCountsAsDiscreteProducer : Bool
     sourceDataAvailabilityCountsAsReplay : Bool
     acquisitionRouteCountsAsByteAcquisition : Bool
     entropyMaxwellSyntheticFixtureCountsAsMeasuredReplay : Bool
@@ -43,6 +46,7 @@ currentTerminalExecutionAddendum : TerminalExecutionAddendum
 currentTerminalExecutionAddendum =
   terminal-execution-addendum
     Terminal.numericallyExecuted
+    Terminal.sourcePaid
     Terminal.openCalibrationOrExecution
     Terminal.openSameObjectPayment
     Terminal.openSameObjectPayment
@@ -59,12 +63,13 @@ currentTerminalExecutionAddendum =
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
-    false false false false false false
+    false false false false false false false
 
 record TerminalExecutionAddendumBoundary : Set where
   constructor terminal-execution-addendum-boundary
   field
     obstructionReceiptImported : THFObstruction.THFSelfConsistencyObstructionBoundary
+    thfDiscretizationBoundaryImported : THFDiscretization.THFDiscretizationBoundary
     sourceDataBoundaryImported : SourceData.MATBGSourceDataAvailabilityBoundary
     publicAcquisitionBoundaryImported : PublicAcquisition.MATBGPublicAcquisitionBoundary
     entropyMaxwellBoundaryImported : EntropyMaxwell.EntropyMaxwellReplayBoundary
@@ -78,6 +83,7 @@ canonicalTerminalExecutionAddendumBoundary : TerminalExecutionAddendumBoundary
 canonicalTerminalExecutionAddendumBoundary =
   terminal-execution-addendum-boundary
     THFObstruction.canonicalTHFSelfConsistencyObstructionBoundary
+    THFDiscretization.canonicalTHFDiscretizationBoundary
     SourceData.canonicalMATBGSourceDataAvailabilityBoundary
     PublicAcquisition.canonicalMATBGPublicAcquisitionBoundary
     EntropyMaxwell.canonicalEntropyMaxwellReplayBoundary
