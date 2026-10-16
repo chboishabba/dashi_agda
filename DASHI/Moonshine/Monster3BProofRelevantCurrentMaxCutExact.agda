@@ -13,28 +13,23 @@ import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact as Prio
 ------------------------------------------------------------------------
 -- POST-CHARACTER / POST-PROOF-RELEVANCE MONSTER 3B MAX-CUT
 --
--- Two formerly broad obligations have now collapsed to concrete same-object
--- inputs:
+-- H_zeta model side is now exhausted much further:
+--   * explicit Schrodinger action;
+--   * unconditional irreducibility;
+--   * all 729 modulation sums checked;
+--   * all 3^13 Heisenberg coordinates classified;
+--   * literal character matches the canonical nonlinear zeta signature at the
+--     exact executable-receipt level;
+--   * a fixed-phase character compiler already turns two concretely packaged
+--     irreducibles in one common theory into the required equivariant iso.
 --
--- H_zeta:
---   * explicit Schrodinger action exists;
---   * unconditional irreducibility exists;
---   * literal character is exhaustively computed on all 3^13 Heisenberg
---     elements by the executable producer;
---   * the fixed-phase character compiler already turns a common-theory pair of
---     irreducibles into the required equivariant H_zeta isomorphism.
+-- Hence the live H_zeta payment is only the ACTUAL W_zeta|E side: a
+-- proof-relevant irreducible constituent decomposition plus same-object
+-- action/character bindings into the common representation theory.
 --
--- Therefore the live H_zeta payment is ONLY the actual W_zeta|E side:
--- construct a proof-relevant irreducible constituent of the same restricted
--- sector and bind its action/character into the common representation theory.
---
--- S_zeta:
---   the existing GAP/CTblLib matcher is already full-character/same-table
---   oriented, but its historical Agda receipt stores decisive obligations as
---   Set-valued types.  The Suzuki hardening owner now requires inhabitants at
---   every level: pair restriction, main split, quotient descent, actual
---   Monster occurrence, same-object identity and individual zeta orientation.
---   An external GAP `true` is execution evidence, not an Agda proof term.
+-- S_zeta uses the existing full-character GAP/CTblLib chain, but promotion is
+-- now proof-relevant at every layer.  External GAP booleans/table coordinates
+-- remain execution evidence rather than Agda inhabitants.
 ------------------------------------------------------------------------
 
 record CurrentMonster3BMaxCut : Set where
@@ -42,8 +37,11 @@ record CurrentMonster3BMaxCut : Set where
   field
     schrodingerExplicitActionPaid : Bool
     schrodingerIrreducibilityPaid : Bool
-    schrodingerLiteralCharacterExhaustivelyExecuted : Bool
+    all729SchrodingerCharacterSumsExecuted : Bool
+    all1594323HeisenbergElementsClassified : Bool
     schrodingerSelectedCentralPhaseCharacterExecuted : Bool
+    schrodingerCharacterMatchesCanonicalSignatureExecutable : Bool
+    schrodingerCharacterIsAgdaKernelTheoremHere : Bool
     hZetaFixedPhaseIsoCompilerAvailable : Bool
     proofRelevantHZetaGateAvailable : Bool
 
@@ -70,8 +68,11 @@ currentMonster3BMaxCut : CurrentMonster3BMaxCut
 currentMonster3BMaxCut = current-monster-3b-max-cut
   true
   (Irreducibility.schrodingerIrreducibilityPaid Irreducibility.canonicalBoundary)
-  (LiteralCharacter.exhaustiveGroupEnumerationCompleted LiteralCharacter.canonicalBoundary)
-  true
+  (LiteralCharacter.all729ModulationCharacterSumsVerified LiteralCharacter.canonicalBoundary)
+  (LiteralCharacter.all1594323HeisenbergCoordinatesClassified LiteralCharacter.canonicalBoundary)
+  (LiteralCharacter.centralZetaTrace729PaidExecutable LiteralCharacter.canonicalBoundary)
+  (LiteralCharacter.literalCharacterMatchesCanonicalHeisenbergSignatureExecutable LiteralCharacter.canonicalBoundary)
+  (LiteralCharacter.agdaKernelTraceDerivationPaidHere LiteralCharacter.canonicalBoundary)
   (HZetaCompiler.fixedPhaseIsoCompilerAvailable HZetaCompiler.canonicalBoundary)
   (RecognitionHardening.paidHZetaRecognitionWrapperAvailable RecognitionHardening.canonicalBoundary)
   false false false false
@@ -80,8 +81,8 @@ currentMonster3BMaxCut = current-monster-3b-max-cut
   false false false
   (SuzukiHardening.externalGapResultCreatesAgdaProof SuzukiHardening.canonicalBoundary)
   false false
-  "Construct the proof-relevant SAME actual W_zeta|E irreducible decomposition; bind one selected constituent and the explicit Schrodinger module to one common finite-group representation/character theory. The model-side irreducibility and literal character calculation are already paid, and the existing fixed-phase compiler then produces the equivariant H_zeta recognition/action isomorphism. Do not add another uniqueness theorem or recompute the Schrodinger character."
-  "Run the already-written CTblLib 6.Suz -> 6.Suz.2 -> quotient -> MN3B -> Monster full-character matcher in an environment with GAP/CTblLib, retain its exact output/provenance, then inhabit the proof-relevant pair-family occurrence obligations and separately orient the selected zeta member. Only after that instantiate S_zeta = Hom_E(H_zeta,W_zeta) and its evaluation/recovery; Fin90 remains an optional later basis coordinate."
+  "Construct the proof-relevant SAME actual W_zeta|E irreducible decomposition; bind one selected constituent and the explicit Schrodinger module to one common finite-group representation/character theory. The model-side irreducibility and exhaustive literal character computation are already paid at their stated authority level, and the existing fixed-phase compiler then produces the equivariant H_zeta recognition/action isomorphism. Do not add another uniqueness theorem or recompute the Schrodinger character."
+  "Run the already-written CTblLib 6.Suz -> 6.Suz.2 -> quotient -> MN3B -> Monster full-character matcher in an environment with GAP/CTblLib, retain exact output/provenance, then inhabit the proof-relevant pair-family occurrence obligations and separately orient the selected zeta member. Only after that instantiate S_zeta = Hom_E(H_zeta,W_zeta) and its evaluation/recovery; Fin90 remains an optional later basis coordinate."
 
 priorBoundary : Prior.CorrectedWZetaMaxCutBoundary
 priorBoundary = Prior.canonicalBoundary
