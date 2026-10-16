@@ -9,12 +9,13 @@ import DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact as Sour
 import DASHI.Physics.YangMills.BalabanCMP109SpatialC3ActionExact as CMP109C3
 import DASHI.Physics.YangMills.BalabanUnifiedRecoveryC3TransportExact as UnifiedC3
 import DASHI.Physics.Foundations.BalabanR144SpatialC3StressRestrictionExact as R144C3
+import DASHI.Physics.Foundations.BalabanA1InvariantPathSourceReductionExact as A1Cut
 
 ------------------------------------------------------------------------
 -- YM / BASE369-MONSTER C3 AUDIT
 --
 -- The old categorical statement "Balaban has no literal C3 action" is stale.
--- The newer source/stress lineage makes the status sharper still:
+-- The source/stress lineage is now sharper:
 --
 --   * CMP109 has source-backed Euclidean C3 actions from literal coordinate
 --     permutation covariance;
@@ -22,12 +23,14 @@ import DASHI.Physics.Foundations.BalabanR144SpatialC3StressRestrictionExact as R
 --   * R144 already uses the SAME B4 generator family on the actual ten-slot
 --     finite-D1 stress readout;
 --   * restricting that action gives an exact order-three action on the stress
---     tensor slots without inventing a GridCell4 -> R140 carrier map.
+--     tensor slots without inventing a GridCell4 -> R140 carrier map;
+--   * the P1 invariant-path theorem further proves that signed B4 tensor
+--     covariance is compiler output once the selected scalar is invariant and
+--     its signed basis path is equivariant.
 --
--- The remaining physical payment is the already-declared terminal R144 B4
--- covariance witness/inhabitant on the selected source object.  A full ambient
--- action on every intermediate R140 carrier remains unnecessary unless a later
--- consumer actually requires it.
+-- The remaining payment is therefore source/same-object data, not another C3
+-- abstraction: identify R144's selected finite-D1 readout with that path
+-- derivative and supply the actual source-path geometry/naturality.
 ------------------------------------------------------------------------
 
 monster369ExactC3TemplateAvailable : Bool
@@ -51,6 +54,10 @@ balabanR144UsesSameSourceHypercubicGeneratorFamily : Bool
 balabanR144UsesSameSourceHypercubicGeneratorFamily =
   R144C3.r144C3RestrictedFromExistingB4Action
 
+balabanP1InvariantPathCompilerRecovered : Bool
+balabanP1InvariantPathCompilerRecovered =
+  A1Cut.p1InvariantPathPaysSignedTensorCovariance
+
 balabanTerminalR144CovarianceInterfaceRecovered : Bool
 balabanTerminalR144CovarianceInterfaceRecovered = true
 
@@ -73,6 +80,10 @@ balabanCMP109SpatialXYZSourceC3RecoveredIsTrue = refl
 balabanR144SpatialStressTensorC3ActionRecoveredIsTrue :
   balabanR144SpatialStressTensorC3ActionRecovered ≡ true
 balabanR144SpatialStressTensorC3ActionRecoveredIsTrue = refl
+
+balabanP1InvariantPathCompilerRecoveredIsTrue :
+  balabanP1InvariantPathCompilerRecovered ≡ true
+balabanP1InvariantPathCompilerRecoveredIsTrue = refl
 
 record BalabanLiteralC3Realisation : Set₁ where
   field
@@ -110,6 +121,9 @@ c3AnalogyMayReplaceSourceDiscriminationIsFalse = refl
 oldR140DirectCarrierSocketIsTerminalFrontier : Bool
 oldR140DirectCarrierSocketIsTerminalFrontier = false
 
+generalFirstVariationNaturalityIsTerminalFrontier : Bool
+generalFirstVariationNaturalityIsTerminalFrontier = false
+
 highestAlphaYM369Question : String
 highestAlphaYM369Question =
-  "Instantiate the existing canonical R144 B4 finite-D1 readout covariance on the selected physical source object, then restrict that witness to the already-constructed spatial 1-2-3 C3 subgroup. Only pursue an ambient action on every R140 intermediate or dexp if a concrete downstream consumer requires it."
+  "Pay the remaining A1 same-object source geometry: realize the selected R144 first variation as the ordinary derivative of the literal CMP109/116 effective potential along the B4-equivariant signed metric/stress basis path, and identify the exact rational finite-D1 readout with that physical derivative. The P1 theorem then compiles signed B4 covariance and the existing compiler restricts it to spatial C3; do not add another C3 socket or generic naturality receipt."
