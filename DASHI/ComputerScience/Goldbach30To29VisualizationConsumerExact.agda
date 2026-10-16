@@ -70,7 +70,7 @@ successVerdictConsumerSurvivesCompression =
 canonicalFutureConsumerRefinement :
   ∀ {Action : Set}
     (system : Dependency.DependentActionSystem
-      Signed.SignedSSPExecutionState Action) →
+      {State = Signed.SignedSSPExecutionState} Action) →
   Future.MaximalSafeRefinement
     system
     Fibre369.executionLengthConsumer
