@@ -19,6 +19,11 @@ module DASHI.Moonshine.MonsterExceptionalActorScopedMaxCutExact where
 --
 --   full normalizer:
 --       actual Fin90 inertia -> 12 + 78 -> E6 -> F4 + 26 recognition.
+--
+-- Source attribution remains with the Wilson/Barraclough--Wilson source owners
+-- imported below.  The generic actor-scoped recognition contract consumed in
+-- this file is a DASHI formalization/adapter and does not replace source
+-- representation-theoretic authority.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -27,6 +32,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Data.Empty using (⊥)
 
+import DASHI.Foundations.ActorScopedSameObjectExact as ActorScoped
 import DASHI.Wikimedia.IbrahimMonster53ActorRestrictionWilsonSnowballCorrectionExact as Actor53
 import DASHI.Moonshine.Base369MonsterFiftyFourFiveModeResidualActionBidiExact as Residual54
 import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact as F4
@@ -150,6 +156,48 @@ record NormalizerE6F4Recognition {source}
 
 open NormalizerE6F4Recognition public
 
+-- The bespoke Monster/E6 target above now compiles into the generic
+-- actor-scoped decomposition surface.  This proves that the generic interface
+-- is not merely documentary: the same literal inertia actor controls Whole,
+-- F4 and 26, and the existing two stability equations are exactly the two
+-- cases of the generic intertwiner.
+normalizerActorScopedDecomposition :
+  {source : Set} →
+  {attachment : Ninety.ActualMultiplicityTwelveSeventyEightAttachment source} →
+  (recognition : NormalizerE6F4Recognition attachment) →
+  ActorScoped.ActorScopedSumDecomposition
+    (Ninety.MultiplicityInertia attachment)
+    (E6.E6Carrier (e6Recognition recognition))
+    (F4Carrier recognition)
+    (TracelessAlbert26 recognition)
+    (E6.e6Action (e6Recognition recognition))
+    (f4Action recognition)
+    (traceless26Action recognition)
+normalizerActorScopedDecomposition recognition =
+  ActorScoped.actor-scoped-sum-decomposition
+    (ActorScoped.actor-scoped-same-object
+      (splitE6 recognition)
+      (combineE6 recognition)
+      (combineAfterSplit recognition)
+      (splitAfterCombine recognition)
+      intertwines)
+  where
+  intertwines :
+    (inertia : _) →
+    (state : E6.E6Carrier (e6Recognition recognition)) →
+    splitE6 recognition
+      (E6.e6Action (e6Recognition recognition) inertia state)
+    ≡ ActorScoped.sumAction
+        (f4Action recognition)
+        (traceless26Action recognition)
+        inertia
+        (splitE6 recognition state)
+  intertwines inertia state with splitE6 recognition state
+  ... | inj₁ left =
+    f4SummandStableUnderSameE6Action recognition inertia left
+  ... | inj₂ right =
+    traceless26StableUnderSameE6Action recognition inertia right
+
 ------------------------------------------------------------------------
 -- 4. Wrong-type firewalls.
 ------------------------------------------------------------------------
@@ -191,6 +239,7 @@ record ActorScopedExceptionalBoundary : Set where
     centralResidualAndNormalizer90Separated : Bool
     centralLaneUsesSingleActualActionObject : Bool
     normalizerF4Plus26RequiresLiteralStabilityEquations : Bool
+    genericActorScopedDecompositionConsumed : Bool
 
     central53ActualActionPaid : Bool
     strictCentralMonsterF4IntertwinerPaid : Bool
@@ -201,5 +250,5 @@ record ActorScopedExceptionalBoundary : Set where
 canonicalActorScopedExceptionalBoundary : ActorScopedExceptionalBoundary
 canonicalActorScopedExceptionalBoundary =
   actor-scoped-exceptional-boundary
-    true true true true true true true true
+    true true true true true true true true true
     false false false false false
