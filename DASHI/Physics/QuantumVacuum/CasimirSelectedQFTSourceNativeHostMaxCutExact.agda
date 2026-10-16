@@ -18,16 +18,17 @@ import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
 ------------------------------------------------------------------------
 -- SOURCE-NATIVE SELECTED-QFT HOST MAX-CUT
 --
--- Formal legacy/source-native projection compatibility is now compiler-owned:
--- enrich a legacy state by retaining recoverQFT itself.  That formal adapter is
--- deliberately provenance-neutral.  The real physical/source seam is the R457
--- same-object attachment proving that legacy recoverQFT returns the literal
--- construction carried by the actual SourceNativeContinuumAndOS certificate.
+-- Formal legacy/source-native projection compatibility is compiler-owned and
+-- intentionally provenance-neutral.  R457's apparent extra recovery equality
+-- is also compiler output once the canonical Round131RecoveredQFTAttachment is
+-- paid on the SAME R457 literal construction: R457 merely needs the reverse
+-- direction of Y = recoverQFT(...).
 --
--- Once that selected construction is pinned, compact simplicity is already a
--- field of PinnedYangMillsConstruction, and QFTRecoveryReceipt identifies the
--- recovered construction with the selected qftTarget.  No second compact-
--- simplicity theorem or Dynkin label is required.
+-- Thus the first live recovery seam is the existing Round131 same-object
+-- recovered-QFT attachment instantiated for the R457 construction.  A pinned
+-- source-native selection then compiles the pinned recovered attachment.
+-- Compact simplicity is a field of that pinned construction; no second proof
+-- or Dynkin label is required.
 ------------------------------------------------------------------------
 
 record SourceNativePinnedHostSelection
@@ -112,8 +113,7 @@ sourceNativeSelectionSuppliesSelectedCompactSimple
 formalProjectionCompatibility :
   ∀ {U : Weld.UnifiedCandidate} →
   Recovery.LegacyQFTRecoveryProjectionCompatibility U
-formalProjectionCompatibility =
-  Recovery.canonicalFormalLegacyProjectionCompatibility
+formalProjectionCompatibility = Recovery.canonicalFormalLegacyProjectionCompatibility
 
 ------------------------------------------------------------------------
 -- Fail-closed boundary.
@@ -124,6 +124,8 @@ data SourceNativeRecoveryAutomaticallyChoosesQuaternionSU2 : Set where
 data CompactSimpleProofRequiresSecondSelectedQFTTheoremAfterPinnedSelection : Set where
 
 data FormalProjectionCompatibilityAutomaticallySuppliesR457Provenance : Set where
+
+data R457ProvenanceAutomaticallySuppliesRound131RecoveredAttachment : Set where
 
 sourceNativeRecoveryDoesNotChooseQuaternionSU2 :
   SourceNativeRecoveryAutomaticallyChoosesQuaternionSU2 → ⊥
@@ -137,13 +139,17 @@ formalProjectionDoesNotSupplyR457Provenance :
   FormalProjectionCompatibilityAutomaticallySuppliesR457Provenance → ⊥
 formalProjectionDoesNotSupplyR457Provenance ()
 
+r457ProvenanceDoesNotSupplyRecoveredAttachment :
+  R457ProvenanceAutomaticallySuppliesRound131RecoveredAttachment → ⊥
+r457ProvenanceDoesNotSupplyRecoveredAttachment ()
+
 data RemainingSourceNativeHostBlocker : Set where
-  missingR457LegacyRecoverySameObjectAttachment : RemainingSourceNativeHostBlocker
+  missingRound131RecoveredQFTAttachmentForR457 : RemainingSourceNativeHostBlocker
   missingPinnedSourceNativeRecoverySelection : RemainingSourceNativeHostBlocker
   missingSelectedGroupQuaternionSU2Interpretation : RemainingSourceNativeHostBlocker
 
 firstSourceNativeHostBlocker : RemainingSourceNativeHostBlocker
-firstSourceNativeHostBlocker = missingR457LegacyRecoverySameObjectAttachment
+firstSourceNativeHostBlocker = missingRound131RecoveredQFTAttachmentForR457
 
 secondSourceNativeHostBlocker : RemainingSourceNativeHostBlocker
 secondSourceNativeHostBlocker = missingPinnedSourceNativeRecoverySelection
@@ -160,7 +166,8 @@ record CasimirSelectedQFTSourceNativeHostBoundary : Set where
     independentSelectedCompactSimplePaymentRequired : Bool
     formalProjectionCompatibilityCompilerPaid : Bool
     independentProjectionCompatibilityPaymentRequired : Bool
-    r457LegacyRecoverySameObjectAttachmentRequired : Bool
+    r457RecoveryEqualityCompiledFromRound131Attachment : Bool
+    round131RecoveredQFTAttachmentForR457Required : Bool
     pinnedSourceNativeSelectionRequired : Bool
     selectedQuaternionSU2InterpretationRequired : Bool
 
@@ -169,8 +176,8 @@ open CasimirSelectedQFTSourceNativeHostBoundary public
 canonicalSourceNativeHostBoundary : CasimirSelectedQFTSourceNativeHostBoundary
 canonicalSourceNativeHostBoundary =
   casimir-selected-qft-source-native-host-boundary
-    true true true false true false true true true
+    true true true false true false true true true true
 
 casimirSelectedQFTSourceNativeHostReading : String
 casimirSelectedQFTSourceNativeHostReading =
-  "The selected-QFT host is now recut around actual source provenance. Formal legacy projection compatibility is compiler-owned and is not physical payment. The live R457 SourceNativeContinuumAndOS certificate supplies the rich provenance object; the first real seam is same-object equality between legacy recoverQFT and the literal R457 construction. A pinned source-native selection then compiles the recovered-QFT attachment, and the Casimir handoff already supplies QFTRecoveryReceipt. Compact simplicity is a field of the pinned construction, so no independent compact-simple theorem remains. The final host seam is same-object identification of the selected compact-simple group with the existing quaternionic SU(2) group; source-native recovery does not choose that group by itself."
+  "The selected-QFT host is recut around canonical shared recovery machinery. Formal projection compatibility is compiler-owned and supplies no rich provenance. R457 SourceNativeContinuumAndOS supplies the real provenance object, but its legacy-recovery equality is not a new theorem: a Round131RecoveredQFTAttachment for the SAME R457 construction compiles it by symmetry. That Round131 attachment is now the first live recovery seam. A pinned source-native selection then compiles the pinned recovered-QFT attachment; the Casimir handoff already supplies QFTRecoveryReceipt; and compact simplicity is a field of the pinned construction. The final host seam remains same-object identification of the selected compact-simple group with the existing quaternionic SU(2) group."
