@@ -1,0 +1,10 @@
+module DASHI.Physics.Closure.JackDanielsExceptionalGravityValidation where
+
+------------------------------------------------------------------------
+-- RED-first source contract for the Oct-16 Jack Daniel's / exceptional /
+-- entropy-gravity integration tranche.
+------------------------------------------------------------------------
+
+import DASHI.Moonshine.JackDanielsNaturalMonsterRecognitionMaxCutExact
+import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact
+import DASHI.Physics.Closure.MonsterExceptionalEntropyGravityCompilerExact
