@@ -3,17 +3,15 @@ module DASHI.Physics.Closure.MonsterC3RepresentationNativeTerminalMaxCutExact wh
 ------------------------------------------------------------------------
 -- REPRESENTATION-NATIVE TERMINAL MAX-CUT
 --
--- This owner supersedes stale status wording in the older Monster/C3/entropy
--- ledger without deleting its historical receipts.  The decisive correction is
--- that X6 x Fin90 and its native-369 chart are finite BASIS-LABEL carriers.
--- They are not the full linear W_zeta state carrier.
+-- X6 x Fin90/native369 is a finite BASIS-LABEL chart, not the complete linear
+-- W_zeta carrier.  The representation-native target is
 --
--- Current representation-native target:
+--   H_zeta x S_zeta <-> W_zeta,
+--   S_zeta = Hom_E(H_zeta,W_zeta),
 --
---   H_zeta x S_zeta  <->  W_zeta
---   S_zeta = Hom_E(H_zeta , W_zeta)
---
--- together with optional actual-basis charts into X6 x Fin90/native369.
+-- together with optional proof-relevant basis charts.  Repo archaeology also
+-- shows that generic semisimple/isotypic assembly and post-recognition copy
+-- count are already source-written; they are no longer roadmap discoveries.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -21,6 +19,7 @@ open import DASHI.Core.Prelude
 import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact as Basis
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as Hardening
 import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact as HZeta
+import DASHI.Moonshine.Monster3BRepresentationNativeCurrentMaxCutExact as MonsterNative
 import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact as Literal3B
 import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
 import DASHI.Physics.Chemistry.AmmoniaMonster3BRepresentationNativeCorrectionExact as NativeCorrection
@@ -43,16 +42,32 @@ record Receipt : Set where
     hZetaFixedPhaseRecognitionCompilerPaid : Bool
     sZetaHomSpaceTargetTyped : Bool
 
+    -- Already-owned generic representation machinery recovered from repo.
+    genericIsotypicAssemblySourceWritten : Bool
+    postRecognitionCopyCountCompilerSourceWritten : Bool
+    proofRelevantWeightTwoWrapperAvailable : Bool
+    proofRelevantZetaRestrictionWrapperAvailable : Bool
+    selectedPhaseTwelveCharacterFamilyPaid : Bool
+    selectedPhaseSeventyEightCharacterFamilyPaid : Bool
+    selectedPhaseTotalDegree65610Paid : Bool
+
     -- Current same-object representation frontier.
     actualRepresentationNativeBasisRecognitionPaid : Bool
+    actualPaidWeightTwoLinearBridge : Bool
+    actualPaidLinearZetaRestriction : Bool
+    actualMonsterSimpleTypeClassifierPaid : Bool
+    actualWholeSectorIsotypicEquivalencePaid : Bool
+    actualCopyCountNinetyPaidAfterRecognition : Bool
     actualHZetaSameObjectPaid : Bool
     actualSZetaHomEvaluationPaid : Bool
     concreteCommonCharacterTransportPaid : Bool
+    actualTwelveSeventyEightActionIntertwinerPaid : Bool
     literalPhaseOneRegularResidualSplitPaid : Bool
     zetaSquaredLiteralRecognitionTransportPaid : Bool
 
-    -- Selected-3B projection recut.
+    -- Selected-3B global projection recut.
     selected3BProjectionChoiceIsIndependentBlocker : Bool
+    selected3BGlobalCompletionCompilerAvailable : Bool
     selected3BActualRetractionPaid : Bool
     selected3BIntrinsicSameActionPaid : Bool
 
@@ -84,46 +99,18 @@ open Receipt public
 
 canonicalReceipt : Receipt
 canonicalReceipt = receipt
-  true
-  false
-  true
-  true
-  true
-  true
-  true
-
-  false
-  false
-  false
-  false
-  false
-  false
-
-  false
-  false
-  false
-
-  true
-  false
-  false
-  false
-
-  true
-  false
-
-  true
-  false
-  true
-  false
-  false
-
-  false
-  false
-
+  true false true true true true true
+  true true true true true true true
+  false false false false false false false false false false false false
+  false true false false
+  true false false false
+  true false
+  true false true false false
+  false false
   false
 
 ------------------------------------------------------------------------
--- Direct links to the owners whose status this capstone is summarising.
+-- Direct theorem/status links.
 ------------------------------------------------------------------------
 
 basisCorrectionSaysFiniteLabelsNotWholeStates :
@@ -131,18 +118,34 @@ basisCorrectionSaysFiniteLabelsNotWholeStates :
     Basis.canonicalBoundary ≡ false
 basisCorrectionSaysFiniteLabelsNotWholeStates = refl
 
-basisCorrectionRejectsWholeSectorFiniteBijection :
-  Basis.WZetaBasisVectorCorrectionBoundary.wholeLiteralSectorBijectionToFiniteLabelsRequired
-    Basis.canonicalBoundary ≡ false
-basisCorrectionRejectsWholeSectorFiniteBijection = refl
-
 hZetaCompilerExists :
   HZeta.Boundary.paidHZetaRecognitionCompilerAvailable HZeta.canonicalBoundary ≡ true
 hZetaCompilerExists = refl
 
-hZetaConcreteSameObjectStillOpen :
-  HZeta.Boundary.actualHZetaSameObjectInhabitedHere HZeta.canonicalBoundary ≡ false
-hZetaConcreteSameObjectStillOpen = refl
+genericIsotypicAssemblyAlreadySourceWritten :
+  MonsterNative.Boundary.genericIsotypicAssemblySourceWritten
+    MonsterNative.canonicalBoundary ≡ true
+genericIsotypicAssemblyAlreadySourceWritten = refl
+
+copyCountCompilerAlreadySourceWritten :
+  MonsterNative.Boundary.postRecognitionCopyCountCompilerSourceWritten
+    MonsterNative.canonicalBoundary ≡ true
+copyCountCompilerAlreadySourceWritten = refl
+
+actualZetaLinearRestrictionStillOpen :
+  MonsterNative.Boundary.actualPaidLinearZetaRestriction
+    MonsterNative.canonicalBoundary ≡ false
+actualZetaLinearRestrictionStillOpen = refl
+
+actualSimpleTypeClassifierStillOpen :
+  MonsterNative.Boundary.actualSimpleTypeClassifier
+    MonsterNative.canonicalBoundary ≡ false
+actualSimpleTypeClassifierStillOpen = refl
+
+actualIsotypicEquivalenceStillOpen :
+  MonsterNative.Boundary.actualWholeSectorIsotypicEquivalence
+    MonsterNative.canonicalBoundary ≡ false
+actualIsotypicEquivalenceStillOpen = refl
 
 projectionChoiceAlreadyRemoved :
   Projection.Selected3BProjectionChoiceIndependenceBoundary.anyTwoRetractionsAgreeOnSelectedFullGradeImages
@@ -195,13 +198,15 @@ scalarEntropyDoesNotDetermineTensorSource :
 scalarEntropyDoesNotDetermineTensorSource = refl
 
 ------------------------------------------------------------------------
--- Explicit terminal frontier.
+-- Explicit remaining frontier.
 ------------------------------------------------------------------------
 
 data RemainingPayment : Set where
   actualRepresentationNativeBasisAttachment : RemainingPayment
-  concreteHZetaCommonRepresentationCharacterTransport : RemainingPayment
-  actualSZetaHomEvaluationIntertwiner : RemainingPayment
+  actualPaidWeightTwoAndZetaLinearRestriction : RemainingPayment
+  actualMonsterSimpleTypeClassifier : RemainingPayment
+  actualWholeSectorIsotypicEquivalenceThenCopyCount90 : RemainingPayment
+  actualSZetaHomEvaluationAndNormalizerAction : RemainingPayment
   literalThreePhaseRegularResidualAndZetaSquaredCompletion : RemainingPayment
   selected3BActualRetractionAndIntrinsicSameAction : RemainingPayment
   physicalNH3ToMonsterStateAndDynamics : RemainingPayment
@@ -215,8 +220,10 @@ data RemainingPayment : Set where
 remainingPayments : List RemainingPayment
 remainingPayments =
   actualRepresentationNativeBasisAttachment ∷
-  concreteHZetaCommonRepresentationCharacterTransport ∷
-  actualSZetaHomEvaluationIntertwiner ∷
+  actualPaidWeightTwoAndZetaLinearRestriction ∷
+  actualMonsterSimpleTypeClassifier ∷
+  actualWholeSectorIsotypicEquivalenceThenCopyCount90 ∷
+  actualSZetaHomEvaluationAndNormalizerAction ∷
   literalThreePhaseRegularResidualAndZetaSquaredCompletion ∷
   selected3BActualRetractionAndIntrinsicSameAction ∷
   physicalNH3ToMonsterStateAndDynamics ∷
@@ -230,22 +237,15 @@ remainingPayments =
 record FrontierBoundary : Set where
   constructor frontier-boundary
   field
-    historicalWholeCharacterBypassImportedAsAuthority : Bool
-    historicalWholeCharacterBypassSupersedesProofRelevantCurrentTarget : Bool
+    genericIsotypicAssemblyIsStillAResearchLeaf : Bool
     furtherCardinalityMatchingCountsAsRepresentationPayment : Bool
     furtherC3PhaseMatchingCountsAsPhysicalPayment : Bool
     furtherScalarEntropyAnalogyCountsAsGravityPayment : Bool
     currentFrontierIsSameObjectRepresentationThenPhysical : Bool
     interpretation : String
-
 open FrontierBoundary public
 
 canonicalFrontierBoundary : FrontierBoundary
 canonicalFrontierBoundary = frontier-boundary
-  false
-  false
-  false
-  false
-  false
-  true
-  "Current max-cut: retain X6 x Fin90/native369 as an exact finite basis-label chart; attach it proof-relevantly to an actual W_zeta basis if available; separately pay H_zeta same-object character transport and S_zeta=Hom_E(H_zeta,W_zeta) evaluation/intertwining; retain the independent literal phase-one regular/residual plus zeta-squared completion and selected-3B intrinsic-action leaves; only then can a physical NH3 state/action, physical ensemble/entropy, Lorentzian tensor gravity route, and observed-3+1D Monster prediction be promoted. The author-released NH3 CI matrix rediagonalization remains an independent execution leaf. Projection choice itself is already eliminated as an independent selected-3B blocker."
+  false false false false true
+  "Current max-cut: generic fixed-phase H_zeta recognition compilation, semisimple/isotypic assembly, post-recognition copy-count logic and selected-phase 12+78 character-family occurrence are already available. Retain X6 x Fin90/native369 strictly as a basis-label chart. The live representation payments are proof-relevant weight-two and same-literal-zeta linear restrictions, the actual simple-type classifier, resulting W_zeta|E ~= H_zeta^n same-object equivalence followed by n=90, S_zeta=Hom_E(H_zeta,W_zeta) evaluation/normalizer action, literal phase-one regular/residual plus zeta-squared completion, and the selected3B retraction/intrinsic-same-action pair. Only after these may a physical NH3 state/action, physical ensemble/entropy, Lorentzian tensor gravity route and observed-3+1D Monster prediction be promoted."
