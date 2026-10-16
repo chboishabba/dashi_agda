@@ -13,14 +13,11 @@ module DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact where
 -- each phase k < T and advances k -> k+1.  No resident source rule is generated
 -- at the terminal phase T.  Hence the T-boundary is quiescent by construction
 -- and a cross-mode return link cannot collide with a resident candidate key.
---
--- This owner pays the finite rule-table / determinism / freshness construction.
--- Whole-run simulation is intentionally separated into the companion owner.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_) 
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Empty using (⊥)
 open import Data.Product using (Σ; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -30,6 +27,7 @@ open import Data.Fin.Properties using (remQuot-combine)
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.CodedFiniteStandardModeSumExact as Mode
+import DASHI.Mathematics.Complexity.CodedFiniteStandardSingletonLinkExact as Singleton
 
 ------------------------------------------------------------------------
 -- Fin n embeds as the nonterminal phases of Fin (suc n).
@@ -288,6 +286,39 @@ phaseTerminalState source steps q =
   phaseState q (lastPhase steps)
 
 ------------------------------------------------------------------------
+-- A complete coded TM carrier.  The accepting state is the source accepting
+-- state at terminal phase T.  The table itself contains no terminal-phase rule.
+------------------------------------------------------------------------
+
+phaseLiftCode :
+  (source : Coded.CodedFiniteStandardTM) →
+  (steps : Nat) →
+  Coded.CodedFiniteStandardTM
+phaseLiftCode source steps = record
+  { Coded.stateCount = Coded.stateCount source * suc steps
+  ; Coded.symbolCount = Coded.symbolCount source
+  ; Coded.blank = Coded.blank source
+  ; Coded.initialState = phaseInitialState source steps
+  ; Coded.acceptingState =
+      phaseTerminalState source steps (Coded.acceptingState source)
+  ; Coded.rules = phaseLiftRules source steps
+  ; Coded.dispatchUnique = phaseLiftDispatchUnique source steps
+  }
+
+phaseLiftCodeRulesExact :
+  (source : Coded.CodedFiniteStandardTM) →
+  (steps : Nat) →
+  Coded.rules (phaseLiftCode source steps) ≡ phaseLiftRules source steps
+phaseLiftCodeRulesExact source steps = refl
+
+phaseLiftAcceptingStateExact :
+  (source : Coded.CodedFiniteStandardTM) →
+  (steps : Nat) →
+  Coded.acceptingState (phaseLiftCode source steps)
+    ≡ phaseTerminalState source steps (Coded.acceptingState source)
+phaseLiftAcceptingStateExact source steps = refl
+
+------------------------------------------------------------------------
 -- THE KEY RETURN-BOUNDARY THEOREM:
 -- no copied candidate rule has a source state in terminal phase T.
 ------------------------------------------------------------------------
@@ -318,13 +349,27 @@ terminalDispatchKeyFresh :
 terminalDispatchKeyFresh source steps residentOccurs q symbol sourceEq readEq =
   noResidentRuleAtTerminalPhase source steps residentOccurs q sourceEq
 
+terminalResidentKeyFresh :
+  (source : Coded.CodedFiniteStandardTM) →
+  (steps : Nat) →
+  (q : Fin.Fin (Coded.stateCount source)) →
+  (symbol : Fin.Fin (Coded.symbolCount source)) →
+  Singleton.ResidentKeyFresh
+    (phaseLiftFragment source steps)
+    (phaseTerminalState source steps q)
+    symbol
+terminalResidentKeyFresh source steps q symbol residentOccurs sourceEq readEq =
+  terminalDispatchKeyFresh
+    source steps residentOccurs q symbol sourceEq readEq
+
 ------------------------------------------------------------------------
 -- MAX-CUT CONSEQUENCE
 --
 -- The old exact-T return obstruction is no longer an architectural blocker.
--- For one fixed budget T, the candidate can be compiled into a finite control
--- product with T+1 phase slices.  The T-th slice has no resident rules at all,
--- so return/opposite-mode links are fresh regardless of endpoint source state
--- and scanned symbol.  Remaining work is the exact whole-run lift into this
--- phase-indexed fragment and assembly with the generator/opposite modes.
+-- For one fixed budget T, the candidate is compiled into a literal coded
+-- finite machine with T+1 phase slices.  The terminal slice has no resident
+-- rules at all, so `singletonSafeLinkExtension` can attach a return/opposite
+-- edge there after choosing its target/write/direction.  What remains is the
+-- exact whole-run lift into this phase-indexed code and integration with the
+-- generator/opposite modes.
 ------------------------------------------------------------------------
