@@ -34,6 +34,7 @@ import DASHI.Wikimedia.IbrahimMonster3BLinearZetaSectorRestrictionExact as Linea
 import DASHI.Moonshine.Monster3BLinearActionProofRelevantHardeningExact as Hardening
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannUniquenessBidiExact as Uniqueness
 import DASHI.Moonshine.Monster3BCommonRepresentationTransportExact as Common
+import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact as HCompiler
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as Recognition
 import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact as Isotypic
 import DASHI.Moonshine.Monster3BTwoIsotypicBlockAssemblyLeanReceiptExact as TwoBlock
@@ -63,9 +64,6 @@ record ActualMonsterLinearInputPacket
     actualSelectedConstituentAttachment :
       Common.ActualHZetaConstituentCommonTheoryAttachment theory
 
-    -- These are the exact Monster-specific premises consumed downstream by the
-    -- generic Lean assembly/cancellation/Schur compilers.  They are kept
-    -- proof-relevant here rather than replaced by character or dimension tags.
     ActualWholeSectorSimpleTypeClassifier : Set
     actualWholeSectorSimpleTypeClassifierWitness :
       ActualWholeSectorSimpleTypeClassifier
@@ -97,7 +95,7 @@ compileActualPaidHZetaRecognition :
     (theory : Uniqueness.IrreducibleCharacterDetermination) →
   (packet : ActualMonsterLinearInputPacket weightLegacy zetaLegacy theory) →
   Recognition.PaidSchrodingerIsActualHZeta
-    (DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact.compiledLegacyHZetaRecognition
+    (HCompiler.compiledLegacyHZetaRecognition
       theory
       (Common.compileCharacterTransport theory
         (literalSchrodingerAttachment packet)
