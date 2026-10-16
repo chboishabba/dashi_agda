@@ -3,6 +3,7 @@ module DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutValidation wher
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact as M
+import DASHI.Physics.QuantumVacuum.CasimirU1QuadraticActionDensityValidation
 
 fieldImageCompilerConsumedRegression :
   M.cartesianU1FieldImageAndBracketCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
@@ -24,9 +25,17 @@ curvatureReductionCompilerConsumedRegression :
   M.cartesianCurvatureReductionCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
 curvatureReductionCompilerConsumedRegression = refl
 
+quadraticDensityCompilerConsumedRegression :
+  M.quadraticActionDensityCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
+quadraticDensityCompilerConsumedRegression = refl
+
 secondAbelianBracketProofNotRequiredRegression :
   M.secondAbelianBracketProofRequired M.canonicalCasimirU1ActionVariationBoundary ≡ false
 secondAbelianBracketProofNotRequiredRegression = refl
+
+independentActionEqualityNotRequiredAfterInputsRegression :
+  M.independentRestrictedYMMaxwellActionEqualityRequiredAfterInputs M.canonicalCasimirU1ActionVariationBoundary ≡ false
+independentActionEqualityNotRequiredAfterInputsRegression = refl
 
 physicalCouplingNormalizationSeparatedRegression :
   M.physicalChargeCouplingNormalizationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
@@ -36,9 +45,13 @@ fieldStrengthAttachmentSeparatedRegression :
   M.nondegenerateCurvatureAttachmentSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
 fieldStrengthAttachmentSeparatedRegression = refl
 
-actionEqualitySeparatedRegression :
-  M.actionEqualitySeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
-actionEqualitySeparatedRegression = refl
+exteriorCartanImageSeparatedRegression :
+  M.exteriorFieldStrengthCartanImageSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+exteriorCartanImageSeparatedRegression = refl
+
+actionFunctionalSeparatedRegression :
+  M.sameObjectActionFunctionalSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+actionFunctionalSeparatedRegression = refl
 
 metricVariationSeparatedRegression :
   M.metricVariationCommutationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
@@ -57,9 +70,13 @@ secondActionBlockerRegression :
 secondActionBlockerRegression = refl
 
 thirdActionBlockerRegression :
-  M.thirdActionRestrictionBlocker ≡ M.missingRestrictedYMMaxwellActionEquality
+  M.thirdActionRestrictionBlocker ≡ M.missingExteriorFieldStrengthCartanImage
 thirdActionBlockerRegression = refl
 
 fourthActionBlockerRegression :
-  M.fourthActionRestrictionBlocker ≡ M.missingMetricVariationRestrictionCommutation
+  M.fourthActionRestrictionBlocker ≡ M.missingSameObjectActionDensityFunctional
 fourthActionBlockerRegression = refl
+
+fifthActionBlockerRegression :
+  M.fifthActionRestrictionBlocker ≡ M.missingMetricVariationRestrictionCommutation
+fifthActionBlockerRegression = refl
