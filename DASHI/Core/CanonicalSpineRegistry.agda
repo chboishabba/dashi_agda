@@ -158,6 +158,24 @@ typedDependencyOwner = canonical-owner "typed dependency witnesses, indexed requ
 genericReceiptOwner : CanonicalOwner
 genericReceiptOwner = canonical-owner "generic non-promoting receipt metadata and list-level fail-closed receipt proof" "DASHI.Core.GenericReceipt" exactInterface false refl
 
+humanReviewOwner : CanonicalOwner
+humanReviewOwner = canonical-owner
+  "domain-neutral exact-item human-review receipt with truth/applicability/causal-authority firewalls"
+  "DASHI.Core.HumanReviewCore"
+  exactInterface false refl
+
+claimRelativeVerificationOwner : CanonicalOwner
+claimRelativeVerificationOwner = canonical-owner
+  "claim-relative specification translation, eligible verification, selective escalation, frontier advisory, and same-object held-out evaluation"
+  "DASHI.Core.ClaimRelativeVerificationEscalationExact"
+  exactInterface false refl
+
+claimRelativeVerificationBenchmarkOwner : CanonicalOwner
+claimRelativeVerificationBenchmarkOwner = canonical-owner
+  "paired act/abstain and weak/strong selective-verification benchmark with matched consumer/scope contract"
+  "DASHI.Core.ClaimRelativeVerificationBenchmarkExact"
+  exactInterface false refl
+
 canonicalOwners : List CanonicalOwner
 canonicalOwners =
   tritOwner ∷ supportSignOwner ∷ multiscaleOwner ∷ ultrametricOwner ∷ mdlOwner ∷
@@ -170,7 +188,9 @@ canonicalOwners =
   queryIndexedFutureSafePromotionOwner ∷ candidateFamilyExecutionOwner ∷
   requirementConflictBatchOwner ∷ localGlobalGluingOwner ∷ candidateObjectIdentityOwner ∷
   attributedSourceOwner ∷ attributionSnowballOwner ∷ appendOnlyRevisionOwner ∷
-  residualActionPolicyOwner ∷ typedDependencyOwner ∷ genericReceiptOwner ∷ []
+  residualActionPolicyOwner ∷ typedDependencyOwner ∷ genericReceiptOwner ∷
+  humanReviewOwner ∷ claimRelativeVerificationOwner ∷
+  claimRelativeVerificationBenchmarkOwner ∷ []
 
 record RepositoryClosureBoundary : Set where
   constructor repository-closure-boundary
