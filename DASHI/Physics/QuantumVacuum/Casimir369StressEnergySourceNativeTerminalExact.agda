@@ -14,10 +14,20 @@ import DASHI.Physics.QuantumVacuum.CasimirSide4CartanCurvatureClosureExact as Si
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact as Action
 import DASHI.Physics.QuantumVacuum.CasimirU1SelectedStressReadoutAttachmentExact as StressReadout
 import DASHI.Physics.QuantumVacuum.CasimirU1ModeRenormalizedStressAttachmentExact as ModeStress
+import DASHI.Physics.QuantumVacuum.CasimirSelectedStressMetricBasisSymmetryExact as MetricSymmetry
 import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact as Round131
+import DASHI.Physics.Foundations.BalabanQ1FiniteTangentCurveReductionExact as Q1
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
+import DASHI.Physics.YangMills.BalabanContinuumMetricStressPairingRound130Exact as R130
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact as R136
 
 ------------------------------------------------------------------------
 -- SOURCE-NATIVE TERMINAL RECUT
+--
+-- Generic callback-shaped action/path/readout sockets remain useful as local
+-- compilers, but they are no longer the physical terminal.  The repository
+-- already owns the concrete generated-action, finite-tangent-curve and metric-
+-- stress representations.  Casimir must attach to those exact owners.
 ------------------------------------------------------------------------
 
 legacyTerminalBoundary : Legacy.Casimir369StressEnergyTerminalBoundary
@@ -49,6 +59,32 @@ selectedStressReadoutBoundary = StressReadout.canonicalSelectedStressReadoutBoun
 
 modeRenormalizedStressBoundary : ModeStress.CasimirU1ModeRenormalizedStressBoundary
 modeRenormalizedStressBoundary = ModeStress.canonicalModeRenormalizedStressBoundary
+
+metricBasisSymmetryBoundary : MetricSymmetry.CasimirSelectedStressMetricBasisBoundary
+metricBasisSymmetryBoundary = MetricSymmetry.canonicalSelectedStressMetricBasisBoundary
+
+round132SelectedGeneratedActionOwner : String
+round132SelectedGeneratedActionOwner =
+  "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact"
+
+q1FiniteTangentCurveOwner : String
+q1FiniteTangentCurveOwner =
+  "DASHI.Physics.Foundations.BalabanQ1FiniteTangentCurveReductionExact"
+
+round130CanonicalMetricStressPairingOwner : String
+round130CanonicalMetricStressPairingOwner =
+  "DASHI.Physics.YangMills.BalabanContinuumMetricStressPairingRound130Exact"
+
+round136GeneratedActionRecoveryOwner : String
+round136GeneratedActionRecoveryOwner =
+  "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact"
+
+-- Import anchors keep these exact existing owners in the terminal dependency
+-- graph; no new generated action, source path or stress representation is made.
+round132CompilerLevel = R132.unifiedGeneratedActionDensityCompilerLevel
+q1UsesExactPresentCutTangent = Q1.q1CurveUsesExactPresentCutFiniteTangent
+round130CompilerLevel = R130.continuumMetricStressPairingCompilerLevel
+round136CompilerLevel = R136.unifiedGeneratedActionRecoveryCompilerLevel
 
 record CasimirSourceNativeTerminalBoundary : Set where
   constructor casimir-source-native-terminal-boundary
@@ -83,6 +119,12 @@ record CasimirSourceNativeTerminalBoundary : Set where
     secondConductingPlateBoundaryRequired : Bool
     secondRenormalizationPrescriptionRequired : Bool
 
+    round132SelectedGeneratedActionOwnerReused : Bool
+    q1FiniteTangentCurveOwnerReused : Bool
+    round130CanonicalMetricStressPairingOwnerReused : Bool
+    metricBasisStressSymmetryCompilerPaid : Bool
+    independentRestrictedStressSymmetryPaymentRequired : Bool
+
     round131RecoveredQFTAttachmentForR457Paid : Bool
     r457LiteralPinnedConstructionIdentityPaid : Bool
     selectedGroupQuaternionSU2RealizationPaid : Bool
@@ -90,12 +132,12 @@ record CasimirSourceNativeTerminalBoundary : Set where
     freeMaxwellActionNormalizationPaid : Bool
     sameObjectNondegenerateCurvatureFormulaPaid : Bool
     selectedNonlinearExteriorCartanTransportPaid : Bool
-    sameObjectActionDensityFunctionalPaid : Bool
-    sameMetricPathActionFamilyPaid : Bool
-    metricVariationStressReadoutPaid : Bool
+    casimirRound132GeneratedActionAttachmentPaid : Bool
+    casimirQ1FiniteTangentCurveAttachmentPaid : Bool
+    casimirRound130StressReadoutAttachmentPaid : Bool
     selectedQFTStressMetricVariationReadoutAttachmentPaid : Bool
     maxwellReadoutSameRenormalizedModeStressAttachmentPaid : Bool
-    restrictedStressCoordinateSymmetryPaid : Bool
+    selectedStressMetricBasisAttachmentPaid : Bool
     brownMaclayTenComponentValuesPaid : Bool
     allSectorAssemblyPaid : Bool
     einsteinCommonMetricVariationPaid : Bool
@@ -109,6 +151,7 @@ canonicalSourceNativeTerminalBoundary =
   casimir-source-native-terminal-boundary
     true true false true false true false false true true false true true false true false
     true true true true false true false true false true false false
+    true true true true false
     false false false false false false false false false false false false false false false false false false
 
 data RemainingSourceNativeCasimirBlocker : Set where
@@ -119,12 +162,12 @@ data RemainingSourceNativeCasimirBlocker : Set where
   missingFreeMaxwellActionNormalization : RemainingSourceNativeCasimirBlocker
   missingSameObjectNondegenerateCurvatureFormulaAttachment : RemainingSourceNativeCasimirBlocker
   missingSelectedNonlinearExteriorCartanTransport : RemainingSourceNativeCasimirBlocker
-  missingSameObjectActionDensityFunctional : RemainingSourceNativeCasimirBlocker
-  missingSameMetricPathActionFamily : RemainingSourceNativeCasimirBlocker
-  missingMetricVariationStressReadout : RemainingSourceNativeCasimirBlocker
+  missingCasimirRound132GeneratedActionAttachment : RemainingSourceNativeCasimirBlocker
+  missingCasimirQ1FiniteTangentCurveAttachment : RemainingSourceNativeCasimirBlocker
+  missingCasimirRound130StressReadoutAttachment : RemainingSourceNativeCasimirBlocker
   missingSelectedQFTStressMetricVariationReadoutAttachment : RemainingSourceNativeCasimirBlocker
   missingMaxwellReadoutSameRenormalizedModeStressAttachment : RemainingSourceNativeCasimirBlocker
-  missingU1RestrictedQFTStressCoordinateSymmetry : RemainingSourceNativeCasimirBlocker
+  missingSelectedStressMetricBasisAttachment : RemainingSourceNativeCasimirBlocker
   missingBrownMaclayTenIndependentComponentValues : RemainingSourceNativeCasimirBlocker
   missingRound131AllSectorAssembly : RemainingSourceNativeCasimirBlocker
   missingEinsteinCommonMetricVariation : RemainingSourceNativeCasimirBlocker
@@ -149,17 +192,17 @@ sixthUnificationBlocker = missingSameObjectNondegenerateCurvatureFormulaAttachme
 seventhUnificationBlocker : RemainingSourceNativeCasimirBlocker
 seventhUnificationBlocker = missingSelectedNonlinearExteriorCartanTransport
 eighthUnificationBlocker : RemainingSourceNativeCasimirBlocker
-eighthUnificationBlocker = missingSameObjectActionDensityFunctional
+eighthUnificationBlocker = missingCasimirRound132GeneratedActionAttachment
 ninthUnificationBlocker : RemainingSourceNativeCasimirBlocker
-ninthUnificationBlocker = missingSameMetricPathActionFamily
+ninthUnificationBlocker = missingCasimirQ1FiniteTangentCurveAttachment
 tenthUnificationBlocker : RemainingSourceNativeCasimirBlocker
-tenthUnificationBlocker = missingMetricVariationStressReadout
+tenthUnificationBlocker = missingCasimirRound130StressReadoutAttachment
 eleventhUnificationBlocker : RemainingSourceNativeCasimirBlocker
 eleventhUnificationBlocker = missingSelectedQFTStressMetricVariationReadoutAttachment
 twelfthUnificationBlocker : RemainingSourceNativeCasimirBlocker
 twelfthUnificationBlocker = missingMaxwellReadoutSameRenormalizedModeStressAttachment
 thirteenthUnificationBlocker : RemainingSourceNativeCasimirBlocker
-thirteenthUnificationBlocker = missingU1RestrictedQFTStressCoordinateSymmetry
+thirteenthUnificationBlocker = missingSelectedStressMetricBasisAttachment
 fourteenthUnificationBlocker : RemainingSourceNativeCasimirBlocker
 fourteenthUnificationBlocker = missingBrownMaclayTenIndependentComponentValues
 fifteenthUnificationBlocker : RemainingSourceNativeCasimirBlocker
@@ -180,41 +223,20 @@ firstGravityBlocker = missingSemiclassicalGravitySameObjectWeld
 firstExperimentalBlocker : RemainingSourceNativeCasimirBlocker
 firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
-data RetiredProjectionCompatibilityBlockerAutomaticallyReturns : Set where
-data RetiredR457RecoveryEqualityBlockerAutomaticallyReturns : Set where
-data RetiredPinnedSourceNativeSelectionBlockerAutomaticallyReturns : Set where
-data RetiredAllGroupsInterpretationBlockerAutomaticallyReturns : Set where
-data RetiredArbitraryCartanFieldBlockerAutomaticallyReturns : Set where
-data RetiredMeasuredAlphaEMBlockerAutomaticallyReturns : Set where
-data RetiredFiniteCartanCurlBlockerAutomaticallyReturns : Set where
-data RetiredCompactSimpleBlockerAutomaticallyReturns : Set where
-data RetiredActionEqualityBlockerAutomaticallyReturns : Set where
-data RetiredMetricVariationEqualityBlockerAutomaticallyReturns : Set where
-data RetiredSecondRenormalizationBlockerAutomaticallyReturns : Set where
+data RetiredGenericActionFunctionalBlockerAutomaticallyReturns : Set where
+data RetiredGenericMetricPathBlockerAutomaticallyReturns : Set where
+data RetiredGenericStressReadoutBlockerAutomaticallyReturns : Set where
+data RetiredIndependentStressSymmetryBlockerAutomaticallyReturns : Set where
 
-retiredProjectionCompatibilityBlockerDoesNotReturn : RetiredProjectionCompatibilityBlockerAutomaticallyReturns → ⊥
-retiredProjectionCompatibilityBlockerDoesNotReturn ()
-retiredR457RecoveryEqualityBlockerDoesNotReturn : RetiredR457RecoveryEqualityBlockerAutomaticallyReturns → ⊥
-retiredR457RecoveryEqualityBlockerDoesNotReturn ()
-retiredPinnedSourceNativeSelectionBlockerDoesNotReturn : RetiredPinnedSourceNativeSelectionBlockerAutomaticallyReturns → ⊥
-retiredPinnedSourceNativeSelectionBlockerDoesNotReturn ()
-retiredAllGroupsInterpretationBlockerDoesNotReturn : RetiredAllGroupsInterpretationBlockerAutomaticallyReturns → ⊥
-retiredAllGroupsInterpretationBlockerDoesNotReturn ()
-retiredArbitraryCartanFieldBlockerDoesNotReturn : RetiredArbitraryCartanFieldBlockerAutomaticallyReturns → ⊥
-retiredArbitraryCartanFieldBlockerDoesNotReturn ()
-retiredMeasuredAlphaEMBlockerDoesNotReturn : RetiredMeasuredAlphaEMBlockerAutomaticallyReturns → ⊥
-retiredMeasuredAlphaEMBlockerDoesNotReturn ()
-retiredFiniteCartanCurlBlockerDoesNotReturn : RetiredFiniteCartanCurlBlockerAutomaticallyReturns → ⊥
-retiredFiniteCartanCurlBlockerDoesNotReturn ()
-retiredCompactSimpleBlockerDoesNotReturn : RetiredCompactSimpleBlockerAutomaticallyReturns → ⊥
-retiredCompactSimpleBlockerDoesNotReturn ()
-retiredActionEqualityBlockerDoesNotReturn : RetiredActionEqualityBlockerAutomaticallyReturns → ⊥
-retiredActionEqualityBlockerDoesNotReturn ()
-retiredMetricVariationEqualityBlockerDoesNotReturn : RetiredMetricVariationEqualityBlockerAutomaticallyReturns → ⊥
-retiredMetricVariationEqualityBlockerDoesNotReturn ()
-retiredSecondRenormalizationBlockerDoesNotReturn : RetiredSecondRenormalizationBlockerAutomaticallyReturns → ⊥
-retiredSecondRenormalizationBlockerDoesNotReturn ()
+retiredGenericActionFunctionalBlockerDoesNotReturn : RetiredGenericActionFunctionalBlockerAutomaticallyReturns → ⊥
+retiredGenericActionFunctionalBlockerDoesNotReturn ()
+retiredGenericMetricPathBlockerDoesNotReturn : RetiredGenericMetricPathBlockerAutomaticallyReturns → ⊥
+retiredGenericMetricPathBlockerDoesNotReturn ()
+retiredGenericStressReadoutBlockerDoesNotReturn : RetiredGenericStressReadoutBlockerAutomaticallyReturns → ⊥
+retiredGenericStressReadoutBlockerDoesNotReturn ()
+retiredIndependentStressSymmetryBlockerDoesNotReturn : RetiredIndependentStressSymmetryBlockerAutomaticallyReturns → ⊥
+retiredIndependentStressSymmetryBlockerDoesNotReturn ()
 
 sourceNativeTerminalReading : String
 sourceNativeTerminalReading =
-  "The source-native Casimir/GRQFT max-cut now charges only genuine same-object seams. The side-four physical field proves finite Cartan closure of the exterior curl, so an independent dA-in-Cartan calculation is retired. After the selected nondegenerate curvature producer, the remaining exterior-Cartan payment is same-object transport from that selected nonlinear curvature/exterior derivative to the concrete side-four Cartan-curvature realization. Free Maxwell normalization remains a convention payment rather than measured alpha_EM. The recovery/group/field seams remain ahead of these action/stress attachments."
+  "The current max-cut reuses the repository's actual source/action/path/stress objects instead of generic callback placeholders. After the recovery/group/Cartan/normalization/curvature seams, Casimir must attach its restricted action to Round132's selected generated action, its metric variation to Q1's one exact finite-tangent curve, and its stress readout to the Round130/136 canonical metric stress lane. Once the selected component evaluator is attached to the canonical symmetric metric-basis readout, coordinate symmetry is compiler output; only the ten Brown-Maclay source/component values remain independently numerical at that stage."
