@@ -85,6 +85,9 @@ for needle in [
     "specificMembraneCarrierRequiredByUptakeStudy", "functionalCocultureCrossTalkSupported",
     "scalarWellMixedPoolSufficient", "intercellBH4TransferDirectlyMeasured",
     "redoxSpatialEvidenceClosesWholeAllocator",
+    "TopologyResolvedPoolBalance", "canonicalTopologyResolvedPoolBalance",
+    "topologyResolvedStateRequired", "scalarProjectionIsLossy",
+    "numericEdgeFluxesPaid", "directTransferFluxPaid",
 ]:
     assert needle in text["redox"], f"redox/spatial discriminator missing {needle}"
 
@@ -93,6 +96,7 @@ for needle in [
     "cellularUptakeAndFunctionalCrossTalkArePaidWithoutInventingFlux",
     "neuralSupplyAndConsumptionNeedNotBeColocalized",
     "striatalRouteAmbiguityBlocksNaiveCofactorInterpretation",
+    "topologyResolvedBalanceReplacesScalarAsSufficientStateWithoutInventingFlux",
     "redoxSpatialEvidenceDoesNotCloseWholeAllocator",
 ]:
     assert needle in text["redox_v"], f"redox/spatial validation missing {needle}"
@@ -145,6 +149,7 @@ for needle in [
     "bh4DirectDiscriminatorsPaySubcoordinatesWithoutWholeClosure",
     "bh4RedoxSpatialCoordinateIsPaidWithoutInventingTransfer",
     "bh4TransportEvidenceDoesNotRequireDedicatedCarrierOrQuantifyInVivoFlux",
+    "bh4TopologyResolvedBalanceRetainsNumericalAcquisitionDebt",
     "bh4AcquisitionStateIsPartialNotClosed",
 ]:
     assert needle in text["chem_validation"], f"chemistry validation missing {needle}"
@@ -158,4 +163,4 @@ for needle in [
 full = (ROOT / "DASHI/Chemistry/EverythingFull.agda").read_text()
 assert "LineageCalibrationDiscriminatorEverything" in full
 
-print("lineage/BH4 causal acquisition + redox/spatial/transport topology + attribution/mechanistic max-cut static contract: PASS")
+print("lineage/BH4 causal acquisition + topology-resolved redox/spatial/transport + attribution/mechanistic max-cut static contract: PASS")
