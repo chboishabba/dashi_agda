@@ -7,7 +7,15 @@ EXPECTED = {
     "DASHI/Culture/PowersPlantationParadiseMethodologySourceAtlasExact.agda": [
         "prest2023PublicTheatreSource", "prest2023MethodologySource",
         "prest2024ResponseSource", "row2024ReviewSource", "sabee2024ReviewSource",
-        "freedomOnTheMoveSource", "canonicalPowersMethodologySourceBoundary",
+        "prest2025DisabilitySource", "freedomOnTheMoveSource",
+        "canonicalPowersMethodologySourceBoundary",
+    ],
+    "DASHI/Culture/PowersPlantationParadiseArchiveModalityExact.agda": [
+        "SourceGenre", "SourceProductionContext", "runawaySaleAdvertisementContext",
+        "theatreAnnouncementContext", "notarialWillContext", "policeRuleContext",
+        "sameSilenceDifferentProductionContext",
+        "sourceGenreDoesNotCreateHistoricalTruth",
+        "canonicalPowersArchiveModalityBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseInvestigationParetoExact.agda": [
         "primaryCorpusCandidate", "actorDistributionCandidate",
@@ -30,11 +38,19 @@ EXPECTED = {
         "canonicalColonialTheatreSensoryAccessBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseEvidenceGraphExact.agda": [
+        "SourceGenre", "SourceProductionContext", "sourceContext",
         "minetteSalaryAnchor", "liseEventAnchor", "julienContributionBurdenAnchor",
         "portAuPrinceSeatingAnchor", "july1790ContestationAnchor",
         "graphReachabilityDoesNotCreateHistoricalIdentity",
         "coerciveAdvertisementDoesNotBecomeNeutralBiography",
+        "sourceSilenceDoesNotCollapseAcrossGenres",
         "canonicalPowersEvidenceGraphBoundary",
+    ],
+    "DASHI/Culture/PowersPlantationParadiseMobilityRegimeTransitionExact.agda": [
+        "MobilityCoordinate", "RegimeCoordinate", "minetteMobilityCoordinate",
+        "liseMobilityCoordinate", "carrierContinuityDoesNotRecoverRegimeContinuity",
+        "repertoireContinuityDoesNotRecoverAccessContinuity",
+        "canonicalPowersMobilityRegimeBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseResearchThroughPerformanceExact.agda": [
         "portAuPrinceSightlineProbe", "mitigatedAudibilityProbe",
@@ -48,15 +64,17 @@ EXPECTED = {
         "canonicalPowersEmpiricalRoadmapBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseEmpiricalPhase3Validation.agda": [
-        "_methodology-boundary-paid", "_five-axis-routing-paid",
-        "_selective-reopening-paid", "_discriminator-boundary-paid",
-        "_sensory-access-gap-paid", "_evidence-graph-boundary-paid",
+        "_methodology-boundary-paid", "_archive-modality-boundary-paid",
+        "_five-axis-routing-paid", "_selective-reopening-paid",
+        "_discriminator-boundary-paid", "_sensory-access-gap-paid",
+        "_evidence-graph-boundary-paid", "_mobility-regime-boundary-paid",
         "_performance-probe-boundary-paid", "_roadmap-boundary-paid", "roadmapBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseSynthesisExact.agda": [
-        "methodologySourceBoundary", "investigationRoutingBoundary",
-        "historicalDiscriminatorBoundary", "sensoryAccessBoundary",
-        "evidenceGraphBoundary", "researchThroughPerformanceBoundary",
+        "methodologySourceBoundary", "archiveModalityBoundary",
+        "investigationRoutingBoundary", "historicalDiscriminatorBoundary",
+        "sensoryAccessBoundary", "evidenceGraphBoundary",
+        "mobilityRegimeBoundary", "researchThroughPerformanceBoundary",
         "empiricalRoadmapBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseValidation.agda": [
