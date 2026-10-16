@@ -8,14 +8,11 @@ open import Agda.Builtin.String using (String)
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Cut
 import DASHI.Physics.Foundations.CMP119SymmetricStressComponentReductionExact as Sym
+import DASHI.Physics.Foundations.CMP119SymmetrySemanticBridgeExact as SymSemantic
 import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationExact as Casimir
 
 ------------------------------------------------------------------------
 -- BROWN-MACLAY-SPECIFIC TEN-COMPONENT REDUCTION
---
--- Coordinate symmetry and numerical Brown-Maclay values are different theorem
--- obligations.  Keep them different in the type: ten upper-triangular values
--- plus one symmetry receipt compile to the full sixteen-component equality.
 ------------------------------------------------------------------------
 
 record CasimirBrownMaclayTenIndependentValues
@@ -67,6 +64,20 @@ compileSymmetryAndTenValues symmetryReceipt valueReceipt = record
   { symmetry = symmetryReceipt
   ; values = valueReceipt
   }
+
+compileYMSymmetrySemanticBridgeAndTenValues :
+  ∀ {StressTensor : Set}
+    {Symmetric : StressTensor → Set}
+    {stress : StressTensor}
+    {evaluator : Cut.CMP119RationalStressComponentEvaluator StressTensor} →
+  SymSemantic.YMSymmetryMeansMetricBasisComponentSymmetry
+    Symmetric stress evaluator →
+  CasimirBrownMaclayTenIndependentValues evaluator stress →
+  CasimirBrownMaclaySymmetricTenComponentPayment evaluator stress
+compileYMSymmetrySemanticBridgeAndTenValues bridge values =
+  compileSymmetryAndTenValues
+    (SymSemantic.compileYMSymmetryToComponentSymmetry bridge)
+    values
 
 casimirTenComponentsCompileToTensorEquality :
   ∀ {StressTensor : Set}
@@ -130,6 +141,7 @@ record CasimirBrownMaclaySymmetricReductionBoundary : Set where
     genericCMP119SymmetryReductionReused : Bool
     tenIndependentValuesRecordOwned : Bool
     symmetryAndTenValuesCompilerOwned : Bool
+    ymSymmetrySemanticBridgeCompilerOwned : Bool
     symmetricTenComponentCompilerOwned : Bool
     sixteenIndependentComponentPaymentsRequired : Bool
     actualSelectedQFTSymmetryPaid : Bool
@@ -142,8 +154,8 @@ canonicalCasimirBrownMaclaySymmetricReductionBoundary :
   CasimirBrownMaclaySymmetricReductionBoundary
 canonicalCasimirBrownMaclaySymmetricReductionBoundary =
   casimir-brown-maclay-symmetric-reduction-boundary
-    true true true true false false false false
+    true true true true true false false false false
 
 casimirBrownMaclaySymmetricReductionReading : String
 casimirBrownMaclaySymmetricReductionReading =
-  "The Brown-Maclay selected-stress target is factored into two genuinely separate payments on one evaluator/stress object: PairingComponentSymmetry and ten independent values 00,01,02,03,11,12,13,22,23,33. Their compiler produces the full sixteen Axis4 equalities; the six lower-triangular values are not independent physical payments."
+  "The Brown-Maclay selected-stress target is factored into PairingComponentSymmetry and ten independent values. If the selected YM stress carries the repo's YMSymmetryMeansMetricBasisComponentSymmetry receipt, the existing semantic compiler pays the coordinate-symmetry side without a second symmetry theorem. Ten values 00,01,02,03,11,12,13,22,23,33 plus symmetry compile to all sixteen Axis4 equalities."
