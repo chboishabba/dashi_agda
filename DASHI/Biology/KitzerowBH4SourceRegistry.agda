@@ -19,6 +19,7 @@ data SourceKind : Set where
   systemsModel : SourceKind
   institutionalFramework : SourceKind
   priorArtReview : SourceKind
+  biologicalDatabase : SourceKind
 
 record SourceRecord : Set where
   constructor sourceRecord
@@ -177,6 +178,28 @@ iacc2026 = sourceRecord
   "institutional research-priority convergence"
   "Policy framing is context, not a mechanistic proof token."
 
+uniprot2026_03 : SourceRecord
+uniprot2026_03 = sourceRecord
+  "SRC-UNIPROT-2026-03"
+  "UniProt Consortium"
+  "UniProtKB release 2026_03 / REST protein knowledgebase"
+  "2026_03; acquired 2026-10-17"
+  "rest.uniprot.org; concrete response digest emitted by scripts/acquire_uniprot_bio_certificate.py"
+  biologicalDatabase
+  "versioned protein identity, sequence, annotation, evidence and cross-reference source for bounded biochemical nodes"
+  "Credit UniProt for the curated database assertion and its contributors; preserve the cited primary literature as separate evidence owners. A reviewed UniProt entry is not itself direct experimental proof or whole-model confirmation."
+
+rheaCurrent : SourceRecord
+rheaCurrent = sourceRecord
+  "SRC-RHEA-CURRENT"
+  "Rhea / SIB Swiss Institute of Bioinformatics"
+  "Rhea expert-curated biochemical reaction knowledgebase"
+  "live service; acquired 2026-10-17"
+  "rhea-db.org; UniProt P09417 links RHEA:17869"
+  biologicalDatabase
+  "chemically precise reaction identifier and reaction-level cross-database target"
+  "Credit Rhea for reaction curation; a UniProt-to-Rhea cross-reference does not collapse protein identity with a reaction or establish disease-level causality."
+
 allSources : List SourceRecord
 allSources =
   kitzerow2024BH4
@@ -192,4 +215,6 @@ allSources =
   ∷ naviaux2025
   ∷ melillo2026
   ∷ iacc2026
+  ∷ uniprot2026_03
+  ∷ rheaCurrent
   ∷ []
