@@ -4,10 +4,6 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.CasimirU1RecoveredQFTStressAttachmentExact as A
 
-------------------------------------------------------------------------
--- RED-first regression surface for the first actual unification stress leaf.
-------------------------------------------------------------------------
-
 u1ArchitectureAvailableRegression :
   A.u1YangMillsGaugeArchitectureAvailable A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
 u1ArchitectureAvailableRegression = refl
@@ -23,6 +19,18 @@ recoveredQFTCommutationConsumedRegression = refl
 concreteSU2HostReceiptConsumedRegression :
   A.concreteSU2HostReceiptRequired A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
 concreteSU2HostReceiptConsumedRegression = refl
+
+u1RestrictedStressRequiredRegression :
+  A.u1RestrictedSelectedQFTStressRequired A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
+u1RestrictedStressRequiredRegression = refl
+
+fullSU2StressNotTargetRegression :
+  A.fullSelectedSU2StressIsBrownMaclayTarget A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
+fullSU2StressNotTargetRegression = refl
+
+symmetryAndTenValuesSeparatedRegression :
+  A.symmetryAndTenValuesSeparatedInAttachment A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
+symmetryAndTenValuesSeparatedRegression = refl
 
 symmetricTenComponentCompilerConsumedRegression :
   A.symmetricTenComponentBrownMaclayCompilerConsumed A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
@@ -40,6 +48,10 @@ concreteSelectedGroupHostStillOpenRegression :
   A.concreteSelectedGroupHostsCanonicalU1Paid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
 concreteSelectedGroupHostStillOpenRegression = refl
 
+u1StressRestrictionStillOpenRegression :
+  A.canonicalU1StressRestrictionPaid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
+u1StressRestrictionStillOpenRegression = refl
+
 selectedQFTStressSymmetryStillOpenRegression :
   A.selectedQFTStressCoordinateSymmetryPaid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
 selectedQFTStressSymmetryStillOpenRegression = refl
@@ -48,9 +60,9 @@ brownMaclayTenComponentValuesStillOpenRegression :
   A.brownMaclayTenIndependentComponentValuesPaid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
 brownMaclayTenComponentValuesStillOpenRegression = refl
 
-actualSectorStressEqualityStillOpenRegression :
-  A.actualSelectedQFTSectorEqualsBrownMaclayPaid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
-actualSectorStressEqualityStillOpenRegression = refl
+restrictedSectorStressEqualityStillOpenRegression :
+  A.u1RestrictedSelectedQFTSectorEqualsBrownMaclayPaid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
+restrictedSectorStressEqualityStillOpenRegression = refl
 
 allSectorAggregationStillOpenRegression :
   A.allSectorStressAggregationPaid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
@@ -62,10 +74,12 @@ commonVariationStillOpenRegression = refl
 
 u1ArchitectureDoesNotCreateStressEqualityRegression :
   A.U1GaugeArchitectureAutomaticallyIdentifiesBrownMaclayWithSelectedQFTStress → ⊥
-u1ArchitectureDoesNotCreateStressEqualityRegression =
-  A.u1GaugeArchitectureDoesNotIdentifySelectedQFTStress
+u1ArchitectureDoesNotCreateStressEqualityRegression = A.u1GaugeArchitectureDoesNotIdentifySelectedQFTStress
+
+fullSU2StressDoesNotBecomeBrownMaclayRegression :
+  A.FullSelectedSU2StressAutomaticallyBecomesBrownMaclayTarget → ⊥
+fullSU2StressDoesNotBecomeBrownMaclayRegression = A.fullSelectedSU2StressDoesNotBecomeBrownMaclayTarget
 
 selectedSectorDoesNotCreateTotalAggregationRegression :
   A.SelectedSectorStressEqualityAutomaticallyPaysAllSectorAggregation → ⊥
-selectedSectorDoesNotCreateTotalAggregationRegression =
-  A.selectedSectorStressDoesNotPayAllSectorAggregation
+selectedSectorDoesNotCreateTotalAggregationRegression = A.selectedSectorStressDoesNotPayAllSectorAggregation
