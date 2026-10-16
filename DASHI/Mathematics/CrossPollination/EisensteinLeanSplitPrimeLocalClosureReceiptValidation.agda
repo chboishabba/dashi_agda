@@ -14,6 +14,10 @@ cubeFibreCertificateObserved :
   Receipt.canonicalCubeFibreCertificateObserved ≡ true
 cubeFibreCertificateObserved = refl
 
+genericKernelEqualsCubesObserved :
+  Receipt.arbitraryOrderThreeKernelEqualsCubesObserved ≡ true
+genericKernelEqualsCubesObserved = refl
+
 jacobiNormPrimeObserved :
   Receipt.splitJacobiNormPrimeObserved ≡ true
 jacobiNormPrimeObserved = refl
@@ -36,13 +40,25 @@ allGoodPrimeLocalObserved :
   Receipt.allGoodPrimeLocalClassificationObserved ≡ true
 allGoodPrimeLocalObserved = refl
 
-badPrimeLiteralReductionObserved :
-  Receipt.badPrimeThreeLiteralReductionObserved ≡ true
-badPrimeLiteralReductionObserved = refl
+badPrimeTwoLiteralReductionObserved :
+  Receipt.badPrimeTwoLiteralReductionObserved ≡ true
+badPrimeTwoLiteralReductionObserved = refl
 
-badPrimeLocalFactorStillUnpaid :
-  Receipt.badPrimeThreeEllipticLocalFactorObserved ≡ false
-badPrimeLocalFactorStillUnpaid = refl
+badPrimeThreeLiteralReductionObserved :
+  Receipt.badPrimeThreeLiteralReductionObserved ≡ true
+badPrimeThreeLiteralReductionObserved = refl
+
+badPrimeLocalFactorsStillUnpaid :
+  Receipt.badPrimeEllipticLocalFactorsObserved ≡ false
+badPrimeLocalFactorsStillUnpaid = refl
+
+external36a1ProvenanceRecorded :
+  Receipt.external36a1ProvenanceReceiptObserved ≡ true
+external36a1ProvenanceRecorded = refl
+
+externalMetadataNotProofAuthority :
+  Receipt.externalMetadataPromotedToProofAuthority ≡ false
+externalMetadataNotProofAuthority = refl
 
 noLeanProofObjectImported :
   Receipt.leanProofObjectImportedIntoAgda ≡ false
