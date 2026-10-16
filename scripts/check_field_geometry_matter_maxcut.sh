@@ -39,6 +39,8 @@ files=(
   DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMValidation.agda
   DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyObstructionReceiptExact.agda
   DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyObstructionValidation.agda
+  DASHI/Physics/CondensedMatter/MATBGTHFSourceFaithfulDiscretizationObligationExact.agda
+  DASHI/Physics/CondensedMatter/MATBGTHFSourceFaithfulDiscretizationObligationValidation.agda
   DASHI/Physics/CondensedMatter/MATBGQTMMatrixElementObserverReceiptExact.agda
   DASHI/Physics/CondensedMatter/MATBGQTMMatrixElementObserverValidation.agda
   DASHI/Physics/CondensedMatter/MATBGQTMElectrostaticsReplayReceiptExact.agda
@@ -133,6 +135,8 @@ grep -q 'atomicReferenceExecutionPaid' DASHI/Physics/CondensedMatter/MATBGTHFHub
 grep -q 'coupledGreenBlockExecutionPaid' DASHI/Physics/CondensedMatter/MATBGTHFCoupledGreenReplayReceiptExact.agda
 grep -q 'selfConsistencyEquationsSourcePaid' DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMExact.agda
 grep -q 'unresolvedCutoffSensitivityExposed' DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyObstructionReceiptExact.agda
+grep -q 'continuumNormalizationSourcePaid' DASHI/Physics/CondensedMatter/MATBGTHFSourceFaithfulDiscretizationObligationExact.agda
+grep -q 'reciprocalMeshSpecified' DASHI/Physics/CondensedMatter/MATBGTHFSourceFaithfulDiscretizationObligationExact.agda
 grep -q 'qtmElectrostaticsSourcePaid' DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMExact.agda
 grep -q 'wavefunctionObserverExecutionPaid' DASHI/Physics/CondensedMatter/MATBGQTMMatrixElementObserverReceiptExact.agda
 grep -q 'highTemperatureMicrostates' DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorics2026Exact.agda
@@ -151,6 +155,8 @@ grep -q 'CausalSuperluminalTransportPromotion' DASHI/Physics/Foundations/CausalT
 grep -q 'metricClaimed' DASHI/Physics/Foundations/CausalTransportFTLObligationsExact.agda
 grep -q 'externalSourceDoesNotOwnDASHISynthesis' DASHI/Physics/Foundations/FieldGeometryMatterAttributionRegression.agda
 grep -q 'numericallyExecuted' DASHI/Physics/Foundations/FieldGeometryMatterTerminalMaxCutExact.agda
+grep -q 'thfContinuousBZMeasure' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
+grep -q 'thfDiscreteBZDomainMeshCutoffProducer' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 grep -q 'qtmPublicAcquisitionRoutes' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 grep -q 'numericalBMDoesNotBecomeExperiment' DASHI/Physics/Foundations/FieldGeometryMatterTerminalValidation.agda
 
