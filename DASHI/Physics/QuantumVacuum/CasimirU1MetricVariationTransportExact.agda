@@ -43,18 +43,18 @@ record SameMetricPathActionFamily : Set₁ where
 open SameMetricPathActionFamily public
 
 restrictedYMMetricFirstVariation :
-  PathDerivative.SignedPathDerivativeLaws →
-  SameMetricPathActionFamily →
-  MetricConfiguration _ → MetricPerturbation _ → ℝ
+  (derivative : PathDerivative.SignedPathDerivativeLaws) →
+  (family : SameMetricPathActionFamily) →
+  MetricConfiguration family → MetricPerturbation family → ℝ
 restrictedYMMetricFirstVariation derivative family background perturbation =
   PathDerivative.derivativeAtZero derivative
     (λ t → restrictedYMActionAt family
       (metricPath family background perturbation t))
 
 maxwellMetricFirstVariation :
-  PathDerivative.SignedPathDerivativeLaws →
-  SameMetricPathActionFamily →
-  MetricConfiguration _ → MetricPerturbation _ → ℝ
+  (derivative : PathDerivative.SignedPathDerivativeLaws) →
+  (family : SameMetricPathActionFamily) →
+  MetricConfiguration family → MetricPerturbation family → ℝ
 maxwellMetricFirstVariation derivative family background perturbation =
   PathDerivative.derivativeAtZero derivative
     (λ t → maxwellActionAt family
