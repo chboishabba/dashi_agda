@@ -26,6 +26,7 @@ record ContemporarySource : Set where
     rocketdyneSameObjectEvidence : Bool
     historicalRequirementAuthority : Bool
     admissibleTransfer : String
+    sourceReference : String
 
 nasaSTD6030 : ContemporarySource
 nasaSTD6030 = contemporary-source
@@ -34,6 +35,7 @@ nasaSTD6030 = contemporary-source
   "active NASA standard governing AM design/fabrication/testing qualification coordinates for spaceflight hardware"
   false false
   "modern qualification-grammar comparator only; does not apply retroactively to R-9557"
+  "NASA Technical Standards System: https://standards.nasa.gov/node/2739"
 
 nasaHDBK5026 : ContemporarySource
 nasaHDBK5026 = contemporary-source
@@ -42,6 +44,7 @@ nasaHDBK5026 = contemporary-source
   "links AM strength/fatigue/fracture-control implementation to structural, NDE, propulsion-life and fracture-control requirements"
   false false
   "supports keeping material/process, inspection, strength/life and acceptance coordinates separate"
+  "NASA Technical Standards System: https://standards.nasa.gov/node/11897"
 
 nasaSTD5023 : ContemporarySource
 nasaSTD5023 = contemporary-source
@@ -50,6 +53,7 @@ nasaSTD5023 = contemporary-source
   "uniform valve design/verification requirements motivated by requirement gaps and costly historical valve failures"
   false false
   "modern valve-qualification comparator; does not identify the Moog 54X107A historical failure population"
+  "NASA Technical Standards System: https://standards.nasa.gov/standard/NASA/NASA-STD-5023"
 
 raambo : ContemporarySource
 raambo = contemporary-source
@@ -58,6 +62,7 @@ raambo = contemporary-source
   "integrated computational-materials/design/build/test development of refractory alloys for high-temperature propulsion and related systems"
   false false
   "supports design-build-inspect-test/process-history grammar; transfers no Rocketdyne numerical result"
+  "NASA TechPort project 147003: https://techport.nasa.gov/projects/147003"
 
 c103HeatTreatment2025 : ContemporarySource
 c103HeatTreatment2025 = contemporary-source
@@ -66,6 +71,7 @@ c103HeatTreatment2025 = contemporary-source
   "HIP can improve C103 density while associated grain growth can reduce mechanical properties; heat-treatment path is a live material-state coordinate"
   false false
   "supports process-history dependence of C103 properties; cannot calibrate 1974 WC103/VH-101"
+  "NASA NTRS 20250002623: https://ntrs.nasa.gov/citations/20250002623"
 
 lreHealthMonitoring2026 : ContemporarySource
 lreHealthMonitoring2026 = contemporary-source
@@ -74,6 +80,7 @@ lreHealthMonitoring2026 = contemporary-source
   "reviews transition toward lifecycle health management, multimodal sensing, hybrid physics-data models and predictive maintenance; identifies data quality, generalization, interpretability and engineering validation challenges"
   false false
   "modern PHM architecture comparator only; does not provide a historical Rocketdyne failure-rate denominator"
+  "Progress in Aerospace Sciences 166 (2026) 101251; DOI 10.1016/j.paerosci.2026.101251"
 
 record ContemporarySourceAtlasBoundary : Set where
   constructor contemporary-source-atlas-boundary
