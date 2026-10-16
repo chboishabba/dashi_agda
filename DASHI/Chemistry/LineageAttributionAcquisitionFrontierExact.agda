@@ -19,6 +19,7 @@ data ScientificAcquisitionKind : Set where
   fluxDataset : ScientificAcquisitionKind
   structuralFunctionalDataset : ScientificAcquisitionKind
   matchedAlternativeChemistryDataset : ScientificAcquisitionKind
+  mechanisticArtifactReplay : ScientificAcquisitionKind
 
 data EvidenceIndependence : Set where
   sameSourceRefinement : EvidenceIndependence
@@ -113,9 +114,27 @@ carbonSiliconMatchedDataset =
     "turns overview carbon context into a direct comparative discriminator"
     independentPrimaryMeasurement 9 10 8 8 0 true refl
 
+pahIndependentMechanisticReplay : ScientificAcquisitionItem
+pahIndependentMechanisticReplay =
+  scientificAcquisitionItem
+    "A7 PAH structure/QM-MM independent mechanistic replay" mechanisticArtifactReplay
+    "PAHMechanismStatePromotionExact"
+    "independently materialize 1J8U/6HYC structure artifacts, bind selected active-site coordinates to the PAH reaction carrier, and independently reproduce a declared QM/MM reaction-path observable"
+    "independent numerical replay with exact artifact/version/method provenance"
+    "versioned PDB coordinates + reproducible QM/MM setup/output for a frozen declared consumer"
+    "promotes the generic biochemical replay from source-backed mechanism to independently replayed numerical artifact; does not discriminate BH4 H1/H2/H3/H4 allocation"
+    independentReplication 7 9 2 8 0 true refl
+
 canonicalScientificAcquisitionItems : List ScientificAcquisitionItem
 canonicalScientificAcquisitionItems =
-  bh4FluxDataset ∷ pahAtomMap ∷ bh4KineticSet ∷ chlorLocator ∷ pbCaTargetDataset ∷ carbonSiliconMatchedDataset ∷ []
+  bh4FluxDataset
+  ∷ pahAtomMap
+  ∷ bh4KineticSet
+  ∷ pbCaTargetDataset
+  ∷ carbonSiliconMatchedDataset
+  ∷ chlorLocator
+  ∷ pahIndependentMechanisticReplay
+  ∷ []
 
 ------------------------------------------------------------------------
 -- Contact/exposure provenance queue. These items have zero causal-scientific
@@ -220,6 +239,9 @@ record LineageAttributionAcquisitionFrontier : Set where
     unpaidCoordinateRetainsAttributionIsTrue : unpaidCoordinateRetainsAttribution ≡ true
     acquisitionCreatesAuthority : Bool
     acquisitionCreatesAuthorityIsFalse : acquisitionCreatesAuthority ≡ false
+    causalDiscriminatorCanOutrankDeeperMechanisticReplay : Bool
+    causalDiscriminatorCanOutrankDeeperMechanisticReplayIsTrue :
+      causalDiscriminatorCanOutrankDeeperMechanisticReplay ≡ true
 
 open LineageAttributionAcquisitionFrontier public
 
@@ -230,4 +252,4 @@ canonicalLineageAttributionAcquisitionFrontier =
     canonicalContactProvenanceItems
     true refl true refl true refl true refl true refl
     false refl false refl false refl false refl
-    false refl true refl false refl
+    false refl true refl false refl true refl
