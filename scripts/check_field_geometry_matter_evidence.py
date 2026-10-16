@@ -21,6 +21,7 @@ PAIRS = [
     ("scripts/matbg_bm_quantum_geometry.py", "Docs/evidence/matbg_bm_quantum_geometry_2026-10-16.json"),
     ("scripts/matbg_qtm_matrix_element_observer.py", "Docs/evidence/matbg_qtm_matrix_element_observer_2026-10-16.json"),
     ("scripts/matbg_qtm_resolution_kernel.py", "Docs/evidence/matbg_qtm_resolution_kernel_2026-10-16.json"),
+    ("scripts/matbg_qtm_resolution_aware_forward_observer.py", "Docs/evidence/matbg_qtm_resolution_aware_forward_observer_2026-10-16.json"),
     ("scripts/matbg_geometry_caloric_upper_bound.py", "Docs/evidence/matbg_geometry_caloric_upper_bound_2026-10-16.json"),
     ("scripts/matbg_thf_hubbard_i_atomic_reference.py", "Docs/evidence/matbg_thf_hubbard_i_atomic_reference_2026-10-16.json"),
     ("scripts/matbg_thf_coupled_green_reference.py", "Docs/evidence/matbg_thf_coupled_green_reference_2026-10-16.json"),
