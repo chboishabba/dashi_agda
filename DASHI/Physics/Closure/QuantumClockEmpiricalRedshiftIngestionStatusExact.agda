@@ -10,6 +10,7 @@ import DASHI.Physics.Closure.BothwellYe2022PublishedGradientPayloadExact as Payl
 import DASHI.Physics.Closure.BothwellYe2022RedshiftComparisonExact as Compare
 import DASHI.Physics.Closure.BothwellYe2022GeodeticCalibrationExact as Geodetic
 import DASHI.Physics.Closure.BothwellYe2022ChronometricGeodesyBridgeExact as Chronometric
+import DASHI.Physics.Closure.BothwellYe2022AntigravityMetricClockBridgeExact as AntiClock
 import DASHI.Physics.Closure.BothwellYe2022PublicArtifactLocatorExact as Artifact
 import DASHI.Physics.Closure.BothwellYe2022ExternalAcquisitionMaxCut as Acquisition
 import DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftReceiptRequest as Request
@@ -26,6 +27,12 @@ import DASHI.Promotion.SIMetrologyPayloadDependencyDAG as SIDAG
 -- remain external. The remaining external evidence is now also represented by
 -- an explicit author-acquisition packet; constructing that packet is not the
 -- same as sending it or receiving evidence.
+--
+-- The standard clock result is also registered as a metric-clock reference for
+-- the antigravity proof-search lane. That cross-pollination is deliberately a
+-- reference/negative-control surface only: no exotic intervention, engineered
+-- metric response, negative-G inference, mechanism validation or promotion is
+-- thereby created.
 ------------------------------------------------------------------------
 
 record EmpiricalRedshiftIngestionStatus : Set where
@@ -43,6 +50,9 @@ record EmpiricalRedshiftIngestionStatus : Set where
     chronometricGeodesyBridge : Chronometric.BothwellYe2022ChronometricGeodesyBridge
     chronometricGeodesyBridgeIsCanonical :
       chronometricGeodesyBridge ≡ Chronometric.canonicalBothwellYe2022ChronometricGeodesyBridge
+    antigravityMetricClockBridge : AntiClock.BothwellYe2022AntigravityMetricClockBridge
+    antigravityMetricClockBridgeIsCanonical :
+      antigravityMetricClockBridge ≡ AntiClock.canonicalBothwellYe2022AntigravityMetricClockBridge
     experimentArtifactLocator : Artifact.PublicExperimentArtifactLocator
     experimentArtifactLocatorIsCanonical :
       experimentArtifactLocator ≡ Artifact.canonicalBothwellYe2022PublicArtifactLocator
@@ -74,6 +84,9 @@ record EmpiricalRedshiftIngestionStatus : Set where
     chronometricGeodesyBridgeConstructedIsTrue : chronometricGeodesyBridgeConstructed ≡ true
     heightEquivalentScaleConstructed : Bool
     heightEquivalentScaleConstructedIsTrue : heightEquivalentScaleConstructed ≡ true
+    antigravityMetricClockBridgeConstructed : Bool
+    antigravityMetricClockBridgeConstructedIsTrue :
+      antigravityMetricClockBridgeConstructed ≡ true
     externalAcquisitionPacketConstructed : Bool
     externalAcquisitionPacketConstructedIsTrue :
       externalAcquisitionPacketConstructed ≡ true
@@ -97,6 +110,9 @@ record EmpiricalRedshiftIngestionStatus : Set where
 
     chronometricGeodesyPromotionAllowed : Bool
     chronometricGeodesyPromotionAllowedIsFalse : chronometricGeodesyPromotionAllowed ≡ false
+    antigravityMetricClockPromotionAllowed : Bool
+    antigravityMetricClockPromotionAllowedIsFalse :
+      antigravityMetricClockPromotionAllowed ≡ false
     genericAcceptanceTokenConstructed : Bool
     genericAcceptanceTokenConstructedIsFalse : genericAcceptanceTokenConstructed ≡ false
     genericPromotionTokenConstructed : Bool
@@ -122,6 +138,8 @@ canonicalBothwellYe2022IngestionStatus = record
   ; geodeticCalibrationReceiptIsCanonical = refl
   ; chronometricGeodesyBridge = Chronometric.canonicalBothwellYe2022ChronometricGeodesyBridge
   ; chronometricGeodesyBridgeIsCanonical = refl
+  ; antigravityMetricClockBridge = AntiClock.canonicalBothwellYe2022AntigravityMetricClockBridge
+  ; antigravityMetricClockBridgeIsCanonical = refl
   ; experimentArtifactLocator = Artifact.canonicalBothwellYe2022PublicArtifactLocator
   ; experimentArtifactLocatorIsCanonical = refl
   ; externalAcquisition = Acquisition.canonicalBothwellYe2022ExternalAcquisitionMaxCut
@@ -150,6 +168,8 @@ canonicalBothwellYe2022IngestionStatus = record
   ; chronometricGeodesyBridgeConstructedIsTrue = refl
   ; heightEquivalentScaleConstructed = true
   ; heightEquivalentScaleConstructedIsTrue = refl
+  ; antigravityMetricClockBridgeConstructed = true
+  ; antigravityMetricClockBridgeConstructedIsTrue = refl
   ; externalAcquisitionPacketConstructed = true
   ; externalAcquisitionPacketConstructedIsTrue = refl
   ; externalAuthorRequestSent = false
@@ -170,6 +190,8 @@ canonicalBothwellYe2022IngestionStatus = record
   ; analysisCodeAcquiredIsFalse = refl
   ; chronometricGeodesyPromotionAllowed = false
   ; chronometricGeodesyPromotionAllowedIsFalse = refl
+  ; antigravityMetricClockPromotionAllowed = false
+  ; antigravityMetricClockPromotionAllowedIsFalse = refl
   ; genericAcceptanceTokenConstructed = false
   ; genericAcceptanceTokenConstructedIsFalse = refl
   ; genericPromotionTokenConstructed = false
@@ -183,6 +205,7 @@ canonicalBothwellYe2022IngestionStatus = record
       ∷ "obtain the analysis code and exact revision/environment sufficient to replay the fitted-gradient pipeline"
       ∷ "materialise the full covariance/independence treatment rather than only the published total systematic budget"
       ∷ "for geodetic-accuracy promotion, also pay survey transfer/geopotential modelling rather than identifying a height-equivalent sensitivity with elevation accuracy"
+      ∷ "for exotic-gravity use, acquire a same-object engineered intervention and the claim-specific metricClockDiscriminator adequacy witness; the ordinary-gravity clock reference alone is only a control/reference surface"
       ∷ "construct the generic EmpiricalRedshiftReceiptAcceptanceToken only after those experiment-evidence rows are actually satisfied"
       ∷ []
   ; reading =
@@ -190,7 +213,8 @@ canonicalBothwellYe2022IngestionStatus = record
       ∷ "Published numbers, source-reported systematics and a same-scale gh/c^2 comparison are ingested."
       ∷ "The geodetic calibration is independently source-closed at the public-artifact level: NOAA NOS NGS 77 is DOI-pinned, checksum-backed, and its JILA S1B60H gravity value rounds to the paper's 9.796 m s^-2 input."
       ∷ "The clock uncertainty, surveyed gravity and exact SI metre/c route produce a 69-to-70 micrometre local height-equivalent scale without promoting that scale to surveyed elevation accuracy."
-      ∷ "The remaining author-supplied evidence is now represented by a typed request packet that separates requested bytes/data/code from repository-owned checksum/replay/consumer-ingestion work."
+      ∷ "The same clock result now pays a standard-gravity metric/clock reference coordinate for antigravity proof search, but no exotic intervention or antigravity consumer adequacy is inferred from it."
+      ∷ "The remaining author-supplied evidence is represented by a typed request packet that separates requested bytes/data/code from repository-owned checksum/replay/consumer-ingestion work."
       ∷ "Constructing that packet does not mean it has been sent and does not manufacture raw experimental arrays, analysis code, covariance evidence or a generic acceptance token."
       ∷ []
   }
@@ -212,6 +236,12 @@ canonicalGeodeticCalibrationChecksumIngested = refl
 
 canonicalChronometricGeodesyBridgeConstructed : chronometricGeodesyBridgeConstructed canonicalBothwellYe2022IngestionStatus ≡ true
 canonicalChronometricGeodesyBridgeConstructed = refl
+
+canonicalAntigravityMetricClockBridgeConstructed : antigravityMetricClockBridgeConstructed canonicalBothwellYe2022IngestionStatus ≡ true
+canonicalAntigravityMetricClockBridgeConstructed = refl
+
+canonicalAntigravityMetricClockPromotionStillClosed : antigravityMetricClockPromotionAllowed canonicalBothwellYe2022IngestionStatus ≡ false
+canonicalAntigravityMetricClockPromotionStillClosed = refl
 
 canonicalExternalAcquisitionPacketConstructed : externalAcquisitionPacketConstructed canonicalBothwellYe2022IngestionStatus ≡ true
 canonicalExternalAcquisitionPacketConstructed = refl
