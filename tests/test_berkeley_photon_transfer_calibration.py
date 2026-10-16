@@ -36,6 +36,7 @@ def test_berkeley_photon_transfer_owner_pins_executed_source_notebook():
         'lensDisplayedSlope = "0.05"',
         'lensDisplayedIntercept = "0.01"',
         'digitalToPhotonFormula = "(image - intercept) / slope"',
+        'photonConversionFormula = "clip((image - intercept) / slope, 0, infinity)"',
         "sourceExecutedPhotonTransferCalibrationPaid = true",
         "sourceDigitalToEstimatedPhotonConversionPaid = true",
         "localRawCalibrationSweepReexecuted = false",
@@ -52,6 +53,6 @@ def test_calibration_is_exported_and_maxcut_keeps_source_and_local_execution_dis
     maxcut = (ROOT / "DASHI/Physics/Optics/Diffraction3DImagingAcquisitionMaxCutExact.agda").read_text(encoding="utf-8")
     assert "sourceExecutedPhotonTransferCalibrationPinned = true" in maxcut
     assert "sourceDigitalToEstimatedPhotonConversionPinned = true" in maxcut
-    assert "localRawPhotonCalibrationReexecuted = false" in maxcut
-    assert "incidentPhotonThroughputCalibrationPinned = false" in maxcut
+    assert "localRawPhotonCalibrationReexecuted = PhotonTransfer.localRawCalibrationSweepReexecuted" in maxcut
+    assert "incidentPhotonThroughputCalibrationPinned = PhotonTransfer.incidentPhotonThroughputCalibrationPaid" in maxcut
     assert "matchedPhotonAcrossParallelSystems = false" in maxcut
