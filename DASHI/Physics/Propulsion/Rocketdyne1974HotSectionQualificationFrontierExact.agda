@@ -8,13 +8,6 @@ import DASHI.Physics.Propulsion.QualifiedHotSectionManufacturingBidiExact as Hot
 
 ------------------------------------------------------------------------
 -- CANONICAL QUALIFICATION REVERSE-PAYMENT WELD
---
--- The Rocketdyne programme already supplies useful engine-test observations,
--- material/coating identity and bounded operating-envelope evidence.  It does
--- NOT yet supply the same-object process/inspection/lifetime package demanded
--- by QualifiedHotSectionManufacturingBidiExact.  This owner maps the live
--- residuals into that existing canonical reverse-acquisition grammar rather
--- than inventing a Rocketdyne-only qualification calculus.
 ------------------------------------------------------------------------
 
 processRouteObligation : Hot.QualificationReverseObligation
@@ -29,9 +22,9 @@ thermalHistoryObligation : Hot.QualificationReverseObligation
 thermalHistoryObligation =
   Hot.qualification-reverse-obligation
     Hot.acquireThermalOrProcessHistory
-    "complete Test-052/Test-768/Test-870-2 temperature and heat-flux histories plus article thermal-processing history"
-    "bounded same-object thermal-history payment"
-    "cannot manufacture a creep lifetime or temperature-dependent failure law from peak temperature alone"
+    "complete Test-052/Test-768/Test-870-2 temperature and heat-flux histories, Test-052 model/referent numerical comparison and uncertainty, plus article thermal-processing history"
+    "bounded same-object thermal-history and model-credibility payment"
+    "cannot manufacture a creep lifetime, off-design predictive model or temperature-dependent failure law from peak temperature/source-reported graphical agreement alone"
 
 geometryRevisionObligation : Hot.QualificationReverseObligation
 geometryRevisionObligation =
@@ -45,9 +38,9 @@ inspectionObligation : Hot.QualificationReverseObligation
 inspectionObligation =
   Hot.qualification-reverse-obligation
     Hot.acquireInspectionAndMetrology
-    "1974 pre/post-test NDE, dimensional inspection, coating inspection and anomaly disposition for the exact nozzle articles"
-    "same-object inspection receipt"
-    "cannot import later Shuttle C-103 NDE history or call observed survival full qualification"
+    "1974 pre/post-test NDE and dimensional/coating inspection bound to the exact nozzle article/revision, including method, coverage, defect class, sensitivity/POD basis, acceptance threshold and chronology where quantitative detection credit is claimed"
+    "same-object inspection-capability receipt"
+    "inspection mention alone does not establish quantitative flaw-detection capability; later NASA POD requirements and later Shuttle C-103 NDE history do not transfer retroactively"
 
 defectAcceptanceObligation : Hot.QualificationReverseObligation
 defectAcceptanceObligation =
@@ -71,7 +64,7 @@ lifeReliabilityObligation =
     Hot.acquireLifeReliabilityEvidence
     "population/lot or repeated-article evidence supporting reuse/lifetime after the WC103 revision"
     "lifetime/reliability payment"
-    "one 45-second successful follow-up cannot establish 100-mission or 100000-second life"
+    "one 45-second successful follow-up cannot establish fatigue/creep life, 100-mission life or 100000-second life"
 
 record RocketdyneQualificationReverseFrontier : Set where
   constructor rocketdyne-qualification-reverse-frontier
@@ -98,7 +91,7 @@ rocketdyneQualificationReverseFrontier =
     operatingEnvelopeObligation
     lifeReliabilityObligation
     true false
-    "engine-test and bounded material/environment observations exist, but the canonical same-object process + inspection + envelope + lifetime qualification payment remains incomplete"
+    "engine-test and bounded material/environment observations exist, but the canonical same-object process + quantitative inspection capability + validated model/envelope + lifetime qualification payment remains incomplete"
 
 fullQualificationPaymentStillOpen : Bool
 fullQualificationPaymentStillOpen = true
