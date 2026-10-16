@@ -6,83 +6,71 @@ import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact as M
 import DASHI.Physics.QuantumVacuum.CasimirU1QuadraticActionDensityValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1MetricVariationTransportValidation
 import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationValidation
+import DASHI.Physics.QuantumVacuum.CasimirSide4CartanCurvatureClosureValidation
 
 fieldImageCompilerConsumedRegression :
   M.cartesianU1FieldImageAndBracketCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
 fieldImageCompilerConsumedRegression = refl
-
 maxwellSectorRestrictionScopeReusedRegression :
   M.maxwellSectorRestrictionScopeReused M.canonicalCasimirU1ActionVariationBoundary ≡ true
 maxwellSectorRestrictionScopeReusedRegression = refl
-
 invariantPairingRestrictionConsumedRegression :
   M.invariantPairingRestrictionConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
 invariantPairingRestrictionConsumedRegression = refl
-
 independentKillingDecompositionNotRequiredRegression :
   M.independentKillingDecompositionRequired M.canonicalCasimirU1ActionVariationBoundary ≡ false
 independentKillingDecompositionNotRequiredRegression = refl
-
 curvatureReductionCompilerConsumedRegression :
   M.cartesianCurvatureReductionCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
 curvatureReductionCompilerConsumedRegression = refl
-
 quadraticDensityCompilerConsumedRegression :
   M.quadraticActionDensityCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
 quadraticDensityCompilerConsumedRegression = refl
-
 metricVariationTransportCompilerConsumedRegression :
   M.metricVariationTransportCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
 metricVariationTransportCompilerConsumedRegression = refl
-
 freeMaxwellNormalizationInterfaceConsumedRegression :
   M.freeMaxwellActionNormalizationInterfaceConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
 freeMaxwellNormalizationInterfaceConsumedRegression = refl
-
 measuredAlphaNotRequiredForIdealKernelRegression :
   M.measuredAlphaEMRequiredForIdealCasimirActionWeld M.canonicalCasimirU1ActionVariationBoundary ≡ false
 measuredAlphaNotRequiredForIdealKernelRegression = refl
-
+side4CartanClosureConsumedRegression :
+  M.side4CartanCurlClosureCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
+side4CartanClosureConsumedRegression = refl
+independentFiniteCartanCurlNotRequiredRegression :
+  M.independentFiniteCartanCurlClosurePaymentRequired M.canonicalCasimirU1ActionVariationBoundary ≡ false
+independentFiniteCartanCurlNotRequiredRegression = refl
 secondAbelianBracketProofNotRequiredRegression :
   M.secondAbelianBracketProofRequired M.canonicalCasimirU1ActionVariationBoundary ≡ false
 secondAbelianBracketProofNotRequiredRegression = refl
-
 independentActionEqualityNotRequiredAfterInputsRegression :
   M.independentRestrictedYMMaxwellActionEqualityRequiredAfterInputs M.canonicalCasimirU1ActionVariationBoundary ≡ false
 independentActionEqualityNotRequiredAfterInputsRegression = refl
-
 independentMetricVariationEqualityNotRequiredAfterInputsRegression :
   M.independentMetricVariationEqualityRequiredAfterSamePathActionEquality M.canonicalCasimirU1ActionVariationBoundary ≡ false
 independentMetricVariationEqualityNotRequiredAfterInputsRegression = refl
-
 freeFieldNormalizationSeparatedRegression :
   M.freeMaxwellNormalizationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
 freeFieldNormalizationSeparatedRegression = refl
-
 empiricalCouplingCalibrationSeparateRegression :
   M.empiricalChargeCouplingCalibrationSeparate M.canonicalCasimirU1ActionVariationBoundary ≡ true
 empiricalCouplingCalibrationSeparateRegression = refl
-
 fieldStrengthAttachmentSeparatedRegression :
   M.nondegenerateCurvatureAttachmentSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
 fieldStrengthAttachmentSeparatedRegression = refl
-
-exteriorCartanImageSeparatedRegression :
-  M.exteriorFieldStrengthCartanImageSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
-exteriorCartanImageSeparatedRegression = refl
-
+selectedNonlinearExteriorTransportSeparatedRegression :
+  M.selectedNonlinearExteriorCartanTransportSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+selectedNonlinearExteriorTransportSeparatedRegression = refl
 actionFunctionalSeparatedRegression :
   M.sameObjectActionFunctionalSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
 actionFunctionalSeparatedRegression = refl
-
 sameMetricPathActionFamilySeparatedRegression :
   M.sameMetricPathActionFamilySeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
 sameMetricPathActionFamilySeparatedRegression = refl
-
 stressReadoutSeparatedRegression :
   M.metricVariationStressReadoutSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
 stressReadoutSeparatedRegression = refl
-
 zeroProbeCannotPayPhysicalActionRegression :
   M.zeroProbeActionSurfacePaysPhysicalRestriction M.canonicalCasimirU1ActionVariationBoundary ≡ false
 zeroProbeCannotPayPhysicalActionRegression = refl
@@ -90,23 +78,18 @@ zeroProbeCannotPayPhysicalActionRegression = refl
 firstActionBlockerRegression :
   M.firstActionRestrictionBlocker ≡ M.missingFreeMaxwellActionNormalization
 firstActionBlockerRegression = refl
-
 secondActionBlockerRegression :
   M.secondActionRestrictionBlocker ≡ M.missingSameObjectNondegenerateCurvatureFormulaAttachment
 secondActionBlockerRegression = refl
-
 thirdActionBlockerRegression :
-  M.thirdActionRestrictionBlocker ≡ M.missingExteriorFieldStrengthCartanImage
+  M.thirdActionRestrictionBlocker ≡ M.missingSelectedNonlinearExteriorCartanTransport
 thirdActionBlockerRegression = refl
-
 fourthActionBlockerRegression :
   M.fourthActionRestrictionBlocker ≡ M.missingSameObjectActionDensityFunctional
 fourthActionBlockerRegression = refl
-
 fifthActionBlockerRegression :
   M.fifthActionRestrictionBlocker ≡ M.missingSameMetricPathActionFamily
 fifthActionBlockerRegression = refl
-
 sixthActionBlockerRegression :
   M.sixthActionRestrictionBlocker ≡ M.missingMetricVariationStressReadout
 sixthActionBlockerRegression = refl
