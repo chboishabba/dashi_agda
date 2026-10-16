@@ -5,14 +5,22 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsBasicLawWitnessesExact as Basic
 
-commutativityPaid : Basic.commutativityKernelWitnessSourceWritten Basic.canonicalBasicLawBoundary ≡ true
-commutativityPaid = refl
+commutativitySourceWritten :
+  Basic.commutativityProofTermSourceWritten Basic.canonicalBasicLawBoundary ≡ true
+commutativitySourceWritten = refl
 
-cubicUnitPaid : Basic.cubicUnitKernelWitnessSourceWritten Basic.canonicalBasicLawBoundary ≡ true
-cubicUnitPaid = refl
+twoSidedUnitSourceWritten :
+  Basic.twoSidedUnitProofTermsSourceWritten Basic.canonicalBasicLawBoundary ≡ true
+twoSidedUnitSourceWritten = refl
 
-twoSidedUnitStillOpen : Basic.twoSidedUnitKernelWitnessPaid Basic.canonicalBasicLawBoundary ≡ false
-twoSidedUnitStillOpen = refl
+cubicUnitSourceWritten :
+  Basic.cubicUnitProofTermSourceWritten Basic.canonicalBasicLawBoundary ≡ true
+cubicUnitSourceWritten = refl
 
-jordanIdentityStillOpen : Basic.jordanIdentityKernelWitnessPaid Basic.canonicalBasicLawBoundary ≡ false
+kernelReceiptStillPending :
+  Basic.exactHeadAgdaKernelReceiptPresent Basic.canonicalBasicLawBoundary ≡ false
+kernelReceiptStillPending = refl
+
+jordanIdentityStillOpen :
+  Basic.jordanIdentityProofTermSourceWritten Basic.canonicalBasicLawBoundary ≡ false
 jordanIdentityStillOpen = refl
