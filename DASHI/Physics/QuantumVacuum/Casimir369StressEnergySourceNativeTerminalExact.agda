@@ -15,23 +15,16 @@ import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact as Round
 ------------------------------------------------------------------------
 -- SOURCE-NATIVE TERMINAL RECUT
 --
--- The older terminal remains as a compatibility/status owner.  The current
--- source-native cut removes every seam that is now compiler output:
+-- Compiler-owned seams now removed from the physical cut:
+-- formal recovery projection compatibility; the R457 reverse recovery equality
+-- once Round131RecoveredQFTAttachment is paid; selected compact simplicity;
+-- quaternion SU(2) group-law duplication; Cartan bracket/pairing/curvature
+-- algebra; restricted YM=Maxwell action equality; same-path first-variation
+-- equality; restricted-QFT=Maxwell readout equality; and duplicate plate/
+-- renormalization objects.
 --
--- * formal legacy/source-native projection compatibility is canonical;
--- * selected compact simplicity follows from a pinned YM construction;
--- * generic/legacy quaternion SU(2) group laws are definitionally bridged;
--- * restricted YM=Maxwell action follows from the Cartan curvature/pairing
---   compilers plus one common density functional and physical prefactor;
--- * metric first-variation equality follows from same-path action equality;
--- * restricted QFT stress=Maxwell readout follows from the selected-stress
---   metric-variation attachment;
--- * conducting-plate boundary and regulator/scheme/reference already live in
---   the existing Casimir mode-hyperfabric weld.
---
--- The first physical recovery seam is therefore the R457 same-object equality
--- between legacy recoverQFT and the literal construction carrying the actual
--- SourceNativeContinuumAndOS provenance.
+-- The first live recovery payment is therefore the canonical existing
+-- Round131RecoveredQFTAttachment instantiated on the literal R457 construction.
 ------------------------------------------------------------------------
 
 legacyTerminalBoundary : Legacy.Casimir369StressEnergyTerminalBoundary
@@ -58,6 +51,8 @@ record CasimirSourceNativeTerminalBoundary : Set where
     sourceNativeHostCompilerPaid : Bool
     formalProjectionCompatibilityCompilerPaid : Bool
     independentProjectionCompatibilityPaymentRequired : Bool
+    r457RecoveryEqualityCompilerPaid : Bool
+    independentR457RecoveryEqualityRequired : Bool
     independentCompactSimplePaymentRequired : Bool
     quaternionSU2GroupLawBridgePaid : Bool
     selectedStructuralGroupQuaternionSU2IdentificationPaid : Bool
@@ -75,7 +70,7 @@ record CasimirSourceNativeTerminalBoundary : Set where
     secondConductingPlateBoundaryRequired : Bool
     secondRenormalizationPrescriptionRequired : Bool
 
-    r457LegacyRecoverySameObjectAttachmentPaid : Bool
+    round131RecoveredQFTAttachmentForR457Paid : Bool
     pinnedSourceNativeRecoverySelectionPaid : Bool
     canonicalCartanU1FieldRestrictionPaid : Bool
     physicalChargeCouplingNormalizationPaid : Bool
@@ -98,15 +93,14 @@ open CasimirSourceNativeTerminalBoundary public
 canonicalSourceNativeTerminalBoundary : CasimirSourceNativeTerminalBoundary
 canonicalSourceNativeTerminalBoundary =
   casimir-source-native-terminal-boundary
-    true true false false true false
+    true true false true false false true false
     true true true true false true false true false true false false
     false false false false false false false false false false false false false false false false false
 
 data RemainingSourceNativeCasimirBlocker : Set where
-  missingR457LegacyRecoverySameObjectAttachment : RemainingSourceNativeCasimirBlocker
+  missingRound131RecoveredQFTAttachmentForR457 : RemainingSourceNativeCasimirBlocker
   missingPinnedSourceNativeRecoverySelection : RemainingSourceNativeCasimirBlocker
   missingSelectedStructuralGroupQuaternionSU2Identification : RemainingSourceNativeCasimirBlocker
-
   missingCanonicalCartanU1FieldRestriction : RemainingSourceNativeCasimirBlocker
   missingPhysicalChargeCouplingNormalization : RemainingSourceNativeCasimirBlocker
   missingSameObjectNondegenerateCurvatureFormulaAttachment : RemainingSourceNativeCasimirBlocker
@@ -116,21 +110,18 @@ data RemainingSourceNativeCasimirBlocker : Set where
   missingMetricVariationStressReadout : RemainingSourceNativeCasimirBlocker
   missingSelectedQFTStressMetricVariationReadoutAttachment : RemainingSourceNativeCasimirBlocker
   missingMaxwellReadoutSameRenormalizedModeStressAttachment : RemainingSourceNativeCasimirBlocker
-
   missingU1RestrictedQFTStressCoordinateSymmetry : RemainingSourceNativeCasimirBlocker
   missingBrownMaclayTenIndependentComponentValues : RemainingSourceNativeCasimirBlocker
-
   missingRound131AllSectorAssembly : RemainingSourceNativeCasimirBlocker
   missingEinsteinCommonMetricVariation : RemainingSourceNativeCasimirBlocker
   missingCommonMetricProducerLanguage : RemainingSourceNativeCasimirBlocker
   missingCasimirCommonActionVariationIdentification : RemainingSourceNativeCasimirBlocker
-
   missingSemiclassicalGravitySameObjectWeld : RemainingSourceNativeCasimirBlocker
   missingDirectStressOrGravityMeasurement : RemainingSourceNativeCasimirBlocker
   missingExactHeadKernelReceipt : RemainingSourceNativeCasimirBlocker
 
 firstUnificationBlocker : RemainingSourceNativeCasimirBlocker
-firstUnificationBlocker = missingR457LegacyRecoverySameObjectAttachment
+firstUnificationBlocker = missingRound131RecoveredQFTAttachmentForR457
 secondUnificationBlocker : RemainingSourceNativeCasimirBlocker
 secondUnificationBlocker = missingPinnedSourceNativeRecoverySelection
 thirdUnificationBlocker : RemainingSourceNativeCasimirBlocker
@@ -176,31 +167,25 @@ firstExperimentalBlocker : RemainingSourceNativeCasimirBlocker
 firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
 data RetiredProjectionCompatibilityBlockerAutomaticallyReturns : Set where
+data RetiredR457RecoveryEqualityBlockerAutomaticallyReturns : Set where
 data RetiredCompactSimpleBlockerAutomaticallyReturns : Set where
 data RetiredActionEqualityBlockerAutomaticallyReturns : Set where
 data RetiredMetricVariationEqualityBlockerAutomaticallyReturns : Set where
 data RetiredSecondRenormalizationBlockerAutomaticallyReturns : Set where
 
-retiredProjectionCompatibilityBlockerDoesNotReturn :
-  RetiredProjectionCompatibilityBlockerAutomaticallyReturns → ⊥
+retiredProjectionCompatibilityBlockerDoesNotReturn : RetiredProjectionCompatibilityBlockerAutomaticallyReturns → ⊥
 retiredProjectionCompatibilityBlockerDoesNotReturn ()
-
-retiredCompactSimpleBlockerDoesNotReturn :
-  RetiredCompactSimpleBlockerAutomaticallyReturns → ⊥
+retiredR457RecoveryEqualityBlockerDoesNotReturn : RetiredR457RecoveryEqualityBlockerAutomaticallyReturns → ⊥
+retiredR457RecoveryEqualityBlockerDoesNotReturn ()
+retiredCompactSimpleBlockerDoesNotReturn : RetiredCompactSimpleBlockerAutomaticallyReturns → ⊥
 retiredCompactSimpleBlockerDoesNotReturn ()
-
-retiredActionEqualityBlockerDoesNotReturn :
-  RetiredActionEqualityBlockerAutomaticallyReturns → ⊥
+retiredActionEqualityBlockerDoesNotReturn : RetiredActionEqualityBlockerAutomaticallyReturns → ⊥
 retiredActionEqualityBlockerDoesNotReturn ()
-
-retiredMetricVariationEqualityBlockerDoesNotReturn :
-  RetiredMetricVariationEqualityBlockerAutomaticallyReturns → ⊥
+retiredMetricVariationEqualityBlockerDoesNotReturn : RetiredMetricVariationEqualityBlockerAutomaticallyReturns → ⊥
 retiredMetricVariationEqualityBlockerDoesNotReturn ()
-
-retiredSecondRenormalizationBlockerDoesNotReturn :
-  RetiredSecondRenormalizationBlockerAutomaticallyReturns → ⊥
+retiredSecondRenormalizationBlockerDoesNotReturn : RetiredSecondRenormalizationBlockerAutomaticallyReturns → ⊥
 retiredSecondRenormalizationBlockerDoesNotReturn ()
 
 sourceNativeTerminalReading : String
 sourceNativeTerminalReading =
-  "The current Casimir/GRQFT max-cut is source-native rather than label-driven. Formal legacy projection compatibility is compiler-owned and supplies no rich provenance. The first physical recovery seam is the equality between legacy recoverQFT and the literal construction carrying the actual R457 SourceNativeContinuumAndOS certificate; then comes selection of the pinned construction. Compact simplicity is compiler output from that pinned construction. The generic and legacy quaternionic SU(2) laws are already bridged, leaving same-object identification of the selected structural group with that concrete SU(2). Cartan bracket, invariant pairing and abelian curvature reductions are paid. Restricted YM=Maxwell action is compiler output from a physical common prefactor, nondegenerate curvature, exterior Cartan image and one real density functional. CMP119 derivative congruence makes metric-variation equality compiler output from equality along one common metric path. R129/R131 make restricted-QFT=Maxwell stress equality compiler output after one selected-stress metric-readout attachment. The existing Casimir mode-hyperfabric weld already owns boundary retopology and regulator/scheme/reference; only the Maxwell-readout-to-that-renormalized-observable stress attachment remains. Coordinate symmetry and ten Brown-Maclay source/component values then lead into Round131 all-sector/common-action/Einstein assembly. Pointwise/local stress still does not imply measured gravity or unified QG."
+  "The source-native Casimir/GRQFT max-cut now reuses the canonical recovered-QFT seam. Formal projection compatibility is compiler-owned. R457's reverse legacy-recovery equality is compiler output from a Round131RecoveredQFTAttachment on the SAME R457 construction, so the first live recovery payment is that existing Round131 attachment, not a new R457 theorem. The pinned selection follows, while compact simplicity is compiler output from the pinned construction. Generic and legacy quaternionic SU(2) group laws are already bridged; only selected-structural-group same-object identification remains. Cartan bracket, invariant pairing, abelian curvature, restricted action equality, same-path metric variation, selected-QFT/Maxwell readout equality and duplicate plate/renormalization objects are all compiler-saturated. The remaining physical inputs proceed through field/coupling/curvature/action/path/stress attachment, ten Brown-Maclay component values, Round131 all-sector assembly and Einstein/common-action closure. Local Casimir stress still does not imply measured gravity or unified QG."
