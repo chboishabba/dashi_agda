@@ -1,5 +1,6 @@
 module DASHI.Physics.CondensedMatter.MATBGInteractingTHFLiteralMatricesValidation where
 
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.CondensedMatter.MATBGInteractingTHFLiteralMatricesExact as THFMatrix
