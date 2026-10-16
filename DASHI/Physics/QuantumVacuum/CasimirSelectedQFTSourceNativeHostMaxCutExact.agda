@@ -20,20 +20,19 @@ import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
 ------------------------------------------------------------------------
 -- SOURCE-NATIVE SELECTED-QFT HOST MAX-CUT
 --
--- The recovery lane is now reduced to two genuine same-object inputs:
+-- Recovery is reduced to two genuine same-object inputs:
 --
 --   1. Round131RecoveredQFTAttachment U Y_R457
---        Y_R457 = recoverQFT(selected microscopic state)
---
 --   2. Y_R457 = asLiteralYangMillsConstruction pinned
 --
--- From those two equalities the old PinnedSourceNativeRecoverySelection and
--- PinnedYangMillsRecoveredQFTAttachment are compiler output.  QFTRecoveryReceipt
--- then identifies the pinned construction with qftTarget, and compact simplicity
--- is already a field of the pinned construction.
+-- Those compile the former pinned-selection receipt, pinned recovered-QFT
+-- attachment and selected-target equality.  Compact simplicity is already a
+-- field of the pinned construction.
 --
--- Thus no third recovery-selection theorem remains between Round131 recovery
--- and the concrete selected-group interpretation.
+-- The next group payment is also sharpened: the physical input is not an
+-- arbitrary function interpreting every compact-simple index.  It is an
+-- indexed SelectedGroupStructureRealization proving that one concrete group
+-- structure realizes THIS selected group and is quaternionic SU(2).
 ------------------------------------------------------------------------
 
 record SourceNativePinnedHostSelection
@@ -119,6 +118,25 @@ round131PinnedInputsBuildSelectedQFTTarget :
 round131PinnedInputsBuildSelectedQFTTarget =
   PinnedCompiler.round131AndPinnedIdentityBuildSelectedTargetEquality
 
+sourceNativeSelectionBuildsSelectedSU2HostFromRealization :
+  ∀ {U : Weld.UnifiedCandidate}
+    {pinned :
+      Pinned.PinnedYangMillsConstruction
+        {C = Weld.qftCarriers U}
+        (Weld.qftSemantics U)} →
+  SourceNativePinnedHostSelection U pinned →
+  (group : QFT.CompactSimpleGroup (Weld.qftCarriers U)) →
+  Host.SelectedGroupStructureRealization U group →
+  String →
+  Host.CasimirSelectedQFTSU2Host U group
+sourceNativeSelectionBuildsSelectedSU2HostFromRealization
+    {pinned = pinned} selection group realization reading =
+  Host.hostFromPinnedSelectedStructure
+    pinned group realization reading
+
+-- Compatibility route retained for older callers.  It is not the current
+-- physical payment surface because the all-groups interpretation is too weak to
+-- establish selected-index same-object semantics by itself.
 sourceNativeSelectionBuildsSelectedSU2Host :
   ∀ {U : Weld.UnifiedCandidate}
     {pinned :
@@ -160,14 +178,11 @@ formalProjectionCompatibility = Recovery.canonicalFormalLegacyProjectionCompatib
 ------------------------------------------------------------------------
 
 data SourceNativeRecoveryAutomaticallyChoosesQuaternionSU2 : Set where
-
 data CompactSimpleProofRequiresSecondSelectedQFTTheoremAfterPinnedSelection : Set where
-
 data FormalProjectionCompatibilityAutomaticallySuppliesR457Provenance : Set where
-
 data R457ProvenanceAutomaticallySuppliesRound131RecoveredAttachment : Set where
-
 data Round131RecoveryAutomaticallyIdentifiesPinnedConstruction : Set where
+data AllGroupsInterpretationAutomaticallyPaysSelectedGroupRealization : Set where
 
 sourceNativeRecoveryDoesNotChooseQuaternionSU2 :
   SourceNativeRecoveryAutomaticallyChoosesQuaternionSU2 → ⊥
@@ -189,10 +204,14 @@ round131RecoveryDoesNotIdentifyPinnedConstruction :
   Round131RecoveryAutomaticallyIdentifiesPinnedConstruction → ⊥
 round131RecoveryDoesNotIdentifyPinnedConstruction ()
 
+allGroupsInterpretationDoesNotPaySelectedRealization :
+  AllGroupsInterpretationAutomaticallyPaysSelectedGroupRealization → ⊥
+allGroupsInterpretationDoesNotPaySelectedRealization ()
+
 data RemainingSourceNativeHostBlocker : Set where
   missingRound131RecoveredQFTAttachmentForR457 : RemainingSourceNativeHostBlocker
   missingR457LiteralPinnedConstructionIdentity : RemainingSourceNativeHostBlocker
-  missingSelectedGroupQuaternionSU2Interpretation : RemainingSourceNativeHostBlocker
+  missingSelectedGroupQuaternionSU2Realization : RemainingSourceNativeHostBlocker
 
 firstSourceNativeHostBlocker : RemainingSourceNativeHostBlocker
 firstSourceNativeHostBlocker = missingRound131RecoveredQFTAttachmentForR457
@@ -201,7 +220,7 @@ secondSourceNativeHostBlocker : RemainingSourceNativeHostBlocker
 secondSourceNativeHostBlocker = missingR457LiteralPinnedConstructionIdentity
 
 thirdSourceNativeHostBlocker : RemainingSourceNativeHostBlocker
-thirdSourceNativeHostBlocker = missingSelectedGroupQuaternionSU2Interpretation
+thirdSourceNativeHostBlocker = missingSelectedGroupQuaternionSU2Realization
 
 record CasimirSelectedQFTSourceNativeHostBoundary : Set where
   constructor casimir-selected-qft-source-native-host-boundary
@@ -217,15 +236,17 @@ record CasimirSelectedQFTSourceNativeHostBoundary : Set where
     pinnedSourceNativeSelectionCompiledFromRound131AndPinnedIdentity : Bool
     independentPinnedSourceNativeSelectionRequired : Bool
     r457LiteralPinnedConstructionIdentityRequired : Bool
-    selectedQuaternionSU2InterpretationRequired : Bool
+    selectedGroupStructureRealizationBuildsHostCompilerOwned : Bool
+    selectedGroupQuaternionSU2RealizationRequired : Bool
+    independentAllGroupsStructureInterpretationRequired : Bool
 
 open CasimirSelectedQFTSourceNativeHostBoundary public
 
 canonicalSourceNativeHostBoundary : CasimirSelectedQFTSourceNativeHostBoundary
 canonicalSourceNativeHostBoundary =
   casimir-selected-qft-source-native-host-boundary
-    true true true false true false true true true false true true
+    true true true false true false true true true false true true true false
 
 casimirSelectedQFTSourceNativeHostReading : String
 casimirSelectedQFTSourceNativeHostReading =
-  "The selected-QFT host is now reduced to actual same-object identities. Formal projection compatibility and the R457 reverse recovery equality are compiler-owned. The first live seam is the existing Round131RecoveredQFTAttachment instantiated on the literal R457 construction Y. The second is the equality Y = asLiteralYangMillsConstruction pinned. Those two inputs compile the old PinnedSourceNativeRecoverySelection, the pinned recovered-QFT attachment and—using the existing QFTRecoveryReceipt—the equality between the pinned construction and selected qftTarget. Compact simplicity is already a field of the pinned object. The remaining host seam after those identities is same-object interpretation of the selected compact-simple group as the existing quaternionic SU(2)."
+  "The selected-QFT host is reduced to genuine same-object inputs. First: Round131RecoveredQFTAttachment on the literal R457 construction. Second: equality of that same construction with the pinned physical Yang-Mills construction; these compile the old pinned-selection receipt and selected-target equality. Compact simplicity is already pinned. Third: an indexed SelectedGroupStructureRealization proving a concrete GroupStructure realizes the chosen compact-simple token and is the existing quaternionic SU(2). The old arbitrary all-groups interpretation remains compatibility-only and is not independent physical payment."
