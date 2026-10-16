@@ -12,19 +12,20 @@ module DASHI.Mathematics.Complexity.CodedFiniteUnaryCursorExact where
 --
 --   q --more/more,R--> q.
 --
--- Its exact n-phase lift therefore gives n+1 cursor states.  Reading each
--- `more` advances exactly one phase.  Phase n is quiescent by the generic phase
--- compiler.  This is the literal control spine used by the fixed-stream lookup
--- generator; stop/output links are added separately.
+-- Its exact n-phase lift therefore gives n+1 cursor states. Reading each
+-- `more` advances exactly one phase. Phase n is quiescent by the generic phase
+-- compiler. Stop/output links are added separately.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Empty using (⊥)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
+import DASHI.Mathematics.Complexity.CodedFiniteStandardModeSumExact as Mode
 import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact as Phase
 
 blankSymbol : Fin.Fin 3
@@ -36,7 +37,7 @@ moreSymbol = Fin.suc Fin.zero
 stopSymbol : Fin.Fin 3
 stopSymbol = Fin.suc (Fin.suc Fin.zero)
 
-moreNotStop : moreSymbol ≡ stopSymbol → Data.Empty.⊥
+moreNotStop : moreSymbol ≡ stopSymbol → ⊥
 moreNotStop ()
 
 cursorRule : Local.TapeRule (Fin.Fin 1) (Fin.Fin 3)
@@ -73,9 +74,7 @@ cursorSourceCode = record
 cursorCode : Nat → Coded.CodedFiniteStandardTM
 cursorCode n = Phase.phaseLiftCode cursorSourceCode n
 
-cursorFragment :
-  (n : Nat) →
-  DASHI.Mathematics.Complexity.CodedFiniteStandardModeSumExact.CodedModeFragment 3
+cursorFragment : (n : Nat) → Mode.CodedModeFragment 3
 cursorFragment n = Phase.phaseLiftFragment cursorSourceCode n
 
 cursorState :
@@ -102,7 +101,7 @@ cursorStopKeyFresh :
     (residentOccurs : Local.RuleOccurs resident (Coded.rules (cursorCode n))) →
   Local.sourceState resident ≡ cursorState n phase →
   Local.readSymbol resident ≡ stopSymbol →
-  Data.Empty.⊥
+  ⊥
 cursorStopKeyFresh n phase residentOccurs sourceEq readEq
   with Phase.phaseTablePreimage (Coded.allFin n) residentOccurs
 ... | residentPhase , original , originalOccurs , exact
@@ -111,9 +110,6 @@ cursorStopKeyFresh n phase residentOccurs sourceEq readEq
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- The runtime unary counter is now literal finite standard-TM syntax, not an
--- Agda Nat recursion.  It consumes one `more` symbol per standard edge and has
--- a fresh `stop` dispatch key at every cursor phase, including the overflow /
--- terminal phase.  A fixed finite bitstream generator can therefore attach one
--- stop/output link per phase without overriding the cursor semantics.
+-- The runtime unary counter is literal finite standard-TM syntax. It consumes
+-- one `more` symbol per standard edge and has a fresh `stop` key at every phase.
 ------------------------------------------------------------------------
