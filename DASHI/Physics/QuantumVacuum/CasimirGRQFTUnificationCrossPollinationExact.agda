@@ -140,6 +140,19 @@ finiteGRLorentzTraceIsNegativeFour :
 finiteGRLorentzTraceIsNegativeFour =
   Defocus.finiteGRStressTraceIsNegativeFour
 
+-- Consume the existing mereology identity on the exact Casimir four-diagonal
+-- fingerprint instead of re-proving the trace/active relation locally.
+casimirActiveProjectionIsTracePlusTwiceEnergyDensity :
+  Mereology.activeProjection
+    (- 1ℚ) 1ℚ 1ℚ (- (Int.+ 3 / 1))
+  ≡
+  Mereology.traceProjection
+    (- 1ℚ) 1ℚ 1ℚ (- (Int.+ 3 / 1))
+  + ((1ℚ + 1ℚ) * (- 1ℚ))
+casimirActiveProjectionIsTracePlusTwiceEnergyDensity =
+  Mereology.activeProjectionIsTracePlusTwiceTimelikePart
+    (- 1ℚ) 1ℚ 1ℚ (- (Int.+ 3 / 1))
+
 record DistinctActiveEquivalentStressFingerprints : Set where
   constructor distinct-active-equivalent-stress-fingerprints
   field
@@ -177,17 +190,50 @@ casimirConditionalRicci00 : ℚ
 casimirConditionalRicci00 =
   Defocus.ricci00TraceReversed casimirNormalizedRationalTensor4
 
+finiteGRConditionalRicci00 : ℚ
+finiteGRConditionalRicci00 =
+  Defocus.ricci00TraceReversed Cut.finiteGRStressRational
+
 casimirConditionalRicci00IsNegativeOne :
   casimirConditionalRicci00 ≡ Defocus.minusOne
 casimirConditionalRicci00IsNegativeOne = solve []
+
+finiteGRConditionalRicci00IsNegativeOne :
+  finiteGRConditionalRicci00 ≡ Defocus.minusOne
+finiteGRConditionalRicci00IsNegativeOne =
+  Defocus.finiteGRRicci00IsNegativeOne
+
+casimirAndFiniteGRShareConditionalRicci00 :
+  casimirConditionalRicci00 ≡ finiteGRConditionalRicci00
+casimirAndFiniteGRShareConditionalRicci00 =
+  trans
+    casimirConditionalRicci00IsNegativeOne
+    (sym finiteGRConditionalRicci00IsNegativeOne)
 
 casimirConditionalRaychaudhuriCurvatureContribution : ℚ
 casimirConditionalRaychaudhuriCurvatureContribution =
   Defocus.raychaudhuriCurvatureContribution casimirConditionalRicci00
 
+finiteGRConditionalRaychaudhuriCurvatureContribution : ℚ
+finiteGRConditionalRaychaudhuriCurvatureContribution =
+  Defocus.raychaudhuriCurvatureContribution finiteGRConditionalRicci00
+
 casimirConditionalRaychaudhuriCurvatureContributionIsPositiveOne :
   casimirConditionalRaychaudhuriCurvatureContribution ≡ 1ℚ
 casimirConditionalRaychaudhuriCurvatureContributionIsPositiveOne = solve []
+
+finiteGRConditionalRaychaudhuriCurvatureContributionIsPositiveOne :
+  finiteGRConditionalRaychaudhuriCurvatureContribution ≡ 1ℚ
+finiteGRConditionalRaychaudhuriCurvatureContributionIsPositiveOne =
+  Defocus.finiteGRCurvatureContributionIsPositiveOne
+
+casimirAndFiniteGRShareConditionalRaychaudhuriCurvatureContribution :
+  casimirConditionalRaychaudhuriCurvatureContribution
+  ≡ finiteGRConditionalRaychaudhuriCurvatureContribution
+casimirAndFiniteGRShareConditionalRaychaudhuriCurvatureContribution =
+  trans
+    casimirConditionalRaychaudhuriCurvatureContributionIsPositiveOne
+    (sym finiteGRConditionalRaychaudhuriCurvatureContributionIsPositiveOne)
 
 finiteGRDefocusingWitnessReused :
   FiniteDefocus.FiniteDefocusingSolutionWitness
@@ -195,7 +241,30 @@ finiteGRDefocusingWitnessReused =
   FiniteDefocus.canonicalFiniteDefocusingSolutionWitness
 
 ------------------------------------------------------------------------
--- 4. Vacuum-Lambda ray discriminator.
+-- 4. Localized-source functional reuse without importing its geometry.
+--
+-- The existing one-cell localized active-mass functional also evaluates the
+-- normalized Casimir stress to -2.  This is only a diagnostic functional
+-- equality.  The live localized GR route additionally requires a stationary,
+-- weak-field, spherical exterior adapter; a parallel-plate Casimir system does
+-- not acquire those assumptions from the scalar equality.
+------------------------------------------------------------------------
+
+casimirUnitWeightActiveMassDiagnostic : ℚ
+casimirUnitWeightActiveMassDiagnostic =
+  Localized.localizedActiveMass casimirNormalizedRationalTensor4
+
+casimirUnitWeightActiveMassIsNegativeTwo :
+  casimirUnitWeightActiveMassDiagnostic ≡ negativeTwo
+casimirUnitWeightActiveMassIsNegativeTwo = solve []
+
+localizedGRAssumptionsReusedAsBoundary :
+  Localized.LocalizedWeakFieldActiveMassAssumptions
+localizedGRAssumptionsReusedAsBoundary =
+  Localized.canonicalLocalizedWeakFieldAssumptions
+
+------------------------------------------------------------------------
+-- 5. Vacuum-Lambda ray discriminator.
 --
 -- The finite GR tensor lies on T=-lambda g.  Casimir does not share that
 -- isotropic fingerprint: it is traceless and anisotropic.  Equal active stress
@@ -209,7 +278,7 @@ finiteGRIsNegativeMetricWitness :
 finiteGRIsNegativeMetricWitness = Vacuum.finiteGRStressIsNegativeMetric
 
 ------------------------------------------------------------------------
--- 5. Unification handoff.
+-- 6. Unification handoff.
 --
 -- The existing same-candidate/common-action machinery remains the correct
 -- consumer.  A future Casimir promotion must explicitly identify this exact
@@ -262,7 +331,7 @@ postMergeGRQFTStillNotTerminallyPromoted =
   PostMerge.postMergeTerminalPromotionStillFalse
 
 ------------------------------------------------------------------------
--- 6. Promotion firewalls and machine-readable boundary.
+-- 7. Promotion firewalls and machine-readable boundary.
 ------------------------------------------------------------------------
 
 data SameActiveProjectionAutomaticallyIdentifiesStressTensor : Set where
@@ -299,6 +368,7 @@ record CasimirGRQFTCrossPollinationBoundary : Set where
     lorentzTraceSharedWithFiniteGR : Bool
     conditionalTraceReversedRicciCompilerReused : Bool
     conditionalRaychaudhuriCurvatureCompilerReused : Bool
+    localizedUnitWeightActiveMassFunctionalReused : Bool
     vacuumLambdaRayUsedAsDiscriminator : Bool
     finiteGRDefocusingWitnessReusedAsComparison : Bool
 
@@ -317,9 +387,9 @@ canonicalCasimirGRQFTCrossPollinationBoundary :
   CasimirGRQFTCrossPollinationBoundary
 canonicalCasimirGRQFTCrossPollinationBoundary =
   casimir-grqft-cross-pollination-boundary
-    true true false true true true true
+    true true false true true true true true
     false false false false true true false true
 
 casimirGRQFTCrossPollinationReading : String
 casimirGRQFTCrossPollinationReading =
-  "Casimir and the existing finite GRQFT vacuum fixture share the normalized active-stress projection -2, so the existing trace-reversal compiler gives the same conditional R_00=-1 / Raychaudhuri curvature contribution +1 when the Casimir tensor is explicitly inserted under the same kappa=1, Lambda=0 convention. They are nevertheless different stress tensors: Casimir is diag(-1,+1,+1,-3) with Lorentz trace 0, while the finite GR vacuum fixture is diag(+1,-1,-1,-1) with trace -4 and lies on the isotropic T=-lambda g vacuum-stress ray. Therefore no finite-GR defocusing solution, spherical localized-source adapter, cosmological-Lambda interpretation, same-candidate QFT/GR weld, common-action variation, G6 GR section, or unified quantum-gravity promotion transfers by projection equality alone."
+  "Casimir and the existing finite GRQFT vacuum fixture share the normalized active-stress projection -2. Under the existing declared kappa=1, Lambda=0 trace-reversal compiler this yields the same conditional R_00=-1 and Raychaudhuri curvature contribution +1; the localized unit-weight active-mass functional also returns -2. These are consumer/projection equalities, not source identity. Casimir is diag(-1,+1,+1,-3) with Lorentz trace 0, whereas the finite GR vacuum fixture is diag(+1,-1,-1,-1) with trace -4 and lies on the isotropic T=-lambda g vacuum-stress ray. Therefore no finite-GR same-object defocusing solution, stationary spherical localized-source adapter, cosmological-Lambda interpretation, same-candidate QFT/GR weld, common-action variation, G6 GR section, or unified quantum-gravity promotion transfers by scalar/projection equality alone."
