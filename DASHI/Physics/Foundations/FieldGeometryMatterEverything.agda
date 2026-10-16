@@ -28,6 +28,8 @@ import DASHI.Physics.CondensedMatter.MATBGInteractingTHF2026SourceExact
 import DASHI.Physics.CondensedMatter.MATBGInteractingTHF2026SourceValidation
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorics2026Exact
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorics2026Validation
+import DASHI.Physics.CondensedMatter.MATBGGeometryCaloricUpperBoundReceiptExact
+import DASHI.Physics.CondensedMatter.MATBGGeometryCaloricUpperBoundValidation
 import DASHI.Physics.Foundations.GeneralizedCaloricCycleExact
 import DASHI.Physics.Foundations.GeneralizedCaloricCycleValidation
 
@@ -35,6 +37,8 @@ import DASHI.Physics.Foundations.QuantumStressEnergyEngineeringBridgeExact
 import DASHI.Physics.Foundations.QuantumStressEnergyEngineeringValidation
 import DASHI.Physics.Foundations.QuantumStressEnergySourceWeldExact
 import DASHI.Physics.Foundations.QuantumStressEnergySourceWeldValidation
+import DASHI.Physics.Foundations.CasimirGravityScalingReceiptExact
+import DASHI.Physics.Foundations.CasimirGravityScalingValidation
 
 import DASHI.Physics.Foundations.PrecisionThrustClosureExact
 import DASHI.Physics.Foundations.PrecisionThrustClosureValidation
