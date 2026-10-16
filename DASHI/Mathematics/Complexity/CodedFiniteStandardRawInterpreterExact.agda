@@ -2,11 +2,6 @@ module DASHI.Mathematics.Complexity.CodedFiniteStandardRawInterpreterExact where
 
 ------------------------------------------------------------------------
 -- EXECUTABLE UNIVERSAL SEMANTICS FOR THE UNTYPED SELF-DELIMITING MACHINE VIEW
---
--- This is not yet a standard-TM implementation.  It removes higher-order
--- machine semantics from the universal route: decoded program text is ordinary
--- Nat/List data, first-match dispatch is an explicit recursive scan, and run
--- iteration is explicit Nat recursion.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -15,6 +10,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; nothing; just)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 
+import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.CodedFiniteStandardSelfDelimitingCodeExact as Code
 
 natEqual : Nat → Nat → Bool
@@ -51,6 +47,24 @@ record RawConfiguration : Set where
 
 open RawConfiguration public
 
+applyMoveRight :
+  Code.RawMachine → List Nat → List Nat → Code.RawRule →
+  Maybe RawConfiguration
+applyMoveRight machine left [] rule =
+  just
+    (raw-configuration
+      (Code.write rule ∷ left)
+      (Code.target rule)
+      (Code.blank machine)
+      [])
+applyMoveRight machine left (next ∷ rest) rule =
+  just
+    (raw-configuration
+      (Code.write rule ∷ left)
+      (Code.target rule)
+      next
+      rest)
+
 applyRawRule :
   Code.RawMachine →
   RawConfiguration →
@@ -74,24 +88,6 @@ applyRawRule machine (raw-configuration [] q a right) rule
           right)
 ... | suc (suc zero) =
       applyMoveRight machine [] right rule
-  where
-    applyMoveRight :
-      Code.RawMachine → List Nat → List Nat → Code.RawRule →
-      Maybe RawConfiguration
-    applyMoveRight machine left [] rule =
-      just
-        (raw-configuration
-          (Code.write rule ∷ left)
-          (Code.target rule)
-          (Code.blank machine)
-          [])
-    applyMoveRight machine left (next ∷ rest) rule =
-      just
-        (raw-configuration
-          (Code.write rule ∷ left)
-          (Code.target rule)
-          next
-          rest)
 ... | suc (suc (suc invalid)) = nothing
 applyRawRule machine (raw-configuration (near ∷ left) q a right) rule
   with Code.direction rule
@@ -111,24 +107,6 @@ applyRawRule machine (raw-configuration (near ∷ left) q a right) rule
           right)
 ... | suc (suc zero) =
       applyMoveRight machine (near ∷ left) right rule
-  where
-    applyMoveRight :
-      Code.RawMachine → List Nat → List Nat → Code.RawRule →
-      Maybe RawConfiguration
-    applyMoveRight machine left [] rule =
-      just
-        (raw-configuration
-          (Code.write rule ∷ left)
-          (Code.target rule)
-          (Code.blank machine)
-          [])
-    applyMoveRight machine left (next ∷ rest) rule =
-      just
-        (raw-configuration
-          (Code.write rule ∷ left)
-          (Code.target rule)
-          next
-          rest)
 ... | suc (suc (suc invalid)) = nothing
 
 rawNext : Code.RawMachine → RawConfiguration → Maybe RawConfiguration
@@ -159,15 +137,9 @@ runSelfDelimitedCode steps bits initial
 ... | just (machine , suffix) =
       iterateRaw steps machine initial
 
-------------------------------------------------------------------------
--- Same syntax round-trip gives a direct execution identity for actual coded
--- machines.  This is still RawMachine semantics; typed standard-TM fidelity is
--- the next theorem, not assumed here.
-------------------------------------------------------------------------
-
 runActualCodeReducesToRawView :
   (steps : Nat)
-  (code : DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact.CodedFiniteStandardTM)
+  (code : Coded.CodedFiniteStandardTM)
   (initial : RawConfiguration) →
   runSelfDelimitedCode
     steps
@@ -182,8 +154,7 @@ runActualCodeReducesToRawView steps code initial
 -- MAX-CUT CONSEQUENCE
 --
 -- The universal-interpreter route now has an executable first-order semantic
--- kernel over the self-delimiting machine code: parse, first-match dispatch,
--- tape update and bounded iteration.  Remaining payments are (1) fidelity of
--- this raw semantics to the typed standard machine for actual codes, and (2)
--- compilation of this fixed recursion into one literal coded standard TM.
+-- kernel over self-delimiting machine code: parse, first-match dispatch, tape
+-- update and bounded iteration. Remaining payments are typed-standard fidelity
+-- on actual codes and compilation of this fixed recursion into one literal TM.
 ------------------------------------------------------------------------
