@@ -19,6 +19,7 @@ import DASHI.Reasoning.TrialecticWavePhaseTwoCellCocycleExact as Two
 import DASHI.Reasoning.TrialecticPolicyIndexedAllDepthIterationExact as Depth
 import DASHI.Reasoning.TrialecticWavePhaseHigherStackExact as Higher
 import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafExact as FiniteHyper
+import DASHI.Reasoning.TrialecticRelationalSiteDepthTwoExact as SiteDepth
 
 historicalBoundary : Historical.TrialecticHigherDescentPromotionBoundary
 historicalBoundary = Historical.canonicalTrialecticHigherDescentPromotionBoundary
@@ -44,6 +45,9 @@ higherBoundary = Higher.canonicalTrialecticWavePhaseHigherStackBoundary
 finiteHyperBoundary : FiniteHyper.TrialecticFiniteTriadicHypersheafBoundary
 finiteHyperBoundary = FiniteHyper.canonicalTrialecticFiniteTriadicHypersheafBoundary
 
+siteDepthBoundary : SiteDepth.TrialecticRelationalSiteDepthBoundary
+siteDepthBoundary = SiteDepth.canonicalTrialecticRelationalSiteDepthBoundary
+
 record TrialecticHigherDescentMaxCutBoundary : Set where
   constructor trialectic-higher-descent-max-cut-boundary
   field
@@ -60,6 +64,7 @@ record TrialecticHigherDescentMaxCutBoundary : Set where
     certifiedPrestackPaid : Bool
     certifiedEffectiveStackPaid : Bool
     certifiedHigherStackPaid : Bool
+    siteNondegenerateNerveDimensionAtMostTwoPaid : Bool
     finiteOneTruncatedHyperdescentPaid : Bool
     certifiedFiniteTriadicHypersheafPaid : Bool
     arbitraryInfinityHypercoverDescentPaid : Bool
@@ -75,6 +80,7 @@ canonicalTrialecticHigherDescentMaxCutBoundary :
   TrialecticHigherDescentMaxCutBoundary
 canonicalTrialecticHigherDescentMaxCutBoundary =
   trialectic-higher-descent-max-cut-boundary
+    true
     true
     true
     true
@@ -112,6 +118,10 @@ effectiveStackReceipt = refl
 higherStackReceipt :
   certifiedHigherStackPaid canonicalTrialecticHigherDescentMaxCutBoundary ≡ true
 higherStackReceipt = refl
+
+siteDepthTwoReceipt :
+  SiteDepth.nondegenerateNerveDimensionAtMostTwo siteDepthBoundary ≡ true
+siteDepthTwoReceipt = refl
 
 finiteHypersheafReceipt :
   certifiedFiniteTriadicHypersheafPaid canonicalTrialecticHigherDescentMaxCutBoundary ≡ true
