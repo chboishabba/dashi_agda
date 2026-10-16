@@ -9,3 +9,4 @@ open import DASHI.Unified.TOEArithmeticCMRealizationExact public
 open import DASHI.Unified.TOEQuantumMatterRealizationExact public
 open import DASHI.Unified.TOEOpenAIMathAcceleratorExact public
 open import DASHI.Unified.DASHITOETerminalMaxCutExact public
+open import DASHI.Unified.TOEImplementationStatus public
