@@ -36,6 +36,9 @@ entropy-maxwell-kernel-executed = refl
 entropy-bytes-still-open : A.entropySourceDataBytes A.currentTerminalExecutionAddendum ≡ T.openSameObjectPayment
 entropy-bytes-still-open = refl
 
+casimir-ideal-sheet-scaling-is-numerical : A.casimirIdealSheetScalingCeiling A.currentTerminalExecutionAddendum ≡ T.numericallyExecuted
+casimir-ideal-sheet-scaling-is-numerical = refl
+
 continuous-measure-is-not-discrete-producer : A.continuousMeasureCountsAsDiscreteProducer A.currentTerminalExecutionAddendum ≡ false
 continuous-measure-is-not-discrete-producer = refl
 
@@ -53,6 +56,9 @@ route-is-not-byte-acquisition = refl
 
 synthetic-maxwell-is-not-measured-replay : A.entropyMaxwellSyntheticFixtureCountsAsMeasuredReplay A.currentTerminalExecutionAddendum ≡ false
 synthetic-maxwell-is-not-measured-replay = refl
+
+ideal-casimir-scaling-is-not-physical-macroscopic-scaling : A.idealSheetScalingCountsAsPhysicalMacroscopicScaling A.currentTerminalExecutionAddendum ≡ false
+ideal-casimir-scaling-is-not-physical-macroscopic-scaling = refl
 
 scientist-acquisition-is-sibling-owned : A.scientistFrontierDedicatedAcquisitionOwner A.currentTerminalExecutionAddendum ≡ T.blockedByUnmergedSibling
 scientist-acquisition-is-sibling-owned = refl
