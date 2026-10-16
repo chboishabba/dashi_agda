@@ -19,6 +19,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119CosmologyE1SignedSymmetricTangentExact as Signed
 import DASHI.Physics.Foundations.CMP119CosmologyE1SignedReadoutCovarianceExact as Readout
+import DASHI.Physics.Foundations.CMP119CosmologyE1HypercubicSignedAxisActionExact as Axis
 import DASHI.Physics.Foundations.CMP119CosmologyP1InvariantPathDerivativeCovarianceExact as P1
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004MExact as Preferred
 import DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact as Hyper
@@ -35,8 +36,7 @@ record A1InvariantPathSourcePackage (Configuration : Set) : Set₁ where
       P1.InvariantSignedBasisPath
         Configuration
         Hyper.HypercubicGenerator
-        (λ generator →
-          DASHI.Physics.Foundations.CMP119CosmologyE1HypercubicSignedAxisActionExact.hypercubicSignedAxisAction generator)
+        Axis.hypercubicSignedAxisAction
 
 open A1InvariantPathSourcePackage public
 
@@ -55,7 +55,7 @@ signedB4ReadoutCovariant :
     (realComponentReadout source
       (P1.actConfiguration (geometry source) generator configuration))
     (Signed.actSignedComponent
-      (DASHI.Physics.Foundations.CMP119CosmologyE1HypercubicSignedAxisActionExact.hypercubicSignedAxisAction generator)
+      (Axis.hypercubicSignedAxisAction generator)
       component)
   ≡
   realComponentReadout source configuration component
