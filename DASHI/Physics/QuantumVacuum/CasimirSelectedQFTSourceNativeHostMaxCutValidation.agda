@@ -30,9 +30,13 @@ independentProjectionCompatibilityNotRequiredRegression :
   M.independentProjectionCompatibilityPaymentRequired M.canonicalSourceNativeHostBoundary ≡ false
 independentProjectionCompatibilityNotRequiredRegression = refl
 
-r457SameObjectAttachmentStillRequiredRegression :
-  M.r457LegacyRecoverySameObjectAttachmentRequired M.canonicalSourceNativeHostBoundary ≡ true
-r457SameObjectAttachmentStillRequiredRegression = refl
+r457RecoveryEqualityCompilerPaidRegression :
+  M.r457RecoveryEqualityCompiledFromRound131Attachment M.canonicalSourceNativeHostBoundary ≡ true
+r457RecoveryEqualityCompilerPaidRegression = refl
+
+round131RecoveredAttachmentRequiredRegression :
+  M.round131RecoveredQFTAttachmentForR457Required M.canonicalSourceNativeHostBoundary ≡ true
+round131RecoveredAttachmentRequiredRegression = refl
 
 pinnedSelectionStillRequiredRegression :
   M.pinnedSourceNativeSelectionRequired M.canonicalSourceNativeHostBoundary ≡ true
@@ -43,7 +47,7 @@ quaternionInterpretationStillRequiredRegression :
 quaternionInterpretationStillRequiredRegression = refl
 
 firstSourceNativeHostBlockerRegression :
-  M.firstSourceNativeHostBlocker ≡ M.missingR457LegacyRecoverySameObjectAttachment
+  M.firstSourceNativeHostBlocker ≡ M.missingRound131RecoveredQFTAttachmentForR457
 firstSourceNativeHostBlockerRegression = refl
 
 secondSourceNativeHostBlockerRegression :
