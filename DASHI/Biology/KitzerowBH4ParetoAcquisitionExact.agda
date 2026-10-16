@@ -24,25 +24,26 @@ open AcquisitionTarget public
 stanfordContactArtifact : AcquisitionTarget
 stanfordContactArtifact = acquisitionTarget
   "Stanford 2023 direct-contact artifact"
-  "high: resolves exposure status for a major circuit-level comparison"
-  "high: distinguishes originator report from inspected contact provenance"
+  "high for exposure chronology: authentication could upgrade an originator-reported pre-publication contact to inspected exposure evidence"
+  "does not close derivation: authenticated exposure/access remains distinct from documented use"
   "primary correspondence / timestamped institutional artifact"
   "unknown; acquire from public archive or originator-provided artifact with provenance"
   Discovery.residualObservation false refl
 
 brazilCorrespondenceArtifact : AcquisitionTarget
 brazilCorrespondenceArtifact = acquisitionTarget
-  "Brazil review journal/author correspondence"
-  "high: resolves what was communicated, when, and by whom"
-  "high: separates chronology/contact from derivation allegation"
+  "Brazil review post-publication journal/author correspondence"
+  "medium for derivation, high for later dispute/response chronology: if the contact is post-publication as reported, it cannot establish exposure before the already-published review"
+  "authenticates who communicated what and when after publication; derivation requires a separate earlier exposure/manuscript lineage"
   "primary correspondence / journal response"
-  "unknown" Discovery.residualObservation false refl
+  "unknown; bounded value means acquire if response chronology matters, not as a substitute for pre-publication derivation evidence"
+  Discovery.residualObservation false refl
 
 iaccExposureArtifact : AcquisitionTarget
 iaccExposureArtifact = acquisitionTarget
   "MedMaps/IACC exposure-chain artifact"
-  "medium-high: resolves claimed institutional awareness"
-  "high: contact and role chronology"
+  "medium-high: can resolve claimed institutional awareness once exact temporal order is authenticated"
+  "pays exposure/contact chronology only; direct use and derivation remain separate coordinates"
   "primary email, meeting record or institutional acknowledgement"
   "unknown" Discovery.residualObservation false refl
 
@@ -58,11 +59,11 @@ sameObjectBH4Experiment =
 
 manuscriptHistoryTargets : AcquisitionTarget
 manuscriptHistoryTargets = acquisitionTarget
-  "comparison-paper manuscript/preprint histories"
-  "high where priority or access timing is disputed"
-  "high: pins what existed before/after alleged exposure"
-  "publisher history, preprint versions, archived drafts where public"
-  "low-medium public acquisition cost"
+  "comparison-paper pre-publication manuscript/exposure lineage"
+  "very high for derivation questions: a versioned manuscript change or authenticated earlier exposure trace can connect an upstream source to a later manifestation where mere chronology/contact cannot"
+  "distinguishes quotation/revision/derivation from public availability, structural convergence, downstream republication and post-publication complaint correspondence"
+  "versioned preprints/manuscripts/submission history, archived drafts, or authenticated pre-publication source-to-recipient correspondence with exact locators"
+  "low-medium where public version history exists; potentially high where primary private artifacts are required"
   Discovery.residualObservation false refl
 
 record ParetoAcquisitionFrontier : Set where
@@ -86,6 +87,6 @@ open ParetoAcquisitionFrontier public
 canonicalKitzerowAcquisitionFrontier : ParetoAcquisitionFrontier
 canonicalKitzerowAcquisitionFrontier =
   paretoAcquisitionFrontier
-    (stanfordContactArtifact ∷ brazilCorrespondenceArtifact ∷ iaccExposureArtifact ∷ sameObjectBH4Experiment ∷ manuscriptHistoryTargets ∷ [])
+    (stanfordContactArtifact ∷ manuscriptHistoryTargets ∷ iaccExposureArtifact ∷ brazilCorrespondenceArtifact ∷ sameObjectBH4Experiment ∷ [])
     false refl false refl false refl true refl false refl
-    "The scientific target is no longer generic BH4 transport, tissue uptake, TH/TPH responsiveness or extracellular neuromodulation. Those coordinates are partially/directly paid. The max-value residual is one donor-resolved target-neural experiment coupling molecular BH4/BH2 transfer to simultaneous branch/redox mediation while retaining route, transporter, compartment, cell/region and state history. Selection remains a work queue, not a truth or priority ranking."
+    "Scientific and attribution acquisition remain separate Pareto axes. The scientific max-value residual is donor-resolved target-neural BH4/BH2 transfer joined to simultaneous branch/redox mediation. For attribution, the hbomberguy/republication/provenance cross-pollination raises pre-publication manuscript/exposure lineage above mere downstream publication count or post-publication correspondence: exposure is not derivation, and later contact cannot establish earlier access. Selection remains a work queue, not a truth, misconduct or legal ranking."
