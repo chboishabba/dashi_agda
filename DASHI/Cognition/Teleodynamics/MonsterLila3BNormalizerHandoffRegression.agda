@@ -44,6 +44,27 @@ _ = refl
 _ : H.fin90IsPrimaryRepresentationObject H.canonicalMonsterLila3BNormalizerHandoff ≡ false
 _ = refl
 
+_ : H.currentMasterLinearHomSpaceOwnerPresent H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.currentMasterPureFin90PermutationRouteRefuted H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.currentMasterSourcePaidCharacterAvailable H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.currentMasterActualEquivariantHomCarrierConstructed H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
+_ : H.currentMasterActualLinearEvaluationInverseConstructed H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
+_ : H.currentMasterActualCocycleLiftInstantiated H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
+_ : H.currentMasterActualLinearMultiplicityRepresentationPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
 _ : H.actualMonsterLilaSelectedWordFitPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
 _ = refl
 
