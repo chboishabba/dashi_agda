@@ -1,14 +1,9 @@
 module DASHI.Physics.Closure.MonsterC3EntropyGravityValidation where
 
 open import DASHI.Core.Prelude
-import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as StateCount
-import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact as Uniform
-import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
-import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact as Authority
-import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
-import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact as ZetaCross
-import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact as Chemistry
+
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3Electronic
+import DASHI.Physics.Chemistry.AmmoniaC3RegularRepresentationExact as NH3Regular
 import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionExact as Hamiltonian
 import DASHI.Physics.Chemistry.AmmoniaSTO3GFCIExact as FCI
 import DASHI.Physics.Chemistry.AmmoniaSCIReleasedArtifactExact as SCIArtifact
@@ -16,46 +11,118 @@ import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact as GroundC3
 import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact as MonsterProbe
 import DASHI.Physics.Chemistry.AmmoniaMonster3BC3QuotientLiftExact as MonsterC3
 import DASHI.Physics.Chemistry.AmmoniaMonster3BPhaseQuotientNonFactorabilityExact as PhaseNF
+import DASHI.Physics.Chemistry.AmmoniaMonster3BRefinedStateLiftCompilerExact as RefinedLift
+import DASHI.Physics.Chemistry.Atomic369Kernel6HeisenbergBridgeExact as Kernel6
+import DASHI.Physics.Chemistry.AmmoniaMonster3BNative369FineCarrierExact as Native369
 import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact as H3C3
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact as Abstraction
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact as Abstraction369
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact as Chemistry
+
+import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as StateCount
+import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact as Uniform
+import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleExact as NativeEnsemble
+import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact as ZetaCross
+import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
+import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact as Authority
+import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
 import DASHI.Physics.Closure.MonsterC3EntropyGravityMaxCutExact as MaxCut
 
-fineMonsterStatesRemainPresent : StateCount.MonsterC3StateCountingReceipt.identityVisibleStates StateCount.canonicalMonsterC3StateCountingReceipt ≡ 196883
-fineMonsterStatesRemainPresent = refl
-nontrivialPhaseSeesResidual53 : StateCount.MonsterC3StateCountingReceipt.nontrivialPhaseVisibleStates StateCount.canonicalMonsterC3StateCountingReceipt ≡ 53
-nontrivialPhaseSeesResidual53 = refl
-literalThreePhasesAlreadyShareOneAction : ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.literalThreePhaseFibresUseOneCentralAction ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ true
-literalThreePhasesAlreadyShareOneAction = refl
-singleLiteralProducerStillUninhabited : ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.actualSingleProducerInhabited ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ false
-singleLiteralProducerStillUninhabited = refl
-ammoniaGroundStateIs1A1 : NH3Electronic.NeutralElectronicReceipt.groundStateLabel NH3Electronic.canonicalNeutralElectronicReceipt ≡ "1A1"
-ammoniaGroundStateIs1A1 = refl
-sameObjectHamiltonianSkeletonPaid : Hamiltonian.HamiltonianWavefunctionBoundary.sameObjectMolecularHamiltonianSkeletonPaid Hamiltonian.canonicalHamiltonianWavefunctionBoundary ≡ true
-sameObjectHamiltonianSkeletonPaid = refl
-literalOccupationStateHasTenElectrons : Hamiltonian.NH3OccupationState.occupiedSpinOrbitalCount Hamiltonian.canonicalNH3OccupationState ≡ 10
-literalOccupationStateHasTenElectrons = refl
-sto3gFCIDiagonalizationPaid : FCI.STO3GFCIBoundary.sourceBackedFCIDiagonalizationPaid FCI.canonicalSTO3GFCIBoundary ≡ true
-sto3gFCIDiagonalizationPaid = refl
-sto3gFCIEnergyMagnitudeIs555245 : FCI.NH3STO3GFCIReceipt.fciEnergyTenThousandthHartree FCI.canonicalNH3STO3GFCIReceipt ≡ 555245
-sto3gFCIEnergyMagnitudeIs555245 = refl
-authorReleasedMatrixIdentityPaid : SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
-authorReleasedMatrixIdentityPaid = refl
-authorReleasedMatrixDimension64 : SCIArtifact.ReleasedSelectedCIArtifact.matrixDimension SCIArtifact.nh3SelectedCI64Artifact ≡ 64
-authorReleasedMatrixDimension64 = refl
-authorReleasedSelectedEnergyNanoHartree : SCIArtifact.ReleasedSelectedCIArtifact.selectedGroundEnergyNanoHartreeMagnitude SCIArtifact.nh3SelectedCI64Artifact ≡ 55517555010
-authorReleasedSelectedEnergyNanoHartree = refl
-paperBenchmarkAndReleasedArtifactRemainDistinct : SCIArtifact.ReleasedArtifactBoundary.paperBenchmarkAndArtifactAreSameNumericalObject SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
-paperBenchmarkAndReleasedArtifactRemainDistinct = refl
-authorMatrixStillNotRediagonalizedByDASHI : SCIArtifact.ReleasedArtifactBoundary.matrixIndependentlyRediagonalizedByDASHI SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
-authorMatrixStillNotRediagonalizedByDASHI = refl
-groundConfigurationC3ActionPaid : GroundC3.GroundStateC3Boundary.literalGroundConfigurationC3ActionPaid GroundC3.canonicalGroundStateC3Boundary ≡ true
-groundConfigurationC3ActionPaid = refl
-groundDeterminantPhaseIsInvariant : GroundC3.groundDeterminantPhase ≡ NH3Electronic.invariant
-groundDeterminantPhaseIsInvariant = refl
+------------------------------------------------------------------------
+-- Monster/C3 and state-count regressions.
+------------------------------------------------------------------------
 
-ammoniaMonsterPhaseCoordinateMapPaid : MonsterProbe.AmmoniaMonsterProbeBoundary.c3PhaseCoordinateMapPaid MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ true
-ammoniaMonsterPhaseCoordinateMapPaid = refl
+fineMonsterStatesRemainPresent :
+  StateCount.MonsterC3StateCountingReceipt.identityVisibleStates
+    StateCount.canonicalMonsterC3StateCountingReceipt ≡ 196883
+fineMonsterStatesRemainPresent = refl
+
+nontrivialPhaseSeesResidual53 :
+  StateCount.MonsterC3StateCountingReceipt.nontrivialPhaseVisibleStates
+    StateCount.canonicalMonsterC3StateCountingReceipt ≡ 53
+nontrivialPhaseSeesResidual53 = refl
+
+literalThreePhasesAlreadyShareOneAction :
+  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.literalThreePhaseFibresUseOneCentralAction
+    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ true
+literalThreePhasesAlreadyShareOneAction = refl
+
+selected3BFrontierCompressedToTwoSourceLeaves :
+  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.selected3BOnlyLinearRetractionAndProjectedActionRemain
+    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ true
+selected3BFrontierCompressedToTwoSourceLeaves = refl
+
+selected3BRetractionStillUnpaid :
+  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.selected3BLinearRetractionPaid
+    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ false
+selected3BRetractionStillUnpaid = refl
+
+selected3BProjectedActionStillUnpaid :
+  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.selected3BProjectedActionPaid
+    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ false
+selected3BProjectedActionStillUnpaid = refl
+
+------------------------------------------------------------------------
+-- Chemistry Hamiltonian/state regressions.
+------------------------------------------------------------------------
+
+ammoniaGroundStateIs1A1 :
+  NH3Electronic.NeutralElectronicReceipt.groundStateLabel
+    NH3Electronic.canonicalNeutralElectronicReceipt ≡ "1A1"
+ammoniaGroundStateIs1A1 = refl
+
+sameObjectHamiltonianSkeletonPaid :
+  Hamiltonian.HamiltonianWavefunctionBoundary.sameObjectMolecularHamiltonianSkeletonPaid
+    Hamiltonian.canonicalHamiltonianWavefunctionBoundary ≡ true
+sameObjectHamiltonianSkeletonPaid = refl
+
+literalOccupationStateHasTenElectrons :
+  Hamiltonian.NH3OccupationState.occupiedSpinOrbitalCount
+    Hamiltonian.canonicalNH3OccupationState ≡ 10
+literalOccupationStateHasTenElectrons = refl
+
+sto3gFCIDiagonalizationPaid :
+  FCI.STO3GFCIBoundary.sourceBackedFCIDiagonalizationPaid
+    FCI.canonicalSTO3GFCIBoundary ≡ true
+sto3gFCIDiagonalizationPaid = refl
+
+sto3gFCIEnergyMagnitudeIs555245 :
+  FCI.NH3STO3GFCIReceipt.fciEnergyTenThousandthHartree
+    FCI.canonicalNH3STO3GFCIReceipt ≡ 555245
+sto3gFCIEnergyMagnitudeIs555245 = refl
+
+authorReleasedMatrixIdentityPaid :
+  SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid
+    SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
+authorReleasedMatrixIdentityPaid = refl
+
+authorReleasedMatrixDimension64 :
+  SCIArtifact.ReleasedSelectedCIArtifact.matrixDimension
+    SCIArtifact.nh3SelectedCI64Artifact ≡ 64
+authorReleasedMatrixDimension64 = refl
+
+authorMatrixStillNotRediagonalizedByDASHI :
+  SCIArtifact.ReleasedArtifactBoundary.matrixIndependentlyRediagonalizedByDASHI
+    SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
+authorMatrixStillNotRediagonalizedByDASHI = refl
+
+groundConfigurationC3ActionPaid :
+  GroundC3.GroundStateC3Boundary.literalGroundConfigurationC3ActionPaid
+    GroundC3.canonicalGroundStateC3Boundary ≡ true
+groundConfigurationC3ActionPaid = refl
+
+------------------------------------------------------------------------
+-- Exact NH3 <-> Monster quotient and native-369 refinement.
+------------------------------------------------------------------------
+
+nh3A1PlusEIsRegularC3 :
+  NH3Regular.RegularC3CrossDomainBoundary.nh3A1PlusERestrictsToOneRegularC3
+    NH3Regular.canonicalRegularC3CrossDomainBoundary ≡ true
+nh3A1PlusEIsRegularC3 = refl
+
+nh3RegularBlockCancelsAtGenerator :
+  NH3Regular.ammoniaA1PlusEGeneratorAmplitude ≡ NH3Regular.zeroAmplitude
+nh3RegularBlockCancelsAtGenerator = NH3Regular.ammoniaA1PlusEGeneratorCancels
 
 ammoniaMonsterC3GroupLawIntertwinerPaid :
   MonsterC3.C3QuotientLiftBoundary.c3GroupLawIntertwiningPaid
@@ -77,44 +144,133 @@ phaseCannotRecoverMonsterMultiplicityPaid :
     PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
 phaseCannotRecoverMonsterMultiplicityPaid = refl
 
-nontrivialMonsterActionStillUnpaid : MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
+refinedMonsterRecognitionCompilerPaid :
+  RefinedLift.RefinedStateLiftBoundary.actualRecognitionLiftCompilerPaid
+    RefinedLift.canonicalRefinedStateLiftBoundary ≡ true
+refinedMonsterRecognitionCompilerPaid = refl
+
+atomicKernel6HeisenbergCarrierPaid :
+  Kernel6.Kernel6HeisenbergBoundary.kernel6HeisenbergCarrierIsomorphismPaid
+    Kernel6.canonicalKernel6HeisenbergBoundary ≡ true
+atomicKernel6HeisenbergCarrierPaid = refl
+
+fullMonsterZetaModelHasNative369Chart :
+  Native369.Native369FineCarrierBoundary.fullMonsterZetaModelHasNative369CarrierChart
+    Native369.canonicalNative369FineCarrierBoundary ≡ true
+fullMonsterZetaModelHasNative369Chart = refl
+
+actualZetaRecognitionComposesWithNative369 :
+  Native369.Native369FineCarrierBoundary.actualZetaRecognitionComposesWithNative369Chart
+    Native369.canonicalNative369FineCarrierBoundary ≡ true
+actualZetaRecognitionComposesWithNative369 = refl
+
+physicalNH3FineCoordinateStillUnpaid :
+  Native369.Native369FineCarrierBoundary.physicalNH3StateToNative369FineCoordinatePaid
+    Native369.canonicalNative369FineCarrierBoundary ≡ false
+physicalNH3FineCoordinateStillUnpaid = refl
+
+nontrivialMonsterActionStillUnpaid :
+  MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid
+    MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
 nontrivialMonsterActionStillUnpaid = refl
-proofRelevantC3ResolvedReactionPaid : H3C3.C3ResolvedH3AmmoniaBoundary.fullProofRelevantC3ResolvedReactionTransitionPaid H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
+
+------------------------------------------------------------------------
+-- Reaction regressions.
+------------------------------------------------------------------------
+
+proofRelevantC3ResolvedReactionPaid :
+  H3C3.C3ResolvedH3AmmoniaBoundary.fullProofRelevantC3ResolvedReactionTransitionPaid
+    H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
 proofRelevantC3ResolvedReactionPaid = refl
-sameReactionThermochemicalDifferencePaid : H3C3.C3ResolvedH3AmmoniaBoundary.sameReactionThermochemicalDifferencePaid H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
-sameReactionThermochemicalDifferencePaid = refl
-protonTransferExothermicityMagnitudeIs4313Tenths : H3C3.reactionExothermicityMagnitudeTenthsKJPerMol ≡ 4313
+
+protonTransferExothermicityMagnitudeIs4313Tenths :
+  H3C3.reactionExothermicityMagnitudeTenthsKJPerMol ≡ 4313
 protonTransferExothermicityMagnitudeIs4313Tenths = refl
-abstractionAnalyticalPESPaid : Abstraction.AbstractionBoundary.sourceBackedAnalyticalPESPaid Abstraction.canonicalAbstractionBoundary ≡ true
+
+abstractionAnalyticalPESPaid :
+  Abstraction.AbstractionBoundary.sourceBackedAnalyticalPESPaid
+    Abstraction.canonicalAbstractionBoundary ≡ true
 abstractionAnalyticalPESPaid = refl
-abstractionWavepacketDynamicsPaid : Abstraction.AbstractionBoundary.sourceBackedTimeDependentWavepacketDynamicsPaid Abstraction.canonicalAbstractionBoundary ≡ true
-abstractionWavepacketDynamicsPaid = refl
-literal369ReactionHyperformPaid : Abstraction369.HyperformBoundary.literalChemistryHyperfibreInhabited Abstraction369.canonicalHyperformBoundary ≡ true
+
+literal369ReactionHyperformPaid :
+  Abstraction369.HyperformBoundary.literalChemistryHyperfibreInhabited
+    Abstraction369.canonicalHyperformBoundary ≡ true
 literal369ReactionHyperformPaid = refl
-boundedGroundC3InterfacePaid : Chemistry.ChemistryC3InterfaceStatus.boundedGroundConfigurationElectronicC3ActionPaid Chemistry.canonicalChemistryC3InterfaceStatus ≡ true
+
+boundedGroundC3InterfacePaid :
+  Chemistry.ChemistryC3InterfaceStatus.boundedGroundConfigurationElectronicC3ActionPaid
+    Chemistry.canonicalChemistryC3InterfaceStatus ≡ true
 boundedGroundC3InterfacePaid = refl
-fullRealSpaceElectronicC3StillUnpaid : Chemistry.ChemistryC3InterfaceStatus.fullRealSpaceElectronicC3ActionInstantiated Chemistry.canonicalChemistryC3InterfaceStatus ≡ false
-fullRealSpaceElectronicC3StillUnpaid = refl
-normalizedFiniteCountingWeightsPaid : Uniform.CountingEnsembleBoundary.normalizedFiniteCountingWeightsPaid Uniform.canonicalCountingEnsembleBoundary ≡ true
+
+------------------------------------------------------------------------
+-- Native microstate ensemble -> physical entropy/gravity boundary.
+------------------------------------------------------------------------
+
+normalizedFiniteCountingWeightsPaid :
+  Uniform.CountingEnsembleBoundary.normalizedFiniteCountingWeightsPaid
+    Uniform.canonicalCountingEnsembleBoundary ≡ true
 normalizedFiniteCountingWeightsPaid = refl
-uniformCountingStillNotPhysicalThermalEnsemble : Uniform.CountingEnsembleBoundary.uniformCountingMeasureIsPhysicalThermalEnsemble Uniform.canonicalCountingEnsembleBoundary ≡ false
-uniformCountingStillNotPhysicalThermalEnsemble = refl
-scalarEntropyDensityIsNotStressTensor : Gravity.EntropyGravityPromotionBoundary.scalarEntropyDensityDeterminesStressTensor Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
+
+nativeZetaMicrostateCarrierPaid :
+  NativeEnsemble.NativeZetaEnsembleBoundary.native369MicrostateCarrierPaid
+    NativeEnsemble.canonicalNativeZetaEnsembleBoundary ≡ true
+nativeZetaMicrostateCarrierPaid = refl
+
+nativeZetaCountIs65610 : NativeEnsemble.zetaStateCount ≡ 65610
+nativeZetaCountIs65610 = refl
+
+nativeCountingStillNotPhysicalThermalEnsemble :
+  NativeEnsemble.NativeZetaEnsembleBoundary.nativeUniformCountingIsPhysicalThermalEnsemble
+    NativeEnsemble.canonicalNativeZetaEnsembleBoundary ≡ false
+nativeCountingStillNotPhysicalThermalEnsemble = refl
+
+scalarEntropyDensityIsNotStressTensor :
+  Gravity.EntropyGravityPromotionBoundary.scalarEntropyDensityDeterminesStressTensor
+    Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
 scalarEntropyDensityIsNotStressTensor = refl
-entropyAloneDoesNotPromoteEinstein : Gravity.EntropyGravityPromotionBoundary.entropyObservableAloneDerivesEinsteinDynamics Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
+
+entropyAloneDoesNotPromoteEinstein :
+  Gravity.EntropyGravityPromotionBoundary.entropyObservableAloneDerivesEinsteinDynamics
+    Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
 entropyAloneDoesNotPromoteEinstein = refl
-wittenRouteIsThreeDimensional : Authority.GravityRouteDescriptor.spacetimeDimension Authority.wittenAdS3MonsterRoute ≡ 3
+
+wittenRouteIsThreeDimensional :
+  Authority.GravityRouteDescriptor.spacetimeDimension Authority.wittenAdS3MonsterRoute ≡ 3
 wittenRouteIsThreeDimensional = refl
-observedFourDimensionalMonsterStillUnpaid : Physical.Monster3Plus1PhysicalSymmetryReceipt.monsterIsSymmetryOfObserved3Plus1Universe Physical.canonicalMonster3Plus1PhysicalSymmetryReceipt ≡ false
+
+observedFourDimensionalMonsterStillUnpaid :
+  Physical.Monster3Plus1PhysicalSymmetryReceipt.monsterIsSymmetryOfObserved3Plus1Universe
+    Physical.canonicalMonster3Plus1PhysicalSymmetryReceipt ≡ false
 observedFourDimensionalMonsterStillUnpaid = refl
 
-terminalReceiptKeepsMatrixRediagonalizationOpen : MaxCut.Receipt.authorReleasedMatrixRediagonalizedByDASHI MaxCut.canonicalReceipt ≡ false
+------------------------------------------------------------------------
+-- Terminal receipt regressions.
+------------------------------------------------------------------------
+
+terminalReceiptKeepsMatrixRediagonalizationOpen :
+  MaxCut.Receipt.authorReleasedMatrixRediagonalizedByDASHI MaxCut.canonicalReceipt ≡ false
 terminalReceiptKeepsMatrixRediagonalizationOpen = refl
-terminalReceiptPaysC3QuotientRepresentation : MaxCut.Receipt.ammoniaMonsterC3QuotientRepresentationPaid MaxCut.canonicalReceipt ≡ true
+
+terminalReceiptPaysRegularC3Block :
+  MaxCut.Receipt.ammoniaA1PlusERegularC3Paid MaxCut.canonicalReceipt ≡ true
+terminalReceiptPaysRegularC3Block = refl
+
+terminalReceiptPaysC3QuotientRepresentation :
+  MaxCut.Receipt.ammoniaMonsterC3QuotientRepresentationPaid MaxCut.canonicalReceipt ≡ true
 terminalReceiptPaysC3QuotientRepresentation = refl
-terminalReceiptPaysPhaseNonfactorability : MaxCut.Receipt.phaseQuotientFineStateNonfactorabilityPaid MaxCut.canonicalReceipt ≡ true
+
+terminalReceiptPaysPhaseNonfactorability :
+  MaxCut.Receipt.phaseQuotientFineStateNonfactorabilityPaid MaxCut.canonicalReceipt ≡ true
 terminalReceiptPaysPhaseNonfactorability = refl
-terminalReceiptPaysProofRelevantReaction : MaxCut.Receipt.h3ProofRelevantC3ReactionPaid MaxCut.canonicalReceipt ≡ true
+
+terminalReceiptPaysRefinedCompiler :
+  MaxCut.Receipt.refinedMonsterModelLiftCompilerPaid MaxCut.canonicalReceipt ≡ true
+terminalReceiptPaysRefinedCompiler = refl
+
+terminalReceiptPaysProofRelevantReaction :
+  MaxCut.Receipt.h3ProofRelevantC3ReactionPaid MaxCut.canonicalReceipt ≡ true
 terminalReceiptPaysProofRelevantReaction = refl
-terminalReceiptBlocksObservedMonster : MaxCut.Receipt.observed3Plus1MonsterPaid MaxCut.canonicalReceipt ≡ false
+
+terminalReceiptBlocksObservedMonster :
+  MaxCut.Receipt.observed3Plus1MonsterPaid MaxCut.canonicalReceipt ≡ false
 terminalReceiptBlocksObservedMonster = refl
