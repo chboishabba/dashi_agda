@@ -9,6 +9,11 @@ import DASHI.Physics.Foundations.FieldGeometryMatterConsumersExact as Consumers
 import DASHI.Physics.CondensedMatter.MATBG2026VerticalSliceExact as MATBG
 import DASHI.Physics.CondensedMatter.MATBGBMFirstHarmonicC3Exact as BM
 import DASHI.Physics.CondensedMatter.MATBGBMEisensteinMatrixExact as BMEisenstein
+import DASHI.Physics.CondensedMatter.MATBGBMFirstShellReplayReceiptExact as FirstShell
+import DASHI.Physics.CondensedMatter.MATBGBMPlaneWaveReplayReceiptExact as PlaneWave
+import DASHI.Physics.CondensedMatter.MATBGQuantumGeometryReplayReceiptExact as QuantumGeometry
+import DASHI.Physics.CondensedMatter.MATBGInteractingTHF2026SourceExact as THF
+import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorics2026Exact as Entropy
 import DASHI.Physics.Foundations.GeneralizedCaloricCycleExact as Caloric
 import DASHI.Physics.Foundations.QuantumStressEnergyEngineeringBridgeExact as QuantumStress
 import DASHI.Physics.Foundations.QuantumStressEnergySourceWeldExact as QuantumStressSource
@@ -24,6 +29,7 @@ import DASHI.Physics.Foundations.FieldGeometryMatterAttributionRegression as Att
 data FrontierStatus : Set where
   structurallyPaid : FrontierStatus
   sourcePaid : FrontierStatus
+  numericallyExecuted : FrontierStatus
   openSameObjectPayment : FrontierStatus
   openCalibrationOrExecution : FrontierStatus
   blockedByUnmergedSibling : FrontierStatus
@@ -49,11 +55,19 @@ record FieldGeometryMatterTerminalFrontier : Set where
     literalMATBGValleyC3Weld : FrontierStatus
     bmFirstHarmonicSymbolicMatrixC3 : FrontierStatus
     bmExactEisensteinMatrixEvaluation : FrontierStatus
-    bmSampleW0W1Calibration : FrontierStatus
-    bmContinuumMomentumLatticeExecution : FrontierStatus
-    literalBMToQTMInteractingReplay : FrontierStatus
+    bmSourceNormalizedW0W1Ratio : FrontierStatus
+    bmFirstShellNumericalReplay : FrontierStatus
+    bmReciprocalLatticePlaneWaveReplay : FrontierStatus
+    bmSampleAbsoluteTunnellingCalibration : FrontierStatus
+    thfHubbardI2026SourceContract : FrontierStatus
+    thfSelfConsistentInteractingSolve : FrontierStatus
+    qtmExperimentalDataReplay : FrontierStatus
+    entropyExactCombinatorialCounts : FrontierStatus
+    entropyMaxwellAtomicLimitSourceContract : FrontierStatus
+    entropyExperimentalDataReplay : FrontierStatus
     sameSampleQTMEntropyReplay : FrontierStatus
-    matbgQuantumMetricSameObjectWeld : FrontierStatus
+    matbgQuantumGeometryNumericalReplay : FrontierStatus
+    matbgQuantumMetricExperimentalCalibration : FrontierStatus
 
     generalizedCaloricFiniteContract : FrontierStatus
     generalizedCaloricUsefulCycle : FrontierStatus
@@ -91,7 +105,11 @@ record FieldGeometryMatterTerminalFrontier : Set where
     sameMaterialClassCountsAsSameSample : Bool
     symbolicBMMatrixCountsAsCalibratedComplexHamiltonian : Bool
     exactEisensteinEvaluationCountsAsSampleCalibration : Bool
+    numericalBMExecutionCountsAsExperiment : Bool
     biologyEisensteinCarrierTransfersBiologyMechanism : Bool
+    sourceTHFParametersCountAsSolvedSelfConsistency : Bool
+    entropyCombinatoricsCountAsMeasuredEntropy : Bool
+    numericalQuantumMetricCountsAsExperimentalCalibration : Bool
     simulationCountsAsPhysicalRealization : Bool
     residualCountsAsAntigravity : Bool
     energyConditionViolationCountsAsWarpCapability : Bool
@@ -102,59 +120,32 @@ open FieldGeometryMatterTerminalFrontier public
 currentTerminalFrontier : FieldGeometryMatterTerminalFrontier
 currentTerminalFrontier =
   field-geometry-matter-terminal-frontier
-    structurallyPaid
-    structurallyPaid
-    structurallyPaid
-    structurallyPaid
-    structurallyPaid
-    structurallyPaid
-    structurallyPaid
+    structurallyPaid structurallyPaid structurallyPaid structurallyPaid
+    structurallyPaid structurallyPaid structurallyPaid
 
     structurallyPaid
-    sourcePaid
-    sourcePaid
-    sourcePaid
-    sourcePaid
-    structurallyPaid
-    structurallyPaid
+    sourcePaid sourcePaid sourcePaid sourcePaid
+    structurallyPaid structurallyPaid sourcePaid
+    numericallyExecuted numericallyExecuted
     openCalibrationOrExecution
-    openCalibrationOrExecution
-    externalOnly
-    externalOnly
-    openSameObjectPayment
+    sourcePaid openCalibrationOrExecution openSameObjectPayment
+    structurallyPaid sourcePaid openSameObjectPayment externalOnly
+    numericallyExecuted openSameObjectPayment
 
-    structurallyPaid
-    externalOnly
-    externalOnly
+    structurallyPaid externalOnly externalOnly
 
-    externalOnly
-    externalOnly
-    blockedByUnmergedSibling
-    blockedByUnmergedSibling
-    blockedByUnmergedSibling
+    externalOnly externalOnly
+    blockedByUnmergedSibling blockedByUnmergedSibling blockedByUnmergedSibling
 
-    structurallyPaid
-    externalOnly
-    requiresIndependentExperiment
-    externalOnly
+    structurallyPaid externalOnly requiresIndependentExperiment externalOnly
 
-    sourcePaid
-    sourcePaid
-    externalOnly
-    externalOnly
-    requiresIndependentExperiment
+    sourcePaid sourcePaid externalOnly externalOnly requiresIndependentExperiment
 
-    externalOnly
-    externalOnly
-    externalOnly
-    requiresIndependentExperiment
+    externalOnly externalOnly externalOnly requiresIndependentExperiment
 
-    structurallyPaid
-    openSameObjectPayment
-    structurallyPaid
-    openCalibrationOrExecution
+    structurallyPaid openSameObjectPayment structurallyPaid openCalibrationOrExecution
 
-    false false false false false false false false false false
+    false false false false false false false false false false false false false false
 
 record MaxCutPaidSurface : Set where
   constructor max-cut-paid-surface
@@ -166,6 +157,11 @@ record MaxCutPaidSurface : Set where
     matbgBoundary : MATBG.MATBG2026VerticalBoundary
     bmBoundary : BM.BMFirstHarmonicBoundary
     bmEisensteinBoundary : BMEisenstein.BMEisensteinBoundary
+    firstShellBoundary : FirstShell.FirstShellReplayBoundary
+    planeWaveBoundary : PlaneWave.PlaneWaveReplayBoundary
+    quantumGeometryBoundary : QuantumGeometry.QuantumGeometryBoundary
+    thfBoundary : THF.MATBGInteractingTHF2026Boundary
+    entropyBoundary : Entropy.EntropyCombinatoricsBoundary
     caloricBoundary : Caloric.GeneralizedCaloricBoundary
     quantumStressBoundary : QuantumStress.QuantumStressEngineeringBoundary
     quantumStressSourceBoundary : QuantumStressSource.QuantumStressSourceBoundary
@@ -186,6 +182,11 @@ canonicalMaxCutPaidSurface =
     MATBG.canonicalMATBG2026VerticalBoundary
     BM.canonicalBMFirstHarmonicBoundary
     BMEisenstein.canonicalBMEisensteinBoundary
+    FirstShell.canonicalFirstShellReplayBoundary
+    PlaneWave.canonicalPlaneWaveReplayBoundary
+    QuantumGeometry.canonicalQuantumGeometryBoundary
+    THF.canonicalTHF2026Boundary
+    Entropy.canonicalEntropyCombinatoricsBoundary
     Caloric.canonicalGeneralizedCaloricBoundary
     QuantumStress.canonicalQuantumStressBoundary
     QuantumStressSource.canonicalQuantumStressSourceBoundary
@@ -206,8 +207,10 @@ record MaxCutStoppingRule : Set where
     sourceClassCompositionDoesNotCreateSameSample : Bool
     unmergedSiblingMayBeImportedOnlyAfterLandingOrExplicitRetarget : Bool
     sourcePaidTheoryDoesNotCreateMeasuredPhysicalPayment : Bool
-    symbolicBMMatrixDoesNotCreateSampleCalibration : Bool
-    exactEisensteinEvaluationDoesNotCreateSampleCalibration : Bool
+    numericalExecutionDoesNotCreateExperimentalAuthority : Bool
+    sourceParameterFixtureDoesNotCreateSolvedModel : Bool
+    exactCombinatoricsDoesNotCreateMeasuredEntropy : Bool
+    quantumGeometryNumericsDoNotCreateExperimentalCalibration : Bool
     mathematicalCarrierCrossPollinationDoesNotTransferDomainMechanism : Bool
     experimentPriorityDoesNotCreateTruthOrAuthority : Bool
     monolithicExportPaidTransitivelyThroughRound5Root : Bool
@@ -218,4 +221,4 @@ open MaxCutStoppingRule public
 canonicalStoppingRule : MaxCutStoppingRule
 canonicalStoppingRule =
   max-cut-stopping-rule
-    true true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true
