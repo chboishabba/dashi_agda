@@ -16,6 +16,10 @@ selectedSectorAttachmentInterfaceOwnedRegression :
   A.selectedQFTSectorStressAttachmentInterfaceOwned A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
 selectedSectorAttachmentInterfaceOwnedRegression = refl
 
+recoveredQFTCommutationConsumedRegression :
+  A.recoveredQFTCommutationConsumed A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
+recoveredQFTCommutationConsumedRegression = refl
+
 componentwiseBrownMaclayTargetOwnedRegression :
   A.componentwiseBrownMaclayEqualityTargetOwned A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ true
 componentwiseBrownMaclayTargetOwnedRegression = refl
