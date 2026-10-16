@@ -12,21 +12,11 @@ import DASHI.Physics.Electromagnetism.U1AsSU2AbelianRestrictionExact as U1
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Stress
 import DASHI.Physics.QuantumVacuum.CasimirU1CurvatureRestrictionExact as Curvature
 import DASHI.Physics.QuantumVacuum.CasimirU1InvariantPairingRestrictionExact as Pairing
+import DASHI.Physics.QuantumVacuum.CasimirSide4CartanCurvatureClosureExact as Side4Cartan
+import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationExact as Normalization
 
 ------------------------------------------------------------------------
 -- CARTAN U(1) QUADRATIC ACTION-DENSITY COMPILER
---
--- The old finite YM action owner has definitionally zero curvature and is not
--- used here.  This theorem is conditional on the SAME real/nondegenerate
--- curvature object.  Once
---
---   F = dA + [A,A]
---
--- is attached and both the selected field and its exterior field strength lie
--- on the canonical Cartan axis, the previously proved bracket and invariant-
--- pairing restrictions force the quadratic Yang--Mills density to be the
--- ordinary Maxwell square.  The theorem is independent of the numerical
--- physical coupling: any common prefactor transports through the equality.
 ------------------------------------------------------------------------
 
 record ExteriorCartanImageReceipt
@@ -138,10 +128,6 @@ restrictedYMQuadraticDensityWithCommonPrefactorIsMaxwell
 
 ------------------------------------------------------------------------
 -- ACTION-FUNCTIONAL LIFT
---
--- Integration/summation is deliberately abstract but proof-relevant: a real
--- selected action producer supplies one density functional plus its congruence
--- law.  Once supplied, no separate YM=Maxwell action theorem is required.
 ------------------------------------------------------------------------
 
 record DensityActionFunctional (SelectedField : Set) : Set₁ where
@@ -207,6 +193,7 @@ restrictedYMActionEqualsMaxwellFromSameDensityFunctional
 
 data QuadraticDensityEqualityAutomaticallyChoosesPhysicalPrefactor : Set where
 data QuadraticDensityEqualityAutomaticallySuppliesActionFunctional : Set where
+data FlatSide4CartanCurlAutomaticallyIdentifiesSelectedNonlinearExteriorField : Set where
 
 quadraticDensityDoesNotChoosePhysicalPrefactor :
   QuadraticDensityEqualityAutomaticallyChoosesPhysicalPrefactor → ⊥
@@ -216,13 +203,26 @@ quadraticDensityDoesNotSupplyActionFunctional :
   QuadraticDensityEqualityAutomaticallySuppliesActionFunctional → ⊥
 quadraticDensityDoesNotSupplyActionFunctional ()
 
+flatSide4CartanCurlDoesNotIdentifySelectedNonlinearExteriorField :
+  FlatSide4CartanCurlAutomaticallyIdentifiesSelectedNonlinearExteriorField → ⊥
+flatSide4CartanCurlDoesNotIdentifySelectedNonlinearExteriorField ()
+
+side4CartanCurvatureBoundary : Side4Cartan.CasimirSide4CartanCurvatureBoundary
+side4CartanCurvatureBoundary = Side4Cartan.canonicalSide4CartanCurvatureBoundary
+
+freeMaxwellNormalizationBoundary : Normalization.CasimirFreeMaxwellNormalizationBoundary
+freeMaxwellNormalizationBoundary = Normalization.canonicalFreeMaxwellNormalizationBoundary
+
 record CasimirU1QuadraticDensityBoundary : Set where
   constructor casimir-u1-quadratic-density-boundary
   field
     quadraticYMDensityToMaxwellDensityCompilerOwned : Bool
     sameObjectNondegenerateCurvatureStillRequired : Bool
-    exteriorFieldStrengthCartanImageStillRequired : Bool
-    physicalActionPrefactorStillRequired : Bool
+    side4CartanCurlClosureCompilerAvailable : Bool
+    independentFiniteCartanCurlClosurePaymentRequired : Bool
+    selectedNonlinearExteriorCartanTransportStillRequired : Bool
+    freeMaxwellNormalizationStillRequired : Bool
+    measuredAlphaEMRequiredForIdealQuadraticDensity : Bool
     actionIntegrationStillRequired : Bool
     independentRestrictedYMMaxwellActionTheoremRequiredAfterInputs : Bool
 
@@ -230,8 +230,9 @@ open CasimirU1QuadraticDensityBoundary public
 
 canonicalU1QuadraticDensityBoundary : CasimirU1QuadraticDensityBoundary
 canonicalU1QuadraticDensityBoundary =
-  casimir-u1-quadratic-density-boundary true true true true true false
+  casimir-u1-quadratic-density-boundary
+    true true true false true true false true false
 
 casimirU1QuadraticDensityReading : String
 casimirU1QuadraticDensityReading =
-  "On the SAME selected nondegenerate curvature object, Cartan abelianization plus the live invariant-pairing theorem compile the quadratic Yang-Mills density exactly to the Maxwell field-strength square. The equality survives any common scalar prefactor. A proof-relevant DensityActionFunctional then lifts pointwise density equality to full action equality, so no second restricted-YM=Maxwell theorem is required after these inputs are attached. Still independent are the actual nondegenerate curvature producer, Cartan image of the exterior field strength, the physical electromagnetic action prefactor/coupling convention, and the real action integration/measure functional. The old zero-curvature finite YM action is not used."
+  "On the SAME selected nondegenerate curvature object, Cartan abelianization plus the invariant pairing compile the Yang-Mills quadratic density to the Maxwell square, and one density functional lifts that to action equality. The literal side-four donor now also proves finite Cartan closure of the curl, so no second finite dA-in-Cartan calculation is required. What remains is same-object transport from the selected nonlinear curvature/exterior derivative to that concrete Cartan-curvature realization, plus the actual nondegenerate curvature producer and action integration. FreeMaxwellActionNormalization supplies the common field/generator/prefactor convention; measured alpha_EM is separate phenomenology rather than an ideal Casimir density input."
