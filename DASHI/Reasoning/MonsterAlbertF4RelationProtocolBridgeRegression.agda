@@ -25,6 +25,12 @@ _ = refl
 _ : B.sameCarrierReceiptReused B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
 _ = refl
 
+_ : B.transportCompilerReceiptReused B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
+_ = refl
+
+_ : B.actualMonsterActionStillRequired B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
+_ = refl
+
 _ : B.finiteStateEmbeddingAlreadyPaid B.canonicalMonsterAlbertF4ProtocolBoundary ≡ true
 _ = refl
 
