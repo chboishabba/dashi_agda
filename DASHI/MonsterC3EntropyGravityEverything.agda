@@ -10,9 +10,18 @@ import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
 import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact
 import DASHI.Moonshine.Base369Monster3BMultiplicityCompletedTenTritSquareCompilerExact
+
+-- Representation-native Monster correction: finite basis labels remain
+-- distinct from the literal linear W_zeta state carrier.
+import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact
+import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact
+import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact
+import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact
+
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact
 import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact
 import DASHI.Reasoning.Trialectic369Selected3BSemanticProjectedCompletionExact
+import DASHI.Reasoning.Trialectic369Selected3BProjectionChoiceIndependenceExact
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
 import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 
@@ -43,6 +52,7 @@ import DASHI.Physics.Chemistry.AmmoniaMonster3BRefinedStateLiftCompilerExact
 import DASHI.Physics.Chemistry.AmmoniaMonster3BRefinedStateLiftCompilerValidation
 import DASHI.Physics.Chemistry.AmmoniaMonster3BNative369FineCarrierExact
 import DASHI.Physics.Chemistry.AmmoniaMonster3BNative369FineCarrierValidation
+import DASHI.Physics.Chemistry.AmmoniaMonster3BRepresentationNativeCorrectionExact
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionValidation
 import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact
@@ -74,3 +84,8 @@ import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact
 import DASHI.Physics.Closure.MonsterC3EntropyGravityMaxCutExact
 import DASHI.Physics.Closure.MonsterC3EntropyGravityValidation
+
+-- Current authoritative terminal recut.
+import DASHI.Physics.Closure.MonsterC3RepresentationNativeCorrectionValidation
+import DASHI.Physics.Closure.MonsterC3RepresentationNativeTerminalMaxCutExact
+import DASHI.Physics.Closure.MonsterC3RepresentationNativeTerminalValidation
