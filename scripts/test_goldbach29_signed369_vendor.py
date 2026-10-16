@@ -6,6 +6,7 @@ PIN = ROOT / "vendor" / "meta-introspector-aok-goldbach29.VENDOR"
 BRIDGE = ROOT / "DASHI" / "ComputerScience" / "Goldbach29Signed369VendorBridgeExact.agda"
 MACRO = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29SuccessMacroExact.agda"
 RECEIPT = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29ReductionReceiptExact.agda"
+SEMANTICS = ROOT / "DASHI" / "ComputerScience" / "Goldbach29ExternalHaltingSemanticsExact.agda"
 VIS = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29VisualizationConsumerExact.agda"
 AGGREGATE = ROOT / "DASHI" / "EverythingGoldbach29Signed369VendorExact.agda"
 WORKFLOW = ROOT / ".github" / "workflows" / "goldbach29-signed369-vendor.yml"
@@ -15,12 +16,14 @@ def test_vendor_pin_and_attribution():
     text = PIN.read_text()
     assert "meta-introspector/aok" in text
     assert "c168223e96f7acc6179044f2a365a92db2e350c3" in text
-    assert "1fcb5ebe-bbab-4c12-bc38-4f1cd4739c1b/code/Cryptids/Goldbach29/Program.lean" in text
+    assert "d3e01240-2567-46da-9224-8a1bc6668f6b/code/Cryptids/Goldbach29/Program.lean" in text
     assert "1fcb5ebe-bbab-4c12-bc38-4f1cd4739c1b/code/Cryptids/Goldbach30/Program.lean" in text
+    assert "428e2366045cb0b728115777df8bef14318a3bcf" in text
+    assert "d3e01240-2567-46da-9224-8a1bc6668f6b/code/Cryptids/Goldbach29/Main.lean" in text
     assert "AGPL-3.0" in text
-    assert "Goldbach29" in text
-    assert "Goldbach30" in text
+    assert "Goldbach29" in text and "Goldbach30" in text
     assert "fstep_enc" in text
+    assert "goldbachProg_halts_iff" in text
     assert "Mike Dupont" in text or "meta-introspector" in text
 
 
@@ -55,6 +58,15 @@ def test_exact_success_macro_is_consumer_preserving():
     assert "newSuccessExecutionLengthIsOneMore" in text
 
 
+def test_external_halting_semantics_is_cross_prover_only():
+    text = SEMANTICS.read_text()
+    assert "goldbachProg_halts_iff" in text
+    assert "importedFormalTheoremSource" in text
+    assert "externalGoldbach29HaltingSemanticsSourcePaid" in text
+    assert "agdaGoldbach29HaltingSemanticsPaid = false" in text
+    assert "goldbachConjectureProvedByUpstreamTheorem = false" in text
+
+
 def test_reduction_receipt_records_pareto_cut():
     text = RECEIPT.read_text()
     assert "Goldbach30To29ReductionReceipt" in text
@@ -63,6 +75,7 @@ def test_reduction_receipt_records_pareto_cut():
     assert "controlStateDeltaPaid" in text
     assert "successConsumerPreservationPaid" in text
     assert "successExecutionPenaltyPaid" in text
+    assert "externalGoldbach29HaltingSemanticsSourcePaidFlag" in text
     assert "wholeMachineReachableWeakBisimulationPaid" in text
     assert "wholeMachineReachableWeakBisimulationPaid = false" in text
 
@@ -89,6 +102,7 @@ def test_aggregate_and_workflow_own_the_new_surface():
     assert "Goldbach29Signed369VendorBridgeExact" in aggregate
     assert "Goldbach30To29SuccessMacroExact" in aggregate
     assert "Goldbach30To29ReductionReceiptExact" in aggregate
+    assert "Goldbach29ExternalHaltingSemanticsExact" in aggregate
     assert "Goldbach30To29VisualizationConsumerExact" in aggregate
     assert "test_goldbach29_signed369_vendor.py" in workflow
     assert "EverythingGoldbach29Signed369VendorExact.agda" in workflow
