@@ -12,33 +12,38 @@ import DASHI.Governance.BoloBoloGovernanceMetricProvenanceEverything
 -- for the same target flat-vs-nested longitudinal coordination question.
 import DASHI.Governance.BoloBoloCausalIdentificationEverything
 
--- Repo-native experimental-coordinate and consumer-descent machinery: exact
--- synthetic collisions show duration/incidence can hide interface state, and
--- the capacity/peak-demand/backlog consumer is the canonical least-sufficient
--- observer for that declared capacity-sensitive question.
+-- Repo-native experimental-coordinate and consumer-descent machinery.
 import DASHI.Governance.BoloBoloCapacityConsumerSufficiencyEverything
 
--- Attribution-safe evidence acquisition: Holmes' bibliography pays archival
--- locator identity only, never primary minute content; the Pareto layer ranks
--- current acquisition routes using DASHI scheduling values without upgrading
--- source authority, truth or causal status.
+-- Attribution-safe evidence acquisition and Pareto routing.
 import DASHI.Governance.BoloBoloEmpiricalAcquisitionEverything
 
--- Leadership / anti-leadership SOTA and the Freeman/Levine tension are retained
--- as source-bounded evidence rather than converted into a universal organising
--- prescription.
+-- Leadership / anti-leadership SOTA and Freeman/Levine tension.
 import DASHI.Governance.AnarchistAntiLeadershipSourceAtlasExact
 
--- Non-domination / reappropriation keeps facilitation, expertise and revocable
--- delegation distinct from durable arbitrary command and reuses the existing
--- proof-carrying anti-panopticon boundary.
+-- Non-domination / reappropriation boundary.
 import DASHI.Governance.ITIRNonDominationReappropriationExact
 
--- Plural viability extends the existing independent viability envelope with
--- non-domination, affected voice and revisability, then reuses generic
--- history-conditioned future-cone non-descent. TSFV, Cybersyn and 3/9/18/27
--- enter only as explicitly bounded structural precedents.
+-- Plural viability / TSFV history-conditioned continuation boundary.
 import DASHI.Governance.ITIRPluralViabilityTSFVExact
 
--- RED-first regression surface for this tranche.
+-- First tranche regression.
 import DASHI.Governance.AnarchistLeadershipNonDominationTSFVRegression
+
+-- Source-bounded Stafford Beer VSM / Cybersyn atlas: primary VSM lineage,
+-- historical project reconstruction, contemporary critical synthesis and
+-- explicit no-legitimacy/no-sovereign-System-5 boundaries.
+import DASHI.Governance.CybersynVSMSourceAtlasExact
+
+-- Same-object action seam: history-indexed think/look/test/act + first-class
+-- ask/listen/deliberate + POSIWID realised-operation semantics + God’s-Eye
+-- inspectable evidence + proof-relevant non-domination + plural viability.
+import DASHI.Governance.DeliberativeViableNonDominationLoopExact
+
+-- Empirical consumer for the primary Occupy/Spokes archive: recover realised
+-- sensing/framing/facilitation/delegation/block/reportback/correction/reopening
+-- topology rather than treating horizontal self-description as realised power.
+import DASHI.Governance.OccupyRealizedControlAcquisitionExact
+
+-- RED-first integration regression for the cybernetic tranche.
+import DASHI.Governance.DeliberativeViableNonDominationLoopRegression
