@@ -8,6 +8,7 @@ import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticValidation
 import DASHI.Wikimedia.IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact
 import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
+import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
 import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 
@@ -28,6 +29,8 @@ import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact
 import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionValidation
 import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact
 import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeValidation
+import DASHI.Physics.Chemistry.AmmoniaMonster3BC3QuotientLiftExact
+import DASHI.Physics.Chemistry.AmmoniaMonster3BC3QuotientLiftValidation
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionValidation
 import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact
