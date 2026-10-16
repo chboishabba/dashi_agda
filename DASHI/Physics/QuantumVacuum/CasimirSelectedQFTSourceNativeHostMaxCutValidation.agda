@@ -1,0 +1,45 @@
+module DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutExact as M
+
+sourceNativeRecoveryCompilerOwnedRegression :
+  M.sourceNativePinnedRecoveryAttachmentCompilerOwned M.canonicalSourceNativeHostBoundary ≡ true
+sourceNativeRecoveryCompilerOwnedRegression = refl
+
+qftRecoveryCommutationAlreadyProvidedByHandoffRegression :
+  M.qftRecoveryReceiptConsumedFromCasimirHandoff M.canonicalSourceNativeHostBoundary ≡ true
+qftRecoveryCommutationAlreadyProvidedByHandoffRegression = refl
+
+compactSimpleCompilerOutputRegression :
+  M.compactSimpleWitnessCompiledFromPinnedConstruction M.canonicalSourceNativeHostBoundary ≡ true
+compactSimpleCompilerOutputRegression = refl
+
+independentCompactSimpleNotRequiredRegression :
+  M.independentSelectedCompactSimplePaymentRequired M.canonicalSourceNativeHostBoundary ≡ false
+independentCompactSimpleNotRequiredRegression = refl
+
+legacyProjectionCompatibilityStillRequiredRegression :
+  M.legacyProjectionCompatibilityRequired M.canonicalSourceNativeHostBoundary ≡ true
+legacyProjectionCompatibilityStillRequiredRegression = refl
+
+pinnedSelectionStillRequiredRegression :
+  M.pinnedSourceNativeSelectionRequired M.canonicalSourceNativeHostBoundary ≡ true
+pinnedSelectionStillRequiredRegression = refl
+
+quaternionInterpretationStillRequiredRegression :
+  M.selectedQuaternionSU2InterpretationRequired M.canonicalSourceNativeHostBoundary ≡ true
+quaternionInterpretationStillRequiredRegression = refl
+
+firstSourceNativeHostBlockerRegression :
+  M.firstSourceNativeHostBlocker ≡ M.missingLegacyQFTRecoveryProjectionCompatibility
+firstSourceNativeHostBlockerRegression = refl
+
+secondSourceNativeHostBlockerRegression :
+  M.secondSourceNativeHostBlocker ≡ M.missingPinnedSourceNativeRecoverySelection
+secondSourceNativeHostBlockerRegression = refl
+
+thirdSourceNativeHostBlockerRegression :
+  M.thirdSourceNativeHostBlocker ≡ M.missingSelectedGroupQuaternionSU2Interpretation
+thirdSourceNativeHostBlockerRegression = refl
