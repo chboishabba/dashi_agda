@@ -14,12 +14,12 @@ open import Agda.Builtin.String using (String)
 --   <delta n_alpha> = 4 int_{-inf}^0 dw int d^2k/A_BZ A_alpha - n_alpha^0
 -- and solves <delta n_f>, <delta n_c>, mu self-consistently for each total
 -- density.  The same paper gives the QTM Fermi-golden-rule tunnelling-current
--- observer and the G_T=G_B=0 matrix I + sigma_x.
+-- observer, the G_T=G_B=0 matrix I + sigma_x, and calibrated junction
+-- electrostatics.
 --
--- This module literalizes the obligations and source relations. It does NOT
--- choose an ultraviolet/BZ discretization, identify the Methods symbol V with
--- the parameter-list symbol Y, solve the coupled Green-function integral, or
--- claim experimental QTM replay.
+-- This module literalizes source relations. It does NOT choose an ultraviolet
+-- / BZ discretization, identify the Methods symbol V with the parameter-list
+-- symbol Y, solve the coupled Green-function integral, or claim QTM data fit.
 ------------------------------------------------------------------------
 
 record THFSelfConsistencyEquationReceipt : Set where
@@ -74,6 +74,30 @@ canonicalQTMGoldenRuleObserverReceipt =
     "|<I + sigma_x>| on the TBG state carries layer and sublattice information"
     "w0/w1 = 0.6 reported as best agreement for the flat-band matrix-element comparison"
 
+record QTMElectrostaticsReceipt : Set where
+  constructor qtm-electrostatics-receipt
+  field
+    sourceDOI : String
+    biasEquation : String
+    backGateEquation : String
+    backGateCapacitance : String
+    interlayerCapacitance : String
+    finiteBiasDopesTBG : String
+    skewCorrectionRole : String
+
+open QTMElectrostaticsReceipt public
+
+canonicalQTMElectrostaticsReceipt : QTMElectrostaticsReceipt
+canonicalQTMElectrostaticsReceipt =
+  qtm-electrostatics-receipt
+    "10.1038/s41586-026-10378-x"
+    "-e V_b = mu_B - mu_T - e^2 n_T / C_g"
+    "e V_bg = mu_B + e^2 (n_B + n_T) / C_bg"
+    "C_bg = 62.3 nF cm^-2"
+    "C_g = 2.3 microF cm^-2"
+    "finite tip bias gates and changes TBG filling at fixed back-gate voltage"
+    "trace constant-density lines in (V_b,V_bg) and skew raw data to filling nu"
+
 record THFSelfConsistencyQTMBoundary : Set where
   constructor thf-self-consistency-qtm-boundary
   field
@@ -83,6 +107,7 @@ record THFSelfConsistencyQTMBoundary : Set where
     spinValleyFactorSourcePaid : Bool
     qtmGoldenRuleObserverSourcePaid : Bool
     zeroBraggMatrixElementSourcePaid : Bool
+    qtmElectrostaticsSourcePaid : Bool
     fullCoupledGreenFunctionFormulaSourcePaid : Bool
     sourceNotationVAmbiguityPreserved : Bool
     songBernevigBZNormalizationImported : Bool
@@ -96,13 +121,13 @@ open THFSelfConsistencyQTMBoundary public
 canonicalTHFSelfConsistencyQTMBoundary : THFSelfConsistencyQTMBoundary
 canonicalTHFSelfConsistencyQTMBoundary =
   thf-self-consistency-qtm-boundary
-    true true true true true true true true
+    true true true true true true true true true
     false false false false false
 
 record THFSelfConsistencyQTMAttributionBoundary : Set where
   constructor thf-self-consistency-qtm-attribution-boundary
   field
-    xiaoEtAlOwn2026SelfConsistencyAndQTMObserverEquations : Bool
+    xiaoEtAlOwn2026SelfConsistencyQTMAndElectrostaticsEquations : Bool
     songBernevigOwnReferencedTHFSingleParticleDefinitions : Bool
     dashiOwnsTypedObligationSeparation : Bool
     sourceFormulaDoesNotCreateUniqueDiscretization : Bool
