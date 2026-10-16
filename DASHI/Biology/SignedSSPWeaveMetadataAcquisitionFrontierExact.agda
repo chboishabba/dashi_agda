@@ -3,21 +3,31 @@ module DASHI.Biology.SignedSSPWeaveMetadataAcquisitionFrontierExact where
 ------------------------------------------------------------------------
 -- METADATA-DYNAMICS ACQUISITION FRONTIER FOR THE FULL SIGNED WEAVE GRAPH
 --
--- Existing nearby owners now pay more of the rich-state metadata policy:
+-- Existing nearby owners pay:
 --   * legacy FRACTRAN prime transport preserves the 3/6/9 address;
 --   * successful legacy prime transport records fromPositive residual approach;
 --   * generic weave program/execution/normal-form lengths are mechanically
 --     derived by SignedSSPWeaveDerivedLengthDynamicsExact;
---   * every general weave instruction EXCEPT refineAt369 is now proved
---     refinement-neutral by the executable WeaveEffect semantics, and therefore
---     has the conservative identity action on an already supplied 3/6/9 address.
+--   * every general weave instruction EXCEPT refineAt369 is proved
+--     refinement-neutral by executable WeaveEffect semantics, giving the
+--     conservative identity action on an already supplied 3/6/9 address.
 --
--- What remains genuinely external is therefore narrower:
---   * the address update semantics of refineAt369 itself;
---   * the zero-residual-direction update semantics of general instructions;
---   * residual-witness-length dynamics.
--- No map between the legacy four-rule machine and the general weave language is
--- invented here.
+-- The refineAt369 seam is now sharper than "missing source semantics".  The
+-- current rich metadata carrier is literally Address 3 and the dynamics socket
+-- is Address 3 -> Address 3, so ANY current step is definitionally depth
+-- preserving.  In addition, refineAt369 is nullary and carries no child digit.
+-- Thus, if refineAt369 is intended as literal prefix/tree refinement, the
+-- current interface is structurally incapable of expressing it.  The new
+-- fixed-depth no-go owner constructs the minimal variable-depth + explicit
+-- Digit369 child repair without promoting that repair to scientific semantics.
+--
+-- Remaining external/design payments are therefore:
+--   * decide whether refineAt369 is same-depth mutation or true depth refinement;
+--   * if true refinement, migrate the rich carrier/compiler to the typed
+--     variable-depth repair and source the child-selection law;
+--   * source zero-residual-direction updates for general instructions;
+--   * source residual-witness-length dynamics.
+-- No legacy/general instruction map or semantic child selection is invented.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -29,6 +39,7 @@ import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as Hyper
 import DASHI.Biology.SignedSSPWeaveRichMetadataCompilerExact as Compiler
 import DASHI.Biology.SignedSSPWeaveDerivedLengthDynamicsExact as Derived
 import DASHI.Biology.SignedSSPWeaveAddressNeutralDynamicsExact as Neutral
+import DASHI.Biology.SignedSSPWeaveRefineAt369FixedDepthNoGoExact as RefineNoGo
 import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 
 legacyCanonicalAddressTransportPaid :
@@ -67,9 +78,6 @@ fullMetadataDynamicsCompiler :
   Derived.ResidualMetadataDynamics → Compiler.RichMetadataDynamics
 fullMetadataDynamicsCompiler = Derived.compileRichMetadataDynamics
 
--- The address problem is no longer a six-instruction acquisition problem.
--- Five instructions are compiler-owned identity updates; only refineAt369 is
--- left source-semantic.
 nonRefinementAddressDynamicsPaid : Bool
 nonRefinementAddressDynamicsPaid = true
 
@@ -77,6 +85,15 @@ refineAt369AddressDynamicsStillOpen :
   Neutral.refineAt369AddressDynamicsPaid Neutral.canonicalAddressDynamicsMaxCut
   ≡ false
 refineAt369AddressDynamicsStillOpen = refl
+
+fixedDepthRichStepCannotIncreaseDepth :
+  (step : DASHI.Geometry.SSP369Ultrametric.Address 3 →
+          DASHI.Geometry.SSP369Ultrametric.Address 3) →
+  (address : DASHI.Geometry.SSP369Ultrametric.Address 3) →
+  DASHI.Geometry.SSP369Ultrametric.addressDepth (step address)
+  ≡ DASHI.Geometry.SSP369Ultrametric.addressDepth address
+fixedDepthRichStepCannotIncreaseDepth =
+  RefineNoGo.fixedDepthThreeStepPreservesAddressDepth
 
 record SignedSSPWeaveMetadataAcquisitionBoundary : Set where
   constructor signed-ssp-weave-metadata-acquisition-boundary
@@ -88,6 +105,9 @@ record SignedSSPWeaveMetadataAcquisitionBoundary : Set where
     genericExecutionLengthDynamicsPaid : Bool
     genericNormalFormLengthDynamicsPaid : Bool
     nonRefinementInstructionAddressDynamicsPaid : Bool
+    fixedDepthAddressRefinementNoGoPaid : Bool
+    variableDepthExplicitChildRepairConstructed : Bool
+    currentRefineInstructionCarriesChildChoice : Bool
     generalWeaveInstructionToLegacyRuleMapLocated : Bool
     refineAt369AddressDynamicsLocated : Bool
     generalZeroResidualDynamicsLocated : Bool
@@ -101,4 +121,5 @@ canonicalSignedSSPWeaveMetadataAcquisitionBoundary =
     true true true
     true true true
     true
+    true true false
     false false false false false
