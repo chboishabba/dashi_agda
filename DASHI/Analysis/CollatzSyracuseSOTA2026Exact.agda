@@ -6,8 +6,8 @@ module DASHI.Analysis.CollatzSyracuseSOTA2026Exact where
 -- This owner records external source identity and the bounded role for which
 -- each source is relevant to the current DASHI Collatz max-cut.  It does NOT
 -- import an external theorem into Agda and does NOT promote almost-all,
--- finite-verification, cycle-exclusion, or parity-vector results to the
--- universal Collatz conjecture.
+-- finite-verification, cycle-exclusion, coefficient-stopping, automaton, or
+-- parity-vector results to the universal Collatz conjecture.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -25,6 +25,11 @@ data CollatzSourceRole : Set where
   verificationAlgorithmPreprintRole : CollatzSourceRole
   maximalTypicalHorizonPreprintRole : CollatzSourceRole
   nontrivialCycleExclusionRole : CollatzSourceRole
+  foundationalCoefficientStoppingRole : CollatzSourceRole
+  coefficientStoppingSurveyRole : CollatzSourceRole
+  binaryTernaryAutomatonRole : CollatzSourceRole
+  coefficientStoppingTreePreprintRole : CollatzSourceRole
+  semiconvergentPassagePreprintRole : CollatzSourceRole
 
 data PublicationStatus : Set where
   peerReviewed : PublicationStatus
@@ -95,6 +100,45 @@ hercher2023 =
     "peer-reviewed nontrivial-cycle exclusion with a 2026 corrigendum; cycle exclusion remains distinct from exclusion of divergent nonperiodic trajectories"
     Source.publicAttribution
 
+terras1976 : Source.AttributedSource
+terras1976 =
+  Source.mkDOISource
+    "Riho Terras"
+    "A stopping time problem on the positive integers"
+    "Acta Arithmetica 30(3), 241-252"
+    "1976"
+    "10.4064/aa-30-3-241-252"
+    "https://doi.org/10.4064/aa-30-3-241-252"
+    Source.academicArticleSource
+    "foundational peer-reviewed stopping-time/density analysis for the accelerated 3x+1 process; historical coefficient/multiplicative stopping framework only"
+    Source.publicAttribution
+
+lagarias1985 : Source.AttributedSource
+lagarias1985 =
+  Source.mkDOISource
+    "Jeffrey C. Lagarias"
+    "The 3x + 1 Problem and its Generalizations"
+    "The American Mathematical Monthly 92(1), 3-23"
+    "1985"
+    "10.1080/00029890.1985.11971528"
+    "https://doi.org/10.1080/00029890.1985.11971528"
+    Source.academicArticleSource
+    "peer-reviewed survey/source for the historical coefficient-stopping formulation and its status as an open intermediate conjectural route; survey authority does not create a proof"
+    Source.publicAttribution
+
+sterinWoods2020 : Source.AttributedSource
+sterinWoods2020 =
+  Source.mkDOISource
+    "Tristan Sterin; Damien Woods"
+    "The Collatz Process Embeds a Base Conversion Algorithm"
+    "Reachability Problems 2020, Lecture Notes in Computer Science 12448, 131-147"
+    "2020"
+    "10.1007/978-3-030-61739-4_9"
+    "https://doi.org/10.1007/978-3-030-61739-4_9"
+    Source.academicArticleSource
+    "peer-reviewed exact quasi-cellular-automaton representation: horizontal binary Collatz evolution, vertical ternary evolution, and embedded base-3 to base-2 conversion; representation/computation donor only"
+    Source.publicAttribution
+
 ------------------------------------------------------------------------
 -- Preprints.  Their formal role is deliberately kept distinct from the
 -- peer-reviewed sources above.
@@ -136,6 +180,30 @@ inselmann2024 =
     "preprint extending typical accelerated-Collatz approximation to the maximal stated logarithmic horizon alpha = 2/log(4/3); almost-all calibration only"
     Source.publicAttribution
 
+winklerStoppingTree : Source.AttributedSource
+winklerStoppingTree =
+  Source.mkNoDOISource
+    "Mike Winkler"
+    "The Recursive Stopping Time Structure of the 3x+1 Function"
+    "arXiv:1709.03385"
+    "2017; current arXiv revision"
+    "https://arxiv.org/abs/1709.03385"
+    (Source.namedSourceKind "academic preprint")
+    "preprint recursive congruence-class/tree description for finite stopping-time classes; finite structural donor only and not universal coefficient stopping"
+    Source.publicAttribution
+
+winklerSemiconvergent2026 : Source.AttributedSource
+winklerSemiconvergent2026 =
+  Source.mkNoDOISource
+    "Mike Winkler"
+    "Admissible qx+1 Sequences, Semiconvergents, and Rational Catalan Numbers"
+    "arXiv:2609.22303"
+    "2026"
+    "https://arxiv.org/abs/2609.22303"
+    (Source.namedSourceKind "academic preprint")
+    "preprint theorem identifying equality orders in finite admissible qx+1 passage bounds with one-sided best approximants/convergents/semiconvergents of log_2(q); exact finite multiplicative-word donor, not affine-correction or universal-stopping authority"
+    Source.publicAttribution
+
 ------------------------------------------------------------------------
 -- Admissions and atlas.
 ------------------------------------------------------------------------
@@ -168,14 +236,36 @@ hercherAdmission : CollatzSourceAdmission
 hercherAdmission =
   collatzSourceAdmission hercher2023 nontrivialCycleExclusionRole peerReviewedWithCorrigendum
 
+terrasAdmission : CollatzSourceAdmission
+terrasAdmission =
+  collatzSourceAdmission terras1976 foundationalCoefficientStoppingRole peerReviewed
+
+lagariasAdmission : CollatzSourceAdmission
+lagariasAdmission =
+  collatzSourceAdmission lagarias1985 coefficientStoppingSurveyRole peerReviewed
+
+sterinWoodsAdmission : CollatzSourceAdmission
+sterinWoodsAdmission =
+  collatzSourceAdmission sterinWoods2020 binaryTernaryAutomatonRole peerReviewed
+
+winklerStoppingTreeAdmission : CollatzSourceAdmission
+winklerStoppingTreeAdmission =
+  collatzSourceAdmission winklerStoppingTree coefficientStoppingTreePreprintRole preprint
+
+winklerSemiconvergentAdmission : CollatzSourceAdmission
+winklerSemiconvergentAdmission =
+  collatzSourceAdmission winklerSemiconvergent2026 semiconvergentPassagePreprintRole preprint
+
 collatzSOTA2026Atlas : Source.AttributedSourceAtlas
 collatzSOTA2026Atlas =
   Source.mkSourceAtlas
     "Collatz/Syracuse terminal max-cut SOTA atlas"
     "DASHI.Analysis.CollatzSyracuseSOTA2026Exact"
     (tao2022 ∷ rozierTerracol2026 ∷ barina2025 ∷ hercher2023 ∷
-     niu2026 ∷ angeltveit2026 ∷ inselmann2024 ∷ [])
-    "claim-relative sources for almost-all dynamics, paradoxical finite sequences, parity-vector density, finite verification, verification algorithms, typical horizons, and cycle exclusion"
+     terras1976 ∷ lagarias1985 ∷ sterinWoods2020 ∷
+     niu2026 ∷ angeltveit2026 ∷ inselmann2024 ∷
+     winklerStoppingTree ∷ winklerSemiconvergent2026 ∷ [])
+    "claim-relative sources for almost-all dynamics, paradoxical finite sequences, coefficient/stopping-time history, parity-vector density, finite verification, verification algorithms, typical horizons, cycle exclusion, binary/ternary process representation, recursive stopping classes, and finite semiconvergent passage orders"
 
 ------------------------------------------------------------------------
 -- Promotion boundary.
@@ -190,14 +280,20 @@ record CollatzSOTA2026Boundary : Set where
     paradoxicalLiteratureAttachedToAffineCorrectionFrontier : Nat
     finiteVerificationAttachedAsComputationOnly : Nat
     cycleExclusionKeptSeparateFromUniversalStopping : Nat
+    coefficientStoppingHistoryAttributed : Nat
+    binaryTernaryAutomatonRoleSeparated : Nat
+    semiconvergentPassageTheoremRoleSeparated : Nat
 
     externalSourcesImportCollatzProof : Nat
     preprintObservationPromotedToTheorem : Nat
     finiteVerificationPromotedToUnboundedProof : Nat
     almostAllPromotedToAllStarts : Nat
+    coefficientStoppingConjecturePromotedToProof : Nat
+    binaryTernaryAutomatonPromotedToUniversalStopping : Nat
+    semiconvergentPassagePromotedToAffineCorrectionEscape : Nat
 
 canonicalCollatzSOTA2026Boundary : CollatzSOTA2026Boundary
 canonicalCollatzSOTA2026Boundary =
   collatzSOTA2026Boundary
-    1 1 1 1 1 1
-    0 0 0 0
+    1 1 1 1 1 1 1 1 1
+    0 0 0 0 0 0 0
