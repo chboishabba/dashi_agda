@@ -7,6 +7,7 @@ import DASHI.Cognition.ProtectiveSpatialIntelligenceExact as Core
 import DASHI.Cognition.VilyaProtectionSourceAtlasExact as Vilya
 import DASHI.Cognition.ProtectiveSpatialDualUseAntiPanopticonExact as DualUse
 import DASHI.Cognition.KirkVilyaCounterfactualPreventionBoundaryExact as Kirk
+import DASHI.Cognition.VilyaGodsEyeAntiPanopticonWeldExact as Weld
 
 gevObservationDoesNotCreateProtectiveAuthority :
   Core.observationCreatesProtectiveAuthority ≡ false
@@ -43,3 +44,15 @@ vilyaWouldHavePreventedKirkNotPaid = refl
 capabilityRelevanceDoesNotPayCausalPrevention :
   Kirk.capabilityAddressesOmittedObservableImpliesPrevention ≡ false
 capabilityRelevanceDoesNotPayCausalPrevention = refl
+
+sharedWorldStateDoesNotTransferOperationalAuthority :
+  Weld.sharedSpatialStateTransfersOperationalAuthority ≡ false
+sharedWorldStateDoesNotTransferOperationalAuthority = refl
+
+privacyAndNonDominationSurviveProtectiveProjection :
+  Weld.privacyAndNonDominationRemainProtected ≡ true
+privacyAndNonDominationSurviveProtectiveProjection = refl
+
+publicObservationAndProtectiveOperationsRemainDistinct :
+  Weld.godsEyeViewEqualsVilyaOperationalSystem ≡ false
+publicObservationAndProtectiveOperationsRemainDistinct = refl
