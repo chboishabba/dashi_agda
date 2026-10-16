@@ -6,7 +6,12 @@ from pathlib import Path
 import subprocess
 from typing import Any, Iterable
 
-from .narrative import NarrativeEvent, archaeology, frontier_genealogy
+from .narrative import (
+    NarrativeEvent,
+    archaeology,
+    frontier_genealogy,
+    stale_frontiers,
+)
 from .narrative_git import read_commit_narrative_events
 from .narrative_index import attach_pr_semantic_context, link_events_to_history
 from .pr_events import PullRequestEvent, collect_pr_events
@@ -93,8 +98,10 @@ def _ranked_payload(items: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def build_explanation(events: Iterable[NarrativeEvent], query: str) -> dict[str, Any]:
-    ranked = archaeology(events, query, limit=80)
-    genealogy = frontier_genealogy(events, query, limit=120)
+    materialized = list(events)
+    ranked = archaeology(materialized, query, limit=80)
+    genealogy = frontier_genealogy(materialized, query, limit=120)
+    stale = stale_frontiers(materialized, query, limit=120)
     relevant = [item["event"] for item in ranked]
     latest = max(relevant, key=lambda event: (event.timestamp, event.event_id)) if relevant else None
 
@@ -115,6 +122,7 @@ def build_explanation(events: Iterable[NarrativeEvent], query: str) -> dict[str,
         "latest_event": latest.to_dict() if latest is not None else None,
         "current_frontier": current_frontier,
         "frontier_genealogy": genealogy,
+        "potentially_stale_frontiers": stale,
         "archaeology": _ranked_payload(ranked[:20]),
     }
 
@@ -134,7 +142,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    for name in ("history", "explain", "frontier", "archaeology"):
+    for name in ("history", "explain", "frontier", "stale", "archaeology"):
         command = sub.add_parser(name)
         _add_source_args(command)
         command.add_argument("query")
@@ -195,6 +203,13 @@ def main(argv: list[str] | None = None) -> int:
             "source_status": source_status,
             "authority": "development-narrative",
             "genealogy": frontier_genealogy(events, query, limit=args.limit),
+        }
+    elif args.command == "stale":
+        payload = {
+            "query": query,
+            "source_status": source_status,
+            "authority": "development-narrative-heuristic",
+            "potentially_stale_frontiers": stale_frontiers(events, query, limit=args.limit),
         }
     elif args.command == "explain":
         payload = build_explanation(events, query)
