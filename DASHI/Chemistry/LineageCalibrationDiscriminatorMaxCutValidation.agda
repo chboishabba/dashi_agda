@@ -7,6 +7,9 @@ open import Data.Product using (_×_; _,_)
 import DASHI.Chemistry.GoldReactionReplaySuiteExact as Gold
 import DASHI.Biology.LeadCalciumEndToEndReplayExact as PbCa
 import DASHI.Biology.KitzerowBH4FluxCausalModelsExact as BH4
+import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact as Hepatic
+import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorExact as Neural
+import DASHI.Chemistry.LineageEvidenceAcquisitionStatusExact as Status
 import DASHI.Chemistry.LineageBidiDiscriminatorSynthesisExact as Disc
 import DASHI.Biology.CarbonSiliconReachableChemistryBenchmarkExact as Carbon
 import DASHI.Chemistry.LineageCalibrationAttributionEnvelopeExact as Attribution
@@ -21,10 +24,23 @@ pbCaReplayRetainsFineAtomicDifference :
   PbCa.atomicIdentityCollapsed PbCa.canonicalLeadCalciumEndToEndReplay ≡ false
 pbCaReplayRetainsFineAtomicDifference = refl
 
-bh4FluxDoesNotPretendMeasuredNumbers :
+bh4FluxDoesNotPretendWholeModelNumericCalibration :
   BH4.numericBranchFluxCalibrated BH4.canonicalBH4FluxModel ≡ false
   × BH4.competingArchitecturesExplicit BH4.canonicalBH4FluxModel ≡ true
-bh4FluxDoesNotPretendMeasuredNumbers = refl , refl
+bh4FluxDoesNotPretendWholeModelNumericCalibration = refl , refl
+
+bh4DirectDiscriminatorsPaySubcoordinatesWithoutWholeClosure :
+  Hepatic.sameSystemPAHAndINOSMeasured Hepatic.canonicalHepaticCompetitionBoundary ≡ true
+  × Hepatic.hepaticTwoBranchResultProvesWholeBH4AllocatorModel Hepatic.canonicalHepaticCompetitionBoundary ≡ false
+  × Neural.simpleCurrentPoolSufficiencySupported Neural.canonicalNeuralContextBoundary ≡ false
+  × Neural.neuralEvidenceProvesWholeKitzerowModel Neural.canonicalNeuralContextBoundary ≡ false
+bh4DirectDiscriminatorsPaySubcoordinatesWithoutWholeClosure = refl , (refl , (refl , refl))
+
+bh4AcquisitionStateIsPartialNotClosed :
+  Status.directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial Status.canonicalEvidenceAcquisitionStatusBoundary ≡ true
+  × Status.hepaticTwoBranchPaymentClosesWholeMultiBranchTarget Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
+  × Status.currentPoolRestorationGuaranteesFunctionalRescue Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
+bh4AcquisitionStateIsPartialNotClosed = refl , (refl , refl)
 
 discriminatorSynthesisDoesNotCreateTruth :
   Disc.generatedCandidateCreatesTruth Disc.canonicalLineageBidiSynthesisBoundary ≡ false
