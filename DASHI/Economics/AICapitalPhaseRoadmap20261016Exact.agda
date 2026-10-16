@@ -42,17 +42,17 @@ phase1EmpiricalCoordinates : PhaseDeliverable
 phase1EmpiricalCoordinates = phase-deliverable
   "Phase 1 — same-object empirical coordinate acquisition"
   currentAcquisition
-  "aggregate CoreWeave customer cash; historical Microsoft named recognised revenue; capital-spread lower bound; capacity-vintage surfaces; same-object CoreWeave financing depreciation 66-78 months with common six-year basis; project/customer-specific DDTL financing spreads; explicit customer-credit-to-financing coupling; DDTL4 borrower-SPV to Polaris Forge 1 site mapping; current multi-generation rental ladder; commercial secondary-market residual-value envelope; provider segment costs; MI355X purchase/depreciation envelope; 37bp AI-linked credit spread cross-section; demand/distress SOTA surface; OpenAI reported multi-year negative-FCF/external-financing dependence; current Australian operative-policy baseline"
-  "named current payer cash; workload-normalised provider serving cost; exact owned-node PUE/operations; CoreWeave-owned realised residual/resale receipts; exact financed GPU generation/count/MW and associated customer identities; serial GPU refresh/retirement; realised generation ASP/utilisation; realised enacted-obligation compliance costs"
-  "each previously-open coordinate is populated from the same economic object and same declared horizon/basis, or explicitly bounded as unobservable; commercial/private-reporting proxies remain separate from audited realised ledgers"
+  "aggregate CoreWeave customer cash; historical Microsoft named recognised revenue; capacity-vintage surfaces; same-object CoreWeave contractual GPU depreciation 66-78 months with common six-year basis; project/customer-specific DDTL financing spreads; customer-credit-to-financing coupling; DDTL4 borrower-SPV to Polaris Forge 1 site mapping; DDTL3 named OpenAI/Phoenix 1 cash-control architecture, contract-realisation metric and private GPU-rack serial reporting; CRR equity-cure mechanism plus non-descent of covenant compliance to customer cash; current multi-generation rental ladder; commercial secondary-market residual-value envelope; provider segment costs and owned-node acquisition/depreciation envelopes"
+  "public OpenAI customer-cash versus CRR-cure decomposition; public contract-realisation ratio; public GPU serial/generation inventory; exact financed MW/count; workload-normalised provider serving cost; exact owned-node PUE/operations; CoreWeave-owned realised residual/resale receipts; serial refresh/retirement; realised generation ASP/utilisation; realised enacted-obligation compliance costs"
+  "each previously-open coordinate is populated from the same economic object and same declared horizon/basis, or explicitly classified as privately measured but publicly unobserved; covenant/equity-cure values must not be collapsed into customer cash"
   false
 
 phase2Longitudinal : PhaseDeliverable
 phase2Longitudinal = phase-deliverable
   "Phase 2 — longitudinal identification"
   longitudinalIdentification
-  "dated state machinery, fixed-basket market series, open-weight production trajectory, debt/vintage scenario calendars, same-issuer CoreWeave CDS deterioration, and a stronger same-instrument 9.625-percent 2032 note repricing from issue coupon to above-15-percent October yield"
-  "repeat the full X_t under identical producer definitions; repeated same-instrument yields plus realised refinancing transactions/default/restructuring; same-generation price/utilisation/resale decay; named customer-cash and contract-realisation histories"
+  "dated state machinery, fixed-basket market series, open-weight production trajectory, debt/vintage scenario calendars, same-issuer CoreWeave CDS deterioration, and same-instrument 9.625-percent 2032 note repricing from issue coupon to above-15-percent October yield"
+  "repeat full X_t under identical producer definitions; repeat same-instrument bond/CDS observations plus realised refinancing/default/restructuring; customer-cash-versus-cure histories; same-generation price/utilisation/resale decay; named contract-realisation histories"
   "at least two comparable later state points across each promoted consumer with unchanged measurement contracts, permitting persistence/regime inference rather than one stressed issuer/instrument coordinate"
   false
 
@@ -69,8 +69,8 @@ phase4OutcomeValidation : PhaseDeliverable
 phase4OutcomeValidation = phase-deliverable
   "Phase 4 — real-world outcome / thesis falsification"
   outcomeValidation
-  "predeclared rival signatures plus a current compatibility surface: selected coordinates most strongly support refinancing-stress and commoditisation-with-volume-growth, while orderly capital rotation remains materially compatible and no terminal regime is selected"
-  "populate the missing signature coordinates longitudinally and discriminate among rivals only when same-basis realised returns, funding/refinancing outcomes, scarcity-rent trajectories, utilisation and market-structure observations are available"
+  "predeclared rival signatures plus current compatibility surface: refinancing-stress and commoditisation-with-volume-growth have the strongest selected-coordinate support, while orderly capital rotation remains materially compatible and no terminal regime is selected"
+  "populate missing signature coordinates longitudinally and discriminate among rivals only when same-basis realised returns, funding/refinancing outcomes, scarcity-rent trajectories, utilisation, customer-cash decomposition and market-structure observations are available"
   "one or more hypotheses are discriminated without post-hoc redefining the consumer; currentOutcomePromotionReady and anyTerminalRegimeSelected remain false until those longitudinal payments exist"
   false
 
@@ -87,6 +87,9 @@ phase2AcquisitionCoordinatesPaid = refl
 
 sameObjectFinancingMaxCutPaid : FinancingMax.sameObjectDepreciationClock FinancingMax.coreWeaveSameObjectFinancingStatus ≡ true
 sameObjectFinancingMaxCutPaid = FinancingMax.sameObjectDepreciationClockPaid
+
+contractRealisationCureNonDescentPaid : FinancingMax.covenantComplianceInsufficientForCustomerCash FinancingMax.coreWeaveSameObjectFinancingStatus ≡ true
+contractRealisationCureNonDescentPaid = FinancingMax.covenantComplianceInsufficientForCustomerCashPaid
 
 sameInstrumentBondRepricingPaid : Bond.sameInstrumentLongitudinalRepricing Bond.coreWeave2032BondRepricing ≡ true
 sameInstrumentBondRepricingPaid = Bond.sameInstrumentLongitudinalRepricingPaid
@@ -111,4 +114,4 @@ compatibilityDoesNotSelectRegime = refl
 
 boundary : String
 boundary =
-  "The roadmap is measurement-first and now materially more same-object. Phase 1 has corrected the generic 36-48 month lender-horizon shortcut using CoreWeave's own filed GPU-backed agreements, which disclose contractual depreciation around 66-78 months and commonly six years; project financing rates and availability are contract/customer specific, customer credit directly enters financing terms, and DDTL4 is source-joined through the same borrower SPV to identified Polaris Forge 1 lease space. Historical Microsoft named recognised revenue is paid without de-anonymising 2026 or creating named cash. Phase 2 now contains both same-issuer CDS deterioration and a same-instrument 2032-note repricing of at least 5.375 percentage points versus issue coupon, while realised refinancing/default outcomes remain open. Phase 4 continues to favour no terminal regime until realised longitudinal cash, asset and financing outcomes discriminate the predeclared rivals."
+  "The roadmap is measurement-first and now materially more same-object. Phase 1 has corrected the generic 36-48 month lender-horizon shortcut using CoreWeave's filed GPU-backed agreements, which disclose contractual depreciation around 66-78 months and commonly six years. Project financing rates and availability are contract/customer specific; customer credit directly enters financing terms; DDTL4 is source-joined through the same borrower SPV to Polaris Forge 1 lease space. DDTL3 further proves that named OpenAI/Phoenix 1 actual-customer-cash, contract-realisation and GPU-rack serial measurements exist inside the lender control surface. Its amendment permits equity-cure proceeds into the CRR numerator, and canonical non-descent proves covenant compliance cannot identify terminal customer cash without a customer-cash versus cure decomposition. Phase 2 now contains both same-issuer CDS deterioration and a same-instrument 2032-note repricing of at least 5.375 percentage points versus issue coupon, while realised refinancing/default outcomes remain open. Phase 4 still selects no terminal regime until realised longitudinal cash, asset and financing outcomes discriminate the predeclared rivals."
