@@ -13,21 +13,21 @@ transportPreservesAppendOnlyHistory :
 transportPreservesAppendOnlyHistory = refl
 
 literalHyperformInhabited :
-  H.HyperformBoundary.literalChemistryHyperfibreInhabited
-    H.canonicalHyperformBoundary ≡ true
+  H.HyperformBoundary.literalChemistryHyperfibreInhabited H.canonicalHyperformBoundary ≡ true
 literalHyperformInhabited = refl
 
 mechanismSourceAttached :
-  H.HyperformBoundary.sourceBackedMechanismAttached
-    H.canonicalHyperformBoundary ≡ true
+  H.HyperformBoundary.sourceBackedMechanismAttached H.canonicalHyperformBoundary ≡ true
 mechanismSourceAttached = refl
 
-atomicIdentityTransportPaid :
-  H.HyperformBoundary.atomicIdentityTransportPaid
-    H.canonicalHyperformBoundary ≡ true
-atomicIdentityTransportPaid = refl
+atomicInventoryEndpointsPaid :
+  H.HyperformBoundary.atomic369InventoryEndpointsPaid H.canonicalHyperformBoundary ≡ true
+atomicInventoryEndpointsPaid = refl
+
+individualAtomIdentityTransportStillUnpaid :
+  H.HyperformBoundary.individualAtomIdentityTransportPaid H.canonicalHyperformBoundary ≡ false
+individualAtomIdentityTransportStillUnpaid = refl
 
 hyperformDoesNotCreateMonsterAction :
-  H.HyperformBoundary.fibreCreatesMonsterAction
-    H.canonicalHyperformBoundary ≡ false
+  H.HyperformBoundary.fibreCreatesMonsterAction H.canonicalHyperformBoundary ≡ false
 hyperformDoesNotCreateMonsterAction = refl
