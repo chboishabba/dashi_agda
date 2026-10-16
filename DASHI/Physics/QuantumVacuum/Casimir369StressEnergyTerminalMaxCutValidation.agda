@@ -69,9 +69,17 @@ selectedGroupCompactSimpleStillOpenRegression :
   Terminal.selectedQFTGroupCompactSimpleWitnessPaid Terminal.canonicalTerminalBoundary ≡ false
 selectedGroupCompactSimpleStillOpenRegression = refl
 
-selectedGroupSprint105SU2StillOpenRegression :
+selectedGroupDynkinA1StillOpenRegression :
+  Terminal.selectedQFTGroupDynkinA1ClassificationPaid Terminal.canonicalTerminalBoundary ≡ false
+selectedGroupDynkinA1StillOpenRegression = refl
+
+selectedGroupSprint105TagStillOpenRegression :
   Terminal.selectedQFTGroupSprint105SU2ClassificationPaid Terminal.canonicalTerminalBoundary ≡ false
-selectedGroupSprint105SU2StillOpenRegression = refl
+selectedGroupSprint105TagStillOpenRegression = refl
+
+sprint105TagSecondaryRegression :
+  Terminal.sprint105SU2ClassificationIsSecondary Terminal.canonicalTerminalBoundary ≡ true
+sprint105TagSecondaryRegression = refl
 
 selectedGroupQuaternionSU2StillOpenRegression :
   Terminal.selectedQFTGroupQuaternionSU2InterpretationPaid Terminal.canonicalTerminalBoundary ≡ false
@@ -140,7 +148,7 @@ firstUnificationBlockerRegression = refl
 
 secondUnificationBlockerRegression :
   Terminal.secondUnificationBlocker
-  ≡ Terminal.missingSelectedQFTGroupSprint105SU2Classification
+  ≡ Terminal.missingSelectedQFTGroupDynkinA1Classification
 secondUnificationBlockerRegression = refl
 
 thirdUnificationBlockerRegression :
