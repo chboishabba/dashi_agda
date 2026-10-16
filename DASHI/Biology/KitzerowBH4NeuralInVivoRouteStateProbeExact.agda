@@ -11,11 +11,6 @@ import DASHI.Biology.KitzerowBH4TransportCarrierProbeExact as Transport
 
 ------------------------------------------------------------------------
 -- IN-VIVO / EX-VIVO ROUTE-AND-STATE RESPONSE TEST
---
--- This owner tests the stronger claim suggested by the transport/topology pass:
--- increasing total or extracellular BH4 is not equivalent to increasing the
--- intracellular cofactor state of a particular branch. Route, intracellular
--- conversion, enzyme state and physiological context can change the response.
 ------------------------------------------------------------------------
 
 nakaharaEtAl1988Microdialysis : Source.AttributedSource
@@ -57,14 +52,17 @@ nagatsuEtAl1994TH =
     "Primary mouse in-vivo microdialysis study. Peripheral 6R-BH4 increased the DOPA-accumulation index of striatal TH activity by about four-fold in both normal and human-TH-transgenic mice under AADC inhibition. This pays context-specific in-vivo branch activation after peripheral BH4 delivery, not multi-branch allocator closure."
     Source.publicAttribution
 
-bh4TryptophanHydroxylase1998 : Source.AttributedSource
-bh4TryptophanHydroxylase1998 =
-  Source.mkPubMedSource
+ishidaEtAl1998TPH : Source.AttributedSource
+ishidaEtAl1998TPH =
+  Source.mkDOISource
+    "Yasushi Ishida; Kazunari Todaka; Itsumi Kuwahara; H. Hashiguchi; Y. Ishizuka; H. Nakane; Y. Mitsuyama"
     "Peripherally administered tetrahydrobiopterin increases in vivo tryptophan hydroxylase activity in the striatum after transplantation of fetal ventral mesencephalon in six hydroxydopamine lesioned rats"
+    "Neuroscience Letters 253(1):45-48"
     "1998"
+    "10.1016/S0304-3940(98)00601-6"
     "https://pubmed.ncbi.nlm.nih.gov/9754801/"
     Source.academicArticleSource
-    "Primary rat in-vivo microdialysis study. Peripheral 6R-BH4 increased 5-HTP accumulation, used as an index of in-vivo tryptophan-hydroxylase activity, in control and lesioned/transplanted striata. It pays a separate branch-response coordinate but is not the same experiment as the TH/NOS measurements and therefore cannot by itself pay simultaneous allocation."
+    "Primary rat in-vivo microdialysis study. Peripheral 6R-BH4 increased extracellular 6R-BH4 and 5-HTP accumulation, used as an index of in-vivo tryptophan-hydroxylase activity, in control and lesioned/transplanted striata. It pays a separate branch-response coordinate but is not the same experiment as the TH/NOS measurements and therefore cannot by itself pay simultaneous allocation."
     Source.publicAttribution
 
 canonicalNeuralInVivoRouteStateSources : List Source.AttributedSource
@@ -72,7 +70,7 @@ canonicalNeuralInVivoRouteStateSources =
   nakaharaEtAl1988Microdialysis
   ∷ koshimuraMiwaWatanabe1994Sepiapterin
   ∷ nagatsuEtAl1994TH
-  ∷ bh4TryptophanHydroxylase1998
+  ∷ ishidaEtAl1998TPH
   ∷ []
 
 record NeuralRouteStateObservation : Set where
