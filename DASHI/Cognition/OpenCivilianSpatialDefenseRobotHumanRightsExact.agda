@@ -2,6 +2,8 @@ module DASHI.Cognition.OpenCivilianSpatialDefenseRobotHumanRightsExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Interop.SensibLawOntologyTopology as Sensib
 import DASHI.Interop.GodsEyeViewProofCarryingWorldOntologyExact as GEV
 import DASHI.Interop.GodsEyeViewWorldOntologyCrossDomainExact as GEVCross
 import DASHI.Cognition.ProtectiveSpatialDualUseAntiPanopticonExact as DualUse
@@ -164,6 +166,7 @@ protectedPersonAndObservedPopulationMustBeSame = false
 antiPanopticonAnchor : GEV.AntiPanopticonBoundary
 antiPanopticonAnchor = GEV.canonicalAntiPanopticonBoundary
 
+protectedInterestAnchor : List Sensib.InterestModality
 protectedInterestAnchor = GEVCross.antiPanopticonProtectedInterests
 
 dualUseAnchor : DualUse.ProtectiveUseOfForceBoundary
@@ -182,6 +185,7 @@ icrcPositionCreatesBindingTreatyLaw = false
 icrcNormativePositionCreatesCaseSpecificLegalityJudgment : Bool
 icrcNormativePositionCreatesCaseSpecificLegalityJudgment = false
 
+sourceAtlasAnchor : Source.AttributedSourceAtlas
 sourceAtlasAnchor = Sources.openCivilianSpatialDefenseAtlas
 
 record OpenCivilianHumanRightsBoundary : Set where
