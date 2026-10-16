@@ -3,16 +3,10 @@ module DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact where
 ------------------------------------------------------------------------
 -- EXACT FINITE-CONTROL PHASE LIFT
 --
--- For the fixed diagonal target, the candidate budget T is one fixed natural.
--- We therefore do not need a runtime tape counter merely to obtain a fresh
--- return boundary.  Instead lift the source control to
---
---   sourceState x elapsedPhase,   elapsedPhase : Fin (T + 1),
---
--- encoded literally in Fin (|Q| * (T + 1)).  Every source rule is copied at
--- each phase k < T and advances k -> k+1.  No resident source rule is generated
--- at the terminal phase T.  Hence the T-boundary is quiescent by construction
--- and a cross-mode return link cannot collide with a resident candidate key.
+-- For one fixed diagonal target the candidate budget T is one fixed natural.
+-- Lift source control to (sourceState, elapsedPhase), elapsedPhase : Fin (T+1).
+-- Every source rule is copied at each k<T and advances k -> k+1.  No copied
+-- rule exists at phase T.  Thus the exact-T boundary is quiescent by syntax.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -36,7 +30,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleTableInterpreter
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 
 ------------------------------------------------------------------------
--- Fin n embeds as the nonterminal phases of Fin (suc n).
+-- Phase arithmetic.
 ------------------------------------------------------------------------
 
 raisePhase : ∀ {n : Nat} → Fin.Fin n → Fin.Fin (suc n)
@@ -72,7 +66,7 @@ raisePhaseNotLast {suc n} (Fin.suc phase) equality =
   raisePhaseNotLast phase (finSucInjective equality)
 
 ------------------------------------------------------------------------
--- Product-state codec and injectivity projections.
+-- Fin-product state codec.
 ------------------------------------------------------------------------
 
 phaseState :
@@ -89,13 +83,10 @@ combineFirstInjective :
   x ≡ y
 combineFirstInjective {m} {n} {x} {y} {u} {v} equality =
   trans
-    (sym
-      (cong proj₁
-        (remQuot-combine {n = m} {k = n} x u)))
+    (sym (cong proj₁ (remQuot-combine {n = m} {k = n} x u)))
     (trans
       (cong (λ code → proj₁ (Fin.remQuot {m = m} n code)) equality)
-      (cong proj₁
-        (remQuot-combine {n = m} {k = n} y v)))
+      (cong proj₁ (remQuot-combine {n = m} {k = n} y v)))
 
 combineSecondInjective :
   ∀ {m n : Nat}
@@ -105,16 +96,13 @@ combineSecondInjective :
   u ≡ v
 combineSecondInjective {m} {n} {x} {y} {u} {v} equality =
   trans
-    (sym
-      (cong proj₂
-        (remQuot-combine {n = m} {k = n} x u)))
+    (sym (cong proj₂ (remQuot-combine {n = m} {k = n} x u)))
     (trans
       (cong (λ code → proj₂ (Fin.remQuot {m = m} n code)) equality)
-      (cong proj₂
-        (remQuot-combine {n = m} {k = n} y v)))
+      (cong proj₂ (remQuot-combine {n = m} {k = n} y v)))
 
 ------------------------------------------------------------------------
--- Copy one source rule at one nonterminal elapsed phase.
+-- Rule compilation.
 ------------------------------------------------------------------------
 
 liftRuleAt :
@@ -167,10 +155,6 @@ mapPhaseRulePreimage phase {rules = rule ∷ rest} (Local.ruleThere occurs)
 ... | original , originalOccurs , exact =
   original , Local.ruleThere originalOccurs , exact
 
-------------------------------------------------------------------------
--- Concatenate the copied table over every k : Fin T.
-------------------------------------------------------------------------
-
 compilePhases :
   ∀ {states symbols steps : Nat} →
   List (Fin.Fin steps) →
@@ -180,31 +164,19 @@ compilePhases [] rules = []
 compilePhases (phase ∷ phases) rules =
   Mode.append (mapPhaseRules phase rules) (compilePhases phases rules)
 
-phaseTablePreimage :
-  ∀ {states symbols steps : Nat}
-    (phases : List (Fin.Fin steps))
-    {wanted : Local.TapeRule (Fin.Fin (states * suc steps)) (Fin.Fin symbols)}
-    {rules : List (Local.TapeRule (Fin.Fin states) (Fin.Fin symbols))} →
-  Local.RuleOccurs wanted (compilePhases phases rules) →
-  Σ (Fin.Fin steps) λ phase →
-    Σ (Local.TapeRule (Fin.Fin states) (Fin.Fin symbols)) λ original →
-      Σ (Local.RuleOccurs original rules) λ _ →
-        wanted ≡ liftRuleAt phase original
-phaseTablePreimage [] ()
-phaseTablePreimage (phase ∷ phases) {rules = rules} occurs
-  with Mode.splitAppendOccurrence
-        (mapPhaseRules phase rules)
-        (compilePhases phases rules)
-        occurs
-... | Mode.occursLeft leftOccurs
-  with mapPhaseRulePreimage phase leftOccurs
-... | original , originalOccurs , exact =
-  phase , original , originalOccurs , exact
-phaseTablePreimage (phase ∷ phases) {rules = rules} occurs
-  | Mode.occursRight rightOccurs
-  with phaseTablePreimage phases rightOccurs
-... | later , original , originalOccurs , exact =
-  later , original , originalOccurs , exact
+phaseLiftRules :
+  (source : Coded.CodedFiniteStandardTM) →
+  (steps : Nat) →
+  List
+    (Local.TapeRule
+      (Fin.Fin (Coded.stateCount source * suc steps))
+      (Fin.Fin (Coded.symbolCount source)))
+phaseLiftRules source steps =
+  compilePhases (Coded.allFin steps) (Coded.rules source)
+
+------------------------------------------------------------------------
+-- Occurrence transport / inversion.
+------------------------------------------------------------------------
 
 appendLeftRuleOccurs :
   ∀ {State Symbol : Set}
@@ -260,18 +232,33 @@ phaseLiftRuleOccurs source phase ruleOccurs =
     (Coded.allFinMember phase)
     ruleOccurs
 
-phaseLiftRules :
-  (source : Coded.CodedFiniteStandardTM) →
-  (steps : Nat) →
-  List
-    (Local.TapeRule
-      (Fin.Fin (Coded.stateCount source * suc steps))
-      (Fin.Fin (Coded.symbolCount source)))
-phaseLiftRules source steps =
-  compilePhases (Coded.allFin steps) (Coded.rules source)
+phaseTablePreimage :
+  ∀ {states symbols steps : Nat}
+    (phases : List (Fin.Fin steps))
+    {wanted : Local.TapeRule (Fin.Fin (states * suc steps)) (Fin.Fin symbols)}
+    {rules : List (Local.TapeRule (Fin.Fin states) (Fin.Fin symbols))} →
+  Local.RuleOccurs wanted (compilePhases phases rules) →
+  Σ (Fin.Fin steps) λ phase →
+    Σ (Local.TapeRule (Fin.Fin states) (Fin.Fin symbols)) λ original →
+      Σ (Local.RuleOccurs original rules) λ _ →
+        wanted ≡ liftRuleAt phase original
+phaseTablePreimage [] ()
+phaseTablePreimage (phase ∷ phases) {rules = rules} occurs
+  with Mode.splitAppendOccurrence
+        (mapPhaseRules phase rules)
+        (compilePhases phases rules)
+        occurs
+... | Mode.occursLeft leftOccurs
+  with mapPhaseRulePreimage phase leftOccurs
+... | original , originalOccurs , exact =
+  phase , original , originalOccurs , exact
+... | Mode.occursRight rightOccurs
+  with phaseTablePreimage phases rightOccurs
+... | later , original , originalOccurs , exact =
+  later , original , originalOccurs , exact
 
 ------------------------------------------------------------------------
--- Determinism is inherited from the source table plus injectivity of phase.
+-- Determinism.
 ------------------------------------------------------------------------
 
 phaseLiftDispatchUnique :
@@ -309,7 +296,7 @@ phaseLiftFragment source steps = record
   }
 
 ------------------------------------------------------------------------
--- Initial and terminal phase-state embeddings.
+-- Full coded carrier.
 ------------------------------------------------------------------------
 
 phaseInitialState :
@@ -345,11 +332,6 @@ phaseTerminalState :
 phaseTerminalState source steps q =
   phaseState q (lastPhase steps)
 
-------------------------------------------------------------------------
--- A complete coded TM carrier.  The accepting state is the source accepting
--- state at terminal phase T.  The table itself contains no terminal-phase rule.
-------------------------------------------------------------------------
-
 phaseLiftCode :
   (source : Coded.CodedFiniteStandardTM) →
   (steps : Nat) →
@@ -364,12 +346,6 @@ phaseLiftCode source steps = record
   ; Coded.rules = phaseLiftRules source steps
   ; Coded.dispatchUnique = phaseLiftDispatchUnique source steps
   }
-
-phaseLiftCodeRulesExact :
-  (source : Coded.CodedFiniteStandardTM) →
-  (steps : Nat) →
-  Coded.rules (phaseLiftCode source steps) ≡ phaseLiftRules source steps
-phaseLiftCodeRulesExact source steps = refl
 
 phaseLiftAcceptingStateExact :
   (source : Coded.CodedFiniteStandardTM) →
@@ -394,8 +370,7 @@ phaseLiftConcreteDeterministic source steps =
   phaseLiftDispatchUnique source steps
 
 ------------------------------------------------------------------------
--- Every listed source rule is selected at every nonterminal phase and advances
--- the phase exactly once while preserving write symbol/direction.
+-- Operational rule theorem.
 ------------------------------------------------------------------------
 
 phaseLiftListedRuleDeterminesStandardTransition :
@@ -421,16 +396,15 @@ phaseLiftListedRuleDeterminesStandardTransition :
             (phaseTargetState source (Local.targetState wanted) phase)
             (Local.writeSymbol wanted)
             (Local.direction wanted))
-phaseLiftListedRuleDeterminesStandardTransition source phase wantedOccurs =
+phaseLiftListedRuleDeterminesStandardTransition source {steps} phase wantedOccurs =
   Standard.listedRuleDeterminesStandardTransition
-    (phaseLiftConcreteDeterministic source _)
+    (phaseLiftConcreteDeterministic source steps)
     (phaseLiftRuleOccurs source phase wantedOccurs)
     refl
     refl
 
 ------------------------------------------------------------------------
--- THE KEY RETURN-BOUNDARY THEOREM:
--- no copied candidate rule has a source state in terminal phase T.
+-- Terminal phase is genuinely quiescent.
 ------------------------------------------------------------------------
 
 noResidentRuleAtTerminalPhase :
@@ -512,12 +486,7 @@ terminalStandardTransitionNothing source steps q symbol
 ------------------------------------------------------------------------
 -- MAX-CUT CONSEQUENCE
 --
--- The old exact-T return obstruction is no longer an architectural blocker.
--- For one fixed budget T, the candidate is compiled into a literal coded
--- finite machine with T+1 phase slices.  Every source rule is operationally
--- selected at each k<T; the terminal slice has no resident rule for ANY scanned
--- symbol, and its standard transition is literally `nothing`.  A safe return
--- link can therefore be attached there without overriding candidate semantics.
--- Remaining work is whole-run induction and integration with generator/opposite
--- modes, not endpoint quiescence.
+-- Exact-T endpoint quiescence is now a concrete compiler theorem.  The remaining
+-- phase-lift work is whole-run induction: transport a source T-step exact run to
+-- the same tape evolution under the phase-lift code, ending in terminal phase T.
 ------------------------------------------------------------------------
