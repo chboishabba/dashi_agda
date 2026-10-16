@@ -110,6 +110,16 @@ canonicalSourceAtlasAuthorityReceipt :
   Source.atlasCreatesAuthority (sourceAtlas canonicalAutismVaccineAttributionRuleBoundary) ≡ false
 canonicalSourceAtlasAuthorityReceipt = Atlas.canonicalAtlasDoesNotCreateAuthority
 
+canonicalHbombCitationImportsProofWitness :
+  Source.citationImportsProof Atlas.hbomberguyMeasuredResponseSource ≡ false
+canonicalHbombCitationImportsProofWitness =
+  Source.citationImportsProofIsFalse Atlas.hbomberguyMeasuredResponseSource
+
+canonicalHbombCitationAuthorityWitness :
+  Source.citationCreatesAuthority Atlas.hbomberguyMeasuredResponseSource ≡ false
+canonicalHbombCitationAuthorityWitness =
+  Source.citationCreatesAuthorityIsFalse Atlas.hbomberguyMeasuredResponseSource
+
 canonicalSourceConsumerTruthReceipt :
   Consumer.sourceIdentityImportsTruthAuthority Consumer.canonicalAttributionConsumerBoundary ≡ false
 canonicalSourceConsumerTruthReceipt = refl
