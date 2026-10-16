@@ -25,6 +25,7 @@ open import Data.Empty using (⊥)
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact as Modular
 import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact as Consumer
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact as Residual
+import DASHI.Core.ConsumerIndexedResidualRefinementExact as ConsumerResidual
 
 ------------------------------------------------------------------------
 -- 1. A downstream consumer on literal fine modular points.
@@ -103,7 +104,7 @@ frickeSensitiveConsumerCannotFactorThroughSymmetricJ
 ------------------------------------------------------------------------
 
 localJ27FailsAnExplicitFineConsumer :
-  Residual.ConsumerSufficient
+  ConsumerResidual.ConsumerSufficient
     Residual.localJObserver
     (Residual.fineFieldAt Residual.q11) -> ⊥
 localJ27FailsAnExplicitFineConsumer =
