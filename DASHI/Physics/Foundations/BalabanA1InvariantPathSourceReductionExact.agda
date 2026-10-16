@@ -4,11 +4,12 @@ module DASHI.Physics.Foundations.BalabanA1InvariantPathSourceReductionExact wher
 ------------------------------------------------------------------------
 -- A1 SOURCE MAX-CUT: INVARIANT POTENTIAL + EQUIVARIANT SIGNED BASIS PATH.
 --
--- The preferred source frontier names one broad CMP109/116 first-variation
--- naturality package as A1.  The repository's P1 theorem is more precise:
--- signed tensor covariance follows by differentiating an invariant scalar along
--- an equivariant signed basis path.  This file records that reduction without
--- manufacturing the remaining physical source data.
+-- The old preferred source frontier named one broad CMP109/116 first-variation
+-- naturality package as A1.  Overlay Q and the repository's P1 theorem are more
+-- precise: signed tensor covariance follows by differentiating an invariant
+-- scalar along an equivariant signed basis path.  The still sharper Q1 cut now
+-- eliminates a free path per component: the component path is generated from
+-- the exact present-cut finite Tangent carrier by one tangent->curve realization.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -21,7 +22,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyE1SignedSymmetricTangentExact as
 import DASHI.Physics.Foundations.CMP119CosmologyE1SignedReadoutCovarianceExact as Readout
 import DASHI.Physics.Foundations.CMP119CosmologyE1HypercubicSignedAxisActionExact as Axis
 import DASHI.Physics.Foundations.CMP119CosmologyP1InvariantPathDerivativeCovarianceExact as P1
-import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004MExact as Preferred
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Preferred
 import DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact as Hyper
 import DASHI.Physics.YangMills.BalabanCMP109VacuumPolarizationHypercubicSourceSymmetryExact as CMP109
 
@@ -84,13 +85,15 @@ rationalFiniteD1ToRealPathDerivativeIdentificationStillSeparate = true
 -- CMP109 Section 5 supplies coordinate/reflection covariance for the literal
 -- vacuum-polarization tensor/scalar projection.  That is valuable source
 -- symmetry, but it is not by itself a theorem that the selected metric/stress
--- source path is equivariant or that R144's first variation is this path
--- derivative.  Keep those source roles distinct.
+-- tangent curve is equivariant or that BC2 first variation is its ordinary
+-- derivative.  CMP109 Eq.(5.1)'s B->U(exp iB) is a gauge-background variation,
+-- not a metric path by notation alone.
 cmp109VacuumPolarizationScalarSymmetryDoesNotByItselfPayA1PathNaturality : Bool
 cmp109VacuumPolarizationScalarSymmetryDoesNotByItselfPayA1PathNaturality = true
 
 preferredFrontierAlreadyCompilerSaturated : Bool
-preferredFrontierAlreadyCompilerSaturated = Preferred.preferredRouteCompilerSaturated
+preferredFrontierAlreadyCompilerSaturated =
+  Preferred.newMathHasReplacedPresentationEqualities
 
 cmp109HypercubicSourceSymmetryCompilerAlreadyMachineChecked : Bool
 cmp109HypercubicSourceSymmetryCompilerAlreadyMachineChecked = true
@@ -99,9 +102,9 @@ record A1InvariantPathTerminalBoundary : Set where
   constructor a1-invariant-path-terminal-boundary
   field
     signedTensorCovarianceIsCompilerOutput : Bool
-    pathDerivativeRealisationStillSourceEvidence : Bool
-    sourcePathB4EquivarianceStillSourceEvidence : Bool
-    selectedPotentialSameObjectB4InvarianceStillSourceEvidence : Bool
+    tangentCurveRealisationStillSourceEvidence : Bool
+    tangentCurveB4EquivarianceStillSourceEvidence : Bool
+    ordinaryDerivativeSemanticsStillSourceEvidence : Bool
     rationalFiniteD1IdentificationStillSeparate : Bool
     cmp109ScalarSymmetrySubstitutesForMetricPathNaturality : Bool
 
