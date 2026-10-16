@@ -3,10 +3,15 @@ module DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionValidation where
 open import DASHI.Core.Prelude
 import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionExact as NH3
 
-sameObjectHamiltonianSkeletonPaid :
-  NH3.HamiltonianWavefunctionBoundary.sameObjectMolecularHamiltonianSkeletonPaid
+sameObjectSymbolicHamiltonianPaid :
+  NH3.HamiltonianWavefunctionBoundary.sameObjectSymbolicHamiltonianExpressionPaid
     NH3.canonicalHamiltonianWavefunctionBoundary ≡ true
-sameObjectHamiltonianSkeletonPaid = refl
+sameObjectSymbolicHamiltonianPaid = refl
+
+energyValuedOperatorStillUnpaid :
+  NH3.HamiltonianWavefunctionBoundary.energyValuedHamiltonianOperatorPaid
+    NH3.canonicalHamiltonianWavefunctionBoundary ≡ false
+energyValuedOperatorStillUnpaid = refl
 
 sourceBackedGroundStatePESPaid :
   NH3.HamiltonianWavefunctionBoundary.sourceBackedGroundElectronicPESPaid
