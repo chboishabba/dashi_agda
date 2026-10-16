@@ -23,7 +23,8 @@ def test_zheng_2023_public_manifest_is_source_bounded() -> None:
     for marker in (
         "10.1038/s41467-023-40629-8",
         "10.5281/zenodo.8184043",
-        "fiveEnsembleClockNetwork = true",
+        "sourceFiveEnsembleClockNetwork = true",
+        "fiveEnsembleClockNetwork = sourceFiveEnsembleClockNetwork",
         "totalVerticalSpanMillimetres = 10",
         "publishedMeasuredGradientTenthsE19PerCm = 124",
         "publishedExpectedGradientTenthsE19PerCm = 109",
@@ -45,9 +46,11 @@ def test_cgpm_2026_bridge_keeps_policy_authority_separate() -> None:
     for marker in (
         "10.59161/CGPM2026RES4E",
         "2026-10-15",
-        "proposalTargetMeeting = \"29th CGPM (2030)\"",
+        "sourceProposalTargetMeeting = \"29th CGPM (2030)\"",
+        "proposalTargetMeeting = sourceProposalTargetMeeting",
+        "sourceTargetComparisonUncertaintyOrder = \"approaching 1e-18\"",
+        "targetComparisonUncertaintyOrder = sourceTargetComparisonUncertaintyOrder",
         "opticalStandardsOutperformCurrentPrimaryRealization = true",
-        "targetComparisonUncertaintyOrder = \"approaching 1e-18\"",
         "cgpmPolicyAuthorityIngested = true",
         "bothwellYeEstablishesCGPMPolicy = false",
         "cgpmResolutionEstablishesBothwellYeExperiment = false",
@@ -67,8 +70,10 @@ def test_sota_atlas_keeps_deployment_geodesy_and_transfer_distinct() -> None:
         "arXiv:2608.01916",
         "transportableRatioFractionalUncertaintyE18Tenths = 43",
         "transportableResultIsPreprint = true",
-        "deploymentRobustnessIsNotChronometricAccuracy = true",
-        "frequencyTransferIsNotGeopotentialKnowledge = true",
+        "sourceDeploymentRobustnessNonCollapse = true",
+        "deploymentRobustnessIsNotChronometricAccuracy = sourceDeploymentRobustnessNonCollapse",
+        "sourceFrequencyTransferNonCollapse = true",
+        "frequencyTransferIsNotGeopotentialKnowledge = sourceFrequencyTransferNonCollapse",
     ):
         assert marker in text
 
@@ -94,6 +99,7 @@ def test_current_status_layers_sent_event_sota_and_fail_closed_evidence() -> Non
         "zhengPublicManifestAvailable = true",
         "zhengReplayCompleted = false",
         "cgpm2026MetrologyAuthorityAvailable = true",
+        "orthogonalSOTAAtlasAvailable = true",
         "bothwellYeRawReplayCompleted = false",
         "terminalEmpiricalPromotionAllowed = false",
     ):
