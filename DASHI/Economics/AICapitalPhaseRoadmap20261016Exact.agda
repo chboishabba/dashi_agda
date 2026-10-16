@@ -36,9 +36,9 @@ phase1EmpiricalCoordinates : PhaseDeliverable
 phase1EmpiricalCoordinates = phase-deliverable
   "Phase 1 — same-object empirical coordinate acquisition"
   currentAcquisition
-  "aggregate CoreWeave customer cash; capital-spread lower bound; capacity-vintage and three-clock surfaces; provider segment costs; MI355X purchase/depreciation envelope; 37bp AI-linked credit spread cross-section; demand/distress SOTA surface"
-  "named payer cash; workload-normalised provider serving cost; exact owned-node finance/PUE/operations/residual; serial GPU generations/refresh; realised generation ASP/utilisation/resale; enacted regulatory obligations and realised compliance costs"
-  "each previously-open coordinate is populated from the same economic object and same declared horizon/basis, or explicitly bounded as unobservable"
+  "aggregate CoreWeave customer cash; capital-spread lower bound; capacity-vintage and three-clock surfaces; current multi-generation rental ladder; commercial secondary-market residual-value envelope; provider segment costs; MI355X purchase/depreciation envelope; 37bp AI-linked credit spread cross-section; demand/distress SOTA surface"
+  "named payer cash; workload-normalised provider serving cost; exact owned-node finance/PUE/operations; CoreWeave-owned realised residual/resale receipts; serial GPU generations/refresh; realised generation ASP/utilisation; enacted regulatory obligations and realised compliance costs"
+  "each previously-open coordinate is populated from the same economic object and same declared horizon/basis, or explicitly bounded as unobservable; commercial market proxies remain separate from CoreWeave realised ledgers"
   false
 
 phase2Longitudinal : PhaseDeliverable
@@ -46,7 +46,7 @@ phase2Longitudinal = phase-deliverable
   "Phase 2 — longitudinal identification"
   longitudinalIdentification
   "dated state machinery, fixed-basket market series, open-weight production trajectory, debt/vintage exposure calendars"
-  "repeat X_t under identical producer definitions; issuer-level spread/refinancing histories; generation-specific price/utilisation decay; customer-cash and contract-realisation histories"
+  "repeat X_t under identical producer definitions; issuer-level spread/refinancing histories; same-generation price/utilisation/resale decay; customer-cash and contract-realisation histories"
   "at least two comparable later state points with unchanged measurement contracts, permitting trend/persistence rather than snapshot inference"
   false
 
@@ -84,4 +84,4 @@ outcomePromotionStillOpen = refl
 
 boundary : String
 boundary =
-  "The roadmap is measurement-first. Phase 0 generic architecture is paid. Phase 1 is the current max-cut: same-object cash/cost/hardware/policy coordinates. Phase 2 requires comparable repeated measurements before trajectory claims. Phase 3 permits causal policy claims only after realised obligations/costs/responses plus identification and review. Phase 4 now has rival outcome signatures fixed in advance; the remaining payment is longitudinal discrimination, not another narrative score."
+  "The roadmap is measurement-first. Phase 0 generic architecture is paid. Phase 1 is the current max-cut: same-object cash/cost/hardware/policy coordinates, with secondary-market residual value now bounded only as a commercial proxy rather than a CoreWeave realised ledger. Phase 2 requires comparable repeated measurements before trajectory claims. Phase 3 permits causal policy claims only after realised obligations/costs/responses plus identification and review. Phase 4 has rival outcome signatures fixed in advance; the remaining payment is longitudinal discrimination, not another narrative score."
