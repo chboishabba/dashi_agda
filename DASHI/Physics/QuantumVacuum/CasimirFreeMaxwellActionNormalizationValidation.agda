@@ -1,0 +1,25 @@
+module DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationExact as N
+
+idealCasimirKernelIndependentOfMeasuredAlphaRegression :
+  N.idealParallelPlateKernelRequiresMeasuredAlphaEM
+    N.canonicalFreeMaxwellNormalizationBoundary ≡ false
+idealCasimirKernelIndependentOfMeasuredAlphaRegression = refl
+
+sameFieldNormalizationStillRequiredRegression :
+  N.sameFieldAndGeneratorNormalizationRequiredForYMMaxwellWeld
+    N.canonicalFreeMaxwellNormalizationBoundary ≡ true
+sameFieldNormalizationStillRequiredRegression = refl
+
+empiricalCouplingSeparateRegression :
+  N.empiricalChargeCouplingCalibrationIsSeparatePhenomenology
+    N.canonicalFreeMaxwellNormalizationBoundary ≡ true
+empiricalCouplingSeparateRegression = refl
+
+standardModelAuthorityNotPromotedRegression :
+  N.standardModelNumericAuthorityCurrentlyPromotedForCasimir
+    N.canonicalFreeMaxwellNormalizationBoundary ≡ false
+standardModelAuthorityNotPromotedRegression = refl
