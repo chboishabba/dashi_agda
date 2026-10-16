@@ -23,10 +23,28 @@ _ = refl
 _ : C.hZetaFixedPhaseIsoCompilerAvailable C.currentMonster3BMaxCut ≡ true
 _ = refl
 
+_ : C.wholeCharacterSimpleTypeAssemblySourceWritten C.currentMonster3BMaxCut ≡ true
+_ = refl
+
+_ : C.wholeCharacterAssemblyLeanKernelObserved C.currentMonster3BMaxCut ≡ false
+_ = refl
+
+_ : C.literalConstituentEnumerationMandatoryOnCanonicalRoute C.currentMonster3BMaxCut ≡ false
+_ = refl
+
+_ : C.actualWholeSectorRepresentationBindingPaid C.currentMonster3BMaxCut ≡ false
+_ = refl
+
+_ : C.actualWholeSectorSimpleTypeClassifierPaid C.currentMonster3BMaxCut ≡ false
+_ = refl
+
+_ : C.actualWholeSectorCopyCountNinetyPaid C.currentMonster3BMaxCut ≡ false
+_ = refl
+
 _ : C.actualWZetaIrreducibleConstituentDecompositionPaid C.currentMonster3BMaxCut ≡ false
 _ = refl
 
-_ : C.proofRelevantSuzukiOccurrenceGateAvailable C.currentMonster3BMaxCut ≡ true
+_ : C.suzukiProofRelevantOccurrenceGateAvailable C.currentMonster3BMaxCut ≡ true
 _ = refl
 
 _ : C.suzukiMatcherExecutedHere C.currentMonster3BMaxCut ≡ false
