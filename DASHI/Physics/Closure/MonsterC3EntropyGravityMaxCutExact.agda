@@ -5,6 +5,8 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.Chemistry.AmmoniaSTO3GFCIExact as NH3FCI
 import DASHI.Physics.Chemistry.AmmoniaSCIReleasedArtifactExact as SCIArtifact
 import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact as NH3MonsterProbe
+import DASHI.Physics.Chemistry.AmmoniaMonster3BC3QuotientLiftExact as NH3MonsterC3
+import DASHI.Physics.Chemistry.AmmoniaMonster3BPhaseQuotientNonFactorabilityExact as PhaseNF
 import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact as H3C3
 import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact as Uniform
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
@@ -34,7 +36,7 @@ nh3ReleasedMatrix : Row
 nh3ReleasedMatrix = row "author-released NH3 selected-CI matrix" "AmmoniaSCIReleasedArtifactExact" "64x64 matrix blob identity, released geometry and run energies are paid as an author-released data carrier; paper benchmark and artifact remain distinct" "materialize exact matrix bytes into the execution runtime, independently diagonalize, and bind the resulting eigenvector to determinant/configuration labels" sourcePaid
 
 nh3Monster : Row
-nh3Monster = row "NH3 -> Monster action" "AmmoniaMonster3BActionProbeExact" "exact C3 phase-coordinate bijection exists; trivial any-group action on a singleton is mathematically available but physically vacuous" "nontrivial same-object state map into a literal Monster representation plus Monster equivariance and physical authority" typed
+nh3Monster = row "NH3 <-> Monster-3B C3 quotient representation" "AmmoniaMonster3BC3QuotientLiftExact + AmmoniaMonster3BPhaseQuotientNonFactorabilityExact" "the phase map is an exact two-sided C3 quotient representation isomorphism preserving multiplication, inversion/conjugation and Fourier rows; separating pairs prove phase alone cannot recover F3^6 weight, Fin90 multiplicity, or the fine Monster-zeta basis state" "refine by Base369/Heisenberg weight + Fin90 multiplicity, then construct a same-object NH3-state -> literal ActualZetaSectorRecognition map with action equivariance and physical authority" paid
 
 h3Reaction : Row
 h3Reaction = row "H3+ + NH3 -> NH4+ + H2 selected-C3 reaction" "AmmoniaH3PlusC3ResolvedReactionExact" "proof-relevant selected-C3 transport pays literal 369 atom identity, charge/electron/bond bookkeeping, PA difference 431.3 kJ/mol, measured rate and 297 K environment" "unique microscopic proton trajectory is not implied" paid
@@ -71,6 +73,10 @@ record Receipt : Set where
     authorReleasedMatrixRediagonalizedByDASHIIsFalse : authorReleasedMatrixRediagonalizedByDASHI ≡ false
     ammoniaGroundStateC3ActionPaid : Bool
     ammoniaGroundStateC3ActionPaidIsTrue : ammoniaGroundStateC3ActionPaid ≡ true
+    ammoniaMonsterC3QuotientRepresentationPaid : Bool
+    ammoniaMonsterC3QuotientRepresentationPaidIsTrue : ammoniaMonsterC3QuotientRepresentationPaid ≡ true
+    phaseQuotientFineStateNonfactorabilityPaid : Bool
+    phaseQuotientFineStateNonfactorabilityPaidIsTrue : phaseQuotientFineStateNonfactorabilityPaid ≡ true
     nontrivialMonsterActionOnAmmoniaPaid : Bool
     nontrivialMonsterActionOnAmmoniaPaidIsFalse : nontrivialMonsterActionOnAmmoniaPaid ≡ false
     h3ProofRelevantC3ReactionPaid : Bool
@@ -88,7 +94,8 @@ record Receipt : Set where
 
 canonicalReceipt : Receipt
 canonicalReceipt = receipt
-  true refl true refl true refl true refl true refl false refl true refl false refl true refl true refl true refl false refl false refl false refl
+  true refl true refl true refl true refl true refl false refl true refl
+  true refl true refl false refl true refl true refl true refl false refl false refl false refl
 
 publishedFCIIsPaid : NH3FCI.STO3GFCIBoundary.sourceBackedFCIDiagonalizationPaid NH3FCI.canonicalSTO3GFCIBoundary ≡ true
 publishedFCIIsPaid = refl
@@ -96,6 +103,10 @@ releasedMatrixIdentityIsPaid : SCIArtifact.ReleasedArtifactBoundary.authorReleas
 releasedMatrixIdentityIsPaid = refl
 releasedMatrixRediagonalizationStillOpen : SCIArtifact.ReleasedArtifactBoundary.matrixIndependentlyRediagonalizedByDASHI SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
 releasedMatrixRediagonalizationStillOpen = refl
+c3QuotientRepresentationIsPaid : NH3MonsterC3.C3QuotientLiftBoundary.c3GroupLawIntertwiningPaid NH3MonsterC3.canonicalC3QuotientLiftBoundary ≡ true
+c3QuotientRepresentationIsPaid = refl
+phaseFineStateNonfactorabilityIsPaid : PhaseNF.PhaseQuotientNonFactorabilityBoundary.phaseQuotientFineStateNonfactorabilityPaid PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
+phaseFineStateNonfactorabilityIsPaid = refl
 h3C3ReactionIsPaid : H3C3.C3ResolvedH3AmmoniaBoundary.fullProofRelevantC3ResolvedReactionTransitionPaid H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
 h3C3ReactionIsPaid = refl
 nontrivialMonsterActionStillOpen : NH3MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid NH3MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
