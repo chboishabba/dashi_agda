@@ -29,6 +29,19 @@ import DASHI.Mathematics.Complexity.ConcreteTapeAcceptancePredicateCodeExact
 import DASHI.Mathematics.Complexity.FixedWidthPredicateDecisionTableExact
 import DASHI.Mathematics.Complexity.ConcreteTapeFixedLocalKernelTablesExact
 
+-- Recent XOR-grid work is consumed only through a locally reproved complexity
+-- microcode boundary.  No IIT numerical quantity or sibling-branch theorem is
+-- imported as complexity-theoretic authority.
+open import DASHI.Mathematics.Complexity.PNotEqualsNPXORCountdownMicrocodeValidation
+  using
+    ( xorRecoverLeft
+    ; xorRecoverRight
+    ; sameXorOutputDifferentBorrow
+    ; countdownBitFalseBorrow
+    ; countdownBitTrueBorrow
+    ; canonicalXORCountdownBoundary
+    )
+
 ------------------------------------------------------------------------
 -- CURRENT EXACT TRUST BOUNDARY
 --
@@ -95,25 +108,43 @@ import DASHI.Mathematics.Complexity.ConcreteTapeFixedLocalKernelTablesExact
 --    * actual transition and acceptance kernels are specialized to those fixed
 --      tables.
 --
+-- 6. XOR / BORROW CLOCK MICROCODE CROSS-POLLINATION
+--    * the recent XOR-grid result is used only as design guidance; all Boolean
+--      facts needed here are reproved on the complexity branch;
+--    * one binary countdown cell has data update `bit XOR borrowIn`;
+--    * XOR is coordinate-recoverable in either input, so this part of the local
+--      timer microcode is information-preserving;
+--    * the outgoing borrow is `(NOT bit) AND borrowIn` and does NOT factor
+--      through XOR output: `(false,true)` and `(true,false)` have equal XOR
+--      output but different outgoing borrow;
+--    * therefore XOR/parity alone is not an exact-T clock and IIT phi is not a
+--      complexity lower bound.  A literal timer must carry bit + borrow/carry
+--      state and compile both into finite tape/rule-table execution.
+--
 -- LIVE CONSTRUCTIVE WALL AFTER THIS CUT:
 --
 -- A. build a literal CodedFiniteStandardTM generator fragment implementing the
 --    remaining first-order unary-index/table-scan/cursor operations, with exact
 --    simulation and explicit compiler coefficient;
 --
--- B. assemble that fragment with the ACTUAL coded polynomial candidate and a
---    finite opposite suffix using the paid mode-sum/link machinery;
+-- B. compile a compact tape counter from the now-explicit binary countdown
+--    microcode (XOR data update + separate borrow/carry propagation), and prove
+--    that it emits the unique handoff pulse at the selected exact budget;
 --
--- C. provide a genuine phase boundary after exactly the candidate's T steps.
---    The candidate middle run/composition are paid, but StandardFiniteCandidateCode
---    does NOT assert that `finish` is halting.  Direct safe return is therefore
---    available only at a fresh dispatch key; otherwise use a clock/phase wrapper
---    or normalize the candidate to an exact-T quiescent endpoint;
+-- C. assemble generator + counter + ACTUAL coded polynomial candidate + finite
+--    opposite suffix using the paid mode-sum/link machinery.  The counter must
+--    transfer control into a fresh/quiescent phase namespace; no direct link may
+--    override a resident candidate dispatch key;
 --
--- D. construct generator call/return and suffix runs and close their total time
---    with the candidate run to the SAME exact T used in the own Cook formula;
+-- D. construct generator/counter/return/suffix exact runs.  Candidate middle
+--    execution and generic run composition are already paid;
 --
--- E. only then reuse the already-paid Cook iff / opposite endpoint path to
+-- E. choose/close one FINAL exact target budget T* that pays generator + timer +
+--    candidate + suffix and is the SAME T* encoded in that target's guarded Cook
+--    formula.  The wrapper is not required to fit inside the candidate's old T;
+--    its overhead must be charged honestly into the final fixed-point budget;
+--
+-- F. only then reuse the already-paid Cook iff / opposite endpoint path to
 --    obtain SATDecisionFailure under the hypothesised polynomial SAT candidate.
 --
 -- SOURCE STATUS: source-written/static-audited only.  No exact-head Agda kernel
