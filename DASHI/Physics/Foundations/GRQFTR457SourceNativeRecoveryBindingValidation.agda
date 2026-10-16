@@ -16,6 +16,14 @@ formalLegacyProjectionRetired :
   B.legacyProjectionCompatibilityStillRequired ≡ false
 formalLegacyProjectionRetired = refl
 
-r457SameObjectAttachmentStillLive :
-  B.r457LegacyRecoverySameObjectAttachmentStillRequired ≡ true
-r457SameObjectAttachmentStillLive = refl
+round131AttachmentCompilerOwned :
+  B.round131RecoveredAttachmentToR457SameObjectCompilerOwned ≡ true
+round131AttachmentCompilerOwned = refl
+
+r457IndependentEqualityNotRequired :
+  B.independentR457RecoveryEqualityRequiredAfterRound131Attachment ≡ false
+r457IndependentEqualityNotRequired = refl
+
+round131RecoveredAttachmentStillLive :
+  B.round131RecoveredQFTAttachmentForR457StillRequired ≡ true
+round131RecoveredAttachmentStillLive = refl
