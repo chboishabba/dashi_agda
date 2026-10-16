@@ -1,0 +1,29 @@
+module DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostExact as H
+
+concreteQuaternionSU2OwnedRegression :
+  H.concreteQuaternionSU2GroupOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+concreteQuaternionSU2OwnedRegression = refl
+
+parameterTableSU2OwnedRegression :
+  H.sprint105SU2EntryOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+parameterTableSU2OwnedRegression = refl
+
+hostInterfaceOwnedRegression :
+  H.selectedQFTSU2HostInterfaceOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+hostInterfaceOwnedRegression = refl
+
+selectedCarrierInterpretationStillOpenRegression :
+  H.selectedGroupInterpretedAsQuaternionSU2Paid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+selectedCarrierInterpretationStillOpenRegression = refl
+
+selectedTableClassificationStillOpenRegression :
+  H.selectedGroupClassifiedAsSprint105SU2Paid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+selectedTableClassificationStillOpenRegression = refl
+
+hostDoesNotCreateStressEqualityRegression :
+  H.SelectedSU2HostAutomaticallyIdentifiesBrownMaclayStress → ⊥
+hostDoesNotCreateStressEqualityRegression = H.selectedSU2HostDoesNotIdentifyBrownMaclayStress
