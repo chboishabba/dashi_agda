@@ -4,10 +4,11 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1Group
 import DASHI.Physics.Foundations.R3HodgeCrossExact as Hodge3
+import DASHI.Physics.Foundations.BalabanR144SpatialC3StressRestrictionExact as R144C3
 import DASHI.Physics.YangMills.BalabanUnifiedRecoveryC3TransportExact as BalabanTransport
 
 ------------------------------------------------------------------------
--- RED-first terminal promotion contract.
+-- Terminal promotion contract.
 ------------------------------------------------------------------------
 
 groupLevelU1InsideSU2 : U1Group.groupLevelU1SubgroupConstructed ≡ true
@@ -22,16 +23,32 @@ r3HodgeWedgeCrossPaid = refl
 
 r3HodgeUsesExistingSU2CrossMinors :
   Hodge3.reusesExistingSU2EuclideanMinors ≡ true
-r3HodgeUsesExistingSU2EuclideanMinors = refl
+r3HodgeUsesExistingSU2CrossMinors = refl
 
 cmp109ReachableC3FibreClosed :
   BalabanTransport.cmp109ReachableFibreC3TransportClosed ≡ true
 cmp109ReachableC3FibreClosed = refl
 
+r144SpatialStressActionClosed :
+  BalabanTransport.r144SpatialStressTensorActionAlreadyLiteral ≡ true
+r144SpatialStressActionClosed = refl
+
+r144SameB4SourceFamilyReused :
+  BalabanTransport.r144UsesSameB4GeneratorFamilyAsCMP109 ≡ true
+r144SameB4SourceFamilyReused = refl
+
+oldAmbientR140SocketNoLongerRequiredForStress :
+  BalabanTransport.ambientR140IntertwinerRequiredForCurrentStressConsumer ≡ false
+oldAmbientR140SocketNoLongerRequiredForStress = refl
+
+terminalPhysicalPaymentIsR144Covariance :
+  BalabanTransport.terminalPhysicalPaymentIsExistingR144CovarianceWitness ≡ true
+terminalPhysicalPaymentIsR144Covariance = refl
+
 fullAmbientR140ActionNotInvented :
   BalabanTransport.fullAmbientUnifiedRecoveryC3ActionRecovered ≡ false
 fullAmbientR140ActionNotInvented = refl
 
-minimalR140IntertwinerObligationExposed :
-  BalabanTransport.minimalSameObjectR140IntertwinerObligationExposed ≡ true
-minimalR140IntertwinerObligationExposed = refl
+r144TensorActionUsesNoNewAmbientCarrier :
+  R144C3.r144SpatialC3NeedsNoNewAmbientCarrier ≡ true
+r144TensorActionUsesNoNewAmbientCarrier = refl
