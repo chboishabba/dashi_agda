@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
 import DASHI.Moonshine.Monster3BCyclotomicLinearAlgebraExact as CycloLA
+import DASHI.Moonshine.Monster3BC3RepresentationRingEvaluationExact as Rep
 import DASHI.Wikimedia.IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact as MonsterZeta
 
 ------------------------------------------------------------------------
@@ -73,29 +74,17 @@ canonicalAmmoniaA1PlusERegularBlock =
     ammoniaA1PlusEGeneratorCancels
     "DASHI reconstruction of the restriction (A1 plus E)|C3 = 1 plus zeta plus zeta^2 = Reg(C3); no Monster state-space identification is imported"
 
--- Public numerical coordinates are restated locally.  Their Monster meaning is
--- retained by the separately imported theorem witnesses below; we do not reach
--- through another module's private import alias.
 monsterRegularBlockMultiplicity : Nat
-monsterRegularBlockMultiplicity = 65610
+monsterRegularBlockMultiplicity = Rep.regularBlockMultiplicity
 
 monsterResidualMultiplicity : Nat
-monsterResidualMultiplicity = 53
+monsterResidualMultiplicity = Rep.residualMultiplicity Rep.monster3BCharacter
 
 monsterRegularBlockMultiplicityIs65610 : monsterRegularBlockMultiplicity ≡ 65610
-monsterRegularBlockMultiplicityIs65610 = refl
+monsterRegularBlockMultiplicityIs65610 = Rep.regularBlockMultiplicityIs65610
 
 monsterResidualMultiplicityIs53 : monsterResidualMultiplicity ≡ 53
-monsterResidualMultiplicityIs53 = refl
-
-monsterOwnerPaysRegularMultiplicity65610 : Set
-monsterOwnerPaysRegularMultiplicity65610 =
-  MonsterZeta.representationRegularMultiplicityIs65610 ≡
-  MonsterZeta.representationRegularMultiplicityIs65610
-
-monsterOwnerPaysResidual53 : Set
-monsterOwnerPaysResidual53 =
-  MonsterZeta.representationResidualIs53 ≡ MonsterZeta.representationResidualIs53
+monsterResidualMultiplicityIs53 = Rep.monster3BResidualIs53
 
 monsterRegularBulkCancellation :
   CycloLA.add
