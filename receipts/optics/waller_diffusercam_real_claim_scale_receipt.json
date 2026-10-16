@@ -1,0 +1,20 @@
+{
+  "budget_bytes": 5368709120,
+  "budget_gib": 5.0,
+  "candidates": [
+    {"budget_fraction": 0.016997361183166505, "conservative_peak_bytes": 91253888, "dtype_bytes": 8, "gram_bytes": 15488, "lateral_positions": 1, "lateral_radius": 0, "lateral_step": 1, "nx": 320, "ny": 270, "nz": 44, "resident_lower_bound_bytes": 60841088, "safe": true, "selected_columns": 44, "selected_h_bytes": 30412800, "sensor_pixels": 86400},
+    {"budget_fraction": 0.1531839609146118, "conservative_peak_bytes": 822400128, "dtype_bytes": 8, "gram_bytes": 1254528, "lateral_positions": 9, "lateral_radius": 1, "lateral_step": 1, "nx": 320, "ny": 270, "nz": 44, "resident_lower_bound_bytes": 548684928, "safe": true, "selected_columns": 396, "selected_h_bytes": 273715200, "sensor_pixels": 86400},
+    {"budget_fraction": 0.42666494846343994, "conservative_peak_bytes": 2290640000, "dtype_bytes": 8, "gram_bytes": 9680000, "lateral_positions": 25, "lateral_radius": 2, "lateral_step": 1, "nx": 320, "ny": 270, "nz": 44, "resident_lower_bound_bytes": 1530320000, "safe": true, "selected_columns": 1100, "selected_h_bytes": 760320000, "sensor_pixels": 86400},
+    {"budget_fraction": 0.8396559000015259, "conservative_peak_bytes": 4507868288, "dtype_bytes": 8, "gram_bytes": 37186688, "lateral_positions": 49, "lateral_radius": 3, "lateral_step": 1, "nx": 320, "ny": 270, "nz": 44, "resident_lower_bound_bytes": 3017641088, "safe": true, "selected_columns": 2156, "selected_h_bytes": 1490227200, "sensor_pixels": 86400},
+    {"budget_fraction": 1.395480179786682, "conservative_peak_bytes": 7491927168, "dtype_bytes": 8, "gram_bytes": 101616768, "lateral_positions": 81, "lateral_radius": 4, "lateral_step": 1, "nx": 320, "ny": 270, "nz": 44, "resident_lower_bound_bytes": 5028490368, "safe": false, "selected_columns": 3564, "selected_h_bytes": 2463436800, "sensor_pixels": 86400}
+  ],
+  "execution_provenance": {
+    "input_mat_artifact_git_blob_sha1": "db59065bdaf44fe771a6d3fbe22ae3c703527b5f",
+    "input_mat_artifact_sha256": "fdbc8b2c7a8753f146e1b270a3f0ae2d0f70cb2c4ff49aef4a926670c0f7c906",
+    "runtime": "local Python/scipy/numpy"
+  },
+  "largest_safe_candidate": {"budget_fraction": 0.8396559000015259, "conservative_peak_bytes": 4507868288, "dtype_bytes": 8, "gram_bytes": 37186688, "lateral_positions": 49, "lateral_radius": 3, "lateral_step": 1, "nx": 320, "ny": 270, "nz": 44, "resident_lower_bound_bytes": 3017641088, "safe": true, "selected_columns": 2156, "selected_h_bytes": 1490227200, "sensor_pixels": 86400},
+  "planner_is_numerical_certificate": false,
+  "planner_is_physical_receipt": false,
+  "shape": [270, 320, 44]
+}
