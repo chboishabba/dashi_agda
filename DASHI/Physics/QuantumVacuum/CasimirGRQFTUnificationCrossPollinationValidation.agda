@@ -20,6 +20,20 @@ finiteGRTraceRegression :
   X.finiteGRLorentzTrace ≡ X.negativeFour
 finiteGRTraceRegression = X.finiteGRLorentzTraceIsNegativeFour
 
+sharedConditionalRicciRegression :
+  X.casimirConditionalRicci00 ≡ X.finiteGRConditionalRicci00
+sharedConditionalRicciRegression = X.casimirAndFiniteGRShareConditionalRicci00
+
+sharedConditionalRaychaudhuriRegression :
+  X.casimirConditionalRaychaudhuriCurvatureContribution
+  ≡ X.finiteGRConditionalRaychaudhuriCurvatureContribution
+sharedConditionalRaychaudhuriRegression =
+  X.casimirAndFiniteGRShareConditionalRaychaudhuriCurvatureContribution
+
+casimirUnitWeightActiveMassRegression :
+  X.casimirUnitWeightActiveMassDiagnostic ≡ X.negativeTwo
+casimirUnitWeightActiveMassRegression = X.casimirUnitWeightActiveMassIsNegativeTwo
+
 sameActiveProjectionDoesNotIdentifyTensorRegression :
   X.sameActiveProjectionIdentifiesStressTensor X.canonicalCasimirGRQFTCrossPollinationBoundary ≡ false
 sameActiveProjectionDoesNotIdentifyTensorRegression = refl
@@ -31,6 +45,10 @@ finiteGRDefocusingNotInheritedRegression = refl
 vacuumLambdaRayNotCasimirRegression :
   X.casimirAutomaticallyLiesOnIsotropicVacuumStressRay X.canonicalCasimirGRQFTCrossPollinationBoundary ≡ false
 vacuumLambdaRayNotCasimirRegression = refl
+
+localizedAdapterNotInheritedRegression :
+  X.localizedSphericalAdapterAutomaticallyAppliesToCasimir X.canonicalCasimirGRQFTCrossPollinationBoundary ≡ false
+localizedAdapterNotInheritedRegression = refl
 
 sameCandidateWeldStillRequiredRegression :
   X.sameCandidateQFTGRStressWeldStillRequired X.canonicalCasimirGRQFTCrossPollinationBoundary ≡ true
