@@ -3,6 +3,8 @@ module DASHI.Physics.Propulsion.Rocketdyne1974DigitalThreadExperimentParetoValid
 
 import DASHI.Physics.Propulsion.Rocketdyne1974DigitalThreadExperimentParetoExact as R
 import DASHI.Physics.Propulsion.Rocketdyne1974ContemporaryQualificationPHMSourceAtlasExact as S
+import DASHI.Physics.Propulsion.Rocketdyne1974InspectionCapabilityPODExact as P
+import DASHI.Physics.Propulsion.Rocketdyne1974ModelCredibilityValidationExact as M
 
 frontierExists : R.RocketdyneDigitalThreadExperimentFrontier
 frontierExists = R.rocketdyneDigitalThreadExperimentFrontier
@@ -15,3 +17,9 @@ digitalThreadBoundaryExists = R.digitalThreadBoundary
 
 sourceAtlasBoundaryExists : S.ContemporarySourceAtlasBoundary
 sourceAtlasBoundaryExists = S.contemporarySourceAtlasBoundary
+
+inspectionCapabilityFrontierExists : P.InspectionCapabilityFrontier
+inspectionCapabilityFrontierExists = P.canonicalInspectionCapabilityFrontier
+
+modelCredibilityFrontierExists : M.Test052CredibilityFrontier
+modelCredibilityFrontierExists = M.test052CredibilityFrontier
