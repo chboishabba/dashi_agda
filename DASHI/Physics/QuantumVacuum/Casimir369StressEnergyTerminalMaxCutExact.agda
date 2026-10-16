@@ -20,20 +20,12 @@ import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
 import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact as Round131
 
-------------------------------------------------------------------------
--- TERMINAL CASIMIR / 369 / STRESS-ENERGY / GRQFT MAX-CUT
-------------------------------------------------------------------------
-
 record CanonicalSetoidScalePayment : Set₁ where
   field
     authority : Setoid.BishopCasimirSetoidAuthority
     separation : Q.Length
-    scaleWitness :
-      Stress4.CasimirSetoidScaleWitness
-        (Setoid.model authority)
-        separation
+    scaleWitness : Stress4.CasimirSetoidScaleWitness (Setoid.model authority) separation
     reading : String
-
 open CanonicalSetoidScalePayment public
 
 record SameObjectQuantumInequalityPayment : Set₁ where
@@ -42,7 +34,6 @@ record SameObjectQuantumInequalityPayment : Set₁ where
     sameStressObjectAsCasimirSetoidReconstruction : Set
     theoremAppliesToSelectedBackground : Set
     reading : String
-
 open SameObjectQuantumInequalityPayment public
 
 record SameObjectANECApplication : Set₁ where
@@ -51,7 +42,6 @@ record SameObjectANECApplication : Set₁ where
     sameStressObjectAsCasimirSetoidReconstruction : Set
     averagedIntegralVerdict : Set
     reading : String
-
 open SameObjectANECApplication public
 
 record SameObjectSemiclassicalGravityPayment : Set₁ where
@@ -63,18 +53,14 @@ record SameObjectSemiclassicalGravityPayment : Set₁ where
     metricOrCurvatureResponse : Set
     calibratedBackreaction : Set
     reading : String
-
 open SameObjectSemiclassicalGravityPayment public
 
 record SameCandidateGRQFTUnificationPayment : Set₂ where
   field
     unifiedCandidate : Weld.UnifiedCandidate
-    selectedSectorStressAttachment :
-      U1Attachment.CasimirU1RecoveredQFTStressAttachment unifiedCandidate
-    handoff :
-      GRQFTX.CasimirSameCandidateGRQFTHandoff unifiedCandidate
+    selectedSectorStressAttachment : U1Attachment.CasimirU1RecoveredQFTStressAttachment unifiedCandidate
+    handoff : GRQFTX.CasimirSameCandidateGRQFTHandoff unifiedCandidate
     reading : String
-
 open SameCandidateGRQFTUnificationPayment public
 
 record Casimir369StressEnergyTerminalBoundary : Set where
@@ -100,6 +86,7 @@ record Casimir369StressEnergyTerminalBoundary : Set where
     selectedQFTSU2HostInterfacePaid : Bool
     brownMaclayTenComponentReductionPaid : Bool
     sixteenIndependentBrownMaclayComponentsRequired : Bool
+    sprint105SU2ClassificationIsSecondary : Bool
     casimirSelectedRecoveredQFTSectorAttachmentInterfacePaid : Bool
     sameCandidateUnificationHandoffInterfacePaid : Bool
 
@@ -109,7 +96,7 @@ record Casimir369StressEnergyTerminalBoundary : Set where
     sameObjectANECApplicationPaid : Bool
 
     selectedQFTGroupCompactSimpleWitnessPaid : Bool
-    selectedQFTGroupSprint105SU2ClassificationPaid : Bool
+    selectedQFTGroupDynkinA1ClassificationPaid : Bool
     selectedQFTGroupQuaternionSU2InterpretationPaid : Bool
     selectedQFTStressCoordinateSymmetryPaid : Bool
     brownMaclayTenIndependentComponentValuesPaid : Bool
@@ -129,22 +116,17 @@ record Casimir369StressEnergyTerminalBoundary : Set where
     directStressMeasurementPaid : Bool
     macroscopicNegativeEnergyEngineeringPaid : Bool
     unifiedQuantumGravityPromoted : Bool
-
 open Casimir369StressEnergyTerminalBoundary public
 
 canonicalTerminalBoundary : Casimir369StressEnergyTerminalBoundary
 canonicalTerminalBoundary =
   casimir-369-stress-energy-terminal-boundary
     true true true true true true true true true true true
-    true true true true true true true false true true
+    true true true true true true true false true true true
     false false false false
     false false false false false
     false false false
     false false false false false false false false false false false
-
-------------------------------------------------------------------------
--- Existing owners witness paid compiler/interface surfaces.
-------------------------------------------------------------------------
 
 hyperfabricBoundaryWitness : Hyper.Casimir369HyperfabricBoundary
 hyperfabricBoundaryWitness = Hyper.canonicalCasimir369HyperfabricBoundary
@@ -164,39 +146,26 @@ quantumInequalityBoundaryWitness = QI.canonicalCasimirQuantumInequalityBoundary
 gravityBoundaryWitness : GR.CasimirGRNullFocusingBoundary
 gravityBoundaryWitness = GR.canonicalCasimirGRNullFocusingBoundary
 
-grqftCrossPollinationBoundaryWitness :
-  GRQFTX.CasimirGRQFTCrossPollinationBoundary
-grqftCrossPollinationBoundaryWitness =
-  GRQFTX.canonicalCasimirGRQFTCrossPollinationBoundary
+grqftCrossPollinationBoundaryWitness : GRQFTX.CasimirGRQFTCrossPollinationBoundary
+grqftCrossPollinationBoundaryWitness = GRQFTX.canonicalCasimirGRQFTCrossPollinationBoundary
 
-selectedQFTSU2HostBoundaryWitness :
-  SU2Host.CasimirSelectedQFTSU2HostBoundary
-selectedQFTSU2HostBoundaryWitness =
-  SU2Host.canonicalCasimirSelectedQFTSU2HostBoundary
+selectedQFTSU2HostBoundaryWitness : SU2Host.CasimirSelectedQFTSU2HostBoundary
+selectedQFTSU2HostBoundaryWitness = SU2Host.canonicalCasimirSelectedQFTSU2HostBoundary
 
-brownMaclaySymmetricReductionBoundaryWitness :
-  Brown10.CasimirBrownMaclaySymmetricReductionBoundary
-brownMaclaySymmetricReductionBoundaryWitness =
-  Brown10.canonicalCasimirBrownMaclaySymmetricReductionBoundary
+brownMaclaySymmetricReductionBoundaryWitness : Brown10.CasimirBrownMaclaySymmetricReductionBoundary
+brownMaclaySymmetricReductionBoundaryWitness = Brown10.canonicalCasimirBrownMaclaySymmetricReductionBoundary
 
-u1RecoveredQFTStressAttachmentBoundaryWitness :
-  U1Attachment.CasimirU1RecoveredQFTStressAttachmentBoundary
-u1RecoveredQFTStressAttachmentBoundaryWitness =
-  U1Attachment.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary
+u1RecoveredQFTStressAttachmentBoundaryWitness : U1Attachment.CasimirU1RecoveredQFTStressAttachmentBoundary
+u1RecoveredQFTStressAttachmentBoundaryWitness = U1Attachment.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary
 
 selectedBrownMaclayIndependentComponentCount : Nat
-selectedBrownMaclayIndependentComponentCount =
-  Brown10.independentBrownMaclayComponentPayments
+selectedBrownMaclayIndependentComponentCount = Brown10.independentBrownMaclayComponentPayments
 
 allSectorAssemblyFrontier : List Round131.Round131AllSectorAssemblyLeaf
 allSectorAssemblyFrontier = Round131.canonicalRound131AllSectorAssemblyLeaves
 
 firstAllSectorAssemblyLeaf : Round131.Round131AllSectorAssemblyLeaf
 firstAllSectorAssemblyLeaf = Round131.commonSectorMetricAndScalarConvention
-
-------------------------------------------------------------------------
--- Firewalls: compiler/payment separation.
-------------------------------------------------------------------------
 
 data FurtherCardinalityFactorisationCountsAsPhysicalPayment : Set where
 data PointwiseViolationCountsAsAveragedViolationPayment : Set where
@@ -208,45 +177,24 @@ data SelectedSectorStressAttachmentCountsAsAllSectorStressWeld : Set where
 data SU2HostCompilerCountsAsHostInhabitation : Set where
 data TenComponentCompilerCountsAsTenPhysicalValues : Set where
 
-furtherCardinalityIsNotPayment :
-  FurtherCardinalityFactorisationCountsAsPhysicalPayment → ⊥
+furtherCardinalityIsNotPayment : FurtherCardinalityFactorisationCountsAsPhysicalPayment → ⊥
 furtherCardinalityIsNotPayment ()
-
-pointwiseIsNotAveragedPayment :
-  PointwiseViolationCountsAsAveragedViolationPayment → ⊥
+pointwiseIsNotAveragedPayment : PointwiseViolationCountsAsAveragedViolationPayment → ⊥
 pointwiseIsNotAveragedPayment ()
-
-theoryStressIsNotGravityMeasurement :
-  TheoryStressCountsAsMeasuredGravityPayment → ⊥
+theoryStressIsNotGravityMeasurement : TheoryStressCountsAsMeasuredGravityPayment → ⊥
 theoryStressIsNotGravityMeasurement ()
-
-sharedActiveProjectionIsNotStressWeld :
-  SharedActiveProjectionCountsAsSameStressEnergyWeld → ⊥
+sharedActiveProjectionIsNotStressWeld : SharedActiveProjectionCountsAsSameStressEnergyWeld → ⊥
 sharedActiveProjectionIsNotStressWeld ()
-
-conditionalRicciDiagnosticIsNotSolvedGeometry :
-  ConditionalRicciDiagnosticCountsAsSolvedCasimirGeometry → ⊥
+conditionalRicciDiagnosticIsNotSolvedGeometry : ConditionalRicciDiagnosticCountsAsSolvedCasimirGeometry → ⊥
 conditionalRicciDiagnosticIsNotSolvedGeometry ()
-
-u1GaugeEmbeddingIsNotNonAbelianAggregation :
-  U1GaugeEmbeddingCountsAsNonAbelianStressAggregation → ⊥
+u1GaugeEmbeddingIsNotNonAbelianAggregation : U1GaugeEmbeddingCountsAsNonAbelianStressAggregation → ⊥
 u1GaugeEmbeddingIsNotNonAbelianAggregation ()
-
-selectedSectorAttachmentIsNotAllSectorStressWeld :
-  SelectedSectorStressAttachmentCountsAsAllSectorStressWeld → ⊥
+selectedSectorAttachmentIsNotAllSectorStressWeld : SelectedSectorStressAttachmentCountsAsAllSectorStressWeld → ⊥
 selectedSectorAttachmentIsNotAllSectorStressWeld ()
-
-su2HostCompilerIsNotHostInhabitation :
-  SU2HostCompilerCountsAsHostInhabitation → ⊥
+su2HostCompilerIsNotHostInhabitation : SU2HostCompilerCountsAsHostInhabitation → ⊥
 su2HostCompilerIsNotHostInhabitation ()
-
-tenComponentCompilerIsNotTenPhysicalValues :
-  TenComponentCompilerCountsAsTenPhysicalValues → ⊥
+tenComponentCompilerIsNotTenPhysicalValues : TenComponentCompilerCountsAsTenPhysicalValues → ⊥
 tenComponentCompilerIsNotTenPhysicalValues ()
-
-------------------------------------------------------------------------
--- Machine-readable irreducible blocker ordering.
-------------------------------------------------------------------------
 
 data RemainingCasimirStressEnergyBlocker : Set where
   missingConcreteCanonicalSetoidAuthorityAndScaleWitness : RemainingCasimirStressEnergyBlocker
@@ -255,7 +203,7 @@ data RemainingCasimirStressEnergyBlocker : Set where
   missingSpecifiedANECApplication : RemainingCasimirStressEnergyBlocker
 
   missingSelectedQFTGroupCompactSimpleWitness : RemainingCasimirStressEnergyBlocker
-  missingSelectedQFTGroupSprint105SU2Classification : RemainingCasimirStressEnergyBlocker
+  missingSelectedQFTGroupDynkinA1Classification : RemainingCasimirStressEnergyBlocker
   missingSelectedQFTGroupQuaternionSU2Interpretation : RemainingCasimirStressEnergyBlocker
   missingSelectedQFTStressCoordinateSymmetry : RemainingCasimirStressEnergyBlocker
   missingBrownMaclayTenIndependentComponentValues : RemainingCasimirStressEnergyBlocker
@@ -270,45 +218,34 @@ data RemainingCasimirStressEnergyBlocker : Set where
   missingExactHeadKernelReceipt : RemainingCasimirStressEnergyBlocker
 
 firstMathematicalSameObjectBlocker : RemainingCasimirStressEnergyBlocker
-firstMathematicalSameObjectBlocker =
-  missingConcreteCanonicalSetoidAuthorityAndScaleWitness
-
+firstMathematicalSameObjectBlocker = missingConcreteCanonicalSetoidAuthorityAndScaleWitness
 firstAveragedConditionBlocker : RemainingCasimirStressEnergyBlocker
 firstAveragedConditionBlocker = missingSpecifiedQISamplingApplication
 
 firstUnificationBlocker : RemainingCasimirStressEnergyBlocker
 firstUnificationBlocker = missingSelectedQFTGroupCompactSimpleWitness
-
 secondUnificationBlocker : RemainingCasimirStressEnergyBlocker
-secondUnificationBlocker = missingSelectedQFTGroupSprint105SU2Classification
-
+secondUnificationBlocker = missingSelectedQFTGroupDynkinA1Classification
 thirdUnificationBlocker : RemainingCasimirStressEnergyBlocker
 thirdUnificationBlocker = missingSelectedQFTGroupQuaternionSU2Interpretation
-
 fourthUnificationBlocker : RemainingCasimirStressEnergyBlocker
 fourthUnificationBlocker = missingSelectedQFTStressCoordinateSymmetry
-
 fifthUnificationBlocker : RemainingCasimirStressEnergyBlocker
 fifthUnificationBlocker = missingBrownMaclayTenIndependentComponentValues
-
 sixthUnificationBlocker : RemainingCasimirStressEnergyBlocker
 sixthUnificationBlocker = missingRound131AllSectorAssembly
-
 seventhUnificationBlocker : RemainingCasimirStressEnergyBlocker
 seventhUnificationBlocker = missingEinsteinCommonMetricVariation
-
 eighthUnificationBlocker : RemainingCasimirStressEnergyBlocker
 eighthUnificationBlocker = missingCommonMetricProducerLanguage
-
 ninthUnificationBlocker : RemainingCasimirStressEnergyBlocker
 ninthUnificationBlocker = missingCasimirCommonActionVariationIdentification
 
 firstGravityBlocker : RemainingCasimirStressEnergyBlocker
 firstGravityBlocker = missingSemiclassicalGravitySameObjectWeld
-
 firstExperimentalBlocker : RemainingCasimirStressEnergyBlocker
 firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
 terminalReading : String
 terminalReading =
-  "The Casimir/369/SO3 local stress, Brown-Maclay energy-condition fingerprint, setoid full-stress interface, QI provenance, GR null-convergence firewall, GRQFT RationalTensor4 crosswalk, conditional Ricci/Raychaudhuri diagnostics, vacuum-Lambda discriminator and U(1)->SU(2) gauge architecture are paid compiler/interface surfaces. The selected-QFT unification cut is now irreducible rather than hidden behind a generic host/equality token. Group side: prove the selected qftCarriers token is compact-simple under the candidate semantics, classify that exact token as Sprint105 SU2, and identify its interpreted GroupStructure with the literal unit-quaternion su2QuaternionGroup. This then transports the already-proved U1TorusElement inclusion into the selected carrier. Stress side: on the same actual recovered selected-QFT stress/evaluator, pay coordinate symmetry plus the ten independent Brown-Maclay values 00,01,02,03,11,12,13,22,23,33; the remaining six 4x4 components are compiler output, so sixteen independent values are explicitly not required. Only after those five selected-sector payments does the existing Round131 all-sector frontier begin, followed by Einstein common metric variation, common metric producer language and common-action identification. None of these compiler surfaces pay QI/ANEC averaging, semiclassical Einstein backreaction, experiment, macroscopic negative-energy engineering or unified quantum gravity."
+  "The selected-QFT Casimir unification cut is now source-strengthened and irreducible. Group side: the exact qftCarriers token must be IsCompactSimple, carry source-backed CompactSimpleYMData with Dynkin family A1, and interpret to the literal unit-quaternion su2QuaternionGroup. Sprint105 SU2 is only a secondary consistency reference and is not required for the host proof. A pinned physical YM construction on the same carrier/semantics can supply IsCompactSimple without a second theorem. Stress side: the same actual recovered selected-QFT stress/evaluator must carry coordinate symmetry plus ten independent Brown-Maclay values 00,01,02,03,11,12,13,22,23,33; the remaining six components are compiler output and YM symmetry may be transported through the existing semantic bridge. After those five payments the existing Round131 all-sector frontier begins, followed by Einstein common metric variation, common metric language and common-action identification. The U(1) application socket contains no stress tensor, and the existing Maxwell sector-restriction owner remains an obligation surface rather than a theorem, so no Maxwell/Casimir action-stress restriction is fabricated."
