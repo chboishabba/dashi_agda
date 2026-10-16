@@ -10,6 +10,7 @@ import DASHI.Physics.ExoticGravity.AntigravityDifferentialTTDonorMaxCutExact as 
 import DASHI.Physics.ExoticGravity.AntigravitySICalibrationDonorMaxCutExact as SI
 import DASHI.Physics.ExoticGravity.AntigravityMatchedControlExperimentDonorMaxCutExact as Experiment
 import DASHI.Physics.ExoticGravity.AntigravityP1MarkedOSParetoReuseMaxCutExact as P1
+import DASHI.Physics.ExoticGravity.AntigravitySameStateFourChannelDiscriminatorExact as FourChannel
 import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStaticExact as Wightman
 
 ------------------------------------------------------------------------
@@ -35,9 +36,11 @@ import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStatic
 --        consumer-relevant source/device stress*length^2 scale).  Accepted
 --       measured G is already paid by the attributed CODATA-2022 admission.
 --
---   P3. one matched experimental package
---       (real controlled source switch, systematics budget, null/calibration,
---        preregistration and replication).
+--   P3. one matched experimental package.  The repository-internal experiment
+--       compiler is now paid: one metric state feeds weight, free-fall, clock
+--       and optical consumers, mechanism-signature templates are separated,
+--       and nuisance closure is candidate-bound.  What remains is physical:
+--       a real source switch, a numerical systematic floor, and replication.
 --
 -- Optional only for a propagating Schuetzhold/GW claim:
 --
@@ -96,17 +99,82 @@ p1IndependentE4DecayEstimateRequired = false
 p1IndependentTerminalLawProjectsRequired : Bool
 p1IndependentTerminalLawProjectsRequired = false
 
+------------------------------------------------------------------------
+-- P2 calibration frontier.
+------------------------------------------------------------------------
+
 commonGravityCalibrationPackageStillRequired : Bool
 commonGravityCalibrationPackageStillRequired = true
 
+acceptedMeasuredGAuthorityStillOpen : Bool
+acceptedMeasuredGAuthorityStillOpen =
+  SI.acceptedMeasuredGAuthorityStillRequired
+
+acceptedMeasuredGAuthorityPaid : Bool
+acceptedMeasuredGAuthorityPaid = true
+
+stressLengthSquaredScaleStillOpen : Bool
+stressLengthSquaredScaleStillOpen =
+  SI.sourceStressLengthSquaredScaleStillRequired
+
+gravityCalibrationInternallyNeedsAcceptedGAndStressLengthSquared : Bool
+gravityCalibrationInternallyNeedsAcceptedGAndStressLengthSquared = false
+
+------------------------------------------------------------------------
+-- P3 four-channel experiment compiler: STRUCTURAL PART PAID.
+------------------------------------------------------------------------
+
+sameStateFourChannelCompilerConstructed : Bool
+sameStateFourChannelCompilerConstructed = true
+
+mechanismSignatureTemplatesConstructed : Bool
+mechanismSignatureTemplatesConstructed = true
+
+candidateBoundNuisanceClosureContractConstructed : Bool
+candidateBoundNuisanceClosureContractConstructed = true
+
+preferredSingleVacuumFixtureFeedsDiscriminator : Bool
+preferredSingleVacuumFixtureFeedsDiscriminator = true
+
+fourChannelStructureDoesNotPayExperiment : Bool
+fourChannelStructureDoesNotPayExperiment = true
+
+physicalMatchedSourceSwitchStillOpen : Bool
+physicalMatchedSourceSwitchStillOpen =
+  Experiment.physicalMatchedSourceSwitchStillRequired
+
+numericalSystematicsBudgetStillOpen : Bool
+numericalSystematicsBudgetStillOpen =
+  Experiment.numericalSystematicsBudgetStillRequired
+
+empiricalReplicationStillOpen : Bool
+empiricalReplicationStillOpen =
+  Experiment.empiricalReplicationStillRequired
+
 matchedExperimentPackageStillRequired : Bool
 matchedExperimentPackageStillRequired = true
+
+matchedExperimentInternallyNeedsPhysicalSwitchAndSystematics : Bool
+matchedExperimentInternallyNeedsPhysicalSwitchAndSystematics =
+  physicalMatchedSourceSwitchStillOpen
+
+------------------------------------------------------------------------
+-- P4 optional propagating-wave package.
+------------------------------------------------------------------------
 
 ttDevicePackageRequiredForStaticOrScalarDifferentialRoute : Bool
 ttDevicePackageRequiredForStaticOrScalarDifferentialRoute = false
 
 ttDevicePackageRequiredWhenPropagatingGWRouteSelected : Bool
 ttDevicePackageRequiredWhenPropagatingGWRouteSelected = true
+
+ttPackageInternallyNeedsThreeSameObjectWelds : Bool
+ttPackageInternallyNeedsThreeSameObjectWelds =
+  TT.sameGWMetricTangentStillRequired
+
+------------------------------------------------------------------------
+-- Reuse firewalls.
+------------------------------------------------------------------------
 
 independentStaticMetricResponseTheoremStillRequired : Bool
 independentStaticMetricResponseTheoremStillRequired =
@@ -124,34 +192,8 @@ representationOnlyAdapterDebtRemains : Bool
 representationOnlyAdapterDebtRemains =
   Reuse.representationOnlyPromotionDebtRemainsAfterR136Reuse
 
-------------------------------------------------------------------------
--- Internal subclaims remain visible but are not separately scheduled projects.
-------------------------------------------------------------------------
-
 typedTerminalInternallyNeedsBoostAndTraceContinuation : Bool
 typedTerminalInternallyNeedsBoostAndTraceContinuation = true
-
-acceptedMeasuredGAuthorityStillOpen : Bool
-acceptedMeasuredGAuthorityStillOpen =
-  SI.acceptedMeasuredGAuthorityStillRequired
-
-acceptedMeasuredGAuthorityPaid : Bool
-acceptedMeasuredGAuthorityPaid = true
-
-stressLengthSquaredScaleStillOpen : Bool
-stressLengthSquaredScaleStillOpen =
-  SI.sourceStressLengthSquaredScaleStillRequired
-
-gravityCalibrationInternallyNeedsAcceptedGAndStressLengthSquared : Bool
-gravityCalibrationInternallyNeedsAcceptedGAndStressLengthSquared = false
-
-matchedExperimentInternallyNeedsPhysicalSwitchAndSystematics : Bool
-matchedExperimentInternallyNeedsPhysicalSwitchAndSystematics =
-  Experiment.physicalMatchedSourceSwitchStillRequired
-
-ttPackageInternallyNeedsThreeSameObjectWelds : Bool
-ttPackageInternallyNeedsThreeSameObjectWelds =
-  TT.sameGWMetricTangentStillRequired
 
 ------------------------------------------------------------------------
 -- Package counts for preferred consumer modes.
@@ -175,6 +217,8 @@ record TerminalPhysicalPackageFrontier : Set where
     acceptedMeasuredGOpen : Bool
     stressLengthSquaredProductOpen : Bool
     commonGravityCalibrationOpen : Bool
+    fourChannelCompilerPaid : Bool
+    candidateBoundNuisanceContractPaid : Bool
     matchedExperimentOpen : Bool
     ttPackageOpenForScalarRoute : Bool
     ttPackageOpenForGWRoute : Bool
@@ -189,7 +233,7 @@ record TerminalPhysicalPackageFrontier : Set where
 canonicalTerminalPhysicalPackageFrontier : TerminalPhysicalPackageFrontier
 canonicalTerminalPhysicalPackageFrontier =
   terminal-physical-package-frontier
-    true true false false true true true false true false false false false
+    true true false false true true true true true false true false false false false
     3 3 4
 
 acceptedMeasuredGAuthorityStillOpenIsFalse :
@@ -216,3 +260,10 @@ r109SignMachineryRequiredForResponseReuseIsFalse = refl
 representationOnlyAdapterDebtRemainsIsFalse :
   representationOnlyAdapterDebtRemains ≡ false
 representationOnlyAdapterDebtRemainsIsFalse = refl
+
+weightOnlyMetricPromotionBlocked : Bool
+weightOnlyMetricPromotionBlocked = FourChannel.weightOnlyCannotPromoteMetricClaim
+
+scalarMetricToTTDirectPromotionBlocked : Bool
+scalarMetricToTTDirectPromotionBlocked =
+  FourChannel.scalarMetricPerturbationIsNotTTMode
