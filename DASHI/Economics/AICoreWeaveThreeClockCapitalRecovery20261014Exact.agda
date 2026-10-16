@@ -52,6 +52,20 @@ record ThreeClockWedge : Set where
 
 open ThreeClockWedge public
 
+-- Compatibility aliases preserve downstream API while the names make clear
+-- that the 36-48 month quantity is no longer a same-object CoreWeave fact.
+lenderLowerMonths : ThreeClockWedge → Nat
+lenderLowerMonths = genericMarketHorizonLowerMonths
+
+lenderUpperMonths : ThreeClockWedge → Nat
+lenderUpperMonths = genericMarketHorizonUpperMonths
+
+lenderBelowContract : ThreeClockWedge → Bool
+lenderBelowContract = genericMarketBelowContract
+
+retirementAtLenderHorizonPaid : ThreeClockWedge → Bool
+retirementAtLenderHorizonPaid = retirementAtGenericMarketHorizonPaid
+
 coreWeaveThreeClockWedge : ThreeClockWedge
 coreWeaveThreeClockWedge = three-clock-wedge
   36 48 60 72
@@ -66,8 +80,6 @@ contractClockMonthsIs60 = refl
 bookClockMonthsIs72 : bookClockMonths coreWeaveThreeClockWedge ≡ 72
 bookClockMonthsIs72 = refl
 
--- Compatibility name retained for downstream consumers: this proves only the
--- arithmetic ordering of the heterogeneous generic-market scenario.
 selectedClockOrderingPaid :
   (genericMarketBelowContract coreWeaveThreeClockWedge ≡ true) ×
   (contractBelowBook coreWeaveThreeClockWedge ≡ true)
@@ -110,8 +122,7 @@ coreWeave2028CalendarOverlap = calendar-overlap
 debtDueThrough2028ShareBpIs4223 : debtDueShareBp coreWeave2028CalendarOverlap ≡ 4223
 debtDueThrough2028ShareBpIs4223 = refl
 
-capacity36MonthWindowThrough2028ShareBpIs5666 :
-  selectedCapacityWindowShareBp coreWeave2028CalendarOverlap ≡ 5666
+capacity36MonthWindowThrough2028ShareBpIs5666 : selectedCapacityWindowShareBp coreWeave2028CalendarOverlap ≡ 5666
 capacity36MonthWindowThrough2028ShareBpIs5666 = refl
 
 data CalendarOverlapImpliesSameAssetsPermission : Set where
