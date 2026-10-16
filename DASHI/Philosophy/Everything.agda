@@ -39,6 +39,8 @@ import DASHI.Philosophy.ReflexivePowerUp
 import DASHI.Philosophy.NonginOriginFormalizationExact
 import DASHI.Philosophy.NonginCurrentMaxCutExact
 import DASHI.Philosophy.NonginCurrentMaxCutValidation
+import DASHI.Philosophy.NonginCurrentMaxCutT27Exact
+import DASHI.Philosophy.NonginCurrentMaxCutT27Validation
 import DASHI.Philosophy.NonginGenealogyOwnerWeldExact
 import DASHI.Philosophy.NonginGenealogyOwnerWeldValidation
 import DASHI.Philosophy.NonginAttachedDescendantProgrammesExact
