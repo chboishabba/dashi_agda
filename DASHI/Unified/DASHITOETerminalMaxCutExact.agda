@@ -14,6 +14,7 @@ import DASHI.Unified.TOEQuantumMatterRealizationExact as Matter
 import DASHI.Unified.TOEConcreteInhabitantsExact as Inhabitants
 import DASHI.Unified.TOEQuantumInhabitantsExact as QuantumInhabitants
 import DASHI.Unified.TOEGaugeInhabitantsExact as GaugeInhabitants
+import DASHI.Unified.TOEOpenAIMathAcceleratorExact as OpenAI
 
 data TOECandidateStatus : Set where
   candidateConstructed : TOECandidateStatus
@@ -51,6 +52,7 @@ record TOECandidate : Setω where
     universalTheory : Universal.UniversalTheorySocket
     c3RealizationGraph : List C3.C3Edge
     concreteInhabitants : Inhabitants.TOEConcreteInhabitantBundle
+    theoremDonorInhabitants : List OpenAI.OpenAITheoremInhabitant
     monsterVertical : Monster.MonsterPhysicalRealizationSocket
     gaugeQFTGRVertical : Gauge.GaugeQFTGRRealization
     arithmeticCMVertical : Arithmetic.ArithmeticCMRealization
@@ -66,6 +68,7 @@ currentTOECandidate =
     { universalTheory = Universal.canonicalUniversalTheorySocket
     ; c3RealizationGraph = C3.canonicalC3Edges
     ; concreteInhabitants = Inhabitants.canonicalTOEConcreteInhabitantBundle
+    ; theoremDonorInhabitants = OpenAI.canonicalOpenAITheoremInhabitants
     ; monsterVertical = Monster.canonicalMonsterPhysicalRealization
     ; gaugeQFTGRVertical = Gauge.canonicalGaugeQFTGRRealization
     ; arithmeticCMVertical = Arithmetic.canonicalArithmeticCMRealization
@@ -74,7 +77,7 @@ currentTOECandidate =
     ; retainsConjecturalSockets = true
     ; retainsNegativeKnowledge = true
     ; reading =
-        "One DASHI candidate physical theory with 369/C3 as universal refinement-orientation substrate. Major downstream sectors are genuinely inhabited at their declared authority: selected interacting matter Hamiltonian; R3 Hodge/cross and group-level U1-inside-SU2; Brown-Maclay electromagnetic stress; j=0 CM point action, primary normalization and Frobenius trace; finite g-TPS projector/metric; corrected RT; and a Lambda=0 Jacobson/Einstein benchmark. Physical closure now asks for same-object transport among existing objects rather than merely constructing examples of the sectors."
+        "One DASHI candidate physical theory with 369/C3 as universal refinement-orientation substrate. Major downstream sectors are genuinely inhabited at their declared authority: selected interacting matter Hamiltonian; R3 Hodge/cross and group-level U1-inside-SU2; Brown-Maclay electromagnetic stress; j=0 CM point action, primary normalization and Frobenius trace; finite g-TPS projector/metric; corrected RT; and a Lambda=0 Jacobson/Einstein benchmark. The exact pinned OpenAI theorem donors are also explicit formal inhabitants, but remain theorem accelerators rather than physical sectors. Physical closure asks for same-object transport among existing physical objects rather than merely constructing examples."
     }
 
 currentTOECandidateStatus : TOECandidateStatus
@@ -137,4 +140,4 @@ currentPhysicalClosureStatus = physicalClosureOpen
 
 terminalMaxCutReading : String
 terminalMaxCutReading =
-  "Partial closure now contains concrete matter-Hamiltonian, Hodge/SU2/U1, electromagnetic-stress, CM, finite-gTPS, RT, and Einstein benchmark inhabitants. The remaining cut is therefore genuinely cross-sector: actual Monster W_zeta same-action recognition; same selected recovered-QFT/universal action and field attachments; metric-variation/stress commutation; cubic/Jacobi split Frobenius and same-curve Hecke; physical source-gTPS/Hamiltonian attachment; controlled continuum limits; calibrated same-object observables; held-out prediction; independent replication."
+  "Partial closure contains concrete matter-Hamiltonian, Hodge/SU2/U1, electromagnetic-stress, CM, finite-gTPS, RT, and Einstein benchmark inhabitants; exact OpenAI theorem donors inhabit a separate accelerator bundle. The remaining cut is genuinely cross-sector: actual Monster W_zeta same-action recognition; same selected recovered-QFT/universal action and field attachments; metric-variation/stress commutation; cubic/Jacobi split Frobenius and same-curve Hecke; physical source-gTPS/Hamiltonian attachment; controlled continuum limits; calibrated same-object observables; held-out prediction; independent replication."
