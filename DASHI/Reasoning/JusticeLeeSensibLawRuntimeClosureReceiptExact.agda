@@ -61,7 +61,7 @@ open ReceiptIndexedLeeRuntimeClosure public
 ------------------------------------------------------------------------
 
 legacyCanonicalRuntimeFlagRemainsHistorical :
-  Legacy.actualRuntimeEmissionReceiptAcquired
+  Legacy.LeeSensibLawBidiClosure.actualRuntimeEmissionReceiptAcquired
     Legacy.canonicalLeeSensibLawBidiClosure
   ≡ false
 legacyCanonicalRuntimeFlagRemainsHistorical = refl
