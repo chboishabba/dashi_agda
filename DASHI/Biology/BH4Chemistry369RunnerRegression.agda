@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.Molecular.BH4RheaChEBIReactionExact as Reaction
 import DASHI.Biology.Molecular.BH4MolecularStoichiometryExact as Stoich
 import DASHI.Interop.BH4Atomic369RefinementExact as Refinement
+import DASHI.Biology.NonginNangNitrogenOxideRefinementExact as NongNang
 import DASHI.Biology.BH4ReactionNetworkRunnerReceipt as Runner
 import DASHI.Unified.BH4BiochemicalCrossScaleAdapter as Unified
 
@@ -40,6 +41,17 @@ coarseBH4ProjectionDoesNotReconstructFineState :
   ≡ false
 coarseBH4ProjectionDoesNotReconstructFineState = refl
 
+chemistryIsNotLiterally369 :
+  Refinement.BH4Atomic369Boundary.chemistryIsLiterally369
+    Refinement.canonicalBH4Atomic369Boundary
+  ≡ false
+chemistryIsNotLiterally369 = refl
+
+coarseNitrogenOxideCannotServeFineChemicalConsumer :
+  NongNang.CoarseChemicalDescent → ⊥
+coarseNitrogenOxideCannotServeFineChemicalConsumer =
+  Refinement.coarseNitrogenOxideCannotServeFineChemicalConsumer
+
 runnerDoesNotInventMeasuredFlux :
   Runner.BH4ReactionRunnerBoundary.stoichiometricRunnerCreatesMeasuredFlux
     Runner.canonicalBH4ReactionRunnerBoundary
@@ -57,3 +69,9 @@ crossScaleAdapterDoesNotCreateAtomsToCellsDerivation :
     Unified.canonicalBH4CrossScaleBoundary
   ≡ false
 crossScaleAdapterDoesNotCreateAtomsToCellsDerivation = refl
+
+crossScaleAdapterDoesNotCreateDiseaseCausation :
+  Unified.BH4CrossScaleBoundary.adapterCreatesDiseaseCausation
+    Unified.canonicalBH4CrossScaleBoundary
+  ≡ false
+crossScaleAdapterDoesNotCreateDiseaseCausation = refl
