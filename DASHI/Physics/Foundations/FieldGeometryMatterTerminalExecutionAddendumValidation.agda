@@ -39,6 +39,15 @@ entropy-bytes-still-open = refl
 casimir-ideal-sheet-scaling-is-numerical : A.casimirIdealSheetScalingCeiling A.currentTerminalExecutionAddendum ≡ T.numericallyExecuted
 casimir-ideal-sheet-scaling-is-numerical = refl
 
+generic-warp-energy-condition-source-is-paid : A.genericWarpEnergyConditionObstructionSource A.currentTerminalExecutionAddendum ≡ T.sourcePaid
+generic-warp-energy-condition-source-is-paid = refl
+
+subluminal-positive-energy-warp-source-is-paid : A.subluminalPositiveEnergyWarpConstructionSource A.currentTerminalExecutionAddendum ≡ T.sourcePaid
+subluminal-positive-energy-warp-source-is-paid = refl
+
+superluminal-positive-energy-physical-source-remains-external : A.superluminalPositiveEnergyPhysicalWarpSource A.currentTerminalExecutionAddendum ≡ T.externalOnly
+superluminal-positive-energy-physical-source-remains-external = refl
+
 continuous-measure-is-not-discrete-producer : A.continuousMeasureCountsAsDiscreteProducer A.currentTerminalExecutionAddendum ≡ false
 continuous-measure-is-not-discrete-producer = refl
 
@@ -59,6 +68,12 @@ synthetic-maxwell-is-not-measured-replay = refl
 
 ideal-casimir-scaling-is-not-physical-macroscopic-scaling : A.idealSheetScalingCountsAsPhysicalMacroscopicScaling A.currentTerminalExecutionAddendum ≡ false
 ideal-casimir-scaling-is-not-physical-macroscopic-scaling = refl
+
+subluminal-positive-energy-warp-is-not-ftl : A.subluminalPositiveEnergyWarpCountsAsFTL A.currentTerminalExecutionAddendum ≡ false
+subluminal-positive-energy-warp-is-not-ftl = refl
+
+warp-source-theorem-is-not-device : A.sourceWarpTheoremCountsAsPhysicalWarpDevice A.currentTerminalExecutionAddendum ≡ false
+warp-source-theorem-is-not-device = refl
 
 scientist-acquisition-is-sibling-owned : A.scientistFrontierDedicatedAcquisitionOwner A.currentTerminalExecutionAddendum ≡ T.blockedByUnmergedSibling
 scientist-acquisition-is-sibling-owned = refl
