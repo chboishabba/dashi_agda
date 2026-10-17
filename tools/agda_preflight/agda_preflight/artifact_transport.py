@@ -52,6 +52,7 @@ class ArtifactResolutionReceipt:
     uri: str
     cid: Optional[str]
     member_path: Optional[str]
+    transport_metadata: dict[str, Any]
     verified: bool
     authority: str
     establishes_proof: bool
@@ -117,6 +118,11 @@ class ArtifactResolutionReceipt:
             if receipt_cid is not None and str(receipt_cid) != cid:
                 raise ValueError("artifact resolution IPFS CID mismatch")
 
+        metadata_value = transport.get("metadata") or {}
+        if not isinstance(metadata_value, Mapping):
+            raise ValueError("transport.metadata must be an object when present")
+        transport_metadata = dict(metadata_value)
+
         verified = item.get("verified") is True
         authority = _require_text("authority", item.get("authority"))
         establishes_proof = item.get("establishesProof") is True
@@ -141,6 +147,7 @@ class ArtifactResolutionReceipt:
             uri=uri,
             cid=cid,
             member_path=member_path,
+            transport_metadata=transport_metadata,
             verified=True,
             authority="transport-only",
             establishes_proof=False,
@@ -161,6 +168,7 @@ class ArtifactResolutionReceipt:
             "uri": self.uri,
             "cid": self.cid,
             "member_path": self.member_path,
+            "transport_metadata": dict(self.transport_metadata),
             "verified": self.verified,
             "authority": self.authority,
             "establishes_proof": self.establishes_proof,
