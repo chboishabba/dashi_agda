@@ -65,3 +65,20 @@ def test_artifact_resolution_receipt_rejects_authority_escalation() -> None:
 
     with pytest.raises(ValueError, match="proof authority"):
         ArtifactResolutionReceipt.from_mapping(item)
+
+
+def test_artifact_resolution_receipt_rejects_boolean_payload_size() -> None:
+    item = receipt()
+    item["payloadSizeBytes"] = True
+    item["objectRef"]["sizeBytes"] = True
+
+    with pytest.raises(ValueError, match="payloadSizeBytes"):
+        ArtifactResolutionReceipt.from_mapping(item)
+
+
+def test_artifact_resolution_receipt_requires_object_ref_digest() -> None:
+    item = receipt()
+    del item["objectRef"]["contentDigest"]
+
+    with pytest.raises(ValueError, match="objectRef.contentDigest"):
+        ArtifactResolutionReceipt.from_mapping(item)
