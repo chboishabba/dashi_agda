@@ -5,6 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PIN = ROOT / "vendor" / "meta-introspector-aok-goldbach29.VENDOR"
 BRIDGE = ROOT / "DASHI" / "ComputerScience" / "Goldbach29Signed369VendorBridgeExact.agda"
 MACRO = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29SuccessMacroExact.agda"
+CHECKPOINT = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29CheckpointMachineExact.agda"
 RECEIPT = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29ReductionReceiptExact.agda"
 SEMANTICS = ROOT / "DASHI" / "ComputerScience" / "Goldbach29ExternalHaltingSemanticsExact.agda"
 AUDIT30 = ROOT / "DASHI" / "ComputerScience" / "Goldbach30HaltingSourceAuditExact.agda"
@@ -55,12 +56,31 @@ def test_success_path_exposes_static_dynamic_tradeoff():
 def test_exact_success_macro_is_consumer_preserving():
     text = MACRO.read_text()
     assert "SuccessEntry" in text
+    assert "aTail" in text
+    assert "successEntryVerdictIsExactlyOne" in text
+    assert "firstGoldbachSuccessEntry" in text
+    assert "firstGoldbachSuccessOldTerminal" in text
+    assert "firstGoldbachSuccessNewTerminal" in text
+    assert "arbitraryPositiveVerdictClaimed" in text
     assert "oldSuccessTerminal" in text
     assert "newSuccessTerminal" in text
     assert "successTerminalRegistersAgree" in text
     assert "successNextEvenConsumerPreserved" in text
     assert "successGoldbachVerdictConsumerPreserved" in text
-    assert "newSuccessExecutionLengthIsOneMore" in text
+    assert "reachableSuccessExecutionLengthIsOneMore" in text
+    assert "fTail" not in text
+
+
+def test_checkpoint_machine_proves_all_finite_consumer_traces_equal():
+    text = CHECKPOINT.read_text()
+    assert "SharedSearchKernel" in text
+    assert "oldCheckpointStep" in text
+    assert "newCheckpointStep" in text
+    assert "checkpointStepAgree" in text
+    assert "checkpointRunsAgree" in text
+    assert "CheckpointHalts" in text
+    assert "oldCheckpointHaltsIffNewCheckpointHalts" in text
+    assert "sourceConcreteFractranAttachmentPaid = false" in text
 
 
 def test_external_halting_semantics_is_cross_prover_only():
@@ -111,6 +131,7 @@ def test_reduction_receipt_records_pareto_cut():
     assert "successConsumerPreservationPaid" in text
     assert "successExecutionPenaltyPaid" in text
     assert "externalGoldbach29HaltingSemanticsSourcePaidFlag" in text
+    assert "checkpointHaltingEquivalencePaidFlag" in text
     assert "wholeMachineReachableWeakBisimulationPaid" in text
     assert "wholeMachineReachableWeakBisimulationPaid = false" in text
 
@@ -136,11 +157,13 @@ def test_aggregate_and_workflow_own_the_new_surface():
     workflow = WORKFLOW.read_text()
     assert "Goldbach29Signed369VendorBridgeExact" in aggregate
     assert "Goldbach30To29SuccessMacroExact" in aggregate
+    assert "Goldbach30To29CheckpointMachineExact" in aggregate
     assert "Goldbach30To29ReductionReceiptExact" in aggregate
     assert "Goldbach29ExternalHaltingSemanticsExact" in aggregate
     assert "Goldbach30HaltingSourceAuditExact" in aggregate
     assert "Goldbach30To29HaltingConsumerCompilerExact" in aggregate
     assert "GoldbachMachineReductionSOTAExact" in aggregate
     assert "Goldbach30To29VisualizationConsumerExact" in aggregate
+    assert "Goldbach30To29CheckpointMachineExact.agda" in workflow
     assert "test_goldbach29_signed369_vendor.py" in workflow
     assert "EverythingGoldbach29Signed369VendorExact.agda" in workflow
