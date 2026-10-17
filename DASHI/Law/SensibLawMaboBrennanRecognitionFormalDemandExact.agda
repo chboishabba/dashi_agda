@@ -6,9 +6,10 @@ module DASHI.Law.SensibLawMaboBrennanRecognitionFormalDemandExact where
 -- This module deliberately proves only a bounded formal-premise relation:
 -- the live SLR demand is tied to the already-reviewed Brennan proposition,
 -- the existing recognition-basis residual/search, and the existing formal
--- recognition decomposition.  Kernel acceptance of this module does not prove
--- judicial truth, does not establish legal applicability, and does not promote
--- claim truth.
+-- recognition decomposition.
+-- Kernel acceptance of this module does not prove judicial truth.
+-- Kernel acceptance of this module does not establish legal applicability.
+-- Kernel acceptance of this module does not promote claim truth.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
