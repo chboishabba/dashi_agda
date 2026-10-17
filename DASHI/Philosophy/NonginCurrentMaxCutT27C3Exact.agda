@@ -5,8 +5,9 @@ module DASHI.Philosophy.NonginCurrentMaxCutT27C3Exact where
 --
 -- The previous current owner pays the generic policy-completed T^27 graph,
 -- higher stack and finite hypersheaf.  This additive owner records the new
--- repository-native C3 policy inhabitant plus the policy-hidden non-descent and
--- guarded universal-369 handoff without weakening attribution boundaries.
+-- repository-native C3 policy inhabitant plus the policy-hidden non-descent,
+-- guarded universal-369 handoff and exact all-finite-depth T^27 lift without
+-- weakening attribution boundaries.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -17,6 +18,7 @@ import DASHI.Reasoning.TrialecticT27PolicyHiddenNonDescentExact as Hidden
 import DASHI.Reasoning.TrialecticT27Universal369HandoffExact as Handoff
 import DASHI.Reasoning.TrialecticT27C3CompletionPolicyExact as C3Policy
 import DASHI.Reasoning.TrialecticT27NativeC3RealizationExact as Native
+import DASHI.Reasoning.TrialecticT27NativeC3AllDepthLiftExact as AllDepth
 
 previousBoundary : Previous.NonginCurrentMaxCutT27Boundary
 previousBoundary = Previous.canonicalNonginCurrentMaxCutT27Boundary
@@ -32,6 +34,9 @@ c3Boundary = C3Policy.canonicalTrialecticT27C3CompletionPolicyBoundary
 
 nativeBoundary : Native.TrialecticT27NativeC3RealizationBoundary
 nativeBoundary = Native.canonicalTrialecticT27NativeC3RealizationBoundary
+
+allDepthBoundary : AllDepth.TrialecticT27NativeC3AllDepthLiftBoundary
+allDepthBoundary = AllDepth.canonicalTrialecticT27NativeC3AllDepthLiftBoundary
 
 hiddenThirdFaceNoGoReceipt :
   Hidden.thirdFaceDoesNotFactorThroughT18 hiddenBoundary ≡ true
@@ -53,6 +58,10 @@ guardedUniversalHandoffReceipt :
   Handoff.twentySevenShapeAlignmentPaid handoffBoundary ≡ true
 guardedUniversalHandoffReceipt = refl
 
+nativeC3AllDepthLiftReceipt :
+  AllDepth.everyFiniteDepthLiftedToNativeC3T27 allDepthBoundary ≡ true
+nativeC3AllDepthLiftReceipt = refl
+
 record NonginCurrentMaxCutT27C3Boundary : Set where
   constructor nongin-current-max-cut-t27-c3-boundary
   field
@@ -66,7 +75,9 @@ record NonginCurrentMaxCutT27C3Boundary : Set where
     nativeC3WavePhaseGroupoidPaid : Bool
     nativeC3HigherStackPaid : Bool
     nativeC3FiniteHypersheafPaid : Bool
+    nativeC3AllFiniteDepthLiftPaid : Bool
     nativeC3PhysicalDynamicsPaid : Bool
+    completedT27DeterminesNextStructuredState : Bool
     iitBOperatorSameObjectWeldPaid : Bool
     pnfAtomCoordinateIsomorphismPaid : Bool
     toeSiblingFormalAuthorityImportedLocally : Bool
@@ -87,6 +98,8 @@ canonicalNonginCurrentMaxCutT27C3Boundary =
     true
     true
     true
+    true
+    false
     false
     false
     false
