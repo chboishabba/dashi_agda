@@ -2,9 +2,14 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
+import shutil
 import subprocess
 
+import pytest
+
 from agda_preflight.kernel_certification import (
+    _agda_check_command,
+    _isolated_agda_workspace,
     build_kernel_certification_receipt,
     certify_artifact,
 )
@@ -38,6 +43,38 @@ def _artifact_receipt_for(path: Path) -> dict:
         "objectRef": {"sink": "file", "uri": uri},
         "transport": {"sink": "file", "uri": uri},
     }
+
+
+def _populate_fake_agda_dependencies(root: Path) -> None:
+    dashi_library = root / "dashi-agda.agda-lib"
+    dashi_library.write_text(
+        "name: dashi-agda\n"
+        "depend: standard-library\n"
+        "        dchott-agda\n"
+        "        bishop\n"
+        "        cubical-0.9\n"
+        "include: .\n"
+        "         bishop\n",
+        encoding="utf-8",
+    )
+    (root / "bishop.agda-lib").write_text(
+        "name: bishop\ninclude: vendor/bishop\n", encoding="utf-8"
+    )
+    (root / "dchott-agda.agda-lib").write_text(
+        "name: dchott-agda\ninclude: DCHoTT-Agda\n", encoding="utf-8"
+    )
+    (root / "cubical").mkdir()
+    (root / "cubical/cubical.agda-lib").write_text(
+        "name: cubical-0.9\ninclude: .\n", encoding="utf-8"
+    )
+    (root / "vendor/bishop").mkdir(parents=True)
+    (root / "vendor/bishop/Prelude.agda").write_text(
+        "module Prelude where\n", encoding="utf-8"
+    )
+    (root / "DCHoTT-Agda").mkdir()
+    (root / "DCHoTT-Agda/Prelude.agda").write_text(
+        "module Prelude where\n", encoding="utf-8"
+    )
 
 
 def test_kernel_receipt_binds_exact_transport_and_demand() -> None:
@@ -89,33 +126,17 @@ def test_transport_receipt_must_remain_transport_only() -> None:
         raise AssertionError("transport receipt with proof authority must fail closed")
 
 
-def test_agda_certification_invokes_kernel_from_single_library_workspace(
+def test_agda_certification_invokes_kernel_on_materialized_source_in_single_library_workspace(
     tmp_path: Path, monkeypatch
 ) -> None:
     root = tmp_path / "repo"
     source = root / "DASHI/Law/SensibLawMaboBrennanRecognitionFormalDemandExact.agda"
     source.parent.mkdir(parents=True)
-    source.write_text("module DASHI.Law.SensibLawMaboBrennanRecognitionFormalDemandExact where\n", encoding="utf-8")
-
-    dashi_library = root / "dashi-agda.agda-lib"
-    dashi_library.write_text(
-        "name: dashi-agda\n"
-        "depend: standard-library\n"
-        "        dchott-agda\n"
-        "        bishop\n"
-        "        cubical-0.9\n"
-        "include: .\n"
-        "         bishop\n",
+    source.write_text(
+        "module DASHI.Law.SensibLawMaboBrennanRecognitionFormalDemandExact where\n",
         encoding="utf-8",
     )
-    (root / "bishop.agda-lib").write_text("name: bishop\ninclude: vendor/bishop\n", encoding="utf-8")
-    (root / "dchott-agda.agda-lib").write_text("name: dchott-agda\ninclude: DCHoTT-Agda\n", encoding="utf-8")
-    (root / "cubical").mkdir()
-    (root / "cubical/cubical.agda-lib").write_text("name: cubical-0.9\ninclude: .\n", encoding="utf-8")
-    (root / "vendor/bishop").mkdir(parents=True)
-    (root / "vendor/bishop/Prelude.agda").write_text("module Prelude where\n", encoding="utf-8")
-    (root / "DCHoTT-Agda").mkdir()
-    (root / "DCHoTT-Agda/Prelude.agda").write_text("module Prelude where\n", encoding="utf-8")
+    _populate_fake_agda_dependencies(root)
 
     home = tmp_path / "home"
     (home / ".agda").mkdir(parents=True)
@@ -135,11 +156,14 @@ def test_agda_certification_invokes_kernel_from_single_library_workspace(
             return subprocess.CompletedProcess(command, 0, stdout="Agda version 2.8.0\n", stderr="")
         if command and command[0] == "agda":
             workspace = Path(cwd)
+            workspace_source = workspace / "DASHI/Law/SensibLawMaboBrennanRecognitionFormalDemandExact.agda"
             observed["command"] = command
             observed["cwd"] = workspace
             observed["library_files"] = sorted(path.name for path in workspace.glob("*.agda-lib"))
-            observed["dashi_library_bytes"] = (workspace / "dashi-agda.agda-lib").read_bytes()
-            observed["dashi_source_target"] = (workspace / "DASHI").resolve()
+            observed["source_is_file"] = workspace_source.is_file()
+            observed["source_is_symlink"] = workspace_source.is_symlink()
+            observed["source_bytes"] = workspace_source.read_bytes()
+            observed["source_resolved"] = workspace_source.resolve()
             library_flag = next(arg for arg in command if arg.startswith("--library-file="))
             registry = Path(library_flag.split("=", 1)[1])
             observed["registry"] = registry.read_text(encoding="utf-8")
@@ -162,8 +186,10 @@ def test_agda_certification_invokes_kernel_from_single_library_workspace(
 
     assert observed["cwd"] != root
     assert observed["library_files"] == ["dashi-agda.agda-lib"]
-    assert observed["dashi_library_bytes"] == dashi_library.read_bytes()
-    assert observed["dashi_source_target"] == (root / "DASHI").resolve()
+    assert observed["source_is_file"] is True
+    assert observed["source_is_symlink"] is False
+    assert observed["source_bytes"] == source.read_bytes()
+    assert observed["source_resolved"] != source.resolve()
     assert observed["command"][-1] == "DASHI/Law/SensibLawMaboBrennanRecognitionFormalDemandExact.agda"
     assert "-l" in observed["command"] and "dashi-agda" in observed["command"]
     registry = str(observed["registry"])
@@ -174,6 +200,49 @@ def test_agda_certification_invokes_kernel_from_single_library_workspace(
     assert receipt["artifactUri"] == source.resolve().as_uri()
     assert receipt["artifactDigest"] == artifact["contentDigest"]
     assert receipt["sourceRevision"] == "git:deadbeef"
+
+
+def test_real_agda_runs_against_materialized_temporary_witness_source() -> None:
+    if shutil.which("agda") is None:
+        pytest.skip("Agda executable is not available")
+
+    repo_root = Path(__file__).resolve().parents[3]
+    source = repo_root / "DASHI/Law/SensibLawMaboBrennanRecognitionFormalDemandExact.agda"
+    if not source.is_file():
+        pytest.skip("live Mabo witness is not present in this checkout")
+    required_populated = (
+        repo_root / "vendor/bishop",
+        repo_root / "DCHoTT-Agda",
+        repo_root / "cubical",
+    )
+    if any(not path.is_dir() or not any(path.iterdir()) for path in required_populated):
+        pytest.skip("canonical Agda dependencies are not populated in this checkout")
+
+    expected_digest = "sha256:" + hashlib.sha256(source.read_bytes()).hexdigest()
+    relative_source = source.relative_to(repo_root)
+
+    with _isolated_agda_workspace(
+        root=repo_root,
+        relative_source=relative_source,
+        original_source=source,
+        expected_digest=expected_digest,
+    ) as (workspace, library_registry):
+        workspace_source = workspace / relative_source
+        assert workspace_source.is_file()
+        assert not workspace_source.is_symlink()
+        assert workspace_source.resolve() != source.resolve()
+        assert "sha256:" + hashlib.sha256(workspace_source.read_bytes()).hexdigest() == expected_digest
+        checked = subprocess.run(
+            _agda_check_command(library_registry, relative_source),
+            cwd=workspace,
+            check=False,
+            capture_output=True,
+        )
+        assert checked.returncode == 0, (
+            checked.stdout.decode("utf-8", errors="replace")
+            + "\n"
+            + checked.stderr.decode("utf-8", errors="replace")
+        )
 
 
 def test_agda_certification_requires_populated_canonical_dependencies(
