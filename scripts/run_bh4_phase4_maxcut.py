@@ -30,6 +30,37 @@ def run(cmd: list[str], *, allow_partial: bool = False) -> int:
     return completed.returncode
 
 
+def load_if_exists(path: Path) -> dict | None:
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
+def evidence_summary(sabio_payload: dict | None, sifts_payload: dict | None) -> dict:
+    sabio_summary = None
+    if sabio_payload is not None:
+        sabio_summary = {
+            "schema": sabio_payload.get("schema"),
+            "proteins_requested": sabio_payload.get("proteins_requested"),
+            "proteins_completed": sabio_payload.get("proteins_completed"),
+            "proteins_with_entries": sabio_payload.get("proteins_with_entries"),
+            "kinetic_entry_count": sabio_payload.get("kinetic_entry_count"),
+            "kinetic_parameter_count": sabio_payload.get("kinetic_parameter_count"),
+            "html_shell_observed": sabio_payload.get("html_shell_observed"),
+            "error_count": len(sabio_payload.get("errors", [])),
+        }
+
+    sifts_summary = None
+    if sifts_payload is not None:
+        sifts_summary = dict(sifts_payload.get("summary") or {})
+        sifts_summary["schema"] = sifts_payload.get("schema")
+
+    return {"sabio": sabio_summary, "sifts": sifts_summary}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--panel", type=Path, default=Path("artifacts/biology/uniprot-kitzerow-bh4-panel-certificate.json"))
@@ -73,8 +104,11 @@ def main() -> int:
     matrix_payload = json.loads(matrix.read_text(encoding="utf-8"))
     parameter_payload = json.loads(solver_parameters.read_text(encoding="utf-8"))
     interval_payload = json.loads(interval.read_text(encoding="utf-8"))
+    sabio_payload = None if args.skip_network_evidence else load_if_exists(sabio)
+    sifts_payload = None if args.skip_network_evidence else load_if_exists(sifts)
+
     summary = {
-        "schema": "dashi.bh4-phase4-maxcut-run.v1",
+        "schema": "dashi.bh4-phase4-maxcut-run.v2",
         "panel": str(args.panel),
         "matrix": {
             "species": len(matrix_payload.get("species_index", [])),
@@ -87,6 +121,7 @@ def main() -> int:
         "missing_reaction_bounds": len(interval_payload.get("missing_reaction_bounds", [])),
         "missing_exchange_bounds": len(interval_payload.get("missing_exchange_bounds", [])),
         "network_evidence_exit_codes": network_exit,
+        "network_evidence": evidence_summary(sabio_payload, sifts_payload),
         "artifacts": {
             "rhea": str(rhea),
             "matrix": str(matrix),
