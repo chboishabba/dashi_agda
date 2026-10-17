@@ -31,8 +31,7 @@ record CMP116CanonicalTraceEntropyBudget
     (selectedTrace : TraceCarrier)
     (ExactCompilerStructure : Set)
     (exactCompilerStructure : ExactCompilerStructure)
-    (QuantitativeTraceEntropyBound :
-      ExactCompilerStructure → TraceCarrier → Set)
+    (QuantitativeTraceEntropyBound : ExactCompilerStructure → TraceCarrier → Set)
     (SameObjectTraceAttachment : SelectedSource → TraceCarrier → Set) : Set₁ where
   field
     quantitativeTraceEntropyBound :
