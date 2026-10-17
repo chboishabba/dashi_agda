@@ -62,6 +62,13 @@ def _router(receipt=None, capability=None, conn=None):
     )
 
 
+def _connection(tmp_path: Path):
+    conn = sqlite3.connect(tmp_path / "repository.sqlite3")
+    conn.row_factory = sqlite3.Row
+    ensure_repository_schema(conn)
+    return conn
+
+
 def test_da51_atlas_parse_is_wire_metadata_not_authority():
     parsed = parse_da51("0xDA51853000A00000")
     assert parsed["address"] == "0xDA51853000A00000"
@@ -178,9 +185,7 @@ def test_da51_status_one_does_not_change_debt_or_backend():
 
 
 def test_route_receipt_is_persisted_relationally(tmp_path: Path):
-    conn = sqlite3.connect(tmp_path / "repository.sqlite3")
-    conn.row_factory = sqlite3.Row
-    ensure_repository_schema(conn)
+    conn = _connection(tmp_path)
     route = _router(conn=conn).route(
         ProofRouteRequest(query="new theorem", target_prover="lean")
     )
@@ -197,4 +202,55 @@ def test_route_receipt_is_persisted_relationally(tmp_path: Path):
     )
     columns = [row[1] for row in conn.execute("PRAGMA table_info(proof_routes)")]
     assert not any("json" in column.lower() for column in columns)
+    conn.close()
+
+
+def test_da51_links_and_evidence_remain_authority_neutral(tmp_path: Path):
+    conn = _connection(tmp_path)
+    router = _router(conn=conn)
+    router.link_da51(
+        "0xDA51853000A00000",
+        "DASHI.Example.sourceTheorem",
+        relation="statement",
+        source="dashi_agda",
+    )
+    evidence = router.add_evidence(
+        "0xDA51853000A00000",
+        producer="zkperf",
+        artifact="sha256:abc",
+        evidence_kind="benchmark",
+        revision="r1",
+        digest="abc",
+    )
+    resolved = router.resolve_da51("0xDA51853000A00000")
+
+    assert evidence["authority"] == "evidence-only"
+    assert resolved["authority"] == "identity-only"
+    assert resolved["symbol_links"] == [
+        {
+            "symbol_id": "DASHI.Example.sourceTheorem",
+            "relation": "statement",
+            "source": "dashi_agda",
+        }
+    ]
+    assert resolved["evidence"][0]["producer"] == "zkperf"
+    assert resolved["evidence"][0]["authority"] == "evidence-only"
+    conn.close()
+
+
+def test_da51_frontier_contains_only_attached_routing_receipts(tmp_path: Path):
+    conn = _connection(tmp_path)
+    router = _router(conn=conn)
+    route = router.route(
+        ProofRouteRequest(
+            query="atlas-linked goal",
+            target_prover="lean",
+            da51_address="0xDA51853000A00000",
+        )
+    )
+    frontier = router.frontier_for("0xDA51853000A00000")
+
+    assert frontier["authority"] == "routing-only"
+    assert [item["route_id"] for item in frontier["routes"]] == [route["route_id"]]
+    assert frontier["routes"][0]["recommended_backend"] == "aristotle+lean"
     conn.close()
