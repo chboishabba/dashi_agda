@@ -36,7 +36,7 @@ Flux = Nat
 record BH4PoolState : Set where
   constructor bh4PoolState
   field
-    compartment : Compartment
+    poolCompartment : Compartment
     bh4Amount : Amount
     bh2Amount : Amount
     synthesisFlux : Flux
@@ -57,7 +57,7 @@ record EnzymeDemand : Set where
   constructor enzymeDemand
   field
     protein : External.ProteinRef
-    compartment : Compartment
+    demandCompartment : Compartment
     bh4DemandFlux : Flux
     activityState : EnzymeActivityState
     demandReference : String
