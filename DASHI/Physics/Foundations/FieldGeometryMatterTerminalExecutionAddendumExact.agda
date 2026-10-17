@@ -12,6 +12,7 @@ import DASHI.Physics.CondensedMatter.MATBGQTMResolutionAwareForwardObserverRecei
 import DASHI.Physics.CondensedMatter.MATBGEntropyMaxwellReplayContractExact as EntropyMaxwell
 import DASHI.Physics.Foundations.CasimirIdealSheetScalingCeilingReceiptExact as CasimirCeiling
 import DASHI.Physics.Foundations.WarpEnergyConditionSourceAtlasExact as WarpAtlas
+import DASHI.Physics.Foundations.CausalTransport2026SourceAtlasExact as Causal2026
 import DASHI.Physics.Foundations.ScientistFrontierSiblingHandoffExact as ScientistHandoff
 import DASHI.Physics.Foundations.FieldGeometryMatterSiblingAuthorityHandoffExact as SiblingHandoff
 
@@ -37,6 +38,10 @@ record TerminalExecutionAddendum : Set where
     genericWarpEnergyConditionObstructionSource : Terminal.FrontierStatus
     subluminalPositiveEnergyWarpConstructionSource : Terminal.FrontierStatus
     superluminalPositiveEnergyPhysicalWarpSource : Terminal.FrontierStatus
+    remoteQuantumGateTeleportationExperimentSource : Terminal.FrontierStatus
+    phantomScalarWormholeTheorySource : Terminal.FrontierStatus
+    casimirEGBWormholeTheorySource : Terminal.FrontierStatus
+    physicalWormholeRealization : Terminal.FrontierStatus
     scientistFrontierDedicatedAcquisitionOwner : Terminal.FrontierStatus
     scientistFrontierCrossObjectPromotion : Terminal.FrontierStatus
     magnetocaloricDedicatedSiblingOwner : Terminal.FrontierStatus
@@ -52,6 +57,9 @@ record TerminalExecutionAddendum : Set where
     idealSheetScalingCountsAsPhysicalMacroscopicScaling : Bool
     subluminalPositiveEnergyWarpCountsAsFTL : Bool
     sourceWarpTheoremCountsAsPhysicalWarpDevice : Bool
+    quantumGateTeleportationCountsAsFTL : Bool
+    quantumGateTeleportationCountsAsMatterTransport : Bool
+    wormholeTheoryCountsAsPhysicalWormhole : Bool
     scientistTechnicalAdjacencyCountsAsTargeting : Bool
     openSiblingReferenceCountsAsAuthorityImport : Bool
 
@@ -79,12 +87,16 @@ currentTerminalExecutionAddendum =
     Terminal.sourcePaid
     Terminal.sourcePaid
     Terminal.externalOnly
+    Terminal.sourcePaid
+    Terminal.sourcePaid
+    Terminal.sourcePaid
+    Terminal.externalOnly
     Terminal.blockedByUnmergedSibling
     Terminal.openSameObjectPayment
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
-    false false false false false false false false false false false false
+    false false false false false false false false false false false false false false false
 
 record TerminalExecutionAddendumBoundary : Set where
   constructor terminal-execution-addendum-boundary
@@ -98,6 +110,7 @@ record TerminalExecutionAddendumBoundary : Set where
     entropyMaxwellBoundaryImported : EntropyMaxwell.EntropyMaxwellReplayBoundary
     casimirScalingBoundaryImported : CasimirCeiling.CasimirIdealSheetScalingBoundary
     warpEnergyConditionSourceBoundaryImported : WarpAtlas.WarpEnergyConditionAttributionBoundary
+    causalTransport2026SourceBoundaryImported : Causal2026.CausalTransport2026AttributionBoundary
     scientistHandoffBoundaryImported : ScientistHandoff.ScientistFrontierHandoffBoundary
     siblingAuthorityHandoffBoundaryImported : SiblingHandoff.SiblingAuthorityHandoffBoundary
     noGenericAbstractionPromotesRemainingLeaves : Bool
@@ -116,6 +129,7 @@ canonicalTerminalExecutionAddendumBoundary =
     EntropyMaxwell.canonicalEntropyMaxwellReplayBoundary
     CasimirCeiling.canonicalCasimirIdealSheetScalingBoundary
     WarpAtlas.canonicalWarpEnergyConditionAttributionBoundary
+    Causal2026.canonicalCausalTransport2026AttributionBoundary
     ScientistHandoff.canonicalScientistFrontierHandoffBoundary
     SiblingHandoff.canonicalSiblingAuthorityHandoffBoundary
     true
