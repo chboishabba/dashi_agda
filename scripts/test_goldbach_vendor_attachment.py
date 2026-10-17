@@ -13,6 +13,7 @@ def test_attachment_receipt_is_fail_closed():
     assert "ff3f10a3e4c72771ac415a7f4bfb70a209478025" in text
     assert "ff748e1d68bf01d19e0c0998f6ac8d3a1c73e2f3" in text
     assert "782ef73cb0b1e0ee72043f5f097b8b1b5213bd3b" in text
+    assert "0ad25db4bd1d86c452db3f9602ccdbe172438f52" in text
     assert "exactProgramSourceObjectsVendored = true" in text
     assert "sourceDrivenFractranReplayAvailable = true" in text
     assert "semanticMainLoopsDuplicateDetected = true" in text
