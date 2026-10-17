@@ -8,6 +8,7 @@ import DASHI.Biology.UniProtBH4PanelCertificateExact
 import DASHI.Biology.BH4SystemStateExact
 import DASHI.Biology.Molecular.BH4RheaChEBIReactionExact
 import DASHI.Biology.Molecular.BH4MolecularStoichiometryExact
+import DASHI.Biology.Molecular.BH4ExecutedPanelReactionReceiptExact
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact
 import DASHI.Biology.BH4CompartmentKineticStateExact
 import DASHI.Biology.BH4NOSCouplingEvidenceExact
