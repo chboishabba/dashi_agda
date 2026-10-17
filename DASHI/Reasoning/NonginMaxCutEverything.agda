@@ -50,6 +50,23 @@ import DASHI.Reasoning.TrialecticT27WavePhaseHigherStackValidation
 import DASHI.Reasoning.TrialecticT27FiniteTriadicHypersheafExact
 import DASHI.Reasoning.TrialecticT27FiniteTriadicHypersheafValidation
 
+-- Policy-hidden residual max-cut and repository-native structural completion.
+-- The first owner proves that T^18 ceases to determine the hidden third T^9
+-- face when the completion policy is itself unobserved.  The second transports
+-- the already-owned participant C3 action to T^9 and supplies an exact
+-- order-three completion policy.  The guarded 369 handoff records shared
+-- 27-shape without cardinality-only same-object promotion, and the native
+-- realization instantiates sheaf/groupoid/higher-stack/hyperdescent with the
+-- concrete structural policy.
+import DASHI.Reasoning.TrialecticT27PolicyHiddenNonDescentExact
+import DASHI.Reasoning.TrialecticT27PolicyHiddenNonDescentValidation
+import DASHI.Reasoning.TrialecticT27Universal369HandoffExact
+import DASHI.Reasoning.TrialecticT27Universal369HandoffValidation
+import DASHI.Reasoning.TrialecticT27C3CompletionPolicyExact
+import DASHI.Reasoning.TrialecticT27C3CompletionPolicyValidation
+import DASHI.Reasoning.TrialecticT27NativeC3RealizationExact
+import DASHI.Reasoning.TrialecticT27NativeC3RealizationValidation
+
 -- 369-wave cross-pollination closes the stale groupoid/pseudofunctor/stack
 -- frontier while retaining chart rotation as a separate equivariant symmetry.
 import DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact
@@ -84,11 +101,13 @@ import DASHI.Reasoning.TrialecticHigherPromotionSupersessionValidation
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutValidation
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
 
--- Core Nongin closure remains paid.  The additive current T27 status owner
--- records the stronger graph-completed carrier without breaking the older
--- compatibility record consumed elsewhere.
+-- Core Nongin closure remains paid.  Additive current owners preserve existing
+-- record consumers while moving the explicit frontier from generic graph-T27
+-- to an inhabited native-C3 graph-T27 structural realization.
 import DASHI.Philosophy.NonginCurrentMaxCutT27Exact
 import DASHI.Philosophy.NonginCurrentMaxCutT27Validation
+import DASHI.Philosophy.NonginCurrentMaxCutT27C3Exact
+import DASHI.Philosophy.NonginCurrentMaxCutT27C3Validation
 import DASHI.Philosophy.NonginRoadmapClosureExact
 import DASHI.Philosophy.NonginRoadmapClosureValidation
 import DASHI.Philosophy.NonginAttachedDescendantProgrammesExact
