@@ -162,7 +162,7 @@ def classify_packages(conn, cfg: dict, packages: list[dict]) -> list[dict]:
     )
 
 
-def write_receipts(rows: list[dict], out: Path) -> None:
+def write_receipts(rows: list[dict], out: Path, max_matches: int = 10) -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open("w", encoding="utf-8") as f:
         for row in sorted(rows, key=lambda r: (r["family"], r["package_id"])):
@@ -170,6 +170,8 @@ def write_receipts(rows: list[dict], out: Path) -> None:
             material["archive_status"] = ARCHIVE_STATUS[material["disposition"]]
             if material["disposition"] == "STATUS_ONLY":
                 material["selected_canonical_owner"] = None
+            if len(material.get("nonround_matches", [])) > max_matches:
+                material["nonround_matches"] = material["nonround_matches"][:max_matches]
             f.write(json.dumps(material, sort_keys=True) + "\n")
 
 
