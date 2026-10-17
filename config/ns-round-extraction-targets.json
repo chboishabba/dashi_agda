@@ -8,6 +8,13 @@
   "round_regex": "Round[0-9]+",
   "candidate_positive_names": [],
   "status_count_names": [],
+  "status_name_patterns": [
+    "IsFalse$",
+    "IsTrue$",
+    "CountIs",
+    "Regression",
+    "StillOpen$"
+  ],
   "negative_name_terms": [
     "nogo",
     "no-go",
