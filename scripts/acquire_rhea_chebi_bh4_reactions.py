@@ -103,7 +103,13 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rh: <http://rdf.rhea-db.org/>
 SELECT ?side ?coefficient ?participant ?compound ?chebi ?name ?formula ?charge
 WHERE {{
-  BIND(rh:{numeric} AS ?reaction)
+  BIND(rh:{numeric} AS ?root)
+  {{
+    SELECT ?root (MIN(?d) AS ?dir) WHERE {{
+      OPTIONAL {{ ?root rh:directionalReaction ?d . }}
+    }} GROUP BY ?root
+  }}
+  BIND(COALESCE(?dir, ?root) AS ?reaction)
   {{ ?reaction rh:substrates ?reactionSide . BIND("substrate" AS ?side) }}
   UNION
   {{ ?reaction rh:products ?reactionSide . BIND("product" AS ?side) }}
@@ -194,9 +200,11 @@ def extract_panel_rhea(panel: dict) -> list[dict]:
             if xref.get("database") != "Rhea":
                 continue
             rid = str(xref.get("id", "")).strip()
-            if rid and not rid.startswith("RHEA:"):
+            if not rid or "COMP" in rid:
+                continue
+            if not rid.startswith("RHEA:"):
                 rid = f"RHEA:{rid}"
-            if rid:
+            if rid.replace("RHEA:", "").isdigit():
                 links.append({"symbol": member.get("symbol"), "accession": member.get("accession"), "rhea_id": rid})
     return links
 
