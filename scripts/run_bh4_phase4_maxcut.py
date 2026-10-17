@@ -4,7 +4,7 @@
 The default path performs live public acquisition where appropriate:
   exact UniProt panel -> Rhea/ChEBI -> finite matrix S
   -> 56-coordinate quantitative template (15 core + 12 v + 29 e)
-  -> SABIO-RK kinetic candidates
+  -> SABIO-RK export-API kinetic candidates
   -> PDBe/SIFTS structural mappings
   -> interval steady-state feasibility
   -> aggregate static regressions
@@ -44,12 +44,12 @@ def evidence_summary(sabio_payload: dict | None, sifts_payload: dict | None) -> 
     if sabio_payload is not None:
         sabio_summary = {
             "schema": sabio_payload.get("schema"),
+            "export_api": sabio_payload.get("export_api"),
             "proteins_requested": sabio_payload.get("proteins_requested"),
             "proteins_completed": sabio_payload.get("proteins_completed"),
             "proteins_with_entries": sabio_payload.get("proteins_with_entries"),
             "kinetic_entry_count": sabio_payload.get("kinetic_entry_count"),
             "kinetic_parameter_count": sabio_payload.get("kinetic_parameter_count"),
-            "html_shell_observed": sabio_payload.get("html_shell_observed"),
             "error_count": len(sabio_payload.get("errors", [])),
         }
 
@@ -108,7 +108,7 @@ def main() -> int:
     sifts_payload = None if args.skip_network_evidence else load_if_exists(sifts)
 
     summary = {
-        "schema": "dashi.bh4-phase4-maxcut-run.v2",
+        "schema": "dashi.bh4-phase4-maxcut-run.v3",
         "panel": str(args.panel),
         "matrix": {
             "species": len(matrix_payload.get("species_index", [])),
