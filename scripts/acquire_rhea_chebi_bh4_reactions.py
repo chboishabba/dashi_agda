@@ -3,15 +3,12 @@
 
 This script is deliberately reaction-identity/stoichiometry facing. It does not
 infer kinetics, cellular flux, compartment state, allocator competition or
-disease mechanism. Rhea's REST table is the primary acquisition source.
+disease mechanism.
 
-Modes:
-  --qdpr
-      acquire and validate the exact QDPR/RHEA:32253 microspecies fixture.
-  --from-uniprot-panel PATH
-      read the already-acquired 16-member UniProt panel, enumerate every Rhea
-      cross-reference without re-keying proteins manually, and acquire exact
-      Rhea equation/ChEBI-ID rows with per-response SHA-256 receipts.
+The REST table pins the public row/equation and raw response.  Rhea SPARQL pins
+reaction sides, participant coefficients and the Rhea compound formula/charge
+coordinates used for chemical balancing.  Panel membership comes only from the
+already-acquired UniProt certificate.
 """
 
 from __future__ import annotations
@@ -28,18 +25,19 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 RHEA_TABLE = "https://www.rhea-db.org/rhea/"
-USER_AGENT = "DASHI-rhea-chebi-acquisition/1.0 (https://github.com/chboishabba/dashi_agda)"
+RHEA_SPARQL = "https://sparql.rhea-db.org/sparql"
+USER_AGENT = "DASHI-rhea-chebi-acquisition/1.1 (https://github.com/chboishabba/dashi_agda)"
 
 QDPR_EXPECTED = {
     "generic_rhea_id": "RHEA:17869",
     "directed_rhea_id": "RHEA:17871",
     "specific_directed_rhea_id": "RHEA:32253",
     "participants": [
-        {"side": "substrate", "chebi_id": "CHEBI:43120", "broader_chebi_id": "CHEBI:20680", "name": "(6R)-L-erythro-6,7-dihydrobiopterin", "formula": "C9H13N5O3", "charge": 0},
-        {"side": "substrate", "chebi_id": "CHEBI:57945", "broader_chebi_id": "CHEBI:57945", "name": "NADH", "formula": "C21H27N7O14P2", "charge": -2},
-        {"side": "substrate", "chebi_id": "CHEBI:15378", "broader_chebi_id": "CHEBI:15378", "name": "H+", "formula": "H", "charge": 1},
-        {"side": "product", "chebi_id": "CHEBI:59560", "broader_chebi_id": "CHEBI:15372", "name": "(6R)-L-erythro-5,6,7,8-tetrahydrobiopterin", "formula": "C9H15N5O3", "charge": 0},
-        {"side": "product", "chebi_id": "CHEBI:57540", "broader_chebi_id": "CHEBI:57540", "name": "NAD+", "formula": "C21H26N7O14P2", "charge": -1},
+        {"side": "substrate", "coefficient": 1, "chebi_id": "CHEBI:43120", "broader_chebi_id": "CHEBI:20680", "name": "(6R)-L-erythro-6,7-dihydrobiopterin", "formula": "C9H13N5O3", "charge": 0},
+        {"side": "substrate", "coefficient": 1, "chebi_id": "CHEBI:57945", "broader_chebi_id": "CHEBI:57945", "name": "NADH", "formula": "C21H27N7O14P2", "charge": -2},
+        {"side": "substrate", "coefficient": 1, "chebi_id": "CHEBI:15378", "broader_chebi_id": "CHEBI:15378", "name": "H+", "formula": "H", "charge": 1},
+        {"side": "product", "coefficient": 1, "chebi_id": "CHEBI:59560", "broader_chebi_id": "CHEBI:15372", "name": "(6R)-L-erythro-5,6,7,8-tetrahydrobiopterin", "formula": "C9H15N5O3", "charge": 0},
+        {"side": "product", "coefficient": 1, "chebi_id": "CHEBI:57540", "broader_chebi_id": "CHEBI:57540", "name": "NAD+", "formula": "C21H26N7O14P2", "charge": -1},
     ],
 }
 
@@ -48,6 +46,36 @@ def _get(url: str) -> bytes:
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(request, timeout=60) as response:
         return response.read()
+
+
+def _sparql(query: str) -> tuple[dict, str]:
+    data = urllib.parse.urlencode({"query": query, "format": "json"}).encode("utf-8")
+    request = urllib.request.Request(
+        RHEA_SPARQL,
+        data=data,
+        headers={
+            "User-Agent": USER_AGENT,
+            "Accept": "application/sparql-results+json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=60) as response:
+        raw = response.read()
+    return json.loads(raw), hashlib.sha256(raw).hexdigest()
+
+
+def _binding(row: dict, name: str) -> str | None:
+    value = row.get(name, {}).get("value")
+    return value if isinstance(value, str) else None
+
+
+def _chebi_id(uri: str | None) -> str | None:
+    if not uri:
+        return None
+    marker = "CHEBI_"
+    if marker in uri:
+        return "CHEBI:" + uri.rsplit(marker, 1)[1]
+    return uri if uri.startswith("CHEBI:") else None
 
 
 def fetch_rhea_row(rhea_id: str) -> dict:
@@ -68,30 +96,62 @@ def fetch_rhea_row(rhea_id: str) -> dict:
     return {"row": exact[0], "raw_sha256": hashlib.sha256(raw).hexdigest()}
 
 
-def acquire_qdpr() -> dict:
-    generic = fetch_rhea_row(QDPR_EXPECTED["generic_rhea_id"])
-    directed = fetch_rhea_row(QDPR_EXPECTED["directed_rhea_id"])
-    specific = fetch_rhea_row(QDPR_EXPECTED["specific_directed_rhea_id"])
-    specific_ids = set(
-        item.strip()
-        for item in specific["row"].get("ChEBI identifier", "").split(";")
-        if item.strip()
+def fetch_rhea_participants(rhea_id: str) -> dict:
+    numeric = rhea_id.replace("RHEA:", "")
+    query = f"""
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rh: <http://rdf.rhea-db.org/>
+SELECT ?side ?coefficient ?participant ?compound ?chebi ?name ?formula ?charge
+WHERE {{
+  BIND(rh:{numeric} AS ?reaction)
+  {{ ?reaction rh:substrates ?reactionSide . BIND("substrate" AS ?side) }}
+  UNION
+  {{ ?reaction rh:products ?reactionSide . BIND("product" AS ?side) }}
+  ?contains rdfs:subPropertyOf rh:contains .
+  ?contains rh:coefficient ?coefficient .
+  ?reactionSide ?contains ?participant .
+  ?participant rh:compound ?compound .
+  OPTIONAL {{ ?compound rh:chebi ?chebi . }}
+  OPTIONAL {{ ?compound rh:name ?name . }}
+  OPTIONAL {{ ?compound rh:formula ?formula . }}
+  OPTIONAL {{ ?compound rh:charge ?charge . }}
+}}
+ORDER BY ?side ?participant
+"""
+    payload, raw_sha = _sparql(query)
+    participants: list[dict] = []
+    for row in payload.get("results", {}).get("bindings", []):
+        coefficient = _binding(row, "coefficient")
+        charge = _binding(row, "charge")
+        participants.append(
+            {
+                "side": _binding(row, "side"),
+                "coefficient": coefficient,
+                "participant_uri": _binding(row, "participant"),
+                "compound_uri": _binding(row, "compound"),
+                "chebi_id": _chebi_id(_binding(row, "chebi")),
+                "name": _binding(row, "name"),
+                "formula": _binding(row, "formula"),
+                "charge": charge,
+            }
+        )
+    formula_charge_ready = bool(participants) and all(
+        p["side"] in {"substrate", "product"}
+        and p["coefficient"] is not None
+        and p["formula"] is not None
+        and p["charge"] is not None
+        for p in participants
     )
-    expected_exact = {p["chebi_id"] for p in QDPR_EXPECTED["participants"]}
-    missing = sorted(expected_exact - specific_ids)
     return {
-        "schema": "dashi.rhea-chebi-bh4.v1",
-        "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
-        "rhea_release_reference": "Rhea release 142 (2026-09-02); SPARQL release 2026_03",
-        "reaction": QDPR_EXPECTED,
-        "generic": generic,
-        "directed": directed,
-        "specific": specific,
-        "specific_chebi_expected": sorted(expected_exact),
-        "specific_chebi_missing_from_rest_row": missing,
-        "specific_chebi_fixture_paid": not missing,
-        "promotion_boundary": promotion_boundary(),
+        "participants": participants,
+        "participant_sparql_response_sha256": raw_sha,
+        "formula_charge_ready": formula_charge_ready,
+        "participant_query": "Rhea RDF: substrates/products + coefficient + compound formula/charge",
     }
+
+
+def acquire_reaction(rhea_id: str) -> dict:
+    return {"rhea_id": rhea_id, **fetch_rhea_row(rhea_id), **fetch_rhea_participants(rhea_id)}
 
 
 def promotion_boundary() -> dict:
@@ -100,6 +160,29 @@ def promotion_boundary() -> dict:
         "chemical_balance_creates_measured_flux": False,
         "reaction_identity_creates_allocator_competition": False,
         "reaction_identity_creates_disease_mechanism": False,
+        "formula_charge_receipt_solves_electronic_structure": False,
+    }
+
+
+def acquire_qdpr() -> dict:
+    generic = acquire_reaction(QDPR_EXPECTED["generic_rhea_id"])
+    directed = acquire_reaction(QDPR_EXPECTED["directed_rhea_id"])
+    specific = acquire_reaction(QDPR_EXPECTED["specific_directed_rhea_id"])
+    specific_ids = {p.get("chebi_id") for p in specific["participants"] if p.get("chebi_id")}
+    expected_exact = {p["chebi_id"] for p in QDPR_EXPECTED["participants"]}
+    missing = sorted(expected_exact - specific_ids)
+    return {
+        "schema": "dashi.rhea-chebi-bh4.v2",
+        "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
+        "rhea_release_reference": "Rhea release 142 (2026-09-02); SPARQL release 2026_03",
+        "reaction": QDPR_EXPECTED,
+        "generic": generic,
+        "directed": directed,
+        "specific": specific,
+        "specific_chebi_expected": sorted(expected_exact),
+        "specific_chebi_missing_from_sparql": missing,
+        "specific_chebi_fixture_paid": not missing and specific["formula_charge_ready"],
+        "promotion_boundary": promotion_boundary(),
     }
 
 
@@ -126,17 +209,21 @@ def acquire_panel(panel_path: Path) -> tuple[dict, int]:
     errors: list[dict] = []
     for rid in unique_ids:
         try:
-            reactions.append({"rhea_id": rid, **fetch_rhea_row(rid)})
+            reactions.append(acquire_reaction(rid))
         except Exception as exc:  # keep partial acquisition explicit
             errors.append({"rhea_id": rid, "error": str(exc)})
+    formula_ready = sum(bool(row.get("formula_charge_ready")) for row in reactions)
     return {
-        "schema": "dashi.rhea-chebi-bh4-panel.v1",
+        "schema": "dashi.rhea-chebi-bh4-panel.v2",
         "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
+        "rhea_release_reference": "Rhea release 142 (2026-09-02); SPARQL release 2026_03",
         "source_uniprot_panel": str(panel_path),
         "protein_reaction_links": links,
         "unique_rhea_ids_requested": len(unique_ids),
         "rhea_rows_acquired": len(reactions),
         "rhea_rows_failed": len(errors),
+        "formula_charge_ready_reactions": formula_ready,
+        "formula_charge_residual_reactions": len(reactions) - formula_ready,
         "complete_reaction_identity_acquisition": not errors,
         "reactions": reactions,
         "errors": errors,
