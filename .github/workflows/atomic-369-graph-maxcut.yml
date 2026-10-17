@@ -1,0 +1,49 @@
+name: Atomic 369 graph max-cut
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Chemistry/AtomicPeriodicTable369FillingGraphExact.agda'
+      - 'DASHI/Physics/Chemistry/AtomicPeriodicTable369TernaryRealizationIntertwinerExact.agda'
+      - 'DASHI/Physics/Chemistry/AtomicPeriodicTable369GraphMaxCutValidation.agda'
+      - 'scripts/plot_atomic_369_filling_graph.py'
+      - 'scripts/plot_semantic_phase_coordinate_graphs.py'
+      - 'tests/test_atomic_369_filling_graph_maxcut.py'
+      - '.github/workflows/atomic-369-graph-maxcut.yml'
+  workflow_dispatch:
+
+jobs:
+  finite-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - run: python3 -m pip install --disable-pip-version-check matplotlib pytest
+      - run: pytest -q tests/test_atomic_369_filling_graph_maxcut.py
+      - name: Re-run graph producers
+        run: |
+          python3 scripts/plot_atomic_369_filling_graph.py --output /tmp/atomic-fill.png --receipt /tmp/atomic-fill.json
+          python3 scripts/plot_semantic_phase_coordinate_graphs.py --output-dir /tmp/phase-graphs
+          python3 - <<'PY'
+          import json
+          r=json.load(open('/tmp/atomic-fill.json'))
+          assert r['states']==19
+          assert r['directed_edges']==18
+          assert r['closure_counts']==[2,10,18]
+          p=json.load(open('/tmp/phase-graphs/phase_coordinate_graph_receipt.json'))
+          assert p['core243_states']==243
+          assert p['core243_q_quotient_states']==81
+          assert p['axis_boundary_states']==27
+          PY
+
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369GraphMaxCutValidation.agda
