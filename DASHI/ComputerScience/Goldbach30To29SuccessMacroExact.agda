@@ -19,21 +19,23 @@ import DASHI.ComputerScience.Goldbach29Signed369VendorBridgeExact as Bridge
 -- only the success-tail register semantics needed to compare the two published
 -- rule sequences.
 --
--- IMPORTANT REACHABLE-GUARD CORRECTION
--- ------------------------------------
--- The published Goldbach search reaches the success tail at NT_B with
+-- EXACT SUCCESS-BRANCH CONTRACT
+-- -----------------------------
+-- In the published `NT_B` case, the success branch is selected only after the
+-- earlier restoration branches have failed.  On the source-reachable success
+-- boundary this gives
 --
---   a = suc aTail   and   f = 1.
+--   a = suc aTail,  f = 1,  s = 0,  g = 0.
 --
--- The positive-a guard matters because the first actual success is
--- `(a,b,c,f)=(2,2,0,1)`: requiring c>0 at ENTRY would incorrectly exclude that
--- real run.  Conversely allowing arbitrary `f = suc fTail` would be too broad:
--- for f>1 the 29-fraction machine still has a positive verdict after its
--- staging pair and re-enters the success branch, so the one-pass macro below
--- would not describe the published `astep`.
+-- `c` may be zero: the first real Goldbach success is `(a,b,c)=(2,2,0)`.
+-- Positive `a` guarantees that the transfer loop increments c before the final
+-- c-consuming rule.  `d/e/h/m` are not inspected by the success-tail rules and
+-- are therefore retained parametrically.
 --
--- We therefore encode exactly the source-reachable success contract:
--- positive a, arbitrary c (including zero), and verdict f exactly one.
+-- Two tempting broader contracts are intentionally rejected:
+--   * requiring c>0 would exclude the real first success;
+--   * allowing f>1 is not source-faithful for Goldbach29, because a positive
+--     verdict remains after staging and the machine re-enters its success loop.
 ------------------------------------------------------------------------
 
 record SuccessEntry : Set where
@@ -44,14 +46,12 @@ record SuccessEntry : Set where
     c : Nat
     d : Nat
     e : Nat
-    s : Nat
-    g : Nat
     h : Nat
     m : Nat
 
 open SuccessEntry public
 
-/-- The actual tested `a` register at a success entry.  It is structurally positive. -/
+/-- The actual tested `a` register at a success entry. -/
 a : SuccessEntry → Nat
 a x = suc (aTail x)
 
@@ -80,8 +80,8 @@ successEntryRegisters x =
     (d x)
     (e x)
     1
-    (s x)
-    (g x)
+    0
+    0
     (h x)
     (m x)
 
@@ -92,25 +92,24 @@ successEntryRegisters x =
 -- transferred by the SA*a -> SB*b*c ; SB -> SA pair.  Because at least one a
 -- unit is transferred, c is positive by the time the terminal SA*c rule is
 -- reached even when entry c=0.  That rule consumes one c, creates a=2,d+=2,
--- and restores f=1.
+-- and restores f=1.  s and g remain zero; d/e/h/m are carried as published.
 --
 -- The first argument is `aTail`; actual entry a is `suc aTail`.  The zero case
 -- therefore still performs one a-transfer before the terminal rule.
 ------------------------------------------------------------------------
 
 oldSuccessTerminalFrom :
-  Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat →
+  Nat → Nat → Nat → Nat → Nat → Nat → Nat →
   SuccessRegisters
-oldSuccessTerminalFrom zero b c d e s g h m =
-  successRegisters 2 (suc b) c (d + 2) e 1 s g h m
-oldSuccessTerminalFrom (suc aTail) b c d e s g h m =
-  oldSuccessTerminalFrom aTail (suc b) (suc c) d e s g h m
+oldSuccessTerminalFrom zero b c d e h m =
+  successRegisters 2 (suc b) c (d + 2) e 1 0 0 h m
+oldSuccessTerminalFrom (suc aTail) b c d e h m =
+  oldSuccessTerminalFrom aTail (suc b) (suc c) d e h m
 
 oldSuccessTerminal : SuccessEntry → SuccessRegisters
 oldSuccessTerminal x =
   oldSuccessTerminalFrom
-    (aTail x) (b x) (c x) (d x) (e x)
-    (s x) (g x) (h x) (m x)
+    (aTail x) (b x) (c x) (d x) (e x) (h x) (m x)
 
 ------------------------------------------------------------------------
 -- New Goldbach29 macro.
@@ -127,35 +126,33 @@ oldSuccessTerminal x =
 ------------------------------------------------------------------------
 
 newSuccessTerminalFrom :
-  Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat →
+  Nat → Nat → Nat → Nat → Nat → Nat → Nat →
   SuccessRegisters
-newSuccessTerminalFrom zero b c d e s g h m =
-  successRegisters 2 (suc b) c (d + 2) e 1 s g h m
-newSuccessTerminalFrom (suc aTail) b c d e s g h m =
-  newSuccessTerminalFrom aTail (suc b) (suc c) d e s g h m
+newSuccessTerminalFrom zero b c d e h m =
+  successRegisters 2 (suc b) c (d + 2) e 1 0 0 h m
+newSuccessTerminalFrom (suc aTail) b c d e h m =
+  newSuccessTerminalFrom aTail (suc b) (suc c) d e h m
 
 newSuccessTerminal : SuccessEntry → SuccessRegisters
 newSuccessTerminal x =
   newSuccessTerminalFrom
-    (aTail x) (b x) (c x) (d x) (e x)
-    (s x) (g x) (h x) (m x)
+    (aTail x) (b x) (c x) (d x) (e x) (h x) (m x)
 
 successTerminalFromAgree :
-  (aTail b c d e s g h m : Nat) →
-  oldSuccessTerminalFrom aTail b c d e s g h m
+  (aTail b c d e h m : Nat) →
+  oldSuccessTerminalFrom aTail b c d e h m
   ≡
-  newSuccessTerminalFrom aTail b c d e s g h m
-successTerminalFromAgree zero b c d e s g h m = refl
-successTerminalFromAgree (suc aTail) b c d e s g h m =
-  successTerminalFromAgree aTail (suc b) (suc c) d e s g h m
+  newSuccessTerminalFrom aTail b c d e h m
+successTerminalFromAgree zero b c d e h m = refl
+successTerminalFromAgree (suc aTail) b c d e h m =
+  successTerminalFromAgree aTail (suc b) (suc c) d e h m
 
 successTerminalRegistersAgree :
   (x : SuccessEntry) →
   oldSuccessTerminal x ≡ newSuccessTerminal x
 successTerminalRegistersAgree x =
   successTerminalFromAgree
-    (aTail x) (b x) (c x) (d x) (e x)
-    (s x) (g x) (h x) (m x)
+    (aTail x) (b x) (c x) (d x) (e x) (h x) (m x)
 
 ------------------------------------------------------------------------
 -- Source-reachable guard receipts.
@@ -171,18 +168,25 @@ successEntryVerdictIsExactlyOne :
   regF (successEntryRegisters x) ≡ 1
 successEntryVerdictIsExactlyOne x = refl
 
+successEntryRestoreRegistersAreZero :
+  (x : SuccessEntry) →
+  (regS (successEntryRegisters x) ≡ 0)
+  ×
+  (regG (successEntryRegisters x) ≡ 0)
+successEntryRestoreRegistersAreZero x = refl , refl
+
 successTerminalVerdictIsExactlyOne :
   (x : SuccessEntry) →
   regF (oldSuccessTerminal x) ≡ 1
-successTerminalVerdictIsExactlyOne (successEntry zero b c d e s g h m) = refl
-successTerminalVerdictIsExactlyOne (successEntry (suc aTail) b c d e s g h m) =
+successTerminalVerdictIsExactlyOne (successEntry zero b c d e h m) = refl
+successTerminalVerdictIsExactlyOne (successEntry (suc aTail) b c d e h m) =
   successTerminalVerdictIsExactlyOne
-    (successEntry aTail (suc b) (suc c) d e s g h m)
+    (successEntry aTail (suc b) (suc c) d e h m)
 
 /-- Regression for the real first success: entry c=0 is intentionally admitted. -/
 firstGoldbachSuccessEntry : SuccessEntry
 firstGoldbachSuccessEntry =
-  successEntry 1 2 0 0 0 0 0 0 0
+  successEntry 1 2 0 0 0 0 0
 
 firstGoldbachSuccessOldTerminal :
   oldSuccessTerminal firstGoldbachSuccessEntry
@@ -252,8 +256,10 @@ record GoldbachSuccessMacroBoundary : Set where
     nextEvenBoundaryPreserved : Bool
     verdictGuardPreserved : Bool
     entryVerdictExactlyOne : Bool
+    restoreRegistersZeroAtSuccess : Bool
     zeroCReachableSuccessCovered : Bool
     arbitraryPositiveVerdictClaimed : Bool
+    arbitraryRestoreRegisterClaimed : Bool
     fractionCountReduced : Bool
     successMicrostepsReduced : Bool
     successMicrostepsIncreaseByOne : Bool
@@ -262,4 +268,4 @@ record GoldbachSuccessMacroBoundary : Set where
 canonicalGoldbachSuccessMacroBoundary : GoldbachSuccessMacroBoundary
 canonicalGoldbachSuccessMacroBoundary =
   goldbachSuccessMacroBoundary
-    true true true true true false true false true false
+    true true true true true true false false true false true false
