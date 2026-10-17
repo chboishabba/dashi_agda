@@ -38,9 +38,6 @@ record BH4JointFluxFeasibility : Set where
 
 open BH4JointFluxFeasibility public
 
--- The current canonical receipt is deliberately underdetermined: the exact
--- reaction/identity layer exists, but the required quantitative bounds and
--- same-state transport coordinates have not yet been source-paid.
 canonicalUnderdeterminedFluxFeasibility : BH4JointFluxFeasibility
 canonicalUnderdeterminedFluxFeasibility =
   bh4-joint-flux-feasibility
@@ -56,7 +53,7 @@ canonicalUnderdeterminedFluxFeasibility =
     "same-state coordinate unresolved"
     "quantitative evidence incomplete"
 
-candidateSystemFluxWitnessType : Set
+candidateSystemFluxWitnessType : System.BH4SystemState → Set
 candidateSystemFluxWitnessType = System.FluxBalanceWitness
 
 parameterStateType : Set
@@ -99,6 +96,6 @@ canonicalBH4JointFluxFeasibilityReceipt =
     "BH4 joint flux feasibility"
     "DASHI.Biology.BH4JointFluxFeasibilityExact"
     "finite internal stoichiometric matrix + source-paid flux bounds + explicit exchange + supplied candidate -> witness check of S*v+e=0"
-    "returns feasible, infeasible-for-this-candidate, or underdetermined; only a fully paid balanced candidate can carry a FluxBalanceWitness reference"
+    "returns feasible, infeasible-for-this-candidate, or underdetermined; only a fully paid balanced candidate can carry a state-indexed FluxBalanceWitness reference"
     "missing bounds are not zero; failed candidate is not global infeasibility; feasible flux is not allocator causality, disease mechanism or clinical prediction"
     "python3 scripts/run_bh4_flux_feasibility.py --matrix MATRIX --parameters PARAMETERS --candidate CANDIDATE"
