@@ -79,8 +79,8 @@ fineContestedArtwork = fine-edge
   artisticRepresentation
   visibleConnection
 
-fineStatesDiffer : FineNarrativeEdge
-fineStatesDiffer = fineContestedArtwork
+fineStatesDiffer : fineConfirmedDirect ≡ fineContestedArtwork → ⊥
+fineStatesDiffer ()
 
 coarseCollision : project fineConfirmedDirect ≡ project fineContestedArtwork
 coarseCollision = refl
