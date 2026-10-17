@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 
-from agda_preflight.product_cli import main
+from agda_preflight.xpollenation_cli import main
 
 
 def _payload() -> dict:
@@ -31,14 +31,13 @@ def _payload() -> dict:
     }
 
 
-def test_product_cli_ingests_and_shows_xpollenation(tmp_path, capsys) -> None:
+def test_cli_ingests_and_shows_xpollenation(tmp_path, capsys) -> None:
     payload_path = tmp_path / "neighbourhood.json"
     payload_path.write_text(json.dumps(_payload()), encoding="utf-8")
     db = tmp_path / "repo.sqlite3"
 
     code = main(
         [
-            "xpollenation",
             "ingest",
             "--root",
             str(tmp_path),
@@ -57,7 +56,6 @@ def test_product_cli_ingests_and_shows_xpollenation(tmp_path, capsys) -> None:
 
     code = main(
         [
-            "xpollenation",
             "show",
             "rhea",
             "RHEA:11920",
