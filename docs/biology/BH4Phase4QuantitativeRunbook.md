@@ -40,6 +40,12 @@ creates the 56-coordinate unresolved parameter template, acquires SABIO-RK
 kinetic-law candidates, acquires bounded PDBe/SIFTS mappings, runs interval
 steady-state feasibility, and executes the aggregate static regressions.
 
+It writes a final machine-readable index:
+
+```text
+artifacts/biology/bh4-phase4-maxcut-summary.json
+```
+
 To use an edited/source-paid manifest:
 
 ```bash
