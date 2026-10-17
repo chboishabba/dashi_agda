@@ -29,16 +29,19 @@ def reaction_links(rhea: dict) -> dict[str, list[str]]:
 
 
 def parameter_kind_hint(candidate: dict) -> str:
-    text = " ".join(
-        str(candidate.get(k) or "")
-        for k in ("parameter_name", "parameter_type", "sbo_term")
-    ).lower()
-    if any(token in text for token in ("vmax", "v_max", "maximum velocity", "specific activity", "reaction rate", "velocity")):
-        return "rate-like"
-    if any(token in text for token in ("kcat", "turnover")):
-        return "turnover-like"
-    if any(token in text for token in ("km", "michaelis", "affinity", "ki", "inhibition constant")):
+    text = " ".join(str(candidate.get(k) or "") for k in ("parameter_name", "parameter_type", "sbo_term")).lower()
+    if any(token in text for token in ("kcat", "turnover number", "catalytic constant")):
+        return "catalytic-constant-like"
+    if any(token in text for token in ("ki", "inhibition constant", "inhibitory constant", "ic50")):
+        return "inhibitory-like"
+    if any(token in text for token in ("km", "michaelis", "affinity", "kd", "dissociation constant")):
         return "affinity-like"
+    if any(token in text for token in ("vmax", "v_max", "maximum velocity", "specific activity", "reaction rate", "velocity", "rate constant")):
+        return "rate-like"
+    if any(token in text for token in ("concentration", "substrate concentration", "enzyme concentration")):
+        return "concentration-like"
+    if "turnover" in text:
+        return "turnover-like"
     return "unclassified"
 
 
@@ -79,10 +82,11 @@ def build(sabio: dict, rhea: dict, matrix: dict) -> dict:
     by_kind = Counter(row["parameter_kind_hint"] for row in rows)
     mapped = [row for row in rows if row["maps_to_finite_matrix_column"]]
     mapped_reactions = sorted({rid for row in mapped for rid in row["finite_matrix_rhea_ids"]})
+    uncovered = sorted(finite - set(mapped_reactions))
     accessions_with_candidates = sorted({row["accession"] for row in rows if row["accession"]})
 
     return {
-        "schema": "dashi.bh4-sabio-adjudication.v1",
+        "schema": "dashi.bh4-sabio-adjudication.v2",
         "source_sabio_schema": sabio.get("schema"),
         "source_rhea_schema": rhea.get("schema"),
         "source_matrix_schema": matrix.get("schema"),
@@ -91,12 +95,14 @@ def build(sabio: dict, rhea: dict, matrix: dict) -> dict:
         "parameter_candidates_mapped_to_finite_matrix": len(mapped),
         "proteins_with_parameter_candidates": len(accessions_with_candidates),
         "finite_reactions_with_parameter_candidates": mapped_reactions,
+        "uncovered_finite_reactions": uncovered,
         "finite_reaction_candidate_coverage": len(mapped_reactions),
         "parameter_kind_counts": dict(sorted(by_kind.items())),
         "rows": rows,
         "promotion_boundary": {
             "parameter_candidate_creates_flux_bound": False,
             "rate_like_hint_creates_flux_bound": False,
+            "sbo_term_creates_flux_bound": False,
             "protein_to_rhea_link_creates_same_assay_reaction_identity": False,
             "mapped_parameter_creates_same_compartment_state": False,
             "candidate_coverage_creates_allocator_causality": False,
@@ -112,7 +118,6 @@ def main() -> int:
     parser.add_argument("--matrix", type=Path, required=True)
     parser.add_argument("-o", "--output", type=Path)
     args = parser.parse_args()
-
     result = build(
         json.loads(args.sabio.read_text(encoding="utf-8")),
         json.loads(args.rhea.read_text(encoding="utf-8")),
