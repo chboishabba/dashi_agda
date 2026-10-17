@@ -21,13 +21,15 @@ jobs:
         with:
           persist-credentials: false
       - name: Verify shared fixture bytes
-        run: echo 'cc67f109e5be3cfea89d7a8e0ba2b1b6279b5f012d751efbdb7e3a971e957106  fixtures/da51_v1.json' | sha256sum --check -
+        run: echo '3a2f191afd465b52ba1db7774c0cf3d02d1ee4f099ea62cd33802ab52293cd75  fixtures/da51_v1.json' | sha256sum --check -
       - name: Install Agda and standard library
         run: |
           sudo apt-get update
           sudo apt-get install -y agda agda-stdlib
       - name: Check DA51 core
         run: agda -i . -i /usr/share/agda-stdlib DASHI/DA51/Core.agda
+      - name: Check DA51 provenance
+        run: agda -i . -i /usr/share/agda-stdlib DASHI/DA51/Provenance.agda
       - name: Check DA51 atlas codec and fixtures
         run: agda -i . -i /usr/share/agda-stdlib DASHI/DA51/Fixtures.agda
       - name: Check typed HME boundary
