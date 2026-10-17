@@ -6,12 +6,14 @@ The default path performs live public acquisition where appropriate:
   -> 56-coordinate quantitative template (15 core + 12 v + 29 e)
   -> SABIO-RK export-API kinetic candidates
   -> SABIO candidate-to-Rhea adjudication worklist
+  -> per-Rhea flux-relevance ranking/payment-gate ledger
   -> PDBe/SIFTS structural mappings
   -> interval steady-state feasibility
   -> aggregate static regressions
 
 A user-supplied --manifest is normalized against the live matrix before solving.
-Candidate external evidence is never automatically promoted into flux bounds.
+Candidate external evidence and ranking are never automatically promoted into
+flux bounds.
 """
 
 from __future__ import annotations
@@ -40,7 +42,12 @@ def load_if_exists(path: Path) -> dict | None:
         return None
 
 
-def evidence_summary(sabio_payload: dict | None, sabio_adjudication: dict | None, sifts_payload: dict | None) -> dict:
+def evidence_summary(
+    sabio_payload: dict | None,
+    sabio_adjudication: dict | None,
+    sabio_flux_ranking: dict | None,
+    sifts_payload: dict | None,
+) -> dict:
     sabio_summary = None
     if sabio_payload is not None:
         sabio_summary = {
@@ -63,7 +70,20 @@ def evidence_summary(sabio_payload: dict | None, sabio_adjudication: dict | None
             "proteins_with_parameter_candidates": sabio_adjudication.get("proteins_with_parameter_candidates"),
             "finite_reaction_candidate_coverage": sabio_adjudication.get("finite_reaction_candidate_coverage"),
             "finite_reactions_with_parameter_candidates": sabio_adjudication.get("finite_reactions_with_parameter_candidates"),
+            "uncovered_finite_reactions": sabio_adjudication.get("uncovered_finite_reactions"),
             "parameter_kind_counts": sabio_adjudication.get("parameter_kind_counts"),
+        }
+
+    ranking_summary = None
+    if sabio_flux_ranking is not None:
+        ranking_summary = {
+            "schema": sabio_flux_ranking.get("schema"),
+            "finite_reaction_count": sabio_flux_ranking.get("finite_reaction_count"),
+            "finite_reactions_with_any_candidate": sabio_flux_ranking.get("finite_reactions_with_any_candidate"),
+            "payable_reaction_count": sabio_flux_ranking.get("payable_reaction_count"),
+            "blocked_reaction_count": sabio_flux_ranking.get("blocked_reaction_count"),
+            "payable_reactions": sabio_flux_ranking.get("payable_reactions"),
+            "blocked_reactions": sabio_flux_ranking.get("blocked_reactions"),
         }
 
     sifts_summary = None
@@ -71,7 +91,12 @@ def evidence_summary(sabio_payload: dict | None, sabio_adjudication: dict | None
         sifts_summary = dict(sifts_payload.get("summary") or {})
         sifts_summary["schema"] = sifts_payload.get("schema")
 
-    return {"sabio": sabio_summary, "sabio_adjudication": adjudication_summary, "sifts": sifts_summary}
+    return {
+        "sabio": sabio_summary,
+        "sabio_adjudication": adjudication_summary,
+        "sabio_flux_ranking": ranking_summary,
+        "sifts": sifts_summary,
+    }
 
 
 def main() -> int:
@@ -80,6 +105,7 @@ def main() -> int:
     parser.add_argument("--artifact-dir", type=Path, default=Path("artifacts/biology"))
     parser.add_argument("--manifest", type=Path, help="optional filled quantitative manifest to normalize and solve")
     parser.add_argument("--max-pdb-per-protein", type=int, default=3)
+    parser.add_argument("--top-kinetic-candidates", type=int, default=10)
     parser.add_argument("--skip-network-evidence", action="store_true", help="skip SABIO/SIFTS only; Rhea chemistry still refreshes")
     args = parser.parse_args()
 
@@ -94,6 +120,7 @@ def main() -> int:
     normalized_parameters = out / "bh4-parameter-normalized.json"
     sabio = out / "bh4-sabio-kinetics.json"
     sabio_adjudication = out / "bh4-sabio-adjudication.json"
+    sabio_flux_ranking = out / "bh4-flux-candidate-ranking.json"
     sifts = out / "bh4-pdbe-sifts.json"
     interval = out / "bh4-interval-flux-feasibility.json"
     summary_path = out / "bh4-phase4-maxcut-summary.json"
@@ -119,6 +146,15 @@ def main() -> int:
                 "--matrix", str(matrix),
                 "-o", str(sabio_adjudication),
             ], allow_partial=True)
+            if network_exit["sabio_adjudication"] == 0 and sabio_adjudication.exists():
+                network_exit["sabio_flux_ranking"] = run([
+                    py,
+                    "scripts/rank_bh4_flux_candidates.py",
+                    "--adjudication", str(sabio_adjudication),
+                    "--matrix", str(matrix),
+                    "--top-n", str(args.top_kinetic_candidates),
+                    "-o", str(sabio_flux_ranking),
+                ], allow_partial=True)
         network_exit["sifts"] = run([py, "scripts/acquire_bh4_pdbe_sifts.py", "--panel", str(args.panel), "--max-pdb-per-protein", str(args.max_pdb_per_protein), "-o", str(sifts)], allow_partial=True)
 
     interval_exit = run([py, "scripts/solve_bh4_flux_intervals.py", "--matrix", str(matrix), "--parameters", str(solver_parameters), "-o", str(interval)], allow_partial=True)
@@ -129,10 +165,11 @@ def main() -> int:
     interval_payload = json.loads(interval.read_text(encoding="utf-8"))
     sabio_payload = None if args.skip_network_evidence else load_if_exists(sabio)
     sabio_adjudication_payload = None if args.skip_network_evidence else load_if_exists(sabio_adjudication)
+    sabio_flux_ranking_payload = None if args.skip_network_evidence else load_if_exists(sabio_flux_ranking)
     sifts_payload = None if args.skip_network_evidence else load_if_exists(sifts)
 
     summary = {
-        "schema": "dashi.bh4-phase4-maxcut-run.v4",
+        "schema": "dashi.bh4-phase4-maxcut-run.v5",
         "panel": str(args.panel),
         "matrix": {
             "species": len(matrix_payload.get("species_index", [])),
@@ -145,7 +182,7 @@ def main() -> int:
         "missing_reaction_bounds": len(interval_payload.get("missing_reaction_bounds", [])),
         "missing_exchange_bounds": len(interval_payload.get("missing_exchange_bounds", [])),
         "network_evidence_exit_codes": network_exit,
-        "network_evidence": evidence_summary(sabio_payload, sabio_adjudication_payload, sifts_payload),
+        "network_evidence": evidence_summary(sabio_payload, sabio_adjudication_payload, sabio_flux_ranking_payload, sifts_payload),
         "artifacts": {
             "rhea": str(rhea),
             "matrix": str(matrix),
@@ -153,6 +190,7 @@ def main() -> int:
             "parameters_used_by_solver": str(solver_parameters),
             "sabio": str(sabio) if not args.skip_network_evidence else None,
             "sabio_adjudication": str(sabio_adjudication) if not args.skip_network_evidence else None,
+            "sabio_flux_ranking": str(sabio_flux_ranking) if not args.skip_network_evidence else None,
             "sifts": str(sifts) if not args.skip_network_evidence else None,
             "interval": str(interval),
             "summary": str(summary_path),
