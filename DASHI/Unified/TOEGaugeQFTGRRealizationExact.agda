@@ -9,6 +9,7 @@ open import DASHI.Unified.TOESectorRealizationExact
 import DASHI.Unified.GRQuantumStrictProofTerms as StrictGRQ
 import DASHI.Unified.TOE369C3RealizationGraphExact as C3
 import DASHI.Unified.TOEConcreteInhabitantsExact as Inhabitants
+import DASHI.Unified.TOEGaugeInhabitantsExact as GaugeInhabitants
 
 GRQuantumTerminalAuthority : Set₁
 GRQuantumTerminalAuthority = StrictGRQ.StrictTerminalGRQuantumProof
@@ -16,12 +17,15 @@ GRQuantumTerminalAuthority = StrictGRQ.StrictTerminalGRQuantumProof
 record GaugeQFTGRPayment : Set where
   field
     spatialC3ToSU2U1RepresentationPaid : Bool
+    hodgeCrossInhabited : Bool
+    groupLevelU1InsideSU2Inhabited : Bool
+    brownMaclayStressBenchmarkInhabited : Bool
     su2ToU1RestrictionPaid : Bool
     concreteRTBenchmarkInhabited : Bool
     concreteVacuumEinsteinBenchmarkInhabited : Bool
     universalActionRestrictionPaid : Bool
     metricVariationCommutesPaid : Bool
-    stressIdentificationPaid : Bool
+    selectedQFTStressIdentificationPaid : Bool
     round131SharedEndpointPaid : Bool
     strictGRQuantumSharedSubstratePaid : Bool
     semiclassicalPhysicalCalibrationPaid : Bool
@@ -31,17 +35,20 @@ currentGaugeQFTGRPayment : GaugeQFTGRPayment
 currentGaugeQFTGRPayment =
   record
     { spatialC3ToSU2U1RepresentationPaid = true
+    ; hodgeCrossInhabited = true
+    ; groupLevelU1InsideSU2Inhabited = true
+    ; brownMaclayStressBenchmarkInhabited = true
     ; su2ToU1RestrictionPaid = true
     ; concreteRTBenchmarkInhabited = true
     ; concreteVacuumEinsteinBenchmarkInhabited = true
     ; universalActionRestrictionPaid = false
     ; metricVariationCommutesPaid = false
-    ; stressIdentificationPaid = false
+    ; selectedQFTStressIdentificationPaid = false
     ; round131SharedEndpointPaid = true
     ; strictGRQuantumSharedSubstratePaid = true
     ; semiclassicalPhysicalCalibrationPaid = false
     ; sourceReceipt =
-        "Consumes the existing torque/Hodge/right-hand-rule SU2/U1 representation layer, Round131 native/recovered-QFT endpoint and strict GR/quantum shared-substrate contract. Lean PR #68 additionally supplies actual formal inhabitants for a corrected independent-Bell-tree RT equality and a concrete flat-vacuum Jacobson Einstein receipt with recovered Lambda=0 plus SI/CODATA calibration metadata. Those benchmark inhabitants do not yet identify the universal DASHI action with observed 3+1D physics."
+        "Concrete lower-level gauge/QFT/GR objects are inhabited: Agda #1164 supplies explicit R3 Hodge/wedge/cross and a literal group-level U1 torus inside quaternionic SU2; Agda #1165 supplies a source-bounded Brown-Maclay electromagnetic stress witness; Lean #68 supplies corrected RT and Lambda=0 Jacobson/Einstein benchmark inhabitants. The live TOE payment is not existence of those objects but their same-object attachment to one selected recovered-QFT/universal action, common metric variation and calibrated physical system."
     }
 
 universalActionToGRGrade : ValidationGrade
@@ -61,6 +68,9 @@ universalActionToGRObligations =
 record GaugeQFTGRRealization : Set where
   field
     orientationToGauge : C3.C3Edge
+    hodgeCrossFormalInhabitant : Inhabitants.FormalInhabitantReceipt
+    u1SU2TorusFormalInhabitant : Inhabitants.FormalInhabitantReceipt
+    brownMaclayStressFormalInhabitant : Inhabitants.FormalInhabitantReceipt
     rtFormalInhabitant : Inhabitants.FormalInhabitantReceipt
     jacobsonVacuumFormalInhabitant : Inhabitants.FormalInhabitantReceipt
     payments : GaugeQFTGRPayment
@@ -75,6 +85,9 @@ canonicalGaugeQFTGRRealization : GaugeQFTGRRealization
 canonicalGaugeQFTGRRealization =
   record
     { orientationToGauge = C3.spatialToGaugeCandidate
+    ; hodgeCrossFormalInhabitant = GaugeInhabitants.agda1164HodgeCrossInhabitant
+    ; u1SU2TorusFormalInhabitant = GaugeInhabitants.agda1164U1SU2TorusInhabitant
+    ; brownMaclayStressFormalInhabitant = GaugeInhabitants.agda1165BrownMaclayStressInhabitant
     ; rtFormalInhabitant = Inhabitants.lean68RTInhabitant
     ; jacobsonVacuumFormalInhabitant = Inhabitants.lean68JacobsonInhabitant
     ; payments = currentGaugeQFTGRPayment
@@ -84,5 +97,5 @@ canonicalGaugeQFTGRRealization =
     ; commonUniversalActionPromoted = false
     ; commonUniversalActionPromotedIsFalse = refl
     ; reading =
-        "HAM hypothesis: YM, U1/EM, QFT stress, entanglement geometry and Einstein/GR are controlled sector reductions of one universal DASHI action. Unlike the first cut, this record now carries actual imported formal inhabitants for a concrete RT benchmark and concrete Lambda=0 Jacobson/Einstein benchmark. They prove that important downstream contracts are nonempty. What remains is the nontrivial same-object weld: literal universal-action restriction, metric-variation commutation, stress identity, calibration to the selected physical system and held-out observation."
+        "HAM hypothesis: YM, U1/EM, QFT stress, entanglement geometry and Einstein/GR are controlled sector reductions of one universal DASHI action. The TOE now carries actual formal inhabitants for the R3 Hodge/cross geometry, group-level U1-inside-SU2 inclusion, Brown-Maclay electromagnetic stress, corrected RT benchmark and Lambda=0 Jacobson/Einstein benchmark. The remaining difficulty is therefore precisely same-object physics: identify the selected recovered-QFT field/action/stress with these concrete inhabitants, prove metric-variation commutation, and calibrate the resulting observable."
     }
