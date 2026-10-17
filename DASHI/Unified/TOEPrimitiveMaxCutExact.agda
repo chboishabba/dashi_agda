@@ -28,7 +28,10 @@ record PrimitiveSourceReceipt : Set where
     ownerClaim : String
     authority : ReceiptAuthority
     localAgdaTheorem : Bool
-open PrimitiveSourceReceipt public
+
+-- Receipt projections intentionally remain namespaced.  DASHITOEEverything
+-- re-exports many provenance records and generic names such as `repository` or
+-- `authority` must not become ambiguous global theorem-surface names.
 
 siblingReceipt : Nat → String → String → String → PrimitiveSourceReceipt
 siblingReceipt pr head moduleName claim = record
