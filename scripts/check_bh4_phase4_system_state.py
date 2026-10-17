@@ -5,6 +5,7 @@ root = Path(__file__).resolve().parents[1]
 files = {
     "matrix": root / "DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda",
     "parameters": root / "DASHI/Biology/BH4CompartmentKineticStateExact.agda",
+    "nos_evidence": root / "DASHI/Biology/BH4NOSCouplingEvidenceExact.agda",
     "nos": root / "DASHI/Biology/BH4NOSCouplingSameObjectExact.agda",
     "flux": root / "DASHI/Biology/BH4JointFluxFeasibilityExact.agda",
     "open_network": root / "DASHI/Biology/BH4OpenMetabolicNetworkAdapterExact.agda",
@@ -37,9 +38,17 @@ for token in [
     assert token in text["parameters"], f"missing parameter token: {token}"
 
 for token in [
+    "10.1074/jbc.M805403200", "10.1074/jbc.M109.041483",
+    "bh4RelativeToNOS3", "bh4ToBh2RedoxRatio", "superoxideOutput",
+    "nos3EvidenceGlobalizesToNOS1",
+]:
+    assert token in text["nos_evidence"], f"missing NOS3 evidence token: {token}"
+
+for token in [
     "BH4NOSSameObjectPayment", "bh4Bh2StatePaid", "redoxStatePaid",
     "couplingTransitionPaid", "nitricOxideProductPaid",
     "nitrousOxideMayStandForNitricOxideProduct",
+    "nos3RecyclingPerturbationLiteratureEvidence",
 ]:
     assert token in text["nos"], f"missing NOS token: {token}"
 
@@ -82,8 +91,9 @@ for token in [
 for root_name in ["external_root", "kitzerow_root", "unified_root"]:
     for token in [
         "BH4PanelStoichiometricMatrixExact", "BH4CompartmentKineticStateExact",
-        "BH4NOSCouplingSameObjectExact", "BH4JointFluxFeasibilityExact",
-        "BH4OpenMetabolicNetworkAdapterExact", "BH4Phase4SystemStateRegression",
+        "BH4NOSCouplingEvidenceExact", "BH4NOSCouplingSameObjectExact",
+        "BH4JointFluxFeasibilityExact", "BH4OpenMetabolicNetworkAdapterExact",
+        "BH4Phase4RoadmapExact", "BH4Phase4SystemStateRegression",
     ]:
         assert token in text[root_name], f"missing {root_name} phase-4 import: {token}"
 
