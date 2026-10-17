@@ -5,6 +5,8 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.Molecular.BH4ExecutedPanelReactionReceiptExact as Executed
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Matrix
 import DASHI.Biology.BH4CompartmentKineticStateExact as Parameters
+import DASHI.Biology.BH4QuantitativeAcquisitionExact as Acquisition
+import DASHI.Biology.BH4IntervalFluxSolverExact as Interval
 import DASHI.Biology.BH4NOSCouplingEvidenceExact as Evidence
 import DASHI.Biology.BH4NOSCouplingSameObjectExact as NOS
 import DASHI.Biology.BH4JointFluxFeasibilityExact as Flux
@@ -43,6 +45,30 @@ compartmentIdentityCannotBeDropped :
     Parameters.canonicalBH4ParameterBoundary
   ≡ false
 compartmentIdentityCannotBeDropped = refl
+
+sabioKineticConstantDoesNotBecomeFluxBound :
+  Acquisition.QuantitativeAcquisitionBoundary.kineticConstantCreatesFluxBound
+    Acquisition.canonicalQuantitativeAcquisitionBoundary
+  ≡ false
+sabioKineticConstantDoesNotBecomeFluxBound = refl
+
+siftsMappingDoesNotCreateCatalyticMechanism :
+  Acquisition.QuantitativeAcquisitionBoundary.structureMappingCreatesCatalyticMechanism
+    Acquisition.canonicalQuantitativeAcquisitionBoundary
+  ≡ false
+siftsMappingDoesNotCreateCatalyticMechanism = refl
+
+intervalSolverDoesNotZeroMissingExchange :
+  Interval.IntervalFluxSolverBoundary.missingExchangeBoundMayBeSubstitutedWithZero
+    Interval.canonicalIntervalFluxSolverBoundary
+  ≡ false
+intervalSolverDoesNotZeroMissingExchange = refl
+
+intervalSteadyStateDoesNotProveDiseaseMechanism :
+  Interval.IntervalFluxSolverBoundary.feasibleSteadyStateCreatesDiseaseMechanism
+    Interval.canonicalIntervalFluxSolverBoundary
+  ≡ false
+intervalSteadyStateDoesNotProveDiseaseMechanism = refl
 
 nosReactionChemistryIsNowPaid :
   Graph.reactionOrRelationPaid Graph.bh4ToNOSCouplingEdge ≡ true
