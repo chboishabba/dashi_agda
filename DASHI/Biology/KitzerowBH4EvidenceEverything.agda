@@ -36,5 +36,8 @@ import DASHI.Biology.BH4NongNangMaxCutRegression
 import DASHI.Biology.BH4Chemistry369RunnerRegression
 import DASHI.Biology.BH4Phase4SystemStateRegression
 import DASHI.Biology.BH4FluxPaymentPreparationRegression
+import DASHI.Core.XPollenationExact
+import DASHI.Biology.BH4XPollenationKineticAdjudicationExact
+import DASHI.Biology.BH4XPollenationRegression
 import DASHI.Wikimedia.BH4ProteinWikimediaIdentityExact
 import DASHI.Wikimedia.BH4ProteinWikimediaIdentityRegression
