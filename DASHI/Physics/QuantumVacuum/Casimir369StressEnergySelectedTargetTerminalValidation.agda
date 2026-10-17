@@ -8,6 +8,10 @@ selectedTargetR457CompilerPaidRegression :
   T.selectedTargetR457CompilerPaid ≡ true
 selectedTargetR457CompilerPaidRegression = refl
 
+continuumFrontierCompilerPaidRegression :
+  T.selectedTargetContinuumFrontierCompilerPaid ≡ true
+continuumFrontierCompilerPaidRegression = refl
+
 independentLiteralProducerRetiredRegression :
   T.independentLiteralConstructionProducerRequiredForSelectedCasimir ≡ false
 independentLiteralProducerRetiredRegression = refl
@@ -28,15 +32,24 @@ selectedContinuumOpenRegression :
   T.selectedTargetContinuumSchwingerPaid ≡ false
 selectedContinuumOpenRegression = refl
 
+combinedContinuumReceiptRetiredRegression :
+  T.independentCombinedContinuumSchwingerAttachmentRequired ≡ false
+combinedContinuumReceiptRetiredRegression = refl
+
 firstSelectedBlockerRegression :
   T.firstPrimitiveUnificationBlocker
-  ≡ T.missingSelectedTargetContinuumSchwingerAttachment
+  ≡ T.missingSelectedTargetContinuumLimit
 firstSelectedBlockerRegression = refl
 
 secondSelectedBlockerRegression :
   T.secondPrimitiveUnificationBlocker
-  ≡ T.missingPrimitiveR114LiteralStressCoordinate
+  ≡ T.missingSelectedTargetSchwingerMembership
 secondSelectedBlockerRegression = refl
+
+thirdSelectedBlockerRegression :
+  T.thirdPrimitiveUnificationBlocker
+  ≡ T.missingPrimitiveR114LiteralStressCoordinate
+thirdSelectedBlockerRegression = refl
 
 h2ProducerRouteStillRecordedRegression :
   T.h2ProducerRouteAvailable ≡ true
