@@ -1,0 +1,25 @@
+module DASHI.Physics.Plasma.Phase243CoilPlasmaFreeBoundaryRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Plasma.Phase243CoilPlasmaFreeBoundaryMaxCutExact as FB
+
+open FB
+
+sameObjectFieldSumRequiredPinned : Bool
+sameObjectFieldSumRequiredPinned = sameObjectFieldSumRequired canonicalCoilPlasmaFreeBoundaryBoundary
+
+sameObjectFieldSumRequiredPinnedIsTrue : sameObjectFieldSumRequiredPinned ≡ true
+sameObjectFieldSumRequiredPinnedIsTrue = refl
+
+coilProxyCannotPayEquilibriumPinned : Bool
+coilProxyCannotPayEquilibriumPinned = coilInverseProxyPaysFreeBoundary canonicalCoilPlasmaFreeBoundaryBoundary
+
+coilProxyCannotPayEquilibriumPinnedIsFalse : coilProxyCannotPayEquilibriumPinned ≡ false
+coilProxyCannotPayEquilibriumPinnedIsFalse = refl
+
+fullOrbitStillRequiredPinned : Bool
+fullOrbitStillRequiredPinned = producedFieldFullOrbitRequired canonicalCoilPlasmaFreeBoundaryBoundary
+
+fullOrbitStillRequiredPinnedIsTrue : fullOrbitStillRequiredPinned ≡ true
+fullOrbitStillRequiredPinnedIsTrue = refl
