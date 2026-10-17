@@ -14,6 +14,21 @@ xiao-nims-route-observed = refl
 zhang-publisher-route-observed : A.routeObserved A.zhangNaturePublisherRoute ≡ true
 zhang-publisher-route-observed = refl
 
+-- A public PMC article identity remains a valid source/article route, but it
+-- must not be promoted into a claim that the retired legacy OA package lookup
+-- is an operational machine-readable payload producer.
+pmc-article-identity-still-paid : A.pmcArticleIdentityRoutePaid A.canonicalMATBGPublicAcquisitionBoundary ≡ true
+pmc-article-identity-still-paid = refl
+
+legacy-pmc-oa-package-endpoint-not-operational : A.legacyPMCOAPackageEndpointOperational A.canonicalMATBGPublicAcquisitionBoundary ≡ false
+legacy-pmc-oa-package-endpoint-not-operational = refl
+
+pmc-identity-is-not-payload-byte-route : A.pmcArticleIdentityCountsAsPayloadByteRoute A.canonicalMATBGPublicAcquisitionBoundary ≡ false
+pmc-identity-is-not-payload-byte-route = refl
+
+first-party-live-routes-remain-required : A.firstPartyLiveRouteStillRequiredForBytes A.canonicalMATBGPublicAcquisitionBoundary ≡ true
+first-party-live-routes-remain-required = refl
+
 qtm-bytes-still-open : A.qtmExperimentalBytesPaid A.canonicalMATBGPublicAcquisitionBoundary ≡ false
 qtm-bytes-still-open = refl
 
