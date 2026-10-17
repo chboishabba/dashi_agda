@@ -1,8 +1,9 @@
 module DASHI.Biology.KitzerowBH4EvidenceEverything where
 
 -- Focused root for the Kitzerow/BH4 evidence, priority and mechanistic-system
--- surfaces.  External evidence and NONG/NANG cross-pollination are imported
--- explicitly so biochemical witnesses cannot be detached from their boundaries.
+-- surfaces.  External evidence, NONG/NANG and Wikimedia identity
+-- cross-pollination are imported explicitly so biochemical witnesses cannot be
+-- detached from their provenance and promotion boundaries.
 
 import DASHI.Biology.KitzerowBH4EvidenceAtlasExact
 import DASHI.Biology.KitzerowPriorityGenealogyExact
@@ -15,3 +16,5 @@ import DASHI.Biology.NonginNangNitrogenOxideRefinementExact
 import DASHI.Biology.KitzerowBH4SystemNongNangMaxCutExact
 import DASHI.Biology.ExternalBiologyRegression
 import DASHI.Biology.BH4NongNangMaxCutRegression
+import DASHI.Wikimedia.BH4ProteinWikimediaIdentityExact
+import DASHI.Wikimedia.BH4ProteinWikimediaIdentityRegression
