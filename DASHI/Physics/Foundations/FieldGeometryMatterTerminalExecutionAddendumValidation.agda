@@ -48,6 +48,18 @@ subluminal-positive-energy-warp-source-is-paid = refl
 superluminal-positive-energy-physical-source-remains-external : A.superluminalPositiveEnergyPhysicalWarpSource A.currentTerminalExecutionAddendum ≡ T.externalOnly
 superluminal-positive-energy-physical-source-remains-external = refl
 
+remote-quantum-gate-teleportation-source-is-paid : A.remoteQuantumGateTeleportationExperimentSource A.currentTerminalExecutionAddendum ≡ T.sourcePaid
+remote-quantum-gate-teleportation-source-is-paid = refl
+
+phantom-scalar-wormhole-theory-source-is-paid : A.phantomScalarWormholeTheorySource A.currentTerminalExecutionAddendum ≡ T.sourcePaid
+phantom-scalar-wormhole-theory-source-is-paid = refl
+
+casimir-egb-wormhole-theory-source-is-paid : A.casimirEGBWormholeTheorySource A.currentTerminalExecutionAddendum ≡ T.sourcePaid
+casimir-egb-wormhole-theory-source-is-paid = refl
+
+physical-wormhole-remains-external : A.physicalWormholeRealization A.currentTerminalExecutionAddendum ≡ T.externalOnly
+physical-wormhole-remains-external = refl
+
 continuous-measure-is-not-discrete-producer : A.continuousMeasureCountsAsDiscreteProducer A.currentTerminalExecutionAddendum ≡ false
 continuous-measure-is-not-discrete-producer = refl
 
@@ -74,6 +86,15 @@ subluminal-positive-energy-warp-is-not-ftl = refl
 
 warp-source-theorem-is-not-device : A.sourceWarpTheoremCountsAsPhysicalWarpDevice A.currentTerminalExecutionAddendum ≡ false
 warp-source-theorem-is-not-device = refl
+
+quantum-gate-teleportation-is-not-ftl : A.quantumGateTeleportationCountsAsFTL A.currentTerminalExecutionAddendum ≡ false
+quantum-gate-teleportation-is-not-ftl = refl
+
+quantum-gate-teleportation-is-not-matter-transport : A.quantumGateTeleportationCountsAsMatterTransport A.currentTerminalExecutionAddendum ≡ false
+quantum-gate-teleportation-is-not-matter-transport = refl
+
+wormhole-theory-is-not-physical-wormhole : A.wormholeTheoryCountsAsPhysicalWormhole A.currentTerminalExecutionAddendum ≡ false
+wormhole-theory-is-not-physical-wormhole = refl
 
 scientist-acquisition-is-sibling-owned : A.scientistFrontierDedicatedAcquisitionOwner A.currentTerminalExecutionAddendum ≡ T.blockedByUnmergedSibling
 scientist-acquisition-is-sibling-owned = refl
