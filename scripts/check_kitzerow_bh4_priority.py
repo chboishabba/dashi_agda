@@ -13,6 +13,7 @@ external_core = root / "DASHI/Biology/ExternalBiologyEvidenceCore.agda"
 mapping = root / "DASHI/Biology/ExternalBiologyMappingRevisionExact.agda"
 admission = root / "DASHI/Biology/ExternalBiologyConsumerAdmissionExact.agda"
 uniprot = root / "DASHI/Biology/UniProtExternalKnowledgeExact.agda"
+panel_certificate = root / "DASHI/Biology/UniProtBH4PanelCertificateExact.agda"
 bridge = root / "DASHI/Biology/KitzerowUniProtCrossPollinationExact.agda"
 external_regression = root / "DASHI/Biology/ExternalBiologyRegression.agda"
 external_root = root / "DASHI/Biology/ExternalBiologyEverything.agda"
@@ -23,6 +24,12 @@ n2o = root / "DASHI/Biology/NitrousOxideMetabolismEvidenceExact.agda"
 nongin_oxide = root / "DASHI/Biology/NonginNangNitrogenOxideRefinementExact.agda"
 system_maxcut = root / "DASHI/Biology/KitzerowBH4SystemNongNangMaxCutExact.agda"
 system_regression = root / "DASHI/Biology/BH4NongNangMaxCutRegression.agda"
+wikimedia_identity = root / "DASHI/Wikimedia/BH4ProteinWikimediaIdentityExact.agda"
+wikimedia_regression = root / "DASHI/Wikimedia/BH4ProteinWikimediaIdentityRegression.agda"
+wikimedia_root = root / "DASHI/Wikimedia/BH4ProteinWikimediaEverything.agda"
+wikimedia_acquisition = root / "scripts/acquire_wikimedia_bio_identity.py"
+wikimedia_checker = root / "scripts/check_bh4_wikimedia_identity.py"
+wikimedia_doc = root / "docs/biology/WikimediaBiologyIdentityAcquisition.md"
 implementation_plan = root / "docs/superpowers/plans/2026-10-17-bh4-nong-nang-maxcut.md"
 
 for path in [
@@ -37,6 +44,7 @@ for path in [
     mapping,
     admission,
     uniprot,
+    panel_certificate,
     bridge,
     external_regression,
     external_root,
@@ -47,6 +55,12 @@ for path in [
     nongin_oxide,
     system_maxcut,
     system_regression,
+    wikimedia_identity,
+    wikimedia_regression,
+    wikimedia_root,
+    wikimedia_acquisition,
+    wikimedia_checker,
+    wikimedia_doc,
     implementation_plan,
 ]:
     assert path.exists(), f"missing Kitzerow/external-biology max-cut file: {path.relative_to(root)}"
@@ -62,6 +76,7 @@ external_core_text = external_core.read_text()
 mapping_text = mapping.read_text()
 admission_text = admission.read_text()
 uniprot_text = uniprot.read_text()
+panel_certificate_text = panel_certificate.read_text()
 bridge_text = bridge.read_text()
 external_regression_text = external_regression.read_text()
 external_root_text = external_root.read_text()
@@ -72,6 +87,10 @@ n2o_text = n2o.read_text()
 nongin_oxide_text = nongin_oxide.read_text()
 system_maxcut_text = system_maxcut.read_text()
 system_regression_text = system_regression.read_text()
+wikimedia_identity_text = wikimedia_identity.read_text()
+wikimedia_regression_text = wikimedia_regression.read_text()
+wikimedia_root_text = wikimedia_root.read_text()
+wikimedia_acquisition_text = wikimedia_acquisition.read_text()
 
 for token in [
     "scientificSupport",
@@ -165,6 +184,18 @@ for token in [
     assert token in uniprot_text, f"missing UniProt witness token: {token}"
 
 for token in [
+    "UniProtPanelCertificate",
+    "requestedMembers : Nat",
+    "acquiredMembers : Nat",
+    "failedMembers : Nat",
+    "everyMemberBytePinned",
+    "a56d2ea6bda05c47dacab457738c272f53ec58a53bcb12df88e2394797bd4fef",
+    "ab0f7cd5427d5ab003220f6ddfc793b5c639389ef46c675ceb4a17ffcf183320",
+    "completePanelCreatesAllocatorFlux",
+]:
+    assert token in panel_certificate_text, f"missing exact panel certificate token: {token}"
+
+for token in [
     "BH4PoolState",
     "EnzymeDemand",
     "BH4SystemState",
@@ -219,6 +250,7 @@ for token in [
     "Q6ZNB7",
     "P49815",
     "P42345",
+    "exactProteinPanelAcquisitionClosed",
     "qdprRegenerationEdge",
     "bh4ToNOSCouplingEdge",
     "nosToTSC2Edge",
@@ -233,6 +265,9 @@ for token in [
     "proteinPresenceDoesNotEstablishNOSUncoupling",
     "reactionAnnotationDoesNotPayWholeFluxBalance",
     "nangCobalaminLaneDoesNotBecomeNOSLane",
+    "exactPanelAcquisitionIsClosed",
+    "allSixteenPanelRecordsArePinned",
+    "completePanelStillDoesNotCreateAllocatorFlux",
     "isolatedNodesDoNotConfirmKitzerowWholeGraph",
 ]:
     assert token in system_regression_text, f"missing system regression token: {token}"
@@ -258,9 +293,12 @@ for token in [
     "KitzerowBH4SystemNongNangMaxCutExact",
     "BH4NongNangMaxCutRegression",
     "NonginNangNitrogenOxideRefinementExact",
+    "UniProtBH4PanelCertificateExact",
+    "BH4ProteinWikimediaIdentityExact",
+    "BH4ProteinWikimediaIdentityRegression",
 ]:
-    assert token in focused_text, f"missing focused-root BH4/NONG/NANG import: {token}"
-    assert token in external_root_text, f"missing external-root BH4/NONG/NANG import: {token}"
+    assert token in focused_text, f"missing focused-root max-cut import: {token}"
+    assert token in external_root_text, f"missing external-root max-cut import: {token}"
 
 for token in [
     "raw_sha256",
@@ -276,8 +314,49 @@ for token in [
 ]:
     assert token in uniprot_acquisition_text, f"missing UniProt acquisition token: {token}"
 
+for token in [
+    "SnowballExternalIdentityAvailabilityExact",
+    "P352",
+    "P702",
+    "P688",
+    "Q1487359",
+    "Q409532",
+    "Q420604",
+    "Q420766",
+    "Q21115057",
+    "Q14884995",
+    "geneQidMayBeUsedAsProteinQidWithoutP688P702Witness",
+    "wikipediaNarrativeCreatesMechanisticEvidence",
+]:
+    assert token in wikimedia_identity_text, f"missing Wikimedia identity token: {token}"
+
+for token in [
+    "geneQidCannotSilentlyBecomeProteinQid",
+    "qidDoesNotCreateSequenceIdentity",
+    "wikipediaDoesNotCreateMechanisticEvidence",
+    "p352IdentityDoesNotCreateFlux",
+]:
+    assert token in wikimedia_regression_text, f"missing Wikimedia identity regression token: {token}"
+
+for token in [
+    "BH4ProteinWikimediaIdentityExact",
+    "BH4ProteinWikimediaIdentityRegression",
+]:
+    assert token in wikimedia_root_text, f"missing Wikimedia focused-root import: {token}"
+
+for token in [
+    "from acquire_uniprot_bio_certificate import KITZEROW_BH4_PANEL",
+    "WIKIDATA_SPARQL",
+    "wdt:P352",
+    "exact_p352_qids",
+    "reciprocal_p688_paid",
+    "qid_round_trip_paid",
+    "complete_identity_panel_creates_biological_truth",
+]:
+    assert token in wikimedia_acquisition_text, f"missing Wikimedia acquisition token: {token}"
+
 assert "explicitContactClaim" in acquisition_text
 assert "not" in acquisition_text.lower() and "verifiedPrimaryContact" in acquisition_text
 assert "uncited" in acquisition_text.lower()
 
-print("kitzerow BH4 + external biology + NONG/NANG system max-cut regression: ok")
+print("kitzerow BH4 + external biology + NONG/NANG + Wikimedia identity max-cut regression: ok")
