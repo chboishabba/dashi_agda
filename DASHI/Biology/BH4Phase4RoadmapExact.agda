@@ -59,6 +59,9 @@ livePhase4Residuals =
 panelRheaAcquisitionExecuted : Bool
 panelRheaAcquisitionExecuted = Executed.acquisitionExecuted Executed.canonicalExecutedPanelReactionReceipt
 
+fluxCandidateRankingToolReady : Bool
+fluxCandidateRankingToolReady = true
+
 fluxPaymentPreparationToolReady : Bool
 fluxPaymentPreparationToolReady = true
 
