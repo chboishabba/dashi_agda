@@ -5,6 +5,7 @@ YM = ROOT / "DASHI/Physics/YangMills"
 
 INSTANTIATION = YM / "BalabanCMP109CanonicalResidualInstantiationExact.agda"
 OWNER = YM / "BalabanCMP109CanonicalSourceSemanticsObligationsExact.agda"
+RECEIPT = YM / "BalabanCMP109ResidualInstantiationReceiptExact.agda"
 CLAY = YM / "YangMillsCanonicalClayResidualExact.agda"
 
 
@@ -89,6 +90,16 @@ def test_cmp109_canonical_owner_uses_sharpened_residual_types():
     assert "SelectedCMP109BetaDifferenceAttachment selectedSource TubePoint" in text
     assert "PhysicalCompositeD1TransportResidual" in text
     assert "selectedSource Component Background Tangent Scalar" in text
+
+
+def test_cmp109_receipt_records_paid_and_unpaid_boundaries():
+    text = _read(RECEIPT)
+    assert "betaDifferenceAlgebraStructurallyPaid = true" in text
+    assert "betaDifferenceStillNeedsSelectedAttachment = true" in text
+    assert "generatedHistoryResponseStillNeedsSourceReconstruction = true" in text
+    assert "physicalCompositeD1StillNeedsTransportEquality = true" in text
+    assert "genuinelyNewMathematicsEstablished = false" in text
+    assert "clayPromotion = false" in text
 
 
 def test_clay_residual_consumes_sharpened_cmp109_owner_and_stays_closed():
