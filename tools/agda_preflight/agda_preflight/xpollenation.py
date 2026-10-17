@@ -10,7 +10,7 @@ from .proof_router import parse_da51
 
 
 XPOLLENATION_SCHEMA = "dashi.xpollenation-neighbourhood/v1"
-XPOLLENATION_DB_SCHEMA = "1"
+XPOLLENATION_DB_SCHEMA = "2"
 XPOLLENATION_AUTHORITY = "navigation-enrichment-only"
 
 _ALLOWED_RELATIONS = frozenset(
@@ -47,9 +47,10 @@ def _text(name: str, value: Any) -> str:
 def _coordinate(name: str, value: Any) -> tuple[str, str]:
     if not isinstance(value, Mapping):
         raise ValueError(f"{name} must be an object")
-    namespace = _text(f"{name}.namespace", value.get("namespace")).lower()
-    identifier = _text(f"{name}.identifier", value.get("identifier"))
-    return namespace, identifier
+    return (
+        _text(f"{name}.namespace", value.get("namespace")).lower(),
+        _text(f"{name}.identifier", value.get("identifier")),
+    )
 
 
 @dataclass(frozen=True)
@@ -68,17 +69,34 @@ class NormalizedEdge:
     same_object_verified: bool
     context_equivalent: bool
 
+    def immutable_record(self) -> dict[str, Any]:
+        return {
+            "subject_namespace": self.subject_namespace,
+            "subject_identifier": self.subject_identifier,
+            "relation_kind": self.relation,
+            "object_namespace": self.object_namespace,
+            "object_identifier": self.object_identifier,
+            "source_ref": self.source_ref,
+            "source_revision": self.source_revision,
+            "acquisition_receipt": self.acquisition_receipt,
+            "status": self.status,
+            "same_object_claimed": int(self.same_object_claimed),
+            "same_object_verified": int(self.same_object_verified),
+            "context_equivalent": int(self.context_equivalent),
+            "promotion_allowed": 0,
+            "authority": XPOLLENATION_AUTHORITY,
+            "establishes_proof": 0,
+            "establishes_payment": 0,
+        }
+
 
 def _normalize_edge(item: Any) -> NormalizedEdge:
     if not isinstance(item, Mapping):
         raise ValueError("xPollenation edge must be an object")
-    edge_id = _text("edgeId", item.get("edgeId"))
-    subject_namespace, subject_identifier = _coordinate("edge.subject", item.get("subject"))
-    object_namespace, object_identifier = _coordinate("edge.object", item.get("object"))
     relation = _text("edge.relation", item.get("relation"))
+    status = _text("edge.status", item.get("status"))
     if relation not in _ALLOWED_RELATIONS:
         raise ValueError(f"unsupported xPollenation relation: {relation}")
-    status = _text("edge.status", item.get("status"))
     if status not in _ALLOWED_STATUSES:
         raise ValueError(f"unsupported xPollenation status: {status}")
     if item.get("promotionAllowed") is not False:
@@ -89,8 +107,10 @@ def _normalize_edge(item: Any) -> NormalizedEdge:
         raise ValueError("same-object verification requires a same-object claim")
     if same_object_verified and relation not in _SAME_OBJECT_RELATIONS:
         raise ValueError("same-object verification requires an identity relation")
+    subject_namespace, subject_identifier = _coordinate("edge.subject", item.get("subject"))
+    object_namespace, object_identifier = _coordinate("edge.object", item.get("object"))
     return NormalizedEdge(
-        edge_id=edge_id,
+        edge_id=_text("edge.edgeId", item.get("edgeId")),
         subject_namespace=subject_namespace,
         subject_identifier=subject_identifier,
         relation=relation,
@@ -98,9 +118,7 @@ def _normalize_edge(item: Any) -> NormalizedEdge:
         object_identifier=object_identifier,
         source_ref=_text("edge.sourceRef", item.get("sourceRef")),
         source_revision=_text("edge.sourceRevision", item.get("sourceRevision")),
-        acquisition_receipt=_text(
-            "edge.acquisitionReceipt", item.get("acquisitionReceipt")
-        ),
+        acquisition_receipt=_text("edge.acquisitionReceipt", item.get("acquisitionReceipt")),
         status=status,
         same_object_claimed=same_object_claimed,
         same_object_verified=same_object_verified,
@@ -112,23 +130,21 @@ def normalize_neighbourhood(item: Mapping[str, Any]) -> dict[str, Any]:
     schema = _text("schema", item.get("schema"))
     if schema != XPOLLENATION_SCHEMA:
         raise ValueError(f"unsupported xPollenation schema: {schema}")
-    authority = _text("authority", item.get("authority"))
     if (
-        authority != XPOLLENATION_AUTHORITY
+        _text("authority", item.get("authority")) != XPOLLENATION_AUTHORITY
         or item.get("establishesProof") is not False
         or item.get("establishesPayment") is not False
     ):
         raise ValueError("xPollenation neighbourhood attempts authority escalation")
     namespace, identifier = _coordinate("subject", item.get("subject"))
-    edges_value = item.get("edges")
-    if not isinstance(edges_value, list):
+    raw_edges = item.get("edges")
+    if not isinstance(raw_edges, list):
         raise ValueError("edges must be a list")
-    edges = [_normalize_edge(edge) for edge in edges_value]
-    edge_ids = [edge.edge_id for edge in edges]
-    if len(edge_ids) != len(set(edge_ids)):
+    edges = [_normalize_edge(edge) for edge in raw_edges]
+    ids = [edge.edge_id for edge in edges]
+    if len(ids) != len(set(ids)):
         raise ValueError("duplicate xPollenation edge id")
     return {
-        "schema": schema,
         "subject": {"namespace": namespace, "identifier": identifier},
         "edges": sorted(edges, key=lambda edge: edge.edge_id),
         "authority": XPOLLENATION_AUTHORITY,
@@ -157,7 +173,7 @@ def ensure_xpollenation_schema(conn: sqlite3.Connection) -> None:
                 CHECK (authority = 'navigation-enrichment-only'),
             establishes_proof INTEGER NOT NULL DEFAULT 0 CHECK (establishes_proof = 0),
             establishes_payment INTEGER NOT NULL DEFAULT 0 CHECK (establishes_payment = 0),
-            created_at INTEGER NOT NULL,
+            updated_at INTEGER NOT NULL,
             PRIMARY KEY(namespace, identifier),
             FOREIGN KEY(namespace, identifier)
                 REFERENCES xpollenation_nodes(namespace, identifier)
@@ -167,8 +183,6 @@ def ensure_xpollenation_schema(conn: sqlite3.Connection) -> None:
 
         CREATE TABLE IF NOT EXISTS xpollenation_edges (
             edge_id TEXT PRIMARY KEY,
-            focus_namespace TEXT NOT NULL,
-            focus_identifier TEXT NOT NULL,
             subject_namespace TEXT NOT NULL,
             subject_identifier TEXT NOT NULL,
             relation_kind TEXT NOT NULL,
@@ -187,8 +201,6 @@ def ensure_xpollenation_schema(conn: sqlite3.Connection) -> None:
             establishes_proof INTEGER NOT NULL DEFAULT 0 CHECK (establishes_proof = 0),
             establishes_payment INTEGER NOT NULL DEFAULT 0 CHECK (establishes_payment = 0),
             created_at INTEGER NOT NULL,
-            FOREIGN KEY(focus_namespace, focus_identifier)
-                REFERENCES xpollenation_neighbourhoods(namespace, identifier) ON DELETE CASCADE,
             FOREIGN KEY(subject_namespace, subject_identifier)
                 REFERENCES xpollenation_nodes(namespace, identifier),
             FOREIGN KEY(object_namespace, object_identifier)
@@ -198,15 +210,25 @@ def ensure_xpollenation_schema(conn: sqlite3.Connection) -> None:
             ON xpollenation_edges(subject_namespace, subject_identifier, relation_kind);
         CREATE INDEX IF NOT EXISTS xpollenation_edges_object
             ON xpollenation_edges(object_namespace, object_identifier, relation_kind);
-        CREATE INDEX IF NOT EXISTS xpollenation_edges_focus
-            ON xpollenation_edges(focus_namespace, focus_identifier);
+
+        CREATE TABLE IF NOT EXISTS xpollenation_neighbourhood_edges (
+            namespace TEXT NOT NULL,
+            identifier TEXT NOT NULL,
+            edge_id TEXT NOT NULL,
+            PRIMARY KEY(namespace, identifier, edge_id),
+            FOREIGN KEY(namespace, identifier)
+                REFERENCES xpollenation_neighbourhoods(namespace, identifier) ON DELETE CASCADE,
+            FOREIGN KEY(edge_id) REFERENCES xpollenation_edges(edge_id)
+        ) WITHOUT ROWID;
+        CREATE INDEX IF NOT EXISTS xpollenation_neighbourhood_edges_edge
+            ON xpollenation_neighbourhood_edges(edge_id);
 
         CREATE TABLE IF NOT EXISTS xpollenation_artifacts (
             namespace TEXT NOT NULL,
             identifier TEXT NOT NULL,
             schema_version TEXT NOT NULL,
             logical_contract_version TEXT NOT NULL,
-            logical_artifact_ref TEXT NOT NULL,
+            logical_artifact_ref TEXT NOT NULL PRIMARY KEY,
             artifact_id TEXT NOT NULL,
             artifact_revision TEXT NOT NULL,
             shard_id TEXT NOT NULL,
@@ -221,12 +243,11 @@ def ensure_xpollenation_schema(conn: sqlite3.Connection) -> None:
             authority TEXT NOT NULL CHECK (authority = 'transport-only'),
             establishes_proof INTEGER NOT NULL CHECK (establishes_proof = 0),
             created_at INTEGER NOT NULL,
-            PRIMARY KEY(namespace, identifier),
             FOREIGN KEY(namespace, identifier)
                 REFERENCES xpollenation_neighbourhoods(namespace, identifier) ON DELETE CASCADE
-        ) WITHOUT ROWID;
-        CREATE UNIQUE INDEX IF NOT EXISTS xpollenation_artifacts_logical_ref
-            ON xpollenation_artifacts(logical_artifact_ref);
+        );
+        CREATE INDEX IF NOT EXISTS xpollenation_artifacts_focus
+            ON xpollenation_artifacts(namespace, identifier, created_at);
         CREATE INDEX IF NOT EXISTS xpollenation_artifacts_cid
             ON xpollenation_artifacts(cid);
         """
@@ -243,7 +264,7 @@ def ensure_xpollenation_schema(conn: sqlite3.Connection) -> None:
 
 
 class XPollenationStore:
-    """Persist authority-neutral cross-domain neighbourhoods and artifact joins."""
+    """Authority-neutral current neighbourhoods plus immutable artifact history."""
 
     def __init__(self, connection: sqlite3.Connection) -> None:
         self.connection = connection
@@ -257,18 +278,58 @@ class XPollenationStore:
             (namespace, identifier),
         )
 
+    def _edge(self, edge: NormalizedEdge) -> None:
+        self._node(edge.subject_namespace, edge.subject_identifier)
+        self._node(edge.object_namespace, edge.object_identifier)
+        existing = self.connection.execute(
+            "SELECT * FROM xpollenation_edges WHERE edge_id=?", (edge.edge_id,)
+        ).fetchone()
+        immutable = edge.immutable_record()
+        if existing is not None:
+            current = dict(existing)
+            if any(current.get(key) != value for key, value in immutable.items()):
+                raise ValueError(f"xPollenation edge id conflicts with persisted edge: {edge.edge_id}")
+            return
+        self.connection.execute(
+            """
+            INSERT INTO xpollenation_edges(
+                edge_id, subject_namespace, subject_identifier, relation_kind,
+                object_namespace, object_identifier, source_ref, source_revision,
+                acquisition_receipt, status, same_object_claimed, same_object_verified,
+                context_equivalent, promotion_allowed, authority,
+                establishes_proof, establishes_payment, created_at
+            ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0,
+                     'navigation-enrichment-only', 0, 0, ?)
+            """,
+            (
+                edge.edge_id,
+                edge.subject_namespace,
+                edge.subject_identifier,
+                edge.relation,
+                edge.object_namespace,
+                edge.object_identifier,
+                edge.source_ref,
+                edge.source_revision,
+                edge.acquisition_receipt,
+                edge.status,
+                int(edge.same_object_claimed),
+                int(edge.same_object_verified),
+                int(edge.context_equivalent),
+                int(time.time()),
+            ),
+        )
+
     def _persist_artifact(
-        self,
-        namespace: str,
-        identifier: str,
-        receipt: ArtifactResolutionReceipt,
+        self, namespace: str, identifier: str, receipt: ArtifactResolutionReceipt
     ) -> None:
         record = receipt.as_record()
         existing = self.connection.execute(
-            "SELECT * FROM xpollenation_artifacts WHERE namespace=? AND identifier=?",
-            (namespace, identifier),
+            "SELECT * FROM xpollenation_artifacts WHERE logical_artifact_ref=?",
+            (record["logical_artifact_ref"],),
         ).fetchone()
         immutable = {
+            "namespace": namespace,
+            "identifier": identifier,
             "schema_version": record["schema_version"],
             "logical_contract_version": record["logical_contract_version"],
             "logical_artifact_ref": record["logical_artifact_ref"],
@@ -289,7 +350,7 @@ class XPollenationStore:
         if existing is not None:
             current = dict(existing)
             if any(current.get(key) != value for key, value in immutable.items()):
-                raise ValueError("xPollenation artifact conflicts with persisted neighbourhood")
+                raise ValueError("logical artifact ref conflicts with persisted xPollenation artifact")
             return
         self.connection.execute(
             """
@@ -298,7 +359,8 @@ class XPollenationStore:
                 logical_artifact_ref, artifact_id, artifact_revision, shard_id,
                 sink, uri, cid, member_path, content_digest, payload_digest,
                 payload_size_bytes, verified, authority, establishes_proof, created_at
-            ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 'transport-only', 0, ?)
+            ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1,
+                     'transport-only', 0, ?)
             """,
             (
                 namespace,
@@ -336,112 +398,76 @@ class XPollenationStore:
             if artifact_resolution_receipt is not None
             else None
         )
-
         self._node(namespace, identifier)
         existing = self.connection.execute(
             "SELECT da51_address FROM xpollenation_neighbourhoods WHERE namespace=? AND identifier=?",
             (namespace, identifier),
         ).fetchone()
-        if existing is not None and existing[0] not in (None, canonical_da51):
+        if existing is not None and canonical_da51 is not None and existing[0] not in (None, canonical_da51):
             raise ValueError("xPollenation neighbourhood conflicts with persisted DA51 join")
         self.connection.execute(
             """
             INSERT INTO xpollenation_neighbourhoods(
                 namespace, identifier, da51_address, authority,
-                establishes_proof, establishes_payment, created_at
+                establishes_proof, establishes_payment, updated_at
             ) VALUES(?, ?, ?, 'navigation-enrichment-only', 0, 0, ?)
             ON CONFLICT(namespace, identifier) DO UPDATE SET
-                da51_address=COALESCE(excluded.da51_address, xpollenation_neighbourhoods.da51_address)
+                da51_address=COALESCE(excluded.da51_address, xpollenation_neighbourhoods.da51_address),
+                updated_at=excluded.updated_at
             """,
             (namespace, identifier, canonical_da51, int(time.time())),
         )
 
+        self.connection.execute(
+            "DELETE FROM xpollenation_neighbourhood_edges WHERE namespace=? AND identifier=?",
+            (namespace, identifier),
+        )
         for edge in normalized["edges"]:
-            self._node(edge.subject_namespace, edge.subject_identifier)
-            self._node(edge.object_namespace, edge.object_identifier)
-            existing_edge = self.connection.execute(
-                "SELECT * FROM xpollenation_edges WHERE edge_id=?",
-                (edge.edge_id,),
-            ).fetchone()
-            values = (
-                namespace,
-                identifier,
-                edge.subject_namespace,
-                edge.subject_identifier,
-                edge.relation,
-                edge.object_namespace,
-                edge.object_identifier,
-                edge.source_ref,
-                edge.source_revision,
-                edge.acquisition_receipt,
-                edge.status,
-                int(edge.same_object_claimed),
-                int(edge.same_object_verified),
-                int(edge.context_equivalent),
-            )
-            if existing_edge is not None:
-                current = dict(existing_edge)
-                keys = (
-                    "focus_namespace",
-                    "focus_identifier",
-                    "subject_namespace",
-                    "subject_identifier",
-                    "relation_kind",
-                    "object_namespace",
-                    "object_identifier",
-                    "source_ref",
-                    "source_revision",
-                    "acquisition_receipt",
-                    "status",
-                    "same_object_claimed",
-                    "same_object_verified",
-                    "context_equivalent",
-                )
-                if any(current[key] != value for key, value in zip(keys, values)):
-                    raise ValueError(f"xPollenation edge id conflicts with persisted edge: {edge.edge_id}")
-                continue
+            self._edge(edge)
             self.connection.execute(
-                """
-                INSERT INTO xpollenation_edges(
-                    edge_id, focus_namespace, focus_identifier,
-                    subject_namespace, subject_identifier, relation_kind,
-                    object_namespace, object_identifier, source_ref, source_revision,
-                    acquisition_receipt, status, same_object_claimed,
-                    same_object_verified, context_equivalent, promotion_allowed,
-                    authority, establishes_proof, establishes_payment, created_at
-                ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0,
-                         'navigation-enrichment-only', 0, 0, ?)
-                """,
-                (edge.edge_id, *values, int(time.time())),
+                "INSERT INTO xpollenation_neighbourhood_edges(namespace, identifier, edge_id) VALUES(?, ?, ?)",
+                (namespace, identifier, edge.edge_id),
             )
-
         if receipt is not None:
             self._persist_artifact(namespace, identifier, receipt)
         self.connection.commit()
+        persisted_da51 = canonical_da51 or (existing[0] if existing else None)
         return {
             "subject": normalized["subject"],
             "edge_count": len(normalized["edges"]),
-            "da51_address": canonical_da51,
+            "da51_address": persisted_da51,
             "artifact": receipt.as_record() if receipt is not None else None,
             "authority": XPOLLENATION_AUTHORITY,
             "establishes_proof": False,
             "establishes_payment": False,
         }
 
-    def _artifact(self, namespace: str, identifier: str) -> Optional[dict[str, Any]]:
-        row = self.connection.execute(
-            "SELECT * FROM xpollenation_artifacts WHERE namespace=? AND identifier=?",
-            (namespace, identifier),
-        ).fetchone()
-        if row is None:
-            return None
-        result = dict(row)
-        result.pop("namespace", None)
-        result.pop("identifier", None)
-        result.pop("created_at", None)
-        result["verified"] = bool(result["verified"])
-        result["establishes_proof"] = bool(result["establishes_proof"])
+    def artifact_history(self, namespace: str, identifier: str) -> list[dict[str, Any]]:
+        rows = self.connection.execute(
+            """
+            SELECT * FROM xpollenation_artifacts
+            WHERE namespace=? AND identifier=?
+            ORDER BY created_at, artifact_revision, logical_artifact_ref
+            """,
+            (_text("namespace", namespace).lower(), _text("identifier", identifier)),
+        ).fetchall()
+        result: list[dict[str, Any]] = []
+        for row in rows:
+            item = dict(row)
+            item["verified"] = bool(item["verified"])
+            item["establishes_proof"] = bool(item["establishes_proof"])
+            result.append(item)
         return result
+
+    def _current_artifact(self, namespace: str, identifier: str) -> Optional[dict[str, Any]]:
+        rows = self.artifact_history(namespace, identifier)
+        if not rows:
+            return None
+        item = dict(rows[-1])
+        item.pop("namespace", None)
+        item.pop("identifier", None)
+        item.pop("created_at", None)
+        return item
 
     def neighbourhood(self, namespace: str, identifier: str) -> Optional[dict[str, Any]]:
         namespace = _text("namespace", namespace).lower()
@@ -452,22 +478,22 @@ class XPollenationStore:
         ).fetchone()
         if row is None:
             return None
-        edges = [
-            dict(item)
-            for item in self.connection.execute(
-                """
-                SELECT edge_id, subject_namespace, subject_identifier, relation_kind,
-                       object_namespace, object_identifier, source_ref, source_revision,
-                       acquisition_receipt, status, same_object_claimed,
-                       same_object_verified, context_equivalent, promotion_allowed,
-                       authority, establishes_proof, establishes_payment
-                FROM xpollenation_edges
-                WHERE focus_namespace=? AND focus_identifier=?
-                ORDER BY edge_id
-                """,
-                (namespace, identifier),
-            ).fetchall()
-        ]
+        edge_rows = self.connection.execute(
+            """
+            SELECT e.edge_id, e.subject_namespace, e.subject_identifier,
+                   e.relation_kind, e.object_namespace, e.object_identifier,
+                   e.source_ref, e.source_revision, e.acquisition_receipt,
+                   e.status, e.same_object_claimed, e.same_object_verified,
+                   e.context_equivalent, e.promotion_allowed, e.authority,
+                   e.establishes_proof, e.establishes_payment
+            FROM xpollenation_neighbourhood_edges ne
+            JOIN xpollenation_edges e ON e.edge_id = ne.edge_id
+            WHERE ne.namespace=? AND ne.identifier=?
+            ORDER BY e.edge_id
+            """,
+            (namespace, identifier),
+        ).fetchall()
+        edges = [dict(item) for item in edge_rows]
         for edge in edges:
             for key in (
                 "same_object_claimed",
@@ -482,7 +508,7 @@ class XPollenationStore:
             "subject": {"namespace": namespace, "identifier": identifier},
             "da51_address": row["da51_address"],
             "edges": edges,
-            "artifact": self._artifact(namespace, identifier),
+            "artifact": self._current_artifact(namespace, identifier),
             "authority": row["authority"],
             "establishes_proof": False,
             "establishes_payment": False,
@@ -494,8 +520,9 @@ class XPollenationStore:
             "SELECT namespace, identifier FROM xpollenation_neighbourhoods WHERE da51_address=? ORDER BY namespace, identifier",
             (canonical,),
         ).fetchall()
-        return [
-            item
-            for row in rows
-            if (item := self.neighbourhood(row["namespace"], row["identifier"])) is not None
-        ]
+        result: list[dict[str, Any]] = []
+        for row in rows:
+            item = self.neighbourhood(row["namespace"], row["identifier"])
+            if item is not None:
+                result.append(item)
+        return result
