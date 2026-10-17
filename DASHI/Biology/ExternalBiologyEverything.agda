@@ -1,12 +1,5 @@
 module DASHI.Biology.ExternalBiologyEverything where
 
--- Focused root for external biological knowledge, versioned evidence,
--- cross-database mappings, consumer admission, exact panel certificates, BH4
--- system state, literal reaction/stoichiometry, nitrogen-oxide refinement,
--- Wikimedia identity, 369/atomic refinement, executable runner receipts,
--- open-metabolic system-state feasibility, the Phase-4 roadmap and Kitzerow
--- bridges.
-
 import DASHI.Biology.ExternalBiologyEvidenceCore
 import DASHI.Biology.ExternalBiologyMappingRevisionExact
 import DASHI.Biology.ExternalBiologyConsumerAdmissionExact
@@ -17,6 +10,7 @@ import DASHI.Biology.Molecular.BH4RheaChEBIReactionExact
 import DASHI.Biology.Molecular.BH4MolecularStoichiometryExact
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact
 import DASHI.Biology.BH4CompartmentKineticStateExact
+import DASHI.Biology.BH4NOSCouplingEvidenceExact
 import DASHI.Biology.BH4NOSCouplingSameObjectExact
 import DASHI.Biology.BH4JointFluxFeasibilityExact
 import DASHI.Biology.BH4OpenMetabolicNetworkAdapterExact
