@@ -23,8 +23,14 @@ nativePolicyPaid = refl
 nativeFiniteHypersheafPaid : Current.nativeC3FiniteHypersheafPaid boundary ≡ true
 nativeFiniteHypersheafPaid = refl
 
+nativeAllDepthPaid : Current.nativeC3AllFiniteDepthLiftPaid boundary ≡ true
+nativeAllDepthPaid = refl
+
 physicalStillFalse : Current.nativeC3PhysicalDynamicsPaid boundary ≡ false
 physicalStillFalse = refl
+
+nextStateStillNotForced : Current.completedT27DeterminesNextStructuredState boundary ≡ false
+nextStateStillNotForced = refl
 
 iitIdentityStillFalse : Current.iitBOperatorSameObjectWeldPaid boundary ≡ false
 iitIdentityStillFalse = refl
