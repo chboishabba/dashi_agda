@@ -4,10 +4,13 @@ root = Path(__file__).resolve().parents[1]
 
 files = {
     "evidence": root / "DASHI/Biology/BH4QuantitativeAcquisitionExact.agda",
+    "sabio_receipt": root / "DASHI/Biology/BH4ExecutedSABIOReceiptExact.agda",
     "sifts_receipt": root / "DASHI/Biology/BH4ExecutedSIFTSReceiptExact.agda",
     "solver": root / "DASHI/Biology/BH4IntervalFluxSolverExact.agda",
     "roadmap": root / "DASHI/Biology/BH4Phase4RoadmapExact.agda",
+    "rhea": root / "scripts/acquire_rhea_chebi_bh4_reactions.py",
     "sabio": root / "scripts/acquire_bh4_sabio_kinetics.py",
+    "sabio_adjudication": root / "scripts/build_bh4_sabio_adjudication.py",
     "sifts": root / "scripts/acquire_bh4_pdbe_sifts.py",
     "parameters": root / "scripts/acquire_bh4_parameter_evidence.py",
     "interval_solver": root / "scripts/solve_bh4_flux_intervals.py",
@@ -33,6 +36,14 @@ for token in [
     assert token in text["evidence"], f"missing quantitative evidence token: {token}"
 
 for token in [
+    "executedSABIOKineticEntryCount", "executedSABIOProteinsWithEntries",
+    "190", "11", "TPH2:Q8IWU9:75", "NOS3:P29474",
+    "zeroPreRepairParameterCountMeansNoKineticParameters",
+    "exportRowCreatesInVivoFluxBound",
+]:
+    assert token in text["sabio_receipt"], f"missing executed SABIO receipt token: {token}"
+
+for token in [
     "executedStructuresExamined = 38", "executedMatchingSIFTSSegmentCount = 526",
     "executedProteinsWithUniProtPDBLinks = 14", "executedProteinsWithMatchingSegments = 13",
     "PCBD1", "AGMO", "PAH", "mappingCreatesCatalyticFunction",
@@ -40,12 +51,16 @@ for token in [
     assert token in text["sifts_receipt"], f"missing executed SIFTS receipt token: {token}"
 
 for token in [
-    "rerunSABIOAfterProtocolRepair", "adjudicateSABIOKineticCandidatesIntoFluxBounds",
+    "normalizeSABIOKineticParameterCandidates", "adjudicateSABIOKineticCandidatesIntoFluxBounds",
     "adjudicatePDBSIFTSResidueSiteWitnesses", "firstBoundedSIFTSAcquisitionExecuted",
-    "sabioExportAPIAdapterReady = true", "expandedQuantitativeCoordinateCount = 56",
+    "sabioExportAPIAdapterReady = true", "sabioExportAcquisitionExecuted",
+    "sabioKineticEntryCount", "expandedQuantitativeCoordinateCount = 56",
     "boundedSIFTSStructuresExamined", "boundedSIFTSMatchingSegments",
 ]:
     assert token in text["roadmap"], f"missing quantitative roadmap token: {token}"
+
+for token in ["NETWORK_ATTEMPTS = 3", "NETWORK_BACKOFF_SECONDS", "_retry", "network_retry_exhaustion_means_reaction_absent"]:
+    assert token in text["rhea"], f"missing Rhea retry hardening token: {token}"
 
 for token in [
     "IntervalFluxSolverStatus", "solverUnavailable", "underdetermined",
@@ -58,9 +73,17 @@ for token in [
     "https://sabio.h-its.org/export-api/sabio/kinlaw-entry/json",
     "UniProtKB_AC", "meta", "total_count", "data", "pageSize",
     "dashi.bh4-sabio-kinetics.v3", "export-envelope",
+    "n_start_value", "n_end_value", "kinetic_parameter_candidates",
     "kinetic_parameters_create_flux_bounds",
 ]:
-    assert token in text["sabio"], f"missing SABIO export-api token: {token}"
+    assert token in text["sabio"], f"missing SABIO export-api/parameter token: {token}"
+
+for token in [
+    "dashi.bh4-sabio-adjudication.v1", "finite_matrix_rhea_ids",
+    "usable_for_flux_bound", "parameter_kind_hint", "same-object/compartment/time translation",
+    "parameter_candidate_creates_flux_bound",
+]:
+    assert token in text["sabio_adjudication"], f"missing SABIO adjudication token: {token}"
 
 for token in [
     "SIFTS", "uniprot_pdb", "pdb_chain_uniprot", "raw_sha256",
@@ -80,8 +103,9 @@ for token in [
 
 for token in [
     "acquire_rhea_chebi_bh4_reactions.py", "build_bh4_stoichiometric_matrix.py",
-    "acquire_bh4_sabio_kinetics.py", "acquire_bh4_pdbe_sifts.py",
-    "solve_bh4_flux_intervals.py", "bh4-phase4-maxcut-summary.json",
+    "acquire_bh4_sabio_kinetics.py", "build_bh4_sabio_adjudication.py",
+    "acquire_bh4_pdbe_sifts.py", "solve_bh4_flux_intervals.py",
+    "bh4-sabio-adjudication.json", "bh4-phase4-maxcut-summary.json",
 ]:
     assert token in text["runner"], f"missing one-command runner token: {token}"
 
