@@ -21,6 +21,8 @@ record CMP116CanonicalSelectedTermReplay
     selectedTermIdentity : SelectedTermIdentity
     proofBearingEquality : ProofBearingEquality
 
+------------------------------------------------------------------------
+
 open CMP116CanonicalSelectedTermReplay public
 
 executionReplayCreatesProofEquality : Bool

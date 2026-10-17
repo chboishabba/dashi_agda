@@ -3,12 +3,12 @@ module DASHI.Physics.YangMills.YangMillsCanonicalClayResidualExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
 
-import DASHI.Physics.YangMills.BalabanCMP109CanonicalSourceSemanticsObligationsExact as CMP109
-import DASHI.Physics.YangMills.BalabanCanonicalPhysicalTransferGapObligationExact as TransferGap
-import DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedTermReplayExact as R409
-import DASHI.Physics.YangMills.BalabanCMP116CanonicalTraceEntropyBudgetExact as R429
-import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
-import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
+open import DASHI.Physics.YangMills.BalabanCMP109CanonicalSourceSemanticsObligationsExact as CMP109
+open import DASHI.Physics.YangMills.BalabanCanonicalPhysicalTransferGapObligationExact as TransferGap
+open import DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedTermReplayExact as R409
+open import DASHI.Physics.YangMills.BalabanCMP116CanonicalTraceEntropyBudgetExact as R429
+open import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
+open import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
 
 ------------------------------------------------------------------------
 -- Preferred non-Round research scheduler after historical Round contraction.
@@ -52,6 +52,8 @@ record YangMillsCanonicalClayResidual
         ExactCompilerStructure
         QuantitativeTraceEntropyBound
         SameObjectTraceAttachment
+
+------------------------------------------------------------------------
 
 open YangMillsCanonicalClayResidual public
 
