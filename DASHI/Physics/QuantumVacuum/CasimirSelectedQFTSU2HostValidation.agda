@@ -1,0 +1,74 @@
+module DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostExact as H
+
+concreteQuaternionSU2OwnedRegression :
+  H.concreteQuaternionSU2GroupOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+concreteQuaternionSU2OwnedRegression = refl
+
+parameterTableSU2OwnedRegression :
+  H.sprint105SU2EntryOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+parameterTableSU2OwnedRegression = refl
+
+compactSimpleDataInterfaceReusedRegression :
+  H.compactSimpleYMDataInterfaceReused H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+compactSimpleDataInterfaceReusedRegression = refl
+
+hostInterfaceOwnedRegression :
+  H.selectedQFTSU2HostInterfaceOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+hostInterfaceOwnedRegression = refl
+
+selectedStructureRealizationOwnedRegression :
+  H.selectedGroupStructureRealizationInterfaceOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+selectedStructureRealizationOwnedRegression = refl
+
+allGroupsInterpretationNotIndependentRegression :
+  H.allGroupsStructureInterpretationRequiredForHost H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+allGroupsInterpretationNotIndependentRegression = refl
+
+selectedStructureHostCompilerOwnedRegression :
+  H.selectedStructureRealizationBuildsHostCompilerOwned H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+selectedStructureHostCompilerOwnedRegression = refl
+
+bareQuaternionStructureInsufficientRegression :
+  H.BareQuaternionStructureAutomaticallyRealizesSelectedGroup → ⊥
+bareQuaternionStructureInsufficientRegression =
+  H.bareQuaternionStructureDoesNotRealizeSelectedGroup
+
+pinnedCompactSimpleCompilerOwnedRegression :
+  H.pinnedYMConstructionSuppliesCompactSimpleCompiler H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+pinnedCompactSimpleCompilerOwnedRegression = refl
+
+structuralBaseCompactSimpleCompilerOwnedRegression :
+  H.literalClayStructuralBaseSuppliesCompactSimpleCompiler H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+structuralBaseCompactSimpleCompilerOwnedRegression = refl
+
+selectedCompactSimpleStillOpenRegression :
+  H.selectedGroupCompactSimpleWitnessPaid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+selectedCompactSimpleStillOpenRegression = refl
+
+selectedCarrierRealizationStillOpenRegression :
+  H.selectedGroupInterpretedAsQuaternionSU2Paid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+selectedCarrierRealizationStillOpenRegression = refl
+
+sprint105TagIsSecondaryRegression :
+  H.sprint105ClassificationIsSecondaryConsistencyTag H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ true
+sprint105TagIsSecondaryRegression = refl
+
+sprint105TagNotRequiredForHostRegression :
+  H.sprint105ClassificationRequiredForHost H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+sprint105TagNotRequiredForHostRegression = refl
+
+dynkinA1NotRequiredForHostRegression :
+  H.dynkinA1ClassificationRequiredForHost H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+dynkinA1NotRequiredForHostRegression = refl
+
+selectedDynkinA1OptionalConsistencyStillOpenRegression :
+  H.selectedGroupDynkinA1ClassificationPaid H.canonicalCasimirSelectedQFTSU2HostBoundary ≡ false
+selectedDynkinA1OptionalConsistencyStillOpenRegression = refl
+
+hostDoesNotCreateStressEqualityRegression :
+  H.SelectedSU2HostAutomaticallyIdentifiesBrownMaclayStress → ⊥
+hostDoesNotCreateStressEqualityRegression = H.selectedSU2HostDoesNotIdentifyBrownMaclayStress

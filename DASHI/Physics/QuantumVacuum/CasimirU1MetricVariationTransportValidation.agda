@@ -1,0 +1,25 @@
+module DASHI.Physics.QuantumVacuum.CasimirU1MetricVariationTransportValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirU1MetricVariationTransportExact as M
+
+samePathDerivativeCompilerOwnedRegression :
+  M.sameMetricPathActionEqualityToVariationEqualityCompilerOwned
+    M.canonicalU1MetricVariationTransportBoundary ≡ true
+samePathDerivativeCompilerOwnedRegression = refl
+
+independentVariationEqualityNotRequiredRegression :
+  M.independentMetricVariationEqualityRequiredAfterSamePathActionEquality
+    M.canonicalU1MetricVariationTransportBoundary ≡ false
+independentVariationEqualityNotRequiredRegression = refl
+
+samePathActionFamilyStillRequiredRegression :
+  M.sameMetricPathActionFamilyStillRequired
+    M.canonicalU1MetricVariationTransportBoundary ≡ true
+samePathActionFamilyStillRequiredRegression = refl
+
+stressReadoutStillRequiredRegression :
+  M.metricVariationToStressReadoutStillRequired
+    M.canonicalU1MetricVariationTransportBoundary ≡ true
+stressReadoutStillRequiredRegression = refl

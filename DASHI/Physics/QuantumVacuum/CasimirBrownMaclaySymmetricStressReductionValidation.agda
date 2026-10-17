@@ -1,0 +1,40 @@
+module DASHI.Physics.QuantumVacuum.CasimirBrownMaclaySymmetricStressReductionValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirBrownMaclaySymmetricStressReductionExact as R
+
+tenIndependentValuesRecordOwnedRegression :
+  R.tenIndependentValuesRecordOwned R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ true
+tenIndependentValuesRecordOwnedRegression = refl
+
+symmetryAndValuesCompilerOwnedRegression :
+  R.symmetryAndTenValuesCompilerOwned R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ true
+symmetryAndValuesCompilerOwnedRegression = refl
+
+ymSymmetrySemanticBridgeCompilerOwnedRegression :
+  R.ymSymmetrySemanticBridgeCompilerOwned R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ true
+ymSymmetrySemanticBridgeCompilerOwnedRegression = refl
+
+symmetricTenComponentCompilerOwnedRegression :
+  R.symmetricTenComponentCompilerOwned R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ true
+symmetricTenComponentCompilerOwnedRegression = refl
+
+sixteenIndependentPaymentsNotRequiredRegression :
+  R.sixteenIndependentComponentPaymentsRequired R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ false
+sixteenIndependentPaymentsNotRequiredRegression = refl
+
+independentPaymentCountRegression : R.independentBrownMaclayComponentPayments ≡ 10
+independentPaymentCountRegression = refl
+
+actualSymmetryStillOpenRegression :
+  R.actualSelectedQFTSymmetryPaid R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ false
+actualSymmetryStillOpenRegression = refl
+
+actualTenComponentValuesStillOpenRegression :
+  R.actualSelectedQFTTenComponentValuesPaid R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ false
+actualTenComponentValuesStillOpenRegression = refl
+
+actualTenComponentPaymentStillOpenRegression :
+  R.actualSelectedQFTTenComponentPaymentPaid R.canonicalCasimirBrownMaclaySymmetricReductionBoundary ≡ false
+actualTenComponentPaymentStillOpenRegression = refl

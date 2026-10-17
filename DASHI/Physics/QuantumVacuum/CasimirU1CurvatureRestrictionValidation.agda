@@ -1,0 +1,29 @@
+module DASHI.Physics.QuantumVacuum.CasimirU1CurvatureRestrictionValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirU1CurvatureRestrictionExact as C
+
+cartanFieldImageConsumedRegression :
+  C.cartesianU1FieldImageConsumed C.canonicalCasimirU1CurvatureRestrictionBoundary ≡ true
+cartanFieldImageConsumedRegression = refl
+
+bracketZeroConsumedRegression :
+  C.bracketZeroCompilerConsumed C.canonicalCasimirU1CurvatureRestrictionBoundary ≡ true
+bracketZeroConsumedRegression = refl
+
+conditionalCurvatureCompilerOwnedRegression :
+  C.curvatureFormulaToAbelianFieldStrengthCompilerOwned C.canonicalCasimirU1CurvatureRestrictionBoundary ≡ true
+conditionalCurvatureCompilerOwnedRegression = refl
+
+secondBracketProofNotRequiredRegression :
+  C.secondBracketVanishingProofRequired C.canonicalCasimirU1CurvatureRestrictionBoundary ≡ false
+secondBracketProofNotRequiredRegression = refl
+
+realNondegenerateCurvatureStillOpenRegression :
+  C.sameObjectNondegenerateCurvatureFormulaAttached C.canonicalCasimirU1CurvatureRestrictionBoundary ≡ false
+realNondegenerateCurvatureStillOpenRegression = refl
+
+firstCurvatureBlockerRegression :
+  C.firstCurvatureRestrictionBlocker ≡ C.missingSameObjectNondegenerateCurvatureFormulaAttachment
+firstCurvatureBlockerRegression = refl

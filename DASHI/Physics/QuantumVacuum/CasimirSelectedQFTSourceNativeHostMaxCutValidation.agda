@@ -1,0 +1,83 @@
+module DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutExact as M
+import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerValidation
+import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostValidation
+import DASHI.Physics.Foundations.GRQFTSourceNativeQFTRecoveryProjectionCompatibilityValidation
+import DASHI.Physics.Foundations.GRQFTR457SourceNativeRecoveryBindingValidation
+
+sourceNativeRecoveryCompilerOwnedRegression :
+  M.sourceNativePinnedRecoveryAttachmentCompilerOwned M.canonicalSourceNativeHostBoundary ≡ true
+sourceNativeRecoveryCompilerOwnedRegression = refl
+
+qftRecoveryCommutationAlreadyProvidedByHandoffRegression :
+  M.qftRecoveryReceiptConsumedFromCasimirHandoff M.canonicalSourceNativeHostBoundary ≡ true
+qftRecoveryCommutationAlreadyProvidedByHandoffRegression = refl
+
+compactSimpleCompilerOutputRegression :
+  M.compactSimpleWitnessCompiledFromPinnedConstruction M.canonicalSourceNativeHostBoundary ≡ true
+compactSimpleCompilerOutputRegression = refl
+
+independentCompactSimpleNotRequiredRegression :
+  M.independentSelectedCompactSimplePaymentRequired M.canonicalSourceNativeHostBoundary ≡ false
+independentCompactSimpleNotRequiredRegression = refl
+
+formalProjectionCompatibilityCompilerPaidRegression :
+  M.formalProjectionCompatibilityCompilerPaid M.canonicalSourceNativeHostBoundary ≡ true
+formalProjectionCompatibilityCompilerPaidRegression = refl
+
+independentProjectionCompatibilityNotRequiredRegression :
+  M.independentProjectionCompatibilityPaymentRequired M.canonicalSourceNativeHostBoundary ≡ false
+independentProjectionCompatibilityNotRequiredRegression = refl
+
+r457RecoveryEqualityCompilerPaidRegression :
+  M.r457RecoveryEqualityCompiledFromRound131Attachment M.canonicalSourceNativeHostBoundary ≡ true
+r457RecoveryEqualityCompilerPaidRegression = refl
+
+round131RecoveredAttachmentRequiredRegression :
+  M.round131RecoveredQFTAttachmentForR457Required M.canonicalSourceNativeHostBoundary ≡ true
+round131RecoveredAttachmentRequiredRegression = refl
+
+pinnedSelectionCompilerOwnedRegression :
+  M.pinnedSourceNativeSelectionCompiledFromRound131AndPinnedIdentity
+    M.canonicalSourceNativeHostBoundary ≡ true
+pinnedSelectionCompilerOwnedRegression = refl
+
+independentPinnedSelectionNotRequiredRegression :
+  M.independentPinnedSourceNativeSelectionRequired
+    M.canonicalSourceNativeHostBoundary ≡ false
+independentPinnedSelectionNotRequiredRegression = refl
+
+r457PinnedIdentityStillRequiredRegression :
+  M.r457LiteralPinnedConstructionIdentityRequired
+    M.canonicalSourceNativeHostBoundary ≡ true
+r457PinnedIdentityStillRequiredRegression = refl
+
+selectedStructureRealizationCompilerOwnedRegression :
+  M.selectedGroupStructureRealizationBuildsHostCompilerOwned
+    M.canonicalSourceNativeHostBoundary ≡ true
+selectedStructureRealizationCompilerOwnedRegression = refl
+
+selectedStructureRealizationStillRequiredRegression :
+  M.selectedGroupQuaternionSU2RealizationRequired
+    M.canonicalSourceNativeHostBoundary ≡ true
+selectedStructureRealizationStillRequiredRegression = refl
+
+allGroupsInterpretationNotRequiredRegression :
+  M.independentAllGroupsStructureInterpretationRequired
+    M.canonicalSourceNativeHostBoundary ≡ false
+allGroupsInterpretationNotRequiredRegression = refl
+
+firstSourceNativeHostBlockerRegression :
+  M.firstSourceNativeHostBlocker ≡ M.missingRound131RecoveredQFTAttachmentForR457
+firstSourceNativeHostBlockerRegression = refl
+
+secondSourceNativeHostBlockerRegression :
+  M.secondSourceNativeHostBlocker ≡ M.missingR457LiteralPinnedConstructionIdentity
+secondSourceNativeHostBlockerRegression = refl
+
+thirdSourceNativeHostBlockerRegression :
+  M.thirdSourceNativeHostBlocker ≡ M.missingSelectedGroupQuaternionSU2Realization
+thirdSourceNativeHostBlockerRegression = refl

@@ -1,0 +1,25 @@
+module DASHI.Physics.QuantumVacuum.CasimirU1SelectedStressReadoutAttachmentValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirU1SelectedStressReadoutAttachmentExact as M
+
+r129LiteralStressDerivativeReuseRegression :
+  M.round129LiteralStressDerivativeExporterReused M.canonicalSelectedStressReadoutBoundary ≡ true
+r129LiteralStressDerivativeReuseRegression = refl
+
+round131RecoveredTransportReuseRegression :
+  M.round131RecoveredQFTTransportCompilerReused M.canonicalSelectedStressReadoutBoundary ≡ true
+round131RecoveredTransportReuseRegression = refl
+
+stressEqualityCompilerOwnedRegression :
+  M.selectedStressToMaxwellReadoutEqualityCompilerOwned M.canonicalSelectedStressReadoutBoundary ≡ true
+stressEqualityCompilerOwnedRegression = refl
+
+independentStressEqualityNotRequiredRegression :
+  M.independentRestrictedQuantumStressMaxwellEqualityRequiredAfterAttachment M.canonicalSelectedStressReadoutBoundary ≡ false
+independentStressEqualityNotRequiredRegression = refl
+
+selectedStressReadoutAttachmentStillRequiredRegression :
+  M.selectedQFTStressMetricVariationReadoutAttachmentRequired M.canonicalSelectedStressReadoutBoundary ≡ true
+selectedStressReadoutAttachmentStillRequiredRegression = refl
