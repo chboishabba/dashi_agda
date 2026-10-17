@@ -5,6 +5,10 @@ FILES=(
   DASHI/Reasoning/JusticeLeeSensibLawAdversarialProofGraphBidiExact.agda
   DASHI/Reasoning/JusticeLeeSensibLawExperimentSearchCrossPollinationExact.agda
   DASHI/Reasoning/JusticeLeeSensibLawBidiSearchClosureExact.agda
+  DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeExact.agda
+  DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeRegression.agda
+  DASHI/Reasoning/JusticeLeeSensibLawRuntimeClosureReceiptExact.agda
+  DASHI/Reasoning/JusticeLeeSensibLawRuntimeClosureReceiptRegression.agda
 )
 
 for file in "${FILES[@]}"; do
@@ -20,5 +24,11 @@ grep -q 'typedResidualAloneDeterminesGloballyOptimalEvidenceProbeIsFalse' DASHI/
 grep -q 'graphAdmissionMayInventUnreceiptedPredicateIsFalse' DASHI/Reasoning/JusticeLeeSensibLawBidiSearchClosureExact.agda
 grep -q 'legalAdjudicationIsLeanKernelVerificationIsFalse' DASHI/Reasoning/JusticeLeeSensibLawExperimentSearchCrossPollinationExact.agda
 grep -q 'silentlyDeletesWeakArgumentsIsFalse' DASHI/Reasoning/JusticeLeeSensibLawAdversarialProofGraphBidiExact.agda
+
+grep -q 'There is deliberately no function' DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeExact.agda
+grep -q 'wrongTypeDiagnosisAutomaticallyDeterminesResidualKindIsFalse' DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeExact.agda
+grep -q 'compiledSearchDischargesResidualIsFalse' DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeExact.agda
+grep -q 'exports no canonical live inhabitant' DASHI/Reasoning/JusticeLeeSensibLawRuntimeClosureReceiptExact.agda
+grep -q 'maboOrOtherMatterReceiptIsEmpiricalLeeExperimentIsFalse' DASHI/Reasoning/JusticeLeeSensibLawRuntimeClosureReceiptExact.agda
 
 echo 'Justice Lee × SensibLaw BIDI structural checks passed'
