@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.QuantumVacuum.Casimir369StressEnergySourceNativeTerminalExact as T
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutValidation
 import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerValidation
+import DASHI.Physics.QuantumVacuum.CasimirPinnedR457SourceNativeCompilerValidation
 import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressValidation
 import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationValidation
@@ -16,6 +17,14 @@ import DASHI.Physics.QuantumVacuum.CasimirSelectedStressMetricBasisSymmetryValid
 
 sourceNativeHostCompilerPaidRegression : T.sourceNativeHostCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
 sourceNativeHostCompilerPaidRegression = refl
+pinnedR457CompilerPaidRegression : T.pinnedR457SourceNativeCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
+pinnedR457CompilerPaidRegression = refl
+round131RecoveryCompilerPaidRegression : T.selectedTargetToRound131RecoveryCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
+round131RecoveryCompilerPaidRegression = refl
+independentRound131RecoveryRetiredRegression : T.independentRound131RecoveredQFTAttachmentRequired T.canonicalSourceNativeTerminalBoundary ≡ false
+independentRound131RecoveryRetiredRegression = refl
+independentR457PinnedEqualityRetiredRegression : T.independentR457PinnedConstructionIdentityRequired T.canonicalSourceNativeTerminalBoundary ≡ false
+independentR457PinnedEqualityRetiredRegression = refl
 formalProjectionCompilerPaidRegression : T.formalProjectionCompatibilityCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
 formalProjectionCompilerPaidRegression = refl
 independentProjectionNotRequiredRegression : T.independentProjectionCompatibilityPaymentRequired T.canonicalSourceNativeTerminalBoundary ≡ false
@@ -24,12 +33,6 @@ compactSimpleNotIndependentRegression : T.independentCompactSimplePaymentRequire
 compactSimpleNotIndependentRegression = refl
 quaternionGroupLawBridgePaidRegression : T.quaternionSU2GroupLawBridgePaid T.canonicalSourceNativeTerminalBoundary ≡ true
 quaternionGroupLawBridgePaidRegression = refl
-r457EqualityCompilerPaidRegression : T.r457RecoveryEqualityCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
-r457EqualityCompilerPaidRegression = refl
-pinnedSelectionCompilerPaidRegression : T.pinnedSourceNativeSelectionCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
-pinnedSelectionCompilerPaidRegression = refl
-independentPinnedSelectionNotRequiredRegression : T.independentPinnedSourceNativeSelectionRequired T.canonicalSourceNativeTerminalBoundary ≡ false
-independentPinnedSelectionNotRequiredRegression = refl
 selectedGroupRealizationCompilerPaidRegression : T.selectedGroupStructureRealizationCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
 selectedGroupRealizationCompilerPaidRegression = refl
 allGroupsInterpretationNotRequiredRegression : T.independentAllGroupsStructureInterpretationRequired T.canonicalSourceNativeTerminalBoundary ≡ false
@@ -65,10 +68,20 @@ secondBoundaryNotRequiredRegression = refl
 secondRenormalizationNotRequiredRegression : T.secondRenormalizationPrescriptionRequired T.canonicalSourceNativeTerminalBoundary ≡ false
 secondRenormalizationNotRequiredRegression = refl
 
-round131RecoveredAttachmentStillOpenRegression : T.round131RecoveredQFTAttachmentForR457Paid T.canonicalSourceNativeTerminalBoundary ≡ false
-round131RecoveredAttachmentStillOpenRegression = refl
-r457PinnedIdentityStillOpenRegression : T.r457LiteralPinnedConstructionIdentityPaid T.canonicalSourceNativeTerminalBoundary ≡ false
-r457PinnedIdentityStillOpenRegression = refl
+pinnedYMStillOpenRegression : T.pinnedYangMillsConstructionInhabited T.canonicalSourceNativeTerminalBoundary ≡ false
+pinnedYMStillOpenRegression = refl
+r114StillOpenRegression : T.literalStressCoordinatePaid T.canonicalSourceNativeTerminalBoundary ≡ false
+r114StillOpenRegression = refl
+r119StillOpenRegression : T.canonicalMetricSelectedStressSemanticsPaid T.canonicalSourceNativeTerminalBoundary ≡ false
+r119StillOpenRegression = refl
+r122StillOpenRegression : T.literalDensityAnchoringPaid T.canonicalSourceNativeTerminalBoundary ≡ false
+r122StillOpenRegression = refl
+r124StillOpenRegression : T.literalDensityFiniteMeasureWeldPaid T.canonicalSourceNativeTerminalBoundary ≡ false
+r124StillOpenRegression = refl
+r127StillOpenRegression : T.sourceOSLiteralSchwingerWeldPaid T.canonicalSourceNativeTerminalBoundary ≡ false
+r127StillOpenRegression = refl
+selectedTargetStillOpenRegression : T.pinnedLiteralSelectedQFTTargetIdentityPaid T.canonicalSourceNativeTerminalBoundary ≡ false
+selectedTargetStillOpenRegression = refl
 selectedGroupQuaternionRealizationStillOpenRegression : T.selectedGroupQuaternionSU2RealizationPaid T.canonicalSourceNativeTerminalBoundary ≡ false
 selectedGroupQuaternionRealizationStillOpenRegression = refl
 selectedCartanFieldStillOpenRegression : T.selectedQFTCartanFieldRealizationPaid T.canonicalSourceNativeTerminalBoundary ≡ false
@@ -86,33 +99,43 @@ round130ReadoutAttachmentStillOpenRegression = refl
 metricBasisAttachmentStillOpenRegression : T.selectedStressMetricBasisAttachmentPaid T.canonicalSourceNativeTerminalBoundary ≡ false
 metricBasisAttachmentStillOpenRegression = refl
 
-firstBlockerRegression : T.firstUnificationBlocker ≡ T.missingRound131RecoveredQFTAttachmentForR457
+firstBlockerRegression : T.firstUnificationBlocker ≡ T.missingPinnedYangMillsConstructionInhabitant
 firstBlockerRegression = refl
-secondBlockerRegression : T.secondUnificationBlocker ≡ T.missingR457LiteralPinnedConstructionIdentity
+secondBlockerRegression : T.secondUnificationBlocker ≡ T.missingR114LiteralStressCoordinate
 secondBlockerRegression = refl
-thirdBlockerRegression : T.thirdUnificationBlocker ≡ T.missingSelectedGroupQuaternionSU2Realization
+thirdBlockerRegression : T.thirdUnificationBlocker ≡ T.missingR119CanonicalMetricSelectedStressSemantics
 thirdBlockerRegression = refl
-fourthBlockerRegression : T.fourthUnificationBlocker ≡ T.missingSelectedQFTCartanFieldRealization
+fourthBlockerRegression : T.fourthUnificationBlocker ≡ T.missingR122LiteralDensityAnchoring
 fourthBlockerRegression = refl
-fifthBlockerRegression : T.fifthUnificationBlocker ≡ T.missingFreeMaxwellActionNormalization
+fifthBlockerRegression : T.fifthUnificationBlocker ≡ T.missingR124LiteralDensityFiniteMeasureWeld
 fifthBlockerRegression = refl
-sixthBlockerRegression : T.sixthUnificationBlocker ≡ T.missingSameObjectNondegenerateCurvatureFormulaAttachment
+sixthBlockerRegression : T.sixthUnificationBlocker ≡ T.missingR127SourceOSLiteralSchwingerWeld
 sixthBlockerRegression = refl
-seventhBlockerRegression : T.seventhUnificationBlocker ≡ T.missingSelectedNonlinearExteriorCartanTransport
+seventhBlockerRegression : T.seventhUnificationBlocker ≡ T.missingPinnedLiteralSelectedQFTTargetIdentity
 seventhBlockerRegression = refl
-eighthBlockerRegression : T.eighthUnificationBlocker ≡ T.missingCasimirRound132GeneratedActionAttachment
+eighthBlockerRegression : T.eighthUnificationBlocker ≡ T.missingSelectedGroupQuaternionSU2Realization
 eighthBlockerRegression = refl
-ninthBlockerRegression : T.ninthUnificationBlocker ≡ T.missingCasimirQ1FiniteTangentCurveAttachment
+ninthBlockerRegression : T.ninthUnificationBlocker ≡ T.missingSelectedQFTCartanFieldRealization
 ninthBlockerRegression = refl
-tenthBlockerRegression : T.tenthUnificationBlocker ≡ T.missingCasimirRound130StressReadoutAttachment
+tenthBlockerRegression : T.tenthUnificationBlocker ≡ T.missingFreeMaxwellActionNormalization
 tenthBlockerRegression = refl
-eleventhBlockerRegression : T.eleventhUnificationBlocker ≡ T.missingSelectedQFTStressMetricVariationReadoutAttachment
+eleventhBlockerRegression : T.eleventhUnificationBlocker ≡ T.missingSameObjectNondegenerateCurvatureFormulaAttachment
 eleventhBlockerRegression = refl
-twelfthBlockerRegression : T.twelfthUnificationBlocker ≡ T.missingMaxwellReadoutSameRenormalizedModeStressAttachment
+twelfthBlockerRegression : T.twelfthUnificationBlocker ≡ T.missingSelectedNonlinearExteriorCartanTransport
 twelfthBlockerRegression = refl
-thirteenthBlockerRegression : T.thirteenthUnificationBlocker ≡ T.missingSelectedStressMetricBasisAttachment
+thirteenthBlockerRegression : T.thirteenthUnificationBlocker ≡ T.missingCasimirRound132GeneratedActionAttachment
 thirteenthBlockerRegression = refl
-fourteenthBlockerRegression : T.fourteenthUnificationBlocker ≡ T.missingBrownMaclayTenIndependentComponentValues
+fourteenthBlockerRegression : T.fourteenthUnificationBlocker ≡ T.missingCasimirQ1FiniteTangentCurveAttachment
 fourteenthBlockerRegression = refl
-fifteenthBlockerRegression : T.fifteenthUnificationBlocker ≡ T.missingRound131AllSectorAssembly
+fifteenthBlockerRegression : T.fifteenthUnificationBlocker ≡ T.missingCasimirRound130StressReadoutAttachment
 fifteenthBlockerRegression = refl
+sixteenthBlockerRegression : T.sixteenthUnificationBlocker ≡ T.missingSelectedQFTStressMetricVariationReadoutAttachment
+sixteenthBlockerRegression = refl
+seventeenthBlockerRegression : T.seventeenthUnificationBlocker ≡ T.missingMaxwellReadoutSameRenormalizedModeStressAttachment
+seventeenthBlockerRegression = refl
+eighteenthBlockerRegression : T.eighteenthUnificationBlocker ≡ T.missingSelectedStressMetricBasisAttachment
+eighteenthBlockerRegression = refl
+nineteenthBlockerRegression : T.nineteenthUnificationBlocker ≡ T.missingBrownMaclayTenIndependentComponentValues
+nineteenthBlockerRegression = refl
+twentiethBlockerRegression : T.twentiethUnificationBlocker ≡ T.missingRound131AllSectorAssembly
+twentiethBlockerRegression = refl
