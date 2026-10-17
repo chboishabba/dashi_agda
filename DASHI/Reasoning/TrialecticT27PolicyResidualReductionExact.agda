@@ -30,10 +30,6 @@ import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
 import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionExact as Tower
 import DASHI.Reasoning.TrialecticT27PolicyHiddenNonDescentExact as Hidden
 
-------------------------------------------------------------------------
--- 1. Consumer-relative reduction: hide policy, retain exact T^18.
-------------------------------------------------------------------------
-
 identityFineStep : ⊤ → Hidden.PolicyTaggedT27 → Hidden.PolicyTaggedT27
 identityFineStep tt state = state
 
@@ -55,11 +51,6 @@ t18ConsumerReduction =
     (λ coordinates → coordinates)
     (λ action state → refl)
     (λ state → refl)
-
-------------------------------------------------------------------------
--- 2. Exact residual reopening.  The information lost by the reduction is
---    precisely the policy choice for this tagged fine-state representation.
-------------------------------------------------------------------------
 
 reopenPolicy :
   Tower.T18Coordinates →
@@ -93,10 +84,6 @@ reopenPolicyExact :
   ≡ state
 reopenPolicyExact = Reduction.reopenExact policyResidualReopening
 
-------------------------------------------------------------------------
--- 3. The coarse code preserves its declared future consumer exactly.
-------------------------------------------------------------------------
-
 t18FuturePreserved :
   (actions : List ⊤) →
   (state : Hidden.PolicyTaggedT27) →
@@ -106,10 +93,6 @@ t18FuturePreserved :
       (Reduction.run (Reduction.reducedStep t18ConsumerReduction) actions
         (Reduction.encode t18ConsumerReduction state))
 t18FuturePreserved = Reduction.consumerFuturePreserved t18ConsumerReduction
-
-------------------------------------------------------------------------
--- 4. The canonical policy collision is separated by the third-face measure.
-------------------------------------------------------------------------
 
 thirdFaceDiscriminator :
   Reduction.MeasurementDiscriminator
@@ -133,12 +116,6 @@ policyMechanisticEquifinality =
     Hidden.secondPolicyState
     Hidden.sameObservedT18
     Hidden.differentPolicyChoice
-
-------------------------------------------------------------------------
--- 5. High-fidelity identity reduction.  It retains the whole tagged fine state
---    while declaring the same T^18 observation, making the loss of the low
---    reduction explicit through the generic fidelity-escalation interface.
-------------------------------------------------------------------------
 
 fullTaggedReduction :
   Reduction.ConsumerRelativeReduction
@@ -165,12 +142,9 @@ policyFidelityEscalation =
     Hidden.firstPolicyState
     Hidden.secondPolicyState
     Hidden.sameObservedT18
-    Hidden.differentPolicyChoice
-
-------------------------------------------------------------------------
--- 6. If the declared consumer is instead the third T^9 face, the same T^18
---    candidate code is falsified immediately by the zero-length action trace.
-------------------------------------------------------------------------
+    (λ taggedEquality →
+      Hidden.differentPolicyChoice
+        (cong Hidden.policyConsumer taggedEquality))
 
 thirdFaceCandidateReductionFailure :
   Reduction.CandidateReductionFailure
@@ -199,10 +173,6 @@ thirdFaceDoesNotDescendThroughReduction realize commutes =
         (cong realize Hidden.sameObservedT18)
         (sym (commutes Hidden.secondPolicyState))))
 
-------------------------------------------------------------------------
--- 7. Promotion boundary.
-------------------------------------------------------------------------
-
 record TrialecticT27PolicyResidualReductionBoundary : Set where
   constructor trialectic-t27-policy-residual-reduction-boundary
   field
@@ -225,6 +195,5 @@ canonicalTrialecticT27PolicyResidualReductionBoundary =
   trialectic-t27-policy-residual-reduction-boundary
     true true true true true true true false true false
 
--- Re-export the canonical collision names for focused validation convenience.
 firstPolicyState : Hidden.PolicyTaggedT27
 firstPolicyState = Hidden.firstPolicyState
