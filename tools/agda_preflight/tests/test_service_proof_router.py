@@ -49,3 +49,40 @@ def test_service_resolves_da51_without_promoting_status():
     assert result["atlas"]["status"] == 1
     assert result["authority"] == "identity-only"
     assert result["establishes_proof"] is False
+
+
+def test_service_routes_external_obligation_with_exact_statement_identity():
+    service = FakeService()
+    result = service.proof_route_for_obligation(
+        "new theorem",
+        demand_ref="formal-demand:1",
+        external_obligation_ref="proof-obligation:1",
+        statement_digest="sha256:statement-a",
+        target_prover="lean",
+        da51_address="0xDA51831100800000",
+    )
+    assert result["demand_ref"] == "formal-demand:1"
+    assert result["external_obligation_ref"] == "proof-obligation:1"
+    assert result["statement_digest"] == "sha256:statement-a"
+    assert result["recommended_backend"] == "aristotle+lean"
+    assert result["establishes_proof"] is False
+    assert result["authority"] == "routing-only"
+
+
+def test_service_external_evidence_lookup_is_read_only_and_exact():
+    service = FakeService()
+    service.proof_route_for_obligation(
+        "new theorem",
+        demand_ref="formal-demand:1",
+        external_obligation_ref="proof-obligation:1",
+        statement_digest="sha256:statement-a",
+        target_prover="lean",
+    )
+    result = service.formal_evidence_for_obligation(
+        demand_ref="formal-demand:1",
+        external_obligation_ref="proof-obligation:1",
+        statement_digest="sha256:statement-a",
+    )
+    assert result["evidence"] == []
+    assert result["authority"] == "evidence-only"
+    assert result["establishes_proof"] is False
