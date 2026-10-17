@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from collections import defaultdict
 from pathlib import Path
 
@@ -104,6 +105,16 @@ def _decl_dict(row) -> dict:
     }
 
 
+def _status_name_evidence(name: str, cfg: dict) -> list[str]:
+    evidence: list[str] = []
+    if name in set(cfg.get("status_count_names", ())):
+        evidence.append(name)
+    for pattern in cfg.get("status_name_patterns", ()):
+        if re.search(pattern, name):
+            evidence.append(pattern)
+    return evidence
+
+
 def cluster_packages(conn, cfg: dict) -> list[dict]:
     paths = module_paths(conn)
     imports, _ = load_import_graph(conn)
@@ -118,7 +129,6 @@ def cluster_packages(conn, cfg: dict) -> list[dict]:
         families = {family_of(m) for m in round_modules}
 
     parents, children = build_round_graph(imports, round_modules)
-    status_names = set(cfg.get("status_count_names", ()))
     negative_terms = tuple(x.lower() for x in cfg.get("negative_name_terms", ()))
     namespace = cfg.get("package_namespace", "ym-round-package")
 
@@ -170,7 +180,7 @@ def cluster_packages(conn, cfg: dict) -> list[dict]:
                 "body_hashes": bodies,
                 "historical_mutation_count": max(0, len(bodies) - 1),
                 "dependency_neighbors": neighbors,
-                "status_only_evidence": [name] if name in status_names else [],
+                "status_only_evidence": _status_name_evidence(name, cfg),
                 "negative_result_evidence": [
                     term for term in negative_terms if term and term in lower
                 ],
@@ -235,6 +245,7 @@ def classify_package(package: dict, nonround_indexes: dict, cfg: dict) -> dict:
     result = dict(package)
     names = set(package.get("candidate_names", ()))
     status_names = set(cfg.get("status_count_names", ()))
+    status_patterns = tuple(cfg.get("status_name_patterns", ()))
     negative_terms = tuple(x.lower() for x in cfg.get("negative_name_terms", ()))
     positive_names = set(cfg.get("candidate_positive_names", ()))
     evidence: list[str] = []
@@ -243,9 +254,12 @@ def classify_package(package: dict, nonround_indexes: dict, cfg: dict) -> dict:
     matches: list[dict] = []
     owner = None
 
-    if names & status_names or package.get("status_only_evidence"):
+    pattern_status = any(
+        re.search(pattern, name) for name in names for pattern in status_patterns
+    )
+    if names & status_names or package.get("status_only_evidence") or pattern_status:
         disposition = "STATUS_ONLY"
-        evidence.append("configured status/count declaration; never theorem authority")
+        evidence.append("configured status/count/regression declaration; never theorem authority")
     elif package.get("negative_result_evidence") or any(
         term in name.lower() for name in names for term in negative_terms
     ):
