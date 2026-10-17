@@ -54,9 +54,9 @@ physicalCompositeD1Blocker = transportEqualityMissing
 ------------------------------------------------------------------------
 -- 1. Generated-history response.
 --
--- Producer and attachment relation are fixed OUTSIDE the residual record.  A
--- record constructor therefore cannot invent a trivial relation in order to
--- discharge the same-object payment.
+-- The source-attachment relation is fixed OUTSIDE the residual record.  The
+-- residual constructor supplies only a producer and evidence in that externally
+-- fixed relation; it cannot define the relation itself.
 ------------------------------------------------------------------------
 
 record CMP109GeneratedHistoryResponseResidual
@@ -66,7 +66,7 @@ record CMP109GeneratedHistoryResponseResidual
     (ProducerBelongsToSelectedSource : SelectedSource → Producer → Set) : Set₁ where
   field
     literalGeneratedHistoryResponseProducer : Producer
-    producerBelongsToSelectedSource :
+    producerAttachment :
       ProducerBelongsToSelectedSource
         selectedSource literalGeneratedHistoryResponseProducer
 
@@ -100,7 +100,7 @@ record SelectedCMP109BetaDifferenceAttachment
     selectedShootingMap : ShootingMap
     selectedLeftHistory : TubePoint
     selectedRightHistory : TubePoint
-    shootingMapBelongsToSelectedSource :
+    shootingMapAttachment :
       ShootingMapBelongsToSelectedSource selectedSource selectedShootingMap
 
 ------------------------------------------------------------------------
@@ -169,9 +169,9 @@ record PhysicalCompositeD1TransportResidual
       Component → Background → Tangent → Scalar)
     (D1BelongsToSelectedSource :
       SelectedSource → (Component → Background → Tangent → Scalar) → Set)
-    (physicalCompositeD1BelongsToSelectedSource :
+    (physicalCompositeD1Attachment :
       D1BelongsToSelectedSource selectedSource physicalCompositeD1)
-    (substitutedD1BelongsToSelectedSource :
+    (substitutedD1Attachment :
       D1BelongsToSelectedSource selectedSource substitutedD1) : Set₁ where
   field
     physicalCompositeD1IsSubstitutedD1 :
