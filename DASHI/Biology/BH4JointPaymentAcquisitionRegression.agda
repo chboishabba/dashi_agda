@@ -1,0 +1,21 @@
+module DASHI.Biology.BH4JointPaymentAcquisitionRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Biology.BH4JointPaymentAcquisitionExact as J
+
+proteinIntensityDoesNotCreateEnzymeConcentration :
+  J.proteinIntensityCreatesEnzymeConcentration J.canonicalBH4JointPaymentAcquisitionBoundary ≡ false
+proteinIntensityDoesNotCreateEnzymeConcentration = refl
+
+metaboliteConcentrationDoesNotCreateExchangeFlux :
+  J.metaboliteConcentrationCreatesExchangeFlux J.canonicalBH4JointPaymentAcquisitionBoundary ≡ false
+metaboliteConcentrationDoesNotCreateExchangeFlux = refl
+
+sameObjectContextCannotBeDropped :
+  J.sameObjectContextMayBeDropped J.canonicalBH4JointPaymentAcquisitionBoundary ≡ false
+sameObjectContextCannotBeDropped = refl
+
+contextCoverageDoesNotCreatePayment :
+  J.contextCoverageCreatesSolverPayment J.canonicalBH4JointPaymentAcquisitionBoundary ≡ false
+contextCoverageDoesNotCreatePayment = refl
