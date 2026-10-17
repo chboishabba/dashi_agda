@@ -18,6 +18,10 @@ open import Agda.Builtin.Bool using (Bool; false)
 -- transcription/replay receipts from the actual selected-term proof relation.
 -- Neither receipt is theorem authority.
 --
+-- The historical `selectedTermIdentity` field is intentionally retired: the
+-- selected term is now fixed as a parameter, so identity cannot be chosen by
+-- the residual constructor.
+--
 -- The selected source, selected term, source-attachment predicate and proof
 -- relation are fixed BEFORE the record is constructed.  The constructor can
 -- therefore carry evidence for the selected equality, but cannot choose a
