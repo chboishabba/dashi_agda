@@ -1,7 +1,6 @@
 module DASHI.Physics.CondensedMatter.MATBG2026PublicAcquisitionRouteExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
@@ -10,6 +9,11 @@ open import Agda.Builtin.String using (String)
 -- This module records first-party / publisher / public-repository routes only.
 -- A route existing is not the same as possessing the bytes, replaying them, or
 -- establishing same-sample identity across the two studies.
+--
+-- In particular, PMC article identity/full-text availability is kept separate
+-- from the legacy PMC OA package-download mechanism.  An article being present
+-- in PMC does not license the claim that a legacy package endpoint is currently
+-- an operational machine-readable payload producer.
 ------------------------------------------------------------------------
 
 record PublicAcquisitionRoute : Set where
@@ -41,7 +45,7 @@ xiaoPMCRoute = public-acquisition-route
   "Xiao et al."
   "public full-text repository"
   "PMC13149035"
-  "open-access article and associated-data metadata; does not by itself establish deposited QTM numerical arrays"
+  "open-access article identity and associated-data metadata; not a guarantee of deposited QTM numerical arrays or a live legacy OA package endpoint"
   true false false
 
 xiaoNIMSMDRRoute : PublicAcquisitionRoute
@@ -68,7 +72,7 @@ zhangPMCRoute = public-acquisition-route
   "Zhang et al."
   "public full-text repository"
   "PMC13575161"
-  "open-access article identity and data-availability metadata; workbook bytes remain a separate acquisition"
+  "open-access article identity and data-availability metadata; workbook bytes and live package transport remain separate acquisition claims"
   true false false
 
 record MATBGPublicAcquisitionBoundary : Set where
@@ -79,6 +83,10 @@ record MATBGPublicAcquisitionBoundary : Set where
     xiaoNIMSMDRRoutePaid : Bool
     zhangPublisherRoutePaid : Bool
     zhangPMCRoutePaid : Bool
+    pmcArticleIdentityRoutePaid : Bool
+    legacyPMCOAPackageEndpointOperational : Bool
+    pmcArticleIdentityCountsAsPayloadByteRoute : Bool
+    firstPartyLiveRouteStillRequiredForBytes : Bool
     qtmExperimentalBytesPaid : Bool
     entropyExperimentalBytesPaid : Bool
     qtmExperimentalReplayPaid : Bool
@@ -93,5 +101,6 @@ canonicalMATBGPublicAcquisitionBoundary : MATBGPublicAcquisitionBoundary
 canonicalMATBGPublicAcquisitionBoundary =
   matbg-public-acquisition-boundary
     true true true true true
+    true false false true
     false false false false false
     true true
