@@ -8,14 +8,14 @@ import DASHI.ComputerScience.Goldbach30HaltingSourceAuditExact as Audit30
 ------------------------------------------------------------------------
 -- HALTING-CONSUMER COMPILER
 --
--- The final semantic comparison does not require literal state identity or a
--- fine-state bisimulation if both machines are independently proved to realize
--- the SAME declared counterexample consumer.  This module pays that logical
--- compiler exactly and leaves the missing Goldbach30 formal attachment explicit.
+-- Literal state identity or fine-state bisimulation is unnecessary if both
+-- machines are independently proved to realize the SAME counterexample
+-- consumer. This module pays that logical compiler exactly.
 --
--- `Set` is used propositionally here: an inhabitant is evidence of the
--- proposition.  No external Lean theorem is silently coerced into such an Agda
--- inhabitant; the Goldbach29 source receipt remains cross-prover authority only.
+-- External source text is not silently turned into an Agda inhabitant. In
+-- particular the pinned Goldbach29 semantic tree contains theorem text but its
+-- Main/Loops duplicate/self-import anomaly means build-verified formal authority
+-- is not yet paid at that revision.
 ------------------------------------------------------------------------
 
 record LogicalIff (A B : Set) : Set where
@@ -61,9 +61,13 @@ haltingEquivalencePreservesCounterexampleConsumer left right h30 =
 -- Source-status cut.
 ------------------------------------------------------------------------
 
+goldbach29ExternalTheoremTextAvailable : Bool
+goldbach29ExternalTheoremTextAvailable =
+  External29.externalGoldbach29HaltingTheoremTextPresent
+
 goldbach29ExternalSourceCanFillRightHandRole : Bool
 goldbach29ExternalSourceCanFillRightHandRole =
-  External29.externalGoldbach29HaltingSemanticsSourcePaid
+  External29.externalGoldbach29SemanticTreeBuildAuthorityPaid
 
 goldbach30NarrativeClaimExists : Bool
 goldbach30NarrativeClaimExists = Audit30.goldbach30NarrativeHaltingClaimFound
@@ -71,11 +75,11 @@ goldbach30NarrativeClaimExists = Audit30.goldbach30NarrativeHaltingClaimFound
 goldbach30NarrativeClaimCanFillLeftHandRole : Bool
 goldbach30NarrativeClaimCanFillLeftHandRole = false
 
--- No Agda inhabitant of HaltingConsumerAttachment is manufactured from either
--- external source receipt.  Goldbach29 has an actual source-visible Lean theorem;
--- Goldbach30 currently has only a commit narrative because the claimed theorem
--- files are absent from the audited tree.  Recovering/receiving that formal
--- source or independently reproving it is the terminal external producer.
+-- Neither external lane currently supplies an Agda HaltingConsumerAttachment:
+-- Goldbach29 theorem text is pinned but its semantic source tree has not earned
+-- a clean build receipt; Goldbach30 has a signed narrative claim but no recovered
+-- Main/Loops theorem source. The checkpoint theorem elsewhere in DASHI is a
+-- separate native result and does not erase this cross-prover authority boundary.
 
 goldbach30HaltingAttachmentPaid : Bool
 goldbach30HaltingAttachmentPaid = false
@@ -87,7 +91,8 @@ record GoldbachHaltingCompilerBoundary : Set where
   constructor goldbachHaltingCompilerBoundary
   field
     sameConsumerCompilerPaid : Bool
-    goldbach29ExternalSourceAvailable : Bool
+    goldbach29TheoremTextAvailable : Bool
+    goldbach29BuildVerifiedFormalSourceAvailable : Bool
     goldbach30NarrativeClaimAvailable : Bool
     goldbach30NarrativeClaimIsFormalSource : Bool
     goldbach29AgdaAttachmentAvailable : Bool
@@ -98,4 +103,4 @@ record GoldbachHaltingCompilerBoundary : Set where
 canonicalGoldbachHaltingCompilerBoundary : GoldbachHaltingCompilerBoundary
 canonicalGoldbachHaltingCompilerBoundary =
   goldbachHaltingCompilerBoundary
-    true true true false false false false false
+    true true false true false false false false false
