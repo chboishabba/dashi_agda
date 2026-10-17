@@ -52,7 +52,8 @@ sampleClosure =
     "closure:receipt-indexed"
 
 regression-legacy-global-flag-remains-historical :
-  Legacy.actualRuntimeEmissionReceiptAcquired Legacy.canonicalLeeSensibLawBidiClosure
+  Legacy.LeeSensibLawBidiClosure.actualRuntimeEmissionReceiptAcquired
+    Legacy.canonicalLeeSensibLawBidiClosure
   ≡ false
 regression-legacy-global-flag-remains-historical = refl
 
