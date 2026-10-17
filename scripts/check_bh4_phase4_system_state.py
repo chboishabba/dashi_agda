@@ -3,6 +3,7 @@ from pathlib import Path
 root = Path(__file__).resolve().parents[1]
 
 files = {
+    "executed": root / "DASHI/Biology/Molecular/BH4ExecutedPanelReactionReceiptExact.agda",
     "matrix": root / "DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda",
     "parameters": root / "DASHI/Biology/BH4CompartmentKineticStateExact.agda",
     "nos_evidence": root / "DASHI/Biology/BH4NOSCouplingEvidenceExact.agda",
@@ -25,8 +26,16 @@ for name, path in files.items():
 text = {name: path.read_text() for name, path in files.items()}
 
 for token in [
+    "proteinReactionLinkCount", "finiteReactionCount", "residualReactionCount",
+    "finiteSpeciesCount", "24 12 3 29", "RHEA:17473", "RHEA:19897",
+    "RHEA:36255", "RHEA:10596", "RHEA:17989", "RHEA:46608",
+]:
+    assert token in text["executed"], f"missing executed-panel token: {token}"
+
+for token in [
     "BH4PanelStoichiometricMatrix", "signedCoefficient", "speciesIndex",
     "reactionIndex", "formulaIncompleteReactionBecomesZeroColumn",
+    "executedPanelSpeciesCount", "executedPanelReactionCount",
 ]:
     assert token in text["matrix"], f"missing matrix token: {token}"
 
@@ -67,6 +76,8 @@ for token in [
 for token in [
     "currentBH4Phase", "systemStateQuantitativePhase", "wholeSystemFluxBalanceAttempted",
     "firstJointFluxOutcome", "underdetermined", "livePhase4Residuals",
+    "panelRheaAcquisitionExecuted", "finitePanelReactionPromotionClosed",
+    "missingReactionFluxBounds = 12", "missingExternalExchangeCoordinates = 29",
 ]:
     assert token in text["roadmap"], f"missing roadmap token: {token}"
 
@@ -90,10 +101,11 @@ for token in [
 
 for root_name in ["external_root", "kitzerow_root", "unified_root"]:
     for token in [
-        "BH4PanelStoichiometricMatrixExact", "BH4CompartmentKineticStateExact",
-        "BH4NOSCouplingEvidenceExact", "BH4NOSCouplingSameObjectExact",
-        "BH4JointFluxFeasibilityExact", "BH4OpenMetabolicNetworkAdapterExact",
-        "BH4Phase4RoadmapExact", "BH4Phase4SystemStateRegression",
+        "BH4ExecutedPanelReactionReceiptExact", "BH4PanelStoichiometricMatrixExact",
+        "BH4CompartmentKineticStateExact", "BH4NOSCouplingEvidenceExact",
+        "BH4NOSCouplingSameObjectExact", "BH4JointFluxFeasibilityExact",
+        "BH4OpenMetabolicNetworkAdapterExact", "BH4Phase4RoadmapExact",
+        "BH4Phase4SystemStateRegression",
     ]:
         assert token in text[root_name], f"missing {root_name} phase-4 import: {token}"
 
