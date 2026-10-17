@@ -15,6 +15,7 @@ on:
       - 'DASHI/ComputerScience/GoldbachMachineReductionSOTAExact.agda'
       - 'DASHI/EverythingGoldbach29Signed369VendorExact.agda'
       - 'scripts/test_goldbach29_signed369_vendor.py'
+      - 'scripts/test_goldbach30_29_vendor_blobs.py'
       - 'scripts/verify_goldbach30_29_replay.py'
       - '.github/workflows/goldbach29-signed369-vendor.yml'
   pull_request:
@@ -31,6 +32,7 @@ on:
       - 'DASHI/ComputerScience/GoldbachMachineReductionSOTAExact.agda'
       - 'DASHI/EverythingGoldbach29Signed369VendorExact.agda'
       - 'scripts/test_goldbach29_signed369_vendor.py'
+      - 'scripts/test_goldbach30_29_vendor_blobs.py'
       - 'scripts/verify_goldbach30_29_replay.py'
       - '.github/workflows/goldbach29-signed369-vendor.yml'
   workflow_dispatch:
@@ -42,6 +44,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify vendor attribution and max-cut regression
         run: python scripts/test_goldbach29_signed369_vendor.py
+      - name: Verify pinned Program blobs and literal tail delta
+        run: python scripts/test_goldbach30_29_vendor_blobs.py
       - name: Replay Goldbach30-to-29 checkpoint equivalence
         run: python scripts/verify_goldbach30_29_replay.py
       - name: Install Agda + stdlib
