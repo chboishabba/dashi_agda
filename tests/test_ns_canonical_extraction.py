@@ -199,7 +199,7 @@ def test_ns_terminal_scheduler_uses_only_canonical_nonround_owners_and_false_gat
     )
     imports = _import_lines(text)
     for path in CANONICAL_RESIDUAL_OWNERS:
-        module = path.removeprefix("DASHI/").removesuffix(".agda").replace("/", ".")
+        module = path.removesuffix(".agda").replace("/", ".")
         assert module in imports
     assert "Round" not in imports
     assert "clayNavierStokesPromoted = false" in text
