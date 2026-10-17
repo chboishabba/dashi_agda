@@ -119,8 +119,19 @@ record WrongTypeResidualBinding
       SL.PNFEmissionReceipt.emittedAtom
         (contextEmission (diagnosisContext diagnosis))
 
+    respondentAtomMatchesDiagnosis :
+      Lee.atom (projectLegalFibre bindingRespondentProjection)
+      ≡
+      SL.PNFEmissionReceipt.emittedAtom
+        (contextEmission (diagnosisContext diagnosis))
+
     applicantConsumerMatchesDiagnosis :
       contextConsumerReference (fibreContext bindingApplicantProjection)
+      ≡
+      contextConsumerReference (diagnosisContext diagnosis)
+
+    respondentConsumerMatchesDiagnosis :
+      contextConsumerReference (fibreContext bindingRespondentProjection)
       ≡
       contextConsumerReference (diagnosisContext diagnosis)
 
