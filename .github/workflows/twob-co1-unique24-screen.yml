@@ -1,0 +1,95 @@
+name: 2B Co1 unique 24-submodule screen
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - agent/2b-same-object-final-maxcut-20261007
+    paths:
+      - 'scripts/co1_f2_sym2_socle_hom_rigidity_screen.g'
+      - 'scripts/check_co1_f2_sym2_socle_hom_rigidity_screen.sh'
+      - 'scripts/render_twob_co1_socle_hom_runtime_certificate.py'
+      - 'scripts/co1_f2_sym2_unique_minimal24_submodule_screen.g'
+      - 'scripts/check_co1_f2_sym2_unique_minimal24_submodule_screen.sh'
+      - 'scripts/render_twob_co1_unique24_runtime_certificate.py'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantRangeInvariantExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantRangeInvariantValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda'
+      - '.github/workflows/twob-co1-unique24-screen.yml'
+  pull_request:
+    paths:
+      - 'scripts/co1_f2_sym2_socle_hom_rigidity_screen.g'
+      - 'scripts/check_co1_f2_sym2_socle_hom_rigidity_screen.sh'
+      - 'scripts/render_twob_co1_socle_hom_runtime_certificate.py'
+      - 'scripts/co1_f2_sym2_unique_minimal24_submodule_screen.g'
+      - 'scripts/check_co1_f2_sym2_unique_minimal24_submodule_screen.sh'
+      - 'scripts/render_twob_co1_unique24_runtime_certificate.py'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantRangeInvariantExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantRangeInvariantValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda'
+      - '.github/workflows/twob-co1-unique24-screen.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  unique24:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: DeterminateSystems/nix-installer-action@v17
+      - name: Install GAP AtlasRep
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gap gap-atlasrep gap-ctbllib python3
+      - name: Prove Co1 Sym2 socle rigidity from Hom spaces
+        run: bash scripts/check_co1_f2_sym2_socle_hom_rigidity_screen.sh
+      - name: Render exact Agda socle-Hom runtime certificate
+        run: |
+          python3 scripts/render_twob_co1_socle_hom_runtime_certificate.py \
+            build/co1_f2_sym2_socle_hom_rigidity_screen.json \
+            DASHI/Moonshine/Generated/TwoBCo1SocleHomRuntimeCertificate.agda
+      - name: Cross-check unique minimal Co1 24-submodule in Sym2(24)
+        run: bash scripts/check_co1_f2_sym2_unique_minimal24_submodule_screen.sh
+      - name: Render exact Agda unique-24 runtime certificate
+        run: |
+          python3 scripts/render_twob_co1_unique24_runtime_certificate.py \
+            build/co1_f2_sym2_unique_minimal24_submodule_screen.json \
+            DASHI/Moonshine/Generated/TwoBCo1Unique24RuntimeCertificate.agda
+      - name: Typecheck exact owners and generated certificates
+        run: |
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientExact.agda \
+            DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientValidation.agda \
+            DASHI/Moonshine/OggSSP2BEquivariantRangeInvariantExact.agda \
+            DASHI/Moonshine/OggSSP2BEquivariantRangeInvariantValidation.agda \
+            DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeExact.agda \
+            DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeValidation.agda \
+            DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldExact.agda \
+            DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldValidation.agda \
+            DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda \
+            DASHI/Moonshine/Generated/TwoBCo1SocleHomRuntimeCertificate.agda \
+            DASHI/Moonshine/Generated/TwoBCo1Unique24RuntimeCertificate.agda
+      - name: Upload unique-24 runtime receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: twob-co1-unique24-runtime
+          path: |
+            build/co1_f2_sym2_socle_hom_rigidity_screen.json
+            build/co1_f2_sym2_unique_minimal24_submodule_screen.json
+            DASHI/Moonshine/Generated/TwoBCo1SocleHomRuntimeCertificate.agda
+            DASHI/Moonshine/Generated/TwoBCo1Unique24RuntimeCertificate.agda
