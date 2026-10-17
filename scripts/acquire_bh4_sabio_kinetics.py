@@ -28,8 +28,17 @@ from pathlib import Path
 from typing import Any
 
 EXPORT_URL = "https://sabio.h-its.org/export-api/sabio/kinlaw-entry/json"
-USER_AGENT = "DASHI-BH4-SABIO/1.2 (https://github.com/chboishabba/dashi_agda)"
+USER_AGENT = "DASHI-BH4-SABIO/1.3 (https://github.com/chboishabba/dashi_agda)"
 PUBMED_RE = re.compile(r"(?:pubmed[^0-9]{0,24}|pmid[^0-9]{0,8})([0-9]{5,9})", re.I)
+VALUE_KEYS = (
+    "n_start_value", "n_end_value", "start_value", "end_value", "value",
+    "startvalue", "endvalue", "lower", "upper",
+)
+NAME_KEYS = (
+    "parameter_name", "parametername", "name", "parameter_type", "parametertype",
+    "type", "parameter", "sbo_term", "sbo", "sbo_term_name",
+)
+UNIT_KEYS = ("unit", "units", "unit_name", "unitname")
 
 
 def get_json(url: str) -> tuple[dict, dict]:
@@ -87,23 +96,61 @@ def extract_pubmed_ids(value: Any) -> list[str]:
     return sorted(set(PUBMED_RE.findall(text)))
 
 
-def count_parameter_objects(value: Any) -> int:
-    """Conservatively count explicit parameter-like objects without schema invention."""
-    count = 0
+def _first_value(mapping: dict, keys: tuple[str, ...]) -> Any:
+    lower = {str(k).lower(): v for k, v in mapping.items()}
+    for key in keys:
+        if key in lower and lower[key] is not None:
+            return lower[key]
+    return None
+
+
+def looks_like_parameter_object(value: Any) -> bool:
+    if not isinstance(value, dict):
+        return False
+    lower_keys = {str(k).lower() for k in value}
+    has_value = bool(lower_keys.intersection(VALUE_KEYS))
+    has_identity = bool(lower_keys.intersection(NAME_KEYS))
+    return has_value and has_identity
+
+
+def normalize_parameter_object(value: dict, *, entry_id: str | None, symbol: str | None, accession: str) -> dict:
+    lower = {str(k).lower(): v for k, v in value.items()}
+    return {
+        "symbol": symbol,
+        "accession": accession,
+        "entry_id": entry_id,
+        "parameter_name": _first_value(lower, ("parameter_name", "parametername", "name", "parameter")),
+        "parameter_type": _first_value(lower, ("parameter_type", "parametertype", "type")),
+        "sbo_term": _first_value(lower, ("sbo_term", "sbo", "sbo_term_name")),
+        "n_start_value": _first_value(lower, ("n_start_value", "start_value", "startvalue", "lower", "value")),
+        "n_end_value": _first_value(lower, ("n_end_value", "end_value", "endvalue", "upper", "value")),
+        "unit": _first_value(lower, UNIT_KEYS),
+        "raw": value,
+    }
+
+
+def extract_parameter_objects(value: Any, *, entry_id: str | None, symbol: str | None, accession: str) -> list[dict]:
+    """Extract explicit SABIO parameter objects without treating arbitrary numerics as parameters."""
+    out: list[dict] = []
     if isinstance(value, dict):
-        lower_keys = {str(k).lower() for k in value}
-        looks_parameter = (
-            bool(lower_keys & {"parameter", "parametername", "parameter_name", "parametertype", "parameter_type"})
-            and bool(lower_keys & {"value", "startvalue", "endvalue", "lower", "upper"})
-        )
-        if looks_parameter:
-            count += 1
+        if looks_like_parameter_object(value):
+            out.append(normalize_parameter_object(value, entry_id=entry_id, symbol=symbol, accession=accession))
         for child in value.values():
-            count += count_parameter_objects(child)
+            out.extend(extract_parameter_objects(child, entry_id=entry_id, symbol=symbol, accession=accession))
     elif isinstance(value, list):
         for child in value:
-            count += count_parameter_objects(child)
-    return count
+            out.extend(extract_parameter_objects(child, entry_id=entry_id, symbol=symbol, accession=accession))
+    return out
+
+
+def count_parameter_objects(value: Any) -> int:
+    """Count explicit SABIO parameter objects under the current export schema."""
+    if isinstance(value, dict):
+        count = 1 if looks_like_parameter_object(value) else 0
+        return count + sum(count_parameter_objects(child) for child in value.values())
+    if isinstance(value, list):
+        return sum(count_parameter_objects(child) for child in value)
+    return 0
 
 
 def entry_identifier(entry: Any) -> str | None:
@@ -159,6 +206,16 @@ def export_query(accession: str, page_size: int = 1000) -> tuple[list[Any], list
 def acquire_member(symbol: str | None, accession: str) -> dict:
     rows, responses, meta = export_query(accession)
     entry_ids = [x for x in (entry_identifier(row) for row in rows) if x is not None]
+    parameter_candidates: list[dict] = []
+    for row in rows:
+        parameter_candidates.extend(
+            extract_parameter_objects(
+                row,
+                entry_id=entry_identifier(row),
+                symbol=symbol,
+                accession=accession,
+            )
+        )
     return {
         "symbol": symbol,
         "accession": accession,
@@ -166,7 +223,8 @@ def acquire_member(symbol: str | None, accession: str) -> dict:
         "acquisition_mode": "export-envelope",
         "entry_count": len(rows),
         "entry_ids": entry_ids,
-        "kinetic_parameter_object_count": sum(count_parameter_objects(row) for row in rows),
+        "kinetic_parameter_object_count": len(parameter_candidates),
+        "kinetic_parameter_candidates": parameter_candidates,
         "pubmed_ids": extract_pubmed_ids(rows),
         "export_meta": meta,
         "response_receipts": responses,
@@ -187,6 +245,7 @@ def acquire(panel_path: Path) -> tuple[dict, int]:
             errors.append({**member, "error": str(exc)})
 
     with_entries = [row for row in results if row["entry_count"]]
+    parameter_candidates = [candidate for row in results for candidate in row["kinetic_parameter_candidates"]]
     return {
         "schema": "dashi.bh4-sabio-kinetics.v3",
         "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -198,7 +257,8 @@ def acquire(panel_path: Path) -> tuple[dict, int]:
         "proteins_completed": len(results),
         "proteins_with_entries": len(with_entries),
         "kinetic_entry_count": sum(row["entry_count"] for row in results),
-        "kinetic_parameter_count": sum(row["kinetic_parameter_object_count"] for row in results),
+        "kinetic_parameter_count": len(parameter_candidates),
+        "kinetic_parameter_candidates": parameter_candidates,
         "results": results,
         "errors": errors,
         "promotion_boundary": {
