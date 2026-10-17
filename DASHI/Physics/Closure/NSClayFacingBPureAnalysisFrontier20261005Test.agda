@@ -1,0 +1,114 @@
+module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Test where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact as F
+
+b4LiteralSplitClosed : F.b4LiteralPrincipalDefectSplitClosed ≡ true
+b4LiteralSplitClosed = F.b4LiteralPrincipalDefectSplitClosedIsTrue
+
+b4LiveBlockWeldClosed : F.b4PrincipalDefectLiveBlockWeldClosed ≡ true
+b4LiveBlockWeldClosed = F.b4PrincipalDefectLiveBlockWeldClosedIsTrue
+
+b4LiteralCompanionClosed : F.b4LiteralCoreCompanionMeaningClosed ≡ true
+b4LiteralCompanionClosed = F.b4LiteralCoreCompanionMeaningClosedIsTrue
+
+b4PrincipalHalfClosed : F.b4PrincipalHalfCompanionBoundClosed ≡ true
+b4PrincipalHalfClosed = F.b4PrincipalHalfCompanionBoundClosedIsTrue
+
+b4PrincipalNoED : F.b4PrincipalNeedsEDRemainder ≡ false
+b4PrincipalNoED = F.b4PrincipalNeedsEDRemainderIsFalse
+
+b4FreeCompanionGone : F.b4FreeCompanionScalarStillRequired ≡ false
+b4FreeCompanionGone = F.b4FreeCompanionScalarStillRequiredIsFalse
+
+b4OnlyDefectRemains : F.b4RemainingStrictMarginIsDefectBelowHalf ≡ true
+b4OnlyDefectRemains = F.b4RemainingStrictMarginIsDefectBelowHalfIsTrue
+
+b4DefectBipartiteClosed : F.b4DefectBipartiteSameObjectClosed ≡ true
+b4DefectBipartiteClosed = F.b4DefectBipartiteSameObjectClosedIsTrue
+
+b4DefectAggregateClosed : F.b4DefectFourAggregateNormalFormClosed ≡ true
+b4DefectAggregateClosed = F.b4DefectFourAggregateNormalFormClosedIsTrue
+
+b4DefectVectorClosed : F.b4DefectOneVectorNormalFormClosed ≡ true
+b4DefectVectorClosed = F.b4DefectOneVectorNormalFormClosedIsTrue
+
+b4DefectNoncoreCoreClosed : F.b4DefectNoncoreCoreBipartiteClosed ≡ true
+b4DefectNoncoreCoreClosed = F.b4DefectNoncoreCoreBipartiteClosedIsTrue
+
+b4DefectNoncoreCoreFourMoments : F.b4DefectNoncoreCoreFourAggregateClosed ≡ true
+b4DefectNoncoreCoreFourMoments = F.b4DefectNoncoreCoreFourAggregateClosedIsTrue
+
+b4DefectNoncoreCoreVector : F.b4DefectNoncoreCoreVectorClosed ≡ true
+b4DefectNoncoreCoreVector = F.b4DefectNoncoreCoreVectorClosedIsTrue
+
+b4R440SubsetWeld : F.b4DefectR440SubsetWeldClosed ≡ true
+b4R440SubsetWeld = F.b4DefectR440SubsetWeldClosedIsTrue
+
+b4PhysicalResidualNormalForm : F.b4DefectPhysicalResidualNormalFormClosed ≡ true
+b4PhysicalResidualNormalForm = F.b4DefectPhysicalResidualNormalFormClosedIsTrue
+
+b4SignedPhysicalWork : F.b4DefectSignedPhysicalWorkClosed ≡ true
+b4SignedPhysicalWork = F.b4DefectSignedPhysicalWorkClosedIsTrue
+
+b4ResidualNotAbstract : F.b4DefectResidualStillAbstractCarrier ≡ false
+b4ResidualNotAbstract = F.b4DefectResidualStillAbstractCarrierIsFalse
+
+b4DefectSharpEnvelopeClosed : F.b4DefectSharpVectorYoungClosed ≡ true
+b4DefectSharpEnvelopeClosed = F.b4DefectSharpVectorYoungClosedIsTrue
+
+b4DefectPhysicalBudgetOpen : F.b4DefectPhysicalVectorBudgetClosed ≡ false
+b4DefectPhysicalBudgetOpen = F.b4DefectPhysicalVectorBudgetClosedIsFalse
+
+b4DefectOpen : F.b4DefectRemainderClosed ≡ false
+b4DefectOpen = F.b4DefectRemainderClosedIsFalse
+
+b4OnlyPhysicalR440Payment : F.b4ResearchLeafNowOnlyPhysicalR440Payment ≡ true
+b4OnlyPhysicalR440Payment = F.b4ResearchLeafNowOnlyPhysicalR440PaymentIsTrue
+
+b1ShellCompilerClosed : F.b1ShellPaymentCompilerClosed ≡ true
+b1ShellCompilerClosed = F.b1ShellPaymentCompilerClosedIsTrue
+
+b1PhysicalProducerOpen : F.b1PhysicalProducerClosed ≡ false
+b1PhysicalProducerOpen = F.b1PhysicalProducerClosedIsFalse
+
+b2ShellFoldClosed : F.b2ShellFoldCompilerClosed ≡ true
+b2ShellFoldClosed = F.b2ShellFoldCompilerClosedIsTrue
+
+b2PhysicalProducerOpen : F.b2PhysicalProducerClosed ≡ false
+b2PhysicalProducerOpen = F.b2PhysicalProducerClosedIsFalse
+
+b3GapAndComponentClosed : F.b3GapAndComponentInfrastructureClosed ≡ true
+b3GapAndComponentClosed = F.b3GapAndComponentInfrastructureClosedIsTrue
+
+b3IntraShellOpen : F.b3PhysicalProducerClosed ≡ false
+b3IntraShellOpen = F.b3PhysicalProducerClosedIsFalse
+
+strictSplitCompiler : F.b4GenericStrictSplitCompilerClosed ≡ true
+strictSplitCompiler = F.b4GenericStrictSplitCompilerClosedIsTrue
+
+q4PointwiseCompiler : F.q4PointwiseToSpacetimeCompilerClosed ≡ true
+q4PointwiseCompiler = F.q4PointwiseToSpacetimeCompilerClosedIsTrue
+
+q4IntegratedNotIndependent : F.q4IntegratedBoundIndependentLeaf ≡ false
+q4IntegratedNotIndependent = F.q4IntegratedBoundIndependentLeafIsFalse
+
+positiveEndpointAggregation : F.ePositiveOutputAggregationClosed ≡ true
+positiveEndpointAggregation = F.ePositiveOutputAggregationClosedIsTrue
+
+positiveEndpointNoOutputCount : F.ePositiveOutputAggregationAddsCardinalityFactor ≡ false
+positiveEndpointNoOutputCount = F.ePositiveOutputAggregationAddsCardinalityFactorIsFalse
+
+continuationAssemblyChecked : F.bContinuationAssemblyMachineChecked ≡ true
+continuationAssemblyChecked = F.bContinuationAssemblyMachineCheckedIsTrue
+
+continuationPhysicalInputsOpen : F.bContinuationPhysicalInputsClosed ≡ false
+continuationPhysicalInputsOpen = F.bContinuationPhysicalInputsClosedIsFalse
+
+localEDGone : F.bLocalEDIndependentLeaf ≡ false
+localEDGone = F.bLocalEDIndependentLeafIsFalse
+
+frontierOpen : F.pureAnalysisFrontierClosed ≡ false
+frontierOpen = F.pureAnalysisFrontierClosedIsFalse
