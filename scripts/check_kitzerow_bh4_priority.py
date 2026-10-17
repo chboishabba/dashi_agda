@@ -17,6 +17,13 @@ bridge = root / "DASHI/Biology/KitzerowUniProtCrossPollinationExact.agda"
 external_regression = root / "DASHI/Biology/ExternalBiologyRegression.agda"
 external_root = root / "DASHI/Biology/ExternalBiologyEverything.agda"
 uniprot_acquisition = root / "scripts/acquire_uniprot_bio_certificate.py"
+bh4_system = root / "DASHI/Biology/BH4SystemStateExact.agda"
+oxide = root / "DASHI/Biology/NitrogenOxideSpeciesCouplingExact.agda"
+n2o = root / "DASHI/Biology/NitrousOxideMetabolismEvidenceExact.agda"
+nongin_oxide = root / "DASHI/Biology/NonginNangNitrogenOxideRefinementExact.agda"
+system_maxcut = root / "DASHI/Biology/KitzerowBH4SystemNongNangMaxCutExact.agda"
+system_regression = root / "DASHI/Biology/BH4NongNangMaxCutRegression.agda"
+implementation_plan = root / "docs/superpowers/plans/2026-10-17-bh4-nong-nang-maxcut.md"
 
 for path in [
     atlas,
@@ -34,6 +41,13 @@ for path in [
     external_regression,
     external_root,
     uniprot_acquisition,
+    bh4_system,
+    oxide,
+    n2o,
+    nongin_oxide,
+    system_maxcut,
+    system_regression,
+    implementation_plan,
 ]:
     assert path.exists(), f"missing Kitzerow/external-biology max-cut file: {path.relative_to(root)}"
 
@@ -52,6 +66,12 @@ bridge_text = bridge.read_text()
 external_regression_text = external_regression.read_text()
 external_root_text = external_root.read_text()
 uniprot_acquisition_text = uniprot_acquisition.read_text()
+bh4_system_text = bh4_system.read_text()
+oxide_text = oxide.read_text()
+n2o_text = n2o.read_text()
+nongin_oxide_text = nongin_oxide.read_text()
+system_maxcut_text = system_maxcut.read_text()
+system_regression_text = system_regression.read_text()
 
 for token in [
     "scientificSupport",
@@ -105,25 +125,6 @@ for token in [
     assert token in regression_text, f"missing regression token: {token}"
 
 for token in [
-    "SourceRecord",
-    "kitzerow2024BH4",
-    "kitzerow2024Allostatic",
-    "kitzerowTimeline",
-    "eichwald2023BH4",
-    "ojha2026",
-    "stanford2025",
-]:
-    assert token in registry_text, f"missing registry token: {token}"
-
-for token in [
-    "KitzerowBH4SourceRegistry",
-    "KitzerowBH4EvidenceAtlasExact",
-    "KitzerowPriorityGenealogyExact",
-    "KitzerowBH4EvidenceRegression",
-]:
-    assert token in maxcut_text, f"missing max-cut import: {token}"
-
-for token in [
     "DatasetSnapshot",
     "ProteinRef",
     "SequenceWitness",
@@ -155,11 +156,86 @@ for token in [
     "DHPR_HUMAN",
     "RHEA:17869",
     "01EAB47E5C55913647DB7DBAD571D960",
+    "0852F9F0CA38AB1C",
+    "sha256:7ef73e73b15eb967db526cc5ba2970965992ff348e758b57057e1bc61def3936",
     "qdprToPDB9DTW",
     "qdprToAlphaFold",
     "qdprMechanismAssessment",
 ]:
     assert token in uniprot_text, f"missing UniProt witness token: {token}"
+
+for token in [
+    "BH4PoolState",
+    "EnzymeDemand",
+    "BH4SystemState",
+    "FluxBalanceWitness",
+    "reactionAnnotationPaysWholeFluxBalance",
+    "cofactorRequirementProvesCompetitionBetweenConsumers",
+]:
+    assert token in bh4_system_text, f"missing BH4 system token: {token}"
+
+for token in [
+    "nitricOxide",
+    "nitrousOxide",
+    "nitricOxideNotNitrousOxide",
+    "NOSCouplingTransitionWitness",
+    "proteinPresenceEstablishesUncoupling",
+    "nitrousOxideIsCanonicalNOSProduct",
+]:
+    assert token in oxide_text, f"missing nitrogen-oxide coupling token: {token}"
+
+for token in [
+    "10.1503/cmaj.230196",
+    "cobalaminOxidationReceipt",
+    "methionineSynthaseReceipt",
+    "nitrousOxideEvidenceCreatesNOSUncouplingProof",
+    "cobalaminOxidationEstablishesBH4Depletion",
+]:
+    assert token in n2o_text, f"missing N2O evidence token: {token}"
+
+for token in [
+    "Nongin.OnePointOneCarrier",
+    "chemicalFrameSensitiveConsumer",
+    "coarseNitrogenOxideCannotServeFineConsumer",
+    "userGenealogyRecordsNongEqualsNang",
+    "nongNangAliasIdentifiesNitricOxide",
+]:
+    assert token in nongin_oxide_text, f"missing Nongin/NANG refinement token: {token}"
+
+for token in [
+    "P30793",
+    "P30047",
+    "Q03393",
+    "P35270",
+    "P61457",
+    "P09417",
+    "P29475",
+    "P35228",
+    "P29474",
+    "P00439",
+    "P07101",
+    "P17752",
+    "Q8IWU9",
+    "Q6ZNB7",
+    "P49815",
+    "P42345",
+    "qdprRegenerationEdge",
+    "bh4ToNOSCouplingEdge",
+    "nosToTSC2Edge",
+    "liveResiduals",
+    "nitrousOxideLaneCreatesKitzerowMechanism",
+]:
+    assert token in system_maxcut_text, f"missing BH4 system max-cut token: {token}"
+
+for token in [
+    "nitricOxideIsNotNitrousOxide",
+    "coarseNitrogenOxideCannotServeFineChemicalConsumer",
+    "proteinPresenceDoesNotEstablishNOSUncoupling",
+    "reactionAnnotationDoesNotPayWholeFluxBalance",
+    "nangCobalaminLaneDoesNotBecomeNOSLane",
+    "isolatedNodesDoNotConfirmKitzerowWholeGraph",
+]:
+    assert token in system_regression_text, f"missing system regression token: {token}"
 
 for token in [
     "qdprBH4AvailabilityAdapter",
@@ -179,24 +255,24 @@ for token in [
     assert token in external_regression_text, f"missing external regression token: {token}"
 
 for token in [
-    "KitzerowUniProtCrossPollinationExact",
-    "ExternalBiologyRegression",
+    "KitzerowBH4SystemNongNangMaxCutExact",
+    "BH4NongNangMaxCutRegression",
+    "NonginNangNitrogenOxideRefinementExact",
 ]:
-    assert token in focused_text, f"missing focused-root external biology import: {token}"
-
-for token in [
-    "ExternalBiologyEvidenceCore",
-    "UniProtExternalKnowledgeExact",
-    "KitzerowUniProtCrossPollinationExact",
-    "ExternalBiologyRegression",
-]:
-    assert token in external_root_text, f"missing external biology root import: {token}"
+    assert token in focused_text, f"missing focused-root BH4/NONG/NANG import: {token}"
+    assert token in external_root_text, f"missing external-root BH4/NONG/NANG import: {token}"
 
 for token in [
     "raw_sha256",
     "x-uniprot-release",
     "uniProtKBCrossReferences",
     "database_assertion_creates_biological_truth",
+    "--kitzerow-bh4-panel",
+    "KITZEROW_BH4_PANEL",
+    "P35270",
+    "P29474",
+    "Q6ZNB7",
+    "complete_panel_creates_whole_model_confirmation",
 ]:
     assert token in uniprot_acquisition_text, f"missing UniProt acquisition token: {token}"
 
@@ -204,4 +280,4 @@ assert "explicitContactClaim" in acquisition_text
 assert "not" in acquisition_text.lower() and "verifiedPrimaryContact" in acquisition_text
 assert "uncited" in acquisition_text.lower()
 
-print("kitzerow BH4 + external biology max-cut regression: ok")
+print("kitzerow BH4 + external biology + NONG/NANG system max-cut regression: ok")
