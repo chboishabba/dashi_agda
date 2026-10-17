@@ -1,0 +1,25 @@
+module DASHI.Moonshine.MonsterWeightTwoGriessConstituentCompilerValidation where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+
+import DASHI.Moonshine.MonsterWeightTwoGriessConstituentCompilerExact as Griess
+
+witnessRequiresSameSemantic196883Carrier : Bool
+witnessRequiresSameSemantic196883Carrier =
+  Griess.griessWitnessRequiresSameSemantic196883Carrier
+
+witnessRequiresLiteralInclusionIntertwining : Bool
+witnessRequiresLiteralInclusionIntertwining =
+  Griess.griessWitnessRequiresLiteralInclusionIntertwining
+
+compilerProducesLegacyBridge : Bool
+compilerProducesLegacyBridge =
+  Griess.griessCompilerProducesLegacyBridge
+
+compilerProducesPaidBridge : Bool
+compilerProducesPaidBridge =
+  Griess.griessCompilerProducesPaidBridge
+
+characterSplitAloneProducesGriessConstituent : Bool
+characterSplitAloneProducesGriessConstituent =
+  Griess.characterSplitAloneProducesGriessConstituent
