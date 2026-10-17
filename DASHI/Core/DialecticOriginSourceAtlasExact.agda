@@ -17,7 +17,7 @@ module DASHI.Core.DialecticOriginSourceAtlasExact where
 -- later formal owners as if they were the historical source of the ideas.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
@@ -39,7 +39,6 @@ data OriginPhase : Set where
   ethicalProcessArchitecture : OriginPhase
   operationalStateTensor : OriginPhase
   generalizedDashiAbstraction : OriginPhase
-
 
 record OriginSourceEntry : Set where
   constructor origin-source-entry
@@ -97,14 +96,23 @@ oddsEntry =
     "finite branching criticality and later weighted-state models"
     "historical concept precedes later exact mathematics"
 
-neutralRefineEntry : OriginSourceEntry
-neutralRefineEntry =
+recursiveObserverEntry : OriginSourceEntry
+recursiveObserverEntry =
   origin-source-entry
-    padicHierarchicalRefinement
-    "user-supplied later reconstruction of ternary operational rule"
-    "-1 reject; 0 go deeper/refine; +1 accept"
-    "DASHI.Core.EpistemicSuspensionExact"
-    "historical operational semantics, not truth-value ontology"
+    recursiveObserver
+    "user-supplied raw origin transcript"
+    "recursive observers O(x), O(O(x)), and deeper observer-of-observer nesting"
+    "DASHI.Reasoning.NonginRecursiveObserverDepthTowerExact / DASHI.Cognition.RecursiveFibreTower"
+    "historical observer-nesting provenance; later depth and inverse-system theorems are DASHI reconstructions"
+
+nonlinearThresholdEntry : OriginSourceEntry
+nonlinearThresholdEntry =
+  origin-source-entry
+    nonlinearThresholdGeometry
+    "user-supplied raw/later Nongin reconstruction stream"
+    "nonlinear threshold, folding and branch-boundary visualisations used to reason about distinctions that appear or disappear under projection"
+    "DASHI.Core.ThresholdResidualTrajectoryGeometryExact and domain-specific threshold-geometry owners"
+    "conceptual/visual genealogy only; no universal nonlinear law or empirical threshold constant is imported"
 
 rhizomeEntry : OriginSourceEntry
 rhizomeEntry =
@@ -115,6 +123,15 @@ rhizomeEntry =
     "observer refinement / hyperfabric / social-ecology owners"
     "conceptual/visual genealogy, not a probability-measure theorem"
 
+neutralRefineEntry : OriginSourceEntry
+neutralRefineEntry =
+  origin-source-entry
+    padicHierarchicalRefinement
+    "user-supplied later reconstruction of ternary operational rule"
+    "-1 reject; 0 go deeper/refine; +1 accept"
+    "DASHI.Core.EpistemicSuspensionExact"
+    "historical operational semantics, not truth-value ontology"
+
 remainderEntry : OriginSourceEntry
 remainderEntry =
   origin-source-entry
@@ -123,6 +140,24 @@ remainderEntry =
     "resolution preserves an unresolved remainder that can matter downstream"
     "residual/reopenability/trajectory-residue owners"
     "later formal owners should be cited separately for exact theorems"
+
+relationalEpistemologyEntry : OriginSourceEntry
+relationalEpistemologyEntry =
+  origin-source-entry
+    relationalEpistemology
+    "user-supplied later philosophical reconstruction, including relational/contextual learning influences"
+    "knowing is situated in relation, context, perspective and reciprocal comparison rather than reduced to one master observer"
+    "DASHI.Core.RelationalEpistemicProcessSourceBridgeExact and relational-perspective owners"
+    "genealogical influence only; source traditions are not identified with DASHI mathematics"
+
+ethicalProcessEntry : OriginSourceEntry
+ethicalProcessEntry =
+  origin-source-entry
+    ethicalProcessArchitecture
+    "user-supplied later philosophical/process reconstruction"
+    "contextualise and relate before reflection/action; retain reciprocity, responsibility and non-collapse of source perspectives"
+    "DASHI.Core.RelationalEpistemicProcessSourceBridgeExact and provenance/admissibility owners"
+    "generic process abstraction only; no source author is represented as endorsing DASHI"
 
 stateTensorEntry : OriginSourceEntry
 stateTensorEntry =
@@ -143,12 +178,54 @@ generalizationEntry =
     "formal descendant with independent source attribution per theorem"
 
 ------------------------------------------------------------------------
+-- Phase-total atlas.
+--
+-- The type of genealogical phases was historically larger than the explicit
+-- entry list.  `entryForPhase` closes that bookkeeping gap: every declared
+-- phase now has one canonical provenance entry, without claiming mathematical
+-- identity across phases.
+------------------------------------------------------------------------
+
+entryForPhase : OriginPhase → OriginSourceEntry
+entryForPhase visualRecursiveSplit = screenSplitEntry
+entryForPhase falseBinaryStateSpace = falseBinaryEntry
+entryForPhase metaPositionPowerUp = powerUpEntry
+entryForPhase higherOrderOdds = oddsEntry
+entryForPhase recursiveObserver = recursiveObserverEntry
+entryForPhase nonlinearThresholdGeometry = nonlinearThresholdEntry
+entryForPhase probabilityDensityRhizome = rhizomeEntry
+entryForPhase padicHierarchicalRefinement = neutralRefineEntry
+entryForPhase dialecticalRemainder = remainderEntry
+entryForPhase relationalEpistemology = relationalEpistemologyEntry
+entryForPhase ethicalProcessArchitecture = ethicalProcessEntry
+entryForPhase operationalStateTensor = stateTensorEntry
+entryForPhase generalizedDashiAbstraction = generalizationEntry
+
+entryForPhaseIsExact :
+  (declared : OriginPhase) →
+  phase (entryForPhase declared) ≡ declared
+entryForPhaseIsExact visualRecursiveSplit = refl
+entryForPhaseIsExact falseBinaryStateSpace = refl
+entryForPhaseIsExact metaPositionPowerUp = refl
+entryForPhaseIsExact higherOrderOdds = refl
+entryForPhaseIsExact recursiveObserver = refl
+entryForPhaseIsExact nonlinearThresholdGeometry = refl
+entryForPhaseIsExact probabilityDensityRhizome = refl
+entryForPhaseIsExact padicHierarchicalRefinement = refl
+entryForPhaseIsExact dialecticalRemainder = refl
+entryForPhaseIsExact relationalEpistemology = refl
+entryForPhaseIsExact ethicalProcessArchitecture = refl
+entryForPhaseIsExact operationalStateTensor = refl
+entryForPhaseIsExact generalizedDashiAbstraction = refl
+
+------------------------------------------------------------------------
 -- Scope boundary.
 ------------------------------------------------------------------------
 
 record DialecticOriginSourceAtlasBoundary : Set where
   constructor dialectic-origin-source-atlas-boundary
   field
+    everyDeclaredOriginPhaseHasCanonicalEntry : Bool
     historicalSourceIsExternalScientificAuthority : Bool
     historicalSourceIsExternalScientificAuthorityIsFalse :
       historicalSourceIsExternalScientificAuthority ≡ false
@@ -162,6 +239,7 @@ record DialecticOriginSourceAtlasBoundary : Set where
 canonicalDialecticOriginSourceAtlasBoundary : DialecticOriginSourceAtlasBoundary
 canonicalDialecticOriginSourceAtlasBoundary =
   dialectic-origin-source-atlas-boundary
+    true
     false refl
     false refl
     false refl
