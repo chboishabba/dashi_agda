@@ -45,8 +45,8 @@ open FineNarrativeEdge public
 record CoarseNarrativeEdge : Set where
   constructor coarse-edge
   field
-    sourceLabel targetLabel : String
-    visible : VisibleRelation
+    coarseSourceLabel coarseTargetLabel : String
+    coarseVisible : VisibleRelation
 open CoarseNarrativeEdge public
 
 project : FineNarrativeEdge → CoarseNarrativeEdge
