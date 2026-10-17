@@ -5,13 +5,12 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Culture.PowersPlantationParadiseMinetteMicrohistoryExact as Minette
 import DASHI.Culture.PowersPlantationParadiseEnslavedDistributionEvidenceExact as Enslaved
-import DASHI.Culture.PowersPlantationParadiseEmpiricalRoadmapExact as Roadmap
 
 ------------------------------------------------------------------------
 -- POWERS EMPIRICAL FRONTIER GENEALOGY
 --
 -- Domain-specific adapter inspired by current repo-history/frontier tooling.
--- Development history may explain why a residual changed.  It is advisory and
+-- Development history may explain why a residual changed. It is advisory and
 -- cannot become historical evidence, theorem truth or source authority.
 ------------------------------------------------------------------------
 
@@ -113,9 +112,6 @@ minetteSalaryEvidenceAnchor = Minette.minette1784SalaryNonpaymentReceipt
 
 julienDistributionEvidenceAnchor : Enslaved.EnslavedMusicianContributionBurdenReceipt
 julienDistributionEvidenceAnchor = Enslaved.julien1781ContributionBurdenReceipt
-
-roadmapAnchor : Roadmap.PowersEmpiricalRoadmapBoundary
-roadmapAnchor = Roadmap.canonicalPowersEmpiricalRoadmapBoundary
 
 data FrontierNarrativeCreatesHistoricalTruth : Set where
 
