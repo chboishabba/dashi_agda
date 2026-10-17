@@ -4,9 +4,9 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.YangMills.BalabanC3MonsterPreferredQ123Audit20261016Exact as Audit
 
-preferredFrontierIsQ123 :
-  Audit.preferredYM369FrontierIsQ1Q2Q3 ≡ true
-preferredFrontierIsQ123 = refl
+preferredFrontierIsPostQ3Identification :
+  Audit.preferredYM369FrontierIsPostQ3Identification ≡ true
+preferredFrontierIsPostQ3Identification = refl
 
 adapterDebtGone :
   Audit.preferredYM369AdapterDebtRemaining ≡ 0
@@ -24,9 +24,37 @@ q3TermwiseEqualityRetired :
   Audit.q3PointwiseFiniteF2EqualityStillRequired ≡ false
 q3TermwiseEqualityRetired = refl
 
-q3VanishingBridgeIsLiveSourcePayment :
-  Audit.q3AsymptoticFiniteF2BridgeStillSourcePackage ≡ true
-q3VanishingBridgeIsLiveSourcePayment = refl
+q3IndependentBridgeRetired :
+  Audit.q3AsymptoticFiniteF2BridgeStillSourcePackage ≡ false
+q3IndependentBridgeRetired = refl
+
+q3BridgeCompiledFromPhysicalIdentification :
+  Audit.q3BridgeIsCompilerOutputFromFactorizedIdentification ≡ true
+q3BridgeCompiledFromPhysicalIdentification = refl
+
+q2OpaqueEquationRetired :
+  Audit.q2OpaqueAnomalyEquationStillSourcePackage ≡ false
+q2OpaqueEquationRetired = refl
+
+q2ReducedToSameObjectTransports :
+  Audit.q2ReducedToRenormalizedSameObjectTransports ≡ true
+q2ReducedToSameObjectTransports = refl
+
+citationDoesNotPayCMP119Transport :
+  Audit.q2CitationAlonePaysSelectedTransport ≡ false
+citationDoesNotPayCMP119Transport = refl
+
+independentHaarQuadratureBridgeRetired :
+  Audit.independentPhysicalHaarQuadratureBridgeStillSourcePackage ≡ false
+independentHaarQuadratureBridgeRetired = refl
+
+haarFiniteMeasureEqualityStillSourceFacing :
+  Audit.physicalHaarFiniteMeasureSameObjectEqualityStillSourcePackage ≡ true
+haarFiniteMeasureEqualityStillSourceFacing = refl
+
+attributionBoundaryLocked :
+  Audit.attributionBoundaryPreserved ≡ true
+attributionBoundaryLocked = refl
 
 wholeActionClassicalCollapseRejected :
   Audit.wholeGeneratedActionMayCollapseToClassicalCurvature ≡ false
