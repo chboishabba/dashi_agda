@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import hashlib
 from pathlib import Path
+import subprocess
 
 from agda_preflight.kernel_certification import (
-    _agda_check_command,
     build_kernel_certification_receipt,
+    certify_artifact,
 )
 
 
@@ -19,6 +21,22 @@ def _artifact_receipt() -> dict:
         "establishesProof": False,
         "objectRef": {"sink": "file", "uri": "file:///tmp/proof.agda"},
         "transport": {"sink": "file", "uri": "file:///tmp/proof.agda"},
+    }
+
+
+def _artifact_receipt_for(path: Path) -> dict:
+    payload = path.read_bytes()
+    digest = "sha256:" + hashlib.sha256(payload).hexdigest()
+    uri = path.resolve().as_uri()
+    return {
+        "schemaVersion": "artifact-resolution-receipt/v1",
+        "logicalArtifactRef": "formal-proof:mabo@rev#formal-proof-source",
+        "contentDigest": digest,
+        "verified": True,
+        "authority": "transport-only",
+        "establishesProof": False,
+        "objectRef": {"sink": "file", "uri": uri},
+        "transport": {"sink": "file", "uri": uri},
     }
 
 
@@ -71,24 +89,117 @@ def test_transport_receipt_must_remain_transport_only() -> None:
         raise AssertionError("transport receipt with proof authority must fail closed")
 
 
-def test_agda_checker_selects_named_dashi_library_in_multi_library_root(tmp_path: Path) -> None:
-    for name in ("bishop.agda-lib", "dashi-agda.agda-lib", "dchott-agda.agda-lib"):
-        (tmp_path / name).write_text(f"name: {name.removesuffix('.agda-lib')}\n", encoding="utf-8")
+def test_agda_certification_invokes_kernel_from_single_library_workspace(
+    tmp_path: Path, monkeypatch
+) -> None:
+    root = tmp_path / "repo"
+    source = root / "DASHI/Law/SensibLawMaboBrennanRecognitionFormalDemandExact.agda"
+    source.parent.mkdir(parents=True)
+    source.write_text("module DASHI.Law.SensibLawMaboBrennanRecognitionFormalDemandExact where\n", encoding="utf-8")
 
-    source = Path("DASHI/Law/SensibLawMaboBrennanRecognitionFormalDemandExact.agda")
-    assert _agda_check_command(tmp_path, source) == [
-        "agda",
-        "-l",
-        "dashi-agda",
-        str(source),
-    ]
+    dashi_library = root / "dashi-agda.agda-lib"
+    dashi_library.write_text(
+        "name: dashi-agda\n"
+        "depend: standard-library\n"
+        "        dchott-agda\n"
+        "        bishop\n"
+        "        cubical-0.9\n"
+        "include: .\n"
+        "         bishop\n",
+        encoding="utf-8",
+    )
+    (root / "bishop.agda-lib").write_text("name: bishop\ninclude: vendor/bishop\n", encoding="utf-8")
+    (root / "dchott-agda.agda-lib").write_text("name: dchott-agda\ninclude: DCHoTT-Agda\n", encoding="utf-8")
+    (root / "cubical").mkdir()
+    (root / "cubical/cubical.agda-lib").write_text("name: cubical-0.9\ninclude: .\n", encoding="utf-8")
+    (root / "vendor/bishop").mkdir(parents=True)
+    (root / "DCHoTT-Agda").mkdir()
+
+    home = tmp_path / "home"
+    (home / ".agda").mkdir(parents=True)
+    (home / ".agda/libraries").write_text(
+        "/opt/agda/standard-library.agda-lib\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("HOME", str(home))
+
+    observed: dict[str, object] = {}
+
+    def fake_run(command, *, cwd=None, check=False, capture_output=False, text=False):
+        command = list(command)
+        if command[:3] == ["git", "-C", str(root)] and command[3:] == ["rev-parse", "HEAD"]:
+            return subprocess.CompletedProcess(command, 0, stdout="deadbeef\n", stderr="")
+        if command == ["agda", "--version"]:
+            return subprocess.CompletedProcess(command, 0, stdout="Agda version 2.8.0\n", stderr="")
+        if command and command[0] == "agda":
+            workspace = Path(cwd)
+            observed["command"] = command
+            observed["cwd"] = workspace
+            observed["library_files"] = sorted(path.name for path in workspace.glob("*.agda-lib"))
+            observed["dashi_library_bytes"] = (workspace / "dashi-agda.agda-lib").read_bytes()
+            observed["dashi_source_target"] = (workspace / "DASHI").resolve()
+            library_flag = next(arg for arg in command if arg.startswith("--library-file="))
+            registry = Path(library_flag.split("=", 1)[1])
+            observed["registry"] = registry.read_text(encoding="utf-8")
+            return subprocess.CompletedProcess(command, 0, stdout=b"checked", stderr=b"")
+        raise AssertionError(f"unexpected subprocess invocation: {command}")
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+
+    artifact = _artifact_receipt_for(source)
+    receipt = certify_artifact(
+        artifact_resolution_receipt=artifact,
+        demand_ref="formal-demand:mabo:1",
+        obligation_ref="legal-obligation:mabo:1",
+        statement_digest="sha256:" + "11" * 32,
+        da51_address=None,
+        checker="agda",
+        source_root=root,
+        result_kind="formal-proof",
+    )
+
+    assert observed["cwd"] != root
+    assert observed["library_files"] == ["dashi-agda.agda-lib"]
+    assert observed["dashi_library_bytes"] == dashi_library.read_bytes()
+    assert observed["dashi_source_target"] == (root / "DASHI").resolve()
+    assert observed["command"][-1] == "DASHI/Law/SensibLawMaboBrennanRecognitionFormalDemandExact.agda"
+    assert "-l" in observed["command"] and "dashi-agda" in observed["command"]
+    registry = str(observed["registry"])
+    assert "/opt/agda/standard-library.agda-lib" in registry
+    assert str(root / "bishop.agda-lib") in registry
+    assert str(root / "dchott-agda.agda-lib") in registry
+    assert str(root / "cubical/cubical.agda-lib") in registry
+    assert receipt["artifactUri"] == source.resolve().as_uri()
+    assert receipt["artifactDigest"] == artifact["contentDigest"]
+    assert receipt["sourceRevision"] == "git:deadbeef"
 
 
-def test_agda_checker_requires_canonical_dashi_library_file(tmp_path: Path) -> None:
-    (tmp_path / "bishop.agda-lib").write_text("name: bishop\n", encoding="utf-8")
+def test_agda_certification_requires_populated_canonical_dependencies(
+    tmp_path: Path, monkeypatch
+) -> None:
+    root = tmp_path / "repo"
+    source = root / "DASHI/Law/Proof.agda"
+    source.parent.mkdir(parents=True)
+    source.write_text("module DASHI.Law.Proof where\n", encoding="utf-8")
+    (root / "dashi-agda.agda-lib").write_text("name: dashi-agda\n", encoding="utf-8")
+
+    monkeypatch.setattr(
+        subprocess,
+        "run",
+        lambda command, **kwargs: subprocess.CompletedProcess(command, 0, stdout="deadbeef\n", stderr=""),
+    )
+
     try:
-        _agda_check_command(tmp_path, Path("DASHI/Law/Proof.agda"))
+        certify_artifact(
+            artifact_resolution_receipt=_artifact_receipt_for(source),
+            demand_ref="demand:1",
+            obligation_ref="obligation:1",
+            statement_digest="sha256:" + "11" * 32,
+            da51_address=None,
+            checker="agda",
+            source_root=root,
+        )
     except ValueError as error:
-        assert "dashi-agda.agda-lib" in str(error)
+        assert "canonical Agda dependency" in str(error)
     else:
-        raise AssertionError("Agda checker must fail closed without canonical DASHI library file")
+        raise AssertionError("Agda checker must fail closed when canonical dependencies are not populated")
