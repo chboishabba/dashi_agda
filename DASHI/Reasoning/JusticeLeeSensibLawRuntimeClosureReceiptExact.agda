@@ -18,6 +18,8 @@ import DASHI.Reasoning.JusticeLeeSensibLawBidiSearchClosureExact as Legacy
 --
 -- This module provides the closure type only.  It does not fabricate a
 -- production receipt and deliberately exports no canonical live inhabitant.
+-- Mabo or another real Matter may inhabit this type only from actual runtime
+-- coordinates; source-level formalisation alone is not such an inhabitant.
 ------------------------------------------------------------------------
 
 record RuntimePNFControversyReceipt : Set where
