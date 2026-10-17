@@ -24,6 +24,34 @@ data QuantitativeEvidenceKind : Set where
   structureMapping : QuantitativeEvidenceKind
   residueMapping : QuantitativeEvidenceKind
 
+data SABIOProtocolStatus : Set where
+  protocolPayload : SABIOProtocolStatus
+  browserShellPayload : SABIOProtocolStatus
+  protocolError : SABIOProtocolStatus
+
+-- The 2026-10-17 first SABIO attempt reached the documented endpoint but the
+-- entry-ID GET returned an HTTP-200 browser SPA shell.  That result is a
+-- protocol-shape failure, not evidence that SABIO contains zero entries.
+firstSABIOAttemptStatus : SABIOProtocolStatus
+firstSABIOAttemptStatus = browserShellPayload
+
+firstSABIOAttemptMayConcludeZeroEntries : Bool
+firstSABIOAttemptMayConcludeZeroEntries = false
+
+-- The bounded PDBe/SIFTS acquisition did execute successfully against the
+-- exact panel and recovered exact UniProt/PDB segment mappings.  The pasted
+-- diagnostic contained inconsistent hand-summed headline/per-protein totals,
+-- so the formal owner promotes execution/zero-fatal-error status only; schema
+-- v2 now computes canonical totals directly from the artifact on rerun.
+pdbeSiftsBoundedAcquisitionExecuted : Bool
+pdbeSiftsBoundedAcquisitionExecuted = true
+
+pdbeSiftsFatalErrorsReported : Nat
+pdbeSiftsFatalErrorsReported = 0
+
+pdbeSiftsCanonicalCoverageCountsRequireArtifactRecount : Bool
+pdbeSiftsCanonicalCoverageCountsRequireArtifactRecount = true
+
 record QuantitativeAcquisitionBoundary : Set where
   constructor quantitative-acquisition-boundary
   field
@@ -31,12 +59,17 @@ record QuantitativeAcquisitionBoundary : Set where
     kineticConstantCreatesFluxBoundIsFalse : kineticConstantCreatesFluxBound ≡ false
     inVitroKineticsCreatesInVivoState : Bool
     inVitroKineticsCreatesInVivoStateIsFalse : inVitroKineticsCreatesInVivoState ≡ false
+    htmlShellCreatesNoEntryConclusion : Bool
+    htmlShellCreatesNoEntryConclusionIsFalse : htmlShellCreatesNoEntryConclusion ≡ false
     structureMappingCreatesCatalyticMechanism : Bool
     structureMappingCreatesCatalyticMechanismIsFalse :
       structureMappingCreatesCatalyticMechanism ≡ false
     residueMappingCreatesFunctionalPerturbation : Bool
     residueMappingCreatesFunctionalPerturbationIsFalse :
       residueMappingCreatesFunctionalPerturbation ≡ false
+    boundedSIFTSAcquisitionCreatesSiteFunction : Bool
+    boundedSIFTSAcquisitionCreatesSiteFunctionIsFalse :
+      boundedSIFTSAcquisitionCreatesSiteFunction ≡ false
     sourceSpecificEvidenceRequired : Bool
     sourceSpecificEvidenceRequiredIsTrue : sourceSpecificEvidenceRequired ≡ true
 
@@ -44,14 +77,15 @@ open QuantitativeAcquisitionBoundary public
 
 canonicalQuantitativeAcquisitionBoundary : QuantitativeAcquisitionBoundary
 canonicalQuantitativeAcquisitionBoundary =
-  quantitative-acquisition-boundary false refl false refl false refl false refl true refl
+  quantitative-acquisition-boundary
+    false refl false refl false refl false refl false refl false refl true refl
 
 canonicalBH4QuantitativeAcquisitionReceipt : Receipt.GenericReceipt
 canonicalBH4QuantitativeAcquisitionReceipt =
   Receipt.mkNonPromotingReceipt
     "BH4 Phase-4 quantitative acquisition"
     "DASHI.Biology.BH4QuantitativeAcquisitionExact"
-    "SABIO-RK kinetic-law candidates + PDBe/SIFTS UniProt/PDB structural mappings"
-    "adds reproducible public evidence acquisition for kinetic and structural coordinates while preserving source/same-object/compartment boundaries"
-    "kinetic constants are not in-vivo flux bounds; structure/residue mapping is not catalytic mechanism; neither source creates disease causation"
-    "python3 scripts/acquire_bh4_sabio_kinetics.py --help && python3 scripts/acquire_bh4_pdbe_sifts.py --help"
+    "SABIO-RK kinetic-law candidates + executed bounded PDBe/SIFTS UniProt/PDB structural mapping acquisition"
+    "records the SABIO HTTP-200 SPA-shell failure as protocol failure rather than zero data, promotes successful bounded SIFTS acquisition execution, and keeps canonical coverage totals delegated to the machine-generated v2 artifact"
+    "kinetic constants are not in-vivo flux bounds; HTML is not a no-entry receipt; structure/residue mapping is not catalytic mechanism; neither source creates disease causation"
+    "python3 scripts/run_bh4_phase4_maxcut.py"
