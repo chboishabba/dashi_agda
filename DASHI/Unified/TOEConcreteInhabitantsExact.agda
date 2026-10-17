@@ -5,16 +5,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
-------------------------------------------------------------------------
--- Actual native mathematical inhabitant: selected atomic 2p^2 Coulomb model.
---
--- This is a TOE-local recut of the exact finite result carried by Agda PR
--- #1194.  The original reconstruction owns the hydrogenic/Gaunt integration
--- and gives F0=93/512, F2=45/512 and V_ee=(21/128) I_3.  Here we instantiate
--- the finite carrier and its C3/Hamiltonian commutation literally, rather than
--- storing only a Boolean that the payment exists.
-------------------------------------------------------------------------
-
 record Rational : Set where
   constructor rational
   field
@@ -103,14 +93,6 @@ canonicalAtomicP2HamiltonianInhabitant =
     ; completeAtomPromotedIsFalse = refl
     }
 
-------------------------------------------------------------------------
--- Cross-branch formal inhabitants.
---
--- These records point at actual constructed theorem values on sibling Lean
--- branches.  They are inhabitants of an imported-formal-inhabitant type here;
--- they are deliberately NOT Agda proof terms and do not pay physical identity.
-------------------------------------------------------------------------
-
 data InhabitantAuthority : Set where
   nativeAgdaInhabitant : InhabitantAuthority
   importedFormalInhabitant : InhabitantAuthority
@@ -178,12 +160,46 @@ lean73CMInhabitant =
     ; importedAsAgdaTheoremIsFalse = refl
     }
 
+lean73PrimaryNormalizationInhabitant : FormalInhabitantReceipt
+lean73PrimaryNormalizationInhabitant =
+  record
+    { prover = "Lean4"
+    ; repository = "chboishabba/dashi_lean4"
+    ; pullRequest = 73
+    ; headCommit = "4dde2b77cbdb76bdb21db852966db2ffa0ca88d3"
+    ; moduleName = "Dashi.EisensteinJZeroPrimaryNormalizationExact"
+    ; declaration = "splitPrime_primary_associate_existsUnique"
+    ; propositionScope =
+        "Every split-prime norm factor has a unique associate in the explicit six-unit orbit satisfying the j=0 primary normalization."
+    ; authority = importedFormalInhabitant
+    ; importedAsAgdaTheorem = false
+    ; importedAsAgdaTheoremIsFalse = refl
+    }
+
+lean73FrobeniusCharacterTraceInhabitant : FormalInhabitantReceipt
+lean73FrobeniusCharacterTraceInhabitant =
+  record
+    { prover = "Lean4"
+    ; repository = "chboishabba/dashi_lean4"
+    ; pullRequest = 73
+    ; headCommit = "4dde2b77cbdb76bdb21db852966db2ffa0ca88d3"
+    ; moduleName = "Dashi.EisensteinJZeroQuadraticCharacterTraceExact"
+    ; declaration = "frobeniusTrace_eq_neg_characterSum"
+    ; propositionScope =
+        "For every odd prime, the Frobenius trace of the same j=0 curve equals minus the standard quadratic-character sum over x^3+1."
+    ; authority = importedFormalInhabitant
+    ; importedAsAgdaTheorem = false
+    ; importedAsAgdaTheoremIsFalse = refl
+    }
+
 record TOEConcreteInhabitantBundle : Set where
   field
     atomicHamiltonian : AtomicP2HamiltonianInhabitant
     rtFormalInhabitant : FormalInhabitantReceipt
     jacobsonFormalInhabitant : FormalInhabitantReceipt
     cmFormalInhabitant : FormalInhabitantReceipt
+    cmPrimaryNormalizationInhabitant : FormalInhabitantReceipt
+    cmFrobeniusTraceInhabitant : FormalInhabitantReceipt
     physicalSameObjectClosureProvided : Bool
     physicalSameObjectClosureProvidedIsFalse :
       physicalSameObjectClosureProvided ≡ false
@@ -196,6 +212,8 @@ canonicalTOEConcreteInhabitantBundle =
     ; rtFormalInhabitant = lean68RTInhabitant
     ; jacobsonFormalInhabitant = lean68JacobsonInhabitant
     ; cmFormalInhabitant = lean73CMInhabitant
+    ; cmPrimaryNormalizationInhabitant = lean73PrimaryNormalizationInhabitant
+    ; cmFrobeniusTraceInhabitant = lean73FrobeniusCharacterTraceInhabitant
     ; physicalSameObjectClosureProvided = false
     ; physicalSameObjectClosureProvidedIsFalse = refl
     }
