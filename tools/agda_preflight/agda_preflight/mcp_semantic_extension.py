@@ -40,6 +40,22 @@ def install_mcp_adapter_semantic_extension(adapter_cls: type) -> None:
     def proof_route(self, query: str, **kwargs):
         return self.service.proof_route(query, **kwargs)
 
+    def proof_route_for_obligation(self, query: str, **kwargs):
+        return self.service.proof_route_for_obligation(query, **kwargs)
+
+    def formal_evidence_for_obligation(
+        self,
+        *,
+        demand_ref: str,
+        external_obligation_ref: str,
+        statement_digest: str,
+    ):
+        return self.service.formal_evidence_for_obligation(
+            demand_ref=demand_ref,
+            external_obligation_ref=external_obligation_ref,
+            statement_digest=statement_digest,
+        )
+
     def proof_route_history(
         self,
         query: Optional[str] = None,
@@ -72,6 +88,8 @@ def install_mcp_adapter_semantic_extension(adapter_cls: type) -> None:
     adapter_cls.discover = discover
     adapter_cls.round_lineage = round_lineage
     adapter_cls.proof_route = proof_route
+    adapter_cls.proof_route_for_obligation = proof_route_for_obligation
+    adapter_cls.formal_evidence_for_obligation = formal_evidence_for_obligation
     adapter_cls.proof_route_history = proof_route_history
     adapter_cls.da51_resolve = da51_resolve
     adapter_cls.da51_evidence = da51_evidence
@@ -153,12 +171,7 @@ def register_repository_mcp_tools(server, tools) -> None:
         current_source_hash: Optional[str] = None,
         limit: int = 50,
     ) -> dict[str, Any]:
-        """Discover-before-prove and return an authority-neutral backend route.
-
-        Exact/equivalent existing owners are routed to reuse review. Incomplete
-        repository coverage blocks generation. Confirmed mathematical absence
-        may route to Aristotle; agda2lean mapping modes constrain translation.
-        """
+        """Discover-before-prove and return an authority-neutral backend route."""
         return tools.proof_route(
             query,
             target_prover=target_prover,
@@ -170,6 +183,52 @@ def register_repository_mcp_tools(server, tools) -> None:
             source_declaration=source_declaration,
             current_source_hash=current_source_hash,
             limit=limit,
+        )
+
+    @server.tool()
+    async def proof_route_for_obligation(
+        query: str,
+        demand_ref: str,
+        external_obligation_ref: str,
+        statement_digest: str,
+        target_prover: str = "lean",
+        claim_kind: str = "deductive",
+        mathematical_status: str = "novel-open",
+        statement_status: str = "not-transcribed",
+        certification_status: str = "uncertified",
+        da51_address: Optional[str] = None,
+        source_declaration: Optional[str] = None,
+        current_source_hash: Optional[str] = None,
+        limit: int = 50,
+    ) -> dict[str, Any]:
+        """Route one external SLR/formal obligation without copying its semantic payload."""
+        return tools.proof_route_for_obligation(
+            query,
+            demand_ref=demand_ref,
+            external_obligation_ref=external_obligation_ref,
+            statement_digest=statement_digest,
+            target_prover=target_prover,
+            claim_kind=claim_kind,
+            mathematical_status=mathematical_status,
+            statement_status=statement_status,
+            certification_status=certification_status,
+            da51_address=da51_address,
+            source_declaration=source_declaration,
+            current_source_hash=current_source_hash,
+            limit=limit,
+        )
+
+    @server.tool()
+    async def formal_evidence_for_obligation(
+        demand_ref: str,
+        external_obligation_ref: str,
+        statement_digest: str,
+    ) -> dict[str, Any]:
+        """Return exact evidence joins for one demand/obligation/statement digest."""
+        return tools.formal_evidence_for_obligation(
+            demand_ref=demand_ref,
+            external_obligation_ref=external_obligation_ref,
+            statement_digest=statement_digest,
         )
 
     @server.tool()
