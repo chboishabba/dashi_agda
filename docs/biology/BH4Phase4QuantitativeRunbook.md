@@ -2,18 +2,16 @@
 
 ## Current executed state
 
-The exact 16-protein panel resolves to 24 protein-to-Rhea links, 12 finite internal reaction columns, 3 non-finite MTOR residual reactions and 29 finite species. The current open-system problem has 56 coordinates: 15 core state/context coordinates + 12 reaction-flux intervals + 29 exchange intervals. The first steady-state attempt remains `underdetermined` because those solver bounds are not yet source-paid.
+The exact 16-protein panel resolves to 24 protein-to-Rhea links, 12 finite internal reaction columns, 3 non-finite MTOR residual reactions and 29 finite species. The open-system problem has 56 coordinates: 15 core state/context coordinates + 12 reaction-flux intervals + 29 exchange intervals. The first steady-state attempt remains `underdetermined` because the solver bounds are not yet source-paid.
 
 Executed evidence receipts:
 
-- PDBe/SIFTS: 38 structures, 526 exact UniProt/PDB segment mappings, zero acquisition errors.
-- SABIO-RK: 190 kinetic-law rows across 11/16 exact human UniProt queries, zero acquisition errors.
-- Schema-aware SABIO recount: **932 explicit kinetic parameter objects**.
-- SABIO -> finite Rhea adjudication v2: **875 parameter candidates map to 10 of 12 finite reaction columns**.
-- v2 parameter hints: 475 concentration-like, 160 affinity-like, 139 rate-like, 83 inhibitory-like, 30 catalytic-constant-like and only 45 unclassified.
-- The two exact-UniProt SABIO coverage holes are `RHEA:11920` (PCBD1) and `RHEA:19897` (NOS).
-
-The v2 classification is now the canonical executed classification receipt. It is descriptive triage, not a quantitative flux payment.
+- PDBe/SIFTS: 38 structures / 526 exact mappings / zero acquisition errors.
+- SABIO-RK: 190 kinetic-law rows, 932 explicit parameter objects.
+- SABIO -> finite Rhea adjudication v2: 875 mapped candidate occurrences covering 10/12 finite columns.
+- v2 classification: 475 concentration-like, 160 affinity-like, 139 rate-like, 83 inhibitory-like, 30 catalytic-constant-like, 45 unclassified.
+- exact-UniProt SABIO holes: `RHEA:11920` (PCBD1) and `RHEA:19897` (NOS), both separately anchored by bounded primary human literature.
+- ranked kinetic queue: 5 columns with rate-like candidates, 3 with turnover/capacity candidates, 2 with kinetic-shape-only candidates, 2 uncovered by SABIO.
 
 ## One-command run
 
@@ -21,29 +19,25 @@ The v2 classification is now the canonical executed classification receipt. It i
 python3 scripts/run_bh4_phase4_maxcut.py
 ```
 
-The runner now refreshes Rhea/ChEBI chemistry with bounded retry/backoff, rebuilds `S`, writes the 56-coordinate template, acquires SABIO-RK export rows and normalized parameter objects, creates the SABIO-to-Rhea adjudication worklist, ranks candidates per finite Rhea column by flux relevance, acquires PDBe/SIFTS mappings, runs interval feasibility and aggregate regressions, and writes `artifacts/biology/bh4-phase4-maxcut-summary.json` schema v5.
-
-New ranking artifact:
+The runner now writes summary schema `dashi.bh4-phase4-maxcut-run.v6` and adds:
 
 ```text
 artifacts/biology/bh4-flux-candidate-ranking.json
+artifacts/biology/bh4-flux-payment-preparation.json
 ```
 
-Use `--top-kinetic-candidates N` to change how many ranked candidates are retained per reaction.
+## Flux payment preparation
 
-## Flux-relevance ranking
+`prepare_bh4_flux_payment.py` converts the ranked candidate queue into a fail-closed per-reaction payment ledger with four evidence classes:
 
-`rank_bh4_flux_candidates.py` converts the large candidate worklist into a bounded per-reaction adjudication queue. It assigns one of five roles:
+- `assay-specific-capacity`: Vmax / specific-activity-like measurements;
+- `turnover-capacity`: kcat / turnover values requiring enzyme abundance/activity state;
+- `kinetic-shape-only`: Km/Kd/Ki-like evidence without a flux-magnitude anchor;
+- `primary-literature-gap`: no direct SABIO candidate for the finite reaction, with PCBD1/NOS handled by the separate primary-literature owner.
 
-- `direct-rate-candidate`: Vmax / measured-rate-like evidence;
-- `capacity-candidate`: kcat / turnover-like evidence that still requires enzyme abundance/activity/state;
-- `kinetic-shape-candidate`: Km/Kd/Ki-like evidence;
-- `assay-context-only`: substrate/effector/condition concentrations;
-- `not-flux-informative`: unclassified at this layer.
+This distinction is important. A Vmax expressed as `nmol/(min·mg)` is an assay capacity normalized by a protein-mass basis, not an intracellular compartment flux. Mapping it into the network requires the relevant enzyme/protein abundance, compartment volume or mass basis, assay-state translation, and one common solver flux unit. Likewise `kcat` requires enzyme abundance before `Vmax = kcat·[E]` can define a capacity.
 
-The ranking score rewards flux relevance plus explicit numeric values, units, entry identity and parameter identity. It is a triage score, not a scientific confidence score and not a solver bound.
-
-Every ranked candidate carries four explicit gates:
+Every reaction remains fail-closed behind:
 
 ```text
 assay_reaction_identity_paid
@@ -52,43 +46,30 @@ normalized_solver_flux_unit_paid
 kinetic_to_flux_translation_paid
 ```
 
-Absent coordinates default to `false`. `usable_for_flux_bound` becomes true only when all four are explicitly true.
+The payment-preparation artifact additionally records:
 
-This is deliberate:
-
-- a rate-like assay value is not automatically an in-vivo reaction flux;
-- kcat alone is only a capacity candidate until enzyme abundance/state are paid;
-- Km/Ki/Kd constrain kinetic shape, not flux magnitude by themselves;
-- assay concentrations are context, not reaction bounds.
-
-Run the ranking independently with:
-
-```bash
-python3 scripts/rank_bh4_flux_candidates.py \
-  --adjudication artifacts/biology/bh4-sabio-adjudication.json \
-  --matrix artifacts/biology/bh4-stoichiometric-matrix.json \
-  -o artifacts/biology/bh4-flux-candidate-ranking.json
+```text
+enzyme_abundance_required_reactions
+normalization_bridge_required_reactions
+magnitude_anchor_missing_reactions
+payable_reaction_count
 ```
 
-## Primary-literature gap evidence
+No missing gate defaults to true, and no evidence class itself creates a solver bound.
 
-`DASHI.Biology.BH4MissingReactionKineticsEvidenceExact` owns bounded primary human evidence for the two SABIO-uncovered reactions.
+## Current quantitative frontier
 
-For PCBD1 / `RHEA:11920`, primary human biochemical studies provide kinetic characterization but do not directly pay wild-type intracellular flux. For NOS / `RHEA:19897`, primary human NOS2/NOS3 studies provide quantitative and BH4-sensitive kinetics but do not justify collapsing isoform-specific assay data into one shared in-vivo NOS reaction bound.
+The next scientific work is no longer acquisition or candidate ranking. It is to pay the reaction-level normalization/context gates and emit the first justified `REACTION_FLUX:<RHEA-ID>` intervals. In parallel, the 29 `EXCHANGE:<species-id>` intervals, compartment-specific BH4/BH2/redox state, simultaneous AAAH/NOS/AGMO demand, NOS coupling transitions, and same-object upstream-to-TSC2 transport remain open.
 
-That means the literature-discovery gap is closed; the translation gap is not.
+## Solver
 
-## Solver payment
-
-A solver-usable reaction or exchange row still requires lower/upper bounds in one normalized flux unit plus source, same-object, compartment and measurement-time coordinates and `usable_for_joint_flux_witness = true`. `unresolved` never means measured zero.
-
-The steady-state problem remains:
+The bounded steady-state target remains:
 
 ```text
 S*v + e = 0
 ```
 
-using `scipy.optimize.linprog(method="highs")` only after all solver-facing intervals are paid.
+using `scipy.optimize.linprog(method="highs")` only after every solver-facing interval is source-paid. `unresolved` never means zero; `feasible`/`infeasible` refer only to the supplied bounded model and do not establish or refute disease causation.
 
 ## Regressions
 
@@ -96,6 +77,4 @@ using `scipy.optimize.linprog(method="highs")` only after all solver-facing inte
 python3 scripts/check_kitzerow_bh4_priority_all.py
 ```
 
-The aggregate checker now covers the executed chemistry/network receipts, Rhea retry contract, SABIO/SIFTS receipts, canonical schema-v2 932/875/10-of-12 classification counts, flux-relevance ranking boundaries, primary PCBD1/NOS gap evidence, the 56-coordinate manifest and interval-solver firewalls.
-
-CI is not the completion gate for this tranche.
+The aggregate checker now includes ranking and flux-payment-preparation firewalls. CI is not the completion gate for this tranche.
