@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import sqlite3
 
 import pytest
@@ -11,14 +12,14 @@ DIGEST = "sha256:" + "a" * 64
 CID = "bafybeigdyrztxpollinationfixture"
 
 
-def _neighbourhood() -> dict:
+def _neighbourhood(reaction: str = "RHEA:19897") -> dict:
     return {
         "schema": "dashi.xpollenation-neighbourhood/v1",
-        "subject": {"namespace": "rhea", "identifier": "RHEA:19897"},
+        "subject": {"namespace": "rhea", "identifier": reaction},
         "edges": [
             {
-                "edgeId": "edge:nos2",
-                "subject": {"namespace": "rhea", "identifier": "RHEA:19897"},
+                "edgeId": f"edge:catalyst:{reaction}",
+                "subject": {"namespace": "rhea", "identifier": reaction},
                 "relation": "catalysed-by",
                 "object": {"namespace": "uniprot", "identifier": "P35228"},
                 "sourceRef": "Rhea/SABIO crosswalk",
@@ -51,27 +52,27 @@ def _neighbourhood() -> dict:
     }
 
 
-def _resolution_receipt() -> dict:
+def _resolution_receipt(revision: str = "rev-1", digest: str = DIGEST, cid: str = CID) -> dict:
     return {
         "schemaVersion": "artifact-resolution-receipt/v1",
         "logicalContractVersion": "shared-shard-artifact/v1",
-        "logicalArtifactRef": "xpollenation:bh4:RHEA-19897@rev-1#neighbourhood",
+        "logicalArtifactRef": f"xpollenation:bh4:RHEA-19897@{revision}#neighbourhood",
         "artifactId": "xpollenation:bh4:RHEA-19897",
-        "artifactRevision": "rev-1",
+        "artifactRevision": revision,
         "shardId": "neighbourhood",
-        "contentDigest": DIGEST,
-        "payloadDigest": DIGEST,
+        "contentDigest": digest,
+        "payloadDigest": digest,
         "payloadSizeBytes": 128,
         "objectRef": {
             "sink": "ipfs",
-            "uri": f"ipfs://{CID}",
+            "uri": f"ipfs://{cid}",
             "sizeBytes": 128,
-            "contentDigest": DIGEST,
+            "contentDigest": digest,
         },
         "transport": {
             "sink": "ipfs",
-            "uri": f"ipfs://{CID}",
-            "cid": CID,
+            "uri": f"ipfs://{cid}",
+            "cid": cid,
             "metadata": {"gatewayVerified": True},
         },
         "verified": True,
@@ -107,9 +108,51 @@ def test_ingest_persists_typed_edges_da51_join_and_ipfs_artifact() -> None:
     assert fetched["artifact"]["logical_artifact_ref"] == (
         "xpollenation:bh4:RHEA-19897@rev-1#neighbourhood"
     )
-    assert [edge["edge_id"] for edge in fetched["edges"]] == ["edge:nos2", "edge:qid"]
+    assert [edge["edge_id"] for edge in fetched["edges"]] == [
+        "edge:catalyst:RHEA:19897",
+        "edge:qid",
+    ]
     assert fetched["edges"][1]["subject_namespace"] == "uniprot"
     assert fetched["edges"][1]["subject_identifier"] == "P35228"
+
+
+def test_one_global_edge_can_belong_to_multiple_neighbourhoods() -> None:
+    store = _store()
+    store.ingest_neighbourhood(_neighbourhood("RHEA:19897"))
+    store.ingest_neighbourhood(_neighbourhood("RHEA:17473"))
+
+    first = store.neighbourhood("rhea", "RHEA:19897")
+    second = store.neighbourhood("rhea", "RHEA:17473")
+    assert first is not None and second is not None
+    assert "edge:qid" in {edge["edge_id"] for edge in first["edges"]}
+    assert "edge:qid" in {edge["edge_id"] for edge in second["edges"]}
+
+
+def test_new_artifact_revision_is_retained_and_becomes_current() -> None:
+    store = _store()
+    store.ingest_neighbourhood(_neighbourhood(), artifact_resolution_receipt=_resolution_receipt())
+    digest2 = "sha256:" + "b" * 64
+    cid2 = "bafybeinewrevision"
+    store.ingest_neighbourhood(
+        _neighbourhood(),
+        artifact_resolution_receipt=_resolution_receipt("rev-2", digest2, cid2),
+    )
+    fetched = store.neighbourhood("rhea", "RHEA:19897")
+    assert fetched is not None
+    assert fetched["artifact"]["artifact_revision"] == "rev-2"
+    assert fetched["artifact"]["cid"] == cid2
+    assert len(store.artifact_history("rhea", "RHEA:19897")) == 2
+
+
+def test_reingest_replaces_current_neighbourhood_membership_not_global_edge_history() -> None:
+    store = _store()
+    store.ingest_neighbourhood(_neighbourhood())
+    updated = copy.deepcopy(_neighbourhood())
+    updated["edges"] = [updated["edges"][0]]
+    store.ingest_neighbourhood(updated)
+    fetched = store.neighbourhood("rhea", "RHEA:19897")
+    assert fetched is not None
+    assert [edge["edge_id"] for edge in fetched["edges"]] == ["edge:catalyst:RHEA:19897"]
 
 
 def test_ingest_rejects_promotion_authority() -> None:
