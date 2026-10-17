@@ -1,15 +1,17 @@
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
 YM = ROOT / "DASHI/Physics/YangMills"
 
 INSTANTIATION = YM / "BalabanCMP109CanonicalResidualInstantiationExact.agda"
+BETA_BRIDGE = YM / "BalabanCMP109BetaDifferenceRealAnalysisBridgeExact.agda"
 OWNER = YM / "BalabanCMP109CanonicalSourceSemanticsObligationsExact.agda"
 RECEIPT = YM / "BalabanCMP109ResidualInstantiationReceiptExact.agda"
 CLAY = YM / "YangMillsCanonicalClayResidualExact.agda"
 
 
-def _read(path: Path) -> str:
+def _raw(path: Path) -> str:
     assert path.exists(), f"missing {path}"
     text = path.read_text(encoding="utf-8")
     imports = "\n".join(
@@ -20,14 +22,19 @@ def _read(path: Path) -> str:
     assert "{!!}" not in text
     assert "postulate" not in text
     assert "--allow-unsolved-metas" not in text
-    assert "{-# OPTIONS --safe #-}" in text
     assert "clayPromotion = true" not in text
     assert "clayYangMillsPromoted = true" not in text
     return text
 
 
+def _read_safe(path: Path) -> str:
+    text = _raw(path)
+    assert "{-# OPTIONS --safe #-}" in text
+    return text
+
+
 def test_cmp109_instantiation_classifies_all_three_blockers():
-    text = _read(INSTANTIATION)
+    text = _read_safe(INSTANTIATION)
     assert "data CMP109BlockerKind" in text
     assert "sourceReconstructionMissing" in text
     assert "sameObjectAttachmentMissing" in text
@@ -37,64 +44,84 @@ def test_cmp109_instantiation_classifies_all_three_blockers():
     assert "physicalCompositeD1Blocker = transportEqualityMissing" in text
 
 
-def test_beta_difference_is_structurally_discharged_by_existing_nonround_theorem():
-    text = _read(INSTANTIATION)
+def test_safe_instantiation_does_not_import_postulated_real_analysis_lane():
+    text = _read_safe(INSTANTIATION)
+    assert "RealAnalysisAxioms" not in text
+    assert "BalabanBetaPrefixSensitivityToTubeContractionExact" not in text
+    assert "BalabanYM4WardQuarticResponseProducerAdapterExact" not in text
+
+
+def test_beta_difference_application_is_isolated_in_explicit_nonsafe_bridge():
+    text = _raw(BETA_BRIDGE)
+    assert "{-# OPTIONS --safe #-}" not in text
+    assert "RealAnalysisAxioms" in text
     assert "BalabanBetaPrefixSensitivityToTubeContractionExact" in text
-    assert "selectedBetaDifferenceDecomposition" in text
     assert "Prefix.sourceMapDifferenceIsBetaDifference" in text
-    assert "SelectedCMP109BetaDifferenceAttachment" in text
+    assert "betaDifferencePaidRelativeToRealAnalysisAxioms" in text
 
 
-def test_generated_history_response_is_sharpened_to_existing_nonround_producer():
-    text = _read(INSTANTIATION)
-    assert "BalabanYM4WardQuarticResponseProducerAdapterExact" in text
+def test_attachment_relations_are_external_parameters_not_residual_fields():
+    text = _read_safe(INSTANTIATION)
+    for field_name in (
+        "ProducerBelongsToSelectedSource",
+        "ShootingMapBelongsToSelectedSource",
+        "D1BelongsToSelectedSource",
+    ):
+        assert field_name in text
+        assert not re.search(rf"(?m)^\s{{4}}{field_name}\s*:", text)
+    assert not re.search(r"(?m)^\s{4}substitutedD1\s*:", text)
+    assert not re.search(r"(?m)^\s{4}physicalCompositeD1\s*:", text)
+
+
+def test_generated_history_response_keeps_externally_fixed_producer_carrier():
+    text = _read_safe(INSTANTIATION)
     assert "CMP109GeneratedHistoryResponseResidual" in text
-    assert "Producer.WardQuarticResponseProducer" in text
-    assert "literalGeneratedHistoryResponseProducer" in text
+    assert "(Producer : Set)" in text
+    assert "(ProducerBelongsToSelectedSource : SelectedSource → Producer → Set)" in text
+    assert "literalGeneratedHistoryResponseProducer : Producer" in text
 
 
-def test_all_cmp109_payments_are_attached_to_one_selected_source():
-    text = _read(INSTANTIATION)
-    assert "(selectedSource : SelectedSource)" in text
-    assert "ProducerBelongsToSelectedSource" in text
-    assert "producerBelongsToSelectedSource" in text
-    assert "ShootingMapBelongsToSelectedSource" in text
-    assert "shootingMapBelongsToSelectedSource" in text
-    assert "D1BelongsToSelectedSource" in text
-    assert "physicalCompositeD1BelongsToSelectedSource" in text
-    assert "substitutedD1BelongsToSelectedSource" in text
+def test_beta_attachment_keeps_externally_fixed_shooting_interface():
+    text = _read_safe(INSTANTIATION)
+    assert "SelectedCMP109BetaDifferenceAttachment" in text
+    assert "(ShootingMap : Set)" in text
+    assert "(ShootingMapBelongsToSelectedSource" in text
+    assert "selectedShootingMap : ShootingMap" in text
 
 
-def test_physical_composite_d1_is_sharpened_to_transport_equality():
-    text = _read(INSTANTIATION)
+def test_physical_composite_d1_reference_functions_are_parameters():
+    text = _read_safe(INSTANTIATION)
     assert "PhysicalCompositeD1TransportResidual" in text
-    assert "physicalCompositeD1" in text
-    assert "substitutedD1" in text
+    assert "(physicalCompositeD1 substitutedD1 :" in text
+    assert "(D1BelongsToSelectedSource :" in text
     assert "physicalCompositeD1IsSubstitutedD1" in text
     assert "DASHI extension" in text
 
 
 def test_source_attribution_boundaries_are_explicit():
-    text = _read(INSTANTIATION)
+    text = _read_safe(INSTANTIATION)
     assert "10.1007/BF01215223" in text
     assert "10.1007/BF01217741" in text
     assert "10.1007/BF01238433" in text
     assert "DASHI EXTENSION" in text
 
 
-def test_cmp109_canonical_owner_uses_sharpened_residual_types():
-    text = _read(OWNER)
+def test_cmp109_canonical_owner_uses_sharpened_external_parameters():
+    text = _read_safe(OWNER)
     assert "BalabanCMP109CanonicalResidualInstantiationExact" in text
     assert "CMP109CanonicalSourceSemanticsObligations" in text
-    assert "CMP109GeneratedHistoryResponseResidual selectedSource cutoff" in text
-    assert "SelectedCMP109BetaDifferenceAttachment selectedSource TubePoint" in text
+    assert "CMP109GeneratedHistoryResponseResidual" in text
+    assert "SelectedCMP109BetaDifferenceAttachment" in text
     assert "PhysicalCompositeD1TransportResidual" in text
-    assert "selectedSource Component Background Tangent Scalar" in text
+    assert "ProducerBelongsToSelectedSource" in text
+    assert "ShootingMapBelongsToSelectedSource" in text
+    assert "D1BelongsToSelectedSource" in text
 
 
-def test_cmp109_receipt_records_paid_and_unpaid_boundaries():
-    text = _read(RECEIPT)
-    assert "betaDifferenceAlgebraStructurallyPaid = true" in text
+def test_cmp109_receipt_records_relative_axiom_boundary_and_unpaid_residuals():
+    text = _read_safe(RECEIPT)
+    assert "betaDifferenceAlgebraPaidRelativeToRealAnalysisAxioms = true" in text
+    assert "betaDifferenceAlgebraUnconditionallySafePaid = false" in text
     assert "betaDifferenceStillNeedsSelectedAttachment = true" in text
     assert "generatedHistoryResponseStillNeedsSourceReconstruction = true" in text
     assert "physicalCompositeD1StillNeedsTransportEquality = true" in text
@@ -102,10 +129,10 @@ def test_cmp109_receipt_records_paid_and_unpaid_boundaries():
     assert "clayPromotion = false" in text
 
 
-def test_clay_residual_consumes_sharpened_cmp109_owner_and_stays_closed():
-    text = _read(CLAY)
-    assert "(selectedSource : SelectedSource)" in text
+def test_clay_residual_uses_qualified_only_owner_imports_and_stays_closed():
+    text = _read_safe(CLAY)
+    for alias in ("CMP109", "TransferGap", "R409", "R429", "Gap", "Limit"):
+        assert f" as {alias} using ()" in text
     assert "CMP109.CMP109CanonicalSourceSemanticsObligations" in text
-    assert "selectedSource TubePoint cutoff Component Background Tangent Scalar" in text
     assert "clayYangMillsPromoted = false" in text
     assert "clayPromotion = false" in text
