@@ -39,6 +39,8 @@ record TerminalExecutionAddendum : Set where
     subluminalPositiveEnergyWarpConstructionSource : Terminal.FrontierStatus
     superluminalPositiveEnergyPhysicalWarpSource : Terminal.FrontierStatus
     remoteQuantumGateTeleportationExperimentSource : Terminal.FrontierStatus
+    lossyChannelTeleportationAdvantageExperimentSource : Terminal.FrontierStatus
+    quantumEnergyTeleportationProtocolSource : Terminal.FrontierStatus
     phantomScalarWormholeTheorySource : Terminal.FrontierStatus
     casimirEGBWormholeTheorySource : Terminal.FrontierStatus
     physicalWormholeRealization : Terminal.FrontierStatus
@@ -58,7 +60,10 @@ record TerminalExecutionAddendum : Set where
     subluminalPositiveEnergyWarpCountsAsFTL : Bool
     sourceWarpTheoremCountsAsPhysicalWarpDevice : Bool
     quantumGateTeleportationCountsAsFTL : Bool
+    teleportationAdvantageCountsAsFTL : Bool
     quantumGateTeleportationCountsAsMatterTransport : Bool
+    qetCountsAsFTL : Bool
+    qetCountsAsMacroscopicPropellantlessEnergyTransport : Bool
     wormholeTheoryCountsAsPhysicalWormhole : Bool
     scientistTechnicalAdjacencyCountsAsTargeting : Bool
     openSiblingReferenceCountsAsAuthorityImport : Bool
@@ -90,13 +95,15 @@ currentTerminalExecutionAddendum =
     Terminal.sourcePaid
     Terminal.sourcePaid
     Terminal.sourcePaid
+    Terminal.sourcePaid
+    Terminal.sourcePaid
     Terminal.externalOnly
     Terminal.blockedByUnmergedSibling
     Terminal.openSameObjectPayment
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
-    false false false false false false false false false false false false false false false
+    false false false false false false false false false false false false false false false false false false
 
 record TerminalExecutionAddendumBoundary : Set where
   constructor terminal-execution-addendum-boundary
