@@ -113,7 +113,9 @@ def test_agda_certification_invokes_kernel_from_single_library_workspace(
     (root / "cubical").mkdir()
     (root / "cubical/cubical.agda-lib").write_text("name: cubical-0.9\ninclude: .\n", encoding="utf-8")
     (root / "vendor/bishop").mkdir(parents=True)
+    (root / "vendor/bishop/Prelude.agda").write_text("module Prelude where\n", encoding="utf-8")
     (root / "DCHoTT-Agda").mkdir()
+    (root / "DCHoTT-Agda/Prelude.agda").write_text("module Prelude where\n", encoding="utf-8")
 
     home = tmp_path / "home"
     (home / ".agda").mkdir(parents=True)
