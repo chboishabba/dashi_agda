@@ -11,6 +11,8 @@ import DASHI.Culture.ColonialTheatreSensoryAccessExact as Sensory
 import DASHI.Culture.PowersPlantationParadiseEvidenceGraphExact as Graph
 import DASHI.Culture.PowersPlantationParadiseMobilityRegimeTransitionExact as Mobility
 import DASHI.Culture.PowersPlantationParadiseResearchThroughPerformanceExact as PerformanceProbe
+import DASHI.Culture.PowersPlantationParadiseSourceAcquisitionPromotionExact as Promotion
+import DASHI.Culture.PowersPlantationParadiseFrontierGenealogyExact as Genealogy
 
 ------------------------------------------------------------------------
 -- TERMINAL EMPIRICAL ROADMAP
@@ -58,6 +60,8 @@ data ProgrammeDeliverable : Set where
   theatreRulesArchitecturePracticeAtlas : ProgrammeDeliverable
   minetteCompensationDossier : ProgrammeDeliverable
   sourceProductionModalityAtlas : ProgrammeDeliverable
+  sourceAcquisitionPromotionGate : ProgrammeDeliverable
+  empiricalFrontierGenealogy : ProgrammeDeliverable
   historicalDiscriminatorCatalogue : ProgrammeDeliverable
   canonicalFiveAxisAcquisitionFrontier : ProgrammeDeliverable
   sensoryAccessibilityExtension : ProgrammeDeliverable
@@ -78,6 +82,8 @@ statusOfDeliverable namedActorDistributionAtlas = activeBuild
 statusOfDeliverable theatreRulesArchitecturePracticeAtlas = activeBuild
 statusOfDeliverable minetteCompensationDossier = partialEvidence
 statusOfDeliverable sourceProductionModalityAtlas = implementedCore
+statusOfDeliverable sourceAcquisitionPromotionGate = implementedCore
+statusOfDeliverable empiricalFrontierGenealogy = implementedCore
 statusOfDeliverable historicalDiscriminatorCatalogue = implementedCore
 statusOfDeliverable canonicalFiveAxisAcquisitionFrontier = implementedCore
 statusOfDeliverable sensoryAccessibilityExtension = implementedCore
@@ -88,7 +94,7 @@ statusOfDeliverable researchThroughPerformanceProbeSet = implementedCore
 
 nextPriorityReference : String
 nextPriorityReference =
-  "primary manifestation saturation plus named actor x venue x time contribution/benefit/burden/voice joins; source genre/producer/purpose stays attached to every assertion; rule-producing instruments and residual settlement are discriminating follow-ups; causal identification remains gated"
+  "primary manifestation saturation plus named actor x venue x time contribution/benefit/burden/voice joins; each source remains stage-labelled from secondary coordinate through direct inspection/transcription/same-item binding/qualification; frontier genealogy may recut residuals but creates no historical authority; causal identification remains gated"
 
 empiricalProgrammeBoundary : Empirical.PowersEmpiricalProgrammeBoundary
 empiricalProgrammeBoundary = Empirical.canonicalPowersEmpiricalProgrammeBoundary
@@ -114,6 +120,12 @@ mobilityBoundary = Mobility.canonicalPowersMobilityRegimeBoundary
 performanceProbeBoundary : PerformanceProbe.PowersResearchThroughPerformanceBoundary
 performanceProbeBoundary = PerformanceProbe.canonicalPowersResearchThroughPerformanceBoundary
 
+promotionBoundary : Promotion.PowersSourceAcquisitionPromotionBoundary
+promotionBoundary = Promotion.canonicalPowersSourceAcquisitionPromotionBoundary
+
+genealogyBoundary : Genealogy.PowersFrontierGenealogyBoundary
+genealogyBoundary = Genealogy.canonicalPowersFrontierGenealogyBoundary
+
 record PowersEmpiricalRoadmapBoundary : Set where
   constructor powers-empirical-roadmap-boundary
   field
@@ -126,6 +138,12 @@ record PowersEmpiricalRoadmapBoundary : Set where
     corpusDistributionRulesAndModalityAreActiveFrontier : Bool
     corpusDistributionRulesAndModalityAreActiveFrontierIsTrue :
       corpusDistributionRulesAndModalityAreActiveFrontier ≡ true
+    locationInspectionPromotionGateIsExplicit : Bool
+    locationInspectionPromotionGateIsExplicitIsTrue :
+      locationInspectionPromotionGateIsExplicit ≡ true
+    frontierGenealogyCreatesHistoricalAuthority : Bool
+    frontierGenealogyCreatesHistoricalAuthorityIsFalse :
+      frontierGenealogyCreatesHistoricalAuthority ≡ false
     causalEffectMayBeEstimatedFromCurrentDescriptiveFibres : Bool
     causalEffectMayBeEstimatedFromCurrentDescriptiveFibresIsFalse :
       causalEffectMayBeEstimatedFromCurrentDescriptiveFibres ≡ false
@@ -145,6 +163,8 @@ canonicalPowersEmpiricalRoadmapBoundary =
     false refl
     true refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     true refl
