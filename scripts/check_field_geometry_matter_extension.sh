@@ -44,6 +44,8 @@ grep -q 'sampleGeometrySourcePaid' DASHI/Physics/CondensedMatter/MATBGQTMInstrum
 grep -q 'normalizedSyntheticKernelExecuted' DASHI/Physics/CondensedMatter/MATBGQTMResolutionKernelReceiptExact.agda
 grep -q 'syntheticResolutionAwareSurfaceExecuted' DASHI/Physics/CondensedMatter/MATBGQTMResolutionAwareForwardObserverReceiptExact.agda
 grep -q 'fixedGapAreaCeilingNumericallyExecuted' DASHI/Physics/Foundations/CasimirIdealSheetScalingCeilingReceiptExact.agda
+grep -q 'superluminalPositiveEulerianEnergyConstructionSourcePaid' DASHI/Physics/Foundations/WarpEnergyConditionSourceAtlasExact.agda
+grep -q 'positiveEulerianEnergyCountsAsFullWEC' DASHI/Physics/Foundations/WarpEnergyConditionSourceAtlasExact.agda
 grep -q 'genericPhysicallyReasonableWarpEnergyConditionViolationSourcePaid' DASHI/Physics/Foundations/WarpEnergyConditionSourceAtlasExact.agda
 grep -q 'constantVelocitySubluminalPositiveEnergyConstructionSourcePaid' DASHI/Physics/Foundations/WarpEnergyConditionSourceAtlasExact.agda
 grep -q 'unconditionalRemoteGateTeleportationExperimentPaid' DASHI/Physics/Foundations/CausalTransport2026SourceAtlasExact.agda
@@ -53,6 +55,8 @@ grep -q 'qetCountsAsMacroscopicPropellantlessEnergyTransport' DASHI/Physics/Foun
 grep -q 'casimirEGBTraversableWormholeTheorySourcePaid' DASHI/Physics/Foundations/CausalTransport2026SourceAtlasExact.agda
 grep -q 'qtmResolutionAwareForwardObserver' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 grep -q 'casimirIdealSheetScalingCeiling' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
+grep -q 'superluminalPositiveEulerianEnergyWarpConstructionSource' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
+grep -q 'positiveEulerianEnergyCountsAsFullWEC' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 grep -q 'genericWarpEnergyConditionObstructionSource' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 grep -q 'remoteQuantumGateTeleportationExperimentSource' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 grep -q 'lossyChannelTeleportationAdvantageExperimentSource' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
