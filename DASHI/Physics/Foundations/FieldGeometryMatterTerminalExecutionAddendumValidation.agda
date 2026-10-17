@@ -51,6 +51,12 @@ superluminal-positive-energy-physical-source-remains-external = refl
 remote-quantum-gate-teleportation-source-is-paid : A.remoteQuantumGateTeleportationExperimentSource A.currentTerminalExecutionAddendum ≡ T.sourcePaid
 remote-quantum-gate-teleportation-source-is-paid = refl
 
+lossy-channel-teleportation-advantage-source-is-paid : A.lossyChannelTeleportationAdvantageExperimentSource A.currentTerminalExecutionAddendum ≡ T.sourcePaid
+lossy-channel-teleportation-advantage-source-is-paid = refl
+
+qet-protocol-source-is-paid : A.quantumEnergyTeleportationProtocolSource A.currentTerminalExecutionAddendum ≡ T.sourcePaid
+qet-protocol-source-is-paid = refl
+
 phantom-scalar-wormhole-theory-source-is-paid : A.phantomScalarWormholeTheorySource A.currentTerminalExecutionAddendum ≡ T.sourcePaid
 phantom-scalar-wormhole-theory-source-is-paid = refl
 
@@ -90,8 +96,17 @@ warp-source-theorem-is-not-device = refl
 quantum-gate-teleportation-is-not-ftl : A.quantumGateTeleportationCountsAsFTL A.currentTerminalExecutionAddendum ≡ false
 quantum-gate-teleportation-is-not-ftl = refl
 
+teleportation-advantage-is-not-ftl : A.teleportationAdvantageCountsAsFTL A.currentTerminalExecutionAddendum ≡ false
+teleportation-advantage-is-not-ftl = refl
+
 quantum-gate-teleportation-is-not-matter-transport : A.quantumGateTeleportationCountsAsMatterTransport A.currentTerminalExecutionAddendum ≡ false
 quantum-gate-teleportation-is-not-matter-transport = refl
+
+qet-is-not-ftl : A.qetCountsAsFTL A.currentTerminalExecutionAddendum ≡ false
+qet-is-not-ftl = refl
+
+qet-is-not-macroscopic-propellantless-energy-transport : A.qetCountsAsMacroscopicPropellantlessEnergyTransport A.currentTerminalExecutionAddendum ≡ false
+qet-is-not-macroscopic-propellantless-energy-transport = refl
 
 wormhole-theory-is-not-physical-wormhole : A.wormholeTheoryCountsAsPhysicalWormhole A.currentTerminalExecutionAddendum ≡ false
 wormhole-theory-is-not-physical-wormhole = refl
