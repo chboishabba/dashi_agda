@@ -15,6 +15,7 @@ import DASHI.Interop.PNFSpectralFieldArchitectureReceipt
 import DASHI.Interop.SeaMeInItROMKernelFormalism
 import DASHI.Interop.SeaMeInItSeamDerivationFormalism
 import DASHI.Interop.SeaMeInItPhysicalSuitClosure
+import DASHI.Interop.SeaMeInItAdaptiveSuitClosure
 import DASHI.Interop.PhysicsChemistryBiologyDNAUnificationDischarge
 import DASHI.Interop.GravitationalObservationProofSearchBridgeExact
 import DASHI.Interop.GravitationalObservationUnificationBidiCrossPollinationExact
