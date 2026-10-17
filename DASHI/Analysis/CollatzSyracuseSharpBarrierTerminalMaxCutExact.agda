@@ -11,6 +11,8 @@ module DASHI.Analysis.CollatzSyracuseSharpBarrierTerminalMaxCutExact where
 --   * exact late-bit affine/gap transitions;
 --   * late-even and late-10 sharp-barrier nonincrease;
 --   * exact internal coefficient-stopping ordering and conditional equality;
+--   * exact typed primitive continuation AST with all semantic invariants
+--     proof-carrying and AST escape compiling to the canonical escape source;
 --   * attribution-safe coefficient-stopping / base-conversion / semiconvergent
 --     source roles.
 --
@@ -26,6 +28,7 @@ import DASHI.Analysis.CollatzSyracuseSharpBarrierThresholdExact as Sharp
 import DASHI.Analysis.CollatzSyracuseAffinePrefixTransitionExact as Prefix
 import DASHI.Analysis.CollatzSyracuseSharpBarrierTransitionExact as EvenBarrier
 import DASHI.Analysis.CollatzSyracuseSharpBarrierOneZeroTransitionExact as OneZero
+import DASHI.Analysis.CollatzSyracuseSharpBarrierPrimitiveASTExact as AST
 import DASHI.Analysis.CollatzSyracuseCoefficientStoppingBoundaryExact as CST
 import DASHI.Analysis.CollatzSyracuseSOTA2026Exact as SOTA
 import DASHI.Analysis.CollatzSyracuseInfiniteSurvivorAffineObstructionExact as Escape
@@ -39,9 +42,12 @@ record SharpBarrierTerminalBoundary : Set where
     safeOddGapConstructionPaid : Nat
     trailingEvenBarrierLawPaid : Nat
     trailingOneZeroBarrierLawPaid : Nat
+    typedPrimitiveASTPaid : Nat
+    astEscapeCompilerPaid : Nat
     coefficientStoppingInternalBoundaryPaid : Nat
     coefficientStoppingAttributionPaid : Nat
 
+    universalASTBarrierEscapeProducerPaid : Nat
     universalCorrectionEscapeProducerPaid : Nat
     universalCoefficientStoppingEqualityPaid : Nat
     finiteCoefficientScanPromotesUniversality : Nat
@@ -51,8 +57,8 @@ record SharpBarrierTerminalBoundary : Set where
 canonicalSharpBarrierTerminalBoundary : SharpBarrierTerminalBoundary
 canonicalSharpBarrierTerminalBoundary =
   sharpBarrierTerminalBoundary
-    1 1 1 1 1 1 1 1
-    0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1
+    0 0 0 0 0 0
 
 priorTerminalSpinePaid :
   Terminal.TerminalParityMaxCutBoundary.terminalCompilersPaid
@@ -96,6 +102,18 @@ trailingOneZeroBarrierPaid :
   ≡ 1
 trailingOneZeroBarrierPaid = refl
 
+typedPrimitiveASTPaid :
+  AST.PrimitiveASTBoundary.typedPrimitiveASTPaid
+    AST.canonicalPrimitiveASTBoundary
+  ≡ 1
+typedPrimitiveASTPaid = refl
+
+astEscapeCompilerPaid :
+  AST.PrimitiveASTBoundary.astEscapeCompilesToCanonicalPaid
+    AST.canonicalPrimitiveASTBoundary
+  ≡ 1
+astEscapeCompilerPaid = refl
+
 coefficientStoppingOrderingPaid :
   CST.CoefficientStoppingBoundary.coefficientHorizonAtMostDescentHorizonPaid
     CST.canonicalCoefficientStoppingBoundary
@@ -113,6 +131,12 @@ coefficientStoppingSourcesPaid :
     SOTA.canonicalCollatzSOTA2026Boundary
   ≡ 1
 coefficientStoppingSourcesPaid = refl
+
+universalASTBarrierEscapeStillOpen :
+  AST.PrimitiveASTBoundary.universalBarrierEscapeProducerPaid
+    AST.canonicalPrimitiveASTBoundary
+  ≡ 0
+universalASTBarrierEscapeStillOpen = refl
 
 universalCorrectionEscapeStillOpen :
   Escape.InfiniteSurvivorAffineBoundary.universalContractingCorrectionEscapeProducerPaid
