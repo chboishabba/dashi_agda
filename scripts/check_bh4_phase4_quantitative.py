@@ -4,6 +4,7 @@ root = Path(__file__).resolve().parents[1]
 
 files = {
     "evidence": root / "DASHI/Biology/BH4QuantitativeAcquisitionExact.agda",
+    "sifts_receipt": root / "DASHI/Biology/BH4ExecutedSIFTSReceiptExact.agda",
     "solver": root / "DASHI/Biology/BH4IntervalFluxSolverExact.agda",
     "roadmap": root / "DASHI/Biology/BH4Phase4RoadmapExact.agda",
     "sabio": root / "scripts/acquire_bh4_sabio_kinetics.py",
@@ -32,6 +33,13 @@ for token in [
     assert token in text["evidence"], f"missing quantitative evidence token: {token}"
 
 for token in [
+    "structuresExamined = 38", "matchingSIFTSSegmentCount = 526",
+    "proteinsWithUniProtPDBLinks = 14", "proteinsWithMatchingSegments = 13",
+    "PCBD1", "AGMO", "PAH", "mappingCreatesCatalyticFunction",
+]:
+    assert token in text["sifts_receipt"], f"missing executed SIFTS receipt token: {token}"
+
+for token in [
     "rerunSABIOAfterProtocolRepair", "adjudicateSABIOKineticCandidatesIntoFluxBounds",
     "adjudicatePDBSIFTSResidueSiteWitnesses", "firstBoundedSIFTSAcquisitionExecuted",
     "sabioProtocolRepairReady = true", "expandedQuantitativeCoordinateCount = 56",
@@ -46,11 +54,12 @@ for token in [
     assert token in text["solver"], f"missing interval solver token: {token}"
 
 for token in [
-    "UniProtKB_AC", "entryIDs", "searchKineticLaws/sbml", "direct-search-sbml",
-    "looks_like_html", "html_shell_means_zero_entries", "dashi.bh4-sabio-kinetics.v2",
+    "https://sabio.h-its.org/export-api/sabio/kinlaw-entry/json",
+    "UniProtKB_AC", "meta", "total_count", "data", "pageSize",
+    "dashi.bh4-sabio-kinetics.v3", "export-envelope",
     "kinetic_parameters_create_flux_bounds",
 ]:
-    assert token in text["sabio"], f"missing SABIO fail-closed token: {token}"
+    assert token in text["sabio"], f"missing SABIO export-api token: {token}"
 
 for token in [
     "SIFTS", "uniprot_pdb", "pdb_chain_uniprot", "raw_sha256",
