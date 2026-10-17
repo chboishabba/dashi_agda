@@ -9,6 +9,7 @@ FILES=(
   DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeRegression.agda
   DASHI/Reasoning/JusticeLeeSensibLawRuntimeClosureReceiptExact.agda
   DASHI/Reasoning/JusticeLeeSensibLawRuntimeClosureReceiptRegression.agda
+  DASHI/Reasoning/JusticeLeeSensibLawEverything.agda
 )
 
 for file in "${FILES[@]}"; do
@@ -30,5 +31,6 @@ grep -q 'wrongTypeDiagnosisAutomaticallyDeterminesResidualKindIsFalse' DASHI/Rea
 grep -q 'compiledSearchDischargesResidualIsFalse' DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeExact.agda
 grep -q 'exports no canonical live inhabitant' DASHI/Reasoning/JusticeLeeSensibLawRuntimeClosureReceiptExact.agda
 grep -q 'maboOrOtherMatterReceiptIsEmpiricalLeeExperimentIsFalse' DASHI/Reasoning/JusticeLeeSensibLawRuntimeClosureReceiptExact.agda
+grep -q 'JusticeLeeSensibLawPNFWrongTypeBridgeExact' DASHI/Reasoning/JusticeLeeSensibLawEverything.agda
 
 echo 'Justice Lee × SensibLaw BIDI structural checks passed'
