@@ -10,10 +10,11 @@ open import Agda.Builtin.String using (String)
 -- A route existing is not the same as possessing the bytes, replaying them, or
 -- establishing same-sample identity across the two studies.
 --
--- In particular, PMC article identity/full-text availability is kept separate
--- from the legacy PMC OA package-download mechanism.  An article being present
--- in PMC does not license the claim that a legacy package endpoint is currently
--- an operational machine-readable payload producer.
+-- PMC changed its dataset-distribution infrastructure in August 2026. Article
+-- identity/full-text availability is therefore kept separate from both the
+-- retired legacy OA Web Service/package mechanism and the current PMC Cloud
+-- Service route class.  A supported route class does not prove that the exact
+-- MATBG supplement payload has been located in that service.
 ------------------------------------------------------------------------
 
 record PublicAcquisitionRoute : Set where
@@ -45,7 +46,7 @@ xiaoPMCRoute = public-acquisition-route
   "Xiao et al."
   "public full-text repository"
   "PMC13149035"
-  "open-access article identity and associated-data metadata; not a guarantee of deposited QTM numerical arrays or a live legacy OA package endpoint"
+  "open-access article identity and associated-data metadata; not a guarantee of deposited QTM numerical arrays, legacy OA package availability, or exact Cloud Service payload membership"
   true false false
 
 xiaoNIMSMDRRoute : PublicAcquisitionRoute
@@ -72,7 +73,7 @@ zhangPMCRoute = public-acquisition-route
   "Zhang et al."
   "public full-text repository"
   "PMC13575161"
-  "open-access article identity and data-availability metadata; workbook bytes and live package transport remain separate acquisition claims"
+  "open-access article identity and data-availability metadata; workbook bytes and exact Cloud Service payload membership remain separate acquisition claims"
   true false false
 
 record MATBGPublicAcquisitionBoundary : Set where
@@ -85,6 +86,8 @@ record MATBGPublicAcquisitionBoundary : Set where
     zhangPMCRoutePaid : Bool
     pmcArticleIdentityRoutePaid : Bool
     legacyPMCOAPackageEndpointOperational : Bool
+    currentPMCCloudServiceSupported : Bool
+    exactMATBGCloudPayloadConfirmed : Bool
     pmcArticleIdentityCountsAsPayloadByteRoute : Bool
     firstPartyLiveRouteStillRequiredForBytes : Bool
     qtmExperimentalBytesPaid : Bool
@@ -101,6 +104,6 @@ canonicalMATBGPublicAcquisitionBoundary : MATBGPublicAcquisitionBoundary
 canonicalMATBGPublicAcquisitionBoundary =
   matbg-public-acquisition-boundary
     true true true true true
-    true false false true
+    true false true false false true
     false false false false false
     true true
