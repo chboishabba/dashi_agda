@@ -41,9 +41,12 @@ data CaseRelation : Set where
   creditProvision : CaseRelation
   landFinance : CaseRelation
 
+-- The canonical core has no kinship relation. Mapping kinship/marriage to the
+-- weakest non-promoting canonical relation prevents family metadata from being
+-- mistaken for institutional continuity while the case relation remains exact.
 canonicalRelation : CaseRelation → Genealogy.PathwayRelation
-canonicalRelation kinship = Genealogy.personnelInstitutionalContinuity
-canonicalRelation marriageBridge = Genealogy.personnelInstitutionalContinuity
+canonicalRelation kinship = Genealogy.analogyOnly
+canonicalRelation marriageBridge = Genealogy.analogyOnly
 canonicalRelation businessCorrespondence = Genealogy.directDocumentedTransfer
 canonicalRelation commercialAgency = Genealogy.fundingOrganisationalLink
 canonicalRelation bankDirectorship = Genealogy.personnelInstitutionalContinuity
