@@ -5,33 +5,34 @@ module DASHI.Physics.Foundations.CMP119PostQ3IdentificationSteelmanRoadmapExact 
 -- POST-Q3-IDENTIFICATION STEELMAN ROADMAP
 --
 -- Q3 used to look like an independent physical theorem equating/bridging two
--- finite F^2 sequences.  The factorized-physical weld shows that is the wrong
--- granularity.  Pin one finite state family and one selected F^2 observable:
+-- finite F^2 sequences.  That bridge is now compiler output from one selected
+-- factorized CMP119 state/observable family.
 --
---   Haar finite lane   = sourceExpectation O_F2
---   Local-C finite lane = approximateExpectation_n O_F2.
+-- H has also been reduced: the factorized expectation error already supplies
+-- the physical-Haar representation once ONE source-facing same-object equality
+-- identifies sourceExpectation with the literal normalized finite YM/Haar
+-- expectation on the chosen carrier.
 --
--- The existing CMP119 factorized-density theorem supplies their error and its
--- vanishing.  Therefore Q3 is compiler output once the ordinary physical-Haar
--- meaning of sourceExpectation is supplied.  That Haar meaning was already an
--- AG-S1/source obligation; it is not new Q3-specific physics.
+-- Q2 has been reduced without changing attribution: Collins--Duncan--Joglekar
+-- supplies the renormalized non-Abelian trace-anomaly theorem, while DASHI must
+-- still pay TWO same-object transports:
+--   selected Hilbert trace -> renormalized trace,
+--   selected Local-C F^2  -> renormalized F^2.
+-- The literature citation is never used to manufacture those model-specific
+-- identifications.
 --
--- The steelman frontier therefore separates:
+-- The steelman frontier is therefore:
 --
---   Q1  source geometry: the actual metric/stress one-parameter path and its
---       ordinary derivative/B4 naturality;
+--   Q1  source geometry: actual metric/stress one-parameter path, ordinary
+--       derivative semantics, B4 naturality;
 --
---   Q2  source QFT: HilbertTrace(T_ren) = b_SU2 [F^2]_ren on the SAME selected
---       R136 / pinned Local-C stress object;
+--   Q2' two same-object transports into the cited renormalized anomaly pair;
 --
---   H   source measure semantics: sourceExpectation for the selected finite
---       F^2 observable really is the literal physical Haar expectation / its
---       convergent quadrature realization.
+--   H'  one same-object finite-measure equality:
+--       sourceExpectation(O_F2) = literal normalized finite YM/Haar expectation.
 --
--- The anomaly/trace result still must not be oversold as a complete Lorentzian
--- antigravity theorem: a trace sign alone does not determine T00 or the active
--- stress combination.  The existing Lorentzian/Wick/same-object continuation
--- boundaries remain independent downstream physics.
+-- A negative Hilbert trace still does NOT by itself prove Lorentzian
+-- antigravity, WEC/SEC violation, or negative active gravitational mass.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -40,7 +41,8 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
 import DASHI.Physics.Foundations.CMP119CosmologyP3FactorizedPhysicalWeldExact as P3Weld
-import DASHI.Physics.Foundations.CMP119AntigravitySourceExpectationToPhysicalHaarExact as Haar
+import DASHI.Physics.Foundations.CMP119PhysicalFiniteMeasureExpectationWeldExact as HaarWeld
+import DASHI.Physics.Foundations.CMP119CosmologyP2RenormalizedSameObjectReductionExact as P2Reduction
 import DASHI.Physics.Foundations.CMP119AntigravityTraceMaxCutExact as Trace
 
 q3IndependentBridgeLeafStillOpen : Bool
@@ -50,14 +52,24 @@ q3IndependentBridgeLeafStillOpen =
 q1PathSemanticsStillOpen : Bool
 q1PathSemanticsStillOpen = Q.q1IsPathDerivativeSemanticsAndEquivariance
 
-q2SameStressAnomalyStillOpen : Bool
-q2SameStressAnomalyStillOpen =
-  Q.q2IsNonperturbativeHilbertTraceAnomalyOnExactLocalCPair
+q2OpaqueAnomalyEquationStillRequired : Bool
+q2OpaqueAnomalyEquationStillRequired = false
 
--- `literalCMP119PhysicalHaarQuadratureWeldLevel` remains conditional in the
--- canonical owner.  This Bool is roadmap accounting, not a replacement proof.
-literalPhysicalHaarSemanticsStillOpen : Bool
-literalPhysicalHaarSemanticsStillOpen = true
+q2ReducedToTwoRenormalizedSameObjectTransports : Bool
+q2ReducedToTwoRenormalizedSameObjectTransports =
+  P2Reduction.q2ReducedToStressAndF2RenormalizedTransports
+
+q2CitationAlonePaysSelectedCMP119Transport : Bool
+q2CitationAlonePaysSelectedCMP119Transport =
+  P2Reduction.citationAlonePaysCMP119SameObjectTransport
+
+independentPhysicalHaarQuadratureBridgeStillRequired : Bool
+independentPhysicalHaarQuadratureBridgeStillRequired =
+  HaarWeld.independentQuadratureBridgeRequired
+
+physicalHaarReducedToFiniteMeasureSameObjectEquality : Bool
+physicalHaarReducedToFiniteMeasureSameObjectEquality =
+  HaarWeld.remainingHaarDebtIsFiniteMeasureSameObjectEquality
 
 newAdapterDebtAfterQ3Identification : Bool
 newAdapterDebtAfterQ3Identification = false
@@ -67,6 +79,9 @@ finiteF2BridgeErrorIsIndependentPhysicalInput = false
 
 sameFactorizedObservablePaysQ3FiniteIdentification : Bool
 sameFactorizedObservablePaysQ3FiniteIdentification = true
+
+attributionBoundaryPreserved : Bool
+attributionBoundaryPreserved = true
 
 -- Full physical interpretation boundaries.
 traceSignAlonePaysLorentzianActiveStress : Bool
@@ -85,4 +100,4 @@ scopedPrimarySourceLeafCountAfterQ3Identification = 3
 
 highestAlphaAfterQ3Identification : String
 highestAlphaAfterQ3Identification =
-  "Q3 is no longer an independent bridge theorem. Pay (1) Q1: the literal present-cut tangent->background metric/stress curve and ordinary derivative/B4 naturality; (2) Q2: the nonperturbative SU(2) Hilbert-trace anomaly on the exact same R136/pinned Local-C stress; and (3) the already-existing physical-Haar/sourceExpectation semantics for the selected factorized F^2 observable. Then use the existing P2/P3 sign compiler. For any antigravity/WEC claim, separately pay Lorentzian/Wick same-object continuation and T00/active-stress control: a negative trace alone is not sufficient."
+  "Q3 is compiler output, not an independent theorem. The remaining scoped source payments are: (1) Q1, the literal present-cut tangent->background metric/stress curve with ordinary derivative and B4 naturality; (2) Q2', two same-object transports from the selected R136/pinned Local-C Hilbert trace and F^2 operator into the renormalized operator pair governed by the Collins-Duncan-Joglekar trace-anomaly theorem; and (3) H', one same-object equality identifying the selected factorized sourceExpectation(O_F2) with the literal normalized finite YM/product-Haar expectation. Preserve attribution: the anomaly theorem belongs to Collins-Duncan-Joglekar; the selected-object transports and compiler reductions are DASHI contributions unless separately source-paid. After those, separately pay Lorentzian/Wick continuation and T00/active-stress control before any antigravity/WEC claim."
