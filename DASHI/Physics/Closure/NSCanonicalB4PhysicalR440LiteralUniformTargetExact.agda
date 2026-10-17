@@ -53,6 +53,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 import DASHI.Physics.Closure.NSTriadKNPhysicalRawCurlCellEDAdapterRound219Exact as R219
 import DASHI.Physics.Closure.NSTriadKNSelectedPairPhysicalTriadRoutingRound469Exact as R469
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact as Companion
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact as DefectR440
 
@@ -80,8 +81,7 @@ literalSignedR440WorkIsNegativeR440Work :
   (output : Z3.FourierMode) →
   let module D = DefectR440.LiveDefectR440 physicalSystem S output
   in literalSignedR440Work physicalSystem S output
-     ≡ 0ℚ - DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact.coherentWork
-          (D.Live.mixed output) D.physicalResidual
+     ≡ 0ℚ - Work.coherentWork (D.Live.mixed output) D.physicalResidual
 literalSignedR440WorkIsNegativeR440Work physicalSystem S output =
   let module D = DefectR440.LiveDefectR440 physicalSystem S output
   in D.defectIsNegativePhysicalR440Work
