@@ -2,6 +2,7 @@ module DASHI.Biology.BH4Phase4SystemStateRegression where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Biology.Molecular.BH4ExecutedPanelReactionReceiptExact as Executed
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Matrix
 import DASHI.Biology.BH4CompartmentKineticStateExact as Parameters
 import DASHI.Biology.BH4NOSCouplingEvidenceExact as Evidence
@@ -9,10 +10,21 @@ import DASHI.Biology.BH4NOSCouplingSameObjectExact as NOS
 import DASHI.Biology.BH4JointFluxFeasibilityExact as Flux
 import DASHI.Biology.BH4OpenMetabolicNetworkAdapterExact as OpenNetwork
 import DASHI.Biology.BH4Phase4RoadmapExact as Roadmap
+import DASHI.Biology.KitzerowBH4SystemNongNangMaxCutExact as Graph
 
 ------------------------------------------------------------------------
--- Regression-first contract for the Phase-4 system-state max-cut.
+-- Regression contract for the executed Phase-4 system-state max-cut.
 ------------------------------------------------------------------------
+
+panelReactionAcquisitionExecuted :
+  Executed.acquisitionExecuted Executed.canonicalExecutedPanelReactionReceipt ≡ true
+panelReactionAcquisitionExecuted = refl
+
+executedPanelHasTwelveFiniteReactions : Matrix.executedPanelReactionCount ≡ 12
+executedPanelHasTwelveFiniteReactions = refl
+
+executedPanelHasTwentyNineFiniteSpecies : Matrix.executedPanelSpeciesCount ≡ 29
+executedPanelHasTwentyNineFiniteSpecies = refl
 
 matrixDoesNotInventMissingChemistry :
   Matrix.BH4PanelMatrixBoundary.formulaIncompleteReactionBecomesZeroColumn
@@ -31,6 +43,18 @@ compartmentIdentityCannotBeDropped :
     Parameters.canonicalBH4ParameterBoundary
   ≡ false
 compartmentIdentityCannotBeDropped = refl
+
+nosReactionChemistryIsNowPaid :
+  Graph.reactionOrRelationPaid Graph.bh4ToNOSCouplingEdge ≡ true
+nosReactionChemistryIsNowPaid = refl
+
+aaahReactionChemistryIsNowPaid :
+  Graph.reactionOrRelationPaid Graph.aaahCompetitionEdge ≡ true
+aaahReactionChemistryIsNowPaid = refl
+
+agmoReactionChemistryIsNowPaid :
+  Graph.reactionOrRelationPaid Graph.agmoCompetitionEdge ≡ true
+agmoReactionChemistryIsNowPaid = refl
 
 nosProteinPresenceDoesNotPayCouplingTransition :
   NOS.BH4NOSSameObjectBoundary.proteinPresencePaysCouplingTransition
@@ -80,6 +104,16 @@ wholeSystemFluxAttemptHasOccurred = refl
 firstWholeSystemFluxOutcomeIsUnderdetermined :
   Roadmap.firstJointFluxOutcome ≡ Flux.underdetermined
 firstWholeSystemFluxOutcomeIsUnderdetermined = refl
+
+firstAttemptMissingTwelveFluxBounds : Roadmap.missingReactionFluxBounds ≡ 12
+firstAttemptMissingTwelveFluxBounds = refl
+
+firstAttemptMissingTwelveFluxValues : Roadmap.missingReactionFluxValues ≡ 12
+firstAttemptMissingTwelveFluxValues = refl
+
+firstAttemptMissingTwentyNineExchangeCoordinates :
+  Roadmap.missingExternalExchangeCoordinates ≡ 29
+firstAttemptMissingTwentyNineExchangeCoordinates = refl
 
 underdeterminedDoesNotMeanMechanismFalse :
   Roadmap.BH4Phase4Boundary.underdeterminedMeansMechanismFalse
