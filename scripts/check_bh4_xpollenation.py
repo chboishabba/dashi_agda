@@ -71,13 +71,15 @@ def main() -> int:
     neighbourhood = result["neighbourhoods"][0]
     assert neighbourhood["subject"] == {"namespace": "rhea", "identifier": "RHEA:19897"}
     relations = {edge["relation"] for edge in neighbourhood["edges"]}
-    assert {"catalysed-by", "reaction-participant", "kinetic-parameter-for", "protein-structure-of", "candidate-neighbour"} <= relations
+    assert {"catalysed-by", "reaction-participant", "kinetic-parameter-for", "protein-structure-of", "curated-cross-reference"} <= relations
     assert neighbourhood["authority"] == "navigation-enrichment-only"
     assert neighbourhood["establishesProof"] is False
     assert neighbourhood["establishesPayment"] is False
     assert all(edge["promotionAllowed"] is False for edge in neighbourhood["edges"])
+    assert all("subject" in edge for edge in neighbourhood["edges"])
     qid_edges = [edge for edge in neighbourhood["edges"] if edge["object"]["namespace"] == "wikidata-qid"]
     assert qid_edges and all(edge["status"] == "identity-paid" for edge in qid_edges)
+    assert qid_edges and all(edge["sameObjectClaimed"] and edge["sameObjectVerified"] for edge in qid_edges)
     print("bh4 xpollenation regression: ok")
     return 0
 
