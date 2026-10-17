@@ -41,7 +41,7 @@ record CanonicalB4PhysicalR440AnalyticPayment
       LocalEDBelongsToSource selectedSource localED) : Set₁ where
   field
     signedPhysicalR440Payment :
-      signedWork ≤ (thetaD * coreMass) + (cD * localED)
+      signedWork ≤ ((thetaD * coreMass) + (cD * localED))
 
     thetaDNonnegative :
       zero ≤ thetaD

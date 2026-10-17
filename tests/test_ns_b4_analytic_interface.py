@@ -41,7 +41,7 @@ def test_b4_exact_three_analytic_payments_are_explicit():
         "strictHalfMargin",
     ]:
         assert name in text
-    assert "signedWork ≤ (thetaD * coreMass) + (cD * localED)" in text
+    assert "signedWork ≤ ((thetaD * coreMass) + (cD * localED))" in text
     assert "zero ≤ thetaD" in text
     assert "(half + thetaD) < one" in text
 
