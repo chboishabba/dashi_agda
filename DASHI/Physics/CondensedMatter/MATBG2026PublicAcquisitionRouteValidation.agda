@@ -23,6 +23,12 @@ pmc-article-identity-still-paid = refl
 legacy-pmc-oa-package-endpoint-not-operational : A.legacyPMCOAPackageEndpointOperational A.canonicalMATBGPublicAcquisitionBoundary ≡ false
 legacy-pmc-oa-package-endpoint-not-operational = refl
 
+current-pmc-cloud-service-is-supported-route-class : A.currentPMCCloudServiceSupported A.canonicalMATBGPublicAcquisitionBoundary ≡ true
+current-pmc-cloud-service-is-supported-route-class = refl
+
+exact-matbg-cloud-payload-membership-not-inferred : A.exactMATBGCloudPayloadConfirmed A.canonicalMATBGPublicAcquisitionBoundary ≡ false
+exact-matbg-cloud-payload-membership-not-inferred = refl
+
 pmc-identity-is-not-payload-byte-route : A.pmcArticleIdentityCountsAsPayloadByteRoute A.canonicalMATBGPublicAcquisitionBoundary ≡ false
 pmc-identity-is-not-payload-byte-route = refl
 
