@@ -19,6 +19,8 @@ def test_attachment_receipt_is_fail_closed():
     assert "semanticBuildAuthorityPaid = false" in text
     assert "crossProverProofTransportPaid = false" in text
     assert "concreteFractranCheckpointFormalAttachmentPaid = false" in text
+    assert "licenseNoticePresent = true" in text
+    assert "exactLicenseBlobVendored = false" in text
 
 
 def test_tail_weak_simulation_records_stuttering_shape():
@@ -37,9 +39,12 @@ def test_vendor_notice_and_license_surface_present():
     notice = NOTICE.read_text()
     assert "Mike Dupont / meta-introspector" in notice
     assert "AGPL-3.0" in notice
+    assert "does **not** claim" in notice
     license_text = LICENSE.read_text()
     assert "GNU AFFERO GENERAL PUBLIC LICENSE" in license_text
     assert "Version 3, 19 November 2007" in license_text
+    assert "0ad25db4bd1d86c452db3f9602ccdbe172438f52" in license_text
+    assert "does not claim" in license_text
 
 
 def test_replay_consumes_vendored_sources_directly():
