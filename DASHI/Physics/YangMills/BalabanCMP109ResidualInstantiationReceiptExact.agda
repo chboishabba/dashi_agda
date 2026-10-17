@@ -7,13 +7,16 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 ------------------------------------------------------------------------
 -- Typed authority receipt for the narrow CMP109 residual-instantiation tranche.
 --
--- This is repository-native DASHI bookkeeping.  It records what the tranche
--- establishes and, more importantly, what it does not establish.
+-- This is repository-native DASHI bookkeeping.  In particular, the existing
+-- concrete beta-difference proof sits on `RealAnalysisAxioms`, so it is recorded
+-- as paid only RELATIVE TO that axiom boundary.  The safe canonical owner does
+-- not import that theorem or its postulated base.
 ------------------------------------------------------------------------
 
 record CMP109ResidualInstantiationReceipt : Set where
   field
-    betaDifferenceAlgebraStructurallyPaid : Bool
+    betaDifferenceAlgebraPaidRelativeToRealAnalysisAxioms : Bool
+    betaDifferenceAlgebraUnconditionallySafePaid : Bool
     betaDifferenceStillNeedsSelectedAttachment : Bool
     generatedHistoryResponseStillNeedsSourceReconstruction : Bool
     physicalCompositeD1StillNeedsTransportEquality : Bool
@@ -24,7 +27,8 @@ record CMP109ResidualInstantiationReceipt : Set where
 
 canonicalCMP109ResidualInstantiationReceipt : CMP109ResidualInstantiationReceipt
 canonicalCMP109ResidualInstantiationReceipt = record
-  { CMP109ResidualInstantiationReceipt.betaDifferenceAlgebraStructurallyPaid = true
+  { CMP109ResidualInstantiationReceipt.betaDifferenceAlgebraPaidRelativeToRealAnalysisAxioms = true
+  ; CMP109ResidualInstantiationReceipt.betaDifferenceAlgebraUnconditionallySafePaid = false
   ; CMP109ResidualInstantiationReceipt.betaDifferenceStillNeedsSelectedAttachment = true
   ; CMP109ResidualInstantiationReceipt.generatedHistoryResponseStillNeedsSourceReconstruction = true
   ; CMP109ResidualInstantiationReceipt.physicalCompositeD1StillNeedsTransportEquality = true
