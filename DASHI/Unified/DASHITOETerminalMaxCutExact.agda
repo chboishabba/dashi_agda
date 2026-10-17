@@ -72,15 +72,37 @@ currentTOECandidate =
     ; retainsConjecturalSockets = true
     ; retainsNegativeKnowledge = true
     ; reading =
-        "One DASHI candidate physical theory with 369/C3 as universal refinement-orientation substrate. The candidate now contains actual mathematical/formal inhabitants rather than status flags alone: a native interacting 2p^2 C3-invariant Coulomb Hamiltonian, an imported formal j=0 elliptic point-group endomorphism, a corrected-tree RT theorem inhabitant, and a concrete Lambda=0 Jacobson/Einstein benchmark inhabitant. These prove that several downstream sector contracts are nonempty. They do not yet provide the single calibrated same-object physical weld required for closure."
+        "One DASHI candidate physical theory with 369/C3 as universal refinement-orientation substrate. The candidate contains actual mathematical/formal inhabitants rather than status flags alone: a native interacting 2p^2 C3-invariant Coulomb Hamiltonian; an actual native Eisenstein C3 carrier in Lean; imported formal j=0 elliptic point-group, primary-normalization and Frobenius-trace inhabitants; a corrected-tree RT inhabitant; and a concrete Lambda=0 Jacobson/Einstein benchmark inhabitant. These establish non-emptiness of major downstream sectors, not their identity as one calibrated physical object."
     }
 
 currentTOECandidateStatus : TOECandidateStatus
 currentTOECandidateStatus = candidateConstructed
 
-record PhysicallyClosedTOE : Setω where
+record PartialPhysicalClosureInhabitant : Setω where
   field
     candidate : TOECandidate
+    selectedMatterHamiltonian : Inhabitants.AtomicP2HamiltonianInhabitant
+    cmPointGroup : Inhabitants.FormalInhabitantReceipt
+    cmPrimaryNormalization : Inhabitants.FormalInhabitantReceipt
+    cmFrobeniusTrace : Inhabitants.FormalInhabitantReceipt
+    rtBenchmark : Inhabitants.FormalInhabitantReceipt
+    vacuumEinsteinBenchmark : Inhabitants.FormalInhabitantReceipt
+
+currentPartialPhysicalClosureInhabitant : PartialPhysicalClosureInhabitant
+currentPartialPhysicalClosureInhabitant =
+  record
+    { candidate = currentTOECandidate
+    ; selectedMatterHamiltonian = Inhabitants.canonicalAtomicP2HamiltonianInhabitant
+    ; cmPointGroup = Inhabitants.lean73CMInhabitant
+    ; cmPrimaryNormalization = Inhabitants.lean73PrimaryNormalizationInhabitant
+    ; cmFrobeniusTrace = Inhabitants.lean73FrobeniusCharacterTraceInhabitant
+    ; rtBenchmark = Inhabitants.lean68RTInhabitant
+    ; vacuumEinsteinBenchmark = Inhabitants.lean68JacobsonInhabitant
+    }
+
+record PhysicallyClosedTOE : Setω where
+  field
+    partial : PartialPhysicalClosureInhabitant
     UniversalPhysicalState : Set
     UniversalDynamicsAction : Set
     ControlledSectorReductions : Set
@@ -103,4 +125,4 @@ currentPhysicalClosureStatus = physicalClosureOpen
 
 terminalMaxCutReading : String
 terminalMaxCutReading =
-  "Actual inhabitants now pay selected finite matter Hamiltonian, j=0 point-group, corrected RT and flat-vacuum Einstein benchmark nonemptiness. The remaining TOE cut is actual Monster same-action recognition; universal-action restriction; metric-variation/stress commutation; cubic/Jacobi split Frobenius and same-curve Hecke; same-physical TPS/Hamiltonian attachment; controlled continuum limits; calibrated observables; held-out prediction; independent replication."
+  "The TOE now has an explicit PartialPhysicalClosureInhabitant carrying every genuinely inhabited downstream sector currently available. Physical closure is therefore no longer blocked by mere existence of a matter Hamiltonian, C3 arithmetic action, RT model or Einstein benchmark. The remaining cut is the cross-sector same-object mathematics: actual Monster W_zeta recognition; universal-action restriction; metric-variation/stress commutation; cubic/Jacobi split Frobenius and same-curve Hecke; same-physical TPS/Hamiltonian attachment; controlled continuum limits; calibrated observables; held-out prediction; independent replication."
