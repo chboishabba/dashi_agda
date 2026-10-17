@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "prefix": "0xDA51",
+  "header_bits": [16, 4, 44],
+  "type_codes": {"0":"monsterWalk","1":"astNode","2":"monsterProtocol","3":"nestedCID","4":"harmonicPath","5":"shardID","6":"eigenspaceAddr","7":"hauptmodul","8":"atlasEntry"},
+  "type_examples": {"0":"0xDA51000000000000","1":"0xDA51100000000000","2":"0xDA51200000000000","3":"0xDA51300000000000","4":"0xDA51400000000000","5":"0xDA51500000000000","6":"0xDA51600000000000","7":"0xDA51700000000000","8":"0xDA51800000000000"},
+  "atlas_layout_bits": {"level":4,"biome":4,"status":4,"serial":12,"reserved":20},
+  "atlas_addresses": [
+    "0xDA51800100000000","0xDA51800100100000","0xDA51800100200000","0xDA51808100300000","0xDA51818000400000","0xDA51811100500000","0xDA51813000600000","0xDA51813400700000","0xDA51831100800000","0xDA51838000900000","0xDA51853000A00000","0xDA51853000B00000","0xDA51852000C00000","0xDA51851100D00000","0xDA51851100E00000","0xDA51852100F00000","0xDA51852101000000","0xDA51852101100000","0xDA51850101200000","0xDA51850101300000","0xDA51850101400000","0xDA51850301500000","0xDA51850301600000"
+  ],
+  "atlas_vectors": [
+    {"address":"0xDA51800100000000","type":8,"level":0,"biome":0,"status":1,"serial":0,"reserved":0},
+    {"address":"0xDA51800100100000","type":8,"level":0,"biome":0,"status":1,"serial":1,"reserved":0},
+    {"address":"0xDA51800100200000","type":8,"level":0,"biome":0,"status":1,"serial":2,"reserved":0},
+    {"address":"0xDA51808100300000","type":8,"level":0,"biome":8,"status":1,"serial":3,"reserved":0},
+    {"address":"0xDA51818000400000","type":8,"level":1,"biome":8,"status":0,"serial":4,"reserved":0},
+    {"address":"0xDA51811100500000","type":8,"level":1,"biome":1,"status":1,"serial":5,"reserved":0},
+    {"address":"0xDA51813000600000","type":8,"level":1,"biome":3,"status":0,"serial":6,"reserved":0},
+    {"address":"0xDA51813400700000","type":8,"level":1,"biome":3,"status":4,"serial":7,"reserved":0},
+    {"address":"0xDA51831100800000","type":8,"level":3,"biome":1,"status":1,"serial":8,"reserved":0},
+    {"address":"0xDA51838000900000","type":8,"level":3,"biome":8,"status":0,"serial":9,"reserved":0},
+    {"address":"0xDA51853000A00000","type":8,"level":5,"biome":3,"status":0,"serial":10,"reserved":0},
+    {"address":"0xDA51853000B00000","type":8,"level":5,"biome":3,"status":0,"serial":11,"reserved":0},
+    {"address":"0xDA51852000C00000","type":8,"level":5,"biome":2,"status":0,"serial":12,"reserved":0},
+    {"address":"0xDA51851100D00000","type":8,"level":5,"biome":1,"status":1,"serial":13,"reserved":0},
+    {"address":"0xDA51851100E00000","type":8,"level":5,"biome":1,"status":1,"serial":14,"reserved":0},
+    {"address":"0xDA51852100F00000","type":8,"level":5,"biome":2,"status":1,"serial":15,"reserved":0},
+    {"address":"0xDA51852101000000","type":8,"level":5,"biome":2,"status":1,"serial":16,"reserved":0},
+    {"address":"0xDA51852101100000","type":8,"level":5,"biome":2,"status":1,"serial":17,"reserved":0},
+    {"address":"0xDA51850101200000","type":8,"level":5,"biome":0,"status":1,"serial":18,"reserved":0},
+    {"address":"0xDA51850101300000","type":8,"level":5,"biome":0,"status":1,"serial":19,"reserved":0},
+    {"address":"0xDA51850101400000","type":8,"level":5,"biome":0,"status":1,"serial":20,"reserved":0},
+    {"address":"0xDA51850301500000","type":8,"level":5,"biome":0,"status":3,"serial":21,"reserved":0},
+    {"address":"0xDA51850301600000","type":8,"level":5,"biome":0,"status":3,"serial":22,"reserved":0}
+  ],
+  "max_serial_address": "0xDA518584FFF00000",
+  "negative": {"wrong_prefix":"0xCAFE800100000000","unknown_type":"0xDA51900000000000","invalid_level":"0xDA51860100000000","invalid_biome":"0xDA51809100000000","invalid_status":"0xDA51800500000000","nonzero_reserved":"0xDA51800100000001"},
+  "authority": {"address_is_identity_only":true,"provenance_is_separate":true,"status_nibble_is_not_external_authority":true}
+}
