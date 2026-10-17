@@ -134,23 +134,24 @@ policyMechanisticEquifinality =
     Hidden.differentPolicyChoice
 
 ------------------------------------------------------------------------
--- 5. The third-face consumer does not descend through this reduction.  The
---    existing non-descent theorem is the exact reason not to overstate the
---    coarse reduction's consumer scope.
+-- 5. The third-face consumer does not descend through this reduction.  This
+--    proof is stated directly on the reduction encoding, so no duplicate
+--    factorisation record is introduced.
 ------------------------------------------------------------------------
 
 thirdFaceDoesNotDescendThroughReduction :
-  (Tower.T18Coordinates → Tower.T9Coordinates) →
+  (realize : Tower.T18Coordinates → Tower.T9Coordinates) →
   ((state : Hidden.PolicyTaggedT27) →
     Hidden.thirdFaceConsumer state
-    ≡ _ (Reduction.encode t18ConsumerReduction state)) →
+    ≡ realize (Reduction.encode t18ConsumerReduction state)) →
   ⊥
 thirdFaceDoesNotDescendThroughReduction realize commutes =
-  Hidden.policyHiddenThirdFaceDoesNotFactorThroughT18
-    (record
-      { factor = realize
-      ; factors = λ state → sym (commutes state)
-      })
+  Hidden.differentThirdFace
+    (trans
+      (commutes Hidden.firstPolicyState)
+      (trans
+        (cong realize Hidden.sameObservedT18)
+        (sym (commutes Hidden.secondPolicyState))))
 
 ------------------------------------------------------------------------
 -- 6. Promotion boundary.
