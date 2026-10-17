@@ -28,3 +28,23 @@ gaugePrimitiveSourceLeavesRemainOpen = refl
 attributionDoesNotPromoteSiblingSource :
   Primitive.siblingFormalSourceIsLocalAgdaTheorem ≡ false
 attributionDoesNotPromoteSiblingSource = refl
+
+monsterReceiptKeepsSiblingAuthority :
+  Primitive.PrimitiveSourceReceipt.authority Primitive.monsterLinearHardeningReceipt
+  ≡ Primitive.dashiSiblingFormalSource
+monsterReceiptKeepsSiblingAuthority = refl
+
+monsterReceiptIsNotLocalAgdaTheorem :
+  Primitive.PrimitiveSourceReceipt.localAgdaTheorem Primitive.monsterLinearHardeningReceipt
+  ≡ false
+monsterReceiptIsNotLocalAgdaTheorem = refl
+
+gaugeReceiptKeepsSiblingAuthority :
+  Primitive.PrimitiveSourceReceipt.authority Primitive.sourceNativeTerminalReceipt
+  ≡ Primitive.dashiSiblingFormalSource
+gaugeReceiptKeepsSiblingAuthority = refl
+
+gaugeReceiptIsNotLocalAgdaTheorem :
+  Primitive.PrimitiveSourceReceipt.localAgdaTheorem Primitive.sourceNativeTerminalReceipt
+  ≡ false
+gaugeReceiptIsNotLocalAgdaTheorem = refl
