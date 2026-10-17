@@ -15,6 +15,7 @@ import DASHI.Unified.TOEConcreteInhabitantsExact as Inhabitants
 import DASHI.Unified.TOEQuantumInhabitantsExact as QuantumInhabitants
 import DASHI.Unified.TOEGaugeInhabitantsExact as GaugeInhabitants
 import DASHI.Unified.TOEOpenAIMathAcceleratorExact as OpenAI
+import DASHI.Unified.TOEPrimitiveMaxCutExact as Primitive
 
 data TOECandidateStatus : Set where
   candidateConstructed : TOECandidateStatus
@@ -23,26 +24,46 @@ data PhysicalClosureStatus : Set where
   physicalClosureOpen : PhysicalClosureStatus
   physicallyClosed : PhysicalClosureStatus
 
+------------------------------------------------------------------------
+-- Exact primitive blockers after contracting compiler-owned wrappers.
+------------------------------------------------------------------------
+
 data TerminalBlocker : Set where
-  monsterActualSameActionRecognition : TerminalBlocker
-  universalActionRestriction : TerminalBlocker
-  metricVariationStressCommutation : TerminalBlocker
-  eisensteinCubicJacobiSplitFrobeniusHecke : TerminalBlocker
-  quantumSamePhysicalTPSHamiltonian : TerminalBlocker
-  continuumControlledEffectiveLimit : TerminalBlocker
-  calibratedMatterObservable : TerminalBlocker
+  monsterWeightTwoAndLiteralZetaRestriction : TerminalBlocker
+  monsterActualWholeCharacterClassifierInputs : TerminalBlocker
+  monsterActualIsotypicNinetyHomNormalizer1278 : TerminalBlocker
+
+  pinnedYangMillsAndR114R119R122R124R127 : TerminalBlocker
+  pinnedLiteralSelectedQFTTargetIdentity : TerminalBlocker
+  selectedSU2AndCartanFieldSameObject : TerminalBlocker
+  maxwellNormalizationCurvatureAndActionStressAttachments : TerminalBlocker
+  round131AllSectorEinsteinMetricVariation : TerminalBlocker
+
+  eisensteinCubeFibreAndCubicJacobiEvaluation : TerminalBlocker
+  eisensteinSplitFrobeniusAndSameCurveHecke : TerminalBlocker
+
+  physicalHilbertGTPSHamiltonianAttachment : TerminalBlocker
+  quantumMinimizerContinuumAndSameStateRT : TerminalBlocker
+
+  calibratedSameObjectObservable : TerminalBlocker
   heldOutPrediction : TerminalBlocker
   independentReplication : TerminalBlocker
 
 canonicalTerminalBlockers : List TerminalBlocker
 canonicalTerminalBlockers =
-  monsterActualSameActionRecognition
-  ∷ universalActionRestriction
-  ∷ metricVariationStressCommutation
-  ∷ eisensteinCubicJacobiSplitFrobeniusHecke
-  ∷ quantumSamePhysicalTPSHamiltonian
-  ∷ continuumControlledEffectiveLimit
-  ∷ calibratedMatterObservable
+  monsterWeightTwoAndLiteralZetaRestriction
+  ∷ monsterActualWholeCharacterClassifierInputs
+  ∷ monsterActualIsotypicNinetyHomNormalizer1278
+  ∷ pinnedYangMillsAndR114R119R122R124R127
+  ∷ pinnedLiteralSelectedQFTTargetIdentity
+  ∷ selectedSU2AndCartanFieldSameObject
+  ∷ maxwellNormalizationCurvatureAndActionStressAttachments
+  ∷ round131AllSectorEinsteinMetricVariation
+  ∷ eisensteinCubeFibreAndCubicJacobiEvaluation
+  ∷ eisensteinSplitFrobeniusAndSameCurveHecke
+  ∷ physicalHilbertGTPSHamiltonianAttachment
+  ∷ quantumMinimizerContinuumAndSameStateRT
+  ∷ calibratedSameObjectObservable
   ∷ heldOutPrediction
   ∷ independentReplication
   ∷ []
@@ -53,6 +74,7 @@ record TOECandidate : Setω where
     c3RealizationGraph : List C3.C3Edge
     concreteInhabitants : Inhabitants.TOEConcreteInhabitantBundle
     theoremDonorInhabitants : List OpenAI.OpenAITheoremInhabitant
+    primitiveMaxCut : Primitive.CurrentPrimitiveMaxCut
     monsterVertical : Monster.MonsterPhysicalRealizationSocket
     gaugeQFTGRVertical : Gauge.GaugeQFTGRRealization
     arithmeticCMVertical : Arithmetic.ArithmeticCMRealization
@@ -69,6 +91,7 @@ currentTOECandidate =
     ; c3RealizationGraph = C3.canonicalC3Edges
     ; concreteInhabitants = Inhabitants.canonicalTOEConcreteInhabitantBundle
     ; theoremDonorInhabitants = OpenAI.canonicalOpenAITheoremInhabitants
+    ; primitiveMaxCut = Primitive.currentPrimitiveMaxCut
     ; monsterVertical = Monster.canonicalMonsterPhysicalRealization
     ; gaugeQFTGRVertical = Gauge.canonicalGaugeQFTGRRealization
     ; arithmeticCMVertical = Arithmetic.canonicalArithmeticCMRealization
@@ -77,7 +100,7 @@ currentTOECandidate =
     ; retainsConjecturalSockets = true
     ; retainsNegativeKnowledge = true
     ; reading =
-        "One DASHI candidate physical theory with 369/C3 as universal refinement-orientation substrate. Major downstream sectors are genuinely inhabited at their declared authority: selected interacting matter Hamiltonian; R3 Hodge/cross and group-level U1-inside-SU2; Brown-Maclay electromagnetic stress; j=0 CM point action, primary normalization and Frobenius trace; finite g-TPS projector/metric; corrected RT; and a Lambda=0 Jacobson/Einstein benchmark. The exact pinned OpenAI theorem donors are also explicit formal inhabitants, but remain theorem accelerators rather than physical sectors. Physical closure asks for same-object transport among existing physical objects rather than merely constructing examples."
+        "One DASHI candidate physical theory with 369/C3 as universal refinement-orientation substrate. Major downstream sectors are inhabited at their declared authority. The terminal is now primitive-leaf exact: Monster starts at actual weight-two/literal-zeta and actual classifier inputs; selected GRQFT starts at the pinned Yang-Mills object plus R114/R119/R122/R124/R127 and pinned-literal=qftTarget, because Round131/R457 wrapper equalities are compiler-owned; arithmetic starts at cube-fibre/cubic-Jacobi evaluation; quantum starts at the physical Hilbert/g-TPS/Hamiltonian attachment. Sibling source receipts remain attribution/provenance and never become local Agda theorems."
     }
 
 currentTOECandidateStatus : TOECandidateStatus
@@ -139,5 +162,4 @@ currentPhysicalClosureStatus : PhysicalClosureStatus
 currentPhysicalClosureStatus = physicalClosureOpen
 
 terminalMaxCutReading : String
-terminalMaxCutReading =
-  "Partial closure contains concrete matter-Hamiltonian, Hodge/SU2/U1, electromagnetic-stress, CM, finite-gTPS, RT, and Einstein benchmark inhabitants; exact OpenAI theorem donors inhabit a separate accelerator bundle. The remaining cut is genuinely cross-sector: actual Monster W_zeta same-action recognition; same selected recovered-QFT/universal action and field attachments; metric-variation/stress commutation; cubic/Jacobi split Frobenius and same-curve Hecke; physical source-gTPS/Hamiltonian attachment; controlled continuum limits; calibrated same-object observables; held-out prediction; independent replication."
+terminalMaxCutReading = Primitive.primitiveTerminalReading
