@@ -1,0 +1,50 @@
+{
+  "authority": {
+    "formalism": "IIT_4_0_2023",
+    "pyphi_repository": "https://github.com/wmayner/pyphi",
+    "inspected_source_commit": "134a8f31b49db512322465ed3ba5da7194d362fd",
+    "golden_fixture": "test/data/golden/v1/xor_iit4_2023.json",
+    "reference_script": "scripts/iit4_2023_three_node_ces_reference.py",
+    "golden_calibration": {
+      "state": "000",
+      "phi_s": 1.5,
+      "distinction_phis": [0.5, 0.5, 0.5, 1.0],
+      "num_distinctions": 4,
+      "num_relations": 15,
+      "sum_phi_relations": 7.0,
+      "big_phi": 9.5,
+      "passed": true
+    },
+    "boundary": "Source-derived finite numerical reference calibrated exactly against upstream PyPhi golden data; PyPhi remains the external numerical authority. This is not an Agda kernel theorem."
+  },
+  "pairwise_xor": [
+    {"state":"000","phi_s":1.5,"num_distinctions":4,"num_relations":15,"sum_phi_relations":7.0,"big_phi":9.5},
+    {"state":"001","phi_s":0.0,"num_distinctions":0,"num_relations":0,"sum_phi_relations":0.0,"big_phi":0.0},
+    {"state":"010","phi_s":0.0,"num_distinctions":0,"num_relations":0,"sum_phi_relations":0.0,"big_phi":0.0},
+    {"state":"011","phi_s":1.5,"num_distinctions":4,"num_relations":15,"sum_phi_relations":7.0,"big_phi":9.5},
+    {"state":"100","phi_s":0.0,"num_distinctions":0,"num_relations":0,"sum_phi_relations":0.0,"big_phi":0.0},
+    {"state":"101","phi_s":1.5,"num_distinctions":4,"num_relations":15,"sum_phi_relations":7.0,"big_phi":9.5},
+    {"state":"110","phi_s":1.5,"num_distinctions":4,"num_relations":15,"sum_phi_relations":7.0,"big_phi":9.5},
+    {"state":"111","phi_s":0.0,"num_distinctions":0,"num_relations":0,"sum_phi_relations":0.0,"big_phi":0.0}
+  ],
+  "same_binary_fabric_plus_abc": [
+    {"state":"000","phi_s":3.0,"num_distinctions":7,"num_relations":126,"sum_phi_distinctions":5.122556248918266,"sum_phi_relations":27.07317913758003,"big_phi":32.1957353864983},
+    {"state":"001","phi_s":0.41503749927884376,"num_distinctions":6,"num_relations":60,"sum_phi_distinctions":2.819133372762361,"sum_phi_relations":8.900295905220212,"big_phi":11.719429277982572},
+    {"state":"010","phi_s":0.0,"num_distinctions":0,"num_relations":0,"sum_phi_distinctions":0.0,"sum_phi_relations":0.0,"big_phi":0.0},
+    {"state":"011","phi_s":0.41503749927884376,"num_distinctions":4,"num_relations":11,"sum_phi_distinctions":1.2335875613070095,"sum_phi_relations":1.9809523999647147,"big_phi":3.2145399612717243},
+    {"state":"100","phi_s":0.0,"num_distinctions":0,"num_relations":0,"sum_phi_distinctions":0.0,"sum_phi_relations":0.0,"big_phi":0.0},
+    {"state":"101","phi_s":0.41503749927884376,"num_distinctions":4,"num_relations":11,"sum_phi_distinctions":1.2335875613070095,"sum_phi_relations":1.9809523999647147,"big_phi":3.2145399612717243},
+    {"state":"110","phi_s":1.5,"num_distinctions":4,"num_relations":15,"sum_phi_distinctions":2.207518749639422,"sum_phi_relations":4.855137497355761,"big_phi":7.062656246995183},
+    {"state":"111","phi_s":0.0,"num_distinctions":0,"num_relations":0,"sum_phi_distinctions":0.0,"sum_phi_relations":0.0,"big_phi":0.0}
+  ],
+  "matched_collision_result": {
+    "state": "110",
+    "pairwise_phi_s": 1.5,
+    "triadic_phi_s": 1.5,
+    "pairwise_big_phi": 9.5,
+    "triadic_big_phi": 7.062656246995183,
+    "full_structure_resolves_scalar_collision": true,
+    "remaining_scalar_collision_states_not_resolved_by_structure": ["010", "100", "111"],
+    "reason": "those states have null cause-effect structures in both deterministic models under this reference"
+  }
+}
