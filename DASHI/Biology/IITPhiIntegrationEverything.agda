@@ -32,6 +32,7 @@ import DASHI.Biology.IITHigherOrderGluingDiscriminationExact
 import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact
 import DASHI.Biology.IITFaceAwareTriadicCausalPairExact
 import DASHI.Biology.IITFaceAwareTriadicGridSynthesisWeldExact
+import DASHI.Biology.IITFaceAwarePyPhiGoldenCalibrationExact
 import DASHI.Biology.IITCyclotomicFourierObserverExact
 import DASHI.Biology.IITBalancedTernary369HierarchyExact
 import DASHI.Biology.IIT369PantsGluingBridgeExact
