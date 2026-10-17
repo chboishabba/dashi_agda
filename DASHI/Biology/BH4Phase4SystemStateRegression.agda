@@ -8,6 +8,7 @@ import DASHI.Biology.BH4CompartmentKineticStateExact as Parameters
 import DASHI.Biology.BH4QuantitativeAcquisitionExact as Acquisition
 import DASHI.Biology.BH4ExecutedSABIOReceiptExact as SABIO
 import DASHI.Biology.BH4ExecutedSABIOAdjudicationReceiptExact as SABIOAdj
+import DASHI.Biology.BH4FluxCandidateRankingExact as Ranking
 import DASHI.Biology.BH4MissingReactionKineticsEvidenceExact as Gap
 import DASHI.Biology.BH4ExecutedSIFTSReceiptExact as SIFTS
 import DASHI.Biology.BH4IntervalFluxSolverExact as Interval
@@ -63,8 +64,30 @@ sabioAdjudicationMappedEightHundredSeventyFiveCandidates = refl
 sabioAdjudicationCoveredTenFiniteReactions : SABIOAdj.executedFiniteReactionCoverage ≡ 10
 sabioAdjudicationCoveredTenFiniteReactions = refl
 
+sabioAdjudicationLeavesOnlyFortyFiveUnclassified : SABIOAdj.executedUnclassifiedCount ≡ 45
+sabioAdjudicationLeavesOnlyFortyFiveUnclassified = refl
+
+sabioAdjudicationClassifiesAllNineHundredThirtyTwo :
+  SABIOAdj.executedConcentrationLikeCount + SABIOAdj.executedAffinityLikeCount
+  + SABIOAdj.executedRateLikeCount + SABIOAdj.executedInhibitoryLikeCount
+  + SABIOAdj.executedCatalyticConstantLikeCount + SABIOAdj.executedUnclassifiedCount
+  ≡ 932
+sabioAdjudicationClassifiesAllNineHundredThirtyTwo = refl
+
 sabioCandidateCoverageStillDoesNotPayFlux : SABIOAdj.ExecutedSABIOAdjudicationBoundary.candidateCoverageCreatesFluxPayment SABIOAdj.canonicalExecutedSABIOAdjudicationBoundary ≡ false
 sabioCandidateCoverageStillDoesNotPayFlux = refl
+
+sabioParameterKindStillDoesNotPayFlux : SABIOAdj.ExecutedSABIOAdjudicationBoundary.parameterKindCreatesFluxPayment SABIOAdj.canonicalExecutedSABIOAdjudicationBoundary ≡ false
+sabioParameterKindStillDoesNotPayFlux = refl
+
+rankingDoesNotCreateFluxBound : Ranking.BH4FluxCandidateRankingBoundary.rankCreatesFluxBound Ranking.canonicalBH4FluxCandidateRankingBoundary ≡ false
+rankingDoesNotCreateFluxBound = refl
+
+catalyticConstantNeedsMoreThanRank : Ranking.BH4FluxCandidateRankingBoundary.catalyticConstantCreatesFluxWithoutEnzymeAbundance Ranking.canonicalBH4FluxCandidateRankingBoundary ≡ false
+catalyticConstantNeedsMoreThanRank = refl
+
+missingRankingGateDefaultsFalse : Ranking.BH4FluxCandidateRankingBoundary.missingPaymentGateDefaultsTrue Ranking.canonicalBH4FluxCandidateRankingBoundary ≡ false
+missingRankingGateDefaultsFalse = refl
 
 primaryGapKineticsStillDoNotPayNetworkFlux : Gap.MissingReactionKineticsBoundary.primaryKineticsCreatesNetworkFluxBound Gap.canonicalMissingReactionKineticsBoundary ≡ false
 primaryGapKineticsStillDoNotPayNetworkFlux = refl
@@ -131,6 +154,12 @@ sabioParameterCountIsPromoted = refl
 
 sabioFiniteCoverageIsTenOfTwelve : Roadmap.sabioFiniteReactionCandidateCoverage ≡ 10
 sabioFiniteCoverageIsTenOfTwelve = refl
+
+sabioUnclassifiedCountIsFortyFive : Roadmap.sabioUnclassifiedParameterCandidates ≡ 45
+sabioUnclassifiedCountIsFortyFive = refl
+
+fluxCandidateRankingToolIsReady : Roadmap.fluxCandidateRankingToolReady ≡ true
+fluxCandidateRankingToolIsReady = refl
 
 underdeterminedDoesNotMeanMechanismFalse : Roadmap.BH4Phase4Boundary.underdeterminedMeansMechanismFalse Roadmap.canonicalBH4Phase4Boundary ≡ false
 underdeterminedDoesNotMeanMechanismFalse = refl
