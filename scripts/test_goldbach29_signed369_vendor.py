@@ -12,7 +12,9 @@ VENDOR29_MAIN = VENDOR_ROOT / "428e2366045cb0b728115777df8bef14318a3bcf" / "Gold
 VENDOR29_LOOPS = VENDOR_ROOT / "428e2366045cb0b728115777df8bef14318a3bcf" / "Goldbach29" / "Loops.lean"
 VENDOR_NOTICE = VENDOR_ROOT / "NOTICE.md"
 BRIDGE = ROOT / "DASHI" / "ComputerScience" / "Goldbach29Signed369VendorBridgeExact.agda"
+SOURCE_ATTACH = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29VendoredSourceAttachmentExact.agda"
 MACRO = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29SuccessMacroExact.agda"
+TAIL = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29TailWeakSimulationExact.agda"
 CHECKPOINT = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29CheckpointMachineExact.agda"
 RECEIPT = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29ReductionReceiptExact.agda"
 SEMANTICS = ROOT / "DASHI" / "ComputerScience" / "Goldbach29ExternalHaltingSemanticsExact.agda"
@@ -59,6 +61,9 @@ def test_vendored_upstream_blobs_are_exact_and_licensed():
     assert "Mike Dupont / meta-introspector" in notice
     assert "AGPL-3.0" in notice
     assert "Main.lean and Loops.lean are the same upstream blob" in notice
+    license_notice = VENDOR_LICENSE.read_text()
+    assert "0ad25db4bd1d86c452db3f9602ccdbe172438f52" in license_notice
+    assert "does not claim to\nbe byte-identical" in license_notice
 
 
 def test_bridge_reuses_signed369_and_descent_owners():
@@ -70,6 +75,16 @@ def test_bridge_reuses_signed369_and_descent_owners():
     assert "externalGoldbach30FractionCount" in text
     assert "fineStateNeedNotEqualCoarseObserver" in text
     assert "goldbachReductionConsumerBoundary" in text
+
+
+def test_source_attachment_is_byte_exact_but_proof_transport_fail_closed():
+    text = SOURCE_ATTACH.read_text()
+    assert "exactProgramSourceObjectsVendored = true" in text
+    assert "sourceDrivenFractranReplayAvailable = true" in text
+    assert "semanticMainLoopsDuplicateDetected = true" in text
+    assert "semanticBuildAuthorityPaid = false" in text
+    assert "crossProverProofTransportPaid = false" in text
+    assert "concreteFractranCheckpointFormalAttachmentPaid = false" in text
 
 
 def test_success_path_exposes_static_dynamic_tradeoff():
@@ -101,6 +116,15 @@ def test_exact_success_macro_is_consumer_preserving():
     assert "fTail" not in text
 
 
+def test_tail_weak_simulation_is_local_only():
+    text = TAIL.read_text()
+    assert "oldToNewPhase" in text
+    assert "oldTransferPairMatchesNewTransferPair" in text
+    assert "oldTerminalStepMatchesThreeNewSteps" in text
+    assert "weakTailConsumerPreserved" in text
+    assert "wholeMachineWeakBisimulationPaid = false" in text
+
+
 def test_checkpoint_machine_proves_all_finite_consumer_traces_equal():
     text = CHECKPOINT.read_text()
     assert "SharedSearchKernel" in text
@@ -113,25 +137,27 @@ def test_checkpoint_machine_proves_all_finite_consumer_traces_equal():
     assert "sourceConcreteFractranAttachmentPaid = false" in text
 
 
-def test_executable_replay_has_guard_and_checkpoint_regressions():
+def test_executable_replay_has_guard_checkpoint_and_source_regressions():
     text = REPLAY.read_text()
     assert "verify_macro_grid" in text
     assert "verify_checkpoint_replay" in text
     assert "arbitrary f>1" in text
     assert "s>0 selects restoration" in text
-    assert "segments=200" in text
     assert "total29 - total30 == successes" in text
     assert "VENDOR29_PROGRAM" in text
     assert "VENDOR30_PROGRAM" in text
     assert "extract_fractran_program" in text
     assert "verify_vendored_fraction_programs" in text
+    assert "verify_direct_fractran_step_bridge" in text
 
 
-def test_external_halting_semantics_is_cross_prover_only():
+def test_external_halting_semantics_is_text_only_at_pinned_revision():
     text = SEMANTICS.read_text()
     assert "goldbachProg_halts_iff" in text
-    assert "importedFormalTheoremSource" in text
-    assert "externalGoldbach29HaltingSemanticsSourcePaid" in text
+    assert "sourceVisibleTheoremText" in text
+    assert "externalGoldbach29HaltingTheoremTextPresent = true" in text
+    assert "externalGoldbach29MainLoopsSameBlob = true" in text
+    assert "externalGoldbach29SemanticTreeBuildAuthorityPaid = false" in text
     assert "agdaGoldbach29HaltingSemanticsPaid = false" in text
     assert "goldbachConjectureProvedByUpstreamTheorem = false" in text
 
@@ -148,12 +174,14 @@ def test_goldbach30_commit_claim_is_not_promoted_without_source_file():
     assert "goldbach30KnownLoopsPathHasCommitHistory = false" in text
 
 
-def test_halting_compiler_reduces_final_leaf_to_goldbach30_attachment():
+def test_halting_compiler_requires_verified_external_authority():
     text = HALTING.read_text()
     assert "LogicalIff" in text
     assert "HaltingConsumerAttachment" in text
     assert "sameCounterexampleConsumerImpliesHaltingEquivalence" in text
+    assert "goldbach29ExternalTheoremTextAvailable" in text
     assert "goldbach29ExternalSourceCanFillRightHandRole" in text
+    assert "externalGoldbach29SemanticTreeBuildAuthorityPaid" in text
     assert "goldbach30HaltingAttachmentPaid = false" in text
 
 
@@ -168,7 +196,7 @@ def test_sota_attribution_keeps_deepmind_as_external_precedent():
     assert "staticCompressionCanIncreaseRuntimeHasIndependentPrecedent = true" in text
 
 
-def test_reduction_receipt_records_pareto_cut():
+def test_reduction_receipt_records_separate_authority_currencies():
     text = RECEIPT.read_text()
     assert "Goldbach30To29ReductionReceipt" in text
     assert "commonRulePrefixCount" in text
@@ -176,10 +204,13 @@ def test_reduction_receipt_records_pareto_cut():
     assert "controlStateDeltaPaid" in text
     assert "successConsumerPreservationPaid" in text
     assert "successExecutionPenaltyPaid" in text
-    assert "externalGoldbach29HaltingSemanticsSourcePaidFlag" in text
+    assert "exactProgramSourceObjectsVendoredFlag" in text
+    assert "tailWeakSimulationPaidFlag" in text
+    assert "sourceDrivenFractranReplayAvailableFlag" in text
+    assert "externalGoldbach29SemanticBuildAuthorityPaidFlag" in text
+    assert "crossProverProofTransportPaidFlag" in text
     assert "checkpointHaltingEquivalencePaidFlag" in text
     assert "sourceConcreteFractranAttachmentPaidFlag" in text
-    assert "wholeMachineReachableWeakBisimulationPaid" in text
     assert "wholeMachineReachableWeakBisimulationPaid = false" in text
 
 
@@ -203,7 +234,9 @@ def test_aggregate_and_workflow_own_the_new_surface():
     aggregate = AGGREGATE.read_text()
     workflow = WORKFLOW.read_text()
     assert "Goldbach29Signed369VendorBridgeExact" in aggregate
+    assert "Goldbach30To29VendoredSourceAttachmentExact" in aggregate
     assert "Goldbach30To29SuccessMacroExact" in aggregate
+    assert "Goldbach30To29TailWeakSimulationExact" in aggregate
     assert "Goldbach30To29CheckpointMachineExact" in aggregate
     assert "Goldbach30To29ReductionReceiptExact" in aggregate
     assert "Goldbach29ExternalHaltingSemanticsExact" in aggregate
@@ -211,8 +244,8 @@ def test_aggregate_and_workflow_own_the_new_surface():
     assert "Goldbach30To29HaltingConsumerCompilerExact" in aggregate
     assert "GoldbachMachineReductionSOTAExact" in aggregate
     assert "Goldbach30To29VisualizationConsumerExact" in aggregate
-    assert "Goldbach30To29CheckpointMachineExact.agda" in workflow
+    assert "vendor/meta-introspector-aok/**" in workflow
     assert "test_goldbach29_signed369_vendor.py" in workflow
+    assert "test_goldbach_vendor_attachment.py" in workflow
     assert "verify_goldbach30_29_replay.py" in workflow
-    assert "Replay Goldbach30-to-29 checkpoint equivalence" in workflow
     assert "EverythingGoldbach29Signed369VendorExact.agda" in workflow
