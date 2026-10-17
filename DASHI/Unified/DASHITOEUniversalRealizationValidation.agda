@@ -6,6 +6,8 @@ open import Data.List.Base using (List; _∷_; [])
 open import DASHI.Unified.DASHIUniversalTheoryExact
 open import DASHI.Unified.TOESectorRealizationExact
 import DASHI.Unified.TOE369C3RealizationGraphExact as C3
+import DASHI.Unified.TOEConcreteInhabitantsExact as Inhabitants
+import DASHI.Unified.TOEQuantumInhabitantsExact as QuantumInhabitants
 import DASHI.Unified.TOEMonsterPhysicalRealizationExact as Monster
 import DASHI.Unified.TOEGaugeQFTGRRealizationExact as Gauge
 import DASHI.Unified.TOEArithmeticCMRealizationExact as Arithmetic
@@ -64,6 +66,20 @@ arithmeticHigherGradeNeedsSameCurveHecke = refl
 matterHamiltonianAttachmentRemainsOpen :
   Matter.quantumMatterGrade ≡ sharedCarrier
 matterHamiltonianAttachmentRemainsOpen = refl
+
+atomicMatterInhabitantIsNative :
+  Inhabitants.numerator Inhabitants.atomicP2CoulombEnergy ≡ 21
+atomicMatterInhabitantIsNative = refl
+
+finiteGTPSProjectorIsFormalInhabitant :
+  Inhabitants.authority QuantumInhabitants.lean76GTPSProjectionInhabitant
+  ≡ Inhabitants.importedFormalInhabitant
+finiteGTPSProjectorIsFormalInhabitant = refl
+
+finiteGTPSMetricIsFormalInhabitant :
+  Inhabitants.authority QuantumInhabitants.lean76GTPSMetricInhabitant
+  ≡ Inhabitants.importedFormalInhabitant
+finiteGTPSMetricIsFormalInhabitant = refl
 
 openAIDoesNotBecomeAgdaProof :
   OpenAI.openAIMaxAuthority ≡ OpenAI.importedFormalSource
