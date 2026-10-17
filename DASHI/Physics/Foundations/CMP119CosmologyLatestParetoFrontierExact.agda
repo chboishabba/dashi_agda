@@ -2,39 +2,32 @@
 module DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact where
 
 ------------------------------------------------------------------------
--- LIVE PARETO FRONTIER / 2026-10-08 / OVERLAY AA.
+-- LIVE PARETO FRONTIER / 2026-10-17 / OVERLAY AA + EXACT S1 AST.
 --
--- The compiler/adapter reduction is complete.  Four physical/source packages
+-- The compiler/adapter reduction is complete. Four physical/source packages
 -- remain, with zero representation-only same-object debt.
 --
--- S1  one literal active regular-E/localization form witness on the selected
---     beta-driven source.  Published-B background, ten-slot tangent carrier and
---     CMP109/116 continuation are compiler-owned; the full quantitative CMP122
---     theorem package is not a premise.
+-- S1 is now frozen to an exact typed open lemma.  At each actual active scale
+-- the entire unproved payload has exactly four coordinates: literal E_k,
+-- localized component family, localized CMP116 activities, and the exact
+-- localized-composite-sum equality.  No all-Nat extension, quantitative CMP122
+-- package, Background equality, or ten tangent choices are hidden inside S1.
 --
--- S3a ONE selected physical-F2 marked-source package.  The R129 marked source
---     and Local-C operator are chosen source-first, so no post-hoc equalities
---     remain.  Internally this package must identify the literal differentiated
---     CMP116 F2 coefficients, prove their cutoff/volume/scale-uniform weighted
---     coefficient-energy bound, and carry the physical gauge/local semantics.
---     These are fields/subclaims of one package, not independent projects.
+-- S3a ONE selected physical-F2 marked-source package. The R129 marked source
+-- and Local-C operator are chosen source-first, so no post-hoc equalities remain.
 --
--- S2  direct same-object application of the imported renormalized Hilbert/Weyl
---     trace-anomaly authority to the selected S3a F2.  Genuine equalities are
---     selected F2 = renormalized F2 and Local-C Hilbert trace = renormalized
---     trace.  No independent Local-C F2 scalar and no fresh anomaly theorem.
+-- S2 direct same-object application of imported renormalized Hilbert/Weyl
+-- trace-anomaly authority to the selected S3a F2.
 --
 -- S3b mass-exact Haar-weighted refinement-indexed Gate4 realization of
---     Eq.(1.71).  Single-slice exact quadrature and mass discrepancy are not
---     premises.  Remaining source/analysis is one weighted tagged-partition /
---     oscillation package; Lipschitz + shrinking mesh is the preferred producer
---     for vanishing oscillation.
+-- Eq.(1.71), with one weighted tagged-partition / oscillation package.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261008AAExact as AA
+import DASHI.Physics.Foundations.CMP119CosmologyS1LiteralActiveRegularEASTExact as S1AST
 
 remainingModelSpecificSourcePackageCount : Nat
 remainingModelSpecificSourcePackageCount = AA.remainingPreferredPackageCount
@@ -68,6 +61,23 @@ s1FullTheorem1QuantitativePackageStillRequired =
 
 s1PublishedPotentialCovarianceNeedsFreshProof : Bool
 s1PublishedPotentialCovarianceNeedsFreshProof = false
+
+s1ExactUnprovenInvariantCount : Nat
+s1ExactUnprovenInvariantCount = S1AST.unprovenInvariantCount
+
+s1InactiveScaleExtensionStillOpen : Bool
+s1InactiveScaleExtensionStillOpen = S1AST.requiresInactiveScaleExtension
+
+s1PostHocBackgroundEqualityStillOpen : Bool
+s1PostHocBackgroundEqualityStillOpen = S1AST.requiresPostHocBackgroundEquality
+
+s1IndependentTenTangentChoicesStillOpen : Bool
+s1IndependentTenTangentChoicesStillOpen =
+  S1AST.requiresIndependentTenTangentChoices
+
+s1ASTToRound246CompilerClosed : Bool
+s1ASTToRound246CompilerClosed =
+  S1AST.astCompilesToActiveRegularESection2FormWitness
 
 ------------------------------------------------------------------------
 -- S2
@@ -165,8 +175,6 @@ s3bWeightedOscillationVanishesStillOpen : Bool
 s3bWeightedOscillationVanishesStillOpen =
   AA.s3bWeightedOscillationVanishesRequired
 
--- Compatibility names for older consumers.  On AA these are producer details
--- within the one S3b package, not separate terminal projects.
 s3bLiteralEquation171FiniteRealizationStillOpen : Bool
 s3bLiteralEquation171FiniteRealizationStillOpen =
   AA.s3bWeightedTaggedPartitionFamilyRequired
