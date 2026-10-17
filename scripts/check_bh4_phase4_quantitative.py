@@ -61,7 +61,7 @@ for token in [
 ]:
     assert token in text["runner"], f"missing one-command runner token: {token}"
 
-for token in ["56 coordinates", "S*v + e = 0", "SABIO-RK", "PDBe/SIFTS", "check_kitzerow_bh4_priority_all.py"]:
+for token in ["56 coordinates", "S*v + e = 0", "SABIO-RK", "PDBe/SIFTS", "bh4-phase4-maxcut-summary.json", "check_kitzerow_bh4_priority_all.py"]:
     assert token in text["runbook"], f"missing runbook token: {token}"
 
 for root_name in ["phase4_checker", "unified"]:
