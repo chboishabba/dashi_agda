@@ -29,8 +29,17 @@ artworkBoundaryRegression = Lombardi.artworkRepresentationDoesNotCreateHistorica
 sharedMethodBoundaryRegression : Method.SharedEvidenceMethodCreatesSharedHistoricalNetwork → ⊥
 sharedMethodBoundaryRegression = Method.sharedEvidenceMethodDoesNotCreateSharedHistoricalNetwork
 
+fineCollisionReallyDistinct : Lombardi.fineConfirmedDirect ≡ Lombardi.fineContestedArtwork → ⊥
+fineCollisionReallyDistinct = Lombardi.fineStatesDiffer
+
+fineCollisionReallyCoarseEqual : Lombardi.project Lombardi.fineConfirmedDirect ≡ Lombardi.project Lombardi.fineContestedArtwork
+fineCollisionReallyCoarseEqual = Lombardi.coarseCollision
+
 sourceAtlasHasNPG : Sources.SourceIdentity
 sourceAtlasHasNPG = Sources.npgMontefioreRothschildGoldRush
+
+sourceAtlasHasADB : Sources.SourceIdentity
+sourceAtlasHasADB = Sources.adbPeopleAustraliaMontefiore
 
 sourceAtlasHasNAA : Sources.SourceIdentity
 sourceAtlasHasNAA = Sources.naaMaralingaNuclearTests
