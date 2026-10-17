@@ -11,6 +11,9 @@ import DASHI.Core.AttributedSourceCore as Source
 primaryFiledCompanyDisclosure : Source.SourceKind
 primaryFiledCompanyDisclosure = Source.namedSourceKind "company disclosure filed with SEC"
 
+primaryTransactionFiling : Source.SourceKind
+primaryTransactionFiling = Source.namedSourceKind "material definitive agreement summary filed with SEC"
+
 nebiusFiledFinancing : Source.AttributedSource
 nebiusFiledFinancing = Source.mkNoDOISource
   "Nebius Group N.V."
@@ -36,12 +39,12 @@ irenFiledMicrosoftContract = Source.mkNoDOISource
 sharonAIFiledFacility : Source.AttributedSource
 sharonAIFiledFacility = Source.mkNoDOISource
   "SharonAI Holdings Inc."
-  "Sharon AI Enters Into GPU-Backed Debt Facility, Expanding Funding Flexibility for AI Factory Deployments"
-  "SEC-filed company exhibit"
+  "Form 8-K Item 1.01 — syndicated GPU-backed facility agreement"
+  "SEC-filed material definitive agreement summary"
   "2026-10-01"
-  "https://www.sec.gov/Archives/edgar/data/2068385/000149315226045368/ex99-1.htm"
-  primaryFiledCompanyDisclosure
-  "Sharon AI disclosed a 356 million dollar committed senior secured GPU-backed SPV debt facility at a fixed 9.95 percent rate, secured against GPUs and associated cash flows, with proceeds supporting compute infrastructure dedicated to customer contracts."
+  "https://www.sec.gov/Archives/edgar/data/2068385/000149315226045368/form8-k.htm"
+  primaryTransactionFiling
+  "Sharon AI disclosed aggregate senior secured term facilities of up to 356 million dollars used for GPU/compute infrastructure supporting a customer contract. The transaction filing says Facility A initially bears 7.25 percent cash-pay interest and steps up to as much as 9.95 percent on specified dates. GPUs/equipment and associated customer-contract cash flows support the secured structure."
   Source.publicAttribution
 
 aibNebiusFiledDevelopment : Source.AttributedSource
@@ -86,7 +89,9 @@ record InfrastructureFinanceLayerReplication : Set where
     developerCustomerPrepayment : Bool
     projectDebtPlusPreferredEquity : Bool
     contractCashCollateralOrFunding : Bool
-    fixedCashInterestBasisPoints : Nat
+    selectedInitialCashInterestBasisPoints : Nat
+    selectedMaxCashInterestBasisPoints : Nat
+    steppedInterestSchedule : Bool
     realisedProjectReturnPaid : Bool
     terminalDemandPaid : Bool
     circularityPaid : Bool
@@ -95,11 +100,11 @@ open InfrastructureFinanceLayerReplication public
 
 sharonAIReplication : InfrastructureFinanceLayerReplication
 sharonAIReplication = infrastructure-finance-layer-replication
-  "Sharon AI" true false false true 995 false false false
+  "Sharon AI" true false false true 725 995 true false false false
 
 aibNebiusDeveloperReplication : InfrastructureFinanceLayerReplication
 aibNebiusDeveloperReplication = infrastructure-finance-layer-replication
-  "AIB/Nebius 50 MW developer layer" false true true true 0 false false false
+  "AIB/Nebius 50 MW developer layer" false true true true 0 0 false false false false
 
 nebiusContractBackedDebtPaid : gpuAndContractCashBackDebt nebiusReplication ≡ true
 nebiusContractBackedDebtPaid = refl
@@ -109,6 +114,12 @@ irenPrepaymentPaid = refl
 
 sharonGPUBackedSPVDebtPaid : gpuBackedSPVDebt sharonAIReplication ≡ true
 sharonGPUBackedSPVDebtPaid = refl
+
+sharonSelectedRateStepsPaid :
+  (selectedInitialCashInterestBasisPoints sharonAIReplication ≡ 725) ×
+  (selectedMaxCashInterestBasisPoints sharonAIReplication ≡ 995) ×
+  (steppedInterestSchedule sharonAIReplication ≡ true)
+sharonSelectedRateStepsPaid = refl , refl , refl
 
 aibDeveloperPrepaymentPaid : developerCustomerPrepayment aibNebiusDeveloperReplication ≡ true
 aibDeveloperPrepaymentPaid = refl
@@ -126,7 +137,6 @@ crossLayerMechanismReplication : Bool
 crossLayerMechanismReplication = true
 
 crossLayerReplicationPaid : crossLayerMechanismReplication ≡ true
-crossLayerReplicationPaid = refl
 
 data MechanismReplicationImpliesCircularFinancingPermission : Set where
 data ContractCoverageImpliesPositiveReturnPermission : Set where
@@ -147,4 +157,4 @@ crossLayerReplicationDoesNotCreateCommonEconomics ()
 
 boundary : String
 boundary =
-  "Primary SEC-filed company disclosures now show customer/contract-linked infrastructure financing replicated across several layers rather than only across neoclouds. Nebius disclosed secured debt backed by GPU infrastructure and contracted cash flows from an investment-grade customer; IREN disclosed Microsoft tranche prepayments before delivery; Sharon AI disclosed a GPU-backed SPV facility secured on GPUs and associated customer cash flows; and AIB disclosed a Nebius data-centre project expected to use customer prepayments plus project debt and preferred equity to fund much of development. This pays cross-company and cross-layer replication of financing mechanisms only. Filed company statements retain authority for their disclosed terms; DASHI owns the typed comparison. Mechanism replication does not establish common project economics, terminal demand, circular financing, fraud, distress or a bubble."
+  "Primary SEC-filed disclosures now show customer/contract-linked infrastructure financing replicated across several layers rather than only across neoclouds. Nebius disclosed secured debt backed by GPU infrastructure and contracted cash flows from an investment-grade customer; IREN disclosed Microsoft tranche prepayments before delivery; Sharon AI's transaction filing disclosed GPU/compute-backed secured facilities supporting a customer contract, with selected Facility A pricing beginning at 7.25 percent and stepping up to 9.95 percent rather than one universal fixed 9.95-percent facility rate; and AIB disclosed a Nebius data-centre project expected to use customer prepayments plus project debt and preferred equity to fund much of development. This pays cross-company and cross-layer replication of financing mechanisms only. Transaction filings retain authority for legal/economic terms; company exhibits retain authority only for their own summaries/forecasts; DASHI owns the typed comparison. Mechanism replication does not establish common project economics, terminal demand, circular financing, fraud, distress or a bubble."
