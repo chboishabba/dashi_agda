@@ -13,7 +13,7 @@ import DASHI.Reasoning.EvidenceDesignAdmissibilityExact as Evidence
 --
 -- Reusable obligation-relative schemas for common causal-identification routes.
 -- These are not a universal hierarchy of study designs and none manufactures a
--- causal effect by itself.  Each schema states which design-specific receipts
+-- causal effect by itself. Each schema states which design-specific receipts
 -- must be paid before the generic multiscale causal router may use that family
 -- as its IdentificationAssumption.
 ------------------------------------------------------------------------
@@ -22,6 +22,7 @@ data CausalIdentificationFamily : Set where
   randomisedPerturbation : CausalIdentificationFamily
   adjustedObservationalComparison : CausalIdentificationFamily
   longitudinalBeforeAfter : CausalIdentificationFamily
+  instrumentalNaturalExperiment : CausalIdentificationFamily
   mechanisticMediation : CausalIdentificationFamily
   lineageGeneticPerturbation : CausalIdentificationFamily
   neuralPerturbationReadout : CausalIdentificationFamily
@@ -49,9 +50,6 @@ open RandomisedPerturbationReceipt public
 
 ------------------------------------------------------------------------
 -- Adjusted observational comparison.
---
--- Measured-covariate adjustment is explicit, but residual/unmeasured
--- confounding is not declared absent merely because adjustment was performed.
 ------------------------------------------------------------------------
 
 record AdjustedObservationalReceipt : Set where
@@ -73,9 +71,6 @@ open AdjustedObservationalReceipt public
 
 ------------------------------------------------------------------------
 -- Longitudinal before/after.
---
--- Repeated observation pays chronology and within-lineage/subject continuity,
--- not causation by temporal order alone.
 ------------------------------------------------------------------------
 
 record LongitudinalBeforeAfterReceipt : Set where
@@ -96,10 +91,38 @@ record LongitudinalBeforeAfterReceipt : Set where
 open LongitudinalBeforeAfterReceipt public
 
 ------------------------------------------------------------------------
--- Mechanistic mediation.
+-- Instrumental-variable / natural-experiment family.
 --
--- Source->mediator and mediator->target must be separately supported; a mediator
--- correlated with both endpoints is not automatically a causal mechanism.
+-- A naturally varying instrument may identify a bounded causal contrast only
+-- when relevance, exogeneity/as-if-random variation and exclusion are all
+-- explicitly argued, with spillover/interference and scope retained rather than
+-- silently erased. This owner does not claim that any proposed instrument pays
+-- those obligations merely because it precedes the exposure or predicts it.
+------------------------------------------------------------------------
+
+record InstrumentalNaturalExperimentReceipt : Set where
+  constructor instrumental-natural-experiment-receipt
+  field
+    instrumentReference exposureReference outcomeReference : String
+    relevanceReference exogeneityReference exclusionReference : String
+    spilloverReference scopeReference : String
+
+    instrumentRelevanceSupported : Bool
+    instrumentRelevanceSupportedIsTrue : instrumentRelevanceSupported ≡ true
+    exogeneityOrAsIfRandomVariationArgued : Bool
+    exogeneityOrAsIfRandomVariationArguedIsTrue :
+      exogeneityOrAsIfRandomVariationArgued ≡ true
+    exclusionRestrictionArgued : Bool
+    exclusionRestrictionArguedIsTrue : exclusionRestrictionArgued ≡ true
+    spilloverOrInterferenceAudited : Bool
+    spilloverOrInterferenceAuditedIsTrue : spilloverOrInterferenceAudited ≡ true
+    estimandScopeDeclared : Bool
+    estimandScopeDeclaredIsTrue : estimandScopeDeclared ≡ true
+
+open InstrumentalNaturalExperimentReceipt public
+
+------------------------------------------------------------------------
+-- Mechanistic mediation.
 ------------------------------------------------------------------------
 
 record MechanisticMediationReceipt : Set where
@@ -142,10 +165,6 @@ open LineageGeneticPerturbationReceipt public
 
 ------------------------------------------------------------------------
 -- Neural perturbation plus behavioural/memory readout.
---
--- Neural manipulation, observation modality, effector/body path and cognitive
--- readout are retained as separate coordinates.  No neural measurement is
--- promoted to thought/intent identity.
 ------------------------------------------------------------------------
 
 record NeuralPerturbationReadoutReceipt : Set where
@@ -183,6 +202,10 @@ data IdentificationFamilyReceipt : CausalIdentificationFamily → Set where
     LongitudinalBeforeAfterReceipt →
     IdentificationFamilyReceipt longitudinalBeforeAfter
 
+  instrumentalNaturalExperimentReceipt :
+    InstrumentalNaturalExperimentReceipt →
+    IdentificationFamilyReceipt instrumentalNaturalExperiment
+
   mediationReceipt :
     MechanisticMediationReceipt →
     IdentificationFamilyReceipt mechanisticMediation
@@ -197,10 +220,6 @@ data IdentificationFamilyReceipt : CausalIdentificationFamily → Set where
 
 ------------------------------------------------------------------------
 -- Evidence-design gate.
---
--- A family receipt must also be admissible for the exact assertion obligation.
--- This reuses the canonical relational evidence-admissibility owner rather than
--- defining a universal ranking among families.
 ------------------------------------------------------------------------
 
 record IdentificationEvidenceGate
@@ -218,11 +237,6 @@ open IdentificationEvidenceGate public
 
 ------------------------------------------------------------------------
 -- Installation into one generic causal design.
---
--- The design's abstract IdentificationAssumption is required to be exactly the
--- selected family receipt type.  Thus downstream code cannot silently relabel
--- an observational receipt as randomisation, mediation, genetic perturbation,
--- etc.
 ------------------------------------------------------------------------
 
 record CrossLevelIdentificationInstallation
@@ -261,6 +275,10 @@ data AdjustmentMeansNoUnmeasuredConfoundingPermission : Set where
 
 data LongitudinalMeansCausationPermission : Set where
 
+data InstrumentRelevanceMeansValidIVPermission : Set where
+
+data InstrumentMeansUniversalEffectPermission : Set where
+
 data MediationAssociationMeansMechanismPermission : Set where
 
 data GeneticPerturbationMeansUniqueMechanismPermission : Set where
@@ -282,6 +300,14 @@ adjustmentDoesNotEraseUnmeasuredConfounding ()
 longitudinalOrderDoesNotByItselfIdentifyCause :
   LongitudinalMeansCausationPermission → ⊥
 longitudinalOrderDoesNotByItselfIdentifyCause ()
+
+instrumentRelevanceDoesNotByItselfValidateIV :
+  InstrumentRelevanceMeansValidIVPermission → ⊥
+instrumentRelevanceDoesNotByItselfValidateIV ()
+
+instrumentDoesNotAutomaticallyTransportEffect :
+  InstrumentMeansUniversalEffectPermission → ⊥
+instrumentDoesNotAutomaticallyTransportEffect ()
 
 mediatorAssociationDoesNotByItselfIdentifyMechanism :
   MediationAssociationMeansMechanismPermission → ⊥
@@ -310,6 +336,8 @@ record CausalIdentificationFamiliesBoundary : Set where
     randomisationAndTransportRemainDistinct : Bool
     adjustmentAndNoResidualConfoundingRemainDistinct : Bool
     longitudinalAndCausationRemainDistinct : Bool
+    instrumentalRelevanceAndValidityRemainDistinct : Bool
+    instrumentalEffectAndUniversalTransportRemainDistinct : Bool
     mediationNeedsSeparatePathReceipts : Bool
     geneticPerturbationKeepsOffTargetBackgroundExplicit : Bool
     neuralPerturbationKeepsCognitiveReadoutSeparate : Bool
@@ -320,4 +348,4 @@ canonicalCausalIdentificationFamiliesBoundary :
   CausalIdentificationFamiliesBoundary
 canonicalCausalIdentificationFamiliesBoundary =
   causal-identification-families-boundary
-    true true true true true true true false false
+    true true true true true true true true true false false
