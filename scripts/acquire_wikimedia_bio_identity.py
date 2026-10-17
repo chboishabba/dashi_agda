@@ -2,10 +2,13 @@
 """Acquire bounded Wikidata/Wikipedia identity receipts for the BH4 protein panel.
 
 The resolver treats Wikimedia as an external identity/provenance surface, not a
-biological authority.  Protein identity is accepted only when a Wikidata item
+biological authority. Protein identity is accepted only when a Wikidata item
 carries an exact P352 (UniProt protein ID) match for the requested accession.
+The primary resolver is an exact WDQS P352 query; MediaWiki text search is kept
+only as diagnostic provenance and never establishes identity.
+
 Gene/protein identity stays separate: P702 (encoded by) and reciprocal P688
-(encodes) are recorded independently.  English-Wikipedia page/revision
+(encodes) are recorded independently. English-Wikipedia page/revision
 coordinates are pinned when a sitelink exists.
 
 Examples:
@@ -32,6 +35,7 @@ from pathlib import Path
 from acquire_uniprot_bio_certificate import KITZEROW_BH4_PANEL
 
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
+WIKIDATA_SPARQL = "https://query.wikidata.org/sparql"
 ENWIKI_API = "https://en.wikipedia.org/w/api.php"
 HUMAN_QID = "Q5"
 
@@ -40,7 +44,10 @@ def _get_json(base: str, params: dict[str, str]) -> tuple[dict, bytes]:
     query = urllib.parse.urlencode(params)
     request = urllib.request.Request(
         f"{base}?{query}",
-        headers={"User-Agent": "DASHI-wikimedia-biology-acquisition/1.0"},
+        headers={
+            "Accept": "application/sparql-results+json, application/json",
+            "User-Agent": "DASHI-wikimedia-biology-acquisition/1.1",
+        },
     )
     with urllib.request.urlopen(request, timeout=60) as response:
         raw = response.read()
@@ -80,6 +87,22 @@ def search_candidates(accession: str) -> list[str]:
     return [row["id"] for row in payload.get("search", []) if row.get("id")]
 
 
+def exact_p352_qids(accession: str) -> tuple[list[str], str]:
+    if not accession.isalnum():
+        raise ValueError(f"invalid UniProt accession for exact P352 query: {accession!r}")
+    sparql = f'SELECT DISTINCT ?item WHERE {{ ?item wdt:P352 "{accession}". }}'
+    payload, raw = _get_json(
+        WIKIDATA_SPARQL,
+        {"query": sparql, "format": "json"},
+    )
+    qids: list[str] = []
+    for row in payload.get("results", {}).get("bindings", []):
+        value = row.get("item", {}).get("value", "")
+        if value.startswith("http://www.wikidata.org/entity/Q"):
+            qids.append(value.rsplit("/", 1)[-1])
+    return sorted(set(qids)), hashlib.sha256(raw).hexdigest()
+
+
 def fetch_entities(qids: list[str]) -> tuple[dict[str, dict], str]:
     if not qids:
         return {}, ""
@@ -88,7 +111,7 @@ def fetch_entities(qids: list[str]) -> tuple[dict[str, dict], str]:
         {
             "action": "wbgetentities",
             "ids": "|".join(qids),
-            "props": "labels|descriptions|claims|sitelinks",
+            "props": "labels|descriptions|claims|sitelinks|info",
             "languages": "en",
             "sitefilter": "enwiki",
             "format": "json",
@@ -97,16 +120,16 @@ def fetch_entities(qids: list[str]) -> tuple[dict[str, dict], str]:
     return payload.get("entities", {}), hashlib.sha256(raw).hexdigest()
 
 
-def exact_protein_candidates(accession: str) -> tuple[list[dict], list[str]]:
+def exact_protein_candidates(accession: str) -> tuple[list[dict], list[str], str, list[str]]:
+    exact_qids, sparql_sha = exact_p352_qids(accession)
     searched = search_candidates(accession)
-    entities, _ = fetch_entities(searched)
+    entities, _ = fetch_entities(exact_qids)
     exact: list[dict] = []
-    for qid in searched:
+    for qid in exact_qids:
         entity = entities.get(qid, {})
-        if accession not in _claim_strings(entity, "P352"):
-            continue
-        exact.append(entity)
-    return exact, searched
+        if accession in _claim_strings(entity, "P352"):
+            exact.append(entity)
+    return exact, exact_qids, sparql_sha, searched
 
 
 def fetch_gene_receipt(gene_qid: str, protein_qid: str) -> dict:
@@ -130,6 +153,8 @@ def fetch_enwiki(title: str | None) -> dict:
             "title": None,
             "pageid": None,
             "lastrevid": None,
+            "wikibase_item": None,
+            "qid_round_trip_paid": False,
             "response_sha256": None,
         }
     payload, raw = _get_json(
@@ -145,18 +170,20 @@ def fetch_enwiki(title: str | None) -> dict:
     pages = payload.get("query", {}).get("pages", {})
     page = next(iter(pages.values()), {})
     present = "missing" not in page and int(page.get("pageid", -1)) >= 0
+    wikibase_item = page.get("pageprops", {}).get("wikibase_item") if present else None
     return {
         "present": present,
         "title": page.get("title", title),
         "pageid": page.get("pageid") if present else None,
         "lastrevid": page.get("lastrevid") if present else None,
-        "wikibase_item": page.get("pageprops", {}).get("wikibase_item") if present else None,
+        "wikibase_item": wikibase_item,
+        "qid_round_trip_paid": False,
         "response_sha256": hashlib.sha256(raw).hexdigest(),
     }
 
 
 def build_identity(accession: str, symbol: str | None = None, sector: str | None = None) -> dict:
-    exact, searched = exact_protein_candidates(accession)
+    exact, exact_qids, sparql_sha, searched = exact_protein_candidates(accession)
     rows: list[dict] = []
     for protein in exact:
         qid = protein.get("id")
@@ -166,6 +193,8 @@ def build_identity(accession: str, symbol: str | None = None, sector: str | None
         enwiki_title = sitelink.get("title")
         gene_receipts = [fetch_gene_receipt(gene_qid, qid) for gene_qid in encoded_by]
         enwiki = fetch_enwiki(enwiki_title)
+        if enwiki["present"]:
+            enwiki["qid_round_trip_paid"] = enwiki.get("wikibase_item") == qid
         _, raw_sha = fetch_entities([qid])
         rows.append(
             {
@@ -191,7 +220,10 @@ def build_identity(accession: str, symbol: str | None = None, sector: str | None
         "symbol": symbol,
         "sector": sector,
         "uniprot_accession": accession,
-        "candidate_qids_searched": searched,
+        "resolver": "exact WDQS wdt:P352 followed by wbgetentities claim verification",
+        "exact_p352_qids": exact_qids,
+        "exact_p352_query_response_sha256": sparql_sha,
+        "diagnostic_text_search_qids": searched,
         "exact_p352_matches": rows,
         "exact_match_count": len(rows),
         "unique_exact_protein_qid": unique_exact,
@@ -211,9 +243,8 @@ def acquire_panel() -> tuple[dict, int]:
     members: list[dict] = []
     for member in KITZEROW_BH4_PANEL:
         try:
-            receipt = build_identity(member["accession"], member["symbol"], member["sector"])
-            members.append(receipt)
-        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, json.JSONDecodeError) as exc:
+            members.append(build_identity(member["accession"], member["symbol"], member["sector"]))
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, json.JSONDecodeError, ValueError) as exc:
             members.append(
                 {
                     "symbol": member["symbol"],
@@ -276,7 +307,7 @@ def main() -> int:
 
     try:
         payload = build_identity(args.accession.strip().upper(), args.symbol)
-    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, json.JSONDecodeError) as exc:
+    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, json.JSONDecodeError, ValueError) as exc:
         print(f"Wikimedia identity acquisition failed: {exc}", file=sys.stderr)
         return 2
     render(payload, args.output)
