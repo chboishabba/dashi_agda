@@ -37,6 +37,30 @@ def install_mcp_adapter_semantic_extension(adapter_cls: type) -> None:
     def round_lineage(self, prefix: Optional[str] = None):
         return self.service.round_lineage(prefix=prefix)
 
+    def proof_route(self, query: str, **kwargs):
+        return self.service.proof_route(query, **kwargs)
+
+    def proof_route_history(
+        self,
+        query: Optional[str] = None,
+        da51_address: Optional[str] = None,
+        limit: int = 50,
+    ):
+        return self.service.proof_route_history(
+            query=query,
+            da51_address=da51_address,
+            limit=limit,
+        )
+
+    def da51_resolve(self, address: str):
+        return self.service.da51_resolve(address)
+
+    def da51_evidence(self, address: str):
+        return self.service.da51_evidence(address)
+
+    def da51_frontier(self, address: str):
+        return self.service.da51_frontier(address)
+
     adapter_cls.symbol_search = symbol_search
     adapter_cls.related_symbols = related_symbols
     adapter_cls.object_detail = object_detail
@@ -47,6 +71,11 @@ def install_mcp_adapter_semantic_extension(adapter_cls: type) -> None:
     adapter_cls.narrative_explain = narrative_explain
     adapter_cls.discover = discover
     adapter_cls.round_lineage = round_lineage
+    adapter_cls.proof_route = proof_route
+    adapter_cls.proof_route_history = proof_route_history
+    adapter_cls.da51_resolve = da51_resolve
+    adapter_cls.da51_evidence = da51_evidence
+    adapter_cls.da51_frontier = da51_frontier
     adapter_cls._semantic_discovery_installed = True
 
 
@@ -110,6 +139,66 @@ def register_repository_mcp_tools(server, tools) -> None:
     async def round_lineage(prefix: Optional[str] = None) -> dict[str, Any]:
         """Report read-only RoundNNN lineage, novelty and snapshot-noise ratios."""
         return tools.round_lineage(prefix=prefix)
+
+    @server.tool()
+    async def proof_route(
+        query: str,
+        target_prover: str = "lean",
+        claim_kind: str = "deductive",
+        mathematical_status: str = "novel-open",
+        statement_status: str = "not-transcribed",
+        certification_status: str = "uncertified",
+        da51_address: Optional[str] = None,
+        source_declaration: Optional[str] = None,
+        current_source_hash: Optional[str] = None,
+        limit: int = 50,
+    ) -> dict[str, Any]:
+        """Discover-before-prove and return an authority-neutral backend route.
+
+        Exact/equivalent existing owners are routed to reuse review. Incomplete
+        repository coverage blocks generation. Confirmed mathematical absence
+        may route to Aristotle; agda2lean mapping modes constrain translation.
+        """
+        return tools.proof_route(
+            query,
+            target_prover=target_prover,
+            claim_kind=claim_kind,
+            mathematical_status=mathematical_status,
+            statement_status=statement_status,
+            certification_status=certification_status,
+            da51_address=da51_address,
+            source_declaration=source_declaration,
+            current_source_hash=current_source_hash,
+            limit=limit,
+        )
+
+    @server.tool()
+    async def proof_route_history(
+        query: Optional[str] = None,
+        da51_address: Optional[str] = None,
+        limit: int = 50,
+    ) -> dict[str, Any]:
+        """Return persisted routing receipts; these are scheduling evidence only."""
+        return tools.proof_route_history(
+            query=query,
+            da51_address=da51_address,
+            limit=limit,
+        )
+
+    @server.tool()
+    async def da51_resolve(address: str) -> dict[str, Any]:
+        """Resolve canonical DA51 wire metadata, links and evidence without authority promotion."""
+        return tools.da51_resolve(address)
+
+    @server.tool()
+    async def da51_evidence(address: str) -> dict[str, Any]:
+        """Return producer/artifact evidence edges for a DA51 identity."""
+        return tools.da51_evidence(address)
+
+    @server.tool()
+    async def da51_frontier(address: str) -> dict[str, Any]:
+        """Return proof-routing debt/history attached to a DA51 identity."""
+        return tools.da51_frontier(address)
 
 
 def install_mcp_server_semantic_extension(module) -> None:
