@@ -14,7 +14,7 @@ import DASHI.Core.GenericReceipt as Receipt
 --     (6R)-L-erythro-6,7-dihydrobiopterin + NADH + H+
 --       => (6R)-L-erythro-5,6,7,8-tetrahydrobiopterin + NAD+.
 --
--- Rhea uses ChEBI major microspecies for chemically balanced reactions.  The
+-- Rhea uses ChEBI major microspecies for chemically balanced reactions. The
 -- exact reaction microspecies and broader ontology coordinates are therefore
 -- kept separate rather than silently collapsed.
 ------------------------------------------------------------------------
@@ -55,7 +55,7 @@ record RheaReactionReceipt : Set where
     chemicallyBalancedByRhea : Bool
     releaseReference : String
     sourceReference : String
-    reactionIdentityCreatesBiologicalMechanism : Bool
+    reactionReceiptCreatesBiologicalMechanism : Bool
 
 open RheaReactionReceipt public
 
