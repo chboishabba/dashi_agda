@@ -3,13 +3,14 @@ module DASHI.Biology.BH4Phase4RoadmapExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.BH4JointFluxFeasibilityExact as Flux
+import DASHI.Biology.BH4QuantitativeAcquisitionExact as Acquisition
 import DASHI.Biology.Molecular.BH4ExecutedPanelReactionReceiptExact as Executed
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Matrix
 import DASHI.Core.GenericReceipt as Receipt
 
 ------------------------------------------------------------------------
 -- Phase-4 roadmap after the live panel chemistry + first joint-flux execution,
--- with the next quantitative acquisition/interval-solver tranche implemented.
+-- and the first quantitative external-evidence run.
 ------------------------------------------------------------------------
 
 data BH4Phase : Set where
@@ -26,8 +27,9 @@ data BH4Phase4Residual : Set where
   executePanelRheaAcquisition : BH4Phase4Residual
   promoteFinitePanelReactionReceipts : BH4Phase4Residual
   resolveNonFiniteMTORProteinReactionRepresentation : BH4Phase4Residual
-  acquireSABIOKineticCandidateEvidence : BH4Phase4Residual
-  acquirePDBSIFTSResidueSiteWitnesses : BH4Phase4Residual
+  rerunSABIOAfterProtocolRepair : BH4Phase4Residual
+  adjudicateSABIOKineticCandidatesIntoFluxBounds : BH4Phase4Residual
+  adjudicatePDBSIFTSResidueSiteWitnesses : BH4Phase4Residual
   payReactionSpecificFluxBounds : BH4Phase4Residual
   payCompartmentSpecificBH4BH2RedoxState : BH4Phase4Residual
   paySimultaneousConsumerDemand : BH4Phase4Residual
@@ -36,14 +38,16 @@ data BH4Phase4Residual : Set where
   payUpstreamToTSC2SameObjectTransport : BH4Phase4Residual
   discriminateAlternativeMechanisms : BH4Phase4Residual
 
--- executePanelRheaAcquisition and promoteFinitePanelReactionReceipts remain in
--- the historical vocabulary but are absent here after the 2026-10-17 live run:
--- 24 links -> 12 finite reaction columns + 3 explicit MTOR residual reactions.
+-- Reaction acquisition/promotion are historical.  The first bounded SIFTS run
+-- also executed successfully and is now an adjudication problem, not an
+-- acquisition problem.  SABIO reached HTTP 200 but returned the browser shell;
+-- its protocol adapter is repaired and requires rerun before evidence payment.
 livePhase4Residuals : List BH4Phase4Residual
 livePhase4Residuals =
   resolveNonFiniteMTORProteinReactionRepresentation
-  ∷ acquireSABIOKineticCandidateEvidence
-  ∷ acquirePDBSIFTSResidueSiteWitnesses
+  ∷ rerunSABIOAfterProtocolRepair
+  ∷ adjudicateSABIOKineticCandidatesIntoFluxBounds
+  ∷ adjudicatePDBSIFTSResidueSiteWitnesses
   ∷ payReactionSpecificFluxBounds
   ∷ payCompartmentSpecificBH4BH2RedoxState
   ∷ paySimultaneousConsumerDemand
@@ -65,6 +69,15 @@ quantitativeAcquisitionToolingReady = true
 intervalFluxSolverReady : Bool
 intervalFluxSolverReady = true
 
+firstBoundedSIFTSAcquisitionExecuted : Bool
+firstBoundedSIFTSAcquisitionExecuted = Acquisition.pdbeSiftsBoundedAcquisitionExecuted
+
+firstSABIOAttemptWasProtocolPayload : Bool
+firstSABIOAttemptWasProtocolPayload = false
+
+sabioProtocolRepairReady : Bool
+sabioProtocolRepairReady = true
+
 executedPanelSpeciesCount : Nat
 executedPanelSpeciesCount = Matrix.executedPanelSpeciesCount
 
@@ -75,7 +88,7 @@ executedPanelReactionCount = Matrix.executedPanelReactionCount
 firstQuantitativeCoordinateCount : Nat
 firstQuantitativeCoordinateCount = 27
 
--- Next-run template: 15 core + 12 reaction fluxes + 29 explicit exchanges.
+-- Current template: 15 core + 12 reaction fluxes + 29 explicit exchanges.
 expandedQuantitativeCoordinateCount : Nat
 expandedQuantitativeCoordinateCount = 56
 
@@ -131,6 +144,9 @@ record BH4Phase4Boundary : Set where
     candidateKineticEvidenceAutomaticallyPaysFluxBounds : Bool
     candidateKineticEvidenceAutomaticallyPaysFluxBoundsIsFalse :
       candidateKineticEvidenceAutomaticallyPaysFluxBounds ≡ false
+    boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSites : Bool
+    boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSitesIsFalse :
+      boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSites ≡ false
     phase4CompletionAutomaticallyPromotesDiseaseCausation : Bool
     phase4CompletionAutomaticallyPromotesDiseaseCausationIsFalse :
       phase4CompletionAutomaticallyPromotesDiseaseCausation ≡ false
@@ -143,14 +159,14 @@ open BH4Phase4Boundary public
 canonicalBH4Phase4Boundary : BH4Phase4Boundary
 canonicalBH4Phase4Boundary =
   bh4-phase4-boundary
-    false refl false refl false refl false refl false refl false refl false refl
+    false refl false refl false refl false refl false refl false refl false refl false refl
 
 canonicalBH4Phase4RoadmapReceipt : Receipt.GenericReceipt
 canonicalBH4Phase4RoadmapReceipt =
   Receipt.mkNonPromotingReceipt
     "BH4 Phase-4 quantitative system-state roadmap"
     "DASHI.Biology.BH4Phase4RoadmapExact"
-    "executed 16-protein panel -> 24 Rhea links -> 12 finite reactions + 3 MTOR residuals -> 29x12 matrix -> first 27-coordinate attempt -> next 56-coordinate reaction+exchange interval problem"
-    "closes panel Rhea execution and finite-reaction promotion; records the first joint attempt as underdetermined and provides SABIO/PDBe-SIFTS acquisition plus a bounded interval steady-state solver for the next run"
-    "underdetermined proves neither mechanism truth nor falsity; candidate kinetics do not automatically become flux bounds; residual protein reactions are not zero columns; Phase-4 closure does not automatically establish disease causation or clinical action"
+    "executed 16-protein panel -> 24 Rhea links -> 12 finite reactions + 3 MTOR residuals -> 29x12 matrix -> 56-coordinate open-system problem -> bounded SIFTS acquisition + repaired SABIO acquisition"
+    "closes panel Rhea execution and SIFTS acquisition-as-acquisition; records the first flux problem as underdetermined; narrows the external-evidence frontier to SABIO rerun plus evidence adjudication rather than more acquisition scaffolding"
+    "HTTP-200 HTML is not zero SABIO data; SIFTS sequence/residue mappings do not automatically establish catalytic-site function; candidate kinetics do not automatically become flux bounds; Phase-4 closure does not establish disease or clinical causation"
     "python3 scripts/run_bh4_phase4_maxcut.py"
