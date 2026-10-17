@@ -6,10 +6,11 @@ import sqlite3
 import time
 from typing import Any, Optional
 
+from .artifact_transport import ArtifactResolutionReceipt
 from .proof_router import ProofRouteRequest, ProofRouter, parse_da51
 
 
-EXTERNAL_PROOF_BRIDGE_SCHEMA = "1"
+EXTERNAL_PROOF_BRIDGE_SCHEMA = "2"
 
 
 @dataclass(frozen=True)
@@ -52,6 +53,7 @@ class ExternalFormalEvidence:
     checker_revision: str
     result_kind: str
     certification_state: str
+    artifact_resolution_receipt: Optional[dict[str, Any]] = None
 
     def validate(self) -> None:
         for name, value in (
@@ -114,6 +116,32 @@ def ensure_external_proof_bridge_schema(conn: sqlite3.Connection) -> None:
         );
         CREATE INDEX IF NOT EXISTS external_formal_evidence_obligation
             ON external_formal_evidence(demand_ref, external_obligation_ref, statement_digest);
+
+        CREATE TABLE IF NOT EXISTS external_artifact_resolutions (
+            evidence_ref TEXT PRIMARY KEY
+                REFERENCES external_formal_evidence(evidence_ref) ON DELETE CASCADE,
+            schema_version TEXT NOT NULL,
+            logical_contract_version TEXT NOT NULL,
+            logical_artifact_ref TEXT NOT NULL,
+            artifact_id TEXT NOT NULL,
+            artifact_revision TEXT NOT NULL,
+            shard_id TEXT NOT NULL,
+            sink TEXT NOT NULL,
+            uri TEXT NOT NULL,
+            cid TEXT,
+            member_path TEXT,
+            content_digest TEXT NOT NULL,
+            payload_digest TEXT NOT NULL,
+            payload_size_bytes INTEGER NOT NULL,
+            verified INTEGER NOT NULL CHECK (verified = 1),
+            authority TEXT NOT NULL CHECK (authority = 'transport-only'),
+            establishes_proof INTEGER NOT NULL CHECK (establishes_proof = 0),
+            created_at INTEGER NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS external_artifact_resolutions_logical_ref
+            ON external_artifact_resolutions(logical_artifact_ref);
+        CREATE INDEX IF NOT EXISTS external_artifact_resolutions_uri
+            ON external_artifact_resolutions(sink, uri);
         """
     )
     try:
@@ -133,6 +161,10 @@ class ExternalProofRouter:
     The adapter delegates discovery/debt/backend selection to ``ProofRouter`` and
     persists only the external demand/obligation/statement-digest join. It never
     mirrors SLR PNF, residual, proposition, Matter, or payment payloads.
+
+    Optional artifact-resolution receipts bind a logical shared-shard artifact to
+    bytes verified through file/HF/IPFS transport.  That transport receipt remains
+    ``transport-only`` and never becomes a proof or SLR payment decision.
     """
 
     def __init__(self, router: ProofRouter, connection: sqlite3.Connection) -> None:
@@ -205,8 +237,81 @@ class ExternalProofRouter:
             "authority": "routing-only",
         }
 
+    def _persist_artifact_resolution(
+        self,
+        evidence_ref: str,
+        receipt: ArtifactResolutionReceipt,
+    ) -> None:
+        record = receipt.as_record()
+        existing = self.connection.execute(
+            "SELECT * FROM external_artifact_resolutions WHERE evidence_ref=?",
+            (evidence_ref,),
+        ).fetchone()
+        if existing is not None:
+            current = dict(existing)
+            immutable = {
+                "schema_version": record["schema_version"],
+                "logical_contract_version": record["logical_contract_version"],
+                "logical_artifact_ref": record["logical_artifact_ref"],
+                "artifact_id": record["artifact_id"],
+                "artifact_revision": record["artifact_revision"],
+                "shard_id": record["shard_id"],
+                "sink": record["sink"],
+                "uri": record["uri"],
+                "cid": record["cid"],
+                "member_path": record["member_path"],
+                "content_digest": record["content_digest"],
+                "payload_digest": record["payload_digest"],
+                "payload_size_bytes": record["payload_size_bytes"],
+                "verified": 1,
+                "authority": "transport-only",
+                "establishes_proof": 0,
+            }
+            if any(current.get(key) != value for key, value in immutable.items()):
+                raise ValueError("artifact resolution conflicts with persisted evidence")
+            return
+
+        self.connection.execute(
+            """
+            INSERT INTO external_artifact_resolutions(
+                evidence_ref, schema_version, logical_contract_version,
+                logical_artifact_ref, artifact_id, artifact_revision, shard_id,
+                sink, uri, cid, member_path, content_digest, payload_digest,
+                payload_size_bytes, verified, authority, establishes_proof,
+                created_at
+            ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 'transport-only', 0, ?)
+            """,
+            (
+                evidence_ref,
+                record["schema_version"],
+                record["logical_contract_version"],
+                record["logical_artifact_ref"],
+                record["artifact_id"],
+                record["artifact_revision"],
+                record["shard_id"],
+                record["sink"],
+                record["uri"],
+                record["cid"],
+                record["member_path"],
+                record["content_digest"],
+                record["payload_digest"],
+                record["payload_size_bytes"],
+                int(time.time()),
+            ),
+        )
+
     def record_evidence(self, evidence: ExternalFormalEvidence) -> dict[str, Any]:
         evidence.validate()
+        artifact_resolution = None
+        if evidence.artifact_resolution_receipt is not None:
+            artifact_resolution = ArtifactResolutionReceipt.from_mapping(
+                evidence.artifact_resolution_receipt
+            )
+            if evidence.artifact_ref.strip() != artifact_resolution.logical_artifact_ref:
+                raise ValueError("formal evidence artifact ref does not match resolution receipt")
+            if evidence.artifact_digest.strip().lower() != artifact_resolution.content_digest:
+                raise ValueError("formal evidence artifact digest does not match resolution receipt")
+
         da51_address = parse_da51(evidence.da51_address)["address"] if evidence.da51_address else None
         row = self.connection.execute(
             """
@@ -251,15 +356,36 @@ class ExternalProofRouter:
                 int(time.time()),
             ),
         )
+        if artifact_resolution is not None:
+            self._persist_artifact_resolution(
+                evidence.evidence_ref.strip(), artifact_resolution
+            )
         self.connection.commit()
         return {
             "evidence_ref": evidence.evidence_ref.strip(),
             "demand_ref": evidence.demand_ref.strip(),
             "external_obligation_ref": evidence.external_obligation_ref.strip(),
             "statement_digest": evidence.statement_digest.strip(),
+            "artifact_resolution": artifact_resolution.as_record()
+            if artifact_resolution is not None
+            else None,
             "authority": "evidence-only",
             "establishes_proof": False,
         }
+
+    def _artifact_resolution_for(self, evidence_ref: str) -> Optional[dict[str, Any]]:
+        row = self.connection.execute(
+            "SELECT * FROM external_artifact_resolutions WHERE evidence_ref=?",
+            (evidence_ref,),
+        ).fetchone()
+        if row is None:
+            return None
+        result = dict(row)
+        result.pop("evidence_ref", None)
+        result.pop("created_at", None)
+        result["verified"] = bool(result["verified"])
+        result["establishes_proof"] = bool(result["establishes_proof"])
+        return result
 
     def evidence_for_obligation(
         self,
@@ -280,7 +406,12 @@ class ExternalProofRouter:
             """,
             (demand_ref.strip(), external_obligation_ref.strip(), statement_digest.strip()),
         ).fetchall()
-        return [dict(row) for row in rows]
+        result: list[dict[str, Any]] = []
+        for row in rows:
+            item = dict(row)
+            item["artifact_resolution"] = self._artifact_resolution_for(item["evidence_ref"])
+            result.append(item)
+        return result
 
     def route_history_for_obligation(
         self,
