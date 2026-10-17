@@ -7,9 +7,6 @@ open import Data.List.Base using (List; _∷_; [])
 
 open import DASHI.Unified.TOESectorRealizationExact
 
-------------------------------------------------------------------------
--- External formal theorem reservoir.  This file records routes, not proofs.
-
 data ExternalFormalAuthority : Set where
   manuscriptOnly : ExternalFormalAuthority
   upstreamLeanDeclaration : ExternalFormalAuthority
@@ -40,6 +37,7 @@ record OpenAITheoremRoute : Set where
     sameObjectTransportPaid : Bool
     sameObjectTransportPaidIsFalse : sameObjectTransportPaid ≡ false
     reading : String
+open OpenAITheoremRoute public
 
 route :
   String → String → String → String → TheoremRouteClass → String →
@@ -99,6 +97,63 @@ canonicalOpenAIRoutes =
   ∷ optimalMaxCutRoute
   ∷ vlasovMaxwellRoute
   ∷ forcedNavierStokesRoute
+  ∷ []
+
+------------------------------------------------------------------------
+-- Exact external formal inhabitants.
+--
+-- The theorem declarations really exist at the pinned upstream commit.  These
+-- values make that non-emptiness explicit while keeping proof-term authority
+-- outside Agda and keeping same-object TOE transport false.
+------------------------------------------------------------------------
+
+record OpenAITheoremInhabitant : Set where
+  field
+    repository : String
+    pinnedCommit : String
+    family : String
+    moduleName : String
+    declarationName : String
+    authority : ExternalFormalAuthority
+    localAgdaProofTerm : Bool
+    localAgdaProofTermIsFalse : localAgdaProofTerm ≡ false
+    sameObjectTOETransport : Bool
+    sameObjectTOETransportIsFalse : sameObjectTOETransport ≡ false
+open OpenAITheoremInhabitant public
+
+inhabitantFromRoute : OpenAITheoremRoute → OpenAITheoremInhabitant
+inhabitantFromRoute theoremRoute =
+  record
+    { repository = "openai/math"
+    ; pinnedCommit = "1581d4cbdd69a0faf34b2089614fe2a814316a6a"
+    ; family = OpenAITheoremRoute.family theoremRoute
+    ; moduleName = upstreamModule theoremRoute
+    ; declarationName = upstreamDeclaration theoremRoute
+    ; authority = importedFormalSource
+    ; localAgdaProofTerm = false
+    ; localAgdaProofTermIsFalse = refl
+    ; sameObjectTOETransport = false
+    ; sameObjectTOETransportIsFalse = refl
+    }
+
+quasiRiemannFormalInhabitant : OpenAITheoremInhabitant
+quasiRiemannFormalInhabitant = inhabitantFromRoute quasiRiemannHeckeRoute
+
+optimalMaxCutFormalInhabitant : OpenAITheoremInhabitant
+optimalMaxCutFormalInhabitant = inhabitantFromRoute optimalMaxCutRoute
+
+vlasovMaxwellFormalInhabitant : OpenAITheoremInhabitant
+vlasovMaxwellFormalInhabitant = inhabitantFromRoute vlasovMaxwellRoute
+
+forcedNavierStokesFormalInhabitant : OpenAITheoremInhabitant
+forcedNavierStokesFormalInhabitant = inhabitantFromRoute forcedNavierStokesRoute
+
+canonicalOpenAITheoremInhabitants : List OpenAITheoremInhabitant
+canonicalOpenAITheoremInhabitants =
+  quasiRiemannFormalInhabitant
+  ∷ optimalMaxCutFormalInhabitant
+  ∷ vlasovMaxwellFormalInhabitant
+  ∷ forcedNavierStokesFormalInhabitant
   ∷ []
 
 crossKernelPromotionRemainsBlocked : openAIMaxAuthority ≡ importedFormalSource
