@@ -41,7 +41,7 @@ pts : ProteinPanelMember
 pts = protein-panel-member "PTS" "Q03393" "BH4 synthesis" Atlas.bh4Availability [] false
 
 spr : ProteinPanelMember
-spr = protein-panel-member "SPR" "P16175" "BH4 synthesis" Atlas.bh4Availability [] false
+spr = protein-panel-member "SPR" "P35270" "BH4 synthesis" Atlas.bh4Availability [] false
 
 pcbd1 : ProteinPanelMember
 pcbd1 = protein-panel-member "PCBD1" "P61457" "BH4 recycling" Atlas.bh4Availability [] false
