@@ -157,8 +157,7 @@ def test_ns_a_and_b_residual_surfaces_match_current_nonround_frontier():
             "b3PhysicalProducer",
         ],
         "NSCanonicalB7IntegratedControlResidualExact.agda": [
-            "q4IntegratedSpacetimeControl",
-            "ePositiveGlobalAmplitudeControl",
+            "preferredQ4EControl",
             "q5SignedQuinticFallback",
         ],
         "NSCanonicalBContinuationResidualExact.agda": [
