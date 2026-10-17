@@ -8,6 +8,7 @@ open import Data.List.Base using (List; _∷_; [])
 open import DASHI.Unified.TOESectorRealizationExact
 import DASHI.Unified.GRQuantumStrictProofTerms as StrictGRQ
 import DASHI.Unified.TOE369C3RealizationGraphExact as C3
+import DASHI.Unified.TOEConcreteInhabitantsExact as Inhabitants
 
 GRQuantumTerminalAuthority : Set₁
 GRQuantumTerminalAuthority = StrictGRQ.StrictTerminalGRQuantumProof
@@ -16,6 +17,8 @@ record GaugeQFTGRPayment : Set where
   field
     spatialC3ToSU2U1RepresentationPaid : Bool
     su2ToU1RestrictionPaid : Bool
+    concreteRTBenchmarkInhabited : Bool
+    concreteVacuumEinsteinBenchmarkInhabited : Bool
     universalActionRestrictionPaid : Bool
     metricVariationCommutesPaid : Bool
     stressIdentificationPaid : Bool
@@ -29,6 +32,8 @@ currentGaugeQFTGRPayment =
   record
     { spatialC3ToSU2U1RepresentationPaid = true
     ; su2ToU1RestrictionPaid = true
+    ; concreteRTBenchmarkInhabited = true
+    ; concreteVacuumEinsteinBenchmarkInhabited = true
     ; universalActionRestrictionPaid = false
     ; metricVariationCommutesPaid = false
     ; stressIdentificationPaid = false
@@ -36,7 +41,7 @@ currentGaugeQFTGRPayment =
     ; strictGRQuantumSharedSubstratePaid = true
     ; semiclassicalPhysicalCalibrationPaid = false
     ; sourceReceipt =
-        "Consumes the existing torque/Hodge/right-hand-rule SU2/U1 representation layer, Round131 native/recovered-QFT endpoint and strict GR/quantum shared-substrate contract. The TOE advance is to demand one universal action whose controlled restrictions commute with metric variation and stress construction."
+        "Consumes the existing torque/Hodge/right-hand-rule SU2/U1 representation layer, Round131 native/recovered-QFT endpoint and strict GR/quantum shared-substrate contract. Lean PR #68 additionally supplies actual formal inhabitants for a corrected independent-Bell-tree RT equality and a concrete flat-vacuum Jacobson Einstein receipt with recovered Lambda=0 plus SI/CODATA calibration metadata. Those benchmark inhabitants do not yet identify the universal DASHI action with observed 3+1D physics."
     }
 
 universalActionToGRGrade : ValidationGrade
@@ -56,6 +61,8 @@ universalActionToGRObligations =
 record GaugeQFTGRRealization : Set where
   field
     orientationToGauge : C3.C3Edge
+    rtFormalInhabitant : Inhabitants.FormalInhabitantReceipt
+    jacobsonVacuumFormalInhabitant : Inhabitants.FormalInhabitantReceipt
     payments : GaugeQFTGRPayment
     attainedGrade : ValidationGrade
     unpaid : List RealizationObligation
@@ -68,6 +75,8 @@ canonicalGaugeQFTGRRealization : GaugeQFTGRRealization
 canonicalGaugeQFTGRRealization =
   record
     { orientationToGauge = C3.spatialToGaugeCandidate
+    ; rtFormalInhabitant = Inhabitants.lean68RTInhabitant
+    ; jacobsonVacuumFormalInhabitant = Inhabitants.lean68JacobsonInhabitant
     ; payments = currentGaugeQFTGRPayment
     ; attainedGrade = universalActionToGRGrade
     ; unpaid = universalActionToGRObligations
@@ -75,5 +84,5 @@ canonicalGaugeQFTGRRealization =
     ; commonUniversalActionPromoted = false
     ; commonUniversalActionPromotedIsFalse = refl
     ; reading =
-        "HAM hypothesis: YM, U1/EM, QFT stress and Einstein/GR are controlled sector reductions of one universal DASHI action. Existing oriented-bracket and shared-substrate results justify keeping the hypothesis live. Promotion requires literal action restriction, metric-variation commutation, stress identity and calibrated observables; Casimir/Brown-Maclay, YM-to-Maxwell and semiclassical-gravity boundaries are therefore tests of this single-action claim, not firewalls against attempting it."
+        "HAM hypothesis: YM, U1/EM, QFT stress, entanglement geometry and Einstein/GR are controlled sector reductions of one universal DASHI action. Unlike the first cut, this record now carries actual imported formal inhabitants for a concrete RT benchmark and concrete Lambda=0 Jacobson/Einstein benchmark. They prove that important downstream contracts are nonempty. What remains is the nontrivial same-object weld: literal universal-action restriction, metric-variation commutation, stress identity, calibration to the selected physical system and held-out observation."
     }
