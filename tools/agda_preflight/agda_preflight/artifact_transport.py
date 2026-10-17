@@ -13,6 +13,7 @@ _SHA256_RE = re.compile(r"^[0-9a-fA-F]{64}$")
 
 
 def _require_text(name: str, value: Any) -> str:
+    """Return one required non-empty text field."""
     text = str(value or "").strip()
     if not text:
         raise ValueError(f"{name} must be non-empty")
@@ -20,6 +21,7 @@ def _require_text(name: str, value: Any) -> str:
 
 
 def _sha256(name: str, value: Any) -> str:
+    """Normalize one strict SHA-256 value to the canonical prefixed form."""
     text = _require_text(name, value)
     body = text.split(":", 1)[1] if text.lower().startswith("sha256:") else text
     if not _SHA256_RE.fullmatch(body):
@@ -28,6 +30,7 @@ def _sha256(name: str, value: Any) -> str:
 
 
 def _cid_from_ipfs_uri(uri: str) -> str:
+    """Extract the CID from a required `ipfs://` URI."""
     if not uri.startswith("ipfs://"):
         raise ValueError("IPFS object ref must use ipfs:// URI")
     parsed = urlparse(uri)
@@ -39,6 +42,8 @@ def _cid_from_ipfs_uri(uri: str) -> str:
 
 @dataclass(frozen=True)
 class ArtifactResolutionReceipt:
+    """Validated, authority-neutral artifact transport provenance."""
+
     schema_version: str
     logical_contract_version: str
     logical_artifact_ref: str
@@ -59,6 +64,7 @@ class ArtifactResolutionReceipt:
 
     @classmethod
     def from_mapping(cls, item: Mapping[str, Any]) -> "ArtifactResolutionReceipt":
+        """Validate and normalize an ITIR `artifact-resolution-receipt/v1`."""
         schema_version = _require_text("schemaVersion", item.get("schemaVersion"))
         if schema_version != ARTIFACT_RESOLUTION_SCHEMA:
             raise ValueError(f"unsupported artifact resolution schema: {schema_version}")
@@ -88,7 +94,7 @@ class ArtifactResolutionReceipt:
             raise ValueError("artifact resolution digest mismatch")
 
         payload_size = item.get("payloadSizeBytes")
-        if not isinstance(payload_size, int) or payload_size < 0:
+        if type(payload_size) is not int or payload_size < 0:
             raise ValueError("payloadSizeBytes must be a non-negative integer")
 
         object_ref = item.get("objectRef") or {}
@@ -97,25 +103,29 @@ class ArtifactResolutionReceipt:
         if sink not in _ALLOWED_SINKS:
             raise ValueError(f"unsupported artifact sink: {sink}")
         uri = _require_text("objectRef.uri", object_ref.get("uri"))
-        if str(transport.get("sink") or sink) != sink:
+        transport_sink = _require_text("transport.sink", transport.get("sink"))
+        transport_uri = _require_text("transport.uri", transport.get("uri"))
+        if transport_sink != sink:
             raise ValueError("transport sink does not match object ref")
-        if str(transport.get("uri") or uri) != uri:
+        if transport_uri != uri:
             raise ValueError("transport URI does not match object ref")
 
-        object_digest = object_ref.get("contentDigest")
-        if object_digest is not None and _sha256(
-            "objectRef.contentDigest", object_digest
-        ) != content_digest:
+        object_digest = _sha256(
+            "objectRef.contentDigest", object_ref.get("contentDigest")
+        )
+        if object_digest != content_digest:
             raise ValueError("object-ref digest does not match logical artifact digest")
         object_size = object_ref.get("sizeBytes")
-        if object_size is not None and int(object_size) != payload_size:
+        if type(object_size) is not int or object_size < 0:
+            raise ValueError("objectRef.sizeBytes must be a non-negative integer")
+        if object_size != payload_size:
             raise ValueError("object-ref size does not match payload size")
 
         cid: Optional[str] = None
         if sink == "ipfs":
             cid = _cid_from_ipfs_uri(uri)
-            receipt_cid = transport.get("cid")
-            if receipt_cid is not None and str(receipt_cid) != cid:
+            receipt_cid = _require_text("transport.cid", transport.get("cid"))
+            if receipt_cid != cid:
                 raise ValueError("artifact resolution IPFS CID mismatch")
 
         metadata_value = transport.get("metadata") or {}
@@ -154,6 +164,7 @@ class ArtifactResolutionReceipt:
         )
 
     def as_record(self) -> dict[str, Any]:
+        """Return a normalized record suitable for persistence or display."""
         return {
             "schema_version": self.schema_version,
             "logical_contract_version": self.logical_contract_version,
