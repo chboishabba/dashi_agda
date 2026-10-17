@@ -52,6 +52,18 @@ def test_generated_history_response_is_sharpened_to_existing_nonround_producer()
     assert "literalGeneratedHistoryResponseProducer" in text
 
 
+def test_all_cmp109_payments_are_attached_to_one_selected_source():
+    text = _read(INSTANTIATION)
+    assert "(selectedSource : SelectedSource)" in text
+    assert "ProducerBelongsToSelectedSource" in text
+    assert "producerBelongsToSelectedSource" in text
+    assert "ShootingMapBelongsToSelectedSource" in text
+    assert "shootingMapBelongsToSelectedSource" in text
+    assert "D1BelongsToSelectedSource" in text
+    assert "physicalCompositeD1BelongsToSelectedSource" in text
+    assert "substitutedD1BelongsToSelectedSource" in text
+
+
 def test_physical_composite_d1_is_sharpened_to_transport_equality():
     text = _read(INSTANTIATION)
     assert "PhysicalCompositeD1TransportResidual" in text
@@ -73,13 +85,16 @@ def test_cmp109_canonical_owner_uses_sharpened_residual_types():
     text = _read(OWNER)
     assert "BalabanCMP109CanonicalResidualInstantiationExact" in text
     assert "CMP109CanonicalSourceSemanticsObligations" in text
-    assert "CMP109GeneratedHistoryResponseResidual" in text
-    assert "SelectedCMP109BetaDifferenceAttachment" in text
+    assert "CMP109GeneratedHistoryResponseResidual selectedSource cutoff" in text
+    assert "SelectedCMP109BetaDifferenceAttachment selectedSource TubePoint" in text
     assert "PhysicalCompositeD1TransportResidual" in text
+    assert "selectedSource Component Background Tangent Scalar" in text
 
 
 def test_clay_residual_consumes_sharpened_cmp109_owner_and_stays_closed():
     text = _read(CLAY)
+    assert "(selectedSource : SelectedSource)" in text
     assert "CMP109.CMP109CanonicalSourceSemanticsObligations" in text
+    assert "selectedSource TubePoint cutoff Component Background Tangent Scalar" in text
     assert "clayYangMillsPromoted = false" in text
     assert "clayPromotion = false" in text
