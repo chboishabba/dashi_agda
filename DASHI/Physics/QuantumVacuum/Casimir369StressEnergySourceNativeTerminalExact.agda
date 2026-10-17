@@ -10,6 +10,7 @@ import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutExact
 import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerExact as PinnedRecovery
 import DASHI.Physics.QuantumVacuum.CasimirPinnedR457SourceNativeCompilerExact as PinnedR457
 import DASHI.Physics.QuantumVacuum.CasimirCMP119H2R457CompilerExact as H2R457
+import DASHI.Physics.QuantumVacuum.CasimirSelectedTargetR457CompilerExact as SelectedR457
 import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeExact as GroupLaw
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Stress
 import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationExact as FreeNormalization
@@ -27,11 +28,11 @@ import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exac
 ------------------------------------------------------------------------
 -- SOURCE-NATIVE TERMINAL
 --
--- Compatibility surface: the historical pinned/R457 list is retained below so
--- existing consumers keep their names.  The authoritative primitive source cut
--- is now the CMP119 H2/R581 lane: Casimir stress does not consume the full
--- PinnedYangMillsConstruction and therefore does not require a positive Clay
--- mass-gap/SI proof package merely to construct the R457 stress carrier.
+-- The selected Casimir application uses the UnifiedCandidate's existing
+-- qftTarget at one chosen candidate/regime as its literal Yang-Mills object.
+-- It does not need a second pinned/H2 construction before same-object stress
+-- attachment can begin.  H2/R581 remain valid upstream producer/audit routes
+-- for constructing such a target, but are not mandatory Casimir-local leaves.
 ------------------------------------------------------------------------
 
 legacyTerminalBoundary : Legacy.Casimir369StressEnergyTerminalBoundary
@@ -48,6 +49,9 @@ pinnedR457SourceNativeBoundary = PinnedR457.canonicalPinnedR457SourceNativeBound
 
 cmp119H2R457Boundary : H2R457.CasimirCMP119H2R457Boundary
 cmp119H2R457Boundary = H2R457.canonicalCMP119H2R457Boundary
+
+selectedTargetR457Boundary : SelectedR457.CasimirSelectedTargetR457Boundary
+selectedTargetR457Boundary = SelectedR457.canonicalSelectedTargetR457Boundary
 
 quaternionGroupLawBoundary : GroupLaw.CasimirQuaternionSU2GroupLawBoundary
 quaternionGroupLawBoundary = GroupLaw.canonicalQuaternionSU2GroupLawBoundary
@@ -263,7 +267,40 @@ firstExperimentalBlocker : RemainingSourceNativeCasimirBlocker
 firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
 ------------------------------------------------------------------------
--- AUTHORITATIVE PRIMITIVE SOURCE FRONTIER
+-- AUTHORITATIVE SELECTED-TARGET PRIMITIVE FRONTIER
+------------------------------------------------------------------------
+
+selectedTargetR457CompilerPaid : Bool
+selectedTargetR457CompilerPaid =
+  SelectedR457.selectedTargetPrimitiveSourceInputsBuildR457CompilerOwned
+    selectedTargetR457Boundary
+
+independentLiteralConstructionProducerRequiredForSelectedCasimir : Bool
+independentLiteralConstructionProducerRequiredForSelectedCasimir =
+  SelectedR457.independentLiteralConstructionProducerRequiredForCasimirR457
+    selectedTargetR457Boundary
+
+cmp119H2RequiredForSelectedCasimir : Bool
+cmp119H2RequiredForSelectedCasimir =
+  SelectedR457.cmp119H2RequiredForCasimirR457 selectedTargetR457Boundary
+
+round581RequiredForSelectedCasimir : Bool
+round581RequiredForSelectedCasimir =
+  SelectedR457.round581RequiredForCasimirR457 selectedTargetR457Boundary
+
+globalRound131AttachmentRequiredForSelectedCasimir : Bool
+globalRound131AttachmentRequiredForSelectedCasimir =
+  SelectedR457.globalRound131RecoveredQFTAttachmentRequiredForSelectedCasimirR457
+    selectedTargetR457Boundary
+
+selectedTargetContinuumSchwingerPaid : Bool
+selectedTargetContinuumSchwingerPaid = false
+
+h2ProducerRouteAvailable : Bool
+h2ProducerRouteAvailable = true
+
+------------------------------------------------------------------------
+-- Optional H2/R581 producer-route accounting.
 ------------------------------------------------------------------------
 
 cmp119H2R457CompilerPaid : Bool
@@ -285,14 +322,12 @@ legacyPinnedYangMillsConstructionBlockerRetired : Bool
 legacyPinnedYangMillsConstructionBlockerRetired = true
 
 data PrimitiveSourceNativeCasimirBlocker : Set where
-  missingCMP119H2PhysicalInstantiation : PrimitiveSourceNativeCasimirBlocker
-  missingCMP119LiteralConstructionEndpointFields : PrimitiveSourceNativeCasimirBlocker
+  missingSelectedTargetContinuumSchwingerAttachment : PrimitiveSourceNativeCasimirBlocker
   missingPrimitiveR114LiteralStressCoordinate : PrimitiveSourceNativeCasimirBlocker
   missingPrimitiveR119CanonicalMetricSelectedStressSemantics : PrimitiveSourceNativeCasimirBlocker
   missingPrimitiveR122LiteralDensityAnchoring : PrimitiveSourceNativeCasimirBlocker
   missingPrimitiveR124LiteralDensityFiniteMeasureWeld : PrimitiveSourceNativeCasimirBlocker
   missingPrimitiveR127SourceOSLiteralSchwingerWeld : PrimitiveSourceNativeCasimirBlocker
-  missingLiteralSelectedQFTTargetIdentity : PrimitiveSourceNativeCasimirBlocker
   missingPrimitiveSelectedGroupQuaternionSU2Realization : PrimitiveSourceNativeCasimirBlocker
   missingPrimitiveSelectedQFTCartanFieldRealization : PrimitiveSourceNativeCasimirBlocker
   missingPrimitiveFreeMaxwellActionNormalization : PrimitiveSourceNativeCasimirBlocker
@@ -310,18 +345,22 @@ data PrimitiveSourceNativeCasimirBlocker : Set where
   missingPrimitiveCommonMetricProducerLanguage : PrimitiveSourceNativeCasimirBlocker
   missingPrimitiveCasimirCommonActionVariationIdentification : PrimitiveSourceNativeCasimirBlocker
 
+  -- Optional producer/audit-route leaves, not mandatory selected-Casimir leaves.
+  missingCMP119H2PhysicalInstantiation : PrimitiveSourceNativeCasimirBlocker
+  missingCMP119LiteralConstructionEndpointFields : PrimitiveSourceNativeCasimirBlocker
+
 firstPrimitiveUnificationBlocker : PrimitiveSourceNativeCasimirBlocker
-firstPrimitiveUnificationBlocker = missingCMP119H2PhysicalInstantiation
+firstPrimitiveUnificationBlocker = missingSelectedTargetContinuumSchwingerAttachment
 
 secondPrimitiveUnificationBlocker : PrimitiveSourceNativeCasimirBlocker
-secondPrimitiveUnificationBlocker = missingCMP119LiteralConstructionEndpointFields
+secondPrimitiveUnificationBlocker = missingPrimitiveR114LiteralStressCoordinate
 
 thirdPrimitiveUnificationBlocker : PrimitiveSourceNativeCasimirBlocker
-thirdPrimitiveUnificationBlocker = missingPrimitiveR114LiteralStressCoordinate
+thirdPrimitiveUnificationBlocker = missingPrimitiveR119CanonicalMetricSelectedStressSemantics
 
 firstH2SourceFacingSubfrontier : String
 firstH2SourceFacingSubfrontier =
-  "Round581 PublishedFiniteOSMomentSource: published finite Euclidean covariance + bosonic permutation symmetry + Wilson reflection positivity applicability + exact-family quantitative moments + OS0/OS5 closure + selected OS4 clustering"
+  "Optional producer route: Round581 PublishedFiniteOSMomentSource = published finite Euclidean covariance + bosonic permutation symmetry + Wilson reflection positivity applicability + exact-family quantitative moments + OS0/OS5 closure + selected OS4 clustering"
 
 data RetiredRound131AttachmentBlockerAutomaticallyReturns : Set where
 data RetiredR457PinnedIdentityBlockerAutomaticallyReturns : Set where
@@ -357,4 +396,4 @@ retiredIndependentStressSymmetryBlockerDoesNotReturn ()
 
 sourceNativeTerminalReading : String
 sourceNativeTerminalReading =
-  "The authoritative primitive Casimir/GRQFT max-cut no longer requires a full PinnedYangMillsConstruction or a positive Clay mass-gap/SI theorem. CMP119 H2 plus CMP119LiteralConstructionFields definitionally builds the literal Y and supplies the continuum-limit/Schwinger-membership witnesses needed for R457. H2 itself is conditional on its preferred Round581 finite-OS/moment source and literal endpoint interpretations. After H2, the local source leaves are R114 same-object stress coordinate, R119 selected metric-stress semantics, R122 literal density anchoring, R124 density/literal-finite-measure identity and R127 source-OS/literal-Schwinger identity. A literal-Y=qftTarget identity plus QFTRecoveryReceipt compiles Round131 recovery; the later SU2/U1/Maxwell/Casimir stress and GRQFT seams remain fail-closed."
+  "The authoritative selected-Casimir max-cut starts from the UnifiedCandidate's existing qftTarget at one chosen candidate/regime. No second literal-Y producer, H2/R581 construction route, global Round131 attachment, full PinnedYangMillsConstruction, or positive Clay mass-gap/SI proof is mandatory merely to attach Casimir stress. The first source payment is continuum-limit plus Schwinger-membership on that exact selected target, followed by R114/R119/R122/R124/R127 on the same object. QFTRecoveryReceipt directly identifies recoverQFT(joint) with this target. H2/R581 remain valid optional producer/audit routes for constructing a target from CMP119 source data. All later SU2/U1/Maxwell/Casimir stress, all-sector, common-action, GR and experimental seams remain fail-closed."
