@@ -77,32 +77,27 @@ def main() -> int:
         exits["exchange_context"] = run([py, "scripts/acquire_bh4_exchange_context.py", "--matrix", str(matrix), "--rhea", str(rhea), "-o", str(exchange_context)], allow_partial=True)
         exits["sifts"] = run([py, "scripts/acquire_bh4_pdbe_sifts.py", "--panel", str(a.panel), "--max-pdb-per-protein", str(a.max_pdb_per_protein), "-o", str(sifts)], allow_partial=True)
 
-        # Partial acquisition artifacts remain scientifically useful context. The
-        # joint ledger therefore compiles whenever all required JSON receipts
-        # exist, but it never promotes context coverage into solver payment.
         if payment.exists() and abundance.exists() and exchange_context.exists():
             exits["joint_payment"] = run([
-                py,
-                "scripts/build_bh4_joint_payment_ledger.py",
-                "--matrix", str(matrix),
-                "--payment", str(payment),
-                "--abundance", str(abundance),
-                "--exchange", str(exchange_context),
-                "--parameters", str(solver),
-                "-o", str(joint_payment),
+                py, "scripts/build_bh4_joint_payment_ledger.py",
+                "--matrix", str(matrix), "--payment", str(payment),
+                "--abundance", str(abundance), "--exchange", str(exchange_context),
+                "--parameters", str(solver), "-o", str(joint_payment),
             ], allow_partial=True)
 
     if adj.exists():
         xp_cmd = [
             py, "scripts/build_bh4_xpollenation.py",
-            "--matrix", str(matrix),
-            "--rhea", str(rhea),
-            "--adjudication", str(adj),
-            "-o", str(xpollenation),
+            "--matrix", str(matrix), "--rhea", str(rhea),
+            "--adjudication", str(adj), "-o", str(xpollenation),
             "--neighbourhood-dir", str(xpollenation_dir),
         ]
         if sifts.exists():
             xp_cmd.extend(["--sifts", str(sifts)])
+        if abundance.exists():
+            xp_cmd.extend(["--abundance", str(abundance)])
+        if exchange_context.exists():
+            xp_cmd.extend(["--exchange-context", str(exchange_context)])
         if a.wikimedia is not None and a.wikimedia.exists():
             xp_cmd.extend(["--wikimedia", str(a.wikimedia)])
         exits["xpollenation"] = run(xp_cmd, allow_partial=True)
@@ -115,15 +110,9 @@ def main() -> int:
     m = json.loads(matrix.read_text())
     params = json.loads(solver.read_text())
     inter = json.loads(interval.read_text())
-    sab = load(sabio)
-    ad = load(adj)
-    rk = load(ranking)
-    pay = load(payment)
-    abund = load(abundance)
-    exch = load(exchange_context)
-    joint = load(joint_payment)
-    sf = load(sifts)
-    xp = load(xpollenation)
+    sab = load(sabio); ad = load(adj); rk = load(ranking); pay = load(payment)
+    abund = load(abundance); exch = load(exchange_context); joint = load(joint_payment)
+    sf = load(sifts); xp = load(xpollenation)
     network: dict[str, object] = {}
     if sab:
         network["sabio"] = {k: sab.get(k) for k in ("schema", "proteins_completed", "proteins_with_entries", "kinetic_entry_count", "kinetic_parameter_count")}
@@ -145,44 +134,28 @@ def main() -> int:
         network["sifts"] = {**(sf.get("summary") or {}), "schema": sf.get("schema")}
     if xp:
         network["xpollenation"] = {
-            "schema": xp.get("schema"),
-            "reaction_count": xp.get("reaction_count"),
+            "schema": xp.get("schema"), "reaction_count": xp.get("reaction_count"),
             "neighbourhood_dir": str(xpollenation_dir),
-            "authority": "navigation-enrichment-only",
-            "establishes_payment": False,
+            "authority": "navigation-enrichment-only", "establishes_payment": False,
         }
 
     summary = {
         "schema": "dashi.bh4-phase4-maxcut-run.v8",
         "panel": str(a.panel),
-        "matrix": {
-            "species": len(m.get("species_index", [])),
-            "reactions": len(m.get("reaction_index", [])),
-            "residual_reactions": len(m.get("finite_formula_residuals", [])),
-        },
+        "matrix": {"species": len(m.get("species_index", [])), "reactions": len(m.get("reaction_index", [])), "residual_reactions": len(m.get("finite_formula_residuals", []))},
         "parameters": params.get("summary", {}),
-        "interval_status": inter.get("status"),
-        "interval_exit_code": interval_exit,
+        "interval_status": inter.get("status"), "interval_exit_code": interval_exit,
         "missing_reaction_bounds": len(inter.get("missing_reaction_bounds", [])),
         "missing_exchange_bounds": len(inter.get("missing_exchange_bounds", [])),
-        "network_evidence_exit_codes": exits,
-        "network_evidence": network,
+        "network_evidence_exit_codes": exits, "network_evidence": network,
         "artifacts": {
-            "rhea": str(rhea),
-            "matrix": str(matrix),
-            "parameter_template": str(template),
-            "parameters_used_by_solver": str(solver),
-            "sabio": str(sabio),
-            "sabio_adjudication": str(adj),
-            "sabio_flux_ranking": str(ranking),
-            "sabio_flux_payment": str(payment),
-            "protein_abundance": str(abundance),
-            "exchange_context": str(exchange_context),
-            "joint_payment": str(joint_payment),
-            "sifts": str(sifts),
-            "xpollenation": str(xpollenation),
-            "xpollenation_neighbourhoods": str(xpollenation_dir),
-            "interval": str(interval),
+            "rhea": str(rhea), "matrix": str(matrix), "parameter_template": str(template),
+            "parameters_used_by_solver": str(solver), "sabio": str(sabio),
+            "sabio_adjudication": str(adj), "sabio_flux_ranking": str(ranking),
+            "sabio_flux_payment": str(payment), "protein_abundance": str(abundance),
+            "exchange_context": str(exchange_context), "joint_payment": str(joint_payment),
+            "sifts": str(sifts), "xpollenation": str(xpollenation),
+            "xpollenation_neighbourhoods": str(xpollenation_dir), "interval": str(interval),
             "summary": str(summary_path),
         },
     }
