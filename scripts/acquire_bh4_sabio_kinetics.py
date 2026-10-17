@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 """Acquire bounded SABIO-RK kinetic-law candidates for the BH4 protein panel.
 
+Primary 2026 API:
+  https://sabio.h-its.org/export-api/sabio/kinlaw-entry/json
+
+The current browser frontend no longer serves the historical
+`/sabioRestWebServices/*` payloads. The export API returns a JSON envelope with
+`meta` and `data`; this acquirer validates that envelope, follows pagination,
+and preserves the raw entry objects plus byte-level response hashes.
+
 The output is evidence discovery, not a flux-bound manifest. SABIO kinetic
 constants may be in vitro, condition-specific, mutant-specific, or otherwise
 non-transferable to the joint in-vivo BH4 state. Nothing here sets a
 REACTION_FLUX bound automatically.
-
-SABIO's documented web-service surface supports both GET and POST.  In 2026 an
-HTTP-200 response can nevertheless be the browser SPA shell rather than the
-requested plain-text/XML payload.  This acquirer therefore treats HTML as a
-protocol failure, retries entry-ID search with POST, and finally falls back to
-the documented direct SBML search.  HTML is never interpreted as "zero data".
 """
 
 from __future__ import annotations
@@ -21,43 +23,43 @@ import json
 import re
 import urllib.parse
 import urllib.request
-import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
-BASE = "https://sabiork.h-its.org/sabioRestWebServices"
-USER_AGENT = "DASHI-BH4-SABIO/1.1 (https://github.com/chboishabba/dashi_agda)"
-PUBMED_RE = re.compile(r"pubmed(?:\.ncbi\.nlm\.nih\.gov/|/)(\d+)", re.I)
+EXPORT_URL = "https://sabio.h-its.org/export-api/sabio/kinlaw-entry/json"
+USER_AGENT = "DASHI-BH4-SABIO/1.2 (https://github.com/chboishabba/dashi_agda)"
+PUBMED_RE = re.compile(r"(?:pubmed[^0-9]{0,24}|pmid[^0-9]{0,8})([0-9]{5,9})", re.I)
 
 
-def request(url: str, *, data: bytes | None = None, accept: str = "*/*") -> tuple[bytes, dict]:
-    headers = {"User-Agent": USER_AGENT, "Accept": accept}
-    if data is not None:
-        headers["Content-Type"] = "application/x-www-form-urlencoded"
-    req = urllib.request.Request(url, data=data, headers=headers, method="POST" if data is not None else "GET")
+def get_json(url: str) -> tuple[dict, dict]:
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
+    )
     with urllib.request.urlopen(req, timeout=90) as response:
         raw = response.read()
-        return raw, {
-            "status": int(response.status),
-            "content_type": response.headers.get("Content-Type"),
-            "final_url": response.geturl(),
-            "raw_sha256": hashlib.sha256(raw).hexdigest(),
-        }
-
-
-def looks_like_html(raw: bytes) -> bool:
-    head = raw[:8192].decode("utf-8", errors="ignore").lower()
-    return (
-        "<!doctype html" in head
-        or "<html" in head
-        or '<div id="shell"' in head
-        or "<div id='shell'" in head
-    )
-
-
-def looks_like_xml(raw: bytes) -> bool:
-    head = raw.lstrip()[:512].decode("utf-8", errors="ignore").lower()
-    return head.startswith("<?xml") or "<sbml" in head
+        content_type = response.headers.get("Content-Type")
+        final_url = response.geturl()
+        status = int(response.status)
+    head = raw[:4096].decode("utf-8", errors="ignore").lower()
+    if "<html" in head or '<div id="shell"' in head or "<!doctype html" in head:
+        raise RuntimeError(f"SABIO export API returned HTML payload: {final_url}")
+    try:
+        payload = json.loads(raw.decode("utf-8"))
+    except Exception as exc:
+        raise RuntimeError(f"SABIO export API returned non-JSON payload: {final_url}: {exc}") from exc
+    if not isinstance(payload, dict) or not isinstance(payload.get("meta"), dict) or not isinstance(payload.get("data"), list):
+        raise RuntimeError(
+            "SABIO export API response does not match required export-envelope {meta: object, data: array}"
+        )
+    return payload, {
+        "status": status,
+        "content_type": content_type,
+        "final_url": final_url,
+        "raw_sha256": hashlib.sha256(raw).hexdigest(),
+        "raw_byte_count": len(raw),
+    }
 
 
 def panel_members(panel: dict) -> list[dict]:
@@ -69,148 +71,109 @@ def panel_members(panel: dict) -> list[dict]:
     return rows
 
 
-def parse_entry_ids(raw: bytes) -> list[int]:
-    text = raw.decode("utf-8", errors="replace").strip()
-    ids = []
-    for line in text.splitlines():
-        line = line.strip()
-        if line.isdigit():
-            ids.append(int(line))
-    return sorted(set(ids))
+def meta_int(meta: dict, *keys: str) -> int | None:
+    for key in keys:
+        value = meta.get(key)
+        try:
+            if value is not None:
+                return int(value)
+        except (TypeError, ValueError):
+            pass
+    return None
 
 
-def entry_ids(accession: str) -> tuple[list[int] | None, list[dict]]:
-    """Return IDs, or None when the entry-ID endpoint never produced data format."""
-    q = f'UniProtKB_AC:"{accession}"'
-    encoded = urllib.parse.urlencode({"format": "txt", "q": q})
-    diagnostics: list[dict] = []
-
-    # POST first: SABIO documents both GET and POST, and POST avoids the current
-    # SPA rewrite observed for some GET entry-ID requests.
-    raw, meta = request(
-        f"{BASE}/searchKineticLaws/entryIDs",
-        data=encoded.encode("utf-8"),
-        accept="text/plain,application/xml;q=0.9,*/*;q=0.1",
-    )
-    diagnostics.append({"method": "POST", **meta, "html_shell": looks_like_html(raw)})
-    if not looks_like_html(raw):
-        return parse_entry_ids(raw), diagnostics
-
-    raw, meta = request(
-        f"{BASE}/searchKineticLaws/entryIDs?{encoded}",
-        accept="text/plain,application/xml;q=0.9,*/*;q=0.1",
-    )
-    diagnostics.append({"method": "GET", **meta, "html_shell": looks_like_html(raw)})
-    if not looks_like_html(raw):
-        return parse_entry_ids(raw), diagnostics
-
-    return None, diagnostics
-
-
-def kinetic_sbml(ids: list[int]) -> tuple[bytes, dict]:
-    params = urllib.parse.urlencode({
-        "kinlawids": ",".join(str(x) for x in ids),
-        "normalized": "true",
-        "annotation": "miriam",
-    })
-    raw, meta = request(f"{BASE}/kineticLaws?{params}", accept="application/xml,text/xml,*/*;q=0.1")
-    if looks_like_html(raw) or not looks_like_xml(raw):
-        raise RuntimeError("SABIO kineticLaws returned non-SBML payload")
-    return raw, meta
-
-
-def direct_search_sbml(accession: str) -> tuple[bytes, dict]:
-    q = f'UniProtKB_AC:"{accession}"'
-    encoded = urllib.parse.urlencode({"q": q, "normalized": "true", "annotation": "miriam"})
-
-    raw, meta = request(
-        f"{BASE}/searchKineticLaws/sbml",
-        data=encoded.encode("utf-8"),
-        accept="application/xml,text/xml,*/*;q=0.1",
-    )
-    meta = {"method": "POST", **meta, "html_shell": looks_like_html(raw)}
-    if not looks_like_html(raw) and looks_like_xml(raw):
-        return raw, meta
-
-    raw, meta2 = request(
-        f"{BASE}/searchKineticLaws/sbml?{encoded}",
-        accept="application/xml,text/xml,*/*;q=0.1",
-    )
-    meta2 = {"method": "GET", **meta2, "html_shell": looks_like_html(raw)}
-    if looks_like_html(raw) or not looks_like_xml(raw):
-        raise RuntimeError(
-            "SABIO entry-ID and direct-SBML endpoints returned browser/non-SBML payloads; "
-            f"POST diagnostic={meta}; GET diagnostic={meta2}"
-        )
-    return raw, meta2
-
-
-def parse_parameters(raw: bytes) -> list[dict]:
-    root = ET.fromstring(raw)
-    out: list[dict] = []
-    for element in root.iter():
-        local = element.tag.rsplit("}", 1)[-1]
-        if local not in {"parameter", "localParameter"}:
-            continue
-        if "value" not in element.attrib:
-            continue
-        out.append({
-            "id": element.attrib.get("id"),
-            "name": element.attrib.get("name"),
-            "value": element.attrib.get("value"),
-            "units": element.attrib.get("units"),
-            "constant": element.attrib.get("constant"),
-        })
-    return out
-
-
-def count_kinetic_laws(raw: bytes) -> int:
-    root = ET.fromstring(raw)
-    return sum(1 for element in root.iter() if element.tag.rsplit("}", 1)[-1] == "kineticLaw")
-
-
-def parse_pubmed(raw: bytes) -> list[str]:
-    text = raw.decode("utf-8", errors="replace")
+def extract_pubmed_ids(value: Any) -> list[str]:
+    text = json.dumps(value, sort_keys=True, ensure_ascii=False)
     return sorted(set(PUBMED_RE.findall(text)))
 
 
+def count_parameter_objects(value: Any) -> int:
+    """Conservatively count explicit parameter-like objects without schema invention."""
+    count = 0
+    if isinstance(value, dict):
+        lower_keys = {str(k).lower() for k in value}
+        looks_parameter = (
+            bool(lower_keys & {"parameter", "parametername", "parameter_name", "parametertype", "parameter_type"})
+            and bool(lower_keys & {"value", "startvalue", "endvalue", "lower", "upper"})
+        )
+        if looks_parameter:
+            count += 1
+        for child in value.values():
+            count += count_parameter_objects(child)
+    elif isinstance(value, list):
+        for child in value:
+            count += count_parameter_objects(child)
+    return count
+
+
+def entry_identifier(entry: Any) -> str | None:
+    if not isinstance(entry, dict):
+        return None
+    for key in ("kinlaw_id", "kinlawId", "kinLawID", "entry_id", "entryId", "id"):
+        if entry.get(key) is not None:
+            return str(entry[key])
+    return None
+
+
+def export_query(accession: str, page_size: int = 1000) -> tuple[list[Any], list[dict], dict]:
+    query = f'UniProtKB_AC:"{accession}"'
+    page = 1
+    rows: list[Any] = []
+    responses: list[dict] = []
+    first_meta: dict | None = None
+    expected_total: int | None = None
+
+    while True:
+        params = urllib.parse.urlencode({"q": query, "page": page, "pageSize": page_size})
+        payload, receipt = get_json(f"{EXPORT_URL}?{params}")
+        meta = payload["meta"]
+        data = payload["data"]
+        if first_meta is None:
+            first_meta = dict(meta)
+            expected_total = meta_int(meta, "total_count", "totalCount", "total")
+        responses.append({"page": page, "row_count": len(data), **receipt})
+        rows.extend(data)
+
+        total_pages = meta_int(meta, "total_pages", "totalPages", "pages")
+        if total_pages is not None:
+            if page >= total_pages:
+                break
+        elif expected_total is not None:
+            if len(rows) >= expected_total:
+                break
+        elif len(data) < page_size:
+            break
+        else:
+            raise RuntimeError("SABIO export envelope lacks a usable pagination terminator")
+        page += 1
+        if page > 1000:
+            raise RuntimeError("SABIO export pagination exceeded 1000 pages")
+
+    if expected_total is not None and len(rows) != expected_total:
+        raise RuntimeError(
+            f"SABIO export envelope row mismatch: total_count={expected_total}, acquired={len(rows)}"
+        )
+    return rows, responses, first_meta or {}
+
+
 def acquire_member(symbol: str | None, accession: str) -> dict:
-    ids, search_diagnostics = entry_ids(accession)
-    row = {
+    rows, responses, meta = export_query(accession)
+    entry_ids = [x for x in (entry_identifier(row) for row in rows) if x is not None]
+    return {
         "symbol": symbol,
         "accession": accession,
         "query": f'UniProtKB_AC:"{accession}"',
-        "entry_ids": ids or [],
-        "entry_count": 0,
-        "parameters": [],
-        "pubmed_ids": [],
-        "sbml_raw_sha256": None,
-        "search_diagnostics": search_diagnostics,
-        "acquisition_mode": None,
-        "status": None,
+        "acquisition_mode": "export-envelope",
+        "entry_count": len(rows),
+        "entry_ids": entry_ids,
+        "kinetic_parameter_object_count": sum(count_parameter_objects(row) for row in rows),
+        "pubmed_ids": extract_pubmed_ids(rows),
+        "export_meta": meta,
+        "response_receipts": responses,
+        "entry_top_level_keys": sorted({str(k) for row in rows if isinstance(row, dict) for k in row}),
+        "entries": rows,
+        "status": "acquired" if rows else "no-entries",
     }
-
-    if ids is not None:
-        if not ids:
-            row["acquisition_mode"] = "entry-ids"
-            row["status"] = "no-entries"
-            return row
-        raw, sbml_meta = kinetic_sbml(ids)
-        row["entry_count"] = len(ids)
-        row["acquisition_mode"] = "entry-ids+kineticLaws"
-        row["sbml_response"] = sbml_meta
-    else:
-        # Crucially, SPA HTML is not evidence of zero SABIO records.
-        raw, sbml_meta = direct_search_sbml(accession)
-        row["entry_count"] = count_kinetic_laws(raw)
-        row["acquisition_mode"] = "direct-search-sbml"
-        row["sbml_response"] = sbml_meta
-
-    row["sbml_raw_sha256"] = hashlib.sha256(raw).hexdigest()
-    row["parameters"] = parse_parameters(raw)
-    row["pubmed_ids"] = parse_pubmed(raw)
-    row["status"] = "acquired" if row["entry_count"] else "no-entries"
-    return row
 
 
 def acquire(panel_path: Path) -> tuple[dict, int]:
@@ -222,27 +185,25 @@ def acquire(panel_path: Path) -> tuple[dict, int]:
             results.append(acquire_member(member["symbol"], member["accession"]))
         except Exception as exc:
             errors.append({**member, "error": str(exc)})
+
     with_entries = [row for row in results if row["entry_count"]]
-    html_shell_observed = any(
-        any(d.get("html_shell") for d in row.get("search_diagnostics", []))
-        for row in results
-    )
     return {
-        "schema": "dashi.bh4-sabio-kinetics.v2",
+        "schema": "dashi.bh4-sabio-kinetics.v3",
         "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
-        "source": "SABIO-RK REST web services",
+        "source": "SABIO-RK kinetic-law export API",
+        "export_api": EXPORT_URL,
         "source_panel": str(panel_path),
         "query_field": "UniProtKB_AC",
         "proteins_requested": len(members),
         "proteins_completed": len(results),
         "proteins_with_entries": len(with_entries),
         "kinetic_entry_count": sum(row["entry_count"] for row in results),
-        "kinetic_parameter_count": sum(len(row["parameters"]) for row in results),
-        "html_shell_observed": html_shell_observed,
+        "kinetic_parameter_count": sum(row["kinetic_parameter_object_count"] for row in results),
         "results": results,
         "errors": errors,
         "promotion_boundary": {
-            "html_shell_means_zero_entries": False,
+            "legacy_rest_spa_means_zero_entries": False,
+            "export_envelope_identity_creates_flux_bounds": False,
             "kinetic_parameters_create_flux_bounds": False,
             "in_vitro_parameters_create_in_vivo_state": False,
             "cross_condition_parameters_create_same_object_state": False,
