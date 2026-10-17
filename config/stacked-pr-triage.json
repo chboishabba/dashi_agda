@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "base": "master",
+  "pull_requests": [
+    {
+      "number": 1004,
+      "head": "a8e4eba2bed40d78382c8df90088df57671a4147",
+      "title": "NS B: compile canonical signed ordered kernel through R423 critical barrier",
+      "seed_paths": [
+        {"path": "DASHI/Physics/Closure/NSTriadKNOrderedOrientedForceToCriticalBarrierExact.agda", "role": "theorem_owner"},
+        {"path": "DASHI/Physics/Closure/NSClayFacingATwoPhysicalSeamCompilerExact.agda", "role": "theorem_owner"},
+        {"path": "DASHI/Physics/Closure/NSLiteralClayABCDRunTargetExact.agda", "role": "authority_surface"},
+        {"path": "DASHI/Physics/Closure/NSClayFacingABCDProofStatusExact.agda", "role": "status_surface"}
+      ],
+      "notes": "Large stacked PR. Start from stated theorem owners and authority surfaces; expand only if current-master semantic delta shows unique signatures outside the seeds."
+    },
+    {
+      "number": 1025,
+      "head": "e73cd0149b083d132022ae1c5377f05a3abc7923",
+      "title": "YM R476-R477: continuum transport and exact source-debt frontier",
+      "seed_paths": [
+        {"path": "DASHI/Physics/Closure/NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact.agda", "role": "theorem_owner"},
+        {"path": "DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalRateDifferenceExact.agda", "role": "theorem_owner"},
+        {"path": "DASHI/Physics/Closure/NSTriadKNSignedRateVectorPaymentToR503Exact.agda", "role": "conditional_compiler"},
+        {"path": "DASHI/Physics/Closure/NSTriadKNSignedRateVectorPaymentToR503Regression.agda", "role": "regression_surface"}
+      ],
+      "historical_path_regex": "Round[0-9]+",
+      "notes": "The six NS Round47x-490 files and YM Round491 file are historical/frontier wrappers unless semantic comparison proves unique value."
+    },
+    {
+      "number": 1068,
+      "head": "9944a9023250b6e087952f14e5f381e87ad785e8",
+      "title": "YM: expose projective-cylinder and WEXT mereology",
+      "seed_paths": [
+        {"path": "DASHI/Physics/YangMills/YangMillsProjectiveMereologyBridgeExact.agda", "role": "theorem_owner"},
+        {"path": "DASHI/Core/MereologyCoreExact.agda", "role": "dependency_scaffold"},
+        {"path": "DASHI/Core/MereologyNonCollapseExact.agda", "role": "dependency_scaffold"},
+        {"path": "DASHI/Core/MultipartMereologyBridgeExact.agda", "role": "dependency_scaffold"},
+        {"path": "DASHI/Core/ConsumerRelativeMereologyExact.agda", "role": "dependency_scaffold"},
+        {"path": "DASHI/Core/Everything.agda", "role": "integration_only"},
+        {"path": "DASHI/Physics/YangMills/Everything.agda", "role": "integration_only"}
+      ],
+      "notes": "PR body explicitly says the core mereology modules were duplicated only so the adapter could typecheck before the core PR landed."
+    }
+  ]
+}
