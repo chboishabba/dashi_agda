@@ -35,6 +35,7 @@ record TerminalExecutionAddendum : Set where
     entropySourceDataBytes : Terminal.FrontierStatus
     crossStudySameSampleIdentity : Terminal.FrontierStatus
     casimirIdealSheetScalingCeiling : Terminal.FrontierStatus
+    superluminalPositiveEulerianEnergyWarpConstructionSource : Terminal.FrontierStatus
     genericWarpEnergyConditionObstructionSource : Terminal.FrontierStatus
     subluminalPositiveEnergyWarpConstructionSource : Terminal.FrontierStatus
     superluminalPositiveEnergyPhysicalWarpSource : Terminal.FrontierStatus
@@ -57,6 +58,8 @@ record TerminalExecutionAddendum : Set where
     acquisitionRouteCountsAsByteAcquisition : Bool
     entropyMaxwellSyntheticFixtureCountsAsMeasuredReplay : Bool
     idealSheetScalingCountsAsPhysicalMacroscopicScaling : Bool
+    positiveEulerianEnergyCountsAsFullWEC : Bool
+    positiveEulerianEnergyCountsAsNEC : Bool
     subluminalPositiveEnergyWarpCountsAsFTL : Bool
     sourceWarpTheoremCountsAsPhysicalWarpDevice : Bool
     quantumGateTeleportationCountsAsFTL : Bool
@@ -91,6 +94,7 @@ currentTerminalExecutionAddendum =
     Terminal.numericallyExecuted
     Terminal.sourcePaid
     Terminal.sourcePaid
+    Terminal.sourcePaid
     Terminal.externalOnly
     Terminal.sourcePaid
     Terminal.sourcePaid
@@ -103,7 +107,7 @@ currentTerminalExecutionAddendum =
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
-    false false false false false false false false false false false false false false false false false false
+    false false false false false false false false false false false false false false false false false false false false
 
 record TerminalExecutionAddendumBoundary : Set where
   constructor terminal-execution-addendum-boundary
