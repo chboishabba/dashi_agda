@@ -6,8 +6,9 @@ module DASHI.Philosophy.NonginCurrentMaxCutT27C3Exact where
 -- The previous current owner pays the generic policy-completed T^27 graph,
 -- higher stack and finite hypersheaf.  This additive owner records the new
 -- repository-native C3 policy inhabitant, policy-hidden non-descent, exact
--- consumer-relative residual reopening, guarded universal-369 handoff and
--- exact all-finite-depth T^27 lift without weakening attribution boundaries.
+-- consumer-relative residual reopening/fidelity boundary, guarded universal-
+-- 369 handoff and exact all-finite-depth T^27 lift without weakening
+-- attribution boundaries.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -54,6 +55,14 @@ policyDiscriminatorReceipt :
   Residual.thirdFaceMeasurementDiscriminatorPaid residualBoundary ≡ true
 policyDiscriminatorReceipt = refl
 
+fidelityEscalationReceipt :
+  Residual.fidelityEscalationWitnessPaid residualBoundary ≡ true
+fidelityEscalationReceipt = refl
+
+thirdFaceReductionFailureReceipt :
+  Residual.thirdFaceCandidateReductionFailurePaid residualBoundary ≡ true
+thirdFaceReductionFailureReceipt = refl
+
 nativeC3PolicyReceipt :
   C3Policy.nativeC3CompletionPolicyConstructed c3Boundary ≡ true
 nativeC3PolicyReceipt = refl
@@ -83,6 +92,8 @@ record NonginCurrentMaxCutT27C3Boundary : Set where
     hiddenPolicyExactResidualReopeningPaid : Bool
     thirdFaceMeasurementDiscriminatorPaid : Bool
     policyMechanisticEquifinalityPaid : Bool
+    fidelityEscalationWitnessPaid : Bool
+    thirdFaceCandidateReductionFailurePaid : Bool
     t18DeclaredFutureConsumerPreserved : Bool
     guardedUniversal369HandoffPaid : Bool
     nativeC3CompletionPolicyPaid : Bool
@@ -105,25 +116,6 @@ open NonginCurrentMaxCutT27C3Boundary public
 canonicalNonginCurrentMaxCutT27C3Boundary : NonginCurrentMaxCutT27C3Boundary
 canonicalNonginCurrentMaxCutT27C3Boundary =
   nongin-current-max-cut-t27-c3-boundary
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    false
-    false
-    false
-    false
-    false
-    false
-    false
+    true true true true true true true true true
+    true true true true true true true true
+    false false false false false false false
