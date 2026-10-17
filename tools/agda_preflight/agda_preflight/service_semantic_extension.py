@@ -8,6 +8,7 @@ from .development_history import (
     frontier_genealogy,
     stale_frontiers,
 )
+from .external_proof_bridge import ExternalProofDemand, ExternalProofRouter
 from .proof_router import ProofRouteRequest, ProofRouter
 from .repository_store import load_narrative_events
 
@@ -28,6 +29,9 @@ def install_service_semantic_extension(service_cls: type) -> None:
             semantic_catalog=getattr(self, "semantic", None),
             connection=self.index.connection,
         )
+
+    def _external_router(self):
+        return ExternalProofRouter(_proof_router(self), self.index.connection)
 
     def refresh_semantic_catalog(self) -> dict:
         count = self.index.refresh_semantic_catalog()
@@ -146,6 +150,61 @@ def install_service_semantic_extension(service_cls: type) -> None:
             limit=limit,
         )
 
+    def proof_route_for_obligation(
+        self,
+        query: str,
+        *,
+        demand_ref: str,
+        external_obligation_ref: str,
+        statement_digest: str,
+        target_prover: str = "lean",
+        claim_kind: str = "deductive",
+        mathematical_status: str = "novel-open",
+        statement_status: str = "not-transcribed",
+        certification_status: str = "uncertified",
+        da51_address: Optional[str] = None,
+        source_declaration: Optional[str] = None,
+        current_source_hash: Optional[str] = None,
+        limit: int = 50,
+    ) -> dict:
+        return _external_router(self).route(
+            ExternalProofDemand(
+                demand_ref=demand_ref,
+                external_obligation_ref=external_obligation_ref,
+                statement_digest=statement_digest,
+                query=query,
+                target_prover=target_prover,
+                claim_kind=claim_kind,
+                mathematical_status=mathematical_status,
+                statement_status=statement_status,
+                certification_status=certification_status,
+                da51_address=da51_address,
+                source_declaration=source_declaration,
+                current_source_hash=current_source_hash,
+            ),
+            limit=limit,
+        )
+
+    def formal_evidence_for_obligation(
+        self,
+        *,
+        demand_ref: str,
+        external_obligation_ref: str,
+        statement_digest: str,
+    ) -> dict:
+        return {
+            "demand_ref": demand_ref,
+            "external_obligation_ref": external_obligation_ref,
+            "statement_digest": statement_digest,
+            "evidence": _external_router(self).evidence_for_obligation(
+                demand_ref=demand_ref,
+                external_obligation_ref=external_obligation_ref,
+                statement_digest=statement_digest,
+            ),
+            "authority": "evidence-only",
+            "establishes_proof": False,
+        }
+
     def proof_route_history(
         self,
         *,
@@ -189,6 +248,8 @@ def install_service_semantic_extension(service_cls: type) -> None:
     service_cls.discover = discover
     service_cls.round_lineage = round_lineage
     service_cls.proof_route = proof_route
+    service_cls.proof_route_for_obligation = proof_route_for_obligation
+    service_cls.formal_evidence_for_obligation = formal_evidence_for_obligation
     service_cls.proof_route_history = proof_route_history
     service_cls.da51_resolve = da51_resolve
     service_cls.da51_evidence = da51_evidence
