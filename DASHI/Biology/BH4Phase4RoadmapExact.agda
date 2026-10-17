@@ -4,13 +4,14 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.BH4JointFluxFeasibilityExact as Flux
 import DASHI.Biology.BH4QuantitativeAcquisitionExact as Acquisition
+import DASHI.Biology.BH4ExecutedSIFTSReceiptExact as SIFTS
 import DASHI.Biology.Molecular.BH4ExecutedPanelReactionReceiptExact as Executed
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Matrix
 import DASHI.Core.GenericReceipt as Receipt
 
 ------------------------------------------------------------------------
 -- Phase-4 roadmap after the live panel chemistry + first joint-flux execution,
--- and the first quantitative external-evidence run.
+-- bounded SIFTS acquisition, and SABIO export-API migration.
 ------------------------------------------------------------------------
 
 data BH4Phase : Set where
@@ -38,10 +39,6 @@ data BH4Phase4Residual : Set where
   payUpstreamToTSC2SameObjectTransport : BH4Phase4Residual
   discriminateAlternativeMechanisms : BH4Phase4Residual
 
--- Reaction acquisition/promotion are historical.  The first bounded SIFTS run
--- also executed successfully and is now an adjudication problem, not an
--- acquisition problem.  SABIO reached HTTP 200 but returned the browser shell;
--- its protocol adapter is repaired and requires rerun before evidence payment.
 livePhase4Residuals : List BH4Phase4Residual
 livePhase4Residuals =
   resolveNonFiniteMTORProteinReactionRepresentation
@@ -70,10 +67,25 @@ intervalFluxSolverReady : Bool
 intervalFluxSolverReady = true
 
 firstBoundedSIFTSAcquisitionExecuted : Bool
-firstBoundedSIFTSAcquisitionExecuted = Acquisition.pdbeSiftsBoundedAcquisitionExecuted
+firstBoundedSIFTSAcquisitionExecuted = SIFTS.boundedAcquisitionExecuted SIFTS.canonicalExecutedSIFTSReceipt
 
-firstSABIOAttemptWasProtocolPayload : Bool
-firstSABIOAttemptWasProtocolPayload = false
+boundedSIFTSStructuresExamined : Nat
+boundedSIFTSStructuresExamined = SIFTS.structuresExamined SIFTS.canonicalExecutedSIFTSReceipt
+
+boundedSIFTSMatchingSegments : Nat
+boundedSIFTSMatchingSegments = SIFTS.matchingSIFTSSegmentCount SIFTS.canonicalExecutedSIFTSReceipt
+
+boundedSIFTSProteinsWithPDBLinks : Nat
+boundedSIFTSProteinsWithPDBLinks = SIFTS.proteinsWithUniProtPDBLinks SIFTS.canonicalExecutedSIFTSReceipt
+
+boundedSIFTSProteinsWithMatchingSegments : Nat
+boundedSIFTSProteinsWithMatchingSegments = SIFTS.proteinsWithMatchingSegments SIFTS.canonicalExecutedSIFTSReceipt
+
+legacySABIORestSurfaceRetired : Bool
+legacySABIORestSurfaceRetired = true
+
+sabioExportAPIAdapterReady : Bool
+sabioExportAPIAdapterReady = true
 
 sabioProtocolRepairReady : Bool
 sabioProtocolRepairReady = true
@@ -84,11 +96,9 @@ executedPanelSpeciesCount = Matrix.executedPanelSpeciesCount
 executedPanelReactionCount : Nat
 executedPanelReactionCount = Matrix.executedPanelReactionCount
 
--- Historical first live template: 15 core + 12 reaction-flux coordinates.
 firstQuantitativeCoordinateCount : Nat
 firstQuantitativeCoordinateCount = 27
 
--- Current template: 15 core + 12 reaction fluxes + 29 explicit exchanges.
 expandedQuantitativeCoordinateCount : Nat
 expandedQuantitativeCoordinateCount = 56
 
@@ -118,6 +128,18 @@ firstCoordinateCountExact = refl
 
 expandedCoordinateCountExact : expandedQuantitativeCoordinateCount ≡ 56
 expandedCoordinateCountExact = refl
+
+boundedSIFTSStructuresExact : boundedSIFTSStructuresExamined ≡ 38
+boundedSIFTSStructuresExact = refl
+
+boundedSIFTSSegmentsExact : boundedSIFTSMatchingSegments ≡ 526
+boundedSIFTSSegmentsExact = refl
+
+boundedSIFTSLinkedProteinsExact : boundedSIFTSProteinsWithPDBLinks ≡ 14
+boundedSIFTSLinkedProteinsExact = refl
+
+boundedSIFTSMatchingProteinsExact : boundedSIFTSProteinsWithMatchingSegments ≡ 13
+boundedSIFTSMatchingProteinsExact = refl
 
 firstFluxAttemptMissingBoundsExact : missingReactionFluxBounds ≡ 12
 firstFluxAttemptMissingBoundsExact = refl
@@ -166,7 +188,7 @@ canonicalBH4Phase4RoadmapReceipt =
   Receipt.mkNonPromotingReceipt
     "BH4 Phase-4 quantitative system-state roadmap"
     "DASHI.Biology.BH4Phase4RoadmapExact"
-    "executed 16-protein panel -> 24 Rhea links -> 12 finite reactions + 3 MTOR residuals -> 29x12 matrix -> 56-coordinate open-system problem -> bounded SIFTS acquisition + repaired SABIO acquisition"
-    "closes panel Rhea execution and SIFTS acquisition-as-acquisition; records the first flux problem as underdetermined; narrows the external-evidence frontier to SABIO rerun plus evidence adjudication rather than more acquisition scaffolding"
-    "HTTP-200 HTML is not zero SABIO data; SIFTS sequence/residue mappings do not automatically establish catalytic-site function; candidate kinetics do not automatically become flux bounds; Phase-4 closure does not establish disease or clinical causation"
+    "executed 16-protein panel -> 24 Rhea links -> 29x12 finite network -> 56-coordinate open-system problem -> bounded SIFTS receipt (38 structures, 526 segments) -> SABIO export-API adapter"
+    "closes reaction and bounded structural-mapping acquisition; promotes canonical SIFTS machine totals; records the historical joint flux problem as underdetermined; narrows SABIO work to rerunning the current export API and adjudicating recovered kinetic rows"
+    "SIFTS mapping is not catalytic-site function; export-API kinetic rows are not in-vivo flux bounds; underdetermination is neither mechanism truth nor falsity; Phase-4 closure does not establish disease or clinical causation"
     "python3 scripts/run_bh4_phase4_maxcut.py"
