@@ -8,10 +8,11 @@ import DASHI.Biology.NitrousOxideMetabolismEvidenceExact as Nang
 import DASHI.Biology.NonginNangNitrogenOxideRefinementExact as Nongin
 import DASHI.Biology.KitzerowBH4SystemNongNangMaxCutExact as MaxCut
 import DASHI.Biology.UniProtExternalKnowledgeExact as UniProt
+import DASHI.Biology.UniProtBH4PanelCertificateExact as Panel
 import DASHI.Biology.ExternalBiologyEvidenceCore as External
 
 ------------------------------------------------------------------------
--- Regression surface written before the production owners.
+-- Regression witnesses for the BH4 / NONG-NANG max-cut.
 ------------------------------------------------------------------------
 
 nitricOxideIsNotNitrousOxide :
@@ -46,6 +47,24 @@ nongNangAliasDoesNotIdentifyNitricOxide :
     Nongin.canonicalNongNangGenealogyBoundary
   ≡ false
 nongNangAliasDoesNotIdentifyNitricOxide = refl
+
+exactPanelAcquisitionIsClosed :
+  MaxCut.KitzerowBH4SystemMaxCutBoundary.exactProteinPanelAcquisitionClosed
+    MaxCut.canonicalKitzerowBH4SystemMaxCutBoundary
+  ≡ true
+exactPanelAcquisitionIsClosed = refl
+
+allSixteenPanelRecordsArePinned :
+  Panel.UniProtBH4PanelBoundary.everyMemberBytePinned
+    Panel.canonicalUniProtBH4PanelBoundary
+  ≡ true
+allSixteenPanelRecordsArePinned = refl
+
+completePanelStillDoesNotCreateAllocatorFlux :
+  Panel.UniProtBH4PanelBoundary.completePanelCreatesAllocatorFlux
+    Panel.canonicalUniProtBH4PanelBoundary
+  ≡ false
+completePanelStillDoesNotCreateAllocatorFlux = refl
 
 isolatedNodesDoNotConfirmKitzerowWholeGraph :
   MaxCut.KitzerowBH4SystemMaxCutBoundary.isolatedNodeSupportConfirmsWholeGraph
