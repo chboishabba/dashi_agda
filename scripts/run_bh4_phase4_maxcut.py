@@ -51,6 +51,7 @@ def main() -> int:
     sabio = out / "bh4-sabio-kinetics.json"
     sifts = out / "bh4-pdbe-sifts.json"
     interval = out / "bh4-interval-flux-feasibility.json"
+    summary_path = out / "bh4-phase4-maxcut-summary.json"
 
     run([py, "scripts/acquire_rhea_chebi_bh4_reactions.py", "--from-uniprot-panel", str(args.panel), "-o", str(rhea)])
     run([py, "scripts/build_bh4_stoichiometric_matrix.py", str(rhea), "--output-prefix", str(matrix_prefix)])
@@ -89,13 +90,14 @@ def main() -> int:
         "artifacts": {
             "rhea": str(rhea),
             "matrix": str(matrix),
-            "parameters": str(solver_parameters),
+            "parameter_template": str(parameter_template),
+            "parameters_used_by_solver": str(solver_parameters),
             "sabio": str(sabio) if not args.skip_network_evidence else None,
             "sifts": str(sifts) if not args.skip_network_evidence else None,
             "interval": str(interval),
+            "summary": str(summary_path),
         },
     }
-    summary_path = out / "bh4-phase4-maxcut-summary.json"
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(summary, indent=2, sort_keys=True))
     return 3 if interval_payload.get("status") == "infeasible" else 0
