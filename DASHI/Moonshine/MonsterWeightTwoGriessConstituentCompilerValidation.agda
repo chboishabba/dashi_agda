@@ -4,13 +4,13 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Moonshine.MonsterWeightTwoGriessConstituentCompilerExact as Griess
 
-witnessRequiresSameSemantic196883Carrier : Bool
-witnessRequiresSameSemantic196883Carrier =
-  Griess.griessWitnessRequiresSameSemantic196883Carrier
+witnessRequiresActual196883Representation : Bool
+witnessRequiresActual196883Representation =
+  Griess.griessWitnessRequiresActual196883Representation
 
-witnessRequiresLiteralInclusionIntertwining : Bool
-witnessRequiresLiteralInclusionIntertwining =
-  Griess.griessWitnessRequiresLiteralInclusionIntertwining
+witnessRequiresInjectiveEquivariantInclusion : Bool
+witnessRequiresInjectiveEquivariantInclusion =
+  Griess.griessWitnessRequiresInjectiveEquivariantInclusion
 
 compilerProducesLegacyBridge : Bool
 compilerProducesLegacyBridge =
@@ -19,6 +19,10 @@ compilerProducesLegacyBridge =
 compilerProducesPaidBridge : Bool
 compilerProducesPaidBridge =
   Griess.griessCompilerProducesPaidBridge
+
+semanticBasisLabelsAloneProduceGriessVectorCarrier : Bool
+semanticBasisLabelsAloneProduceGriessVectorCarrier =
+  Griess.semanticBasisLabelsAloneProduceGriessVectorCarrier
 
 characterSplitAloneProducesGriessConstituent : Bool
 characterSplitAloneProducesGriessConstituent =
