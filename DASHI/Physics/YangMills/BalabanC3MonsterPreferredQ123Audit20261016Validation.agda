@@ -32,9 +32,29 @@ q3BridgeCompiledFromPhysicalIdentification :
   Audit.q3BridgeIsCompilerOutputFromFactorizedIdentification ≡ true
 q3BridgeCompiledFromPhysicalIdentification = refl
 
-physicalHaarMeaningStillSourceFacing :
-  Audit.physicalHaarSourceExpectationSemanticsStillSourcePackage ≡ true
-physicalHaarMeaningStillSourceFacing = refl
+q2OpaqueEquationRetired :
+  Audit.q2OpaqueAnomalyEquationStillSourcePackage ≡ false
+q2OpaqueEquationRetired = refl
+
+q2ReducedToSameObjectTransports :
+  Audit.q2ReducedToRenormalizedSameObjectTransports ≡ true
+q2ReducedToSameObjectTransports = refl
+
+citationDoesNotPayCMP119Transport :
+  Audit.q2CitationAlonePaysSelectedTransport ≡ false
+citationDoesNotPayCMP119Transport = refl
+
+independentHaarQuadratureBridgeRetired :
+  Audit.independentPhysicalHaarQuadratureBridgeStillSourcePackage ≡ false
+independentHaarQuadratureBridgeRetired = refl
+
+haarFiniteMeasureEqualityStillSourceFacing :
+  Audit.physicalHaarFiniteMeasureSameObjectEqualityStillSourcePackage ≡ true
+haarFiniteMeasureEqualityStillSourceFacing = refl
+
+attributionBoundaryLocked :
+  Audit.attributionBoundaryPreserved ≡ true
+attributionBoundaryLocked = refl
 
 wholeActionClassicalCollapseRejected :
   Audit.wholeGeneratedActionMayCollapseToClassicalCurvature ≡ false
