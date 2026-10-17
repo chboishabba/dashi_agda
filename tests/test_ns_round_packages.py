@@ -62,6 +62,13 @@ def _cfg():
         "package_namespace": "ns-round-package",
         "candidate_positive_names": [],
         "status_count_names": ["statusCount"],
+        "status_name_patterns": [
+            r"IsFalse$",
+            r"IsTrue$",
+            r"CountIs",
+            r"Regression",
+            r"StillOpen$",
+        ],
         "negative_name_terms": ["nogo"],
         "compiler_hints": {},
         "canonical_owner_by_name": {},
@@ -81,6 +88,13 @@ def test_ns_config_uses_two_prefixes_without_seed_families():
     assert "seed_families" not in cfg
     assert cfg["package_namespace"] == "ns-round-package"
     assert cfg["nonround_match_sample_limit"] == 10
+    assert cfg["status_name_patterns"] == [
+        "IsFalse$",
+        "IsTrue$",
+        "CountIs",
+        "Regression",
+        "StillOpen$",
+    ]
 
 
 def test_ns_discovers_round_families_under_both_prefixes_without_seeds():
@@ -161,6 +175,30 @@ def test_ns_negative_and_status_receipts_are_preserved():
     assert status["disposition"] == "STATUS_ONLY"
     assert nogo["disposition"] == "NEGATIVE_RESULT"
     assert nogo["retained_negative_results"] == ["transportNoGo"]
+
+
+def test_ns_status_patterns_reclassify_boolean_and_regression_receipts_only():
+    engine = _load("round_engine_status_patterns", SCRIPTS / "_round_package_extraction.py")
+    base = {
+        "package_id": "p", "domain": "DASHI.Physics.Closure.",
+        "family": "DASHI.Physics.Closure.Foo", "declarations": [],
+        "status_only_evidence": [], "negative_result_evidence": [],
+    }
+    indexes = {"exact": {}, "sig": {}, "name": {}, "body": {}}
+    for name in [
+        "literalCarrierClosedIsFalse",
+        "compilerClosedIsTrue",
+        "sourceAttachmentCountIsEighteen",
+        "strictMarginRegression",
+        "physicalProducerStillOpen",
+    ]:
+        row = engine.classify_package({**base, "candidate_names": [name]}, indexes, _cfg())
+        assert row["disposition"] == "STATUS_ONLY"
+        assert row["selected_canonical_owner"] is None
+    theorem = engine.classify_package(
+        {**base, "candidate_names": ["integratedMixedHelicityBound"]}, indexes, _cfg()
+    )
+    assert theorem["disposition"] == "UNRESOLVED"
 
 
 def test_ns_match_sampling_keeps_full_count_and_truncation_flag():
