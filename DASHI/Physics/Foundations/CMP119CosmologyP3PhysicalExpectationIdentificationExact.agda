@@ -25,13 +25,17 @@ open import DASHI.Foundations.RealAnalysisAxioms using
 
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteToLocalCAnomalyLimitTransportExact as LocalLimit
 import DASHI.Physics.Foundations.CMP119AntigravityRealHaarExpectationRepresentationExact as HaarLimit
+import DASHI.Physics.Foundations.CMP119AntigravityPinnedLocalCTraceAnomalyBridgeExact as LocalTrace
+import DASHI.Physics.Foundations.CMP119AntigravityRealSU2TraceClosureExact as SU2Trace
 import DASHI.Physics.Foundations.CMP119CosmologyP3AsymptoticFiniteF2CommonLimitExact as P3
 
 import DASHI.Physics.YangMills.BalabanCMP119FactorizedDensityApproximationExact as Approx
 import DASHI.Physics.YangMills.BalabanCMP119FactorizedDensityConvergenceExact as Conv
 import DASHI.Physics.YangMills.BalabanCMP119FiniteObservableExpectationConvergenceExact as Expect
+import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Embed
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanRealVanishingFiniteAlgebraExact as Vanishing
+import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact as Local
 
 record FactorizedPhysicalExpectationIdentification
     {SlowField Sequence Component Step : Set}
@@ -73,7 +77,15 @@ compileFactorizedPhysicalIdentificationToQ3 :
     {observable : SlowField → ℝ}
     {ContinuumFamily CurvaturePolynomial LocalOperator Position
      OPECoefficient StressTensor Hamiltonian : Set}
-    {localC embedding convention readout}
+    {localC :
+      Local.ContinuumLocalOperatorOPEStressTensor
+        ContinuumFamily CurvaturePolynomial LocalOperator Position
+        OPECoefficient StressTensor Hamiltonian}
+    {embedding : Embed.OrderedRationalRealEmbedding}
+    {convention : SU2Trace.RealSU2TraceConvention embedding}
+    {readout :
+      LocalTrace.SameFamilyLocalCTraceAnomalyReadout
+        localC embedding convention}
     {localTransport :
       LocalLimit.FiniteCMP119ToLocalCAnomalyLimitTransport
         sequenceLimit readout}
