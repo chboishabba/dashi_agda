@@ -99,22 +99,14 @@ canonicalOpenAIRoutes =
   ∷ forcedNavierStokesRoute
   ∷ []
 
-------------------------------------------------------------------------
--- Exact external formal inhabitants.
---
--- The theorem declarations really exist at the pinned upstream commit.  These
--- values make that non-emptiness explicit while keeping proof-term authority
--- outside Agda and keeping same-object TOE transport false.
-------------------------------------------------------------------------
-
 record OpenAITheoremInhabitant : Set where
   field
-    repository : String
-    pinnedCommit : String
-    family : String
-    moduleName : String
-    declarationName : String
-    authority : ExternalFormalAuthority
+    inhabitantRepository : String
+    inhabitantPinnedCommit : String
+    inhabitantFamily : String
+    inhabitantModuleName : String
+    inhabitantDeclarationName : String
+    inhabitantAuthority : ExternalFormalAuthority
     localAgdaProofTerm : Bool
     localAgdaProofTermIsFalse : localAgdaProofTerm ≡ false
     sameObjectTOETransport : Bool
@@ -124,12 +116,12 @@ open OpenAITheoremInhabitant public
 inhabitantFromRoute : OpenAITheoremRoute → OpenAITheoremInhabitant
 inhabitantFromRoute theoremRoute =
   record
-    { repository = "openai/math"
-    ; pinnedCommit = "1581d4cbdd69a0faf34b2089614fe2a814316a6a"
-    ; family = OpenAITheoremRoute.family theoremRoute
-    ; moduleName = upstreamModule theoremRoute
-    ; declarationName = upstreamDeclaration theoremRoute
-    ; authority = importedFormalSource
+    { inhabitantRepository = "openai/math"
+    ; inhabitantPinnedCommit = "1581d4cbdd69a0faf34b2089614fe2a814316a6a"
+    ; inhabitantFamily = OpenAITheoremRoute.family theoremRoute
+    ; inhabitantModuleName = upstreamModule theoremRoute
+    ; inhabitantDeclarationName = upstreamDeclaration theoremRoute
+    ; inhabitantAuthority = importedFormalSource
     ; localAgdaProofTerm = false
     ; localAgdaProofTermIsFalse = refl
     ; sameObjectTOETransport = false
