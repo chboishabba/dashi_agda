@@ -117,6 +117,24 @@ def _git(root_or_child: Path, *args: str) -> str:
     return result.stdout.strip()
 
 
+def _agda_check_command(root: Path, relative_source: Path) -> list[str]:
+    """Select DASHI's canonical named Agda library explicitly.
+
+    The repository root intentionally contains several `.agda-lib` files.
+    Bare `agda <source>` asks Agda to auto-discover a project library and
+    fails on that valid multi-library layout.  The repository's documented
+    consumer/checker contract is the named `dashi-agda` library, whose
+    `.agda-lib` file owns the standard-library/DCHoTT/Bishop/Cubical
+    dependency/include configuration.
+    """
+    canonical_library = root / "dashi-agda.agda-lib"
+    if not canonical_library.is_file():
+        raise ValueError(
+            "Agda kernel check requires canonical dashi-agda.agda-lib in source root"
+        )
+    return ["agda", "-l", "dashi-agda", str(relative_source)]
+
+
 def certify_artifact(
     *,
     artifact_resolution_receipt: dict[str, Any],
@@ -154,7 +172,7 @@ def certify_artifact(
 
     if checker_name == "agda":
         version_cmd = ["agda", "--version"]
-        check_cmd = ["agda", str(relative_source)]
+        check_cmd = _agda_check_command(root, relative_source)
     else:
         version_cmd = ["lake", "env", "lean", "--version"]
         check_cmd = ["lake", "env", "lean", str(relative_source)]
