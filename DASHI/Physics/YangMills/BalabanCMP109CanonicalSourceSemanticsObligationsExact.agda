@@ -1,6 +1,8 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP109CanonicalSourceSemanticsObligationsExact where
 
+open import Agda.Builtin.Bool using (Bool; false)
+
 ------------------------------------------------------------------------
 -- Canonical non-Round owner for the residual CMP109 source-semantics package.
 --
@@ -25,5 +27,3 @@ open CMP109CanonicalSourceSemanticsObligations public
 -- the three residual source-semantic payments has been discharged.
 sourceSemanticsExtractionCreatesInhabitant : Bool
 sourceSemanticsExtractionCreatesInhabitant = false
-
-open import Agda.Builtin.Bool using (Bool; false)
