@@ -9,22 +9,28 @@ module DASHI.Physics.Foundations.CMP119GRQFTPreferredQ123TraceReconciliationExac
 -- with the classical d=4 CurvatureSix sector, whose diagonal action trace is
 -- exactly zero.
 --
--- But the preferred source-physics overlay is already sharper than introducing
--- a generic "nonclassical action sector".  It leaves exactly three source
--- packages:
+-- The preferred source-physics overlay leaves three source packages:
 --
 --   Q1  ordinary path-derivative semantics/equivariance for the present-cut D1;
 --   Q2  the nonperturbative SU(2) trace-anomaly theorem on the Hilbert trace of
 --       the SAME R136 / pinned Local-C stress;
---   Q3  one pointwise-common finite physical F^2 sequence whose two existing
---       limit representations identify Local-C F^2 with physical-Haar F^2.
+--   Q3  asymptotic identification of the finite Local-C and physical-Haar F^2
+--       sequences by a vanishing bridge error.
 --
--- Therefore the classical CurvatureSix same-object weld remains valuable for
--- the classical Wilson/Gibbs lane, but it is NOT an additional terminal debt of
--- the scoped preferred Q1/Q2/Q3 source route.  Nor is there a free quantum trace
+-- Q3 no longer requires pointwise equality of the two finite sequences.  The
+-- existing Local-C limit and physical-Haar error representations, together with
+-- a vanishing bridge
+--
+--   |F2_Haar(n) - F2_LocalC(n)| <= eps(n), eps -> 0,
+--
+-- already force equality of their continuum readouts.
+--
+-- The classical CurvatureSix same-object weld remains valuable for the
+-- classical Wilson/Gibbs lane, but it is NOT an additional terminal debt of the
+-- scoped preferred Q1/Q2/Q3 source route.  Nor is there a free quantum trace
 -- scalar: Q2 names the trace of the actual stress object.
 --
--- On the finite side, Wilson DS[h] and F^2 are now compiled from exactly one
+-- On the finite side, Wilson DS[h] and F^2 are compiled from exactly one
 -- FiniteCurvatureSixFamily, so Q3 does not get to select an unrelated curvature
 -- family merely because it is consumed by an anomaly observable.
 ------------------------------------------------------------------------
@@ -36,7 +42,8 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
 import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as Latest
 import DASHI.Physics.Foundations.CMP119CosmologyP2HilbertTraceAnomalyExact as P2
-import DASHI.Physics.Foundations.CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitExact as P3
+import DASHI.Physics.Foundations.CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitExact as P3Old
+import DASHI.Physics.Foundations.CMP119CosmologyP3AsymptoticFiniteF2CommonLimitExact as P3
 import DASHI.Physics.Foundations.CMP119R144CurvatureTraceSectorNoGoExact as TraceNoGo
 import DASHI.Physics.Foundations.CMP119R144PartitionInsertionTrivialityExact as Partition
 import DASHI.Physics.Foundations.CMP119CurvatureWilsonSelectedInsertionCompilerExact as CurvatureWilson
@@ -67,13 +74,25 @@ q2FreeTraceScalarRetired : Bool
 q2FreeTraceScalarRetired =
   Q.freeTraceFrameCalibrationRetired
 
-q3UsesPointwiseCommonFiniteF2Sequence : Bool
-q3UsesPointwiseCommonFiniteF2Sequence =
-  Q.q3IsPointwiseCommonFinitePhysicalF2Sequence
+------------------------------------------------------------------------
+-- Q3 recut: termwise equality is stronger than the limit argument needs.
+------------------------------------------------------------------------
+
+q3PointwiseCommonFiniteF2SequenceStillRequired : Bool
+q3PointwiseCommonFiniteF2SequenceStillRequired =
+  P3.termwiseFiniteF2EqualityRequired
+
+q3UsesAsymptoticFiniteF2Bridge : Bool
+q3UsesAsymptoticFiniteF2Bridge =
+  P3.q3ReducedToAsymptoticFiniteF2Bridge
+
+q3VanishingFiniteF2BridgeSuffices : Bool
+q3VanishingFiniteF2BridgeSuffices =
+  P3.vanishingFiniteF2BridgeSufficesForCommonLimit
 
 q3ExactFiniteContinuumF2EqualityRetired : Bool
 q3ExactFiniteContinuumF2EqualityRetired =
-  P3.exactFiniteEqualsContinuumF2NoLongerRequired
+  P3Old.exactFiniteEqualsContinuumF2NoLongerRequired
 
 p23AlreadyCompilesPhysicalHaarPositivityToNegativeR136 : Bool
 p23AlreadyCompilesPhysicalHaarPositivityToNegativeR136 =
@@ -89,8 +108,6 @@ genericNonclassicalActionSectorIsTerminalLeaf = false
 freeSelectedQuantumTraceScalarIsTerminalLeaf : Bool
 freeSelectedQuantumTraceScalarIsTerminalLeaf = false
 
--- The anomaly theorem belongs to the Hilbert trace of the SAME selected stress,
--- not to an independently postulated additive action scalar.
 preferredNonclassicalTraceObjectIsSelectedStressHilbertTrace : Bool
 preferredNonclassicalTraceObjectIsSelectedStressHilbertTrace = true
 
@@ -145,9 +162,13 @@ q2AnomalyIsOnSameR136LocalCStressIsTrue :
   q2AnomalyIsOnSameR136LocalCStress ≡ true
 q2AnomalyIsOnSameR136LocalCStressIsTrue = refl
 
-q3UsesPointwiseCommonFiniteF2SequenceIsTrue :
-  q3UsesPointwiseCommonFiniteF2Sequence ≡ true
-q3UsesPointwiseCommonFiniteF2SequenceIsTrue = refl
+q3PointwiseCommonFiniteF2SequenceStillRequiredIsFalse :
+  q3PointwiseCommonFiniteF2SequenceStillRequired ≡ false
+q3PointwiseCommonFiniteF2SequenceStillRequiredIsFalse = refl
+
+q3UsesAsymptoticFiniteF2BridgeIsTrue :
+  q3UsesAsymptoticFiniteF2Bridge ≡ true
+q3UsesAsymptoticFiniteF2BridgeIsTrue = refl
 
 wholeGeneratedActionMayCollapseToClassicalCurvatureIsFalse :
   wholeGeneratedActionMayCollapseToClassicalCurvature ≡ false
