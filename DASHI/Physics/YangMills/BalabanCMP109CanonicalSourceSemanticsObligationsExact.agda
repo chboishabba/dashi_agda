@@ -6,10 +6,10 @@ open import Agda.Builtin.Bool using (Bool; false)
 ------------------------------------------------------------------------
 -- Canonical non-Round owner for the residual CMP109 source-semantics package.
 --
--- Historical scheduler states are provenance only.  This module does not turn
--- an `open`, `blocked`, source-citation, or proof-level receipt into an
--- inhabitant.  The three fields below are deliberately the remaining typed
--- payments to be instantiated on the selected literal Balaban source object.
+-- Historical scheduler labels are provenance only.  This module does not turn
+-- scheduler state, source citation, or proof-level receipt into an inhabitant.
+-- The three fields below are deliberately the remaining typed payments to be
+-- instantiated on the selected literal Balaban source object.
 ------------------------------------------------------------------------
 
 record CMP109CanonicalSourceSemanticsObligations
@@ -23,7 +23,5 @@ record CMP109CanonicalSourceSemanticsObligations
 
 open CMP109CanonicalSourceSemanticsObligations public
 
--- Extraction is a scheduler contraction only; it does not assert that any of
--- the three residual source-semantic payments has been discharged.
 sourceSemanticsExtractionCreatesInhabitant : Bool
 sourceSemanticsExtractionCreatesInhabitant = false
