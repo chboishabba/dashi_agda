@@ -18,8 +18,10 @@ open import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as L
 -- into this scheduler's scope.
 --
 -- CMP109 carrier relations and reference D1 functions are fixed externally and
--- threaded into the canonical owner.  The residual constructor cannot invent
--- a trivial same-object relation or choose its own substituted D1 reference.
+-- threaded into the canonical owner.  Likewise CMP116 now takes one fixed
+-- selected source/term/proof relation for R409 and one fixed trace/compiler/
+-- quantitative/attachment surface for R429.  Residual records cannot invent
+-- the relations they are asked to inhabit.
 ------------------------------------------------------------------------
 
 record YangMillsCanonicalClayResidual
@@ -52,16 +54,32 @@ record YangMillsCanonicalClayResidual
     (substitutedD1BelongsToSelectedSource :
       D1BelongsToSelectedSource selectedSource substitutedD1)
     (cutoff : Nat)
+
+    (SelectedCMP116Source : Set)
+    (selectedCMP116Source : SelectedCMP116Source)
+    (SelectedCMP116Term : Set)
+    (selectedCMP116Term : SelectedCMP116Term)
+    (SelectedCMP116TermBelongsToSource :
+      SelectedCMP116Source → SelectedCMP116Term → Set)
+    (selectedCMP116TermSourceAttachment :
+      SelectedCMP116TermBelongsToSource
+        selectedCMP116Source selectedCMP116Term)
+    (CMP116ProofBearingEquality :
+      SelectedCMP116Source → SelectedCMP116Term → Set)
+    (SourceTranscriptionReceipt ExecutionReplayReceipt : Set)
+
+    (R429TraceCarrier : Set)
+    (selectedR429Trace : R429TraceCarrier)
+    (R429ExactCompilerStructure : Set)
+    (r429ExactCompilerStructure : R429ExactCompilerStructure)
+    (R429QuantitativeTraceEntropyBound :
+      R429ExactCompilerStructure → R429TraceCarrier → Set)
+    (R429SameObjectTraceAttachment :
+      SelectedCMP116Source → R429TraceCarrier → Set)
+
     {Measure Schwinger Observable Energy Bound : Set}
     (closure : Limit.FiniteToContinuumOSClosure Measure Schwinger)
-    (spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Bound)
-    {SourceTranscriptionReceipt
-     ExecutionReplayReceipt
-     SelectedTermIdentity
-     ProofBearingEquality
-     ExactCompilerStructure
-     QuantitativeTraceEntropyBound
-     SameObjectTraceAttachment : Set} : Set₁ where
+    (spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Bound) : Set₁ where
   field
     cmp109SourceSemantics :
       CMP109.CMP109CanonicalSourceSemanticsObligations
@@ -83,16 +101,20 @@ record YangMillsCanonicalClayResidual
 
     cmp116SelectedTermReplay :
       R409.CMP116CanonicalSelectedTermReplay
-        SourceTranscriptionReceipt
-        ExecutionReplayReceipt
-        SelectedTermIdentity
-        ProofBearingEquality
+        SelectedCMP116Source selectedCMP116Source
+        SelectedCMP116Term selectedCMP116Term
+        SelectedCMP116TermBelongsToSource
+        selectedCMP116TermSourceAttachment
+        CMP116ProofBearingEquality
+        SourceTranscriptionReceipt ExecutionReplayReceipt
 
     cmp116TraceEntropyBudget :
       R429.CMP116CanonicalTraceEntropyBudget
-        ExactCompilerStructure
-        QuantitativeTraceEntropyBound
-        SameObjectTraceAttachment
+        SelectedCMP116Source selectedCMP116Source
+        R429TraceCarrier selectedR429Trace
+        R429ExactCompilerStructure r429ExactCompilerStructure
+        R429QuantitativeTraceEntropyBound
+        R429SameObjectTraceAttachment
 
 ------------------------------------------------------------------------
 
