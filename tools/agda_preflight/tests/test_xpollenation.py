@@ -18,6 +18,7 @@ def _neighbourhood() -> dict:
         "edges": [
             {
                 "edgeId": "edge:nos2",
+                "subject": {"namespace": "rhea", "identifier": "RHEA:19897"},
                 "relation": "catalysed-by",
                 "object": {"namespace": "uniprot", "identifier": "P35228"},
                 "sourceRef": "Rhea/SABIO crosswalk",
@@ -31,6 +32,7 @@ def _neighbourhood() -> dict:
             },
             {
                 "edgeId": "edge:qid",
+                "subject": {"namespace": "uniprot", "identifier": "P35228"},
                 "relation": "candidate-neighbour",
                 "object": {"namespace": "wikidata-qid", "identifier": "Q000000"},
                 "sourceRef": "Wikidata candidate lookup",
@@ -106,6 +108,8 @@ def test_ingest_persists_typed_edges_da51_join_and_ipfs_artifact() -> None:
         "xpollenation:bh4:RHEA-19897@rev-1#neighbourhood"
     )
     assert [edge["edge_id"] for edge in fetched["edges"]] == ["edge:nos2", "edge:qid"]
+    assert fetched["edges"][1]["subject_namespace"] == "uniprot"
+    assert fetched["edges"][1]["subject_identifier"] == "P35228"
 
 
 def test_ingest_rejects_promotion_authority() -> None:
