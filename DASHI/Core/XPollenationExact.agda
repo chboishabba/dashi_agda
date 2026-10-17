@@ -24,7 +24,6 @@ data ExternalNamespace : Set where
   doi : ExternalNamespace
   pubchem : ExternalNamespace
   oeis : ExternalNamespace
-  da51 : ExternalNamespace
   customNamespace : String → ExternalNamespace
 
 data RelationKind : Set where
@@ -129,7 +128,7 @@ canonicalXPollenationReceipt =
   Receipt.mkNonPromotingReceipt
     "generic xPollenation external-identity graph"
     "DASHI.Core.XPollenationExact"
-    "typed external-coordinate edges with source revision, acquisition receipt, edge status and optional DA51/logical-artifact/CID coordinates"
-    "provides one reusable navigation/enrichment ABI for Wikidata QID, ChEBI, Rhea, UniProt, PDB, SABIO, PMID, DOI, PubChem, OEIS and custom domains without inventing a second truth or storage system"
-    "QID/OEIS adjacency is not semantic identity; CID is content identity only; DA51 is internal logical identity only; an xPollenation edge or transport receipt cannot create proof, context equivalence or consumer payment"
+    "typed external-coordinate edges with source revision and acquisition receipt; DA51/logical-artifact/CID coordinates remain separate joins"
+    "provides one reusable navigation/enrichment ABI for Wikidata QID, ChEBI, Rhea, UniProt, PDB, SABIO, PMID, DOI, PubChem, OEIS and custom external domains without inventing a second truth or storage system"
+    "QID/OEIS adjacency is not semantic identity; CID is content identity only; DA51 is internal logical identity only and is intentionally not an ExternalNamespace; an xPollenation edge or transport receipt cannot create proof, context equivalence or consumer payment"
     "agda -i . DASHI/Core/XPollenationExact.agda"
