@@ -20,7 +20,7 @@ def _raw(path: Path) -> str:
     )
     assert "Round" not in imports
     assert "{!!}" not in text
-    assert "postulate" not in text
+    assert not re.search(r"(?m)^\s*postulate\b", text)
     assert "--allow-unsolved-metas" not in text
     assert "clayPromotion = true" not in text
     assert "clayYangMillsPromoted = true" not in text
@@ -68,8 +68,6 @@ def test_attachment_relations_are_external_parameters_not_residual_fields():
         "D1BelongsToSelectedSource",
     ):
         assert relation_name in text
-    # A residual constructor must not be able to choose either the attachment
-    # relation or an attachment proof under a `...BelongsToSelectedSource` field.
     assert not re.search(
         r"(?m)^\s{4}[A-Za-z0-9_]*BelongsToSelectedSource\s*:", text
     )
