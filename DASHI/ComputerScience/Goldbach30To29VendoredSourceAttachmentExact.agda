@@ -14,6 +14,10 @@ open import Agda.Builtin.String using (String)
 -- upstream source bytes and Git returned the SAME blob identifiers as upstream.
 -- This pays byte-level source-object identity for the machine definitions.
 -- It does not by itself transport Lean proof terms into Agda.
+--
+-- The local LICENSE.AGPL-3.0 is a license/provenance notice which pins the
+-- canonical upstream LICENSE blob; it is deliberately NOT represented as a
+-- byte-identical copy of that legal-text object.
 ------------------------------------------------------------------------
 
 record VendoredSourceObject : Set where
@@ -47,6 +51,9 @@ goldbach30ProgramSource =
 
 semanticDuplicateBlob : String
 semanticDuplicateBlob = "782ef73cb0b1e0ee72043f5f097b8b1b5213bd3b"
+
+upstreamLicenseBlob : String
+upstreamLicenseBlob = "0ad25db4bd1d86c452db3f9602ccdbe172438f52"
 
 exactProgramSourceObjectsVendored : Bool
 exactProgramSourceObjectsVendored = true
