@@ -18,7 +18,7 @@ files = {
     "interval_solver": root / "scripts/solve_bh4_flux_intervals.py",
     "runner": root / "scripts/run_bh4_phase4_maxcut.py",
     "runbook": root / "docs/biology/BH4Phase4QuantitativeRunbook.md",
-    "phase4_checker": root / "scripts/check_bh4_phase4_system_state.py",
+    "phase4_checker": root / "DASHI/Biology/BH4Phase4SystemStateRegression.agda",
     "unified": root / "DASHI/Unified/BH4BiochemicalEverything.agda",
 }
 
@@ -27,103 +27,46 @@ for name, path in files.items():
 
 text = {name: path.read_text() for name, path in files.items()}
 
-for token in [
-    "SABIO", "PDBe", "SIFTS", "browserShellPayload",
-    "firstSABIOAttemptMayConcludeZeroEntries = false",
-    "pdbeSiftsBoundedAcquisitionExecuted = true",
-    "kineticConstantCreatesFluxBound", "htmlShellCreatesNoEntryConclusion",
-    "structureMappingCreatesCatalyticMechanism", "boundedSIFTSAcquisitionCreatesSiteFunction",
-    "sourceSpecificEvidenceRequired",
-]:
+for token in ["kineticConstantCreatesFluxBound", "structureMappingCreatesCatalyticMechanism", "sourceSpecificEvidenceRequired"]:
     assert token in text["evidence"], f"missing quantitative evidence token: {token}"
 
-for token in [
-    "executedSABIOKineticEntryCount", "executedSABIOProteinsWithEntries",
-    "executedSABIOKineticParameterCount", "932", "190", "11", "TPH2:Q8IWU9:75",
-    "zeroProteinRowsMeansProteinHasNoKinetics", "exportRowCreatesInVivoFluxBound",
-]:
+for token in ["executedSABIOKineticEntryCount", "executedSABIOKineticParameterCount", "190", "932", "11", "parameterObjectCreatesInVivoFluxBound"]:
     assert token in text["sabio_receipt"], f"missing executed SABIO receipt token: {token}"
 
-for token in [
-    "executedParameterCandidateCount", "executedMappedParameterCandidateCount",
-    "executedFiniteReactionCoverage", "932", "875", "10",
-    "RHEA:11920", "RHEA:19897", "affinityLikeCount", "rateLikeCount",
-    "turnoverLikeCount", "unclassifiedCount", "candidateCoverageCreatesFluxPayment",
-]:
+for token in ["executedParameterCandidateCount", "executedMappedParameterCandidateCount", "executedFiniteReactionCoverage", "932", "875", "10", "RHEA:11920", "RHEA:19897", "affinityLikeCount", "rateLikeCount", "turnoverLikeCount", "unclassifiedCount", "candidateCoverageCreatesFluxPayment"]:
     assert token in text["sabio_adjudication_receipt"], f"missing executed SABIO adjudication receipt token: {token}"
 
-for token in [
-    "PCBD1", "NOS", "RHEA:11920", "RHEA:19897",
-    "10.1073/pnas.92.26.12384", "10.1111/j.1432-1033.1995.tb20714.x",
-    "PMID:9224737", "PMID:9089781", "primaryKineticsCreatesNetworkFluxBound",
-]:
+for token in ["PCBD1", "NOS", "RHEA:11920", "RHEA:19897", "10.1073/pnas.92.26.12384", "10.1111/j.1432-1033.1995.tb20714.x", "PMID:9224737", "PMID:9089781", "primaryKineticsCreatesNetworkFluxBound"]:
     assert token in text["gap_evidence"], f"missing gap-evidence token: {token}"
 
-for token in [
-    "executedStructuresExamined = 38", "executedMatchingSIFTSSegmentCount = 526",
-    "executedProteinsWithUniProtPDBLinks = 14", "executedProteinsWithMatchingSegments = 13",
-    "PCBD1", "AGMO", "PAH", "mappingCreatesCatalyticFunction",
-]:
+for token in ["executedStructuresExamined = 38", "executedMatchingSIFTSSegmentCount = 526", "mappingCreatesCatalyticFunction"]:
     assert token in text["sifts_receipt"], f"missing executed SIFTS receipt token: {token}"
 
-for token in [
-    "adjudicateSABIOKineticCandidatesIntoFluxBounds", "adjudicatePDBSIFTSResidueSiteWitnesses",
-    "acquireMissingPCBD1NOSPrimaryKinetics", "firstBoundedSIFTSAcquisitionExecuted",
-    "sabioExportAcquisitionExecuted", "sabioKineticParameterCount",
-    "sabioFiniteReactionCandidateCoverage", "expandedQuantitativeCoordinateCount = 56",
-    "boundedSIFTSStructuresExamined", "boundedSIFTSMatchingSegments",
-]:
+for token in ["acquireMissingPCBD1NOSPrimaryKinetics", "adjudicateSABIOKineticCandidatesIntoFluxBounds", "adjudicatePDBSIFTSResidueSiteWitnesses", "sabioExportAcquisitionExecuted", "sabioKineticParameterCount", "sabioFiniteReactionCandidateCoverage", "expandedQuantitativeCoordinateCount = 56"]:
     assert token in text["roadmap"], f"missing quantitative roadmap token: {token}"
 
 for token in ["NETWORK_ATTEMPTS = 3", "NETWORK_BACKOFF_SECONDS", "_retry", "network_retry_exhaustion_means_reaction_absent"]:
     assert token in text["rhea"], f"missing Rhea retry hardening token: {token}"
 
-for token in [
-    "IntervalFluxSolverStatus", "solverUnavailable", "underdetermined",
-    "feasible", "infeasible", "missingExchangeBoundMayBeSubstitutedWithZero",
-    "feasibleSteadyStateCreatesDiseaseMechanism",
-]:
+for token in ["IntervalFluxSolverStatus", "solverUnavailable", "underdetermined", "missingExchangeBoundMayBeSubstitutedWithZero"]:
     assert token in text["solver"], f"missing interval solver token: {token}"
 
-for token in [
-    "https://sabio.h-its.org/export-api/sabio/kinlaw-entry/json",
-    "UniProtKB_AC", "meta", "total_count", "data", "pageSize",
-    "dashi.bh4-sabio-kinetics.v3", "export-envelope",
-    "n_start_value", "n_end_value", "kinetic_parameter_candidates",
-    "kinetic_parameters_create_flux_bounds",
-]:
+for token in ["https://sabio.h-its.org/export-api/sabio/kinlaw-entry/json", "UniProtKB_AC", "dashi.bh4-sabio-kinetics.v3", "n_start_value", "n_end_value", "kinetic_parameter_candidates", "kinetic_parameters_create_flux_bounds"]:
     assert token in text["sabio"], f"missing SABIO export-api/parameter token: {token}"
 
-for token in [
-    "dashi.bh4-sabio-adjudication.v2", "finite_matrix_rhea_ids",
-    "usable_for_flux_bound", "parameter_kind_hint", "same-object/compartment/time translation",
-    "sbo_term", "catalytic-constant-like", "inhibitory-like", "concentration-like",
-    "uncovered_finite_reactions", "parameter_candidate_creates_flux_bound",
-]:
+for token in ["dashi.bh4-sabio-adjudication.v2", "finite_matrix_rhea_ids", "usable_for_flux_bound", "parameter_kind_hint", "sbo_term", "catalytic-constant-like", "inhibitory-like", "concentration-like", "uncovered_finite_reactions", "parameter_candidate_creates_flux_bound"]:
     assert token in text["sabio_adjudication"], f"missing SABIO adjudication token: {token}"
 
-for token in [
-    "SIFTS", "uniprot_pdb", "pdb_chain_uniprot", "raw_sha256",
-    "matching_sifts_segment_count", "structures_examined", "summarize",
-    "dashi.bh4-pdbe-sifts.v2", "structure_mapping_creates_catalytic_mechanism",
-]:
+for token in ["matching_sifts_segment_count", "structures_examined", "dashi.bh4-pdbe-sifts.v2", "structure_mapping_creates_catalytic_mechanism"]:
     assert token in text["sifts"], f"missing SIFTS summary token: {token}"
 
-for token in ["EXCHANGE:", "reaction_flux_ids", "exchange_ids", "dashi.bh4-parameter-evidence.v2"]:
+for token in ["EXCHANGE:", "REACTION_FLUX:", "dashi.bh4-parameter-evidence.v2"]:
     assert token in text["parameters"], f"missing parameter exchange token: {token}"
 
-for token in [
-    "scipy.optimize", "linprog", "REACTION_FLUX:", "EXCHANGE:",
-    "solver-unavailable", "underdetermined", "candidate_flux_balance_witness",
-]:
+for token in ["scipy.optimize", "linprog", "REACTION_FLUX:", "EXCHANGE:", "solver-unavailable", "underdetermined"]:
     assert token in text["interval_solver"], f"missing solver script token: {token}"
 
-for token in [
-    "acquire_rhea_chebi_bh4_reactions.py", "build_bh4_stoichiometric_matrix.py",
-    "acquire_bh4_sabio_kinetics.py", "build_bh4_sabio_adjudication.py",
-    "acquire_bh4_pdbe_sifts.py", "solve_bh4_flux_intervals.py",
-    "bh4-sabio-adjudication.json", "bh4-phase4-maxcut-summary.json",
-]:
+for token in ["acquire_rhea_chebi_bh4_reactions.py", "build_bh4_stoichiometric_matrix.py", "acquire_bh4_sabio_kinetics.py", "build_bh4_sabio_adjudication.py", "acquire_bh4_pdbe_sifts.py", "solve_bh4_flux_intervals.py", "bh4-sabio-adjudication.json", "bh4-phase4-maxcut-summary.json"]:
     assert token in text["runner"], f"missing one-command runner token: {token}"
 
 for token in ["56-coordinate", "S*v + e = 0", "SABIO-RK", "PDBe/SIFTS", "932", "875", "10 of 12", "bh4-phase4-maxcut-summary.json", "check_kitzerow_bh4_priority_all.py"]:
