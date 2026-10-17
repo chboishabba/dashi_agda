@@ -64,6 +64,7 @@ import DASHI.Biology.IITXOR369StressFamilyExact
 import DASHI.Biology.IITIIT4ConsumerDescentExact
 import DASHI.Biology.IITHyperfabricCompletionReceiptExact
 import DASHI.Biology.IITParityGluingConjectureMaxCutExact
+import DASHI.Biology.IITParityGluingTerminalMaxCut20261017Exact
 import DASHI.Reasoning.IITHyperfabricPartitionBridgeExact
 import DASHI.Reasoning.IITBrainMaleCNSConsumerBoundaryExact
 import DASHI.Reasoning.LILACubeEmpiricalSameObjectReceiptExact
