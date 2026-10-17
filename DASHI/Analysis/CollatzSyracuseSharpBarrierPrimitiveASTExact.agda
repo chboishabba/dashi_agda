@@ -15,10 +15,12 @@ module DASHI.Analysis.CollatzSyracuseSharpBarrierPrimitiveASTExact where
 -- promoted into the universal Collatz producer.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat using (_<_; _≤_)
-open import Data.Product using (Σ; _,_)
+import Data.Nat.Properties as NatP
+import Data.Product as Product
+open Product using (Σ; _,_)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
@@ -161,18 +163,66 @@ record UniversalASTBarrierEscapeSource : Set₁ where
 open UniversalASTBarrierEscapeSource public
 
 ------------------------------------------------------------------------
--- Equivalence-facing source socket.
---
--- The pre-existing terminal source remains canonical theorem authority.  This
--- field records that an AST producer must eventually compile to that source;
--- it is intentionally a source interface rather than an assumed theorem.
+-- AST barrier witness -> exact affine correction fit.
 ------------------------------------------------------------------------
 
-record ASTToCanonicalEscapeCompiler : Set₁ where
-  field
-    compile :
-      UniversalASTBarrierEscapeSource →
-      Survivor.UniversalContractingCorrectionEscapeSource
+barrierBelowImpliesCorrectionFit :
+  {m : Nat} →
+  (word : Binary.BinaryWord m) →
+  (state : ContractingState word) →
+  (x : Syracuse.PositiveNat) →
+  sharpBarrier word state < Syracuse.toNat x →
+  Affine.affineAdditiveTerm word
+    < Paradox.gap (coefficient state) * Syracuse.toNat x
+barrierBelowImpliesCorrectionFit word state x barrierBelow =
+  NatP.<-≤-trans
+    (Sharp.quotientThresholdFits
+      (Affine.affineAdditiveTerm word)
+      (Paradox.gap (coefficient state))
+      (Paradox.gapPositive (coefficient state)))
+    (NatP.*-monoʳ-≤
+      (Paradox.gap (coefficient state))
+      barrierBelow)
+
+pathToCanonicalWitness :
+  {n : Nat} →
+  (x : Syracuse.PositiveNat) →
+  (ast : PrimitiveAST zero n) →
+  ActualCertifiedPath x ast →
+  Σ (Paradox.ContractingCoefficientGap (Itinerary.parityWord n x)) λ coefficient →
+    Affine.affineAdditiveTerm (Itinerary.parityWord n x)
+    < Paradox.gap coefficient * Syracuse.toNat x
+pathToCanonicalWitness {n} x ast path
+  with actualWord path
+... | refl =
+  coefficient (contracting path) ,
+  barrierBelowImpliesCorrectionFit
+    (applyAST ast Binary.end)
+    (contracting path)
+    x
+    (barrierBelowStart path)
+
+------------------------------------------------------------------------
+-- Constructive compiler into the pre-existing canonical terminal source.
+--
+-- Therefore the AST statement is not a hidden strengthening: an inhabitant
+-- immediately inhabits the already-audited correction-escape interface.
+------------------------------------------------------------------------
+
+astEscapeCompilesToCanonical :
+  UniversalASTBarrierEscapeSource →
+  Survivor.UniversalContractingCorrectionEscapeSource
+astEscapeCompilesToCanonical source = record
+  { Survivor.escape = λ x nontrivial →
+      let
+        witness = escape source x nontrivial
+        n = Product.proj₁ witness
+        astWitness = Product.proj₂ witness
+        ast = Product.proj₁ astWitness
+        path = Product.proj₂ astWitness
+      in
+      n , pathToCanonicalWitness x ast path
+  }
 
 ------------------------------------------------------------------------
 -- Bounded invariant inventory.
@@ -191,15 +241,17 @@ record PrimitiveASTBoundary : Set where
     lateZeroUnconditionallySafeClassified : Nat
     lateOneZeroUnconditionallySafeClassified : Nat
     lateOneRequiresExactSideCondition : Nat
+    astEscapeCompilesToCanonicalPaid : Nat
 
     everyASTIsActualSyracusePrefix : Nat
     everyASTIsContracting : Nat
     everyASTLowersBarrier : Nat
+    canonicalEscapeCompilesToASTPaid : Nat
     localMonotonicityPromotedToUniversalEscape : Nat
     universalBarrierEscapeProducerPaid : Nat
 
 canonicalPrimitiveASTBoundary : PrimitiveASTBoundary
 canonicalPrimitiveASTBoundary =
   primitiveASTBoundary
-    1 1 1 1 1 1 1 1 1 1
-    0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1 1
+    0 0 0 0 0 0
