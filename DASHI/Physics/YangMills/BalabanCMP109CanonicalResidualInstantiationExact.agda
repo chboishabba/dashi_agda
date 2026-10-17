@@ -4,6 +4,7 @@ module DASHI.Physics.YangMills.BalabanCMP109CanonicalResidualInstantiationExact 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import DASHI.Foundations.RealAnalysisAxioms using (_-ℝ_)
 
 import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact as Prefix
 import DASHI.Physics.YangMills.BalabanYM4WardQuarticResponseProducerAdapterExact as Producer
@@ -90,14 +91,14 @@ selectedBetaDifferenceDecomposition :
   Prefix.initialInverseSquare (selectedShootingMap attachment)
       (Prefix.renormalisationMap (selectedShootingMap attachment)
         (selectedLeftHistory attachment))
-    Prefix.-ℝ
+    -ℝ
   Prefix.initialInverseSquare (selectedShootingMap attachment)
       (Prefix.renormalisationMap (selectedShootingMap attachment)
         (selectedRightHistory attachment))
   ≡
   Prefix.cumulativeBeta (selectedShootingMap attachment)
       (selectedLeftHistory attachment)
-    Prefix.-ℝ
+    -ℝ
   Prefix.cumulativeBeta (selectedShootingMap attachment)
       (selectedRightHistory attachment)
 selectedBetaDifferenceDecomposition attachment =
