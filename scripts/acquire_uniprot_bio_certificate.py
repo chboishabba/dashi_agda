@@ -30,7 +30,7 @@ KITZEROW_BH4_PANEL = [
     {"symbol": "GCH1", "accession": "P30793", "sector": "BH4 synthesis / regulation"},
     {"symbol": "GCHFR", "accession": "P30047", "sector": "GCH1 feedback regulation"},
     {"symbol": "PTS", "accession": "Q03393", "sector": "BH4 synthesis"},
-    {"symbol": "SPR", "accession": "P16175", "sector": "BH4 synthesis"},
+    {"symbol": "SPR", "accession": "P35270", "sector": "BH4 synthesis"},
     {"symbol": "PCBD1", "accession": "P61457", "sector": "BH4 recycling"},
     {"symbol": "QDPR", "accession": "P09417", "sector": "BH4 recycling"},
     {"symbol": "NOS1", "accession": "P29475", "sector": "NOS / neuronal"},
