@@ -27,6 +27,8 @@ grep -q 'legalAdjudicationIsLeanKernelVerificationIsFalse' DASHI/Reasoning/Justi
 grep -q 'silentlyDeletesWeakArgumentsIsFalse' DASHI/Reasoning/JusticeLeeSensibLawAdversarialProofGraphBidiExact.agda
 
 grep -q 'There is deliberately no function' DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeExact.agda
+grep -q 'respondentAtomMatchesDiagnosis' DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeExact.agda
+grep -q 'respondentConsumerMatchesDiagnosis' DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeExact.agda
 grep -q 'wrongTypeDiagnosisAutomaticallyDeterminesResidualKindIsFalse' DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeExact.agda
 grep -q 'compiledSearchDischargesResidualIsFalse' DASHI/Reasoning/JusticeLeeSensibLawPNFWrongTypeBridgeExact.agda
 grep -q 'exports no canonical live inhabitant' DASHI/Reasoning/JusticeLeeSensibLawRuntimeClosureReceiptExact.agda
