@@ -31,7 +31,11 @@
     "serial": 12,
     "status": 4
   },
-  "header_bits": [16, 4, 44],
+  "header_bits": [
+    16,
+    4,
+    44
+  ],
   "max_serial_address": "0xDA518584FFF00000",
   "negative": {
     "invalid_biome": "0xDA51809100000000",
