@@ -9,6 +9,7 @@ files = {
     "sifts": root / "scripts/acquire_bh4_pdbe_sifts.py",
     "parameters": root / "scripts/acquire_bh4_parameter_evidence.py",
     "interval_solver": root / "scripts/solve_bh4_flux_intervals.py",
+    "runner": root / "scripts/run_bh4_phase4_maxcut.py",
     "phase4_checker": root / "scripts/check_bh4_phase4_system_state.py",
     "unified": root / "DASHI/Unified/BH4BiochemicalEverything.agda",
 }
@@ -32,8 +33,8 @@ for token in [
     assert token in text["solver"], f"missing interval solver token: {token}"
 
 for token in [
-    "UniProtKB_AC", "kineticlawsExportTsv", "Parameter", "PubMedID",
-    "raw_sha256", "kinetic_parameters_create_flux_bounds",
+    "UniProtKB_AC", "searchKineticLaws/entryIDs", "kineticLaws",
+    "parameters", "pubmed_ids", "raw_sha256", "kinetic_parameters_create_flux_bounds",
 ]:
     assert token in text["sabio"], f"missing SABIO token: {token}"
 
@@ -51,6 +52,13 @@ for token in [
     "solver-unavailable", "underdetermined", "candidate_flux_balance_witness",
 ]:
     assert token in text["interval_solver"], f"missing solver script token: {token}"
+
+for token in [
+    "acquire_rhea_chebi_bh4_reactions.py", "build_bh4_stoichiometric_matrix.py",
+    "acquire_bh4_sabio_kinetics.py", "acquire_bh4_pdbe_sifts.py",
+    "solve_bh4_flux_intervals.py", "bh4-phase4-maxcut-summary.json",
+]:
+    assert token in text["runner"], f"missing one-command runner token: {token}"
 
 for root_name in ["phase4_checker", "unified"]:
     for token in ["BH4QuantitativeAcquisitionExact", "BH4IntervalFluxSolverExact"]:
