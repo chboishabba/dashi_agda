@@ -14,6 +14,10 @@ vanishingFiniteF2BridgeSufficesRegression :
   P3.vanishingFiniteF2BridgeSufficesForCommonLimit ≡ true
 vanishingFiniteF2BridgeSufficesRegression = refl
 
+oldPointwiseQ3IsZeroErrorSpecialCaseRegression :
+  P3.oldPointwiseQ3IsZeroErrorSpecialCase ≡ true
+oldPointwiseQ3IsZeroErrorSpecialCaseRegression = refl
+
 q3SourcePaymentReducedRegression :
   P3.q3ReducedToAsymptoticFiniteF2Bridge ≡ true
 q3SourcePaymentReducedRegression = refl
