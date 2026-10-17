@@ -28,9 +28,13 @@ import DASHI.Biology.IITCubePermutationStabilizer18Exact
 import DASHI.Biology.IITCubeJordanChainCentralizerTargetExact
 import DASHI.Biology.IITCubeJordanBasisMatrixExact
 import DASHI.Biology.IITCubeConcreteJordanConjugacyExact
+import DASHI.Biology.IITCubeConcreteNMatrixRecognitionExact
 import DASHI.Biology.IITCubeJordanCentralizerAlgebraExact
 
 -- Finite same-action intersection with the synchronized first-Tits
 -- (sector,row,column) basis: cube row/column C3 translations are the same
 -- order-three coordinate cycles, with positive permutation determinant sign.
 import DASHI.Biology.IITCubeFirstTitsSL3TranslationIntersectionExact
+
+-- Current terminal local/external boundary.
+import DASHI.Biology.IITParityGluingTerminalMaxCut20261017Exact
