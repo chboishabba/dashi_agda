@@ -1,27 +1,27 @@
 # BH4 Phase-4 quantitative max-cut runbook
 
-## Purpose
+## Current state
 
-This runbook starts from the exact 16-protein UniProt certificate and executes
-the strongest current bounded pipeline without promoting database identity,
-kinetic constants, structure mappings, or steady-state feasibility into disease
-mechanism claims.
+The exact 16-protein panel currently resolves to:
 
-Current executed chemistry baseline (2026-10-17):
-
-- 16 proteins;
 - 24 protein-to-Rhea catalytic links;
-- 12 finite reaction columns;
+- 12 finite internal reaction columns;
 - 3 non-finite MTOR protein/R-group residual reactions;
 - 29 finite species;
-- first joint feasibility result: `underdetermined`.
+- a 56-coordinate quantitative problem: 15 core state coordinates + 12 reaction-flux intervals + 29 exchange intervals;
+- first joint feasibility outcome: `underdetermined`.
 
-The historical first live parameter template had 27 coordinates (15 core + 12
-reaction-flux coordinates). The current quantitative problem has 56 coordinates:
+The first bounded PDBe/SIFTS run is now formally promoted from its machine-generated schema-v2 receipt:
 
-- 15 core BH4/context coordinates;
-- 12 `REACTION_FLUX:<RHEA-ID>` intervals;
-- 29 `EXCHANGE:<species-id>` intervals.
+- 38 PDB structures examined;
+- 526 exact `_pdbx_sifts_unp_segments` rows;
+- 14 proteins with UniProt PDB links;
+- 13 proteins with at least one matching segment;
+- PCBD1 and AGMO have no panel PDB links;
+- PCBD1, AGMO and PAH have no matching segment in the bounded first-three-PDB sample;
+- zero HTTP/parse errors.
+
+These are structural mapping facts, not catalytic-site/function claims.
 
 ## One-command run
 
@@ -35,46 +35,39 @@ Default input:
 artifacts/biology/uniprot-kitzerow-bh4-panel-certificate.json
 ```
 
-The runner refreshes Rhea/ChEBI chemistry, rebuilds the stoichiometric matrix,
-creates the 56-coordinate unresolved parameter template, acquires SABIO-RK
-kinetic-law candidates, acquires bounded PDBe/SIFTS mappings, runs interval
-steady-state feasibility, and executes the aggregate static regressions.
-
-It writes a final machine-readable index:
+The runner refreshes Rhea/ChEBI chemistry, rebuilds `S`, writes the 56-coordinate template, acquires SABIO-RK kinetic candidates and PDBe/SIFTS mappings, runs interval feasibility and the aggregate regressions, then writes:
 
 ```text
 artifacts/biology/bh4-phase4-maxcut-summary.json
 ```
 
-The v2 summary carries the external-evidence diagnostics directly:
+The current summary schema is `dashi.bh4-phase4-maxcut-run.v3`.
+
+## SABIO-RK current API
+
+The historical `/sabioRestWebServices/*` endpoints now rewrite to the browser SPA/404 shell. HTTP 200 HTML is therefore explicitly **not** a zero-entry receipt.
+
+The current acquirer uses the kinetic-law export API:
 
 ```text
-network_evidence.sabio.proteins_with_entries
-network_evidence.sabio.kinetic_entry_count
-network_evidence.sabio.kinetic_parameter_count
-network_evidence.sabio.html_shell_observed
-network_evidence.sabio.error_count
-network_evidence.sifts.structures_examined
-network_evidence.sifts.matching_sifts_segment_count
-network_evidence.sifts.proteins_with_uniprot_pdb_links
-network_evidence.sifts.proteins_without_uniprot_pdb_links
-network_evidence.sifts.error_count
+https://sabio.h-its.org/export-api/sabio/kinlaw-entry/json
 ```
 
-This avoids using hand-summed console diagnostics as formal evidence.
+with queries of the form:
 
-To use an edited/source-paid manifest:
-
-```bash
-python3 scripts/run_bh4_phase4_maxcut.py \
-  --manifest artifacts/biology/bh4-parameter-paid.json
+```text
+UniProtKB_AC:"P30793"
 ```
 
-The supplied manifest is normalized against the current matrix before solving.
+and validates the required JSON export envelope:
 
-## Quantitative evidence discovery
+```json
+{"meta": {...}, "data": [...]}
+```
 
-### SABIO-RK
+It paginates until `meta.total_count`/`meta.total_pages` is satisfied, hashes every raw page, and preserves the raw SABIO entries for later condition/assay adjudication.
+
+Run it independently with:
 
 ```bash
 python3 scripts/acquire_bh4_sabio_kinetics.py \
@@ -82,28 +75,9 @@ python3 scripts/acquire_bh4_sabio_kinetics.py \
   -o artifacts/biology/bh4-sabio-kinetics.json
 ```
 
-The script queries exact `UniProtKB_AC` coordinates and records normalized SBML
-response hashes, parameter values/units and PubMed identifiers. When the entry-ID
-endpoint returns SABIO's browser SPA shell with HTTP 200, that response is now
-classified as a protocol-shape failure, not as zero kinetic entries. The script:
+SABIO records are **candidate kinetic evidence only**. Km, kcat, Vmax, rate-law entries or an export match do not automatically become in-vivo reaction-flux bounds. Same-object, compartment, time, condition and unit translation remain required.
 
-1. tries the documented entry-ID search by POST;
-2. retries by GET;
-3. if both return HTML, queries the documented direct SBML search by POST/GET;
-4. fails nonzero if SABIO still does not produce a protocol payload.
-
-Therefore a zero-entry receipt is emitted only from a real web-service payload,
-never from `<div id="shell">` HTML.
-
-These records remain **candidate kinetic evidence only**. Km, kcat, Vmax, or a
-rate law do not automatically become an in-vivo reaction-flux interval.
-
-SABIO-RK REST documentation:
-
-- https://sabiork.h-its.org/sabioRestWebServices/
-- https://sabiork.h-its.org/layouts/content/docuRESTfulWeb/manual.gsp
-
-### PDBe/SIFTS
+## PDBe/SIFTS
 
 ```bash
 python3 scripts/acquire_bh4_pdbe_sifts.py \
@@ -112,33 +86,11 @@ python3 scripts/acquire_bh4_pdbe_sifts.py \
   -o artifacts/biology/bh4-pdbe-sifts.json
 ```
 
-PDB IDs come from the exact UniProt panel. The script fetches PDBe updated
-PDBx/mmCIF files and extracts `_pdbx_sifts_unp_segments` rows for the exact
-UniProt accession. Use `--max-pdb-per-protein -1` for exhaustive PDB coverage.
+Use `--max-pdb-per-protein -1` for exhaustive panel-linked PDB coverage. The current first-three-PDB receipt is owned formally by `DASHI.Biology.BH4ExecutedSIFTSReceiptExact`.
 
-Schema v2 computes canonical coverage totals directly from the result structure:
-structures examined, exact matching SIFTS segments, proteins with/without PDB
-links, proteins with/without matching segments, and error count. Those values,
-rather than manually summed console rows, are the promotion coordinates.
-
-The first bounded acquisition completed without fatal HTTP/parse errors and
-recovered extensive exact UniProt/PDB segment mappings. Its pasted diagnostics
-contained inconsistent hand-summed headline versus per-protein totals, so exact
-coverage counts intentionally await the v2 machine recount.
-
-A SIFTS mapping pays sequence/residue identity between UniProt and a PDB model;
-it does not by itself prove that a mapped residue is catalytic, regulatory, or
-causally involved in the BH4 mechanism. The live frontier is therefore SIFTS
-**adjudication**, not generic SIFTS acquisition.
-
-PDBe/SIFTS documentation:
-
-- https://www.ebi.ac.uk/pdbe/pdbe-rest-api
-- https://www.ebi.ac.uk/pdbe/docs/sifts/quick.html
+A SIFTS mapping pays sequence/residue identity between UniProt and a PDB model. It does not itself prove catalytic function, regulation, perturbational causality or same-cell biochemical state.
 
 ## Parameter manifest
-
-Generate the matrix-aware template directly:
 
 ```bash
 python3 scripts/acquire_bh4_parameter_evidence.py \
@@ -147,25 +99,7 @@ python3 scripts/acquire_bh4_parameter_evidence.py \
   -o artifacts/biology/bh4-parameter-template-v2.json
 ```
 
-A paid reaction or exchange row requires:
-
-```text
-payment_status
-lower
-upper
-unit
-source_reference
-same_object_reference
-compartment_reference
-measurement_time_reference
-usable_for_joint_flux_witness = true
-```
-
-`unresolved` never means measured zero.
-
-All solver-facing reaction and exchange intervals must use one normalized flux
-unit. Cross-unit conversion must be performed and attributed before setting a
-row usable for the joint witness.
+A solver-usable row requires lower/upper bounds, one normalized flux unit, source, same-object, compartment and measurement-time coordinates, plus `usable_for_joint_flux_witness = true`. `unresolved` never means measured zero.
 
 ## Interval feasibility
 
@@ -176,7 +110,7 @@ python3 scripts/solve_bh4_flux_intervals.py \
   -o artifacts/biology/bh4-interval-flux-feasibility.json
 ```
 
-The solver searches the bounded linear steady-state problem
+The bounded steady-state problem is:
 
 ```text
 S*v + e = 0
@@ -186,14 +120,12 @@ using `scipy.optimize.linprog(method="highs")`.
 
 Outcomes:
 
-- `feasible`: at least one supplied-interval steady-state witness exists;
-- `infeasible`: no steady-state witness exists inside those paid intervals;
+- `feasible`: one state exists inside the supplied intervals;
+- `infeasible`: no state exists inside those supplied steady-state intervals;
 - `underdetermined`: required intervals or normalized units are missing;
-- `solver-unavailable`: SciPy is not installed.
+- `solver-unavailable`: SciPy is unavailable.
 
-Even `feasible` does not establish allocator causality, disease mechanism, or
-clinical action. `infeasible` rules out only the specified steady-state interval
-problem; it does not rule out time-varying dynamics or alternative state spaces.
+None of these automatically establishes or refutes the broader Kitzerow disease mechanism outside the modeled state/problem.
 
 ## Regressions
 
@@ -201,14 +133,6 @@ problem; it does not rule out time-varying dynamics or alternative state spaces.
 python3 scripts/check_kitzerow_bh4_priority_all.py
 ```
 
-This runs:
+The aggregate checker covers the legacy evidence/identity lane, executed Phase-4 system-state lane, SABIO export-envelope contract, canonical SIFTS receipt, 56-coordinate manifest and interval-solver firewalls.
 
-1. the legacy evidence/identity regression;
-2. the Phase-4 executed system-state regression;
-3. the quantitative acquisition / interval-solver regression.
-
-The quantitative regression now requires SABIO HTML-shell rejection/direct-SBML
-fallback, canonical SIFTS summary generation, the 56-coordinate manifest and the
-interval solver firewalls.
-
-CI is not required for this tranche.
+CI is not the completion gate for this tranche.
