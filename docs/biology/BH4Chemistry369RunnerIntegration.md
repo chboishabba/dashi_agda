@@ -2,19 +2,20 @@
 
 ## Status after PR #1159 max-cut
 
-This tranche moves the BH4 lane from external protein/database identity into one
-literal, executable biochemical path while retaining every existing promotion
-boundary.
+This tranche moves the BH4 lane from external protein/database identity into a
+literal, executable biochemical path and then generalises the acquisition and
+finite stoichiometry runner across every Rhea cross-reference already carried
+by the exact 16-protein UniProt panel.
 
-The end-to-end bounded path is now:
+The bounded path is now:
 
 ```text
-UniProt P09417 / QDPR
-  -> RHEA:17869 generic reaction identity
-  -> RHEA:17871 directed generic child
-  -> RHEA:32253 specific BH4 microspecies reaction
-  -> exact ChEBI participant identities/formulae/charges
-  -> finite CHNOP + net-charge equality
+exact UniProt protein panel
+  -> exact Rhea cross-references
+  -> Rhea REST equation/row receipts
+  -> Rhea RDF substrates/products + coefficients
+  -> ChEBI identity/formula/charge coordinates
+  -> finite formula/charge audit where structurally representable
   -> atomic/369 refinement adapter
   -> executable stoichiometric/topological runner
   -> BH4SystemState / BH4SystemPayment
@@ -58,8 +59,8 @@ so the finite atom-count and net-charge witness is definitional in
 ## Existing DASHI machinery reused
 
 `BH4MolecularStoichiometryExact` imports the existing
-`MolecularStoichiometricConservation` owner.  The present QDPR witness supplies
-the concrete finite inventory; the generic owner remains responsible for the
+`MolecularStoichiometricConservation` owner. The QDPR witness supplies the
+concrete finite inventory; the generic owner remains responsible for the
 abstract reaction-event/path conservation interface.
 
 `BH4Atomic369RefinementExact` consumes:
@@ -101,20 +102,51 @@ python3 scripts/acquire_rhea_chebi_bh4_reactions.py \
 ```
 
 The panel mode inherits protein/accession membership from the acquired UniProt
-certificate rather than maintaining a second hand-written panel.
+certificate rather than maintaining a second hand-written panel. For each
+unique Rhea ID it records both the REST row/raw SHA-256 and an RDF/SPARQL
+participant receipt containing:
+
+```text
+substrate/product side
+stoichiometric coefficient
+Rhea participant and compound URI
+ChEBI identifier when present
+compound name
+formula
+charge
+SPARQL response SHA-256
+```
+
+Rhea compounds involving polymers, macromolecules, undefined R groups, missing
+formulae, non-integer coefficients, or otherwise incomplete finite formula
+coordinates remain explicit `formula_charge_residual_reactions`; they are not
+silently forced through the finite molecular-formula parser.
 
 ## Runner
+
+Exact QDPR fixture:
 
 ```bash
 python3 scripts/run_bh4_reaction_network.py --qdpr \
   --output-prefix artifacts/biology/bh4-qdpr-network
 ```
 
-This emits JSON, CSV and Markdown receipts.  It recomputes molecular formula
-and charge balance and emits the finite substrate-product graph.
+Panel certificate:
 
-It always leaves the following false unless a future source-specific adapter
-pays them:
+```bash
+python3 scripts/run_bh4_reaction_network.py \
+  --certificate artifacts/biology/rhea-chebi-kitzerow-bh4-panel.json \
+  --output-prefix artifacts/biology/bh4-panel-network
+```
+
+The panel runner multiplies participant formula/charge inventories by the
+Rhea stoichiometric coefficients. It independently audits every finite
+formula/charge-ready reaction and reports unsupported/polymeric/R-group cases
+as finite-formula residuals. A database `isChemicallyBalanced` assertion and an
+independently reconstructed finite balance remain distinct receipts.
+
+Both modes emit JSON, CSV and Markdown receipts and always leave these false
+unless a future source-specific adapter pays them:
 
 ```text
 kinetics_supplied = false
@@ -123,15 +155,15 @@ measured_flux_promoted = false
 disease_mechanism_promoted = false
 ```
 
-The formal runner receipt projects this into `BH4SystemState` with
-`participantIdentityPaid=true` and `reactionIdentityPaid=true`, while
+The formal runner receipt projects the QDPR exact slice into `BH4SystemState`
+with `participantIdentityPaid=true` and `reactionIdentityPaid=true`, while
 `wholeSystemFluxMeasured=false`, transport/consumer-flux payment false and
 allocator causality false.
 
 ## Unified cross-scale integration
 
 `BH4BiochemicalCrossScaleAdapter` is a bounded instance of the existing DASHI
-cross-scale parent.  It connects the QDPR slice to
+cross-scale parent. It connects the literal chemistry/runner slice to
 `CrossScaleMatterPhysics` and `PhysicsChemistryBiologyDNAUnificationDischarge`
 without changing their claim strength.
 
@@ -162,9 +194,11 @@ disease causation / clinical prediction
 
 ## Next max-cut
 
-Identity architecture is no longer the blocker.  The next work should consume
-the panel-mode Rhea acquisition and instantiate additional exact reaction
-microspecies/stoichiometry owners for GCH1/PTS/SPR/PCBD1, PAH/TH/TPH1/TPH2,
-NOS1/2/3 and AGMO.  Once those isolated reaction certificates are paid, the
-scientifically meaningful frontier is one shared compartment/redox state and a
-joint `FluxBalanceWitness`, not additional ontology work.
+The architecture and generic acquisition/runner machinery are no longer the
+blocker. Run the panel Rhea acquisition to determine the exact reaction set and
+which reactions are finite-formula-auditable, then promote the successful
+reaction-specific receipts into Agda owners for GCH1/PTS/SPR/PCBD1,
+PAH/TH/TPH1/TPH2, NOS1/2/3 and AGMO. After those isolated chemical rewrites are
+paid, the scientifically meaningful frontier is quantitative: one shared
+compartment/redox state, kinetic/transport parameters and a joint
+`FluxBalanceWitness`, not additional ontology work.
