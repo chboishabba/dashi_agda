@@ -24,6 +24,7 @@ import DASHI.Biology.IITCubeConcreteJordanConjugacyExact as Conjugacy
 import DASHI.Biology.IITCubeJordanCentralizerAlgebraExact as Centralizer
 import DASHI.Biology.IITCubeFirstTitsSL3TranslationIntersectionExact as SL3
 import DASHI.Biology.IITCubePermutationStabilizer18Exact as Perm18
+import DASHI.Biology.IITCubeDiagonalStabilizerExact as Stabilizer
 
 ------------------------------------------------------------------------
 -- 1. Concrete proof-relevant centralizer witnesses.
@@ -60,8 +61,7 @@ cubeFirstTitsSL3TranslationIntersection =
 
 permutationSpinePreservesGraph :
   (g : Perm18.Permutation18) →
-  DASHI.Biology.IITCubeDiagonalStabilizerExact.PreservesGraph
-    (Perm18.permutationEndo g)
+  Stabilizer.PreservesGraph (Perm18.permutationEndo g)
 permutationSpinePreservesGraph = Perm18.permutationPreservesGraph
 
 ------------------------------------------------------------------------
