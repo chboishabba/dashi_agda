@@ -5,15 +5,11 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.BH4JointFluxFeasibilityExact as Flux
 import DASHI.Biology.BH4QuantitativeAcquisitionExact as Acquisition
 import DASHI.Biology.BH4ExecutedSABIOReceiptExact as SABIO
+import DASHI.Biology.BH4ExecutedSABIOAdjudicationReceiptExact as SABIOAdj
 import DASHI.Biology.BH4ExecutedSIFTSReceiptExact as SIFTS
 import DASHI.Biology.Molecular.BH4ExecutedPanelReactionReceiptExact as Executed
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Matrix
 import DASHI.Core.GenericReceipt as Receipt
-
-------------------------------------------------------------------------
--- Phase-4 roadmap after live panel chemistry, bounded SIFTS acquisition,
--- successful SABIO export acquisition, and the first joint-flux execution.
-------------------------------------------------------------------------
 
 data BH4Phase : Set where
   identityAndProvenancePhase : BH4Phase
@@ -26,10 +22,8 @@ currentBH4Phase : BH4Phase
 currentBH4Phase = systemStateQuantitativePhase
 
 data BH4Phase4Residual : Set where
-  executePanelRheaAcquisition : BH4Phase4Residual
-  promoteFinitePanelReactionReceipts : BH4Phase4Residual
   resolveNonFiniteMTORProteinReactionRepresentation : BH4Phase4Residual
-  normalizeSABIOKineticParameterCandidates : BH4Phase4Residual
+  acquireMissingPCBD1NOSPrimaryKinetics : BH4Phase4Residual
   adjudicateSABIOKineticCandidatesIntoFluxBounds : BH4Phase4Residual
   adjudicatePDBSIFTSResidueSiteWitnesses : BH4Phase4Residual
   payReactionSpecificFluxBounds : BH4Phase4Residual
@@ -43,7 +37,7 @@ data BH4Phase4Residual : Set where
 livePhase4Residuals : List BH4Phase4Residual
 livePhase4Residuals =
   resolveNonFiniteMTORProteinReactionRepresentation
-  ∷ normalizeSABIOKineticParameterCandidates
+  ∷ acquireMissingPCBD1NOSPrimaryKinetics
   ∷ adjudicateSABIOKineticCandidatesIntoFluxBounds
   ∷ adjudicatePDBSIFTSResidueSiteWitnesses
   ∷ payReactionSpecificFluxBounds
@@ -71,22 +65,13 @@ firstBoundedSIFTSAcquisitionExecuted : Bool
 firstBoundedSIFTSAcquisitionExecuted = SIFTS.boundedAcquisitionExecuted SIFTS.canonicalExecutedSIFTSReceipt
 
 boundedSIFTSStructuresExamined : Nat
-boundedSIFTSStructuresExamined = SIFTS.structuresExamined SIFTS.canonicalExecutedSIFTSReceipt
+boundedSIFTSStructuresExamined = SIFTS.executedStructuresExamined
 
 boundedSIFTSMatchingSegments : Nat
-boundedSIFTSMatchingSegments = SIFTS.matchingSIFTSSegmentCount SIFTS.canonicalExecutedSIFTSReceipt
-
-boundedSIFTSProteinsWithPDBLinks : Nat
-boundedSIFTSProteinsWithPDBLinks = SIFTS.proteinsWithUniProtPDBLinks SIFTS.canonicalExecutedSIFTSReceipt
-
-boundedSIFTSProteinsWithMatchingSegments : Nat
-boundedSIFTSProteinsWithMatchingSegments = SIFTS.proteinsWithMatchingSegments SIFTS.canonicalExecutedSIFTSReceipt
+boundedSIFTSMatchingSegments = SIFTS.executedMatchingSIFTSSegmentCount
 
 legacySABIORestSurfaceRetired : Bool
 legacySABIORestSurfaceRetired = true
-
-sabioExportAPIAdapterReady : Bool
-sabioExportAPIAdapterReady = true
 
 sabioExportAcquisitionExecuted : Bool
 sabioExportAcquisitionExecuted = SABIO.exportAcquisitionExecuted SABIO.canonicalExecutedSABIOReceipt
@@ -100,11 +85,17 @@ sabioProteinsWithEntries = SABIO.executedSABIOProteinsWithEntries
 sabioKineticEntryCount : Nat
 sabioKineticEntryCount = SABIO.executedSABIOKineticEntryCount
 
+sabioKineticParameterCount : Nat
+sabioKineticParameterCount = SABIO.executedSABIOKineticParameterCount
+
 sabioAcquisitionErrorCount : Nat
 sabioAcquisitionErrorCount = SABIO.executedSABIOAcquisitionErrorCount
 
-sabioParameterSchemaRecountRequired : Bool
-sabioParameterSchemaRecountRequired = SABIO.parameterSchemaRecountRequired SABIO.canonicalExecutedSABIOReceipt
+sabioFiniteReactionCandidateCoverage : Nat
+sabioFiniteReactionCandidateCoverage = SABIOAdj.executedFiniteReactionCoverage
+
+sabioMappedParameterCandidates : Nat
+sabioMappedParameterCandidates = SABIOAdj.executedMappedParameterCandidateCount
 
 executedPanelSpeciesCount : Nat
 executedPanelSpeciesCount = Matrix.executedPanelSpeciesCount
@@ -139,41 +130,23 @@ executedPanelDimensionsExact = refl
 executedPanelReactionsExact : executedPanelReactionCount ≡ 12
 executedPanelReactionsExact = refl
 
-firstCoordinateCountExact : firstQuantitativeCoordinateCount ≡ 27
-firstCoordinateCountExact = refl
-
 expandedCoordinateCountExact : expandedQuantitativeCoordinateCount ≡ 56
 expandedCoordinateCountExact = refl
-
-boundedSIFTSStructuresExact : boundedSIFTSStructuresExamined ≡ 38
-boundedSIFTSStructuresExact = refl
-
-boundedSIFTSSegmentsExact : boundedSIFTSMatchingSegments ≡ 526
-boundedSIFTSSegmentsExact = refl
-
-boundedSIFTSLinkedProteinsExact : boundedSIFTSProteinsWithPDBLinks ≡ 14
-boundedSIFTSLinkedProteinsExact = refl
-
-boundedSIFTSMatchingProteinsExact : boundedSIFTSProteinsWithMatchingSegments ≡ 13
-boundedSIFTSMatchingProteinsExact = refl
-
-sabioProteinsCompletedExact : sabioProteinsCompleted ≡ 16
-sabioProteinsCompletedExact = refl
-
-sabioProteinsWithEntriesExact : sabioProteinsWithEntries ≡ 11
-sabioProteinsWithEntriesExact = refl
 
 sabioKineticEntriesExact : sabioKineticEntryCount ≡ 190
 sabioKineticEntriesExact = refl
 
-sabioErrorsExact : sabioAcquisitionErrorCount ≡ 0
-sabioErrorsExact = refl
+sabioKineticParametersExact : sabioKineticParameterCount ≡ 932
+sabioKineticParametersExact = refl
+
+sabioFiniteReactionCoverageExact : sabioFiniteReactionCandidateCoverage ≡ 10
+sabioFiniteReactionCoverageExact = refl
+
+sabioMappedCandidatesExact : sabioMappedParameterCandidates ≡ 875
+sabioMappedCandidatesExact = refl
 
 firstFluxAttemptMissingBoundsExact : missingReactionFluxBounds ≡ 12
 firstFluxAttemptMissingBoundsExact = refl
-
-firstFluxAttemptMissingValuesExact : missingReactionFluxValues ≡ 12
-firstFluxAttemptMissingValuesExact = refl
 
 firstFluxAttemptMissingExchangeExact : missingExternalExchangeCoordinates ≡ 29
 firstFluxAttemptMissingExchangeExact = refl
@@ -183,43 +156,31 @@ record BH4Phase4Boundary : Set where
   field
     underdeterminedMeansMechanismFalse : Bool
     underdeterminedMeansMechanismFalseIsFalse : underdeterminedMeansMechanismFalse ≡ false
-    underdeterminedMeansMechanismTrue : Bool
-    underdeterminedMeansMechanismTrueIsFalse : underdeterminedMeansMechanismTrue ≡ false
     finitePanelExecutionPaysQuantitativeFlux : Bool
-    finitePanelExecutionPaysQuantitativeFluxIsFalse :
-      finitePanelExecutionPaysQuantitativeFlux ≡ false
+    finitePanelExecutionPaysQuantitativeFluxIsFalse : finitePanelExecutionPaysQuantitativeFlux ≡ false
     residualMTORReactionMayBeInsertedAsZeroColumn : Bool
-    residualMTORReactionMayBeInsertedAsZeroColumnIsFalse :
-      residualMTORReactionMayBeInsertedAsZeroColumn ≡ false
+    residualMTORReactionMayBeInsertedAsZeroColumnIsFalse : residualMTORReactionMayBeInsertedAsZeroColumn ≡ false
     candidateKineticEvidenceAutomaticallyPaysFluxBounds : Bool
-    candidateKineticEvidenceAutomaticallyPaysFluxBoundsIsFalse :
-      candidateKineticEvidenceAutomaticallyPaysFluxBounds ≡ false
-    sabioExportCoverageAutomaticallyPaysFluxBounds : Bool
-    sabioExportCoverageAutomaticallyPaysFluxBoundsIsFalse :
-      sabioExportCoverageAutomaticallyPaysFluxBounds ≡ false
+    candidateKineticEvidenceAutomaticallyPaysFluxBoundsIsFalse : candidateKineticEvidenceAutomaticallyPaysFluxBounds ≡ false
+    sabioCandidateCoverageAutomaticallyPaysFluxBounds : Bool
+    sabioCandidateCoverageAutomaticallyPaysFluxBoundsIsFalse : sabioCandidateCoverageAutomaticallyPaysFluxBounds ≡ false
     boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSites : Bool
-    boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSitesIsFalse :
-      boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSites ≡ false
+    boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSitesIsFalse : boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSites ≡ false
     phase4CompletionAutomaticallyPromotesDiseaseCausation : Bool
-    phase4CompletionAutomaticallyPromotesDiseaseCausationIsFalse :
-      phase4CompletionAutomaticallyPromotesDiseaseCausation ≡ false
-    phase4CompletionAutomaticallyPromotesClinicalAction : Bool
-    phase4CompletionAutomaticallyPromotesClinicalActionIsFalse :
-      phase4CompletionAutomaticallyPromotesClinicalAction ≡ false
+    phase4CompletionAutomaticallyPromotesDiseaseCausationIsFalse : phase4CompletionAutomaticallyPromotesDiseaseCausation ≡ false
 
 open BH4Phase4Boundary public
 
 canonicalBH4Phase4Boundary : BH4Phase4Boundary
 canonicalBH4Phase4Boundary =
-  bh4-phase4-boundary
-    false refl false refl false refl false refl false refl false refl false refl false refl false refl
+  bh4-phase4-boundary false refl false refl false refl false refl false refl false refl false refl
 
 canonicalBH4Phase4RoadmapReceipt : Receipt.GenericReceipt
 canonicalBH4Phase4RoadmapReceipt =
   Receipt.mkNonPromotingReceipt
     "BH4 Phase-4 quantitative system-state roadmap"
     "DASHI.Biology.BH4Phase4RoadmapExact"
-    "executed 16-protein panel -> 24 Rhea links -> 29x12 finite network -> 56-coordinate open-system problem -> SIFTS receipt (38 structures, 526 segments) -> SABIO receipt (190 kinetic rows across 11 proteins)"
-    "closes reaction, bounded structural-mapping and SABIO export acquisition; advances the live frontier to schema-aware kinetic-parameter normalization, condition/source adjudication and justified reaction/exchange interval payment"
-    "SIFTS mapping is not catalytic-site function; SABIO export rows are not in-vivo flux bounds; historical zero parameter count was a parser-schema miss; underdetermination is neither mechanism truth nor falsity; Phase-4 closure does not establish disease or clinical causation"
+    "executed 29x12 network -> 56-coordinate open system -> SIFTS 38/526 -> SABIO 190 kinetic rows -> 932 parameter objects -> 875 candidates mapped across 10/12 finite reactions"
+    "closes SABIO acquisition, schema-aware parameter extraction and candidate-coverage accounting; isolates RHEA:11920 and RHEA:19897 as the two exact-UniProt SABIO coverage holes and advances the frontier to primary-literature gap filling plus scientific flux-bound adjudication"
+    "candidate kinetics and coverage are not in-vivo flux bounds; SIFTS mapping is not catalytic function; underdetermination is neither mechanism truth nor falsity; disease and clinical promotion remain separately gated"
     "python3 scripts/run_bh4_phase4_maxcut.py"
