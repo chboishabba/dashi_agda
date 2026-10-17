@@ -24,13 +24,16 @@ def _unit_text(unit: Any) -> str:
 
 
 def _is_per_mass(unit: Any) -> bool:
-    text = _unit_text(unit)
-    return bool(re.search(r"(?:/|per\s*)(?:mg|g)\b", text) or "mg^-1" in text or "g^-1" in text)
+    text = _unit_text(unit).replace("μ", "µ")
+    explicit_inverse = any(tok in text for tok in ("mg^-1", "g^-1", "mg−1", "g−1"))
+    explicit_per = bool(re.search(r"\bper\s+(?:milli)?gram\b|\bper\s+mg\b|\bper\s+g\b", text))
+    compound_denominator = ("mg" in text or "milligram" in text) and ("/" in text or "(" in text or "·" in text or "*" in text)
+    return explicit_inverse or explicit_per or compound_denominator
 
 
 def _is_per_time(unit: Any) -> bool:
     text = _unit_text(unit)
-    return any(tok in text for tok in ("/s", "s^-1", "sec^-1", "second^-1", "/min", "min^-1", "/h", "h^-1"))
+    return any(tok in text for tok in ("/s", "s^-1", "sec^-1", "second^-1", "/min", "min^-1", "/h", "h^-1", "minute", "second"))
 
 
 def _is_concentration_rate(unit: Any) -> bool:
