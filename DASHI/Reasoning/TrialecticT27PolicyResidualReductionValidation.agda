@@ -20,6 +20,12 @@ discriminatorPaid = refl
 equifinalityPaid : Reduction27.policyMechanisticEquifinalityPaid boundary ≡ true
 equifinalityPaid = refl
 
+fidelityEscalationPaid : Reduction27.fidelityEscalationWitnessPaid boundary ≡ true
+fidelityEscalationPaid = refl
+
+thirdFaceFalsifiesLowCode : Reduction27.thirdFaceCandidateReductionFailurePaid boundary ≡ true
+thirdFaceFalsifiesLowCode = refl
+
 futurePaid : Reduction27.declaredT18FutureConsumerPreserved boundary ≡ true
 futurePaid = refl
 
