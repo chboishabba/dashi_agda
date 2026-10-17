@@ -37,8 +37,10 @@ for token in [
 
 for token in [
     "AtomicGenerationPipelineExact", "ArgumentLevelTransportHyperformalismExact",
-    "PNFHyperfabric369", "atomicInventorySolvesMolecularHamiltonian",
-    "coarseBH4AvailabilityReconstructsFineChemicalState", "chemistryIsLiterally369",
+    "PNFHyperfabric369", "NonginNangNitrogenOxideRefinementExact",
+    "atomicInventorySolvesMolecularHamiltonian",
+    "coarseBH4AvailabilityReconstructsFineChemicalState",
+    "coarseNitrogenOxideCannotServeFineChemicalConsumer", "chemistryIsLiterally369",
 ]:
     assert token in text["refinement"], f"missing refinement token: {token}"
 
@@ -51,12 +53,16 @@ for token in [
 for token in [
     "rhea_id", "stoichiometrically_balanced", "kinetics_supplied",
     "measured_flux_promoted", "disease_mechanism_promoted", "residuals",
-    "write_outputs", ".json", ".csv", ".md",
+    "--certificate", "audit_certificate", "formula_charge_audited",
+    "finite_formula_residuals", "write_outputs", ".json", ".csv", ".md",
 ]:
     assert token in text["runner"], f"missing runner token: {token}"
 
 for token in [
     "--from-uniprot-panel", "extract_panel_rhea", "complete_reaction_identity_acquisition",
+    "RHEA_SPARQL", "fetch_rhea_participants", "rh:substrates", "rh:products",
+    "rh:coefficient", "rh:formula", "rh:charge", "formula_charge_ready",
+    "formula_charge_ready_reactions", "participant_sparql_response_sha256",
     "raw_sha256", "specific_chebi_fixture_paid", "reaction_identity_creates_kinetics",
 ]:
     assert token in text["rhea_acquirer"], f"missing Rhea acquirer token: {token}"
@@ -80,9 +86,11 @@ for token in [
 for token in [
     "qdprReactionIsRhea17869", "qdprStoichiometryBalanced",
     "atomicInventoryDoesNotSolveMolecularHamiltonian",
-    "coarseBH4ProjectionDoesNotReconstructFineState",
+    "coarseBH4ProjectionDoesNotReconstructFineState", "chemistryIsNotLiterally369",
+    "coarseNitrogenOxideCannotServeFineChemicalConsumer",
     "runnerDoesNotInventMeasuredFlux",
     "crossScaleAdapterDoesNotCreateAtomsToCellsDerivation",
+    "crossScaleAdapterDoesNotCreateDiseaseCausation",
 ]:
     assert token in text["regression"], f"missing formal regression token: {token}"
 
