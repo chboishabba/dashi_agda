@@ -6,6 +6,7 @@ import DASHI.Biology.Molecular.BH4ExecutedPanelReactionReceiptExact as Executed
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Matrix
 import DASHI.Biology.BH4CompartmentKineticStateExact as Parameters
 import DASHI.Biology.BH4QuantitativeAcquisitionExact as Acquisition
+import DASHI.Biology.BH4ExecutedSABIOReceiptExact as SABIO
 import DASHI.Biology.BH4ExecutedSIFTSReceiptExact as SIFTS
 import DASHI.Biology.BH4IntervalFluxSolverExact as Interval
 import DASHI.Biology.BH4NOSCouplingEvidenceExact as Evidence
@@ -48,6 +49,30 @@ sabioKineticConstantDoesNotBecomeFluxBound :
     Acquisition.canonicalQuantitativeAcquisitionBoundary
   ≡ false
 sabioKineticConstantDoesNotBecomeFluxBound = refl
+
+executedSABIOExportRecoveredOneHundredNinetyRows :
+  SABIO.executedSABIOKineticEntryCount ≡ 190
+executedSABIOExportRecoveredOneHundredNinetyRows = refl
+
+executedSABIOExportCoveredElevenProteins :
+  SABIO.executedSABIOProteinsWithEntries ≡ 11
+executedSABIOExportCoveredElevenProteins = refl
+
+executedSABIOExportHadZeroAcquisitionErrors :
+  SABIO.executedSABIOAcquisitionErrorCount ≡ 0
+executedSABIOExportHadZeroAcquisitionErrors = refl
+
+preRepairZeroParameterCountIsNotScientificZero :
+  SABIO.ExecutedSABIOBoundary.zeroPreRepairParameterCountMeansNoKineticParameters
+    SABIO.canonicalExecutedSABIOBoundary
+  ≡ false
+preRepairZeroParameterCountIsNotScientificZero = refl
+
+sabioExportRowsStillDoNotPayFluxBounds :
+  SABIO.ExecutedSABIOBoundary.exportRowCreatesInVivoFluxBound
+    SABIO.canonicalExecutedSABIOBoundary
+  ≡ false
+sabioExportRowsStillDoNotPayFluxBounds = refl
 
 siftsMappingDoesNotCreateCatalyticMechanism :
   Acquisition.QuantitativeAcquisitionBoundary.structureMappingCreatesCatalyticMechanism
@@ -167,6 +192,9 @@ quantitativeAcquisitionAndIntervalSolverAreReady = refl , refl
 
 sabioExportAPIAdapterIsReady : Roadmap.sabioExportAPIAdapterReady ≡ true
 sabioExportAPIAdapterIsReady = refl
+
+sabioExportAcquisitionHasExecuted : Roadmap.sabioExportAcquisitionExecuted ≡ true
+sabioExportAcquisitionHasExecuted = refl
 
 underdeterminedDoesNotMeanMechanismFalse :
   Roadmap.BH4Phase4Boundary.underdeterminedMeansMechanismFalse
