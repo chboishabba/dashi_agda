@@ -1,0 +1,79 @@
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def read(rel: str) -> str:
+    path = ROOT / rel
+    assert path.is_file(), f"missing {rel}"
+    return path.read_text(encoding="utf-8", errors="replace")
+
+
+def test_localized_vacuum_readout_reuses_existing_projector():
+    text = read("DASHI/Physics/Foundations/CMP119AntigravityLocalizedVacuumReadoutExact.agda")
+    for token in (
+        "localizedVacuumReadout",
+        "plaquetteCoefficientProjector",
+        "sourceNativeAmplitudeReceiptFromProjectedVacua",
+        "independentVacuumReadoutStillRequired",
+        "twoSourceAmplitudeEqualitiesStillRequired",
+    ):
+        assert token in text
+
+
+def test_direct_source_vacuum_compiles_to_cosmological_stress_without_pinned_tensor():
+    text = read("DASHI/Physics/Foundations/CMP119AntigravityDirectSourceVacuumStressExact.agda")
+    for token in (
+        "sourceVacuumStressAtScale",
+        "vacuumStressIsMinusLambdaMetric",
+        "symbolicVacuumVariationShape",
+        "fixedAmplitudeReceiptRequired",
+        "pinnedNormalizedStressTensorRequired",
+        "actualSourceVacuumCoefficientFeedsStressDirectly",
+    ):
+        assert token in text
+
+
+def test_source_vacuum_pair_feeds_parameterized_israel_geometry():
+    text = read("DASHI/Physics/Foundations/CMP119AntigravitySourceVacuumIsraelAdmissionExact.agda")
+    for token in (
+        "SourceVacuumPair",
+        "sourceInteriorLambda",
+        "sourceExteriorLambda",
+        "SourceVacuumIsraelAdmission",
+        "interiorLambdaMatchesSource",
+        "exteriorLambdaMatchesSource",
+        "fixedTwentyOneSixtyFourAndNineteenFortyEightRequired",
+        "sourceToGeometryEqualitiesStillRequired",
+    ):
+        assert token in text
+
+
+def test_eq223_metric_stress_route_bypasses_old_ancestry_adapter():
+    text = read("DASHI/Physics/Foundations/CMP119AntigravityEq223MetricStressReuseMaxCutExact.agda")
+    for token in (
+        "sourceCompleteFiniteMetricVariation",
+        "vacuumVariationIsLiteralEq223V",
+        "sameObjectEffectiveActionResponseWeldExists",
+        "oldPinnedStressAncestryAdapterRequiredOnPreferredRoute",
+        "directResponseEqualityStillRequired",
+        "preferredRouteDoesNotClaimResponseEqualityWithoutWeld",
+    ):
+        assert token in text
+
+
+def test_terminal_owner_compresses_remaining_source_frontier():
+    text = read("DASHI/Physics/ExoticGravity/AntigravitySourceNativeReuseTerminalExact.agda")
+    for token in (
+        "canonicalLocalizedVacuumReadoutBoundary",
+        "canonicalDirectSourceVacuumStressBoundary",
+        "canonicalSourceVacuumIsraelAdmissionBoundary",
+        "canonicalEq223MetricStressReuseBoundary",
+        "rationalVacuumReadoutIsNoLongerIndependentLeaf",
+        "pinnedNormalizedStressIsNoLongerNeededForVacuumGeometryRoute",
+        "fixedMagicAmplitudePairIsNoLongerRequired",
+        "differenceDataDoesNotFixAbsoluteSourceAnchor",
+        "sourceToGeometryAdmissionStillOpen",
+        "actualR136EffectiveActionResponseEqualityStillOpen",
+    ):
+        assert token in text
