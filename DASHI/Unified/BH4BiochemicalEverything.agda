@@ -10,6 +10,8 @@ import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact
 import DASHI.Biology.BH4CompartmentKineticStateExact
 import DASHI.Biology.BH4QuantitativeAcquisitionExact
 import DASHI.Biology.BH4ExecutedSABIOReceiptExact
+import DASHI.Biology.BH4ExecutedSABIOAdjudicationReceiptExact
+import DASHI.Biology.BH4MissingReactionKineticsEvidenceExact
 import DASHI.Biology.BH4ExecutedSIFTSReceiptExact
 import DASHI.Biology.BH4IntervalFluxSolverExact
 import DASHI.Biology.BH4NOSCouplingEvidenceExact
