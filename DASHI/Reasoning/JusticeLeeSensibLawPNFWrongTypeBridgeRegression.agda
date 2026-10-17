@@ -76,6 +76,8 @@ sampleBinding =
     respondentProjection
     refl
     refl
+    refl
+    refl
     Lee.characterisationDisagreement
     SL.partial
     "what characterisation is supported for this consumer?"
