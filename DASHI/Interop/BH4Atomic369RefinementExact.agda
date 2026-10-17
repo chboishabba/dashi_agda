@@ -3,6 +3,7 @@ module DASHI.Interop.BH4Atomic369RefinementExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.Molecular.BH4MolecularStoichiometryExact as Stoich
+import DASHI.Biology.NonginNangNitrogenOxideRefinementExact as NongNang
 import DASHI.Core.ArgumentLevelTransportHyperformalismExact as ArgumentLevelTransportHyperformalismExact
 import DASHI.Interop.PNFHyperfabric369 as H369
 import DASHI.Physics.Foundations.AtomicGenerationPipelineExact as AtomicGenerationPipelineExact
@@ -11,8 +12,8 @@ import DASHI.Core.GenericReceipt as Receipt
 ------------------------------------------------------------------------
 -- BH4 / atomics / 369 refinement adapter.
 --
--- The shared shape is level-indexed observation with retained residuals.  The
--- chemistry is not identified with the 3/6/9 address geometry.  Instead the
+-- The shared shape is level-indexed observation with retained residuals. The
+-- chemistry is not identified with the 3/6/9 address geometry. Instead the
 -- 369 carrier supplies an already-existing refinement vocabulary for keeping a
 -- whole object while moving between coarse and fine observations.
 ------------------------------------------------------------------------
@@ -71,6 +72,14 @@ nonaryDimensionAvailable = refl
 qdprFiniteStoichiometryAvailable : Stoich.qdprAtomAndChargeBalanced ≡ true
 qdprFiniteStoichiometryAvailable = refl
 
+-- Literal theorem reuse from the existing NONG/NANG refinement lane.  A
+-- coarse nitrogen-oxide observation cannot satisfy the consumer that requires
+-- the fine NO-versus-N2O chemical frame.
+coarseNitrogenOxideCannotServeFineChemicalConsumer :
+  NongNang.CoarseChemicalDescent → ⊥
+coarseNitrogenOxideCannotServeFineChemicalConsumer =
+  NongNang.coarseNitrogenOxideCannotServeFineConsumer
+
 record BH4Atomic369Boundary : Set where
   constructor bh4-atomic-369-boundary
   field
@@ -99,7 +108,7 @@ canonicalBH4Atomic369Receipt =
   Receipt.mkNonPromotingReceipt
     "BH4 atomics / 369 refinement adapter"
     "DASHI.Interop.BH4Atomic369RefinementExact"
-    "QDPR atom inventory -> molecular reaction -> coarse BH4 projection -> fine compartment/redox residual"
+    "QDPR atom inventory -> molecular reaction -> coarse BH4 projection -> fine compartment/redox residual; literal reuse of Nongin NO/N2O non-descent"
     "reuses AtomicGenerationPipelineExact and the argument-level/369 refinement grammar while retaining the whole biochemical reference and provenance"
     "atomic inventory is not a solved molecular Hamiltonian; finite balance is not quantitative chemistry; coarse projection does not reconstruct fine state; chemistry is not literally 369"
     "agda -i . DASHI/Interop/BH4Atomic369RefinementExact.agda"
