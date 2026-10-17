@@ -1,0 +1,62 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.YangMillsCanonicalClayResidualExact where
+
+open import Agda.Builtin.Bool using (Bool; false)
+
+import DASHI.Physics.YangMills.BalabanCMP109CanonicalSourceSemanticsObligationsExact as CMP109
+import DASHI.Physics.YangMills.BalabanCanonicalPhysicalTransferGapObligationExact as TransferGap
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedTermReplayExact as R409
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalTraceEntropyBudgetExact as R429
+import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
+import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
+
+------------------------------------------------------------------------
+-- Preferred non-Round research scheduler after historical Round contraction.
+-- Every field is typed through one of the canonical package owners; no Round
+-- scheduler is imported and no residual inhabitant is manufactured here.
+------------------------------------------------------------------------
+
+record YangMillsCanonicalClayResidual
+    {GeneratedHistoryResponse
+     BetaDifferenceDecomposition
+     PhysicalCompositeD1ChainRule : Set}
+    {Measure Schwinger Observable Energy Bound : Set}
+    (closure : Limit.FiniteToContinuumOSClosure Measure Schwinger)
+    (spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Bound)
+    {SourceTranscriptionReceipt
+     ExecutionReplayReceipt
+     SelectedTermIdentity
+     ProofBearingEquality
+     ExactCompilerStructure
+     QuantitativeTraceEntropyBound
+     SameObjectTraceAttachment : Set} : Set₁ where
+  field
+    cmp109SourceSemantics :
+      CMP109.CMP109CanonicalSourceSemanticsObligations
+        GeneratedHistoryResponse
+        BetaDifferenceDecomposition
+        PhysicalCompositeD1ChainRule
+
+    physicalTransferGap :
+      TransferGap.SelectedPhysicalTransferGapObligation closure spectrum
+
+    cmp116SelectedTermReplay :
+      R409.CMP116CanonicalSelectedTermReplay
+        SourceTranscriptionReceipt
+        ExecutionReplayReceipt
+        SelectedTermIdentity
+        ProofBearingEquality
+
+    cmp116TraceEntropyBudget :
+      R429.CMP116CanonicalTraceEntropyBudget
+        ExactCompilerStructure
+        QuantitativeTraceEntropyBound
+        SameObjectTraceAttachment
+
+open YangMillsCanonicalClayResidual public
+
+clayYangMillsPromoted : Bool
+clayYangMillsPromoted = false
+
+clayPromotion : Bool
+clayPromotion = false
