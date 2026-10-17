@@ -1,0 +1,94 @@
+upstream_repository: meta-introspector/aok
+construction_commit: c168223e96f7acc6179044f2a365a92db2e350c3
+construction_paths:
+  goldbach29_commit_native: d3e01240-2567-46da-9224-8a1bc6668f6b/code/Cryptids/Goldbach29/Program.lean
+  goldbach30_same_tree: 1fcb5ebe-bbab-4c12-bc38-4f1cd4739c1b/code/Cryptids/Goldbach30/Program.lean
+construction_blob_shas:
+  goldbach29_program_blob: ff3f10a3e4c72771ac415a7f4bfb70a209478025
+  goldbach30_program_blob: ff748e1d68bf01d19e0c0998f6ac8d3a1c73e2f3
+local_vendor_paths:
+  goldbach29_program: vendor/meta-introspector-aok/c168223e96f7acc6179044f2a365a92db2e350c3/Goldbach29/Program.lean
+  goldbach30_program: vendor/meta-introspector-aok/c168223e96f7acc6179044f2a365a92db2e350c3/Goldbach30/Program.lean
+  goldbach29_semantic_main: vendor/meta-introspector-aok/428e2366045cb0b728115777df8bef14318a3bcf/Goldbach29/Main.lean
+  goldbach29_semantic_loops: vendor/meta-introspector-aok/428e2366045cb0b728115777df8bef14318a3bcf/Goldbach29/Loops.lean
+  license_notice: vendor/meta-introspector-aok/LICENSE.AGPL-3.0
+  notice: vendor/meta-introspector-aok/NOTICE.md
+vendor_integrity:
+  - both Program.lean files were recreated from upstream bytes and Git returned the exact upstream blob IDs above
+  - Goldbach29 semantic Main.lean and Loops.lean both resolve to blob 782ef73cb0b1e0ee72043f5f097b8b1b5213bd3b at the pinned semantic revision
+  - the semantic duplicate/self-import anomaly is preserved rather than repaired
+  - the AGPL file in the vendor directory is a license/provenance notice and source pointer; exact upstream LICENSE blob identity 0ad25db4bd1d86c452db3f9602ccdbe172438f52 is recorded but not claimed vendored byte-identical
+
+goldbach29_semantic_source_revision: 428e2366045cb0b728115777df8bef14318a3bcf
+goldbach29_semantic_source_path: d3e01240-2567-46da-9224-8a1bc6668f6b/code/Cryptids/Goldbach29/Main.lean
+goldbach29_semantic_blob: 782ef73cb0b1e0ee72043f5f097b8b1b5213bd3b
+goldbach29_semantic_source_status: theorem text present; Main.lean and Loops.lean are the same self-importing blob, so clean build authority is not paid
+goldbach30_semantic_claim_revision: 7added5000a75226a834ba7aab08a7380f0c70b3
+goldbach30_semantic_claimed_path: Cryptids/Goldbach30/Main.lean
+goldbach30_audited_tree: 1ff3d6acbc46a2b01fc4663964eb031aca7635e4
+goldbach30_semantic_source_status: claimed in signed commit narrative, but Main.lean and Loops.lean absent from audited tree and known-path commit histories
+upstream_author: Mike Dupont / meta-introspector
+upstream_license: AGPL-3.0
+upstream_license_blob: 0ad25db4bd1d86c452db3f9602ccdbe172438f52
+upstream_title: Goldbach30 / Goldbach29 FRACTRAN reduction pair and halting-semantics provenance
+
+attribution_boundary:
+  Mike Dupont / meta-introspector owns the upstream Goldbach30 and Goldbach29
+  constructions, their 30-to-29 fraction reduction, abstract machines,
+  FRACTRAN programs, and Lean proofs fstep_enc. The later Goldbach29 source
+  visibly contains theorem text goldbachProg_halts_iff, but the pinned semantic
+  tree does not earn build-verified theorem authority because Main.lean and
+  Loops.lean are the same self-importing blob. The Goldbach30 commit narrative
+  claims a matching theorem, but DASHI does not promote that narrative to formal
+  theorem authority because the claimed Main.lean/Loops.lean files are absent.
+  DASHI owns the provenance/audit receipts, independent observer/fibre
+  translation, source-faithful arithmetic reconstruction, local tail quotient,
+  checkpoint theorem, and source-driven replay. Vendored upstream files retain
+  Mike/meta-introspector attribution and AGPL-3.0 licensing.
+
+literal_rule_delta_at_construction_commit:
+  - rules 1 through 25 are identical annotated rules in both Program.lean blobs
+  - Goldbach30 rule 26 is NT.B[f] -> SA
+  - Goldbach30 rule 27 is NT.B[b,c] -> RA.A[a,d^2,f]
+  - Goldbach30 rules 28..30 are SA[a] -> SB[b,c], SB -> SA, SA[c] -> RA.A[a^2,d^2,f]
+  - Goldbach29 rule 26 is NT.B[f,a] -> SB[b,c]
+  - Goldbach29 rule 27 is NT.B[f] -> NT2.B[a,b]
+  - Goldbach29 rule 28 is the same failure rule NT.B[b,c] -> RA.A[a,d^2,f]
+  - Goldbach29 rule 29 is SB -> NT.B[f]
+  - therefore all post-prefix differences are confined to the success routing;
+    the failure transition is retained literally with only its list position shifted
+
+source_reachable_success_guard:
+  - NT.B success is reached only after earlier s/g restoration branches are exhausted
+  - exact DASHI macro contract therefore fixes s=0, g=0 and verdict f=1
+  - tested a is structurally positive
+  - c may be zero on entry; canonical first success has a=2,b=2,c=0,f=1
+  - arbitrary f>1 is intentionally excluded because Goldbach29 would re-enter
+    the success branch after staging rather than satisfy the one-pass quotient
+
+external_facts_used:
+  - Goldbach30 has 30 fractions and 11 control states
+  - Goldbach29 has 29 fractions and 10 control states
+  - the first 25 annotated rules are shared before the success/failure tail
+  - the SA control state is removed in Goldbach29
+  - Goldbach30 success uses NT.B -> SA, the SA/SB transfer loop, then SA -> RA.A
+  - Goldbach29 success reroutes the transfer through NT.B/SB, stages through
+    NT2.B, and reuses the existing NT.B b c -> RA.A transition
+  - each committed Program.lean proves one encoded FRACTRAN step matches one abstract astep step (fstep_enc)
+  - Goldbach29 semantic source text contains goldbachProg_halts_iff but its duplicate/self-import tree prevents promotion to build-verified authority at the pinned revision
+  - Goldbach30 commit 7added5000a75226a834ba7aab08a7380f0c70b3 narratively claims the corresponding Goldbach30 theorem and no-sorry build
+  - recursive tree audit and GitHub path-history queries recover no Goldbach30/Main.lean or Goldbach30/Loops.lean
+
+path_provenance_note:
+  The construction commit itself records Goldbach29 under the d3e01240 UUID
+  directory. A later/user-supplied link used another UUID path; DASHI does not
+  rewrite commit-native provenance to that later path.
+
+non_claims:
+  - vendoring does not transfer authorship to DASHI
+  - byte-identical Program source is not cross-prover proof transport
+  - source-visible theorem text is not a clean kernel-build receipt
+  - a commit-message theorem claim without its source artifact is not formal theorem authority
+  - the DASHI checkpoint theorem is not yet a formal same-object proof about the pinned Lean/FRACTRAN carriers
+  - goldbachProg_halts_iff text is an equivalence to a counterexample; it is not a proof that no counterexample exists and therefore does not prove Goldbach
+  - whole-machine weak/stuttering bisimulation remains unpaid and optional for richer fine-state consumers
