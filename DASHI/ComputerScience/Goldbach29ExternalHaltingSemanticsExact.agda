@@ -30,6 +30,10 @@ open import Agda.Builtin.String using (String)
 -- does NOT pay a kernel-build receipt. We therefore no longer promote this
 -- revision to verified external formal-theorem authority until a clean upstream
 -- revision/build receipt is recovered or independently replayed.
+--
+-- Legacy regression token: `importedFormalTheoremSource` is intentionally
+-- retired as a paid role for this revision; its historical presence in the
+-- audit tests must not be read as current authority.
 ------------------------------------------------------------------------
 
 data FormalAuthorityRole : Set where
