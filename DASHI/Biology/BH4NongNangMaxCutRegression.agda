@@ -7,6 +7,8 @@ import DASHI.Biology.NitrogenOxideSpeciesCouplingExact as Oxide
 import DASHI.Biology.NitrousOxideMetabolismEvidenceExact as Nang
 import DASHI.Biology.NonginNangNitrogenOxideRefinementExact as Nongin
 import DASHI.Biology.KitzerowBH4SystemNongNangMaxCutExact as MaxCut
+import DASHI.Biology.UniProtExternalKnowledgeExact as UniProt
+import DASHI.Biology.ExternalBiologyEvidenceCore as External
 
 ------------------------------------------------------------------------
 -- Regression surface written before the production owners.
@@ -56,3 +58,19 @@ n2oLaneDoesNotCreateKitzerowMechanism :
     MaxCut.canonicalKitzerowBH4SystemMaxCutBoundary
   ≡ false
 n2oLaneDoesNotCreateKitzerowMechanism = refl
+
+qdprSnapshotIsBytePinned :
+  External.exactBinaryPinned UniProt.uniProt2026_03 ≡ true
+qdprSnapshotIsBytePinned = refl
+
+sprAccessionIsCurrentHumanSPR :
+  MaxCut.accession MaxCut.spr ≡ "P35270"
+sprAccessionIsCurrentHumanSPR = refl
+
+nos3AccessionIsCurrentHumanNOS3 :
+  MaxCut.accession MaxCut.nos3 ≡ "P29474"
+nos3AccessionIsCurrentHumanNOS3 = refl
+
+agmoAccessionIsCurrentHumanAGMO :
+  MaxCut.accession MaxCut.agmo ≡ "Q6ZNB7"
+agmoAccessionIsCurrentHumanAGMO = refl
