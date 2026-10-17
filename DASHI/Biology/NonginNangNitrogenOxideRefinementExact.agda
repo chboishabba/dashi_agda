@@ -64,7 +64,7 @@ chemicalFrameSensitiveConsumer =
     chemicalSpeciesFrameWitness
     chemicalConsumerSeparatesFrames
 
-CoarseChemicalDescent : Set
+CoarseChemicalDescent : Set₁
 CoarseChemicalDescent =
   Base.ConsumerDescent
     (Nongin.onePointZeroProject {CoarseNitrogenOxide} {ChemicalSpeciesFrame})
