@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
 """Acquire bounded Rhea/ChEBI reaction certificates for the BH4 lane.
 
-This script is deliberately reaction-identity/stoichiometry facing.  It does not
+This script is deliberately reaction-identity/stoichiometry facing. It does not
 infer kinetics, cellular flux, compartment state, allocator competition or
-disease mechanism.  Rhea's REST table is the primary acquisition source; the
-QDPR specific microspecies fixture is checked against the exact ChEBI IDs used
-by RHEA:32253.
+disease mechanism. Rhea's REST table is the primary acquisition source.
+
+Modes:
+  --qdpr
+      acquire and validate the exact QDPR/RHEA:32253 microspecies fixture.
+  --from-uniprot-panel PATH
+      read the already-acquired 16-member UniProt panel, enumerate every Rhea
+      cross-reference without re-keying proteins manually, and acquire exact
+      Rhea equation/ChEBI-ID rows with per-response SHA-256 receipts.
 """
 
 from __future__ import annotations
@@ -84,30 +90,84 @@ def acquire_qdpr() -> dict:
         "specific_chebi_expected": sorted(expected_exact),
         "specific_chebi_missing_from_rest_row": missing,
         "specific_chebi_fixture_paid": not missing,
-        "promotion_boundary": {
-            "reaction_identity_creates_kinetics": False,
-            "chemical_balance_creates_measured_flux": False,
-            "reaction_identity_creates_allocator_competition": False,
-            "reaction_identity_creates_disease_mechanism": False,
-        },
+        "promotion_boundary": promotion_boundary(),
     }
+
+
+def promotion_boundary() -> dict:
+    return {
+        "reaction_identity_creates_kinetics": False,
+        "chemical_balance_creates_measured_flux": False,
+        "reaction_identity_creates_allocator_competition": False,
+        "reaction_identity_creates_disease_mechanism": False,
+    }
+
+
+def extract_panel_rhea(panel: dict) -> list[dict]:
+    links: list[dict] = []
+    for member in panel.get("members", []):
+        cert = member.get("certificate", {})
+        for xref in cert.get("cross_references", []):
+            if xref.get("database") != "Rhea":
+                continue
+            rid = str(xref.get("id", "")).strip()
+            if rid and not rid.startswith("RHEA:"):
+                rid = f"RHEA:{rid}"
+            if rid:
+                links.append({"symbol": member.get("symbol"), "accession": member.get("accession"), "rhea_id": rid})
+    return links
+
+
+def acquire_panel(panel_path: Path) -> tuple[dict, int]:
+    panel = json.loads(panel_path.read_text(encoding="utf-8"))
+    links = extract_panel_rhea(panel)
+    unique_ids = sorted({link["rhea_id"] for link in links})
+    reactions: list[dict] = []
+    errors: list[dict] = []
+    for rid in unique_ids:
+        try:
+            reactions.append({"rhea_id": rid, **fetch_rhea_row(rid)})
+        except Exception as exc:  # keep partial acquisition explicit
+            errors.append({"rhea_id": rid, "error": str(exc)})
+    return {
+        "schema": "dashi.rhea-chebi-bh4-panel.v1",
+        "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
+        "source_uniprot_panel": str(panel_path),
+        "protein_reaction_links": links,
+        "unique_rhea_ids_requested": len(unique_ids),
+        "rhea_rows_acquired": len(reactions),
+        "rhea_rows_failed": len(errors),
+        "complete_reaction_identity_acquisition": not errors,
+        "reactions": reactions,
+        "errors": errors,
+        "qdpr_specific_fixture": QDPR_EXPECTED,
+        "promotion_boundary": promotion_boundary(),
+    }, (0 if not errors else 3)
+
+
+def render(payload: dict, output: Path | None) -> None:
+    text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
+    if output:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(text, encoding="utf-8")
+    else:
+        sys.stdout.write(text)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--qdpr", action="store_true", help="acquire the QDPR Rhea/ChEBI witness")
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--qdpr", action="store_true", help="acquire the QDPR Rhea/ChEBI witness")
+    mode.add_argument("--from-uniprot-panel", type=Path, metavar="PATH", help="acquire all Rhea xrefs found in the exact UniProt panel certificate")
     parser.add_argument("-o", "--output", type=Path)
     args = parser.parse_args()
-    if not args.qdpr:
-        parser.error("currently select --qdpr; panel expansion consumes exact per-protein Rhea cross-references")
-    payload = acquire_qdpr()
-    text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
-    if args.output:
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(text, encoding="utf-8")
-    else:
-        sys.stdout.write(text)
-    return 0 if payload["specific_chebi_fixture_paid"] else 3
+    if args.qdpr:
+        payload = acquire_qdpr()
+        render(payload, args.output)
+        return 0 if payload["specific_chebi_fixture_paid"] else 3
+    payload, code = acquire_panel(args.from_uniprot_panel)
+    render(payload, args.output)
+    return code
 
 
 if __name__ == "__main__":
