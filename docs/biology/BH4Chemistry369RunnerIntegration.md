@@ -2,365 +2,161 @@
 
 ## Current phase
 
-PR #1159 has moved beyond identity/provenance and the first literal reaction.
-The current phase is **quantitative system-state / open-metabolic closure**.
+PR #1159 is in **quantitative system-state / open-metabolic closure**.
 
-The bounded DASHI path is now:
-
-```text
-exact UniProt protein panel
-  -> exact Rhea cross-references
-  -> Rhea/ChEBI reaction participants + coefficients + formula/charge
-  -> finite molecular reaction audits
-  -> deterministic species x reaction stoichiometric matrix S
-  -> interval/source/compartment/time parameter coordinates
-  -> explicit environmental/compartment exchange vector e
-  -> candidate witness check S v + e = 0
-  -> BH4SystemState / FluxBalanceWitness boundary
-  -> isoform-specific NOS coupling / product-state boundary
-  -> existing CrossScaleMatterPhysics and biology-discharge parents
-```
-
-Identity, reaction identity, finite stoichiometry, quantitative state, transport,
-causality and clinical authority remain separate coordinates.
-
-## Exact QDPR anchor
-
-The first fully literal path remains:
+Executed chemistry baseline (2026-10-17):
 
 ```text
-QDPR / UniProt P09417
-  -> RHEA:17869 generic reaction
-  -> RHEA:17871 directed generic child
-  -> RHEA:32253 specific BH4 reaction
+16 exact UniProt proteins
+  -> 24 protein/Rhea catalytic links
+  -> 12 finite formula/charge reactions
+  -> 3 explicit non-finite MTOR protein/R-group residual reactions
+  -> 29 species x 12 reactions stoichiometric matrix S
+  -> first 27-coordinate parameter template
+  -> first S*v+e=0 attempt = underdetermined
 ```
 
-with:
+The next-run quantitative problem is now explicit:
 
 ```text
-(6R)-L-erythro-6,7-dihydrobiopterin + NADH + H+
-  => (6R)-L-erythro-5,6,7,8-tetrahydrobiopterin + NAD+
+15 core state/context coordinates
++ 12 REACTION_FLUX:<RHEA-ID> intervals
++ 29 EXCHANGE:<species-id> intervals
+= 56 coordinates
 ```
 
-Specific reaction microspecies:
-
-| side | ChEBI | formula | charge |
-|---|---|---:|---:|
-| substrate | CHEBI:43120 | C9H13N5O3 | 0 |
-| substrate | CHEBI:57945 | C21H27N7O14P2 | -2 |
-| substrate | CHEBI:15378 | H | +1 |
-| product | CHEBI:59560 | C9H15N5O3 | 0 |
-| product | CHEBI:57540 | C21H26N7O14P2 | -1 |
-
-The broader tetrahydrobiopterin ontology coordinate `CHEBI:15372` remains
-separate from the exact reaction microspecies `CHEBI:59560`.
-
-Both sides reduce to:
+## Exact finite reaction index
 
 ```text
-C30 H41 N12 O17 P2 ; net charge -1
+RHEA:17473  GCH1
+RHEA:22048  PTS
+RHEA:32627  SPR
+RHEA:18953  SPR
+RHEA:11920  PCBD1
+RHEA:17869  QDPR
+RHEA:17865  QDPR
+RHEA:20273  PAH
+RHEA:18201  TH
+RHEA:16709  TPH1 / TPH2
+RHEA:19897  NOS1 / NOS2 / NOS3
+RHEA:36255  AGMO
 ```
 
-so the QDPR atom-count/net-charge witness is definitional in
-`BH4MolecularStoichiometryExact`.
+Explicit non-finite residuals:
+
+```text
+RHEA:10596  MTOR tyrosyl-[protein] kinase
+RHEA:17989  MTOR seryl-[protein] kinase
+RHEA:46608  MTOR threonyl-[protein] kinase
+```
+
+Residual reactions are acquired reaction identities, not zero columns.
 
 ## Existing DASHI machinery reused
 
-The BH4 lane does not introduce a parallel metabolic theory.
+The BH4 lane consumes the existing molecular stoichiometric conservation,
+`OpenMetabolicNetwork`, metabolic stoichiometric conservation,
+`MetabolicOpenSystemBalance`, atomic-generation obligation surface, 369
+retained-carrier/refinement machinery, and the NONG/NANG NO-vs-N2O theorem.
 
-It consumes:
-
-- `MolecularStoichiometricConservation` for exact reaction/path conservation;
-- `OpenMetabolicNetwork` for reaction, state, environment and flux carriers;
-- `MetabolicStoichiometricConservation` for network-level internal reaction
-  conservation;
-- `MetabolicOpenSystemBalance` for the exact separation between internal
-  reaction increments and environmental exchange increments;
-- `AtomicGenerationPipelineExact` for the atomic/electronic obligation boundary;
-- `PNFHyperfabric369` and argument-level transport for retained-carrier
-  coarse/fine refinement;
-- `NonginNangNitrogenOxideRefinementExact` for the literal theorem that a coarse
-  nitrogen-oxide observer cannot serve a consumer that needs the NO/N2O frame.
-
-The resulting anti-collapse laws include:
+The main anti-collapse laws remain:
 
 ```text
 atomic inventory != solved molecular Hamiltonian
 finite stoichiometry != quantitative physical chemistry
-Rhea balanced != independently finite-formula reconstructed
 missing/incomplete reaction != zero stoichiometric column
-internal reaction != compartment/environmental exchange
+internal reaction != environmental/compartment exchange
 unresolved parameter != measured zero
 same molecule in two compartments != one state
 same variable at two times != one same-time state
-coarse BH4 availability != BH4/BH2/redox/occupancy/flux state
+kinetic constant != in-vivo flux bound
+SIFTS mapping != catalytic mechanism
 NO != N2O
 chemistry != literally 369
-feasible flux candidate != allocator causality
+feasible steady state != allocator causality
 a whole-system balance != disease mechanism
 ```
 
-## Panel reaction acquisition
+## Quantitative acquisition and solving
 
-The already-acquired 16-member UniProt certificate is the sole panel-membership
-source. No second hand-written reaction panel is maintained.
+Full runbook:
+
+```text
+docs/biology/BH4Phase4QuantitativeRunbook.md
+```
+
+One-command execution:
 
 ```bash
-python3 scripts/acquire_rhea_chebi_bh4_reactions.py \
-  --from-uniprot-panel artifacts/biology/uniprot-kitzerow-bh4-panel-certificate.json \
-  -o artifacts/biology/rhea-chebi-kitzerow-bh4-panel.json
+python3 scripts/run_bh4_phase4_maxcut.py
 ```
 
-For each unique Rhea ID the certificate records the REST row/raw digest and an
-RDF/SPARQL participant receipt with:
+The runner:
 
-```text
-substrate/product side
-stoichiometric coefficient
-Rhea participant and compound URI
-ChEBI identifier when present
-compound name
-formula
-charge
-SPARQL response SHA-256
-```
+1. refreshes Rhea/ChEBI chemistry from the exact UniProt panel;
+2. rebuilds the deterministic finite matrix `S`;
+3. generates the 56-coordinate quantitative template;
+4. acquires SABIO-RK kinetic-law candidates by exact UniProt accession;
+5. acquires bounded PDBe/SIFTS UniProt/PDB segment mappings;
+6. runs interval steady-state feasibility;
+7. runs the aggregate evidence/identity/chemistry/Phase-4 static regressions.
 
-Polymeric/macromolecular/R-group/incomplete-formula reactions remain explicit
-finite-formula residuals.
-
-## Canonical stoichiometric matrix
-
-`build_bh4_stoichiometric_matrix.py` converts every finite formula/charge-ready
-reaction into one deterministic signed reaction column.
+A source-paid manifest can be supplied with:
 
 ```bash
-python3 scripts/build_bh4_stoichiometric_matrix.py \
-  artifacts/biology/rhea-chebi-kitzerow-bh4-panel.json \
-  --output-prefix artifacts/biology/bh4-stoichiometric-matrix
+python3 scripts/run_bh4_phase4_maxcut.py \
+  --manifest artifacts/biology/bh4-parameter-paid.json
 ```
 
-The result contains:
+The interval solver searches:
 
 ```text
-species_index
-reaction_index
-matrix                # signed stoichiometric coefficients
-columns               # sparse human-readable form
-finite_formula_residuals
-external_exchange=[]  # deliberately not folded into S
+S*v + e = 0
 ```
 
-A reaction lacking a finite structural receipt is absent from `S` and present in
-`finite_formula_residuals`; it is never represented as a fake all-zero column.
+with source-paid lower/upper bounds on every reaction flux and every species
+exchange coordinate. It uses `scipy.optimize.linprog(method="highs")` only after
+all required bounds are marked usable for the joint witness.
 
-`BH4PanelStoichiometricMatrixExact` is the formal owner for this contract.
-
-## Quantitative parameter coordinates
-
-`BH4CompartmentKineticStateExact` replaces the old implicit idea of a single
-number per pathway with interval-valued evidence coordinates carrying:
+Possible outcomes:
 
 ```text
-payment status: measured | derived | bounded-literature | unresolved
-lower/upper bound
-unit / scale
-source
-same-object reference
-compartment
-measurement time
-method
-direct-measurement flag
-usable-for-joint-flux-witness flag
+feasible
+infeasible
+underdetermined
+solver-unavailable
 ```
 
-Generate a fail-closed template from the concrete matrix:
+Missing reaction or exchange intervals are never silently replaced by zero or
+infinity.
 
-```bash
-python3 scripts/acquire_bh4_parameter_evidence.py \
-  --template \
-  --matrix artifacts/biology/bh4-stoichiometric-matrix.json \
-  -o artifacts/biology/bh4-parameter-template.json
-```
+## Evidence lanes
 
-This automatically adds `REACTION_FLUX:<RHEA-ID>` coordinates for every matrix
-column. An unresolved coordinate has `lower=null`, `upper=null` and is not
-usable for a joint flux witness. It is not zero.
+`BH4QuantitativeAcquisitionExact` owns the SABIO/PDBe/SIFTS promotion boundary.
+SABIO entries may provide Km, kcat, Vmax, rate laws and experimental context,
+but those remain candidate evidence until translated into an explicitly sourced,
+compartment/time/same-object flux interval. PDBe/SIFTS pays structure/sequence
+mapping, not catalytic function or perturbational causality.
 
-A populated manifest can then be normalized:
+`BH4IntervalFluxSolverExact` owns the interval-feasibility boundary. A feasible
+steady-state witness establishes consistency of the supplied intervals only. An
+infeasible bounded steady-state problem does not rule out time-varying dynamics
+or a different state space.
 
-```bash
-python3 scripts/acquire_bh4_parameter_evidence.py \
-  --manifest artifacts/biology/bh4-parameter-input.json \
-  --matrix artifacts/biology/bh4-stoichiometric-matrix.json \
-  -o artifacts/biology/bh4-parameters.json
-```
-
-Paid values require source, same-object, compartment and measurement-time
-coordinates in addition to numeric bounds and units.
-
-## NOS coupling: what is now paid
-
-`BH4NOSCouplingEvidenceExact` adds bounded primary-source evidence for the
-NOS3/eNOS lane:
-
-- Crabtree et al., JBC 2009, DOI `10.1074/jbc.M805403200`, PMID `19011239`;
-- Crabtree et al., JBC 2009, DOI `10.1074/jbc.M109.041483`, PMID `19666465`.
-
-The first separates BH4 relative to eNOS protein and BH4:BH2 redox status as
-coupling coordinates. The second uses DHFR perturbation and observes lower BH4
-relative to BH2 together with reduced NO and increased eNOS-dependent superoxide
-in the studied systems.
-
-This pays **bounded NOS3/eNOS coupling support and perturbational support**.
-It does not yet pay:
+## Current live frontier
 
 ```text
-same single-cell / same-time BH4/BH2 + NOS state
-complete compartment identity
-reaction flux
-all required substrates/oxygen in one state
-NOS1 or NOS2 generalisation
-upstream BH4/NOS -> TSC2 same-object transport
-Kitzerow disease mechanism
+resolve the three non-finite MTOR protein/R-group reaction representations where needed
+execute/adjudicate SABIO kinetic candidate evidence
+execute/adjudicate PDBe/SIFTS residue/site evidence
+pay 12 reaction-specific flux intervals
+pay 29 species-specific external-exchange intervals
+pay compartment-specific BH4/BH2/redox state
+pay simultaneous AAAH/NOS/AGMO demand
+pay isoform-specific NOS coupling transitions
+pay same-object upstream NOS -> TSC2 transport
+discriminate alternative mechanisms
 ```
 
-`BH4NOSCouplingSameObjectExact` makes that distinction explicit.
-
-## Joint flux witness checker
-
-The Phase-4 runner checks a supplied candidate rather than pretending to solve
-an unconstrained biochemical optimisation problem.
-
-Candidate shape:
-
-```json
-{
-  "reaction_flux": {
-    "RHEA:...": 1.0
-  },
-  "external_exchange": {
-    "CHEBI:...": 0.0
-  },
-  "same_state_reference": "...",
-  "measurement_reference": "..."
-}
-```
-
-Run:
-
-```bash
-python3 scripts/run_bh4_flux_feasibility.py \
-  --matrix artifacts/biology/bh4-stoichiometric-matrix.json \
-  --parameters artifacts/biology/bh4-parameters.json \
-  --candidate artifacts/biology/bh4-flux-candidate.json \
-  --output-prefix artifacts/biology/bh4-flux-feasibility
-```
-
-The status is one of:
-
-```text
-feasible        complete supplied candidate is inside paid bounds and S*v+e=0
-infeasible      this complete supplied candidate violates bounds or balance
-underdetermined required bounds / fluxes / exchanges are missing
-```
-
-`infeasible` is intentionally candidate-relative; it does not prove that no
-other feasible state exists.
-
-A `candidate_flux_balance_witness` is emitted only for a complete balanced
-candidate.
-
-## First whole-system attempt
-
-The formal Phase-4 roadmap records:
-
-```text
-wholeSystemFluxBalanceAttempted = true
-firstJointFluxOutcome = underdetermined
-```
-
-This is a substantive result. The blocker is no longer undefined architecture.
-The remaining missing coordinates are named:
-
-```text
-complete panel reaction acquisition/promotion
-reaction-specific quantitative flux bounds
-compartment-specific BH4/BH2/redox state
-simultaneous AAAH/NOS/AGMO demand
-transport/oxidation external exchange vector
-isoform-specific NOS transitions beyond bounded NOS3 evidence
-same-object upstream NOS -> TSC2 transport
-PDB/SIFTS residue/site witnesses where mechanistically needed
-alternative-mechanism discrimination
-```
-
-`BH4Phase4RoadmapExact` is the current roadmap owner.
-
-## Open metabolic integration
-
-`BH4OpenMetabolicNetworkAdapterExact` explicitly consumes the existing DASHI
-open-system owners. Its central decomposition is:
-
-```text
-internal biochemical reactions -> S
-transport / uptake / export / oxidation -> external exchange e
-```
-
-so the quantitative target is:
-
-```text
-S v + e = d x / d t
-```
-
-and a steady-state witness is the special case:
-
-```text
-S v + e = 0
-```
-
-The current interface is present but the concrete quantitative open-network
-instance remains unpaid until the source-specific parameter and exchange
-coordinates are populated.
-
-## 369 / atomics / unified integration
-
-369 remains a refinement/observer grammar, not a chemical force law. The BH4
-object now moves through exact observation levels:
-
-```text
-atomic inventory
-  -> molecular reaction
-  -> reaction network
-  -> coarse BH4 availability
-  -> fine BH4/BH2/redox/compartment/flux state
-  -> cell/open-system observation
-```
-
-while retaining provenance and residuals at every projection.
-
-The end-to-end focused root is:
-
-```text
-DASHI/Unified/BH4BiochemicalEverything.agda
-```
-
-and the Phase-4 regression is:
-
-```bash
-python3 scripts/check_bh4_phase4_system_state.py
-```
-
-## Phase exit
-
-Phase 4 exits only when enough source-specific coordinates are paid to construct
-at least one meaningful joint state and challenge it against the full admitted
-network.
-
-A feasible state would establish consistency of the paid constraints, not the
-Kitzerow mechanism. An infeasible state would only falsify that candidate unless
-an exhaustive/convex feasibility theorem is separately supplied. An
-underdetermined state proves neither truth nor falsity.
-
-Only after this quantitative phase should the roadmap move to mechanistic
-alternative discrimination, intervention/temporal causality and, separately,
-clinical validity.
+Identity, finite chemistry, quantitative state, transport, causality and clinical
+authority remain independent payment layers.
