@@ -11,11 +11,6 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2Exact as H2
 import DASHI.Physics.YangMills.YangMillsClayCMP119LiteralConstructionCoreExact as Core
-import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSMomentSourceRound581Exact as R581
-import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
-import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
-import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
-import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
 
 ------------------------------------------------------------------------
 -- CMP119 H2 -> LITERAL Y -> MINIMAL CASIMIR/R457 CONTINUUM ATTACHMENT
@@ -75,10 +70,6 @@ h2AndFieldsBuildMinimalContinuum h2 fields group = record
       H2.schwingerBelongsToContinuumMeasure h2 group
   }
 
-------------------------------------------------------------------------
--- Boundary accounting.
-------------------------------------------------------------------------
-
 record CasimirCMP119H2R457Boundary : Set where
   constructor casimir-cmp119-h2-r457-boundary
   field
@@ -95,18 +86,6 @@ canonicalCMP119H2R457Boundary : CasimirCMP119H2R457Boundary
 canonicalCMP119H2R457Boundary =
   casimir-cmp119-h2-r457-boundary
     true true false false true true
-
-r581PhysicalSourceLevel :
-  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
-      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
-      EuclideanAction Permutation sequenceLimit limitLaws quotient division S} →
-  R581.PublishedFiniteOSMomentSource
-    G X Configuration Position CurvaturePolynomial LocalOperator
-    OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
-    EuclideanAction Permutation
-    {sequenceLimit = sequenceLimit}
-    limitLaws quotient division S → Set
-r581PhysicalSourceLevel _ = ⊤
 
 casimirCMP119H2R457Reading : String
 casimirCMP119H2R457Reading =
