@@ -147,7 +147,7 @@ compileWeightTwoLinearActionBridge :
     {bridge : MonsterVOA.MonsterGradedVOABridge Monster K} →
   GriessConstituentLinearWitness bridge →
   WeightTwo.WeightTwoLinearActionBridge bridge
-compileWeightTwoLinearActionBridge witness = record
+compileWeightTwoLinearActionBridge {bridge = bridge} witness = record
   { semanticActionBridge = semanticActionBridge witness
   ; fullWeightTwoLinearRealisation = fullWeightTwoLinearRealisation witness
   ; evaluationIsSameObject = evaluationIsSameObject witness
@@ -185,7 +185,7 @@ compileWeightTwoLinearActionBridge witness = record
         (GR.action
           (GR.grade
             (GVOA.gradedRepresentation
-              (MonsterVOA.voaAction _))
+              (MonsterVOA.voaAction bridge))
             2)
           g)
         (constituentInclusion witness state)
