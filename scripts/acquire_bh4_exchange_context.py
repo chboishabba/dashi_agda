@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 BASE = "https://www.metabolomicsworkbench.org/rest"
-UA = "DASHI-BH4-exchange-context/1.0"
+UA = "DASHI-BH4-exchange-context/1.1"
 
 
 def fetch(url: str) -> tuple[object, str]:
@@ -41,11 +41,6 @@ def listish(payload: object) -> list[dict]:
     return []
 
 
-def is_human(row: dict) -> bool:
-    text=" ".join(str(row.get(k) or "") for k in ("subject_species","species","SUBJECT_SPECIES","study_title","STUDY_TITLE")).lower()
-    return "homo sapiens" in text or "human" in text
-
-
 def acquire(matrix: dict, rhea: dict) -> dict:
     meta=participant_metadata(rhea); rows=[]; errors=[]
     for species in matrix.get("species_index",[]):
@@ -58,17 +53,20 @@ def acquire(matrix: dict, rhea: dict) -> dict:
                 payload,digest=fetch(ref_url); rec["refmet_request"]=ref_url; rec["refmet_raw_sha256"]=digest; rec["refmet_matches"]=listish(payload)
             except (urllib.error.URLError,urllib.error.HTTPError,TimeoutError,json.JSONDecodeError) as exc:
                 errors.append({"species":species,"stage":"refmet","error":str(exc)})
-            # Study lookup is navigation/context only. We deliberately do not
-            # interpret study signal intensity or concentration as transport.
-            study_url=f"{BASE}/study/refmet_name/{encoded}/summary"
+
+            # Documented metstat slot order:
+            # analysis; ion; chromatography; species; sample; disease; KEGG; RefMet.
+            # Empty slots are intentional. Human-study occurrence is navigation
+            # context only and is not interpreted as concentration or transport.
+            study_url=f"{BASE}/metstat/;;;Human;;;;{encoded}"
             try:
-                payload,digest=fetch(study_url); rec["study_request"]=study_url; rec["study_raw_sha256"]=digest; rec["human_studies"]=[x for x in listish(payload) if is_human(x)]
+                payload,digest=fetch(study_url); rec["study_request"]=study_url; rec["study_raw_sha256"]=digest; rec["human_studies"]=listish(payload)
             except (urllib.error.URLError,urllib.error.HTTPError,TimeoutError,json.JSONDecodeError) as exc:
                 errors.append({"species":species,"stage":"human-study","error":str(exc)})
         rows.append(rec)
     return {
         "schema":"dashi.bh4-exchange-context.v1",
-        "source":"Metabolomics Workbench REST / RefMet",
+        "source":"Metabolomics Workbench REST / RefMet + metstat",
         "acquired_at_utc":datetime.now(timezone.utc).isoformat(),
         "species_requested":len(rows),
         "species_with_refmet_match":sum(bool(r["refmet_matches"]) for r in rows),
