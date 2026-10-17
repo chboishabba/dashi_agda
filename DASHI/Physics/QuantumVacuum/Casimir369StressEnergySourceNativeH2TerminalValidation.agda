@@ -16,19 +16,21 @@ positiveMassGapRetiredRegression :
   T.positiveClayMassGapProofRequiredForCasimirStress ≡ false
 positiveMassGapRetiredRegression = refl
 
-r581SourceFrontierOpenRegression :
+r581ProducerFrontierRecordedRegression :
   T.r581PreferredFiniteOSMomentSourceStillRequired ≡ true
-r581SourceFrontierOpenRegression = refl
+r581ProducerFrontierRecordedRegression = refl
 
-firstPrimitiveBlockerRegression :
-  T.firstPrimitiveUnificationBlocker
-  ≡ T.missingCMP119H2PhysicalInstantiation
-firstPrimitiveBlockerRegression = refl
+h2NotMandatoryForSelectedCasimirRegression :
+  T.cmp119H2RequiredForSelectedCasimir ≡ false
+h2NotMandatoryForSelectedCasimirRegression = refl
 
-secondPrimitiveBlockerRegression :
-  T.secondPrimitiveUnificationBlocker
-  ≡ T.missingCMP119LiteralConstructionEndpointFields
-secondPrimitiveBlockerRegression = refl
+r581NotMandatoryForSelectedCasimirRegression :
+  T.round581RequiredForSelectedCasimir ≡ false
+r581NotMandatoryForSelectedCasimirRegression = refl
+
+h2ProducerRouteAvailableRegression :
+  T.h2ProducerRouteAvailable ≡ true
+h2ProducerRouteAvailableRegression = refl
 
 legacyPinnedBlockerRetiredRegression :
   T.legacyPinnedYangMillsConstructionBlockerRetired ≡ true
