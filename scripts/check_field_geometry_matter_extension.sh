@@ -13,6 +13,8 @@ files=(
   DASHI/Physics/CondensedMatter/MATBGQTMResolutionAwareForwardObserverValidation.agda
   DASHI/Physics/Foundations/CasimirIdealSheetScalingCeilingReceiptExact.agda
   DASHI/Physics/Foundations/CasimirIdealSheetScalingCeilingValidation.agda
+  DASHI/Physics/Foundations/WarpEnergyConditionSourceAtlasExact.agda
+  DASHI/Physics/Foundations/WarpEnergyConditionSourceAtlasValidation.agda
 )
 
 for file in "${files[@]}"; do
@@ -40,8 +42,12 @@ grep -q 'sampleGeometrySourcePaid' DASHI/Physics/CondensedMatter/MATBGQTMInstrum
 grep -q 'normalizedSyntheticKernelExecuted' DASHI/Physics/CondensedMatter/MATBGQTMResolutionKernelReceiptExact.agda
 grep -q 'syntheticResolutionAwareSurfaceExecuted' DASHI/Physics/CondensedMatter/MATBGQTMResolutionAwareForwardObserverReceiptExact.agda
 grep -q 'fixedGapAreaCeilingNumericallyExecuted' DASHI/Physics/Foundations/CasimirIdealSheetScalingCeilingReceiptExact.agda
+grep -q 'genericPhysicallyReasonableWarpEnergyConditionViolationSourcePaid' DASHI/Physics/Foundations/WarpEnergyConditionSourceAtlasExact.agda
+grep -q 'constantVelocitySubluminalPositiveEnergyConstructionSourcePaid' DASHI/Physics/Foundations/WarpEnergyConditionSourceAtlasExact.agda
 grep -q 'qtmResolutionAwareForwardObserver' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 grep -q 'casimirIdealSheetScalingCeiling' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
+grep -q 'genericWarpEnergyConditionObstructionSource' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
+grep -q 'superluminalPositiveEnergyPhysicalWarpSource' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 
 python3 scripts/check_field_geometry_matter_evidence.py
 
