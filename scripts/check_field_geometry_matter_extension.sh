@@ -5,6 +5,8 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 files=(
+  DASHI/Physics/CondensedMatter/MATBG2026PublicAcquisitionRouteExact.agda
+  DASHI/Physics/CondensedMatter/MATBG2026PublicAcquisitionRouteValidation.agda
   DASHI/Physics/CondensedMatter/MATBGQTMInstrumentCalibration2026Exact.agda
   DASHI/Physics/CondensedMatter/MATBGQTMInstrumentCalibration2026Validation.agda
   DASHI/Physics/CondensedMatter/MATBGQTMResolutionKernelReceiptExact.agda
@@ -40,6 +42,10 @@ for artifact in "${artifacts[@]}"; do
   test -f "$artifact" || { echo "missing execution artifact: $artifact" >&2; exit 1; }
 done
 
+grep -q 'legacyPMCOAPackageEndpointOperational' DASHI/Physics/CondensedMatter/MATBG2026PublicAcquisitionRouteExact.agda
+grep -q 'currentPMCCloudServiceSupported' DASHI/Physics/CondensedMatter/MATBG2026PublicAcquisitionRouteExact.agda
+grep -q 'exactMATBGCloudPayloadConfirmed' DASHI/Physics/CondensedMatter/MATBG2026PublicAcquisitionRouteExact.agda
+grep -q 'pmcArticleIdentityCountsAsPayloadByteRoute' DASHI/Physics/CondensedMatter/MATBG2026PublicAcquisitionRouteExact.agda
 grep -q 'sampleGeometrySourcePaid' DASHI/Physics/CondensedMatter/MATBGQTMInstrumentCalibration2026Exact.agda
 grep -q 'normalizedSyntheticKernelExecuted' DASHI/Physics/CondensedMatter/MATBGQTMResolutionKernelReceiptExact.agda
 grep -q 'syntheticResolutionAwareSurfaceExecuted' DASHI/Physics/CondensedMatter/MATBGQTMResolutionAwareForwardObserverReceiptExact.agda
