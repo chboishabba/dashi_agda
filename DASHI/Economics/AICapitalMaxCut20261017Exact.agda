@@ -10,6 +10,7 @@ import DASHI.Economics.AIFinancingCohortCompanyOutcomeCoordinates20261017Exact a
 import DASHI.Economics.AIFinancingCustomerCreditPriceDifferential20261017Exact as Price
 import DASHI.Economics.AIHardwareLeaseResidualStructure20261017Exact as Lease
 import DASHI.Economics.AIIRENCloudDirectCostBoundary20261017Exact as DirectCost
+import DASHI.Economics.AIIRENProjectPaybackExpectation20261017Exact as Payback
 import DASHI.Economics.AICapitalOutcomeCompatibility20261016Exact as Outcome
 import DASHI.Economics.AIAustraliaDataCentrePolicyShift20261016Exact as Policy
 
@@ -22,6 +23,7 @@ record MaxCutState : Set where
     sameCompanyFinancingPriceDifferencePaid : Bool
     leaseResidualStructurePaid : Bool
     providerDirectCostCoordinatePaid : Bool
+    projectPaybackForecastPaid : Bool
     namedPayerCashPaid : Bool
     publicContractRealisationRatioPaid : Bool
     publicGPUSerialCohortPaid : Bool
@@ -37,7 +39,7 @@ open MaxCutState public
 
 currentMaxCut : MaxCutState
 currentMaxCut = max-cut-state
-  true true true true true true
+  true true true true true true true
   false false false false false false false false false false
 
 financingCohortPaid : financingCohortStructurePaid currentMaxCut ≡ true
@@ -48,6 +50,9 @@ companyOutcomeCoordinatesPaidProof = refl
 
 providerDirectCostPaid : providerDirectCostCoordinatePaid currentMaxCut ≡ true
 providerDirectCostPaid = refl
+
+paybackForecastPaid : projectPaybackForecastPaid currentMaxCut ≡ true
+paybackForecastPaid = refl
 
 namedCashStillOpen : namedPayerCashPaid currentMaxCut ≡ false
 namedCashStillOpen = refl
@@ -73,6 +78,9 @@ leaseOptionNotSalvage = Lease.optionDoesNotEqualMarketResidual
 directCostNotMarginalCost : DirectCost.marginalInferenceCostPaid DirectCost.irenFY2026CloudCost ≡ false
 directCostNotMarginalCost = DirectCost.marginalInferenceCostStillOpen
 
+paybackForecastNotRealisedReturn : Payback.realisedPaybackPaid Payback.irenSelectedProjectExpectation ≡ false
+paybackForecastNotRealisedReturn = Payback.realisedPaybackStillOpen
+
 policyEnactmentStillOpen : Policy.newMandatoryDataCentreDutyEnacted Policy.currentPolicyShift ≡ false
 policyEnactmentStillOpen = Policy.enactmentStillOpen
 
@@ -81,4 +89,4 @@ outcomeStillUnselected = Outcome.terminalPromotionStillClosed
 
 boundary : String
 boundary =
-  "The October-17 max-cut is empirical rather than architectural. Public sources now pay a five-subject financing-mechanism cohort across provider/neocloud/developer layers, first company-level outcome coordinates for Nebius and IREN, a same-company selected 300bp IREN financing-price difference, explicit GPU lease terminal-value structures and an audited IREN cloud direct-cost coordinate. None of these closes the decisive consumers by proxy. Positive operating cash can be advance/prepayment-driven and is not project return; the selected financing-rate difference is not a pure customer-credit effect because instrument/project/maturity/collateral matching is unpaid; contractual buyout options are not realised salvage; direct cloud cost excluding depreciation is not marginal inference cost. The genuine remaining public wall is named payer cash and realised CRR, public GPU cohort/serial data, matched project return/refinancing outcomes, workload-normalised marginal provider cost, realised hardware residual/refresh economics, actually enacted infrastructure duties and realised compliance costs. Predeclared outcome regimes remain unselected."
+  "The October-17 max-cut is empirical rather than architectural. Public sources now pay a five-subject financing-mechanism cohort across provider/neocloud/developer layers, first company-level outcome coordinates for Nebius and IREN, a same-company selected 300bp IREN financing-price difference, explicit GPU lease terminal-value structures, an audited IREN cloud direct-cost coordinate and a company-estimated roughly two-year project-payback forecast for selected recent IREN contracts. None of these closes the decisive consumers by proxy. Positive operating cash can be advance/prepayment-driven and is not project return; the selected financing-rate difference is not a pure customer-credit effect because instrument/project/maturity/collateral matching is unpaid; contractual buyout options are not realised salvage; direct cloud cost excluding depreciation is not marginal inference cost; and a management payback estimate is a falsifiable forecast rather than realised IRR. The genuine remaining public wall is named payer cash and realised CRR, public GPU cohort/serial data, matched project return/refinancing outcomes, workload-normalised marginal provider cost, realised hardware residual/refresh economics, actually enacted infrastructure duties and realised compliance costs. Predeclared outcome regimes remain unselected."
