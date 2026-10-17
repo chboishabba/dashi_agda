@@ -9,12 +9,17 @@ on:
       - '.github/workflows/da51.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   agda:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Verify shared fixture bytes
         run: echo 'cc67f109e5be3cfea89d7a8e0ba2b1b6279b5f012d751efbdb7e3a971e957106  fixtures/da51_v1.json' | sha256sum --check -
       - name: Install Agda and standard library
