@@ -17,6 +17,27 @@ EXPECTED = {
         "sourceGenreDoesNotCreateHistoricalTruth",
         "canonicalPowersArchiveModalityBoundary",
     ],
+    "DASHI/Culture/PowersPlantationParadiseSourceAcquisitionPromotionExact.agda": [
+        "ResolutionStage", "HistoricalSourceAcquisitionReceipt",
+        "HistoricalSourceAcquisitionObligation",
+        "julien1781SecondaryCoordinateReceipt", "minette1784WillSecondaryCoordinateReceipt",
+        "lise1786AnnouncementSecondaryCoordinateReceipt",
+        "july1790PrimaryIssueObligation", "minetteSettlementObligation",
+        "saintDomingueSeatingRuleObligation", "locationCannotRecoverInspection",
+        "inspectionCannotRecoverQualification",
+        "canonicalPowersSourceAcquisitionPromotionBoundary",
+    ],
+    "DASHI/Culture/PowersPlantationParadiseFrontierGenealogyExact.agda": [
+        "FrontierGenealogyReceipt", "compensationFrontierGenealogy",
+        "distributionFrontierGenealogy", "chronologyFrontierGenealogy",
+        "causalFrontierGenealogy", "frontierNarrativeDoesNotCreateHistoricalTruth",
+        "canonicalPowersFrontierGenealogyBoundary",
+    ],
+    "DASHI/Culture/PowersPlantationParadisePromotionGateValidation.agda": [
+        "_source-acquisition-boundary-paid", "_frontier-genealogy-boundary-paid",
+        "_july-primary-obligation-paid", "_minette-settlement-obligation-paid",
+        "_compensation-genealogy-paid", "_distribution-genealogy-paid",
+    ],
     "DASHI/Culture/PowersPlantationParadiseInvestigationParetoExact.agda": [
         "primaryCorpusCandidate", "actorDistributionCandidate",
         "compensationSettlementCandidate", "seatingRuleCandidate",
@@ -62,7 +83,8 @@ EXPECTED = {
         "canonicalPowersResearchThroughPerformanceBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseEmpiricalRoadmapExact.agda": [
-        "phaseStatus", "statusOfDeliverable", "nextPriorityReference",
+        "phaseStatus", "statusOfDeliverable", "sourceAcquisitionPromotionGate",
+        "empiricalFrontierGenealogy", "nextPriorityReference",
         "canonicalPowersEmpiricalRoadmapBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseEmpiricalPhase3Validation.agda": [
@@ -70,13 +92,16 @@ EXPECTED = {
         "_five-axis-routing-paid", "_selective-reopening-paid",
         "_discriminator-boundary-paid", "_sensory-access-gap-paid",
         "_evidence-graph-boundary-paid", "_mobility-regime-boundary-paid",
-        "_performance-probe-boundary-paid", "_roadmap-boundary-paid", "roadmapBoundary",
+        "_performance-probe-boundary-paid", "_source-acquisition-promotion-boundary-paid",
+        "_location-inspection-gap-paid", "_frontier-genealogy-boundary-paid",
+        "_compensation-frontier-genealogy-paid", "_roadmap-boundary-paid", "roadmapBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseSynthesisExact.agda": [
         "methodologySourceBoundary", "archiveModalityBoundary",
         "investigationRoutingBoundary", "historicalDiscriminatorBoundary",
         "sensoryAccessBoundary", "evidenceGraphBoundary",
         "mobilityRegimeBoundary", "researchThroughPerformanceBoundary",
+        "sourceAcquisitionPromotionBoundary", "frontierGenealogyBoundary",
         "empiricalRoadmapBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseValidation.agda": [
