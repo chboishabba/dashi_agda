@@ -69,6 +69,10 @@ record AcquiredProteinQidReceipt : Set where
 
 open AcquiredProteinQidReceipt public
 
+gch1Identity gchfrIdentity ptsIdentity sprIdentity pcbd1Identity qdprIdentity
+  nos1Identity nos2Identity nos3Identity pahIdentity thIdentity tph1Identity
+  tph2Identity agmoIdentity tsc2Identity mtorIdentity : AcquiredProteinQidReceipt
+
 gch1Identity = acquired-protein-qid-receipt "GCH1" "P30793" uniqueExact ("Q1487359" ∷ []) "Q14916168" true true "GTP cyclohydrolase I" true "executed exact-P352 acquisition 2026-10-17"
 gchfrIdentity = acquired-protein-qid-receipt "GCHFR" "P30047" uniqueExact ("Q21101579" ∷ []) "Q18025609" true false "" true "executed exact-P352 acquisition 2026-10-17"
 ptsIdentity = acquired-protein-qid-receipt "PTS" "Q03393" uniqueExact ("Q21106788" ∷ []) "Q7121042" true false "" true "executed exact-P352 acquisition 2026-10-17"
