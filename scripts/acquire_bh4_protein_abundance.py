@@ -27,9 +27,11 @@ def members(panel: dict) -> list[dict]:
 
 
 def endpoint(accession: str, ms_level: int) -> str:
+    # ProteomicsDB documents semicolon-separated tissue categories. Keep the
+    # space in "cell line" percent-encoded inside the OData path.
     params = (
         f"InputParams(PROTEINFILTER='{accession}',MS_LEVEL={ms_level},"
-        "TISSUE_ID_SELECTION='',TISSUE_CATEGORY_SELECTION='tissue;fluid;cell line',"
+        "TISSUE_ID_SELECTION='',TISSUE_CATEGORY_SELECTION='tissue;fluid;cell%20line',"
         "SCOPE_SELECTION=1,GROUP_BY_TISSUE=1,CALCULATION_METHOD=0,EXP_ID=-1)/Results"
     )
     select = "UNIQUE_IDENTIFIER,TISSUE_ID,TISSUE_NAME,TISSUE_SAP_SYNONYM,SAMPLE_ID,SAMPLE_NAME,EXPERIMENT_ID,EXPERIMENT_NAME,PROJECT_ID,PROJECT_NAME,NORMALIZED_INTENSITY,MIN_NORMALIZED_INTENSITY,MAX_NORMALIZED_INTENSITY,SAMPLES"
