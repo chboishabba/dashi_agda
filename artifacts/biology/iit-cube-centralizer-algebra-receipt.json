@@ -1,0 +1,59 @@
+{
+  "carrier": "concrete 3x3 F3 face operator B=Sx+Sy",
+  "nilpotent": "N=B+I",
+  "finite_linear_audit": {
+    "rank_N": 6,
+    "rank_N2": 3,
+    "rank_N3": 0,
+    "kernel_dimensions": [3, 6, 9],
+    "N3_zero": true,
+    "jordan_block_sizes": [3, 3, 3],
+    "commutator_system_variables": 81,
+    "commutator_system_rank": 54,
+    "centralizer_dimension": 27
+  },
+  "explicit_basis": {
+    "basis_order": ["A0", "A1", "A2", "B0", "B1", "B2", "C0", "C1", "C2"],
+    "basis_matrix_P": [
+      [1,1,1,2,1,0,1,0,0],
+      [1,0,0,1,1,1,2,1,0],
+      [2,1,0,1,0,0,1,1,1],
+      [1,0,0,0,0,0,0,0,0],
+      [0,0,0,1,0,0,0,0,0],
+      [0,0,0,0,0,0,1,0,0],
+      [2,1,0,2,0,0,0,0,0],
+      [0,0,0,2,1,0,2,0,0],
+      [2,0,0,0,0,0,2,1,0]
+    ],
+    "inverse_matrix_Q": [
+      [0,0,0,1,0,0,0,0,0],
+      [0,0,0,1,1,0,1,0,0],
+      [1,0,0,1,2,1,2,2,0],
+      [0,0,0,0,1,0,0,0,0],
+      [0,0,0,0,1,1,0,1,0],
+      [0,1,0,1,1,2,0,2,2],
+      [0,0,0,0,0,1,0,0,0],
+      [0,0,0,1,0,1,0,0,1],
+      [0,0,1,2,1,1,2,0,2]
+    ],
+    "P_times_Q_identity_mod3": true,
+    "Q_times_P_identity_mod3": true,
+    "Q_N_P_equals_three_J3_blocks_mod3": true
+  },
+  "centralizer_algebra": {
+    "jordan_coordinate_shape": "nine upper-triangular Toeplitz 3x3 blocks",
+    "block_form": "[[a,b,c],[0,a,b],[0,0,a]]",
+    "target": "M3(F3[t]/(t^3))",
+    "target_parameter_count_over_F3": 27,
+    "full_27_basis_multiplication_table_matches_Eab_tk_rule": true,
+    "multiplication_rule": "E_ab t^k * E_cd t^l = delta_bc E_ad t^(k+l), with t^3=0"
+  },
+  "formal_owners": [
+    "DASHI/Biology/IITCubeJordanChainCentralizerTargetExact.agda",
+    "DASHI/Biology/IITCubeJordanBasisMatrixExact.agda",
+    "DASHI/Biology/IITCubeConcreteJordanConjugacyExact.agda",
+    "DASHI/Biology/IITCubeConcreteNMatrixRecognitionExact.agda",
+    "DASHI/Biology/IITCubeJordanCentralizerAlgebraExact.agda"
+  ],
+  "boundary": "Finite numerical receipt plus source-written proof objects; newest Agda owners have no fresh kernel receipt in the current runtime."
+}
