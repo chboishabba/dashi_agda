@@ -1,0 +1,46 @@
+module DASHI.Cognition.ClinicToStreetsSOTAExperimentRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Cognition.ClinicToStreetsSOTAEvidenceAtlasExact as SOTA
+import DASHI.Cognition.ClinicToStreetsFormulationExperimentExact as Experiment
+
+sotaSourceCountRegression :
+  SOTA.sotaSourceCount ≡ 11
+sotaSourceCountRegression = refl
+
+sheehiTheoryNotEmpiricalClosureRegression :
+  SOTA.sheehiTheoryEstablishesEmpiricalCounterinsurgency SOTA.canonicalClinicSOTABoundary ≡ false
+sheehiTheoryNotEmpiricalClosureRegression = refl
+
+structuralDeterminantsEvidenceRetainedRegression :
+  SOTA.structuralDeterminantsEmpiricalPriorRetained SOTA.canonicalClinicSOTABoundary ≡ true
+structuralDeterminantsEvidenceRetainedRegression = refl
+
+clarityNotTruthRegression :
+  SOTA.narrativeClarityCreatesTruth SOTA.canonicalClinicSOTABoundary ≡ false
+clarityNotTruthRegression = refl
+
+confusionNotManipulationRegression :
+  SOTA.confusionCreatesManipulationFinding SOTA.canonicalClinicSOTABoundary ≡ false
+confusionNotManipulationRegression = refl
+
+experimentUsesSameCaseMaterialRegression :
+  Experiment.sameCaseMaterial Experiment.canonicalFormulationExperiment ≡ true
+experimentUsesSameCaseMaterialRegression = refl
+
+contextIsDeclaredTreatmentContrastRegression :
+  Experiment.structuralContextIsDeclaredContrast Experiment.canonicalFormulationExperiment ≡ true
+contextIsDeclaredTreatmentContrastRegression = refl
+
+negativeControlRequiredRegression :
+  Experiment.heldOutStructuralIrrelevanceControl Experiment.canonicalFormulationExperiment ≡ true
+negativeControlRequiredRegression = refl
+
+experimentDoesNotEstablishCounterinsurgencyRegression :
+  Experiment.experimentEstablishesCounterinsurgency Experiment.canonicalFormulationExperiment ≡ false
+experimentDoesNotEstablishCounterinsurgencyRegression = refl
+
+acquisitionPriorityDoesNotCreateTruthRegression :
+  Experiment.acquisitionPriorityCreatesTruth Experiment.canonicalFormulationExperiment ≡ false
+acquisitionPriorityDoesNotCreateTruthRegression = refl
