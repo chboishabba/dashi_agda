@@ -26,13 +26,7 @@ import DASHI.Reasoning.TrialecticC3EdgeResidualRepairValidation
 import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyExact
 import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyValidation
 
--- Exact carrier ladder.  The mature structured boundary is T^18; the graph
--- extension recharts it as two T^9 chunks and embeds it into ambient T^27 once
--- an explicit third-face completion policy is supplied.  The completed graph
--- is then transported through the actual Grothendieck sheaf, full site
--- presheaf, non-discrete wave-phase groupoid, phase 2-cell calculus, effective
--- stack, setoid-truncated higher stack and finite hypersheaf.  No bare-T^18
--- canonical completion is manufactured.
+-- Exact carrier ladder and graph-T27 stack/hypersheaf tranche.
 import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionExact
 import DASHI.Reasoning.TrialecticT9T18T27GraphExtensionValidation
 import DASHI.Reasoning.TrialecticT27GraphGrothendieckSheafExact
@@ -50,17 +44,7 @@ import DASHI.Reasoning.TrialecticT27WavePhaseHigherStackValidation
 import DASHI.Reasoning.TrialecticT27FiniteTriadicHypersheafExact
 import DASHI.Reasoning.TrialecticT27FiniteTriadicHypersheafValidation
 
--- Policy-hidden residual max-cut and repository-native structural completion.
--- The policy-hidden owner proves that T^18 ceases to determine the hidden third
--- T^9 face when completion policy is unobserved.  The generic consumer-reduction
--- kernel then identifies PolicyChoice as an exact reopening residual, while
--- furnishing a third-face discriminator and mechanistic-equifinality witness.
--- The native C3 owner transports the already-owned participant action to T^9
--- and supplies an exact order-three completion policy.  The guarded 369 handoff
--- records shared 27-shape without cardinality-only same-object promotion; the
--- native realization instantiates sheaf/groupoid/higher-stack/hyperdescent; and
--- the all-depth lift observes every finite structured trajectory state through
--- that same completed graph while preserving exact T^18 projection.
+-- Policy-hidden residual, native C3 completion and all-depth realization.
 import DASHI.Reasoning.TrialecticT27PolicyHiddenNonDescentExact
 import DASHI.Reasoning.TrialecticT27PolicyHiddenNonDescentValidation
 import DASHI.Reasoning.TrialecticT27PolicyResidualReductionExact
@@ -74,8 +58,13 @@ import DASHI.Reasoning.TrialecticT27NativeC3RealizationValidation
 import DASHI.Reasoning.TrialecticT27NativeC3AllDepthLiftExact
 import DASHI.Reasoning.TrialecticT27NativeC3AllDepthLiftValidation
 
--- 369-wave cross-pollination closes the stale groupoid/pseudofunctor/stack
--- frontier while retaining chart rotation as a separate equivariant symmetry.
+-- Exact typed same-object frontier.  This enumerates every remaining invariant,
+-- keeps the T18 projection node paid, and leaves coordinate/semantic/physical
+-- realization obligations open rather than promoting 27 = 27 into identity.
+import DASHI.Reasoning.TrialecticT27PNF369RealizationASTExact
+import DASHI.Reasoning.TrialecticT27PNF369RealizationASTValidation
+
+-- 369-wave groupoid/pseudofunctor/stack tranche.
 import DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact
 import DASHI.Reasoning.TrialecticWavePhaseEffectiveStackDescentExact
 import DASHI.Reasoning.TrialecticWavePhasePseudofunctorCoherenceExact
@@ -85,33 +74,24 @@ import DASHI.Reasoning.TrialecticWavePhaseHigherStackExact
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionExact
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionValidation
 
--- The exact relational topology has only maximal covers plus the distinguished
--- triadic global cover; non-global pullbacks are maximal and strict site chains
--- stop at vertex -> edge -> global.  This pays finite one-truncated
--- hyperdescent and keeps arbitrary infinity-hypercovers separate.
+-- Finite one-truncated hyperdescent and stronger infinity frontier.
 import DASHI.Reasoning.TrialecticRelationalSiteDepthTwoExact
 import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafExact
 import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafValidation
 import DASHI.Reasoning.TrialecticHypersheafHypercoverFrontierExact
 import DASHI.Reasoning.TrialecticHypersheafHypercoverFrontierValidation
 
--- Independent Base369 6/12/8 Cech geometry is cross-pollinated as a second
--- finite 2-skeleton descent donor without erasing the full-boundary rank no-go.
+-- Independent Base369 6/12/8 Cech geometry crosswalk.
 import DASHI.Reasoning.TrialecticFiniteHypercover369CechCrosswalkExact
 import DASHI.Reasoning.TrialecticFiniteHypercover369CechCrosswalkValidation
 
--- Historical compatibility/status surfaces remain imported.  The dedicated
--- supersession owner keeps old local empty promotion tokens empty while proving
--- that later independent higher-stack/hypersheaf certificates now exist.
+-- Historical compatibility/status surfaces.
 import DASHI.Reasoning.TrialecticHigherPromotionSupersessionExact
 import DASHI.Reasoning.TrialecticHigherPromotionSupersessionValidation
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutValidation
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
 
--- Core Nongin closure remains paid.  Additive current owners preserve existing
--- record consumers while moving the explicit frontier from generic graph-T27
--- to an inhabited native-C3 graph-T27 structural realization at every finite
--- depth.
+-- Additive current-status owners and Nongin closure surfaces.
 import DASHI.Philosophy.NonginCurrentMaxCutT27Exact
 import DASHI.Philosophy.NonginCurrentMaxCutT27Validation
 import DASHI.Philosophy.NonginCurrentMaxCutT27C3Exact
