@@ -85,6 +85,8 @@ import DASHI.Physics.Foundations.FieldGeometryMatterSiblingAuthorityHandoffValid
 
 import DASHI.Physics.Foundations.WarpEnergyConditionSourceAtlasExact
 import DASHI.Physics.Foundations.WarpEnergyConditionSourceAtlasValidation
+import DASHI.Physics.Foundations.CausalTransport2026SourceAtlasExact
+import DASHI.Physics.Foundations.CausalTransport2026SourceAtlasValidation
 import DASHI.Physics.Foundations.CausalTransportFTLObligationsExact
 import DASHI.Physics.Foundations.CausalTransportFTLValidation
 import DASHI.Physics.Foundations.FieldGeometryMatterAttributionRegression
