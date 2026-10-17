@@ -5,6 +5,7 @@ open import DASHI.Unified.TOESectorRealizationExact public
 open import DASHI.Unified.TOE369C3RealizationGraphExact public
 open import DASHI.Unified.TOEConcreteInhabitantsExact public
 open import DASHI.Unified.TOEQuantumInhabitantsExact public
+open import DASHI.Unified.TOEGaugeInhabitantsExact public
 open import DASHI.Unified.TOEMonsterPhysicalRealizationExact public
 open import DASHI.Unified.TOEGaugeQFTGRRealizationExact public
 open import DASHI.Unified.TOEArithmeticCMRealizationExact public
