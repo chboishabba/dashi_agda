@@ -1,0 +1,24 @@
+module DASHI.Culture.PowersPlantationParadisePromotionGateValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Culture.PowersPlantationParadiseSourceAcquisitionPromotionExact as Promotion
+import DASHI.Culture.PowersPlantationParadiseFrontierGenealogyExact as Genealogy
+
+_source-acquisition-boundary-paid : Promotion.PowersSourceAcquisitionPromotionBoundary
+_source-acquisition-boundary-paid = Promotion.canonicalPowersSourceAcquisitionPromotionBoundary
+
+_frontier-genealogy-boundary-paid : Genealogy.PowersFrontierGenealogyBoundary
+_frontier-genealogy-boundary-paid = Genealogy.canonicalPowersFrontierGenealogyBoundary
+
+_july-primary-obligation-paid : Promotion.HistoricalSourceAcquisitionObligation
+_july-primary-obligation-paid = Promotion.july1790PrimaryIssueObligation
+
+_minette-settlement-obligation-paid : Promotion.HistoricalSourceAcquisitionObligation
+_minette-settlement-obligation-paid = Promotion.minetteSettlementObligation
+
+_compensation-genealogy-paid : Genealogy.FrontierGenealogyReceipt
+_compensation-genealogy-paid = Genealogy.compensationFrontierGenealogy
+
+_distribution-genealogy-paid : Genealogy.FrontierGenealogyReceipt
+_distribution-genealogy-paid = Genealogy.distributionFrontierGenealogy
