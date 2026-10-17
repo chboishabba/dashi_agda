@@ -137,9 +137,9 @@ liveSourceRevisionReference = sourceRevisionReference liveMaboBrennanFormalDeman
 liveStatementDigest : String
 liveStatementDigest = statementDigest liveMaboBrennanFormalDemandWitness
 
-reviewedTruthStatusIsUnresolved :
+liveReviewedTruthStatusIsUnresolved :
   Mabo.truthStatus (reviewedProposition liveMaboBrennanFormalDemandWitness)
     ≡ Status.truthUnresolved
-reviewedTruthStatusIsUnresolved =
+liveReviewedTruthStatusIsUnresolved =
   MaboBrennanFormalDemandWitness.reviewedTruthStatusIsUnresolved
     liveMaboBrennanFormalDemandWitness
