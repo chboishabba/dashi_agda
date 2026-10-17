@@ -5,25 +5,20 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 -- OVERLAY AA / 2026-10-08: FINAL PACKAGE COMPRESSION AFTER YM C1
 -- CROSS-POLLINATION.
 --
--- Overlay Z identified the true physical/source leaves.  Merged YM Round527 and
--- source-first Round523 show that C1 is scheduled as ONE marked-curvature source
--- package: same-family marked source data (including its Hilbert modulus) plus
--- gauge/local semantics.  The antigravity/cosmology route needs only one
--- selected F^2 instance of that pattern, not a universal curvature family.
---
--- Therefore do not schedule the selected coefficient-energy estimate and the
--- gauge/local semantics as independent projects.  They are fields of one
--- selected physical-F^2 source package.  The hard internal analytic subclaim is
--- still the literal differentiated-CMP116 coefficient identification plus the
--- cutoff/volume/scale-uniform weighted coefficient-energy bound.
---
--- The terminal preferred package schedule is thus:
+-- The terminal preferred package schedule is:
 --
 --   S1  active regular-E/localization source witness;
 --   S3a one selected physical-F^2 marked-source package;
 --   S2  selected-F2 / Hilbert-trace same-object application to renormalized
 --       trace-anomaly authority;
 --   S3b weighted product-Haar Eq.(1.71) partition + oscillation package.
+--
+-- S1 is now additionally frozen by an exact typed AST.  At each actual active
+-- scale it has exactly four unproved source coordinates: E_k, component family,
+-- localized activities, and the exact localized-composite-sum equality.  The
+-- active-scale witness is an index, not a fifth invariant.  No inactive-scale
+-- extension, quantitative Section-2 package, Background equality, or ten tangent
+-- choices are hidden inside the S1 package.
 --
 -- This is package compression only.  No conditional physical theorem is
 -- promoted to machineChecked.
@@ -33,6 +28,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261008ZExact as Z
+import DASHI.Physics.Foundations.CMP119CosmologyS1LiteralActiveRegularEASTExact as S1AST
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedF2HilbertMaxCutExact as F2Hilbert
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119MarkedCurvatureCompositeExact as Curvature
 
@@ -43,7 +39,7 @@ remainingAdapterDebt : Nat
 remainingAdapterDebt = 0
 
 ------------------------------------------------------------------------
--- S1 unchanged.
+-- S1: one source lemma, exactly four internal unproved invariants.
 ------------------------------------------------------------------------
 
 s1LiteralActiveRegularEFormWitnessRequired : Bool
@@ -53,6 +49,23 @@ s1LiteralActiveRegularEFormWitnessRequired =
 s1FullTheorem1QuantitativePackageRequired : Bool
 s1FullTheorem1QuantitativePackageRequired =
   Z.s1FullTheorem1QuantitativePackageRequired
+
+s1UnprovenInvariantCount : Nat
+s1UnprovenInvariantCount = S1AST.unprovenInvariantCount
+
+s1InactiveScaleExtensionRequired : Bool
+s1InactiveScaleExtensionRequired = S1AST.requiresInactiveScaleExtension
+
+s1PostHocBackgroundEqualityRequired : Bool
+s1PostHocBackgroundEqualityRequired = S1AST.requiresPostHocBackgroundEquality
+
+s1IndependentTenTangentChoicesRequired : Bool
+s1IndependentTenTangentChoicesRequired =
+  S1AST.requiresIndependentTenTangentChoices
+
+s1ASTCompilesToExistingRound246Witness : Bool
+s1ASTCompilesToExistingRound246Witness =
+  S1AST.astCompilesToActiveRegularESection2FormWitness
 
 ------------------------------------------------------------------------
 -- S3a is ONE selected physical-F2 package.
