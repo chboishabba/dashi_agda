@@ -51,16 +51,20 @@ import DASHI.Reasoning.TrialecticT27FiniteTriadicHypersheafExact
 import DASHI.Reasoning.TrialecticT27FiniteTriadicHypersheafValidation
 
 -- Policy-hidden residual max-cut and repository-native structural completion.
--- The first owner proves that T^18 ceases to determine the hidden third T^9
--- face when the completion policy is itself unobserved.  The native C3 owner
--- transports the already-owned participant action to T^9 and supplies an exact
--- order-three completion policy.  The guarded 369 handoff records shared
--- 27-shape without cardinality-only same-object promotion; the native
--- realization instantiates sheaf/groupoid/higher-stack/hyperdescent; and the
--- all-depth lift observes every finite structured trajectory state through the
--- same native-C3 completed graph while preserving exact T^18 projection.
+-- The policy-hidden owner proves that T^18 ceases to determine the hidden third
+-- T^9 face when completion policy is unobserved.  The generic consumer-reduction
+-- kernel then identifies PolicyChoice as an exact reopening residual, while
+-- furnishing a third-face discriminator and mechanistic-equifinality witness.
+-- The native C3 owner transports the already-owned participant action to T^9
+-- and supplies an exact order-three completion policy.  The guarded 369 handoff
+-- records shared 27-shape without cardinality-only same-object promotion; the
+-- native realization instantiates sheaf/groupoid/higher-stack/hyperdescent; and
+-- the all-depth lift observes every finite structured trajectory state through
+-- that same completed graph while preserving exact T^18 projection.
 import DASHI.Reasoning.TrialecticT27PolicyHiddenNonDescentExact
 import DASHI.Reasoning.TrialecticT27PolicyHiddenNonDescentValidation
+import DASHI.Reasoning.TrialecticT27PolicyResidualReductionExact
+import DASHI.Reasoning.TrialecticT27PolicyResidualReductionValidation
 import DASHI.Reasoning.TrialecticT27Universal369HandoffExact
 import DASHI.Reasoning.TrialecticT27Universal369HandoffValidation
 import DASHI.Reasoning.TrialecticT27C3CompletionPolicyExact
