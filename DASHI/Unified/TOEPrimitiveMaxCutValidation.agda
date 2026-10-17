@@ -1,5 +1,6 @@
 module DASHI.Unified.TOEPrimitiveMaxCutValidation where
 
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Unified.TOEPrimitiveMaxCutExact as Primitive
