@@ -7,6 +7,7 @@ import DASHI.Biology.BH4QuantitativeAcquisitionExact as Acquisition
 import DASHI.Biology.BH4ExecutedSABIOReceiptExact as SABIO
 import DASHI.Biology.BH4ExecutedSABIOAdjudicationReceiptExact as SABIOAdj
 import DASHI.Biology.BH4ExecutedSIFTSReceiptExact as SIFTS
+import DASHI.Biology.BH4FluxCandidateRankingExact as Ranking
 import DASHI.Biology.Molecular.BH4ExecutedPanelReactionReceiptExact as Executed
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Matrix
 import DASHI.Core.GenericReceipt as Receipt
@@ -23,8 +24,9 @@ currentBH4Phase = systemStateQuantitativePhase
 
 data BH4Phase4Residual : Set where
   resolveNonFiniteMTORProteinReactionRepresentation : BH4Phase4Residual
-  acquireMissingPCBD1NOSPrimaryKinetics : BH4Phase4Residual
+  rankSABIOCandidatesByFluxRelevance : BH4Phase4Residual
   adjudicateSABIOKineticCandidatesIntoFluxBounds : BH4Phase4Residual
+  translatePCBD1NOSPrimaryKineticsIntoReactionBounds : BH4Phase4Residual
   adjudicatePDBSIFTSResidueSiteWitnesses : BH4Phase4Residual
   payReactionSpecificFluxBounds : BH4Phase4Residual
   payCompartmentSpecificBH4BH2RedoxState : BH4Phase4Residual
@@ -37,8 +39,9 @@ data BH4Phase4Residual : Set where
 livePhase4Residuals : List BH4Phase4Residual
 livePhase4Residuals =
   resolveNonFiniteMTORProteinReactionRepresentation
-  ∷ acquireMissingPCBD1NOSPrimaryKinetics
+  ∷ rankSABIOCandidatesByFluxRelevance
   ∷ adjudicateSABIOKineticCandidatesIntoFluxBounds
+  ∷ translatePCBD1NOSPrimaryKineticsIntoReactionBounds
   ∷ adjudicatePDBSIFTSResidueSiteWitnesses
   ∷ payReactionSpecificFluxBounds
   ∷ payCompartmentSpecificBH4BH2RedoxState
@@ -60,6 +63,9 @@ quantitativeAcquisitionToolingReady = true
 
 intervalFluxSolverReady : Bool
 intervalFluxSolverReady = true
+
+fluxCandidateRankingToolReady : Bool
+fluxCandidateRankingToolReady = true
 
 firstBoundedSIFTSAcquisitionExecuted : Bool
 firstBoundedSIFTSAcquisitionExecuted = SIFTS.boundedAcquisitionExecuted SIFTS.canonicalExecutedSIFTSReceipt
@@ -96,6 +102,9 @@ sabioFiniteReactionCandidateCoverage = SABIOAdj.executedFiniteReactionCoverage
 
 sabioMappedParameterCandidates : Nat
 sabioMappedParameterCandidates = SABIOAdj.executedMappedParameterCandidateCount
+
+sabioUnclassifiedParameterCandidates : Nat
+sabioUnclassifiedParameterCandidates = SABIOAdj.executedUnclassifiedCount
 
 executedPanelSpeciesCount : Nat
 executedPanelSpeciesCount = Matrix.executedPanelSpeciesCount
@@ -145,6 +154,9 @@ sabioFiniteReactionCoverageExact = refl
 sabioMappedCandidatesExact : sabioMappedParameterCandidates ≡ 875
 sabioMappedCandidatesExact = refl
 
+sabioUnclassifiedCandidatesExact : sabioUnclassifiedParameterCandidates ≡ 45
+sabioUnclassifiedCandidatesExact = refl
+
 firstFluxAttemptMissingBoundsExact : missingReactionFluxBounds ≡ 12
 firstFluxAttemptMissingBoundsExact = refl
 
@@ -164,6 +176,8 @@ record BH4Phase4Boundary : Set where
     candidateKineticEvidenceAutomaticallyPaysFluxBoundsIsFalse : candidateKineticEvidenceAutomaticallyPaysFluxBounds ≡ false
     sabioCandidateCoverageAutomaticallyPaysFluxBounds : Bool
     sabioCandidateCoverageAutomaticallyPaysFluxBoundsIsFalse : sabioCandidateCoverageAutomaticallyPaysFluxBounds ≡ false
+    rankedCandidateAutomaticallyPaysFluxBound : Bool
+    rankedCandidateAutomaticallyPaysFluxBoundIsFalse : rankedCandidateAutomaticallyPaysFluxBound ≡ false
     boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSites : Bool
     boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSitesIsFalse : boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSites ≡ false
     phase4CompletionAutomaticallyPromotesDiseaseCausation : Bool
@@ -173,14 +187,14 @@ open BH4Phase4Boundary public
 
 canonicalBH4Phase4Boundary : BH4Phase4Boundary
 canonicalBH4Phase4Boundary =
-  bh4-phase4-boundary false refl false refl false refl false refl false refl false refl false refl
+  bh4-phase4-boundary false refl false refl false refl false refl false refl false refl false refl false refl
 
 canonicalBH4Phase4RoadmapReceipt : Receipt.GenericReceipt
 canonicalBH4Phase4RoadmapReceipt =
   Receipt.mkNonPromotingReceipt
     "BH4 Phase-4 quantitative system-state roadmap"
     "DASHI.Biology.BH4Phase4RoadmapExact"
-    "executed 29x12 network -> 56-coordinate open system -> SIFTS 38/526 -> SABIO 190 kinetic rows -> 932 parameter objects -> 875 candidates mapped across 10/12 finite reactions"
-    "closes SABIO acquisition, schema-aware parameter extraction and candidate-coverage accounting; isolates RHEA:11920 and RHEA:19897 as the two exact-UniProt SABIO coverage holes and advances the frontier to primary-literature gap filling plus scientific flux-bound adjudication"
-    "candidate kinetics and coverage are not in-vivo flux bounds; SIFTS mapping is not catalytic function; underdetermination is neither mechanism truth nor falsity; disease and clinical promotion remain separately gated"
+    "executed 29x12 network -> 56-coordinate open system -> SIFTS 38/526 -> SABIO 190 rows -> 932 parameter objects -> 875 finite-column mappings across 10/12 reactions -> refined v2 classification with only 45 unclassified -> flux-relevance ranking tool"
+    "closes SABIO acquisition, schema-aware extraction and candidate classification/coverage accounting; narrows the live work to ranked assay/context adjudication, PCBD1/NOS primary-kinetics translation, reaction-bound payment and exchange/state payment"
+    "candidate kinetics, candidate coverage and rank are not in-vivo flux bounds; kcat requires enzyme abundance/state; SIFTS mapping is not catalytic function; underdetermination is neither mechanism truth nor falsity"
     "python3 scripts/run_bh4_phase4_maxcut.py"
