@@ -23,6 +23,12 @@ thirdFaceDiscriminatorPaid = refl
 mechanisticEquifinalityPaid : Current.policyMechanisticEquifinalityPaid boundary ≡ true
 mechanisticEquifinalityPaid = refl
 
+fidelityEscalationPaid : Current.fidelityEscalationWitnessPaid boundary ≡ true
+fidelityEscalationPaid = refl
+
+thirdFaceReductionFailurePaid : Current.thirdFaceCandidateReductionFailurePaid boundary ≡ true
+thirdFaceReductionFailurePaid = refl
+
 t18FutureConsumerPaid : Current.t18DeclaredFutureConsumerPreserved boundary ≡ true
 t18FutureConsumerPaid = refl
 
