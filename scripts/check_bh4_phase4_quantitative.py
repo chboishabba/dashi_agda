@@ -33,8 +33,8 @@ for token in [
     assert token in text["evidence"], f"missing quantitative evidence token: {token}"
 
 for token in [
-    "structuresExamined = 38", "matchingSIFTSSegmentCount = 526",
-    "proteinsWithUniProtPDBLinks = 14", "proteinsWithMatchingSegments = 13",
+    "executedStructuresExamined = 38", "executedMatchingSIFTSSegmentCount = 526",
+    "executedProteinsWithUniProtPDBLinks = 14", "executedProteinsWithMatchingSegments = 13",
     "PCBD1", "AGMO", "PAH", "mappingCreatesCatalyticFunction",
 ]:
     assert token in text["sifts_receipt"], f"missing executed SIFTS receipt token: {token}"
@@ -42,7 +42,8 @@ for token in [
 for token in [
     "rerunSABIOAfterProtocolRepair", "adjudicateSABIOKineticCandidatesIntoFluxBounds",
     "adjudicatePDBSIFTSResidueSiteWitnesses", "firstBoundedSIFTSAcquisitionExecuted",
-    "sabioProtocolRepairReady = true", "expandedQuantitativeCoordinateCount = 56",
+    "sabioExportAPIAdapterReady = true", "expandedQuantitativeCoordinateCount = 56",
+    "boundedSIFTSStructuresExamined", "boundedSIFTSMatchingSegments",
 ]:
     assert token in text["roadmap"], f"missing quantitative roadmap token: {token}"
 
