@@ -9,6 +9,7 @@ import DASHI.Biology.Molecular.BH4ExecutedPanelReactionReceiptExact
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact
 import DASHI.Biology.BH4CompartmentKineticStateExact
 import DASHI.Biology.BH4QuantitativeAcquisitionExact
+import DASHI.Biology.BH4ExecutedSIFTSReceiptExact
 import DASHI.Biology.BH4IntervalFluxSolverExact
 import DASHI.Biology.BH4NOSCouplingEvidenceExact
 import DASHI.Biology.BH4NOSCouplingSameObjectExact
