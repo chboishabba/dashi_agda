@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.ExoticGravity.AntigravityP1A2CertifiedStressCylinderExact as CertifiedA2
+import DASHI.Physics.ExoticGravity.AntigravityP1A2OpenLemmaASTExact as A2AST
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q1
 import DASHI.Physics.Foundations.CMP119CosmologyA2LocalCWilsonPresentationCompilerExact as A2
 import DASHI.Physics.Foundations.CMP119CosmologyR109PairObservableUnderdeterminationExact as Under
@@ -24,13 +25,17 @@ import DASHI.Physics.Foundations.CMP119CosmologyR109PairObservableUnderdetermina
 -- observable.  `R109PairObservableUnderdeterminationExact` proves that the bare
 -- pair cannot determine a unique evaluator.
 --
--- This branch now makes that trust boundary executable: one A2 source receipt
--- supplies an evaluator together with the equality saying that the selected
--- Round109 pair-image IS the canonical Local-C stress cylinder.  The compiler
--- then transports published Wilson positive-time/gauge admissibility to that
--- pair-image automatically.
+-- This branch makes that trust boundary executable twice, at complementary
+-- levels:
 --
--- Therefore the antigravity-specific P1 frontier has exactly TWO source leaves:
+--   * `AntigravityP1A2CertifiedStressCylinderExact` gives the consumer-facing
+--     compiler once source semantics are supplied;
+--   * `AntigravityP1A2OpenLemmaASTExact` gives the exact typed syntax/goal split
+--     for the still-open source lemma, so constructing the AST cannot count as
+--     constructing its proof.
+--
+-- Therefore the antigravity-specific P1 frontier still has exactly TWO source
+-- leaves:
 --
 --   Q1  actual present-cut source-path derivative semantics + B4 equivariance;
 --   A2  the selected Round109 pair denotes the canonical Local-C stress
@@ -58,6 +63,30 @@ pairToCanonicalLocalCObservableSemanticsStillRequired =
 a2SameObjectReceiptCompilesCertifiedWilsonPresentation : Bool
 a2SameObjectReceiptCompilesCertifiedWilsonPresentation =
   CertifiedA2.observableChoiceCompilerOwned
+
+a2OpenLemmaASTDefined : Bool
+a2OpenLemmaASTDefined = true
+
+a2ASTConstructionPaysSourceSemantics : Bool
+a2ASTConstructionPaysSourceSemantics = false
+
+a2SourceSemanticPackageCount : Nat
+a2SourceSemanticPackageCount = A2AST.a2SourceSemanticPackageCount
+
+a2InternalOpenInvariantCount : Nat
+a2InternalOpenInvariantCount = A2AST.a2InternalOpenInvariantCount
+
+a2NonSelectedPairImagesConstrained : Bool
+a2NonSelectedPairImagesConstrained = A2AST.nonSelectedPairImagesConstrainedByA2
+
+a2EvaluatorInjectivityRequired : Bool
+a2EvaluatorInjectivityRequired = A2AST.evaluatorInjectivityRequired
+
+a2EvaluatorSurjectivityRequired : Bool
+a2EvaluatorSurjectivityRequired = A2AST.evaluatorSurjectivityRequired
+
+a2AllPairSemanticsRequired : Bool
+a2AllPairSemanticsRequired = A2AST.allPairSemanticsRequired
 
 q1PathDerivativeSourcePackageStillRequired : Bool
 q1PathDerivativeSourcePackageStillRequired =
@@ -99,6 +128,10 @@ q1PathDerivativeSourcePackageStillRequiredIsTrue = refl
 bareR109PairContainsObservableEvaluatorIsFalse :
   bareR109PairContainsObservableEvaluator ≡ false
 bareR109PairContainsObservableEvaluatorIsFalse = refl
+
+a2ASTConstructionPaysSourceSemanticsIsFalse :
+  a2ASTConstructionPaysSourceSemantics ≡ false
+a2ASTConstructionPaysSourceSemanticsIsFalse = refl
 
 remainingP1WorkIsSourceSemanticsIsTrue :
   remainingP1WorkIsSourceSemantics ≡ true
