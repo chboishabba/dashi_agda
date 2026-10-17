@@ -1,0 +1,269 @@
+module DASHI.Governance.BoloBoloCounterfactualEvaluationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Governance.BoloBoloPrimarySourceAtlasExact as Source
+import DASHI.Governance.BoloBoloDerivedScaleEnvelopeExact as Scale
+import DASHI.Governance.BoloBoloIncidenceCompressionExact as Compression
+import DASHI.Governance.BoloBoloIncidenceCompressionCostBridgeExact as CompressionBridge
+import DASHI.Governance.BoloBoloFederationCostComparisonExact as Comparison
+import DASHI.Governance.BoloBoloRobustCostBoundsExact as Robust
+import DASHI.Governance.BoloBoloNestedCostBoundCompilerExact as ComponentCompiler
+import DASHI.Governance.BoloBoloPracticalSignificanceExact as Significance
+import DASHI.Governance.BoloBoloLinearCalibrationBoundCompilerExact as LinearCompiler
+import DASHI.Governance.BoloBoloOccupyCalibrationBridgeExact as Calibration
+import DASHI.Governance.BoloBoloComparatorEvidenceAtlasExact as Comparators
+import DASHI.Governance.BoloBoloOWSSpokesInterruptedTransitionExact as Spokes
+import DASHI.Governance.BoloBoloOWSSpokesRateShiftExact as SpokesShift
+import DASHI.Governance.BoloBoloPolycentricEvidenceSynthesisExact as Polycentric
+import DASHI.Governance.BoloBoloOrganizationalNetworkEvidenceExact as NetworkEvidence
+import DASHI.Governance.BoloBoloComparatorCalibrationFrontierExact as ComparatorFrontier
+import DASHI.Governance.BoloBoloComparatorWorkloadLowerBoundExact as Workload
+import DASHI.Governance.BoloBoloComparatorInstitutionalVersioningExact as Versioning
+import DASHI.Governance.BoloBoloDynamicInstitutionalFeedbackBridgeExact as Dynamic
+import DASHI.Governance.BoloBoloFederatedInterfaceCapacityBridgeExact as Capacity
+import DASHI.Governance.BoloBoloCalibrationTransferExact as Transfer
+import DASHI.Governance.BoloBoloPairedGovernanceExperimentExact as Experiment
+import DASHI.Governance.BoloBoloEmpiricalPromotionGateExact as Promotion
+import DASHI.Governance.BoloBoloLongitudinalPromotionGateExact as Longitudinal
+import DASHI.Governance.BoloBoloModelClassRobustnessExact as ModelRobustness
+
+------------------------------------------------------------------------
+-- PROJECT OBJECTIVE
+--
+-- Under what empirically plausible, target-qualified and longitudinally stable
+-- coordination model does nested kana -> bolo -> tega governance outperform a
+-- globally coupled comparison after accounting for federation overhead,
+-- interface capacity, actor adaptation, realised topology and institutional
+-- evolution?
+------------------------------------------------------------------------
+
+record BoloCounterfactualEvaluation : Set where
+  constructor boloCounterfactualEvaluation
+  field
+    sourceDesign : Source.BoloBoloPrimarySourceAtlas
+    derivedScaleEnvelope : Scale.DerivedScaleEnvelope
+    nestedDesign : Comparison.BoloNestedArchitectureDesign
+    incidenceCompressionBoundary : Compression.IncidenceCompressionBoundary
+    incidenceCompressionCostBridgeBoundary : CompressionBridge.CompressionCostBridgeBoundary
+    robustNestedBoundTargets : Robust.NestedCostBoundTargets
+    componentBoundCompilerBoundary : ComponentCompiler.NestedCostBoundCompilerBoundary
+    practicalSignificanceBoundary : Significance.PracticalSignificanceBoundary
+    linearCalibrationCompilerBoundary : LinearCompiler.LinearCalibrationCompilerBoundary
+    calibrationPacket : Calibration.BoloOccupyCalibrationPacket
+    calibrationObligations : Calibration.BoloComparisonCalibrationObligations
+    comparatorEvidenceBoundary : Comparators.ComparatorEvidenceBoundary
+    spokesTransitionBoundary : Spokes.OWSSpokesTransitionBoundary
+    spokesRateShiftBoundary : SpokesShift.RateShiftBoundary
+    polycentricEvidenceSynthesis : Polycentric.PolycentricEvidenceSynthesis
+    organizationalNetworkBoundary : NetworkEvidence.OrganizationalNetworkEvidenceBoundary
+    comparatorPrimitiveFrontier : ComparatorFrontier.PrimitiveCalibrationFrontier
+    comparatorWorkloadLowerBound : Workload.ComparatorWorkloadLowerBound
+    comparatorWorkloadBoundary : Workload.ComparatorWorkloadBoundary
+    comparatorVersioningBoundary : Versioning.ComparatorVersioningBoundary
+    dynamicInstitutionalFeedback : Dynamic.DynamicInstitutionalFeedbackBridge
+    dynamicEvaluationObligations : Dynamic.DynamicBoloEvaluationObligations
+    interfaceCapacityBoundary : Capacity.FederatedInterfaceCapacityBoundary
+    interfaceCapacityResearchBoundary : Capacity.InterfaceCapacityResearchBoundary
+    comparatorAcquisitionRoadmap : ComparatorFrontier.ComparatorAcquisitionRoadmap
+    comparatorCalibrationBoundary : ComparatorFrontier.ComparatorCalibrationBoundary
+    transferBoundary : Transfer.CalibrationTransferBoundary
+    directExperimentTermMapping : Experiment.CounterfactualTermMappingPlan
+    empiricalPromotionBoundary : Promotion.EmpiricalPromotionBoundary
+    meaningfulPromotionBoundary : Promotion.MeaningfulPromotionBoundary
+    longitudinalPromotionBoundary : Longitudinal.LongitudinalPromotionBoundary
+    modelClassRobustnessBoundary : ModelRobustness.ModelClassRobustnessBoundary
+
+open BoloCounterfactualEvaluation public
+
+canonicalBoloCounterfactualEvaluation : BoloCounterfactualEvaluation
+canonicalBoloCounterfactualEvaluation = record
+  { sourceDesign = Source.canonicalBoloBoloPrimarySourceAtlas
+  ; derivedScaleEnvelope = Scale.canonicalDerivedScaleEnvelope
+  ; nestedDesign = Comparison.canonicalBoloNestedArchitectureDesign
+  ; incidenceCompressionBoundary = Compression.canonicalIncidenceCompressionBoundary
+  ; incidenceCompressionCostBridgeBoundary = CompressionBridge.canonicalCompressionCostBridgeBoundary
+  ; robustNestedBoundTargets = Robust.canonicalNestedCostBoundTargets
+  ; componentBoundCompilerBoundary = ComponentCompiler.canonicalNestedCostBoundCompilerBoundary
+  ; practicalSignificanceBoundary = Significance.canonicalPracticalSignificanceBoundary
+  ; linearCalibrationCompilerBoundary = LinearCompiler.canonicalLinearCalibrationCompilerBoundary
+  ; calibrationPacket = Calibration.canonicalBoloOccupyCalibrationPacket
+  ; calibrationObligations = Calibration.canonicalCalibrationObligations
+  ; comparatorEvidenceBoundary = Comparators.canonicalComparatorEvidenceBoundary
+  ; spokesTransitionBoundary = Spokes.canonicalOWSSpokesTransitionBoundary
+  ; spokesRateShiftBoundary = SpokesShift.canonicalRateShiftBoundary
+  ; polycentricEvidenceSynthesis = Polycentric.canonicalPolycentricEvidenceSynthesis
+  ; organizationalNetworkBoundary = NetworkEvidence.canonicalOrganizationalNetworkEvidenceBoundary
+  ; comparatorPrimitiveFrontier = ComparatorFrontier.canonicalPrimitiveCalibrationFrontier
+  ; comparatorWorkloadLowerBound = Workload.canonicalComparatorWorkloadLowerBound
+  ; comparatorWorkloadBoundary = Workload.canonicalComparatorWorkloadBoundary
+  ; comparatorVersioningBoundary = Versioning.canonicalComparatorVersioningBoundary
+  ; dynamicInstitutionalFeedback = Dynamic.canonicalDynamicInstitutionalFeedbackBridge
+  ; dynamicEvaluationObligations = Dynamic.canonicalDynamicBoloEvaluationObligations
+  ; interfaceCapacityBoundary = Capacity.canonicalFederatedInterfaceCapacityBoundary
+  ; interfaceCapacityResearchBoundary = Capacity.canonicalInterfaceCapacityResearchBoundary
+  ; comparatorAcquisitionRoadmap = ComparatorFrontier.canonicalComparatorAcquisitionRoadmap
+  ; comparatorCalibrationBoundary = ComparatorFrontier.canonicalComparatorCalibrationBoundary
+  ; transferBoundary = Transfer.canonicalCalibrationTransferBoundary
+  ; directExperimentTermMapping = Experiment.canonicalCounterfactualTermMappingPlan
+  ; empiricalPromotionBoundary = Promotion.canonicalEmpiricalPromotionBoundary
+  ; meaningfulPromotionBoundary = Promotion.canonicalMeaningfulPromotionBoundary
+  ; longitudinalPromotionBoundary = Longitudinal.canonicalLongitudinalPromotionBoundary
+  ; modelClassRobustnessBoundary = ModelRobustness.canonicalModelClassRobustnessBoundary
+  }
+
+record BoloEvaluationBoundary : Set where
+  constructor boloEvaluationBoundary
+  field
+    nestedSourceDesignPaid : Bool
+    derivedScaleEnvelopePaid : Bool
+    structuralLocalityContractionPaid : Bool
+    incidenceCompressionScenarioPaid : Bool
+    incidenceCompressionCostBridgePaid : Bool
+    conditionalFederationWinTheoremPaid : Bool
+    robustPartialIdentificationTheoremPaid : Bool
+    componentwiseCostBoundCompilerPaid : Bool
+    practicalSignificanceGatePaid : Bool
+    linearCalibrationBoundCompilerPaid : Bool
+    occupyCalibrationFrontierPaid : Bool
+    realWorldComparatorAtlasPaid : Bool
+    owsSpokesInterruptedTransitionPaid : Bool
+    normalizedSpokesTransitionCheckPaid : Bool
+    polycentricEvidenceSynthesisPaid : Bool
+    taskContingentNetworkEvidencePaid : Bool
+    comparatorCalibrationFrontierPaid : Bool
+    comparatorLocalWorkloadFloorPaid : Bool
+    comparatorInstitutionalVersioningPaid : Bool
+    dynamicInstitutionalFeedbackBridgePaid : Bool
+    adaptiveModelReopeningObligationPaid : Bool
+    interfaceCapacityBottleneckBridgePaid : Bool
+    crossContextTransferFirewallPaid : Bool
+    directFlatVersusNestedExperimentDesignPaid : Bool
+    validatedEmpiricalPromotionGatePaid : Bool
+    meaningfulEmpiricalPromotionGatePaid : Bool
+    longitudinalPromotionGatePaid : Bool
+    modelClassRobustnessGatePaid : Bool
+
+    empiricalCostTermsIdentified : Bool
+    targetQualifiedCostBoundsPaid : Bool
+    targetInterfaceCapacityAndDemandPaid : Bool
+    minimumMeaningfulThresholdTargetStudyPaid : Bool
+    admissibleTargetModelFamilyPaid : Bool
+    robustTargetCoordinationWinPaid : Bool
+    removalPaysOverheadEmpiricallyPaid : Bool
+    underlyingOWSSpokesMinutesMaterialised : Bool
+    directFlatVersusNestedExperimentRun : Bool
+    validatedCoordinationAdvantagePaid : Bool
+    validatedCoordinationDisadvantagePaid : Bool
+    validatedMeaningfulAdvantagePaid : Bool
+    validatedMeaningfulDisadvantagePaid : Bool
+    longitudinalMeaningfulAdvantagePaid : Bool
+    longitudinalMeaningfulDisadvantagePaid : Bool
+    uniformModelFamilyAdvantagePaid : Bool
+    uniformModelFamilyDisadvantagePaid : Bool
+    prospectiveHoldoutSpendable : Bool
+    prospectiveHoldoutValidationPaid : Bool
+
+    actualPoliticalLegitimacyEstablished : Bool
+    concreteEcologicalViabilityEstablished : Bool
+    concreteResourceBasicNeedsViabilityEstablished : Bool
+    empiricalComparativeSuperiorityEstablished : Bool
+
+    structuralTheoremAutomaticallyBecomesPoliticalRecommendation : Bool
+    sourceArchitectureAutomaticallyBecomesEmpiricalOptimum : Bool
+    occupyFailureAutomaticallyProvesBoloSuccess : Bool
+    comparatorSimilarityAutomaticallyProvesBoloSuccess : Bool
+    comparatorLocalWorkloadAutomaticallyTransfersToBolo : Bool
+    historicalAndCurrentComparatorVersionsMayBeSpliced : Bool
+    occupyBoundsAutomaticallyTransferToBolo : Bool
+    robustCoordinationWinAutomaticallyImpliesTotalPoliticalSuccess : Bool
+    validatedCoordinationDisadvantageRefutesEveryPossibleBoloVariant : Bool
+    oneFavouredCostModelEnoughForRobustRecommendation : Bool
+    anyTinyStrictWinEnoughForMeaningfulRecommendation : Bool
+    universalMonotoneDecentralizationAdvantageAssumed : Bool
+    snapshotWinAutomaticallyBecomesLongRunWin : Bool
+    declaredArchitectureAutomaticallyDeterminesRealisedTopology : Bool
+    localFeasibilityAutomaticallyImpliesJointInterfaceFeasibility : Bool
+
+open BoloEvaluationBoundary public
+
+canonicalBoloEvaluationBoundary : BoloEvaluationBoundary
+canonicalBoloEvaluationBoundary = record
+  { nestedSourceDesignPaid = true
+  ; derivedScaleEnvelopePaid = true
+  ; structuralLocalityContractionPaid = true
+  ; incidenceCompressionScenarioPaid = true
+  ; incidenceCompressionCostBridgePaid = true
+  ; conditionalFederationWinTheoremPaid = true
+  ; robustPartialIdentificationTheoremPaid = true
+  ; componentwiseCostBoundCompilerPaid = true
+  ; practicalSignificanceGatePaid = true
+  ; linearCalibrationBoundCompilerPaid = true
+  ; occupyCalibrationFrontierPaid = true
+  ; realWorldComparatorAtlasPaid = true
+  ; owsSpokesInterruptedTransitionPaid = true
+  ; normalizedSpokesTransitionCheckPaid = true
+  ; polycentricEvidenceSynthesisPaid = true
+  ; taskContingentNetworkEvidencePaid = true
+  ; comparatorCalibrationFrontierPaid = true
+  ; comparatorLocalWorkloadFloorPaid = true
+  ; comparatorInstitutionalVersioningPaid = true
+  ; dynamicInstitutionalFeedbackBridgePaid = true
+  ; adaptiveModelReopeningObligationPaid = true
+  ; interfaceCapacityBottleneckBridgePaid = true
+  ; crossContextTransferFirewallPaid = true
+  ; directFlatVersusNestedExperimentDesignPaid = true
+  ; validatedEmpiricalPromotionGatePaid = true
+  ; meaningfulEmpiricalPromotionGatePaid = true
+  ; longitudinalPromotionGatePaid = true
+  ; modelClassRobustnessGatePaid = true
+  ; empiricalCostTermsIdentified = false
+  ; targetQualifiedCostBoundsPaid = false
+  ; targetInterfaceCapacityAndDemandPaid = false
+  ; minimumMeaningfulThresholdTargetStudyPaid = false
+  ; admissibleTargetModelFamilyPaid = false
+  ; robustTargetCoordinationWinPaid = false
+  ; removalPaysOverheadEmpiricallyPaid = false
+  ; underlyingOWSSpokesMinutesMaterialised = false
+  ; directFlatVersusNestedExperimentRun = false
+  ; validatedCoordinationAdvantagePaid = false
+  ; validatedCoordinationDisadvantagePaid = false
+  ; validatedMeaningfulAdvantagePaid = false
+  ; validatedMeaningfulDisadvantagePaid = false
+  ; longitudinalMeaningfulAdvantagePaid = false
+  ; longitudinalMeaningfulDisadvantagePaid = false
+  ; uniformModelFamilyAdvantagePaid = false
+  ; uniformModelFamilyDisadvantagePaid = false
+  ; prospectiveHoldoutSpendable = false
+  ; prospectiveHoldoutValidationPaid = false
+  ; actualPoliticalLegitimacyEstablished = false
+  ; concreteEcologicalViabilityEstablished = false
+  ; concreteResourceBasicNeedsViabilityEstablished = false
+  ; empiricalComparativeSuperiorityEstablished = false
+  ; structuralTheoremAutomaticallyBecomesPoliticalRecommendation = false
+  ; sourceArchitectureAutomaticallyBecomesEmpiricalOptimum = false
+  ; occupyFailureAutomaticallyProvesBoloSuccess = false
+  ; comparatorSimilarityAutomaticallyProvesBoloSuccess = false
+  ; comparatorLocalWorkloadAutomaticallyTransfersToBolo = false
+  ; historicalAndCurrentComparatorVersionsMayBeSpliced = false
+  ; occupyBoundsAutomaticallyTransferToBolo = false
+  ; robustCoordinationWinAutomaticallyImpliesTotalPoliticalSuccess = false
+  ; validatedCoordinationDisadvantageRefutesEveryPossibleBoloVariant = false
+  ; oneFavouredCostModelEnoughForRobustRecommendation = false
+  ; anyTinyStrictWinEnoughForMeaningfulRecommendation = false
+  ; universalMonotoneDecentralizationAdvantageAssumed = false
+  ; snapshotWinAutomaticallyBecomesLongRunWin = false
+  ; declaredArchitectureAutomaticallyDeterminesRealisedTopology = false
+  ; localFeasibilityAutomaticallyImpliesJointInterfaceFeasibility = false
+  }
+
+canonicalBoloCounterfactualEvaluationReceipt : GenericReceipt.GenericReceipt
+canonicalBoloCounterfactualEvaluationReceipt =
+  GenericReceipt.mkNonPromotingReceipt
+    "bolo'bolo persistent adaptive counterfactual evaluation max-cut"
+    "DASHI.Governance.BoloBoloCounterfactualEvaluationExact"
+    "canonicalBoloEvaluationBoundary"
+    "closes the source-written and methodological chain from p.m.'s nested design through topology/incidence accounting, exact and robust cost comparison, bound compilers, practical significance, Occupy calibration, independent real-world comparators, comparator workload/versioning, dynamic institutional feedback and evidence-triggered model reopening, shared-interface capacity/bottleneck analysis, transfer qualification, a capacity-aware longitudinal paired trial, snapshot and repeated-period promotion/falsification, and predeclared model-family robustness"
+    "the remaining frontier is empirical and longitudinal: target-qualified cost bounds, target interface capacity/concurrent-demand/backlog measurements, a predeclared target model family and practical threshold, direct or qualified repeated outcomes, realised-topology/actor-adaptation/version audits and prospective validation; the final target is persistent adaptive advantage or disadvantage, not a one-shot snapshot win"
+    "agda -i . DASHI/Governance/BoloBoloCounterfactualEvaluationRegression.agda"

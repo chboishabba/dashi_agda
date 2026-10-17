@@ -1,0 +1,29 @@
+module DASHI.Governance.BoloBoloOrganizationalNetworkEvidenceRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloOrganizationalNetworkEvidenceExact as Evidence
+
+centralizationNotUniversal :
+  Evidence.centralizationHasContextInvariantPositiveEffect Evidence.canonicalOrganizationalNetworkEvidenceBoundary ≡ false
+centralizationNotUniversal = refl
+
+decentralizationNotUniversal :
+  Evidence.decentralizationHasContextInvariantPositiveEffect Evidence.canonicalOrganizationalNetworkEvidenceBoundary ≡ false
+decentralizationNotUniversal = refl
+
+tieStrengthModerates :
+  Evidence.tieStrengthCanModerateStructuralPerformance Evidence.canonicalOrganizationalNetworkEvidenceBoundary ≡ true
+tieStrengthModerates = refl
+
+adaptationCanMatter :
+  Evidence.adaptiveStructureCanMatterAcrossTasks Evidence.canonicalOrganizationalNetworkEvidenceBoundary ≡ true
+adaptationCanMatter = refl
+
+modelFamilyMustPermitInteractions :
+  Evidence.admissibleModelFamilyShouldPermitContextInteractions Evidence.canonicalOrganizationalNetworkEvidenceBoundary ≡ true
+modelFamilyMustPermitInteractions = refl
+
+notDirectBoloEvidence :
+  Evidence.organizationalTeamEvidenceDirectlyValidatesBolo Evidence.canonicalOrganizationalNetworkEvidenceBoundary ≡ false
+notDirectBoloEvidence = refl

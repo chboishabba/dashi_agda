@@ -1,0 +1,17 @@
+module DASHI.Governance.BoloBoloExternalChannelDominationNonDescentRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloExternalChannelDominationNonDescentExact as X
+
+channelObserverInsufficient : X.channelPresenceObserverConsumerSufficient X.canonicalExternalChannelDominationBoundary ≡ false
+channelObserverInsufficient = refl
+
+networkTransportBlocked : X.relationPathAutoPromotesInfluence X.canonicalExternalChannelDominationBoundary ≡ false
+networkTransportBlocked = refl
+
+sameChannelsCanDifferInAuthority : X.sameObservedChannelsCanHideDifferentDecisionAuthority X.canonicalExternalChannelDominationBoundary ≡ true
+sameChannelsCanDifferInAuthority = refl
+
+decisionAuthorityAuditRequired : X.sameObjectDecisionAuthorityAuditRequired X.canonicalExternalChannelDominationBoundary ≡ true
+decisionAuthorityAuditRequired = refl

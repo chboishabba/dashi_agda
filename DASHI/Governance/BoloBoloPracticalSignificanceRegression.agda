@@ -1,0 +1,23 @@
+module DASHI.Governance.BoloBoloPracticalSignificanceRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloPracticalSignificanceExact as Significance
+
+syntheticMeaningfulWinPaid :
+  Significance.MeaningfulOrderImprovement
+    Significance.syntheticMeaningfulThreshold
+    Significance.syntheticMeaningfulModel
+syntheticMeaningfulWinPaid = Significance.syntheticMeaningfulOrderImprovement
+
+thresholdMustBeFrozen :
+  Significance.meaningfulThresholdMustBePredeclared Significance.canonicalPracticalSignificanceBoundary ≡ true
+thresholdMustBeFrozen = refl
+
+anyTinyWinNotEnough :
+  Significance.anyStrictWinAutomaticallyCountsAsMeaningful Significance.canonicalPracticalSignificanceBoundary ≡ false
+anyTinyWinNotEnough = refl
+
+meaningfulCoordinationWinNotTotalPolitics :
+  Significance.meaningfulCoordinationWinCreatesUniversalPoliticalOptimality Significance.canonicalPracticalSignificanceBoundary ≡ false
+meaningfulCoordinationWinNotTotalPolitics = refl
