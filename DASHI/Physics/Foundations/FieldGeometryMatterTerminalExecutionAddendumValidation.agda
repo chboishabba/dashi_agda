@@ -39,6 +39,9 @@ entropy-bytes-still-open = refl
 casimir-ideal-sheet-scaling-is-numerical : A.casimirIdealSheetScalingCeiling A.currentTerminalExecutionAddendum ≡ T.numericallyExecuted
 casimir-ideal-sheet-scaling-is-numerical = refl
 
+superluminal-positive-eulerian-energy-source-is-paid : A.superluminalPositiveEulerianEnergyWarpConstructionSource A.currentTerminalExecutionAddendum ≡ T.sourcePaid
+superluminal-positive-eulerian-energy-source-is-paid = refl
+
 generic-warp-energy-condition-source-is-paid : A.genericWarpEnergyConditionObstructionSource A.currentTerminalExecutionAddendum ≡ T.sourcePaid
 generic-warp-energy-condition-source-is-paid = refl
 
@@ -86,6 +89,12 @@ synthetic-maxwell-is-not-measured-replay = refl
 
 ideal-casimir-scaling-is-not-physical-macroscopic-scaling : A.idealSheetScalingCountsAsPhysicalMacroscopicScaling A.currentTerminalExecutionAddendum ≡ false
 ideal-casimir-scaling-is-not-physical-macroscopic-scaling = refl
+
+positive-eulerian-energy-is-not-full-wec : A.positiveEulerianEnergyCountsAsFullWEC A.currentTerminalExecutionAddendum ≡ false
+positive-eulerian-energy-is-not-full-wec = refl
+
+positive-eulerian-energy-is-not-nec : A.positiveEulerianEnergyCountsAsNEC A.currentTerminalExecutionAddendum ≡ false
+positive-eulerian-energy-is-not-nec = refl
 
 subluminal-positive-energy-warp-is-not-ftl : A.subluminalPositiveEnergyWarpCountsAsFTL A.currentTerminalExecutionAddendum ≡ false
 subluminal-positive-energy-warp-is-not-ftl = refl
