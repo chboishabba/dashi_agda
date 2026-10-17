@@ -5,10 +5,14 @@ This script is deliberately reaction-identity/stoichiometry facing. It does not
 infer kinetics, cellular flux, compartment state, allocator competition or
 disease mechanism.
 
-The REST table pins the public row/equation and raw response.  Rhea SPARQL pins
+The REST table pins the public row/equation and raw response. Rhea SPARQL pins
 reaction sides, participant coefficients and the Rhea compound formula/charge
-coordinates used for chemical balancing.  Panel membership comes only from the
+coordinates used for chemical balancing. Panel membership comes only from the
 already-acquired UniProt certificate.
+
+Public Rhea endpoints occasionally time out under batch acquisition. Network
+reads therefore use a bounded three-attempt exponential-backoff retry. Exhausted
+retries remain explicit acquisition errors; they never become missing chemistry.
 """
 
 from __future__ import annotations
@@ -19,6 +23,7 @@ import hashlib
 import io
 import json
 import sys
+import time
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -26,7 +31,9 @@ from pathlib import Path
 
 RHEA_TABLE = "https://www.rhea-db.org/rhea/"
 RHEA_SPARQL = "https://sparql.rhea-db.org/sparql"
-USER_AGENT = "DASHI-rhea-chebi-acquisition/1.1 (https://github.com/chboishabba/dashi_agda)"
+USER_AGENT = "DASHI-rhea-chebi-acquisition/1.2 (https://github.com/chboishabba/dashi_agda)"
+NETWORK_ATTEMPTS = 3
+NETWORK_BACKOFF_SECONDS = 1.0
 
 QDPR_EXPECTED = {
     "generic_rhea_id": "RHEA:17869",
@@ -42,25 +49,44 @@ QDPR_EXPECTED = {
 }
 
 
+def _retry(operation, label: str):
+    last_exc: Exception | None = None
+    for attempt in range(1, NETWORK_ATTEMPTS + 1):
+        try:
+            return operation()
+        except Exception as exc:
+            last_exc = exc
+            if attempt >= NETWORK_ATTEMPTS:
+                break
+            time.sleep(NETWORK_BACKOFF_SECONDS * (2 ** (attempt - 1)))
+    raise RuntimeError(f"{label} failed after {NETWORK_ATTEMPTS} attempts: {last_exc}") from last_exc
+
+
 def _get(url: str) -> bytes:
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=60) as response:
-        return response.read()
+    def operation() -> bytes:
+        request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(request, timeout=60) as response:
+            return response.read()
+    return _retry(operation, f"Rhea GET {url}")
 
 
 def _sparql(query: str) -> tuple[dict, str]:
     data = urllib.parse.urlencode({"query": query, "format": "json"}).encode("utf-8")
-    request = urllib.request.Request(
-        RHEA_SPARQL,
-        data=data,
-        headers={
-            "User-Agent": USER_AGENT,
-            "Accept": "application/sparql-results+json",
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-    )
-    with urllib.request.urlopen(request, timeout=60) as response:
-        raw = response.read()
+
+    def operation() -> bytes:
+        request = urllib.request.Request(
+            RHEA_SPARQL,
+            data=data,
+            headers={
+                "User-Agent": USER_AGENT,
+                "Accept": "application/sparql-results+json",
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        )
+        with urllib.request.urlopen(request, timeout=60) as response:
+            return response.read()
+
+    raw = _retry(operation, "Rhea SPARQL POST")
     return json.loads(raw), hashlib.sha256(raw).hexdigest()
 
 
@@ -167,6 +193,7 @@ def promotion_boundary() -> dict:
         "reaction_identity_creates_allocator_competition": False,
         "reaction_identity_creates_disease_mechanism": False,
         "formula_charge_receipt_solves_electronic_structure": False,
+        "network_retry_exhaustion_means_reaction_absent": False,
     }
 
 
@@ -218,7 +245,7 @@ def acquire_panel(panel_path: Path) -> tuple[dict, int]:
     for rid in unique_ids:
         try:
             reactions.append(acquire_reaction(rid))
-        except Exception as exc:  # keep partial acquisition explicit
+        except Exception as exc:
             errors.append({"rhea_id": rid, "error": str(exc)})
     formula_ready = sum(bool(row.get("formula_charge_ready")) for row in reactions)
     return {
@@ -226,6 +253,7 @@ def acquire_panel(panel_path: Path) -> tuple[dict, int]:
         "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
         "rhea_release_reference": "Rhea release 142 (2026-09-02); SPARQL release 2026_03",
         "source_uniprot_panel": str(panel_path),
+        "network_retry_policy": {"attempts": NETWORK_ATTEMPTS, "initial_backoff_seconds": NETWORK_BACKOFF_SECONDS, "exponential": True},
         "protein_reaction_links": links,
         "unique_rhea_ids_requested": len(unique_ids),
         "rhea_rows_acquired": len(reactions),
