@@ -151,7 +151,6 @@ def _agda_user_libraries_file() -> Path:
 
 def _write_isolated_library_registry(
     *,
-    root: Path,
     workspace: Path,
     bishop_library: Path,
     dchott_library: Path,
@@ -188,40 +187,62 @@ def _write_isolated_library_registry(
     return registry
 
 
+def _write_isolated_dashi_library(*, root: Path, workspace: Path) -> Path:
+    """Create the single project library Agda sees for kernel checking.
+
+    The demanded artifact itself lives physically under ``workspace``. Existing
+    DASHI modules are available as secondary include paths from the populated
+    source checkout, but the initial source path does not resolve through a
+    symlink into that checkout, so Agda project-root discovery remains isolated.
+    """
+    library = workspace / "dashi-agda.agda-lib"
+    library.write_text(
+        "name: dashi-agda\n"
+        "depend: standard-library\n"
+        "        dchott-agda\n"
+        "        bishop\n"
+        "        cubical-0.9\n"
+        "include: .\n"
+        f"         {root.resolve()}\n",
+        encoding="utf-8",
+    )
+    return library
+
+
 @contextmanager
 def _isolated_agda_workspace(
     *,
     root: Path,
     relative_source: Path,
     original_source: Path,
+    expected_digest: str,
 ) -> Iterator[tuple[Path, Path]]:
-    canonical_library, bishop_library, dchott_library, cubical_library = (
+    _canonical_library, bishop_library, dchott_library, cubical_library = (
         _canonical_agda_dependency_files(root)
     )
     if not (root / "DASHI").is_dir():
         raise ValueError("canonical DASHI source directory is missing from source root")
 
+    expected = _digest("expected_digest", expected_digest)
+    original_bytes = original_source.read_bytes()
+    if _sha256_bytes(original_bytes) != expected:
+        raise ValueError("original source bytes no longer match the ITIR artifact digest")
+
     with tempfile.TemporaryDirectory(prefix="dashi-agda-kernel-") as temporary:
         workspace = Path(temporary)
-        workspace_library = workspace / "dashi-agda.agda-lib"
-        canonical_library_bytes = canonical_library.read_bytes()
-        workspace_library.write_bytes(canonical_library_bytes)
-        if workspace_library.read_bytes() != canonical_library_bytes:
-            raise ValueError("isolated Agda workspace did not preserve canonical library bytes")
-
-        (workspace / "DASHI").symlink_to((root / "DASHI").resolve(), target_is_directory=True)
-        (workspace / "bishop").symlink_to(
-            (root / "vendor/bishop").resolve(), target_is_directory=True
-        )
+        _write_isolated_dashi_library(root=root, workspace=workspace)
 
         workspace_source = workspace / relative_source
-        if not workspace_source.is_file():
-            raise ValueError("isolated Agda workspace cannot reopen the exact source path")
-        if workspace_source.read_bytes() != original_source.read_bytes():
-            raise ValueError("isolated Agda workspace source bytes differ from the ITIR artifact")
+        workspace_source.parent.mkdir(parents=True, exist_ok=True)
+        workspace_source.write_bytes(original_bytes)
+        if workspace_source.is_symlink():
+            raise ValueError("isolated Agda source must be materialized, not symlinked")
+        if workspace_source.resolve() == original_source.resolve():
+            raise ValueError("isolated Agda source resolved back to the original repository")
+        if _sha256_bytes(workspace_source.read_bytes()) != expected:
+            raise ValueError("materialized Agda source bytes differ from the ITIR artifact digest")
 
         library_registry = _write_isolated_library_registry(
-            root=root,
             workspace=workspace,
             bishop_library=bishop_library,
             dchott_library=dchott_library,
@@ -287,6 +308,7 @@ def certify_artifact(
             root=root,
             relative_source=relative_source,
             original_source=source_path,
+            expected_digest=expected_digest,
         ) as (workspace, library_registry):
             version = subprocess.run(
                 ["agda", "--version"],
