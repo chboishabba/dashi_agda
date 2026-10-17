@@ -9,11 +9,14 @@ open import DASHI.Unified.TOESectorRealizationExact
 import DASHI.Unified.TOE369C3RealizationGraphExact as C3
 import DASHI.Unified.CrossScaleMatterPhysics as CrossScale
 import DASHI.Unified.TOEConcreteInhabitantsExact as Inhabitants
+import DASHI.Unified.TOEQuantumInhabitantsExact as QuantumInhabitants
 
 record QuantumMatterPayment : Set where
   field
     finiteTPSAtlasPaid : Bool
     gTPSStructurePaid : Bool
+    finiteGTPSProjectorInhabited : Bool
+    finiteGTPSUnitaryMetricInhabited : Bool
     selectedSubsystemObserverPaid : Bool
     nh3C3HamiltonianSourcePaid : Bool
     matbgC3HamiltonianSourcePaid : Bool
@@ -25,6 +28,7 @@ record QuantumMatterPayment : Set where
     atomicContinuumSameObjectWeldPaid : Bool
     nh3HamiltonianIntertwinerPaid : Bool
     matbgHamiltonianIntertwinerPaid : Bool
+    minimizerPullbackPaid : Bool
     thermodynamicLimitPaid : Bool
     empiricalPhaseTransitionPaid : Bool
     sourceReceipt : String
@@ -34,6 +38,8 @@ currentQuantumMatterPayment =
   record
     { finiteTPSAtlasPaid = true
     ; gTPSStructurePaid = true
+    ; finiteGTPSProjectorInhabited = true
+    ; finiteGTPSUnitaryMetricInhabited = true
     ; selectedSubsystemObserverPaid = true
     ; nh3C3HamiltonianSourcePaid = true
     ; matbgC3HamiltonianSourcePaid = true
@@ -44,10 +50,11 @@ currentQuantumMatterPayment =
     ; atomicContinuumSameObjectWeldPaid = false
     ; nh3HamiltonianIntertwinerPaid = false
     ; matbgHamiltonianIntertwinerPaid = false
+    ; minimizerPullbackPaid = false
     ; thermodynamicLimitPaid = false
     ; empiricalPhaseTransitionPaid = false
     ; sourceReceipt =
-        "Consumes current finite/g-TPS quantum-mereology structure, NH3 and MATBG Hamiltonian lanes, and now an actual finite interacting matter inhabitant: the selected hydrogenic common-spin 2p^2 carrier with V_ee=(21/128) I_3 and exact C3 commutation from Agda PR #1194, recut natively in the TOE branch. The live promotion is not Hamiltonian existence anymore; it is the same-object universal-to-physical TPS/Hamiltonian weld, continuum projection, calibration and experiment."
+        "The finite quantum-mereology mathematics is now concretely inhabited at imported-formal-source scope: Lean PR #76 constructs canonical finite Hilbert-Schmidt projectors for every source g-TPS and reconstructs the finite unitary-family metric element. The matter side is also concretely inhabited natively by the selected hydrogenic common-spin 2p^2 carrier with V_ee=(21/128) I_3 and exact C3 commutation. The live TOE payment is therefore the same-object physical source-gTPS + Hamiltonian attachment, universal dynamics transport, continuum projection, minimizer/Hamiltonian-parameter pullback, calibration and experiment."
     }
 
 crossScaleMatterSurface : CrossScale.CrossScaleMatterPhysicsSurface
@@ -70,6 +77,8 @@ record QuantumMatterRealization : Set where
   field
     matbgOrientationCandidate : C3.C3Edge
     selectedAtomicHamiltonianInhabitant : Inhabitants.AtomicP2HamiltonianInhabitant
+    finiteGTPSProjectorFormalInhabitant : Inhabitants.FormalInhabitantReceipt
+    finiteGTPSMetricFormalInhabitant : Inhabitants.FormalInhabitantReceipt
     payments : QuantumMatterPayment
     attainedGrade : ValidationGrade
     unpaid : List RealizationObligation
@@ -82,11 +91,13 @@ canonicalQuantumMatterRealization =
   record
     { matbgOrientationCandidate = C3.universalToMATBGCandidate
     ; selectedAtomicHamiltonianInhabitant = Inhabitants.canonicalAtomicP2HamiltonianInhabitant
+    ; finiteGTPSProjectorFormalInhabitant = QuantumInhabitants.lean76GTPSProjectionInhabitant
+    ; finiteGTPSMetricFormalInhabitant = QuantumInhabitants.lean76GTPSMetricInhabitant
     ; payments = currentQuantumMatterPayment
     ; attainedGrade = quantumMatterGrade
     ; unpaid = quantumMatterObligations
     ; samePhysicalHamiltonianPromoted = false
     ; samePhysicalHamiltonianPromotedIsFalse = refl
     ; reading =
-        "HAM candidate: quantum subsystem structure and concrete matter Hamiltonians are sector readouts of one universal state/refinement/orientation object. This is no longer merely existential: the TOE branch contains an actual three-state interacting 2p^2 Coulomb Hamiltonian inhabitant whose C3 commutation is proved by construction. The decisive remaining bridge is to identify the universal physical state/TPS and continuum action with that selected matter carrier, then repeat the weld for NH3/MATBG and test calibrated predictions."
+        "HAM candidate: quantum subsystem structure and concrete matter Hamiltonians are sector readouts of one universal state/refinement/orientation object. The selected finite mathematics is no longer existential: the TOE carries a concrete interacting 2p^2 Coulomb Hamiltonian inhabitant, plus imported formal inhabitants for canonical finite g-TPS projectors and the source unitary-family metric formula. What remains is the physically decisive same-object weld tying the selected source algebra/TPS and Hamiltonian to the universal state/action, followed by continuum/thermodynamic transport and held-out measurement."
     }
