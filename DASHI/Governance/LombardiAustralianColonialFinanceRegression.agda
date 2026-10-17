@@ -1,0 +1,45 @@
+module DASHI.Governance.LombardiAustralianColonialFinanceRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.MontefioreRothschildAustralianGoldSourceAtlasExact as Sources
+import DASHI.Governance.MontefioreRothschildAustralianGoldNetworkExact as Gold
+import DASHI.Governance.LombardiNarrativeStructureAdapterExact as Lombardi
+import DASHI.Governance.MaralingaPineGapStrategicLandGrammarExact as Land
+import DASHI.Governance.AustralianColonialExtractionNarrativeStructureExact as Extraction
+import DASHI.Governance.LombardiBCCIHistoricalFixtureExact as BCCI
+import DASHI.Governance.NarrativeStructureEvidenceAdapterExact as Method
+import DASHI.Governance.LombardiAustralianColonialFinanceTerminalMaxCutExact as Terminal
+
+kinshipBoundaryRegression : Gold.KinshipCreatesCoordination → ⊥
+kinshipBoundaryRegression = Gold.kinshipDoesNotCreateCoordination
+
+identityBoundaryRegression : Gold.JewishIdentityCreatesFinancialNetworkEdge → ⊥
+identityBoundaryRegression = Gold.jewishIdentityDoesNotCreateFinancialNetworkEdge
+
+strategicLandBoundaryRegression : Land.SharedStrategicLandGrammarCreatesProgrammeLineage → ⊥
+strategicLandBoundaryRegression = Land.sharedStrategicLandGrammarDoesNotCreateProgrammeLineage
+
+graphPathBoundaryRegression : Lombardi.GraphPathCreatesCausalChain → ⊥
+graphPathBoundaryRegression = Lombardi.graphPathDoesNotCreateCausalChain
+
+artworkBoundaryRegression : Lombardi.ArtworkRepresentationCreatesHistoricalReceipt → ⊥
+artworkBoundaryRegression = Lombardi.artworkRepresentationDoesNotCreateHistoricalReceipt
+
+sharedMethodBoundaryRegression : Method.SharedEvidenceMethodCreatesSharedHistoricalNetwork → ⊥
+sharedMethodBoundaryRegression = Method.sharedEvidenceMethodDoesNotCreateSharedHistoricalNetwork
+
+sourceAtlasHasNPG : Sources.SourceIdentity
+sourceAtlasHasNPG = Sources.npgMontefioreRothschildGoldRush
+
+sourceAtlasHasNAA : Sources.SourceIdentity
+sourceAtlasHasNAA = Sources.naaMaralingaNuclearTests
+
+sourceAtlasHasWhitney : Sources.SourceIdentity
+sourceAtlasHasWhitney = Sources.whitneyLombardiBCCI
+
+sourceAtlasHasSenate : Sources.SourceIdentity
+sourceAtlasHasSenate = Sources.senateBCCIAffair
+
+terminalRegression : Terminal.TerminalBoundary
+terminalRegression = Terminal.canonicalTerminalBoundary
