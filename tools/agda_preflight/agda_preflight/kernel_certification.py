@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+from contextlib import contextmanager
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
-from typing import Any, Iterable, Optional
+import tempfile
+from typing import Any, Iterable, Iterator, Optional
 from urllib.parse import unquote, urlparse
 
 _SHA256_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -117,22 +120,124 @@ def _git(root_or_child: Path, *args: str) -> str:
     return result.stdout.strip()
 
 
-def _agda_check_command(root: Path, relative_source: Path) -> list[str]:
-    """Select DASHI's canonical named Agda library explicitly.
-
-    The repository root intentionally contains several `.agda-lib` files.
-    Bare `agda <source>` asks Agda to auto-discover a project library and
-    fails on that valid multi-library layout.  The repository's documented
-    consumer/checker contract is the named `dashi-agda` library, whose
-    `.agda-lib` file owns the standard-library/DCHoTT/Bishop/Cubical
-    dependency/include configuration.
-    """
-    canonical_library = root / "dashi-agda.agda-lib"
-    if not canonical_library.is_file():
+def _require_populated_directory(root: Path, relative: str) -> Path:
+    directory = root / relative
+    if not directory.is_dir() or not any(directory.iterdir()):
         raise ValueError(
-            "Agda kernel check requires canonical dashi-agda.agda-lib in source root"
+            f"canonical Agda dependency is not populated: {relative}; use a checkout with populated submodules"
         )
-    return ["agda", "-l", "dashi-agda", str(relative_source)]
+    return directory
+
+
+def _canonical_agda_dependency_files(root: Path) -> tuple[Path, ...]:
+    canonical_library = root / "dashi-agda.agda-lib"
+    bishop_library = root / "bishop.agda-lib"
+    dchott_library = root / "dchott-agda.agda-lib"
+    cubical_library = root / "cubical/cubical.agda-lib"
+    for path in (canonical_library, bishop_library, dchott_library, cubical_library):
+        if not path.is_file():
+            raise ValueError(f"canonical Agda dependency/library file is missing: {path}")
+    _require_populated_directory(root, "vendor/bishop")
+    _require_populated_directory(root, "DCHoTT-Agda")
+    _require_populated_directory(root, "cubical")
+    return canonical_library, bishop_library, dchott_library, cubical_library
+
+
+def _agda_user_libraries_file() -> Path:
+    configured = os.environ.get("AGDA_DIR")
+    agda_dir = Path(configured).expanduser() if configured else Path.home() / ".agda"
+    return agda_dir / "libraries"
+
+
+def _write_isolated_library_registry(
+    *,
+    root: Path,
+    workspace: Path,
+    bishop_library: Path,
+    dchott_library: Path,
+    cubical_library: Path,
+) -> Path:
+    registry = workspace / "libraries"
+    inherited: list[str] = []
+    user_registry = _agda_user_libraries_file()
+    if user_registry.is_file():
+        for raw in user_registry.read_text(encoding="utf-8").splitlines():
+            line = raw.strip()
+            if not line or line.startswith("--") or line.startswith("#"):
+                continue
+            expanded = str(Path(line).expanduser())
+            basename = Path(expanded).name
+            if basename in {
+                "dashi-agda.agda-lib",
+                "bishop.agda-lib",
+                "dchott-agda.agda-lib",
+                "cubical.agda-lib",
+            }:
+                continue
+            if expanded not in inherited:
+                inherited.append(expanded)
+
+    canonical_entries = [
+        str(bishop_library.resolve()),
+        str(dchott_library.resolve()),
+        str(cubical_library.resolve()),
+        str((workspace / "dashi-agda.agda-lib").resolve()),
+    ]
+    entries = inherited + [entry for entry in canonical_entries if entry not in inherited]
+    registry.write_text("\n".join(entries) + "\n", encoding="utf-8")
+    return registry
+
+
+@contextmanager
+def _isolated_agda_workspace(
+    *,
+    root: Path,
+    relative_source: Path,
+    original_source: Path,
+) -> Iterator[tuple[Path, Path]]:
+    canonical_library, bishop_library, dchott_library, cubical_library = (
+        _canonical_agda_dependency_files(root)
+    )
+    if not (root / "DASHI").is_dir():
+        raise ValueError("canonical DASHI source directory is missing from source root")
+
+    with tempfile.TemporaryDirectory(prefix="dashi-agda-kernel-") as temporary:
+        workspace = Path(temporary)
+        workspace_library = workspace / "dashi-agda.agda-lib"
+        canonical_library_bytes = canonical_library.read_bytes()
+        workspace_library.write_bytes(canonical_library_bytes)
+        if workspace_library.read_bytes() != canonical_library_bytes:
+            raise ValueError("isolated Agda workspace did not preserve canonical library bytes")
+
+        (workspace / "DASHI").symlink_to((root / "DASHI").resolve(), target_is_directory=True)
+        (workspace / "bishop").symlink_to(
+            (root / "vendor/bishop").resolve(), target_is_directory=True
+        )
+
+        workspace_source = workspace / relative_source
+        if not workspace_source.is_file():
+            raise ValueError("isolated Agda workspace cannot reopen the exact source path")
+        if workspace_source.read_bytes() != original_source.read_bytes():
+            raise ValueError("isolated Agda workspace source bytes differ from the ITIR artifact")
+
+        library_registry = _write_isolated_library_registry(
+            root=root,
+            workspace=workspace,
+            bishop_library=bishop_library,
+            dchott_library=dchott_library,
+            cubical_library=cubical_library,
+        )
+        yield workspace, library_registry
+
+
+def _agda_check_command(library_registry: Path, relative_source: Path) -> list[str]:
+    return [
+        "agda",
+        f"--library-file={library_registry}",
+        "-l",
+        "dashi-agda",
+        str(relative_source),
+    ]
 
 
 def certify_artifact(
@@ -153,11 +258,18 @@ def certify_artifact(
     source_path = _path_from_file_uri(uri)
     if not source_path.is_file():
         raise ValueError(f"artifact file does not exist: {source_path}")
-    observed_digest = _sha256_bytes(source_path.read_bytes())
+    original_bytes = source_path.read_bytes()
+    observed_digest = _sha256_bytes(original_bytes)
     if observed_digest != expected_digest:
         raise ValueError("artifact bytes no longer match the ITIR resolution receipt")
 
-    checker_name = checker or ("agda" if source_path.suffix == ".agda" else "lean" if source_path.suffix == ".lean" else None)
+    checker_name = checker or (
+        "agda"
+        if source_path.suffix == ".agda"
+        else "lean"
+        if source_path.suffix == ".lean"
+        else None
+    )
     if checker_name not in {"agda", "lean"}:
         raise ValueError("checker must be supplied for non-.agda/.lean artifacts")
 
@@ -171,25 +283,39 @@ def certify_artifact(
     source_revision = "git:" + _git(root, "rev-parse", "HEAD")
 
     if checker_name == "agda":
-        version_cmd = ["agda", "--version"]
-        check_cmd = _agda_check_command(root, relative_source)
+        with _isolated_agda_workspace(
+            root=root,
+            relative_source=relative_source,
+            original_source=source_path,
+        ) as (workspace, library_registry):
+            version = subprocess.run(
+                ["agda", "--version"],
+                cwd=workspace,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            checked = subprocess.run(
+                _agda_check_command(library_registry, relative_source),
+                cwd=workspace,
+                check=False,
+                capture_output=True,
+            )
     else:
-        version_cmd = ["lake", "env", "lean", "--version"]
-        check_cmd = ["lake", "env", "lean", str(relative_source)]
+        version = subprocess.run(
+            ["lake", "env", "lean", "--version"],
+            cwd=root,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        checked = subprocess.run(
+            ["lake", "env", "lean", str(relative_source)],
+            cwd=root,
+            check=False,
+            capture_output=True,
+        )
 
-    version = subprocess.run(
-        version_cmd,
-        cwd=root,
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.strip()
-    checked = subprocess.run(
-        check_cmd,
-        cwd=root,
-        check=False,
-        capture_output=True,
-    )
     if checked.returncode != 0:
         stderr = checked.stderr.decode("utf-8", errors="replace")
         stdout = checked.stdout.decode("utf-8", errors="replace")
