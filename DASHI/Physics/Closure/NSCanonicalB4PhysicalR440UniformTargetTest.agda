@@ -24,6 +24,9 @@ physicalMassBounded = T.b4UniformTargetRequiresCoreMassNonnegativeIsTrue
 localEDBounded : T.b4UniformTargetRequiresLocalEDNonnegative ≡ true
 localEDBounded = T.b4UniformTargetRequiresLocalEDNonnegativeIsTrue
 
+admissibleCutoffRequired : T.b4UniformTargetRequiresAdmissibleCutoff ≡ true
+admissibleCutoffRequired = T.b4UniformTargetRequiresAdmissibleCutoffIsTrue
+
 sourceAttachmentRequired : T.b4UniformTargetRequiresSameSourceAttachments ≡ true
 sourceAttachmentRequired = T.b4UniformTargetRequiresSameSourceAttachmentsIsTrue
 
