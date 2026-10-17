@@ -17,12 +17,14 @@ open import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as L
 -- scheduler is imported and no residual inhabitant is manufactured here.
 --
 -- CMP109 is no longer represented by three opaque Set-valued placeholders.
--- Its field is now typed through the selected shooting-map attachment, the
--- existing Ward/quartic response producer, and the minimal D1 transport
--- equality exposed by the canonical CMP109 owner.
+-- Its field is now tied to one selected source value, with the shooting-map,
+-- Ward/quartic response producer, and D1 transport all required to carry
+-- explicit same-object attachment evidence.
 ------------------------------------------------------------------------
 
 record YangMillsCanonicalClayResidual
+    {SelectedSource : Set}
+    (selectedSource : SelectedSource)
     {TubePoint Component Background Tangent Scalar : Set}
     {cutoff : Nat}
     {Measure Schwinger Observable Energy Bound : Set}
@@ -38,7 +40,7 @@ record YangMillsCanonicalClayResidual
   field
     cmp109SourceSemantics :
       CMP109.CMP109CanonicalSourceSemanticsObligations
-        TubePoint cutoff Component Background Tangent Scalar
+        selectedSource TubePoint cutoff Component Background Tangent Scalar
 
     physicalTransferGap :
       TransferGap.SelectedPhysicalTransferGapObligation closure spectrum
