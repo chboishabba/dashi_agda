@@ -29,8 +29,9 @@ open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; _+ℝ_; _-ℝ_; absℝ; _≤ℝ_;
-   ≤ℝ-trans; +-mono-≤; absAddSubadditive; subAddCancelMiddle)
+  (ℝ; 0ℝ; _+ℝ_; _-ℝ_; absℝ; _≤ℝ_;
+   ≤ℝ-refl; ≤ℝ-trans; +-mono-≤; absZero; absAddSubadditive;
+   subSelf; subAddCancelMiddle)
 
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteToLocalCAnomalyLimitTransportExact as LocalLimit
 import DASHI.Physics.Foundations.CMP119AntigravityRealHaarExpectationRepresentationExact as HaarLimit
@@ -241,6 +242,55 @@ localCF2EqualsPhysicalHaarFromAsymptoticBridge
     (localFiniteF2LimitIsPhysicalHaar vanishing common)
 
 ------------------------------------------------------------------------
+-- Backward compatibility: the old pointwise-common Q3 is the zero-error case.
+------------------------------------------------------------------------
+
+pointwiseCommonFiniteF2ToAsymptotic :
+  ∀ {ContinuumFamily CurvaturePolynomial LocalOperator Position
+      OPECoefficient StressTensor Hamiltonian localC embedding convention
+      sequenceLimit readout localTransport physicalHaar}
+    (vanishing : Vanishing.RealVanishingFiniteAlgebra sequenceLimit) →
+    (∀ cutoff →
+      HaarLimit.finiteCMP119Expectation physicalHaar cutoff
+      ≡ LocalLimit.finiteF2Numerator localTransport cutoff) →
+    AsymptoticCommonFiniteF2
+      {ContinuumFamily = ContinuumFamily}
+      {CurvaturePolynomial = CurvaturePolynomial}
+      {LocalOperator = LocalOperator}
+      {Position = Position}
+      {OPECoefficient = OPECoefficient}
+      {StressTensor = StressTensor}
+      {Hamiltonian = Hamiltonian}
+      {localC = localC}
+      {embedding = embedding}
+      {convention = convention}
+      {sequenceLimit = sequenceLimit}
+      {readout = readout}
+      localTransport physicalHaar
+pointwiseCommonFiniteF2ToAsymptotic
+    {localTransport = localTransport}
+    {physicalHaar = physicalHaar}
+    vanishing same =
+  let
+    zeroBound :
+      ∀ cutoff →
+      absℝ
+        (HaarLimit.finiteCMP119Expectation physicalHaar cutoff
+          -ℝ LocalLimit.finiteF2Numerator localTransport cutoff)
+      ≤ℝ 0ℝ
+    zeroBound cutoff
+      rewrite same cutoff
+            | subSelf (LocalLimit.finiteF2Numerator localTransport cutoff)
+            | absZero =
+      ≤ℝ-refl
+  in record
+    { AsymptoticCommonFiniteF2.bridgeError = λ _ → 0ℝ
+    ; AsymptoticCommonFiniteF2.finiteF2BridgeBound = zeroBound
+    ; AsymptoticCommonFiniteF2.bridgeErrorVanishes =
+        Vanishing.vanishesZero vanishing
+    }
+
+------------------------------------------------------------------------
 -- Frontier accounting.
 ------------------------------------------------------------------------
 
@@ -249,6 +299,9 @@ termwiseFiniteF2EqualityRequired = false
 
 vanishingFiniteF2BridgeSufficesForCommonLimit : Bool
 vanishingFiniteF2BridgeSufficesForCommonLimit = true
+
+oldPointwiseQ3IsZeroErrorSpecialCase : Bool
+oldPointwiseQ3IsZeroErrorSpecialCase = true
 
 q3ReducedToAsymptoticFiniteF2Bridge : Bool
 q3ReducedToAsymptoticFiniteF2Bridge = true
