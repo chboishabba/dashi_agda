@@ -6,6 +6,7 @@ import sqlite3
 import sys
 
 from .development_history import NarrativeEvent
+from .external_proof_bridge import ExternalProofDemand, ExternalProofRouter
 from .proof_router import ProofRouteRequest, ProofRouter, ensure_proof_router_schema
 from .repository_annotations import (
     capture_repository_annotations,
@@ -73,6 +74,8 @@ def _status(argv) -> int:
             "da51_evidence",
             "proof_routes",
             "proof_route_matches",
+            "external_proof_demands",
+            "external_formal_evidence",
         ):
             try:
                 counts[table] = int(
@@ -138,32 +141,16 @@ def _harvest(argv) -> int:
     parser.add_argument("--max-commits", type=int)
     args = parser.parse_args(argv)
     root = args.root.resolve()
-
-    forwarded = [
-        "harvest",
-        "--root",
-        str(root),
-        "--database",
-        str(args.database),
-    ]
+    forwarded = ["harvest", "--root", str(root), "--database", str(args.database)]
     if args.github_prs:
         forwarded.extend(["--github-prs", args.github_prs])
     if args.max_commits is not None:
         forwarded.extend(["--max-commits", str(args.max_commits)])
     history_code = repository_main(forwarded)
-
     complete = args.max_commits is None
     with _connect(root, args.database) as conn:
-        events = [
-            NarrativeEvent.from_record(item)
-            for item in load_narrative_events(conn)
-        ]
-        git_result = replace_git_history(
-            conn,
-            root,
-            events,
-            complete=complete,
-        )
+        events = [NarrativeEvent.from_record(item) for item in load_narrative_events(conn)]
+        git_result = replace_git_history(conn, root, events, complete=complete)
     for key in ("commits", "parent_edges", "refs", "commit_paths", "complete"):
         print(f"git_{key}\t{git_result[key]}")
     return history_code
@@ -199,18 +186,15 @@ def _da51(argv) -> int:
         description="Resolve and attach authority-neutral DA51 identity/provenance.",
     )
     sub = parser.add_subparsers(dest="action", required=True)
-
     resolve = sub.add_parser("resolve")
     resolve.add_argument("address")
     _common(resolve)
-
     link = sub.add_parser("link")
     link.add_argument("address")
     link.add_argument("symbol")
     link.add_argument("--relation", required=True)
     link.add_argument("--source", required=True)
     _common(link)
-
     add = sub.add_parser("add-evidence")
     add.add_argument("address")
     add.add_argument("--producer", required=True)
@@ -219,15 +203,12 @@ def _da51(argv) -> int:
     add.add_argument("--revision", default="")
     add.add_argument("--digest", default="")
     _common(add)
-
     evidence = sub.add_parser("evidence")
     evidence.add_argument("address")
     _common(evidence)
-
     frontier = sub.add_parser("frontier")
     frontier.add_argument("address")
     _common(frontier)
-
     args = parser.parse_args(argv)
     root = args.root.resolve()
     with _connect(root, args.database) as conn:
@@ -248,36 +229,17 @@ def _da51(argv) -> int:
                 for key in ("level", "biome", "status", "serial", "reserved"):
                     _print_scalar(f"atlas_{key}", atlas[key])
             for item in result.get("symbol_links", ()):
-                print(
-                    f"symbol_link\t{item['symbol_id']}\t{item['relation']}\t{item['source']}"
-                )
+                print(f"symbol_link\t{item['symbol_id']}\t{item['relation']}\t{item['source']}")
             for item in result.get("evidence", ()):
-                print(
-                    "evidence\t{}\t{}\t{}\t{}\t{}".format(
-                        item["producer"], item["evidence_kind"], item["artifact"],
-                        item["revision"], item["digest"],
-                    )
-                )
+                print("evidence\t{}\t{}\t{}\t{}\t{}".format(item["producer"], item["evidence_kind"], item["artifact"], item["revision"], item["digest"]))
             return 0
         if args.action == "link":
-            result = router.link_da51(
-                args.address,
-                args.symbol,
-                relation=args.relation,
-                source=args.source,
-            )
+            result = router.link_da51(args.address, args.symbol, relation=args.relation, source=args.source)
             print(f"address\t{result['address']}")
             print(f"symbol_links\t{len(result['symbol_links'])}")
             return 0
         if args.action == "add-evidence":
-            result = router.add_evidence(
-                args.address,
-                producer=args.producer,
-                artifact=args.artifact,
-                evidence_kind=args.kind,
-                revision=args.revision,
-                digest=args.digest,
-            )
+            result = router.add_evidence(args.address, producer=args.producer, artifact=args.artifact, evidence_kind=args.kind, revision=args.revision, digest=args.digest)
             print(f"address\t{result['address']}")
             print(f"evidence_count\t{len(result['evidence'])}")
             print(f"authority\t{result['authority']}")
@@ -286,65 +248,25 @@ def _da51(argv) -> int:
             result = router.resolve_da51(args.address)
             print(f"address\t{result['address']}")
             for item in result["evidence"]:
-                print(
-                    "evidence\t{}\t{}\t{}\t{}\t{}\t{}".format(
-                        item["producer"], item["evidence_kind"], item["artifact"],
-                        item["revision"], item["digest"], item["authority"],
-                    )
-                )
+                print("evidence\t{}\t{}\t{}\t{}\t{}\t{}".format(item["producer"], item["evidence_kind"], item["artifact"], item["revision"], item["digest"], item["authority"]))
             return 0
         if args.action == "frontier":
             result = router.frontier_for(args.address)
             print(f"address\t{result['address']}")
             print(f"authority\t{result['authority']}")
             for item in result["routes"]:
-                print(
-                    "route\t{}\t{}\t{}\t{}\t{}".format(
-                        item["route_id"], item["debt_kind"],
-                        item["recommended_backend"], item["absence_status"],
-                        bool(item["generation_permitted"]),
-                    )
-                )
+                print("route\t{}\t{}\t{}\t{}\t{}".format(item["route_id"], item["debt_kind"], item["recommended_backend"], item["absence_status"], bool(item["generation_permitted"])))
             return 0
     raise AssertionError(args.action)
 
 
-def _prove(argv) -> int:
-    parser = argparse.ArgumentParser(
-        prog="dashi-repo prove",
-        description="Discover-before-prove and route formalisation debt fail-closed.",
-    )
-    sub = parser.add_subparsers(dest="action", required=True)
-
-    discover = sub.add_parser("discover")
-    discover.add_argument("query")
-    discover.add_argument("--limit", type=int, default=50)
-    _common(discover)
-
-    preflight = sub.add_parser("preflight")
-    preflight.add_argument("target")
-    preflight.add_argument("--errors-only", action="store_true")
-    _common(preflight)
-
-    route = sub.add_parser("route")
+def _add_route_options(route: argparse.ArgumentParser) -> None:
     route.add_argument("query")
     route.add_argument("--target-prover", choices=("lean", "agda"), default="lean")
     route.add_argument("--claim-kind", choices=("deductive", "empirical"), default="deductive")
-    route.add_argument(
-        "--mathematical-status",
-        choices=("novel-open", "source-established", "derived-in-repo", "experimentally-supported"),
-        default="novel-open",
-    )
-    route.add_argument(
-        "--statement-status",
-        choices=("not-transcribed", "transcribed-unaligned", "source-aligned"),
-        default="not-transcribed",
-    )
-    route.add_argument(
-        "--certification-status",
-        choices=("uncertified", "proof-deferred", "lean-kernel", "agda-kernel"),
-        default="uncertified",
-    )
+    route.add_argument("--mathematical-status", choices=("novel-open", "source-established", "derived-in-repo", "experimentally-supported"), default="novel-open")
+    route.add_argument("--statement-status", choices=("not-transcribed", "transcribed-unaligned", "source-aligned"), default="not-transcribed")
+    route.add_argument("--certification-status", choices=("uncertified", "proof-deferred", "lean-kernel", "agda-kernel"), default="uncertified")
     route.add_argument("--da51")
     route.add_argument("--source-declaration")
     route.add_argument("--current-source-hash")
@@ -352,59 +274,20 @@ def _prove(argv) -> int:
     route.add_argument("--limit", type=int, default=50)
     _common(route)
 
-    history = sub.add_parser("history")
-    history.add_argument("--query")
-    history.add_argument("--da51")
-    history.add_argument("--limit", type=int, default=50)
-    _common(history)
 
-    args = parser.parse_args(argv)
-    root = args.root.resolve()
-
-    if args.action == "discover":
-        return repository_main([
-            "discover", args.query,
-            "--limit", str(args.limit),
-            "--root", str(root),
-            "--database", str(args.database),
-        ])
-    if args.action == "preflight":
-        forwarded = [
-            "diagnose", args.target,
-            "--root", str(root),
-            "--database", str(args.database),
-        ]
-        if args.errors_only:
-            forwarded.append("--errors-only")
-        return repository_main(forwarded)
-    if args.action == "history":
-        with _connect(root, args.database) as conn:
-            router = ProofRouter(discovery=lambda query, **kwargs: {}, connection=conn)
-            for item in router.route_history(query=args.query, address=args.da51, limit=args.limit):
-                print(
-                    "route\t{}\t{}\t{}\t{}\t{}".format(
-                        item["route_id"], item["query"], item["debt_kind"],
-                        item["recommended_backend"], item["authority"],
-                    )
-                )
-        return 0
-    if args.action == "route":
-        database = args.database if args.database.is_absolute() else root / args.database
-        semantic_catalog = args.semantic_catalog
-        if semantic_catalog is not None and not semantic_catalog.is_absolute():
-            semantic_catalog = root / semantic_catalog
-        with DashiAgdaService(
-            root,
-            database,
-            semantic_catalog=semantic_catalog,
-        ) as service:
-            router = ProofRouter(
-                discovery=service.discover,
-                semantic_catalog=service.semantic,
-                connection=service.index.connection,
-            )
-            result = router.route(
-                ProofRouteRequest(
+def _service_route(args, root: Path, *, external: bool):
+    database = args.database if args.database.is_absolute() else root / args.database
+    semantic_catalog = args.semantic_catalog
+    if semantic_catalog is not None and not semantic_catalog.is_absolute():
+        semantic_catalog = root / semantic_catalog
+    with DashiAgdaService(root, database, semantic_catalog=semantic_catalog) as service:
+        router = ProofRouter(discovery=service.discover, semantic_catalog=service.semantic, connection=service.index.connection)
+        if external:
+            return ExternalProofRouter(router, service.index.connection).route(
+                ExternalProofDemand(
+                    demand_ref=args.demand_ref,
+                    external_obligation_ref=args.obligation_ref,
+                    statement_digest=args.statement_digest,
                     query=args.query,
                     target_prover=args.target_prover,
                     claim_kind=args.claim_kind,
@@ -417,18 +300,90 @@ def _prove(argv) -> int:
                 ),
                 limit=args.limit,
             )
+        return router.route(
+            ProofRouteRequest(
+                query=args.query,
+                target_prover=args.target_prover,
+                claim_kind=args.claim_kind,
+                mathematical_status=args.mathematical_status,
+                statement_status=args.statement_status,
+                certification_status=args.certification_status,
+                da51_address=args.da51,
+                source_declaration=args.source_declaration,
+                current_source_hash=args.current_source_hash,
+            ),
+            limit=args.limit,
+        )
+
+
+def _prove(argv) -> int:
+    parser = argparse.ArgumentParser(
+        prog="dashi-repo prove",
+        description="Discover-before-prove and route formalisation debt fail-closed.",
+    )
+    sub = parser.add_subparsers(dest="action", required=True)
+    discover = sub.add_parser("discover")
+    discover.add_argument("query")
+    discover.add_argument("--limit", type=int, default=50)
+    _common(discover)
+    preflight = sub.add_parser("preflight")
+    preflight.add_argument("target")
+    preflight.add_argument("--errors-only", action="store_true")
+    _common(preflight)
+    route = sub.add_parser("route")
+    _add_route_options(route)
+    external = sub.add_parser("route-external-obligation")
+    _add_route_options(external)
+    external.add_argument("--demand-ref", required=True)
+    external.add_argument("--obligation-ref", required=True)
+    external.add_argument("--statement-digest", required=True)
+    evidence = sub.add_parser("evidence-for-obligation")
+    evidence.add_argument("--demand-ref", required=True)
+    evidence.add_argument("--obligation-ref", required=True)
+    evidence.add_argument("--statement-digest", required=True)
+    _common(evidence)
+    history = sub.add_parser("history")
+    history.add_argument("--query")
+    history.add_argument("--da51")
+    history.add_argument("--limit", type=int, default=50)
+    _common(history)
+    args = parser.parse_args(argv)
+    root = args.root.resolve()
+    if args.action == "discover":
+        return repository_main(["discover", args.query, "--limit", str(args.limit), "--root", str(root), "--database", str(args.database)])
+    if args.action == "preflight":
+        forwarded = ["diagnose", args.target, "--root", str(root), "--database", str(args.database)]
+        if args.errors_only:
+            forwarded.append("--errors-only")
+        return repository_main(forwarded)
+    if args.action == "history":
+        with _connect(root, args.database) as conn:
+            router = ProofRouter(discovery=lambda query, **kwargs: {}, connection=conn)
+            for item in router.route_history(query=args.query, address=args.da51, limit=args.limit):
+                print("route\t{}\t{}\t{}\t{}\t{}".format(item["route_id"], item["query"], item["debt_kind"], item["recommended_backend"], item["authority"]))
+        return 0
+    if args.action == "evidence-for-obligation":
+        with _connect(root, args.database) as conn:
+            base = ProofRouter(discovery=lambda query, **kwargs: {"query": query, "absence_claim_permitted": False, "absence_status": "not-requested"}, connection=conn)
+            bridge = ExternalProofRouter(base, conn)
+            rows = bridge.evidence_for_obligation(demand_ref=args.demand_ref, external_obligation_ref=args.obligation_ref, statement_digest=args.statement_digest)
+            print(f"authority\tevidence-only")
+            print(f"establishes_proof\tFalse")
+            for item in rows:
+                print("evidence\t{}\t{}\t{}\t{}\t{}\t{}".format(item["evidence_ref"], item["producer"], item["artifact_ref"], item["artifact_digest"], item["checker"], item["certification_state"]))
+        return 0
+    if args.action in {"route", "route-external-obligation"}:
+        result = _service_route(args, root, external=args.action == "route-external-obligation")
         for key in (
-            "route_id", "debt_kind", "recommended_backend", "generation_permitted",
-            "absence_status", "agda2lean_mapping_mode", "authority",
-            "translation_establishes_proof",
+            "route_id", "external_route_id", "demand_ref", "external_obligation_ref", "statement_digest",
+            "debt_kind", "recommended_backend", "generation_permitted", "absence_status",
+            "agda2lean_mapping_mode", "authority", "translation_establishes_proof", "establishes_proof",
         ):
             _print_scalar(key, result.get(key))
         if result.get("da51"):
             print(f"da51\t{result['da51']['address']}")
         for item in result.get("matches", ()):
-            print(
-                f"match\t{item['kind']}\t{item['symbol_id']}\t{item.get('similarity')}"
-            )
+            print(f"match\t{item['kind']}\t{item['symbol_id']}\t{item.get('similarity')}")
         return 0
     raise AssertionError(args.action)
 
