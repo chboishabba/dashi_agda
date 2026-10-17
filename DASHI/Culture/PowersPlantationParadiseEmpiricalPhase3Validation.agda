@@ -2,6 +2,7 @@ module DASHI.Culture.PowersPlantationParadiseEmpiricalPhase3Validation where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Culture.PowersPlantationParadiseMethodologySourceAtlasExact as Methodology
 import DASHI.Culture.PowersPlantationParadiseArchiveModalityExact as ArchiveModality
 import DASHI.Culture.PowersPlantationParadiseInvestigationParetoExact as Routing
@@ -45,7 +46,7 @@ _source-acquisition-promotion-boundary-paid : Promotion.PowersSourceAcquisitionP
 _source-acquisition-promotion-boundary-paid = Promotion.canonicalPowersSourceAcquisitionPromotionBoundary
 
 _location-inspection-gap-paid :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough Promotion.locationReading Promotion.inspectionReading → ⊥
+  INF.FactorsThrough Promotion.locationReading Promotion.inspectionReading → ⊥
 _location-inspection-gap-paid = Promotion.locationCannotRecoverInspection
 
 _frontier-genealogy-boundary-paid : Genealogy.PowersFrontierGenealogyBoundary
