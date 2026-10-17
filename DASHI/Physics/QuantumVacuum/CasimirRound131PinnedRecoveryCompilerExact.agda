@@ -14,18 +14,6 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact as P
 
 ------------------------------------------------------------------------
 -- R457 SELECTED-TARGET IDENTITY -> ROUND131 RECOVERY ATTACHMENT
---
--- QFTRecoveryReceipt already owns, on every selected coarse-grained regime,
---
---   recoverQFT(joint) = qftTarget(coarseGrain candidate regime).
---
--- Therefore the primitive same-object input is not a second recovery theorem.
--- It is the source/QFT identification
---
---   Y_R457 = qftTarget(coarseGrain candidate regime).
---
--- The Round131 `Y = recoverQFT(joint)` attachment then compiles by equality
--- transport through the existing recovery receipt.
 ------------------------------------------------------------------------
 
 record R457LiteralSelectedQFTTargetIdentity
@@ -73,22 +61,6 @@ record R457LiteralPinnedConstructionIdentity
 
 open R457LiteralPinnedConstructionIdentity public
 
-selectedTargetAndPinnedIdentityBuildPinnedAttachment :
-  ∀ {U : Weld.UnifiedCandidate}
-    {Y : Top.LiteralYangMillsConstruction
-      (Weld.qftCarriers U) (Weld.qftSemantics U)}
-    {pinned : Pinned.PinnedYangMillsConstruction
-      {C = Weld.qftCarriers U} (Weld.qftSemantics U)} →
-  R457LiteralSelectedQFTTargetIdentity U Y →
-  R457LiteralPinnedConstructionIdentity U Y pinned →
-  Weld.QFTRecoveryReceipt U →
-  PinnedAttachment.PinnedYangMillsRecoveredQFTAttachment U pinned
-selectedTargetAndPinnedIdentityBuildPinnedAttachment
-    selectedTarget identity qftRecovery =
-  round131AndPinnedIdentityBuildPinnedAttachment
-    (selectedTargetIdentityBuildsRound131Attachment selectedTarget qftRecovery)
-    identity
-
 round131AndPinnedIdentityBuildPinnedAttachment :
   ∀ {U : Weld.UnifiedCandidate}
     {Y : Top.LiteralYangMillsConstruction
@@ -106,6 +78,22 @@ round131AndPinnedIdentityBuildPinnedAttachment attachment identity = record
           (Round131.literalConstructionIsRecoveredQFT
             attachment candidate regime qftAtRegime)
   }
+
+selectedTargetAndPinnedIdentityBuildPinnedAttachment :
+  ∀ {U : Weld.UnifiedCandidate}
+    {Y : Top.LiteralYangMillsConstruction
+      (Weld.qftCarriers U) (Weld.qftSemantics U)}
+    {pinned : Pinned.PinnedYangMillsConstruction
+      {C = Weld.qftCarriers U} (Weld.qftSemantics U)} →
+  R457LiteralSelectedQFTTargetIdentity U Y →
+  R457LiteralPinnedConstructionIdentity U Y pinned →
+  Weld.QFTRecoveryReceipt U →
+  PinnedAttachment.PinnedYangMillsRecoveredQFTAttachment U pinned
+selectedTargetAndPinnedIdentityBuildPinnedAttachment
+    selectedTarget identity qftRecovery =
+  round131AndPinnedIdentityBuildPinnedAttachment
+    (selectedTargetIdentityBuildsRound131Attachment selectedTarget qftRecovery)
+    identity
 
 round131AndPinnedIdentityBuildSourceNativeSelection :
   ∀ {U : Weld.UnifiedCandidate}
@@ -208,4 +196,4 @@ canonicalRound131PinnedRecoveryBoundary =
 
 casimirRound131PinnedRecoveryReading : String
 casimirRound131PinnedRecoveryReading =
-  "QFTRecoveryReceipt already transports recoverQFT to qftTarget on every selected coarse-grained regime. Therefore Round131RecoveredQFTAttachment is no longer primitive: an R457LiteralSelectedQFTTargetIdentity Y=qftTarget plus the existing recovery receipt compiles it. Together with Y=asLiteralYangMillsConstruction pinned, the same inputs compile the pinned recovered-QFT attachment and former PinnedSourceNativeRecoverySelection. The first physical seam is now source identity of the literal R457 construction with the selected qftTarget, followed by the literal R457=pinned identity."
+  "QFTRecoveryReceipt already transports recoverQFT to qftTarget on every selected coarse-grained regime. Therefore Round131RecoveredQFTAttachment is no longer primitive: an R457LiteralSelectedQFTTargetIdentity Y=qftTarget plus the existing recovery receipt compiles it. On the generic compatibility route, adding Y=asLiteralYangMillsConstruction pinned compiles the pinned recovered-QFT attachment and former PinnedSourceNativeRecoverySelection. On the canonical pinned R457 route that extra Y=pinned equality is retired by indexing R457 directly by asLiteralYangMillsConstruction pinned."
