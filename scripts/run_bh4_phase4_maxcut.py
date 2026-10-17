@@ -66,7 +66,7 @@ def main() -> int:
         network_exit["sabio"] = run([py, "scripts/acquire_bh4_sabio_kinetics.py", "--panel", str(args.panel), "-o", str(sabio)], allow_partial=True)
         network_exit["sifts"] = run([py, "scripts/acquire_bh4_pdbe_sifts.py", "--panel", str(args.panel), "--max-pdb-per-protein", str(args.max_pdb_per_protein), "-o", str(sifts)], allow_partial=True)
 
-    run([py, "scripts/solve_bh4_flux_intervals.py", "--matrix", str(matrix), "--parameters", str(solver_parameters), "-o", str(interval)], allow_partial=True)
+    interval_exit = run([py, "scripts/solve_bh4_flux_intervals.py", "--matrix", str(matrix), "--parameters", str(solver_parameters), "-o", str(interval)], allow_partial=True)
     run([py, "scripts/check_kitzerow_bh4_priority_all.py"])
 
     matrix_payload = json.loads(matrix.read_text(encoding="utf-8"))
@@ -82,6 +82,7 @@ def main() -> int:
         },
         "parameters": parameter_payload.get("summary", {"total_coordinates": len(parameter_payload.get("parameters", []))}),
         "interval_status": interval_payload.get("status"),
+        "interval_exit_code": interval_exit,
         "missing_reaction_bounds": len(interval_payload.get("missing_reaction_bounds", [])),
         "missing_exchange_bounds": len(interval_payload.get("missing_exchange_bounds", [])),
         "network_evidence_exit_codes": network_exit,
@@ -97,7 +98,7 @@ def main() -> int:
     summary_path = out / "bh4-phase4-maxcut-summary.json"
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(summary, indent=2, sort_keys=True))
-    return 0
+    return 3 if interval_payload.get("status") == "infeasible" else 0
 
 
 if __name__ == "__main__":
