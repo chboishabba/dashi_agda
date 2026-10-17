@@ -14,14 +14,30 @@ q1StillSourcePhysics :
   Roadmap.q1PathSemanticsStillOpen ≡ true
 q1StillSourcePhysics = refl
 
-q2StillSourcePhysics :
-  Roadmap.q2SameStressAnomalyStillOpen ≡ true
-q2StillSourcePhysics = refl
+q2OpaqueEquationRetired :
+  Roadmap.q2OpaqueAnomalyEquationStillRequired ≡ false
+q2OpaqueEquationRetired = refl
 
-haarMeaningStillSourceFacing :
-  Roadmap.literalPhysicalHaarSemanticsStillOpen ≡ true
-haarMeaningStillSourceFacing = refl
+q2ReducedToSameObjectTransports :
+  Roadmap.q2ReducedToTwoRenormalizedSameObjectTransports ≡ true
+q2ReducedToSameObjectTransports = refl
+
+citationAloneDoesNotPaySelectedTransport :
+  Roadmap.q2CitationAlonePaysSelectedCMP119Transport ≡ false
+citationAloneDoesNotPaySelectedTransport = refl
+
+independentHaarQuadratureBridgeRetired :
+  Roadmap.independentPhysicalHaarQuadratureBridgeStillRequired ≡ false
+independentHaarQuadratureBridgeRetired = refl
+
+haarReducedToSingleSameObjectEquality :
+  Roadmap.physicalHaarReducedToFiniteMeasureSameObjectEquality ≡ true
+haarReducedToSingleSameObjectEquality = refl
 
 adapterDebtRemainsZero :
   Roadmap.newAdapterDebtAfterQ3Identification ≡ false
 adapterDebtRemainsZero = refl
+
+attributionBoundaryLocked :
+  Roadmap.attributionBoundaryPreserved ≡ true
+attributionBoundaryLocked = refl
