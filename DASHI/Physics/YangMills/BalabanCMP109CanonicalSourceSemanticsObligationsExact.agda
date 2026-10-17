@@ -10,7 +10,8 @@ import DASHI.Physics.YangMills.BalabanCMP109CanonicalResidualInstantiationExact 
 -- Canonical non-Round owner for the residual CMP109 source-semantics package.
 --
 -- Historical scheduler labels are provenance only.  This owner now names the
--- three residuals by their actual non-Round theorem carriers:
+-- three residuals by their actual non-Round theorem carriers, all attached to
+-- the SAME selected source value:
 --
 --   * generated-history response -> Ward/quartic producer reconstruction;
 --   * beta difference -> selected shooting-map attachment, with decomposition
@@ -21,19 +22,21 @@ import DASHI.Physics.YangMills.BalabanCMP109CanonicalResidualInstantiationExact 
 ------------------------------------------------------------------------
 
 record CMP109CanonicalSourceSemanticsObligations
+    {SelectedSource : Set}
+    (selectedSource : SelectedSource)
     (TubePoint : Set)
     (cutoff : Nat)
     (Component Background Tangent Scalar : Set) : Set₁ where
   field
     generatedHistoryResponseProducer :
-      Inst.CMP109GeneratedHistoryResponseResidual cutoff
+      Inst.CMP109GeneratedHistoryResponseResidual selectedSource cutoff
 
     betaDifferenceDecomposition :
-      Inst.SelectedCMP109BetaDifferenceAttachment TubePoint
+      Inst.SelectedCMP109BetaDifferenceAttachment selectedSource TubePoint
 
     physicalCompositeD1ChainRule :
       Inst.PhysicalCompositeD1TransportResidual
-        Component Background Tangent Scalar
+        selectedSource Component Background Tangent Scalar
 
 ------------------------------------------------------------------------
 
