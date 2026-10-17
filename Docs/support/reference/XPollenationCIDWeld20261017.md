@@ -10,8 +10,13 @@ New normalized tables:
 xpollenation_nodes
 xpollenation_neighbourhoods
 xpollenation_edges
+xpollenation_neighbourhood_edges
 xpollenation_artifacts
 ```
+
+`xpollenation_edges` is global and immutable by edge ID. `xpollenation_neighbourhood_edges` is the current many-to-many membership projection, so one exact `UniProt -> QID` or other typed edge may lawfully appear in multiple Rhea neighbourhoods without being duplicated or rebound to one focus object.
+
+`xpollenation_artifacts` retains immutable artifact-resolution history keyed by `logicalArtifactRef`; querying a neighbourhood returns the latest persisted artifact while older revisions remain inspectable.
 
 The store accepts `dashi.xpollenation-neighbourhood/v1` and optionally binds:
 
@@ -62,6 +67,8 @@ dashi-repo-xpollenation for-da51 0xDA51...
 ```
 
 The xPollenation CLI opens the same repository-intelligence SQLite file used by `dashi-repo`. A future local mechanical edit may dispatch this as `dashi-repo xpollenation`; no separate persistence product is introduced here.
+
+Re-ingesting a neighbourhood replaces only its current edge-membership projection. Global typed edges and historical content-addressed artifact receipts remain separately retained.
 
 ## Authority firewall
 
