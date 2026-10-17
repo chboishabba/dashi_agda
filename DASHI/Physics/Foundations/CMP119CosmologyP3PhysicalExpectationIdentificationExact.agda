@@ -4,25 +4,15 @@ module DASHI.Physics.Foundations.CMP119CosmologyP3PhysicalExpectationIdentificat
 ------------------------------------------------------------------------
 -- P3 PHYSICAL IDENTIFICATION: ONE CMP119 F^2 OBSERVABLE, TWO APPROXIMATIONS
 --
--- Do not postulate a new finite-sequence bridge.  The factorized CMP119 lane
--- already has the exact relation needed:
+-- The factorized CMP119 lane already owns the exact estimate
 --
---   sourceExpectation O
---       versus
---   approximateExpectation_n O,
+--   |sourceExpectation O - approximateExpectation_n O|
+--      <= expectationErrorBudget_n(O),
 --
--- with an explicit expectationErrorBudget_n -> 0.
---
--- The physical identification is therefore only that the two existing Q3
--- consumers are looking at those two presentations of the SAME selected CMP119
--- observable/state carrier:
---
---   physical-Haar finite readout = sourceExpectation O
---   Local-C finite readout       = approximateExpectation_n O.
---
--- Once those same-object attachments are supplied, the existing factorized
--- density theorem constructs the asymptotic Q3 bridge automatically.  No third
--- bridge/error source is physical data.
+-- and proves that budget vanishes.  Therefore Q3 does not need a separately
+-- postulated asymptotic bridge.  It only needs the two existing finite readouts
+-- to be identified with the source/approximate expectations of the SAME
+-- selected F^2 observable on the SAME finite state carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -30,7 +20,8 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Foundations.RealAnalysisAxioms using
+  (ℝ; _-ℝ_; absℝ; _≤ℝ_)
 
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteToLocalCAnomalyLimitTransportExact as LocalLimit
 import DASHI.Physics.Foundations.CMP119AntigravityRealHaarExpectationRepresentationExact as HaarLimit
@@ -47,37 +38,21 @@ record FactorizedPhysicalExpectationIdentification
     {approximation :
       Approx.CMP119FactorizedDensityApproximation
         SlowField Sequence Component Step}
-    {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
-    (convergence :
-      Conv.CMP119FactorizedDensityConvergence
-        approximation sequenceLimit)
-    (vanishing :
-      Vanishing.RealVanishingFiniteAlgebra sequenceLimit)
     (states : List SlowField)
     (scale : Nat)
     (observable : SlowField → ℝ)
-    {ContinuumFamily CurvaturePolynomial LocalOperator Position
-     OPECoefficient StressTensor Hamiltonian : Set}
-    {localC : _}
-    {embedding : _}
-    {convention : _}
-    {readout : _}
-    (localTransport :
-      LocalLimit.FiniteCMP119ToLocalCAnomalyLimitTransport
-        sequenceLimit readout)
-    (physicalHaar :
-      HaarLimit.RealHaarExpectationRepresentation sequenceLimit) : Set₁ where
+    (localFinite haarFinite : Nat → ℝ) : Set₁ where
   field
     localFiniteF2IsFactorizedApproximation :
       ∀ refinement →
-      LocalLimit.finiteF2Numerator localTransport refinement
+      localFinite refinement
       ≡
       Expect.approximateExpectation
         approximation states refinement scale observable
 
     haarFiniteF2IsFactorizedSourceExpectation :
       ∀ refinement →
-      HaarLimit.finiteCMP119Expectation physicalHaar refinement
+      haarFinite refinement
       ≡
       Expect.sourceExpectation approximation states scale observable
 
@@ -104,8 +79,10 @@ compileFactorizedPhysicalIdentificationToQ3 :
         sequenceLimit readout}
     {physicalHaar : HaarLimit.RealHaarExpectationRepresentation sequenceLimit} →
   FactorizedPhysicalExpectationIdentification
-    convergence vanishing states scale observable
-    localTransport physicalHaar →
+    {approximation = approximation}
+    states scale observable
+    (LocalLimit.finiteF2Numerator localTransport)
+    (HaarLimit.finiteCMP119Expectation physicalHaar) →
   P3.AsymptoticCommonFiniteF2 localTransport physicalHaar
 compileFactorizedPhysicalIdentificationToQ3
     {approximation = approximation}
@@ -121,8 +98,7 @@ compileFactorizedPhysicalIdentificationToQ3
       λ refinement →
         Expect.expectationErrorBudget
           approximation states refinement scale observable
-  ; P3.AsymptoticCommonFiniteF2.finiteF2BridgeBound =
-      λ refinement → bridgeBound refinement
+  ; P3.AsymptoticCommonFiniteF2.finiteF2BridgeBound = bridgeBound
   ; P3.AsymptoticCommonFiniteF2.bridgeErrorVanishes =
       Expect.finiteExpectationBudgetVanishes
         convergence vanishing states scale observable
@@ -130,7 +106,12 @@ compileFactorizedPhysicalIdentificationToQ3
   where
   bridgeBound :
     ∀ refinement →
-    _
+    absℝ
+      (HaarLimit.finiteCMP119Expectation physicalHaar refinement
+        -ℝ LocalLimit.finiteF2Numerator localTransport refinement)
+    ≤ℝ
+    Expect.expectationErrorBudget
+      approximation states refinement scale observable
   bridgeBound refinement
     rewrite haarFiniteF2IsFactorizedSourceExpectation identification refinement
           | localFiniteF2IsFactorizedApproximation identification refinement =
@@ -150,8 +131,8 @@ independentAsymptoticQ3BridgeStillRequired = false
 sameFactorizedObservableCarriesBothFiniteLanes : Bool
 sameFactorizedObservableCarriesBothFiniteLanes = true
 
--- What remains is not a free epsilon_n.  It is the physical same-object
--- attachment saying which literal Local-C and Haar finite readouts are the
--- factorized approximate/source expectations of this one F^2 observable.
+-- The remaining source statement is now only the same-object attachment of the
+-- literal finite readouts to these already-defined source/approximate
+-- expectations.  The bridge estimate itself is no longer a physical input.
 remainingQ3DebtIsExpectationSameObjectAttachment : Bool
 remainingQ3DebtIsExpectationSameObjectAttachment = true
