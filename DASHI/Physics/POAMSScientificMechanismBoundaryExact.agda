@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ScientificMechanismEvidenceBidiExact as S
+import DASHI.Physics.Foundations.TorqueTrialectic369Exact as Torque369
 
 ------------------------------------------------------------------------
 -- POAMS SCIENTIFIC CONTENT / BOUNDARY
@@ -22,6 +23,35 @@ angularMomentumConservation = S.scientific-mechanism-receipt
   S.established
   "standard classical mechanics background used as a comparison boundary"
   "This background law does not by itself validate or refute a particular claimed anomalous-force apparatus; the system boundary and external couplings must be specified."
+
+------------------------------------------------------------------------
+-- Shared torque geometry for the established angular-momentum background law.
+--
+-- This does not promote POAMS.  It only says that whenever an external torque
+-- value has an explicit local output/lever/force geometry, the background-law
+-- comparison can carry the same torque object used by textile torsion and
+-- resonant-flight power.
+------------------------------------------------------------------------
+
+record AngularMomentumTorque369Witness (TorqueValue : Set) : Set₁ where
+  constructor angular-momentum-torque-369-witness
+  field
+    orientedTorque : Torque369.OrientedTorque TorqueValue
+    backgroundLaw : S.ScientificMechanismReceipt
+    backgroundLawIsCanonical : backgroundLaw ≡ angularMomentumConservation
+
+open AngularMomentumTorque369Witness public
+
+attachAngularMomentumTorque :
+  ∀ {TorqueValue : Set} →
+  Torque369.BracketVoxel →
+  TorqueValue →
+  AngularMomentumTorque369Witness TorqueValue
+attachAngularMomentumTorque voxel value =
+  angular-momentum-torque-369-witness
+    (Torque369.oriented-torque voxel value)
+    angularMomentumConservation
+    refl
 
 poamsReformulation : S.ScientificMechanismReceipt
 poamsReformulation = S.scientific-mechanism-receipt

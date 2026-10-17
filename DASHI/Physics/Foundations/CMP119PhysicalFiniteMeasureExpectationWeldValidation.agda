@@ -1,0 +1,17 @@
+module DASHI.Physics.Foundations.CMP119PhysicalFiniteMeasureExpectationWeldValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.CMP119PhysicalFiniteMeasureExpectationWeldExact as W
+
+independentQuadratureBridgeRetired :
+  W.independentQuadratureBridgeRequired ≡ false
+independentQuadratureBridgeRetired = refl
+
+singleSameObjectExpectationEqualityRemains :
+  W.remainingHaarDebtIsFiniteMeasureSameObjectEquality ≡ true
+singleSameObjectExpectationEqualityRemains = refl
+
+weightedFactorizedErrorPaysRepresentation :
+  W.factorizedExpectationErrorPaysPhysicalRepresentation ≡ true
+weightedFactorizedErrorPaysRepresentation = refl
