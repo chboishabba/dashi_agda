@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 BASE = "https://www.metabolomicsworkbench.org/rest"
-UA = "DASHI-BH4-exchange-context/1.1"
+UA = "DASHI-BH4-exchange-context/1.2"
 
 
 def fetch(url: str) -> tuple[object, str]:
@@ -41,6 +41,15 @@ def listish(payload: object) -> list[dict]:
     return []
 
 
+def canonical_refmet_name(matches: list[dict], fallback: str) -> str:
+    for row in matches:
+        for key in ("refmet_name","name","REFMET_NAME","RefMet_name"):
+            value=row.get(key)
+            if value:
+                return str(value)
+    return fallback
+
+
 def acquire(matrix: dict, rhea: dict) -> dict:
     meta=participant_metadata(rhea); rows=[]; errors=[]
     for species in matrix.get("species_index",[]):
@@ -52,13 +61,26 @@ def acquire(matrix: dict, rhea: dict) -> dict:
             try:
                 payload,digest=fetch(ref_url); rec["refmet_request"]=ref_url; rec["refmet_raw_sha256"]=digest; rec["refmet_matches"]=listish(payload)
             except (urllib.error.URLError,urllib.error.HTTPError,TimeoutError,json.JSONDecodeError) as exc:
-                errors.append({"species":species,"stage":"refmet","error":str(exc)})
+                errors.append({"species":species,"stage":"refmet-name","error":str(exc)})
+
+            # Rhea names are not guaranteed to be canonical RefMet names. When
+            # exact name lookup yields nothing, retain the source name and use
+            # the documented synonym-match endpoint as a separate provenance
+            # step rather than silently substituting identity.
+            if not rec["refmet_matches"]:
+                match_url=f"{BASE}/refmet/match/{encoded}"
+                try:
+                    payload,digest=fetch(match_url); rec["refmet_match_request"]=match_url; rec["refmet_match_raw_sha256"]=digest; rec["refmet_matches"]=listish(payload)
+                except (urllib.error.URLError,urllib.error.HTTPError,TimeoutError,json.JSONDecodeError) as exc:
+                    errors.append({"species":species,"stage":"refmet-match","error":str(exc)})
+
+            canonical=canonical_refmet_name(rec["refmet_matches"], str(name))
+            rec["canonical_refmet_name"] = canonical
+            canonical_encoded=urllib.parse.quote(canonical,safe="")
 
             # Documented metstat slot order:
             # analysis; ion; chromatography; species; sample; disease; KEGG; RefMet.
-            # Empty slots are intentional. Human-study occurrence is navigation
-            # context only and is not interpreted as concentration or transport.
-            study_url=f"{BASE}/metstat/;;;Human;;;;{encoded}"
+            study_url=f"{BASE}/metstat/;;;Human;;;;{canonical_encoded}"
             try:
                 payload,digest=fetch(study_url); rec["study_request"]=study_url; rec["study_raw_sha256"]=digest; rec["human_studies"]=listish(payload)
             except (urllib.error.URLError,urllib.error.HTTPError,TimeoutError,json.JSONDecodeError) as exc:
@@ -66,7 +88,7 @@ def acquire(matrix: dict, rhea: dict) -> dict:
         rows.append(rec)
     return {
         "schema":"dashi.bh4-exchange-context.v1",
-        "source":"Metabolomics Workbench REST / RefMet + metstat",
+        "source":"Metabolomics Workbench REST / RefMet name+match + human metstat",
         "acquired_at_utc":datetime.now(timezone.utc).isoformat(),
         "species_requested":len(rows),
         "species_with_refmet_match":sum(bool(r["refmet_matches"]) for r in rows),
