@@ -5,12 +5,14 @@ open import DASHI.Core.Prelude
 import DASHI.Core.GenericReceipt as Receipt
 
 ------------------------------------------------------------------------
--- Executed SABIO-RK export-API acquisition receipt, 2026-10-17.
+-- Executed SABIO-RK export-API acquisition + schema-aware parameter recount,
+-- 2026-10-17.
 --
 -- Live schema-v3 run:
 --   16 proteins requested/completed
 --   11 proteins with >=1 export row
 --   190 kinetic-law entries
+--   932 explicit parameter objects under the current export schema
 --   0 acquisition errors
 --
 -- Per-protein entry counts:
@@ -18,10 +20,9 @@ import DASHI.Core.GenericReceipt as Receipt
 --   QDPR 4; TH 2; AGMO 2; TSC2 1.
 --   GCHFR, PCBD1, NOS1, NOS2, NOS3: zero rows in this exact export query.
 --
--- The run's kinetic_parameter_count = 0 is NOT promoted as a scientific zero:
--- the parser used pre-migration key spellings and missed SABIO export fields such
--- as n_start_value/n_end_value/end_value. Parameter normalization is therefore
--- a separate rerun/adjudication obligation.
+-- The earlier kinetic_parameter_count = 0 was a parser-schema miss. The
+-- schema-aware rerun paid 932 parameter objects; that count is acquisition
+-- metadata, not a claim that all 932 are scientifically usable flux bounds.
 ------------------------------------------------------------------------
 
 record ExecutedSABIOReceipt : Set where
@@ -31,6 +32,7 @@ record ExecutedSABIOReceipt : Set where
     proteinsCompleted : Nat
     proteinsWithEntries : Nat
     kineticEntryCount : Nat
+    kineticParameterCount : Nat
     acquisitionErrorCount : Nat
     proteinsWithEntryCounts : List String
     proteinsWithoutEntries : List String
@@ -46,6 +48,7 @@ canonicalExecutedSABIOReceipt =
     16
     11
     190
+    932
     0
     ( "TPH2:Q8IWU9:75"
     ∷ "PAH:P00439:44"
@@ -66,7 +69,7 @@ canonicalExecutedSABIOReceipt =
     ∷ "NOS3:P29474"
     ∷ [] )
     true
-    true
+    false
 
 executedSABIOProteinsRequested : Nat
 executedSABIOProteinsRequested = proteinsRequested canonicalExecutedSABIOReceipt
@@ -80,11 +83,17 @@ executedSABIOProteinsWithEntries = proteinsWithEntries canonicalExecutedSABIORec
 executedSABIOKineticEntryCount : Nat
 executedSABIOKineticEntryCount = kineticEntryCount canonicalExecutedSABIOReceipt
 
+executedSABIOKineticParameterCount : Nat
+executedSABIOKineticParameterCount = kineticParameterCount canonicalExecutedSABIOReceipt
+
 executedSABIOAcquisitionErrorCount : Nat
 executedSABIOAcquisitionErrorCount = acquisitionErrorCount canonicalExecutedSABIOReceipt
 
 executedSABIOEntriesExact : executedSABIOKineticEntryCount ≡ 190
 executedSABIOEntriesExact = refl
+
+executedSABIOParametersExact : executedSABIOKineticParameterCount ≡ 932
+executedSABIOParametersExact = refl
 
 executedSABIOCoverageExact : executedSABIOProteinsWithEntries ≡ 11
 executedSABIOCoverageExact = refl
@@ -94,6 +103,8 @@ record ExecutedSABIOBoundary : Set where
   field
     exportRowCreatesInVivoFluxBound : Bool
     exportRowCreatesInVivoFluxBoundIsFalse : exportRowCreatesInVivoFluxBound ≡ false
+    parameterObjectCreatesInVivoFluxBound : Bool
+    parameterObjectCreatesInVivoFluxBoundIsFalse : parameterObjectCreatesInVivoFluxBound ≡ false
     exportRowCreatesSameCompartmentState : Bool
     exportRowCreatesSameCompartmentStateIsFalse : exportRowCreatesSameCompartmentState ≡ false
     zeroPreRepairParameterCountMeansNoKineticParameters : Bool
@@ -108,14 +119,14 @@ open ExecutedSABIOBoundary public
 
 canonicalExecutedSABIOBoundary : ExecutedSABIOBoundary
 canonicalExecutedSABIOBoundary =
-  executed-sabio-boundary false refl false refl false refl false refl false refl
+  executed-sabio-boundary false refl false refl false refl false refl false refl false refl
 
 canonicalExecutedSABIOGenericReceipt : Receipt.GenericReceipt
 canonicalExecutedSABIOGenericReceipt =
   Receipt.mkNonPromotingReceipt
     "executed BH4 SABIO-RK export receipt"
     "DASHI.Biology.BH4ExecutedSABIOReceiptExact"
-    "16 exact panel proteins -> SABIO export API -> 190 kinetic-law rows across 11 proteins with zero acquisition errors"
-    "closes SABIO transport/acquisition and moves the live frontier to schema-aware parameter normalization, assay/condition adjudication and justified reaction-flux interval translation"
-    "export rows are not in-vivo flux bounds or same-compartment state; the historical zero parameter count was a parser-schema miss, not evidence of absent kinetic parameters; zero rows for an exact query do not prove the protein has no kinetics; SABIO coverage does not establish disease mechanism"
+    "16 exact panel proteins -> SABIO export API -> 190 kinetic-law rows across 11 proteins -> 932 schema-aware parameter objects with zero acquisition errors"
+    "closes SABIO transport/acquisition and parameter-object extraction; moves the live frontier to assay/condition adjudication and justified reaction-flux interval translation"
+    "export rows and parameter objects are not in-vivo flux bounds or same-compartment state; zero rows for an exact UniProt query do not prove a protein has no kinetics; SABIO coverage does not establish disease mechanism"
     "python3 scripts/run_bh4_phase4_maxcut.py"
