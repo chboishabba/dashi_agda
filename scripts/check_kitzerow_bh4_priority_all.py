@@ -9,6 +9,7 @@ for name in [
     "check_bh4_phase4_quantitative.py",
     "check_bh4_flux_candidate_ranking.py",
     "check_bh4_flux_payment_preparation.py",
+    "check_bh4_state_payment_acquisition.py",
 ]:
     runpy.run_path(str(root / "scripts" / name), run_name="__main__")
-print("Kitzerow BH4 aggregate evidence + identity + chemistry + executed-panel + quantitative + flux-ranking + payment-preparation Phase-4 regression: ok")
+print("Kitzerow BH4 aggregate evidence + identity + chemistry + executed-panel + quantitative + flux-ranking + payment-preparation + state-acquisition Phase-4 regression: ok")
