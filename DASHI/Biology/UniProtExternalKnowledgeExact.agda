@@ -11,10 +11,10 @@ import DASHI.Biology.ExternalBiologyConsumerAdmissionExact as Admission
 ------------------------------------------------------------------------
 -- UNIPROT / QDPR CONCRETE WITNESS
 --
--- The snapshot identifies the current release/API surface but intentionally
--- keeps exactBinaryPinned = false until the acquisition script emits a byte
--- digest for a concrete REST response.  This prevents live-page inspection
--- from masquerading as an immutable source artifact.
+-- The P09417 REST response was acquired against UniProt release 2026_03 and
+-- byte-pinned by scripts/acquire_uniprot_bio_certificate.py.  The immutable
+-- response digest is retained below; exact acquisition still does not promote
+-- database curation into biological truth or downstream mechanism.
 ------------------------------------------------------------------------
 
 uniProtServiceSource : Source.AttributedSource
@@ -35,10 +35,10 @@ uniProt2026_03 =
     External.uniProtKB
     "2026_03"
     "2026-10-17"
-    "live API page inspected; exact response digest emitted by scripts/acquire_uniprot_bio_certificate.py"
-    "UniProt REST OpenAPI / UniProtKB JSON"
+    "sha256:7ef73e73b15eb967db526cc5ba2970965992ff348e758b57057e1bc61def3936"
+    "UniProt REST OpenAPI / UniProtKB JSON; X-UniProt-Release 2026_03; release date 02-September-2026"
     uniProtServiceSource
-    false
+    true
 
 qdprProtein : External.ProteinRef
 qdprProtein =
@@ -58,7 +58,7 @@ qdprSequence =
     "MD5"
     "01EAB47E5C55913647DB7DBAD571D960"
     true
-    "UniProtKB P09417 canonical isoform P09417-1; last sequence update 2006-11-28 v2"
+    "UniProtKB P09417 canonical isoform P09417-1; sequence version 2; CRC64 0852F9F0CA38AB1C"
 
 qdprCatalysisEvidence : External.EvidenceBundle
 qdprCatalysisEvidence =
@@ -157,7 +157,7 @@ canonicalUniProtExternalKnowledgeReceipt =
   Receipt.mkNonPromotingReceipt
     "UniProt external knowledge witness"
     "DASHI.Biology.UniProtExternalKnowledgeExact"
-    "P09417/QDPR sequence, BH4-regeneration claim and Rhea/PDB/AlphaFold mappings"
-    "instantiates the reusable external-biology substrate on one reviewed human BH4-pathway protein"
-    "the live snapshot is not byte-pinned until acquisition; UniProt annotation does not prove a whole disease model or clinical action; cross-references do not collapse entity identity"
+    "P09417/QDPR byte-pinned sequence, BH4-regeneration claim and Rhea/PDB/AlphaFold mappings"
+    "instantiates the reusable external-biology substrate on one reviewed human BH4-pathway protein with an exact 2026_03 REST-response SHA-256 receipt"
+    "exact acquisition does not prove a whole disease model or clinical action; cross-references do not collapse entity identity"
     "python3 scripts/acquire_uniprot_bio_certificate.py P09417 && agda -i . DASHI/Biology/UniProtExternalKnowledgeExact.agda"
