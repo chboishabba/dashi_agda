@@ -5,6 +5,7 @@ The default path performs live public acquisition where appropriate:
   exact UniProt panel -> Rhea/ChEBI -> finite matrix S
   -> 56-coordinate quantitative template (15 core + 12 v + 29 e)
   -> SABIO-RK export-API kinetic candidates
+  -> SABIO candidate-to-Rhea adjudication worklist
   -> PDBe/SIFTS structural mappings
   -> interval steady-state feasibility
   -> aggregate static regressions
@@ -39,7 +40,7 @@ def load_if_exists(path: Path) -> dict | None:
         return None
 
 
-def evidence_summary(sabio_payload: dict | None, sifts_payload: dict | None) -> dict:
+def evidence_summary(sabio_payload: dict | None, sabio_adjudication: dict | None, sifts_payload: dict | None) -> dict:
     sabio_summary = None
     if sabio_payload is not None:
         sabio_summary = {
@@ -53,12 +54,24 @@ def evidence_summary(sabio_payload: dict | None, sifts_payload: dict | None) -> 
             "error_count": len(sabio_payload.get("errors", [])),
         }
 
+    adjudication_summary = None
+    if sabio_adjudication is not None:
+        adjudication_summary = {
+            "schema": sabio_adjudication.get("schema"),
+            "parameter_candidate_count": sabio_adjudication.get("parameter_candidate_count"),
+            "parameter_candidates_mapped_to_finite_matrix": sabio_adjudication.get("parameter_candidates_mapped_to_finite_matrix"),
+            "proteins_with_parameter_candidates": sabio_adjudication.get("proteins_with_parameter_candidates"),
+            "finite_reaction_candidate_coverage": sabio_adjudication.get("finite_reaction_candidate_coverage"),
+            "finite_reactions_with_parameter_candidates": sabio_adjudication.get("finite_reactions_with_parameter_candidates"),
+            "parameter_kind_counts": sabio_adjudication.get("parameter_kind_counts"),
+        }
+
     sifts_summary = None
     if sifts_payload is not None:
         sifts_summary = dict(sifts_payload.get("summary") or {})
         sifts_summary["schema"] = sifts_payload.get("schema")
 
-    return {"sabio": sabio_summary, "sifts": sifts_summary}
+    return {"sabio": sabio_summary, "sabio_adjudication": adjudication_summary, "sifts": sifts_summary}
 
 
 def main() -> int:
@@ -80,6 +93,7 @@ def main() -> int:
     parameter_template = out / "bh4-parameter-template-v2.json"
     normalized_parameters = out / "bh4-parameter-normalized.json"
     sabio = out / "bh4-sabio-kinetics.json"
+    sabio_adjudication = out / "bh4-sabio-adjudication.json"
     sifts = out / "bh4-pdbe-sifts.json"
     interval = out / "bh4-interval-flux-feasibility.json"
     summary_path = out / "bh4-phase4-maxcut-summary.json"
@@ -96,6 +110,15 @@ def main() -> int:
     network_exit = {}
     if not args.skip_network_evidence:
         network_exit["sabio"] = run([py, "scripts/acquire_bh4_sabio_kinetics.py", "--panel", str(args.panel), "-o", str(sabio)], allow_partial=True)
+        if network_exit["sabio"] == 0 and sabio.exists():
+            network_exit["sabio_adjudication"] = run([
+                py,
+                "scripts/build_bh4_sabio_adjudication.py",
+                "--sabio", str(sabio),
+                "--rhea", str(rhea),
+                "--matrix", str(matrix),
+                "-o", str(sabio_adjudication),
+            ], allow_partial=True)
         network_exit["sifts"] = run([py, "scripts/acquire_bh4_pdbe_sifts.py", "--panel", str(args.panel), "--max-pdb-per-protein", str(args.max_pdb_per_protein), "-o", str(sifts)], allow_partial=True)
 
     interval_exit = run([py, "scripts/solve_bh4_flux_intervals.py", "--matrix", str(matrix), "--parameters", str(solver_parameters), "-o", str(interval)], allow_partial=True)
@@ -105,10 +128,11 @@ def main() -> int:
     parameter_payload = json.loads(solver_parameters.read_text(encoding="utf-8"))
     interval_payload = json.loads(interval.read_text(encoding="utf-8"))
     sabio_payload = None if args.skip_network_evidence else load_if_exists(sabio)
+    sabio_adjudication_payload = None if args.skip_network_evidence else load_if_exists(sabio_adjudication)
     sifts_payload = None if args.skip_network_evidence else load_if_exists(sifts)
 
     summary = {
-        "schema": "dashi.bh4-phase4-maxcut-run.v3",
+        "schema": "dashi.bh4-phase4-maxcut-run.v4",
         "panel": str(args.panel),
         "matrix": {
             "species": len(matrix_payload.get("species_index", [])),
@@ -121,13 +145,14 @@ def main() -> int:
         "missing_reaction_bounds": len(interval_payload.get("missing_reaction_bounds", [])),
         "missing_exchange_bounds": len(interval_payload.get("missing_exchange_bounds", [])),
         "network_evidence_exit_codes": network_exit,
-        "network_evidence": evidence_summary(sabio_payload, sifts_payload),
+        "network_evidence": evidence_summary(sabio_payload, sabio_adjudication_payload, sifts_payload),
         "artifacts": {
             "rhea": str(rhea),
             "matrix": str(matrix),
             "parameter_template": str(parameter_template),
             "parameters_used_by_solver": str(solver_parameters),
             "sabio": str(sabio) if not args.skip_network_evidence else None,
+            "sabio_adjudication": str(sabio_adjudication) if not args.skip_network_evidence else None,
             "sifts": str(sifts) if not args.skip_network_evidence else None,
             "interval": str(interval),
             "summary": str(summary_path),
