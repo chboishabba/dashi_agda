@@ -3,8 +3,9 @@ module DASHI.Biology.KitzerowBH4EvidenceEverything where
 -- Focused root for the Kitzerow/BH4 evidence, priority and mechanistic-system
 -- surfaces. External evidence, exact UniProt/Wikimedia identity, literal
 -- Rhea/ChEBI chemistry, 369/atomic refinement, runner receipts, open-metabolic
--- system state and joint flux feasibility are imported explicitly so biochemical
--- witnesses cannot be detached from provenance and promotion boundaries.
+-- system state, joint flux feasibility and the Phase-4 roadmap are imported
+-- explicitly so biochemical witnesses cannot be detached from provenance and
+-- promotion boundaries.
 
 import DASHI.Biology.KitzerowBH4EvidenceAtlasExact
 import DASHI.Biology.KitzerowPriorityGenealogyExact
@@ -19,6 +20,7 @@ import DASHI.Biology.BH4CompartmentKineticStateExact
 import DASHI.Biology.BH4NOSCouplingSameObjectExact
 import DASHI.Biology.BH4JointFluxFeasibilityExact
 import DASHI.Biology.BH4OpenMetabolicNetworkAdapterExact
+import DASHI.Biology.BH4Phase4RoadmapExact
 import DASHI.Interop.BH4Atomic369RefinementExact
 import DASHI.Biology.BH4ReactionNetworkRunnerReceipt
 import DASHI.Unified.BH4BiochemicalCrossScaleAdapter
