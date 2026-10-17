@@ -2,6 +2,7 @@ module DASHI.Reasoning.TrialecticT27PolicyHiddenNonDescentValidation where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Core.Prelude using (⊥)
 
 import DASHI.Reasoning.TrialecticT27PolicyHiddenNonDescentExact as Hidden
 
@@ -32,5 +33,5 @@ witnessThirdFaceDiffers :
   Hidden.thirdFaceConsumer Hidden.firstPolicyState
   ≡ Hidden.thirdFaceConsumer Hidden.secondPolicyState
   →
-  Hidden.⊥
+  ⊥
 witnessThirdFaceDiffers = Hidden.differentThirdFace
