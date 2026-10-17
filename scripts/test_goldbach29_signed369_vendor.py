@@ -12,6 +12,7 @@ AUDIT30 = ROOT / "DASHI" / "ComputerScience" / "Goldbach30HaltingSourceAuditExac
 HALTING = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29HaltingConsumerCompilerExact.agda"
 SOTA = ROOT / "DASHI" / "ComputerScience" / "GoldbachMachineReductionSOTAExact.agda"
 VIS = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29VisualizationConsumerExact.agda"
+REPLAY = ROOT / "scripts" / "verify_goldbach30_29_replay.py"
 AGGREGATE = ROOT / "DASHI" / "EverythingGoldbach29Signed369VendorExact.agda"
 WORKFLOW = ROOT / ".github" / "workflows" / "goldbach29-signed369-vendor.yml"
 
@@ -58,10 +59,12 @@ def test_exact_success_macro_is_consumer_preserving():
     assert "SuccessEntry" in text
     assert "aTail" in text
     assert "successEntryVerdictIsExactlyOne" in text
+    assert "successEntryRestoreRegistersAreZero" in text
     assert "firstGoldbachSuccessEntry" in text
     assert "firstGoldbachSuccessOldTerminal" in text
     assert "firstGoldbachSuccessNewTerminal" in text
     assert "arbitraryPositiveVerdictClaimed" in text
+    assert "arbitraryRestoreRegisterClaimed" in text
     assert "oldSuccessTerminal" in text
     assert "newSuccessTerminal" in text
     assert "successTerminalRegistersAgree" in text
@@ -83,6 +86,16 @@ def test_checkpoint_machine_proves_all_finite_consumer_traces_equal():
     assert "sourceConcreteFractranAttachmentPaid = false" in text
 
 
+def test_executable_replay_has_guard_and_checkpoint_regressions():
+    text = REPLAY.read_text()
+    assert "verify_macro_grid" in text
+    assert "verify_checkpoint_replay" in text
+    assert "arbitrary f>1" in text
+    assert "s>0 selects restoration" in text
+    assert "segments=200" in text
+    assert "total29 - total30 == successes" in text
+
+
 def test_external_halting_semantics_is_cross_prover_only():
     text = SEMANTICS.read_text()
     assert "goldbachProg_halts_iff" in text
@@ -100,6 +113,8 @@ def test_goldbach30_commit_claim_is_not_promoted_without_source_file():
     assert "goldbach30NarrativeHaltingClaimFound = true" in text
     assert "goldbach30FormalHaltingSourceFound = false" in text
     assert "goldbach30MainFilePresentInAuditedTree = false" in text
+    assert "goldbach30KnownMainPathHasCommitHistory = false" in text
+    assert "goldbach30KnownLoopsPathHasCommitHistory = false" in text
 
 
 def test_halting_compiler_reduces_final_leaf_to_goldbach30_attachment():
@@ -132,6 +147,7 @@ def test_reduction_receipt_records_pareto_cut():
     assert "successExecutionPenaltyPaid" in text
     assert "externalGoldbach29HaltingSemanticsSourcePaidFlag" in text
     assert "checkpointHaltingEquivalencePaidFlag" in text
+    assert "sourceConcreteFractranAttachmentPaidFlag" in text
     assert "wholeMachineReachableWeakBisimulationPaid" in text
     assert "wholeMachineReachableWeakBisimulationPaid = false" in text
 
@@ -166,4 +182,6 @@ def test_aggregate_and_workflow_own_the_new_surface():
     assert "Goldbach30To29VisualizationConsumerExact" in aggregate
     assert "Goldbach30To29CheckpointMachineExact.agda" in workflow
     assert "test_goldbach29_signed369_vendor.py" in workflow
+    assert "verify_goldbach30_29_replay.py" in workflow
+    assert "Replay Goldbach30-to-29 checkpoint equivalence" in workflow
     assert "EverythingGoldbach29Signed369VendorExact.agda" in workflow
