@@ -8,27 +8,33 @@ module DASHI.Moonshine.MonsterWeightTwoGriessConstituentCompilerExact where
 --   65610 = 90 * 729 = (12 + 78) * 729
 --
 -- lives downstream of the literal weight-two Monster representation.  It does
--- not create the 196883-dimensional Griess constituent.  This owner isolates
--- the exact same-object linear data required to produce that constituent and
--- then compiles those data into the legacy `WeightTwoLinearActionBridge`
--- together with the proof-relevant paid wrapper.
+-- not create the 196883-dimensional Griess constituent.
 --
--- The key anti-shortcut is the explicit two-sided carrier weld to the repo's
--- semantic `SemanticMonsterConstituent196883` plus equality of its inclusion
--- with the SAME grade-two representation carrier.  Therefore the legacy bare
--- Nat field `constituentDimension = 196883` cannot be satisfied by simply
--- reusing the full 196884 carrier.
+-- IMPORTANT WRONG-TYPE CORRECTION
+-- --------------------------------
+-- `Nested.SemanticMonsterConstituent196883` is a finite BASIS-LABEL carrier.
+-- It is not the set of vectors of a 196883-dimensional complex vector space.
+-- Therefore this owner does NOT demand or manufacture a bijection between that
+-- finite set and the vector carrier of the Griess representation.
+--
+-- The correct proof-bearing object is instead:
+--
+--   * an actual finite-dimensional Monster representation C with declared
+--     representation dimension 196883;
+--   * a proof-bearing linear realisation of C;
+--   * an injective Monster-equivariant linear inclusion of C into the SAME
+--     full grade-two representation used by the literal VOA/trace authority.
+--
+-- From exactly those data this owner compiles the historical
+-- `WeightTwoLinearActionBridge` and its proof-relevant paid wrapper.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 import DASHI.Geometry.HilbertLorentzForcing as Linear
-import DASHI.Foundations.Base369StableAlgebraicIdentityTowerExact as Stable
-import DASHI.Foundations.Base369NestedUnitCompletionMonsterAssemblyExact as Nested
 import DASHI.Moonshine.GradedRepresentation as GR
 import DASHI.Moonshine.GradedVertexOperatorAlgebraBoundary as GVOA
 import DASHI.Moonshine.MonsterGradedVOABridgeExact as MonsterVOA
@@ -38,7 +44,7 @@ import DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact as WeightTwo
 import DASHI.Moonshine.Monster3BLinearActionProofRelevantHardeningExact as Hardening
 
 ------------------------------------------------------------------------
--- 1. The actual proof-bearing 196883 constituent witness.
+-- 1. Actual representation-level Griess constituent witness.
 ------------------------------------------------------------------------
 
 record GriessConstituentLinearWitness
@@ -59,72 +65,37 @@ record GriessConstituentLinearWitness
       LinearRep.endomorphismEvaluation fullWeightTwoLinearRealisation
       ≡ Semantic.evaluation semanticActionBridge
 
-    -- Literal linear carrier for the Griess constituent.
-    constituentLinearCarrier : Linear.HilbertLift
+    -- Independent actual Monster representation object for the Griess piece.
+    constituentRepresentation :
+      GR.FiniteDimensionalRepresentation
+        Monster K
+        (GVOA.group (MonsterVOA.voaAction bridge))
 
-    -- Same-object carrier weld to the existing semantic 196883 object.
-    constituentToSemantic :
-      Linear.Vector constituentLinearCarrier →
-      Nested.SemanticMonsterConstituent196883
+    constituentDimensionIs196883 :
+      GR.dimension constituentRepresentation ≡ 196883
 
-    constituentFromSemantic :
-      Nested.SemanticMonsterConstituent196883 →
-      Linear.Vector constituentLinearCarrier
-
-    semanticAfterConstituent :
-      (state : Linear.Vector constituentLinearCarrier) →
-      constituentFromSemantic (constituentToSemantic state) ≡ state
-
-    constituentAfterSemantic :
-      (state : Nested.SemanticMonsterConstituent196883) →
-      constituentToSemantic (constituentFromSemantic state) ≡ state
+    constituentLinearRealisation :
+      LinearRep.LinearEndomorphismRealisation
+        (GVOA.group (MonsterVOA.voaAction bridge))
+        constituentRepresentation
 
     -- Inclusion into the SAME full grade-two linear representation.
     constituentInclusion :
-      Linear.Vector constituentLinearCarrier →
+      Linear.Vector
+        (LinearRep.linearCarrier constituentLinearRealisation) →
       Linear.Vector
         (LinearRep.linearCarrier fullWeightTwoLinearRealisation)
 
-    constituentInclusionMatchesSemantic :
-      (state : Linear.Vector constituentLinearCarrier) →
-      LinearRep.toRepresentationCarrier
-        fullWeightTwoLinearRealisation
-        (constituentInclusion state)
-      ≡
-      Stable.to
-        (Semantic.weightTwoCarrierIso semanticActionBridge)
-        (inj₁ (constituentToSemantic state))
-
-    -- Actual Monster action on the same linear constituent.
-    constituentAct :
-      Monster →
-      Linear.Vector constituentLinearCarrier →
-      Linear.Vector constituentLinearCarrier
-
-    constituentActPreservesZero :
-      (g : Monster) →
-      constituentAct g (Linear.zero constituentLinearCarrier)
-      ≡ Linear.zero constituentLinearCarrier
-
-    constituentActPreservesAddition :
-      (g : Monster) →
-      (left right : Linear.Vector constituentLinearCarrier) →
-      constituentAct g (Linear._+_ constituentLinearCarrier left right)
-      ≡ Linear._+_ constituentLinearCarrier
-          (constituentAct g left)
-          (constituentAct g right)
-
-    constituentActPreservesScaling :
-      (g : Monster) →
-      (scalar : Linear.Scalar constituentLinearCarrier) →
-      (state : Linear.Vector constituentLinearCarrier) →
-      constituentAct g (Linear._·_ constituentLinearCarrier scalar state)
-      ≡ Linear._·_ constituentLinearCarrier scalar
-          (constituentAct g state)
+    constituentInclusionInjective :
+      ∀ {left right} →
+      constituentInclusion left ≡ constituentInclusion right →
+      left ≡ right
 
     constituentInclusionIntertwines :
       (g : Monster) →
-      (state : Linear.Vector constituentLinearCarrier) →
+      (state :
+        Linear.Vector
+          (LinearRep.linearCarrier constituentLinearRealisation)) →
       LinearRep.evaluatedEnd
         fullWeightTwoLinearRealisation
         (GR.action
@@ -133,13 +104,97 @@ record GriessConstituentLinearWitness
             2)
           g)
         (constituentInclusion state)
-      ≡ constituentInclusion (constituentAct g state)
+      ≡
+      constituentInclusion
+        (LinearRep.evaluatedEnd
+          constituentLinearRealisation
+          (GR.action constituentRepresentation g)
+          state)
 
 open GriessConstituentLinearWitness public
 
 ------------------------------------------------------------------------
--- 2. Compile the legacy bridge, but choose its Set-valued fields to be the
---    exact proof obligations above rather than vacuous proposition names.
+-- 2. Actual constituent action and its linearity are compiler outputs of the
+--    proof-bearing constituent representation.
+------------------------------------------------------------------------
+
+griessConstituentAct :
+  ∀ {Monster K bridge}
+    (witness : GriessConstituentLinearWitness {Monster} {K} bridge) →
+  Monster →
+  Linear.Vector
+    (LinearRep.linearCarrier (constituentLinearRealisation witness)) →
+  Linear.Vector
+    (LinearRep.linearCarrier (constituentLinearRealisation witness))
+griessConstituentAct witness g =
+  LinearRep.evaluatedEnd
+    (constituentLinearRealisation witness)
+    (GR.action (constituentRepresentation witness) g)
+
+griessActPreservesZero :
+  ∀ {Monster K bridge}
+    (witness : GriessConstituentLinearWitness {Monster} {K} bridge) →
+  (g : Monster) →
+  griessConstituentAct witness g
+    (Linear.zero
+      (LinearRep.linearCarrier (constituentLinearRealisation witness)))
+  ≡
+  Linear.zero
+    (LinearRep.linearCarrier (constituentLinearRealisation witness))
+griessActPreservesZero witness g =
+  LinearRep.evaluatedEndPreservesZero
+    (constituentLinearRealisation witness)
+    (GR.action (constituentRepresentation witness) g)
+
+griessActPreservesAddition :
+  ∀ {Monster K bridge}
+    (witness : GriessConstituentLinearWitness {Monster} {K} bridge) →
+  (g : Monster) →
+  (left right :
+    Linear.Vector
+      (LinearRep.linearCarrier (constituentLinearRealisation witness))) →
+  griessConstituentAct witness g
+    (Linear._+_
+      (LinearRep.linearCarrier (constituentLinearRealisation witness))
+      left right)
+  ≡
+  Linear._+_
+    (LinearRep.linearCarrier (constituentLinearRealisation witness))
+    (griessConstituentAct witness g left)
+    (griessConstituentAct witness g right)
+griessActPreservesAddition witness g left right =
+  LinearRep.evaluatedEndPreservesAddition
+    (constituentLinearRealisation witness)
+    (GR.action (constituentRepresentation witness) g)
+    left right
+
+griessActPreservesScaling :
+  ∀ {Monster K bridge}
+    (witness : GriessConstituentLinearWitness {Monster} {K} bridge) →
+  (g : Monster) →
+  (scalar :
+    Linear.Scalar
+      (LinearRep.linearCarrier (constituentLinearRealisation witness))) →
+  (state :
+    Linear.Vector
+      (LinearRep.linearCarrier (constituentLinearRealisation witness))) →
+  griessConstituentAct witness g
+    (Linear._·_
+      (LinearRep.linearCarrier (constituentLinearRealisation witness))
+      scalar state)
+  ≡
+  Linear._·_
+    (LinearRep.linearCarrier (constituentLinearRealisation witness))
+    scalar
+    (griessConstituentAct witness g state)
+griessActPreservesScaling witness g scalar state =
+  LinearRep.evaluatedEndPreservesScaling
+    (constituentLinearRealisation witness)
+    (GR.action (constituentRepresentation witness) g)
+    scalar state
+
+------------------------------------------------------------------------
+-- 3. Compile the historical bridge with exact proof obligations.
 ------------------------------------------------------------------------
 
 compileWeightTwoLinearActionBridge :
@@ -151,35 +206,63 @@ compileWeightTwoLinearActionBridge {bridge = bridge} witness = record
   { semanticActionBridge = semanticActionBridge witness
   ; fullWeightTwoLinearRealisation = fullWeightTwoLinearRealisation witness
   ; evaluationIsSameObject = evaluationIsSameObject witness
-  ; constituentLinearCarrier = constituentLinearCarrier witness
+  ; constituentLinearCarrier =
+      LinearRep.linearCarrier (constituentLinearRealisation witness)
   ; constituentInclusion = constituentInclusion witness
-  ; constituentDimension = 196883
-  ; constituentDimensionIs196883 = refl
-  ; constituentAct = constituentAct witness
+  ; constituentDimension = GR.dimension (constituentRepresentation witness)
+  ; constituentDimensionIs196883 = constituentDimensionIs196883 witness
+  ; constituentAct = griessConstituentAct witness
   ; constituentActPreservesZero =
-      (g : _) →
-      constituentAct witness g
-        (Linear.zero (constituentLinearCarrier witness))
-      ≡ Linear.zero (constituentLinearCarrier witness)
+      (g : Monster) →
+      griessConstituentAct witness g
+        (Linear.zero
+          (LinearRep.linearCarrier
+            (constituentLinearRealisation witness)))
+      ≡
+      Linear.zero
+        (LinearRep.linearCarrier (constituentLinearRealisation witness))
   ; constituentActPreservesAddition =
-      (g : _) →
-      (left right : Linear.Vector (constituentLinearCarrier witness)) →
-      constituentAct witness g
-        (Linear._+_ (constituentLinearCarrier witness) left right)
-      ≡ Linear._+_ (constituentLinearCarrier witness)
-          (constituentAct witness g left)
-          (constituentAct witness g right)
+      (g : Monster) →
+      (left right :
+        Linear.Vector
+          (LinearRep.linearCarrier
+            (constituentLinearRealisation witness))) →
+      griessConstituentAct witness g
+        (Linear._+_
+          (LinearRep.linearCarrier
+            (constituentLinearRealisation witness))
+          left right)
+      ≡
+      Linear._+_
+        (LinearRep.linearCarrier (constituentLinearRealisation witness))
+        (griessConstituentAct witness g left)
+        (griessConstituentAct witness g right)
   ; constituentActPreservesScaling =
-      (g : _) →
-      (scalar : Linear.Scalar (constituentLinearCarrier witness)) →
-      (state : Linear.Vector (constituentLinearCarrier witness)) →
-      constituentAct witness g
-        (Linear._·_ (constituentLinearCarrier witness) scalar state)
-      ≡ Linear._·_ (constituentLinearCarrier witness) scalar
-          (constituentAct witness g state)
+      (g : Monster) →
+      (scalar :
+        Linear.Scalar
+          (LinearRep.linearCarrier
+            (constituentLinearRealisation witness))) →
+      (state :
+        Linear.Vector
+          (LinearRep.linearCarrier
+            (constituentLinearRealisation witness))) →
+      griessConstituentAct witness g
+        (Linear._·_
+          (LinearRep.linearCarrier
+            (constituentLinearRealisation witness))
+          scalar state)
+      ≡
+      Linear._·_
+        (LinearRep.linearCarrier (constituentLinearRealisation witness))
+        scalar
+        (griessConstituentAct witness g state)
   ; constituentInvariantUnderMonsterAction =
-      (g : _) →
-      (state : Linear.Vector (constituentLinearCarrier witness)) →
+      (g : Monster) →
+      (state :
+        Linear.Vector
+          (LinearRep.linearCarrier
+            (constituentLinearRealisation witness))) →
       LinearRep.evaluatedEnd
         (fullWeightTwoLinearRealisation witness)
         (GR.action
@@ -189,13 +272,9 @@ compileWeightTwoLinearActionBridge {bridge = bridge} witness = record
             2)
           g)
         (constituentInclusion witness state)
-      ≡ constituentInclusion witness (constituentAct witness g state)
+      ≡ constituentInclusion witness (griessConstituentAct witness g state)
   ; constituentInclusionIntertwines = constituentInclusionIntertwines witness
   }
-
-------------------------------------------------------------------------
--- 3. Compile the proof-relevant paid wrapper.
-------------------------------------------------------------------------
 
 compilePaidWeightTwoLinearActionBridge :
   ∀ {Monster K}
@@ -205,11 +284,11 @@ compilePaidWeightTwoLinearActionBridge :
     (compileWeightTwoLinearActionBridge witness)
 compilePaidWeightTwoLinearActionBridge witness = record
   { constituentActPreservesZeroWitness =
-      constituentActPreservesZero witness
+      griessActPreservesZero witness
   ; constituentActPreservesAdditionWitness =
-      constituentActPreservesAddition witness
+      griessActPreservesAddition witness
   ; constituentActPreservesScalingWitness =
-      constituentActPreservesScaling witness
+      griessActPreservesScaling witness
   ; constituentInvariantUnderMonsterActionWitness =
       constituentInclusionIntertwines witness
   }
@@ -239,12 +318,13 @@ compileGriessWeightTwoBridge witness = record
   }
 
 ------------------------------------------------------------------------
--- 4. Attribution / non-promotion firewall.
+-- 4. Attribution / non-promotion firewalls.
 ------------------------------------------------------------------------
 
 data CharacterSplitCreatesGriessConstituent : Set where
 data Dimension196883CreatesLinearSubrepresentation : Set where
 data FixedConformalPointCreatesInvariantComplement : Set where
+data SemanticBasisLabelsCreateVectorCarrier : Set where
 
 characterSplitDoesNotCreateGriessConstituent :
   CharacterSplitCreatesGriessConstituent → ⊥
@@ -258,21 +338,28 @@ fixedConformalPointDoesNotCreateInvariantComplement :
   FixedConformalPointCreatesInvariantComplement → ⊥
 fixedConformalPointDoesNotCreateInvariantComplement ()
 
+semanticBasisLabelsDoNotCreateVectorCarrier :
+  SemanticBasisLabelsCreateVectorCarrier → ⊥
+semanticBasisLabelsDoNotCreateVectorCarrier ()
+
 ------------------------------------------------------------------------
 -- 5. Machine-readable status consumed by validation/current-max-cut owners.
 ------------------------------------------------------------------------
 
-griessWitnessRequiresSameSemantic196883Carrier : Bool
-griessWitnessRequiresSameSemantic196883Carrier = true
+griessWitnessRequiresActual196883Representation : Bool
+griessWitnessRequiresActual196883Representation = true
 
-griessWitnessRequiresLiteralInclusionIntertwining : Bool
-griessWitnessRequiresLiteralInclusionIntertwining = true
+griessWitnessRequiresInjectiveEquivariantInclusion : Bool
+griessWitnessRequiresInjectiveEquivariantInclusion = true
 
 griessCompilerProducesLegacyBridge : Bool
 griessCompilerProducesLegacyBridge = true
 
 griessCompilerProducesPaidBridge : Bool
 griessCompilerProducesPaidBridge = true
+
+semanticBasisLabelsAloneProduceGriessVectorCarrier : Bool
+semanticBasisLabelsAloneProduceGriessVectorCarrier = false
 
 characterSplitAloneProducesGriessConstituent : Bool
 characterSplitAloneProducesGriessConstituent = false
