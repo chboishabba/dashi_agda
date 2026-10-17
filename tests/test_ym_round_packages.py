@@ -323,6 +323,10 @@ def test_canonical_clay_residual_imports_four_nonround_owners_and_stays_false():
         "BalabanCMP116CanonicalTraceEntropyBudgetExact",
     ]:
         assert module in text
+    assert "CMP109.CMP109CanonicalSourceSemanticsObligations" in text
+    assert "TransferGap.SelectedPhysicalTransferGapObligation" in text
+    assert "R409.CMP116CanonicalSelectedTermReplay" in text
+    assert "R429.CMP116CanonicalTraceEntropyBudget" in text
     assert "clayYangMillsPromoted = false" in text
     assert "clayPromotion = false" in text
 
