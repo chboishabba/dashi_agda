@@ -28,21 +28,27 @@ data SABIOProtocolStatus : Set where
   protocolPayload : SABIOProtocolStatus
   browserShellPayload : SABIOProtocolStatus
   protocolError : SABIOProtocolStatus
+  migratedExportAPI : SABIOProtocolStatus
 
--- The 2026-10-17 first SABIO attempt reached the documented endpoint but the
--- entry-ID GET returned an HTTP-200 browser SPA shell.  That result is a
--- protocol-shape failure, not evidence that SABIO contains zero entries.
+-- Historical first attempt: the retired sabioRestWebServices surface rewrote
+-- requests to the browser SPA/404 shell. This was correctly treated as a
+-- protocol-shape failure rather than evidence of zero kinetic entries.
 firstSABIOAttemptStatus : SABIOProtocolStatus
 firstSABIOAttemptStatus = browserShellPayload
 
 firstSABIOAttemptMayConcludeZeroEntries : Bool
 firstSABIOAttemptMayConcludeZeroEntries = false
 
--- The bounded PDBe/SIFTS acquisition did execute successfully against the
--- exact panel and recovered exact UniProt/PDB segment mappings.  The pasted
--- diagnostic contained inconsistent hand-summed headline/per-protein totals,
--- so the formal owner promotes execution/zero-fatal-error status only; schema
--- v2 now computes canonical totals directly from the artifact on rerun.
+-- Current adapter targets the 2026 export API:
+-- https://sabio.h-its.org/export-api/sabio/kinlaw-entry/json
+currentSABIOProtocolStatus : SABIOProtocolStatus
+currentSABIOProtocolStatus = migratedExportAPI
+
+sabioExportEnvelopeRequired : Bool
+sabioExportEnvelopeRequired = true
+
+-- Bounded PDBe/SIFTS acquisition is now machine-recounted and promoted by the
+-- dedicated BH4ExecutedSIFTSReceiptExact owner: 38 structures / 526 segments.
 pdbeSiftsBoundedAcquisitionExecuted : Bool
 pdbeSiftsBoundedAcquisitionExecuted = true
 
@@ -50,7 +56,7 @@ pdbeSiftsFatalErrorsReported : Nat
 pdbeSiftsFatalErrorsReported = 0
 
 pdbeSiftsCanonicalCoverageCountsRequireArtifactRecount : Bool
-pdbeSiftsCanonicalCoverageCountsRequireArtifactRecount = true
+pdbeSiftsCanonicalCoverageCountsRequireArtifactRecount = false
 
 record QuantitativeAcquisitionBoundary : Set where
   constructor quantitative-acquisition-boundary
@@ -85,7 +91,7 @@ canonicalBH4QuantitativeAcquisitionReceipt =
   Receipt.mkNonPromotingReceipt
     "BH4 Phase-4 quantitative acquisition"
     "DASHI.Biology.BH4QuantitativeAcquisitionExact"
-    "SABIO-RK kinetic-law candidates + executed bounded PDBe/SIFTS UniProt/PDB structural mapping acquisition"
-    "records the SABIO HTTP-200 SPA-shell failure as protocol failure rather than zero data, promotes successful bounded SIFTS acquisition execution, and keeps canonical coverage totals delegated to the machine-generated v2 artifact"
+    "SABIO-RK export-API kinetic candidates + executed bounded PDBe/SIFTS UniProt/PDB structural mappings"
+    "records the retired REST/SPA failure as protocol failure, promotes migration to the validated meta+data export envelope, and delegates canonical SIFTS coverage totals to BH4ExecutedSIFTSReceiptExact"
     "kinetic constants are not in-vivo flux bounds; HTML is not a no-entry receipt; structure/residue mapping is not catalytic mechanism; neither source creates disease causation"
     "python3 scripts/run_bh4_phase4_maxcut.py"
