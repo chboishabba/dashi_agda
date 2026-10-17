@@ -23,6 +23,10 @@ currentBH4Phase = systemStateQuantitativePhase
 data BH4Phase4Residual : Set where
   resolveNonFiniteMTORProteinReactionRepresentation : BH4Phase4Residual
   executeFluxPaymentPreparation : BH4Phase4Residual
+  executeProteinAbundanceContextAcquisition : BH4Phase4Residual
+  executeExchangeContextAcquisition : BH4Phase4Residual
+  payAbsoluteEnzymeConcentrationOrMassVolumeBridge : BH4Phase4Residual
+  acquireExchangeTransportTurnoverEvidence : BH4Phase4Residual
   payAssayReactionIdentityGates : BH4Phase4Residual
   paySameObjectCompartmentTimeGates : BH4Phase4Residual
   payNormalizedFluxUnitGates : BH4Phase4Residual
@@ -41,6 +45,10 @@ livePhase4Residuals : List BH4Phase4Residual
 livePhase4Residuals =
   resolveNonFiniteMTORProteinReactionRepresentation
   ∷ executeFluxPaymentPreparation
+  ∷ executeProteinAbundanceContextAcquisition
+  ∷ executeExchangeContextAcquisition
+  ∷ payAbsoluteEnzymeConcentrationOrMassVolumeBridge
+  ∷ acquireExchangeTransportTurnoverEvidence
   ∷ payAssayReactionIdentityGates
   ∷ paySameObjectCompartmentTimeGates
   ∷ payNormalizedFluxUnitGates
@@ -64,6 +72,15 @@ fluxCandidateRankingToolReady = true
 
 fluxPaymentPreparationToolReady : Bool
 fluxPaymentPreparationToolReady = true
+
+proteinAbundanceContextAcquisitionToolReady : Bool
+proteinAbundanceContextAcquisitionToolReady = true
+
+exchangeContextAcquisitionToolReady : Bool
+exchangeContextAcquisitionToolReady = true
+
+jointPaymentLedgerToolReady : Bool
+jointPaymentLedgerToolReady = true
 
 sabioKineticParameterCount : Nat
 sabioKineticParameterCount = SABIO.executedSABIOKineticParameterCount
@@ -129,6 +146,10 @@ record BH4Phase4Boundary : Set where
     assaySpecificCapacityAutomaticallyPaysIntracellularFluxIsFalse : assaySpecificCapacityAutomaticallyPaysIntracellularFlux ≡ false
     turnoverCapacityAutomaticallyPaysFluxWithoutAbundance : Bool
     turnoverCapacityAutomaticallyPaysFluxWithoutAbundanceIsFalse : turnoverCapacityAutomaticallyPaysFluxWithoutAbundance ≡ false
+    abundanceContextAutomaticallyPaysEnzymeConcentration : Bool
+    abundanceContextAutomaticallyPaysEnzymeConcentrationIsFalse : abundanceContextAutomaticallyPaysEnzymeConcentration ≡ false
+    metabolomicsContextAutomaticallyPaysExchangeFlux : Bool
+    metabolomicsContextAutomaticallyPaysExchangeFluxIsFalse : metabolomicsContextAutomaticallyPaysExchangeFlux ≡ false
     boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSites : Bool
     boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSitesIsFalse : boundedSIFTSAcquisitionAutomaticallyPaysCatalyticSites ≡ false
     phase4CompletionAutomaticallyPromotesDiseaseCausation : Bool
@@ -138,14 +159,14 @@ open BH4Phase4Boundary public
 
 canonicalBH4Phase4Boundary : BH4Phase4Boundary
 canonicalBH4Phase4Boundary =
-  bh4-phase4-boundary false refl false refl false refl false refl false refl false refl false refl
+  bh4-phase4-boundary false refl false refl false refl false refl false refl false refl false refl false refl false refl
 
 canonicalBH4Phase4RoadmapReceipt : Receipt.GenericReceipt
 canonicalBH4Phase4RoadmapReceipt =
   Receipt.mkNonPromotingReceipt
     "BH4 Phase-4 quantitative system-state roadmap"
     "DASHI.Biology.BH4Phase4RoadmapExact"
-    "executed 29x12 network -> 56-coordinate open system -> SABIO 932 parameters -> 875 finite-column mappings across 10/12 reactions -> refined classification -> ranked candidate queue -> fail-closed flux-payment preparation"
-    "closes acquisition, extraction, classification and ranking architecture; narrows the live work to paying reaction identity, compartment/time, unit-normalization and kinetic-to-flux translation gates plus the 29 exchange bounds"
-    "assay-specific Vmax is not intracellular flux; kcat requires enzyme abundance/state; Km/Kd/Ki do not define magnitude alone; primary-literature kinetics and SIFTS mappings remain non-promoting evidence"
+    "executed 29x12 network -> 56-coordinate open system -> SABIO 932 parameters -> 875 finite-column mappings across 10/12 reactions -> ranked/payment-prepared candidates -> protein-abundance and metabolomics-context acquisition -> joint payment ledger"
+    "closes acquisition/ranking infrastructure and moves the executable frontier to source-backed same-state normalization: enzyme abundance/mass-volume bridges for reaction capacity, transport/turnover evidence for exchanges, and compartment/time matching before solver payment"
+    "normalized protein intensity is not enzyme concentration; metabolite identity/concentration/study occurrence is not exchange flux; context coverage is not payment; assay Vmax and kcat retain their existing abundance/unit/state obligations"
     "python3 scripts/run_bh4_phase4_maxcut.py"
