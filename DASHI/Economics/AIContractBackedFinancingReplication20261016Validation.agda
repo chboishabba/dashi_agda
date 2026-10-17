@@ -14,5 +14,20 @@ irenCustomerPrepaymentPaid :
   Replication.customerPrepaymentBeforeDelivery Replication.irenReplication ≡ true
 irenCustomerPrepaymentPaid = Replication.irenPrepaymentPaid
 
+sharonGPUBackedSPVDebtPaid :
+  Replication.gpuBackedSPVDebt Replication.sharonAIReplication ≡ true
+sharonGPUBackedSPVDebtPaid = Replication.sharonGPUBackedSPVDebtPaid
+
+aibDeveloperCustomerPrepayPaid :
+  Replication.developerCustomerPrepayment Replication.aibNebiusDeveloperReplication ≡ true
+aibDeveloperCustomerPrepayPaid = Replication.aibDeveloperPrepaymentPaid
+
+aibProjectFinanceStackPaid :
+  Replication.projectDebtPlusPreferredEquity Replication.aibNebiusDeveloperReplication ≡ true
+aibProjectFinanceStackPaid = Replication.aibProjectFinancePaid
+
+crossLayerReplicationPaid : Replication.crossLayerMechanismReplication ≡ true
+crossLayerReplicationPaid = Replication.crossLayerReplicationPaid
+
 crossCompanyReplicationPaid : Replication.crossCompanyMechanismReplication ≡ true
 crossCompanyReplicationPaid = Replication.crossCompanyReplicationPaid
