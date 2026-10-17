@@ -12,6 +12,7 @@ import DASHI.Unified.TOEGaugeQFTGRRealizationExact as Gauge
 import DASHI.Unified.TOEArithmeticCMRealizationExact as Arithmetic
 import DASHI.Unified.TOEQuantumMatterRealizationExact as Matter
 import DASHI.Unified.TOEConcreteInhabitantsExact as Inhabitants
+import DASHI.Unified.TOEQuantumInhabitantsExact as QuantumInhabitants
 
 data TOECandidateStatus : Set where
   candidateConstructed : TOECandidateStatus
@@ -72,7 +73,7 @@ currentTOECandidate =
     ; retainsConjecturalSockets = true
     ; retainsNegativeKnowledge = true
     ; reading =
-        "One DASHI candidate physical theory with 369/C3 as universal refinement-orientation substrate. The candidate contains actual mathematical/formal inhabitants rather than status flags alone: a native interacting 2p^2 C3-invariant Coulomb Hamiltonian; an actual native Eisenstein C3 carrier in Lean; imported formal j=0 elliptic point-group, primary-normalization and Frobenius-trace inhabitants; a corrected-tree RT inhabitant; and a concrete Lambda=0 Jacobson/Einstein benchmark inhabitant. These establish non-emptiness of major downstream sectors, not their identity as one calibrated physical object."
+        "One DASHI candidate physical theory with 369/C3 as universal refinement-orientation substrate. Major downstream sectors are genuinely inhabited at their declared authority: a native interacting 2p^2 C3-invariant Coulomb Hamiltonian; imported formal j=0 elliptic point-group, primary-normalization and Frobenius-trace inhabitants; finite g-TPS projector and unitary-metric inhabitants; a corrected-tree RT inhabitant; and a concrete Lambda=0 Jacobson/Einstein benchmark inhabitant. These establish non-emptiness and concrete theorem content without identifying all sectors as one calibrated physical object."
     }
 
 currentTOECandidateStatus : TOECandidateStatus
@@ -85,6 +86,8 @@ record PartialPhysicalClosureInhabitant : Setω where
     cmPointGroup : Inhabitants.FormalInhabitantReceipt
     cmPrimaryNormalization : Inhabitants.FormalInhabitantReceipt
     cmFrobeniusTrace : Inhabitants.FormalInhabitantReceipt
+    finiteGTPSProjector : Inhabitants.FormalInhabitantReceipt
+    finiteGTPSUnitaryMetric : Inhabitants.FormalInhabitantReceipt
     rtBenchmark : Inhabitants.FormalInhabitantReceipt
     vacuumEinsteinBenchmark : Inhabitants.FormalInhabitantReceipt
 
@@ -96,6 +99,8 @@ currentPartialPhysicalClosureInhabitant =
     ; cmPointGroup = Inhabitants.lean73CMInhabitant
     ; cmPrimaryNormalization = Inhabitants.lean73PrimaryNormalizationInhabitant
     ; cmFrobeniusTrace = Inhabitants.lean73FrobeniusCharacterTraceInhabitant
+    ; finiteGTPSProjector = QuantumInhabitants.lean76GTPSProjectionInhabitant
+    ; finiteGTPSUnitaryMetric = QuantumInhabitants.lean76GTPSMetricInhabitant
     ; rtBenchmark = Inhabitants.lean68RTInhabitant
     ; vacuumEinsteinBenchmark = Inhabitants.lean68JacobsonInhabitant
     }
@@ -125,4 +130,4 @@ currentPhysicalClosureStatus = physicalClosureOpen
 
 terminalMaxCutReading : String
 terminalMaxCutReading =
-  "The TOE now has an explicit PartialPhysicalClosureInhabitant carrying every genuinely inhabited downstream sector currently available. Physical closure is therefore no longer blocked by mere existence of a matter Hamiltonian, C3 arithmetic action, RT model or Einstein benchmark. The remaining cut is the cross-sector same-object mathematics: actual Monster W_zeta recognition; universal-action restriction; metric-variation/stress commutation; cubic/Jacobi split Frobenius and same-curve Hecke; same-physical TPS/Hamiltonian attachment; controlled continuum limits; calibrated observables; held-out prediction; independent replication."
+  "Partial physical closure is explicitly inhabited through selected matter Hamiltonian, arithmetic/CM, finite g-TPS, RT, and vacuum-Einstein sectors. Remaining blockers are no longer existence placeholders. They are cross-sector same-object obligations: actual Monster W_zeta recognition; universal-action restriction; metric-variation/stress commutation; cubic/Jacobi split Frobenius and same-curve Hecke; physical source-gTPS/Hamiltonian attachment; controlled continuum limits; calibrated observables; held-out prediction; independent replication."
