@@ -5,9 +5,9 @@ module DASHI.Philosophy.NonginCurrentMaxCutT27C3Exact where
 --
 -- The previous current owner pays the generic policy-completed T^27 graph,
 -- higher stack and finite hypersheaf.  This additive owner records the new
--- repository-native C3 policy inhabitant plus the policy-hidden non-descent,
--- guarded universal-369 handoff and exact all-finite-depth T^27 lift without
--- weakening attribution boundaries.
+-- repository-native C3 policy inhabitant, policy-hidden non-descent, exact
+-- consumer-relative residual reopening, guarded universal-369 handoff and
+-- exact all-finite-depth T^27 lift without weakening attribution boundaries.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -15,6 +15,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Philosophy.NonginCurrentMaxCutT27Exact as Previous
 import DASHI.Reasoning.TrialecticT27PolicyHiddenNonDescentExact as Hidden
+import DASHI.Reasoning.TrialecticT27PolicyResidualReductionExact as Residual
 import DASHI.Reasoning.TrialecticT27Universal369HandoffExact as Handoff
 import DASHI.Reasoning.TrialecticT27C3CompletionPolicyExact as C3Policy
 import DASHI.Reasoning.TrialecticT27NativeC3RealizationExact as Native
@@ -25,6 +26,9 @@ previousBoundary = Previous.canonicalNonginCurrentMaxCutT27Boundary
 
 hiddenBoundary : Hidden.TrialecticT27PolicyHiddenNonDescentBoundary
 hiddenBoundary = Hidden.canonicalTrialecticT27PolicyHiddenNonDescentBoundary
+
+residualBoundary : Residual.TrialecticT27PolicyResidualReductionBoundary
+residualBoundary = Residual.canonicalTrialecticT27PolicyResidualReductionBoundary
 
 handoffBoundary : Handoff.TrialecticT27Universal369HandoffBoundary
 handoffBoundary = Handoff.canonicalTrialecticT27Universal369HandoffBoundary
@@ -41,6 +45,14 @@ allDepthBoundary = AllDepth.canonicalTrialecticT27NativeC3AllDepthLiftBoundary
 hiddenThirdFaceNoGoReceipt :
   Hidden.thirdFaceDoesNotFactorThroughT18 hiddenBoundary ≡ true
 hiddenThirdFaceNoGoReceipt = refl
+
+policyResidualReopeningReceipt :
+  Residual.hiddenPolicyExactResidualReopeningPaid residualBoundary ≡ true
+policyResidualReopeningReceipt = refl
+
+policyDiscriminatorReceipt :
+  Residual.thirdFaceMeasurementDiscriminatorPaid residualBoundary ≡ true
+policyDiscriminatorReceipt = refl
 
 nativeC3PolicyReceipt :
   C3Policy.nativeC3CompletionPolicyConstructed c3Boundary ≡ true
@@ -68,6 +80,10 @@ record NonginCurrentMaxCutT27C3Boundary : Set where
     previousGraphT27MaxCutRetained : Bool
     hiddenPolicyNonDescentPaid : Bool
     hiddenThirdFaceNonDescentPaid : Bool
+    hiddenPolicyExactResidualReopeningPaid : Bool
+    thirdFaceMeasurementDiscriminatorPaid : Bool
+    policyMechanisticEquifinalityPaid : Bool
+    t18DeclaredFutureConsumerPreserved : Bool
     guardedUniversal369HandoffPaid : Bool
     nativeC3CompletionPolicyPaid : Bool
     nativeC3OrderThreePaid : Bool
@@ -78,6 +94,7 @@ record NonginCurrentMaxCutT27C3Boundary : Set where
     nativeC3AllFiniteDepthLiftPaid : Bool
     nativeC3PhysicalDynamicsPaid : Bool
     completedT27DeterminesNextStructuredState : Bool
+    thirdFaceConsumerPreservedByT18Reduction : Bool
     iitBOperatorSameObjectWeldPaid : Bool
     pnfAtomCoordinateIsomorphismPaid : Bool
     toeSiblingFormalAuthorityImportedLocally : Bool
@@ -99,6 +116,11 @@ canonicalNonginCurrentMaxCutT27C3Boundary =
     true
     true
     true
+    true
+    true
+    true
+    true
+    false
     false
     false
     false
