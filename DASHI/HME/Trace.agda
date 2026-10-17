@@ -6,7 +6,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.List using (List)
 open import Data.Product using (_×_; _,_)
-open import DASHI.DA51.Core using (DA51Address)
+open import DASHI.DA51.Provenance using (EvidenceRef)
 open import DASHI.Physics.Closure.DynamicalClosureStatus as DCS
 
 ------------------------------------------------------------------------
@@ -37,13 +37,13 @@ record TraceWitness : Set where
     invariant   : TraceInvariant
     admissible  : Bool
 
--- Typed wire identity for a trace witness.  The address is deliberately
--- separate from the witness semantics: possessing a DA51 identity does not
+-- Producer-owned provenance for a trace witness.  The evidence edge and the
+-- witness semantics remain distinct: possessing a DA51 reference does not
 -- prove admissibility or any theorem.
 record AddressedTrace : Set where
   field
-    address : DA51Address
-    witness : TraceWitness
+    evidence : EvidenceRef
+    witness  : TraceWitness
 
 record CanonicalWitness : Set where
   field
