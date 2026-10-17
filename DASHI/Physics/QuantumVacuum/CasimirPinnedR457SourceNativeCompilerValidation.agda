@@ -5,7 +5,9 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.QuantumVacuum.CasimirPinnedR457SourceNativeCompilerExact as M
 import DASHI.Physics.QuantumVacuum.CasimirMinimalR457SourceNativeCompilerValidation
 import DASHI.Physics.QuantumVacuum.CasimirCMP119H2R457CompilerValidation
+import DASHI.Physics.QuantumVacuum.CasimirSelectedTargetR457CompilerValidation
 import DASHI.Physics.QuantumVacuum.Casimir369StressEnergySourceNativeH2TerminalValidation
+import DASHI.Physics.QuantumVacuum.Casimir369StressEnergySelectedTargetTerminalValidation
 
 r114R119BuildR120Regression :
   M.r114AndR119BuildR120CompilerOwned
