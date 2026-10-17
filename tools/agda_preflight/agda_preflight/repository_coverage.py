@@ -11,16 +11,31 @@ def repository_inventory_coverage(root: Path, conn: sqlite3.Connection) -> dict[
     """Report completeness of the canonical preflight-produced Agda inventory."""
 
     root = root.resolve()
-    producer_row = conn.execute(
-        "SELECT value FROM repository_meta WHERE key='inventory_producer'"
-    ).fetchone()
-    producer = str(producer_row[0]) if producer_row is not None else ""
+    meta = {
+        str(row[0]): str(row[1])
+        for row in conn.execute(
+            "SELECT key, value FROM repository_meta WHERE key IN ("
+            "'inventory_producer', 'inventory_generation', "
+            "'inventory_target_generation', 'inventory_generation_state', 'inventory_cursor'"
+            ")"
+        ).fetchall()
+    }
+    producer = meta.get("inventory_producer", "")
+    generation = int(meta.get("inventory_generation", "0") or "0")
+    target_generation = int(meta.get("inventory_target_generation", "0") or "0")
+    generation_state = meta.get("inventory_generation_state", "")
+    cursor = meta.get("inventory_cursor", "")
+
     if producer != "agda-preflight":
         return {
             "available": False,
             "complete": False,
             "state": "not-native",
             "producer": producer or None,
+            "generation": generation,
+            "target_generation": target_generation,
+            "generation_state": generation_state or None,
+            "cursor": cursor or None,
             "missing": [],
             "extra": [],
             "stale": [],
@@ -28,7 +43,7 @@ def repository_inventory_coverage(root: Path, conn: sqlite3.Connection) -> dict[
         }
 
     expected_paths = {
-        path.resolve().relative_to(root).as_posix()
+        path.relative_to(root).as_posix()
         for path in Checker(root).repository_agda_files()
     }
     rows = conn.execute(
@@ -54,12 +69,17 @@ def repository_inventory_coverage(root: Path, conn: sqlite3.Connection) -> dict[
             "SELECT path, error FROM repo_inventory_receipts WHERE parsed=0 ORDER BY path"
         )
     ]
-    complete = not missing and not extra and not stale and not parse_errors
+    in_progress = generation_state == "in-progress"
+    complete = (not in_progress) and not missing and not extra and not stale and not parse_errors
     return {
         "available": True,
         "complete": complete,
         "state": "complete" if complete else "stale-or-incomplete",
         "producer": producer,
+        "generation": generation,
+        "target_generation": target_generation,
+        "generation_state": generation_state or "complete",
+        "cursor": cursor or None,
         "indexed_files": len(indexed),
         "repository_files": len(expected_paths),
         "missing": missing[:100],
