@@ -49,6 +49,7 @@ import DASHI.Biology.IITCubePermutationStabilizer18Exact
 import DASHI.Biology.IITCubeJordanChainCentralizerTargetExact
 import DASHI.Biology.IITCubeJordanBasisMatrixExact
 import DASHI.Biology.IITCubeConcreteJordanConjugacyExact
+import DASHI.Biology.IITCubeConcreteNMatrixRecognitionExact
 import DASHI.Biology.IITCubeJordanCentralizerAlgebraExact
 import DASHI.Biology.IITCubeFirstTitsSL3TranslationIntersectionExact
 import DASHI.Biology.IITCubeExceptionalGeometryHandoffExact
