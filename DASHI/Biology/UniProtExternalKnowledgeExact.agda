@@ -29,8 +29,8 @@ uniProtServiceSource =
     "versioned protein sequence, annotation, evidence and cross-reference source"
     Source.publicAttribution
 
-uniProt2026_03 : External.DatasetSnapshot
-uniProt2026_03 =
+uniProt2026-03 : External.DatasetSnapshot
+uniProt2026-03 =
   External.datasetSnapshot
     External.uniProtKB
     "2026_03"
@@ -79,7 +79,7 @@ qdprBH4RegenerationClaim =
     External.catalyzes
     "RHEA:17869; quinonoid-dihydrobiopterin/tetrahydrobiopterin redox reaction as curated on P09417"
     qdprCatalysisEvidence
-    uniProt2026_03
+    uniProt2026-03
     "UniProtKB curates QDPR/P09417 as dihydropteridine reductase and links catalytic activity to Rhea; this pays a bounded BH4-regeneration annotation node."
     "The UniProt record does not establish an autism mechanism, whole-cascade causality, clinical efficacy, temporal priority, source access or attribution breach."
 

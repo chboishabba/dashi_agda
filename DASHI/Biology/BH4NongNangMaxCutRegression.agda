@@ -60,7 +60,7 @@ n2oLaneDoesNotCreateKitzerowMechanism :
 n2oLaneDoesNotCreateKitzerowMechanism = refl
 
 qdprSnapshotIsBytePinned :
-  External.exactBinaryPinned UniProt.uniProt2026_03 ≡ true
+  External.exactBinaryPinned UniProt.uniProt2026-03 ≡ true
 qdprSnapshotIsBytePinned = refl
 
 sprAccessionIsCurrentHumanSPR :

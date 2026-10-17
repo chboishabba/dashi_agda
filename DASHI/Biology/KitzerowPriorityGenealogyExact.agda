@@ -252,8 +252,8 @@ open AttributionAssessment public
 
 mkOpenAssessment :
   String → Bool → Bool → Bool → Bool → Bool → Atlas.AttributionStatus → String → AttributionAssessment
-mkOpenAssessment ident priority overlap exposure copying independent status explanation =
-  attributionAssessment ident priority overlap exposure copying independent status false refl explanation
+mkOpenAssessment ident priority hasOverlap exposure copying independent status explanation =
+  attributionAssessment ident priority hasOverlap exposure copying independent status false refl explanation
 
 stanfordAssessment : AttributionAssessment
 stanfordAssessment =
@@ -294,6 +294,8 @@ record IndependentCoordinates : Set where
     priorityCoordinate : Atlas.PriorityStatus
     contactCoordinate : Atlas.ContactStatus
     attributionCoordinate : Atlas.AttributionStatus
+
+open IndependentCoordinates public
 
 supportWithoutPriority : IndependentCoordinates
 supportWithoutPriority =
