@@ -44,6 +44,7 @@ import DASHI.Biology.IITCubeTwoFaceQ9SelfIndexingWeldExact
 import DASHI.Biology.IITCubeTwoFaceImageRecognitionExact
 import DASHI.Biology.IITCubeConcreteTorusImageExact
 import DASHI.Biology.IITCubeDiagonalStabilizerExact
+import DASHI.Biology.IITCubePermutationStabilizer18Exact
 import DASHI.Biology.IITCubeExceptionalGeometryHandoffExact
 import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact
 import DASHI.Biology.IITHyperfabricCausalCellNetworkExact
