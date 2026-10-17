@@ -29,13 +29,12 @@ prefixBetaDifferenceAlgebra :
   ∀ {TubePoint}
     (shootingMap : Prefix.BetaPrefixShootingMap TubePoint)
     (left right : TubePoint) →
-  Prefix.initialInverseSquare shootingMap
-      (Prefix.renormalisationMap shootingMap left)
+  let open Prefix.BetaPrefixShootingMap shootingMap in
+  initialInverseSquare (renormalisationMap left)
     -ℝ
-  Prefix.initialInverseSquare shootingMap
-      (Prefix.renormalisationMap shootingMap right)
+  initialInverseSquare (renormalisationMap right)
   ≡
-  Prefix.cumulativeBeta shootingMap left
+  cumulativeBeta left
     -ℝ
-  Prefix.cumulativeBeta shootingMap right
+  cumulativeBeta right
 prefixBetaDifferenceAlgebra = Prefix.sourceMapDifferenceIsBetaDifference
