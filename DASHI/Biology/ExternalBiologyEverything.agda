@@ -4,7 +4,8 @@ module DASHI.Biology.ExternalBiologyEverything where
 -- cross-database mappings, consumer admission, exact panel certificates, BH4
 -- system state, literal reaction/stoichiometry, nitrogen-oxide refinement,
 -- Wikimedia identity, 369/atomic refinement, executable runner receipts,
--- open-metabolic system-state feasibility and Kitzerow bridges.
+-- open-metabolic system-state feasibility, the Phase-4 roadmap and Kitzerow
+-- bridges.
 
 import DASHI.Biology.ExternalBiologyEvidenceCore
 import DASHI.Biology.ExternalBiologyMappingRevisionExact
@@ -19,6 +20,7 @@ import DASHI.Biology.BH4CompartmentKineticStateExact
 import DASHI.Biology.BH4NOSCouplingSameObjectExact
 import DASHI.Biology.BH4JointFluxFeasibilityExact
 import DASHI.Biology.BH4OpenMetabolicNetworkAdapterExact
+import DASHI.Biology.BH4Phase4RoadmapExact
 import DASHI.Interop.BH4Atomic369RefinementExact
 import DASHI.Biology.BH4ReactionNetworkRunnerReceipt
 import DASHI.Unified.BH4BiochemicalCrossScaleAdapter
