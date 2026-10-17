@@ -26,19 +26,20 @@ import DASHI.Biology.IITXORGridSynthesisFabricExact
 import DASHI.Biology.IITXORGridOrientationLiftExact
 
 -- Closed routed paths now carry an explicit C3 socket-phase holonomy.  Swapping
--- A/B conjugates the path holonomy while XOR dynamics stays unchanged.  This
--- must remain a chosen orientation chart, not an automatic physical torque.
+-- A/B conjugates the path holonomy while XOR dynamics stays unchanged.
 import DASHI.Biology.IITXORGridLoopHolonomyExact
 
--- The torque donor uses the same symbolic C3 phase carrier.  A proof-relevant
--- handoff compiler must reduce physical same-phase promotion to the donor's
--- exact positive/negative/swap receipts rather than prose correspondence.
+-- The synchronized torque donor uses the same symbolic C3 phase carrier; the
+-- finite one-hop and whole-path phase intertwiners remain amplitude-firewalled.
 import DASHI.Biology.IITGridTorqueC3HolonomyHandoffExact
 
--- The matched face-aware pair must also be recognized as three ordinary binary
--- XOR synthesis cells versus the same fabric plus one genuine ABC interior term.
+-- The matched face-aware pair is three ordinary binary XOR synthesis cells
+-- versus the same fabric plus one genuine ABC interior term.
 import DASHI.Biology.IITFaceAwareTriadicGridSynthesisWeldExact
 
--- Concrete permutation-stabilizer relations: transpose is an involutive graph
--- symmetry and conjugates row translation to column translation.
+-- Concrete permutation stabilizer: generator regression plus the explicit
+-- 3 x 3 x 2 normal-form carrier.  Every normal form preserves the graph by
+-- centralizer closure; finite Python independently checks faithfulness and all
+-- 324 semidirect-product compositions.
 import DASHI.Biology.IITCubePermutationStabilizerRegression
+import DASHI.Biology.IITCubePermutationStabilizer18Exact
