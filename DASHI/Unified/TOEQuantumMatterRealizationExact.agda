@@ -8,6 +8,7 @@ open import Data.List.Base using (List; _∷_; [])
 open import DASHI.Unified.TOESectorRealizationExact
 import DASHI.Unified.TOE369C3RealizationGraphExact as C3
 import DASHI.Unified.CrossScaleMatterPhysics as CrossScale
+import DASHI.Unified.TOEConcreteInhabitantsExact as Inhabitants
 
 record QuantumMatterPayment : Set where
   field
@@ -16,10 +17,12 @@ record QuantumMatterPayment : Set where
     selectedSubsystemObserverPaid : Bool
     nh3C3HamiltonianSourcePaid : Bool
     matbgC3HamiltonianSourcePaid : Bool
+    exactAtomicP2CoulombC3Inhabited : Bool
     crossScaleMatterCarrierPaid : Bool
 
     samePhysicalTPSPaid : Bool
     universalToTPSDynamicsPaid : Bool
+    atomicContinuumSameObjectWeldPaid : Bool
     nh3HamiltonianIntertwinerPaid : Bool
     matbgHamiltonianIntertwinerPaid : Bool
     thermodynamicLimitPaid : Bool
@@ -34,15 +37,17 @@ currentQuantumMatterPayment =
     ; selectedSubsystemObserverPaid = true
     ; nh3C3HamiltonianSourcePaid = true
     ; matbgC3HamiltonianSourcePaid = true
+    ; exactAtomicP2CoulombC3Inhabited = true
     ; crossScaleMatterCarrierPaid = true
     ; samePhysicalTPSPaid = false
     ; universalToTPSDynamicsPaid = false
+    ; atomicContinuumSameObjectWeldPaid = false
     ; nh3HamiltonianIntertwinerPaid = false
     ; matbgHamiltonianIntertwinerPaid = false
     ; thermodynamicLimitPaid = false
     ; empiricalPhaseTransitionPaid = false
     ; sourceReceipt =
-        "Consumes current finite/g-TPS quantum-mereology structure, NH3 source-backed Hamiltonian/state C3 lane, MATBG three-harmonic C3 Hamiltonian lane and the existing cross-scale matter carrier. The live TOE payment is same-object physical TPS/Hamiltonian attachment plus dynamics and experimental continuation."
+        "Consumes current finite/g-TPS quantum-mereology structure, NH3 and MATBG Hamiltonian lanes, and now an actual finite interacting matter inhabitant: the selected hydrogenic common-spin 2p^2 carrier with V_ee=(21/128) I_3 and exact C3 commutation from Agda PR #1194, recut natively in the TOE branch. The live promotion is not Hamiltonian existence anymore; it is the same-object universal-to-physical TPS/Hamiltonian weld, continuum projection, calibration and experiment."
     }
 
 crossScaleMatterSurface : CrossScale.CrossScaleMatterPhysicsSurface
@@ -64,6 +69,7 @@ quantumMatterObligations =
 record QuantumMatterRealization : Set where
   field
     matbgOrientationCandidate : C3.C3Edge
+    selectedAtomicHamiltonianInhabitant : Inhabitants.AtomicP2HamiltonianInhabitant
     payments : QuantumMatterPayment
     attainedGrade : ValidationGrade
     unpaid : List RealizationObligation
@@ -75,11 +81,12 @@ canonicalQuantumMatterRealization : QuantumMatterRealization
 canonicalQuantumMatterRealization =
   record
     { matbgOrientationCandidate = C3.universalToMATBGCandidate
+    ; selectedAtomicHamiltonianInhabitant = Inhabitants.canonicalAtomicP2HamiltonianInhabitant
     ; payments = currentQuantumMatterPayment
     ; attainedGrade = quantumMatterGrade
     ; unpaid = quantumMatterObligations
     ; samePhysicalHamiltonianPromoted = false
     ; samePhysicalHamiltonianPromotedIsFalse = refl
     ; reading =
-        "HAM candidate: quantum subsystem structure and concrete NH3/MATBG matter Hamiltonians are sector readouts of one universal state/refinement/orientation object. Existing TPS and source-backed C3/Hamiltonian structure keeps the hypothesis live; the decisive promotion is a same-object subsystem algebra plus Hamiltonian/dynamics intertwiner and physical calibration, not another shared C3 label."
+        "HAM candidate: quantum subsystem structure and concrete matter Hamiltonians are sector readouts of one universal state/refinement/orientation object. This is no longer merely existential: the TOE branch contains an actual three-state interacting 2p^2 Coulomb Hamiltonian inhabitant whose C3 commutation is proved by construction. The decisive remaining bridge is to identify the universal physical state/TPS and continuum action with that selected matter carrier, then repeat the weld for NH3/MATBG and test calibrated predictions."
     }
