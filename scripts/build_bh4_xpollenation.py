@@ -2,7 +2,7 @@
 """Build deterministic BH4 xPollenation neighbourhoods.
 
 This joins already-acquired Rhea/ChEBI, SABIO adjudication, PDBe/SIFTS and
-Wikimedia identity receipts into typed navigation/enrichment edges.  It does
+Wikimedia identity receipts into typed navigation/enrichment edges. It does
 not perform acquisition and it never promotes a relation into flux payment.
 The output is designed to be packaged as an ITIR `shared-shard-artifact/v1`
 then mirrored to file/HF/IPFS without changing semantic identity.
@@ -49,6 +49,7 @@ def _edge(
         raise ValueError("same-object verification requires an explicit same-object claim")
     return {
         "edgeId": _edge_id(subject_ns, subject_id, relation, object_ns, object_id, source_ref),
+        "subject": {"namespace": subject_ns, "identifier": subject_id},
         "relation": relation,
         "object": {"namespace": object_ns, "identifier": object_id},
         "sourceRef": source_ref,
@@ -190,7 +191,7 @@ def build(
                         object_ns="pdb",
                         object_id=pdb_id,
                         source_ref="PDBe/SIFTS _pdbx_sifts_unp_segments",
-                        source_revision=_text(sifts.get("schema")) if sifts else "",
+                        source_revision=_text((sifts or {}).get("schema")),
                         acquisition_receipt=_text(structure.get("raw_sha256")) or pdb_id,
                         status="identity-paid",
                     )
@@ -210,7 +211,7 @@ def build(
                             object_ns="wikidata-qid",
                             object_id=qid,
                             source_ref="Wikidata exact P352 UniProt match",
-                            source_revision=_text(match.get("wikidata_lastrevid")) or _text(wikimedia.get("panel_schema")) if wikimedia else "",
+                            source_revision=_text(match.get("wikidata_lastrevid")) or _text((wikimedia or {}).get("panel_schema")),
                             acquisition_receipt=_text(match.get("wikidata_entity_response_sha256")) or qid,
                             status="identity-paid",
                             same_object_claimed=True,
