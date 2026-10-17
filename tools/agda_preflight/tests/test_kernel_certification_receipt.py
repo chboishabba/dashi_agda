@@ -1,6 +1,11 @@
 from __future__ import annotations
 
-from agda_preflight.kernel_certification import build_kernel_certification_receipt
+from pathlib import Path
+
+from agda_preflight.kernel_certification import (
+    _agda_check_command,
+    build_kernel_certification_receipt,
+)
 
 
 def _artifact_receipt() -> dict:
@@ -64,3 +69,26 @@ def test_transport_receipt_must_remain_transport_only() -> None:
         assert "transport-only" in str(error)
     else:
         raise AssertionError("transport receipt with proof authority must fail closed")
+
+
+def test_agda_checker_selects_named_dashi_library_in_multi_library_root(tmp_path: Path) -> None:
+    for name in ("bishop.agda-lib", "dashi-agda.agda-lib", "dchott-agda.agda-lib"):
+        (tmp_path / name).write_text(f"name: {name.removesuffix('.agda-lib')}\n", encoding="utf-8")
+
+    source = Path("DASHI/Law/SensibLawMaboBrennanRecognitionFormalDemandExact.agda")
+    assert _agda_check_command(tmp_path, source) == [
+        "agda",
+        "-l",
+        "dashi-agda",
+        str(source),
+    ]
+
+
+def test_agda_checker_requires_canonical_dashi_library_file(tmp_path: Path) -> None:
+    (tmp_path / "bishop.agda-lib").write_text("name: bishop\n", encoding="utf-8")
+    try:
+        _agda_check_command(tmp_path, Path("DASHI/Law/Proof.agda"))
+    except ValueError as error:
+        assert "dashi-agda.agda-lib" in str(error)
+    else:
+        raise AssertionError("Agda checker must fail closed without canonical DASHI library file")
