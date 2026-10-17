@@ -1,7 +1,7 @@
 module DASHI.Unified.BH4BiochemicalEverything where
 
 -- Focused end-to-end root for the bounded BH4 chemistry/369/runner/open-system
--- slice.
+-- slice and its quantitative Phase-4 roadmap.
 
 import DASHI.Biology.Molecular.BH4RheaChEBIReactionExact
 import DASHI.Biology.Molecular.BH4MolecularStoichiometryExact
@@ -10,6 +10,7 @@ import DASHI.Biology.BH4CompartmentKineticStateExact
 import DASHI.Biology.BH4NOSCouplingSameObjectExact
 import DASHI.Biology.BH4JointFluxFeasibilityExact
 import DASHI.Biology.BH4OpenMetabolicNetworkAdapterExact
+import DASHI.Biology.BH4Phase4RoadmapExact
 import DASHI.Interop.BH4Atomic369RefinementExact
 import DASHI.Biology.BH4ReactionNetworkRunnerReceipt
 import DASHI.Unified.BH4BiochemicalCrossScaleAdapter
