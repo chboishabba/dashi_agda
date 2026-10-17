@@ -29,6 +29,8 @@ import DASHI.Culture.ColonialTheatreSensoryAccessExact as Sensory
 import DASHI.Culture.PowersPlantationParadiseEvidenceGraphExact as EvidenceGraph
 import DASHI.Culture.PowersPlantationParadiseMobilityRegimeTransitionExact as Mobility
 import DASHI.Culture.PowersPlantationParadiseResearchThroughPerformanceExact as PerformanceProbe
+import DASHI.Culture.PowersPlantationParadiseSourceAcquisitionPromotionExact as Promotion
+import DASHI.Culture.PowersPlantationParadiseFrontierGenealogyExact as Genealogy
 import DASHI.Culture.PowersPlantationParadiseEmpiricalRoadmapExact as Roadmap
 
 ------------------------------------------------------------------------
@@ -162,6 +164,12 @@ mobilityRegimeBoundary = Mobility.canonicalPowersMobilityRegimeBoundary
 
 researchThroughPerformanceBoundary : PerformanceProbe.PowersResearchThroughPerformanceBoundary
 researchThroughPerformanceBoundary = PerformanceProbe.canonicalPowersResearchThroughPerformanceBoundary
+
+sourceAcquisitionPromotionBoundary : Promotion.PowersSourceAcquisitionPromotionBoundary
+sourceAcquisitionPromotionBoundary = Promotion.canonicalPowersSourceAcquisitionPromotionBoundary
+
+frontierGenealogyBoundary : Genealogy.PowersFrontierGenealogyBoundary
+frontierGenealogyBoundary = Genealogy.canonicalPowersFrontierGenealogyBoundary
 
 empiricalRoadmapBoundary : Roadmap.PowersEmpiricalRoadmapBoundary
 empiricalRoadmapBoundary = Roadmap.canonicalPowersEmpiricalRoadmapBoundary
