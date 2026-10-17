@@ -16,9 +16,13 @@ q2UsesSameR136LocalCStress :
   Cut.q2AnomalyIsOnSameR136LocalCStress ≡ true
 q2UsesSameR136LocalCStress = refl
 
-q3UsesCommonFiniteF2Sequence :
-  Cut.q3UsesPointwiseCommonFiniteF2Sequence ≡ true
-q3UsesCommonFiniteF2Sequence = refl
+q3PointwiseSequenceEqualityRetired :
+  Cut.q3PointwiseCommonFiniteF2SequenceStillRequired ≡ false
+q3PointwiseSequenceEqualityRetired = refl
+
+q3UsesVanishingAsymptoticBridge :
+  Cut.q3UsesAsymptoticFiniteF2Bridge ≡ true
+q3UsesVanishingAsymptoticBridge = refl
 
 wholeActionStillCannotCollapseToClassicalCurvature :
   Cut.wholeGeneratedActionMayCollapseToClassicalCurvature ≡ false
