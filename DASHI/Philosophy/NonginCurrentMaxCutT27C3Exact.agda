@@ -1,16 +1,5 @@
 module DASHI.Philosophy.NonginCurrentMaxCutT27C3Exact where
 
-------------------------------------------------------------------------
--- CURRENT NONGIN MAX-CUT: NATIVE C3-COMPLETED T^27
---
--- The previous current owner pays the generic policy-completed T^27 graph,
--- higher stack and finite hypersheaf.  This additive owner records the new
--- repository-native C3 policy inhabitant, policy-hidden non-descent, exact
--- consumer-relative residual reopening/fidelity boundary, guarded universal-
--- 369 handoff and exact all-finite-depth T^27 lift without weakening
--- attribution boundaries.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
@@ -21,6 +10,7 @@ import DASHI.Reasoning.TrialecticT27Universal369HandoffExact as Handoff
 import DASHI.Reasoning.TrialecticT27C3CompletionPolicyExact as C3Policy
 import DASHI.Reasoning.TrialecticT27NativeC3RealizationExact as Native
 import DASHI.Reasoning.TrialecticT27NativeC3AllDepthLiftExact as AllDepth
+import DASHI.Reasoning.TrialecticT27PNF369RealizationASTExact as AST
 
 previousBoundary : Previous.NonginCurrentMaxCutT27Boundary
 previousBoundary = Previous.canonicalNonginCurrentMaxCutT27Boundary
@@ -43,45 +33,44 @@ nativeBoundary = Native.canonicalTrialecticT27NativeC3RealizationBoundary
 allDepthBoundary : AllDepth.TrialecticT27NativeC3AllDepthLiftBoundary
 allDepthBoundary = AllDepth.canonicalTrialecticT27NativeC3AllDepthLiftBoundary
 
-hiddenThirdFaceNoGoReceipt :
-  Hidden.thirdFaceDoesNotFactorThroughT18 hiddenBoundary ≡ true
+astBoundary : AST.PNF369T27RealizationASTBoundary
+astBoundary = AST.canonicalPNF369T27RealizationASTBoundary
+
+hiddenThirdFaceNoGoReceipt : Hidden.thirdFaceDoesNotFactorThroughT18 hiddenBoundary ≡ true
 hiddenThirdFaceNoGoReceipt = refl
 
-policyResidualReopeningReceipt :
-  Residual.hiddenPolicyExactResidualReopeningPaid residualBoundary ≡ true
+policyResidualReopeningReceipt : Residual.hiddenPolicyExactResidualReopeningPaid residualBoundary ≡ true
 policyResidualReopeningReceipt = refl
 
-policyDiscriminatorReceipt :
-  Residual.thirdFaceMeasurementDiscriminatorPaid residualBoundary ≡ true
+policyDiscriminatorReceipt : Residual.thirdFaceMeasurementDiscriminatorPaid residualBoundary ≡ true
 policyDiscriminatorReceipt = refl
 
-fidelityEscalationReceipt :
-  Residual.fidelityEscalationWitnessPaid residualBoundary ≡ true
+fidelityEscalationReceipt : Residual.fidelityEscalationWitnessPaid residualBoundary ≡ true
 fidelityEscalationReceipt = refl
 
-thirdFaceReductionFailureReceipt :
-  Residual.thirdFaceCandidateReductionFailurePaid residualBoundary ≡ true
+thirdFaceReductionFailureReceipt : Residual.thirdFaceCandidateReductionFailurePaid residualBoundary ≡ true
 thirdFaceReductionFailureReceipt = refl
 
-nativeC3PolicyReceipt :
-  C3Policy.nativeC3CompletionPolicyConstructed c3Boundary ≡ true
+nativeC3PolicyReceipt : C3Policy.nativeC3CompletionPolicyConstructed c3Boundary ≡ true
 nativeC3PolicyReceipt = refl
 
-nativeC3OrderThreeReceipt :
-  C3Policy.t9C3ActionOrderThree c3Boundary ≡ true
+nativeC3OrderThreeReceipt : C3Policy.t9C3ActionOrderThree c3Boundary ≡ true
 nativeC3OrderThreeReceipt = refl
 
-nativeC3FiniteHyperdescentReceipt :
-  Native.nativeC3FiniteHypersheafInhabited nativeBoundary ≡ true
+nativeC3FiniteHyperdescentReceipt : Native.nativeC3FiniteHypersheafInhabited nativeBoundary ≡ true
 nativeC3FiniteHyperdescentReceipt = refl
 
-guardedUniversalHandoffReceipt :
-  Handoff.twentySevenShapeAlignmentPaid handoffBoundary ≡ true
+guardedUniversalHandoffReceipt : Handoff.twentySevenShapeAlignmentPaid handoffBoundary ≡ true
 guardedUniversalHandoffReceipt = refl
 
-nativeC3AllDepthLiftReceipt :
-  AllDepth.everyFiniteDepthLiftedToNativeC3T27 allDepthBoundary ≡ true
+nativeC3AllDepthLiftReceipt : AllDepth.everyFiniteDepthLiftedToNativeC3T27 allDepthBoundary ≡ true
 nativeC3AllDepthLiftReceipt = refl
+
+realizationASTReceipt : AST.exactTypedASTConstructed astBoundary ≡ true
+realizationASTReceipt = refl
+
+realizationOpenLemmaReceipt : AST.sameObjectRealizationExistenceLemmaStated astBoundary ≡ true
+realizationOpenLemmaReceipt = refl
 
 record NonginCurrentMaxCutT27C3Boundary : Set where
   constructor nongin-current-max-cut-t27-c3-boundary
@@ -103,6 +92,10 @@ record NonginCurrentMaxCutT27C3Boundary : Set where
     nativeC3HigherStackPaid : Bool
     nativeC3FiniteHypersheafPaid : Bool
     nativeC3AllFiniteDepthLiftPaid : Bool
+    pnf369T27TypedRealizationASTPaid : Bool
+    pnf369T27FiniteInvariantLedgerPaid : Bool
+    pnf369T27SameObjectOpenLemmaStated : Bool
+    pnf369T27TerminalSameObjectRealizationPaid : Bool
     nativeC3PhysicalDynamicsPaid : Bool
     completedT27DeterminesNextStructuredState : Bool
     thirdFaceConsumerPreservedByT18Reduction : Bool
@@ -118,4 +111,5 @@ canonicalNonginCurrentMaxCutT27C3Boundary =
   nongin-current-max-cut-t27-c3-boundary
     true true true true true true true true true
     true true true true true true true true
+    true true true false
     false false false false false false false
