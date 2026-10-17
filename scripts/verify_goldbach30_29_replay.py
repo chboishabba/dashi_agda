@@ -1,17 +1,38 @@
 from dataclasses import dataclass
 from enum import Enum
+from pathlib import Path
 import json
+import re
 
 """Independent executable reconstruction of the attributed Goldbach30/29
-abstract transition semantics used only as a bounded empirical replay receipt.
+abstract transition semantics, now anchored to byte-exact vendored upstream
+`Program.lean` source objects.
 
-External construction authority: Mike Dupont / meta-introspector, aok commits
-7added5000a75226a834ba7aab08a7380f0c70b3 and
+External construction authority: Mike Dupont / meta-introspector, aok commit
 c168223e96f7acc6179044f2a365a92db2e350c3.
 
-This is NOT a copy of the upstream Lean source and does not substitute for the
-upstream Lean kernel proofs or DASHI's Agda theorems.
+The vendored Lean files remain upstream AGPL-3.0 source. This Python replay is
+DASHI-authored empirical verification: it parses the literal published
+FRACTRAN fraction lists, checks their source-level relation, and cross-checks
+direct integer FRACTRAN stepping against the independently reconstructed
+abstract machines. It does not replace either Lean `fstep_enc` theorem or an
+Agda kernel proof.
 """
+
+ROOT = Path(__file__).resolve().parents[1]
+VENDOR_ROOT = ROOT / "vendor" / "meta-introspector-aok"
+VENDOR29_PROGRAM = (
+    VENDOR_ROOT
+    / "c168223e96f7acc6179044f2a365a92db2e350c3"
+    / "Goldbach29"
+    / "Program.lean"
+)
+VENDOR30_PROGRAM = (
+    VENDOR_ROOT
+    / "c168223e96f7acc6179044f2a365a92db2e350c3"
+    / "Goldbach30"
+    / "Program.lean"
+)
 
 
 class St(Enum):
@@ -46,6 +67,95 @@ class Regs:
 class Cfg:
     st: St
     r: Regs
+
+
+REGISTER_PRIMES = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29)
+STATE_PRIMES_30 = {
+    St.RAA: 31,
+    St.RAB: 37,
+    St.Q: 41,
+    St.R: 43,
+    St.R2: 47,
+    St.NTA: 53,
+    St.NT2A: 59,
+    St.NTB: 61,
+    St.NT2B: 67,
+    St.SA: 71,
+    St.SB: 73,
+}
+STATE_PRIMES_29 = {
+    St.RAA: 31,
+    St.RAB: 37,
+    St.Q: 41,
+    St.R: 43,
+    St.R2: 47,
+    St.NTA: 53,
+    St.NT2A: 59,
+    St.NTB: 61,
+    St.NT2B: 67,
+    St.SB: 71,
+}
+
+
+def extract_fractran_program(path: Path):
+    """Parse exactly the literal fraction list assigned to `goldbachProg`."""
+    text = path.read_text()
+    match = re.search(
+        r"def\s+goldbachProg\s*:\s*FractranProgram\s*:=\s*\[(.*?)\]",
+        text,
+        flags=re.S,
+    )
+    if not match:
+        raise AssertionError(f"goldbachProg list not found in {path}")
+    return [(int(p), int(q)) for p, q in re.findall(r"(\d+)\s*/\s*(\d+)", match.group(1))]
+
+
+def fractran_step(program, n):
+    for numerator, denominator in program:
+        product = n * numerator
+        if product % denominator == 0:
+            return product // denominator
+    return None
+
+
+def encode_cfg(cfg, state_primes):
+    if cfg is None:
+        return None
+    exponents = (
+        cfg.r.a,
+        cfg.r.b,
+        cfg.r.c,
+        cfg.r.d,
+        cfg.r.e,
+        cfg.r.f,
+        cfg.r.s,
+        cfg.r.g,
+        cfg.r.h,
+        cfg.r.m,
+    )
+    n = state_primes[cfg.st]
+    for p, exponent in zip(REGISTER_PRIMES, exponents):
+        n *= p ** exponent
+    return n
+
+
+def verify_vendored_fraction_programs():
+    p29 = extract_fractran_program(VENDOR29_PROGRAM)
+    p30 = extract_fractran_program(VENDOR30_PROGRAM)
+    assert len(p29) == 29
+    assert len(p30) == 30
+    # Literal source relation: the shared machine front/back-end prefix is exact.
+    assert p29[:25] == p30[:25]
+    # The failure transition NT_B*b*c -> RA_A*a*d^2*f is reused unchanged,
+    # shifted by the inserted/removed success routing.
+    assert p30[26] == p29[27] == (39494, 915)
+    # Start integer is source-declared identically in both Program files.
+    assert "def goldbachStart : ℕ := 710892" in VENDOR29_PROGRAM.read_text()
+    assert "def goldbachStart : ℕ := 710892" in VENDOR30_PROGRAM.read_text()
+    # Each exact source contains its own formal one-step bridge.
+    assert "theorem fstep_enc" in VENDOR29_PROGRAM.read_text()
+    assert "theorem fstep_enc" in VENDOR30_PROGRAM.read_text()
+    return p29, p30
 
 
 def step30(cfg):
@@ -150,6 +260,13 @@ def step29(cfg):
     return None
 
 
+def verify_direct_fractran_step_bridge(program, step, state_primes, cfg):
+    encoded = encode_cfg(cfg, state_primes)
+    abstract_next = step(cfg)
+    fractran_next = fractran_step(program, encoded)
+    assert fractran_next == encode_cfg(abstract_next, state_primes)
+
+
 def is_top(cfg):
     if cfg is None or cfg.st != St.RAA:
         return False
@@ -175,7 +292,7 @@ def first_raa(step, cfg, limit=10000):
     raise AssertionError("no RAA boundary within limit")
 
 
-def verify_macro_grid():
+def verify_macro_grid(p29, p30):
     cases = 0
     for a_tail in range(5):
         for b in range(4):
@@ -193,6 +310,10 @@ def verify_macro_grid():
                                 new, _ = first_raa(step29, start)
                                 assert old is not None and old.r == expected
                                 assert new is not None and new.r == expected
+                                # Same-object sanity: direct FRACTRAN must agree with the
+                                # attributed abstract step on the success entry itself.
+                                verify_direct_fractran_step_bridge(p30, step30, STATE_PRIMES_30, start)
+                                verify_direct_fractran_step_bridge(p29, step29, STATE_PRIMES_29, start)
                                 cases += 1
 
     # Regression: arbitrary f>1 must NOT be admitted by the macro contract.
@@ -207,10 +328,13 @@ def verify_macro_grid():
     return cases
 
 
-def advance_top(step, cfg, machine, max_steps=10_000_000):
+def advance_top(step, cfg, machine, program, state_primes, max_steps=10_000_000):
     assert is_top(cfg)
     success = False
     for n in range(1, max_steps + 1):
+        # Every abstract microstep on the replay path is cross-checked against
+        # the literal vendored FRACTRAN fraction program.
+        verify_direct_fractran_step_bridge(program, step, state_primes, cfg)
         if machine == "30" and cfg.st == St.NTB and cfg.r.s == 0 and cfg.r.g == 0 and cfg.r.f > 0:
             nxt = step(cfg)
             if nxt is not None and nxt.st == St.SA:
@@ -221,7 +345,7 @@ def advance_top(step, cfg, machine, max_steps=10_000_000):
     raise AssertionError("top segment exceeded max_steps")
 
 
-def verify_checkpoint_replay(segments=200):
+def verify_checkpoint_replay(p29, p30, segments=200):
     c30 = Cfg(St.RAA, Regs(2, 2, 0, 2, 0, 1, 0, 0, 0, 0))
     c29 = c30
     total30 = 0
@@ -232,8 +356,8 @@ def verify_checkpoint_replay(segments=200):
         assert is_top(c30) and is_top(c29)
         assert (c30.r.a, c30.r.b, c30.r.c) == (c29.r.a, c29.r.b, c29.r.c)
 
-        n30, l30, success = advance_top(step30, c30, "30")
-        n29, l29, _ = advance_top(step29, c29, "29")
+        n30, l30, success = advance_top(step30, c30, "30", p30, STATE_PRIMES_30)
+        n29, l29, _ = advance_top(step29, c29, "29", p29, STATE_PRIMES_29)
         assert (n30 is None) == (n29 is None)
         if n30 is None:
             return {
@@ -264,9 +388,19 @@ def verify_checkpoint_replay(segments=200):
 
 
 def main():
-    macro_cases = verify_macro_grid()
-    replay = verify_checkpoint_replay()
-    print(json.dumps({"macro_cases": macro_cases, "checkpoint_replay": replay}, sort_keys=True))
+    p29, p30 = verify_vendored_fraction_programs()
+    macro_cases = verify_macro_grid(p29, p30)
+    replay = verify_checkpoint_replay(p29, p30)
+    print(
+        json.dumps(
+            {
+                "vendored_program_lengths": [len(p30), len(p29)],
+                "macro_cases": macro_cases,
+                "checkpoint_replay": replay,
+            },
+            sort_keys=True,
+        )
+    )
 
 
 if __name__ == "__main__":
