@@ -11,6 +11,7 @@ import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerExact as
 import DASHI.Physics.QuantumVacuum.CasimirPinnedR457SourceNativeCompilerExact as PinnedR457
 import DASHI.Physics.QuantumVacuum.CasimirCMP119H2R457CompilerExact as H2R457
 import DASHI.Physics.QuantumVacuum.CasimirSelectedTargetR457CompilerExact as SelectedR457
+import DASHI.Physics.QuantumVacuum.CasimirSelectedTargetContinuumFrontierExact as ContinuumFrontier
 import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeExact as GroupLaw
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Stress
 import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationExact as FreeNormalization
@@ -30,9 +31,8 @@ import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exac
 --
 -- The selected Casimir application uses the UnifiedCandidate's existing
 -- qftTarget at one chosen candidate/regime as its literal Yang-Mills object.
--- It does not need a second pinned/H2 construction before same-object stress
--- attachment can begin.  H2/R581 remain valid upstream producer/audit routes
--- for constructing such a target, but are not mandatory Casimir-local leaves.
+-- The first source payments are the exact finite->continuum theorem and the
+-- exact Schwinger-membership theorem on that selected object.
 ------------------------------------------------------------------------
 
 legacyTerminalBoundary : Legacy.Casimir369StressEnergyTerminalBoundary
@@ -52,6 +52,9 @@ cmp119H2R457Boundary = H2R457.canonicalCMP119H2R457Boundary
 
 selectedTargetR457Boundary : SelectedR457.CasimirSelectedTargetR457Boundary
 selectedTargetR457Boundary = SelectedR457.canonicalSelectedTargetR457Boundary
+
+selectedTargetContinuumBoundary : ContinuumFrontier.CasimirSelectedTargetContinuumBoundary
+selectedTargetContinuumBoundary = ContinuumFrontier.canonicalSelectedTargetContinuumBoundary
 
 quaternionGroupLawBoundary : GroupLaw.CasimirQuaternionSU2GroupLawBoundary
 quaternionGroupLawBoundary = GroupLaw.canonicalQuaternionSU2GroupLawBoundary
@@ -275,6 +278,16 @@ selectedTargetR457CompilerPaid =
   SelectedR457.selectedTargetPrimitiveSourceInputsBuildR457CompilerOwned
     selectedTargetR457Boundary
 
+selectedTargetContinuumFrontierCompilerPaid : Bool
+selectedTargetContinuumFrontierCompilerPaid =
+  ContinuumFrontier.splitContinuumAndSchwingerBuildMinimalAttachmentCompilerOwned
+    selectedTargetContinuumBoundary
+
+independentCombinedContinuumSchwingerAttachmentRequired : Bool
+independentCombinedContinuumSchwingerAttachmentRequired =
+  ContinuumFrontier.combinedMinimalAttachmentRequiredAfterTwoLeaves
+    selectedTargetContinuumBoundary
+
 independentLiteralConstructionProducerRequiredForSelectedCasimir : Bool
 independentLiteralConstructionProducerRequiredForSelectedCasimir =
   SelectedR457.independentLiteralConstructionProducerRequiredForCasimirR457
@@ -322,6 +335,8 @@ legacyPinnedYangMillsConstructionBlockerRetired : Bool
 legacyPinnedYangMillsConstructionBlockerRetired = true
 
 data PrimitiveSourceNativeCasimirBlocker : Set where
+  missingSelectedTargetContinuumLimit : PrimitiveSourceNativeCasimirBlocker
+  missingSelectedTargetSchwingerMembership : PrimitiveSourceNativeCasimirBlocker
   missingSelectedTargetContinuumSchwingerAttachment : PrimitiveSourceNativeCasimirBlocker
   missingPrimitiveR114LiteralStressCoordinate : PrimitiveSourceNativeCasimirBlocker
   missingPrimitiveR119CanonicalMetricSelectedStressSemantics : PrimitiveSourceNativeCasimirBlocker
@@ -350,13 +365,13 @@ data PrimitiveSourceNativeCasimirBlocker : Set where
   missingCMP119LiteralConstructionEndpointFields : PrimitiveSourceNativeCasimirBlocker
 
 firstPrimitiveUnificationBlocker : PrimitiveSourceNativeCasimirBlocker
-firstPrimitiveUnificationBlocker = missingSelectedTargetContinuumSchwingerAttachment
+firstPrimitiveUnificationBlocker = missingSelectedTargetContinuumLimit
 
 secondPrimitiveUnificationBlocker : PrimitiveSourceNativeCasimirBlocker
-secondPrimitiveUnificationBlocker = missingPrimitiveR114LiteralStressCoordinate
+secondPrimitiveUnificationBlocker = missingSelectedTargetSchwingerMembership
 
 thirdPrimitiveUnificationBlocker : PrimitiveSourceNativeCasimirBlocker
-thirdPrimitiveUnificationBlocker = missingPrimitiveR119CanonicalMetricSelectedStressSemantics
+thirdPrimitiveUnificationBlocker = missingPrimitiveR114LiteralStressCoordinate
 
 firstH2SourceFacingSubfrontier : String
 firstH2SourceFacingSubfrontier =
@@ -396,4 +411,4 @@ retiredIndependentStressSymmetryBlockerDoesNotReturn ()
 
 sourceNativeTerminalReading : String
 sourceNativeTerminalReading =
-  "The authoritative selected-Casimir max-cut starts from the UnifiedCandidate's existing qftTarget at one chosen candidate/regime. No second literal-Y producer, H2/R581 construction route, global Round131 attachment, full PinnedYangMillsConstruction, or positive Clay mass-gap/SI proof is mandatory merely to attach Casimir stress. The first source payment is continuum-limit plus Schwinger-membership on that exact selected target, followed by R114/R119/R122/R124/R127 on the same object. QFTRecoveryReceipt directly identifies recoverQFT(joint) with this target. H2/R581 remain valid optional producer/audit routes for constructing a target from CMP119 source data. All later SU2/U1/Maxwell/Casimir stress, all-sector, common-action, GR and experimental seams remain fail-closed."
+  "The authoritative selected-Casimir max-cut starts from the UnifiedCandidate's existing qftTarget at one chosen candidate/regime. No second literal-Y producer, H2/R581 construction route, global Round131 attachment, full PinnedYangMillsConstruction, or positive Clay mass-gap/SI proof is mandatory merely to attach Casimir stress. The first two exact source payments are finiteMeasure(qftTarget)->continuumMeasure(qftTarget) and schwinger(qftTarget) belonging to that same continuum measure for the selected compact-simple sector. Their conjunction compiles the older combined continuum receipt. R114/R119/R122/R124/R127 then attach stress/density/measure/OS semantics on that same target, while QFTRecoveryReceipt directly identifies recoverQFT(joint) with it. H2/R581 remain optional producer/audit routes. All later SU2/U1/Maxwell/Casimir stress, all-sector, common-action, GR and experimental seams remain fail-closed."
