@@ -16,8 +16,9 @@ module DASHI.Reasoning.TrialecticT27PolicyResidualReductionExact where
 --
 -- For the declared T^18 observation, the reduction is future-safe under the
 -- identity action.  The canonical collision is also an exact measurement
--- discriminator for the third T^9 face and a mechanistic-equifinality witness
--- for policy choice.  None of this turns policy labels into physical mechanism.
+-- discriminator, mechanistic-equifinality witness, fidelity-escalation witness
+-- and candidate-reduction failure when the declared consumer is the third T^9
+-- face.  None of this turns policy labels into physical mechanism.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -134,10 +135,55 @@ policyMechanisticEquifinality =
     Hidden.differentPolicyChoice
 
 ------------------------------------------------------------------------
--- 5. The third-face consumer does not descend through this reduction.  This
---    proof is stated directly on the reduction encoding, so no duplicate
---    factorisation record is introduced.
+-- 5. High-fidelity identity reduction.  It retains the whole tagged fine state
+--    while declaring the same T^18 observation, making the loss of the low
+--    reduction explicit through the generic fidelity-escalation interface.
 ------------------------------------------------------------------------
+
+fullTaggedReduction :
+  Reduction.ConsumerRelativeReduction
+    Hidden.PolicyTaggedT27
+    ⊤
+    Tower.T18Coordinates
+fullTaggedReduction =
+  Reduction.consumerRelativeReduction
+    Hidden.PolicyTaggedT27
+    (λ state → state)
+    identityFineStep
+    identityFineStep
+    Hidden.observedT18
+    Hidden.observedT18
+    (λ action state → refl)
+    (λ state → refl)
+
+policyFidelityEscalation :
+  Reduction.FidelityEscalationWitness
+    t18ConsumerReduction
+    fullTaggedReduction
+policyFidelityEscalation =
+  Reduction.fidelityEscalationWitness
+    Hidden.firstPolicyState
+    Hidden.secondPolicyState
+    Hidden.sameObservedT18
+    Hidden.differentPolicyChoice
+
+------------------------------------------------------------------------
+-- 6. If the declared consumer is instead the third T^9 face, the same T^18
+--    candidate code is falsified immediately by the zero-length action trace.
+------------------------------------------------------------------------
+
+thirdFaceCandidateReductionFailure :
+  Reduction.CandidateReductionFailure
+    identityFineStep
+    Hidden.thirdFaceConsumer
+    Hidden.observedT18
+thirdFaceCandidateReductionFailure =
+  Reduction.candidateReductionFailure
+    Hidden.firstPolicyState
+    Hidden.secondPolicyState
+    Hidden.sameObservedT18
+    []
+    Hidden.differentThirdFace
 
 thirdFaceDoesNotDescendThroughReduction :
   (realize : Tower.T18Coordinates → Tower.T9Coordinates) →
@@ -154,7 +200,7 @@ thirdFaceDoesNotDescendThroughReduction realize commutes =
         (sym (commutes Hidden.secondPolicyState))))
 
 ------------------------------------------------------------------------
--- 6. Promotion boundary.
+-- 7. Promotion boundary.
 ------------------------------------------------------------------------
 
 record TrialecticT27PolicyResidualReductionBoundary : Set where
@@ -164,6 +210,8 @@ record TrialecticT27PolicyResidualReductionBoundary : Set where
     hiddenPolicyExactResidualReopeningPaid : Bool
     thirdFaceMeasurementDiscriminatorPaid : Bool
     policyMechanisticEquifinalityPaid : Bool
+    fidelityEscalationWitnessPaid : Bool
+    thirdFaceCandidateReductionFailurePaid : Bool
     declaredT18FutureConsumerPreserved : Bool
     thirdFaceConsumerPreservedByT18Reduction : Bool
     residualIdentifiedAsPolicyChoice : Bool
@@ -175,7 +223,7 @@ canonicalTrialecticT27PolicyResidualReductionBoundary :
   TrialecticT27PolicyResidualReductionBoundary
 canonicalTrialecticT27PolicyResidualReductionBoundary =
   trialectic-t27-policy-residual-reduction-boundary
-    true true true true true false true false
+    true true true true true true true false true false
 
 -- Re-export the canonical collision names for focused validation convenience.
 firstPolicyState : Hidden.PolicyTaggedT27
