@@ -20,6 +20,14 @@ secondFiniteF2FamilyRetired :
   Audit.secondFiniteCurvatureFamilyForF2Required ≡ false
 secondFiniteF2FamilyRetired = refl
 
+q3TermwiseEqualityRetired :
+  Audit.q3PointwiseFiniteF2EqualityStillRequired ≡ false
+q3TermwiseEqualityRetired = refl
+
+q3VanishingBridgeIsLiveSourcePayment :
+  Audit.q3AsymptoticFiniteF2BridgeStillSourcePackage ≡ true
+q3VanishingBridgeIsLiveSourcePayment = refl
+
 wholeActionClassicalCollapseRejected :
   Audit.wholeGeneratedActionMayCollapseToClassicalCurvature ≡ false
 wholeActionClassicalCollapseRejected = refl
