@@ -44,7 +44,8 @@ def test_vendor_notice_and_license_surface_present():
     assert "GNU AFFERO GENERAL PUBLIC LICENSE" in license_text
     assert "Version 3, 19 November 2007" in license_text
     assert "0ad25db4bd1d86c452db3f9602ccdbe172438f52" in license_text
-    assert "does not claim" in license_text
+    assert "does not claim to" in license_text
+    assert "byte-identical" in license_text
 
 
 def test_replay_consumes_vendored_sources_directly():
