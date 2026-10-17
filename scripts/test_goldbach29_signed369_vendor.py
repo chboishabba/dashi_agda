@@ -1,8 +1,16 @@
 from pathlib import Path
+import hashlib
 
 ROOT = Path(__file__).resolve().parents[1]
 
 PIN = ROOT / "vendor" / "meta-introspector-aok-goldbach29.VENDOR"
+VENDOR_ROOT = ROOT / "vendor" / "meta-introspector-aok"
+VENDOR_LICENSE = VENDOR_ROOT / "LICENSE.AGPL-3.0"
+VENDOR30 = VENDOR_ROOT / "c168223e96f7acc6179044f2a365a92db2e350c3" / "Goldbach30" / "Program.lean"
+VENDOR29 = VENDOR_ROOT / "c168223e96f7acc6179044f2a365a92db2e350c3" / "Goldbach29" / "Program.lean"
+VENDOR29_MAIN = VENDOR_ROOT / "428e2366045cb0b728115777df8bef14318a3bcf" / "Goldbach29" / "Main.lean"
+VENDOR29_LOOPS = VENDOR_ROOT / "428e2366045cb0b728115777df8bef14318a3bcf" / "Goldbach29" / "Loops.lean"
+VENDOR_NOTICE = VENDOR_ROOT / "NOTICE.md"
 BRIDGE = ROOT / "DASHI" / "ComputerScience" / "Goldbach29Signed369VendorBridgeExact.agda"
 MACRO = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29SuccessMacroExact.agda"
 CHECKPOINT = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29CheckpointMachineExact.agda"
@@ -15,6 +23,11 @@ VIS = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29VisualizationConsumerE
 REPLAY = ROOT / "scripts" / "verify_goldbach30_29_replay.py"
 AGGREGATE = ROOT / "DASHI" / "EverythingGoldbach29Signed369VendorExact.agda"
 WORKFLOW = ROOT / ".github" / "workflows" / "goldbach29-signed369-vendor.yml"
+
+
+def git_blob_sha(path: Path) -> str:
+    data = path.read_bytes()
+    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
 
 
 def test_vendor_pin_and_attribution():
@@ -32,6 +45,20 @@ def test_vendor_pin_and_attribution():
     assert "fstep_enc" in text
     assert "goldbachProg_halts_iff" in text
     assert "Mike Dupont" in text or "meta-introspector" in text
+
+
+def test_vendored_upstream_blobs_are_exact_and_licensed():
+    assert VENDOR_LICENSE.exists()
+    assert VENDOR_NOTICE.exists()
+    assert git_blob_sha(VENDOR29) == "ff3f10a3e4c72771ac415a7f4bfb70a209478025"
+    assert git_blob_sha(VENDOR30) == "ff748e1d68bf01d19e0c0998f6ac8d3a1c73e2f3"
+    assert git_blob_sha(VENDOR29_MAIN) == "782ef73cb0b1e0ee72043f5f097b8b1b5213bd3b"
+    assert git_blob_sha(VENDOR29_LOOPS) == "782ef73cb0b1e0ee72043f5f097b8b1b5213bd3b"
+    assert VENDOR29_MAIN.read_bytes() == VENDOR29_LOOPS.read_bytes()
+    notice = VENDOR_NOTICE.read_text()
+    assert "Mike Dupont / meta-introspector" in notice
+    assert "AGPL-3.0" in notice
+    assert "Main.lean and Loops.lean are the same upstream blob" in notice
 
 
 def test_bridge_reuses_signed369_and_descent_owners():
@@ -94,6 +121,10 @@ def test_executable_replay_has_guard_and_checkpoint_regressions():
     assert "s>0 selects restoration" in text
     assert "segments=200" in text
     assert "total29 - total30 == successes" in text
+    assert "VENDOR29_PROGRAM" in text
+    assert "VENDOR30_PROGRAM" in text
+    assert "extract_fractran_program" in text
+    assert "verify_vendored_fraction_programs" in text
 
 
 def test_external_halting_semantics_is_cross_prover_only():
