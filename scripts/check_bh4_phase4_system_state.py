@@ -8,10 +8,14 @@ files = {
     "nos": root / "DASHI/Biology/BH4NOSCouplingSameObjectExact.agda",
     "flux": root / "DASHI/Biology/BH4JointFluxFeasibilityExact.agda",
     "open_network": root / "DASHI/Biology/BH4OpenMetabolicNetworkAdapterExact.agda",
+    "roadmap": root / "DASHI/Biology/BH4Phase4RoadmapExact.agda",
     "matrix_builder": root / "scripts/build_bh4_stoichiometric_matrix.py",
     "parameter_acquirer": root / "scripts/acquire_bh4_parameter_evidence.py",
     "flux_runner": root / "scripts/run_bh4_flux_feasibility.py",
     "regression": root / "DASHI/Biology/BH4Phase4SystemStateRegression.agda",
+    "external_root": root / "DASHI/Biology/ExternalBiologyEverything.agda",
+    "kitzerow_root": root / "DASHI/Biology/KitzerowBH4EvidenceEverything.agda",
+    "unified_root": root / "DASHI/Unified/BH4BiochemicalEverything.agda",
 }
 
 for name, path in files.items():
@@ -52,6 +56,12 @@ for token in [
     assert token in text["open_network"], f"missing open-network token: {token}"
 
 for token in [
+    "currentBH4Phase", "systemStateQuantitativePhase", "wholeSystemFluxBalanceAttempted",
+    "firstJointFluxOutcome", "underdetermined", "livePhase4Residuals",
+]:
+    assert token in text["roadmap"], f"missing roadmap token: {token}"
+
+for token in [
     "species_index", "reaction_index", "matrix", "finite_formula_residuals",
     "signed_coefficient",
 ]:
@@ -59,7 +69,7 @@ for token in [
 
 for token in [
     "payment_status", "same_object_reference", "compartment_reference",
-    "measurement_time_reference", "unresolved",
+    "measurement_time_reference", "unresolved", "REACTION_FLUX:",
 ]:
     assert token in text["parameter_acquirer"], f"missing parameter acquirer token: {token}"
 
@@ -68,5 +78,13 @@ for token in [
     "external_exchange", "candidate_flux_balance_witness",
 ]:
     assert token in text["flux_runner"], f"missing flux runner token: {token}"
+
+for root_name in ["external_root", "kitzerow_root", "unified_root"]:
+    for token in [
+        "BH4PanelStoichiometricMatrixExact", "BH4CompartmentKineticStateExact",
+        "BH4NOSCouplingSameObjectExact", "BH4JointFluxFeasibilityExact",
+        "BH4OpenMetabolicNetworkAdapterExact", "BH4Phase4SystemStateRegression",
+    ]:
+        assert token in text[root_name], f"missing {root_name} phase-4 import: {token}"
 
 print("BH4 phase-4 system-state max-cut regression: ok")
