@@ -14,6 +14,7 @@ dependencies = [
 
 [project.scripts]
 dashi-repo = "agda_preflight.product_cli:main"
+dashi-repo-formal-evidence = "agda_preflight.external_evidence_cli:main"
 dashi-repo-mcp = "agda_preflight.repository_mcp:main"
 dashi-agda = "agda_preflight.interactive_cli:main"
 dashi-agda-server = "agda_preflight.service:main"
