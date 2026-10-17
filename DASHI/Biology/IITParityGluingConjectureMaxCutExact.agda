@@ -7,6 +7,7 @@ module DASHI.Biology.IITParityGluingConjectureMaxCutExact where
 -- ordered gluing        : orientation, handedness, C3 phase / loop holonomy
 -- higher-order gluing   : recurrent binary fabric vs explicit ABC interaction
 -- global geometry       : image/kernel structure and residual stabilizer
+-- IIT structure         : golden-calibrated distinction/relation/big-Phi lane
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -22,10 +23,12 @@ import DASHI.Biology.IITCubeTwoFaceImageRecognitionExact as Cube
 import DASHI.Biology.IITCubeExceptionalGeometryHandoffExact as Exceptional
 import DASHI.Biology.IITCubeConcreteTorusImageExact as Concrete
 import DASHI.Biology.IITCubeDiagonalStabilizerExact as Stabilizer
+import DASHI.Biology.IITCubePermutationStabilizer18Exact as Perm18
 import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact as Broken
 import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact as FullFace
 import DASHI.Biology.IITFaceAwareTriadicCausalPairExact as FaceAware
 import DASHI.Biology.IITFaceAwareTriadicGridSynthesisWeldExact as FaceWeld
+import DASHI.Biology.IITFaceAwarePyPhiGoldenCalibrationExact as Golden
 import DASHI.Biology.IITXORGridSynthesisFabricExact as GridFabric
 import DASHI.Biology.IITXORGridOrientationLiftExact as GridOrientation
 import DASHI.Biology.IITXORGridLoopHolonomyExact as GridHolonomy
@@ -89,6 +92,11 @@ transposeConjugatesRowToColumn :
   ≡ Stabilizer.columnShift (Stabilizer.transposeFace f)
 transposeConjugatesRowToColumn = Stabilizer.transposeRowToColumn
 
+permutation18PreservesCubeGraph :
+  (g : Perm18.Permutation18) →
+  Stabilizer.PreservesGraph (Perm18.permutationEndo g)
+permutation18PreservesCubeGraph = Perm18.permutationPreservesGraph
+
 exceptionalSymmetryBreakingWitness :
   Broken.sectorZ Broken.transformedState ≡ Broken.requiredTransformedThird → ⊥
 exceptionalSymmetryBreakingWitness = Broken.selectedTrinificationShearBreaksCubeGraph
@@ -115,6 +123,12 @@ faceAwareTriadicIsSameFabricPlusABC :
   (site : FaceWeld.TriSite) →
   FaceWeld.triadicOutputField state site ≡ FaceWeld.triadicFabricStep state site
 faceAwareTriadicIsSameFabricPlusABC = FaceWeld.triadicIsPairwiseFabricPlusABC
+
+pairwiseControlIsCanonicalPyPhiXorTPM :
+  (state : FaceAware.BitTriple) →
+  FaceAware.pairwiseStep state ≡ Golden.pyphiCanonicalXorStep state
+pairwiseControlIsCanonicalPyPhiXorTPM =
+  Golden.pairwiseControlIsCanonicalPyPhiXorTPM
 
 gridWideXorSynthesisBoundary : GridFabric.XORGridSynthesisFabricBoundary
 gridWideXorSynthesisBoundary = GridFabric.canonicalXORGridSynthesisFabricBoundary
@@ -203,11 +217,20 @@ record ParityGluingConjectureStatus : Set where
     concreteTorusImageEqualsGraphKernelPaid : Bool
     cubePermutationTransposeStabilizerSourceWritten : Bool
     cubePermutationTranslationReflectionRelationsSourceWritten : Bool
+    cubePermutation18NormalFormsSourceWritten : Bool
+    cubePermutation18FaithfulSemidirectNumericallyPaid : Bool
     cubeCentralizerJordan333NumericallyPaid : Bool
     cubeCentralizerDimension27NumericallyPaid : Bool
     cubeCentralizerM3TruncatedPolynomialAlgebraNumericallyPaid : Bool
 
+    pairwiseControlSameTPMAsPyPhiGoldenKernelPaid : Bool
+    pyPhiXOR2023GoldenCalibrationPaid : Bool
+    pyPhiXOR2026SystemPhiCESSeparationSourceReceipt : Bool
+    goldenCalibratedFullCESMatchedPairNumericallyPaid : Bool
+    fullCESResolvesScalarPhiCollisionAt110 : Bool
+    fullCESResolvesEveryScalarPhiCollision : Bool
     fullIITDistinctionRelationPhiDiscriminatesHigherGluing : Bool
+    directPyPhiPackageReplayPaid : Bool
     diagonalCubeStabilizerCharacterizedKernelPaid : Bool
     exceptionalActionPreservesCubeImageKernelPaid : Bool
     exceptionalActionBreaksSelectedCubeImageKernelPaid : Bool
@@ -224,8 +247,8 @@ canonicalParityGluingConjectureStatus =
     true true true true true true true true true true false false
     true true true true false
     true true true true true true true false true true
-    true true true true true true true true
-    false true false true true false false
+    true true true true true true true true true true
+    true true true true true false true false true false true true false false
 
 record ParityGluingMaxCutFrontier : Set where
   constructor parity-gluing-max-cut-frontier
@@ -239,11 +262,15 @@ record ParityGluingMaxCutFrontier : Set where
     remainingTernaryWorkIsMoreAffineEnumeration : Bool
     remainingCubeWorkIsConcreteSameObjectOperatorProof : Bool
     remainingCubeWorkIsMoreCentralizerDimensionCounting : Bool
+    remainingCubeWorkIsFormalFullCentralizerAlgebra : Bool
     remainingIITWorkIsFullCESMatchedHigherGluingEvaluation : Bool
+    remainingIITWorkIsDirectPyPhiPackageReplay : Bool
     remainingExceptionalWorkIsActionPreservationIntertwiner : Bool
+    remainingExceptionalWorkIsResidualSL3SameActionIntersection : Bool
     remainingLilaWorkIsActualHiddenTrajectoryAndHeldOutConsumer : Bool
 
 canonicalParityGluingMaxCutFrontier : ParityGluingMaxCutFrontier
 canonicalParityGluingMaxCutFrontier =
   parity-gluing-max-cut-frontier
-    false false false false false false false false false true false true
+    false false false false false false false false false
+    true false true false true true
