@@ -9,6 +9,7 @@ import DASHI.Physics.QuantumVacuum.Casimir369StressEnergyTerminalMaxCutExact as 
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutExact as SourceHost
 import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerExact as PinnedRecovery
 import DASHI.Physics.QuantumVacuum.CasimirPinnedR457SourceNativeCompilerExact as PinnedR457
+import DASHI.Physics.QuantumVacuum.CasimirCMP119H2R457CompilerExact as H2R457
 import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeExact as GroupLaw
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Stress
 import DASHI.Physics.QuantumVacuum.CasimirFreeMaxwellActionNormalizationExact as FreeNormalization
@@ -24,20 +25,13 @@ import DASHI.Physics.YangMills.BalabanContinuumMetricStressPairingRound130Exact 
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact as R136
 
 ------------------------------------------------------------------------
--- SOURCE-NATIVE TERMINAL, PRIMITIVE-LEAF RECUT
+-- SOURCE-NATIVE TERMINAL
 --
--- The earlier terminal started too late: it treated R457/Round131 attachment as
--- the first input and hid the still-conditional source objects below it.  The
--- canonical pinned route now contracts the wrapper chain
---
---   R114 + R119 -> R120
---   R120 + R122 -> R123
---   R123 + R124 -> R125
---   pinned continuum + R125 -> R126
---   R126 + R127 -> R128 -> R457
---
--- and QFTRecoveryReceipt compiles selected-target identity -> Round131 recovery.
--- Thus the terminal begins at the first theorem-bearing source leaves.
+-- Compatibility surface: the historical pinned/R457 list is retained below so
+-- existing consumers keep their names.  The authoritative primitive source cut
+-- is now the CMP119 H2/R581 lane: Casimir stress does not consume the full
+-- PinnedYangMillsConstruction and therefore does not require a positive Clay
+-- mass-gap/SI proof package merely to construct the R457 stress carrier.
 ------------------------------------------------------------------------
 
 legacyTerminalBoundary : Legacy.Casimir369StressEnergyTerminalBoundary
@@ -51,6 +45,9 @@ pinnedRecoveryBoundary = PinnedRecovery.canonicalRound131PinnedRecoveryBoundary
 
 pinnedR457SourceNativeBoundary : PinnedR457.CasimirPinnedR457SourceNativeBoundary
 pinnedR457SourceNativeBoundary = PinnedR457.canonicalPinnedR457SourceNativeBoundary
+
+cmp119H2R457Boundary : H2R457.CasimirCMP119H2R457Boundary
+cmp119H2R457Boundary = H2R457.canonicalCMP119H2R457Boundary
 
 quaternionGroupLawBoundary : GroupLaw.CasimirQuaternionSU2GroupLawBoundary
 quaternionGroupLawBoundary = GroupLaw.canonicalQuaternionSU2GroupLawBoundary
@@ -103,6 +100,10 @@ round130CompilerLevel = R130.continuumMetricStressPairingCompilerLevel
 
 round136CompilerLevel : ProofLevel
 round136CompilerLevel = R136.unifiedGeneratedActionRecoveryCompilerLevel
+
+------------------------------------------------------------------------
+-- Existing compatibility boundary.
+------------------------------------------------------------------------
 
 record CasimirSourceNativeTerminalBoundary : Set where
   constructor casimir-source-native-terminal-boundary
@@ -261,6 +262,67 @@ firstGravityBlocker = missingSemiclassicalGravitySameObjectWeld
 firstExperimentalBlocker : RemainingSourceNativeCasimirBlocker
 firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
+------------------------------------------------------------------------
+-- AUTHORITATIVE PRIMITIVE SOURCE FRONTIER
+------------------------------------------------------------------------
+
+cmp119H2R457CompilerPaid : Bool
+cmp119H2R457CompilerPaid =
+  H2R457.cmp119H2LiteralConstructionCompilerOwned cmp119H2R457Boundary
+
+fullPinnedYangMillsConstructionRequiredForCasimirStress : Bool
+fullPinnedYangMillsConstructionRequiredForCasimirStress =
+  H2R457.pinnedYangMillsConstructionRequiredForCasimirR457 cmp119H2R457Boundary
+
+positiveClayMassGapProofRequiredForCasimirStress : Bool
+positiveClayMassGapProofRequiredForCasimirStress = false
+
+r581PreferredFiniteOSMomentSourceStillRequired : Bool
+r581PreferredFiniteOSMomentSourceStillRequired =
+  H2R457.r581PreferredFiniteOSMomentSourceStillRequiredInsideH2 cmp119H2R457Boundary
+
+legacyPinnedYangMillsConstructionBlockerRetired : Bool
+legacyPinnedYangMillsConstructionBlockerRetired = true
+
+data PrimitiveSourceNativeCasimirBlocker : Set where
+  missingCMP119H2PhysicalInstantiation : PrimitiveSourceNativeCasimirBlocker
+  missingCMP119LiteralConstructionEndpointFields : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveR114LiteralStressCoordinate : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveR119CanonicalMetricSelectedStressSemantics : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveR122LiteralDensityAnchoring : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveR124LiteralDensityFiniteMeasureWeld : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveR127SourceOSLiteralSchwingerWeld : PrimitiveSourceNativeCasimirBlocker
+  missingLiteralSelectedQFTTargetIdentity : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveSelectedGroupQuaternionSU2Realization : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveSelectedQFTCartanFieldRealization : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveFreeMaxwellActionNormalization : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveSameObjectNondegenerateCurvature : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveSelectedNonlinearExteriorCartanTransport : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveCasimirRound132GeneratedActionAttachment : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveCasimirQ1FiniteTangentCurveAttachment : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveCasimirRound130StressReadoutAttachment : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveSelectedQFTStressMetricVariationReadoutAttachment : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveMaxwellReadoutSameRenormalizedModeStressAttachment : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveSelectedStressMetricBasisAttachment : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveBrownMaclayTenIndependentComponentValues : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveRound131AllSectorAssembly : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveEinsteinCommonMetricVariation : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveCommonMetricProducerLanguage : PrimitiveSourceNativeCasimirBlocker
+  missingPrimitiveCasimirCommonActionVariationIdentification : PrimitiveSourceNativeCasimirBlocker
+
+firstPrimitiveUnificationBlocker : PrimitiveSourceNativeCasimirBlocker
+firstPrimitiveUnificationBlocker = missingCMP119H2PhysicalInstantiation
+
+secondPrimitiveUnificationBlocker : PrimitiveSourceNativeCasimirBlocker
+secondPrimitiveUnificationBlocker = missingCMP119LiteralConstructionEndpointFields
+
+thirdPrimitiveUnificationBlocker : PrimitiveSourceNativeCasimirBlocker
+thirdPrimitiveUnificationBlocker = missingPrimitiveR114LiteralStressCoordinate
+
+firstH2SourceFacingSubfrontier : String
+firstH2SourceFacingSubfrontier =
+  "Round581 PublishedFiniteOSMomentSource: published finite Euclidean covariance + bosonic permutation symmetry + Wilson reflection positivity applicability + exact-family quantitative moments + OS0/OS5 closure + selected OS4 clustering"
+
 data RetiredRound131AttachmentBlockerAutomaticallyReturns : Set where
 data RetiredR457PinnedIdentityBlockerAutomaticallyReturns : Set where
 data RetiredR120WrapperBlockerAutomaticallyReturns : Set where
@@ -295,4 +357,4 @@ retiredIndependentStressSymmetryBlockerDoesNotReturn ()
 
 sourceNativeTerminalReading : String
 sourceNativeTerminalReading =
-  "The source-native Casimir/GRQFT terminal now begins at the first theorem-bearing source objects rather than downstream recovery wrappers. No concrete PinnedYangMillsConstruction inhabitant is currently supplied. Conditional on that upstream Yang-Mills object, the local pinned-R457 route requires R114 one-coordinate same-object stress semantics, R119 canonical metric selected-stress semantics, R122 literal beta-density anchoring, R124 beta-density/literal-finite-measure identity and R127 source-OS/literal-Schwinger identity. These compile R120/R123/R125/R126/R128/R457, so Y_R457=Y_pinned is definitional on the canonical route. A single pinned-literal=qftTarget identity plus the existing QFTRecoveryReceipt then compiles Round131 recovery. All later SU2/U1/Maxwell/Casimir stress seams remain ordered after those source inputs."
+  "The authoritative primitive Casimir/GRQFT max-cut no longer requires a full PinnedYangMillsConstruction or a positive Clay mass-gap/SI theorem. CMP119 H2 plus CMP119LiteralConstructionFields definitionally builds the literal Y and supplies the continuum-limit/Schwinger-membership witnesses needed for R457. H2 itself is conditional on its preferred Round581 finite-OS/moment source and literal endpoint interpretations. After H2, the local source leaves are R114 same-object stress coordinate, R119 selected metric-stress semantics, R122 literal density anchoring, R124 density/literal-finite-measure identity and R127 source-OS/literal-Schwinger identity. A literal-Y=qftTarget identity plus QFTRecoveryReceipt compiles Round131 recovery; the later SU2/U1/Maxwell/Casimir stress and GRQFT seams remain fail-closed."
