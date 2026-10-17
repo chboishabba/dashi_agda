@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.ComputerScience.Goldbach29Signed369VendorBridgeExact as Bridge
 import DASHI.ComputerScience.Goldbach30To29SuccessMacroExact as Macro
+import DASHI.ComputerScience.Goldbach30To29CheckpointMachineExact as Checkpoint
 import DASHI.ComputerScience.Goldbach29ExternalHaltingSemanticsExact as Semantics
 import DASHI.ComputerScience.Goldbach30HaltingSourceAuditExact as Audit30
 import DASHI.ComputerScience.Goldbach30To29HaltingConsumerCompilerExact as Halting
@@ -49,6 +50,15 @@ successExecutionPenaltyPaid :
   ≡ suc (Macro.oldSuccessExecutionLength a)
 successExecutionPenaltyPaid = Macro.newSuccessExecutionLengthIsOneMore
 
+checkpointHaltingEquivalenceTheorem :
+  (kernel : Checkpoint.SharedSearchKernel) →
+  (start : Checkpoint.TopCheckpoint) →
+  Halting.LogicalIff
+    (Checkpoint.oldCheckpointHalts kernel start)
+    (Checkpoint.newCheckpointHalts kernel start)
+checkpointHaltingEquivalenceTheorem =
+  Checkpoint.oldCheckpointHaltsIffNewCheckpointHalts
+
 programLengthAndExecutionLengthRemainDifferentConsumers :
   Signed.shortestProgramLengthEqualsExecutionLength
     Signed.canonicalSignedSSPWeaveBoundary
@@ -72,23 +82,34 @@ goldbach30FormalHaltingSourceFound =
 sameCounterexampleHaltingCompilerPaid : Bool
 sameCounterexampleHaltingCompilerPaid = true
 
+checkpointHaltingEquivalencePaid : Bool
+checkpointHaltingEquivalencePaid = true
+
+sourceConcreteFractranAttachmentPaid : Bool
+sourceConcreteFractranAttachmentPaid =
+  Checkpoint.sourceConcreteFractranAttachmentPaid
+
 ------------------------------------------------------------------------
--- Paid Pareto point.
+-- Paid Pareto / semantic cut.
 --
 -- Relative to Goldbach30, Goldbach29 simultaneously has:
 --   - one fewer fraction;
 --   - one fewer control state;
---   - the same success-macro terminal register consumer;
+--   - the same guard-corrected success-macro terminal register consumer;
 --   - one MORE microstep on that success macro.
 --
--- The later attributed Lean source additionally pays the Goldbach29 halting
--- consumer at imported-formal-source authority.  DASHI now owns the generic
--- same-counterexample-consumer -> halting-equivalence compiler.
+-- The checkpoint machine now goes further: for every shared classifier/failure
+-- kernel, the two success implementations induce identical finite checkpoint
+-- traces and equivalent checkpoint-halting witnesses.  This is a genuine Agda
+-- theorem and means literal fine-state weak bisimulation is not required for
+-- the checkpoint halting consumer.
 --
--- Goldbach30 is narrower: a signed upstream commit narrative claims the matching
--- theorem and no-sorry build, but the exact audited tree lacks the claimed
--- Main.lean/Loops.lean artifacts.  Hence the narrative is retained as an
--- acquisition lead and NOT promoted to formal theorem authority.
+-- The source-attachment firewall remains: DASHI has not identified the Agda
+-- checkpoint functions with Mike's concrete Lean `astep`/FRACTRAN objects.
+-- Goldbach29 has a source-visible Lean halting theorem.  Goldbach30 has a signed
+-- commit narrative claiming the matching theorem/no-sorry build, but the exact
+-- audited tree lacks the claimed Main.lean/Loops.lean files.  That narrative is
+-- retained as an acquisition lead and NOT promoted to formal theorem authority.
 ------------------------------------------------------------------------
 
 record Goldbach30To29ReductionReceipt : Set where
@@ -99,6 +120,7 @@ record Goldbach30To29ReductionReceipt : Set where
     fractionCountThirtyToTwentyNine : Bool
     controlStatesElevenToTen : Bool
     saStateEliminated : Bool
+    reachableSuccessGuardCorrected : Bool
     successConsumerPreservationPaidFlag : Bool
     successExecutionPenaltyPaidFlag : Bool
     programLengthEqualsExecutionLength : Bool
@@ -106,6 +128,8 @@ record Goldbach30To29ReductionReceipt : Set where
     goldbach30NarrativeHaltingClaimFoundFlag : Bool
     goldbach30FormalHaltingSourceFoundFlag : Bool
     sameCounterexampleHaltingCompilerPaidFlag : Bool
+    checkpointHaltingEquivalencePaidFlag : Bool
+    sourceConcreteFractranAttachmentPaidFlag : Bool
     agdaGoldbach29HaltingSemanticsPaidFlag : Bool
     goldbach30HaltingAttachmentPaidFlag : Bool
     wholeMachineReachableWeakBisimulationPaidFlag : Bool
@@ -118,14 +142,15 @@ canonicalGoldbach30To29ReductionReceipt : Goldbach30To29ReductionReceipt
 canonicalGoldbach30To29ReductionReceipt =
   goldbach30To29ReductionReceipt
     true true true true true
-    true true false
-    true true false true
-    false false
-    false false false
+    true true true false
+    true true false true true false
+    false false false false false
 
 wholeMachineReachableWeakBisimulationPaid : Bool
 wholeMachineReachableWeakBisimulationPaid = false
 
+-- This name remains reserved for SAME-OBJECT concrete program halting
+-- equivalence, not the now-paid checkpoint theorem above.
 wholeMachineHaltingEquivalencePaid : Bool
 wholeMachineHaltingEquivalencePaid = false
 
@@ -141,9 +166,12 @@ record Goldbach30To29TerminalMaxCut : Set where
   field
     exactUpstreamPairProvenancePaid : Bool
     exactStaticReductionPaid : Bool
+    reachableSuccessGuardCorrectedTerminalFlag : Bool
     exactSuccessMacroConsumerEqualityPaid : Bool
     exactSuccessMacroCostDeltaPaid : Bool
     signed369StaticDynamicSeparationReused : Bool
+    checkpointHaltingEquivalencePaidTerminalFlag : Bool
+    checkpointConcreteSourceAttachmentPaid : Bool
     goldbach29ExternalHaltingSemanticsSourcePaidTerminalFlag : Bool
     goldbach30NarrativeHaltingClaimFoundTerminalFlag : Bool
     goldbach30FormalHaltingSourceFoundTerminalFlag : Bool
@@ -158,7 +186,8 @@ record Goldbach30To29TerminalMaxCut : Set where
 canonicalGoldbach30To29TerminalMaxCut : Goldbach30To29TerminalMaxCut
 canonicalGoldbach30To29TerminalMaxCut =
   goldbach30To29TerminalMaxCut
-    true true true true true
+    true true true true true true
+    true false
     true true false true false
     false false false
     true false
