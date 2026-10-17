@@ -4,7 +4,7 @@
     "DASHI.Everything",
     "DASHI.Physics.YangMills.PostulateInventory",
     "DASHI.Physics.YangMills.BalabanRGLane",
-    "DASHI.Physics.Closure.NSLiteralClayABCDCapstone"
+    "DASHI.Physics.Closure.NSConcreteLiteralClayABCDRunTargetExact"
   ],
   "policy": {
     "round_regex": "Round[0-9]+",
