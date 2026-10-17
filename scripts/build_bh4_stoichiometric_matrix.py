@@ -71,6 +71,8 @@ def build_matrix(certificate: dict) -> dict:
         for j, rid in enumerate(reaction_index)
     ]
 
+    species_count = len(species_index)
+    reaction_count = len(reaction_index)
     return {
         "schema": "dashi.bh4-stoichiometric-matrix.v1",
         "source_certificate_schema": certificate.get("schema"),
@@ -78,8 +80,10 @@ def build_matrix(certificate: dict) -> dict:
         "reaction_index": reaction_index,
         "matrix": matrix,
         "columns": columns,
-        "finite_reaction_count": len(reaction_index),
-        "finite_species_count": len(species_index),
+        "species_count": species_count,
+        "reaction_count": reaction_count,
+        "finite_reaction_count": reaction_count,
+        "finite_species_count": species_count,
         "finite_formula_residuals": residuals,
         "external_exchange": [],
         "promotion_boundary": {
@@ -102,8 +106,8 @@ def write_outputs(result: dict, prefix: Path) -> None:
     lines = [
         "# BH4 stoichiometric matrix receipt",
         "",
-        f"- finite species: {result['finite_species_count']}",
-        f"- finite reactions: {result['finite_reaction_count']}",
+        f"- finite species: {result['species_count']}",
+        f"- finite reactions: {result['reaction_count']}",
         f"- formula/incomplete residuals: {len(result['finite_formula_residuals'])}",
         "- external exchange columns in S: `0`",
         "",
