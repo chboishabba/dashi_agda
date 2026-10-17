@@ -21,6 +21,7 @@ import DASHI.Biology.IITFaceAwarePyPhiGoldenCalibrationExact as Golden
 import DASHI.Biology.IITCubeJordanChainCentralizerTargetExact as Jordan
 import DASHI.Biology.IITCubeJordanBasisMatrixExact as JordanBasis
 import DASHI.Biology.IITCubeConcreteJordanConjugacyExact as Conjugacy
+import DASHI.Biology.IITCubeConcreteNMatrixRecognitionExact as Recognition
 import DASHI.Biology.IITCubeJordanCentralizerAlgebraExact as Centralizer
 import DASHI.Biology.IITCubeFirstTitsSL3TranslationIntersectionExact as SL3
 import DASHI.Biology.IITCubePermutationStabilizer18Exact as Perm18
@@ -41,6 +42,9 @@ concreteJordanChainC = Jordan.chainC
 
 concreteJordanBasisMatrix : JordanBasis.ConcreteJordanBasisMatrixWitness
 concreteJordanBasisMatrix = JordanBasis.canonicalConcreteJordanBasisMatrixWitness
+
+concreteNMatrixRecognition : Recognition.ConcreteNMatrixRecognition
+concreteNMatrixRecognition = Recognition.canonicalConcreteNMatrixRecognition
 
 concreteJordanConjugacy : Conjugacy.ConcreteJordanConjugacyWitness
 concreteJordanConjugacy = Conjugacy.canonicalConcreteJordanConjugacyWitness
@@ -92,6 +96,7 @@ record TerminalLocalMaxCutStatus : Set where
 
     concreteJordanChainsSourceWritten : Bool
     concreteJordanBasisHasExplicitTwoSidedInverseSourceWritten : Bool
+    concreteNMatrixRecognizedAsActualBPlusIOnBasisSourceWritten : Bool
     concreteNConjugatesToThreeJordanBlocksSourceWritten : Bool
     jordanCentralizerIffToeplitzShapeSourceWritten : Bool
     jordanCentralizerPolynomialExtractionExpansionSourceWritten : Bool
@@ -111,7 +116,7 @@ canonicalTerminalLocalMaxCutStatus : TerminalLocalMaxCutStatus
 canonicalTerminalLocalMaxCutStatus =
   terminal-local-max-cut-status
     true true true true true true true true
-    true true true true true true
+    true true true true true true true
     true true true true
     false false false
 
