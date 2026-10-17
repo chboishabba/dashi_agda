@@ -117,6 +117,28 @@ canonicalWikimediaPanelAcquisitionSummary =
     "16" "15" "1" "0" "0" true "7/16" false
 
 ------------------------------------------------------------------------
+-- Wikimedia-only cleanup frontier.  None of these obligations block the
+-- already-pinned UniProt sequence identities or the independent biochemical
+-- proof graph.
+------------------------------------------------------------------------
+
+data WikimediaIdentityResidual : Set where
+  adjudicateQDPRDuplicateExactP352Items : WikimediaIdentityResidual
+  inspectMissingProteinLevelEnwikiCoverage : WikimediaIdentityResidual
+
+liveWikimediaIdentityResiduals : List WikimediaIdentityResidual
+liveWikimediaIdentityResiduals =
+  adjudicateQDPRDuplicateExactP352Items
+  ∷ inspectMissingProteinLevelEnwikiCoverage
+  ∷ []
+
+qdprAmbiguityBlocksUniqueQidOnly : Bool
+qdprAmbiguityBlocksUniqueQidOnly = true
+
+missingEnwikiCoverageBlocksProteinIdentity : Bool
+missingEnwikiCoverageBlocksProteinIdentity = false
+
+------------------------------------------------------------------------
 -- External-identity coordinates.  QDPR is intentionally candidate/ambiguous:
 -- its gene item Q14884995 reciprocally encodes both exact-P352 protein items.
 ------------------------------------------------------------------------
