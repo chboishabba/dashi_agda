@@ -3,6 +3,8 @@ module DASHI.Physics.QuantumVacuum.CasimirPinnedR457SourceNativeCompilerValidati
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.CasimirPinnedR457SourceNativeCompilerExact as M
+import DASHI.Physics.QuantumVacuum.CasimirMinimalR457SourceNativeCompilerValidation
+import DASHI.Physics.QuantumVacuum.CasimirCMP119H2R457CompilerValidation
 
 r114R119BuildR120Regression :
   M.r114AndR119BuildR120CompilerOwned
