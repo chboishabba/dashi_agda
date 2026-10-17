@@ -5,6 +5,7 @@ root = Path(__file__).resolve().parents[1]
 files = {
     "evidence": root / "DASHI/Biology/BH4QuantitativeAcquisitionExact.agda",
     "solver": root / "DASHI/Biology/BH4IntervalFluxSolverExact.agda",
+    "roadmap": root / "DASHI/Biology/BH4Phase4RoadmapExact.agda",
     "sabio": root / "scripts/acquire_bh4_sabio_kinetics.py",
     "sifts": root / "scripts/acquire_bh4_pdbe_sifts.py",
     "parameters": root / "scripts/acquire_bh4_parameter_evidence.py",
@@ -21,10 +22,21 @@ for name, path in files.items():
 text = {name: path.read_text() for name, path in files.items()}
 
 for token in [
-    "SABIO", "PDBe", "SIFTS", "kineticConstantCreatesFluxBound",
-    "structureMappingCreatesCatalyticMechanism", "sourceSpecificEvidenceRequired",
+    "SABIO", "PDBe", "SIFTS", "browserShellPayload",
+    "firstSABIOAttemptMayConcludeZeroEntries = false",
+    "pdbeSiftsBoundedAcquisitionExecuted = true",
+    "kineticConstantCreatesFluxBound", "htmlShellCreatesNoEntryConclusion",
+    "structureMappingCreatesCatalyticMechanism", "boundedSIFTSAcquisitionCreatesSiteFunction",
+    "sourceSpecificEvidenceRequired",
 ]:
     assert token in text["evidence"], f"missing quantitative evidence token: {token}"
+
+for token in [
+    "rerunSABIOAfterProtocolRepair", "adjudicateSABIOKineticCandidatesIntoFluxBounds",
+    "adjudicatePDBSIFTSResidueSiteWitnesses", "firstBoundedSIFTSAcquisitionExecuted",
+    "sabioProtocolRepairReady = true", "expandedQuantitativeCoordinateCount = 56",
+]:
+    assert token in text["roadmap"], f"missing quantitative roadmap token: {token}"
 
 for token in [
     "IntervalFluxSolverStatus", "solverUnavailable", "underdetermined",
@@ -34,16 +46,18 @@ for token in [
     assert token in text["solver"], f"missing interval solver token: {token}"
 
 for token in [
-    "UniProtKB_AC", "searchKineticLaws/entryIDs", "kineticLaws",
-    "parameters", "pubmed_ids", "raw_sha256", "kinetic_parameters_create_flux_bounds",
+    "UniProtKB_AC", "entryIDs", "searchKineticLaws/sbml", "direct-search-sbml",
+    "looks_like_html", "html_shell_means_zero_entries", "dashi.bh4-sabio-kinetics.v2",
+    "kinetic_parameters_create_flux_bounds",
 ]:
-    assert token in text["sabio"], f"missing SABIO token: {token}"
+    assert token in text["sabio"], f"missing SABIO fail-closed token: {token}"
 
 for token in [
     "SIFTS", "uniprot_pdb", "pdb_chain_uniprot", "raw_sha256",
-    "structure_mapping_creates_catalytic_mechanism",
+    "matching_sifts_segment_count", "structures_examined", "summarize",
+    "dashi.bh4-pdbe-sifts.v2", "structure_mapping_creates_catalytic_mechanism",
 ]:
-    assert token in text["sifts"], f"missing SIFTS token: {token}"
+    assert token in text["sifts"], f"missing SIFTS summary token: {token}"
 
 for token in ["EXCHANGE:", "reaction_flux_ids", "exchange_ids", "dashi.bh4-parameter-evidence.v2"]:
     assert token in text["parameters"], f"missing parameter exchange token: {token}"
