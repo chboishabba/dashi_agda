@@ -4,8 +4,11 @@ on:
   push:
     paths:
       - 'vendor/meta-introspector-aok-goldbach29.VENDOR'
+      - 'vendor/meta-introspector-aok/**'
       - 'DASHI/ComputerScience/Goldbach29Signed369VendorBridgeExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29VendoredSourceAttachmentExact.agda'
       - 'DASHI/ComputerScience/Goldbach30To29SuccessMacroExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29TailWeakSimulationExact.agda'
       - 'DASHI/ComputerScience/Goldbach30To29CheckpointMachineExact.agda'
       - 'DASHI/ComputerScience/Goldbach29ExternalHaltingSemanticsExact.agda'
       - 'DASHI/ComputerScience/Goldbach30HaltingSourceAuditExact.agda'
@@ -16,13 +19,17 @@ on:
       - 'DASHI/EverythingGoldbach29Signed369VendorExact.agda'
       - 'scripts/test_goldbach29_signed369_vendor.py'
       - 'scripts/test_goldbach30_29_vendor_blobs.py'
+      - 'scripts/test_goldbach_vendor_attachment.py'
       - 'scripts/verify_goldbach30_29_replay.py'
       - '.github/workflows/goldbach29-signed369-vendor.yml'
   pull_request:
     paths:
       - 'vendor/meta-introspector-aok-goldbach29.VENDOR'
+      - 'vendor/meta-introspector-aok/**'
       - 'DASHI/ComputerScience/Goldbach29Signed369VendorBridgeExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29VendoredSourceAttachmentExact.agda'
       - 'DASHI/ComputerScience/Goldbach30To29SuccessMacroExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29TailWeakSimulationExact.agda'
       - 'DASHI/ComputerScience/Goldbach30To29CheckpointMachineExact.agda'
       - 'DASHI/ComputerScience/Goldbach29ExternalHaltingSemanticsExact.agda'
       - 'DASHI/ComputerScience/Goldbach30HaltingSourceAuditExact.agda'
@@ -33,6 +40,7 @@ on:
       - 'DASHI/EverythingGoldbach29Signed369VendorExact.agda'
       - 'scripts/test_goldbach29_signed369_vendor.py'
       - 'scripts/test_goldbach30_29_vendor_blobs.py'
+      - 'scripts/test_goldbach_vendor_attachment.py'
       - 'scripts/verify_goldbach30_29_replay.py'
       - '.github/workflows/goldbach29-signed369-vendor.yml'
   workflow_dispatch:
@@ -46,7 +54,9 @@ jobs:
         run: python scripts/test_goldbach29_signed369_vendor.py
       - name: Verify pinned Program blobs and literal tail delta
         run: python scripts/test_goldbach30_29_vendor_blobs.py
-      - name: Replay Goldbach30-to-29 checkpoint equivalence
+      - name: Verify vendored source attachment and weak-tail boundary
+        run: python scripts/test_goldbach_vendor_attachment.py
+      - name: Replay vendored Goldbach30-to-29 FRACTRAN/checkpoint equivalence
         run: python scripts/verify_goldbach30_29_replay.py
       - name: Install Agda + stdlib
         uses: wenkokke/setup-agda@v2
