@@ -1,0 +1,68 @@
+{
+  "atlas_addresses": [
+    "0xDA51800100000000",
+    "0xDA51800100100000",
+    "0xDA51800100200000",
+    "0xDA51808100300000",
+    "0xDA51818000400000",
+    "0xDA51811100500000",
+    "0xDA51813000600000",
+    "0xDA51813400700000",
+    "0xDA51831100800000",
+    "0xDA51838000900000",
+    "0xDA51853000A00000",
+    "0xDA51853000B00000",
+    "0xDA51852000C00000",
+    "0xDA51851100D00000",
+    "0xDA51851100E00000",
+    "0xDA51852100F00000",
+    "0xDA51852101000000",
+    "0xDA51852101100000",
+    "0xDA51850101200000",
+    "0xDA51850101300000",
+    "0xDA51850101400000",
+    "0xDA51850301500000",
+    "0xDA51850301600000"
+  ],
+  "atlas_layout_bits": {
+    "biome": 4,
+    "level": 4,
+    "reserved": 20,
+    "serial": 12,
+    "status": 4
+  },
+  "header_bits": [16, 4, 44],
+  "max_serial_address": "0xDA518584FFF00000",
+  "negative": {
+    "invalid_biome": "0xDA51809100000000",
+    "invalid_level": "0xDA51860100000000",
+    "invalid_status": "0xDA51800500000000",
+    "nonzero_reserved": "0xDA51800100000001",
+    "unknown_type": "0xDA51900000000000",
+    "wrong_prefix": "0xCAFE800100000000"
+  },
+  "prefix": "0xDA51",
+  "type_codes": {
+    "0": "monsterWalk",
+    "1": "astNode",
+    "2": "monsterProtocol",
+    "3": "nestedCID",
+    "4": "harmonicPath",
+    "5": "shardID",
+    "6": "eigenspaceAddr",
+    "7": "hauptmodul",
+    "8": "atlasEntry"
+  },
+  "type_examples": {
+    "0": "0xDA51000000000000",
+    "1": "0xDA51100000000000",
+    "2": "0xDA51200000000000",
+    "3": "0xDA51300000000000",
+    "4": "0xDA51400000000000",
+    "5": "0xDA51500000000000",
+    "6": "0xDA51600000000000",
+    "7": "0xDA51700000000000",
+    "8": "0xDA51800000000000"
+  },
+  "version": 1
+}
