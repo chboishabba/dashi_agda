@@ -8,6 +8,8 @@ import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as 
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
+import DASHI.Physics.YangMills.BalabanLiteralStressCoordinateRound114Exact as R114
+import DASHI.Physics.YangMills.BalabanCanonicalMetricSelectedStressRound119Exact as R119
 import DASHI.Physics.YangMills.BalabanCanonicalMetricStressLaneRound120Exact as R120
 import DASHI.Physics.YangMills.BalabanDensityAnchoredMetricStressRound122Exact as R122
 import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as R123
@@ -23,19 +25,39 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact as P
 ------------------------------------------------------------------------
 -- PINNED SOURCE-NATIVE R457 COMPILER
 --
--- R123 and R125 are package records, not physical leaves:
---
+-- Packaging chain:
+--   R114 + R119 -> R120
 --   R120 + R122 -> R123
---   R123 + R124 -> R125.
+--   R123 + R124 -> R125
+--   pinned continuum + R125 -> R126
+--   R126 + R127 -> R128 -> R457.
 --
--- Once Y is definitionally `asLiteralYangMillsConstruction pinned`, the pinned
--- continuum object already owns the exact continuum-limit and
--- Schwinger-belongs-to-measure witnesses required by R126.  Hence
---
---   R120 + R122 + R124 + R127 + pinned -> R457
---
--- with no second R123/R125/R126 theorem and no later Y_R457=Y_pinned equality.
+-- Therefore R120/R123/R125/R126 and Y_R457=Y_pinned are not primitive physics
+-- payments on the canonical pinned route.
 ------------------------------------------------------------------------
+
+r114AndR119BuildR120 :
+  ∀ {C : Top.LiteralYangMillsCarriers}
+    {S : Top.LiteralYangMillsSemantics C}
+    (pinned : Pinned.PinnedYangMillsConstruction {C = C} S)
+    {group : Top.CompactSimpleGroup C}
+    {Scale Volume : Set}
+    {activity : Chain.SubstitutedActivitySecondVariation}
+    {domain : Domain.CanonicalMetricSourceDomain Scale Volume activity}
+    {representation : StressRep.CanonicalMetricStressRepresentation domain}
+    {coordinate : R114.LiteralStressCoordinate
+      (Pinned.asLiteralYangMillsConstruction pinned) group} →
+  R119.CanonicalMetricSelectedStressWeld
+    domain representation coordinate →
+  R120.CanonicalMetricLiteralStressLane
+    {C = C} {S = S}
+    {Y = Pinned.asLiteralYangMillsConstruction pinned}
+    {group = group}
+    domain representation
+r114AndR119BuildR120 pinned {coordinate = coordinate} selected = record
+  { R120.CanonicalMetricLiteralStressLane.coordinate = coordinate
+  ; R120.CanonicalMetricLiteralStressLane.metricSelectedStress = selected
+  }
 
 r120AndR122BuildR123 :
   ∀ {trajectory split}
@@ -175,7 +197,7 @@ pinnedFiniteMeasureAndOSBuildR457 pinned finiteLane osWeld = record
       pinnedFiniteMeasureAndOSBuildR128 pinned finiteLane osWeld
   }
 
-pinnedSourceInputsBuildR457 :
+pinnedPrimitiveSourceInputsBuildR457 :
   ∀ {trajectory split}
     {inputs : BetaDensity.BetaDrivenCompleteDensityInputs
       {trajectory = trajectory} {split = split}}
@@ -187,22 +209,23 @@ pinnedSourceInputsBuildR457 :
     {activity : Chain.SubstitutedActivitySecondVariation}
     {domain : Domain.CanonicalMetricSourceDomain Scale Volume activity}
     {representation : StressRep.CanonicalMetricStressRepresentation domain}
-    (metricLane : R120.CanonicalMetricLiteralStressLane
-      {C = C} {S = S}
-      {Y = Pinned.asLiteralYangMillsConstruction pinned}
-      {group = group}
-      domain representation) →
-  (densityAnchor : R122.DensityAnchoredCanonicalMetricStress
-    (R120.metricSelectedStress metricLane)) →
+    {coordinate : R114.LiteralStressCoordinate
+      (Pinned.asLiteralYangMillsConstruction pinned) group}
+    (selected : R119.CanonicalMetricSelectedStressWeld
+      domain representation coordinate) →
+  (densityAnchor : R122.DensityAnchoredCanonicalMetricStress selected) →
   R124.BalabanDensityLiteralFiniteMeasureWeld
     {trajectory = trajectory} {split = split} {inputs = inputs}
     (Pinned.asLiteralYangMillsConstruction pinned) group →
   R127.OSLiteralSchwingerWeld
     (Pinned.asLiteralYangMillsConstruction pinned) group →
-  let stressLane = r120AndR122BuildR123 pinned metricLane densityAnchor
+  let metricLane = r114AndR119BuildR120 pinned selected
+      stressLane = r120AndR122BuildR123 pinned metricLane densityAnchor
   in R457.SourceNativeContinuumAndOS stressLane
-pinnedSourceInputsBuildR457 pinned metricLane densityAnchor measureWeld osWeld =
-  let stressLane = r120AndR122BuildR123 pinned metricLane densityAnchor
+pinnedPrimitiveSourceInputsBuildR457
+    pinned selected densityAnchor measureWeld osWeld =
+  let metricLane = r114AndR119BuildR120 pinned selected
+      stressLane = r120AndR122BuildR123 pinned metricLane densityAnchor
       finiteLane = r123AndR124BuildR125 pinned stressLane measureWeld
   in pinnedFiniteMeasureAndOSBuildR457 pinned finiteLane osWeld
 
@@ -212,8 +235,7 @@ pinnedSourceInputsBuildR457 pinned metricLane densityAnchor measureWeld osWeld =
 
 data PinnedContinuumAutomaticallySuppliesDensityFiniteMeasureWeld : Set where
 data PinnedContinuumAutomaticallySuppliesSourceOSWeld : Set where
-
-data R120AutomaticallySuppliesDensityAnchor : Set where
+data SelectedStressAutomaticallySuppliesDensityAnchor : Set where
 
 pinnedContinuumDoesNotSupplyDensityFiniteMeasureWeld :
   PinnedContinuumAutomaticallySuppliesDensityFiniteMeasureWeld → ⊥
@@ -223,22 +245,25 @@ pinnedContinuumDoesNotSupplySourceOSWeld :
   PinnedContinuumAutomaticallySuppliesSourceOSWeld → ⊥
 pinnedContinuumDoesNotSupplySourceOSWeld ()
 
-r120DoesNotSupplyDensityAnchor :
-  R120AutomaticallySuppliesDensityAnchor → ⊥
-r120DoesNotSupplyDensityAnchor ()
+selectedStressDoesNotSupplyDensityAnchor :
+  SelectedStressAutomaticallySuppliesDensityAnchor → ⊥
+selectedStressDoesNotSupplyDensityAnchor ()
 
 record CasimirPinnedR457SourceNativeBoundary : Set where
   constructor casimir-pinned-r457-source-native-boundary
   field
+    r114AndR119BuildR120CompilerOwned : Bool
     r120AndR122BuildR123CompilerOwned : Bool
     r123AndR124BuildR125CompilerOwned : Bool
     pinnedContinuumBuildsR126CompilerOwned : Bool
-    pinnedSourceInputsBuildR457CompilerOwned : Bool
+    pinnedPrimitiveSourceInputsBuildR457CompilerOwned : Bool
+    independentR120StressLaneRequiredAfterR114R119 : Bool
     independentR123StressLaneRequiredAfterR120R122 : Bool
     independentR125FiniteMeasureLaneRequiredAfterR124 : Bool
     independentR126ContinuumWitnessRequiredAfterPinned : Bool
     independentR457PinnedConstructionEqualityRequired : Bool
-    canonicalMetricSelectedStressLaneStillRequired : Bool
+    literalStressCoordinateStillRequired : Bool
+    canonicalMetricSelectedStressSemanticsStillRequired : Bool
     literalDensityAnchoringStillRequired : Bool
     literalDensityFiniteMeasureWeldStillRequired : Bool
     sourceOSLiteralSchwingerWeldStillRequired : Bool
@@ -248,8 +273,8 @@ open CasimirPinnedR457SourceNativeBoundary public
 canonicalPinnedR457SourceNativeBoundary : CasimirPinnedR457SourceNativeBoundary
 canonicalPinnedR457SourceNativeBoundary =
   casimir-pinned-r457-source-native-boundary
-    true true true true false false false false true true true true
+    true true true true true false false false false false true true true true true
 
 casimirPinnedR457SourceNativeReading : String
 casimirPinnedR457SourceNativeReading =
-  "The pinned R457 route is now contracted to the first theorem-bearing source inputs. R123 is just R120 canonical metric literal stress plus R122 literal-density anchoring; R125 is R123 plus the R124 density-to-literal-finite-measure weld. On Y=asLiteralYangMillsConstruction pinned, the pinned continuum object definitionally supplies the R126 continuum-limit and Schwinger-membership witnesses. Adding the R127 source-OS/literal-Schwinger weld then compiles R128 and R457. Therefore no independent R123, R125, R126 or Y_R457=Y_pinned payment remains. The live source inputs are R120 selected metric-stress semantics, R122 density anchoring, R124 density/finite-measure same-object identity, and R127 source-OS/literal-Schwinger identity."
+  "The canonical pinned R457 path is contracted to the first semantic/source payments. R120 is only R114 literal stress coordinate plus R119 selected metric-stress semantics; R123 is R120 plus R122 literal-density anchoring; R125 is R123 plus R124 density-to-literal-finite-measure identity. The pinned continuum object supplies R126 continuum and Schwinger witnesses definitionally. R127 then closes R128/R457. No independent R120/R123/R125/R126 or Y_R457=Y_pinned theorem remains. The local source leaves are therefore R114, R119, R122, R124 and R127; construction of the pinned Yang-Mills object itself remains an upstream Yang-Mills theorem dependency rather than a Casimir-local payment."
