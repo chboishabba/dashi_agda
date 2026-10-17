@@ -60,11 +60,13 @@ open SharedSearchKernel public
 
 successEntryAtCheckpoint : TopCheckpoint → Macro.SuccessEntry
 successEntryAtCheckpoint top =
+  -- The checkpoint success boundary is clean: f=1 and s=g=0 are structural in
+  -- Macro.SuccessEntry; d=e=h=m=0 are the source-reachable top-loop values.
   Macro.successEntry
     (aTail top)
     (b top)
     (c top)
-    0 0 0 0 0 0
+    0 0 0 0
 
 terminalCheckpoint : Macro.SuccessRegisters → TopCheckpoint
 terminalCheckpoint registers =
