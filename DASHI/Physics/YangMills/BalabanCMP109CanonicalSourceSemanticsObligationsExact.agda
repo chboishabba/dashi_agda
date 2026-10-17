@@ -2,26 +2,45 @@
 module DASHI.Physics.YangMills.BalabanCMP109CanonicalSourceSemanticsObligationsExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.YangMills.BalabanCMP109CanonicalResidualInstantiationExact as Inst
 
 ------------------------------------------------------------------------
 -- Canonical non-Round owner for the residual CMP109 source-semantics package.
 --
--- Historical scheduler labels are provenance only.  This module does not turn
--- scheduler state, source citation, or proof-level receipt into an inhabitant.
--- The three fields below are deliberately the remaining typed payments to be
--- instantiated on the selected literal Balaban source object.
+-- Historical scheduler labels are provenance only.  This owner now names the
+-- three residuals by their actual non-Round theorem carriers:
+--
+--   * generated-history response -> Ward/quartic producer reconstruction;
+--   * beta difference -> selected shooting-map attachment, with decomposition
+--     compiled by the existing non-Round beta-prefix theorem;
+--   * physical composite D1 -> selected first-order transport equality.
+--
+-- No scheduler state, citation, or proof-level receipt inhabits these fields.
 ------------------------------------------------------------------------
 
 record CMP109CanonicalSourceSemanticsObligations
-    (GeneratedHistoryResponse
-     BetaDifferenceDecomposition
-     PhysicalCompositeD1ChainRule : Set) : Set₁ where
+    (TubePoint : Set)
+    (cutoff : Nat)
+    (Component Background Tangent Scalar : Set) : Set₁ where
   field
-    generatedHistoryResponseProducer : GeneratedHistoryResponse
-    betaDifferenceDecomposition : BetaDifferenceDecomposition
-    physicalCompositeD1ChainRule : PhysicalCompositeD1ChainRule
+    generatedHistoryResponseProducer :
+      Inst.CMP109GeneratedHistoryResponseResidual cutoff
+
+    betaDifferenceDecomposition :
+      Inst.SelectedCMP109BetaDifferenceAttachment TubePoint
+
+    physicalCompositeD1ChainRule :
+      Inst.PhysicalCompositeD1TransportResidual
+        Component Background Tangent Scalar
+
+------------------------------------------------------------------------
 
 open CMP109CanonicalSourceSemanticsObligations public
 
 sourceSemanticsExtractionCreatesInhabitant : Bool
 sourceSemanticsExtractionCreatesInhabitant = false
+
+clayPromotion : Bool
+clayPromotion = false
