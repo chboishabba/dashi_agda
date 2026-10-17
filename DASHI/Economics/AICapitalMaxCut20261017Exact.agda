@@ -11,6 +11,7 @@ import DASHI.Economics.AIFinancingCustomerCreditPriceDifferential20261017Exact a
 import DASHI.Economics.AIHardwareLeaseResidualStructure20261017Exact as Lease
 import DASHI.Economics.AIIRENCloudDirectCostBoundary20261017Exact as DirectCost
 import DASHI.Economics.AIIRENProjectPaybackExpectation20261017Exact as Payback
+import DASHI.Economics.AIOperatingCashTerminalDemandNonIdentification20261017Exact as OCF
 import DASHI.Economics.AICapitalOutcomeCompatibility20261016Exact as Outcome
 import DASHI.Economics.AIAustraliaDataCentrePolicyShift20261016Exact as Policy
 
@@ -69,6 +70,9 @@ cohortValidatorNotOutcome = Cohort.mechanismSimilarityDoesNotSelectOutcome
 positiveOCFNotProjectReturn : Company.positiveOCFSelectsProjectReturn Company.currentCompanyOutcomeBoundary ≡ false
 positiveOCFNotProjectReturn = Company.positiveOCFDoesNotSelectProjectReturn
 
+operatingCashNotTerminalDemand : OCF.operatingCashSufficientForTerminalDemand OCF.currentOCFBoundary ≡ false
+operatingCashNotTerminalDemand = OCF.operatingCashInsufficient
+
 selected300bpNotCausal : Price.pureCustomerCreditCausalEffectPaid Price.irenSelectedFinancingDifferential ≡ false
 selected300bpNotCausal = Price.causalEffectStillOpen
 
@@ -89,4 +93,4 @@ outcomeStillUnselected = Outcome.terminalPromotionStillClosed
 
 boundary : String
 boundary =
-  "The October-17 max-cut is empirical rather than architectural. Public sources now pay a five-subject financing-mechanism cohort across provider/neocloud/developer layers, first company-level outcome coordinates for Nebius and IREN, a same-company selected 300bp IREN financing-price difference, explicit GPU lease terminal-value structures, an audited IREN cloud direct-cost coordinate and a company-estimated roughly two-year project-payback forecast for selected recent IREN contracts. None of these closes the decisive consumers by proxy. Positive operating cash can be advance/prepayment-driven and is not project return; the selected financing-rate difference is not a pure customer-credit effect because instrument/project/maturity/collateral matching is unpaid; contractual buyout options are not realised salvage; direct cloud cost excluding depreciation is not marginal inference cost; and a management payback estimate is a falsifiable forecast rather than realised IRR. The genuine remaining public wall is named payer cash and realised CRR, public GPU cohort/serial data, matched project return/refinancing outcomes, workload-normalised marginal provider cost, realised hardware residual/refresh economics, actually enacted infrastructure duties and realised compliance costs. Predeclared outcome regimes remain unselected."
+  "The October-17 max-cut is empirical rather than architectural. Public sources now pay a five-subject financing-mechanism cohort across provider/neocloud/developer layers, first company-level outcome coordinates for Nebius and IREN, a same-company selected 300bp IREN financing-price difference, explicit GPU lease terminal-value structures, an audited IREN cloud direct-cost coordinate and a company-estimated roughly two-year project-payback forecast for selected recent IREN contracts. A synthetic DASHI collision additionally proves that positive/identical operating cash cannot identify terminal independent demand once advances/prepayments are admissible. None of these closes the decisive consumers by proxy. Positive operating cash can be advance/prepayment-driven and is not project return; the selected financing-rate difference is not a pure customer-credit effect because instrument/project/maturity/collateral matching is unpaid; contractual buyout options are not realised salvage; direct cloud cost excluding depreciation is not marginal inference cost; and a management payback estimate is a falsifiable forecast rather than realised IRR. The genuine remaining public wall is named payer cash and realised CRR, public GPU cohort/serial data, matched project return/refinancing outcomes, workload-normalised marginal provider cost, realised hardware residual/refresh economics, actually enacted infrastructure duties and realised compliance costs. Predeclared outcome regimes remain unselected."
