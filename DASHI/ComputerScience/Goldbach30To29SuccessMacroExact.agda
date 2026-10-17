@@ -19,27 +19,41 @@ import DASHI.ComputerScience.Goldbach29Signed369VendorBridgeExact as Bridge
 -- only the success-tail register semantics needed to compare the two published
 -- rule sequences.
 --
--- We encode the success-entry guards structurally:
---   c = suc cTail   and   f = suc fTail.
--- Thus the final c-consuming and verdict-consuming rules are total on every
--- inhabitant of SuccessEntry.  All other registers are carried explicitly.
+-- IMPORTANT REACHABLE-GUARD CORRECTION
+-- ------------------------------------
+-- The published Goldbach search reaches the success tail at NT_B with
+--
+--   a = suc aTail   and   f = 1.
+--
+-- The positive-a guard matters because the first actual success is
+-- `(a,b,c,f)=(2,2,0,1)`: requiring c>0 at ENTRY would incorrectly exclude that
+-- real run.  Conversely allowing arbitrary `f = suc fTail` would be too broad:
+-- for f>1 the 29-fraction machine still has a positive verdict after its
+-- staging pair and re-enters the success branch, so the one-pass macro below
+-- would not describe the published `astep`.
+--
+-- We therefore encode exactly the source-reachable success contract:
+-- positive a, arbitrary c (including zero), and verdict f exactly one.
 ------------------------------------------------------------------------
 
 record SuccessEntry : Set where
   constructor successEntry
   field
-    a : Nat
+    aTail : Nat
     b : Nat
-    cTail : Nat
+    c : Nat
     d : Nat
     e : Nat
-    fTail : Nat
     s : Nat
     g : Nat
     h : Nat
     m : Nat
 
 open SuccessEntry public
+
+/-- The actual tested `a` register at a success entry.  It is structurally positive. -/
+a : SuccessEntry → Nat
+a x = suc (aTail x)
 
 record SuccessRegisters : Set where
   constructor successRegisters
@@ -62,10 +76,10 @@ successEntryRegisters x =
   successRegisters
     (a x)
     (b x)
-    (suc (cTail x))
+    (c x)
     (d x)
     (e x)
-    (suc (fTail x))
+    1
     (s x)
     (g x)
     (h x)
@@ -74,74 +88,114 @@ successEntryRegisters x =
 ------------------------------------------------------------------------
 -- Old Goldbach30 macro.
 --
--- NT_B*f -> SA consumes one f.  Each unit of a is transferred by the
--- SA*a -> SB*b*c ; SB -> SA pair.  The terminal SA*c rule consumes one c,
--- creates a=2,d+=2 and restores f.  f therefore has its entry value again at
--- the macro boundary.
+-- NT_B*f -> SA consumes the unique verdict f=1.  Each unit of positive a is
+-- transferred by the SA*a -> SB*b*c ; SB -> SA pair.  Because at least one a
+-- unit is transferred, c is positive by the time the terminal SA*c rule is
+-- reached even when entry c=0.  That rule consumes one c, creates a=2,d+=2,
+-- and restores f=1.
+--
+-- The first argument is `aTail`; actual entry a is `suc aTail`.  The zero case
+-- therefore still performs one a-transfer before the terminal rule.
 ------------------------------------------------------------------------
 
 oldSuccessTerminalFrom :
-  Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat →
+  Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat →
   SuccessRegisters
-oldSuccessTerminalFrom zero b cTail d e fTail s g h m =
-  successRegisters 2 b cTail (d + 2) e (suc fTail) s g h m
-oldSuccessTerminalFrom (suc a) b cTail d e fTail s g h m =
-  oldSuccessTerminalFrom a (suc b) (suc cTail) d e fTail s g h m
+oldSuccessTerminalFrom zero b c d e s g h m =
+  successRegisters 2 (suc b) c (d + 2) e 1 s g h m
+oldSuccessTerminalFrom (suc aTail) b c d e s g h m =
+  oldSuccessTerminalFrom aTail (suc b) (suc c) d e s g h m
 
 oldSuccessTerminal : SuccessEntry → SuccessRegisters
 oldSuccessTerminal x =
   oldSuccessTerminalFrom
-    (a x) (b x) (cTail x) (d x) (e x) (fTail x)
+    (aTail x) (b x) (c x) (d x) (e x)
     (s x) (g x) (h x) (m x)
 
 ------------------------------------------------------------------------
 -- New Goldbach29 macro.
 --
--- Each a-unit is transferred by NT_B*f*a -> SB*b*c ; SB -> NT_B*f, so f is
--- restored after every pair.  At a=0, NT_B*f -> NT2_B*a*b and NT2_B -> NT_B
--- stage one a and one b while consuming f; the existing NT_B*b*c -> RA_A rule
--- then consumes that staged b and one c, adds one further a and restores f.
--- The macro-boundary register result is therefore the same as Goldbach30.
+-- Each positive a-unit is transferred by
+--
+--   NT_B*f*a -> SB*b*c ; SB -> NT_B*f
+--
+-- with the unique verdict f=1 consumed and restored on every pair.  At a=0,
+-- NT_B*f -> NT2_B*a*b and NT2_B -> NT_B consume that verdict; the existing
+-- NT_B*b*c -> RA_A transition can then fire because the positive-a transfer
+-- has made c positive, and it restores f=1.  The macro-boundary registers are
+-- exactly the Goldbach30 registers.
 ------------------------------------------------------------------------
 
 newSuccessTerminalFrom :
-  Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat →
+  Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat → Nat →
   SuccessRegisters
-newSuccessTerminalFrom zero b cTail d e fTail s g h m =
-  successRegisters 2 b cTail (d + 2) e (suc fTail) s g h m
-newSuccessTerminalFrom (suc a) b cTail d e fTail s g h m =
-  newSuccessTerminalFrom a (suc b) (suc cTail) d e fTail s g h m
+newSuccessTerminalFrom zero b c d e s g h m =
+  successRegisters 2 (suc b) c (d + 2) e 1 s g h m
+newSuccessTerminalFrom (suc aTail) b c d e s g h m =
+  newSuccessTerminalFrom aTail (suc b) (suc c) d e s g h m
 
 newSuccessTerminal : SuccessEntry → SuccessRegisters
 newSuccessTerminal x =
   newSuccessTerminalFrom
-    (a x) (b x) (cTail x) (d x) (e x) (fTail x)
+    (aTail x) (b x) (c x) (d x) (e x)
     (s x) (g x) (h x) (m x)
 
 successTerminalFromAgree :
-  (a b cTail d e fTail s g h m : Nat) →
-  oldSuccessTerminalFrom a b cTail d e fTail s g h m
+  (aTail b c d e s g h m : Nat) →
+  oldSuccessTerminalFrom aTail b c d e s g h m
   ≡
-  newSuccessTerminalFrom a b cTail d e fTail s g h m
-successTerminalFromAgree zero b cTail d e fTail s g h m = refl
-successTerminalFromAgree (suc a) b cTail d e fTail s g h m =
-  successTerminalFromAgree a (suc b) (suc cTail) d e fTail s g h m
+  newSuccessTerminalFrom aTail b c d e s g h m
+successTerminalFromAgree zero b c d e s g h m = refl
+successTerminalFromAgree (suc aTail) b c d e s g h m =
+  successTerminalFromAgree aTail (suc b) (suc c) d e s g h m
 
 successTerminalRegistersAgree :
   (x : SuccessEntry) →
   oldSuccessTerminal x ≡ newSuccessTerminal x
 successTerminalRegistersAgree x =
   successTerminalFromAgree
-    (a x) (b x) (cTail x) (d x) (e x) (fTail x)
+    (aTail x) (b x) (c x) (d x) (e x)
     (s x) (g x) (h x) (m x)
 
 ------------------------------------------------------------------------
+-- Source-reachable guard receipts.
+------------------------------------------------------------------------
+
+successEntryAIsPositiveByConstruction :
+  (x : SuccessEntry) →
+  a x ≡ suc (aTail x)
+successEntryAIsPositiveByConstruction x = refl
+
+successEntryVerdictIsExactlyOne :
+  (x : SuccessEntry) →
+  regF (successEntryRegisters x) ≡ 1
+successEntryVerdictIsExactlyOne x = refl
+
+successTerminalVerdictIsExactlyOne :
+  (x : SuccessEntry) →
+  regF (oldSuccessTerminal x) ≡ 1
+successTerminalVerdictIsExactlyOne (successEntry zero b c d e s g h m) = refl
+successTerminalVerdictIsExactlyOne (successEntry (suc aTail) b c d e s g h m) =
+  successTerminalVerdictIsExactlyOne
+    (successEntry aTail (suc b) (suc c) d e s g h m)
+
+/-- Regression for the real first success: entry c=0 is intentionally admitted. -/
+firstGoldbachSuccessEntry : SuccessEntry
+firstGoldbachSuccessEntry =
+  successEntry 1 2 0 0 0 0 0 0 0
+
+firstGoldbachSuccessOldTerminal :
+  oldSuccessTerminal firstGoldbachSuccessEntry
+  ≡ successRegisters 2 4 1 2 0 1 0 0 0 0
+firstGoldbachSuccessOldTerminal = refl
+
+firstGoldbachSuccessNewTerminal :
+  newSuccessTerminal firstGoldbachSuccessEntry
+  ≡ successRegisters 2 4 1 2 0 1 0 0 0 0
+firstGoldbachSuccessNewTerminal = refl
+
+------------------------------------------------------------------------
 -- Declared consumers.
---
--- `nextEvenBoundaryConsumer` is the (a,b,c) boundary state identified by the
--- upstream Goldbach29 source comment as the start of the next even-number
--- search.  `verdictGuardConsumer` retains the f register, whose success guard
--- is consumed and restored by both macros.
 ------------------------------------------------------------------------
 
 NextEvenBoundary : Set
@@ -180,9 +234,16 @@ newSuccessExecutionLength : Nat → Nat
 newSuccessExecutionLength = Bridge.newSuccessExecutionLength
 
 newSuccessExecutionLengthIsOneMore :
-  (a : Nat) →
-  newSuccessExecutionLength a ≡ suc (oldSuccessExecutionLength a)
+  (actualA : Nat) →
+  newSuccessExecutionLength actualA ≡ suc (oldSuccessExecutionLength actualA)
 newSuccessExecutionLengthIsOneMore = Bridge.newSuccessExecutionLengthIsOneMore
+
+reachableSuccessExecutionLengthIsOneMore :
+  (x : SuccessEntry) →
+  newSuccessExecutionLength (a x)
+  ≡ suc (oldSuccessExecutionLength (a x))
+reachableSuccessExecutionLengthIsOneMore x =
+  newSuccessExecutionLengthIsOneMore (a x)
 
 record GoldbachSuccessMacroBoundary : Set where
   constructor goldbachSuccessMacroBoundary
@@ -190,6 +251,9 @@ record GoldbachSuccessMacroBoundary : Set where
     terminalRegistersPreserved : Bool
     nextEvenBoundaryPreserved : Bool
     verdictGuardPreserved : Bool
+    entryVerdictExactlyOne : Bool
+    zeroCReachableSuccessCovered : Bool
+    arbitraryPositiveVerdictClaimed : Bool
     fractionCountReduced : Bool
     successMicrostepsReduced : Bool
     successMicrostepsIncreaseByOne : Bool
@@ -197,4 +261,5 @@ record GoldbachSuccessMacroBoundary : Set where
 
 canonicalGoldbachSuccessMacroBoundary : GoldbachSuccessMacroBoundary
 canonicalGoldbachSuccessMacroBoundary =
-  goldbachSuccessMacroBoundary true true true true false true false
+  goldbachSuccessMacroBoundary
+    true true true true true false true false true false
