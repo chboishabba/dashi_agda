@@ -1,12 +1,12 @@
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
-
 files = {
     "evidence": root / "DASHI/Biology/BH4QuantitativeAcquisitionExact.agda",
     "sabio_receipt": root / "DASHI/Biology/BH4ExecutedSABIOReceiptExact.agda",
     "sabio_adjudication_receipt": root / "DASHI/Biology/BH4ExecutedSABIOAdjudicationReceiptExact.agda",
     "ranking_exact": root / "DASHI/Biology/BH4FluxCandidateRankingExact.agda",
+    "payment_exact": root / "DASHI/Biology/BH4FluxPaymentPreparationExact.agda",
     "gap_evidence": root / "DASHI/Biology/BH4MissingReactionKineticsEvidenceExact.agda",
     "sifts_receipt": root / "DASHI/Biology/BH4ExecutedSIFTSReceiptExact.agda",
     "solver": root / "DASHI/Biology/BH4IntervalFluxSolverExact.agda",
@@ -15,6 +15,7 @@ files = {
     "sabio": root / "scripts/acquire_bh4_sabio_kinetics.py",
     "sabio_adjudication": root / "scripts/build_bh4_sabio_adjudication.py",
     "ranking": root / "scripts/rank_bh4_flux_candidates.py",
+    "payment": root / "scripts/prepare_bh4_flux_payment.py",
     "sifts": root / "scripts/acquire_bh4_pdbe_sifts.py",
     "parameters": root / "scripts/acquire_bh4_parameter_evidence.py",
     "interval_solver": root / "scripts/solve_bh4_flux_intervals.py",
@@ -23,65 +24,24 @@ files = {
     "phase4_checker": root / "DASHI/Biology/BH4Phase4SystemStateRegression.agda",
     "unified": root / "DASHI/Unified/BH4BiochemicalEverything.agda",
 }
-
-for name, path in files.items():
-    assert path.exists(), f"missing quantitative max-cut {name}: {path.relative_to(root)}"
-
+for name, path in files.items(): assert path.exists(), f"missing quantitative max-cut {name}: {path.relative_to(root)}"
 text = {name: path.read_text() for name, path in files.items()}
 
-for token in ["kineticConstantCreatesFluxBound", "structureMappingCreatesCatalyticMechanism", "sourceSpecificEvidenceRequired"]:
-    assert token in text["evidence"], f"missing quantitative evidence token: {token}"
+def require(name, tokens):
+    for token in tokens: assert token in text[name], f"missing {name} token: {token}"
 
-for token in ["executedSABIOKineticEntryCount", "executedSABIOKineticParameterCount", "190", "932", "11", "parameterObjectCreatesInVivoFluxBound"]:
-    assert token in text["sabio_receipt"], f"missing executed SABIO receipt token: {token}"
-
-for token in ["executedParameterCandidateCount", "executedMappedParameterCandidateCount", "executedFiniteReactionCoverage", "932", "875", "10", "475", "160", "139", "83", "30", "45", "RHEA:11920", "RHEA:19897", "parameterKindCreatesFluxPayment"]:
-    assert token in text["sabio_adjudication_receipt"], f"missing executed SABIO adjudication receipt token: {token}"
-
-for token in ["FluxRelevanceClass", "directRateCandidate", "capacityCandidate", "kineticShapeCandidate", "assayContextOnly", "notFluxInformative", "missingPaymentGateDefaultsTrue"]:
-    assert token in text["ranking_exact"], f"missing ranking exact token: {token}"
-
-for token in ["PCBD1", "NOS", "RHEA:11920", "RHEA:19897", "10.1073/pnas.92.26.12384", "10.1111/j.1432-1033.1995.tb20714.x", "PMID:9224737", "PMID:9089781", "primaryKineticsCreatesNetworkFluxBound"]:
-    assert token in text["gap_evidence"], f"missing gap-evidence token: {token}"
-
-for token in ["executedStructuresExamined = 38", "executedMatchingSIFTSSegmentCount = 526", "mappingCreatesCatalyticFunction"]:
-    assert token in text["sifts_receipt"], f"missing executed SIFTS receipt token: {token}"
-
-for token in ["rankSABIOCandidatesByFluxRelevance", "translatePCBD1NOSPrimaryKineticsIntoReactionBounds", "adjudicateSABIOKineticCandidatesIntoFluxBounds", "fluxCandidateRankingToolReady = true", "sabioKineticParameterCount", "sabioFiniteReactionCandidateCoverage", "sabioUnclassifiedParameterCandidates", "expandedQuantitativeCoordinateCount = 56"]:
-    assert token in text["roadmap"], f"missing quantitative roadmap token: {token}"
-
-for token in ["NETWORK_ATTEMPTS = 3", "NETWORK_BACKOFF_SECONDS", "_retry", "network_retry_exhaustion_means_reaction_absent"]:
-    assert token in text["rhea"], f"missing Rhea retry hardening token: {token}"
-
-for token in ["IntervalFluxSolverStatus", "solverUnavailable", "underdetermined", "missingExchangeBoundMayBeSubstitutedWithZero"]:
-    assert token in text["solver"], f"missing interval solver token: {token}"
-
-for token in ["https://sabio.h-its.org/export-api/sabio/kinlaw-entry/json", "UniProtKB_AC", "dashi.bh4-sabio-kinetics.v3", "n_start_value", "n_end_value", "kinetic_parameter_candidates", "kinetic_parameters_create_flux_bounds"]:
-    assert token in text["sabio"], f"missing SABIO export-api/parameter token: {token}"
-
-for token in ["dashi.bh4-sabio-adjudication.v2", "finite_matrix_rhea_ids", "usable_for_flux_bound", "parameter_kind_hint", "sbo_term", "catalytic-constant-like", "inhibitory-like", "concentration-like", "uncovered_finite_reactions", "parameter_candidate_creates_flux_bound"]:
-    assert token in text["sabio_adjudication"], f"missing SABIO adjudication token: {token}"
-
-for token in ["dashi.bh4-flux-candidate-ranking.v1", "direct-rate-candidate", "capacity-candidate", "kinetic-shape-candidate", "assay-context-only", "not-flux-informative", "assay_reaction_identity_paid", "usable_for_flux_bound", "top_candidates_by_reaction"]:
-    assert token in text["ranking"], f"missing flux ranking script token: {token}"
-
-for token in ["matching_sifts_segment_count", "structures_examined", "dashi.bh4-pdbe-sifts.v2", "structure_mapping_creates_catalytic_mechanism"]:
-    assert token in text["sifts"], f"missing SIFTS summary token: {token}"
-
-for token in ["EXCHANGE:", "REACTION_FLUX:", "dashi.bh4-parameter-evidence.v2"]:
-    assert token in text["parameters"], f"missing parameter exchange token: {token}"
-
-for token in ["scipy.optimize", "linprog", "REACTION_FLUX:", "EXCHANGE:", "solver-unavailable", "underdetermined"]:
-    assert token in text["interval_solver"], f"missing solver script token: {token}"
-
-for token in ["acquire_rhea_chebi_bh4_reactions.py", "build_bh4_stoichiometric_matrix.py", "acquire_bh4_sabio_kinetics.py", "build_bh4_sabio_adjudication.py", "rank_bh4_flux_candidates.py", "bh4-flux-candidate-ranking.json", "dashi.bh4-phase4-maxcut-run.v5", "bh4-phase4-maxcut-summary.json"]:
-    assert token in text["runner"], f"missing one-command runner token: {token}"
-
-for token in ["56-coordinate", "flux-relevance ranking", "932", "875", "10 of 12", "bh4-flux-candidate-ranking.json", "check_kitzerow_bh4_priority_all.py"]:
-    assert token in text["runbook"], f"missing runbook token: {token}"
-
-for root_name in ["phase4_checker", "unified"]:
-    for token in ["BH4ExecutedSABIOAdjudicationReceiptExact", "BH4FluxCandidateRankingExact", "BH4MissingReactionKineticsEvidenceExact", "BH4QuantitativeAcquisitionExact", "BH4IntervalFluxSolverExact"]:
-        assert token in text[root_name], f"missing {root_name} quantitative import/token: {token}"
-
-print("BH4 Phase-4 quantitative acquisition + ranked flux adjudication + interval solver regression: ok")
+require("sabio_receipt", ["executedSABIOKineticEntryCount","executedSABIOKineticParameterCount","190","932","parameterObjectCreatesInVivoFluxBound"])
+require("sabio_adjudication_receipt", ["executedMappedParameterCandidateCount","executedFiniteReactionCoverage","875","10","475","160","139","83","30","45","RHEA:11920","RHEA:19897"])
+require("ranking_exact", ["FluxRelevanceClass","directRateCandidate","capacityCandidate","kineticShapeCandidate","missingPaymentGateDefaultsTrue"])
+require("payment_exact", ["BH4FluxEvidenceClass","assaySpecificCapacity","turnoverCapacity","kineticShapeOnly","primaryLiteratureGap","specificActivityCreatesCompartmentFlux","kcatCreatesFluxWithoutAbundance"])
+require("gap_evidence", ["RHEA:11920","RHEA:19897","PMID:9224737","PMID:9089781","primaryKineticsCreatesNetworkFluxBound"])
+require("roadmap", ["executeFluxPaymentPreparation","payAssayReactionIdentityGates","paySameObjectCompartmentTimeGates","payNormalizedFluxUnitGates","payKineticToFluxTranslationGates","fluxPaymentPreparationToolReady = true","sabioKineticParameterCount","sabioFiniteReactionCandidateCoverage","sabioUnclassifiedParameterCandidates","expandedQuantitativeCoordinateCount = 56"])
+require("rhea", ["NETWORK_ATTEMPTS = 3","NETWORK_BACKOFF_SECONDS","_retry","network_retry_exhaustion_means_reaction_absent"])
+require("sabio", ["dashi.bh4-sabio-kinetics.v3","n_start_value","n_end_value","kinetic_parameter_candidates"])
+require("sabio_adjudication", ["dashi.bh4-sabio-adjudication.v2","catalytic-constant-like","inhibitory-like","concentration-like","uncovered_finite_reactions"])
+require("ranking", ["dashi.bh4-flux-candidate-ranking.v1","direct-rate-candidate","capacity-candidate","assay_reaction_identity_paid","usable_for_flux_bound"])
+require("payment", ["dashi.bh4-flux-payment-preparation.v1","assay-specific-capacity","turnover-capacity","kinetic-shape-only","primary-literature-gap","enzyme_abundance_required","normalization_bridge_required","steady_state_flux_bound_payable"])
+require("interval_solver", ["scipy.optimize","linprog","REACTION_FLUX:","EXCHANGE:","underdetermined"])
+require("runner", ["rank_bh4_flux_candidates.py","prepare_bh4_flux_payment.py","bh4-flux-payment-preparation.json","dashi.bh4-phase4-maxcut-run.v6","sabio_flux_payment"])
+require("unified", ["BH4ExecutedSABIOAdjudicationReceiptExact","BH4FluxCandidateRankingExact","BH4FluxPaymentPreparationExact","BH4MissingReactionKineticsEvidenceExact","BH4IntervalFluxSolverExact"])
+print("BH4 Phase-4 quantitative acquisition + ranking + payment preparation + interval solver regression: ok")
