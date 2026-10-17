@@ -47,6 +47,9 @@ def main() -> int:
     adj = out / "bh4-sabio-adjudication.json"
     ranking = out / "bh4-flux-candidate-ranking.json"
     payment = out / "bh4-flux-payment-preparation.json"
+    abundance = out / "bh4-protein-abundance.json"
+    exchange_context = out / "bh4-exchange-context.json"
+    joint_payment = out / "bh4-joint-payment-ledger.json"
     sifts = out / "bh4-pdbe-sifts.json"
     xpollenation = out / "bh4-xpollenation.json"
     xpollenation_dir = out / "xpollenation-neighbourhoods"
@@ -70,22 +73,33 @@ def main() -> int:
                 exits["sabio_flux_ranking"] = run([py, "scripts/rank_bh4_flux_candidates.py", "--adjudication", str(adj), "--matrix", str(matrix), "--top-n", str(a.top_kinetic_candidates), "-o", str(ranking)], allow_partial=True)
                 if exits["sabio_flux_ranking"] == 0 and ranking.exists():
                     exits["sabio_flux_payment"] = run([py, "scripts/prepare_bh4_flux_payment.py", "--ranking", str(ranking), "-o", str(payment)], allow_partial=True)
+        exits["protein_abundance"] = run([py, "scripts/acquire_bh4_protein_abundance.py", "--panel", str(a.panel), "-o", str(abundance)], allow_partial=True)
+        exits["exchange_context"] = run([py, "scripts/acquire_bh4_exchange_context.py", "--matrix", str(matrix), "--rhea", str(rhea), "-o", str(exchange_context)], allow_partial=True)
         exits["sifts"] = run([py, "scripts/acquire_bh4_pdbe_sifts.py", "--panel", str(a.panel), "--max-pdb-per-protein", str(a.max_pdb_per_protein), "-o", str(sifts)], allow_partial=True)
+
+        # Partial acquisition artifacts remain scientifically useful context. The
+        # joint ledger therefore compiles whenever all required JSON receipts
+        # exist, but it never promotes context coverage into solver payment.
+        if payment.exists() and abundance.exists() and exchange_context.exists():
+            exits["joint_payment"] = run([
+                py,
+                "scripts/build_bh4_joint_payment_ledger.py",
+                "--matrix", str(matrix),
+                "--payment", str(payment),
+                "--abundance", str(abundance),
+                "--exchange", str(exchange_context),
+                "--parameters", str(solver),
+                "-o", str(joint_payment),
+            ], allow_partial=True)
 
     if adj.exists():
         xp_cmd = [
-            py,
-            "scripts/build_bh4_xpollenation.py",
-            "--matrix",
-            str(matrix),
-            "--rhea",
-            str(rhea),
-            "--adjudication",
-            str(adj),
-            "-o",
-            str(xpollenation),
-            "--neighbourhood-dir",
-            str(xpollenation_dir),
+            py, "scripts/build_bh4_xpollenation.py",
+            "--matrix", str(matrix),
+            "--rhea", str(rhea),
+            "--adjudication", str(adj),
+            "-o", str(xpollenation),
+            "--neighbourhood-dir", str(xpollenation_dir),
         ]
         if sifts.exists():
             xp_cmd.extend(["--sifts", str(sifts)])
@@ -105,6 +119,9 @@ def main() -> int:
     ad = load(adj)
     rk = load(ranking)
     pay = load(payment)
+    abund = load(abundance)
+    exch = load(exchange_context)
+    joint = load(joint_payment)
     sf = load(sifts)
     xp = load(xpollenation)
     network: dict[str, object] = {}
@@ -116,6 +133,14 @@ def main() -> int:
         network["sabio_flux_ranking"] = {k: rk.get(k) for k in ("schema", "finite_reaction_count", "finite_reactions_with_any_candidate", "payable_reaction_count", "blocked_reaction_count", "payable_reactions", "blocked_reactions")}
     if pay:
         network["sabio_flux_payment"] = {k: pay.get(k) for k in ("schema", "finite_reaction_count", "evidence_class_counts", "enzyme_abundance_required_reactions", "normalization_bridge_required_reactions", "magnitude_anchor_missing_reactions", "payable_reaction_count")}
+    if abund:
+        network["protein_abundance"] = {k: abund.get(k) for k in ("schema", "proteins_requested", "proteins_with_observations", "observation_count")}
+        network["protein_abundance"]["error_count"] = len(abund.get("errors", []))
+    if exch:
+        network["exchange_context"] = {k: exch.get(k) for k in ("schema", "species_requested", "species_with_refmet_match", "species_with_human_study_context")}
+        network["exchange_context"]["error_count"] = len(exch.get("errors", []))
+    if joint:
+        network["joint_payment"] = {"schema": joint.get("schema"), **(joint.get("summary") or {})}
     if sf:
         network["sifts"] = {**(sf.get("summary") or {}), "schema": sf.get("schema")}
     if xp:
@@ -128,7 +153,7 @@ def main() -> int:
         }
 
     summary = {
-        "schema": "dashi.bh4-phase4-maxcut-run.v7",
+        "schema": "dashi.bh4-phase4-maxcut-run.v8",
         "panel": str(a.panel),
         "matrix": {
             "species": len(m.get("species_index", [])),
@@ -151,6 +176,9 @@ def main() -> int:
             "sabio_adjudication": str(adj),
             "sabio_flux_ranking": str(ranking),
             "sabio_flux_payment": str(payment),
+            "protein_abundance": str(abundance),
+            "exchange_context": str(exchange_context),
+            "joint_payment": str(joint_payment),
             "sifts": str(sifts),
             "xpollenation": str(xpollenation),
             "xpollenation_neighbourhoods": str(xpollenation_dir),
