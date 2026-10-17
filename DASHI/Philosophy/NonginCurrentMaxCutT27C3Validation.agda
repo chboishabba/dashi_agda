@@ -14,6 +14,18 @@ previousT27Retained = refl
 hiddenPolicyNoGoPaid : Current.hiddenPolicyNonDescentPaid boundary ≡ true
 hiddenPolicyNoGoPaid = refl
 
+policyResidualReopeningPaid : Current.hiddenPolicyExactResidualReopeningPaid boundary ≡ true
+policyResidualReopeningPaid = refl
+
+thirdFaceDiscriminatorPaid : Current.thirdFaceMeasurementDiscriminatorPaid boundary ≡ true
+thirdFaceDiscriminatorPaid = refl
+
+mechanisticEquifinalityPaid : Current.policyMechanisticEquifinalityPaid boundary ≡ true
+mechanisticEquifinalityPaid = refl
+
+t18FutureConsumerPaid : Current.t18DeclaredFutureConsumerPreserved boundary ≡ true
+t18FutureConsumerPaid = refl
+
 universalHandoffPaid : Current.guardedUniversal369HandoffPaid boundary ≡ true
 universalHandoffPaid = refl
 
@@ -31,6 +43,9 @@ physicalStillFalse = refl
 
 nextStateStillNotForced : Current.completedT27DeterminesNextStructuredState boundary ≡ false
 nextStateStillNotForced = refl
+
+thirdFaceNotCoarseSafe : Current.thirdFaceConsumerPreservedByT18Reduction boundary ≡ false
+thirdFaceNotCoarseSafe = refl
 
 iitIdentityStillFalse : Current.iitBOperatorSameObjectWeldPaid boundary ≡ false
 iitIdentityStillFalse = refl
