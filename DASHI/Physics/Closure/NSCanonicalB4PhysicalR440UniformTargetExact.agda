@@ -12,7 +12,8 @@ module DASHI.Physics.Closure.NSCanonicalB4PhysicalR440UniformTargetExact where
 --   signedWork(u,N,k)
 --     <= thetaD * coreMass(u,N,k) + cD * localED(u,N,k)
 --
--- for every physical state u and retained output k at every cutoff N, with
+-- for every physical state u and retained output k at every admissible cutoff
+-- N, with
 --
 --   0 <= thetaD < 1/2,
 --   0 <= cD,
@@ -24,7 +25,10 @@ module DASHI.Physics.Closure.NSCanonicalB4PhysicalR440UniformTargetExact where
 -- by the downstream strict-split compiler.
 --
 -- All three observables also carry explicit same-source attachment predicates.
--- Hence no producer can satisfy the target by choosing unrelated scalars.
+-- Cutoff admissibility is an independent premise: it cannot be hidden inside
+-- retained-output membership or one of the observable attachment predicates.
+-- Hence no producer can satisfy the target by choosing unrelated scalars or by
+-- silently changing the admissible cutoff family.
 --
 -- This module STATES the irreducible analytic AST.  It proves no R440
 -- estimate and deliberately leaves the terminal closure flag false.
@@ -46,6 +50,7 @@ record CanonicalB4PhysicalR440UniformTarget
     (SelectedPeriodicSource PhysicalState Cutoff Output : Set)
     (selectedSource : SelectedPeriodicSource)
     (IsPhysicalState : SelectedPeriodicSource → PhysicalState → Set)
+    (IsAdmissibleCutoff : SelectedPeriodicSource → Cutoff → Set)
     (RetainedOutput : SelectedPeriodicSource → Cutoff → Output → Set)
     (signedWork coreMass localED : PhysicalState → Cutoff → Output → ℚ)
     (SignedWorkBelongsToSource :
@@ -78,6 +83,7 @@ record CanonicalB4PhysicalR440UniformTarget
       (cutoff : Cutoff) →
       (output : Output) →
       IsPhysicalState selectedSource state →
+      IsAdmissibleCutoff selectedSource cutoff →
       RetainedOutput selectedSource cutoff output →
       SignedWorkBelongsToSource
         selectedSource state cutoff output (signedWork state cutoff output)
@@ -87,6 +93,7 @@ record CanonicalB4PhysicalR440UniformTarget
       (cutoff : Cutoff) →
       (output : Output) →
       IsPhysicalState selectedSource state →
+      IsAdmissibleCutoff selectedSource cutoff →
       RetainedOutput selectedSource cutoff output →
       CoreMassBelongsToSource
         selectedSource state cutoff output (coreMass state cutoff output)
@@ -96,6 +103,7 @@ record CanonicalB4PhysicalR440UniformTarget
       (cutoff : Cutoff) →
       (output : Output) →
       IsPhysicalState selectedSource state →
+      IsAdmissibleCutoff selectedSource cutoff →
       RetainedOutput selectedSource cutoff output →
       LocalEDBelongsToSource
         selectedSource state cutoff output (localED state cutoff output)
@@ -105,6 +113,7 @@ record CanonicalB4PhysicalR440UniformTarget
       (cutoff : Cutoff) →
       (output : Output) →
       IsPhysicalState selectedSource state →
+      IsAdmissibleCutoff selectedSource cutoff →
       RetainedOutput selectedSource cutoff output →
       0ℚ ≤ coreMass state cutoff output
 
@@ -113,6 +122,7 @@ record CanonicalB4PhysicalR440UniformTarget
       (cutoff : Cutoff) →
       (output : Output) →
       IsPhysicalState selectedSource state →
+      IsAdmissibleCutoff selectedSource cutoff →
       RetainedOutput selectedSource cutoff output →
       0ℚ ≤ localED state cutoff output
 
@@ -128,6 +138,7 @@ record CanonicalB4PhysicalR440UniformTarget
       (cutoff : Cutoff) →
       (output : Output) →
       IsPhysicalState selectedSource state →
+      IsAdmissibleCutoff selectedSource cutoff →
       RetainedOutput selectedSource cutoff output →
       signedWork state cutoff output
       ≤ thetaD * coreMass state cutoff output
@@ -141,6 +152,7 @@ B4PhysicalR440KeyOpenLemma :
   (SelectedPeriodicSource PhysicalState Cutoff Output : Set) →
   (selectedSource : SelectedPeriodicSource) →
   (IsPhysicalState : SelectedPeriodicSource → PhysicalState → Set) →
+  (IsAdmissibleCutoff : SelectedPeriodicSource → Cutoff → Set) →
   (RetainedOutput : SelectedPeriodicSource → Cutoff → Output → Set) →
   (signedWork coreMass localED : PhysicalState → Cutoff → Output → ℚ) →
   (SignedWorkBelongsToSource :
@@ -174,6 +186,9 @@ b4UniformTargetRequiresCoreMassNonnegative = true
 b4UniformTargetRequiresLocalEDNonnegative : Bool
 b4UniformTargetRequiresLocalEDNonnegative = true
 
+b4UniformTargetRequiresAdmissibleCutoff : Bool
+b4UniformTargetRequiresAdmissibleCutoff = true
+
 b4UniformTargetRequiresSameSourceAttachments : Bool
 b4UniformTargetRequiresSameSourceAttachments = true
 
@@ -206,6 +221,10 @@ b4UniformTargetRequiresCoreMassNonnegativeIsTrue = refl
 b4UniformTargetRequiresLocalEDNonnegativeIsTrue :
   b4UniformTargetRequiresLocalEDNonnegative ≡ true
 b4UniformTargetRequiresLocalEDNonnegativeIsTrue = refl
+
+b4UniformTargetRequiresAdmissibleCutoffIsTrue :
+  b4UniformTargetRequiresAdmissibleCutoff ≡ true
+b4UniformTargetRequiresAdmissibleCutoffIsTrue = refl
 
 b4UniformTargetRequiresSameSourceAttachmentsIsTrue :
   b4UniformTargetRequiresSameSourceAttachments ≡ true
