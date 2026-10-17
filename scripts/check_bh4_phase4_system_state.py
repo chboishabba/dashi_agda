@@ -7,6 +7,8 @@ files = {
     "matrix": root / "DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda",
     "parameters": root / "DASHI/Biology/BH4CompartmentKineticStateExact.agda",
     "quantitative": root / "DASHI/Biology/BH4QuantitativeAcquisitionExact.agda",
+    "sabio_receipt": root / "DASHI/Biology/BH4ExecutedSABIOReceiptExact.agda",
+    "sifts_receipt": root / "DASHI/Biology/BH4ExecutedSIFTSReceiptExact.agda",
     "interval": root / "DASHI/Biology/BH4IntervalFluxSolverExact.agda",
     "nos_evidence": root / "DASHI/Biology/BH4NOSCouplingEvidenceExact.agda",
     "nos": root / "DASHI/Biology/BH4NOSCouplingSameObjectExact.agda",
@@ -16,6 +18,7 @@ files = {
     "matrix_builder": root / "scripts/build_bh4_stoichiometric_matrix.py",
     "parameter_acquirer": root / "scripts/acquire_bh4_parameter_evidence.py",
     "sabio": root / "scripts/acquire_bh4_sabio_kinetics.py",
+    "sabio_adjudication": root / "scripts/build_bh4_sabio_adjudication.py",
     "sifts": root / "scripts/acquire_bh4_pdbe_sifts.py",
     "interval_solver": root / "scripts/solve_bh4_flux_intervals.py",
     "flux_runner": root / "scripts/run_bh4_flux_feasibility.py",
@@ -42,6 +45,12 @@ for token in ["ParameterPaymentStatus", "unresolvedParameter", "sameObjectRefere
 for token in ["SABIO-RK", "PDBe", "SIFTS", "kineticConstantCreatesFluxBound", "structureMappingCreatesCatalyticMechanism"]:
     assert token in text["quantitative"], f"missing quantitative acquisition token: {token}"
 
+for token in ["executedSABIOKineticEntryCount", "190", "executedSABIOProteinsWithEntries", "11", "zeroPreRepairParameterCountMeansNoKineticParameters", "exportRowCreatesInVivoFluxBound"]:
+    assert token in text["sabio_receipt"], f"missing SABIO receipt token: {token}"
+
+for token in ["executedStructuresExamined", "38", "executedMatchingSIFTSSegmentCount", "526", "mappingCreatesCatalyticFunction"]:
+    assert token in text["sifts_receipt"], f"missing SIFTS receipt token: {token}"
+
 for token in ["IntervalFluxSolverStatus", "solverUnavailable", "underdetermined", "missingExchangeBoundMayBeSubstitutedWithZero", "feasibleSteadyStateCreatesDiseaseMechanism"]:
     assert token in text["interval"], f"missing interval solver token: {token}"
 
@@ -57,7 +66,7 @@ for token in ["FluxFeasibilityStatus", "underdetermined", "candidateFluxBalanceW
 for token in ["OpenMetabolicNetwork", "MetabolicOpenSystemBalance", "externalExchangeMayBeCollapsedIntoInternalStoichiometry"]:
     assert token in text["open_network"], f"missing open-network token: {token}"
 
-for token in ["currentBH4Phase", "systemStateQuantitativePhase", "wholeSystemFluxBalanceAttempted", "firstJointFluxOutcome", "underdetermined", "livePhase4Residuals", "panelRheaAcquisitionExecuted", "finitePanelReactionPromotionClosed", "firstQuantitativeCoordinateCount = 27", "expandedQuantitativeCoordinateCount = 56", "quantitativeAcquisitionToolingReady", "intervalFluxSolverReady", "missingReactionFluxBounds = 12", "missingExternalExchangeCoordinates = 29"]:
+for token in ["currentBH4Phase", "systemStateQuantitativePhase", "wholeSystemFluxBalanceAttempted", "firstJointFluxOutcome", "underdetermined", "livePhase4Residuals", "panelRheaAcquisitionExecuted", "finitePanelReactionPromotionClosed", "firstQuantitativeCoordinateCount = 27", "expandedQuantitativeCoordinateCount = 56", "quantitativeAcquisitionToolingReady", "intervalFluxSolverReady", "sabioExportAcquisitionExecuted", "sabioKineticEntryCount", "missingReactionFluxBounds = 12", "missingExternalExchangeCoordinates = 29"]:
     assert token in text["roadmap"], f"missing roadmap token: {token}"
 
 for token in ["species_index", "reaction_index", "matrix", "finite_formula_residuals", "signed_coefficient", "species_count", "reaction_count"]:
@@ -66,8 +75,11 @@ for token in ["species_index", "reaction_index", "matrix", "finite_formula_resid
 for token in ["payment_status", "same_object_reference", "compartment_reference", "measurement_time_reference", "unresolved", "REACTION_FLUX:", "EXCHANGE:", "exchange_ids", "dashi.bh4-parameter-evidence.v2"]:
     assert token in text["parameter_acquirer"], f"missing parameter acquirer token: {token}"
 
-for token in ["UniProtKB_AC", "raw_sha256", "kinetic_parameters_create_flux_bounds"]:
+for token in ["UniProtKB_AC", "n_start_value", "kinetic_parameter_candidates", "kinetic_parameters_create_flux_bounds"]:
     assert token in text["sabio"], f"missing SABIO acquisition token: {token}"
+
+for token in ["finite_matrix_rhea_ids", "usable_for_flux_bound", "parameter_kind_hint", "parameter_candidate_creates_flux_bound"]:
+    assert token in text["sabio_adjudication"], f"missing SABIO adjudication token: {token}"
 
 for token in ["SIFTS", "_pdbx_sifts_unp_segments", "raw_sha256", "structure_mapping_creates_catalytic_mechanism"]:
     assert token in text["sifts"], f"missing SIFTS acquisition token: {token}"
@@ -79,7 +91,7 @@ for token in ["feasible", "infeasible", "underdetermined", "missing_flux_bounds"
     assert token in text["flux_runner"], f"missing flux runner token: {token}"
 
 for root_name in ["external_root", "kitzerow_root", "unified_root"]:
-    for token in ["BH4ExecutedPanelReactionReceiptExact", "BH4PanelStoichiometricMatrixExact", "BH4CompartmentKineticStateExact", "BH4QuantitativeAcquisitionExact", "BH4IntervalFluxSolverExact", "BH4NOSCouplingEvidenceExact", "BH4NOSCouplingSameObjectExact", "BH4JointFluxFeasibilityExact", "BH4OpenMetabolicNetworkAdapterExact", "BH4Phase4RoadmapExact", "BH4Phase4SystemStateRegression"]:
+    for token in ["BH4ExecutedPanelReactionReceiptExact", "BH4PanelStoichiometricMatrixExact", "BH4CompartmentKineticStateExact", "BH4QuantitativeAcquisitionExact", "BH4ExecutedSABIOReceiptExact", "BH4ExecutedSIFTSReceiptExact", "BH4IntervalFluxSolverExact", "BH4NOSCouplingEvidenceExact", "BH4NOSCouplingSameObjectExact", "BH4JointFluxFeasibilityExact", "BH4OpenMetabolicNetworkAdapterExact", "BH4Phase4RoadmapExact", "BH4Phase4SystemStateRegression"]:
         assert token in text[root_name], f"missing {root_name} phase-4 import: {token}"
 
 print("BH4 phase-4 system-state max-cut regression: ok")
