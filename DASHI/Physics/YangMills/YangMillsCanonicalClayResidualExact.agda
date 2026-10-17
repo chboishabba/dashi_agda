@@ -7,40 +7,53 @@ import DASHI.Physics.YangMills.BalabanCMP109CanonicalSourceSemanticsObligationsE
 import DASHI.Physics.YangMills.BalabanCanonicalPhysicalTransferGapObligationExact as TransferGap
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedTermReplayExact as R409
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalTraceEntropyBudgetExact as R429
+import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
+import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
 
 ------------------------------------------------------------------------
 -- Preferred non-Round research scheduler after historical Round contraction.
--- This record only composes residual obligation packages.  It does not provide
--- inhabitants for any package and therefore cannot promote a Clay conclusion.
+-- Every field is typed through one of the canonical package owners; no Round
+-- scheduler is imported and no residual inhabitant is manufactured here.
 ------------------------------------------------------------------------
 
 record YangMillsCanonicalClayResidual
-    (CMP109Residual
-     PhysicalTransferGapResidual
-     SelectedTermReplayResidual
-     TraceEntropyResidual : Set) : Set₁ where
+    {GeneratedHistoryResponse
+     BetaDifferenceDecomposition
+     PhysicalCompositeD1ChainRule : Set}
+    {Measure Schwinger Observable Energy Bound : Set}
+    (closure : Limit.FiniteToContinuumOSClosure Measure Schwinger)
+    (spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Bound)
+    {SourceTranscriptionReceipt
+     ExecutionReplayReceipt
+     SelectedTermIdentity
+     ProofBearingEquality
+     ExactCompilerStructure
+     QuantitativeTraceEntropyBound
+     SameObjectTraceAttachment : Set} : Set₁ where
   field
-    cmp109SourceSemantics : CMP109Residual
-    physicalTransferGap : PhysicalTransferGapResidual
-    cmp116SelectedTermReplay : SelectedTermReplayResidual
-    cmp116TraceEntropyBudget : TraceEntropyResidual
+    cmp109SourceSemantics :
+      CMP109.CMP109CanonicalSourceSemanticsObligations
+        GeneratedHistoryResponse
+        BetaDifferenceDecomposition
+        PhysicalCompositeD1ChainRule
+
+    physicalTransferGap :
+      TransferGap.SelectedPhysicalTransferGapObligation closure spectrum
+
+    cmp116SelectedTermReplay :
+      R409.CMP116CanonicalSelectedTermReplay
+        SourceTranscriptionReceipt
+        ExecutionReplayReceipt
+        SelectedTermIdentity
+        ProofBearingEquality
+
+    cmp116TraceEntropyBudget :
+      R429.CMP116CanonicalTraceEntropyBudget
+        ExactCompilerStructure
+        QuantitativeTraceEntropyBound
+        SameObjectTraceAttachment
 
 open YangMillsCanonicalClayResidual public
-
--- Imported owner namespaces are intentional authority anchors for this residual
--- surface.  The actual package types remain parameterized until their selected
--- same-object carriers are instantiated by theorem-bearing work.
-cmp109OwnerPresent : Bool
-cmp109OwnerPresent = false
-
-transferGapOwnerPresent : Bool
-transferGapOwnerPresent = false
-
-r409OwnerPresent : Bool
-r409OwnerPresent = false
-
-r429OwnerPresent : Bool
-r429OwnerPresent = false
 
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
