@@ -17,5 +17,5 @@ record EvidenceRevisionRef : Set where
 
 open EvidenceRevisionRef public
 
-establishesProof : EvidenceRevisionRef -> Bool
+establishesProof : EvidenceRevisionRef → Bool
 establishesProof _ = false
