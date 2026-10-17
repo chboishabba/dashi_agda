@@ -93,13 +93,15 @@ def test_beta_attachment_keeps_externally_fixed_shooting_interface():
     assert "shootingMapAttachment" in text
 
 
-def test_physical_composite_d1_reference_functions_are_parameters():
+def test_physical_composite_d1_reference_functions_and_attachments_are_parameters():
     text = _read_safe(INSTANTIATION)
     assert "PhysicalCompositeD1TransportResidual" in text
     assert "(physicalCompositeD1 substitutedD1 :" in text
     assert "(D1BelongsToSelectedSource :" in text
+    assert "(physicalCompositeD1Attachment :" in text
+    assert "(substitutedD1Attachment :" in text
     assert "physicalCompositeD1IsSubstitutedD1" in text
-    assert "DASHI extension" in text
+    assert "DASHI EXTENSIONS" in text
 
 
 def test_source_attribution_boundaries_are_explicit():
