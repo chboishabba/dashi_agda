@@ -6,6 +6,9 @@ of structures per protein, the script fetches PDBe updated mmCIF files and
 extracts `_pdbx_sifts_unp_segments` rows, which map PDB segments to UniProt.
 A mapping is structural provenance only; it does not create catalytic-site or
 functional-mechanism evidence.
+
+The output carries machine-computed coverage totals so later formal promotion
+does not rely on hand-summed console diagnostics.
 """
 
 from __future__ import annotations
@@ -19,7 +22,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 PDBe_UPDATED_CIF = "https://www.ebi.ac.uk/pdbe/entry-files/download/{pdb}_updated.cif"
-USER_AGENT = "DASHI-BH4-PDBe-SIFTS/1.0 (https://github.com/chboishabba/dashi_agda)"
+USER_AGENT = "DASHI-BH4-PDBe-SIFTS/1.1 (https://github.com/chboishabba/dashi_agda)"
 
 
 def get(url: str) -> bytes:
@@ -67,6 +70,36 @@ def extract_sifts_segments(text: str, accession: str) -> list[dict]:
     return out
 
 
+def summarize(results: list[dict], errors: list[dict]) -> dict:
+    structures_examined = sum(len(row.get("structures", [])) for row in results)
+    segment_count = sum(
+        int(structure.get("matching_segment_count", 0))
+        for row in results
+        for structure in row.get("structures", [])
+    )
+    with_pdb = [row for row in results if row.get("uniprot_pdb_ids")]
+    without_pdb = [row for row in results if not row.get("uniprot_pdb_ids")]
+    with_segments = [
+        row for row in results
+        if any(int(s.get("matching_segment_count", 0)) > 0 for s in row.get("structures", []))
+    ]
+    without_segments = [row for row in results if row not in with_segments]
+    return {
+        "proteins_requested": len(results),
+        "proteins_with_uniprot_pdb_links": len(with_pdb),
+        "proteins_without_uniprot_pdb_links": len(without_pdb),
+        "proteins_without_uniprot_pdb_link_ids": [
+            {"symbol": row.get("symbol"), "accession": row.get("accession")}
+            for row in without_pdb
+        ],
+        "proteins_with_matching_sifts_segments": len(with_segments),
+        "proteins_without_matching_sifts_segments": len(without_segments),
+        "structures_examined": structures_examined,
+        "matching_sifts_segment_count": segment_count,
+        "error_count": len(errors),
+    }
+
+
 def acquire(panel_path: Path, max_pdb_per_protein: int) -> tuple[dict, int]:
     panel = json.loads(panel_path.read_text(encoding="utf-8"))
     results, errors = [], []
@@ -98,13 +131,16 @@ def acquire(panel_path: Path, max_pdb_per_protein: int) -> tuple[dict, int]:
             "uniprot_pdb_ids": [p.upper() for p in structures],
             "pdb_ids_examined": [p.upper() for p in selected],
             "structures": mappings,
+            "matching_segment_count": sum(m.get("matching_segment_count", 0) for m in mappings),
         })
+    summary = summarize(results, errors)
     return {
-        "schema": "dashi.bh4-pdbe-sifts.v1",
+        "schema": "dashi.bh4-pdbe-sifts.v2",
         "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
         "source": "PDBe updated PDBx/mmCIF with SIFTS _pdbx_sifts_unp_segments",
         "source_panel": str(panel_path),
         "max_pdb_per_protein": max_pdb_per_protein,
+        "summary": summary,
         "results": results,
         "errors": errors,
         "promotion_boundary": {
