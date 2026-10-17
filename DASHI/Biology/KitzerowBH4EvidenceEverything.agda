@@ -16,6 +16,8 @@ import DASHI.Biology.BH4ExecutedSABIOReceiptExact
 import DASHI.Biology.BH4ExecutedSABIOAdjudicationReceiptExact
 import DASHI.Biology.BH4FluxCandidateRankingExact
 import DASHI.Biology.BH4FluxPaymentPreparationExact
+import DASHI.Biology.BH4JointPaymentAcquisitionExact
+import DASHI.Biology.BH4JointPaymentAcquisitionRegression
 import DASHI.Biology.BH4MissingReactionKineticsEvidenceExact
 import DASHI.Biology.BH4ExecutedSIFTSReceiptExact
 import DASHI.Biology.BH4IntervalFluxSolverExact
