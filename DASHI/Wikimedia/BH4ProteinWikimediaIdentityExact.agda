@@ -88,7 +88,7 @@ tph1Identity = acquired-protein-qid-receipt "TPH1" "P17752" uniqueExact ("Q21125
 tph2Identity = acquired-protein-qid-receipt "TPH2" "Q8IWU9" uniqueExact ("Q21125466" ∷ []) "Q18049432" true false "" true "executed exact-P352 acquisition 2026-10-17"
 agmoIdentity = acquired-protein-qid-receipt "AGMO" "Q6ZNB7" uniqueExact ("Q22680132" ∷ []) "Q18057391" true false "" true "executed exact-P352 acquisition 2026-10-17"
 tsc2Identity = acquired-protein-qid-receipt "TSC2" "P49815" uniqueExact ("Q21109261" ∷ []) "Q18032199" true true "TSC2" true "executed exact-P352 acquisition 2026-10-17"
-mtorIdentity = acquired-protein-qid-receipt "MTOR" "P42345" uniqueExact ("Q285613" ∷ []) "Q14876086" true true "MTOR" true "executed exact-P352 acquisition 2026-10-17"
+mtorIdentity = acquired-protein-qid-receipt "MTOR" "P42345" uniqueExact ("Q285613" ∷ []) "Q14876086" true true "MTOR" true "executed exact-P352 acquisition 2026-10-17; Q285613 supersedes rejected preliminary seed Q21115057"
 
 acquiredBH4WikimediaPanel : List AcquiredProteinQidReceipt
 acquiredBH4WikimediaPanel =
