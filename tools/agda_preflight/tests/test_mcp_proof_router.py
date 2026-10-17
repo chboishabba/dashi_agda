@@ -6,6 +6,20 @@ class FakeService:
     def proof_route(self, query, **kwargs):
         return {"query": query, "recommended_backend": "aristotle+lean", "authority": "routing-only"}
 
+    def proof_route_for_obligation(self, query, **kwargs):
+        return {
+            "query": query,
+            "demand_ref": kwargs["demand_ref"],
+            "external_obligation_ref": kwargs["external_obligation_ref"],
+            "statement_digest": kwargs["statement_digest"],
+            "recommended_backend": "aristotle+lean",
+            "authority": "routing-only",
+            "establishes_proof": False,
+        }
+
+    def formal_evidence_for_obligation(self, **kwargs):
+        return {**kwargs, "evidence": [], "authority": "evidence-only", "establishes_proof": False}
+
     def proof_route_history(self, **kwargs):
         return {"routes": [], "authority": "routing-only"}
 
@@ -27,6 +41,25 @@ def test_repository_mcp_adapter_exposes_proof_route():
     result = tools.proof_route("goal", target_prover="lean")
     assert result["recommended_backend"] == "aristotle+lean"
     assert result["authority"] == "routing-only"
+
+
+def test_repository_mcp_adapter_exposes_external_obligation_route_and_evidence():
+    tools = DashiAgdaMcpTools(FakeService())
+    route = tools.proof_route_for_obligation(
+        "goal",
+        demand_ref="formal-demand:1",
+        external_obligation_ref="proof-obligation:1",
+        statement_digest="sha256:a",
+    )
+    assert route["demand_ref"] == "formal-demand:1"
+    assert route["establishes_proof"] is False
+    evidence = tools.formal_evidence_for_obligation(
+        demand_ref="formal-demand:1",
+        external_obligation_ref="proof-obligation:1",
+        statement_digest="sha256:a",
+    )
+    assert evidence["evidence"] == []
+    assert evidence["establishes_proof"] is False
 
 
 def test_repository_mcp_adapter_exposes_da51_read_surfaces():
