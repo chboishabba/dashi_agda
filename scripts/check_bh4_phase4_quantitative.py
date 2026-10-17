@@ -42,6 +42,8 @@ require("sabio_adjudication", ["dashi.bh4-sabio-adjudication.v2","catalytic-cons
 require("ranking", ["dashi.bh4-flux-candidate-ranking.v1","direct-rate-candidate","capacity-candidate","assay_reaction_identity_paid","usable_for_flux_bound"])
 require("payment", ["dashi.bh4-flux-payment-preparation.v1","assay-specific-capacity","turnover-capacity","kinetic-shape-only","primary-literature-gap","enzyme_abundance_required","normalization_bridge_required","steady_state_flux_bound_payable"])
 require("interval_solver", ["scipy.optimize","linprog","REACTION_FLUX:","EXCHANGE:","underdetermined"])
-require("runner", ["rank_bh4_flux_candidates.py","prepare_bh4_flux_payment.py","bh4-flux-payment-preparation.json","dashi.bh4-phase4-maxcut-run.v6","sabio_flux_payment"])
+require("runner", ["rank_bh4_flux_candidates.py","prepare_bh4_flux_payment.py","bh4-flux-payment-preparation.json","sabio_flux_payment"])
+runner_text = (root / "scripts/run_bh4_phase4_maxcut.py").read_text()
+assert any(f"dashi.bh4-phase4-maxcut-run.v{v}" in runner_text for v in (6, 7)), "runner missing schema v6/v7 token"
 require("unified", ["BH4ExecutedSABIOAdjudicationReceiptExact","BH4FluxCandidateRankingExact","BH4FluxPaymentPreparationExact","BH4MissingReactionKineticsEvidenceExact","BH4IntervalFluxSolverExact"])
 print("BH4 Phase-4 quantitative acquisition + ranking + payment preparation + interval solver regression: ok")

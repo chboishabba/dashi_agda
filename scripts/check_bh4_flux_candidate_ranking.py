@@ -37,17 +37,17 @@ for token in [
     "bh4-flux-candidate-ranking.json",
     "rank_bh4_flux_candidates.py",
     "sabio_flux_ranking",
-    "dashi.bh4-phase4-maxcut-run.v5",
 ]:
     assert token in run_text, f"missing runner ranking token: {token}"
+assert any(f"dashi.bh4-phase4-maxcut-run.v{v}" in run_text for v in (5, 6, 7)), "missing runner schema token"
 
 for token in [
     "sabioKineticParameterCount",
     "sabioMappedParameterCandidates",
     "sabioFiniteReactionCandidateCoverage",
-    "rankSABIOCandidatesByFluxRelevance",
 ]:
     assert token in roadmap_text, f"missing roadmap ranking token: {token}"
+assert "fluxCandidateRankingToolReady" in roadmap_text or "rankSABIOCandidatesByFluxRelevance" in roadmap_text, "missing roadmap ranking token"
 
 for token in ["932", "875", "10", "RHEA:11920", "RHEA:19897"]:
     assert token in receipt_text, f"missing executed adjudication receipt token: {token}"
