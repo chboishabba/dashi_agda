@@ -29,6 +29,7 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -40,18 +41,26 @@ ENWIKI_API = "https://en.wikipedia.org/w/api.php"
 HUMAN_QID = "Q5"
 
 
-def _get_json(base: str, params: dict[str, str]) -> tuple[dict, bytes]:
+def _get_json(base: str, params: dict[str, str], max_retries: int = 5) -> tuple[dict, bytes]:
     query = urllib.parse.urlencode(params)
     request = urllib.request.Request(
         f"{base}?{query}",
         headers={
             "Accept": "application/sparql-results+json, application/json",
-            "User-Agent": "DASHI-wikimedia-biology-acquisition/1.1",
+            "User-Agent": "DASHI-wikimedia-biology-acquisition/1.1 (https://github.com/chboishabba/dashi_agda; contact: johlbrown@gmail.com)",
         },
     )
-    with urllib.request.urlopen(request, timeout=60) as response:
-        raw = response.read()
-    return json.loads(raw), raw
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(request, timeout=15) as response:
+                raw = response.read()
+            return json.loads(raw), raw
+        except urllib.error.HTTPError as exc:
+            if exc.code == 429 and attempt < max_retries - 1:
+                wait_time = 2.0 * (attempt + 1)
+                time.sleep(wait_time)
+                continue
+            raise
 
 
 def _claim_entity_ids(entity: dict, prop: str) -> list[str]:
@@ -242,6 +251,7 @@ def build_identity(accession: str, symbol: str | None = None, sector: str | None
 def acquire_panel() -> tuple[dict, int]:
     members: list[dict] = []
     for member in KITZEROW_BH4_PANEL:
+        print(f"Acquiring {member['symbol']} ({member['accession']})...", file=sys.stderr, flush=True)
         try:
             members.append(build_identity(member["accession"], member["symbol"], member["sector"]))
         except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, json.JSONDecodeError, ValueError) as exc:
@@ -254,6 +264,7 @@ def acquire_panel() -> tuple[dict, int]:
                     "error": str(exc),
                 }
             )
+        time.sleep(0.5)
 
     verified = sum(row.get("identity_status") == "verified" for row in members)
     ambiguous = sum(row.get("identity_status") == "ambiguous" for row in members)
