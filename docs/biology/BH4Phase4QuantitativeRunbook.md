@@ -31,14 +31,6 @@ artifacts/biology/bh4-flux-candidate-ranking.json
 
 Use `--top-kinetic-candidates N` to change how many ranked candidates are retained per reaction.
 
-## SABIO-RK acquisition and adjudication
-
-The live export API is `https://sabio.h-its.org/export-api/sabio/kinlaw-entry/json`; exact queries use `UniProtKB_AC`. The successful run returned 190 rows and 932 nested parameter objects. `build_bh4_sabio_adjudication.py` joins each parameter to the exact panel protein, protein-linked Rhea IDs and the subset present in the 12-column finite matrix.
-
-Every candidate remains `usable_for_flux_bound = false` until assay/context identity, same-object/compartment/time translation, normalized solver units, and a justified kinetic-parameter-to-network-flux translation are paid.
-
-The executed coverage is **10 of 12 finite reactions**. `RHEA:11920` and `RHEA:19897` use separately owned primary-literature evidence rather than weaker database matching.
-
 ## Flux-relevance ranking
 
 `rank_bh4_flux_candidates.py` converts the large candidate worklist into a bounded per-reaction adjudication queue. It assigns one of five roles:
@@ -82,17 +74,9 @@ python3 scripts/rank_bh4_flux_candidates.py \
 
 `DASHI.Biology.BH4MissingReactionKineticsEvidenceExact` owns bounded primary human evidence for the two SABIO-uncovered reactions.
 
-For PCBD1 / `RHEA:11920`:
+For PCBD1 / `RHEA:11920`, primary human biochemical studies provide kinetic characterization but do not directly pay wild-type intracellular flux. For NOS / `RHEA:19897`, primary human NOS2/NOS3 studies provide quantitative and BH4-sensitive kinetics but do not justify collapsing isoform-specific assay data into one shared in-vivo NOS reaction bound.
 
-- Johnen et al., PNAS 1995, DOI `10.1073/pnas.92.26.12384`: human 4a-carbinolamine dehydratase shows cooperative/non-Michaelis-Menten behavior; the C82R mutant retains approximately 5 uM Km but has lower Vmax.
-- Thony et al., Eur J Biochem 1995, DOI `10.1111/j.1432-1033.1995.tb20714.x`: purified human wild-type dehydratase strongly accelerates synthetic substrate dehydration.
-
-For NOS / `RHEA:19897`:
-
-- PMID `9224737`: recombinant human inducible NOS reports approximately 800 nmol NO min^-1 mg^-1 Vmax and 22 uM Km(L-Arg), with BH4 required during preparation.
-- PMID `9089781`: human placental NOS3 reports BH4-sensitive activity and BH4-dependent changes in apparent Km/Vmax.
-
-These close the evidence-discovery gap, not the network-flux gap. PCBD1 mutant kinetics do not substitute for wild-type cellular flux, and NOS isoform/assay kinetics cannot be collapsed silently into one shared in-vivo `RHEA:19897` flux.
+That means the literature-discovery gap is closed; the translation gap is not.
 
 ## Solver payment
 
