@@ -10,6 +10,8 @@ import DASHI.Culture.ColonialTheatreSensoryAccessExact as Sensory
 import DASHI.Culture.PowersPlantationParadiseEvidenceGraphExact as Graph
 import DASHI.Culture.PowersPlantationParadiseMobilityRegimeTransitionExact as Mobility
 import DASHI.Culture.PowersPlantationParadiseResearchThroughPerformanceExact as PerformanceProbe
+import DASHI.Culture.PowersPlantationParadiseSourceAcquisitionPromotionExact as Promotion
+import DASHI.Culture.PowersPlantationParadiseFrontierGenealogyExact as Genealogy
 import DASHI.Culture.PowersPlantationParadiseEmpiricalRoadmapExact as Roadmap
 
 _methodology-boundary-paid : Methodology.PowersMethodologySourceBoundary
@@ -38,6 +40,19 @@ _mobility-regime-boundary-paid = Mobility.canonicalPowersMobilityRegimeBoundary
 
 _performance-probe-boundary-paid : PerformanceProbe.PowersResearchThroughPerformanceBoundary
 _performance-probe-boundary-paid = PerformanceProbe.canonicalPowersResearchThroughPerformanceBoundary
+
+_source-acquisition-promotion-boundary-paid : Promotion.PowersSourceAcquisitionPromotionBoundary
+_source-acquisition-promotion-boundary-paid = Promotion.canonicalPowersSourceAcquisitionPromotionBoundary
+
+_location-inspection-gap-paid :
+  DASHI.Core.IntersectionalNonFactorability.FactorsThrough Promotion.locationReading Promotion.inspectionReading → ⊥
+_location-inspection-gap-paid = Promotion.locationCannotRecoverInspection
+
+_frontier-genealogy-boundary-paid : Genealogy.PowersFrontierGenealogyBoundary
+_frontier-genealogy-boundary-paid = Genealogy.canonicalPowersFrontierGenealogyBoundary
+
+_compensation-frontier-genealogy-paid : Genealogy.FrontierGenealogyReceipt
+_compensation-frontier-genealogy-paid = Genealogy.compensationFrontierGenealogy
 
 _roadmap-boundary-paid : Roadmap.PowersEmpiricalRoadmapBoundary
 _roadmap-boundary-paid = Roadmap.canonicalPowersEmpiricalRoadmapBoundary
