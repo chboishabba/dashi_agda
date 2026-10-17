@@ -10,6 +10,7 @@ files = {
     "parameters": root / "scripts/acquire_bh4_parameter_evidence.py",
     "interval_solver": root / "scripts/solve_bh4_flux_intervals.py",
     "runner": root / "scripts/run_bh4_phase4_maxcut.py",
+    "runbook": root / "docs/biology/BH4Phase4QuantitativeRunbook.md",
     "phase4_checker": root / "scripts/check_bh4_phase4_system_state.py",
     "unified": root / "DASHI/Unified/BH4BiochemicalEverything.agda",
 }
@@ -44,7 +45,7 @@ for token in [
 ]:
     assert token in text["sifts"], f"missing SIFTS token: {token}"
 
-for token in ["EXCHANGE:", "reaction_flux_ids", "exchange_ids"]:
+for token in ["EXCHANGE:", "reaction_flux_ids", "exchange_ids", "dashi.bh4-parameter-evidence.v2"]:
     assert token in text["parameters"], f"missing parameter exchange token: {token}"
 
 for token in [
@@ -59,6 +60,9 @@ for token in [
     "solve_bh4_flux_intervals.py", "bh4-phase4-maxcut-summary.json",
 ]:
     assert token in text["runner"], f"missing one-command runner token: {token}"
+
+for token in ["56 coordinates", "S*v + e = 0", "SABIO-RK", "PDBe/SIFTS", "check_kitzerow_bh4_priority_all.py"]:
+    assert token in text["runbook"], f"missing runbook token: {token}"
 
 for root_name in ["phase4_checker", "unified"]:
     for token in ["BH4QuantitativeAcquisitionExact", "BH4IntervalFluxSolverExact"]:
