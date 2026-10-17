@@ -6,6 +6,7 @@ import DASHI.Biology.Molecular.BH4ExecutedPanelReactionReceiptExact as Executed
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Matrix
 import DASHI.Biology.BH4CompartmentKineticStateExact as Parameters
 import DASHI.Biology.BH4QuantitativeAcquisitionExact as Acquisition
+import DASHI.Biology.BH4ExecutedSIFTSReceiptExact as SIFTS
 import DASHI.Biology.BH4IntervalFluxSolverExact as Interval
 import DASHI.Biology.BH4NOSCouplingEvidenceExact as Evidence
 import DASHI.Biology.BH4NOSCouplingSameObjectExact as NOS
@@ -13,10 +14,6 @@ import DASHI.Biology.BH4JointFluxFeasibilityExact as Flux
 import DASHI.Biology.BH4OpenMetabolicNetworkAdapterExact as OpenNetwork
 import DASHI.Biology.BH4Phase4RoadmapExact as Roadmap
 import DASHI.Biology.KitzerowBH4SystemNongNangMaxCutExact as Graph
-
-------------------------------------------------------------------------
--- Regression contract for the executed Phase-4 system-state max-cut.
-------------------------------------------------------------------------
 
 panelReactionAcquisitionExecuted :
   Executed.acquisitionExecuted Executed.canonicalExecutedPanelReactionReceipt ≡ true
@@ -57,6 +54,20 @@ siftsMappingDoesNotCreateCatalyticMechanism :
     Acquisition.canonicalQuantitativeAcquisitionBoundary
   ≡ false
 siftsMappingDoesNotCreateCatalyticMechanism = refl
+
+boundedSIFTSRunExaminedThirtyEightStructures :
+  SIFTS.structuresExamined SIFTS.canonicalExecutedSIFTSReceipt ≡ 38
+boundedSIFTSRunExaminedThirtyEightStructures = refl
+
+boundedSIFTSRunRecoveredFiveHundredTwentySixSegments :
+  SIFTS.matchingSIFTSSegmentCount SIFTS.canonicalExecutedSIFTSReceipt ≡ 526
+boundedSIFTSRunRecoveredFiveHundredTwentySixSegments = refl
+
+boundedSIFTSMappingStillDoesNotCreateCatalyticFunction :
+  SIFTS.ExecutedSIFTSBoundary.mappingCreatesCatalyticFunction
+    SIFTS.canonicalExecutedSIFTSBoundary
+  ≡ false
+boundedSIFTSMappingStillDoesNotCreateCatalyticFunction = refl
 
 intervalSolverDoesNotZeroMissingExchange :
   Interval.IntervalFluxSolverBoundary.missingExchangeBoundMayBeSubstitutedWithZero
@@ -153,6 +164,9 @@ quantitativeAcquisitionAndIntervalSolverAreReady :
   Roadmap.quantitativeAcquisitionToolingReady ≡ true
   × Roadmap.intervalFluxSolverReady ≡ true
 quantitativeAcquisitionAndIntervalSolverAreReady = refl , refl
+
+sabioExportAPIAdapterIsReady : Roadmap.sabioExportAPIAdapterReady ≡ true
+sabioExportAPIAdapterIsReady = refl
 
 underdeterminedDoesNotMeanMechanismFalse :
   Roadmap.BH4Phase4Boundary.underdeterminedMeansMechanismFalse
