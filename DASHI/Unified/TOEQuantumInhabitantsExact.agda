@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (refl)
 
 import DASHI.Unified.TOEConcreteInhabitantsExact as Inhabitants
+open Inhabitants.FormalInhabitantReceipt
 
 lean76GTPSProjectionInhabitant : Inhabitants.FormalInhabitantReceipt
 lean76GTPSProjectionInhabitant =
