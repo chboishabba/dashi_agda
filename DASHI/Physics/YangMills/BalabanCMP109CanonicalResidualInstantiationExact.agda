@@ -156,9 +156,9 @@ selectedBetaDifferenceDecomposition
 -- 3. Physical composite D1.
 --
 -- Both reference functions, the source-attachment relation, and both attachment
--- proofs are external parameters.  The residual record can only carry the live
--- transport equality; it cannot choose `substitutedD1 = physicalCompositeD1`
--- during construction.
+-- proofs are external parameters fixed before the residual record is built.
+-- The residual record can only carry the live transport equality; it cannot
+-- choose `substitutedD1 = physicalCompositeD1` during construction.
 ------------------------------------------------------------------------
 
 record PhysicalCompositeD1TransportResidual
