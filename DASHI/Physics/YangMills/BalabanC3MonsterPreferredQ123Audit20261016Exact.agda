@@ -2,27 +2,23 @@
 module DASHI.Physics.YangMills.BalabanC3MonsterPreferredQ123Audit20261016Exact where
 
 ------------------------------------------------------------------------
--- TERMINAL YM / 369 / CMP119 AUDIT AFTER THE Q3 PHYSICAL IDENTIFICATION.
+-- TERMINAL YM / 369 / CMP119 AUDIT AFTER Q3/H/Q2 REDUCTIONS.
 --
--- Q3 is no longer an independent finite-bridge source package.  One fixed
--- factorized CMP119 F^2 observable/state family now feeds both finite lanes:
+-- Q3 is compiler output from one fixed factorized CMP119 F^2 state/observable
+-- family.  H is reduced to ONE source-facing same-object equality between that
+-- factorized sourceExpectation and the literal normalized finite YM/Haar
+-- expectation.  Q2 is reduced to TWO same-object transports into the
+-- renormalized operator pair governed by the attributed trace-anomaly theorem.
 --
---   Haar finite lane    = sourceExpectation O_F2
---   Local-C finite lane = approximateExpectation_n O_F2.
---
--- The existing factorized-density convergence theorem supplies the finite
--- bridge and proves its error vanishes.  The remaining source payment on that
--- side is the already-existing physical-Haar/sourceExpectation semantics, not a
--- new Q3 theorem.
---
--- The source frontier is therefore:
---   Q1 : literal metric/stress source path + derivative/B4 semantics;
---   Q2 : same-stress nonperturbative SU(2) Hilbert-trace anomaly;
---   H  : literal physical-Haar semantics for the selected sourceExpectation.
+-- Attribution boundary:
+-- * Collins--Duncan--Joglekar supports the renormalized non-Abelian trace
+--   anomaly theorem only.
+-- * Balaban/CMP source claims remain attached to their existing source owners.
+-- * the finite-identification, reduction and compiler theorems added on this
+--   branch are DASHI contributions, not retroactive source claims.
 --
 -- For antigravity/WEC interpretation, Lorentzian/Wick same-object continuation
--- and T00/active-stress control remain independent downstream physics.  A trace
--- sign by itself is not an active-stress theorem.
+-- and T00/active-stress control remain independent downstream physics.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -58,8 +54,17 @@ preferredYM369RemainingWorkIsSourcePhysics = true
 q1PathDerivativeSemanticsStillSourcePackage : Bool
 q1PathDerivativeSemanticsStillSourcePackage = Roadmap.q1PathSemanticsStillOpen
 
-q2SameStressHilbertTraceAnomalyStillSourcePackage : Bool
-q2SameStressHilbertTraceAnomalyStillSourcePackage = Roadmap.q2SameStressAnomalyStillOpen
+q2OpaqueAnomalyEquationStillSourcePackage : Bool
+q2OpaqueAnomalyEquationStillSourcePackage =
+  Roadmap.q2OpaqueAnomalyEquationStillRequired
+
+q2ReducedToRenormalizedSameObjectTransports : Bool
+q2ReducedToRenormalizedSameObjectTransports =
+  Roadmap.q2ReducedToTwoRenormalizedSameObjectTransports
+
+q2CitationAlonePaysSelectedTransport : Bool
+q2CitationAlonePaysSelectedTransport =
+  Roadmap.q2CitationAlonePaysSelectedCMP119Transport
 
 q3PointwiseFiniteF2EqualityStillRequired : Bool
 q3PointwiseFiniteF2EqualityStillRequired = false
@@ -71,9 +76,16 @@ q3AsymptoticFiniteF2BridgeStillSourcePackage =
 q3BridgeIsCompilerOutputFromFactorizedIdentification : Bool
 q3BridgeIsCompilerOutputFromFactorizedIdentification = true
 
-physicalHaarSourceExpectationSemanticsStillSourcePackage : Bool
-physicalHaarSourceExpectationSemanticsStillSourcePackage =
-  Roadmap.literalPhysicalHaarSemanticsStillOpen
+independentPhysicalHaarQuadratureBridgeStillSourcePackage : Bool
+independentPhysicalHaarQuadratureBridgeStillSourcePackage =
+  Roadmap.independentPhysicalHaarQuadratureBridgeStillRequired
+
+physicalHaarFiniteMeasureSameObjectEqualityStillSourcePackage : Bool
+physicalHaarFiniteMeasureSameObjectEqualityStillSourcePackage =
+  Roadmap.physicalHaarReducedToFiniteMeasureSameObjectEquality
+
+attributionBoundaryPreserved : Bool
+attributionBoundaryPreserved = Roadmap.attributionBoundaryPreserved
 
 freeTraceScalarIsPreferredFrontier : Bool
 freeTraceScalarIsPreferredFrontier = false
@@ -100,16 +112,8 @@ traceSignAlonePaysLorentzianActiveStress : Bool
 traceSignAlonePaysLorentzianActiveStress =
   Roadmap.traceSignAlonePaysLorentzianActiveStress
 
-------------------------------------------------------------------------
--- Terminal question.
-------------------------------------------------------------------------
-
 highestAlphaYM369Question : String
 highestAlphaYM369Question = Roadmap.highestAlphaAfterQ3Identification
-
-------------------------------------------------------------------------
--- Machine-visible receipts.
-------------------------------------------------------------------------
 
 preferredYM369FrontierIsPostQ3IdentificationIsTrue :
   preferredYM369FrontierIsPostQ3Identification ≡ true
@@ -119,6 +123,18 @@ preferredYM369AdapterDebtRemainingIsZero :
   preferredYM369AdapterDebtRemaining ≡ zero
 preferredYM369AdapterDebtRemainingIsZero = refl
 
+q2OpaqueAnomalyEquationStillSourcePackageIsFalse :
+  q2OpaqueAnomalyEquationStillSourcePackage ≡ false
+q2OpaqueAnomalyEquationStillSourcePackageIsFalse = refl
+
+q2ReducedToRenormalizedSameObjectTransportsIsTrue :
+  q2ReducedToRenormalizedSameObjectTransports ≡ true
+q2ReducedToRenormalizedSameObjectTransportsIsTrue = refl
+
+q2CitationAlonePaysSelectedTransportIsFalse :
+  q2CitationAlonePaysSelectedTransport ≡ false
+q2CitationAlonePaysSelectedTransportIsFalse = refl
+
 q3PointwiseFiniteF2EqualityStillRequiredIsFalse :
   q3PointwiseFiniteF2EqualityStillRequired ≡ false
 q3PointwiseFiniteF2EqualityStillRequiredIsFalse = refl
@@ -127,13 +143,17 @@ q3AsymptoticFiniteF2BridgeStillSourcePackageIsFalse :
   q3AsymptoticFiniteF2BridgeStillSourcePackage ≡ false
 q3AsymptoticFiniteF2BridgeStillSourcePackageIsFalse = refl
 
-q3BridgeIsCompilerOutputFromFactorizedIdentificationIsTrue :
-  q3BridgeIsCompilerOutputFromFactorizedIdentification ≡ true
-q3BridgeIsCompilerOutputFromFactorizedIdentificationIsTrue = refl
+independentPhysicalHaarQuadratureBridgeStillSourcePackageIsFalse :
+  independentPhysicalHaarQuadratureBridgeStillSourcePackage ≡ false
+independentPhysicalHaarQuadratureBridgeStillSourcePackageIsFalse = refl
 
-physicalHaarSourceExpectationSemanticsStillSourcePackageIsTrue :
-  physicalHaarSourceExpectationSemanticsStillSourcePackage ≡ true
-physicalHaarSourceExpectationSemanticsStillSourcePackageIsTrue = refl
+physicalHaarFiniteMeasureSameObjectEqualityStillSourcePackageIsTrue :
+  physicalHaarFiniteMeasureSameObjectEqualityStillSourcePackage ≡ true
+physicalHaarFiniteMeasureSameObjectEqualityStillSourcePackageIsTrue = refl
+
+attributionBoundaryPreservedIsTrue :
+  attributionBoundaryPreserved ≡ true
+attributionBoundaryPreservedIsTrue = refl
 
 secondFiniteCurvatureFamilyForF2RequiredIsFalse :
   secondFiniteCurvatureFamilyForF2Required ≡ false
