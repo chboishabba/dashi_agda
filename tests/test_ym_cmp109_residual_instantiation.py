@@ -62,13 +62,17 @@ def test_beta_difference_application_is_isolated_in_explicit_nonsafe_bridge():
 
 def test_attachment_relations_are_external_parameters_not_residual_fields():
     text = _read_safe(INSTANTIATION)
-    for field_name in (
+    for relation_name in (
         "ProducerBelongsToSelectedSource",
         "ShootingMapBelongsToSelectedSource",
         "D1BelongsToSelectedSource",
     ):
-        assert field_name in text
-        assert not re.search(rf"(?m)^\s{{4}}{field_name}\s*:", text)
+        assert relation_name in text
+    # A residual constructor must not be able to choose either the attachment
+    # relation or an attachment proof under a `...BelongsToSelectedSource` field.
+    assert not re.search(
+        r"(?m)^\s{4}[A-Za-z0-9_]*BelongsToSelectedSource\s*:", text
+    )
     assert not re.search(r"(?m)^\s{4}substitutedD1\s*:", text)
     assert not re.search(r"(?m)^\s{4}physicalCompositeD1\s*:", text)
 
@@ -79,14 +83,16 @@ def test_generated_history_response_keeps_externally_fixed_producer_carrier():
     assert "(Producer : Set)" in text
     assert "(ProducerBelongsToSelectedSource : SelectedSource → Producer → Set)" in text
     assert "literalGeneratedHistoryResponseProducer : Producer" in text
+    assert "producerAttachment" in text
 
 
 def test_beta_attachment_keeps_externally_fixed_shooting_interface():
     text = _read_safe(INSTANTIATION)
     assert "SelectedCMP109BetaDifferenceAttachment" in text
-    assert "(ShootingMap : Set)" in text
+    assert "(TubePoint ShootingMap Scalar : Set)" in text
     assert "(ShootingMapBelongsToSelectedSource" in text
     assert "selectedShootingMap : ShootingMap" in text
+    assert "shootingMapAttachment" in text
 
 
 def test_physical_composite_d1_reference_functions_are_parameters():
@@ -103,7 +109,7 @@ def test_source_attribution_boundaries_are_explicit():
     assert "10.1007/BF01215223" in text
     assert "10.1007/BF01217741" in text
     assert "10.1007/BF01238433" in text
-    assert "DASHI EXTENSION" in text
+    assert "DASHI EXTENSIONS" in text
 
 
 def test_cmp109_canonical_owner_uses_sharpened_external_parameters():
