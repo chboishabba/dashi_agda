@@ -1,0 +1,102 @@
+{
+  "schema": "dashi.monster3b.atlas_compression_field_selector.v4",
+  "date": "2026-10-12",
+  "source_manifest": "data/atlas/monster3b_suz12_source_manifest_20261012.json",
+  "source_summary": {
+    "inner": "2SuzG1-f3r12B0",
+    "outer": "2Suzd2G1-f3r12aB0",
+    "inner_invariant_alternating_form_dimension": 1,
+    "inner_symplectic_multipliers": [1, 1],
+    "outer_similitude_multipliers": [2, 1],
+    "outer_generator_2_equals_inner_generator_2": true
+  },
+  "compression_search": {
+    "search_depth": 8,
+    "distinct_elements_visited": 212,
+    "irreducible_degree6_hit_count": 14,
+    "lagrangian_stabilising_irreducible_degree6_hit_count": 0,
+    "primitive_compatible_hits_in_selected_GF729": 6,
+    "primitive_center_preserving_hits": 4,
+    "preferred_word": "g1 g2^-1 g1 g2 g1 g2^-1 g1 g2^-1",
+    "preferred_word_length": 8,
+    "preferred_word_similitude_multiplier": 1,
+    "preferred_word_stabilises_translation_lagrangian": false,
+    "preferred_compression_polynomial_low_to_high": [2,2,1,0,2,0,1],
+    "preferred_compression_polynomial": "x^6 - x^4 + x^2 - x - 1",
+    "preferred_compression_matrix": [
+      [2,2,0,1,1,2], [0,0,0,1,1,2], [2,1,0,0,0,0],
+      [1,2,0,2,2,2], [0,0,1,1,1,2], [0,0,1,2,1,1]
+    ],
+    "cyclic_span_rank": 6,
+    "breaks_swap01": true
+  },
+  "preferred_center_preserving_heisenberg_lift": {
+    "similitude_multiplier_mod3": 1,
+    "center_phase_role": "preserves center; eligible for the existing zeta-sector inertia theorem once lifted to the actual phase-resolved state carrier",
+    "cocycle_defect_definition": "D=M^T C M-C",
+    "cocycle_defect_matrix_symmetric": true,
+    "cocycle_defect_rank": 12,
+    "cocycle_defect_matrix": [
+      [2,2,0,1,2,0,2,1,0,0,0,2],
+      [2,2,2,2,0,1,0,2,0,2,1,1],
+      [0,2,0,2,2,2,2,2,1,2,1,1],
+      [1,2,2,2,0,1,0,2,0,1,2,0],
+      [2,0,2,0,1,0,2,0,2,2,2,1],
+      [0,1,2,1,0,1,2,2,1,2,1,0],
+      [2,0,2,0,2,2,0,1,2,2,0,0],
+      [1,2,2,2,0,2,1,1,1,1,2,1],
+      [0,0,1,0,2,1,2,1,2,0,1,2],
+      [0,2,2,1,2,2,2,1,0,1,1,1],
+      [0,1,1,2,2,1,0,2,1,1,2,2],
+      [2,1,1,0,1,0,0,1,2,1,2,2]
+    ],
+    "quadratic_correction": "q(x)=2*x^T*D*x over GF(3)",
+    "quadratic_correction_diagonal_coefficients": [1,1,0,1,2,2,0,2,1,2,1,1],
+    "concrete_center_correction_runtime_paid": true,
+    "agda_kernel_concrete_lift_paid": false
+  },
+  "preferred_selected_GF729_weld": {
+    "selected_modulus_low_to_high": [1,0,0,0,1,1,1],
+    "primitive_root_coordinates": [0,1,0,1,1,0],
+    "primitive_root_multiplicative_order": 728,
+    "multiplication_by_root_matrix": [
+      [0,0,2,0,1,1], [1,0,0,2,0,1], [0,1,0,0,2,0],
+      [1,0,1,0,0,2], [1,1,2,1,1,1], [0,1,0,2,2,2]
+    ],
+    "compression_to_selected_basis_intertwiner_Q": [
+      [1,1,0,1,0,0], [0,2,0,1,2,2], [0,0,1,1,0,1],
+      [0,1,1,2,0,2], [0,2,2,0,2,2], [0,2,2,2,2,2]
+    ],
+    "intertwiner_determinant_mod3": 2,
+    "intertwining_equation": "Q*T = M_gamma*Q",
+    "intertwining_equation_verified": true,
+    "selected_nonzero_field_orbit_size": 728,
+    "selected_nonzero_field_stabilizer_size": 1,
+    "same_selected_GF729_presentation_paid_numerically": true,
+    "full_selected_field_multiplicative_cyclic_action_paid_numerically": true
+  },
+  "full_normalizer_center_inverting_comparator": {
+    "source_word": "g2^-1 g1 g2^-1 g1 g2 g1 g2^-1",
+    "similitude_multiplier_mod3": 2,
+    "primitive_root_coordinates": [0,2,0,1,2,0],
+    "primitive_root_multiplicative_order": 728,
+    "center_scaled_lift_rule": "(x,z) -> (g x, 2*z + q(x))",
+    "cocycle_defect_symmetric": true,
+    "role": "full-normalizer / zeta<->zeta^2 phase-swap comparator; not preferred for one fixed central-character sector"
+  },
+  "earlier_depth5_strict_lift": {
+    "source_word": "g2 g1 g2^-1 g1 g2^-1",
+    "similitude_multiplier_mod3": 1,
+    "selected_GF729_generator": "beta=1-alpha",
+    "beta_multiplicative_order": 364,
+    "exact_selected_heisenberg_lift_runtime_paid": true
+  },
+  "remaining_boundary": {
+    "agda_kernel_concrete_matrix_proofs": false,
+    "actual_phase_resolved_monster_sector_action_paid": false,
+    "fin90_multiplicity_action_identified": false,
+    "full_normalizer_heisenberg_action_paid": false,
+    "physical_Monster_3B_realization_paid": false,
+    "note": "A single center-preserving source word now pays primitive GF729 action plus selected Heisenberg lift at exact runtime level. The residual is the same-object lift to the actual phase-resolved Monster sector and its 90-dimensional multiplicity action, then full-normalizer/physical semantics."
+  }
+}

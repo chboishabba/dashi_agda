@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and render the Monster 3B Suzuki/main quotient same-object receipt.
+"""Validate and render the Monster 3B Suzuki/main quotient execution receipt.
 
 The GAP producer works entirely at character-table level and keeps two
 order-three class coordinates distinct:
@@ -7,9 +7,15 @@ order-three class coordinates distinct:
 * the extraspecial central class is selected by ker(main -> 6.Suz.2);
 * the diagonal class killed by qGtoN3B is selected by ker(main -> MN3B).
 
-The full character matcher pays pair-family occurrence but deliberately does
-not pay whether the diagonal kernel is <t1*t2> or <t1*t2^-1>, nor the resulting
-individual a/b orientation inside the selected zeta sector.
+The full character matcher establishes an externally executed pair-family
+occurrence certificate.  It deliberately does not pay whether the diagonal
+kernel is <t1*t2> or <t1*t2^-1>, nor the resulting individual a/b orientation
+inside the selected zeta sector.
+
+Authority rule: a validated GAP/CTblLib JSON plus generated Agda constants is
+execution evidence.  It is not an Agda proof term for character equality,
+same-object irreducibility, quotient descent, or Monster occurrence.  Those
+semantic promotions are handled by the proof-relevant Suzuki hardening owner.
 """
 
 from __future__ import annotations
@@ -150,12 +156,13 @@ def agda_pair_string(xs: list[str]) -> str:
 def render(v: dict[str, Any], digest: str) -> str:
     return f'''module DASHI.Moonshine.Generated.Monster3BSuzukiMainQuotientMatchCertificate where
 
--- GENERATED CERTIFICATE.
--- Full character-table matching pays the 12a/b and 78a/b PAIR-FAMILY
--- occurrence in the actual restricted Monster character.  The extraspecial
--- central class and qGtoN3B diagonal-kernel class remain separately identified.
+-- GENERATED EXECUTION CERTIFICATE.
+-- GAP/CTblLib checked the full character-table relations represented by the
+-- coordinates below.  This module records those exact outputs and their input
+-- digest.  It does NOT import a GAP proof term into Agda and therefore does not
+-- inhabit the proof-relevant same-object/character obligations by itself.
 -- Diagonal t1*t2 versus t1*t2^-1 orientation and individual a/b orientation
--- remain unpaid.
+-- remain unpaid even at the execution-certificate layer.
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -203,6 +210,7 @@ mn3b12MonsterMultiplicity = {v['mult12']}
 mn3b78MonsterMultiplicity : Nat
 mn3b78MonsterMultiplicity = {v['mult78']}
 
+-- External execution findings.
 extraspecialCentreSelectedByOuterQuotientKernel : Bool
 extraspecialCentreSelectedByOuterQuotientKernel = true
 qGtoN3BKernelClassIdentified : Bool
@@ -215,12 +223,28 @@ quotientDescentFullCharacterMatch : Bool
 quotientDescentFullCharacterMatch = true
 restrictedMonsterSameObjectMatch : Bool
 restrictedMonsterSameObjectMatch = true
-pairFamilyMonsterOccurrencePaid : Bool
-pairFamilyMonsterOccurrencePaid = true
-diagonalKernelOrientationPaid : Bool
-diagonalKernelOrientationPaid = false
-individualZetaLabelOrientationPaid : Bool
-individualZetaLabelOrientationPaid = false
+pairFamilyMonsterOccurrencePaidExecutable : Bool
+pairFamilyMonsterOccurrencePaidExecutable = true
+diagonalKernelOrientationPaidExecutable : Bool
+diagonalKernelOrientationPaidExecutable = false
+individualZetaLabelOrientationPaidExecutable : Bool
+individualZetaLabelOrientationPaidExecutable = false
+
+-- Authority boundary.  Generated constants/booleans do not create semantic
+-- inhabitants in the Agda kernel.  Consumers must use the proof-relevant
+-- Suzuki hardening interface before promoting any of these findings.
+gapCTblLibExecutionCertificatePresent : Bool
+gapCTblLibExecutionCertificatePresent = true
+agdaCharacterEqualityProofImported : Bool
+agdaCharacterEqualityProofImported = false
+agdaQuotientDescentProofImported : Bool
+agdaQuotientDescentProofImported = false
+agdaSameObjectIrreducibleProofImported : Bool
+agdaSameObjectIrreducibleProofImported = false
+agdaMonsterOccurrenceProofImported : Bool
+agdaMonsterOccurrenceProofImported = false
+agdaIndividualZetaOrientationProofImported : Bool
+agdaIndividualZetaOrientationProofImported = false
 
 baseFusionDegree : 2 * 729 ≡ 1458
 baseFusionDegree = refl
@@ -245,9 +269,10 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(render(values, digest), encoding="utf-8")
     print(
-        "validated Suzuki/main/N3B/Monster pair-family same-object match; "
+        "validated Suzuki/main/N3B/Monster pair-family execution certificate; "
         f"12={values['labels12']} 78={values['labels78']} "
-        f"qkernel={values['q_kernel_pos']} sha256={digest}"
+        f"qkernel={values['q_kernel_pos']} sha256={digest}; "
+        "Agda semantic promotion remains proof-relevant"
     )
 
 
