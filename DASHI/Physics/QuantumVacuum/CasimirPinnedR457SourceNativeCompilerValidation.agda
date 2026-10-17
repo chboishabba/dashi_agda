@@ -4,6 +4,11 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.CasimirPinnedR457SourceNativeCompilerExact as M
 
+r114R119BuildR120Regression :
+  M.r114AndR119BuildR120CompilerOwned
+    M.canonicalPinnedR457SourceNativeBoundary ≡ true
+r114R119BuildR120Regression = refl
+
 r120R122BuildR123Regression :
   M.r120AndR122BuildR123CompilerOwned
     M.canonicalPinnedR457SourceNativeBoundary ≡ true
@@ -19,10 +24,15 @@ pinnedContinuumBuildsR126Regression :
     M.canonicalPinnedR457SourceNativeBoundary ≡ true
 pinnedContinuumBuildsR126Regression = refl
 
-pinnedSourceInputsBuildR457Regression :
-  M.pinnedSourceInputsBuildR457CompilerOwned
+pinnedPrimitiveInputsBuildR457Regression :
+  M.pinnedPrimitiveSourceInputsBuildR457CompilerOwned
     M.canonicalPinnedR457SourceNativeBoundary ≡ true
-pinnedSourceInputsBuildR457Regression = refl
+pinnedPrimitiveInputsBuildR457Regression = refl
+
+independentR120NotRequiredRegression :
+  M.independentR120StressLaneRequiredAfterR114R119
+    M.canonicalPinnedR457SourceNativeBoundary ≡ false
+independentR120NotRequiredRegression = refl
 
 independentR123NotRequiredRegression :
   M.independentR123StressLaneRequiredAfterR120R122
@@ -44,10 +54,15 @@ r457PinnedEqualityNotRequiredRegression :
     M.canonicalPinnedR457SourceNativeBoundary ≡ false
 r457PinnedEqualityNotRequiredRegression = refl
 
-r120StillRequiredRegression :
-  M.canonicalMetricSelectedStressLaneStillRequired
+r114StillRequiredRegression :
+  M.literalStressCoordinateStillRequired
     M.canonicalPinnedR457SourceNativeBoundary ≡ true
-r120StillRequiredRegression = refl
+r114StillRequiredRegression = refl
+
+r119StillRequiredRegression :
+  M.canonicalMetricSelectedStressSemanticsStillRequired
+    M.canonicalPinnedR457SourceNativeBoundary ≡ true
+r119StillRequiredRegression = refl
 
 r122StillRequiredRegression :
   M.literalDensityAnchoringStillRequired
