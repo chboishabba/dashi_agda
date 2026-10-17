@@ -2,31 +2,56 @@
 module DASHI.Physics.YangMills.YangMillsCanonicalClayResidualExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
-open import DASHI.Physics.YangMills.BalabanCMP109CanonicalSourceSemanticsObligationsExact as CMP109
-open import DASHI.Physics.YangMills.BalabanCanonicalPhysicalTransferGapObligationExact as TransferGap
-open import DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedTermReplayExact as R409
-open import DASHI.Physics.YangMills.BalabanCMP116CanonicalTraceEntropyBudgetExact as R429
-open import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
-open import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
+open import DASHI.Physics.YangMills.BalabanCMP109CanonicalSourceSemanticsObligationsExact as CMP109 using ()
+open import DASHI.Physics.YangMills.BalabanCanonicalPhysicalTransferGapObligationExact as TransferGap using ()
+open import DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedTermReplayExact as R409 using ()
+open import DASHI.Physics.YangMills.BalabanCMP116CanonicalTraceEntropyBudgetExact as R429 using ()
+open import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap using ()
+open import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit using ()
 
 ------------------------------------------------------------------------
 -- Preferred non-Round research scheduler after historical Round contraction.
--- Every field is typed through one of the canonical package owners; no Round
--- scheduler is imported and no residual inhabitant is manufactured here.
+-- Qualified-only imports prevent per-owner authority/status names from leaking
+-- into this scheduler's scope.
 --
--- CMP109 is no longer represented by three opaque Set-valued placeholders.
--- Its field is now tied to one selected source value, with the shooting-map,
--- Ward/quartic response producer, and D1 transport all required to carry
--- explicit same-object attachment evidence.
+-- CMP109 carrier relations and reference D1 functions are fixed externally and
+-- threaded into the canonical owner.  The residual constructor cannot invent
+-- a trivial same-object relation or choose its own substituted D1 reference.
 ------------------------------------------------------------------------
 
 record YangMillsCanonicalClayResidual
-    {SelectedSource : Set}
+    (SelectedSource : Set)
     (selectedSource : SelectedSource)
-    {TubePoint Component Background Tangent Scalar : Set}
-    {cutoff : Nat}
+    (Producer : Set)
+    (ProducerBelongsToSelectedSource : SelectedSource → Producer → Set)
+    (TubePoint ShootingMap BetaScalar : Set)
+    (ShootingMapBelongsToSelectedSource : SelectedSource → ShootingMap → Set)
+    (initialInverseSquare : ShootingMap → TubePoint → BetaScalar)
+    (renormalisationMap : ShootingMap → TubePoint → TubePoint)
+    (cumulativeBeta : ShootingMap → TubePoint → BetaScalar)
+    (minus : BetaScalar → BetaScalar → BetaScalar)
+    (betaDifferenceAlgebra :
+      ∀ shootingMap left right →
+      minus
+        (initialInverseSquare shootingMap (renormalisationMap shootingMap left))
+        (initialInverseSquare shootingMap (renormalisationMap shootingMap right))
+      ≡
+      minus
+        (cumulativeBeta shootingMap left)
+        (cumulativeBeta shootingMap right))
+    (Component Background Tangent D1Scalar : Set)
+    (physicalCompositeD1 substitutedD1 :
+      Component → Background → Tangent → D1Scalar)
+    (D1BelongsToSelectedSource :
+      SelectedSource → (Component → Background → Tangent → D1Scalar) → Set)
+    (physicalCompositeD1BelongsToSelectedSource :
+      D1BelongsToSelectedSource selectedSource physicalCompositeD1)
+    (substitutedD1BelongsToSelectedSource :
+      D1BelongsToSelectedSource selectedSource substitutedD1)
+    (cutoff : Nat)
     {Measure Schwinger Observable Energy Bound : Set}
     (closure : Limit.FiniteToContinuumOSClosure Measure Schwinger)
     (spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Bound)
@@ -40,7 +65,18 @@ record YangMillsCanonicalClayResidual
   field
     cmp109SourceSemantics :
       CMP109.CMP109CanonicalSourceSemanticsObligations
-        selectedSource TubePoint cutoff Component Background Tangent Scalar
+        SelectedSource selectedSource
+        Producer ProducerBelongsToSelectedSource
+        TubePoint ShootingMap BetaScalar
+        ShootingMapBelongsToSelectedSource
+        initialInverseSquare renormalisationMap cumulativeBeta minus
+        betaDifferenceAlgebra
+        Component Background Tangent D1Scalar
+        physicalCompositeD1 substitutedD1
+        D1BelongsToSelectedSource
+        physicalCompositeD1BelongsToSelectedSource
+        substitutedD1BelongsToSelectedSource
+        cutoff
 
     physicalTransferGap :
       TransferGap.SelectedPhysicalTransferGapObligation closure spectrum
