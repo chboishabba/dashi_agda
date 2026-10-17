@@ -1,0 +1,48 @@
+name: Field geometry matter max-cut
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/SameObjectConservationLedgerExact.agda'
+      - 'DASHI/Physics/Foundations/ControlledPhysicalTransitionExact.agda'
+      - 'DASHI/Physics/Foundations/PhysicalResidualPromotionExact.agda'
+      - 'DASHI/Physics/Foundations/FieldGeometryMatter*.agda'
+      - 'DASHI/Physics/Foundations/GeneralizedCaloricCycle*.agda'
+      - 'DASHI/Physics/Foundations/PrecisionThrustClosure*.agda'
+      - 'DASHI/Physics/Foundations/QuantumStressEnergy*.agda'
+      - 'DASHI/Physics/Foundations/Casimir*.agda'
+      - 'DASHI/Physics/Foundations/CausalTransportFTL*.agda'
+      - 'DASHI/Physics/CondensedMatter/MATBG*.agda'
+      - 'scripts/check_field_geometry_matter_maxcut.sh'
+      - 'scripts/check_field_geometry_matter_evidence.py'
+      - 'scripts/matbg_*.py'
+      - 'scripts/casimir_*.py'
+      - 'Docs/evidence/matbg_*.json'
+      - 'Docs/evidence/casimir_*.json'
+      - '.github/workflows/field-geometry-matter-maxcut.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Install pinned numerical replay dependency
+        run: python3 -m pip install --disable-pip-version-check 'numpy==2.3.5'
+      - name: Check field-geometry-matter evidence reproduction
+        run: python3 scripts/check_field_geometry_matter_evidence.py
+      - name: Check field-geometry-matter conservation, materials, thermodynamic, quantum-stress and causal boundaries
+        run: nix develop --command bash scripts/check_field_geometry_matter_maxcut.sh

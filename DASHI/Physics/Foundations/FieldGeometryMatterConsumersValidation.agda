@@ -1,0 +1,30 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.FieldGeometryMatterConsumersValidation where
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+
+import DASHI.Physics.Foundations.FieldGeometryMatterConsumersExact as Consumers
+
+quantumMaterialAdapterExists : Consumers.QuantumMaterialEntropyAdapter
+quantumMaterialAdapterExists = Consumers.canonicalQuantumMaterialEntropyAdapter
+
+thermodynamicAdapterExists : Consumers.ProgrammableThermodynamicCycleAdapter
+thermodynamicAdapterExists = Consumers.canonicalProgrammableThermodynamicCycleAdapter
+
+plasmaMHDAdapterExists : Consumers.EMBodyForceMomentumAdapter
+plasmaMHDAdapterExists = Consumers.canonicalEMBodyForceMomentumAdapter
+
+precisionThrustAdapterExists : Consumers.PrecisionThrustResidualAdapter
+precisionThrustAdapterExists = Consumers.canonicalPrecisionThrustResidualAdapter
+
+sameBodyForceDoesNotCollapseMechanism : Bool
+sameBodyForceDoesNotCollapseMechanism =
+  Consumers.sameBodyForceFormDoesNotIdentifyMechanism Consumers.canonicalConsumerBoundary
+
+rocketdyneDoesNotTransferValues : Bool
+rocketdyneDoesNotTransferValues =
+  Consumers.rocketdyneValuesDoNotTransfer Consumers.canonicalConsumerBoundary
+
+precisionThrustCarriesAllDeclaredNuisances : Bool
+precisionThrustCarriesAllDeclaredNuisances =
+  Consumers.declaredNuisanceFibrePresent Consumers.canonicalPrecisionThrustResidualAdapter

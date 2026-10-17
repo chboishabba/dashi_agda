@@ -1,0 +1,38 @@
+{
+  "script": "scripts/matbg_bm_plane_wave_replay.py",
+  "script_sha256": "8558c6e9c048acbe4142524dbd824648815cd3251692bc1756c071d4e8f5259a",
+  "execution_environment": "Python with numpy.linalg.eigvalsh",
+  "model": "independent BM reciprocal-lattice plane-wave reconstruction",
+  "sources": {
+    "bm2011": "10.1073/pnas.1108174108",
+    "xiao2026_ratio": "10.1038/s41586-026-10378-x",
+    "external_implementation_crosscheck": "R-Carrasco/tbg-simulator (MIT)"
+  },
+  "xiao_ratio_reference_fixture": {
+    "theta_deg": 1.08,
+    "wAB_eV_generic_reference": 0.11,
+    "wAA_over_wAB": 0.6,
+    "same_sample_absolute_calibration": false,
+    "convergence": {
+      "2": {"bandwidth_eV": 0.04008548338121812, "dimension": 56, "hermiticity_error": 0.0},
+      "3": {"bandwidth_eV": 0.027903563960662826, "dimension": 132, "hermiticity_error": 0.0},
+      "4": {"bandwidth_eV": 0.0278976317849461, "dimension": 228, "hermiticity_error": 0.0}
+    }
+  },
+  "relaxed_reference_crosscheck": {
+    "wAA_eV": 0.0797,
+    "wAB_eV": 0.0975,
+    "shells": 3,
+    "theta_step_deg": 0.005,
+    "minimum_theta_deg": 1.084999999999999,
+    "minimum_bandwidth_eV": 0.0009274612896131532
+  },
+  "assertions_passed": true,
+  "promotion_boundaries": {
+    "interacting_self_energy": false,
+    "qtm_data_replay": false,
+    "same_sample_entropy": false,
+    "xiao_absolute_sample_calibration": false,
+    "agda_kernel_receipt": false
+  }
+}

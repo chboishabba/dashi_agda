@@ -1,0 +1,24 @@
+{
+  "script": "scripts/matbg_geometry_caloric_upper_bound.py",
+  "script_sha256": "263011eaecf0135634a087f4f8c0b1e47d247143fc347db5cb4138f3b71a60f7",
+  "execution_environment": "Python standard library",
+  "source": "10.1038/s41467-026-76179-y",
+  "interpretation": "equilibrium combinatorial entropy-swing scale only",
+  "fillings": {
+    "0": {"high": 70, "low": 1, "delta_s_over_kB": 4.248495242049359, "TDeltaS_15K_meV_per_cell": 5.491604904414102},
+    "1": {"high": 56, "low": 4, "delta_s_over_kB": 2.6390573296152584, "TDeltaS_15K_meV_per_cell": 3.4112454760227697},
+    "2": {"high": 28, "low": 6, "delta_s_over_kB": 1.540445040947149, "TDeltaS_15K_meV_per_cell": 1.9911792434455229},
+    "3": {"high": 8, "low": 4, "delta_s_over_kB": 0.6931471805599453, "TDeltaS_15K_meV_per_cell": 0.8959620381751104}
+  },
+  "assertions_passed": true,
+  "promotion_boundaries": {
+    "controlled_geometry_or_strain_cycle": false,
+    "reversible_cycle": false,
+    "adiabatic_temperature_change": false,
+    "useful_cooling": false,
+    "cop": false,
+    "hysteresis_and_relaxation_closure": false,
+    "same_sample_qtm_entropy_cycle": false,
+    "agda_kernel_receipt": false
+  }
+}

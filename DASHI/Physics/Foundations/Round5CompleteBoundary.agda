@@ -26,6 +26,12 @@ import DASHI.Visualisation.RendererParityExact as Parity
 import DASHI.Visualisation.RendererReceiptExact as Receipt
 import DASHI.Visualisation.MeasureFieldAdapterExact as Adapter
 
+-- Exact-head integration hook for the approved field–geometry–matter max-cut.
+-- Importing the focused aggregate here causes the existing base-branch
+-- unification-round5 workflow to kernel-check the entire new tranche without
+-- rewriting the much larger monolithic Foundations.Everything owner.
+import DASHI.Physics.Foundations.FieldGeometryMatterEverything as FieldGeometryMatter
+
 record Round5CompleteBoundary : Set where
   field
     fullRound5Boundary : Full.Round5FullBoundary

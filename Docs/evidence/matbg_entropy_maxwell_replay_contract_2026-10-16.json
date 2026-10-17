@@ -1,0 +1,46 @@
+{
+  "assertions_passed": true,
+  "entropy_meV_per_K": [
+    0.008,
+    0.004500000000000001,
+    0.002,
+    0.0005,
+    -0.0
+  ],
+  "expected_entropy_meV_per_K": [
+    0.008,
+    0.0045000000000000005,
+    0.002,
+    0.0005,
+    0.0
+  ],
+  "fixture": {
+    "mu_meV": [
+      [0.04, 0.03, 0.02, 0.01, 0.0],
+      [0.08, 0.06, 0.04, 0.02, 0.0],
+      [0.12, 0.09, 0.06, 0.03, 0.0]
+    ],
+    "nu": [0.0, 1.0, 2.0, 3.0, 4.0],
+    "temperatures_K": [10.0, 20.0, 30.0]
+  },
+  "integral_4_to_nu_mu_meV": [
+    [-0.08000000000000002, -0.045, -0.02, -0.005, -0.0],
+    [-0.16000000000000003, -0.09, -0.04, -0.01, -0.0],
+    [-0.24, -0.135, -0.06, -0.015, -0.0]
+  ],
+  "max_abs_error": 8.673617379884035e-19,
+  "promotion_boundaries": {
+    "experimental_xlsx_used": false,
+    "measured_entropy_replay": false,
+    "same_sample_qtm_entropy": false
+  },
+  "script": "scripts/matbg_entropy_maxwell_replay_contract.py",
+  "script_sha256": "ce737acd8472833679c235f03b70ee066de7dc500d68c684a49bc56bb74910a0",
+  "source_doi": "10.1038/s41467-026-76179-y",
+  "source_equations": {
+    "boundary": "S(nu=4,T)=0",
+    "maxwell": "dS/dnu = -dmu/dT",
+    "preferred_order": "S(nu,T) = -d/dT integral_4^nu mu(nu,T) dnu",
+    "temperature_derivative": "linear fit over three adjacent temperature points"
+  }
+}
