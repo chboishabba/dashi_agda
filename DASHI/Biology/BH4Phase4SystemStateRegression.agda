@@ -141,6 +141,19 @@ firstAttemptMissingTwentyNineExchangeCoordinates :
   Roadmap.missingExternalExchangeCoordinates ≡ 29
 firstAttemptMissingTwentyNineExchangeCoordinates = refl
 
+historicalFirstTemplateHasTwentySevenCoordinates :
+  Roadmap.firstQuantitativeCoordinateCount ≡ 27
+historicalFirstTemplateHasTwentySevenCoordinates = refl
+
+nextTemplateHasFiftySixCoordinates :
+  Roadmap.expandedQuantitativeCoordinateCount ≡ 56
+nextTemplateHasFiftySixCoordinates = refl
+
+quantitativeAcquisitionAndIntervalSolverAreReady :
+  Roadmap.quantitativeAcquisitionToolingReady ≡ true
+  × Roadmap.intervalFluxSolverReady ≡ true
+quantitativeAcquisitionAndIntervalSolverAreReady = refl , refl
+
 underdeterminedDoesNotMeanMechanismFalse :
   Roadmap.BH4Phase4Boundary.underdeterminedMeansMechanismFalse
     Roadmap.canonicalBH4Phase4Boundary
