@@ -16,7 +16,8 @@ Current executed chemistry baseline (2026-10-17):
 - 29 finite species;
 - first joint feasibility result: `underdetermined`.
 
-The next-run quantitative problem has 56 coordinates:
+The historical first live parameter template had 27 coordinates (15 core + 12
+reaction-flux coordinates). The next-run quantitative problem has 56 coordinates:
 
 - 15 core BH4/context coordinates;
 - 12 `REACTION_FLUX:<RHEA-ID>` intervals;
