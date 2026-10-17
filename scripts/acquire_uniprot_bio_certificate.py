@@ -84,6 +84,22 @@ def select_cross_references(record: dict) -> list[dict[str, object]]:
                     "properties": xref.get("properties", []),
                 }
             )
+    for comment in record.get("comments", []):
+        if comment.get("commentType") == "CATALYTIC ACTIVITY":
+            reaction = comment.get("reaction", {})
+            for rxref in reaction.get("reactionCrossReferences", []):
+                database = rxref.get("database")
+                if database in keep:
+                    selected.append(
+                        {
+                            "database": database,
+                            "id": rxref.get("id"),
+                            "properties": [
+                                {"key": "ReactionName", "value": reaction.get("name", "")},
+                                {"key": "EcNumber", "value": reaction.get("ecNumber", "")},
+                            ],
+                        }
+                    )
     return selected
 
 
