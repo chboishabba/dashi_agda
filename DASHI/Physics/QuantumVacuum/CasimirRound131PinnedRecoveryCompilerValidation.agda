@@ -4,6 +4,21 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerExact as M
 
+selectedTargetBuildsRound131AttachmentRegression :
+  M.selectedTargetIdentityBuildsRound131AttachmentCompilerOwned
+    M.canonicalRound131PinnedRecoveryBoundary ≡ true
+selectedTargetBuildsRound131AttachmentRegression = refl
+
+independentRound131AttachmentRetiredRegression :
+  M.independentRound131RecoveredAttachmentRequiredAfterSelectedTargetIdentity
+    M.canonicalRound131PinnedRecoveryBoundary ≡ false
+independentRound131AttachmentRetiredRegression = refl
+
+selectedTargetIdentityStillRequiredRegression :
+  M.r457LiteralSelectedQFTTargetIdentityStillRequired
+    M.canonicalRound131PinnedRecoveryBoundary ≡ true
+selectedTargetIdentityStillRequiredRegression = refl
+
 round131PinnedAttachmentCompilerOwnedRegression :
   M.round131AndPinnedIdentityBuildPinnedAttachmentCompilerOwned
     M.canonicalRound131PinnedRecoveryBoundary ≡ true
@@ -18,11 +33,6 @@ independentPinnedSelectionRetiredRegression :
   M.independentPinnedSourceNativeSelectionRequiredAfterInputs
     M.canonicalRound131PinnedRecoveryBoundary ≡ false
 independentPinnedSelectionRetiredRegression = refl
-
-round131AttachmentStillRequiredRegression :
-  M.round131RecoveredQFTAttachmentStillRequired
-    M.canonicalRound131PinnedRecoveryBoundary ≡ true
-round131AttachmentStillRequiredRegression = refl
 
 r457LiteralPinnedIdentityStillRequiredRegression :
   M.r457LiteralPinnedConstructionIdentityStillRequired
