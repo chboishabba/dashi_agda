@@ -128,8 +128,8 @@ module DirectLeafAST
     CutoffUniformLiveCommutatorBudgetAST T R →
     Comm.CommutatorOnlySpacetimeBudget568 T R
   toR568 P = record
-    { Comm.cutoffIndependentCommutatorBound568 = bound P
-    ; Comm.liveCommutatorOnlyBudget568 = paysLiteralR568 P
+    { cutoffIndependentCommutatorBound568 = bound P
+    ; liveCommutatorOnlyBudget568 = paysLiteralR568 P
     }
 
 
@@ -229,9 +229,9 @@ module DirectLeafAST
     Comm.CommutatorOnlySpacetimeBudget568 T R
   signedBilinearTransportBuildsR568 {T} {R} {D} P =
     record
-      { Comm.cutoffIndependentCommutatorBound568 =
+      { cutoffIndependentCommutatorBound568 =
           signedTransportBound P
-      ; Comm.liveCommutatorOnlyBudget568 = λ cutoff terminal →
+      ; liveCommutatorOnlyBudget568 = λ cutoff terminal →
           let
             live =
               Comm.integratedGlobalForcingFull T R cutoff terminal
