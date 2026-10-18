@@ -1,0 +1,12 @@
+{
+  "metadata_only_unreviewed_count": 43846,
+  "metadata_only_unreviewed_records_are_retrieval_failures": false,
+  "processing_ledger_reference": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.real-eric-round2/pre-fetch-processing-ledger-round3.jsonl",
+  "processing_record_count": 43996,
+  "retained_missing_verified_fulltext_count": 13,
+  "retrieval_queue_creates_screening_decision": false,
+  "retrieval_queue_creates_source_audit_admission": false,
+  "retrieval_queue_reference": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.real-eric-round2/fulltext/retrieval-residual-round3.jsonl",
+  "retrieval_queue_sha256": "3d7f4efddede18116ec6579b2b792ef060c0182ad5d0ad54ac413adb1aa05b28",
+  "schema": "digital-esd-fulltext-retrieval-residual-manifest-v1"
+}

@@ -107,23 +107,23 @@ recentGodelSOTAAtlas =
 ------------------------------------------------------------------------
 
 data ExternalProducerRole : Set where
-  machineCheckedSourceProducer
-  theoremLibraryProducer
+  machineCheckedSourceProducer : ExternalProducerRole
+  theoremLibraryProducer : ExternalProducerRole
   mechanismAlignmentProducer : ExternalProducerRole
 
 data LocalPaymentStatus : Set where
-  externalOnly
-  adapterRequired
+  externalOnly : LocalPaymentStatus
+  adapterRequired : LocalPaymentStatus
   sameObjectPaymentAvailable : LocalPaymentStatus
 
 data DiagonalCoordinate : Set where
-  syntaxCoding
-  substitutionPrimitiveRecursiveness
-  internalRepresentability
-  representedFunctionPrecomposition
-  diagonalFixedPoint
-  proofPredicate
-  derivabilityConditions
+  syntaxCoding : DiagonalCoordinate
+  substitutionPrimitiveRecursiveness : DiagonalCoordinate
+  internalRepresentability : DiagonalCoordinate
+  representedFunctionPrecomposition : DiagonalCoordinate
+  diagonalFixedPoint : DiagonalCoordinate
+  proofPredicate : DiagonalCoordinate
+  derivabilityConditions : DiagonalCoordinate
   incompletenessResult : DiagonalCoordinate
 
 record SOTAProducerReceipt : Set where

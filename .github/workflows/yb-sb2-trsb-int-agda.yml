@@ -1,0 +1,89 @@
+name: YbSb2 TRSB INT Agda
+
+on:
+  push:
+    paths:
+      - 'DASHI/Physics/CondensedMatter/SuperconductingTimeReversalGaugeObstructionExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoINTNonunitarySelectedExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoMuSRTRSBEvidenceExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoSingleBandConstraintFunnelExact.agda'
+      - 'DASHI/Physics/CondensedMatter/InternallyAntisymmetricTripletExchangeExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoBdGSymmetryBoundaryExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoDiracMassSignExact.agda'
+      - 'DASHI/Physics/CondensedMatter/BdGNambuParticleHoleExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoBdGParticleHoleAdapterExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoMajoranaQuantumComputerBridgeExact.agda'
+      - 'DASHI/Physics/CondensedMatter/MajoranaBraidYangBaxterExact.agda'
+      - 'DASHI/Physics/CondensedMatter/MajoranaParityQubitExact.agda'
+      - 'DASHI/Physics/CondensedMatter/MajoranaFockActionExact.agda'
+      - 'DASHI/Physics/CondensedMatter/MajoranaB4BraidExact.agda'
+      - 'DASHI/Physics/CondensedMatter/IsingMajoranaUniversalityBoundaryExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoMajoranaMaxCutBoundaryExact.agda'
+      - '.github/workflows/yb-sb2-trsb-int-agda.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/CondensedMatter/SuperconductingTimeReversalGaugeObstructionExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoINTNonunitarySelectedExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoMuSRTRSBEvidenceExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoSingleBandConstraintFunnelExact.agda'
+      - 'DASHI/Physics/CondensedMatter/InternallyAntisymmetricTripletExchangeExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoBdGSymmetryBoundaryExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoDiracMassSignExact.agda'
+      - 'DASHI/Physics/CondensedMatter/BdGNambuParticleHoleExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoBdGParticleHoleAdapterExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoMajoranaQuantumComputerBridgeExact.agda'
+      - 'DASHI/Physics/CondensedMatter/MajoranaBraidYangBaxterExact.agda'
+      - 'DASHI/Physics/CondensedMatter/MajoranaParityQubitExact.agda'
+      - 'DASHI/Physics/CondensedMatter/MajoranaFockActionExact.agda'
+      - 'DASHI/Physics/CondensedMatter/MajoranaB4BraidExact.agda'
+      - 'DASHI/Physics/CondensedMatter/IsingMajoranaUniversalityBoundaryExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoMajoranaMaxCutBoundaryExact.agda'
+      - '.github/workflows/yb-sb2-trsb-int-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  kernel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda + stdlib
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+      - name: Check SuperconductingTimeReversalGaugeObstructionExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/SuperconductingTimeReversalGaugeObstructionExact.agda
+      - name: Check YbSbTwoINTNonunitarySelectedExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoINTNonunitarySelectedExact.agda
+      - name: Check YbSbTwoMuSRTRSBEvidenceExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoMuSRTRSBEvidenceExact.agda
+      - name: Check YbSbTwoINTPhysicalBridgeExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda
+      - name: Check YbSbTwoSingleBandConstraintFunnelExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoSingleBandConstraintFunnelExact.agda
+      - name: Check InternallyAntisymmetricTripletExchangeExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/InternallyAntisymmetricTripletExchangeExact.agda
+      - name: Check YbSbTwoBdGSymmetryBoundaryExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoBdGSymmetryBoundaryExact.agda
+      - name: Check YbSbTwoDiracMassSignExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoDiracMassSignExact.agda
+      - name: Check BdGNambuParticleHoleExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/BdGNambuParticleHoleExact.agda
+      - name: Check YbSbTwoBdGParticleHoleAdapterExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoBdGParticleHoleAdapterExact.agda
+      - name: Check YbSbTwoMajoranaQuantumComputerBridgeExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoMajoranaQuantumComputerBridgeExact.agda
+      - name: Check MajoranaBraidYangBaxterExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/MajoranaBraidYangBaxterExact.agda
+      - name: Check MajoranaParityQubitExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/MajoranaParityQubitExact.agda
+      - name: Check MajoranaFockActionExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/MajoranaFockActionExact.agda
+      - name: Check MajoranaB4BraidExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/MajoranaB4BraidExact.agda
+      - name: Check IsingMajoranaUniversalityBoundaryExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/IsingMajoranaUniversalityBoundaryExact.agda
+      - name: Check YbSbTwoMajoranaMaxCutBoundaryExact.agda
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoMajoranaMaxCutBoundaryExact.agda

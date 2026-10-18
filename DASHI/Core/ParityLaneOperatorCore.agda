@@ -16,24 +16,18 @@ import DASHI.Core.EvenLaneOperatorCore as Even
 -- authority.
 
 data LaneClass : Set where
-  oddCollapsedLane :
-    LaneClass
+  oddCollapsedLane : LaneClass
 
-  evenSeparatedLane :
-    LaneClass
+  evenSeparatedLane : LaneClass
 
-  unresolvedLane :
-    LaneClass
+  unresolvedLane : LaneClass
 
 data OperatorRegime : Set where
-  collapsedRegime :
-    OperatorRegime
+  collapsedRegime : OperatorRegime
 
-  separatedRegime :
-    OperatorRegime
+  separatedRegime : OperatorRegime
 
-  candidateOnlyRegime :
-    OperatorRegime
+  candidateOnlyRegime : OperatorRegime
 
 laneClassLabel :
   LaneClass →

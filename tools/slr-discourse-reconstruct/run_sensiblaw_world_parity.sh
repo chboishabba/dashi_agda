@@ -15,8 +15,13 @@ ERR="${SPECIMEN}/sensiblaw-world-parity.stderr"
 
 bash "$HERE/run_sensiblaw_world_adapter.sh" "$SPECIMEN" >/dev/null
 
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+if [[ -x "$SENSIBLAW_ROOT/.venv/bin/python" ]]; then
+  PYTHON_BIN="$SENSIBLAW_ROOT/.venv/bin/python"
+fi
+
 PYTHONPATH="$SENSIBLAW_ROOT${PYTHONPATH:+:$PYTHONPATH}" \
-python3 - "$WORLD" "$NORMALIZED" > /dev/null 2> "$ERR" <<'PY'
+"$PYTHON_BIN" - "$WORLD" "$NORMALIZED" > /dev/null 2> "$ERR" <<'PY'
 import json
 import sys
 from pathlib import Path

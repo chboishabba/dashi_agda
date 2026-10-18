@@ -74,9 +74,9 @@ abakerBerningerStarr2018 = dryland-study-source
 ------------------------------------------------------------------------
 
 data EvidenceRole : Set where
-  measured
-  pedotransferComputed
-  dailyBalanceModelled
+  measured : EvidenceRole
+  pedotransferComputed : EvidenceRole
+  dailyBalanceModelled : EvidenceRole
   sourceInterpretation : EvidenceRole
 
 record StudyCoordinate : Set where

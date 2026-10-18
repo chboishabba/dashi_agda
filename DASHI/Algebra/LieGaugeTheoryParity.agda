@@ -20,50 +20,35 @@ data ⊥ : Set where
 -- no Clay/continuum/PhysLean parity claim without explicit authority fields.
 
 data GaugeTheoryFeature : Set where
-  lieGroupFeature :
-    GaugeTheoryFeature
+  lieGroupFeature : GaugeTheoryFeature
 
-  lieAlgebraFeature :
-    GaugeTheoryFeature
+  lieAlgebraFeature : GaugeTheoryFeature
 
-  representationFeature :
-    GaugeTheoryFeature
+  representationFeature : GaugeTheoryFeature
 
-  principalBundleFeature :
-    GaugeTheoryFeature
+  principalBundleFeature : GaugeTheoryFeature
 
-  associatedBundleFeature :
-    GaugeTheoryFeature
+  associatedBundleFeature : GaugeTheoryFeature
 
-  connectionFeature :
-    GaugeTheoryFeature
+  connectionFeature : GaugeTheoryFeature
 
-  curvatureFeature :
-    GaugeTheoryFeature
+  curvatureFeature : GaugeTheoryFeature
 
-  covariantDerivativeFeature :
-    GaugeTheoryFeature
+  covariantDerivativeFeature : GaugeTheoryFeature
 
-  gaugeTransformationFeature :
-    GaugeTheoryFeature
+  gaugeTransformationFeature : GaugeTheoryFeature
 
-  yangMillsActionFeature :
-    GaugeTheoryFeature
+  yangMillsActionFeature : GaugeTheoryFeature
 
-  wilsonLoopFeature :
-    GaugeTheoryFeature
+  wilsonLoopFeature : GaugeTheoryFeature
 
-  brstFeature :
-    GaugeTheoryFeature
+  brstFeature : GaugeTheoryFeature
 
-  gaugeFixingFeature :
-    GaugeTheoryFeature
+  gaugeFixingFeature : GaugeTheoryFeature
 
-  ghostSectorFeature :
-    GaugeTheoryFeature
+  ghostSectorFeature : GaugeTheoryFeature
 
-  obstructionInventoryFeature :
-    GaugeTheoryFeature
+  obstructionInventoryFeature : GaugeTheoryFeature
 
 canonicalGaugeTheoryFeatures : List GaugeTheoryFeature
 canonicalGaugeTheoryFeatures =
@@ -85,79 +70,55 @@ canonicalGaugeTheoryFeatures =
   ∷ []
 
 data ParityStatus : Set where
-  interfaceRecorded :
-    ParityStatus
+  interfaceRecorded : ParityStatus
 
-  obligationOpen :
-    ParityStatus
+  obligationOpen : ParityStatus
 
-  authorityBacked :
-    ParityStatus
+  authorityBacked : ParityStatus
 
-  promoted :
-    ParityStatus
+  promoted : ParityStatus
 
 data ParityClaim : Set where
-  reusableInterfaceClaim :
-    ParityClaim
+  reusableInterfaceClaim : ParityClaim
 
-  finiteCarrierClaim :
-    ParityClaim
+  finiteCarrierClaim : ParityClaim
 
-  continuumSmoothBundleClaim :
-    ParityClaim
+  continuumSmoothBundleClaim : ParityClaim
 
-  classicalGaugeTheoryClaim :
-    ParityClaim
+  classicalGaugeTheoryClaim : ParityClaim
 
-  quantumYangMillsClaim :
-    ParityClaim
+  quantumYangMillsClaim : ParityClaim
 
-  clayMassGapClaim :
-    ParityClaim
+  clayMassGapClaim : ParityClaim
 
 data ObligationKind : Set where
-  algebraicLawObligation :
-    ObligationKind
+  algebraicLawObligation : ObligationKind
 
-  smoothStructureObligation :
-    ObligationKind
+  smoothStructureObligation : ObligationKind
 
-  bundleLocalTrivialityObligation :
-    ObligationKind
+  bundleLocalTrivialityObligation : ObligationKind
 
-  equivarianceObligation :
-    ObligationKind
+  equivarianceObligation : ObligationKind
 
-  connectionNaturalityObligation :
-    ObligationKind
+  connectionNaturalityObligation : ObligationKind
 
-  curvatureBianchiObligation :
-    ObligationKind
+  curvatureBianchiObligation : ObligationKind
 
-  actionGaugeInvarianceObligation :
-    ObligationKind
+  actionGaugeInvarianceObligation : ObligationKind
 
-  wilsonHolonomyObligation :
-    ObligationKind
+  wilsonHolonomyObligation : ObligationKind
 
-  brstNilpotenceObligation :
-    ObligationKind
+  brstNilpotenceObligation : ObligationKind
 
-  gaugeSliceObligation :
-    ObligationKind
+  gaugeSliceObligation : ObligationKind
 
-  analyticWellPosednessObligation :
-    ObligationKind
+  analyticWellPosednessObligation : ObligationKind
 
-  reflectionPositivityObligation :
-    ObligationKind
+  reflectionPositivityObligation : ObligationKind
 
-  continuumLimitObligation :
-    ObligationKind
+  continuumLimitObligation : ObligationKind
 
-  externalAuthorityObligation :
-    ObligationKind
+  externalAuthorityObligation : ObligationKind
 
 canonicalObligations : List ObligationKind
 canonicalObligations =

@@ -20,15 +20,15 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data SocialCarrierKind : Set where
-  instagramProfile
-  instagramReel
+  instagramProfile : SocialCarrierKind
+  instagramReel : SocialCarrierKind
   googleDiscoverySnapshot : SocialCarrierKind
 
 data SocialClaimTopic : Set where
-  thcaExperience
-  organicPesticides
-  pesticideUseOnCannabis
-  soilMicrobiology
+  thcaExperience : SocialClaimTopic
+  organicPesticides : SocialClaimTopic
+  pesticideUseOnCannabis : SocialClaimTopic
+  soilMicrobiology : SocialClaimTopic
   blacklistWhitelistArchitecture : SocialClaimTopic
 
 record SocialClaimCarrier : Set where
@@ -101,12 +101,12 @@ fadedSoilMicrobiologyReel = social-claim-carrier
 ------------------------------------------------------------------------
 
 data CandidateChemical : Set where
-  imidacloprid
-  propamocarb
-  paclobutrazol
-  daminozide
-  abamectin
-  azadirachtinA
+  imidacloprid : CandidateChemical
+  propamocarb : CandidateChemical
+  paclobutrazol : CandidateChemical
+  daminozide : CandidateChemical
+  abamectin : CandidateChemical
+  azadirachtinA : CandidateChemical
   glyphosate : CandidateChemical
 
 record ChemicalRegistryReceipt : Set where
@@ -169,11 +169,11 @@ glyphosateRegistry = chemical-registry-receipt
 ------------------------------------------------------------------------
 
 data RegulatoryArchitecture : Set where
-  prohibitedCriteria
-  positiveLegalUseCriteria
-  residueTestingPanel
-  pharmacopoeialQualityStandard
-  pureBlacklist
+  prohibitedCriteria : RegulatoryArchitecture
+  positiveLegalUseCriteria : RegulatoryArchitecture
+  residueTestingPanel : RegulatoryArchitecture
+  pharmacopoeialQualityStandard : RegulatoryArchitecture
+  pureBlacklist : RegulatoryArchitecture
   pureWhitelist : RegulatoryArchitecture
 
 record RegulatoryReceipt : Set where
@@ -301,12 +301,12 @@ tgo93DoesNotCreatePureWhitelist ()
 ------------------------------------------------------------------------
 
 data FadedParetoTarget : Set where
-  exactReelTranscript
-  exactProductLabelJoin
-  exactCannabisResidueOccurrence
-  combustionVaporisationTransform
-  routeSpecificToxicology
-  regulatoryArchitectureComparison
+  exactReelTranscript : FadedParetoTarget
+  exactProductLabelJoin : FadedParetoTarget
+  exactCannabisResidueOccurrence : FadedParetoTarget
+  combustionVaporisationTransform : FadedParetoTarget
+  routeSpecificToxicology : FadedParetoTarget
+  regulatoryArchitectureComparison : FadedParetoTarget
   genericSocialSnowball : FadedParetoTarget
 
 record FadedParetoStep : Set where
@@ -373,15 +373,15 @@ pareto99 = faded-pareto-step
 ------------------------------------------------------------------------
 
 data FadedTime : Set where
-  attachedDiscoverySnapshot
-  primaryRegistryAndLabelCheck
+  attachedDiscoverySnapshot : FadedTime
+  primaryRegistryAndLabelCheck : FadedTime
   currentDashi : FadedTime
 
 data FadedInterpretation : Set where
-  fadedContentExists
-  exactPesticideClaimPartiallyLocated
-  namedChemicalsRegistryResolved
-  socialClaimScientificallyProven
+  fadedContentExists : FadedInterpretation
+  exactPesticideClaimPartiallyLocated : FadedInterpretation
+  namedChemicalsRegistryResolved : FadedInterpretation
+  socialClaimScientificallyProven : FadedInterpretation
   regulatoryArchitectureRequiresMoreThanBlacklistWhitelist : FadedInterpretation
 
 data FadedSummary : Set where socialAndPrimaryEvidenceRemainSeparate : FadedSummary

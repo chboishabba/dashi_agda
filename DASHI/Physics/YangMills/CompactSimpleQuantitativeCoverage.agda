@@ -1,7 +1,9 @@
 module DASHI.Physics.YangMills.CompactSimpleQuantitativeCoverage where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Unit using (⊤)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat.Base using (_≤_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Product using (_×_)
 
@@ -21,6 +23,26 @@ data CompactSimpleLieGroup : Set where
   SOeven : Nat → CompactSimpleLieGroup
   Sp : Nat → CompactSimpleLieGroup
   G2 F4 E6 E7 E8 : CompactSimpleLieGroup
+
+------------------------------------------------------------------------
+-- Genuine simple-index domain of the classical compact families.
+--
+-- These indices follow the conventional SU(n), SO(2n+1), SO(2n),
+-- Sp(n) parametrization.  SU(0/1), SO(1), SO(2/4), and Sp(0) are
+-- not to be misclassified as simple compact gauge groups.
+-- Rank/center global identifications still require their own proof.
+------------------------------------------------------------------------
+
+ValidCompactSimpleIndex : CompactSimpleLieGroup → Set
+ValidCompactSimpleIndex (SU n) = 2 ≤ n
+ValidCompactSimpleIndex (SOodd n) = 1 ≤ n
+ValidCompactSimpleIndex (SOeven n) = 3 ≤ n
+ValidCompactSimpleIndex (Sp n) = 1 ≤ n
+ValidCompactSimpleIndex G2 = ⊤
+ValidCompactSimpleIndex F4 = ⊤
+ValidCompactSimpleIndex E6 = ⊤
+ValidCompactSimpleIndex E7 = ⊤
+ValidCompactSimpleIndex E8 = ⊤
 
 ------------------------------------------------------------------------
 -- Uniform local analytic package.

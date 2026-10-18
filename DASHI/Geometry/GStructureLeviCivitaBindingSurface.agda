@@ -26,51 +26,36 @@ import DASHI.Lorentz.ConeSignature as Cone
 -- torsion-free module and does not promote Levi-Civita.
 
 data GStructureLeviCivitaBindingStatus : Set where
-  gStructureLeviCivitaBindingTargetsOnlyNoPromotion :
-    GStructureLeviCivitaBindingStatus
+  gStructureLeviCivitaBindingTargetsOnlyNoPromotion : GStructureLeviCivitaBindingStatus
 
 data GStructureLeviCivitaBindingBlocker : Set where
-  missingDepthIndexedFrameBundle :
-    GStructureLeviCivitaBindingBlocker
+  missingDepthIndexedFrameBundle : GStructureLeviCivitaBindingBlocker
 
-  missingFrameTowerMaps :
-    GStructureLeviCivitaBindingBlocker
+  missingFrameTowerMaps : GStructureLeviCivitaBindingBlocker
 
-  missingCompatibleMetricTower :
-    GStructureLeviCivitaBindingBlocker
+  missingCompatibleMetricTower : GStructureLeviCivitaBindingBlocker
 
-  missingAdapter1SignatureGate :
-    GStructureLeviCivitaBindingBlocker
+  missingAdapter1SignatureGate : GStructureLeviCivitaBindingBlocker
 
-  missingSO31ReductionWitness :
-    GStructureLeviCivitaBindingBlocker
+  missingSO31ReductionWitness : GStructureLeviCivitaBindingBlocker
 
-  missingActualDCHoTTGStructureBinding :
-    GStructureLeviCivitaBindingBlocker
+  missingActualDCHoTTGStructureBinding : GStructureLeviCivitaBindingBlocker
 
-  missingPrincipalBundleSocket :
-    GStructureLeviCivitaBindingBlocker
+  missingPrincipalBundleSocket : GStructureLeviCivitaBindingBlocker
 
-  missingWeakBGCorrespondenceAuthority :
-    GStructureLeviCivitaBindingBlocker
+  missingWeakBGCorrespondenceAuthority : GStructureLeviCivitaBindingBlocker
 
-  missingCubicalHITBGConstruction :
-    GStructureLeviCivitaBindingBlocker
+  missingCubicalHITBGConstruction : GStructureLeviCivitaBindingBlocker
 
-  missingLocalTrivialitySocket :
-    GStructureLeviCivitaBindingBlocker
+  missingLocalTrivialitySocket : GStructureLeviCivitaBindingBlocker
 
-  missingWellenTheoremAuthority :
-    GStructureLeviCivitaBindingBlocker
+  missingWellenTheoremAuthority : GStructureLeviCivitaBindingBlocker
 
-  missingWellenSocketDischarge :
-    GStructureLeviCivitaBindingBlocker
+  missingWellenSocketDischarge : GStructureLeviCivitaBindingBlocker
 
-  missingTorsionFreeMetricCompatibleAdapter :
-    GStructureLeviCivitaBindingBlocker
+  missingTorsionFreeMetricCompatibleAdapter : GStructureLeviCivitaBindingBlocker
 
-  missingLeviCivitaUniquenessImport :
-    GStructureLeviCivitaBindingBlocker
+  missingLeviCivitaUniquenessImport : GStructureLeviCivitaBindingBlocker
 
 canonicalGStructureLeviCivitaBindingBlockers :
   List GStructureLeviCivitaBindingBlocker
@@ -1182,8 +1167,7 @@ localSignature31IsSig31 =
   refl
 
 data SO31FirstProlongationZeroLocalStatus : Set where
-  localAbstractIndexFirstProlongationZeroProof :
-    SO31FirstProlongationZeroLocalStatus
+  localAbstractIndexFirstProlongationZeroProof : SO31FirstProlongationZeroLocalStatus
 
 canonicalSO31FirstProlongationZeroLocalStatus :
   SO31FirstProlongationZeroLocalStatus

@@ -74,8 +74,8 @@ integerMatrixQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data GateAxis : Set where
-  parameterDomain modularElement action automorphyFactor weight level
-  transformationLaw coefficientAgreement analyticRegularity normalization
+  parameterDomain modularElement action automorphyFactor weight level : GateAxis
+  transformationLaw coefficientAgreement analyticRegularity normalization : GateAxis
   sourceIdentity : GateAxis
 
 record QidGateAlignment : Set where

@@ -153,6 +153,8 @@ record ConsciousnessAbstractionInstantiationBoundary : Set where
     oneOntologyPaperSettlesMoralStatusIsFalse : oneOntologyPaperSettlesMoralStatus ≡ false
     reading : String
 
+open ConsciousnessAbstractionInstantiationBoundary public
+
 canonicalConsciousnessAbstractionInstantiationBoundary :
   ConsciousnessAbstractionInstantiationBoundary
 canonicalConsciousnessAbstractionInstantiationBoundary =

@@ -33,6 +33,10 @@ fortyTwoEtaFamilyRegression :
   P.fortyTwoEtaFamilyBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
 fortyTwoEtaFamilyRegression = refl
 
+d4OeisBridgeRegression :
+  P.fiveOrbitD4OEISBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
+d4OeisBridgeRegression = refl
+
 c6SpectrumSourceRegression :
   P.c6WeightTwoSpectrumBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
 c6SpectrumSourceRegression = refl

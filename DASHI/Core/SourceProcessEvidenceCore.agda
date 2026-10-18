@@ -35,44 +35,31 @@ listCount (_ ∷ xs) =
 -- Vocabulary.
 
 data SourceProcessEvidenceKind : Set where
-  sourceStateKind :
-    SourceProcessEvidenceKind
+  sourceStateKind : SourceProcessEvidenceKind
 
-  emissionProcessKind :
-    SourceProcessEvidenceKind
+  emissionProcessKind : SourceProcessEvidenceKind
 
-  publicArtifactKind :
-    SourceProcessEvidenceKind
+  publicArtifactKind : SourceProcessEvidenceKind
 
-  publicArtifactBatchKind :
-    SourceProcessEvidenceKind
+  publicArtifactBatchKind : SourceProcessEvidenceKind
 
-  observableTraceKind :
-    SourceProcessEvidenceKind
+  observableTraceKind : SourceProcessEvidenceKind
 
-  sideEvidenceKind :
-    SourceProcessEvidenceKind
+  sideEvidenceKind : SourceProcessEvidenceKind
 
-  sourceFiberKind :
-    SourceProcessEvidenceKind
+  sourceFiberKind : SourceProcessEvidenceKind
 
-  restrictedSourceFiberKind :
-    SourceProcessEvidenceKind
+  restrictedSourceFiberKind : SourceProcessEvidenceKind
 
-  batchStatisticKind :
-    SourceProcessEvidenceKind
+  batchStatisticKind : SourceProcessEvidenceKind
 
-  candidateWeaknessKind :
-    SourceProcessEvidenceKind
+  candidateWeaknessKind : SourceProcessEvidenceKind
 
-  recoveredWitnessKind :
-    SourceProcessEvidenceKind
+  recoveredWitnessKind : SourceProcessEvidenceKind
 
-  artifactSpecificFindingKind :
-    SourceProcessEvidenceKind
+  artifactSpecificFindingKind : SourceProcessEvidenceKind
 
-  sourceClassWeaknessKind :
-    SourceProcessEvidenceKind
+  sourceClassWeaknessKind : SourceProcessEvidenceKind
 
   namedSourceProcessEvidenceKind :
     String →
@@ -101,14 +88,11 @@ canonicalSourceProcessEvidenceKindCount =
   listCount canonicalSourceProcessEvidenceKinds
 
 data SourceProcessEvidenceAdapterSurface : Set where
-  sourceProcessEvidenceAdapter :
-    SourceProcessEvidenceAdapterSurface
+  sourceProcessEvidenceAdapter : SourceProcessEvidenceAdapterSurface
 
-  sourceFiberRestrictionAdapter :
-    SourceProcessEvidenceAdapterSurface
+  sourceFiberRestrictionAdapter : SourceProcessEvidenceAdapterSurface
 
-  recoveredWitnessEscalationAdapter :
-    SourceProcessEvidenceAdapterSurface
+  recoveredWitnessEscalationAdapter : SourceProcessEvidenceAdapterSurface
 
   namedSourceProcessEvidenceAdapter :
     String →

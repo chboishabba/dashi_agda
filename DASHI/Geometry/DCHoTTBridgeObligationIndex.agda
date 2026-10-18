@@ -712,31 +712,23 @@ limitAsProObjectPoint surface x =
     (limitAsCompatibleFamily surface x)
 
 data DCHoTTB0BridgeStatus : Set where
-  indexedObligationsOnlyNoB0Proof :
-    DCHoTTB0BridgeStatus
+  indexedObligationsOnlyNoB0Proof : DCHoTTB0BridgeStatus
 
 data DCHoTTB0BridgeObligation : Set where
-  carrierToDSpace :
-    DCHoTTB0BridgeObligation
+  carrierToDSpace : DCHoTTB0BridgeObligation
 
-  waveCoherentToFlat :
-    DCHoTTB0BridgeObligation
+  waveCoherentToFlat : DCHoTTB0BridgeObligation
 
-  refinementToGStr :
-    DCHoTTB0BridgeObligation
+  refinementToGStr : DCHoTTB0BridgeObligation
 
-  gStrToLeviCivita :
-    DCHoTTB0BridgeObligation
+  gStrToLeviCivita : DCHoTTB0BridgeObligation
 
 data Paper2CarrierGeometryMilestone : Set where
-  b01CarrierToFormalDSpace :
-    Paper2CarrierGeometryMilestone
+  b01CarrierToFormalDSpace : Paper2CarrierGeometryMilestone
 
-  b02WaveCoherentFlatFormalDisk :
-    Paper2CarrierGeometryMilestone
+  b02WaveCoherentFlatFormalDisk : Paper2CarrierGeometryMilestone
 
-  b03WeakBGGStructureBinding :
-    Paper2CarrierGeometryMilestone
+  b03WeakBGGStructureBinding : Paper2CarrierGeometryMilestone
 
 canonicalPaper2CarrierGeometryMilestones :
   List Paper2CarrierGeometryMilestone
@@ -747,11 +739,9 @@ canonicalPaper2CarrierGeometryMilestones =
   ∷ []
 
 data Paper2CarrierGeometrySprintPromotionStatus : Set where
-  promoteAfterSprintOnly :
-    Paper2CarrierGeometrySprintPromotionStatus
+  promoteAfterSprintOnly : Paper2CarrierGeometrySprintPromotionStatus
 
-  alreadyPromotedBySafePostulate :
-    Paper2CarrierGeometrySprintPromotionStatus
+  alreadyPromotedBySafePostulate : Paper2CarrierGeometrySprintPromotionStatus
 
 record TierBPaper2CarrierGeometrySprintAccounting : Setω where
   field
@@ -879,47 +869,33 @@ canonicalDCHoTTB0BridgeObligations =
   ∷ []
 
 data DCHoTTB0BridgeBlocker : Set where
-  missingCarrierToDSpace :
-    DCHoTTB0BridgeBlocker
+  missingCarrierToDSpace : DCHoTTB0BridgeBlocker
 
-  missingLimitProjectionCompatibility :
-    DCHoTTB0BridgeBlocker
+  missingLimitProjectionCompatibility : DCHoTTB0BridgeBlocker
 
-  missingProFinSetCategoryChain :
-    DCHoTTB0BridgeBlocker
+  missingProFinSetCategoryChain : DCHoTTB0BridgeBlocker
 
-  missingCondensedEmbeddingAdapter :
-    DCHoTTB0BridgeBlocker
+  missingCondensedEmbeddingAdapter : DCHoTTB0BridgeBlocker
 
-  missingDCHoTTFormalSpaceAdapter :
-    DCHoTTB0BridgeBlocker
+  missingDCHoTTFormalSpaceAdapter : DCHoTTB0BridgeBlocker
 
-  missingFormalDiskEquivalenceAdapter :
-    DCHoTTB0BridgeBlocker
+  missingFormalDiskEquivalenceAdapter : DCHoTTB0BridgeBlocker
 
-  missingReverseImLiftAdapter :
-    DCHoTTB0BridgeBlocker
+  missingReverseImLiftAdapter : DCHoTTB0BridgeBlocker
 
-  missingImModalQuotientEqualityAdapter :
-    DCHoTTB0BridgeBlocker
+  missingImModalQuotientEqualityAdapter : DCHoTTB0BridgeBlocker
 
-  missingWaveCoherentToFlat :
-    DCHoTTB0BridgeBlocker
+  missingWaveCoherentToFlat : DCHoTTB0BridgeBlocker
 
-  missingFlatFormalDiskTrivialization :
-    DCHoTTB0BridgeBlocker
+  missingFlatFormalDiskTrivialization : DCHoTTB0BridgeBlocker
 
-  missingRefinementToGStr :
-    DCHoTTB0BridgeBlocker
+  missingRefinementToGStr : DCHoTTB0BridgeBlocker
 
-  missingRefinementStableFrameMetricTower :
-    DCHoTTB0BridgeBlocker
+  missingRefinementStableFrameMetricTower : DCHoTTB0BridgeBlocker
 
-  missingDCHoTTGStructureReduction :
-    DCHoTTB0BridgeBlocker
+  missingDCHoTTGStructureReduction : DCHoTTB0BridgeBlocker
 
-  missingGStrToLeviCivita :
-    DCHoTTB0BridgeBlocker
+  missingGStrToLeviCivita : DCHoTTB0BridgeBlocker
 
 canonicalDCHoTTB0BridgeBlockers :
   List DCHoTTB0BridgeBlocker
@@ -941,26 +917,19 @@ canonicalDCHoTTB0BridgeBlockers =
   ∷ []
 
 data FlatFormalDiskOpenObligation : Set where
-  missingOperatorNormTransportDefect :
-    FlatFormalDiskOpenObligation
+  missingOperatorNormTransportDefect : FlatFormalDiskOpenObligation
 
-  missingTransportDefectNorm :
-    FlatFormalDiskOpenObligation
+  missingTransportDefectNorm : FlatFormalDiskOpenObligation
 
-  missingCauchyCompletenessForTransportLimit :
-    FlatFormalDiskOpenObligation
+  missingCauchyCompletenessForTransportLimit : FlatFormalDiskOpenObligation
 
-  missingSummableWaveCoherenceDecay :
-    FlatFormalDiskOpenObligation
+  missingSummableWaveCoherenceDecay : FlatFormalDiskOpenObligation
 
-  missingLimitParallelTransport :
-    FlatFormalDiskOpenObligation
+  missingLimitParallelTransport : FlatFormalDiskOpenObligation
 
-  missingHolonomyLimitTriviality :
-    FlatFormalDiskOpenObligation
+  missingHolonomyLimitTriviality : FlatFormalDiskOpenObligation
 
-  missingDCHoTTFormalDiskTrivialization :
-    FlatFormalDiskOpenObligation
+  missingDCHoTTFormalDiskTrivialization : FlatFormalDiskOpenObligation
 
 canonicalFlatFormalDiskOpenObligations :
   List FlatFormalDiskOpenObligation
@@ -1061,42 +1030,30 @@ record WaveCoherentFlatFormalDiskSurface (P : ProObjectCarrier) : Setω where
 open WaveCoherentFlatFormalDiskSurface public
 
 data DiscreteToSmoothRoadmapStatus : Set where
-  roadmapIndexedOnlyNoDiscreteSmoothProof :
-    DiscreteToSmoothRoadmapStatus
+  roadmapIndexedOnlyNoDiscreteSmoothProof : DiscreteToSmoothRoadmapStatus
 
 data DiscreteToSmoothRoadmapObligation : Set where
-  finiteRefinementCategory :
-    DiscreteToSmoothRoadmapObligation
+  finiteRefinementCategory : DiscreteToSmoothRoadmapObligation
 
-  proFinSetCompletionTarget :
-    DiscreteToSmoothRoadmapObligation
+  proFinSetCompletionTarget : DiscreteToSmoothRoadmapObligation
 
-  condensedFunctorTarget :
-    DiscreteToSmoothRoadmapObligation
+  condensedFunctorTarget : DiscreteToSmoothRoadmapObligation
 
-  dchottFormalSpaceTarget :
-    DiscreteToSmoothRoadmapObligation
+  dchottFormalSpaceTarget : DiscreteToSmoothRoadmapObligation
 
-  condensedProfiniteEmbedding :
-    DiscreteToSmoothRoadmapObligation
+  condensedProfiniteEmbedding : DiscreteToSmoothRoadmapObligation
 
-  formalDiskEquivalenceTarget :
-    DiscreteToSmoothRoadmapObligation
+  formalDiskEquivalenceTarget : DiscreteToSmoothRoadmapObligation
 
-  operatorNormWaveCoherence :
-    DiscreteToSmoothRoadmapObligation
+  operatorNormWaveCoherence : DiscreteToSmoothRoadmapObligation
 
-  pathIndependenceHolonomyLimit :
-    DiscreteToSmoothRoadmapObligation
+  pathIndependenceHolonomyLimit : DiscreteToSmoothRoadmapObligation
 
-  ambroseSingerZeroCurvatureTarget :
-    DiscreteToSmoothRoadmapObligation
+  ambroseSingerZeroCurvatureTarget : DiscreteToSmoothRoadmapObligation
 
-  tangentCategoryLayerTarget :
-    DiscreteToSmoothRoadmapObligation
+  tangentCategoryLayerTarget : DiscreteToSmoothRoadmapObligation
 
-  dchottTangentEquivalenceObligationTarget :
-    DiscreteToSmoothRoadmapObligation
+  dchottTangentEquivalenceObligationTarget : DiscreteToSmoothRoadmapObligation
 
 canonicalDiscreteToSmoothRoadmapObligations :
   List DiscreteToSmoothRoadmapObligation
@@ -1115,47 +1072,33 @@ canonicalDiscreteToSmoothRoadmapObligations =
   ∷ []
 
 data DiscreteToSmoothRoadmapBlocker : Set where
-  missingFiniteRefinementCategory :
-    DiscreteToSmoothRoadmapBlocker
+  missingFiniteRefinementCategory : DiscreteToSmoothRoadmapBlocker
 
-  missingProFinSetCompletionFunctor :
-    DiscreteToSmoothRoadmapBlocker
+  missingProFinSetCompletionFunctor : DiscreteToSmoothRoadmapBlocker
 
-  missingCondensedSetFunctor :
-    DiscreteToSmoothRoadmapBlocker
+  missingCondensedSetFunctor : DiscreteToSmoothRoadmapBlocker
 
-  missingCondensedEmbeddingCompatibility :
-    DiscreteToSmoothRoadmapBlocker
+  missingCondensedEmbeddingCompatibility : DiscreteToSmoothRoadmapBlocker
 
-  missingDCHoTTFormalSpaceCarrier :
-    DiscreteToSmoothRoadmapBlocker
+  missingDCHoTTFormalSpaceCarrier : DiscreteToSmoothRoadmapBlocker
 
-  missingDCHoTTFormalDiskFamily :
-    DiscreteToSmoothRoadmapBlocker
+  missingDCHoTTFormalDiskFamily : DiscreteToSmoothRoadmapBlocker
 
-  missingFormalDiskEquivalenceWitness :
-    DiscreteToSmoothRoadmapBlocker
+  missingFormalDiskEquivalenceWitness : DiscreteToSmoothRoadmapBlocker
 
-  missingOperatorNormAdapter :
-    DiscreteToSmoothRoadmapBlocker
+  missingOperatorNormAdapter : DiscreteToSmoothRoadmapBlocker
 
-  missingHolonomyLimitAdapter :
-    DiscreteToSmoothRoadmapBlocker
+  missingHolonomyLimitAdapter : DiscreteToSmoothRoadmapBlocker
 
-  missingZeroCurvatureToFlatnessAdapter :
-    DiscreteToSmoothRoadmapBlocker
+  missingZeroCurvatureToFlatnessAdapter : DiscreteToSmoothRoadmapBlocker
 
-  missingFirstGradedFiltration :
-    DiscreteToSmoothRoadmapBlocker
+  missingFirstGradedFiltration : DiscreteToSmoothRoadmapBlocker
 
-  missingTangentCategoryOperations :
-    DiscreteToSmoothRoadmapBlocker
+  missingTangentCategoryOperations : DiscreteToSmoothRoadmapBlocker
 
-  missingTangentCategoryAxioms :
-    DiscreteToSmoothRoadmapBlocker
+  missingTangentCategoryAxioms : DiscreteToSmoothRoadmapBlocker
 
-  missingDCHoTTTangentExponential :
-    DiscreteToSmoothRoadmapBlocker
+  missingDCHoTTTangentExponential : DiscreteToSmoothRoadmapBlocker
 
 canonicalDiscreteToSmoothRoadmapBlockers :
   List DiscreteToSmoothRoadmapBlocker
@@ -1394,20 +1337,15 @@ record DiscreteToSmoothRoadmapSurface (P : ProObjectCarrier) : Setω where
 open DiscreteToSmoothRoadmapSurface public
 
 data TangentCategoryAxiomTarget : Set where
-  pZeroSectionLawTarget :
-    TangentCategoryAxiomTarget
+  pZeroSectionLawTarget : TangentCategoryAxiomTarget
 
-  addFiberwiseCommutativeMonoidTarget :
-    TangentCategoryAxiomTarget
+  addFiberwiseCommutativeMonoidTarget : TangentCategoryAxiomTarget
 
-  liftNaturalityTarget :
-    TangentCategoryAxiomTarget
+  liftNaturalityTarget : TangentCategoryAxiomTarget
 
-  canonicalFlipInvolutionTarget :
-    TangentCategoryAxiomTarget
+  canonicalFlipInvolutionTarget : TangentCategoryAxiomTarget
 
-  tangentPullbackStabilityTarget :
-    TangentCategoryAxiomTarget
+  tangentPullbackStabilityTarget : TangentCategoryAxiomTarget
 
 canonicalTangentCategoryAxiomTargets :
   List TangentCategoryAxiomTarget
@@ -1551,35 +1489,25 @@ record FirstGradedFiltrationTangentSurface
 open FirstGradedFiltrationTangentSurface public
 
 data GStructureReductionOpenObligation : Set where
-  missingDepthIndexedFrameBundle :
-    GStructureReductionOpenObligation
+  missingDepthIndexedFrameBundle : GStructureReductionOpenObligation
 
-  missingFrameRefinementCompatibility :
-    GStructureReductionOpenObligation
+  missingFrameRefinementCompatibility : GStructureReductionOpenObligation
 
-  missingMetricCompatibilityTower :
-    GStructureReductionOpenObligation
+  missingMetricCompatibilityTower : GStructureReductionOpenObligation
 
-  missingMetricTowerRefinementMaps :
-    GStructureReductionOpenObligation
+  missingMetricTowerRefinementMaps : GStructureReductionOpenObligation
 
-  missingLorentzSignatureAdapter :
-    GStructureReductionOpenObligation
+  missingLorentzSignatureAdapter : GStructureReductionOpenObligation
 
-  missingLorentzSignatureRefinementLock :
-    GStructureReductionOpenObligation
+  missingLorentzSignatureRefinementLock : GStructureReductionOpenObligation
 
-  missingProFrameLimitConstruction :
-    GStructureReductionOpenObligation
+  missingProFrameLimitConstruction : GStructureReductionOpenObligation
 
-  missingActualDCHoTTGStructureBinding :
-    GStructureReductionOpenObligation
+  missingActualDCHoTTGStructureBinding : GStructureReductionOpenObligation
 
-  missingDCHoTTGStructureReductionWitness :
-    GStructureReductionOpenObligation
+  missingDCHoTTGStructureReductionWitness : GStructureReductionOpenObligation
 
-  missingTorsionFreeSpecialization :
-    GStructureReductionOpenObligation
+  missingTorsionFreeSpecialization : GStructureReductionOpenObligation
 
 canonicalGStructureReductionOpenObligations :
   List GStructureReductionOpenObligation

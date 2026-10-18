@@ -1,6 +1,6 @@
 module DASHI.Biology.FiniteRationalCausalEstimandExpectationExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (_≤_; _+_; _*_)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)

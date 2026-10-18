@@ -5,6 +5,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDManuscriptMethodologyExact as Method
+import DASHI.Education.DigitalESDStudyClaimMethodBridgeExact as ClaimMethod
+import DASHI.Education.DigitalESDTransferablePrincipleDerivationMethodExact as Derivation
+import DASHI.Education.DigitalESDExternalityIncidenceAuditExact as Incidence
+import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
 import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact as Paper
 import DASHI.Education.DigitalESDStructuredSearchExact as Search
 
@@ -14,76 +18,105 @@ paperTypeRegression = refl
 researchQuestionCountRegression : Method.researchQuestionCount ≡ 5
 researchQuestionCountRegression = refl
 
-methodRetainsStructuredSearchRegression :
-  Method.MethodologyBoundary.transparentStructuredSearchRequired
-    Method.canonicalMethodologyBoundary
-  ≡ true
+baseExtractionCoordinateCountRegression : Method.extractionCoordinateCount ≡ 19
+baseExtractionCoordinateCountRegression = refl
+
+effectiveExtractionCoordinateCountRegression :
+  ClaimMethod.effectiveExtractionCoordinateCount ≡ 20
+effectiveExtractionCoordinateCountRegression = refl
+
+methodRetainsStructuredSearchRegression : Method.MethodologyBoundary.transparentStructuredSearchRequired Method.canonicalMethodologyBoundary ≡ true
 methodRetainsStructuredSearchRegression = refl
 
-searchClosureDoesNotEqualSynthesisRegression :
-  Method.SearchClosureEqualsEvidenceSynthesis → ⊥
-searchClosureDoesNotEqualSynthesisRegression =
-  Method.searchClosureDoesNotEqualEvidenceSynthesis
+methodRetainsPrincipleDerivationRegression :
+  Method.principleDerivationBoundary
+  ≡ Derivation.canonicalPrincipleDerivationBoundary
+methodRetainsPrincipleDerivationRegression = refl
 
-primarySourceDoesNotAutoIncludeRegression :
-  Method.PrimarySourceAcquisitionCreatesIncludedStudy → ⊥
-primarySourceDoesNotAutoIncludeRegression =
-  Method.primarySourceAcquisitionDoesNotCreateIncludedStudy
+preSearchFrameworkNotReviewResultRegression :
+  Derivation.PrincipleDerivationBoundary.preSearchFrameworkEqualsReviewResult
+    Method.principleDerivationBoundary
+  ≡ false
+preSearchFrameworkNotReviewResultRegression = refl
 
-unescoRoadmapReceiptRegression :
-  Method.SourceReceipt.observed Method.unescoESD2030RoadmapReceipt ≡ true
+methodRetainsExternalityIncidenceRegression :
+  Method.externalityIncidenceBoundary
+  ≡ Incidence.canonicalExternalityIncidenceBoundary
+methodRetainsExternalityIncidenceRegression = refl
+
+methodRequiresExternalityIncidenceAuditRegression :
+  Method.MethodologyBoundary.externalityIncidenceAuditRetained
+    Method.canonicalMethodologyBoundary
+  ≡ true
+methodRequiresExternalityIncidenceAuditRegression = refl
+
+studyClaimBridgePinsBaseMethodRegression :
+  ClaimMethod.baseMethodBoundary ≡ Method.canonicalMethodologyBoundary
+studyClaimBridgePinsBaseMethodRegression = refl
+
+studyClaimBridgePinsCeilingRegression :
+  ClaimMethod.studyClaimCeilingBoundary ≡ Ceiling.canonicalStudyClaimCeilingBoundary
+studyClaimBridgePinsCeilingRegression = refl
+
+studyClaimBridgeRequiresCeilingRegression :
+  ClaimMethod.StudyClaimMethodBoundary.studyClaimCeilingRequired
+    ClaimMethod.canonicalStudyClaimMethodBoundary
+  ≡ true
+studyClaimBridgeRequiresCeilingRegression = refl
+
+searchClosureDoesNotEqualSynthesisRegression : Method.SearchClosureEqualsEvidenceSynthesis → ⊥
+searchClosureDoesNotEqualSynthesisRegression = Method.searchClosureDoesNotEqualEvidenceSynthesis
+
+primarySourceDoesNotAutoIncludeRegression : Method.PrimarySourceAcquisitionCreatesIncludedStudy → ⊥
+primarySourceDoesNotAutoIncludeRegression = Method.primarySourceAcquisitionDoesNotCreateIncludedStudy
+
+unescoRoadmapReceiptRegression : Method.SourceReceipt.observed Method.unescoESD2030RoadmapReceipt ≡ true
 unescoRoadmapReceiptRegression = refl
 
-unescoMidtermReceiptRegression :
-  Method.SourceReceipt.observed Method.unescoESD2030MidtermReceipt ≡ true
+unescoMidtermReceiptRegression : Method.SourceReceipt.observed Method.unescoESD2030MidtermReceipt ≡ true
 unescoMidtermReceiptRegression = refl
 
-oecdOutlookReceiptRegression :
-  Method.SourceReceipt.observed Method.oecdDigitalEducationOutlook2026Receipt ≡ true
+oecdOutlookReceiptRegression : Method.SourceReceipt.observed Method.oecdDigitalEducationOutlook2026Receipt ≡ true
 oecdOutlookReceiptRegression = refl
 
-unescoAICommonGoodMinisterialReceiptRegression :
-  Method.SourceReceipt.observed Method.unescoAICommonGoodMinisterialReceipt ≡ true
+uneceFifthEvaluationReceiptRegression : Method.SourceReceipt.observed Method.uneceFifthESDEvaluationReceipt ≡ true
+uneceFifthEvaluationReceiptRegression = refl
+
+unescoAICommonGoodMinisterialReceiptRegression : Method.SourceReceipt.observed Method.unescoAICommonGoodMinisterialReceipt ≡ true
 unescoAICommonGoodMinisterialReceiptRegression = refl
 
-unescoAIConsultationDiscussionReceiptRegression :
-  Method.SourceReceipt.observed Method.unescoAIConsultationDiscussionReceipt ≡ true
+unescoAIConsultationDiscussionReceiptRegression : Method.SourceReceipt.observed Method.unescoAIConsultationDiscussionReceipt ≡ true
 unescoAIConsultationDiscussionReceiptRegression = refl
 
-consultationDoesNotEqualAdoptedStatementRegression :
-  Method.ConsultationDiscussionPaperEqualsAdoptedMinisterialStatement → ⊥
-consultationDoesNotEqualAdoptedStatementRegression =
-  Method.consultationDiscussionPaperDoesNotEqualAdoptedMinisterialStatement
+unescoAIProcurementBackgroundReceiptRegression : Method.SourceReceipt.observed Method.unescoAIProcurementBackgroundReceipt ≡ true
+unescoAIProcurementBackgroundReceiptRegression = refl
 
-systemTransformationNotActivityRegression :
-  Method.ActivityLevelDeterminesSystemTransformation → ⊥
-systemTransformationNotActivityRegression =
-  Method.activityDoesNotDetermineSystemTransformation
+unescoAITCOBackgroundReceiptRegression : Method.SourceReceipt.observed Method.unescoAITCOBackgroundReceipt ≡ true
+unescoAITCOBackgroundReceiptRegression = refl
 
-performanceNotLearningRegression :
-  Method.TaskPerformanceDeterminesLearning → ⊥
+consultationDoesNotEqualAdoptedStatementRegression : Method.ConsultationDiscussionPaperEqualsAdoptedMinisterialStatement → ⊥
+consultationDoesNotEqualAdoptedStatementRegression = Method.consultationDiscussionPaperDoesNotEqualAdoptedMinisterialStatement
+
+backgroundPaperDoesNotEqualAdoptedPolicyRegression : Method.ConsultationBackgroundPaperEqualsAdoptedPolicy → ⊥
+backgroundPaperDoesNotEqualAdoptedPolicyRegression = Method.consultationBackgroundPaperDoesNotEqualAdoptedPolicy
+
+regionalReportsDoNotCreateDigitalESDEffectRegression : Method.RegionalImplementationReportsCreateDigitalESDEffect → ⊥
+regionalReportsDoNotCreateDigitalESDEffectRegression = Method.regionalImplementationReportsDoNotCreateDigitalESDEffect
+
+systemTransformationNotActivityRegression : Method.ActivityLevelDeterminesSystemTransformation → ⊥
+systemTransformationNotActivityRegression = Method.activityDoesNotDetermineSystemTransformation
+
+performanceNotLearningRegression : Method.TaskPerformanceDeterminesLearning → ⊥
 performanceNotLearningRegression = Method.taskPerformanceDoesNotDetermineLearning
 
-methodsExtractionRetainsScopeRegression :
-  Method.MethodologyBoundary.sourcePopulationTimeScopeRetained
-    Method.canonicalMethodologyBoundary
-  ≡ true
+methodsExtractionRetainsScopeRegression : Method.MethodologyBoundary.sourcePopulationTimeScopeRetained Method.canonicalMethodologyBoundary ≡ true
 methodsExtractionRetainsScopeRegression = refl
 
-methodsExtractionRetainsSourceRoleRegression :
-  Method.MethodologyBoundary.sourceRoleRetained
-    Method.canonicalMethodologyBoundary
-  ≡ true
+methodsExtractionRetainsSourceRoleRegression : Method.MethodologyBoundary.sourceRoleRetained Method.canonicalMethodologyBoundary ≡ true
 methodsExtractionRetainsSourceRoleRegression = refl
 
-paperMethodologyDoesNotPromoteSystematicReviewRegression :
-  Method.MethodologyBoundary.promotesSystematicReview
-    Method.canonicalMethodologyBoundary
-  ≡ false
+paperMethodologyDoesNotPromoteSystematicReviewRegression : Method.MethodologyBoundary.promotesSystematicReview Method.canonicalMethodologyBoundary ≡ false
 paperMethodologyDoesNotPromoteSystematicReviewRegression = refl
 
-searchLineageRemainsCanonicalRegression :
-  Search.StructuredSearchLedger.scopusExecutionObserved
-    Search.canonicalStructuredSearchLedger
-  ≡ false
+searchLineageRemainsCanonicalRegression : Search.StructuredSearchLedger.scopusExecutionObserved Search.canonicalStructuredSearchLedger ≡ false
 searchLineageRemainsCanonicalRegression = refl

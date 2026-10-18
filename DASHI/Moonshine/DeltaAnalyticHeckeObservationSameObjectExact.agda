@@ -23,9 +23,16 @@ module DASHI.Moonshine.DeltaAnalyticHeckeObservationSameObjectExact where
 -- the three 3-power observations transports the already-proved tau recurrence
 -- to the analytic object's coefficient readout.
 --
--- It does not pretend that DASHI has yet constructed the q-expansion
--- coefficient extractor for eta^24.  That extractor/identification is the
--- remaining analytic-arithmetic producer.
+-- Agda-native q-expansion extraction for eta^24 is still not constructed in
+-- this module.  However, the pinned Lean companion now owns eta^24 as a
+-- weight-12 cusp form, proves its first q coefficient is 1, packages the
+-- normalized E4/E6 target as a cusp form with first coefficient 1, and proves
+-- eta^24 = normalized(E4^3-E6^2)/1728 by scalar comparison.
+--
+-- Therefore the old statement "the extractor/identification is the remaining
+-- analytic-arithmetic producer" is no longer globally correct.  It remains an
+-- Agda-native producer gap only; the corresponding classical same-object
+-- theorem is externally formalized and recorded below.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -38,6 +45,7 @@ import DASHI.Physics.Closure.TriadicEisensteinTransformationTheorem as Eisenstei
 import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact as Disc
 import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact as Analytic
 import DASHI.Moonshine.RamanujanTauHecke23Exact as Tau
+import DASHI.Interop.LeanMoonshineDeltaIdentityPinnedReceiptExact as LeanDelta
 
 ------------------------------------------------------------------------
 -- Three concrete observations are enough to expose the existing 3-power
@@ -157,6 +165,11 @@ record DeltaAnalyticHeckeBoundary : Set where
     qExpansionCoefficientExtractorConstructed : Bool
     eta24CoefficientIdentificationConstructed : Bool
 
+    leanEta24FirstQCoefficientOwned : Bool
+    leanNormalizedDeltaFirstQCoefficientOwned : Bool
+    leanEta24NormalizedDeltaSameObjectOwned : Bool
+    externalFormalReceiptImported : Bool
+
 canonicalDeltaAnalyticHeckeBoundary : DeltaAnalyticHeckeBoundary
 canonicalDeltaAnalyticHeckeBoundary = record
   { analyticWeight12TransportDerived = true
@@ -164,4 +177,8 @@ canonicalDeltaAnalyticHeckeBoundary = record
   ; sameObjectReadoutTransportsRecurrence = true
   ; qExpansionCoefficientExtractorConstructed = false
   ; eta24CoefficientIdentificationConstructed = false
+  ; leanEta24FirstQCoefficientOwned = true
+  ; leanNormalizedDeltaFirstQCoefficientOwned = true
+  ; leanEta24NormalizedDeltaSameObjectOwned = true
+  ; externalFormalReceiptImported = true
   }

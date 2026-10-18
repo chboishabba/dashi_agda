@@ -18,39 +18,28 @@ open import Data.List.Base using (List; _∷_; [])
 -- Levi-Civita connection, or prove any characteristic-class theorem.
 
 data CharacteristicClassSurfaceStatus : Set where
-  characteristicClassTargetsOnlyNoPromotion :
-    CharacteristicClassSurfaceStatus
+  characteristicClassTargetsOnlyNoPromotion : CharacteristicClassSurfaceStatus
 
 data CharacteristicClassOpenObligation : Set where
-  missingB0GeometricEmergence :
-    CharacteristicClassOpenObligation
+  missingB0GeometricEmergence : CharacteristicClassOpenObligation
 
-  missingTorsionFreeLeviCivitaAdapter :
-    CharacteristicClassOpenObligation
+  missingTorsionFreeLeviCivitaAdapter : CharacteristicClassOpenObligation
 
-  missingPrincipalGStructureBundle :
-    CharacteristicClassOpenObligation
+  missingPrincipalGStructureBundle : CharacteristicClassOpenObligation
 
-  missingClassifyingMapToBG :
-    CharacteristicClassOpenObligation
+  missingClassifyingMapToBG : CharacteristicClassOpenObligation
 
-  missingAHSSObstructionClassifier :
-    CharacteristicClassOpenObligation
+  missingAHSSObstructionClassifier : CharacteristicClassOpenObligation
 
-  missingChernWeilInvariantPolynomialMap :
-    CharacteristicClassOpenObligation
+  missingChernWeilInvariantPolynomialMap : CharacteristicClassOpenObligation
 
-  missingCurvatureFormForChernWeil :
-    CharacteristicClassOpenObligation
+  missingCurvatureFormForChernWeil : CharacteristicClassOpenObligation
 
-  missingPontryaginClassTarget :
-    CharacteristicClassOpenObligation
+  missingPontryaginClassTarget : CharacteristicClassOpenObligation
 
-  missingEulerClassTarget :
-    CharacteristicClassOpenObligation
+  missingEulerClassTarget : CharacteristicClassOpenObligation
 
-  missingNaturalityAndGaugeInvariance :
-    CharacteristicClassOpenObligation
+  missingNaturalityAndGaugeInvariance : CharacteristicClassOpenObligation
 
 canonicalCharacteristicClassOpenObligations :
   List CharacteristicClassOpenObligation

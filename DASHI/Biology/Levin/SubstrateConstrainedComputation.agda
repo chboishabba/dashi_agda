@@ -26,7 +26,7 @@ record PhysicalComputationCarrier : Set where
 record SubstrateConstrainedComputationBoundary : Set where
   field
     agencyBoundary        : Agency.SubstrateIndependentAgencyBoundary
-    waveBoundaryType      : Set
+    waveBoundary          : Wave.TravelingWaveBoundary
     chemistryBoundary     : Chemistry.BioelectricChemistryWaveAdapter
     sameInputOutputDoesNotFixInternalComputation : Bool
     analogNotSufficientForConsciousness          : Bool
@@ -52,7 +52,7 @@ canonicalSubstrateConstrainedComputationBoundary :
   SubstrateConstrainedComputationBoundary
 canonicalSubstrateConstrainedComputationBoundary = record
   { agencyBoundary = Agency.canonicalSubstrateIndependentAgencyBoundary
-  ; waveBoundaryType = Wave.TravelingWaveComputationBoundary
+  ; waveBoundary = Wave.canonicalTravelingWaveBoundary
   ; chemistryBoundary = Chemistry.canonicalBioelectricChemistryWaveAdapter
   ; sameInputOutputDoesNotFixInternalComputation = true
   ; analogNotSufficientForConsciousness = true

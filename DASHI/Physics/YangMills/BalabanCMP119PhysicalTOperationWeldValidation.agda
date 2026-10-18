@@ -1,0 +1,21 @@
+module DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationWeldValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationWeldExact as Weld
+
+weightNonnegativityIsCompilerOwned :
+  Weld.cmp119PhysicalTOperationWeightNonnegativeCompilerLevel ≡ machineChecked
+weightNonnegativityIsCompilerOwned = refl
+
+finiteSlowDensityCompilerOwned :
+  Weld.cmp119PhysicalTOperationFiniteSlowDensityCompilerLevel ≡ machineChecked
+finiteSlowDensityCompilerOwned = refl
+
+assembledDensityPhysicalTOperationSameObjectRemainsPhysical :
+  Weld.literalCMP119AssembledDensityIsPhysicalTOperationLevel ≡ conditional
+assembledDensityPhysicalTOperationSameObjectRemainsPhysical = refl
+
+strictPositiveSupportRemainsPhysical :
+  Weld.literalCMP119PhysicalTOperationPositiveSupportLevel ≡ conditional
+strictPositiveSupportRemainsPhysical = refl

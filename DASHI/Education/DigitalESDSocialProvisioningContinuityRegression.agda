@@ -1,0 +1,9 @@
+module DASHI.Education.DigitalESDSocialProvisioningContinuityRegression where
+
+open import DASHI.Core.Prelude
+import DASHI.Education.DigitalESDSocialProvisioningContinuityExact as Social
+
+socialProvisioningBoundary = Social.canonicalSocialProvisioningBoundary
+socialProvisioningIntersectionalChallenge = Social.canonicalSocialProvisioningIntersectionalChallenge
+socialProvisioningSourceAtlas = Social.canonicalSocialProvisioningSourceAtlas
+instructionDoesNotDetermineProvisioning = Social.instructionalDeliveryCannotDetermineSocialProvisioning

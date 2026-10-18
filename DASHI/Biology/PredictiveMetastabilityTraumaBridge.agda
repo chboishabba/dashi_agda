@@ -29,23 +29,17 @@ listCount (_ ∷ xs) =
 -- Surfaces.
 
 data PredictiveTraumaSurface : Set where
-  dangerPriorPrecisionSurface :
-    PredictiveTraumaSurface
+  dangerPriorPrecisionSurface : PredictiveTraumaSurface
 
-  freeEnergyLocalMinimumSurface :
-    PredictiveTraumaSurface
+  freeEnergyLocalMinimumSurface : PredictiveTraumaSurface
 
-  metastableChartMobilitySurface :
-    PredictiveTraumaSurface
+  metastableChartMobilitySurface : PredictiveTraumaSurface
 
-  interoceptiveMessengerSurface :
-    PredictiveTraumaSurface
+  interoceptiveMessengerSurface : PredictiveTraumaSurface
 
-  flowRestoresApproachSurface :
-    PredictiveTraumaSurface
+  flowRestoresApproachSurface : PredictiveTraumaSurface
 
-  recoveredMemoryBoundarySurface :
-    PredictiveTraumaSurface
+  recoveredMemoryBoundarySurface : PredictiveTraumaSurface
 
 canonicalPredictiveTraumaSurfaces :
   List PredictiveTraumaSurface

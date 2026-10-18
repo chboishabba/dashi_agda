@@ -76,8 +76,11 @@ legalProjectionJudicialStatusIsSubmission : Consumer.legalJudicialStatus legalPr
 legalProjectionJudicialStatusIsSubmission = refl
 
 pdfTextProfile : Axes.TextContextProfile
-pdfTextProfile = Axes.textContextProfile Axes.formalLegalDocument
-  (Axes.legalSubject ∷ Axes.historicalSubject ∷ []) simultaneousDemand
+pdfTextProfile = Axes.textContextProfile
+  (Axes.formalLegalDocument "source provenance: legislation/case material fixture")
+  ( Axes.legalSubject "native title/property law subject"
+  ∷ Axes.historicalSubject "historical land tenure context"
+  ∷ []) simultaneousDemand
   ("source provenance: legislation/case material fixture" ∷ [])
   ("native title/property law subject" ∷ "historical land tenure context" ∷ [])
   "formal legal source may still be consumed simultaneously through non-legal views"

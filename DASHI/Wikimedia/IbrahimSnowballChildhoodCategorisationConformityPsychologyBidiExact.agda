@@ -93,7 +93,7 @@ categorisationQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data ChildSocialGraphNode : Set where
-  childhoodNode childDevelopmentNode categorisationNode disciplineNode
+  childhoodNode childDevelopmentNode categorisationNode disciplineNode : ChildSocialGraphNode
   conformityNode obedienceNode socialPsychologyNode ethicsNode : ChildSocialGraphNode
 
 record ChildSocialGraphAudit : Set where

@@ -326,8 +326,8 @@ data DOIIdentifiesConcept : Set where
 data SymbolicMeaningCreatesPrediction : Set where
 data VerificationErasesCulturalMeaning : Set where
 
-deweyDoesNotCreateSemanticParent : DeweyCreatesSemanticParent → ⊥
-deweyDoesNotCreateSemanticParent ()
+deweyCannotCreateSemanticParent : DeweyCreatesSemanticParent → ⊥
+deweyCannotCreateSemanticParent ()
 
 deweyDoesNotCreateTruth : DeweyCreatesTruth → ⊥
 deweyDoesNotCreateTruth ()

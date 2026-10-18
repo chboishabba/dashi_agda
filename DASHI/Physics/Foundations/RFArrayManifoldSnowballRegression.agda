@@ -1,0 +1,14 @@
+module DASHI.Physics.Foundations.RFArrayManifoldSnowballRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.RFArrayManifoldSnowballExact as S
+
+phaseRepairProposalRequired : S.ArrayAxisProposalBundle
+phaseRepairProposalRequired = S.canonicalArrayAxisProposalBundle
+
+proofSearchRouteRequired : S.ArrayManifoldProofSearchRoute
+proofSearchRouteRequired = S.canonicalArrayManifoldProofSearchRoute
+
+admissionFirewallRequired : S.ArrayManifoldAdmissionFirewall
+admissionFirewallRequired = S.canonicalArrayManifoldAdmissionFirewall

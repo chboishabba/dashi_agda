@@ -20,7 +20,7 @@ import DASHI.Core.ApplicationTransformationCapabilityBidiExact as T
 ------------------------------------------------------------------------
 
 data PhotoControlStage : Set where
-  photonInput photoswitchStateChange targetEncounter targetBinding
+  photonInput photoswitchStateChange targetEncounter targetBinding : PhotoControlStage
   molecularOrPhysiologicalReadout recoveryOrReverseSwitch : PhotoControlStage
 
 record PhotoControlModel : Set where
@@ -63,8 +63,8 @@ liMinyongTransformation = T.application-transformation
   "Application requires source-specific wavelengths, dose/concentration, target context, optical calibration and biological validation."
 
 data LiMinyongReverseTarget : Set where
-  selectExactCompound acquireWavelengthBands acquirePhotostationaryState
-  acquireBindingAffinity acquireSelectivity acquireDoseWindow acquireReadoutCalibration
+  selectExactCompound acquireWavelengthBands acquirePhotostationaryState : LiMinyongReverseTarget
+  acquireBindingAffinity acquireSelectivity acquireDoseWindow acquireReadoutCalibration : LiMinyongReverseTarget
   acquireReversibilityKinetics acquireInVivoValidation acquireLabCustodian : LiMinyongReverseTarget
 
 probeOrReviewImpliesClinicalEfficacy : Bool

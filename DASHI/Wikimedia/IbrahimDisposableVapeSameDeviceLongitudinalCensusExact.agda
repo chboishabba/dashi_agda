@@ -21,15 +21,15 @@ import DASHI.Wikimedia.IbrahimDisposableVapeChemicalUniverseObserverParetoExact 
 ------------------------------------------------------------------------
 
 data LongitudinalStage : Set where
-  unopened
-  virginBaseline
-  puff100
-  puff200
-  puff300
-  puff500
-  midLife
-  lateLife
-  exhaustedOrStop
+  unopened : LongitudinalStage
+  virginBaseline : LongitudinalStage
+  puff100 : LongitudinalStage
+  puff200 : LongitudinalStage
+  puff300 : LongitudinalStage
+  puff500 : LongitudinalStage
+  midLife : LongitudinalStage
+  lateLife : LongitudinalStage
+  exhaustedOrStop : LongitudinalStage
   spentMaterials : LongitudinalStage
 
 record PhysicalSpecimen : Set where
@@ -159,9 +159,9 @@ canonicalPairedStageObserver = paired-stage-observer
 ------------------------------------------------------------------------
 
 data CorrespondenceGrade : Set where
-  sameFeatureUnpaid
-  massOrSpectrumCandidate
-  orthogonallySupported
+  sameFeatureUnpaid : CorrespondenceGrade
+  massOrSpectrumCandidate : CorrespondenceGrade
+  orthogonallySupported : CorrespondenceGrade
   standardConfirmedSameChemical : CorrespondenceGrade
 
 record LongitudinalFeature : Set where

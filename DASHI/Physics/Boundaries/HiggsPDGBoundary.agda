@@ -7,7 +7,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
-import DASHI.Physics.Closure.HiggsSymmetryBreakingReceipt as Higgs
+import DASHI.Physics.Boundaries.VHiggsDefinitionalReceipt as Higgs
 
 ------------------------------------------------------------------------
 -- Higgs / PDG electroweak boundary.

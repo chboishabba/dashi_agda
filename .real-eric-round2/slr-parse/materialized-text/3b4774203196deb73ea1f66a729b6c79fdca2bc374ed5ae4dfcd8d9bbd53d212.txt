@@ -1,0 +1,957 @@
+[PAGE 1]
+\;.,:
+.19e,
+Computer Oriented Exe- rciseeGaii0line ConStimptionAttituCompt1terTechnology Rrogril
+.
+110its.-H'.-...:::-_..
+JIISTXTOTIbi 'vottheeetegionel Education
+brag. -:--
+',:51)011.8AGENCYNatiOlial Insit. of. Edutation
+D.C.
+.4
+.OntvcutTE. 8ep 75..
+NOTE25p.; For related. docvsents,available in hard copy- due t
+-, original document,
+AVAILABLE EROSOffice of Marketing, AlorthweLab.:,; 710 S.W. Second Ave..,
+($34,25)
+cPAttiti,des and 0.1'de. TeaChetL
+Envir,orwebtal EduCatrot
+Leb.,'Portlendfr
+(DEM; Oash4mgton,
+siee, SE 026 732-'741; Set;ci marginalof;
+-"st Begionai EduCat.ionatPortland,bregop97.204
+EDIS PR/CEMF-$0.83 Plus Postage. HC Not Availalle from EDN'S.°.
+DESCRIPTORS*Attitudes:.*Computer Assisted./nstruct.ion; *EnergyConservation; Environmental -E.ducation: *fuelConsuiptior,l,y Higher Educatitii; 4InstructionalMaterials; Secoildary Educati3On: Social Atudiesr
+Surveys
+IDENTIFIERS*Energy-EduCation
+ABSTRACT
+This is the teacher's guide to accompany the studentguide which together comptiee one of five compu'ier-orientedenvirdnmentalienergy education units. This Unit is concerned with theattitude of people toward-gasoline shortagles 'and ditferert-stepsthe
+government could take to reduce gasoline consumption. Through theexercises, part of which make use of a' computer program, stutientsconsider methods of redUcing gasoline consumptionexplore theattitudes of people toward these methods, learnthat people'sattitudes differ, and form and expresS their own attitudes. This unitis appropriate for social studies and envirormentaaeducation coursesgrades 9 through lg.', This,teacher's guide provides a sample runof'the computer program and gives suggestions for using the unit incl ass.(NR)
+***********************************14***4,******************************
+*Reproductions'supplied by EDPS are the best that can be made*
+* -from the original document.*
+.***********************************************************************
+
+[PAGE 2]
+This work is, submitted in confldencel'and has not asyet been pUblished.
+The recipiept receivesthe :.work In confidence and will use the same,:
+only for the purpOse' for which itis tendered.
+This work represents development efforts to date MidishoUld:nOt be
+considered final material.)There °ore, use ofrestri:Oted
+exclusively to those persons and ugencies cooperating in fieldtesting,
+All rights, including the right to reptltduce all or part .ofthe contents
+in any form, .are reserved by, the NorthwestItegional EdueStidnat
+Laboratory.
+Prospective users of this manual are urged. to first run he sample'
+simulation program provided in order todeteiGnine any. needed or
+desirable adjOtments prior tbirri:
+Coo"*-
+
+[PAGE 3]
+T.A.BLE-OF CONTENTS-
+,INTRODUCTION. TO THE UNIT.
+-Unit Description... .
+Objectives2
+Description of the ATITUD Program
+USING THE UNIT IN THE CLASSROOM
+Preparing to Use the Unit3.
+Setting, Up the Computer Program..4
+Suggestions for Teaching the Unit...
+(...
+4
+Suggested Additional Exercise.....4
+.,Sources,of Additional Information. .... 4
+PROGRAM DOCUMENTATION
+Sample Run of ATITUD.......7
+ATITUD Program Listing. .......15
+yI
+
+[PAGE 4]
+INTRODUCTION TO THE UNIT
+Unit .Description
+,,'
+Subject Areas:Sdcial Studies, Environmental Education
+TopAttyudes..toward the gasoline -shortage' andmethods
+ethic Eng ,,gasoline constiMpt
+Abstact:This unit .is, concerned with 'the attitude of people toward
+he gaSoline shortage and different stepS the goVermient couldtake
+n Order to reduce gasoline consumption..ThroUgh the exercises,
+hich are the hegrt of this unit, the students will edasider,
+-ey,arious,methOda of reducing gasoline consumption,consider'tie attitudes of, variouspeople toward those methods,
+,cylearn; that different people have different attitudes,and finally
+,form and exprdss their own attitudes.
+:I!
+Pail of the exercises make use o!'a computer.program, ATITUD.
+That program (1) enables stticiet4to enter their attitudes toward'
+various issues-having todo wit tithe gasoline shortage and (2)- prints
+the 'student attitudes as well as ,attitudes of theArrierican public as
+determined by 'the Gallup and 1441ris polls.
+Some of the exercises involve students', taking polls,in order to
+determine the attitudes of their, friends', relatives,neighbors, etc.,toward methods, of reducing gasoline consumption.As a tinal
+exercise the student is asked to take the role of a member of
+Congress, consider h s/her oval attitudes as wellas the attitudesOf others, and vote ovarious methods of reducing gasoline
+consumption,.
+Grade Level:9-14
+Commuter Lneaati BASIC
+Program Name: ATITUD
+
+[PAGE 5]
+Objectives
+Upon completion of this unit.,the studerib will
+.1.Be awar pf tile attitudes of various peOple toward .inethods
+of solving the psoline shortage problem._
+a.Recognize that illifferent 'groups of people, with
+different backgrounds and interests, have different
+attitudes toward methods of solution of the gasoline
+shortage.
+Understand that 'government actions toward relieving the
+gasoline shortage must dePend, to some extent, on, the
+attitudes of the people, which may be ,conflicting.
+.-
+3.Be able to foimulate and .express his/her own attitudes
+toward various 'inethodscoof reducing gasoline consumption.
+Description of the. ATITtn=i .Program
+ATITUD offers the usetweoptions:
+To entend store his pr her-, own answers to 17
+questions about the gasoline shortage and methods of
+reducing ga s 61'ine consurant ion.
+2.To see , a summary , .of the responses to the same qtrt ions
+gathered0
+by IlarDis and Gallup polls, and
+.from all his, or her claS-sinates
+The program is used IA Exercise 1 -as the means for entering and Staring
+class data on attitudes toward tire gasoline -situation.In Exercise 2,, ATITUD
+is used to print out data frail- Professional polls and from 'class entries as
+a basis forcomparisOn and analysi.S.
+6-
+The ATITUD program and printout is clearly structured for ease of inter-
+pretation.Even. students with no familiaritY with coinputer materials will
+find no difficulty working with ATITUD and its brintout.
+-A- sample run and program listing are liven rin the last section'ofithis Guide.
+Instructions for setting up the prograrn, for class use are given ok page 3.- .
+
+[PAGE 6]
+USING THE UNIT IN THE CLASSROOM.
+Preparing to Use the Unit
+The primary focus of this unit is on attitudes toward the gasoline shortage
+and toward methods of reducing gasoline consumption.It should be continually
+emphasized that the purpose of the unit is to examine attitudes and their
+relation to government actions, not to learn how o,.solve 'the shortage
+problem.4
+The unit was developed duiting the spring of 1.9.75 and contains information
+current at that time.. Since then, conditions may have changed and the
+government may have taken new actions in order to reduce gasoline consumption,/
+causing some of the information presented to bp out-ofdae.Therefore,
+before assigning exercises itis suggested, that you study the ,exercises and
+provide supplementary current information, as necessary.Or, you may wish
+to assign,a special exercise which, involves having students determine what
+conditions 'have changed and what actionhave been initiated since the material
+was developed.
+Setting Up the Computer program :
+The computer program ATITUD Is used for Exercises 1' and 2.The program
+makes use of a file which must be opened prior to running the program.The
+file name is ATITD.It is One record long.It1 is opened by 'entering
+OPEN- ATITD,1
+If a file name' other than ATITD is used, the program statement
+140 FILES ATITD
+must be changed accordingly.' For example,if you. used file name ONE
+you would enter
+OPEN = ONE, 1
+and would change statem'ent' 140 to
+140 FILES ONE
+A. sample run and listing-,of ATITUD are even in the last section of the
+Guide.
+
+[PAGE 7]
+Suggestions for Teaching the Unit
+. ,
+It is -essential that the students read the baCkground informationat thebeginning of the Student Guide before proceedingto the ten 'exercises
+in th6 Guide:. You may wish 'to have the students do justsome of theexercises rather than all of them, dependingon how extensively you wish tocover this topic and on the amount ofctime available.If.rtirm?is very'limited you may wish to assign just Exercises1. and 2.
+.
+Exercises 1 and 2 make use of the computerprogram ATITUD.In- Exercise 1
+r each student will exprAs his/her attitude toward various issuesinvolved inthe gasoline shortage by responding to' questionsand statements.Exercise '2calls for you or the students to nse the'program and retrieve' a summary ofstudent res-pcinses as well as responses gathered'by the Gallup and" Harrispblls.0-
+A
+nExercise-1 the students will be askedsome questions about driving a carnd transportation to work.You may wish to tell your students to respond
+as if they were older and were working full timeor to respond as, they feeltheir parents would.
+l
+Suggested Additional Exercise
+The last exercise (number 10) calls for eachstudent to pretend he/she isa member of Congress, consider his/her own attitudeas well as theattitudes of the' people he/she represents andthe attitudes of special groups,then to vote on each action proposed to, reducegasoline consumption.A
+meaningful followup to' that exercise" would beto have the entire class, act
+as members of Congress, debate the various actions proposed,then vote onthem.
+Sources of Additional Information.
+SeVeral books having to-with the gasoline shortage are liked below.Thebest source's of Informs ton in connectionwith this unit, however, will becurrent articles and editorials In newspapersand magaMhes.
+1.DeBell, Ga'rrett (editor), The "Environmental Handbook,Ballantine
+IBooks, Inc.r NewYork, 1,970..
+)
+2.Finkel, Asher J. (editor), EnergyEnvironmentand HumanHealthPublishing Sciences Group, I., Acton, Massachusetts,
+1974.
+3.Goodwin,-t14In(editor), Energy andnviromnent:A Collision ofCrises Publishing Sciences Group,Inc., Acton,, Massachusetts,
+1974.
+
+[PAGE 8]
+Hellman, Thai Energy in the 'World of the Future) M. Evans
+and Company, Inc., New Yorke. 1973.,
+5.Rocks, Laivrence and Runyon, Richard P..The Energy Crisis,
+Grown Pub 116hers,"Inc., New York, 1972.
+Snill, Vac lav, Energy and the Environment, A Long Range
+Filarecasting Study; The University of'Manttoba, Wirmipeg,"
+Canada, 1974.
+
+[PAGE 9]
+PROGRAM. DOCUMENTATION
+
+[PAGE 10]
+FnJN..
+TITUD
+YOU utA\IT TO ANSWER\QUE TIONS OR SEE RESULTS?
+1MSWER PUES.TIOS
+2 = SEE RESULTS'
+?1
+QUESTION OAI THE BASIC ASSUMPTION
+THE ENERGY CRI SI 5 IS A SERIOUS PRO BLEM.
+1 = AGREE, 2 =DI SAGREE OR NOT SURE
+?
+9UESTIONS ON' THE.GOAL --. REDUCE DEPENDpE ON IMPORTED' Op.;.
+IN THEICITE .13 TWEEN-15RAEL AND THERABS,WHICH SIDE DO YOU
+SYMPAT ZE 'WITH M 1EISRAEL:-ORTHERABS?'
+-.1=I .RAEL, 2 = AR v_.3 = NEITHER, 4 = BOTH, 5 . 'claT SURE
+,.
+WE NEED ARAB OIL.
+FIND WAYS TO GET
+ISRAEL LESS.
+1= AGREE, 2 = -DI
+11
+OF; .OUR GASOL INIF HERE. AT HOYIE,HAD BETTER
+ONG WITH THEARABS EVENIFTHAT .MEANS SUPPO RTING
+'3NOT SURE
+IF tqh: YIELDThARAB RESTra CTIONS OVEROIL 'NOW, WEWHLL SOON FIND:
+'THE ARABS DICTATING MUCH. OF 0 S. FOREI GN. P C * I CY, MD THAT I S WRONG..
+.1AGREE, 2F.DISAGREE, 3 = NOT SURE
+DO YOU FAVOR ATA4EOVERAND INTERNATIONAL I,ZATIONI OF14..ARAB OIL
+FIELDS BY THEIL--CriN SIN ING NATIONS?
+1,FYES, 2NO, 3=stir*:
+?P.
+11
+
+[PAGE 11]
+co YOU FAVOR A CUTBACK IN OILPO RTS' FkM ABROAD, EVEN IF IT MEANS.
+GOING TO -AN ODD -EVES PAY RAA'IONINfi 0 F GASOLIr El;
+" YES, 2 m NO, k".3la NOV SURE.
+QUESTION.S ON THE SUBSOAL,REDUCE CONSUMPTION '^O.F;SA.SOL
+IF YOT.1 .TRAVEL TO141/AT lEANS Di) YOU 11SETO SET TO
+CAR, TRA I N -.8173.WALK, O Ft HO W?
+1CAR, 2 = BUS,3 b WALK,= TRAIN,5THn-R
+?I
+ASKED ONLY OF THO SE WHO !ISE A CAti 2
+4
+Y
+SUPPOSE, YOU HAD NO AUTO.Y1013IL E, HOW IlOrIL. D YOU THEN CET. TO WORK--
+BY TRAIN, .ROS WALKon HOW?.. ,.
+'1=F3IJS,2 = WALK, 3 = BI,CYCLE,14= TRAIN,5 = OTHER,
+6 = NOTHING -,- ,CO IlLDN ' T GET TO WORK.
+?S
+SUPPOSE YOU HAD TO REDUCE .TAE NUMBER OF MILES YOU DRIVE BY 'ONE-
+FOURTH.HOW DIFFICULT WOULD IT BE FOR YOU TO MEET THIS REQUIREMENT
+VERY' DIFFICULT, FAIRLY DI FF I CULT, OR NOT AT ALL DI FFI CULT?I.
+.1= VERY -DI PEI CrILT 2 `r=FAMILY DIFFICULT, 3.= NOT Air ALL
+QUESTIONS ON THE OPTION'S
+OPTION1--INCREASE THE I1iICE OF GASOLINE
+HY TARIFFS'a
+,- IF THE PRICE OF GASOLINE GOES UP 10 CENTS A GALLON,-
+DO YOU BELIEVE, YOU WILL CUT DO ITV .YOUR. URI VINO .?
+1= YES-2= NO
+71
+IF YES, WILL' YOU CUT no WV YOUR DUIV.ING A GREAT DEAL,
+SOME, OR ONLY A LITTLE ?
+1= A GREAT DEAL2= SOYIE3= A L I TTLE
+?2
+
+[PAGE 12]
+ONE WAY TO CUT OIL IMPORTS INTO THIS CiOUNTRY
+TO INCREASE .THE, TARIFT OR TAX, WIALL OIL BROUGHT
+INTO THE UNITED STATES F1.1011 FORLEGN SOI1RCESTHIS. WOVCD
+RAISE: GASOLINE ,PRICESDISCOURAGE PEOPLE FROM USING
+AS'MUCGASOLINE:WOULD YOU FAVOR OR OPPOSE SUCH AN
+INICREA F. AN THE. i'leyRIFF, OR TAX, ON OILIMPORTED FROM ABROAD ??
+I.=AVOR2701 OPPOSE3NOTNOT SURE
+OPTION 2 -- INCREASE THE PRICE OF GASOLINE
+BY A DIRECT CAT THE PUMP) GASOLINE TAX.
+IN ORDER TO CONSERVE OIL., WOULD YOUFAVOR OR OPPOSE
+A 10CENT TAX ON GASOLINE, WHICH WOULD BE DEDUCTIBLE
+FROMYOUR. FEDERAL INCOME TAX, IF THIS WOULD HELP US
+BECOMELESS DEPENDENT ON ARAB OIL ??
+1=.FAVOR2 = OPPOSE3 = NOT SURE
+?3
+:IN ORDER TO CONSERVE OIL, WOULDYOU, PREFER A
+IQCENTAGALLON INCREASE IN THE GASOLINE TAX, WHICH
+WOULD BE DEDUCTIBLE FROM YOUR FEDERAL INCOME TAX,, OR AN
+IICENTAGALLON RISE IN THE: COST. OF GASOLINE AND FUEL OIL
+At. A RESULT OR THE TARIFF ON IMPORTED OILFROM ABROAD 2?
+1 = PREFER 10CENT TAX2 = PREFER IMPORT ..-TAX3 = NOT -SURE
+?1
+IN ORDER TO CONS1ERVF. OIL, WOULD YOU PPEFER A
+0CENTAGALLON INCREASE IN THE GASOLINE TAX, WHICH WOULD
+E DEDUCTISLE FROM YOUR FEDERAL INCOME TAX, OA AN 11- CENT A GALLON
+RISE IN THE COST OF GASOLINE AND FUEL OIL AS A RESULT
+OF THE TARIFF ON IMPORTED OIL FROM ABROAD ??
+1= PREFER 20CENT TAX2 = PREFER IMPORT- TAX 3 = NOT SURE
+710
+OPTION 3-- REDUCE THE SUPPLY OF GASOLINE 'BY
+RATIONING' 0-R ALLOCATION
+INORDER TO CONSERVE OIL, WOULD YOU HAVE MANDATORY.
+GASOLINE RATIONING ON AN ODDEVEN BASIS WITH NO INCREASE ,IN
+THE PRICE OF' GASOLINE, OR NO RATIONING BUT AN'
+11 CENTA GALLONIII SE IN THE PRICEOF GASOLINE AND. FUELOIL
+ASA RESULTOF THE TARIFF ON IMPORTED OIL FROM ABROAD ??
+1=RATIONING2PREFER. IMPORTS TAX'3 = 'NOT SURE
+71
+
+[PAGE 13]
+-"...4411111
+P4ESIDENT-FORD'SAYS AMERICA BUST REDUCE ITS
+t3SE OF GASOLINE*IN ORDER TIIACCOMPLISH THIS._WHICH
+-WOULD YOU .PREFERTHEPRESIDENTS PLAN TO,IMPOSE TAXES.
+';THAT WOULD RESULT IN HIGHER 'GASPRICES, OR A NATIONWIDE
+VRATIONINa.PRO:PRAM77
+TAXES2 .0RATIONING
+'BONE.
+GET-fqITUD
+RUN
+ATITUD
+m YOU "ANT TOANSWER QUESTIONS OR SEE RESULTS?-
+1.,--.ANSWER QUESTIONS
+2SEE RESULTS
+72
+'ALL FIGURES ARE PERCENTS
+r,
+QUESTION Oiv THEBASIC. ASSUMPTION
+1
+THE' ENERGY CRIS/S.IS A SERIOUS PROBLEM.
+4ARRIS, JAN.1975
+AGREE';.::84
+DISAGREE 416
+NOT'SURE''.,,
+16PEOnOtE HAVE RESPONDED
+HARRIS .JULY,1974
+67
+.34.
+.
+FILE: DATA
+,75.
+25.
+7
+QUESTIONS pN THE GOAL --REDUCE DEPENDENCE ON IMPORTED OIL
+,
+IN THE DISPUTE PETWEEN ISRAEL ANDTHE ARABS,. WHICH SIDE DO YOU
+SYMPATHIZE WITH MORE ''.--, ISRAEL OR THEARABS.?
+HARRIS, JAN.,' 1975HARRIS, NOV., 1973FILE DATA
+ISRAEL.52.390
+THE ARABS:74.0
+NEITHER24.. 30100
+.
+00TH,160
+NOT SURE: 11110
+1PEOPLE. HAVE RESPONDED
+14 10
+
+[PAGE 14]
+WE NEED ARAB. 0 IL FO R OUR (iASOLPsJEHPRE AT HOME, SO WE-HAD BETTER
+FIND WAYS TO GET ALONG. WITH THE ARABS EVPII IF THAT MEANS SUPPORTING
+SRAEL LESS.
+.HARRIS, JAN., 1975FILE DATA
+'AGREE-eo. 100
+DISAGREE68. 0
+NOT SURE120
+.1.PEOPLE . HAVE RESPONDED
+IF WE YIELD TO ARAB RESTRICTIONS OVER01,LNO W, WE WILL SOON FIND
+THE ARABS DICTATIMUCH OF U.S. FORF.IcPOLICY, AND THAT IS WRONG.
+HARRI S, JAM,19,75FILE DATA
+AGRE.E76100.
+DI SAGREE13, 0
+NOT SURF1 10
+1PEOPLE HAVE RESPONDED
+.D0 YOU FAVOR A TAKEOVER AND INTERNATIONAL I Z AT ION. OF THE ARABIL
+FIELDS BY THE 0 I L - CONSUI IN. 'NATION S?
+HARRIS, JAN ,1975FILE DATA
+YES.ri250
+NO
+0
+5F100
+MOT STTHE17'0
+PEO PLE HAVE FIESPONDED
+, .
+DO YOU FAVOR A CUTBACK IN OIL IMPORTS FROM ABROAD, EVEN IF IT MEANS
+GOINC1_,TO AN o fin- F.Vn1 DAY RATION IN G OF GASOL IV E?. .
+tHARRISJAN ,1975FILE DATA
+YES51109
+NO 340 .
+vn T SURE_____1.50 .
+1 PEOPLE HAVE RESPONDEDi
+QUESTIONS OM THE STITIGO ALREDUCE CONSUMPTION .OF GASOLINE
+IF' YOU TRAVEL T'IJHAT MEAN 5 DO YOU USE TO GET TO WORK --
+CAR, TRAIN, [WS, WAL IS, OR HO W?
+GALLUP, JAN. ,1975FILE DATA
+CAR74,100
+BUS7 0
+WALK5 0
+TRAIN2 0
+OTHERs 12,0
+1 PEO PL.F HAVE RESPONDED
+- .
+ASKED ONLY OF THOS}WHO USE A CAR:
+.. . .
+SUPPOSE YOU HAD NO AUTOMOBILT-.7., HOW WOULD YOU THEN GET TO WORK - -
+BY TRAIN, BUS, WALK, 0 R HOW?
+GALLUP, JAN 1 e's1975FILE DATA
+BUS. '26t0
+WALK_ .250
+BIKE9 0Q,
+TRAIN2 0
+OTHER
+. 5 100,
+NOTHING33-0
+1 PEOPLE HAVE RESPONDED
+15
+11.
+4
+
+[PAGE 15]
+-------_,-..........
+SUPPOSE. YOU HAD, TO REDUCE THE NUMBER OF MILES YOU DRIVE BY ONE -
+FOURTH.HOW DIFFICULT WOULD IT BE FOR YOU TO MEET THIS REQUI AEMENT:.
+.VERY DI FF IULT.. FAIRLY DIFFICULT, OR NOT AT ALL DIFFICULT?
+,...
+'G LLUP, JAN., 1975FILE DATA
+0
+100
+0
+0
+1PEO PL E HAVE RESPONDED
+,.
+VE'RY -DI FFI CPLT3
+FAIRLY; "23
+NOT AT ALL40
+NNT SURE,6
+QUEST IONS ON THE OPTIONS
+A
+OPTION1 INCREASE THE PRICE OF GASOL INE
+BYTARIFFS
+IF THE PRICE OF GASOLINE GOES UP 10 CENTS A GALLON.,
+DO YOU BELIEVE. YOU 'WILL CUT DOWN YOUR DRIVING ? ?
+GALLUP, JAN., 1975FILE DATA
+YES49100
+NO 480
+PEO PLE HAVE RE S PON ED
+IF YES, WILL YOU CUT DOG,NYOUR DRIVING A GREAT DEAL,
+SOME, OR:ONLY A LITTLE ??
+GALLUPJAN. , 1975FILE DATA
+A GREAT DEAL11
+rcra-
+A LITTLE
+_
+' 11
+1 PEOPLE HAVE RESPONDED
+ONE WAY TO CUT OIL IMPORTS INTO THIS COUNTRY.
+IS TO INCREASE THE TARIFF, OR TAX. ON ALL OPL BROUGHT
+INTO THE UNITED STATES. FROM FORT EGN SOURCES.THIS WOULD
+RAISE GASOL INE PRI CES AND DISCOURAGE PEOPLE FROM USING
+LAS MUCH GASOLINE.WOULD YOU FAVOR OR OPPOSE SUCH AN
+INCREASE IN THE TARIFF, 'OR TAX. ON OIL IMPORTED FROM ABROAD ? ?
+HARRIS, jAN., 1975FILE DATA
+FAVOR27
+OPPOSE.53o
+NOT SURE20100
+1PEOPLEHAVE RESPONDED
+16
+12
+
+[PAGE 16]
+OPTION2CREASE THE PRICE OF GASOLINE
+YA- DIRECT CAT THE PUMP) GASOLINETAX
+IN. ORDER. TO CON .RVE OIL, WOULD YOU'FAVOR OR 0Pk) SE
+A 10 CENT TAX aGASOLINE, WHIZH 103 UL D BE DEDUCTIBLE
+FROM YOUR ,REDAL INCOME TAX,' IF THIS WOULD HELP U$
+BECOME LESSENDENT ON ARAB OIL ? ?
+FAVOR
+OPPO SE
+NOT SURE
+HiIS, JAN.1975FILE DATA
+51- 0
+;
+25cr.
+1PEOPLE HAVE RESPONDED
+100
+IN ORDER TO CONSERVE 0 ILWOT12DYOU PREFER A
+-10-CENT- A- GALLON "INCREASE IN THE GASOLINE TAX, WHI CH
+T.DULD B'E DEDUCTIBLE ,FRON YO TYR FEDERAL INCOME TAX, 0 R
+I I -CENT-A-GALLON HI SE IN THF, CO ST 0 F GASOLINE AND FUEL. OIL
+AS A RESULT. 0 R THE TARIFF ON IMPORTED OIL FROM ABROAD ??
+°H-ARR I S,JAN1975
+PREFER 10-Cer4T . TAX60
+I ^IP-) RT TAX13
+NOT SURF,
+., 27
+/1.'
+,,
+-PEO PLE HAVE RESPONDED
+......,:.
+FILE DATA
+100
+0
+IN ORDER TO CON SERVE.0I LWOULD YOU PREFER A
+207 CENT-A-GALLON INCREASE IN THE GASOLINE TAX, WHICH WOULD
+BE,DEDUCT I BLE FROM YOUR FEDERAL INCOME TAX, OR AN 11-CENT-A- GALLON
+,RISEIN THE COST OF GASOLINE AND FUEL OIL AS A RESULT.
+OF THE TARIFF ON IMPORTED OIL FROM ABROAD?
+HARRIS JAN.1975FILE DATA
+PREFER 20 -CENT TAX38100
+PREFER IMPORT TAX290
+NOT SURF. 330
+1PEOPLE. HAVE RESPONDED
+17
+
+[PAGE 17]
+OPTIQN 3REDUCE THE SUPPLY OF GASOL INE BY
+RATIONING OR ALLOCATION
+IN ORDER TO CONSERVE OILWOULD YOU HAVE MANDATORY
+GASOLINE RATIONING ON AN ODDEVE4BASIS WITH NO INCTHE PRICE OF GASOLINE, OR NO RATIONINGBUT AN1 t-CENT-A-GALLON RI S.F.IN THE PRICE 0F GASOLINE ANDAS A RESULT OF THE TARIFFON IMPORTED OIL FROM,ABRO
+HARRI S.,JAN. ,1975
+RATIOAIING60
+PREFER IMPORTS TAX25
+NOT SURE.15
+1PEOPLE' HAVE H'ESPON1 DED
+'FILE, DATA
+100
+0
+0
+REASEIN
+FUEL OIL
+AD ? ?
+PRES I DENT FORD SAYS Al ER I CA.1 UST REDUCE ITS
+USE OF GASOL I N EIN 0 RDER TO ACCOMPLISH THIS, WHICH
+WOULD YOU PREFER -- THE PRESIDENTS PLAN TO IM PO SE T,,AXEltTHAT WOULD RESULT IN HIGHERGAS PRI CRS',. OR -A NATION-WIDERATIONING PROGRAM ??
+.GALLOP, JAN.,1975F I L. F: DATA
+TAXES320RATION IG . 55
+1PEOPLE HAVE RESPON1Df..2D
+CONE
+14
+18
+
+[PAGE 18]
+ATITUD Program LIstln
+10ON SS,C 723 Ei171, DC 171poDim AC 551
+30F1LE$- ATIV)
+40FOR N=1 TO 17
+50READ ECN3,
+150 : NEXT 'N
+70READ1 p
+00IF TYPO1 TAN 120
+90IF,END 01 THEN 120
+100PRINT #1 ;0
+110GO TO 90
+120.READ 01,1
+I30PRINT "DO YOU WANT TO ANSWERQiJESTIONS' OR SEE -RESULTS?"140 .PRINT "I = ANSWER QUESTIONS"
+150PRINT "2 = SEE RESULTS"
+160INPUT 0
+170I F 0=1 OR 0=2 THEN 200
+180PRINT "YOMUST ENTER1 OR 2"
+190GO TO 130
+200I F 0= 1TEEN 220
+2100 =0
+22Q. REM QUESTION 0V ASSUMPTION
+230PRINT
+240I F Q=1- THEN 270
+256PRINT "ALL FIGURES ARE PERCENTS"'260. PRINT4
+270PRINT "QUESTION,ON THE BASIC ASSUMPTION"
+280'PRINT
+290N=1
+300PRINT "THE ENERGY CRIS IS.A ,,sErizous PROBLEM."
+310I F 040 THEN 360.
+320PRINT "1= AGREE, 2 =DI SAGtiEE OR NOT SURE"
+330INPUT Ft
+340I F R<1 OR R >2 THEN 330
+-350IF 0=1 THEN 380
+360H=2
+370GOTO 400
+380H=
+390READ .#1., 1
+400GO SUB H O F 3580, 3710
+410PRINT ,
+420I F Q=1 THEN 480
+430PRINT 'TAB( 8 );"HARRI S,JAN.1975HARRIS JULY, 1974" -TAB(/i8); 'FILE111
+440PRINT ."AGREE"., "84", "67",TAB( 52) FE 13450PRINT "DISAGREE OR ","16 ","34", l'AF3( 50, EC 23460PRINT "NOT SURE"
+470PRINT T;"P-EOPLE HAVE RESPONDED "
+480PRINT-.
+490REM QUESTIONS ON THE GOAL
+500N=2510. . GstoHARRI S"
+520PRINT "QUESTIONS ON THE GOAL-- REDUCE DEPENDENCE ON IMPO RTED OIL"530PRINT
+.540PRINT "IN THE ,DI SPUTE BETWEENI SRAFL AND 'THE ARAF3S, WHICH SIDE DO (0
+15
+19
+
+[PAGE 19]
+55.0"SYMPATHI 4E, WITH NIORE, - I S.THE ARABS?"
+S60IF Q= 0 THEN ROO
+'PFaNT "1ISRAEL, 2 = ARABS,THEt.R, 4 = BOTH; 5NOT SURF:"
+!' :589INPUT 1-1.
+590.I F ,1141R> 5 THEN 530
+500-J, .00 StIVI1F' .35801 3710
+610IF 0= 1 THEN 690)
+.620.TAB(6).tARRIS, JAV4. 1975 ',HARRIS, NOV, 1973";,TAB(48);"FILE11e
+630PRINT "I SRAM". 52", "39"; TAB( 52); FE 13.
+6110,PRINT "TARABS ","y1 "; TAB( 52); FC 23
+650PRINT "NI THEW',"24'1,0"..30";,TAB( 52) ; FC 33
+660Pi-11\7T "BO H ",''6 ","16", TAB( 52) ;IrE 43
+670PRIyr."NOT SURE", "-11", ".1 I"., TAB( 52) ; FE 53.
+689PRINT T; "PEO PLHAVF. RESPON DEO"fi
+690PRINT
+700. N=3
+71.0PRINT "3.;F: NEED ARABIL FOR 0,p1i VASIL INE HERE AT 1-10'4E,SO WE HAD BE1f
+,720.. PRINT "FIND. WAYS TO SET .ALON.G WI TH THE ARABS EVENI F THAT MEANS SUP.
+'730PRINT- "ISRAEL LESS."
+740IF P= 0. THEN .770'.
+(T,
+750.GO SUB 3500
+760.GOTO780
+770GO St.ifj3550
+780GOSUB H OF3580, 3710
+790IF 0=1 'THEN840
+800'PRINT"AGREE", "20", FC13
+.810.PRINT"DI SAGREE""63".0EC,23
+820PRINT "NOT SURF."'"12", E(11
+830PRINT T;-"PEOPL; F. HAVE RESPONDED"
+£3110PRINT
+.850N=4
+860PRINT "I.F WE YI Fr,, 11. TO. ARAB RCTI ON S,0 VER 0 IL Ni T.i7,'WE WILL SOON I
+870. PRINT "THE ARABS; DIGTATINS 'ITCH OF iy..s.FOREI SN POLICY, AND- THAT -ISO
+.880IF 0=0 /HEN 910890 700SUB 3500'
+900 .GOTO:920
+910GO SUB' 3550
+920
+') 930
+,94.0
+950
+960
+-97\0
+S980
+990
+1000
+1010
+1620
+1030
+1040
+3050
+GOSUB,H OF 3580,3710
+IF 0=1 THEN 980
+PRINT "AGREE","76",FE1]
+PRINT"DISAGREE","13""FC2)
+PRINT "NOT SURE","--11",FC31
+PRINT:T;"PEOPLE HAVE RESPONDED"
+PRPNT
+N=5.
+PRINT "DOtou FAvaIRA TAKEOVER AND IN' ERNATI1VALIZATION OF THE AHF*
+PRINT "FIELDS BY THEOIL-caysumivnNATIONS?",
+IF 0=0 THEN 1060.
+PRINT "1= YES; 2 = NO, 3 = NOT -SI1RE"
+rv)stril 350
+GOT,) 1070
+1060SOSUB 3550
+1070.GO SUB H OF 3580, 3710
+1080.I F1THEN 1130
+20
+GA
+.16
+
+[PAGE 20]
+1090PRINT "YES" "25"; FC 1)
+000- PRINT "NO".,";58",FC
+...1110PRINT "NOT SURE ","FC 3]
+1120'PRINT Tr'PEOPLE, HAVE RESPONDED"
+,1130PRINT
+1140,, '.1=6
+1150'PRI VT "DO YOU FAVOR A .CUTBACK', IN OIL IMPORTS FROM -OBROAD,
+-1160PRINT "GOING TO AN" ODD-EVEN DAY RATIONING. OFGASOL :NE?"
+.1170.IF 0=0 THEN'' 1210
+1180PRINT "1m YES, 2 =..N/O,3 = NOTSURE "
+'1190GOS119 35201'
+1200GOro 1220
+1210GO SUB 3.550 (
+1220,2: GOSLIBH OE' 3580, 3710
+1230rF Q=*-1 THEN 128°-
+1240PRINT` "YES","51", FC 1]
+ipsoPRINT "NO", "34", FC 21
+1260PRINT, "NOT SORE ",";15"; FC 31
+1.270PRINT. T; "PEOPLE HAVE. RESPONDED"
+1280PRINT
+1290REM 0[1E510:VS ON THE SURGOAL
+1300PRINT
+131\0G'S="RALLUP'r
+1320PRINT " QUESTIONS ON THE. SUBGOAL -- REDUCE CONSUMPTION OF GASOLINE ".
+11330PRINT'
+1340N=7
+'1350. PRINT "IF-YOTJ TRAVEL. TO`1.70.RK,WHAT MEANS DoY04411SE.1 TO GET TO WORK";
+IF 0=0THEN1420
+1360PRINT "CAR" TRAIN,. BUS, WALK,R 'HOW?",
+.
+13,80PRINT "1r CAR; 2 =3 = WALK, 4 =2TRAIN,=THER "
+1390INPUT R
+i
+1400 IF R <1 OH R >5 THEN1390
+1410I F Q= 1THEN1430
+1420G0SUB 3550
+1430GOS[1B H OF 3580,3710
+1440I F 0= 1THEN 1510
+.1450PRINT "CAR", "7/4", EC 1]
+.;:', F FC 2C3]
+1460 -PRINT.T "BU"'"
+71470PRINT "GIALK" "
+1.480PRINT "TRAIN","2",FC4]
+1490PRINT "OTHER ","12", FC 5]-
+1500PRINT T ;" PEOPLEHAVE RESPONDED"
+1510PRINT
+1520N=8
+1530.IF 0=0 THEN' 1550
+1540IF R> 1THEN1590
+1550PRINT "ASKEDONLYOP THOSE WHO USE ACAR:"e
+1560,PRINT d WOR
+1580PRINT "BY TRAIN, BUS, WALK, OR HO"
+1570PRINT "SUPPOSE YOU HAD NOAUTOMOBILE, HOW WOULD YOstI THEN GET T
+1590I, F Q= 0 THEN 1680
+1600I FR> 1THEN1790 I.
+1610PRINT' TAB( 3);k
+1620PRINT "1 = BUS, 2 = WALK, -3 ,= BICYCLE, 4 = TRAIM, 5120 TITER, "
+EVEN IF'
+17
+21.
+
+[PAGE 21]
+1630PRINT. TAB(3);,
+1640PRINT= NC)TRINC4 -- CO IlLDN ' T SET TflwOkli "
+1650 r. INFOT R
+1660IF R<1 ON R>5 THEN1
+1670IF 0= 1THEN 1690
+...1680GO SUB 3550
+169090511B lig OF 3580,3710
+1.700I F A= 1 THEN- 1780
+1710PRINT ',BUS ","1.3
+1720PRINT "WALK ","25", FC 231730PRINT "BIKE ","9", FC1740PRINT "TRAIN ","2", FC it 1
+1750PRINT "OTHER ","5" FC 511760PRINT "NO T'HIN G", "33",FC 631770PRINT T.:"! PEOPLE HAVE RESPONDED"
+1780PRINT '
+1790N=9
+1800PRINT "SUPPOSE YOU HAD TO REDUCE THE \WISER OF" MILES- you DRI VE BY .81810PRINT "FOURTH.HOW DI FFI CULT WOULD I T BE FOR Y311 TO MEET THI'S REC.1820PRINT "VERY DIFFICULT, FAIRLY DIFFICULT, OR NOT AT ALL DIFFICULT?"
+1830IF 0=0 THEN- 1900
+1840PRINT TAB( 3);
+1850PRINT. ".1= VERY DI FFI CULT,
+10 PRINT TAB( 3) ;
+1870INPUT R
+1880IF R <1 OR R >4 THEN 1870
+1890I F 0= 1THEN 1910c3:
+1900GOSUB 35510
+1910.GO SUB H. O F .3580, 3710
+1920IF 0 =.1THEN-- 198.0-
+1930PRINT' "VERY DI FFIC.ULT", "11", EC 111940PRINT, "FAIRLY1", "23", FC 23
+1950PRINT "NOT 'AT ALL ", "40", FC 33.
+1960PRINT "NOT SURE", "6", FC 41
+1970PRINT T;"-PEOPLE HAVE RESPONDED" N
+1980PRINT
+1990PRINT "'011EsSTIONS ON THE OPTIONS"
+2000PRINT
+fi2010PRINT "OPTION. 1--INCREASE ..THE .PRICE OF GASTh INE"
+2020. PRINT "-;TARIFFS"'iL IN( 1 )
+2030PRINT a
+2040 = 10
+2050PRINT "IF' THE PRICE 0.F GASOLINE GOES UP 10 CENTS A. GALLON
+18060PRINT "DO YOU. BELIEVE YOU WILL CUT -DOWN YOUR DRI VING ??"
+2070IF 0 =0 THEN .alio
+2080PRINT. "1= YES2 = 'NOt 2090INPUT R.
+2100IF R< 1 OR R> 2 THEN 2080
+2110REM
+2120GO SOB H 0 F580, 3.7102130IF 0= 1THEN 24-80
+2140PRINT LIN( 2 )-TAB( 8 )1 "GALLUP, JAN.-,1975FILE DATA"'2150P R NT " Y E S " "49"-; TAO( 33); FC 11
+2160PRP T "NO '' "48"1 TALK 33) ;EC 23
+FAIRLY 'DIFFICULT, 3 = NOT AT ALL..."
+22
+18
+
+[PAGE 22]
+2170PRINT T;"PEOPLE HAVE RESPONDED"
+2180PRINT
+2190.1=1.1
+2200.IF (0320 THEN2220
+2210IF1THEN '2360
+2220PRINT "I.E YES, WILL Y'llt eltr irn.A;
+.2230PRINT "SOME, OR ONLY A LITTLE ??"
+2240IP .Q=0 THEN -2280
+2250pRINT "1= A GREAT DEAL/2= S)ME
+2260INPUT
+'2270IF R< 1 OR R.1.3 .THEN, 2250
+2280PRINT
+2290GO S1113,0 H OF 3580, 3710
+2300'I F 0=1 THEN 2360
+2310PRINT TAB( 10); "GALLuP, ijAN. ,1975FILE DATA
+.2320PRINT "A ,GREAT DEAL11"; TAR( 34); EC 1.1
+2330'PRINT "SOME26"; TAB( 34) ; FC 23
+2340PRINT "A LITTLE11";TAB(34);FC 31
+2350PRINTt T; "PEOPLE HAiiE RESPONDED"
+2360N=12
+2370PRINT LIN(2); "ONE. WAY TO CUT OILIMPORTS INTO THISCOATRY".
+2380PRINT "I S TO NCRE,ASE THE TARIFF, OR. TAX,.. 0\1 ALL-) IL BROUGHT"
+2390PRINT "INTO THE. UNITED STATES FROA FOREI btsI,SOT1RCEs.THIS 1,6ULD"
+2400pi-11NT "HAI SE niksoLINE PRICES AND DISCONAGE PEOPLF!!- FROM TiSING11-
+2410PRINT "AS MUCH GASOLINEWOULD YOU FAVOR OR OPP0.5,E SUCH AN"
+2420PRINT "INCREASE IN THE TARIFF, Oft .TAX, ON OIL IMP() RTEDFROM ABROAD?
+24.30IF 0=0 THEN, 247064
+2440?HINT "1= FAVOR2 = OPPOSE3 = NOT SURE"
+2450INPUT R
+246-07-- I F R<-111?-9 THF.A1 244a
+3470REM:.
+2.480GO SUB H OF 35;t30,3710
+249.00=1 THEN 2550
+2500PRINT( 1 ) ; TAB( 10 ); "HARRI S JAV. ,1975
+2510PRINT "FAVOR";TABC 20) ; "27";TAB( 34; Fri
+PRINT "OPPOSE"; TAB( 20 ); "53"; TAB( 34) ; FC23
+2530PRINT "NOT SURE"; TAB( 20 ); "20";TAB( 34 ); EC 3f
+2540PRINT TVIPEOPLE HAVE RESPONDED"
+2550 ,PRINT LIN( 2) ; "OPTION 2 -- INCREASF: THE PRICE OF GASOLINE"
+2560'PRINT "BY A. pIHF.CT( AT, THE (PUMP) GASOLINE TAX"
+2570N=13
+2580PRINT L( 2 ); "IN ORDER TO 'CONSERVE OIL, w0i,ILD YouA.vf)R OR OPPOSE ".
+2590PRINT "A 10 CENT TAX ON GAST3L INE,U.THI.11E' DEDiti IttFti,
+20049,. PRINT "FROA YOUR FEDERAL INCOvIE TAK,THIS ipiOULD ,HELP US','
+2610PHINTr, "BECOME LESS DEPENDENT ON ARAB 0 kl_.',.??"
+.2620IF 0=0 THEN 2660
+2,3pPRINT ",1= FAVOR2 = OPPOSE
+2640INPUT
+265r0IF R<1 OR n;."3 THEN 2630
+2660REM
+2670G0 SUBOF 3580, 3710
+2680IF 0=1 'THEN 2740
+2690PRINT' LIN( 2); TAB(10); "HARR' S, JAv.,19-15...,FILE DATA"
+2700PRINT."FAVOR"; TAB( 20) ; "51"; TAB( 34); FC 13
+1110 VINIG A Groot
+= A LITTLE"
+at?
+FILE DATA"
+3.= NOT SURE"
+23
+19
+
+[PAGE 23]
+2710PRINT. "IPPO SE"; TAB( 20); "PA"; TABC14 ); ECP.1
+2720PRINT 'NOT SURE"; TABC 20 ) ; "25"; TAM 34);k33
+,2730PRINT T.1 "PEOPIA HAVE RESPONDED"
+2740PRINT
+2750N$14
+_2760PRINT LIN ( 2 )"IN ORDER.n CONSERVE 0 IL,4.11(11.0 YOU PREFER,A. "
+2770paiNT ,610-CENT-A-CIALLON INCREASE IN THE (aASOLINE TAX, WHIM.'"
+2780iiRINT "WOULDBEDEDUCTI BLE FROM YOUR FEDERAL INCOME TAX, OR
+279'0PRINT"11-CENT-A-GALLON RI SE II THE COST. OF GASOLINE AND FUEL OIL"
+2800PRINT "AS A RESULT OR THE TARIFF ON IMPORTED OIL, FRONT At3R9AD ??"
+-2810IF()=40 THEN 2850
+2820PRINT "1=' PREFER 10-CENT TAX2 = PREFER IMPORT TAX3 = NOT SUS
+2830INPUT R
+2840IF R <1 OR R >3 THEN 2820
+2850REM
+2860GO SUB 11 OF580, 3710
+2870F 0= 1THEN 2930
+2880, PRINT LINC2); TAB( 10); "HARRI S JAN.41975
+2890PRINT "PREFER 10-CENT TAX60"; TAB( 314);EC
+2900PRINT "PREFER IAPORT TAX13"; TAB(I34) ; FE
+2910IPRINT "NAT SURE27"; TAB( 3/4 ); FC 3) /
+.2920PRINT T; "PEOPLE HAVE. RitSPONDED"
+2930Na 15
+'2940 ,PRINT L IN( 3 ); "IN ORDER TO CON 4:14VE OIL, WOULD. YOU PREFER A"
+2950PlirIT "20-CENT- A- GALLON INCREASE.THE GASOLINk TAX, WHICH WOULD"-°'
+2960PRINT ,"BE DEDUCTIBLE FDR071 YOUR FEDERAL INCOME TAX; O'R AN 11-CENT-A111
+2970PRINT"RISE INTHE CO ST OF GASOLINE AND FUEL .0 IL AS A RESULT"
+.2980. PRINT "OF THE TARIFF ON IMPORTED OILFROMABROAD' ??."
+2990IF 0=0 THEN 3030
+3000'PRINT "1= PREFER 20-CENT TAX2 = PREFER IMPORT TAX 3 = NOT SURA
+3010 INPUT R
+3020I F. R< 10 R- 13>3THEN 3000
+3030REM
+3040GOSUB H OF 3580, 3710
+-3050I F 0= 1 THEN N3110
+3060PRINT LIN(2) TAB( 10); "HARRIJAN..,1975FILEDATA"
+3070,PRINT "PREFER 20-CENT TAX33,"; TA13( 34) ;FC11
+3080PRINT "PREFER IMPORT TAX29::; TA13( 347; FE 23.
+3090PRINT "NOT SURErTAB (.343 ; FC 3
+-:31.00PRINT T; "PEOPLE .HAVE-IiE.SPONDED"
+3110.PRINT LIN ()',o"0 PT ION 3 -- REDUCE THE SUPPLY 7 F GA.S3L, I 'NE By"
+3120PRINT "RATIONING OR ALLOCATION"
+3130TI=16
+3140PRINT L IN (2); "IN ORDER TO CONISERI7E OIL, WOULD YOU'. HAVE MANDATORY"
+3150PRINT"GASOLINE. RAtI9NGAN 0 DD-E.VEBASI STH NO INCREASE IN"
+3160.,- PRINT "THE PRICE. OF GASOLINE, OR NO RAT &UN G BUT AN"
+3170 :PRINT "11-CENT- A-GALLON RISE IV THE PRI E OF GASOLINE ANDFUEL
+318(P PRINT "AS A RESULT OF THE TARIFF ON IPORTED OIL FROM ABROAD?"
+3190IF Q., 0 THEN 3230
+3200PRINT1= RATIONING2 = ,p REFER IMPORTS TAX3 =NOT SURE"
+3210 %,,,,INPUT
+3220%IFR< 1311 R> 3 ,THEM' 3200
+3230REM
+3240GOS(1D H3580, 3710
+FILE DATA"'
+20
+24
+
+[PAGE 24]
+3260 ,:PRINT ,LIN ( 2), TAEt( 10)I"HARRIS, JAN.", 41975FILE DATA"
+3270 PRINT "IAATIONING"TABC 20? ; "60"; TAfic 34 ) ; FC 13
+3280PRINT "PREFER ,IMPORTS. VAK"TAD ( 20) ; "25"; TAB( 34); FC 21
+3290PRINT "NOT SURR"TAI3(20);"15"3 TAB( 34); FC 33.
+3300PROT TI"PEOPLE.HAVE :RESPONDED" .
+.3310Ns#7
+3320. PRINT LIN( 311"PRE'SI DENT FORD SAYS AMERI CA, MUSTREDUCE ITS"
+3330pRINT ;'USE OF RAsOLINE.IN ORDER TO ACcOMPL; SH THIS,.!!'!
+33210PAINT-1,.'101MILD YO It PREFER -- THE PRESIDENTS PLAN, TO IMP° SF TAXES"
+33,50PRINT "THAT. toCIuLD RESULT IN HIGHER GAS PRICES, ORA', NATIONWIDE
+3360PRINT '_'RATIONING PRO GRAM? ?"
+3370I F0 THEN , .3.410
+3380PRINT "1 = TAXES2 = RATIONING"
+3390INPUT H
+3400.I F R< 1 OR R> 2 THEN 3380
+'3410REM
+3420GO SUB, H O F 3580;374 0
+3430Q.-7. 1THEN 3480/3440PRINT LIN ( 2.); TAR(10);,JAv., 1975FILE DATA"
+3450PRINT "IAXES"TABc 20); "32"1TAB( 3(-4 ); FE 11
+3460PRINT "RATION ING"TABc 20) ; "55" ; ,TABS 34) 1 FE 21
+3470PRINT T;"PEOPLE 0-1.AvE RESPONDED"
+'3480REM
+3490GOTO 3430
+3500REM PRINT SU13ROUTINE
+3510PRINT "1= AGREE, 2 =' DI SGREE, 3 = NOT SURF"
+3520INPUT
+35301 F R <1 OR R>3 THEN 3520
+3540F 0=. :1:THEN 3560
+3550.pRINIT 'TAR(+4); G%; ";JAN..,19 75", "FILE. DATA"
+3560RETURN
+3570REM ST/BROITTINIE FO 'H RECORDI VGMS T.0 F.
+3580READ # 1, 1
+359.0 < :MAT.HEAD # 1; A
+3§qoK=0
+31.0I F N= 1TFI,M 3f,0
+362M=N- 1
+3630FOR V= 1TOtvl
+3(?40K+FEN
+3650T N
+3660(=K+14
+3670.143=, AC K3
+3680 READ 01, 13690 :IATPRINT 01; pi
+3700RFTURN
+L
+3710REM SUBROUTINE FOR RETRIEVING ANSWERS
+3720Ti=0
+3730FOR I= 1 'TO EC,
+3740- RFAD1; k I
+3750T=T+F'C I.
+3760':' "MKT
+3770T 'IFNI 38 10
+3713 0FOR I d 1TOCN..3
+3790EuI 3= INT( FE 11;/,100+. 5)
+3800NEXT
+3/310RETURN-4,.
+3820DATA 24,5, 3,1,3; 3, 5, 6, 3, 2i 3, 3, 3, 3, 3, 3, 2
+3830END -
+25
+21

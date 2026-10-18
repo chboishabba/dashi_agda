@@ -26,12 +26,17 @@ import DASHI.Philosophy.MentalHealthWorkedExample
 import DASHI.Philosophy.PartialChartCategory
 import DASHI.Philosophy.PatternPreservingTeaching
 import DASHI.Philosophy.PhilosophicalPromotionBoundary
+import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeExact
+import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeRegression
+import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeCompletionExact
+import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeCompletionRegression
 import DASHI.Philosophy.PolyphonicRelation
 import DASHI.Philosophy.PowerAndGrammar
 import DASHI.Philosophy.ProcessCompositionLaws
 import DASHI.Philosophy.ProcessHistoryEquivalence
 import DASHI.Philosophy.ProcessOntology
 import DASHI.Philosophy.ReflexivePowerUp
+import DASHI.Philosophy.NonginOriginFormalizationExact
 import DASHI.Philosophy.RelationalAtlas
 import DASHI.Philosophy.RelationalEncounter
 import DASHI.Philosophy.RelationalProtocol

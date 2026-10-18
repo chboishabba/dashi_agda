@@ -28,22 +28,22 @@ import DASHI.Wikimedia.IbrahimSnowballTiwiSameExperimentFireBiodiversityCarbonEx
 ------------------------------------------------------------------------
 
 data EmpiricalEdgeKind : Set where
-  experimentDefinition
-  fireToWoodyStructure
-  fireToMammalResponse
-  shrubCatTaxonAssociation
-  predatorToRabbitRatDemography
-  hollowUnderstoreyMultiTaxonResponse
-  fireGroundCoverPredationMechanism
-  fireScarPredatorMovement
-  megaherbivoreTrailPredatorMovement
-  longFireExclusionVegetationFauna
+  experimentDefinition : EmpiricalEdgeKind
+  fireToWoodyStructure : EmpiricalEdgeKind
+  fireToMammalResponse : EmpiricalEdgeKind
+  shrubCatTaxonAssociation : EmpiricalEdgeKind
+  predatorToRabbitRatDemography : EmpiricalEdgeKind
+  hollowUnderstoreyMultiTaxonResponse : EmpiricalEdgeKind
+  fireGroundCoverPredationMechanism : EmpiricalEdgeKind
+  fireScarPredatorMovement : EmpiricalEdgeKind
+  megaherbivoreTrailPredatorMovement : EmpiricalEdgeKind
+  longFireExclusionVegetationFauna : EmpiricalEdgeKind
   longTermCarbonStock : EmpiricalEdgeKind
 
 data CarrierRelation : Set where
-  exactTiwiExperimentFamily
-  MelvilleIslandLocal
-  northernSavannaMechanismDonor
+  exactTiwiExperimentFamily : CarrierRelation
+  MelvilleIslandLocal : CarrierRelation
+  northernSavannaMechanismDonor : CarrierRelation
   northernTerritoryComparisonDonor : CarrierRelation
 
 record PrimaryEdgeSourcePayment : Set where

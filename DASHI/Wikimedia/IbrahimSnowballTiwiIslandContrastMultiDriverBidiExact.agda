@@ -102,20 +102,20 @@ careyEtAl2026 = island-contrast-primary-source
 ------------------------------------------------------------------------
 
 data Island : Set where
-  Bathurst
+  Bathurst : Island
   Melville : Island
 
 data ContrastCoordinate : Set where
-  islandIdentity
-  rainfallRegime
-  fireFrequency
-  fireSeverity
-  feralHerbivorePresence
-  feralHerbivoreActivity
-  catDensity
-  dingoPresence
-  understoreyState
-  mammalTrajectory
+  islandIdentity : ContrastCoordinate
+  rainfallRegime : ContrastCoordinate
+  fireFrequency : ContrastCoordinate
+  fireSeverity : ContrastCoordinate
+  feralHerbivorePresence : ContrastCoordinate
+  feralHerbivoreActivity : ContrastCoordinate
+  catDensity : ContrastCoordinate
+  dingoPresence : ContrastCoordinate
+  understoreyState : ContrastCoordinate
+  mammalTrajectory : ContrastCoordinate
   geneticConnectivity : ContrastCoordinate
 
 record IslandContrastBidiFrontier : Set where

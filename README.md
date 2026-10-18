@@ -22,6 +22,11 @@ the normative repository policy and preferred identifier order.
 
 ### Repository orientation and current status
 
+For a generated, source-derived table of contents of the `DASHI/` module
+tree—lane sizes, aggregate entrypoints, and dependency hubs—start with
+**[`Docs/ProjectMap.md`](Docs/ProjectMap.md)**. Regenerate it with
+`python scripts/build_project_map.py` after structural changes.
+
 The previous full README, including the detailed current lane/status orientation,
 is preserved verbatim at
 **[`Docs/RepositoryLongformREADME.md`](Docs/RepositoryLongformREADME.md)**.

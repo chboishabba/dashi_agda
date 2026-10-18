@@ -1,0 +1,541 @@
+[PAGE 1]
+International Education Studies; V ol. 8, No. 1; 2015 
+ISSN 1913-9020 E-ISSN 1913-9039 
+Published by Canadian Center of Science and Education 
+152 
+ 
+The Integration of Environmental Education in Science Materials by 
+Using MOTORIC Learning Model 
+I Wayan Sukarjita1, Muhammad Ardi2, Abdul Rachman2, Amiruddin Supu1 & Gufran Darma Dirawan2 
+1 Faculty of Education, Nusa Cendana University, Indonesia 
+2 Department of Environment Education, Post Graduate Programs, Makassar State University, Indonesia 
+Correspondence: I Wayan Sukarjita, Post Graduate Programs, Makassar State University, Indonesia. E-mail: 
+wayansukarjita@yahoo.co.id 
+ 
+Received: September 26, 2014   A ccepted: November 3, 2014   Onlin e Published: December 30, 2014 
+doi:10.5539/ies.v8n1p152            URL: http://dx.doi.org/10.5539/ies.v8n1p152 
+ 
+Abstract 
+The research of the integration of Environmental Education in science subject matter by application of MOTORIC 
+Learning models has carried out on Junior High School Kupang Nusa Tenggara Timur Indonesia. MOTORIC 
+learning model is a Environmental  Education (EE) learning model that colla borate three learning approach i.e. 
+character approach, contextual  and multimedia approaches. MOTORIC consists of seven components which 
+constitute the acronym namely: Motivation, Observation, Talking, Orientation, Reinforcement, Implementation 
+and Confirmation. The purpose of this research is to improve the junior high school students’ knowledge about the 
+environment. Futhermore, the study was carried out in Fe bruary-May 2014, with a sample of class VII students 
+of junior high school in Kupang Indonesia. Environmental education materials are integrated in this study 
+include energy, living sustem, pollution, waste management and conservation. Data was measured by using 
+multiple choice test of environmental knowledge. The data were analyzed using the Wilcoxon Signed Rank test. 
+The results showed at 95% confidence level ( α = 0.05), the integration of Environmental Education materials in 
+science subject matter of junior high school through application of MOTORIC learning models effectively 
+improve students’ knowledge of the environment by 64.15% in large groups of students meanwhile 68.07% in 
+small group of students. 
+Keywords: environmental, education, MOTORIC, model, science 
+1. Introduction 
+Nature is a source of life for humans. Therefore, ma n cannot escape from the reliance by nature and the 
+environment. To meet all the requirements (needs) and desires (wants), then humans explore natural resources 
+excessively without being followed by remediation measures or rehabilitation of natural resources. Environmental 
+degradation becomes result of community behavior and co mmunity attitude in managing their environment. The 
+fact is, many phenomena of environmental change in recent years have become an event that jolted our thinking. 
+Some unfortunate events caused by environmental degradation caused community to think backwards and connect 
+the incident with the educational process. For example: deforestation causes erosion, floods and landslides that 
+resulted in a lot of human casualties due to the avalanche of soil, the problem of air pollution in large cities due to 
+the heavy use of motor vehicles, water and soil pollution, the attitude of people who still throw waste and littering 
+the land, global warming, greenhouse effect and many others phenomena that portrait of environmental 
+degradation. From this fact, it is needed community awareness to protect nature that has limitations and should be 
+preserved for the continuation of existence of mankind in the future. 
+One effort that can be done by the government to prevent and save the environment at an early stage is to involve 
+children from an early age in caring and loving environment. This can be done either through formal, non-formal 
+and informal educational basis. Moreover, in formal edu cation, efforts to recognize and cherish the environment 
+can begin to introduce to students some of the terms a ssociated with the environm ent. Environment Knowledge 
+is needed to be implanted since early childhood with th e hope that this knowledge will be the foundation for 
+students to be even behaved positively towards the environment. Associated with this statement, Hendrawati 
+(2009) states that childhood  is a critical period as the future generation in the future. If knowledge is embedded 
+in the way childhood is true, can be expected when he reaches adol escence and adulthood, the stock of 
+[PAGE 2]
+www.ccsenet.org/ies International Edu cation Studies V ol. 8, No. 1; 2015 
+153 
+ 
+knowledge, understanding and attitude formation during childhood will bring enormous positive effect that will 
+affect their lives. 
+Introduction to the ecosystem, habitat and community livelihoods in the junior high and even elementary school 
+students should gradually from planting of knowledge about the environment. By simplifying introduced the 
+ecosystem knowledge that related to the community, the nature, the phenomena of the nature and community 
+expectations their livelihoods in the future. Knowledg e is information or intimation known or recognized by 
+someone. Furthermore, Soekanto (2003) also explains that knowledge is the impression in the minds of men as a 
+result of his senses and different users with conf idence (beliefs), superstitions, and enlightened wrong 
+(misinformation). 
+In another sense, knowledge is a variety of symptoms encountered and acquired through observation of human 
+senses. Knowledge arises when someone uses the senses or his reason to recognize certain objects or events that 
+have never seen or felt before. Knowledge is information that has been combined with the understanding and the 
+potential for further action, which is then attached to one’s mind. In addition, Notoatmodjo (2007) also explains 
+that knowledge can be interpreted as the result of human sensing of objects through the senses of its senses of 
+sight, hearing, smell, taste and touch at a time which in itself will generate a sensi ng knowledge. Much of the 
+knowledge gained from sensing the eyes and ears. It is greatly influenced by one’s knowledge and perception of 
+the intensity of the attention object which is a guide in shaping attitudes even one’s actions. 
+In general, knowledge of the predictive ability of something as a result of recognition of a particular form of 
+pattern s. Knowledge arises when someone uses the senses or cultural sense to explore an object, event or form 
+specific patterns that have never seen or felt before. Person ’s ability to use his senses to recognize an object or a 
+specific incident different from each other, depending on the sensitivity and intensity of sensory stimuli received 
+one. Therefore, it has a level of knowledge and level of intensity as part of a process of thought if someone on the 
+observed object or event. Accordingly, Bloom and Kratwohl (1956) as quoted by Rusman (2012) classifies 
+knowledge as cognitive domains (cognitive) in six aspects or levels of thinking processes, ranging from the lowest 
+level to the highest level. The sixth level or aspect in question is (1) knowledge (C1); (2) comprehension (C2); (3) 
+Applications (C3); (4) Analysis (C4); (5) Synthesis (C5) and (6) evaluation (C6). 
+The sixth level of knowledge of the above, then by Anderson (2001) revised by changing the form of the noun 
+into a verb, as well as a change in the level of the fifth and sixth. According to Anderson (2001) as cited in 
+Rohmad (2012) that the cognitive domains has six aspects or levels of thinking processes ranging from the 
+Remembering (C1), Understanding (C2), Applying (C3), Analyzing (C4), Evaluating (C5) to the level of the 
+highest thought process that is Creating (C6). 
+The Research in an effort to raise awareness of environmental preservation for junior high school students had 
+conducted by Puspandari (2008) by  applying Contextual Teaching and Learning (CTL) in the learning of 
+Population and Environment Education by sample is Junior High Schools students in Balikpapan, South 
+Kalimantan. The results of research show that, (1) In Population and Environment Education learning, students 
+need to gain direct experience or at least see the real case about environmental, (2) students began to realize the 
+importance of environmental sustainability, (3) application of learning model CTL in Population and 
+Environment Education learning able to optimize the appearance of intellectual potential, creativity, emotional 
+intelligence and student adversity (Puspandari, 2008). 
+In formal education in junior high school, knowledge about the environment can be provided to students, among 
+others, through the Environmental Education (EE) lessons. Environmental Education (EE) is the activity in the 
+field of environmental education organized by schools, consisting of elementary education, secondary education 
+and higher education and is done in a structured and tiered. According Arianto (1988) that the Environmental 
+Education (EE) teaching through formal education can be achieved through two approaches, namely:  
+(1) monolithic approach, the Environmental Education (EE) as a stand-alone subject in line with other subjects, (2) 
+an integrative approach, which combines or unites Environmental Education (EE) material into a particular subject, 
+for example in science lessons. However, when it sis re ferring to the concept of ESD (Education for Sustainable 
+Development) then Environmental Education in formal learning for primary and secondary education done in 
+integrative approach (Deputy for Environmental Communication and Community Empowerment, Ministry of 
+Environment, 2012). Associat ed with it, then if Environmental Educa tion is not listed in the curriculum for 
+Environmental Education can be taught in an integrated manner on other subjects. 
+Science is one of the subjects taught  in the secondary school. Science is the nature and meaning of various 
+phenomena/behaviors/characteristics that are packed into a set of theories or concepts through the scientific 
+process by humans. Theory or concept is organized into an inspiration for the creation of technology that is utilized 
+[PAGE 3]
+www.ccsenet.org/ies International Edu cation Studies V ol. 8, No. 1; 2015 
+154 
+ 
+for human life (Mariana, 2009). Science in the Junior High Schools include; material of physics, chemistry and 
+biology. 
+When a teacher wishes to integrate the Environmental E ducation materials into scie nce materials, will arise a 
+question, “how to integrate EE into science learning ef fectively and practicaly?” Effective and practical implies 
+that the model is applicable not inte rfere with subject matter that is scie nce, but easily insert environmental 
+education materials into the learning process. On this o ccasion, the authors introduce a learning model that can 
+be used in learning are integrated EE in science learning. This model is named MOTORIC which stands for 
+Motivation, Observation, Talking, Orientation, Rein forcement, Implementation and Confirmation that shows 
+seven components of learning process in this model. The learning model is based on the third approach is the 
+approach of learning EE character, cont extual and multimedia refers to the theories of behaviorism, in which 
+learning is a change in behavior as a result of the in teraction between stimulus and response. According to this 
+theory, the most important is the input in the form of stimulus and the output in the form of response. 
+The MOTORIC Learning is essentially a study designed to combine several strategies and learning approach that 
+is now being referred to as a learning approach that pr ioritizes active students to think, be factual, bold 
+expression, and is able to implement the knowledge obtained by students in the learning process in the form of 
+positive attitude in social life. MOTORIC stand for several aksioma i.e. Motivation, Observation, Talking, 
+Orientation, Reinforcement, Implementation and Reflection depicting the seven components of learning that 
+characterizes MOTORIC learning. MOTORIC learning model is applied in the learning environment is based on 
+three learning approach, which is environmentally approach to the character, contextual learning and multimedia 
+learning as the application of techno logy in learning. The three approaches, which approaches the character, and 
+the contextual approach to learning multimedia forms of learning approach es appropriate and in line with the 
+five learning component in the curriculum in 2013, are watching, asking, gather information, associating and 
+communicating. 
+Character is a learning approach that is more about the attitude that characterizes eac h individual student. As 
+Rohman (2012) explains that the character is a way of thinking, attitude and behavior that is characteristic of 
+each individual to live and work togeth er, both within the family, community, nation and state. The character of 
+individual is an individual who can make decisions and be ready to account for every effect and the decision he 
+made. Character education is a plus ch aracter education, ie education that involves aspects of cognitive, feeling 
+and action. Without these three aspects, it will not be effective character education. 
+Contextual approach is a concept whic h helps teachers link between the lear ning materials taught students with 
+real-world situations and encourage students to make connections between the knowledge possessed by its 
+application in their lives as family members, citizen s and workers (Komalasari, 2011). Meanwhile, the concept 
+of a multimedia approach that underlies the MOTORIC model this is learning environment that seek to present 
+factual issues concerning environmental audio-visual equipment. One goal is for the student brought in a sense 
+of real-world environmental problems associated with that display. Environmental Education learning cannot be 
+separated from the role of the media, especially the four media, visual media, audio-visual media, media people 
+and media settings. Impressions through photographs and audio-visual recordings of how sengasaranya people 
+who lived in the stricken region where floods, landslides, droughts and crop failure due to water sultry as the 
+impact of a green area that serves as a water catchment has been broken and the like events, is expected to arouse 
+feelings (feeling) students to help preserve the enviro nment. Media especially multimedia, according to research 
+Hussein (2010) can motivate students to behave and act. 
+Chosen character, contextual and multimedia approach as learning concepts underlying MOTORIC models of 
+learning, because according to the curriculum 2013 expect ations as set out by the Minister of Education and 
+Culture of the Republic of Indonesia Number 65 Year 2013 About Standard of Process Primary and Secondary 
+Education, that the learning objectives in the New curriculum 2013 include the development of the realm of 
+attitudes, knowledge and skills elaborated in every educational unit of learning. In addition, the third domain has 
+a trajectory acquisition of competence or  different psychological processes. The attitude is gained through the 
+activities of learners “receive, run, respect, appreciate, and practice”. Knowledge gained through the activity of 
+“remembering, understanding, applying, analyzing, evaluating, development. Meanwhile learners acquired skills 
+through activity “observe, ask, try, reason, describe, a nd create”. The third characteristic differences and their 
+sphere of competence acquisiti on trajectory participate aff ect the characteristics of the standard process. To 
+strengthen the scientific approach, thematic integrated (i nter thematic subjects), and thematic (in the subject) it 
+needs to be designed and implemented an innovative lear ning to encourage the achievement of a balance of 
+competence attitudes, knowledge and skills. The MOTORIC learning model is one alternative learning 
+innovation to achieve the intended purpose. Therefore, to  achieve a balance of student attitudes and knowledge 
+[PAGE 4]
+www.ccsenet.org/ies International Edu cation Studies V ol. 8, No. 1; 2015 
+155 
+ 
+about the environment in learning environment, then this MOTORIC learning concept which refers to input a 
+positive character to the environment-science subject through contextual learning by using multimedia learning. 
+The MOTORIC learning model has seven components learning, namely: 
+(1) Motivation, the teachers motivate their students in the learning process activity apperception appropriate 
+subject matter in the classroom environment will be di scussed. At this stage th e teacher motivates through 
+questions or statements that provoke interest students to feel interested in following the topic material that will be 
+submitted by teachers. Phase motivation is actually very close to the next stage of the observation stage. 
+(2) Observation, the students make observations directly or indirectly related to environmental topics to be 
+discussed. Direct observation is the observation by di rectly observe to the environmental topics that will 
+discussed (outside the classroom). While the indirect observation is the observation can been done through the 
+use of multimedia that has been prepared in advance by the teacher. 
+(3) Talking, the students form groups and discuss appropriat e discussion guide has been prepared teachers. 
+Teachers act as facilitators for each group discussion. The result of the discu ssion then briefly presented by each 
+group. 
+(4) Orientation, the teacher directed that the conclusion of the discussion groups according to subject matter that 
+is being discussed. In the orientation phase, the teacher’s role a bit more dominant than the students, the goal that 
+the conclusions made in strict accord ance with the concept of the material covered during the learning takes 
+place. 
+(5) Reinforcement, Reinforcement is done primarily to provid e teachers with the knowledge and the related 
+strengthening of environmental attitudes of students. 
+(6) Implementation, the students implement what they have learned at the meeting in attitude in daily life and in 
+social life. This implementation is more geared to fo stering positive attitudes of students in maintaining and 
+preserving the surrounding environment. At this stage,  students implement the material in the life of the 
+surrounding environment through Attitude Implementati on Guide (AIG) of environmental prepared by the 
+teachers. Implementation of a positive a ttitude towards the environment can be done starting from a small scope 
+like cleanliness class, school yard to residence students. 
+(7) Confirmation, at the end of the activity, the teacher always reminds students to always be positive towards 
+environmental conservation efforts. 
+2. Research and Methods 
+The research of implementation MOTORIC model was conducted in April-May 2014 at a class VII student of 
+Junior High School 13 Kupang Indonesia. The test is done twice, i.e in small groups totaling 12 students and large 
+groups totaling 21 students. Before the trial experiment, the researcher conducted pre-test to determine students’ 
+prior knowledge about the environment. The implementation of MOTORIC model on a small group of samples is 
+done by inserting environmental messages on key words science lessons that can be attributed to the 
+environment. The effectiveness and practicality of the mode l is indicated by an increa se in students’ knowledge 
+about the environment. The steps of Research and Development models approach is used pre-test before treatment 
+is done, and at the end of the implementation of the model is done post-test about environmental knowledge with 
+35 question items. 
+The Integration of environmental education materials into  science lessons cover three topics, there are: energy, 
+living system pollution, waste and conservation. Those materials are integrated environment in materials science 
+with the topic of energy and system life. Analysis of data from the pre- post test knowledge environment for the 
+sample group used Wilcoxon Signed Rank test (Sudjana, 2005). 
+3. Results and Discussion 
+Trials of integration environmental edu cation in the science material by using MOTORIC learning model on 
+Junior High School had done through two-stage models. The implementation of MOTORIC model on a small 
+group of samples is done by inserting environmental messages on key words science lessons that can be 
+attributed to the environment. To facilitate delivering of  learning material used science books that have been 
+inserted with environmental messages and picture messages of interest in accordance with the character of junior 
+high school students. In addition, also be used to guide the implementation of the attitude inspires students to 
+love the attitude of the environment. In order for the messages to be conveyed environment more attractive, 
+multimedia is used along with the video. The seven existing learning syntax in the MOTORIC model taught as 
+one-on-one integrated whole as a model of science learning but inserted with environmental messages. The 
+[PAGE 5]
+www.ccsenet.org/ies International Edu cation Studies V ol. 8, No. 1; 2015 
+156 
+ 
+model innovation is to emphasize to students that they basically are learning the mate rial instead of learning 
+about science and the environment. However, with the inclusion of environmental messages through the 
+characters approach, contextual and multimedia use their unwitting students have also been learning 
+environment. 
+Trials on small groups and large groups performed 5 times face to face on schedule by applies curriculum 2013 in 
+the sample schools. Science material is tested with the topic of energy and lif e systems with integrated 
+environmental materials include pollution, litter and conservation. At the end of the experiment trial, the researcher 
+was conducted post-test, to determine how much the MOTORIC model effectiveness in improving students’ 
+knowledge of the environment. Based on the results of pre-post test in a small group and the group, the data 
+obtained as Table 1 below. 
+ 
+Table 1. Pre-post test results for small and large groups’ data 
+ Small groups Large groups 
+Pre Post Pre Post 
+Number of samples 12 12 21 21 
+Means 13.8 23.3 17.0 27.9 
+Minimum Value 8 18 12 20 
+Maximum Value  20 30 23 33 
+standard deviation 2.98 3.70 2.74 3.67 
+Percentage of Improvement (%) 68.07 64.15 
+ 
+Based on the data, as shown in Table 1 above, it appear s that the integration of material Environmental 
+Education in the subject matt er of science through the MOTORIC learning model effective increase students’ 
+knowledge about the environment. In a small pilot group, an increase in students’ knowledge of the environment 
+before and after the application of the MOTORIC model is equal to 68.07%, while trials on large groups of 
+64.15%. This suggests that environmental messages are in tegrated in science lessons were able to increase the 
+students’ knowledge of environmental issues, especially  related to waste, pollution issues and environmental 
+conservation issues. Increasing students ‘knowledge of the environment is expected to be a good influence on 
+students’ attitudes toward the environment. 
+The integration of environmental materials by MOTORIC models in science are contextual material that is part 
+of the MOTORIC model, assist students in understanding the importance of the environment for students. 
+Similarly, the role of instructional videos that are included in the MOTORIC model can developed sense of love 
+and sympathy for the students on the en vironment. Therefore, the approach to the concept of the use of media 
+characters (what is seen) would make it easier for students in recording a variety of knowledge about 
+environmental issues. Increasing students’ knowledge of the environment by 68.07% in the test sample and the 
+small group of 64.15% on a large test sample group indicated that the integration of environmental education 
+materials through MOTORIC models in materials science of junior hi gh schools effectively increase students’ 
+knowledge about the environment. 
+The percentage of increase in the mean pre-post students’ knowledge of the environment after application of 
+MOTORIC learning models significantly as shown by Figure 1. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[PAGE 6]
+www.ccsen
+ 
+F
+ 
+To see t h
+environme
+differences
+were treate
+ 
+Tabel 2. Th
+ 
+Based on t
+μw is 39 an
+value of w
+between t h
+MOTORIC
+3.  
+ 
+et.org/ies 
+Figure 1. Chart
+he significan c
+ental by grou p
+s in the value 
+ed as shown in
+he Wilcoxon s
+ 
+Pos
+ P o
+ Ti e
+ T o
+a. P
+b. P
+C, P
+Test
+ 
+z 
+As
+y
+ 
+a. B
+b. W
+the analysis re
+nd σw is 12.74.
+wcrtitical is 14. Be
+he students’ k
+C learning mod
+0
+10
+20
+30
+40
+50
+60
+70
+ts of knowledg
+ce of the dif f
+ps Wilcoxon 
+of pre-test to 
+n Table 2 and T
+signed ranks te
+st-Pre Negative
+ositive Ranks 
+es 
+otal 
+Post < Pre 
+Post > Pre 
+Post = Pre 
+t Statisticsb 
+ymp. Sig. (2-ta
+Based on negat
+Wilcoxon Sign
+sults of the Wi
+. Based on the
+ecause the valu
+knowledge of 
+del. Something
+Pre
+Internation
+ge enhancemen
+ference betwe
+Signed Ran k
+post-test stud
+Table 3. 
+est for the smal
+e Ranks 
+ailed) 
+tive ranks 
+ed Rank Test
+ilcoxon Signed
+se values obta
+ue of wobs < wc
+the environ m
+g similar happ
+Post P
+nal Education Stu
+157 
+nt percentage f
+een the pre-t e
+k tes t. Based 
+dents’ knowled
+ll group 
+N M
+0a . 0
+12b 6
+0c 
+12 
+ 
+ 
+ 
+ 
+Post-Pre
+-3.068a 
+.002 
+ 
+ 
+ 
+d Rank test, th
+ained wobs is 7.
+critical it can be
+ment before a n
+ened with a la
+Pre P o
+udies
+for students in
+est to post-t e
+on the analy s
+dge of the en v
+Mean Rank S
+00 . 0
+.50 7
+he value of Z =
+72. Meanwhile
+concluded tha
+nd after the a p
+arge group of t
+ost
+n small and larg
+est knowledg e
+sis of data o b
+vironment as t h
+Sum of Rank 
+00 
+78.00 
+= -3.068, with n
+e, for n = 12 a
+at there are sign
+pplication the 
+test samples as
+Mean
+Percentage o
+increase  (%)
+V ol. 8, No. 1; 
+ 
+ge groups 
+e of the val u
+btained signi f
+he obtained r e
+n = 12, the valu
+at level α = 0.0
+nificant differe
+application o
+s indicated in T
+of 
+)
+2015 
+ue of 
+ficant 
+esults 
+ue of 
+5 the 
+ences 
+f the 
+Table 
+[PAGE 7]
+www.ccsenet.org/ies International Edu cation Studies V ol. 8, No. 1; 2015 
+158 
+ 
+Tabel 3. The Wilcoxon signed ranks test for the large group 
+ N Mean Rank Sum of Rank 
+Post-Pre Negative Ranks 0 a .00 .00 
+     Positive Ranks 21 b 11.00 231.00 
+     T i e s  0 c   
+     Total 21   
+d. Post < Pre    
+e. Post > Pre    
+f. Post = Pre    
+Test Statisticsb    
+ Post - Pre   
+z -4.020 a   
+Asymp. Sig. (2-tailed) .000   
+   
+c. Based on negative ranks    
+d. Wilcoxon Signed Rank Test    
+ 
+For the large group, we find z = -4.020. For n = 21, the value of μw is 115 and σw is 21.75. Based on these values 
+obtained wobs = 27.56. Meanwhile, for n = 21 at level α = 0.05 the value of w crtitical is 59. Because the value of 
+wobs < w critical it can be concluded that there are significant di fferences between the students’ knowledge of the 
+environment before and after the application MOTORIC learning model. Based on two groups of samples analysis 
+results indicate that the integration of environmental education materials that exist in phases MOTORIC models 
+can be effective to improve students’ knowledge of the environment at the 95% confidence level (α = 0.05 level). 
+The increasing students’ knowledge of the environment is expected to have an im pact on increasing students’ 
+positive attitudes towards the environmen t. As the result of research conducted by Masmuddin (2011) with a 
+sample of Junior High Schools at Pamboang District of Pamboang, Majene West Sulawesi shows that there is a 
+positive relationship between students’ environmental know ledge with attitude against environmental hygiene. 
+Therefore, the integration of environmental education materials on junior high school science lessons through the 
+MOTORIC learning model practicaly and effectively applied to embed and enhance the student’s knowledge 
+about environment. 
+4. Conclusion 
+Based on the analysis and discussion as described above, it can be concluded as follows:  
+Integration of environmental education materials can be done through the application of MOTORIC learning 
+models.  
+Integration of environmental education materials on junior high school science lessons through the application of 
+MOTORIC learning models in the sample small group test of students were able to increase the knowledge about 
+the environment amounted to 68.07%, while the large group of test samples was 64.15%.  
+Accordingly, it can be said that the integration of environmental education materials on junior high school science 
+lessons through the application of MOTORIC learning models can increasing the students’ knowledge about the 
+environment. 
+Acknowledgements 
+Thank you submitted to: (1) Prof. Dr. Gufran D. Dirawan, M.EMD as Chairman of Departemen of Environment 
+Education, Post Graduate Programs, Makassar State University, Indonesia who have given permission to conduct 
+research, (2) Prof. Muhammad Ardi as a promoter, (3) Dr. Abdul Rahman as Co Promoter 1 and (4) Dr. 
+Amirudiin Supu, S.Pd., M.Si as Co Promoter 2 which has guided the development of proposals for research to 
+take place. Thanks are also submitted to the Graduate Program of Makassar State Un iversity who has provided 
+administrative facilities during the research process. 
+[PAGE 8]
+www.ccsenet.org/ies International Edu cation Studies V ol. 8, No. 1; 2015 
+159 
+ 
+References 
+Arianto, I. (1988). Population and Environmental Education at the Teachers’ Training College . Jakarta: 
+Department of Education, Director ate of Higher Education, the Di rectorate General of Primary and 
+Secondary Education. 
+Deputy for Environmental Communication and Community Empowerment. (2012). Guideline Development 
+Outline the Content Material of Environmental Education. Jakarta: Ministry of Environment. 
+Hendrawati, S. (2009). Environmental Education and Its Application in Education for Elementary School Students. 
+Research papers: Environmental Education . Retrieved from http://erma.st udent.umm.ac.id/download-as- 
+pdf/umm_ article_10.pdf, accessed January 24, 2013 
+Hussein, G. (2010). The Attitudes of Undergraduate St udents towards Motivation and Technology in a Foreign 
+Language Classroom. International Journal of Learning and Teaching, 2 (2), 14-24. Retrieved from 
+http://www.world-education-center.org/index.php/ijlt/article/viewFile/354/pdf_62 
+Komalasari, K. (2011). Contextual Learning, Concepts and Applications. Bandung: PT. Refika Aditama. 
+Mariana Alit and Praginda Wandy. (2009). Natural Science Education . Bandung: Centre for Development and 
+Empowerment of Teachers and Education Personnel Natural Sciences. 
+Masmuddin, K. (2011). Relationship between Students’ Environmental Knowledge with Students’ Attitudes 
+toward School Environmental Hygiene Junior High School N 4 Pamboang Majene, West Sulawesi province 
+(Thesis, Not Published, State University of Makassar). 
+Notoatmodjo, S. (2007). Promotion of Health and Behavioral Sciences. Jakarta: Rineka Cipta. 
+Puspandari. (2008). Efforts to Raise Awareness through Environmental Conservation trough Population and 
+Environment Education Learning-Based Contextual Teaching and Learning. Journal of Innovative 
+Education, 4(1), 28-30. 
+Rohmad. (2012). Revised Bloom’ s Taxonomy . Retrieved November 16, 2013 from 
+http://www4.uwsp.edu/education/lwilson/curric/ newtaxonomy.htm 
+Rohman, M. (2012). Curriculum Character. Jakarta: Prestasi Pustaka. 
+Rusman. (2012). Learning Models. Jakarta: Raja Grafindo Persada. 
+Soekanto, S. (2003). Sociology an Introduction. Jakarta: PT. Raja Grafindo Persada. 
+Sudjana. (2005). Statistical Methods. Bandung: Tarsito. 
+ 
+Copyrights 
+Copyright for this article is retained by the author(s), with first publication rights granted to the journal. 
+This is an open-access article distributed under the te rms and conditions of the Cr eative Commons Attribution 
+license (http://creativecommons.org/licenses/by/3.0/).

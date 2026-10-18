@@ -225,6 +225,8 @@ record ApproximationWithResidualObligation
     exactOrBoundedPart : Exact
     unresolvedPart : ResidualPart
 
+open ApproximationWithResidualObligation public
+
 asExactPlusResidual :
   ∀ {Exact ResidualPart} →
   ApproximationWithResidualObligation Exact ResidualPart →

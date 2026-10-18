@@ -24,15 +24,15 @@ import DASHI.Law.SensibLawWoogarooLegalConsumerAtomCompletionExact as Atom
 ------------------------------------------------------------------------
 
 data CrosswalkStatus : Set where
-  exactIdentityPaid
-  compatibleButUnpaid
-  evidenceAgainstIdentity
+  exactIdentityPaid : CrosswalkStatus
+  compatibleButUnpaid : CrosswalkStatus
+  evidenceAgainstIdentity : CrosswalkStatus
   unresolved : CrosswalkStatus
 
 data CrosswalkEvidenceRole : Set where
-  primaryPopulationReport
-  primaryApprovedSurvey
-  primaryGeneticDataset
+  primaryPopulationReport : CrosswalkEvidenceRole
+  primaryApprovedSurvey : CrosswalkEvidenceRole
+  primaryGeneticDataset : CrosswalkEvidenceRole
   secondarySignpost : CrosswalkEvidenceRole
 
 populationGeneticsQid : Id.ItemId

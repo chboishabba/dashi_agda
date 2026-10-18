@@ -18,7 +18,7 @@ import DASHI.Core.ScientificWorkAttributionExact as Attribution
 ------------------------------------------------------------------------
 
 data ElectricalPumpSourceRole : Set where
-  measurementProtocol
+  measurementProtocol : ElectricalPumpSourceRole
   operationalFieldCase : ElectricalPumpSourceRole
 
 record ElectricalPumpPrimarySource : Set where

@@ -20,16 +20,16 @@ import DASHI.Law.SensibLawProofGapExecutableSearchCompilerExact as Compiler
 ------------------------------------------------------------------------
 
 data LegalNetworkMode : Set where
-  localFixtureOnly
-  persistedAuthorityReceiptOnly
-  governedLiveLegalAdapter
+  localFixtureOnly : LegalNetworkMode
+  persistedAuthorityReceiptOnly : LegalNetworkMode
+  governedLiveLegalAdapter : LegalNetworkMode
   : LegalNetworkMode
 
 data LegalAcquisitionOperation : Set where
-  searchReferencesOnly
-  fetchExplicitDocumentBytes
-  deterministicKnownAuthorityResolution
-  boundedCitationFollow
+  searchReferencesOnly : LegalAcquisitionOperation
+  fetchExplicitDocumentBytes : LegalAcquisitionOperation
+  deterministicKnownAuthorityResolution : LegalAcquisitionOperation
+  boundedCitationFollow : LegalAcquisitionOperation
   : LegalAcquisitionOperation
 
 record LegalHostPacingPolicy : Set where

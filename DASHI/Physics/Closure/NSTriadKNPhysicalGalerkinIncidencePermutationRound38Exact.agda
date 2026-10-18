@@ -79,7 +79,7 @@ F : C3.RealField _
 F = Rational.rationalRealField
 
 ------------------------------------------------------------------------
--- Exact involutions and injections on proof-bearing physical incidences.
+-- Exact finite-order actions and injections on proof-bearing physical incidences.
 ------------------------------------------------------------------------
 
 pEnergyLegInvolutiveExact : ∀ tau →
@@ -90,13 +90,38 @@ pEnergyLegInvolutiveExact tau =
     (Symmetry.sameP (Orbit38.pEnergyLegInvolutiveOnLattice tau))
     (Symmetry.sameQ (Orbit38.pEnergyLegInvolutiveOnLattice tau))
 
-qEnergyLegInvolutiveExact : ∀ tau →
-  Orbit.qEnergyLeg (Orbit.qEnergyLeg tau) ≡ tau
-qEnergyLegInvolutiveExact tau =
+qEnergyLegThirdIsConjugateExact : ∀ tau →
+  Orbit.qEnergyLeg
+    (Orbit.qEnergyLeg
+      (Orbit.qEnergyLeg tau))
+  ≡ Symmetry.conjugateTriad tau
+qEnergyLegThirdIsConjugateExact tau =
   KFree.physicalIncidenceExtPQ
-    (Orbit.qEnergyLeg (Orbit.qEnergyLeg tau)) tau
-    (Symmetry.sameP (Orbit38.qEnergyLegInvolutiveOnLattice tau))
-    (Symmetry.sameQ (Orbit38.qEnergyLegInvolutiveOnLattice tau))
+    (Orbit.qEnergyLeg
+      (Orbit.qEnergyLeg
+        (Orbit.qEnergyLeg tau)))
+    (Symmetry.conjugateTriad tau)
+    (Symmetry.sameP (Orbit38.qEnergyLegThirdIsConjugateOnLattice tau))
+    (Symmetry.sameQ (Orbit38.qEnergyLegThirdIsConjugateOnLattice tau))
+
+qEnergyLegFive :
+  Physical.PhysicalTriadIncidence →
+  Physical.PhysicalTriadIncidence
+qEnergyLegFive tau =
+  Orbit.qEnergyLeg
+    (Orbit.qEnergyLeg
+      (Orbit.qEnergyLeg
+        (Orbit.qEnergyLeg
+          (Orbit.qEnergyLeg tau))))
+
+qEnergyLegOrderSixExact : ∀ tau →
+  Orbit.qEnergyLeg (qEnergyLegFive tau) ≡ tau
+qEnergyLegOrderSixExact tau =
+  KFree.physicalIncidenceExtPQ
+    (Orbit.qEnergyLeg (qEnergyLegFive tau))
+    tau
+    (Symmetry.sameP (Orbit38.qEnergyLegOrderSixOnLattice tau))
+    (Symmetry.sameQ (Orbit38.qEnergyLegOrderSixOnLattice tau))
 
 swapTriadInvolutiveExact : ∀ tau →
   Symmetry.swapTriad (Symmetry.swapTriad tau) ≡ tau
@@ -119,10 +144,10 @@ qEnergyLegInjective : ∀ {left right} →
   Orbit.qEnergyLeg left ≡ Orbit.qEnergyLeg right → left ≡ right
 qEnergyLegInjective {left} {right} equality =
   trans
-    (sym (qEnergyLegInvolutiveExact left))
+    (sym (qEnergyLegOrderSixExact left))
     (trans
-      (cong Orbit.qEnergyLeg equality)
-      (qEnergyLegInvolutiveExact right))
+      (cong qEnergyLegFive equality)
+      (qEnergyLegOrderSixExact right))
 
 swapTriadInjective : ∀ {left right} →
   Symmetry.swapTriad left ≡ Symmetry.swapTriad right → left ≡ right
@@ -236,6 +261,16 @@ mappedQEnergyLegForward {cutoff} member with ∈-map⁻ Orbit.qEnergyLeg member
     sourceMaps
     (qEnergyLegMember sourceMember)
 
+qEnergyLegFiveMember : ∀ {cutoff tau} →
+  tau ∈ Physical.physicalTriadEnumeration cutoff →
+  qEnergyLegFive tau ∈ Physical.physicalTriadEnumeration cutoff
+qEnergyLegFiveMember member =
+  qEnergyLegMember
+    (qEnergyLegMember
+      (qEnergyLegMember
+        (qEnergyLegMember
+          (qEnergyLegMember member))))
+
 mappedQEnergyLegBackward : ∀ {cutoff tau} →
   tau ∈ Physical.physicalTriadEnumeration cutoff →
   tau ∈ map Orbit.qEnergyLeg (Physical.physicalTriadEnumeration cutoff)
@@ -243,8 +278,8 @@ mappedQEnergyLegBackward {cutoff} {tau} member =
   subst
     (λ chosen → chosen ∈ map Orbit.qEnergyLeg
       (Physical.physicalTriadEnumeration cutoff))
-    (qEnergyLegInvolutiveExact tau)
-    (∈-map⁺ Orbit.qEnergyLeg (qEnergyLegMember member))
+    (qEnergyLegOrderSixExact tau)
+    (∈-map⁺ Orbit.qEnergyLeg (qEnergyLegFiveMember member))
 
 mappedSwapForward : ∀ {cutoff tau} →
   tau ∈ map Symmetry.swapTriad (Physical.physicalTriadEnumeration cutoff) →

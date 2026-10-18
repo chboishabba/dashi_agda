@@ -29,36 +29,26 @@ import DASHI.Foundations.RealAnalysisAxioms as RA
 -- DCHoTT formal-disk trivialisation remain explicit targets.
 
 data FlatFormalDiskHolonomyStatus : Set where
-  b02HolonomyTargetsOnlyNoB0Promotion :
-    FlatFormalDiskHolonomyStatus
+  b02HolonomyTargetsOnlyNoB0Promotion : FlatFormalDiskHolonomyStatus
 
 data FlatFormalDiskHolonomyOpenObligation : Set where
-  missingNormedCarrierFibreCompletion :
-    FlatFormalDiskHolonomyOpenObligation
+  missingNormedCarrierFibreCompletion : FlatFormalDiskHolonomyOpenObligation
 
-  missingOperatorNormDefectAdapter :
-    FlatFormalDiskHolonomyOpenObligation
+  missingOperatorNormDefectAdapter : FlatFormalDiskHolonomyOpenObligation
 
-  missingGeometricSummabilityProof :
-    FlatFormalDiskHolonomyOpenObligation
+  missingGeometricSummabilityProof : FlatFormalDiskHolonomyOpenObligation
 
-  missingFiniteAreaLoopSurface :
-    FlatFormalDiskHolonomyOpenObligation
+  missingFiniteAreaLoopSurface : FlatFormalDiskHolonomyOpenObligation
 
-  missingNonabelianStokesBoundaryLaw :
-    FlatFormalDiskHolonomyOpenObligation
+  missingNonabelianStokesBoundaryLaw : FlatFormalDiskHolonomyOpenObligation
 
-  missingHolonomyLimitToIdentity :
-    FlatFormalDiskHolonomyOpenObligation
+  missingHolonomyLimitToIdentity : FlatFormalDiskHolonomyOpenObligation
 
-  missingFormalDiskPathIndependence :
-    FlatFormalDiskHolonomyOpenObligation
+  missingFormalDiskPathIndependence : FlatFormalDiskHolonomyOpenObligation
 
-  missingFlatFormalDiskConnectionCertificate :
-    FlatFormalDiskHolonomyOpenObligation
+  missingFlatFormalDiskConnectionCertificate : FlatFormalDiskHolonomyOpenObligation
 
-  missingDCHoTTFormalDiskTrivialisationAdapter :
-    FlatFormalDiskHolonomyOpenObligation
+  missingDCHoTTFormalDiskTrivialisationAdapter : FlatFormalDiskHolonomyOpenObligation
 
 canonicalFlatFormalDiskHolonomyOpenObligations :
   List FlatFormalDiskHolonomyOpenObligation
@@ -75,28 +65,21 @@ canonicalFlatFormalDiskHolonomyOpenObligations =
   ∷ []
 
 data B02ConstructibleDiscreteDecayStatus : Set where
-  natWaveCoherenceDecayOnly :
-    B02ConstructibleDiscreteDecayStatus
+  natWaveCoherenceDecayOnly : B02ConstructibleDiscreteDecayStatus
 
 data B02AuthorityVsLocalProofStatus : Set where
-  postulatedAnalysisAuthorityWithLocalDiscreteReceiptsOnly :
-    B02AuthorityVsLocalProofStatus
+  postulatedAnalysisAuthorityWithLocalDiscreteReceiptsOnly : B02AuthorityVsLocalProofStatus
 
 data B02UnprovedAnalyticHolonomyClaim : Set where
-  realOperatorNormTransportDefectUnproved :
-    B02UnprovedAnalyticHolonomyClaim
+  realOperatorNormTransportDefectUnproved : B02UnprovedAnalyticHolonomyClaim
 
-  geometricSummabilityUnproved :
-    B02UnprovedAnalyticHolonomyClaim
+  geometricSummabilityUnproved : B02UnprovedAnalyticHolonomyClaim
 
-  nonabelianStokesUnproved :
-    B02UnprovedAnalyticHolonomyClaim
+  nonabelianStokesUnproved : B02UnprovedAnalyticHolonomyClaim
 
-  holonomyLimitToIdentityUnproved :
-    B02UnprovedAnalyticHolonomyClaim
+  holonomyLimitToIdentityUnproved : B02UnprovedAnalyticHolonomyClaim
 
-  dchottFormalDiskTrivialisationUnproved :
-    B02UnprovedAnalyticHolonomyClaim
+  dchottFormalDiskTrivialisationUnproved : B02UnprovedAnalyticHolonomyClaim
 
 canonicalB02UnprovedAnalyticHolonomyClaims :
   List B02UnprovedAnalyticHolonomyClaim

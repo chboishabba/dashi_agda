@@ -43,26 +43,19 @@ alwaysTrueRelation _ _ =
 -- Shared vocabulary.
 
 data FormalStructureLawKind : Set where
-  finiteSampleLawKind :
-    FormalStructureLawKind
+  finiteSampleLawKind : FormalStructureLawKind
 
-  vectorProductLawKind :
-    FormalStructureLawKind
+  vectorProductLawKind : FormalStructureLawKind
 
-  coordinateProjectionLawKind :
-    FormalStructureLawKind
+  coordinateProjectionLawKind : FormalStructureLawKind
 
-  equivalenceRelationLawKind :
-    FormalStructureLawKind
+  equivalenceRelationLawKind : FormalStructureLawKind
 
-  quotientFiberProjectionLawKind :
-    FormalStructureLawKind
+  quotientFiberProjectionLawKind : FormalStructureLawKind
 
-  canonicalEncodingLawKind :
-    FormalStructureLawKind
+  canonicalEncodingLawKind : FormalStructureLawKind
 
-  residueSystemLawKind :
-    FormalStructureLawKind
+  residueSystemLawKind : FormalStructureLawKind
 
   namedFormalStructureLawKind :
     String →

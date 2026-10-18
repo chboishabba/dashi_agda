@@ -9,122 +9,86 @@ open import Data.List.Base using (List; _∷_; [])
 import DASHI.Core.GenericReceipt as GenericReceipt
 
 data OperatorShapeNonAuthorityStatus : Set where
-  operatorShapeCandidateOnly :
-    OperatorShapeNonAuthorityStatus
+  operatorShapeCandidateOnly : OperatorShapeNonAuthorityStatus
 
 data DomainCarrierLabel : Set where
-  genericDomainCarrier :
-    DomainCarrierLabel
+  genericDomainCarrier : DomainCarrierLabel
 
-  finiteSymbolicDomainCarrier :
-    DomainCarrierLabel
+  finiteSymbolicDomainCarrier : DomainCarrierLabel
 
-  receiptDomainCarrier :
-    DomainCarrierLabel
+  receiptDomainCarrier : DomainCarrierLabel
 
 data CodomainCarrierLabel : Set where
-  genericCodomainCarrier :
-    CodomainCarrierLabel
+  genericCodomainCarrier : CodomainCarrierLabel
 
-  finiteSymbolicCodomainCarrier :
-    CodomainCarrierLabel
+  finiteSymbolicCodomainCarrier : CodomainCarrierLabel
 
-  receiptCodomainCarrier :
-    CodomainCarrierLabel
+  receiptCodomainCarrier : CodomainCarrierLabel
 
 data OperatorShapeTag : Set where
-  symbolicOperatorTag :
-    OperatorShapeTag
+  symbolicOperatorTag : OperatorShapeTag
 
-  residualOperatorTag :
-    OperatorShapeTag
+  residualOperatorTag : OperatorShapeTag
 
-  transportOperatorTag :
-    OperatorShapeTag
+  transportOperatorTag : OperatorShapeTag
 
-  observationOperatorTag :
-    OperatorShapeTag
+  observationOperatorTag : OperatorShapeTag
 
 data CompositionHint : Set where
-  noCompositionWitness :
-    CompositionHint
+  noCompositionWitness : CompositionHint
 
-  endomorphismCompositionHint :
-    CompositionHint
+  endomorphismCompositionHint : CompositionHint
 
-  domainToCodomainCompositionHint :
-    CompositionHint
+  domainToCodomainCompositionHint : CompositionHint
 
-  diagnosticCompositionHint :
-    CompositionHint
+  diagnosticCompositionHint : CompositionHint
 
 data BoundednessCandidate : Set where
-  boundednessCandidateUnwitnessed :
-    BoundednessCandidate
+  boundednessCandidateUnwitnessed : BoundednessCandidate
 
-  boundednessCandidateSymbolic :
-    BoundednessCandidate
+  boundednessCandidateSymbolic : BoundednessCandidate
 
-  boundednessCandidateRequiresProof :
-    BoundednessCandidate
+  boundednessCandidateRequiresProof : BoundednessCandidate
 
 data ContractionCandidate : Set where
-  contractionCandidateUnwitnessed :
-    ContractionCandidate
+  contractionCandidateUnwitnessed : ContractionCandidate
 
-  contractionCandidateSymbolic :
-    ContractionCandidate
+  contractionCandidateSymbolic : ContractionCandidate
 
-  contractionCandidateRequiresProof :
-    ContractionCandidate
+  contractionCandidateRequiresProof : ContractionCandidate
 
 data DissipativeCandidate : Set where
-  dissipativeCandidateUnwitnessed :
-    DissipativeCandidate
+  dissipativeCandidateUnwitnessed : DissipativeCandidate
 
-  dissipativeCandidateSymbolic :
-    DissipativeCandidate
+  dissipativeCandidateSymbolic : DissipativeCandidate
 
-  dissipativeCandidateRequiresProof :
-    DissipativeCandidate
+  dissipativeCandidateRequiresProof : DissipativeCandidate
 
 data SpectralShapeTag : Set where
-  noSpectrumWitness :
-    SpectralShapeTag
+  noSpectrumWitness : SpectralShapeTag
 
-  spectralShapeCandidate :
-    SpectralShapeTag
+  spectralShapeCandidate : SpectralShapeTag
 
-  spectralDiagnosticShape :
-    SpectralShapeTag
+  spectralDiagnosticShape : SpectralShapeTag
 
 data OperatorShapeReceiptComponent : Set where
-  domainCarrierComponent :
-    OperatorShapeReceiptComponent
+  domainCarrierComponent : OperatorShapeReceiptComponent
 
-  codomainCarrierComponent :
-    OperatorShapeReceiptComponent
+  codomainCarrierComponent : OperatorShapeReceiptComponent
 
-  operatorTagComponent :
-    OperatorShapeReceiptComponent
+  operatorTagComponent : OperatorShapeReceiptComponent
 
-  compositionHintComponent :
-    OperatorShapeReceiptComponent
+  compositionHintComponent : OperatorShapeReceiptComponent
 
-  boundednessCandidateComponent :
-    OperatorShapeReceiptComponent
+  boundednessCandidateComponent : OperatorShapeReceiptComponent
 
-  contractionCandidateComponent :
-    OperatorShapeReceiptComponent
+  contractionCandidateComponent : OperatorShapeReceiptComponent
 
-  dissipativeCandidateComponent :
-    OperatorShapeReceiptComponent
+  dissipativeCandidateComponent : OperatorShapeReceiptComponent
 
-  spectralShapeTagComponent :
-    OperatorShapeReceiptComponent
+  spectralShapeTagComponent : OperatorShapeReceiptComponent
 
-  authorityBlockComponent :
-    OperatorShapeReceiptComponent
+  authorityBlockComponent : OperatorShapeReceiptComponent
 
 canonicalOperatorShapeReceiptComponents :
   List OperatorShapeReceiptComponent
@@ -141,29 +105,21 @@ canonicalOperatorShapeReceiptComponents =
   ∷ []
 
 data OperatorShapeBlockedAuthorityKind : Set where
-  boundedLinearOperatorAuthorityKind :
-    OperatorShapeBlockedAuthorityKind
+  boundedLinearOperatorAuthorityKind : OperatorShapeBlockedAuthorityKind
 
-  selfAdjointAuthorityKind :
-    OperatorShapeBlockedAuthorityKind
+  selfAdjointAuthorityKind : OperatorShapeBlockedAuthorityKind
 
-  spectrumAuthorityKind :
-    OperatorShapeBlockedAuthorityKind
+  spectrumAuthorityKind : OperatorShapeBlockedAuthorityKind
 
-  semigroupAuthorityKind :
-    OperatorShapeBlockedAuthorityKind
+  semigroupAuthorityKind : OperatorShapeBlockedAuthorityKind
 
-  generatorAuthorityKind :
-    OperatorShapeBlockedAuthorityKind
+  generatorAuthorityKind : OperatorShapeBlockedAuthorityKind
 
-  PDEAuthorityKind :
-    OperatorShapeBlockedAuthorityKind
+  PDEAuthorityKind : OperatorShapeBlockedAuthorityKind
 
-  functionalCalculusAuthorityKind :
-    OperatorShapeBlockedAuthorityKind
+  functionalCalculusAuthorityKind : OperatorShapeBlockedAuthorityKind
 
-  theoremAuthorityKind :
-    OperatorShapeBlockedAuthorityKind
+  theoremAuthorityKind : OperatorShapeBlockedAuthorityKind
 
 canonicalOperatorShapeBlockedAuthorityKinds :
   List OperatorShapeBlockedAuthorityKind

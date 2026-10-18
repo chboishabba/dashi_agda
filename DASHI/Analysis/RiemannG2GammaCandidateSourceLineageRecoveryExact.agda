@@ -9,28 +9,24 @@ import DASHI.Analysis.RiemannG2GammaProducerSourceAcquisitionExact as Acquisitio
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as Return8889
 
 ------------------------------------------------------------------------
--- RECOVERED GAMMA SOURCE FAMILY, WITHOUT SAME-CONSUMER PROMOTION
+-- RECOVERED EXACT 8889 GAMMA SOURCE LINEAGE
 --
--- Retained checked-source artifacts expose an actual Gamma estimate family:
+-- The companion dashi_lean4 repository vendors both the original envelope
 --
---   Zeta23Bridge/LiteralWeilGammaConeBound.lean
---     epsGamma
---     gammaConeEnvelope
+--   LiteralWeilGammaConeBound.gammaConeEnvelope
 --
--- and a downstream theorem-bearing consumer:
+-- and the exact pole-quotient consumer
 --
---   LiteralWeilTwoRadiusResidualEnvelope.abs_residualCone_le
+--   PoleQuotientGammaBudget.exists_gamma_budget_linear_in_stripConst.
 --
--- whose residual envelope is
+-- The latter calls gammaConeEnvelope directly.  Therefore the historical
+-- epsGamma/gammaConeEnvelope chain is now source-identified with the reported
+-- 8889 pole-quotient Gamma producer.  This is source custody, not Agda proof
+-- transport.
 --
---   epsZero + epsGamma + 4 * |poleEvenResp|.
---
--- This materially improves source acquisition: a concrete Gamma producer family
--- and downstream use are known.  But the retained artifact inspected here is an
--- earlier two-radius/projective lane.  We have not recovered an exact theorem
--- stating that the 8889 pole-quotient uniform Gamma bound is produced by this
--- same gammaConeEnvelope/epsGamma chain.  Therefore this module refuses to set
--- Acquisition.GammaProducerSourceArtifact.decompositionFeedsReportedUniformBound.
+-- The producer's own source commentary also identifies why it misses the sharp
+-- window: stripConst carries a second-derivative L1 term which grows
+-- quadratically when the high-ordinate taper support shrinks.
 ------------------------------------------------------------------------
 
 record RecoveredGammaCandidateLineage : Set where
@@ -53,8 +49,8 @@ record RecoveredGammaCandidateLineage : Set where
       downstreamResidualUsesSameEnvelopeSymbol ≡ true
 
     sameAsReported8889PoleQuotientGammaProducer : Bool
-    sameAsReported8889PoleQuotientGammaProducerIsFalse :
-      sameAsReported8889PoleQuotientGammaProducer ≡ false
+    sameAsReported8889PoleQuotientGammaProducerIsTrue :
+      sameAsReported8889PoleQuotientGammaProducer ≡ true
 
     lineageReference : String
 
@@ -71,8 +67,8 @@ canonicalRecoveredGammaCandidateLineage =
     true refl
     true refl
     true refl
-    false refl
-    "Retained Zeta23Bridge source history recovers the concrete epsGamma/gammaConeEnvelope family and its use inside epsResidual. This is a real candidate Gamma producer lineage. It is not promoted to the 8889 pole-quotient Gamma producer until an exact source/provenance theorem identifies that consumer with this chain."
+    true refl
+    "Vendored dashi_lean4 now contains the exact 8889 PoleQuotientGammaBudget.lean source. Its theorem exists_gamma_budget_linear_in_stripConst invokes gammaConeEnvelope directly, so the epsGamma/gammaConeEnvelope chain is no longer merely a candidate: the same-consumer producer lineage is source-recovered. The remaining work is quantitative repair/bypass of the strip-constant envelope, not producer identity."
 
 ------------------------------------------------------------------------
 -- Exact search consequence.
@@ -96,9 +92,9 @@ data PaymentStatus : Set where
 paymentStatus : GammaLineagePayment → PaymentStatus
 paymentStatus searchForAnyConcreteGammaSourceFamily = pruned
 paymentStatus recoverCandidateGammaEnvelopeFamily = owned
-paymentStatus proveCandidateFeeds8889PoleQuotientBound = live
-paymentStatus localizePrecisionLossInsideCandidateBeforeIdentity = blocked
-paymentStatus localizePrecisionLossAfterSameConsumerIdentity = downstream
+paymentStatus proveCandidateFeeds8889PoleQuotientBound = owned
+paymentStatus localizePrecisionLossInsideCandidateBeforeIdentity = pruned
+paymentStatus localizePrecisionLossAfterSameConsumerIdentity = live
 
 concreteGammaSourceSearchPruned :
   paymentStatus searchForAnyConcreteGammaSourceFamily ≡ pruned
@@ -108,9 +104,9 @@ candidateGammaFamilyOwned :
   paymentStatus recoverCandidateGammaEnvelopeFamily ≡ owned
 candidateGammaFamilyOwned = refl
 
-candidateTo8889SameConsumerIdentityStillLive :
-  paymentStatus proveCandidateFeeds8889PoleQuotientBound ≡ live
-candidateTo8889SameConsumerIdentityStillLive = refl
+candidateTo8889SameConsumerIdentityRecovered :
+  paymentStatus proveCandidateFeeds8889PoleQuotientBound ≡ owned
+candidateTo8889SameConsumerIdentityRecovered = refl
 
 ------------------------------------------------------------------------
 -- Cross-check against the checked-return boundary.
@@ -138,12 +134,12 @@ record GammaCandidateLineageBoundary : Set where
       concreteGammaSourceFamilyRecovered ≡ true
 
     exact8889ConsumerIdentityRecovered : Bool
-    exact8889ConsumerIdentityRecoveredIsFalse :
-      exact8889ConsumerIdentityRecovered ≡ false
+    exact8889ConsumerIdentityRecoveredIsTrue :
+      exact8889ConsumerIdentityRecovered ≡ true
 
-    precisionLossMayBeLocalizedBeforeConsumerIdentity : Bool
-    precisionLossMayBeLocalizedBeforeConsumerIdentityIsFalse :
-      precisionLossMayBeLocalizedBeforeConsumerIdentity ≡ false
+    precisionLossLocalizationNowUnblocked : Bool
+    precisionLossLocalizationNowUnblockedIsTrue :
+      precisionLossLocalizationNowUnblocked ≡ true
 
     genericGammaSourceSearchStillHighestAlpha : Bool
     genericGammaSourceSearchStillHighestAlphaIsFalse :
@@ -158,8 +154,8 @@ canonicalGammaCandidateLineageBoundary : GammaCandidateLineageBoundary
 canonicalGammaCandidateLineageBoundary =
   gamma-candidate-lineage-boundary
     true refl
+    true refl
+    true refl
     false refl
     false refl
-    false refl
-    false refl
-    "The retained checked Zeta23 source history recovers a concrete Gamma envelope family, epsGamma/gammaConeEnvelope, and a theorem-bearing downstream residual use. Generic source discovery is therefore pruned. However the current 8889 pole-quotient consumer is not yet proved to use this exact producer chain. The next source payment is same-consumer provenance: identify the reported uniform pole-quotient Gamma bound with this recovered chain or recover the actual alternate chain. Only after that identity may a first precision-losing transformation be localized and repaired. RH remains open."
+    "The exact vendored 8889 file PoleQuotientGammaBudget.lean is now present in dashi_lean4 and its final budget theorem uses gammaConeEnvelope directly. Same-consumer Gamma lineage is therefore recovered. The file itself explains the sharpness failure: stripConst contains a second-derivative L1 term which grows quadratically as the high-ordinate taper support shrinks. The live Gamma work is now quantitative repair of that strip/C2 envelope or a fresh sharper same-taper theorem. RH remains open."

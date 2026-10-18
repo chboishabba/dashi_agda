@@ -52,10 +52,10 @@ record ElaborationObservation : Set where
 open ElaborationObservation public
 
 data ElaborationIntervention : Set where
-  stageEqualityOrConversion
-  exposeIndicesAndSplitInference
-  nameAndShareIntermediateTerms
-  performInterfaceConeSurgery
+  stageEqualityOrConversion : ElaborationIntervention
+  exposeIndicesAndSplitInference : ElaborationIntervention
+  nameAndShareIntermediateTerms : ElaborationIntervention
+  performInterfaceConeSurgery : ElaborationIntervention
   noElaborationSurgerySelected : ElaborationIntervention
 
 selectIntervention : ElaborationObservation -> ElaborationIntervention

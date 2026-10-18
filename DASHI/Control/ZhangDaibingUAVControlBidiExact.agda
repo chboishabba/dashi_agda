@@ -21,8 +21,8 @@ import DASHI.Core.ApplicationTransformationCapabilityBidiExact as T
 ------------------------------------------------------------------------
 
 data UAVControlStage : Set where
-  stateSensing multisensorFusion localisation referenceGeneration
-  guidanceCommand flightControl landingOrPathDecision formationCoordination
+  stateSensing multisensorFusion localisation referenceGeneration : UAVControlStage
+  guidanceCommand flightControl landingOrPathDecision formationCoordination : UAVControlStage
   fieldTestResidual : UAVControlStage
 
 record UAVControlPipeline : Set where
@@ -66,8 +66,8 @@ zhangDaibingTransformation = T.application-transformation
   "Operational autonomy requires vehicle/sensor geometry, calibrated state estimation, environmental assumptions, validation and failure handling."
 
 data ZhangDaibingReverseTarget : Set where
-  selectExactPaper acquireDynamics acquireStateDefinition acquireControlLaw
-  acquireGains acquireSensorModel acquireTestGeometry acquireErrorMetrics
+  selectExactPaper acquireDynamics acquireStateDefinition acquireControlLaw : ZhangDaibingReverseTarget
+  acquireGains acquireSensorModel acquireTestGeometry acquireErrorMetrics : ZhangDaibingReverseTarget
   acquireCodeCustodian : ZhangDaibingReverseTarget
 
 publishedControlLawImpliesSpecificDeployment : Bool

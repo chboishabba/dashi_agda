@@ -185,33 +185,103 @@ Once those equalities are explicit, the low-frequency singularity is cancelled
 by the already-proved saturation estimate and the high-frequency branch is
 handled by the existing curvature/inverse-power envelope.
 
-## 5. Alternative B — remaining theorem-production seam
+## 5. Alternative B — primary live signed-reserve route and legacy route
 
-The current B route is the literal physical infinity-shell route:
+The **primary R823--R825 path** is no longer the legacy B1--B7
+physical-shell compiler. The preferred current physical finite-Galerkin
+payment is at the **single shared** R408 viscosity
+`delta = nu > 0`, for each selected cutoff and terminal.
 
-\`\`\`text
-B1  R236-filtered physical DFL
-    -> literal InfinityShellSupport receipt
+```text
+R408/R648 live finite trajectory
+       |
+R745 -> R760 -> R781
+       |                        R822
+       |               original CC rows + comparable certificates
+       |                        |
+R813 fully-separated     original signed CC scalar
+  four-helicity work             |
+       +---------- R823 ---------+
+                    |
+    V_N(T) = integral (D_CC + 6 nu d_N)
+    A_N(T) = 2 integral (Q_sep - 9 N_sep)
+                    |
+    OPEN B-RESERVE: A_N(T) <= V_N(T)  for all admissible
+                    |
+      R821 / R735 critical energy barrier
+                    ^
+                    |
+    OPEN B-W1: W_N(T) + Q_+-,N(T) <= B(T) (cutoff independent)
+                    |
+    OPEN uniform-in-N continuation AND universal initial-data bridge
+                    |
+      NSConcreteLiteralClayABCDRunTargetExact.LiteralB K
+                    |
+      NSConcreteLiteralClayABCDRunTargetExact.runTargetFromB
+```
 
-B2  literal DFL x DHH shell-pair signed estimate
+**New physical feasibility cut:**
 
-B3  literal DHH intra-shell signed l2 aggregation
+- `NSTriadKNR650PhysicalCCGradedReserveRound824Exact.agda`
+  uses R760 on each **R822 original incidence**. It proves the CC
+  signed row is exactly a nested forcing contribution minus a
+  dyadic production contribution. Comparable representatives remain
+  attached as geometry certificates, not as substitute source scalars.
+- `NSTriadKNR650PhysicalReserveFeasibilityRound825Exact.agda`
+  proves that the *complete integrated R823 rate*, on the same live
+  physical system and integration authority, equals the integral of
+  the quadratic viscous, full nested high, and full dyadic low pieces.
+  Its decision function returns either an actual reserve-payment
+  certificate or a negated payment certificate **once concrete
+  rational physical integrals are supplied**. It supplies neither an
+  evaluated witness nor a signed inequality by itself.
+- A physical counterexample to the universal auxiliary reserve
+  estimate would reject this B auxiliary route only; it would **not**
+  refute Fefferman B or the Navier--Stokes equation.
+- R214 excludes using shell-width localization **alone** to pay the
+  between-partner Gram debt. Do not infer a CC bound merely from
+  R822's comparable representative.
 
-B4  critical-touching signed operator estimate with theta < 1
+**Important carrier-to-Clay gap:** R823–R825 are parameterised by a
+rational finite Fourier/Galerkin system, abstract time, and an explicitly
+supplied rational-valued integration authority. Even a proved reserve bound
+on these carriers would require its actual continuous-time realization,
+cutoff-uniform real/complex extension, the full arbitrary smooth periodic
+initial-data quantifiers, and a continuation passage before it can inhabit
+`NSConcreteLiteralClayABCDRunTargetExact.LiteralB K`. Neither the rational
+decision procedure nor a finite selected-cutoff barrier supplies these
+by itself.
 
-B7  literal R406 remainder
-    = 4 * sum of the live fixed-output covariances
-\`\`\`
+**No duplicate B compiler is required:** R823 already contains
+`allCutoffsSignedReserveBarrier`; R821 and R735 own the conditional
+barrier. The remaining mathematical inputs are actual B-RESERVE,
+independent B-W1, and a continuation/universal-data theorem matching
+the canonical `LiteralB K` predicate. A barrier for a selected
+trajectory is not the all-data theorem.
 
-Classification:
+**Legacy B1--B7 remains an alternative sufficient route.** B1/B7 are
+physical extraction/identification seams; B2/B3/B4 are analytic
+estimates. They are not extra assumptions automatically imposed on
+the R823 route. The ownership remains
+`NSClayFacingBResearchCutExact.agda`.
 
-- **B1/B7:** exact same-object/extraction identities;
-- **B2/B3/B4:** genuine analytic estimates.
+**Other Clay alternatives are independent:**
 
-A publishable B proof must state and prove these five claims directly in
-conventional mathematics, then show how they imply the periodic continuation
-criterion. Agda remains the preferred discovery/checking environment because
-its physical carrier and signed block machinery are already exact.
+- A: `NSClayFacingATwoPhysicalSeamCompilerExact.agda` still
+  requires its actual Euclidean resolvent-kernel and state-majorant
+  identifications plus whole-space continuation; R823 does not
+  discharge these.
+- C/D: `NSClayFacingCDSourceAuditExact.agda` and
+  `NSClayFacingABCDProofStatusExact.agda` track external source
+  alignment and optional local reconstruction, separate from an
+  independently checked conventional proof and CMI adjudication.
+  No periodic B barrier is used to prove forced breakdown.
+- All four terminal theorem *types*, including the pressure
+  periodicity clause in D, are owned by
+  `NSClayLiteralABCDExact.agda`; the canonical run target is
+  `NSConcreteLiteralClayABCDRunTargetExact.agda`. The latter
+  consumes a genuine literal A/B/C/D proof term, never a Boolean
+  receipt, selected-trajectory estimate, or GitHub status.
 
 ## 6. Submission policy
 
@@ -247,3 +317,178 @@ Under this standard, C/D are finite referee-audit/manuscript tasks. A/B still
 contain explicit theorem-production obligations. Stale Boolean ledgers or the
 amount of formal infrastructure remaining below the paper layer do not alter
 that mathematical classification.
+
+## 8. 2026-09-30 R828: direct rational finite-Fourier feasibility result (newer than historical B1–B7)
+
+This section supersedes the *research priority* in section 5, but does not
+delete the earlier sufficient B1–B7 route. The latest periodic development
+R745–R823 produces the canonical signed reserve payment at delta=nu:
+
+  integral [ 18*Nsep - 2*Qsep + D_CC + 6*nu*d_N ] dt >= 0.
+
+The new [R828 3-4-5 mathematical witness](NSR828Rational345FourierWitness.md)
+does **not** assume this estimate: it evaluates its complete R815-style
+physical Fourier scalar at an explicit smooth real divergence-free mean-zero
+initial state in the radius-four cube, with the normalization
+
+  commutator coherent work = -557627/125,
+  critical production = 0, critical dissipation = 15834,
+  complete signed initial rate = -28273644/125 < 0.
+
+An independent conservative rational Lipschitz/ODE enclosure yields a
+positive real-time interval with negative integrated scalar for the ordinary
+finite Fourier polynomial dynamics. This is a mathematical falsification
+candidate for the *auxiliary universal B reserve inequality*; it is never
+a counterexample to Navier–Stokes itself.
+
+The actual Agda R408 specialization is Q-valued and requires global
+helical projector laws, whereas the real physical Fourier flow is
+real-valued. Even though the selected 3-4-5 active helical snapshot is
+rational, this does not fill the global Q-projector or genuine continuous
+time dynamics interface. The exact R408/R692 scalar identification is
+still a kernel/source-verification seam. Do not claim unconditional
+certification of a false payment before discharging it.
+
+If the literal source scalar weld succeeds, retire universal B-RESERVE as
+a potential route: retain the exact R822/R823 identities as identities,
+and pursue a **different** analytic inequality or the older independent
+B1–B7 signed route, plus W1/continuation. Avoid adding new compilers
+assuming the disproven hypothesis. The A resolvent work is logically
+independent; C/D remain externally attributed forced-case source audits.
+
+
+## 9. 2026-10-02 max-cut after R829--R832
+
+The R828 decision route is now separated into theorem-bearing closed
+infrastructure and exactly two physical leaves.
+
+Closed/source-written surfaces:
+
+1. R829B evaluates the eight exact mixed/commutator vectors through the literal
+   R692 coherent-work consumer.
+2. R829C evaluates the six production/dissipation rows from exact
+   velocity/forcing vectors.
+3. R829A aggregates those rows and R829 normalizes the canonical
+   (6(12C-P+d)) scalar.
+4. R830 kernel-targets the exact rational horizon/negative upper-bound
+   arithmetic.
+5. R831 proves the logical implication
+   [
+   	ext{selected integrated complete rate}<0
+   Longrightarrow
+   
+eg(	ext{R823 demand}le	ext{R823 reserve}).
+   ]
+6. R832 records that no further reserve estimate is required after the two
+   remaining physical leaves.
+
+The exact remaining B-decision cut is
+
+[
+oxed{
+	ext{D1 repository operator evaluation}
++
+	ext{D2 real finite-Galerkin transport}.
+}
+]
+
+D1 is now the finite record
+`Repository345VectorEvaluation`: prove the actual repository
+`fixedOutputMixedProduct`, `fixedOutputCommutator`,
+`Audit.velocityAt`, and `Audit.projectedNonlinearity` values equal the
+already kernel-targeted vectors on the radius-four state.  The global
+`PeriodicHelicalProjectorLaws ℚ` record is explicitly not part of this
+instantaneous theorem.
+
+For D2, Round71 already constructs the fixed-cutoff autonomous
+reality-preserving Galerkin vector field.  The Lean companion now factors the
+standard analytic part as:
+
+[
+	ext{linear + bounded bilinear diagonal}
+Longrightarrow C^1
+Longrightarrow 	ext{local real integral curve},
+]
+
+followed by the already-source-written displacement/Lipschitz-to-negative-
+integral theorem.  Hence the remaining Navier--Stokes-specific real-ODE work is
+to identify the Round71 coordinate field with that quadratic template and
+verify that the explicit R828 bootstrap constants apply to the selected
+solution.
+
+### Post-decision periodic B
+
+If D1+D2 produce the selected negative integral, freeze universal R823
+B-RESERVE as a false auxiliary conjecture.  The surviving positive B cut is
+exactly
+
+[
+oxed{mathrm{B1+B2+B3+B4+B7+Bcont}}.
+]
+
+The existing B1/B2/B3/B4/B7 shell/payment/decomposition compilers are already
+closed and are not counted as separate leaves.
+
+### Whole-space A
+
+`NSClayFacingAMaxCut20261002Exact.agda` records exactly three remaining jobs:
+
+[
+oxed{mathrm{A1 kernel+A2 majorant+A3 continuation}}.
+]
+
+The canonical near-origin pair resolvents are already constructed directly by
+`NSWholeSpaceCanonicalPairSaturationOriginExact.agda`; an abstract physical
+kernel is not required for that local theorem.  Generic Young/Cauchy and
+inverse-sixth tail integration are likewise outside the research cut.
+
+### C/D
+
+`NSClayFacingCDMaxCut20261002Exact.agda` makes source-coordinate audit
+completion independent of optional DASHI Fourier/369/R406 reconstruction.
+C/D manuscript reconstruction and independent referee checking remain
+publication/audit work; optional internal representation welds do not gate the
+official-coordinate source audit.
+
+This is the current hard stop condition: do not create new compiler layers
+unless one of the named leaves proves that a genuinely new mathematical
+quantity is required.
+
+
+## 10. Round71/74 cross-pollination into R830
+
+The R830 real-ODE leaf is smaller than the first R828 handoff suggested.
+
+Existing theorem-bearing owners already provide:
+
+- `NSTriadKNFixedCanonicalRealityVectorFieldRound71Exact`: one autonomous
+  fixed-cutoff Galerkin vector field with reality built into the phase space;
+- `NSTriadKNFixedCanonicalTransverseInvariantRound71Exact`: the transverse
+  subspace is invariant;
+- `NSTriadKNFixedCanonicalVectorFieldDegreeTwoRound71Exact`: the literal
+  Round71 RHS is represented by an exact expression of algebraic degree at most
+  two and that expression evaluates to the literal RHS;
+- `NSTriadKNFiniteRationalSlotAssignmentBridgeRound74Exact`: the corrected
+  finite slot chart is executable and the earlier quantitative local-Lipschitz
+  estimate already applies through it.
+
+The standard complete-real side is now isolated in the Lean modules
+`Rational345LocalODE`, `Rational345QuadraticODE`, and
+`Rational345ShortTime`: a linear-plus-bounded-bilinear real field is (C^1),
+has a local integral curve, and the exact R828 constants satisfy the entire
+short-time sign budget.
+
+Accordingly `NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda`
+reduces R830 to only two NS-specific bridges:
+
+1. physical Round71 RHS = corrected finite-real quadratic/chart field;
+2. the selected R828 displacement and rate-Lipschitz bounds apply to that
+   solution, with the selected scalar identified with the R829/R815 scalar.
+
+Reality, transversality invariance, polynomial degree, generic Picard theory,
+and the huge rational (KLT) arithmetic are not separate open leaves.
+
+The post-reserve B continuation cut is also non-circular: the standard
+localized Luo continuation compiler is already constructed, while the
+cutoff-uniform/continuum inputs needed to turn the eventual B1--B7 estimate into
+the all-data global theorem remain the explicit B-continuation leaf.

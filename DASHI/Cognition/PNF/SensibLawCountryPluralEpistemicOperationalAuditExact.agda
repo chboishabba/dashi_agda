@@ -199,11 +199,11 @@ doctrinalRejectionOnlyCanStillCarryStructuralContinuityRisk = refl
 ------------------------------------------------------------------------
 
 data CountryOperationalResidual : Set where
-  landCountryControlResidual
-  communityAuthorityResidual
-  compensationResidual
-  correctionLoopResidual
-  preventionEvidenceResidual
+  landCountryControlResidual : CountryOperationalResidual
+  communityAuthorityResidual : CountryOperationalResidual
+  compensationResidual : CountryOperationalResidual
+  correctionLoopResidual : CountryOperationalResidual
+  preventionEvidenceResidual : CountryOperationalResidual
   : CountryOperationalResidual
 
 producerForResidual : CountryOperationalResidual → Operational.OperationalProducer
@@ -248,12 +248,12 @@ currentTerraNulliusClosureEvidenceNotPaidByDefault = refl
 
 data StateSuccessSurface : Set where stateReportsProgress : StateSuccessSurface
 data CountryOutcomeState : Set where
-  sameStateReportResidualOpen
-  sameStateReportMateriallyTransformed
+  sameStateReportResidualOpen : CountryOutcomeState
+  sameStateReportMateriallyTransformed : CountryOutcomeState
   : CountryOutcomeState
 data CountryMaterialOutcome : Set where
-  materialRelationResidual
-  materialRelationTransformed
+  materialRelationResidual : CountryMaterialOutcome
+  materialRelationTransformed : CountryMaterialOutcome
   : CountryMaterialOutcome
 
 stateSuccessObserver : CountryOutcomeState → StateSuccessSurface

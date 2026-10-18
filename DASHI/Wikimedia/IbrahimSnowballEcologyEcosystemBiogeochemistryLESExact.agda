@@ -88,8 +88,8 @@ waterCycleQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data EcologyLESNode : Set where
-  ecologyNode ecosystemNode soilEcologyNode landscapeEcologyNode
-  restorationEcologyNode successionNode biogeochemicalCycleNode
+  ecologyNode ecosystemNode soilEcologyNode landscapeEcologyNode : EcologyLESNode
+  restorationEcologyNode successionNode biogeochemicalCycleNode : EcologyLESNode
   carbonCycleNode waterCycleNode : EcologyLESNode
 
 record EcologyLESGraphAudit : Set where

@@ -1,0 +1,98 @@
+name: Tekum paper max-cut Agda check
+
+on:
+  push:
+    branches:
+      - research/tekum-balanced-ternary-20261002
+  pull_request:
+    paths:
+      - 'DASHI/ComputerScience/Tekum*.agda'
+      - 'scripts/check_tekum_balanced_ternary_static.py'
+      - 'scripts/check_tekum_prop4_extractor_static.py'
+      - '.github/workflows/tekum-paper-max-cut-check.yml'
+
+concurrency:
+  group: tekum-paper-max-cut-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  static-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Tekum static regression
+        run: |
+          python3 scripts/check_tekum_balanced_ternary_static.py
+          python3 scripts/check_tekum_prop4_extractor_static.py
+
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: tekum-agda29-${{ runner.os }}-86a1179-experimental-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+
+      - name: Check focused Tekum owners with Agda 2.9
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-tekum-check.log"
+            export AGDA_JOBS=4
+            targets=(
+              DASHI/ComputerScience/TekumSourceAnchorCenterExact.agda
+              DASHI/ComputerScience/TekumFixedWidthBalancedArithmeticExact.agda
+              DASHI/ComputerScience/TekumSourceWordDecodeExact.agda
+              DASHI/ComputerScience/TekumPositiveAnchorInjectiveExact.agda
+              DASHI/ComputerScience/TekumSourceAnchorInjectiveExact.agda
+              DASHI/ComputerScience/TekumSourceWordInjectiveExact.agda
+              DASHI/ComputerScience/TekumSourceNegationExact.agda
+              DASHI/ComputerScience/TekumBalancedSuccessorExact.agda
+              DASHI/ComputerScience/TekumSuccessorCarrySplitExact.agda
+              DASHI/ComputerScience/TekumRegimeSuccessorExact.agda
+              DASHI/ComputerScience/TekumFractionSuccessorExact.agda
+              DASHI/ComputerScience/TekumMonotoneMagnitudeExact.agda
+              DASHI/ComputerScience/TekumPositiveSourceSuccessorAnchorExact.agda
+              DASHI/ComputerScience/TekumSourceOrderExact.agda
+              DASHI/ComputerScience/TekumParsedAnchorListExact.agda
+              DASHI/ComputerScience/TekumParsedAdjacentCarryExtractExact.agda
+              DASHI/ComputerScience/TekumMonotonicityExact.agda
+              DASHI/ComputerScience/TekumProposition4PositiveChainExact.agda
+              DASHI/ComputerScience/TekumProposition5CounterexampleExact.agda
+              DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda
+            )
+            scripts/run_agda29_parallel_check.sh "${targets[@]}"
+          ) > agda-tekum-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 220 agda-tekum-check.log
+          exit 0
+
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tekum-paper-max-cut-agda-log
+          path: agda-tekum-check.log
+          if-no-files-found: error
+
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1

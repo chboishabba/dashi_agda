@@ -1,0 +1,17 @@
+module DASHI.Physics.Foundations.RFCalibrationGoniometerRelevanceRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.RFCalibrationGoniometerRelevanceExact as C
+
+calibrationResidualRequired : C.ArrayCalibrationResidualReceipt
+calibrationResidualRequired = C.canonicalArrayCalibrationResidualReceipt
+
+quantizationResidualRequired : C.PhaseQuantizationResidualReceipt
+quantizationResidualRequired = C.canonicalPhaseQuantizationResidualReceipt
+
+goniometerRelevanceRequired : C.GoniometerCalibrationRelevanceReceipt
+goniometerRelevanceRequired = C.canonicalGoniometerCalibrationRelevanceReceipt
+
+originalTaskBoundaryRequired : C.OriginalTaskRelevanceBoundary
+originalTaskBoundaryRequired = C.canonicalOriginalTaskRelevanceBoundary

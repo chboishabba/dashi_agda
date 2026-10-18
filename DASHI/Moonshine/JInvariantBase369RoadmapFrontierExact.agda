@@ -22,6 +22,9 @@ import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 import DASHI.Moonshine.JInvariantAnalyticJCoarseFineFrickeIntertwinerExact
+import DASHI.Moonshine.JInvariantAnalyticJCoarseFineObserverExact
+import DASHI.Moonshine.JInvariantAnalyticStructuredPantsHyperformObserverExact
+import DASHI.Moonshine.JInvariantAnalyticObserverSeamCompilerBridgeExact
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
 import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
@@ -73,7 +76,14 @@ record RoadmapState : Set where
     analyticModularCoordinateToStructuredJFieldExact : Bool
     analyticStructuredSeamCompilerExact : Bool
     analyticFrickeFiniteTransportIntertwinerExact : Bool
-    concreteAnalyticJCoarseFineEquivalencePaid : Bool
+    analyticStructuredObserverInterfaceExact : Bool
+    analyticObserverToLocalTwentySevenExact : Bool
+    analyticObserverToPantsPathThreeExact : Bool
+    analyticObserverHyperformContextSeparatedExact : Bool
+    analyticObserverToSeamOrbitCompilerExact : Bool
+    analyticFrickeToObservedPantsTransportExact : Bool
+    concreteAnalyticStructuredObserverPaid : Bool
+    legacyConcreteAnalyticJCoarseFineEquivalencePaid : Bool
     jActualAnalyticGluingLawExact : Bool
 
     monsterGradeWiseSignedFibreIntertwinerExact : Bool
@@ -120,7 +130,14 @@ canonicalRoadmapState = record
   ; analyticModularCoordinateToStructuredJFieldExact = true
   ; analyticStructuredSeamCompilerExact = true
   ; analyticFrickeFiniteTransportIntertwinerExact = true
-  ; concreteAnalyticJCoarseFineEquivalencePaid = false
+  ; analyticStructuredObserverInterfaceExact = true
+  ; analyticObserverToLocalTwentySevenExact = true
+  ; analyticObserverToPantsPathThreeExact = true
+  ; analyticObserverHyperformContextSeparatedExact = true
+  ; analyticObserverToSeamOrbitCompilerExact = true
+  ; analyticFrickeToObservedPantsTransportExact = true
+  ; concreteAnalyticStructuredObserverPaid = false
+  ; legacyConcreteAnalyticJCoarseFineEquivalencePaid = false
   ; jActualAnalyticGluingLawExact = false
 
   ; monsterGradeWiseSignedFibreIntertwinerExact = true
@@ -132,19 +149,24 @@ canonicalRoadmapState = record
 data FirstLiveRoadmapResidual : Set where
   missingConcretePixelToAnalyticBoxCalibration : FirstLiveRoadmapResidual
   missingSymbolicOrbitToAnalyticRealisation : FirstLiveRoadmapResidual
-  missingConcreteAnalyticJCoarseFineEquivalence : FirstLiveRoadmapResidual
+  missingConcreteAnalyticStructuredObserver : FirstLiveRoadmapResidual
+  missingLegacyConcreteAnalyticJCoarseFineEquivalence : FirstLiveRoadmapResidual
   missingAnalyticGluingTransport : FirstLiveRoadmapResidual
   missingConcreteGradeWise3BRecognitionAssignment : FirstLiveRoadmapResidual
   missingCompressionCostTheorem : FirstLiveRoadmapResidual
   missingKernelCertification : FirstLiveRoadmapResidual
 
--- Every row in the requested status table is now closed at the appropriate
--- theorem/compiler or empirical-source-binding layer.  The first remaining
--- j-side residual is a STRONGER coordinate not present in that table: prove a
--- concrete pixel box is an analytic Mobius box, rather than merely retaining
--- its measured scale/candidate binding.
+-- The canonical analytic/finite target is now an observer-with-fibre, not a
+-- global finite/analytic bijection.  Accordingly the first semantic j/369
+-- residual is construction of that observer on the actual analytic modular
+-- carrier.  Rendered pixel -> analytic-box calibration remains a distinct
+-- acquisition residual rather than being allowed to stand in for the observer.
 firstJMonsterResidual : FirstLiveRoadmapResidual
-firstJMonsterResidual = missingConcretePixelToAnalyticBoxCalibration
+firstJMonsterResidual = missingConcreteAnalyticStructuredObserver
+
+firstRenderedAcquisitionResidual : FirstLiveRoadmapResidual
+firstRenderedAcquisitionResidual =
+  missingConcretePixelToAnalyticBoxCalibration
 
 firstPhiResidual : FirstLiveRoadmapResidual
 firstPhiResidual = missingKernelCertification

@@ -7,7 +7,7 @@ module DASHI.Physics.YangMills.BalabanRealRingSolverProbe where
 -- operation names definitionally.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using ([]; _∷_)
 open import Relation.Binary.PropositionalEquality using (sym)
 
@@ -22,6 +22,10 @@ open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
   ; *-identityˡ
   ; realSolverRing
   )
+open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
+  ( module RealPolynomialSolver )
+open RealPolynomialSolver using
+  ( Polynomial; solve; _:=_; _:+_; _:*_; :-_ )
 
 solverRawRingProbe :
   ∀ (a b c : ℝ) →
@@ -35,3 +39,14 @@ solverRawRingConstantProbe :
     ≡ oneR *R (-R (oneR *R oneR))
 solverRawRingConstantProbe =
   sym (*-identityˡ (-R (oneR *R oneR)))
+
+coefficientSolverCancellationProbe :
+  ∀ (a b : ℝ) →
+  (a *R (-R b)) +R (b *R a) ≡ a +R (-R a)
+coefficientSolverCancellationProbe =
+  solve 2
+    (λ a b →
+      (a :* (:- b)) :+ (b :* a)
+      :=
+      a :+ (:- a))
+    refl

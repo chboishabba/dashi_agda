@@ -1,0 +1,21 @@
+module DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationAssemblyRealizationValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationAssemblyRealizationExact as Realization
+
+operationActionPhysicalTCompilerOwned :
+  Realization.cmp119OperationActionPhysicalTOperationCompilerLevel ≡ machineChecked
+operationActionPhysicalTCompilerOwned = refl
+
+endToEndWeldCompilerOwned :
+  Realization.cmp119EndToEndPhysicalTOperationWeldCompilerLevel ≡ machineChecked
+endToEndWeldCompilerOwned = refl
+
+literalOperationActionPhysicalTRemainsPhysical :
+  Realization.literalCMP119OperationActionIsPhysicalTOperationLevel ≡ conditional
+literalOperationActionPhysicalTRemainsPhysical = refl
+
+positiveSupportRemainsPhysical :
+  Realization.literalCMP119PhysicalTOperationPositiveSupportLevel ≡ conditional
+positiveSupportRemainsPhysical = refl

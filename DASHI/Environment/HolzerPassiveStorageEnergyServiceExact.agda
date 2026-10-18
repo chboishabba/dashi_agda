@@ -23,18 +23,18 @@ import DASHI.Physics.Units.SI as SI
 ------------------------------------------------------------------------
 
 data StorageArchitecture : Set where
-  earthCoupledPassiveCellar
-  mechanicallyRefrigeratedStore
+  earthCoupledPassiveCellar : StorageArchitecture
+  mechanicallyRefrigeratedStore : StorageArchitecture
   hybridPassiveMechanicalStore : StorageArchitecture
 
 data StorageServiceCoordinate : Set where
-  productTemperature
-  relativeHumidity
-  airExchange
-  condensationControl
-  mouldControl
-  productMassRetained
-  storageDuration
+  productTemperature : StorageServiceCoordinate
+  relativeHumidity : StorageServiceCoordinate
+  airExchange : StorageServiceCoordinate
+  condensationControl : StorageServiceCoordinate
+  mouldControl : StorageServiceCoordinate
+  productMassRetained : StorageServiceCoordinate
+  storageDuration : StorageServiceCoordinate
   productQuality : StorageServiceCoordinate
 
 record StorageServiceDemand : Set where

@@ -16,10 +16,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data BridgePromotionStatus : Set where
-  acquisitionOnly
-  secondPersonCandidateOnly
-  sameObjectSemanticsUnpaid
-  H2programmeBridgePaid
+  acquisitionOnly : BridgePromotionStatus
+  secondPersonCandidateOnly : BridgePromotionStatus
+  sameObjectSemanticsUnpaid : BridgePromotionStatus
+  H2programmeBridgePaid : BridgePromotionStatus
   H3operationalBridgePaid : BridgePromotionStatus
 
 record ProgrammeBridgeCandidate : Set where

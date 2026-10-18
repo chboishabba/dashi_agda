@@ -146,12 +146,12 @@ canonicalPairwise88SiteJoinReceipt = pairwise-88-site-join-receipt
 ------------------------------------------------------------------------
 
 data LocalDriverCoordinate : Set where
-  severeFireFrequency
-  feralHerbivoreActivity
-  shrubDensity
-  catActivity
-  catAbundance
-  rabbitRatOccupancy
+  severeFireFrequency : LocalDriverCoordinate
+  feralHerbivoreActivity : LocalDriverCoordinate
+  shrubDensity : LocalDriverCoordinate
+  catActivity : LocalDriverCoordinate
+  catAbundance : LocalDriverCoordinate
+  rabbitRatOccupancy : LocalDriverCoordinate
   rabbitRatLocalExtinction : LocalDriverCoordinate
 
 record PairwiseMultiDriverBidiFrontier : Set where

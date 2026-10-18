@@ -64,11 +64,11 @@ open HiddenObservationQuotient public
 ------------------------------------------------------------------------
 
 data StabilityRole : Set where
-  localMinimum
-  flatMinimum
-  metastable
-  phaseLocked
-  limitCycleModGauge
+  localMinimum : StabilityRole
+  flatMinimum : StabilityRole
+  metastable : StabilityRole
+  phaseLocked : StabilityRole
+  limitCycleModGauge : StabilityRole
   invariantLearnedClass : StabilityRole
 
 record StableLearnedClass (Hidden : Set) : Set₁ where

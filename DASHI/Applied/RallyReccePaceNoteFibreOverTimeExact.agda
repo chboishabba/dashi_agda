@@ -37,7 +37,7 @@ data LineInstruction : Set where
   neutralLine keepLeft keepRight keepMiddle keepIn keepOut cut smallCut bigCut dontCut early late : LineInstruction
 
 data Hazard : Set where
-  caution doubleCaution tripleCaution
+  caution doubleCaution tripleCaution : Hazard
   ditch bank rock log post gate bridge tunnel junction water narrowing unseen sudden : Hazard
 
 data LinkKind : Set where

@@ -18,11 +18,11 @@ import DASHI.Law.SensibLawProofSearchParetoSaturationExact as Pareto
 ------------------------------------------------------------------------
 
 data ProofResidualStatus : Set where
-  residualOpen
-  residualSatisfied
-  residualContested
-  residualAuthorityBlocked
-  residualUnderidentified
+  residualOpen : ProofResidualStatus
+  residualSatisfied : ProofResidualStatus
+  residualContested : ProofResidualStatus
+  residualAuthorityBlocked : ProofResidualStatus
+  residualUnderidentified : ProofResidualStatus
   : ProofResidualStatus
 
 record ProofResidual : Set where

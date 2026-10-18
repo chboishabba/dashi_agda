@@ -11,9 +11,9 @@ import DASHI.Foundations.DialecticSheetFrameSelectorExact as Selector
 import DASHI.Foundations.FrameWitnessFibreMDLExact as FrameMDL
 
 data PipelineStage : Set where
-  featureExtractionStage hexagramProjectionStage candidateFrameGenerationStage
-    localGluingWitnessStage ssp15SpectrumStage mdlResidualSelectionStage
-    selectedFrameStage : PipelineStage
+  featureExtractionStage hexagramProjectionStage candidateFrameGenerationStage : PipelineStage
+  localGluingWitnessStage ssp15SpectrumStage mdlResidualSelectionStage : PipelineStage
+  selectedFrameStage : PipelineStage
 
 canonicalPipeline : List PipelineStage
 canonicalPipeline =

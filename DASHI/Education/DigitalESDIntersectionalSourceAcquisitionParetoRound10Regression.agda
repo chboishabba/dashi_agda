@@ -1,0 +1,26 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound10Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound10Exact as Round10
+
+candidateStillRequiresCorpusAdmission :
+  Round10.Round10CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round10.round10CandidateDoesNotCreateIncludedStudy
+
+studentConcernNotPolicyOutcome :
+  Round10.StudentConcernCreatesPolicyOutcome → ⊥
+studentConcernNotPolicyOutcome = Round10.studentConcernDoesNotCreatePolicyOutcome
+
+policyReversalNotIndividualAppealSuccess :
+  Round10.SystemReversalCreatesIndividualAppealSuccess → ⊥
+policyReversalNotIndividualAppealSuccess = Round10.systemReversalDoesNotCreateIndividualAppealSuccess
+
+enrolmentConsentNotRepurposingConsent :
+  Round10.EnrolmentConsentCreatesDownstreamAnalyticsConsent → ⊥
+enrolmentConsentNotRepurposingConsent = Round10.enrolmentConsentDoesNotCreateDownstreamAnalyticsConsent
+
+institutionalLabelNotStudentTruth :
+  Round10.InstitutionalRiskLabelCreatesStudentStateTruth → ⊥
+institutionalLabelNotStudentTruth = Round10.institutionalRiskLabelDoesNotCreateStudentStateTruth

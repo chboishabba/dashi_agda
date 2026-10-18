@@ -9,9 +9,7 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Governance.PalantirPlatformCapabilityEvidenceExact as Palantir
 import DASHI.Economics.ChinaUSAITrainingServingComputeSeparation2026Exact as ChinaUS
-import DASHI.Economics.TSMCHBMManufacturingDemandPolicy2026Exact as TSMC
 import DASHI.Planning.DataCentreUrbanResourceConflictExact as DataCentre
-import DASHI.Biology.DeepTimeCarbonBiosphereFossilFuelBidiExact as Fossil
 
 ------------------------------------------------------------------------
 -- IBRAHIM/SNOWBALL CROSS-DOMAIN WALK:
@@ -36,11 +34,8 @@ import DASHI.Biology.DeepTimeCarbonBiosphereFossilFuelBidiExact as Fossil
 ------------------------------------------------------------------------
 
 data PublicFactRole : Set where
-  companyOfficialStatement
-  governmentContractRecord
-  judicialRuling
-  reputableNewsReport
-  wikidataIdentityOnly : PublicFactRole
+  companyOfficialStatement governmentContractRecord judicialRuling : PublicFactRole
+  reputableNewsReport wikidataIdentityOnly : PublicFactRole
 
 record PublicFact : Set where
   constructor public-fact

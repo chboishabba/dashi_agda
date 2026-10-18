@@ -81,8 +81,8 @@ data PaymentState : Set where
 paymentState : GammaAllowancePayment → PaymentState
 paymentState findAnyGammaBound = pruned
 paymentState recoverAnyGammaSourceFamily = pruned
-paymentState proveRecoveredCandidateIsFinal8889Producer = live
-paymentState localizeFirstPrecisionLoss = blocked
+paymentState proveRecoveredCandidateIsFinal8889Producer = owned
+paymentState localizeFirstPrecisionLoss = owned
 paymentState proveGammaBudgetBelowAssignedAllowance = live
 paymentState inventCutoffDependentGammaLaw = pruned
 paymentState compileFinalGammaAllowancePayment = downstream
@@ -95,9 +95,13 @@ anyGammaSourceSearchPruned :
   paymentState recoverAnyGammaSourceFamily ≡ pruned
 anyGammaSourceSearchPruned = refl
 
-candidateFinalProducerIdentityLive :
-  paymentState proveRecoveredCandidateIsFinal8889Producer ≡ live
-candidateFinalProducerIdentityLive = refl
+candidateFinalProducerIdentityOwned :
+  paymentState proveRecoveredCandidateIsFinal8889Producer ≡ owned
+candidateFinalProducerIdentityOwned = refl
+
+precisionLossLocalizationOwned :
+  paymentState localizeFirstPrecisionLoss ≡ owned
+precisionLossLocalizationOwned = refl
 
 assignedAllowanceTheoremLive :
   paymentState proveGammaBudgetBelowAssignedAllowance ≡ live
@@ -116,20 +120,20 @@ candidateGammaFamilyAlreadyRecovered :
     Lineage.canonicalGammaCandidateLineageBoundary ≡ true
 candidateGammaFamilyAlreadyRecovered = refl
 
-candidateIdentityWith8889StillOpen :
+candidateIdentityWith8889Recovered :
   Lineage.GammaCandidateLineageBoundary.exact8889ConsumerIdentityRecovered
-    Lineage.canonicalGammaCandidateLineageBoundary ≡ false
-candidateIdentityWith8889StillOpen = refl
+    Lineage.canonicalGammaCandidateLineageBoundary ≡ true
+candidateIdentityWith8889Recovered = refl
 
 coarseUniformBoundAlreadyKnown :
   Precision.GammaPrecisionLocalizationBoundary.gammaUpperBoundExistenceIsStillTheResearchQuestion
     Precision.canonicalGammaPrecisionLocalizationBoundary ≡ false
 coarseUniformBoundAlreadyKnown = refl
 
-precisionLossNotYetLocalized :
+precisionLossLocalizedAtStripConst :
   Precision.GammaPrecisionLocalizationBoundary.exactPrecisionLossStepAlreadyRecoveredOnThisBranch
-    Precision.canonicalGammaPrecisionLocalizationBoundary ≡ false
-precisionLossNotYetLocalized = refl
+    Precision.canonicalGammaPrecisionLocalizationBoundary ≡ true
+precisionLossLocalizedAtStripConst = refl
 
 gammaHasNoCutoffCoordinate :
   Coordinate.CutoffComplementCoordinateBoundary.existingGammaConsumerHasCutoffArgument
@@ -148,8 +152,8 @@ record PoleQuotientGammaAllowanceDirectCompilerBoundary : Set where
       concreteCandidateGammaLineageRecovered ≡ true
 
     candidateLineageAlreadyIdentifiedWithFinal8889Producer : Bool
-    candidateLineageAlreadyIdentifiedWithFinal8889ProducerIsFalse :
-      candidateLineageAlreadyIdentifiedWithFinal8889Producer ≡ false
+    candidateLineageAlreadyIdentifiedWithFinal8889ProducerIsTrue :
+      candidateLineageAlreadyIdentifiedWithFinal8889Producer ≡ true
 
     gammaDependsOnQuarterPeriodCutoff : Bool
     gammaDependsOnQuarterPeriodCutoffIsFalse :
@@ -174,9 +178,9 @@ canonicalPoleQuotientGammaAllowanceDirectCompilerBoundary =
   pole-quotient-gamma-allowance-direct-compiler-boundary
     false refl
     true refl
-    false refl
+    true refl
     false refl
     true refl
     true refl
     false refl
-    "Do not search for an arbitrary Gamma bound or invent Gamma(J). A uniform Gamma bound already exists and a concrete epsGamma/gammaConeEnvelope source family is recovered, but its identity with the final 8889 pole-quotient producer is not yet proved. The terminal analytic theorem is concrete: on the same universal pole-quotient taper, prove the actual final Gamma budget B_Gamma is <= the downstream-assigned A_Gamma. Once that theorem and same-taper receipt exist, PoleQuotientGammaAllowancePayment is compiler output. Historical lineage/precision localization is a route to that theorem, not the final consumer API. RH is not derived."
+    "Do not search for an arbitrary Gamma bound or invent Gamma(J). The vendored exact 8889 PoleQuotientGammaBudget theorem calls gammaConeEnvelope directly, so the epsGamma/gammaConeEnvelope producer identity is source-recovered, and the coarse loss is localized at the stripConst/C2 taper-norm envelope. The terminal analytic theorem remains concrete and unpaid in Agda: on the same universal pole-quotient taper, produce a sharp Gamma payment compatible with the baseline-excess window. Historical identity is no longer a prerequisite; theorem transport and quantitative repair/bypass remain. RH is not derived."

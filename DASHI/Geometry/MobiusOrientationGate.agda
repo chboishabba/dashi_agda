@@ -15,27 +15,20 @@ open import Data.List.Base using (List; _∷_; [])
 -- no promotion is manufactured here.
 
 data MobiusOrientationGateStatus : Set where
-  mobiusOrientationTargetsOnlyNoPromotion :
-    MobiusOrientationGateStatus
+  mobiusOrientationTargetsOnlyNoPromotion : MobiusOrientationGateStatus
 
 data MobiusOrientationGateOpenObligation : Set where
-  missingLocalOrientationCarrier :
-    MobiusOrientationGateOpenObligation
+  missingLocalOrientationCarrier : MobiusOrientationGateOpenObligation
 
-  missingGlobalOrientationCarrier :
-    MobiusOrientationGateOpenObligation
+  missingGlobalOrientationCarrier : MobiusOrientationGateOpenObligation
 
-  missingOneLoopFlipTransportCertificate :
-    MobiusOrientationGateOpenObligation
+  missingOneLoopFlipTransportCertificate : MobiusOrientationGateOpenObligation
 
-  missingTwoLoopReturnCertificate :
-    MobiusOrientationGateOpenObligation
+  missingTwoLoopReturnCertificate : MobiusOrientationGateOpenObligation
 
-  missingOrientabilityGate :
-    MobiusOrientationGateOpenObligation
+  missingOrientabilityGate : MobiusOrientationGateOpenObligation
 
-  missingPromotionAuthorityBoundary :
-    MobiusOrientationGateOpenObligation
+  missingPromotionAuthorityBoundary : MobiusOrientationGateOpenObligation
 
 canonicalMobiusOrientationGateOpenObligations :
   List MobiusOrientationGateOpenObligation
@@ -49,14 +42,11 @@ canonicalMobiusOrientationGateOpenObligations =
   ∷ []
 
 data MobiusOrientationTarget : Set where
-  localVsGlobalOrientationTransportTarget :
-    MobiusOrientationTarget
+  localVsGlobalOrientationTransportTarget : MobiusOrientationTarget
 
-  oneLoopOrderTwoFlipTarget :
-    MobiusOrientationTarget
+  oneLoopOrderTwoFlipTarget : MobiusOrientationTarget
 
-  orientabilityFalseGateTarget :
-    MobiusOrientationTarget
+  orientabilityFalseGateTarget : MobiusOrientationTarget
 
 canonicalMobiusOrientationTargets :
   List MobiusOrientationTarget

@@ -127,7 +127,7 @@ canonicalExtensionProducerExternalCoordinates =
 ------------------------------------------------------------------------
 
 data ProducerFieldRole : Set where
-  complexEigenvalueLiftField
+  complexEigenvalueLiftField : ProducerFieldRole
   rationalFusedCharacterCrossCheckField : ProducerFieldRole
 
 record FiniteFieldRepresentationRun : Set₁ where

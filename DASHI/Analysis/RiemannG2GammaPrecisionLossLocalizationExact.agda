@@ -17,10 +17,10 @@ import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 -- same-taper producer chain and replace only that step by a consumer-adequate
 -- estimate.
 --
--- This module intentionally does not guess whether the loss occurs in a kernel
--- estimate, an absolute-value envelope, a taper norm, a parameter supremum, an
--- asymptotic remainder, or only in the final constant comparison.  A source
--- audit must identify that step explicitly.
+-- The vendored exact source now identifies the first coarse scaling mechanism:
+-- PoleQuotientGammaBudget factors through stripConst, whose sample-test C2 norm
+-- contains a second-derivative L1 term that grows quadratically as support
+-- shrinks.  Thus taperNormEstimate is the recovered precision-loss stage.
 ------------------------------------------------------------------------
 
 data GammaPrecisionStage : Set where
@@ -31,6 +31,9 @@ data GammaPrecisionStage : Set where
   asymptoticRemainder : GammaPrecisionStage
   finalConstantComparison : GammaPrecisionStage
   sourceLocalizationStillRequired : GammaPrecisionStage
+
+currentGammaPrecisionLossStage : GammaPrecisionStage
+currentGammaPrecisionLossStage = taperNormEstimate
 
 
 record ExistingCoarseGammaProducer : Set₁ where
@@ -135,8 +138,8 @@ record GammaPrecisionLocalizationBoundary : Set where
       gammaUpperBoundExistenceIsStillTheResearchQuestion ≡ false
 
     exactPrecisionLossStepAlreadyRecoveredOnThisBranch : Bool
-    exactPrecisionLossStepAlreadyRecoveredOnThisBranchIsFalse :
-      exactPrecisionLossStepAlreadyRecoveredOnThisBranch ≡ false
+    exactPrecisionLossStepAlreadyRecoveredOnThisBranchIsTrue :
+      exactPrecisionLossStepAlreadyRecoveredOnThisBranch ≡ true
 
     precisionLossLocalizationIsLive : Bool
     precisionLossLocalizationIsLiveIsTrue :
@@ -159,9 +162,9 @@ canonicalGammaPrecisionLocalizationBoundary : GammaPrecisionLocalizationBoundary
 canonicalGammaPrecisionLocalizationBoundary =
   gamma-precision-localization-boundary
     false refl
-    false refl
+    true refl
     true refl
     false refl
     true refl
     false refl
-    "The 8889 return already supplies existence of a uniform Gamma upper bound and simultaneously proves that this bound misses the sharp pole-quotient comparison window. Do not search for another generic bound. Audit the actual same-taper producer chain, identify the first step that loses the required precision, and repair that exact step. The repaired producer must inhabit the existing PoleQuotientGammaBudgetTarget and carry an explicit sharp-window fit receipt. This branch does not yet identify which analytic step loses the powers, and RH is not derived."
+    "The vendored exact 8889 PoleQuotientGammaBudget source is now recovered. Its proof factors through gammaConeEnvelope and stripConst, and its own source commentary identifies the failure mechanism: stripConst includes the sample-test second-derivative L1 norm, which grows quadratically as the high-ordinate taper support shrinks. Treat taperNormEstimate/stripConst as the localized precision-loss stage. Repair that C2 envelope or bypass it with a sharper same-taper Gamma theorem; a generic Gamma existence proof is already owned. RH is not derived."

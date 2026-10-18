@@ -19,8 +19,7 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 -- committed support, admissibility, or trading authority.
 
 data VectorNonAuthorityCoreStatus : Set where
-  vectorNonAuthorityCore_candidateOnly :
-    VectorNonAuthorityCoreStatus
+  vectorNonAuthorityCore_candidateOnly : VectorNonAuthorityCoreStatus
 
 data ⊤-local : Set where
   tt-local : ⊤-local
@@ -99,20 +98,15 @@ fallbackRankRef =
 -- Proposal modes and evidence-claim vocabulary.
 
 data VectorProposalMode : Set where
-  embeddingProposalMode :
-    VectorProposalMode
+  embeddingProposalMode : VectorProposalMode
 
-  spectralProposalMode :
-    VectorProposalMode
+  spectralProposalMode : VectorProposalMode
 
-  proximityProposalMode :
-    VectorProposalMode
+  proximityProposalMode : VectorProposalMode
 
-  rankingProposalMode :
-    VectorProposalMode
+  rankingProposalMode : VectorProposalMode
 
-  arithmeticProposalMode :
-    VectorProposalMode
+  arithmeticProposalMode : VectorProposalMode
 
   blendedProposalMode :
     String →
@@ -128,20 +122,15 @@ canonicalVectorProposalModes =
   ∷ []
 
 data VectorEvidenceClaimKind : Set where
-  coordinateObservationClaim :
-    VectorEvidenceClaimKind
+  coordinateObservationClaim : VectorEvidenceClaimKind
 
-  spectralFeatureClaim :
-    VectorEvidenceClaimKind
+  spectralFeatureClaim : VectorEvidenceClaimKind
 
-  proximityScoreClaim :
-    VectorEvidenceClaimKind
+  proximityScoreClaim : VectorEvidenceClaimKind
 
-  rankingOrderClaim :
-    VectorEvidenceClaimKind
+  rankingOrderClaim : VectorEvidenceClaimKind
 
-  arithmeticTransportClaim :
-    VectorEvidenceClaimKind
+  arithmeticTransportClaim : VectorEvidenceClaimKind
 
   namedVectorEvidenceClaim :
     String →
@@ -249,20 +238,15 @@ canonicalVectorEvidenceClaimReceipt =
 -- Candidate-only hits.
 
 data CandidateHitKind : Set where
-  vectorHit :
-    CandidateHitKind
+  vectorHit : CandidateHitKind
 
-  spectralHit :
-    CandidateHitKind
+  spectralHit : CandidateHitKind
 
-  proximityHit :
-    CandidateHitKind
+  proximityHit : CandidateHitKind
 
-  rankingHit :
-    CandidateHitKind
+  rankingHit : CandidateHitKind
 
-  arithmeticHit :
-    CandidateHitKind
+  arithmeticHit : CandidateHitKind
 
   namedCandidateHit :
     String →

@@ -32,10 +32,10 @@ modelReference model6 = "continuous oscillator model N=6"
 modelReference model9 = "continuous oscillator model N=9"
 
 data OscillatorParetoAxis : Set where
-  modelSizeAxis
-  heldoutErrorAxis
-  hiddenStateErrorAxis
-  restartInstabilityAxis
+  modelSizeAxis : OscillatorParetoAxis
+  heldoutErrorAxis : OscillatorParetoAxis
+  hiddenStateErrorAxis : OscillatorParetoAxis
+  restartInstabilityAxis : OscillatorParetoAxis
   nullFragilityAxis : OscillatorParetoAxis
 
 axisReference : OscillatorParetoAxis → String

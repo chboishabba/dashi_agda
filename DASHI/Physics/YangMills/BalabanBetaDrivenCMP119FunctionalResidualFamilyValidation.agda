@@ -1,0 +1,12 @@
+module DASHI.Physics.YangMills.BalabanBetaDrivenCMP119FunctionalResidualFamilyValidation where
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119FunctionalResidualFamilyExact as F
+assemblyEvaluationDefinitional : F.functionalCMP119AssemblyEvaluationLevel ≡ machineChecked
+assemblyEvaluationDefinitional = refl
+pointwiseDensityCompilerOwned : F.functionalCMP119PointwiseDensityEquationLevel ≡ machineChecked
+pointwiseDensityCompilerOwned = refl
+completeDensityCompilerOwned : F.functionalCMP119CompleteDensityCompilerLevel ≡ machineChecked
+completeDensityCompilerOwned = refl
+equation218StillSource : F.literalCMP119Equation218FunctionalRepresentationLevel ≡ conditional
+equation218StillSource = refl

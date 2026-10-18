@@ -6,6 +6,9 @@
 # Stage 1 is purely character-theoretic: enumerate every admissible D8 -> MN3B
 # class fusion and retain those for which the actual degree-196883 Monster
 # character restricted along the fusion contains theta as a subcharacter.
+# Each retained fusion is serialized literally into the runtime receipt; the
+# downstream scheduler must consume these rows rather than reconstruct worlds
+# from the compatible-fusion count.
 #
 # Stage 2 tries to realize an actual D8 subgroup inside the constructible MN3B
 # model already used by monster_3b_actual_kernel_structure.g. A concrete
@@ -33,6 +36,7 @@ mn3b := CharacterTable("MN3B");
 if monster = fail or mn3b = fail then
   Error("required character tables M and MN3B are unavailable");
 fi;
+monsterAtlasClassNames := ClassNames(monster,"ATLAS");
 
 # ----------------------------------------------------------------------
 # Canonical abstract D4 and the five-orbit quotient action.
@@ -129,10 +133,16 @@ for fusion in possibleFusions do
   pulled := ClassFunction(d4, pulledValues);
   multiplicities := List(d4Irr, psi -> ScalarProduct(d4, pulled, psi));
   if ForAll([1..Length(d4Irr)], i -> IsInt(multiplicities[i]) and multiplicities[i] >= targetMult[i]) then
+    centralMN3BClass := fusion[classR2];
+    centralMonsterClass := mn3bToMonster[centralMN3BClass];
     Add(compatible, rec(
       fusion := fusion,
+      monsterFusion := List(fusion, i -> mn3bToMonster[i]),
       multiplicities := multiplicities,
-      canonicalValues := List(canonicalClassOrder, c -> pulledValues[c])
+      canonicalValues := List(canonicalClassOrder, c -> pulledValues[c]),
+      centralMN3BClass := centralMN3BClass,
+      centralMonsterClass := centralMonsterClass,
+      centralMonsterClassName := monsterAtlasClassNames[centralMonsterClass]
     ));
   fi;
 od;
@@ -153,7 +163,6 @@ G := fail;
 atlasGroupRealized := false;
 selectedConstructionSource := fail;
 
-# First use the documented AtlasRep information-record route.
 for groupName in groupNames do
   infos := AllAtlasGeneratingSetInfos(groupName);
   infos := Filtered(infos, info -> IsBound(info.size) and info.size = expectedGroupOrder);
@@ -169,8 +178,6 @@ for groupName in groupNames do
   if G <> fail then break; fi;
 od;
 
-# Some installations construct the group directly even when the local
-# information list is incomplete.
 if G = fail then
   for groupName in groupNames do
     candidate := AtlasGroup(groupName);
@@ -183,7 +190,6 @@ if G = fail then
   od;
 fi;
 
-# Reuse the CTblLib/Browse fallback from the established actual-kernel producer.
 if G = fail and LoadPackage("browse") = true then
   groupInfos := GroupInfoForCharacterTable(mn3b);
   for groupInfo in groupInfos do
@@ -234,8 +240,6 @@ if G <> fail then
       candidateFusion := List([1..Length(d4Classes)], i -> fail);
       unique := true;
 
-      # Transport each canonical abstract-D4 class representative into the
-      # concrete subgroup, then identify its ambient MN3B class.
       for canonicalPosition in [1..Length(d4Classes)] do
         x := Image(canonicalToActual,Representative(d4Classes[canonicalPosition]));
         xOrder := Order(x);
@@ -283,6 +287,41 @@ PrintIntList := function(out, xs)
   AppendTo(out,"]");
 end;
 
+WorldId := function(i)
+  if i < 10 then
+    return Concatenation("fusion-0",String(i));
+  fi;
+  return Concatenation("fusion-",String(i));
+end;
+
+PrintCompatibleRows := function(out, rows)
+  local i, item;
+  AppendTo(out,"[\n");
+  for i in [1..Length(rows)] do
+    item := rows[i];
+    AppendTo(out,"    {\"world_id\":\"",WorldId(i),"\",\"character_compatible\":true,\"fusion\":");
+    PrintIntList(out,item.fusion);
+    AppendTo(out,",\"monster_class_fusion\":");
+    PrintIntList(out,item.monsterFusion);
+    AppendTo(out,",\"canonical_values\":");
+    PrintIntList(out,item.canonicalValues);
+    AppendTo(out,",\"d4_multiplicities\":{\"A1\":",String(item.multiplicities[posA1]),
+      ",\"A2\":",String(item.multiplicities[posA2]),
+      ",\"B1\":",String(item.multiplicities[posB1]),
+      ",\"B2\":",String(item.multiplicities[posB2]),
+      ",\"E\":",String(item.multiplicities[posE]),"}");
+    AppendTo(out,",\"central_mn3b_class_position\":",String(item.centralMN3BClass));
+    AppendTo(out,",\"central_monster_class_position\":",String(item.centralMonsterClass));
+    AppendTo(out,",\"central_monster_class\":\"",item.centralMonsterClassName,"\"}");
+    if i < Length(rows) then AppendTo(out,","); fi;
+    AppendTo(out,"\n");
+  od;
+  AppendTo(out,"  ]");
+end;
+
+central2ACount := Number(compatible, item -> item.centralMonsterClassName = "2A");
+central2BCount := Number(compatible, item -> item.centralMonsterClassName = "2B");
+
 output := OutputTextFile("build/monster_3b_five_orbit_d4_n3b_screen.json", false);
 SetPrintFormattingStatus(output,false);
 AppendTo(output,"{\n");
@@ -290,6 +329,10 @@ AppendTo(output,"  \"target_character\": [5,5,1,3,3],\n");
 AppendTo(output,"  \"target_multiplicities\": {\"A1\":3,\"A2\":0,\"B1\":1,\"B2\":1,\"E\":0},\n");
 AppendTo(output,"  \"possible_fusion_count\": ",String(Length(possibleFusions)),",\n");
 AppendTo(output,"  \"character_compatible_fusion_count\": ",String(Length(compatible)),",\n");
+AppendTo(output,"  \"central_monster_class_split\": {\"2A\":",String(central2ACount),",\"2B\":",String(central2BCount),"},\n");
+AppendTo(output,"  \"character_compatible_fusions\": ");
+PrintCompatibleRows(output,compatible);
+AppendTo(output,",\n");
 AppendTo(output,"  \"atlas_group_realized\": ",JsonBool(atlasGroupRealized),",\n");
 if selectedConstructionSource = fail then
   AppendTo(output,"  \"group_construction_source\": null,\n");
@@ -317,6 +360,8 @@ CloseStream(output);
 
 Print("D4/N3B character screen written: possible=",Length(possibleFusions),
   "; compatible=",Length(compatible),
+  "; central-2A=",central2ACount,
+  "; central-2B=",central2BCount,
   "; group-source=",selectedConstructionSource,
   "; atlas-group=",atlasGroupRealized,
   "; d4-found=",d4SubgroupFound,

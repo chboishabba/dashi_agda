@@ -19,21 +19,21 @@ import DASHI.Environment.KNFSoilMicrobePlantFruitResourceLoopExact as Forward
 ------------------------------------------------------------------------
 
 data PlantSoilReturnKind : Set where
-  rootExudation
-  rootTurnover
-  leafLitter
-  fruitResidue
-  pruningResidue
+  rootExudation : PlantSoilReturnKind
+  rootTurnover : PlantSoilReturnKind
+  leafLitter : PlantSoilReturnKind
+  fruitResidue : PlantSoilReturnKind
+  pruningResidue : PlantSoilReturnKind
   fungalCarbonTransfer : PlantSoilReturnKind
 
 data ReturnFlowResponse : Set where
-  returnFlowUnresolved
-  returnFlowObserved
+  returnFlowUnresolved : ReturnFlowResponse
+  returnFlowObserved : ReturnFlowResponse
   returnFlowNotObserved : ReturnFlowResponse
 
 data SoilReentryResponse : Set where
-  soilReentryUnresolved
-  soilPoolChanged
+  soilReentryUnresolved : SoilReentryResponse
+  soilPoolChanged : SoilReentryResponse
   soilPoolUnchanged : SoilReentryResponse
 
 record PlantSoilReturnFlow

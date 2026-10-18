@@ -36,35 +36,25 @@ listCount (_ ∷ xs) =
 -- Vocabulary.
 
 data RSAIterationLeakVocabularyKind : Set where
-  iterationCountTraceVocabularyKind :
-    RSAIterationLeakVocabularyKind
+  iterationCountTraceVocabularyKind : RSAIterationLeakVocabularyKind
 
-  candidateDrawIndexVocabularyKind :
-    RSAIterationLeakVocabularyKind
+  candidateDrawIndexVocabularyKind : RSAIterationLeakVocabularyKind
 
-  rejectionPathVocabularyKind :
-    RSAIterationLeakVocabularyKind
+  rejectionPathVocabularyKind : RSAIterationLeakVocabularyKind
 
-  acceptanceTraceVocabularyKind :
-    RSAIterationLeakVocabularyKind
+  acceptanceTraceVocabularyKind : RSAIterationLeakVocabularyKind
 
-  knownGeneratorContextVocabularyKind :
-    RSAIterationLeakVocabularyKind
+  knownGeneratorContextVocabularyKind : RSAIterationLeakVocabularyKind
 
-  constrainedCandidatePrimeSetVocabularyKind :
-    RSAIterationLeakVocabularyKind
+  constrainedCandidatePrimeSetVocabularyKind : RSAIterationLeakVocabularyKind
 
-  sourceFiberShrinkCandidateVocabularyKind :
-    RSAIterationLeakVocabularyKind
+  sourceFiberShrinkCandidateVocabularyKind : RSAIterationLeakVocabularyKind
 
-  searchCostReductionCandidateVocabularyKind :
-    RSAIterationLeakVocabularyKind
+  searchCostReductionCandidateVocabularyKind : RSAIterationLeakVocabularyKind
 
-  rejectionCountVocabularyKind :
-    RSAIterationLeakVocabularyKind
+  rejectionCountVocabularyKind : RSAIterationLeakVocabularyKind
 
-  timingCountVocabularyKind :
-    RSAIterationLeakVocabularyKind
+  timingCountVocabularyKind : RSAIterationLeakVocabularyKind
 
   namedRSAIterationLeakVocabularyKind :
     String →
@@ -391,17 +381,13 @@ canonicalRSAIterationLeakCandidateGenericReceiptsNonPromoting =
 -- Blocked authorities.
 
 data RSAIterationLeakBlockedAuthorityKind : Set where
-  factorRecoveryAuthorityKind :
-    RSAIterationLeakBlockedAuthorityKind
+  factorRecoveryAuthorityKind : RSAIterationLeakBlockedAuthorityKind
 
-  exploitAuthorityKind :
-    RSAIterationLeakBlockedAuthorityKind
+  exploitAuthorityKind : RSAIterationLeakBlockedAuthorityKind
 
-  sideChannelAuthorityKind :
-    RSAIterationLeakBlockedAuthorityKind
+  sideChannelAuthorityKind : RSAIterationLeakBlockedAuthorityKind
 
-  securityAuthorityKind :
-    RSAIterationLeakBlockedAuthorityKind
+  securityAuthorityKind : RSAIterationLeakBlockedAuthorityKind
 
   namedRSAIterationLeakBlockedAuthorityKind :
     String →

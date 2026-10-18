@@ -338,13 +338,12 @@ complementIsInvolutive :
   complementHexagram (complementHexagram x) ≡ x
 complementIsInvolutive
   (a vcons b vcons c vcons d vcons e vcons f vcons vnil)
-  with Triadic.negateTritInvolutive a
-     | Triadic.negateTritInvolutive b
-     | Triadic.negateTritInvolutive c
-     | Triadic.negateTritInvolutive d
-     | Triadic.negateTritInvolutive e
-     | Triadic.negateTritInvolutive f
-... | refl | refl | refl | refl | refl | refl = refl
+  rewrite Triadic.negateTritInvolutive a
+        | Triadic.negateTritInvolutive b
+        | Triadic.negateTritInvolutive c
+        | Triadic.negateTritInvolutive d
+        | Triadic.negateTritInvolutive e
+        | Triadic.negateTritInvolutive f = refl
 
 canonicalNuclearExtraction :
   nuclearHexagram canonicalCastInitial

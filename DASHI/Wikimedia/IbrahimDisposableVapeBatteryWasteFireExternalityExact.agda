@@ -13,11 +13,11 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data AttributionGrade : Set where
-  confirmedBatteryCause
-  suspectedBatteryCause
-  possibleBatteryCause
-  industryBatteryEstimate
-  industryVapeSpecificEstimate
+  confirmedBatteryCause : AttributionGrade
+  suspectedBatteryCause : AttributionGrade
+  possibleBatteryCause : AttributionGrade
+  industryBatteryEstimate : AttributionGrade
+  industryVapeSpecificEstimate : AttributionGrade
   vapeSpecificRecordedIncident : AttributionGrade
 
 record FireIncidenceReceipt : Set where

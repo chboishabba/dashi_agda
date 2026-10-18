@@ -20,9 +20,9 @@ import DASHI.Cognition.PNF.SensibLawCountryRealisedRepairProofSearchBridgeV02Exa
 ------------------------------------------------------------------------
 
 data PaymentCutState : Set where
-  candidateAvailable
-  admissionEvidenceMissing
-  paymentAdmitted
+  candidateAvailable : PaymentCutState
+  admissionEvidenceMissing : PaymentCutState
+  paymentAdmitted : PaymentCutState
   : PaymentCutState
 
 currentOutcomeCandidateState : PaymentCutState
@@ -121,7 +121,7 @@ firstResidualBeforePayment = refl
 ------------------------------------------------------------------------
 
 data HighestAlphaNextProducer : Set where
-  obtainConsumerMatchedCommunityOutcomeAndMandate
+  obtainConsumerMatchedCommunityOutcomeAndMandate : HighestAlphaNextProducer
   : HighestAlphaNextProducer
 
 highestAlphaNextProducer : HighestAlphaNextProducer

@@ -23,12 +23,7 @@ import DASHI.Wikimedia.NativeReferenceSemanticsExact as Ref
 ------------------------------------------------------------------------
 
 data BundleCoordinateKind : Set where
-  mainSnakCoordinate
-  qualifierCoordinate
-  referenceCoordinate
-  rankCoordinate
-  provenanceCoordinate
-  : BundleCoordinateKind
+  mainSnakCoordinate qualifierCoordinate referenceCoordinate rankCoordinate provenanceCoordinate : BundleCoordinateKind
 
 record BundleCoordinate : Set where
   constructor bundle-coordinate

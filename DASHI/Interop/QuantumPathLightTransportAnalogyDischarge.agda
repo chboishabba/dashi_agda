@@ -29,20 +29,15 @@ import DASHI.Physics.Closure.QuantumPathFibreObservationQuotient as Quantum
 -- are inhabited.
 
 data QuantumLightSharedAnalogySurface : Set where
-  weightedFibreCarrierSurface :
-    QuantumLightSharedAnalogySurface
+  weightedFibreCarrierSurface : QuantumLightSharedAnalogySurface
 
-  cancellationOrResidualSurface :
-    QuantumLightSharedAnalogySurface
+  cancellationOrResidualSurface : QuantumLightSharedAnalogySurface
 
-  quotientDependentObservationSurface :
-    QuantumLightSharedAnalogySurface
+  quotientDependentObservationSurface : QuantumLightSharedAnalogySurface
 
-  maskOrVisibilityTopologySurface :
-    QuantumLightSharedAnalogySurface
+  maskOrVisibilityTopologySurface : QuantumLightSharedAnalogySurface
 
-  receiptGatedReuseSurface :
-    QuantumLightSharedAnalogySurface
+  receiptGatedReuseSurface : QuantumLightSharedAnalogySurface
 
 canonicalQuantumLightSharedSurfaces :
   List QuantumLightSharedAnalogySurface
@@ -55,23 +50,17 @@ canonicalQuantumLightSharedSurfaces =
   ∷ []
 
 data QuantumLightAnalogyGuard : Set where
-  QuantumPathIsNotRendererAlgorithm :
-    QuantumLightAnalogyGuard
+  QuantumPathIsNotRendererAlgorithm : QuantumLightAnalogyGuard
 
-  RendererClosureIsNotQEDProof :
-    QuantumLightAnalogyGuard
+  RendererClosureIsNotQEDProof : QuantumLightAnalogyGuard
 
-  NoRetrocausalRendererClaim :
-    QuantumLightAnalogyGuard
+  NoRetrocausalRendererClaim : QuantumLightAnalogyGuard
 
-  NoGlobalO1PhysicalExactnessClaim :
-    QuantumLightAnalogyGuard
+  NoGlobalO1PhysicalExactnessClaim : QuantumLightAnalogyGuard
 
-  NoHiddenResidualOrSideInfoDiscard :
-    QuantumLightAnalogyGuard
+  NoHiddenResidualOrSideInfoDiscard : QuantumLightAnalogyGuard
 
-  NoCollapseOrMeasurementTheorem :
-    QuantumLightAnalogyGuard
+  NoCollapseOrMeasurementTheorem : QuantumLightAnalogyGuard
 
 canonicalQuantumLightAnalogyGuards :
   List QuantumLightAnalogyGuard
@@ -85,29 +74,21 @@ canonicalQuantumLightAnalogyGuards =
   ∷ []
 
 data QuantumLightPromotionRequirement : Set where
-  pathIntegralToClosedTransportCompiler :
-    QuantumLightPromotionRequirement
+  pathIntegralToClosedTransportCompiler : QuantumLightPromotionRequirement
 
-  stationaryPhaseErrorBound :
-    QuantumLightPromotionRequirement
+  stationaryPhaseErrorBound : QuantumLightPromotionRequirement
 
-  materialScatteringLawReceipt :
-    QuantumLightPromotionRequirement
+  materialScatteringLawReceipt : QuantumLightPromotionRequirement
 
-  visibilityMaskCompletenessReceipt :
-    QuantumLightPromotionRequirement
+  visibilityMaskCompletenessReceipt : QuantumLightPromotionRequirement
 
-  residualToleranceProof :
-    QuantumLightPromotionRequirement
+  residualToleranceProof : QuantumLightPromotionRequirement
 
-  sideInformationBudgetProof :
-    QuantumLightPromotionRequirement
+  sideInformationBudgetProof : QuantumLightPromotionRequirement
 
-  rendererRuntimeComplexityProof :
-    QuantumLightPromotionRequirement
+  rendererRuntimeComplexityProof : QuantumLightPromotionRequirement
 
-  empiricalRendererConformanceReceipt :
-    QuantumLightPromotionRequirement
+  empiricalRendererConformanceReceipt : QuantumLightPromotionRequirement
 
 canonicalQuantumLightPromotionRequirements :
   List QuantumLightPromotionRequirement

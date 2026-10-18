@@ -21,20 +21,15 @@ import DASHI.Physics.Closure.CompressionAdmissibilityReceipt as Compression
 -- conservation, physical adequacy, or terminal unification.
 
 data SemanticPipelineStage : Set where
-  artifactCIDStage :
-    SemanticPipelineStage
+  artifactCIDStage : SemanticPipelineStage
 
-  fractranTraceStage :
-    SemanticPipelineStage
+  fractranTraceStage : SemanticPipelineStage
 
-  factorVecPrimeGeometryStage :
-    SemanticPipelineStage
+  factorVecPrimeGeometryStage : SemanticPipelineStage
 
-  mdlPostEntropyStage :
-    SemanticPipelineStage
+  mdlPostEntropyStage : SemanticPipelineStage
 
-  observableProjectionStage :
-    SemanticPipelineStage
+  observableProjectionStage : SemanticPipelineStage
 
 canonicalSemanticPipelineStages :
   List SemanticPipelineStage
@@ -47,20 +42,15 @@ canonicalSemanticPipelineStages =
   ∷ []
 
 data AdmissibleSemanticTransform : Set where
-  cidPreservingReencoding :
-    AdmissibleSemanticTransform
+  cidPreservingReencoding : AdmissibleSemanticTransform
 
-  fractranTraceReplay :
-    AdmissibleSemanticTransform
+  fractranTraceReplay : AdmissibleSemanticTransform
 
-  factorVecAddressNormalization :
-    AdmissibleSemanticTransform
+  factorVecAddressNormalization : AdmissibleSemanticTransform
 
-  mdlCanonicalRepresentative :
-    AdmissibleSemanticTransform
+  mdlCanonicalRepresentative : AdmissibleSemanticTransform
 
-  receiptBoundObservableProjection :
-    AdmissibleSemanticTransform
+  receiptBoundObservableProjection : AdmissibleSemanticTransform
 
 canonicalAdmissibleSemanticTransforms :
   List AdmissibleSemanticTransform
@@ -73,20 +63,15 @@ canonicalAdmissibleSemanticTransforms =
   ∷ []
 
 data SemanticConservationNonClaim : Set where
-  noExactSemanticConservationProof :
-    SemanticConservationNonClaim
+  noExactSemanticConservationProof : SemanticConservationNonClaim
 
-  noPostEntropyInvarianceProof :
-    SemanticConservationNonClaim
+  noPostEntropyInvarianceProof : SemanticConservationNonClaim
 
-  noPhysicalAdequacyPromotion :
-    SemanticConservationNonClaim
+  noPhysicalAdequacyPromotion : SemanticConservationNonClaim
 
-  noDASLRuntimeEquivalencePromotion :
-    SemanticConservationNonClaim
+  noDASLRuntimeEquivalencePromotion : SemanticConservationNonClaim
 
-  noTerminalUnificationPromotion :
-    SemanticConservationNonClaim
+  noTerminalUnificationPromotion : SemanticConservationNonClaim
 
 canonicalSemanticConservationNonClaims :
   List SemanticConservationNonClaim

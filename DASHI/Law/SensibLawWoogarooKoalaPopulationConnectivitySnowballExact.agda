@@ -127,10 +127,10 @@ conservationBiologyCoordinate = external-coordinate
 ------------------------------------------------------------------------
 
 data PopulationScale : Set where
-  southeastQueenslandRegional
-  ipswichLocalGovernmentArea
-  woogarooCreekLandscape
-  springviewReferralSite
+  southeastQueenslandRegional : PopulationScale
+  ipswichLocalGovernmentArea : PopulationScale
+  woogarooCreekLandscape : PopulationScale
+  springviewReferralSite : PopulationScale
   independentlyGenotypedCluster : PopulationScale
 
 record PopulationConnectivityReceipt : Set where

@@ -48,7 +48,7 @@ openCriticalInfrastructureCoordinate c =
     "requires jurisdiction/project-specific source and authority receipt"
     false
 
-record CriticalInfrastructureAudit : Set where
+record CriticalInfrastructureAudit : Set₁ where
   constructor criticalInfrastructureAudit
   field
     coordinateReference : CriticalInfrastructureCoordinate → String

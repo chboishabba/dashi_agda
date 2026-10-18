@@ -18,9 +18,9 @@ import DASHI.Cognition.PNF.LearningUpdateMechanismSeparationExact as Mechanism
 ------------------------------------------------------------------------
 
 data OscillatorUpdateLawCandidate : Set where
-  currentGradientCandidate
-  hebbianCandidate
-  ojaCandidate
+  currentGradientCandidate : OscillatorUpdateLawCandidate
+  hebbianCandidate : OscillatorUpdateLawCandidate
+  ojaCandidate : OscillatorUpdateLawCandidate
   kuramotoCandidate : OscillatorUpdateLawCandidate
 
 candidateReference : OscillatorUpdateLawCandidate → String

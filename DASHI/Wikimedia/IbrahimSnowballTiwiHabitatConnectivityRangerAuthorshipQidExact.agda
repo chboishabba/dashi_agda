@@ -84,11 +84,11 @@ careyEtAl2026 = tiwi-connectivity-primary-source
 ------------------------------------------------------------------------
 
 data TiwiCareyRole : Set where
-  publishedNamedIndividualAuthor
-  publishedNamedCollectiveAuthor
-  acknowledgedTraditionalOwnerSupport
-  acknowledgedInstitutionalSupport
-  researchPermitAuthority
+  publishedNamedIndividualAuthor : TiwiCareyRole
+  publishedNamedCollectiveAuthor : TiwiCareyRole
+  acknowledgedTraditionalOwnerSupport : TiwiCareyRole
+  acknowledgedInstitutionalSupport : TiwiCareyRole
+  researchPermitAuthority : TiwiCareyRole
   dataUsePermissionAuthority : TiwiCareyRole
 
 record TiwiCareyAttributionReceipt : Set where
@@ -132,7 +132,7 @@ data ConnectivityScale : Set where
   fineScale broadIslandScale : ConnectivityScale
 
 data TiwiLandscapeVariable : Set where
-  fireHistory fireFrequency rainfall vegetation topography watercourses
+  fireHistory fireFrequency rainfall vegetation topography watercourses : TiwiLandscapeVariable
   feralPredators feralHerbivores geographicDistance midStoreyStructure : TiwiLandscapeVariable
 
 data TiwiConnectivityTaxon : Set where

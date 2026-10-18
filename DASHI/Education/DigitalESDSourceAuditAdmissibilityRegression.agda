@@ -1,0 +1,33 @@
+module DASHI.Education.DigitalESDSourceAuditAdmissibilityRegression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDSourceAuditAdmissibilityExact as Admissibility
+
+aiGovernanceQuestionPinned : Admissibility.AuditConsumerQuestion
+aiGovernanceQuestionPinned = Admissibility.aiGovernanceRequirement
+
+learningQuestionPinned : Admissibility.AuditConsumerQuestion
+learningQuestionPinned = Admissibility.studentLearningEffect
+
+accessibilityQuestionPinned : Admissibility.AuditConsumerQuestion
+accessibilityQuestionPinned = Admissibility.livedAccessibilityExperience
+
+prevalenceQuestionPinned : Admissibility.AuditConsumerQuestion
+prevalenceQuestionPinned = Admissibility.nationalPrevalence
+
+fabWaterQuestionPinned : Admissibility.AuditConsumerQuestion
+fabWaterQuestionPinned = Admissibility.reportedFabricationWaterUse
+
+schoolWaterQuestionPinned : Admissibility.AuditConsumerQuestion
+schoolWaterQuestionPinned = Admissibility.specificSchoolAIWaterFootprint
+
+scoreNoQuality : Admissibility.ScoreProjectionCreatesSourceQuality → ⊥
+scoreNoQuality = Admissibility.scoreProjectionDoesNotCreateSourceQuality
+
+participantNoAuthority : Admissibility.ParticipantPresenceCreatesAuthority → ⊥
+participantNoAuthority = Admissibility.participantPresenceDoesNotCreateAuthority
+
+indigenousCitationNoAuthority : Admissibility.IndigenousCitationCreatesIndigenousAuthority → ⊥
+indigenousCitationNoAuthority = Admissibility.indigenousCitationDoesNotCreateIndigenousAuthority

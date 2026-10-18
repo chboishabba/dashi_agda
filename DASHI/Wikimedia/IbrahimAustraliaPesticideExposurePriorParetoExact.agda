@@ -31,10 +31,10 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data RegulatoryObjectKind : Set where
-  foodResidueUse
-  quarantineNonFoodUse
-  biosecurityMovementControl
-  dietaryExposureModel
+  foodResidueUse : RegulatoryObjectKind
+  quarantineNonFoodUse : RegulatoryObjectKind
+  biosecurityMovementControl : RegulatoryObjectKind
+  dietaryExposureModel : RegulatoryObjectKind
   pesticideToleranceSystem : RegulatoryObjectKind
 
 record RegulatoryEvidence : Set where
@@ -176,11 +176,11 @@ berryConsumptionRevision = prior-revision
 ------------------------------------------------------------------------
 
 data PlantUseClass : Set where
-  ornamental
-  nonBearingFruitTree
-  bearingFruitTree
-  vegetableSeedling
-  edibleCrop
+  ornamental : PlantUseClass
+  nonBearingFruitTree : PlantUseClass
+  bearingFruitTree : PlantUseClass
+  vegetableSeedling : PlantUseClass
+  edibleCrop : PlantUseClass
   unresolvedPlantUse : PlantUseClass
 
 record NurseryTreatmentAdmission : Set where
@@ -299,12 +299,12 @@ canonicalComparativeBoundary =
 ------------------------------------------------------------------------
 
 data AustraliaStandardsParetoTarget : Set where
-  quantifyBerryPriorShift
-  traceFireAntPlantLifecycle
-  auditNonFoodToFoodTransitions
-  compareAusUsConsumptionModelFreshness
-  compareRetailSurveillance
-  tobaccoResidueGovernance
+  quantifyBerryPriorShift : AustraliaStandardsParetoTarget
+  traceFireAntPlantLifecycle : AustraliaStandardsParetoTarget
+  auditNonFoodToFoodTransitions : AustraliaStandardsParetoTarget
+  compareAusUsConsumptionModelFreshness : AustraliaStandardsParetoTarget
+  compareRetailSurveillance : AustraliaStandardsParetoTarget
+  tobaccoResidueGovernance : AustraliaStandardsParetoTarget
   scalarCountryRanking : AustraliaStandardsParetoTarget
 
 record AustraliaStandardsParetoStep : Set where
@@ -371,16 +371,16 @@ pareto99 = australia-standards-pareto-step
 ------------------------------------------------------------------------
 
 data StandardsTime : Set where
-  dimethoate2017
-  berryConsumption2025
-  fireAntPermitCurrent
+  dimethoate2017 : StandardsTime
+  berryConsumption2025 : StandardsTime
+  fireAntPermitCurrent : StandardsTime
   currentDashi : StandardsTime
 
 data StandardsInterpretation : Set where
-  usePatternAcceptedUnderPriorExposure
-  consumptionPriorChanged
-  foodUseReopened
-  nonFoodQuarantineTreatmentPaid
+  usePatternAcceptedUnderPriorExposure : StandardsInterpretation
+  consumptionPriorChanged : StandardsInterpretation
+  foodUseReopened : StandardsInterpretation
+  nonFoodQuarantineTreatmentPaid : StandardsInterpretation
   australiaGloballyWorseThanUS : StandardsInterpretation
 
 data StandardsSummary : Set where exposurePriorMustBeVersioned : StandardsSummary

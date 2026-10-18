@@ -6,7 +6,8 @@ module DASHI.Computation.SSSPConsumerInvariantSymmetryQuotientExact where
 -- deliberately representation-agnostic; no group cardinality or Base369
 -- carrier identification is assumed.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; trans; sym)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Biology.FiniteSymmetryStabiliserExact as Sym
@@ -90,7 +91,7 @@ tailReflectionComposition Sym.identityReflection Sym.identityReflection o = refl
 tailReflectionComposition Sym.identityReflection Sym.swapReflection o = refl
 tailReflectionComposition Sym.swapReflection Sym.identityReflection o = refl
 tailReflectionComposition Sym.swapReflection Sym.swapReflection o =
-  F3.swapBC-involutive o
+  sym (F3.swapBC-involutive o)
 
 aIsFirstTailInvariant :
   (g : Sym.Reflection2) (o : F3.LinearOrder3) →

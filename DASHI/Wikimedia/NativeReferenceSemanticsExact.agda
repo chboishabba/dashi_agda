@@ -26,8 +26,7 @@ p143 : Id.PropertyId
 p143 = Id.propertyId "P143"
 
 data NativeReferenceKind : Set where
-  statedInReference referenceUrlReference importedFromReference otherReference
-  : NativeReferenceKind
+  statedInReference referenceUrlReference importedFromReference otherReference : NativeReferenceKind
 
 propertyForReferenceKind : NativeReferenceKind → Id.PropertyId
 propertyForReferenceKind statedInReference = p248

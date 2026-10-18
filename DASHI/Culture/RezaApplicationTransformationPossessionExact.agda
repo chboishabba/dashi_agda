@@ -112,14 +112,14 @@ canonicalRezaApplicationBoundary = reza-application-boundary
   false false true false false false true
 
 data RezaApplicationReverseTarget : Set where
-  acquirePrimaryJPLEventTimeRoleRecord
-  acquireArchivedCalState2024To2025BoardRow
-  acquireHeatTreatmentDevelopmentRecords
-  acquireMicrostructureAcceptanceWindow
-  acquireProcessToleranceAndFailureHistory
-  acquireEngineQualificationOwnership
-  acquireManufacturingHandover
-  acquireSuccessorRole
+  acquirePrimaryJPLEventTimeRoleRecord : RezaApplicationReverseTarget
+  acquireArchivedCalState2024To2025BoardRow : RezaApplicationReverseTarget
+  acquireHeatTreatmentDevelopmentRecords : RezaApplicationReverseTarget
+  acquireMicrostructureAcceptanceWindow : RezaApplicationReverseTarget
+  acquireProcessToleranceAndFailureHistory : RezaApplicationReverseTarget
+  acquireEngineQualificationOwnership : RezaApplicationReverseTarget
+  acquireManufacturingHandover : RezaApplicationReverseTarget
+  acquireSuccessorRole : RezaApplicationReverseTarget
   acquireRequalificationAfterDeparture : RezaApplicationReverseTarget
 
 firstRezaApplicationTarget : RezaApplicationReverseTarget

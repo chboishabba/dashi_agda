@@ -16,12 +16,7 @@ import DASHI.Wikimedia.SensibLawZelphHFSelectorResultPaymentExact as Result
 ------------------------------------------------------------------------
 
 data RoutingFamily : Set where
-  fullAuto
-  splitAuto
-  repairPlusMigrateReview
-  reviewOnlyTypedHold
-  manualReconstruction
-  : RoutingFamily
+  fullAuto splitAuto repairPlusMigrateReview reviewOnlyTypedHold manualReconstruction : RoutingFamily
 
 data SelectorClass : Set where
   zelphHFSelector theoremSearch humanReview noSelector : SelectorClass

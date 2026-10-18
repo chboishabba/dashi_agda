@@ -21,11 +21,11 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data KNFPreparationKind : Set where
-  indigenousMicroorganismCulture
-  fermentedPlantInput
-  fermentedAnimalInput
-  mineralInput
-  herbalInput
+  indigenousMicroorganismCulture : KNFPreparationKind
+  fermentedPlantInput : KNFPreparationKind
+  fermentedAnimalInput : KNFPreparationKind
+  mineralInput : KNFPreparationKind
+  herbalInput : KNFPreparationKind
   mixedCompostInput : KNFPreparationKind
 
 data MaterialOrigin : Set where

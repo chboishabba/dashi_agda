@@ -57,16 +57,15 @@ reflectionIsInvolutive (sheet3 a b c d e f g h i) = refl
 negationIsInvolutive :
   (x : Sheet3) → negateSheet (negateSheet x) ≡ x
 negationIsInvolutive (sheet3 a b c d e f g h i)
-  with Triadic.negateTritInvolutive a
-     | Triadic.negateTritInvolutive b
-     | Triadic.negateTritInvolutive c
-     | Triadic.negateTritInvolutive d
-     | Triadic.negateTritInvolutive e
-     | Triadic.negateTritInvolutive f
-     | Triadic.negateTritInvolutive g
-     | Triadic.negateTritInvolutive h
-     | Triadic.negateTritInvolutive i
-... | refl | refl | refl | refl | refl | refl | refl | refl | refl = refl
+  rewrite Triadic.negateTritInvolutive a
+        | Triadic.negateTritInvolutive b
+        | Triadic.negateTritInvolutive c
+        | Triadic.negateTritInvolutive d
+        | Triadic.negateTritInvolutive e
+        | Triadic.negateTritInvolutive f
+        | Triadic.negateTritInvolutive g
+        | Triadic.negateTritInvolutive h
+        | Triadic.negateTritInvolutive i = refl
 
 ------------------------------------------------------------------------
 -- Dialectical spiral lift.  Projection to the sheet can return after four

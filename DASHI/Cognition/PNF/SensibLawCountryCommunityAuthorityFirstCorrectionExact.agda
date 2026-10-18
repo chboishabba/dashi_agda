@@ -57,12 +57,12 @@ currentCorrectionResponseState = refl
 ------------------------------------------------------------------------
 
 data CountryCorrectionStage : Set where
-  obtainCommunityDefinedOutcomeStage
-  establishCommunityAuthorityStage
-  testInstitutionalCorrectionStage
-  verifyMaterialEffectStage
-  verifyPreventionStage
-  operationalClosureStage
+  obtainCommunityDefinedOutcomeStage : CountryCorrectionStage
+  establishCommunityAuthorityStage : CountryCorrectionStage
+  testInstitutionalCorrectionStage : CountryCorrectionStage
+  verifyMaterialEffectStage : CountryCorrectionStage
+  verifyPreventionStage : CountryCorrectionStage
+  operationalClosureStage : CountryCorrectionStage
   : CountryCorrectionStage
 
 nextCorrectionStage : CountryCorrectionStage → CountryCorrectionStage

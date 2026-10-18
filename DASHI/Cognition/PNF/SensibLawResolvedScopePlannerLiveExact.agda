@@ -116,7 +116,7 @@ record ResolvedScopePlannerLiveBoundary : Set where
     samePropositionRequired : Bool
     sameEventRequired : Bool
     allScopeAxesResolved : Bool
-    resolvedScopeReusesExisting : Bool
+    boundaryResolvedScopeReusesExisting : Bool
     parserCandidateWouldHaveSufficed : Bool
 
 canonicalResolvedScopePlannerLiveBoundary : ResolvedScopePlannerLiveBoundary

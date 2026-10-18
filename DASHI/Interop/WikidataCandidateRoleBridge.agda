@@ -29,11 +29,9 @@ listCount (_ ∷ xs) =
 -- Wikidata candidate identity and hints.
 
 data QID : Set where
-  Q7368 :
-    QID
+  Q7368 : QID
 
-  Q283 :
-    QID
+  Q283 : QID
 
   externalQID :
     String →
@@ -121,26 +119,19 @@ open WikidataCandidateSurface public
 -- authority classes are delegated to DASHI.Interop.RoleGrammarCore.
 
 data RoleGrammarFibre : Set where
-  biologicalTaxonFibre :
-    RoleGrammarFibre
+  biologicalTaxonFibre : RoleGrammarFibre
 
-  lexicalSurfaceFibre :
-    RoleGrammarFibre
+  lexicalSurfaceFibre : RoleGrammarFibre
 
-  labourTransportFibre :
-    RoleGrammarFibre
+  labourTransportFibre : RoleGrammarFibre
 
-  chemicalSubstanceFibre :
-    RoleGrammarFibre
+  chemicalSubstanceFibre : RoleGrammarFibre
 
-  environmentalMediumFibre :
-    RoleGrammarFibre
+  environmentalMediumFibre : RoleGrammarFibre
 
-  resourceGovernanceFibre :
-    RoleGrammarFibre
+  resourceGovernanceFibre : RoleGrammarFibre
 
-  metaphorCarrierFibre :
-    RoleGrammarFibre
+  metaphorCarrierFibre : RoleGrammarFibre
 
   externalCandidateFibre :
     String →
@@ -151,26 +142,19 @@ CandidateFibre =
   RoleGrammarFibre
 
 data RoleGrammarRole : Set where
-  speciesCandidateRole :
-    RoleGrammarRole
+  speciesCandidateRole : RoleGrammarRole
 
-  packAnimalCandidateRole :
-    RoleGrammarRole
+  packAnimalCandidateRole : RoleGrammarRole
 
-  lexicalSenseCandidateRole :
-    RoleGrammarRole
+  lexicalSenseCandidateRole : RoleGrammarRole
 
-  chemicalSubstanceCandidateRole :
-    RoleGrammarRole
+  chemicalSubstanceCandidateRole : RoleGrammarRole
 
-  environmentalMediumCandidateRole :
-    RoleGrammarRole
+  environmentalMediumCandidateRole : RoleGrammarRole
 
-  resourceCommodityCandidateRole :
-    RoleGrammarRole
+  resourceCommodityCandidateRole : RoleGrammarRole
 
-  metaphorCarrierCandidateRole :
-    RoleGrammarRole
+  metaphorCarrierCandidateRole : RoleGrammarRole
 
   externalCandidateRole :
     String →
@@ -181,20 +165,15 @@ CandidateRole =
   RoleGrammarRole
 
 data RoleGrammarResidual : Set where
-  exactCandidateResidual :
-    RoleGrammarResidual
+  exactCandidateResidual : RoleGrammarResidual
 
-  partialCandidateResidual :
-    RoleGrammarResidual
+  partialCandidateResidual : RoleGrammarResidual
 
-  noTypedMeetCandidateResidual :
-    RoleGrammarResidual
+  noTypedMeetCandidateResidual : RoleGrammarResidual
 
-  scopeExceededCandidateResidual :
-    RoleGrammarResidual
+  scopeExceededCandidateResidual : RoleGrammarResidual
 
-  unresolvedCandidateResidual :
-    RoleGrammarResidual
+  unresolvedCandidateResidual : RoleGrammarResidual
 
 CandidateResidual : Set
 CandidateResidual =
@@ -292,8 +271,7 @@ candidateRoleCoreReceipt fibre role residual =
     "Wikidata candidate role grammar delegates generic role-family receipt fields to RoleGrammarCore."
 
 data CandidateFormalRoleEntailment : Set where
-  noFormalRoleEntailed :
-    CandidateFormalRoleEntailment
+  noFormalRoleEntailed : CandidateFormalRoleEntailment
 
   formalRoleEntailedByPNF :
     FormalRole →
@@ -341,31 +319,24 @@ pnfAssignmentFromGrammar candidate fibre role residual =
 -- Commit status and authority.
 
 data RoleGrammarCommitStatus : Set where
-  wikidataCandidateOnly :
-    RoleGrammarCommitStatus
+  wikidataCandidateOnly : RoleGrammarCommitStatus
 
-  pnfRoleAssigned :
-    RoleGrammarCommitStatus
+  pnfRoleAssigned : RoleGrammarCommitStatus
 
-  itirCommittedWithReceipt :
-    RoleGrammarCommitStatus
+  itirCommittedWithReceipt : RoleGrammarCommitStatus
 
-  rejectedCandidate :
-    RoleGrammarCommitStatus
+  rejectedCandidate : RoleGrammarCommitStatus
 
 TypedTermCommitStatus : Set
 TypedTermCommitStatus =
   RoleGrammarCommitStatus
 
 data RoleGrammarAuthority : Set where
-  noTypedTermAuthority :
-    RoleGrammarAuthority
+  noTypedTermAuthority : RoleGrammarAuthority
 
-  pnfLocalTypingAuthority :
-    RoleGrammarAuthority
+  pnfLocalTypingAuthority : RoleGrammarAuthority
 
-  itirCommittedReceiptAuthority :
-    RoleGrammarAuthority
+  itirCommittedReceiptAuthority : RoleGrammarAuthority
 TypedTermAuthority : Set
 TypedTermAuthority =
   RoleGrammarAuthority

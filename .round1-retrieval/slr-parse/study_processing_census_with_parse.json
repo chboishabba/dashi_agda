@@ -1,0 +1,51 @@
+{
+  "artifacts": {
+    "fulltext_index": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.round1-retrieval/fulltext/digital_esd_fulltext_index.tsv",
+      "sha256": "742875d4ac60560d838b0a1eb8422143540e3b28b454316d9cf75d059e032885"
+    },
+    "screening_ledger": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.round1-retrieval/screening-ledger-round1.tsv",
+      "sha256": "19ebc5ce663d6836d876b50283fda0a25aa88be49bb95d9794b7733b6ebe5aaf"
+    },
+    "slr_handoff": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.round1-retrieval/slr-parse/slr-handoff-receipts.jsonl",
+      "sha256": "033a086991532ff2ecd891ef878d01620f5e2ec3afedf97fe5202af73ca4fc42"
+    },
+    "slr_parse_receipts": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.round1-retrieval/slr-parse/slr-parse-receipts.jsonl",
+      "sha256": "7f593609b7e388f339c8bd3b4076ed7e781dbf9e5bbf57dd3e57c4b39d82b97e"
+    },
+    "slr_review_receipts": null,
+    "source_audit_receipts": null
+  },
+  "denominator_integrity": true,
+  "expected_metadata_records": 50,
+  "fulltext_counts_as_parsed": false,
+  "fulltext_failed": 0,
+  "fulltext_pending": 8,
+  "genuinely_screened_records": 50,
+  "handed_to_slr": 7,
+  "include_probable_eligible_for_materialisation": 15,
+  "later_stage_inference_used": false,
+  "metadata_count_matches_expected": true,
+  "metadata_counts_as_fulltext": false,
+  "metadata_records": 50,
+  "parse_counts_as_reviewed": false,
+  "review_counts_as_source_audit_admission": false,
+  "reviewed_canonical_evidence": 0,
+  "schema": "sensiblaw.digital-esd-study-processing-census.v0_1",
+  "screening_decision_counts": {
+    "exclude": 27,
+    "include": 4,
+    "probable": 11,
+    "unresolved": 8
+  },
+  "source_audit_admission_complete": 0,
+  "successfully_parsed_by_slr": 7,
+  "verified_fulltext_artifacts": 7
+}

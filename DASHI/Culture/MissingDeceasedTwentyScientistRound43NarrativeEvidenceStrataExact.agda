@@ -17,8 +17,8 @@ import DASHI.Culture.MissingDeceasedTwentyScientistRound42ExactKeyCrossingSurfac
 ------------------------------------------------------------------------
 
 data NarrativeStatus : Set where
-  directlyEvidenced
-  boundedInference
+  directlyEvidenced : NarrativeStatus
+  boundedInference : NarrativeStatus
   unsupported : NarrativeStatus
 
 record NarrativeProposition : Set where

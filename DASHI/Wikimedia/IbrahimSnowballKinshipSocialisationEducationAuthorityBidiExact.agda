@@ -368,7 +368,7 @@ aliceMillerFrontier = named-source-frontier true true true false false
 ------------------------------------------------------------------------
 
 data LocalFormationAxis : Set where
-  relationAxis voiceAgencyAxis refusalRevisionAxis observerAxis authoritySenseAxis
+  relationAxis voiceAgencyAxis refusalRevisionAxis observerAxis authoritySenseAxis : LocalFormationAxis
   sourceRoleAxis designAxis historicalTransmissionAxis : LocalFormationAxis
 
 localRelevant : LocalFormationAxis → Bool
@@ -428,17 +428,17 @@ data InstitutionalEducationCreatesCommunityCountryAuthority : Set where
 data BidiParentLabelExplainsEveryChildCase : Set where
 data QidCreatesAuthorityOrProof : Set where
 
-socialisationDoesNotCreateConsent : SocialisationCreatesConsent → ⊥
-socialisationDoesNotCreateConsent ()
+socialisationCannotCreateConsent : SocialisationCreatesConsent → ⊥
+socialisationCannotCreateConsent ()
 
-educationDoesNotCreateAutonomousEndorsement : EducationCreatesAutonomousEndorsement → ⊥
-educationDoesNotCreateAutonomousEndorsement ()
+educationCannotCreateAutonomousEndorsement : EducationCreatesAutonomousEndorsement → ⊥
+educationCannotCreateAutonomousEndorsement ()
 
 kinshipDoesNotCreateUnlimitedDecisionAuthority : KinshipCreatesUnlimitedChildDecisionAuthority → ⊥
 kinshipDoesNotCreateUnlimitedDecisionAuthority ()
 
-hierarchicalPowerDoesNotCreateLegitimateAuthority : HierarchicalPowerCreatesLegitimateAuthority → ⊥
-hierarchicalPowerDoesNotCreateLegitimateAuthority ()
+hierarchicalPowerCannotCreateLegitimateAuthority : HierarchicalPowerCreatesLegitimateAuthority → ⊥
+hierarchicalPowerCannotCreateLegitimateAuthority ()
 
 authorityQidSensesCannotBeSilentlySwapped : AuthorityQidSenseCanBeSilentlySwapped → ⊥
 authorityQidSensesCannotBeSilentlySwapped ()

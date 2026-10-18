@@ -42,7 +42,7 @@ record PulmonicConsonantCell : Set where
 open PulmonicConsonantCell public
 
 data VowelHeight : Set where
-  close nearClose closeMid mid openMid nearOpen open : VowelHeight
+  close nearClose closeMid mid openMid nearOpen openVowel : VowelHeight
 
 data VowelBackness : Set where
   front central back : VowelBackness

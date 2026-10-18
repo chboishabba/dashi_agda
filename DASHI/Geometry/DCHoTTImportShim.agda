@@ -38,14 +38,11 @@ open import G-structure using (groups-over-automorphismgroup-of_)
 -- G-structure theorem, a Levi-Civita adapter, or the B0 emergence theorem.
 
 data DCHoTTCompilationLane : Set where
-  cohesionLane :
-    DCHoTTCompilationLane
+  cohesionLane : DCHoTTCompilationLane
 
-  cubicalLane :
-    DCHoTTCompilationLane
+  cubicalLane : DCHoTTCompilationLane
 
-  proofErasingInterfaceLane :
-    DCHoTTCompilationLane
+  proofErasingInterfaceLane : DCHoTTCompilationLane
 
 canonicalDCHoTTCompilationLanes :
   List DCHoTTCompilationLane

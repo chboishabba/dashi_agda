@@ -14,9 +14,9 @@ import DASHI.Biology.Levin.CellPhysicalOrganisationCore as Physical
 
 record MitochondrialBioenergeticAdapter : Set where
   field
-    atpOrganisationBoundary : ATP.ATPOrganisationBoundary
-    atpOrganisationBoundaryIsCanonical :
-      atpOrganisationBoundary ≡ ATP.canonicalATPOrganisationBoundary
+    atpOrganisationWitness : ATP.ATPOrganisationWitness
+    atpOrganisationWitnessIsCanonical :
+      atpOrganisationWitness ≡ ATP.canonicalATPOrganisationWitness
 
     physicalOrganisationCore : Physical.CellPhysicalOrganisationCore
     physicalOrganisationCoreIsCanonical :
@@ -39,8 +39,8 @@ open MitochondrialBioenergeticAdapter public
 
 canonicalMitochondrialBioenergeticAdapter : MitochondrialBioenergeticAdapter
 canonicalMitochondrialBioenergeticAdapter = record
-  { atpOrganisationBoundary = ATP.canonicalATPOrganisationBoundary
-  ; atpOrganisationBoundaryIsCanonical = refl
+  { atpOrganisationWitness = ATP.canonicalATPOrganisationWitness
+  ; atpOrganisationWitnessIsCanonical = refl
   ; physicalOrganisationCore = Physical.canonicalCellPhysicalOrganisationCore
   ; physicalOrganisationCoreIsCanonical = refl
   ; mitochondrialOutputFeedsATPAvailability = true

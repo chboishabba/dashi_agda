@@ -1,0 +1,28 @@
+name: Earth Embedding Agda Kernel
+on:
+  push:
+    branches:
+      - research/earth-embeddings-woogaroo-20260929
+    paths:
+      - 'DASHI/Geo/EarthEmbedding*.agda'
+      - '.github/workflows/earth-embedding-agda.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Geo/EarthEmbedding*.agda'
+      - '.github/workflows/earth-embedding-agda.yml'
+jobs:
+  check-earth-embeddings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and standard library
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y agda agda-stdlib
+      - name: Check selected owner modules
+        run: |
+          agda -i . -i /usr/share/agda-stdlib DASHI/Geo/EarthEmbeddingWoogarooExact.agda
+          agda -i . -i /usr/share/agda-stdlib DASHI/Geo/EarthEmbeddingGeometryExact.agda
+          agda -i . -i /usr/share/agda-stdlib DASHI/Geo/EarthEmbeddingAttributedSourcesExact.agda
+          agda -i . -i /usr/share/agda-stdlib DASHI/Geo/EarthEmbeddingInterpretabilityExact.agda
+          agda -i . -i /usr/share/agda-stdlib DASHI/Geo/EarthEmbeddingAcquisitionExact.agda

@@ -21,81 +21,81 @@ import DASHI.Environment.LESSituatedObservationInteractionExact as LES
 ------------------------------------------------------------------------
 
 data ManagementTechnique : Set where
-  agroecologicalDiversification
-  integratedPestManagement
-  coverCrop
-  noTill
-  reducedTill
-  conservationCropRotation
-  compostOrOrganicAmendment
-  nutrientManagement
-  agroforestry
-  alleyCropping
-  riparianForestBuffer
-  windbreak
-  forestFarming
-  silvopasture
-  prescribedGrazing
-  organicManagement
-  koreanNaturalFarming
-  permacultureDesign
-  biocharAmendment
-  waterHarvesting
-  mulching
-  intercropping
-  polyculture
+  agroecologicalDiversification : ManagementTechnique
+  integratedPestManagement : ManagementTechnique
+  coverCrop : ManagementTechnique
+  noTill : ManagementTechnique
+  reducedTill : ManagementTechnique
+  conservationCropRotation : ManagementTechnique
+  compostOrOrganicAmendment : ManagementTechnique
+  nutrientManagement : ManagementTechnique
+  agroforestry : ManagementTechnique
+  alleyCropping : ManagementTechnique
+  riparianForestBuffer : ManagementTechnique
+  windbreak : ManagementTechnique
+  forestFarming : ManagementTechnique
+  silvopasture : ManagementTechnique
+  prescribedGrazing : ManagementTechnique
+  organicManagement : ManagementTechnique
+  koreanNaturalFarming : ManagementTechnique
+  permacultureDesign : ManagementTechnique
+  biocharAmendment : ManagementTechnique
+  waterHarvesting : ManagementTechnique
+  mulching : ManagementTechnique
+  intercropping : ManagementTechnique
+  polyculture : ManagementTechnique
   integratedCropLivestock : ManagementTechnique
 
 data ManagementDomain : Set where
-  soilDomain
-  cropDomain
-  pestDomain
-  waterDomain
-  nutrientDomain
-  livestockDomain
-  treeCropDomain
+  soilDomain : ManagementDomain
+  cropDomain : ManagementDomain
+  pestDomain : ManagementDomain
+  waterDomain : ManagementDomain
+  nutrientDomain : ManagementDomain
+  livestockDomain : ManagementDomain
+  treeCropDomain : ManagementDomain
   wholeFarmDomain : ManagementDomain
 
 data MechanismHypothesis : Set where
-  erosionProtection
-  reducedSoilDisturbance
-  increasedLivingCover
-  alteredResidueReturn
-  alteredNutrientCycling
-  alteredWaterRetention
-  alteredPestPressure
-  alteredPredatorService
-  alteredMicrobialProcess
-  alteredRootAcquisition
-  alteredCarbonStorage
-  alteredHeatOrWindExposure
-  alteredLivestockForageUse
-  increasedFunctionalDiversity
+  erosionProtection : MechanismHypothesis
+  reducedSoilDisturbance : MechanismHypothesis
+  increasedLivingCover : MechanismHypothesis
+  alteredResidueReturn : MechanismHypothesis
+  alteredNutrientCycling : MechanismHypothesis
+  alteredWaterRetention : MechanismHypothesis
+  alteredPestPressure : MechanismHypothesis
+  alteredPredatorService : MechanismHypothesis
+  alteredMicrobialProcess : MechanismHypothesis
+  alteredRootAcquisition : MechanismHypothesis
+  alteredCarbonStorage : MechanismHypothesis
+  alteredHeatOrWindExposure : MechanismHypothesis
+  alteredLivestockForageUse : MechanismHypothesis
+  increasedFunctionalDiversity : MechanismHypothesis
   mechanismUnresolved : MechanismHypothesis
 
 data ResponseCoordinate : Set where
-  soilOrganicMatterResponse
-  erosionResponse
-  infiltrationResponse
-  nutrientAvailabilityResponse
-  microbialResponse
-  cropPerformanceResponse
-  pestResponse
-  pesticideUseResponse
-  biodiversityResponse
-  livestockResponse
-  waterQualityResponse
-  carbonResponse
-  labourResponse
-  profitabilityResponse
+  soilOrganicMatterResponse : ResponseCoordinate
+  erosionResponse : ResponseCoordinate
+  infiltrationResponse : ResponseCoordinate
+  nutrientAvailabilityResponse : ResponseCoordinate
+  microbialResponse : ResponseCoordinate
+  cropPerformanceResponse : ResponseCoordinate
+  pestResponse : ResponseCoordinate
+  pesticideUseResponse : ResponseCoordinate
+  biodiversityResponse : ResponseCoordinate
+  livestockResponse : ResponseCoordinate
+  waterQualityResponse : ResponseCoordinate
+  carbonResponse : ResponseCoordinate
+  labourResponse : ResponseCoordinate
+  profitabilityResponse : ResponseCoordinate
   resilienceResponse : ResponseCoordinate
 
 data EvidenceState : Set where
-  practiceDefined
-  mechanismProposed
-  responseObserved
-  effectEstimated
-  effectReplicated
+  practiceDefined : EvidenceState
+  mechanismProposed : EvidenceState
+  responseObserved : EvidenceState
+  effectEstimated : EvidenceState
+  effectReplicated : EvidenceState
   recommendationAdmitted : EvidenceState
 
 record ManagementPractice : Set where

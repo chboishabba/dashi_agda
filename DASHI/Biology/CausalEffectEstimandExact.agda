@@ -163,7 +163,7 @@ record NeuralBehaviouralEffectEstimand
     behaviourReadout : Unit scope → Intervention scope → Time scope → BehaviourReadout
     cognitiveReadout : Unit scope → Intervention scope → Time scope → CognitiveReadout
     Effect : Set
-    effectReceipt : Effect
+    neuralBehaviouralEffectReceipt : Effect
     neuralReference : String
     behaviourReference : String
     cognitiveReference : String
@@ -242,7 +242,7 @@ estimandEffectReceipt (mediatedIndirectWitness mediation) =
 estimandEffectReceipt (trajectoryWitness estimand) =
   trajectoryEffectReceipt estimand
 estimandEffectReceipt (neuralBehaviouralWitness estimand) =
-  NeuralBehaviouralEffectEstimand.effectReceipt estimand
+  neuralBehaviouralEffectReceipt estimand
 
 record CausalEffectEstimand : Set₂ where
   constructor causal-effect-estimand

@@ -434,8 +434,8 @@ idwLabelDoesNotCreateUnifiedIdeology ()
 qidDoesNotCreateNetworkMembership : QidCreatesNetworkMembership → ⊥
 qidDoesNotCreateNetworkMembership ()
 
-engagementDoesNotCreateAssent : EngagementCreatesAssent → ⊥
-engagementDoesNotCreateAssent ()
+engagementCannotCreateAssent : EngagementCreatesAssent → ⊥
+engagementCannotCreateAssent ()
 
 recommendationDoesNotCreateRadicalisation : RecommendationCreatesRadicalisation → ⊥
 recommendationDoesNotCreateRadicalisation ()

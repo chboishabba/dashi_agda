@@ -32,18 +32,14 @@ import DASHI.Physics.Closure.GRConcreteLeviCivita as FlatLC
 data LeviCivitaBridgePromotionAuthorityToken : Set where
 
 data LeviCivitaBridgeStatus : Set where
-  dchottGStructureSocketVisibleB0Open :
-    LeviCivitaBridgeStatus
+  dchottGStructureSocketVisibleB0Open : LeviCivitaBridgeStatus
 
 data LeviCivitaBridgeFirstOpenObligation : Set where
-  missingB0GeometricEmergence :
-    LeviCivitaBridgeFirstOpenObligation
+  missingB0GeometricEmergence : LeviCivitaBridgeFirstOpenObligation
 
-  missingTorsionFreeGStructureSpecialisation :
-    LeviCivitaBridgeFirstOpenObligation
+  missingTorsionFreeGStructureSpecialisation : LeviCivitaBridgeFirstOpenObligation
 
-  missingLeviCivitaUniquenessAdapter :
-    LeviCivitaBridgeFirstOpenObligation
+  missingLeviCivitaUniquenessAdapter : LeviCivitaBridgeFirstOpenObligation
 
 postulate
   -- DASHI transport predicates to be refined by the Paper 2 bridge theorem.

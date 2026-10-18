@@ -223,7 +223,10 @@ record EisensteinAnalyticModel : Set₁ where
 open EisensteinAnalyticModel public
 
 EisensteinSeries :
-  EisensteinAnalyticModel → Nat → Parameter → Scalar
+  (M : EisensteinAnalyticModel) →
+  Nat →
+  Parameter M →
+  Scalar M
 EisensteinSeries M weight τ =
   eisensteinSum M (λ p → summand M weight p τ)
 
@@ -263,7 +266,7 @@ record EisensteinTraceAgreement
     sector : QS.Sector T
     weight : Nat
     level : Nat
-    coefficientAgreement : (n : Nat) → ⊤
+    coefficientAgreement : (n : Nat) → Set
 
 open EisensteinTraceAgreement public
 
@@ -280,7 +283,7 @@ record CoefficientEisensteinModel
     sector : QS.Sector T
     weight : Nat
     level : Nat
-    coefficientAgreement : (n : Nat) → ⊤
+    coefficientAgreement : (n : Nat) → Set
 
 open CoefficientEisensteinModel public
 
@@ -320,7 +323,7 @@ record AlignedEisensteinModel
     sector : QS.Sector T
     modularWeight : Nat
     modularLevel : Nat
-    coefficientAgreement : (n : Nat) → ⊤
+    coefficientAgreement : (n : Nat) → Set
 
 open AlignedEisensteinModel public
 

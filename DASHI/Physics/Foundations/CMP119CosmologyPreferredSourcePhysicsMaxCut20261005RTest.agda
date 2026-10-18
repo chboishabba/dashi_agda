@@ -1,0 +1,10 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261005RTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261005RExact as R
+
+remainingPackageCountRegression = R.remainingPreferredSourcePackageCount
+q3SequenceWeldRetiredRegression = R.q3PointwiseFiniteSequenceWeldRetired
+q3CombinedErrorCompilerRegression = R.q3ApproximateExpectationHaarCompilerOwned
+q2WardIdentityRegression = R.q2RemainingTheoremIsRenormalizedHilbertWeylWardIdentity
+q1GeometryRegression = R.q1RemainingTheoremIsLiteralCompactGaugeSourcePathRealization

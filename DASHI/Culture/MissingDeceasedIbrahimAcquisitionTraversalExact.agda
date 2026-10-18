@@ -25,9 +25,9 @@ import DASHI.Wikimedia.IbrahimFirstLinkSourceArchaeologyLedgerExact as IbrahimSo
 ------------------------------------------------------------------------
 
 data TraversalEdgeClass : Set where
-  parserEquivalentCurrentFirstLink
-  currentSemanticNeighbour
-  wikidataBroaderCoordinate
+  parserEquivalentCurrentFirstLink : TraversalEdgeClass
+  currentSemanticNeighbour : TraversalEdgeClass
+  wikidataBroaderCoordinate : TraversalEdgeClass
   historicalIbrahimPaidEdge : TraversalEdgeClass
 
 record ScientistAcquisitionTraversal : Set where

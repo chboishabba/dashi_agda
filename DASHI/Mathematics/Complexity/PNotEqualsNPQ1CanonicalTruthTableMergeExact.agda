@@ -1,0 +1,321 @@
+module DASHI.Mathematics.Complexity.PNotEqualsNPQ1CanonicalTruthTableMergeExact where
+
+------------------------------------------------------------------------
+-- EXECUTABLE FINITE-LAYER SEMANTIC MERGING
+--
+-- The trace generator gives cheap reachability. Its trace is not a canonical
+-- semantic key: distinct traces can compute identical residual functions.
+--
+-- Here the finite truth-table repair is used as an exact semantic key.
+-- A structural equality decision merges equal keys in a concrete finite list.
+--
+-- The scan cost is recorded explicitly. No claim is made that this constructs
+-- a globally admitted Q1 transition table within the direct-DP strict budget.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Empty using (⊥)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
+import Data.Vec.Base as Vec
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+
+import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
+import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact as Bits
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as Truth
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1GradedShannonRepairGeneratorExact as Shannon
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CoarseFineConstructionSharingExact as Sharing
+
+------------------------------------------------------------------------
+-- Decidable equality of finite Bool tables, with no function extensionality.
+------------------------------------------------------------------------
+
+decideBoolEqual :
+  (left right : Bool) →
+  (left ≡ right) ⊎ (left ≡ right → ⊥)
+decideBoolEqual false false = inj₁ refl
+decideBoolEqual false true = inj₂ (λ ())
+decideBoolEqual true false = inj₂ (λ ())
+decideBoolEqual true true = inj₁ refl
+
+decideTableEqual :
+  ∀ {n : Nat} →
+  (left right : Vec.Vec Bool n) →
+  (left ≡ right) ⊎ (left ≡ right → ⊥)
+decideTableEqual Vec.[] Vec.[] = inj₁ refl
+decideTableEqual (left Vec.∷ lefts) (right Vec.∷ rights)
+    with decideBoolEqual left right
+... | inj₂ notSame = inj₂ (λ { refl → notSame refl })
+... | inj₁ refl with decideTableEqual lefts rights
+...   | inj₁ refl = inj₁ refl
+...   | inj₂ notSame = inj₂ (λ { refl → notSame refl })
+
+------------------------------------------------------------------------
+-- Canonicalized fixed-layer semantic keys.
+------------------------------------------------------------------------
+
+SemanticKey : Nat → Set
+SemanticKey remaining =
+  Vec.Vec Bool (Bits.bitCardinality remaining)
+
+semanticKey :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables} →
+  Width.LayerNode {root = root} remaining →
+  SemanticKey remaining
+semanticKey = Truth.truthTableRepair
+
+keyEqualityPreservesFutureSemantics :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Width.LayerNode {root = root} remaining} →
+  semanticKey left ≡ semanticKey right →
+  Width.LayerResidualEqual left right
+keyEqualityPreservesFutureSemantics =
+  Truth.truthTableRepairEqualityImpliesResidualEquality
+
+------------------------------------------------------------------------
+-- COMPLETENESS: fixed-layer residual equality also implies equal keys.
+--
+-- Each finite key is literally the vector of all evaluations of the residual
+-- function, so extensional semantic equality forces structural Vec equality.
+-- No propositional function extensionality is used.
+------------------------------------------------------------------------
+
+residualEqualityGivesKeyEquality :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Width.LayerNode {root = root} remaining} →
+  Width.LayerResidualEqual left right →
+  semanticKey left ≡ semanticKey right
+residualEqualityGivesKeyEquality
+    {left = left}
+    {right = right}
+    sameResidual =
+  Truth.vecExtensionality
+    (semanticKey left)
+    (semanticKey right)
+    (λ index →
+      trans
+        (Truth.lookupTabulateVec
+          (λ i →
+            Sharing.layerResidualSemantic
+              left
+              (Truth.bitsAssignment
+                (Bits.finToBits i)))
+          index)
+        (trans
+          (sameResidual
+            (Truth.bitsAssignment
+              (Bits.finToBits index)))
+          (sym
+            (Truth.lookupTabulateVec
+              (λ i →
+                Sharing.layerResidualSemantic
+                  right
+                  (Truth.bitsAssignment
+                    (Bits.finToBits i)))
+              index))))
+
+------------------------------------------------------------------------
+-- Canonical semantic keys are congruent under both Shannon transitions.
+------------------------------------------------------------------------
+
+semanticKeyShannonStepExact :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (action : Bool)
+    (parent : Width.LayerNode {root = root} (suc remaining)) →
+  semanticKey (Shannon.layerChild action parent)
+  ≡
+  Truth.restrictTruthTable action (semanticKey parent)
+semanticKeyShannonStepExact =
+  Truth.truthTableRepairStepExact
+
+equalKeysGiveEqualChildKeys :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (action : Bool)
+    (left right : Width.LayerNode {root = root} (suc remaining)) →
+  semanticKey left ≡ semanticKey right →
+  semanticKey (Shannon.layerChild action left)
+  ≡
+  semanticKey (Shannon.layerChild action right)
+equalKeysGiveEqualChildKeys action left right parentEqual =
+  trans
+    (semanticKeyShannonStepExact action left)
+    (trans
+      (cong
+        (Truth.restrictTruthTable action)
+        parentEqual)
+      (sym
+        (semanticKeyShannonStepExact action right)))
+
+------------------------------------------------------------------------
+-- Real insertion / deduplication, not a supplied equivalence oracle.
+------------------------------------------------------------------------
+
+insertSemanticKey :
+  ∀ {remaining : Nat} →
+  SemanticKey remaining →
+  List (SemanticKey remaining) →
+  List (SemanticKey remaining)
+insertSemanticKey key [] = key ∷ []
+insertSemanticKey key (head ∷ rest)
+    with decideTableEqual key head
+... | inj₁ same = head ∷ rest
+... | inj₂ different =
+  head ∷ insertSemanticKey key rest
+
+canonicalKeyList :
+  ∀ {remaining : Nat} →
+  List (SemanticKey remaining) →
+  List (SemanticKey remaining)
+canonicalKeyList [] = []
+canonicalKeyList (key ∷ rest) =
+  insertSemanticKey key (canonicalKeyList rest)
+
+keyForLayer :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables} →
+  List (Width.LayerNode {root = root} remaining) →
+  List (SemanticKey remaining)
+keyForLayer [] = []
+keyForLayer (node ∷ rest) =
+  semanticKey node ∷ keyForLayer rest
+
+canonicalMergedLayer :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables} →
+  List (Width.LayerNode {root = root} remaining) →
+  List (SemanticKey remaining)
+canonicalMergedLayer nodes =
+  canonicalKeyList (keyForLayer nodes)
+
+------------------------------------------------------------------------
+-- Every input key retains a representative after deduplication.
+------------------------------------------------------------------------
+
+data ListedKey {remaining : Nat}
+    (key : SemanticKey remaining) :
+    List (SemanticKey remaining) → Set where
+  firstKey :
+    ∀ {rest} →
+    ListedKey key (key ∷ rest)
+  laterKey :
+    ∀ {head rest} →
+    ListedKey key rest →
+    ListedKey key (head ∷ rest)
+
+insertAddsKey :
+  ∀ {remaining : Nat}
+    (key : SemanticKey remaining)
+    (keys : List (SemanticKey remaining)) →
+  ListedKey key (insertSemanticKey key keys)
+insertAddsKey key [] =
+  firstKey
+insertAddsKey key (head ∷ rest)
+    with decideTableEqual key head
+... | inj₁ refl =
+  firstKey
+... | inj₂ different =
+  laterKey (insertAddsKey key rest)
+
+insertPreservesKey :
+  ∀ {remaining : Nat}
+    (key other : SemanticKey remaining)
+    (keys : List (SemanticKey remaining)) →
+  ListedKey other keys →
+  ListedKey other (insertSemanticKey key keys)
+insertPreservesKey key other (head ∷ rest) member
+    with decideTableEqual key head
+... | inj₁ same = member
+... | inj₂ different with member
+...   | firstKey = firstKey
+...   | laterKey inRest =
+  laterKey (insertPreservesKey key other rest inRest)
+
+canonicalKeysCoverInput :
+  ∀ {remaining : Nat}
+    (keys : List (SemanticKey remaining))
+    (key : SemanticKey remaining) →
+  ListedKey key keys →
+  ListedKey key (canonicalKeyList keys)
+canonicalKeysCoverInput (head ∷ rest) key firstKey =
+  insertAddsKey head (canonicalKeyList rest)
+canonicalKeysCoverInput (head ∷ rest) key (laterKey member) =
+  insertPreservesKey
+    head
+    key
+    (canonicalKeyList rest)
+    (canonicalKeysCoverInput rest key member)
+
+------------------------------------------------------------------------
+-- Explicit comparison work. These are TABLE comparisons, each requiring
+-- inspection of up to 2^remaining bits. Count both the number of calls and
+-- a conservative full-width charge for each call.
+------------------------------------------------------------------------
+
+insertComparisonCount :
+  ∀ {remaining : Nat} →
+  SemanticKey remaining →
+  List (SemanticKey remaining) →
+  Nat
+insertComparisonCount key [] = zero
+insertComparisonCount key (head ∷ rest)
+    with decideTableEqual key head
+... | inj₁ same = suc zero
+... | inj₂ different =
+  suc (insertComparisonCount key rest)
+
+canonicalComparisonCount :
+  ∀ {remaining : Nat} →
+  List (SemanticKey remaining) →
+  Nat
+canonicalComparisonCount [] = zero
+canonicalComparisonCount (key ∷ rest) =
+  insertComparisonCount key (canonicalKeyList rest)
+  + canonicalComparisonCount rest
+
+fullWidthComparisonBudget :
+  ∀ {remaining : Nat} →
+  List (SemanticKey remaining) →
+  Nat
+fullWidthComparisonBudget {remaining} keys =
+  Bits.bitCardinality remaining
+  * canonicalComparisonCount keys
+
+------------------------------------------------------------------------
+-- Source materialization cost is separate from merging comparisons.
+-- Constructing a literal table for one node evaluates 2^remaining rows.
+------------------------------------------------------------------------
+
+layerKeyMaterializationRows :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables} →
+  List (Width.LayerNode {root = root} remaining) →
+  Nat
+layerKeyMaterializationRows {remaining = remaining} [] =
+  zero
+layerKeyMaterializationRows {remaining = remaining} (_ ∷ rest) =
+  Bits.bitCardinality remaining
+  + layerKeyMaterializationRows rest
+
+layerTotalAccounting :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables} →
+  List (Width.LayerNode {root = root} remaining) →
+  Nat
+layerTotalAccounting nodes =
+  layerKeyMaterializationRows nodes
+  + fullWidthComparisonBudget (keyForLayer nodes)
+
+------------------------------------------------------------------------
+-- The finite list above is only a same-layer set of semantic keys. A real Q1
+-- automaton still needs cross-layer state numbering, both transition targets,
+-- terminal labels, a construction execution trace, and its combined strict
+-- resource charge on the actual candidate-quoted root.
+------------------------------------------------------------------------

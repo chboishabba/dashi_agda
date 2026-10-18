@@ -17,101 +17,73 @@ import DASHI.Core.GenericReceipt as Generic
 -- safety, physical law, or metaphysical authority.
 
 data FunctionalKind : Set where
-  HamiltonianLike :
-    FunctionalKind
+  HamiltonianLike : FunctionalKind
 
-  EnergyLike :
-    FunctionalKind
+  EnergyLike : FunctionalKind
 
-  CostLike :
-    FunctionalKind
+  CostLike : FunctionalKind
 
-  RiskLike :
-    FunctionalKind
+  RiskLike : FunctionalKind
 
-  ScoreLike :
-    FunctionalKind
+  ScoreLike : FunctionalKind
 
-  LossLike :
-    FunctionalKind
+  LossLike : FunctionalKind
 
-  UtilityLike :
-    FunctionalKind
+  UtilityLike : FunctionalKind
 
-  StrainLike :
-    FunctionalKind
+  StrainLike : FunctionalKind
 
-  PressureLike :
-    FunctionalKind
+  PressureLike : FunctionalKind
 
-  HarmLike :
-    FunctionalKind
+  HarmLike : FunctionalKind
 
-  RenewalLike :
-    FunctionalKind
+  RenewalLike : FunctionalKind
 
   NamedFunctionalKind :
     String →
     FunctionalKind
 
 data TermPolarity : Set where
-  positiveStrainPolarity :
-    TermPolarity
+  positiveStrainPolarity : TermPolarity
 
-  negativeSupportPolarity :
-    TermPolarity
+  negativeSupportPolarity : TermPolarity
 
-  negativeCreditPolarity :
-    TermPolarity
+  negativeCreditPolarity : TermPolarity
 
-  neutralPolarity :
-    TermPolarity
+  neutralPolarity : TermPolarity
 
 data TermSign : Set where
-  positiveSign :
-    TermSign
+  positiveSign : TermSign
 
-  negativeSign :
-    TermSign
+  negativeSign : TermSign
 
-  neutralSign :
-    TermSign
+  neutralSign : TermSign
 
-  symbolicSign :
-    TermSign
+  symbolicSign : TermSign
 
 data SymbolicWeight : Set where
-  unitSymbolicWeight :
-    SymbolicWeight
+  unitSymbolicWeight : SymbolicWeight
 
-  strainSymbolicWeight :
-    SymbolicWeight
+  strainSymbolicWeight : SymbolicWeight
 
-  supportSymbolicWeight :
-    SymbolicWeight
+  supportSymbolicWeight : SymbolicWeight
 
-  creditSymbolicWeight :
-    SymbolicWeight
+  creditSymbolicWeight : SymbolicWeight
 
-  neutralSymbolicWeight :
-    SymbolicWeight
+  neutralSymbolicWeight : SymbolicWeight
 
   namedSymbolicWeight :
     String →
     SymbolicWeight
 
 data CandidateAggregation : Set where
-  candidateSymbolicSum :
-    CandidateAggregation
+  candidateSymbolicSum : CandidateAggregation
 
-  candidateWeightedSymbolicSum :
-    CandidateAggregation
+  candidateWeightedSymbolicSum : CandidateAggregation
 
-  candidateSignedBalance :
-    CandidateAggregation
+  candidateSignedBalance : CandidateAggregation
 
-  candidateTermCatalogue :
-    CandidateAggregation
+  candidateTermCatalogue : CandidateAggregation
 
   namedCandidateAggregation :
     String →

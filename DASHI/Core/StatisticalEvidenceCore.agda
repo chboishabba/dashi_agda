@@ -32,50 +32,35 @@ listCount (_ ∷ xs) =
 -- Statistical vocabulary.
 
 data StatisticalEvidenceKind : Set where
-  statisticalEvidenceKind :
-    StatisticalEvidenceKind
+  statisticalEvidenceKind : StatisticalEvidenceKind
 
-  inferenceKind :
-    StatisticalEvidenceKind
+  inferenceKind : StatisticalEvidenceKind
 
-  robustEvidenceKind :
-    StatisticalEvidenceKind
+  robustEvidenceKind : StatisticalEvidenceKind
 
-  observationCarrierKind :
-    StatisticalEvidenceKind
+  observationCarrierKind : StatisticalEvidenceKind
 
-  statisticKind :
-    StatisticalEvidenceKind
+  statisticKind : StatisticalEvidenceKind
 
-  estimatorKind :
-    StatisticalEvidenceKind
+  estimatorKind : StatisticalEvidenceKind
 
-  confidenceIntervalKind :
-    StatisticalEvidenceKind
+  confidenceIntervalKind : StatisticalEvidenceKind
 
-  hypothesisTestKind :
-    StatisticalEvidenceKind
+  hypothesisTestKind : StatisticalEvidenceKind
 
-  decisionRuleKind :
-    StatisticalEvidenceKind
+  decisionRuleKind : StatisticalEvidenceKind
 
-  robustFilterKind :
-    StatisticalEvidenceKind
+  robustFilterKind : StatisticalEvidenceKind
 
-  outlierKind :
-    StatisticalEvidenceKind
+  outlierKind : StatisticalEvidenceKind
 
-  contaminationKind :
-    StatisticalEvidenceKind
+  contaminationKind : StatisticalEvidenceKind
 
-  uncertaintyKind :
-    StatisticalEvidenceKind
+  uncertaintyKind : StatisticalEvidenceKind
 
-  residualKind :
-    StatisticalEvidenceKind
+  residualKind : StatisticalEvidenceKind
 
-  probabilityKind :
-    StatisticalEvidenceKind
+  probabilityKind : StatisticalEvidenceKind
 
   namedStatisticalEvidenceKind :
     String →

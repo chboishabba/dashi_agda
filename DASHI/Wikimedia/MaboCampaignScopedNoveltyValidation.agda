@@ -1,0 +1,50 @@
+module DASHI.Wikimedia.MaboCampaignScopedNoveltyValidation where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+open import DASHI.Wikimedia.MaboCampaignScopedNoveltyExact
+
+validationGlobalBaselineUsedForIdentityCoherence :
+  globalIdentityBaselineUsedForCoherence canonicalMaboCampaignScopedNovelty ≡ true
+validationGlobalBaselineUsedForIdentityCoherence = refl
+
+validationGlobalBaselineDoesNotCountCampaignNovelty :
+  globalIdentityBaselineCountsCampaignNovelty canonicalMaboCampaignScopedNovelty ≡ false
+validationGlobalBaselineDoesNotCountCampaignNovelty = refl
+
+validationMaboNoveltyUsesSeedRootedLineage :
+  maboCampaignNoveltyUsesSeedRootedDiscoveryLineage canonicalMaboCampaignScopedNovelty ≡ true
+validationMaboNoveltyUsesSeedRootedLineage = refl
+
+validationAliasesDoNotCountCampaignNovelty :
+  aliasesCountCampaignNovelty canonicalMaboCampaignScopedNovelty ≡ false
+validationAliasesDoNotCountCampaignNovelty = refl
+
+validationUnrelatedCampaignLineageDoesNotCountForMabo :
+  unrelatedCampaignLineageCountsForMabo canonicalMaboCampaignScopedNovelty ≡ false
+validationUnrelatedCampaignLineageDoesNotCountForMabo = refl
+
+validationTargetCompletionUsesCampaignScopedCardinality :
+  targetCompletionUsesCampaignScopedCardinality canonicalMaboCampaignScopedNovelty ≡ true
+validationTargetCompletionUsesCampaignScopedCardinality = refl
+
+validationContextExpansionUsesCurrentMaboWorld :
+  contextExpansionUsesCurrentMaboWorld canonicalMaboCampaignScopedNovelty ≡ true
+validationContextExpansionUsesCurrentMaboWorld = refl
+
+validationGlobalDurableIdentityIsNotMaboNovelty :
+  globalDurableIdentityEqualsMaboCampaignNovelty canonicalMaboCampaignScopedNovelty ≡ false
+validationGlobalDurableIdentityIsNotMaboNovelty = refl
+
+validationCurrentWorldIsNotGlobalIdentityTable :
+  currentMaboWorldEqualsGlobalIdentityTable canonicalMaboCampaignScopedNovelty ≡ false
+validationCurrentWorldIsNotGlobalIdentityTable = refl
+
+validationNoAuthorityPromotion :
+  scopedNoveltyCreatesSemanticAuthority canonicalMaboCampaignScopedNovelty ≡ false
+validationNoAuthorityPromotion = refl
+
+validationNoTruthPromotion :
+  scopedNoveltyCreatesClaimTruth canonicalMaboCampaignScopedNovelty ≡ false
+validationNoTruthPromotion = refl

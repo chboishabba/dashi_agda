@@ -119,9 +119,19 @@ q3ReflexiveSustainability = planned-query
   false refl
   false refl
 
-q4ParticipantGovernance : PlannedQuery
-q4ParticipantGovernance = planned-query
-  "Q4-participant-agency-governance"
+q4LifecycleCircularity : PlannedQuery
+q4LifecycleCircularity = planned-query
+  "Q4-lifecycle-circularity"
+  Search.lifecycleCircularity
+  "identify lifecycle, energy, carbon, water, e-waste, circularity, repair, reuse, upgrade and service-life evidence for digital education technologies and infrastructure"
+  "D"
+  protocolVersion
+  false refl
+  false refl
+
+q5ParticipantGovernance : PlannedQuery
+q5ParticipantGovernance = planned-query
+  "Q5-participant-agency-governance"
   Search.participantAgencyGovernance
   "identify participant agency, student voice, co-design and governance evidence in digital education and/or ESD"
   "A AND B AND E"
@@ -129,9 +139,9 @@ q4ParticipantGovernance = planned-query
   false refl
   false refl
 
-q5LongitudinalInstitutional : PlannedQuery
-q5LongitudinalInstitutional = planned-query
-  "Q5-longitudinal-institutional"
+q6LongitudinalInstitutional : PlannedQuery
+q6LongitudinalInstitutional = planned-query
+  "Q6-longitudinal-institutional"
   Search.longitudinalInstitutionalImpact
   "identify longitudinal, persistent and institutionalised effects or conditions in digital-ESD and adjacent ESD/digital-education evidence"
   "A AND B AND F"
@@ -139,9 +149,9 @@ q5LongitudinalInstitutional = planned-query
   false refl
   false refl
 
-q6OpenInteroperableRepairable : PlannedQuery
-q6OpenInteroperableRepairable = planned-query
-  "Q6-open-interoperable-repairable"
+q7OpenInteroperableRepairable : PlannedQuery
+q7OpenInteroperableRepairable = planned-query
+  "Q7-open-interoperable-repairable"
   Search.openInteroperabilityRepairability
   "identify openness, interoperability, portability, vendor-lock-in, repairability and related durability evidence for digital learning infrastructure"
   "A AND G"
@@ -154,13 +164,14 @@ canonicalPlannedQueries =
   q1DigitalEducationESD
   ∷ q2Transformation
   ∷ q3ReflexiveSustainability
-  ∷ q4ParticipantGovernance
-  ∷ q5LongitudinalInstitutional
-  ∷ q6OpenInteroperableRepairable
+  ∷ q4LifecycleCircularity
+  ∷ q5ParticipantGovernance
+  ∷ q6LongitudinalInstitutional
+  ∷ q7OpenInteroperableRepairable
   ∷ []
 
 plannedQueryCount : Nat
-plannedQueryCount = 6
+plannedQueryCount = 7
 
 ------------------------------------------------------------------------
 -- Declared database translation surfaces.

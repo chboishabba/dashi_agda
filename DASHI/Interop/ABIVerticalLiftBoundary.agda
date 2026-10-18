@@ -15,17 +15,13 @@ open import Data.List.Base using (List; []; _∷_)
 -- context strings, and does not promote the bridge to a physical theorem.
 
 data ABITransformKind : Set where
-  elfToCar :
-    ABITransformKind
+  elfToCar : ABITransformKind
 
-  dagCborToIpld :
-    ABITransformKind
+  dagCborToIpld : ABITransformKind
 
-  machineCodeToFractran :
-    ABITransformKind
+  machineCodeToFractran : ABITransformKind
 
-  agdaToLean :
-    ABITransformKind
+  agdaToLean : ABITransformKind
 
   contextOnlyTransform :
     String →
@@ -310,20 +306,15 @@ canonicalABIBoundedOverheadRow =
     }
 
 data ABIBridgeNonClaim : Set where
-  noExactKolmogorovSemanticTheorem :
-    ABIBridgeNonClaim
+  noExactKolmogorovSemanticTheorem : ABIBridgeNonClaim
 
-  noSemanticAITAuthorityAcceptance :
-    ABIBridgeNonClaim
+  noSemanticAITAuthorityAcceptance : ABIBridgeNonClaim
 
-  noPhysicalPromotion :
-    ABIBridgeNonClaim
+  noPhysicalPromotion : ABIBridgeNonClaim
 
-  noGlobalCompilerCorrectness :
-    ABIBridgeNonClaim
+  noGlobalCompilerCorrectness : ABIBridgeNonClaim
 
-  noAllEncodingEquivalence :
-    ABIBridgeNonClaim
+  noAllEncodingEquivalence : ABIBridgeNonClaim
 
 canonicalABIBridgeNonClaims :
   List ABIBridgeNonClaim

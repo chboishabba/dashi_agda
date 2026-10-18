@@ -17,19 +17,19 @@ import DASHI.Core.ScientificWorkAttributionExact as Attribution
 ------------------------------------------------------------------------
 
 data AquaticSourceRole : Set where
-  aquaponicsArchitecture
-  rasEngineering
-  dissolvedOxygenEngineering
-  salineAquaponics
-  foamFractionation
-  bellSiphonHydraulics
-  nutrientRecovery
+  aquaponicsArchitecture : AquaticSourceRole
+  rasEngineering : AquaticSourceRole
+  dissolvedOxygenEngineering : AquaticSourceRole
+  salineAquaponics : AquaticSourceRole
+  foamFractionation : AquaticSourceRole
+  bellSiphonHydraulics : AquaticSourceRole
+  nutrientRecovery : AquaticSourceRole
   microalgaeIntegration : AquaticSourceRole
 
 data PublicationForm : Set where
-  reviewArticle
-  systematicOrCriticalReview
-  engineeringTextbookChapter
+  reviewArticle : PublicationForm
+  systematicOrCriticalReview : PublicationForm
+  engineeringTextbookChapter : PublicationForm
   controlledEngineeringStudy : PublicationForm
 
 record AquaticSourceReference : Set where

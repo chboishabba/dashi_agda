@@ -123,25 +123,25 @@ cooperTotalisationRequiresReclassification =
 ------------------------------------------------------------------------
 
 jurisdictionAloneDoesNotEstablishApplicability :
-  Jurisdiction.resolvedJurisdictionAloneEstablishesApplicability
+  Jurisdiction.LegalJurisdictionBoundary.resolvedJurisdictionAloneEstablishesApplicability
     Jurisdiction.canonicalLegalJurisdictionBoundary ≡ false
 jurisdictionAloneDoesNotEstablishApplicability = refl
 
 authorityAloneDoesNotEstablishApplicability :
-  Authority.legalSourceAuthorityAloneEstablishesApplicability
+  Authority.LegalSourceAuthorityBoundary.legalSourceAuthorityAloneEstablishesApplicability
     Authority.canonicalLegalSourceAuthorityBoundary ≡ false
 authorityAloneDoesNotEstablishApplicability = refl
 
 applicabilityRequiresAuthority :
-  Meet.legalSourceAuthorityRequired Meet.canonicalApplicabilityPrerequisiteMeetBoundary ≡ true
+  Meet.ApplicabilityPrerequisiteMeetBoundary.legalSourceAuthorityRequired Meet.canonicalApplicabilityPrerequisiteMeetBoundary ≡ true
 applicabilityRequiresAuthority = refl
 
 applicabilityRequiresJurisdiction :
-  Meet.resolvedJurisdictionRequired Meet.canonicalApplicabilityPrerequisiteMeetBoundary ≡ true
+  Meet.ApplicabilityPrerequisiteMeetBoundary.resolvedJurisdictionRequired Meet.canonicalApplicabilityPrerequisiteMeetBoundary ≡ true
 applicabilityRequiresJurisdiction = refl
 
 applicabilityRequiresSameSystemWeld :
-  Meet.authorityJurisdictionSameLegalSystemRequired
+  Meet.ApplicabilityPrerequisiteMeetBoundary.authorityJurisdictionSameLegalSystemRequired
     Meet.canonicalApplicabilityPrerequisiteMeetBoundary ≡ true
 applicabilityRequiresSameSystemWeld = refl
 

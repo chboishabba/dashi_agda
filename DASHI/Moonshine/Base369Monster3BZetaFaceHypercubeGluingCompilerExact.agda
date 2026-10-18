@@ -30,6 +30,7 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Recognition
 import DASHI.Moonshine.Base369Monster3BActualMultiplicitySliceAppraisalBidiExact as Slice
 import DASHI.Moonshine.Base369Ternary27FaceHypercubeCechGluingBidiExact as Cech
+import DASHI.Reasoning.ActualFaceHypercubeGluingFromSharedSliceExact as Shared
 
 ------------------------------------------------------------------------
 -- 1. Canonical fixed-multiplicity X6 inclusion into the actual zeta sector.
@@ -113,7 +114,26 @@ includeTranslationIntertwines recognition multiplicity axis state =
           | includeAtMultiplicityToModel recognition multiplicity state = refl
 
 ------------------------------------------------------------------------
--- 3. Compile the Cech gluing promotion.  Actor here is Axis6: this is the
+-- 3. Package the actual zeta slice in the generic shared-slice compiler.
+------------------------------------------------------------------------
+
+zetaSharedSliceRecognition :
+  ∀ {ActualSector : Set} →
+  Recognition.ActualZetaSectorRecognition ActualSector →
+  Fin 90 →
+  Shared.SharedActualX6SliceRecognition H.Axis6 ActualSector
+zetaSharedSliceRecognition recognition multiplicity = record
+  { modelAct = H.translate
+  ; actualAct = Recognition.actualTranslate recognition
+  ; include = includeAtMultiplicity recognition multiplicity
+  ; includeInjective =
+      includeAtMultiplicityInjective recognition multiplicity
+  ; includeIntertwines =
+      includeTranslationIntertwines recognition multiplicity
+  }
+
+------------------------------------------------------------------------
+-- 4. Compile the Cech gluing promotion.  Actor here is Axis6: this is the
 --    recognized Heisenberg translation action, not the whole Monster group.
 ------------------------------------------------------------------------
 
@@ -122,20 +142,12 @@ zetaFaceHypercubeGluing :
   (recognition : Recognition.ActualZetaSectorRecognition ActualSector) →
   (multiplicity : Fin 90) →
   Cech.ActualFaceHypercubeGluingPromotion H.Axis6 ActualSector
-zetaFaceHypercubeGluing recognition multiplicity = record
-  { modelGluing = Cech.uniformModelGluing H.translate
-  ; actualAct = Recognition.actualTranslate recognition
-  ; includeFace = λ face state →
-      includeAtMultiplicity recognition multiplicity state
-  ; includeFaceInjective = λ face equality →
-      includeAtMultiplicityInjective recognition multiplicity equality
-  ; includeFaceIntertwines = λ face axis state →
-      includeTranslationIntertwines recognition multiplicity axis state
-  ; edgeDescriptionsAgreeInActualState = λ edge state → refl
-  }
+zetaFaceHypercubeGluing recognition multiplicity =
+  Shared.compileSharedSliceGluing
+    (zetaSharedSliceRecognition recognition multiplicity)
 
 ------------------------------------------------------------------------
--- 4. Exact pruning boundary.
+-- 5. Exact pruning boundary.
 ------------------------------------------------------------------------
 
 record ZetaFaceGluingCompilerBoundary : Set where

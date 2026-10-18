@@ -1,7 +1,3 @@
-module DASHI.Culture.Everything where
-
--- Culture domain rollup.
-
 import DASHI.Culture.Cuisine.Everything
 import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact
 import DASHI.Culture.KimmererNarrativeMetaphorCalibrationExact
@@ -35,6 +31,7 @@ import DASHI.Culture.IPAPhoneticFeatureLatticeExact
 import DASHI.Culture.PhonologicalFeatureMatrixContrastExact
 import DASHI.Culture.IPANDimFibreHyperfabricTetrationBridgeExact
 import DASHI.Culture.LinguisticMorphologySourceObservationBridgeExact
+import DASHI.Culture.ArabicRootPatternMorphologyProcessingBoundaryExact
 import DASHI.Culture.NaturalLanguageSyntaxSourceObservationBridgeExact
 import DASHI.Culture.ReligiousPowerChildFearClaimBidiExact
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact
@@ -73,6 +70,16 @@ import DASHI.Culture.CohnInstitutionalEpistemicConsequenceCrossPollinationExact
 import DASHI.Culture.CohnInstitutionalEpistemicConsequenceRegression
 import DASHI.Culture.CohnInstitutionalDecisionRevisionBraidExact
 import DASHI.Culture.CohnInstitutionalDecisionRevisionBraidRegression
+import DASHI.Culture.CohnInstitutionalComposedConsumerAdequacyExact
+import DASHI.Culture.CohnInstitutionalComposedConsumerAdequacyRegression
+import DASHI.Culture.CohnInstitutionalLeastCoordinateRepairExact
+import DASHI.Culture.CohnInstitutionalLeastCoordinateRepairRegression
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyTraversalExact
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyTraversalRegression
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionExact
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionRegression
+import DASHI.Culture.CohnInstitutionalHistorySensitiveProbe369Exact
+import DASHI.Culture.CohnInstitutionalHistorySensitiveProbe369Regression
 import DASHI.Culture.CohnTechnostrategicCrossPollinationRegression
 import DASHI.Culture.DerridaFourfoldRetreatPrimarySourceBoundaryExact
 import DASHI.Culture.FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact
@@ -113,3 +120,8 @@ import DASHI.Culture.BlochfieldCrossPlatformIdentityConvergenceExact
 import DASHI.Culture.BlochfieldHistoricalWalletReviewCandidateExact
 import DASHI.Culture.BlochfieldMediumSavedReadingSnowballExact
 import DASHI.Culture.BlochfieldAcquisitionResidualSnowballExact
+
+module DASHI.Culture.Everything where
+
+-- Culture domain rollup.
+

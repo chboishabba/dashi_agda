@@ -1,0 +1,17 @@
+module DASHI.Physics.Foundations.RFMutualCouplingManifoldRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.RFMutualCouplingManifoldExact as C
+
+couplingObservationRequired : C.MutualCouplingObservationReceipt
+couplingObservationRequired = C.canonicalMutualCouplingObservationReceipt
+
+activeResponseRepairRequired : C.ActiveElementResponseReceipt
+activeResponseRepairRequired = C.canonicalActiveElementResponseReceipt
+
+correctedManifoldRequired : C.CouplingCorrectedManifoldReceipt
+correctedManifoldRequired = C.canonicalCouplingCorrectedManifoldReceipt
+
+couplingFirewallRequired : C.MutualCouplingFirewall
+couplingFirewallRequired = C.canonicalMutualCouplingFirewall

@@ -2,6 +2,7 @@ module DASHI.Core.TypedDependencyCore where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+open import Agda.Primitive using (Level)
 
 ------------------------------------------------------------------------
 -- Typed dependency core.
@@ -68,7 +69,7 @@ open FamilyWitness public
 -- inhabited.  Preconditions and postconditions are indexed by state/action.
 ------------------------------------------------------------------------
 
-record DependentActionSystem (State Action : Set) : Set₁ where
+record DependentActionSystem {State : Set ℓ} (Action : Set) : Set₁ where
   field
     Precondition : State → Action → Set
     Postcondition : State → Action → State → Set
@@ -77,10 +78,11 @@ record DependentActionSystem (State Action : Set) : Set₁ where
 open DependentActionSystem public
 
 record AdmissibleAction
-    {State Action : Set}
-    (system : DependentActionSystem State Action)
+    {State : Set ℓ}
+    {Action : Set}
+    (system : DependentActionSystem {State = State} Action)
     (before : State)
-    (action : Action) : Set where
+    (action : Action) : Set ℓ where
   field
     precondition : Precondition system before action
     after : State

@@ -1,0 +1,14 @@
+{
+  "active_stress_rho_plus_px_plus_py_plus_pz": -2,
+  "diagonal_finite_d1_readouts": {
+    "00": 1,
+    "11": -1,
+    "22": -1,
+    "33": -1
+  },
+  "full_ten_component_gr_residual_evaluated": false,
+  "input_form": "four post-sum diagonal finite localized D1 rational readouts",
+  "negative_active_stress": true,
+  "off_diagonal_readouts_required_for_this_diagnostic": false,
+  "status": "negative_active_stress"
+}

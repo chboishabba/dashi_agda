@@ -29,12 +29,12 @@ data PhilosophyCategoryArtifact : Set where
   legitimacyResidualArtifact
   historicalPathResidualArtifact
 
-  lexicalCategoryCertificate
-  categoryAuthorityCertificate
-  commercialReclamationCertificate
-  legitimacyCertificate
-  historicalClassifierCertificate
-  consumerRouteCertificate
+  lexicalCategoryCertificate : PhilosophyCategoryArtifact
+  categoryAuthorityCertificate : PhilosophyCategoryArtifact
+  commercialReclamationCertificate : PhilosophyCategoryArtifact
+  legitimacyCertificate : PhilosophyCategoryArtifact
+  historicalClassifierCertificate : PhilosophyCategoryArtifact
+  consumerRouteCertificate : PhilosophyCategoryArtifact
   : PhilosophyCategoryArtifact
 
 data Depends : PhilosophyCategoryArtifact → PhilosophyCategoryArtifact → Set where

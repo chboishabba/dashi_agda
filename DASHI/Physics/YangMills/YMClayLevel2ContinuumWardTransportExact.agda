@@ -1,0 +1,216 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.YMClayLevel2ContinuumWardTransportExact where
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base as ℚ using (ℚ; _-_)
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
+import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
+import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as StressLane
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionFirstVariationRound133Exact as R133
+import DASHI.Physics.YangMills.BalabanPresentCutCanonicalMetricDomainRound134Exact as R134
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact as R135
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact as R136
+import DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Exact as R131
+import DASHI.Physics.YangMills.YangMillsLatticeStressWardSliceConservationExact as Ward
+import DASHI.Physics.YangMills.YMClayLevel2D3ConservedWardChargeExact as Conserved
+import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
+
+------------------------------------------------------------------------
+-- LEVEL-2 D3: FINITE WARD CURRENT -> RECOVERED CONTINUUM STRESS TRANSPORT
+--
+-- The finite Ward theorem and the generated-action stress theorem live on
+-- different scalar carriers:
+--
+--   finite periodic Ward slice charge : ℚ
+--   continuum metric stress pairing   : StressRep.PairingScalar representation
+--
+-- Hence they must NOT be identified by type/name alone.
+--
+-- Existing machinery already pays:
+--
+--   * Ward: discrete balance -> exact finite slice-charge conservation;
+--   * R132-R135: the selected stress insertion is a first-order view of the
+--     SAME beta-driven generated action at the SAME scale;
+--   * R136: the recovered continuum first variation equals the literal stress
+--     metric pairing.
+--
+-- The remaining D3 theorem is precisely the representation/convergence weld
+-- showing that the perturbation-indexed finite Ward charge/current from that
+-- generated-action family is the finite representative whose continuum limit is
+-- the recovered stress pairing.  The finite-to-continuum scalar map is allowed
+-- to depend on cutoff/depth: the physical theorem is iota_k(Q_k[h]) -> deltaS[h],
+-- not one universal scalar coercion applied to every cutoff.
+------------------------------------------------------------------------
+
+record ContinuumWardTransport
+    {trajectory split}
+    {inputs : BetaDensity.BetaDrivenCompleteDensityInputs
+      {trajectory = trajectory} {split = split}}
+    {History Cell : Set} {cutoff : Nat}
+    {present : Present.PresentCutPhysicalSourceInputs History Cell cutoff}
+    {actionWeld : R132.UnifiedGeneratedActionDensity
+      {trajectory = trajectory} {split = split} {inputs = inputs} present}
+    {firstWeld : R133.UnifiedGeneratedActionFirstVariation actionWeld}
+    {metricInputs : R134.PresentCutMetricSpecificInputs firstWeld}
+    {representation : StressRep.CanonicalMetricStressRepresentation
+      (R134.presentCutCanonicalMetricDomain metricInputs)}
+    {C : Top.LiteralYangMillsCarriers}
+    {S : Top.LiteralYangMillsSemantics C}
+    {Y : Top.LiteralYangMillsConstruction C S}
+    {group : Top.CompactSimpleGroup C}
+    {lane : StressLane.DensityAnchoredCanonicalMetricStressLane
+      {trajectory = trajectory} {split = split} {inputs = inputs}
+      {C = C} {S = S} {Y = Y} {group = group}
+      (R134.presentCutCanonicalMetricDomain metricInputs) representation}
+    {scaleWeld : R135.UnifiedGeneratedActionStressScale lane}
+    (recovery : R136.UnifiedGeneratedActionSectorRecovery scaleWeld)
+    : Set₁ where
+  field
+    finiteWardChargeAt :
+      Domain.MetricPerturbation
+        (R134.presentCutCanonicalMetricDomain metricInputs) →
+      Nat → Ward.LatticeStressWardCharge
+
+    wardChargeToPairingScalarAt :
+      Nat → ℚ → StressRep.PairingScalar representation
+
+    -- The finite Ward charge is attached to the SAME generated-action stress
+    -- family rather than to an unrelated conserved lattice current.
+    FiniteWardChargeIsGeneratedActionStressCharge :
+      Domain.MetricPerturbation
+        (R134.presentCutCanonicalMetricDomain metricInputs) →
+      Nat → Ward.LatticeStressWardCharge → Set
+
+    finiteWardChargeIsGeneratedActionStressCharge :
+      ∀ perturbation depth →
+      Domain.AdmissibleMetricPerturbation
+        (R134.presentCutCanonicalMetricDomain metricInputs) perturbation →
+      FiniteWardChargeIsGeneratedActionStressCharge
+        perturbation depth (finiteWardChargeAt perturbation depth)
+
+    -- Convergence/continuum meaning is explicit on the real scalar carrier.
+    Converges :
+      (Nat → StressRep.PairingScalar representation) →
+      StressRep.PairingScalar representation →
+      Set
+
+    finiteWardChargeConvergesToRecoveredStress :
+      ∀ perturbation →
+      Domain.AdmissibleMetricPerturbation
+        (R134.presentCutCanonicalMetricDomain metricInputs) perturbation →
+      Converges
+        (λ depth →
+          wardChargeToPairingScalarAt depth
+            (Ward.chargeAfter (finiteWardChargeAt perturbation depth)))
+        (R131.continuumSectorFirstVariation
+          (R136.asCommonMetricReadyBalabanSectorRecovery recovery)
+          perturbation)
+
+open ContinuumWardTransport public
+
+finiteSliceChargeConservationAlreadyCompilerOwned :
+  ∀ {trajectory split inputs History Cell cutoff present actionWeld firstWeld
+      metricInputs representation C S Y group lane scaleWeld recovery}
+    (transport : ContinuumWardTransport
+      {trajectory = trajectory} {split = split} {inputs = inputs}
+      {History = History} {Cell = Cell} {cutoff = cutoff}
+      {present = present} {actionWeld = actionWeld} {firstWeld = firstWeld}
+      {metricInputs = metricInputs} {representation = representation}
+      {C = C} {S = S} {Y = Y} {group = group}
+      {lane = lane} {scaleWeld = scaleWeld} recovery) →
+  ∀ perturbation depth →
+  Ward.chargeAfter (finiteWardChargeAt transport perturbation depth)
+    - Ward.chargeBefore (finiteWardChargeAt transport perturbation depth) ≡ 0ℚ
+finiteSliceChargeConservationAlreadyCompilerOwned transport perturbation depth =
+  Ward.sliceChargeDifferenceZero
+    (finiteWardChargeAt transport perturbation depth)
+
+
+finiteWardChargeAlreadyConserved :
+  ∀ {trajectory split inputs History Cell cutoff present actionWeld firstWeld
+      metricInputs representation C S Y group lane scaleWeld recovery}
+    (transport : ContinuumWardTransport
+      {trajectory = trajectory} {split = split} {inputs = inputs}
+      {History = History} {Cell = Cell} {cutoff = cutoff}
+      {present = present} {actionWeld = actionWeld} {firstWeld = firstWeld}
+      {metricInputs = metricInputs} {representation = representation}
+      {C = C} {S = S} {Y = Y} {group = group}
+      {lane = lane} {scaleWeld = scaleWeld} recovery) →
+  ∀ perturbation depth →
+  Ward.chargeAfter (finiteWardChargeAt transport perturbation depth)
+    ≡ Ward.chargeBefore (finiteWardChargeAt transport perturbation depth)
+finiteWardChargeAlreadyConserved transport perturbation depth =
+  Conserved.wardChargeConserved
+    (finiteWardChargeAt transport perturbation depth)
+
+------------------------------------------------------------------------
+-- Frontier classification.
+------------------------------------------------------------------------
+
+
+independentFiniteTimeChargeConservationRequired : Bool
+independentFiniteTimeChargeConservationRequired =
+  Conserved.independentFiniteTimeChargeConservationRequiredInD3
+
+independentFiniteTimeChargeConservationRequiredIsFalse :
+  independentFiniteTimeChargeConservationRequired ≡ false
+independentFiniteTimeChargeConservationRequiredIsFalse =
+  Conserved.independentFiniteTimeChargeConservationRequiredInD3IsFalse
+
+finiteWardAlgebraNewPhysicalTheoremInD3 : Bool
+finiteWardAlgebraNewPhysicalTheoremInD3 = false
+
+finiteWardAlgebraNewPhysicalTheoremInD3IsFalse :
+  finiteWardAlgebraNewPhysicalTheoremInD3 ≡ false
+finiteWardAlgebraNewPhysicalTheoremInD3IsFalse = refl
+
+generatedActionStressProvenanceNewPhysicalTheoremInD3 : Bool
+generatedActionStressProvenanceNewPhysicalTheoremInD3 = false
+
+generatedActionStressProvenanceNewPhysicalTheoremInD3IsFalse :
+  generatedActionStressProvenanceNewPhysicalTheoremInD3 ≡ false
+generatedActionStressProvenanceNewPhysicalTheoremInD3IsFalse = refl
+
+finiteToContinuumSameCurrentTransportStillPhysical : Bool
+finiteToContinuumSameCurrentTransportStillPhysical = true
+
+perturbationIndependentWardChargeSequenceWouldBeTooWeak : Bool
+perturbationIndependentWardChargeSequenceWouldBeTooWeak = true
+
+perturbationIndependentWardChargeSequenceWouldBeTooWeakIsTrue :
+  perturbationIndependentWardChargeSequenceWouldBeTooWeak ≡ true
+perturbationIndependentWardChargeSequenceWouldBeTooWeakIsTrue = refl
+
+cutoffIndependentChargeRepresentationMapRequired : Bool
+cutoffIndependentChargeRepresentationMapRequired = false
+
+cutoffIndependentChargeRepresentationMapRequiredIsFalse :
+  cutoffIndependentChargeRepresentationMapRequired ≡ false
+cutoffIndependentChargeRepresentationMapRequiredIsFalse = refl
+
+finiteToContinuumSameCurrentTransportStillPhysicalIsTrue :
+  finiteToContinuumSameCurrentTransportStillPhysical ≡ true
+finiteToContinuumSameCurrentTransportStillPhysicalIsTrue = refl
+
+finiteWardCompilerLevel : ProofLevel
+finiteWardCompilerLevel = Ward.periodicStressWardSliceConservationLevel
+
+generatedActionStressRecoveryCompilerLevel : ProofLevel
+generatedActionStressRecoveryCompilerLevel =
+  R136.unifiedGeneratedActionRecoveryCompilerLevel
+
+physicalContinuumWardTransportLevel : ProofLevel
+physicalContinuumWardTransportLevel = conditional
+
+clayPromotion : Bool
+clayPromotion = false
+
+clayPromotionIsFalse : clayPromotion ≡ false
+clayPromotionIsFalse = refl

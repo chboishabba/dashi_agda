@@ -1,0 +1,34 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound19Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound19Exact as Round19
+
+candidateStillRequiresCorpusAdmission :
+  Round19.Round19CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round19.round19CandidateDoesNotCreateIncludedStudy
+
+respondentSurfaceNotNonrespondentBehaviour :
+  Round19.RespondentSurfaceCreatesNonrespondentBehaviour → ⊥
+respondentSurfaceNotNonrespondentBehaviour = Round19.respondentSurfaceDoesNotCreateNonrespondentBehaviour
+
+responsePropensityNotPopulationTruth :
+  Round19.ResponsePropensityCreatesPopulationTruth → ⊥
+responsePropensityNotPopulationTruth = Round19.responsePropensityDoesNotCreatePopulationTruth
+
+assignedModeNotRealisedCarrier :
+  Round19.AssignedModeCreatesRealisedCarrierEquivalence → ⊥
+assignedModeNotRealisedCarrier = Round19.assignedModeDoesNotCreateRealisedCarrierEquivalence
+
+higherResponseNotNoSelectionBias :
+  Round19.HigherResponseRateCreatesNoSelectionBias → ⊥
+higherResponseNotNoSelectionBias = Round19.higherResponseRateDoesNotCreateNoSelectionBias
+
+respondentCollisionRulesOutFlatRecovery :
+  Round19.RespondentCarrierFactorisation → ⊥
+respondentCollisionRulesOutFlatRecovery = Round19.respondentCarrierDoesNotFactorThroughObservedSurveySurface
+
+modeCollisionRulesOutFlatRecovery :
+  Round19.ModeParticipationFactorisation → ⊥
+modeCollisionRulesOutFlatRecovery = Round19.modeParticipationDoesNotFactorThroughAssignedModeSurface

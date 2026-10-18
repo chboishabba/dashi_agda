@@ -18,14 +18,11 @@ open import Data.Nat using (_≤_; z≤n; s≤s)
 -- not promoted as DASHI theorem content and are not Clay promotion evidence.
 
 data Artifact : Set where
-  rawArtifact :
-    Artifact
+  rawArtifact : Artifact
 
-  selectedArtifact :
-    Artifact
+  selectedArtifact : Artifact
 
-  minedFixedArtifact :
-    Artifact
+  minedFixedArtifact : Artifact
 
 L :
   Artifact → Nat
@@ -192,8 +189,7 @@ canonicalFiniteFixedPoint =
     }
 
 data ImportedBridgeVocabulary : Set where
-  jmdCrankMiningVocabulary :
-    ImportedBridgeVocabulary
+  jmdCrankMiningVocabulary : ImportedBridgeVocabulary
 
 importedBridgeVocabulary :
   List ImportedBridgeVocabulary

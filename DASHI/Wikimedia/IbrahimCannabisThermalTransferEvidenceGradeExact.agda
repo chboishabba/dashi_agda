@@ -21,11 +21,11 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data EvidenceGrade : Set where
-  directCannabisSmokeTransfer
-  directCannabisVapeAerosolTransfer
-  cannabisProductOccurrenceOnly
-  nonCannabisThermalTransformation
-  mechanisticPredictionOnly
+  directCannabisSmokeTransfer : EvidenceGrade
+  directCannabisVapeAerosolTransfer : EvidenceGrade
+  cannabisProductOccurrenceOnly : EvidenceGrade
+  nonCannabisThermalTransformation : EvidenceGrade
+  mechanisticPredictionOnly : EvidenceGrade
   unresolved : EvidenceGrade
 
 record ThermalTransferEvidence : Set where
@@ -165,12 +165,12 @@ deviceIndependentTransferIsFalse ()
 ------------------------------------------------------------------------
 
 data ThermalParetoTarget : Set where
-  modernPaclobutrazolReplication
-  myclobutanilDirectSmokeProducts
-  myclobutanilDirectVapeAerosolProducts
-  chlorfenapyrDirectVapeAerosolProducts
-  pboDirectVapeAerosolTransfer
-  concentrationToInhaledDose
+  modernPaclobutrazolReplication : ThermalParetoTarget
+  myclobutanilDirectSmokeProducts : ThermalParetoTarget
+  myclobutanilDirectVapeAerosolProducts : ThermalParetoTarget
+  chlorfenapyrDirectVapeAerosolProducts : ThermalParetoTarget
+  pboDirectVapeAerosolTransfer : ThermalParetoTarget
+  concentrationToInhaledDose : ThermalParetoTarget
   broaderThermalPrediction : ThermalParetoTarget
 
 record ThermalParetoStep : Set where
@@ -237,15 +237,15 @@ pareto99 = thermal-pareto-step
 ------------------------------------------------------------------------
 
 data ThermalTime : Set where
-  smokeTransfer2013
-  recallRisk2017
-  vapeOccurrence2020
+  smokeTransfer2013 : ThermalTime
+  recallRisk2017 : ThermalTime
+  vapeOccurrence2020 : ThermalTime
   currentSota2026 : ThermalTime
 
 data ThermalInterpretation : Set where
-  parentResidueCanTransferToSmoke
-  vapeFluidOccurrenceIsNotAerosolTransfer
-  routeSpecificProductsRemainOpen
+  parentResidueCanTransferToSmoke : ThermalInterpretation
+  vapeFluidOccurrenceIsNotAerosolTransfer : ThermalInterpretation
+  routeSpecificProductsRemainOpen : ThermalInterpretation
   directDoseComplete : ThermalInterpretation
 
 data ThermalSummary : Set where routeSpecificEvidenceGradesRequired : ThermalSummary

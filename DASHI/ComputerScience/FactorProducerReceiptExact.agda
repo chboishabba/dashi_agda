@@ -50,15 +50,15 @@ data FactorCostKnowledge : Set where
 
 data FactorEvidence : Set where
   certifiedFactorEvidence :
-    (N d : Nat) →
+  (N d : Nat) →
     Factor.FactorCertificate N d →
     FactorEvidence
 
   externalFactorIdentityEvidence :
-    (modulusReference : String) →
-    (factorReference : String) →
-    (cofactorReference : String) →
-    (verificationReference : String) →
+  (modulusReference : String) →
+  (factorReference : String) →
+  (cofactorReference : String) →
+  (verificationReference : String) →
     FactorEvidence
 
 record FactorProducerReceipt : Set where

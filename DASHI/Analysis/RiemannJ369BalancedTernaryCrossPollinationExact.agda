@@ -1,0 +1,323 @@
+module DASHI.Analysis.RiemannJ369BalancedTernaryCrossPollinationExact where
+
+------------------------------------------------------------------------
+-- RH / J369 BALANCED-TERNARY SHIFT CROSS-POLLINATION
+--
+-- DASHI CONTRIBUTION
+--
+-- Exact typed arithmetic/carrier comparison:
+--
+--   (3^2 + 1) * |T^9|
+--      = 3^5 * (|X6| + |T^4|)
+--      = 196830
+--
+-- where:
+--
+--   |T^9| = 3^9  = 19683
+--   |X6|  = 3^6  = 729
+--   |T^4| = 3^4  = 81.
+--
+-- The RH pole coefficient is separately
+--
+--   80 = 3^4 - 1,
+--
+-- i.e. the arithmetic target for puncturing the same four-trit scale.
+--
+-- X6 is additionally welded to the canonical TriadicPAdicCodec Kernel 6.
+--
+-- No semantic RH/Monster identification is claimed.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+
+import DASHI.Analysis.RiemannQuarticBalancedTernaryStencilExact as Stencil
+import DASHI.Analysis.RiemannQuarticDepthFiveX6Rank4BridgeExact as Depth
+import DASHI.Analysis.RiemannQuarticTriadicCodecKernelBridgeExact as CodecBridge
+import DASHI.Analysis.RiemannQuarticPuncturedKernel4EnumerationExact as Punctured
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
+import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
+import DASHI.Wikimedia.IbrahimEnZeroToThirteenNDimOEISHyperfabricSnowballExact as Rank
+import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
+import DASHI.Reasoning.Trialectic369DyadicSectionTriadicKernelExact as Dyadic
+import DASHI.Reasoning.Trialectic369DescentNaturalityExact as Descent
+import DASHI.Reasoning.Trialectic369DyadicKernel4DescentCountExact as DyadicCount
+import DASHI.Reasoning.Trialectic369DyadicLocalComplementFactorizationExact as LocalComplement
+
+------------------------------------------------------------------------
+-- 1. Typed carrier counts.
+------------------------------------------------------------------------
+
+t9Count : Nat
+t9Count = Geometry.hyperfabricStateCount
+
+x6Count : Nat
+x6Count = H.schrodingerBasisDimension
+
+t4Count : Nat
+t4Count = Rank.fixedTernaryProfileCount Rank.rank4
+
+rhPuncturedFourShiftCount : Nat
+rhPuncturedFourShiftCount = Stencil.poleCoefficient
+
+t9CountIsThreePowerNine :
+  t9Count ≡ Stencil.pow3 9
+t9CountIsThreePowerNine = refl
+
+x6CountIsThreePowerSix :
+  x6Count ≡ Stencil.pow3 6
+x6CountIsThreePowerSix = refl
+
+t4CountIsThreePowerFour :
+  t4Count ≡ Stencil.pow3 4
+t4CountIsThreePowerFour = refl
+
+rhPuncturedFourShiftCountIs80 :
+  rhPuncturedFourShiftCount ≡ 80
+rhPuncturedFourShiftCountIs80 = refl
+
+------------------------------------------------------------------------
+-- 2. Bulk as shift-plus-identity on the T9 count.
+------------------------------------------------------------------------
+
+bulkAsShiftPlusIdentityOnT9 :
+  (Stencil.pow3 2 + 1) * t9Count
+  ≡ Stencil.twoSpikeBulk
+bulkAsShiftPlusIdentityOnT9 = refl
+
+bulkAsDepthFiveX6PlusT4 :
+  Stencil.pow3 5 * (x6Count + t4Count)
+  ≡ Stencil.twoSpikeBulk
+bulkAsDepthFiveX6PlusT4 = refl
+
+typedShiftIdentityEqualsDepthFiveSplit :
+  (Stencil.pow3 2 + 1) * t9Count
+  ≡
+  Stencil.pow3 5 * (x6Count + t4Count)
+typedShiftIdentityEqualsDepthFiveSplit = refl
+
+------------------------------------------------------------------------
+-- 3. Full versus punctured four-trit scale.
+------------------------------------------------------------------------
+
+fullT4IsPunctureTargetPlusOrigin :
+  t4Count
+  ≡ rhPuncturedFourShiftCount + 1
+fullT4IsPunctureTargetPlusOrigin = refl
+
+depthFiveResidualIsX6PlusPunctureTargetPlusOrigin :
+  Stencil.bulkAfterDepthFive
+  ≡ x6Count + rhPuncturedFourShiftCount + 1
+depthFiveResidualIsX6PlusPunctureTargetPlusOrigin =
+  Depth.depthFiveResidualIsX6PlusPolePuncturePlusOrigin
+
+bulkFactorsThroughX6PunctureTargetOrigin :
+  Stencil.twoSpikeBulk
+  ≡
+  Stencil.pow3 5
+    * (x6Count + rhPuncturedFourShiftCount + 1)
+bulkFactorsThroughX6PunctureTargetOrigin =
+  Depth.bulkFactorsThroughX6PolePunctureOrigin
+
+------------------------------------------------------------------------
+-- 4. Canonical codec attachment.
+------------------------------------------------------------------------
+
+x6CodecKernel6RoundTrip :
+  (x : H.X6) →
+  CodecBridge.kernel6ToX6 (CodecBridge.x6ToKernel6 x) ≡ x
+x6CodecKernel6RoundTrip =
+  CodecBridge.x6Kernel6RoundTrip
+
+kernel6X6RoundTrip :
+  (kernel : CodecBridge.Kernel6) →
+  CodecBridge.x6ToKernel6 (CodecBridge.kernel6ToX6 kernel) ≡ kernel
+kernel6X6RoundTrip =
+  CodecBridge.kernel6X6RoundTrip
+
+fourTritCodecFullArithmeticCountIs81 :
+  CodecBridge.fullKernel4ArithmeticCount ≡ 81
+fourTritCodecFullArithmeticCountIs81 =
+  CodecBridge.fullKernel4ArithmeticCountIs81
+
+fourTritCodecPunctureTargetIs80 :
+  CodecBridge.puncturedKernel4ArithmeticTarget ≡ 80
+fourTritCodecPunctureTargetIs80 =
+  CodecBridge.puncturedKernel4ArithmeticTargetIs80
+
+puncturedKernel4FiniteCountIs80 :
+  DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact.listLength
+    Punctured.puncturedKernel4Enumeration
+  ≡ 80
+puncturedKernel4FiniteCountIs80 =
+  Punctured.puncturedKernel4EnumerationLengthIs80
+
+------------------------------------------------------------------------
+-- 4b. The original trialectic dyadic locals are the same four-trit carrier.
+------------------------------------------------------------------------
+
+abLocalChartIsCanonicalKernel4 :
+  (section : Descent.ABSection) ->
+  Dyadic.kernel4ToAB (Dyadic.abToKernel4 section) ≡ section
+abLocalChartIsCanonicalKernel4 =
+  Dyadic.abKernelRoundTrip
+
+bcLocalChartIsCanonicalKernel4 :
+  (section : Descent.BCSection) ->
+  Dyadic.kernel4ToBC (Dyadic.bcToKernel4 section) ≡ section
+bcLocalChartIsCanonicalKernel4 =
+  Dyadic.bcKernelRoundTrip
+
+caLocalChartIsCanonicalKernel4 :
+  (section : Descent.CASection) ->
+  Dyadic.kernel4ToCA (Dyadic.caToKernel4 section) ≡ section
+caLocalChartIsCanonicalKernel4 =
+  Dyadic.caKernelRoundTrip
+
+abLocalChartCountIs81 :
+  Reindex.listLength Dyadic.abEnumeration ≡ 81
+abLocalChartCountIs81 =
+  Dyadic.abEnumerationLengthIs81
+
+puncturedABLocalChartCountIs80 :
+  Reindex.listLength Dyadic.puncturedABEnumeration ≡ 80
+puncturedABLocalChartCountIs80 =
+  Dyadic.puncturedABEnumerationLengthIs80
+
+------------------------------------------------------------------------
+-- 4c. Pre-RH descent explanation of the T9 carrier.
+------------------------------------------------------------------------
+
+threeKernel4LocalsGlueToT9Count :
+  DyadicCount.globalStateCount ≡ t9Count
+threeKernel4LocalsGlueToT9Count =
+  DyadicCount.descentGlobalCountMatchesExistingT9
+
+threeLocalChartsGiveTwelveRawTritSlots :
+  DyadicCount.rawLocalSlotCount ≡ 12
+threeLocalChartsGiveTwelveRawTritSlots =
+  DyadicCount.rawLocalSlotCountIsTwelve
+
+threeOverlapIdentificationsRemoveThreeSlots :
+  DyadicCount.identifiedOverlapSlotCount ≡ 3
+threeOverlapIdentificationsRemoveThreeSlots =
+  DyadicCount.identifiedOverlapSlotCountIsThree
+
+twelveMinusThreeCoordinateLedger :
+  DyadicCount.rawLocalSlotCount
+  ≡ DyadicCount.independentGlobalTritCount
+    + DyadicCount.identifiedOverlapSlotCount
+twelveMinusThreeCoordinateLedger =
+  DyadicCount.coordinateLedger
+
+rawThreeLocalCountFactorsThroughT9AndOverlapMultiplicity :
+  DyadicCount.rawLocalTupleCount
+  ≡ t9Count * DyadicCount.overlapConstraintMultiplicity
+rawThreeLocalCountFactorsThroughT9AndOverlapMultiplicity =
+  DyadicCount.rawTupleCountFactorsThroughGlobal
+
+------------------------------------------------------------------------
+-- 4d. Exact local/complement factorization of the original T9 carrier.
+------------------------------------------------------------------------
+
+globalT9IsLocalT4TimesComplementT5 :
+  LocalComplement.globalKernel9StateCount
+  ≡
+  LocalComplement.localKernel4StateCount
+    * LocalComplement.complementKernel5StateCount
+globalT9IsLocalT4TimesComplementT5 =
+  LocalComplement.globalFactorizationCount
+
+depthFiveFactorIsLiteralT5Complement :
+  LocalComplement.complementKernel5StateCount
+  ≡ Stencil.pow3 5
+depthFiveFactorIsLiteralT5Complement = refl
+
+bulkAsComplementTimesShiftedLocal :
+  Stencil.twoSpikeBulk
+  ≡
+  LocalComplement.complementKernel5StateCount
+    * ((Stencil.pow3 2 + 1)
+      * LocalComplement.localKernel4StateCount)
+bulkAsComplementTimesShiftedLocal = refl
+
+rhPoleMatchesPuncturedDyadicLocalCount :
+  Reindex.listLength Dyadic.puncturedABEnumeration
+  ≡ Stencil.poleCoefficient
+rhPoleMatchesPuncturedDyadicLocalCount = refl
+
+------------------------------------------------------------------------
+-- 5. The same 3^4 scale under two boundary operations.
+------------------------------------------------------------------------
+
+j369FourShiftResidual : Nat
+j369FourShiftResidual =
+  Stencil.pow3 4 * (Stencil.pow3 2 + 1)
+
+j369FourShiftResidualIs810 :
+  j369FourShiftResidual ≡ 810
+j369FourShiftResidualIs810 = refl
+
+-- Avoid depending on Nat subtraction for the structural theorem; the
+-- subtraction-free owner is the canonical receipt:
+rhPuncturedFourShiftByReceipt :
+  Stencil.pow3 4
+  ≡ rhPuncturedFourShiftCount + 1
+rhPuncturedFourShiftByReceipt =
+  Stencil.poleBalancedTernary
+
+------------------------------------------------------------------------
+-- 6. Firewall.
+------------------------------------------------------------------------
+
+data SharedFourShiftCreatesSemanticIdentity : Set where
+data TypedCountEqualityCreatesAnalyticMechanism : Set where
+data CodecPunctureIsProvedRHConstruction : Set where
+
+sharedFourShiftDoesNotCreateSemanticIdentity :
+  SharedFourShiftCreatesSemanticIdentity → ⊥
+sharedFourShiftDoesNotCreateSemanticIdentity ()
+
+typedCountEqualityDoesNotCreateAnalyticMechanism :
+  TypedCountEqualityCreatesAnalyticMechanism → ⊥
+typedCountEqualityDoesNotCreateAnalyticMechanism ()
+
+codecPunctureNotPromotedToRHMechanism :
+  CodecPunctureIsProvedRHConstruction → ⊥
+codecPunctureNotPromotedToRHMechanism ()
+
+record RiemannJ369BalancedTernaryCrossPollinationBoundary : Set where
+  constructor riemann-j369-balanced-ternary-cross-pollination-boundary
+  field
+    t9ThreePowerNineTyped : Bool
+    x6ThreePowerSixTyped : Bool
+    t4ThreePowerFourTyped : Bool
+    bulkShiftPlusIdentityWithoutPrimitiveTen : Bool
+    depthFiveX6PlusT4SplitTyped : Bool
+    sharedFullVsPuncturedFourShiftTyped : Bool
+    x6CanonicalCodecKernel6ChartPaid : Bool
+    trialecticDyadicLocalIsCanonicalKernel4 : Bool
+    localFullCount81Paid : Bool
+    localPuncturedCount80Paid : Bool
+    threeKernel4LocalsGlueToT9 : Bool
+    twelveMinusThreeCoordinateLedgerPaid : Bool
+    globalT9IsLocalT4TimesComplementT5 : Bool
+    depthFiveFactorIsLiteralT5Complement : Bool
+    rhPoleMatchesPuncturedDyadicLocal : Bool
+    kernel4PunctureOperationAvailable : Bool
+    concreteKernel4PunctureCardinality80Paid : Bool
+    semanticIdentityClaimed : Bool
+    analyticMechanismClaimed : Bool
+
+canonicalRiemannJ369BalancedTernaryCrossPollinationBoundary :
+  RiemannJ369BalancedTernaryCrossPollinationBoundary
+canonicalRiemannJ369BalancedTernaryCrossPollinationBoundary =
+  riemann-j369-balanced-ternary-cross-pollination-boundary
+    true true true true true true true
+    true true true
+    true true
+    true true true
+    true true
+    false false

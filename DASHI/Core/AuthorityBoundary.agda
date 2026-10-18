@@ -13,11 +13,9 @@ open import Data.List.Base using (List; _∷_; [])
 -- be carried by its own boundary receipt.
 
 data AuthorityKind : Set where
-  CitationAuthority :
-    AuthorityKind
+  CitationAuthority : AuthorityKind
 
-  ArtifactAuthority :
-    AuthorityKind
+  ArtifactAuthority : AuthorityKind
 
 record AuthorityBoundary (kind : AuthorityKind) : Set where
   constructor mkAuthorityBoundary

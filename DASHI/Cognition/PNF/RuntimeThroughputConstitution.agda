@@ -2,7 +2,7 @@ module DASHI.Cognition.PNF.RuntimeThroughputConstitution where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
@@ -95,6 +95,55 @@ record ParserDominatedOptimisationReceipt
       ≤ᶜ workUnits parserAfter
 
 open ParserDominatedOptimisationReceipt public
+
+------------------------------------------------------------------------
+-- Matched-workload parser worker scaling.
+--
+-- Worker-count points are indexed by one workload identifier, preventing a
+-- scaling receipt from comparing unrelated corpora.  The receipt requires an
+-- explicit single-worker baseline plus at least one point with two-or-more
+-- workers.  Tail/concentration coordinates are empirical measurements only.
+------------------------------------------------------------------------
+
+record WorkerScalePoint (workload : String) : Set where
+  constructor workerScalePoint
+  field
+    workerCount : Nat
+    representedTokens : Nat
+    semanticRegions : Nat
+    workerElapsedUnits : Nat
+    aggregateParserProcessUnits : Nat
+    aggregateParserPersistUnits : Nat
+    jobP50Units : Nat
+    jobP95Units : Nat
+    jobP99Units : Nat
+    jobMaxUnits : Nat
+    jobC1Permille : Nat
+    jobC10Permille : Nat
+
+open WorkerScalePoint public
+
+record WorkerScalingReceipt (workload : String) : Set where
+  constructor workerScalingReceipt
+  field
+    singleWorkerBaseline : WorkerScalePoint workload
+    singleWorkerCountIsOne :
+      workerCount singleWorkerBaseline ≡ 1
+
+    parallelExtraWorkers : Nat
+    parallelObservation : WorkerScalePoint workload
+    parallelWorkerCountIsAtLeastTwo :
+      workerCount parallelObservation ≡ suc (suc parallelExtraWorkers)
+
+    remainingWorkerObservations : List (WorkerScalePoint workload)
+
+open WorkerScalingReceipt public
+
+data WorkerScalingReceiptCreatesSemanticAuthority : Set where
+
+workerScalingReceiptDoesNotCreateSemanticAuthority :
+  WorkerScalingReceiptCreatesSemanticAuthority → ⊥
+workerScalingReceiptDoesNotCreateSemanticAuthority ()
 
 ------------------------------------------------------------------------
 -- Non-empty archive/corpus scaling series.

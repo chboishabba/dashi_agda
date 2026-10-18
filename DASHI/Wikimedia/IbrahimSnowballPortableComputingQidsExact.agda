@@ -186,9 +186,9 @@ data ComputingGraphRelation : Set where
   fieldOfWorkNavigation : ComputingGraphRelation
 
 data ComputingNode : Set where
-  simdNode flynnNode gpuNode vectorProcessorNode gpgpuNode
-  parallelNode concurrentNode armNode riscNode x86Node x8664Node
-  vulkanNode webGPUNode openCLNode heterogeneousNode tpuNode aiAcceleratorNode
+  simdNode flynnNode gpuNode vectorProcessorNode gpgpuNode : ComputingNode
+  parallelNode concurrentNode armNode riscNode x86Node x8664Node : ComputingNode
+  vulkanNode webGPUNode openCLNode heterogeneousNode tpuNode aiAcceleratorNode : ComputingNode
   cudaNode rocmNode rustNode : ComputingNode
 
 record ComputingGraphEdge : Set where

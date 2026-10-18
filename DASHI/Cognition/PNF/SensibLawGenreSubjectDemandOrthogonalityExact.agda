@@ -17,26 +17,26 @@ import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as C
 ------------------------------------------------------------------------
 
 data TextGenre : Set where
-  casualConversation
-  transcript
-  educationalLecture
-  academicDiscussion
-  newsReport
-  narrativeText
-  institutionalDocument
-  formalLegalDocument
-  unresolvedGenre
+  casualConversation : String → TextGenre
+  transcript : String → TextGenre
+  educationalLecture : String → TextGenre
+  academicDiscussion : String → TextGenre
+  newsReport : String → TextGenre
+  narrativeText : String → TextGenre
+  institutionalDocument : String → TextGenre
+  formalLegalDocument : String → TextGenre
+  unresolvedGenre : String → TextGenre
   customGenre : String → TextGenre
 
 data SubjectMatter : Set where
-  legalSubject
-  historicalSubject
-  culturalSubject
-  politicalSubject
-  scientificSubject
-  personalSubject
-  institutionalSubject
-  generalSubject
+  legalSubject : String → SubjectMatter
+  historicalSubject : String → SubjectMatter
+  culturalSubject : String → SubjectMatter
+  politicalSubject : String → SubjectMatter
+  scientificSubject : String → SubjectMatter
+  personalSubject : String → SubjectMatter
+  institutionalSubject : String → SubjectMatter
+  generalSubject : String → SubjectMatter
   customSubject : String → SubjectMatter
 
 record TextContextProfile : Set where
@@ -92,8 +92,11 @@ contextualise {candidate} general profile =
 casualLegalCaseTranscript : Consumer.ConsumerDemandProfile → TextContextProfile
 casualLegalCaseTranscript demand =
   textContextProfile
-    transcript
-    (legalSubject ∷ historicalSubject ∷ culturalSubject ∷ [])
+    (transcript "container evidence: informal/casual transcript")
+    ( legalSubject "discussion concerns a legal case"
+    ∷ historicalSubject "discussion may recount historical context"
+    ∷ culturalSubject "discussion may analyse cultural effects"
+    ∷ [])
     demand
     ("container evidence: informal/casual transcript" ∷ [])
     ( "discussion concerns a legal case"
@@ -105,8 +108,11 @@ casualLegalCaseTranscript demand =
 lawSchoolLecture : Context.DocumentDiscourseFrame → TextContextProfile
 lawSchoolLecture frame =
   textContextProfile
-    educationalLecture
-    (legalSubject ∷ historicalSubject ∷ culturalSubject ∷ [])
+    (educationalLecture "container evidence: teaching/lecture context")
+    ( legalSubject "legal doctrine"
+    ∷ historicalSubject "case history"
+    ∷ culturalSubject "cultural context"
+    ∷ [])
     (Consumer.lawSchoolCaseDemand frame)
     ("container evidence: teaching/lecture context" ∷ [])
     ("legal doctrine" ∷ "case history" ∷ "cultural context" ∷ [])

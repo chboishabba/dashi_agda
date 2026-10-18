@@ -21,71 +21,50 @@ import DASHI.Interop.PNFHyperfabric369 as H369
 -- It does not prove supergeometry, and it does not carry authority.
 
 data LaneClassification : Set where
-  oddLaneClass :
-    LaneClassification
+  oddLaneClass : LaneClassification
 
-  evenLaneClass :
-    LaneClassification
+  evenLaneClass : LaneClassification
 
-  unresolvedLaneClass :
-    LaneClassification
+  unresolvedLaneClass : LaneClassification
 
 data LanePresentationLabel369 : Set where
-  presentationLabel3 :
-    LanePresentationLabel369
+  presentationLabel3 : LanePresentationLabel369
 
-  presentationLabel6 :
-    LanePresentationLabel369
+  presentationLabel6 : LanePresentationLabel369
 
-  presentationLabel9 :
-    LanePresentationLabel369
+  presentationLabel9 : LanePresentationLabel369
 
 data ProbeMeasureFace : Set where
-  oddProbeFace :
-    ProbeMeasureFace
+  oddProbeFace : ProbeMeasureFace
 
-  oddMeasureFace :
-    ProbeMeasureFace
+  oddMeasureFace : ProbeMeasureFace
 
-  evenProbeFace :
-    ProbeMeasureFace
+  evenProbeFace : ProbeMeasureFace
 
-  evenMeasureFace :
-    ProbeMeasureFace
+  evenMeasureFace : ProbeMeasureFace
 
-  unresolvedProbeFace :
-    ProbeMeasureFace
+  unresolvedProbeFace : ProbeMeasureFace
 
-  unresolvedMeasureFace :
-    ProbeMeasureFace
+  unresolvedMeasureFace : ProbeMeasureFace
 
 data ReceiptGridCell : Set where
-  oddPresentation3Cell :
-    ReceiptGridCell
+  oddPresentation3Cell : ReceiptGridCell
 
-  oddPresentation6Cell :
-    ReceiptGridCell
+  oddPresentation6Cell : ReceiptGridCell
 
-  oddPresentation9Cell :
-    ReceiptGridCell
+  oddPresentation9Cell : ReceiptGridCell
 
-  evenPresentation3Cell :
-    ReceiptGridCell
+  evenPresentation3Cell : ReceiptGridCell
 
-  evenPresentation6Cell :
-    ReceiptGridCell
+  evenPresentation6Cell : ReceiptGridCell
 
-  evenPresentation9Cell :
-    ReceiptGridCell
+  evenPresentation9Cell : ReceiptGridCell
 
-  unresolvedPresentation3Cell :
-    ReceiptGridCell
+  unresolvedPresentation3Cell : ReceiptGridCell
 
-  unresolvedPresentation6Cell :
-    ReceiptGridCell
+  unresolvedPresentation6Cell : ReceiptGridCell
 
-  unresolvedPresentation9Cell :
-    ReceiptGridCell
+  unresolvedPresentation9Cell : ReceiptGridCell
 
 laneClassToPresentationLabel369 :
   LaneClassification →

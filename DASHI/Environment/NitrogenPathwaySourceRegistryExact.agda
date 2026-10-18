@@ -18,18 +18,18 @@ import DASHI.Environment.KNFSourceAttributionLineageExact as KNFAttribution
 ------------------------------------------------------------------------
 
 data NitrogenSourceRole : Set where
-  industrialAmmoniaSynthesis
-  plasmaNitrogenFixation
-  biologicalNitrogenFixation
-  compostNitrogenMineralisation
-  aquaponicNitrogenRecovery
+  industrialAmmoniaSynthesis : NitrogenSourceRole
+  plasmaNitrogenFixation : NitrogenSourceRole
+  biologicalNitrogenFixation : NitrogenSourceRole
+  compostNitrogenMineralisation : NitrogenSourceRole
+  aquaponicNitrogenRecovery : NitrogenSourceRole
   localNitrogenRecycling : NitrogenSourceRole
 
 data NitrogenEvidenceForm : Set where
-  reviewSource
-  peerReviewedExperiment
-  peerReviewedSynthesis
-  existingSourceAtlas
+  reviewSource : NitrogenEvidenceForm
+  peerReviewedExperiment : NitrogenEvidenceForm
+  peerReviewedSynthesis : NitrogenEvidenceForm
+  existingSourceAtlas : NitrogenEvidenceForm
   existingTypedLineage : NitrogenEvidenceForm
 
 record NitrogenPathwaySource : Set where

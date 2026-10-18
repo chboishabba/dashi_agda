@@ -19,8 +19,8 @@ record IntegrationTrajectory : Set where
 record DurableIntegratedStateBoundary : Set where
   field
     ratchetBoundary : Ratchet.RatchetInterpretationBoundary
-    hiddenStateType : Set
-    memoryAdapterType : Set
+    hiddenStateBoundary : Hidden.NonrecurrenceBoundary
+    memoryAdapter : Memory.OscillatoryMemoryAdapter
     transientIntegrationNotPersistentSelf : Bool
     returnToBaselineNotErasure : Bool
     reactivationGainRequiresStoredStateModel : Bool
@@ -32,8 +32,8 @@ record DurableIntegratedStateBoundary : Set where
 canonicalDurableIntegratedStateBoundary : DurableIntegratedStateBoundary
 canonicalDurableIntegratedStateBoundary = record
   { ratchetBoundary = Ratchet.canonicalRatchetInterpretationBoundary
-  ; hiddenStateType = Hidden.HiddenStateNonrecurrenceBoundary
-  ; memoryAdapterType = Memory.OscillatoryMemoryStorageAdapter
+  ; hiddenStateBoundary = Hidden.canonicalNonrecurrenceBoundary
+  ; memoryAdapter = Memory.canonicalOscillatoryMemoryAdapter
   ; transientIntegrationNotPersistentSelf = true
   ; returnToBaselineNotErasure = true
   ; reactivationGainRequiresStoredStateModel = true

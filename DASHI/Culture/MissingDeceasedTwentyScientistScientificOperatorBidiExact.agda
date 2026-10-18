@@ -15,7 +15,7 @@ import DASHI.Culture.MissingDeceasedTwentyScientistScientificOperatorFactorisati
 ------------------------------------------------------------------------
 
 data ScientificRoleQuery : Set where
-  weakSignalRole resilientControlRole materialsProcessRole
+  weakSignalRole resilientControlRole materialsProcessRole : ScientificRoleQuery
   molecularMeasurementRole fieldComparatorRole classificationEvidenceRole : ScientificRoleQuery
 
 familyForRole : ScientificRoleQuery → O.ScientificOperatorFamily

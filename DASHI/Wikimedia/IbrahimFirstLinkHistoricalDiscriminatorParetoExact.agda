@@ -23,9 +23,9 @@ import DASHI.Wikimedia.IbrahimFirstLinkProducerArchaeologyDeweyDoiQidExact as Pr
 ------------------------------------------------------------------------
 
 data ProbeRole : Set where
-  primaryPaperOracle
-  parserRegressionOracle
-  snapshotDiscriminator
+  primaryPaperOracle : ProbeRole
+  parserRegressionOracle : ProbeRole
+  snapshotDiscriminator : ProbeRole
   methodCodeDiscriminator : ProbeRole
 
 record HistoricalEdgeProbe : Set where
@@ -125,9 +125,9 @@ novemberPaperCorpus = candidate-corpus
 ------------------------------------------------------------------------
 
 data InvestigationTarget : Set where
-  exactDumpLineage
-  parserMethodEquivalence
-  historicalEdgeReplay
+  exactDumpLineage : InvestigationTarget
+  parserMethodEquivalence : InvestigationTarget
+  historicalEdgeReplay : InvestigationTarget
   fullCorpusReplay : InvestigationTarget
 
 record ParetoTarget : Set where

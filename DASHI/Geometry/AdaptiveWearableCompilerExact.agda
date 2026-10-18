@@ -155,8 +155,8 @@ record CurvatureDisposition (Region : Set) : Set where
 ------------------------------------------------------------------------
 
 data PanelAction : Set where
-  relief drain wedge dartAction lens gussetAction subdivide changeGrain
-    changeMaterial : PanelAction
+  relief drain wedge dartAction lens gussetAction subdivide changeGrain : PanelAction
+  changeMaterial : PanelAction
 
 data WearableConsumer : Set where
   seamSearch : WearableConsumer

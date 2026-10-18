@@ -88,10 +88,10 @@ operationDoesNotNeedPrivateIntentProof = refl
 ------------------------------------------------------------------------
 
 data OperationalHistoricalStage : Set where
-  foundationalJuridicalErasureStage
-  nativeTitleDoctrinalCorrectionStage
-  partialOperationalCorrectionStage
-  materialCommunityClosureStage
+  foundationalJuridicalErasureStage : OperationalHistoricalStage
+  nativeTitleDoctrinalCorrectionStage : OperationalHistoricalStage
+  partialOperationalCorrectionStage : OperationalHistoricalStage
+  materialCommunityClosureStage : OperationalHistoricalStage
   : OperationalHistoricalStage
 
 record TerraNulliusOperationalHistory : Set where

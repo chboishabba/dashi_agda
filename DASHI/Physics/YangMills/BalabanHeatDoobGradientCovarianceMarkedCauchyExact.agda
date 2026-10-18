@@ -32,6 +32,7 @@ import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as N
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteWeightedInfluencePowerExact as Weighted
 import DASHI.Physics.YangMills.BalabanThreeHalvesMetricWeightExact as Metric
+import DASHI.Physics.YangMills.BalabanFiniteBoundedCovarianceExact as FiniteCov
 
 two : ℚ
 two = + 2 / 1
@@ -216,14 +217,25 @@ temporalGradientCovarianceShellCompilerLevel = machineChecked
 spatialGradientCovarianceWeightedRowCompilerLevel : ProofLevel
 spatialGradientCovarianceWeightedRowCompilerLevel = machineChecked
 
+-- On the finite rational conditional fibres used by the selected lattice
+-- reopening route, the bounded covariance inequality is now proved internally:
+--
+--   |Cov(F,G)| <= 2 A B.
+--
+-- The generic real/measure-theoretic formulation may still be standard
+-- mathematics, but it is no longer a theorem payment on this finite carrier.
+heatDoobFiniteRationalBoundedGradientCovarianceInequalityLevel : ProofLevel
+heatDoobFiniteRationalBoundedGradientCovarianceInequalityLevel =
+  FiniteCov.finiteRationalBoundedCovarianceLevel
+
 heatDoobBoundedGradientCovarianceInequalityLevel : ProofLevel
-heatDoobBoundedGradientCovarianceInequalityLevel = standardImported
+heatDoobBoundedGradientCovarianceInequalityLevel =
+  heatDoobFiniteRationalBoundedGradientCovarianceInequalityLevel
 
 -- TRUE physical source seam after this reduction: instantiate one first-gradient
 -- localized response and one uniform companion-gradient bound from the SAME
--- CMP116 common analytic polydisc / Heat-Doob density.  CMP116 Sect.1 explicitly
--- preserves localization under finite Cauchy differentiation; the remaining job
--- is literal coordinate/radius identification, not a new covariance cluster
--- expansion.
+-- CMP116 common analytic polydisc / Heat-Doob density, and identify that density's
+-- finite conditional law with FiniteCov.FiniteRationalProbability.  The
+-- covariance inequality itself is no longer external analysis on that carrier.
 literalCMP116FirstGradientHeatDoobCovarianceInstantiationLevel : ProofLevel
 literalCMP116FirstGradientHeatDoobCovarianceInstantiationLevel = conditional

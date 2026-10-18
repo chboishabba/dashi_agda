@@ -14,10 +14,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data BridgePaymentClass : Set where
-  primaryObjectCustody
-  secondRetainedPersonIdentity
-  sameObjectRoleReceipt
-  preEventTemporalOverlap
+  primaryObjectCustody : BridgePaymentClass
+  secondRetainedPersonIdentity : BridgePaymentClass
+  sameObjectRoleReceipt : BridgePaymentClass
+  preEventTemporalOverlap : BridgePaymentClass
   preEventOperationalReceipt : BridgePaymentClass
 
 record BridgeDebtReceipt : Set where

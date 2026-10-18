@@ -1,0 +1,31 @@
+module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigure5QualitativeFreeEnergyAcquisitionValidation where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigure5QualitativeFreeEnergyAcquisitionExact as Acquisition
+
+referenceStateIsGamma :
+  Acquisition.Figure5QualitativeFreeEnergyBoundary.gammaReferenceStatePaid
+    Acquisition.canonicalFigure5QualitativeFreeEnergyBoundary ≡ true
+referenceStateIsGamma = refl
+
+alphaBetaGammaNearSameLevelPaid :
+  Acquisition.Figure5QualitativeFreeEnergyBoundary.alphaBetaGammaNearlySameFreeEnergyPaid
+    Acquisition.canonicalFigure5QualitativeFreeEnergyBoundary ≡ true
+alphaBetaGammaNearSameLevelPaid = refl
+
+exactAlphaBetaGammaNumericDifferencesRemainUnpaid :
+  Acquisition.Figure5QualitativeFreeEnergyBoundary.exactAlphaBetaGammaFreeEnergyDifferencesPaid
+    Acquisition.canonicalFigure5QualitativeFreeEnergyBoundary ≡ false
+exactAlphaBetaGammaNumericDifferencesRemainUnpaid = refl
+
+qualitativeOrderingDoesNotCreateNumericCell :
+  Acquisition.Figure5QualitativeFreeEnergyBoundary.qualitativeRelationCreatesNumericCalibration
+    Acquisition.canonicalFigure5QualitativeFreeEnergyBoundary ≡ false
+qualitativeOrderingDoesNotCreateNumericCell = refl
+
+attributionEnvelopeRetained :
+  Acquisition.Figure5QualitativeFreeEnergyBoundary.attributionEnvelopeReused
+    Acquisition.canonicalFigure5QualitativeFreeEnergyBoundary ≡ true
+attributionEnvelopeRetained = refl

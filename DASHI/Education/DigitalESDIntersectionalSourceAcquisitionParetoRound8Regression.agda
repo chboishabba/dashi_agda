@@ -1,0 +1,19 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound8Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound8Exact as Round8
+
+candidateStillNotIncluded : Round8.Round8CandidateCreatesIncludedStudy → ⊥
+candidateStillNotIncluded = Round8.round8CandidateDoesNotCreateIncludedStudy
+
+workerStudyNotDeploymentSupplyChain :
+  Round8.WorkerStudyCreatesDigitalESDDeploymentSupplyChainIdentity → ⊥
+workerStudyNotDeploymentSupplyChain =
+  Round8.workerStudyDoesNotCreateDigitalESDDeploymentSupplyChainIdentity
+
+lifecycleObserverNotUniversalWorker :
+  Round8.LocalWorkerObservationCreatesUniversalLifecycleWorkerState → ⊥
+lifecycleObserverNotUniversalWorker =
+  Round8.localWorkerObservationDoesNotCreateUniversalLifecycleWorkerState

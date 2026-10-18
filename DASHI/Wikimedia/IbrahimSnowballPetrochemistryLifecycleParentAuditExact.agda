@@ -79,9 +79,9 @@ thermalCrackingReviewSource = Attribution.mkDOISource
 ------------------------------------------------------------------------
 
 data PetroleumStageCase : Set where
-  petroleumInGeologicalReservoir
-  petroleumAsExtractedFeedstock
-  petroleumAsPetrochemicalInput
+  petroleumInGeologicalReservoir : PetroleumStageCase
+  petroleumAsExtractedFeedstock : PetroleumStageCase
+  petroleumAsPetrochemicalInput : PetroleumStageCase
   petroleumCarbonAfterCombustion : PetroleumStageCase
 
 data PetroleumSurface : Set where samePetroleumLabel : PetroleumSurface

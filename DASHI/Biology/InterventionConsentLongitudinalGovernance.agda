@@ -25,29 +25,21 @@ listCount (_ ∷ xs) =
 -- Route and topology vocabulary.
 
 data GovernanceRoute : Set where
-  candidateGovernanceRoute :
-    GovernanceRoute
+  candidateGovernanceRoute : GovernanceRoute
 
-  forcedDisclosureRoute :
-    GovernanceRoute
+  forcedDisclosureRoute : GovernanceRoute
 
-  therapeuticAuthorityRoute :
-    GovernanceRoute
+  therapeuticAuthorityRoute : GovernanceRoute
 
-  cureClaimRoute :
-    GovernanceRoute
+  cureClaimRoute : GovernanceRoute
 
-  diagnosisRoute :
-    GovernanceRoute
+  diagnosisRoute : GovernanceRoute
 
-  treatmentRoute :
-    GovernanceRoute
+  treatmentRoute : GovernanceRoute
 
-  clinicalAuthorityRoute :
-    GovernanceRoute
+  clinicalAuthorityRoute : GovernanceRoute
 
-  coerciveInstitutionalUseRoute :
-    GovernanceRoute
+  coerciveInstitutionalUseRoute : GovernanceRoute
 
 data Never : Set where
 
@@ -99,14 +91,11 @@ coerciveInstitutionalUseRouteRejected :
 coerciveInstitutionalUseRouteRejected impossible = impossible
 
 data TopologyNode : Set where
-  chartTopologyNode :
-    TopologyNode
+  chartTopologyNode : TopologyNode
 
-  residualTopologyNode :
-    TopologyNode
+  residualTopologyNode : TopologyNode
 
-  plusOneTopologyNode :
-    TopologyNode
+  plusOneTopologyNode : TopologyNode
 
 canonicalTopologySignature :
   List TopologyNode
@@ -125,29 +114,21 @@ canonicalTopologyNodeCount =
 -- Consent states and longitudinal gates.
 
 data ConsentState : Set where
-  consentRequestedState :
-    ConsentState
+  consentRequestedState : ConsentState
 
-  consentAffirmedState :
-    ConsentState
+  consentAffirmedState : ConsentState
 
-  consentPausedState :
-    ConsentState
+  consentPausedState : ConsentState
 
-  consentStoppedState :
-    ConsentState
+  consentStoppedState : ConsentState
 
-  consentOrientedState :
-    ConsentState
+  consentOrientedState : ConsentState
 
-  consentWitnessedState :
-    ConsentState
+  consentWitnessedState : ConsentState
 
-  safetySeedState :
-    ConsentState
+  safetySeedState : ConsentState
 
-  consentRevokedState :
-    ConsentState
+  consentRevokedState : ConsentState
 
 canonicalConsentStates :
   List ConsentState
@@ -168,26 +149,19 @@ canonicalConsentStateCount =
   listCount canonicalConsentStates
 
 data LongitudinalReviewGate : Set where
-  pacingGate :
-    LongitudinalReviewGate
+  pacingGate : LongitudinalReviewGate
 
-  stopGate :
-    LongitudinalReviewGate
+  stopGate : LongitudinalReviewGate
 
-  pauseGate :
-    LongitudinalReviewGate
+  pauseGate : LongitudinalReviewGate
 
-  orientGate :
-    LongitudinalReviewGate
+  orientGate : LongitudinalReviewGate
 
-  witnessGate :
-    LongitudinalReviewGate
+  witnessGate : LongitudinalReviewGate
 
-  safetyGate :
-    LongitudinalReviewGate
+  safetyGate : LongitudinalReviewGate
 
-  reconsentGate :
-    LongitudinalReviewGate
+  reconsentGate : LongitudinalReviewGate
 
 canonicalLongitudinalReviewGates :
   List LongitudinalReviewGate
@@ -207,29 +181,21 @@ canonicalLongitudinalReviewGateCount =
   listCount canonicalLongitudinalReviewGates
 
 data GovernanceRowKind : Set where
-  stopRowKind :
-    GovernanceRowKind
+  stopRowKind : GovernanceRowKind
 
-  pauseRowKind :
-    GovernanceRowKind
+  pauseRowKind : GovernanceRowKind
 
-  orientRowKind :
-    GovernanceRowKind
+  orientRowKind : GovernanceRowKind
 
-  witnessRowKind :
-    GovernanceRowKind
+  witnessRowKind : GovernanceRowKind
 
-  safetyRowKind :
-    GovernanceRowKind
+  safetyRowKind : GovernanceRowKind
 
-  interventionObservationRowKind :
-    GovernanceRowKind
+  interventionObservationRowKind : GovernanceRowKind
 
-  longitudinalReviewRowKind :
-    GovernanceRowKind
+  longitudinalReviewRowKind : GovernanceRowKind
 
-  safetySeedRowKind :
-    GovernanceRowKind
+  safetySeedRowKind : GovernanceRowKind
 
 canonicalGovernanceRowKinds :
   List GovernanceRowKind

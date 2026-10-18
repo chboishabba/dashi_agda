@@ -148,23 +148,26 @@ canonicalOggPrimes =
 canonicalOggPrimeCountIsFifteen : listCount canonicalOggPrimes ≡ 15
 canonicalOggPrimeCountIsFifteen = refl
 
+open import Agda.Builtin.Nat using (_==_)
+open import Data.Bool using (_∨_)
+
 isOggPrime : Nat → Bool
-isOggPrime 2 = true
-isOggPrime 3 = true
-isOggPrime 5 = true
-isOggPrime 7 = true
-isOggPrime 11 = true
-isOggPrime 13 = true
-isOggPrime 17 = true
-isOggPrime 19 = true
-isOggPrime 23 = true
-isOggPrime 29 = true
-isOggPrime 31 = true
-isOggPrime 41 = true
-isOggPrime 47 = true
-isOggPrime 59 = true
-isOggPrime 71 = true
-isOggPrime n = false
+isOggPrime n =
+  (n == 2)
+  ∨ (n == 3)
+  ∨ (n == 5)
+  ∨ (n == 7)
+  ∨ (n == 11)
+  ∨ (n == 13)
+  ∨ (n == 17)
+  ∨ (n == 19)
+  ∨ (n == 23)
+  ∨ (n == 29)
+  ∨ (n == 31)
+  ∨ (n == 41)
+  ∨ (n == 47)
+  ∨ (n == 59)
+  ∨ (n == 71)
 
 largestThreeOggPrimesMultiplyTo196883 : 47 * 59 * 71 ≡ 196883
 largestThreeOggPrimesMultiplyTo196883 = refl

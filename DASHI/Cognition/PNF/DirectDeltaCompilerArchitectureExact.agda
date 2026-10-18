@@ -48,8 +48,8 @@ data PersistenceCut : Set where
   authorityPublicationCut : PersistenceCut
 
 data PostgreSQLRole : Set where
-  durableAuthorityRole globalIdentityRole globalReconciliationRole
-    recoveryMetadataRole referenceAuditRole : PostgreSQLRole
+  durableAuthorityRole globalIdentityRole globalReconciliationRole : PostgreSQLRole
+  recoveryMetadataRole referenceAuditRole : PostgreSQLRole
 
 data ParserProjectionMode : Set where
   productionDirect : ParserProjectionMode
