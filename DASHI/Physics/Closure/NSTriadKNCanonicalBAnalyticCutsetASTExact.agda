@@ -25,7 +25,9 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalBAnalyticCutsetASTExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ; _*_; _≤_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -39,6 +41,8 @@ import DASHI.Physics.Closure.NSTriadKNSpectatorResolventPhysicalShellFloorRound5
 import DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact as R591
 import DASHI.Physics.Closure.NSTriadKNRationalHermitianYoungRound579Exact as R579
 import DASHI.Physics.Closure.NSTriadKNFactoredFullCommutatorOnlyRound567Exact as R567
+import DASHI.Physics.Closure.NSTriadKNSignedCrossShellAlmostOrthogonalityRound29Exact as Signed29
+import DASHI.Physics.Closure.NSTriadKNUnrestrictedNestedSignedOverlapRound584Exact as R584
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -50,6 +54,7 @@ F = Rational.rationalRealField
 data PeriodicBAnalyticAtom : Set where
   cutoffUniformLiveCommutatorBudget : PeriodicBAnalyticAtom
   cutoffUniformSameOutputEnvelopeMass : PeriodicBAnalyticAtom
+  signedBilinearTransportDecomposition : PeriodicBAnalyticAtom
   signedNestedSpacetimeTransport : PeriodicBAnalyticAtom
   literalCriticalProductionAbsorption : PeriodicBAnalyticAtom
   scalarFTCInstallation : PeriodicBAnalyticAtom
@@ -65,6 +70,7 @@ data ProofState : Set where
 stateOf : PeriodicBAnalyticAtom → ProofState
 stateOf cutoffUniformLiveCommutatorBudget = openAnalytic
 stateOf cutoffUniformSameOutputEnvelopeMass = openAnalytic
+stateOf signedBilinearTransportDecomposition = theoremBearing
 stateOf signedNestedSpacetimeTransport = openAnalytic
 stateOf literalCriticalProductionAbsorption = openAnalytic
 stateOf scalarFTCInstallation = openStandardAnalysis
@@ -124,6 +130,98 @@ module DirectLeafAST
     ; Comm.liveCommutatorOnlyBudget568 = paysLiteralR568 P
     }
 
+  ----------------------------------------------------------------------
+  -- Signed bilinear transport producer for the R568 leaf.
+  --
+  -- R584 supplies the literal unrestricted nested same-output pair carrier
+  -- and maps each pair into R29.SignedCrossShellCell.  R29 supplies the
+  -- finite signed aggregation theorem.  What is NOT already proved is the
+  -- same-object weld from the live R568 global forcing observable to a
+  -- concrete family of those cells, nor the cutoff-uniform spacetime payment.
+  --
+  -- The two records below expose exactly those two remaining jobs.  The
+  -- compiler into R568 uses only integration congruence; it introduces no
+  -- inequality beyond the supplied signed spacetime payment.
+  ----------------------------------------------------------------------
+
+  record SignedBilinearTransportDecompositionAST
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T) : Set₁ where
+    field
+      signedCells :
+        Nat → Time → List Signed29.SignedCrossShellCell
+
+      liveForcingIsSignedBilinearAggregate :
+        (cutoff : Nat) (time : Time) →
+        Comm.globalForcingFull T R cutoff time
+        ≡ Signed29.sumSignedPairings (signedCells cutoff time)
+
+  open SignedBilinearTransportDecompositionAST public
+
+  record CutoffUniformSignedBilinearTransportBudgetAST
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T)
+      (D : SignedBilinearTransportDecompositionAST T R) : Set₁ where
+    field
+      signedTransportBound : Time → ℚ
+
+      paysSignedBilinearTransport :
+        (cutoff : Nat) (terminal : Time) →
+        R567.four567
+          * integrateTo
+              (λ time →
+                Signed29.sumSignedPairings
+                  (signedCells D cutoff time))
+              terminal
+        ≤ signedTransportBound terminal
+
+  open CutoffUniformSignedBilinearTransportBudgetAST public
+
+  signedBilinearTransportBuildsR568 :
+    ∀ {T R}
+      {D : SignedBilinearTransportDecompositionAST T R} →
+    CutoffUniformSignedBilinearTransportBudgetAST T R D →
+    Comm.CommutatorOnlySpacetimeBudget568 T R
+  signedBilinearTransportBuildsR568 {T} {R} {D} P =
+    record
+      { Comm.cutoffIndependentCommutatorBound568 =
+          signedTransportBound P
+      ; Comm.liveCommutatorOnlyBudget568 = λ cutoff terminal →
+          let
+            live =
+              Comm.integratedGlobalForcingFull T R cutoff terminal
+
+            signed =
+              integrateTo
+                (λ time →
+                  Signed29.sumSignedPairings
+                    (signedCells D cutoff time))
+                terminal
+
+            sameObject :
+              live ≡ signed
+            sameObject =
+              R495.integrateCongruent integration
+                (Comm.globalForcingFull T R cutoff)
+                (λ time →
+                  Signed29.sumSignedPairings
+                    (signedCells D cutoff time))
+                (liveForcingIsSignedBilinearAggregate D cutoff)
+                terminal
+
+            paid :
+              R567.four567 * signed
+              ≤ signedTransportBound P terminal
+            paid = paysSignedBilinearTransport P cutoff terminal
+          in
+          subst
+            (λ selected →
+              R567.four567 * selected
+              ≤ signedTransportBound P terminal)
+            (sym sameObject)
+            paid
+      }
+
 ------------------------------------------------------------------------
 -- 3. Producer-side AST boundary.
 --
@@ -160,6 +258,12 @@ record CanonicalBInvariantBounds : Set where
 
     localSignedOverlapEnvelope :
       R586.round586LocalSignedOverlapEnvelopeClosed ≡ true
+
+    literalNestedPairMapsToSignedBilinearCell :
+      R584.round584LocalSignedOverlapEnvelopeClosed ≡ true
+
+    finiteSignedBilinearAggregationClosed :
+      Signed29.crossShellAlmostOrthogonalityScalarCoreClosed ≡ true
 
     pointwiseMassDoesNotCloseFibre :
       R586.round586PointwiseMassAloneClosesSameOutputFibre ≡ false
@@ -202,6 +306,10 @@ canonicalBInvariantBounds = record
       R586.round586OperatorShellNormalizedToOuterForcingIsTrue
   ; localSignedOverlapEnvelope =
       R586.round586LocalSignedOverlapEnvelopeClosedIsTrue
+  ; literalNestedPairMapsToSignedBilinearCell =
+      R584.round584LocalSignedOverlapEnvelopeClosedIsTrue
+  ; finiteSignedBilinearAggregationClosed =
+      Signed29.crossShellAlmostOrthogonalityScalarCoreClosedIsTrue
   ; pointwiseMassDoesNotCloseFibre =
       R586.round586PointwiseMassAloneClosesSameOutputFibreIsFalse
   ; explicitSeparationDecayNotMandatory =
@@ -224,7 +332,65 @@ canonicalBInvariantBounds = record
   }
 
 ------------------------------------------------------------------------
--- 5. Residual cutset.
+-- 5. R568 producer frontier.
+--
+-- The canonical global residual remains the R568 budget itself.  Internally,
+-- the preferred signed producer is now typed as two exact sub-obligations:
+--
+--   (i) live global forcing = finite R29 signed bilinear aggregate;
+--  (ii) cutoff-uniform spacetime payment of that same signed aggregate.
+--
+-- R29/R584 already own the finite carrier and local signed envelope; neither
+-- theorem is misreported as the missing global/time estimate.
+------------------------------------------------------------------------
+
+data CanonicalR568SignedProducerResidual : Set where
+  missingLiveForcingSignedBilinearSameObjectWeld :
+    CanonicalR568SignedProducerResidual
+  missingCutoffUniformSignedBilinearSpacetimePayment :
+    CanonicalR568SignedProducerResidual
+  canonicalR568SignedProducerPaid :
+    CanonicalR568SignedProducerResidual
+
+currentCanonicalR568SignedProducerResidual :
+  CanonicalR568SignedProducerResidual
+currentCanonicalR568SignedProducerResidual =
+  missingLiveForcingSignedBilinearSameObjectWeld
+
+canonicalR568SignedFiniteAggregationClosed : Bool
+canonicalR568SignedFiniteAggregationClosed =
+  Signed29.crossShellAlmostOrthogonalityScalarCoreClosed
+
+canonicalR568LiteralNestedToSignedCellClosed : Bool
+canonicalR568LiteralNestedToSignedCellClosed =
+  R584.round584LocalSignedOverlapEnvelopeClosed
+
+canonicalR568LiveForcingSignedBilinearSameObjectWeldClosed : Bool
+canonicalR568LiveForcingSignedBilinearSameObjectWeldClosed = false
+
+canonicalR568SignedBilinearSpacetimePaymentClosed : Bool
+canonicalR568SignedBilinearSpacetimePaymentClosed = false
+
+canonicalR568SignedFiniteAggregationClosedIsTrue :
+  canonicalR568SignedFiniteAggregationClosed ≡ true
+canonicalR568SignedFiniteAggregationClosedIsTrue =
+  Signed29.crossShellAlmostOrthogonalityScalarCoreClosedIsTrue
+
+canonicalR568LiteralNestedToSignedCellClosedIsTrue :
+  canonicalR568LiteralNestedToSignedCellClosed ≡ true
+canonicalR568LiteralNestedToSignedCellClosedIsTrue =
+  R584.round584LocalSignedOverlapEnvelopeClosedIsTrue
+
+canonicalR568LiveForcingSignedBilinearSameObjectWeldClosedIsFalse :
+  canonicalR568LiveForcingSignedBilinearSameObjectWeldClosed ≡ false
+canonicalR568LiveForcingSignedBilinearSameObjectWeldClosedIsFalse = refl
+
+canonicalR568SignedBilinearSpacetimePaymentClosedIsFalse :
+  canonicalR568SignedBilinearSpacetimePaymentClosed ≡ false
+canonicalR568SignedBilinearSpacetimePaymentClosedIsFalse = refl
+
+------------------------------------------------------------------------
+-- 6. Residual cutset.
 ------------------------------------------------------------------------
 
 data CanonicalBResidual : Set where
