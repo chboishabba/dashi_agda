@@ -137,6 +137,13 @@ def test_agda_certification_invokes_kernel_on_materialized_source_in_single_libr
         encoding="utf-8",
     )
     _populate_fake_agda_dependencies(root)
+    # A DASHI import may transitively reference an Agda module at repo root.
+    (root / "Base369.agda").write_text(
+        "module Base369 where\\n", encoding="utf-8"
+    )
+    (root / "RootTransit.agda").write_text(
+        "module RootTransit where\\nopen import Base369\\n", encoding="utf-8"
+    )
 
     home = tmp_path / "home"
     (home / ".agda").mkdir(parents=True)
@@ -163,6 +170,11 @@ def test_agda_certification_invokes_kernel_on_materialized_source_in_single_libr
             observed["source_is_file"] = workspace_source.is_file()
             observed["source_is_symlink"] = workspace_source.is_symlink()
             observed["source_bytes"] = workspace_source.read_bytes()
+            observed["root_closure_files"] = {
+                name: (workspace / name).read_bytes()
+                for name in ("Base369.agda", "RootTransit.agda")
+            }
+            assert not (workspace / "Base369.agda").is_symlink()
             observed["source_resolved"] = workspace_source.resolve()
             library_flag = next(arg for arg in command if arg.startswith("--library-file="))
             registry = Path(library_flag.split("=", 1)[1])
@@ -194,6 +206,8 @@ def test_agda_certification_invokes_kernel_on_materialized_source_in_single_libr
     assert observed["source_is_file"] is True
     assert observed["source_is_symlink"] is False
     assert observed["source_bytes"] == source.read_bytes()
+    assert observed["root_closure_files"]["Base369.agda"] == (root / "Base369.agda").read_bytes()
+    assert observed["root_closure_files"]["RootTransit.agda"] == (root / "RootTransit.agda").read_bytes()
     assert observed["source_resolved"] != source.resolve()
     assert observed["staged_import_is_regular"] is True
     assert str(root.resolve()) not in observed["temporary_dashi_library"]
