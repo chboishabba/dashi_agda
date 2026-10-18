@@ -108,12 +108,22 @@ module Polynomial {r : Level} (F : C3.RealField r) where
   module R = Solver F
 
   multiplyReal :
-    ∀ {n} → R.Expr n → R.Expr n → R.Expr n → R.Expr n → R.Expr n
+    ∀ {n} →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n
   multiplyReal ar ai br bi =
     (ar R.⊗ br) R.⊕ (R.⊝ (ai R.⊗ bi))
 
   multiplyImaginary :
-    ∀ {n} → R.Expr n → R.Expr n → R.Expr n → R.Expr n → R.Expr n
+    ∀ {n} →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n
   multiplyImaginary ar ai br bi =
     (ar R.⊗ bi) R.⊕ (ai R.⊗ br)
 
@@ -669,7 +679,7 @@ hermitianAddLeft {F = F} u v w =
     dotAddStep
   where
   conjugateVectorAdd :
-    ∀ {r} {F : C3.RealField r} (a b : C3.Complex3 F) →
+    (a b : C3.Complex3 F) →
     C3.complex3Conjugate (C3.complex3Add a b)
     ≡ C3.complex3Add (C3.complex3Conjugate a) (C3.complex3Conjugate b)
   conjugateVectorAdd
