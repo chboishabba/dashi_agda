@@ -139,10 +139,10 @@ def test_agda_certification_invokes_kernel_on_materialized_source_in_single_libr
     _populate_fake_agda_dependencies(root)
     # A DASHI import may transitively reference an Agda module at repo root.
     (root / "Base369.agda").write_text(
-        "module Base369 where\\n", encoding="utf-8"
+        "module Base369 where\n", encoding="utf-8"
     )
     (root / "RootTransit.agda").write_text(
-        "module RootTransit where\\nopen import Base369\\n", encoding="utf-8"
+        "module RootTransit where\nopen import Base369\n", encoding="utf-8"
     )
 
     home = tmp_path / "home"
