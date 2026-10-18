@@ -41,6 +41,8 @@ import DASHI.Physics.Closure.NSTriadKNSpectatorResolventPhysicalShellFloorRound5
 import DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact as R591
 import DASHI.Physics.Closure.NSTriadKNRationalHermitianYoungRound579Exact as R579
 import DASHI.Physics.Closure.NSTriadKNFactoredFullCommutatorOnlyRound567Exact as R567
+import DASHI.Physics.Closure.NSTriadKNLiveSpectatorResolventNestedLeafABidiExact as LiveNested
+import DASHI.Physics.Closure.NSTriadKNWeightedNestedSignedCrossThreeOrbitBidiExact as SignedThreeOrbit
 import DASHI.Physics.Closure.NSTriadKNSignedCrossShellAlmostOrthogonalityRound29Exact as Signed29
 import DASHI.Physics.Closure.NSTriadKNUnrestrictedNestedSignedOverlapRound584Exact as R584
 
@@ -129,6 +131,49 @@ module DirectLeafAST
     { Comm.cutoffIndependentCommutatorBound568 = bound P
     ; Comm.liveCommutatorOnlyBudget568 = paysLiteralR568 P
     }
+
+
+  ------------------------------------------------------------------------
+  -- 2a. Exact producer-side live nested transport.
+  --
+  -- This is not a second analytic leaf.  LiveNested proves that the literal
+  -- R568 forcing scalar is the same live spectator-resolvent / R573 nested
+  -- signed object, including canonical output summation and integration.
+  -- An inhabitant of its spacetime budget therefore compiles directly to the
+  -- SAME R568 consumer above.
+  ------------------------------------------------------------------------
+
+  record SignedNestedTransportProducerAST
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T) : Set₁ where
+    field
+      nestedBudget :
+        LiveNested.LiveNested.NestedSpectatorSpacetimeBudget
+          Time initialTime integrateTo DerivativeOf integration T R
+
+  open SignedNestedTransportProducerAST public
+
+  signedNestedTransportToR568 :
+    ∀ {T R} →
+    SignedNestedTransportProducerAST T R →
+    Comm.CommutatorOnlySpacetimeBudget568 T R
+  signedNestedTransportToR568 {T} {R} P =
+    LiveNested.LiveNested.nestedBudgetBuildsR568
+      Time initialTime integrateTo DerivativeOf integration
+      (nestedBudget P)
+
+  signedNestedTransportToDirectAST :
+    ∀ {T R} →
+    SignedNestedTransportProducerAST T R →
+    CutoffUniformLiveCommutatorBudgetAST T R
+  signedNestedTransportToDirectAST {T} {R} P =
+    let
+      B = signedNestedTransportToR568 P
+    in
+    record
+      { bound = Comm.cutoffIndependentCommutatorBound568 B
+      ; paysLiteralR568 = Comm.liveCommutatorOnlyBudget568 B
+      }
 
   ----------------------------------------------------------------------
   -- Signed bilinear transport producer for the R568 leaf.
@@ -298,6 +343,28 @@ record CanonicalBInvariantBounds : Set where
     temporalRouteNotCanonicalPrerequisite :
       R591.round591TemporalRouteCanonicalPrerequisite ≡ false
 
+
+    liveNestedOutputSameObjectWeld :
+      LiveNested.liveNestedR568OutputSameObjectWeldClosed ≡ true
+
+    liveNestedIntegrationTransport :
+      LiveNested.liveNestedIntegrationTransportClosed ≡ true
+
+    liveNestedBudgetCompilerToR568 :
+      LiveNested.liveNestedBudgetCompilesToR568 ≡ true
+
+    liveNestedSpacetimeEstimateStillOpen :
+      LiveNested.liveNestedCutoffUniformSpacetimeEstimateClosed ≡ false
+
+    bilinearSignedThreeOrbitDecomposition :
+      SignedThreeOrbit.signedHermitianConsumerDescendsToThreeBonyOrbits ≡ true
+
+    bilinearSignedTransportKeepsNormDelayed :
+      SignedThreeOrbit.normIntroducedBeforeSignedCross ≡ false
+
+    bilinearSignedThreeOrbitBudgetStillOpen :
+      SignedThreeOrbit.cutoffUniformSignedThreeOrbitBudgetClosed ≡ false
+
 canonicalBInvariantBounds : CanonicalBInvariantBounds
 canonicalBInvariantBounds = record
   { literalUnrestrictedNestedSameObject =
@@ -329,6 +396,17 @@ canonicalBInvariantBounds = record
       R568.round568LiveCommutatorSpacetimeBudgetClosedIsFalse
   ; temporalRouteNotCanonicalPrerequisite =
       R591.round591TemporalRouteCanonicalPrerequisiteIsFalse
+  ; liveNestedOutputSameObjectWeld =
+      LiveNested.liveNestedR568OutputSameObjectWeldClosedIsTrue
+  ; liveNestedIntegrationTransport = refl
+  ; liveNestedBudgetCompilerToR568 =
+      LiveNested.liveNestedBudgetCompilesToR568IsTrue
+  ; liveNestedSpacetimeEstimateStillOpen = refl
+  ; bilinearSignedThreeOrbitDecomposition =
+      SignedThreeOrbit.signedHermitianConsumerDescendsToThreeBonyOrbitsIsTrue
+  ; bilinearSignedTransportKeepsNormDelayed =
+      SignedThreeOrbit.normIntroducedBeforeSignedCrossIsFalse
+  ; bilinearSignedThreeOrbitBudgetStillOpen = refl
   }
 
 ------------------------------------------------------------------------
@@ -408,6 +486,15 @@ currentCanonicalBResidual =
 -- The R414 production inequality remains separately open and is not discharged
 -- by an inhabitant of the direct-leaf AST.
 
+canonicalR568BoundaryBoundIntoAST : Bool
+canonicalR568BoundaryBoundIntoAST = true
+
+canonicalSignedNestedTransportCompilerBoundIntoAST : Bool
+canonicalSignedNestedTransportCompilerBoundIntoAST = true
+
+canonicalBilinearSignedThreeOrbitDecompositionBoundIntoAST : Bool
+canonicalBilinearSignedThreeOrbitDecompositionBoundIntoAST = true
+
 canonicalDirectR568LeafClosed : Bool
 canonicalDirectR568LeafClosed = false
 
@@ -416,6 +503,18 @@ canonicalR414ProductionAbsorptionClosed = false
 
 canonicalPeriodicBAnalyticCutsetPaid : Bool
 canonicalPeriodicBAnalyticCutsetPaid = false
+
+canonicalR568BoundaryBoundIntoASTIsTrue :
+  canonicalR568BoundaryBoundIntoAST ≡ true
+canonicalR568BoundaryBoundIntoASTIsTrue = refl
+
+canonicalSignedNestedTransportCompilerBoundIntoASTIsTrue :
+  canonicalSignedNestedTransportCompilerBoundIntoAST ≡ true
+canonicalSignedNestedTransportCompilerBoundIntoASTIsTrue = refl
+
+canonicalBilinearSignedThreeOrbitDecompositionBoundIntoASTIsTrue :
+  canonicalBilinearSignedThreeOrbitDecompositionBoundIntoAST ≡ true
+canonicalBilinearSignedThreeOrbitDecompositionBoundIntoASTIsTrue = refl
 
 canonicalDirectR568LeafClosedIsFalse :
   canonicalDirectR568LeafClosed ≡ false
