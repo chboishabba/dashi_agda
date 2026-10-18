@@ -1,0 +1,35 @@
+module DASHI.Culture.CohnInstitutionalProofSearchResidualPortfolioReuseRegression where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (true; false)
+
+import DASHI.Culture.CohnInstitutionalProofSearchResidualPortfolioReuseExact as Reuse
+import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
+
+proofSearchPortfolioAlreadyOwnsGenericResidualSelection :
+  Reuse.genericResidualPortfolioAlreadyOwned Reuse.canonicalReuseBoundary ≡ true
+proofSearchPortfolioAlreadyOwnsGenericResidualSelection = refl
+
+newGenericSetCoverSubsystemIsNotRequired :
+  Reuse.newGenericSetCoverSubsystemRequired Reuse.canonicalReuseBoundary ≡ false
+newGenericSetCoverSubsystemIsNotRequired = refl
+
+applicationResidualFunctionsRemainLocal :
+  Reuse.applicationResidualFunctionsRemainApplicationSpecific Reuse.canonicalReuseBoundary ≡ true
+applicationResidualFunctionsRemainLocal = refl
+
+existingProbeCanDiscriminateMultipleCoordinates :
+  Reuse.existingPortfolioSupportsMultiCoordinateProbe Reuse.canonicalReuseBoundary ≡ true
+existingProbeCanDiscriminateMultipleCoordinates = refl
+
+existingPortfolioCarriesSelectiveReopening :
+  Reuse.existingPortfolioCarriesDependencyReopening Reuse.canonicalReuseBoundary ≡ true
+existingPortfolioCarriesSelectiveReopening = refl
+
+duplicateGenericRouteRedirectsToReuse :
+  Reuse.genericPortfolioRouteDisposition ≡ ProofSearch.redirectedReuse
+duplicateGenericRouteRedirectsToReuse = refl
+
+globalMinimumCollisionCoverStillUnpaid :
+  Reuse.globalMinimumCoverAcrossArbitraryCollisionFamiliesPaid Reuse.canonicalReuseBoundary ≡ false
+globalMinimumCollisionCoverStillUnpaid = refl

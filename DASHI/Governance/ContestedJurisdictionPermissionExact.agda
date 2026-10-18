@@ -75,8 +75,7 @@ permissionDenialDoesNotSelfLegitimateAmbientClaim =
   Ambient.coerciveDominanceDoesNotEstablishLegitimateAmbientAuthority
 
 data JurisdictionalFineState : Set where
-  administrativeViolationState independentlyAuthorisedPresenceState :
-    JurisdictionalFineState
+  administrativeViolationState independentlyAuthorisedPresenceState : JurisdictionalFineState
 
 data AdministrativeSurface : Set where
   unauthorisedPresenceSurface : AdministrativeSurface

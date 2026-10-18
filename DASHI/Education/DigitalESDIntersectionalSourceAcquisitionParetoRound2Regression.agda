@@ -1,0 +1,20 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound2Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound2Exact as Round2
+
+round2CandidateStillNotIncluded :
+  Round2.Round2CandidateCreatesIncludedStudy → ⊥
+round2CandidateStillNotIncluded = Round2.round2CandidateDoesNotCreateIncludedStudy
+
+conceptualEcojusticeIsNotDeploymentMeasurement :
+  Round2.EcocriticalSourceCreatesDeploymentMeasurement → ⊥
+conceptualEcojusticeIsNotDeploymentMeasurement =
+  Round2.ecocriticalSourceDoesNotCreateDeploymentMeasurement
+
+surveillanceReviewIsNotUniversalStudentEffect :
+  Round2.SurveillanceReviewCreatesUniversalStudentEffect → ⊥
+surveillanceReviewIsNotUniversalStudentEffect =
+  Round2.surveillanceReviewDoesNotCreateUniversalStudentEffect

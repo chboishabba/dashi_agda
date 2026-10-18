@@ -17,14 +17,11 @@ import DASHI.Interop.InterMediaCarrierBridge as IM
 -- descriptive candidate surface only.
 
 data QiDomain : Set where
-  fengShuiQiDomain :
-    QiDomain
+  fengShuiQiDomain : QiDomain
 
-  taiChiQiDomain :
-    QiDomain
+  taiChiQiDomain : QiDomain
 
-  meditationQiDomain :
-    QiDomain
+  meditationQiDomain : QiDomain
 
 canonicalQiDomains : List QiDomain
 canonicalQiDomains =
@@ -34,50 +31,35 @@ canonicalQiDomains =
   ∷ []
 
 data QiCarrier : Set where
-  roomQiCarrier :
-    QiCarrier
+  roomQiCarrier : QiCarrier
 
-  landscapeQiCarrier :
-    QiCarrier
+  landscapeQiCarrier : QiCarrier
 
-  thresholdQiCarrier :
-    QiCarrier
+  thresholdQiCarrier : QiCarrier
 
-  relationQiCarrier :
-    QiCarrier
+  relationQiCarrier : QiCarrier
 
-  bodyQiCarrier :
-    QiCarrier
+  bodyQiCarrier : QiCarrier
 
-  breathQiCarrier :
-    QiCarrier
+  breathQiCarrier : QiCarrier
 
-  postureQiCarrier :
-    QiCarrier
+  postureQiCarrier : QiCarrier
 
-  forceQiCarrier :
-    QiCarrier
+  forceQiCarrier : QiCarrier
 
-  movementQiCarrier :
-    QiCarrier
+  movementQiCarrier : QiCarrier
 
-  attentionQiCarrier :
-    QiCarrier
+  attentionQiCarrier : QiCarrier
 
-  perceptionQiCarrier :
-    QiCarrier
+  perceptionQiCarrier : QiCarrier
 
-  affectQiCarrier :
-    QiCarrier
+  affectQiCarrier : QiCarrier
 
-  memoryQiCarrier :
-    QiCarrier
+  memoryQiCarrier : QiCarrier
 
-  selfModelQiCarrier :
-    QiCarrier
+  selfModelQiCarrier : QiCarrier
 
-  residualMindNoiseQiCarrier :
-    QiCarrier
+  residualMindNoiseQiCarrier : QiCarrier
 
   namedQiCarrier :
     String →
@@ -112,23 +94,17 @@ meditationQiCarriers =
   ∷ []
 
 data QiClassifier : Set where
-  shengQi :
-    QiClassifier
+  shengQi : QiClassifier
 
-  siQi :
-    QiClassifier
+  siQi : QiClassifier
 
-  shaQi :
-    QiClassifier
+  shaQi : QiClassifier
 
-  shengMindQi :
-    QiClassifier
+  shengMindQi : QiClassifier
 
-  siMindQi :
-    QiClassifier
+  siMindQi : QiClassifier
 
-  shaMindQi :
-    QiClassifier
+  shaMindQi : QiClassifier
 
 canonicalQiClassifiers : List QiClassifier
 canonicalQiClassifiers =
@@ -141,53 +117,37 @@ canonicalQiClassifiers =
   ∷ []
 
 data MindQiDescriptor : Set where
-  clearMindQi :
-    MindQiDescriptor
+  clearMindQi : MindQiDescriptor
 
-  spaciousMindQi :
-    MindQiDescriptor
+  spaciousMindQi : MindQiDescriptor
 
-  coherentMindQi :
-    MindQiDescriptor
+  coherentMindQi : MindQiDescriptor
 
-  embodiedMindQi :
-    MindQiDescriptor
+  embodiedMindQi : MindQiDescriptor
 
-  steadyMindQi :
-    MindQiDescriptor
+  steadyMindQi : MindQiDescriptor
 
-  renewingMindQi :
-    MindQiDescriptor
+  renewingMindQi : MindQiDescriptor
 
-  dullMindQi :
-    MindQiDescriptor
+  dullMindQi : MindQiDescriptor
 
-  collapsedMindQi :
-    MindQiDescriptor
+  collapsedMindQi : MindQiDescriptor
 
-  dissociatedMindQi :
-    MindQiDescriptor
+  dissociatedMindQi : MindQiDescriptor
 
-  sleepyMindQi :
-    MindQiDescriptor
+  sleepyMindQi : MindQiDescriptor
 
-  foggyMindQi :
-    MindQiDescriptor
+  foggyMindQi : MindQiDescriptor
 
-  intrusiveMindQi :
-    MindQiDescriptor
+  intrusiveMindQi : MindQiDescriptor
 
-  racingMindQi :
-    MindQiDescriptor
+  racingMindQi : MindQiDescriptor
 
-  agitatedMindQi :
-    MindQiDescriptor
+  agitatedMindQi : MindQiDescriptor
 
-  compulsiveMindQi :
-    MindQiDescriptor
+  compulsiveMindQi : MindQiDescriptor
 
-  selfAttackingMindQi :
-    MindQiDescriptor
+  selfAttackingMindQi : MindQiDescriptor
 
 canonicalShengMindDescriptors : List MindQiDescriptor
 canonicalShengMindDescriptors =

@@ -24,27 +24,20 @@ import DASHI.Geometry.TransportSmoothFormalDiskSurface as TS
 -- every DASHI carrier, and does not promote B0 / Levi-Civita.
 
 data DCHoTTAdapterStatus : Set where
-  interpretationBridgeOnlyNoPromotion :
-    DCHoTTAdapterStatus
+  interpretationBridgeOnlyNoPromotion : DCHoTTAdapterStatus
 
 data DCHoTTAdapterOpenObligation : Set where
-  missingCarrierToDCHoTTFormalDSpace :
-    DCHoTTAdapterOpenObligation
+  missingCarrierToDCHoTTFormalDSpace : DCHoTTAdapterOpenObligation
 
-  missingDCHoTTFormalDiskEquivalence :
-    DCHoTTAdapterOpenObligation
+  missingDCHoTTFormalDiskEquivalence : DCHoTTAdapterOpenObligation
 
-  missingImportedImReflection :
-    DCHoTTAdapterOpenObligation
+  missingImportedImReflection : DCHoTTAdapterOpenObligation
 
-  missingDCHoTTFlatFormalDiskTrivialisation :
-    DCHoTTAdapterOpenObligation
+  missingDCHoTTFlatFormalDiskTrivialisation : DCHoTTAdapterOpenObligation
 
-  missingDCHoTTGStructureBinding :
-    DCHoTTAdapterOpenObligation
+  missingDCHoTTGStructureBinding : DCHoTTAdapterOpenObligation
 
-  missingTorsionFreeLeviCivitaImport :
-    DCHoTTAdapterOpenObligation
+  missingTorsionFreeLeviCivitaImport : DCHoTTAdapterOpenObligation
 
 canonicalDCHoTTAdapterOpenObligations :
   List DCHoTTAdapterOpenObligation

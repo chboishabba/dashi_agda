@@ -1,0 +1,19 @@
+module DASHI.ComputerScience.FlyEnvironmentalMultiStressorAdjacentValidation where
+
+open import DASHI.Core.Prelude
+import DASHI.ComputerScience.FlyEnvironmentalMultiStressorAdjacentExact as Adjacent
+
+boundary : Adjacent.FlyEnvironmentalMultiStressorBoundary
+boundary = Adjacent.canonicalFlyEnvironmentalMultiStressorBoundary
+
+sameSpeciesAdjacentEvidenceRetained : Bool
+sameSpeciesAdjacentEvidenceRetained = Adjacent.sameSpeciesAdjacentEvidenceRetained boundary
+
+coexposureRoleRetained : Bool
+coexposureRoleRetained = Adjacent.coexposureRoleRetained boundary
+
+studyIsPesticideEvidence : Bool
+studyIsPesticideEvidence = Adjacent.studyIsPesticideEvidence boundary
+
+sameEndpointCreatesSameExposureClass : Bool
+sameEndpointCreatesSameExposureClass = Adjacent.sameEndpointCreatesSameExposureClass boundary

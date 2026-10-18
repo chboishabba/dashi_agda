@@ -83,6 +83,7 @@ modelReactivationEvent =
     (Temporal.resultTrigger Outcome.adverse)
     "later observation reopens model-conflict diagnosis"
     "finite incremental truth-maintenance fixture"
+    "model conflict truth-maintenance provenance"
 
 modelReactivationLineage :
   Lineage.DiagnosisLineageEvent Depends Outcome.modelConflict

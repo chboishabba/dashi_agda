@@ -18,8 +18,8 @@ import DASHI.Environment.PlasmaActivatedWaterSameObjectSnowballExact as SameObje
 ------------------------------------------------------------------------
 
 data PAWDownstreamPrimaryCarrier : Set where
-  kizerArabidopsis2025
-  kaushikMaizePea2024
+  kizerArabidopsis2025 : PAWDownstreamPrimaryCarrier
+  kaushikMaizePea2024 : PAWDownstreamPrimaryCarrier
   lettuceNitrogenRegime2026 : PAWDownstreamPrimaryCarrier
 
 record PAWDownstreamSource : Set where

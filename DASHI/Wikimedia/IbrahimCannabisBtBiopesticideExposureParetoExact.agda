@@ -21,15 +21,15 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data BtObjectKind : Set where
-  organism
-  strain
-  viableSpore
-  vegetativeCell
-  crystalProtein
-  formulation
-  formulationIngredient
-  applicationEvent
-  plantSurfaceResidue
+  organism : BtObjectKind
+  strain : BtObjectKind
+  viableSpore : BtObjectKind
+  vegetativeCell : BtObjectKind
+  crystalProtein : BtObjectKind
+  formulation : BtObjectKind
+  formulationIngredient : BtObjectKind
+  applicationEvent : BtObjectKind
+  plantSurfaceResidue : BtObjectKind
   thermalTransformationProduct : BtObjectKind
 
 record BtIdentityReceipt : Set where
@@ -104,15 +104,15 @@ australiaTgo93BtContext = bt-regulatory-source
 ------------------------------------------------------------------------
 
 data BtObserverKind : Set where
-  smallMoleculeLCMS
-  smallMoleculeGCMS
-  viableCountCFU
-  cultureIdentification
-  strainPCR
-  qPCR
-  proteinImmunoassay
-  targetedProteomics
-  microscopy
+  smallMoleculeLCMS : BtObserverKind
+  smallMoleculeGCMS : BtObserverKind
+  viableCountCFU : BtObserverKind
+  cultureIdentification : BtObserverKind
+  strainPCR : BtObserverKind
+  qPCR : BtObserverKind
+  proteinImmunoassay : BtObserverKind
+  targetedProteomics : BtObserverKind
+  microscopy : BtObserverKind
   metagenomicSequence : BtObserverKind
 
 record BtObservationAdmission : Set where
@@ -328,13 +328,13 @@ canonicalBtExposureBoundary = bt-exposure-boundary false false false false false
 ------------------------------------------------------------------------
 
 data BtParetoTarget : Set where
-  exactCannabisBtProduct
-  exactStrainAndProteinContent
-  cannabisFlowerBtMeasurement
-  smallMoleculePanelBlindSpotAudit
-  combustionFate
-  vaporisationFate
-  inhaledDose
+  exactCannabisBtProduct : BtParetoTarget
+  exactStrainAndProteinContent : BtParetoTarget
+  cannabisFlowerBtMeasurement : BtParetoTarget
+  smallMoleculePanelBlindSpotAudit : BtParetoTarget
+  combustionFate : BtParetoTarget
+  vaporisationFate : BtParetoTarget
+  inhaledDose : BtParetoTarget
   clinicalRisk : BtParetoTarget
 
 record BtParetoStep : Set where
@@ -408,15 +408,15 @@ pareto9 = bt-pareto-step
 ------------------------------------------------------------------------
 
 data BtTime : Set where
-  occupationalEvidence
-  efsaPeerReview2020
-  currentReview2025
+  occupationalEvidence : BtTime
+  efsaPeerReview2020 : BtTime
+  currentReview2025 : BtTime
   currentCannabisDashi : BtTime
 
 data BtInterpretation : Set where
-  aerosolExposurePossible
-  repeatedInhalationUnresolved
-  btCannabisConsumerExposurePaid
+  aerosolExposurePossible : BtInterpretation
+  repeatedInhalationUnresolved : BtInterpretation
+  btCannabisConsumerExposurePaid : BtInterpretation
   btDemonstratedConsumerHarm : BtInterpretation
 
 data BtSummary : Set where btRequiresMultiObjectExposureModel : BtSummary

@@ -35,24 +35,15 @@ listCount (_ ∷ xs) = suc (listCount xs)
 data Never : Set where
 
 data CulturalTriadOperatorRoute : Set where
-  candidateOnlyTriadOperatorRoute :
-    CulturalTriadOperatorRoute
-  secularCandidateOnlyTriadOperatorRoute :
-    CulturalTriadOperatorRoute
-  trinityMetaphorRejectionRoute :
-    CulturalTriadOperatorRoute
-  theologyPromotionRoute :
-    CulturalTriadOperatorRoute
-  monocultureCompressionRoute :
-    CulturalTriadOperatorRoute
-  enemyCodingDominationRoute :
-    CulturalTriadOperatorRoute
-  neutralTriadClaimRoute :
-    CulturalTriadOperatorRoute
-  politicalAuthorityRoute :
-    CulturalTriadOperatorRoute
-  legalAuthorityRoute :
-    CulturalTriadOperatorRoute
+  candidateOnlyTriadOperatorRoute : CulturalTriadOperatorRoute
+  secularCandidateOnlyTriadOperatorRoute : CulturalTriadOperatorRoute
+  trinityMetaphorRejectionRoute : CulturalTriadOperatorRoute
+  theologyPromotionRoute : CulturalTriadOperatorRoute
+  monocultureCompressionRoute : CulturalTriadOperatorRoute
+  enemyCodingDominationRoute : CulturalTriadOperatorRoute
+  neutralTriadClaimRoute : CulturalTriadOperatorRoute
+  politicalAuthorityRoute : CulturalTriadOperatorRoute
+  legalAuthorityRoute : CulturalTriadOperatorRoute
 
 AdmissibleCulturalTriadOperatorRoute :
   CulturalTriadOperatorRoute →

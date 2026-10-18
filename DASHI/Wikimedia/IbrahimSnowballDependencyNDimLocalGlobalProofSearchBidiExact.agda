@@ -149,10 +149,10 @@ data EvidentialValue : Set where
   distinctAdditionalInformation : EvidentialValue
 
 dependencyMayRetainInformation : DependencyGrade → EvidentialValue
- dependencyMayRetainInformation independent = distinctAdditionalInformation
- dependencyMayRetainInformation partiallyDependent = partialAdditionalInformation
- dependencyMayRetainInformation sharedEvidenceDependent = partialAdditionalInformation
- dependencyMayRetainInformation copiedOrCommonSource = noAdditionalInformation
+dependencyMayRetainInformation independent = distinctAdditionalInformation
+dependencyMayRetainInformation partiallyDependent = partialAdditionalInformation
+dependencyMayRetainInformation sharedEvidenceDependent = partialAdditionalInformation
+dependencyMayRetainInformation copiedOrCommonSource = noAdditionalInformation
 
 ------------------------------------------------------------------------
 -- TRUE(HERE) != TRUE(EVERYWHERE): scope/transport is a separate consumer.

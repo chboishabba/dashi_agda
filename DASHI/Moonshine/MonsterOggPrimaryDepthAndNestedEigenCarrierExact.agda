@@ -77,8 +77,8 @@ canonicalOggWidthDepthProfile prime =
     refl
 
 data OddOggPrime : Set where
-  odd3 odd5 odd7 odd11 odd13 odd17 odd19 odd23
-    odd29 odd31 odd41 odd47 odd59 odd71 : OddOggPrime
+  odd3 odd5 odd7 odd11 odd13 odd17 odd19 odd23 : OddOggPrime
+  odd29 odd31 odd41 odd47 odd59 odd71 : OddOggPrime
 
 oddToLane : OddOggPrime → Lane.MonsterPrimeLane
 oddToLane odd3 = Lane.p3

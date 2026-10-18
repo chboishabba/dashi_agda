@@ -28,16 +28,16 @@ data RelationOrigin : Set where
   assertedRelation derivedRelation unresolvedRelation : RelationOrigin
 
 data ConditionedFeatureKind : Set where
-  propertyFamilyCoverageFeature
-  propertyStatementPresenceFeature
-  statementSnakTypeFeature
-  statementRankFeature
-  statementVisibilityFeature
-  qualifierProfileCoverageFeature
-  scopeProfileCoverageFeature
-  qualifierConstraintFeature
-  propertyScopeFeature
-  propertyRelationFeature
+  propertyFamilyCoverageFeature : ConditionedFeatureKind
+  propertyStatementPresenceFeature : ConditionedFeatureKind
+  statementSnakTypeFeature : ConditionedFeatureKind
+  statementRankFeature : ConditionedFeatureKind
+  statementVisibilityFeature : ConditionedFeatureKind
+  qualifierProfileCoverageFeature : ConditionedFeatureKind
+  scopeProfileCoverageFeature : ConditionedFeatureKind
+  qualifierConstraintFeature : ConditionedFeatureKind
+  propertyScopeFeature : ConditionedFeatureKind
+  propertyRelationFeature : ConditionedFeatureKind
   : ConditionedFeatureKind
 
 record PropertyFamilyCoverage : Set where

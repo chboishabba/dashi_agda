@@ -1,0 +1,35 @@
+{
+  "artifactSchema": "dashi-grqft-collider-chi2-scope-matrix-v1",
+  "rows": [
+    {
+      "experiment": "CMS",
+      "observable": "SMP-20-003 t43 50--76 / 76--106 phi-star ratio",
+      "chi2PerDof": 2.1565191176275618,
+      "dof": 18,
+      "authority": "bounded-comparison-law-receipt",
+      "promotion": "W3-bounded-only"
+    },
+    {
+      "experiment": "ATLAS",
+      "observable": "yAbs_yy:linear",
+      "chi2PerDof": 2.6493994618998236,
+      "dof": 6,
+      "authority": "fixture-not-authority",
+      "promotion": "none"
+    },
+    {
+      "experiment": "CMS",
+      "observable": "SMP-20-003 76--106 absolute d-sigma/d-phi-star current W4 projection",
+      "chi2PerDof": 298.8462841768543,
+      "dof": 17,
+      "authority": "rejected-projection-diagnostic",
+      "promotion": "none"
+    }
+  ],
+  "guards": {
+    "compareOnlyWithScopeAndAuthority": true,
+    "atlasFixtureCountsAsAcceptedValidation": false,
+    "w4RejectionCancelsCMSRatioContact": false
+  },
+  "atlasSummaryPromotionDecision": "hold"
+}

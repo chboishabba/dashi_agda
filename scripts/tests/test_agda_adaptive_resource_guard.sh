@@ -6,6 +6,8 @@ ADAPTIVE="$ROOT/scripts/run_agda29_adaptive_repo_check.sh"
 PROFILE="$ROOT/scripts/agda_typecheck_resource_profiles.json"
 TRIADIC="DASHI/Algebra/TriadicDepthTwoCyclotomicDFT.agda"
 AFTER="DASHI/After.agda"
+LEAF="DASHI/Leaf.agda"
+CONSUMER="DASHI/Consumer.agda"
 
 fail() {
   echo "FAIL: $*" >&2
@@ -28,6 +30,13 @@ mkdir -p "$fixture/scripts" "$fixture/.cache" "$fixture/DASHI/Algebra"
 cat > "$fixture/DASHI/Before.agda" <<'EOF'
 module DASHI.Before where
 EOF
+cat > "$fixture/DASHI/Leaf.agda" <<'EOF'
+module DASHI.Leaf where
+EOF
+cat > "$fixture/DASHI/Consumer.agda" <<'EOF'
+module DASHI.Consumer where
+import DASHI.Leaf
+EOF
 cat > "$fixture/DASHI/Algebra/TriadicDepthTwoCyclotomicDFT.agda" <<'EOF'
 module DASHI.Algebra.TriadicDepthTwoCyclotomicDFT where
 EOF
@@ -47,7 +56,12 @@ p.add_argument('--heavy-output', required=True)
 p.add_argument('--json', required=True)
 p.add_argument('--include-heavy', action='store_true')
 a = p.parse_args()
+# Deliberately put Consumer before Leaf.  The adaptive layer must preserve the
+# canonical membership set but reorder execution so dependencies warm the cache
+# before their consumers.
 targets = [
+  'DASHI/Consumer.agda',
+  'DASHI/Leaf.agda',
   'DASHI/Before.agda',
   'DASHI/Algebra/TriadicDepthTwoCyclotomicDFT.agda',
   'DASHI/After.agda',
@@ -65,6 +79,32 @@ printf '%s|%s|' "${AGDA_JOBS:-}" "${DASHI_AGDA_RSS_LIMIT_MB:-}" >> "$DASHI_TEST_
 paste -sd, "$AGDA_TARGETS_FILE" >> "$DASHI_TEST_INVOCATIONS"
 SH
 chmod +x "$fixture/scripts/run_agda29_parallel_check.sh"
+
+# Planning alone must put Leaf before Consumer even though the canonical target
+# list above is intentionally reversed.
+DASHI_REPO_ROOT="$fixture" \
+"$ADAPTIVE" \
+  --profile "$PROFILE" \
+  --report-dir "$tmp/plan-report" \
+  --plan-only >"$tmp/plan.out" 2>&1 || {
+    cat "$tmp/plan.out" >&2
+    fail "dependency-order plan failed"
+  }
+leaf_line="$(grep -n -Fx "$LEAF" "$tmp/plan-report/ordinary.txt" | cut -d: -f1)"
+consumer_line="$(grep -n -Fx "$CONSUMER" "$tmp/plan-report/ordinary.txt" | cut -d: -f1)"
+[ -n "$leaf_line" ] && [ -n "$consumer_line" ] || fail "missing dependency-order fixtures"
+[ "$leaf_line" -lt "$consumer_line" ] || {
+  cat "$tmp/plan-report/ordinary.txt" >&2
+  fail "consumer scheduled before dependency"
+}
+python3 - "$tmp/plan-report/resource-summary.json" <<'PY'
+import json, sys
+summary = json.load(open(sys.argv[1]))
+if not summary.get("dependency_ordered"):
+    raise SystemExit("resource summary does not record dependency ordering")
+if summary.get("dependency_edges", 0) < 2:
+    raise SystemExit(f"expected at least two first-party dependency edges, got {summary!r}")
+PY
 
 cat > "$tmp/meminfo-low" <<'EOF'
 MemTotal:       32768000 kB
@@ -128,4 +168,4 @@ if grep -q '^2|' "$tmp/invocations"; then
 fi
 [ ! -e "$tmp/report/last-success.json" ] || fail "resumed run must not mint full success receipt"
 
-echo "PASS: adaptive Agda resource guard regression"
+echo "PASS: adaptive Agda resource/cache scheduling regression"

@@ -104,8 +104,7 @@ data DemoState : Set where
   communityOutcome : DemoState
 
 data DemoOption : Set where
-  immediatePhysicalSafety housingContinuity kinParticipation futureHelpSeeking :
-    DemoOption
+  immediatePhysicalSafety housingContinuity kinParticipation futureHelpSeeking : DemoOption
 
 data DemoAvailable : DemoState → DemoOption → Set where
   beforeImmediate : DemoAvailable beforeResponse immediatePhysicalSafety

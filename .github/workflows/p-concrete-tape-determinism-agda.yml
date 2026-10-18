@@ -1,0 +1,68 @@
+name: P concrete tape determinism Agda
+
+on:
+  push:
+    branches:
+      - 'agent/pnp-direct-sat-lower-bound-20260924'
+    paths:
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeDeterminismNoGoExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleTableInterpreterExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleKeyDeterminismExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalRuleAgreementExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalAfterRowExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeIntrinsicOperationalStepExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeExecutableRelationalEquivalenceExact.agda'
+      - 'DASHI/Mathematics/Complexity/StandardSingleTapeMachineExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardOneStepExact.agda'
+      - 'DASHI/Mathematics/Complexity/StandardFiniteTapePresentationExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalProjectionExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardClockExact.agda'
+      - '.github/workflows/p-concrete-tape-determinism-agda.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeDeterminismNoGoExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleTableInterpreterExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleKeyDeterminismExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalRuleAgreementExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalAfterRowExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeIntrinsicOperationalStepExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeExecutableRelationalEquivalenceExact.agda'
+      - 'DASHI/Mathematics/Complexity/StandardSingleTapeMachineExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardOneStepExact.agda'
+      - 'DASHI/Mathematics/Complexity/StandardFiniteTapePresentationExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalProjectionExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardClockExact.agda'
+      - '.github/workflows/p-concrete-tape-determinism-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck concrete tape determinism max-cut
+        run: |
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeDeterminismNoGoExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleTableInterpreterExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleKeyDeterminismExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalRuleAgreementExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalAfterRowExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeIntrinsicOperationalStepExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeExecutableRelationalEquivalenceExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/StandardSingleTapeMachineExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/ConcreteTapeStandardOneStepExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/StandardFiniteTapePresentationExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalProjectionExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/ConcreteTapeStandardClockExact.agda

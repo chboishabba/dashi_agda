@@ -1,0 +1,23 @@
+{
+  "every_metadata_record_has_processing_row": true,
+  "fulltext_index_reference": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.real-eric-round2/fulltext/digital_esd_fulltext_index.tsv",
+  "fulltext_index_sha256": "b18f3c7a941d93a86b3648ebee5471ee8441f7cf73ecdfa292eef0d9db15b973",
+  "genuinely_screened_records": 200,
+  "handed_to_slr": 0,
+  "include_probable_eligible": 28,
+  "later_stage_inference_forbidden_per_row": true,
+  "materialised_texts": 0,
+  "metadata_records": 43996,
+  "processing_ledger_reference": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.real-eric-round2/pre-fetch-processing-ledger-round4.jsonl",
+  "processing_ledger_sha256": "43dcd869b39a13e60341d01502a297f92557db42f4699e417c8b33e45976bc0b",
+  "processing_row_count": 43996,
+  "processing_row_count_matches_expected": true,
+  "reviewed_canonical_evidence": 0,
+  "schema": "digital-esd-study-processing-ledger-manifest-v1",
+  "screening_ledger_reference": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.real-eric-round2/screening_ledger_reviewed_round4.tsv",
+  "screening_ledger_sha256": "bafed3240871af699ff10d7edfaae011f46ddec5535949a051e7e509e1b46d89",
+  "source_audit_admission_complete": 0,
+  "stage_containment_checked_per_row": true,
+  "successfully_parsed_by_slr": 0,
+  "verified_fulltext_artifacts": 8
+}

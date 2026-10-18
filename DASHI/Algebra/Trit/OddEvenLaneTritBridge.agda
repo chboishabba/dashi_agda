@@ -17,24 +17,18 @@ import DASHI.Core.ParityLaneOperatorCore as P
 -- lane, and unresolved lanes stay neutral at the boundary.
 
 data OddEvenLaneClass : Set where
-  oddLane :
-    OddEvenLaneClass
+  oddLane : OddEvenLaneClass
 
-  evenLane :
-    OddEvenLaneClass
+  evenLane : OddEvenLaneClass
 
-  unresolvedLane :
-    OddEvenLaneClass
+  unresolvedLane : OddEvenLaneClass
 
 data TritRoutingCode : Set where
-  collapsedResidualLane :
-    TritRoutingCode
+  collapsedResidualLane : TritRoutingCode
 
-  separatedOperatorLane :
-    TritRoutingCode
+  separatedOperatorLane : TritRoutingCode
 
-  neutralBoundaryLane :
-    TritRoutingCode
+  neutralBoundaryLane : TritRoutingCode
 
 oddEvenLaneClassLabel : OddEvenLaneClass → String
 oddEvenLaneClassLabel oddLane =

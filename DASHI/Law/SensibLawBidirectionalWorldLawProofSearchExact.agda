@@ -63,7 +63,7 @@ open CandidateWrongTypeConsumer public
 record WorldToLawDemand : Set₁ where
   constructor worldToLawDemand
   field
-    worldPattern : WorldPattern
+    sourceWorldPattern : WorldPattern
     candidateWrongTypes : List CandidateWrongTypeConsumer
     authorityProducer : Intent.ProducerClass
     applicabilityProducer : Intent.ProducerClass

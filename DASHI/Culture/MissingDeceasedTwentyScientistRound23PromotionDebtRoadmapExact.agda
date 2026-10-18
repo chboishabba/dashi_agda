@@ -6,9 +6,9 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 data PromotionStage : Set where
-  H0admissible
-  H1strategicExposure
-  H2sharedProgrammePaid
+  H0admissible : PromotionStage
+  H1strategicExposure : PromotionStage
+  H2sharedProgrammePaid : PromotionStage
   H3targetingPaid : PromotionStage
 
 record PromotionDebt : Set where

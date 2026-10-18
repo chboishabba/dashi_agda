@@ -28,8 +28,7 @@ import DASHI.Governance.OptionConeCoercionExact as OptionCone
 ------------------------------------------------------------------------
 
 data OppositionDomain : Set where
-  protestDomain labourDomain studentRepresentationDomain electoralDomain :
-    OppositionDomain
+  protestDomain labourDomain studentRepresentationDomain electoralDomain : OppositionDomain
 
 data OppositionState : Set where
   recognisedOpposition : OppositionState

@@ -50,8 +50,8 @@ currentAgdaValidationStatus = blockedByMissingBishopLibrary
 ------------------------------------------------------------------------
 
 data LegalSemanticValidatedFrontier : Set where
-  goldAdmissionAndResidualV03ValidatedAwaitingFineResidualRefinement
-    : LegalSemanticValidatedFrontier
+  goldAdmissionAndResidualV03ValidatedAwaitingFineResidualRefinement : LegalSemanticValidatedFrontier
+  : LegalSemanticValidatedFrontier
 
 currentLegalSemanticValidatedFrontier : LegalSemanticValidatedFrontier
 currentLegalSemanticValidatedFrontier =

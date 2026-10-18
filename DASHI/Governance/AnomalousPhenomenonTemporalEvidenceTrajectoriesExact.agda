@@ -72,10 +72,10 @@ data Interpretation : Set where
   psilocybinTherapeuticEffect
   expectancyBlindingContribution
 
-  noRecalledExperienceDuringCardiacArrest
-  recalledExperienceDuringCardiacArrest
-  brainBasedCriticalStateMechanism
-  extracerebralInterpretation
+  noRecalledExperienceDuringCardiacArrest : Interpretation
+  recalledExperienceDuringCardiacArrest : Interpretation
+  brainBasedCriticalStateMechanism : Interpretation
+  extracerebralInterpretation : Interpretation
   : Interpretation
 
 ------------------------------------------------------------------------

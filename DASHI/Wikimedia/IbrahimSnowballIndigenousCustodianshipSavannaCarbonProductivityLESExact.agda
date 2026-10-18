@@ -68,9 +68,9 @@ indigenousLandManagementQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data CustodianshipCarbonSourceRole : Set where
-  continuousAboriginalManagementComparison
-  savannaCarbonProductivityFluxStudy
-  indigenousFireGHGOperationalStudy
+  continuousAboriginalManagementComparison : CustodianshipCarbonSourceRole
+  savannaCarbonProductivityFluxStudy : CustodianshipCarbonSourceRole
+  indigenousFireGHGOperationalStudy : CustodianshipCarbonSourceRole
   tiwiCarbonLandscapeExperiment : CustodianshipCarbonSourceRole
 
 record CustodianshipCarbonPrimarySource : Set where
@@ -146,17 +146,17 @@ richardsEtAl2012 = custodianship-carbon-primary-source
 ------------------------------------------------------------------------
 
 data CustodianshipLESConsumer : Set where
-  fireRegime
-  habitatMosaic
-  biodiversityCondition
-  grossPrimaryProduction
-  netEcosystemProductivity
-  netBiomeProductivity
-  vegetationCarbonStock
-  soilCarbonStock
-  methaneNitrousOxideFireEmissions
-  carbonSequestration
-  culturalCountryAuthority
+  fireRegime : CustodianshipLESConsumer
+  habitatMosaic : CustodianshipLESConsumer
+  biodiversityCondition : CustodianshipLESConsumer
+  grossPrimaryProduction : CustodianshipLESConsumer
+  netEcosystemProductivity : CustodianshipLESConsumer
+  netBiomeProductivity : CustodianshipLESConsumer
+  vegetationCarbonStock : CustodianshipLESConsumer
+  soilCarbonStock : CustodianshipLESConsumer
+  methaneNitrousOxideFireEmissions : CustodianshipLESConsumer
+  carbonSequestration : CustodianshipLESConsumer
+  culturalCountryAuthority : CustodianshipLESConsumer
   livelihoodOutcome : CustodianshipLESConsumer
 
 record CustodianshipSourceAdmission : Set where

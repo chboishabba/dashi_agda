@@ -12,8 +12,7 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceAuthority : Set where
-  deckArtifact historicalMuseumSummary interpretiveHCIStudy repositoryFormalSubstrate :
-    SourceAuthority
+  deckArtifact historicalMuseumSummary interpretiveHCIStudy repositoryFormalSubstrate : SourceAuthority
 
 record TarotSource : Set where
   constructor tarotSource

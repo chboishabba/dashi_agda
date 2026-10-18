@@ -158,11 +158,11 @@ productActivePercentDoesNotCreateFlowerResidue ()
 ------------------------------------------------------------------------
 
 data BtProductParetoTarget : Set where
-  exactCaliforniaCannabisBtProduct
-  exactCanadaCannabisBtProduct
-  exactLabelAndApplicationTiming
-  strainAndCryVipComplement
-  postApplicationFlowerResidue
+  exactCaliforniaCannabisBtProduct : BtProductParetoTarget
+  exactCanadaCannabisBtProduct : BtProductParetoTarget
+  exactLabelAndApplicationTiming : BtProductParetoTarget
+  strainAndCryVipComplement : BtProductParetoTarget
+  postApplicationFlowerResidue : BtProductParetoTarget
   smokeVapeFate : BtProductParetoTarget
 
 record BtProductParetoStep : Set where

@@ -27,31 +27,31 @@ import DASHI.Environment.LESSituatedObservationInteractionExact as LES
 ------------------------------------------------------------------------
 
 data CascadeStageKind : Set where
-  productivePond
-  plantedRestPond
-  openRockChannel
-  sedimentationOrSettlingZone
+  productivePond : CascadeStageKind
+  plantedRestPond : CascadeStageKind
+  openRockChannel : CascadeStageKind
+  sedimentationOrSettlingZone : CascadeStageKind
   downstreamProductivePond : CascadeStageKind
 
 data WaterQualityCoordinate : Set where
-  dissolvedOxygen
-  carbonDioxide
-  totalAmmoniacalNitrogen
-  nitrite
-  nitrate
-  temperature
-  pH
-  conductivity
-  suspendedSolids
-  turbidity
+  dissolvedOxygen : WaterQualityCoordinate
+  carbonDioxide : WaterQualityCoordinate
+  totalAmmoniacalNitrogen : WaterQualityCoordinate
+  nitrite : WaterQualityCoordinate
+  nitrate : WaterQualityCoordinate
+  temperature : WaterQualityCoordinate
+  pH : WaterQualityCoordinate
+  conductivity : WaterQualityCoordinate
+  suspendedSolids : WaterQualityCoordinate
+  turbidity : WaterQualityCoordinate
   flowRate : WaterQualityCoordinate
 
 data ClaimStatus : Set where
-  practitionerReported
-  mechanismHypothesis
-  adjacentLiteratureSupported
-  siteMeasured
-  causallyEstimated
+  practitionerReported : ClaimStatus
+  mechanismHypothesis : ClaimStatus
+  adjacentLiteratureSupported : ClaimStatus
+  siteMeasured : ClaimStatus
+  causallyEstimated : ClaimStatus
   replicatedOrHeldOut : ClaimStatus
 
 record CascadeStageIdentity : Set where
@@ -195,15 +195,15 @@ open CascadeCoordinateEffectReceipt public
 ------------------------------------------------------------------------
 
 data CascadeFailureMode : Set where
-  blockedStandpipe
-  channelBypass
-  shortCircuiting
-  vegetationLoss
-  sedimentResuspension
-  lowFlowStagnation
-  highFlowWashout
-  thermalStress
-  oxygenCrash
+  blockedStandpipe : CascadeFailureMode
+  channelBypass : CascadeFailureMode
+  shortCircuiting : CascadeFailureMode
+  vegetationLoss : CascadeFailureMode
+  sedimentResuspension : CascadeFailureMode
+  lowFlowStagnation : CascadeFailureMode
+  highFlowWashout : CascadeFailureMode
+  thermalStress : CascadeFailureMode
+  oxygenCrash : CascadeFailureMode
   externalContamination : CascadeFailureMode
 
 record CascadeResilienceObservation : Set where

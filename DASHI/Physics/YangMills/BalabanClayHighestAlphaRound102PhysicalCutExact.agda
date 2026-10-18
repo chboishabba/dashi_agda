@@ -43,6 +43,7 @@ import DASHI.Physics.YangMills.BalabanCMP109116SameDifferentiatedCarrierRound102
 import DASHI.Physics.YangMills.BalabanCMP116FirstGradientSharedMarkedExact as GradMarked
 import DASHI.Physics.YangMills.BalabanCMP116FirstGradientCovarianceInstantiationRound102Exact as GradInst
 import DASHI.Physics.YangMills.BalabanHeatDoobGradientCovarianceMarkedCauchyExact as GradCov
+import DASHI.Physics.YangMills.BalabanHeatDoobFiniteGradientCovarianceInstantiationExact as FiniteGrad
 import DASHI.Physics.YangMills.BalabanCMP116GradientCovarianceToHeatDoobDebtExact as Temporal
 import DASHI.Physics.YangMills.BalabanCMP116GradientCovarianceToWeightedHeatDoobExact as Spatial
 import DASHI.Physics.YangMills.BalabanWeightedInfluenceEntryQuasiLocalExact as Entry
@@ -119,6 +120,10 @@ rowBCTemporalGradientCovarianceShellRound102Level : ProofLevel
 rowBCTemporalGradientCovarianceShellRound102Level =
   GradCov.temporalGradientCovarianceShellCompilerLevel
 
+rowBCFiniteConditionalCovarianceInstantiationRound102Level : ProofLevel
+rowBCFiniteConditionalCovarianceInstantiationRound102Level =
+  FiniteGrad.finiteHeatDoobGradientCovarianceInstantiationLevel
+
 rowBCSpatialGradientCovarianceRowRound102Level : ProofLevel
 rowBCSpatialGradientCovarianceRowRound102Level =
   GradCov.spatialGradientCovarianceWeightedRowCompilerLevel
@@ -141,8 +146,9 @@ rowCPositiveWeightedDysonSeriesRound102Level =
 
 -- Actual source-facing B/C seam after all current collapse: instantiate ONE
 -- literal differentiated CMP109/CMP116 density/coordinate and its first-gradient
--- Cauchy response on the common positive radius, then identify the conditional
--- Heat/Doob covariance with the standard product expression on that SAME density.
+-- Cauchy response on the common positive radius, give the finite conditional law
+-- on that SAME density, and prove the pointwise gradient bounds.  The covariance
+-- inequality and covariance-debt record are now internally constructed.
 rowBCPhysicalSourceInstantiationRound102Level : ProofLevel
 rowBCPhysicalSourceInstantiationRound102Level = conditional
 

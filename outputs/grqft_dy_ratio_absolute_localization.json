@@ -1,0 +1,34 @@
+{
+  "artifactSchema": "dashi-grqft-dy-ratio-absolute-localization-v1",
+  "ratioObservable": {
+    "scope": "CMS-SMP-20-003 t43 50--76 / 76--106 GeV phi-star ratio",
+    "covariance": "t44 Total uncertainty",
+    "chi2PerDof": 2.1565191176275618,
+    "dof": 18,
+    "meanPredData": 0.9941233096866525,
+    "status": "candidate-pass-no-authority-token"
+  },
+  "absoluteObservable": {
+    "scope": "CMS-SMP-20-003 76--106 GeV absolute d-sigma/d-phi-star",
+    "chi2PerDof": 298.8462841768543,
+    "dof": 17,
+    "status": "rejected-current-W4-projection"
+  },
+  "chi2PerDofContrastAbsoluteOverRatio": 138.57808249139114,
+  "inference": {
+    "sharedCarrierGloballyRejected": false,
+    "projectionSpecificDefectSearchPreferred": true,
+    "uniqueCauseProved": false,
+    "priorityTargets": [
+      "absolute observable/Jacobian construction",
+      "fiducial acceptance",
+      "soft-recoil/TMD resummation",
+      "nonperturbative transverse momentum",
+      "fixed-order tail",
+      "physical normalization after shape adequacy"
+    ]
+  },
+  "atlasCovarianceChi2ReceiptUsed": false,
+  "atlasBoundary": "No comparable low-chi2 ATLAS covariance receipt was found on current master; do not manufacture one from tail/projection diagnostics.",
+  "promotesW4": false
+}

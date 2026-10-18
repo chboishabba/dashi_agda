@@ -265,23 +265,23 @@ rezaDoesNotDominateAmy dominates = oneNotLeZero (dominates professionalGateClosu
 ------------------------------------------------------------------------
 
 data SchedulerResidual : Set where
-  hcbSameObjectResidual
-  ningPrimaryBytesResidual
-  amyReferentResidual
-  scorpiusCrossingResidual
-  leblancWBSResidual
-  chineseOriginResidual
-  garciaRoleResidual
+  hcbSameObjectResidual : SchedulerResidual
+  ningPrimaryBytesResidual : SchedulerResidual
+  amyReferentResidual : SchedulerResidual
+  scorpiusCrossingResidual : SchedulerResidual
+  leblancWBSResidual : SchedulerResidual
+  chineseOriginResidual : SchedulerResidual
+  garciaRoleResidual : SchedulerResidual
   noPromotionResidual : SchedulerResidual
 
 data SchedulerProducer : Set where
-  exactProgrammeRecordProducer
-  primaryAwardBytesProducer
-  identityWeldProducer
-  engineeringArtefactProducer
-  subordinateWBSProducer
-  provenanceGraphProducer
-  primaryRoleRecordProducer
+  exactProgrammeRecordProducer : SchedulerProducer
+  primaryAwardBytesProducer : SchedulerProducer
+  identityWeldProducer : SchedulerProducer
+  engineeringArtefactProducer : SchedulerProducer
+  subordinateWBSProducer : SchedulerProducer
+  provenanceGraphProducer : SchedulerProducer
+  primaryRoleRecordProducer : SchedulerProducer
   genericBiographyProducer : SchedulerProducer
 
 residualForTask : AcquisitionTask → SchedulerResidual

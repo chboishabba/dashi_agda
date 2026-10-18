@@ -26,27 +26,20 @@ import DASHI.Interop.VectorNonAuthorityCore as VectorNA
 -- vector hits.
 
 data ResolverSelectorCommitmentStatus : Set where
-  resolverSelectorCommitmentReceipt_checkedNoANNPromotion :
-    ResolverSelectorCommitmentStatus
+  resolverSelectorCommitmentReceipt_checkedNoANNPromotion : ResolverSelectorCommitmentStatus
 
 data FormalismSection : Set where
-  section15ResolvePrecondition :
-    FormalismSection
+  section15ResolvePrecondition : FormalismSection
 
-  section16SelectorPackage :
-    FormalismSection
+  section16SelectorPackage : FormalismSection
 
-  section17RejectionAndContradiction :
-    FormalismSection
+  section17RejectionAndContradiction : FormalismSection
 
-  section21QueryModes :
-    FormalismSection
+  section21QueryModes : FormalismSection
 
-  section22HybridRanking :
-    FormalismSection
+  section22HybridRanking : FormalismSection
 
-  section29ITIRCommitment :
-    FormalismSection
+  section29ITIRCommitment : FormalismSection
 
 canonicalFormalismSections : List FormalismSection
 canonicalFormalismSections =
@@ -226,23 +219,17 @@ record ProvenanceReceipt : Set where
 open ProvenanceReceipt public
 
 data SelectionTraceStep : Set where
-  traceCandidateReturned :
-    SelectionTraceStep
+  traceCandidateReturned : SelectionTraceStep
 
-  traceResolverAnchored :
-    SelectionTraceStep
+  traceResolverAnchored : SelectionTraceStep
 
-  traceResidualChecked :
-    SelectionTraceStep
+  traceResidualChecked : SelectionTraceStep
 
-  traceSpanRecorded :
-    SelectionTraceStep
+  traceSpanRecorded : SelectionTraceStep
 
-  traceContradictionPreserved :
-    SelectionTraceStep
+  traceContradictionPreserved : SelectionTraceStep
 
-  traceSelectorAdmitted :
-    SelectionTraceStep
+  traceSelectorAdmitted : SelectionTraceStep
 
 canonicalSelectionTraceSteps : List SelectionTraceStep
 canonicalSelectionTraceSteps =
@@ -349,26 +336,19 @@ open SelectorPackage public
 -- Section 17: rejection reasons and false contradiction erasure gate.
 
 data RejectionReason : Set where
-  unresolvedCandidate :
-    RejectionReason
+  unresolvedCandidate : RejectionReason
 
-  rawVectorHitOnly :
-    RejectionReason
+  rawVectorHitOnly : RejectionReason
 
-  missingResolverAnchor :
-    RejectionReason
+  missingResolverAnchor : RejectionReason
 
-  missingTypedSpan :
-    RejectionReason
+  missingTypedSpan : RejectionReason
 
-  contradictionWouldBeErased :
-    RejectionReason
+  contradictionWouldBeErased : RejectionReason
 
-  scoreClaimedAsAuthority :
-    RejectionReason
+  scoreClaimedAsAuthority : RejectionReason
 
-  directANNToITIRAttempt :
-    RejectionReason
+  directANNToITIRAttempt : RejectionReason
 
 canonicalRejectionReasons : List RejectionReason
 canonicalRejectionReasons =
@@ -402,17 +382,13 @@ open RejectionReceipt public
 -- Section 21: query modes A-D.
 
 data QueryMode : Set where
-  modeAExactObjectLookup :
-    QueryMode
+  modeAExactObjectLookup : QueryMode
 
-  modeBResidualNeighborhood :
-    QueryMode
+  modeBResidualNeighborhood : QueryMode
 
-  modeCHybridSpectralNavigation :
-    QueryMode
+  modeCHybridSpectralNavigation : QueryMode
 
-  modeDITIRCommitmentRequest :
-    QueryMode
+  modeDITIRCommitmentRequest : QueryMode
 
 canonicalQueryModes : List QueryMode
 canonicalQueryModes =
@@ -504,17 +480,13 @@ canonicalQueryModeReceipts =
 -- Section 22: hybrid ranking is ordering-only.
 
 data RankingSignal : Set where
-  lexicalMatchSignal :
-    RankingSignal
+  lexicalMatchSignal : RankingSignal
 
-  residualSeveritySignal :
-    RankingSignal
+  residualSeveritySignal : RankingSignal
 
-  spectralProximitySignal :
-    RankingSignal
+  spectralProximitySignal : RankingSignal
 
-  provenanceFreshnessSignal :
-    RankingSignal
+  provenanceFreshnessSignal : RankingSignal
 
 canonicalRankingSignals : List RankingSignal
 canonicalRankingSignals =
@@ -603,11 +575,9 @@ rankingCoreAdapterProposalReceipt =
 -- Product commitment certificate: resolved and corroborated candidates.
 
 data ResidualCheckShape : Set where
-  residualExactCheck :
-    ResidualCheckShape
+  residualExactCheck : ResidualCheckShape
 
-  residualPartialCheck :
-    ResidualCheckShape
+  residualPartialCheck : ResidualCheckShape
 
 canonicalResidualCheckShapes : List ResidualCheckShape
 canonicalResidualCheckShapes =

@@ -18,13 +18,13 @@ import DASHI.Wikimedia.IbrahimDisposableVapeUnknownIngredientFibreExact as Fibre
 ------------------------------------------------------------------------
 
 data CensusStage : Set where
-  unopenedDevice
-  virginLiquid
-  earlyLifeAerosol
-  midLifeLiquid
-  midLifeAerosol
-  lateLifeLiquid
-  lateLifeAerosol
+  unopenedDevice : CensusStage
+  virginLiquid : CensusStage
+  earlyLifeAerosol : CensusStage
+  midLifeLiquid : CensusStage
+  midLifeAerosol : CensusStage
+  lateLifeLiquid : CensusStage
+  lateLifeAerosol : CensusStage
   spentDeviceMaterials : CensusStage
 
 record ProductIdentity : Set where

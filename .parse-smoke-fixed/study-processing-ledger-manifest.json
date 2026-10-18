@@ -1,0 +1,23 @@
+{
+  "every_metadata_record_has_processing_row": true,
+  "fulltext_index_reference": "/home/c/Documents/code/slr/artifacts/digital-esd/first-reviewed-study/fulltext/digital_esd_fulltext_index.tsv",
+  "fulltext_index_sha256": "5ca8a3a52ac25eef2f86109b224a3ac2d3c16173d0673655f3fe3997a1c5c1a9",
+  "genuinely_screened_records": 1,
+  "handed_to_slr": 1,
+  "include_probable_eligible": 1,
+  "later_stage_inference_forbidden_per_row": true,
+  "materialised_texts": 1,
+  "metadata_records": 43996,
+  "processing_ledger_reference": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.parse-smoke-fixed/study-processing-ledger.jsonl",
+  "processing_ledger_sha256": "34e003705c5603df8632a5a4800fe0833559b936e47e3bb299a57df235f71d08",
+  "processing_row_count": 43996,
+  "processing_row_count_matches_expected": true,
+  "reviewed_canonical_evidence": 0,
+  "schema": "digital-esd-study-processing-ledger-manifest-v1",
+  "screening_ledger_reference": "/home/c/Documents/code/slr/artifacts/digital-esd/first-reviewed-study/screening_ledger_reviewed.tsv",
+  "screening_ledger_sha256": "aaf052fabb52723019a02d8fecb5b75d2c7b1abddb306a085c1994c08f36ed38",
+  "source_audit_admission_complete": 0,
+  "stage_containment_checked_per_row": true,
+  "successfully_parsed_by_slr": 1,
+  "verified_fulltext_artifacts": 1
+}

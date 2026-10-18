@@ -1,0 +1,9 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyMathematicalMaxCut20261003BTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyMathematicalMaxCut20261003BExact as New
+
+signedTelescopeDemotedRegression = New.signedOneEndpointRouteDemoted
+absoluteTailIsPreferredRegression = New.preferredB1IsAbsolutePinnedFiniteTail
+vacuumThresholdStillPhysicalRegression = New.eq223VacuumThresholdStillPhysical
+anomalyFallbackOneWeldRegression = New.anomalyFallbackStillOneSameObjectWeld

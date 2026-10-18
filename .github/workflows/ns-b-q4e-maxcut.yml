@@ -1,0 +1,52 @@
+name: NS B7 Q4+E max-cut
+
+on:
+  push:
+    branches:
+      - 'agent/ns-r655-remote-collar-transport'
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNLiveOffDiagonalPairFixedResolventMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiteralLiveOffDiagonalPairDerivativeMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiteralOffDiagonalFluxFixedOutputFamilyMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiteralGlobalOffDiagonalFluxDerivativeMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4EFTCCompilerMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4EAnalyticMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4EAnalyticMaxCutTest.agda'
+      - '.github/workflows/ns-b-q4e-maxcut.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNLiveOffDiagonalPairFixedResolventMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiteralLiveOffDiagonalPairDerivativeMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiteralOffDiagonalFluxFixedOutputFamilyMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiteralGlobalOffDiagonalFluxDerivativeMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4EFTCCompilerMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4EAnalyticMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4EAnalyticMaxCutTest.agda'
+      - '.github/workflows/ns-b-q4e-maxcut.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  semantic-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install Agda semantic preflight
+        run: python -m pip install -e tools/agda_preflight
+      - name: Preflight Q4+E max-cut owners
+        run: |
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNLiveOffDiagonalPairFixedResolventMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNLiteralLiveOffDiagonalPairDerivativeMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNLiteralOffDiagonalFluxFixedOutputFamilyMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNLiteralGlobalOffDiagonalFluxDerivativeMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4EFTCCompilerMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4EAnalyticMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4EAnalyticMaxCutTest.agda

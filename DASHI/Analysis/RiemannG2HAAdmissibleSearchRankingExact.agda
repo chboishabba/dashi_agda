@@ -18,8 +18,8 @@ import DASHI.Analysis.RiemannG2HARecoveryDependencyFrontierExact as Frontier
 ------------------------------------------------------------------------
 
 data SearchMove : Set where
-  rebuildGenericTransformTheory
-  reuseFiniteCharacterAsAnalyticHA
+  rebuildGenericTransformTheory : HA.HARecoveryProbe → SearchMove
+  reuseFiniteCharacterAsAnalyticHA : HA.HARecoveryProbe → SearchMove
   runHAProbe : HA.HARecoveryProbe → SearchMove
 
 SearchModel : Set

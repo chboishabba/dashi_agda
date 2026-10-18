@@ -41,9 +41,9 @@ directionTrit aboveTarget = Triadic.positiveTrit
 
 data SqrtThreeHalfDefect (p q : Nat) : Set where
   defectBelow : (delta : Nat) → 4 * p * p + delta ≡ 3 * q * q →
-                SqrtThreeHalfDefect p q
+  SqrtThreeHalfDefect p q : 4 * p * p ≡ 3 * q * q →
   defectExact : 4 * p * p ≡ 3 * q * q →
-                SqrtThreeHalfDefect p q
+  SqrtThreeHalfDefect p q : (delta : Nat) → 4 * p * p ≡ 3 * q * q + delta →
   defectAbove : (delta : Nat) → 4 * p * p ≡ 3 * q * q + delta →
                 SqrtThreeHalfDefect p q
 
@@ -100,9 +100,9 @@ sqrt3AlternatingSigns = refl , refl , refl , refl
 
 data GoldenRatioDefect (p q : Nat) : Set where
   phiBelow : (delta : Nat) → p * p + delta ≡ p * q + q * q →
-             GoldenRatioDefect p q
+  GoldenRatioDefect p q : p * p ≡ p * q + q * q →
   phiExact : p * p ≡ p * q + q * q →
-             GoldenRatioDefect p q
+  GoldenRatioDefect p q : (delta : Nat) → p * p ≡ p * q + q * q + delta →
   phiAbove : (delta : Nat) → p * p ≡ p * q + q * q + delta →
              GoldenRatioDefect p q
 

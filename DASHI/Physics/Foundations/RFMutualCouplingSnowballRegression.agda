@@ -1,0 +1,14 @@
+module DASHI.Physics.Foundations.RFMutualCouplingSnowballRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.RFMutualCouplingSnowballExact as S
+
+couplingRepairProposalRequired : S.CouplingRepairProposalBundle
+couplingRepairProposalRequired = S.canonicalCouplingRepairProposalBundle
+
+couplingRouteRequired : S.CouplingProofSearchRoute
+couplingRouteRequired = S.canonicalCouplingProofSearchRoute
+
+couplingAdmissionFirewallRequired : S.CouplingAdmissionFirewall
+couplingAdmissionFirewallRequired = S.canonicalCouplingAdmissionFirewall

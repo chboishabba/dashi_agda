@@ -120,7 +120,7 @@ record SearchFrontierDelta : Set₁ where
 
 open SearchFrontierDelta public
 
-record NonProgressingSearchResult : Set where
+record NonProgressingSearchResult : Set₁ where
   constructor nonProgressingSearchResult
   field
     resultReference : String

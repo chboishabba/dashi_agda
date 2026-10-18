@@ -69,7 +69,7 @@ soilFoodWebQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data SoilBiologySourceRole : Set where
-  rootCarbonSoilRespirationExperiment
+  rootCarbonSoilRespirationExperiment : SoilBiologySourceRole
   mycorrhizalDiversityEcosystemExperiment : SoilBiologySourceRole
 
 record SoilBiologyPrimarySource : Set where

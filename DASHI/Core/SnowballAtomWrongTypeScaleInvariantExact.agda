@@ -13,7 +13,7 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data SemanticScale : Set where
-  sourceProposition legalNorm legalElement deviceProcess rtlLogic physicalLayout
+  sourceProposition legalNorm legalElement deviceProcess rtlLogic physicalLayout : SemanticScale
   manufacturedObject economicObservation policyClassification : SemanticScale
 
 record AtomGrain (Consumer Query : Set) : Set₁ where

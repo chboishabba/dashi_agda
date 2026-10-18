@@ -25,9 +25,9 @@ import DASHI.Culture.MissingDeceasedTwentyScientistRound38ContractTemporalNonFac
 ------------------------------------------------------------------------
 
 data HCBSourceRole : Set where
-  exactProjectRoleSource
-  programmeReferenceSource
-  contractDerivativeIdentitySource
+  exactProjectRoleSource : HCBSourceRole
+  programmeReferenceSource : HCBSourceRole
+  contractDerivativeIdentitySource : HCBSourceRole
   laterContractPersistenceSource : HCBSourceRole
 
 record HCBSourceRoleBoundary : Set where

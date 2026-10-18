@@ -103,18 +103,23 @@ exactSummaryCertifiesWeightedFutureSafety :
     {coarsen : State → Coarse} →
   ExactWeightedFutureSummary kernel coarsen →
   WeightedFutureSafeProjection kernel coarsen
-exactSummaryCertifiesWeightedFutureSafety summary =
+exactSummaryCertifiesWeightedFutureSafety
+  {kernel = kernel} {coarsen = coarsen} summary =
   weightedFutureSafeProjection certify
   where
     certify :
       ∀ {left right} →
       coarsen left ≡ coarsen right →
       WeightedFutureEquivalent kernel left right
-    certify {left} {right} refl =
+    certify {left} {right} sameCoarsening =
       weightedFutureEquivalent λ actions outcome →
         trans
           (summaryExact summary left actions outcome)
-          (sym (summaryExact summary right actions outcome))
+          (trans
+            (cong
+              (λ coarse → summaryWeight summary coarse actions outcome)
+              sameCoarsening)
+            (sym (summaryExact summary right actions outcome)))
 
 ------------------------------------------------------------------------
 -- Approximate weighted future sufficiency.
@@ -178,9 +183,15 @@ exactImpliesApproximateAtZero
         (weight kernel left actions outcome)
         (weight kernel right actions outcome)
       ≤ 0
-    bound actions outcome with sameWeightedFuture equivalent actions outcome
-    ... | refl with distanceReflexive (weight kernel left actions outcome)
-    ...   | refl = z≤n
+    bound actions outcome =
+      subst
+        (λ other →
+          distance (weight kernel left actions outcome) other ≤ 0)
+        (sameWeightedFuture equivalent actions outcome)
+        (subst
+          (λ distanceValue → distanceValue ≤ 0)
+          (sym (distanceReflexive (weight kernel left actions outcome)))
+          z≤n)
 
 ------------------------------------------------------------------------
 -- Boundary: this is a weighted kernel quotient.  A later analytic layer may

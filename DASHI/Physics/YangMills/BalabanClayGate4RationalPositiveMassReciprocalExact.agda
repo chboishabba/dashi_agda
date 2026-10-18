@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExa
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using
-  (ℚ; 0ℚ; 1ℚ; Positive; _*_; 1/_; _≟_; ≢-nonZero)
+  (ℚ; 0ℚ; 1ℚ; Positive; _*_; _≤_; 1/_; _≟_; ≢-nonZero)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 open import Relation.Nullary using (yes; no)
@@ -41,6 +41,26 @@ safeRationalReciprocal : ℚ → ℚ
 safeRationalReciprocal value with value ≟ 0ℚ
 ... | yes _ = 0ℚ
 ... | no value≢zero = (1/ value) {{≢-nonZero value≢zero}}
+
+safeRationalReciprocalPositive :
+  ∀ (value : ℚ) → Positive value → Positive (safeRationalReciprocal value)
+safeRationalReciprocalPositive value positive with value ≟ 0ℚ
+... | yes value≡zero =
+  emptyEliminate
+    (positiveZeroImpossible (subst Positive value≡zero positive))
+... | no value≢zero =
+  let
+    instance
+      valuePositive : Positive value
+      valuePositive = positive
+  in
+  ℚP.1/pos⇒pos value
+
+safeRationalReciprocalNonnegative :
+  ∀ (value : ℚ) → Positive value →
+  0ℚ ≤ safeRationalReciprocal value
+safeRationalReciprocalNonnegative value positive =
+  ℚP.<⇒≤ (safeRationalReciprocalPositive value positive)
 
 safeRationalReciprocalTimesPositive :
   ∀ (value : ℚ) → Positive value →
@@ -86,6 +106,12 @@ rationalPositiveMassReciprocalAlgebra interpretation = record
             (positiveMeansRationalPositive interpretation positive))
           (sym (oneMeaning interpretation)))
   }
+
+safeRationalReciprocalPositiveLevel : ProofLevel
+safeRationalReciprocalPositiveLevel = machineChecked
+
+safeRationalReciprocalNonnegativeLevel : ProofLevel
+safeRationalReciprocalNonnegativeLevel = machineChecked
 
 safeRationalReciprocalDefinitionLevel : ProofLevel
 safeRationalReciprocalDefinitionLevel = machineChecked

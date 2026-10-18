@@ -1,0 +1,11 @@
+module DASHI.Physics.Foundations.RFCalibrationCabarlahCrossPollinationRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.RFCalibrationCabarlahCrossPollinationExact as C
+
+cabarlahCalibrationBoundaryRequired : C.CabarlahCalibrationBoundary
+cabarlahCalibrationBoundaryRequired = C.canonicalCabarlahCalibrationBoundary
+
+historicalModernBridgeRequired : C.HistoricalModernCalibrationBridge
+historicalModernBridgeRequired = C.canonicalHistoricalModernCalibrationBridge

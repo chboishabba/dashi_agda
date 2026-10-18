@@ -20,18 +20,18 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data Jurisdiction : Set where
-  australia
-  unitedStates
+  australia : Jurisdiction
+  unitedStates : Jurisdiction
   europeanUnion : Jurisdiction
 
 data ComparisonAxis : Set where
-  dietaryExposureModelFreshness
-  foodMRLHarmonisation
-  retailFoodResidueSurveillance
-  emergencyOrMinorUseDerogation
-  nonFoodToFoodLifecycleControl
-  tobaccoPesticideResidueGovernance
-  inhalationSpecificResidueGovernance
+  dietaryExposureModelFreshness : ComparisonAxis
+  foodMRLHarmonisation : ComparisonAxis
+  retailFoodResidueSurveillance : ComparisonAxis
+  emergencyOrMinorUseDerogation : ComparisonAxis
+  nonFoodToFoodLifecycleControl : ComparisonAxis
+  tobaccoPesticideResidueGovernance : ComparisonAxis
+  inhalationSpecificResidueGovernance : ComparisonAxis
   updateAndReviewCadence : ComparisonAxis
 
 record JurisdictionCoordinate : Set where
@@ -238,12 +238,12 @@ tobaccoFinding = comparative-finding
 ------------------------------------------------------------------------
 
 data ComparisonParetoTarget : Set where
-  normalizeFoodSurveillance
-  normalizeExposureModelVintage
-  normalizeEmergencyUseControls
-  traceLifecycleTransitions
-  compareTobaccoBlindSpot
-  compareInhalationSpecificStandards
+  normalizeFoodSurveillance : ComparisonParetoTarget
+  normalizeExposureModelVintage : ComparisonParetoTarget
+  normalizeEmergencyUseControls : ComparisonParetoTarget
+  traceLifecycleTransitions : ComparisonParetoTarget
+  compareTobaccoBlindSpot : ComparisonParetoTarget
+  compareInhalationSpecificStandards : ComparisonParetoTarget
   scalarCountryRanking : ComparisonParetoTarget
 
 record ComparisonParetoStep : Set where
@@ -310,15 +310,15 @@ pareto99 = comparison-pareto-step
 ------------------------------------------------------------------------
 
 data ComparisonTime : Set where
-  legacyModelEra
+  legacyModelEra : ComparisonTime
   current2026Comparison : ComparisonTime
 
 data ComparisonInterpretation : Set where
-  euFoodSurveillanceStructurallyStrong
-  australiaModelDriftCaseReal
-  usExposureModelOldConsumptionData
-  tobaccoBlindSpotShared
-  euUniversallySafest
+  euFoodSurveillanceStructurallyStrong : ComparisonInterpretation
+  australiaModelDriftCaseReal : ComparisonInterpretation
+  usExposureModelOldConsumptionData : ComparisonInterpretation
+  tobaccoBlindSpotShared : ComparisonInterpretation
+  euUniversallySafest : ComparisonInterpretation
   australiaUniversallyWorst : ComparisonInterpretation
 
 data ComparisonSummary : Set where coordinateIndexedNotScalar : ComparisonSummary

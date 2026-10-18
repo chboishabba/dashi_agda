@@ -37,6 +37,8 @@ record SameMemoryDifferentAccess : Set where
     firstAccessible : accessible first ≡ false
     secondAccessible : accessible second ≡ true
 
+open SameMemoryDifferentAccess public
+
 sameMemoryCanChangeAccess :
   (m : Memory.MemoryFibre) →
   SameMemoryDifferentAccess

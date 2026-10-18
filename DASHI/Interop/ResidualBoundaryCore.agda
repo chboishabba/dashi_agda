@@ -19,20 +19,15 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 -- promotes truth, support, or external authority.
 
 data BoundaryResidual : Set where
-  exact :
-    BoundaryResidual
+  exact : BoundaryResidual
 
-  partial :
-    BoundaryResidual
+  partial : BoundaryResidual
 
-  noTypedMeet :
-    BoundaryResidual
+  noTypedMeet : BoundaryResidual
 
-  scopeExceeded :
-    BoundaryResidual
+  scopeExceeded : BoundaryResidual
 
-  contradiction :
-    BoundaryResidual
+  contradiction : BoundaryResidual
 
 boundaryResidualToFour :
   BoundaryResidual →
@@ -80,50 +75,36 @@ boundarySeverity contradiction =
 -- Inspection and comparison boundary vocabulary.
 
 data InspectionLevel : Set where
-  currentStructuralInspection :
-    InspectionLevel
+  currentStructuralInspection : InspectionLevel
 
-  deeperParseInspection :
-    InspectionLevel
+  deeperParseInspection : InspectionLevel
 
-  bridgeAwareInspection :
-    InspectionLevel
+  bridgeAwareInspection : InspectionLevel
 
-  externalAuthorityInspection :
-    InspectionLevel
+  externalAuthorityInspection : InspectionLevel
 
 data BridgeRequirement : Set where
-  bridgeNotRequired :
-    BridgeRequirement
+  bridgeNotRequired : BridgeRequirement
 
-  bridgeRequired :
-    BridgeRequirement
+  bridgeRequired : BridgeRequirement
 
-  bridgeSatisfied :
-    BridgeRequirement
+  bridgeSatisfied : BridgeRequirement
 
 data FibreRelation : Set where
-  sameFibre :
-    FibreRelation
+  sameFibre : FibreRelation
 
-  crossFibre :
-    FibreRelation
+  crossFibre : FibreRelation
 
 data BoundaryKind : Set where
-  exactBoundary :
-    BoundaryKind
+  exactBoundary : BoundaryKind
 
-  partialBoundary :
-    BoundaryKind
+  partialBoundary : BoundaryKind
 
-  noTypedMeetBoundary :
-    BoundaryKind
+  noTypedMeetBoundary : BoundaryKind
 
-  contradictionBoundary :
-    BoundaryKind
+  contradictionBoundary : BoundaryKind
 
-  scopeExceededBoundary :
-    BoundaryKind
+  scopeExceededBoundary : BoundaryKind
 
 boundaryKindResidual :
   BoundaryKind →

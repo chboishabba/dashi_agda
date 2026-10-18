@@ -75,7 +75,7 @@ weierstrassWikipediaRevision = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data EdgeRole : Set where
-  redirectEdge currentFirstBody secondaryDefinition secondaryProperty
+  redirectEdge currentFirstBody secondaryDefinition secondaryProperty : EdgeRole
   sourceFormula repositoryConstruction : EdgeRole
 
 record TypedEdge : Set where

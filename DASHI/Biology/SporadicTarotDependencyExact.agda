@@ -41,8 +41,7 @@ sporadicInventoryCountIsTwentySix : sporadicInventoryCount ≡ 26
 sporadicInventoryCountIsTwentySix = refl
 
 data SporadicFamily : Set where
-  mathieuFamily leechLatticeFamily monsterSectionFamily pariahFamily :
-    SporadicFamily
+  mathieuFamily leechLatticeFamily monsterSectionFamily pariahFamily : SporadicFamily
 
 sporadicFamily : SporadicGroup → SporadicFamily
 sporadicFamily M11 = mathieuFamily
@@ -177,8 +176,8 @@ twentySixIsNotTwentyTwo : 26 ≡ 22 → ⊥
 twentySixIsNotTwentyTwo ()
 
 data CorrespondenceAuthority : Set where
-  mathematicalReferentAuthority declaredSymbolicAuthority
-    undefinedCorrespondenceAuthority : CorrespondenceAuthority
+  mathematicalReferentAuthority declaredSymbolicAuthority : CorrespondenceAuthority
+  undefinedCorrespondenceAuthority : CorrespondenceAuthority
 
 record TarotCorrespondenceRule : Set where
   constructor tarotCorrespondenceRule
@@ -200,17 +199,16 @@ record SymbolicCorrespondenceLedger : Set where
       syntheticCardsDeclared : Bool
 
 data DependencyNode : Set where
-  fourElementCarrierNode semigroupAxiomNode monoidAxiomNode groupAxiomNode
-    abelianGroupAxiomNode f2VectorSpaceNode affinePlaneNode projectivePlaneNode
-    fanoPlaneNode steinerS3622Node binaryGolayCodeNode mathieu24Node
-    leechLatticeNode conwayGroupsNode moonshineVOANode monsterGroupNode
-    tarotArcanaNode : DependencyNode
+  fourElementCarrierNode semigroupAxiomNode monoidAxiomNode groupAxiomNode : DependencyNode
+  abelianGroupAxiomNode f2VectorSpaceNode affinePlaneNode projectivePlaneNode : DependencyNode
+  fanoPlaneNode steinerS3622Node binaryGolayCodeNode mathieu24Node : DependencyNode
+  leechLatticeNode conwayGroupsNode moonshineVOANode monsterGroupNode : DependencyNode
+  tarotArcanaNode : DependencyNode
 
 data DependencyEdgeKind : Set where
-  sameCarrierStrongerAxioms sameObjectDifferentPresentation constructionInput
-    automorphismGroup stabiliserOrQuotient subgroupOrSubquotient
-    vertexOperatorAlgebraBridge historicalAssociation symbolicCorrespondence :
-    DependencyEdgeKind
+  sameCarrierStrongerAxioms sameObjectDifferentPresentation constructionInput : DependencyEdgeKind
+  automorphismGroup stabiliserOrQuotient subgroupOrSubquotient : DependencyEdgeKind
+  vertexOperatorAlgebraBridge historicalAssociation symbolicCorrespondence : DependencyEdgeKind
 
 record TypedDependencyEdge : Set where
   constructor typedDependencyEdge

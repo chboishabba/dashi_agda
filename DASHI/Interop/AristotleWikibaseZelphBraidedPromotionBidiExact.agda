@@ -13,9 +13,9 @@ import DASHI.Interop.SensibLawNatZelphPipelineExact as Pipeline
 
 -- Concrete provenance strands for the actual Nat/Wikimedia route.
 data NatEvidenceStrand : Set where
-  nativeWikibaseStrand
-  zelphGraphStrand
-  governedReviewStrand
+  nativeWikibaseStrand : NatEvidenceStrand
+  zelphGraphStrand : NatEvidenceStrand
+  governedReviewStrand : NatEvidenceStrand
   migrationPolicyStrand : NatEvidenceStrand
 
 record NatBraidedEvidenceObligations : Set where

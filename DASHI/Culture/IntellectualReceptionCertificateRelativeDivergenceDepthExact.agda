@@ -20,7 +20,7 @@ import DASHI.Culture.IntellectualReceptionPrecisionFiltrationFirstDivergenceExac
 
 data DivergenceDepthOutcome (support : Reuse.CertificateSupport) : Set where
   firstAt :
-    (stage : Filtration.PrecisionStage) →
+  (stage : Filtration.PrecisionStage) →
     Filtration.FirstSupportedDivergenceAt support stage →
     DivergenceDepthOutcome support
 

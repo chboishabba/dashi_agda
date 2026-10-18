@@ -17,12 +17,12 @@ import DASHI.Law.SensibLawWoogarooLegalConsumerAtomCompletionExact as Atom
 ------------------------------------------------------------------------
 
 data CarbonOffsetRequirement : Set where
-  exactOffsetParcelIdentity
-  impactReferenceCarbonAndMaturity
-  offsetReferenceCarbonAndMaturity
-  restorationTrajectory
-  carbonStockParityTime
-  habitatFunctionParityTime
+  exactOffsetParcelIdentity : CarbonOffsetRequirement
+  impactReferenceCarbonAndMaturity : CarbonOffsetRequirement
+  offsetReferenceCarbonAndMaturity : CarbonOffsetRequirement
+  restorationTrajectory : CarbonOffsetRequirement
+  carbonStockParityTime : CarbonOffsetRequirement
+  habitatFunctionParityTime : CarbonOffsetRequirement
   populationCapacityParityTime : CarbonOffsetRequirement
 
 record CarbonParetoState : Set where

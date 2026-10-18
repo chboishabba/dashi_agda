@@ -1,0 +1,10 @@
+module DASHI.Physics.CondensedMatter.Everything where
+
+import DASHI.Physics.CondensedMatter.FlatBandObservableFibreExact
+import DASHI.Physics.CondensedMatter.GaoFe5GeTe2FlatBandChargeOrderSourceReplayExact
+import DASHI.Physics.CondensedMatter.ThreeFoldBandFoldingExact
+import DASHI.Physics.CondensedMatter.FlatBandTwistronicsFe5GeTe2CrossPollinationExact
+import DASHI.Physics.CondensedMatter.HexagonalSqrt3R30ReciprocalFoldingExact
+import DASHI.Physics.CondensedMatter.GaoFe5GeTe2Sqrt3R30SameObjectWeldExact
+import DASHI.Physics.CondensedMatter.ARPESBandFoldingWitnessGateExact
+import DASHI.Physics.CondensedMatter.GaoFe5GeTe2FigureReplayExact

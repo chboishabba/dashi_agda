@@ -89,8 +89,8 @@ data ClassifierArtifact : Set where
   ceremonialRouteCertificate
   streetRouteCertificate
 
-  carePunishmentConsumerCertificate
-  historicalMeaningConsumerCertificate
+  carePunishmentConsumerCertificate : ClassifierArtifact
+  historicalMeaningConsumerCertificate : ClassifierArtifact
   : ClassifierArtifact
 
 data Depends : ClassifierArtifact → ClassifierArtifact → Set where

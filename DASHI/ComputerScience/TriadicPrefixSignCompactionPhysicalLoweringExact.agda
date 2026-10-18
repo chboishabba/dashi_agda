@@ -65,10 +65,10 @@ canonicalSignCompactionReceipt =
 ------------------------------------------------------------------------
 
 data PrefixLoweringKind : Set where
-  scalarLowerBitsPopcount
-  cudaLowerLaneMaskPopcount
-  hipLowerLaneMaskPopcount
-  svePrefixPredicateCount
+  scalarLowerBitsPopcount : PrefixLoweringKind
+  cudaLowerLaneMaskPopcount : PrefixLoweringKind
+  hipLowerLaneMaskPopcount : PrefixLoweringKind
+  svePrefixPredicateCount : PrefixLoweringKind
   x86MaskLowerBitsPopcount : PrefixLoweringKind
 
 record PrefixLoweringReceipt : Set where

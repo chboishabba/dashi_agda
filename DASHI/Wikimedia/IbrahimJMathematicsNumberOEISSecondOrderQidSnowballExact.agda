@@ -20,8 +20,8 @@ import DASHI.Wikimedia.WikipediaAllPairsPrunedMergeSnowballExact as AllPairs
 ------------------------------------------------------------------------
 
 data ExternalRelationRole : Set where
-  wikidataInstanceOf wikidataSubclassOf wikidataPartOf wikidataStudies
-  wikidataDifferentFrom wikidataHasPart wikidataImage wikidataDuplicateStatus
+  wikidataInstanceOf wikidataSubclassOf wikidataPartOf wikidataStudies : ExternalRelationRole
+  wikidataDifferentFrom wikidataHasPart wikidataImage wikidataDuplicateStatus : ExternalRelationRole
   oeisIdentifier currentWikipediaFirstBody explicitWikipediaCrosslink : ExternalRelationRole
 
 record SecondOrderEdge : Set where

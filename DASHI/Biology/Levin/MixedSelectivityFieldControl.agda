@@ -15,6 +15,8 @@ record MixedSelectivitySystem
     fieldPatternDoesNotUniquelyDetermineResponse : Bool
     interpretation : String
 
+open MixedSelectivitySystem public
+
 record ContextDependentWitness
   {Neuron Context Stimulus Response FieldPattern : Set}
   (S : MixedSelectivitySystem Neuron Context Stimulus Response FieldPattern) : Set where
@@ -24,6 +26,8 @@ record ContextDependentWitness
     stimulus : Stimulus
     responsesDiffer : Bool
 
+open ContextDependentWitness public
+
 record FieldControlBoundary : Set where
   field
     mixedSelectivityObserved : Bool
@@ -32,6 +36,8 @@ record FieldControlBoundary : Set where
     connectionWeightsRemainRelevant : Bool
     fieldControlIsNotHomunculus : Bool
     fieldControlDoesNotImplyConsciousness : Bool
+
+open FieldControlBoundary public
 
 canonicalFieldControlBoundary : FieldControlBoundary
 canonicalFieldControlBoundary = record

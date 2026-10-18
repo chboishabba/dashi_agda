@@ -11,10 +11,10 @@ data TransportStatus : Set where
   transportComplete transportPartial transportFailed : TransportStatus
 
 data QueryCoverageStatus : Set where
-  queryCoverageComplete
-  queryCoverageIncomplete
-  queryCoverageUninspected
-  queryCoverageInvalid
+  queryCoverageComplete : QueryCoverageStatus
+  queryCoverageIncomplete : QueryCoverageStatus
+  queryCoverageUninspected : QueryCoverageStatus
+  queryCoverageInvalid : QueryCoverageStatus
   : QueryCoverageStatus
 
 record ZelphTransportReceipt : Set where

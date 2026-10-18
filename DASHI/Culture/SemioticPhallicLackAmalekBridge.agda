@@ -28,23 +28,17 @@ listCount (_ ∷ xs) =
 -- Sign vocabulary.
 
 data PhallicSignSurface : Set where
-  phallicClosureSurface :
-    PhallicSignSurface
+  phallicClosureSurface : PhallicSignSurface
 
-  lackGashSurface :
-    PhallicSignSurface
+  lackGashSurface : PhallicSignSurface
 
-  symbolicCastrationSurface :
-    PhallicSignSurface
+  symbolicCastrationSurface : PhallicSignSurface
 
-  hygieneCivilisationSurface :
-    PhallicSignSurface
+  hygieneCivilisationSurface : PhallicSignSurface
 
-  enemyPollutantSurface :
-    PhallicSignSurface
+  enemyPollutantSurface : PhallicSignSurface
 
-  survivorAsFeedbackSurface :
-    PhallicSignSurface
+  survivorAsFeedbackSurface : PhallicSignSurface
 
 canonicalPhallicSignSurfaces :
   List PhallicSignSurface
@@ -95,23 +89,17 @@ phallicSignSurfaceReading survivorAsFeedbackSurface =
 -- Opposition lattice.
 
 data SemioticOpposition : Set where
-  phallusLackOpposition :
-    SemioticOpposition
+  phallusLackOpposition : SemioticOpposition
 
-  blueGreenOpposition :
-    SemioticOpposition
+  blueGreenOpposition : SemioticOpposition
 
-  cleanDirtyOpposition :
-    SemioticOpposition
+  cleanDirtyOpposition : SemioticOpposition
 
-  civilisationNatureOpposition :
-    SemioticOpposition
+  civilisationNatureOpposition : SemioticOpposition
 
-  sacredDefiledOpposition :
-    SemioticOpposition
+  sacredDefiledOpposition : SemioticOpposition
 
-  humanPollutantOpposition :
-    SemioticOpposition
+  humanPollutantOpposition : SemioticOpposition
 
 canonicalSemioticOppositions :
   List SemioticOpposition

@@ -20,25 +20,25 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data ContaminantCarrierClass : Set where
-  ordinarySmallMoleculeResidue
-  polarIonicResidue
-  elementalContaminant
-  viableMicroorganism
-  microbialProteinOrBiopesticide
-  mycotoxin
-  residualSolventOrProcessingChemical
+  ordinarySmallMoleculeResidue : ContaminantCarrierClass
+  polarIonicResidue : ContaminantCarrierClass
+  elementalContaminant : ContaminantCarrierClass
+  viableMicroorganism : ContaminantCarrierClass
+  microbialProteinOrBiopesticide : ContaminantCarrierClass
+  mycotoxin : ContaminantCarrierClass
+  residualSolventOrProcessingChemical : ContaminantCarrierClass
   foreignMatterOrPhysicalContaminant : ContaminantCarrierClass
 
 data ObserverModality : Set where
-  gcMsMs
-  lcMsMs
-  dedicatedPolarLcMsMs
-  icpMs
-  cultureCount
-  targetedPCRorQPCR
-  immunoassayOrProteomics
-  mycotoxinLcMsOrPharmacopoeial
-  headspaceGc
+  gcMsMs : ObserverModality
+  lcMsMs : ObserverModality
+  dedicatedPolarLcMsMs : ObserverModality
+  icpMs : ObserverModality
+  cultureCount : ObserverModality
+  targetedPCRorQPCR : ObserverModality
+  immunoassayOrProteomics : ObserverModality
+  mycotoxinLcMsOrPharmacopoeial : ObserverModality
+  headspaceGc : ObserverModality
   microscopyOrPhysicalInspection : ObserverModality
 
 record ObserverCoverageReceipt : Set where
@@ -211,12 +211,12 @@ oralLimitDoesNotCreateInhalationSafety ()
 ------------------------------------------------------------------------
 
 data MeasurementParetoTarget : Set where
-  closeBtObserverGap
-  closeGlyphosateObserverGap
-  compareJurisdictionPanelUniverses
-  acquireCannabisSpecificBtResidue
-  acquireCannabisSpecificGlyphosateOccurrence
-  routeSpecificThermalTransfer
+  closeBtObserverGap : MeasurementParetoTarget
+  closeGlyphosateObserverGap : MeasurementParetoTarget
+  compareJurisdictionPanelUniverses : MeasurementParetoTarget
+  acquireCannabisSpecificBtResidue : MeasurementParetoTarget
+  acquireCannabisSpecificGlyphosateOccurrence : MeasurementParetoTarget
+  routeSpecificThermalTransfer : MeasurementParetoTarget
   broaderSmallMoleculeListExpansion : MeasurementParetoTarget
 
 record MeasurementParetoStep : Set where
@@ -283,13 +283,13 @@ pareto99 = measurement-pareto-step
 ------------------------------------------------------------------------
 
 data MeasurementTime : Set where
-  chemicalPanelEra
-  crossClassReview
+  chemicalPanelEra : MeasurementTime
+  crossClassReview : MeasurementTime
   currentArchitecture : MeasurementTime
 
 data MeasurementInterpretation : Set where
-  finitePanelOnly
-  crossClassObserverRequired
+  finitePanelOnly : MeasurementInterpretation
+  crossClassObserverRequired : MeasurementInterpretation
   everyRelevantClassObserved : MeasurementInterpretation
 
 data MeasurementSummary : Set where panelCoverageIsObserverIndexed : MeasurementSummary

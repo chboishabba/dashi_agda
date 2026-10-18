@@ -20,39 +20,28 @@ open import Data.List.Base using (List; _∷_; [])
 -- derive the Standard Model.
 
 data K3GeometryReceiptStatus : Set where
-  k3GeometryTargetsOnlyNoPromotion :
-    K3GeometryReceiptStatus
+  k3GeometryTargetsOnlyNoPromotion : K3GeometryReceiptStatus
 
 data K3GeometryOpenObligation : Set where
-  missingK3SurfaceConstruction :
-    K3GeometryOpenObligation
+  missingK3SurfaceConstruction : K3GeometryOpenObligation
 
-  missingEulerCharacteristicProof :
-    K3GeometryOpenObligation
+  missingEulerCharacteristicProof : K3GeometryOpenObligation
 
-  missingSignatureProof :
-    K3GeometryOpenObligation
+  missingSignatureProof : K3GeometryOpenObligation
 
-  missingHodgeDiamondDerivation :
-    K3GeometryOpenObligation
+  missingHodgeDiamondDerivation : K3GeometryOpenObligation
 
-  missingK3LatticeIsomorphism :
-    K3GeometryOpenObligation
+  missingK3LatticeIsomorphism : K3GeometryOpenObligation
 
-  missingTorelliTheoremAdapter :
-    K3GeometryOpenObligation
+  missingTorelliTheoremAdapter : K3GeometryOpenObligation
 
-  missingModuliPeriodDomainConstruction :
-    K3GeometryOpenObligation
+  missingModuliPeriodDomainConstruction : K3GeometryOpenObligation
 
-  missingE8E8CompactificationBridge :
-    K3GeometryOpenObligation
+  missingE8E8CompactificationBridge : K3GeometryOpenObligation
 
-  missingGUTBreakingAdapter :
-    K3GeometryOpenObligation
+  missingGUTBreakingAdapter : K3GeometryOpenObligation
 
-  missingStandardModelDerivation :
-    K3GeometryOpenObligation
+  missingStandardModelDerivation : K3GeometryOpenObligation
 
 canonicalK3GeometryOpenObligations :
   List K3GeometryOpenObligation
@@ -70,20 +59,15 @@ canonicalK3GeometryOpenObligations =
   ∷ []
 
 data K3GeometryTarget : Set where
-  k3InvariantTarget :
-    K3GeometryTarget
+  k3InvariantTarget : K3GeometryTarget
 
-  k3HodgeDiamondTarget :
-    K3GeometryTarget
+  k3HodgeDiamondTarget : K3GeometryTarget
 
-  k3LatticeTarget :
-    K3GeometryTarget
+  k3LatticeTarget : K3GeometryTarget
 
-  k3TorelliModuliTarget :
-    K3GeometryTarget
+  k3TorelliModuliTarget : K3GeometryTarget
 
-  k3ToE8E8ToGUTBreakingToSMChainTarget :
-    K3GeometryTarget
+  k3ToE8E8ToGUTBreakingToSMChainTarget : K3GeometryTarget
 
 canonicalK3GeometryTargets :
   List K3GeometryTarget

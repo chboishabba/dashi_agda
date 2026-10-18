@@ -323,3 +323,4 @@ liveNarrativeStatusDoesNotMeanLegalConclusion ()
 materialisedVerticalDoesNotCompleteReportingCompiler :
   OneMaterialisedVerticalMeansReportingCompilerComplete → ⊥
 materialisedVerticalDoesNotCompleteReportingCompiler ()
+import DASHI.Cognition.PNF.SensibLawITIRNarrativeComparisonTransportExact

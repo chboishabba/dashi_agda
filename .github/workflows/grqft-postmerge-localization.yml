@@ -1,0 +1,98 @@
+name: GRQFT post-merge localization
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/DrellYanRatioAbsoluteDefectLocalizationExact.agda'
+      - 'DASHI/Physics/Closure/DrellYanRatioAbsoluteDefectLocalizationValidation.agda'
+      - 'DASHI/Physics/Closure/ColliderChiSquareScopeMatrixExact.agda'
+      - 'DASHI/Physics/Closure/ColliderChiSquareScopeMatrixValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119PinnedYMGRQFTSectorStressBridgeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119PinnedYMGRQFTSectorStressBridgeValidation.agda'
+      - 'DASHI/Physics/Foundations/GRQFTPostMergeMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTPostMergeMaxCutValidation.agda'
+      - 'scripts/grqft_dy_ratio_absolute_localization.py'
+      - 'scripts/grqft_collider_chi2_scope_matrix.py'
+      - 'outputs/grqft_dy_ratio_absolute_localization.json'
+      - 'outputs/grqft_collider_chi2_scope_matrix.json'
+      - 'DASHI/Physics/Foundations/GRQFTActiveGaugeSectorTotalizationExact.agda'
+      - 'DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda'
+      - 'DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda'
+      - 'DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda'
+      - 'scripts/grqft_w4_projection_operator_ablation.py'
+      - 'DASHI/Physics/Foundations/CMP119SingleActiveSectorSourceFactorisationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119SingleActiveSectorSourceFactorisationValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119SingleSectorSharedSourceStressWeldExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119SingleSectorSharedSourceStressWeldValidation.agda'
+      - 'DASHI/Physics/Foundations/GRAnchoredSharedEffectiveSourceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119GRAnchoredStressWeldCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119GRAnchoredStressWeldCompilerValidation.agda'
+      - 'DASHI/Physics/Foundations/GRRecoveryVsSchwarzschildValidationExact.agda'
+      - 'DASHI/Physics/Foundations/GRRecoveryVsSchwarzschildValidationValidation.agda'
+      - 'DASHI/Physics/Foundations/StressEnergyWeldMathematicalCoreExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119GRAnchoredStressMathematicalCoreExact.agda'
+      - 'DASHI/Physics/Foundations/StressEnergyWeldMathematicalCoreValidation.agda'
+      - 'DASHI/Physics/Foundations/StressEnergyEqualityCoreExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119GRAnchoredStressEqualityCoreExact.agda'
+      - 'DASHI/Physics/Foundations/StressEnergyEqualityCoreValidation.agda'
+      - 'DASHI/Physics/Foundations/SingleSectorUnifiedCandidateExact.agda'
+      - 'DASHI/Physics/Foundations/SingleSectorRecoveryTransportExact.agda'
+      - 'DASHI/Physics/Foundations/SingleSectorUnifiedCandidateValidation.agda'
+      - 'DASHI/Physics/Foundations/GRHolonomyTaylorRicciEvidenceExact.agda'
+      - 'DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutValidation.agda'
+      - 'DASHI/Physics/Foundations/RecoveryCommutationCoreExact.agda'
+      - 'DASHI/Physics/Foundations/CommonRegimeMathematicalCoreExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTTheoryValidationSplitExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTTheoryValidationSplitValidation.agda'
+      - 'DASHI/Physics/Foundations/GRQFTRationalStressComponentCutExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTConcreteInstanceFrontierV2Exact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTConcreteInstanceFrontierV2Validation.agda'
+      - 'DASHI/Physics/Foundations/GRQFTCommonRegimeBidiAttemptExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTCommonRegimeBidiAttemptValidation.agda'
+      - 'scripts/grqft_cross_sector_component_residual.py'
+      - 'outputs/grqft_cross_sector_component_target.json'
+      - 'DASHI/Physics/Foundations/CMP119MetricBasisStressComponentCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119MetricBasisStressComponentCompilerValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119SymmetricStressComponentReductionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119SymmetrySemanticBridgeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119SymmetricStressComponentReductionValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119SymmetricMetricBasisRealizationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119SymmetricMetricBasisRealizationValidation.agda'
+      - 'DASHI/Physics/Foundations/GRQFTSourceNativeQFTRecoveryProvenanceExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTSourceNativeQFTRecoveryProvenanceValidation.agda'
+      - 'DASHI/Physics/Foundations/GRQFTR457SourceNativeRecoveryBindingExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTR457SourceNativeRecoveryBindingValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119SymmetricFiniteTangentBasisCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119SymmetricFiniteTangentBasisCompilerValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119ActiveRawSymmetricTangentSpecializationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119ActiveRawSymmetricTangentSpecializationValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119SymmetricPresentCutCarrierCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119SymmetricPresentCutCarrierCompilerValidation.agda'
+      - 'DASHI/Physics/Foundations/GRQFTCMP119CorrectedD1MaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119TenFinitePhysicalCompositeDerivativeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119TenFinitePhysicalCompositeDerivativeValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119TenPhysicalCompositeDerivativeSemanticsExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119TenNormalizedStressInsertionNumeratorsExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119TenNormalizedStressInsertionNumeratorsValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119TenNormalizedTargetEqualityExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119TenNormalizedTargetEqualityValidation.agda'
+      - 'scripts/check_grqft_postmerge_localization.sh'
+      - '.github/workflows/grqft-postmerge-localization.yml'
+
+jobs:
+  replay-and-preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Agda semantic preflight
+        run: python3 -m pip install -e tools/agda_preflight
+      - name: Replay diagnostics and run semantic preflight
+        run: bash scripts/check_grqft_postmerge_localization.sh

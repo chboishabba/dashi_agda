@@ -24,9 +24,9 @@ import DASHI.Environment.NitrogenPathwaySourceRegistryExact as NitrogenSources
 ------------------------------------------------------------------------
 
 data AttributionCoverage : Set where
-  canonicalOwnerEmbedded
-  canonicalStageOwnerWelded
-  canonicalExternalEntitlementWelded
+  canonicalOwnerEmbedded : AttributionCoverage
+  canonicalStageOwnerWelded : AttributionCoverage
+  canonicalExternalEntitlementWelded : AttributionCoverage
   legacyAtlasRequiresExplicitAdapter : AttributionCoverage
 
 record LegacyBNFExternalEntitlement

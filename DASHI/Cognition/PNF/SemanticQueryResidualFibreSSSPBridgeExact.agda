@@ -9,7 +9,8 @@ module DASHI.Cognition.PNF.SemanticQueryResidualFibreSSSPBridgeExact where
 -- split under a later, finer query.
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; cong; trans; sym)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Agda.Builtin.String using (String)
 open import Relation.Nullary using (¬_)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)

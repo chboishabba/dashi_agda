@@ -1,0 +1,258 @@
+[PAGE 1]
+T echnology-Supported
+University T eaching Models
+in China During the Pandemic:
+National Survey and Future
+Prospects
+Xiaoxiao Wang (汪潇潇) and
+Shuangshuang Guo (郭双双)
+Tsinghua University
+Highlights
+ The Ministry of Education Research Center for Online Education conducted a national survey
+of university administrators of learning and teaching.
+ The survey results showed that (a) the universities in eastern China had developed and introduced
+more massive open online courses (MOOCs) than those in the central and western regions; (b) of
+the various measures for blended learning, the universities tended to focus on supporting hardware
+development before providing training and incentive measures to teachers; and (c) the universities
+had widely used hybrid learning approaches. In relation to hybrid learning, Tsinghua University
+explored infrastructure upgrades, teacher training, and the optimal use of the rain classroom and
+its clone class, and launched the global hybrid classroom and global open courses.
+ In the future, it will be necessary to further promote education equity in line with national pol-
+icies and provide and perfect incentives to improve the quality of blended learning and expand
+hybrid learning while improving interaction through technology.
+Keywords
+Blended learning, hybrid learning, MOOCs
+Date received: 27 May 2022; revised: 8 July 2022; accepted: 14 August 2022
+Corresponding author:
+Xiaoxiao Wang, Online Education Center, Tsinghua University, Beijing 100084, China.
+Email: xxwang@mail.tsinghua.edu.cn
+Creative Commons Non Commercial CC BY -NC: This article is distributed under the terms of the Creative
+Commons Attribution-NonCommercial 4.0 License (https://creativecommons.org/licenses/by-nc/4.0/) which permits
+non-commercial use, reproduction and distribution of the work without further permission provided the original work is attributed as
+speciﬁed on the SAGE and Open Access page (https://us.sagepub.com/en-us/nam/open-access-at-sage).
+ROE Report
+ECNU Review of Education
+2024, Vol. 7(1) 174– 181
+© The Author(s) 2022
+Article reuse guidelines:
+sagepub.com/journals-permissions
+DOI: 10.1177/20965311221135088
+journals.sagepub.com/home/roe
+
+[PAGE 2]
+Introduction
+In early 2020, the sudden outbreak of the pandemic posed enormous challenges to higher education
+worldwide. On February 5, 2020, the Ministry of Education of the People’s Republic of China
+(MOE) responded by issuing a guideline on the organization and management of university
+online teaching amid the pandemic, which set a goal of suspending classes without suspending
+teaching or learning (MOE, 2020).
+At the end of 2021, seeking to understand and learn from Chinese universities’ emergent
+technology-supported teaching models, the Ministry of Education Research Center for Online
+Education conducted a national survey of university administrators of learning and teaching.
+This study was commissioned by the Ministry of Education, and the principles of voluntary par-
+ticipation and anonymity of participants were a dhered to during the research process. One
+hundred and sixty-six questionnaires were returned, of which 150 were valid, for a response
+rate of 90.4%. Of the universities that participated in the survey, 56 (37.3%) were in eastern
+China, 38 (25.3%) were in central China, and 56 (37.3%) were in western China. The
+average university size, measured by the number of undergraduates, was 17,866 (±12,099),
+and the average number of courses offered to undergraduates was 2,023 (±1,656). The survey
+focused on the status of technology-supported university teaching models in China, especially
+on the development of massive open online courses (MOOCs), blended learning, and hybrid
+learning during the pandemic.
+The three mainﬁndings of the survey were (a) that more MOOCs had been developed and intro-
+duced in the universities in eastern China than in those in the central and western regions; (b) that
+the universities tended to focus on supporting hardware development before providing training and
+incentive measures to teachers in terms of the various measures for blended learning; and (c) that
+hybrid learning approaches had been widely used among universities. In relation to hybrid learning,
+Tsinghua University explored infrastructure upgrades, teacher training, the optimal use of the rain
+classroom and its clone classes, and launched the global hybrid classroom and global open courses.
+Future care should be taken to further promote education equity in line with national policies and
+provide and perfect incentives to improve the quality of blended learning and expand hybrid learn-
+ing while improving interaction through technology.
+Results of the survey
+Accelerated growth of MOOCs
+The survey results indicated that 94% of the universities had developed their own MOOCs.
+Speciﬁcally, 54.0% of the universities had developed between one and 50 MOOC(s), 19.3% had
+developed between 51 and 100, and 20.7% had developed more than 100. The universities in
+Wang and Guo 175
+[PAGE 3]
+eastern China had developed more MOOCs than those in the central and western regions: 50% of the
+universities in eastern China, 42.1% in central China, and 28.6% in western China had developed
+more than 50 MOOCs.
+In addition to developing MOOCs independently, 98% of the surveyed universities had intro-
+duced MOOCs from other institutions. Speciﬁcally, 41.3% of the universities had introduced
+between one and 50 MOOC(s), 24.7% had introduced between 51 and 100, and 32.0% had intro-
+duced more than 100. Again, the universities in eastern China introduced more MOOCs than those
+in the central and western regions: 60.7% of the universities in eastern China, 47.4% in central
+China, and 58.6% in western China had introduced more than 50 MOOCs.
+Various measures for blended learning
+Chinese universities have implemented a range of measures to promote blended learning. The
+survey results showed that 14.0% of the universities had adopted one to three supportive measures
+for blended learning, 33.3% had adopted four to six measures, 39.3% had adopted seven to nine
+measures, and 13.3% had adopted between 10 and 12 measures. The measures the surveyed uni-
+versities implemented to promote blended learning are listed in Table 1, from the most to the
+least prevalent. The results showed that the universities tended to focus on supporting hardware
+development before providing training and incentive measures to teachers.
+Extensive application of hybrid learning
+Chinese universities have widely implemented hybrid learning and used their experiences to deepen
+their understanding of the hybrid teaching model. The survey results showed that 86% of the uni-
+versities were allowing students to learn in hybrid learning modes to make their courses available to
+those who could not be physically present in the classroom during the pandemic. Of the surveyed
+university administrators of teaching and learning, 88.7% believed that hybrid learning had become
+the new normal in higher education. Based on their experience in recent years, 82.7% of the admin-
+istrators believed that leadership at the university and departmental levels had developed a deep
+understanding of hybrid learning, and 82% believed that university teachers had a deep understand-
+ing of hybrid learning. Tsinghua University is among the Chinese universities that have made par-
+ticular efforts to implement and improve their provision of hybrid learning in recent years.
+Tsinghua University’s hybrid learning practices
+To ensure that all courses are given on time and that students are catered for both on and off campus,
+Tsinghua University built a system of online and ofﬂine hybrid learning in 2020 and has made the
+following efforts to support the initiative.
+176 ECNU Review of Education 7(1)
+[PAGE 4]
+Infrastructure upgrades
+Tsinghua University has renovated and upgraded 311 classrooms, including installing high-
+deﬁnition cameras, wireless microphones, and electronic education systems to work alongside
+the existing multimedia devices. These classrooms are equipped for online and ofﬂine hybrid learn-
+ing. Meanwhile, Tsinghua University continues to maintain and upgrade its software, such as appli-
+cations for online classrooms and videoconferencing, to create a better learning environment and
+experience for students and ensure the smooth development of hybrid learning.
+Teacher training
+Tsinghua University promptly formed an expert group on hybrid learning to guide its teachers in
+designing diverse teaching plans based on hybrid learning and provide teachers and teaching assis-
+tants with technical training on hybrid learning, demonstration course resources, trial teaching
+opportunities, and so on.
+Optimizing the use of the rain classroom
+Using the rain classroom, Tsinghua University’s teachers can send videos, exercises, audio expla-
+nations, and other materials to students and show slides in classes. Meanwhile, students can use
+Danmu (a form of video commentary used on online videos comprising scrolling through
+viewer messages posted on top of the video in real time) to give feedback to teachers, answer ques-
+tions, and express any difﬁculties they are having understanding the topic; teachers can see stu-
+dents’ answers and learning records and use these data for real-time interactions (Wang, 2017).
+In the fall semesters of 2020 and 2021, three times as many of Tsinghua University’s courses
+Table 1.Measures taken by universities to promote blended learning.
+Measures Rate of adoption (%)
+Introducing smart teaching tools 78.0
+Providing training in relevant technologies 77.3
+Classroom renovation 75.3
+Pedagogical training 69.3
+Granting funds for course development 66.0
+Publishing special documents 65.3
+Giving greater weight to blended learning in promotion among teachers 59.3
+Systematically promoting teachers’ blended learning practices 57.3
+Giving policy support acknowledging teachers’ workload 54.7
+Introducing private cloud platforms 44.0
+Wang and Guo 177
+[PAGE 5]
+were given via the rain classroom than in the fall semester of 2019, and there were four times as
+many classroom interactions between teachers and students. The average number of replays per
+course was about 10 (Wang, 2021).
+Using the rain classroom’s clone classes
+The rain classroom allows for duplication of Tsinghua University’s on-campus teaching scenarios in
+the digital world through clone classes that take place outside of the university. Students from outside
+of Tsinghua University can join Tsinghua classrooms remotely without interfering with on-campus
+teaching and engage in extensive real-time synchronous learning, communication, and interaction,
+an ability that represents an innovative model of“synchronous and remote” teaching (Li & Qiao,
+2020). At the beginning of 2022, Tsinghua University had offered 101 undergraduate and postgradu-
+ate clone classes, attracting nearly 10,000 students and nearly 5,000 teachers throughout China.
+Launching the global hybrid classroom and global open courses
+Tsinghua University invites students from other Chinese and foreign universities to join Tsinghua
+classrooms online so that students at home and abroad can attend the same class. Approximately
+680 students from Tsinghua University, Nanyang Technological University, Politecnico di
+Milano, University of Chile, Mongolian University of Science and Technology, and other univer-
+sities have made online academic visits and had academic credit recognition from participation in
+global hybrid classrooms. Meanwhile, global open courses have attracted 7 million learners from
+around the world.
+Discussion and future prospects
+Advancement of education equity in line with national policies
+On December 27, 2021, the Department of Higher Education of the Ministry of Education issued a
+proposal for revitalizing higher education and promoting quality development in central and
+western China. The proposal aimed to leverage the advantages of teaching and technology in
+eastern China to empower education by connecting the eastern and western regions and facilitating
+the sharing of quality teaching resources between universities in eastern and western China. Twelve
+alliances, organizations, and institutions, including the East and West University Courses Sharing
+Alliance and UOOC (university open online course), have been established to share curriculum
+resources and experimental teaching resources with western universities and provide them with
+technical support (MOE, 2021). In the future, more efforts can be made to advance educational
+equity by facilitating the sharing of resources among eastern, central, and western universities
+while bringing out the inherent power and development vitality of central and western universities.
+178 ECNU Review of Education 7(1)
+[PAGE 6]
+Providing and perfecting incentives and improving the quality of blended learning
+To support the development of blended learning, universities are currently giving priority to the
+upgrading and installation of hardware and facilities, and teachertraining and incentives need to
+be strengthened. The development of blended learning usually occurs in several stages. Atﬁrst,
+universities pay more attention to the development of infrastructure. Gradually, however, the
+focus needs to shift from information technology to improving the development process of
+blended courses, teacher training and incentives, and other endeavors (Graham et al., 2013).
+For example, in the future, the use of blended learning could be considered when determining
+teachers’ workloads and promotions, and more specialized training, awards, and promotions
+for blended learning could be launched to incentivize the development of more high-quality
+blended courses.
+Expanding hybrid learning and improving interaction through technology
+Presently, hybrid learning is mostly focused on the“hybrid” modes of students online and teachers
+and students ofﬂine. Both parties can use information technology to access the classroom to partici-
+pate in real-time interactions and discussions. In the future, the hybrid learning concept could be
+expanded to update educational concepts and models. For example, hybrid learning could refer
+to international, intergenerational, interdisciplinary, inter-sector, and interpersonal hybrids
+(THUNews, 2021) and to the hybridization of different information technologies, such as a
+hybrid of“virtuality and reality” in the context of the metaverse and the application of a broader
+range of arti ﬁcial intelligence, virtual reality, augmented reality, and other technologies to
+improve the sense of reality and interaction in online classrooms. In the future, universities
+should prioritize the iterative upgrading of technologies, combining new technologies with curric-
+ulum design and training objectives, and improving training quality.
+In recent years, China’s higher education system has achieved remarkable results and successes
+through the development of MOOCs, blended learning, and hybrid learning. In 2019 and 2020,
+China hosted the Chinese MOOC Conference and the Global MOOC Conference, published
+China MOOCs Action Declarationand Beijing Declaration on MOOC Development, and estab-
+lished the Global MOOC and Online Education Alliance, showcasing robust development and
+application of online open courses and technologies. More than 52,000 MOOCs have been
+offered in China, attracting 800 million visits. MOOC credits were issued to students over 330
+million times. China is rankedﬁrst in the world for the number and scale of MOOCs (MOE,
+2022). After nearly 10 years of continuous development, especially after the extensive practice
+of online teaching since 2020, online learning, online and ofﬂine blended and hybrid learning,
+and other new models have gradually become the new normal for university education. In the
+Wang and Guo 179
+[PAGE 7]
+future, Chinese universities will accelerate the development and application of MOOC resources
+and develop various teaching and learning modes through the application of digital technologies
+and resources to promote education equity and quality. China’s ideas and solutions on this front
+will further contribute to higher education and online education worldwide.
+Contributorship
+Xiaoxiao Wang was responsible for the survey design, devising the overall idea, writing the bulk of the main
+body of the paper,ﬁnalizing the paper, and responding to reviewers’ comments. Shuangshuang Guo was
+responsible for the literature review, data analysis, and part of the writing.
+Declaration of conﬂicting interests
+The authors declared no potential conﬂicts of interest with respect to the research, authorship, and/or publica-
+tion of this article.
+Ethical statement
+This research was carried out in full compliance with the APA ethical principles of psychologists and code of
+conduct.
+Funding
+The authors received noﬁnancial support for the research, authorship, and/or publication of this article
+References
+Graham, C. R., Woodﬁeld, W., & Harrison, J. B. (2013). A framework for institutional adoption and imple-
+mentation of blended learning in higher education.Internet & Higher Education, 18(July), 4–14. https://
+doi.org/10.1016/j.iheduc.2012.09.003
+Li, M., & Qiao, W. (2020). New exploration of“synchronous and remote” classroom teaching model: Taking
+Tsinghua clone classes as an example [in Chinese].China University Teaching, (10), 79–83. https://doi.org/
+CNKI:SUN:JXCY .0.2020-10-018
+Ministry of Education of the People’s Republic of China. (2020).The Ministry of Education issued guidelines
+on the organisation and management of university online teaching amid the pandemic[in Chinese]. http://
+www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/s5987/202002/t20200205_418131.html
+Ministry of Education of the People’s Republic of China. (2021).Revitalising higher education and servicing
+quality development in central and western China[in Chinese]. http://www.moe.gov.cn/fbh/live/2021/
+53921/sfcl/202112/t20211227_590326.html
+Ministry of Education of the People’s Republic of China. (2022).The Ministry of Education answered repor-
+ters’ questions on“Several opinions of the Ministry of Education and four other departments on further
+strengthening the teaching management of online open courses in ordinary colleges and universities”
+[in Chinese]. http://www.gov.cn/zhengce/2022-04/01/content_5682927.htm
+180 ECNU Review of Education 7(1)
+[PAGE 8]
+THUNews. (2021). The Global MOOC Alliance Online Education Dialogue 2021 ofﬁcially launched [in
+Chinese]. https://www.tsinghua.edu.cn/info/1181/84939.htm
+Wang, S. (2017). Rain classroom: The wisdom teaching tool in the context of mobile internet and big data [in
+Chinese]. Modern Educational Technology, (5), 26–32. https://doi.org/CNKI:SUN:XJJS.0.2017-05-005
+Wang, X. (2021).Online education empowers teaching innovation of universities[in Chinese]. https://www.
+tsinghua.edu.cn/info/1662/86241.htm
+Wang and Guo 181

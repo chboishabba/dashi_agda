@@ -104,16 +104,16 @@ pentonEtAl2021 = covariate-vector-primary-source
 ------------------------------------------------------------------------
 
 data Covariate : Set where
-  fireFrequency5Year
-  largeFeralHerbivorePresence
-  feralCatActivity
-  shrubDensity
-  coarseWoodyDebris
-  rainfall
-  distanceToWatercourse
-  dingoPresence
-  largeEucalyptDensity
-  hollowDensity
+  fireFrequency5Year : Covariate
+  largeFeralHerbivorePresence : Covariate
+  feralCatActivity : Covariate
+  shrubDensity : Covariate
+  coarseWoodyDebris : Covariate
+  rainfall : Covariate
+  distanceToWatercourse : Covariate
+  dingoPresence : Covariate
+  largeEucalyptDensity : Covariate
+  hollowDensity : Covariate
   mammalDetectionHistory : Covariate
 
 record Same82SiteCovariateReceipt : Set where

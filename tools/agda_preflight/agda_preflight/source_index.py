@@ -1,0 +1,1930 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+import hashlib
+import json
+from pathlib import Path
+import sqlite3
+import time
+from typing import Dict, Iterable, List, Optional, Set, Tuple
+
+from .checker import Checker, Diagnostic
+from .cache_identity import analyzer_fingerprints
+from .fixes import SuggestedFix, TextEdit
+from .timing import Profiler
+from .cold_bootstrap import ImportReceipt, discover_closure, diagnose_paths, worker_count
+from .interfaces import (
+    interface_api_base_hash,
+    interface_from_dict,
+    interface_from_summary,
+    interface_public_dependencies,
+    interface_to_dict,
+    resolve_interface_exports,
+)
+
+
+SCHEMA_VERSION = "5"
+
+
+@dataclass(frozen=True)
+class DiagnoseResult:
+    diagnostics: List[Diagnostic]
+    modules: Tuple[str, ...]
+    cache_hit: bool
+    source_hashes: Tuple[Tuple[str, str], ...] = ()
+
+    def as_dict(self) -> dict:
+        return {
+            "modules": list(self.modules),
+            "cache_hit": self.cache_hit,
+            "diagnostics": [diagnostic.as_dict() for diagnostic in self.diagnostics],
+        }
+
+
+@dataclass
+class _ModuleState:
+    path: Path
+    module_name: str
+    source_hash: str
+    api_hash: str
+    imports: Tuple[str, ...]
+    public_imports: Tuple[str, ...]
+    diagnostics: List[Diagnostic]
+
+
+class SourceIndex:
+    """Persistent dirty-source index for fast interactive diagnostics.
+
+    The index is deliberately separate from Agda's semantic/interface cache.
+    It stores source freshness, direct imports and already-computed structural
+    diagnostics. A warm unchanged dependency rollup can therefore be served
+    without constructing tree-sitter or parsing any source file.
+    """
+
+    def __init__(
+        self,
+        root: Path,
+        path: Path,
+        *,
+        profiler: Optional[Profiler] = None,
+        jobs: int = 1,
+    ) -> None:
+        self.root = root.resolve()
+        self.path = path if path.is_absolute() else self.root / path
+        self.profiler = profiler or Profiler()
+        self.jobs = jobs
+        self._checker: Optional[Checker] = None
+        self._visiting: Set[Path] = set()
+        self._states: Dict[Path, _ModuleState] = {}
+        self._reverse_import_cache: Optional[Dict[str, Set[str]]] = None
+
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        with self.profiler.stage("db.open"):
+            self.connection = sqlite3.connect(self.path)
+            self.connection.row_factory = sqlite3.Row
+        with self.profiler.stage("db.schema"):
+            self._configure()
+            self._ensure_schema()
+        with self.profiler.stage("cache.identity"):
+            self._ensure_cache_identity()
+
+    def begin_request(self) -> None:
+        """Clear request-scoped in-memory state for long-lived service use.
+
+        The SQLite connection and persistent cache remain warm, while parsed
+        source/diagnostic state is discarded so filesystem edits are observed
+        on the next operation.
+        """
+        self._states.clear()
+        self._visiting.clear()
+        self._checker = None
+
+    def cache_stats(self) -> dict:
+        module_count = self.connection.execute(
+            "SELECT count(*) FROM modules"
+        ).fetchone()[0]
+        import_count = self.connection.execute(
+            "SELECT count(*) FROM imports"
+        ).fetchone()[0]
+        interface_count = self.connection.execute(
+            "SELECT count(*) FROM modules WHERE interface_json != ''"
+        ).fetchone()[0]
+        diagnostic_count = self.connection.execute(
+            "SELECT count(*) FROM modules WHERE diagnostics_json != ''"
+        ).fetchone()[0]
+        return {
+            "modules": int(module_count),
+            "imports": int(import_count),
+            "interfaces": int(interface_count),
+            "diagnostic_modules": int(diagnostic_count),
+            "database": str(self.path),
+        }
+
+    def record_promotion(self, receipt: dict) -> int:
+        payload = json.dumps(
+            receipt,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        cursor = self.connection.execute(
+            """
+            INSERT INTO promotion_receipts(
+                created_ns,
+                module_name,
+                target_path,
+                source_sha256,
+                status,
+                promoter_returncode,
+                semantic_freshness,
+                receipt_json
+            )
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                time.time_ns(),
+                receipt["module_name"],
+                receipt["target_path"],
+                receipt["source_sha256"],
+                receipt["status"],
+                receipt.get("promoter_returncode"),
+                receipt.get("semantic_freshness", "unknown"),
+                payload,
+            ),
+        )
+        self.connection.commit()
+        return int(cursor.lastrowid)
+
+    def promotion_history(
+        self,
+        *,
+        module_name: Optional[str] = None,
+        limit: int = 20,
+    ) -> List[dict]:
+        if limit < 1:
+            raise ValueError("promotion history limit must be positive")
+        if module_name is None:
+            rows = self.connection.execute(
+                """
+                SELECT receipt_id, receipt_json
+                FROM promotion_receipts
+                ORDER BY receipt_id DESC
+                LIMIT ?
+                """,
+                (limit,),
+            ).fetchall()
+        else:
+            rows = self.connection.execute(
+                """
+                SELECT receipt_id, receipt_json
+                FROM promotion_receipts
+                WHERE module_name = ?
+                ORDER BY receipt_id DESC
+                LIMIT ?
+                """,
+                (module_name, limit),
+            ).fetchall()
+        result = []
+        for row in rows:
+            payload = json.loads(row["receipt_json"])
+            payload["receipt_id"] = int(row["receipt_id"])
+            result.append(payload)
+        return result
+
+    def close(self) -> None:
+        self.connection.close()
+
+    def __enter__(self) -> "SourceIndex":
+        return self
+
+    def __exit__(self, exc_type, exc, tb) -> None:
+        self.close()
+
+    def _configure(self) -> None:
+        self.connection.execute("PRAGMA journal_mode=WAL")
+        self.connection.execute("PRAGMA synchronous=NORMAL")
+        self.connection.execute("PRAGMA foreign_keys=ON")
+        self.connection.execute("PRAGMA temp_store=MEMORY")
+        self.connection.execute("PRAGMA busy_timeout=5000")
+
+    def _ensure_schema(self) -> None:
+        self.connection.executescript(
+            """
+            CREATE TABLE IF NOT EXISTS meta (
+                key TEXT PRIMARY KEY,
+                value TEXT NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS modules (
+                path TEXT PRIMARY KEY,
+                module_name TEXT NOT NULL,
+                mtime_ns INTEGER NOT NULL,
+                size INTEGER NOT NULL,
+                source_sha256 TEXT NOT NULL,
+                api_base_sha256 TEXT NOT NULL,
+                api_fingerprint TEXT NOT NULL,
+                public_imports_json TEXT NOT NULL,
+                interface_json TEXT NOT NULL,
+                dependency_fingerprint TEXT NOT NULL,
+                diagnostics_json TEXT NOT NULL,
+                top_diagnostic_json TEXT NOT NULL,
+                top_fixable_diagnostic_json TEXT NOT NULL,
+                updated_ns INTEGER NOT NULL
+            );
+
+            CREATE UNIQUE INDEX IF NOT EXISTS modules_by_name
+                ON modules(module_name);
+
+            CREATE TABLE IF NOT EXISTS imports (
+                importer_path TEXT NOT NULL
+                    REFERENCES modules(path) ON DELETE CASCADE,
+                imported_module TEXT NOT NULL,
+                PRIMARY KEY (importer_path, imported_module)
+            ) WITHOUT ROWID;
+
+            CREATE INDEX IF NOT EXISTS imports_by_module
+                ON imports(imported_module);
+
+            CREATE TABLE IF NOT EXISTS promotion_receipts (
+                receipt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_ns INTEGER NOT NULL,
+                module_name TEXT NOT NULL,
+                target_path TEXT NOT NULL,
+                source_sha256 TEXT NOT NULL,
+                status TEXT NOT NULL,
+                promoter_returncode INTEGER,
+                semantic_freshness TEXT NOT NULL,
+                receipt_json TEXT NOT NULL
+            );
+
+            CREATE INDEX IF NOT EXISTS promotion_receipts_by_module
+                ON promotion_receipts(module_name, receipt_id DESC);
+            """
+        )
+        self.connection.execute(
+            "INSERT OR IGNORE INTO meta(key, value) VALUES('schema_version', ?)",
+            (SCHEMA_VERSION,),
+        )
+        row = self.connection.execute(
+            "SELECT value FROM meta WHERE key = 'schema_version'"
+        ).fetchone()
+        version = row["value"] if row is not None else None
+
+        columns = {
+            item["name"]
+            for item in self.connection.execute(
+                "PRAGMA table_info(modules)"
+            ).fetchall()
+        }
+
+        if version == "1":
+            if "api_base_sha256" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "api_base_sha256 TEXT NOT NULL DEFAULT ''"
+                )
+            if "api_fingerprint" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "api_fingerprint TEXT NOT NULL DEFAULT ''"
+                )
+            if "public_imports_json" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "public_imports_json TEXT NOT NULL DEFAULT '[]'"
+                )
+            self.connection.execute(
+                "UPDATE modules SET "
+                "api_base_sha256 = CASE WHEN api_base_sha256 = '' "
+                "THEN source_sha256 ELSE api_base_sha256 END, "
+                "api_fingerprint = CASE WHEN api_fingerprint = '' "
+                "THEN source_sha256 ELSE api_fingerprint END"
+            )
+            version = "2"
+
+        if version == "2":
+            columns = {
+                item["name"]
+                for item in self.connection.execute(
+                    "PRAGMA table_info(modules)"
+                ).fetchall()
+            }
+            if "interface_json" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "interface_json TEXT NOT NULL DEFAULT ''"
+                )
+            version = "3"
+
+        if version == "3":
+            columns = {
+                item["name"]
+                for item in self.connection.execute(
+                    "PRAGMA table_info(modules)"
+                ).fetchall()
+            }
+            if "top_diagnostic_json" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "top_diagnostic_json TEXT NOT NULL DEFAULT ''"
+                )
+            if "top_fixable_diagnostic_json" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "top_fixable_diagnostic_json TEXT NOT NULL DEFAULT ''"
+                )
+            version = "4"
+
+        if version == "4":
+            # promotion_receipts is created idempotently above; the version
+            # bump records that durable semantic-promotion receipts are now
+            # part of the source-index contract.
+            self.connection.execute(
+                "UPDATE meta SET value = ? WHERE key = 'schema_version'",
+                (SCHEMA_VERSION,),
+            )
+            version = SCHEMA_VERSION
+
+        if version != SCHEMA_VERSION:
+            raise RuntimeError(
+                "unsupported dashi-agda source-index schema; "
+                "remove the cache or migrate it"
+            )
+
+        self.connection.execute(
+            "UPDATE meta SET value = ? WHERE key = 'schema_version'",
+            (SCHEMA_VERSION,),
+        )
+        self.connection.commit()
+
+    def _ensure_cache_identity(self) -> None:
+        interface_fingerprint, diagnostic_fingerprint = (
+            analyzer_fingerprints()
+        )
+        rows = self.connection.execute(
+            "SELECT key, value FROM meta WHERE key IN (?, ?)",
+            (
+                "interface_analyzer_fingerprint",
+                "diagnostic_analyzer_fingerprint",
+            ),
+        ).fetchall()
+        previous = {
+            row["key"]: row["value"]
+            for row in rows
+        }
+        previous_interface = previous.get(
+            "interface_analyzer_fingerprint"
+        )
+        previous_diagnostic = previous.get(
+            "diagnostic_analyzer_fingerprint"
+        )
+
+        interface_changed = (
+            previous_interface != interface_fingerprint
+        )
+        diagnostic_changed = (
+            previous_diagnostic != diagnostic_fingerprint
+        )
+
+        if interface_changed:
+            cursor = self.connection.execute(
+                "UPDATE modules SET "
+                "api_base_sha256 = '', "
+                "api_fingerprint = '', "
+                "interface_json = '', "
+                "dependency_fingerprint = '', "
+                "diagnostics_json = '', "
+                "top_diagnostic_json = '', "
+                "top_fixable_diagnostic_json = ''"
+            )
+            self.profiler.count(
+                "cache_interface_invalidated_modules",
+                max(0, cursor.rowcount),
+            )
+        elif diagnostic_changed:
+            cursor = self.connection.execute(
+                "UPDATE modules SET "
+                "diagnostics_json = '', "
+                "top_diagnostic_json = '', "
+                "top_fixable_diagnostic_json = ''"
+            )
+            self.profiler.count(
+                "cache_diagnostic_invalidated_modules",
+                max(0, cursor.rowcount),
+            )
+
+        self.connection.execute(
+            "INSERT INTO meta(key, value) VALUES(?, ?) "
+            "ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+            (
+                "interface_analyzer_fingerprint",
+                interface_fingerprint,
+            ),
+        )
+        self.connection.execute(
+            "INSERT INTO meta(key, value) VALUES(?, ?) "
+            "ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+            (
+                "diagnostic_analyzer_fingerprint",
+                diagnostic_fingerprint,
+            ),
+        )
+        self.connection.commit()
+
+    def _module_row_by_name(self, module: str):
+        return self.connection.execute(
+            "SELECT * FROM modules WHERE module_name = ?",
+            (module,),
+        ).fetchone()
+
+    def _load_interface_from_db(
+        self,
+        module: str,
+    ):
+        interfaces = {}
+        active = [module]
+        seen = set()
+
+        while active:
+            current = active.pop()
+            if current in seen:
+                continue
+            seen.add(current)
+            row = self._module_row_by_name(current)
+            if row is None:
+                self.profiler.count("incremental_interface_cache_misses")
+                return None
+
+            path = self.root / row["path"]
+            try:
+                stat = self._stat(path)
+            except OSError:
+                self.profiler.count("incremental_interface_cache_misses")
+                return None
+            if not self._fresh(row, stat):
+                self.profiler.count("incremental_interface_cache_misses")
+                return None
+
+            payload = row["interface_json"]
+            if not payload:
+                self.profiler.count("incremental_interface_cache_misses")
+                return None
+            try:
+                interface = interface_from_dict(json.loads(payload))
+            except (TypeError, ValueError, KeyError, json.JSONDecodeError):
+                self.profiler.count("incremental_interface_cache_misses")
+                return None
+
+            interfaces[current] = interface
+            for reexport in interface.public_reexports:
+                if reexport.module not in seen:
+                    active.append(reexport.module)
+
+        resolved = resolve_interface_exports(interfaces)
+        result = resolved.get(module)
+        if result is not None:
+            self.profiler.count("incremental_interface_cache_hits")
+        return result
+
+    def _checker_instance(self) -> Checker:
+        if self._checker is None:
+            self.profiler.count("checker_instances")
+            self._checker = Checker(
+                self.root,
+                profiler=self.profiler,
+                interface_loader=self._load_interface_from_db,
+            )
+        return self._checker
+
+    def _relative(self, path: Path) -> str:
+        return path.resolve().relative_to(self.root).as_posix()
+
+    def _module_path(self, module: str) -> Path:
+        return self.root.joinpath(*module.split(".")).with_suffix(".agda")
+
+    def _row(self, path: Path):
+        return self.connection.execute(
+            "SELECT * FROM modules WHERE path = ?",
+            (self._relative(path),),
+        ).fetchone()
+
+    def _imports_for_path(self, relative_path: str) -> Tuple[str, ...]:
+        rows = self.connection.execute(
+            "SELECT imported_module FROM imports "
+            "WHERE importer_path = ? ORDER BY imported_module",
+            (relative_path,),
+        ).fetchall()
+        return tuple(row["imported_module"] for row in rows)
+
+    def _cached_import_receipt(
+        self,
+        path: Path,
+    ) -> Optional[ImportReceipt]:
+        row = self._row(path)
+        if row is None:
+            self.profiler.count("cold_interface_cache_misses")
+            return None
+        try:
+            stat = self._stat(path)
+        except OSError:
+            self.profiler.count("cold_interface_cache_misses")
+            return None
+        if not self._fresh(row, stat):
+            self.profiler.count("cold_interface_cache_misses")
+            return None
+        payload = row["interface_json"]
+        if not payload:
+            self.profiler.count("cold_interface_cache_misses")
+            return None
+
+        self.profiler.count("cold_interface_cache_hits")
+        return ImportReceipt(
+            path=str(path.resolve()),
+            module_name=row["module_name"],
+            imports=self._imports_for_path(row["path"]),
+            interface=None,
+            interface_json=payload,
+            api_base_hash=row["api_base_sha256"],
+            public_imports=tuple(
+                json.loads(row["public_imports_json"])
+            ),
+            files_parsed=0,
+            parse_ns=0,
+        )
+
+    def _stat(self, path: Path) -> Tuple[int, int]:
+        self.profiler.count("files_stat")
+        stat = path.stat()
+        return stat.st_mtime_ns, stat.st_size
+
+    @staticmethod
+    def _fresh(row, stat: Tuple[int, int]) -> bool:
+        return (
+            row is not None
+            and int(row["mtime_ns"]) == stat[0]
+            and int(row["size"]) == stat[1]
+        )
+
+    def _diagnostic_dict(self, diagnostic: Diagnostic) -> dict:
+        payload = diagnostic.as_dict()
+        path = Path(payload["path"])
+        try:
+            payload["path"] = path.resolve().relative_to(self.root).as_posix()
+        except ValueError:
+            payload["path"] = str(path)
+        return payload
+
+    def _diagnostic_from_dict(self, payload: dict) -> Diagnostic:
+        path = Path(payload["path"])
+        if not path.is_absolute():
+            path = self.root / path
+
+        fixes = []
+        for item in payload.get("fixes", []):
+            edits = []
+            for edit in item.get("edits", []):
+                edit_path = Path(edit["path"])
+                if not edit_path.is_absolute():
+                    edit_path = self.root / edit_path
+                edits.append(
+                    TextEdit(
+                        path=edit_path,
+                        start_line=int(edit["start_line"]),
+                        start_column=int(edit["start_column"]),
+                        end_line=int(edit["end_line"]),
+                        end_column=int(edit["end_column"]),
+                        replacement=edit["replacement"],
+                        start_byte=(
+                            int(edit["start_byte"])
+                            if edit.get("start_byte") is not None
+                            else None
+                        ),
+                        end_byte=(
+                            int(edit["end_byte"])
+                            if edit.get("end_byte") is not None
+                            else None
+                        ),
+                    )
+                )
+            fixes.append(
+                SuggestedFix(
+                    title=item["title"],
+                    applicability=item["applicability"],
+                    rationale=item["rationale"],
+                    validation=item["validation"],
+                    edits=tuple(edits),
+                )
+            )
+
+        return Diagnostic(
+            code=payload["code"],
+            message=payload["message"],
+            path=path,
+            line=int(payload["line"]),
+            column=int(payload.get("column", 1)),
+            hint=payload.get("hint"),
+            severity=payload.get("severity", "error"),
+            confidence=payload.get("confidence", "high"),
+            evidence=payload.get("evidence", "dashi-index"),
+            minimum_evidence=payload.get("minimum_evidence", "dashi-index"),
+            evidence_sufficient=bool(payload.get("evidence_sufficient", True)),
+            root_cause=payload.get("root_cause"),
+            explanation=payload.get("explanation"),
+            expected=payload.get("expected"),
+            found=payload.get("found"),
+            fixes=tuple(fixes),
+        )
+
+    def _decode_diagnostics(self, row) -> List[Diagnostic]:
+        return [
+            self._diagnostic_from_dict(item)
+            for item in json.loads(row["diagnostics_json"])
+        ]
+
+    @staticmethod
+    def _api_fingerprint(
+        api_base_hash: str,
+        public_dependencies: Iterable[Tuple[str, str]],
+    ) -> str:
+        digest = hashlib.sha256()
+        digest.update(api_base_hash.encode("ascii"))
+        digest.update(b"\n")
+        for module, api_hash in sorted(public_dependencies):
+            digest.update(module.encode("utf-8"))
+            digest.update(b"\0")
+            digest.update(api_hash.encode("ascii"))
+            digest.update(b"\n")
+        return digest.hexdigest()
+
+    @staticmethod
+    def _dependency_fingerprint(
+        dependencies: Iterable[Tuple[str, str]],
+    ) -> str:
+        digest = hashlib.sha256()
+        for module, source_hash in sorted(dependencies):
+            digest.update(module.encode("utf-8"))
+            digest.update(b"\0")
+            digest.update(source_hash.encode("ascii"))
+            digest.update(b"\n")
+        return digest.hexdigest()
+
+    @staticmethod
+    def _diagnostic_priority(diagnostic: Diagnostic):
+        return (
+            0 if diagnostic.severity == "error" else 1,
+            0 if diagnostic.evidence_sufficient else 1,
+            0 if any(fix.edits for fix in diagnostic.fixes) else 1,
+            str(diagnostic.path),
+            diagnostic.line,
+            diagnostic.column,
+            diagnostic.code,
+        )
+
+    def _top_diagnostic_payloads(
+        self,
+        diagnostics: Iterable[Diagnostic],
+    ) -> Tuple[str, str]:
+        items = list(diagnostics)
+        if not items:
+            return "", ""
+        top = min(items, key=self._diagnostic_priority)
+        fixable = [item for item in items if item.fixes]
+        top_fixable = (
+            min(fixable, key=self._diagnostic_priority)
+            if fixable
+            else None
+        )
+        top_payload = json.dumps(
+            self._diagnostic_dict(top),
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        fixable_payload = (
+            json.dumps(
+                self._diagnostic_dict(top_fixable),
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+            if top_fixable is not None
+            else ""
+        )
+        return top_payload, fixable_payload
+
+    def _store(
+        self,
+        path: Path,
+        module_name: str,
+        stat: Tuple[int, int],
+        source_hash: str,
+        api_base_hash: str,
+        api_hash: str,
+        public_imports: Iterable[str],
+        interface,
+        dependency_fingerprint: str,
+        imports: Iterable[str],
+        diagnostics: List[Diagnostic],
+        *,
+        commit: bool = True,
+        diagnostics_payload: Optional[str] = None,
+        interface_payload: Optional[str] = None,
+    ) -> None:
+        relative = self._relative(path)
+        payload = diagnostics_payload
+        if payload is None:
+            payload = json.dumps(
+                [self._diagnostic_dict(item) for item in diagnostics],
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+        top_payload, top_fixable_payload = self._top_diagnostic_payloads(
+            diagnostics
+        )
+        with self.profiler.stage("db.write"):
+            self.connection.execute(
+                """
+                INSERT INTO modules(
+                    path, module_name, mtime_ns, size, source_sha256,
+                    api_base_sha256, api_fingerprint, public_imports_json,
+                    interface_json, dependency_fingerprint, diagnostics_json,
+                    top_diagnostic_json, top_fixable_diagnostic_json, updated_ns
+                )
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(path) DO UPDATE SET
+                    module_name = excluded.module_name,
+                    mtime_ns = excluded.mtime_ns,
+                    size = excluded.size,
+                    source_sha256 = excluded.source_sha256,
+                    api_base_sha256 = excluded.api_base_sha256,
+                    api_fingerprint = excluded.api_fingerprint,
+                    public_imports_json = excluded.public_imports_json,
+                    interface_json = excluded.interface_json,
+                    dependency_fingerprint = excluded.dependency_fingerprint,
+                    diagnostics_json = excluded.diagnostics_json,
+                    top_diagnostic_json = excluded.top_diagnostic_json,
+                    top_fixable_diagnostic_json = excluded.top_fixable_diagnostic_json,
+                    updated_ns = excluded.updated_ns
+                """,
+                (
+                    relative,
+                    module_name,
+                    stat[0],
+                    stat[1],
+                    source_hash,
+                    api_base_hash,
+                    api_hash,
+                    json.dumps(sorted(set(public_imports))),
+                    (
+                        interface_payload
+                        if interface_payload is not None
+                        else (
+                            json.dumps(
+                                interface_to_dict(interface),
+                                sort_keys=True,
+                                separators=(",", ":"),
+                            )
+                            if interface is not None
+                            else ""
+                        )
+                    ),
+                    dependency_fingerprint,
+                    payload,
+                    top_payload,
+                    top_fixable_payload,
+                    time.time_ns(),
+                ),
+            )
+            self.connection.execute(
+                "DELETE FROM imports WHERE importer_path = ?",
+                (relative,),
+            )
+            self.connection.executemany(
+                "INSERT INTO imports(importer_path, imported_module) VALUES(?, ?)",
+                [(relative, module) for module in sorted(set(imports))],
+            )
+            self._reverse_import_cache = None
+            if commit:
+                self.connection.commit()
+
+    def _cached_closure(
+        self,
+        target: Path,
+        *,
+        projection: str = "diagnostics",
+    ) -> Optional[List[sqlite3.Row]]:
+        target_rel = self._relative(target)
+        if projection == "diagnostics":
+            select = (
+                "m.path, m.module_name, m.mtime_ns, m.size, "
+                "m.source_sha256, m.diagnostics_json"
+            )
+        elif projection == "candidates":
+            select = (
+                "m.path, m.module_name, m.mtime_ns, m.size, "
+                "m.top_diagnostic_json, m.top_fixable_diagnostic_json, "
+                "(m.diagnostics_json = '[]') AS diagnostics_empty, "
+                "(m.diagnostics_json = '') AS diagnostics_invalid"
+            )
+        else:
+            raise ValueError(
+                f"unknown cached closure projection: {projection}"
+            )
+
+        query = f"""
+            WITH RECURSIVE closure(path, module_name) AS (
+                SELECT path, module_name
+                FROM modules
+                WHERE path = ?
+                UNION
+                SELECT m.path, m.module_name
+                FROM closure c
+                JOIN imports i ON i.importer_path = c.path
+                JOIN modules m ON m.module_name = i.imported_module
+            )
+            SELECT {select}
+            FROM closure c
+            JOIN modules m ON m.path = c.path
+            ORDER BY m.module_name
+        """
+        with self.profiler.stage("closure.lookup"):
+            rows = self.connection.execute(
+                query,
+                (target_rel,),
+            ).fetchall()
+        if not rows:
+            return None
+        return rows
+
+    def _warm_result(self, target: Path) -> Optional[DiagnoseResult]:
+        rows = self._cached_closure(target)
+        if rows is None:
+            self.profiler.count("closure_cache_miss")
+            return None
+
+        diagnostics: List[Diagnostic] = []
+        modules: List[str] = []
+
+        with self.profiler.stage("source.stat"):
+            for row in rows:
+                path = self.root / row["path"]
+                try:
+                    stat = self._stat(path)
+                except OSError:
+                    self.profiler.count("closure_cache_miss")
+                    return None
+                if not self._fresh(row, stat):
+                    self.profiler.count("closure_cache_miss")
+                    return None
+                if not row["diagnostics_json"]:
+                    self.profiler.count("closure_cache_miss")
+                    return None
+                modules.append(row["module_name"])
+                decoded = self._decode_diagnostics(row)
+                diagnostics.extend(decoded)
+                self.profiler.count("diagnostics_cached", len(decoded))
+                self.profiler.count("modules_cached")
+
+        self.profiler.count("closure_cache_hit")
+        self.profiler.count("modules_in_closure", len(rows))
+        return DiagnoseResult(
+            diagnostics=sorted(
+                diagnostics,
+                key=lambda item: (str(item.path), item.line, item.column, item.code),
+            ),
+            modules=tuple(modules),
+            cache_hit=True,
+            source_hashes=tuple(
+                (row["module_name"], row["source_sha256"])
+                for row in rows
+            ),
+        )
+
+    def source_identity(
+        self,
+        path: Path,
+    ) -> Optional[Tuple[str, str]]:
+        path = path if path.is_absolute() else self.root / path
+        path = path.resolve()
+        try:
+            relative = self._relative(path)
+        except ValueError:
+            return None
+        row = self.connection.execute(
+            "SELECT module_name, source_sha256 FROM modules WHERE path = ?",
+            (relative,),
+        ).fetchone()
+        if row is None:
+            return None
+        return row["module_name"], row["source_sha256"]
+
+    def source_state(
+        self,
+        path: Path,
+    ) -> Optional[Tuple[str, str, str]]:
+        """Return module name, source hash and API fingerprint from the index."""
+        path = path if path.is_absolute() else self.root / path
+        path = path.resolve()
+        try:
+            relative = self._relative(path)
+        except ValueError:
+            return None
+        row = self.connection.execute(
+            "SELECT module_name, source_sha256, api_fingerprint "
+            "FROM modules WHERE path = ?",
+            (relative,),
+        ).fetchone()
+        if row is None:
+            return None
+        return (
+            row["module_name"],
+            row["source_sha256"],
+            row["api_fingerprint"],
+        )
+
+    def cached_closure_modules(
+        self,
+        target: Path,
+    ) -> Optional[Tuple[str, ...]]:
+        """Return indexed closure membership without touching the filesystem."""
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+        rows = self._cached_closure(target, projection="candidates")
+        if rows is None:
+            return None
+        self.profiler.count("trusted_closure_modules", len(rows))
+        return tuple(row["module_name"] for row in rows)
+
+    def closure_source_hashes(
+        self,
+        target: Path,
+    ) -> Optional[Tuple[Tuple[str, str], ...]]:
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+        rows = self._cached_closure(target)
+        if rows is None:
+            return None
+
+        with self.profiler.stage("semantic.source_freshness"):
+            identities = []
+            for row in rows:
+                path = self.root / row["path"]
+                try:
+                    stat = self._stat(path)
+                except OSError:
+                    return None
+                if not self._fresh(row, stat):
+                    return None
+                identities.append(
+                    (row["module_name"], row["source_sha256"])
+                )
+        return tuple(sorted(identities))
+
+    def find_cached_diagnostic(
+        self,
+        target: Path,
+        diagnostic_id: str,
+    ) -> Optional[Diagnostic]:
+        """Find a diagnostic from compact closure candidates without full decode.
+
+        This is optimized for the normal agent loop where apply-fix receives
+        the ID just returned by next-error. Arbitrary non-top IDs intentionally
+        fall back to full diagnosis at the caller.
+        """
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+        rows = self._cached_closure(
+            target,
+            projection="candidates",
+        )
+        if rows is None:
+            return None
+
+        seen_payloads = set()
+        with self.profiler.stage("source.stat"):
+            for row in rows:
+                path = self.root / row["path"]
+                try:
+                    stat = self._stat(path)
+                except OSError:
+                    return None
+                if not self._fresh(row, stat):
+                    return None
+
+                for column in (
+                    "top_diagnostic_json",
+                    "top_fixable_diagnostic_json",
+                ):
+                    payload = row[column]
+                    if not payload or payload in seen_payloads:
+                        continue
+                    seen_payloads.add(payload)
+                    try:
+                        diagnostic = self._diagnostic_from_dict(
+                            json.loads(payload)
+                        )
+                    except (
+                        TypeError,
+                        ValueError,
+                        KeyError,
+                        json.JSONDecodeError,
+                    ):
+                        continue
+                    self.profiler.count(
+                        "diagnostic_candidate_payloads_decoded"
+                    )
+                    if diagnostic.diagnostic_id == diagnostic_id:
+                        self.profiler.count(
+                            "diagnostic_candidate_lookup_hits"
+                        )
+                        return diagnostic
+
+        self.profiler.count("diagnostic_candidate_lookup_misses")
+        return None
+
+    def affected_modules(self, target: Path) -> Tuple[str, ...]:
+        """Return the indexed reverse-import frontier, nearest consumers first."""
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+
+        identity = self.source_identity(target)
+        if identity is None:
+            self.diagnose(target)
+            identity = self.source_identity(target)
+        if identity is None:
+            return ()
+
+        start_module, _ = identity
+        reverse = self._reverse_import_cache
+        if reverse is None:
+            with self.profiler.stage("affected.reverse_graph_load"):
+                rows = self.connection.execute(
+                    """
+                    SELECT m.module_name AS importer, i.imported_module AS imported
+                    FROM imports i
+                    JOIN modules m ON m.path = i.importer_path
+                    """
+                ).fetchall()
+                reverse = {}
+                for row in rows:
+                    reverse.setdefault(row["imported"], set()).add(row["importer"])
+            self._reverse_import_cache = reverse
+            self.profiler.count("affected_reverse_graph_cache_misses")
+        else:
+            self.profiler.count("affected_reverse_graph_cache_hits")
+
+        order: List[str] = []
+        seen = {start_module}
+        frontier = [start_module]
+        while frontier:
+            current = sorted(frontier)
+            order.extend(current)
+            following = []
+            for module in current:
+                for consumer in sorted(reverse.get(module, ())):
+                    if consumer in seen:
+                        continue
+                    seen.add(consumer)
+                    following.append(consumer)
+            frontier = following
+
+        self.profiler.count("affected_modules", len(order))
+        return tuple(order)
+
+
+    def cached_candidate_snapshot(
+        self,
+        target: Path,
+        *,
+        validate_freshness: bool = True,
+    ) -> Optional[Tuple[Tuple[str, Optional[Diagnostic], Optional[Diagnostic]], ...]]:
+        """Return one compact diagnostic candidate pair per closure module.
+
+        This is intended for long-lived services: decode the persistent
+        top-diagnostic payloads once, then keep the resulting objects in an
+        in-memory rollup priority structure. It deliberately avoids decoding
+        full diagnostics_json payloads.
+        """
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+        rows = self._cached_closure(
+            target,
+            projection="candidates",
+        )
+        if rows is None:
+            return None
+
+        snapshot = []
+        if not validate_freshness:
+            self.profiler.count(
+                "trusted_closure_stat_skips",
+                len(rows),
+            )
+
+        upgraded = False
+        for row in rows:
+            if validate_freshness:
+                path = self.root / row["path"]
+                with self.profiler.stage("source.stat"):
+                    try:
+                        stat = self._stat(path)
+                    except OSError:
+                        return None
+                    if not self._fresh(row, stat):
+                        return None
+
+            if row["diagnostics_invalid"]:
+                return None
+
+            top_payload = row["top_diagnostic_json"]
+            fixable_payload = row["top_fixable_diagnostic_json"]
+            if (
+                not row["diagnostics_empty"]
+                and not top_payload
+            ):
+                diagnostic_row = self.connection.execute(
+                    "SELECT diagnostics_json FROM modules "
+                    "WHERE path = ?",
+                    (row["path"],),
+                ).fetchone()
+                if diagnostic_row is None:
+                    return None
+                try:
+                    module_diagnostics = self._decode_diagnostics(
+                        diagnostic_row
+                    )
+                except (
+                    TypeError,
+                    ValueError,
+                    KeyError,
+                    json.JSONDecodeError,
+                ):
+                    return None
+                top_payload, fixable_payload = (
+                    self._top_diagnostic_payloads(module_diagnostics)
+                )
+                self.connection.execute(
+                    "UPDATE modules SET "
+                    "top_diagnostic_json = ?, "
+                    "top_fixable_diagnostic_json = ? "
+                    "WHERE path = ?",
+                    (
+                        top_payload,
+                        fixable_payload,
+                        row["path"],
+                    ),
+                )
+                upgraded = True
+                self.profiler.count(
+                    "candidate_snapshot_rows_upgraded"
+                )
+
+            decoded = []
+            for payload in (
+                top_payload,
+                fixable_payload,
+            ):
+                if not payload:
+                    decoded.append(None)
+                    continue
+                try:
+                    decoded.append(
+                        self._diagnostic_from_dict(
+                            json.loads(payload)
+                        )
+                    )
+                except (
+                    TypeError,
+                    ValueError,
+                    KeyError,
+                    json.JSONDecodeError,
+                ):
+                    return None
+
+            snapshot.append(
+                (
+                    row["module_name"],
+                    decoded[0],
+                    decoded[1],
+                )
+            )
+
+        self.profiler.count(
+            "candidate_snapshot_modules",
+            len(snapshot),
+        )
+        self.profiler.count(
+            "candidate_snapshot_payloads_decoded",
+            sum(
+                int(top is not None) + int(fixable is not None)
+                for _, top, fixable in snapshot
+            ),
+        )
+        if upgraded:
+            self.connection.commit()
+        return tuple(snapshot)
+
+    def cached_module_candidates(
+        self,
+        path: Path,
+    ) -> Tuple[Optional[Diagnostic], Optional[Diagnostic]]:
+        """Return persisted top candidates for one indexed module."""
+        path = path if path.is_absolute() else self.root / path
+        path = path.resolve()
+        try:
+            relative = self._relative(path)
+        except ValueError:
+            return None, None
+        row = self.connection.execute(
+            "SELECT top_diagnostic_json, top_fixable_diagnostic_json "
+            "FROM modules WHERE path = ?",
+            (relative,),
+        ).fetchone()
+        if row is None:
+            return None, None
+
+        result = []
+        for column in (
+            "top_diagnostic_json",
+            "top_fixable_diagnostic_json",
+        ):
+            payload = row[column]
+            if not payload:
+                result.append(None)
+                continue
+            try:
+                result.append(
+                    self._diagnostic_from_dict(
+                        json.loads(payload)
+                    )
+                )
+            except (
+                TypeError,
+                ValueError,
+                KeyError,
+                json.JSONDecodeError,
+            ):
+                result.append(None)
+        return result[0], result[1]
+
+    def next_diagnostic(
+        self,
+        target: Path,
+        *,
+        require_fix: bool = False,
+        validate_freshness: bool = True,
+    ) -> Optional[Diagnostic]:
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+        rows = self._cached_closure(
+            target,
+            projection="candidates",
+        )
+        if rows is None:
+            result = self.diagnose(target)
+            candidates = [
+                item for item in result.diagnostics
+                if (not require_fix or item.fixes)
+            ]
+            return (
+                min(candidates, key=self._diagnostic_priority)
+                if candidates
+                else None
+            )
+
+        payload_column = (
+            "top_fixable_diagnostic_json"
+            if require_fix
+            else "top_diagnostic_json"
+        )
+        candidates: List[Diagnostic] = []
+        if not validate_freshness:
+            self.profiler.count("trusted_closure_stat_skips", len(rows))
+
+        for row in rows:
+            if validate_freshness:
+                path = self.root / row["path"]
+                with self.profiler.stage("source.stat"):
+                    try:
+                        stat = self._stat(path)
+                    except OSError:
+                        result = self.diagnose(target)
+                        fallback = [
+                            item for item in result.diagnostics
+                            if (not require_fix or item.fixes)
+                        ]
+                        return (
+                            min(fallback, key=self._diagnostic_priority)
+                            if fallback
+                            else None
+                        )
+                    if not self._fresh(row, stat):
+                        result = self.diagnose(target)
+                        fallback = [
+                            item for item in result.diagnostics
+                            if (not require_fix or item.fixes)
+                        ]
+                        return (
+                            min(fallback, key=self._diagnostic_priority)
+                            if fallback
+                            else None
+                        )
+            payload = row[payload_column]
+            if not payload:
+                if row["diagnostics_empty"]:
+                    continue
+                if row["diagnostics_invalid"]:
+                    result = self.diagnose(target)
+                    fallback = [
+                        item for item in result.diagnostics
+                        if (not require_fix or item.fixes)
+                    ]
+                    return (
+                        min(
+                            fallback,
+                            key=self._diagnostic_priority,
+                        )
+                        if fallback
+                        else None
+                    )
+                diagnostic_row = self.connection.execute(
+                    "SELECT diagnostics_json FROM modules "
+                    "WHERE path = ?",
+                    (row["path"],),
+                ).fetchone()
+                if diagnostic_row is None:
+                    continue
+                try:
+                    module_diagnostics = self._decode_diagnostics(
+                        diagnostic_row
+                    )
+                except (
+                    TypeError,
+                    ValueError,
+                    KeyError,
+                    json.JSONDecodeError,
+                ):
+                    module_diagnostics = []
+                top_payload, top_fixable_payload = (
+                    self._top_diagnostic_payloads(module_diagnostics)
+                )
+                self.connection.execute(
+                    "UPDATE modules SET "
+                    "top_diagnostic_json = ?, "
+                    "top_fixable_diagnostic_json = ? "
+                    "WHERE path = ?",
+                    (
+                        top_payload,
+                        top_fixable_payload,
+                        row["path"],
+                    ),
+                )
+                self.profiler.count(
+                    "next_error_candidate_rows_upgraded"
+                )
+                payload = (
+                    top_fixable_payload
+                    if require_fix
+                    else top_payload
+                )
+            if not payload:
+                continue
+            try:
+                candidates.append(
+                    self._diagnostic_from_dict(json.loads(payload))
+                )
+            except (TypeError, ValueError, KeyError, json.JSONDecodeError):
+                continue
+
+        self.profiler.count("next_error_modules_scanned", len(rows))
+        self.profiler.count(
+            "next_error_candidates_decoded",
+            len(candidates),
+        )
+        if self.profiler.snapshot().counts.get(
+            "next_error_candidate_rows_upgraded",
+            0,
+        ):
+            self.connection.commit()
+        return (
+            min(candidates, key=self._diagnostic_priority)
+            if candidates
+            else None
+        )
+
+    def _ensure_module(self, path: Path) -> _ModuleState:
+        path = path.resolve()
+        existing = self._states.get(path)
+        if existing is not None:
+            return existing
+
+        if path in self._visiting:
+            # A provisional state is installed before dependency recursion, so
+            # a cold import cycle can safely reuse it without requiring a
+            # previously persisted row.
+            provisional = self._states.get(path)
+            if provisional is None:
+                raise RuntimeError(
+                    "internal source-index invariant: visiting module has no provisional state"
+                )
+            return provisional
+
+        self._visiting.add(path)
+        try:
+            stat = self._stat(path)
+            row = self._row(path)
+            fresh = self._fresh(row, stat)
+
+            interface_rebuilt = False
+            if fresh:
+                module_name = row["module_name"]
+                imports = self._imports_for_path(row["path"])
+                public_imports = tuple(
+                    json.loads(row["public_imports_json"])
+                )
+                source_hash = row["source_sha256"]
+                api_base_hash = row["api_base_sha256"]
+                interface_payload = row["interface_json"]
+                if interface_payload:
+                    interface = interface_from_dict(
+                        json.loads(interface_payload)
+                    )
+                else:
+                    checker = self._checker_instance()
+                    summary = checker.parse_summary(path)
+                    interface = interface_from_summary(
+                        self.root,
+                        summary,
+                    )
+                    interface_rebuilt = True
+            else:
+                checker = self._checker_instance()
+                summary = checker.parse_summary(path)
+                module_name = summary.module_name
+                imports = tuple(sorted(set(summary.imports.values())))
+                interface = interface_from_summary(
+                    self.root,
+                    summary,
+                )
+                api_base_hash = interface_api_base_hash(interface)
+                public_imports = interface_public_dependencies(interface)
+                with self.profiler.stage("source.hash"):
+                    source_hash = hashlib.sha256(
+                        summary.source.encode("utf-8")
+                    ).hexdigest()
+                self.profiler.count("dirty_modules")
+
+            provisional_diagnostics = (
+                self._decode_diagnostics(row)
+                if fresh and row is not None
+                else []
+            )
+            provisional_api_hash = (
+                row["api_fingerprint"]
+                if fresh and row is not None
+                else api_base_hash
+            )
+            self._states[path] = _ModuleState(
+                path=path,
+                module_name=module_name,
+                source_hash=source_hash,
+                api_hash=provisional_api_hash,
+                imports=imports,
+                public_imports=public_imports,
+                diagnostics=provisional_diagnostics,
+            )
+
+            dependency_states: List[Tuple[str, _ModuleState]] = []
+            for module in imports:
+                dependency_path = self._module_path(module)
+                if not dependency_path.exists():
+                    continue
+                dependency_states.append(
+                    (module, self._ensure_module(dependency_path))
+                )
+
+            dependency_by_module = {
+                module: state
+                for module, state in dependency_states
+            }
+            api_hash = self._api_fingerprint(
+                api_base_hash,
+                (
+                    (module, dependency_by_module[module].api_hash)
+                    for module in public_imports
+                    if module in dependency_by_module
+                ),
+            )
+            dependency_fingerprint = self._dependency_fingerprint(
+                (module, state.api_hash)
+                for module, state in dependency_states
+            )
+
+            if (
+                fresh
+                and row is not None
+                and row["dependency_fingerprint"] == dependency_fingerprint
+            ):
+                diagnostics = self._decode_diagnostics(row)
+                self.profiler.count("modules_cached")
+                self.profiler.count("diagnostics_cached", len(diagnostics))
+                if interface_rebuilt:
+                    self._store(
+                        path,
+                        module_name,
+                        stat,
+                        source_hash,
+                        api_base_hash,
+                        api_hash,
+                        public_imports,
+                        interface,
+                        dependency_fingerprint,
+                        imports,
+                        diagnostics,
+                    )
+                    self.profiler.count(
+                        "incremental_interface_rebuilds_persisted"
+                    )
+            else:
+                checker = self._checker_instance()
+                diagnostics = checker.structural_check(path)
+                self._store(
+                    path,
+                    module_name,
+                    stat,
+                    source_hash,
+                    api_base_hash,
+                    api_hash,
+                    public_imports,
+                    interface,
+                    dependency_fingerprint,
+                    imports,
+                    diagnostics,
+                )
+
+            state = _ModuleState(
+                path=path,
+                module_name=module_name,
+                source_hash=source_hash,
+                api_hash=api_hash,
+                imports=imports,
+                public_imports=public_imports,
+                diagnostics=diagnostics,
+            )
+            self._states[path] = state
+            return state
+        finally:
+            self._visiting.remove(path)
+
+    def _collect_states(self, target: Path) -> List[_ModuleState]:
+        root_state = self._ensure_module(target)
+        result: Dict[str, _ModuleState] = {}
+
+        def visit(state: _ModuleState) -> None:
+            if state.module_name in result:
+                return
+            result[state.module_name] = state
+            for module in state.imports:
+                dependency = self._states.get(self._module_path(module).resolve())
+                if dependency is not None:
+                    visit(dependency)
+
+        visit(root_state)
+        return [result[name] for name in sorted(result)]
+
+    def _parallel_bootstrap(self, target: Path) -> DiagnoseResult:
+        workers = worker_count(self.jobs)
+        with self.profiler.stage("cold.import_discovery"):
+            import_receipts = discover_closure(
+                self.root,
+                target,
+                jobs=workers,
+                cached_lookup=self._cached_import_receipt,
+            )
+        paths = tuple(Path(item.path) for item in import_receipts)
+        self.profiler.count("cold_workers", workers)
+        self.profiler.count("cold_modules_discovered", len(paths))
+        interface_files_parsed = sum(
+            item.files_parsed for item in import_receipts
+        )
+        self.profiler.count(
+            "cold_interface_files_parsed",
+            interface_files_parsed,
+        )
+        self.profiler.count(
+            "files_parsed",
+            interface_files_parsed,
+        )
+        self.profiler.add_ns(
+            "cold.interface_parse",
+            sum(item.parse_ns for item in import_receipts),
+        )
+
+        receipt_by_module = {
+            item.module_name: item
+            for item in import_receipts
+        }
+        api_memo: Dict[str, str] = {}
+
+        def resolve_api(module: str, visiting: Set[str]) -> str:
+            cached = api_memo.get(module)
+            if cached is not None:
+                return cached
+            receipt = receipt_by_module[module]
+            if module in visiting:
+                return receipt.api_base_hash
+            nested = set(visiting)
+            nested.add(module)
+            value = self._api_fingerprint(
+                receipt.api_base_hash,
+                (
+                    (dependency, resolve_api(dependency, nested))
+                    for dependency in sorted(receipt.public_imports)
+                    if dependency in receipt_by_module
+                ),
+            )
+            api_memo[module] = value
+            return value
+
+        for module in sorted(receipt_by_module):
+            resolve_api(module, set())
+
+        dependency_fingerprints = {
+            module: self._dependency_fingerprint(
+                (
+                    dependency,
+                    api_memo[dependency],
+                )
+                for dependency in receipt.imports
+                if dependency in api_memo
+            )
+            for module, receipt in receipt_by_module.items()
+        }
+
+        cached_rows = {}
+        diagnostic_paths = []
+        for module, receipt in sorted(receipt_by_module.items()):
+            path = Path(receipt.path)
+            row = self._row(path)
+            reusable = (
+                receipt.files_parsed == 0
+                and row is not None
+                and row["dependency_fingerprint"]
+                    == dependency_fingerprints[module]
+                and bool(row["diagnostics_json"])
+            )
+            if reusable:
+                cached_rows[module] = row
+                self.profiler.count("cold_diagnostic_cache_hits")
+            else:
+                diagnostic_paths.append(path)
+                self.profiler.count("cold_diagnostic_cache_misses")
+
+        self.profiler.count(
+            "cold_diagnostic_targets",
+            len(diagnostic_paths),
+        )
+
+        with self.profiler.stage("cold.parallel_diagnostics"):
+            batch_receipts = diagnose_paths(
+                self.root,
+                diagnostic_paths,
+                jobs=workers,
+                import_receipts=import_receipts,
+            )
+
+        receipts = tuple(
+            receipt
+            for batch in batch_receipts
+            for receipt in batch.receipts
+        )
+        diagnostic_by_module = {
+            receipt.module_name: receipt
+            for receipt in receipts
+        }
+        worker_files_parsed = sum(
+            receipt.files_parsed for receipt in receipts
+        )
+        self.profiler.count(
+            "files_parsed",
+            worker_files_parsed,
+        )
+        self.profiler.count(
+            "diagnostics_recomputed",
+            sum(receipt.diagnostics_recomputed for receipt in receipts),
+        )
+        self.profiler.count(
+            "cold_worker_files_parsed",
+            worker_files_parsed,
+        )
+        self.profiler.count(
+            "cold_batches",
+            len(batch_receipts),
+        )
+        predicted_surface = sum(
+            batch.dependency_surface for batch in batch_receipts
+        )
+        self.profiler.count(
+            "cold_batch_dependency_surface",
+            predicted_surface,
+        )
+        self.profiler.count(
+            "cold_predicted_amplification_milli",
+            round(
+                1000 * predicted_surface / max(1, len(paths))
+            ),
+        )
+        self.profiler.count(
+            "cold_parse_amplification_milli",
+            round(
+                1000 * worker_files_parsed / max(1, len(paths))
+            ),
+        )
+        total_files_parsed = interface_files_parsed + worker_files_parsed
+        self.profiler.count(
+            "cold_total_files_parsed",
+            total_files_parsed,
+        )
+        self.profiler.count(
+            "cold_total_parse_amplification_milli",
+            round(
+                1000 * total_files_parsed / max(1, len(paths))
+            ),
+        )
+        self.profiler.count(
+            "cold_unpredicted_parse_overhead",
+            max(0, worker_files_parsed - len(diagnostic_paths)),
+        )
+        self.profiler.count(
+            "cold_interface_parse_savings",
+            max(0, predicted_surface - worker_files_parsed),
+        )
+        self.profiler.add_ns(
+            "cold.worker_parse",
+            sum(receipt.parse_ns for receipt in receipts),
+        )
+        self.profiler.add_ns(
+            "cold.worker_diagnostics",
+            sum(receipt.diagnostics_ns for receipt in receipts),
+        )
+
+        states: Dict[str, _ModuleState] = {}
+        all_diagnostics: List[Diagnostic] = []
+
+        with self.profiler.stage("db.batch_write"):
+            if not getattr(self.connection, "in_transaction", False):
+                self.connection.execute("BEGIN")
+            try:
+                for module in sorted(receipt_by_module):
+                    import_receipt = receipt_by_module[module]
+                    api_hash = api_memo[module]
+                    dependency_fingerprint = dependency_fingerprints[module]
+                    diagnostic_receipt = diagnostic_by_module.get(module)
+
+                    if diagnostic_receipt is not None:
+                        diagnostics = [
+                            self._diagnostic_from_dict(item)
+                            for item in json.loads(
+                                diagnostic_receipt.diagnostics_json
+                            )
+                        ]
+                        path = Path(diagnostic_receipt.path)
+                        self._store(
+                            path,
+                            diagnostic_receipt.module_name,
+                            (
+                                diagnostic_receipt.mtime_ns,
+                                diagnostic_receipt.size,
+                            ),
+                            diagnostic_receipt.source_hash,
+                            diagnostic_receipt.api_base_hash,
+                            api_hash,
+                            diagnostic_receipt.public_imports,
+                            None,
+                            dependency_fingerprint,
+                            diagnostic_receipt.imports,
+                            diagnostics,
+                            commit=False,
+                            diagnostics_payload=(
+                                diagnostic_receipt.diagnostics_json
+                            ),
+                            interface_payload=(
+                                diagnostic_receipt.interface_json
+                            ),
+                        )
+                        source_hash = diagnostic_receipt.source_hash
+                        imports = diagnostic_receipt.imports
+                        public_imports = diagnostic_receipt.public_imports
+                    else:
+                        row = cached_rows[module]
+                        diagnostics = self._decode_diagnostics(row)
+                        path = Path(import_receipt.path)
+                        source_hash = row["source_sha256"]
+                        imports = import_receipt.imports
+                        public_imports = import_receipt.public_imports
+                        self.profiler.count(
+                            "diagnostics_cached",
+                            len(diagnostics),
+                        )
+                        self.profiler.count("modules_cached")
+
+                    state = _ModuleState(
+                        path=path,
+                        module_name=module,
+                        source_hash=source_hash,
+                        api_hash=api_hash,
+                        imports=imports,
+                        public_imports=public_imports,
+                        diagnostics=diagnostics,
+                    )
+                    states[module] = state
+                    self._states[path.resolve()] = state
+                    all_diagnostics.extend(diagnostics)
+                self.connection.commit()
+            except Exception:
+                self.connection.rollback()
+                raise
+
+        self.profiler.count("modules_in_closure", len(states))
+        return DiagnoseResult(
+            diagnostics=sorted(
+                all_diagnostics,
+                key=lambda item: (
+                    str(item.path),
+                    item.line,
+                    item.column,
+                    item.code,
+                ),
+            ),
+            modules=tuple(sorted(states)),
+            cache_hit=False,
+            source_hashes=tuple(
+                (module, states[module].source_hash)
+                for module in sorted(states)
+            ),
+        )
+
+
+    def _invalid_diagnostic_count(self, target: Path) -> int:
+        target_rel = self._relative(target)
+        query = """
+            WITH RECURSIVE closure(path, module_name) AS (
+                SELECT path, module_name
+                FROM modules
+                WHERE path = ?
+                UNION
+                SELECT m.path, m.module_name
+                FROM closure c
+                JOIN imports i ON i.importer_path = c.path
+                JOIN modules m ON m.module_name = i.imported_module
+            )
+            SELECT count(*)
+            FROM closure c
+            JOIN modules m ON m.path = c.path
+            WHERE m.diagnostics_json = ''
+        """
+        row = self.connection.execute(
+            query,
+            (target_rel,),
+        ).fetchone()
+        return int(row[0]) if row is not None else 0
+
+    def diagnose(self, target: Path) -> DiagnoseResult:
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+
+        warm = self._warm_result(target)
+        if warm is not None:
+            return warm
+
+        if self.jobs != 1:
+            target_row = self._row(target)
+            invalid_diagnostics = (
+                0
+                if target_row is None
+                else self._invalid_diagnostic_count(target)
+            )
+            if target_row is None or invalid_diagnostics > 1:
+                self.profiler.count(
+                    "parallel_refresh_invalid_diagnostics",
+                    invalid_diagnostics,
+                )
+                return self._parallel_bootstrap(target)
+
+        with self.profiler.stage("closure.refresh"):
+            states = self._collect_states(target)
+        self.profiler.count("modules_in_closure", len(states))
+        diagnostics = [
+            diagnostic
+            for state in states
+            for diagnostic in state.diagnostics
+        ]
+        return DiagnoseResult(
+            diagnostics=sorted(
+                diagnostics,
+                key=lambda item: (str(item.path), item.line, item.column, item.code),
+            ),
+            modules=tuple(state.module_name for state in states),
+            cache_hit=False,
+            source_hashes=tuple(
+                (state.module_name, state.source_hash)
+                for state in states
+            ),
+        )

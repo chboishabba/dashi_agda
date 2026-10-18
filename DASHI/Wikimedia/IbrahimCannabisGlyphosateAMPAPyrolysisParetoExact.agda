@@ -157,11 +157,11 @@ pyrolysisRequirementDoesNotCreatePyrolysisResult ()
 ------------------------------------------------------------------------
 
 data GlyphosateParetoTarget : Set where
-  modernCannabisOccurrence
-  cannabisValidatedLCMS
-  ampaRegistryClosure
-  combustionPyrolysis
-  vaporisationTransformation
+  modernCannabisOccurrence : GlyphosateParetoTarget
+  cannabisValidatedLCMS : GlyphosateParetoTarget
+  ampaRegistryClosure : GlyphosateParetoTarget
+  combustionPyrolysis : GlyphosateParetoTarget
+  vaporisationTransformation : GlyphosateParetoTarget
   inhaledDose : GlyphosateParetoTarget
 
 record GlyphosateParetoStep : Set where
@@ -214,15 +214,15 @@ pareto9 = glyphosate-pareto-step
 ------------------------------------------------------------------------
 
 data GlyphosateTime : Set where
-  forensicOccurrence2015
-  modernPanelEra
-  canadaPyrolysisGuidance
+  forensicOccurrence2015 : GlyphosateTime
+  modernPanelEra : GlyphosateTime
+  canadaPyrolysisGuidance : GlyphosateTime
   currentGlyphosateState : GlyphosateTime
 
 data GlyphosateInterpretation : Set where
-  cannabisOccurrenceDemonstrated
-  modernPrevalenceKnown
-  pyrolysisRequiredForUseRegistration
+  cannabisOccurrenceDemonstrated : GlyphosateInterpretation
+  modernPrevalenceKnown : GlyphosateInterpretation
+  pyrolysisRequiredForUseRegistration : GlyphosateInterpretation
   routeRiskResolved : GlyphosateInterpretation
 
 data GlyphosateSummary : Set where occurrencePaidExposureOpen : GlyphosateSummary

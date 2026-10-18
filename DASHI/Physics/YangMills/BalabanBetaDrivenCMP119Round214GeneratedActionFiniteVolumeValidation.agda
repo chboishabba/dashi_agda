@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Round214GeneratedActionFiniteVolumeValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Round214GeneratedActionFiniteVolumeExact as P
+
+round283CompilerOwned :
+  P.betaDrivenRound214GeneratedActionRound283CompilerLevel ≡ machineChecked
+round283CompilerOwned = refl
+
+selectedProbabilityCompilerOwned :
+  P.betaDrivenRound214GeneratedActionSelectedProbabilityCompilerLevel ≡ machineChecked
+selectedProbabilityCompilerOwned = refl
+
+t5ExpectationSameObjectRemainsPhysical :
+  P.betaDrivenRound214GeneratedActionToT5ExpectationSameObjectLevel ≡ conditional
+t5ExpectationSameObjectRemainsPhysical = refl

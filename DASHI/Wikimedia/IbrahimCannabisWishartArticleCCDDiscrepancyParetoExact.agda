@@ -134,8 +134,8 @@ ccdTangerineDream = sample-value "Tangerine Dream" "115" ccdSurface true false
 ------------------------------------------------------------------------
 
 data AgreementStanding : Set where
-  agrees
-  disagrees
+  agrees : AgreementStanding
+  disagrees : AgreementStanding
   unresolvedVersionJoin : AgreementStanding
 
 record SameLabelConflict : Set where
@@ -197,11 +197,11 @@ wishartCorrection = correction-receipt
 ------------------------------------------------------------------------
 
 data ReconciliationTarget : Set where
-  acquireSupplementaryTableS5
-  identifyCCDConcentrationProvenance
-  compareAnalyticalIdentityAndUnits
-  recoverVersionTimestampOrIngestionTransform
-  selectDownstreamPerSampleVector
+  acquireSupplementaryTableS5 : ReconciliationTarget
+  identifyCCDConcentrationProvenance : ReconciliationTarget
+  compareAnalyticalIdentityAndUnits : ReconciliationTarget
+  recoverVersionTimestampOrIngestionTransform : ReconciliationTarget
+  selectDownstreamPerSampleVector : ReconciliationTarget
   continueEntourageInteraction : ReconciliationTarget
 
 record ReconciliationStep : Set where
@@ -261,15 +261,15 @@ lastStep = reconciliation-step
 ------------------------------------------------------------------------
 
 data DiscrepancyTime : Set where
-  article2024
-  correction2024
-  ccdCurrent
+  article2024 : DiscrepancyTime
+  correction2024 : DiscrepancyTime
+  ccdCurrent : DiscrepancyTime
   reconciledFuture : DiscrepancyTime
 
 data DiscrepancyInterpretation : Set where
-  articleVectorCandidate
-  ccdVectorCandidate
-  unresolvedDataLineageConflict
+  articleVectorCandidate : DiscrepancyInterpretation
+  ccdVectorCandidate : DiscrepancyInterpretation
+  unresolvedDataLineageConflict : DiscrepancyInterpretation
   reconciledSameObjectVector : DiscrepancyInterpretation
 
 data DiscrepancySummary : Set where quantitativeCannabinoidFrontierOpen : DiscrepancySummary

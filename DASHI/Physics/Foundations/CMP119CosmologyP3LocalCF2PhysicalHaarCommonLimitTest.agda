@@ -1,0 +1,13 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitExact as P3
+
+localCF2EqualsPhysicalHaarRegression =
+  P3.localCF2EqualsPhysicalHaarExpectation
+
+physicalHaarPositiveGivesLocalCF2PositiveRegression =
+  P3.physicalHaarPositiveGivesLocalCF2Positive
+
+exactFiniteEqualsContinuumF2NoLongerRequiredRegression =
+  P3.exactFiniteEqualsContinuumF2NoLongerRequired

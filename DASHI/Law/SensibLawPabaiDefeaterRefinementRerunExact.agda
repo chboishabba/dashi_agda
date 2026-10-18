@@ -121,8 +121,10 @@ controlBeforeProof = Algebra.fromFact (Algebra.there (Algebra.there Algebra.here
 corePolicyAbsentBefore :
   Algebra.Reachable Regression.pabaiGraph pabaiFactsBeforeDefeater
     Regression.pabaiCorePolicy → ⊥
-corePolicyAbsentBefore (Algebra.fromFact ())
-corePolicyAbsentBefore (Algebra.byRule () enabled premises exceptions defeaters)
+corePolicyAbsentBefore
+  (Algebra.fromFact (Algebra.there (Algebra.there (Algebra.there ()))))
+corePolicyAbsentBefore
+  (Algebra.byRule (Algebra.there ()) enabled premises exceptions defeaters)
 
 pabaiDutyProofBeforeDefeater :
   Algebra.Reachable Regression.pabaiGraph pabaiFactsBeforeDefeater
@@ -144,7 +146,12 @@ corePolicyAfterProof = Algebra.fromFact Algebra.here
 pabaiDutyImpossibleAfterDefeater :
   Algebra.Reachable Regression.pabaiGraph pabaiFactsAfterDefeater
     Negligence.dutyProposition → ⊥
-pabaiDutyImpossibleAfterDefeater (Algebra.fromFact ())
+pabaiDutyImpossibleAfterDefeater
+  (Algebra.fromFact
+    (Algebra.there
+      (Algebra.there
+        (Algebra.there
+          (Algebra.there ())))))
 pabaiDutyImpossibleAfterDefeater
   (Algebra.byRule Algebra.here enabled premises exceptions
     (Algebra._∷_ defeaterAbsent Algebra.[])) =
@@ -152,7 +159,7 @@ pabaiDutyImpossibleAfterDefeater
 pabaiDutyImpossibleAfterDefeater
   (Algebra.byRule (Algebra.there ()) enabled premises exceptions defeaters)
 
-record PabaiDefeaterRerun : Set where
+record PabaiDefeaterRerun : Set₁ where
   constructor pabai-defeater-rerun
   field
     refinement :

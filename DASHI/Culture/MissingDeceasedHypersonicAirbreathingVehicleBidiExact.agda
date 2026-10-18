@@ -25,16 +25,16 @@ import DASHI.Control.ZhangDaibingUAVControlBidiExact as Zhang
 ------------------------------------------------------------------------
 
 data HypersonicSubsystem : Set where
-  inletCompression
-  isolatorShockTrain
-  shockBoundaryLayerControl
-  supersonicCombustion
-  hotStructuralMechanics
-  thermalProtection
-  sensingActuation
-  faultTolerantControl
-  hardwareVerification
-  guidanceAutonomy
+  inletCompression : HypersonicSubsystem
+  isolatorShockTrain : HypersonicSubsystem
+  shockBoundaryLayerControl : HypersonicSubsystem
+  supersonicCombustion : HypersonicSubsystem
+  hotStructuralMechanics : HypersonicSubsystem
+  thermalProtection : HypersonicSubsystem
+  sensingActuation : HypersonicSubsystem
+  faultTolerantControl : HypersonicSubsystem
+  hardwareVerification : HypersonicSubsystem
+  guidanceAutonomy : HypersonicSubsystem
   highEnthalpyQualification : HypersonicSubsystem
 
 ------------------------------------------------------------------------

@@ -86,23 +86,23 @@ phaseDifferenceChangesRecruitment = trueNotFalse
 amplitudeInteractionModel :
   Analog.WaveInteractionModel Nat Bool Bool
 amplitudeInteractionModel = record
-  { Analog.superpose = _+_
-  ; Analog.readState = nonzeroRecruit
-  ; Analog.interpretOutput = nonzeroRecruit
-  ; Analog.parallelInteractionAvailable = true
-  ; Analog.continuousAmplitudeAvailable = false
-  ; Analog.interpretation =
+  { superpose = _+_
+  ; readState = nonzeroRecruit
+  ; interpretOutput = nonzeroRecruit
+  ; parallelInteractionAvailable = true
+  ; continuousAmplitudeAvailable = false
+  ; interpretation =
       "finite endpoint realization of phase-sensitive superposition and recruitment"
   }
 
 amplitudeComputationWitness :
   Analog.ComputationRealisationWitness amplitudeInteractionModel
 amplitudeComputationWitness = record
-  { Analog.inputEncodingSpecified = true
-  ; Analog.operationSpecified = true
-  ; Analog.outputDecodingSpecified = true
-  ; Analog.commutingInterpretationDiagram = true
-  ; Analog.perturbationPreservesPredictedRelation = true
+  { inputEncodingSpecified = true
+  ; operationSpecified = true
+  ; outputDecodingSpecified = true
+  ; commutingInterpretationDiagram = true
+  ; perturbationPreservesPredictedRelation = true
   }
 
 record WaveInterferenceBoundary : Set where

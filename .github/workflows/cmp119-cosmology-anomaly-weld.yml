@@ -1,0 +1,36 @@
+name: CMP119 R136 anomaly weld
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyWeldExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
+      - '.github/workflows/cmp119-cosmology-anomaly-weld.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck anomaly sign weld
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library \
+              DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyWeldExact.agda
+            agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library \
+              DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda
+          '

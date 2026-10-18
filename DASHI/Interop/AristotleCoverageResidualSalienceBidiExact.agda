@@ -12,12 +12,12 @@ import DASHI.Interop.ZelphPrunedArtifactQueryPreservationExact as Preservation
 
 -- Concrete Nat/Wikimedia residual kinds.
 data AristotleCoverageResidual : Set where
-  propertyFamilyUninspected
-  propertyFamilyIncomplete
-  querySoundnessMissing
-  queryCompletenessMissing
-  revisionAlignmentMissing
-  qualifierProfileUninspected
+  propertyFamilyUninspected : AristotleCoverageResidual
+  propertyFamilyIncomplete : AristotleCoverageResidual
+  querySoundnessMissing : AristotleCoverageResidual
+  queryCompletenessMissing : AristotleCoverageResidual
+  revisionAlignmentMissing : AristotleCoverageResidual
+  qualifierProfileUninspected : AristotleCoverageResidual
   peerCohortUnresolved : AristotleCoverageResidual
 
 record CoverageResidualSchedulingReceipt : Set where

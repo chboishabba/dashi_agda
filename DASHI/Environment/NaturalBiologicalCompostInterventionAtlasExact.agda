@@ -29,66 +29,66 @@ import DASHI.Environment.SustainableManagementCausalEstimandExperimentBridgeExac
 ------------------------------------------------------------------------
 
 data InterventionClass : Set where
-  rapidThermophilicCompost
-  bokashiFermentation
-  johnsonSuBioreactor
-  vermicomposting
-  aeratedCompostTea
-  nonAeratedCompostTea
-  compostExtract
-  mycorrhizalInoculation
-  rhizobialInoculation
-  trichodermaIntervention
-  entomopathogenicFungus
-  predatorBiocontrol
-  parasitoidBiocontrol
-  poultryFeedProbiotic
-  poultryWaterProbiotic
-  poultryLitterMicrobialAmendment
-  poultrySurfaceMicrobialAmendment
-  poultryFermentedFeed
+  rapidThermophilicCompost : InterventionClass
+  bokashiFermentation : InterventionClass
+  johnsonSuBioreactor : InterventionClass
+  vermicomposting : InterventionClass
+  aeratedCompostTea : InterventionClass
+  nonAeratedCompostTea : InterventionClass
+  compostExtract : InterventionClass
+  mycorrhizalInoculation : InterventionClass
+  rhizobialInoculation : InterventionClass
+  trichodermaIntervention : InterventionClass
+  entomopathogenicFungus : InterventionClass
+  predatorBiocontrol : InterventionClass
+  parasitoidBiocontrol : InterventionClass
+  poultryFeedProbiotic : InterventionClass
+  poultryWaterProbiotic : InterventionClass
+  poultryLitterMicrobialAmendment : InterventionClass
+  poultrySurfaceMicrobialAmendment : InterventionClass
+  poultryFermentedFeed : InterventionClass
   manureBiologicalTreatment : InterventionClass
 
 data InterventionRoute : Set where
-  solidSoilAmendment
-  liquidSoilDrench
-  foliarApplication
-  seedOrRootInoculation
-  feedAdministration
-  drinkingWaterAdministration
-  litterApplication
-  environmentalSurfaceApplication
-  manureTreatment
+  solidSoilAmendment : InterventionRoute
+  liquidSoilDrench : InterventionRoute
+  foliarApplication : InterventionRoute
+  seedOrRootInoculation : InterventionRoute
+  feedAdministration : InterventionRoute
+  drinkingWaterAdministration : InterventionRoute
+  litterApplication : InterventionRoute
+  environmentalSurfaceApplication : InterventionRoute
+  manureTreatment : InterventionRoute
   biologicalRelease : InterventionRoute
 
 data TargetCoordinate : Set where
-  soilOrganicMatter
-  soilCarbon
-  nutrientAvailability
-  soilMicrobiome
-  rootColonisation
-  plantGrowth
-  diseaseSuppression
-  pestSuppression
-  pathogenCarriage
-  litterPH
-  litterMoisture
-  ammonia
-  odourVOC
-  animalPerformance
-  animalWelfare
-  greenhouseGasFlux
-  carbonRetention
+  soilOrganicMatter : TargetCoordinate
+  soilCarbon : TargetCoordinate
+  nutrientAvailability : TargetCoordinate
+  soilMicrobiome : TargetCoordinate
+  rootColonisation : TargetCoordinate
+  plantGrowth : TargetCoordinate
+  diseaseSuppression : TargetCoordinate
+  pestSuppression : TargetCoordinate
+  pathogenCarriage : TargetCoordinate
+  litterPH : TargetCoordinate
+  litterMoisture : TargetCoordinate
+  ammonia : TargetCoordinate
+  odourVOC : TargetCoordinate
+  animalPerformance : TargetCoordinate
+  animalWelfare : TargetCoordinate
+  greenhouseGasFlux : TargetCoordinate
+  carbonRetention : TargetCoordinate
   nitrogenRetention : TargetCoordinate
 
 data EvidenceTier : Set where
-  sourceDescription
-  mechanisticHypothesis
-  controlledExperiment
-  fieldExperiment
-  systematicReview
-  metaAnalysis
-  identifiedCausalEffect
+  sourceDescription : EvidenceTier
+  mechanisticHypothesis : EvidenceTier
+  controlledExperiment : EvidenceTier
+  fieldExperiment : EvidenceTier
+  systematicReview : EvidenceTier
+  metaAnalysis : EvidenceTier
+  identifiedCausalEffect : EvidenceTier
   promotedRecommendation : EvidenceTier
 
 record InterventionIdentity : Set where

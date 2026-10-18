@@ -396,7 +396,7 @@ livePoliticalRoleAssignmentRemainsBlocked =
 data InverseJusticeRun : Set₁ where
   emptyInverseJusticeRun : InverseJusticeRun
   extendInverseJusticeRun :
-    ∀ {beforeBase afterBase}
+    ∀ {beforeBase afterBase : SituatedJusticeBase}
       {before : JusticeFibre beforeBase}
       {after : JusticeFibre afterBase}
       {transition : JusticeTransition before after} →

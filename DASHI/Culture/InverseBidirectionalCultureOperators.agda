@@ -22,16 +22,13 @@ data Direction : Set where
   bidirectional : Direction
 
 data CulturalAxis : Set where
-  fiction nonfiction reading-aloud audience child art architecture poetry politics :
-    CulturalAxis
+  fiction nonfiction reading-aloud audience child art architecture poetry politics : CulturalAxis
 
 data PruningStyle : Set where
-  breadth-first depth-first sparse exhaustive social-cue formal-rule metaphorical :
-    PruningStyle
+  breadth-first depth-first sparse exhaustive social-cue formal-rule metaphorical : PruningStyle
 
 data SearchStyle : Set where
-  local global linear branching associative reflective :
-    SearchStyle
+  local global linear branching associative reflective : SearchStyle
 
 record CultureState : Set where
   constructor mkCultureState

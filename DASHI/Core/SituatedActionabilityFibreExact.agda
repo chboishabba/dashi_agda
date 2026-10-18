@@ -154,3 +154,18 @@ sameSignalDoesNotAutoPromoteToSameContext ()
 contextDifferenceDoesNotUniversallyForceActionabilityChange :
   ContextDifferenceAlwaysChangesActionabilityPermission → ⊥
 contextDifferenceDoesNotUniversallyForceActionabilityChange ()
+
+record SituatedActionabilityFibreBoundary : Set where
+  constructor situatedActionabilityFibreBoundary
+  field
+    signalDeterminesActionability : Bool
+    signalDeterminesActionabilityIsFalse : signalDeterminesActionability ≡ false
+    signalDeterminesContext : Bool
+    signalDeterminesContextIsFalse : signalDeterminesContext ≡ false
+    contextDifferenceUniversallyForcesActionabilityChange : Bool
+    contextDifferenceUniversallyForcesActionabilityChangeIsFalse :
+      contextDifferenceUniversallyForcesActionabilityChange ≡ false
+
+canonicalSituatedActionabilityFibreBoundary : SituatedActionabilityFibreBoundary
+canonicalSituatedActionabilityFibreBoundary =
+  situatedActionabilityFibreBoundary false refl false refl false refl

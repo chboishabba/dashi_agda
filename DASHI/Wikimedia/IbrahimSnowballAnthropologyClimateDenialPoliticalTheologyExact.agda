@@ -46,15 +46,9 @@ import DASHI.Wikimedia.IbrahimSnowballAIStateMilitaryChipClimateExact as AIClima
 ------------------------------------------------------------------------
 
 data ClimateBeliefAtomKind : Set where
-  physicalClimateClaim
-  causalAttributionClaim
-  policyPreferenceClaim
-  religiousWorldviewClaim
-  eschatologicalNarrativeClaim
-  identityPositioningClaim
-  movementMobilisationClaim
-  materialInterestClaim
-  scripturalReceptionClaim : ClimateBeliefAtomKind
+  physicalClimateClaim causalAttributionClaim policyPreferenceClaim : ClimateBeliefAtomKind
+  religiousWorldviewClaim eschatologicalNarrativeClaim identityPositioningClaim : ClimateBeliefAtomKind
+  movementMobilisationClaim materialInterestClaim scripturalReceptionClaim : ClimateBeliefAtomKind
 
 record ClimateBeliefAttributedAtom : Set where
   constructor climate-belief-attributed-atom

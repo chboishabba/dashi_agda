@@ -99,10 +99,10 @@ frontendInterpret :
   (backend : FrontendBackend) →
   UiNode DemoCommand →
   FrontendImplementation backend
-frontendInterpret eguiStyle syntax =
-  frontendArtifact syntax immediateMode
-frontendInterpret retainedStyle syntax =
-  frontendArtifact syntax retainedMode
+frontendInterpret eguiStyle ui =
+  frontendArtifact ui immediateMode
+frontendInterpret retainedStyle ui =
+  frontendArtifact ui retainedMode
 
 frontendProblem : Portable.SemanticInterpretationProblem
 frontendProblem =

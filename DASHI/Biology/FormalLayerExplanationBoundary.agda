@@ -18,29 +18,21 @@ open import Agda.Builtin.String using (String)
 -- guidance into truth claims or authority promotions.
 
 data RouteKind : Set where
-  mythNarrativeRoute :
-    RouteKind
+  mythNarrativeRoute : RouteKind
 
-  narrativeGuideRoute :
-    RouteKind
+  narrativeGuideRoute : RouteKind
 
-  eigenvectorIntuitionRoute :
-    RouteKind
+  eigenvectorIntuitionRoute : RouteKind
 
-  intuitiveGuideRoute :
-    RouteKind
+  intuitiveGuideRoute : RouteKind
 
-  typedProofSurfaceRoute :
-    RouteKind
+  typedProofSurfaceRoute : RouteKind
 
-  clinicalAuthorityRoute :
-    RouteKind
+  clinicalAuthorityRoute : RouteKind
 
-  educationalAuthorityRoute :
-    RouteKind
+  educationalAuthorityRoute : RouteKind
 
-  legalAuthorityRoute :
-    RouteKind
+  legalAuthorityRoute : RouteKind
 
 routeKindName : RouteKind → String
 routeKindName mythNarrativeRoute =
@@ -127,29 +119,21 @@ canonicalRouteKinds =
   ∷ []
 
 data ExplanationLayer : Set where
-  mythLayer :
-    ExplanationLayer
+  mythLayer : ExplanationLayer
 
-  narrativeLayer :
-    ExplanationLayer
+  narrativeLayer : ExplanationLayer
 
-  eigenvectorLayer :
-    ExplanationLayer
+  eigenvectorLayer : ExplanationLayer
 
-  intuitiveGuideLayer :
-    ExplanationLayer
+  intuitiveGuideLayer : ExplanationLayer
 
-  typedProofSurfaceLayer :
-    ExplanationLayer
+  typedProofSurfaceLayer : ExplanationLayer
 
-  clinicalAuthorityLayer :
-    ExplanationLayer
+  clinicalAuthorityLayer : ExplanationLayer
 
-  educationalAuthorityLayer :
-    ExplanationLayer
+  educationalAuthorityLayer : ExplanationLayer
 
-  legalAuthorityLayer :
-    ExplanationLayer
+  legalAuthorityLayer : ExplanationLayer
 
 layerName : ExplanationLayer → String
 layerName mythLayer =
@@ -651,35 +635,25 @@ canonicalNoLegalAuthorityPromotionClaimedIsFalse =
 -- Cultural/operator explanation and neuro-affirming limits.
 
 data CulturalOperatorRouteKind : Set where
-  culturalGuideRoute :
-    CulturalOperatorRouteKind
+  culturalGuideRoute : CulturalOperatorRouteKind
 
-  operatorGuideRoute :
-    CulturalOperatorRouteKind
+  operatorGuideRoute : CulturalOperatorRouteKind
 
-  neuroAffirmingGuideRoute :
-    CulturalOperatorRouteKind
+  neuroAffirmingGuideRoute : CulturalOperatorRouteKind
 
-  socialTruthClaimRoute :
-    CulturalOperatorRouteKind
+  socialTruthClaimRoute : CulturalOperatorRouteKind
 
-  clinicalTruthClaimRoute :
-    CulturalOperatorRouteKind
+  clinicalTruthClaimRoute : CulturalOperatorRouteKind
 
-  neurologicalTruthClaimRoute :
-    CulturalOperatorRouteKind
+  neurologicalTruthClaimRoute : CulturalOperatorRouteKind
 
-  biologicalTruthClaimRoute :
-    CulturalOperatorRouteKind
+  biologicalTruthClaimRoute : CulturalOperatorRouteKind
 
-  operatorAuthorityRoute :
-    CulturalOperatorRouteKind
+  operatorAuthorityRoute : CulturalOperatorRouteKind
 
-  culturalAuthorityRoute :
-    CulturalOperatorRouteKind
+  culturalAuthorityRoute : CulturalOperatorRouteKind
 
-  neuroAuthorityRoute :
-    CulturalOperatorRouteKind
+  neuroAuthorityRoute : CulturalOperatorRouteKind
 
 routeKindNameCulturalOperator :
   CulturalOperatorRouteKind → String
@@ -788,29 +762,21 @@ canonicalCulturalOperatorRouteKinds =
   ∷ []
 
 data CulturalOperatorExplanationRowKind : Set where
-  culturalNarrativeRowKind :
-    CulturalOperatorExplanationRowKind
+  culturalNarrativeRowKind : CulturalOperatorExplanationRowKind
 
-  operatorInterpretationRowKind :
-    CulturalOperatorExplanationRowKind
+  operatorInterpretationRowKind : CulturalOperatorExplanationRowKind
 
-  neuroAffirmingBoundaryRowKind :
-    CulturalOperatorExplanationRowKind
+  neuroAffirmingBoundaryRowKind : CulturalOperatorExplanationRowKind
 
-  socialTruthLimitRowKind :
-    CulturalOperatorExplanationRowKind
+  socialTruthLimitRowKind : CulturalOperatorExplanationRowKind
 
-  clinicalTruthLimitRowKind :
-    CulturalOperatorExplanationRowKind
+  clinicalTruthLimitRowKind : CulturalOperatorExplanationRowKind
 
-  neurologicalTruthLimitRowKind :
-    CulturalOperatorExplanationRowKind
+  neurologicalTruthLimitRowKind : CulturalOperatorExplanationRowKind
 
-  biologicalTruthLimitRowKind :
-    CulturalOperatorExplanationRowKind
+  biologicalTruthLimitRowKind : CulturalOperatorExplanationRowKind
 
-  authorityBoundaryRowKind :
-    CulturalOperatorExplanationRowKind
+  authorityBoundaryRowKind : CulturalOperatorExplanationRowKind
 
 canonicalCulturalOperatorExplanationRowKinds :
   List CulturalOperatorExplanationRowKind

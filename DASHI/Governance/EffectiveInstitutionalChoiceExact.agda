@@ -103,7 +103,7 @@ secularSchoolNotAccessible access =
   impossible (distanceWitness access)
   where
     impossible : 5 ≤ 2 → ⊥
-    impossible ()
+    impossible (s≤s (s≤s ()))
 
 ------------------------------------------------------------------------
 -- Formal plurality and effective plurality are separate propositions.

@@ -15,6 +15,153 @@ It covers:
 
 No open Millennium problem is claimed solved. Poincaré is treated as a historically solved theorem whose full Perelman/Hamilton proof remains an external theorem boundary in this repository.
 
+
+## 2026-09-28 live three-lane Clay recut
+
+This document predates several later max-cut results.  For Hodge, BSD, and
+P versus NP, the preferred theorem-search hierarchy is now the following.
+
+### Hodge
+
+**Official Clay-facing target**
+
+For every smooth projective complex variety and every rational Hodge class,
+construct a literal rational algebraic cycle whose cycle class reopens the
+given class.
+
+**Preferred reduction**
+
+The live Hodge branch has already paid the primitive Lefschetz reduction and
+the inverse-Lefschetz type firewall.  The remaining theorem is the primitive
+cycle producer, exposed as
+
+```text
+PrimitiveAlgebraicLift
+```
+
+No general Lefschetz wrapper, Hodge decomposition identity, or observer
+repackaging shortens this residual obligation.  Further Hodge work should only
+be counted as progress when it constructs an algebraic cycle or strictly
+reduces the unsupported primitive class.
+
+### Birch--Swinnerton-Dyer
+
+**Official Millennium rank target**
+
+```text
+analytic rank = Mordell--Weil rank
+```
+
+universally over rational elliptic curves.
+
+The preferred prover-facing split is directional:
+
+```text
+Mordell--Weil rank <= analytic rank
+analytic rank <= Mordell--Weil rank
+```
+
+The Lean BSD branch exposes these as independent universal theorem surfaces.
+Ordinary Kummer/Selmer injection machinery naturally contributes toward the
+first direction.  The reverse direction needs an independent zero-defect /
+Selmer-excess / Sha-control theorem or a genuinely different universal
+mechanism.
+
+An unconstrained intermediate rank with equalities to both canonical ranks is
+propositionally equivalent to the original BSD rank conjecture and therefore
+does not shorten it.
+
+**Refined BSD is a separate extension.**  Sha finiteness and the leading
+coefficient identity are important refined-BSD targets but are not part of the
+smallest mandatory handoff for the Millennium rank equality.  The live Lean
+surface keeps these in a separate refined-extension status.
+
+### P versus NP
+
+**Official Clay-facing target**
+
+```text
+SAT not in P
+```
+
+under the repository's established NP-completeness/P-subset-NP background.
+
+**Direct formal target**
+
+```text
+UniversalPolynomialSATDecisionFailure
+```
+
+That is: for every polynomial-time SAT decision candidate, produce a concrete
+SAT decision error.  This is the preferred direct theorem surface.  The older
+uniform observer/collision route is not the preferred public target: lossless
+or identity observers show that a collision theorem of that generality is
+false without a stronger coverage restriction.
+
+The current self-reference/Q1 machinery is only a **candidate proof
+mechanism** for reaching the direct failure theorem.  Its present max-cut is:
+
+```text
+candidate D
+    |
+    v
+construct a candidate-dependent initial live state s_D
+    |
+    v
+prove, without assuming a SAT error, that the first Q1 step must succeed
+    |
+    v
+compare semantic residual width with the charged recursive measure
+```
+
+The critical semantic firewall is now:
+
+```text
+Q1OppositeSATTerminalSemantics
+    <-> concrete SATDecisionFailure
+```
+
+for the current finite-code terminal construction.  Consequently terminal
+opposite-SAT semantics must not be used as an innocent intermediate premise to
+force first-step progress: doing so already supplies the lower-bound witness.
+
+The current direct-DP route has additionally paid:
+
+```text
+literal exponential residual width for block equality
+high width + small recursive measure -> no direct-DP run
+high width + small recursive measure -> total constructor returns nothing
+one successful direct-DP step -> one-node constant formula
+```
+
+Thus the only useful width experiment is on the **pre-first-step
+candidate-coupled root**.
+
+### Minimal prover handoff
+
+The smallest current handoff for the three lanes is therefore:
+
+```text
+Hodge
+  construct an algebraic cycle for every rational Hodge class;
+  preferred reduction: solve the primitive algebraic lift.
+
+BSD
+  prove analytic rank = Mordell--Weil rank universally;
+  preferred reduction: independently source both rank inequalities.
+  Refined BSD remains separate.
+
+P != NP
+  for every polynomial-time SAT candidate, produce a concrete SAT
+  decision failure (or prove an equivalent conventional all-machines
+  lower bound).
+```
+
+Internal proof-search mechanisms should remain subordinate to these official
+surfaces.  A mechanism is not itself a Clay theorem, and a theorem-equivalent
+intermediate is not counted as a simplification merely because it has been
+renamed.
+
 ## Graded VOA and moonshine
 
 `GradedVertexOperatorAlgebraBoundary.agda` distinguishes a graded group representation from a VOA. It adds the missing data and laws:

@@ -20,11 +20,11 @@ import DASHI.Law.SensibLawWoogarooS13EssentialityStressTestExact as S13
 ------------------------------------------------------------------------
 
 data SourceLayer : Set where
-  primaryLaw
-  primaryGovernmentEcology
-  primaryLocalGovernmentContext
-  peerReviewedMechanism
-  projectSpecificConsultant
+  primaryLaw : SourceLayer
+  primaryGovernmentEcology : SourceLayer
+  primaryLocalGovernmentContext : SourceLayer
+  peerReviewedMechanism : SourceLayer
+  projectSpecificConsultant : SourceLayer
   currentIndependentExpert : SourceLayer
 
 data IdentifierState : Set where
@@ -223,13 +223,13 @@ incidentalDensityReceipt = snowball-identifier-receipt
 ------------------------------------------------------------------------
 
 data LegalAtom : Set where
-  threatenedWildlifeStatusAtom
-  threateningProcessMechanismAtom
-  landscapeConnectivityMechanismAtom
-  localPopulationContextAtom
-  sameProjectExposureAtom
-  likelySignificantDetrimentalEffectAtom
-  viablePopulationIdentityAtom
+  threatenedWildlifeStatusAtom : LegalAtom
+  threateningProcessMechanismAtom : LegalAtom
+  landscapeConnectivityMechanismAtom : LegalAtom
+  localPopulationContextAtom : LegalAtom
+  sameProjectExposureAtom : LegalAtom
+  likelySignificantDetrimentalEffectAtom : LegalAtom
+  viablePopulationIdentityAtom : LegalAtom
   statutoryEssentialityAtom : LegalAtom
 
 record SourceToAtomRoute : Set where

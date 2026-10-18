@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Cognition.PNF.EditTransportLeafLocalityExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -110,7 +111,7 @@ ambiguityRefutesVerifiedCorrespondence :
   Match before right →
   (left ≡ right → ⊥) →
   ⊥
-ambiguityRefutesVerifiedCorrespondence certificate before eligible left right leftMatch rightMatch distinct =
+ambiguityRefutesVerifiedCorrespondence {After = After} {Match = Match} certificate before eligible left right leftMatch rightMatch distinct =
   distinct (trans leftIsChosen (sym rightIsChosen))
   where
     witness : UniqueMatch Match before

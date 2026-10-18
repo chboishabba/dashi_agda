@@ -33,39 +33,28 @@ listCount (_ ∷ xs) =
   suc (listCount xs)
 
 data PNFSpectralNumericABIStatus : Set where
-  pnfSpectralNumericABICandidateOnlyNoRuntimePromotion :
-    PNFSpectralNumericABIStatus
+  pnfSpectralNumericABICandidateOnlyNoRuntimePromotion : PNFSpectralNumericABIStatus
 
 data PNFSpectralNumericABIComponent : Set where
-  rowMapBindingComponent :
-    PNFSpectralNumericABIComponent
+  rowMapBindingComponent : PNFSpectralNumericABIComponent
 
-  residualEdgeTableComponent :
-    PNFSpectralNumericABIComponent
+  residualEdgeTableComponent : PNFSpectralNumericABIComponent
 
-  adjacencyABIComponent :
-    PNFSpectralNumericABIComponent
+  adjacencyABIComponent : PNFSpectralNumericABIComponent
 
-  laplacianABIComponent :
-    PNFSpectralNumericABIComponent
+  laplacianABIComponent : PNFSpectralNumericABIComponent
 
-  eigenSpectralCoordinateABIComponent :
-    PNFSpectralNumericABIComponent
+  eigenSpectralCoordinateABIComponent : PNFSpectralNumericABIComponent
 
-  gemvPayloadComponent :
-    PNFSpectralNumericABIComponent
+  gemvPayloadComponent : PNFSpectralNumericABIComponent
 
-  rebuildWitnessComponent :
-    PNFSpectralNumericABIComponent
+  rebuildWitnessComponent : PNFSpectralNumericABIComponent
 
-  admissionRuleComponent :
-    PNFSpectralNumericABIComponent
+  admissionRuleComponent : PNFSpectralNumericABIComponent
 
-  authorityBoundaryLemmaComponent :
-    PNFSpectralNumericABIComponent
+  authorityBoundaryLemmaComponent : PNFSpectralNumericABIComponent
 
-  formalStructureBoundaryComponent :
-    PNFSpectralNumericABIComponent
+  formalStructureBoundaryComponent : PNFSpectralNumericABIComponent
 
 canonicalPNFSpectralNumericABIComponents :
   List PNFSpectralNumericABIComponent

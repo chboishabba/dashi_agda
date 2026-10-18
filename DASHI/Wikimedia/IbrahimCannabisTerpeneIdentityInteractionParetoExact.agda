@@ -277,12 +277,12 @@ currentBatchToInteractionResidual = batch-to-interaction-admission
 ------------------------------------------------------------------------
 
 data InteractionParetoTarget : Set where
-  registryIdentityClosure
-  exactBatchComposition
-  concentrationMatchedMechanismTest
-  exposureTranslation
-  controlledHumanInteraction
-  umbrellaEntourageClaim
+  registryIdentityClosure : InteractionParetoTarget
+  exactBatchComposition : InteractionParetoTarget
+  concentrationMatchedMechanismTest : InteractionParetoTarget
+  exposureTranslation : InteractionParetoTarget
+  controlledHumanInteraction : InteractionParetoTarget
+  umbrellaEntourageClaim : InteractionParetoTarget
   historicalIbrahimReplay : InteractionParetoTarget
 
 record InteractionParetoStep : Set where
@@ -350,20 +350,20 @@ historicalStep = interaction-pareto-step
 ------------------------------------------------------------------------
 
 data InteractionTime : Set where
-  endogenous1998
-  cb2Specific2008
-  cannabisHypothesis2011
-  receptorTest2020
-  review2024
-  caution2026
+  endogenous1998 : InteractionTime
+  cb2Specific2008 : InteractionTime
+  cannabisHypothesis2011 : InteractionTime
+  receptorTest2020 : InteractionTime
+  review2024 : InteractionTime
+  caution2026 : InteractionTime
   currentDashi : InteractionTime
 
 data InteractionInterpretation : Set where
-  endogenousEntourageSourcePaid
-  phytocannabinoidTerpeneHypothesisLive
-  directCB1CB2UmbrellaMechanismLive
-  betaCaryophylleneSpecificCB2MechanismLive
-  stableClinicalEntouragePaid
+  endogenousEntourageSourcePaid : InteractionInterpretation
+  phytocannabinoidTerpeneHypothesisLive : InteractionInterpretation
+  directCB1CB2UmbrellaMechanismLive : InteractionInterpretation
+  betaCaryophylleneSpecificCB2MechanismLive : InteractionInterpretation
+  stableClinicalEntouragePaid : InteractionInterpretation
   constituentSpecificTestingStillRequired : InteractionInterpretation
 
 data InteractionSummary : Set where

@@ -20,23 +20,23 @@ import DASHI.Core.ScientificWorkAttributionExact as Attribution
 ------------------------------------------------------------------------
 
 data AdjacentEvidenceDomain : Set where
-  aquacultureWastewaterManagement
-  natureBasedAquacultureTreatment
-  constructedWetlandTreatment
-  silvopastoralAgroforestry
+  aquacultureWastewaterManagement : AdjacentEvidenceDomain
+  natureBasedAquacultureTreatment : AdjacentEvidenceDomain
+  constructedWetlandTreatment : AdjacentEvidenceDomain
+  silvopastoralAgroforestry : AdjacentEvidenceDomain
   passiveUndergroundFoodStorage : AdjacentEvidenceDomain
 
 data AdjacentEvidenceRelation : Set where
-  mechanismAdjacent
-  managementFamilyAdjacent
-  engineeringAnalogue
-  directExternalSystemStudy
+  mechanismAdjacent : AdjacentEvidenceRelation
+  managementFamilyAdjacent : AdjacentEvidenceRelation
+  engineeringAnalogue : AdjacentEvidenceRelation
+  directExternalSystemStudy : AdjacentEvidenceRelation
   systematicReviewOfAdjacentClass : AdjacentEvidenceRelation
 
 data AdjacentPublicationForm : Set where
-  review
-  systematicReview
-  fieldStudy
+  review : AdjacentPublicationForm
+  systematicReview : AdjacentPublicationForm
+  fieldStudy : AdjacentPublicationForm
   engineeringAssessment : AdjacentPublicationForm
 
 record AdjacentSOTASource : Set where

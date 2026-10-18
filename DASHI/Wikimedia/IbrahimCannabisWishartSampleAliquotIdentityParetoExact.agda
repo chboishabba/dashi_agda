@@ -27,14 +27,14 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data SampleIdentityLevel : Set where
-  cultivarLabel
-  retailProductIdentity
-  purchasedPackage
-  grossPlantMaterial
-  groundHomogenate
-  extractionAliquot
-  analyticalInjection
-  technicalReplicate
+  cultivarLabel : SampleIdentityLevel
+  retailProductIdentity : SampleIdentityLevel
+  purchasedPackage : SampleIdentityLevel
+  grossPlantMaterial : SampleIdentityLevel
+  groundHomogenate : SampleIdentityLevel
+  extractionAliquot : SampleIdentityLevel
+  analyticalInjection : SampleIdentityLevel
+  technicalReplicate : SampleIdentityLevel
   reportedAggregate : SampleIdentityLevel
 
 record WishartSampleCarrier : Set where
@@ -189,13 +189,13 @@ currentCCDCarrierResidual = ccd-carrier-admission
 ------------------------------------------------------------------------
 
 data SampleParetoTarget : Set where
-  recoverTableS5
-  identifyCCDSourceCarrier
-  testSamePackageOrDifferentPackage
-  testHomogenateAndAliquotLineage
-  testReplicateAggregation
-  testCompoundRowMapping
-  testDeterministicTransforms
+  recoverTableS5 : SampleParetoTarget
+  identifyCCDSourceCarrier : SampleParetoTarget
+  testSamePackageOrDifferentPackage : SampleParetoTarget
+  testHomogenateAndAliquotLineage : SampleParetoTarget
+  testReplicateAggregation : SampleParetoTarget
+  testCompoundRowMapping : SampleParetoTarget
+  testDeterministicTransforms : SampleParetoTarget
   resumeEntourageTranslation : SampleParetoTarget
 
 record SampleParetoStep : Set where
@@ -269,17 +269,17 @@ samplePareto9 = sample-pareto-step
 ------------------------------------------------------------------------
 
 data SampleTime : Set where
-  biologicalSpatialLiterature
-  wishartAcquisition2023
-  wishartPublication2024
-  currentCCDObservation
+  biologicalSpatialLiterature : SampleTime
+  wishartAcquisition2023 : SampleTime
+  wishartPublication2024 : SampleTime
+  currentCCDObservation : SampleTime
   currentDashi : SampleTime
 
 data SampleInterpretation : Set where
-  spatialHeterogeneityPlausible
-  publicationUsesOnePackagePerCultivar
-  publicationGroundsPlantMaterial
-  ccdSamePackagePaid
+  spatialHeterogeneityPlausible : SampleInterpretation
+  publicationUsesOnePackagePerCultivar : SampleInterpretation
+  publicationGroundsPlantMaterial : SampleInterpretation
+  ccdSamePackagePaid : SampleInterpretation
   discrepancyExplainedBySampling : SampleInterpretation
 
 data SampleSummary : Set where

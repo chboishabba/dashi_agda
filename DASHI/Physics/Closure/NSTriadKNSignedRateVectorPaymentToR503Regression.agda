@@ -1,0 +1,173 @@
+module DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Regression where
+
+------------------------------------------------------------------------
+-- Regression pins for the post-R490 A1--A5 reduction.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as A1
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as A2
+import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as A3A5
+import DASHI.Physics.Closure.NSTriadKNA3EndpointAwareR406TransportExact as EndpointAware
+
+aggregateWorkDifferenceBridgeClosed :
+  A1.fixedOutputPairDifferenceAggregateVectorBridgeClosed ≡ true
+aggregateWorkDifferenceBridgeClosed =
+  A1.fixedOutputPairDifferenceAggregateVectorBridgeClosedIsTrue
+
+physicalRateDifferenceWeldClosed :
+  A2.physicalCellRateDifferenceSameObjectWeldClosed ≡ true
+physicalRateDifferenceWeldClosed =
+  A2.physicalCellRateDifferenceSameObjectWeldClosedIsTrue
+
+liveA3SnapshotBoundToTrajectory :
+  A3A5.liveA3SnapshotBoundToR240Trajectory ≡ true
+liveA3SnapshotBoundToTrajectory =
+  A3A5.liveA3SnapshotBoundToR240TrajectoryIsTrue
+
+liveA3OutputAggregationClosed :
+  A3A5.liveA3SelectedOutputAggregationClosed ≡ true
+liveA3OutputAggregationClosed =
+  A3A5.liveA3SelectedOutputAggregationClosedIsTrue
+
+a3TargetTypeConstructed :
+  A3A5.a3ExactSignedRateVectorPaymentTypeConstructed ≡ true
+a3TargetTypeConstructed =
+  A3A5.a3ExactSignedRateVectorPaymentTypeConstructedIsTrue
+
+a3QuantitativePaymentStillOpen :
+  A3A5.a3QuantitativePhysicalPaymentClosed ≡ false
+a3QuantitativePaymentStillOpen =
+  A3A5.a3QuantitativePhysicalPaymentClosedIsFalse
+
+a3ToLiteralR406AttachmentStillOpen :
+  A3A5.a3ToR432LiteralR406SameObjectAttachmentClosed ≡ false
+a3ToLiteralR406AttachmentStillOpen =
+  A3A5.a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse
+
+a4CardinalityFreeCompilerClosed :
+  A3A5.a4CardinalityFreeLocalToGlobalCompilerClosed ≡ true
+a4CardinalityFreeCompilerClosed =
+  A3A5.a4CardinalityFreeLocalToGlobalCompilerClosedIsTrue
+
+a5DirectR503CompilerClosed :
+  A3A5.a5GlobalPaymentToR503CompilerClosed ≡ true
+a5DirectR503CompilerClosed =
+  A3A5.a5GlobalPaymentToR503CompilerClosedIsTrue
+
+a4OrderPreservingIntegrationCompilerClosed :
+  A3A5.a4OrderPreservingIntegrationCompilerClosed ≡ true
+a4OrderPreservingIntegrationCompilerClosed =
+  A3A5.a4OrderPreservingIntegrationCompilerClosedIsTrue
+
+physicalRateDifferenceSameOutputFactorizationClosed :
+  A2.physicalRateDifferenceSameOutputFactorizationClosed ≡ true
+physicalRateDifferenceSameOutputFactorizationClosed =
+  A2.physicalRateDifferenceSameOutputFactorizationClosedIsTrue
+
+physicalOutputFibreSignedRateGeometryFactorizationClosed :
+  A2.physicalOutputFibreSignedRateGeometryFactorizationClosed ≡ true
+physicalOutputFibreSignedRateGeometryFactorizationClosed =
+  A2.physicalOutputFibreSignedRateGeometryFactorizationClosedIsTrue
+
+a3RateWorkCorrelationReducedToSeparationGeometry :
+  A3A5.a3RateWorkCorrelationReducedToSeparationGeometry ≡ true
+a3RateWorkCorrelationReducedToSeparationGeometry =
+  A3A5.a3RateWorkCorrelationReducedToSeparationGeometryIsTrue
+
+a3SeparationGeometryPaymentCompilerClosed :
+  A3A5.a3SeparationGeometryPaymentCompilerClosed ≡ true
+a3SeparationGeometryPaymentCompilerClosed =
+  A3A5.a3SeparationGeometryPaymentCompilerClosedIsTrue
+
+r205RawCurlSameObjectBridgeStillOpen :
+  A3A5.a3R205RawCurlPartnerSameObjectBridgeClosed ≡ false
+r205RawCurlSameObjectBridgeStillOpen =
+  A3A5.a3R205RawCurlPartnerSameObjectBridgeClosedIsFalse
+
+
+normalizedQuadraticKernelAggregateBridgeClosed :
+  A3A5.a3NormalizedQuadraticKernelAggregateBridgeClosed ≡ true
+normalizedQuadraticKernelAggregateBridgeClosed =
+  A3A5.a3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue
+
+r205PointwiseIdentificationRejected :
+  A3A5.a3R205PointwiseIdentificationAdmissible ≡ false
+r205PointwiseIdentificationRejected =
+  A3A5.a3R205PointwiseIdentificationAdmissibleIsFalse
+
+
+directCovarianceEqualsR406Rejected :
+  A3A5.a3DirectCovarianceEqualsR406RemainderAdmissible ≡ false
+directCovarianceEqualsR406Rejected =
+  A3A5.a3DirectCovarianceEqualsR406RemainderAdmissibleIsFalse
+
+a3ConsumerAttachmentTypeConstructed :
+  A3A5.a3ConsumerAttachmentTypeConstructed ≡ true
+a3ConsumerAttachmentTypeConstructed =
+  A3A5.a3ConsumerAttachmentTypeConstructedIsTrue
+
+
+preferredR406BudgetAttachmentTypeConstructed :
+  A3A5.a3PreferredR406BudgetAttachmentTypeConstructed ≡ true
+preferredR406BudgetAttachmentTypeConstructed =
+  A3A5.a3PreferredR406BudgetAttachmentTypeConstructedIsTrue
+
+preferredCompilerDoesNotRequireDirectCovarianceR406Equality :
+  A3A5.a3PreferredCompilerRequiresDirectCovarianceR406Equality ≡ false
+preferredCompilerDoesNotRequireDirectCovarianceR406Equality =
+  A3A5.a3PreferredCompilerRequiresDirectCovarianceR406EqualityIsFalse
+
+
+endpointAwareConsumerTransportConstructed :
+  EndpointAware.endpointAwareConsumerTransportTypeConstructed ≡ true
+endpointAwareConsumerTransportConstructed =
+  EndpointAware.endpointAwareConsumerTransportTypeConstructedIsTrue
+
+pointwiseR406AttachmentNotRequiredByPreferredTransport :
+  EndpointAware.preferredPointwiseR406AttachmentRequired ≡ false
+pointwiseR406AttachmentNotRequiredByPreferredTransport =
+  EndpointAware.preferredPointwiseR406AttachmentRequiredIsFalse
+
+endpointTermExplicitInPreferredTransport :
+  EndpointAware.endpointTermExplicitInPreferredTransport ≡ true
+endpointTermExplicitInPreferredTransport =
+  EndpointAware.endpointTermExplicitInPreferredTransportIsTrue
+
+consumerTransportIntroducesNoNewNonlinearEstimate :
+  EndpointAware.newNonlinearEstimateIntroducedByConsumerTransport ≡ false
+consumerTransportIntroducesNoNewNonlinearEstimate =
+  EndpointAware.newNonlinearEstimateIntroducedByConsumerTransportIsFalse
+
+d1b0d1b1SameObjectTransportStillProofBearing :
+  EndpointAware.d1b0d1b1SameObjectTransportStillProofBearing ≡ true
+d1b0d1b1SameObjectTransportStillProofBearing =
+  EndpointAware.d1b0d1b1SameObjectTransportStillProofBearingIsTrue
+
+a3QuantitativeSignedPaymentStillProofBearing :
+  EndpointAware.a3QuantitativeSignedPaymentStillProofBearing ≡ true
+a3QuantitativeSignedPaymentStillProofBearing =
+  EndpointAware.a3QuantitativeSignedPaymentStillProofBearingIsTrue
+
+
+exactR406EndpointNormalFormAvailable :
+  EndpointAware.exactR406EndpointNormalFormClosedGivenScalarFTC ≡ true
+exactR406EndpointNormalFormAvailable =
+  EndpointAware.exactR406EndpointNormalFormClosedGivenScalarFTCIsTrue
+
+divisionFreeD1bA3NormalizationAvailable :
+  EndpointAware.divisionFreeD1bA3NormalizationClosed ≡ true
+divisionFreeD1bA3NormalizationAvailable =
+  EndpointAware.divisionFreeD1bA3NormalizationClosedIsTrue
+
+endpointPlusFourA3NotYetDerivedFromD1b0D1b1 :
+  EndpointAware.endpointPlusFourA3EqualityDerivedFromD1b0D1b1 ≡ false
+endpointPlusFourA3NotYetDerivedFromD1b0D1b1 =
+  EndpointAware.endpointPlusFourA3EqualityDerivedFromD1b0D1b1IsFalse
+
+factoredMinusSelfGramToA3StillOpen :
+  EndpointAware.factoredFullMinusSelfGramToA3AttachmentClosed ≡ false
+factoredMinusSelfGramToA3StillOpen =
+  EndpointAware.factoredFullMinusSelfGramToA3AttachmentClosedIsFalse

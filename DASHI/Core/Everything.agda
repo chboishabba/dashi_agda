@@ -1,7 +1,8 @@
-module DASHI.Core.Everything where
-
--- Core domain rollup.  Specialized theorem-family rollups attach here.
-
+import DASHI.Core.MereologyCoreExact
+import DASHI.Core.MereologyNonCollapseExact
+import DASHI.Core.MultipartSameObjectReconstructionExact
+import DASHI.Core.MultipartMereologyBridgeExact
+import DASHI.Core.ConsumerRelativeMereologyExact
 import DASHI.Core.FallacyObstructionEverything
 import DASHI.Core.TrajectoryResidueExact
 import DASHI.Core.ContrastiveHistoryResidualExact
@@ -123,9 +124,6 @@ import DASHI.Core.SolisInquiryPipelineExact
 import DASHI.Core.ResidualScalingLawEscapeExact
 import DASHI.Core.ResidualScalingDependencyCrossPollinationExact
 import DASHI.Core.DescriptorResidualPromotionAdmissibilityExact
-
--- History-conditioned decision / relational compression / observer-gain core.
-import DASHI.Core.HistoryConditionedChoiceExact
 import DASHI.Core.RelationalTensionCompressionExact
 import DASHI.Core.RelationalObserverGainExact
 import DASHI.Core.RelationalHistoryFabricExact
@@ -135,14 +133,14 @@ import DASHI.Core.HistoryQualifiedSelectionTopologyExact
 import DASHI.Core.MeasurementBoundaryNonfactorabilityExact
 import DASHI.Core.ResponsibilityBurdenNonfactorabilityExact
 import DASHI.Core.PoliticalContestabilityExact
+import DASHI.Core.GovernanceTrajectoryRealisationExact
+import DASHI.Core.FriendlyjordiesGovernanceQuestionExact
 import DASHI.Core.CategoryAuthorityAuditExact
 import DASHI.Core.MultiaxialResidualBundleExact
 import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
 import DASHI.Core.SituatedClaimAuthoritySystemExact
 import DASHI.Core.KnowledgeContentAuthoritySeparationExact
 import DASHI.Core.TerminalRealisationValidationExact
-
--- Situated fibre dynamics / consumer-indexed adequacy.
 import DASHI.Core.SituatedActionabilityFibreExact
 import DASHI.Core.TrajectoryRecoveryFibreExact
 import DASHI.Core.MultiaxialIncidenceFibreExact
@@ -150,28 +148,49 @@ import DASHI.Core.ConsumerIndexedTrajectoryFibreAdequacyExact
 import DASHI.Core.ConsumerFibreRefinementSchedulerExact
 import DASHI.Core.BoundAcquisitionDemandExact
 import DASHI.Core.SituatedFibreDynamicsEverything
-
--- Proof-carrying physical execution / shared-state coalition / proof-search
--- least-privilege closure.
 import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact
-
--- Snowball plural-lens invariant, discovery/admission, attribution, grain, OSINT,
--- and historical programme-name provenance.
 import DASHI.Core.SnowballPluralLensInvariantExact
 import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact
 import DASHI.Core.SnowballAtomWrongTypeScaleInvariantExact
 import DASHI.Core.SnowballOSINTAcquisitionInvariantExact
 import DASHI.Core.SnowballHistoricalProgrammeNameCollisionExact
-
--- Domain-neutral source/provenance/observation carrier.
 import DASHI.Core.SourceConditionedObservationExact
-
--- Portable consumer-indexed semantics with UI and loop interpretation fixtures.
 import DASHI.Core.PortableSemanticInterpretationExact
 import DASHI.Core.PortableInteractiveViewExact
 import DASHI.Core.PortableLoopInterpretationExact
 import DASHI.Core.PortableSemanticConsumerAdequacyBridgeExact
 import DASHI.Core.PortableSemanticTranslationRealisationBridgeExact
+import DASHI.Core.WorldRepresentationSeparationExact
+import DASHI.Core.TheoryUnderdeterminationExperimentExact
+import DASHI.Core.LawlikeRegularityCounterfactualExact
+import DASHI.Core.EmancipatoryVocabularyRelationalGrammarNoncollapseExact
+import DASHI.Core.ProtectionVocabularyUniversalContestabilityNoncollapseExact
+
+module DASHI.Core.Everything where
+
+-- Core domain rollup.  Specialized theorem-family rollups attach here.
+
+
+-- History-conditioned decision / relational compression / observer-gain core.
+
+-- Situated fibre dynamics / consumer-indexed adequacy.
+
+-- Proof-carrying physical execution / shared-state coalition / proof-search
+-- least-privilege closure.
+
+-- Snowball plural-lens invariant, discovery/admission, attribution, grain, OSINT,
+-- and historical programme-name provenance.
+
+-- Domain-neutral source/provenance/observation carrier.
+
+-- Portable consumer-indexed semantics with UI and loop interpretation fixtures.
+
+-- World/observation/theory/belief type separation and factorisation boundary.
+
+-- Theory underdetermination, epistemic suspension, and discriminating experiments.
+
+-- Law-like invariance under declared counterfactual/control families.
+import DASHI.Core.HistoricalMechanismCompilerExact

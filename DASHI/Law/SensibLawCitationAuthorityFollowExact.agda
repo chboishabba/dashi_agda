@@ -26,7 +26,7 @@ record CitationCandidate : Set where
 
 open CitationCandidate public
 
-record CitationIdentity (candidate : CitationCandidate) : Set where
+record CitationIdentity (candidate : CitationCandidate) : Set₁ where
   constructor citationIdentity
   field
     normalizedCitation : String

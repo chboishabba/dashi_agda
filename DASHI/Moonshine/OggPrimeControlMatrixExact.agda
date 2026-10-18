@@ -28,9 +28,8 @@ import DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact as Candidate
 import DASHI.Moonshine.RamanujanTauCandidateFingerprintJ0To35Exact as Tau
 
 data OddPrimeCandidateUnder72 : Set where
-  prime3 prime5 prime7 prime11 prime13 prime17 prime19 prime23 prime29 prime31
-    prime37 prime41 prime43 prime47 prime53 prime59 prime61 prime67 prime71 :
-    OddPrimeCandidateUnder72
+  prime3 prime5 prime7 prime11 prime13 prime17 prime19 prime23 prime29 prime31 : OddPrimeCandidateUnder72
+  prime37 prime41 prime43 prime47 prime53 prime59 prime61 prime67 prime71 : OddPrimeCandidateUnder72
 
 primeLevel : OddPrimeCandidateUnder72 → Nat
 primeLevel prime3 = 3

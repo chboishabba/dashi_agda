@@ -37,10 +37,10 @@ ternaryLifeBoundary = TernaryLife.canonicalTernaryLifeStrategicBridgeBoundary
 ------------------------------------------------------------------------
 
 data MixedNashExistenceResidual : Set where
-  missingIndependentProductSourceAlignment
-  missingFiniteSimplexRealisation
-  missingNashFixedPointTheoremTranscription
-  missingExactGameInstantiation
+  missingIndependentProductSourceAlignment : MixedNashExistenceResidual
+  missingFiniteSimplexRealisation : MixedNashExistenceResidual
+  missingNashFixedPointTheoremTranscription : MixedNashExistenceResidual
+  missingExactGameInstantiation : MixedNashExistenceResidual
   missingKernelCertification : MixedNashExistenceResidual
 
 producerClass : MixedNashExistenceResidual → Debt.DebtClass

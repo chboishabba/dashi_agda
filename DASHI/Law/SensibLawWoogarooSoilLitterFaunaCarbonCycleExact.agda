@@ -21,11 +21,11 @@ import DASHI.Law.SensibLawWoogarooLegalConsumerAtomCompletionExact as Atom
 ------------------------------------------------------------------------
 
 data EcosystemReplacementClock : Set where
-  abovegroundCarbonClock
-  soilCarbonClock
-  detritalLitterClock
-  habitatStructureClock
-  populationSupportClock
+  abovegroundCarbonClock : EcosystemReplacementClock
+  soilCarbonClock : EcosystemReplacementClock
+  detritalLitterClock : EcosystemReplacementClock
+  habitatStructureClock : EcosystemReplacementClock
+  populationSupportClock : EcosystemReplacementClock
   bioticProcessClock : EcosystemReplacementClock
 
 record EcosystemReplacementDimension : Set where

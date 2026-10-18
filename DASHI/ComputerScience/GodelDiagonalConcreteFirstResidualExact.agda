@@ -10,8 +10,8 @@ import DASHI.ComputerScience.GodelArithmetisedSubstitutionCompilerExact as Subst
 ------------------------------------------------------------------------
 
 data FormulaRetractionProducerKind : Set where
-  directFormulaNatCodec
-  prefixSyntaxViaExactStreamCodec
+  directFormulaNatCodec : FormulaRetractionProducerKind
+  prefixSyntaxViaExactStreamCodec : FormulaRetractionProducerKind
   recursiveSyntaxViaPairingCodec : FormulaRetractionProducerKind
 
 data ProducerReadiness : Set where

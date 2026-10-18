@@ -74,10 +74,10 @@ canonicalRootMappingPacket =
 
 data UniqueResolvedRoot (packet : RootMappingPacket) : Set where
   chooseQ35120 :
-    q35120CandidateActive packet ≡ true →
-    q136433660CandidateActive packet ≡ false →
-    explicitSemanticRootDecision packet ≡ true →
-    UniqueResolvedRoot packet
+  q35120CandidateActive packet ≡ true → :
+  q136433660CandidateActive packet ≡ false → :
+  explicitSemanticRootDecision packet ≡ true → :
+  UniqueResolvedRoot packet :
   chooseQ136433660 :
     q35120CandidateActive packet ≡ false →
     q136433660CandidateActive packet ≡ true →

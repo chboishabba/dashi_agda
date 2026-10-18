@@ -23,24 +23,18 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 -- metaphysical authority, or Clay/physics authority.
 
 data InterMediaBridgeStatus : Set where
-  interMediaBridge_candidateOnly :
-    InterMediaBridgeStatus
+  interMediaBridge_candidateOnly : InterMediaBridgeStatus
 
 data MediaKind : Set where
-  spatialMedium :
-    MediaKind
+  spatialMedium : MediaKind
 
-  movingBodyMedium :
-    MediaKind
+  movingBodyMedium : MediaKind
 
-  attentionalMedium :
-    MediaKind
+  attentionalMedium : MediaKind
 
-  relationalMedium :
-    MediaKind
+  relationalMedium : MediaKind
 
-  textualMedium :
-    MediaKind
+  textualMedium : MediaKind
 
   namedMedium :
     String →
@@ -55,47 +49,33 @@ canonicalMediaKinds =
   ∷ []
 
 data CarrierKind : Set where
-  roomCarrier :
-    CarrierKind
+  roomCarrier : CarrierKind
 
-  landscapeCarrier :
-    CarrierKind
+  landscapeCarrier : CarrierKind
 
-  thresholdCarrier :
-    CarrierKind
+  thresholdCarrier : CarrierKind
 
-  bodyCarrier :
-    CarrierKind
+  bodyCarrier : CarrierKind
 
-  breathCarrier :
-    CarrierKind
+  breathCarrier : CarrierKind
 
-  postureCarrier :
-    CarrierKind
+  postureCarrier : CarrierKind
 
-  forceCarrier :
-    CarrierKind
+  forceCarrier : CarrierKind
 
-  movementCarrier :
-    CarrierKind
+  movementCarrier : CarrierKind
 
-  attentionCarrier :
-    CarrierKind
+  attentionCarrier : CarrierKind
 
-  perceptionCarrier :
-    CarrierKind
+  perceptionCarrier : CarrierKind
 
-  affectCarrier :
-    CarrierKind
+  affectCarrier : CarrierKind
 
-  memoryCarrier :
-    CarrierKind
+  memoryCarrier : CarrierKind
 
-  selfModelCarrier :
-    CarrierKind
+  selfModelCarrier : CarrierKind
 
-  residualCarrier :
-    CarrierKind
+  residualCarrier : CarrierKind
 
   namedCarrier :
     String →

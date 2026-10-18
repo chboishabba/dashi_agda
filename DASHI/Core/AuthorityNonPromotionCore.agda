@@ -26,50 +26,35 @@ listCount (_ ∷ xs) =
 -- Authority vocabulary.
 
 data AuthorityKind : Set where
-  truthAuthority :
-    AuthorityKind
+  truthAuthority : AuthorityKind
 
-  supportAuthority :
-    AuthorityKind
+  supportAuthority : AuthorityKind
 
-  admissibilityAuthority :
-    AuthorityKind
+  admissibilityAuthority : AuthorityKind
 
-  clinicalAuthority :
-    AuthorityKind
+  clinicalAuthority : AuthorityKind
 
-  scientificAuthority :
-    AuthorityKind
+  scientificAuthority : AuthorityKind
 
-  spiritualAuthority :
-    AuthorityKind
+  spiritualAuthority : AuthorityKind
 
-  metaphysicalAuthority :
-    AuthorityKind
+  metaphysicalAuthority : AuthorityKind
 
-  tradingAuthority :
-    AuthorityKind
+  tradingAuthority : AuthorityKind
 
-  theoremAuthority :
-    AuthorityKind
+  theoremAuthority : AuthorityKind
 
-  clayAuthority :
-    AuthorityKind
+  clayAuthority : AuthorityKind
 
-  runtimeAuthority :
-    AuthorityKind
+  runtimeAuthority : AuthorityKind
 
-  externalAuthority :
-    AuthorityKind
+  externalAuthority : AuthorityKind
 
-  empiricalAuthority :
-    AuthorityKind
+  empiricalAuthority : AuthorityKind
 
-  legalAuthority :
-    AuthorityKind
+  legalAuthority : AuthorityKind
 
-  culturalAuthority :
-    AuthorityKind
+  culturalAuthority : AuthorityKind
 
 AuthorityDomain : Set
 AuthorityDomain =

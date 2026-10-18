@@ -28,7 +28,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 ------------------------------------------------------------------------
 
 record ConsumerDescent
-    {Fine Coarse Output : Set}
+    {Fine : Set ℓ} {Coarse Output : Set}
     (project : Fine → Coarse)
     (consume : Fine → Output) : Set₁ where
   constructor consumerDescent
@@ -40,7 +40,7 @@ record ConsumerDescent
 open ConsumerDescent public
 
 record ConsumerDescentDefect
-    {Fine Coarse Output : Set}
+    {Fine : Set ℓ} {Coarse Output : Set}
     (project : Fine → Coarse)
     (consume : Fine → Output) : Set where
   constructor consumerDescentDefect
@@ -71,7 +71,7 @@ consumerDescentDefectContradictsDescent descent defect =
 ------------------------------------------------------------------------
 
 record Intertwiner
-    {FineIn FineOut CoarseIn CoarseOut : Set}
+    {FineIn : Set ℓ₁} {FineOut : Set ℓ₂} {CoarseIn CoarseOut : Set}
     (projectIn : FineIn → CoarseIn)
     (projectOut : FineOut → CoarseOut)
     (fineMap : FineIn → FineOut)
@@ -85,7 +85,7 @@ record Intertwiner
 open Intertwiner public
 
 record IntertwiningDefect
-    {FineIn FineOut CoarseIn CoarseOut : Set}
+    {FineIn : Set ℓ₁} {FineOut : Set ℓ₂} {CoarseIn CoarseOut : Set}
     (projectIn : FineIn → CoarseIn)
     (projectOut : FineOut → CoarseOut)
     (fineMap : FineIn → FineOut)

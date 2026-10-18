@@ -14,11 +14,11 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data AcquisitionStatus : Set where
-  primaryBytesInCustody
-  primaryPublicObjectLocated
-  primaryLocatorKnownBytesUninspected
-  secondaryTranscriptionOnly
-  institutionalPrimaryOnly
+  primaryBytesInCustody : AcquisitionStatus
+  primaryPublicObjectLocated : AcquisitionStatus
+  primaryLocatorKnownBytesUninspected : AcquisitionStatus
+  secondaryTranscriptionOnly : AcquisitionStatus
+  institutionalPrimaryOnly : AcquisitionStatus
   searchResidual : AcquisitionStatus
 
 record ObjectAcquisitionReceipt : Set where

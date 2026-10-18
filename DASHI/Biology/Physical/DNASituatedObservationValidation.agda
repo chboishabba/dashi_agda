@@ -1,0 +1,20 @@
+module DASHI.Biology.Physical.DNASituatedObservationValidation where
+
+open import DASHI.Core.Prelude
+import DASHI.Biology.Physical.DNASituatedObservationExact as Situated
+
+boundary : Situated.DNASituatedObservationBoundary
+boundary = Situated.canonicalDNASituatedObservationBoundary
+
+uvChartExactWherePaid : Bool
+uvChartExactWherePaid = Situated.uvChartExactWherePaid boundary
+
+centralStepInsufficientForContext : Bool
+centralStepInsufficientForContext = Situated.centralStepInsufficientForContext boundary
+
+parameterNameInsufficientForMeasurementIdentity : Bool
+parameterNameInsufficientForMeasurementIdentity =
+  Situated.parameterNameInsufficientForMeasurementIdentity boundary
+
+uvChartCreatesCompleteDNAState : Bool
+uvChartCreatesCompleteDNAState = Situated.uvChartCreatesCompleteDNAState boundary

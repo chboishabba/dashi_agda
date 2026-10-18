@@ -24,58 +24,41 @@ import DASHI.Physics.Closure.ChemistryRightLimitsGateTheorem as Chem
 data Never : Set where
 
 data ProteinHormoneChemistryCellLane : Set where
-  chemistryRightLimitReceiptLane :
-    ProteinHormoneChemistryCellLane
+  chemistryRightLimitReceiptLane : ProteinHormoneChemistryCellLane
 
-  proteinCandidateObservationLane :
-    ProteinHormoneChemistryCellLane
+  proteinCandidateObservationLane : ProteinHormoneChemistryCellLane
 
-  hormoneCandidateObservationLane :
-    ProteinHormoneChemistryCellLane
+  hormoneCandidateObservationLane : ProteinHormoneChemistryCellLane
 
-  receptorCellCommunicationLane :
-    ProteinHormoneChemistryCellLane
+  receptorCellCommunicationLane : ProteinHormoneChemistryCellLane
 
-  boundedCellPhysiologyReceiptLane :
-    ProteinHormoneChemistryCellLane
+  boundedCellPhysiologyReceiptLane : ProteinHormoneChemistryCellLane
 
 data ProteinHormoneChemistryCellGuard : Set where
-  NoDiseaseCausationClaim :
-    ProteinHormoneChemistryCellGuard
+  NoDiseaseCausationClaim : ProteinHormoneChemistryCellGuard
 
-  NoFullProteinFoldingClaim :
-    ProteinHormoneChemistryCellGuard
+  NoFullProteinFoldingClaim : ProteinHormoneChemistryCellGuard
 
-  NoFullCellFatePredictionClaim :
-    ProteinHormoneChemistryCellGuard
+  NoFullCellFatePredictionClaim : ProteinHormoneChemistryCellGuard
 
-  NoHormoneToBehaviourClosureClaim :
-    ProteinHormoneChemistryCellGuard
+  NoHormoneToBehaviourClosureClaim : ProteinHormoneChemistryCellGuard
 
-  NoChemistryToBiologyClosureClaim :
-    ProteinHormoneChemistryCellGuard
+  NoChemistryToBiologyClosureClaim : ProteinHormoneChemistryCellGuard
 
-  NoReceiptlessPromotionClaim :
-    ProteinHormoneChemistryCellGuard
+  NoReceiptlessPromotionClaim : ProteinHormoneChemistryCellGuard
 
 data ProteinHormoneChemistryCellRoute : Set where
-  boundedProteinHormoneCellObservationRoute :
-    ProteinHormoneChemistryCellRoute
+  boundedProteinHormoneCellObservationRoute : ProteinHormoneChemistryCellRoute
 
-  diseaseCausationRoute :
-    ProteinHormoneChemistryCellRoute
+  diseaseCausationRoute : ProteinHormoneChemistryCellRoute
 
-  fullProteinFoldingRoute :
-    ProteinHormoneChemistryCellRoute
+  fullProteinFoldingRoute : ProteinHormoneChemistryCellRoute
 
-  cellFatePredictionRoute :
-    ProteinHormoneChemistryCellRoute
+  cellFatePredictionRoute : ProteinHormoneChemistryCellRoute
 
-  hormoneToBehaviourClosureRoute :
-    ProteinHormoneChemistryCellRoute
+  hormoneToBehaviourClosureRoute : ProteinHormoneChemistryCellRoute
 
-  chemistryToBiologyClosureRoute :
-    ProteinHormoneChemistryCellRoute
+  chemistryToBiologyClosureRoute : ProteinHormoneChemistryCellRoute
 
 AdmissibleProteinHormoneChemistryCellRoute :
   ProteinHormoneChemistryCellRoute -> Set

@@ -1,0 +1,12 @@
+module DASHI.Analysis.RiemannConstructiveRealPlattTrudgianWindowValidation where
+
+import DASHI.Analysis.ConstructiveCompleteRealPackageExact as Package
+import DASHI.Analysis.RiemannAnalyticLocatedVerifiedHeightExact as Located
+import DASHI.Analysis.RiemannConstructiveRealPlattTrudgianWindowExact as Window
+
+canonicalWindowCompilesOnAnyAttachedRationalPresentation :
+  ∀ {realPackage : Package.ConstructiveCompleteRealPackage} →
+  Window.StandardRationalCoordinate realPackage →
+  Located.RationalLocatedHeightWindow realPackage
+canonicalWindowCompilesOnAnyAttachedRationalPresentation =
+  Window.compileCanonicalLocatedHeightWindow

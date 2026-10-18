@@ -17,15 +17,15 @@ waveMixedSelectivitySystem :
   Mixed.MixedSelectivitySystem
     Miller.Site2 Miller.Tick2 Bool Bool Miller.Tick2
 waveMixedSelectivitySystem = record
-  { Mixed.respond = λ neuron context stimulus →
+  { respond = λ neuron context stimulus →
       Miller.recruitedAt context neuron
-  ; Mixed.fieldGate = λ pattern neuron →
-      Miller.recruitedAt pattern neuron
-  ; Mixed.contextPattern = λ context → context
-  ; Mixed.sameStimulusMayChangeWithContext = true
-  ; Mixed.gateActsOnPopulationNotSingleSynapse = true
-  ; Mixed.fieldPatternDoesNotUniquelyDetermineResponse = true
-  ; Mixed.interpretation =
+  ; fieldGate = λ pat neuron →
+      Miller.recruitedAt pat neuron
+  ; contextPattern = λ context → context
+  ; sameStimulusMayChangeWithContext = true
+  ; gateActsOnPopulationNotSingleSynapse = true
+  ; fieldPatternDoesNotUniquelyDetermineResponse = true
+  ; interpretation =
       "same stored/input token, context-indexed traveling field, different effective participation"
   }
 
@@ -50,11 +50,11 @@ sameStimulusContextChangesParticipation ()
 canonicalContextDependentWitness :
   Mixed.ContextDependentWitness waveMixedSelectivitySystem
 canonicalContextDependentWitness = record
-  { Mixed.neuron = Miller.leftSite
-  ; Mixed.first = Miller.firstTick
-  ; Mixed.second = Miller.secondTick
-  ; Mixed.stimulus = false
-  ; Mixed.responsesDiffer = true
+  { neuron = Miller.leftSite
+  ; first = Miller.firstTick
+  ; second = Miller.secondTick
+  ; stimulus = false
+  ; responsesDiffer = true
   }
 
 record MixedSelectivityWaveBoundary : Set where

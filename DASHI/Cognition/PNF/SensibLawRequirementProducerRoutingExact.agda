@@ -49,9 +49,9 @@ invocationNeed Planner.acquireMissingEvidence = producerInvocationRequired
 invocationNeed Planner.resolveConflict = producerInvocationRequired
 invocationNeed Planner.revalidateStaleEvidence = producerInvocationRequired
 
-data WorkRoute (need : ProducerInvocationNeed) (coordinate : Demand.SemanticCoordinate) : Set where
-  reuseWithoutProducer : WorkRoute noProducerInvocation coordinate
-  invokeProducer : ProducerRoute coordinate → WorkRoute producerInvocationRequired coordinate
+data WorkRoute : ProducerInvocationNeed → Demand.SemanticCoordinate → Set where
+  reuseWithoutProducer : ∀ {coordinate} → WorkRoute noProducerInvocation coordinate
+  invokeProducer : ∀ {coordinate} → ProducerRoute coordinate → WorkRoute producerInvocationRequired coordinate
 record RoutedWork {state} {active : Demand.ActiveRequirement} (plan : Planner.RequirementPlan state active) : Set where
   constructor routedWork
   field need : ProducerInvocationNeed; needExact : need ≡ invocationNeed (Planner.action plan); route : WorkRoute need (Demand.coordinate active); routeReference : String

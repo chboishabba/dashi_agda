@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassFiniteVolumePresentationValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassFiniteVolumePresentationExact as Presentation
+
+constrainedMassRound283CompilerOwned :
+  Presentation.cmp119ConstrainedMassRound283CompilerLevel ≡ machineChecked
+constrainedMassRound283CompilerOwned = refl
+
+constrainedMassSelectedProbabilityCompilerOwned :
+  Presentation.cmp119ConstrainedMassSelectedProbabilityCompilerLevel ≡ machineChecked
+constrainedMassSelectedProbabilityCompilerOwned = refl
+
+constrainedMassT5ExpectationSameObjectRemainsPhysical :
+  Presentation.cmp119ConstrainedMassToT5ExpectationSameObjectLevel ≡ conditional
+constrainedMassT5ExpectationSameObjectRemainsPhysical = refl

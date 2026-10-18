@@ -17,14 +17,14 @@ import DASHI.Environment.PluralSustainableLandManagementTraditionsExact as Plura
 ------------------------------------------------------------------------
 
 data AgrarianClaimKind : Set where
-  foodSovereigntyClaim
-  peasantAgroecologyClaim
-  landTerritoryClaim
-  seedSovereigntyClaim
-  nativeMaizeMilpaClaim
-  autonomousGovernanceClaim
-  technicalOutcomeClaim
-  causalEffectClaim
+  foodSovereigntyClaim : AgrarianClaimKind
+  peasantAgroecologyClaim : AgrarianClaimKind
+  landTerritoryClaim : AgrarianClaimKind
+  seedSovereigntyClaim : AgrarianClaimKind
+  nativeMaizeMilpaClaim : AgrarianClaimKind
+  autonomousGovernanceClaim : AgrarianClaimKind
+  technicalOutcomeClaim : AgrarianClaimKind
+  causalEffectClaim : AgrarianClaimKind
   portableRecommendationClaim : AgrarianClaimKind
 
 record AgrarianAttributedClaim : Set where

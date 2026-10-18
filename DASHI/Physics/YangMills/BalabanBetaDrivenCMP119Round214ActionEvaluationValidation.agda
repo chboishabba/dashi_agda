@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Round214ActionEvaluationValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Round214ActionEvaluationExact as A
+
+round214ActionEvaluationCompilerOwned :
+  A.round219Round214ActionEvaluationCompilerLevel ≡ machineChecked
+round214ActionEvaluationCompilerOwned = refl
+
+selectedActionSameObjectCompilerOwned :
+  A.round219ActionIsRound214SelectedActionCompilerLevel ≡ machineChecked
+selectedActionSameObjectCompilerOwned = refl
+
+literalRound214ActionEvaluationRemainsPhysical :
+  A.literalRound219Round214ActionEvaluationLevel ≡ conditional
+literalRound214ActionEvaluationRemainsPhysical = refl

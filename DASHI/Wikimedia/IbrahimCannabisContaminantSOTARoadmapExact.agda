@@ -22,12 +22,12 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data SOTASourceRole : Set where
-  recentAnalyticalReview
-  recentToxicologyReview
-  recentMarketSurveillance
-  activeStandardWorkItem
-  currentRegulatoryGuidance
-  currentRegulatoryRulemaking
+  recentAnalyticalReview : SOTASourceRole
+  recentToxicologyReview : SOTASourceRole
+  recentMarketSurveillance : SOTASourceRole
+  activeStandardWorkItem : SOTASourceRole
+  currentRegulatoryGuidance : SOTASourceRole
+  currentRegulatoryRulemaking : SOTASourceRole
   legacyRiskAssessment : SOTASourceRole
 
 record SOTASource : Set where
@@ -148,14 +148,14 @@ efsaABTS351 = sota-source
 ------------------------------------------------------------------------
 
 data SOTAClaim : Set where
-  detectionTechnologyMature
-  regulationHarmonised
-  actionLevelsGenerallyHealthBased
-  inhalationRouteMustBeModelled
-  thermalTransformationMustBeModelled
-  surveillanceSupportsLegalIllegalDifference
-  btHarvestResidueResolved
-  glyphosateCoverageUniversallyResolved
+  detectionTechnologyMature : SOTAClaim
+  regulationHarmonised : SOTAClaim
+  actionLevelsGenerallyHealthBased : SOTAClaim
+  inhalationRouteMustBeModelled : SOTAClaim
+  thermalTransformationMustBeModelled : SOTAClaim
+  surveillanceSupportsLegalIllegalDifference : SOTAClaim
+  btHarvestResidueResolved : SOTAClaim
+  glyphosateCoverageUniversallyResolved : SOTAClaim
   crossClassMeasurementRequired : SOTAClaim
 
 record SOTAStanding : Set where
@@ -235,11 +235,11 @@ crossClassStanding = sota-standing
 ------------------------------------------------------------------------
 
 data RiskMaturity : Set where
-  detectabilityDriven
-  ruleBasedActionLevel
-  routeSeparatedActionLevel
-  routeSpecificTransformationData
-  healthBasedExposureThreshold
+  detectabilityDriven : RiskMaturity
+  ruleBasedActionLevel : RiskMaturity
+  routeSeparatedActionLevel : RiskMaturity
+  routeSpecificTransformationData : RiskMaturity
+  healthBasedExposureThreshold : RiskMaturity
   harmonisedCrossJurisdictionStandard : RiskMaturity
 
 record RiskMaturityReceipt : Set where
@@ -327,12 +327,12 @@ btDataGapDoesNotCreateBtHarm ()
 ------------------------------------------------------------------------
 
 data SOTATarget : Set where
-  deriveRouteSpecificRiskPackets
-  acquirePyrolysisAndVapeData
-  closeBtHarvestResidue
-  normalizeJurisdictionRiskLevels
-  modernGlyphosateAMPASurveillance
-  expandGenericResidueList
+  deriveRouteSpecificRiskPackets : SOTATarget
+  acquirePyrolysisAndVapeData : SOTATarget
+  closeBtHarvestResidue : SOTATarget
+  normalizeJurisdictionRiskLevels : SOTATarget
+  modernGlyphosateAMPASurveillance : SOTATarget
+  expandGenericResidueList : SOTATarget
   broadReviewAccumulation : SOTATarget
 
 record SOTAParetoStep : Set where
@@ -399,13 +399,13 @@ pareto100 = sota-pareto-step
 ------------------------------------------------------------------------
 
 data SOTATime : Set where
-  legacyDetectionEra
-  routeAwareRegulation2025
+  legacyDetectionEra : SOTATime
+  routeAwareRegulation2025 : SOTATime
   currentSOTA2026 : SOTATime
 
 data SOTAInterpretation : Set where
-  detectionIsEnough
-  routeSpecificRiskNeeded
+  detectionIsEnough : SOTAInterpretation
+  routeSpecificRiskNeeded : SOTAInterpretation
   globallyHarmonisedHealthThresholdsExist : SOTAInterpretation
 
 data SOTASummary : Set where routeRiskIsCurrentFrontier : SOTASummary

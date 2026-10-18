@@ -24,8 +24,7 @@ import UFTC_Lattice as UFTC
 -- implementable first layer; Hodge authority remains fail-closed.
 
 data PNFHodgeResidualTopologyStatus : Set where
-  residualTopologyReceipt_noHodgeAuthorityPromotion :
-    PNFHodgeResidualTopologyStatus
+  residualTopologyReceipt_noHodgeAuthorityPromotion : PNFHodgeResidualTopologyStatus
 
 data PNFCellDimension : Set where
   zeroCellDimension : PNFCellDimension
@@ -39,14 +38,13 @@ data PNFZeroCellRef : Set where
 data PNFOneCellRef : Set where
   pnfOneCellRef : Nat → PNFOneCellRef
   pnfResidualOneCell :
-    Core.ResidualEdgeRef →
-    PNFOneCellRef
+  Core.ResidualEdgeRef → :
+  PNFOneCellRef :
   pnfTransportOneCell :
-    Core.BraidPathRef →
-    PNFOneCellRef
+  Core.BraidPathRef → :
+  PNFOneCellRef :
   pnfGraphOneCell :
-    Graph.PNFGraphEdge →
-    PNFOneCellRef
+  Graph.PNFGraphEdge → : PNFOneCellRef
   pnfOneCellFallback : PNFOneCellRef
 
 data PNFTwoCellRef : Set where
@@ -71,17 +69,13 @@ record PNFZeroCell : Set where
 open PNFZeroCell public
 
 data PNFOneCellKind : Set where
-  residualEdge1Cell :
-    PNFOneCellKind
+  residualEdge1Cell : PNFOneCellKind
 
-  transportEdge1Cell :
-    PNFOneCellKind
+  transportEdge1Cell : PNFOneCellKind
 
-  braidWitness1Cell :
-    PNFOneCellKind
+  braidWitness1Cell : PNFOneCellKind
 
-  contradictionResidual1Cell :
-    PNFOneCellKind
+  contradictionResidual1Cell : PNFOneCellKind
 
 record PNFOneCell : Set where
   constructor pnfOneCell
@@ -116,14 +110,11 @@ record PNFOneCell : Set where
 open PNFOneCell public
 
 data PNFTwoCellKind : Set where
-  meetTriangle2Cell :
-    PNFTwoCellKind
+  meetTriangle2Cell : PNFTwoCellKind
 
-  joinTriangle2Cell :
-    PNFTwoCellKind
+  joinTriangle2Cell : PNFTwoCellKind
 
-  contradictionTriangle2Cell :
-    PNFTwoCellKind
+  contradictionTriangle2Cell : PNFTwoCellKind
 
 record PNFTriangleBoundary : Set where
   constructor pnfTriangleBoundary
@@ -213,14 +204,11 @@ data HodgeLaplacianTag : Set where
   Δ2 : HodgeLaplacianTag
 
 data HodgeLaplacianBoundaryLayer : Set where
-  signedGraphLaplacian0Implementable :
-    HodgeLaplacianBoundaryLayer
+  signedGraphLaplacian0Implementable : HodgeLaplacianBoundaryLayer
 
-  hodgeLaplacian1DiagnosticOnly :
-    HodgeLaplacianBoundaryLayer
+  hodgeLaplacian1DiagnosticOnly : HodgeLaplacianBoundaryLayer
 
-  hodgeLaplacian2DiagnosticOnly :
-    HodgeLaplacianBoundaryLayer
+  hodgeLaplacian2DiagnosticOnly : HodgeLaplacianBoundaryLayer
 
 laplacianBoundaryLayer :
   HodgeLaplacianTag →
@@ -409,32 +397,23 @@ canonicalΔ2Shape =
 -- Detected residual-field features.
 
 data DetectedResidualFeatureTag : Set where
-  cycleFeature :
-    DetectedResidualFeatureTag
+  cycleFeature : DetectedResidualFeatureTag
 
-  holeFeature :
-    DetectedResidualFeatureTag
+  holeFeature : DetectedResidualFeatureTag
 
-  inconsistentLoopFeature :
-    DetectedResidualFeatureTag
+  inconsistentLoopFeature : DetectedResidualFeatureTag
 
-  unresolvedEvidenceCavityFeature :
-    DetectedResidualFeatureTag
+  unresolvedEvidenceCavityFeature : DetectedResidualFeatureTag
 
-  closedContradictionStructureFeature :
-    DetectedResidualFeatureTag
+  closedContradictionStructureFeature : DetectedResidualFeatureTag
 
-  frustratedSignedCycleFeature :
-    DetectedResidualFeatureTag
+  frustratedSignedCycleFeature : DetectedResidualFeatureTag
 
-  rotationalFrustrationFeature :
-    DetectedResidualFeatureTag
+  rotationalFrustrationFeature : DetectedResidualFeatureTag
 
-  harmonicCycleDiagnosticFeature :
-    DetectedResidualFeatureTag
+  harmonicCycleDiagnosticFeature : DetectedResidualFeatureTag
 
-  harmonicCavityDiagnosticFeature :
-    DetectedResidualFeatureTag
+  harmonicCavityDiagnosticFeature : DetectedResidualFeatureTag
 
 canonicalDetectedResidualFeatures :
   List DetectedResidualFeatureTag
@@ -645,38 +624,27 @@ pnfHodgeResidualTopologyPromotionImpossible :
 pnfHodgeResidualTopologyPromotionImpossible ()
 
 data PNFHodgeResidualTopologyComponent : Set where
-  zeroOneTwoCellReferenceComponent :
-    PNFHodgeResidualTopologyComponent
+  zeroOneTwoCellReferenceComponent : PNFHodgeResidualTopologyComponent
 
-  residualAndTransportOneCellComponent :
-    PNFHodgeResidualTopologyComponent
+  residualAndTransportOneCellComponent : PNFHodgeResidualTopologyComponent
 
-  meetJoinContradictionTriangleComponent :
-    PNFHodgeResidualTopologyComponent
+  meetJoinContradictionTriangleComponent : PNFHodgeResidualTopologyComponent
 
-  d0d1BoundaryShapeComponent :
-    PNFHodgeResidualTopologyComponent
+  d0d1BoundaryShapeComponent : PNFHodgeResidualTopologyComponent
 
-  hodgeLaplacianTagComponent :
-    PNFHodgeResidualTopologyComponent
+  hodgeLaplacianTagComponent : PNFHodgeResidualTopologyComponent
 
-  detectedFeatureTagComponent :
-    PNFHodgeResidualTopologyComponent
+  detectedFeatureTagComponent : PNFHodgeResidualTopologyComponent
 
-  signedLaplacianFirstComponent :
-    PNFHodgeResidualTopologyComponent
+  signedLaplacianFirstComponent : PNFHodgeResidualTopologyComponent
 
-  hodgeDiagnosticOnlyComponent :
-    PNFHodgeResidualTopologyComponent
+  hodgeDiagnosticOnlyComponent : PNFHodgeResidualTopologyComponent
 
-  frustrationFeatureComponent :
-    PNFHodgeResidualTopologyComponent
+  frustrationFeatureComponent : PNFHodgeResidualTopologyComponent
 
-  harmonicCycleDiagnosticComponent :
-    PNFHodgeResidualTopologyComponent
+  harmonicCycleDiagnosticComponent : PNFHodgeResidualTopologyComponent
 
-  failClosedHodgeAuthorityComponent :
-    PNFHodgeResidualTopologyComponent
+  failClosedHodgeAuthorityComponent : PNFHodgeResidualTopologyComponent
 
 canonicalPNFHodgeResidualTopologyComponents :
   List PNFHodgeResidualTopologyComponent

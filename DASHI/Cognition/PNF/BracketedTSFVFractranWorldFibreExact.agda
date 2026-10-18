@@ -86,7 +86,7 @@ open WorldHistory public
 record BracketEnablement : Set where
   constructor bracketEnablement
   field
-    option : StratifiedOption
+    selectedOption : StratifiedOption
     prerequisiteSatisfied : Bool
     fractionExecutable : Bool
     semanticTypeCompatible : Bool
@@ -94,7 +94,7 @@ record BracketEnablement : Set where
 open BracketEnablement public
 
 enabled : BracketEnablement → Bool
-enabled (bracketEnablement option true true true) = true
+enabled (bracketEnablement selected true true true) = true
 enabled _ = false
 
 record AdmissibleEventExtension : Set where

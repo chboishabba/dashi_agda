@@ -172,8 +172,8 @@ masculinityCannotFactorMisogyny =
 -- Reuse existing online/social-influence firewalls.
 ------------------------------------------------------------------------
 
-priorOnlineBoundary : Prior.ManosphereIDWOnlineInfluenceBoundary
-priorOnlineBoundary = Prior.canonicalManosphereIDWOnlineInfluenceBoundary
+priorOnlineBoundary : Prior.ManosphereIDWOnlineInfluenceBidiBoundary
+priorOnlineBoundary = Prior.canonicalManosphereIDWOnlineInfluenceBidiBoundary
 
 visibleComplianceStillDoesNotRecoverRelation :
   INF.FactorsThrough Influence.complianceSurface Influence.relationReading → ⊥

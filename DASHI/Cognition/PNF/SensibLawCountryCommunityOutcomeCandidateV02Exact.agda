@@ -22,8 +22,8 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data CommunityOutcomeCandidateStatus : Set where
-  communityOriginatingCandidate
-  consumerMatchedOutcomeAdmitted
+  communityOriginatingCandidate : CommunityOutcomeCandidateStatus
+  consumerMatchedOutcomeAdmitted : CommunityOutcomeCandidateStatus
   : CommunityOutcomeCandidateStatus
 
 record CommunityOutcomeCandidate : Set where

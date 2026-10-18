@@ -1,8 +1,9 @@
 module DASHI.Cognition.PNF.FiniteExpectedDecisionPotentialExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (_+_; _*_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
-open import Data.Rational.Tactic.RingSolver using (solve-∀)
+import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Data.Product using (_×_; _,_)
 
 import DASHI.Cognition.PNF.GenericExpectedFibreRateExact as FibreRate
@@ -61,9 +62,17 @@ expectedPotential (term ∷ terms) =
 expectedPotentialDecomposes : (terms : List PotentialTerm) →
   expectedPotential terms
   ≡ expectedEpistemic terms + expectedPragmatic terms
-expectedPotentialDecomposes [] = solve-∀
+expectedPotentialDecomposes [] = sym (ℚP.+-identityˡ 0ℚ)
 expectedPotentialDecomposes (term ∷ terms)
-  rewrite expectedPotentialDecomposes terms = solve-∀
+  rewrite expectedPotentialDecomposes terms
+        | ℚP.*-distribˡ-+ (termMass term) (epistemicCost term) (pragmaticCost term) =
+  sumFour (termMass term * epistemicCost term)
+          (termMass term * pragmaticCost term)
+          (expectedEpistemic terms)
+          (expectedPragmatic terms)
+  where
+    sumFour : ∀ a b c d → (a + b) + (c + d) ≡ (a + c) + (b + d)
+    sumFour a b c d = solve (a ∷ b ∷ c ∷ d ∷ [])
 
 totalProbability : List PotentialTerm → ℚ
 totalProbability [] = 0ℚ
@@ -91,7 +100,7 @@ normalizedExpectedPotentialStillDecomposes law =
 
 componentAsExpectedRate :
   (p e g : ℚ) → p * (e + g) ≡ p * e + p * g
-componentAsExpectedRate p e g = solve-∀
+componentAsExpectedRate p e g = ℚP.*-distribˡ-+ p e g
 
 ------------------------------------------------------------------------
 -- Boundary.  The exact theorem here is finite weighted expectation algebra.

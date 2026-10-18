@@ -6,7 +6,7 @@ open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
 open import Data.List.Base using (List; _∷_; [])
 
-open import DASHI.Physics.Closure.BlockerKillConditions using
+open import DASHI.Physics.Closure.BlockerKillConditionsBase using
   (KillCondition; w1KillCondition; w2KillCondition; w3KillCondition;
    w4KillCondition; w5KillCondition; w6KillCondition)
 

@@ -30,8 +30,8 @@ record RelationalComputationWitness : Set where
 record ObserverRelativePolycomputationBoundary : Set where
   field
     biologyAdapter       : Poly.PolycomputationBiologyAdapter
-    hiddenStateType      : Set
-    boundaryType         : Set
+    hiddenStateBoundary  : Hidden.NonrecurrenceBoundary
+    boundaryPersistence  : Boundary.BoundaryPersistenceBoundary
     noPrivilegedComputationByDefault : Bool
     observerRelativeNotArbitrary     : Bool
     empiricalAdequacyStillRequired   : Bool
@@ -43,8 +43,8 @@ canonicalObserverRelativePolycomputationBoundary :
   ObserverRelativePolycomputationBoundary
 canonicalObserverRelativePolycomputationBoundary = record
   { biologyAdapter = Poly.canonicalPolycomputationBiologyAdapter
-  ; hiddenStateType = Hidden.HiddenStateNonrecurrenceBoundary
-  ; boundaryType = Boundary.SeparableBoundaryPersistence
+  ; hiddenStateBoundary = Hidden.canonicalNonrecurrenceBoundary
+  ; boundaryPersistence = Boundary.canonicalBoundaryPersistenceBoundary
   ; noPrivilegedComputationByDefault = true
   ; observerRelativeNotArbitrary = true
   ; empiricalAdequacyStillRequired = true

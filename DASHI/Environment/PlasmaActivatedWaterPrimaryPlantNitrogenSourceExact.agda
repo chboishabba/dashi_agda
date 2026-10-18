@@ -19,11 +19,11 @@ import DASHI.Core.ScientificWorkAttributionExact as Attribution
 ------------------------------------------------------------------------
 
 data PAWPlantPrimaryRole : Set where
-  plasmaNitrateHydroponicComparator
+  plasmaNitrateHydroponicComparator : PAWPlantPrimaryRole
   pawRootNitrogenUptakeMechanism : PAWPlantPrimaryRole
 
 data PAWPlantPrimaryDesign : Set where
-  controlledHydroponicNitrateSubstitution
+  controlledHydroponicNitrateSubstitution : PAWPlantPrimaryDesign
   phytofluidicRootUptakeExperiment : PAWPlantPrimaryDesign
 
 record PAWPlantPrimarySource : Set where

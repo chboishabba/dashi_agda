@@ -25,22 +25,22 @@ import DASHI.Cognition.PNF.SensibLawTerraNulliusOperationalJuridicalNonHumanityE
 ------------------------------------------------------------------------
 
 data CompletionLayer : Set where
-  formalArchitectureLayer
-  sourceMappingLayer
-  communityOutcomeLayer
-  communityAuthorityLayer
-  correctionResponseLayer
-  realisedEffectLayer
-  independentMonitoringLayer
-  recurrencePreventionLayer
+  formalArchitectureLayer : CompletionLayer
+  sourceMappingLayer : CompletionLayer
+  communityOutcomeLayer : CompletionLayer
+  communityAuthorityLayer : CompletionLayer
+  correctionResponseLayer : CompletionLayer
+  realisedEffectLayer : CompletionLayer
+  independentMonitoringLayer : CompletionLayer
+  recurrencePreventionLayer : CompletionLayer
   : CompletionLayer
 
 data CompletionState : Set where
-  paid
-  partial
-  open
-  sourceUnresolved
-  externallyDependent
+  paid : CompletionState
+  partial : CompletionState
+  open : CompletionState
+  sourceUnresolved : CompletionState
+  externallyDependent : CompletionState
   : CompletionState
 
 currentCompletionState : CompletionLayer → CompletionState
@@ -117,13 +117,13 @@ preventionSourceUnresolved = refl
 ------------------------------------------------------------------------
 
 data CompletionAction : Set where
-  obtainAffectedCommunityDefinedOutcome
-  establishCommunityAuthorityReceipt
-  identifyRequiredInstitutionalCorrection
-  observeCorrectionInRealisedOperation
-  verifyIndependentMonitoring
-  verifyPreventionOfRecurrence
-  reassessFullOperationalClosure
+  obtainAffectedCommunityDefinedOutcome : CompletionAction
+  establishCommunityAuthorityReceipt : CompletionAction
+  identifyRequiredInstitutionalCorrection : CompletionAction
+  observeCorrectionInRealisedOperation : CompletionAction
+  verifyIndependentMonitoring : CompletionAction
+  verifyPreventionOfRecurrence : CompletionAction
+  reassessFullOperationalClosure : CompletionAction
   : CompletionAction
 
 firstCompletionAction : CompletionAction

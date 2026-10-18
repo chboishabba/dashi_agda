@@ -13,13 +13,13 @@ import DASHI.Law.SensibLawWoogarooLegalConsumerAtomCompletionExact as Atom
 import DASHI.Law.SensibLawWoogarooPopulationConnectivityAcquisitionExact as Population
 
 data ReplacementDimension : Set where
-  standingCarbonStock
-  annualCarbonAccumulation
-  canopyStructuralMaturity
-  habitatFunction
-  populationCarryingCapacity
-  realisedConnectivity
-  geneFlow
+  standingCarbonStock : ReplacementDimension
+  annualCarbonAccumulation : ReplacementDimension
+  canopyStructuralMaturity : ReplacementDimension
+  habitatFunction : ReplacementDimension
+  populationCarryingCapacity : ReplacementDimension
+  realisedConnectivity : ReplacementDimension
+  geneFlow : ReplacementDimension
   restorationTimeLag : ReplacementDimension
 
 record ReplacementCoordinate : Set where

@@ -2,7 +2,7 @@ module DASHI.Reasoning.RelationalBranchCobordismGeometry where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-open import Data.Integer using (ℤ; +_; -[1+_]; _+_; _-_; _*_)
+open import Data.Integer using (ℤ; +_; -[1+_]) renaming (_+_ to _+ℤ_; _-_ to _-ℤ_)
 open import Data.List.Base using (map; _++_)
 
 import DASHI.Physics.ShiftDiscreteWaveStep as Wave
@@ -83,8 +83,8 @@ subtractWave :
   Interference.BranchWave
 subtractWave x y =
   Wave.mkDiscreteWave
-    (Wave.DiscreteWave.re x - Wave.DiscreteWave.re y)
-    (Wave.DiscreteWave.im x - Wave.DiscreteWave.im y)
+    (Wave.DiscreteWave.re x -ℤ Wave.DiscreteWave.re y)
+    (Wave.DiscreteWave.im x -ℤ Wave.DiscreteWave.im y)
 
 splitRecombineResidual : OneToNBranching → Interference.BranchWave
 splitRecombineResidual junction =
@@ -483,8 +483,8 @@ markedPairIntensity :
   Interference.BranchWave →
   ℤ
 markedPairIntensity relation left right =
-  (Norm.waveNormSq left + Norm.waveNormSq right)
-  + retainedCrossTerm relation left right
+  (Norm.waveNormSq left +ℤ Norm.waveNormSq right)
+  +ℤ retainedCrossTerm relation left right
 
 indistinguishableInPhaseIntensityIsFour :
   markedPairIntensity
@@ -513,7 +513,7 @@ distinguishableOpposedIntensityIsTwo = refl
 pathErasureCanCreateSpuriousConstructiveMass :
   markedPairIntensity
     distinguishablePaths Interference.phase0 Interference.phase0
-  + (+ 2)
+  +ℤ (+ 2)
   ≡
   markedPairIntensity
     indistinguishablePaths Interference.phase0 Interference.phase0
@@ -525,7 +525,7 @@ pathOverseparationCanDestroyConstructiveMass :
   ≡
   markedPairIntensity
     distinguishablePaths Interference.phase0 Interference.phase0
-  + (+ 2)
+  +ℤ (+ 2)
 pathOverseparationCanDestroyConstructiveMass = refl
 
 record PersistentPathMarker : Set where
@@ -545,15 +545,15 @@ branchMarginalLaw :
   (others : List Interference.BranchWave) →
   Interference.coherentIntensity (branch ∷ others)
   ≡
-  (Norm.waveNormSq branch + Interference.coherentIntensity others)
-  + Interference.pairInterferenceWith branch others
+  (Norm.waveNormSq branch +ℤ Interference.coherentIntensity others)
+  +ℤ Interference.pairInterferenceWith branch others
 branchMarginalLaw branch others =
   trans
     (Interference.doubleSlitLaw branch (Interference.sumWaves others))
     (cong
       (λ cross →
-        (Norm.waveNormSq branch + Interference.coherentIntensity others)
-        + cross)
+        (Norm.waveNormSq branch +ℤ Interference.coherentIntensity others)
+        +ℤ cross)
       (Interference.pairInterferenceWithSum branch others))
 
 inPhaseMarginalContainsPositiveCrossTerm :
@@ -561,8 +561,8 @@ inPhaseMarginalContainsPositiveCrossTerm :
     (Interference.phase0 ∷ Interference.phase0 ∷ [])
   ≡
   (Norm.waveNormSq Interference.phase0
-    + Interference.coherentIntensity (Interference.phase0 ∷ []))
-  + Interference.pairInterferenceWith
+    +ℤ Interference.coherentIntensity (Interference.phase0 ∷ []))
+  +ℤ Interference.pairInterferenceWith
       Interference.phase0 (Interference.phase0 ∷ [])
 inPhaseMarginalContainsPositiveCrossTerm = refl
 
@@ -571,8 +571,8 @@ opposedMarginalContainsNegativeCrossTerm :
     (Interference.phase0 ∷ Interference.phase2 ∷ [])
   ≡
   (Norm.waveNormSq Interference.phase0
-    + Interference.coherentIntensity (Interference.phase2 ∷ []))
-  + Interference.pairInterferenceWith
+    +ℤ Interference.coherentIntensity (Interference.phase2 ∷ []))
+  +ℤ Interference.pairInterferenceWith
       Interference.phase0 (Interference.phase2 ∷ [])
 opposedMarginalContainsNegativeCrossTerm = refl
 

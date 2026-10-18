@@ -1,0 +1,1544 @@
+[PAGE 1]
+Australian Journal of Teacher Education
+Volume 40 | Issue 11 Article 5
+2015
+Promoting Online Students’ Engagement and
+Learning in Science and Sustainability Preservice
+Teacher Education
+Louisa Tomas
+James Cook University, louisa.tomas@jcu.edu.au
+Michelle Lasen
+James Cook University
+Ellen Field
+James Cook University
+Keith Skamp
+Southern Cross University
+This Journal Article is posted at Research Online.
+http://ro.ecu.edu.au/ajte/vol40/iss11/5
+Recommended Citation
+Tomas, L., Lasen, M., Field, E., & Skamp, K. (2015). Promoting Online Students’ Engagement and Learning in Science and
+Sustainability Preservice Teacher Education. Australian Journal of Teacher Education, 40(11).
+http://dx.doi.org/10.14221/ajte.2015v40n11.5
+[PAGE 2]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  79 
+Promoting Online Students’ Engagement and Learning in  
+Science and Sustainability Preservice Teacher Education 
+ 
+ 
+Louisa Tomas 
+Michelle Lasen 
+Ellen Field 
+James Cook University 
+Keith Skamp, 
+Southern Cross University 
+ 
+ 
+Abstract: At James Cook University, a core first-year subject within 
+the Bachelor of Education, Foundations of Sustainability in 
+Education (FSE), sees students investigate the underlying science and 
+complexity of socioecological challenges through inquiry, place-
+based learning, experimentation and consideration of classroom 
+practice. Given that this subject is delivered across modes, a blended 
+learning approach that encompasses an innovative use of learning 
+technologies and careful consideration of pedagogy provides 
+opportunity for both on-campus and online students to engage in 
+active, learner-centred, collaborative, experiential and praxis-
+oriented learning experiences (Wals & Jickling, 2002). In this paper, 
+we draw upon Pittaway’s (2012) engagement framework and 
+Herrington, Herrington, Oliver, Stoney and Willis’s (2001) guidelines 
+for quality online courses to explore students’ perceptions and 
+experiences of FSE. We investigate how a blended learning design 
+can support the development of a robust foundational knowledge base 
+in science and sustainability education, and engagement in active, 
+experiential and praxis-oriented learning experiences for first year 
+online students. This paper furthers the discussion around best 
+pedagogical practice and blended learning design for science and 
+sustainability education in online preservice teacher education, and 
+in other disciplines in teacher education that call for hands-on 
+learning experiences in an online environment. 
+ 
+ 
+Introduction 
+ 
+Research indicates that the current generation of school leavers entering university is 
+more technically competent and confident than any previous student intake and, as such, has 
+high expectations of universities to provide robust and engaging online learning 
+environments and technologies (Jeffries & Hyde, 2010). However, generalisations about 
+‘digital natives’ (Prensky, 2001) are likely to mask complexities related to differences in, and 
+the potential impact of socio-economic and cultural factors on, young people’s technology 
+uses and skills (Bennett, Maton, & Kervin, 2008). For instance, underprepared students and 
+those who are the first in their families to attend university are likely to differ from their 
+young peers in regard to their capacity to adapt to university study, the level of monitoring 
+and support that they need for successful participation, and prior experience with online 
+[PAGE 3]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  80 
+learning and learning management systems (Brinthaupt, Fisher, Gardner, Raffo, & 
+Woodward, 2011).  
+In Australia, it is worth noting that the widening participation agenda in higher 
+education is not only reflected in a doubling of the participation rate (1982–2010) for school 
+leavers but also for students in their twenties (Norton, 2013). Jeffries and Hyde’s (2010) 
+study revealed a changing landscape for learning, especially for those ‘mature’ aged students 
+(i.e. over 21 upon entry) who have had no prior experience of using technology for learning 
+and yet, on account of busy lives involving employment and family responsibilities, are 
+dependent on accessing technology to undertake their studies. Indeed, for many higher 
+education students in the second decade of the 21st century, “the existence of all day, every 
+day online access” is an essential requirement and support for study (Jeffries & Hyde, 2010, 
+p. 134).  
+While research shows that learners are likely to assume greater responsibility for their 
+learning in online learning environments (Jeffries & Hyde, 2010), there are also heightened 
+expectations on their part for the provision of adequate learning support (Kawka & Larkin, 
+2011). According to Kawka and Larkin (2011), the support that is required by online students 
+“relates both to authentic learning and assessment experiences, as well as assistance in 
+communicating with lecturers, tutors and peers” (p. 40).  
+In terms of online delivery, research efforts have tended to focus generally on the 
+effectiveness of the medium itself (Reeves, Herrington, & Oliver, 2005), and, more 
+specifically, on the utilisation of particular tools or strategies (Brinthaupt et al., 2011). The 
+literature now calls for greater attention to aspects of curriculum and content organisation, 
+pedagogy, assessment, communication, support strategies and resources that promote student 
+engagement and learning (Brinthaupt et al., 2011; Green et al., 2010). According to Fan and 
+Lê (2011), in order to cater better to students’ learning needs in online environments, research 
+is needed that privileges “the views of both staff and students, particularly their evaluative 
+judgements” (p. 367).  
+The need for determining and ensuring quality in the process of designing and 
+delivering online learning is an increasingly important issue for higher education institutions 
+worldwide (Herrington et al., 2001). The past five years have seen a substantial expansion in 
+the number of universities offering preservice teacher education courses in an online or 
+‘blended’ mode (i.e. technology-enhanced instructional design that draws together physical 
+and online learning environments) (Fasso, Knight, & Knight, 2013; Green et al., 2010; 
+Kawka & Larkin, 2011; Keppell & Riddle, 2011). At James Cook University (JCU), we offer 
+preservice teacher education courses in early childhood, primary and secondary majors across 
+multiple modes of delivery and campuses. A Bachelor of Education (B.Ed.) in early 
+childhood education is delivered wholly online, of which the student cohorts typically 
+comprise females in their twenties and thirties, with family and work responsibilities, from 
+rural and regional contexts in Queensland and interstate. While these mature students are 
+likely to have acquired a range of learning experiences, both formal and informal (often 
+within the early childhood care and education sector), many are the first in their families to 
+undertake higher education. Responding to diverse student needs and delivery contexts has 
+substantially impacted the pedagogical and technological knowledge of the Education 
+academic staff within our College (Kennedy et al., 2008).  
+At JCU, Foundations of Sustainability in Education (FSE) is a compulsory subject (or 
+‘unit’) for first-year preservice teachers that engages them in the underlying science and 
+complexity of socioecological challenges, such as global climate change and premature 
+species extinction, through inquiry, place-based learning, experimentation and consideration 
+of classroom pedagogy. Given that FSE is undertaken by students studying on-campus and 
+wholly online, a key consideration in the development of the subject was how to address the 
+challenge of engaging students in an online context, with a view to develop foundational 
+[PAGE 4]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  81 
+knowledge in science and sustainability education, and to engage students in active, 
+experiential and praxis-orientated learning. In this paper, we investigate how a blended 
+learning design can support online students’ learning and engagement by exploring the 
+perceptions and experiences of a cohort of students who studied FSE in the online mode. We 
+utilise two lenses – Herrington and colleagues’ (2001) framework for evaluating online 
+learning settings and Pittaway’s (2012) engagement framework – to analyse students’ 
+perceptions regarding their engagement and learning vis-à-vis the subject’s content modules 
+and resources, scaffolded learning experiences, assessment tasks, and communication and 
+support strategies. As reflexive practitioners, this focus is important as we are interested in 
+the extent to which the blended learning approach adopted in the subject successfully engages 
+our online students in active, learner-centred, collaborative, experiential and praxis-oriented 
+learning experiences (Wals & Jickling, 2002), while developing a foundational knowledge 
+base in an intellectually rigorous subject. While these aspects underpin science and 
+sustainability education, they are potentially challenging to facilitate in an online learning 
+environment. We aim to inform best practice regarding the design and development of online 
+and blended learning environments in science and sustainability preservice teacher education, 
+and believe that our findings have relevance to other learning areas in teacher education that 
+also call for active learning approaches in an online environment.  
+In the sections that follow, we begin by reviewing the literature on online learning in 
+both higher and teacher education, before outlining the aim of the current study and our 
+chosen interpretative frameworks.  
+ 
+ 
+Online Learning in Higher and Teacher Education: Challenges and Opportunities 
+ 
+Online learning presents both challenges and opportunities to promote student 
+engagement and learning. There is evidence in the literature that online learning 
+environments can provide different affordances than physical learning spaces (Johnson, 
+Adams Becker, Estrada, & Freeman, 2014) and, hence, more creative learning opportunities 
+(Salyers, Carter, Barrett, & Williams, 2010). The literature is also suggestive that online 
+learning environments can be more responsive to different learning styles and rhythms 
+(Pombo, Smith, Abelha, Caixinha, & Costa, 2012). Fan and Lê (2011) proposed that: 
+ 
+Due to its adaptability to various learning styles, paces and contents, web-based 
+learning has a stronger potential than the face-to-face learning mode to satisfy 
+students with varied learning needs and preferences. This adaptability is desired by 
+Australian universities as it fits with a high level of diversity in student populations, 
+backgrounds and preferred learning styles. (p. 373) 
+ 
+According to Brinthaupt et al. (2011), a “productive and transformational approach” 
+to online teaching entertains no notions of it being less demanding or time consuming than 
+face-to-face teaching “or something that can be put on autopilot” (p. 522). Instead, it 
+recognises that, on account of a well-designed online learning environment, the teacher is 
+free to shift their attention from transmitting content to fostering student engagement, 
+stimulating intellectual development and building rapport with students. In this way, online 
+and blended learning environments can facilitate a shift from didactic teaching to 
+constructivist, collaborative and student-centred learning approaches (Beldarrin, 2006; Fan & 
+Lê, 2011) – approaches that are conducive to sustainability and science education.  
+It is important to note that our paper informs a scant literature on facilitating 
+sustainability education in online teacher education environments. Having delivered an 
+environmental education elective for preservice teachers online at JCU since 2001, which has 
+[PAGE 5]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  82 
+sustained high levels of student enrolments and satisfaction over time, Whitehouse (2008) 
+concluded that, “well-conceived, web-based delivery is certainly no barrier to teaching and 
+learning environmental education in the tertiary sector” (p. 11). Initially concerned with “how 
+to engage students meaningfully with place-based learning through the no-place of 
+cyberspace”, Whitehouse (2008, p. 11) reflected on learning and pedagogical design aspects 
+of the fourth-year elective, as follows:  
+ 
+Students enrolled in e-learning subjects have to learn how to learn online as well as 
+offline and make effective use of information communication technologies … I 
+deliberately designed learning and assessment options that require my students to shut 
+down their computers and go offline and outdoors to undertake activities of their 
+choosing … Online delivery can realise quality outcomes if the principles of 
+participatory inquiry are kept firmly in mind. (pp. 12, 15, & 17)   
+ 
+The assessment requirements of her online subject saw students undertake self-guided field 
+visits to local environmental education facilities; ‘learning investigations’ that could be 
+replicated with school age children (e.g. Plant a Garbage Garden, Mapping my Place); a 
+research/curriculum assessment project (e.g. ‘Learnscapes’ analysis of a school ground, 
+designing a web-quest); and reflective posts on the discussion board. In contrast with 
+Whitehouse’s (2008) emphasis on self-directed and largely individual, place-based inquiry, 
+Briano, Midor and Trentin (1997), in much earlier work, highlighted the potential of online 
+environments to facilitate collaborative, interdisciplinary, project-based learning in 
+environmental education, for Italian teachers and their students. While the article reported 
+significant logistical challenges in the structuring and facilitation of the project groups, which 
+needed to be addressed, the authors concluded that the pedagogical approach allowed the 
+teachers who engaged in all phases of the projects to develop skills in environmental 
+education project planning and implementation, problem solving and working in 
+interdisciplinary teams.  
+More recently, in the context of online teacher professional development, Pombo and 
+colleagues (2012) investigated the efficacy of a blended e-module in enhancing Portuguese 
+primary school teachers’ assessment practices in science education, through group-based and 
+reflective learning experiences. While participant teachers reported that their new learnings 
+extended their classroom repertoire of science assessment and teaching strategies and tools, 
+the authors concluded that participant teachers would benefit from a further blending of 
+strategies in the e-module in order to enhance opportunities for inter-group sharing, possibly 
+through peer assessment activities utilising asynchronous online tools, as well as face-to-face 
+interaction with module facilitators (Pombo et al., 2012).  
+Sinha, Khreisat and Sharma (2009) identified four key interactions that shape learning 
+processes in the online environment: (1) learner–content interaction; (2) learner–instructor 
+interaction; (3) learner–learner interaction; and (4) learner–interface interaction (i.e. the 
+interaction between learner and tools in order to perform requisite tasks). Online learners 
+have reported on the benefits of both asynchronous and synchronous strategies to support 
+such interactions (Beldarrin, 2006). There is broad consensus in the literature that, for 
+effective online learning to occur, it is ultimately important to create a ‘community of 
+learners’, wherein the quantity and quality of interactions promote student engagement 
+(Abedin, Daneshgar, & D’Ambra, 2010; Oliveira, Tinoca, & Pereira, 2011).  
+Fasso et al. (2013) proposed an online learning design framework, in the context of 
+teacher education, which aligns Dettmer’s (2006) phases of learning and doing with learner-
+centred pedagogies enabled by Learning Management System (LMS) and Web 2.0 tools. The 
+framework enables preservice teachers to engage in the sociocultural practices of an online 
+community as knowledge creators, rather than knowledge consumers, and, positioned as 
+[PAGE 6]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  83 
+such, to achieve higher order learning outcomes. In a similar vein, Green et al. (2010) 
+evaluated a design approach to online early childhood teacher education, underpinned by 
+notions of “learning as knowledge creation” and “teaching through assessment with 
+technologies” (p. 270). These authors reported on an assessment schedule that built on the 
+experiential bases and sociocultural contexts of their online students – many of whom were 
+working in education and child care settings in addition to studying, as is the case for our 
+online cohort – by way of tasks that called for resource sharing, co-creation of documents and 
+personal reflection. Green and colleagues (2010) observed an evolving shift in their 
+pedagogical emphases from knowledge acquisition to student-centred and self-directed 
+engagement in “knowledge-creating communities” (Hong & Sullivan, 2009, cited in Green et 
+al., 2010, p. 270). 
+ 
+ 
+Aim, Research Question and Interpretative Frameworks 
+ 
+Student engagement is increasingly understood as a prerequisite for learning and, 
+hence, an emerging priority in preservice teacher education (Pittaway, 2012). Engagement is 
+particularly important for online students given their need for often greater responsibility and 
+self-discipline than on-campus students (Brinthaupt et al., 2011; Jeffries & Hyde, 2010) – 
+who interact face-to-face in class settings where peer and staff support “can appear more 
+real” (Pittaway, 2012, p. 37) – to actively engage themselves in meaningful tasks for 
+effective learning to occur (Simon, 2002). Our study aims to investigate how blended 
+learning design can promote online preservice teacher engagement and learning in science 
+and sustainability education. Within this context, the research question that guided the 
+development of the research design was: 
+ 
+In what ways does a blended learning design promote the development of a robust 
+foundational knowledge base within a discipline or field of study in teacher 
+education, and engage first year online university students in active, experiential 
+and praxis-oriented learning experiences? 
+ 
+This research question reflects our view that the findings reported in this paper have 
+applicability in other university areas of learning apart from science and sustainability 
+education. The frameworks we use to interpret the findings, and hence respond to this 
+research question, also enhance this study’s transferability to other areas. 
+We utilise Pittaway’s (2012) engagement framework to investigate the ways in which 
+the first-year students of this study engaged or disengaged in the online delivery of FSE. 
+Pittaway’s (2012) framework was developed as a tool for academics “to enhance unit design 
+and development, teaching practice and student support” in both online and face-to-face 
+modes of delivery (p. 37). It comprises “five distinctive yet intersecting, non-hierarchical 
+elements” of engagement (Pittaway, 2012, p. 38), as follows: (1) personal, (2) academic, (3) 
+intellectual, (4) social, and (5) professional elements (see Tab. 1). We saw utility in the 
+framework given that it was developed for Faculty of Education academics in a regional 
+Australian University, as is true of the authors’ context, and is applicable to online contexts 
+as well. 
+  
+[PAGE 7]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  84 
+Personal  Having a level of confidence that a university education is achievable, being aware of 
+intentions of and motivation for enrolling, and having or developing perseverance. 
+Academic  
+Planning, monitoring and evaluating learning, becoming effective note-takers, readers, 
+listeners and problem solvers, and becoming familiar with other aspects of academic 
+culture including academic writing and information and computer literacy. 
+Intellectual Engaging with ideas, concepts and disciplinary thinking associated with education and 
+the social, political, civic, moral and ethical issues that are part of formal education. 
+Social  Forming positive relationships with tutors and unit coordinators, and being proactive in 
+becoming part of a learning community. 
+Professional 
+Connecting with teachers, principals and others within professional experience settings, 
+being involved in classroom life, joining professional associations, and attending 
+professional learning opportunities, workshops and conferences. 
+Table 1: Pittaway’s (2012) elements of engagement and engagement behaviours . Source: Pittaway, 2012, 
+pp. 39-44. 
+ 
+The second analytical lens that we employ in this paper – Herrington and colleagues’ 
+(2001) quality guidelines for online courses – is a framework that was developed at an 
+Australian university in order to provide a university-wide tool for “instructional design and 
+consistent assessment and evaluation of online learning materials” (p. 266). It identifies three 
+main areas of focus (pedagogy, resources and delivery strategies) and, what are deemed to be, 
+critical elements of effective learning environments related to these areas (see Tab. 2). 
+According to Herrington et al. (2001), the framework is intended to provide academics with 
+the capacity to evaluate the potential effectiveness of online units through “a determination of 
+the scope and extent of these critical elements” (p. 266). While we acknowledge other more 
+recent guidelines for evaluating online education within the literature (e.g. Parsell, 2014) we 
+found that our chosen framework resonated strongly with our data, and provided a powerful 
+frame to investigate student perceptions of what elements supported their engagement and 
+learning in the online subject under review. 
+ 
+Pedagogies Authentic tasks; Opportunities for collaboration; Learner-centred environments; 
+Engaging; Meaningful assessments. 
+Resources Accessibility; Currency; Richness; Purposeful use of media; Inclusivity. 
+Delivery strategies Reliable and robust interface; Clear goals, directions and learning plans; Communication; 
+Equity and accessibility; Appropriate corporate style. 
+Table 2: Herrington and colleagues’ (2001) three main areas and associated critical elements of effective 
+online learning environments. Source: Herrington et al., 2001, pp. 267-269. 
+ 
+ 
+Research Context 
+ 
+In response to JCU’s Curriculum Refresh Project, Australia’s University for the 
+Tropics (Australian Department of Education, Employment and Workplace Relations, 2009–
+2011), and recognition of sustainability as a cross-curriculum priority in the Australian 
+Curriculum (Australian Curriculum, Assessment and Reporting Authority, n.d.), the School 
+of Education adopted a whole-of-program approach to embedding sustainability in its B.Ed.. 
+Academic staff engaged in collaborative projects in order to design two new dedicated 
+sustainability subjects (FSE, the focus of this paper, and a fourth-year capstone, Service 
+Learning for Sustainable Futures); revise aspects of content in a longstanding elective 
+(Whitehouse, 2008); and embed sustainability principles, concepts and issues in other early 
+childhood and primary subjects in the B.Ed. (see Lasen et al., 2015; Simoncini, Lasen, & 
+Rocco, 2014).  
+[PAGE 8]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  85 
+FSE was designed collaboratively by three academics (including the first and second 
+authors) with disciplinary and curriculum expertise in science, science education and social 
+science. Input was also sought from an online designer and academics from other 
+universities, who facilitated sustainability subjects in preservice teacher education programs. 
+An internal teaching and learning fellowship funded the fourth author, an academic with 
+extensive expertise in environmental and science education including online delivery, to 
+conduct an external evaluation of teaching and learning in the newly developed sustainability 
+subjects. The external evaluation generated one of the data sources for this study. 
+FSE seeks to develop students’ foundational knowledge of science, through exploration of 
+the underlying science of key socioecological challenges – such as climate change, renewable 
+and non-renewable energy, water availability and quality, and biodiversity conservation – and 
+to model classroom pedagogies, involving experiential activities and hands-on 
+experimentation, relating to sustainability and science education. Table 3 presents a summary 
+of the blended learning design utilised in the online mode of FSE. The subject’s content is 
+organised within six online modules hosted by Google Sites™ (Tab. 3) that adopt an 
+overarching inquiry framework (with ‘tuning in’, ‘preparing to find out’, ‘finding out’, 
+‘sorting out’ and ‘reflecting and taking action’ phases [Hamston & Murdoch, 1996]), in order 
+to engage students in a weekly, scaffolded journey of learning and discovery. While this 
+study focuses on the early childhood online cohort, student cohorts are enrolled in FSE across 
+multiple modes, including on-campus offerings at JCU’s three major campuses, and a 
+community-based delivery for Indigenous students. Cohorts share the one platform in the 
+university’s online LMS (‘LearnJCU’) that hosts all learning materials (Tab. 3), and interact 
+differently with teaching staff, activities, resources and technologies to achieve the subject’s 
+learning outcomes through comparable learning experiences.  
+ 
+Aspect of subject delivery for online cohort Engagement with learning environments 
+Modules hosted by Google Sites™ and linked to LMS Online learning environment 
+Lecture vodcasts Online learning environment 
+Other subject materials (e.g. readings, assessment 
+support documents) hosted by LearnJCU Online learning environment 
+Tutorials facilitated using wikis 
+(e.g. scaffolded online tutorials support simple science 
+experiments) 
+Online and physical learning environments  
+Assessment task 1: Solar still investigation and report 
+(i.e. conducting a science inquiry and communicating 
+findings) 
+Online and physical learning environments  
+Assessment task 2: Sustainability inquiry and web story 
+(i.e. investigation, photographing and communicating 
+aspects of local sustainability issue) 
+Online and physical learning environments  
+Table 3: A summary of the blended learning design adopted for the online delivery of FSE.  
+ 
+Intentional, student-centred blended learning design is recognised within the JCU 
+(2014) Access, Participation and Success Plan, 2015-2017 as a key strategy to engage 
+diverse learners. The blended learning approach in FSE involves deliberate pedagogical 
+choices that are responsive to both the diversity of student cohorts and the nature of the 
+subject matter itself. It may be described as an ‘enabling’ and ‘enhancing’ blend (Keppell, 
+2010) in that it enables students’ participation by providing flexibility and overcoming issues 
+of access and equity (e.g. through weekly lectures that are vodcasted for online students; Tab. 
+3) and enhances learning and the student experience through engagement with online and 
+physical learning environments (e.g. through hands-on activities and experiments that are 
+scaffolded by online tutorials; Tab. 3). Through this blend, students develop a foundational 
+[PAGE 9]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  86 
+knowledge base in key science and sustainability concepts and engage in authentic learning 
+opportunities appropriate for classroom practice. For the online cohort, the innovative use of 
+learning technologies and purposeful assessment task design facilitates achievement of the 
+subject’s intended learning outcomes, arguably providing students with a learning experience 
+that is as rich and engaging as that of their on-campus peers. The assurance of “equivalent 
+student learning outcomes regardless of a student’s place or mode of study” is a recognised 
+priority in the current Australian higher education threshold standards (Department of 
+Industry, Innovation, Science, Research and Tertiary Education, 2011, Ch. 3.1.9). 
+The intended learning outcomes of FSE emphasise the development of a foundational 
+knowledge base in science and sustainability education, as well as sustainability 
+competencies and capabilities, such as critical, creative and systemic thinking and values 
+clarification, as follows: 
+  
+  Recall, apply and communicate concepts and procedures of science and 
+sustainability through multiple modes and genres to local and global contexts; 
+ Explore how the design and implementation of engaging and intellectually 
+challenging learning experiences promotes the development of scientific literacy;  
+ Develop evidence-informed values and positions relating to sustainability 
+through active citizenship, critical and systemic thinking, and reflection (JCU, 
+2015a, para. 2) 
+  
+These learning outcomes reflect Fien and Maclean’s (2000) definition of education for 
+sustainability as: 
+ 
+… a new paradigm for a lifelong learning process that leads to an informed and 
+involved citizenry having the creative problem solving skills, scientific, technological 
+and social literacy and commitment to engage in responsible actions to ensure an 
+environmentally sound, socially just and economically prosperous future for all. (p. 
+37) 
+ 
+At the same time, science education is foregrounded in the subject given that an 
+understanding of the Earth’s systems and systems thinking are essential in empowering 
+students to engage critically with the complex sustainability issues explored during the 
+semester (Morse, 2000). Given that experiential learning is inherent to science and 
+sustainability education – and the importance of place-based learning is increasingly 
+recognised (i.e. connecting students with the resources, issues and values of their local 
+community and environment) (Buxton, 2010; Green, 2012; Semken & Freeman, 2008; Smith 
+& Sobel, 2012) – learning and assessment experiences in the subject are designed to get 
+students ‘out and into’ their environment and working in active, hands-on ways.  
+Weekly tutorials provide opportunities for experiential learning and modelling of 
+classroom pedagogies for science and sustainability education (Tab. 3). For example, students 
+perform simple science experiments and activities involving the simulation of the greenhouse 
+effect in a jar, the identification of soil samples and the use of dichotomous keys to classify 
+plants and animals. All of the activities and experiments are designed such that they can be 
+performed with simple everyday materials, making them accessible to online students. At the 
+same time, they are supported online by wikis hosted within the LMS that guide students 
+through the activities. 
+Experiential learning is also a key feature of the assessment schedule (Tab. 3). With a 
+focus on the development of scientific literacy, all students are required to plan, conduct and 
+report upon a solar still investigation that engages the principles and processes of a fair test, 
+[PAGE 10]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  87 
+the water cycle and sustainable ways of purifying water. Students also collaboratively 
+investigate a local sustainability issue, through application of the strategic questioning 
+framework (Peavey, 1994; United Nations Educational, Scientific and Cultural Organisation, 
+2010), and communicate findings to a children’s audience through the creation of a digital 
+web story. The focus here is on place-based learning and consideration of actions for a more 
+sustainable future. The assessment schedule also includes a written examination wherein 
+students are required to demonstrate foundational science and sustainability conceptual and 
+pedagogical knowledge.  
+In light of the nature of the content and the diversity of the student cohorts, we 
+deemed it essential to design and deliver a subject that was learner-centred, supportive of 
+deep and meaningful learning and praxis-oriented. In the design phase of the subject, we 
+carefully considered what online technologies, within and outside of the university’s LMS, 
+could support these pedagogical emphases and student achievement of learning outcomes. 
+ 
+ 
+Methods 
+ 
+Utilising a multi-method case study research design (Yin, 2009), we draw upon two 
+sources of data (a student survey and student interviews) to explore the perceptions and 
+experiences of a cohort of students who studied FSE online as part of the B.Ed. (Early 
+Childhood Education) at JCU in 2012, with a view to understand better how they engaged in 
+the subject’s online environment, and what elements of the subject supported their 
+engagement and learning. In reviewing the literature for this study, we found that research 
+papers concerned with online pedagogies tended to focus on a specific technological platform 
+or tool in a specific context, demonstrate the tool’s effectiveness and then seek to generalise 
+the tool’s effectiveness in all contexts – a kind of ‘one-size-fits-all’ approach (Knight & 
+Gandomi, 2010). For example, there are numerous studies on the benefits and limitations of 
+blogs for teaching and learning (see Koschman, Kelson, Feltovich, & Barrows, 1996; Oravec, 
+2002; Saeed, Yang, & Sinnappan, 2009; Williams & Jacobs, 2004). However, within the 
+LMS used for FSE, there are multiple tools that students engage with. Instead of focusing on 
+the technological affordances of each tool or design feature, we have chosen to focus on 
+students’ perceptions of their learning processes and levels of engagement in an online 
+delivery that draws upon a variety of learning technologies. This approach allowed us to 
+privilege the students’ voice so as to understand their learning experience while avoiding 
+technological determinism wherein learning is tied to a specific technological platform or 
+tool.  
+  
+ 
+Data Sources 
+ 
+Within all sectors of education, student views of teaching and learning are becoming 
+increasingly common as a perspective to be seriously considered (Baumfield, Hall, & Wall, 
+2008; Flutter & Rudduck, 2004; Jenkins, 2006). In this study, we draw upon two sources of 
+data that privilege the students’ voice. In order to understand better which elements of FSE, 
+including the online environment, supported student engagement and learning, we canvassed 
+the students’ voice through: (1) an online survey that was completed once at the end of the 
+semester; and (2) interview data from the aforementioned external evaluation of FSE that was 
+completed in December, 2012.  
+Surveys are a reliable and valid tool for researchers and subject developers to evaluate 
+web-based learning (Fan & Lê, 2011). The online survey was developed specifically for this 
+study, comprising eight questions that generated evaluative data about the subject through 
+[PAGE 11]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  88 
+rating scales (including Likert-style scales), dichotomous questions and open-ended questions 
+allowing for free response. Specifically, the survey explored the design and delivery of the 
+subject (Question 1); aspects of the subject’s online delivery that supported students’ learning 
+(e.g. their understanding of content knowledge, and the development of teaching strategies 
+for science and sustainability education) (Question 2); students’ ratings of the extent to which 
+the hands-on activities and experiments embedded in the subject were engaging (Question 3); 
+students’ perceptions of the most and least effective aspects of the subject for their learning 
+(Questions 4 and 5, respectively); students’ views as to whether they would have liked 
+additional/alternative learning materials and other approaches to online learning and teaching 
+(Questions 6 and 7, respectively); and students’ views on whether they had sufficient 
+information communication technology (ICT) skills to undertake the subject online (Question 
+8). 
+Students were invited to participate in the research via a group email to the cohort. 
+Twenty-seven participants (55% response rate) consented to completing the survey online 
+and accessed the instrument through the LMS. Approximately 80 per cent of the respondents 
+(n=22) were aged in their twenties and thirties; five respondents were aged in their forties; 
+and one respondent was less than 20 years old. One respondent was male. Given that this 
+profile is quite typical of the student demographic within the online cohort, it is likely that 
+student survey responses reflect the views of the cohort, overall. 
+ As part of the external evaluation, the fourth author conducted individual semi-
+structured interviews with a small group of volunteer students in December 2012, after they 
+had completed the subject. Five female mature age students were interviewed. All 
+interviewees were mothers, and two were employed as teachers’ aides at the time of 
+interview. Four of the students were in the first year of their degree, and one had almost 
+completed two years of her degree.  
+Given students’ varied geographical locations, the interviews were conducted by 
+telephone and ranged from approximately 30 to 47 minutes in duration. Students were asked 
+a range of questions about the learning processes, online pedagogies and assessment tasks 
+that they engaged in during the subject. While they were not explicitly asked what they 
+learned or acquired (e.g. content, processes, skills, attitudes, values), some of what they had 
+learned emerged through the interviews. The interviews were audio recorded and fully 
+transcribed, and the transcripts analysed in this study to provide a deeper insight into 
+students’ experiences and perceptions of FSE, than provided by the survey alone. While we 
+acknowledge that generalisations may not be drawn from such a small sample of students, 
+their responses could be interpreted as an indicator of possible typical responses, especially if 
+all five interviewees mentioned particular issues. In the reporting of results, the participants 
+are identified as Student 1 through to Student 5. 
+ 
+ 
+Data Analysis 
+ 
+Students’ responses to the rating scales and dichotomous questions of the survey 
+(Questions 1-3, and Questions 6-8) were analysed quantitatively using univariate analysis 
+(frequencies, percentages and means). The results of this analysis are presented and discussed 
+according to our analytical frames: Pittaway’s (2012) elements of engagement (Tab. 1) and 
+Herrington and colleagues’ (2001) critical elements of effective online learning environments 
+(Tab. 2). A deductive approach was employed to qualitatively analyse students’ free 
+responses to Questions 5, 6 and 7 according to elements of one or both of the analytical 
+frames, as appropriate. For example, a student’s comment that he/she would have liked the 
+provision of additional videos to explain key science concepts more effectively (Question 6) 
+would be coded as follows: intellectual engagement (Pittaway, 2012) and resources – 
+[PAGE 12]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  89 
+purposeful use of media (Herrington et al., 2001). The first and second authors undertook this 
+process, discussing and refining their coding of the survey data until they were in agreement. 
+Students’ free responses to Question 4 of the survey (i.e. the most effective aspects of 
+the subject that supported their learning) and the transcripts from the five student interviews 
+were analysed qualitatively using Nvivo 10 (QSR International, 2012). These data were also 
+coded according to one or both of the analytical frames, as appropriate, in order to analyse 
+students’ perceptions of engagement and learning based on the online subject’s modules, 
+resources, scaffolded learning experiences, assessment tasks and support strategies. For 
+example, a student’s comment that referred to the opportunity or value of learning something 
+new about a local sustainability issue through the sustainability inquiry assessment task 
+would be coded as follows: intellectual engagement (Pittaway, 2012) and pedagogies – 
+meaningful assessment (Herrington et al., 2001). The coding for this part of the analysis was 
+discussed and refined by the first and third authors until they were in agreement. The coded 
+data derived from the Nvivo analysis were also used to generate a word cloud (see word 
+cloud software, for example, at http://tagcrowd.com/ or http://www.wordle.net/) to provide a 
+visual representation of the prominent themes to emerge from the findings and to guide the 
+discussion of the results. 
+ 
+ 
+Findings and Discussion 
+ 
+In the following section, we present the findings of our analyses according to each of 
+Pittaway’s (2012) five categories of engagement, and outline students’ perceptions of what 
+elements of the subject supported their engagement and learning, drawing upon Herrington et 
+al.’s (2001) quality guidelines for online courses. In this way, we seek to illuminate how the 
+pedagogies, resources and delivery strategies adopted in FSE shaped students’ personal, 
+academic, intellectual, social and professional engagement. Figure 1 presents the word cloud 
+highlighting the prominent themes regarding student engagement and learning to emerge 
+from the analysis of the open-ended responses of Question 4 of the student survey and the 
+interview data. It is broadly evident that ‘intellectual engagement’ (Pittaway, 2012; see Tab. 
+1) and ‘authentic tasks’, ‘communication’, ‘clear goals, directions and learning plans’, and 
+‘purposeful use of media’ (Herrington et al., 2001; see Tab. 2) are the most prominent themes 
+to emerge from students’ perceptions of the subject. We will now present and explore these 
+findings, and others, in closer detail. 
+ 
+[PAGE 13]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  90 
+ 
+Figure 1: A word cloud representing the most prominent themes regarding student engagement and 
+learning that emerged from the analysis of the coded open-ended responses of the student survey and 
+the interview data. 
+ 
+Personal Engagement 
+ 
+Being personally engaged in university study requires an awareness of one’s own 
+“expectations, experiences, assumptions, knowledge, skill and dispositions” (Pittaway, 2012, 
+p. 42). In the context of a first year subject – when students are transitioning into higher 
+education – feeling enabled to successfully undertake university study through accessible and 
+inclusive approaches to teaching and learning is critical to student retention and success (Kift, 
+2009). When FSE was first conceptualised, a key consideration was providing ‘equivalence 
+of experience’ for on-campus and online students. This immediate challenge was driven by 
+our university’s Learning, Teaching and Assessment policy which requires that “the design of 
+course content and learning experiences across different campuses and/or modes … will 
+ensure equivalent opportunity for students to achieve the stated learning outcomes” (JCU, 
+2015b).  While we acknowledge that equivalence of experience does not guarantee quality 
+provision of online or blended learning, in this case, this requirement provided the impetus to 
+think creatively about how all students could be enabled to be successful in the subject 
+through a purposeful selection of learning technologies that provide equitable access to 
+learning that is participatory and experiential. Equity and accessibility (i.e. ensuring that all 
+subject materials and activities are accessible to all students, irrespective of their 
+geographical location) are critical elements in the delivery of online courses (Herrington et 
+al., 2001). In the context of FSE, equivalence of experience is achieved, in part, by having a 
+shared LearnJCU site for all student cohorts to access (noting that the university’s LMS 
+automatically generates separate sites for each mode and that a request for a merged site is 
+required) (see also, Social engagement).  
+Equivalence of experience is also achieved by using a range of learning technologies 
+that enable lecturers and tutors to deliver the subject effectively in an online environment (see 
+Tab. 4). Online modules and weekly lectures are the primary mode for content delivery. As 
+previously discussed, the online modules (hosted by Google Sites™) are framed by an 
+inquiry approach that navigates students through the weekly learning by way of a scaffolded 
+narrative supported by readings and activities. The modules are linked into LearnJCU for all 
+ 
+
+[PAGE 14]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  91 
+students to access at any time, while the on-campus lectures are video-recorded (‘vodcasted’) 
+so that online students can listen to their lecturer’s explanation of the subject matter, watch 
+demonstrations and videos, and listen to questions asked during the lecture: 
+ 
+Being an online student I really, really appreciated being able to watch the lectures 
+because they videotaped them and then put them online a few days later. I found 
+that very helpful for my particular learning style to actually listen to the lecture and 
+be able to watch the lecture online. I felt like I was in the classroom as well so it 
+proved beneficial for me. (Student 3, emphasis added) 
+ 
+In the student survey, the majority of respondents (92.6%) agreed or strongly agreed 
+that the subject materials and online delivery of FSE (including online modules, lecture 
+vodcasts, online tutorials and Collaborate™ sessions) enabled them to have an experience of 
+the subject comparable to that of on-campus students. As one student explained in the survey, 
+“By having lecture vodcasts and online tutorials I felt like I was getting a similar experience 
+to that of internal [on-campus] students”. This is significant because providing online 
+students with equitable opportunities to achieve the same learning outcomes as their on-
+campus peers – particularly in the context of challenging subject content and underprepared 
+first-year students – supports their personal engagement by empowering them to be motivated 
+and successful learners.  
+ 
+On-campus provision Equivalent online provision 
+LearnJCU site hosts all subject materials – accessed by all students 
+Online modules hosted by Google Sites™  – accessed by all students 
+On-campus lectures Lecture vodcasts 
+On-campus tutorials Online tutorials facilitated using wikis 
+Additional assessment support provided in lectures 
+and tutorials at students’ request 
+Real-time assessment support provided via 
+Blackboard Collaborate™ (virtual classroom) 
+sessions 
+Interactive discussion and question-and-answer time 
+provided in lectures and tutorials 
+Online discussion board, including prompts to use 
+the discussion board in online tutorials 
+Table 4: A summary of the approaches to on-campus subject delivery employed in FSE and equivalent 
+online provisions, facilitated via a range of learning technologies. 
+ 
+On-campus tutorials, in which students engage in hands-on and experiential learning 
+activities, extend the concepts examined in the modules and lectures, and model teaching 
+strategies for science and sustainability education. For online students, the tutorials are 
+facilitated using wikis that, like the online modules, provide a scaffolded narrative that guides 
+them through the weekly activities and simple experiments performed with everyday 
+materials. The wikis include task instructions, links to resources, model responses and 
+opportunities to respond to the activities via a discussion board. 
+ 
+ 
+Academic Engagement 
+ 
+Academic engagement supports students’ success through the employment of a range of 
+academic skills and attributes that they bring to their university studies, and the active 
+development of others while they learn (Pittaway, 2012). In a blended learning environment, 
+students’ computer literacy skills, including the ability to navigate and engage successfully 
+with the online learning environment, is as important to academic success as other academic 
+[PAGE 15]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  92 
+skills and attributes, such as the ability to read critically, evaluate and synthesise information, 
+solve problems and communicate.  
+Question 8 of the survey asked students whether they had sufficient ICT skills to 
+successfully undertake FSE online. While 25 respondents indicated that they did, two 
+students (7.4%) responded in the negative. For instance, one student explained that she did 
+not know what a hyperlink was or how to create one – a necessary requirement for the web 
+story assessment. While this may not seem like a significant proportion of students, it does 
+challenge the assumption that students who enrol in online courses possess the necessary 
+computer literacy skills required to complete their studies successfully (cf. Bennett, Maton, & 
+Kervin, 2008). Not possessing the necessary skills is likely to impede students’ intellectual 
+engagement in online study, as it makes navigating the online learning environment, 
+accessing information and completing activities difficult. Furthermore, it is likely to impede 
+students’ personal engagement by eroding their confidence in their ability to successfully 
+complete their university studies. It is also important to note that even students with advanced 
+computer literacy skills benefit from guidance on how to use technologies in learning.  
+Aside from computer literacy, FSE explicitly teaches, models and assesses a range of 
+other academic literacy skills that are necessary to complete the subject (and first-year 
+university studies) successfully, such as written communication and numeracy skills. At 
+interview, a student recognised the importance of her own academic engagement, valuing the 
+emphasis placed upon the development of academic literacy in FSE, in addition to skills that 
+she perceived as essential to future classroom practice: 
+ 
+I think the emphasis upon academic literacy is very valuable … it’s only a first year 
+subject so you need to be able to learn from these things ... [assessment] feedback 
+[indicated] that referencing across the board was pretty poor … so, covering a whole 
+range of different skills from academic literacy to some of the skills that will become 
+vital in a classroom environment down the track. (Student 5) 
+ 
+Another interviewee explained how the online modules fostered important academic skills, 
+including self-directed learning: 
+ 
+I felt we were encouraged to do the online modules of work, where you had to read, 
+answer questions. That was self-directed learning, structured self-directed learning … 
+(Student 4) 
+ 
+Indeed, a blended learning approach can introduce opportunities for self-directed, self-paced 
+learning (JISC, 2009). Beyond fulfilling ‘content delivery’ requirements of teaching, the 
+modules were purposefully designed to create compelling and personally relevant weekly 
+learning journeys for students. It is important to note though that six students (22.2%) 
+indicated that technical difficulties associated with accessing the learning materials impeded 
+their learning in the subject. A reliable and robust interface that is error free in its operation is 
+an important consideration in the online environment (Herrington et al., 2001). 
+ 
+ 
+Intellectual Engagement 
+ 
+Intellectual engagement concerns students’ engagement with the ideas, concepts and 
+thinking associated with their chosen discipline. Students who are intellectually engaged ask 
+questions, are critical about their own thinking and are open to multiple perspectives 
+(Pittaway, 2012). Given that FSE is a first-year subject, it is foundational in the sense that it 
+develops a knowledge base for students’ curriculum studies in science and social science 
+[PAGE 16]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  93 
+education later in their degree. As such, the development, communication and application of 
+science and sustainability concepts are important learning outcomes in the subject. 
+Achievement of these outcomes is promoted through a purposeful choice of pedagogies and 
+enabled through quality resources and media (Herrington et al., 2001). 
+As shown in Figure 1, intellectual engagement was the most significant theme to 
+emerge from analysis of the student survey and interview data. A number of aspects of FSE 
+engaged students intellectually; namely, the nature of the subject matter, the organisation of 
+the subject matter (i.e. the modularised structure and the use of an overarching pedagogical 
+framework), the assessment tasks, and the purposeful choice of online pedagogies and 
+resources that supported students’ learning (i.e. their conceptual understanding, scientific 
+literacy and personal actions for sustainability). The findings pertaining to each of these 
+aspects are presented below. 
+ 
+ 
+The Nature of the Subject Matter 
+ 
+It was clear from interview data that the nature of the subject matter explored in FSE 
+played a critical role in engaging students intellectually. Students explained that new and 
+diverse content and perspectives, which served to enhance their awareness and understanding 
+of sustainability and sustainability issues both locally and globally, was engaging:  
+ 
+I really do enjoy the content of this unit. I found it very interesting and there’s a lot of 
+things that I didn’t know and I’ve learnt for the first time. (Student 1) 
+ 
+I went to a commercial school when I was in school so we did practical subjects like 
+typing, accounting and business economics and stuff like that so I haven’t had a 
+science-based schooling. I was really captivated by the subject content. I found it 
+really interesting. I learnt heaps about the environment. I knew, but didn’t really want 
+to look at the bigger picture. (Student 3) 
+ 
+From a personal perspective, it gave me the opportunity to look at a lot of different 
+issues … that previously I haven’t had time or the motivation to do. So, I gained a lot, 
+lots and lots of knowledge about the environment, sustainability, about it being more 
+than just a piece of land outside, that there is so much more to all of it, to the whole 
+subject, and to sustainability. (Student 4) 
+ 
+ 
+The Organisation of Subject Matter 
+ 
+With regards to engaging students with the key ideas and ways of thinking in science 
+and sustainability education, the conceptual organisation of the subject and an overarching 
+pedagogical framework were key design considerations. The foci of the six modules 
+(Education for Sustainability, Water, Energy, Land, Air and Sustainable Futures) serve as 
+conceptual organisers for the key science and sustainability concepts and issues explored in 
+the subject. With a view to foster independent learning, the modules themselves are framed 
+by an inquiry pedagogical framework that prompts students to explore their prior knowledge, 
+learn new knowledge by engaging with the weekly concepts and readings, reflect on and 
+synthesise their learning, and consider implications for classroom practice and personal 
+sustainability actions. The inquiry framework provides explicit guidance, scaffolding and 
+structure, conveying clear expectations to students – as is necessary in the first-year 
+experience (Kift, 2009). It also helps to structure clear learning goals and directions 
+[PAGE 17]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  94 
+(Herrington et al., 2001), which, for the students in our study, was a prominent theme to 
+emerge from the data (Fig. 1).  
+As shown in Table 5, all students indicated in the survey that the modules effectively 
+organised subject content. Approximately 92 per cent of students agreed that the inquiry 
+framework was an effective way to organise the weekly learning materials. Thirty-seven per 
+cent of respondents (n=10) indicated in Question 4 of the survey that the online modules, 
+including their organisation, best supported their learning. As two students explained, the 
+modules provided a “structured learning environment” and were “very helpful in developing 
+an understanding of the content especially, the way they were structured e.g. drawing on our 
+previous knowledge before learning new concepts and sorting out the new knowledge and 
+how it can be used in classroom practice”. 
+ 
+Items 
+Agree and 
+Strongly agree, 
+n (%) 
+Mean 
+The six module organisation (i.e. Education for Sustainability, Water, 
+Energy, Land, Air and Sustainable Futures) was an effective way to 
+organise subject content 
+27 (100.0) 1.3 
+The inquiry framework of online modules (Tuning in, Finding out, 
+Sorting out, etc.) was an effective way to organise the weekly materials 
+25 (92.6) 1.5 
+Assessment Task 2 (Sustainability inquiry and web story) provided a 
+valuable opportunity to use my imagination and creativity in designing a 
+web story 
+25 (92.6) 1.6 
+Assessment Task 2 (Sustainability inquiry and web story) provided a 
+valuable opportunity to consider actions for sustainability 
+25 (92.6) 1.6 
+Assessment Task 1 (Solar still investigation) was valuable for 
+developing my scientific literacy 
+26 (96.3) 1.7 
+Table 5: A summary of students’ responses regarding the conceptual organisation and assessment tasks 
+in FSE (n=27). Mean represents the average score for each item, on a scale of 1 (strongly agree) to 4 
+(strongly disagree). 
+ 
+ 
+Choice of Online Pedagogies and Resources to Support Student Learning 
+  
+According to Herrington et al. (2001), effective online learning environments use 
+technology and media purposefully and appropriately, “according to strengths and 
+affordances” (p. 7). The purposeful use of media was a prominent theme to emerge from the 
+data, as shown in Figure 1. With regards to the online pedagogies and resources that engaged 
+students intellectually, the online modules and lecture vodcasts and accompanying lecture 
+notes (in the form of PowerPoint™ slideshows) were most frequently cited by students as 
+supporting their understanding of content knowledge, development of scientific literacy and 
+personal actions for sustainability (Tab. 6; see Professional engagement for a discussion of 
+science and sustainability teaching strategies). Approximately 56 per cent of students (n=15) 
+also reported that the hands-on activities and experiments embedded in the online modules, 
+which were designed to consolidate students’ disciplinary knowledge, were highly engaging 
+(Tab. 7). 
+As shown in Table 6, all students who responded to the survey engaged with the 
+lecture vodcasts and accompanying notes in the subject. The lecture vodcasts were also cited 
+most frequently in Question 4 of the survey (n=12, 44.4%) as being the most effective aspect 
+of the subject that supported students’ learning and intellectual engagement because, for 
+[PAGE 18]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  95 
+example, they “really, really helped in my understanding of the content”. A student explained 
+at interview that “being able to watch the lecture online [was] very beneficial because the 
+stuff that I had read, my modules that I had worked through by myself, made more sense 
+when I listened to the lecture” (Student 3). In this way, bringing students ‘into’ the lecture is 
+important to support their personal engagement and learning. Further, unlike face-to-face 
+lectures, vodcasts can be paused and replayed as necessary, from any location. Evidence 
+suggests that students spend longer with content of pod/vodcasts than that of the scheduled 
+lecture by, for example, replaying parts and researching recommended resources or links 
+(JISC, 2009). 
+ 
+Aspect of 
+learning 
+Responses, n (%) 
+Online 
+modules 
+Lecture 
+vodcasts and 
+accompanying 
+PowerPoints™ 
+Weekly 
+online 
+tutorials 
+Assessment 
+preparation 
+sessions 
+delivered via 
+Collaborate™ 
+Additional 
+Camtasia™ 
+recordings 
+Discussion 
+board 
+Supported 
+understanding of 
+content 
+knowledge 
+23 (85.2) 24 (88.9) 16 (59.3) 11 (40.7) 14 (51.9) 13 (48.1) 
+Supported 
+development of 
+scientific literacy 
+23 (85.2) 22 (81.5) 17 (63.0) 10 (37.0) 16 (59.3) 12 (44.4) 
+Supported 
+personal actions 
+for sustainability 
+23 (85.2) 20 (74.1) 15 (55.6) 9 (33.3) 11 (40.7) 12 (44.4) 
+Supported 
+development of 
+science and 
+sustainability 
+teaching strategies 
+22 (81.5) 21 (77.8) 15 (55.6) 9 (33.3) 10 (37.0) 10 (37.0) 
+I didn’t 
+participate in this 
+aspect of the 
+subject 
+1 (3.7) 0 2 (7.4) 8 (29.6) 4 (14.8) 1 (3.7) 
+Table 6: Students’ views regarding the online pedagogies and resources that supported different aspects 
+of their learning in FSE (n=27). The mode for each item is shaded. Students could select more than one 
+response in each row. 
+ 
+Students most frequently cited the online modules and lecture vodcasts as supporting 
+personal actions for sustainability (Tab. 6). At interview, students explained how studying 
+FSE was an “eye-opening” experience that motivated them to consider their own actions for 
+sustainability, as well as how to influence those of their family and colleagues: 
+ 
+It has been a real eye opening subject … It has made me more conscious, more aware 
+of personal issues, of community issues, and the world as a whole, and the issues that 
+the world is facing going forth … It has made me more aware, and I want to share it 
+with people at school. I want to turn off the fridge on the weekend, and get the other 
+staff that I am working with involved and share what I am learning with them so that 
+they can also, especially the teachers, which are more in a position to share and 
+motivate the kids, and incorporate some of the things that I am learning in what 
+they’re doing. (Student 4) 
+ 
+[PAGE 19]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  96 
+It [the subject] has made me think what can I do as one little person on my own or one 
+little family, what we can do to make things better.  (Student 3) 
+ 
+Responses to the online tutorials were mixed. While only two survey respondents 
+reported that they did not participate in the online tutorials (Tab. 6), five students (18.5%) 
+indicated in Question 5 that the tutorials were least effective for their learning. Similarly, the 
+majority of students reported that the hands-on activities and experiments embedded in the 
+online tutorials were only somewhat engaging (Tab. 7). One student explained that she could 
+not complete all of the experiments as she worked through the tutorials at night. For example, 
+in one activity, students are required to calculate the carbon content of a tree by measuring 
+the circumference and shadow of a tree: “[I] couldn’t do the shadow test [because] I did that 
+tute at night!” This student also explained the uncertainty she experienced doing the activities 
+on her own: “Getting the resources together to do the experiments then wondering if I had 
+done it right was disheartening”. The model tutorial responses provided, however, were 
+helpful for this student: “Embedding response data to experiments was valuable”. In this 
+case, studying online was an isolating experience that impeded this student’s intellectual and 
+personal engagement.  
+ 
+Items 
+Responses, n (%) 
+Mean Highly 
+engaging 
+Somewhat 
+engaging 
+Not engaging 
+at all 
+1 2 3 
+Online modules 15 (55.6) 12 (44.4) 0 1.4 
+Weekly online tutorials*  2 (7.7) 20 (76.9) 3 (11.5) 1.8 
+Assessment Task 1  
+(Solar still investigation) 14 (51.9) 12 (44.4) 1 (3.7) 1.5 
+Assessment Task 2  
+(Sustainability inquiry and 
+web story) 
+19 (70.4) 6 (22.2) 2 (7.4) 1.4 
+Table 7: Students’ views regarding the extent to which the hands-on activities and experiments 
+embedded in particular aspects of FSE were engaging (n=27). The mode for each item is shaded. 
+Mean represents the average score for each item, on a scale of 1-3. *n=25. 
+ 
+It can also be seen from Table 6 that approximately 30 per cent of students did not 
+participate in the assessment preparation sessions delivered via Blackboard Collaborate™. 
+Student feedback indicated that ‘real time’ or synchronous teaching and learning 
+opportunities like these are difficult to accommodate given their personal commitments. A 
+small number of students did not engage with the Camtasia™ recordings, developed by their 
+tutor as ‘additional’ resources to support selected topics relevant to assessment, such as how 
+to design a fair test and how to reference their work appropriately. Only one student indicated 
+that she did not engage with the discussion board. Perhaps this is not surprising because, 
+while optional, it presents the only ongoing opportunity for students to connect with their 
+peers in the subject. 
+Twenty-one survey respondents (77.8%) indicated that they were satisfied with the 
+range of the pedagogies employed and resources provided in FSE (Questions 6 and 7 of the 
+survey). Four students offered the following suggestions to better support their intellectual 
+engagement with the key concepts in the subject: more YouTube™ clips (“I found some 
+YouTube clips on areas where I lacked understanding [that] really helped”); optional 
+Collaborate™ sessions each week (“to consolidate weekly information”); and “more 
+examples” (presumably of applied concepts). Interestingly, one student indicated that she 
+would have preferred that less resources and activities were provided, explaining that it “was 
+[PAGE 20]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  97 
+a lot to get through per week.  I could only work at night, so for me it was heavy going”. This 
+highlights an interesting tension between providing a rich and stimulating online learning 
+environment for students and them managing the realities of online study when often time-
+poor. 
+ 
+ 
+The Assessment Tasks 
+ 
+The two key assessment tasks also played an important role in engaging students 
+intellectually. Assessment lies arguably at the heart of the learning experience in higher 
+education, shaping how learners understand the most valued aspects and intent of the 
+curriculum (JISC, 2010). Ninety-six per cent of students surveyed felt that the solar still 
+investigation was valuable for developing their scientific literacy (Tab. 5). With regards to 
+the sustainability inquiry and web story, 25 respondents (92.6%) felt that this assessment task 
+enabled them to use their imagination and creativity, and to consider actions for sustainability 
+(Tab. 5). Approximately one-quarter of respondents indicated in Question 4 of the survey that 
+the assessment tasks were the most effective aspects of the subject for their learning (n=7, 
+25.9%).  
+The majority of students also reported high levels of engagement arising from the 
+hands-on activities and experiments embedded in the assessment tasks (Tab. 7). Some 
+students explained that they found the “hands-on learning” beneficial in the solar still 
+investigation, while the place-based nature of the sustainability inquiry and web story was 
+valuable as “it bought home the reality of sustainability”. At interview, a student explained 
+how playing an active role in completing the assessment engaged her intellectually: 
+ 
+I don’t know if interactive is the right word, but it [the assessment] kind of made you 
+get out there and do things, like the solar still assessment, you had to make a solar still 
+and watch it and write up about it, and the web story we had to go out there and take 
+photographs of our chosen web story and research the sustainable issues around it, so 
+it made you get out there and do stuff.  I found being interactive with our assessments 
+was beneficial. It made it interesting and not just reading vast amounts of literature 
+and regurgitating it in an essay. (Student 3) 
+ 
+ 
+Social Engagement 
+ 
+For first-year students, social engagement (including social interaction and 
+communication, getting to know other students, the development of strong social networks, 
+and being part of a learning community) is particularly important for success at university 
+(Kift, 2009; Pittaway, 2012). Social engagement also involves the development of positive 
+relationships and open communication with university teaching staff. As shown in Figure 1, 
+‘communication’ arose as a dominant theme in this study.  
+In the student survey, 22 respondents (81.5%) either agreed or strongly agreed that 
+they felt part of a community of learners in the FSE online environment (Tab. 8). At the same 
+time, it must be recognised though that nearly one-fifth of students surveyed responded in the 
+negative to this statement. Opportunities for dialogue with other students and university 
+teaching staff are an important part of the delivery of quality online courses (Herrington et 
+al., 2001). In FSE, the discussion board is the only tool within the LMS that facilitates 
+student-student communication for online students; however, contributions are not 
+compulsory or assessed. This was a deliberate choice in the design of the subject, so as not to 
+overburden students’ workloads in what is already a rigorous subject. Instead, students are 
+[PAGE 21]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  98 
+prompted to contribute to the discussion board in the online tutorials to share their learning 
+and experiences of the activities, and to ask questions. Three students indicated in the survey 
+that the discussion board was least effective for their learning (Question 7). One survey 
+respondent, on reflecting on a tutorial activity that was intended to culminate in students 
+debating renewable energy on the discussion board, commented that: “I actually debated 
+myself as no one else participated.  [I] felt like I was doing the subject alone”. Another 
+student explained at interview that contributing to the discussion board was onerous in light 
+of the volume of reading that she had to do as an online student, and that she preferred the 
+real-time verbal communication that came by way of the Collaborate™ sessions to support 
+the assessment: 
+ 
+I am studying externally [online] so I have to read and I have to write an awful lot but 
+just the general communication, to also have to sit and write that and then read 
+responses, I find really tiring. And it’s like a chore, where being able to verbally just 
+listen and talk about things is quick, it’s immediate. That’s what appealed to me. 
+(Student 4) 
+ 
+Item 
+Agree and 
+Strongly agree,  
+n (%) 
+Disagree and 
+Strongly disagree, 
+n (%) 
+Mean 
+There was benefit in sharing the one LearnJCU site 
+with all modes of delivery in the subject (on-campus 
+and online) 
+23 (85.2) 4 (14.8) 1.7 
+I felt part of a community of learners in the online 
+environment 22 (81.5) 5 (18.5) 1.9 
+Table 8: A summary of students’ responses in regards to feeling part of a community of learners and 
+accessing a shared LearnJCU site in FSE (n=27). Mean represents the average score for each item, on a 
+scale of 1 (strongly agree) to 4 (strongly disagree). 
+ 
+Another opportunity for student–student communication and collaboration comes by 
+way of the assessment tasks. For on-campus students, the solar still experiment and the web 
+story task is completed in small groups so that students can collaborate on their experimental 
+design, and on their inquiry into a local sustainability issue. For external students, working 
+collaboratively is optional, acknowledging that not all students will have peers in their own 
+geographic location to work with. For one online student who could take up the opportunity, 
+collaborating on the assessment tasks was useful for their learning: 
+ 
+With our assessment tasks, we had the opportunity to work in a group, so I was 
+working alongside other students, and I think, yeah, that did help me to learn and 
+consolidate and talk with other students seeing what they thought or what their 
+understanding is with the content. (Student 1) 
+ 
+High levels of student–staff communication are fostered throughout the subject in 
+relation to weekly learning and the assessment tasks (e.g. via email, the discussion board, 
+announcements on LearnJCU and assessment preparation sessions). While this is reflected in 
+consistently high levels of student satisfaction in subject and teaching evaluation surveys 
+(administered by the university), it is not clear whether students considered their 
+communication with teaching staff when deciding whether they felt part of a community of 
+learners. Students did, however, acknowledge the importance of timely communication and 
+feedback from teaching staff at interview:  
+[PAGE 22]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  99 
+ 
+I think they [the tutor and lecturer] have done a really good job, in like, they’re 
+constantly sending out emails and reminders and letting us know when information has 
+been posted and I think that’s sort of been a good motivation for myself. (Student 1) 
+ 
+My tutor was outstanding because any questions that anyone had, he would respond to 
+very promptly and there was no silly question. It was safe to ask a question. (Student 2) 
+ 
+As discussed earlier, a deliberate decision was made to develop one integrated 
+LearnJCU site for all student cohorts in FSE. Aside from contributing to students’ personal 
+engagement, there is evidence that this approach also supports their social engagement. 
+Although students are not actively required to interact with peers across different modes of 
+delivery (on-campus and online), the provision of one LearnJCU site does appear to provide 
+students with a sense that they are part of a larger cohort and community of learners. In the 
+student survey, 23 respondents (85.2%) felt that there was benefit in sharing the one LMS site 
+with all modes of delivery in the subject (Tab. 8).  
+ 
+ 
+Professional Engagement 
+ 
+Professional engagement involves students engaging with their chosen profession 
+during their university study. In the context of our study and Pittaway’s (2012) framework 
+(i.e. preservice teacher education), it is about students connecting with teachers, principals, 
+schools and other educational contexts; engaging in professional experience; participating in 
+professional learning opportunities; and sharing and reflecting on their professional 
+experience with other students. We have also extended this category of engagement to 
+include the development of a professional identity and the skills and knowledge necessary to 
+teach in the classroom. As teacher educators, we understand the importance of modelling and 
+engaging students in authentic learning experiences that also can be effectively implemented 
+in classrooms. We recognise that “teacher education represents a unique form of teaching in 
+which both the content of the teaching and the practice of the teaching form the basis of what 
+is being taught” (Edwards, 2010, p. 10).  
+Indeed, it is the purposeful choice of authentic pedagogies in FSE that engages 
+students professionally (Herrington et al., 2001); see the prominence of ‘authentic tasks’ in 
+Figure 1. Through the online modules, lectures, tutorials and assessment tasks, FSE makes 
+connections to early childhood and primary curricula and pedagogies for science and 
+sustainability education, in order to develop students’ professional identity and competence. 
+As shown in Table 9, 89-96 per cent of respondents agreed that the online modules made 
+effective links to classroom practice, and that the online tutorials and assessment tasks 
+modelled classroom strategies for science and sustainability education effectively. Students 
+most frequently cited the online modules and the lecture vodcasts in terms of supporting their 
+development of science and sustainability teaching strategies (Tab. 6). 
+  
+[PAGE 23]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  100 
+Item 
+Agree and 
+Strongly agree, 
+n (%) 
+Mean 
+The assessment tasks (Tasks 1 and 2) effectively modelled classroom 
+strategies for science and sustainability education 26 (96.3) 1.7 
+The online module activities made effective links to classroom 
+practice 26 (96.3) 1.8 
+The weekly online tutorials effectively modelled classroom strategies 
+for science and sustainability education 24 (88.9) 1.9 
+Table 9: A summary of students’ responses regarding whether the online modules, online tutorials and 
+assessment tasks in FSE made effective links to classroom practice and effectively modelled classroom 
+strategies for science and sustainability education (n=27). Mean represents the average score for each 
+item, on a scale of 1 (strongly agree) to 4 (strongly disagree). 
+ 
+Student perceptions of authenticity of assessment tasks and consideration of the 
+implications for real-world practice have been shown in the literature to influence student 
+learning (Gulikers, Kester, Kirschner, & Bastiaens, 2008). In this study, one student 
+explained at interview how the solar still investigation engaged her professionally as a future 
+teacher: 
+ 
+Actually doing the experiment and as a prospective teacher going through the process 
+of doing a basic experiment and writing it up and going into a little bit of depth was 
+quite useful. (Student 2) 
+ 
+Similarly, for another student, the sustainability inquiry and web story was professionally 
+engaging as it modelled an authentic pedagogical process: 
+ 
+I think it was a very good exercise for preservice teachers to be able to work on 
+developing something that was age appropriate, something that was meaningful in 
+terms of being a sustainability issue, something that was informed by the process of 
+inquiry and too, I suppose, to have a bit of an idea of what it’s like if you were to be 
+able to present it on a real issue in the world around us and to be able to deliver it in 
+an educational environment. (Student 5)  
+ 
+This student also explained that the provision of authentic examples of education for 
+sustainability by way of case studies was engaging and motivating, and helped her to 
+consider her role as a future teacher: 
+ 
+Of interest to me was some of the examples where schools have taken on engaging 
+sustainability and garden projects and things like that. Reading about some of the 
+different schools, you know, like the ones that were the trial for the Stephanie 
+Alexander garden project. Case studies like that. And I suppose for me as I’m starting 
+to envisage myself as a teacher … it’s really quite motivating, I suppose, to see that 
+on a national scale there are a lot of things that we can learn … The value of seeing a 
+case study, the successes, the failures that people have had in the past and being able 
+to learn from that to be able to draw from that. (Student 5) 
+ 
+In the context of preservice teacher education, and our own subject, authenticity serves to 
+promote learning through “a more challenging content of diverse practices and for diverse 
+learners” (Iverson, Lewis, & Talbot, 2007, p. 291).  
+[PAGE 24]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  101 
+Summary and Conclusions: Implications for Practice 
+ 
+This research sought to investigate the ways a blended learning design can promote 
+the development of a robust foundational knowledge base in science and sustainability 
+education, and engage first year online university students in active, experiential and praxis-
+oriented learning experiences. While this study was conducted in a science and sustainability 
+context, we believe its findings are of value to a range of learning areas in teacher education 
+that call for quality online and blended learning design.  
+In answering the first component of our research question, our findings revealed that 
+intellectual engagement was fostered through the provision of online modules that effectively 
+organise the subject’s content and structure the weekly learning through an overarching 
+inquiry pedagogical frame. Together, these aspects most strongly supported the development 
+of students’ foundational knowledge base by supporting them to engage with the learning 
+material in a structured way and providing them with clear learning goals and directions. Far 
+from privileging knowledge acquisition, student-centred, self-directed engagement with the 
+learning material is supported through the explicit scaffolding (cf. Green et al., 2010). Such 
+scaffolding is critical in an online environment – and even more so in the context of the first-
+year experience for diverse student cohorts. 
+The appropriate use of media and the assessment tasks also played a critical role in 
+engaging students intellectually and developing their knowledge base. Students frequently 
+cited the lecture vodcasts as being important for engaging with the subject’s content. Indeed, 
+it was the nature of the subject matter itself that students found stimulating and engaging. 
+Intellectual engagement was also fostered through the assessment tasks that support the 
+development of students’ scientific literacy, exercise their imagination and creativity, and 
+prompt them to consider actions for sustainability. 
+In answering the second component of our research question, our findings revealed 
+that students engaged in active, experiential and praxis-oriented learning experiences through 
+scaffolded hands-on activities and experiments embedded in the online modules and tutorials. 
+These aspects were also integral to the assessment task design. Both assessment tasks engage 
+students meaningfully with place-based learning by mobilising them in their local 
+environment through inquiry. This finding has applicability to other learning areas in teacher 
+education that call for active, learner-centred, experiential and praxis-orientated pedagogies 
+in an online or blended learning environment, such as the Arts, Technology, and Health and 
+Physical Education. A powerful blended learning design can be achieved by using online 
+affordances to facilitate students’ learning in their physical environment; for example, by 
+thoughtfully selecting experiential activities that students can perform themselves with 
+readily accessible materials; by scaffolding and structuring such activities in the LMS so that 
+students feel supported and enabled; and by considering how a subject’s assessment tasks can 
+offer opportunities to engage meaningfully with their local environment. Although not 
+employed in FSE, learning technologies can also encourage students to share their hands-on 
+experiences through, for example, video blogs, which themselves become shared artefacts for 
+learning. In this way, a blended learning environment can support active, student-centred 
+learning approaches, as suggested by Beldarrin (2006) and Fan and Lê (2011). 
+Although the online tutorials included opportunities for experiential learning, the 
+majority of survey respondents found that these activities were only ‘somewhat engaging’, 
+which may be a reflection of the activities’ requirements (e.g. to source materials to complete 
+the experiments, or to conduct some activities outdoors). Where possible, the tutorials 
+provide secondary data or scenarios if students cannot perform the activities themselves. In 
+2014, the first author led a project to develop a suite of short videos to accompany the online 
+tutorials that show on-campus students performing the activities and manipulating materials 
+and equipment, with a view to support students’ engagement with the tutorials and prevent 
+[PAGE 25]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  102 
+the “disheartening” experience of wondering whether they have “done it right”, as described 
+by one of the survey respondents. These videos will be employed for the first time and 
+evaluated when the subject is delivered in 2015. 
+In a professional degree like the B.Ed., we found that students valued opportunities 
+for praxis-orientated learning, which, in turn, fostered professional engagement as a way to 
+develop both their professional identity as teachers, and the skills and knowledge required for 
+classroom practice. Authentic tasks emerged as a dominant theme in our study; links to the 
+curriculum and classroom strategies for teaching science and sustainability education are 
+evidenced in the online modules, the lecture vodcasts and PowerPoint™ slideshows, online 
+tutorials and assessment tasks. 
+Academic engagement was found to be fostered through the effective use of a range 
+of ICTs that enable students’ access to the learning materials, as well as an explicit focus on 
+academic skills such as self-directed learning (which can be supported through well-designed 
+and scaffolded learning modules). At the same time, we are reminded of the importance of 
+understanding the ICT proficiency of our students, as not having adequate skills can impede 
+students’ academic, intellectual and personal engagement.  
+As students are transitioning into higher education, an enabling learning environment 
+that supports personal engagement is critical. We found that providing online students with a 
+clear sense that they are receiving a comparable learning experience to that of their on-
+campus peers to be important in this context. The need to provide equivalent learning 
+opportunities, as required by our university, led us to consider how we might leverage the 
+strengths of a range of learning technologies to deliver subject content and experiential 
+learning opportunities for all cohorts, through purposeful pedagogical design. In this way, the 
+online modules became an integral component of subject delivery for both online and on-
+campus students, while learning technologies offer tailored solutions to enable online 
+students to access tutorials and lectures. 
+With regards to promoting students’ social engagement in the online environment, we 
+found that student–staff communication was another prominent theme to emerge in our study, 
+as students valued timely feedback and support from teaching staff. In our review of the 
+literature regarding what constitutes quality online teacher education, there is broad 
+consensus on the value of creating a community of learners that positions students as 
+knowledge creators through collaborative, learner-centred pedagogies (Abedin et al., 2010; 
+Fasso et al., 2013; Green et al., 2010; Oliveira et al., 2011). It is interesting to note, however, 
+as we reflect on the design of FSE, strategies that promote social engagement and the 
+development of an online community were not a key consideration. Nonetheless, our findings 
+indicate that more than 80 per cent of the students who were surveyed felt part of a learning 
+community (Table 8). This raises interesting questions about the extent to which online 
+student-student interactions and collaboration are important in a successful blending learning 
+design. In FSE, online students predominantly learn individually through carefully scaffolded 
+learning experiences, guided inquiry and place-based learning. While engagement and 
+learning may be enhanced through greater opportunities for student-student interaction, the 
+challenge is to find a balance between an intellectually rigorous and stimulating subject (and 
+the associated student workload) and building connections between learners in such a way 
+that is not onerous (cf. Student 4, who found the discussion board ‘tiring’). We continue to 
+reflect on how to embed purposeful opportunities for online student collaboration as the 
+subject evolves, particularly given that building connections between learners is important in 
+supporting first-year students’ personal engagement and success. 
+Our journey through this research reminds us that promoting student engagement with 
+a view to best support learning must be purposefully planned during the subject development 
+phase. In this study, Pittaway’s (2012) engagement framework and Herrington et al.’s (2001) 
+quality guidelines for online courses offered real utility in reflecting on our instructional 
+[PAGE 26]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  103 
+design to understand how students engage in the online environment personally, 
+academically, intellectually, professionally and socially, and how this is facilitated by our 
+choice of pedagogies, resources and delivery strategies. In doing so, we believe that this 
+study furthers our understanding of what constitutes quality preservice teacher education in 
+an online environment, particularly within the under-researched field of science and 
+sustainability education. We encourage other university educators developing or enhancing 
+online or blended courses to share their experiences of using quality frameworks to inform 
+their instructional design and pedagogical choices, to further the discussion on best practice 
+for student engagement and learning across a range of disciplines, particularly those that call 
+for place-based and experiential learning. 
+ 
+ 
+References 
+ 
+Abedin, B., Daneshgar, F., & D’Ambra, J. (2010). Underlying factors of sense of community 
+in asynchronous computer supported collaborative learning environments. Journal of 
+Online Learning and Teaching, 6(3), 585–596. 
+Australian Curriculum Assessment and Reporting Authority. (n.d.). Sustainability. Retrieved 
+from 
+http://www.australiancurriculum.edu.au/CrossCurriculumPriorities/Sustainability 
+Australian Department of Education, Employment and Workplace Relations. (2009–2011). 
+James Cook University Curriculum Refresh project: Australia’s University for the 
+Tropics. Diversity and Structural Adjustment Fund, Canberra. 
+Baumfield, V., Hall, E., & Wall, K. (2008). Action research in the classroom. London: AGE. 
+http://dx.doi.org/10.4135/9780857024305 
+Beldarrain, Y. (2006).  Distance Education Trends: Integrating new technologies to foster 
+student interaction and collaboration. Distance Education, 27(2), 139–153. 
+http://dx.doi.org/10.1080/01587910600789498 
+Bennett, S., Maton, K., & Kervin, L. (2008). The ‘digital natives’ debate: A critical review of 
+the evidence. British Journal of Educational Technology, 39(5), 775–786. 
+http://dx.doi.org/10.1111/j.1467-8535.2007.00793.x 
+Briano, R., Midoro, V., & Trentin, G. (1997). Computer mediated communication and online 
+teacher training in environmental education. Journal of Information Technology for 
+Teacher Education, 6(2), 127–146. http://dx.doi.org/10.1080/14759399700200012 
+Brinthaupt, T., Fisher, L., Gardner, J., Raffo D., & Woodard, J. (2011). What the best online 
+teachers should do. Journal of Online Learning and Teaching, 7(4), 515–524. 
+Buxton, C. (2010). Social problem solving through science: An approach to critical, place-
+based, science teaching and learning. Equity and Excellence in Education, 43(1), 120–
+135. http://dx.doi.org/10.1080/10665680903408932 
+Department of Industry, Innovation, Science, Research and Tertiary Education. (2011). 
+Higher Education Standards Framework (Threshold Standards). Version 1. Retrieved 
+from http://www.comlaw.gov.au/Details/F2013L00194 
+Dettmer, P. (2006). New Blooms in established fields: Four domains of learning and doing. 
+Roeper Review, 28(2), 70–78. http://dx.doi.org/10.1080/02783190609554341 
+Edwards, S. (2010). Teaching through assessment: The merging of technology and 
+assessment in teacher education learning contexts. In D. Gronn, & G. Romeo (Eds.), 
+ACEC2010: Digital Diversity. Conference Proceedings of the Australian Computers 
+in Education Conference 2010, Melbourne, 6–9 April. Carlton, Victoria: Australian 
+Council for Computers in Education. 
+[PAGE 27]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  104 
+Fan, S. & Lê, Q. (2011).  Developing a Valid and Reliable Instrument to Evaluate Users’ 
+Perception of Web-Based Learning in an Australian University Context. Journal of 
+Online Learning and Teaching, 7(3), 366–379. 
+Fasso, W., Knight, C., & Knight, B. (2013). A design framework for enhancing on-line 
+learning. In C. Boyle (Ed.), Student Learning: improving practice. Education in a 
+Competitive and Globalizing World (pp. 59-77). New York, NY: Nova Science 
+Publishers. 
+Fien, J. & Maclean, R. (2000). Teacher education for sustainability: Two teacher education 
+projects from Asia and the Pacific. Journal of Science Education and Technology, 
+9(1), 83-94. http://dx.doi.org/10.1023/A:1009420923692 
+Flutter, J., & Rudduck, J. (2004). Consulting pupils: What’s in it for schools? London: 
+RoutledgeFalmer. 
+Green, M. (2012). Place, sustainability and literacy in environmental education: Frameworks 
+for teaching and learning. Review of International Geographical Education Online, 
+2(3), 327-346. 
+Green, N., Edwards, H., Wolodko, B., Stewart, C., Brooks, M., & Littledyke, R. (2010). 
+Reconceptualising higher education pedagogy in online learning. Distance Education, 
+31(3), 257–273. http://dx.doi.org/10.1080/01587919.2010.513951 
+Gulikers, J., Kester, L., Kirschner, P., & Bastiaens, T. (2008). The effect of practical 
+experience on perceptions of assessment authenticity, study approach, and learning 
+outcomes. Learning and Instruction, 18(2), 172-
+186.  http://dx.doi.org/10.1016/j.learninstruc.2007.02.012 
+Hamston, J., & Murdoch, K. (1996). Integrating socially: Planning units of work for social 
+education. Melbourne, Australia: Eleanor Curtin. 
+Herrington, A., Herrington, J., Oliver, R., Stoney, S., & Willis, J. (2001). Quality guidelines 
+for online courses: The development of an instrument to audit online units. In G. 
+Kennedy, M. Keppell, C. McNaught & T. Petrovic (Eds.) Meeting at the crossroads: 
+Proceedings of ASCILITE 2001 (pp. 263-270). Melbourne: The University of 
+Melbourne. 
+Hong, H. Y., & Sullivan, F. R. (2009). Towards an idea-centered, principle-based design 
+approach to support learning as knowledge creation. Educational Technology 
+Research and Development, 57(5), 613-627. http://dx.doi.org/10.1007/s11423-009-
+9122-0 
+Iverson, H., Lewis, M., & Talbot, R. (2007). Building a framework for determining the 
+authenticity of instructional tasks within teacher education programs. Teaching and 
+Teacher Education, 24, 290-302. http://dx.doi.org/10.1016/j.tate.2007.09.003 
+James Cook University. (2014). Access, participation and success plan, 2015-2017. Division 
+of Academic and Student Life. Internal document. 
+James Cook University. (2015a). ED1411 – Foundations of Sustainability in Education. 
+Retrieved from https://secure.jcu.edu.au/app/studyfinder/?subject=ed1411  
+James Cook University. (2015b). Learning, Teaching and Assessment Policy. Retrieved from 
+http://www.jcu.edu.au/policy/allitoz/JCU_076643.html 
+Jefferies, A. & Hyde, R. (2010). Building the future students’ blended learning experiences 
+from current research findings.  Electronic Journal of e-Learning 8(2), 133–140. 
+Jenkins, E. (2006). The student voice and school science education. Studies in Science 
+Education, 42(1), 49-88. http://dx.doi.org/10.1080/03057260608560220 
+JISC. (2009). Effective practice in a digital age: A guide to technology-enhanced learning 
+and teaching. Higher Education Funding Council for England. Retrieved from 
+http://www.webarchive.org.uk/wayback/archive/20140615094835/http://www.jisc.ac.
+uk/media/documents/publications/effectivepracticedigitalage.pdf 
+[PAGE 28]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  105 
+JISC. (2010). Effective assessment in a digital age: A guide to technology-enhanced 
+assessment and feedback. Higher Education Funding Council for England. Retrieved 
+from 
+http://www.webarchive.org.uk/wayback/archive/20140614115719/http://www.jisc.ac.
+uk/media/documents/programmes/elearning/digiassass_eada.pdf  
+Johnson, L., Adams Becker, S., Estrada, V., Freeman, A. (2014). NMC Horizon Report: 2014 
+Higher Education Edition. Austin, Texas: The New Media Consortium. 
+Kawka, M. & Larkin, K. (2011). Wrestling and wrangling with a worrisome wiki: An 
+account of pedagogical change in the use of a Web 2.0 technology in a first year 
+education course. Studies in Learning, Evaluation, Innovation and Development, 8(1), 
+38–48.  
+Kennedy, G., Dalgarno, B., Bennett, S., Judd, T., Gray, K., & Chang, R. (2008). Immigrants 
+and natives: Investigating differences between staff and students’ use of technology. 
+Retrieved from 
+http://www.ascilite.org.au/conferences/melbourne08/procs/kennedy.pdf 
+Keppell, M. (2010). Redesigning curricula using blended learning: A development-based 
+research approach (pp. 217-227). In J. Higgs, D. Fish, I. Goulter, S. Loftus & J. Reid: 
+Education for Future Practice. Sense Publishers: The Netherlands. 
+Keppell, M., & Riddle, M. (2011). Distributed learning places: Physical, blended and virtual 
+learning spaces in higher education. In Physical and Virtual Learning Spaces in 
+Higher Education: Concepts for the Modern Learning Environment (pp. 1-20). 
+Hershey, PA: IGI Publishing (IGI Global). 
+Kift, S. (2009). Articulating a transition pedagogy to scaffold and to enhance the first year 
+student learning experience in Australian higher education: Final Report for ALTC 
+Senior Fellowship Program. Retrieved January 23, 2015, from: 
+http://fyhe.com.au/wp-content/uploads/2012/10/Kift-Sally-ALTC-Senior-Fellowship-
+Report-Sep-092.pdf  
+Knight, E., & Gandomi, N. (2010). Participatory Media for Education: Driving Student-
+Centred Learning. Paper presented at the meeting of the Illinois Digital Environment 
+for Access to Learning and Scholarship. Retrieved January 23, 2013 from: 
+https://www.ideals.illinois.edu/handle/2142/15056  
+Koschmann, T., Kelson, A., Feltovich, P., & Barrows, H. (1996). Computer-supported 
+problem-based learning: A Principled approach to the use of computers in 
+collaborative learning. In T. Koschmann (Ed.), CSCL: Theory and practice of an 
+emerging paradigm (pp. 83-119). New Jersey: Lawrence Erlbaum Associates. 
+Lasen, M., Tomas, L., Whitehouse, H., Sorin, R., Evans, N., & Stevenson, B. (2015). A case 
+study of an Australian university embedding EfS in a pre-service teaching program. In 
+S.K. Stratton, R. Hagevik, A. Feldman, & M. Bloom, (eds.), Educating Science 
+Teachers for Sustainability (pp. 323-346). ASTE Series in Science Education. 
+Switzerland: Springer International Publishing.  http://dx.doi.org/10.1007/978-3-319-
+16411-3_17 
+Morse, P. (2000). Education and understanding science and the Earth system for long-term 
+sustainability. In K. Wheeler, & A. Perraca Bijur (Eds.), Education for a sustainable 
+future: A paradigm of hope for the 21st century (pp. 113-122). New York: Kluwer 
+Academic. http://dx.doi.org/10.1007/978-1-4615-4277-3_8 
+Norton, A. (2013). Mapping Australian higher education. Carlton, VIC: Grattan Institute. 
+Oliveira, I., Tinoca, L., & Pereira, A. (2011). Online group work patterns: How to promote a 
+successful collaboration. Computers & Education, 57, 1348–1357. 
+http://dx.doi.org/10.1016/j.compedu.2011.01.017 
+Oravec, J. (2002). Bookmarking the World: Weblog Applications in Education. Journal of 
+Adolescent & Adult Literacy, 45(7), 616–621. 
+[PAGE 29]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  106 
+Parsell, M. (2014). Standards for Online Education (SOE). Final Report. Sydney: Office for 
+Learning and Teaching. 
+Peavey, F. (1994). By Life’s Grace: Musings on the Essence of Social Change. Philadelphia: 
+New Society Publishers. 
+Pittaway, S. (2012). Student and staff engagement: Developing an engagement framework in 
+a Faculty of Education. Australian Journal of Teacher Education, 37(4), 37–45. 
+http://dx.doi.org/10.14221/ajte.2012v37n4.8 
+Pombo, L., Smith, M., Abelha, M., Caixinha, H., & Costa, N. (2012). Evaluating an online e-
+module for Portuguese primary teachers: trainees’ perceptions. Technology, Pedagogy 
+and Education, 21(1), 21-36. http://dx.doi.org/10.1080/1475939X.2011.589156 
+Prensky, M. (2001). Digital Natives, Digital Immigrants. On the Horizon – MCB University 
+Press, 9(5), 6.  
+QSR International. (2012). NVivo (Version 10) [qualitative data analysis software]. 
+Doncaster, Australia: QSR International. Retrieved from 
+http://www.qsrinternational.com 
+Reeves, T., Herrington, J. & Oliver, R. (2005). Design Research: A Socially Responsible 
+Approach to Instructional Technology Research in Higher Education. Journal of 
+Computing in Higher Education, 16(2), 96-
+115.  http://dx.doi.org/10.1007/BF02961476 
+Saeed, N., Yang, Y., & Sinnappan, S. (2009). Emerging Web Technologies in Higher 
+Education: A Case of Incorporating Blogs, Podcasts and Social Bookmarks in a Web 
+Programming Course Based on Students’ Learning Styles and Technology 
+Preferences. Educational Technology & Society, 12(4), 98-109. 
+Salyers, V., Carter, L., Barrett, P., & Williams, L. (2010). Evaluating student and faculty 
+satisfaction with a pedagogical framework. Journal of Distance Education, 24(3).  
+Retrieved from http://www.jofde.ca/index.php/jde/article/viewArticle/695/1169  
+Semken, S., & Freeman, C. (2008). Sense of place in the practice and assessment of place-
+based science teaching. Science Education, 92(6), 1042-1057. 
+http://dx.doi.org/10.1002/sce.20279http://dx.doi.org/10.14221/ajte.2014v39n1.3 
+Simon, S. (2002). Participatory online environmental education at the Open University, UK. 
+In W. Filho (Ed.), Teaching sustainability: Towards curriculum greening (Chapter 7). 
+Bern: Peter Lang. 
+Simoncini, K., Lasen, M., & Rocco, S. (2014). Professional dialogue, reflective practice and 
+teacher research: Engaging early childhood pre-service teachers in collegial dialogue 
+about curriculum innovation. Australian Journal of Teacher Education, 39(1), 27-44. 
+Sinha, N., Khreisat, L., & Sharma, K. (2009). Leaner-interface interaction for technology-
+enhanced active learning. Innovate: Journal of Online Education, 5(3), 3. 
+Smith, G., & Sobel, D. (2010). Place- and community-based education in schools. New 
+York: Routledge. 
+United Nations Educational, Scientific and Cultural Organisation. (2010). Strategic 
+questioning. Teaching and learning for a sustainable future: A multimedia teacher 
+education programme. Retrieved from 
+http://www.unesco.org/education/tlsf/mods/theme_a/mod01.html?panel=4#top  
+Wals, A.E.J., & Jickling, B. (2002). “Sustainability” in higher education: From doublethink 
+and newspeak to critical thinking and meaningful learning. International Journal of 
+Sustainability in Higher Education, 3(3), 221-232. 
+http://dx.doi.org/10.1108/14676370210434688 
+Whitehouse, H. (2008). “EE in cyberspace, why not?” Teaching, learning and researching 
+tertiary pre-service and in-service teacher environmental education online. Australian 
+Journal of Environmental Education, 24, 11–21. 
+[PAGE 30]
+Australian Journal of Teacher Education 
+ Vol 40, 11, November 2015  107 
+Williams, J. & Jacobs, J. (2004). Exploring the use of blogs as learning spaces in the higher 
+education sector. Australasian Journal of Educational Technology, 20(2), 232-247. 
+Yin, R. K. (2009). Case Study Research: Design and Methods. 4th Edition. California: Sage 
+Publications. 
+ 
+ 
+Acknowledgement 
+ 
+The authors acknowledge that a James Cook University  Teaching and Learning Academy 
+Fellowship funded the research reported in this paper.

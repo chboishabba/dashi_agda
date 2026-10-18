@@ -1,0 +1,10 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyR136TraceFrameCalibrationTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyR136TraceFrameCalibrationExact as TraceFrame
+
+fourAdmittedDirectionsDoNotByThemselvesDefineRenormalizedTraceRegression =
+  TraceFrame.fourAdmittedDirectionsDoNotByThemselvesDefineRenormalizedTrace
+
+remainingAnomalyWeldIsScalarTraceFrameCalibrationRegression =
+  TraceFrame.remainingAnomalyWeldIsScalarTraceFrameCalibration

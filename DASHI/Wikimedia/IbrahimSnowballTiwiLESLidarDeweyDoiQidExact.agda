@@ -97,7 +97,7 @@ forestStructureSupportsHabitat = Traversal.dashi-first-link-edge
 ------------------------------------------------------------------------
 
 data LidarLESSourceRole : Set where
-  landscapeCanopyGeometryMethod
+  landscapeCanopyGeometryMethod : LidarLESSourceRole
   arborealDenTreeTLSStudy : LidarLESSourceRole
 
 record LidarLESPrimarySource : Set where
@@ -146,14 +146,14 @@ stoboWilsonEtAl2021 = lidar-les-primary-source
 ------------------------------------------------------------------------
 
 data LidarObservationProduct : Set where
-  pointCloud
-  digitalTerrainModel
-  digitalSurfaceModel
-  canopyHeightModel
-  individualCrownGeometry
-  treeHeight
-  verticalStructure
-  denTreeGeometry
+  pointCloud : LidarObservationProduct
+  digitalTerrainModel : LidarObservationProduct
+  digitalSurfaceModel : LidarObservationProduct
+  canopyHeightModel : LidarObservationProduct
+  individualCrownGeometry : LidarObservationProduct
+  treeHeight : LidarObservationProduct
+  verticalStructure : LidarObservationProduct
+  denTreeGeometry : LidarObservationProduct
   hollowProxy : LidarObservationProduct
 
 record LidarSituatedObservationReceipt : Set where

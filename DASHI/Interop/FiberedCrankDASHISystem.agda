@@ -21,22 +21,17 @@ data _≤_ : Nat → Nat → Set where
 -- them to DASHI semantic claims, theorem claims, or authority claims.
 
 data JMDBridgeVocabularyTerm : Set where
-  jmdCrankBridgeVocabulary :
-    JMDBridgeVocabularyTerm
+  jmdCrankBridgeVocabulary : JMDBridgeVocabularyTerm
 
-  jmdProtagonistBridgeVocabulary :
-    JMDBridgeVocabularyTerm
+  jmdProtagonistBridgeVocabulary : JMDBridgeVocabularyTerm
 
 data BridgeVocabularySource : Set where
-  importedJMDBridgeVocabulary :
-    BridgeVocabularySource
+  importedJMDBridgeVocabulary : BridgeVocabularySource
 
 data DASHIPromotionStatus : Set where
-  bridgeVocabularyOnly :
-    DASHIPromotionStatus
+  bridgeVocabularyOnly : DASHIPromotionStatus
 
-  promotedDASHIClaimBlocked :
-    DASHIPromotionStatus
+  promotedDASHIClaimBlocked : DASHIPromotionStatus
 
 record JMDTermNonClaimGuard
   (term : JMDBridgeVocabularyTerm) : Set where
@@ -215,11 +210,9 @@ open FiberedCrankDASHISystem public
 -- Concrete finite Bool-like instance.
 
 data BitArtifact : Set where
-  bitFalse :
-    BitArtifact
+  bitFalse : BitArtifact
 
-  bitTrue :
-    BitArtifact
+  bitTrue : BitArtifact
 
 BitSemantic :
   Set

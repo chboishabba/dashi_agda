@@ -21,20 +21,15 @@ open import Data.List.Base using (List; _∷_; [])
 -- numeric receipt strings, and promotion boundary.
 
 data BasisSourceType : Set where
-  causalBasis :
-    BasisSourceType
+  causalBasis : BasisSourceType
 
-  structuralBasis :
-    BasisSourceType
+  structuralBasis : BasisSourceType
 
-  symmetryBasis :
-    BasisSourceType
+  symmetryBasis : BasisSourceType
 
-  mdlBasis :
-    BasisSourceType
+  mdlBasis : BasisSourceType
 
-  fittedBasis :
-    BasisSourceType
+  fittedBasis : BasisSourceType
 
 NotFittedBasisSource : BasisSourceType → Set
 NotFittedBasisSource fittedBasis = ⊥
@@ -66,8 +61,7 @@ record TypedBasis (X : Set) : Setω where
 open TypedBasis public
 
 data ObstructionStatus : Set where
-  pass :
-    ObstructionStatus
+  pass : ObstructionStatus
 
   obstructionTypedClean :
     BasisName →
@@ -77,8 +71,7 @@ data ObstructionStatus : Set where
     BasisName →
     ObstructionStatus
 
-  obstructionUntyped :
-    ObstructionStatus
+  obstructionUntyped : ObstructionStatus
 
 TRBDPromotionEligible : ObstructionStatus → Set
 TRBDPromotionEligible pass = ⊤

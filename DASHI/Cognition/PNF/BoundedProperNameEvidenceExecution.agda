@@ -58,8 +58,7 @@ open BoundedProperNameCandidate public
 ------------------------------------------------------------------------
 
 data ProperNameEnumerationCoverage : Set where
-  completeEnumeration boundedRepresentativeEnumeration :
-    ProperNameEnumerationCoverage
+  completeEnumeration boundedRepresentativeEnumeration : ProperNameEnumerationCoverage
 
 record ProperNameOverflowReceipt : Set where
   constructor properNameOverflowReceipt

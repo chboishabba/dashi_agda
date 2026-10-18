@@ -1,0 +1,19 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRegression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoExact as Acquisition
+
+candidateIsNotIncludedCorpus :
+  Acquisition.CandidateSourceCreatesIncludedStudy → ⊥
+candidateIsNotIncludedCorpus = Acquisition.candidateSourceDoesNotCreateIncludedStudy
+
+paretoPriorityIsNotAuthority :
+  Acquisition.ParetoPriorityCreatesAuthority → ⊥
+paretoPriorityIsNotAuthority = Acquisition.paretoPriorityDoesNotCreateAuthority
+
+identifierCompletenessIsNotEvidenceCompleteness :
+  Acquisition.IdentifierCompletenessCreatesEvidenceCompleteness → ⊥
+identifierCompletenessIsNotEvidenceCompleteness =
+  Acquisition.identifierCompletenessDoesNotCreateEvidenceCompleteness

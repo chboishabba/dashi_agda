@@ -1,0 +1,12 @@
+module DASHI.Physics.YangMills.BalabanCMP122Equation171WeightedGate4QuadratureSliceValidation where
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP122Equation171WeightedGate4QuadratureSliceExact as S
+sliceCompilerOwned : S.weightedEquation171SliceCompilerLevel ≡ machineChecked
+sliceCompilerOwned = refl
+taggedQuadratureCompilerOwned : S.weightedEquation171TaggedQuadratureCompilerLevel ≡ machineChecked
+taggedQuadratureCompilerOwned = refl
+sourcePartitionStillPhysical : S.literalEquation171WeightedSourcePartitionLevel ≡ conditional
+sourcePartitionStillPhysical = refl
+tagDensityStillPhysical : S.literalEquation171WeightedTagDensityLevel ≡ conditional
+tagDensityStillPhysical = refl

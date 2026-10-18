@@ -152,21 +152,21 @@ firthEtAl2006 = megaherbivore-predator-primary-source
   Attribution.primaryPublicationRecord Attribution.externalSourceOwner refl
 
 data Driver : Set where
-  fireDriver
-  megaherbivoreDriver
+  fireDriver : Driver
+  megaherbivoreDriver : Driver
   plantationLandUseDriver : Driver
 
 data StructuralConsumer : Set where
-  groundCover
-  shrubUnderstorey
-  woodyStructure
-  gameTrailNetwork
-  habitatConnectivity
+  groundCover : StructuralConsumer
+  shrubUnderstorey : StructuralConsumer
+  woodyStructure : StructuralConsumer
+  gameTrailNetwork : StructuralConsumer
+  habitatConnectivity : StructuralConsumer
   habitatFragmentation : StructuralConsumer
 
 data PredatorConsumer : Set where
-  catDetection
-  dingoDetection
+  catDetection : PredatorConsumer
+  dingoDetection : PredatorConsumer
   predationMortality : PredatorConsumer
 
 record MultiDriverPredatorAccessFrontier : Set where

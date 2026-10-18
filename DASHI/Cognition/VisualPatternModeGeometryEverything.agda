@@ -19,3 +19,11 @@ import DASHI.Analysis.EisensteinTuringModeAnalogyBoundary
 import DASHI.Cognition.VisualPatternModeGeometryBundle
 import DASHI.Cognition.VisualPatternModeGeometryTests
 import DASHI.Cognition.VisualPatternFullFormalismBundle
+
+-- Attributed analytic/log-polar + psychedelic receptor cross-pollination.
+import DASHI.Cognition.LogPolarKluverDerivationExact
+import DASHI.Cognition.Kluver5HT2ACrossPollinationExact
+
+import DASHI.Cognition.FiveHT2AVisualModeObservationBridgeExact
+
+import DASHI.Cognition.AnalyticLogPolarSpiralCompilerExact

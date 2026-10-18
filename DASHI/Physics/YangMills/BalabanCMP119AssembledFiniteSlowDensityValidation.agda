@@ -1,0 +1,25 @@
+module DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteSlowDensityValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteSlowDensityExact as Density
+
+assembledDensitySameObjectIsCompilerOwned :
+  Density.cmp119AssembledDensitySameObjectCompilerLevel ≡ machineChecked
+assembledDensitySameObjectIsCompilerOwned = refl
+
+assembledFiniteSlowDensityCompilerOwned :
+  Density.cmp119AssembledFiniteSlowDensityCompilerLevel ≡ machineChecked
+assembledFiniteSlowDensityCompilerOwned = refl
+
+assembledDensityEvaluatorRemainsPhysical :
+  Density.literalCMP119AssembledDensityEvaluatorLevel ≡ conditional
+assembledDensityEvaluatorRemainsPhysical = refl
+
+assembledWeightNonnegativeRemainsPhysical :
+  Density.literalCMP119AssembledWeightNonnegativeLevel ≡ conditional
+assembledWeightNonnegativeRemainsPhysical = refl
+
+assembledPositiveSupportRemainsPhysical :
+  Density.literalCMP119AssembledPositiveSupportLevel ≡ conditional
+assembledPositiveSupportRemainsPhysical = refl

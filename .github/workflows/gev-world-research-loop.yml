@@ -6,6 +6,14 @@ on:
       - 'DASHI/Core/BoundAcquisitionDemandExact.agda'
       - 'DASHI/Interop/GodsEyeViewRuntimeNeutralAcquisitionABIExact.agda'
       - 'DASHI/Interop/GodsEyeViewExecutableWorldResearchLoopExact.agda'
+      - 'DASHI/Interop/GodsEyeViewForecastVerificationExact.agda'
+      - 'DASHI/Statistics/Forecast*.agda'
+      - 'DASHI/Applications/WorldMonitorForecastScorecardExact.agda'
+      - 'DASHI/Core/ObjectDecompositionResidualRouterExact.agda'
+      - 'DASHI/Core/ProviderNeutralWorldQueryAlgebraExact.agda'
+      - 'DASHI/Chemistry/PetrochemicalForecastObjectResidualAdapterExact.agda'
+      - 'DASHI/Reasoning/ForecastWaveHyperfabricCrossPollinationExact.agda'
+      - 'DASHI/ForecastVerificationEverything.agda'
       - 'DASHI/Interop/GodsEyeViewAcquisitionResultAssessmentBridgeExact.agda'
       - 'DASHI/Interop/GodsEyeViewP854InspectionWorldAdapterExact.agda'
       - 'DASHI/Interop/GodsEyeViewMarketAcquisitionWorldAdapterExact.agda'
@@ -50,6 +58,16 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Interop/GodsEyeViewExecutableWorldResearchLoopExact.agda
+
+      - name: Fast preflight forecast verification root
+        run: |
+          python3 -m pip install -e tools/agda_preflight
+          dashi-agda-preflight --root . DASHI/ForecastVerificationEverything.agda
+
+      - name: Type-check forecast verification root
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/ForecastVerificationEverything.agda
 
       - name: Type-check acquisition assessment bridge
         run: >-

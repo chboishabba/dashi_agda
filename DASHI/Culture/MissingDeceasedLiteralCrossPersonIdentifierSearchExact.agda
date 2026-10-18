@@ -17,14 +17,14 @@ import DASHI.Culture.AmyEskridgeMechanismAssociationProvenanceExact as AmyAssoc
 ------------------------------------------------------------------------
 
 data CrossPersonRelationClass : Set where
-  explicitPersonWorkReference
-  sharedInstitutionOnly
-  postEventGovernmentAggregation
-  singlePersonProgrammeIdentifier
-  objectProgrammeIdentifierWithoutCrossPerson
-  intermediatedInstitutionalChain
-  allegedProfessionalLink
-  literalCommonProgrammeIdentifier
+  explicitPersonWorkReference : CrossPersonRelationClass
+  sharedInstitutionOnly : CrossPersonRelationClass
+  postEventGovernmentAggregation : CrossPersonRelationClass
+  singlePersonProgrammeIdentifier : CrossPersonRelationClass
+  objectProgrammeIdentifierWithoutCrossPerson : CrossPersonRelationClass
+  intermediatedInstitutionalChain : CrossPersonRelationClass
+  allegedProfessionalLink : CrossPersonRelationClass
+  literalCommonProgrammeIdentifier : CrossPersonRelationClass
   preEventOperationalIdentifier : CrossPersonRelationClass
 
 record CrossPersonIdentifierSearchReceipt : Set where

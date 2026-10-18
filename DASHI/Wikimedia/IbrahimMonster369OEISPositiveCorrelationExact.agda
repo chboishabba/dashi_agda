@@ -12,6 +12,7 @@ import DASHI.Wikimedia.IbrahimMonster42d17496PositiveBridgeAcquisitionExact as F
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Ternary27Reduction
 import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierExact as FortyTwoCarrier
 import DASHI.Wikimedia.IbrahimMonster42ClassEtaFamilyOEISAcquisitionExact as FortyTwoEta
+import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4OEISBridgeExact as D4OEIS
 import DASHI.Wikimedia.IbrahimMonster6BWeightTwoC6FourierOEISExact as C6
 import DASHI.Wikimedia.IbrahimMonster6BPositiveDegreeNormalizationAcquisitionExact as Acquisition
 
@@ -65,7 +66,7 @@ correlation17496 = positive-correlation-receipt
   crossContextNumericalEcho
   true true true false false true
   false false false false
-  "inspect whether the 42d graded trace and N(3B) restriction degree factor through a shared Monster character, power map, induction/restriction, or graded-module construction; retain the exact T^3 -> T x (T^2/inner inversion) = 3 x 5 = 15 reduction, downstream 15 -> 14 -> 42 carrier, and source-native 42-family eta levels {3,7,14,21,42} as additional search coordinates without identifying them with class 42d"
+  "inspect whether the 42d graded trace and N(3B) restriction degree factor through a shared Monster character, power map, induction/restriction, or graded-module construction; retain the exact T^3 -> T x (T^2/inner inversion) = 3 x 5 = 15 reduction, downstream 15 -> 14 -> 42 carrier, five-orbit D4 character, and source-native 42-family eta levels {3,7,14,21,42} as additional search coordinates without identifying them with class 42d"
 
 correlation32772 : PositiveCorrelationReceipt
 correlation32772 = positive-correlation-receipt
@@ -101,6 +102,9 @@ fortyTwoCarrierBoundary = FortyTwoCarrier.currentMonster42dFifteenFourteenBounda
 
 fortyTwoEtaFamilyBoundary : FortyTwoEta.Monster42ClassEtaFamilyBoundary
 fortyTwoEtaFamilyBoundary = FortyTwoEta.currentMonster42ClassEtaFamilyBoundary
+
+fiveOrbitD4OEISBoundary : D4OEIS.FiveOrbitD4OEISBridgeBoundary
+fiveOrbitD4OEISBoundary = D4OEIS.currentFiveOrbitD4OEISBridgeBoundary
 
 c6WeightTwoSpectrumReceipt : C6.C6WeightTwoMultiplicitySpectrum
 c6WeightTwoSpectrumReceipt = C6.canonicalC6WeightTwoMultiplicitySpectrum
@@ -152,6 +156,7 @@ record PositiveCorrelationBoundary : Set where
     ternary27PhasePreservingReductionSourcePaid : Bool
     fortyTwoCarrierBridgeSourcePaid : Bool
     fortyTwoEtaFamilyBridgeSourcePaid : Bool
+    fiveOrbitD4OEISBridgeSourcePaid : Bool
     c6WeightTwoSpectrumBridgeSourcePaid : Bool
     sixBPositiveDegreeNormalizationBridgePaid : Bool
     sameClassSourceFamilyBridgeSearchFirst : Bool
@@ -163,6 +168,6 @@ open PositiveCorrelationBoundary public
 
 currentPositiveCorrelationBoundary : PositiveCorrelationBoundary
 currentPositiveCorrelationBoundary = positive-correlation-boundary
-  true true true true true true true true true true
+  true true true true true true true true true true true
   false false false
-  "Prioritize the 32772 6B same-class cross-role bridge, where the graded-trace side is normalization-stable and the C6 side is source-bound to the exact weight-two Fourier spectrum. Retain 17496 as a separate positive cross-context bridge whose 42d modular-function side and actual N(3B) degree-occurrence side are source-paid. For the class-42 lane, the repo now also owns the exact phase-preserving symmetry reduction T^3 -> T x (T^2/inner inversion) = 3 x 5 = 15, the downstream 15 -> 14 -> 3 x 14 = 42 carrier, and the source-native eta-level family {3,7,14,21,42}. Search for an actual shared character, power-map, restriction/induction, graded-module, spectral-projector, eta-level, or carrier-action construction. Promote neither shared integer nor the 42-state carrier to same-object or representation identity without that bridge."
+  "Prioritize the 32772 6B same-class cross-role bridge, where the graded-trace side is normalization-stable and the C6 side is source-bound to the exact weight-two Fourier spectrum. Retain 17496 as a separate positive cross-context bridge whose 42d modular-function side and actual N(3B) degree-occurrence side are source-paid. For the class-42 lane, the repo now also owns the exact phase-preserving symmetry reduction T^3 -> T x (T^2/inner inversion) = 3 x 5 = 15, the downstream 15 -> 14 -> 3 x 14 = 42 carrier, the exact five-orbit D4 character (5,5,1,3,3)=3*A1+B1+B2, the weak A058674 q^1..q^3 tail echo 1,3,3, and the source-native eta-level family {3,7,14,21,42}. The D4/N(3B) same-action subgroup screen is now the next proof-bearing execution seam. Search for an actual shared character, power-map, restriction/induction, graded-module, spectral-projector, eta-level, or carrier-action construction. Promote neither shared integer, OEIS tail, nor the 42-state carrier to same-object or representation identity without that bridge."

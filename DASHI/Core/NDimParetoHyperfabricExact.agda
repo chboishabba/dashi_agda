@@ -71,10 +71,10 @@ ProjectedWeaklyDominates :
     {costs : Pareto.CostHyperfabric problem} →
   AxisProjection costs →
   Pareto.Model problem → Pareto.Model problem → Set
-ProjectedWeaklyDominates projection left right =
+ProjectedWeaklyDominates {costs = costs} projection left right =
   (axis : ProjectedAxis projection) →
-  Pareto.cost _ (includeAxis projection axis) left ≤
-  Pareto.cost _ (includeAxis projection axis) right
+  Pareto.cost costs (includeAxis projection axis) left ≤
+  Pareto.cost costs (includeAxis projection axis) right
 
 fullDominanceImpliesProjected :
   ∀ {problem : Pareto.ConsumerMDLProblem}

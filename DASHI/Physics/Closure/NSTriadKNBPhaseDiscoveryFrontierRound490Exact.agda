@@ -1,0 +1,1848 @@
+module DASHI.Physics.Closure.NSTriadKNBPhaseDiscoveryFrontierRound490Exact where
+
+------------------------------------------------------------------------
+-- ROUND490 / ACTIVE B-PHASE DISCOVERY FRONTIER
+--
+-- R592/R503 is the canonical shortest terminal consumer.  The live ABCD
+-- proof-control plane nevertheless routes theorem discovery through B_phase.
+-- On that route S2b2d1b2 is the current nonlinear leaf.
+--
+-- Already closed on the literal fixed-output carrier:
+--   * division-free coherent-covariance -> signed pair-difference identity;
+--   * attachment of that identity to the physical mixed-helicity fibre;
+--   * complete-graph pair-difference / R574 aggregate bookkeeping;
+--   * lower-separation -> same-output debt compiler;
+--   * R205/R574 same-object partner-difference adapter;
+--   * quotient-correct slot-kernel difference telescope through amplitude
+--     increments;
+--   * coherent scalar work differences are the coherent work of the SAME
+--     literal vector differences;
+--   * ||B_alpha-B_beta||^2 = 4 ||K_alpha-K_beta||^2;
+--   * R128 polynomial square-gap / Pluecker identity.
+--
+-- Still genuinely analytic:
+--   a theorem-bearing quantitative payment on the actual rate-weighted signed
+--   pair-difference family.
+--
+-- The new live aggregate bridge reaches the normalized quadratic slot kernel
+-- after COMPLETE fixed-output summation.  It does not justify the stronger
+-- pointwise identification with the older unnormalized R205 raw-curl partner
+-- carrier, so that historical route remains fail-closed and non-mandatory.
+--
+-- A concrete distinct-incidence same-slot collision exists, so an
+-- incidence-label-only coercivity theorem is not an admissible substitute.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as D1b2
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferencePaymentExact as PairPay
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as WorkBridge
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as Rate
+import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as SignedPayment
+import DASHI.Physics.Closure.NSTriadKNA3EndpointAwareR406SameObjectCompilerExact as EndpointCompiler
+import DASHI.Physics.Closure.NSTriadKNA3CauchyFluxTangentMismatchRound598Exact as R598
+import DASHI.Physics.Closure.NSTriadKNA3CenteredFullGramNormalFormRound599Exact as R599
+import DASHI.Physics.Closure.NSTriadKNA3CenteredCauchyPairNormalFormRound600Exact as R600
+import DASHI.Physics.Closure.NSTriadKNA3CenteredCauchyNonlinearRemainderRound601Exact as R601
+import DASHI.Physics.Closure.NSTriadKNA3CenteredRemainderReconciliationRound602Exact as R602
+import DASHI.Physics.Closure.NSTriadKNA3CauchyAlgebraVanishingNoGoRound603Exact as R603
+import DASHI.Physics.Closure.NSTriadKNA3CauchyForcingMismatchRound604Exact as R604
+import DASHI.Physics.Closure.NSTriadKNR230SelfExternalNetworkSplitRound605Exact as R605
+import DASHI.Physics.Closure.NSTriadKNR567ForcingFullSelfExternalSplitRound606Exact as R606
+import DASHI.Physics.Closure.NSTriadKNA3CauchyMismatchNetworkSplitRound607Exact as R607
+import DASHI.Physics.Closure.NSTriadKNR230ExternalResidualCarrierRound608Exact as R608
+import DASHI.Physics.Closure.NSTriadKNR567ExternalResidualPairExpansionRound609Exact as R609
+import DASHI.Physics.Closure.NSTriadKNR609ExternalHelicalQuinticExpansionRound610Exact as R610
+import DASHI.Physics.Closure.NSTriadKNR604AmplitudeHomogeneityNoGoRound611Exact as R611
+import DASHI.Physics.Closure.NSTriadKNA3ToR568HomogeneityBoundaryRound612Exact as R612
+import DASHI.Physics.Closure.NSTriadKNR571HermitianStateDifferenceRound613Exact as R613G2Hermitian
+import DASHI.Physics.Closure.NSTriadKNOrderedOrientedSelfExternalSpacetimeRound615Exact as R615
+import DASHI.Physics.Closure.NSTriadKNR573SelfExternalNestedCompanionSplitRound613Exact as R613NestedNested
+import DASHI.Physics.Closure.NSTriadKNR573ExternalResidualNestedCarrierRound614Exact as R614
+import DASHI.Physics.Closure.NSTriadKNThreeLegResidualMembershipCompilerRound616Exact as R616
+import DASHI.Physics.Closure.NSTriadKNThreeLegResidualNonfixedGeometryRound617Exact as R617
+import DASHI.Physics.Closure.NSTriadKNExternalSelfOrbitMultiplicityRound618Exact as R618
+import DASHI.Physics.Closure.NSTriadKNExternalWaleffeOrbitResolvedRound619Exact as R619
+import DASHI.Physics.Closure.NSTriadKNR573OrbitResolvedExternalNestedRound620Exact as R620
+import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedSelectionRound621Exact as R621
+import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedExternalNestedFoldRound622Exact as R622
+import DASHI.Physics.Closure.NSTriadKNSpectatorNestedSelfCanonicalExternalRowRound623Exact as R623Row
+import DASHI.Physics.Closure.NSTriadKNLiveNestedSelfCanonicalExternalSpacetimeRound624Exact as R624Live
+import DASHI.Physics.Closure.NSTriadKNR573SelfMultiplierDifferenceExpansionRound625Exact as R625Self
+import DASHI.Physics.Closure.NSTriadKNR573SelfMultiplierDifferenceFoldRound626Exact as R626
+import DASHI.Physics.Closure.NSTriadKNSpectatorSelfMultiplierDifferenceRowRound627Exact as R627
+import DASHI.Physics.Closure.NSTriadKNLiveSelfMultiplierExternalSpacetimeRound628Exact as R628
+import DASHI.Physics.Closure.NSTriadKNSelfEnergyCancellationWeightNoGoRound629Exact as R629
+import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedExternalScalarRound623Exact as R623Scalar
+import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedSpectatorRowRound624Exact as R624Row
+import DASHI.Physics.Closure.NSTriadKNExternalProductRuleCommutatorRound625Exact as R625Ext
+import DASHI.Physics.Closure.NSTriadKNExternalWeightedSlotCommutatorRound629Exact as R629Ext
+import DASHI.Physics.Closure.NSTriadKNExternalWeightedSlotCommutatorTotalRound630Exact as R630
+import DASHI.Physics.Closure.NSTriadKNCanonicalExternalTotalCommutatorScalarRound631Exact as R631
+import DASHI.Physics.Closure.NSTriadKNSelfHomochiralHeterochiralSplitRound632Exact as R632
+import DASHI.Physics.Closure.NSTriadKNSpectatorSelfHomochiralHeterochiralRowRound633Exact as R633
+import DASHI.Physics.Closure.NSTriadKNLiveSelfHelicityExternalSpacetimeRound634Exact as R634
+import DASHI.Physics.Closure.NSTriadKNR571HeterochiralRadialSumSpecializationRound635Exact as R635
+import DASHI.Physics.Closure.NSTriadKNCanonicalExternalHelicityCommutatorRound636Exact as R636
+import DASHI.Physics.Closure.NSTriadKNLiveExternalHelicityCommutatorSpacetimeRound637Exact as R637
+import DASHI.Physics.Closure.NSTriadKNLiveThreeChannelHelicityBudgetRound638Exact as R638
+import DASHI.Physics.Closure.NSTriadKNExternalForcingTransverseRound626Exact as ExtTrans626
+import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
+import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
+import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
+import DASHI.Physics.Closure.NSTriadKNR406ExactEndpointNormalFormExact as R406Endpoint
+import DASHI.Physics.Closure.NSTriadKNA3WeightedR406EndpointCutExact as WeightedEndpoint
+import DASHI.Physics.Closure.NSTriadKNA3CenteredVectorWorkNormalFormExact as A3Centered
+import DASHI.Physics.Closure.NSTriadKNRateWeightedMixedHelicityKernelCollapseExact as RateKernel
+import DASHI.Physics.Closure.NSTriadKNA3CenteredKernelNormalFormExact as A3Kernel
+import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact as Adapter
+import DASHI.Physics.Closure.NSTriadKNCenteredPartnerSlotDefectExact as SlotDefect
+import DASHI.Physics.Closure.NSTriadKNExternalHHSquareGapGramRound128Exact as R128
+import DASHI.Physics.Closure.NSTriadKNFixedOutputConcreteSlotCollisionWitnessExact as Collision
+
+round490FiniteCovarianceCenteringClosed : Bool
+round490FiniteCovarianceCenteringClosed =
+  D1b2.divisionFreePairDifferenceCenteringClosed
+
+round490PhysicalCovarianceAttachmentClosed : Bool
+round490PhysicalCovarianceAttachmentClosed =
+  D1b2.fixedOutputCovariancePairDifferenceAttachmentClosed
+
+round490PairDifferencePaymentCompilerClosed : Bool
+round490PairDifferencePaymentCompilerClosed =
+  PairPay.fixedOutputPairDifferencePaymentCompilerClosed
+
+round490R574AggregateUsedByPaymentCompiler : Bool
+round490R574AggregateUsedByPaymentCompiler =
+  PairPay.fixedOutputPairDifferencePaymentUsesLiteralR574Aggregate
+
+round490AggregateWorkDifferenceVectorBridgeClosed : Bool
+round490AggregateWorkDifferenceVectorBridgeClosed =
+  WorkBridge.fixedOutputPairDifferenceAggregateVectorBridgeClosed
+
+round490PhysicalRateDifferenceSameObjectWeldClosed : Bool
+round490PhysicalRateDifferenceSameObjectWeldClosed =
+  Rate.physicalCellRateDifferenceSameObjectWeldClosed
+
+round490PhysicalRateDifferenceSameOutputFactorizationClosed : Bool
+round490PhysicalRateDifferenceSameOutputFactorizationClosed =
+  Rate.physicalRateDifferenceSameOutputFactorizationClosed
+
+round490PhysicalOutputFibreSignedRateGeometryFactorizationClosed : Bool
+round490PhysicalOutputFibreSignedRateGeometryFactorizationClosed =
+  Rate.physicalOutputFibreSignedRateGeometryFactorizationClosed
+
+round490A3RateWorkCorrelationReducedToSeparationGeometry : Bool
+round490A3RateWorkCorrelationReducedToSeparationGeometry =
+  SignedPayment.a3RateWorkCorrelationReducedToSeparationGeometry
+
+round490A3SeparationGeometryPaymentCompilerClosed : Bool
+round490A3SeparationGeometryPaymentCompilerClosed =
+  SignedPayment.a3SeparationGeometryPaymentCompilerClosed
+
+round490ExactA3PaymentTypeConstructed : Bool
+round490ExactA3PaymentTypeConstructed =
+  SignedPayment.a3ExactSignedRateVectorPaymentTypeConstructed
+
+
+round490LiveA3SnapshotBoundToR240Trajectory : Bool
+round490LiveA3SnapshotBoundToR240Trajectory =
+  SignedPayment.liveA3SnapshotBoundToR240Trajectory
+
+round490A3DirectCovarianceEqualsR406RemainderAdmissible : Bool
+round490A3DirectCovarianceEqualsR406RemainderAdmissible =
+  SignedPayment.a3DirectCovarianceEqualsR406RemainderAdmissible
+
+round490A3ToR432LiteralR406SameObjectAttachmentClosed : Bool
+round490A3ToR432LiteralR406SameObjectAttachmentClosed =
+  SignedPayment.a3ToR432LiteralR406SameObjectAttachmentClosed
+
+round490A3ConsumerAttachmentTypeConstructed : Bool
+round490A3ConsumerAttachmentTypeConstructed =
+  SignedPayment.a3ConsumerAttachmentTypeConstructed
+
+round490A3PreferredR406BudgetAttachmentTypeConstructed : Bool
+round490A3PreferredR406BudgetAttachmentTypeConstructed =
+  SignedPayment.a3PreferredR406BudgetAttachmentTypeConstructed
+
+round490A3PreferredCompilerRequiresDirectCovarianceR406Equality : Bool
+round490A3PreferredCompilerRequiresDirectCovarianceR406Equality =
+  SignedPayment.a3PreferredCompilerRequiresDirectCovarianceR406Equality
+
+round490A3NormalizedQuadraticKernelAggregateBridgeClosed : Bool
+round490A3NormalizedQuadraticKernelAggregateBridgeClosed =
+  SignedPayment.a3NormalizedQuadraticKernelAggregateBridgeClosed
+
+round490A3R205RawCurlSameObjectBridgeClosed : Bool
+round490A3R205RawCurlSameObjectBridgeClosed =
+  SignedPayment.a3R205RawCurlPartnerSameObjectBridgeClosed
+
+round490A3R205PointwiseIdentificationAdmissible : Bool
+round490A3R205PointwiseIdentificationAdmissible =
+  SignedPayment.a3R205PointwiseIdentificationAdmissible
+
+round490A4CardinalityFreeLocalToGlobalCompilerClosed : Bool
+round490A4CardinalityFreeLocalToGlobalCompilerClosed =
+  SignedPayment.a4CardinalityFreeLocalToGlobalCompilerClosed
+
+round490A4OrderPreservingIntegrationCompilerClosed : Bool
+round490A4OrderPreservingIntegrationCompilerClosed =
+  SignedPayment.a4OrderPreservingIntegrationCompilerClosed
+
+------------------------------------------------------------------------
+-- Endpoint-aware consumer reduction after d1b0/d1b1 archaeology.
+------------------------------------------------------------------------
+
+round490IntegratedR406EndpointIdentityCompilerClosed : Bool
+round490IntegratedR406EndpointIdentityCompilerClosed =
+  EndpointCompiler.integratedR406EndpointIdentityCompilerClosed
+
+round490ArbitraryIntegratedR406EqualityRequired : Bool
+round490ArbitraryIntegratedR406EqualityRequired =
+  EndpointCompiler.arbitraryIntegratedR406EqualityRequired
+
+round490PointwiseWeightedR406EndpointA3WeldStillProofBearing : Bool
+round490PointwiseWeightedR406EndpointA3WeldStillProofBearing =
+  EndpointCompiler.pointwiseR406WeightedToEndpointPlusA3WeldStillProofBearing
+
+round490EndpointFTCIntroducesNewNonlinearEstimate : Bool
+round490EndpointFTCIntroducesNewNonlinearEstimate =
+  EndpointCompiler.endpointFTCStillSeparateNonlinearEstimate
+
+
+round490ExactR406EndpointNormalFormAvailable : Bool
+round490ExactR406EndpointNormalFormAvailable =
+  EndpointCompiler.exactR406EndpointNormalFormAvailable
+
+round490DivisionFreeD1bA3NormalizationAvailable : Bool
+round490DivisionFreeD1bA3NormalizationAvailable =
+  EndpointCompiler.divisionFreeD1bA3NormalizationAvailable
+
+round490PointwiseR406EndpointPlusFourA3RepresentationClosed : Bool
+round490PointwiseR406EndpointPlusFourA3RepresentationClosed =
+  EndpointCompiler.pointwiseR406EndpointPlusFourA3RepresentationClosed
+
+round490RemainingSameObjectSeamIsFactoredMinusSelfGramToA3 : Bool
+round490RemainingSameObjectSeamIsFactoredMinusSelfGramToA3 =
+  EndpointCompiler.remainingSameObjectSeamIsFactoredMinusSelfGramToA3
+
+round490WeightedIntegratedR406NormalFormClosed : Bool
+round490WeightedIntegratedR406NormalFormClosed =
+  WeightedEndpoint.weightedIntegratedR406NormalFormClosed
+
+round490WeightedSelfFluxTangentSameObjectWeldClosed : Bool
+round490WeightedSelfFluxTangentSameObjectWeldClosed =
+  WeightedEndpoint.weightedSelfFluxTangentSameObjectWeldClosed
+
+round490WeightedInitialSelfFluxEndpointSameObjectWeldClosed : Bool
+round490WeightedInitialSelfFluxEndpointSameObjectWeldClosed =
+  WeightedEndpoint.weightedInitialSelfFluxEndpointSameObjectWeldClosed
+
+round490A3PairDifferenceIsLiteralFactoredFullSameObjectClosed : Bool
+round490A3PairDifferenceIsLiteralFactoredFullSameObjectClosed =
+  WeightedEndpoint.a3PairDifferenceIsLiteralFactoredFullSameObjectClosed
+
+round490UnweightedD1b0DirectlyPaysWeightedR406Pointwise : Bool
+round490UnweightedD1b0DirectlyPaysWeightedR406Pointwise =
+  WeightedEndpoint.unweightedD1b0DirectlyPaysWeightedR406Pointwise
+
+round490WeightedR406EndpointSideRequiresNewNonlinearEstimate : Bool
+round490WeightedR406EndpointSideRequiresNewNonlinearEstimate =
+  WeightedEndpoint.weightedR406EndpointSideRequiresNewNonlinearEstimate
+
+round490A3PairEnumerationCollapsedToCenteredNormalForm : Bool
+round490A3PairEnumerationCollapsedToCenteredNormalForm =
+  A3Centered.a3PairEnumerationCollapsedToCenteredNormalForm
+
+round490A3CenteredNormalFormUsesCompleteFibreFold : Bool
+round490A3CenteredNormalFormUsesCompleteFibreFold =
+  A3Centered.a3CenteredNormalFormUsesCompleteFibreFold
+
+round490A3CenteredNormalFormUsesPointwiseIncidenceSeparation : Bool
+round490A3CenteredNormalFormUsesPointwiseIncidenceSeparation =
+  A3Centered.a3CenteredNormalFormUsesPointwiseIncidenceSeparation
+
+round490SwapInvariantWeightedR225CollapseClosed : Bool
+round490SwapInvariantWeightedR225CollapseClosed =
+  RateKernel.swapInvariantWeightedR225CollapseClosed
+
+round490PhysicalRateWeightedR225CollapseClosed : Bool
+round490PhysicalRateWeightedR225CollapseClosed =
+  RateKernel.physicalRateWeightedR225CollapseClosed
+
+round490RateWeightedR225UsesPointwiseSeparation : Bool
+round490RateWeightedR225UsesPointwiseSeparation =
+  RateKernel.physicalRateWeightedR225CollapseUsesPointwiseSeparation
+
+round490A3KernelCenteredNormalFormClosed : Bool
+round490A3KernelCenteredNormalFormClosed =
+  A3Kernel.a3KernelCenteredNormalFormClosed
+
+round490A3KernelCenteredNormalFormUsesPointwiseR205 : Bool
+round490A3KernelCenteredNormalFormUsesPointwiseR205 =
+  A3Kernel.a3KernelCenteredNormalFormUsesPointwiseR205
+
+round490A3KernelCenteredNormalFormUsesLowerSeparation : Bool
+round490A3KernelCenteredNormalFormUsesLowerSeparation =
+  A3Kernel.a3KernelCenteredNormalFormUsesLowerSeparation
+
+round490A3KernelCenteredNormalFormIntroducesEstimate : Bool
+round490A3KernelCenteredNormalFormIntroducesEstimate =
+  A3Kernel.a3KernelCenteredNormalFormIntroducesEstimate
+
+round490A3ToLiteralFactoredFullCompilerClosed : Bool
+round490A3ToLiteralFactoredFullCompilerClosed =
+  A3Factored.a3ToFactoredFullCompilerClosed
+
+round490A3ToFactoredFullAddsNewNonlinearEstimate : Bool
+round490A3ToFactoredFullAddsNewNonlinearEstimate =
+  A3Factored.a3ToFactoredFullRequiresNewNonlinearEstimateAfterA3
+
+round490A3ToFactoredFullSameObjectWeldClosed : Bool
+round490A3ToFactoredFullSameObjectWeldClosed =
+  A3Factored.a3ToFactoredFullExactSameObjectWeldClosed
+
+round490A3FactoredFullDirectEqualityIsPreferredConsumerBridge : Bool
+round490A3FactoredFullDirectEqualityIsPreferredConsumerBridge =
+  A3Factored.weightedFactoredFullIsPreferredConsumerBridge
+
+round490OverstrongA3WeightedForcingSocketConstructed : Bool
+round490OverstrongA3WeightedForcingSocketConstructed =
+  A3Weighted.a3WeightedForcingSameObjectSocketConstructed
+
+round490OverstrongA3WeightedForcingWeldClosed : Bool
+round490OverstrongA3WeightedForcingWeldClosed =
+  A3Weighted.a3WeightedForcingSameObjectWeldClosed
+
+round490OverstrongA3WeightedForcingWeldIsRepresentationNotEstimate : Bool
+round490OverstrongA3WeightedForcingWeldIsRepresentationNotEstimate =
+  A3Weighted.a3WeightedForcingWeldIsRepresentationTheorem
+
+round490CauchyA3MismatchNormalFormClosed : Bool
+round490CauchyA3MismatchNormalFormClosed =
+  R598.round598CauchyA3MismatchNormalFormClosed
+
+round490A3SelfWorkCoordinateCancelledExactly : Bool
+round490A3SelfWorkCoordinateCancelledExactly =
+  R598.round598A3SelfWorkCoordinateCancelledExactly
+
+round490OnlyRemainingWeightedA3RepresentationCoordinateIsFluxTangentRateKernel : Bool
+round490OnlyRemainingWeightedA3RepresentationCoordinateIsFluxTangentRateKernel =
+  R598.round598OnlyResidualIsFluxTangentPlusRateWeightedKernel
+
+round490WeightedFluxTangentToA3RateKernelClosed : Bool
+round490WeightedFluxTangentToA3RateKernelClosed =
+  R598.round598FluxTangentToRateWeightedKernelClosed
+
+round490A3CenteredFullGramNormalFormClosed : Bool
+round490A3CenteredFullGramNormalFormClosed =
+  R599.round599A3CenteredFullGramNormalFormClosed
+
+round490A3AndR596ShareCompleteDoubleMixedGramCarrier : Bool
+round490A3AndR596ShareCompleteDoubleMixedGramCarrier =
+  R599.round599A3AndR596NowShareCompleteDoubleMixedGramCarrier
+
+round490RemainingWeightedA3CoordinateIsDynamicCauchyFluxTangent : Bool
+round490RemainingWeightedA3CoordinateIsDynamicCauchyFluxTangent =
+  R599.round599RemainingCoordinateIsDynamicCauchyFluxTangent
+
+
+round490CenteredDynamicCauchyPairNormalFormClosed : Bool
+round490CenteredDynamicCauchyPairNormalFormClosed =
+  R600.round600DynamicCenteredCauchyPairNormalFormClosed
+
+round490CenteredDynamicCauchyNonlinearRemainderNormalFormClosed : Bool
+round490CenteredDynamicCauchyNonlinearRemainderNormalFormClosed =
+  R601.round601LiteralR291DynamicRemainderNormalFormClosed
+
+round490CenteredDynamicCauchyRemainderPaid : Bool
+round490CenteredDynamicCauchyRemainderPaid =
+  R601.round601CenteredDynamicRemainderPaid
+
+round490R601ResidualReducesToR538WeightedRemainder : Bool
+round490R601ResidualReducesToR538WeightedRemainder =
+  R602.round602R601ResidualReducesToR538WeightedRemainder
+
+round490R538WeightedRemainderFullIsR567ForcingFull : Bool
+round490R538WeightedRemainderFullIsR567ForcingFull =
+  R602.round602R538WeightedRemainderFullIsR567ForcingFull
+
+round490R601ResidualIsTwiceR598MismatchClosed : Bool
+round490R601ResidualIsTwiceR598MismatchClosed =
+  R602.round602R601ResidualIsTwiceR598Mismatch
+
+round490R601IntroducesIndependentAnalyticLeaf : Bool
+round490R601IntroducesIndependentAnalyticLeaf =
+  R602.round602IntroducesIndependentAnalyticLeaf
+
+round490CanonicalDynamicMismatchPaid : Bool
+round490CanonicalDynamicMismatchPaid =
+  R602.round602R598MismatchPaid
+
+round490PureR291CauchyAlgebraForcesDynamicMismatchVanishing : Bool
+round490PureR291CauchyAlgebraForcesDynamicMismatchVanishing =
+  R603.round603PureFiniteAlgebraForcesMismatchVanishing
+
+round490DynamicMismatchNeedsAdditionalPhysicalStructureOrEstimate : Bool
+round490DynamicMismatchNeedsAdditionalPhysicalStructureOrEstimate =
+  R603.round603AdditionalPhysicalStructureOrEstimateRequired
+
+round490NoGoClaimsLiteralNSMismatchNonzero : Bool
+round490NoGoClaimsLiteralNSMismatchNonzero =
+  R603.round603ClaimsLiteralNSMismatchIsNonzero
+
+round490R601ResidualIsEightTimesCanonicalA3CauchyMismatch : Bool
+round490R601ResidualIsEightTimesCanonicalA3CauchyMismatch =
+  R604.round604R601ResidualIsEightTimesCanonicalMismatch
+
+round490CanonicalA3CauchyIdentityIsRateTotalForcingEqualsFourA3 : Bool
+round490CanonicalA3CauchyIdentityIsRateTotalForcingEqualsFourA3 =
+  R604.round604CanonicalIdentityIsRateTotalForcingEqualsFourA3
+
+round490CanonicalA3CauchyForcingMismatchClosed : Bool
+round490CanonicalA3CauchyForcingMismatchClosed =
+  R604.round604CanonicalPhysicalMismatchClosed
+
+round490R230MixedForcingSelfExternalSplitClosed : Bool
+round490R230MixedForcingSelfExternalSplitClosed =
+  R605.round605R230FullCommutatorSelfExternalSplitClosed
+
+round490R230SelfPartCancelledByCyclicEnergy : Bool
+round490R230SelfPartCancelledByCyclicEnergy =
+  R605.round605SelfPartCancelsByCyclicEnergyConservation
+
+round490R230ExternalNetworkPartPaid : Bool
+round490R230ExternalNetworkPartPaid =
+  R605.round605ExternalNetworkPartPaid
+
+round490R567ForcingFullSelfExternalSplitClosed : Bool
+round490R567ForcingFullSelfExternalSplitClosed =
+  R606.round606ForcingFullSelfExternalSplitClosed
+
+round490SelectedSelfForcingFullPaysA3 : Bool
+round490SelectedSelfForcingFullPaysA3 =
+  R606.round606SelfForcingFullPaysA3
+
+round490ExternalNetworkForcingFullPaid : Bool
+round490ExternalNetworkForcingFullPaid =
+  R606.round606ExternalForcingFullPaid
+
+round490CanonicalMismatchSelfExternalSplitClosed : Bool
+round490CanonicalMismatchSelfExternalSplitClosed =
+  R607.round607CanonicalMismatchSelfExternalSplitClosed
+
+round490SelectedSelfMismatchClosed : Bool
+round490SelectedSelfMismatchClosed =
+  R607.round607SelectedSelfMismatchClosed
+
+round490ExternalNetworkContributionClosed : Bool
+round490ExternalNetworkContributionClosed =
+  R607.round607ExternalNetworkContributionClosed
+
+round490CyclicSelfEnergyDirectlyClosesSelectedSelfMismatch : Bool
+round490CyclicSelfEnergyDirectlyClosesSelectedSelfMismatch =
+  R607.round607CyclicSelfEnergyConservationDirectlyClosesSelfMismatch
+
+
+round490R230ExternalCellOnLiteralResidualCarrierClosed : Bool
+round490R230ExternalCellOnLiteralResidualCarrierClosed =
+  R608.round608R230ExternalCellOnLiteralResidualCarrierClosed
+
+round490ExternalVectorResidualCarrierIsScalarPayment : Bool
+round490ExternalVectorResidualCarrierIsScalarPayment =
+  R608.round608IdentifiesVectorCellWithScalarWaleffeFunctional
+
+round490ExternalNetworkResidualPaymentClosed : Bool
+round490ExternalNetworkResidualPaymentClosed =
+  R608.round608ExternalNetworkMismatchPaid
+
+
+round490ExternalCauchyPairExpandedToLiteralResidualPairings : Bool
+round490ExternalCauchyPairExpandedToLiteralResidualPairings =
+  R609.round609R606ExternalPairOnLiteralR112ResidualCarriers
+
+round490ExternalResidualPairingsIdentifiedWithR115Cells : Bool
+round490ExternalResidualPairingsIdentifiedWithR115Cells =
+  R609.round609IdentifiesThesePairingsWithR115WaleffeCells
+
+round490A5GlobalPaymentToR503CompilerClosed : Bool
+round490A5GlobalPaymentToR503CompilerClosed =
+  SignedPayment.a5GlobalPaymentToR503CompilerClosed
+
+round490CoherentWorkDifferenceVectorBridgeClosed : Bool
+round490CoherentWorkDifferenceVectorBridgeClosed =
+  WorkBridge.fixedOutputWorkDifferenceVectorBridgeClosed
+
+round490AmplitudeIncrementTelescopeClosed : Bool
+round490AmplitudeIncrementTelescopeClosed =
+  Adapter.roundCenteredPartnerPhysicalAmplitudeTelescopeClosed
+
+round490SlotDefectNormNormalizationClosed : Bool
+round490SlotDefectNormNormalizationClosed =
+  SlotDefect.roundCenteredPartnerCompressedDifferenceIsFourSlotDefect
+
+round490R128PolynomialPlueckerIdentityClosed : Bool
+round490R128PolynomialPlueckerIdentityClosed =
+  R128.round128LowOutputTimesHighInputPolynomialIdentityClosed
+
+round490ConcreteDistinctIncidenceSlotCollisionConstructed : Bool
+round490ConcreteDistinctIncidenceSlotCollisionConstructed =
+  Collision.roundFixedOutputConcreteDistinctCCCollisionWitnessConstructed
+
+------------------------------------------------------------------------
+-- Exact unpaid analytic boundary.
+------------------------------------------------------------------------
+
+round490AggregateWorkDifferenceVectorBridgeClosedIsTrue :
+  round490AggregateWorkDifferenceVectorBridgeClosed ≡ true
+round490AggregateWorkDifferenceVectorBridgeClosedIsTrue =
+  WorkBridge.fixedOutputPairDifferenceAggregateVectorBridgeClosedIsTrue
+
+round490PhysicalRateDifferenceSameObjectWeldClosedIsTrue :
+  round490PhysicalRateDifferenceSameObjectWeldClosed ≡ true
+round490PhysicalRateDifferenceSameObjectWeldClosedIsTrue =
+  Rate.physicalCellRateDifferenceSameObjectWeldClosedIsTrue
+
+round490PhysicalRateDifferenceSameOutputFactorizationClosedIsTrue :
+  round490PhysicalRateDifferenceSameOutputFactorizationClosed ≡ true
+round490PhysicalRateDifferenceSameOutputFactorizationClosedIsTrue =
+  Rate.physicalRateDifferenceSameOutputFactorizationClosedIsTrue
+
+round490PhysicalOutputFibreSignedRateGeometryFactorizationClosedIsTrue :
+  round490PhysicalOutputFibreSignedRateGeometryFactorizationClosed ≡ true
+round490PhysicalOutputFibreSignedRateGeometryFactorizationClosedIsTrue =
+  Rate.physicalOutputFibreSignedRateGeometryFactorizationClosedIsTrue
+
+round490A3RateWorkCorrelationReducedToSeparationGeometryIsTrue :
+  round490A3RateWorkCorrelationReducedToSeparationGeometry ≡ true
+round490A3RateWorkCorrelationReducedToSeparationGeometryIsTrue =
+  SignedPayment.a3RateWorkCorrelationReducedToSeparationGeometryIsTrue
+
+round490A3SeparationGeometryPaymentCompilerClosedIsTrue :
+  round490A3SeparationGeometryPaymentCompilerClosed ≡ true
+round490A3SeparationGeometryPaymentCompilerClosedIsTrue =
+  SignedPayment.a3SeparationGeometryPaymentCompilerClosedIsTrue
+
+round490ExactA3PaymentTypeConstructedIsTrue :
+  round490ExactA3PaymentTypeConstructed ≡ true
+round490ExactA3PaymentTypeConstructedIsTrue =
+  SignedPayment.a3ExactSignedRateVectorPaymentTypeConstructedIsTrue
+
+
+round490LiveA3SnapshotBoundToR240TrajectoryIsTrue :
+  round490LiveA3SnapshotBoundToR240Trajectory ≡ true
+round490LiveA3SnapshotBoundToR240TrajectoryIsTrue =
+  SignedPayment.liveA3SnapshotBoundToR240TrajectoryIsTrue
+
+round490A3DirectCovarianceEqualsR406RemainderAdmissibleIsFalse :
+  round490A3DirectCovarianceEqualsR406RemainderAdmissible ≡ false
+round490A3DirectCovarianceEqualsR406RemainderAdmissibleIsFalse =
+  SignedPayment.a3DirectCovarianceEqualsR406RemainderAdmissibleIsFalse
+
+round490A3ToR432LiteralR406SameObjectAttachmentClosedIsFalse :
+  round490A3ToR432LiteralR406SameObjectAttachmentClosed ≡ false
+round490A3ToR432LiteralR406SameObjectAttachmentClosedIsFalse =
+  SignedPayment.a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse
+
+round490A3ConsumerAttachmentTypeConstructedIsTrue :
+  round490A3ConsumerAttachmentTypeConstructed ≡ true
+round490A3ConsumerAttachmentTypeConstructedIsTrue =
+  SignedPayment.a3ConsumerAttachmentTypeConstructedIsTrue
+
+round490A3PreferredR406BudgetAttachmentTypeConstructedIsTrue :
+  round490A3PreferredR406BudgetAttachmentTypeConstructed ≡ true
+round490A3PreferredR406BudgetAttachmentTypeConstructedIsTrue =
+  SignedPayment.a3PreferredR406BudgetAttachmentTypeConstructedIsTrue
+
+round490A3PreferredCompilerRequiresDirectCovarianceR406EqualityIsFalse :
+  round490A3PreferredCompilerRequiresDirectCovarianceR406Equality ≡ false
+round490A3PreferredCompilerRequiresDirectCovarianceR406EqualityIsFalse =
+  SignedPayment.a3PreferredCompilerRequiresDirectCovarianceR406EqualityIsFalse
+
+round490A3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue :
+  round490A3NormalizedQuadraticKernelAggregateBridgeClosed ≡ true
+round490A3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue =
+  SignedPayment.a3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue
+
+round490A3R205RawCurlSameObjectBridgeClosedIsFalse :
+  round490A3R205RawCurlSameObjectBridgeClosed ≡ false
+round490A3R205RawCurlSameObjectBridgeClosedIsFalse =
+  SignedPayment.a3R205RawCurlPartnerSameObjectBridgeClosedIsFalse
+
+round490A3R205PointwiseIdentificationAdmissibleIsFalse :
+  round490A3R205PointwiseIdentificationAdmissible ≡ false
+round490A3R205PointwiseIdentificationAdmissibleIsFalse =
+  SignedPayment.a3R205PointwiseIdentificationAdmissibleIsFalse
+
+round490A4CardinalityFreeLocalToGlobalCompilerClosedIsTrue :
+  round490A4CardinalityFreeLocalToGlobalCompilerClosed ≡ true
+round490A4CardinalityFreeLocalToGlobalCompilerClosedIsTrue =
+  SignedPayment.a4CardinalityFreeLocalToGlobalCompilerClosedIsTrue
+
+round490A4OrderPreservingIntegrationCompilerClosedIsTrue :
+  round490A4OrderPreservingIntegrationCompilerClosed ≡ true
+round490A4OrderPreservingIntegrationCompilerClosedIsTrue =
+  SignedPayment.a4OrderPreservingIntegrationCompilerClosedIsTrue
+
+round490IntegratedR406EndpointIdentityCompilerClosedIsTrue :
+  round490IntegratedR406EndpointIdentityCompilerClosed ≡ true
+round490IntegratedR406EndpointIdentityCompilerClosedIsTrue =
+  EndpointCompiler.integratedR406EndpointIdentityCompilerClosedIsTrue
+
+round490ArbitraryIntegratedR406EqualityRequiredIsFalse :
+  round490ArbitraryIntegratedR406EqualityRequired ≡ false
+round490ArbitraryIntegratedR406EqualityRequiredIsFalse =
+  EndpointCompiler.arbitraryIntegratedR406EqualityRequiredIsFalse
+
+round490PointwiseWeightedR406EndpointA3WeldStillProofBearingIsTrue :
+  round490PointwiseWeightedR406EndpointA3WeldStillProofBearing ≡ true
+round490PointwiseWeightedR406EndpointA3WeldStillProofBearingIsTrue =
+  EndpointCompiler.pointwiseR406WeightedToEndpointPlusA3WeldStillProofBearingIsTrue
+
+round490EndpointFTCIntroducesNewNonlinearEstimateIsFalse :
+  round490EndpointFTCIntroducesNewNonlinearEstimate ≡ false
+round490EndpointFTCIntroducesNewNonlinearEstimateIsFalse =
+  EndpointCompiler.endpointFTCStillSeparateNonlinearEstimateIsFalse
+
+
+round490ExactR406EndpointNormalFormAvailableIsTrue :
+  round490ExactR406EndpointNormalFormAvailable ≡ true
+round490ExactR406EndpointNormalFormAvailableIsTrue =
+  EndpointCompiler.exactR406EndpointNormalFormAvailableIsTrue
+
+round490DivisionFreeD1bA3NormalizationAvailableIsTrue :
+  round490DivisionFreeD1bA3NormalizationAvailable ≡ true
+round490DivisionFreeD1bA3NormalizationAvailableIsTrue =
+  EndpointCompiler.divisionFreeD1bA3NormalizationAvailableIsTrue
+
+round490PointwiseR406EndpointPlusFourA3RepresentationClosedIsFalse :
+  round490PointwiseR406EndpointPlusFourA3RepresentationClosed ≡ false
+round490PointwiseR406EndpointPlusFourA3RepresentationClosedIsFalse =
+  EndpointCompiler.pointwiseR406EndpointPlusFourA3RepresentationClosedIsFalse
+
+round490RemainingSameObjectSeamIsFactoredMinusSelfGramToA3IsTrue :
+  round490RemainingSameObjectSeamIsFactoredMinusSelfGramToA3 ≡ true
+round490RemainingSameObjectSeamIsFactoredMinusSelfGramToA3IsTrue =
+  EndpointCompiler.remainingSameObjectSeamIsFactoredMinusSelfGramToA3IsTrue
+
+round490WeightedIntegratedR406NormalFormClosedIsTrue :
+  round490WeightedIntegratedR406NormalFormClosed ≡ true
+round490WeightedIntegratedR406NormalFormClosedIsTrue =
+  WeightedEndpoint.weightedIntegratedR406NormalFormClosedIsTrue
+
+round490WeightedSelfFluxTangentSameObjectWeldClosedIsTrue :
+  round490WeightedSelfFluxTangentSameObjectWeldClosed ≡ true
+round490WeightedSelfFluxTangentSameObjectWeldClosedIsTrue =
+  WeightedEndpoint.weightedSelfFluxTangentSameObjectWeldClosedIsTrue
+
+round490WeightedInitialSelfFluxEndpointSameObjectWeldClosedIsTrue :
+  round490WeightedInitialSelfFluxEndpointSameObjectWeldClosed ≡ true
+round490WeightedInitialSelfFluxEndpointSameObjectWeldClosedIsTrue =
+  WeightedEndpoint.weightedInitialSelfFluxEndpointSameObjectWeldClosedIsTrue
+
+round490A3PairDifferenceIsLiteralFactoredFullSameObjectClosedIsFalse :
+  round490A3PairDifferenceIsLiteralFactoredFullSameObjectClosed ≡ false
+round490A3PairDifferenceIsLiteralFactoredFullSameObjectClosedIsFalse =
+  WeightedEndpoint.a3PairDifferenceIsLiteralFactoredFullSameObjectClosedIsFalse
+
+round490UnweightedD1b0DirectlyPaysWeightedR406PointwiseIsFalse :
+  round490UnweightedD1b0DirectlyPaysWeightedR406Pointwise ≡ false
+round490UnweightedD1b0DirectlyPaysWeightedR406PointwiseIsFalse =
+  WeightedEndpoint.unweightedD1b0DirectlyPaysWeightedR406PointwiseIsFalse
+
+round490WeightedR406EndpointSideRequiresNewNonlinearEstimateIsFalse :
+  round490WeightedR406EndpointSideRequiresNewNonlinearEstimate ≡ false
+round490WeightedR406EndpointSideRequiresNewNonlinearEstimateIsFalse =
+  WeightedEndpoint.weightedR406EndpointSideRequiresNewNonlinearEstimateIsFalse
+
+round490A3PairEnumerationCollapsedToCenteredNormalFormIsTrue :
+  round490A3PairEnumerationCollapsedToCenteredNormalForm ≡ true
+round490A3PairEnumerationCollapsedToCenteredNormalFormIsTrue =
+  A3Centered.a3PairEnumerationCollapsedToCenteredNormalFormIsTrue
+
+round490A3CenteredNormalFormUsesCompleteFibreFoldIsTrue :
+  round490A3CenteredNormalFormUsesCompleteFibreFold ≡ true
+round490A3CenteredNormalFormUsesCompleteFibreFoldIsTrue =
+  A3Centered.a3CenteredNormalFormUsesCompleteFibreFoldIsTrue
+
+round490A3CenteredNormalFormUsesPointwiseIncidenceSeparationIsFalse :
+  round490A3CenteredNormalFormUsesPointwiseIncidenceSeparation ≡ false
+round490A3CenteredNormalFormUsesPointwiseIncidenceSeparationIsFalse =
+  A3Centered.a3CenteredNormalFormUsesPointwiseIncidenceSeparationIsFalse
+
+round490SwapInvariantWeightedR225CollapseClosedIsTrue :
+  round490SwapInvariantWeightedR225CollapseClosed ≡ true
+round490SwapInvariantWeightedR225CollapseClosedIsTrue =
+  RateKernel.swapInvariantWeightedR225CollapseClosedIsTrue
+
+round490PhysicalRateWeightedR225CollapseClosedIsTrue :
+  round490PhysicalRateWeightedR225CollapseClosed ≡ true
+round490PhysicalRateWeightedR225CollapseClosedIsTrue =
+  RateKernel.physicalRateWeightedR225CollapseClosedIsTrue
+
+round490RateWeightedR225UsesPointwiseSeparationIsFalse :
+  round490RateWeightedR225UsesPointwiseSeparation ≡ false
+round490RateWeightedR225UsesPointwiseSeparationIsFalse =
+  RateKernel.physicalRateWeightedR225CollapseUsesPointwiseSeparationIsFalse
+
+round490A3KernelCenteredNormalFormClosedIsTrue :
+  round490A3KernelCenteredNormalFormClosed ≡ true
+round490A3KernelCenteredNormalFormClosedIsTrue =
+  A3Kernel.a3KernelCenteredNormalFormClosedIsTrue
+
+round490A3KernelCenteredNormalFormUsesPointwiseR205IsFalse :
+  round490A3KernelCenteredNormalFormUsesPointwiseR205 ≡ false
+round490A3KernelCenteredNormalFormUsesPointwiseR205IsFalse =
+  A3Kernel.a3KernelCenteredNormalFormUsesPointwiseR205IsFalse
+
+round490A3KernelCenteredNormalFormUsesLowerSeparationIsFalse :
+  round490A3KernelCenteredNormalFormUsesLowerSeparation ≡ false
+round490A3KernelCenteredNormalFormUsesLowerSeparationIsFalse =
+  A3Kernel.a3KernelCenteredNormalFormUsesLowerSeparationIsFalse
+
+round490A3KernelCenteredNormalFormIntroducesEstimateIsFalse :
+  round490A3KernelCenteredNormalFormIntroducesEstimate ≡ false
+round490A3KernelCenteredNormalFormIntroducesEstimateIsFalse =
+  A3Kernel.a3KernelCenteredNormalFormIntroducesEstimateIsFalse
+
+round490A3ToLiteralFactoredFullCompilerClosedIsTrue :
+  round490A3ToLiteralFactoredFullCompilerClosed ≡ true
+round490A3ToLiteralFactoredFullCompilerClosedIsTrue =
+  A3Factored.a3ToFactoredFullCompilerClosedIsTrue
+
+round490A3ToFactoredFullAddsNewNonlinearEstimateIsFalse :
+  round490A3ToFactoredFullAddsNewNonlinearEstimate ≡ false
+round490A3ToFactoredFullAddsNewNonlinearEstimateIsFalse =
+  A3Factored.a3ToFactoredFullRequiresNewNonlinearEstimateAfterA3IsFalse
+
+round490A3ToFactoredFullSameObjectWeldClosedIsFalse :
+  round490A3ToFactoredFullSameObjectWeldClosed ≡ false
+round490A3ToFactoredFullSameObjectWeldClosedIsFalse =
+  A3Factored.a3ToFactoredFullExactSameObjectWeldClosedIsFalse
+
+round490A3FactoredFullDirectEqualityIsPreferredConsumerBridgeIsFalse :
+  round490A3FactoredFullDirectEqualityIsPreferredConsumerBridge ≡ false
+round490A3FactoredFullDirectEqualityIsPreferredConsumerBridgeIsFalse =
+  A3Factored.weightedFactoredFullIsPreferredConsumerBridgeIsFalse
+
+round490OverstrongA3WeightedForcingSocketConstructedIsTrue :
+  round490OverstrongA3WeightedForcingSocketConstructed ≡ true
+round490OverstrongA3WeightedForcingSocketConstructedIsTrue =
+  A3Weighted.a3WeightedForcingSameObjectSocketConstructedIsTrue
+
+round490OverstrongA3WeightedForcingWeldClosedIsFalse :
+  round490OverstrongA3WeightedForcingWeldClosed ≡ false
+round490OverstrongA3WeightedForcingWeldClosedIsFalse =
+  A3Weighted.a3WeightedForcingSameObjectWeldClosedIsFalse
+
+round490OverstrongA3WeightedForcingWeldIsRepresentationNotEstimateIsTrue :
+  round490OverstrongA3WeightedForcingWeldIsRepresentationNotEstimate ≡ true
+round490OverstrongA3WeightedForcingWeldIsRepresentationNotEstimateIsTrue =
+  A3Weighted.a3WeightedForcingWeldIsRepresentationTheoremIsTrue
+
+round490CauchyA3MismatchNormalFormClosedIsTrue :
+  round490CauchyA3MismatchNormalFormClosed ≡ true
+round490CauchyA3MismatchNormalFormClosedIsTrue =
+  R598.round598CauchyA3MismatchNormalFormClosedIsTrue
+
+round490A3SelfWorkCoordinateCancelledExactlyIsTrue :
+  round490A3SelfWorkCoordinateCancelledExactly ≡ true
+round490A3SelfWorkCoordinateCancelledExactlyIsTrue =
+  R598.round598A3SelfWorkCoordinateCancelledExactlyIsTrue
+
+round490OnlyRemainingWeightedA3RepresentationCoordinateIsFluxTangentRateKernelIsTrue :
+  round490OnlyRemainingWeightedA3RepresentationCoordinateIsFluxTangentRateKernel ≡ true
+round490OnlyRemainingWeightedA3RepresentationCoordinateIsFluxTangentRateKernelIsTrue =
+  R598.round598OnlyResidualIsFluxTangentPlusRateWeightedKernelIsTrue
+
+round490WeightedFluxTangentToA3RateKernelClosedIsFalse :
+  round490WeightedFluxTangentToA3RateKernelClosed ≡ false
+round490WeightedFluxTangentToA3RateKernelClosedIsFalse =
+  R598.round598FluxTangentToRateWeightedKernelClosedIsFalse
+
+round490A3CenteredFullGramNormalFormClosedIsTrue :
+  round490A3CenteredFullGramNormalFormClosed ≡ true
+round490A3CenteredFullGramNormalFormClosedIsTrue =
+  R599.round599A3CenteredFullGramNormalFormClosedIsTrue
+
+round490A3AndR596ShareCompleteDoubleMixedGramCarrierIsTrue :
+  round490A3AndR596ShareCompleteDoubleMixedGramCarrier ≡ true
+round490A3AndR596ShareCompleteDoubleMixedGramCarrierIsTrue =
+  R599.round599A3AndR596NowShareCompleteDoubleMixedGramCarrierIsTrue
+
+round490RemainingWeightedA3CoordinateIsDynamicCauchyFluxTangentIsTrue :
+  round490RemainingWeightedA3CoordinateIsDynamicCauchyFluxTangent ≡ true
+round490RemainingWeightedA3CoordinateIsDynamicCauchyFluxTangentIsTrue =
+  R599.round599RemainingCoordinateIsDynamicCauchyFluxTangentIsTrue
+
+
+round490CenteredDynamicCauchyPairNormalFormClosedIsTrue :
+  round490CenteredDynamicCauchyPairNormalFormClosed ≡ true
+round490CenteredDynamicCauchyPairNormalFormClosedIsTrue =
+  R600.round600DynamicCenteredCauchyPairNormalFormClosedIsTrue
+
+round490CenteredDynamicCauchyNonlinearRemainderNormalFormClosedIsTrue :
+  round490CenteredDynamicCauchyNonlinearRemainderNormalFormClosed ≡ true
+round490CenteredDynamicCauchyNonlinearRemainderNormalFormClosedIsTrue =
+  R601.round601LiteralR291DynamicRemainderNormalFormClosedIsTrue
+
+round490CenteredDynamicCauchyRemainderPaidIsFalse :
+  round490CenteredDynamicCauchyRemainderPaid ≡ false
+round490CenteredDynamicCauchyRemainderPaidIsFalse =
+  R601.round601CenteredDynamicRemainderPaidIsFalse
+
+round490R601ResidualReducesToR538WeightedRemainderIsTrue :
+  round490R601ResidualReducesToR538WeightedRemainder ≡ true
+round490R601ResidualReducesToR538WeightedRemainderIsTrue =
+  R602.round602R601ResidualReducesToR538WeightedRemainderIsTrue
+
+round490R538WeightedRemainderFullIsR567ForcingFullIsTrue :
+  round490R538WeightedRemainderFullIsR567ForcingFull ≡ true
+round490R538WeightedRemainderFullIsR567ForcingFullIsTrue =
+  R602.round602R538WeightedRemainderFullIsR567ForcingFullIsTrue
+
+round490R601ResidualIsTwiceR598MismatchClosedIsTrue :
+  round490R601ResidualIsTwiceR598MismatchClosed ≡ true
+round490R601ResidualIsTwiceR598MismatchClosedIsTrue =
+  R602.round602R601ResidualIsTwiceR598MismatchIsTrue
+
+round490R601IntroducesIndependentAnalyticLeafIsFalse :
+  round490R601IntroducesIndependentAnalyticLeaf ≡ false
+round490R601IntroducesIndependentAnalyticLeafIsFalse =
+  R602.round602IntroducesIndependentAnalyticLeafIsFalse
+
+round490CanonicalDynamicMismatchPaidIsFalse :
+  round490CanonicalDynamicMismatchPaid ≡ false
+round490CanonicalDynamicMismatchPaidIsFalse =
+  R602.round602R598MismatchPaidIsFalse
+
+round490PureR291CauchyAlgebraForcesDynamicMismatchVanishingIsFalse :
+  round490PureR291CauchyAlgebraForcesDynamicMismatchVanishing ≡ false
+round490PureR291CauchyAlgebraForcesDynamicMismatchVanishingIsFalse =
+  R603.round603PureFiniteAlgebraForcesMismatchVanishingIsFalse
+
+round490DynamicMismatchNeedsAdditionalPhysicalStructureOrEstimateIsTrue :
+  round490DynamicMismatchNeedsAdditionalPhysicalStructureOrEstimate ≡ true
+round490DynamicMismatchNeedsAdditionalPhysicalStructureOrEstimateIsTrue =
+  R603.round603AdditionalPhysicalStructureOrEstimateRequiredIsTrue
+
+round490NoGoClaimsLiteralNSMismatchNonzeroIsFalse :
+  round490NoGoClaimsLiteralNSMismatchNonzero ≡ false
+round490NoGoClaimsLiteralNSMismatchNonzeroIsFalse =
+  R603.round603ClaimsLiteralNSMismatchIsNonzeroIsFalse
+
+round490R601ResidualIsEightTimesCanonicalA3CauchyMismatchIsTrue :
+  round490R601ResidualIsEightTimesCanonicalA3CauchyMismatch ≡ true
+round490R601ResidualIsEightTimesCanonicalA3CauchyMismatchIsTrue =
+  R604.round604R601ResidualIsEightTimesCanonicalMismatchIsTrue
+
+round490CanonicalA3CauchyIdentityIsRateTotalForcingEqualsFourA3IsTrue :
+  round490CanonicalA3CauchyIdentityIsRateTotalForcingEqualsFourA3 ≡ true
+round490CanonicalA3CauchyIdentityIsRateTotalForcingEqualsFourA3IsTrue =
+  R604.round604CanonicalIdentityIsRateTotalForcingEqualsFourA3IsTrue
+
+round490CanonicalA3CauchyForcingMismatchClosedIsFalse :
+  round490CanonicalA3CauchyForcingMismatchClosed ≡ false
+round490CanonicalA3CauchyForcingMismatchClosedIsFalse =
+  R604.round604CanonicalPhysicalMismatchClosedIsFalse
+
+round490R230MixedForcingSelfExternalSplitClosedIsTrue :
+  round490R230MixedForcingSelfExternalSplitClosed ≡ true
+round490R230MixedForcingSelfExternalSplitClosedIsTrue =
+  R605.round605R230FullCommutatorSelfExternalSplitClosedIsTrue
+
+round490R230SelfPartCancelledByCyclicEnergyIsFalse :
+  round490R230SelfPartCancelledByCyclicEnergy ≡ false
+round490R230SelfPartCancelledByCyclicEnergyIsFalse =
+  R605.round605SelfPartCancelsByCyclicEnergyConservationIsFalse
+
+round490R230ExternalNetworkPartPaidIsFalse :
+  round490R230ExternalNetworkPartPaid ≡ false
+round490R230ExternalNetworkPartPaidIsFalse =
+  R605.round605ExternalNetworkPartPaidIsFalse
+
+round490R567ForcingFullSelfExternalSplitClosedIsTrue :
+  round490R567ForcingFullSelfExternalSplitClosed ≡ true
+round490R567ForcingFullSelfExternalSplitClosedIsTrue =
+  R606.round606ForcingFullSelfExternalSplitClosedIsTrue
+
+round490SelectedSelfForcingFullPaysA3IsFalse :
+  round490SelectedSelfForcingFullPaysA3 ≡ false
+round490SelectedSelfForcingFullPaysA3IsFalse =
+  R606.round606SelfForcingFullPaysA3IsFalse
+
+round490ExternalNetworkForcingFullPaidIsFalse :
+  round490ExternalNetworkForcingFullPaid ≡ false
+round490ExternalNetworkForcingFullPaidIsFalse =
+  R606.round606ExternalForcingFullPaidIsFalse
+
+round490CanonicalMismatchSelfExternalSplitClosedIsTrue :
+  round490CanonicalMismatchSelfExternalSplitClosed ≡ true
+round490CanonicalMismatchSelfExternalSplitClosedIsTrue =
+  R607.round607CanonicalMismatchSelfExternalSplitClosedIsTrue
+
+round490SelectedSelfMismatchClosedIsFalse :
+  round490SelectedSelfMismatchClosed ≡ false
+round490SelectedSelfMismatchClosedIsFalse =
+  R607.round607SelectedSelfMismatchClosedIsFalse
+
+round490ExternalNetworkContributionClosedIsFalse :
+  round490ExternalNetworkContributionClosed ≡ false
+round490ExternalNetworkContributionClosedIsFalse =
+  R607.round607ExternalNetworkContributionClosedIsFalse
+
+round490CyclicSelfEnergyDirectlyClosesSelectedSelfMismatchIsFalse :
+  round490CyclicSelfEnergyDirectlyClosesSelectedSelfMismatch ≡ false
+round490CyclicSelfEnergyDirectlyClosesSelectedSelfMismatchIsFalse =
+  R607.round607CyclicSelfEnergyConservationDirectlyClosesSelfMismatchIsFalse
+
+
+round490R230ExternalCellOnLiteralResidualCarrierClosedIsTrue :
+  round490R230ExternalCellOnLiteralResidualCarrierClosed ≡ true
+round490R230ExternalCellOnLiteralResidualCarrierClosedIsTrue =
+  R608.round608R230ExternalCellOnLiteralResidualCarrierClosedIsTrue
+
+round490ExternalVectorResidualCarrierIsScalarPaymentIsFalse :
+  round490ExternalVectorResidualCarrierIsScalarPayment ≡ false
+round490ExternalVectorResidualCarrierIsScalarPaymentIsFalse =
+  R608.round608IdentifiesVectorCellWithScalarWaleffeFunctionalIsFalse
+
+round490ExternalNetworkResidualPaymentClosedIsFalse :
+  round490ExternalNetworkResidualPaymentClosed ≡ false
+round490ExternalNetworkResidualPaymentClosedIsFalse =
+  R608.round608ExternalNetworkMismatchPaidIsFalse
+
+
+round490ExternalCauchyPairExpandedToLiteralResidualPairingsIsTrue :
+  round490ExternalCauchyPairExpandedToLiteralResidualPairings ≡ true
+round490ExternalCauchyPairExpandedToLiteralResidualPairingsIsTrue =
+  R609.round609R606ExternalPairOnLiteralR112ResidualCarriersIsTrue
+
+round490ExternalResidualPairingsIdentifiedWithR115CellsIsFalse :
+  round490ExternalResidualPairingsIdentifiedWithR115Cells ≡ false
+round490ExternalResidualPairingsIdentifiedWithR115CellsIsFalse =
+  R609.round609IdentifiesThesePairingsWithR115WaleffeCellsIsFalse
+
+round490ExternalResidualPairingsExpandedToHelicalQuinticCells : Bool
+round490ExternalResidualPairingsExpandedToHelicalQuinticCells =
+  R610.round610ExternalPairExpandedToEightHelicalQuinticCells
+
+round490HelicalQuinticCellsIdentifiedWithR115QuarticWaleffeCells : Bool
+round490HelicalQuinticCellsIdentifiedWithR115QuarticWaleffeCells =
+  R610.round610IdentifiesHelicalQuinticCellsWithR115QuarticWaleffeCells
+
+round490ExternalHelicalQuinticPaymentClosed : Bool
+round490ExternalHelicalQuinticPaymentClosed =
+  R610.round610ExternalNetworkPaymentClosed
+
+round490ExternalResidualPairingsExpandedToHelicalQuinticCellsIsTrue :
+  round490ExternalResidualPairingsExpandedToHelicalQuinticCells ≡ true
+round490ExternalResidualPairingsExpandedToHelicalQuinticCellsIsTrue =
+  R610.round610ExternalPairExpandedToEightHelicalQuinticCellsIsTrue
+
+round490HelicalQuinticCellsIdentifiedWithR115QuarticWaleffeCellsIsFalse :
+  round490HelicalQuinticCellsIdentifiedWithR115QuarticWaleffeCells ≡ false
+round490HelicalQuinticCellsIdentifiedWithR115QuarticWaleffeCellsIsFalse =
+  R610.round610IdentifiesHelicalQuinticCellsWithR115QuarticWaleffeCellsIsFalse
+
+round490ExternalHelicalQuinticPaymentClosedIsFalse :
+  round490ExternalHelicalQuinticPaymentClosed ≡ false
+round490ExternalHelicalQuinticPaymentClosedIsFalse =
+  R610.round610ExternalNetworkPaymentClosedIsFalse
+
+round490R604A3AmplitudeDegreeIsFour : Bool
+round490R604A3AmplitudeDegreeIsFour = true
+
+round490R604NonlinearForcingWorkAmplitudeDegreeIsFive : Bool
+round490R604NonlinearForcingWorkAmplitudeDegreeIsFive = true
+
+round490R604SidesHaveSameAmplitudeDegree : Bool
+round490R604SidesHaveSameAmplitudeDegree =
+  R611.r604SidesHaveSameAmplitudeDegree
+
+round490R604UniversalScaleFreeSameObjectIdentityAdmissible : Bool
+round490R604UniversalScaleFreeSameObjectIdentityAdmissible =
+  R611.r604UniversalScaleFreeSameObjectIdentityAdmissible
+
+round490R604NeedsTrajectorySpecificStructureOrEstimate : Bool
+round490R604NeedsTrajectorySpecificStructureOrEstimate =
+  R611.pureR291CauchyAlgebraAlreadyKnownInsufficient
+
+round490R604HomogeneityNoGoClaimsLiteralMismatchAlwaysNonzero : Bool
+round490R604HomogeneityNoGoClaimsLiteralMismatchAlwaysNonzero =
+  R611.r604NoGoClaimsLiteralMismatchAlwaysNonzero
+
+
+round490R573NestedCompanionSelfExternalSplitClosed : Bool
+round490R573NestedCompanionSelfExternalSplitClosed =
+  R613Nested.round613R573NestedWeightedCompanionSelfExternalSplitClosed
+
+round490R573ExternalNestedPaymentClosed : Bool
+round490R573ExternalNestedPaymentClosed =
+  R613Nested.round613ExternalNestedPaymentClosed
+
+
+round490R573ExternalNestedOnLiteralR112ResidualClosed : Bool
+round490R573ExternalNestedOnLiteralR112ResidualClosed =
+  R614.round614ExternalNestedCellOnLiteralR112ResidualClosed
+
+round490FixedOutputR573FoldSelfExternalSplitClosed : Bool
+round490FixedOutputR573FoldSelfExternalSplitClosed =
+  R614.round614FixedOutputR573FoldSelfExternalSplitClosed
+
+round490R112SixMembershipFieldsCompilerOwned : Bool
+round490R112SixMembershipFieldsCompilerOwned =
+  R616.round616SixR112MembershipFieldsCompilerOwned
+
+round490R112WitnessReducedToThreeNonfixednessInputs : Bool
+round490R112WitnessReducedToThreeNonfixednessInputs =
+  R616.round616R112WitnessReducedToThreeNonfixednessInputs
+
+round490R112RemainingDebtOnlyThreeNonfixednessWitnesses : Bool
+round490R112RemainingDebtOnlyThreeNonfixednessWitnesses =
+  R616.round616RemainingDebtIsOnlyThreeNonfixednessWitnesses
+
+round490R112WitnessReducedToThreeExplicitModeDiagonals : Bool
+round490R112WitnessReducedToThreeExplicitModeDiagonals =
+  R617.round617R112WitnessReducedToThreeModeInequalities
+
+round490R112ExceptionalModeDiagonalsProvedAbsent : Bool
+round490R112ExceptionalModeDiagonalsProvedAbsent =
+  R617.round617ExceptionalLociProvedAbsent
+
+
+
+
+
+round490ExternalForcingFixedOrbitCorrectionClosed : Bool
+round490ExternalForcingFixedOrbitCorrectionClosed =
+  R618.round618FixedOrbitCorrectionClosed
+
+round490ExternalForcingTotalOrbitRepresentationClosed : Bool
+round490ExternalForcingTotalOrbitRepresentationClosed =
+  R618.round618ExternalForcingHasTotalProofRelevantOrbitRepresentation
+
+round490FixedOrbitExternalResidualIsPlainDeletionOnly : Bool
+round490FixedOrbitExternalResidualIsPlainDeletionOnly =
+  R618.round618FixedOrbitResidualIsPlainDeletionOnly
+
+round490ThreeLegExternalRepresentationTotalOverOrbitCases : Bool
+round490ThreeLegExternalRepresentationTotalOverOrbitCases =
+  R619.round619ThreeLegExternalRepresentationTotalOverOrbitCases
+
+round490ThreeLegExternalRequiresGlobalNonfixedR112Family : Bool
+round490ThreeLegExternalRequiresGlobalNonfixedR112Family =
+  R619.round619RequiresGlobalNonfixedR112WitnessFamily
+
+round490R573ExternalNestedCellTotalGivenOrbitCases : Bool
+round490R573ExternalNestedCellTotalGivenOrbitCases =
+  R620.round620ExternalNestedCellTotalGivenOrbitCases
+
+round490R573ExternalNestedRequiresLegacyR112Family : Bool
+round490R573ExternalNestedRequiresLegacyR112Family =
+  R620.round620RequiresLegacyGlobalR112NonfixedWitnessFamily
+
+round490R573ExternalNestedAnalyticPaymentClosed : Bool
+round490R573ExternalNestedAnalyticPaymentClosed =
+  R620.round620ExternalNestedAnalyticPaymentClosed
+
+
+round490CanonicalThreeLegOrbitSelectionConstructed : Bool
+round490CanonicalThreeLegOrbitSelectionConstructed =
+  R621.round621CanonicalThreeLegOrbitSelectionConstructed
+
+round490CanonicalOrbitSelectionRequiresUserChoice : Bool
+round490CanonicalOrbitSelectionRequiresUserChoice =
+  R621.round621RequiresUserSuppliedOrbitCaseChoice
+
+round490CanonicalExternalR573FoldSameObjectWeldClosed : Bool
+round490CanonicalExternalR573FoldSameObjectWeldClosed =
+  R622.round622FixedOutputExternalR573FoldSameObjectWeldClosed
+
+round490CanonicalExternalR573FoldRequiresLegacyR112Family : Bool
+round490CanonicalExternalR573FoldRequiresLegacyR112Family =
+  R622.round622RequiresLegacyR112WitnessFamily
+
+round490CanonicalExternalR573AnalyticPaymentClosed : Bool
+round490CanonicalExternalR573AnalyticPaymentClosed =
+  R622.round622ExternalAnalyticPaymentClosed
+
+
+round490SignedNestedRowSelfCanonicalExternalSplitClosed : Bool
+round490SignedNestedRowSelfCanonicalExternalSplitClosed =
+  R623Row.round623SignedNestedRowSelfExternalSplitClosed
+
+round490LiveNestedSelfCanonicalExternalSpacetimeSplitClosed : Bool
+round490LiveNestedSelfCanonicalExternalSpacetimeSplitClosed =
+  R624Live.round624LiveNestedSelfCanonicalExternalSplitClosed
+
+round490SplitNestedSignedBudgetsCompileToR568 : Bool
+round490SplitNestedSignedBudgetsCompileToR568 =
+  R624Live.round624SplitSignedNestedBudgetsCompileToR568
+
+round490CanonicalExternalNestedSignedSpacetimeBudgetClosed : Bool
+round490CanonicalExternalNestedSignedSpacetimeBudgetClosed =
+  R624Live.round624CanonicalExternalNestedSignedSpacetimeBudgetClosed
+
+round490SelfNestedSignedSpacetimeBudgetClosed : Bool
+round490SelfNestedSignedSpacetimeBudgetClosed =
+  R624Live.round624SelfNestedSignedSpacetimeBudgetClosed
+
+
+round490R573SelfFourMultiplierDifferenceNormalFormClosed : Bool
+round490R573SelfFourMultiplierDifferenceNormalFormClosed =
+  R625Self.round625R573SelfNestedFourMultiplierDifferenceNormalFormClosed
+
+round490FixedOutputSelfMultiplierDifferenceFoldClosed : Bool
+round490FixedOutputSelfMultiplierDifferenceFoldClosed =
+  R626.round626FixedOutputSelfR573MultiplierDifferenceFoldClosed
+
+round490SignedSelfSpectatorRowMultiplierDifferenceWeldClosed : Bool
+round490SignedSelfSpectatorRowMultiplierDifferenceWeldClosed =
+  R627.round627SignedSelfSpectatorRowMultiplierDifferenceWeldClosed
+
+round490SelfMultiplierPlusCanonicalExternalCompilesToR568 : Bool
+round490SelfMultiplierPlusCanonicalExternalCompilesToR568 =
+  R628.round628SelfMultiplierPlusCanonicalExternalCompilesToR568
+
+round490SelfMultiplierSignedSpacetimeBudgetClosed : Bool
+round490SelfMultiplierSignedSpacetimeBudgetClosed =
+  R628.round628SelfMultiplierSignedSpacetimeBudgetClosed
+
+round490CanonicalExternalSignedSpacetimeBudgetClosedLatest : Bool
+round490CanonicalExternalSignedSpacetimeBudgetClosedLatest =
+  R628.round628CanonicalExternalSignedSpacetimeBudgetClosed
+
+
+round490UnweightedSelfEnergyCancellationCannotCloseWeightedLeafAAlone : Bool
+round490UnweightedSelfEnergyCancellationCannotCloseWeightedLeafAAlone =
+  R629.round629ArbitraryWeightedCancellationFromR95Admissible
+
+round490SelfSameObjectWeightDefectWeldStillRequired : Bool
+round490SelfSameObjectWeightDefectWeldStillRequired =
+  R629.round629SameObjectWeightDefectWeldStillRequired
+
+round490CanonicalExternalR573ScalarSameObjectWeldClosed : Bool
+round490CanonicalExternalR573ScalarSameObjectWeldClosed =
+  R623Scalar.round623ExternalFoldHermitianScalarSameObjectClosed
+
+round490CanonicalOrbitResolvedExternalCarrierReachesScalarConsumer : Bool
+round490CanonicalOrbitResolvedExternalCarrierReachesScalarConsumer =
+  R623Scalar.round623CanonicalOrbitResolvedCarrierReachesScalarConsumer
+
+round490CanonicalExternalScalarRequiresLegacyR112Family : Bool
+round490CanonicalExternalScalarRequiresLegacyR112Family =
+  R623Scalar.round623RequiresLegacyR112WitnessFamily
+
+round490CanonicalExternalScalarAnalyticPaymentClosed : Bool
+round490CanonicalExternalScalarAnalyticPaymentClosed =
+  R623Scalar.round623ExternalScalarAnalyticPaymentClosed
+
+round490LiteralR545CanonicalExternalScalarInstalled : Bool
+round490LiteralR545CanonicalExternalScalarInstalled =
+  R624Row.round624LiteralR545ExternalScalarCanonicalized
+
+round490R545NestedForceSelfCanonicalExternalSplitClosed : Bool
+round490R545NestedForceSelfCanonicalExternalSplitClosed =
+  R624Row.round624NestedForceFoldSelfCanonicalExternalSplitClosed
+
+round490R545AmplitudeHalfPreservedLiterally : Bool
+round490R545AmplitudeHalfPreservedLiterally =
+  R624Row.round624AmplitudeHalfPreservedLiterally
+
+round490R545CanonicalExternalScalarBudgetClosed : Bool
+round490R545CanonicalExternalScalarBudgetClosed =
+  R624Row.round624CanonicalExternalScalarBudgetClosed
+
+round490ExternalProductRuleToCommutatorFoldClosed : Bool
+round490ExternalProductRuleToCommutatorFoldClosed =
+  R625Ext.round625ExternalProductRuleToCommutatorFoldClosed
+
+round490ExternalCommutatorRequiresLegacyR112Family : Bool
+round490ExternalCommutatorRequiresLegacyR112Family =
+  R625Ext.round625RequiresLegacyR112WitnessFamily
+
+round490ExternalCommutatorAnalyticPaymentClosed : Bool
+round490ExternalCommutatorAnalyticPaymentClosed =
+  R625Ext.round625ExternalCommutatorAnalyticPaymentClosed
+
+
+round490ExternalWeightedSlotCommutatorSameObjectClosed : Bool
+round490ExternalWeightedSlotCommutatorSameObjectClosed =
+  R629Ext.round629ExternalWeightedSlotCommutatorSameObjectClosed
+
+round490ExternalWeightedSlotCommutatorTotal : Bool
+round490ExternalWeightedSlotCommutatorTotal =
+  R630.round630ExternalExhaustiveCommutatorTotal
+
+round490ExternalZeroPBranchClosed : Bool
+round490ExternalZeroPBranchClosed =
+  R630.round630ZeroPBranchClosed
+
+round490ExternalR573NestedCommutatorTotal : Bool
+round490ExternalR573NestedCommutatorTotal =
+  R630.round630R573ExternalNestedCommutatorTotal
+
+
+round490CanonicalExternalFoldOnTotalCommutatorClosed : Bool
+round490CanonicalExternalFoldOnTotalCommutatorClosed =
+  R631.round631CanonicalExternalFoldOnTotalCommutatorClosed
+
+round490CanonicalExternalScalarOnTotalCommutatorClosed : Bool
+round490CanonicalExternalScalarOnTotalCommutatorClosed =
+  R631.round631CanonicalExternalScalarOnTotalCommutatorClosed
+
+
+round490CanonicalExternalCellOnHelicityCommutatorClosed : Bool
+round490CanonicalExternalCellOnHelicityCommutatorClosed =
+  R636.round636ExternalCellOnLiteralHelicityCommutatorClosed
+
+round490CanonicalExternalScalarOnHelicityCommutatorClosed : Bool
+round490CanonicalExternalScalarOnHelicityCommutatorClosed =
+  R636.round636CanonicalExternalScalarOnHelicityCommutatorClosed
+
+round490ExternalHelicityCommutatorPaymentClosed : Bool
+round490ExternalHelicityCommutatorPaymentClosed =
+  R636.round636ExternalHelicityCommutatorPaymentClosed
+
+
+round490LiveExternalSpacetimeOnHelicityCommutatorClosed : Bool
+round490LiveExternalSpacetimeOnHelicityCommutatorClosed =
+  R637.round637LiveExternalSpacetimeOnHelicityCommutatorClosed
+
+round490HelicityCommutatorSignedSpacetimePaymentClosed : Bool
+round490HelicityCommutatorSignedSpacetimePaymentClosed =
+  R637.round637HelicityCommutatorSignedSpacetimePaymentClosed
+
+
+round490ResolvedThreeChannelBudgetsCompileToR568 : Bool
+round490ResolvedThreeChannelBudgetsCompileToR568 =
+  R638.round638ThreeResolvedChannelBudgetsCompileToR568
+
+round490ResolvedThreeChannelBudgetsMandatoryForR568 : Bool
+round490ResolvedThreeChannelBudgetsMandatoryForR568 =
+  R638.round638SeparateThreeChannelBudgetsMandatoryForR568
+
+round490ResolvedHomochiralSignedBudgetClosed : Bool
+round490ResolvedHomochiralSignedBudgetClosed =
+  R638.round638HomochiralSignedBudgetClosed
+
+round490ResolvedHeterochiralSignedBudgetClosed : Bool
+round490ResolvedHeterochiralSignedBudgetClosed =
+  R638.round638HeterochiralSignedBudgetClosed
+
+round490ResolvedExternalHelicitySignedBudgetClosed : Bool
+round490ResolvedExternalHelicitySignedBudgetClosed =
+  R638.round638ExternalHelicitySignedBudgetClosed
+
+
+round490SelfHomochiralHeterochiralSplitClosed : Bool
+round490SelfHomochiralHeterochiralSplitClosed =
+  R632.round632SelfR573NestedHomochiralHeterochiralSplitClosed
+
+round490SelfHomochiralRadialCarrierWeldReused : Bool
+round490SelfHomochiralRadialCarrierWeldReused =
+  R632.round632HomochiralR571RadialCarrierWeldReused
+
+round490SelfSpectatorRowHomochiralHeterochiralSplitClosed : Bool
+round490SelfSpectatorRowHomochiralHeterochiralSplitClosed =
+  R633.round633SpectatorSelfRowHomochiralHeterochiralSplitClosed
+
+round490SelfHeterochiralPartStillLiteral : Bool
+round490SelfHeterochiralPartStillLiteral =
+  R633.round633HeterochiralPartStillLiteral
+
+
+round490LiveSelfHelicityThreeChannelCompilerClosed : Bool
+round490LiveSelfHelicityThreeChannelCompilerClosed =
+  R634.round634ThreeChannelBudgetsCompileToR568
+
+round490LiveSeparateThreeChannelBudgetsMandatory : Bool
+round490LiveSeparateThreeChannelBudgetsMandatory =
+  R634.round634SeparateThreeChannelBudgetsMandatoryForR568
+
+round490HeterochiralRadialSumCarrierWeldClosed : Bool
+round490HeterochiralRadialSumCarrierWeldClosed =
+  R635.round635R632HeterochiralVectorRadialSumWeldClosed
+
+round490HeterochiralRadialSumIsNullGain : Bool
+round490HeterochiralRadialSumIsNullGain =
+  R635.round635HeterochiralRadialSumIsNullGain
+
+round490ExternalTotalCommutatorZeroPIncluded : Bool
+round490ExternalTotalCommutatorZeroPIncluded =
+  R631.round631ZeroPBranchIncluded
+
+round490ExternalForcingTransversalityClosed : Bool
+round490ExternalForcingTransversalityClosed =
+  ExtTrans626.round626ExternalPForcingTransverseClosed
+
+round490ExternalR307PairConstructed : Bool
+round490ExternalR307PairConstructed =
+  ExtTrans626.round626ExternalR307PairConstructed
+
+
+
+
+
+round490CanonicalR112ResidualWitnessFamilyInstalled : Bool
+round490CanonicalR112ResidualWitnessFamilyInstalled =
+  R614.round614CanonicalResidualWitnessFamilyInstalled
+
+round490R604SidesHaveSameAmplitudeDegreeIsFalse :
+  round490R604SidesHaveSameAmplitudeDegree ≡ false
+round490R604SidesHaveSameAmplitudeDegreeIsFalse =
+  R611.r604SidesHaveSameAmplitudeDegreeIsFalse
+
+round490R604UniversalScaleFreeSameObjectIdentityAdmissibleIsFalse :
+  round490R604UniversalScaleFreeSameObjectIdentityAdmissible ≡ false
+round490R604UniversalScaleFreeSameObjectIdentityAdmissibleIsFalse =
+  R611.r604UniversalScaleFreeSameObjectIdentityAdmissibleIsFalse
+
+round490R604NeedsTrajectorySpecificStructureOrEstimateIsTrue :
+  round490R604NeedsTrajectorySpecificStructureOrEstimate ≡ true
+round490R604NeedsTrajectorySpecificStructureOrEstimateIsTrue =
+  R611.pureR291CauchyAlgebraAlreadyKnownInsufficientIsTrue
+
+round490R604HomogeneityNoGoClaimsLiteralMismatchAlwaysNonzeroIsFalse :
+  round490R604HomogeneityNoGoClaimsLiteralMismatchAlwaysNonzero ≡ false
+round490R604HomogeneityNoGoClaimsLiteralMismatchAlwaysNonzeroIsFalse =
+  R611.r604NoGoClaimsLiteralMismatchAlwaysNonzeroIsFalse
+
+
+round490R573NestedCompanionSelfExternalSplitClosedIsTrue :
+  round490R573NestedCompanionSelfExternalSplitClosed ≡ true
+round490R573NestedCompanionSelfExternalSplitClosedIsTrue =
+  R613Nested.round613R573NestedWeightedCompanionSelfExternalSplitClosedIsTrue
+
+round490R573ExternalNestedPaymentClosedIsFalse :
+  round490R573ExternalNestedPaymentClosed ≡ false
+round490R573ExternalNestedPaymentClosedIsFalse =
+  R613Nested.round613ExternalNestedPaymentClosedIsFalse
+
+
+round490R573ExternalNestedOnLiteralR112ResidualClosedIsTrue :
+  round490R573ExternalNestedOnLiteralR112ResidualClosed ≡ true
+round490R573ExternalNestedOnLiteralR112ResidualClosedIsTrue =
+  R614.round614ExternalNestedCellOnLiteralR112ResidualClosedIsTrue
+
+round490FixedOutputR573FoldSelfExternalSplitClosedIsTrue :
+  round490FixedOutputR573FoldSelfExternalSplitClosed ≡ true
+round490FixedOutputR573FoldSelfExternalSplitClosedIsTrue =
+  R614.round614FixedOutputR573FoldSelfExternalSplitClosedIsTrue
+
+round490R112SixMembershipFieldsCompilerOwnedIsTrue :
+  round490R112SixMembershipFieldsCompilerOwned ≡ true
+round490R112SixMembershipFieldsCompilerOwnedIsTrue =
+  R616.round616SixR112MembershipFieldsCompilerOwnedIsTrue
+
+round490R112WitnessReducedToThreeNonfixednessInputsIsTrue :
+  round490R112WitnessReducedToThreeNonfixednessInputs ≡ true
+round490R112WitnessReducedToThreeNonfixednessInputsIsTrue =
+  R616.round616R112WitnessReducedToThreeNonfixednessInputsIsTrue
+
+round490R112RemainingDebtOnlyThreeNonfixednessWitnessesIsTrue :
+  round490R112RemainingDebtOnlyThreeNonfixednessWitnesses ≡ true
+round490R112RemainingDebtOnlyThreeNonfixednessWitnessesIsTrue =
+  R616.round616RemainingDebtIsOnlyThreeNonfixednessWitnessesIsTrue
+
+round490R112WitnessReducedToThreeExplicitModeDiagonalsIsTrue :
+  round490R112WitnessReducedToThreeExplicitModeDiagonals ≡ true
+round490R112WitnessReducedToThreeExplicitModeDiagonalsIsTrue =
+  R617.round617R112WitnessReducedToThreeModeInequalitiesIsTrue
+
+round490R112ExceptionalModeDiagonalsProvedAbsentIsFalse :
+  round490R112ExceptionalModeDiagonalsProvedAbsent ≡ false
+round490R112ExceptionalModeDiagonalsProvedAbsentIsFalse =
+  R617.round617ExceptionalLociProvedAbsentIsFalse
+
+
+round490CanonicalThreeLegOrbitSelectionConstructedIsTrue :
+  round490CanonicalThreeLegOrbitSelectionConstructed ≡ true
+round490CanonicalThreeLegOrbitSelectionConstructedIsTrue =
+  R621.round621CanonicalThreeLegOrbitSelectionConstructedIsTrue
+
+round490CanonicalOrbitSelectionRequiresUserChoiceIsFalse :
+  round490CanonicalOrbitSelectionRequiresUserChoice ≡ false
+round490CanonicalOrbitSelectionRequiresUserChoiceIsFalse =
+  R621.round621RequiresUserSuppliedOrbitCaseChoiceIsFalse
+
+round490CanonicalExternalR573FoldSameObjectWeldClosedIsTrue :
+  round490CanonicalExternalR573FoldSameObjectWeldClosed ≡ true
+round490CanonicalExternalR573FoldSameObjectWeldClosedIsTrue =
+  R622.round622FixedOutputExternalR573FoldSameObjectWeldClosedIsTrue
+
+round490CanonicalExternalR573FoldRequiresLegacyR112FamilyIsFalse :
+  round490CanonicalExternalR573FoldRequiresLegacyR112Family ≡ false
+round490CanonicalExternalR573FoldRequiresLegacyR112FamilyIsFalse =
+  R622.round622RequiresLegacyR112WitnessFamilyIsFalse
+
+round490CanonicalExternalR573AnalyticPaymentClosedIsFalse :
+  round490CanonicalExternalR573AnalyticPaymentClosed ≡ false
+round490CanonicalExternalR573AnalyticPaymentClosedIsFalse =
+  R622.round622ExternalAnalyticPaymentClosedIsFalse
+
+
+round490SignedNestedRowSelfCanonicalExternalSplitClosedIsTrue :
+  round490SignedNestedRowSelfCanonicalExternalSplitClosed ≡ true
+round490SignedNestedRowSelfCanonicalExternalSplitClosedIsTrue =
+  R623Row.round623SignedNestedRowSelfExternalSplitClosedIsTrue
+
+round490LiveNestedSelfCanonicalExternalSpacetimeSplitClosedIsTrue :
+  round490LiveNestedSelfCanonicalExternalSpacetimeSplitClosed ≡ true
+round490LiveNestedSelfCanonicalExternalSpacetimeSplitClosedIsTrue =
+  R624Live.round624LiveNestedSelfCanonicalExternalSplitClosedIsTrue
+
+round490SplitNestedSignedBudgetsCompileToR568IsTrue :
+  round490SplitNestedSignedBudgetsCompileToR568 ≡ true
+round490SplitNestedSignedBudgetsCompileToR568IsTrue =
+  R624Live.round624SplitSignedNestedBudgetsCompileToR568IsTrue
+
+
+round490R573SelfFourMultiplierDifferenceNormalFormClosedIsTrue :
+  round490R573SelfFourMultiplierDifferenceNormalFormClosed ≡ true
+round490R573SelfFourMultiplierDifferenceNormalFormClosedIsTrue =
+  R625Self.round625R573SelfNestedFourMultiplierDifferenceNormalFormClosedIsTrue
+
+round490FixedOutputSelfMultiplierDifferenceFoldClosedIsTrue :
+  round490FixedOutputSelfMultiplierDifferenceFoldClosed ≡ true
+round490FixedOutputSelfMultiplierDifferenceFoldClosedIsTrue =
+  R626.round626FixedOutputSelfR573MultiplierDifferenceFoldClosedIsTrue
+
+round490SignedSelfSpectatorRowMultiplierDifferenceWeldClosedIsTrue :
+  round490SignedSelfSpectatorRowMultiplierDifferenceWeldClosed ≡ true
+round490SignedSelfSpectatorRowMultiplierDifferenceWeldClosedIsTrue =
+  R627.round627SignedSelfSpectatorRowMultiplierDifferenceWeldClosedIsTrue
+
+round490SelfMultiplierPlusCanonicalExternalCompilesToR568IsTrue :
+  round490SelfMultiplierPlusCanonicalExternalCompilesToR568 ≡ true
+round490SelfMultiplierPlusCanonicalExternalCompilesToR568IsTrue =
+  R628.round628SelfMultiplierPlusCanonicalExternalCompilesToR568IsTrue
+
+
+round490UnweightedSelfEnergyCancellationCannotCloseWeightedLeafAAloneIsFalse :
+  round490UnweightedSelfEnergyCancellationCannotCloseWeightedLeafAAlone ≡ false
+round490UnweightedSelfEnergyCancellationCannotCloseWeightedLeafAAloneIsFalse =
+  R629.round629ArbitraryWeightedCancellationFromR95AdmissibleIsFalse
+
+round490SelfSameObjectWeightDefectWeldStillRequiredIsTrue :
+  round490SelfSameObjectWeightDefectWeldStillRequired ≡ true
+round490SelfSameObjectWeightDefectWeldStillRequiredIsTrue =
+  R629.round629SameObjectWeightDefectWeldStillRequiredIsTrue
+
+
+
+
+
+round490ExternalForcingFixedOrbitCorrectionClosedIsTrue :
+  round490ExternalForcingFixedOrbitCorrectionClosed ≡ true
+round490ExternalForcingFixedOrbitCorrectionClosedIsTrue =
+  R618.round618FixedOrbitCorrectionClosedIsTrue
+
+round490ExternalForcingTotalOrbitRepresentationClosedIsTrue :
+  round490ExternalForcingTotalOrbitRepresentationClosed ≡ true
+round490ExternalForcingTotalOrbitRepresentationClosedIsTrue =
+  R618.round618ExternalForcingHasTotalProofRelevantOrbitRepresentationIsTrue
+
+round490FixedOrbitExternalResidualIsPlainDeletionOnlyIsFalse :
+  round490FixedOrbitExternalResidualIsPlainDeletionOnly ≡ false
+round490FixedOrbitExternalResidualIsPlainDeletionOnlyIsFalse =
+  R618.round618FixedOrbitResidualIsPlainDeletionOnlyIsFalse
+
+round490ThreeLegExternalRepresentationTotalOverOrbitCasesIsTrue :
+  round490ThreeLegExternalRepresentationTotalOverOrbitCases ≡ true
+round490ThreeLegExternalRepresentationTotalOverOrbitCasesIsTrue =
+  R619.round619ThreeLegExternalRepresentationTotalOverOrbitCasesIsTrue
+
+round490ThreeLegExternalRequiresGlobalNonfixedR112FamilyIsFalse :
+  round490ThreeLegExternalRequiresGlobalNonfixedR112Family ≡ false
+round490ThreeLegExternalRequiresGlobalNonfixedR112FamilyIsFalse =
+  R619.round619RequiresGlobalNonfixedR112WitnessFamilyIsFalse
+
+round490R573ExternalNestedCellTotalGivenOrbitCasesIsTrue :
+  round490R573ExternalNestedCellTotalGivenOrbitCases ≡ true
+round490R573ExternalNestedCellTotalGivenOrbitCasesIsTrue =
+  R620.round620ExternalNestedCellTotalGivenOrbitCasesIsTrue
+
+round490R573ExternalNestedRequiresLegacyR112FamilyIsFalse :
+  round490R573ExternalNestedRequiresLegacyR112Family ≡ false
+round490R573ExternalNestedRequiresLegacyR112FamilyIsFalse =
+  R620.round620RequiresLegacyGlobalR112NonfixedWitnessFamilyIsFalse
+
+round490R573ExternalNestedAnalyticPaymentClosedIsFalse :
+  round490R573ExternalNestedAnalyticPaymentClosed ≡ false
+round490R573ExternalNestedAnalyticPaymentClosedIsFalse =
+  R620.round620ExternalNestedAnalyticPaymentClosedIsFalse
+
+round490CanonicalExternalR573ScalarSameObjectWeldClosedIsTrue :
+  round490CanonicalExternalR573ScalarSameObjectWeldClosed ≡ true
+round490CanonicalExternalR573ScalarSameObjectWeldClosedIsTrue =
+  R623Scalar.round623ExternalFoldHermitianScalarSameObjectClosedIsTrue
+
+round490CanonicalOrbitResolvedExternalCarrierReachesScalarConsumerIsTrue :
+  round490CanonicalOrbitResolvedExternalCarrierReachesScalarConsumer ≡ true
+round490CanonicalOrbitResolvedExternalCarrierReachesScalarConsumerIsTrue =
+  R623Scalar.round623CanonicalOrbitResolvedCarrierReachesScalarConsumerIsTrue
+
+round490CanonicalExternalScalarRequiresLegacyR112FamilyIsFalse :
+  round490CanonicalExternalScalarRequiresLegacyR112Family ≡ false
+round490CanonicalExternalScalarRequiresLegacyR112FamilyIsFalse =
+  R623Scalar.round623RequiresLegacyR112WitnessFamilyIsFalse
+
+round490CanonicalExternalScalarAnalyticPaymentClosedIsFalse :
+  round490CanonicalExternalScalarAnalyticPaymentClosed ≡ false
+round490CanonicalExternalScalarAnalyticPaymentClosedIsFalse =
+  R623Scalar.round623ExternalScalarAnalyticPaymentClosedIsFalse
+
+round490LiteralR545CanonicalExternalScalarInstalledIsTrue :
+  round490LiteralR545CanonicalExternalScalarInstalled ≡ true
+round490LiteralR545CanonicalExternalScalarInstalledIsTrue =
+  R624Row.round624LiteralR545ExternalScalarCanonicalizedIsTrue
+
+round490R545NestedForceSelfCanonicalExternalSplitClosedIsTrue :
+  round490R545NestedForceSelfCanonicalExternalSplitClosed ≡ true
+round490R545NestedForceSelfCanonicalExternalSplitClosedIsTrue =
+  R624Row.round624NestedForceFoldSelfCanonicalExternalSplitClosedIsTrue
+
+round490R545AmplitudeHalfPreservedLiterallyIsTrue :
+  round490R545AmplitudeHalfPreservedLiterally ≡ true
+round490R545AmplitudeHalfPreservedLiterallyIsTrue =
+  R624Row.round624AmplitudeHalfPreservedLiterallyIsTrue
+
+round490R545CanonicalExternalScalarBudgetClosedIsFalse :
+  round490R545CanonicalExternalScalarBudgetClosed ≡ false
+round490R545CanonicalExternalScalarBudgetClosedIsFalse =
+  R624Row.round624CanonicalExternalScalarBudgetClosedIsFalse
+
+round490ExternalProductRuleToCommutatorFoldClosedIsTrue :
+  round490ExternalProductRuleToCommutatorFoldClosed ≡ true
+round490ExternalProductRuleToCommutatorFoldClosedIsTrue =
+  R625Ext.round625ExternalProductRuleToCommutatorFoldClosedIsTrue
+
+round490ExternalCommutatorRequiresLegacyR112FamilyIsFalse :
+  round490ExternalCommutatorRequiresLegacyR112Family ≡ false
+round490ExternalCommutatorRequiresLegacyR112FamilyIsFalse =
+  R625Ext.round625RequiresLegacyR112WitnessFamilyIsFalse
+
+round490ExternalCommutatorAnalyticPaymentClosedIsFalse :
+  round490ExternalCommutatorAnalyticPaymentClosed ≡ false
+round490ExternalCommutatorAnalyticPaymentClosedIsFalse =
+  R625Ext.round625ExternalCommutatorAnalyticPaymentClosedIsFalse
+
+
+round490ExternalWeightedSlotCommutatorSameObjectClosedIsTrue :
+  round490ExternalWeightedSlotCommutatorSameObjectClosed ≡ true
+round490ExternalWeightedSlotCommutatorSameObjectClosedIsTrue =
+  R629Ext.round629ExternalWeightedSlotCommutatorSameObjectClosedIsTrue
+
+round490ExternalWeightedSlotCommutatorTotalIsTrue :
+  round490ExternalWeightedSlotCommutatorTotal ≡ true
+round490ExternalWeightedSlotCommutatorTotalIsTrue =
+  R630.round630ExternalExhaustiveCommutatorTotalIsTrue
+
+round490ExternalZeroPBranchClosedIsTrue :
+  round490ExternalZeroPBranchClosed ≡ true
+round490ExternalZeroPBranchClosedIsTrue =
+  R630.round630ZeroPBranchClosedIsTrue
+
+round490ExternalR573NestedCommutatorTotalIsTrue :
+  round490ExternalR573NestedCommutatorTotal ≡ true
+round490ExternalR573NestedCommutatorTotalIsTrue =
+  R630.round630R573ExternalNestedCommutatorTotalIsTrue
+
+
+round490CanonicalExternalFoldOnTotalCommutatorClosedIsTrue :
+  round490CanonicalExternalFoldOnTotalCommutatorClosed ≡ true
+round490CanonicalExternalFoldOnTotalCommutatorClosedIsTrue =
+  R631.round631CanonicalExternalFoldOnTotalCommutatorClosedIsTrue
+
+round490CanonicalExternalScalarOnTotalCommutatorClosedIsTrue :
+  round490CanonicalExternalScalarOnTotalCommutatorClosed ≡ true
+round490CanonicalExternalScalarOnTotalCommutatorClosedIsTrue =
+  R631.round631CanonicalExternalScalarOnTotalCommutatorClosedIsTrue
+
+
+round490CanonicalExternalCellOnHelicityCommutatorClosedIsTrue :
+  round490CanonicalExternalCellOnHelicityCommutatorClosed ≡ true
+round490CanonicalExternalCellOnHelicityCommutatorClosedIsTrue =
+  R636.round636ExternalCellOnLiteralHelicityCommutatorClosedIsTrue
+
+round490CanonicalExternalScalarOnHelicityCommutatorClosedIsTrue :
+  round490CanonicalExternalScalarOnHelicityCommutatorClosed ≡ true
+round490CanonicalExternalScalarOnHelicityCommutatorClosedIsTrue =
+  R636.round636CanonicalExternalScalarOnHelicityCommutatorClosedIsTrue
+
+round490ExternalHelicityCommutatorPaymentClosedIsFalse :
+  round490ExternalHelicityCommutatorPaymentClosed ≡ false
+round490ExternalHelicityCommutatorPaymentClosedIsFalse =
+  R636.round636ExternalHelicityCommutatorPaymentClosedIsFalse
+
+
+round490LiveExternalSpacetimeOnHelicityCommutatorClosedIsTrue :
+  round490LiveExternalSpacetimeOnHelicityCommutatorClosed ≡ true
+round490LiveExternalSpacetimeOnHelicityCommutatorClosedIsTrue =
+  R637.round637LiveExternalSpacetimeOnHelicityCommutatorClosedIsTrue
+
+round490HelicityCommutatorSignedSpacetimePaymentClosedIsFalse :
+  round490HelicityCommutatorSignedSpacetimePaymentClosed ≡ false
+round490HelicityCommutatorSignedSpacetimePaymentClosedIsFalse =
+  R637.round637HelicityCommutatorSignedSpacetimePaymentClosedIsFalse
+
+
+round490ResolvedThreeChannelBudgetsCompileToR568IsTrue :
+  round490ResolvedThreeChannelBudgetsCompileToR568 ≡ true
+round490ResolvedThreeChannelBudgetsCompileToR568IsTrue =
+  R638.round638ThreeResolvedChannelBudgetsCompileToR568IsTrue
+
+round490ResolvedThreeChannelBudgetsMandatoryForR568IsFalse :
+  round490ResolvedThreeChannelBudgetsMandatoryForR568 ≡ false
+round490ResolvedThreeChannelBudgetsMandatoryForR568IsFalse =
+  R638.round638SeparateThreeChannelBudgetsMandatoryForR568IsFalse
+
+round490ResolvedHomochiralSignedBudgetClosedIsFalse :
+  round490ResolvedHomochiralSignedBudgetClosed ≡ false
+round490ResolvedHomochiralSignedBudgetClosedIsFalse =
+  R638.round638HomochiralSignedBudgetClosedIsFalse
+
+round490ResolvedHeterochiralSignedBudgetClosedIsFalse :
+  round490ResolvedHeterochiralSignedBudgetClosed ≡ false
+round490ResolvedHeterochiralSignedBudgetClosedIsFalse =
+  R638.round638HeterochiralSignedBudgetClosedIsFalse
+
+round490ResolvedExternalHelicitySignedBudgetClosedIsFalse :
+  round490ResolvedExternalHelicitySignedBudgetClosed ≡ false
+round490ResolvedExternalHelicitySignedBudgetClosedIsFalse =
+  R638.round638ExternalHelicitySignedBudgetClosedIsFalse
+
+round490ExternalTotalCommutatorZeroPIncludedIsTrue :
+  round490ExternalTotalCommutatorZeroPIncluded ≡ true
+round490ExternalTotalCommutatorZeroPIncludedIsTrue =
+  R631.round631ZeroPBranchIncludedIsTrue
+
+round490ExternalForcingTransversalityClosedIsTrue :
+  round490ExternalForcingTransversalityClosed ≡ true
+round490ExternalForcingTransversalityClosedIsTrue =
+  ExtTrans626.round626ExternalPForcingTransverseClosedIsTrue
+
+round490ExternalR307PairConstructedIsTrue :
+  round490ExternalR307PairConstructed ≡ true
+round490ExternalR307PairConstructedIsTrue =
+  ExtTrans626.round626ExternalR307PairConstructedIsTrue
+
+round490CanonicalR112ResidualWitnessFamilyInstalledIsFalse :
+  round490CanonicalR112ResidualWitnessFamilyInstalled ≡ false
+round490CanonicalR112ResidualWitnessFamilyInstalledIsFalse =
+  R614.round614CanonicalResidualWitnessFamilyInstalledIsFalse
+
+round490A3AndR568HaveSameAmplitudeDegree : Bool
+round490A3AndR568HaveSameAmplitudeDegree =
+  R612.a3AndR568HaveSameAmplitudeDegree
+
+round490A3ToR568IsPureRepresentationCompiler : Bool
+round490A3ToR568IsPureRepresentationCompiler =
+  R612.a3ToR568IsPureRepresentationCompiler
+
+round490A3ToR568RequiresScaleChangingAnalyticContent : Bool
+round490A3ToR568RequiresScaleChangingAnalyticContent =
+  R612.a3ToR568RequiresScaleChangingAnalyticContent
+
+round490CanonicalR503RouteKeepsSignedCrossFineUntilPairing : Bool
+round490CanonicalR503RouteKeepsSignedCrossFineUntilPairing =
+  R612.canonicalR503RouteKeepsSignedCrossFineUntilPairing
+
+round490A3AndR568HaveSameAmplitudeDegreeIsFalse :
+  round490A3AndR568HaveSameAmplitudeDegree ≡ false
+round490A3AndR568HaveSameAmplitudeDegreeIsFalse =
+  R612.a3AndR568HaveSameAmplitudeDegreeIsFalse
+
+round490A3ToR568IsPureRepresentationCompilerIsFalse :
+  round490A3ToR568IsPureRepresentationCompiler ≡ false
+round490A3ToR568IsPureRepresentationCompilerIsFalse =
+  R612.a3ToR568IsPureRepresentationCompilerIsFalse
+
+round490A3ToR568RequiresScaleChangingAnalyticContentIsTrue :
+  round490A3ToR568RequiresScaleChangingAnalyticContent ≡ true
+round490A3ToR568RequiresScaleChangingAnalyticContentIsTrue =
+  R612.a3ToR568RequiresScaleChangingAnalyticContentIsTrue
+
+round490CanonicalR503RouteKeepsSignedCrossFineUntilPairingIsTrue :
+  round490CanonicalR503RouteKeepsSignedCrossFineUntilPairing ≡ true
+round490CanonicalR503RouteKeepsSignedCrossFineUntilPairingIsTrue =
+  R612.canonicalR503RouteKeepsSignedCrossFineUntilPairingIsTrue
+
+round490R571G2ScalarDifferenceSameObjectClosed : Bool
+round490R571G2ScalarDifferenceSameObjectClosed =
+  R613Hermitian.round613G2ScalarDifferenceSameObjectClosed
+
+round490R571G2ReducedToLiteralVectorDifference : Bool
+round490R571G2ReducedToLiteralVectorDifference =
+  R613Hermitian.round613G2ReducedToLiteralVectorDifference
+
+round490R571G2PhysicalPathGradientEstimateClosed : Bool
+round490R571G2PhysicalPathGradientEstimateClosed =
+  R613Hermitian.round613PhysicalPathGradientEstimateClosed
+
+round490R571G2ScalarDifferenceSameObjectClosedIsTrue :
+  round490R571G2ScalarDifferenceSameObjectClosed ≡ true
+round490R571G2ScalarDifferenceSameObjectClosedIsTrue =
+  R613Hermitian.round613G2ScalarDifferenceSameObjectClosedIsTrue
+
+round490R571G2ReducedToLiteralVectorDifferenceIsTrue :
+  round490R571G2ReducedToLiteralVectorDifference ≡ true
+round490R571G2ReducedToLiteralVectorDifferenceIsTrue =
+  R613Hermitian.round613G2ReducedToLiteralVectorDifferenceIsTrue
+
+round490R571G2PhysicalPathGradientEstimateClosedIsFalse :
+  round490R571G2PhysicalPathGradientEstimateClosed ≡ false
+round490R571G2PhysicalPathGradientEstimateClosedIsFalse =
+  R613Hermitian.round613PhysicalPathGradientEstimateClosedIsFalse
+
+round490TerminalOrderedSelfExternalSpacetimeSplitClosed : Bool
+round490TerminalOrderedSelfExternalSpacetimeSplitClosed =
+  R615.round615IntegratedSelfExternalSplitClosed
+
+round490TerminalSeparateSelfExternalBudgetsCompileToR503 : Bool
+round490TerminalSeparateSelfExternalBudgetsCompileToR503 =
+  R615.round615SelfExternalBudgetsCompileToR503
+
+round490TerminalSeparateSelfExternalBudgetsMandatoryForR503 : Bool
+round490TerminalSeparateSelfExternalBudgetsMandatoryForR503 =
+  R615.round615SeparateSelfExternalBudgetsMandatoryForR503
+
+round490CanonicalSingleSignedOrderedBudgetRemainsWeaker : Bool
+round490CanonicalSingleSignedOrderedBudgetRemainsWeaker =
+  R615.round615CanonicalSingleSignedOrderedBudgetRemainsWeaker
+
+round490TerminalSelfSignedSpacetimeBudgetClosed : Bool
+round490TerminalSelfSignedSpacetimeBudgetClosed =
+  R615.round615SelfSignedSpacetimeBudgetClosed
+
+round490TerminalExternalSignedSpacetimeBudgetClosed : Bool
+round490TerminalExternalSignedSpacetimeBudgetClosed =
+  R615.round615ExternalSignedSpacetimeBudgetClosed
+
+round490TerminalOrderedSelfExternalSpacetimeSplitClosedIsTrue :
+  round490TerminalOrderedSelfExternalSpacetimeSplitClosed ≡ true
+round490TerminalOrderedSelfExternalSpacetimeSplitClosedIsTrue = refl
+
+round490TerminalSeparateSelfExternalBudgetsCompileToR503IsTrue :
+  round490TerminalSeparateSelfExternalBudgetsCompileToR503 ≡ true
+round490TerminalSeparateSelfExternalBudgetsCompileToR503IsTrue =
+  R615.round615SelfExternalBudgetsCompileToR503IsTrue
+
+round490TerminalSeparateSelfExternalBudgetsMandatoryForR503IsFalse :
+  round490TerminalSeparateSelfExternalBudgetsMandatoryForR503 ≡ false
+round490TerminalSeparateSelfExternalBudgetsMandatoryForR503IsFalse =
+  R615.round615SeparateSelfExternalBudgetsMandatoryForR503IsFalse
+
+round490CanonicalSingleSignedOrderedBudgetRemainsWeakerIsTrue :
+  round490CanonicalSingleSignedOrderedBudgetRemainsWeaker ≡ true
+round490CanonicalSingleSignedOrderedBudgetRemainsWeakerIsTrue =
+  R615.round615CanonicalSingleSignedOrderedBudgetRemainsWeakerIsTrue
+
+round490A5GlobalPaymentToR503CompilerClosedIsTrue :
+  round490A5GlobalPaymentToR503CompilerClosed ≡ true
+round490A5GlobalPaymentToR503CompilerClosedIsTrue =
+  SignedPayment.a5GlobalPaymentToR503CompilerClosedIsTrue
+
+round490QuantitativePairDifferencePaymentClosed : Bool
+round490QuantitativePairDifferencePaymentClosed =
+  D1b2.quantitativePairDifferencePaymentClosed
+
+round490PhysicalLowerSeparationClosed : Bool
+round490PhysicalLowerSeparationClosed =
+  PairPay.fixedOutputPhysicalLowerSeparationClosed
+
+round490RadialPlueckerDefectWeldClosed : Bool
+round490RadialPlueckerDefectWeldClosed =
+  Adapter.roundCenteredPartnerRadialPlueckerDefectWeldClosed
+
+round490SlotDefectRadialPlueckerLowerBoundClosed : Bool
+round490SlotDefectRadialPlueckerLowerBoundClosed =
+  SlotDefect.roundCenteredPartnerSlotDefectRadialPlueckerLowerBoundClosed
+
+round490R128OrderedDropAloneClosesPhysicalPayment : Bool
+round490R128OrderedDropAloneClosesPhysicalPayment = false
+
+round490IncidenceOnlyCoercivityAdmissible : Bool
+round490IncidenceOnlyCoercivityAdmissible = false
+
+round490ClayPromotion : Bool
+round490ClayPromotion = false
+
+------------------------------------------------------------------------
+-- Proof-bearing status pins.
+------------------------------------------------------------------------
+
+round490FiniteCovarianceCenteringClosedIsTrue :
+  round490FiniteCovarianceCenteringClosed ≡ true
+round490FiniteCovarianceCenteringClosedIsTrue =
+  D1b2.divisionFreePairDifferenceCenteringClosedIsTrue
+
+round490PhysicalCovarianceAttachmentClosedIsTrue :
+  round490PhysicalCovarianceAttachmentClosed ≡ true
+round490PhysicalCovarianceAttachmentClosedIsTrue =
+  D1b2.fixedOutputCovariancePairDifferenceAttachmentClosedIsTrue
+
+round490PairDifferencePaymentCompilerClosedIsTrue :
+  round490PairDifferencePaymentCompilerClosed ≡ true
+round490PairDifferencePaymentCompilerClosedIsTrue =
+  PairPay.fixedOutputPairDifferencePaymentCompilerClosedIsTrue
+
+round490CoherentWorkDifferenceVectorBridgeClosedIsTrue :
+  round490CoherentWorkDifferenceVectorBridgeClosed ≡ true
+round490CoherentWorkDifferenceVectorBridgeClosedIsTrue =
+  WorkBridge.fixedOutputWorkDifferenceVectorBridgeClosedIsTrue
+
+round490AmplitudeIncrementTelescopeClosedIsTrue :
+  round490AmplitudeIncrementTelescopeClosed ≡ true
+round490AmplitudeIncrementTelescopeClosedIsTrue =
+  Adapter.roundCenteredPartnerPhysicalAmplitudeTelescopeClosedIsTrue
+
+round490SlotDefectNormNormalizationClosedIsTrue :
+  round490SlotDefectNormNormalizationClosed ≡ true
+round490SlotDefectNormNormalizationClosedIsTrue =
+  SlotDefect.roundCenteredPartnerCompressedDifferenceIsFourSlotDefectIsTrue
+
+round490R128PolynomialPlueckerIdentityClosedIsTrue :
+  round490R128PolynomialPlueckerIdentityClosed ≡ true
+round490R128PolynomialPlueckerIdentityClosedIsTrue =
+  R128.round128LowOutputTimesHighInputPolynomialIdentityClosedIsTrue
+
+round490ConcreteDistinctIncidenceSlotCollisionConstructedIsTrue :
+  round490ConcreteDistinctIncidenceSlotCollisionConstructed ≡ true
+round490ConcreteDistinctIncidenceSlotCollisionConstructedIsTrue =
+  Collision.roundFixedOutputConcreteDistinctCCCollisionWitnessConstructedIsTrue
+
+round490QuantitativePairDifferencePaymentClosedIsFalse :
+  round490QuantitativePairDifferencePaymentClosed ≡ false
+round490QuantitativePairDifferencePaymentClosedIsFalse =
+  D1b2.quantitativePairDifferencePaymentClosedIsFalse
+
+round490PhysicalLowerSeparationClosedIsFalse :
+  round490PhysicalLowerSeparationClosed ≡ false
+round490PhysicalLowerSeparationClosedIsFalse =
+  PairPay.fixedOutputPhysicalLowerSeparationClosedIsFalse
+
+round490RadialPlueckerDefectWeldClosedIsFalse :
+  round490RadialPlueckerDefectWeldClosed ≡ false
+round490RadialPlueckerDefectWeldClosedIsFalse =
+  Adapter.roundCenteredPartnerRadialPlueckerDefectWeldClosedIsFalse
+
+round490SlotDefectRadialPlueckerLowerBoundClosedIsFalse :
+  round490SlotDefectRadialPlueckerLowerBoundClosed ≡ false
+round490SlotDefectRadialPlueckerLowerBoundClosedIsFalse =
+  SlotDefect.roundCenteredPartnerSlotDefectRadialPlueckerLowerBoundClosedIsFalse
+
+round490R128OrderedDropAloneClosesPhysicalPaymentIsFalse :
+  round490R128OrderedDropAloneClosesPhysicalPayment ≡ false
+round490R128OrderedDropAloneClosesPhysicalPaymentIsFalse = refl
+
+round490IncidenceOnlyCoercivityAdmissibleIsFalse :
+  round490IncidenceOnlyCoercivityAdmissible ≡ false
+round490IncidenceOnlyCoercivityAdmissibleIsFalse = refl
+
+round490ClayPromotionIsFalse : round490ClayPromotion ≡ false
+round490ClayPromotionIsFalse = refl

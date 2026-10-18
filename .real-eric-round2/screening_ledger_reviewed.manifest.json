@@ -1,0 +1,20 @@
+{
+  "applied_decision_count": 50,
+  "candidate_assessment_auto_promoted": false,
+  "decision_counts": {
+    "exclude": 27,
+    "include": 4,
+    "probable": 11,
+    "unresolved": 43954
+  },
+  "decision_overlay": "/home/c/Documents/code/dashi_agda-esd-ledger-check/artifacts/digital-esd/screening/reviewer-decisions-round1.jsonl",
+  "decision_overlay_sha256": "c9efdc35fbf3e6955ae6a2c87d58b42aced7009061fe2c18528ec1c7a880b70a",
+  "denominator_preserved": true,
+  "input_ledger": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.real-eric-round2/screening_ledger.tsv",
+  "input_ledger_sha256": "ab5a62cb9a7d9153c1a1aa9f5aa55c7c8faf0a9c28ebac1a50a9984c27907a7e",
+  "output_ledger": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.real-eric-round2/screening_ledger_reviewed.tsv",
+  "output_ledger_sha256": "269f7c81dfa7276e9c6a4470bf4887056aced517541b3b49169766c66bd41143",
+  "pareto_priority_auto_promoted": false,
+  "record_count": 43996,
+  "schema": "sensiblaw.digital-esd-screening-decision-application.v0_1"
+}

@@ -43,22 +43,22 @@ record ConsumerStatusComparison : Set where
 open ConsumerStatusComparison public
 
 occurrenceIdentitySurvivesContextDescent :
-  Restriction.occurrenceIdentitySurvivesBackwardDescent
+  Restriction.RegionRestrictionBoundary.occurrenceIdentitySurvivesBackwardDescent
     Restriction.canonicalRegionRestrictionBoundary ≡ true
 occurrenceIdentitySurvivesContextDescent = refl
 
 closedChildInteriorNotCopied :
-  Restriction.parentCopiesClosedChildInterior
+  Restriction.RegionRestrictionBoundary.parentCopiesClosedChildInterior
     Restriction.canonicalRegionRestrictionBoundary ≡ false
 closedChildInteriorNotCopied = refl
 
 consumerEquivalenceNotWorldIdentity :
-  Stabiliser.observationalEquivalenceMeansWorldIdentity
+  Stabiliser.ConsumerStabiliserBoundary.observationalEquivalenceMeansWorldIdentity
     Stabiliser.canonicalConsumerStabiliserBoundary ≡ false
 consumerEquivalenceNotWorldIdentity = refl
 
 fineAlternativesSurviveConsumerQuotient :
-  Stabiliser.residualWorldOrbitRetainsFineAlternatives
+  Stabiliser.ConsumerStabiliserBoundary.residualWorldOrbitRetainsFineAlternatives
     Stabiliser.canonicalConsumerStabiliserBoundary ≡ true
 fineAlternativesSurviveConsumerQuotient = refl
 

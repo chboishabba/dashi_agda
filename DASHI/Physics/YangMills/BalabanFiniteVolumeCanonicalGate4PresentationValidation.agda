@@ -1,0 +1,21 @@
+module DASHI.Physics.YangMills.BalabanFiniteVolumeCanonicalGate4PresentationValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanFiniteVolumeCanonicalGate4PresentationExact as Canonical
+
+round283StepConstructionClosed :
+  Canonical.canonicalGate4Round283StepCompilerLevel ≡ machineChecked
+round283StepConstructionClosed = refl
+
+selectedProbabilityFamilyConstructionClosed :
+  Canonical.canonicalGate4SelectedProbabilityFamilyCompilerLevel ≡ machineChecked
+selectedProbabilityFamilyConstructionClosed = refl
+
+finiteExpectationSameObjectRemainsPhysical :
+  Canonical.finiteVolumeExpectationCanonicalReopeningSameObjectLevel ≡ conditional
+finiteExpectationSameObjectRemainsPhysical = refl
+
+finiteRGDisintegrationRemainsPhysical :
+  Canonical.finiteRGCoarseFibreDisintegrationLevel ≡ conditional
+finiteRGDisintegrationRemainsPhysical = refl

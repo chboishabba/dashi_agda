@@ -1,0 +1,972 @@
+[PAGE 1]
+International Journal of Early Childhood Environmental Education, 3(1), p. 54 
+ 
+ 
+ 
+International Journal of Early Childhood Environmental Education, 3(1) 
+Copyright © North American Association for Environmental Education  
+ISSN:  2331-0464 (online) 
+ 
+ 
+Children as “Solutionaries”:  
+Environmental Education as an Opportunity to Take Action 
+ 
+Elizabeth O. Crawford 
+University of North Carolina Wilmington 
+ 
+Nancy Luke 
+Western Carolina University 
+ 
+William Van Pelt 
+HeartGift, Austin, Texas 
+ 
+Submitted October 3, 2014; accepted September 30, 2015 
+ 
+Abstract 
+ 
+“Do Y ou Want Paper or Plastic ?” An Inquiry into Single -Use Grocery Bags is an inquiry -based, solutions -focused 
+environmental education unit developed for the U.S. Fund for UNICEF. Field -tested in two U.S. southeastern 
+regions, the unit enga ges students as informed change makers  who investigate the production, consumption, and 
+disposal of single -use, disposable grocery bags. Based upon their inquiries, students become empowered as 
+“solutionaries,” or individuals who plan and implement action steps that lead to a sustainable futur e. Results from 
+the curriculum pilot offer support for the importance of interdisciplinary environmental education in the 
+elementary setting. 
+ 
+Keywords: curriculum, inquiry, environmental sustainability, plastic pollution, global citizenship, STEM  
+ 
+CURRICULUM OVERVIEW 
+ 
+Using large format photography , “Plastic Bags ” by artist Chris Jordan (2007) (see Figure 1 ) depicts our mass 
+consumption of single -use bags  - 60,000 every five seconds in the U.S. alone . Statistics like these pertain to the 
+study of everyday “stuff,” including how a product is made, who invented it, the raw materials used, why and how 
+it changes over time, and whether there is a more sustainable process to meet our human wants and needs.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 1:  Chris Jordan’s (2007) “Plastic Bags1” 
+                                                        
+1 This is for online journal use, one issue only. For any subsequent uses, permission must be obtained. Credit: Photo by Chris 
+Jordan, www.chrisjordan.com.  
+
+[PAGE 2]
+International Journal of Early Childhood Environmental Education, 3(1), p. 55 
+ 
+ 
+A Framework for K -12 Science Education  (National Research Council , 2012) reinforces the interrelated nature of 
+science, technology, engineering, and mathematics (STEM), and inspires learners to create solutions to 21st century 
+global challenges. Engaging in scientific inquiry about the materials economy fosters learning in all three 
+dimensions of the NRC framework : (a) practices (scientist behaviors); (b) crosscutting concepts (those that are 
+transdisciplinary and apply to all domains of science); and (c) disciplinary core ideas  (key ideas that focus learning 
+and investigation in the physical, life, and earth space  sciences, as well as engineering, technology, and 
+applications of science) . Specifically, students analyze cause and effect relationships in interdependent local and 
+global systems, gather and analyze data, use technology in authentic ways,  and explore the design and 
+development of solutions to problems . As students weigh the intended (and often unintended) effects of 
+innovations like single -use, disposable grocery bags, they conclude there is no “best” solution, but rather many 
+solutions to solve complex, global issues.   
+ 
+This article details the design and field -testing of an inquiry -based, solutions -focused environmental curriculum 
+unit entitled “ Do You Want Paper or Plastic ? An Inquiry into Single -Use, Disposable Grocery Bags. ”  Developed on 
+behalf of TeachUNICEF , the Education Division of the U.S. Fund for UNICEF,  this unit addresses UN Millennium 
+Development Goal (MDG) #7 Ensure Environmental Sustainability  (United Nations, n.d.).  Importantly, “Do You 
+Want Paper or Plastic ?” affords “opportunities for young learners to engage in exercises of ecological citizenship,” 
+says Dr. Jay Shuttleworth, a scholar of environmental sustainability at Teachers College, Columbia University.  He 
+continues: 
+ 
+This carefully considered curriculum links being informed about sustainable living with matters of 
+civic responsibility. Through potentially existential inquiries about where consumer goods “come 
+from” and discarded items “go,” this curriculum also creates  the potential for students to 
+recognize the interconnectedness of the natural world. Most importantly, the lessons may lead 
+participants-- with minimal prodding from the teacher -- to conclude that the answer to “paper or 
+plastic?” may be derived from a di fferent source altogether (like, “I brought my own bags.”).  
+Thus, the instructional objective of students as “solutionaries” offers possibilities to challenge 
+assumptions about consumer habits, and as a result, forge new paths of understanding and 
+action-taking. (J. Shuttleworth, personal communication, June 24, 2015). 
+ 
+Informal science educator and doctoral candidate at the University of Maryland College Park, Emily Hestness, 
+agrees. “Do You Want Paper or Plastic ?” helps to meet the “growing need for curricular materials that help 
+educators to foster the competencies, knowledge, dispositions, and actions necessary for en vironmentally literate 
+citizens (E. Hestness, personal communication, June 24, 2015). It also easily connects to existing curriculum 
+standards (e.g., Common Core State Standards, Next Generation Science Standards), says Dr. Scott Morrison, 
+Assistant Professor at Elon University with a specialization in environmental and ecological studies (S. Morrison, 
+personal communication, June 29, 2015). 
+ 
+Intentionally flexible in design, “Do You Want Paper or Plastic ?” is adaptable to diverse early and elementary 
+grades and contexts, as teachers consider students’ prior knowledge, experiences, and interests in exploring 
+sustainability issues and possible solutions to resolve them. The focus on student inquiry is key, as it “ allows 
+teachers to adjust lessons based on student knowledge, ability, and interest ” (S. Morrison, personal 
+communication, June 29, 2015). Further, the content is relevant to t he lives of students. Morrison 
+continues:  “[Students] all consume products and participate in what Annie Leonard calls ‘the materials 
+economy.’  What they see, use, and throw away everyday becomes part of the curriculum.”   
+[PAGE 3]
+International Journal of Early Childhood Environmental Education, 3(1), p. 56 
+ 
+ 
+ 
+Figure 2. Photograph of beach plastic on a Taiwanese shore (Terry, 2014). 
+ 
+Finally, although  “Do You Want Paper or Plastic ?” focuses on one specific issue, the inquiry design allows the 
+content to be easily substituted. Hestness explains, “[this resource’s] approach may be applied to the investigation 
+and analysis of myriad environmental issues of personal rel evance and interest to learners” (E. Hestness, personal 
+communication, June 24, 2015).  Morrison concurs, adding “ the inquiry-based structure is a model  for other units 
+on sustainability, so the use of the guide extends beyond the paper and plastic bag issue” (S. Morrison, personal 
+communication, June 29, 2015). 
+ 
+RATIONALE 
+ 
+As children develop as learners and thinkers from birth through high school, it is their teachers (including parents) 
+who help shape their understanding of the world directly around them and, by extension, the world as a whole. 
+This understanding is multifaceted and includes understandings related to the natural world  and the interaction 
+between humankind and the environment (Duhn, 2012; Pearson & Degotardi, 2009). It is important, as 
+Christenson (2004) notes, for teachers to help young children develop critical thinking about their world by 
+teaching them that human in teractions and decisions that impact the environment are made for both diverse and 
+complex reasons. By examining and understanding these cause and effect relationships, children can develop the 
+ability to make more informed and deeply considered decisions , not only about the environment but , how they 
+view and interact with the choices that others make.  Christenson further states that for young children 
+“environmental education (EE) must also help develop the social knowledge and critical thinking skills th at are 
+necessary for examining diverse viewpoints on environmental issues” (p. 3).  
+ 
+While many early childhood and elementary teachers affirm the need to teach EE, some are reluctant to do so for 
+a variety of reasons including concerns with covering potent ially controversial content, frightening students with 
+exploration of destructive human or natural events, or potentially upsetting parents (Christenson, 2004; Duhn, 
+2012). “Too many teachers leave students feeling helpless in the face of environmental destruction,” explains 
+Morrison (S. Morrison, personal communication, June 29, 2015).  Research supports this notion. As Özsoy and Ahi 
+(2014) studied the drawings of elementary c hildren depicting the current and future state of the environment, for 
+example, they found that children’s perceptions ranged from hopeful to bleak. What may be inferred from these 
+findings and from others ( e.g., Davis, 2009) is that young children have a beginning context for understanding and 
+representing the environment yet there is also a need to help children engage in exploration and inquiry so that 
+they may more deeply comprehend environmental issues such as sustainability, recycling, and social acti on.  
+Instead of overwhelming students, “Do You Want Paper or Plastic? ” is designed to empower students to consider 
+the positive differences they can make.  
+ 
+
+[PAGE 4]
+International Journal of Early Childhood Environmental Education, 3(1), p. 57 
+ 
+ 
+The need to address EE using effective and innovative approaches is  indeed reflected throughout the world (Conde 
+& Sanchez, 2009; Dimopoulos, Paraskevopoulos, & Pantis, 2009; Sagy & Tal, 2015) as schools, teachers, and 
+educational systems turn their focus to developing and implementing meaningful and authentic integrated units o f 
+study to address topics related to exploring, understanding, and caring for our global resources and environment. 
+Dimopoulos, Paraskevopoulos, and  Pantis (2009) field-tested a module for young children that focused on 
+endangered species in protected area s with positive results affirming the use of this model for future EE units of 
+study. Sagy and  Tal (2015) presented a landscape view of EE in Israel’s schools looking at both historical and 
+current practices and encouraging increased commitment from system s and teachers to integrate environmental 
+education in the curriculum. 
+ 
+Further, Conde and Sanchez (2010) investigated the influence, effectiveness and efficiency of environmental 
+education using an eco -audit approach in 13 primary and pre -primary Spanish schools. Their findings gathered via 
+participatory action research methodology indicated progress in successful integration of EE but also the need for 
+further research into the "treatment of the content, the preparation of materials, [and] the motivation and habits 
+and attitudes of the pupils" (p. 491).  Additionally, conducting research on the potential of EE curricula to positively 
+impact the hearts and minds of young learners with regard to the environment is specifically needed. Research 
+studies of thi s kind are gradually increasing , but as Hardy (2011) asserts, there is a continued need for empirical 
+and robust testing of EE curricula's effectiveness in "cultivating responsible environmental behavior and other 
+components of environmental literacy (knowledge, affect, and skills)" (p.1). 
+ 
+In another study, Forbes and Zint (2010) found that certain elements must be in place for elementary teachers to 
+strengthen and develop their beliefs about and practices related to the power of inquiry to support childre n's 
+learning about the environment. One of these factors was access to appropriate and meaningful EE curriculum 
+materials. While there exist many curricula that address topics inherent in EE , such as sustainability and social 
+action, what makes “Do You Want Paper or Plastic? ” unique and  particularly helpful for teachers of early and 
+elementary learners  is the natural integration of many essential ideas and practices that incorporate multiple 
+subject areas.  While other curricula may include some importan t knowledge, skills, and dispositions related to 
+current educational practice, including EE, this unit seeks to inclusively weave together essential 21 st century skills 
+(Partnership for 21st Century Skills, 2009) including: inquiry (e.g. , research processe s, critical thinking, 
+collaboration, and problem solving); multimodal, environmental, and global literacy; environmental awareness of 
+the interdependence of all living things; and the authentic and developmentally appropriate use of technology to 
+represent knowledge and understanding.  
+ 
+Resources were indeed purposefully selected in the development of “ Do You Want Paper or Plastic? ” As 
+Christenson (2004) found in her action research with fellow elementary teachers , using quality children’s literature 
+was an effective strategy in teaching multiple perspectives and critical thinking about the environment including 
+issues such as recycling. “Do You Want Paper or Plastic ?” includes high quality children’s literature thr oughout to 
+scaffold students’ ability to take multiple perspectives and their understanding of concepts related to the materials 
+economy and the positive and negative effects of innovations on humans, animals, and the environment, as 
+highlighted in Table 1 (see next page). 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[PAGE 5]
+International Journal of Early Childhood Environmental Education, 3(1), p. 58 
+ 
+ 
+Table 1 
+Sample Descriptions and Applications of Children’s Literature in “Do You Want Paper or Plastic”? 
+ 
+ 
+Book Title 
+ 
+Brief Description and Application 
+ 
+ 
+Browne, A. (1998). Voices in the park. 
+New York: DK Publishing. 
+ 
+The same story is told from four different perspectives illustrating to the 
+reader that there is more than just one way to interpret an event, 
+situation, or setting. Students can discuss and write about examples from 
+their own lives in which they saw multi ple perspectives at play. Younger 
+children can explore and share the differences between fact and opinion 
+and accept that they may differ from their peers in how they feel or think 
+about a particular situation or idea related to the environment.   
+ 
+Claybourne, A. (2007). The story of 
+inventions. Tulsa, OK: EDC Publishing. 
+ 
+The history and impact of a variety of inve ntions (e.g. spectacles, jeans, 
+computers) is described with a unifying theme that innovation has an 
+effect on our society and the way we live.   Students can research other 
+inventions as part of their inquiry and can also brainstorm and discuss 
+inventions that have impacted their lives and the world around them. 
+Younger children can collaboratively create a class picture book choosing 
+and drawing an invention and then listing one way it helps them and one 
+way it may negatively affect their life or their environment.  
+ 
+Deedy, C.A., & Seeley, L. L. (1994). 
+Agatha’s feather bed: Not just 
+another wild goose story. Atlanta: 
+Peachtree Publishers. 
+ 
+ 
+ 
+In this children’s book the theme of “ Everything comes from something, / 
+Nothing comes from nothing ” is reinforced in an engaging and humorous 
+story. Teachers can use this book as a springboard for a discussion on 
+renewable or non -renewable resources. For yo unger children, photos of 
+renewable and non -renewable resources can be sorted as part of a 
+learning station or guided small group activity.  
+  
+ 
+In addition to understanding and engaging in inquiry about the environment, children should also examine and 
+discover ways to take action for making their world a healthier and more sustainable place (Locke, 2009). Through 
+investigating case studies of pra ctices and attitudes toward consumption among elementary Dutch children, 
+Kopnina (2013) found that some students, particularly those of lower socioeconomic status, "exhibited less 
+awareness of environmental impact of consumption and less belief in their ow n agency in bringing about positive 
+change" (p. 131) while others were able to "perceive the link between (over) consumption and [the] environment" 
+(p. 133). The variability of these results may indicate a need for focused early childhood and elementary cu rriculum 
+that encourages not only awareness but also support for students to make changes in their individual behavior as 
+well as take social action to improve the environment. Strong environmental education curricula that are cross -
+disciplinary as well as  socially conscious can be supported by children’s literature as stated above (Christenson, 
+2004), as well as by the innovative uses of digital technologies (Willis, Weiser, & Kirkwood, 2014). In each lesson, 
+“Do You Want Paper or Plastic ?” offers sample t echnology applications for use by teachers and students, as 
+appropriate based on students’ ages and context. Sample digital resources and their possible applications are 
+detailed in Table 2. 
+ 
+ 
+ 
+[PAGE 6]
+International Journal of Early Childhood Environmental Education, 3(1), p. 59 
+ 
+ 
+Table 2 
+Sample Descriptions and Applications of Digital Resources in “Do You Want Paper or Plastic”? 
+ 
+ 
+Digital Resource 
+ 
+Brief Description and Application 
+ 
+ 
+Animoto: Video creation 
+(https://animoto.com/) 
+ 
+Children can upload images and add captions, audio narration, and music to 
+create an online video that shows what they have learned as a result of their 
+inquiry and/or to support ways in which they “take action”. 
+ 
+Delicious: Social bookmarking 
+(https://delicious.com/) 
+ 
+Teachers and students can collaboratively store and publically access web 
+sites that guide and support their inquiry in one online location. Links can 
+also be categorized and annotated based on topics related to their study of 
+sustainability and the environment.  
+ 
+Glogster: Online posters 
+(http://edu.glogster.com/) 
+ 
+This tool supports students to create digital, interactive posters on a website 
+that specifically targets K -12 classrooms. Children can embed and link to 
+text, images, audio and video files to represent content, ideas, and 
+perspectives related to their research. 
+ 
+Padlet: Wonder Wall online 
+(https://padlet.com/)  
+ 
+Collections of student questions or “wonderings” as they begin and 
+throughout the unit can be posted and collected either publically or behind 
+password protection on this digital board.  The web link to students’ 
+questions can also be shared with parents. 
+ 
+Lastly, Davis (2009) asserts the need for more research related to environmental education and early childhood 
+including investigat ing the effectiveness of multidisciplinary and social action oriented curricula, “exemplars of 
+practice” (p. 235) such as the field-tested unit of curriculum described in this article. 
+ 
+THE CURRICULUM 
+ 
+“Do You Want Paper or Plastic ?” includes six lesson plans with recommended extension activities. Scaffolded using 
+Kath Mu rdoch’s (1998) inquiry model , students learn about the origin of common goods, the effects of 
+consumption on living things and the environment, and why governing bodies worldwide have im posed 
+restrictions on single -use plastic bags. The unit follows the philosophy of solutionary education, defined by the 
+Institute for Humane Education (n.d.) as: 
+ 
+Someone who identifies inhumane, unsustainable, and exploitative systems and then develops 
+practical, effective, and visionary solutions, both large and small, to replace them with those that 
+are restorative, healthy, and just. Solutionaries bring their knowledge  and skills to bear on 
+pressing and entrenched challenges in an effort to create positive changes for all people, animals 
+and the earth. (paras. 1-2) 
+ 
+Making informed decisions regarding consumption habits is deemed a civic responsibility and aims to empow er 
+children as individuals who plan and implement action steps that lead to a sustainable future. This unit outlines 
+how educators may implement inquiry -based teaching and learning about the specific issue of single -use, 
+[PAGE 7]
+International Journal of Early Childhood Environmental Education, 3(1), p. 60 
+ 
+ 
+disposable grocery bags; however, any material good and its related environmental and human health issues can 
+be researched, analyzed, and acted upon by students. 
+ 
+First, we developed a curriculum framework stru ctured around the Murdoch inquiry  model, outlining broa d, open-
+ended questions and enduring understandings, or transferable “big ideas.” Afterwards, we created topic -specific 
+questions related to the specific issue of single-use grocery bags (Table 3 ). While the sequence of these questions is 
+intentional and guide students’ investigations and decision-making, they also afford flexibility. The unit neither intends 
+to answer questions for students nor to instruct them how to develop solutions to the issues presented. Students are 
+encouraged to delve deeply into the problems,  to draw their own conclusions, and to make decisions regarding  how 
+they may be “solutionaries”. 
+ 
+Table 3 
+“Do You Want Paper or Plastic?” Curriculum Framework 
+ 
+ 
+Lesson  
+ 
+Enduring Understanding 
+ 
+Overarching Questions 
+ 
+Topical Questions 
+ 
+Lesson 1: “Tuning 
+In” to Consumption 
+ 
+The goods we purchase are made 
+from limited natural resources; 
+therefore, we must make 
+informed, thoughtful choices as 
+consumers. 
+ 
+Where do the goods come 
+from? How are goods 
+produced and distributed? 
+ 
+What are paper and plastic bags 
+made from?  How are they 
+produced?  How are bags 
+distributed to local grocery stores? 
+Lesson 2: “Finding 
+Out” about Human 
+Innovation 
+Scientific discoveries and 
+technological innovations affect 
+the way society functions. These 
+changes may result in predictable 
+/unpredictable, positive / negative 
+effects on living things and the 
+environment. 
+How do advancements in 
+science and technology 
+affect society? 
+What led to the production of 
+paper and plastic bags?  
+How have they evolved over time 
+and why? What are the perceived 
+benefits and drawbacks of paper 
+and plastic bags to society?  
+Lesson 3: “Sorting 
+Out” Diverse 
+Perspectives 
+People have diverse perspectives 
+that may explain the behaviors of 
+individuals and groups. Sometimes 
+these different points of view lead 
+to conflict. 
+What does it mean to have 
+a perspective or point of 
+view? How does one’s 
+perspective affect or 
+influence one’s behaviors? 
+ 
+What perspectives do stakeholder 
+groups have regarding the 
+production, consumption, and 
+disposal of paper and plastic bags? 
+Lesson 4:  
+“Going Further”: 
+Local to Global Bag 
+Politics 
+Governing bodies affect the 
+choices or decisions we make as 
+consumers through the 
+implementation of laws and 
+policies.  
+What is the role of the 
+government in regulating 
+the production, distribution, 
+consumption, and disposal 
+of products? 
+What local, national, and 
+international laws and policies 
+have been passed regarding paper 
+and plastic bags? 
+Lesson 5: Making 
+Conclusions, Making 
+Informed Choices 
+Being an informed citizen is a civic 
+responsibility. 
+ 
+What are the effects of 
+consumerism on humans, 
+other living creatures, and 
+the environment? 
+What happens when paper and 
+plastic are thrown away? Where is 
+“away”? What are the effects of 
+disposal? 
+Lesson 6:  
+“Solutionaries” 
+Taking Action 
+An individual’s choices and 
+actions can have a positive impact 
+on others and the environment. 
+Anyone can be a “solutionary”! 
+ 
+How can individuals, groups, 
+and nations work together 
+to solve problems? 
+In what ways can I make positive 
+choices regarding consumption 
+of goods to lessen my impact on 
+the local environment and the 
+entire planet?   
+ 
+[PAGE 8]
+CHILDREN AS “SOLUTIONARIES” 
+ 
+ 
+ 
+61 
+The Inquiry Model 
+ 
+Each lesson plan includes two parts. Part I builds interdisciplinary background knowledge. Part II outlines the 
+teacher’s facilitation of the inquiry model that we made into a student-friendly poster to be displayed in the 
+classroom (Figure 3 ). Subsequent sections of this paper describe each stage and its relationship to the content 
+under study . Reflective of the unit’s flexible design, the teacher may determine students have ad equate prior 
+knowledge and skills addressed in Part I and proceed to Part II.  Within each lesson, a variety of resources are 
+provided, including sample children’s literature and technology tools for teaching and learning, as explained 
+previously. 
+ 
+Field-Testing the Inquiry 
+ 
+We field-tested the unit in six third -grade classrooms located in two regions: coastal Georgia and western North 
+Carolina. The classroom teachers taught the lessons and were asked to provide written feedback regarding their 
+effectiveness, as well as to suggest improvements. Each student maintained an inquiry journal and completed 
+authentic projects, offering insights about their mastery of the unit goals and objectives.  
+ 
+ 
+Figure 3. Kath Murdoch inquiry cycle. 
+
+[PAGE 9]
+International Journal of Early Childhood Environmental Education, 3(1), p. 62 
+ 
+ 
+ 
+ 
+ 
+Pre-Assessment: Causes and Effects of Environmental Issues 
+ 
+Prior to beginning the unit, each student completed a pre -assessment table of knowledge and perceptions in his or 
+her inquiry journal. During the pilot, it was evident that most third graders understood cause and effect  
+relationships and could identify specific examples that related to human -environment interactions. This allowed 
+teachers to begin Lesson 1 without introducing or reviewing this overarching concept as it is woven throughout the 
+unit. Table 4 highlights a c ompilation of written responses from both regions. (Note: To maintain the integrity of 
+the students’ original voices, their words are presented throughout the manuscript in the original spelling and 
+grammar).  
+ 
+Table 4. 
+Student Pre-Assessment of Human-Environment Cause and Effect Relationships 
+ 
+Issue or Problem What Caused It? What are the Effects? 
+Littering 
+Oil spills 
+Paper bags 
+Animals coming into cities 
+ 
+Deer are overpopulating 
+Cutting down trees 
+Wasting water 
+Gasses/pollution 
+Fire 
+No trees 
+Damage 
+Bad water 
+Pollution 
+Throwing trash in environment 
+Explosion 
+Grocery shopping 
+Humans tearing down habitats 
+Not too many predators 
+People 
+Careless people 
+Driving car 
+Matches 
+ 
+Too much paper made 
+Hurricane or tornado 
+Lead 
+Oil spill 
+Harm the environment 
+Animals die 
+Killing trees 
+Animals coming closer into cities and 
+towns 
+Deer create big troubles 
+Less oxygen 
+Less water to drink 
+Harm to animals 
+Burn 
+No habitat for animals 
+The world world 
+Getting sick 
+Oil in the water 
+ 
+ 
+Lesson 1: “Tuning In” to Consumption  
+ 
+ 
+Everything comes from something, 
+Nothing comes from nothing. 
+Just like paper comes from trees, 
+And glass comes from sand. 
+— Carmen Agra Deedy 
+(Excerpt from Agatha’s Featherbed: Not Just Another Wild Goose Story) 
+ 
+ 
+Prompted by common household items such as canned goods an d shampoo bottles, students explore the origin of 
+everyday products. Where have you seen these items? How are they used? What do you know about how they are 
+made? They discover that all goods have a story or a life cycle—how they are manufactured or produced, shipped 
+or distributed, and used and disposed of by consumers. At their basic, raw level, all products are made from 
+natural resources. Following a teacher-guided discussion and a read -aloud such as Agatha’s Featherbed by Carmen 
+Agra Deedy  and Laura L. Seeley (1994) , students learn whether the natural resources used to make goods  are 
+renewable or non-renewable. They can then create a graphic organizer such as a T -chart using renewable and non-
+[PAGE 10]
+International Journal of Early Childhood Environmental Education, 3(1), p. 63 
+ 
+ 
+renewable as headings and then list the resources in what they think is the correct column . Feedback from the 
+pilot indicated that most students categorized resources similarly, labeling trees as non-renewable. Although most 
+trees can be classified as renewable, th e students were indeed correct: some trees do take longer to regrow than 
+humans currently use them. This resulted in our revision of the final unit, clarifying that some natural resources are 
+both renewable and non-renewable.  
+ 
+In Part II, students begin their inquiry by “tuning in.” The teacher displays a paper bag and a plastic bag. Students 
+record what they think they know and what their wonderings are about this issue in their inquiry journals. The 
+teacher can also designate wall space within the classroom, often referred to as a “Wonder Wall,” on which 
+students post their questions or “wonderings” on sticky notes. These notes , with their questions, serve to support 
+and document their investigations.  Sample student “wonderings” from the pilot included: 
+ 
+ Why do people litter and hurt our environment? 
+ What will happen if we keep littering? 
+ How many trees die to make paper, and how many animals die because of plastic in the ocean and on 
+land? 
+ What is plastic made of? 
+ Is paper better than plastic? 
+ How you could destroy plastic better, so it does not hurt the environment. 
+ I wonder what if we lose trees and the oils, what will happen to earth?  
+ I whant to know how we  can make sure people do not wa ist paper or plastic because if you wa ist paper 
+and plastic for something really waistful and then throw it away we wouldn’t have a lot of paper or plastic, 
+and then we won’t have a lot of trees for paper. 
+ I want to find out how many things that are in the trash, that are supposed to be rycicled. 
+ 
+Students’ questions focused their research throughout the inquiry and were revisited in each lesson.  
+ 
+Lesson 2: “Finding Out” about Human Innovation  
+ 
+The second lesson builds students’ understanding of the production of goods with a focus on why new goods are 
+made to replace older products or ideas. By reading books like The Story of Inventions (Claybourne & Larkum, 
+2007), students discover the intentional and unintentional co nsequences of human innovation . They record 
+reflections to questions such as: Is a new discovery or technology always better than that which it replaces? Why or 
+why not ?  Student responses suggested that innovations like iPads were  overall positive, but that not all 
+technologies improve human life. For example, one student wrote, “Som people like books better than nooks.”  
+During Part II, students participated in small research groups, taking notes from a variety of print -based and digital 
+sources that were saved on a class social bookmarking account (Figure 4). 
+ 
+Whereas most students focused their research on commonly used technology tools, others researched the specific 
+innovation of paper and plastic bags. Handwritten notes based on print -based and digital research included: 
+ 
+ First plactic sandwitch bag was made in 1957. Be tween 25 and 30 percent of packing for bread is plactic. 
+Only 1 to 2% of plastic are getting recycled in the USA. Paper is better.  
+ Approx. 380 billon bags are used in the united states every year. That’s more than 1,200 bags per year. In 
+1852 paper bags were made 1852-2012 In 1957 plastic bags were made, 1957-2012 
+ 1957- First plastic sandwich is made. 1966 - Between 25 and 30 percent of packing for bread is plastic. 
+1969- New York City begins collecting garbage in plastic bags. 1974 - Retail giants sears and J.C. Penny 
+switch to plastic shopping bags. !977 - Super markets begin to say: paper or plastic? 1994 - Denmark creats 
+firs plastic bag tax. 1997 - Over 80% of all bags used are plastic. 2002 - Ireland interduses the worlds first 
+consumer paid plastic bag tax. 
+[PAGE 11]
+International Journal of Early Childhood Environmental Education, 3(1), p. 64 
+ 
+ 
+ There are diffrant plastic bags and are used for many purposes. In 1996 over 80% of all bags used are 
+plastic. In 1957 the first sandwich bag was made. Approx. 380 billion plastic bags are used in the United 
+States every year. That's more than 1,200 bags per US resident, per year. 
+ 
+Early in these investigations, students determined the complexity of human innovations and how they can result in 
+both beneficial and harmful impacts on humans, animals, and the environment.  
+ 
+ 
+Figure 4. Georgia (left) and North Carolina (right) third grade student reflections on human innovation.  
+ 
+Lesson 3: “Sorting Out” Diverse Perspectives  
+ 
+In this third lesson, students’ skills in perspective -taking are enhanced through reading and discussing a work of 
+fiction, such as Voices in the Park  (Browne, 1998), relating point of view and author’s voice to stakeholder 
+perspectives. By being introduced to a variety of persp ectives, students begin to sort out  their research findings 
+and to validate sources of information as they continue their investigations. They also reflect on their feelings 
+during the inquiry, determining whether and how they have changed. Contrary to the  lesson’s focus on flexible 
+thinking, the majority of students shared that their feelings remained constant, with most expressing persistently 
+negative perceptions of plastic. “I still think paper is better because it decomposes quicker and paper is made o ut 
+of trees and uses a renewable resource,” one recorded in her journal. Another wrote:  
+ 
+I feel like paper & plastic are two very very different things. [Have my feelings changed? Why or 
+why not?] No, because I still lik paper much much more. I like paper more because it is better for 
+the envirerment and decomposses faster. 
+ 
+Another student supported this belief: “My feelings haven’t changed. I still think plastic is worse.” Some admitted 
+to feeling affirmed by their unchanged perspectives. For example, one wrote: “I feel great about what I’ve learned. 
+My feelings have not changed. All of our research is leading to paper.” Unaltered perception s aside, another 
+
+[PAGE 12]
+International Journal of Early Childhood Environmental Education, 3(1), p. 65 
+ 
+ 
+explained that research has been helpful because “I have bin learning many more ways paper is better than 
+plastic.”  
+ 
+A few students expressed being up set by what they were learning ( even if feelings remained the same ). For 
+example, one student wrote, “I feel sad because some animals died. My feelings haven’t changed.” Another 
+shared: 
+ 
+I am mad a bout what I have been learning. People are littering way too much. A lot of trash is 
+going into the ocean and killing animals.  My feelings have not changed because I still think paper 
+is better. 
+ 
+In sum, while a few students in each class did express changing their perspectives as a result of the inquiry (e.g., 
+“My feelings have changed a little bit because I didn’t recycle and used to use plastic bags”), the majority 
+expressed unchanged beliefs. This finding suggests, perhaps, that some students may be less open to new 
+information that changes their existing core belief structure about the environment and issues of sustainability. 
+ 
+Lesson 4: Going Further - Local to Global Bag Politics  
+ 
+Students go further  in their inquiry by learning how local, national, and international groups have responded to 
+this issue of single -use, disposable grocery bags. The child-friendly version of the documentary film Bag It! (Hill & 
+Beraza, 2010)  and websites such as ChicoBag (https://www.chicobag.com/track-movement) (2014) allow one to  
+“Track the Movement” around the world. Students conclude how complex, controversial, and ever evolving  are 
+environmental concerns, economic systems, and politics. Through collaborative research, students discover that 
+policies set in place by governing bodies affect consumers’ choices.  During the pilot, many students expressed 
+disdain for taxes and regulations, such as fees imposed on single -use grocery bags. Sample written comments 
+included: 
+ 
+ It is not fair to other people to get charged for what they buy becquse they will run out of money. 
+ We should be able to use what we want to do! Government you stink.  
+ It’s not fair to us. Because maybe we can't pay that much. 
+ We should be alould to use plastick bags. 
+ I dont think it is fair because some people need bags and dont want to pay 10 cent.  
+ 
+Other students appeared to support governmental regulations when human activity causes harm. For example, 
+one wrote that bags “can get in the ocean or kill an imals.” Another agreed:  “[the government] may place a ban 
+because it is polluting the envirment.” Finally, one student specifically referenced the role of government in 
+protecting human safety:  “People throw their single -use plastic bag on the road and could get cought in other 
+people on the road and could reck.” 
+ 
+Lesson 5: Making Conclusions, Making Informed Choices  
+ 
+Drawing upon  their research -based findings and reflections , students begin to make conclusions  regarding the 
+issue under investigation. They learn about human rights by watching Cartoons for Children's Rights (UNICEF, 2004) 
+and discover their related responsibilities to one another and  to the environment. Students reflect upon how their 
+ideas and feelings have changed throughout the inquiry, ultimately deciding upon what is most essential to 
+communicate with others. Conclusions made by students during the pilot varied, some citing specific statistics they 
+wanted to share, others explaining the negative effects of both paper and plastic bag production and disposal. 
+Sample written statements included: 
+ 
+ Both Plastic and PaPer are bad because Plastic is bad for the enviromen and PaPer cuts trees and we 
+would not have any oxshugen and we will die. 
+[PAGE 13]
+International Journal of Early Childhood Environmental Education, 3(1), p. 66 
+ 
+ 
+ Americans use about 100 billion plastic bags per year. Paper bags are better for the enviroment. Paper 
+goes through a better prosses of recycling. 
+ I think we should put a ban on plastic. Using a high quality bad helps stop you from using disposeble begs 
+each year I think we should have all of those rights from the story. 
+ 
+Several students commented specifically on the inquiry process, calling it “fun,” whereas others elaborated: 
+“Research is inportant because you look things up and you get to know more about paper and plastic. And keeping 
+our enviroment safe and clean! ” We were pleased to learn that many students expressed awar eness that being 
+informed is an essential part of one’s civic duties. 
+ 
+Lesson 6: “Solutionaries” Taking Action  
+ 
+In this culminating lesson, students determine how they can become change agents . Inspired by “solutionaries” 
+worldwide, students review a list of possibilities in their inquiry journals , such as “design a poster by hand or using 
+technology (e.g., Glogster )” or “write a script and create a video (e.g., Animoto) to promote awareness.” Students 
+decide how they will take action. The North Carolina third graders chose among the options, some crafting a sign -
+up sheet to “join the environment club” and collecting peers’ signatures. Unfortunately, due to time constraints at 
+the end of the school year  and standardized testing in the 3 rd grade, they were unable to implement their plan. In 
+contrast, through a coordinated effort of the teachers, students, and parents in Georgia , the school participated in 
+a community “Let It Shine” art exhibit. The third graders  designed artwork and selected their favorite (Figure 3), 
+which was screen-printed on reusable cloth bags and sold to raise money for UNICEF . In collaboration with a local 
+environmental artist, they also created a quilt made of plastic bags and large -scale sculptures using recycled 
+materials (Figure 5). The students put STEM into action through their research, design, and implementation of 
+their chosen solutions, which was personally meaningful and had an impact in their communities. 
+ 
+ 
+Figure 5. Original student artwork to bring awareness to the issue of single-use, disposable grocery bags. 
+
+[PAGE 14]
+International Journal of Early Childhood Environmental Education, 3(1), p. 67 
+ 
+ 
+ 
+Figure 6. Student-created plastic quilt and fish sculpture using recycled materials displayed at the community art exhibit. 
+ 
+CONCLUSION 
+ 
+To raise new questions, new possibilities, to regard old problems from a new angle,  
+requires creative imagination and marks real advance in science.  
+— Albert Einstein 
+ 
+ “Do You Want Paper or Plastic? ” challenges learners to consider the complex relationships between environment, 
+society, technology, and science – including ethical questions they may face as consumers and citizens – and, 
+ultimately, to translate these deliberations to informed and resp onsible action” (E. Hestness, personal 
+communication, June 24, 2015). As a common household good, disposable bags were relatable to students in both 
+regions. Although student perceptions of paper and plastic remained largely unchanged as a result of the in quiry, 
+they expressed genuine concern, particularly f or animals and the environment. Students wanted to take action at 
+the local level to bring awareness to the community  using their design skills . As the authors of A Framework for K -
+12 Science Education  emphasize, science education “ should help students see how science and engineering are 
+instrumental in addressing major challenges that confront society today”  (NRC, 2012, p. 9). The curriculum pilot 
+provided evidence of this critical need.  
+ 
+Teachers participating in the pilot also expressed how their involvement improved their own teaching practices, 
+knowledge of environmental issues , and personal behaviors . One commented that the unit pilot prompted her to 
+be more “purposeful” as she approaches  teaching issues of environmental sustainability across the curriculum. 
+Another shared: 
+ 
+I was amazed at how involved and interested students became in the environmental issues. This 
+made my perception a lot more positive in the fact that these students care so muc h about this 
+issue. Also, this pilot made me begin practicing what I preach. I since have bought these two 
+canvas baskets that fold flat that I keep in my car to carry my groceries to avoid ever using plastic 
+bags. 
+ 
+Another reflected upon the positive impact of students’ passion for the subject matter. “My students would not let 
+me throw ANYTHING away. I have begun using the cloth bags that were stuffed in my trunk more often,” one 
+
+[PAGE 15]
+International Journal of Early Childhood Environmental Education, 3(1), p. 68 
+ 
+ 
+teacher shared. A different teacher agreed that the unit “ definitely opened my eyes and opened a new door to a 
+number of ways that I can take my part in keeping the environment cleaner and protect my BEAUTIFUL 
+environment!” 
+ 
+As with all curriculum pilots, our work was not without its challenges, with time constraints being most restrictive.  
+“In reality we have about 30 minutes a day to teach the science standards,” one teacher commented.  As a result, 
+many classroom teachers were unable to complete the unit and to fully support students’ action -taking due to 
+end-of-grade testing and the amount of dedicated time needed to thoughtfully implement the lessons and inquiry 
+cycle. One veteran teacher expressed frustration that “ there is neither time nor space in the curriculum for 
+[teachers] to implement [meaningful] curriculums to the d egree that t hey should be” and that he is “ very 
+disappointed that we did not complete/ implement the curriculum to the degree we should have  - this was an 
+injustice to the curriculum (which is extremely well thought out and written).”  Another teacher at the same school 
+agreed: 
+ 
+The one thing I would say that did not work too well was the time frame that I was given to teach 
+the lesson. There is A LOT of information in this unit, and it is somewhat unreasonable to teach all 
+of the conte nt with the small amount of instructional time given for science. All great and 
+important information, just not sure that it is AS important as the others considering the amount 
+of time it demands (like language arts, reading, or math) due to testing of th ese other subjects. 
+ 
+Although “excited” to teach the unit, another commented that the “reality of time constraints prevented me from 
+getting through the entire thing as efficiently and thoroughly as I would have liked.”  
+ 
+The diverse use of technology tools was also  deemed both beneficial and  frustrating. One teacher shared how 
+technology can engage students in the learning process in unexpected ways: 
+ 
+I had not ever used technology prior to this experience as much as I did in this unit. I would 
+typically use technology in the presentation of the material I was teaching; but through this unit, I 
+used it in every way possible. Not only did I teach with the technology, but also  I allowed the 
+students to use it as well through an e xtended project. They had not even seen the computer that 
+many times throughout a week prior to the unit. They were extremely excited about that, I might 
+add. ;) I also want to mention that one of my students followed the unit up (without being asked) 
+with a PowerPoint presentation containing information about what she learned. She claimed that 
+she would "Show it to friends so that they will no more about how to save our planet!"  
+ 
+Several teachers also commented that the tools allowed them to be more effici ent and taught the students new 
+skills. The social bookmarking site delicious.com was considered valuable as it “led students right to what you need 
+them to see, but then it also let them begin learning researching skills by searching for answers to questions asked  
+of them,” one teacher shared. T echnology malfunctions could be frustrating , however. “Several of the links were 
+broken,” one teacher wrote.  Although time constraints prohibited one from fully incorporating technology in the 
+unit’s lessons, one teacher plans to “spend some time learning moviemaking /editing techniques so that we could 
+have realized some of the projects undertaken.” 
+ 
+In closing, environmental education researcher Scott Morrison underscores that “ Students must be taught not only 
+about what is wrong in the world; they must also be equipped with the skills necessary to advocate for peace, 
+justice, and sustainability. [“ Do You Want Paper or Plastic? ”] is a step in that direction”  (S. Morrison, personal 
+communication, June 29, 2015). When immersed in the study of “stuff,” students engage in deep , critical thinking 
+about their roles as consume rs and how they can be change agents. As the pilot  results suggest, deep, integrated 
+learning does require dedicated time and support. These findings reflect prior research on teaching EE as teachers 
+express concerns regarding the time required to plan and  teach environmental topics (Christenson, 2004). Indeed, 
+there is documented need to approach EE from a multidisciplinary and cultural perspective with a focus on 
+sustainability (Davis, 2009; Duhn, 2012).  Environmental education should not be reserved for one content area 
+(such as science) or one 30 -minute time frame after other more seemingly critical subjects are taught (e.g., ELA or 
+[PAGE 16]
+International Journal of Early Childhood Environmental Education, 3(1), p. 69 
+ 
+ 
+mathematics). With appropriate scaffolding , we believe that children can be empowered to see themselves as 
+“solutionaries” who change their personal choices to contr ibute positively to their world, who develop larger 
+solutions that addres s broad issues such as environmental sustainability. We hope that “ Do You Want Paper or 
+plastic?” is one such resource to support teachers in these efforts. 
+[PAGE 17]
+International Journal of Early Childhood Environmental Education, 3(1), p. 70 
+ 
+ 
+References 
+ 
+Browne, A. (1998). Voices in the park. New York: DK Publishing. 
+ 
+Claybourne, A., & Larkum, A. (2007). The story of inventions. London: Usborne Pub Ltd. 
+ 
+ChicoBag. (2014). Track the movement. Retrieved from http://www.chicobag.com/track-movement. 
+ 
+Christenson, M. (2004). Teaching multiple perspectives on environmental issues in elementary classrooms: A story  
+of teacher inquiry. The Journal of Environmental Education, 35(4), 3-16. 
+ 
+Cole, A. (2007). Expanding the field: Revisiting environmental education principles through multidisciplinary 
+frameworks. The Journal of Environmental Education, 38(2), 35-45. 
+ 
+Conde, M. D. C., &  Sánchez, J. S. (2010). The school curriculum and environmental education: A school 
+environmental audit experience. International Journal of Environmental and Science Education, 5( 4), 477-
+494. 
+ 
+Davis, J. (2009). Revealing the research ‘hole’of early childh ood education for sustainability: A preliminary survey 
+of the literature. Environmental Education Research, 15(2), 227-241.  
+ 
+Deedy, C. A., & Seeley, L.L. (1994). Agatha’s feather bed: Not just another wild goose story. Atlanta, GA: Peachtree 
+Publishers. 
+ 
+Dimopoulos, D. I., Paraskevopoulos, S., & Pantis, J. D. (2009). Planning educational activities and teaching 
+strategies on constructing a conservation educational module. International Journal of Environmental and 
+Science Education, 4(4), 351-364. 
+ 
+Duhn, I. (2012). Making ‘place’ for ecological sustainability in early childhood education. Environmental Education 
+Research, 18(1), 19-29. 
+ 
+Forbes, C. T., & Zint, M. (2010). Elementary teachers’ beliefs about, perceived competencies for, and reported use 
+of scientific inquiry to promote student learning about and for the environment. The Journal of 
+environmental education, 42(1), 30-42. 
+ 
+Hardy, J. M. (2011). A" right" way to teach about endangered species?: An analysis and comparison of two 
+environmental e ducation approaches using North Atlantic right whales as a case study (Doctoral 
+dissertation, University of Georgia). 
+ 
+Hill, M. & Beraza, S. (2010). Bag it: Is your life too plastic? United States: Reel Thing Production Films. 
+ 
+Institute for Humane Education. (n.d.). What is a solutionary? Retrieved from 
+http://humaneeducation.org/become-a-humane-educator/what-is-humane-education/what-is-a-
+solutionary/. 
+ 
+Jordan, C.  (2007). Plastic bags [digital image]. Running the numbers: An American self -portrait (2006 - Current). 
+Retrieved from http://www.chrisjordan.com/gallery/rtn/#plastic-bags. 
+ 
+Kopnina, H. (2013). An exploratory c ase study of Dutch children's attitudes toward consumption: Implications for 
+environmental education. The Journal of Environmental Education, 44(2), 128-144.  
+ 
+Locke, S. (2009). Environmental education for democracy and social justice in Costa Rica. International Research in 
+Geographical and Environmental Education, 18(2), 97-110. 
+[PAGE 18]
+International Journal of Early Childhood Environmental Education, 3(1), p. 71 
+ 
+ 
+ 
+Murdoch, K. (1998). Classroom connections: Strategies for integrated learning. Prahran Victoria, Australia: Eleanor 
+Curtain Publishing. 
+ 
+North American Association for Environmental Education (2011). Developing a framework for assessing 
+environmental literacy. Retrieved from 
+http://www.naaee.net/sites/default/files/framework/DevFramewkAssessEnvLitOnlineEd.pdf . 
+ 
+National Research Council (NRC). (2012). A framework for K -12 science education: Practices, crosscutting concepts, 
+and core ideas. Washington, DC: The National Academies Press. 
+ 
+Özsoy, S., &  Ahi, B. (2014). Elementary School Students’ Perceptions of the Future Environment through Artwork. 
+Educational Sciences: Theory & Practice, 14(4), 1570-1582.  
+ 
+Sagy, G., & Tal, A. (2015). Greening the curriculum: Current trends in environmental education in Israel's public 
+schools. Israel Studies, 20(1), 57-85.  
+ 
+Terry, B. (2014). Beach plastic [digital image]. Retrieved from http://myplasticfreelife.com/. 
+ 
+UNICEF. (2004). Cartoons for children's rights. Retrieved from 
+http://www.unicef.org/videoaudio/video_top_cartoons.html. 
+ 
+United Nations. (n.d.). United Nations Millennium Development Goals. Retrieved from 
+http://www.un.org/millenniumgoals/. 
+ 
+United States Fund for UNICEF. (2014). Retrieved from http://teachunicef.org/. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Elizabeth O. Crawford is an Assistant Professor in the Department of Early Childhood, Elementary, Middle, Literacy, and Special 
+Education at the University of North Carolina Wilmington.  She can be reached at crawforde@uncw.edu. 
+ 
+Nancy Luke is an Assistant Professor of Elementary Education and Digital Literacy in the School of Teaching and Learning at 
+Western Carolina University. She can be reached at ncluke@wcu.edu. 
+ 
+William Van Pelt is the CEO of HeartGift, an organization providing lifesaving heart surgery to children from around the world. 
+He can be reached at wvanpelt@heartgift.org.

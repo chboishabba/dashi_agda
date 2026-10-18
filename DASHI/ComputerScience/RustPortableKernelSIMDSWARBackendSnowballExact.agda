@@ -98,7 +98,7 @@ burnQID =
 ------------------------------------------------------------------------
 
 data PortableTarget : Set where
-  cudaTarget rocmHIPTarget vulkanTarget webGPUTarget metalTarget
+  cudaTarget rocmHIPTarget vulkanTarget webGPUTarget metalTarget : PortableTarget
   cpuX86Target cpuARMTarget unresolvedTarget : PortableTarget
 
 data ParallelLoweringKind : Set where

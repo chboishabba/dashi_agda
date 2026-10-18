@@ -8,7 +8,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Wikimedia.IbrahimKnowledgeCoverageRoadmapExact as Base
 import DASHI.Wikimedia.IbrahimKnowledgeCoverageRoadmapBrownExtensionExact as Brown
 import DASHI.Wikimedia.IbrahimSnowballCommunitySocietySocialScienceExact as Community
-import DASHI.Wikimedia.IbrahimSnowballScienceKnowledgePluralityBridgeExact as Science
+import DASHI.Wikimedia.IbrahimScienceKnowledgePluralityBridgeExact as Science
 import DASHI.Wikimedia.IbrahimSnowballStateAnthropologyArchaeologyExact as Archaeology
 import DASHI.Wikimedia.IbrahimSnowballLinguisticsSubfieldsAttributionExact as Linguistics
 import DASHI.Wikimedia.IbrahimSnowballArchiveHistoriographyCausalityBidiExact as Archive
@@ -30,7 +30,7 @@ data CompletionState : Set where
   paid : CompletionState
   substantiallyPaid : CompletionState
   partial : CompletionState
-  open : CompletionState
+  openState : CompletionState
 
 record RoadmapDeltaLeaf : Set where
   constructor roadmap-delta-leaf
@@ -134,7 +134,7 @@ geologyBreadthDelta : RoadmapDeltaLeaf
 geologyBreadthDelta = roadmap-delta-leaf
   8
   "Geology beyond salt/geochemistry"
-  open
+  openState
   "existing Geology/Environment/DeepTimeCarbon owners plus Ibrahim archaeology/geology joins"
   "stratigraphy, petrology, sedimentology, tectonics, geomorphology, geophysics and deep-time method breadth remain the clearest original roadmap breadth gap"
   "attach exact QIDs opportunistically per demanded subdiscipline"
@@ -146,7 +146,7 @@ healthcareBreadthDelta : RoadmapDeltaLeaf
 healthcareBreadthDelta = roadmap-delta-leaf
   9
   "Health care beyond access/equality/governance"
-  open
+  openState
   "HealthcareEqualityInvariant; HealthcareAccessDistortion; governance/access owners"
   "clinical/public-health/health-services breadth remains intentionally unpaid unless a concrete consumer requires it"
   "QID acquisition should distinguish health care, public health, clinical medicine and health services"

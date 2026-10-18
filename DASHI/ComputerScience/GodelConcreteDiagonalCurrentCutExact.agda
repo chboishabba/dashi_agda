@@ -12,16 +12,16 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data LiveDiagonalResidual : Set where
-  coquandT4DependencyIntake
-  coquandT4ArithmeticSourcePayment
-  coquandT4FinishedDiagonalPayment
+  coquandT4DependencyIntake : LiveDiagonalResidual
+  coquandT4ArithmeticSourcePayment : LiveDiagonalResidual
+  coquandT4FinishedDiagonalPayment : LiveDiagonalResidual
   localKernelReplayReceipt : LiveDiagonalResidual
 
 data OptionalDiagonalProducerResidual : Set where
-  sourceNativeSubstitutionAndRepresentationAlignment
-  representedFunctionPrecompositionClosure
-  base12SelfSubstitutionPrimitiveRecursive
-  base12ToSourceNativeSameCodeWeld
+  sourceNativeSubstitutionAndRepresentationAlignment : OptionalDiagonalProducerResidual
+  representedFunctionPrecompositionClosure : OptionalDiagonalProducerResidual
+  base12SelfSubstitutionPrimitiveRecursive : OptionalDiagonalProducerResidual
+  base12ToSourceNativeSameCodeWeld : OptionalDiagonalProducerResidual
   fromScratchPrimitiveRecursiveLibrary : OptionalDiagonalProducerResidual
 
 record CurrentDiagonalCut : Set where
