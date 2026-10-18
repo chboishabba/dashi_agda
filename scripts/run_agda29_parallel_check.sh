@@ -82,7 +82,7 @@ if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && [ -t 0 ] && command
   rm -f "$STATUS_FILE"
   exit "$rc"
 fi
-REPO_ROOT="${DASHI_REPO_ROOT:-/home/c/Documents/code/dashi_agda}"
+REPO_ROOT="${DASHI_REPO_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 STDLIB_SRC="${AGDA_STDLIB_SRC_29:-${AGDA_STDLIB_SRC:-}}"
 STDLIB_REPO="${AGDA_STDLIB_REPO:-https://github.com/agda/agda-stdlib.git}"
 STDLIB_REF="${AGDA_STDLIB_REF:-experimental}"
