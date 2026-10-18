@@ -668,6 +668,30 @@ hermitianAddLeft {F = F} u v w =
     conjugateAddStep
     dotAddStep
   where
+  conjugateVectorAdd :
+    ∀ {r} {F : C3.RealField r} (a b : C3.Complex3 F) →
+    C3.complex3Conjugate (C3.complex3Add a b)
+    ≡ C3.complex3Add (C3.complex3Conjugate a) (C3.complex3Conjugate b)
+  conjugateVectorAdd
+    (C3.complex3 (C3.complex axr axi) (C3.complex ayr ayi)
+      (C3.complex azr azi))
+    (C3.complex3 (C3.complex bxr bxi) (C3.complex byr byi)
+      (C3.complex bzr bzi)) =
+    complex3Ext
+      (complexExt refl
+        (P.R.solve 2
+          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
+                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl axi bxi))
+      (complexExt refl
+        (P.R.solve 2
+          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
+                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl ayi byi))
+      (complexExt refl
+        (P.R.solve 2
+          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
+                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl azi bzi))
+    where module P = Polynomial F
+
   conjugateAddStep :
     C3.hermitianPairing3 (C3.complex3Add u v) w
     ≡ C3.bilinearDot3
@@ -702,30 +726,6 @@ hermitianAddLeft {F = F} u v w =
         (cong₂ C3.complexAdd
           (bilinearDotCommutative w (C3.complex3Conjugate u))
           (bilinearDotCommutative w (C3.complex3Conjugate v))))
-
-  conjugateVectorAdd :
-    ∀ {r} {F : C3.RealField r} (a b : C3.Complex3 F) →
-    C3.complex3Conjugate (C3.complex3Add a b)
-    ≡ C3.complex3Add (C3.complex3Conjugate a) (C3.complex3Conjugate b)
-  conjugateVectorAdd
-    (C3.complex3 (C3.complex axr axi) (C3.complex ayr ayi)
-      (C3.complex azr azi))
-    (C3.complex3 (C3.complex bxr bxi) (C3.complex byr byi)
-      (C3.complex bzr bzi)) =
-    complex3Ext
-      (complexExt refl
-        (P.R.solve 2
-          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
-                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl axi bxi))
-      (complexExt refl
-        (P.R.solve 2
-          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
-                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl ayi byi))
-      (complexExt refl
-        (P.R.solve 2
-          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
-                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl azi bzi))
-    where module P = Polynomial F
 
 hermitianScaleLeft :
   ∀ {r} {F : C3.RealField r}
