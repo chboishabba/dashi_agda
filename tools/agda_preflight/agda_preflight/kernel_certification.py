@@ -236,6 +236,19 @@ def _isolated_agda_workspace(
         # pointing at the original repository root. This gives Agda one
         # canonical module path for both the witness and its local imports.
         shutil.copytree(root / "DASHI", workspace / "DASHI", symlinks=False)
+        # DASHI imports can reach top-level modules (e.g. Base369).
+        # Materialise root-level Agda modules as ordinary files. This is a
+        # conservative compiler-input closure, not independent evidence or a
+        # claim that all these modules participate in the proof. Do not add
+        # the original checkout to the include path: that would duplicate
+        # the demanded witness's module name.
+        for root_module in root.glob("*.agda"):
+            if not root_module.is_file():
+                continue
+            staged = workspace / root_module.name
+            staged.write_bytes(root_module.read_bytes())
+            if staged.is_symlink() or staged.resolve() == root_module.resolve():
+                raise ValueError("root-level Agda module escaped isolated workspace")
         workspace_source = workspace / relative_source
         if not workspace_source.is_file():
             raise ValueError("isolated Agda workspace cannot locate its materialized witness")
