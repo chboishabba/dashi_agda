@@ -45,16 +45,16 @@ realMultiplyOneRight F a =
 
 realDistributeRight :
   ∀ {r} (F : C3.RealField r) (a b c : C3.Carrier F) →
-  C3.multiply F (C3.add F a b) c
-  ≡ C3.add F (C3.multiply F a c) (C3.multiply F b c)
+  C3.multiply F (C3.add F b c) a
+  ≡ C3.add F (C3.multiply F b a) (C3.multiply F c a)
 realDistributeRight F a b c =
   trans
-    (C3.multiplyCommutative F (C3.add F a b) c)
+    (C3.multiplyCommutative F (C3.add F b c) a)
     (trans
-      (C3.distributeLeft F c a b)
+      (C3.distributeLeft F a b c)
       (cong₂ (C3.add F)
-        (C3.multiplyCommutative F c a)
-        (C3.multiplyCommutative F c b)))
+        (C3.multiplyCommutative F a b)
+        (C3.multiplyCommutative F a c)))
 
 realCommutativeRing :
   ∀ {r} (F : C3.RealField r) → CommutativeRing r r
@@ -88,7 +88,7 @@ realCommutativeRing F = record
       ; *-cong = cong₂ (C3.multiply F)
       ; *-assoc = C3.multiplyAssociative F
       ; *-identity = C3.multiplyOneLeft F , realMultiplyOneRight F
-      ; distrib = realDistributeRight F , C3.distributeLeft F
+      ; distrib = C3.distributeLeft F , realDistributeRight F
       }
     ; *-comm = C3.multiplyCommutative F
     }
