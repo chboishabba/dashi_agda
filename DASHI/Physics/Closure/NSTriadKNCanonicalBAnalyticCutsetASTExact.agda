@@ -415,15 +415,19 @@ canonicalBInvariantBounds = record
 -- The canonical global residual remains the R568 budget itself.  Internally,
 -- the preferred signed producer is now typed as two exact sub-obligations:
 --
---   (i) live global forcing = finite R29 signed bilinear aggregate;
+--   (i) the already-welded live nested spectator aggregate = one finite R29
+--       signed bilinear aggregate;
 --  (ii) cutoff-uniform spacetime payment of that same signed aggregate.
 --
--- R29/R584 already own the finite carrier and local signed envelope; neither
--- theorem is misreported as the missing global/time estimate.
+-- LiveNested already owns live forcing = nested spectator aggregate, while
+-- SignedThreeOrbit owns the signed three-channel decomposition inside the
+-- nested cell. R29/R584 own the finite signed-cell/envelope language. The
+-- remaining representation seam is their global assembly; none of these
+-- exact identities is misreported as the missing cutoff-uniform time estimate.
 ------------------------------------------------------------------------
 
 data CanonicalR568SignedProducerResidual : Set where
-  missingLiveForcingSignedBilinearSameObjectWeld :
+  missingLiveNestedToSignedBilinearAggregateWeld :
     CanonicalR568SignedProducerResidual
   missingCutoffUniformSignedBilinearSpacetimePayment :
     CanonicalR568SignedProducerResidual
@@ -433,7 +437,7 @@ data CanonicalR568SignedProducerResidual : Set where
 currentCanonicalR568SignedProducerResidual :
   CanonicalR568SignedProducerResidual
 currentCanonicalR568SignedProducerResidual =
-  missingLiveForcingSignedBilinearSameObjectWeld
+  missingLiveNestedToSignedBilinearAggregateWeld
 
 canonicalR568SignedFiniteAggregationClosed : Bool
 canonicalR568SignedFiniteAggregationClosed =
@@ -443,8 +447,8 @@ canonicalR568LiteralNestedToSignedCellClosed : Bool
 canonicalR568LiteralNestedToSignedCellClosed =
   R584.round584LocalSignedOverlapEnvelopeClosed
 
-canonicalR568LiveForcingSignedBilinearSameObjectWeldClosed : Bool
-canonicalR568LiveForcingSignedBilinearSameObjectWeldClosed = false
+canonicalR568LiveNestedToSignedBilinearAggregateWeldClosed : Bool
+canonicalR568LiveNestedToSignedBilinearAggregateWeldClosed = false
 
 canonicalR568SignedBilinearSpacetimePaymentClosed : Bool
 canonicalR568SignedBilinearSpacetimePaymentClosed = false
@@ -459,9 +463,9 @@ canonicalR568LiteralNestedToSignedCellClosedIsTrue :
 canonicalR568LiteralNestedToSignedCellClosedIsTrue =
   R584.round584LocalSignedOverlapEnvelopeClosedIsTrue
 
-canonicalR568LiveForcingSignedBilinearSameObjectWeldClosedIsFalse :
-  canonicalR568LiveForcingSignedBilinearSameObjectWeldClosed ≡ false
-canonicalR568LiveForcingSignedBilinearSameObjectWeldClosedIsFalse = refl
+canonicalR568LiveNestedToSignedBilinearAggregateWeldClosedIsFalse :
+  canonicalR568LiveNestedToSignedBilinearAggregateWeldClosed ≡ false
+canonicalR568LiveNestedToSignedBilinearAggregateWeldClosedIsFalse = refl
 
 canonicalR568SignedBilinearSpacetimePaymentClosedIsFalse :
   canonicalR568SignedBilinearSpacetimePaymentClosed ≡ false
