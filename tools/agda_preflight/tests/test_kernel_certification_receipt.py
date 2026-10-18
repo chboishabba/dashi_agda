@@ -167,6 +167,11 @@ def test_agda_certification_invokes_kernel_on_materialized_source_in_single_libr
             library_flag = next(arg for arg in command if arg.startswith("--library-file="))
             registry = Path(library_flag.split("=", 1)[1])
             observed["registry"] = registry.read_text(encoding="utf-8")
+            observed["temporary_dashi_library"] = (workspace / "dashi-agda.agda-lib").read_text(encoding="utf-8")
+            observed["staged_import_is_regular"] = (workspace / "DASHI/Law/SensibLawMaboBrennanRecognitionFormalDemandExact.agda").is_file()
+            assert str(root.resolve()) not in observed["temporary_dashi_library"]
+            assert str(root / "dashi-agda.agda-lib") not in observed["registry"]
+            assert str(workspace / "dashi-agda.agda-lib") in observed["registry"]
             return subprocess.CompletedProcess(command, 0, stdout=b"checked", stderr=b"")
         raise AssertionError(f"unexpected subprocess invocation: {command}")
 
@@ -190,6 +195,8 @@ def test_agda_certification_invokes_kernel_on_materialized_source_in_single_libr
     assert observed["source_is_symlink"] is False
     assert observed["source_bytes"] == source.read_bytes()
     assert observed["source_resolved"] != source.resolve()
+    assert observed["staged_import_is_regular"] is True
+    assert str(root.resolve()) not in observed["temporary_dashi_library"]
     assert observed["command"][-1] == "DASHI/Law/SensibLawMaboBrennanRecognitionFormalDemandExact.agda"
     assert "-l" in observed["command"] and "dashi-agda" in observed["command"]
     registry = str(observed["registry"])
@@ -231,6 +238,10 @@ def test_real_agda_runs_against_materialized_temporary_witness_source() -> None:
         assert workspace_source.is_file()
         assert not workspace_source.is_symlink()
         assert workspace_source.resolve() != source.resolve()
+        assert str(repo_root.resolve()) not in (workspace / "dashi-agda.agda-lib").read_text(encoding="utf-8")
+        registered_libraries = library_registry.read_text(encoding="utf-8").splitlines()
+        assert str(workspace / "dashi-agda.agda-lib") in registered_libraries
+        assert str(repo_root / "dashi-agda.agda-lib") not in registered_libraries
         assert "sha256:" + hashlib.sha256(workspace_source.read_bytes()).hexdigest() == expected_digest
         checked = subprocess.run(
             _agda_check_command(library_registry, relative_source),
