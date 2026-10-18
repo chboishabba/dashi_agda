@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import tempfile
 from typing import Any, Iterable, Iterator, Optional
@@ -191,9 +192,9 @@ def _write_isolated_dashi_library(*, root: Path, workspace: Path) -> Path:
     """Create the single project library Agda sees for kernel checking.
 
     The demanded artifact itself lives physically under ``workspace``. Existing
-    DASHI modules are available as secondary include paths from the populated
-    source checkout, but the initial source path does not resolve through a
-    symlink into that checkout, so Agda project-root discovery remains isolated.
+    DASHI modules are staged as ordinary files inside the temporary source
+    root. Never include the original checkout root: doing so introduces two
+    definitions of the demanded witness and defeats isolation.
     """
     library = workspace / "dashi-agda.agda-lib"
     library.write_text(
@@ -202,8 +203,7 @@ def _write_isolated_dashi_library(*, root: Path, workspace: Path) -> Path:
         "        dchott-agda\n"
         "        bishop\n"
         "        cubical-0.9\n"
-        "include: .\n"
-        f"         {root.resolve()}\n",
+        "include: .\n",
         encoding="utf-8",
     )
     return library
@@ -232,7 +232,15 @@ def _isolated_agda_workspace(
         workspace = Path(temporary)
         _write_isolated_dashi_library(root=root, workspace=workspace)
 
+        # Materialise the DASHI tree, not a symlink and not a second include
+        # pointing at the original repository root. This gives Agda one
+        # canonical module path for both the witness and its local imports.
+        shutil.copytree(root / "DASHI", workspace / "DASHI", symlinks=False)
         workspace_source = workspace / relative_source
+        if not workspace_source.is_file():
+            raise ValueError("isolated Agda workspace cannot locate its materialized witness")
+        if workspace_source.is_symlink():
+            raise ValueError("isolated Agda witness cannot be a symlink")
         workspace_source.parent.mkdir(parents=True, exist_ok=True)
         workspace_source.write_bytes(original_bytes)
         if workspace_source.is_symlink():
