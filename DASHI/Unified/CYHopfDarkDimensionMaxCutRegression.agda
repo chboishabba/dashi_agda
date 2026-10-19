@@ -4,6 +4,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (false; true)
 
 import DASHI.Geometry.CalabiYauPhysicalProducerCompilerExact as CY
+import DASHI.Geometry.FermatQuinticGradientNonvanishingExact as Quintic
+open import Data.Empty using (⊥)
 import DASHI.Geometry.CalabiYauPhysicalProducerCutset as Physical
 import DASHI.Mathematics.Topology.HopfU1PrincipalBundleObligationsExact as Hopf
 import DASHI.Mathematics.Topology.HopfU1CurvatureNaturalityExact as Curvature
@@ -40,3 +42,10 @@ cartanBracketCancellationRegression :
   Bracket.lieBracket (EM.embedU1Lie a) (EM.embedU1Lie b)
     ≡ Lie.lieZero
 cartanBracketCancellationRegression = Curvature.cartanSelfInteractionVanishes
+
+quinticGradientCannotVanishAtProjectivePoint :
+  (F : Quintic.QuinticField) →
+  (z : Quintic.ProjectiveFiveCoordinates F) →
+  Quintic.QuinticGradientZero F z → ⊥
+quinticGradientCannotVanishAtProjectivePoint =
+  Quintic.fermatQuinticHasNoSimultaneousGradientZero
