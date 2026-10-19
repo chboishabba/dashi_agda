@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 import DASHI.Geometry.CalabiYauPhysicalProducerCutset as Physical
 import DASHI.Mathematics.Topology.HopfU1PrincipalBundleObligationsExact as Hopf
 import DASHI.Mathematics.Topology.HopfU1CurvatureNaturalityExact as Curvature
+import DASHI.Mathematics.Topology.HopfU1CosetOrbitExact as Orbit
 import DASHI.Physics.Electromagnetism.U1AsSU2AbelianRestrictionExact as EM
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Bracket
@@ -49,3 +50,11 @@ quinticGradientCannotVanishAtProjectivePoint :
   Quintic.QuinticGradientZero F z → ⊥
 quinticGradientCannotVanishAtProjectivePoint =
   Quintic.fermatQuinticHasNoSimultaneousGradientZero
+
+-- Concrete homogeneous-space action, no smooth-quotient promotion.
+orbitEquivalenceIsTransitive :
+  (g h k : Orbit.Total) →
+  Orbit.SameOrbit g h →
+  Orbit.SameOrbit h k →
+  Orbit.SameOrbit g k
+orbitEquivalenceIsTransitive = Orbit.orbitTransitive
