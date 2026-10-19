@@ -37,12 +37,6 @@ record CirclePrincipalBundle : Set₁ where
       (p : Total) (a : U1.U1TorusElement) →
       projection (rightPhase p a) ≡ projection p
 
-    transitiveOnFibre :
-      (p q : Total) →
-      projection p ≡ projection q →
-      (a : U1.U1TorusElement) →
-      Set
-
     transitiveWitness :
       (p q : Total) →
       (equalBase : projection p ≡ projection q) →
@@ -52,6 +46,8 @@ record CirclePrincipalBundle : Set₁ where
       (p q : Total) (same : projection p ≡ projection q) →
       rightPhase p (transitiveWitness p q same) ≡ q
 
+-- Transitivity is witnessed constructively by 'transitiveWitness' and
+-- 'transitivePaid'; no empty proposition-valued substitute is accepted.
 -- The smooth version requires local charts and transition maps in
 -- addition to purely set-theoretic principality.
 record SmoothHopfUpgrade (P : CirclePrincipalBundle) : Set₁ where
