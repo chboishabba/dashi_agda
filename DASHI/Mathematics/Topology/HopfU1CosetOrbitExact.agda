@@ -5,7 +5,8 @@ module DASHI.Mathematics.Topology.HopfU1CosetOrbitExact where
 -- The quotient is represented by the orbit relation, NOT falsely
 -- identified with a smooth S2 or a quotient type without proof.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import DASHI.Core.Prelude
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1
 import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
