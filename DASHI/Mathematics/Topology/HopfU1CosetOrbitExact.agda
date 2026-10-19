@@ -47,8 +47,8 @@ rightPhaseFixesOnlyIdentityImage g u eq =
       (sym (cong (λ x → SU2.su2Multiply x (phase u))
         (SU2.su2InverseLeft g)))
       (trans
-        (sym (SU2.su2MultiplyAssociative
-          (SU2.su2Inverse g) g (phase u)))
+        (SU2.su2MultiplyAssociative
+          (SU2.su2Inverse g) g (phase u))
         (trans
           (cong (SU2.su2Multiply (SU2.su2Inverse g)) eq)
           (SU2.su2InverseLeft g))))
