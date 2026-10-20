@@ -1,0 +1,12 @@
+{
+  "receipt_kind": "focused_local_receipt_contract_pytest",
+  "date": "2026-10-12",
+  "command": "pytest -q tests/test_diffusercam_local_execution_receipts.py",
+  "tests_passed": 2,
+  "tests_failed": 0,
+  "elapsed_seconds_reported": 0.06,
+  "scope": "minimal local staging of exact receipt owner markers and receipt payload paths",
+  "full_repository_pytest": false,
+  "agda_kernel_checked": false,
+  "real_psf_receipt": false
+}
