@@ -1,7 +1,31 @@
 module DASHI.Ontology.Everything where
 
--- Ontology domain rollup.\n\nimport DASHI.Ontology.MereologyClassOrderNoConfusionExact
+-- Ontology domain rollup.
 
+import DASHI.Ontology.MereologyClassOrderNoConfusionExact
 import DASHI.Ontology.WikidataWorkingGroupFullProvenanceEverything
 import DASHI.Ontology.DeweyQidCoverageQualityExact
+import DASHI.Ontology.EducationViaOntologyExact
+import DASHI.Ontology.EducationViaOntologyValidation
+import DASHI.Ontology.EducationViaOntologyCompletionExact
+import DASHI.Ontology.EducationViaOntologyCompletionValidation
+import DASHI.Ontology.EducationOntologyMappingSSSOMExact
+import DASHI.Ontology.EducationOntologyMappingValidation
+import DASHI.Ontology.EducationOntologyMappingPNFExact
+import DASHI.Ontology.EducationOntologyMappingPNFValidation
+import DASHI.Ontology.RosarioConceptualDiagnosticsExact
+import DASHI.Ontology.RosarioReportedEmpiricsExact
+import DASHI.Ontology.RosarioConceptualDiagnosticsValidation
+import DASHI.Ontology.RosarioPNFAdmissibleFactorisationExact
+import DASHI.Ontology.RosarioPNFAdmissibleFactorisationValidation
+import DASHI.Ontology.OCTFSensibLawHandoffExact
+import DASHI.Ontology.OCTFSensibLawHandoffValidation
+import DASHI.Ontology.OntologyRepairPluralityMaxCutExact
+import DASHI.Ontology.OntologyRepairPluralityMaxCutValidation
+import DASHI.Ontology.OntologyRepairCompletionExact
+import DASHI.Ontology.OntologyRepairCompletionValidation
+import DASHI.Ontology.OntologyRepairEndToEndExact
+import DASHI.Ontology.OntologyRepairEndToEndValidation
+import DASHI.Ontology.OntologyCrosswalkStructuralExact
+import DASHI.Ontology.OntologyCrosswalkStructuralValidation
 import Ontology.Hecke.Everything
