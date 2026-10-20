@@ -1,0 +1,135 @@
+module DASHI.Biology.BH4NOSCouplingSameObjectExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Biology.BH4CompartmentKineticStateExact as Parameters
+import DASHI.Biology.NitrogenOxideSpeciesCouplingExact as NOS
+import DASHI.Biology.BH4NOSCouplingEvidenceExact as Evidence
+import DASHI.Biology.KitzerowBH4SystemNongNangMaxCutExact as Graph
+import DASHI.Core.GenericReceipt as Receipt
+
+------------------------------------------------------------------------
+-- Same-object bridge from the quantitative BH4 state into NOS coupling.
+--
+-- The bridge is deliberately payment-oriented. Protein identity and BH4
+-- dependence are prerequisites, but a promoted coupling transition additionally
+-- requires same-object/same-compartment BH4/BH2, redox, substrate, product and
+-- interventional transition coordinates. Primary NOS3/eNOS perturbation evidence
+-- is visible here, but remains bounded to its experimental-system scope.
+------------------------------------------------------------------------
+
+record BH4NOSSameObjectPayment : Set where
+  constructor bh4-nos-same-object-payment
+  field
+    isoformReference : String
+    quantitativeStateReference : String
+    sameObjectReference : String
+    compartmentReference : String
+    bh4Bh2StatePaid : Bool
+    redoxStatePaid : Bool
+    substrateStatePaid : Bool
+    oxygenStatePaid : Bool
+    couplingTransitionPaid : Bool
+    nitricOxideProductPaid : Bool
+    superoxideProductPaid : Bool
+    downstreamTSC2SameObjectTransportPaid : Bool
+    transitionEvidenceReference : String
+    residualReference : String
+
+open BH4NOSSameObjectPayment public
+
+unresolvedNOS1Payment : BH4NOSSameObjectPayment
+unresolvedNOS1Payment =
+  bh4-nos-same-object-payment
+    "NOS1/P29475"
+    "BH4 quantitative parameter manifest"
+    "same-object NOS1 experiment not yet admitted"
+    "compartment not yet paid"
+    false false false false false false false false
+    "no interventional NOS1 coupling transition receipt admitted yet"
+    "requires same-compartment BH4/BH2 + redox + substrate/oxygen + product measurement + perturbation transition"
+
+unresolvedNOS2Payment : BH4NOSSameObjectPayment
+unresolvedNOS2Payment =
+  bh4-nos-same-object-payment
+    "NOS2/P35228"
+    "BH4 quantitative parameter manifest"
+    "same-object NOS2 experiment not yet admitted"
+    "compartment not yet paid"
+    false false false false false false false false
+    "no interventional NOS2 coupling transition receipt admitted yet"
+    "requires same-compartment BH4/BH2 + redox + substrate/oxygen + product measurement + perturbation transition"
+
+unresolvedNOS3Payment : BH4NOSSameObjectPayment
+unresolvedNOS3Payment =
+  bh4-nos-same-object-payment
+    "NOS3/P29474"
+    "BH4 quantitative parameter manifest"
+    "Crabtree 2009 evidence pays bounded NOS3/eNOS coupling relation in experimental systems, but not the complete DASHI same-single-cell/same-time state"
+    "endothelial/eNOS experimental-system scope; exact target compartment/time witness remains unpaid"
+    false false false false false false false false
+    "DOI 10.1074/jbc.M805403200 and 10.1074/jbc.M109.041483"
+    "bounded perturbational support present; same-object compartment/time flux state and upstream-to-TSC2 transport remain unpaid"
+
+nos3StoichiometryLiteratureEvidence : Evidence.NOS3CouplingEvidenceReceipt
+nos3StoichiometryLiteratureEvidence = Evidence.nos3StoichiometryEvidence
+
+nos3RecyclingPerturbationLiteratureEvidence : Evidence.NOS3CouplingEvidenceReceipt
+nos3RecyclingPerturbationLiteratureEvidence = Evidence.nos3RecyclingPerturbationEvidence
+
+nosCouplingStateTypeAvailable : Set
+nosCouplingStateTypeAvailable = NOS.NOSCouplingState
+
+nitricOxideProduct : NOS.NitrogenOxideSpecies
+nitricOxideProduct = NOS.nitricOxide
+
+nitrousOxideAlternativeSpecies : NOS.NitrogenOxideSpecies
+nitrousOxideAlternativeSpecies = NOS.nitrousOxide
+
+nitricOxideStillNotNitrousOxide :
+  nitricOxideProduct ≡ nitrousOxideAlternativeSpecies → ⊥
+nitricOxideStillNotNitrousOxide = NOS.nitricOxideNotNitrousOxide
+
+upstreamToTSC2GraphEdge : Graph.MechanisticEdgePayment
+upstreamToTSC2GraphEdge = Graph.nosToTSC2Edge
+
+record BH4NOSSameObjectBoundary : Set where
+  constructor bh4-nos-same-object-boundary
+  field
+    proteinPresencePaysCouplingTransition : Bool
+    proteinPresencePaysCouplingTransitionIsFalse :
+      proteinPresencePaysCouplingTransition ≡ false
+    bh4CofactorRequirementPaysCouplingTransition : Bool
+    bh4CofactorRequirementPaysCouplingTransitionIsFalse :
+      bh4CofactorRequirementPaysCouplingTransition ≡ false
+    nitrousOxideMayStandForNitricOxideProduct : Bool
+    nitrousOxideMayStandForNitricOxideProductIsFalse :
+      nitrousOxideMayStandForNitricOxideProduct ≡ false
+    oneIsoformTransitionPaysAllIsoforms : Bool
+    oneIsoformTransitionPaysAllIsoformsIsFalse :
+      oneIsoformTransitionPaysAllIsoforms ≡ false
+    downstreamRelationEvidencePaysUpstreamSameObjectTransport : Bool
+    downstreamRelationEvidencePaysUpstreamSameObjectTransportIsFalse :
+      downstreamRelationEvidencePaysUpstreamSameObjectTransport ≡ false
+    literatureParameterWithoutSameObjectCoordinatePaysTransition : Bool
+    literatureParameterWithoutSameObjectCoordinatePaysTransitionIsFalse :
+      literatureParameterWithoutSameObjectCoordinatePaysTransition ≡ false
+    nos3ExperimentalSystemEvidencePaysSameSingleCellState : Bool
+    nos3ExperimentalSystemEvidencePaysSameSingleCellStateIsFalse :
+      nos3ExperimentalSystemEvidencePaysSameSingleCellState ≡ false
+
+open BH4NOSSameObjectBoundary public
+
+canonicalBH4NOSSameObjectBoundary : BH4NOSSameObjectBoundary
+canonicalBH4NOSSameObjectBoundary =
+  bh4-nos-same-object-boundary false refl false refl false refl false refl false refl false refl false refl
+
+canonicalBH4NOSSameObjectReceipt : Receipt.GenericReceipt
+canonicalBH4NOSSameObjectReceipt =
+  Receipt.mkNonPromotingReceipt
+    "BH4 -> NOS same-object coupling bridge"
+    "DASHI.Biology.BH4NOSCouplingSameObjectExact"
+    "same-object/same-compartment BH4/BH2 + redox + substrate + oxygen -> isoform-specific NOS coupling transition -> measured NO/superoxide product -> downstream TSC2 transport"
+    "makes every prerequisite/payment coordinate explicit for NOS1/NOS2/NOS3; imports bounded primary NOS3/eNOS perturbation evidence; reuses NO != N2O and the downstream graph edge"
+    "protein presence, BH4 dependence, experimental-system literature evidence or downstream relation evidence do not by themselves pay a same-single-cell coupling transition or upstream-to-TSC2 same-object transport"
+    "agda -i . DASHI/Biology/BH4NOSCouplingSameObjectExact.agda"
