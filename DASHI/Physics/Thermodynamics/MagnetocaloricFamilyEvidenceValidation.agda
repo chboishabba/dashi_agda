@@ -1,0 +1,29 @@
+module DASHI.Physics.Thermodynamics.MagnetocaloricFamilyEvidenceValidation where
+
+open import DASHI.Core.Prelude
+import DASHI.Physics.Thermodynamics.MagnetocaloricFamilyEvidenceExact as Family
+
+radulovCrystalEvidenceIsCrossObject :
+  Family.FamilyClaimPayment.sameObjectStatus Family.radulovCrystalStructurePayment
+  ≡ Family.crossObjectFamilyEvidence
+radulovCrystalEvidenceIsCrossObject = refl
+
+krautzHydrogenationEvidenceIsEmpirical :
+  Family.FamilyClaimPayment.empiricalPayment Family.krautzHydrogenationTuningPayment ≡ true
+krautzHydrogenationEvidenceIsEmpirical = refl
+
+piazziMagnetoelasticEvidenceIsModelBound :
+  Family.FamilyClaimPayment.modelMediated Family.piazziMagnetoelasticSpecificHeatPayment ≡ true
+piazziMagnetoelasticEvidenceIsModelBound = refl
+
+fukamichiThermalTransportEvidenceIsEmpirical :
+  Family.FamilyClaimPayment.empiricalPayment Family.fukamichiHydrideTransportPayment ≡ true
+fukamichiThermalTransportEvidenceIsEmpirical = refl
+
+familyEvidenceDoesNotCloseSameMaterialIdentity :
+  Family.FamilyEvidenceFirewall.sameMaterialIdentityStillRequired Family.canonicalFamilyEvidenceFirewall ≡ true
+familyEvidenceDoesNotCloseSameMaterialIdentity = refl
+
+familyEvidenceDoesNotCloseDeviceCalibration :
+  Family.FamilyEvidenceFirewall.sameDeviceCalibrationStillRequired Family.canonicalFamilyEvidenceFirewall ≡ true
+familyEvidenceDoesNotCloseDeviceCalibration = refl
