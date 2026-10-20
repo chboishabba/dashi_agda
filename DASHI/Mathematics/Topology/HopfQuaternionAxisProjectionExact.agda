@@ -124,3 +124,44 @@ record GeometricHopfChartUpgrade : Set₁ where
 
 -- No canonical inhabitant is asserted: centralizer, S2 equivalence,
 -- free/transitive geometric fibres, and smooth charts are open.
+
+-- Name the single missing converse to phase invariance. Once supplied,
+-- both the full AxisFibreNaturality record and constructive principal
+-- fibre-transitivity consumers are inhabited from the same lemma.
+record AxisOrbitClassification : Set where
+  field
+    sameAxisImpliesOrbit :
+      (g h : Orbit.Total) →
+      axisMap g ≡ axisMap h → Orbit.SameOrbit g h
+
+open AxisOrbitClassification public
+
+axisNaturalityFromClassification :
+  AxisOrbitClassification → AxisFibreNaturality
+axisNaturalityFromClassification C = record
+  { phaseInvariant = canonicalAxisPhaseInvariant
+  ; fibreComplete = sameAxisImpliesOrbit C
+  }
+
+axisOrbitQuotientClassifier :
+  (C : AxisOrbitClassification) →
+  Orbit.OrbitQuotientClassifier Q.Quaternion axisMap
+axisOrbitQuotientClassifier C = record
+  { sameBaseImpliesOrbit = sameAxisImpliesOrbit C }
+
+-- Exact concrete witnesses for the two remaining fibre-transitivity
+-- fields, conditional only on the *same* axis-orbit classification.
+axisFibreWitness :
+  (C : AxisOrbitClassification) →
+  (g h : Orbit.Total) →
+  axisMap g ≡ axisMap h → U.U1TorusElement
+axisFibreWitness C =
+  Orbit.quotientTransitiveWitness axisMap (axisOrbitQuotientClassifier C)
+
+axisFibreWitnessPaid :
+  (C : AxisOrbitClassification) →
+  (g h : Orbit.Total) →
+  (eq : axisMap g ≡ axisMap h) →
+  Orbit.rightPhase g (axisFibreWitness C g h eq) ≡ h
+axisFibreWitnessPaid C =
+  Orbit.quotientTransitivePaid axisMap (axisOrbitQuotientClassifier C)
