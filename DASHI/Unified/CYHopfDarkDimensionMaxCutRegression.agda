@@ -5,6 +5,9 @@ open import Agda.Builtin.Bool using (false; true)
 
 import DASHI.Geometry.CalabiYauPhysicalProducerCompilerExact as CY
 import DASHI.Geometry.FermatQuinticGradientNonvanishingExact as Quintic
+import DASHI.Geometry.FermatQuinticJacobianCriterionHandoffExact as Jacobian
+import DASHI.Mathematics.Topology.HopfU1TransitionCocycleExact as Cocycle
+import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1
 open import Data.Empty using (⊥)
 import DASHI.Geometry.CalabiYauPhysicalProducerCutset as Physical
 import DASHI.Mathematics.Topology.HopfU1PrincipalBundleObligationsExact as Hopf
@@ -58,3 +61,16 @@ orbitEquivalenceIsTransitive :
   Orbit.SameOrbit h k →
   Orbit.SameOrbit g k
 orbitEquivalenceIsTransitive = Orbit.orbitTransitive
+
+hopfPhaseCocycleRegression :
+  (a b c : U1.U1TorusElement) →
+  U1.u1Multiply (Cocycle.transition a b) (Cocycle.transition b c)
+    ≡ Cocycle.transition a c
+hopfPhaseCocycleRegression = Cocycle.transitionCocycle
+
+fermatJacobianHandoffRegression :
+  (F : Quintic.QuinticField) →
+  (J : Jacobian.ProjectiveJacobianCriterion F) →
+  (z : Quintic.ProjectiveFiveCoordinates F) →
+  Jacobian.SmoothAt J z
+fermatJacobianHandoffRegression = Jacobian.fermatSmoothAtEveryProjectivePoint
