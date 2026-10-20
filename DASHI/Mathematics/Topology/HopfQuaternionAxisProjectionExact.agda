@@ -11,6 +11,7 @@ import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as Q
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U
 import DASHI.Mathematics.Topology.HopfU1CosetOrbitExact as Orbit
 open import Data.List.Base using ([]; _∷_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 import Tactic.RingSolver as Solver
 
 axisQuaternion : Q.Quaternion
@@ -34,7 +35,7 @@ record AxisCentralizer : Set where
 -- commutes with its unit imaginary basis k, without imposing an
 -- arbitrary new axiom or identifying all SU2 rotations as abelian.
 axisCentralizerPolynomial :
-  (a b : U.ℝ) →
+  (a b : ℝ) →
   Q._*q_ (Q.quat a Q.zeroR Q.zeroR b) axisQuaternion ≡
   Q._*q_ axisQuaternion (Q.quat a Q.zeroR Q.zeroR b)
 axisCentralizerPolynomial a b =
