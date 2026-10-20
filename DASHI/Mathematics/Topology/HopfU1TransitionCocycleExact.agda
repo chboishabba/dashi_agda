@@ -9,6 +9,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (trans; sym; cong)
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1
 
+Phase : Set
 Phase = U1.U1TorusElement
 
 transition : Phase → Phase → Phase
