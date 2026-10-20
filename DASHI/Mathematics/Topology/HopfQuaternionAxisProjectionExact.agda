@@ -13,6 +13,7 @@ import DASHI.Mathematics.Topology.HopfU1CosetOrbitExact as Orbit
 open import Data.List.Base using ([]; _∷_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 import Tactic.RingSolver as Solver
+import DASHI.Physics.YangMills.QuaternionConjugationProductExact as Conj
 
 axisQuaternion : Q.Quaternion
 axisQuaternion = Q.quat Q.zeroR Q.zeroR Q.zeroR Q.oneR
@@ -50,6 +51,54 @@ canonicalAxisCentralizer = record
   { commutes = λ u →
       axisCentralizerPolynomial (U.realPart u) (U.imagPart u)
   }
+
+-- Centralizer + unit inverse imply phase conjugation fixes k.
+phaseFixesAxis : (u : U.U1TorusElement) →
+  Q._*q_
+    (Q._*q_ (Q.quaternion (U.includeU1InSU2 u)) axisQuaternion)
+    (Q.conjugateQ (Q.quaternion (U.includeU1InSU2 u)))
+  ≡ axisQuaternion
+phaseFixesAxis u =
+  let p = U.includeU1InSU2 u
+      x = Q.quaternion p
+  in
+  trans
+    (cong (λ y → Q._*q_ y (Q.conjugateQ x))
+      (AxisCentralizer.commutes canonicalAxisCentralizer u))
+    (trans
+      (Q.quaternionMultiplyAssociative axisQuaternion x (Q.conjugateQ x))
+      (trans
+        (cong (Q._*q_ axisQuaternion)
+          (cong Q.quaternion (Q.su2InverseRight p)))
+        (Q.quaternionOneRight axisQuaternion)))
+
+-- The next geometric fact is now a consequence of concrete
+-- multiplication, the shared YM conjugation anti-homomorphism, and
+-- the circle centralizer; no atlas/smoothness assumption is involved.
+canonicalAxisPhaseInvariant :
+  (g : Orbit.Total) (u : U.U1TorusElement) →
+  axisMap (Orbit.rightPhase g u) ≡ axisMap g
+canonicalAxisPhaseInvariant g u =
+  let x = Q.quaternion g
+      y = Q.quaternion (U.includeU1InSU2 u)
+      cy = Q.conjugateQ y
+      cx = Q.conjugateQ x
+  in
+  trans
+    (cong (λ z → Q._*q_ (Q._*q_ (Q._*q_ x y) axisQuaternion) z)
+      (Conj.conjugateProduct x y))
+    (trans
+      (sym (Q.quaternionMultiplyAssociative
+        (Q._*q_ (Q._*q_ x y) axisQuaternion) cy cx))
+      (trans
+        (cong (λ z → Q._*q_ (Q._*q_ z cy) cx)
+          (Q.quaternionMultiplyAssociative x y axisQuaternion))
+        (trans
+          (cong (λ z → Q._*q_ z cx)
+            (Q.quaternionMultiplyAssociative x
+              (Q._*q_ y axisQuaternion) cy))
+          (cong (λ z → Q._*q_ (Q._*q_ x z) cx)
+            (phaseFixesAxis u)))))
 
 -- Equivariance is stated at the SU2 group level, without identifying
 -- spatial three-vectors until an S2 representation is provided.
