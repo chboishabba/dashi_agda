@@ -10,6 +10,8 @@ open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as Q
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U
 import DASHI.Mathematics.Topology.HopfU1CosetOrbitExact as Orbit
+open import Data.List.Base using ([]; _∷_)
+import Tactic.RingSolver as Solver
 
 axisQuaternion : Q.Quaternion
 axisQuaternion = Q.quat Q.zeroR Q.zeroR Q.zeroR Q.oneR
@@ -27,6 +29,26 @@ record AxisCentralizer : Set where
       Q._*q_ (Q.quaternion (U.includeU1InSU2 u)) axisQuaternion
       ≡ Q._*q_ axisQuaternion
           (Q.quaternion (U.includeU1InSU2 u))
+
+-- Polynomial centralizer: the selected complex plane (q0,q3)
+-- commutes with its unit imaginary basis k, without imposing an
+-- arbitrary new axiom or identifying all SU2 rotations as abelian.
+axisCentralizerPolynomial :
+  (a b : U.ℝ) →
+  Q._*q_ (Q.quat a Q.zeroR Q.zeroR b) axisQuaternion ≡
+  Q._*q_ axisQuaternion (Q.quat a Q.zeroR Q.zeroR b)
+axisCentralizerPolynomial a b =
+  Q.quaternionExt
+    (Solver.solve (a ∷ b ∷ []) Q.realSolverRing)
+    (Solver.solve (a ∷ b ∷ []) Q.realSolverRing)
+    (Solver.solve (a ∷ b ∷ []) Q.realSolverRing)
+    (Solver.solve (a ∷ b ∷ []) Q.realSolverRing)
+
+canonicalAxisCentralizer : AxisCentralizer
+canonicalAxisCentralizer = record
+  { commutes = λ u →
+      axisCentralizerPolynomial (U.realPart u) (U.imagPart u)
+  }
 
 -- Equivariance is stated at the SU2 group level, without identifying
 -- spatial three-vectors until an S2 representation is provided.
