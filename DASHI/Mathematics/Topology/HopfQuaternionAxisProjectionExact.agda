@@ -16,17 +16,17 @@ axisQuaternion = Q.quat Q.zeroR Q.zeroR Q.zeroR Q.oneR
 
 axisMap : Orbit.Total → Q.Quaternion
 axisMap g =
-  Q._*q_ (Q._*q_ (Q.quaternionValue g) axisQuaternion)
-    (Q.quaternionValue (Q.su2Inverse g))
+  Q._*q_ (Q._*q_ (Q.quaternion g) axisQuaternion)
+    (Q.quaternion (Q.su2Inverse g))
 
 -- An honest, named algebraic prerequisite: all phases commute with k.
 -- This can be discharged by the repository's real polynomial solver.
 record AxisCentralizer : Set where
   field
     commutes : (u : U.U1TorusElement) →
-      Q._*q_ (Q.quaternionValue (U.includeU1InSU2 u)) axisQuaternion
+      Q._*q_ (Q.quaternion (U.includeU1InSU2 u)) axisQuaternion
       ≡ Q._*q_ axisQuaternion
-          (Q.quaternionValue (U.includeU1InSU2 u))
+          (Q.quaternion (U.includeU1InSU2 u))
 
 -- Equivariance is stated at the SU2 group level, without identifying
 -- spatial three-vectors until an S2 representation is provided.
