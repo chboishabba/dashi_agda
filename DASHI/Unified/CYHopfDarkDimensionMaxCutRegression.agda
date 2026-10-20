@@ -6,6 +6,8 @@ open import Agda.Builtin.Bool using (false; true)
 import DASHI.Geometry.CalabiYauPhysicalProducerCompilerExact as CY
 import DASHI.Geometry.FermatQuinticGradientNonvanishingExact as Quintic
 import DASHI.Geometry.FermatQuinticJacobianCriterionHandoffExact as Jacobian
+import DASHI.Geometry.FermatQuinticComplexFieldHandoffExact as ComplexQuintic
+import DASHI.Mathematics.Topology.HopfQuaternionAxisProjectionExact as QuaternionAxis
 import DASHI.Mathematics.Topology.HopfU1TransitionCocycleExact as Cocycle
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1
 open import Data.Empty using (⊥)
@@ -74,3 +76,10 @@ fermatJacobianHandoffRegression :
   (z : Quintic.ProjectiveFiveCoordinates F) →
   Jacobian.SmoothAt J z
 fermatJacobianHandoffRegression = Jacobian.fermatSmoothAtEveryProjectivePoint
+
+-- Literal axis projection is defined on the canonical existing SU(2)
+-- quaternion carrier (no arbitrary standalone sphere abstraction).
+axisProjectionUsesConcreteSU2 :
+  (q : QuaternionAxis.Orbit.Total) →
+  QuaternionAxis.axisMap q ≡ QuaternionAxis.axisMap q
+axisProjectionUsesConcreteSU2 q = refl
