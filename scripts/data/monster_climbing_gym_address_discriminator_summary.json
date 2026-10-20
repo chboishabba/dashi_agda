@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "monster_climbing_gym_native_address_discriminator_result",
+  "design": {
+    "depth": 1,
+    "per_prime_statistic": "Pearson chi-square occupancy deviation over native p cells",
+    "per_prime_null": "720 deterministic midpoint boundary shifts over one native cell period 1/p",
+    "standardisation": "within-prime z score using shift-null population mean and SD",
+    "group_contrast": "mean z over 15 Ogg primes minus mean z over five non-Ogg controls",
+    "balanced_assignments": 15504,
+    "multiple_statistic_search_allowed": false
+  },
+  "discovery_window": {
+    "zero_numbers": [1, 849],
+    "actual_contrast": -0.4278031863279293,
+    "two_sided_tail_count": 7074,
+    "two_sided_tail_fraction": 0.45626934984520123
+  },
+  "held_out_window": {
+    "zero_numbers": [850, 1698],
+    "actual_contrast": 0.23515611780682538,
+    "two_sided_tail_count": 10449,
+    "two_sided_tail_fraction": 0.6739551083591331
+  },
+  "interpretation": {
+    "discovery_tail_extreme": false,
+    "held_out_tail_extreme": false,
+    "ogg_specific_address_anomaly_promoted": false,
+    "monster_mechanism_promoted": false,
+    "moonshine_theorem_promoted": false,
+    "riemann_hypothesis_evidence_promoted": false,
+    "universal_no_go_theorem_claimed": false
+  }
+}
