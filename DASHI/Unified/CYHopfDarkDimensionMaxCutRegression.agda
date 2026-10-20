@@ -8,6 +8,7 @@ import DASHI.Geometry.FermatQuinticGradientNonvanishingExact as Quintic
 import DASHI.Geometry.FermatQuinticJacobianCriterionHandoffExact as Jacobian
 import DASHI.Geometry.FermatQuinticComplexFieldHandoffExact as ComplexQuintic
 import DASHI.Mathematics.Topology.HopfQuaternionAxisProjectionExact as QuaternionAxis
+import DASHI.Mathematics.Topology.HopfU1PrincipalBundleObligationsExact as Principal
 import DASHI.Physics.YangMills.QuaternionConjugationProductExact as Conjugation
 import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
 import DASHI.Mathematics.Topology.HopfU1TransitionCocycleExact as Cocycle
@@ -97,3 +98,11 @@ hopfPhaseInvarianceRegression :
   QuaternionAxis.axisMap (QuaternionAxis.Orbit.rightPhase g u)
     ≡ QuaternionAxis.axisMap g
 hopfPhaseInvarianceRegression = QuaternionAxis.canonicalAxisPhaseInvariant
+
+-- Same geometric classifier inhabits the entire algebraic principal
+-- bundle record; none of the smooth atlas/Chern conditions are inferred.
+classifiedAxisPrincipalBundleRegression :
+  (C : QuaternionAxis.AxisOrbitClassification) →
+  Principal.CirclePrincipalBundle
+classifiedAxisPrincipalBundleRegression =
+  QuaternionAxis.axisPrincipalBundleFromClassification
