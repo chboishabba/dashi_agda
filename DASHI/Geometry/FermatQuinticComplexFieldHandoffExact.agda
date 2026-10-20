@@ -33,6 +33,30 @@ record ComplexQuinticCancellation
 
 open ComplexQuinticCancellation public
 
+-- Shared integral-domain cancellation cut: one square-zero elimination
+-- proves fourth-power cancellation by iteration. Useful outside CY3,
+-- including Hodge/complex-polynomial consumers.
+record ComplexReducedAlgebra (R0 : R.ConstructedOrderedCompleteReal) : Set₁ where
+  field
+    squareZero :
+      (z : C.ComplexPair R0) →
+      C._*C_ z z ≡ C.zeroC → z ≡ C.zeroC
+    fiveTorsionFree :
+      (z : C.ComplexPair R0) →
+      timesFive z ≡ C.zeroC → z ≡ C.zeroC
+
+open ComplexReducedAlgebra public
+
+cancellationFromReducedAlgebra :
+  (R0 : R.ConstructedOrderedCompleteReal) →
+  ComplexReducedAlgebra R0 → ComplexQuinticCancellation R0
+cancellationFromReducedAlgebra R0 A = record
+  { fourthZero = λ z eq →
+      squareZero A z
+        (squareZero A (C._*C_ z z) eq)
+  ; fiveZero = fiveTorsionFree A
+  }
+
 complexQuinticField :
   (R0 : R.ConstructedOrderedCompleteReal) →
   ComplexQuinticCancellation R0 → Fermat.QuinticField
