@@ -9,15 +9,16 @@ import DASHI.Physics.Materials.RezaBurnResistantAlloyBidiExact as Reza
 import DASHI.Physics.Materials.NickelBaseSuperalloyMechanismExact as Ni
 import DASHI.Physics.Materials.FangDainingActiveMechanicalMetamaterialBidiExact as Fang
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
+import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierExact as RocketFals
+import DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact as RocketTerminal
+import DASHI.Physics.Propulsion.Rocketdyne1974HotSectionQualificationFrontierExact as RocketQual
+import DASHI.Physics.Propulsion.Rocketdyne1974DigitalThreadExperimentParetoExact as RocketThread
+import DASHI.Physics.Propulsion.Rocketdyne1974InspectionCapabilityPODExact as RocketPOD
+import DASHI.Physics.Propulsion.Rocketdyne1974ModelCredibilityValidationExact as RocketCred
+import DASHI.Physics.Propulsion.QualifiedHotSectionManufacturingBidiExact as Hot
 
 ------------------------------------------------------------------------
 -- FUSION PROPULSION x MATERIAL SURVIVABILITY
---
--- This owner preserves a real cross-domain engineering intersection without
--- collapsing distinct propulsion environments.  Reza/Jacinto/Hardwick address
--- oxygen-rich chemical-rocket combustion.  NASA fusion-propulsion concepts use
--- magnetized plasma, lithium/metal propellant, magnetic nozzles, FRCs and HTS
--- coils.  Both create material-survivability consumers, but not the same one.
 ------------------------------------------------------------------------
 
 data PropulsionMaterialEnvironment : Set where
@@ -77,12 +78,6 @@ fangArchitectedIntersection = fusion-propulsion-material-intersection
 
 ------------------------------------------------------------------------
 -- Historical quantum-vacuum wording in a fusion/propulsion programme.
---
--- NASA TechPort's Direct Energy Conversion for Nuclear Propulsion at Low
--- Specific Mass project discusses aneutronic-fusion products, TWDEC and plasma
--- propulsion, and its anticipated-benefits text mentions a 'Quantum Vacuum
--- thruster'.  That is an official historical mention, not a thrust-validation
--- receipt and not a zero-point-energy extraction receipt.
 ------------------------------------------------------------------------
 
 record QuantumVacuumProgrammeMention : Set where
@@ -127,6 +122,74 @@ existingFangBoundary = Fang.canonicalFangMetamaterialBoundary
 
 existingAntigravityBoundary : Anti.AntigravityPromotionBoundary
 existingAntigravityBoundary = Anti.canonicalAntigravityPromotionBoundary
+
+------------------------------------------------------------------------
+-- Rocketdyne provides reusable experimental-design / acquisition grammar.
+-- Historical chemical-rocket values do not themselves become fusion evidence.
+------------------------------------------------------------------------
+
+rocketdyneMaterialDependenceBoundary : RocketFals.MaterialDependenceBoundary
+rocketdyneMaterialDependenceBoundary = RocketFals.canonicalMaterialDependenceBoundary
+
+rocketdyneTerminalFrontier : RocketTerminal.TerminalPhysicalFrontier
+rocketdyneTerminalFrontier = RocketTerminal.currentTerminalFrontier
+
+rocketdyneQualificationReverseFrontier : RocketQual.RocketdyneQualificationReverseFrontier
+rocketdyneQualificationReverseFrontier = RocketQual.rocketdyneQualificationReverseFrontier
+
+rocketdyneDigitalThreadFrontier : RocketThread.RocketdyneDigitalThreadExperimentFrontier
+rocketdyneDigitalThreadFrontier = RocketThread.rocketdyneDigitalThreadExperimentFrontier
+
+rocketdyneInspectionCapabilityFrontier : RocketPOD.InspectionCapabilityFrontier
+rocketdyneInspectionCapabilityFrontier = RocketPOD.canonicalInspectionCapabilityFrontier
+
+rocketdyneModelCredibilityFrontier : RocketCred.Test052CredibilityFrontier
+rocketdyneModelCredibilityFrontier = RocketCred.test052CredibilityFrontier
+
+canonicalHotSectionQualificationBoundary : Hot.CanonicalQualificationBoundary
+canonicalHotSectionQualificationBoundary = Hot.canonicalQualificationBoundary
+
+fusionQualificationNeedsOwnSameObjectPayment : Bool
+fusionQualificationNeedsOwnSameObjectPayment = true
+
+fusionMayReuseDigitalThreadGrammar : Bool
+fusionMayReuseDigitalThreadGrammar = true
+
+rocketdyneAcquisitionScoresTransferToFusion : Bool
+rocketdyneAcquisitionScoresTransferToFusion = false
+
+fusionMayReuseInspectionCapabilityGrammar : Bool
+fusionMayReuseInspectionCapabilityGrammar = true
+
+rocketdynePODTransfersToFusion : Bool
+rocketdynePODTransfersToFusion = false
+
+fusionMayReuseModelCredibilityGrammar : Bool
+fusionMayReuseModelCredibilityGrammar = true
+
+rocketdyneValidationResidualTransfersToFusion : Bool
+rocketdyneValidationResidualTransfersToFusion = false
+
+record MaterialDiscriminatorTransferBoundary : Set where
+  constructor material-discriminator-transfer-boundary
+  field
+    temperatureOnlyCanBeRejectedByMatchedOutcomeContrast : Bool
+    materialIdentityMustRemainExplicitWhenTestingMaterialEffect : Bool
+    rocketdyneOutcomeTransfersNumericallyToFusionPlasma : Bool
+    matchedEnvironmentGeometryAndConstitutiveDataStillRequired : Bool
+    canonicalQualificationGrammarReusable : Bool
+    rocketdyneQualificationReceiptPaysFusionQualification : Bool
+    digitalThreadGrammarReusable : Bool
+    rocketdyneParetoCalibrationTransfersToFusion : Bool
+    inspectionCapabilityGrammarReusable : Bool
+    rocketdynePODNumericallyTransfersToFusion : Bool
+    modelCredibilityGrammarReusable : Bool
+    rocketdyneValidationResidualTransfersToFusion : Bool
+
+canonicalMaterialDiscriminatorTransferBoundary : MaterialDiscriminatorTransferBoundary
+canonicalMaterialDiscriminatorTransferBoundary =
+  material-discriminator-transfer-boundary
+    true true false true true false true false true false true false
 
 ------------------------------------------------------------------------
 -- Named firewalls.
