@@ -8,6 +8,8 @@ import DASHI.Geometry.FermatQuinticGradientNonvanishingExact as Quintic
 import DASHI.Geometry.FermatQuinticJacobianCriterionHandoffExact as Jacobian
 import DASHI.Geometry.FermatQuinticComplexFieldHandoffExact as ComplexQuintic
 import DASHI.Mathematics.Topology.HopfQuaternionAxisProjectionExact as QuaternionAxis
+import DASHI.Physics.YangMills.QuaternionConjugationProductExact as Conjugation
+import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
 import DASHI.Mathematics.Topology.HopfU1TransitionCocycleExact as Cocycle
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1
 open import Data.Empty using (⊥)
@@ -83,3 +85,15 @@ axisProjectionUsesConcreteSU2 :
   (q : QuaternionAxis.Orbit.Total) →
   QuaternionAxis.axisMap q ≡ QuaternionAxis.axisMap q
 axisProjectionUsesConcreteSU2 q = refl
+
+quaternionConjugationReusableByYM :
+  (x y : SU2.Quaternion) →
+  SU2.conjugateQ (SU2._*q_ x y) ≡
+  SU2._*q_ (SU2.conjugateQ y) (SU2.conjugateQ x)
+quaternionConjugationReusableByYM = Conjugation.conjugateProduct
+
+hopfPhaseInvarianceRegression :
+  (g : QuaternionAxis.Orbit.Total) (u : U1.U1TorusElement) →
+  QuaternionAxis.axisMap (QuaternionAxis.Orbit.rightPhase g u)
+    ≡ QuaternionAxis.axisMap g
+hopfPhaseInvarianceRegression = QuaternionAxis.canonicalAxisPhaseInvariant
