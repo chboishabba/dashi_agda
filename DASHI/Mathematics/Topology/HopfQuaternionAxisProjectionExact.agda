@@ -10,6 +10,7 @@ open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as Q
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U
 import DASHI.Mathematics.Topology.HopfU1CosetOrbitExact as Orbit
+import DASHI.Mathematics.Topology.HopfU1PrincipalBundleObligationsExact as Bundle
 open import Data.List.Base using ([]; _∷_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 import Tactic.RingSolver as Solver
@@ -165,3 +166,21 @@ axisFibreWitnessPaid :
   Orbit.rightPhase g (axisFibreWitness C g h eq) ≡ h
 axisFibreWitnessPaid C =
   Orbit.quotientTransitivePaid axisMap (axisOrbitQuotientClassifier C)
+
+-- Full Set-level circle-principal-bundle record over the axis image,
+-- conditional exactly on the missing same-axis/implies-same-orbit
+-- theorem. No smoothness or c1 is smuggled into this construction.
+axisPrincipalBundleFromClassification :
+  (C : AxisOrbitClassification) → Bundle.CirclePrincipalBundle
+axisPrincipalBundleFromClassification C = record
+  { Base = Q.Quaternion
+  ; Total = Orbit.Total
+  ; projection = axisMap
+  ; rightPhase = Orbit.rightPhase
+  ; rightIdentity = Orbit.rightUnit
+  ; rightComposition = Orbit.rightComposition
+  ; free = Orbit.rightPhaseFree
+  ; fibrePreserved = canonicalAxisPhaseInvariant
+  ; transitiveWitness = axisFibreWitness C
+  ; transitivePaid = axisFibreWitnessPaid C
+  }
