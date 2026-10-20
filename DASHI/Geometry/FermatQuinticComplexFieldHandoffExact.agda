@@ -6,6 +6,7 @@ module DASHI.Geometry.FermatQuinticComplexFieldHandoffExact where
 -- *named witnesses*; no false "concrete complex field is solved" claim.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂)
 open import Data.Empty using (⊥)
 import DASHI.Analysis.ConcreteComplex as C
 import DASHI.Analysis.ConstructiveRealSpine as R
@@ -55,6 +56,52 @@ cancellationFromReducedAlgebra R0 A = record
       squareZero A z
         (squareZero A (C._*C_ z z) eq)
   ; fiveZero = fiveTorsionFree A
+  }
+
+
+-- The complex five-torsion condition reduces exactly to the same
+-- real five-torsion condition on each coordinate. This is a genuine
+-- componentwise reduction; it does not assume characteristic zero.
+realTimesFive : (R0 : R.ConstructedOrderedCompleteReal) →
+  R.Real R0 → R.Real R0
+realTimesFive R0 x =
+  R._+_ R0 x (R._+_ R0 x (R._+_ R0 x (R._+_ R0 x x)))
+
+record RealFiveTorsionFree (R0 : R.ConstructedOrderedCompleteReal) : Set where
+  field
+    fiveZeroReal :
+      (x : R.Real R0) →
+      realTimesFive R0 x ≡ R.zero R0 → x ≡ R.zero R0
+open RealFiveTorsionFree public
+
+complexFiveZeroFromReal :
+  (R0 : R.ConstructedOrderedCompleteReal) →
+  RealFiveTorsionFree R0 →
+  (z : C.ComplexPair R0) →
+  timesFive z ≡ C.zeroC → z ≡ C.zeroC
+complexFiveZeroFromReal R0 laws (C.complex x y) eq =
+  cong₂ C.complex
+    (fiveZeroReal laws x (cong C.re eq))
+    (fiveZeroReal laws y (cong C.im eq))
+
+-- Reuses a weaker ordinary quadratic cancellation rather than an
+-- independent Fermat-specific fourth-power theorem.
+record RealComplexQuadraticReduction
+  (R0 : R.ConstructedOrderedCompleteReal) : Set₁ where
+  field
+    complexSquareZero :
+      (z : C.ComplexPair R0) →
+      C._*C_ z z ≡ C.zeroC → z ≡ C.zeroC
+open RealComplexQuadraticReduction public
+
+complexReducedFromReal :
+  (R0 : R.ConstructedOrderedCompleteReal) →
+  RealComplexQuadraticReduction R0 →
+  RealFiveTorsionFree R0 →
+  ComplexReducedAlgebra R0
+complexReducedFromReal R0 Q F = record
+  { squareZero = complexSquareZero Q
+  ; fiveTorsionFree = complexFiveZeroFromReal R0 F
   }
 
 complexQuinticField :
