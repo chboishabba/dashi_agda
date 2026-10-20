@@ -106,3 +106,23 @@ classifiedAxisPrincipalBundleRegression :
   Principal.CirclePrincipalBundle
 classifiedAxisPrincipalBundleRegression =
   QuaternionAxis.axisPrincipalBundleFromClassification
+
+-- Round-5 single-premise payoff: actual planar U1 inverse image is
+-- consumed by the full Hopf algebraic principal-bundle constructor.
+transverseCancellationPaysBundle :
+  QuaternionAxis.RelativeAxisTransverseCancellation →
+  Principal.CirclePrincipalBundle
+transverseCancellationPaysBundle T =
+  QuaternionAxis.axisPrincipalBundleFromClassification
+    (QuaternionAxis.axisClassificationFromTransverseCancellation T)
+
+-- ConcreteComplex five-torsion follows from the same real cancellation
+-- law on the two complex coordinates, independent of the Fermat polynomial.
+complexFiveTorsionFromRealRegression :
+  (R0 : ComplexQuintic.R.ConstructedOrderedCompleteReal) →
+  ComplexQuintic.RealFiveTorsionFree R0 →
+  (z : ComplexQuintic.C.ComplexPair R0) →
+  ComplexQuintic.timesFive z ≡ ComplexQuintic.C.zeroC →
+  z ≡ ComplexQuintic.C.zeroC
+complexFiveTorsionFromRealRegression =
+  ComplexQuintic.complexFiveZeroFromReal
