@@ -1,0 +1,39 @@
+module DASHI.Governance.OccupyDeclaredRealizedControlRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.OccupyDeclaredRealizedControlExact as Subject
+
+primaryDeclaredPurposeIsPaid :
+  Subject.primaryAdoptedDocumentsPresent Subject.canonicalOccupyDeclaredRealizedBoundary ≡ true
+primaryDeclaredPurposeIsPaid = refl
+
+leaderlessDeclarationDoesNotPayLeadershipAbsence :
+  Subject.declaredLeaderlessProvesNoRealizedLeadership
+    Subject.canonicalOccupyDeclaredRealizedBoundary ≡ false
+leaderlessDeclarationDoesNotPayLeadershipAbsence = refl
+
+horizontalPurposeDoesNotPayRealizedControl :
+  Subject.declaredParticipatoryPurposeProvesRealizedHorizontalControl
+    Subject.canonicalOccupyDeclaredRealizedBoundary ≡ false
+horizontalPurposeDoesNotPayRealizedControl = refl
+
+secondaryReconstructionDoesNotPayPrimaryMinutes :
+  Subject.secondaryReconstructionPaysPrimaryMinuteContent
+    Subject.canonicalOccupyDeclaredRealizedBoundary ≡ false
+secondaryReconstructionDoesNotPayPrimaryMinutes = refl
+
+correctionResponseRemainsPartOfControlAudit :
+  Subject.correctionResponseRequiredForRealizedControlAudit
+    Subject.canonicalOccupyDeclaredRealizedBoundary ≡ true
+correctionResponseRemainsPartOfControlAudit = refl
+
+privacyAndOpenKnowledgeRemainDistinct :
+  Subject.openKnowledgeCancelsIndividualPrivacy
+    Subject.canonicalOccupyDeclaredRealizedBoundary ≡ false
+privacyAndOpenKnowledgeRemainDistinct = refl
+
+declaredPurposeCannotCertifyRealizedControl :
+  Subject.DeclaredPurposeDeterminesRealizedControl → ⊥
+declaredPurposeCannotCertifyRealizedControl =
+  Subject.declaredPurposeDoesNotDetermineRealizedControl

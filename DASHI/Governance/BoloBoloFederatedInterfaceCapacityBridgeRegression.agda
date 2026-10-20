@@ -1,0 +1,33 @@
+module DASHI.Governance.BoloBoloFederatedInterfaceCapacityBridgeRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloFederatedInterfaceCapacityBridgeExact as Interface
+
+localityDoesNotEraseUpperLoad :
+  Interface.localityReductionEliminatesAllUpperInterfaceLoad Interface.canonicalFederatedInterfaceCapacityBoundary ≡ false
+localityDoesNotEraseUpperLoad = refl
+
+localFeasibilityNotJointFeasibility :
+  Interface.individuallyFeasibleCommunitiesGuaranteeJointInterfaceFeasibility Interface.canonicalFederatedInterfaceCapacityBoundary ≡ false
+localFeasibilityNotJointFeasibility = refl
+
+aggregateCostDoesNotRuleOutBottleneck :
+  Interface.aggregateLowCoordinationCostGuaranteesNoBottleneck Interface.canonicalFederatedInterfaceCapacityBoundary ≡ false
+aggregateCostDoesNotRuleOutBottleneck = refl
+
+capacityAuditRequired :
+  Interface.sharedInterfaceCapacityMustBeAudited Interface.canonicalFederatedInterfaceCapacityBoundary ≡ true
+capacityAuditRequired = refl
+
+concurrentDemandAuditRequired :
+  Interface.concurrentBoundaryDemandMustBeAudited Interface.canonicalFederatedInterfaceCapacityBoundary ≡ true
+concurrentDemandAuditRequired = refl
+
+capacityNeedsEvidence :
+  Interface.targetCapacityAndDemandRequireDirectOrQualifiedEvidence Interface.canonicalInterfaceCapacityResearchBoundary ≡ true
+capacityNeedsEvidence = refl
+
+noPoliticalSemanticIdentity :
+  Interface.planningNetworkSemanticsArePoliticalGovernanceSemantics Interface.canonicalFederatedInterfaceCapacityBoundary ≡ false
+noPoliticalSemanticIdentity = refl

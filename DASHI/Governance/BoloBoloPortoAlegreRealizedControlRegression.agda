@@ -1,0 +1,25 @@
+module DASHI.Governance.BoloBoloPortoAlegreRealizedControlRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloPortoAlegreRealizedControlExact as Subject
+
+officialDecisionFlowPaid :
+  Subject.officialCOPDecisionFlowObserved Subject.canonicalPortoRealizedControlBoundary ≡ true
+officialDecisionFlowPaid = refl
+
+questionResponseFlowPaid :
+  Subject.councillorQuestionGovernmentResponseObserved Subject.canonicalPortoRealizedControlBoundary ≡ true
+questionResponseFlowPaid = refl
+
+assemblyVoiceSurfacePaid :
+  Subject.communitySpeechAndGovernmentResponseObserved Subject.canonicalPortoRealizedControlBoundary ≡ true
+assemblyVoiceSurfacePaid = refl
+
+officialAccountDoesNotPayNonDomination :
+  Subject.officialProcessAccountProvesNonDomination Subject.canonicalPortoRealizedControlBoundary ≡ false
+officialAccountDoesNotPayNonDomination = refl
+
+unanimousPresentVoteDoesNotPayFullAttendance :
+  Subject.unanimousPresentVoteProvesAllCouncillorsPresent Subject.canonicalPortoRealizedControlBoundary ≡ false
+unanimousPresentVoteDoesNotPayFullAttendance = refl
