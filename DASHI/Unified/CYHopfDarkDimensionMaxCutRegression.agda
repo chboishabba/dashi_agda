@@ -7,6 +7,8 @@ import DASHI.Geometry.CalabiYauPhysicalProducerCompilerExact as CY
 import DASHI.Geometry.FermatQuinticGradientNonvanishingExact as Quintic
 import DASHI.Geometry.FermatQuinticJacobianCriterionHandoffExact as Jacobian
 import DASHI.Geometry.FermatQuinticComplexFieldHandoffExact as ComplexQuintic
+import DASHI.Analysis.ConstructiveRealSpine as RealSpine
+import DASHI.Analysis.ConcreteComplex as ConcreteComplex
 import DASHI.Mathematics.Topology.HopfQuaternionAxisProjectionExact as QuaternionAxis
 import DASHI.Mathematics.Topology.HopfU1PrincipalBundleObligationsExact as Principal
 import DASHI.Physics.YangMills.QuaternionConjugationProductExact as Conjugation
@@ -119,10 +121,10 @@ transverseCancellationPaysBundle T =
 -- ConcreteComplex five-torsion follows from the same real cancellation
 -- law on the two complex coordinates, independent of the Fermat polynomial.
 complexFiveTorsionFromRealRegression :
-  (R0 : ComplexQuintic.R.ConstructedOrderedCompleteReal) →
+  (R0 : RealSpine.ConstructedOrderedCompleteReal) →
   ComplexQuintic.RealFiveTorsionFree R0 →
-  (z : ComplexQuintic.C.ComplexPair R0) →
-  ComplexQuintic.timesFive z ≡ ComplexQuintic.C.zeroC →
-  z ≡ ComplexQuintic.C.zeroC
+  (z : ConcreteComplex.ComplexPair R0) →
+  ComplexQuintic.timesFive z ≡ ConcreteComplex.zeroC →
+  z ≡ ConcreteComplex.zeroC
 complexFiveTorsionFromRealRegression =
   ComplexQuintic.complexFiveZeroFromReal
