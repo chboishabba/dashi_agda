@@ -1,0 +1,165 @@
+module DASHI.Biology.BH4Phase4SystemStateRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Biology.Molecular.BH4ExecutedPanelReactionReceiptExact as Executed
+import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Matrix
+import DASHI.Biology.BH4CompartmentKineticStateExact as Parameters
+import DASHI.Biology.BH4QuantitativeAcquisitionExact as Acquisition
+import DASHI.Biology.BH4ExecutedSABIOReceiptExact as SABIO
+import DASHI.Biology.BH4ExecutedSABIOAdjudicationReceiptExact as SABIOAdj
+import DASHI.Biology.BH4FluxCandidateRankingExact as Ranking
+import DASHI.Biology.BH4MissingReactionKineticsEvidenceExact as Gap
+import DASHI.Biology.BH4ExecutedSIFTSReceiptExact as SIFTS
+import DASHI.Biology.BH4IntervalFluxSolverExact as Interval
+import DASHI.Biology.BH4NOSCouplingEvidenceExact as Evidence
+import DASHI.Biology.BH4NOSCouplingSameObjectExact as NOS
+import DASHI.Biology.BH4JointFluxFeasibilityExact as Flux
+import DASHI.Biology.BH4OpenMetabolicNetworkAdapterExact as OpenNetwork
+import DASHI.Biology.BH4Phase4RoadmapExact as Roadmap
+import DASHI.Biology.KitzerowBH4SystemNongNangMaxCutExact as Graph
+
+panelReactionAcquisitionExecuted : Executed.acquisitionExecuted Executed.canonicalExecutedPanelReactionReceipt ≡ true
+panelReactionAcquisitionExecuted = refl
+
+executedPanelHasTwelveFiniteReactions : Matrix.executedPanelReactionCount ≡ 12
+executedPanelHasTwelveFiniteReactions = refl
+
+executedPanelHasTwentyNineFiniteSpecies : Matrix.executedPanelSpeciesCount ≡ 29
+executedPanelHasTwentyNineFiniteSpecies = refl
+
+matrixDoesNotInventMissingChemistry : Matrix.BH4PanelMatrixBoundary.formulaIncompleteReactionBecomesZeroColumn Matrix.canonicalBH4PanelMatrixBoundary ≡ false
+matrixDoesNotInventMissingChemistry = refl
+
+unresolvedParameterIsNotZeroMeasurement : Parameters.BH4ParameterBoundary.unresolvedParameterMayBeReadAsMeasuredZero Parameters.canonicalBH4ParameterBoundary ≡ false
+unresolvedParameterIsNotZeroMeasurement = refl
+
+compartmentIdentityCannotBeDropped : Parameters.BH4ParameterBoundary.sameMoleculeDifferentCompartmentMayBeCollapsed Parameters.canonicalBH4ParameterBoundary ≡ false
+compartmentIdentityCannotBeDropped = refl
+
+sabioKineticConstantDoesNotBecomeFluxBound : Acquisition.QuantitativeAcquisitionBoundary.kineticConstantCreatesFluxBound Acquisition.canonicalQuantitativeAcquisitionBoundary ≡ false
+sabioKineticConstantDoesNotBecomeFluxBound = refl
+
+executedSABIOExportRecoveredOneHundredNinetyRows : SABIO.executedSABIOKineticEntryCount ≡ 190
+executedSABIOExportRecoveredOneHundredNinetyRows = refl
+
+executedSABIORecoveredNineHundredThirtyTwoParameters : SABIO.executedSABIOKineticParameterCount ≡ 932
+executedSABIORecoveredNineHundredThirtyTwoParameters = refl
+
+executedSABIOExportCoveredElevenProteins : SABIO.executedSABIOProteinsWithEntries ≡ 11
+executedSABIOExportCoveredElevenProteins = refl
+
+executedSABIOExportHadZeroAcquisitionErrors : SABIO.executedSABIOAcquisitionErrorCount ≡ 0
+executedSABIOExportHadZeroAcquisitionErrors = refl
+
+sabioExportRowsStillDoNotPayFluxBounds : SABIO.ExecutedSABIOBoundary.exportRowCreatesInVivoFluxBound SABIO.canonicalExecutedSABIOBoundary ≡ false
+sabioExportRowsStillDoNotPayFluxBounds = refl
+
+sabioParameterObjectsStillDoNotPayFluxBounds : SABIO.ExecutedSABIOBoundary.parameterObjectCreatesInVivoFluxBound SABIO.canonicalExecutedSABIOBoundary ≡ false
+sabioParameterObjectsStillDoNotPayFluxBounds = refl
+
+sabioAdjudicationMappedEightHundredSeventyFiveCandidates : SABIOAdj.executedMappedParameterCandidateCount ≡ 875
+sabioAdjudicationMappedEightHundredSeventyFiveCandidates = refl
+
+sabioAdjudicationCoveredTenFiniteReactions : SABIOAdj.executedFiniteReactionCoverage ≡ 10
+sabioAdjudicationCoveredTenFiniteReactions = refl
+
+sabioAdjudicationLeavesOnlyFortyFiveUnclassified : SABIOAdj.executedUnclassifiedCount ≡ 45
+sabioAdjudicationLeavesOnlyFortyFiveUnclassified = refl
+
+sabioAdjudicationClassifiesAllNineHundredThirtyTwo :
+  SABIOAdj.executedConcentrationLikeCount + SABIOAdj.executedAffinityLikeCount
+  + SABIOAdj.executedRateLikeCount + SABIOAdj.executedInhibitoryLikeCount
+  + SABIOAdj.executedCatalyticConstantLikeCount + SABIOAdj.executedUnclassifiedCount
+  ≡ 932
+sabioAdjudicationClassifiesAllNineHundredThirtyTwo = refl
+
+sabioCandidateCoverageStillDoesNotPayFlux : SABIOAdj.ExecutedSABIOAdjudicationBoundary.candidateCoverageCreatesFluxPayment SABIOAdj.canonicalExecutedSABIOAdjudicationBoundary ≡ false
+sabioCandidateCoverageStillDoesNotPayFlux = refl
+
+sabioParameterKindStillDoesNotPayFlux : SABIOAdj.ExecutedSABIOAdjudicationBoundary.parameterKindCreatesFluxPayment SABIOAdj.canonicalExecutedSABIOAdjudicationBoundary ≡ false
+sabioParameterKindStillDoesNotPayFlux = refl
+
+rankingDoesNotCreateFluxBound : Ranking.BH4FluxCandidateRankingBoundary.rankCreatesFluxBound Ranking.canonicalBH4FluxCandidateRankingBoundary ≡ false
+rankingDoesNotCreateFluxBound = refl
+
+catalyticConstantNeedsMoreThanRank : Ranking.BH4FluxCandidateRankingBoundary.catalyticConstantCreatesFluxWithoutEnzymeAbundance Ranking.canonicalBH4FluxCandidateRankingBoundary ≡ false
+catalyticConstantNeedsMoreThanRank = refl
+
+missingRankingGateDefaultsFalse : Ranking.BH4FluxCandidateRankingBoundary.missingPaymentGateDefaultsTrue Ranking.canonicalBH4FluxCandidateRankingBoundary ≡ false
+missingRankingGateDefaultsFalse = refl
+
+primaryGapKineticsStillDoNotPayNetworkFlux : Gap.MissingReactionKineticsBoundary.primaryKineticsCreatesNetworkFluxBound Gap.canonicalMissingReactionKineticsBoundary ≡ false
+primaryGapKineticsStillDoNotPayNetworkFlux = refl
+
+isoformNOSKineticsCannotBeCollapsedToSharedFlux : Gap.MissingReactionKineticsBoundary.isoformSpecificNOSKineticsCreatesSharedNOSFlux Gap.canonicalMissingReactionKineticsBoundary ≡ false
+isoformNOSKineticsCannotBeCollapsedToSharedFlux = refl
+
+siftsMappingDoesNotCreateCatalyticMechanism : Acquisition.QuantitativeAcquisitionBoundary.structureMappingCreatesCatalyticMechanism Acquisition.canonicalQuantitativeAcquisitionBoundary ≡ false
+siftsMappingDoesNotCreateCatalyticMechanism = refl
+
+boundedSIFTSRunExaminedThirtyEightStructures : SIFTS.structuresExamined SIFTS.canonicalExecutedSIFTSReceipt ≡ 38
+boundedSIFTSRunExaminedThirtyEightStructures = refl
+
+boundedSIFTSRunRecoveredFiveHundredTwentySixSegments : SIFTS.matchingSIFTSSegmentCount SIFTS.canonicalExecutedSIFTSReceipt ≡ 526
+boundedSIFTSRunRecoveredFiveHundredTwentySixSegments = refl
+
+intervalSolverDoesNotZeroMissingExchange : Interval.IntervalFluxSolverBoundary.missingExchangeBoundMayBeSubstitutedWithZero Interval.canonicalIntervalFluxSolverBoundary ≡ false
+intervalSolverDoesNotZeroMissingExchange = refl
+
+intervalSteadyStateDoesNotProveDiseaseMechanism : Interval.IntervalFluxSolverBoundary.feasibleSteadyStateCreatesDiseaseMechanism Interval.canonicalIntervalFluxSolverBoundary ≡ false
+intervalSteadyStateDoesNotProveDiseaseMechanism = refl
+
+nosReactionChemistryIsNowPaid : Graph.reactionOrRelationPaid Graph.bh4ToNOSCouplingEdge ≡ true
+nosReactionChemistryIsNowPaid = refl
+
+aaahReactionChemistryIsNowPaid : Graph.reactionOrRelationPaid Graph.aaahCompetitionEdge ≡ true
+aaahReactionChemistryIsNowPaid = refl
+
+agmoReactionChemistryIsNowPaid : Graph.reactionOrRelationPaid Graph.agmoCompetitionEdge ≡ true
+agmoReactionChemistryIsNowPaid = refl
+
+nosProteinPresenceDoesNotPayCouplingTransition : NOS.BH4NOSSameObjectBoundary.proteinPresencePaysCouplingTransition NOS.canonicalBH4NOSSameObjectBoundary ≡ false
+nosProteinPresenceDoesNotPayCouplingTransition = refl
+
+noAndN2oRemainDistinctAcrossSameObjectBridge : NOS.BH4NOSSameObjectBoundary.nitrousOxideMayStandForNitricOxideProduct NOS.canonicalBH4NOSSameObjectBoundary ≡ false
+noAndN2oRemainDistinctAcrossSameObjectBridge = refl
+
+nos3EvidenceDoesNotGlobalizeToNOS1 : Evidence.NOS3EvidenceBoundary.nos3EvidenceGlobalizesToNOS1 Evidence.canonicalNOS3EvidenceBoundary ≡ false
+nos3EvidenceDoesNotGlobalizeToNOS1 = refl
+
+missingBoundsProduceUnderdeterminedNotZeroFlux : Flux.BH4FluxFeasibilityBoundary.missingFluxBoundMayBeSubstitutedWithZero Flux.canonicalBH4FluxFeasibilityBoundary ≡ false
+missingBoundsProduceUnderdeterminedNotZeroFlux = refl
+
+exchangeIsNotInternalReaction : OpenNetwork.BH4OpenMetabolicBoundary.externalExchangeMayBeCollapsedIntoInternalStoichiometry OpenNetwork.canonicalBH4OpenMetabolicBoundary ≡ false
+exchangeIsNotInternalReaction = refl
+
+wholeSystemFluxAttemptHasOccurred : Roadmap.wholeSystemFluxBalanceAttempted ≡ true
+wholeSystemFluxAttemptHasOccurred = refl
+
+firstWholeSystemFluxOutcomeIsUnderdetermined : Roadmap.firstJointFluxOutcome ≡ Flux.underdetermined
+firstWholeSystemFluxOutcomeIsUnderdetermined = refl
+
+firstAttemptMissingTwelveFluxBounds : Roadmap.missingReactionFluxBounds ≡ 12
+firstAttemptMissingTwelveFluxBounds = refl
+
+firstAttemptMissingTwentyNineExchangeCoordinates : Roadmap.missingExternalExchangeCoordinates ≡ 29
+firstAttemptMissingTwentyNineExchangeCoordinates = refl
+
+nextTemplateHasFiftySixCoordinates : Roadmap.expandedQuantitativeCoordinateCount ≡ 56
+nextTemplateHasFiftySixCoordinates = refl
+
+sabioParameterCountIsPromoted : Roadmap.sabioKineticParameterCount ≡ 932
+sabioParameterCountIsPromoted = refl
+
+sabioFiniteCoverageIsTenOfTwelve : Roadmap.sabioFiniteReactionCandidateCoverage ≡ 10
+sabioFiniteCoverageIsTenOfTwelve = refl
+
+sabioUnclassifiedCountIsFortyFive : Roadmap.sabioUnclassifiedParameterCandidates ≡ 45
+sabioUnclassifiedCountIsFortyFive = refl
+
+fluxCandidateRankingToolIsReady : Roadmap.fluxCandidateRankingToolReady ≡ true
+fluxCandidateRankingToolIsReady = refl
+
+underdeterminedDoesNotMeanMechanismFalse : Roadmap.BH4Phase4Boundary.underdeterminedMeansMechanismFalse Roadmap.canonicalBH4Phase4Boundary ≡ false
+underdeterminedDoesNotMeanMechanismFalse = refl
