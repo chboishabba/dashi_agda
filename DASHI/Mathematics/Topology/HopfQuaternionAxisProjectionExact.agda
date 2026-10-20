@@ -184,3 +184,48 @@ axisPrincipalBundleFromClassification C = record
   ; transitiveWitness = axisFibreWitness C
   ; transitivePaid = axisFibreWitnessPaid C
   }
+
+-- The remaining reverse-centralizer calculation is exposed as two
+-- component laws, instead of assuming the whole orbit classifier.
+-- This is the minimal algebraic obstruction after U1 image recognition.
+record RelativeAxisTransverseCancellation : Set where
+  field
+    transverseOne :
+      (g h : Orbit.Total) →
+      axisMap g ≡ axisMap h →
+      Q.q1 (Q.quaternion (Q.su2Multiply (Q.su2Inverse g) h))
+        ≡ Q.zeroR
+    transverseTwo :
+      (g h : Orbit.Total) →
+      axisMap g ≡ axisMap h →
+      Q.q2 (Q.quaternion (Q.su2Multiply (Q.su2Inverse g) h))
+        ≡ Q.zeroR
+open RelativeAxisTransverseCancellation public
+
+axisClassificationFromTransverseCancellation :
+  RelativeAxisTransverseCancellation → AxisOrbitClassification
+axisClassificationFromTransverseCancellation T = record
+  { sameAxisImpliesOrbit = λ g h eq →
+      let relative = Q.su2Multiply (Q.su2Inverse g) h
+          u = U.planarUnitToU1 relative
+                (transverseOne T g h eq)
+                (transverseTwo T g h eq)
+      in Orbit.sameOrbit u
+        (trans
+          (cong (Q.su2Multiply g)
+            (U.planarUnitToU1Correct relative
+              (transverseOne T g h eq)
+              (transverseTwo T g h eq)))
+          (trans
+            (sym (Q.su2MultiplyAssociative
+              g (Q.su2Inverse g) h))
+            (trans
+              (cong (λ z → Q.su2Multiply z h)
+                (Q.su2InverseRight g))
+              (Q.su2IdentityLeft h))))
+  }
+
+-- A single algebraic transverse-cancellation witness now feeds:
+-- fibre completeness, CirclePrincipalBundle.free/transitivity, and
+-- the eventual smooth Hopf lift, without replacing any of these
+-- with a Bool or an assumed orbit equality.
