@@ -3,6 +3,7 @@ module DASHI.Education.DigitalESDEfSPedagogicalReciprocityRegression where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 import DASHI.Education.DigitalESDEfSPedagogicalReciprocityExact as E
 import DASHI.Education.DigitalESDTransferablePedagogicalPrinciplesExact as D
 
@@ -29,5 +30,5 @@ allCandidatesUnpromotedRegression :
   E.ReciprocalPedagogicalBridge.promotion E.collectiveAgency ≡ E.candidate
 allCandidatesUnpromotedRegression = refl
 
-noEffectPromotionRegression : E.TheoreticalAlignmentProvesEffect → E.TheoreticalAlignmentProvesEffect
-noEffectPromotionRegression x = x
+noEffectPromotionRegression : E.TheoreticalAlignmentProvesEffect → ⊥
+noEffectPromotionRegression = E.alignmentIsNotEffect
