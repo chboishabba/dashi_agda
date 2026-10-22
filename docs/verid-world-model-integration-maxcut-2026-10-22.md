@@ -236,3 +236,16 @@ No tests were run in this connector-only implementation. Canonical B4 and A/B/C/
 New `DASHI/Physics/Closure/NSVERIDB4BipartiteRateShiftExact.agda` derives `(a+r)-(a+s)=r-s` via rational ring solver and then uses list induction to prove common-rate-shift invariance of the **actual** `NSTriadKNFiniteBipartiteCovarianceExact.bipartitePairSum` owner. This is a more meaningful formal owner than a standalone scalar script because it establishes invariance of the same bipartite covariance that the literal physical R440 reduction uses. Source-written only; no kernel receipt yet.
 
 The mathematical lesson is that physical B4 proof search should target input-Laplacian **relative multipliers** and signed shell interactions. An overall reference rate cancels exactly; raw individual-rate bounds lose this cancellation. Still unpaid is controlling the rate variation with the *actual physical* M_core and ED uniformly in cutoff with a strict sub-half coefficient. No analytic payment or Clay promotion follows from this finite identity alone.
+
+## Signed shell and commutator repository re-audit; B4 physical weld
+
+The signed and commutator research was **already present**. Exact reuse examples:
+- `NSTriadKNWeightedNestedSignedCrossThreeOrbitBidiExact.agda`: same-object nested signed LH/HL, HH-to-low and comparable channels *before taking norms*.
+- `NSForensicSignedRouteLineageAuditExact.agda`: historical actual-signed route through R294/R301, physical R375/R377/R379, live R406 and subsequent nested Bony/commutator owners. Lineage is not an analytic proof.
+- `NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Exact.agda`: sharp core-core principal `<= (1/2) M_core`.
+- `NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Exact.agda`: exact same-output noncore/core signed covariance; `NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda`: literal R440 normal form.
+- `NSClayFacingBPureAnalysisFrontier20261005Exact.agda`: B4 remains the strict physical signed payment; B1/B2/B3 and B7 retain separate live physical producers.
+
+New `DASHI/Physics/Closure/NSVERIDB4PhysicalRateShiftWeldExact.agda` specializes the prior generic bipartite rate-shift invariance to the **actual** live B4 noncore/core incidence lists, `Rate.inputMass`, `Live.work output`, and signed defect. It proves the shifted physical covariance equals the original, and rewriting the signed defect with any common reference rate is legitimate. This is an exact algebraic cancellation statement about the literal physical *finite* family; it does **not** pay its physical energy estimate, and does **not** say the full dissipative PDE is invariant under a rate shift.
+
+Do not reimplement Bony decomposition, signed cross channels, rate-to-resolvent transport, principal Young half estimate, or generic experiment scheduling. The next honest physical leaf is a cutoff-uniform noncore/core bound using the already-existing signed shell and commutator certificates that has coefficient `thetaD<1/2` against actual core mass, plus local ED. Verify an exact carrier/normalization transfer before borrowing any other signed route's estimate. As before, source-written, not Agda-kernel verified in this session.
