@@ -10,7 +10,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
-record BinaryPhotonLikelihood : Set where
+record BinaryPhotonLikelihood : Set₁ where
   constructor binary-photon
   field
     photon : ℚ
