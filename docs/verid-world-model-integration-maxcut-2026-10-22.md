@@ -206,3 +206,19 @@ Suggested local Agda test (not run):
 AGDA_BIN="$PWD/scripts/agda29_without_k_wrapper.sh" \
 scripts/run_agda29_parallel_check.sh DASHI/WorldModel/VERIDNSCanonicalEvidenceFirewallExact.agda
 ```
+
+## B4 new mathematics: rate-oscillation cancellation candidate
+
+The *existing* same-object October 7 owner `NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda` proves the literal signed noncore/core defect normal form. The existing `NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Exact.agda` identifies the bipartite covariance, which is the correct starting point; **do not introduce a second representation theorem**.
+
+For finite noncore cells `(r_i,w_i)` and core cells `(s_j,z_j)`, the covariance is exactly
+`C = sum_ij (r_i - s_j)(w_i - z_j)`.
+Consequently,
+`|C| <= sum_ij |r_i - s_j||w_i-z_j| <= osc_cross(r) sum_ij |w_i-z_j|`.
+The bound is invariant under adding a common constant to all rates and vanishes when all interacting rates are equal. These are genuine finite algebraic consequences; unlike a naive `max|r| * sum|w|` bound, only **rate differences** are charged. Their potential analytic payoff is a cross-shell cancellation/commutator estimate if `osc_cross(r)` or the signed sum gains summability.
+
+New `scripts/ns_b4_r440_oscillation_bound.py` checks exact rational four-moment versus pairwise identity and both inequalities, including an exhaustive 729-case bounded fixture. `tests/test_ns_b4_r440_oscillation_bound.py` checks common rate shift invariance and constant-rate vanishing.
+
+**Critical gap:** the physical R440 mixed vectors are not scalar toy values, and the required inequality `-coherentWork(M,R440residual) <= theta_D M_core + c_D ED` needs the *actual* physical scalar product, signed structure and cutoff-uniform coefficient bounds with `theta_D < 1/2`. The above finite bound is not that theorem; it suggests exactly what oscillation-weighted physical estimate to seek. An unrestricted cross-shell supremum may blow up or scale with cutoff, so an unweighted oscillation estimate is not sufficient. Remaining A1/A2/A3/B123/B7/CD remain open.
+
+No kernel or local Python receipts were obtained by the GitHub-connector edit session.
