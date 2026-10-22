@@ -1443,3 +1443,8 @@ Statistical meta-analysis is a **conditionally enabled secondary consumer only**
 6. Assemble the *Sustainability* submission, subject to current journal/editorial requirements and responsible GenAI disclosure.
 
 **Hard boundaries:** Being one of ~43,996 ERIC records does not make a study included; reviewer nomination != evidence; team mail != methodological execution; interpretive meta-synthesis != statistical meta-analysis; reflexive worked application != prospective human-subjects research; author invitation != finding.
+
+
+## 2026-10-22 Weekly decision calendar
+
+The proposed **28 Friday decision gates, 23 October 2026–30 April 2027**, are detailed in [digital-esd-weekly-decision-calendar-2026-2027.md](digital-esd-weekly-decision-calendar-2026-2027.md). The 6 November 2026 ~250-word abstract and 30 April 2027 completed-paper targets are **provisional team-internal planning assumptions**, not publisher deadlines or verified agreements. The MDPI special issue publicly lists **30 August 2027** as the full-manuscript submission deadline and invites optional ~250-word planned-paper enquiries. The calendar specifies owners/decisions, 2026 holiday exceptions, phased evidence work, two worked applications, and a conditional rather than compulsory statistical meta-analysis gate. Verify both internal targets with collaborators; avoid reporting them as settled until confirmed.
