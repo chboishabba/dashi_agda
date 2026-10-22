@@ -146,3 +146,18 @@ The benchmark deliberately excludes numerical agreement from formal theorem clos
 Phases: foundation existing; lab-contact / proof/experiment / snowball/pareto adapters source-written; numerical contact code now source-written; runtime verification and formal/numeric RHS parity open; independent physical fidelity and actual model-guided performance benchmark open.
 
 This tranche was committed by GitHub connector without running Python tests, Agda kernel, CI, or any physical experiment.
+
+## Re-audit: previous NS experiments already pay part of numerical comparison (2026-10-22)
+
+IMPORTANT roadmap correction: numerical comparison and even held-out falsification were **already implemented and reported** before the new VERID adapters.
+
+- `docs/ns_exact_galerkin_coherence_baseline_results.md`: matched N32/N48/N64 triad initial states; initial gamma around 0.72727; nonvacuous held-out N64 rows; RHS component/direct RHS and derivative checks at machine precision; held-out depletion-margin *failure* (-0.01/-0.05/-0.10/-0.25); fitted feature-span domination does **not** close the required nonvacuous depletion claim. This is a real, valuable negative experiment.
+- `scripts/ns_generate_matched_galerkin_trajectories.py` and `scripts/ns_run_matched_coherence_baseline.py`: existing matched-cutoff simulation and held-out comparison producers.
+- `scripts/ns_diagnostic_harness.py`: consumes sibling dashiCFD truth NPZ, handles 2D-vs-3D vorticity scope explicitly, and emits side-by-side shell-time residual/budget audits. 2D embedded data cannot pay the 3D vortex-stretching bridge.
+- `DASHI/Physics/Closure/DashiCFDThetaRuntimeDiagnosticReceipt.agda`: entire theta-profile, critical shell, seed/grid/backend stress roles and non-promotion firewall.
+- `DASHI/Core/ResidualConditionedExperimentPortfolioExact.agda`: existing proof of changing the selected experiment after a live residual update.
+- `DASHI/Reasoning/BlockedImplicationExperimentBackpropExact.agda`: blocked implication -> missing evidence obligation -> experiment-design slot -> candidate information move.
+
+`VERIDNSExistingEvidenceConvergenceExact.agda` imports those conceptual owners (CFD programme, theta receipt, existing residual-scheduler proof, blocked implication) so the VERID programme does **not** recreate general adaptive experiment selection.
+
+**Revised remaining gap:** the missing work is a concrete executable *same-object evidence adapter* mapping a particular previously executed NS discrepancy/falsifier into the established `ResidualConditionedExperimentPortfolio` and updating its real experiment choice, with authority/provenance and a replay receipt. The toy portfolio already proves change of selection, but it is not data-driven by the actual NS baselines. A cross-integrator test is a supplemental stress test, not the first observed comparison or proof that independent finite-RHS comparisons were historically absent. No real physical instrument or continuum theorem is certified by these results.
