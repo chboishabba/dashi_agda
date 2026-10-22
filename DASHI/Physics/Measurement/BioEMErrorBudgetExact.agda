@@ -1,11 +1,9 @@
 module DASHI.Physics.Measurement.BioEMErrorBudgetExact where
 
--- Abstract triangle-inequality error transport. Each real experimental
--- error bound must be supplied by an independently justified receipt.
--- No probability distribution or uncertainty level is inferred by this code.
+-- Abstract three-stage triangle error transport with explicit monotonicity
+-- and associativity assumptions. Empirical estimates remain separate.
 
 open import Agda.Primitive using (Level)
-open import Agda.Builtin.Equality using (_≡_; refl)
 
 record AdditiveErrorGeometry {ℓ : Level}
   (Signal Error : Set ℓ) : Set ℓ where
@@ -26,6 +24,10 @@ record AdditiveErrorGeometry {ℓ : Level}
     transitive :
       (a b c : Error) →
       bounded a b → bounded b c → bounded a c
+    associateBound :
+      (a b c : Error) →
+      bounded (combine (combine a b) c)
+              (combine a (combine b c))
 open AdditiveErrorGeometry public
 
 record ThreeStageErrorReceipt {ℓ : Level}
@@ -43,22 +45,40 @@ totalErrorBound :
   ∀ {ℓ} {Signal Error : Set ℓ}
     (g : AdditiveErrorGeometry Signal Error)
     (actual physical sensor processed : Signal)
-    (ePhysical eSensor eProcess : Error) →
-    ThreeStageErrorReceipt g actual physical sensor processed
-      ePhysical eSensor eProcess →
+    (ep es er : Error) →
+    ThreeStageErrorReceipt g actual physical sensor processed ep es er →
     bounded g (distance g actual processed)
-      (combine g ePhysical (combine g eSensor eProcess))
+      (combine g ep (combine g es er))
 totalErrorBound g actual physical sensor processed ep es er receipt =
   let
     open AdditiveErrorGeometry g
     open ThreeStageErrorReceipt receipt
-    first : bounded (distance actual sensor) (combine ep es)
-    first = transitive _ _ _
-      (triangle actual physical sensor)
-      (rightMonotone _ _ _ physicalBound)
+    dAP = distance actual physical
+    dPS = distance physical sensor
+    dAS = distance actual sensor
+    dSR = distance sensor processed
+    first : bounded dAS (combine ep es)
+    first =
+      transitive dAS (combine dAP dPS) (combine ep es)
+        (triangle actual physical sensor)
+        (transitive (combine dAP dPS) (combine ep dPS)
+          (combine ep es)
+          (leftMonotone dAP ep dPS physicalBound)
+          (rightMonotone dPS es ep sensorBound))
+    second :
+      bounded (distance actual processed)
+        (combine (combine ep es) er)
+    second =
+      transitive (distance actual processed) (combine dAS dSR)
+        (combine (combine ep es) er)
+        (triangle actual sensor processed)
+        (transitive (combine dAS dSR) (combine (combine ep es) dSR)
+          (combine (combine ep es) er)
+          (leftMonotone dAS (combine ep es) dSR first)
+          (rightMonotone dSR er (combine ep es) processBound))
   in
-  transitive _ _ _
-    (triangle actual sensor processed)
-    (transitive _ _ _
-      (leftMonotone _ _ _ first)
-      (leftMonotone _ _ _ processBound))
+  transitive (distance actual processed)
+    (combine (combine ep es) er)
+    (combine ep (combine es er))
+    second
+    (associateBound ep es er)
