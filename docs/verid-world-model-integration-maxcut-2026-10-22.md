@@ -249,3 +249,21 @@ The signed and commutator research was **already present**. Exact reuse examples
 New `DASHI/Physics/Closure/NSVERIDB4PhysicalRateShiftWeldExact.agda` specializes the prior generic bipartite rate-shift invariance to the **actual** live B4 noncore/core incidence lists, `Rate.inputMass`, `Live.work output`, and signed defect. It proves the shifted physical covariance equals the original, and rewriting the signed defect with any common reference rate is legitimate. This is an exact algebraic cancellation statement about the literal physical *finite* family; it does **not** pay its physical energy estimate, and does **not** say the full dissipative PDE is invariant under a rate shift.
 
 Do not reimplement Bony decomposition, signed cross channels, rate-to-resolvent transport, principal Young half estimate, or generic experiment scheduling. The next honest physical leaf is a cutoff-uniform noncore/core bound using the already-existing signed shell and commutator certificates that has coefficient `thetaD<1/2` against actual core mass, plus local ED. Verify an exact carrier/normalization transfer before borrowing any other signed route's estimate. As before, source-written, not Agda-kernel verified in this session.
+
+## ABCD roll-up exact-source reconciliation (2026-10-22)
+
+Directly inspected `NSABCDMaxCut20261007Exact.agda`, `NSABCDConcentratedCompletionCutExact.agda`, `NSClayFacingABCDProofStatusExact.agda` and their A/B/C/D physical/source owner modules. The roll-up exists, and prior VERID cuts duplicated some established signed and covariance representations.
+
+- A's canonical physical frontier owner declares `aInternalFrontierClosed = false`.
+- B's pure-analysis owner declares `b1PhysicalProducerClosed = false`, `b2PhysicalProducerClosed = false`, `b3PhysicalProducerClosed = false`, and `pureAnalysisFrontierClosed = false`. Physical B4 and B7 payments are separately open.
+- C/D are treated by `NSClayFacingABCDProofStatusExact.agda` as external released-source proofs with statement alignment. `NSClayFacingCDReleasedAuditFrontier20261007Exact.agda` explicitly declares `independentKernelBuildWitnessedHere = false` (through its publication ledger) and separates source-audit from independent reconstruction.
+- No full canonical A/B internal mathematical closure or independently verified external C/D kernel build was demonstrated by this audit.
+
+New `scripts/ns_abcd_rollup_exact_owner_audit.py` and regression `tests/test_ns_abcd_rollup_exact_owner_audit.py` reconcile *literal declarations*, distinguish external source claims from reproduction, and fail closed on unsupported flag promotion. This is a structural audit, not an Agda kernel check or a proof of uninspected later obligations.
+
+```sh
+python scripts/ns_abcd_rollup_exact_owner_audit.py
+python -m unittest discover -s tests -p 'test_ns_abcd_rollup_exact_owner_audit.py'
+```
+
+Next cut: audit candidate later *theorems*, exact type signatures and dependency imports for each open A/B physical producer; if a matching term exists, integrate it into the canonical owner and kernel-check. Do not flip flags based on names, numerical receipts or existence of a conditional compiler.
