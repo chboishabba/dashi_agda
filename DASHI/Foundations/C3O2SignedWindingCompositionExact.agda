@@ -32,6 +32,6 @@ module Prove (S : AssociativeSignedWinding) where
   composeAssociative (pair a p) (pair b q) (pair c r)
     rewrite W.parityAssociative p q r
           | actionProduct p q c
-          | sym (assoc S a (action p b) (action p (action q c)))
-          | sym (actionDistributes p b (action q c))
+          | assoc S a (action p b) (action p (action q c))
+          | actionDistributes p b (action q c)
     = refl
