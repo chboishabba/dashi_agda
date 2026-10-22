@@ -100,3 +100,24 @@ State a validated abstraction relation between a real physical transition and th
 ### Benchmark preregistration
 
 Declare three task variants before evaluation: full state, dropped critical state coordinate, and sensor-noisy state. Compare baseline action selection, discriminator-aware planning and abstention. Measure failure-to-detect dangerous ambiguity, false promotion, experiment/measurement cost, and calibration error. Retain per-task receipts; do not generalize a one-task win.
+
+## 2026-10-22 NS as twin / simulator as experimental system
+
+We reuse the actual numerical solver in `scripts/ns_five_halves_galerkin_trajectory.py` (periodic finite Galerkin RK4; three fixed seeds). New `scripts/ns_verid_simulation_contact.py` runs it with `dt` and `dt/2` at identical horizons and cutoffs, compares final energy, time-integrated weighted five-halves and vorticity Fourier L1 quantities, and produces a deterministic digest and strictly non-promoting authority fields. `tests/test_ns_verid_simulation_contact.py` checks deterministic outputs, matched horizons, negative authority fields, projected-state collision and invalid arguments.
+
+`DASHI/WorldModel/VERIDNSFiniteTwinContactExact.agda` imports the existing finite canonical NS Galerkin RHS mode-retention (Round 65), path-history residue and VERID experiment/frontier owners. The receipt is *not* a proof that the Python numerical RHS is identical to Agda's literal Fourier RHS. That semantic parity remains a named next producer.
+
+Proposed experiment stack:
+1. **Formal twin:** exact finite modal coordinates, reality constraint, RHS geometry/invariants, cutoff-indexed obligations.
+2. **Numerical experiment:** independently replayable simulation, digest, time grid, observable comparisons; currently two runs of the **same** RK4 solver with different time steps.
+3. **Validation model:** separate discretisation error, reference-solver disagreement, state-projection loss and physical model discrepancy. A smaller RK4 step alone does not certify error versus the mathematical ODE.
+4. **Physical contact:** calibrated measurements only if/when available; do not substitute simulation traces for real-world experimental evidence.
+5. **F1 analogy:** F1 teams use software simulations, wind tunnels, dyno/test rigs, telemetry and track runs iteratively; the useful analogy is model correlation and discrepancy-led design, not an assertion that their measurements establish this specific NS simulation's fidelity.
+
+Run from the repository root with dependencies installed:
+```sh
+python -m unittest discover -s tests -p 'test_ns_verid_simulation_contact.py'
+python scripts/ns_verid_simulation_contact.py --steps 8 --dt 0.002 --output-json /tmp/ns_verid_contact.json
+```
+
+No runtime or Agda kernel receipt was obtained in this GitHub connector session. The symbolic projection fixture is preregistered, not a derived performance win. Next highest-alpha action: connect two **independent** solver implementations to one pinned finite same-object initial state and timestep/horizon, then prove/calibrate numerical RHS parity and error envelopes; add matched full/projection/noisy benchmark conditions and held-out physical measurement when possible.
