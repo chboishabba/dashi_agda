@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Programmes.ResearchProgrammeExact as Programme
 import DASHI.Programmes.TestHarnessExact as TestHarness
 import DASHI.Programmes.DashifineExact as Dashifine
 import DASHI.Programmes.DashifineWaveProjectionFamilyExact as Projection
@@ -17,10 +18,10 @@ import DASHI.WorldModel.VERIDExperimentProofSearchBridgeExact as VERID
 -- coordinate. A physical bound still needs an empirical contact receipt.
 ------------------------------------------------------------------------
 
-legacyTestProgramme : DASHI.Programmes.ResearchProgrammeExact.ResearchProgramme
+legacyTestProgramme : Programme.ResearchProgramme
 legacyTestProgramme = TestHarness.dashitestProgramme
 
-legacyFineProgramme : DASHI.Programmes.ResearchProgrammeExact.ResearchProgramme
+legacyFineProgramme : Programme.ResearchProgramme
 legacyFineProgramme = Dashifine.dashifineProgramme
 
 fullObserver : Bool → Bool
