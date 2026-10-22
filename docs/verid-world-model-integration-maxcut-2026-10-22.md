@@ -192,3 +192,17 @@ python -m unittest discover -s tests -p 'test_ns_verid_raw_baseline_reconciliati
 ```
 
 No raw archive was loaded in the GitHub connector editing environment, so the real-data reconciliation has been **implemented but not executed**. The next outstanding same-object handoff is a concrete source-artifact locator/hash and consumer-relative proof-obligation audit, not another generic numerical comparison or selection scheduler.
+
+## Canonical mathematics max-cut audit — no false discharge
+
+The request to discharge all canonical NS residuals cannot be met by finite simulations or structural wrappers alone. The current canonical `NSCanonicalClayResidualExact` has eight genuinely open sockets: A1 same-source continuum pair population and high-frequency heat weld; A2 low/high actual physical majorant domination; A3 actual continuum continuation; B4 signed physical R440 estimate with `1/2+theta_D<1`; B123 three physical producer estimates; B7 actual Q4 integrated + E positive route **or** signed Q5 fallback; B continuation physical inputs; CD independent kernel build plus reconstruction against a released source. `CanonicalClayFrontierExact` keeps unresolved packages and Clay promotion false. Finite held-out falsification of one candidate B7 depletion currency is valuable, but not the B7 estimate, let alone all A/B/C/D.
+
+New `DASHI/WorldModel/VERIDNSCanonicalEvidenceFirewallExact.agda` gives each numerical observation an explicit canonical target and non-promoting consequence, reuses the exact bidirectional measured-fibre refinement theorem and proves the canonical no-promotion flags remain false for any finite observation. These are genuine compositional results within existing formal interfaces, **not proofs of the canonical physical obligations**.
+
+Highest-return missing mathematical producer to attack is B4's concrete source-specific signed estimate, because the criterion `signedWork ≤ thetaD*coreMass + cD*localED`, `thetaD≥0`, `1/2 + thetaD < 1` and the same-source attachments already have a fixed interface. Require a physical derivation of the inequality and strict margin before constructing `CanonicalB4PhysicalR440AnalyticPayment`. Other canonical leaves remain independently open; do not use unsafe postulates, definitional tautologies, synthetic evidence, simulation-only claims, or a hypothetical implication as the missing producer.
+
+Suggested local Agda test (not run):
+```sh
+AGDA_BIN="$PWD/scripts/agda29_without_k_wrapper.sh" \
+scripts/run_agda29_parallel_check.sh DASHI/WorldModel/VERIDNSCanonicalEvidenceFirewallExact.agda
+```
