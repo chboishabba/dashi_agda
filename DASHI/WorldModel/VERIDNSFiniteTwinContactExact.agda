@@ -2,6 +2,7 @@ module DASHI.WorldModel.VERIDNSFiniteTwinContactExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitRHSTangentRound65Exact as Tangent
 import DASHI.Core.TrajectoryResidueExact as Residue
@@ -37,11 +38,11 @@ literalExperimentalFrontier = Frontier.canonicalVERIDFrontier
 record NSNumericalTwinContact : Set where
   constructor nsNumericalTwinContact
   field
-    formalRHSReference : Agda.Builtin.String.String
-    modelSolverDigest : Agda.Builtin.String.String
-    comparisonSolverDigest : Agda.Builtin.String.String
-    measuredDiscrepancyReference : Agda.Builtin.String.String
-    timeGridAndCutoffReference : Agda.Builtin.String.String
+    formalRHSReference : String
+    modelSolverDigest : String
+    comparisonSolverDigest : String
+    measuredDiscrepancyReference : String
+    timeGridAndCutoffReference : String
     identicalSolverCode : Bool
     physicallyValidated : Bool
     continuumAuthority : Bool
