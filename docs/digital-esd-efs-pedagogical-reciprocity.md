@@ -59,3 +59,22 @@ Only **after** that EfS-side definition does `DigitalESDEfSIndependentChallengeE
 5. Rerun a source-admission and literature-search completeness check. The candidate six EfS themes and seven digital themes may split/merge/extend/be defeated.
 
 An Agda structural inhabitant guarantees that the typed receipt contains its declared data and boundaries; it does **not** guarantee factual source agreement, independence of actual human reviewers, a complete literature search, or empirical validity. These owners are source-written, kernel-pending.
+
+
+## Canonical reuse and real ERIC world integration
+
+`DigitalESDEfSCanonicalReuseAdapterExact` reuses the existing `DigitalESDEvidenceBraidTensionExact.BraidRelation/TensionReceipt` vocabulary instead of defining yet another relation ontology; it explicitly links the EfS comparison to the Alice corpus loom, Kimmerer/Two-Eyed and relational epistemic source boundaries, the situated education trajectory and the DB-native exact 19-coordinate extraction. The canonical evidence braid retains complementarity, convergence, productive tension, scope/provenance/authority differences, conflict, and forbidden collapse. The EfS adapter maps only the four currently used comparison outcomes; unmatched is represented as scope difference, **not** absence in a scholarly corpus.
+
+### Large-corpus capabilities already present
+
+- `docs/digital-esd-roadmap-live.md` records **46,597 raw ERIC query hits**, **43,996 unique ERIC metadata records**, and **2,601 cross-query duplicate occurrences**. These are source-registry/screening *records*, not 43,996 acquired full texts or eligible studies.
+- `interop_scripts/digital_esd/run_world.py` is the zero-flag orchestration path: explicit reviewer decisions and retrieval; byte verification and textual materialisation for selected/retrieved documents; SCALE-1 PostgreSQL-native prepare/worker/finalize; a 43,996-row **processing ledger**; and canonical SLR/PostgreSQL world revisions.
+- The SLR 43,996-row **synthetic scale fixture** is deliberately distinct from the **real ERIC 43,996-record universe** (`interop_scripts/README.md`, `DigitalESDERICStudyInteropExact`). Matching row counts do not establish matching source identities or parsed full texts.
+- `DigitalESDManuscriptMethodologyExact` provides the canonical 19-coordinate schema. `DigitalESDAcademicCorpusWorldCrossPollinationExact` retains revision/span/observation, claim ceilings, source genealogy and independence, and forbids parser/PNF nominations from paying semantic or audit admission.
+- Relevant status remains **candidate-only** until actual screening, text/source review, source-audit admission, and consumer-scoped synthesis receipts exist. The non-ERIC database surfaces are not silently treated as completed.
+
+### Highest-alpha next evidence operation
+
+Do **not** add EfS themes as extra canonical extraction coordinates yet. Instead introduce EfS concept candidates as revision- and span-grounded `EvidenceObservation`/PNF nominations **inside the existing 19-coordinate** pedagogy/competence, sustainability, participant-authority, time, context and uncertainty coordinates. Route to human review cases that distinguish (i) awareness vs systems reasoning, (ii) individual voice vs collective decision power, (iii) situated practice vs school topic labels, (iv) ecocentric relations vs purely human observer vocabulary, and (v) pathways/pedagogies vs outcomes. Reviewers may split/merge/refute the preliminary six EfS themes and seven digital principles. The metadata universe is screened first; only selected full texts are retrieved for expensive passage-level interpretation.
+
+No new large-corpus parser, source ontology, ingestion database or screening service is justified. This crosswalk does **not** assert that the ~44k ERIC records have all been fully read, screened, admitted or semantically coded.
