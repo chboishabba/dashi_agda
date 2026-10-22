@@ -1448,3 +1448,8 @@ Statistical meta-analysis is a **conditionally enabled secondary consumer only**
 ## 2026-10-22 Weekly decision calendar
 
 The proposed **28 Friday decision gates, 23 October 2026–30 April 2027**, are detailed in [digital-esd-weekly-decision-calendar-2026-2027.md](digital-esd-weekly-decision-calendar-2026-2027.md). The 6 November 2026 ~250-word abstract and 30 April 2027 completed-paper targets are **provisional team-internal planning assumptions**, not publisher deadlines or verified agreements. The MDPI special issue publicly lists **30 August 2027** as the full-manuscript submission deadline and invites optional ~250-word planned-paper enquiries. The calendar specifies owners/decisions, 2026 holiday exceptions, phased evidence work, two worked applications, and a conditional rather than compulsory statistical meta-analysis gate. Verify both internal targets with collaborators; avoid reporting them as settled until confirmed.
+
+
+## Current-week checkpoint — 22–23 October 2026
+
+**Current authoritative planning packet:** [digital-esd-weekly-brief-2026-10-23.md](digital-esd-weekly-brief-2026-10-23.md). It inventories PR #1237, evidence/source boundaries, the repo's integrative-review paper-type owner and the coauthor October correspondence. **This week's P0 is coauthor decisions** on research question, both directions of sustainability, paper type, title/abstract owner, optional 6 November abstract target, and 30 April manuscript milestone. The intended deliverable is a recorded decision packet and abstract outline, **not** statistical meta-analysis or completion of the ERIC corpus. 6 November and 30 April remain proposed internal targets pending team confirmation.
