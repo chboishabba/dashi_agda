@@ -222,3 +222,11 @@ New `scripts/ns_b4_r440_oscillation_bound.py` checks exact rational four-moment 
 **Critical gap:** the physical R440 mixed vectors are not scalar toy values, and the required inequality `-coherentWork(M,R440residual) <= theta_D M_core + c_D ED` needs the *actual* physical scalar product, signed structure and cutoff-uniform coefficient bounds with `theta_D < 1/2`. The above finite bound is not that theorem; it suggests exactly what oscillation-weighted physical estimate to seek. An unrestricted cross-shell supremum may blow up or scale with cutoff, so an unweighted oscillation estimate is not sufficient. Remaining A1/A2/A3/B123/B7/CD remain open.
 
 No kernel or local Python receipts were obtained by the GitHub-connector edit session.
+
+## New B4 mathematical falsifier — scalar absorption cannot follow from covariance alone
+
+The previous finite rate-oscillation envelope is mathematically valid but is not coercive. New `scripts/ns_b4_r440_scalar_absorption_nogo.py` constructs, for any selected `0<=theta<1/2`, `c>=0`, a one-noncore/one-core exact rational family with `C=-R`, so signed defect `-C=R`, while illustrative *unconstrained* scalar core mass and ED both equal one. Choose integer `R>theta+c` and the claimed unqualified estimate fails. `tests/test_ns_b4_r440_scalar_absorption_nogo.py` exercises the counterfamily.
+
+**Scope:** this is a rigorous counterexample to deriving a universal strict absorption estimate from *bare covariance algebra plus independent scalar budget placeholders*. It is emphatically **not** a realizable physical NS counterexample: actual `M_core` and `ED` are not freely assignable, and actual triad rates and work are state-dependent. Hence any B4 payment MUST exploit physical compatibility/energy relations of the literal R440 fibre. Continue from `NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact` and `NSCanonicalB4PhysicalR440AnalyticInterfaceExact`, not a larger generic bound. A sufficient new producer would be cutoff-uniform control of signed rate-difference work by actual `M_core` and `ED` with strict coefficient below 1/2.
+
+No tests were run in this connector-only implementation. Canonical B4 and A/B/C/D remain open.
