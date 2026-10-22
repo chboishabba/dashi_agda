@@ -42,3 +42,29 @@ Use the repository's Agda 2.9 parallel-check wrapper if available. No kernel rec
 - New negative fixture is kernel-checked.
 - Positive laboratory fixture only after its concrete safety/refinement/observation receipts exist.
 - No generated candidate source, selected route, closed contact gate or simulator output is promoted as physical truth.
+
+## 2026-10-22 proof-search / experiment max-cut
+
+New `DASHI/WorldModel/VERIDExperimentProofSearchBridgeExact.agda` reuses:
+- `SequentialConsumerExperimentPlannerExact.SequentialConsumerPlan`;
+- `DiscriminatorSynthesisExact.ExperimentBundle` and `DiscriminatingLanguageExtension`;
+- `AristotleActiveExperimentalProofSearchLoopExact.initialIteration`;
+- `ProofSearchExperimentalParetoCrossPollinationExact` and `ProofExperimentAction369IntegrationExact` authority boundaries;
+- the lab contact from the previous cut, with **separate** simulation vs physical safety/conformity/observation payments.
+
+The finite fixture has two Bool worlds with the same coarse observation. The identity experiment bundle distinguishes them, and `extensionJoinSeparates` rules out equality of the joined observations. This is a symbolic regression, not a calibrated laboratory measurement.
+
+**Digital-ESD cross-pollination, without domain conflation:** The `DigitalESDStudyResultPNFProofSearchExact` source's strongest-paid vs first-unpaid implication and study-specific uncertainty ceilings motivate separately recording model-safe, physically observed, and causally identified claims. No educational population effect or statistical estimate is transferred into physical-lab semantics.
+
+**Remaining priorities:** kernel-check the new modules; finite *positive* governed lab instance; concrete state-version/capacity guards; observation-wire receipts; instrument-specific calibration and benchmark against the same experiment planner without typed repair. Do not mark those as complete based on symbolic non-descent or action-gate declarations.
+
+### Suggested check (Agda 2.9 pinned environment)
+
+```sh
+AGDA_BIN="$PWD/scripts/agda29_without_k_wrapper.sh" \
+  scripts/run_agda29_parallel_check.sh \
+  DASHI/WorldModel/VERIDLabWorldModelInstanceExact.agda \
+  DASHI/WorldModel/VERIDExperimentProofSearchBridgeExact.agda
+```
+
+Kernel receipt: **not yet obtained in this editing environment**.
