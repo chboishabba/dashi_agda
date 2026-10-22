@@ -230,3 +230,9 @@ The previous finite rate-oscillation envelope is mathematically valid but is not
 **Scope:** this is a rigorous counterexample to deriving a universal strict absorption estimate from *bare covariance algebra plus independent scalar budget placeholders*. It is emphatically **not** a realizable physical NS counterexample: actual `M_core` and `ED` are not freely assignable, and actual triad rates and work are state-dependent. Hence any B4 payment MUST exploit physical compatibility/energy relations of the literal R440 fibre. Continue from `NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact` and `NSCanonicalB4PhysicalR440AnalyticInterfaceExact`, not a larger generic bound. A sufficient new producer would be cutoff-uniform control of signed rate-difference work by actual `M_core` and `ED` with strict coefficient below 1/2.
 
 No tests were run in this connector-only implementation. Canonical B4 and A/B/C/D remain open.
+
+## B4 exact source-carrier rate-shift cancellation proof
+
+New `DASHI/Physics/Closure/NSVERIDB4BipartiteRateShiftExact.agda` derives `(a+r)-(a+s)=r-s` via rational ring solver and then uses list induction to prove common-rate-shift invariance of the **actual** `NSTriadKNFiniteBipartiteCovarianceExact.bipartitePairSum` owner. This is a more meaningful formal owner than a standalone scalar script because it establishes invariance of the same bipartite covariance that the literal physical R440 reduction uses. Source-written only; no kernel receipt yet.
+
+The mathematical lesson is that physical B4 proof search should target input-Laplacian **relative multipliers** and signed shell interactions. An overall reference rate cancels exactly; raw individual-rate bounds lose this cancellation. Still unpaid is controlling the rate variation with the *actual physical* M_core and ED uniformly in cutoff with a strict sub-half coefficient. No analytic payment or Clay promotion follows from this finite identity alone.
