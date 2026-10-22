@@ -68,3 +68,17 @@ AGDA_BIN="$PWD/scripts/agda29_without_k_wrapper.sh" \
 ```
 
 Kernel receipt: **not yet obtained in this editing environment**.
+
+## Ibrahim / snowball / Pareto max-cut
+
+The new `DASHI/WorldModel/VERIDIbrahimSnowballParetoBridgeExact.agda` makes VERID's first live laboratory consumer a **redirect**, not a closure. It imports the canonical `LiteralFrontierSchedulerExact`, `SnowballAtomWrongTypeScaleInvariantExact`, `ProofSearchExperimentalParetoCrossPollinationExact`, and `IbrahimSnowballParetoFrontierExact` owners rather than copying their algorithms.
+
+- Ibrahim: same-object source identification and non-substitution; the historical first-link corpus is an **acquisition/provenance method** example, not evidence for lab action.
+- Snowball: retain source discoveries out of order; payment is receipt- and consumer-relative; first unpaid physical calibration remains open.
+- Pareto: rank actionable residual-reducing experiments by declared cost/risk/discrimination, with no automatic promotion from membership in a frontier.
+- Literal scheduler: `redirectFrontier` for the symbolic two-world discriminator, not `closeLeaf`; never use a string reference as an execution capability.
+- Digital ESD: borrow strongest-paid/first-unpaid claim ceilings, not educational causal conclusions.
+
+### Next executable cut
+
+Build a positive finite model with (1) a concrete capacity/volume invariant, (2) a lab-native stale-snapshot guard, (3) a realized discriminator outcome, (4) version-bound authority and physical evidence separate from formal simulation, and (5) native SLRW/SLRO execution receipt. Benchmark two otherwise identical planners with and without fibre-sensitive experiment selection. Pending Agda kernel checks, all new modules remain source-written only.
