@@ -121,3 +121,28 @@ python scripts/ns_verid_simulation_contact.py --steps 8 --dt 0.002 --output-json
 ```
 
 No runtime or Agda kernel receipt was obtained in this GitHub connector session. The symbolic projection fixture is preregistered, not a derived performance win. Next highest-alpha action: connect two **independent** solver implementations to one pinned finite same-object initial state and timestep/horizon, then prove/calibrate numerical RHS parity and error envelopes; add matched full/projection/noisy benchmark conditions and held-out physical measurement when possible.
+
+## Cross-integrator numerical contact and revised steelman
+
+`scripts/ns_verid_cross_integrator_contact.py` runs existing finite Fourier Galerkin `rhs` through two *different time integrators*: canonical fixed-step RK4 and adaptive SciPy DOP853. It holds initial seed, cutoff, viscosity and horizon fixed and records energy, five-halves, Fourier vorticity, modal L2 discrepancy and digest. This is stronger than RK4-vs-half-RK4 as a numerical check but both share **the same Fourier RHS and state geometry**. It is neither independently coded spatial-physics validation nor a rigorous numerical error bound. `tests/test_ns_verid_cross_integrator_contact.py` covers determinism, finite discrepancy and authority firewalls.
+
+```sh
+python -m unittest discover -s tests -p 'test_ns_verid_cross_integrator_contact.py'
+python scripts/ns_verid_cross_integrator_contact.py --output-json /tmp/verid_ns_cross_integrator.json
+```
+
+The benchmark deliberately excludes numerical agreement from formal theorem closure and physical-action authorization. The first genuinely valuable independent parity experiment is direct Fourier triad summation versus FFT pseudo-spectral RHS on exactly matching retained modes, normalization, dealiasing and projection; only afterwards compare to the Agda literal coefficient owner. Once that works, run full-observation / erased-coordinate / noisy-observation preregistered cohorts and have the *same live residual* select a discriminating experiment.
+
+### Steelman and gap order
+
+1. **Technical novelty hypothesis:** common consumer-relative residual frontier for proof/acquisition/measurement/simulation/action, but distinct authority for each.
+2. **Strongest falsifier:** without consumer-relative repair, an otherwise identical controller is no worse across matched held-out worlds and budgets.
+3. **Most decisive physical-math theorem:** calibrated simulator-to-ODE defect envelope plus forward invariant/safety-margin transfer, distinguished from continuum NS.
+4. **Cross-instrument contact:** finite solver comparison -> independently coded Fourier RHS -> rigorous defect/error bound -> optional laboratory/physical telemetry.
+5. **Causal/scope ceiling:** numerical trajectory replay is not causal identification for a real physical system; experimental interventions still need controls and nuisance accounting.
+6. **Pareto discipline:** report domination only over declared feasible moves and declared observable/cost/risk coordinates, not an all-domain optimum.
+7. **Stopping/reopening:** progress is a measured reduction of the named consumer residual or a typed redirect; stale source, proof or calibration retracts downstream promotion.
+
+Phases: foundation existing; lab-contact / proof/experiment / snowball/pareto adapters source-written; numerical contact code now source-written; runtime verification and formal/numeric RHS parity open; independent physical fidelity and actual model-guided performance benchmark open.
+
+This tranche was committed by GitHub connector without running Python tests, Agda kernel, CI, or any physical experiment.
