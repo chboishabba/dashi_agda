@@ -242,3 +242,40 @@ This is now the operational interpretation of “each paper should prove only as
 **P1** Update manuscript results only when P0 paid; publish a transparent evidence table showing each relationship, contextual transfer, source-role, independent evidence units and unresolved contradictions. Reconcile the review draft's outdated statement that ERIC has never been executed with the ERIC retrieval evidence, without conflating retrieval with screening closure.
 
 **Non-goals:** new parser/DB ontology, new generic non-factorability calculus, claiming all 43,996 records were semantically coded, or attributing DASHI mathematical results to EfS/Indigenous scholarship.
+
+
+## 2026-10-22 correction from coauthor correspondence: manuscript phase, meta-synthesis and deliverables
+
+**Decision evidence**: Alice Brown's 13 October 2026 team email and the follow-up 14 October exchange, inspected in the connected Gmail (private working correspondence; do not quote/distribute without authors' permission), point to an **integrative conceptual review with a bounded author-nominated scholarship corpus, explicit relevance rationales, independently challenged ESD competency mapping, and retrospective/prospective scholarly praxis**. Do not claim the collaboration agreed on statistical meta-analysis. The letter explicitly cautions against describing the authors' work as a 'meta-analysis' and against committing the whole manuscript to a new action-research case study. The seven existing principles are an intermediate, revisable output rather than the headline novelty.
+
+### Correct paper type and conditional meta-analytic lane
+
+Canonical primary consumer: `DigitalESDPaperTypeRequirementParetoExact.integrativeConceptualReview`. The cross-paper operation is **interpretive evidence synthesis / candidate qualitative meta-synthesis** under transparent source-role, scope and alternative-interpretation discipline. A systematic mapping of admitted external studies may supplement this; avoid calling it completed or a quantitative meta-analysis.
+
+Statistical meta-analysis is a **conditionally enabled secondary consumer only** after accepted studies show: (1) a common estimand/intervention-comparator/outcome and compatible population/time horizon, (2) recoverable effects plus uncertainty, (3) reviewed study-family genealogy to avoid double-counting, (4) heterogeneity/explanatory context and missingness review, (5) risk-of-bias/publication-bias and sensitivity receipts, and (6) an explicit reason pooling is meaningful. Otherwise deliver stratified narrative evidence tables and falsification/claim-ceiling analysis. Existing `DigitalESDAcademicCorpusWorldCrossPollinationExact` and `DigitalESDStudyClaimCeilingExact` already own much of this; do not introduce another pooling ontology.
+
+### Updated publication phases / deliverables
+
+| Phase | Current status | Acceptance/deliverable |
+| --- | --- | --- |
+| 0. Target, rubric, governance | Owner implemented / editorial deadline reverify | Named MDPI *Sustainability* special issue; exact call + paper-type rubric + ethics/AI disclosures, coauthor agreement |
+| 1. Bounded author scholarship selection | Partly formalised, author decisions required | Nominated paper list with reasons, source boundaries and accepted/rejected candidates; not just the original nine-item starter |
+| 2. Source reconstruction and conceptual synthesis | Seven-principle starter + survival audit source-written | Exact source/revision/span/claim ceiling and rival theme audit; preserve what each source can prove |
+| 3. EfS competency and reciprocal challenge | Initial EfS-first formal owner and candidate comparisons committed | Reviewer-audited GreenComp/Tilbury/Elliott/Vikane mappings; relationships support/narrow/split/merge/defeat/extend |
+| 4. Broader external review | 43,996 ERIC metadata universe acquired/dedup reported; full review not demonstrated | Actual eligibility decisions, retained full texts, source-audit admission, cross-database status, reviewer disagreement |
+| 5. Synthesis and worked applications | Partial manuscript; revised framework not final | One bounded retrospective reconstruction and one prospective research-design demonstration, both source-grounded |
+| 6. Quantitative pooling gate | Not demonstrated eligible; optional | Either justified statistical pooled model with full diagnostics OR explicit documented 'pooling not warranted' decision |
+| 7. Writing and submission | Working draft only | Revised abstract; introduction, methods, evidence tables, discussion/limitations, references, declarations, coauthor signoff, submission-ready package |
+
+**Phase judgment:** conceptual/methodological architecture and processing apparatus are substantially built; manuscript execution is between phases 2–4, with phases 4–7 *not yet closed*. This is not a finished meta-analysis and not yet a completed external review.
+
+### Highest-alpha deliverable order
+
+1. Obtain collaborative acceptance of the question, paper type, selection logic and retrospective/prospective contributions; retain exact team feedback.
+2. Complete the nominated-author-corpus ledger including the additional named works in Alice's 13 October proposal, and make study-level claim ceilings visible.
+3. Turn existing EfS source candidates into reviewed source spans and author adjudications, not just further source-written Agda types.
+4. Run admitted external screening on real ERIC artifacts and other databases as available, with denominator and missingness receipts.
+5. Publish a principle-survival table and two contrasting worked applications, then make a deliberate pooling-feasibility determination.
+6. Assemble the *Sustainability* submission, subject to current journal/editorial requirements and responsible GenAI disclosure.
+
+**Hard boundaries:** Being one of ~43,996 ERIC records does not make a study included; reviewer nomination != evidence; team mail != methodological execution; interpretive meta-synthesis != statistical meta-analysis; reflexive worked application != prospective human-subjects research; author invitation != finding.
