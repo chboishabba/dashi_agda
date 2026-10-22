@@ -58,3 +58,11 @@ noBookLevelEffectPromotion : BookDescriptionEstablishesChapterEffect → ⊥
 noBookLevelEffectPromotion ()
 noRetroactiveFrameworkAttribution : Tilbury2004FrameworkIsTilbury2002ChapterResult → ⊥
 noRetroactiveFrameworkAttribution ()
+
+
+tilburyEfSSourceAtlas : Attr.AttributedSourceAtlas
+tilburyEfSSourceAtlas = Attr.mkSourceAtlas
+  "Tilbury / IUCN Education for Sustainability historical sources"
+  "DASHI.Education.DigitalESDTilburySourceRoleExact"
+  (tilbury2002 ∷ tilburyWortman2004 ∷ [])
+  "The 2002 IUCN collection provides book-level plural case pathways; the 2004 IUCN guide explicitly names five educational practice themes. Chapter-specific claims require separately acquired and reviewed spans; neither source establishes universal efficacy."
