@@ -14,26 +14,24 @@ import DASHI.Core.AttributedSourceCore as Attr
 -- chapter-level evidence, and the latter's five themes must not be
 -- retroactively attributed to every chapter of the first.
 tilbury2002 : Attr.AttributedSource
-tilbury2002 = Attr.mkDOISource
+tilbury2002 = Attr.mkNoDOISource
   "Daniella Tilbury; Robert B. Stevenson; John Fien; Danie Schreuder (editors)"
   "Education and Sustainability: Responding to the Global Challenge"
   "IUCN Commission on Education and Communication; ISBN 2-8317-0623-8"
   "2002"
-  "no DOI"
   "https://iucn.org/resources/publication/education-and-sustainability-responding-global-challenge"
-  Attr.academicArticleSource
+  Attr.academicBookSource
   "Edited case-study collection: multiple educational and community pathways. Book-level description is not chapter-specific outcome evidence."
   Attr.publicAttribution
 
 tilburyWortman2004 : Attr.AttributedSource
-tilburyWortman2004 = Attr.mkDOISource
+tilburyWortman2004 = Attr.mkNoDOISource
   "Daniella Tilbury; David Wortman"
   "Engaging People in Sustainability"
   "IUCN Publication Services; ISBN 2831708230"
   "2004"
-  "no DOI"
   "https://researchers.mq.edu.au/en/publications/engaging-people-in-sustainability/"
-  Attr.academicArticleSource
+  Attr.academicBookSource
   "Explicit five-theme practice framework: imagining a better future; critical thinking/reflection; participation in decision-making; partnerships; systemic thinking."
   Attr.publicAttribution
 
