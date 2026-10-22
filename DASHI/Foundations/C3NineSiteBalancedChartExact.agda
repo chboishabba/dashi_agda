@@ -3,6 +3,7 @@ module DASHI.Foundations.C3NineSiteBalancedChartExact where
 -- Exact nine-site <-> two-balanced-trit chart. No topology is inferred
 -- from the finite chart without an explicit continuous lift.
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 open import DASHI.Foundations.C3NineSiteAlternatingOrbitExact using
   (Site; TL; TM; TR; ML; MM; MR; BL; BM; BR; Triple;
    triple; configuration; T12)
@@ -64,8 +65,6 @@ chartInjective : ∀ {a b} → encode a ≡ encode b → a ≡ b
 chartInjective {a} {b} eq =
   trans (sym (decodeEncode a))
     (trans (cong decode eq) (decodeEncode b))
-  where
-    open import Agda.Builtin.Equality using (sym; trans; cong)
 
 chartTriple : Triple Site → Triple ChartPoint
 chartTriple (triple a b c) = triple (encode a) (encode b) (encode c)
