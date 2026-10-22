@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.DependencyPullbackCore as Pullback
 import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
 import DASHI.Core.SequentialConsumerExperimentPlannerExact as Planner
 import DASHI.Core.ProofSearchExperimentalParetoCrossPollinationExact as Pareto
@@ -43,7 +44,7 @@ experimentContactIsGoverned :
   (lab : Lab.LabWorldModelInstance) →
   (bridge : ExperimentToLabContact lab) →
   World.dependencyStatus (Lab.world lab) (dependency bridge)
-    ≡ DASHI.Core.DependencyPullbackCore.live
+    ≡ Pullback.live
 experimentContactIsGoverned lab bridge =
   Lab.contactHasLiveDependency lab (state bridge)
     (dependency bridge) (contact bridge)
