@@ -176,3 +176,19 @@ python scripts/ns_verid_abcd_bidi_replay.py --output-json /tmp/ns_verid_abcd_bid
 ```
 
 Main honest remaining gap: extract an *exact same-object raw numerical receipt* from archived manifests and bind it to the canonical B7 consumer; then execute the chosen new experiment and update the actual live residual portfolio, avoiding a new generic scheduler. Numerical failure of a proof *candidate* does not discharge physical A/B/C/D obligations. Agda kernel tests / runtime tests were not run by this GitHub-connector edit session.
+
+## Raw-result reconciliation cut (latest)
+
+The prior numerical next-probe recommendation was stale: the repo's `ns_run_matched_coherence_baseline.py` already executes replacement depletion currencies, bounded turnover and compact-Gamma potential analyses on the same matched trajectory manifest. In particular, `docs/ns_depletion_currency_comparison.md` documents cross-shell coherence, vorticity-direction turnover, projector turnover and middle-eigenvalue probes. Do not independently schedule the already completed cross-shell comparison.
+
+New `scripts/ns_verid_raw_baseline_reconciliation.py` reads the actual complete `schema_version=1.4.0` result produced by the canonical baseline, insists on N32/N48/N64 and a designated held-out N64 trajectory, extracts four typed held-out verdicts, hashes the source report, marks completed probes and routes the next move to canonical B7 *analytic* Q4/E-or-Q5 assumption audit. Missing results or unexpected authority flags cause abstention. Tests are in `tests/test_ns_verid_raw_baseline_reconciliation.py`.
+
+```sh
+# Reuse an existing archived output where available; regenerate only if needed.
+python scripts/ns_verid_raw_baseline_reconciliation.py \
+  --baseline-json /path/to/ns-matched-baseline.json \
+  --output-json /tmp/ns-verid-b7-reconciliation.json
+python -m unittest discover -s tests -p 'test_ns_verid_raw_baseline_reconciliation.py'
+```
+
+No raw archive was loaded in the GitHub connector editing environment, so the real-data reconciliation has been **implemented but not executed**. The next outstanding same-object handoff is a concrete source-artifact locator/hash and consumer-relative proof-obligation audit, not another generic numerical comparison or selection scheduler.
