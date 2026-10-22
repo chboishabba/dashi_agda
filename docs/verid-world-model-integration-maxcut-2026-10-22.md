@@ -82,3 +82,21 @@ The new `DASHI/WorldModel/VERIDIbrahimSnowballParetoBridgeExact.agda` makes VERI
 ### Next executable cut
 
 Build a positive finite model with (1) a concrete capacity/volume invariant, (2) a lab-native stale-snapshot guard, (3) a realized discriminator outcome, (4) version-bound authority and physical evidence separate from formal simulation, and (5) native SLRW/SLRO execution receipt. Benchmark two otherwise identical planners with and without fibre-sensitive experiment selection. Pending Agda kernel checks, all new modules remain source-written only.
+
+## Early DASHItest / DASHIfine / NS cross-pollination
+
+Concrete legacy owners found:
+- `DASHI/Programmes/TestHarnessExact.agda`: heterogeneous dashitest experiments attached to shared prediction/inference and kernel-defect contracts.
+- `DASHI/Programmes/DashifineExact.agda`: spectral/quotient/operator experiments under receipt-gated inference.
+- `DASHI/Programmes/DashifineWaveProjectionFamilyExact.agda`: preregistered three-task (fullXY/xOnly/yOnly) projection stress; one-task success cannot be lifted to family-wide superiority.
+- `DASHI/Physics/Closure/NSTriadKNHighestAlphaRound63Exact.agda`: finite Galerkin reality-orbit and coefficient-count repairs; explicitly unpaid physical bounds and continuum producers.
+
+New `VERIDLegacyExperimentProjectionReuseExact.agda` reuses both programme receipts and the projection benchmark boundary, exhibiting a finite coarse-observer collision and discriminating-coordinate repair. This is a negative/projection-invariance stress test, not an NS-to-laboratory physics theorem.
+
+### Highest-alpha physical obligation
+
+State a validated abstraction relation between a real physical transition and the simulated rollout, with an explicitly calibrated error envelope. Then derive a safety-margin transfer under declared Lipschitz/robustness assumptions, preserving time-indexed state versions. Do not import finite NS Galerkin constructions as proof of real-world convergence or calibrated liquid handling.
+
+### Benchmark preregistration
+
+Declare three task variants before evaluation: full state, dropped critical state coordinate, and sensor-noisy state. Compare baseline action selection, discriminator-aware planning and abstention. Measure failure-to-detect dangerous ambiguity, false promotion, experiment/measurement cost, and calibration error. Retain per-task receipts; do not generalize a one-task win.
