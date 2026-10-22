@@ -161,3 +161,18 @@ IMPORTANT roadmap correction: numerical comparison and even held-out falsificati
 `VERIDNSExistingEvidenceConvergenceExact.agda` imports those conceptual owners (CFD programme, theta receipt, existing residual-scheduler proof, blocked implication) so the VERID programme does **not** recreate general adaptive experiment selection.
 
 **Revised remaining gap:** the missing work is a concrete executable *same-object evidence adapter* mapping a particular previously executed NS discrepancy/falsifier into the established `ResidualConditionedExperimentPortfolio` and updating its real experiment choice, with authority/provenance and a replay receipt. The toy portfolio already proves change of selection, but it is not data-driven by the actual NS baselines. A cross-integrator test is a supplemental stress test, not the first observed comparison or proof that independent finite-RHS comparisons were historically absent. No real physical instrument or continuum theorem is certified by these results.
+
+## NS canonical A/B/C/D and bidi evidence max-cut
+
+Canonical owner `DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda` distinguishes: A1 physical population, A2 domination, A3 continuation; B4 R440 physical payment, B123 producer triplet, B7 Q4/E-versus-Q5 integrated control, B continuation, C/D released reconstruction. `DASHI/Physics/CanonicalClayFrontierExact.agda` also provides literal obligation IDs. These are **not** eight numerical test scores or independent proof completions; they are live mathematical proof obligations.
+
+`DASHI/WorldModel/VERIDNSABCDResidualBidiExact.agda` maps numerical experiment lanes to these exact canonical identifiers; imports `BidiResidualApproximationExact.measurementAlwaysRefinesPrior` and `ResidualConditionedExperimentPortfolioExact.selectionChangesAfterResidualUpdate`; retains exact no-Clay-promotion gates. It records the previously reported N64 held-out negative depletion margins as a B7-relevant counterexample to one proposed proof currency, not a falsification of B7 or NS itself.
+
+`scripts/ns_verid_abcd_bidi_replay.py` replays *the documented aggregate values* from `docs/ns_exact_galerkin_coherence_baseline_results.md` into a reproducible consumer-specific experiment portfolio, rejects repeating the already-falsified self-advection depletion hypothesis, and chooses the least declared-cost live next probe, cross-shell coherence. This is a source-report replay, **not** raw time-series ingestion or execution of that next probe, and its ad hoc declared comparison cost is not a physically calibrated optimization or proof of Pareto global optimality.
+
+```sh
+python -m unittest discover -s tests -p 'test_ns_verid_abcd_bidi_replay.py'
+python scripts/ns_verid_abcd_bidi_replay.py --output-json /tmp/ns_verid_abcd_bidi_replay.json
+```
+
+Main honest remaining gap: extract an *exact same-object raw numerical receipt* from archived manifests and bind it to the canonical B7 consumer; then execute the chosen new experiment and update the actual live residual portfolio, avoiding a new generic scheduler. Numerical failure of a proof *candidate* does not discharge physical A/B/C/D obligations. Agda kernel tests / runtime tests were not run by this GitHub-connector edit session.
