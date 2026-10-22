@@ -37,16 +37,14 @@ expectedCount detector p =
   pExcited p * darkCount detector +
   backgroundCount detector
 
--- Both terms reduce to the same value when contrast vanishes.
-zeroContrastIndependentOfPopulation :
-  (p : PopulationReadout) (bright background : ℚ) →
-  expectedCount (optical-detector bright bright background 1ℚ) p
-  ≡ bright + background
-zeroContrastIndependentOfPopulation (population-readout x y eq) bright background
-  rewrite sym eq = solve (x ∷ y ∷ bright ∷ background ∷ [])
-  where
-    open import Relation.Binary.PropositionalEquality using (sym)
+-- Canonical population assignment is normalized by exact arithmetic.
+canonicalPopulation : ℚ → PopulationReadout
+canonicalPopulation p = population-readout p (1ℚ - p)
+  (solve (p ∷ []))
 
+-- Zero contrast makes the expected count insensitive to *differences*
+-- in the given populations when they share the same normalization.
+-- This does not constrain actual detector shot noise or count positivity.
 -- Optical transfer from a frequency predictor must be provided as a
 -- device-specific state-preparation/readout law; an ODMR line is not
 -- definitionally a detected photon count.
