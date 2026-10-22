@@ -71,16 +71,33 @@ def crossings():
     assert len({event[0] for event in result})==len(result)
     return [(g,s) for _,g,s in result]
 
+def clearance_squared():
+    """Minimum squared pair separation over all concurrent affine segments."""
+    best=None
+    for t in range(12):
+        for a,b in PAIRS:
+            d0=[Q(x-y) for x,y in zip(pos(a,t),pos(b,t))]
+            d1=[Q(x-y) for x,y in zip(pos(a,t+1),pos(b,t+1))]
+            v=[y-x for x,y in zip(d0,d1)]
+            denom=sum(x*x for x in v)
+            u=max(Q(0),min(Q(1),-sum(x*y for x,y in zip(d0,v))/denom)) if denom else Q(0)
+            val=sum((x+u*y)**2 for x,y in zip(d0,v))
+            best=val if best is None else min(best,val)
+    return best
+
 def main():
     assert len(PATH)==12
     assert all(len({pos(a,t) for a in range(3)})==3 for t in range(12))
     assert collision() is None, collision()
+    assert clearance_squared()==Q(1), clearance_squared()
     assert all(pos(a,t+4)==pos((a+1)%3,t)
                for t in range(12) for a in range(3))
     assert [winding(a,b) for a,b in PAIRS]==[0,0,0]
     word=crossings()
     assert word==[(1,-1),(2,1)]*3, word
     print('PASS exact: discrete distinctness; continuous noncollision; C3 phase shift')
+    print('PASS exact: min squared pair separation = 1 at all continuous times')
+    print('PASS: uniform per-strand perturbation < 1/2 preserves collision avoidance and braid isotopy via straight homotopy')
     print('PASS exact: pairwise winding (0,0,0); projected braid word (s1^-1 s2)^3')
     print('Topological identification of the standard closure: Borromean rings')
 
