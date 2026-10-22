@@ -5,7 +5,7 @@ module DASHI.Physics.QuantumSensors.DiamondMCGAxialResonanceBridgeExact where
 -- stochastic likelihood, cardiac torso volume conduction or measured data.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _+_; _*_)
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.QuantumSensors.NVSpinOneAxialExact as NV
 import DASHI.Physics.QuantumSensors.NVFiniteResonanceReadoutExact as Resonance
