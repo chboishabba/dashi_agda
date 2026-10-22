@@ -9,7 +9,7 @@ module DASHI.Physics.Measurement.BioEMDiscreteCurvatureGaugeExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; _+_; _-_)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 import DASHI.Physics.Measurement.CausalBioelectromagneticExperimentExact as Bio
 
@@ -47,12 +47,12 @@ record RationalMagneticReadout : Set where
 open RationalMagneticReadout public
 
 observe : RationalMagneticReadout → TrianglePotential → ℚ
-observe device a = gain device + curvature a + offset device
+observe device a = gain device * curvature a + offset device
 
 readoutGaugeInvariant :
   (device : RationalMagneticReadout)
   (v : VertexGauge) (a : TrianglePotential) →
   observe device (gaugeShift v a) ≡ observe device a
 readoutGaugeInvariant device v a =
-  cong (λ flux → gain device + flux + offset device)
+  cong (λ flux → gain device * flux + offset device)
        (gaugeInvariantCurvature v a)
