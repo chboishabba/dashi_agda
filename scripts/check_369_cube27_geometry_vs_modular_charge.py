@@ -130,3 +130,11 @@ assert len(actual_automorphisms)==48
 assert 48%27!=0
 print('PASS Aut(3x3x3 grid)=signed-axis permutation group, order 48')
 print('NO faithful C27 graph-isometry action on the native Cube27')
+
+# The six centre-adjacent axial points distinguish EVERY cube vertex
+# by its graph-distance signature. Thus an automorphism is uniquely
+# determined by its action on those six points, closing the upper bound.
+distance_signature=lambda p:tuple(sum(abs(p[i]-a[i]) for i in range(3))
+                                for a in sorted(axial))
+assert len({distance_signature(p) for p in CUBE})==27
+print('PASS six axial-neighbour distance signatures distinguish all 27 vertices')
