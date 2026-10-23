@@ -61,3 +61,20 @@ gatewaySimilarityDoesNotProveTransmission = refl
 archiveIsNotAnIndependentCroftReplication :
   Atlas.root Atlas.croftCoLocatedDevice ≡ Atlas.croftAuthorRoot
 archiveIsNotAnIndependentCroftReplication = refl
+
+-- The Ed Dames reference is documented by Croft but transmits neither
+-- institutional authority nor any military-device design.
+croftDamesIsOnlyNamedReference :
+  Atlas.relationClass Atlas.croftRemoteViewingPersonMention ≡
+  Atlas.namedPersonMentionOnly
+croftDamesIsOnlyNamedReference = refl
+
+croftDamesMentionSharesMaySourceRoot :
+  Atlas.root Atlas.croftMentionsEdDames ≡
+  Atlas.root Atlas.croftReportedEntities
+croftDamesMentionSharesMaySourceRoot = refl
+
+associationChronologyCannotPromoteMechanism :
+  Attribution.citationCreatesAuthority Atlas.irvaTimeline ≡ false
+associationChronologyCannotPromoteMechanism =
+  Atlas.allSourcesRemainNonAuthoritative Atlas.irvaTimeline
