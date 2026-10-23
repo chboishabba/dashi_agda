@@ -40,13 +40,13 @@ def reconcile(root=ROOT):
             reported[var]=False
         if name=="B_preferred_R832":
             closed = re.findall(
-                r"(?m)^decisionLeafClosed\\s+concreteRepositoryVectorEvaluation\\s*=\\s*\\n\\s*(R852\\.[A-Za-z0-9_]+)\\s*$",
+                r"(?m)^decisionLeafClosed\s+concreteRepositoryVectorEvaluation\s*=\s*\n\s*(R852\.[A-Za-z0-9_]+)\s*$",
                 content,
             )
             if closed != ["R852.round852FullR829DRepositoryVectorRecordInhabited"]:
                 raise ValueError("R832 R829D proof owner changed: inspect proof terms")
             remaining = re.findall(
-                r"(?m)^decisionLeafClosed\\s+concreteRealFiniteODETransport\\s*=\\s*(true|false)\\s*$",
+                r"(?m)^decisionLeafClosed\s+concreteRealFiniteODETransport\s*=\s*(true|false)\s*$",
                 content,
             )
             if remaining != ["false"]:
