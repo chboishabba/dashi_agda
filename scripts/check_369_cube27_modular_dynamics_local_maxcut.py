@@ -80,3 +80,19 @@ print('PASS energy witness (1,0,0)->(1,1,0): 5J->4J, delta=-J')
 print('PASS energy-shift counts: -1:12, zero:3, +1:12')
 print('PASS invariant-completion Laplacian charpoly:',poly)
 print('PHYSICS GATE: H=J Lcube, control of PM and measurable site states remain independent producers')
+
+# Even Pin/O2 sign or U(1) local gauge dressing cannot repair an
+# INCORRECT hopping support. Diagonal site gauge twists multiply each
+# transformed nonzero bond by nonzero phases; they do not create
+# the 36 missing native edges or delete the 36 new diagonal edges.
+assert len(E.symmetric_difference(ME))==72
+signs=s.diag(*((-1)**(i%2) for i in range(27)))
+assert signs*signs==s.eye(27)
+gauge_dressed=signs*P*L*P.T*signs
+def support(A):
+    return {canon(pts[i],pts[j]) for i in range(27)
+            for j in range(i+1,27) if A[i,j]!=0}
+assert support(gauge_dressed)==ME
+assert len(support(gauge_dressed).symmetric_difference(support(L)))==72
+print('PASS gauge-dressed modular permutation still mismatches 72 undirected cube bonds')
+print('NO-GO no invertible sitewise U1/Pin phase factor can fix the underlying cube graph support')
