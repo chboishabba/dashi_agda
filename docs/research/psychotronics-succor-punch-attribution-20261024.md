@@ -1,4 +1,6 @@
 # Succor Punch / psychotronics source genealogy — bounded max-cut
+
+> **Current roadmap:** [psychotronics-pareto-current.md](psychotronics-pareto-current.md) is the canonical Pareto / Ibrahim decision document as of 2026-10-24. This long file is an **append-only audit trail**. Earlier intermediate headings/counts (9/10/11/17/19 sources) are superseded by **21 attributed document instances / 18 distinct uploaded PNG hashes**; none counts independent validation. The current kernel/CI/physical verification boundary remains non-certified. Named maker claims are attributed, not promoted to device measurements.
 Last investigated: 2026-10-24. Canonical owners: `DASHI/Cognition/PsychotronicsSuccorSourceAtlasExact.agda`, `DASHI/Cognition/PsychotronicsScreenshotDiscriminationExact.agda`. Version: max-cut 5 (latest status and open leaves at end; older intermediate counts superseded).
 
 ## Question and scope
