@@ -149,7 +149,14 @@ The source owners for this obligation are existing DASHI/Core/FiniteStochasticBi
 
 **Exact synthetic counterexample:** select source-permitted form projections of the four finite states stripe -> lattice, spot -> lattice, spiral -> spiral, front -> tunnel. For the original positive 4x4 Q fixture, next-step tunnel mass from stripe is 1/10; from spot it is 1/5. Yet both current modes share the lattice label. Therefore no fine-state-independent first-order lattice-to-tunnel transition row fits both. The updated exact Python audit checks this and nested subset traces separately. The selected mapping is a synthetic choice from a partial relation, NOT a physical measurement or unique visual generator.
 
-A non-Markov sequence of reported forms can be modelled using a hidden Markov model or sufficient history, not by silently treating the form sequence as a first-return chain. The originally proposed trace-consistency identity would otherwise be applied to the wrong mathematical object.
+The example is explicitly **history dependent**, not merely structurally non-lumpable. Because spiral and tunnel each label one fine state in this fixture, exact two-step conditional probabilities are
+
+    P(Y2=tunnel | Y1=lattice, Y0=spiral) = 2/15,
+    P(Y2=tunnel | Y1=lattice, Y0=tunnel) = 7/50.
+
+The current coarse form Y1 is identical in both cases, but the earlier coarse form changes the future conditional. These numbers are exact synthetic fractions computed from the fixed four-state Q, **not** measured participant visual episodes. They assume each conditioning event has nonzero probability. This makes the difference an actual form-level non-Markov witness, not only a lack of uniform lumpability.
+
+A non-Markov sequence of reported forms can be modelled using a hidden Markov model or sufficient history, not by silently treating the form sequence as a first-return chain. In a future validated visual-report dataset, compare predeclared held-out scoring of (a) one-step form-label Markov models, (b) higher-order form history, and (c) a protocol-indexed hidden-state/emission model. If (b) or (c) predicts better, that can motivate richer endogenous dynamics but cannot itself identify conscious-agent ontology. The originally proposed trace-consistency identity would otherwise be applied to the wrong mathematical object.
 
 ### Refined max-cut frontier
 
