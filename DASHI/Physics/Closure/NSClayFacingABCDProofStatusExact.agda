@@ -53,6 +53,7 @@ import DASHI.Physics.Closure.NSTriadKNR650Rational345ShortTimeRound830Exact as R
 import DASHI.Physics.Closure.NSTriadKNR650Rational345DecisionMaxCutRound832Exact as R832
 import DASHI.Physics.Closure.NSTriadKNR650Rational345SnapshotIdentificationRound850Exact as R850
 import DASHI.Physics.Closure.NSTriadKNR650Rational345FullVectorEvaluationRound852Exact as R852
+import DASHI.Physics.Closure.NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact as R853
 import DASHI.Physics.Closure.NSClayFacingAMaxCut20261002Exact as AMax
 import DASHI.Physics.Closure.NSClayFacingBPostReserveMaxCut20261002Exact as BMax
 import DASHI.Physics.Closure.NSClayFacingCDMaxCut20261002Exact as CDMax
@@ -422,6 +423,24 @@ bR829ConcreteSameObjectSnapshotEvaluationClosedIsTrue = refl
 bR850InstantaneousRepositoryRateNegative : Bool
 bR850InstantaneousRepositoryRateNegative =
   R850.round850InstantaneousActualRepositoryRateStrictlyNegative
+
+-- General R815/R823 physical pointwise identification ALREADY exists as a
+-- term in R853; only its real-time physical carrier instantiation is open.
+bR853PointwiseSelectedRateSamePhysicalPacket : Bool
+bR853PointwiseSelectedRateSamePhysicalPacket =
+  R853.round853GeneralR815SelectedRateNormalFormClosed
+
+bR853SelectedRateOnRealTrajectory : Bool
+bR853SelectedRateOnRealTrajectory =
+  R853.round853RealTrajectoryCarrierWeldClosed
+
+bR853PointwiseSelectedRateSamePhysicalPacketIsTrue :
+  bR853PointwiseSelectedRateSamePhysicalPacket ≡ true
+bR853PointwiseSelectedRateSamePhysicalPacketIsTrue = refl
+
+bR853SelectedRateOnRealTrajectoryIsFalse :
+  bR853SelectedRateOnRealTrajectory ≡ false
+bR853SelectedRateOnRealTrajectoryIsFalse = refl
 
 bR830ExactShortTimeArithmeticClosedIsTrue :
   bR830ExactShortTimeArithmeticClosed ≡ true
