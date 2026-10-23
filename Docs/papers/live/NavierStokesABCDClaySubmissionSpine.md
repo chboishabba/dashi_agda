@@ -2,13 +2,13 @@
 > passages below identifying a still-open *real Galerkin ODE*, *real R853
 > physical carrier*, *R760 original-multiplicity cell* or *real integrated
 > reserve/demand* implementation are superseded by existing Lean
-> \`NSBControl/Rational345Round71TrajectoryPhysical.lean\`,
-> \`Rational345BPClosed.lean\`, \`Rational345R823RealSemanticProvenance.lean\`,
-> \`Rational345R823RealR749R760.lean\` and
-> \`Rational345R823DecisionFreeze.lean\`.
+> `NSBControl/Rational345Round71TrajectoryPhysical.lean`,
+> `Rational345BPClosed.lean`, `Rational345R823RealSemanticProvenance.lean`,
+> `Rational345R823RealR749R760.lean` and
+> `Rational345R823DecisionFreeze.lean`.
 > The literal R760 source identity, R823 same-source reserve definitions,
 > physical segment and integral contradiction are **source-written**,
-> including the stronger \`literalPhysicalReserveIntegralCounterexample\`
+> including the stronger `literalPhysicalReserveIntegralCounterexample`
 > in the canonical decision owner. This refutes an **auxiliary proposed
 > universal reserve shortcut**, if the Lean proofs check; it **does not**
 > establish the official unforced Clay alternative B. No exact-head
