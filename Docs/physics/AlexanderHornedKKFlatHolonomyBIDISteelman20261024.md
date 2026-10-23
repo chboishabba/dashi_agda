@@ -40,3 +40,15 @@ Nonabelian detection caveat: the separate finite-stage `F2 -> S3` test has nonze
 `python3 scripts/check_alexander_horned_abelian_bidi.py`: finite-stage checks, not an infinite-topology proof.
 `agda -i . -i /path/to/agda-stdlib DASHI/Mathematics/Topology/AlexanderHornedAbelianHolonomyBIDIExact.agda`: intended exact-head kernel target, not executed here.
 Attribution: Alexander and Hatcher own geometric/exterior topology; canonical DASHI BIDI/consumer modules own general factorisation; this branch proves the conditional algebraic no-descent and documents the physical KK boundary. No claims of proof of wild equivariant embedding, actual fundamental group or experimental physics.
+
+
+## Paired detector theorem: exact shared-actor BIDI
+
+`AlexanderHornedAbelianHolonomyBIDIExact.pairedFlatHolonomyBlindAndOuterActionDetectable` now *consumes the actual* `AlexanderHornedC3OuterDetectorExact.EquivariantQuotientDetector` owner together with the generic Abelian-character theorem. For ONE group G and its ONE `rotateLoop` operator, it produces both:
+
+1. every Abelian character assigns equal values to a loop and its C3-rotated loop, PROVIDED every group element is represented by meridian words;
+2. that same rotation is NOT inner, PROVIDED the source has the supplied equivariant surjective quotient with an externally witnessed non-inner target rotation.
+
+This is a conditional SAME-OBJECT result and does not conflate a nontrivial order-three action on formal addresses with an actually realised geometric wild embedding.
+
+**Topology precision**: acyclicity / H²(E)=0 applies to E=S³ minus the closed embedded horned BALL. The exterior R³ minus that closed ball differs by removing the point at infinity; its H² may be nonzero. The horned sphere K=boundary ball is itself different from the solid ball; never switch among these three base spaces when transporting cohomology or circle-bundle classifications.
