@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact as Atlas
+import DASHI.Cognition.PsychotronicsScreenshotDiscriminationExact as Frames
 
 ------------------------------------------------------------------------
 -- Definitional regressions for a historical source atlas, NOT an empirical
@@ -78,3 +79,47 @@ associationChronologyCannotPromoteMechanism :
   Attribution.citationCreatesAuthority Atlas.irvaTimeline ≡ false
 associationChronologyCannotPromoteMechanism =
   Atlas.allSourcesRemainNonAuthoritative Atlas.irvaTimeline
+
+------------------------------------------------------------------------
+-- Max-cut 2: sourced explicit influences and same-object image guardrails.
+------------------------------------------------------------------------
+
+croftNamedReadingNotMerelyAnalogy :
+  Atlas.relationClass Atlas.croftNamedBookRelation ≡
+  Atlas.explicitlyAttributedReading
+croftNamedReadingNotMerelyAnalogy = refl
+
+croftStarIsNotInstagramIdentity :
+  Atlas.relationClass Atlas.croftStarSymbolRelation ≡
+  Atlas.namedSymbolOnly
+croftStarIsNotInstagramIdentity = refl
+
+croftNamedExemplarsNotTechnologyTransfer :
+  Atlas.relationClass Atlas.croftNamedHistoricalExemplars ≡
+  Atlas.namedExemplarsOnly
+croftNamedExemplarsNotTechnologyTransfer = refl
+
+croftBookClaimRemainsSameAuthorialRoot :
+  Atlas.root Atlas.croftNamesKing ≡ Atlas.croftAuthorRoot
+croftBookClaimRemainsSameAuthorialRoot = refl
+
+screenshotCountIsTen :
+  Frames.countStills Frames.stillAtlas ≡ 10
+screenshotCountIsTen = Frames.stillAtlasHasTenFrames
+
+separateCreatorForCopperCage :
+  Frames.creator Frames.copperWide ≡ Frames.crystalPyramids96
+separateCreatorForCopperCage = refl
+
+separateCreatorForArc :
+  Frames.creator Frames.curvedArcComment ≡
+  Frames.colourTheoryInstallations
+separateCreatorForArc = refl
+
+stillDoesNotVerifyTemporalMotion :
+  Frames.temporalMotionVerified Frames.curvedArcComment ≡ false
+stillDoesNotVerifyTemporalMotion = refl
+
+thermalScreenDoesNotVerifyCalibration :
+  Frames.instrumentCalibrationVerified Frames.thermalScreen ≡ false
+thermalScreenDoesNotVerifyCalibration = refl
