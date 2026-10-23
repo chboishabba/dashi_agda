@@ -14,7 +14,6 @@ module DASHI.Mathematics.Topology.AlexanderHornedC3OuterDetectorExact where
 -- The finite A5 construction is separately audited in Python.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Set₁)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
