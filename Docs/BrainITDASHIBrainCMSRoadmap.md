@@ -57,3 +57,15 @@ Let `X` be a fine latent system, `Q : X -> B` a measured observation, `T : X -> 
 **Formal cut:** exact-head Agda validation is green, tests pass, upstream metadata is source-correct, and the merged owner remains discoverable in `Everything.agda`.
 
 **Empirical cut:** subject/checkpoint/test-split identities are digest-bound; T2/T3/T7 comparisons are independently reproduced (or failed/revised with signed receipts); matched-baseline quotient results include ablations and uncertainty. No stronger promotion before then.
+
+## Separate DMT/conscious-realism consumer (24 October 2026 BIDI handoff)
+
+Sibling implementation: [DMT identifiability and prediction PR #1243](https://github.com/chboishabba/dashi_agda/pull/1243), canonical programme document Docs/roadmaps/ConsciousRealismDMTPredictiveRoadmap.md on its own branch. PR #1121 was opened 8 October and updated 24 October Brisbane time. This is a **cross-branch conceptual and source-method handoff**, not an imported same-object result or merged dependency.
+
+**Different evidence consumers:** Brain-IT (Beliy, Zalcher, Kogman, Wasserman, Irani, arXiv:2510.25976v2) reconstructs *presented images* from measured human fMRI. Timmermann et al. (PNAS 2023, DOI 10.1073/pnas.2218949120) measured DMT EEG/fMRI in different participants and paradigms. NSD/Brain-IT and DMT imaging are not the same subjects, source task, preprocessing pipeline or latent brain state. A prospectively concealed target, a report of an apparently independent entity, and human viewed-image reconstruction are **different consumers**. No cross-dataset physical map or independently verified information channel is established here.
+
+PR #1243 deliberately uses the long-established generic DASHI.Core.CoarseFineFabricCalculusExact collision theorem rather than importing currently **unmerged** PR #1121 modules. Its synthetic four-world example reconstructs an observed viewed image perfectly (1) while every predictor of an independent concealed target from the same observed image is at chance (1/2); if the target leaks into the measurement, it is recovered perfectly (1). Those numbers are exact toy computations by DASHI, not published Brain-IT/DMT participant results.
+
+**Highest-alpha shared method:** source-lock all data and preprocessing, use participant/session-held-out splits, declare the exact prediction consumer, estimate only supported metrics and preserve per-source attribution. The DMT branch adds a fail-closed file-hash and rights-review preflight pinned to the observed timmer500/DMT_Imaging commit b35701d88d904e2f602164ff2eae0fc879772078. Neither a passed file manifest nor the Brain-IT paper's source-transcribed T2/T3/T7 metrics is an independent replay of the other experiment.
+
+**Merge gate:** keep both PRs separately reviewable until their own exact-head Agda verification and/or independent empirical evaluation; do not merge merely for conceptual integration. Future joint modelling requires a registered actual observation function and matched dataset/protocol, not a source-similarity analogy.
