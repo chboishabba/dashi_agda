@@ -1,5 +1,7 @@
 # Conscious realism × DMT — max-cut formalisation (2026-10-24)
 
+> **Programme-priority update (2026-10-24):** The canonical data-first, model-comparison and experimental roadmap is [ConsciousRealismDMTPredictiveRoadmap.md](roadmaps/ConsciousRealismDMTPredictiveRoadmap.md). This document is a mathematical/source ledger and specialist Klüver appendix, **not** the ranked project plan. Visual form-constant geometry is now a P3 diagnostic rather than the next primary implementation cut. Read the roadmap first; retain these results for reproducibility and original-author attribution.
+
 Status: **Agda source-written / kernel-unverified**; **exact synthetic arithmetic executed**; no clinical, neural, DMT, or external-entity evidence is claimed.
 
 ## Attribution ledger (original authors own their results)
