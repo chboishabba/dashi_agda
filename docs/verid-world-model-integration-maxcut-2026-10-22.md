@@ -267,3 +267,20 @@ python -m unittest discover -s tests -p 'test_ns_abcd_rollup_exact_owner_audit.p
 ```
 
 Next cut: audit candidate later *theorems*, exact type signatures and dependency imports for each open A/B physical producer; if a matching term exists, integrate it into the canonical owner and kernel-check. Do not flip flags based on names, numerical receipts or existence of a conditional compiler.
+
+## 2026-10-23 exact-current ABCD frontier correction
+
+The older October 7 B4/B1-3 audit is not the only live periodic-B research programme. `Docs/papers/live/NavierStokesABCDClaySubmissionSpine.md` explicitly prioritizes **R823–R832 signed reserve** for B, with R408 physical viscosity delta=nu and R822 original CC rows. `NSTriadKNR650Rational345DecisionMaxCutRound832Exact.agda` retains TWO open prerequisites: `concreteRepositoryVectorEvaluation` and `concreteRealFiniteODETransport`. R829/R830 arithmetic does not supply these physical realizations. Even refuting the auxiliary R823 reserve would not establish Clay B.
+
+A's `NSClayFacingAPhysicalSameObjectCutExact.agda` retains `aActualKernelSameObjectInstantiationClosedHere=false` and `aFiniteEnergyMajorantIdentificationClosedHere=false` even though generic near-origin and high-frequency theorems are closed.
+
+C/D manuscript `Docs/papers/live/NavierStokesABCDClaySubmissionSpine.md` describes external pinned Lean claims and Gap/ClauseAudit/SubmissionAudit. The present audit has **not** verified actual external Lean proof dependencies or kernel receipts. Source-asserted is not independently certified.
+
+New `scripts/ns_abcd_current_frontier_reconciliation.py` records source hashes and exact open A/B leaves; refuses silent status flips. Test: `tests/test_ns_abcd_current_frontier_reconciliation.py`.
+
+```sh
+python scripts/ns_abcd_current_frontier_reconciliation.py
+python -m unittest discover -s tests -p 'test_ns_abcd_current_frontier_reconciliation.py'
+```
+
+Remaining real mathematical work: literal R829 eight-vector same-object evaluation and finite R408 ODE transport for the auxiliary B-RESERVE challenge; A same-object actual kernel/finite-energy majorant; true cutoff-uniform B estimates; independent inspection and reproduction of C/D external Lean proof. No local tests or Agda kernel checks were run.
