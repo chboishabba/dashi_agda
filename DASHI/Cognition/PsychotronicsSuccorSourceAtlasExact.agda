@@ -311,6 +311,50 @@ aurumayaShopCatalogue = Source.mkNoDOISource
   "directly indexes 15Hz QUBIT crystal kits, ACU-VAC 333Mhz labelled pendants, geometric Tesla multi-wave oscillator disks, orgonite; distinct URL same maker root as home page and QUBIT product"
   Source.publicAttribution
 
+zeroPointStarshipProductIndexed : Source.AttributedSource
+zeroPointStarshipProductIndexed = Source.mkNoDOISource
+  "Zero Point Tech, matching-handle store crystalpyramids96.com (actual Instagram account ownership unverified)"
+  "PEMF Dark knight Protector Starship Harmonic Rife Coil & Amp"
+  "public search-index reproduction of commercial product copy; native page returned HTTP 402 when directly opened, 24 October 2026"
+  "undated indexed listing"
+  "https://crystalpyramids96.com/products/pemf-dark-knight-rife-coil?variant=46117812928698"
+  Source.practitionerSource
+  "seller describes 24-point starship coil, quartz/iron frame, 50-W amplifier, phone-fed Rife signal and 1.25-inch neodymium sphere intended to 'dance'; a strong multiple-feature match to copper cage and ball, NOT original-video/model identity or measured field/piezoelectric effect"
+  Source.publicAttribution
+
+zeroPointMiniProductIndexed : Source.AttributedSource
+zeroPointMiniProductIndexed = Source.mkNoDOISource
+  "Zero Point Tech, matching-handle store crystalpyramids96.com"
+  "PEMF Dark Knight Protector Starship Harmonic Rife Coil Mini"
+  "another listed SKU; indexed product copy; direct page returned HTTP 402 in current web environment"
+  "undated indexed listing"
+  "https://crystalpyramids96.com/products/dark-knight-starship-coil-pemf-rife-machine-aux-to-phone-frequency-powered-vortex-iron-quartz-piezoelectric-magnet-included-upgraded-stronger-coil"
+  Source.practitionerSource
+  "seller explicitly describes phone-input coil with moveable included neodymium magnet vibrating audibly like speaker around 100-1000 Hz; corroborates intended conventional magnet-vibration principle within maker's OWN catalogue, not field magnitude or photographed device SKU"
+  Source.publicAttribution
+
+rodinSocialRelay : Source.AttributedSource
+rodinSocialRelay = Source.mkNoDOISource
+  "Pictame (third-party social-media index; captions attributed to @crystal_pyramids96 and @ipyramids, not independently authenticated)"
+  "Rodin Coil Sacred Geometry: indexed creator excerpts"
+  "aggregated social post snippets; retrieved 24 October 2026; native reel identity/hash unavailable"
+  "undated excerpts in current index"
+  "https://pictame.com/en/discover/hashtag/rodin-coil-sacred-geometry"
+  Source.communitySource
+  "caption attributed to @crystal_pyramids96 calls four builds 'Starship Rodin Coil' including Red Rock and Dark Knight with revised circuitry; separate caption attributed to @ipyramids invokes Marco Rodin and Randy Powell. Both are DERIVATIVE CAPTION copies, not original reel/source custody or independent confirmation"
+  Source.publicAttribution
+
+merchantStoreDirectory : Source.AttributedSource
+merchantStoreDirectory = Source.mkNoDOISource
+  "Merchant Genius (independent store directory)"
+  "Zero Point Tech: crystalpyramids96.com Shopify Store Listing"
+  "third-party indexed store catalogue; purported registration 3 November 2025; retrieved 24 October 2026"
+  "2025 store directory record"
+  "https://www.merchantgenius.io/shop/url/crystalpyramids96.com"
+  Source.communitySource
+  "identifies matching-handle domain as Zero Point Tech and enumerates 24-point Starship/Rodin coil models, amplifiers and sphere magnets; this strengthens matching product-family discovery but does not prove Instagram account ownership or authenticate original video"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -323,7 +367,9 @@ sourceAtlas = Source.mkSourceAtlas
    oudinBeharyRestoration ∷ oudinBeharySphere ∷
    guilleminotOudinDiagram ∷ jefimenkoElectrostaticMotors ∷
    itorusAppPublisher ∷ itorusHeartStoneReseller ∷
-   aurumayaHomeCatalogue ∷ aurumayaShopCatalogue ∷ jefimenko1971 ∷ [])
+   aurumayaHomeCatalogue ∷ aurumayaShopCatalogue ∷ jefimenko1971 ∷
+   zeroPointStarshipProductIndexed ∷ zeroPointMiniProductIndexed ∷
+   rodinSocialRelay ∷ merchantStoreDirectory ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -337,6 +383,7 @@ data LineageRoot : Set where
   beharyRestorationRoot : LineageRoot
   guilleminotHistoricalManualRoot jefimenkoAuthorRoot : LineageRoot
   itorusAppPublisherRoot itorusRetailCopyRoot : LineageRoot
+  zeroPointCommercialRoot rodinSocialMirrorRoot merchantDirectoryRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -618,6 +665,56 @@ aurumayaShop333Catalogue = mkBound
   attributedAuthorReport
   "the numeral 333Mhz is a product-label assertion, not a frequency measurement; homepage 369 is a separate URL; same maker, not independent corroboration"
 
+zeroPointStarshipSphereClaim : ClaimBound
+zeroPointStarshipSphereClaim = mkBound
+  "Indexed seller copy describes 24-point Starship coil with 50-W amplifier and 1.25-inch neodymium sphere magnet that is designed to move when an input waveform drives the coil"
+  zeroPointStarshipProductIndexed
+  "Product description, paragraphs beginning 'Description: This 24-pointed starship coil' and 'The included 1.25-inch neodymium sphere magnet'"
+  zeroPointCommercialRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "SEARCH INDEX ONLY, native page HTTP402; named Instagram actor matching domain not independently verified, exact physical pictured SKU and sphere motion not directly instrumented"
+
+zeroPointMiniMagnetResponse : ClaimBound
+zeroPointMiniMagnetResponse = mkBound
+  "Seller's separate Dark Knight Mini listing describes an included neodymium magnet that vibrates audibly at higher audio drive as if a small speaker"
+  zeroPointMiniProductIndexed
+  "Product description, section 'Important - How to Know It's Working'"
+  zeroPointCommercialRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "not the exact 24-point product, no external field magnitude measurement, induction/vibration possible without special crystal energy"
+
+rodinAttributedSocialCaption : ClaimBound
+rodinAttributedSocialCaption = mkBound
+  "Pictame reports a @crystal_pyramids96 post explicitly saying 'DIY Starship Rodin Coil', naming Red Rock and Dark Knight variants and a build course"
+  rodinSocialRelay
+  "Rodin Coil Sacred Geometry discovery, @crystal_pyramids96 preview"
+  rodinSocialMirrorRoot
+  Diligence.contextualEvidence
+  attributedAuthorReport
+  "aggregator copy not original native reel; exact creator account-to-domain owner relationship and transcript/version unresolved"
+
+itorusRodinSocialCaption : ClaimBound
+itorusRodinSocialCaption = mkBound
+  "Same social index attributes to @ipyramids an explanation that identifies Marco Rodin and Randy Powell in the Rodin/Vortex Based Mathematics lineage"
+  rodinSocialRelay
+  "Rodin Coil Sacred Geometry discovery, @ipyramids preview"
+  rodinSocialMirrorRoot
+  Diligence.contextualEvidence
+  attributedAuthorReport
+  "third-party excerpt only, not independently inspected original attributed creator caption or validation of described mathematical energy theory"
+
+zeroPointDirectoryName : ClaimBound
+zeroPointDirectoryName = mkBound
+  "Store directory associates crystalpyramids96.com with Zero Point Tech and enumerates 24-point Starship/Rodin products"
+  merchantStoreDirectory
+  "Zero Point Tech store listing, General Information and Products for Sale"
+  merchantDirectoryRoot
+  Diligence.contextualEvidence
+  attributedAuthorReport
+  "identity of Shopify store is independently listed; same-name Instagram owner and product-to-screenshot identity need actual outbound link, purchase SKU or creator confirmation"
+
 reichSeparation : ClaimBound
 reichSeparation = mkBound
   "Museum distinguishes Reich's cloudbuster from later Welz/Croft orgonite, quartz-and-resin devices"
@@ -695,6 +792,7 @@ data RelationClass : Set where
   contemporarySelfAttribution : RelationClass
   historicalMechanismPrecedentOnly : RelationClass
   commercialSpecificationOnly : RelationClass
+  multiFeatureCatalogueMatchUnconfirmed : RelationClass
 
 record BoundedRelation : Set where
   constructor bounded-relation
@@ -803,6 +901,22 @@ aurumayaShopCoMarketing : BoundedRelation
 aurumayaShopCoMarketing = bounded-relation
   "Aurumaya shop listings" "15Hz QUBIT / 333Mhz ACU-VAC / Tesla-labelled discs"
   contemporarySelfAttribution aurumayaShop333Catalogue false refl false refl
+
+candidateCopperStarIdentification : BoundedRelation
+candidateCopperStarIdentification = bounded-relation
+  "Instagram @crystal_pyramids96 copper-star and centre-ball screenshots 1000018562-8564"
+  "Zero Point Tech indexed 24-point Starship Rodin/Dark Knight coil with dancing neodymium sphere"
+  multiFeatureCatalogueMatchUnconfirmed zeroPointStarshipSphereClaim false refl false refl
+
+rodinNamedBySocialRelay : BoundedRelation
+rodinNamedBySocialRelay = bounded-relation
+  "indexed @crystal_pyramids96 caption" "DIY Starship Rodin Coil / Dark Knight / Red Rock"
+  namedSymbolOnly rodinAttributedSocialCaption false refl false refl
+
+zeroPointSameMakerMiniComparator : BoundedRelation
+zeroPointSameMakerMiniComparator = bounded-relation
+  "Zero Point Tech 24-point Starship seller listing" "Zero Point Tech Mini moving magnet explanation"
+  hardwareAnalogyOnly zeroPointMiniMagnetResponse false refl false refl
 
 -- Imported source-attribution laws are used directly; no new source/role
 -- ontology is needed. The proof obligations are the existing fields.
