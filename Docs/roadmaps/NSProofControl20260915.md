@@ -1,7 +1,7 @@
 ## 2026-10-24 original unforced A/B direct analytical cut
 
 **Theorem source:** `dashi_lean4/NSUnforcedAnalyticCuts.lean`, optional
-`lake build NSUnforcedAnalyticCuts`. This source contains five genuine
+`lake build NSUnforcedAnalyticCuts`. This source contains eight source-written
 finite analytical lemmas and creates **zero numbered Round modules**.
 Lean was not run on this source, so treat these as source-written terms.
 
