@@ -472,3 +472,80 @@ They are not fictitiously discharged by matching row arrays.
 No Agda/Lean kernel check was run on these new edits. This is a narrowed
 source theorem audit and rigorous conditional real-time implication, not a
 certified R823 real-trajectory counterexample or Clay B.
+
+### 2026-10-24 exact both-side source cut
+
+**(I) Full physical real-helical seed.** New
+`scripts/check_ns_real_helical_same_source.py` computes from the literal
+six nonzero 3-4-5 initial velocity coefficients, over all 728 nonzero
+radius-four lattice modes, with
+
+`P_k v = v - k(k·v)/|k|²`,
+`F_k(u) = -i P_k sum_(p+q=k) (q·u_p) u_q`,
+`u'_k = -|k|² u_k + F_k(u)`, and
+`H_k^± v = (P_k v ± i k×v/sqrt(k·k))/2`.
+
+No rational helical default is used: the physical positive square root is
+evaluated wherever a term is nonzero. Sparsity pruning is exact because
+the nonzero velocity and resulting nonlinear supports are enumerated
+first. It checks every *individually selected* coherent-work output,
+all totals, RHS Fourier reality and transversality. An independent local
+run of this source calculation returned:
+
+```text
+full cutoff: 728 nonzero modes
+physical selected work rows:
+ [-48, 322917/250, -48, -428272/125,
+  -428272/125, -48, 322917/250, -48]
+work = -557627/125
+production = 0
+dissipation = 15834
+selected rate = -28273644/125
+physical RHS reality/transversality: pass
+```
+
+`tests/test_ns_real_helical_same_source.py` independently executes both
+this full-physical evaluator and the pre-existing rational R829 component
+producer, asserting exact per-mode parity, not just total agreement.
+The newly committed regression itself was **not executed** here; the
+equivalent direct physical calculation was executed locally and passed.
+This is an executable finite-source receipt, not a Lean/Agda kernel proof.
+
+**(II) Real-time R853/R823 rate identity.** In the *existing* Lean
+`NSBControl/Rational345ShortTime.lean` owner, the new
+`realR823_from_R853_pointwise` and
+`realR823_R853_integral_on_same_flow` prove the real-codomain
+pointwise and signed-integral algebra. The latter uses genuine real
+interval-integral linearity, so integrated Reserve and Demand refer
+to the SAME real trajectory, time interval and selected signed rate.
+`exists_negative_real_R823_reserve_difference` composes those
+equations with the existing Picard and exact R850-seed real
+negative-integral theorem. All source terms remain explicit.
+
+The precise real pointwise physical input is
+
+```
+2*(9*N(x)-Q(x)) + CC(x) = 6*(12*C(x)-P(x))
+```
+
+for the actual real helical finite Fourier state `x`. Existing R853
+proves the analogous literal physical identity in its historical
+rational-valued Agda packet; the new Lean lemma proves its **real
+integration consequences**, but not the R853 finite-frequency
+permutation and projector identity for every real Fourier state.
+The new initial-source real evaluator checks this equality's scalar
+normalization and physical operators **at the seed**, not for all
+real evolved states. That is the outstanding real-source theorem.
+
+**One existing Agda proof repair:** In
+`NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact.agda`
+replaced a shadowed, self-defined `margin` and `refl` convenience
+lemma with the genuine parametrized same-object packet theorem
+`Physical.literalStrictSurplusIsPhysicalPacket`. No general
+pointwise normalization estimate was reopened.
+
+**Scope:** These are new source-written Lean theorem terms and executed
+exact finite arithmetic, without Lean/Agda compilation this round.
+Only when the actual real Fourier R853 equality is proved and fed to
+the real integral owner is a kernel-certified R823 auxiliary-reserve
+counterexample possible. R823 is not the Clay B alternative.
