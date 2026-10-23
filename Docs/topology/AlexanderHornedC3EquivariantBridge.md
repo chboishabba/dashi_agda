@@ -95,6 +95,10 @@ formalisation of that universal-property proof.
 
 ## Exact repo modules
 
+- `DASHI/Mathematics/Topology/AlexanderHornedC3AmbientRotationExact.agda`:
+  order-three coordinate permutation of an ambient triple, marked-axis
+  C3 intertwining, and rotation fixing the infinity point of the
+  compactified point-set carrier (topology still unproved).
 - `DASHI/Mathematics/Topology/AlexanderHornedC3FiniteStageExact.agda`:
   C3-labelled binary addresses, degree-three rotation, braid relation
   in S3, word action, commuting iterated commutator substitution, and
@@ -118,7 +122,11 @@ automorphism is nontrivial.
 ## Geometric bridge: exact missing obligations
 
 Choose a standard 120-degree rotation of S3 (the one-point
-compactification of R3). Begin with a round 3-ball and attach three
+compactification of R3). The exact coordinate action can be chosen
+as (x,y,z) -> (z,x,y), with determinant +1 and diagonal fixed axis;
+its order-three point-level equations are implemented in
+`AlexanderHornedC3AmbientRotationExact.agda`. This does not yet
+prove continuity or that the horned-ball subset is invariant. Begin with a round 3-ball and attach three
 pairwise disjoint, unknotted, rotationally permuted initial handles.
 Perform Hatcher's two-interlocking-horn replacement on every handle,
 in rotationally symmetric disjoint neighborhoods, with rapidly
@@ -150,6 +158,7 @@ action C3 -> Out(pi1) with a character pi1 -> C3.
 Run from the repo root:
 
     python3 scripts/alexander_horned_c3_a5_probe.py
+    agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3AmbientRotationExact.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3FiniteStageExact.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3ExteriorBridge.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3CharactersExact.agda
