@@ -89,3 +89,14 @@ print('PASS cube↔Z/27 digit bijection; carry wraps opposite corners, not graph
 print('PASS M on cube xy slices: three fixed z-axis points, six 4-cycles')
 print('PASS M action fails geometric edge-preservation')
 print('PASS Monster order-27 sector pair has 729 labels; not the cube')
+
+# Stronger, CHART-INDEPENDENT no-go: the 3x3x3 grid graph is bipartite.
+# Every one-step edge flips parity of the number of nonzero coordinates.
+# An equivariant identification of the 27-cycle of residue +1 with an
+# adjacency-preserving motion would require a closed 27-edge walk in
+# the cube graph, impossible by parity (all odd cycles are forbidden).
+parity=lambda p:sum(abs(t) for t in p)%2
+assert all(parity(p)!=parity(q) for p,q in edges)
+assert Counter(parity(p) for p in CUBE)==Counter({0:13,1:14})
+print('PASS intrinsic no-go: bipartite cube graph has no 27-edge closed cycle')
+print('NO chart makes +1 generator on Z/27 an adjacency-preserving 27-cycle on Cube27')
