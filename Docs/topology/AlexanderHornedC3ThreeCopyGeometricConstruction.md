@@ -148,7 +148,10 @@ is nontrivial and perfect, with no nontrivial abelian characters.
 - **Agda exact files:** `AlexanderHornedC3AmbientRotationExact`,
   `AlexanderHornedC3FiniteStageExact`,
   `AlexanderHornedC3ComplementActionExact`,
-  `AlexanderHornedC3FreeFactorDetectorExact`. The last two prove
+  `AlexanderHornedC3OrbitSolidExact`,
+  `AlexanderHornedC3FreeFactorDetectorExact`. The complement and orbit
+  modules construct an order-three point-set action on the exterior
+  of an explicit union of three translates. The factor detector proves
   the corresponding **abstract statements conditionally**.
 - **Not yet kernel-checked:** this specific 3-ball embedding,
   the tame-collar cover deformation retractions, van Kampen
@@ -162,9 +165,11 @@ is nontrivial and perfect, with no nontrivial abelian characters.
 ## Acceptance
 
     python3 scripts/alexander_horned_c3_a5_probe.py
+    python3 scripts/alexander_horned_c3_free_factor_probe.py
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3AmbientRotationExact.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3FiniteStageExact.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3ComplementActionExact.agda
+    agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3OrbitSolidExact.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3FreeFactorDetectorExact.agda
 
 A reviewable true-topology proof should present the explicit
