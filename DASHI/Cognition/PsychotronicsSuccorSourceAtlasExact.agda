@@ -211,6 +211,28 @@ atmosphericFieldMill = Source.mkNoDOISource
   "atmospheric electric potential/field is measurable by a field mill; this does not authenticate a Pignatelli inventor, charged aerostat driver, usable motor power or continuous generation"
   Source.publicAttribution
 
+oudinBeharyRestoration : Source.AttributedSource
+oudinBeharyRestoration = Source.mkNoDOISource
+  "Jeff Behary"
+  "Oudin Coil 2010: Revisiting a Turn Of The Century Invention"
+  "The Turn Of The Century Electrotherapy Museum; illustrated 2010 reconstruction and historical interpretation"
+  "2010"
+  "https://electrotherapymuseum.org/2010/Oudin2010/index.htm"
+  Source.practitionerSource
+  "describes heavy-gauge spaced windings and historically varying Oudin resonator geometry, with a demonstrated externally driven corona apparatus; NOT independent identification of berndnindl reel, output measurements, or therapy evidence"
+  Source.publicAttribution
+
+oudinBeharySphere : Source.AttributedSource
+oudinBeharySphere = Source.mkNoDOISource
+  "Jeff Behary"
+  "Tesla / Oudin Coil with 6-inch Copper Sphere Topload"
+  "The Turn Of The Century Electrotherapy Museum; illustrated maker's 2008 reconstruction and self-reported electrical measurements"
+  "2008"
+  "https://www.electrotherapymuseum.org/2008/CopperOudin/index.htm"
+  Source.practitionerSource
+  "maker documents round topload and air streamers on an Oudin/Tesla family resonator. Same authorial museum lineage as 2010 reconstruction, NOT independent replication or modern clip identity"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -219,7 +241,8 @@ sourceAtlas = Source.mkSourceAtlas
    lakhovskyPatent ∷ channonManual ∷ gateway1983 ∷ air1995 ∷
    electricWhirl ∷ irvaTimeline ∷ kingEarthEnergies ∷
    ipyramidsI9 ∷ aurumayaQubit ∷ oudinHistoricalDiagram ∷
-   mayuVortex ∷ aapStructuredWater ∷ atmosphericFieldMill ∷ [])
+   mayuVortex ∷ aapStructuredWater ∷ atmosphericFieldMill ∷
+   oudinBeharyRestoration ∷ oudinBeharySphere ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -230,6 +253,7 @@ data LineageRoot : Set where
   boulderDemonstrationRoot remoteViewingAssociationRoot : LineageRoot
   iPyramidsManufacturerRoot aurumayaMakerRoot oudinHistoricalRoot : LineageRoot
   mayuManufacturerRoot aapFactCheckRoot atmosphericResearchRoot : LineageRoot
+  beharyRestorationRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -411,6 +435,26 @@ atmosphericElectricityBoundary = mkBound
   externallyDescribedApparatus
   "caption 'Pignatelli motor' unverified; voltage gradient alone not demonstration of delivered shaft power"
 
+oudinSpacedWindingFamily : ClaimBound
+oudinSpacedWindingFamily = mkBound
+  "A contemporary Oudin reconstruction uses a spaced, relatively coarse winding; Oudin is a family of resonant high-voltage apparatus, not one universal winding geometry"
+  oudinBeharyRestoration
+  "Oudin Coil 2010; paragraphs beginning 'The definition of Oudin Resonator' and 'The unique thing'"
+  beharyRestorationRoot
+  Diligence.contextualEvidence
+  experimentalMechanismElsewhere
+  "class precedent only; picture 1000018569 has pale periodic serpentine bands whose electrical connectivity cannot be read from pixels"
+
+oudinSphereStreamerFamily : ClaimBound
+oudinSphereStreamerFamily = mkBound
+  "Behary built a high-voltage Oudin/Tesla resonator with a spherical copper topload and reported streamer production in ordinary air"
+  oudinBeharySphere
+  "Tesla/Oudin Coil with 6-inch Copper Sphere Topload; apparatus description and discharge paragraphs"
+  beharyRestorationRoot
+  Diligence.implementationEvidence
+  experimentalMechanismElsewhere
+  "maker-reported input/output details apply to Behary's device only; not to berndnindl, plasma healing, or the claimed floating orb"
+
 reichSeparation : ClaimBound
 reichSeparation = mkBound
   "Museum distinguishes Reich's cloudbuster from later Welz/Croft orgonite, quartz-and-resin devices"
@@ -551,6 +595,16 @@ iTorusCommercialSpecOnly : BoundedRelation
 iTorusCommercialSpecOnly = bounded-relation
   "iTorus i9 commercial geometry" "room-sized coherent healing field"
   commercialSpecificationOnly itorusSpecBound false refl false refl
+
+berndTowerGeometryAnalogy : BoundedRelation
+berndTowerGeometryAnalogy = bounded-relation
+  "berndnindl photograph 1000018569" "coarse-wound sphere-topped Oudin/Tesla resonator"
+  hardwareAnalogyOnly oudinSpacedWindingFamily false refl false refl
+
+oudinSphereDisplayAnalogy : BoundedRelation
+oudinSphereDisplayAnalogy = bounded-relation
+  "berndnindl spherical top and purple discharge" "Behary 2008 Oudin sphere topload"
+  hardwareAnalogyOnly oudinSphereStreamerFamily false refl false refl
 
 oudinHistoricalPrecedentOnly : BoundedRelation
 oudinHistoricalPrecedentOnly = bounded-relation
