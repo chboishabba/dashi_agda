@@ -256,3 +256,43 @@ Consequently the R823 decision route now has exactly two substantive leaves:
 
 Once both are discharged, the universal R823 reserve conjecture is refuted.
 No conclusion about Navier--Stokes regularity itself follows.
+
+## R850–R852 mathematical closure update (23 October 2026)
+
+The prior description above of R829D as a remaining physical vector/scalar
+identification has been superseded by theorem-bearing work:
+- R841 constructs a *literal* rational radius-four Field30 physical snapshot,
+  with actual all-mode sparse velocity and transversality.
+- R844/R845/R846 evaluate the selected physical projected nonlinearity,
+  mixed helicity vectors and commutator vector rows.
+- R847 proves literal critical production = 0 and dissipation = 15834.
+- R848 proves every **nonzero** inactive output has an empty selected
+  mixed-cell fibre.
+- R849 proves literal global R692 coherent work = -557627/125.
+- R850 proves exact same-object identification of the three physical
+  scalars and the negative initial R815 rate.
+- R851 makes R845's all-mode forcing-same-object theorem unconditional for
+  the selected snapshot by splitting **zero-output transverse cancellation**
+  (existing R436) from **nonzero-output support emptiness** (existing R848).
+  Crucially, the older R846 universal support-empty premise was **false at
+  zero**: six nonzero seed pairs (p,-p) sum to zero. Their projected NS
+  contributions vanish, not their incidences.
+- R852 composes R851.modalSameObject, R837 full-to-active fold conversion,
+  R845 mixed vectors and R846 literal commutator vectors to construct the
+  exact R829D `Repository345VectorEvaluation` record, including all eight
+  mixed/commutator rows and six velocity/forcing pairs.
+
+Consequently the preferred R832 reserve decision now has one *coarse* open
+mathematical leaf: R833 real finite-Galerkin ODE transport. Its finer
+prerequisites remain the physical real quadratic/chart identification and
+the selected R828 displacement/rate functional along a real local solution.
+This is an **auxiliary R823 signed-reserve decision**, not Clay B.
+
+Source-written new modules are NOT exact-head Agda kernel receipts. A local
+independent support enumerator was run: six opposite active pairs produce
+zero output and all nonzero active sums inside the radius-four cube lie in
+the eight selected modes. The committed regression is
+`tests/test_ns_r851_zero_output_support.py`.
+
+Do not reopen already established R829 scalar/vector producers or impose the
+impossible zero-output empty-incidence condition.
