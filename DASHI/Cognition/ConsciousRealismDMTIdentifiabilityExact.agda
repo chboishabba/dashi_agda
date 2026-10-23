@@ -16,6 +16,12 @@ import DASHI.Core.FiniteStochasticBisimulationExact as Stochastic
 import DASHI.Cognition.ConsciousRealismDMTSourceAtlasExact as Sources
 import DASHI.Biology.Psychedelic5HT2AAttentionBoundaryExact as Salience
 import DASHI.Biology.PsychedelicVisualOperatorAlgebra as Visual
+import DASHI.Cognition.KlueverFormConstantProjection as Kluver
+import DASHI.Cognition.VisualTuringKlueverBridge as VisualTuring
+import DASHI.Cognition.ModeSelectionToProjectionLaw as ModeLaw
+import DASHI.Cognition.CorticalLogPolarProjectionGeometry as Cortical
+import DASHI.Biology.TuringPatternRegimeSurface as Turing
+import DASHI.Cognition.Kluver5HT2ACrossPollinationExact as Kluver5HT2A
 
 -- A concrete stochastic matrix instance must discharge normalization separately.
 record KernelComposition (K : Set) : Set where
@@ -185,3 +191,86 @@ targetDependentResponseExcludesTargetBlindModel :
 targetDependentResponseExcludesTargetBlindModel
   observedMass targetA targetB reply blindMass differs matchesA matchesB =
   differs (trans matchesA (sym matchesB))
+
+------------------------------------------------------------------------
+-- Klüver / Kluever source-specific prior art.
+--
+-- Heinrich Klüver's historical mescal-vision classification is attributed in
+-- the existing KluverLogPolar5HT2ASourceAtlasExact. Bressloff et al. 2001
+-- and Ermentrout/Cowan 1979 own the source-side cortical pattern account.
+-- DASHI.Cognition.ModeSelectionToProjectionLaw ALREADY proves the concrete
+-- distinct-stripes/spots -> same lattice relation, and non-totality. We
+-- consume that same witness, not a new encoding of the four form constants.
+------------------------------------------------------------------------
+
+klueverModeLaw : ModeLaw.ManyToOneLatticeWitness
+klueverModeLaw = ModeLaw.canonicalManyToOneLatticeWitness
+
+-- The pre-existing proof has a local empty type. Transport its impossible
+-- case to the standard empty type without assuming them definitionally equal.
+modeLawImpossible : ModeLaw.⊥ → ⊥
+modeLawImpossible ()
+
+-- No function assigning a single underlying Turing family to every lattice
+-- report can be correct on both already-proved admissible projections.
+-- This is stronger than merely labelling Klüver projection "lossy".
+klueverLatticeNoUniformInverse :
+  (decode : Kluver.KlueverForm → Turing.TuringPatternFamily) →
+  ((family : Turing.TuringPatternFamily) →
+   VisualTuring.ProjectsAsKluever family Kluver.latticeGrating →
+   decode Kluver.latticeGrating ≡ family) →
+  ⊥
+klueverLatticeNoUniformInverse decode claimsInverse =
+  modeLawImpossible
+    (ModeLaw.stripe≢spot
+      (trans
+        (sym (claimsInverse Turing.stripeFamily
+          VisualTuring.stripesAsLattice))
+        (claimsInverse Turing.spotFamily
+          VisualTuring.spotsAsLattice)))
+
+-- A second independent degeneracy: cortical angular- and radial-periodic
+-- features can each project to the same cobweb percept in the original
+-- CorticalLogPolarProjectionGeometry relation. This too is a source-bounded
+-- synthetic consequence, not a claim of experimentally measured V1 fields.
+radialPeriodIsNotAngularPeriod :
+  Cortical.radialPeriodicity ≡ Cortical.angularPeriodicity → ⊥
+radialPeriodIsNotAngularPeriod ()
+
+cobwebNoUniformCorticalFeatureInverse :
+  (decode : Kluver.KlueverForm → Cortical.VisualModeFeature) →
+  ((feature : Cortical.VisualModeFeature) →
+   Cortical.FeatureProjectsAs feature Kluver.radialCobweb →
+   decode Kluver.radialCobweb ≡ feature) →
+  ⊥
+cobwebNoUniformCorticalFeatureInverse decode claimsInverse =
+  radialPeriodIsNotAngularPeriod
+    (trans
+      (sym (claimsInverse Cortical.radialPeriodicity
+        Cortical.radialPeriodAsCobweb))
+      (claimsInverse Cortical.angularPeriodicity
+        Cortical.angularPeriodAsCobweb))
+
+-- Original CROSS-POLLINATION owner already distinguishes the proven finite
+-- visual geometry from the still-uncalibrated drug-to-visual mechanism.
+existingKluver5HT2ACompositeIsNotCalibrated :
+  Kluver5HT2A.jointMechanismEmpiricallyClosed
+    Kluver5HT2A.canonicalKluver5HT2ACrossPollination ≡ false
+existingKluver5HT2ACompositeIsNotCalibrated =
+  Kluver5HT2A.jointMechanismEmpiricallyClosedIsFalse
+    Kluver5HT2A.canonicalKluver5HT2ACrossPollination
+
+existingKluverSalienceDoesNotIdentifyExternalAgency :
+  Kluver5HT2A.feltImportanceProvesExternalAgency
+    Kluver5HT2A.canonicalKluver5HT2ACrossPollination ≡ false
+existingKluverSalienceDoesNotIdentifyExternalAgency =
+  Kluver5HT2A.feltImportanceProvesExternalAgencyIsFalse
+    Kluver5HT2A.canonicalKluver5HT2ACrossPollination
+
+-- Crucial separation of operators:
+-- Klüver uses a (generally many-to-one and partial) mode -> observed-form
+-- projection. Markov first-return traces use a subset of Markov *states*.
+-- The first operation need not preserve a one-step Markov transition law.
+-- Therefore T_V(Q) for neural states cannot silently be identified with
+-- a Markov kernel on reported Klüver labels. The repository's original
+-- finite bisimulation/lumping counterexample above enforces this distinction.
