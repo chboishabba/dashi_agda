@@ -282,8 +282,8 @@ oudinCoil = screenshot-evidence
   "1000018569.png"
   "6324ec164df5524fe117979d66351a04e16fafdd66400139030fff769a0ba1cc"
   berndNindl oudInAirDischarge
-  "Metal spherical top above tall ribbed/wound cylindrical body; blue-white transverse discharges"
-  "A separate post by the same creator; not the same clip as the open loop"
+  "Large smooth metal sphere above a tall cylinder with many regularly repeating, pale serpentine horizontal bands; purple-blue luminous patches near upper bands, apparently on or near the winding; not enough detail to establish whether the pale bands are wires, reflections, insulation or another electrode"
+  "Caption starts 'Triple insulated but directly you should not ...'; a separate post by this creator, not the same clip as the open-loop Oudin author reply; electrical topology and exact Oudin class NOT verified"
   false false false false
 
 pignatelliCaptionedMotor : ScreenshotEvidence
@@ -359,3 +359,67 @@ noMotorPowerFromPotential ()
 
 noWaterPhaseFromVortex : WaterVortexEstablishesNewWaterPhase → ⊥
 noWaterPhaseFromVortex ()
+
+------------------------------------------------------------------------
+-- EXACT FIFTH IMAGE: IN THE USER'S EIGHT-SCREENSHOT DISPLAY ORDER.
+-- This is a human-readable ordinal into the *presented sequence*, not a
+-- carousel identity, chronological ordering, a new hardware identifier
+-- or an inference from the internal secondBatch array ordering.
+------------------------------------------------------------------------
+
+displayOrder : List ScreenshotEvidence
+displayOrder =
+  itorusTablet ∷ aurumayaSuccor ∷ itorusCase ∷
+  pignatelliCaptionedMotor ∷ oudinCoil ∷
+  waterSwirl ∷ oudinLoop ∷ biopunkStory ∷ []
+
+displayOrderEight : countStills displayOrder ≡ 8
+displayOrderEight = refl
+
+fifthImage : ScreenshotEvidence
+fifthImage = oudinCoil
+
+data TowerVisibleFeature : Set where
+  smoothMetalSphere : TowerVisibleFeature
+  verticalBody : TowerVisibleFeature
+  paleSerpentineBands : TowerVisibleFeature
+  violetPatchesNearUpperBands : TowerVisibleFeature
+
+data TowerMechanismCandidate : Set where
+  conventionalSphereTopRFResonator : TowerMechanismCandidate
+  customSpacedSecondaryConductor : TowerMechanismCandidate
+  surfaceOrInterTurnFlashover : TowerMechanismCandidate
+  localCoronaFromElectrodeOrWinding : TowerMechanismCandidate
+  imagingOrReflectionOfDischarge : TowerMechanismCandidate
+
+record TowerDiscriminatorDemand : Set where
+  constructor tower-discriminator-demand
+  field
+    candidate : TowerMechanismCandidate
+    sourceReel : String
+    wiringContinuity : String
+    exposureAndFrameTiming : String
+    locationOfVisibleDischarge : String
+    powerSupplyIsolation : String
+open TowerDiscriminatorDemand public
+
+candidateTest : TowerMechanismCandidate → String
+candidateTest conventionalSphereTopRFResonator =
+  "native reel plus maker circuit, topload connection, winding/primary identification and calibrated electrical spectrum"
+candidateTest customSpacedSecondaryConductor =
+  "continuity/winding map and insulation description from builder, compared to native unobstructed stills"
+candidateTest surfaceOrInterTurnFlashover =
+  "non-contact supervised video locating arc endpoints with respect to successive turns and dielectric surfaces"
+candidateTest localCoronaFromElectrodeOrWinding =
+  "corona location and electrical field/voltage phase correlated with camera exposure under controlled safe setup"
+candidateTest imagingOrReflectionOfDischarge =
+  "second-view synchronised video and exposure/filter control to separate emitted light from reflection"
+
+data FifthImageProvesOudinCircuit : Set where
+data VisiblePurpleMeansTherapeuticField : Set where
+
+fifthImageNeedsActualCircuit : FifthImageProvesOudinCircuit → ⊥
+fifthImageNeedsActualCircuit ()
+
+noClinicalInferenceFromPurple : VisiblePurpleMeansTherapeuticField → ⊥
+noClinicalInferenceFromPurple ()
