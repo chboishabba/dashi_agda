@@ -1,5 +1,5 @@
 # Succor Punch / psychotronics source genealogy — bounded max-cut
-Last investigated: 2026-10-24. Canonical formal owner: `DASHI/Cognition/PsychotronicsSuccorSourceAtlasExact.agda`.
+Last investigated: 2026-10-24. Canonical owners: `DASHI/Cognition/PsychotronicsSuccorSourceAtlasExact.agda`, `DASHI/Cognition/PsychotronicsScreenshotDiscriminationExact.agda`. Version: max-cut 2.
 
 ## Question and scope
 Trace the actual copper/star/quartz, 15 Hz Mobius Succor Punch, Reich/Croft cloudbusting, purple open-air corona, 7.83/333 Hz, remote-viewing/Gateway and First Earth Battalion motifs in two Instagram screenshot sets supplied in the conversation. The question is **who asserted which design or effect, and what would test it?** This is *not* an endorsement of orgone, scalar healing, clairvoyance, extraterrestrials, mind-over-matter, timeline shifting or alleged government suppression.
@@ -17,6 +17,7 @@ Trace the actual copper/star/quartz, 15 Hz Mobius Succor Punch, Reich/Croft clou
 | Wayne M. McDonnell | [Analysis and Assessment of Gateway Process](https://www.govinfo.gov/app/details/GOVPUB-D101-PURL-gpo152943), memorandum dated 9 June 1983; section *The Consciousness Matrix* | One Army officer's **speculative model** linking consciousness, holography and resonant language | Institutional proof of holographic consciousness, personal future selection or modern creator borrowing |
 | Mumford, Rose and Goslin for AIR | [1995 final evaluation](https://www.cia.gov/readingroom/document/cia-rdp96-00791r000200180006-4), 29 September 1995, executive summary and operational assessment | Research debate and operational intelligence utility are separate claims; contested conclusions | Psychic mechanism, universal rejection of all data; automatic transfer of draft quotations to final |
 | International Remote Viewing Association (IRVA) | [Remote Viewing Timeline](https://www.irva.org/time-line), 1986 SUN STREAK / Ed Dames entry | Organisation's retrospective history names Dames as having joined operational remote viewing at Fort Meade; **context for Croft's direct named reference**, not an efficacy receipt | Reproducible paranormal information acquisition, involvement with Croft or his device |
+| Serge Kahili King | [Earth Energies](https://books.google.com/books/about/Earth_Energies.html?id=qqnEtTMSaxwC), Quest Books first edition 1992, ISBN 9780835606820 | Croft says in *Moonbusting Part 1* he learned of Reich through this named book. This is **first-person attribution of reading**, not merely thematic resemblance | Whether every book claim is scientifically valid or directly copied into a specific circuit |
 | University of Colorado Boulder | [Electric Whirl](https://physicslabs.colorado.edu/demos/electricity-and-magnetism/electric-fields-and-potential/electrostatic-potential/electric-whirl/), updated 27 March 2026 | Sharp-electrode corona drives ion wind that rotates a pinwheel under high voltage | Identification of specific creator's rotor or orb |
 | Instagram posts `crystal_pyramids96` and `color_theory_installations` | Ten user-provided screenshots, recorded 2026-10-24; original reel, frame sequence, measurement data and model identities unavailable | **The posts visually show** a copper woven/angled cage and central metal sphere; purple branching arcs near quartz/fluorite-like material; one small blue-topped emitter and claimed 7.83/333 Hz use | Video motion, wiring, true frequencies, voltage/current, rotating orb geometry, fabrication provenance, full context of captions |
 
@@ -28,6 +29,9 @@ Trace the actual copper/star/quartz, 15 Hz Mobius Succor Punch, Reich/Croft clou
 
 | From → to | Relation and limit |
 |---|---|
+| Croft's retrospective narrative → Serge Kahili King | **Explicitly named reading**: he credits *Earth Energies* for his introduction to Reich. Book existence/publisher/year independently corroborated; later reprint cannot date Croft's actual reading precisely. |
+| Croft → star-tetrahedron geometrical language | **Named symbol in Croft narrative**: a star tetrahedron allegedly overlaid on geography. It is not a wiring diagram or a same-object match for the copper star cage. |
+| Croft → Tesla/Rife/Schauberger/Mesmer | **Explicit group of names in retrospective narrative**, not an experimental lineage or confirmed reading of each person's work. |
 | Croft 2002 → Ed Dames / remote-viewing public culture | **Direct named reference**, not merely a similar theme: Croft's 18 May piece mentions 'Maj. Ed Dames' and government psychics; IRVA places Dames in the 1986 SUN STREAK unit. This supports that Croft referred to a remote-viewing figure, NOT contact, joint work, inheritance of military technology, or psychic effectiveness. |
 | Croft Succor Punch → Croft modified cloudbuster | **Explicit reported co-use** in Croft's own anthology. A real documentary edge, not an independent measurement. |
 | Original Reich cloudbuster → contemporary orgonite/Croft | **Terminology and later reinterpretation**; Museum explicitly states the designs aren't Reich's theoretical or practical work. Do not assert direct functional equivalence. |
@@ -59,7 +63,49 @@ Recompute the Pareto frontier after each acquisition. Priority is about possible
 - `DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact`: valid EM mechanisms should be attributed to observable fields and physical sources, not novel scalar energy.
 - SLR/ITIR/SensibLaw: downstream source-graph ingestion is a *future consumer integration* unless materialised into their native persisted provenance and checked; a DASHI link or module does not assert those systems have been updated.
 
-### Acceptance and open certification
+### Image-level acquisition (exact uploaded-object receipts)
+
+Ten PNG screenshots supplied in the conversation, 684 x 1536 pixels each. Hashes for **those uploaded PNG bytes** were computed locally (SHA-256), **not** for the original Instagram reels, their upload packets, or any Facebook/Instagram-hosted canonical video. The source photos are not copied into the repository.
+
+| Creator | Uploaded PNG identifiers | What is directly visible | What is *not* established |
+|---|---|---|---|
+| `@color_theory_installations` | `1000018554`, `8555`, `8557`, `8558`, `8559`, `8560`, `8561` | Purple branching arc on or near a green specimen; blue circular-topped item; thermal camera display; a crescent-like free-air discharge | Separate mechanical rotor, freely hovering plasma orb, Schumann modulation, 333 Hz room field, actual crystal temperature |
+| `@crystal_pyramids96` | `1000018562`, `8563`, `8564` | Dense copper basket/weave and angled copper strands around a reflective metal sphere | Confirmed Merkaba or Rodin topology, winding schematic, electrical activity, identity with Croft's quartz-point Succor Punch |
+
+The fully enumerated ten SHA-256 records are in `PsychotronicsScreenshotDiscriminationExact.agda`; `countStills stillAtlas ≡ 10` is a definitional assertion. The screenshot account split is **7 + 3**. Croft's own source and a different account's posts do not coalesce into one author/device lineage.
+
+The thermal-camera still reads `Max 282.0` and also `69.2`, but **the displayed unit, emissivity settings, reflective-artefact handling, and physical contact temperature are not verified**. Do not convert this into `282 °C` or a calibrated crystal heating claim.
+
+The purple crescent appearing above the blue-lit quartz is compatible with several electrical/optical arrangements. **The specific separate spinning plasma orb described by the user is not identified or clearly resolved in these screenshots.** No rotor speed, electrode geometry, distance, or temporal trajectory is paid.
+
+### Experiment reuse instead of invented authority
+
+`DASHI.Physics.QuantumVacuum.DiscriminatingExperiment` already expresses an observed signal and per-null control/exclusion witness, and `ReplicatedDiscrimination` independently records apparatus and analysis. New `PsychotronicsScreenshotDiscriminationExact.agda` instantiates the **type of required experiment**, without constructing a fake observation or exclusion witness. Explicit alternative nulls are stationary corona, rotating high-voltage electrode, ionic-wind rotor, phone-shutter aliasing, UV fluorescence/reflection, thermal/emissivity artefacts, drive/modulation mixing and external pickup.
+
+For a bounded actual study: request original uninterrupted video and audio, retained capture settings, timing references and apparatus diagram; obtain independently measured output under supervised high-voltage-safe conditions; use separate reference probes and calibrated controls; pre-register which observation discriminates which alternative. The experiment should not treat 7.83 Hz, 15 Hz, and 333 Hz as one frequency; they might label different generators or modulation channels. A number in a caption is not spectral data. A spinning shape in a single frame is not a measured rotating body.
+
+### New explicit source leads (Pareto-paid)
+
+- [Croft retrospective archive](https://archive.org/stream/DonCroftTheAdventuresOfDonAndCarolCroft/Don%20Croft%20-%20The%20Adventures%20of%20Don%20and%20Carol%20Croft_djvu.txt) *Moonbusting Part 1*: explicit `Earth Energies` reading, star-tetrahedron geographical language (NOT a star-wound coil attribution).
+- Same archive, later passage groups Tesla, Rife, Schauberger and Mesmer as named exemplars; this is a documented cultural cluster, but not electrical engineering continuity.
+- [IRVA timeline](https://www.irva.org/time-line): Ed Dames appears in a 1984 CRV training-class entry and in a 1986 unit entry; the chronology distinguishes training and joining, **not evidence of conflicting military dates to force into one event**.
+- [AIR 1995 final report PDF](https://www.alice.id.tue.nl/references/mumford-rose-goslin-1995.pdf): scanned first page and E-3 were inspected on 2026-10-24. The formerly linked CIA item `CIA-RDP96-00791R000200180006-4` currently returns 404; accession ID preserved while accessible PDF is the actual atlas URL. The executive summary distinguishes above-chance results in reviewed laboratory protocols from unestablished paranormal attribution and failure to produce actionable operational intelligence. A 22 September draft is a different document.
+- [Aurumaya powered ritual crystals](https://www.aurumaya.com.au/pemf): contemporary commercial example joining copper/crystals, intention and piezoelectric terms. No verified direct lineage to the Instagram accounts or an exact 15 Hz signal in the currently accessible page.
+
+## Revised roadmap with objective closure conditions
+
+| Priority | Phase | Current status | Exact exit condition |
+|---|---|---|---|
+| 0 | Source genealogy/attribution | **Paid for bounded claims** (Croft book/readings; Ed Dames mention; 1992 book; manufacturer theories, Reich separation; AIR final) | 11 named source instances and claim ceiling regressions preserved; no mirror becomes independent testimony |
+| 1 | Original reel / same device | **BLOCKED by missing original media** | Original post URL, native creator footage, matching shot/clip and creator/device identifier under custody, plus rotor/electrode temporal trace |
+| 2 | Driver/waveform and visible effects | **Protocol defined, no measurements** | Synchronised calibrated voltage/current/spectrum/video and controls reject or retain ordinary mechanisms separately |
+| 3 | Directed influence or physical anomaly | **No warrant to promote** | Pre-registered blinded result exceeds matched-control effects with independent reproduction, calibrated exposure/safety |
+| 4 | Biological treatment or consciousness claims | **Unsubstantiated** | Separate clinically appropriate controlled outcomes with interpretable dose and safety, not extrapolation from arcs or patents |
+| 5 | Wider Ibrahim graph expansion | **Consumer-driven only** | New edge only when a specific source/document/device changes a live inference; QIDs/DOIs never manufactured |
+
+**Roadmap consequence:** Do not start a new orgone/scalar-wave mathematical ontology, or claim an experimental success, until a physical `same-object` discriminator demands it. The greatest information gain is source acquisition for the unrecovered videos, followed by waveform-specific controls. The mathematically interesting downstream problem is an inverse-model selection task over synchronised spatiotemporal observations, not a Clay-like proof obligation.
+
+## Acceptance and open certification
 
 Formal leaf:
 ```sh
