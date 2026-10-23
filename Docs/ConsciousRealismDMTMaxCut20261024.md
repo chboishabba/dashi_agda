@@ -116,3 +116,51 @@ For preregistered inaccessible-target studies, targetDependentResponseExcludesTa
 5. Update the **existing** empirical source atlases or measurement owners on genuine new source evidence. Do not fabricate a DMT sample, a concentration-to-kernel identification, or a source author contribution.
 
 **Research frontier after prior-art recovery:** The major missing object is now more precise: a *single-source-and-protocol-aligned calibrated DMT receptor/circuit/experience transition map*, with a separate adversarial concealed-information test. The formal ingredients, toy degeneracy results, and experiment-selection infrastructure mostly pre-exist.
+
+## Klüver: trace versus coarse-graining (2026-10-24)
+
+### Original attributions and what they actually pay
+
+- Heinrich Klüver, Mescal Visions and Eidetic Vision, American Journal of Psychology 37(4):502–515 (1926), DOI **10.2307/1414910**. Newly recorded as the named entry heinrichKluver1926 in the pre-existing source atlas DASHI/Biology/KluverLogPolar5HT2ASourceAtlasExact.agda. The 1926 article pays original systematic mescal-vision phenomenology history only; neither a specific neural mechanism nor entity ontology follows.
+- G. Bard Ermentrout and Jack D. Cowan, A mathematical theory of visual hallucination patterns (1979), DOI **10.1007/BF00336965**, and Paul C. Bressloff, Jack D. Cowan, Martin Golubitsky, Peter J. Thomas and Matthew C. Wiener, Geometric visual hallucinations, Euclidean symmetry and the functional architecture of striate cortex (2001), DOI **10.1098/rstb.2000.0769**. These authors own original cortical neural-field/symmetry geometry, not the DASHI finite witnesses.
+- The DASHI concrete typed relation, symmetry and noninvertibility witnesses are repo-native reconstructions/extensions, NOT original Klüver/Bressloff theorems. Source citations do not import proof, observed biological equivalence, or entity authority.
+
+### Exact reused structural prior art
+
+- DASHI/Cognition/KlueverFormConstantProjection.agda: four coarse Klüver classes and nonrecovery/meaning boundaries.
+- DASHI/Cognition/VisualTuringKlueverBridge.agda: PARTIAL relation from Turing pattern families to possible form constants. Stripe, spot and hexagon may each project to lattice; front can project to tunnel or radial.
+- DASHI/Cognition/ModeSelectionToProjectionLaw.agda: already proves stripe/spot distinct with equal coarse lattice projection; the current finite relation has no dissipative-soliton projection constructor, which does NOT assert the biological impossibility of such patterns.
+- DASHI/Cognition/CorticalLogPolarProjectionGeometry.agda: distinct radial-periodic and angular-periodic features may both appear as cobwebs.
+- DASHI/Cognition/LogPolarKluverDerivationExact.agda: finite log-radius translation/magnification law, not a calibrated human V1 atlas.
+- DASHI/Cognition/AnalyticLogPolarSpiralCompilerExact.agda: exp(log) radius law conditional on supplied affine-phase rearrangement. Division/ring rearrangement and measured V1 mode identity still open.
+- DASHI/Cognition/EndogenousPhospheneObservationBridge.agda: closed-eye/reduced-drive endogenous carrier and lossy geometric projection; no inverse pathology or semantic meaning attribution.
+- DASHI/Cognition/Kluver5HT2ACrossPollinationExact.agda: exact source-bounded geometry/pharmacology separation, candidate-only human causal transfer and non-promotion of felt importance into external agency.
+- The present PR now consumes original witnesses to derive klueverLatticeNoUniformInverse and cobwebNoUniformCorticalFeatureInverse in the existing DMT identifiability Agda owner, rather than creating another nominal visual-pattern carrier.
+
+### Critically: subset trace and observed-form quotient are different constructions
+
+For a finite row-stochastic latent Q, first-return trace T_V(Q)=Q_VV+Q_VH(I-Q_HH)^(-1)Q_HV applies to a SUBSET V of literal latent states, provided return/transience conditions hold. By contrast, a Klüver form label is a typically many-to-one and partial relation/projection from latent modes to percept classes.
+
+A first-order Markov kernel on coarse form labels is *not* automatically determined by Q. Strong lumpability of an explicitly selected deterministic form map pi requires, for every i,i' with pi(i)=pi(i') and output form b:
+
+    sum(Q[i,j] : pi(j)=b) = sum(Q[i',j] : pi(j)=b).
+
+The source owners for this obligation are existing DASHI/Core/FiniteStochasticBisimulationExact.agda and DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda. Reuse them, not new R-number wrappers.
+
+**Exact synthetic counterexample:** select source-permitted form projections of the four finite states stripe -> lattice, spot -> lattice, spiral -> spiral, front -> tunnel. For the original positive 4x4 Q fixture, next-step tunnel mass from stripe is 1/10; from spot it is 1/5. Yet both current modes share the lattice label. Therefore no fine-state-independent first-order lattice-to-tunnel transition row fits both. The updated exact Python audit checks this and nested subset traces separately. The selected mapping is a synthetic choice from a partial relation, NOT a physical measurement or unique visual generator.
+
+A non-Markov sequence of reported forms can be modelled using a hidden Markov model or sufficient history, not by silently treating the form sequence as a first-return chain. The originally proposed trace-consistency identity would otherwise be applied to the wrong mathematical object.
+
+### Refined max-cut frontier
+
+| Rank | Reuse / deliverable | Admission needed |
+|---|---|---|
+| P0 | Source atlas now credits Klüver 1926; original Ermentrout/Cowan and Bressloff source roles kept separate | Preserve author/DOI/actual provenance; no historical or scientific authority promotion |
+| P0 | Original ModeSelection and cortical projection witnesses consumed by two derived no-inverse lemmas | Agda kernel check remains unperformed |
+| P0 | Original stochastic bisimulation and lumping owners reused; executable 4-state non-lumpability counterexample | Synthetic exact arithmetic is not neural or DMT data |
+| P1 | Existing 5HT2A protocol-indexed receptor/transducer/cortical modules | Same-ligand, same-protocol, dose/time/cell-type aligned quantitative evidence |
+| P1 | Existing visual-mode/log-polar/analytic spiral modules | Spatial V1 field and validated retinotopic report dictionary, held-out error |
+| P1 | Existing discriminator and experiment-admission modules | Pre-registered blinded concealed-target result, interference/leakage control, repeatability |
+| P2 | Independent DMT entities | No existing source or finite theorem establishes them, even if geometric reports recur |
+
+**Termination criterion:** mathematical noninvertibility is paid by concrete original witnesses and exact arithmetic. Do not duplicate it. The high-value unresolved task is an independently calibrated same-object DMT receptor->neural->perceptual emission model plus a separate anomalous-information experiment. Ethical authorization, not an Agda fixture, must govern human experiments.
