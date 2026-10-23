@@ -114,7 +114,7 @@ canonicalSources =
     true false false false
   ∷ bounded-source deceptiveFacebookCollection ftcRoot
     regulatoryFinding
-    "https://www.ftc.gov/news-events/news/press-releases/2019/12/ftc-issues-opinion-order-against-cambridge-analytica-deceptive-practices"
+    "https://www.ftc.gov/legal-library/browse/cases-proceedings/182-3107-cambridge-analytica-llc-matter"
     "2019-12" "2014 onward"
     "FTC found Cambridge Analytica used deceptive collection of Facebook personal data; this does not establish election causation or a specific Aquino-to-SCL transfer."
     true false false false
