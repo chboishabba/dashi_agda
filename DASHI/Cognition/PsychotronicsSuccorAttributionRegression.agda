@@ -8,6 +8,7 @@ import DASHI.Cognition.PsychotronicsScreenshotDiscriminationExact as Frames
 import DASHI.Culture.HoeMathLevelsSourceBoundaryExact as HoeMath
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.AnomalousConsciousnessResearchEvidenceContinuumExact as Evidence
+import DASHI.Governance.AnomalousConsumerIndexedObligationFibreExact as Consumer
 import DASHI.Physics.QuantumVacuum.DiscriminatingExperiment as Experiment
 
 ------------------------------------------------------------------------
@@ -607,3 +608,24 @@ instrumentValidatedElsewhereNeedsTransport ()
 syntheticContrastIsNotMeasuredPeople :
   SyntheticCounterexampleIsRealParticipantData → ⊥
 syntheticContrastIsNotMeasuredPeople ()
+
+------------------------------------------------------------------------
+-- Cross-pollinate existing consumer-dependent evidence requirements:
+-- a subjective state report is not a demonstrated induction mechanism.
+-- This reuses the GOVERNANCE owner; no novel evidence ladder invented.
+------------------------------------------------------------------------
+
+meditativeAndPsychedelicInductionsStayDifferent :
+  Evidence.inductionMethod Evidence.meditationWorld ≡
+  Evidence.inductionMethod Evidence.psychedelicWorld → ⊥
+meditativeAndPsychedelicInductionsStayDifferent = Evidence.methodDiffers
+
+selfReportSupportCannotAutomaticallyCloseFieldMechanism :
+  Consumer.PhenomenologyClosurePromotesMechanismClosure → ⊥
+selfReportSupportCannotAutomaticallyCloseFieldMechanism =
+  Consumer.phenomenologyClosureDoesNotPromoteMechanismClosure
+
+psiClaimCannotFollowFromPsychedelicPhenomenology :
+  Evidence.PsychedelicPhenomenologyPromotesRemoteViewing → ⊥
+psiClaimCannotFollowFromPsychedelicPhenomenology =
+  Evidence.psychedelicPhenomenologyDoesNotPromoteRemoteViewing
