@@ -105,6 +105,10 @@ formalisation of that universal-property proof.
 - `DASHI/Mathematics/Topology/AlexanderHornedC3CharactersExact.agda`:
   C3 group-character structure; conditional theorem that any C3
   character is trivial if all loop classes admit meridian words.
+- `DASHI/Mathematics/Topology/AlexanderHornedC3OuterDetectorExact.agda`:
+  conditional theorem transporting a non-inner cyclic action from a
+  surjective equivariant quotient back to the source loop group.
+  The A5^3 quotient is not instantiated in Agda yet.
 
 These are **conditional type-theoretic results**, not instances for
 the real three-manifold. In particular a finite word moving under C3
@@ -149,6 +153,7 @@ Run from the repo root:
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3FiniteStageExact.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3ExteriorBridge.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3CharactersExact.agda
+    agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3OuterDetectorExact.agda
 
 The A5 finite probe passed in a local Python run (depth 5, 32
 meridians per sector). There is **no Agda compiler in this execution
