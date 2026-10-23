@@ -126,6 +126,50 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- The atlas deliberately has eleven source instances. The five named-source
 -- / original-author Croft passages still share a single authorial root.
-sourceAtlasCountIsEleven :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 11
-sourceAtlasCountIsEleven = refl
+sourceAtlasCountIsSeventeen :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 17
+sourceAtlasCountIsSeventeen = refl
+
+------------------------------------------------------------------------
+-- Max-cut 3: product-author identity and eight additional screenshot hashes
+------------------------------------------------------------------------
+
+secondImageBatchIsEight :
+  Frames.countStills Frames.secondBatch ≡ 8
+secondImageBatchIsEight = Frames.secondBatchHasEight
+
+allScreenshotCountIsEighteen :
+  Frames.countStills Frames.stillAtlas +
+  Frames.countStills Frames.secondBatch ≡ 18
+allScreenshotCountIsEighteen = Frames.bothBatchesHaveEighteen
+
+aurumayaNamesCroftButNotAnEfficacyWitness :
+  Atlas.relationClass Atlas.aurumayaSelfIdentifiesCroft ≡
+  Atlas.contemporarySelfAttribution
+aurumayaNamesCroftButNotAnEfficacyWitness = refl
+
+iTorusSpecsAreMarketingNotFieldMapping :
+  Atlas.relationClass Atlas.iTorusCommercialSpecOnly ≡
+  Atlas.commercialSpecificationOnly
+iTorusSpecsAreMarketingNotFieldMapping = refl
+
+oudinPhotoIsOnlyHistoricalMechanismPrecedent :
+  Atlas.relationClass Atlas.oudinHistoricalPrecedentOnly ≡
+  Atlas.historicalMechanismPrecedentOnly
+oudinPhotoIsOnlyHistoricalMechanismPrecedent = refl
+
+torusPostAuthorRetained :
+  Frames.creator Frames.itorusCase ≡ Frames.iPyramids
+torusPostAuthorRetained = refl
+
+oudinMakerPostAuthorRetained :
+  Frames.creator Frames.oudinLoop ≡ Frames.berndNindl
+oudinMakerPostAuthorRetained = refl
+
+modernQuartzMakerAuthorRetained :
+  Frames.creator Frames.aurumayaSuccor ≡ Frames.aurumaya
+modernQuartzMakerAuthorRetained = refl
+
+pignatelliLabelNotAnOriginalInventorReceipt :
+  Frames.electromagneticSpectrumMeasured Frames.pignatelliCaptionedMotor ≡ false
+pignatelliLabelNotAnOriginalInventorReceipt = refl
