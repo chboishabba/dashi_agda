@@ -52,14 +52,7 @@ clusteringRow schaefer1000 = metricRow 378 475 963
 
 -- Table T3: only reported exemplar counts transcribed here. Full T3
 -- must be retained at the paper when extending to additional metrics.
-clusterCountPixelCorrMilli : Nat → Nat
-clusterCountPixelCorrMilli 8 = 379
-clusterCountPixelCorrMilli 128 = 386
-clusterCountPixelCorrMilli 512 = 392
-clusterCountPixelCorrMilli _ = 0
-
--- Prefer a partial, provenance-aware API: do not interpret 0 as a
--- measurement for cluster counts that have not been entered.
+-- No fabricated zero for unreported cluster counts: use an indexed API.
 data ReportedClusterCount : Set where
   eight : ReportedClusterCount
   oneTwentyEight : ReportedClusterCount
