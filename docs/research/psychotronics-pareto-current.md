@@ -4,7 +4,7 @@
 
 ## Outcome of source investigation
 
-**30 document/source instances** are represented by a canonical `AttributedSource`; **18 screenshots** are keyed to SHA-256 of uploaded PNG files, not original social-media reels. These counts are *not* 30 independent confirmations or 18 separate experiments. Crosswalk preserved: earlier batch 10 stills / 2 accounts; later batch 8 stills / 6 more accounts.
+**32 document/source instances** are represented by a canonical `AttributedSource`; **18 screenshots** are keyed to SHA-256 of uploaded PNG files, not original social-media reels. These counts are *not* 32 independent confirmations or 18 separate experiments. Crosswalk preserved: earlier batch 10 stills / 2 accounts; later batch 8 stills / 6 more accounts.
 
 There are four different, non-identical objects that superficially share a coil or ring:
 - Bernd Nindl's **sphere-topped resonator** (fifth image of eight, `1000018569.png`) with pale serpentine bands and violet light; exact circuit unknown. The **seventh** image `1000018567.png` is a different open-loop clip with a creator reply naming an **Oudin Oscillator**. The historical resonator *family* is well documented; no reel/circuit continuity receipt shows the two are one construction.
@@ -29,7 +29,7 @@ The **[Revive Pro Tech iTorus i9 Heart Stone listing](https://reviveprotech.com/
 
 The peer-reviewed bibliographic coordinate for **Oleg D. Jefimenko**, *Operation of electric motors from atmospheric electric field*, *American Journal of Physics* **39**, 776–779 (1971), DOI [10.1119/1.1986281](https://doi.org/10.1119/1.1986281), was cross-checked with the West Virginia University author bibliography. It is the **same research lineage** as Jefimenko's 1973 book; the original 1971 article's full text was not page-inspected in this cut. It is therefore an improved original-source locator, **not new independent replication** or evidence for the viral “Pignatelli” label.
 
-All four newly discovered source families live in the *existing* source atlas with claim ceilings. **Five** additional document instances were added in this tranche: official app listing, reseller Heart Stone page, Aurumaya homepage, separate Aurumaya shop page, and 1971 AJP article. The previous 21 grew to 26, and the four new copper-star discovery carriers bring this to **30 document instances**, not 30 independent source roots. The 18 screenshot hashes and existing user-provided original pixels are unchanged.
+All four newly discovered source families live in the *existing* source atlas with claim ceilings. **Five** additional document instances were added in this tranche: official app listing, reseller Heart Stone page, Aurumaya homepage, separate Aurumaya shop page, and 1971 AJP article. The previous 21 grew to 26, four copper-star discovery carriers brought that to 30, and two new Openhand documents bring this to **32 document instances**, not 32 independent source roots. The 18 screenshot hashes and existing user-provided original pixels are unchanged.
 
 ## High-alpha new identification: first-batch copper-star and metallic sphere
 
@@ -45,11 +45,41 @@ The Starship 24-point seller copy further asserts a quartz/iron frame at constan
 
 Four new **source document instances** are now included: two maker-indexed product variants (same seller root), a derivative attributed social-caption index (another source role) and an independent store-directory entry. Their repetition is not independent engineering replication. The state of source archaeology improves, but original social video custody and actual instrument data remain unpaid.
 
+## Cross-pollination — hoe_math's Levels are NOT 5D, and 5D is not one consensus framework
+
+### Canonical *prior art* already present in repo
+
+`DASHI/Culture/HoeMathLevelsSourceBoundaryExact.agda` already owns a bounded presentation of `hoe_math`'s nine-level teaching model. **hoe_math owns their assembly/presentation only**, while Spiral Dynamics / developmental-stage / AQAL originators retain their conceptual authorships. Its existing coordinates distinguish **developmental stages**, **independent developmental lines**, **fluctuating states**, **types**, and **perspectives/quadrants**. The file explicitly blocks the conclusion that these coordinates can be reduced to a single universal scalar ladder. `DialecticLevelsAestheticConsumerFibreCrossPollinationExact.agda` additionally uses existing `IntersectionalNonFactorability` to show why a coarse *single stage label* cannot in general recover an independently varying line. No new developmental-stage theory belongs in this psychotronics branch.
+
+Original hoe_math 2025–26 source links in that Culture owner (e.g. `/levels-1-introduction/`, `/free-levels-chart/`) currently redirect to the author's Linktree; they are **historical pointers, not presently inspected original webpage text**. A currently accessible [creator-authored levels essay](https://itishoemath.com/0085-levels-why-most-people-stay-stuck/) separately describes stage modelling and explicitly notes that someone can be more developed cognitively than morally, or vice versa. The creator's own wording is a simplified pedagogical interpretation of prior research, not a validated diagnosis of a stranger's actual moral or psychological level.
+
+### Openhand is the direct creator of the claims in the supplied 5D text
+
+[Openhand, **7 September 2026**, *What Does It Actually Mean To Be Creating From 5D Consciousness?*](https://www.openhandweb.org/what-does-it-actually-mean-be-creating-5d-consciousness) claims **a Torus/Flower-of-Life 'singularity'**, '7D' inspiration, '6D' feeling, '4D' heart flow and '5D' consciousness. Crucially, **this author says generic love/oneness is 4D, not 5D**—it directly contests the simplified 3D→4D→5D = ego→awakening→love table in the user-provided composite. Different esoteric authors do *not* use the same level definitions.
+
+[Openhand, **19 October 2026**, *3D/5D Reality Split*](https://openhandweb.org/3d5d-reality-split-calling-soul-move-5d-stream), alleges accelerated planetary toroidal motion, electromagnetic suppression, high-tech simulation and a spiritual split. These are **source-attributed beliefs**, not measured geomagnetism, MRI results, geophysical evidence or extraordinary physical events. Both articles have the **same Openhand source root**. No direct citation chain from Openhand to the iTorus app was found. Shared marketing vocabulary is only a thematic parallel.
+
+### Seven registers preserved by typed existing-regression crosswalk
+
+| Word/claim | Source owner | Kind of thing | Evidence needed |
+|---|---|---|---|
+| hoe_math 'level 5' or levels 1–9 | hoe_math presenter; underlying Graves/Spiral Dynamics/AQAL authors separately | pedagogical developmental stage axis | scope-valid developmental measure with author/source lineage and explicit limitations |
+| Cognitive line, empathy line, developmental skill | respective psychological construct author/validated measure | line, not automatically a total level | operational task, psychometric validity and reliability |
+| Meditation, peace, unity or altered perception in a session | person reporting the experience | possible *state* | first-person report and/or bounded behavioural/physiological correlates; none identifies a cosmological dimension |
+| Openhand's '5D torus singularity' | **Openhand** | metaphysical cosmology and claimed spiritual process | cannot be equated with measured field or objectively ordered psychometric levels without a separately stated falsifier |
+| Kaluza–Klein 'fifth dimension' | mathematical/physical theory authors | fifth coordinate in a specified geometric model | metric, dynamics, coupling and empirical consequences |
+| Geometric torus (surface or volume) | mathematical topology / construction | topology/shape, distinct from dimension of spacetime | geometry, coordinates, material construction; a torus has no inherently five-dimensional consciousness |
+| A copper winding's EM field | specific engineering apparatus owner and instrument | measurable vector field `B(x,t)` and spectrum | calibrated drive, spatial map, controls, uncertainty and safety |
+
+**Main non-collapse:** `5D consciousness ≠ hoe_math level 5 ≠ fifth spacetime dimension ≠ torus geometry ≠ a measured magnetic field`. A *numerical* word or an attractive analogy cannot provide an identification map. This is now implemented in `PsychotronicsSuccorAttributionRegression.agda` using an import of **`DASHI.Culture.HoeMathLevelsSourceBoundaryExact`** rather than copying existing theories.
+
+The new Openhand primary documents occupy **two additional source entries**, bringing the atlas to **32 document instances** (one new authorial root), not independent corroborations. They modify the cultural taxonomy but **do not** displace native-reel recovery or actual field measurement from the physical Pareto frontier.
+
 ## Minimal Pareto cutset
 
 | Order | Open specific obligation | What is paid | Lowest-cost discriminating next evidence | Exit condition |
 |---|---|---|---|---|
-| 0 | Preserve attribution, uploaded-object IDs, source role, document/version custody | **Paid source-side:** 30 attributed document instances; 18 actual PNG hashes; common-root distinctions | Review corresponding author-title-year/canonical URLs and three Agda modules | Formal kernel (when available) plus no source role/independence/authority promotion; **CI expressly out of scope** |
+| 0 | Preserve attribution, uploaded-object IDs, source role, document/version custody | **Paid source-side:** 32 attributed document instances; 18 actual PNG hashes; common-root distinctions | Review corresponding author-title-year/canonical URLs and three Agda modules | Formal kernel (when available) plus no source role/independence/authority promotion; **CI expressly out of scope** |
 | 1 | **Original copper star / sphere** now has a source-matched Starship/Rodin retail candidate | Indexed 24-point maker product + 1.25-inch magnetic sphere + 50-W amplifier, one Mini audio-vibration comparator, third-party Rodin caption and store directory | Native creator-to-store provenance, uninterrupted reel, photographed variant SKU and motion/reference with drive OFF/ON | Distinguish a mechanically vibrating neodymium sphere from camera reflections or asserted exotic force; no field/health validation inferred |
 | 1b | **Fifth Bernd tower:** Oudin-family resonator, segmented winding, or flashover/reflection | Visible sphere, repeated wavy bands, several luminous patches; Oudin primary literature and other builds exist | Original post/reel, schematic showing sphere-secondary-primary connection, unobstructed slow/ordinary frame sequence | One *same device* record tells whether arcs attach to winding, dielectric or other electrodes and which circuit it is |
 | 1c | Earlier independent purported spinning free-air “orb” | User report and earlier unrelated stills | Original continuous footage with stationary landmarks and exposure details | Distinguish physical rotating body, moving streamer tips, air ion-wind spinner or camera aliasing; no invented rotor |
@@ -58,6 +88,7 @@ Four new **source document instances** are now included: two maker-indexed produ
 | 4 | “Pignatelli” label and atmospheric electrostatic motor | Jefimenko 1973 already established *different* small atmosphere-driven motors | Original creator/inventor circuit provenance, charged collector current, shaft-load torque and angular speed | Identify creator apparatus, then distinguish `P_elec = V I` input/collector losses from `P_shaft = τ ω`; voltage without current/loaded power insufficient |
 | 5 | MAYU special hydration claims | Rotating carafe, maker marketing and critical chemistry sources | Specific preregistered water chemistry claim, matched aeration/stirring control and blind samples | Ordinary O2/CO2/pH changes measured without inventing a persistent H3O2 bulk phase |
 | 6 | Health/remote viewing/matrix/timeline narratives | Attributed historical claims only; no verified cross-device effect | Explicit endpoint and safe blinded experiment, independent repetitions | Separate endpoint-specific evidence; observation of arcs, patents or creator testimonials creates no medical/psychic proof |
+| 6b | 5D / hoe_math category clarification | Existing Culture/HoeMath formalisation and Openhand author-original 2026 definitions inspected; numerically similar labels shown nonidentical | Only if proposing a psychological outcome: operationalise explicit developmental line vs temporary state and validate it; keep spiritual cosmology as creator description | No 5D physical field claim, fifth-dimension or moral-development score imported by shared symbols |
 | 7 | Ibrahim/QID/DOI/Dewey metadata | Canonical source lines and roles available | Only a concrete same-object missing coordinate exposed by a consumer | Attach an actually inspected coordinate; no nearest-match substitution or extra graph breadth |
 
 ### Pareto stop/branch rules
