@@ -110,9 +110,18 @@ For a bounded actual study: request original uninterrupted video and audio, reta
 Formal leaf:
 ```sh
 agda -i . DASHI/Cognition/PsychotronicsSuccorSourceAtlasExact.agda
+agda -i . DASHI/Cognition/PsychotronicsScreenshotDiscriminationExact.agda
 agda -i . DASHI/Cognition/PsychotronicsSuccorAttributionRegression.agda
 ```
 
 Passage-level evidence still needs original scanned-page inspection for the most specific Gateway numerical claims and comparison of the final-versus-draft AIR wording. No such page-level or source-byte receipt is claimed in this cut. Static/source inspection is **not** kernel certification.
 
 **Attribution rule:** external authors own historical descriptions, claimed events, statistics and physical measurements; DASHI owns only source genealogy, confidence ceilings, residual classification, wrong-type rejection and experiment prioritisation. Source attribution, an online citation, archival custody, patent registration, QID or bibliography traversal cannot manufacture truth.
+
+### Acquisition record, 2026-10-24
+
+Attempted public search for the two Instagram accounts, Schumann/333 footage and copper-coil captions. Exact original reel permalinks were **not recovered**; direct platform retrieval was blocked/throttled in the available web environment. This is an *unresolved acquisition*, never a claim that the original post was deleted or unavailable to other viewers.
+
+Source count is 11 **document instances**, not 11 independent proofs, and screenshot count is 10 **uploaded PNGs**, not 10 independent experiments. The upload object hashes and inspection data do not reveal the original device rotor geometry or actual power-supply frequency.
+
+**Certification:** Agda is unavailable in the local execution container. Source-level structural tests and actual uploaded-PNG SHA-256 calculations were performed; no Agda kernel/CI/physical replication receipt is issued here. The PR remains draft. Reopen only the smallest concrete failing code leaf if the kernel disagrees with the source-written regressions.
