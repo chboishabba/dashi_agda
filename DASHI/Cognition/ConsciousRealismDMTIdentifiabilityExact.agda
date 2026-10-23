@@ -14,6 +14,8 @@ open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 open import Data.Empty using (⊥)
 import DASHI.Core.FiniteStochasticBisimulationExact as Stochastic
 import DASHI.Cognition.ConsciousRealismDMTSourceAtlasExact as Sources
+import DASHI.Biology.Psychedelic5HT2AAttentionBoundaryExact as Salience
+import DASHI.Biology.PsychedelicVisualOperatorAlgebra as Visual
 
 -- A concrete stochastic matrix instance must discharge normalization separately.
 record KernelComposition (K : Set) : Set where
@@ -127,3 +129,59 @@ record DMTClaimBoundary : Set where
 canonicalDMTClaimBoundary : DMTClaimBoundary
 canonicalDMTClaimBoundary =
   dmtClaimBoundary false refl false refl false refl false refl
+
+------------------------------------------------------------------------
+-- Existing psychedelic prior art, not new empirical findings:
+--  * Salience: measured LSD/receptor dependencies, candidate salience effects,
+--    and a hard boundary before entity communication.
+--  * Visual: separate endogenous generation, pattern completion, coupling,
+--    prior precision, and uncalibrated psycho-perceptual parameters.
+-- Derived visual features of the same Q do not add source-identifying data.
+------------------------------------------------------------------------
+
+existingSalienceDoesNotEstablishEntityCommunication :
+  Salience.telepathicEntitySignalEstablished
+    Salience.canonicalPsychedelic5HT2AAttentionBoundary ≡ false
+existingSalienceDoesNotEstablishEntityCommunication =
+  Salience.telepathicEntitySignalEstablishedIsFalse
+    Salience.canonicalPsychedelic5HT2AAttentionBoundary
+
+existingVisualParametersNotCalibrated :
+  Visual.modelParametersAreEmpiricallyCalibrated
+    Visual.canonicalVisualOperatorBoundary ≡ false
+existingVisualParametersNotCalibrated =
+  Visual.modelParametersAreEmpiricallyCalibratedIsFalse
+    Visual.canonicalVisualOperatorBoundary
+
+-- Any feature obtained by postprocessing the same observable Q (e.g.
+-- endogenous geometric motifs or fitted visual operators) still cannot
+-- distinguish two origin labels assigned to that identical observable.
+-- New independent calibrated measurements may instead refine the fibre.
+derivedPsychedelicFeaturesCannotUniquelyDecodeOrigin :
+  ∀ {K F : Set}
+  (q : K)
+  (features : K → F)
+  (decode : K → F → OriginHypothesis) →
+  decode q (features q) ≡ endogenousModel →
+  decode q (features q) ≡ independentAgentModel → ⊥
+derivedPsychedelicFeaturesCannotUniquelyDecodeOrigin q features decode =
+  noUniversalOriginDecoder q (λ law → decode law (features law))
+
+-- A target-blind conditional-response class is genuinely testable if the
+-- response masses are independently measured under locked randomized targets:
+-- an observed target-specific difference excludes any response distribution
+-- that is constant across those targets. The premise is an empirical debt.
+-- This says nothing about which physical channel caused the difference.
+targetDependentResponseExcludesTargetBlindModel :
+  ∀ {Target Reply : Set}
+  (observedMass : Target → Reply → Nat)
+  (targetA targetB : Target)
+  (reply : Reply)
+  (blindMass : Reply → Nat) →
+  (observedMass targetA reply ≡ observedMass targetB reply → ⊥) →
+  observedMass targetA reply ≡ blindMass reply →
+  observedMass targetB reply ≡ blindMass reply →
+  ⊥
+targetDependentResponseExcludesTargetBlindModel
+  observedMass targetA targetB reply blindMass differs matchesA matchesB =
+  differs (trans matchesA (sym matchesB))
