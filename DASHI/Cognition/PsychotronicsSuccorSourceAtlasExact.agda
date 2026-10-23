@@ -483,13 +483,15 @@ data LineageRoot : Set where
   zeroPointCommercialRoot rodinSocialMirrorRoot merchantDirectoryRoot : LineageRoot
   openhandAuthorRoot : LineageRoot
   hanleyPsychometricsRoot macleanPsychometricsRoot nourPsychometricsRoot : LineageRoot
-  ascQuestionnaireResearchRoot heartmathInstituteRoot : LineageRoot
+  kervadecAscValidationRoot stockerAscRevisionRoot : LineageRoot
+  heartmathInstituteRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
   externallyDescribedApparatus : EvidenceCeiling
   institutionalHistoricalInterpretation : EvidenceCeiling
   experimentalMechanismElsewhere : EvidenceCeiling
+  scopedValidatedSelfReport : EvidenceCeiling
   modernVisualIdentificationUnpaid : EvidenceCeiling
 
 record ClaimBound : Set where
@@ -842,7 +844,7 @@ nondualStateTraitMeasurement = mkBound
   "Psychological Assessment 2018 abstract and methods; NADA-S and NADA-T validation"
   hanleyPsychometricsRoot
   Diligence.primaryProposition
-  externallyDescribedApparatus
+  scopedValidatedSelfReport
   "scope-valid administration, longitudinal and condition-specific validation before a torus-device experiment; self-report alone never establishes a new physical dimension"
 
 mysticalFourFactorReport : ClaimBound
@@ -852,7 +854,7 @@ mysticalFourFactorReport = mkBound
   "2012 original abstract/results; 1602 exploratory plus 440 confirmatory samples"
   macleanPsychometricsRoot
   Diligence.primaryProposition
-  externallyDescribedApparatus
+  scopedValidatedSelfReport
   "originally retrospective psilocybin reports; measurement invariance in meditation/non-drug/PEMF contexts unestablished"
 
 egoDissolutionExperienceReport : ClaimBound
@@ -862,7 +864,7 @@ egoDissolutionExperienceReport = mkBound
   "Frontiers in Human Neuroscience 2016 article, abstract and factor-analysis table"
   nourPsychometricsRoot
   Diligence.primaryProposition
-  externallyDescribedApparatus
+  scopedValidatedSelfReport
   "does not establish lasting trait, paranormal causal mechanism or clinical outcome"
 
 psychometricFiveDNotSpiritualFiveD : ClaimBound
@@ -870,9 +872,9 @@ psychometricFiveDNotSpiritualFiveD = mkBound
   "5D-ASC's five factor coordinates include oceanic boundlessness, anxious ego dissolution, visionary restructuring, auditory alterations and reduced vigilance"
   kervadecFiveDASC2026
   "2026 French 5D-ASC validation introduction and abstract, 777 naturalistic retrospective respondents"
-  ascQuestionnaireResearchRoot
+  kervadecAscValidationRoot
   Diligence.primaryProposition
-  externallyDescribedApparatus
+  scopedValidatedSelfReport
   "5D names scale structure only; 11-subscale fit slightly below standard CFI cutoffs; cannot transfer to spiritual five-dimensional reality or electrotherapy efficacy"
 
 ascModelRevision : ClaimBound
@@ -880,9 +882,9 @@ ascModelRevision = mkBound
   "Stocker et al. reconsider 5D-ASC and 11-ASC dimensional structure, proposing a revised three-domain positive/distressing/perceptual model"
   stockerASCRevision2026
   "Journal of Psychopharmacology 2026, abstract and methods: 901 questionnaires, 398 people, 16 trials"
-  ascQuestionnaireResearchRoot
+  stockerAscRevisionRoot
   Diligence.primaryProposition
-  externallyDescribedApparatus
+  scopedValidatedSelfReport
   "different research group and independent dataset, but same measure family; not proof that any psychometric factor is a fundamental dimension of space"
 
 heartmathDistinguishedFromHoeMath : ClaimBound
