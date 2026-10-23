@@ -7,6 +7,7 @@ import DASHI.Biology.BrainITFunctionalClusterTransferExact as Transfer
 import DASHI.Biology.BrainITObservationPromotionBoundaryExact as Boundary
 import DASHI.Biology.BrainITConnectomeFMRIWeldExact as Weld
 import DASHI.Biology.BrainITConsumerRelativeExact as Consumer
+import DASHI.Biology.NeuralRepresentationLaplacianExact as Neural
 import DASHI.Biology.BrainITTableReceiptsExact as Tables
 
 brainITMaxCutPinsSourceBoundary :
@@ -66,9 +67,9 @@ brainITPinsReplayBoundary :
 brainITPinsReplayBoundary = Tables.reportOnlyNoEvaluatorReplay
 
 brainITPinsConsumerCollision :
-  (decoder : DASHI.Biology.NeuralRepresentationLaplacianExact.CoarseRegionalObservation → Nat) →
-  ((state : DASHI.Biology.NeuralRepresentationLaplacianExact.PopulationActivation) →
-     DASHI.Biology.NeuralRepresentationLaplacianExact.laplacianVariation state ≡
-     decoder (DASHI.Biology.NeuralRepresentationLaplacianExact.fmriLikeObservation state)) →
+  (decoder : Neural.CoarseRegionalObservation → Nat) →
+  ((state : Neural.PopulationActivation) →
+     Neural.laplacianVariation state ≡
+     decoder (Neural.fmriLikeObservation state)) →
   ⊥
 brainITPinsConsumerCollision = Consumer.noUniversalLaplacianDecoder
