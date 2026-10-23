@@ -123,13 +123,24 @@ electricWhirl = Source.mkNoDOISource
   "ordinary high-voltage corona / ionic-wind rotor mechanism; separately demonstrable but not an identification of Instagram hardware"
   Source.publicAttribution
 
+irvaTimeline : Source.AttributedSource
+irvaTimeline = Source.mkNoDOISource
+  "International Remote Viewing Association"
+  "A Brief Timeline of Remote Viewing and IRVA"
+  "professional association's retrospective chronology; 1986 and 1988 SUN STREAK / Ed Dames entries"
+  "undated online chronology; inspected 2026-10-24"
+  "https://www.irva.org/time-line"
+  Source.communitySource
+  "association timeline says Ed Dames joined the Fort Meade operational remote-viewing unit in 1986 and later left; contextual attribution, not independent success evidence"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
   "DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact"
   (croftMay2002 ∷ croftJuly2002 ∷ croftAdventures ∷ reichMuseum ∷
    lakhovskyPatent ∷ channonManual ∷ gateway1983 ∷ air1995 ∷
-   electricWhirl ∷ [])
+   electricWhirl ∷ irvaTimeline ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -137,7 +148,7 @@ sourceAtlas = Source.mkSourceAtlas
 data LineageRoot : Set where
   croftAuthorRoot reichMuseumRoot lakhovskyPatentRoot : LineageRoot
   channonConceptRoot gatewayReportRoot airEvaluationRoot : LineageRoot
-  boulderDemonstrationRoot : LineageRoot
+  boulderDemonstrationRoot remoteViewingAssociationRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -198,6 +209,26 @@ croftReportedEntities = mkBound
   Diligence.primaryProposition
   attributedAuthorReport
   "independent verification of alleged entities, telepathy, or device effect absent"
+
+croftMentionsEdDames : ClaimBound
+croftMentionsEdDames = mkBound
+  "Croft's May 2002 text explicitly names Maj. Ed Dames when describing purported government psychics"
+  croftMay2002
+  "What's A Succor Punch?, 18 May 2002, paragraph beginning 'Some other folks'"
+  croftAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "named mention documents awareness of a public figure; no correspondence, affiliation, technological dependence or effectiveness follows"
+
+irvaDamesContext : ClaimBound
+irvaDamesContext = mkBound
+  "IRVA retrospectively lists Ed Dames joining the remote-viewing unit in 1986"
+  irvaTimeline
+  "A Brief Timeline of Remote Viewing and IRVA, 1986 SUN STREAK entry"
+  remoteViewingAssociationRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "association chronology is contextual, not an independent proof of remote-viewing ability"
 
 reichSeparation : ClaimBound
 reichSeparation = mkBound
@@ -269,6 +300,7 @@ data RelationClass : Set where
   documentaryDistinction : RelationClass
   hardwareAnalogyOnly : RelationClass
   thematicResemblanceOnly : RelationClass
+  namedPersonMentionOnly : RelationClass
 
 record BoundedRelation : Set where
   constructor bounded-relation
@@ -302,6 +334,11 @@ gatewayTimelineRelation : BoundedRelation
 gatewayTimelineRelation =
   bounded-relation "Gateway consciousness-matrix wording" "Instagram timeline-shifting claim"
     thematicResemblanceOnly gatewayProposal false refl false refl
+
+croftRemoteViewingPersonMention : BoundedRelation
+croftRemoteViewingPersonMention =
+  bounded-relation "Don Croft 2002 discourse" "Ed Dames, later public remote-viewing figure"
+    namedPersonMentionOnly croftMentionsEdDames false refl false refl
 
 -- Imported source-attribution laws are used directly; no new source/role
 -- ontology is needed. The proof obligations are the existing fields.
