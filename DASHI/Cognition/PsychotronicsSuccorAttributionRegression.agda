@@ -126,9 +126,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- The atlas deliberately has eleven source instances. The five named-source
 -- / original-author Croft passages still share a single authorial root.
-sourceAtlasCountIsTwentyFive :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 25
-sourceAtlasCountIsTwentyFive = refl
+sourceAtlasCountIsTwentySix :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 26
+sourceAtlasCountIsTwentySix = refl
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -282,3 +282,15 @@ appPublisherDoesNotCreateAuthority :
   Attribution.citationCreatesAuthority Atlas.itorusAppPublisher ≡ false
 appPublisherDoesNotCreateAuthority =
   Atlas.allSourcesRemainNonAuthoritative Atlas.itorusAppPublisher
+
+-- Same-maker shop and homepage are different documents, not independent
+-- experimental corroboration; exact webpage 333MHz/369 locators retained.
+aurumayaShopAndHomeShareMakerRoot :
+  Atlas.root Atlas.aurumayaShop333Catalogue ≡
+  Atlas.root Atlas.aurumayaSharedVocabulary
+aurumayaShopAndHomeShareMakerRoot = refl
+
+shop333IsOnlyContemporarySelfAttribution :
+  Atlas.relationClass Atlas.aurumayaShopCoMarketing ≡
+  Atlas.contemporarySelfAttribution
+shop333IsOnlyContemporarySelfAttribution = refl
