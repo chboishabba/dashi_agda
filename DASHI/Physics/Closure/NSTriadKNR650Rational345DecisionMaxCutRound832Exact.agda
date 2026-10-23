@@ -14,8 +14,14 @@ module DASHI.Physics.Closure.NSTriadKNR650Rational345DecisionMaxCutRound832Exact
 --   D1 is now SOURCE-WRITTEN in R851/R852: full modal forcing equality
 --      + the inhabited R829D vector-evaluation record. A kernel run is
 --      still needed before calling this independently certified.
---   D2 remains: real finite-Galerkin C1/local-flow + quantitative
---      bootstrap and same-scalar identification with R829/R850.
+--   D2 status is a single still-unpaid SAME-REAL-SOURCE transport:
+--      build the actual finite real-time Fourier trajectory, identify the
+--      full real helical signed observable at t=0 with the R850 value,
+--      and move the R823 reserve-minus-demand identity off its historical
+--      rational-valued Time -> Q integration carrier.
+--      Polynomial finite-dimensional local Picard and negative-integral
+--      continuity are standard, already supplied as mathematics; do NOT
+--      reopen them as fresh nonlinear PDE estimates or another Round.
 --
 -- This decision is ONLY about the auxiliary R823 reserve, not Clay B.
 ------------------------------------------------------------------------
