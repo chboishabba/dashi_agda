@@ -19,6 +19,10 @@ class R829BoundaryChecks(unittest.TestCase):
         fixture["output_rows"][str(EXPECTED_MODES[2])]["coherent_work"]="1"
         with self.assertRaises(ValueError):
             check(fixture,BOUNDARY.read_text())
+    def test_reject_changed_physical_mode_coordinates(self):
+        source=BOUNDARY.read_text().replace("k₁ = Z3.mode minus3 minus4 (+ 0)", "k₁ = Z3.mode minus4 minus4 (+ 0)")
+        with self.assertRaises(ValueError):
+            check(self.fixture(),source)
     def test_refuse_authority_promotion(self):
         fixture=self.fixture()
         fixture["repository_agda_reification_complete"]=True
