@@ -472,21 +472,41 @@ Existing theorem-bearing owners already provide:
   finite slot chart is executable and the earlier quantitative local-Lipschitz
   estimate already applies through it.
 
-The standard complete-real side is now isolated in the Lean modules
-`Rational345LocalODE`, `Rational345QuadraticODE`, and
-`Rational345ShortTime`: a linear-plus-bounded-bilinear real field is (C^1),
-has a local integral curve, and the exact R828 constants satisfy the entire
-short-time sign budget.
+A prior handoff named Lean modules `Rational345LocalODE`,
+`Rational345QuadraticODE`, and `Rational345ShortTime`. **These names were
+not located in the connected `dashi_lean4` default-branch code index or
+at their presumed root paths in the 2026-10-23 direct audit.** Do not claim
+independent Lean kernel receipts for those modules from this manuscript
+reference. The finite-dimensional analytic statements themselves follow
+directly from classical real polynomial ODE theory.
 
-Accordingly `NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda`
-reduces R830 to only two NS-specific bridges:
+**2026-10-23 current mathematical cut (post-R850/R852):** The later proof
+owners already establish literal instantaneous R692 work, critical
+production and dissipation (R847–R850), and source-write the complete R829D
+vector equalities (R851–R852; kernel check outstanding). The supposed two
+R833 `ODE` leaves are two older *encoding-specific formal obligations*,
+not two missing existence/continuity theorems. On the actual finite real
+Fourier state, the physical Galerkin right-hand side is a degree-two real
+polynomial and the full real helical signed observable is continuous.
+Therefore an exact negative initial value implies a strictly negative
+integral over some positive interval, without a novel PDE estimate.
 
-1. physical Round71 RHS = corrected finite-real quadratic/chart field;
-2. the selected R828 displacement and rate-Lipschitz bounds apply to that
-   solution, with the selected scalar identified with the R829/R815 scalar.
+**One non-round, source-exact acceptance target:** identify the real-valued
+physical signed rate at the rational initial seed with the R850 exact
+value, and transport R823's reserve-minus-demand identity to the SAME
+real-valued trajectory and integral. Historical R823 currently fixes
+`Time → ℚ` and rational integration, which cannot encode a nonconstant
+real-time flow. The exact real-time transport has NOT been kernel proved.
+See Section 7 of `NSR828Rational345FourierWitness.md` for a full
+classical finite-dimensional proof and the precise Agda authority boundary.
 
-Reality, transversality invariance, polynomial degree, generic Picard theory,
-and the huge rational (KLT) arithmetic are not separate open leaves.
+This is an auxiliary reserve-inequality research conclusion, not a Clay
+regularity proof. The canonical Clay scheduler remains
+`NSCanonicalClayResidualExact` from merged PR #1232; do not promote
+another R-number alias to a ninth Clay obligation.
+
+Reality, transversality, quadratic field shape, Picard local solvability and
+the large rational short-time arithmetic must not be reproved independently.
 
 The post-reserve B continuation cut is also non-circular: the standard
 localized Luo continuation compiler is already constructed, while the
