@@ -22,6 +22,19 @@ import DASHI.Core.AttributedSourceCore as Source
 ------------------------------------------------------------------------
 
 
+heinrichKluver1926 : Source.AttributedSource
+heinrichKluver1926 =
+  Source.mkDOISource
+    "Heinrich Klüver"
+    "Mescal Visions and Eidetic Vision"
+    "The American Journal of Psychology 37(4):502-515"
+    "1926"
+    "10.2307/1414910"
+    "https://doi.org/10.2307/1414910"
+    Source.academicArticleSource
+    "Historical primary source for Klüver's systematic mescal visual-phenomenology investigations. The later four-form-constant taxonomy is attributed to Klüver's broader work; this 1926 article alone is NOT asserted to prove a cortical mechanism, independent entity, or exact formal mode classification."
+    Source.publicAttribution
+
 pubChemSerotonin : Source.AttributedSource
 pubChemSerotonin =
   Source.mkNoDOISource
@@ -331,6 +344,7 @@ canonicalKluverLogPolar5HT2ASources =
   ∷ xuEtAl2026
   ∷ gumpperEtAl2025
   ∷ pdb9AS4
+  ∷ heinrichKluver1926
   ∷ ermentroutCowan1979
   ∷ schwartz1980
   ∷ grusser1995
