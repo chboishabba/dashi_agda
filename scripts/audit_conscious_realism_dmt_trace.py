@@ -91,6 +91,23 @@ def kluever_form_partition(q):
         if form[i] == form[j]
     )
     assert not lumpable
+
+    # The distinction is not only failure of strong lumpability. With any
+    # initial distribution assigning positive mass to spiral (state 2) and
+    # tunnel (state 3), the actual observable conditional future differs:
+    # P(Y2=tunnel | Y1=lattice,Y0=spiral) = 2/15;
+    # P(Y2=tunnel | Y1=lattice,Y0=tunnel) = 7/50.
+    # The unique first-form modes make the two conditioning events explicit.
+    spiral_then_lattice = (
+        q[2][0] * q[0][3] + q[2][1] * q[1][3]
+    ) / (q[2][0] + q[2][1])
+    tunnel_then_lattice = (
+        q[3][0] * q[0][3] + q[3][1] * q[1][3]
+    ) / (q[3][0] + q[3][1])
+    assert spiral_then_lattice == F(2, 15)
+    assert tunnel_then_lattice == F(7, 50)
+    assert spiral_then_lattice != tunnel_then_lattice
+
     return {
         "modes": modes, "form_labels": form,
         "projection_is_selected_from_partial_relation": True,
@@ -98,6 +115,10 @@ def kluever_form_partition(q):
         "lattice_next_tunnel_mass_from_stripe": str(mass["stripe"]["tunnel"]),
         "lattice_next_tunnel_mass_from_spot": str(mass["spot"]["tunnel"]),
         "strong_lumpability": lumpable,
+        "conditional_tunnel_after_spiral_lattice": str(spiral_then_lattice),
+        "conditional_tunnel_after_tunnel_lattice": str(tunnel_then_lattice),
+        "observed_form_history_changes_future": (
+            spiral_then_lattice != tunnel_then_lattice),
         "one_step_form_only_markov_kernel_identified": lumpable,
         "trace_is_not_lumping": True,
     }
