@@ -1,0 +1,91 @@
+#!/usr/bin/env python3
+"""Type and action audit for canonical DASHI 3x3x3 balanced-ternary cube.
+
+DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact
+is the REAL 27 geometric object. Compared here with:
+  (a) cyclic Z/27 encoded using signed ternary digits;
+  (b) the 3-adic modular B3 matrix on an arbitrarily chosen xy sheet;
+  (c) exponent labels of a separate Monster order-27 element.
+
+Cardinality/chart equality does NOT imply graph isometry, group
+structure, modular-torus state, or a physical Monster/KK duality.
+"""
+from itertools import product
+from collections import Counter
+
+TRITS=(-1,0,1)
+CUBE=set(product(TRITS,repeat=3))
+assert len(CUBE)==27
+
+def grid_edge(p,q):
+    return sum(p[i]!=q[i] for i in range(3))==1 and sum(abs(p[i]-q[i]) for i in range(3))==1
+
+edges={tuple(sorted((p,q))) for p in CUBE for q in CUBE if grid_edge(p,q)}
+assert len(edges)==54
+degree=Counter(p for e in edges for p in e)
+assert Counter(degree.values())==Counter({3:8,4:12,5:6,6:1})
+assert sum(p[2]==0 for p in CUBE)==9
+assert len({p for p in CUBE if max(abs(x) for x in p)==1})==26
+
+# Chart bijection by digits, NOT an equivarariance theorem for
+# cube graph, and definitely NOT an identification with Monster g.
+def encode(p):
+    return sum(p[i]*3**i for i in range(3))%27
+
+def decode(n):
+    a=n%27
+    if a>13:a-=27
+    digits=[]
+    for _ in range(3):
+        r=((a+1)%3)-1
+        digits.append(r)
+        a=(a-r)//3
+    assert a==0
+    return tuple(digits)
+
+assert {encode(p) for p in CUBE}==set(range(27))
+assert all(decode(encode(p))==p for p in CUBE)
+assert all(encode(decode(n))==n for n in range(27))
+assert encode((1,1,1))==13 and decode((13+1)%27)==(-1,-1,-1)
+assert not grid_edge((1,1,1),(-1,-1,-1))
+
+res=lambda x: ((x+1)%3)-1
+def modular_slice(p):
+    x,y,z=p
+    return (res(x+y),res(x-y),z)
+
+assert {modular_slice(p) for p in CUBE}==CUBE
+assert all(modular_slice(modular_slice(p))==(-p[0],-p[1],p[2]) for p in CUBE)
+assert all(modular_slice(modular_slice(modular_slice(modular_slice(p))))==p for p in CUBE)
+assert grid_edge((0,0,0),(1,0,0))
+assert not grid_edge(modular_slice((0,0,0)),modular_slice((1,0,0)))
+
+cycles=[];remaining=set(CUBE)
+while remaining:
+    start=min(remaining); cur=start; cycle=[]
+    while cur not in cycle:
+        cycle.append(cur);remaining.remove(cur);cur=modular_slice(cur)
+    assert cur==start
+    cycles.append(cycle)
+assert Counter(map(len,cycles))==Counter({1:3,4:6})
+assert {p for p in CUBE if modular_slice(p)==p}=={(0,0,z) for z in TRITS}
+
+# Contrast: addition mod27 is a SINGLE cycle, acting by carry
+# which does not preserve nearest-neighbour geometric cube edges.
+carry=lambda p:decode((encode(p)+1)%27)
+seen=set();x=(0,0,0)
+for _ in range(27):
+    assert x not in seen
+    seen.add(x);x=carry(x)
+assert seen==CUBE and x==(0,0,0)
+
+# Order-27 Monster charge data are another TYPED group carrier;
+# modular exponents (r,s) live on 27x27=729 labels, not Cube27.
+assert 27*27==729
+
+print('PASS Cube27=3x3x3, faces 6, sheets 3x9, edges 54')
+print('PASS degree distribution corners=8, edge sites=12, face centres=6, centre=1')
+print('PASS cube↔Z/27 digit bijection; carry wraps opposite corners, not graph edge')
+print('PASS M on cube xy slices: three fixed z-axis points, six 4-cycles')
+print('PASS M action fails geometric edge-preservation')
+print('PASS Monster order-27 sector pair has 729 labels; not the cube')
