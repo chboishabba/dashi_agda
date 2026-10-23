@@ -440,7 +440,7 @@ aMaxCutLeafCount : Nat
 aMaxCutLeafCount = AMax.aLeafCount
 
 bDecisionLeafCount : Nat
-bDecisionLeafCount = R832.decisionLeafCount
+bDecisionLeafCount = R832.remainingDecisionLeafCount
 
 bPostReserveLeafCount : Nat
 bPostReserveLeafCount = BMax.bPostReserveLeafCount
