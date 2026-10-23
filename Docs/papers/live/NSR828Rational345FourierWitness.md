@@ -549,3 +549,53 @@ exact finite arithmetic, without Lean/Agda compilation this round.
 Only when the actual real Fourier R853 equality is proved and fed to
 the real integral owner is a kernel-certified R823 auxiliary-reserve
 counterexample possible. R823 is not the Clay B alternative.
+
+### 2026-10-24 major simplification: invariant eight-mode real subspace
+
+The first independent full-real evaluator suggested and a complete
+64-pair exact support enumeration confirmed a stronger fact:
+
+```
+S = ({-3,0,3} × {-4,0,4} × {0}) \ {(0,0,0)}
+|S| = 8
+p,q in S, k=p+q in Lambda_4\{0}  implies k in S.
+```
+
+This is independent of amplitudes, so it holds **at all times** as an
+algebraic support restriction for the finite Galerkin quadratic term.
+If a velocity vanishes outside S, then its quadratic projected RHS
+also vanishes outside S. The viscous linear term is diagonal and
+therefore preserves S too. Standard uniqueness/local existence of the
+finite real ODE means the flow from the selected seed stays in this
+finite **eight-mode invariant subspace** throughout its local existence.
+
+Most importantly, for every k in S, the *physical* norm is one of
+3, 4 or 5. Consequently, all nonzero real helical terms along this
+particular Galerkin trajectory have the same rational normalization
+factors as the selected R835 sparse calculation; an irrational
+sqrt(2) mode is never populated. Previous generic worries that
+unpopulated off-support helical norms necessarily enter the actual
+short-time solution were too strong for this seed/cutoff.
+
+New proof owners *without creating more RNNN files*:
+- `dashi_lean4/NSBControl/Rational345QuadraticODE.lean`:
+  `selected345_add_closed_inside_cutoff`,
+  `inactive_output_has_no_selected345_pairs`,
+  `inactive_real_fourier_quadratic_sum_zero`, and
+  `selected345_physical_squared_norm`.
+- `tests/test_ns_real_helical_same_source.py`:
+  explicit 64-pair support closure and norm-squared {9,16,25},
+  plus independently re-running two exact physical R829/real seed evaluators.
+
+**Remaining proof-assistant distinction:** The finite geometric support
+theorems establish the combinatorial forcing restriction. A complete
+Lean kernel proof that the REAL finite Galerkin local trajectory is
+the eight-mode supported solution and that R853's full signed-reserve
+orbit identity lifts from the Agda rational packet to this real
+invariant subspace has not been compiled in this session. The latter
+requires validating the actual R815/R823 packet definitions, not
+merely taking R853's resulting equation as a new hypothesis.
+
+This substantially sharpens the one surviving real-source proof
+obligation. It does not justify declaring R823 refuted in a proof
+assistant until the remaining actual-source identity is inhabited.
