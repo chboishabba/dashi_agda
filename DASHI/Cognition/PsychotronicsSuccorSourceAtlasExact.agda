@@ -151,7 +151,7 @@ ipyramidsI9 = Source.mkNoDOISource
   "iTorus i9, 9.5-inch Tachyon Vortex PEMF 4.0 product documentation"
   "commercial product specifications; supplier website inspected 2026-10-24"
   "undated product page"
-  "https://ipyramids.store/products/itorus-9-9-5-tachyon-vortex-pemf-4-0"
+  "https://ipyramids.com/products/full-spectrum-ipyramids-i9-nubian-quantum-vortex-shield"
   Source.practitionerSource
   "manufacturer describes audio/app-driven toroidal coil; 7-ohm-per-channel, 9.5-inch diameter and claimed field dimensions remain manufacturer attestations, not independent B-field mapping or healthcare outcomes"
   Source.publicAttribution
@@ -162,7 +162,7 @@ aurumayaQubit = Source.mkNoDOISource
   "QUBIT CRYSTAL: Large Pulsed Quartz Succor Punch, 15 Hz Crystal Tech"
   "maker's commercial product listing; inspected 2026-10-24"
   "undated product page"
-  "https://www.aurumaya.com.au/product-page/qubit-crystal-large-pulsed-quartz-succor-punch-15hz-crystal-tech"
+  "https://www.aurumaya.com.au/crystaltech"
   Source.practitionerSource
   "explicitly markets quartz/copper/15-Hz/9-V modern Succor Punch; maker reply in separate screenshot names Don Croft; this establishes *claimed design tradition*, not scalar-energy performance"
   Source.publicAttribution
@@ -180,13 +180,13 @@ oudinHistoricalDiagram = Source.mkNoDOISource
 
 mayuVortex : Source.AttributedSource
 mayuVortex = Source.mkNoDOISource
-  "MAYU Water"
-  "What is Vortexing Water?"
-  "company explanation of MAYU Swirl rotating-water carafe"
-  "undated web guide; inspected 2026-10-24"
+  "Cameron-Leigh Henning (edited by Joel Taylor), for MAYU Water"
+  "What Is Vortexing Water?"
+  "MAYU's commercial structured-water explainer; revised 3 February 2025"
+  "2025"
   "https://mayuwater.com/a/resources/structured-water/what-is-vortexing-water"
   Source.practitionerSource
-  "rotational water motion and possible ordinary aeration are distinct from claimed stable special hydration structures; brand identification in screenshot is an on-screen label"
+  "source explicitly advertises H3O2 and superior hydration; these remain unsupported commercial claims. Ordinary rotational aeration is a separate testable mechanism; screenshot carries an on-screen MAYU label"
   Source.publicAttribution
 
 aapStructuredWater : Source.AttributedSource
