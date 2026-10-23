@@ -11,6 +11,7 @@ open import Data.Rational.Base using (ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 import DASHI.Core.ThreeChannelC3EquivarianceGateExact as C3
 import DASHI.Physics.YangMills.BalabanCMP109SpatialC3ActionExact as YM
+import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
 
 record ThreePhotonChannels : Set where
   constructor channels
@@ -69,5 +70,5 @@ intensityIntertwiner = record { intertwines = intensityC3Invariant }
 -- The existing Balaban spatial XYZ permutation action is an unrelated
 -- instance of the *same generic theorem shape*. A physical map from
 -- YM grid/sources to these optical channels still requires a witness.
-balabanSpatialC3 : C3.OrderThreeAction YM.Grid.GridCell4
+balabanSpatialC3 : C3.OrderThreeAction Grid.GridCell4
 balabanSpatialC3 = YM.cmp109SpatialXYZC3Action
