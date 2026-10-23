@@ -56,3 +56,26 @@ Local Python finite consumer audit and Lie algebra constraints: PASS. Agda modul
     agda -i . -i /path/to/agda-stdlib DASHI/Physics/Gravity/KKSteelmanBidirectionalConsumerExact.agda
 
 The latter is an acceptance command, not a certification receipt. No real 5D Earth model or empirical LARES bound is claimed. Standard physics remains attributed to the original KK, GR, and Lie-algebra literature; DASHI core owners are reused instead of claimed as new foundational theorems.
+
+
+## Verified cross-PR donor: Alexander horned C3 and flat U(1) holonomy (PR #1244)
+
+Donor: https://github.com/chboishabba/dashi_agda/pull/1244, branch `alexander-horned-c3-equivariant-20261024`.
+
+The actual source files include:
+- `DASHI/Mathematics/Topology/AlexanderHornedC3FiniteStageExact.agda`: three C3-labelled copies of a binary horn tree; finite-stage braid-permutation symmetry.
+- `AlexanderHornedC3ExteriorBridge.agda` and `AlexanderHornedC3CharactersExact.agda`: conditional recursive meridian-group interpretation and C3-character no-go.
+- `AlexanderHornedC3OuterDetectorExact.agda`: a surjective equivariant non-inner quotient detector, with Python A5^3 calculations separately attached.
+- `AlexanderHornedAbelianHolonomyBIDIExact.agda`: generalized theorem for ALL Abelian character targets, essential-meridian non-descent, and a **paired same-group** proof: Abelian holonomy is blind to the cyclic rotation while an independently supplied non-Abelian outer-action detector witnesses its noninner character.
+
+This is a stronger, consumer-dependent obstruction than simply saying wild and smooth topology differ. For the abstract recursively commutator-related group, flat U(1) holonomy (a representation pi1 -> U(1)) has zero character on its meridians; if they generate, the character is trivial. Non-flat U(1) Wilson loops are NOT fundamental-group characters and can be curvature-sensitive. A5^3 action detection is conditional on a specified quotient and a matched group, not a derivation of an Earth electromagnetic field. The three-root cyclic group is not yet the geometric pi1 of an equivariantly horned sphere: real nested embedding, van Kampen/direct limit and C3 geometric action remain open.
+
+**Important ambient-space distinction:** for the open exterior E=S³ minus the closed embedded horned *ball*, Alexander duality gives acyclic reduced homology and H²(E;Z)=0. The punctured R³ exterior R³ minus that ball (infinity removed) can have different H²; do not import the S³ complement bundle classification without verifying which base is chosen. Likewise ordinary spatial Earth exterior has different H² and smooth-source conditions. No horned-sphere geometry is asserted for Earth.
+
+BIDI consumer cases:
+- local KK metric/gauge-shift: can pass independently of ambient pi1;
+- global flat-U1-holonomy: cannot recover perfect-group meridians;
+- non-Abelian outer action: may pass with a same-object A5^3 detector;
+- physically admissible Earth KK: still requires same-action stress-energy, smooth boundary matching, physical matter coupling and observables. Horned-sphere results do NOT discharge these physical obligations.
+
+This is a **cross-branch donor reference**, not a typed import into PR #1241: an actual merge or identical verified source ancestry is required before a typechecked KK module can use PR #1244 directly. Avoid duplicate topology definitions; retain the reusable theorem in the owning PR #1244. Existing BIDI/consumer owners remain the canonical transport theory.
