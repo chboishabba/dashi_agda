@@ -1,3 +1,62 @@
+## 2026-10-24 original unforced A/B direct analytical cut
+
+**Theorem source:** `dashi_lean4/NSUnforcedAnalyticCuts.lean`, optional
+`lake build NSUnforcedAnalyticCuts`. This source contains five genuine
+finite analytical lemmas and creates **zero numbered Round modules**.
+Lean was not run on this source, so treat these as source-written terms.
+
+**A actual next step (whole-space Fourier physical owner):**
+`NSWholeSpaceCanonicalPairSaturationOriginExact` already constructs
+the actual scalar saturation coefficient from positive viscous heat
+`a = nu*|xi|^2` and centered residual `s >= 0`, with signed
+off-diagonal Gram treated correctly. New analytic equations:
+
+```text
+K_a(s) = s/(a(a+s)) = 1/a - 1/(a+s)
+0 <= K_a(s) <= 1/a
+K_a(s)-K_a(t) = (s-t)/((a+s)(a+t))
+|K_a(s)-K_a(t)| <= |s-t|/a^2
+```
+
+The stability estimate is a **local** quantitative bound; it blows
+up as |xi| -> 0, since a=nu*|xi|^2. It does not manufacture the
+physical near-zero same-object realization or finite-energy majorant.
+The two genuine A proof producers remain:
+
+1. Identify the literal Fourier-velocity / Leray-projected
+   Euclidean physical kernel with the canonical signed Gram and
+   canonical pair/output resolvents on the SAME continuum solution.
+2. Derive physical low and high source-state convolution envelopes
+   with actual domination and integrability from finite energy;
+   then discharge the whole-space continuation criterion.
+
+Do not treat a user-chosen `Set`-valued `FourierTransformVelocity` or
+`PointwiseBelow` in an abstract record as a physical analytical proof.
+
+**B actual next step (signed noncore/core R440):**
+`NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact` already
+identifies the literal residual and its coherent-work payment.
+`NSTriadKNFiniteBipartiteCovarianceExact` already shows the defect
+is a signed sum of pairwise input-rate and work differences.
+The new theorem proves the exact finite signed oscillation Young
+bound and cancellation when cross-partition input rates agree.
+A tunable `eps>0` bound permits a formal strict-subhalf
+`eps/2` coefficient on pairwise work oscillations.
+
+CRITICAL: **This alone does not pay B4.** The raw squared rate-gap
+term has a positive, velocity-amplitude-independent floor. It
+cannot be bounded by homogeneous local enstrophy dissipation under
+small-amplitude scaling. The real next theorem must exploit the
+literal R440 mixed-product amplitudes and input-frequency geometry
+to produce an **amplitude-weighted** cutoff-uniform rate defect
+estimate without a shell-count/cardinality loss. No sign or
+pointwise-absolute-value shortcut is allowed. Continue B1/B2/B3
+physical producer estimates and B7/Q4/E-positive summation separately.
+
+Neither A nor B is mathematically closed. Do not change the canonical
+`clayPromotion = false`, and do not interpret this as Clay certification.
+
+---
 ## 2026-10-24 canonical max-cut navigation — no RNNN grep loop
 
 The September chronology below is historical. Merged PR #1232 already
