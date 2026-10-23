@@ -709,3 +709,33 @@ physical seed and rate in \`Rational345ShortTime.lean\`. These
 source-written definitions/theorems still require kernel checks;
 the exact physical seed calculation was independently executed via
 SymPy and passed.
+
+
+### Physical admissibility / verification caveat for the eight-mode ODE
+
+The explicit Lean chart E = Fin8 -> (Fin3 -> Complex) is a REAL normed
+vector space but contains complex coefficient families that do not obey
+Fourier reality or transversality. The initial seed is physically
+real/divergence-free, and the actual viscosity-one projected Galerkin
+equation algebraically preserves those constraints. The earlier Agda
+owners \`NSTriadKNFixedCanonicalRealityVectorFieldRound71Exact\`
+and \`NSTriadKNFixedCanonicalTransverseInvariantRound71Exact\`
+contain the relevant algebra; exact Lean source transport to the
+explicit eight-mode chart and propagation by ODE uniqueness are still
+part of the *physical admissibility proof*, not discretionary CI.
+
+The short-time continuity counterexample theorem is mathematically
+valid on the full real chart for the literal finite ODE; its promotion
+to a Navier-Stokes R408 physical trajectory additionally requires
+that preservation/identification. The complete fail-closed source
+boundary is therefore:
+
+1. kernel-verified physical complex eight-mode field and invariant
+   reality/transversality/cutoff support;
+2. kernel-verified finite real Fourier reserve-minus-demand value
+   at the exact R850 seed (R822/R813 physical definitions);
+3. genuine real interval-integral interpretation of the same physical
+   reserve and demand (source-written theorem provided).
+
+Do not substitute a continuous surrogate observable or reinterpret
+the auxiliary R823 reserve as an unconditional Clay theorem.
