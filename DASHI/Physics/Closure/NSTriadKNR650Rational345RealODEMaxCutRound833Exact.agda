@@ -10,9 +10,18 @@ module DASHI.Physics.Closure.NSTriadKNR650Rational345RealODEMaxCutRound833Exact 
 --   * corrected finite rational slot chart (R74);
 --   * quantitative local-Lipschitz majorant through that finite chart (R74).
 --
--- Standard complete-real C1/Picard and negative-integral transport are
--- separately source-written in dashi_lean4 Rational345LocalODE,
--- Rational345QuadraticODE and Rational345ShortTime.
+-- These existing mathlib Lean sources are located at
+-- dashi_lean4/NSBControl/Rational345LocalODE.lean,
+-- NSBControl/Rational345QuadraticODE.lean,
+-- NSBControl/Rational345ShortTime.lean and
+-- NSBControl/Rational345ReserveWitness.lean.
+-- The ShortTime owner now derives a REAL strict-negative short-time integral
+-- from (i) the actual rational snapshot cast into R, (ii) real quadratic
+-- local Picard, (iii) a continuous real rate matching that selected seed.
+-- It also proves the real R823 reserve-contradiction implication once the
+-- SAME integral is identified as integratedReserve - integratedDemand.
+-- Agda still needs the source-exact real Fourier field/rate instantiation;
+-- none of these generic facts can replace that physical equality.
 --
 -- Historical formal-transport flags (DO NOT RESTART ANALYTIC ODE WORK):
 --   O1. rational Round71 RHS-to-older-coordinate-chart equality;
