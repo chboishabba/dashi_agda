@@ -296,3 +296,108 @@ the eight selected modes. The committed regression is
 
 Do not reopen already established R829 scalar/vector producers or impose the
 impossible zero-output empty-incidence condition.
+
+
+## 7. Canonical real-flow max-cut — no new RNNN encoding (2026-10-23)
+
+**Repository archaeology:** The canonicalization effort was already completed in
+merged PR #1232 (`NSCanonicalClayResidualExact.agda`; historical Round
+packages are not automatically canonical proof obligations). Earlier
+finite-flow analysis is already in the literal projected RHS, Round71 fixed
+finite reality field / degree-two theorem, Round74 slot chart and
+local-Lipschitz majorant, Picard transport, and the independent rational R828
+finite-time bounds. The exact instantaneous *physical* signed observable
+is now represented by the R847/R849/R850 theorem chain and the R851/R852
+selected vector correspondence (the latter source-written, kernel-unchecked).
+
+### A real mathematical theorem, without another coordinate compiler
+
+Let `Λ` be the 728 nonzero lattice modes in the radius-four cube. Work on
+the finite **real** vector space of complex Fourier coefficients, subject to
+`u(-k)=conj(u(k))` and `k·u(k)=0`; the usual full real coordinate ambient
+space can equivalently be used, with these conditions invariant for the
+projected equation. Fix viscosity 1 and define
+
+```text
+F_k(u) = -|k|² u_k - i P_k sum_{p+q=k} (q·u_p) u_q
+P_k    = I - k⊗k / |k|²
+du/dt  = F(u).
+```
+
+The mode list is finite, `|k|²` is a positive integer at every retained
+nonzero mode, and all coefficients in `F` are fixed real/complex numbers.
+Therefore `F` is a real polynomial map of degree at most two. Standard
+finite-dimensional Picard–Lindelöf yields a unique continuously
+differentiable local real-time solution `u(t)` through the rational initial
+seed. Fourier reality and transversality are preserved by the literal
+projected nonlinearity and diagonal viscous term.
+
+Define the **physical real-valued signed observable** `ρ(u)` using the
+full real helical projectors
+
+```text
+H_k^±(v) = (P_k v ± i (k × v)/|k|)/2
+```
+
+and exactly the coherent-work, critical-production and dissipation folds
+specified in Section 2, on the complete fixed cutoff. The denominator
+`|k|` is well-defined for every retained nonzero `k`; some of these
+values are irrational, **which is why the real scalar field is essential**.
+All folds are finite; their terms are compositions of fixed real-linear
+maps and polynomial operations. In particular, `ρ` is continuous (indeed
+polynomial, given the finite fixed real helical coefficients).
+
+At the selected initial state `u₀`, only active modes with lengths
+3, 4 and 5 enter the nonzero helical calculations. The **same-object
+initial evaluation**, if the literal real-lift conventions match the
+already-proved R850/R849/critical-fold reductions, gives
+
+```text
+ρ(u₀) = 6(12·(-557627/125) - 0 + 15834)
+      = -28273644/125 < 0.
+```
+
+Since `t ↦ ρ(u(t))` is continuous and strictly negative at `t=0`,
+there exists a real `ε>0` such that it remains negative on
+`[0,ε]`. Thus
+
+```text
+∫₀^ε ρ(u(t)) dt < 0.
+```
+
+For the stronger explicit witness, the already-proved conservative bounds
+in Section 3 give `K=5032512`, `L=391309593930357307785216`, and
+`T=226189/3938540454339300631433585885184`, with
+`L K T = 226189/2`. The initial rate is strictly below
+`-226189`, so `ρ(u(t))≤-226189/2` over `[0,T]`, and the
+integral is strictly negative. No numerical integration or new analytic
+PDE estimate is required for this **classical finite-dimensional result**.
+
+### Exact remaining proof-assistant obligation
+
+The historical R823/R831 abstraction fixes
+`F=Rational.rationalRealField`, `Time→ℚ` and
+`integrateTo : (Time→ℚ)→Time→ℚ`. That is **not** the above physical
+real-time trajectory or its real-valued integral. Connected real time
+cannot carry a nonconstant continuous rational-valued trajectory.
+
+Thus the remaining task is **one non-round, source-specific transport**:
+identify the full real, finite-mode physical signed observable at the
+initial seed with R850's exact rational evaluation (via `ℚ→ℝ`);
+then place the existing signed reserve = complete rate identity,
+pointwise in real time, over the *same* real trajectory/integration
+functional. Only then can the R831 negative-integral logic be consumed
+without an illicit scalar cast.
+
+Do not treat an Agda Boolean flag, a conditional calculus record or the
+R823 rational-time authority as a replacement for this transport. Equally,
+do not restart Picard existence, degree-two polynomiality, R829 scalar
+arithmetic, or the old impossible zero-output empty-incidence premise.
+The auxiliary universal reserve would be refuted after the exact
+real-source interpretation is certified; this does not prove or disprove
+the Clay unforced periodic regularity alternative.
+
+**Verification boundary:** The real finite-ODE proof above is classical
+mathematics using the displayed polynomial RHS; the same-object transfer
+into the historical R823 Agda predicate is **not kernel-certified**.
+The canonical A/B/C/D proof scheduler remains fail-closed.
