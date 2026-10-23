@@ -59,6 +59,49 @@ def trace(q, visible):
 def display_matrix(a):
     return [[str(x) for x in row] for row in a]
 
+def kluever_form_partition(q):
+    """Synthetic source-compatible *selected* Turing-to-form projections.
+
+    The original relation is partial and many-to-one: stripes/spots/hexagons
+    may project as lattice, a spiral family as spiral, and a front as tunnel
+    or cobweb. This fixture picks one allowed outcome for each of four modes;
+    it does not complete the source relation or predict an individual's DMT
+    reports. First-return traces are NOT Markov lumping of these forms.
+    """
+    modes = ["stripe", "spot", "spiral", "front"]
+    form = ["lattice", "lattice", "spiral", "tunnel"]
+    assert len(q) == len(modes) == len(form)
+    assert form[0] == form[1] and modes[0] != modes[1]
+    outcomes = sorted(set(form))
+    mass = {
+        modes[i]: {target: sum(
+            (q[i][j] for j in range(len(q)) if form[j] == target), F(0))
+            for target in outcomes}
+        for i in range(len(q))
+    }
+    # Lattice projects at states 0/1, but future observed-form laws differ.
+    # E.g. Q(stripe -> tunnel)=1/10, Q(spot -> tunnel)=1/5.
+    mismatch = mass["stripe"]["tunnel"] != mass["spot"]["tunnel"]
+    assert mismatch
+    # If a single one-step Markov transition row on observed forms existed,
+    # both fine modes with current form='lattice' would have to share it.
+    lumpable = all(
+        mass[modes[i]] == mass[modes[j]]
+        for i in range(len(q)) for j in range(len(q))
+        if form[i] == form[j]
+    )
+    assert not lumpable
+    return {
+        "modes": modes, "form_labels": form,
+        "projection_is_selected_from_partial_relation": True,
+        "lattice_has_distinct_preimages": True,
+        "lattice_next_tunnel_mass_from_stripe": str(mass["stripe"]["tunnel"]),
+        "lattice_next_tunnel_mass_from_spot": str(mass["spot"]["tunnel"]),
+        "strong_lumpability": lumpable,
+        "one_step_form_only_markov_kernel_identified": lumpable,
+        "trace_is_not_lumping": True,
+    }
+
 def binomial_one_sided_tail(n, k):
     """Valid under fixed-n, iid, preregistered Bernoulli(.5) null only."""
     return F(sum(comb(n, j) for j in range(k, n+1)), 2**n)
@@ -68,6 +111,7 @@ def prove():
     q = [[F(x, 10) for x in row] for row in
          [[4, 3, 2, 1], [1, 5, 2, 2], [2, 1, 5, 2], [3, 2, 1, 4]]]
     assert valid_stochastic(q)
+    kluever = kluever_form_partition(q)
     v0, v1 = [0, 1], [0, 1, 2]
     direct = trace(q, v0)
     via = trace(trace(q, v1), v0)
@@ -106,6 +150,7 @@ def prove():
        "status": "exact_synthetic_arithmetic_passed",
        "matrix_source": "invented stochastic fixture; NOT empirical DMT data",
        "q_full": display_matrix(q),
+       "kluever_selected_projection_non_lumpability": kluever,
        "trace_direct_V01": display_matrix(direct),
        "trace_via_V012_then_V01": display_matrix(via),
        "nested_trace_equal": direct == via,
@@ -123,6 +168,7 @@ def prove():
        },
        "limitations": [
          "Nested trace identity assumes one fixed kernel and nested observed sets.",
+         "Kluver mode-to-form quotient is not a subset trace and may fail Markov lumpability.",
          "Finite exact fixtures do not formally prove the general trace-chain theorem.",
          "Observed Q cannot uniquely determine internal vs external ontology.",
          "Zero cooperation permits an external story observationally identical to null.",
