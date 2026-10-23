@@ -1,0 +1,37 @@
+# 2026-10-24 Cube27 / B3 / Monster / Pin / KK: exact local-Python max-cut
+
+## Attribution and canonical semantics
+The original 27 is the 3×3×3 balanced-ternary spatial cube from `DASHI/Foundations/Base369Ternary27HypervoxelFabricGeometryExact.agda`. It has 27 sites, 54 nearest-neighbour edges and true geometric adjacency. Existing `JInvariant369Cube27CuspCodecNonIsometryExact.agda` establishes that a 27-value signed-digit chart is NOT an isometry to a cyclic Z/27 residue. Existing `JInvariant369Cube27ModularSliceActionExact.agda` provides the selected braid modular action on cube xy sheets `M(x,y,z)=(x+y,x-y,z) mod3`, M^4=id. Existing `JInvariant369BraidModularTernaryTowerExact.agda` concerns **different** 3-adic cyclic pairs/monodromy. A Monster element of order27 and twisted-sector exponents are yet other carriers; no identity is assumed.
+
+## Exact new geometry and locality theorem
+Let E be all 54 undirected nearest-neighbour edges of the native cube grid P3□P3□P3, and ME the edges transported by the chosen modular permutation M. M²:(x,y,z)->(-x,-y,z) is an *actual cube graph isometry*, so M²E=E.
+Exact enumeration gives `|E∩ME|=18`, all 18 are the z-direction bonds; `|E∪ME|=90`, with 36 new nonlocal bonds: 12 Manhattan-length2 and 24 Manhattan-length3. The two canonical constructions have universal extremal properties: `E∩ME` is the **largest** M-invariant subgraph supported exclusively on native cube bonds, while `E∪ME` is the **smallest** M-invariant graph containing all native cube bonds. Both commute with M because M²E=E.
+The largest local invariant graph consists of exactly **nine disconnected vertical z-chains of three sites**. Thus no connected exact M-invariant bond network can retain the original nearest-neighbour locality without enlarging support. The smallest invariant completion is connected but replaces strict nearest-neighbour physics with diagonal/nonlocal interactions.
+Any invertible local U1, Pin/O2 or sitewise sign dressing of a permutation only multiplies nonzero offdiagonal bond amplitudes by nonzero numbers; it does not change hopping support. `E △ ME` has 72 undirected bonds, so **no invertible site-local phase can restore the missing 36 bonds and remove the extra 36**. This is a support-level no-go and not a claim about all possible nonlocal or dynamical gauge theories.
+
+## Exact dashiQ-compatible conditional observable
+Let `H=J L_cube` with nonzero calibrated J and local 27-site basis states |x,y,z>. The chosen permutation sends |1,0,0> -> |1,1,0>. The graph Laplacian diagonal expectations differ: `<1,0,0|L_cube|1,0,0>=5` and `<1,1,0|L_cube|1,1,0>=4`, so the predicted energy shift is exactly `−J`. Across all 27 sites, the shifts in units of J have multiplicities `{−1:12, 0:3, +1:12}`. This is a model-specific physical test only **if** H and M are implemented on the same experimentally calibrated source. It is not automatically a Monster VOA or gravitational observable.
+`[Lcube,P_M]` has exact matrix rank24 and squared Frobenius norm168, certifying the selected modular label transformation is not a native cube Hamiltonian symmetry. The smallest M-complete graph Laplacian has trace180, trace-square1410 and characteristic polynomial `x (x−12)^2 (x−10)^2 (x−9)^2 (x−8)^6 (x−6)^6 (x−5)^6 (x−3) (x−1)`.
+
+## Constructive separate internal C27 model, NO spatial conflation
+A genuine order-27 cyclic *quantum* charge need not permute 27 spatial sites. On a **separate two-sector internal complex fibre** `C²=span{|neutral>,|charge1>}`, choose `U=diag(1,ζ27)` where ζ27=exp(2πi/27). Then on `C^27_sites ⊗ C²_charge`, `H=L_cube ⊗ I₂` commutes with `G=I₂₇⊗U`, with `G^27=I` and exact order27. The modular site permutation `P_M⊗I₂` commutes with G but **does not** commute with the original H, correctly preserving the cube no-go.
+Relative neutral/charge superposition permits a charge-reference interferometric test of `G^19` that is invisible in a one-sector global-phase measurement: `P_+=(2+ζ27^19+ζ27^(-19))/4 = cos²(19π/27) ≈0.356598383644455` against identity baseline1. This is a **toy** source demonstrating compatibility of a spatial cube and an independent faithful charge. The modular braid itself has NOT been proved to *cause* G^19 on any actual Monster or KK module; that is the missing intertwiner/producer. Note a faithful one-dimensional complex representation exists too (as a global phase); two sectors are introduced for a relative interferometric readout, not to assert minimum algebraic faithfulness.
+
+## New checked implementations
+`scripts/check_369_cube27_modular_dynamics_local_maxcut.py`: exact SymPy and combinatorial proof witnesses for 18/54/90 bonds, components, nonlocal lengths, graph Laplacian spectrum, rank/energy witness, phase-dressing support no-go.
+`scripts/check_369_cube27_internal_c27_quantum_phase.py`: exact SymPy 54×54 product Hamiltonian, commuting order27 charge, independent modular site permutation, and two-charge phase observable with exact root-of-unity expression.
+`DASHI/Moonshine/JInvariant369Cube27ModularLocalityObstructionExact.agda`: source-written direct proof against preservation of the original origin→positiveX cube bond under M; any M-invariant bond support contained in the native graph cannot retain that bond. Also proves 5 vs4 single-site degree counterexample.
+Equivalent complete Python implementations were executed locally in container and all assertions passed; new Agda source has **not** had an exact-head kernel run and physical same-object claims are NOT made.
+
+## Next highest-leverage owner-specific closure
+1. Accept or reject physical **spatial** M symmetry: use the measured/local H to detect explicit breaking, OR choose/pay 36 additional nonlocal bonds and retest the spectrum. Do not demand both with no cost.
+2. If genuine Monster-order27 (ATLAS 27A/27B->3B) is the objective, map the internal charge generator to a concrete *source-certified* Monster VOA twisted/twining operator and give its actual charge-sector or trace coefficient. Root-of-unity toy phases are not a substitute.
+3. If 369 cube geometry is the claimed physical content, identify a measurable spatial site/connection/metric whose neighbour graph corresponds to the native Cube27. A scalar modular J and twist-pair exponent do not carry that adjacency.
+4. If KK/Pin physics is claimed, supply an operator-preserving frame/bundle map that either changes the coupling graph or proves a physical nonlocal/gauge mechanism. Local fibre phases alone cannot cure the offdiagonal support mismatch.
+5. For AdS3, supply a bulk topological defect or Wilson observable matching the *actual* boundary Monster twisted trace with framing, modular multiplier and physical-source calibration.
+
+## Local acceptance
+`python3 scripts/check_369_cube27_modular_dynamics_local_maxcut.py`
+`python3 scripts/check_369_cube27_internal_c27_quantum_phase.py`
+`agda -i . -i /path/to/agda-stdlib DASHI/Moonshine/JInvariant369Cube27ModularLocalityObstructionExact.agda`
+Local Python calculations: PASS. Agda kernel and physical tests: not run. No ADs3/Monster/KK quantum-gravity equivalence asserted.
