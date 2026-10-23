@@ -145,13 +145,81 @@ kingEarthEnergies = Source.mkNoDOISource
   "named by Don Croft as his introduction to Reich/orgone in his autobiographical narrative; this documents Croft's attributed reading, NOT proof of the book's psychoenergetic claims"
   Source.publicAttribution
 
+ipyramidsI9 : Source.AttributedSource
+ipyramidsI9 = Source.mkNoDOISource
+  "iPyramids"
+  "iTorus i9, 9.5-inch Tachyon Vortex PEMF 4.0 product documentation"
+  "commercial product specifications; supplier website inspected 2026-10-24"
+  "undated product page"
+  "https://ipyramids.store/products/itorus-9-9-5-tachyon-vortex-pemf-4-0"
+  Source.practitionerSource
+  "manufacturer describes audio/app-driven toroidal coil; 7-ohm-per-channel, 9.5-inch diameter and claimed field dimensions remain manufacturer attestations, not independent B-field mapping or healthcare outcomes"
+  Source.publicAttribution
+
+aurumayaQubit : Source.AttributedSource
+aurumayaQubit = Source.mkNoDOISource
+  "Aurumaya"
+  "QUBIT CRYSTAL: Large Pulsed Quartz Succor Punch, 15 Hz Crystal Tech"
+  "maker's commercial product listing; inspected 2026-10-24"
+  "undated product page"
+  "https://www.aurumaya.com.au/product-page/qubit-crystal-large-pulsed-quartz-succor-punch-15hz-crystal-tech"
+  Source.practitionerSource
+  "explicitly markets quartz/copper/15-Hz/9-V modern Succor Punch; maker reply in separate screenshot names Don Croft; this establishes *claimed design tradition*, not scalar-energy performance"
+  Source.publicAttribution
+
+oudinHistoricalDiagram : Source.AttributedSource
+oudinHistoricalDiagram = Source.mkNoDOISource
+  "Mihran Krikor Kassabian"
+  "Roentgen Rays and Electro-Therapeutics: Oudin coil and circuit diagram"
+  "1907 J.B. Lippincott published illustration, p.142 figs.61-62; Wikimedia Commons archivally describes image"
+  "1907"
+  "https://commons.wikimedia.org/wiki/File:Oudin_coil_and_circuit_diagram.png"
+  Source.archivalSource
+  "historical Oudin resonant high-voltage apparatus with handheld electrode and corona discharge; not same-object identification of @berndnindl footage or proof of medical efficacy"
+  Source.publicAttribution
+
+mayuVortex : Source.AttributedSource
+mayuVortex = Source.mkNoDOISource
+  "MAYU Water"
+  "What is Vortexing Water?"
+  "company explanation of MAYU Swirl rotating-water carafe"
+  "undated web guide; inspected 2026-10-24"
+  "https://mayuwater.com/a/resources/structured-water/what-is-vortexing-water"
+  Source.practitionerSource
+  "rotational water motion and possible ordinary aeration are distinct from claimed stable special hydration structures; brand identification in screenshot is an on-screen label"
+  Source.publicAttribution
+
+aapStructuredWater : Source.AttributedSource
+aapStructuredWater = Source.mkNoDOISource
+  "Soofia Tariq / Australian Associated Press FactCheck"
+  "Claims of 'structured' water health benefits are mere fiction"
+  "AAP FactCheck, 6 August 2024; quotes chemistry experts"
+  "2024"
+  "https://www.aap.com.au/factcheck/claims-of-structured-water-health-benefits-are-mere-fiction/"
+  Source.newsSource
+  "evidence-based challenge to purported distinct H3O2/hexagonal hydration fluid; not a claim that mechanical swirling cannot alter gas dissolution"
+  Source.publicAttribution
+
+atmosphericFieldMill : Source.AttributedSource
+atmosphericFieldMill = Source.mkNoDOISource
+  "PITHIA-NRF Research Infrastructure"
+  "Field mill for the measurement of atmospheric electricity"
+  "research infrastructure explainer, technical discussion of fair-weather atmospheric E fields"
+  "undated web page; inspected 2026-10-24"
+  "https://www.pithia-nrf.eu/activities-results/outreach/space-weather-research-instruments/electric-field-mills"
+  Source.institutionalSource
+  "atmospheric electric potential/field is measurable by a field mill; this does not authenticate a Pignatelli inventor, charged aerostat driver, usable motor power or continuous generation"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
   "DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact"
   (croftMay2002 ∷ croftJuly2002 ∷ croftAdventures ∷ reichMuseum ∷
    lakhovskyPatent ∷ channonManual ∷ gateway1983 ∷ air1995 ∷
-   electricWhirl ∷ irvaTimeline ∷ kingEarthEnergies ∷ [])
+   electricWhirl ∷ irvaTimeline ∷ kingEarthEnergies ∷
+   ipyramidsI9 ∷ aurumayaQubit ∷ oudinHistoricalDiagram ∷
+   mayuVortex ∷ aapStructuredWater ∷ atmosphericFieldMill ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -160,6 +228,8 @@ data LineageRoot : Set where
   croftAuthorRoot reichMuseumRoot lakhovskyPatentRoot : LineageRoot
   channonConceptRoot gatewayReportRoot airEvaluationRoot kingPublicationRoot : LineageRoot
   boulderDemonstrationRoot remoteViewingAssociationRoot : LineageRoot
+  iPyramidsManufacturerRoot aurumayaMakerRoot oudinHistoricalRoot : LineageRoot
+  mayuManufacturerRoot aapFactCheckRoot atmosphericResearchRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -281,6 +351,66 @@ croftNamesTeslaRife = mkBound
   attributedAuthorReport
   "documented name cluster, not proof of reading their originals, shared apparatus design, or experimental efficacy"
 
+itorusSpecBound : ClaimBound
+itorusSpecBound = mkBound
+  "iPyramids advertises its iTorus i9 as a 9.5-inch amplifier-driven toroidal PEMF device rated 7 ohms per channel"
+  ipyramidsI9
+  "Manufacturer specification table and product description"
+  iPyramidsManufacturerRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "unknown actual flux-density map, drive spectrum, safe exposure envelope and clinical effects; field radius is unverified advertising"
+
+aurumayaCroftClaim : ClaimBound
+aurumayaCroftClaim = mkBound
+  "Aurumaya calls its low-voltage quartz/copper/15-Hz product a Succor Punch and names Croft in author screenshot"
+  aurumayaQubit
+  "Product page QUBIT CRYSTAL; screenshot 1000018577.png author reply"
+  aurumayaMakerRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "marketed lineage supports maker's attribution only; does not establish original engineer-to-builder technical custody"
+
+oudinHighVoltagePrecedent : ClaimBound
+oudinHighVoltagePrecedent = mkBound
+  "1907 electrotherapy text describes Oudin resonator, a high-voltage resonant apparatus giving brush discharges"
+  oudinHistoricalDiagram
+  "Kassabian 1907 p.142 figs.61-62 as described by Wikimedia reproduction"
+  oudinHistoricalRoot
+  Diligence.contextualEvidence
+  externallyDescribedApparatus
+  "historical class precedent, not identity/circuit/radiation measurement of berndnindl reels"
+
+mayuMechanics : ClaimBound
+mayuMechanics = mkBound
+  "MAYU markets a mechanically rotating/vortexing water carafe with claimed aeration"
+  mayuVortex
+  "What is Vortexing Water? company page"
+  mayuManufacturerRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "direct measurements of oxygen/pH/taste on the pictured example unresolved; special water phases not established"
+
+structuredWaterChallenge : ClaimBound
+structuredWaterChallenge = mkBound
+  "AAP reports expert challenges to claims of stable H3O2 structured water and unusual hydration effects"
+  aapStructuredWater
+  "AAP FactCheck 6 August 2024, chemist quotations and conclusion"
+  aapFactCheckRoot
+  Diligence.contestingEvidence
+  institutionalHistoricalInterpretation
+  "does not disprove measurable hydrodynamic swirl or ordinary dissolved oxygen change"
+
+atmosphericElectricityBoundary : ClaimBound
+atmosphericElectricityBoundary = mkBound
+  "Fair-weather atmospheric electric field exists and can be monitored by electric-field mills"
+  atmosphericFieldMill
+  "PITHIA-NRF field-mill explainer"
+  atmosphericResearchRoot
+  Diligence.contextualEvidence
+  externallyDescribedApparatus
+  "caption 'Pignatelli motor' unverified; voltage gradient alone not demonstration of delivered shaft power"
+
 reichSeparation : ClaimBound
 reichSeparation = mkBound
   "Museum distinguishes Reich's cloudbuster from later Welz/Croft orgonite, quartz-and-resin devices"
@@ -355,6 +485,9 @@ data RelationClass : Set where
   explicitlyAttributedReading : RelationClass
   namedSymbolOnly : RelationClass
   namedExemplarsOnly : RelationClass
+  contemporarySelfAttribution : RelationClass
+  historicalMechanismPrecedentOnly : RelationClass
+  commercialSpecificationOnly : RelationClass
 
 record BoundedRelation : Set where
   constructor bounded-relation
@@ -408,6 +541,21 @@ croftNamedHistoricalExemplars : BoundedRelation
 croftNamedHistoricalExemplars =
   bounded-relation "Don Croft" "Tesla, Rife, Schauberger and Mesmer name cluster"
     namedExemplarsOnly croftNamesTeslaRife false refl false refl
+
+aurumayaSelfIdentifiesCroft : BoundedRelation
+aurumayaSelfIdentifiesCroft = bounded-relation
+  "Aurumaya QUBIT Quartz" "Don Croft Succor Punch"
+  contemporarySelfAttribution aurumayaCroftClaim false refl false refl
+
+iTorusCommercialSpecOnly : BoundedRelation
+iTorusCommercialSpecOnly = bounded-relation
+  "iTorus i9 commercial geometry" "room-sized coherent healing field"
+  commercialSpecificationOnly itorusSpecBound false refl false refl
+
+oudinHistoricalPrecedentOnly : BoundedRelation
+oudinHistoricalPrecedentOnly = bounded-relation
+  "Kassabian 1907 Oudin discharge" "berndnindl Oudin-named footage"
+  historicalMechanismPrecedentOnly oudinHighVoltagePrecedent false refl false refl
 
 -- Imported source-attribution laws are used directly; no new source/role
 -- ontology is needed. The proof obligations are the existing fields.
