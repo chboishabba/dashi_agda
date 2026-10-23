@@ -42,5 +42,180 @@
     "body_only_equivalence_is_semantic_evidence": false,
     "renamed_supersession_requires_signature_identity_or_explicit_alias": true,
     "missing_evidence_disposition": "UNRESOLVED"
+  },
+  "canonical_navigation": {
+    "schema_version": 1,
+    "rule": "Navigate by mathematical owner. Historical Round modules are evidence, not independent proof obligations.",
+    "routes": [
+      {
+        "id": "NS-ABCD",
+        "aliases": [
+          "ns",
+          "abcd",
+          "clay",
+          "four-alternatives"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_agda",
+          "path": "DASHI/Physics/Closure/NSConcreteLiteralClayABCDRunTargetExact.agda"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
+          }
+        ],
+        "status": "canonical contract; Clay promotion false",
+        "next": "Inspect canonical A/B/C/D residuals; do not reopen historical Round modules."
+      },
+      {
+        "id": "NS-A",
+        "aliases": [
+          "a",
+          "a1",
+          "a2",
+          "a3",
+          "whole-space",
+          "euclidean"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_agda",
+          "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalA1PhysicalPopulationResidualExact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalA2MajorantResidualExact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalA3ContinuationResidualExact.agda"
+          }
+        ],
+        "status": "physical/continuum obligations open",
+        "next": "Specify one actual source-level A1/A2/A3 analytic producer."
+      },
+      {
+        "id": "NS-B",
+        "aliases": [
+          "b",
+          "b1",
+          "b2",
+          "b3",
+          "b7",
+          "bcontinuation",
+          "periodic"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_agda",
+          "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalB123PhysicalProducerResidualExact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalB7IntegratedControlResidualExact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalBContinuationResidualExact.agda"
+          }
+        ],
+        "status": "unforced periodic positive proof open",
+        "next": "Use physical B producer/continuation, not R823 reserve shortcut."
+      },
+      {
+        "id": "NS-B4",
+        "aliases": [
+          "b4",
+          "r440",
+          "noncore-core",
+          "signed-defect"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_agda",
+          "path": "DASHI/Physics/Closure/NSCanonicalB4PhysicalR440PaymentResidualExact.agda"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
+          }
+        ],
+        "status": "uniform physical signed-defect estimate open",
+        "next": "Construct the actual cutoff-uniform physical R440 payment, not another scalar surrogate."
+      },
+      {
+        "id": "NS-B-RESERVE",
+        "aliases": [
+          "b-reserve",
+          "reserve",
+          "signed-reserve",
+          "r823",
+          "r829",
+          "r830",
+          "r831",
+          "r832",
+          "r833",
+          "r850",
+          "r851",
+          "r852",
+          "r853"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_lean4",
+          "path": "NSBControl/Rational345R823DecisionFreeze.lean"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_lean4",
+            "path": "NSBControl/Rational345R823RealR749R760.lean"
+          },
+          {
+            "repo": "chboishabba/dashi_lean4",
+            "path": "NSBControl/Rational345Round71TrajectoryPhysical.lean"
+          },
+          {
+            "repo": "chboishabba/dashi_lean4",
+            "path": "NSBControl/Rational345R831PhysicalWeld.lean"
+          }
+        ],
+        "status": "auxiliary reserve counterexample source-written; kernel certification not established",
+        "next": "Audit exact-head Lean proof and same-source R760 chain only; NOT Clay B; do not regenerate R829/R833 wrappers."
+      },
+      {
+        "id": "NS-CD",
+        "aliases": [
+          "c",
+          "d",
+          "cd",
+          "forced",
+          "forced-breakdown"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_agda",
+          "path": "DASHI/Physics/Closure/NSCanonicalCDReleasedReconstructionResidualExact.agda"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_lean4",
+            "path": "ExternalClayNS/SubmissionAudit.lean"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSClayLiteralABCDExact.agda"
+          }
+        ],
+        "status": "external forced C/D source proof located; independent reconstruction receipt pending",
+        "next": "Inspect pinned source theorem and Lean dependency/axiom profile; do not infer A/B."
+      }
+    ]
   }
 }
