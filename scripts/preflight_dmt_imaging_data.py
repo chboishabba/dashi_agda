@@ -7,13 +7,14 @@ No participant data included. File checks do not recompute EEG/fMRI metrics.
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 
 SOURCE_REPO = "timmer500/DMT_Imaging"
 SOURCE_COMMIT = "b35701d88d904e2f602164ff2eae0fc879772078"
 
 
-def check_manifest(root, manifest_path):
+def check_manifest(root, manifest_path, source_receipt_path=None):
     errors = []
     if root is None or not root.is_dir():
         errors.append("Data root not supplied or unreadable")
@@ -28,6 +29,21 @@ def check_manifest(root, manifest_path):
     except (OSError, ValueError) as exc:
         return {"status": "blocked", "errors": ["Invalid manifest: " + str(exc)],
                 "human_data_replayed": False}
+    if source_receipt_path is None:
+        source_receipt_path = (Path(__file__).resolve().parents[1]
+                               / "Docs/receipts/DMTImagingPinnedSourceTree20261024.json")
+    try:
+        source = json.loads(source_receipt_path.read_text(encoding="utf-8"))
+        source_files = {row["path"]: row for row in source["files"]}
+        if (source.get("source_repository") != SOURCE_REPO
+                or source.get("source_commit") != SOURCE_COMMIT
+                or len(source_files) != source["inventory"]["file_count"]
+                or source["inventory"]["fmri_file_count"] != 40
+                or source["inventory"]["fmri_subjects_with_two_conditions"] != 20):
+            errors.append("Source-tree receipt identity/shape mismatch")
+    except (OSError, ValueError, KeyError, TypeError):
+        source_files = {}
+        errors.append("Missing or invalid source-tree receipt")
     if manifest.get("source_repo") != SOURCE_REPO:
         errors.append("Source repository identity mismatch")
     if manifest.get("source_commit") != SOURCE_COMMIT:
@@ -70,10 +86,27 @@ def check_manifest(root, manifest_path):
                 raise ValueError("Missing file or path escapes root")
             if not isinstance(digest, str) or len(digest) != 64:
                 raise ValueError("Missing SHA256")
-            with candidate.open("rb") as file:
-                actual = hashlib.file_digest(file, "sha256").hexdigest()
+            match = re.fullmatch(r"fMRI/Long(S[0-9]+)(DMT|PCB)[.]mat", relative)
+            if match is None:
+                raise ValueError("Not an individually identified source fMRI file")
+            if sub != match.group(1) or condition != (
+                "DMT" if match.group(2) == "DMT" else "placebo"
+            ):
+                raise ValueError("Subject/condition disagrees with filename")
+            source_row = source_files.get(relative)
+            if source_row is None:
+                raise ValueError("File absent from pinned Git source inventory")
+            data = candidate.read_bytes()
+            if len(data) != source_row.get("size_bytes"):
+                raise ValueError("Source byte length mismatch")
+            actual = hashlib.sha256(data).hexdigest()
             if actual.lower() != digest.lower():
                 raise ValueError("SHA256 mismatch")
+            source_blob_sha1 = hashlib.sha1(
+                b"blob " + str(len(data)).encode("ascii") + b"\0" + data
+            ).hexdigest()
+            if source_blob_sha1 != source_row.get("git_blob_sha1"):
+                raise ValueError("Pinned Git blob SHA1 mismatch")
         except (OSError, ValueError) as exc:
             errors.append(sub + "/" + sess + ": " + str(exc))
     if any(len(x) > 1 for x in splits.values()):
@@ -84,6 +117,7 @@ def check_manifest(root, manifest_path):
         "source_commit": SOURCE_COMMIT,
         "declared_subjects": len(subjects),
         "verified_files": len(entries) if not errors else 0,
+        "git_source_blob_checks_passed": not errors,
         "human_data_replayed": False,
         "paper_metrics_independently_recomputed": False,
         "scope": "Admission checks only; neither rights adjudication nor published-metric replay",
@@ -94,8 +128,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-root", type=Path)
     parser.add_argument("--manifest", type=Path)
+    parser.add_argument("--source-receipt", type=Path)
     args = parser.parse_args()
-    result = check_manifest(args.data_root, args.manifest)
+    result = check_manifest(args.data_root, args.manifest, args.source_receipt)
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0 if result["status"] == "admissible_manifest_only" else 2
 
