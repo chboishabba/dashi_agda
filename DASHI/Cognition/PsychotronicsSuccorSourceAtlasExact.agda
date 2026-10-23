@@ -221,6 +221,16 @@ croftReportedEntities = mkBound
   attributedAuthorReport
   "independent verification of alleged entities, telepathy, or device effect absent"
 
+croftNominalElectricalDrive : ClaimBound
+croftNominalElectricalDrive = mkBound
+  "Croft's July 2002 explanation claims about five milliamps through a nine-volt powered coil pulsed at 15 cycles per second"
+  croftJuly2002
+  "Succor Punch Explained, 22 July 2002, paragraph beginning 'I glue the coil to the crystal'"
+  croftAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "reported nominal numbers only; no waveform/current instrumentation or exact model identity; cannot explain the separate visible Tesla-style arcs without new hardware evidence"
+
 croftMentionsEdDames : ClaimBound
 croftMentionsEdDames = mkBound
   "Croft's May 2002 text explicitly names Maj. Ed Dames when describing purported government psychics"
