@@ -1,3 +1,51 @@
+## 2026-10-24 canonical max-cut navigation — no RNNN grep loop
+
+The September chronology below is historical. Merged PR #1232 already
+classified Round packages and defined non-Round canonical Clay residuals.
+The later Lean `NSBControl/Rational345R823DecisionFreeze.lean` holds the
+literal real R760/R823 auxiliary reserve decision, source-written but
+not independently kernel-certified in this handoff.
+
+**Start from the mathematical route, not a numbered Round module:**
+
+```sh
+python scripts/ns_canonical_focus.py --route R823
+python scripts/ns_canonical_focus.py --route B
+python scripts/ns_canonical_focus.py --route B4
+python scripts/ns_canonical_focus.py --list --validate
+```
+
+The six registered routes resolve to one primary theorem owner and at most
+three supporting owners. This registry lives inside the existing
+`config/ns-round-extraction-targets.json`; it is navigation metadata, not
+new mathematical authority. Unmapped R numbers fail closed.
+
+If an exact old declaration must be inspected, query the existing classified
+receipt, returning at most three examples instead of 30,885 packages:
+
+```sh
+python scripts/ns_canonical_focus.py --route B --historical-symbol exactTheoremName
+```
+
+Historical classifications and the 19,312 unresolved baseline entries
+are evidence only; never inflate them into independent open Clay tasks.
+
+**No-growth guard** against newly added numbered modules, using the
+post-reconciliation baseline (prior R851/R852 remain historical evidence):
+
+```sh
+python scripts/ns_canonical_focus.py --guard-new-rounds 4f9d7d517e60b7607c85b41d3b58e7bb88041d39
+```
+
+This checks only files newly added after that baseline; existing theorem
+owners may be edited. Do not delete theorem-bearing history, or replace
+source equalities with aliases lacking exact same-object proofs.
+
+**Authority boundary:** auxiliary R823 failure is not positive Clay B;
+source-written is not Lean/Agda kernel-certified, and forced C/D are
+not unforced A/B. Keep the canonical Clay promotion flag fail-closed.
+
+---
 # Navier–Stokes proof-control record — live A/B/C/D coordinator
 
 Status: authoritative live routing/control document; non-promoting.
