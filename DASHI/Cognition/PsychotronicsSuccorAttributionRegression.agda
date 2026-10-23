@@ -126,9 +126,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- The atlas deliberately has eleven source instances. The five named-source
 -- / original-author Croft passages still share a single authorial root.
-sourceAtlasCountIsTwentyOne :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 21
-sourceAtlasCountIsTwentyOne = refl
+sourceAtlasCountIsTwentyFive :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 25
+sourceAtlasCountIsTwentyFive = refl
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -243,3 +243,42 @@ jefimenkoCitationImportsNoExperimentForPignatelli :
   Attribution.citationImportsProof Atlas.jefimenkoElectrostaticMotors ≡ false
 jefimenkoCitationImportsNoExperimentForPignatelli =
   Atlas.allSourcesRemainNonPromoting Atlas.jefimenkoElectrostaticMotors
+
+------------------------------------------------------------------------
+-- Same-family product text does not establish a common calibrated quantity.
+-- Explicit Rife/Zero-point marketing is a bounded *cultural* attribution.
+------------------------------------------------------------------------
+
+itorusAppExplicitlyNamesRifeButNotMeasuredWaveform :
+  Atlas.relationClass Atlas.itorusExplicitRifeBridge ≡
+  Atlas.contemporarySelfAttribution
+itorusAppExplicitlyNamesRifeButNotMeasuredWaveform = refl
+
+resellerCopyDoesNotProveField :
+  Atlas.relationClass Atlas.itorusRetailClaimsUncalibrated ≡
+  Atlas.commercialSpecificationOnly
+resellerCopyDoesNotProveField = refl
+
+aurumayaCatalogueIsNotIndependentFromItsProducts :
+  Atlas.root Atlas.aurumayaSharedVocabulary ≡
+  Atlas.root Atlas.aurumayaCroftClaim
+aurumayaCatalogueIsNotIndependentFromItsProducts = refl
+
+jefimenko1971And1973SameAuthor :
+  Atlas.root Atlas.jefimenko1971Bibliography ≡
+  Atlas.root Atlas.jefimenkoSmallMotorField
+jefimenko1971And1973SameAuthor = refl
+
+jefimenko1971DOIDoesNotProveViralMotor :
+  Attribution.citationImportsProof Atlas.jefimenko1971 ≡ false
+jefimenko1971DOIDoesNotProveViralMotor =
+  Atlas.allSourcesRemainNonPromoting Atlas.jefimenko1971
+
+differentSourceRolesPreservedForImpedanceClaim :
+  Atlas.root Atlas.itorusImpedanceVariants ≡ Atlas.itorusRetailCopyRoot
+differentSourceRolesPreservedForImpedanceClaim = refl
+
+appPublisherDoesNotCreateAuthority :
+  Attribution.citationCreatesAuthority Atlas.itorusAppPublisher ≡ false
+appPublisherDoesNotCreateAuthority =
+  Atlas.allSourcesRemainNonAuthoritative Atlas.itorusAppPublisher
