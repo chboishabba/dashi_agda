@@ -233,6 +233,28 @@ oudinBeharySphere = Source.mkNoDOISource
   "maker documents round topload and air streamers on an Oudin/Tesla family resonator. Same authorial museum lineage as 2010 reconstruction, NOT independent replication or modern clip identity"
   Source.publicAttribution
 
+guilleminotOudinDiagram : Source.AttributedSource
+guilleminotOudinDiagram = Source.mkNoDOISource
+  "W. Hyacinthe Guilleminot; Wellcome Collection (archival custodian)"
+  "Oudin unipolar resonator circuit diagram, reproduced from Handbook of Electricity in Medicine"
+  "original diagram in 1906 manual; Wellcome catalogue M0015155 / WT/D/1/20/1/135/34 records a September 1956 photographic negative"
+  "1906 original; 1956 archive negative"
+  "https://wellcomecollection.org/works/kgngz6kz"
+  Source.archivalSource
+  "source-distinct historical circuit diagram of a unipolar Oudin resonator; the modern photograph has no disclosed primary/secondary continuity, so this is a class comparator, not exact circuit identity or proof of clinical utility"
+  Source.publicAttribution
+
+jefimenkoElectrostaticMotors : Source.AttributedSource
+jefimenkoElectrostaticMotors = Source.mkNoDOISource
+  "Oleg D. Jefimenko; David K. Walker (credited with many illustrations)"
+  "Electrostatic Motors: Their History, Types, and Principles of Operation"
+  "Electret Scientific Company, Star City, 1973; publicly mirrored scan inspected: PDF pages 69-70, printed pages 114-117"
+  "1973"
+  "https://rexresearch1.com/Electrostatics/Electrostatic%20MotorsJefimenko.pdf"
+  Source.academicBookSource
+  "primary-author account of small electrostatic motors operated from earth-field antennas with explicitly unresolved larger-motor power; does not identify the viral 'Pignatelli motor' or yield a power measurement for that post"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -242,7 +264,8 @@ sourceAtlas = Source.mkSourceAtlas
    electricWhirl ∷ irvaTimeline ∷ kingEarthEnergies ∷
    ipyramidsI9 ∷ aurumayaQubit ∷ oudinHistoricalDiagram ∷
    mayuVortex ∷ aapStructuredWater ∷ atmosphericFieldMill ∷
-   oudinBeharyRestoration ∷ oudinBeharySphere ∷ [])
+   oudinBeharyRestoration ∷ oudinBeharySphere ∷
+   guilleminotOudinDiagram ∷ jefimenkoElectrostaticMotors ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -254,6 +277,7 @@ data LineageRoot : Set where
   iPyramidsManufacturerRoot aurumayaMakerRoot oudinHistoricalRoot : LineageRoot
   mayuManufacturerRoot aapFactCheckRoot atmosphericResearchRoot : LineageRoot
   beharyRestorationRoot : LineageRoot
+  guilleminotHistoricalManualRoot jefimenkoAuthorRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -455,6 +479,26 @@ oudinSphereStreamerFamily = mkBound
   experimentalMechanismElsewhere
   "maker-reported input/output details apply to Behary's device only; not to berndnindl, plasma healing, or the claimed floating orb"
 
+oudinUnipolarHistoricalTopology : ClaimBound
+oudinUnipolarHistoricalTopology = mkBound
+  "A 1906 Oudin medical-electricity circuit diagram specifies one historically described unipolar resonator arrangement; a spherical terminal alone cannot establish a matching primary/secondary electrical topology"
+  guilleminotOudinDiagram
+  "Wellcome M0015155: catalogued photograph of diagram in Guilleminot, Handbook of electricity in medicine (1906)"
+  guilleminotHistoricalManualRoot
+  Diligence.contextualEvidence
+  externallyDescribedApparatus
+  "independent maker schematic and continuity check of 1000018569.png remain absent; historical clinical claims not supported by morphology"
+
+jefimenkoSmallMotorField : ClaimBound
+jefimenkoSmallMotorField = mkBound
+  "Jefimenko reports powering a small electret motor and corona motor using earth-field antennas; explicitly leaves appreciable power / larger motors dependent on collectors"
+  jefimenkoElectrostaticMotors
+  "printed pp.114-117, especially Fig.57 and statements on p.117; scan PDF page indices 69-70; visually inspected 2026-10-24"
+  jefimenkoAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "reported primary experiment, not independent exact-measurement receipt; Pignatelli name/creator circuit absent; input/output loading and antenna charging must be measured on that device"
+
 reichSeparation : ClaimBound
 reichSeparation = mkBound
   "Museum distinguishes Reich's cloudbuster from later Welz/Croft orgonite, quartz-and-resin devices"
@@ -610,6 +654,16 @@ oudinHistoricalPrecedentOnly : BoundedRelation
 oudinHistoricalPrecedentOnly = bounded-relation
   "Kassabian 1907 Oudin discharge" "berndnindl Oudin-named footage"
   historicalMechanismPrecedentOnly oudinHighVoltagePrecedent false refl false refl
+
+historicTopologyComparisonOnly : BoundedRelation
+historicTopologyComparisonOnly = bounded-relation
+  "1906 Guilleminot Oudin circuit" "sphere-topped Bernd tower, 1000018569.png"
+  hardwareAnalogyOnly oudinUnipolarHistoricalTopology false refl false refl
+
+jefimenkoMotorClaimOnly : BoundedRelation
+jefimenkoMotorClaimOnly = bounded-relation
+  "Jefimenko's 1973 atmospheric-field motor report" "Pignatelli-labelled viral motor"
+  historicalMechanismPrecedentOnly jefimenkoSmallMotorField false refl false refl
 
 -- Imported source-attribution laws are used directly; no new source/role
 -- ontology is needed. The proof obligations are the existing fields.
