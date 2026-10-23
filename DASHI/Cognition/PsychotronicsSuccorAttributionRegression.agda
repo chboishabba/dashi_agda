@@ -523,21 +523,36 @@ data OutcomeDomain : Set where
   expectancyAndBlinding : OutcomeDomain
   autonomicBreathingPhysiology : OutcomeDomain
 
-candidateSource : OutcomeDomain → Attribution.AttributedSource
-candidateSource immediateNondualReport = Atlas.hanleyNADA2018
-candidateSource mysticalFourFactorExperience = Atlas.macleanMEQ2012
-candidateSource egoDissolutionReport = Atlas.nourEDI2016
-candidateSource alteredStateFactorReport = Atlas.kervadecFiveDASC2026
-candidateSource longerTermPsychologicalFunction = Atlas.hanleyNADA2018
-candidateSource instrumentedMagneticField = Atlas.ipyramidsI9
-candidateSource expectancyAndBlinding = Atlas.stockerASCRevision2026
-candidateSource autonomicBreathingPhysiology = Atlas.heartmathEnergeticCommunication
+-- Candidate psychometric tools have published *construct* validity within
+-- their stated populations; other outcomes are not silently assigned an
+-- unrelated questionnaire, retailer specification or commercial claim.
+data PsychometricCandidate : OutcomeDomain → Set where
+  nadaForNondualReport :
+    PsychometricCandidate immediateNondualReport
+  meqForMysticalExperience :
+    PsychometricCandidate mysticalFourFactorExperience
+  ediForSelfExperience :
+    PsychometricCandidate egoDissolutionReport
+  ascForAlteredState :
+    PsychometricCandidate alteredStateFactorReport
 
--- These are candidate *source locators*, not endorsements of these papers
--- as validated metrics for every outcome. In particular NADA is not a
--- validated longitudinal clinical-function instrument and HeartMath is not
--- an independent breath/HRV calibration paper. The trial designer must
--- establish instrument validity separately.
+candidatePsychometricSource :
+  (d : OutcomeDomain) →
+  PsychometricCandidate d →
+  Attribution.AttributedSource
+candidatePsychometricSource .immediateNondualReport nadaForNondualReport =
+  Atlas.hanleyNADA2018
+candidatePsychometricSource .mysticalFourFactorExperience meqForMysticalExperience =
+  Atlas.macleanMEQ2012
+candidatePsychometricSource .egoDissolutionReport ediForSelfExperience =
+  Atlas.nourEDI2016
+candidatePsychometricSource .alteredStateFactorReport ascForAlteredState =
+  Atlas.kervadecFiveDASC2026
+
+-- No instance asserts that NADA measures sustained clinical function,
+-- that HeartMath's website validates HRV measurement, that a retailer
+-- spec is a calibrated B-field meter, or that an ASC paper validates
+-- blinding/expectancy assessment. Those require their own instruments.
 
 record TorusPhenomenologyProtocolDemand : Set where
   constructor torus-phenomenology-protocol-demand
