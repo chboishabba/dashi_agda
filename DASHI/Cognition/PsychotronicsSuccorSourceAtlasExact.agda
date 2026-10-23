@@ -285,7 +285,7 @@ aurumayaHomeCatalogue = Source.mkNoDOISource
   "undated catalogue"
   "https://www.aurumaya.com.au/"
   Source.practitionerSource
-  "first-party commercial co-listing of Tesla multi-wave oscillator disk, 369 ritual elixir, 333-MHz tensor pendants and Croft-named QUBIT crystals; a same-vendor vocabulary cluster, not proof of physical relations or independent corroboration"
+  "maker home page co-lists Tesla multi-wave-oscillator discs, 369 ritual elixir, 432-MHz-labelled tensor jewellery and Croft-named QUBIT; it does NOT itself display 333-MHz pendant text, which appears on the distinct shop page; same-vendor vocabulary only"
   Source.publicAttribution
 
 jefimenko1971 : Source.AttributedSource
@@ -300,6 +300,17 @@ jefimenko1971 = Source.mkDOISource
   "original same-author peer-reviewed publication of reported atmospheric-field motor operation; primary article full text not independently page-inspected in this cut; neither an independent experiment relative to 1973 monograph nor confirmation of Pignatelli identity"
   Source.publicAttribution
 
+aurumayaShopCatalogue : Source.AttributedSource
+aurumayaShopCatalogue = Source.mkNoDOISource
+  "Aurumaya"
+  "AURUMAYA: Shop Products"
+  "same maker's separate shop catalogue, inspected 24 October 2026"
+  "undated catalogue"
+  "https://www.aurumaya.com.au/shop"
+  Source.practitionerSource
+  "directly indexes 15Hz QUBIT crystal kits, ACU-VAC 333Mhz labelled pendants, geometric Tesla multi-wave oscillator disks, orgonite; distinct URL same maker root as home page and QUBIT product"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -312,7 +323,7 @@ sourceAtlas = Source.mkSourceAtlas
    oudinBeharyRestoration ∷ oudinBeharySphere ∷
    guilleminotOudinDiagram ∷ jefimenkoElectrostaticMotors ∷
    itorusAppPublisher ∷ itorusHeartStoneReseller ∷
-   aurumayaHomeCatalogue ∷ jefimenko1971 ∷ [])
+   aurumayaHomeCatalogue ∷ aurumayaShopCatalogue ∷ jefimenko1971 ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -579,9 +590,9 @@ itorusImpedanceVariants = mkBound
 
 aurumayaSharedVocabulary : ClaimBound
 aurumayaSharedVocabulary = mkBound
-  "Aurumaya catalogues Tesla multi-wave oscillator disks, 333MHz tensor jewellery, 369 elixirs and quartz Succor Punches in the same commercial house"
+  "Aurumaya's homepage co-lists Tesla multi-wave oscillator disks, a 369-labelled ritual elixir, 432MHz-labelled tensor jewellery and Succor Punches"
   aurumayaHomeCatalogue
-  "AURUMAYA home/catalogue sections Frequency Jewellery, ELIXIRS and New Arrival"
+  "AURUMAYA home page: Featured Collection, ELIXIRS, View Our Frequency Jewellery; actual visible page does not list a 333-MHz pendant"
   aurumayaMakerRoot
   Diligence.primaryProposition
   attributedAuthorReport
@@ -596,6 +607,16 @@ jefimenko1971Bibliography = mkBound
   Diligence.contextualEvidence
   attributedAuthorReport
   "bibliographic identity and same-author provenance, not a new experimental reproduction; full article extraction and data remain a separate obligation"
+
+aurumayaShop333Catalogue : ClaimBound
+aurumayaShop333Catalogue = mkBound
+  "Aurumaya shop indexes ACU-VAC pendants advertised with 333Mhz labels alongside 15Hz quartz kit offerings and Tesla multi-wave disks"
+  aurumayaShopCatalogue
+  "Shop Products, ACU-VAC pendants (333Mhz), QUBIT 15Hz listings and GOLD MULTI-WAVE OSCILLATOR item"
+  aurumayaMakerRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "the numeral 333Mhz is a product-label assertion, not a frequency measurement; homepage 369 is a separate URL; same maker, not independent corroboration"
 
 reichSeparation : ClaimBound
 reichSeparation = mkBound
@@ -777,6 +798,11 @@ aurumayaCommercialVocabularyBridge : BoundedRelation
 aurumayaCommercialVocabularyBridge = bounded-relation
   "Aurumaya house catalogue" "Tesla / 369 / 333 MHz tensor / Succor Punch"
   contemporarySelfAttribution aurumayaSharedVocabulary false refl false refl
+
+aurumayaShopCoMarketing : BoundedRelation
+aurumayaShopCoMarketing = bounded-relation
+  "Aurumaya shop listings" "15Hz QUBIT / 333Mhz ACU-VAC / Tesla-labelled discs"
+  contemporarySelfAttribution aurumayaShop333Catalogue false refl false refl
 
 -- Imported source-attribution laws are used directly; no new source/role
 -- ontology is needed. The proof obligations are the existing fields.
