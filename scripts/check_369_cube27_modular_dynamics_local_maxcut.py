@@ -96,3 +96,6 @@ assert support(gauge_dressed)==ME
 assert len(support(gauge_dressed).symmetric_difference(support(L)))==72
 print('PASS gauge-dressed modular permutation still mismatches 72 undirected cube bonds')
 print('NO-GO no invertible sitewise U1/Pin phase factor can fix the underlying cube graph support')
+
+# NOTATION: The illustrative lattice coupling J in some prose is a generic
+# hopping strength kappa; it is NOT Klein's modular J(tau)=j(tau)-744.
