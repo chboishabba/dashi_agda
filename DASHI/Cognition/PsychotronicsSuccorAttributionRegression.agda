@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact as Atlas
 import DASHI.Cognition.PsychotronicsScreenshotDiscriminationExact as Frames
+import DASHI.Culture.HoeMathLevelsSourceBoundaryExact as HoeMath
 
 ------------------------------------------------------------------------
 -- Definitional regressions for a historical source atlas, NOT an empirical
@@ -126,9 +127,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- The atlas deliberately has eleven source instances. The five named-source
 -- / original-author Croft passages still share a single authorial root.
-sourceAtlasCountIsThirty :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 30
-sourceAtlasCountIsThirty = refl
+sourceAtlasCountIsThirtyTwo :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 32
+sourceAtlasCountIsThirtyTwo = refl
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -328,3 +329,79 @@ indexedSellerCannotCreateExperimentalAuthority =
 rodinMirrorCannotBecomeSameCreatorReceipt :
   Atlas.historicalTransmissionProved Atlas.rodinNamedBySocialRelay ≡ false
 rodinMirrorCannotBecomeSameCreatorReceipt = refl
+
+------------------------------------------------------------------------
+-- HOE_MATH / 5D SPIRITUALITY: NO NUMBER-ID OR ONTOLOGY TRANSFER
+--
+-- Original hoe_math Levels source and its Spiral Dynamics/AQAL lineage
+-- are owned by Culture.HoeMathLevelsSourceBoundaryExact. We only import
+-- that owner: do NOT copy the model into this psychotronics atlas.
+------------------------------------------------------------------------
+
+data FiveDUsageRegister : Set where
+  spiritualFiveDClaim : FiveDUsageRegister
+  hoeMathStageOrLevel : FiveDUsageRegister
+  temporaryExperientialState : FiveDUsageRegister
+  developmentalSkillLine : FiveDUsageRegister
+  fifthSpacetimeCoordinate : FiveDUsageRegister
+  toroidalMaterialGeometry : FiveDUsageRegister
+  measuredElectromagneticField : FiveDUsageRegister
+
+spiritualNumberIsNotHoeMathLevel :
+  spiritualFiveDClaim ≡ hoeMathStageOrLevel → ⊥
+spiritualNumberIsNotHoeMathLevel ()
+
+spiritualNumberIsNotPhysicsCoordinate :
+  spiritualFiveDClaim ≡ fifthSpacetimeCoordinate → ⊥
+spiritualNumberIsNotPhysicsCoordinate ()
+
+toroidalPhysicalShapeIsNotSpiritualStage :
+  toroidalMaterialGeometry ≡ spiritualFiveDClaim → ⊥
+toroidalPhysicalShapeIsNotSpiritualStage ()
+
+observedMagneticFieldIsNotMysticalState :
+  measuredElectromagneticField ≡ spiritualFiveDClaim → ⊥
+observedMagneticFieldIsNotMysticalState ()
+
+developmentalLineDistinctFromMomentaryState :
+  developmentalSkillLine ≡ temporaryExperientialState → ⊥
+developmentalLineDistinctFromMomentaryState ()
+
+hoeMathDistinguishesStageFromState :
+  HoeMath.coordinateRelation HoeMath.stateMode ≡
+  HoeMath.fluctuatingStateRelation
+hoeMathDistinguishesStageFromState = refl
+
+hoeMathPreservesIndependentLines :
+  HoeMath.coordinateRelation HoeMath.developmentalLine ≡
+  HoeMath.independentlyDevelopingLine
+hoeMathPreservesIndependentLines = refl
+
+hoeMathOwnsOnlyItsPresentedStageChart :
+  HoeMath.ownership HoeMath.simplifiedNineLevelPresentation ≡
+  HoeMath.hoeMathPresentationOwnership
+hoeMathOwnsOnlyItsPresentedStageChart = refl
+
+hoeMathDoesNotOwnAQAL :
+  HoeMath.ownership HoeMath.aqalQuadrants ≡
+  HoeMath.underlyingNamedTradition
+hoeMathDoesNotOwnAQAL = refl
+
+openhandTorusFiveDIsOnlyAnAttributedAuthorDefinition :
+  Atlas.relationClass Atlas.openhandTorusFiveDIsSpecificBeliefSource ≡
+  Atlas.thematicResemblanceOnly
+openhandTorusFiveDIsOnlyAnAttributedAuthorDefinition = refl
+
+openhandTwoPostsShareOneSourceOrigin :
+  Atlas.root Atlas.openhandFiveDTorusSource ≡
+  Atlas.root Atlas.openhandRealitySplitClaim
+openhandTwoPostsShareOneSourceOrigin = refl
+
+appMarketerDoesNotMakeOpenhandOrigin :
+  Atlas.historicalTransmissionProved Atlas.openhandTorusFiveDIsSpecificBeliefSource ≡ false
+appMarketerDoesNotMakeOpenhandOrigin = refl
+
+openhandDocumentDoesNotImportFieldMeasurement :
+  Attribution.citationImportsProof Atlas.openhand2026FiveD ≡ false
+openhandDocumentDoesNotImportFieldMeasurement =
+  Atlas.allSourcesRemainNonPromoting Atlas.openhand2026FiveD
