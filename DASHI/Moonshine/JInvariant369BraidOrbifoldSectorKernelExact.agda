@@ -93,3 +93,79 @@ sameWordHasNonidentityIntegralMonodromy ()
 
 -- NO promotion: an action on the *four labels* (g,h) is not an
 -- action on constructed twisted VOA modules nor a gravity Hilbert space.
+
+
+------------------------------------------------------------------------
+-- 3. Generator-matched C3 strand-role / nonzero orbifold-sector codec.
+--
+-- This is an explicit equivariant bijection onto the three named nonzero
+-- sectors; it is NOT an equivalence of the physical strands with orbifold
+-- Hilbert states or modules.
+------------------------------------------------------------------------
+
+import DASHI.Biology.TriadicBraidDialecticExact as TriadicBraid
+
+roleToNonzeroOrbifold :
+  TriadicBraid.DialecticalStrandRole → Orb.OrbifoldSector
+roleToNonzeroOrbifold TriadicBraid.thesisStrand =
+  Orb.untwistedTwining
+roleToNonzeroOrbifold TriadicBraid.mediatingStrand =
+  Orb.twistedTwining
+roleToNonzeroOrbifold TriadicBraid.antithesisStrand =
+  Orb.twistedNoInsertion
+
+roleSigmaOne :
+  TriadicBraid.DialecticalStrandRole →
+  TriadicBraid.DialecticalStrandRole
+roleSigmaOne TriadicBraid.thesisStrand =
+  TriadicBraid.mediatingStrand
+roleSigmaOne TriadicBraid.mediatingStrand =
+  TriadicBraid.thesisStrand
+roleSigmaOne TriadicBraid.antithesisStrand =
+  TriadicBraid.antithesisStrand
+
+roleSigmaTwo :
+  TriadicBraid.DialecticalStrandRole →
+  TriadicBraid.DialecticalStrandRole
+roleSigmaTwo TriadicBraid.thesisStrand =
+  TriadicBraid.thesisStrand
+roleSigmaTwo TriadicBraid.mediatingStrand =
+  TriadicBraid.antithesisStrand
+roleSigmaTwo TriadicBraid.antithesisStrand =
+  TriadicBraid.mediatingStrand
+
+roleSigmaOneIntertwines :
+  (r : TriadicBraid.DialecticalStrandRole) →
+  roleToNonzeroOrbifold (roleSigmaOne r)
+  ≡ sigmaOne (roleToNonzeroOrbifold r)
+roleSigmaOneIntertwines TriadicBraid.thesisStrand = refl
+roleSigmaOneIntertwines TriadicBraid.mediatingStrand = refl
+roleSigmaOneIntertwines TriadicBraid.antithesisStrand = refl
+
+roleSigmaTwoIntertwines :
+  (r : TriadicBraid.DialecticalStrandRole) →
+  roleToNonzeroOrbifold (roleSigmaTwo r)
+  ≡ sigmaTwo (roleToNonzeroOrbifold r)
+roleSigmaTwoIntertwines TriadicBraid.thesisStrand = refl
+roleSigmaTwoIntertwines TriadicBraid.mediatingStrand = refl
+roleSigmaTwoIntertwines TriadicBraid.antithesisStrand = refl
+
+roleC3 :
+  TriadicBraid.DialecticalStrandRole →
+  TriadicBraid.DialecticalStrandRole
+roleC3 r = roleSigmaTwo (roleSigmaOne r)
+
+roleC3IntertwinesExistingOrbifoldST :
+  (r : TriadicBraid.DialecticalStrandRole) →
+  roleToNonzeroOrbifold (roleC3 r)
+  ≡ Orb.ST (roleToNonzeroOrbifold r)
+roleC3IntertwinesExistingOrbifoldST
+  TriadicBraid.thesisStrand = refl
+roleC3IntertwinesExistingOrbifoldST
+  TriadicBraid.mediatingStrand = refl
+roleC3IntertwinesExistingOrbifoldST
+  TriadicBraid.antithesisStrand = refl
+
+-- The existing coarse observer kills the pure braid, while fine modular
+-- levels retain a nontrivial matrix: the C3 strand-role codec must not be
+-- promoted to the level-3/9/27 modular-curve lift without a new map.
