@@ -7,7 +7,8 @@ from ns_abcd_current_frontier_reconciliation import reconcile,ROOT
 class CurrentFrontierTests(unittest.TestCase):
     def test_canonical_frontier(self):
         r=reconcile()
-        self.assertFalse(r["reconciliation"]["R832_concrete_vector_evaluation_closed"])
+        self.assertTrue(r["reconciliation"]["R832_concrete_vector_evaluation_source_written"])
+        self.assertFalse(r["reconciliation"]["R832_concrete_vector_evaluation_kernel_checked_here"])
         self.assertFalse(r["reconciliation"]["R832_real_ODE_transport_closed"])
         self.assertFalse(r["reconciliation"]["Clay_proof_verified_by_this_audit"])
         self.assertIn("R823-R832",r["reconciliation"]["preferred_periodic_B"])
