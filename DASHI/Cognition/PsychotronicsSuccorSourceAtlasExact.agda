@@ -355,6 +355,28 @@ merchantStoreDirectory = Source.mkNoDOISource
   "identifies matching-handle domain as Zero Point Tech and enumerates 24-point Starship/Rodin coil models, amplifiers and sphere magnets; this strengthens matching product-family discovery but does not prove Instagram account ownership or authenticate original video"
   Source.publicAttribution
 
+openhand2026FiveD : Source.AttributedSource
+openhand2026FiveD = Source.mkNoDOISource
+  "Open (Openhand)"
+  "What Does It Actually Mean To Be Creating From 5D Consciousness?"
+  "author-published article, 7 September 2026; exact primary page inspected 24 October 2026"
+  "2026"
+  "https://www.openhandweb.org/what-does-it-actually-mean-be-creating-5d-consciousness"
+  Source.practitionerSource
+  "explicit claim that 5D consciousness emerges from a torus singularity and Flower of Life; author explicitly distinguishes a unity/love notion as merely 4D. Cosmological belief claim, NOT geometry or EM field measurement"
+  Source.publicAttribution
+
+openhand2026RealitySplit : Source.AttributedSource
+openhand2026RealitySplit = Source.mkNoDOISource
+  "Open (Openhand)"
+  "3D/5D Reality Split: A Calling To The Soul - Move Into the 5D Stream"
+  "same author's 19 October 2026 public post, inspected 24 October 2026"
+  "2026"
+  "https://openhandweb.org/3d5d-reality-split-calling-soul-move-5d-stream"
+  Source.practitionerSource
+  "claim about accelerating planetary toroidal flow, alleged electromagnetic suppression and 3D high-tech simulation; again a metaphysical author statement, not calibrated magnetometry or independent source"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -369,7 +391,8 @@ sourceAtlas = Source.mkSourceAtlas
    itorusAppPublisher ∷ itorusHeartStoneReseller ∷
    aurumayaHomeCatalogue ∷ aurumayaShopCatalogue ∷ jefimenko1971 ∷
    zeroPointStarshipProductIndexed ∷ zeroPointMiniProductIndexed ∷
-   rodinSocialRelay ∷ merchantStoreDirectory ∷ [])
+   rodinSocialRelay ∷ merchantStoreDirectory ∷
+   openhand2026FiveD ∷ openhand2026RealitySplit ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -384,6 +407,7 @@ data LineageRoot : Set where
   guilleminotHistoricalManualRoot jefimenkoAuthorRoot : LineageRoot
   itorusAppPublisherRoot itorusRetailCopyRoot : LineageRoot
   zeroPointCommercialRoot rodinSocialMirrorRoot merchantDirectoryRoot : LineageRoot
+  openhandAuthorRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -715,6 +739,26 @@ zeroPointDirectoryName = mkBound
   attributedAuthorReport
   "identity of Shopify store is independently listed; same-name Instagram owner and product-to-screenshot identity need actual outbound link, purchase SKU or creator confirmation"
 
+openhandFiveDTorusSource : ClaimBound
+openhandFiveDTorusSource = mkBound
+  "Openhand (7 September 2026) defines 5D creation through a Torus/Flower of Life 'singularity' and explicitly says mere oneness/love may be 4D, not 5D"
+  openhand2026FiveD
+  "What Does It Actually Mean To Be Creating From 5D Consciousness? sections Moving Beyond Relativity, Multidimensional Flow"
+  openhandAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "spiritual definition by a specific author only; no agreed operational scale, no field frequency, and no identity with hoe_math stage 5 or physics spatial dimension"
+
+openhandRealitySplitClaim : ClaimBound
+openhandRealitySplitClaim = mkBound
+  "Openhand (19 October 2026) claims a planetary 3D/5D reality split and accelerating toroidal energies involving alleged electromagnetic suppression"
+  openhand2026RealitySplit
+  "3D/5D Reality Split post dated 19 October 2026, body and 19/10 shift update"
+  openhandAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "same Openhand authorial origin, not independently verified geology, magnetometry, extraterrestrial intervention or physically shifting reality"
+
 reichSeparation : ClaimBound
 reichSeparation = mkBound
   "Museum distinguishes Reich's cloudbuster from later Welz/Croft orgonite, quartz-and-resin devices"
@@ -917,6 +961,16 @@ zeroPointSameMakerMiniComparator : BoundedRelation
 zeroPointSameMakerMiniComparator = bounded-relation
   "Zero Point Tech 24-point Starship seller listing" "Zero Point Tech Mini moving magnet explanation"
   hardwareAnalogyOnly zeroPointMiniMagnetResponse false refl false refl
+
+openhandTorusFiveDIsSpecificBeliefSource : BoundedRelation
+openhandTorusFiveDIsSpecificBeliefSource = bounded-relation
+  "Openhand 2026 spiritual 5D / torus singularity" "iTorus app marketing of 5D consciousness"
+  thematicResemblanceOnly openhandFiveDTorusSource false refl false refl
+
+openhandClaimOfRealitySplit : BoundedRelation
+openhandClaimOfRealitySplit = bounded-relation
+  "Openhand 2026 toroidal planetary flow report" "physical geomagnetic/clinical proposition"
+  thematicResemblanceOnly openhandRealitySplitClaim false refl false refl
 
 -- Imported source-attribution laws are used directly; no new source/role
 -- ontology is needed. The proof obligations are the existing fields.
