@@ -377,6 +377,77 @@ openhand2026RealitySplit = Source.mkNoDOISource
   "claim about accelerating planetary toroidal flow, alleged electromagnetic suppression and 3D high-tech simulation; again a metaphysical author statement, not calibrated magnetometry or independent source"
   Source.publicAttribution
 
+hanleyNADA2018 : Source.AttributedSource
+hanleyNADA2018 = Source.mkDOISource
+  "Adam W. Hanley; Yoshio Nakamura; Eric L. Garland"
+  "The Nondual Awareness Dimensional Assessment (NADA): New Tools to Assess Nondual Traits and States of Consciousness"
+  "Psychological Assessment 30(12), 1625-1639; original validation, NADA-T and NADA-S"
+  "2018"
+  "10.1037/pas0000615"
+  "https://doi.org/10.1037/pas0000615"
+  Source.academicArticleSource
+  "validated self-report measures distinguishing nondual awareness as state vs trait in studied populations; NADA-T self-transcendence/bliss dimensions do not prove fifth spacetime dimension or efficacy of a torus device"
+  Source.publicAttribution
+
+macleanMEQ2012 : Source.AttributedSource
+macleanMEQ2012 = Source.mkDOISource
+  "Katherine A. MacLean; Matthew W. Johnson; Robert R. Griffiths"
+  "Factor Analysis of the Mystical Experience Questionnaire"
+  "Journal for the Scientific Study of Religion 51(4), 721-737; 1602-person exploratory and 440-person confirmation samples, retrospective psilocybin experiences"
+  "2012"
+  "10.1111/j.1468-5906.2012.01685.x"
+  "https://doi.org/10.1111/j.1468-5906.2012.01685.x"
+  Source.academicArticleSource
+  "30-item self-report with mystical/unity, positive mood, space-time transcendence and ineffability factors; initial validation in psilocybin retrospective accounts is not blanket validation for PEMF devices or metaphysical timeline shifts"
+  Source.publicAttribution
+
+nourEDI2016 : Source.AttributedSource
+nourEDI2016 = Source.mkDOISource
+  "Matthew M. Nour; Lisa Evans; David Nutt; Robin L. Carhart-Harris"
+  "Ego-Dissolution and Psychedelics: Validation of the Ego-Dissolution Inventory"
+  "Frontiers in Human Neuroscience 10:269; originally validated in reports of psychedelic/drug experiences"
+  "2016"
+  "10.3389/fnhum.2016.00269"
+  "https://doi.org/10.3389/fnhum.2016.00269"
+  Source.academicArticleSource
+  "eight-item subjective ego-dissolution scale distinguishable from ego-inflation; it cannot establish lasting moral development, material torus field, or a paranormal cause"
+  Source.publicAttribution
+
+kervadecFiveDASC2026 : Source.AttributedSource
+kervadecFiveDASC2026 = Source.mkDOISource
+  "Ewen Kervadec; Pauline Mathieu; Baptiste Fauvel; Lana Strika-Bruneau; collaborators"
+  "Psychometric validation of the French version of the five-dimensional altered states of consciousness questionnaire (5D-ASC) and associated 11 OAV subscales"
+  "Progress in Neuro-Psychopharmacology and Biological Psychiatry 147:111770; N=777 naturalistic substance-related reports"
+  "2026"
+  "10.1016/j.pnpbp.2026.111770"
+  "https://doi.org/10.1016/j.pnpbp.2026.111770"
+  Source.academicArticleSource
+  "5D means FIVE PSYCHOMETRIC FACTORS, not 5D spiritual consciousness. Study reports better 11-subscale fit but marginal CFI, alpha reliability and limitations of language/population transport; does not validate a PEMF intervention"
+  Source.publicAttribution
+
+stockerASCRevision2026 : Source.AttributedSource
+stockerASCRevision2026 = Source.mkDOISource
+  "Kurt Stocker; Matthias Hartmann; Yasmin Schmid; Severin B. Vogt; collaborators"
+  "The 3D-ASCr scale: A revalidation of core dimensions of the Altered States of Consciousness Rating Scale 5D(11)-ASC"
+  "Journal of Psychopharmacology 40(5):850-862; published online 26 December 2025, issue May 2026; 901 questionnaires from 398 participants in 16 psychedelic studies"
+  "2026 issue; online 2025"
+  "10.1177/02698811251397328"
+  "https://doi.org/10.1177/02698811251397328"
+  Source.academicArticleSource
+  "revisits competing altered-state factor models; proposes positive, distressing, perceptual broad dimensions. This challenges treating scale labels as eternal natural categories and is specific to psychedelic research context"
+  Source.publicAttribution
+
+heartmathEnergeticCommunication : Source.AttributedSource
+heartmathEnergeticCommunication = Source.mkNoDOISource
+  "HeartMath Institute"
+  "Energetic Communication"
+  "institutional self-description of human heart electric/magnetic field and suggested interpersonal energetic information transfer; undated live page inspected 2026-10-24"
+  "undated online article"
+  "https://www.heartmath.org/research/science-of-the-heart/energetic-communication/"
+  Source.institutionalSource
+  "HeartMath is distinct from hoe_math. Heart-generated bioelectromagnetic fields are measurable with appropriate sensors, but the institute's stronger interpersonal information/coherence claims are separate hypotheses and are not established by its narrative"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -392,7 +463,10 @@ sourceAtlas = Source.mkSourceAtlas
    aurumayaHomeCatalogue ∷ aurumayaShopCatalogue ∷ jefimenko1971 ∷
    zeroPointStarshipProductIndexed ∷ zeroPointMiniProductIndexed ∷
    rodinSocialRelay ∷ merchantStoreDirectory ∷
-   openhand2026FiveD ∷ openhand2026RealitySplit ∷ [])
+   openhand2026FiveD ∷ openhand2026RealitySplit ∷
+   hanleyNADA2018 ∷ macleanMEQ2012 ∷ nourEDI2016 ∷
+   kervadecFiveDASC2026 ∷ stockerASCRevision2026 ∷
+   heartmathEnergeticCommunication ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -408,6 +482,8 @@ data LineageRoot : Set where
   itorusAppPublisherRoot itorusRetailCopyRoot : LineageRoot
   zeroPointCommercialRoot rodinSocialMirrorRoot merchantDirectoryRoot : LineageRoot
   openhandAuthorRoot : LineageRoot
+  hanleyPsychometricsRoot macleanPsychometricsRoot nourPsychometricsRoot : LineageRoot
+  ascQuestionnaireResearchRoot heartmathInstituteRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -759,6 +835,66 @@ openhandRealitySplitClaim = mkBound
   attributedAuthorReport
   "same Openhand authorial origin, not independently verified geology, magnetometry, extraterrestrial intervention or physically shifting reality"
 
+nondualStateTraitMeasurement : ClaimBound
+nondualStateTraitMeasurement = mkBound
+  "Hanley, Nakamura and Garland distinguish self-reported nondual *state* and *trait* questionnaires"
+  hanleyNADA2018
+  "Psychological Assessment 2018 abstract and methods; NADA-S and NADA-T validation"
+  hanleyPsychometricsRoot
+  Diligence.primaryProposition
+  externallyDescribedApparatus
+  "scope-valid administration, longitudinal and condition-specific validation before a torus-device experiment; self-report alone never establishes a new physical dimension"
+
+mysticalFourFactorReport : ClaimBound
+mysticalFourFactorReport = mkBound
+  "MacLean et al. describe mystical unity, positive mood, transcendence of time/space and ineffability as four self-report factors of MEQ30"
+  macleanMEQ2012
+  "2012 original abstract/results; 1602 exploratory plus 440 confirmatory samples"
+  macleanPsychometricsRoot
+  Diligence.primaryProposition
+  externallyDescribedApparatus
+  "originally retrospective psilocybin reports; measurement invariance in meditation/non-drug/PEMF contexts unestablished"
+
+egoDissolutionExperienceReport : ClaimBound
+egoDissolutionExperienceReport = mkBound
+  "Nour et al. present an 8-item report instrument for ego-dissolution separable from ego-inflation"
+  nourEDI2016
+  "Frontiers in Human Neuroscience 2016 article, abstract and factor-analysis table"
+  nourPsychometricsRoot
+  Diligence.primaryProposition
+  externallyDescribedApparatus
+  "does not establish lasting trait, paranormal causal mechanism or clinical outcome"
+
+psychometricFiveDNotSpiritualFiveD : ClaimBound
+psychometricFiveDNotSpiritualFiveD = mkBound
+  "5D-ASC's five factor coordinates include oceanic boundlessness, anxious ego dissolution, visionary restructuring, auditory alterations and reduced vigilance"
+  kervadecFiveDASC2026
+  "2026 French 5D-ASC validation introduction and abstract, 777 naturalistic retrospective respondents"
+  ascQuestionnaireResearchRoot
+  Diligence.primaryProposition
+  externallyDescribedApparatus
+  "5D names scale structure only; 11-subscale fit slightly below standard CFI cutoffs; cannot transfer to spiritual five-dimensional reality or electrotherapy efficacy"
+
+ascModelRevision : ClaimBound
+ascModelRevision = mkBound
+  "Stocker et al. reconsider 5D-ASC and 11-ASC dimensional structure, proposing a revised three-domain positive/distressing/perceptual model"
+  stockerASCRevision2026
+  "Journal of Psychopharmacology 2026, abstract and methods: 901 questionnaires, 398 people, 16 trials"
+  ascQuestionnaireResearchRoot
+  Diligence.primaryProposition
+  externallyDescribedApparatus
+  "different research group and independent dataset, but same measure family; not proof that any psychometric factor is a fundamental dimension of space"
+
+heartmathDistinguishedFromHoeMath : ClaimBound
+heartmathDistinguishedFromHoeMath = mkBound
+  "HeartMath Institute's web page discusses physical heart fields and speculative interpersonal energetic communication, separate from hoe_math's developmental Levels teaching"
+  heartmathEnergeticCommunication
+  "Energetic Communication webpage, electric/magnetic fields and energetic communication sections"
+  heartmathInstituteRoot
+  Diligence.contextualEvidence
+  attributedAuthorReport
+  "physiological field instrumentation and actual interpersonal causal effect require independent controls; this does not validate 5D or stage labels"
+
 reichSeparation : ClaimBound
 reichSeparation = mkBound
   "Museum distinguishes Reich's cloudbuster from later Welz/Croft orgonite, quartz-and-resin devices"
@@ -971,6 +1107,21 @@ openhandClaimOfRealitySplit : BoundedRelation
 openhandClaimOfRealitySplit = bounded-relation
   "Openhand 2026 toroidal planetary flow report" "physical geomagnetic/clinical proposition"
   thematicResemblanceOnly openhandRealitySplitClaim false refl false refl
+
+psychometricsNotSpiritualDimension : BoundedRelation
+psychometricsNotSpiritualDimension = bounded-relation
+  "5D-ASC psychometric five-factor name" "Openhand five-dimensional spiritual consciousness"
+  documentaryDistinction psychometricFiveDNotSpiritualFiveD false refl false refl
+
+nondualIsReportNotAppEffect : BoundedRelation
+nondualIsReportNotAppEffect = bounded-relation
+  "NADA-S or NADA-T reported experience" "iTorus 5D consciousness marketing"
+  hardwareAnalogyOnly nondualStateTraitMeasurement false refl false refl
+
+heartmathIsNotHoeMath : BoundedRelation
+heartmathIsNotHoeMath = bounded-relation
+  "HeartMath Institute claimed interpersonal heart fields" "hoe_math developmental Levels presentation"
+  documentaryDistinction heartmathDistinguishedFromHoeMath false refl false refl
 
 -- Imported source-attribution laws are used directly; no new source/role
 -- ontology is needed. The proof obligations are the existing fields.
