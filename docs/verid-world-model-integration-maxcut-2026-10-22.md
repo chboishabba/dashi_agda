@@ -284,3 +284,16 @@ python -m unittest discover -s tests -p 'test_ns_abcd_current_frontier_reconcili
 ```
 
 Remaining real mathematical work: literal R829 eight-vector same-object evaluation and finite R408 ODE transport for the auxiliary B-RESERVE challenge; A same-object actual kernel/finite-energy majorant; true cutoff-uniform B estimates; independent inspection and reproduction of C/D external Lean proof. No local tests or Agda kernel checks were run.
+
+## 2026-10-23 R829 concrete symbolic producer cut
+
+Existing `scripts/check_ns_r829_rational_345_component_certificate.py` already independently evaluates the actual radius-four projected Fourier quadratic operator and helical mixed/commutator slots on the rational 3-4-5 seed; it produces exact eight-output rational work rows and the canonical R815 value. Avoid duplicate symbolic mathematics.
+
+New `scripts/ns_r829_exact_component_boundary_crosscheck.py` executes that existing independent producer, checks its eight work outputs in the literal order of `NSTriadKNR650Rational345RepositoryVectorBoundaryRound829Exact.agda`, checks the source still exposes eight selected mixed and commutator equations, and exactly checks the summed work and R815 rate. No tolerance, floats or fabricated authority. `tests/test_ns_r829_exact_component_boundary_crosscheck.py` checks mismatch and authority failure conditions.
+
+```sh
+python -m unittest discover -s tests -p 'test_ns_r829_exact_component_boundary_crosscheck.py'
+python scripts/ns_r829_exact_component_boundary_crosscheck.py
+```
+
+**Important:** this is a real algebraic cross-producer parity test, not an Agda proof of `Repository345VectorEvaluation`: the actual repository `Audit.velocityAt`, `Audit.projectedNonlinearity`, `Helical` laws and each R224/R230 expression must still be equated in Agda on the selected physical system. R833's real-time selected scalar transport also remains open. No kernel or runtime receipts were obtained in this GitHub-only session.
