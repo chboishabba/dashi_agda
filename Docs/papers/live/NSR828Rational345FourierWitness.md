@@ -652,3 +652,60 @@ No Lean/Agda kernel check of these new source terms was run; do not mark
 R823 auxiliary-reserve refutation or Clay B closed by a source-written
 statement. Keep canonical NSClayFacingABCDProofStatusExact fail-closed
 until both source-specific theorems have actual kernel receipts.
+
+
+### 2026-10-24 maximum-cut refinement: one seed identity suffices for R823 falsification
+
+The previously listed *global real R853 orbit identity* is a
+mathematically stronger obligation than the auxiliary R823 reserve
+decision needs. The actual R823 theorem claims an **integrated universal
+reserve >= demand** estimate on the same physical cutoff. To falsify
+that universal estimate it suffices to exhibit ONE physical flow for
+which the **reserve-minus-demand RATE at t=0 is negative**, provided
+the genuine real physical reserve and demand are continuous along
+that flow. Then the integrated difference is negative on a positive
+short-time interval. This avoids requiring a pointwise R853 identity
+at all real future states.
+
+The actual existing Agda R823 file proves
+\`At.actualFullRateIsReserveMinusDemand\`, while R853 proves its
+normalization to \`6(12*C-P+D)\`. These are already the correct physical
+finite signed operators *on the rational snapshot*; there is no
+need to duplicate their all-state formal algebra over reals to obtain
+an auxiliary counterexample.
+
+In the existing dashi_lean4/NSBControl/Rational345ShortTime.lean,
+\`actualEightModeR823_refuted_of_seed_only\` uses the **concrete**
+eight-mode Galerkin field and the literal six-mode seed. It assumes
+only two continuous real observables \`reserve\`, \`demand\` plus ONE
+initial-value source equality
+
+\`\`\`text
+realReserve(physical345Seed) - realDemand(physical345Seed)
+  = selectedRealRateFromSourceRows
+  = -28273644/125.
+\`\`\`
+
+It then constructs a local genuine REAL Fourier Galerkin solution and
+proves that the integral of reserve-minus-demand is strictly
+negative, hence the corresponding integrated demand exceeds reserve.
+The theorem DOES NOT presume a full real R853 equality at later times.
+
+The precise remaining source calculation is to instantiate reserve
+and demand from the **literal R822 comparable signed CC rows**, the
+**R813 nested four-helicity/quotient demand** and the viscosity-one
+dissipation, all on the real eight-mode state, and prove their one
+seed equality by the R823/R853 rational finite-sum calculation and
+the exact physical real helical normalization. This is an exact
+finite algebraic task, not a local-ODE or integration obstacle.
+It does NOT follow from defining reserve/demand backwards using
+the desired equality. Do not promote a Clay claim on this basis.
+
+New concrete same-source Lean owners now also include
+\`literalProjectedGalerkinRHS345\` and
+\`physicalEightModeField_real_local_solution\`, and the *literal*
+real helical H±, mixed, commutator, critical production/dissipation,
+physical seed and rate in \`Rational345ShortTime.lean\`. These
+source-written definitions/theorems still require kernel checks;
+the exact physical seed calculation was independently executed via
+SymPy and passed.
