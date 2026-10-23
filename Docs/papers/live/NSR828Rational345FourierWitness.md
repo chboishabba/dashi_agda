@@ -426,3 +426,49 @@ observable to the Lean field/rate and equating the R823 integrated payment
 to that **same real integral**. A proof that a chosen scalar is negative
 at t=0 without the full real Fourier formula is insufficient. No claim of
 a Lean kernel build or Agda R823 physical counterexample is made.
+
+
+### 2026-10-24 source theorem reconciliation: R853 was already the physical normal form
+
+Direct repo audit found
+`NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact.agda`.
+Its `At.signedRateNormalForm` proves ON THE SAME literal Agda
+packet/cutoff/time that R815 equals
+`6*(12*globalCommutator-production+(2nu-margin)*dissipation)`.
+At nu=margin=1 this is exactly the scalar formula in R829/R850.
+Earlier descriptions of the missing work as a generic pointwise signed-rate
+same-object proof were therefore stale. Do not recreate R741/R815/R853.
+
+The finite seed result is already paid inside the Agda selected rational
+carrier by R847 production/dissipation, R849 actual R692 work, R850 scalar
+evaluation, and R835's selected helical norms and reciprocals. R835
+**explicitly** makes NO global-physical-norm claim: values away from the
+support are dummy rationals. The selected-support pruning is indispensable
+for seed correctness, and a genuine real trajectory must use physical
+`sqrt(|k|²)` for all modes (not continue the rational defaults).
+
+In `dashi_lean4` these proof cuts are now on the EXISTING
+`NSBControl/Rational345ReserveWitness.lean` and
+`NSBControl/Rational345ShortTime.lean` surfaces:
+- cast every selected physical work/production/dissipation row Q->R and
+  prove their real sum and R853 rate normal form;
+- prove the real physical sqrt norms 3, 4, 5 and their rational-reciprocal
+  equality on the *selected* modes;
+- prove a direct physical-component seed identification theorem and
+  compose it with the real quadratic local ODE and real negative integral;
+- preserve the R823 reserve-minus-demand algebra and the contradiction
+  theorem for the same integrated real rate.
+
+**One true unclosed real-source obligation:** Give a concrete REAL Fourier
+coefficient state, its literal projected quadratic Galerkin RHS and globally
+physical real helical projectors, plus the equality of its coherent work,
+production and dissipation at the selected initial seed to the real casts of
+the Agda R850 actual physical rows. Then prove the R823/R853 pointwise
+reserve-minus-demand equality holds on that SAME real Fourier state and
+integrate that literal identity. The new Lean component-acceptance theorem
+still has these three exact real-source seed-equalities as hypotheses.
+They are not fictitiously discharged by matching row arrays.
+
+No Agda/Lean kernel check was run on these new edits. This is a narrowed
+source theorem audit and rigorous conditional real-time implication, not a
+certified R823 real-trajectory counterexample or Clay B.
