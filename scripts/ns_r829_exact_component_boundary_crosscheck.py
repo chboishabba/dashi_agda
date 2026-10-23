@@ -5,7 +5,6 @@ Execute the existing independent component producer rather than copying its
 results or inventing an Agda proof. The output is a falsifiable cross-check,
 not a kernel-certified same-object weld.
 """
-import ast
 import json
 import subprocess
 import sys
@@ -23,13 +22,11 @@ def check(rows,source):
         raise ValueError("wrong exact component producer")
     if rows.get("repository_agda_reification_complete") is not False:
         raise ValueError("unverified promotion in producer")
-    if source.count("Work.fixedOutputMixedProduct S")<8 or source.count("Work.fixedOutputCommutator S")<8:
-        raise ValueError("R829D no longer has exactly eight selected operator equations")
+    if source.count("Work.fixedOutputMixedProduct S") < 8 or source.count("Work.fixedOutputCommutator S") < 8:\n        raise ValueError("R829D lacks selected operator equations")
     import re
     for index in range(1,9):
         match=re.search(r"(?m)^k"+str(index).translate(str.maketrans("12345678","₁₂₃₄₅₆₇₈"))+r"\s*=\s*Z3.mode",source)
-        if match is None:
-            raise ValueError(f"missing physical mode k{index} in R829D")
+        if match is None:\n            raise ValueError(f"missing physical mode k{index} in R829D")\n        expected=EXPECTED_MODES[index-1]\n        values=re.findall(r"(?m)^k"+str(index).translate(str.maketrans("12345678","₁₂₃₄₅₆₇₈"))+r"\\s*=\\s*Z3\\.mode\\s+([^\\n]+)",source)\n        if len(values)!=1:\n            raise ValueError(f"ambiguous R829D mode k{index}")\n        coordinates=re.findall(r"(minus3|minus4|\\(\\+\\s*\\d+\\))",values[0])\n        parse=lambda s: -3 if s=="minus3" else -4 if s=="minus4" else int(re.search(r"\\d+",s).group())\n        if tuple(map(parse,coordinates)) != expected:\n            raise ValueError(f"R829D physical mode k{index} changed")
     outputs=rows.get("output_rows",{})
     works=[]
     for k in EXPECTED_MODES:
