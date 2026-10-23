@@ -12,7 +12,6 @@ module DASHI.Mathematics.Topology.AlexanderHornedC3CharactersExact where
 -- Primary source: Hatcher, Algebraic Topology, Example 2B.2.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Set₁)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
