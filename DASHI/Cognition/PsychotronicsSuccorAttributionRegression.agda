@@ -123,3 +123,9 @@ stillDoesNotVerifyTemporalMotion = refl
 thermalScreenDoesNotVerifyCalibration :
   Frames.instrumentCalibrationVerified Frames.thermalScreen ≡ false
 thermalScreenDoesNotVerifyCalibration = refl
+
+-- The atlas deliberately has eleven source instances. The five named-source
+-- / original-author Croft passages still share a single authorial root.
+sourceAtlasCountIsEleven :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 11
+sourceAtlasCountIsEleven = refl
