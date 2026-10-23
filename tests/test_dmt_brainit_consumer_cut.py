@@ -47,12 +47,37 @@ def test_reuses_canonical_consumer_theorem_without_unmerged_brainit_import():
 def test_data_intake_refuses_unverified_dataset_and_missing_rights(tmp_path):
     m = load_script("scripts/preflight_dmt_imaging_data.py")
     assert m.check_manifest(None, None)["status"] == "blocked"
-    payload = b"synthetic bytes (not clinical data)"
-    (tmp_path / "synthetic.bin").write_bytes(payload)
+
+    # Invented 40-file Git source inventory, NOT the downloaded public data.
+    # Exercise actual Git-blob hashing and the subject/condition firewall.
+    payload = b"synthetic unit test bytes (not participant data)"
+    rel = "fMRI/LongS01PCB.mat"
+    (tmp_path / "fMRI").mkdir()
+    (tmp_path / rel).write_bytes(payload)
+    blob_sha = hashlib.sha1(
+        b"blob " + str(len(payload)).encode("ascii") + b"\0" + payload
+    ).hexdigest()
+    fake_files = [
+        {"path": "fMRI/LongS%02d%s.mat" % (n, cond),
+         "size_bytes": len(payload), "git_blob_sha1": "0" * 40}
+        for n in range(1, 21) for cond in ("DMT", "PCB")
+    ]
+    for row in fake_files:
+        if row["path"] == rel:
+            row["git_blob_sha1"] = blob_sha
+    fake_tree = {
+        "source_repository": m.SOURCE_REPO, "source_commit": m.SOURCE_COMMIT,
+        "inventory": {"file_count": 40,
+                      "fmri_file_count": 40,
+                      "fmri_subjects_with_two_conditions": 20},
+        "files": fake_files,
+    }
+    receipt = tmp_path / "synthetic_source_tree.json"
+    receipt.write_text(json.dumps(fake_tree))
     entry = {
-        "subject_id": "synthetic_subject", "session_id": "one",
+        "subject_id": "S01", "session_id": "one",
         "condition": "placebo", "split": "test",
-        "relative_path": "synthetic.bin",
+        "relative_path": rel,
         "sha256": hashlib.sha256(payload).hexdigest(),
     }
     manifest = {
@@ -61,16 +86,33 @@ def test_data_intake_refuses_unverified_dataset_and_missing_rights(tmp_path):
     }
     path = tmp_path / "manifest.json"
     path.write_text(json.dumps(manifest))
-    assert m.check_manifest(tmp_path, path)["status"] == "admissible_manifest_only"
+    assert m.check_manifest(tmp_path, path, receipt)["status"] == "admissible_manifest_only"
+
     manifest["permission_reference"] = ""
     path.write_text(json.dumps(manifest))
-    assert m.check_manifest(tmp_path, path)["status"] == "blocked"
+    assert m.check_manifest(tmp_path, path, receipt)["status"] == "blocked"
     manifest["permission_reference"] = "SYNTHETIC UNIT-TEST ONLY"
+
     manifest["files"].append({**entry, "session_id": "two", "split": "train"})
     path.write_text(json.dumps(manifest))
-    r = m.check_manifest(tmp_path, path)
-    assert r["status"] == "blocked"
-    assert any("both train and test" in x for x in r["errors"])
+    split_error = m.check_manifest(tmp_path, path, receipt)
+    assert split_error["status"] == "blocked"
+    assert any("both train and test" in x for x in split_error["errors"])
+
     manifest["files"] = [{**entry, "sha256": "0" * 64}]
     path.write_text(json.dumps(manifest))
-    assert m.check_manifest(tmp_path, path)["status"] == "blocked"
+    assert m.check_manifest(tmp_path, path, receipt)["status"] == "blocked"
+
+    manifest["files"] = [{**entry, "condition": "DMT"}]
+    path.write_text(json.dumps(manifest))
+    assert m.check_manifest(tmp_path, path, receipt)["status"] == "blocked"
+
+    fake_files[1]["git_blob_sha1"] = "1" * 40
+    # The actual included PCB row must fail its Git source-object check.
+    for row in fake_files:
+        if row["path"] == rel:
+            row["git_blob_sha1"] = "1" * 40
+    receipt.write_text(json.dumps(fake_tree))
+    manifest["files"] = [entry]
+    path.write_text(json.dumps(manifest))
+    assert m.check_manifest(tmp_path, path, receipt)["status"] == "blocked"
