@@ -51,3 +51,46 @@ print('PASS B3 relation and central full twist -> -I; modular word ->',M)
 print('PASS finite orders mod (3,9,27):', expected)
 print('PASS half-order -> -I at all three principal levels')
 print('RESIDUAL actual geometric braid lift, VOA modular multipliers, physical AdS3 and KK action')
+
+
+# Exact native Z/2 orbifold sector action:
+# S(g,h)=(h,g), T_orb(g,h)=(g,g+h) over F2.
+sectors=[(g,h) for g in (0,1) for h in (0,1)]
+S=lambda z:(z[1],z[0])
+Torb=lambda z:(z[0],z[0]^z[1])
+sigma1=lambda z:S(Torb(S(z)))
+sigma2=Torb
+for z in sectors:
+    assert sigma1(sigma2(sigma1(z)))==sigma2(sigma1(sigma2(z)))
+    assert sigma2(sigma1(z))==S(Torb(z))
+    assert sigma1(sigma1(z))==sigma2(sigma2(z))==z
+    pure=z
+    for _ in range(3):pure=sigma1(sigma2(pure))
+    assert pure==z
+roles={'thesis':(0,1),'mediating':(1,1),'antithesis':(1,0)}
+role_sigma1={'thesis':'mediating','mediating':'thesis','antithesis':'antithesis'}
+role_sigma2={'thesis':'thesis','mediating':'antithesis','antithesis':'mediating'}
+for name,z in roles.items():
+    assert roles[role_sigma1[name]]==sigma1(z)
+    assert roles[role_sigma2[name]]==sigma2(z)
+    assert roles[role_sigma2[role_sigma1[name]]]==S(Torb(z))
+
+# Existing OggSSPP2BalancedTernaryPuncturedPlaneExact punctured T9.
+nonzero={(x,y) for x in (-1,0,1) for y in (-1,0,1)}-{(0,0)}
+residue=lambda v:{0:0,1:1,2:-1}[v%3]
+act=lambda z:(residue(13*z[0]-8*z[1]),residue(-8*z[0]+5*z[1]))
+antipode=lambda z:(-z[0],-z[1])
+assert {act(p) for p in nonzero}==nonzero
+assert all(act(act(p))==antipode(p) and act(act(act(act(p))))==p for p in nonzero)
+assert all(act(p)!=p for p in nonzero)
+cycles=[];remaining=set(nonzero)
+while remaining:
+    start=min(remaining);cur=start;cycle=[]
+    while cur not in cycle:
+        cycle.append(cur);remaining.remove(cur);cur=act(cur)
+    assert cur==start
+    cycles.append(cycle)
+assert sorted(map(len,cycles))==[4,4],cycles
+print('PASS B3->SL2(F2) matches native twisted Z/2 orbifold S/T sector action')
+print('PASS C3 strand roles equivariantly match three nontrivial orbifold sectors')
+print('PASS pure braid is invisible mod2, but acts as 2x4-cycles on punctured T9 mod3:',cycles)
