@@ -4,7 +4,7 @@
 
 ## Outcome of source investigation
 
-**32 document/source instances** are represented by a canonical `AttributedSource`; **18 screenshots** are keyed to SHA-256 of uploaded PNG files, not original social-media reels. These counts are *not* 32 independent confirmations or 18 separate experiments. Crosswalk preserved: earlier batch 10 stills / 2 accounts; later batch 8 stills / 6 more accounts.
+**38 document/source instances** are represented by a canonical `AttributedSource`; **18 screenshots** are keyed to SHA-256 of uploaded PNG files, not original social-media reels. These counts are *not* 38 independent confirmations or 18 separate experiments. Crosswalk preserved: earlier batch 10 stills / 2 accounts; later batch 8 stills / 6 more accounts.
 
 There are four different, non-identical objects that superficially share a coil or ring:
 - Bernd Nindl's **sphere-topped resonator** (fifth image of eight, `1000018569.png`) with pale serpentine bands and violet light; exact circuit unknown. The **seventh** image `1000018567.png` is a different open-loop clip with a creator reply naming an **Oudin Oscillator**. The historical resonator *family* is well documented; no reel/circuit continuity receipt shows the two are one construction.
@@ -29,7 +29,7 @@ The **[Revive Pro Tech iTorus i9 Heart Stone listing](https://reviveprotech.com/
 
 The peer-reviewed bibliographic coordinate for **Oleg D. Jefimenko**, *Operation of electric motors from atmospheric electric field*, *American Journal of Physics* **39**, 776–779 (1971), DOI [10.1119/1.1986281](https://doi.org/10.1119/1.1986281), was cross-checked with the West Virginia University author bibliography. It is the **same research lineage** as Jefimenko's 1973 book; the original 1971 article's full text was not page-inspected in this cut. It is therefore an improved original-source locator, **not new independent replication** or evidence for the viral “Pignatelli” label.
 
-All four newly discovered source families live in the *existing* source atlas with claim ceilings. **Five** additional document instances were added in this tranche: official app listing, reseller Heart Stone page, Aurumaya homepage, separate Aurumaya shop page, and 1971 AJP article. The previous 21 grew to 26, four copper-star discovery carriers brought that to 30, and two new Openhand documents bring this to **32 document instances**, not 32 independent source roots. The 18 screenshot hashes and existing user-provided original pixels are unchanged.
+All four newly discovered source families live in the *existing* source atlas with claim ceilings. **Five** additional document instances were added in this tranche: official app listing, reseller Heart Stone page, Aurumaya homepage, separate Aurumaya shop page, and 1971 AJP article. The previous 21 grew to 26, four copper-star discovery carriers brought that to 30, and two Openhand documents brought that to 32; **six source instances in the current psychometrics cut bring this to 38 document instances**, not 38 independent source roots. The 18 screenshot hashes and existing user-provided original pixels are unchanged.
 
 ## High-alpha new identification: first-batch copper-star and metallic sphere
 
@@ -75,11 +75,51 @@ Original hoe_math 2025–26 source links in that Culture owner (e.g. `/levels-1-
 
 The new Openhand primary documents occupy **two additional source entries**, bringing the atlas to **32 document instances** (one new authorial root), not independent corroborations. They modify the cultural taxonomy but **do not** displace native-reel recovery or actual field measurement from the physical Pareto frontier.
 
+## Empirical max-cut: what "5D" can mean in an actual study (not an iTorus claim)
+
+### The real 5D instrument and its naming collision
+
+**5D-ASC**, the *Five-Dimensional Altered States of Consciousness* questionnaire, exists in peer-reviewed psychometric research. The five original high-level questionnaire factors are **oceanic boundlessness, anxious ego dissolution, visionary restructuralization, auditory alterations and reduced vigilance**. This is a **factor count**, unrelated to spiritual “5D”, a fifth spacetime coordinate, hoe_math's fifth stage, a toroidal geometry or human electrocardiomagnetism. A spiritual teacher's statement that “we enter 5D” does not imply any defined score on 5D-ASC.
+
+Two particularly relevant, currently published studies show why the labels **cannot be treated as fixed natural kinds**:
+
+- Ewen Kervadec et al., [2026 French 5D-ASC validation](https://doi.org/10.1016/j.pnpbp.2026.111770), *Progress in Neuro-Psychopharmacology and Biological Psychiatry* 147:111770, DOI `10.1016/j.pnpbp.2026.111770`: **777** retrospectively self-reporting substance-related experiences; 11-subscale model fit better, but CFI **0.882** was marginal/below common 0.9 criteria. Cross-language validation **does not** imply an electrically driven device changes scores.
+- Kurt Stocker et al., [3D-ASCr revision](https://doi.org/10.1177/02698811251397328), published online **26 December 2025** and in the **May 2026** issue of *Journal of Psychopharmacology*, DOI `10.1177/02698811251397328`: **901 questionnaires from 398 participants in 16 psychedelic studies**, reanalysed factor structure and proposed **positive, distressing, perceptual** broad dimensions. Independent authors/data, **same questionnaire research family**. This is neither a permanent “ascension stage” nor treatment efficacy.
+
+Three more precisely bounded measurement precedents:
+
+1. Adam W. Hanley, Yoshio Nakamura, Eric L. Garland, [*Nondual Awareness Dimensional Assessment*](https://doi.org/10.1037/pas0000615) (2018; DOI `10.1037/pas0000615`): NADA-*S* state and NADA-*T* trait versions. Distinguishes immediate unity/nonduality claims from more stable dispositions; NADA-T's validated dimensions include self-transcendence and bliss.
+2. Katherine A. MacLean, Matthew W. Johnson, Robert R. Griffiths, [*Factor Analysis of the Mystical Experience Questionnaire*](https://doi.org/10.1111/j.1468-5906.2012.01685.x) (2012): MEQ30 four factors—mystical/unity, positive mood, time-space transcendence and ineffability—with original retrospective **psilocybin** validation samples of **1,602 and 440**. No automatic transport of clinical meaning to ordinary meditation or PEMF.
+3. Matthew M. Nour, Lisa Evans, David Nutt, Robin L. Carhart-Harris, [*Ego-Dissolution Inventory*](https://doi.org/10.3389/fnhum.2016.00269) (2016): eight-item EDI self-report, distinct from ego-inflation. No evidentiary bridge to paranormal cognition, lifespan moral development or 5D physics.
+
+**HeartMath ≠ hoe_math**: [HeartMath Institute's *Energetic Communication*](https://www.heartmath.org/research/science-of-the-heart/energetic-communication/) describes actual bioelectromagnetic heart fields alongside stronger *claimed* interpersonal information/energetic influence. The real ECG/magnetocardiographic phenomenon is not evidence for remote communication, a room-sized healing field or any spiritual 5D. HeartMath is an institute with its own source ownership; **hoe_math** is a distinct commentator whose sourced Levels system separates stages/lines/states/types. Don't assign their work to one another.
+
+### Study design that would actually discriminate a device-specific effect
+
+The useful first human study is not “prove entering another dimension”. It is: **does energising an identified coil alter a bounded self-report state above matched expectancy, relaxation and audio/vibration controls, and is any difference associated with a measured field?**
+
+A deliberately **unrun** protocol is now a typed `TorusPhenomenologyExperiment` slot in the existing `PsychotronicsSuccorAttributionRegression.agda`, reusing `DiscriminatingExperiment` rather than inventing a new theory:
+
+| Planned arm | Drive & controls | What this isolates |
+|---|---|---|
+| Active coil + matched audible input | Actual powered field, identical audio protocol | Full compound intervention |
+| Coil present, electrically sham + matched sound | Same object, display and sound cues; no magnet drive | Sound/ritual/expectation without field |
+| Sound-only, no active coil | Same audible programme, no active magnet | Audio-only effects; checks ritual/coil appearance |
+| Quiet guided-meditation control | Matched time, context and attention where feasible | Relaxation/practice-time baseline |
+
+**Outcome hierarchy:** preregister one primary immediate *self-reported* nondual/union measure (NADA-S candidate subject to population/wording transport checks). Secondary MEQ30 / EDI / 5D-ASC measures can be used only if their construct validity and multiple-testing plan are appropriate for the particular population and induction, not because all are called “consciousness”. Durable wellbeing, ethical development or objective perception are **different endpoints**, requiring separate longitudinal or behavioural tools and appropriate participant recruitment. Monitor adverse effects.
+
+**Essential confounds:** blinded/sham credibility and expectation (prefer independent ratings), actual coil/amplifier/spectrum/flux-density map and instrument noise floor, sham leakage and peripheral sensory cues, loudness and vibration, respiratory rate, heart rate, ECG/HRV and motion, time of day and previous experience. An HRV/coherence effect can simply arise from altered breathing; it is not a fifth-dimensional measurement. Electrical activation must remain professionally safe; do not expose volunteers to open high-voltage discharges or make health claims from pilot self-report.
+
+**Falsifier/interpretation:** If subjective scores improve equally with matched sound/sham, electromagnetic causality is not supported. If the powered field differs, the result may motivate controlled replication, but blinding, expectancy, amplifier noise/vibration and field-dependent sensory effects must be ruled out before crediting magnetic action. Even a replicated field-specific psychological effect **cannot establish a fifth physical dimension**. In existing Core, the synthetic `same reported unity, different powered state` two-world witness invokes `IntersectionalNonFactorability`, formally demonstrating why a coarse phenomenology label does **not recover intervention status**. It is a mathematical possibility construction, *not observed participants*.
+
+**Next Pareto pivot:** Since questionnaire instruments are already known and the original coil source candidate exists, **do not** create another questionnaire or spiritual ontology. Acquire native video, exact physical SKU/driver and independently recorded coil field before any participant testing; audit and adapt a published instrument only when that intervention is actually specified and ethics/feasibility are available.
+
 ## Minimal Pareto cutset
 
 | Order | Open specific obligation | What is paid | Lowest-cost discriminating next evidence | Exit condition |
 |---|---|---|---|---|
-| 0 | Preserve attribution, uploaded-object IDs, source role, document/version custody | **Paid source-side:** 32 attributed document instances; 18 actual PNG hashes; common-root distinctions | Review corresponding author-title-year/canonical URLs and three Agda modules | Formal kernel (when available) plus no source role/independence/authority promotion; **CI expressly out of scope** |
+| 0 | Preserve attribution, uploaded-object IDs, source role, document/version custody | **Paid source-side:** 38 attributed document instances; 18 actual PNG hashes; common-root distinctions | Review corresponding author-title-year/canonical URLs and three Agda modules | Formal kernel (when available) plus no source role/independence/authority promotion; **CI expressly out of scope** |
 | 1 | **Original copper star / sphere** now has a source-matched Starship/Rodin retail candidate | Indexed 24-point maker product + 1.25-inch magnetic sphere + 50-W amplifier, one Mini audio-vibration comparator, third-party Rodin caption and store directory | Native creator-to-store provenance, uninterrupted reel, photographed variant SKU and motion/reference with drive OFF/ON | Distinguish a mechanically vibrating neodymium sphere from camera reflections or asserted exotic force; no field/health validation inferred |
 | 1b | **Fifth Bernd tower:** Oudin-family resonator, segmented winding, or flashover/reflection | Visible sphere, repeated wavy bands, several luminous patches; Oudin primary literature and other builds exist | Original post/reel, schematic showing sphere-secondary-primary connection, unobstructed slow/ordinary frame sequence | One *same device* record tells whether arcs attach to winding, dielectric or other electrodes and which circuit it is |
 | 1c | Earlier independent purported spinning free-air “orb” | User report and earlier unrelated stills | Original continuous footage with stationary landmarks and exposure details | Distinguish physical rotating body, moving streamer tips, air ion-wind spinner or camera aliasing; no invented rotor |
@@ -88,7 +128,7 @@ The new Openhand primary documents occupy **two additional source entries**, bri
 | 4 | “Pignatelli” label and atmospheric electrostatic motor | Jefimenko 1973 already established *different* small atmosphere-driven motors | Original creator/inventor circuit provenance, charged collector current, shaft-load torque and angular speed | Identify creator apparatus, then distinguish `P_elec = V I` input/collector losses from `P_shaft = τ ω`; voltage without current/loaded power insufficient |
 | 5 | MAYU special hydration claims | Rotating carafe, maker marketing and critical chemistry sources | Specific preregistered water chemistry claim, matched aeration/stirring control and blind samples | Ordinary O2/CO2/pH changes measured without inventing a persistent H3O2 bulk phase |
 | 6 | Health/remote viewing/matrix/timeline narratives | Attributed historical claims only; no verified cross-device effect | Explicit endpoint and safe blinded experiment, independent repetitions | Separate endpoint-specific evidence; observation of arcs, patents or creator testimonials creates no medical/psychic proof |
-| 6b | 5D / hoe_math category clarification | Existing Culture/HoeMath formalisation and Openhand author-original 2026 definitions inspected; numerically similar labels shown nonidentical | Only if proposing a psychological outcome: operationalise explicit developmental line vs temporary state and validate it; keep spiritual cosmology as creator description | No 5D physical field claim, fifth-dimension or moral-development score imported by shared symbols |
+| 6b | 5D / hoe_math psychometric transport and true device-specific test | Validated source instruments NADA-S/T, MEQ30, EDI, 5D-ASC with divergent revised factor models; HeartMath separately attributed | Preregister self-report outcome, examine validity in an appropriate non-drug device/meditation sample, trial 4 properly blinded safe arms *only after* exact coil field/acoustic controls | A causal signal with predeclared limits, not 5D dimension, higher moral level or field-to-mind metaphysics |
 | 7 | Ibrahim/QID/DOI/Dewey metadata | Canonical source lines and roles available | Only a concrete same-object missing coordinate exposed by a consumer | Attach an actually inspected coordinate; no nearest-match substitution or extra graph breadth |
 
 ### Pareto stop/branch rules
