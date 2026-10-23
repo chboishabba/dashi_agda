@@ -15,6 +15,8 @@ FILES={
  "C_D_source":"DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Exact.agda",
  "ABCD_rollup":"DASHI/Physics/Closure/NSABCDMaxCut20261007Exact.agda",
  "Clay_propositions":"DASHI/Physics/Closure/NSConcreteLiteralClayABCDRunTargetExact.agda",
+ "R851_zero_mode":"DASHI/Physics/Closure/NSTriadKNR650Rational345FullForcingSupportRound851Exact.agda",
+ "R852_vector":"DASHI/Physics/Closure/NSTriadKNR650Rational345FullVectorEvaluationRound852Exact.agda",
 }
 EXPECTED_FALSE={
  "A_same_object": ["aActualKernelSameObjectInstantiationClosedHere",
@@ -37,11 +39,26 @@ def reconcile(root=ROOT):
                 raise ValueError(f"{name}: changed or missing {var}; review proof dependencies")
             reported[var]=False
         if name=="B_preferred_R832":
-            for leaf in LEAVES:
-                pattern=r"(?m)^decisionLeafClosed\s+"+re.escape(leaf)+r"\s*=\s*(true|false)\s*$"
-                if re.findall(pattern,content)!=["false"]:
-                    raise ValueError(f"R832 leaf {leaf} changed; independent mathematical review needed")
-                reported[leaf]=False
+            closed = re.findall(
+                r"(?m)^decisionLeafClosed\\s+concreteRepositoryVectorEvaluation\\s*=\\s*\\n\\s*(R852\\.[A-Za-z0-9_]+)\\s*$",
+                content,
+            )
+            if closed != ["R852.round852FullR829DRepositoryVectorRecordInhabited"]:
+                raise ValueError("R832 R829D proof owner changed: inspect proof terms")
+            remaining = re.findall(
+                r"(?m)^decisionLeafClosed\\s+concreteRealFiniteODETransport\\s*=\\s*(true|false)\\s*$",
+                content,
+            )
+            if remaining != ["false"]:
+                raise ValueError("R832 real ODE transport status changed")
+            reported["concreteRepositoryVectorEvaluation_source_written"] = True
+            reported["concreteRealFiniteODETransport"] = False
+        if name=="R851_zero_mode":
+            if "R436.projectedNonlinearityAtZeroIsZero" not in content or "R848.mixedFilterEmptyAtInactiveNonzero" not in content:
+                raise ValueError("R851 lost the disjoint zero/nonzero mode proof")
+        if name=="R852_vector":
+            if "physicalR829D = R.activeEvaluationBuildsR829D activeVectors" not in content:
+                raise ValueError("R852 physical R829D construction missing")
         report["sources"][name]={
             "path":relative,
             "sha256":hashlib.sha256(content.encode()).hexdigest(),
@@ -49,7 +66,8 @@ def reconcile(root=ROOT):
         }
     report["reconciliation"]={
         "preferred_periodic_B":"R823-R832 signed reserve, not old B4-only path",
-        "R832_concrete_vector_evaluation_closed":False,
+        "R832_concrete_vector_evaluation_source_written":True,
+        "R832_concrete_vector_evaluation_kernel_checked_here":False,
         "R832_real_ODE_transport_closed":False,
         "A_physical_same_object_closed":False,
         "legacy_B_analytic_frontier_closed":False,
