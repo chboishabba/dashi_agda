@@ -53,3 +53,28 @@ remain normative and are preserved verbatim in
 read that file before making repository changes.** This root file is the
 front-door style contract; the linked operational notes are part of the same
 agent instructions.
+
+## Navier–Stokes: canonical workset before Round files
+
+For any NS task, run `python scripts/ns_canonical_focus.py --route <goal>`
+(e.g. `R823`, `B`, `B4`), then read the primary owner first. The registry
+lives in `config/ns-round-extraction-targets.json`, backed by the merged
+Round extractor from PR #1232. It is routing evidence, not proof authority.
+
+Do not grep or load the entire RNNN archive into context, infer thousands
+of independent obligations from its package count, or mint a new
+`RoundNNNExact.agda`/`RNNN` Lean implementation before checking the
+canonical route and its existing theorem dependencies. Inspect one exact
+historical declaration using `--historical-symbol` only if still needed.
+
+For the auxiliary R823 reserve decision, reuse
+`dashi_lean4/NSBControl/Rational345R823DecisionFreeze.lean` and its
+literal R760/R830/Round71 sources. That source-written negative-reserve
+route is NOT the unforced Clay B theorem, nor kernel-certified by metadata.
+The positive B estimates and continuation have their own canonical owners.
+
+Guard newly added numbered source files with
+`python scripts/ns_canonical_focus.py --guard-new-rounds <base-ref>`;
+a new numbered unit requires an explicit, independently justified
+mathematical need and source attribution. Preserve old theorem-bearing
+history; don't delete or mechanically alias it without same-object proof.
