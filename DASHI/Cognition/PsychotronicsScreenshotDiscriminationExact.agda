@@ -144,11 +144,12 @@ stillAtlas =
   curvedArcCaption ∷ copperWide ∷ copperMedium ∷
   copperClose ∷ []
 
-stillAtlasCount : sourceCountPlaceholder ≡ sourceCountPlaceholder
-stillAtlasCount = refl
-  where
-    sourceCountPlaceholder : Nat
-    sourceCountPlaceholder = 10
+countStills : List ScreenshotEvidence → Nat
+countStills [] = zero
+countStills (_ ∷ frames) = suc (countStills frames)
+
+stillAtlasHasTenFrames : countStills stillAtlas ≡ 10
+stillAtlasHasTenFrames = refl
 
 -- OSINT acquisition and evidentiary admission are separate. The hashes
 -- identify only screenshots; no social-media reel URL, original uploader
@@ -237,5 +238,3 @@ noCalibratedTemperatureFromScreen ()
 noCroftIdentityFromAppearance : CroftWiringProvesInstagramDeviceIdentity → ⊥
 noCroftIdentityFromAppearance ()
 
-unpaidSourceAtlas : Atlas.Source.SourceKind
-unpaidSourceAtlas = Atlas.Source.archivalSource
