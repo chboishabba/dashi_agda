@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Biology.MoonshineOrbifoldModularSectorActionExact as Orb
 import DASHI.Moonshine.JInvariant369BraidModularGeneratorWeldExact as Mod
+import DASHI.Biology.TriadicBraidDialecticExact as TriadicBraid
 
 -- Orb.T(g,h)=(g,g+h) is the *lower* matrix mod 2.  The modular
 -- upper shear T must be conjugated by the existing sector swap S.
@@ -102,8 +103,6 @@ sameWordHasNonidentityIntegralMonodromy ()
 -- sectors; it is NOT an equivalence of the physical strands with orbifold
 -- Hilbert states or modules.
 ------------------------------------------------------------------------
-
-import DASHI.Biology.TriadicBraidDialecticExact as TriadicBraid
 
 roleToNonzeroOrbifold :
   TriadicBraid.DialecticalStrandRole → Orb.OrbifoldSector
