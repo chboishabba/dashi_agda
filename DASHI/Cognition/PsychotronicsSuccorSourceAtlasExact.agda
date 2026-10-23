@@ -255,6 +255,51 @@ jefimenkoElectrostaticMotors = Source.mkNoDOISource
   "primary-author account of small electrostatic motors operated from earth-field antennas with explicitly unresolved larger-motor power; does not identify the viral 'Pignatelli motor' or yield a power measurement for that post"
   Source.publicAttribution
 
+itorusAppPublisher : Source.AttributedSource
+itorusAppPublisher = Source.mkNoDOISource
+  "Itorus, LLC (Google Play developer); iPyramids named as hardware maker"
+  "iTorus: official PEMF Therapy application listing"
+  "Google Play app identifier com.goodbarber.itorus, public listing updated 13 July 2026; inspected 24 October 2026"
+  "2026"
+  "https://play.google.com/store/apps/details?id=com.goodbarber.itorus"
+  Source.practitionerSource
+  "direct app-publisher copy invokes Premium RIFE frequencies, Zero Point, 5D, biofield protection, EMF/5G shielding, chakra repair and pineal activation. This pays explicit modern thematic vocabulary, not effectiveness or the exact app session pictured"
+  Source.publicAttribution
+
+itorusHeartStoneReseller : Source.AttributedSource
+itorusHeartStoneReseller = Source.mkNoDOISource
+  "Revive Pro Tech (reseller)"
+  "iTorus i9 Heart Stone: portable PEMF device listing"
+  "commercial third-party product page inspected 24 October 2026; multiple stated coverage diameters on same named product page"
+  "undated product listing"
+  "https://reviveprotech.com/products/itorus-i9-heart-stone-portable-pemf-device"
+  Source.practitionerSource
+  "same page markets 55-ft, 30-ft and 24-ft diameters in distinct sections, plus nominal 8.5 ohm/channel rating; no common field threshold or model revision specified, and not the exact pictured SKU"
+  Source.publicAttribution
+
+aurumayaHomeCatalogue : Source.AttributedSource
+aurumayaHomeCatalogue = Source.mkNoDOISource
+  "Aurumaya"
+  "AURUMAYA: Ancient Frequency Tools of the Future"
+  "maker's home/catalogue landing page inspected 24 October 2026"
+  "undated catalogue"
+  "https://www.aurumaya.com.au/"
+  Source.practitionerSource
+  "first-party commercial co-listing of Tesla multi-wave oscillator disk, 369 ritual elixir, 333-MHz tensor pendants and Croft-named QUBIT crystals; a same-vendor vocabulary cluster, not proof of physical relations or independent corroboration"
+  Source.publicAttribution
+
+jefimenko1971 : Source.AttributedSource
+jefimenko1971 = Source.mkDOISource
+  "Oleg D. Jefimenko"
+  "Operation of electric motors from atmospheric electric field"
+  "American Journal of Physics 39, 776-779 (1971); publication identity verified against West Virginia University author bibliography"
+  "1971"
+  "10.1119/1.1986281"
+  "https://doi.org/10.1119/1.1986281"
+  Source.academicArticleSource
+  "original same-author peer-reviewed publication of reported atmospheric-field motor operation; primary article full text not independently page-inspected in this cut; neither an independent experiment relative to 1973 monograph nor confirmation of Pignatelli identity"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -265,7 +310,9 @@ sourceAtlas = Source.mkSourceAtlas
    ipyramidsI9 ∷ aurumayaQubit ∷ oudinHistoricalDiagram ∷
    mayuVortex ∷ aapStructuredWater ∷ atmosphericFieldMill ∷
    oudinBeharyRestoration ∷ oudinBeharySphere ∷
-   guilleminotOudinDiagram ∷ jefimenkoElectrostaticMotors ∷ [])
+   guilleminotOudinDiagram ∷ jefimenkoElectrostaticMotors ∷
+   itorusAppPublisher ∷ itorusHeartStoneReseller ∷
+   aurumayaHomeCatalogue ∷ jefimenko1971 ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -278,6 +325,7 @@ data LineageRoot : Set where
   mayuManufacturerRoot aapFactCheckRoot atmosphericResearchRoot : LineageRoot
   beharyRestorationRoot : LineageRoot
   guilleminotHistoricalManualRoot jefimenkoAuthorRoot : LineageRoot
+  itorusAppPublisherRoot itorusRetailCopyRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -499,6 +547,56 @@ jefimenkoSmallMotorField = mkBound
   attributedAuthorReport
   "reported primary experiment, not independent exact-measurement receipt; Pignatelli name/creator circuit absent; input/output loading and antenna charging must be measured on that device"
 
+itorusRifeLanguage : ClaimBound
+itorusRifeLanguage = mkBound
+  "The iTorus app publisher itself lists RIFE frequencies, zero-point access, 5D consciousness, biofield shielding, chakra and pineal activation"
+  itorusAppPublisher
+  "Google Play com.goodbarber.itorus, About this app, public version updated 13 July 2026"
+  itorusAppPublisherRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "marketing vocabulary only; not evidence of waveform reproduction, disease treatment or consciousness effects; product/hardware maker and app publisher must remain distinct parties"
+
+itorusRetailCoverageConflict : ClaimBound
+itorusRetailCoverageConflict = mkBound
+  "One Revive Pro Tech i9 Heart Stone page gives nominal coverage diameters 55 feet, 30 feet, and 24 feet in three separately labelled sections"
+  itorusHeartStoneReseller
+  "Hero near heading: 55 ft; Whole-House Recovery text: 30 feet; 360 Field Coverage section: 24 feet; inspected 24 October 2026"
+  itorusRetailCopyRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "internal copy discrepancy rather than proof the exact same physical test used comparable threshold or drive; unresolved provenance of each number"
+
+itorusImpedanceVariants : ClaimBound
+itorusImpedanceVariants = mkBound
+  "iPyramids branded i9 description reports 7.0 ohms/channel while reseller i9 Heart Stone advertises 8.5 ohms/channel"
+  itorusHeartStoneReseller
+  "Revive Pro Tech Technical Specs 8.5 ohm/channel; compare existing ipyramidsI9 attributed source 7.0 ohm/channel"
+  itorusRetailCopyRoot
+  Diligence.contextualEvidence
+  attributedAuthorReport
+  "different variants, production revisions, impedance versus DC resistance, or copy error unresolved; do not posit a single experimentally measured contradiction"
+
+aurumayaSharedVocabulary : ClaimBound
+aurumayaSharedVocabulary = mkBound
+  "Aurumaya catalogues Tesla multi-wave oscillator disks, 333MHz tensor jewellery, 369 elixirs and quartz Succor Punches in the same commercial house"
+  aurumayaHomeCatalogue
+  "AURUMAYA home/catalogue sections Frequency Jewellery, ELIXIRS and New Arrival"
+  aurumayaMakerRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "co-marketing cluster, not a same-source technical design genealogy, scalar-energy demonstration or a second independent Aurumaya witness"
+
+jefimenko1971Bibliography : ClaimBound
+jefimenko1971Bibliography = mkBound
+  "WVU's Jefimenko bibliography records a 1971 American Journal of Physics article on atmospheric electric motor operation"
+  jefimenko1971
+  "AJP 39 (1971), 776-779; DOI 10.1119/1.1986281"
+  jefimenkoAuthorRoot
+  Diligence.contextualEvidence
+  attributedAuthorReport
+  "bibliographic identity and same-author provenance, not a new experimental reproduction; full article extraction and data remain a separate obligation"
+
 reichSeparation : ClaimBound
 reichSeparation = mkBound
   "Museum distinguishes Reich's cloudbuster from later Welz/Croft orgonite, quartz-and-resin devices"
@@ -664,6 +762,21 @@ jefimenkoMotorClaimOnly : BoundedRelation
 jefimenkoMotorClaimOnly = bounded-relation
   "Jefimenko's 1973 atmospheric-field motor report" "Pignatelli-labelled viral motor"
   historicalMechanismPrecedentOnly jefimenkoSmallMotorField false refl false refl
+
+itorusExplicitRifeBridge : BoundedRelation
+itorusExplicitRifeBridge = bounded-relation
+  "Official iTorus app publisher wording" "Rife-frequency / zero-point / 5D / chakra cluster"
+  contemporarySelfAttribution itorusRifeLanguage false refl false refl
+
+itorusRetailClaimsUncalibrated : BoundedRelation
+itorusRetailClaimsUncalibrated = bounded-relation
+  "Single i9 Heart Stone reseller listing" "55 / 30 / 24 ft advertised coverage"
+  commercialSpecificationOnly itorusRetailCoverageConflict false refl false refl
+
+aurumayaCommercialVocabularyBridge : BoundedRelation
+aurumayaCommercialVocabularyBridge = bounded-relation
+  "Aurumaya house catalogue" "Tesla / 369 / 333 MHz tensor / Succor Punch"
+  contemporarySelfAttribution aurumayaSharedVocabulary false refl false refl
 
 -- Imported source-attribution laws are used directly; no new source/role
 -- ontology is needed. The proof obligations are the existing fields.
