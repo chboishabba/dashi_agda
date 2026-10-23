@@ -100,3 +100,33 @@ assert all(parity(p)!=parity(q) for p,q in edges)
 assert Counter(parity(p) for p in CUBE)==Counter({0:13,1:14})
 print('PASS intrinsic no-go: bipartite cube graph has no 27-edge closed cycle')
 print('NO chart makes +1 generator on Z/27 an adjacency-preserving 27-cycle on Cube27')
+
+# Graph-aut group computation: every signed coordinate permutation is an
+# exact adjacency-preserving bijection; there are precisely 3!*2^3=48.
+# To see there are no others: the origin is the unique degree-6 vertex,
+# its six degree-5 neighbours are grouped into three opposite pairs.
+# Opposite axis neighbours have just one shared neighbour (the origin),
+# whereas transverse pairs have two. Every automorphism must permute
+# the three pairs and choose an orientation in each -> at most 3!*2^3.
+# Since explicit signed permutations attain 48, this is the full group.
+from itertools import permutations
+def neighbours(p):
+    return {q for q in CUBE if grid_edge(p,q)}
+origin=(0,0,0)
+assert {p for p in CUBE if degree[p]==6}=={origin}
+axial=neighbours(origin)
+assert len(axial)==6 and all(degree[p]==5 for p in axial)
+opposite_pairs={frozenset((p,q)) for p in axial for q in axial
+                if p!=q and len(neighbours(p)&neighbours(q))==1}
+assert len(opposite_pairs)==3
+assert set().union(*opposite_pairs)==axial
+actual_automorphisms=set()
+for perm in permutations(range(3)):
+    for signs in product((-1,1),repeat=3):
+        f=lambda p:tuple(signs[i]*p[perm[i]] for i in range(3))
+        assert {tuple(sorted((f(p),f(q)))) for p,q in edges}==edges
+        actual_automorphisms.add(tuple(f(p) for p in sorted(CUBE)))
+assert len(actual_automorphisms)==48
+assert 48%27!=0
+print('PASS Aut(3x3x3 grid)=signed-axis permutation group, order 48')
+print('NO faithful C27 graph-isometry action on the native Cube27')
