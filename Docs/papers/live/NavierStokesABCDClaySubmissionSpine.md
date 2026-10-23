@@ -472,13 +472,30 @@ Existing theorem-bearing owners already provide:
   finite slot chart is executable and the earlier quantitative local-Lipschitz
   estimate already applies through it.
 
-A prior handoff named Lean modules `Rational345LocalODE`,
-`Rational345QuadraticODE`, and `Rational345ShortTime`. **These names were
-not located in the connected `dashi_lean4` default-branch code index or
-at their presumed root paths in the 2026-10-23 direct audit.** Do not claim
-independent Lean kernel receipts for those modules from this manuscript
-reference. The finite-dimensional analytic statements themselves follow
-directly from classical real polynomial ODE theory.
+**Confirmed source location (2026-10-24):** The earlier audit looked
+in the WRONG directory. All three theorem-bearing Lean modules are present
+on the `dashi_lean4` default branch under:
+`NSBControl/Rational345LocalODE.lean`,
+`NSBControl/Rational345QuadraticODE.lean`, and
+`NSBControl/Rational345ShortTime.lean`. The exact rational arithmetic
+is in `NSBControl/Rational345ReserveWitness.lean`. The existing
+`NSBCyclicOrbit` Lean library already includes these files.
+
+The `Rational345ShortTime` owner now also proves
+`NSBControl.Rational345RealSource.snapshot_rate_real_exact` (the
+actual rational witness mapped to the real scalar),
+`exists_real_negative_signed_integral` (real quadratic local ODE
+plus continuous rate and EXACT seeded value yield a negative real integral
+on some positive interval), and
+`negative_real_integral_refutes_reserve` (the real-source R823
+logical endpoint under the same-integral identity).
+The new theorem removes the need to assume the enormous R828 quantitative
+Lipschitz budget merely to secure SOME positive interval; those original
+exact bounds remain available when a prescribed rational horizon matters.
+The physical-source *instantiation* is not automatic: one must show the
+literal full real Fourier rate and field are those consumed by the Lean
+theorem and the R823 signed-reserve identity on the SAME trajectory.
+No Lean kernel build was executed in this session.
 
 **2026-10-23 current mathematical cut (post-R850/R852):** The later proof
 owners already establish literal instantaneous R692 work, critical
