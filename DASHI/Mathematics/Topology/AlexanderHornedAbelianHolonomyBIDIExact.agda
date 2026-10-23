@@ -24,6 +24,7 @@ open import DASHI.Core.Prelude
 import DASHI.Mathematics.Topology.AlexanderHornedC3FiniteStageExact as Finite
 import DASHI.Mathematics.Topology.AlexanderHornedC3ExteriorBridge as Bridge
 import DASHI.Mathematics.Topology.AlexanderHornedC3CharactersExact as Characters
+import DASHI.Mathematics.Topology.AlexanderHornedC3OuterDetectorExact as Outer
 import DASHI.Core.FormalClaimTransportGeometryExact as Transport
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
@@ -222,3 +223,31 @@ noBIDIRecoveryOfFullLoopsFromAbelianHolonomy :
 noBIDIRecoveryOfFullLoopsFromAbelianHolonomy G A chi essential =
   Transport.claimNonTransportWitnessBlocksTransport
     (essentialMeridianIsAbelianNonDescent G A chi essential)
+
+
+------------------------------------------------------------------------
+-- SAME-OBJECT DUAL CONSUMER / STEELMAN: ABELIAN BLINDNESS VS
+-- NONABELIAN OUTER-ACTION DETECTION.
+--
+-- Both halves concern the SAME G and the SAME C3 rotateLoop operation.
+-- The nonabelian detector quotient is supplied as a premise; the
+-- abstract theorem does not construct the geometric embedding or A5^3.
+------------------------------------------------------------------------
+
+pairedFlatHolonomyBlindAndOuterActionDetectable :
+  (G : Bridge.EquivariantMeridianGroup) →
+  (A : AbelianHolonomyTarget) →
+  (generation : Characters.MeridianGeneration G) →
+  (chi : AbelianCharacter G A) →
+  (Q : Outer.EquivariantQuotientDetector G) →
+  ((∀ x →
+      image chi (Bridge.rotateLoop G x) ≡ image chi x)
+    ×
+    (∀ g →
+      (∀ x →
+        Bridge.rotateLoop G x ≡ Outer.sourceInner G g x)
+      → ⊥))
+pairedFlatHolonomyBlindAndOuterActionDetectable G A gen chi Q =
+  allAbelianCharactersBlindToC3Rotation G A gen chi
+  ,
+  Outer.rotationCannotBeInnerIfDetectorExists G Q
