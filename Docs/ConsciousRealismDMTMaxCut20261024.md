@@ -60,3 +60,59 @@ Potential Agda commands, **not claimed run**:
 | P2 | Existence of independent DMT entities | **Not established** | Even a signal requires ordinary-channel exclusion and replication; ontology remains nonunique |
 
 **Max-cut conclusion:** The mathematical obstruction is observational equivalence, so further nominal restatements have low alpha. The decisive unresolved bridge is independently constrained, calibrated, same-object physical and information-theoretic measurement. Cite original authors for source mathematics and hypotheses, DASHI for derivations, and no one for empirical claims that have not been observed.
+
+
+## Existing psychedelic prior-art dependency graph — recovered 2026-10-24
+
+**Status/attribution:** These are extant DASHI source-bounded formal carriers, not new mathematical discoveries or empirical results of PR #1243. Cite named original source authors *through their existing source atlases*; DASHI owns only its formal adaptations and cross-source synthesis. Treat the original 2026 DMT paper as a testable speculative hypothesis, not confirmed entity ontology. Do not collapse psilocybin/LSD findings into DMT clinical findings.
+
+### Reuse existing source-backed owners instead of adding numbered duplicates
+
+| Existing Agda owner | Reusable content | Claim ceiling / obligation |
+|---|---|---|
+| DASHI/Biology/Kluver5HT2AMolecularProteinInstantiationExact.agda | Molecular identities, comparative 5-HT2A cryo-EM (including DMT in the Gumpper comparison); receptor structure provenance | DMT crystal/cryo-EM ligand inclusion is not DMT receptor occupancy in people, a brain-state kernel or phenomenology |
+| DASHI/Biology/FiveHT2ARecognitionStateSpaceExact.agda | Same ligand under different receptor/environment states | Molecular identity does not determine signalling |
+| DASHI/Biology/FiveHT2ASignalingDialecticExact.agda | Source-conditioned Gq/Gi/arrestin contrasts; different assays protected from flattening | No universal pathway or quantitative circuit readout |
+| DASHI/Biology/FiveHT2AProtocolIndexedSignalTransportExact.agda | Protocol-indexed transducer, candidate signal-to-neural transport; explicit gaps | Missing same-ligand time course, occupancy, quantitative electrophysiology and aligned visual readout |
+| DASHI/Biology/FiveHT2AVisualCortexBioelectricBridgeExact.agda | Source-bound cell-type-specific V1 gain, calcium, firing and oscillatory observations | Animal/cell measures cannot alone establish human hallucination or qualia |
+| DASHI/Cognition/FiveHT2AVisualModeObservationBridgeExact.agda | Mode-geometry and Klüver/log-polar target; residual/calibration obligations | Need spatially resolved retinotopic brain-field, freeze projection before report comparison |
+| DASHI/Cognition/LogPolarKluverDerivationExact.agda | Finite geometry of spiral, cortical magnification / projection | Form constants recur across conditions; not entity or symbolic meaning evidence |
+| DASHI/Biology/PsychedelicVisualOperatorAlgebra.agda | Seven distinct perceptual operators, OEV/CEV continuum, endogenous generation, temporal retention and pattern completion | Parameters explicitly uncalibrated; model does not prove complete phenomenology |
+| DASHI/Biology/PsychedelicAttractorReweightingBoundary.agda | Prior precision, basin/motif selection, lowered thresholds, reachability and predictable structural vision | Candidate, not fixed drug law, entropy biomarker or recovered memory |
+| DASHI/Cognition/PsychedelicNetworkDiffusion.agda | 2-network segregation/cross-talk illustrative transition profile | Hand-chosen integers, not fits; BOLD functional connectivity ≠ molecular diffusion |
+| DASHI/Biology/Psychedelic5HT2AAttentionBoundaryExact.agda | Receptor -> network evidence -> candidate altered salience/endogenous capture -> no entity-channel inference | LSD source effects do not license DMT entity communication; canonical boundary explicitly sets telepathicEntitySignalEstablished=false |
+| DASHI/Biology/FiveHT2AProjectionTowerExact.agda | Proven (finite toy) many-to-one recognition -> signalling -> circuit -> percept projection | Non-invertible projection and lack of calibrated percept map |
+| DASHI/Biology/PsilautNetworkResponseGeometryExact.agda | Source-conditioned group-summary baseline collision, psilocybin-5mg response separation, contrastive intervention refinement | Distinct treatment-specific, cohort-level psilocybin evidence; not DMT, not deterministic individual brain law |
+| DASHI/Core/ContrastiveInterventionResponseExact.agda | Generic control/baseline vs intervention observation and strict-refinement lemma | Use for preregistered and stratified response study; don't equate association with causation |
+| DASHI/Core/DiscriminatorSynthesisExact.agda | Observable collision, separating bundle, nuisance robustness, prospective consumer closure | A synthetic separator requires measured/scored validated readout to support any real-world claim |
+| DASHI/Governance/AnomalousTemporalProofSearchExperimentAdmissionExact.agda | Consumer-relative evidence, admissible experiment routes and rejection of "experience therefore psi" | Must state which evidence consumer and which axis each proposed DMT design pays |
+| DASHI/Governance/AnomalousExperimentParetoFibreExact.agda | Experimental selection after separation + ethical/authority admissibility, nuisance/cost Pareto | Its explicit ethics/authority witnesses are synthetic fixtures, **not real IRB approval** |
+| DASHI/Governance/AnomalousConsumerIndexedObligationFibreExact.agda | Distinct axes for phenomenal reliability, anomaly, replication, mechanism and ontology | Psychotropic subjective reports cannot close a mechanism or ontology consumer |
+| DASHI/Governance/PsilocybinOutcomeConditionedSequentialExperimentExact.agda | Sequential efficacy then attribution/blinding design (separate use case) | A psilocybin efficacy signal does not prove pharmacological causation or DMT agent ontology |
+| DASHI/Governance/ConsciousnessPhysicalDiscriminatorSynthesisExact.agda | Existing model collision and physically separating coordinate requirements | Schematic discriminator must be instantiated with measured physical coordinates |
+| DASHI/Governance/PsychedelicIndigenousAuthorityIntersectionalExact.agda | Separates biomedical research, participant consent, Indigenous knowledge authority, community permission and benefits | Biomedical permission is not ceremonial/Indigenous permission; similarity transfers no authority |
+
+### Formal consequence of reusing the perceptual prior art
+
+The pre-existing seven-operator model is a much stronger **endogenous** alternative than "random hallucination": altered gain, completion, retention, prior precision and network coupling can generate coherent, compelling, seemingly autonomous percepts as a mathematical candidate. Nevertheless, its parameters and subjective mapping are uncalibrated and cannot currently account for every entity-report feature. No experimental falsification of the hypothesis is claimed here.
+
+Importantly, deriving additional geometry and report statistics as functions F(Q) of the **same observed transition law Q** does not disambiguate identical internal/external attributions of Q. The newly extended Agda theorem derivedPsychedelicFeaturesCannotUniquelyDecodeOrigin makes that conditional no-decoder statement explicit. Independent data from a new intervention can refine the observational fibre, but only after a validated calibrated measurement is provided.
+
+For preregistered inaccessible-target studies, targetDependentResponseExcludesTargetBlindModel proves an **abstract conditional** criterion: a target-conditioned response-mass difference excludes a model with target-independent response mass if the claimed equalities would otherwise hold. It is not evidence a difference has been measured and it does not uniquely identify a conscious entity (ordinary leakage remains an alternative).
+
+### Consumer-specific hypothesis ladder
+
+- **H0 (restricted endogenous)**: a source-bounded receptor/signalling/circuit/visual-generator chain; randomised concealed Z does not causally enter the participant response after explicitly declared channels are excluded. It can still generate coherent entity reports.
+- **H1 (window expansion with fixed Q)**: a nested visible-state family V0 subset V1 of one Q. Predicts trace-of-trace equality, **also satisfiable by ordinary Markov chains**. It is not a source-specific test of conscious realism.
+- **H2 (pharmacologically modified Q_c)**: receptor/network/percept perturbation alters Q with concentration/time. No unconditional sober-vs-DMT trace equality. Require concentration/participant/time-stratified calibrated measurements rather than collapsing distinct intervention responses.
+- **H3 (independent information-carrying channel)**: after locked concealed targets, leakage exclusion and signal/cooperation restrictions, response distribution retains a statistically and causally credible target dependency. Predictive restrictions must be declared before data; successful anomalous transfer still does not identify independent conscious beings.
+
+### Next constrained experiment
+
+1. Freeze ligand, receptor/brain readouts, task, population strata, within-person concentration-time index, and a common percept/report dictionary. Do not extrapolate the PSILAUT group fixture to DMT individuals.
+2. Use protocol-indexed quantitative receptor/neural measurements and randomized blinded target tasks **on distinct analysis axes**: within-subject perturbational response versus inaccessible-information accuracy.
+3. Hold out data by participants and by sessions, and compare fitted constrained H0/H1/H2/H3 on the same observation space, with preregistered likelihood/scoring and leakage/nuisance checks.
+4. Require Ethics/Authority in the correct real-world jurisdiction and provenance permissions; synthetic Agda admission records are not authorizations.
+5. Update the **existing** empirical source atlases or measurement owners on genuine new source evidence. Do not fabricate a DMT sample, a concentration-to-kernel identification, or a source author contribution.
+
+**Research frontier after prior-art recovery:** The major missing object is now more precise: a *single-source-and-protocol-aligned calibrated DMT receptor/circuit/experience transition map*, with a separate adversarial concealed-information test. The formal ingredients, toy degeneracy results, and experiment-selection infrastructure mostly pre-exist.
