@@ -6,6 +6,9 @@ import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact as Atlas
 import DASHI.Cognition.PsychotronicsScreenshotDiscriminationExact as Frames
 import DASHI.Culture.HoeMathLevelsSourceBoundaryExact as HoeMath
+import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Governance.AnomalousConsciousnessResearchEvidenceContinuumExact as Evidence
+import DASHI.Physics.QuantumVacuum.DiscriminatingExperiment as Experiment
 
 ------------------------------------------------------------------------
 -- Definitional regressions for a historical source atlas, NOT an empirical
@@ -127,9 +130,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- The atlas deliberately has eleven source instances. The five named-source
 -- / original-author Croft passages still share a single authorial root.
-sourceAtlasCountIsThirtyTwo :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 32
-sourceAtlasCountIsThirtyTwo = refl
+sourceAtlasCountIsThirtyEight :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 38
+sourceAtlasCountIsThirtyEight = refl
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -405,3 +408,187 @@ openhandDocumentDoesNotImportFieldMeasurement :
   Attribution.citationImportsProof Atlas.openhand2026FiveD ≡ false
 openhandDocumentDoesNotImportFieldMeasurement =
   Atlas.allSourcesRemainNonPromoting Atlas.openhand2026FiveD
+
+------------------------------------------------------------------------
+-- ACTUAL SCIENTIFIC 5D-ASC ≠ SPIRITUAL 5D / 5TH SPACETIME COORDINATE
+-- "5D" in the altered-states rating scale refers to five reported
+-- dimensions. NADA, MEQ30, EDI, 5D-ASC measure partially overlapping,
+-- nonidentical subjective constructs in validated populations.
+-- None validates an iTorus field or an "ascension" endpoint.
+------------------------------------------------------------------------
+
+data FiveDLabelReferent : Set where
+  openhandSpiritualFiveD : FiveDLabelReferent
+  alteredStatesFiveFactorScale : FiveDLabelReferent
+  physicalFifthDimension : FiveDLabelReferent
+  hoeMathFifthNumberLabel : FiveDLabelReferent
+
+fiveFactorScaleNotSpiritualDimension :
+  alteredStatesFiveFactorScale ≡ openhandSpiritualFiveD → ⊥
+fiveFactorScaleNotSpiritualDimension ()
+
+fiveFactorScaleNotPhysicalFifthCoordinate :
+  alteredStatesFiveFactorScale ≡ physicalFifthDimension → ⊥
+fiveFactorScaleNotPhysicalFifthCoordinate ()
+
+fiveFactorScaleNotHoeMathFifthLevel :
+  alteredStatesFiveFactorScale ≡ hoeMathFifthNumberLabel → ⊥
+fiveFactorScaleNotHoeMathFifthLevel ()
+
+psychometricSourceIsScopedToReportedExperience :
+  Atlas.ceiling Atlas.psychometricFiveDNotSpiritualFiveD ≡
+  Atlas.scopedValidatedSelfReport
+psychometricSourceIsScopedToReportedExperience = refl
+
+nadaStateTraitAreSpecificReportedConstructs :
+  Atlas.ceiling Atlas.nondualStateTraitMeasurement ≡
+  Atlas.scopedValidatedSelfReport
+nadaStateTraitAreSpecificReportedConstructs = refl
+
+revisedAscIsIndependentResearchTeam :
+  Atlas.root Atlas.psychometricFiveDNotSpiritualFiveD ≡
+  Atlas.root Atlas.ascModelRevision → ⊥
+revisedAscIsIndependentResearchTeam ()
+
+ascNameDoesNotValidate5DMysticism :
+  Atlas.relationClass Atlas.psychometricsNotSpiritualDimension ≡
+  Atlas.documentaryDistinction
+ascNameDoesNotValidate5DMysticism = refl
+
+heartmathIsNotHoeMathSource :
+  Atlas.relationClass Atlas.heartmathIsNotHoeMath ≡
+  Atlas.documentaryDistinction
+heartmathIsNotHoeMathSource = refl
+
+------------------------------------------------------------------------
+-- SAME REPORT SURFACE DOES NOT IDENTIFY CAUSE: a transparent SYNTHETIC
+-- two-world counterexample (NOT two observed human results).
+--
+-- These world names represent possible intervention settings with an
+-- indistinguishable unity self-report; hence a coarse report cannot
+-- determine whether the physical coil was powered.
+------------------------------------------------------------------------
+
+data SyntheticUnityWorld : Set where
+  reportedUnityWithSoundOnly : SyntheticUnityWorld
+  reportedUnityWithPoweredCoil : SyntheticUnityWorld
+
+data CoarseUnityResponse : Set where feltUnity : CoarseUnityResponse
+
+observedUnity : SyntheticUnityWorld → CoarseUnityResponse
+observedUnity _ = feltUnity
+
+data PhysicalDriveStatus : Set where
+  coilUnpowered : PhysicalDriveStatus
+  coilPowered : PhysicalDriveStatus
+
+physicalDriver : SyntheticUnityWorld → PhysicalDriveStatus
+physicalDriver reportedUnityWithSoundOnly = coilUnpowered
+physicalDriver reportedUnityWithPoweredCoil = coilPowered
+
+differentDriverAtSameSubjectiveReport :
+  physicalDriver reportedUnityWithSoundOnly ≡
+  physicalDriver reportedUnityWithPoweredCoil → ⊥
+differentDriverAtSameSubjectiveReport ()
+
+unityReportCannotIdentifyDeviceDrive :
+  INF.FactorsThrough observedUnity physicalDriver → ⊥
+unityReportCannotIdentifyDeviceDrive =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      reportedUnityWithSoundOnly
+      reportedUnityWithPoweredCoil
+      refl
+      differentDriverAtSameSubjectiveReport)
+
+------------------------------------------------------------------------
+-- EXPERIMENT CUT: no assignment, participant, observation, questionnaire
+-- score, blinding success or measured coil field is fabricated.
+-- Design types specify required source-backed receipt fields.
+------------------------------------------------------------------------
+
+data ControlledArm : Set where
+  poweredCoilWithMatchedSound : ControlledArm
+  nonpoweredCoilWithMatchedSound : ControlledArm
+  soundOnlyNoActiveCoil : ControlledArm
+  quietMeditationControl : ControlledArm
+
+data OutcomeDomain : Set where
+  immediateNondualReport : OutcomeDomain
+  mysticalFourFactorExperience : OutcomeDomain
+  egoDissolutionReport : OutcomeDomain
+  alteredStateFactorReport : OutcomeDomain
+  longerTermPsychologicalFunction : OutcomeDomain
+  instrumentedMagneticField : OutcomeDomain
+  expectancyAndBlinding : OutcomeDomain
+  autonomicBreathingPhysiology : OutcomeDomain
+
+candidateSource : OutcomeDomain → Attribution.AttributedSource
+candidateSource immediateNondualReport = Atlas.hanleyNADA2018
+candidateSource mysticalFourFactorExperience = Atlas.macleanMEQ2012
+candidateSource egoDissolutionReport = Atlas.nourEDI2016
+candidateSource alteredStateFactorReport = Atlas.kervadecFiveDASC2026
+candidateSource longerTermPsychologicalFunction = Atlas.hanleyNADA2018
+candidateSource instrumentedMagneticField = Atlas.ipyramidsI9
+candidateSource expectancyAndBlinding = Atlas.stockerASCRevision2026
+candidateSource autonomicBreathingPhysiology = Atlas.heartmathEnergeticCommunication
+
+-- These are candidate *source locators*, not endorsements of these papers
+-- as validated metrics for every outcome. In particular NADA is not a
+-- validated longitudinal clinical-function instrument and HeartMath is not
+-- an independent breath/HRV calibration paper. The trial designer must
+-- establish instrument validity separately.
+
+record TorusPhenomenologyProtocolDemand : Set where
+  constructor torus-phenomenology-protocol-demand
+  field
+    ethicalApprovalAndConsent : String
+    preregisteredQuestionAndAnalysis : String
+    participantEligibilityAndAdverseEventMonitoring : String
+    interventionArmsAndRandomisation : String
+    maskingCredibilityAndExpectation : String
+    actualCoilModelAndAmpWaveform : String
+    independentlyCalibratedFieldMap : String
+    audioAndVibrationMatching : String
+    respirationAndMovementRecording : String
+    validatedStateQuestionnaireAndTimepoint : String
+    separateTraitOrFunctionalEndpoint : String
+    sampleSizePowerAndMultiplicityPlan : String
+    independentReproductionAndRawDataPlan : String
+
+data AlternateMechanism : Set where
+  suggestionOrExpectation : AlternateMechanism
+  audibleToneOrVibration : AlternateMechanism
+  breathingAndHeartRateCovariation : AlternateMechanism
+  practiceTimeOrRelaxation : AlternateMechanism
+  unblindingBySensoryCues : AlternateMechanism
+  electromagneticInterventionSpecific : AlternateMechanism
+
+-- Existing constructor is kept EMPTY: available literature validates
+-- questionnaires in bounded populations, NOT a complete coil trial.
+TorusPhenomenologyExperiment : Set₁
+TorusPhenomenologyExperiment =
+  Experiment.DiscriminatingExperiment
+    TorusPhenomenologyProtocolDemand
+    AlternateMechanism
+
+data QuestionnaireScoreProvesCoilSpecificEffect : Set where
+data HeartCoherenceProvesFifthDimension : Set where
+data PsychometricValidationAutomaticallyTransfersToPEMF : Set where
+data SyntheticCounterexampleIsRealParticipantData : Set where
+
+noMagneticCauseFromStateScore :
+  QuestionnaireScoreProvesCoilSpecificEffect → ⊥
+noMagneticCauseFromStateScore ()
+
+heartBiofieldDoesNotProveFifthDimension :
+  HeartCoherenceProvesFifthDimension → ⊥
+heartBiofieldDoesNotProveFifthDimension ()
+
+instrumentValidatedElsewhereNeedsTransport :
+  PsychometricValidationAutomaticallyTransfersToPEMF → ⊥
+instrumentValidatedElsewhereNeedsTransport ()
+
+syntheticContrastIsNotMeasuredPeople :
+  SyntheticCounterexampleIsRealParticipantData → ⊥
+syntheticContrastIsNotMeasuredPeople ()
