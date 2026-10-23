@@ -126,9 +126,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- The atlas deliberately has eleven source instances. The five named-source
 -- / original-author Croft passages still share a single authorial root.
-sourceAtlasCountIsSeventeen :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 17
-sourceAtlasCountIsSeventeen = refl
+sourceAtlasCountIsNineteen :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 19
+sourceAtlasCountIsNineteen = refl
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -173,3 +173,43 @@ modernQuartzMakerAuthorRetained = refl
 pignatelliLabelNotAnOriginalInventorReceipt :
   Frames.electromagneticSpectrumMeasured Frames.pignatelliCaptionedMotor ≡ false
 pignatelliLabelNotAnOriginalInventorReceipt = refl
+
+------------------------------------------------------------------------
+-- Fifth-image source attribution: one maker-historical source lineage,
+-- multiple apparatus examples, and screenshot ordinal ≠ circuit identity.
+------------------------------------------------------------------------
+
+fifthIsBerndTower :
+  Frames.creator Frames.fifthImage ≡ Frames.berndNindl
+fifthIsBerndTower = refl
+
+fifthIsNotBerndLoop :
+  Frames.scene Frames.fifthImage ≡ Frames.oudInAirDischarge
+fifthIsNotBerndLoop = refl
+
+towerOrdinalsCorrect :
+  Frames.countStills Frames.displayOrder ≡ 8
+towerOrdinalsCorrect = Frames.displayOrderEight
+
+towerGeometryOnly :
+  Atlas.relationClass Atlas.berndTowerGeometryAnalogy ≡
+  Atlas.hardwareAnalogyOnly
+towerGeometryOnly = refl
+
+sphereAnalogyOnly :
+  Atlas.relationClass Atlas.oudinSphereDisplayAnalogy ≡
+  Atlas.hardwareAnalogyOnly
+sphereAnalogyOnly = refl
+
+beharyTwoExamplesOneRoot :
+  Atlas.root Atlas.oudinSpacedWindingFamily ≡
+  Atlas.root Atlas.oudinSphereStreamerFamily
+beharyTwoExamplesOneRoot = refl
+
+fifthImageHasNoMeasuredSpectrum :
+  Frames.electromagneticSpectrumMeasured Frames.fifthImage ≡ false
+fifthImageHasNoMeasuredSpectrum = refl
+
+fifthImageNoNativeVideo :
+  Frames.originalMediaURLInspected Frames.fifthImage ≡ false
+fifthImageNoNativeVideo = refl
