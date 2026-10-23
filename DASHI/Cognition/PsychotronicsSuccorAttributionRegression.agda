@@ -126,9 +126,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- The atlas deliberately has eleven source instances. The five named-source
 -- / original-author Croft passages still share a single authorial root.
-sourceAtlasCountIsTwentySix :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 26
-sourceAtlasCountIsTwentySix = refl
+sourceAtlasCountIsThirty :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 30
+sourceAtlasCountIsThirty = refl
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -294,3 +294,37 @@ shop333IsOnlyContemporarySelfAttribution :
   Atlas.relationClass Atlas.aurumayaShopCoMarketing ≡
   Atlas.contemporarySelfAttribution
 shop333IsOnlyContemporarySelfAttribution = refl
+
+------------------------------------------------------------------------
+-- Source-backed visual matching. Strong catalogue convergence is NOT
+-- same-physical-SKU, native reel, a functioning medical modality or an
+-- independently measured coil transfer function.
+------------------------------------------------------------------------
+
+copperStarNowHasBoundedSellerCandidate :
+  Atlas.relationClass Atlas.candidateCopperStarIdentification ≡
+  Atlas.multiFeatureCatalogueMatchUnconfirmed
+copperStarNowHasBoundedSellerCandidate = refl
+
+rodinTermPresentInMirroredCaption :
+  Atlas.relationClass Atlas.rodinNamedBySocialRelay ≡
+  Atlas.namedSymbolOnly
+rodinTermPresentInMirroredCaption = refl
+
+zeroPointTwoProductsShareOneCommercialRoot :
+  Atlas.root Atlas.zeroPointMiniMagnetResponse ≡
+  Atlas.root Atlas.zeroPointStarshipSphereClaim
+zeroPointTwoProductsShareOneCommercialRoot = refl
+
+retailerCatalogIsNotInstagramOwnerProof :
+  Atlas.historicalTransmissionProved Atlas.candidateCopperStarIdentification ≡ false
+retailerCatalogIsNotInstagramOwnerProof = refl
+
+indexedSellerCannotCreateExperimentalAuthority :
+  Attribution.citationCreatesAuthority Atlas.zeroPointStarshipProductIndexed ≡ false
+indexedSellerCannotCreateExperimentalAuthority =
+  Atlas.allSourcesRemainNonAuthoritative Atlas.zeroPointStarshipProductIndexed
+
+rodinMirrorCannotBecomeSameCreatorReceipt :
+  Atlas.historicalTransmissionProved Atlas.rodinNamedBySocialRelay ≡ false
+rodinMirrorCannotBecomeSameCreatorReceipt = refl
