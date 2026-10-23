@@ -113,6 +113,13 @@ formalisation of that universal-property proof.
   conditional theorem transporting a non-inner cyclic action from a
   surjective equivariant quotient back to the source loop group.
   The A5^3 quotient is not instantiated in Agda yet.
+- `DASHI/Mathematics/Topology/AlexanderHornedAbelianHolonomyBIDIExact.agda`:
+  same-group BIDI/consumer cross-check: all *abelian* characters kill
+  recursive meridians, fail to recover an essential loop, and are blind
+  to C3 rotation even when the separately supplied nonabelian quotient
+  proves that rotation outer. This is restricted to flat holonomy,
+  not nonflat Wilson loops or physical KK field equations.
+  Details: `Docs/physics/AlexanderHornedKKFlatHolonomyBIDISteelman20261024.md`.
 
 These are **conditional type-theoretic results**, not instances for
 the real three-manifold. In particular a finite word moving under C3
@@ -163,6 +170,8 @@ Run from the repo root:
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3ExteriorBridge.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3CharactersExact.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3OuterDetectorExact.agda
+    python3 scripts/check_alexander_horned_abelian_bidi.py
+    agda -i . DASHI/Mathematics/Topology/AlexanderHornedAbelianHolonomyBIDIExact.agda
 
 The A5 finite probe passed in a local Python run (depth 5, 32
 meridians per sector). There is **no Agda compiler in this execution
