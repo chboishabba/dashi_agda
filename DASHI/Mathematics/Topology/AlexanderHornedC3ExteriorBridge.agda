@@ -19,7 +19,6 @@ module DASHI.Mathematics.Topology.AlexanderHornedC3ExteriorBridge where
 -- does not classify it.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Set₁)
 open import Agda.Builtin.Nat using (zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
