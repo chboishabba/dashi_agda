@@ -124,16 +124,6 @@ record EssentialMeridian (G : EquivariantMeridianGroup) : Set where
     address : Finite.HornAddress
     notIdentity : meridian G address ≢ identity G
 
--- An essential loop certifies nontriviality only for the supplied
--- group G.  Calling G = pi_1 of a geometric exterior still requires
--- a separate van Kampen and compactness argument.
-essentialMeridianWitnessesNontriviality :
-  (G : EquivariantMeridianGroup) →
-  EssentialMeridian G →
-  (x : LoopClass G) →
-  x ≡ identity G → x ≢ identity G → ⊥
-essentialMeridianWitnessesNontriviality G certificate x eq neq = neq eq
-
 -- Exact nontriviality witness, without the tautological x input.
 noTrivialMeridianIfEssential :
   (G : EquivariantMeridianGroup) →
