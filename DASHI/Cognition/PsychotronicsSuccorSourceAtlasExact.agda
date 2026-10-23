@@ -134,20 +134,31 @@ irvaTimeline = Source.mkNoDOISource
   "association timeline says Ed Dames joined the Fort Meade operational remote-viewing unit in 1986 and later left; contextual attribution, not independent success evidence"
   Source.publicAttribution
 
+kingEarthEnergies : Source.AttributedSource
+kingEarthEnergies = Source.mkNoDOISource
+  "Serge Kahili King"
+  "Earth Energies: A Quest for the Hidden Power of the Planet"
+  "Quest Books / Theosophical Publishing House, ISBN 9780835606820; first edition"
+  "1992"
+  "https://books.google.com/books/about/Earth_Energies.html?id=qqnEtTMSaxwC"
+  Source.academicBookSource
+  "named by Don Croft as his introduction to Reich/orgone in his autobiographical narrative; this documents Croft's attributed reading, NOT proof of the book's psychoenergetic claims"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
   "DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact"
   (croftMay2002 ∷ croftJuly2002 ∷ croftAdventures ∷ reichMuseum ∷
    lakhovskyPatent ∷ channonManual ∷ gateway1983 ∷ air1995 ∷
-   electricWhirl ∷ irvaTimeline ∷ [])
+   electricWhirl ∷ irvaTimeline ∷ kingEarthEnergies ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
 -- document instances but cannot be counted as independent witnesses.
 data LineageRoot : Set where
   croftAuthorRoot reichMuseumRoot lakhovskyPatentRoot : LineageRoot
-  channonConceptRoot gatewayReportRoot airEvaluationRoot : LineageRoot
+  channonConceptRoot gatewayReportRoot airEvaluationRoot kingPublicationRoot : LineageRoot
   boulderDemonstrationRoot remoteViewingAssociationRoot : LineageRoot
 
 data EvidenceCeiling : Set where
@@ -230,6 +241,36 @@ irvaDamesContext = mkBound
   institutionalHistoricalInterpretation
   "association chronology is contextual, not an independent proof of remote-viewing ability"
 
+croftNamesKing : ClaimBound
+croftNamesKing = mkBound
+  "Croft explicitly says he discovered Reich through Serge Kahili King's 1992 Earth Energies"
+  croftAdventures
+  "Episode 1 Moonbusting Part 1, archive transcription lines near 'just discovered the work of Wilhelm Reich through Serge Kahili King's excellent book'"
+  croftAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "direct first-person reading claim, not independent proof of internal bibliographic or physics statements"
+
+croftNamesStarTetrahedron : ClaimBound
+croftNamesStarTetrahedron = mkBound
+  "Croft describes a star tetrahedron superimposed on Earth's landmarks in the same autobiographical chapter"
+  croftAdventures
+  "Episode 1 Moonbusting Part 1, paragraph beginning 'Someone had marked some lines on the globe'"
+  croftAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "cultural symbol in Croft narrative only; no creator/engineering link to Instagram copper cage"
+
+croftNamesTeslaRife : ClaimBound
+croftNamesTeslaRife = mkBound
+  "Croft groups Tesla, Rife, Schauberger, Mesmer and others in his stated historical exemplars"
+  croftAdventures
+  "retrospective compilation, paragraph beginning 'The same is true of Tesla, Rife, Schauberger'"
+  croftAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "documented name cluster, not proof of reading their originals, shared apparatus design, or experimental efficacy"
+
 reichSeparation : ClaimBound
 reichSeparation = mkBound
   "Museum distinguishes Reich's cloudbuster from later Welz/Croft orgonite, quartz-and-resin devices"
@@ -301,6 +342,9 @@ data RelationClass : Set where
   hardwareAnalogyOnly : RelationClass
   thematicResemblanceOnly : RelationClass
   namedPersonMentionOnly : RelationClass
+  explicitlyAttributedReading : RelationClass
+  namedSymbolOnly : RelationClass
+  namedExemplarsOnly : RelationClass
 
 record BoundedRelation : Set where
   constructor bounded-relation
@@ -339,6 +383,21 @@ croftRemoteViewingPersonMention : BoundedRelation
 croftRemoteViewingPersonMention =
   bounded-relation "Don Croft 2002 discourse" "Ed Dames, later public remote-viewing figure"
     namedPersonMentionOnly croftMentionsEdDames false refl false refl
+
+croftNamedBookRelation : BoundedRelation
+croftNamedBookRelation =
+  bounded-relation "Don Croft's own Reich introduction" "Serge Kahili King, Earth Energies (1992)"
+    explicitlyAttributedReading croftNamesKing false refl false refl
+
+croftStarSymbolRelation : BoundedRelation
+croftStarSymbolRelation =
+  bounded-relation "Croft's star tetrahedron geography passage" "Instagram angular copper weave"
+    namedSymbolOnly croftNamesStarTetrahedron false refl false refl
+
+croftNamedHistoricalExemplars : BoundedRelation
+croftNamedHistoricalExemplars =
+  bounded-relation "Don Croft" "Tesla, Rife, Schauberger and Mesmer name cluster"
+    namedExemplarsOnly croftNamesTeslaRife false refl false refl
 
 -- Imported source-attribution laws are used directly; no new source/role
 -- ontology is needed. The proof obligations are the existing fields.
