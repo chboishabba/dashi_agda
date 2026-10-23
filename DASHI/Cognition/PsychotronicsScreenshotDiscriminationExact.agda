@@ -7,7 +7,7 @@ import DASHI.Physics.QuantumVacuum.DiscriminatingExperiment as Experiment
 import DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact as Atlas
 
 ------------------------------------------------------------------------
--- CONCRETE CONSUMER: TEN USER-SUPPLIED STILL SCREENSHOTS
+-- CONCRETE CONSUMER: EIGHTEEN USER-SUPPLIED STILL SCREENSHOTS
 --
 -- These are exact hashes of screenshot PNG attachments in the conversation,
 -- not hashes of the original reels or the creator's originally uploaded
@@ -20,6 +20,12 @@ import DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact as Atlas
 data Creator : Set where
   colourTheoryInstallations : Creator
   crystalPyramids96 : Creator
+  iPyramids : Creator
+  aurumaya : Creator
+  berndNindl : Creator
+  officialPiggyPower : Creator
+  moonaSmagicka : Creator
+  theCitadel04 : Creator
 
 data StillScene : Set where
   quartzTourmalineArc : StillScene
@@ -28,6 +34,13 @@ data StillScene : Set where
   curvedFreeAirArc : StillScene
   angularCopperCage : StillScene
   copperSphereInterior : StillScene
+  torusCopperCrystalCase : StillScene
+  torusAppInterface : StillScene
+  succorHandheldQuartz : StillScene
+  oudInAirDischarge : StillScene
+  electrostaticMotorBench : StillScene
+  waterVortexCarafe : StillScene
+  speculativeBiopunkDiagram : StillScene
 
 record ScreenshotEvidence : Set where
   constructor screenshot-evidence
@@ -238,3 +251,111 @@ noCalibratedTemperatureFromScreen ()
 noCroftIdentityFromAppearance : CroftWiringProvesInstagramDeviceIdentity → ⊥
 noCroftIdentityFromAppearance ()
 
+
+------------------------------------------------------------------------
+-- SECOND USER ATTACHMENT BATCH: EIGHT NEW STILL SCREENSHOTS, 2026-10-24
+-- Distinct native PNG SHA-256 values: these do not identify reel bytes.
+-- Named product/poster or maker statements are *caption attestations*, not
+-- independent validations of bio-effects or device measurements.
+------------------------------------------------------------------------
+
+waterSwirl : ScreenshotEvidence
+waterSwirl = screenshot-evidence
+  "1000018565.png"
+  "86df9377c1af95d62c22868f9eb93772d9511ac4d3dd0a1013f51a8abdfc9c6e"
+  moonaSmagicka waterVortexCarafe
+  "Transparent vase-shaped water vortex device; copper triple-spiral ornament and coiled copper exterior"
+  "On-screen search label MAYU Swirl structured water; Water is Magic claim"
+  false false false false
+
+oudinLoop : ScreenshotEvidence
+oudinLoop = screenshot-evidence
+  "1000018567.png"
+  "7327aaf0a6ba02d4b6e5dd3d0257405b844fb7f8f832da1ea552757ceca55ce7"
+  berndNindl oudInAirDischarge
+  "Red copper loop around black surface; purple branching discharge visible below loop near fingertip"
+  "Creator reply explicitly labels the device 'Oudin Oscillator'; user proximity is not a safety test"
+  false false false false
+
+oudinCoil : ScreenshotEvidence
+oudinCoil = screenshot-evidence
+  "1000018569.png"
+  "6324ec164df5524fe117979d66351a04e16fafdd66400139030fff769a0ba1cc"
+  berndNindl oudInAirDischarge
+  "Metal spherical top above tall ribbed/wound cylindrical body; blue-white transverse discharges"
+  "A separate post by the same creator; not the same clip as the open loop"
+  false false false false
+
+pignatelliCaptionedMotor : ScreenshotEvidence
+pignatelliCaptionedMotor = screenshot-evidence
+  "1000018571.png"
+  "0a3ad0cf668c4165a090e548383380e7af6e313918ea9d3d5c45e6cc8959113f"
+  officialPiggyPower electrostaticMotorBench
+  "Parallel metallic bars between insulating-looking plates; leads and external power supply visible"
+  "Caption identifies a Pignatelli motor and claims possible atmospheric-electricity drive; name/provenance unverified"
+  false false false false
+
+biopunkStory : ScreenshotEvidence
+biopunkStory = screenshot-evidence
+  "1000018572.png"
+  "dc812dad48e04b9c78a5fbe8c5a6aa92569227238e9986d87a276d68ed56fdca"
+  theCitadel04 speculativeBiopunkDiagram
+  "Handwritten notebook with arrows, boxed labels, eyes and organic-body sketches"
+  "Biopunk story concepts; presented as creative speculation rather than confirmed device mechanism"
+  false false false false
+
+itorusCase : ScreenshotEvidence
+itorusCase = screenshot-evidence
+  "1000018574.png"
+  "e2d99e1d740db9212b788be64a471654dd038a69c403744cb811e5d3607a43ba"
+  iPyramids torusCopperCrystalCase
+  "Torus-shaped object with curved copper lattice/crystal elements in foam case next to electronics"
+  "Creator names iTorus i9 pulsed EMF toroidal product"
+  false false false false
+
+itorusTablet : ScreenshotEvidence
+itorusTablet = screenshot-evidence
+  "1000018575.png"
+  "22217e5322f736c1840496ed2c68c9ed2093081a2e9ab43721bdfabf9ca24cc6"
+  iPyramids torusAppInterface
+  "Tablet with iZen Meditation, Earth Based Therapy, Chakra Balance interface in front of toroid"
+  "iTorus i9 bio-regeneration and room-sized coherent field marketing"
+  false false false false
+
+aurumayaSuccor : ScreenshotEvidence
+aurumayaSuccor = screenshot-evidence
+  "1000018577.png"
+  "9d0cbf3a213c5139a1fcd7b2f655e6bf891ae9919a3f58fbad71bbff4562febb"
+  aurumaya succorHandheldQuartz
+  "Person holding translucent pointed quartz with coiled cable and small electronics"
+  "Creator explicitly describes Succor Punch as Don Croft's device in a reply"
+  false false false false
+
+secondBatch : List ScreenshotEvidence
+secondBatch = waterSwirl ∷ oudinLoop ∷ oudinCoil ∷
+  pignatelliCaptionedMotor ∷ biopunkStory ∷
+  itorusCase ∷ itorusTablet ∷ aurumayaSuccor ∷ []
+
+secondBatchHasEight : countStills secondBatch ≡ 8
+secondBatchHasEight = refl
+
+bothBatchesHaveEighteen :
+  (countStills stillAtlas + countStills secondBatch) ≡ 18
+bothBatchesHaveEighteen = refl
+
+data BrandStatementEstablishesMeasuredField : Set where
+data HistoricDeviceNameEstablishesCurrentDeviceIdentity : Set where
+data AtmosphericPotentialEstablishesMotorOutput : Set where
+data WaterVortexEstablishesNewWaterPhase : Set where
+
+noFieldFromMarketing : BrandStatementEstablishesMeasuredField → ⊥
+noFieldFromMarketing ()
+
+noSameObjectFromDeviceName : HistoricDeviceNameEstablishesCurrentDeviceIdentity → ⊥
+noSameObjectFromDeviceName ()
+
+noMotorPowerFromPotential : AtmosphericPotentialEstablishesMotorOutput → ⊥
+noMotorPowerFromPotential ()
+
+noWaterPhaseFromVortex : WaterVortexEstablishesNewWaterPhase → ⊥
+noWaterPhaseFromVortex ()
