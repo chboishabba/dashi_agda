@@ -126,9 +126,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- The atlas deliberately has eleven source instances. The five named-source
 -- / original-author Croft passages still share a single authorial root.
-sourceAtlasCountIsNineteen :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 19
-sourceAtlasCountIsNineteen = refl
+sourceAtlasCountIsTwentyOne :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 21
+sourceAtlasCountIsTwentyOne = refl
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -213,3 +213,33 @@ fifthImageHasNoMeasuredSpectrum = refl
 fifthImageNoNativeVideo :
   Frames.originalMediaURLInspected Frames.fifthImage ≡ false
 fifthImageNoNativeVideo = refl
+
+------------------------------------------------------------------------
+-- Max-cut: separate historically real Oudin/electrostatic precedents from
+-- SAME OBJECT identification and demonstrated power at the viral device.
+------------------------------------------------------------------------
+
+oudinOriginalIsAnalogyNotCircuitIdentification :
+  Atlas.relationClass Atlas.historicTopologyComparisonOnly ≡
+  Atlas.hardwareAnalogyOnly
+oudinOriginalIsAnalogyNotCircuitIdentification = refl
+
+jefimenkoReportedExperimentDoesNotIdentifyPignatelli :
+  Atlas.relationClass Atlas.jefimenkoMotorClaimOnly ≡
+  Atlas.historicalMechanismPrecedentOnly
+jefimenkoReportedExperimentDoesNotIdentifyPignatelli = refl
+
+historicalOudinHasSeparateSourceRoot :
+  Atlas.root Atlas.oudinUnipolarHistoricalTopology ≡
+  Atlas.guilleminotHistoricalManualRoot
+historicalOudinHasSeparateSourceRoot = refl
+
+jefimenkoRemainsOriginalAuthorReport :
+  Atlas.ceiling Atlas.jefimenkoSmallMotorField ≡
+  Atlas.attributedAuthorReport
+jefimenkoRemainsOriginalAuthorReport = refl
+
+jefimenkoCitationImportsNoExperimentForPignatelli :
+  Attribution.citationImportsProof Atlas.jefimenkoElectrostaticMotors ≡ false
+jefimenkoCitationImportsNoExperimentForPignatelli =
+  Atlas.allSourcesRemainNonPromoting Atlas.jefimenkoElectrostaticMotors
