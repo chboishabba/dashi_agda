@@ -15,7 +15,9 @@ open import DASHI.Core.Prelude
 --   * Weizmann Institute of Science, 2026-09-14.
 --
 -- The uploaded transcript is represented only as a secondary social-media
--- paraphrase. It does not upgrade stronger extrapolations to paper claims.
+-- paraphrase. Its 15-minute adaptation claim IS independently supported by
+-- the primary arXiv v2, Appendix B, Table T7 (Subject 1, 450 fMRI samples).
+-- This source correction does not promote dream or arbitrary thought reading.
 
 data BrainITSource : Set where
   brainITArxiv251025976 : BrainITSource
@@ -53,9 +55,13 @@ record BrainITSourceBoundary : Set where
     oneHourTransferComparableToFullFortyHourBaselineIsTrue :
       oneHourTransferComparableToFullFortyHourBaseline ≡ true
 
-    fifteenMinuteRecognisableImageIsPrimaryPaperClaim : Bool
-    fifteenMinuteRecognisableImageIsPrimaryPaperClaimIsFalse :
-      fifteenMinuteRecognisableImageIsPrimaryPaperClaim ≡ false
+    fifteenMinuteSubjectOneTransferIsPrimaryPaperClaim : Bool
+    fifteenMinuteSubjectOneTransferIsPrimaryPaperClaimIsTrue :
+      fifteenMinuteSubjectOneTransferIsPrimaryPaperClaim ≡ true
+
+    fifteenMinuteSubjectOneSampleCount : Nat
+    fifteenMinuteSubjectOneSampleCountIs450 :
+      fifteenMinuteSubjectOneSampleCount ≡ 450
 
     arbitraryThoughtReadingSupported : Bool
     arbitraryThoughtReadingSupportedIsFalse :
@@ -76,7 +82,8 @@ canonicalBrainITSourceBoundary =
     true refl
     true refl
     true refl
-    false refl
+    true refl
+    450 refl
     false refl
     false refl
     false refl
