@@ -35,8 +35,3 @@ import DASHI.Cognition.Kluver5HT2ACrossPollinationExact
 import DASHI.Cognition.FiveHT2AVisualModeObservationBridgeExact
 
 import DASHI.Cognition.AnalyticLogPolarSpiralCompilerExact
-
--- Conditional conscious-realism/DMT consumer: uses existing Klüver and 5-HT2A owners.
--- This import does not promote an entity existence claim.
-import DASHI.Cognition.ConsciousRealismDMTSourceAtlasExact
-import DASHI.Cognition.ConsciousRealismDMTIdentifiabilityExact
