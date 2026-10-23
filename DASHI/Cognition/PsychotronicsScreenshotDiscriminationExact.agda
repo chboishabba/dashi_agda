@@ -471,3 +471,51 @@ noReplicationFromRetailCopies ()
 noSameCircuitFromMarketingFamily :
   SameProductFamilyMeansSameElectromagneticCircuit → ⊥
 noSameCircuitFromMarketingFamily ()
+
+------------------------------------------------------------------------
+-- HIGH-ALPHA SOURCED CANDIDATE FOR THE FIRST-BATCH COPPER STAR.
+--
+-- Zero Point Tech indexed "24-point Starship" seller copy explicitly
+-- offers a neodymium sphere magnet intended to dance in an amplified
+-- coil field. The user photo shows a reflective central sphere in an
+-- angular copper structure. The matching-handle store/site and an
+-- unauthenticated social-index caption "Starship Rodin Coil" provide
+-- convergent *search and descriptive* leads, not a source-custodied
+-- identification. Original reel URL and exact model/version still absent.
+------------------------------------------------------------------------
+
+record CopperStarCandidate : Set where
+  constructor copper-star-candidate
+  field
+    picturedPhoto : ScreenshotEvidence
+    sellerDescription : Atlas.ClaimBound
+    sourceDiscoveryRole : String
+    positiveFeatureMatch : String
+    unresolvedSameObjectConditions : String
+    originalReelInspected : Bool
+    exactSKUIdentified : Bool
+    deviceFieldMeasured : Bool
+    ownershipConfirmed : Bool
+    purportedTherapyValidated : Bool
+open CopperStarCandidate public
+
+starshipSourceCandidate : CopperStarCandidate
+starshipSourceCandidate = copper-star-candidate
+  copperWide
+  Atlas.zeroPointStarshipSphereClaim
+  "search-index merchant prose; native product page blocked (402), social caption reposted by third-party index"
+  "angular or star-like copper winding and reflective central sphere match a 24-point Starship/Rodin coil product which advertises a moveable 1.25-inch sphere magnet driven by a 50-W amplifier"
+  "confirm first-party Instagram profile-to-store link, original reel/variant, true winding geometry, permanent-magnet dimensions and synchronized current/angular-motion trace"
+  false false false false false
+
+noSameSKUFromFeatureOverlap :
+  exactSKUIdentified starshipSourceCandidate ≡ false
+noSameSKUFromFeatureOverlap = refl
+
+noCreatorIdentityFromMatchingHandle :
+  ownershipConfirmed starshipSourceCandidate ≡ false
+noCreatorIdentityFromMatchingHandle = refl
+
+noBiologicalEfficacyFromMovingMagnet :
+  purportedTherapyValidated starshipSourceCandidate ≡ false
+noBiologicalEfficacyFromMovingMagnet = refl
