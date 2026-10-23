@@ -401,3 +401,28 @@ the Clay unforced periodic regularity alternative.
 mathematics using the displayed polynomial RHS; the same-object transfer
 into the historical R823 Agda predicate is **not kernel-certified**.
 The canonical A/B/C/D proof scheduler remains fail-closed.
+
+
+### 2026-10-24 Lean real-scalar theorem connection
+
+Verified the previous hidden code path: the real analytic companions are in
+`dashi_lean4/NSBControl/Rational345LocalODE.lean`,
+`Rational345QuadraticODE.lean`, `Rational345ShortTime.lean` and
+`Rational345ReserveWitness.lean`, all included in the opt-in
+`NSBCyclicOrbit` library. The earlier assertion that they could not be
+located was a *wrong-path search*, not missing mathematical work.
+
+New theorem terms in the EXISTING Lean short-time file:
+`Rational345RealSource.snapshot_rate_real_exact`,
+`Rational345RealSource.exists_real_negative_signed_integral` and
+`Rational345RealSource.negative_real_integral_refutes_reserve`.
+These compose an exact rational seed cast, real local quadratic-flow
+existence, continuity-based negative real integral, and the real-valued
+reserve contradiction without an unnecessary fixed-horizon bootstrap.
+
+The remaining physical proof is the **one** exact source-instantiation
+equating the literal radius-four real Fourier ODE and signed helical
+observable to the Lean field/rate and equating the R823 integrated payment
+to that **same real integral**. A proof that a chosen scalar is negative
+at t=0 without the full real Fourier formula is insufficient. No claim of
+a Lean kernel build or Agda R823 physical counterexample is made.
