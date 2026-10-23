@@ -40,3 +40,21 @@ print('PASS Cube27 traces (L,L^2)=(108,558)')
 print('PASS cyclic Z/27 traces (L,L^2)=(54,162), non-isospectral')
 print('CONDITIONAL OBSERVABLE: requires adjacency-coupled dynamics calibrated on same source')
 print('NO Monster-VOA/KK physical identity follows from distinct finite spectra')
+
+# Braid modular M also FAILS to commute with the physical cube-grid
+# nearest-neighbour Laplacian; this is the stronger specific detector:
+# a potential geometric Hamiltonian H=J*Lcube does distinguish acting
+# by the M-labelled permutation from doing nothing (state-dependent).
+points=list(product((-1,0,1),repeat=3))
+index={p:i for i,p in enumerate(points)}
+mod3=lambda v: ((v+1)%3)-1
+cube_M=lambda p:(mod3(p[0]+p[1]),mod3(p[0]-p[1]),p[2])
+PM=s.zeros(27)
+for site,i in index.items():PM[index[cube_M(site)],i]=1
+assert PM.T*PM==s.eye(27)
+comm=Lc*PM-PM*Lc
+assert comm!=s.zeros(27)
+assert comm.rank()==24
+assert s.trace(comm.T*comm)==168
+print('PASS [Lcube, PM] has rank 24 and Hilbert-Schmidt norm² 168')
+print('Conditional experimental readout: cube adjacency-coupled dynamics detects this nonisometry')
