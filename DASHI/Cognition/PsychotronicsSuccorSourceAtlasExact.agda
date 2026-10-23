@@ -141,7 +141,7 @@ kingEarthEnergies = Source.mkNoDOISource
   "Quest Books / Theosophical Publishing House, ISBN 9780835606820; first edition"
   "1992"
   "https://books.google.com/books/about/Earth_Energies.html?id=qqnEtTMSaxwC"
-  Source.academicBookSource
+  (Source.namedSourceKind "esoteric popular-press book")
   "named by Don Croft as his introduction to Reich/orgone in his autobiographical narrative; this documents Croft's attributed reading, NOT proof of the book's psychoenergetic claims"
   Source.publicAttribution
 
