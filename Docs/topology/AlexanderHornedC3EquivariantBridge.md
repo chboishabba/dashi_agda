@@ -26,6 +26,45 @@ geometric realization and Agda kernel check open**.  2026-10-24.
   formal Out(pi1) result. This is NOT a proof about gravity, KK, Monster
   moonshine, three-dimensional spacetime, or the Poincare conjecture.
 
+## 2026-10-24 maximal geometric consolidation (new)
+
+The **highest-alpha construction** is now a boundary-connected sum of three
+*existing* Hatcher horned balls, arranged by the ambient order-three rotation
+`(x,y,z)->(z,x,y)`, connected via three unknotted tame tube collars and
+a central round ball. See
+`Docs/topology/AlexanderHornedC3ThreeCopyGeometricConstruction.md`
+for the detailed local van Kampen cuts and the actual geometric proof plan.
+
+The associated infinite group is explicitly
+`G_A * G_A * G_A`, not an unrelated new group: filtered colimits
+of the three independent binary towers agree with their free product.
+The rotation cyclically permutes the three free factors. A projection
+to the first factor immediately proves it is non-inner: a nontrivial
+first-factor meridian remains nontrivial after conjugation and
+projection, whereas its cyclic rotation projects to the identity.
+This removes the need to make A5³ a logical dependency for
+noninnerness. A5³ remains a finite independent detector.
+
+NEW exact Agda modules:
+- `AlexanderHornedC3ComplementActionExact.agda`: complement
+  point-set invariance for any invariant subset of an order-three
+  ambient map, with pointwise cubed identity.
+- `AlexanderHornedC3FreeFactorDetectorExact.agda`: target-group
+  conjugation cannot kill nonidentity elements and the complete
+  conditional first-factor noninnerness theorem.
+
+NEW executable independent finite regression:
+`python3 scripts/alexander_horned_c3_free_factor_probe.py`:
+937 reduced words through length 4, binary-horn substitution and
+threefold rotation consistency, and first-sector retraction against
+937 conjugators. **Passed locally in this session**.
+
+**Certification remains precise:** concrete topological disk collars,
+ambient horned-ball embedding and exact pi1 identification are
+described as a mathematical construction/proof specification, not as
+Agda kernel-certified geometric data. Agda typechecking is not
+available here. No physical or moonshine promotion follows.
+
 ## Exact three-root algebraic model
 
 Index meridians at stage n by (c,w) with c in C3 and w in {0,1}^n.
@@ -165,7 +204,10 @@ action C3 -> Out(pi1) with a character pi1 -> C3.
 Run from the repo root:
 
     python3 scripts/alexander_horned_c3_a5_probe.py
+    python3 scripts/alexander_horned_c3_free_factor_probe.py
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3AmbientRotationExact.agda
+    agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3ComplementActionExact.agda
+    agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3FreeFactorDetectorExact.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3FiniteStageExact.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3ExteriorBridge.agda
     agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3CharactersExact.agda
