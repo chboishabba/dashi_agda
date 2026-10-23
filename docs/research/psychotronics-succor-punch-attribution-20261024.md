@@ -125,3 +125,54 @@ Attempted public search for the two Instagram accounts, Schumann/333 footage and
 Source count is 11 **document instances**, not 11 independent proofs, and screenshot count is 10 **uploaded PNGs**, not 10 independent experiments. The upload object hashes and inspection data do not reveal the original device rotor geometry or actual power-supply frequency.
 
 **Certification:** Agda is unavailable in the local execution container. Source-level structural tests and actual uploaded-PNG SHA-256 calculations were performed; no Agda kernel/CI/physical replication receipt is issued here. The PR remains draft. Reopen only the smallest concrete failing code leaf if the kernel disagrees with the source-written regressions.
+
+
+## Max-cut 3: eight additional screenshot objects and named device manufacturers (2026-10-24)
+
+The latest user-provided batch is NOT one device or one author. It introduces **six distinct Instagram posting accounts across eight PNGs**, whose screenshot-byte SHA-256 digests and caption-versus-observation fields live in `DASHI/Cognition/PsychotronicsScreenshotDiscriminationExact.agda`.
+
+| Uploaded PNG | Posting account | Observed/captioned device | Exact SHA-256 | Source status |
+|---|---|---|---|---|
+| `1000018565.png` | `moonasmagicka` | Vortex glass water carafe decorated with copper triskelion; app search label MAYU Swirl | `86df9377c1af95d62c22868f9eb93772d9511ac4d3dd0a1013f51a8abdfc9c6e` | Brand/caption identification, not water chemistry |
+| `1000018567.png` | `berndnindl` | Horizontal metal loop with purple air corona; author reply explicitly says “Oudin Oscillator” | `7327aaf0a6ba02d4b6e5dd3d0257405b844fb7f8f832da1ea552757ceca55ce7` | **Primary author-labelled apparatus class**, no independently inspected schematic |
+| `1000018569.png` | `berndnindl` | Tall wound cylindrical apparatus with metal spherical top and transverse purple corona | `6324ec164df5524fe117979d66351a04e16fafdd66400139030fff769a0ba1cc` | Same creator, separate clip and mechanism unverified |
+| `1000018571.png` | `officialpiggypower` | Parallel-plate/rod electromechanical-looking bench with leads and supply | `0a3ad0cf668c4165a090e548383380e7af6e313918ea9d3d5c45e6cc8959113f` | Caption calls it “Pignatelli motor”; **original named inventor/circuit is not independently found** |
+| `1000018572.png` | `the_citadel04` | Handwritten speculative diagram | `dc812dad48e04b9c78a5fbe8c5a6aa92569227238e9986d87a276d68ed56fdca` | Tag is *biopunk story concepts*, not peer-reviewed experimental mechanism |
+| `1000018574.png` | `ipyramids` | Open hard case with copper woven/crystal torus and apparent drive unit | `e2d99e1d740db9212b788be64a471654dd038a69c403744cb811e5d3607a43ba` | Creator identifies product as iTorus i9 |
+| `1000018575.png` | `ipyramids` | Tablet screen showing iZen Meditation, Earth Based Therapy, Chakra Balance; torus visible behind | `22217e5322f736c1840496ed2c68c9ed2093081a2e9ab43721bdfabf9ca24cc6` | Interface categories are not measured biological endpoints |
+| `1000018577.png` | `aurumaya.co` | Held pointed/translucent quartz with wire coil and electronics; maker comment | `9d0cbf3a213c5139a1fcd7b2f655e6bf891ae9919a3f58fbad71bbff4562febb` | **Direct contemporary maker claims invention by Don Croft**, corroborating explicit named tradition |
+
+The total is now **18 PNG screenshot bytes, split as earlier 10 + new 8**, from eight posting accounts overall. The two berndnindl clips do not by themselves prove identical hardware wiring. The iTorus i9 and the low-voltage quartz Succor Punch **are separate designs**; neither is identical to the earlier uncredited copper basket/orb stills simply because they use copper.
+
+### Six new attributed source instances and their bounded roles
+
+1. **iPyramids, iTorus i9**: [maker's description](https://ipyramids.store/products/itorus-9-9-5-tachyon-vortex-pemf-4-0), claiming ~9.5 inch diameter, app/audio drive, 7-ohm-per-channel technical rating, and 55-foot effective field diameter. The electrical geometry and resistance are *maker specifications*. The field extent and medical claims lack independent measurement within this study. The marketing formula is not a B-field map: demand measured `B(r,theta,phi,t)`, spectral content and exposure thresholds.
+2. **Aurumaya**, [QUBIT Quartz Succor Punch](https://www.aurumaya.com.au/product-page/qubit-crystal-large-pulsed-quartz-succor-punch-15hz-crystal-tech): explicit marketed 15 Hz, copper, quartz and 9 V battery; Instagram maker comment explicitly credits Don Croft. This is the **strongest new modern transmission link** but only *self-attribution* until design-document version history is retrieved.
+3. **Kassabian, 1907**, [historical Oudin resonator and circuit illustration](https://commons.wikimedia.org/wiki/File:Oudin_coil_and_circuit_diagram.png), p.142 figs.61–62 as attributed by Wikimedia Commons. Brush-discharge resonator is a known high-voltage circuit family. Contemporary video would require original Oudin schematic, inductance, resonance and geometry to identify beyond poster naming.
+4. **MAYU**, [What Is Vortexing Water?](https://mayuwater.com/a/resources/structured-water/what-is-vortexing-water): ordinary rotational movement and possible air–water gas exchange are real, while claimed long-lived healing water forms require separate chemistry.
+5. **AAP FactCheck / Soofia Tariq (2024)**, [Structured-water claims](https://www.aap.com.au/factcheck/claims-of-structured-water-health-benefits-are-mere-fiction/): chemist-backed criticism of advertised H3O2/hexagonal bulk water. This does not mean water molecules lack transient structure or that swirling cannot cause ordinary aeration.
+6. **PITHIA-NRF**, [Atmospheric electricity field mills](https://www.pithia-nrf.eu/activities-results/outreach/space-weather-research-instruments/electric-field-mills): atmospheric electric fields are real and measurable. **Voltage alone is not delivered electric/mechanical power**; record current, dissipation, shaft load and actual charge-collection pathway before endorsing the attributed motor.
+
+These are six **document instances serving different claim-specific roles**, not six independent validations of a single healing theory. There are now **17 attributed entries** (previous 11 + six), not 17 independent experiments.
+
+### New physical separation with higher information gain
+
+- **Oudin/Tesla-type high-voltage resonator** can generate visible free-air corona; the maker's device name gives a much stronger explanation for the two new `berndnindl` videos than a floating or self-sustaining plasma ball theory. No video of the exact earlier described free-floating orb was recovered. The mere presence of luminous arcs says nothing about crystal resonance, remote viewing or cell regeneration.
+- **iTorus i9** is manufacturer-labelled low-frequency PEMF/waveform equipment marketed with crystalline inserts and a phone/tablet interface. A coil plus audio amplifier is not itself a scalar field, and a room-radius marketing claim needs independent field measurements with stated sensitivity and exposure reference.
+- **Croft/Aurumaya Succor Punch** is quartz plus copper winding plus explicitly stated 15 Hz low-voltage unit. A strong directly stated *design/tradition link* exists; do not infer high-voltage Oudin plasma emission from this low-voltage device.
+- **Pignatelli motor** remains an unverified named term from the creator caption; actual rotor geometry, source history, circuit, atmospheric electrode, and bench PSU operation were not recovered. Electrostatic motors and atmospheric potential gradient are familiar physics but do not authenticate the caption's attribution or practical energy yield.
+- **MAYU vortex** couples ordinary hydrodynamics with crystal/copper spiritual framing. This makes it a useful *negative control for rhetorical rather than technical cross-pollination*: shared sacred-geometry vocabulary cannot imply electromagnetic coupling or the same physical mechanism.
+
+### Pareto roadmap after the new attachments (supersedes earlier phase statuses)
+
+| Rank | Payable obligation | Position | Acceptance / closure |
+|---|---|---|---|
+| 0 | Source-root and image provenance | **Paid to source-written/inspection level**, 17 attributed document instances and 18 screenshot hashes; all distinct account origins retained | Agda kernel on owner + regression files; author/citation inspection with screenshot hashes; no cross-platform image identity by appearance |
+| 1 | Modern Croft transmission to Aurumaya | **Direct contemporary maker attestation**, high confidence about source influence *claim* | Dated maker schematic and winding instructions identifying source/version; no assumed identical coils |
+| 2 | Oudin oscillator vs original spinning/plasma orb | **Oudin class established historically and new creator named it**; original earlier orb still unresolved | Original reels and frame sequence; electrode/rotor motion, voltage/current, wavelength spectrum and independent camera |
+| 3 | iTorus spatial field claim | **Maker electrical specifications located**, actual mapping unpaid | Calibrated tri-axis magnetometry across spatial grid under recorded drive; amplitude vs distance and sham/control mode |
+| 4 | Electrostatic motor atmospheric harvesting | **Known EM class, 'Pignatelli' historical label not authenticated** | Actual technical origin/schematic and independently logged source/load/shaft-power measurements |
+| 5 | MAYU water effects | **Vortex identity and mechanical mechanism plausible; special hydration unsubstantiated** | Matched-control dissolved gases/pH with blinded sampling if specific property is claimed; no invented stable water phase |
+| 6 | Health, clairvoyance, mind-network and timeline changes | **Claims remain unestablished** | Separately pre-registered endpoint, realistic controls, replication; no promotion from device marketing, patient anecdotes or corona imagery |
+
+No new scalar-wave ontology, new 3-6-9 model or speculation that all pictured devices are part of one secret technology is needed. Preserve the scientific and historical attribution boundaries already coded. Product literature, creator replies, archival patent diagrams and academic measurements have *different evidentiary roles*.
