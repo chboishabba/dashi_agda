@@ -1,5 +1,5 @@
 # Succor Punch / psychotronics source genealogy — bounded max-cut
-Last investigated: 2026-10-24. Canonical owners: `DASHI/Cognition/PsychotronicsSuccorSourceAtlasExact.agda`, `DASHI/Cognition/PsychotronicsScreenshotDiscriminationExact.agda`. Version: max-cut 2.
+Last investigated: 2026-10-24. Canonical owners: `DASHI/Cognition/PsychotronicsSuccorSourceAtlasExact.agda`, `DASHI/Cognition/PsychotronicsScreenshotDiscriminationExact.agda`. Version: max-cut 5 (latest status and open leaves at end; older intermediate counts superseded).
 
 ## Question and scope
 Trace the actual copper/star/quartz, 15 Hz Mobius Succor Punch, Reich/Croft cloudbusting, purple open-air corona, 7.83/333 Hz, remote-viewing/Gateway and First Earth Battalion motifs in two Instagram screenshot sets supplied in the conversation. The question is **who asserted which design or effect, and what would test it?** This is *not* an endorsement of orgone, scalar healing, clairvoyance, extraterrestrials, mind-over-matter, timeline shifting or alleged government suppression.
@@ -179,3 +179,55 @@ No new scalar-wave ontology, new 3-6-9 model or speculation that all pictured de
 
 ### Source locator corrections (same-day online recheck)
 The iPyramids store-page and Aurumaya exact product URL both returned **404** when opened, notwithstanding indexed search excerpts describing their listings. The source atlas therefore retains currently openable **family/product category pages** (iPyramids Nubian i9 product variants; Aurumaya Crystal Tech) as canonical navigation coordinates while leaving the exact variant’s same-object status as a *search-index candidate*, not a verified live sale. The user’s screenshots directly identify the device families. Do not infer availability or a particular SKU from the category page. The MAYU article was authored by **Cameron-Leigh Henning**, edited by **Joel Taylor**, and updated 3 February 2025. It specifically advertises `H3O2`, a biologically enhanced water state, which the 2024 AAP chemist-based fact check disputes. These are conflicting **propositions**, not sources that corroborate one another.
+
+## Max-cut 5 — specific answer for fifth screenshot, and full Pareto consolidation (2026-10-24)
+
+**Referent pinned:** *fifth image in the user's displayed eight-image sequence* is
+`1000018569.png` / `@berndnindl`, the tall sphere-topped resonator photographed at 11:07. The seventh displayed image is a **different Bernd clip** showing an open red circular loop and purple discharge, where the maker separately says "Oudin Oscillator" in a comment. **Do not transfer that exact circuit identification to the fifth image without an original same-device schematic.** The screenshot order is now explicitly encoded by `displayOrder`/`fifthImage` in `PsychotronicsScreenshotDiscriminationExact.agda`.
+
+### Observed fifth-image features versus live hypotheses
+
+| Feature visible on attachment | Strongest physical reading | Limitation / next discriminator |
+|---|---|---|
+| Dark metallic rounded sphere, high above coil | Spherical topload; raises capacitance and shapes the discharge field in a high-voltage resonator | No continuity or driver photo showing topload electrically connected |
+| Tall cylindrical body with many pale, stacked serpent-like bands | Spaced, shaped or externally segmented winding; alternatively illuminated insulating surface or reflections | Need isolated close-ups and continuity/wiring diagram; cannot assert exact coil topology or conductor material |
+| Blue-violet luminous patches close to upper bands | Local corona or discharge adjacent to conductors, possible surface/interturn flashover | Exposure-synced two-angle movie, visible endpoints and high-voltage-safe measurement; light colour alone proves neither current nor source |
+| Creator caption begins “Triple insulated but directly you should not...” | Maker signals an insulation/safety distinction | Truncated text isn't a safety certification, and insulation claims must not be used as contact advice |
+| Same creator labels an *open-ring apparatus* “Oudin Oscillator” | Strong author-labelled family link to pre-20th-century/early-20th-century high-voltage resonant electrical experiments | The photo of the tall tower is a different post, may be a different circuit |
+
+Primary comparison:
+- Jeff Behary, [Oudin Coil 2010](https://electrotherapymuseum.org/2010/Oudin2010/index.htm), a historically informed reconstruction describing coarsely spaced/heavy-gauge windings. This supports a **plausible class-level morphology**, not circuit identity.
+- Jeff Behary, [Tesla/Oudin Coil with 6-inch Copper Sphere Topload](https://www.electrotherapymuseum.org/2008/CopperOudin/index.htm), illustrates spherical top-loading and atmospheric streamers; electrical numbers describe *his separate reconstruction only*. **Both Behary web pages share one originator**, not two independent validations.
+- [Sinclair Tousey historical Oudin description](https://electrotherapymuseum.org/Articles/HighFrequencyCurrents.htm) and [historic published Oudin discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC8734689/) describe resonance and spaced/wire coils; historical medical use does not demonstrate clinical benefits.
+- [BrightArcs DRSSTC manual](https://manualzz.com/doc/4155469/mtfx-drsstc-4.2-tesla-coil-user-manual) separately describes surface/secondary flashover and topload-associated breakdown as phenomena requiring precautions or correction.
+- Search indexing surfaced a public comment **attributed** to Bernd Nindl mentioning “Tesla, Oudin, DArsonval” while recommending historical schematics in a separate Facebook thread. The actual post was not fetchable in the current environment. This is a **discovery candidate / search-snippet role only**, not an inspected primary link or validation of specific apparatus design.
+
+Two newly attributed source instances (Behary 2008/2010) make **19 total document instances** (17 before this cut). They are one maker root for corroboration accounting. The entire screenshot inventory remains **18 original user-uploaded PNGs, independently SHA-256 verified locally**, not 18 original reels or experiments.
+
+### Rebased Pareto cutset (priority follows expected information gain, not source count)
+
+| Rank | Payable item | Current status | Falsifiable acceptance criterion / effect on downstream |
+|---|---|---|---|
+| P0 | Attributed-source preservation; screenshot IDs/hashes; author/same-origin accounting | **Source-written + static inspected**, 19 document instances / 18 PNGs | Agda kernel check of three modules; do not upgrade science status from compiler certification |
+| P1 | `berndnindl` **fifth sphere-topped tower** vs seventh open-ring Oudin device | **Morphology and source tradition known; exact circuit unknown** | Original native reel, unoccluded wiring diagram, electrode/to-load path; compare to actual Oudin/Tesla circuit, resolve bands and arc endpoints |
+| P1b | First set's “floating/spinning orb” | **Still genuinely unidentified** | Original uninterrupted footage, high-speed reference and multi-angle view; distinguish discharge motion from physical rotor/afterimage/aliasing |
+| P2 | iPyramids iTorus i9 room-sized PEMF field | **Maker-labelled product/spec only** | Calibrated vector field + spectrum over declared distances with drive off/sham; confirm or falsify claimed spatial coverage |
+| P3 | Aurumaya modern Succor Punch ← Croft | **Explicit contemporary maker attribution** | Dated winding/circuit documentation and exact design comparison; no efficacy inference |
+| P4 | Pignatelli-captioned electrostatic motor | **Name remains unverified despite searching** | First-party schematic/technical origin; input current and terminal potential vs loaded rotor torque/speed, energy balance |
+| P5 | MAYU Swirl structured-water claims | **Vortex established as fluid motion; special claims disputed** | Calibrated ordinary water chemistry/dissolved gas control, long-term structural persistence test if claimed; no leap to new chemical formula |
+| P6 | Clinical/psychic/timeline outcomes | **No adequate empirical support** | Individually specified endpoints, independent blind/sham controls, replication and safety; none derived from pretty sparks or user testimonials |
+| P7 | Further historical Ibrahim/Wikidata snowball | **Consumer-driven only** | Promote only an actually inspected relevant edge with source identity, role, authorial root and same-object check; absent QID/DOI doesn't block physics |
+
+**Cut outcome:** The optimal next effort is no longer simply “find more Tesla/occult sources”. It is recovering specific original video + a circuit/geometry **same-object** description for the fifth tower, then the earlier purple orb, then measured iTorus outputs. Other examples remain distinct comparator/control families. Do not open new modules for every device; reuse `SourceAtlasExact`, `ScreenshotDiscriminationExact`, `AttributionRegression`, and existing OSINT and `DiscriminatingExperiment` machinery.
+
+### Kernel and evidence receipts
+
+The screenshot files are in conversation context, not committed into source control. Their SHA-256 values have been re-checked in the active container. The GitHub branch update is **source-written and static-audited only**; no Agda binary was found on PATH, so kernel checks remain **not run**, and the PR is draft. The executable acceptance commands remain:
+
+```sh
+agda -i . DASHI/Cognition/PsychotronicsSuccorSourceAtlasExact.agda
+agda -i . DASHI/Cognition/PsychotronicsScreenshotDiscriminationExact.agda
+agda -i . DASHI/Cognition/PsychotronicsSuccorAttributionRegression.agda
+```
+
+Attribution firewall: external makers claim *device specifications, intended functions and effects*; historical authors supply *descriptions and hypotheses*; physical demonstrations justify only the *tested phenomenon on their own apparatus*. DASHI owns the source genealogy, the identity and role preservation, the non-promotion guards, and the prioritised measurement requirements.
