@@ -1,6 +1,7 @@
 """Exact parity of full real 728-mode helical source and older rational R829 evaluator."""
 import ast
 import json
+from itertools import product
 from pathlib import Path
 import subprocess
 import sys
@@ -35,6 +36,16 @@ class RealSameSourceTests(unittest.TestCase):
         self.assertTrue(self.real["physical_rhs_real"])
         self.assertTrue(self.real["physical_rhs_divergence_free"])
         self.assertTrue(self.real["physical_helical_norms_genuine_sqrt"])
+
+    def test_invariant_eight_mode_support_and_norms(self):
+        active={(x,y,0) for x in (-3,0,3) for y in (-4,0,4)}-{(0,0,0)}
+        self.assertEqual(len(active),8)
+        cutoff={(x,y,z) for x,y,z in product(range(-4,5),repeat=3)}-{(0,0,0)}
+        inside={tuple(a+b for a,b in zip(p,q))
+                for p,q in product(active,repeat=2)
+                if tuple(a+b for a,b in zip(p,q)) in cutoff}
+        self.assertEqual(inside,active)
+        self.assertEqual({sum(t*t for t in k) for k in active},{9,16,25})
 
     def test_no_formal_authority_promotion(self):
         self.assertFalse(self.real["full_real_trajectory_formalized"])
