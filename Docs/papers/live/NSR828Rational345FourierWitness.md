@@ -1,3 +1,22 @@
+> **Canonical R823 source reconciliation — 24 October 2026.** Earlier
+> passages below identifying a still-open *real Galerkin ODE*, *real R853
+> physical carrier*, *R760 original-multiplicity cell* or *real integrated
+> reserve/demand* implementation are superseded by existing Lean
+> \`NSBControl/Rational345Round71TrajectoryPhysical.lean\`,
+> \`Rational345BPClosed.lean\`, \`Rational345R823RealSemanticProvenance.lean\`,
+> \`Rational345R823RealR749R760.lean\` and
+> \`Rational345R823DecisionFreeze.lean\`.
+> The literal R760 source identity, R823 same-source reserve definitions,
+> physical segment and integral contradiction are **source-written**,
+> including the stronger \`literalPhysicalReserveIntegralCounterexample\`
+> in the canonical decision owner. This refutes an **auxiliary proposed
+> universal reserve shortcut**, if the Lean proofs check; it **does not**
+> establish the official unforced Clay alternative B. No exact-head
+> independent Lean kernel run was obtained in this session. The historical
+> Agda R833/R853 rational-time status flags are not the authority for the
+> newer Lean real-trajectory source chain.
+>
+
 # R828: exact rational 3-4-5 finite-Fourier obstruction to universal W2 reserve
 
 **Scope**: independent finite-mode Fourier calculation and elementary finite-ODE
