@@ -7,6 +7,7 @@ module DASHI.Cognition.Everything where
 import DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact
 import DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact
 import DASHI.Cognition.PsychotronicsSuccorAttributionRegression
+import DASHI.Cognition.PsychotronicsScreenshotDiscriminationExact
 import DASHI.Cognition.PlatoCaveTraumaMemoryDecisionBridgeExact
 import DASHI.Cognition.CaveTraumaNonErasingReopeningExact
 import DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact
