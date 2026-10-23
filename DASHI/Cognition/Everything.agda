@@ -80,3 +80,6 @@ import DASHI.Cognition.PNF.SensibLawCullenRegisteredS5BBlockExact
 import DASHI.Cognition.PNF.SensibLawCullenConsumerRelativeSourceAcquisitionExact
 import DASHI.Cognition.PNF.SensibLawCullenEdelman64SemanticStateCompilerExact
 import DASHI.Cognition.PNF.SensibLawCullenResidualAdmissionBidiExact
+
+-- Consumer-relative, data-first DMT / Brain-IT mathematical cut.
+import DASHI.Cognition.ConsciousRealismDMTEverything
