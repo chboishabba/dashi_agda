@@ -83,6 +83,37 @@ Existing Klüver/Kluever geometry and Turing projection results already prove us
 - No credible validated ontology discriminator -> C4 remains open regardless of C1–C3.
 - Original authors own published mathematical and empirical work; DASHI only owns stated formal reconstructions, deductions, audit scripts, and planned experiments. Do not count datasets reused in separate papers as independent replications.
 
+## Brain-IT / DMT cross-lane max-cut (2026-10-24)
+
+**Verified branch relationship:** [Brain-IT Agda PR #1121](https://github.com/chboishabba/dashi_agda/pull/1121) was **opened 8 October** and **updated 24 October Brisbane time**. At its inspected head 5b5fed7e3c7cddc98afcddf6a403a415d7b0bbb5 it is an *unmerged draft*. It now contains BrainITTableReceiptsExact, BrainITConsumerRelativeExact, BrainITConnectomeFMRIWeldExact and Docs/BrainITDASHIBrainCMSRoadmap.md. Do not import those unmerged file definitions directly from this DMT branch; use existing, already present CoarseFineFabricCalculusExact / PredictionEnvelopeExact and link the donor PR by commit.
+
+**Original source and attribution:** Roman Beliy, Amit Zalcher, Jonathan Kogman, Navve Wasserman, Michal Irani, *Brain-IT: Image Reconstruction from fMRI via Brain-Interaction Transformer*, arXiv:2510.25976v2 (ICLR 2026), owns the reported image reconstruction/transfer work. The BrainIT paper's Appendix B Table T7 reports subject-1 15-min PixCorr **0.336**, SSIM **0.476** and CLIP identification **91.3%** at 450 examples; PR #1121 transcribes these values as integers 336,476,913. The static transcription does NOT replay the model or infer arbitrary mind reading. Appendix A's T2 SSIM **0.491** for 3D coordinates vs **0.486** for functional clustering is a reminder not to assert unqualified across-metric superiority.
+
+**Independent DMT source:** Christopher Timmermann, Leor Roseman, Sharad Haridas, Fernando Rosas et al., *Human brain effects of DMT assessed via EEG-fMRI* (PNAS 2023), DOI 10.1073/pnas.2218949120. Public source [timmer500/DMT_Imaging](https://github.com/timmer500/DMT_Imaging) latest reviewed commit **b35701d88d904e2f602164ff2eae0fc879772078**. Its README says fMRI/EEG for 20 people and 15 fMRI cases surviving motion correction. MATLAB StaticSpectraAnalysis and LZ_analysis scripts reference **author-local absolute directories**, MATLAB FieldTrip and, in the LZ script, a compiled LZ76 dependency. Conventional root LICENSE and license paths were not found during inspection; this is a *reuse-rights review trigger*, **not** a legal conclusion. No data were downloaded or analysed in this PR.
+
+### Two consumers, not a semantic identity
+
+Brain-IT reconstructs a **viewed stimulus** from a measured BOLD quotient; DMT/C3 asks about **experience dynamics** or a totally **concealed target**. These are not equal variables or the same participants/dataset. A transfer learner's learned functional clusters are decoder coordinates, not anatomically identified 128 regions or a latent mind. No Brain-IT 128-cluster architecture may be imported as literal DMT physical clusters without a measured map.
+
+A new source-written Agda owner ConsciousRealismDMTBrainITConsumerExact instantiates the **already existing** Fabric.ProjectionCollision theorem with a deliberately *perfect* viewed-stimulus observation, paired with two possible hidden targets that give identical viewed stimulus. Even this ideal decoder cannot uniformly recover the independent concealed consumer. The original Brain-IT PR's more general collision argument is not reauthored here and remains credited to its repository author/source lineage.
+
+The executable companion audit_brainit_dmt_consumer.py enumerates four equiprobable synthetic worlds (independent viewed S and secret Z): reconstruction of S is **1**, every deterministic S-only predictor of Z is **1/2**, and a deliberately **leaked** observation (S,Z) recovers Z with **1**. These exact fractions follow from a toy independence assumption; they are not participant measurements. A hidden target could in principle become dependent on observed neural signals through ordinary leakage, and that possibility must be adversarially checked, not assumed absent.
+
+### Data admission gate
+
+The executable preflight_dmt_imaging_data.py locks the inspected Timmermann repository revision, rejects missing dataset files/manifests, missing review-of-rights reference, invalid relative paths, SHA256 mismatches, duplicate session/condition identities and participants split across train/test. It returns status **blocked** without source data and **admissible_manifest_only** only after checks. An admitted manifest is **not** independent EEG/fMRI analysis, permission adjudication, or model performance validation. Run:
+
+    python3 scripts/preflight_dmt_imaging_data.py
+    python3 scripts/preflight_dmt_imaging_data.py --data-root LOCAL_VERIFIED_DATA --manifest LOCKED_MANIFEST.json
+    python3 scripts/audit_brainit_dmt_consumer.py
+    python3 -m pytest -q tests/test_dmt_brainit_consumer_cut.py
+
+No source acquisition, code-clone, Agda typecheck or fMRI inference was possible within the execution environment; acceptance remains blocked accordingly.
+
+### Highest-alpha decision
+
+**Immediate:** obtain source-licensed subject/session files with exact hashes and provenance, align DMT/placebo time and fMRI/EEG preprocessing, and reproduce a published analysis from Timmermann on held-out/separated subjects. **Then:** run stringent endogenous/Brain-IT-inspired representation-transfer models vs restricted Hoffman prediction envelopes *on matched DMT measurements*, with equal tuning budgets and appropriate participant splits. Brain-IT can contribute a method for subject calibration and consumer-relative decoding, **not** evidence that a DMT entity is external. **Separately:** preregister the concealed information-transfer experiment; it is not already contained in NSD/DMT imaging. Klüver remains P3 supporting visual-mode validation only.
+
 ## Exact next implementation order
 
 1. Audit Timmermann et al. public repository files, conditions and data rights; reproduce one published statistic and record a deterministic split manifest.
