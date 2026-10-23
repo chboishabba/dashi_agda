@@ -423,3 +423,51 @@ fifthImageNeedsActualCircuit ()
 
 noClinicalInferenceFromPurple : VisiblePurpleMeansTherapeuticField → ⊥
 noClinicalInferenceFromPurple ()
+
+------------------------------------------------------------------------
+-- SOURCE-CONFLICT-DRIVEN EXPERIMENTAL CUT, OCTOBER 2026
+--
+-- The *same named retailer page* advertises three spatial coverage diameters
+-- (55, 30, 24 feet), and the i9 family has reported nominal electrical
+-- impedances 7.0 and 8.5 ohms/channel across manufacturer/reseller listings.
+-- Neither numeral can become measured B-field magnitude, test radius, or
+-- a same-hardware discrepancy without identifying a SKU/revision and a
+-- measurement threshold. No claim that 900 kHz is independently passed
+-- through a particular 100 W audio driver is encoded.
+------------------------------------------------------------------------
+
+record ITorusCalibratedComparisonDemand : Set where
+  constructor itorus-calibrated-comparison-demand
+  field
+    serialAndSKUReference : String
+    driverModelAndAmplifierTransferReference : String
+    documentedCoilResistanceOrImpedanceDefinition : String
+    waveformAmplitudeAndSpectralCalibration : String
+    simultaneousInputVoltageCurrent : String
+    fieldSensorAndNoiseFloorCalibration : String
+    spatialCoordinatesAndDistanceUnit : String
+    operationalCoverageThresholdAndUnits : String
+    controlConditionOffOrSham : String
+    sampleDateAndRevision : String
+open ITorusCalibratedComparisonDemand public
+
+data UnspecifiedThresholdCreatesCoverage : Set where
+data AdvertisedFrequencyRangeProvesEmittedSpectrum : Set where
+data MultipleRetailCopiesCreateIndependentReplication : Set where
+data SameProductFamilyMeansSameElectromagneticCircuit : Set where
+
+noCoverageFromUnspecifiedThreshold :
+  UnspecifiedThresholdCreatesCoverage → ⊥
+noCoverageFromUnspecifiedThreshold ()
+
+noMeasuredSpectrumFromSpecification :
+  AdvertisedFrequencyRangeProvesEmittedSpectrum → ⊥
+noMeasuredSpectrumFromSpecification ()
+
+noReplicationFromRetailCopies :
+  MultipleRetailCopiesCreateIndependentReplication → ⊥
+noReplicationFromRetailCopies ()
+
+noSameCircuitFromMarketingFamily :
+  SameProductFamilyMeansSameElectromagneticCircuit → ⊥
+noSameCircuitFromMarketingFamily ()
