@@ -53,3 +53,31 @@ print("PASS all 728 nontrivial Z27^2 twist pairs move; mod2 modular matrix is id
 print("PASS conditional primitive Z27 charge gives nontrivial g^19 phase")
 print("OPEN specific 27A/27B twisted graded trace, modular multiplier, marked torus experiment")
 print("OPEN bulk AdS3 symmetry defect or Wilson-loop dual, not inferred from KK pp-wave")
+
+
+# Independent integer q-series from source ETA QUOTIENT identities,
+# rather than just rechecking copied coefficients:
+# P(q)=prod (1+q^n)^(-24)
+# T_2B=q^-1 P(q)+24, T_2A=T_2B+4096 q/P(q).
+from math import comb
+LIMIT=6
+def conv(a,b):
+    return [sum(a[j]*b[n-j] for j in range(n+1)) for n in range(LIMIT+1)]
+P=[1]+[0]*LIMIT
+Pinverse=[1]+[0]*LIMIT
+for n in range(1,LIMIT+1):
+    f=[0]*(LIMIT+1)
+    finv=[0]*(LIMIT+1)
+    for k in range(LIMIT//n+1):
+        f[k*n]=(-1)**k*comb(23+k,k)
+        if k<=24:finv[k*n]=comb(24,k)
+    P=conv(P,f)
+    Pinverse=conv(Pinverse,finv)
+assert conv(P,Pinverse)==[1]+[0]*LIMIT
+# Series indices i represent powers q^(i-1).
+series2B=[P[i]+(24 if i==1 else 0) for i in range(LIMIT+1)]
+series2A=[series2B[i]+(4096*Pinverse[i-2] if i>=2 else 0)
+          for i in range(LIMIT+1)]
+assert series2B[:5]==[1,0,276,-2048,11202]
+assert series2A[:5]==[1,0,4372,96256,1240002]
+print("PASS independent eta-product derivation of 2A/2B twining q-series")
