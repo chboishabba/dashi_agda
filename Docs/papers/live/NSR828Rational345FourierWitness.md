@@ -599,3 +599,56 @@ merely taking R853's resulting equation as a new hypothesis.
 This substantially sharpens the one surviving real-source proof
 obligation. It does not justify declaring R823 refuted in a proof
 assistant until the remaining actual-source identity is inhabited.
+
+
+### 2026-10-24 concrete physical real flow max-cut (no new Round files)
+
+The previously source-written eight-mode support theorem has now been
+strengthened in-place in dashi_lean4/NSBControl/Rational345QuadraticODE.lean:
+
+- literalProjectedGalerkinRHS345 explicitly implements the **actual**
+  complex Fourier momentum-triad convection, physical Leray projection,
+  -i factor and viscosity-one |k|² multiplier, without an artificial
+  active-pair-gating hypothesis;
+- literalProjectedGalerkinRHS345_preserves_selected_support proves its
+  RHS vanishes at EVERY inactive nonzero mode inside the full radius-four
+  cube, provided the physical velocity is supported on S;
+- selected345ModeAt / extendPhysicalEight / physicalEightModeField give
+  the concrete 8×complex3 real Fourier coordinate chart and its field,
+  with a theorem physicalEightModeField_off_support about the literal
+  full physical RHS;
+- physicalEightModeField_contDiff and
+  physicalEightModeField_real_local_solution source-write local REAL-time
+  existence for that specific projected finite Galerkin field.
+
+The existing NSBControl/Rational345ShortTime.lean now ALSO contains literal
+same-state real Fourier observables:
+physicalHelical345 (genuine sqrt(k·k)), physicalProjectedForce345,
+physicalMixedOutput345, physicalCommutatorOutput345,
+physicalCoherentWork345, physicalProduction345, physicalDissipation345,
+physicalSelectedSignedRate345 and the exact six-mode input
+physical345Seed. These are the concrete REAL operator surfaces, no longer
+uninterpreted functions with matching numeric claims.
+
+RealPhysicalSeedReceipt is exactly the conjunction of the three specific
+native-real seed identities C=-557627/125, P=0 and D=15834. The prior
+independent exact SymPy full-physical calculation supplies an executed
+finite receipt for each component; Lean kernel inhabitants for these
+three definitions have not yet been constructed.
+
+physical345_real_negative_integral_of_seed_receipt source-writes the
+actual eight-mode physical ODE negative integral assuming only that
+finite receipt. Thus **the former generic real ODE instantiation is
+eliminated as a mathematical gap**. The second remaining acceptance
+target is actual REAL finite-orbit R853:
+  2*(9*N-Q)+CC=6*(12*C-P),
+with N,Q,CC instantiated from their signed physical triad
+permutation/packet expressions in Agda, not defined backwards from
+the desired equation. The prior Lean realR823_R853_integral_on_same_flow
+already proves the integrated identity once this actual source law is
+supplied.
+
+No Lean/Agda kernel check of these new source terms was run; do not mark
+R823 auxiliary-reserve refutation or Clay B closed by a source-written
+statement. Keep canonical NSClayFacingABCDProofStatusExact fail-closed
+until both source-specific theorems have actual kernel receipts.
