@@ -14,11 +14,28 @@ module DASHI.Physics.Closure.NSTriadKNR650Rational345RealODEMaxCutRound833Exact 
 -- separately source-written in dashi_lean4 Rational345LocalODE,
 -- Rational345QuadraticODE and Rational345ShortTime.
 --
--- Remaining NS-specific bridge:
---   O1. actual Round71 physical RHS = the finite-chart polynomial / complete
---       real quadratic field;
---   O2. selected R828 displacement/rate bounds apply to that solution and the
---       selected rate is the same R829/R815 scalar.
+-- Historical formal-transport flags (DO NOT RESTART ANALYTIC ODE WORK):
+--   O1. rational Round71 RHS-to-older-coordinate-chart equality;
+--   O2. selected R828 real-time physical observable transported into the
+--       historical rational-valued R823/R831 calculus.
+--
+-- IMPORTANT 2026-10-23 source audit:
+-- Standard finite-dimensional real Picard existence is NOT a new physical
+-- estimate: the literal full Fourier Galerkin field is a degree-two
+-- polynomial on a finite real space, and the finite real helical observable
+-- is continuous. An initially strictly negative rate implies a strictly
+-- negative short-time real integral by continuity, independently of the
+-- cumbersome rational slot-encoding.
+--
+-- The older two flags therefore count encoding-specific UNPAID TYPED WELDS,
+-- not two independent mathematical ODE problems. In particular, the
+-- historical R823 calculus fixes Time -> Q with Q-valued integration and a
+-- globally rational helical projector; neither is a genuine real-time
+-- physical flow. The one canonical target is the exact real-source scalar
+-- identification + reserve identity on the SAME real Galerkin trajectory.
+--
+-- See Docs/papers/live/NSR828Rational345FourierWitness.md section 7.
+-- Do not infer R823 kernel refutation or Clay B from local existence alone.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
