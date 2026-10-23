@@ -35,3 +35,5 @@ Equivalent complete Python implementations were executed locally in container an
 `python3 scripts/check_369_cube27_internal_c27_quantum_phase.py`
 `agda -i . -i /path/to/agda-stdlib DASHI/Moonshine/JInvariant369Cube27ModularLocalityObstructionExact.agda`
 Local Python calculations: PASS. Agda kernel and physical tests: not run. No ADs3/Monster/KK quantum-gravity equivalence asserted.
+## Symbol hygiene
+The hopping constant written `J` in the finite-lattice Hamiltonian H=J Lcube is **NOT** the Klein modular invariant `J(tau)=j(tau)-744`. To avoid false same-symbol attribution, call this physical-model coupling `kappa`: H=kappa Lcube, with conditional energy shift -kappa. The independent coherence probability cos²(19π/27) is likewise not a Moonshine graded character value.
