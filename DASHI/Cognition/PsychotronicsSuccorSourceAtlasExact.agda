@@ -105,9 +105,9 @@ air1995 : Source.AttributedSource
 air1995 = Source.mkNoDOISource
   "Michael D. Mumford; Andrew M. Rose; David S. Goslin"
   "An Evaluation of Remote Viewing: Research and Applications"
-  "American Institutes for Research, 29 September 1995 final evaluation; CIA-RDP96-00791R000200180006-4"
+  "American Institutes for Research, 29 September 1995 final; CIA-RDP96-00791R000200180006-4 archival locator (CIA landing URL now 404); final-report PDF title and E-3 visually inspected 2026-10-24"
   "1995"
-  "https://www.cia.gov/readingroom/document/cia-rdp96-00791r000200180006-4"
+  "https://www.alice.id.tue.nl/references/mumford-rose-goslin-1995.pdf"
   Source.institutionalSource
   "independent programme evaluation; distinguishes contested statistical findings from insufficient operational intelligence utility; final version not 22 September draft"
   Source.publicAttribution
