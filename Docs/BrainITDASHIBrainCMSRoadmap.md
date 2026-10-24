@@ -1,5 +1,7 @@
 # Brain-IT / DASHI BRAIN / CMS-style empirical contact — roadmap
 
+> **Programme ownership:** [Brain-IT Scientific Programme](roadmaps/BrainITScientificProgramme.md) now owns the research phases, scientific novelty, milestone deliverables and go/no-go decisions. This document remains the technical/provenance ledger. CMS and dashiBRAIN are optional supporting lanes, not prerequisites for real human-fMRI evaluation.
+
 Status: **source-written; Agda exact-head kernel receipt and independent ML replay not yet provided**.
 Updated: 2026-10-24. Agda integration owner: [PR #1121](https://github.com/chboishabba/dashi_agda/pull/1121).
 Sibling empirical implementation owner: [dashiBRAIN](https://github.com/chboishabba/dashiBRAIN).
