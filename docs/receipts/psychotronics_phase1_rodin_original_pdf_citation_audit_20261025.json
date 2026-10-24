@@ -1,0 +1,75 @@
+{
+  "schema": "psychotronics.phase1.rodin_bibliography_noncitation_exact_source.v1",
+  "date": "2026-10-25",
+  "owner": "PR #1242",
+  "original_scientists": "Ramírez-Galindo, Pérez-Olivas, Basurto-Islas, Hernández-Rayas, González López and Córdova-Fraga (2024); Pérez and colleagues (2013)",
+  "new_source_report": "docs/research/psychotronics-phase1-2024-rodin-reference-absence-2002-croft-chronology-20261025.md",
+  "document_evidence": {
+    "source_journal_original": "https://rmf.smf.mx/ojs/index.php/rmf/article/view/6973",
+    "source_publisher_pdf": "https://rmf.smf.mx/ojs/index.php/rmf/article/download/6973/6911/27256",
+    "journal_doi": "10.31349/RevMexFis.70.030901",
+    "source_2013_doi": "10.1063/1.4819796",
+    "original_2024_paper_received": "2023-02-17",
+    "accepted": "2023-12-27",
+    "journal_issue": "2024-05",
+    "scielo_electronic_carrier": "2025-09-22",
+    "inspected_publisher_pdf_printed_pages": [
+      5,
+      6,
+      7
+    ],
+    "bounded_2024_bibliography_size": 24,
+    "explicitly_absent_2013_doi": true,
+    "original_bib_citations_present": {
+      "13": "Maldonado-Moreles et al. 2021",
+      "14": "Rodin and Volk 2010",
+      "23": "Aparicio-Bautista et al. 2022"
+    },
+    "three_2013_2024_rounded_pairs": [
+      [
+        "1.60",
+        "4.13"
+      ],
+      [
+        "1.25",
+        "3.05"
+      ],
+      [
+        "0.60",
+        "1.16"
+      ]
+    ],
+    "original_2013_reported_drive_frequencies_hz": [
+      100,
+      800,
+      2450
+    ],
+    "original_2024_simulation_steady_state": true,
+    "actual_2024_instrument_current_frequency_determined_by_model": false,
+    "raw_acquisition_shared_or_independent": "UNRESOLVED",
+    "misconduct_inferred": false,
+    "separate_same_author_2026_chapter": "10.1016/B978-0-443-41624-8.00004-8",
+    "chapter_original_body_inspected": false
+  },
+  "source_execution": {
+    "program": "scripts/check_rodin_citation_independence_cut.py",
+    "git_blob": "bfd312f2ed1fca5653b4234f652dbbf3b68a91a5",
+    "tests": "tests/test_rodin_citation_independence_cut.py",
+    "tests_git_blob": "5341dbede1d7250d1311ccf8d4af1fca8912216b",
+    "input": "docs/research/psychotronics-phase1-rodin-field-table-concordance-20261025.csv",
+    "input_git_blob": "3362039173ca50f46f85ec18325a7aa67ceb1d06",
+    "all_three_git_object_hashes_checked": true,
+    "local_program_over_committed_original_csv": "PASS",
+    "unittest_seven_of_seven": "PASS",
+    "original_24_reference_body_supplied_to_python": false,
+    "reason": "The 24-reference absence was separately checked by reading original publisher HTML and original PDF pp6-7; the test's optional bibliography input uses synthetic 24-item reference index. Do not claim complete original bibliography parsed into Python."
+  },
+  "croft_original_actor_2002_claim_versions": {
+    "july": "Original Croft-authored July 22 text later hosted at myhealinggarden.net: instruction source anonymous",
+    "december": "Later-hosted Croft-authored internal Dec 9 2002 text names Gentry Smith, attributes his earlier source to Patrick Flanagan",
+    "original_2002_server_metadata_recovered": false,
+    "independent_original_gentry_witness": false,
+    "witness_roots_for_handoff": 1
+  },
+  "admission_ceiling": "Source-carrier chronology and printed numerical concordance only; no independent instrument raw data, author motive, historical extraordinary effect, Hardt connection, Agda kernel or original participant event observed."
+}
