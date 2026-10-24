@@ -1258,3 +1258,60 @@ def test_us_personal_consents_do_not_multiply_into_private_facebook_dataset_cust
     assert "uk2016AIQInvoicesIdentifyGSRScoreFile : Bool" in case
     assert "sourcePaysEpsteinAquinoCommonCommand : Bool" in case
     assert "original-election-regulatory-split" in case
+
+
+def test_original_ftc_v_bannon_2020_four_distinct_roles_and_no_guilt_promotion():
+    ca = (ROOT / "DASHI/Cognition/BannonCambridgeAnalyticaInfluenceInfrastructureExact.agda").read_text()
+    case = OWNER.read_text()
+    for marker in (
+        "ftc2020BannonCivilDemandInvestigation : InfluenceEdgeKind",
+        "ftc2020BannonJudicialShowCauseOrder : InfluenceEdgeKind",
+        "ftc2020BannonCIDPetitionReceipt = influence-receipt",
+        "ftc2020BannonRespondentOppositionReceipt = influence-receipt",
+        "ftc2020BannonJudicialShowCauseReceipt = influence-receipt",
+        "ftc2020BannonReplyReceipt = influence-receipt",
+        "1:20-mc-00111-CRC",
+        "original independent opposing litigant pleading",
+        "same FTC prosecutor root",
+        "signed original federal judicial PROCEDURAL order",
+        "∷ ftc2020BannonCIDPetitionReceipt",
+        "∷ ftc2020BannonJudicialShowCauseReceipt",
+        "∷ ftc2020BannonRespondentOppositionReceipt",
+        "∷ ftc2020BannonReplyReceipt",
+    ):
+        assert marker in ca
+    for marker in (
+        "ftc2020BannonCourtPetitionOriginalOwner = CA.ftc2020BannonCIDPetitionReceipt",
+        "ftc2020BannonOppositionOriginalOwner = CA.ftc2020BannonRespondentOppositionReceipt",
+        "ftc2020BannonJudicialShowCauseOriginalOwner = CA.ftc2020BannonJudicialShowCauseReceipt",
+        "ftc2020BannonReplyOriginalOwner = CA.ftc2020BannonReplyReceipt",
+        "canonicalBannonFTCCIDAdversarialBoundary = bannon-ftc-cid-adversarial-boundary",
+        "ftcBannonDirectAgencyInvestigationSourcePaid = refl",
+        "ftcReplyIsNotIndependentNewAgencyProducer = refl",
+        "bannonContraryOriginalPleadingRetained = refl",
+        "ftcBannonActualCourtSchedulingOrderPaid = refl",
+        "ftcBannonCivilCIDIsNotAdjudicatedGuilt = refl",
+        "bannonResponseNotJudicialExoneration = refl",
+        "ftcBannonCaseOutcomeStillUnverified = refl",
+        "ftcBannonCIDDoesNotPayEpsteinMediaTransfer = refl",
+        "ftcBannonCIDDoesNotPayWholeNetworkH3 = refl",
+    ):
+        assert marker in case
+
+
+def test_ftc_bannon_adversarial_original_docs_not_two_independent_findings():
+    report = (ROOT / "docs/research/aquino-epstein-canonical-disposition-20261025.md").read_text()
+    for marker in (
+        "FTC v Stephen K. Bannon",
+        "2020-11-09 petition",
+        "Judge Christopher R. Cooper",
+        "2020-12-09 opposition",
+        "2020-12-18 reply",
+        "denies",
+        "not a judicial holding",
+        "Same FTC producer",
+        "not an administrative FTC finding against Bannon",
+        "2019 Bannon–Epstein film",
+        "H2/H3 remains unestablished",
+    ):
+        assert marker.lower() in report.lower()
