@@ -22,6 +22,34 @@ module DASHI.Physics.Closure.NSTriadKNEuclideanCanonicalProjectedInteractionExac
 -- identification itself.
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+-- 2026-10-24 A PHYSICAL SAME-OBJECT FOURIER MAX-CUT
+--
+-- The local raw divergence-form/Leray cell below is ALREADY implemented.
+-- The remaining transform is not another pointwise projector identity:
+-- construct the SPATIAL Fourier/Plancherel map on the SAME continuum
+-- physical velocity (not a free FourierTransformVelocity : Set).
+--
+-- Standard finite-energy distributional identity:
+--   F[(u.grad)u]_i(xi) =
+--     i (2pi)^(-3) sum_j xi_j int_eta uhat_j(eta) uhat_i(xi-eta)
+-- for div u=0; initially Schwartz, then u in L2 via
+-- u_i u_j in L1, L2 approximation and distribution derivatives.
+--
+-- Physical source estimate for u in H1(R3):
+-- |F[P div(u tensor u)](xi)|
+--   <= min( |xi| E, sqrt(E D)),
+-- E=||u||_2^2, D=||grad u||_2^2.
+-- The *direct* heat-inverse response is globally L2 in frequency:
+-- integral |source/(nu|xi|^2)|^2
+--   <= 8pi E^(3/2) sqrt(D) / nu^2.
+-- This is standard analysis documented in the live NSProofControl roadmap.
+-- It has NOT yet been transported into Bishop Fourier formal semantics,
+-- nor paid the signed centered-resolvent A2/A3 continuation theorem.
+-- Exact nontrivial Schwartz provenance/witness:
+-- scripts/ns_a_schwartz_fourier_same_object.py.
+------------------------------------------------------------------------
+
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
