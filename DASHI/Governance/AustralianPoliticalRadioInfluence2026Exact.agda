@@ -25,6 +25,9 @@ data PoliticalRelation : Set where
   prospectiveSponsorOffer : PoliticalRelation
   externalPlatformSupplier : PoliticalRelation
   financialEntitlement : PoliticalRelation
+  timedTargetedInformationRelease : PoliticalRelation
+  originalOpinionProduction : PoliticalRelation
+  traceableClaimAmplification : PoliticalRelation
   advertiserBoycottCampaign : PoliticalRelation
   commercialLeaseArrangement : PoliticalRelation
   ownershipBuyoutSettlement : PoliticalRelation
@@ -509,3 +512,50 @@ noRumourToEquity : ReportedPodcastBackerIsAuditedCapital → ⊥
 noRumourToEquity ()
 noRepublishedFileCommand : OriginalInterviewFileAccessIsProvenInstruction → ⊥
 noRepublishedFileCommand ()
+
+
+-- Selected historical comparison from the independent 2021 Great Barrier
+-- Reef literature. These are bounded joins, not a claim that 2021 actors
+-- commissioned 2026 BOM radio content. The complete non-exhaustive
+-- graph is in Docs/support/reference/australian_climate_claim_origin_edges_20261025.csv.
+-- Other existing environmental / genealogy / gas owners remain canonical.
+
+leyAimsTargetedMediaPreview : RelationshipReceipt
+leyAimsTargetedMediaPreview = relationship-receipt
+  "2021 federal environment minister's office / AIMS"
+  "Selected News Corp newspapers: The Australian and Courier Mail"
+  timedTargetedInformationRelease journalistCorroboration
+  "Michael Slezak, ABC, 2 September 2021; FOI-derived correspondence"
+  "https://www.abc.net.au/news/2021-09-02/government-told-science-agency-to-rush-reef-report-release/100422190"
+  "FOI records show pressure to accelerate AIMS report publication and preparation for selected-media preview; government and agency characterised request as reasonable. Not proof the minister altered AIMS coral measurements or commissioned Ridd's separate column."
+  false false false
+
+riddIndependentReefOpinion : RelationshipReceipt
+riddIndependentReefOpinion = relationship-receipt
+  "Peter Ridd"
+  "23 July 2021 The Australian reef-science commentary"
+  originalOpinionProduction journalistCorroboration
+  "Lubicz-Zaorski/Newlands/Petray, Public Understanding of Science; original Ridd article traced"
+  "https://journals.sagepub.com/doi/10.1177/09636625231202117"
+  "Peer-reviewed source genealogy separately attributes Ridd's newspaper interpretation of an AIMS 2021 report. The opinion is not the original AIMS scientific assessment."
+  false false false
+
+mooreAmplifiedRiddReefClaim : RelationshipReceipt
+mooreAmplifiedRiddReefClaim = relationship-receipt
+  "Peter Ridd's original The Australian reef interpretation"
+  "Patrick Moore's Twitter sharing of Ridd opinion"
+  traceableClaimAmplification journalistCorroboration
+  "Lubicz-Zaorski/Newlands/Petray 2023 online / 2024 issue; Twitter network trace"
+  "https://journals.sagepub.com/doi/10.1177/09636625231202117"
+  "Peer-reviewed network analysis attributes sharing of Ridd content to Moore. This is evidence of amplification, not an independent coral measurement, a payment or a shared campaign command."
+  false false false
+
+acmaReefOutsidersFinding : RelationshipReceipt
+acmaReefOutsidersFinding = relationship-receipt
+  "ACMA"
+  "Sky News Outsiders 2021 reef-report broadcasts / 2023 decisions"
+  enforcementFinding regulatoryDetermination
+  "ACMA television broadcaster investigations, 26 April 2023: BI-645, BI-646, BI-647"
+  "https://www.acma.gov.au/investigations-tv-broadcasters"
+  "ACMA found specific accuracy/misrepresentation and news-commentary distinction breaches for Outsiders across relevant regional and subscription licences. Do not generalise findings to every Sky programme or equate with 2026 BOM broadcast."
+  false false false
