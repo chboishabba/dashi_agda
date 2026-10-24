@@ -88,6 +88,27 @@ relativeReopening {V} {G} witness =
         (embedLostProfile witness residual))
     (exactReopenFromPowerCertificate witness)
 
+-- Two relative-fibre presentations exist for the SAME pair of measurements.
+-- For geometric coarse-first semantics choose the five-slot P profile
+-- as coarse and the 120-dimensional F image as relative fine. The earlier
+-- presentation instead chooses the dynamic F observation as coarse and P
+-- as its missing relative residual. Neither is absolute without a consumer.
+
+diagonalCoarseFirstReopening :
+  ∀ {V G} →
+  DiagonalCoarseFiveSplit V G →
+  Fibre.CoarseFineReopening V
+diagonalCoarseFirstReopening {V} {G} witness =
+  Fibre.coarseFineReopening
+    G V
+    (projectedLostProfile witness)
+    (transition witness)
+    (λ diagonalCoarse retainedFine →
+      join witness
+        (inverseOnRetainedOutput witness retainedFine)
+        (embedLostProfile witness diagonalCoarse))
+    (exactReopenFromPowerCertificate witness)
+
 retainedPlusLostDimension : Depth.CoarseFineDecomposition
 retainedPlusLostDimension =
   Depth.coarse-fine-decomposition 120 5 125 refl
