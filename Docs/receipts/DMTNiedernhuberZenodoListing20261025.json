@@ -22,8 +22,8 @@
     "access_label": "Open",
     "license_status": "unresolved_display_blank",
     "code_url_advertised": "https://github.com/marianiedernhuber/DMT_microstates",
-    "code_commit_status": "not_verified",
-    "note": "2026-10-25 record page renders a blank license field. Open download status does not establish permitted reuse/redistribution. Original treatment/file or within-file epoch crosswalk not shown. 18850896 listed in paper, 18850897 on version page; concept/version relation inferred, API confirmation outstanding."
+    "code_commit_status": "pinned_primary_author_commit",
+    "note": "2026-10-25 record page renders a blank license field. Open download status does not establish permitted reuse/redistribution. Original analysis code explicitly declares 25 file-prefix participant IDs and loops three conditions with unavailable getconds/session metadata; raw dataset mapping, split and executed state not verified. 18850896 listed in paper, 18850897 on version page; concept/version relation inferred, API confirmation outstanding."
   },
   "file_pairs": [
     {
@@ -359,6 +359,51 @@
     "microstate_label_arrays_verified": false,
     "original_transition_reproduced": false,
     "measured_entity_experience": false,
-    "independent_conscious_agent_inferred": false
+    "independent_conscious_agent_inferred": false,
+    "source_code_declares_25_participants": true,
+    "source_code_declares_three_condition_loop": true,
+    "source_code_g1_export_identified": true,
+    "participant_identity_and_arms_verified_from_recording_contents": false,
+    "original_pipeline_dependencies_verified": false
+  },
+  "original_analysis_code": {
+    "repository": "marianiedernhuber/DMT_microstates",
+    "branch": "main",
+    "commit": "c5c064d109563e97127403a8fbb340009ba1e88b",
+    "committed": "2026-03-02T16:58:11Z",
+    "source_files": [
+      {
+        "path": "check_counterbalance.r",
+        "git_blob_sha1": "9716ab46f15782294e53ccf8e3588593653dbdfc",
+        "role": "author lists 25 participant IDs and obtains session order from unavailable acute_change_bl.csv"
+      },
+      {
+        "path": "disemb_mc_mkcoh.m",
+        "git_blob_sha1": "f1855919b8a8ef315413ecbf103dcad24fc81519",
+        "role": "loops DMT,harmine,placebo and uses getconds project helper on each .set prefix"
+      },
+      {
+        "path": "disemb_mc_backfit.m",
+        "git_blob_sha1": "74f23cad7fc968e3a8b537bfa013ae62fb3b885e",
+        "role": "microstate class backfit against globally estimated maps, two label rounds"
+      },
+      {
+        "path": "disemb_mc_Rprep.m",
+        "git_blob_sha1": "3f58dde834189972410165cdd06392dea9220b33",
+        "role": "exports coh.stats(idx).markov.G1 for author-side Markov result"
+      },
+      {
+        "path": "disemb_microstate.m",
+        "git_blob_sha1": "83683cfadb5a6ca76f63a0a9ec7a227a45e61e85",
+        "role": "author's thin pipeline orchestrator"
+      }
+    ],
+    "dependency_obligations": [
+      "Author getconds, allproj_dir, disemb_loadpaths and external microstate MATLAB class implementation and versions",
+      "Author session drug order input acute_change_bl.csv and source data preprocessing/segmentation",
+      "Pin G1 definition from original microstate dependency; not interchangeable with entropy/MI",
+      "Recover effective maps, inclusion/exclusion/order and reproducible execution state"
+    ],
+    "claim": "Original authors supply source-written analysis plan and explicit 25 participant IDs; this is not an executed or kernel-proved participant replay"
   }
 }
