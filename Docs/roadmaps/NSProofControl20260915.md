@@ -1,3 +1,25 @@
+# Current A/B mathematical handoff — 24 October 2026
+
+> **Read this section first.** The many dated sections below preserve
+> source provenance and negative-control receipts but are not separate
+> open mathematical tasks. RNNN owners are historical imports, not
+> milestones. `python scripts/ns_canonical_focus.py --route A|B|B4`
+> resolves directly to the live physical theorem owners.
+
+| Track | Already established / exact evidence | Single next mathematical cut |
+| --- | --- | --- |
+| **B4 original count-centered inequality** | Fixed smooth shear; full-fibre defect grows without bound, core companion freezes, literal R219/R469 selected local ED<=4. **Auxiliary inequality falsified** (ordinary exact mathematics; not kernel proof). | **Do not prove or reinstall it.** |
+| **B physical replacement** | Existing fixed-output output-heat theorem, R681 cross-gradient rate, R684 input-Laplacian, R685 commutator-minus-tangent, R690 global sum-before-integral; these are prior source-written proofs. | Prove the signed quantitative *global* cross-gradient payment and a compensated same-object link to original physical critical production. The naive R681=B4 defect identity is **false** on the same shear. |
+| **A Fourier source** | Physical local Leray/divergence cell; finite-energy tensor Fourier source; direct H¹ response full-frequency + finite-time bounds; new strong-H¹ density inequality `||Vhat(u)-Vhat(v)||² <=8πAB/ν²`, with A/B actual tensor/convective L¹ source differences. | Construct verified Agda/Bishop Fourier/Plancherel mapping for the **same** continuum NS trajectory and consume it in actual *signed centered* A2, not just the direct Stokes response. |
+| **A/B completion** | Abstract compilers and Galerkin continuation infrastructure already present. | Source-level universal physical A2/A3 and B1–B3/B7/global regularity bounds remain **open**. No Clay promotion. |
+
+**Proof acceptance:** physical source-written vs exact finite computation vs
+standard analytic derivation vs Lean/Agda kernel check must remain separate.
+No new RoundNNN/RNNN modules, no unbounded historical search, no CI required.
+The current work added tests to the existing A/B evaluators and reuses
+existing R681/R690, not a freshly invented substitute representation.
+
+---
 ## 2026-10-24 next max-cut: recover the already-proved B4 alternative; quantify A Fourier H¹ density
 
 ### B: do NOT reconstruct the zero-padding-invariant output-rate identity
