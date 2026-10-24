@@ -107,13 +107,13 @@ def test_bidi_source_independence_and_acquisition_stages():
 def test_per_consumer_witnesses_remain_unpaid_without_original_artefacts():
     source = OWNER.read_text()
     for named_cut in (
-        "sclTransferCut", "bannonWorkProductCut",
+        "cambridgeLegalEntityCut", "sclTransferCut", "bannonWorkProductCut",
         "promisExecutableCut", "aquinoHistoricalTransferCut",
         "commandHierarchyCut",
     ):
         assert f"{named_cut} : CaseDependencyCut" in source
         assert f"{named_cut} = case-dependency-cut" in source
-    assert source.count("true true true false false") >= 5
+    assert source.count("true true true false false") >= 6
     assert "canonicalCaseCuts : List CaseDependencyCut" in source
     for target in (
         "sclCorporateWorkProductTarget", "bannonEpsteinFilmWorkProductTarget",
