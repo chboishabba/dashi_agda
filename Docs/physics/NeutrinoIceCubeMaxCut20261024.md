@@ -539,3 +539,166 @@ the Monster/3B/C3, qutrit, or 27-hypervoxel representations induce
 the physical flavour-sector mass operator.  Without actual
 intertwining, those are donors and potential no-go targets, not
 physics derivations.
+
+## 2026-10-24 empirical discovery: IceCube three-flavour composition as a real consumer
+
+### Original primary experimental source (not a secondary Nobel retelling)
+
+**IceCube Collaboration (R. Abbasi et al.),**
+"Characterization of the Three-Flavor Composition of Cosmic Neutrinos
+with IceCube," *Physical Review Letters* **137**, 081002, published
+18 August 2026, DOI **10.1103/vntd-m133**:
+https://doi.org/10.1103/vntd-m133
+
+Using **11.4 years of IceCube data**, the collaboration reports
+the best-fit *Earthly flux* flavour fractions
+`(f_e,f_mu,f_tau)=(0.30,0.37,0.33)`, with asymmetric and substantial
+uncertainties, in an analysis spanning about 5 TeV–10 PeV.
+Its result finds all three flavours present above the 90% confidence
+threshold; source composition is consistent with pion-decay origin,
+while pure-neutron-decay production is disfavoured under the assumed
+analysis model, with posterior probability `2.7×10^-5`.
+Those are the **collaboration's** statistical conclusions, **not**
+new significance calculations produced by DASHI.
+
+This is a **different primary analysis/sample/likelihood** from the
+IceTracks-DR2-v2 public point-source dataset, NuFIT's
+oscillation parameter fit, and the 2026 Nobel award.  It must not
+be treated as four independent source detections merely because the
+press coverage and data releases have separate URLs.
+
+### Exact high-energy long-baseline phase averaging
+
+Over astronomical distances, under standard incoherent vacuum
+propagation with three stable neutrinos:
+
+```
+Pbar(alpha,beta) = Σ_i |U(alpha,i)|² |U(beta,i)|²
+f_earth(beta) = Σ_alpha f_source(alpha) Pbar(alpha,beta)
+```
+
+`DASHI/Physics/QFT/NeutrinoC3AstrophysicalFlavorNoGoExact.agda`
+constructs both finite mixing examples by **reusing** the Fourier
+entry and rational mixer owners, and deriving their incoherent
+oscillation transfer from the literal algebraic entries.
+
+**Flat C3 Fourier** `U=F3/sqrt(3)`:
+
+```
+Pbar_F = (1/3) [[1,1,1],
+                [1,1,1],
+                [1,1,1]]
+```
+
+This matrix has rank one, annihilates the two-dimensional
+source-contrast subspace, and produces the same Earth mixture
+`(1/3,1/3,1/3)` for all normalized source mixtures.
+In particular, the normalized **pion** `(1:2:0)` and pure
+**neutron** `(1:0:0)` source ratios become exactly identical.
+This is a **source-identifiability no-go for FLAVOUR FRACTIONS ALONE**
+under that fixed mixing matrix and the stated phase-averaging
+assumptions—not a claim that a specific IceCube likelihood has
+measured or excluded F3 by itself.  Reactor mixing independently
+rules out the naive Fourier matrix.
+
+**Earlier rational toy** `U=M/3`:
+
+```
+Pbar_M = (1/27) [[11, 8, 8],
+                 [8, 11, 8],
+                 [8, 8, 11]]
+        = (8J+3I)/27
+pion_earth    = (9,10,8)/27
+neutron_earth = (11,8,8)/27
+```
+
+The old rational toy retains one ninth of source flavour contrast,
+but its reactor `|U_e3|²=4/9` is incompatible with observations;
+therefore **neither** toy is an acceptable physical PMNS
+candidate.  Agreement of a selected toy pion fraction with a
+single observed best-fit coordinate is NOT a fit.
+
+**Continuous complex PMNS numerical benchmark** using the declared
+NuFIT 6.1 NO best-fit angle/CP input choices in
+`tests/test_neutrino_three_flavour_bridge.py` gives:
+
+| Source flavour at emission | Calculated Earth e | Calculated Earth μ | Calculated Earth τ |
+| --- | ---: | ---: | ---: |
+| Pion decay (1:2:0) | 0.32634 | 0.34322 | 0.33044 |
+| Neutron decay (1:0:0) | 0.54815 | 0.21543 | 0.23642 |
+| IceCube published best fit (Earth only, not a source model) | 0.30 | 0.37 | 0.33 |
+
+These are **newly computed deterministic model predictions using
+existing published mixing inputs**, not new measurements.
+No astrophysical source spectra, energy-dependent detector response,
+production branching uncertainty, neutrino/antineutrino ratio,
+classification systematics, or posterior has been constructed here;
+therefore **do not infer significance** or claim a replication of
+the collaboration's exclusion.  The physical benchmark
+`Pbar` is a mathematical consumer of accepted PMNS data, not a
+proof of mass eigenstate mechanism or C3/Monster identity.
+
+### New tests and exact status
+
+`tests/test_neutrino_c3_cyclotomic_bridge.py` contains:
+81-case exact C3 conservation, 9-case exact Fourier character
+orthogonality, sum-zero versus nonzero unit phases, source-mixing
+no-go and detector screening.  Newly added
+`tests/test_neutrino_three_flavour_bridge.py` includes the
+physical PMNS phase-averaged pion/neutron source benchmarks.
+
+Independent Python arithmetic was executed for **81 C3 identities,
+9 Fourier orthogonality checks and both source propagators**, including
+their exact rational Earth fractions.  A separate Python calculation
+executed the standard three-flavour PMNS benchmark and produced the
+six Earth fractions recorded above.  These are **independent
+computational validations**.  The exact GitHub branch files and all
+Agda modules remain **kernel-pending**, and the freshly committed
+test files do not have a direct exact-file test-run receipt yet.
+Use these commands on the head branch:
+
+```sh
+python -m unittest discover -s tests -p 'test_neutrino_c3_cyclotomic_bridge.py' -v
+python -m unittest discover -s tests -p 'test_neutrino_three_flavour_bridge.py' -v
+agda -i . DASHI/Physics/QFT/NeutrinoC3CyclotomicPriorArtBridgeExact.agda
+agda -i . DASHI/Physics/QFT/NeutrinoC3AstrophysicalFlavorNoGoExact.agda
+```
+
+### Roadmap re-ranking: 2026 high-value independent constraints
+
+**P0 paid at source-written/exact arithmetic level:** C3 phase reuse,
+additive-zero versus phase identity, source-conditioned 81-case
+probability normalization, strict same-phase but different-mixer
+countermodels, 3-divisibility obstruction to continuous C3-only
+propagation, and exact decohered source-information rank-one no-go.
+The 2026 IceCube paper is now registered under its
+**original collaboration authorship** as a consumer.
+
+**P1 physical necessity:** continuous 3x3 PMNS must be derived from
+the **charged-lepton diagonalization and neutrino mass eigenbasis**
+on the same lepton Hilbert space; the differing residual actions
+and their symmetry breaking must genuinely reproduce non-flat
+`|U_e3|²`, nonmaximal mixings, CP convention and mass splittings.
+Simply tagging three cube sites or 3B eigenvalues electron/muon/tau
+is insufficient.
+
+**P2 empirical source fits:** reproduce the original IceCube 2026
+three-flavour likelihood or a properly released event-level sample,
+including track/cascade/double-cascade classifications, energy
+selection, detection efficiencies and all reported nuisance
+parameters, then profile pion/neutron counterfactuals.  DR2-v2
+point-source IRFs are **not a substitute** for that experiment's
+flavour-classification likelihood.
+
+**P3 parameter tension:** NuFIT correlated Δχ² for the original
+`1/31` ratio (with exact ordering/convention), plus registration
+of possible A4/S4 residual-family mass-texture models and
+held-out observables.  No post-hoc free counterterms to rescue a
+failed literal ratio.
+
+**P4 terminal same-object decision:** require a literal
+spectral/operator intertwiner from the repo's 3B/C3/qutrit/729
+action to a physical lepton flavour Hamiltonian with source,
+propagation and detection and a discriminating observation.
+Until then the native C3 work is an excellent mathematical donor,
+not an empirical derivation of neutrino dynamics.
