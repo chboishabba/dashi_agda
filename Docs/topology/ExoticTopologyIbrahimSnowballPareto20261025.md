@@ -197,3 +197,60 @@ user's specific figure. It is not yet a homomorphism out of the
 ACTUAL topological complement `pi1` without the geometric
 colimit/VK theorem. Nor does it decide the local endpoint
 wildness of source Examples 1.2 and 1.3.
+
+
+## 2026-10-25 lineage correction: finite manifold != Cantor end construction
+
+A subtle implementation defect in the earlier `exotic_topology_pl_surface_gluings.py`
+was uncovered: its Cantor scheduler iterated
+`range(len(boundary_loops(mesh)[0]))` but repeatedly called
+`glue(mesh, pants)` on **boundary index zero**. After the first
+attachment that index can denote a NEWBORN frontier circle.
+Therefore its passed genus/Euler/vertex-link and `2^n` boundary
+count fixtures did **not** certify that every PREVIOUS stage
+branch had split exactly once. The old `audit` is retained as
+a mesh-integrity audit, but its end-lineage inference is superseded.
+
+Repairs committed:
+- `exotic_topology_pl_surface_gluings.py:glue(...,with_transport=True)`
+  now optionally returns **actual vertex maps** from both input
+  triangulations through the orientation-reversing quotient.
+  Original callers and mathematical triangulation are unchanged.
+- `exotic_topology_pl_frontier_lineage.py` reuses the original
+  disk, three-holed sphere/pants, punctured torus/handle, gluing,
+  link validator and boundary-cycle detector. It labels every
+  live geometric boundary circle and transports all labels through
+  vertex identifications; at a new stage it snapshots the full old
+  frontier, attaches to each old label **once only**, and compares
+  resulting labels against the exact binary child set.
+  Cantor: prefix `p -> p0,p1`; Loch: sole label persists after
+  one handle; Jacob: each of L/R persists after its own handle.
+  Every live label must match exactly one actual geometric boundary
+  loop, not merely an address in a separate registry.
+- Three additional unit tests check exact labelled stages, a
+  count-only false-positive, and an **actual legal oriented
+  4-boundary triangulated surface** obtained by repeatedly
+  splitting the same left branch while leaving the right one
+  unsplit. Thus topology stage integrity, Euler/genus and b=4
+  do not imply correct Cantor-tree ancestry.
+- `dashi_lean4` #86 adds
+  `Synthesis/ExoticTopologyCantorInverseLimit.lean`, sourcing
+  finite stage functions from **existing** `Integration.Address.Addr`.
+  It defines coherent infinite towers and a two-sided stream/tower
+  equivalence. This is not yet kernel-checked or a claim about the
+  Freudenthal/Richards end topology of the literal 2-manifold.
+
+**Important outstanding bridge:** the infinite collared union and
+its actual space of proper nested unbounded-region classes must be
+identified with this coherent prefix space, including continuity
+in the Richards ideal-boundary topology. The 1963 paper defines
+ends by nested connected unbounded regions with compact frontier
+and the properness condition, not simply by arbitrarily labelled
+triangular boundary circles (Richards pp.261--262).
+The PL lineage repair supplies the correct **finite incidence
+input** for this global theorem and no more.
+
+Fresh execution at the exact pushed SHA: NOT YET AVAILABLE.
+The tests and construction are source-written and committed;
+the earlier 8/8 + mesh receipts predate the lineage repair and
+must not be cited as having executed these new tests.
