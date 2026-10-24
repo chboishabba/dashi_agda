@@ -149,6 +149,25 @@ def audit():
         omega=next(t for t in range(2,p) if pow(t,3,p)==1)
         fields[str(p)]={"primitive_root_order3":omega,"rank_Cnew":90,"rank_Cold":90,
                         "char_2_invertible":True,"model_only_not_historical_Barraclough_matrices":True}
+    # From the *source-backed* irreducible Sym²(12) of 3.Suz,
+    # predict central scalar fingerprints without claiming the Monster
+    # selected 78 family or Barraclough diagonal-quotient orientation.
+    # Z[zeta] coordinates: a+b*zeta, zeta²=-1-zeta.
+    zeta=[(1,0),(0,1),(-1,-1)]
+    centre_rows=[]
+    for phase12 in (1,2):
+        for dual in (False,True):
+            phase78=((-2 if dual else 2)*phase12)%3
+            v12=zeta[phase12];v78=zeta[phase78]
+            chi3=(12*v12[0]+78*v78[0],
+                  12*v12[1]+78*v78[1])
+            chi6=(-12*v12[0]+78*v78[0],
+                  -12*v12[1]+78*v78[1])
+            assert chi3[1]!=0  # Not a pure 90-point permutation trace
+            centre_rows.append(dict(phase12=phase12,dual_sym2_78=dual,
+                                    centre_C2_character=66,
+                                    centre_C3_character=chi3,
+                                    centre_C6_character=chi6))
     return dict(status="exact_D4_9plus3_symmetric_square_Q_intertwiner_passed",
        original_nine_cell_irreps=nine,
        three_12dimensional_D4_roots=[dict(multiplicities=c,character=ch) for c,ch in possible],
@@ -160,7 +179,7 @@ def audit():
        new_basis_sha256=hashlib.sha256(json.dumps(cb).encode()).hexdigest(),
        rational_rank_certificate="both canonical integer matrices have rank90 mod101",
        source_finite_field_crosschecks=fields,
-       actual_6Suz_selected_78_is_Sym2_12=False,
+       source_irreducible_6Suz_Sym2_12_degree78=True,\n       source_sym2_78_descends_to_3Suz=True,\n       model_central_C2_C3_C6_fingerprints=centre_rows,\n       actual_Monster_selected_78_is_Sym2_12="unverified",
        full_monster_inertia_action_established=False,
        false_promotion_warning="Sym² of faithful 6.Suz degree12 kills its central involution; 6.Suz faithful degree78 cannot be that Sym²")
 if __name__=="__main__":
