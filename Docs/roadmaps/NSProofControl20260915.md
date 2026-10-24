@@ -1,3 +1,47 @@
+# 2026-10-25 IMPORTANT R699 SHARPENING — H^(3/4), NOT H^s>3/2, IS SUFFICIENT
+
+The s>3/2 ell1/ell2 theorem in the previous current-turn
+amendment below remains correct, but is NOT the minimal classical
+regularity input. On the exact periodic rectangular sharp cube,
+uniform L4 boundedness of P_N follows from M. Riesz's 1D
+interval-partial-sum operator (difference of modulated Riesz
+projections), tensorized across the three axes. True physical
+helical H± are uniformly bounded L4 zero-order periodic Riesz
+operators. Hölder/cross-product inequality plus H^(3/4)->L4
+thus gives, for ALL N and real divergence-free u0∈H^(3/4)(T³),
+  E_M,N(0)
+    = Σ_(k∈original nonzero cutoff)|M_(N,k)|²
+    ≤ C ||u0||_(H^(3/4))⁴.
+For H¹ initial data, interpolation immediately gives
+  E_M,N(0) ≤ C sqrt(E0)(E0+D0)^(3/2).
+The bound is cutoff-independent and does NOT depend on a
+periodic unit spectral gap. This is a mathematical proof via
+classical Fourier multiplier/Sobolev theorems, not yet an inhabited
+Agda record. Source and provenance:
+`Docs/research/ns_r699_initial_mass_cutoff_young_20261025.md`.
+The two exact physical L4/Parseval tests
+`tests/test_ns_r699_h34_l4_physical_endpoint.py` passed locally.
+
+**Do not confuse this successful L4 initial PRODUCT bound with the
+historical failed L4×L4 BERSTEIN shortcut for the *derivative-bearing*
+A2 triadic shell inequality in
+`NSTriadicShellBernsteinHolderBoundary.agda`. That latter target
+requires a sharp 2^min(j,k) commutator factor and is NOT proved
+by generic L4 Holder. Similarly,
+`NSTriadKNPeriodicUniformHarmonicAnalysis.agda` records a
+`youngConstantSq` and `integerLatticeYoungConvolution` as
+UNINHABITED RECORD FIELDS, not source-exact analytic theorem terms.
+Reuse its interface only after a genuine normed physical
+instantiation and independent kernel checking.
+
+The physical heat-shear energy-only initial-mass no-go remains
+valid: fixed kinetic E=1, E_M,N(0)~N/24 when u0 itself varies
+with N. Its H^(3/4) norm increases accordingly.
+All universal nonlinear R735 W1/W2 inequalities and
+whole-space A continuation remain OPEN.
+
+---
+
 # 2026-10-25 A/B MAX-CUT: R699 INITIAL MASS PAID ANALYTICALLY, ENERGY-ONLY ROUTE EXCLUDED
 
 **Research source:** `Docs/research/ns_r699_initial_mass_cutoff_young_20261025.md`.
