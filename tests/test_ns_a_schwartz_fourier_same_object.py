@@ -38,3 +38,24 @@ def test_no_global_regulariy_or_unjustified_transform_claim():
     assert "every solution" in not_claimed
     assert "time propagation" in not_claimed
     assert "kernel certification" in not_claimed
+
+
+def test_arbitrary_finite_energy_low_frequency_response_is_locally_L2():
+    # Analytical theorem: u in L2 -> u⊗u in L1; each Fourier
+    # component of the physical tensor is bounded by E=||u||_2².
+    # P_xi has norm ≤1 and divergence supplies one |xi| factor:
+    # |P_xi F[div(u⊗u)]| ≤ E |xi|.
+    # Dividing by the actual positive heat rate nu|xi|² gives
+    # E/(nu|xi|), whose SQUARED R3 integral over B_R is finite.
+    R,nu,E,r=S.symbols("R nu E r",positive=True)
+    upper=E/(nu*r)
+    ball_l2=S.integrate(4*S.pi*r*r*upper*upper,(r,0,R))
+    ball_l1=S.integrate(4*S.pi*r*r*upper,(r,0,R))
+    assert S.simplify(ball_l2-4*S.pi*R*E**2/nu**2)==0
+    assert S.simplify(ball_l1-2*S.pi*R*R*E/nu)==0
+
+    receipt=module.certificate()
+    assert receipt["arbitrary_L2_physical_projected_source_bound"] == (
+        "|F(Pdiv(u⊗u))(xi)| <= |xi|*E")
+    assert "R" in receipt["low_ball_resolvent_L2_norm_squared_bound"]
+    assert "R" in receipt["low_ball_resolvent_L1_norm_bound"]
