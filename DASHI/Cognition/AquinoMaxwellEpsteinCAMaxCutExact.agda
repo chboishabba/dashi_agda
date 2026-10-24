@@ -27,6 +27,7 @@ import DASHI.Cognition.EpsteinBlackAgreementInvoiceWorkJoin20261015Exact as Blac
 import DASHI.Cognition.EpsteinBlackInvoiceWireSettlement20261015Exact as BlackWire
 import DASHI.Cognition.EpsteinBlackApolloSameObjectReceiptRound20261014Exact as BlackApollo
 import DASHI.Cognition.EpsteinBankingInfrastructureAcquisitionExact as Banking
+import DASHI.Cognition.EpsteinBlackPaymentScopeReconciliation20261014Exact as BlackScope
 
 ------------------------------------------------------------------------
 -- AQUINO / MAXWELL / EPSTEIN / CA: EXISTING-CARRIER ATTRIBUTION MAX-CUT
@@ -1890,3 +1891,161 @@ riponScoreDisplayDoesNotCertifyFacebookOrigin = refl
 riponScoreDisplayNoElectionOutcomeProof :
   scoringInterfaceProvesInfluenceOnElection canonicalRiponScoreProducerDisplayBoundary ≡ false
 riponScoreDisplayNoElectionOutcomeProof = refl
+
+
+------------------------------------------------------------------------
+-- CROSS-POLLINATION 2026-10-25: THE EXISTING SOURCE-ACQUISITION,
+-- EVENT-TIME, COMMON-OBJECT AND FINANCIAL SCOPE OWNERS.
+-- This is source-state model checking, not an external-world theorem.
+------------------------------------------------------------------------
+
+ftcGSRSCLCommissionSource : Acquisition.SourceAcquisitionTarget
+ftcGSRSCLCommissionSource = Acquisition.sourceAcquisitionTarget
+  "FTC Docket 9383 Commission Opinion, 2019, PDF original"
+  "Printed opinion pp 5-6: June 4 2014 GSR/SCL agreement; SCL/CA service and IP licences"
+  Acquisition.directDigitalArchive Acquisition.nationalCatalogue
+  true true true
+
+ocdetfOriginalDocumentAcquisition : Acquisition.SourceAcquisitionTarget
+ocdetfOriginalDocumentAcquisition = Acquisition.sourceAcquisitionTarget
+  "2015-05-18 OCDETF EFTA00173953, DOJ Data Set 9"
+  "69-page memorandum; third-party extraction indexed; original DOJ scan age-gated in this investigation"
+  Acquisition.directDigitalArchive Acquisition.nationalCatalogue
+  false false true
+
+ftcPrimaryInspectionPaid :
+  Acquisition.primaryTextInspected ftcGSRSCLCommissionSource ≡ true
+ftcPrimaryInspectionPaid = refl
+
+ocdetfOriginalPageInspectionStillUnpaid :
+  Acquisition.primaryTextInspected ocdetfOriginalDocumentAcquisition ≡ false
+ocdetfOriginalPageInspectionStillUnpaid = refl
+
+-- THE SCL BOTTLENECK: contracts on the GSR/SCL/CA side are regulator-
+-- established; supplying scores to AIQ is recorded as witness testimony.
+-- Contractual network reachability does NOT entail exact-data identity.
+record SCLTwoArmExactObjectCut : Set where
+  constructor scl-two-arm-exact-object-cut
+  field
+    ftcGSRSCLDataScoreContract : Bool
+    ftcSCLCAServicesAgreement : Bool
+    ftcSCLCAIPAgreement : Bool
+    silvesterSCLScoreSupplyTestimony : Bool
+    massinghamSCLScoreSupplyTestimony : Bool
+    riponDisplayInterfaceWitnessed : Bool
+    specificGSRScoreFileEqualsRiponInput : Bool
+    versionedOriginalScoreParserInCustody : Bool
+    campaignDeploymentSameRowMatched : Bool
+    directSignedAIQCAAgreementLocated : Bool
+    historicalTechniqueTransmittedFromAquino : Bool
+    epsteinBannonUsedRiponOutput : Bool
+open SCLTwoArmExactObjectCut public
+
+canonicalSCLTwoArmExactObjectCut : SCLTwoArmExactObjectCut
+canonicalSCLTwoArmExactObjectCut = scl-two-arm-exact-object-cut
+  true true true true true true false false false false false false
+
+ftcGSRContractAndRiponInterfaceBothLocated :
+  ftcGSRSCLDataScoreContract canonicalSCLTwoArmExactObjectCut ≡ true
+ftcGSRContractAndRiponInterfaceBothLocated = refl
+
+sharedSCLHubDoesNotProveSpecificDataset :
+  specificGSRScoreFileEqualsRiponInput canonicalSCLTwoArmExactObjectCut ≡ false
+sharedSCLHubDoesNotProveSpecificDataset = refl
+
+threeDifferentFTCContractsDoNotCreateDirectAIQCAContract :
+  directSignedAIQCAAgreementLocated canonicalSCLTwoArmExactObjectCut ≡ false
+threeDifferentFTCContractsDoNotCreateDirectAIQCAContract = refl
+
+sclProgrammeDoesNotProveAquinoOriginalTechnique :
+  historicalTechniqueTransmittedFromAquino canonicalSCLTwoArmExactObjectCut ≡ false
+sclProgrammeDoesNotProveAquinoOriginalTechnique = refl
+
+sclProgrammeDoesNotProveBannonEpsteinReuse :
+  epsteinBannonUsedRiponOutput canonicalSCLTwoArmExactObjectCut ≡ false
+sclProgrammeDoesNotProveBannonEpsteinReuse = refl
+
+-- Import existing source-appropriate *witness* from the missing-scientists
+-- common-programme discriminator, without borrowing its scientist facts.
+localNamedRiponWitnesses : Common.CrossPersonProgrammeReceipt
+localNamedRiponWitnesses = Common.cross-person-programme-receipt
+  "AIQ/SCL Ripon software development programme (local only)"
+  "Jeff Silvester" "Alexander Nix"
+  "Named Ripon software described by independent company witnesses; not an identical score file"
+  "UK Commons 2018 Silvester Q2776-84; Nix 2018 Q3259-66"
+  Common.literalCrossPerson true
+  "Supports named local software programme, not native code identity, specific GSR dataset, Epstein media usage, Aquino transfer or whole-network targeting."
+
+bannonBlackProgrammeNonJoin : Common.CrossPersonProgrammeReceipt
+bannonBlackProgrammeNonJoin = Common.cross-person-programme-receipt
+  "Proposed Bannon/Black/Epstein all-purpose operational command"
+  "Steve Bannon" "Leon Black"
+  "No common original same-object payor or technical instruction is established by separate Epstein relationships"
+  "DOJ EFTA01600824 media index; existing Black invoice-wire owners, distinct objects"
+  Common.thematicAdjacency false
+  "One shared acquaintance/counterparty cannot pay shared film financing or common clandestine tasking."
+
+localRiponNamesDoNotPayWholeCommand :
+  Common.literalCrossPersonPaid bannonBlackProgrammeNonJoin ≡ false
+localRiponNamesDoNotPayWholeCommand = refl
+
+-- Event-time positions are read as research questions, not evidence that
+-- an individual had operational access in an otherwise unrelated event.
+gsrSCL2014ContractTime : EventTime.EventTimeCapabilityReceipt
+gsrSCL2014ContractTime = EventTime.event-time-capability-receipt
+  "GSR/SCL contracting organisations"
+  "GSR personality-score subscription June 2014"
+  EventTime.eventTime
+  "FTC 2019 Opinion at printed p5"
+  "2014 signed agreement found by FTC; 2014 Ripon row/version identity still unverified."
+
+bannonEpstein2019ProductionTime : EventTime.EventTimeCapabilityReceipt
+bannonEpstein2019ProductionTime = EventTime.event-time-capability-receipt
+  "Bannon/Epstein documentary production"
+  "2019 lawyer letter and dated filming correspondence"
+  EventTime.eventTime
+  "DOJ EFTA00809863; House Oversight 027794-027848"
+  "Different later production; no event-time technical transfer from the 2014 scores established."
+
+-- Keep the financial denominator distinctions of the mature #1131 Black
+-- ledger while routing OCDETF 2015 as an investigative lead, not a wire.
+blackExistingScopeReconciliation : BlackScope.ScopeReconciliation
+blackExistingScopeReconciliation = BlackScope.canonicalScopeReconciliation
+
+blackScopeDifferenceDoesNotResolveOCDETF :
+  BlackScope.differenceMeansHiddenFeeByDefinition blackExistingScopeReconciliation ≡ false
+blackScopeDifferenceDoesNotResolveOCDETF = refl
+
+black2016TransactionClassificationStillOpen :
+  BlackScope.year2016ClassPaid blackExistingScopeReconciliation ≡ false
+black2016TransactionClassificationStillOpen = refl
+
+-- An original 2015 lead memo, its 2026 Senate rediscovery and the Black
+-- annual wire ledger are different evidence products: join requires actual
+-- identical dated payer/account/recipient/wire reference and source custody.
+record FinanceInvestigationJoinBoundary : Set where
+  constructor finance-investigation-join-boundary
+  field
+    ocdetf2015LeadProductIndexed : Bool
+    black2015AnnualAggregateExists : Bool
+    sameOriginalWireTransactionMatched : Bool
+    originalOCDETFInvestigationDispositionVerified : Bool
+    memoRedactionImpliesDeliberateCoverUp : Bool
+    separateBlack2015NDAAutomaticallyConnected : Bool
+open FinanceInvestigationJoinBoundary public
+
+canonicalFinanceInvestigationJoinBoundary : FinanceInvestigationJoinBoundary
+canonicalFinanceInvestigationJoinBoundary =
+  finance-investigation-join-boundary true true false false false false
+
+financialEventTimeOverlapNotTransactionIdentity :
+  sameOriginalWireTransactionMatched canonicalFinanceInvestigationJoinBoundary ≡ false
+financialEventTimeOverlapNotTransactionIdentity = refl
+
+unverifiedOCDETFOutcomeIsNotSuppression :
+  memoRedactionImpliesDeliberateCoverUp canonicalFinanceInvestigationJoinBoundary ≡ false
+unverifiedOCDETFOutcomeIsNotSuppression = refl
+
+two2015RecordsDoNotCreateNDAJoin :
+  separateBlack2015NDAAutomaticallyConnected canonicalFinanceInvestigationJoinBoundary ≡ false
+two2015RecordsDoNotCreateNDAJoin = refl
