@@ -252,7 +252,7 @@ naumovVilenskaya1971OriginalBib : Source.AttributedSource
 naumovVilenskaya1971OriginalBib = Source.mkNoDOISource
   "E. K. Naumov and L. V. Vilenskaya (original Soviet compilers; do not credit US translator as original research author)"
   "Bibliographies on Parapsychology (Psychoenergetics) and Related Subjects"
-  "original bibliography compiled Moscow 1971; JPRS 55557, dated 28 March 1972, original translated scan of 109 PDF pages, declassified document C00015462; source content and compilers introduction inspected at PDF indices 4,7,8"
+  "original bibliography compiled Moscow 1971; JPRS 55557, dated 28 March 1972, original translated scan of 109 PDF pages, declassified document C00015462; original JPRS 1972 report cover PDF index 4, original Moscow 1971 compilers/title leaf index 5, contents 7 and compilers preface 8 inspected"
   "1971 compiled; 1972 translated"
   "https://documents2.theblackvault.com/documents/cia/ufos/C05516145.pdf"
   (Source.namedSourceKind "primary author-generated scholarly bibliography / US JPRS translated source carrier")
