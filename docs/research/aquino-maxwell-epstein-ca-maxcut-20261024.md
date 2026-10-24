@@ -50,6 +50,43 @@ Rankings express expected *information gain and retrieval cost*, not guilt, trut
 6. **The Box:** treat documented employment litigation separately from claims of covert recordings/blackmail; require case number, outcome and actual linkage evidence.
 7. **Cargill/ILM and early LSD:** verify people and institutions through independent contemporaneous records; do not manufacture `Cargill Incorporated -> Melissa Cargill` or NSF -> CIA programme edges.
 
+## Phase, dependency and deliverable plan (2026-10-24)
+
+This is a **research verification programme**, not a single theorem that proves a conspiracy. Advancement requires independently inspectable records; a formal Agda constructor establishes a permitted claim state in this repository, not the truth of all historical assertions. Source-written, statically inspected, type-checked, externally corroborated, and institutionally adjudicated are distinct states.
+
+| Phase | State now | Concrete deliverable | Exit receipt / stop rule |
+|---|---|---|---|
+| 0. Prior-art inventory and scope | **Complete for selected owners** | Canonical owner/PR map: #1131 evidence + influence + finance; #1245 narrow case bridge; psychotronics #1242 and DMT #1243 remain separate | Paths and exact head SHAs recorded; no duplicated ontology or ungrounded merge |
+| 1. Claim typing and attribution | **Source-written / static-readback only** | `AquinoMaxwellEpsteinCAMaxCutExact.agda`, rollup import, source atlas/negative tokens, case tests and this roadmap | Each claim carries role, independent author root, event/document dates, bounded support, and non-promotion; `37` is a structural-readback count, not kernel certification |
+| 2. Verification and integration | **OPEN gate, highest engineering priority** | Exact-head pytest + Agda output; audit imports against the fast-moving #1131 head; retest after any rebase; merge order recorded | `pytest -q tests/test_aquino_maxwell_epstein_ca_maxcut.py`; `agda -i . DASHI/Cognition/AquinoMaxwellEpsteinCAMaxCutExact.agda`; `agda -i . DASHI/Cognition/Everything.agda` all recorded against full commit SHA. No false green from CodeRabbit/mergeability. If blocked, retain draft and exact diagnostic |
+| 3. Primary-document acquisition | **Partially seeded, not saturated** | Source-lineage ledger and machine-readable claim-to-source graph for CA/SCL/Wylie/Bannon, INSLAW/PROMIS/Maxwell, Aquino/MindWar, Epstein files. Record locators, source roots, date, quoted minimum, contradictors, identity joins, and inaccessible/missing corpus | At least one opened original record per *promoted* substantive edge, with negative/contrary material; explicit unknown where absent; no independence inflation from reposts |
+| 4. Discriminating hypothesis tests | **NOT RESOLVED** | Test H1 independent recurring techniques; H2 specific organisational/personnel/technical transfers; H3 coordinated multi-generation command hypothesis | Documented same-object handoff for H2; for H3 a common sponsor/tasking/payment/command chain. Without it H3 stays unsupported; do not infer coordination from network centrality |
+| 5. Auditable research output | **NOT STARTED as integrated publication** | Evidence-labelled network diagram and reproducible dossier: timeline, verified links, contested claims, counterevidence, open questions, uncertainty and attribution appendix | Referee-style reproducibility review; no legal or criminal guilt assigned from associations; source snapshots and exact code revision identified |
+
+### Immediate sequencing: engineering gate before a new corpus sweep
+
+**Cut A — highest leverage / smallest code cut:** Exact-head verification of #1245 against its base. Its current change set is one owner, one rollup import, one Markdown roadmap and one Python test; GitHub reports six commits ahead and zero behind #1131. PR #1245 is a **draft stacked on an unmerged 154-file / 299-commit draft #1131**, so opening it as mergeable does not imply it can safely be merged to `master` independently. Verify, then integrate parent-before-child or deliberately rebase/cherry-pick after the parent's history stabilises.
+
+**Cut B — first historical research deliverable:** Two *positive and negative* source cards (rather than another broad node sweep): (1) SCL-to-CA incorporation/IP/personnel/operating mechanism, checked against contemporaneous 2014 legal/board material and Wylie's attributable testimony; (2) 2018–19 Epstein–Bannon communication -> concrete work-product/media/documentary timeline. Test whether specific CA systems were reused, *not* whether both people used influence rhetoric. For each card, preserve contrary facts and beneficiary/incidence effects.
+
+**Cut C — unresolved adversarial branch:** Maxwell/PROMIS: match procurement/software/payments and original House/Bua conclusions by precise proposition. Aquino/MindWar: seek dated personnel, manual, contract or technical transfer to SCL; absent same-technique primary receipts keep unpaid. Blackmail/tasking: require specific threats, victims, uses, recipients, handler communication or money, and explicitly test against DOJ/FBI's 2025 review statement. Case sources from the Finders/Franklin, the Box, Cargill/ILM or UFO topics are held below the main frontier unless an exact cross-network artefact appears.
+
+### Owner and delivery matrix
+
+- **Research architecture / source authority:** Existing `DASHI.Governance.EvidenceGradedGenealogyCore`, `DASHI.Governance.InstitutionalTechniqueTransferCore` and relevant PNF/SensibLaw evidence consumers. Avoid cloning these.
+- **Direct network evidence / finance:** Existing #1131 `EpsteinMasterPlanAttributionBoundaryExact`, `TrumpMarALagoBannonBridgeExact`, `EpsteinBannonAICapitalReflexivityCrossPollinationExact`, `BannonCambridgeAnalyticaInfluenceInfrastructureExact`, and existing beneficiary/incidence modules.
+- **Case source-boundary / regression:** #1245 `AquinoMaxwellEpsteinCAMaxCutExact`, `tests/test_aquino_maxwell_epstein_ca_maxcut.py` and `Everything.agda`.
+- **Empirical acquisition/interpretation:** Separate source receipts from analytic assertions, record each root once, cross-check institutionally contradictory findings, and keep unread sources as acquisition targets. No new generic `RNNN` family for this case.
+
+### Release gates (no invented deadline)
+
+- **M1, verified technical slice:** exact-head local Agda + pytest receipts and stable stacked diff.
+- **M2, traceable evidence slice:** claim-indexed primary-source cards for SCL/CA and Bannon/Epstein with dates, contradictory records, provenance roots and exportable edges.
+- **M3, adversarial finding:** typed and documented conclusion on H1/H2/H3 per tested chain; report missing links even if no theory is confirmed.
+- **M4, publication:** source-linked dossier and network visualization whose edge styles encode *kind of evidence*, not merely strength of suspicion.
+
+Do not label a phase complete just because files or PRs exist. Use the strongest actual receipt for each stage and carry outstanding tasks forward unchanged.
+
 ## Acceptance / status
 
 ```sh
