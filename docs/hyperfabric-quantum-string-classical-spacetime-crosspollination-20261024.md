@@ -645,3 +645,60 @@ still needs source full current OPE/BRST
 and quantum-to-target gerbe/momentum
 transport. New Agda and Lean source proof
 modules remain kernel-UNVERIFIED.
+
+
+## Attached worker's true max-cut integrated into hyperfabric/TOE phase hierarchy
+
+Full independently attributed source and H0–H6 roadmap:
+`docs/hyperfabric-horn-witten-su3-regularity-charge-maxcut-20261024.md`.
+Worker PR #1247 carries chosen exact
+SU3 Wilson trace/interference and
+50/50 original test receipt; horn PR
+#1244 has Hatcher commutator
+regularization probe, literal C3
+geometric action and separate nontrivial
+A5³⋊C3 finite VOA quotient. This
+branch REUSES these sources as external
+unmerged evidence rather than importing
+the modules or duplicating their operators.
+
+**Strongest maths**: Hatcher perfect
+horned-exterior G has `Hom(G,C3)=0`,
+even though compact ambient SU3 admits
+nontrivial NONABELIAN root holonomy;
+source `SU3_1` WZW pointed C3 fusion
+labels cannot directly encode horn
+meridians. Its external C3 geometric
+rotation is a distinct quotient.
+Further, nontrivial root
+`delta=||W-I||>0` forces nonshrinking
+deep unitary holonomy norms
+`≥(2delta)^(1/2^n)/2→1/2`;
+bounded connection plus uniformly
+shrinking actual representative loops
+would contradict this. Quantitative
+GEOMETRY of the intended three-copy
+wild embedding not established.
+The original 27-site P3³ graph,
+27 spectral Monster C27 labels,
+ternary C3 rotation, SU3_1 fusion
+charges, SU3 gauge Wilson matrix,
+and 26D target WZW worldsheet are
+six DIFFERENT objects without an
+actual same-operator/state transport.
+
+**Pareto reorder:** physical
+horn geometry/regularity now first
+within any horn-specific claim;
+synthetic gauge-invariant two-path
+interference an independent
+engineering model with S1/F2
+negative controls; source Hosotani
+potential only after geometry and
+physical matter/boundaries selected;
+VOA/SU2_4→SU3_1 embedding can
+continue natively but cannot bypass
+the topology; 5D KK common
+Einstein–Maxwell–matter stress, lepton
+anomalies and empirical calibration
+still unpaid. No Clay promotion.
