@@ -6,7 +6,7 @@
   "source_blobs": {
     "DASHI/Physics/QFT/NeutrinoSameLeptonMassOperatorRationalExact.agda": "759b33f8750788c87fe663fc53797ee27122cc08",
     "DASHI/Physics/QFT/NeutrinoC3FiniteResidualTraceObstructionExact.agda": "433352637c313ecd23cc0181351bf13d73289dde",
-    "tests/test_neutrino_same_lepton_rational.py": "e99b9a7bd7359f1bd2df3de2627624eeccc76e7b"
+    "tests/test_neutrino_same_lepton_rational.py": "836d318c144864bce51f50e4d411bb212c25cca1"
   },
   "attribution": {
     "background": [
@@ -80,6 +80,8 @@
     "finite_group_counterexample_math": "FOLLOWS_FROM_CLASSICAL_ALGEBRAIC_INTEGER_THEOREM",
     "physical_neutrino_mass_mechanism": "NOT_DERIVED",
     "correlated_nufit_likelihood": "NOT_RUN",
-    "icecube_event_level_likelihood": "NOT_RUN"
+    "icecube_event_level_likelihood": "NOT_RUN",
+    "test_script_cp_check": "SOURCE_WRITTEN_REVISED_AFTER_BIGINT_RECEIPT_NOT_LOCAL_TEST_EXECUTION",
+    "note": "The exact BigInt recomputation parsed the mass-operator Agda source, which is unchanged; the Python test file was later strengthened to test a nonzero complex CP counterfactual."
   }
 }
