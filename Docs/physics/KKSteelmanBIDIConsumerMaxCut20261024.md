@@ -174,3 +174,34 @@ Einstein equation. No physical gate in this BIDI programme is
 paid by the source-written horned/neutrino steelman.
 The consumer should link, not duplicate, the canonical
 phase-gate register in PR #1247.
+
+## 2026-10-24 largest cross-program return: flat holonomy vs local gravity
+
+The horned source and CP residual yield an informative
+**conditional no-go**: uniformly shrinking nested
+representative loops, together with bounded compatible
+SU3 connection, force trivial root holonomy via
+\(\|[X,Y]-I\|\le2\|X-I\|\|Y-I\|\).
+The required metric family has not been proved for
+the three-copy wild embedding.
+
+Even if a nontrivial flat SU3 holonomy survives,
+\(F=0\) implies the classical pure Yang–Mills
+local curvature action and stress vanish in the
+exterior. It cannot source the KK/LARES frame
+dragging or gravitational field without a
+specified nonflat core, defect, boundary stress
+or independent matter dynamics. The simplest
+non-Abelian two-path Wilson fringe and a smooth
+circle twisted spectrum are gauge-invariant but
+are not horn-specific and DO NOT constitute
+a 5D KK `U(1)` photon.
+
+Highest positive selection donor is Hosotani's
+original 1989 Wilson-line quantum effective
+potential, which demands a physical compact
+geometry and renormalized spectrum, not an
+ad hoc holonomy. The current KK physical
+source/radion/CS anomaly/BIDI gates stay OPEN.
+Physics decision register in PR #1247
+`Docs/physics/HornedSU3ObservableRegularityParetoMaxCut20261024.md`.
