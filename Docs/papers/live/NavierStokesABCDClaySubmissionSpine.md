@@ -1,3 +1,31 @@
+> **24 Oct 2026 — physical B4 source-defined no-go now resolved.**
+> The original R219 modal ED, R109 pair kernel, R469 selected-triad
+> transport and physical uniform-family localED definition fix the
+> previously open dissipation provenance. For the exact smooth shear
+> u=2e^{-t}(cos x+cos y)e_z, fixed output k=(1,1,0), the only active
+> ordered input pairs are (e_x,e_y) and (e_y,e_x); each pair kernel=2.
+> Hence selected localED_N(k)<=4 for ALL N, while the literal full-fibre
+> signed noncore/core B4 defect diverges with N and the literal Core-Core
+> companion freezes at 1345859672 for N>=9. No fixed theta_D<1/2 and
+> finite c_D can make the old full-fibre estimate hold against its ACTUAL
+> physical ED currency. This is an exact mathematical counterexample
+> to that auxiliary bound, **not** to unforced Navier-Stokes regularity.
+> An abstract B4 payment record with a free LocalEDBelongsToSource
+> proposition cannot rescue this source-defined uniform estimate.
+> Retain the R440 identities; seek a zero-padding-invariant physical
+> replacement and prove its same-source critical-production meaning.
+>
+> **A finite-energy Fourier recut.** For u in L²(R³), the actual tensor
+> u⊗u lies in L¹ and |F(u⊗u)(xi)|_F<=||u||²_L²=E.
+> The physical Fourier-projected divergence obeys |F(Pdiv(u⊗u))|<=E|xi|
+> in the distributional Fourier sense, and its heat-rate inverse
+> E/(nu|xi|) has squared L²(B_R) integral 4*pi*R*(E/nu)^2.
+> This is a real near-origin physical-source bound (with standard
+> Fourier/Plancherel provenance), NOT yet the full signed centered
+> resolvent A2 or A3 continuation. The nontrivial Gaussian vortex
+> source/convolution/Leray calibration and paper-level derivation
+> are in the NSProofControl roadmap and the exact SymPy script.
+> No Lean/Agda kernel promotion is claimed.
 > **24 October 2026 — decisive B4 auxiliary-estimate negative control.**
 > **Source-correction receipt:** the strict R63 shell-gap classifier,
 > not a non-strict surrogate, gives the corrected numbers below.
