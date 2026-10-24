@@ -276,6 +276,14 @@
       "kind": "source_execution_state",
       "source": "pnas_static_script",
       "scope": "Original executable MATLAB variables and source/version: xdata,ydata,fdrcorrection and nets used before their in-file definitions; runtime toolbox load_nii, newFDR, export_fig etc. Exact effect generation cannot be inferred from script text alone."
+    },
+    {
+      "id": "original_static_nifti_and_mask_in_pinned_tree",
+      "status": "knownAbsent",
+      "kind": "source_tree_scope",
+      "source": "pnas_gitrepo",
+      "scope": "No /post1/MNI152/scrubbed_FD_040/clean_with_intact/*.nii.gz source images nor Schaeff1007NExt.nii.gz atlas in EXACT 56-file b35701d tree. Does not assert these files never existed elsewhere.",
+      "negative_search_receipt": "DMTImagingPinnedSourceTree20261024.json recursively inventories all 56 files: 40 parcelled fMRI MAT, five EEG regional MAT and scripts; no .nii or .nii.gz entry. StaticGFC.m line 9 and 21 require NIfTI and atlas."
     }
   ],
   "claims": [
@@ -401,16 +409,13 @@
     },
     {
       "id": "c_public_mat_reproduces_original_static",
-      "consumer": "Independent published t(15) static GFC replay from publicly deposited BOLD_AAL MAT files ALONE",
+      "consumer": "Published n=16 static-GFC result can be reproduced solely from the 56 files in the pinned source tree, without external voxel NIfTI/atlas or executed workspace",
       "grade": "empirical",
       "requires": [
-        "original_static_fd",
-        "original_preproc",
-        "source_local_bytes",
-        "data_use_review",
-        "original_preprocessed_voxel_nifti",
-        "original_schaefer_extended_mask",
+        "original_static_nifti_and_mask_in_pinned_tree",
         "effective_static_gfc_workspace",
+        "original_static_fd",
+        "source_local_bytes",
         "static_fmri_replay"
       ]
     }
