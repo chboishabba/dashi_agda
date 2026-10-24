@@ -129,11 +129,13 @@ thermalScreenDoesNotVerifyCalibration :
   Frames.instrumentCalibrationVerified Frames.thermalScreen ≡ false
 thermalScreenDoesNotVerifyCalibration = refl
 
--- The atlas deliberately has eleven source instances. The five named-source
--- / original-author Croft passages still share a single authorial root.
-sourceAtlasCountIsForty :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 40
-sourceAtlasCountIsForty = refl
+-- Original-published source instances are counted individually, including
+-- different dated reprints. Common author roots do not become experiments.
+-- The older 40-instance regression had become stale after a two-source
+-- addition; six further primary-source audit records now bring this to 48.
+sourceAtlasCountIsFortyEight :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 48
+sourceAtlasCountIsFortyEight = refl
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -377,6 +379,53 @@ liveSellerListingCannotCreateScientificProof :
   Attribution.citationImportsProof Atlas.zeroPointGoldeneye24PointLive ≡ false
 liveSellerListingCannotCreateScientificProof =
   Atlas.allSourcesRemainNonPromoting Atlas.zeroPointGoldeneye24PointLive
+
+------------------------------------------------------------------------
+-- Phase-1 dated-source and exact 2024 citation audit regression guards.
+-- Definitional checks only, NOT journal/magnetometer re-analysis or CI.
+------------------------------------------------------------------------
+
+croftTwoSourceDatesShareAuthorialRoot :
+  Atlas.root Atlas.croftAugustNoPublishedGuideClaim ≡
+  Atlas.root Atlas.croftOriginalGuide2003Claim
+croftTwoSourceDatesShareAuthorialRoot = refl
+
+croftNamedGuideDoesNotProveGentryOriginalAuthorship :
+  Atlas.historicalTransmissionProved Atlas.croftJanGuideNotGentryProof ≡ false
+croftNamedGuideDoesNotProveGentryOriginalAuthorship = refl
+
+croftAugustAndJanuaryPublicationClaimsDistinct :
+  Atlas.relationClass Atlas.croftInstructionPublicationDatesDistinct ≡
+  Atlas.documentaryDistinction
+croftAugustAndJanuaryPublicationClaimsDistinct = refl
+
+saikiaOriginalResearchCannotCreateIndependentRodinComparison :
+  Attribution.citationCreatesAuthority Atlas.saikiaAmyloid2019 ≡ false
+saikiaOriginalResearchCannotCreateIndependentRodinComparison =
+  Atlas.allSourcesRemainNonAuthoritative Atlas.saikiaAmyloid2019
+
+ramirezRef24ComparisonNotProvenByCitation :
+  Atlas.historicalTransmissionProved Atlas.ramirezRef24NotValidatedCoilComparison ≡ false
+ramirezRef24ComparisonNotProvenByCitation = refl
+
+ramirezRef12NotSamePerezCitation :
+  Atlas.relationClass Atlas.ramirezRef12NotPerez2013 ≡
+  Atlas.documentaryDistinction
+ramirezRef12NotSamePerezCitation = refl
+
+identicalSourceNumbersDoNotProveIndependentMeasurement :
+  Atlas.historicalTransmissionProved Atlas.perezRamirezTableOverlapUnresolved ≡ false
+identicalSourceNumbersDoNotProveIndependentMeasurement = refl
+
+guanajuatoOriginalStudyFamilySharesResearchRoot :
+  Atlas.root Atlas.perez2013TableClaim ≡
+  Atlas.root Atlas.ramirez2024ReusedNumbersQuestion
+guanajuatoOriginalStudyFamilySharesResearchRoot = refl
+
+crofts2003SourceDoesNotEstablishPhysics :
+  Attribution.citationImportsProof Atlas.croftPowerWand2003 ≡ false
+crofts2003SourceDoesNotEstablishPhysics =
+  Atlas.allSourcesRemainNonPromoting Atlas.croftPowerWand2003
 
 ------------------------------------------------------------------------
 -- HOE_MATH / 5D SPIRITUALITY: NO NUMBER-ID OR ONTOLOGY TRANSFER
