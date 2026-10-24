@@ -196,6 +196,33 @@ class ExactLeptonCPTests(unittest.TestCase):
         self.assertTrue(F(2)<q<F(3))
         self.assertNotEqual(q.denominator,1)
 
+    def test_astrophysical_decoherence_erases_cp_conjugation_sign(self):
+        # IceCube-style phase-averaged vacuum flavour mixture uses only
+        # |U_ai|²|U_bi|², not the CP-odd interference sign.
+        # Original source: IceCube Collaboration PRL 137,081002 (2026).
+        # No atmospheric matter or detector likelihood is inferred here.
+        positive=pmns(ROOT_ZETA)
+        negative=pmns(ROOT_ZETA2)
+        def born_row(U,a):
+            return tuple((lambda z: z[0]*z[0]-z[0]*z[1]+z[1]*z[1])(
+                U[a][i]) for i in range(3))
+        bp=tuple(born_row(positive,a) for a in range(3))
+        bn=tuple(born_row(negative,a) for a in range(3))
+        self.assertEqual(bp,bn)
+        def pbar(born):
+            return tuple(tuple(sum(born[a][i]*born[b][i]
+                        for i in range(3)) for b in range(3))
+                        for a in range(3))
+        self.assertEqual(pbar(bp),pbar(bn))
+        for src in ((F(1,3),F(2,3),F(0)),(F(1),F(0),F(0)),
+                    (F(0),F(1),F(0))):
+            rates=[tuple(sum(src[a]*mat[a][b] for a in range(3))
+                    for b in range(3)) for mat in (pbar(bp),pbar(bn))]
+            self.assertEqual(rates[0],rates[1])
+            self.assertEqual(sum(rates[0]),F(1))
+        self.assertEqual(quartet(positive)[1],-quartet(negative)[1])
+        self.assertNotEqual(quartet(positive)[1],F(0))
+
     def test_cp_conserving_real_branch_has_zero_cp_odd_invariant(self):
         U=pmns(ROOT_ONE)
         self.assertEqual(quartet(U)[1],0)
