@@ -111,3 +111,30 @@ They have equal cardinality but **are not the same set/action by definition**; t
 **Pre-existing projective-geometric proof donors:** ProjectiveLineHomogeneousPairExact, ProjectiveLineAffineChartsExact and ProjectiveLineAtlasHomogeneousWeldExact own general projective coordinate/overlap constructions over an abstract ComplexFieldPresentation. Our P1(F9) uses finite-field coordinate laws, so do not silently import a CP1/complex theorem as an F9 theorem; transport requires the specific field-presentation instance.
 
 **Acceptance:** run scripts/iit_projective_f9_pointed80_audit.py and the aggregate numeric verifier at the exact PR head; compile IITProjectiveF9Pointed80Exact.agda with source-pinned Agda. Independent local arithmetic receipt is /mnt/data/independent_f9_projective_receipt.json. A genuine same-structure J to modular curve/Moonshine or physically measured system is still unproven.
+
+
+## PGL2(F9): why the affine 72 is the infinity stabilizer, and why C5 appears
+
+**The finite projective action has now also been independently computed on all ten actual chart points.** Its full fractional-linear symmetry group is
+
+\[
+|\operatorname{PGL}_2(\mathbb F_9)|
+=\frac{(9^2-1)(9^2-9)}{9-1}
+=\frac{80\cdot72}{8}
+=\mathbf{720}.
+\]
+
+The stabilizer of projective infinity consists of the affine maps \(z\mapsto az+b\), hence has **72** elements, and its orbit has index \(720/72=\mathbf{10}\). Therefore
+\[
+\mathbb P^1(\mathbb F_9)
+\cong
+\operatorname{PGL}_2(\mathbb F_9)\big/
+\operatorname{AGL}(1,9)
+\]
+as a transitive group-set. This is a **structural** reason for nine ordinary points plus one infinity, not just a cardinality fact.
+
+There is a cyclic order-ten *Singer subgroup* coming from \(\mathbb F_{81}^{\times}/\mathbb F_9^{\times}\) acting regularly on the ten projective points. Its unique order-five subgroup acts as **two disjoint five-cycles** on the ten points. This is a natural new mathematical relationship to the five-slot lost diagonal profile; however the original D4-square action is not the Singer C5 action. The Singer order-five action **moves infinity** and therefore is not in the 72-element affine stabilizer. Thus \(5\nmid72\) is no contradiction: C5 is present in *PGL2(F9)* of order720, not in the infinity-fixing affine subgroup.
+
+**Exact local group receipt:** an independent finite-field script enumerated all 720 distinct fractional-linear permutations of the ten projective points from F9 matrices, found 72 infinity-fixing permutations, an order-ten cycle, and two order-five cycles. The new IIT owner script is scripts/iit_pgl2_f9_720_audit.py; its aggregate numerical verification is wired but fresh exact-head GitHub script execution is not claimed. The independent JSON is /mnt/data/independent_f9_projective_group_receipt.json.
+
+The older Hodge/complex projective owners ProjectiveLineHomogeneousPairExact, ProjectiveLineAffineChartsExact and ProjectiveLineAtlasHomogeneousWeldExact are **generic structural donors only**. The present F9 projective line is a finite-field object and is *not* the complex Riemann sphere or a physically measured Möbius field. Similar formal Möbius patterns in Ferrocell optics do not establish material/spacetime identity. This source/action distinction is essential under the attribution rules.
