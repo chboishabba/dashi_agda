@@ -4,11 +4,13 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+from scipy.io import savemat
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "experiments" / "brainit"))
 
 from inventory import create_manifest, digest
+from alignment import checked_alignment
 from stage_conditions import controlled_fmri, derangement, stage
 from evaluate import evaluate, two_way_feature_identification, pixel_corr
 from compare import paired_contrast
@@ -28,6 +30,9 @@ def toy_source(tmp_path):
     rng = np.random.default_rng(47)
     images = rng.integers(0, 255, size=(6, 24, 24, 3), dtype=np.uint8)
     np.save(src / "data/nsd_data/nsd_images_224.npy", images)
+    (src / "data/nsd_data/experiment").mkdir(parents=True)
+    savemat(src / "data/nsd_data/experiment/nsd_expdesign.mat",
+            {"subjectim": np.array([[2, 4, 5, 6]])})
     np.save(src / "data/derived_data/v2c_128_mapping_gmm_v2.npy",
             np.zeros((6,), dtype=np.int64))
     return src
@@ -94,7 +99,8 @@ def test_image_evaluation_and_stimulus_paired_metric_contrast(tmp_path):
     np.save(a, paired)
     np.save(b, bad)
     args = (src / "data/nsd_data/nsd_images_224.npy",
-            src / "data/nsd_data/fmri_v2.npz")
+            src / "data/nsd_data/fmri_v2.npz",
+            src / "data/nsd_data/experiment/nsd_expdesign.mat")
     real = evaluate(a, *args, 1, "paired", 11, "enhanced")
     null = evaluate(b, *args, 1, "deranged", 11, "enhanced")
     assert real["aggregate"]["pixcorr"]["mean"] == pytest.approx(1, abs=1e-5)
@@ -117,3 +123,20 @@ def test_feature_identity_does_not_claim_clip_thousand_way():
 
 def test_metric_rejects_undefined_variance():
     assert pixel_corr(np.zeros((2, 2)), np.ones((2, 2))) is None
+
+
+def test_reordered_stimuli_are_checked_not_silently_mislabeled(tmp_path):
+    src = toy_source(tmp_path)
+    fmri = src / "data/nsd_data/fmri_v2.npz"
+    design = src / "data/nsd_data/experiment/nsd_expdesign.mat"
+    savemat(design, {"subjectim": np.array([[5, 2, 6, 4]])})
+    receipt = checked_alignment(fmri, design)
+    assert not receipt["upstream_inference_gt_order_matches_fmri_rows"]
+    assert receipt["row_global_image_ids"] == [4, 1, 5, 3]
+    imgs = np.load(src / "data/nsd_data/nsd_images_224.npy")
+    recon = tmp_path / "reorder.npy"
+    np.save(recon, imgs[[4, 1, 5]])
+    result = evaluate(recon, src / "data/nsd_data/nsd_images_224.npy",
+                      fmri, design, 1, "paired", 3, "enhanced")
+    assert result["aggregate"]["pixcorr"]["mean"] == pytest.approx(1, abs=1e-5)
+    assert [x["stimulus_id"] for x in result["rows"]] == [4, 1, 5]
