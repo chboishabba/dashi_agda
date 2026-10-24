@@ -42,6 +42,7 @@ from iit_jfine_d4_s3_mixed_character_audit import audit as jfine_d4_s3_mixed_aud
 from iit_jfine_heisenberg_four_pair_audit import audit as heisenberg_four_pair_audit
 from iit_jfine_d4_symplectic_obstruction_audit import audit as d4_symplectic_audit
 from iit_jfine_d4_heisenberg_h6_model_weld import audit as d4_h6_weld_audit
+from iit_jfine_d4_single_line_orientation_bypass import audit as d4_line_bypass_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -309,6 +310,21 @@ def verify_numeric_results() -> dict:
     assert not d4_h6_weld["D4_lift_needs_central_quadratic_correction"]
     assert d4_h6_weld["source_D4_repaired_group_generator_checks"] == 354294
 
+    d4_line_bypass = d4_line_bypass_audit()
+    assert d4_line_bypass["new_trits"] == 0
+    assert d4_line_bypass["mirror_rank_one_operator_defect"] == 1
+    assert d4_line_bypass["twisted_symplectic_rank"] == 8
+    assert d4_line_bypass["twisted_D4_acts_by_H4_automorphisms"]
+    assert not d4_line_bypass["source_geometric_reflection_preserved"]
+    assert d4_line_bypass["relative_chart_roundtrips"] == 6561
+    assert d4_line_bypass["D4_original_source_group_action_checks"] == 354294
+    assert d4_line_bypass["fine_joint_orbits"] == 535
+    assert d4_line_bypass["moving_marker_pointed_joint_orbits"] == 4576
+    assert d4_line_bypass["zeta_D4_phase_character"] == {
+        "identity": 65610, "half": 162, "quarter": 18,
+        "axis": 2916, "diagonal": 324}
+    assert not d4_line_bypass["actual_Monster_normalizer_same_object"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -326,6 +342,7 @@ def verify_numeric_results() -> dict:
         "jfine_heisenberg_four_pair": h4,
         "jfine_d4_symplectic_obstruction": d4_symplectic,
         "jfine_d4_h6_model_weld": d4_h6_weld,
+        "jfine_d4_single_line_orientation_bypass": d4_line_bypass,
         "projective_f9_pointed80": projective,
         "projective_group_f9_720": pgl,
         "f81_norm_inversion": f81_norm,
