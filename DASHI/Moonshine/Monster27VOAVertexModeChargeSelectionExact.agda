@@ -97,3 +97,66 @@ positiveZAxisSite = refl
 -- The actual g-twisted module W(g) and its modular S/T multipliers
 -- are *another* existing owner: TwistedModuleModularity.agda.
 -- Ordinary untwisted eigenspaces of V^natural are not g-twisted modules.
+
+
+------------------------------------------------------------------------
+-- Source-specific NONZERO vertex-mode production, a stronger criterion
+-- than the prior field allowing zero outputs. A simple VOA is
+-- nondegenerate (H. Li, Journal of Algebra 267 (2003), 199-211,
+-- DOI 10.1016/S0021-8693(03)00382-X). This source theorem does NOT
+-- guarantee a particular grade-two/Griess product u_1 v is nonzero.
+-- Grade-2 projectors and edge couplings remain separate producers.
+------------------------------------------------------------------------
+
+open import Data.Product using (_×_; Σ; _,_)
+
+SelectedCarrier :
+  ∀ {Monster K : Set}
+    (source : Parent.Monster27VOAOnCubeSource Monster K) → Set
+SelectedCarrier source =
+  Core.GradedModule.Carrier
+    (Core.VertexOperatorAlgebra.gradedModule
+      (Core.MoonshineVOABridge.voa
+        (Weld.literalVOA
+          (Selected.weld (Parent.selected3B source)))))
+
+record ActualNonzeroChargedVertexMode
+  {Monster K : Set}
+  {source : Parent.Monster27VOAOnCubeSource Monster K}
+  (base : LiteralMonster27ModeChargeReceipt source) : Setω where
+  field
+    Nonzero : SelectedCarrier source → Set
+
+    -- The 27 nonempty E_k charge spaces here must be realised by
+    -- actual spectral states, not just dimensions and integer names.
+    sourceSectorNonzero :
+      (charge : Q.Residue3Pow 3) →
+      Σ (Sector base charge)
+        (λ state → Nonzero (embed base charge state))
+
+    -- The Li/nondegeneracy input pays an ACTUALLY NONZERO mode for
+    -- each pair of nonzero charged states at some integer mode n.
+    -- It is not a claim about a FIXED conformal grade or a selected
+    -- Hamiltonian hopping coefficient.
+    someNonzeroMode :
+      ∀ left right (u : Sector base left) (v : Sector base right) →
+      Nonzero (embed base left u) →
+      Nonzero (embed base right v) →
+      Σ ℤ (λ n →
+        Σ (Sector base (Arithmetic.addResidue left right))
+          (λ out →
+            Nonzero
+              (embed base (Arithmetic.addResidue left right) out)
+            ×
+            (embed base (Arithmetic.addResidue left right) out
+              ≡ Core.VertexOperatorData.mode
+                  (Core.VertexOperatorAlgebra.vertexData
+                    (Core.MoonshineVOABridge.voa
+                      (Weld.literalVOA
+                        (Selected.weld (Parent.selected3B source)))))
+                  (embed base left u) n (embed base right v)))
+open ActualNonzeroChargedVertexMode public
+
+-- Distinguish existence of SOME nonzero graded VOA mode from a
+-- selected grade-two mode, numerical matrix element, operator norm,
+-- dynamic locality, and actual AdS3/Kaluza-Klein field equation.
