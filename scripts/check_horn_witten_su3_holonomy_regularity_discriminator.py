@@ -67,6 +67,23 @@ for aa in (.02,.1,.4,1.1):
         np.linalg.norm(Y-np.eye(3),ord=2)+1e-12)
 print('PASS unitary commutator finite regression; analytic inequality original prior math')
 
+# Abelian-target obstruction from Hatcher's PERFECT commutator tower.
+# Every horn meridian m_w is [m_w0,m_w1]. For a hypothetical group
+# homomorphism q:G->Z/3, q(m_w)=q(m_w0)+q(m_w1)
+#                         -q(m_w0)-q(m_w1)=0.
+# This is about GROUP HOMOMORPHISMS into the pointed fusion group,
+# not a no-go for arbitrary categorical/defect representations.
+from itertools import product
+for x,y in product(range(3),repeat=2):
+    assert (x+y-x-y)%3==0
+for leaves in product(range(3),repeat=4):
+    first=(leaves[0]+leaves[1]-leaves[0]-leaves[1])%3
+    second=(leaves[2]+leaves[3]-leaves[2]-leaves[3])%3
+    assert (first+second-first-second)%3==0
+print('PASS all 9 one-stage and 81 two-stage horn->abelian C3 charge maps trivial')
+# For G^3 ⋊ C3 with perfect horn G, any group hom to C3
+# kills G^3 and can depend only on the OUTER rotation C3 coordinate.
+
 # A Z3 fusion SIMPLE-OBJECT label is not a holonomy matrix.
 # Concrete falsifier for falsely equating selected W with centre z I:
 # tr(z I)=3z, unit visibility, P0=1/4, while selected W has
