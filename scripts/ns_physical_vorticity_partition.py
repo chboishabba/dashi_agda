@@ -55,11 +55,14 @@ def budget(u):
             adv+=-I*dot*omega[q]
             vortex+=I*vec(q).dot(omega[p])*u[q]
         N=-I*conv
+        projected=N-vec(k)*(vec(k).dot(N))/norm2(k) if norm2(k) else N
         assert all(S.simplify(x)==0 for x in I*vec(k).cross(N)-adv-vortex),k
+        assert all(S.simplify(x)==0 for x in I*vec(k).cross(projected)-I*vec(k).cross(N)),k
         if k not in u:continue
         uk=u[k]; wk=omega[k]
-        E=2*S.re(conjdot(uk,N))
-        W=2*S.re(conjdot(wk,I*vec(k).cross(N)))
+        assert S.simplify(conjdot(uk,N)-conjdot(uk,projected))==0
+        E=2*S.re(conjdot(uk,projected))
+        W=2*S.re(conjdot(wk,I*vec(k).cross(projected)))
         A=2*S.re(conjdot(wk,adv))
         V=2*S.re(conjdot(wk,vortex))
         assert S.simplify(W-norm2(k)*E)==0
