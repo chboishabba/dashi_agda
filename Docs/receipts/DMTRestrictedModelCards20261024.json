@@ -71,7 +71,9 @@
       "Participant count 20 deposited pairs does not identify n16 static eligible or n13 dynamic",
       "Unmeasured expectancy, participant belief and pharmacokinetic state are not assumed to be observed",
       "Do not use source-defined sample-specific statistics for held-out tuning",
-      "No retrospective model family tightening after seeing test results"
+      "No retrospective model family tightening after seeing test results",
+      "Existing psychedelic motif Agda operators are finite stipulated transitions (lattice→tunnel→face), not transition kernels estimated from Erowid experience reports",
+      "Noah et al 2024 Erowid corpus includes a named Entities category and 1,121 DMT reports; authors' published category proportions are not person-level onsets, no proof of participant recurrence, and no evidence of independent external entities"
     ]
   },
   "models": [
@@ -143,7 +145,8 @@
         "M1a: implement an explicitly bounded active-inference candidate with two distinct prior dimensions: counterfactual richness / depth, and sensory precision / self-other agency attribution, following Mago et al's conceptual account; do not claim authors provided an executable model",
         "M1b: include a generic matched-capacity HMM/state-space observational equivalence ceiling: any finite M2 latent Q/emission-only observation model can be relabelled as an endogenous stochastic latent model with the same observed law",
         "Prespecify culturally conditioned priors, familiarity and expectancy as potential explanatory covariates only if actually collected; unknowns stay unobserved",
-        "Account for retrospective temporal ordering uncertainty, interviews/coder reliability, subject overlap and independent cohort provenance"
+        "Account for retrospective temporal ordering uncertainty, interviews/coder reliability, subject overlap and independent cohort provenance",
+        "Condition a future report-level theme comparator on substance, dose, preparation, expectations and cultural narrative/selection bias only where permitted and actually observed; do not transform sentence counts into independent people"
       ],
       "conditional_predictions": [
         "If operational sensory precision/counterfactual depth are measurable and modulated under controlled conditions, a restricted M1a predicts agency-attribution shifts attributable to those variables, with parameter bounds predeclared",
@@ -178,7 +181,8 @@
         "Supply a prediction impossible under the predeclared serious endogenous mechanistic M1a, rather than merely outperforming M0",
         "Report a generic matched-capacity M1b HMM observational-equivalence ceiling, with a rational exact counterexample when appropriate",
         "If the distinguishing prediction is concealed-target information, move it into prospective M3 with leakage and blinding controls; no retrospective fMRI or presence report can stand in",
-        "Formal fixed-Q nesting constraints must be separately measured and operationally identified across conditions; condition-specific Q(c) changes cannot be hidden under the fixed-Q proof"
+        "Formal fixed-Q nesting constraints must be separately measured and operationally identified across conditions; condition-specific Q(c) changes cannot be hidden under the fixed-Q proof",
+        "Any recurring motif Markov attractor or ternary three-cycle is already reproducible by ordinary endogenous stochastic dynamics; a distinct M2 claim needs source-defined transition distributions or independent intervention, not recurring labels alone"
       ],
       "ontology_not_identified_by_finite_HMM_trace": true
     }
@@ -249,5 +253,25 @@
   "empirical_predictions_tested": false,
   "synthetic_contract_tests": "code-validated separately; not evidence of model fit",
   "steelman_adversarial_dossier": "Docs/receipts/DMTSteelmanDiscriminatorValue20261024.json",
-  "adversarial_rational_witness": "scripts/audit_dmt_steelman_identifiability.py"
+  "adversarial_rational_witness": "scripts/audit_dmt_steelman_identifiability.py",
+  "recurring_motif_prior_art": "Docs/receipts/DMTRecurringMotifErowidPriorArtBridge20261025.json",
+  "retrospective_report_modality": {
+    "original_study_doi": "10.3389/fpsyg.2024.1397064",
+    "source": "Noah, Shen, Earth Erowid, Fire Erowid, Silver 2024",
+    "observables_available_from_published_study": [
+      "substance-indexed visual-sentence prevalence",
+      "relative similarity to author-defined visual seed phrases",
+      "categories Pattern, Movement, Color, Entities, Global visual alterations, Distortion, Affect, Other"
+    ],
+    "unavailable_without_rights_or_new_coding": [
+      "individual raw Erowid report corpus",
+      "person-level temporal motif transition kernel",
+      "report-level multi-label recurrence with reliably annotated chronology",
+      "neural-to-Erowid paired observations"
+    ],
+    "experimental_independence": "Erowid narrative cohort not a replication of original 2023 EEG-fMRI cohort. Do not infer cross-paper same-person matching or independence without evidence.",
+    "rights": "Erowid requires prior permission for mining/distilled aggregate experience-report data; published author summary can be analysed with citation",
+    "source_claim_ceiling": "substance-specific narrative feature proportions are source-supported; recurrent attractor processes remain untested toys",
+    "cannot_identify_external_agents": true
+  }
 }
