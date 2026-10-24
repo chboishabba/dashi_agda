@@ -565,14 +565,14 @@ ramirezRodinRMF2024 = Source.mkDOISource
 
 perezHeatShock2008 : Source.AttributedSource
 perezHeatShock2008 = Source.mkDOISource
-  "F. P. Perez et al."
+  "Felipe P. Perez; Ximing Zhou; Jorge Morisaki; Donald A. Jurivich"
   "Electromagnetic field therapy delays cellular senescence and death by enhancement of the heat shock response"
-  "Experimental Gerontology 43 (2008), 307; original article identified as reference 12 in 2024 printed bibliography; full paper uninspected"
+  "Experimental Gerontology 43(4), 307-316; e-published 29 January 2008; original publisher and PubMed PMID 18325704 abstracts inspected, full article not page-inspected"
   "2008"
   "10.1016/j.exger.2008.01.004"
   "https://doi.org/10.1016/j.exger.2008.01.004"
   Source.academicArticleSource
-  "named by 2024 RMF reference 12; different credited author/title and year from the H. Pérez et al. 2013 human lymphocyte Rodin source; citation existence not proof either biology claim"
+  "2008 uses 50 MHz 0.5 W repeated EM-field shock in primary human T lymphocytes AND fibroblast lines, thus not irrelevant to lymphocyte biology; nevertheless different field and heat-shock/senescence endpoint from H. Perez et al 2013 100-2500 Hz Rodin-coil protocol; named as 2024 RMF reference 12"
   Source.publicAttribution
 
 sourceAtlas : Source.AttributedSourceAtlas
