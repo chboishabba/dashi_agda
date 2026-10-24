@@ -11,6 +11,7 @@ import DASHI.Cognition.EpsteinMasterPlanAttributionBoundaryExact as Plan
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
 import DASHI.Law.EvidenceProvenanceDependencyDagExact as Provenance
 import DASHI.Core.ProvenanceClosureIndependenceExact as RootClosure
+import DASHI.Core.AffectedDependencyClosureExact as Affected
 import DASHI.Core.SourceAcquisitionGeometryExact as Acquisition
 import DASHI.Core.ITIRInvestigationAcquisitionParetoExact as ITIR
 import DASHI.Core.ITIRInvestigationWorkbenchProjectionExact as Workbench
@@ -248,6 +249,37 @@ investigationUIAuthority = Workbench.canonicalInvestigationWorkbenchBoundary
 
 multipartIdentityAuthority : Multipart.MultipartReconstructionBoundary
 multipartIdentityAuthority = Multipart.canonicalMultipartReconstructionBoundary
+
+-- Constructive toy countermodel: two direct reprints of one author statement
+-- have one shared declared producer. This is NOT a claim that any particular
+-- two journalists copied Wylie; those historical edges require their own
+-- source documents. It demonstrates why citation-count != independent roots.
+data ReprintCarrier : Set where
+  firstPersonStatement : ReprintCarrier
+  excerptA : ReprintCarrier
+  excerptB : ReprintCarrier
+
+data ReprintDependency : ReprintCarrier → ReprintCarrier → Set where
+  statementToExcerptA : ReprintDependency firstPersonStatement excerptA
+  statementToExcerptB : ReprintDependency firstPersonStatement excerptB
+
+data ReprintRoot : ReprintCarrier → Set where
+  firstPersonRoot : ReprintRoot firstPersonStatement
+
+reprintSystem : RootClosure.ProvenanceSystem ReprintCarrier
+reprintSystem = RootClosure.provenanceSystem ReprintDependency ReprintRoot
+
+twoExcerptsShareOneRoot :
+  RootClosure.SharedUpstreamRoot reprintSystem excerptA excerptB
+twoExcerptsShareOneRoot = RootClosure.sharedUpstreamRoot
+  firstPersonStatement firstPersonRoot
+  (Affected.affectedStep statementToExcerptA Affected.affectedRefl)
+  (Affected.affectedStep statementToExcerptB Affected.affectedRefl)
+
+sharedReprintRootRefutesIndependence :
+  RootClosure.IndependentByUpstreamClosure reprintSystem excerptA excerptB → ⊥
+sharedReprintRootRefutesIndependence =
+  RootClosure.sharedUpstreamRootRefutesIndependence twoExcerptsShareOneRoot
 
 -- BIDI: requests for independent corroboration must return to the original
 -- producer; multiple indexed PDFs of one witness/claim do not suffice.
