@@ -23,7 +23,7 @@ Local executed results, default q and L=20, Python SciPy/SymPy, 2026-10-25:
 | 12 | 4.268142e-12 | 4.045625e-14 | 4.78555e-13 | 3.12826e-13 |
 | 24 | 4.365733e-12 | 1.353428e-14 | 1.70974e-14 | 9.97327e-13 |
 
-Actual computed effective geometric budgets: q10 `-0.02787042341554`; q12 `-0.03956700102417`; q24 `-0.10157394399799` (dimensionless chosen effective BVP units), NOT physical ANEC detection. Negative control shifts the source budget by +0.025 and is correctly rejected. Exact symbolic algebra `Gkk−8πTkk=C/r²` passed SymPy. Locally executed script SHA256 **5530161574b85055189d2e5e7b751af3b3c2c1a767b6b9fc3e2cf6a334b96746**. The local reproduction used a functionally equivalent **manually reconstructed original BVP producer** from its GitHub source, not a byte-hashed repo export; the new checker matched its GitHub upload by length and codepoint sum. The checker also passes under `python -O` with explicit always-on error guards. No GitHub exact-head CI or kernel certificate.
+Actual computed effective geometric budgets: q10 `-0.02787042341554`; q12 `-0.03956700102417`; q24 `-0.10157394399799` (dimensionless chosen effective BVP units), NOT physical ANEC detection. Negative control shifts the source budget by +0.025 and is correctly rejected. Exact symbolic algebra `Gkk−8πTkk=C/r²` passed SymPy. Locally executed script SHA256 **0220035006e4ecfff743625bcc27a9c93422cf118ff961b44ad541d2f96154d2**. The local reproduction used a functionally equivalent **manually reconstructed original BVP producer** from its GitHub source, not a byte-hashed repo export; the new checker matched its GitHub upload by length and codepoint sum. The checker also passes under `python -O` with explicit always-on error guards. No GitHub exact-head CI or kernel certificate.
 
 **Important scope:** this verifies **one** radial Einstein equation and its integrated consequence for the **effective chosen Polyakov + truncated massive spherical tower**. It does not validate independent Maxwell gauge variation, angular/timelike Einstein equations against an independently renormalized full 4D quantum Dirac state, the exterior same-universe mouth gluing, or the validity of externally specified negative Casimir energy as a selected Hadamard source.
 
@@ -62,3 +62,27 @@ Existing `scripts/check_mmp_cauchy_handle_thom_flux_20261024.py` specifies `Sigm
 6. **P4–P6: Three plasma material regions, source control, external gravity** (dependent; high experimental cost): the existing 3D finite U1 ports are toy classical current drives. Real plasma current, transport, constitutive material stress and independent gravity instruments remain external gates.
 
 **Stop indiscriminate snowballing when no new original source object supplies a missing state, stress, QEI, topological gluing or scattering acceptance.** Closure/rejection/redirection must be identified by the specific theorem, not source counts or repeated citation chains.
+
+
+## Snowball second generation: classical-Dirac junction and dynamical challenge (2021–2026)
+
+**This citation branch changes an acceptance test, rather than merely enlarging a reading list.**
+
+- Blázquez-Salcedo, Knoll, Radu (2021), *Traversable Wormholes in Einstein-Dirac-Maxwell Theory*, PRL 126 101102, DOI `10.1103/PhysRevLett.126.101102`, **original classical EDM numerical claim**; distinct from MMP's quantized fermion vacuum.
+- Danielson, Satishchandran, Wald, Weinbaum (2021), *Blázquez-Salcedo–Knoll–Radu wormholes are not solutions to the Einstein-Dirac-Maxwell equations*, PRD 104 124055, DOI `10.1103/PhysRevD.104.124055`, **direct source-critical reply**: matched classical EDM throat violates sufficient smoothness, with Maxwell and Dirac gluing source defects. This critique belongs to that classical solution, not automatically to MMP or our effective BVP.
+- Konoplya and Zhidenko (2022), *Traversable Wormholes in General Relativity*, PRL 128 091104, DOI `10.1103/PhysRevLett.128.091104`, **separate alternative classical asymmetrical continuation**; a response to the prior symmetry objection, not proof of quantum Casimir state.
+- Ben Kain (2023), *Are Einstein-Dirac-Maxwell wormholes traversable?*, PRD 108 044019, DOI `10.1103/PhysRevD.108.044019`, **independent classical time-evolution test**; reported black-hole formation/trapping in its simulated models.
+- Weinbaum (2026), DOI `10.1103/g89c-gqyf`, **later original numerical follow-up** on positive-frequency classical fields. This is not an independent corroboration of every specific 2021 gluing argument; same author network and source chain are marked.
+- 2026 PRD 113 064026, DOI `10.1103/dsnv-gq47`, *Wormholes as perturbations of near-horizon black hole geometries: No-go theorems within effective field theories*, **separate near-horizon EFT constraint**; higher-derivative perturbations alone differ from the specifically negative-Casimir MMP mechanism.
+
+**New original-repo numerical junction discriminator:** for the selected effective BVP's finite proper-radial RN matching, verify *metric and first derivatives* (up to the trivial static clock rescaling), then calculate proper-radial `r''` and `(log N)''` on BOTH sides. At `r=r_m`, `f=1-2M/r+Q²/r²` and `A=M/r²-Q²/r³`, the RN exterior gives `r'_RN=sqrt(f)`, `r''_RN=A`, `(log N)'_RN=A/sqrt(f)`, `(log N)''_RN=-2M/r³+3Q²/r⁴-A²/f`. No independent tensor equations are invented.
+
+| q | Max selected first-derivative junction mismatch | `r''_interior-r''_RN` | `(log N)''_interior-(log N)''_RN` |
+|---|---:|---:|---:|
+| 10 | 4.97623e-13 | +1.11101e-4 | +3.76627e-6 |
+| 12 | 3.75151e-13 | +1.03726e-4 | +5.65731e-6 |
+| 24 | 3.60031e-13 | +1.25975e-4 | +1.20664e-5 |
+
+Thus the canonical *sharp-cutoff* BVP has excellent **C1** finite matching, but **nonzero C2 jumps** in this coordinate. C1 is enough to avoid automatically inferring an Israel delta-function shell **from the metric alone**. A C2 jump in a piecewise smooth metric is not by itself a proof of a distributional shell or a physical contradiction: the effective quantum source was deliberately switched off, potentially allowing finite-step stress. It **does** show that the model is not a smooth globally selected renormalized fermionic Hadamard source without further work. Spinor/Maxwell matching is independently unpaid.
+
+**Updated cut:** prioritize source- and state-controlled smooth global exterior glue and matching of fermion 2-point/Hadamard and Maxwell field, not arbitrary improvement of the interior radial numerical residual. The always-on `must` guards were rerun with `python -O` and both intended positive/negative controls passed. Latest committed-source SHA256: `0220035006e4ecfff743625bcc27a9c93422cf118ff961b44ad541d2f96154d2`.
