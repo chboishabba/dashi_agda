@@ -62,9 +62,15 @@ def verify():
         square=tuple(perm[perm[i]] for i in range(N))
         trace_sq=sum(square[i]==i for i in range(N))
         assert wedge_trace==(fixed*fixed-trace_sq)//2
+        # Sym²_0(24) is the graviton 299, with trace
+        # (chi(g)^2+chi(g²))/2 - 1; sum of graviton, B and Phi
+        # must equal the character chi_(24 tensor 24)=chi_24(g)^2.
+        grav_trace=(fixed*fixed+trace_sq)//2-1
+        assert grav_trace=={'2A':43,'2B':11,'3A':20,'3B':-1}[cls]
+        assert grav_trace+wedge_trace+1==fixed*fixed
         assert duad_trace=={'2A':36,'2B':12,'3A':15,'3B':0}[cls]
         assert wedge_trace=={'2A':20,'2B':-12,'3A':15,'3B':0}[cls]
-        print(f'PASS ATLAS M24 {cls}: fixed24={fixed}, duad276 trace={duad_trace}, exterior-B276 trace={wedge_trace}; star equivariant')
+        print(f'PASS ATLAS M24 {cls}: fixed24={fixed}, duad276 trace={duad_trace}, grav299 trace={grav_trace}, exterior-B276 trace={wedge_trace}; star equivariant')
     print('NO-GO M24 degree-276 DUAD permutation != natural antisymmetric string-B2 M24 module')
     print('BOUNDARY neither M24 duads nor Leech weight-two coordinates imply a physical string VOA')
 
