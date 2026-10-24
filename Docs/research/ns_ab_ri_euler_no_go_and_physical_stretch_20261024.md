@@ -1,3 +1,142 @@
+# 2026-10-24 same-object physical max-cut: exact B class compensation + A Duhamel response
+
+**Original attribution:** The Fourier curl-vorticity identity and heat-kernel convolution bounds are classical Navier–Stokes mathematics (Temam and standard semigroup/Plancherel theory). Bony and Bahouri–Chemin–Danchin own Littlewood–Paley/paraproduct source ideas; DASHI's R63/R236 source owners implement the strict classifier. The new script/calibrations are DASHI integration checks, not new discovery of these identities. OpenAI C/D and Euler theorem source ownership is unchanged. No Clay A/B theorem asserted.
+
+## B: a NONTRIVIAL same-field signed finite Fourier identity
+
+`scripts/ns_physical_vorticity_partition.py`, regression
+`tests/test_ns_physical_vorticity_partition.py` (five tests locally
+passing on matching scripts, including a mixed-triad fixture).
+
+Let `u_hat(-k)=conj(u_hat(k))`, `k·u_hat(k)=0`, finite Fourier support,
+`omega_hat(k)=i k×u_hat(k)`, and normalized T³ Fourier integration.
+The actual unforced projected nonlinear velocity source is
+`N_hat(k)=-i P_k sum_(p+q=k)(q·u_hat(p))u_hat(q)`.
+Curl kills its longitudinal projection, and the actual vorticity
+equation gives the GLOBAL physical identity
+
+```text
+2 Re sum_k |k|² conj(u_k)·N_k
+= 2 Re sum_k conj(omega_k)·i k×N_k
+= 2 Re sum_k conj(omega_k)·[
+    -i sum_(p+q=k) (q·u_p)omega_q
+    +i sum_(p+q=k) (q·omega_p)u_q
+  ]
+= 2 Re sum_k conj(omega_k)·[
+    i sum_(p+q=k) (q·omega_p)u_q
+  ].
+```
+
+The vorticity transport term vanishes AFTER signed output summation;
+no claim is made that it vanishes on each output or each Bony class.
+For every generated output (even outside the retained input support),
+the script checks the VECTOR CURL identity symbolically. The projection
+identity and global kinetic conservation are also checked.
+
+The splitter copies the ACTUAL repository j(k)=ceil(log2(max|k_i|))
+with j(0)=0 and authoritative STRICT `j_p+3<j_q`, `j_q+3<j_p`,
+and `j_k+3<j_p AND j_k+3<j_q`. Only after this does it apply the
+literal R236 deep filters `3j_low<=2j_high` and `5j_k<=4max`.
+This is a partition of physical production BY the source classifier,
+not a definitionally equal term of R236's distinct critical-production
+consumer. The differentiated Com class remains a fifth source,
+not silently merged into CC.
+
+**Adversarial six-mode datum:** p=(1,0,0), q=(0,1,64), k=p+q;
+transverse real p/q amplitudes and imaginary k amplitude
+constructed by cross products, plus conjugate negative modes.
+The EXACT source-weighted sums are:
+
+| tag | physical enstrophy P | vorticity transport T | stretching S | curl residual P−T−S |
+|---|---:|---:|---:|---:|
+| LH | +4 | 0 | 0 | +4 |
+| HL | −16392 | −4 | −16384 | −4 |
+| HH | +4 | +4 | 0 | 0 |
+| CC | 0 | 0 | 0 | 0 |
+| TOTAL | −16384 | 0 | −16384 | 0 |
+
+A naive classwise `P_C=S_C` is **FALSE** even in this elementary
+real smooth datum. The signed global sum cancels both transport and the
+nonzero classwise curl residual. An arbitrary per-class absolute-value
+estimate would lose precisely these cancellations. This makes the
+existing R690 sum-BEFORE-estimation discipline a mathematical requirement,
+although it does not prove an exact R690 mixed-helicity→enstrophy link.
+
+The +8/−8 moderate-scale physical fixture from the previous cut is
+retained as independent nonzero calibration. Zero-amplitude mode padding,
+strict three-shell collar (j=0 versus j=3), phase reversal and multiple
+triad superposition are separately regression-tested.
+
+**Unpaid:** exact phase-preserving general complex-to-existing-rational
+carrier theorem; the R236 critical-production/Com source equality
+to the full physical production with compensation; R685/R690 mixed
+commutator identification; uniform signed quantitative bound and B7
+continuation. The present exact tests alone do NOT discharge these.
+
+## A: advance stationary physical response to actual Duhamel, WITHOUT A3
+
+Already proved analytically in `scripts/ns_a_schwartz_fourier_same_object.py`
+and its existing owner: for divergence-free physical u∈H¹(R³),
+`V_hat(t,xi)=[nu|xi|²]^{-1} F[Pdiv(u⊗u)](t,xi)` obeys
+`∫_0^T ||V_hat(t)||²_L²xi dt <= 4 sqrt(2) pi E0² sqrt(T)/nu^(5/2)`
+when the unforced energy inequality holds, using the **same u**.
+
+For `a=nu|xi|²>0`, the actual nonlinear Duhamel response of
+`F_hat(t,xi)=a V_hat(t,xi)` is
+`W_hat(t,xi)=int_0^t a exp(-a(t-s)) V_hat(s,xi) ds`.
+The causal positive kernel `h_a(r)=a exp(-ar)1_(r>=0)` has mass <=1
+on [0,t]. Jensen/Cauchy–Schwarz:
+`|W_hat(t,xi)|² <= int_0^t a exp(-a(t-s)) |V_hat(s,xi)|² ds`.
+Integrate t∈[0,T], exchange nonnegative integrals by Tonelli:
+```text
+int_0^T |W_hat(t,xi)|² dt
+ <= int_0^T |V_hat(s,xi)|² (1-exp(-a(T-s))) ds
+ <= int_0^T |V_hat(s,xi)|² ds.
+```
+Integrate in xi to obtain the new full-frequency, finite-time physical
+Duhamel norm estimate
+```text
+||W_hat||²_(L²([0,T]×R³))
+ <= ||V_hat||²_(L²([0,T]×R³))
+ <= 4 sqrt(2) pi E0² sqrt(T) / nu^(5/2).
+```
+Choose zero output frequency as the natural null-set representative.
+This requires the actual distributional/mild Duhamel identity on
+the physical solution, not an unrelated transform variable.
+A formal Bishop time/space Fourier inhabitant is still missing.
+The nonlinear term's sign in the mild equation does not affect
+the squared-norm estimate.
+
+`scripts/ns_a_physical_duhamel_maximal_l2.py` and
+`tests/test_ns_a_physical_duhamel_maximal_l2.py` check exact kernel
+mass, exact scalar nonstationary input `V=e^{-2t}` at heat rate a=1
+(where input squared norm=1/4 and output=1/12), and a rational
+sign-changing finite convolution contraction.
+
+**Critical scaling diagnostic:** under NS scaling
+`u_lambda(t,x)=lambda u(lambda² t,lambda x)`, W scales similarly
+and `||W_lambda||²_(L²_tL²_x)=lambda^{-3}||W||²`.
+This estimate does NOT provide a scale-critical Serrin/Kato/BKM
+criterion or the signed centered double-resolvent A2, and does NOT
+imply global regularity. It is, however, a genuine same-source
+time-integrated estimate, more directly applicable to the actual
+mild equation than only the stationary response.
+
+## Execution / acceptance
+- Local exact Python/SymPy tests: **13 passed** across the expanded
+  physical B suite and A Duhamel tests; source files were ported to
+  the GitHub PR branch. The independently added B classwise test
+  passed locally as the fifth physical-classifier test.
+- No checked-out exact-PR-head test run, no Agda/Lean kernel receipt.
+- The mathematical identities follow standard vector calculus and
+  Jensen/Tonelli under their listed hypotheses; the executable
+  regression alone is not a universal theorem proof.
+- A and B unrestricted continuation: **OPEN**. The two direct
+  next proofs are original-carrier signed B compensation and physical
+  A2 scale-critical domination, NOT redoing Fourier algebra.
+
+---
+
 # Navier–Stokes A/B decisive max-cut: Euler/Ri incompatibility and physical B witness
 Date: 2026-10-24
 
