@@ -30,7 +30,8 @@ module DASHI.Mathematics.Topology.AlexanderHornedA5C3RestrictionWeldExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer using (+_) renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
+open import Data.Integer using (ℤ; +_; -[1+_])
+  renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
