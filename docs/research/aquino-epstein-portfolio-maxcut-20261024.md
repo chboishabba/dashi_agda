@@ -1,5 +1,8 @@
 # Cross-network portfolio max-cut, Pareto/Ibrahim/snowball — 2026-10-24
 
+> **CURRENT DISPOSITION — RESEARCH FREEZE (25 Oct 2026):** [canonical acceptance/debt ledger](aquino-epstein-canonical-disposition-20261025.md) supersedes historical round priorities in this document. The original-source details below remain a provenance archive; do **not** reopen aggregate GSR/Kogan-to-AIQ research or promote whole-network coordination without a new original same-object discriminator. Next gate: typecheck/test and bounded corrections, not another broad snowball.
+
+
 Scope: child [PR 1245](https://github.com/chboishabba/dashi_agda/pull/1245), stacked on #1131. **Do not prioritise one convenient NDA above higher-yield technical and financial evidence.** This is a risk-limited, original-source portfolio for competing models, not evidence of a unified clandestine programme.
 
 ## Decision rule and research stages
