@@ -12,7 +12,6 @@ No network, email, file mutation or third-party access.
 """
 from __future__ import annotations
 import argparse
-import itertools
 import json
 import re
 from pathlib import Path
@@ -33,7 +32,7 @@ def load_world(path: Path = DEFAULT_WORLD) -> dict:
 def validate_world(world: dict) -> None:
     if world.get("schema") != "dashi-source-world-v1":
         raise ValueError("Unrecognized source-world schema")
-    if not world.get("safety", {}).get("send_email") is False:
+    if world.get("safety", {}).get("send_email") is not False:
         raise ValueError("External contact/actuation forbidden")
     if world["safety"].get("autopromote_ontology") is not False:
         raise ValueError("Ontology cannot auto-promote")
@@ -54,6 +53,21 @@ def validate_world(world: dict) -> None:
             raise ValueError("Unattributed source " + source["id"])
         if not source.get("lineage_root"):
             raise ValueError("Source requires an explicit provenance-root key")
+    # Source-record count differs from the number of independent empirical
+    # roots. A primary paper, its author script, and a reuse study must never
+    # be counted as three independent participant acquisitions.
+    distinct_roots = {v["lineage_root"] for v in sources.values()}
+    if (world.get("counts", {}).get("distinct_lineage_roots") != len(distinct_roots)
+            or not set(distinct_roots) <= sources.keys()):
+        raise ValueError("Incorrect independent source-root count")
+    namespace = next((a for a in world["artifacts"]
+                      if a["id"] == "source_subject_namespace"), None)
+    if namespace is not None:
+        listed = namespace.get("subject_ids")
+        if (not isinstance(listed, list) or len(listed) != 20
+                or len(set(listed)) != 20
+                or namespace.get("git_blob_sha1") != sources["pnas_static_script"].get("git_blob_sha1")):
+            raise ValueError("Source manuscript subject IDs not pinned to author script")
     for edge in world["source_dependencies"]:
         if edge["from"] not in sources or edge["to"] not in sources:
             raise ValueError("Dangling provenance source edge")
@@ -101,6 +115,9 @@ def validate_world(world: dict) -> None:
     if len(fmri) != 40:
         raise ValueError("Expected 20 paired source subjects")
     names = {x["path"].split("/")[1][4:7] for x in fmri}
+    if "source_subject_namespace" in artifacts:
+        if set(artifacts["source_subject_namespace"]["subject_ids"]) != names:
+            raise ValueError("Archived author script IDs disagree with original paired MAT source filenames")
     if len(names) != 20 or any(
         "fMRI/Long%sDMT.mat" % s not in {x["path"] for x in fmri}
         or "fMRI/Long%sPCB.mat" % s not in {x["path"] for x in fmri}
@@ -176,7 +193,9 @@ def hypothetical_plan(world: dict, claim_id: str) -> dict:
     if needed <= initial:
         return {"consumer": claim_id, "status": "no_acquisition_needed",
                 "hypothetical_actions": [], "evidence_created": False}
-    candidates = [a for a in world["actions"] if a["targets"]]
+    candidates = [a for a in world["actions"] if a["targets"] and not any(
+        x["status"] == "knownAbsent" and x["id"] in a["needs"]
+        for x in world["artifacts"])]
     queue = [(initial, ())]
     seen = {initial}
     while queue:
@@ -199,8 +218,11 @@ def hypothetical_plan(world: dict, claim_id: str) -> dict:
 def snapshot(world: dict) -> dict:
     return {
         "world_id": world["world_id"],
-        "source_roots": len(world["sources"]),
+        "source_records": len(world["sources"]),
+        "independent_lineage_roots": len({s["lineage_root"] for s in world["sources"]}),
         "source_file_objects": len(world["observed_git_tree"]["files"]),
+        "artifact_status_counts": {k: sum(a["status"] == k for a in world["artifacts"])
+                                   for k in sorted(STATES)},
         "claims": claim_status(world),
         "action_frontier": action_candidates(world),
         "safety": world["safety"],
