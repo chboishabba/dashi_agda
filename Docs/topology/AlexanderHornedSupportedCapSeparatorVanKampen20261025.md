@@ -282,3 +282,65 @@ Remaining **machine-independent topology**:
 Per user instruction, Agda typechecking and CI are
 not pursued here. No result is promoted to kernel
 certification from local finite checks.
+
+
+## 7. A NEW genuine interpretation of external C3: orbifold isotropy
+
+The previous symbolic `G_three rtimes C3` is not an
+unexplained second fundamental group. Once the supported
+threefold-invariant wild-ball construction is realized,
+take E=S3\\B and a fixed R-basepoint well outside the
+compact solid, e.g. x0=(20,20,20). This point is fixed by
+R(x,y,z)=(z,x,y) and lies outside the central ball,
+all tubes and the satellite unit containers.
+
+Consider the global quotient orbifold `[E/C3]`, not
+the ORDINARY topological quotient space `E/C3`.
+Its classifying space is the Borel homotopy quotient
+  E_hC3 = EC3 ×_(C3) E.
+
+Because E is connected, the fibre sequence
+  E -> E_hC3 -> BC3
+gives a fundamental group extension
+  1 -> pi1(E,x0) -> pi1(E_hC3,[x0])
+      -> C3 -> 1.
+Since x0 is a C3-fixed point, its constant inclusion
+induces a SECTION `BC3 -> E_hC3`. Thus this exact
+sequence splits naturally, with the specified action:
+
+  pi1^orb([E/C3],[x0])
+      ~= pi1(E,x0) rtimes C3.
+
+After the geometric equivariant van Kampen identification
+in §4, this becomes
+  (G_A * G_A * G_A) rtimes C3.
+
+THIS IS A POSITIVE TOPOLOGICAL ANSWER to the old
+'how can horns twist if their exterior pi1 is torsion-free?'
+The ordinary loop group of E remains torsion-free;
+the true external C3 is isotropy/automorphism data
+in the ORBIFOLD quotient, not an element of pi1(E).
+The chosen spin3 lift of the spatial C3 is separately
+a splitting of the pulled-back Spin3 cover; it is
+compatible with, but not the same group as, the
+orbifold pi1.
+
+The distinction between orbifold π1 and ordinary quotient
+π1 matters here: the isotropy at a fixed point can be
+forgotten by taking the underlying coarse quotient.
+Do not call either group simply `pi1(E/C3)` without
+specifying which topology/stack is intended.
+
+Primary/survey source on global quotient orbifolds and
+their fundamental groups:
+Francisco C. Caramello Jr., *Introduction to Orbifolds*,
+arXiv:1909.08699, §§1.1,2.2, and Borel construction;
+https://arxiv.org/pdf/1909.08699.
+
+New independent finite instance:
+`scripts/alexander_horned_orbifold_split_c3.py`
+certifies the concrete fixed x0 and the compatible
+120-element SL2(F5) quotient semidirect law and section.
+The Borel-fibration theorem is classical proof input;
+the script does not construct the infinite topological
+covering space.
