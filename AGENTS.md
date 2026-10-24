@@ -78,3 +78,25 @@ Guard newly added numbered source files with
 a new numbered unit requires an explicit, independently justified
 mathematical need and source attribution. Preserve old theorem-bearing
 history; don't delete or mechanically alias it without same-object proof.
+
+### 2026-10-24 NS A/B physical negative-control priority
+
+Before proving a new B4 physical signed covariance estimate, inspect
+`scripts/ns_b4_literal_padding_adversary.py` and its exact test.
+The **strict** R63 dyadic classifier yields a globally smooth fixed
+real shear with unbounded full-fibre signed defect under zero-mode
+padding, while the literal Core-Core companion is fixed from N>=9.
+If the proposed `localED` is bounded on that same physical state,
+the current cutoff-uniform B4 conjecture is mathematically false.
+Do not build another Round module to 'prove' it; identify the actual
+ED semantics and derive a padding-invariant same-source R440 estimate.
+
+For whole-space A, reuse the existing
+`NSTriadKNEuclideanCanonicalProjectedInteractionExact` local
+divergence-form/Leray constructor and
+`NSWholeSpaceFiniteConvolutionSingleLimitExact` energy-square
+quadrature. The unpaid theorem is the *actual* space-to-Fourier
+transform on one continuum NS solution, with the low/high physical
+envelope and continuation. Never use an arbitrary `Set`-typed
+transform equality or a free-variable positive R9 Gram majorant
+as proof.
