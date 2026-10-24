@@ -61,21 +61,28 @@ def correlated_residual_gls(pairs, *, common_force_std_n=0.,
                 raise ValueError('invalid numeric '+key)
         if p['random_std_n'] <= 0 or p['moment_std_am2'] < 0:
             raise ValueError('invalid pair uncertainty')
-        cal = p['moment_calibration_id']
+        cal = p.get('moment_covariance_group_id', p['moment_calibration_id'])
         if not isinstance(cal, str) or not cal.strip():
-            raise ValueError('moment calibration ID required')
-        signature = (p['moment_am2'], p['moment_std_am2'])
+            raise ValueError('shared magnet calibration ID required')
+        if p['moment_am2'] == 0:
+            raise ValueError('zero or unknown moment orientation')
+        # Opposite orientations of one physical magnet share magnitude error.
+        # Signed derivatives propagate anticorrelation under reversal.
+        signature = (abs(p['moment_am2']), p['moment_std_am2'])
         if cal in ids and ids[cal] != signature:
             raise ValueError('conflicting moment or uncertainty for shared calibration ID')
         ids[cal] = signature
     # Covariance in newtons squared.
     force_vector = [p['moment_am2'] * p['moment_gradient_t_m'] for p in pairs]
+    shared_groups = [p.get('moment_covariance_group_id', p['moment_calibration_id']) for p in pairs]
+    signed_grads = [p['moment_gradient_t_m'] * (1 if p['moment_am2'] > 0 else -1)
+                    for p in pairs]
     cov = [[(pairs[i]['random_std_n'] ** 2 if i == j else 0.0)
             + common_force_std_n ** 2
             + gradient_calibration_fractional_std ** 2 * force_vector[i] * force_vector[j]
             + ((pairs[i]['moment_std_am2'] ** 2
-                * pairs[i]['moment_gradient_t_m'] * pairs[j]['moment_gradient_t_m'])
-               if pairs[i]['moment_calibration_id'] == pairs[j]['moment_calibration_id'] else 0.0)
+                * signed_grads[i] * signed_grads[j])
+               if shared_groups[i] == shared_groups[j] else 0.0)
             for j in range(n)] for i in range(n)]
     inv_ones = _chol_solve(cov, [1.0] * n)
     denom = fsum(inv_ones)
@@ -86,8 +93,8 @@ def correlated_residual_gls(pairs, *, common_force_std_n=0.,
     independent_var = fsum((w * p['random_std_n']) ** 2 for w, p in zip(weights, pairs))
     moment_var = fsum(
         sigma ** 2 * fsum(
-            weights[i] * pairs[i]['moment_gradient_t_m']
-            for i in range(n) if pairs[i]['moment_calibration_id'] == group
+            weights[i] * signed_grads[i]
+            for i in range(n) if shared_groups[i] == group
         ) ** 2 for group, (_mean, sigma) in ids.items())
     common_var = common_force_std_n ** 2 * fsum(weights) ** 2
     gradient_var = gradient_calibration_fractional_std ** 2 * fsum(
@@ -125,6 +132,12 @@ def _selftest():
     independent = correlated_residual_gls([
         {**pair, 'moment_calibration_id': str(i)} for i in range(4)])
     assert abs(independent['shared_moment_calibration_std_n'] - 5e-6) < 1e-17
+    reverse = {**pair, 'moment_am2': -.01, 'moment_calibration_id':'minus',
+               'moment_covariance_group_id':'physical_magnet'}
+    forward = {**pair, 'moment_covariance_group_id':'physical_magnet'}
+    opposed = correlated_residual_gls([forward, reverse])
+    assert opposed['shared_moment_calibration_std_n'] < 1e-12
+    assert opposed['calibration_group_count'] == 1
     with_field = correlated_residual_gls([pair] * 4,
                gradient_calibration_fractional_std=.1)
     assert abs(with_field['shared_gradient_scale_std_n'] - 1e-5) < 1e-17
