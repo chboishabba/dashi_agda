@@ -80,24 +80,24 @@
         ],
         "owner": {
           "repo": "chboishabba/dashi_agda",
-          "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
+          "path": "DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Exact.agda"
         },
         "support": [
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSCanonicalA1PhysicalPopulationResidualExact.agda"
+            "path": "DASHI/Physics/Closure/NSClayFacingAPhysicalSameObjectCutExact.agda"
           },
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSCanonicalA2MajorantResidualExact.agda"
+            "path": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda"
           },
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSCanonicalA3ContinuationResidualExact.agda"
+            "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
           }
         ],
-        "status": "physical/continuum obligations open",
-        "next": "Specify one actual source-level A1/A2/A3 analytic producer."
+        "status": "existing canonical resolvents, signed Gram, near-origin and high-frequency analytic bounds; actual continuum Fourier population, physical envelope domination and A3 continuation remain open",
+        "next": "A1a: construct same-solution actual Euclidean Fourier integrand -> canonical projected pair (not arbitrary Set evidence); then A1b heat, A2 low/high finite-energy envelopes, A3 continuation."
       },
       {
         "id": "NS-B",
@@ -112,12 +112,12 @@
         ],
         "owner": {
           "repo": "chboishabba/dashi_agda",
-          "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
+          "path": "DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda"
         },
         "support": [
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSCanonicalB123PhysicalProducerResidualExact.agda"
+            "path": "DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda"
           },
           {
             "repo": "chboishabba/dashi_agda",
@@ -125,11 +125,11 @@
           },
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSCanonicalBContinuationResidualExact.agda"
+            "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
           }
         ],
-        "status": "unforced periodic positive proof open",
-        "next": "Use physical B producer/continuation, not R823 reserve shortcut."
+        "status": "principal half estimate, signed B4 source reduction and finite shell compilers exist; B1/2/3 physical estimates, B4 uniform payment, B7 integrated control and continuation inputs open",
+        "next": "Prefer B4 literal signed noncore/core R440 payment, quantified uniformly in state/output/cutoff, with theta_D<1/2 and homogeneous local-ED control; separately B1/2/3 and B7."
       },
       {
         "id": "NS-B4",
@@ -141,16 +141,24 @@
         ],
         "owner": {
           "repo": "chboishabba/dashi_agda",
-          "path": "DASHI/Physics/Closure/NSCanonicalB4PhysicalR440PaymentResidualExact.agda"
+          "path": "DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda"
         },
         "support": [
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
+            "path": "DASHI/Physics/Closure/NSCanonicalB4PhysicalR440AnalyticInterfaceExact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Exact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalB4PhysicalR440PaymentResidualExact.agda"
           }
         ],
-        "status": "uniform physical signed-defect estimate open",
-        "next": "Construct the actual cutoff-uniform physical R440 payment, not another scalar surrogate."
+        "status": "literal noncore/core R440 expression and principal <=1/2 M_core proved; merged PR #1234 gives exact analytic socket only, signed cutoff-uniform physical estimate uninhabited",
+        "next": "Prove literal -W(M,n_C R440_N+n_N R440_C-r_N M_C-r_C M_N) <= theta_D M_core+c_D ED with 0<=theta_D<1/2 and constants independent of cutoff; source-attach to PR #1234 interface."
       },
       {
         "id": "NS-B-RESERVE",
