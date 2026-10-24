@@ -18,7 +18,7 @@ from skimage.color import rgb2gray
 from skimage.metrics import structural_similarity
 from skimage.transform import resize
 
-from inventory import digest
+from inventory import digest, upstream_commit
 from alignment import checked_alignment
 
 METRIC_VERSION = "brainit-independent-pixcorr-ssim425-v1"
@@ -121,6 +121,21 @@ def verify_source_receipts(recons_path: Path, images_path: Path, fmri_path: Path
     for key, file in expected:
         if inv["artifacts"][key]["sha256"] != digest(file):
             raise ValueError(f"Source hash changed since inventory: {key}")
+    for key in ("v2c_mapping",):
+        recorded = inv["artifacts"][key]
+        if recorded.get("status") != "present" or digest(
+            Path(recorded["path"])
+        ) != recorded["sha256"]:
+            raise ValueError(f"Mapping changed since inventory: {key}")
+    for checkpoint in inv["artifacts"]["checkpoints"]:
+        if checkpoint.get("status") != "present" or digest(
+            Path(checkpoint["path"])
+        ) != checkpoint["sha256"]:
+            raise ValueError("A frozen checkpoint changed since inventory")
+    root = Path(inv["source"]["upstream_root"])
+    revision, dirty = upstream_commit(root)
+    if (revision, dirty) != (inv["source"]["actual_revision"], False):
+        raise ValueError("Upstream source revision or working tree changed")
     if run.get("source_fmri_sha256") != digest(fmri_path):
         raise ValueError("Stage input is not a control of admitted source fMRI")
     stage_root = inference_receipt.parent.resolve()
