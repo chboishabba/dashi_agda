@@ -324,6 +324,7 @@ aquinoSCLTransferTarget = Acquisition.sourceAcquisitionTarget
 -- not sum to three independent observations of covert coordination.
 data CaseConsumer : Set where
   historicalDocumentExists : CaseConsumer
+  cambridgeAnalyticaLegalEntityIdentity : CaseConsumer
   sclCATechniqueDeployment : CaseConsumer
   epsteinBannonActualWorkProduct : CaseConsumer
   maxwellPROMISBackdoor : CaseConsumer
@@ -342,6 +343,13 @@ record CaseDependencyCut : Set where
     consumerConclusionPaid : Bool
     firstUnpaidConsumerObligation : String
 open CaseDependencyCut public
+
+cambridgeLegalEntityCut : CaseDependencyCut
+cambridgeLegalEntityCut = case-dependency-cut
+  cambridgeAnalyticaLegalEntityIdentity
+  "Indexed 2014 parliamentary counsel memorandum and FEC corporate chronology"
+  true true true false false
+  "Resolve Delaware entity number, the exact LLC/LLP/UK subsidiary, formation versus incorporation date and cited filing. Similar CA names or indexed PDF excerpts do not pay same legal object."
 
 sclTransferCut : CaseDependencyCut
 sclTransferCut = case-dependency-cut
@@ -380,7 +388,7 @@ commandHierarchyCut = case-dependency-cut
 
 canonicalCaseCuts : List CaseDependencyCut
 canonicalCaseCuts =
-  sclTransferCut ∷ bannonWorkProductCut ∷ promisExecutableCut
+  cambridgeLegalEntityCut ∷ sclTransferCut ∷ bannonWorkProductCut ∷ promisExecutableCut
   ∷ aquinoHistoricalTransferCut ∷ commandHierarchyCut ∷ []
 
 -- The only instantiated Pareto routes are proposals about where to search;
