@@ -556,3 +556,17 @@ Restricting to C3 gives phase multiplicities **(65610,65610,65610)**, the **same
 The same actual nine-site fine ternary carrier has 19683 configurations but **490 equivalence classes** under commuting positional D4 (square rotations/reflections) and global balanced-trit value S3 (six affine F3 permutations). Exact Burnside gives \((3^9+2·3^3+3^5+4·3^6+3(1+2·9+81+4·27))/48=23520/48=490\). Independent exhaustive orbit enumeration on the original 19683 configurations found the orbit-size histogram \(\{3:1,6:6,12:17,24:122,48:344\}\). Both numerical checks are integrated into the IIT #1148 finite audit; its new Agda 4+1+4 gauge source includes an arithmetic checksum, not yet a fully kernel-checked Burnside theorem.
 
 This supplies a **mathematically well-defined symmetry-normalised geometric-pattern benchmark** for AI geometry and Ferrocell-optical modelling (P1/P3A). For experimental promotion one must verify that D4 position changes and S3 value relabellings are actual nuisance symmetries of the measurement. A model/image does not become a C3 physics or quantum/brain-consciousness system because its shape lies in one of the 490 classes. Contrast this quotient with the existing nine-point spatial translation C3² and the selected five-cycle C5; they are different group actions and generally yield different orbit counts.
+
+
+### D3B.16 — 65610 as a literal 90 × 729 pointed C3-orbit chart
+
+Prior art \`Monster3BHeisenbergMultiplicityExact\` **already** pays the numerical identity \(65610=90\times3^6=90\times729\) and separate \(90=12+78\) Suzuki multiplicity interpretation. The new [IIT #1148 jFine S3 roadmap](https://github.com/chboishabba/dashi_agda/blob/agent/iit-phi-integration-maxcut-20261013/docs/superpowers/plans/2026-10-24-iit-jfine-4-1-4-s3-zeta-gauge.md) actually constructs a literal *source-typed finite set* codec:
+
+\[
+(\mathrm{Coarse}_{10}\times\mathbb F_3^8)
+\;\cong\;
+(\mathrm{Coarse}_{10}\times\mathbb F_3^2)\times\mathbb F_3^6
+\quad(10\times6561=90\times729=65610).
+\]
+
+The 2-trit \(\mathbb F_3^2\) label is **chosen** as north/east relative edges, leaving six residual trits. \`IITJFineS3Heisenberg90x729CodecExact.agda\` constructs source-written inverse maps and composes this chart with the original 196830-point harmonic source and its free C3 action. All 65610 orbit labels were roundtrip checked by independent local Python and imported into the numerical regression. This is a stronger identification than 90×729 arithmetic, but **no actual extraspecial Heisenberg/Weyl or Suzuki action is identified** by this coordinate choice. That remains the next representation-theoretic max-cut, accompanied by an actual Monster N(3B) involution trace comparison and exact-head Agda kernel checks; no physical/phenomenal claim is promoted.
