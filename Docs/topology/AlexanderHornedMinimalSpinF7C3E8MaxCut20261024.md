@@ -437,3 +437,84 @@ remaining max-cut is no longer 'find separating spheres',
 but instantiate its *supported infinite attachment*
 and the complement-piece homeomorphisms as concrete
 same-object maps. No Agda/CI work per user request.
+
+
+## 2026-10-25 roadmap reset: FINITE vs INFINITE physical observables
+
+New source-audited decision report:
+`Docs/topology/AlexanderHornedRoadmapRealWorldImplications20261025.md`.
+
+**Critical Hatcher object discriminator:** `B_n` is a
+locally-flat/tame finite horned BALL with simply connected
+exterior (Schoenflies), whereas Hatcher's stage enclosure
+`X_n` is a genus-`2^n` handlebody with nontrivial
+exterior `Y_n` and `pi1(Y_n)=F_(2^n)`.
+For three independent sectors, stage group rank is
+`3*2^n`. The ideal limit `B=intersection X_n` is
+the source of the perfect but nontrivial exterior group.
+Do NOT use a finite printed B_n and falsely advertise
+the complement group of X_n or the ideal limit.
+Original: Hatcher Example 2B.2 (printed pp171-172)
+and locally-flat Schoenflies.
+
+**Essential noncommutation of limit/abelianization:**
+Each source meridian becomes a child commutator, so
+H1(Y_n)->H1(Y_(n+1)) is the ZERO map despite each
+H1(Y_n)=Z^(3*2^n). Thus H1(E)=0 while
+pi1(E) is nontrivial. In R3 the exterior also has
+H2(E)=Z from the sphere at infinity; in S3 the
+complement of the compact contractible ball is
+reduced-acyclic. Do not call R3 exterior fully acyclic.
+
+**Flat U1 vs nonabelian holonomy**:
+Hom(perfect G,U1)=1; each isolated finite free stage
+has nontrivial U1 characters that cannot be carried
+compatibly through all commutator refinements.
+In contrast existing 2I=SL2(F5) perfect quotient
+has an order-six root q with q^3=-I, recursively
+compatible child commutators and spin-character
+Wilson trace -2. Nonflat Maxwell connections can
+still have Wilson loops on contractible paths.
+A one-level Q8 commutator [i,j]=-I works, but
+Q8 cannot extend recursively: [Q8,Q8]=C2.
+The perfect 2I target is essential for ALL scales.
+Executable finite audit:
+`scripts/alexander_horned_scale_holonomy_maxcut.py`.
+
+**Actual experiment/control roadmap:** finite sculpture,
+finite X_n handlebody, and unlinked/tame controls must be
+labelled DIFFERENT specimens. A synthetic SU2/optical
+control circuit may implement recursive commutator
+identities and observe relative Wilson phases; this is
+not direct observation of the infinite wild pi1.
+Prior published physical feasibility roots: Lucien
+Grillet's FOUR-level 20cm PLA/PVA horned sculpture,
+Bridges 2022; Q. Liang et al. Nature Physics
+(2024), DOI 10.1038/s41567-024-02644-4
+synthetic SU2 nonabelian AB in a 1D ladder, and
+Sugawa et al. npj Quantum Information (2021)
+nonabelian Wilson-loop measurements.
+No original DASHI experiment currently exists.
+
+**Quantitative synthetic signature:**
+`scripts/alexander_horned_su2_controls_noise_probe.py`
+verifies exact quaternion algebra
+`tr([A,B]) = 2-4 sin²(alpha) sin²(beta)` for
+orthogonal-axis SU2 controls; at alpha=beta=pi/2
+this is -2 versus commuting U1 +2. Angular control
+errors change the trace; a lone global -1 spinor sign
+must be measured against a reference. One SU2
+commutator does not prove the whole tower's perfectness.
+
+**Hard acceptance gates:** actual supported Hatcher
+infinite horn coordinates and cap, the three piecewise
+open-cover/van Kampen homotopy maps, CAD models with
+known finite stage group, calibration/flatness controls,
+specified Maxwell/Dirac operator and boundary data.
+No implication of gravity anomalies, free energy,
+superluminal communication, quantum consciousness or
+new physical zero modes.
+
+The work priority is a dual track: geometry source
+same-object closure plus practical finite nonabelian
+control experiment; defer Agda typecheck/CI by request.
