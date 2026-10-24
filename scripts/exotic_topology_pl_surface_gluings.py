@@ -130,8 +130,13 @@ class DSU:
             self.parent[b] = a
 
 
-def glue(a, b, which_a=0, which_b=0):
-    """Identify two polygonal boundary circles, reversing orientation."""
+def glue(a, b, which_a=0, which_b=0, with_transport=False):
+    """Identify matched oriented polygonal circles.
+
+    Optional exact vertex transport prevents losing frontier identity
+    when an earlier boundary is removed and fresh child circles arise.
+    Existing callers still receive only the Mesh.
+    """
     av = boundary_loops(a)[0][which_a]
     bv = boundary_loops(b)[0][which_b]
     assert len(av) == len(bv)
@@ -142,7 +147,14 @@ def glue(a, b, which_a=0, which_b=0):
         uf.union(v, offset + bv[-i % len(bv)])
     roots = sorted({uf.find(x) for tri in whole for x in tri})
     rename = {v: i for i, v in enumerate(roots)}
-    return Mesh([tuple(rename[uf.find(x)] for x in tri) for tri in whole], a.label + "+" + b.label)
+    result = Mesh([tuple(rename[uf.find(x)] for x in tri) for tri in whole], a.label + "+" + b.label)
+    if not with_transport:
+        return result
+    left_vertices = {v for tri in a.triangles for v in tri}
+    right_vertices = {v for tri in b.triangles for v in tri}
+    left_map = {v: rename[uf.find(v)] for v in left_vertices}
+    right_map = {v: rename[uf.find(v + offset)] for v in right_vertices}
+    return result, left_map, right_map
 
 
 def inspect(mesh, expected=None):
