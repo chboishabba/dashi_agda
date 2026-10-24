@@ -55,6 +55,12 @@ def fine(state):
 
 def audit():
     assert set(Counter(SLICES).values()) == {N * N}
+    # The '+one coordinate' interpretation is the GRAPH of a dependent
+    # fourth address s=i+j+k mod 5. Exactly 125 admissible addresses,
+    # not all 625 independent points of a four-axis size-five lattice.
+    graph_addresses = tuple((*c, label) for c, label in zip(COORDS, SLICES))
+    assert len(set(graph_addresses)) == SIZE
+    assert all(sum(c[:3]) % N == c[3] for c in graph_addresses)
     for k in range(N):
         e = basis(k, N)
         assert coarse(section(e)) == e    # P J = 1 (25 = 1 mod 3)
@@ -91,6 +97,13 @@ def audit():
         "retained_core_dimensions": rank,
         "diagonal_coarse_profile_dimensions": N,
         "diagonal_planes": N, "sites_per_plane": N * N,
+        "plus_one_dependent_address_graph": {
+            "ambient_four_axis_addresses": N ** 4,
+            "valid_graph_addresses": len(graph_addresses),
+            "auxiliary_label": "s=(i+j+k) mod 5",
+            "fourth_coordinate_independent": False,
+            "source_sites_unchanged": True,
+        },
         "coarse_profiles": Q ** N,
         "source_states": str(Q ** SIZE),
         "retained_after_step": str(Q ** rank),
