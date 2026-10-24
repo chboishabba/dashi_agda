@@ -605,3 +605,69 @@ hancockToIPAHistoricalFunding = relationship-receipt
   "https://www.thenewdaily.com.au/news/national/2018/07/24/ipa-membership-donors"
   "Reporting identifies AUD4.5m historical IPA donations across two years. Neither current 2026 funding, nor an earmark for Ridd, Sky, Lloyd or Fordham, follows from this organizational record."
   false false false
+
+
+-- Pareto snowball: direct public cross-site reproduction of an identifiable
+-- article is a concrete transfer of CONTENT, not evidence of transferred
+-- policy authorship or of an editorial commission. Reuses Ibrahim source
+-- genealogy's independence/primary-carrier distinctions in the evidence
+-- ledger rather than importing its large dependency graph here.
+creightonIPAOriginalArticle : RelationshipReceipt
+creightonIPAOriginalArticle = relationship-receipt
+  "Adam Creighton, original The Australian opinion"
+  "IPA web republication, 17 April 2026"
+  traceableClaimAmplification institutionRecord
+  "IPA original-source credit 17 April 2026"
+  "https://ipa.org.au/research/australias-prosperity/our-energy-policy-is-in-the-hands-of-the-incompetent"
+  "The IPA labels Adam Creighton author and links to The Australian as the original publisher. Same credited text is not a separate original institutional energy-system study."
+  false false false
+
+senexLinksIPACreighton : RelationshipReceipt
+senexLinksIPACreighton = relationship-receipt
+  "Institute of Public Affairs, Adam Creighton 17 April opinion"
+  "Senex Energy company newsroom, 21 April 2026"
+  traceableClaimAmplification institutionRecord
+  "Senex directly credits IPA author and links hosted article"
+  "https://senexenergy.com.au/news/our-energy-policy-is-in-the-hands-of-the-incompetent-the-australian/"
+  "First-party gas producer promotes a named IPA opinion. There is no corporate donor payment, commissioned piece or policy instruction in this receipt."
+  false false false
+
+hancockReprintsJohnsonNightly : RelationshipReceipt
+hancockReprintsJohnsonNightly = relationship-receipt
+  "Stephen Johnson, The Nightly, 22 April 2026"
+  "Hancock Energy website, 22 April 2026"
+  traceableClaimAmplification institutionRecord
+  "Hancock Energy explicit original-author credit"
+  "https://www.hancockenergy.com.au/gas-tax-would-burn-everyday-australians/"
+  "Hancock Energy reproduces Johnson's named article about a 25 percent gas-export tax, with attribution to The Nightly. Republishing is not independent modelling or authorship of the original article."
+  false false false
+
+senexLinksJohnsonNightly : RelationshipReceipt
+senexLinksJohnsonNightly = relationship-receipt
+  "Stephen Johnson, The Nightly, 22 April 2026"
+  "Senex Energy newsroom, 27 April 2026"
+  traceableClaimAmplification institutionRecord
+  "Senex first-party article links to original The Nightly text"
+  "https://senexenergy.com.au/news/why-a-25-per-cent-tax-on-gas-exports-would-hurt-everyday-australians/"
+  "The corporate item sends readers to the same titled Johnson original. Shared publisher and policy stance cannot establish business-to-party consultation identity."
+  false false false
+
+senateGasTaxInquiryPublicComparator : RelationshipReceipt
+senateGasTaxInquiryPublicComparator = relationship-receipt
+  "Australian Senate Select Committee on the Taxation of Gas Resources"
+  "Public debate on gas levy, 22 April hearings to 7 May report"
+  editorialPublication institutionRecord
+  "Australian Parliament 7 May report, hearings 21/22/24 April"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Taxation_of_Gas_Resources/TaxationofGasResources/Report/Chapter_1_-_Report"
+  "Over 230 public submissions and competing evidence, no agreed committee recommendations on tax approach. Public common arguments are a competing explanatory channel; no proof Senex or IPA drafted One Nation's June policy."
+  false false false
+
+-- Explicit negative controls: content republication is real, while
+-- consultation-party identity and downstream policy causal transfer are open.
+data LinkedIndustryArticleProvesPartyDrafting : Set where
+linkedIndustryArticleNotPartyDrafting : LinkedIndustryArticleProvesPartyDrafting → ⊥
+linkedIndustryArticleNotPartyDrafting ()
+
+data CommonPoliticalArgumentProvesSharedSponsor : Set where
+commonArgumentDoesNotProveSponsor : CommonPoliticalArgumentProvesSharedSponsor → ⊥
+commonArgumentDoesNotProveSponsor ()
