@@ -69,8 +69,8 @@ def ffast(w,t):
 def fast_U(x,t):
     return float(L)/x+(-a+d*ffast(float(z)*x,0)+q*ffast(float(kq*z)*x,t)-bos*ffast(float(kb*z)*x,t))/x**6
 minimum=(float('inf'),0,0)
-for xx in np.geomspace(.04,30,145):
-    for tt in np.linspace(0,float(mp.pi),25):
+for xx in np.geomspace(.0001,1000,260):
+    for tt in np.linspace(0,float(mp.pi),49):
         val=fast_U(float(xx),float(tt))
         if val<minimum[0]: minimum=(val,xx,tt)
 assert minimum[0]>-1e-9
