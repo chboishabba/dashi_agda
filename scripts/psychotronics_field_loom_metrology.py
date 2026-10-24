@@ -187,6 +187,12 @@ def paired_analysis(record):
     obligations.extend(source_join['unpaid_source_joins'])
     if not design_identifiable:
         obligations.append('unidentifiable_coil_dipole_energised_indicator_factorial')
+    # Full rank in signed field controls does not prevent time-drift
+    # confounding if all shams precede actives. Require opposite orders
+    # with exact time-gap cancellation in every active-sign x dipole arm.
+    temporal = source_join.get('temporal_counterbalance_from_source')
+    if not temporal or not temporal.get('balanced_linear_order_by_active_arm'):
+        obligations.append('unbalanced_active_sham_time_order_by_arm')
     if not source_join.get('raw_stream_replayed_to_pairs'):
         obligations.append('unverified_raw_to_pair_reduction')
     # Deterministic replay still cannot independently authenticate an
@@ -213,6 +219,8 @@ def paired_analysis(record):
         'input_bytes_hash_verified': provenance_ok,
         'same_object_source_join': source_join,
         'factorial_identifiability': design,
+        'temporal_counterbalance': source_join.get('temporal_counterbalance_from_source'),
+        'time_order_drift_control_claim': 'linear within-arm signed-pair lag check only; thermal/nonlinear drift unmeasured',
         'factorial_settings_source': 'replayed_hashed_raw_sensor_stream' if
             source_join.get('raw_stream_replayed_to_pairs') else 'unverified',
         'raw_stream_to_pair_replay_passed':source_join.get('raw_stream_replayed_to_pairs', False),
