@@ -81,3 +81,38 @@ def test_real_part_only_map_loses_helical_phase_and_stretching():
     # Real vector coordinates in the existing Round42 input carrier
     # are not automatically the real physical Fourier field: imaginary
     # Fourier phases must be preserved by paired real/imag components.
+
+def test_exact_real_imag_six_vector_bridge_preserves_work():
+    # Physical C^3 ~= Q^3 + i Q^3, keeping BOTH coordinates and i signs.
+    def pair(v): return (v.applyfunc(S.re),v.applyfunc(S.im))
+    def add(x,y): return (x[0]+y[0],x[1]+y[1])
+    def cmul(scalar,v):
+        a,b=scalar
+        return (a*v[0]-b*v[1],a*v[1]+b*v[0])
+    def minus_i(v):return (v[1],-v[0])
+    def plus_i(v):return (-v[1],v[0])
+    def proj(m,v):
+        n=vector(m)
+        return tuple(S.simplify(z-n*n.dot(z)/n.dot(n)) for z in v)
+    def vorticity(m,v):
+        n=vector(m)
+        return plus_i((n.cross(v[0]),n.cross(v[1])))
+    def inner_re(v,w):return S.simplify(v[0].dot(w[0])+v[1].dot(w[1]))
+    modes={m:pair(v) for m,v in seed().items()}
+    omega={m:vorticity(m,v) for m,v in modes.items()}
+    enstrophy=stretch=S.Integer(0)
+    for m,um in modes.items():
+        raw=(S.zeros(3,1),S.zeros(3,1))
+        sw=(S.zeros(3,1),S.zeros(3,1))
+        for p,up in modes.items():
+            q=tuple(m[j]-p[j] for j in range(3))
+            if q not in modes:continue
+            coefficient=tuple(vector(q).dot(v) for v in up)
+            raw=add(raw,cmul(coefficient,modes[q]))
+            omega_coefficient=tuple(vector(q).dot(v) for v in omega[p])
+            sw=add(sw,plus_i(cmul(omega_coefficient,modes[q])))
+        N=minus_i(proj(m,raw))
+        enstrophy+=2*sum(x*x for x in m)*inner_re(um,N)
+        stretch+=2*inner_re(omega[m],sw)
+    assert S.simplify(enstrophy)==8
+    assert S.simplify(stretch)==8
