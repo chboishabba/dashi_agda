@@ -44,6 +44,14 @@ record SameObjectRationalAlbertTransport (Actor : Set) : Setω where
     nativeRoundTrip : (y : Existing.J native) →
       toNative (toSource y) ≡ y
 
+    -- The positive rational trace form from the ACTUAL 27D model
+    -- is separately transported, rather than inferred from a set-bijection.
+    TraceScalar : Set
+    sourceTrace : Existing.J source → TraceScalar
+    nativeTrace : Existing.J native → TraceScalar
+    tracePreserved : (x : Existing.J source) →
+      nativeTrace (toNative x) ≡ sourceTrace x
+
     unitPreserved :
       toNative (Existing.unit source) ≡ Existing.unit native
 
@@ -69,6 +77,20 @@ leftJordanOperatorTransport :
   toNative R (Existing.leftMultiplication (source R) h x) ≡
   Existing.leftMultiplication (native R) (toNative R h) (toNative R x)
 leftJordanOperatorTransport R h x = productPreserved R h x
+
+-- Under the independently provided same-object trace, the bilinear
+-- product trace is exactly transported (no extra F4/source theorem needed).
+tracePairTransport :
+  ∀ {Actor : Set} (R : SameObjectRationalAlbertTransport Actor)
+    (x y : Existing.J (source R)) →
+  nativeTrace R
+    (Existing._∘_ (native R) (toNative R x) (toNative R y))
+  ≡
+  sourceTrace R (Existing._∘_ (source R) x y)
+tracePairTransport R x y =
+  trans
+    (cong (nativeTrace R) (sym (productPreserved R x y)))
+    (tracePreserved R (Existing._∘_ (source R) x y))
 
 -- Equality of source idempotents is preserved by the same source map.
 idempotentTransport :
