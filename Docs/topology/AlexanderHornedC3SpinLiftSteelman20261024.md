@@ -465,3 +465,67 @@ WRITTEN, not exact-head kernel checked. The scripts
 were independently reproduced locally and committed.
 Geometric horned R(B)=B, analytic Dirac domains,
 and 3-copy exterior pi1 are still independent gates.
+
+
+## 2026-10-24 actual Maschke-where-it-applies cut
+
+Do NOT treat the split C3 cover as a 'negative result' we ever
+sought. It is already paid by
+`AlexanderHornedC3SpinLiftSplitExact.agda`.
+The productive question is whether the SAME horn rotation
+action admits Maschke projectors and nontrivial semisimple
+spin/sign observations under a controlled change of field.
+
+Actual previous donors reviewed:
+`C3CyclotomicRealDescentExact`,
+`C3FourierConjugationExact`,
+`R3HodgeCrossExact`,
+`SpinorRepresentationReceipt`,
+`IbrahimMonster3BWholeCharacterIsotypicBypassExact`
+and `BinaryPolyhedralMcKayDimensionExact`.
+
+NEW source-written term-level rational owner:
+`AlexanderHornedC3MaschkeR3Exact.agda` uses the existing
+`Ambient.rotateXYZ` on the SAME triple coordinates,
+constructs and proves the Reynolds idempotent
+`P=(I+R+R²)/3`, proves vector = invariant diagonal +
+sum-zero transverse residual and identifies the literal
+transverse companion matrix `[[0,-1],[1,-1]]`.
+It bridges the old symbolic 1+2 cyclotomic record without
+assuming a nonexistent general ℚ-to-ℝ equivalence.
+
+Finite exact modular comparison:
+`scripts/alexander_horned_c3_maschke_field_comparison.py`.
+Over F3 the transverse cyclotomic polynomial becomes
+`(X-1)^2`; `(A-I)²=0`, invariant line is NOT a
+direct summand, and the 3-site Reynolds sum is nonzero
+nilpotent. Over F5 the module is irreducible semisimple;
+over F7 it splits into 1D eigencharacters 2 and 4,
+with **explicit orthogonal rank-one projectors**.
+Over F2 it is also semisimple but spin -1=+1 disappears.
+This is a representation-theoretic phenomenon, NOT a
+physical Dirac zero mode.
+
+**Stronger entire-actor answer:** char 7 divides neither
+`|A5³⋊C3|=648000` nor `|2I³⋊C3|=5184000`,
+so Maschke applies to EVERY finite module for BOTH complete
+groups. `scripts/alexander_horned_c3_full_actor_maschke_f7.py`
+reuses the 120->60 literal SL2(F5)->A5 map and tests the
+180/360 coordinate pullback and 2-to-1 central-sign
+averaging `(f(x)+f(-x))/2`, which yields an invariant
+even/odd 180+180 splitting over F7. The older independent
+full-actor local equivalent test PASSED. Exact new script
+will run in the focused CI; no successful Agda receipt.
+
+McKay nuance: binary 2T/2O/2I give affine E6/E7/E8
+representation graphs, not a direct group map
+`C3->E8`, not the separate `3^n` En-hyperfabric
+and not a Monster VOA physical realization. Original
+source: Kostant 1984 PNAS; classical McKay 1979/1980.
+See full attribution and proof-gate roadmap at
+`Docs/topology/AlexanderHornedC3MaschkeR3E8CrossCut20261024.md`.
+
+Remaining high-value cut is an executable Agda kernel
+receipt and genuine same-object geometric R(B)=B for
+the exact embedded horned ball, NOT another abstract
+C3 split-obstruction proof.
