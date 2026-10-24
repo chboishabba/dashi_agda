@@ -67,6 +67,7 @@ data SourceRole : Set where
   disputedAgencyReview : SourceRole
   releasedCorrespondence : SourceRole
   crossSourceHypothesis : SourceRole
+  estateScheduleCarrier : SourceRole
 
 -- Source roots represent original authors or record-producing bodies.
 -- Reposting a witness statement does not create another witness.
@@ -79,6 +80,7 @@ data OriginRoot : Set where
   buaDOJRoot : OriginRoot
   dojFBIMemoRoot : OriginRoot
   epsteinCorrespondenceRoot : OriginRoot
+  epsteinEstateScheduleRoot : OriginRoot
 
 data CaseClaim : Set where
   sclCAOperatingContinuity : CaseClaim
@@ -89,6 +91,10 @@ data CaseClaim : Set where
   inslawSpecialCounselCounterFinding : CaseClaim
   dojFBI2025ReviewPosition : CaseClaim
   bannonEpsteinMediaContact : CaseClaim
+  sclCALicensingOralEvidence : CaseClaim
+  delaware2013FTCEntityFinding : CaseClaim
+  caVersusCIAWitnessClarification : CaseClaim
+  bannonScheduledBreakfast2019 : CaseClaim
 
 record BoundedSource : Set where
   constructor bounded-source
@@ -113,6 +119,30 @@ canonicalSources =
     "https://committees.parliament.uk/writtenevidence/89475/html/"
     "2018" "2013-2014"
     "Christopher Wylie testified to SCL/CA corporate and technique continuity and Mercer's/Bannon's roles. This is attributed testimony, not proof that Aquino's particular 1980 paper was adopted."
+    true false false false
+  ∷ bounded-source sclCALicensingOralEvidence wylieRoot
+    attributedFirstPersonTestimony
+    "https://committees.parliament.uk/oralevidence/7803/html/ ; Q1273"
+    "2018-03-27" "2013-2014"
+    "In oral evidence Wylie said SCL assigned IP to CA, CA licensed back to SCL Elections and granted an exclusive service arrangement. Witness testimony supports this attributed description, not verified signatures, exact licensed versions, or Aquino provenance; same author root as written FKN0079."
+    true false false false
+  ∷ bounded-source delaware2013FTCEntityFinding ftcRoot
+    regulatoryFinding
+    "https://www.ftc.gov/system/files/documents/cases/d09389_comm_final_opinionpublic.pdf ; printed p3 / PDF page index 2"
+    "2019-12-06" "December 2013 and conduct 2014 onward"
+    "The Commission's unopposed administrative opinion says the Delaware Cambridge Analytica company was formed in December 2013, shared functions, owners, officers and employees with SCL Elections. This resolves the bounded regulator position only, not the full original 2014 legal-counsel memo or a specific charter/entity-identifier clash."
+    true false false false
+  ∷ bounded-source caVersusCIAWitnessClarification wylieRoot
+    attributedFirstPersonTestimony
+    "https://committees.parliament.uk/oralevidence/7803/html/ ; Q1458-Q1459"
+    "2018-03-27" "2018-03-27"
+    "Asked if Cambridge Analytica shorthand was CIA rather than CA, Wylie clarified CA, not CIA. An initial perceived acronym is explicitly corrected in its originating source and cannot pay an intelligence-service identity."
+    true false false false
+  ∷ bounded-source bannonScheduledBreakfast2019 epsteinEstateScheduleRoot
+    estateScheduleCarrier
+    "https://oversightdemocrats.house.gov/imo/media/doc/epstein-production-3rd-tranch_456.pdf ; PDF page 2 (index 1)"
+    "email timestamp 2019-02-14; publicly released 2025" "2019-02-16 07:00"
+    "A redacted contemporaneous schedule emailed to Epstein lists a 7:00 a.m. breakfast with Steve Bannon on Saturday February 16, 2019. The listed appointment is an original-document datum; it does not establish attendance, conversation, production work, intelligence tasking or criminal conduct."
     true false false false
   ∷ bounded-source mindWarAuthored aquinoVallelyRoot
     attributedAuthorProposal
@@ -775,3 +805,116 @@ caseNarrativeStrata =
 caseStrataDoNotPromoteProgramme :
   Narrative.narrativeCannotSkipPromotionGate ≡ true
 caseStrataDoNotPromoteProgramme = refl
+
+
+------------------------------------------------------------------------
+-- SOURCE-SPECIFIC MAX-CUT UPDATE: 2018 ORAL EVIDENCE / 2019 FTC / 2019
+-- EPSTEIN ESTATE SCHEDULE. These are actual source observations at narrow
+-- propositions, not whole-network H2/H3 identification or certification
+-- of source integrity, signatures, attendance or any further misconduct.
+------------------------------------------------------------------------
+
+oralLicensingSource : BoundedSource
+oralLicensingSource = bounded-source sclCALicensingOralEvidence wylieRoot
+  attributedFirstPersonTestimony
+  "https://committees.parliament.uk/oralevidence/7803/html/ ; Q1273"
+  "2018-03-27" "2013-2014"
+  "Wylie describes SCL IP assignment to CA and CA reciprocal licensing to SCL."
+  true false false false
+
+ftcDelawareEntitySource : BoundedSource
+ftcDelawareEntitySource = bounded-source delaware2013FTCEntityFinding ftcRoot
+  regulatoryFinding
+  "https://www.ftc.gov/system/files/documents/cases/d09389_comm_final_opinionpublic.pdf ; p3"
+  "2019-12-06" "2013-12"
+  "FTC opinion records Delaware CA formed December 2013, within an administrative default proceeding."
+  true false false false
+
+estateBannonScheduleSource : BoundedSource
+estateBannonScheduleSource = bounded-source bannonScheduledBreakfast2019
+  epsteinEstateScheduleRoot estateScheduleCarrier
+  "https://oversightdemocrats.house.gov/imo/media/doc/epstein-production-3rd-tranch_456.pdf ; page 2"
+  "2019-02-14; public release 2025" "2019-02-16"
+  "7:00 a.m. breakfast entry with Steve Bannon; meeting held and object-level filmed work remain unverified."
+  true false false false
+
+-- The *bounded documentary* fact of a planned appointment is paid in the
+-- original calendar artifact. The downstream real-world meeting and activity
+-- must not be inferred from the date appearing on that artifact.
+data ScheduleItem : Set where
+  february2019PlannedBreakfast : ScheduleItem
+
+data ScheduleOutcome : Set where
+  listedOnly : ScheduleOutcome
+  independentlyConfirmedOccurred : ScheduleOutcome
+
+observedScheduleOutcome : ScheduleOutcome
+observedScheduleOutcome = listedOnly
+
+listedAppointmentNotConfirmedMeeting :
+  observedScheduleOutcome ≡ listedOnly
+listedAppointmentNotConfirmedMeeting = refl
+
+data SourceStatementClass : Set where
+  wylieWritten2018 : SourceStatementClass
+  wylieOral2018 : SourceStatementClass
+  ftcDelawareFinding2019 : SourceStatementClass
+  counselMemoIndexed2014 : SourceStatementClass
+
+-- Wylie's written and oral testimony are two distinct statements with
+-- one author root, *not* two independent firsthand attestations.
+data SourceStatementOrigin : SourceStatementClass → OriginRoot → Set where
+  wylieWrittenOrigin :
+    SourceStatementOrigin wylieWritten2018 wylieRoot
+  wylieOralOrigin :
+    SourceStatementOrigin wylieOral2018 wylieRoot
+  ftcEntityOrigin :
+    SourceStatementOrigin ftcDelawareFinding2019 ftcRoot
+
+-- The counsel memo is only indexed in this cut. Its complete 22MB PDF
+-- has NOT been inspected. Therefore no author-root or signed agreement
+-- constructor is provided for it here.
+data ContractDirection : Set where
+  sclIPAssignedToCAAndLicensedBack : ContractDirection
+  sclIPLicensedDirectlyToCA : ContractDirection
+
+oralAttributedDirection : ContractDirection
+oralAttributedDirection = sclIPAssignedToCAAndLicensedBack
+
+indexedMemoReportedDirection : ContractDirection
+indexedMemoReportedDirection = sclIPLicensedDirectlyToCA
+
+differentDescriptionsRequireOriginalAgreements :
+  oralAttributedDirection ≡ indexedMemoReportedDirection → ⊥
+differentDescriptionsRequireOriginalAgreements ()
+
+-- Distinct *descriptions* do not mean distinct historical contracts.
+-- Full execution history might contain both stages; this cut does not
+-- assert they are logically mutually exclusive in the real world.
+data DescriptionsProveContradictoryHistoricalContracts : Set where
+
+descriptionsDoNotResolveContractIdentity :
+  DescriptionsProveContradictoryHistoricalContracts → ⊥
+descriptionsDoNotResolveContractIdentity ()
+
+data AcronymInQuestion : Set where
+  CA : AcronymInQuestion
+  CIA : AcronymInQuestion
+
+record TranscriptCorrection : Set where
+  constructor transcript-correction
+  field
+    spokenCorrection : AcronymInQuestion
+    locatedSource : String
+open TranscriptCorrection public
+
+oralCorrection : TranscriptCorrection
+oralCorrection = transcript-correction CA
+  "Q1458-Q1459; 27 March 2018, UK Commons DCMS"
+
+correctedAcronymIsCA : spokenCorrection oralCorrection ≡ CA
+correctedAcronymIsCA = refl
+
+correctedAcronymIsNotCIA :
+  spokenCorrection oralCorrection ≡ CIA → ⊥
+correctedAcronymIsNotCIA ()
