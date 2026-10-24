@@ -135,7 +135,7 @@ representation than the 360-site permutation model.
 **IMPORTANT**: 12D faithfulness is proved; minimality of
 12 for the entire wreath group is NOT proved.
 
-## Impasse 5: six C3 x C2 blocks vs only TWO full-actor blocks
+## Impasse 5: six C3 x C2 eigensectors vs TWO central-sign full-actor projectors
 
 In the 360-dimensional F7 permutation module
 V=Fun(C3 x 2I,F7) there are two commuting operators:
@@ -152,7 +152,8 @@ All six E_{±,k}=P±Pk are pairwise-orthogonal idempotents.
 Every nonidentity element of the subgroup C2 x C3 acts
 fixed-point-freely on these 360 sites, so each
 tr(E_{±,k})=360/6=60 (ranks 60). The even/odd pieces
-have ranks 180 each.
+have ranks 180 each; they need not be irreducible under
+the full group and may admit finer invariant decompositions.
 
 **Promotion discriminator:** the P± commute with the
 ENTIRE (2I)^3 rtimes C3 group, because diagonal -I is
@@ -220,3 +221,20 @@ NEXT MATHEMATICAL MAX CUT:
 
 Per user instruction, Agda typecheck and CI are not
 treated as current work priorities. They remain unclaimed.
+
+## Additional same-meridian BIDI receipt (after initial report)
+
+The locally executed `scripts/alexander_horned_f7_spin12_horn_meridian_bidi.py`
+uses the SAME 2I root selected by the existing
+`alexander_horned_spin_icosahedral_bridge.py`, including its
+actual generating commutator children. Transporting that element
+through the explicit finite SL2(F5)-to-icosian isomorphism and
+the 12D full-actor representation gives
+
+    rho_spin12(m^3) = diag(-I4,I4,I4) != I12,
+    rho_A5(m^3) = 1.
+
+This improves the earlier abstract non-descent into a
+literal computationally executable quotient-to-linear
+same-root example. It is not a geometric identification
+of m with a loop of an actual wild complement.
