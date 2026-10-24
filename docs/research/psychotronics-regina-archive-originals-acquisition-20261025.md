@@ -25,6 +25,14 @@
 4. **[Digitised JPRS Part II](https://archive.org/details/JPRSL502226September1974ProceedingsOfTheFirstConferenceOnPsychotronicResearchPartII)**: shared table of contents **names original author Robert Pavlita and Jana Pavlitová-Zapadlová**, *Inductive Effect of the Human Organism on Matter*, **Part I p.64**; it is **not** itself that article's main text. An absence in Part II does not establish the original paper is lost.
 5. **Archive reference desk:** [University of Regina Archives research/contact](https://library.uregina.ca/research/archives), email `archives@uregina.ca`. **No request sent** during this cut; the address is institutional public contact, not an invented personal address.
 
+## Translation-specific page-coordinate crosswalk — do not conflate editions
+
+A contemporaneous **1977 German-language published congress-index transcription** in [*Psychotronik*, first annual volume, issue 3/4](https://www.imagomundi.biz/wp-content/uploads/2018/09/Psychotronik_1_Jahrgang_1977_Heft_34_optimized.pdf) indexes **`PAVLITA R. / PAVLITOVÁ J.`, “Indukční působení lidského organismu na hmotu,” original Prague proceedings p.61**, versus the [1974 English JPRS Part I combined contents](https://archive.org/details/JPRSL502226September1974ProceedingsOfTheFirstConferenceOnPsychotronicResearchPartII), which lists *“Inductive Effect of the Human Organism on Matter”* at **translated Part I p.64**. It also indexes **`BLEWETT J. / BLEWETT D.`, “Psychic Energy—Its Characteristics and Dynamics,” Prague p.42** versus the JPRS translated **p.43**. Thus **original-Czech proceedings pages and US translated pages differ**, without implying two underlying experiments. The large PDF's direct web open fails; its indexed source passage supports an **author/title/page-coordinate lead** and should be confirmed against native printed leaves before final bibliographic certification.
+
+**Archival search strings to provide to the reference librarian:** English *Inductive Effect of the Human Organism on Matter* / Czech *Indukční působení lidského organismu na hmotu*; **Pavlita Robert / Pavlitová-Zapadlová Jana**; Czech original **p.61**, JPRS translated Part I **p.64**. Blewett originals **Prague p.42**, translated **p.43**. Verify whether cataloguers use original conference paging, JPRS paging or folder-local numbering.
+
+This is an **Ibrahim source-root/translation-fingerprint cut**. Cross-publication page-offset arithmetic cannot identify apparatus, reproduce physical effects, imply conference volumes are identical, or establish intellectual inheritance. Original source author and coauthor must be preserved in both languages.
+
 ## First-unpaid obligations and expected value (local review Pareto)
 
 | Cut | Precise original/custodian target | Why it matters | Accept / do not promote |
