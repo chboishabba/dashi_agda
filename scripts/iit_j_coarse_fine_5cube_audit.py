@@ -61,6 +61,13 @@ def audit():
         assert step(section(e)) == (0,) * SIZE  # F J = 0
     rank = rank_mod(torus_linear_matrix(N, DIM, Q, (0, 1, 2)), Q)
     assert rank == 120, rank
+    # Context: "one 5-slot lost profile" is NOT a universal ternary-3D
+    # rule. The source scan already shows different kernel multiplicity
+    # when 3 divides the periodic side length (n=3).
+    contrast_rank3 = rank_mod(torus_linear_matrix(3, 3, Q, (0, 1, 2)), Q)
+    contrast_rank4 = rank_mod(torus_linear_matrix(4, 3, Q, (0, 1, 2)), Q)
+    assert 27 - contrast_rank3 == 9
+    assert 64 - contrast_rank4 == 4
 
     for k in range(SIZE):
         e = basis(k)
@@ -98,6 +105,12 @@ def audit():
         "tested_basis_vectors": SIZE,
         "not_an_extra_spatial_axis": True,
         "not_identified_with_j_harmonic_9_or_19683": True,
+        "cross_size_falsifiers": {
+            "ternary_3d_side_3_kernel": 27 - contrast_rank3,
+            "ternary_3d_side_4_kernel": 64 - contrast_rank4,
+            "ternary_3d_side_5_kernel": SIZE - rank,
+            "universal_one_profile_kernel_claimed": False,
+        },
         "no_agda_kernel_or_full_iit_receipt": True,
     }
     blob = json.dumps(receipt, sort_keys=True, separators=(",", ":")).encode()
