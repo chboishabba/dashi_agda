@@ -78,6 +78,50 @@ alone is not it. Avoid another n-weighted R236 B4 attempt.
 already defines/sums/integrates the precise signed object; there is
 no mathematical reason to duplicate the aggregator.
 
+## B direct R689/R690 source owner continuation, not just fixed-output
+
+The existing `NSTriadKNR650RateLiftedInputLaplacianCancellationRound689Exact`
+now exposes `outputHeatSelfWork`, `centeredDifferenceWork`, and the
+source-written identity
+`inputLaplacianIsOutputHeatPlusCenteredDifference` on the actual
+R689 physics owner.
+
+The existing `NSTriadKNR650GlobalSignedRateLiftInputLaplacianRound690Exact`
+now has the source-written SAME-TRAJECTORY consumer
+`sameGlobalSignedObjectNoCardinality`: output-by-output
+ `8 nu W(M,L_in) = 8*(outputHeatSelfWork+centeredDifferenceWork)`,
+summed over the ORIGINAL literal nonzero cutoff outputs. Its
+`integratedOriginalR690IsNoCardinality` transports the identical
+global pointwise equality through the existing
+`R495.integrateCongruent`. The decomposition is performed under the
+same signed SUM before integration: it does not take outputwise
+absolute values or invent an integrability/positivity lemma.
+**No new signed B spacetime bound is proved.**
+
+The new exact physical unforced shear time-trajectory test
+`tests/test_ns_r690_integrated_physical_shear_no_cardinality.py`
+at k=(1,1,0) has M(t)=e^(-2t) M(0), K(t)=2 e^(-4t),
+R690 integrand 8K(t)=16 e^(-4t), hence
+`integral_0^T 8K(t)dt=4(1-e^(-4T))`.
+The same shear has pointwise nonlinear forcing zero. Adding zero
+high-frequency mixed-cell rows does not alter K(t), while the
+full-fibre count-centered covariance changes by
+`(r_new-2)e^(-4t)`. This is a time-dependent same-PDE solution
+rather than an arbitrary static polynomial witness.
+
+The primary implementation and research delta is now exact:
+**R690's physical source is fully expressed in padding-free rate
+coordinates.** Remaining claim "complete B" requires actual
+cutoff-UNIFORM physical signed estimate + B7 continuation, with
+physically selected amplitudes and boundary/commutator corrections.
+A strict relative payment inherited from the falsified R236
+full-fibre B4 cannot be silently assumed.
+
+**Updated local receipt:** seven independent matching Python/SymPy
+checks passed in the current turn; the committed GitHub tests are
+source-written without an exact-head pytest receipt, and the Agda
+term insertions remain untypechecked in this runtime.
+
 ## A actual remaining continuation hinge
 
 The previous cut's physical H¹ dual-Sobolev estimate is good:
