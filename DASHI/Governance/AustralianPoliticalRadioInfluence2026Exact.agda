@@ -25,6 +25,7 @@ data PoliticalRelation : Set where
   prospectiveSponsorOffer : PoliticalRelation
   externalPlatformSupplier : PoliticalRelation
   financialEntitlement : PoliticalRelation
+  advertiserBoycottCampaign : PoliticalRelation
   commercialLeaseArrangement : PoliticalRelation
   ownershipBuyoutSettlement : PoliticalRelation
   securedStakeFinancing : PoliticalRelation
