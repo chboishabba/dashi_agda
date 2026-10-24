@@ -50,6 +50,22 @@ module DASHI.Physics.Closure.NSTriadKNEuclideanCanonicalProjectedInteractionExac
 -- scripts/ns_a_schwartz_fourier_same_object.py.
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+-- 2026-10-24 STANDARD H1 DENSITY: SAME PHYSICAL FOURIER SOURCE
+-- For divergence-free u,v in H1(R3), let
+-- A=(||u||2+||v||2)||u-v||2 and
+-- B=||u-v||2||grad u||2 + ||v||2||grad(u-v)||2.
+-- Then |F[Pdiv(u⊗u-v⊗v)](xi)| <= min(A|xi|,B), and
+-- ||F[(-nu Delta)^(-1)Pdiv(u⊗u-v⊗v)]||²_L2xi
+--      <= 8pi*A*B/nu².
+-- This proves mathematical strong-H1 continuity of the REAL spatial
+-- Fourier-Stokes source, using L1 products and 3D radial integration.
+-- An Agda Bishop checked proof attaching it to the chosen
+-- EuclideanFourierTrajectory is STILL OPEN; the signed centered
+-- A2 resolvent and A3 continuation are separate unproved claims.
+-- Do not rebuild this owner or make an arbitrary Set-valued
+-- FourierTransformVelocity into a source proof.
+------------------------------------------------------------------------
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
