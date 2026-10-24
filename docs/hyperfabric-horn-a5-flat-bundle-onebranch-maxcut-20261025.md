@@ -137,3 +137,35 @@ Local exact checks cover all 60 A5 permutations, 3600 A5
 commutator pairs, 8 selected local collar levels and these
 127 source-marking rejection controls. Source original
 A5 horn quotient remains owned by #1244.
+
+
+## Strict cross-PR discriminatory NO-GO: selected W ≠ standard icosahedral A5 root
+
+The other worker's ORIGINAL #1247 source character is
+`Tr(W)=a+b ζ3`, where
+`b=-19836986431118/181846007130841 ≠0`,
+`ζ3=-1/2+i sqrt(3)/2`.
+Thus `Im Tr(W)=b sqrt(3)/2 ≠0`; exact rational
+squared imaginary component is
+`295129523001269734919047443/33067970309429875820893367281 >0`.
+
+Every matrix in the chosen **REAL** icosahedral
+`A5<SO3<SU3` has REAL trace; conjugation
+by SU3 cannot change it. Therefore the source-selected
+W **cannot be SU3-conjugate to any matrix in this
+chosen standard A5 subgroup**. The A5 quotient
+and its one-short-branch no-go are legitimate
+independently sourced alternatives, but cannot be
+presented as the selected #1247 Wilson realization
+or as a proof about its physical gauge field.
+This does not rule out a non-finite-image SU3
+representation or some separately sourced
+different gauge/matter embedding.
+
+The exact-source test was extended, executed locally
+and byte SHA-matched to Git blob
+`bce4f345d18912687bcf2d4a99d469376db39754`.
+Lean #84 `HornWittenRegularityAndChargeCut.lean`
+adds source-written `rootTraceZeta≠0`
+and rational `3b²/4>0` theorem terms,
+**kernel not run**.
