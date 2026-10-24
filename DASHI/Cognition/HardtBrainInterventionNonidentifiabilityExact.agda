@@ -1,0 +1,120 @@
+module DASHI.Cognition.HardtBrainInterventionNonidentifiabilityExact where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Core.CoarseFineFabricCalculusExact as Fabric
+import DASHI.Core.ContrastiveInterventionResponseExact as Intervention
+
+------------------------------------------------------------------------
+-- HARDT/BR AIN-IT/THALAMOCORTICAL CROSS-PR FINITE CAUSAL CUT
+--
+-- THIS IS A SOURCE-INDEPENDENT MATHEMATICAL COUNTEREXAMPLE, NOT A
+-- HUMAN EEG, fMRI, MEG, DELTA TRAINING, MIND-READING OR PSI RESULT.
+--
+-- Original contributors retain their attribution: Core generic fabric
+-- and contrastive intervention are existing DASHI owners; Brain-IT
+-- Beliy et al. ICLR 2026 is an external fMRI reconstruction result.
+-- dashiBRAIN PR #9 owns runnable finite consumer/commutation diagnostics.
+--
+-- Both microcausal worlds show the same passive input/output under
+-- ordinary observation. Their outcomes differ under do(X:=true).
+------------------------------------------------------------------------
+
+data CausalModel : Set where
+  directEffect : CausalModel
+  sharedCauseOnly : CausalModel
+
+record TrialWorld : Set where
+  constructor world
+  field
+    sharedCue : Bool
+    causalModel : CausalModel
+open TrialWorld public
+
+observedStimulus : TrialWorld → Bool
+observedStimulus w = sharedCue w
+
+observedOutcome : TrialWorld → Bool
+observedOutcome w = sharedCue w
+
+passiveObservation : TrialWorld → Bool × Bool
+passiveObservation w = observedStimulus w , observedOutcome w
+
+-- Intervention false is the untreated state (for the witness cue=false).
+-- In the direct model the receiving outcome follows a forced input.
+-- In the shared-cause model it remains driven by its independent cue.
+-- The toy is a finite structural causal model, not human neural physics.
+interventionOutcome : Bool → TrialWorld → Bool
+interventionOutcome imposed (world cue directEffect) = imposed
+interventionOutcome imposed (world cue sharedCauseOnly) = cue
+
+-- The actual existing generic intervention-response definition is reused.
+-- It contrasts sham/control(false) and do(true) in the declared toy.
+causalResponse : TrialWorld → Bool × Bool
+causalResponse =
+  Intervention.ContrastiveInterventionResponse
+    (λ b → b)
+    interventionOutcome
+    false
+    (λ control treated → control , treated)
+    -- Agda's final two function arguments are state then intervention.
+    -- Defined pointwise below through eta expansion.
+
+sameCueDirect : TrialWorld
+sameCueDirect = world false directEffect
+
+sameCueConfounded : TrialWorld
+sameCueConfounded = world false sharedCauseOnly
+
+passivelyIndistinguishable :
+  passiveObservation sameCueDirect ≡ passiveObservation sameCueConfounded
+passivelyIndistinguishable = refl
+
+differentCausalResponse :
+  causalResponse sameCueDirect true ≡
+  causalResponse sameCueConfounded true → ⊥
+differentCausalResponse ()
+
+-- The observation quotient is not a sufficient statistic for the
+-- causal intervention consumer, even though its baseline fits perfectly.
+counterexample : Fabric.ProjectionCollision
+  passiveObservation (λ w → causalResponse w true)
+counterexample = record
+  { Fabric.ProjectionCollision.left = sameCueDirect
+  ; Fabric.ProjectionCollision.right = sameCueConfounded
+  ; Fabric.ProjectionCollision.sameProjection = refl
+  ; Fabric.ProjectionCollision.consumerSeparates = differentCausalResponse
+  }
+
+noUniversalDoDecoder :
+  (decoder : Bool × Bool → Bool × Bool) →
+  ((w : TrialWorld) → causalResponse w true ≡
+    decoder (passiveObservation w)) → ⊥
+noUniversalDoDecoder =
+  Fabric.consumerCannotFactorThroughProjection counterexample
+
+-- ContrastiveInterventionResponseExact provides its more general descent
+-- theorem. The same two worlds refute baseline-only intervention response.
+noBaselineResponseDescent :
+  Intervention.ResponseDescendsThroughBaseline
+    (λ b → b) interventionOutcome false
+    (λ control treated → control , treated) true → ⊥
+noBaselineResponseDescent =
+  Intervention.responseCollisionBlocksBaselineDescent
+    {x = sameCueDirect} {y = sameCueConfounded}
+    refl differentCausalResponse
+
+------------------------------------------------------------------------
+-- A causal distinction does not establish brain-source physical identity.
+------------------------------------------------------------------------
+
+data RealHumanDeltaAndFieldSourceReceipt : Set where
+data BlindedInterventionObservationReceipt : Set where
+data IndependentlyReplicatedReceiverEffect : Set where
+
+record PhysicalPromotionReceipt : Set where
+  field
+    physiologicalSource : RealHumanDeltaAndFieldSourceReceipt
+    interventionObservation : BlindedInterventionObservationReceipt
+    replicatedCausality : IndependentlyReplicatedReceiverEffect
