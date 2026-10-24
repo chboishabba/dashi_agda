@@ -740,3 +740,270 @@ quarticPuncturedInverse79 ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit
 -- recorded exact-head kernel run. An independent finite arithmetic program
 -- has checked the original F81 polynomial↔tower operations exhaustively.
 -- Higher-order claims (Monster, classical moduli, physics, IIT) remain open.
+
+
+------------------------------------------------------------------------
+-- Relative norm-one / Galois inversion on the ACTUAL punctured source.
+-- x^8 maps F81× into the norm-one C10 subgroup, so x^(8*10)=1.
+-- Under the relative Frobenius9, these norm-one values invert.
+-- 79 is not a numerical inverse of the integer 81; in F3, integer 81=0.
+------------------------------------------------------------------------
+
+power8ImageHasNormOne :
+  (p : K4.PuncturedKernel4) →
+  power10 (power8 (fromOriginalKernel4 (proj₁ p))) ≡ one81
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , ())
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+power8ImageHasNormOne ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+
+
+relativeFrobeniusInvertsProjectiveImage :
+  (p : K4.PuncturedKernel4) →
+  power9 (power8 (fromOriginalKernel4 (proj₁ p)))
+  ≡ power79 (power8 (fromOriginalKernel4 (proj₁ p)))
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , ())
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+relativeFrobeniusInvertsProjectiveImage ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+
+
+exponent79IsInvolutiveOnUnits :
+  (p : K4.PuncturedKernel4) →
+  power79 (power79 (fromOriginalKernel4 (proj₁ p)))
+  ≡ fromOriginalKernel4 (proj₁ p)
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , ())
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) , refl) = refl
+exponent79IsInvolutiveOnUnits ((Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) , refl) = refl
