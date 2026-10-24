@@ -179,3 +179,9 @@ External representation-theory SOURCE ROOT: R. Slansky, *Group theory for unifie
 DOWNSTREAM conditional physical consumer [KK #1241](https://github.com/chboishabba/dashi_agda/pull/1241): selecting SU3_colour and two extra SU3 factors gives 16 further 5D gauge vectors, 16×3=48 bosonic Casimir polarizations, exactly the free massless-limit compensation for (6 flavours×3 colours×4 Dirac)−(8 gluons×3 pols)=48 fermionic excess. At the chosen b0 and nonzero physical quark masses, a toy all-degenerate additional vector mass ≈86.31 GeV is needed. The compensator is NOT a phenomenologically accepted trinification action; symmetry breaking, vector couplings, collider constraints, chiral fermions, Higgs portal, QCD running and the 5D source stress remain open.
 
 The ternary 240-site graph has NO graph isomorphism to the classical E8 root inner-product-one graph, so the group-theoretic SU3 branching does not repair the missing root-operator intertwiner in this original branch. Preserve all three distinct source roles.
+
+## E6 Casimir physically stronger correction: Wilson/Higgsed vectors
+
+The later physically sourced [KK #1241](https://github.com/chboishabba/dashi_agda/pull/1241) test **supersedes** any interpretation of the early 86.31GeV scalar-like tuning mass as a real vector mass. Ordinary 5D massless Yang–Mills fields have 3 polarizations, but 5D Higgsed massive vectors have 4 and require the full Higgs/ghost spectrum.
+
+With the *true massless* extra SU3³ gauge factors, a slight neutral bulk mass retuning restores the RADION stationary equation, but the physical electric charges of six quarks make U_EM-Wilson-theta-theta≈−21.189, not a stable vacuum. This is a consumer-indexed failure of the selected trinification-motivated free KK candidate, not of the original E8 or 243 arithmetic. It does not grant an E8 root intertwiner or a physically completed group unification.
