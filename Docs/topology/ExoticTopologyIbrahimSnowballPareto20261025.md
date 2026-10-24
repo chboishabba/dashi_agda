@@ -138,3 +138,40 @@ negative control or compatible proof source.
 - No entire twenty-object theorem bundle is promoted complete.
 - DOI is source identity, QID/DDC may be unknown, citation is not a
   mathematical proof, and Pareto rank is not a proof-status certificate.
+
+
+## Fox–Artin original example disambiguation — decisive negative control
+
+Read the 1948 primary paper directly, not secondary summaries or figure labels.
+
+- **Example 1.1\***, pp. 982–983: the arc pictured in the original
+  user's prompt. Fox–Artin explicitly says its complement is
+  **NOT simply connected**. Its source-specific iterated *chain
+  stitch* and nontrivial group relations are the proper positive
+  construction target; do not misattribute the simply-connected
+  contrast to this exact diagram.
+- **Example 1.2**, pp. 983–985: a **wild** arc whose complement **IS
+  an open 3-cell**. Consequently the entire ambient complement's
+  homeomorphism type, not just its global fundamental group, is
+  insufficient to decide tameness. The paper instead uses a
+  **local inverse system of punctured neighborhoods at the endpoint**.
+- **Example 1.3**, pp. 985–987: the complement is simply connected,
+  yet is **NOT an open 3-cell**. The proof uses an additional
+  disjoint closed curve and a nontrivial fundamental group of its
+  complement with the arc; global `pi1(S3 - arc)` alone again fails.
+
+This gives a **three-way source-derived acceptance discriminator**,
+rather than one generic "wild arc" Boolean:
+`nontrivial global pi1` / `global complement is an open cell but local
+wildness remains` / `global pi1 trivial yet complement not an open cell`.
+
+The existing horned-complement finite group pipeline may address the
+first case, but **cannot by itself** settle the other two. Next
+source-specific proof must formalise the actual nested local
+complement inclusions and tameness test from Example 1.2,
+then its Example 1.3 witness. Do not call the subject of Figure 6
+an Example 1.3 simply-connected arc.
+
+Primary source: Fox and Artin, Annals of Mathematics 49 (1948),
+979–990, DOI 10.2307/1969408;
+https://www.maths.gla.ac.uk/~mpowell/fox-artin.pdf
