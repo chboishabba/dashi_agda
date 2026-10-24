@@ -96,8 +96,8 @@
             "path": "scripts/ns_a_schwartz_fourier_same_object.py"
           }
         ],
-        "status": "Existing physical continuum local Fourier/Leray cell plus finite-energy direct Stokes response; strong H1-source continuity quantified: ||Stokes(u)-Stokes(v)||²_L2xi <=8pi AB/nu² from L1 tensor and convection differences. Bishop formal transform, signed centered A2 and global A3 still open.",
-        "next": "Reuse the strong H1 continuity to instantiate physical EuclideanFourierTrajectory via divergence-free Schwartz density and physical Plancherel; prove same-object Bishop Fourier mapping then signed centered A2 and continuation. Do not rederive local projector or use free FourierTransformVelocity:Set."
+        "status": "Original local Fourier/Leray source and H1 physical Stokes response continuity available; under NS dilation Eλ=E/λ, Dλ=λD, response-L2² scales λ⁻¹, so this is supercritical and does NOT imply A3. Bishop same-trajectory Fourier/Plancherel, signed A2 critical control and A3 continuation remain.",
+        "next": "Weld existing divergence-form source and H1 density theorem into physical Agda/Bishop Fourier transport; obtain signed A2 bound in a genuine scale-critical regularity/continuation norm rather than promoting supercritical stationary Stokes L2."
       },
       {
         "id": "NS-B",
@@ -129,7 +129,7 @@
           }
         ],
         "status": "Historical full-fibre B4 uniform payment is false against literal R219/R469 ED; the padding-invariant SAME-PHYSICAL-RATE output-heat and cross-gradient normal forms ALREADY exist in FixedOutputPhysicalOutputRateNormalForm and R681/R684/R685/R690, but quantitative cross-gradient/spacetime estimate and B123/B7/continuation remain.",
-        "next": "Compensate and globally recombine ALL original critical Bony/source contributions using already-proved R681/R685/R690 before estimating: on the same shear R681 output-relative work=0 but old B4 defect>0, so direct equality is false. Then derive signed cutoff-uniform global cross-gradient payment; B123/B7 and continuation remain."
+        "next": "Review old B4 false full-fibre estimate only as mathematical negative control; its exact degree-5 obstruction is settled. Continue original-source signed cross-gradient R681/R685/R690 GLOBAL compensation and quantitative payment, plus B123/B7/continuation."
       },
       {
         "id": "NS-B4",
@@ -157,8 +157,8 @@
             "path": "scripts/ns_b4_literal_padding_adversary.py"
           }
         ],
-        "status": "falsified original literal full-fibre R440 noncore/core strict-half payment: fixed globally smooth shear has localED<=4, companion fixed for N>=9, signed defect diverges. Existing R681 output-heat alternative is exact prior art, but naive equality with old B4 is false and positive replacement is open.",
-        "next": "Retire disproved full-fibre B4 payment. R681 output-relative work is NOT equal to the old B4 defect (explicit smooth shear: 0 vs positive); search existing R685/R690 global compensation over original Bony classes and prove exact total-source identity before any uniform bound."
+        "status": "falsified original full-fibre B4 physical payment: exact literal defect D_N=(8/3)N²(2N+1)(3N²+N−2)−840480 for all N≥9, grows as 16N⁵; fixed core companion 1345859672, original selected localED≤4. R681 output-relative work is distinct, not a drop-in replacement.",
+        "next": "Use existing R681→R684→R685→R690 and prove compensated same-source GLOBAL physical critical-production identity before any signed cutoff-uniform estimate. Do NOT resurrect the disproved full-fibre B4 strict-half payment."
       },
       {
         "id": "NS-B-RESERVE",
