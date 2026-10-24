@@ -16,6 +16,7 @@ import exotic_topology_warsaw_contour as warsaw
 import exotic_topology_cw_donor_reuse as cw
 import exotic_topology_binary_ternary_pants as codec
 import exotic_topology_pl_surface_gluings as pl
+import exotic_topology_pl_frontier_lineage as lineage
 
 class ExoticMaxCutTests(unittest.TestCase):
     def test_whitney_real_parametric_image_caution(self):
@@ -71,5 +72,26 @@ class ExoticMaxCutTests(unittest.TestCase):
     def test_wrongly_oriented_shared_edge_rejected(self):
         with self.assertRaises(AssertionError):
             pl.inspect(pl.Mesh([(0,1,2),(0,1,3)], 'same-orientation-shared-edge'))
+
+
+    def test_exact_geometric_frontier_lineage(self):
+        result = lineage.audit(4)
+        self.assertTrue(result['status'].startswith('PASS'))
+        for depth, stage in enumerate(result['families']['cantor']):
+            self.assertEqual(len(stage['frontier_keys']), 2 ** depth)
+            self.assertEqual(
+                set(stage['frontier_keys']),
+                {tuple(int(x) for x in format(k, '0%db' % depth)) if depth
+                 else () for k in range(2 ** depth)})
+        self.assertEqual(result['families']['loch'][-1]['genus'], 4)
+        self.assertEqual(result['families']['jacob'][-1]['genus'], 8)
+
+    def test_wrong_lineage_even_with_correct_frontier_count(self):
+        # Same numerical count but an old branch did not split:
+        # the label (1,) persists while (0,) is over-refined.
+        old = {(0,), (1,)}
+        bad = {(0, 0), (0, 1), (0, 0, 0), (1,)}
+        self.assertEqual(len(bad), 2 * len(old))
+        self.assertNotEqual(bad, {p + (b,) for p in old for b in (0, 1)})
 
 if __name__ == '__main__': unittest.main()
