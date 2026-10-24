@@ -962,3 +962,32 @@ def test_crosspollination_source_roots_and_hypothesis_gates():
         assert token in report
     assert "source-state countermodel" in portfolio
     assert "source-identical" in report
+
+
+def test_ftc_final_order_is_duty_not_completed_deletion():
+    case = OWNER.read_text()
+    report = (ROOT / "docs/research/aquino-epstein-crosspollination-phase-decision-20261025.md").read_text()
+    for token in (
+        "record FTCDataCustodyOrderBoundary : Set where",
+        "canonicalFTCDataCustodyOrderBoundary = ftc-data-custody-order-boundary",
+        "recipientDisclosureSwornStatementRequired : Bool",
+        "derivedDataAndWorkProductDeletionRequired : Bool",
+        "regulatoryPreservationExceptionExplicit : Bool",
+        "complianceStatementPersonallyInspectedHere : Bool",
+        "dataDeletionCompletedAndIndependentlyVerified : Bool",
+        "ftcCustodyOrderOfficiallyLocated = refl",
+        "ftcRequiredDeletionNotProvedCompleted = refl",
+        "ftcOrderDoesNotIdentifyRiponRows = refl",
+        "ftcOrderDoesNotConvictThirdPartyPossessor = refl",
+        "ftcRedactedComplianceRouteAccepted = refl",
+        "ftc2019OriginalOrderSource = Acquisition.sourceAcquisitionTarget",
+    ):
+        assert token in case
+    for token in (
+        "original FTC Final Order",
+        "sworn statement identifying recipients",
+        "preservation exceptions",
+        "order is not itself proof",
+        "lawfully redacted",
+    ):
+        assert token in report
