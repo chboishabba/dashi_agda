@@ -170,3 +170,31 @@ python3 scripts/check_fermion_axial_pump_nec_budget_20261024.py
 A self-contained local-physics surrogate is now **committed**, `scripts/check_three_localized_field_helicity_20261024.py`: three separate Gaussian twisted vector potentials, exact `div B=0`, positive helicity density, exact cross-helicity integral with independently executed 3D Gauss–Hermite quadrature (≈1.3e-15 agreement). Balanced C3 phase drive has zero integrated anomaly pump even when packets overlap; amplitude envelope creates a nonzero `E·B` source and formally exchanges axial charge with helicity.
 
 **Next required promotion is NOT more C3 numerology:** replace prescribed packets with material-consistent Maxwell–MHD/plasma dynamics (external/internally rotating E,B, real matter current, finite walls, supplied work, surface helicity flux), then compute the *in-in* fermionic `δ<T_kk>_ren` including ordinary Maxwell positive NEC, causal state prep, fermion mass/chirality relaxation and signal backreaction. A positive axial-charge measurement cannot be counted as negative quantum energy. Wild-horn topology remains optional P6.
+
+
+## New critical-path reassessment, 2026-10-24: global loop quantum state BEFORE full 4D Dirac solve
+
+**See [`MMPGlobalDiracOpticalLoopStateMaxCut20261024.md`](MMPGlobalDiracOpticalLoopStateMaxCut20261024.md).**
+
+A prior constraint has moved ahead of the originally identified P1 renormalization bottleneck: **MMP LLL Casimir energy exists on actual closed magnetic field lines returning through the same external universe**. The earlier model glued RN exteriors independently to each end of `R×S²`. It has an effective C1 Israel solution and negative ANEC but **does not implement the same-universe handle or closed fermion return path**. A radial coordinate pressure zero is *not* an exterior quantum-state boundary condition.
+
+**New P0a global topology/magnetic-loop gate (CRITICAL PATH, not optional horn topology):** build same-asymptotic-universe two-mouth 3D handle schematically `R³#(S¹×S²)` with H1=H2=Z, actual U1 magnetic field lines linking the mouths, spin-c lift, Wilson holonomy and global optical length. A two-ended `R×S²` has H1=0,H2=Z; classical Alexander horn complement has H1=H2=0. Neither is the needed closed-line geometry by itself. The 2026 horned PR #1244 is therefore still optional non-Abelian P6, not the solution to this U1 loop gate.
+
+**New P1a completed at scoped 2D level:** one genuinely global, static, zeta-renormalized massless complex Dirac conformal-circle state with
+`E_ren[N,h,α]=2πc B2(α)/(∮ h/N dx) - c/(24π)∮N'²/(hN) dx`.
+Its same-state lapse/spatial metric variations produce both anomaly-corrected density and radial pressure; the Wilson phase derivative produces equilibrium persistent current. Symbolic Ward+trace and independent finite variation refinement PASS. The C3 holonomy shift ±1/3 from NS α=1/2 flips B2 from -1/12 to +1/36 IN THIS LOOP MODEL; no three-ball physical holonomy generation is asserted.
+
+**New P0b optical consistency gate:** `L_loop = τ_inside + τ_external_return`, return ≥0. The old `L=20` q=12,13,24 effective numerical solutions FAIL even the nonnegative-return necessary condition. Illustrative q12 model with **assumed** return 2.0 has a conditional optical fixed point `L=22.516301125725`, internal transit 20.516301125718, matched RN radius 12.793819, mass 5.997251, and effective ANEC -3.631e-4. This only solves the length-normalization equation of the existing source; the exterior fermion stress/state and Maxwell field-line geometry remain unsolved.
+
+**New P1b noncompact source no-go:** in a stationary conserved 2D free Dirac conformal state on an asymptotically Minkowski infinite line, chiral t constants must vanish if both asymptotics are vacuum. Patching constant negative Casimir t to zero creates radial Ward defect 2t'/N². For t=0, the 2D null integral of the conformal vacuum is c/(12π)∫F²/N dx ≥0 with decay boundaries. This does NOT exclude the physical MMP closed-loop state; it shows why imposing that state on a different topology cannot be repaired by junction pressure alone.
+
+**New priority order:** (0) existing code reproducibility, (0a) actual closed flux/spin/Wilson loop and optical state; (1a) exact 2D loop current/stress [bounded DONE]; (1b) **full 4D globally Hadamard and covariantly renormalized spin-c Dirac stress/current** [OPEN]; (2) *one-state* Einstein–Maxwell + exterior handle solve [OPEN]; (3) stability and QEI; (4) dynamic three localized source Wilson/helicity response; (6) horned/JMD/SUSY only if a physical operator weld is provided. Preserve MMP original publication and all prior theorem authorship.
+
+Committed acceptance:
+```sh
+python3 scripts/check_global_dirac_optical_circle_source_20261024.py
+python3 scripts/check_mmp_closed_loop_optical_fixedpoint_20261024.py
+python3 scripts/check_noncompact_static_dirac_state_nogo_20261024.py
+```
+
+These scripts' locally equivalent calculations passed. Neither PR-head CI nor any full 4D Einstein-Maxwell-Dirac quantum saddle is claimed.
