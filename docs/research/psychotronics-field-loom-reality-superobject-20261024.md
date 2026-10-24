@@ -1,5 +1,13 @@
 # FIELD LOOM — a reality-compatible psychotronics super-object
 
+## Repair to S1 experimental admissibility (25 October)
+
+The original ideal permanent-dipole force estimate remains a **conditional numerical model**. Its later paired-residual implementation has been corrected: see [GLS uncertainty, source-object join and factorial-identification audit](psychotronics-s1-metrology-repair-20261025.md). Shared magnetic-moment calibration, common force offset and common field-scale errors cannot be treated as independent across repeated observations. A source hash alone cannot establish that analysis pairs were derived from that source; submitted pairs and calibration now must match source-byte identities, though independent stream→pair derivation and actual instrument authentication remain open. The exact five-parameter `coil sign × dipole sign + current-even heating` model needs rank five to separate its terms, and field/cue parity, mechanical response and uncertainty must still be measured.
+
+**Correct S1 phase:** numerical architecture, conservative provenance intake and statistical estimator have improved, **not bench validated**. The independent gravimetric channel remains unpaid under the existing Amy/exotic-gravity consumers, and Source/CI/Python files in GitHub are not laboratory result receipts. Continue to isolate HV/corona/plasma and human-sensing modules from the S1 low-risk field survey.
+
+
+
 **Sensor placement refinement:** S6 now has a *computed*, ideal failure-robust four-sensor candidate (2 upper + 2 lower sampling planes) selected exhaustively from the 27 grid positions under a one-failed-sensor maximin singular-value objective. This supports **reconstructing only the two coil currents**, not independently commanding 27 fields. Treat as prebuild design only; ambient three-axis calibration, noise covariance, magnetic mounting, vibration and heat must be measured before selecting physical sensors. Source/proof and numerical receipts in the [S1/S6 audit](psychotronics-s1-s6-twenty-scientist-maxcut-20261024.md).
 
 
