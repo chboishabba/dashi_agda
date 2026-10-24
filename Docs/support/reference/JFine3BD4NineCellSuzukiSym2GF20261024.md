@@ -65,6 +65,24 @@ The earlier source producer `scripts/monster_3b_suzuki_multiplicity_characters.g
 - **GF(31), GF(103), GF(223)** are Barraclough's original finite-field *computational methods*, NOT class labels. Our **new model**, independently, has faithful D4 canonical-basis rank90 modulo each, with primitive cubic roots 5,46,39 respectively. No historical Barraclough generator data/matrices were used in these cross-field checks.
 - **GF(3)** is the 3×3/Heisenberg geometry carrier; characteristic 3 is modular for E, and ordinary Stone–von Neumann semisimplicity there cannot be imported unmodified.
 
+
+## External source confirmation: actual irreducible Sym²(12) in the Suzuki cover
+
+The open-access peer-reviewed paper *Symmetrizations of quadratic and Hermitian forms*, `Journal of Algebraic Combinatorics` 61, article 29 (20 March 2025), DOI `10.1007/s10801-025-01399-2`, §6, **explicitly constructs** the symmetrization of its unitary degree-12 character of `6.Suz`. Its partition (2) row names irreducible character `χ_80` of degree78, and §6 separately calls out the degree-78 representations as **faithful to 3.Suz**, not to the 6.Suz central involution. Direct source: https://link.springer.com/article/10.1007/s10801-025-01399-2
+
+This resolves an uncertainty at *Suzuki character existence* level: `Sym²(12)=78` is not simply a proposed tensor dimension and does **exist as a sourced irreducible character**. It confirms the central-involution argument: on 12 the central involution is -I; on the 78 symmetric square it is +I, so the 78 descends to `3.Suz`.
+
+It **does not** yet prove the selected `78ab` character in the actual Monster 3B quotient descent is precisely `χ_80` (or its conjugate). Barraclough-Wilson main-to-normalizer quotient has a diagonal kernel and a central phase convention that must be checked classwise. The source character is independent external corroboration of the structural idea, not a Monster intertwiner receipt.
+
+Exact conditional cyclotomic predictions from `U_12 ⊕ Sym²(U_12)`:
+
+- Centre `C2` trace is always `-12 + 78 = 66` in the 90-dimensional multiplicity module.
+- For the nontrivial centre C3 scalar on the 12, `lambda=ζ`, the genuine Sym² acts with `ζ²`; so `χ_90(c3)=12ζ+78ζ²=-78-66ζ`. For the dual Sym², the 78 instead has scalar `ζ`, giving `90ζ`.
+- Reversing `ζ↔ζ²` produces conjugate fingerprint choices `-12+66ζ` and `90ζ²`. None is a nonnegative integral pure 90-point permutation trace.
+- The central C6 trace follows by multiplying the 12 block by `-1` but not the 78 block, producing the four exact cyclotomic fingerprints in `scripts/monster_3b_jfine_ninecell_sym2_intertwiner.py`. The local-only cross-check program `jfine_6suz_centre_sym2_fingerprint.py` and receipt were executed in Python.
+
+These exact centre fingerprints give a **short source-level matching filter** for the selected actual 12/78 pair, likely cheaper than general character-table products. The newly source-written `monster_3b_suzuki_sym2_character_screen.g` still tests full classwise equality and then requires the already existing `IbrahimMonster3BSuzukiQuotientDescentCorrectionExact` same-object kernel/phase certificate. No GAP execution is claimed.
+
 ## Revised highest-alpha path
 
 1. DONE and locally checked: the 9+3→12→Sym²78→90 D4-only construction, all three D4 12 roots, unique root containing the actual nine-cell D4 representation, rational D4 intertwiner into the preceding signed repair, and mod-31/103/223 same-model full-rank checks.
