@@ -8,8 +8,7 @@ This is a cyclic spectral chart, NOT cube geometry or VOA fusion.
 """
 from itertools import product
 from collections import Counter
-from math import gcd, comb
-from fractions import Fraction
+from math import gcd
 
 DIM=196884
 CHAR={0:196884,1:3,3:0,9:54}
@@ -71,7 +70,7 @@ assert all(gcd(27,(label(q)-label(p))%27)!=27 for p,q,i in E)
 assert {i:gcd(27,3**i) for i in range(3)}=={0:1,1:3,2:9}
 
 print('PASS exact Monster McKay-Thompson char checks: T_27=3 T_9B=0 T_3B=54')
-print('PASS C27 eigenspace multiplicities: phi1:7300 phi3:7297 phi9:7295 phi27:7290')
+print('PASS C27 eigenspace multiplicities: phi1:7298 phi3:7295 phi9:7296 phi27:7290')
 print('PASS spatial cube chart 27 sites; fibre dimensions',sorted(Counter(rank.values()).items()))
 print('PASS cube axis edges 18 each with cyclic-charge shifts +1,+3,+9')
 print('PASS distinct-charge intersite hopping impossible under strictly preserved onsite g')
