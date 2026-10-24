@@ -81,7 +81,11 @@ def create_manifest(upstream: Path, fmri: Path, images: Path,
                      "n_test_image_labels": n_test}
     base_present = all(artifacts[x]["status"] == "present"
                        for x in ("fmri", "ground_truth", "v2c_mapping"))
-    ckpt_present = bool(checkpoints) and all(
+    required_checkpoints = {
+        "combined_model.ckpt", "decoder_vgg_ext-1_batch64_save.pth",
+        "decoder_clipg_ext-1_save.pth"}
+    named_checkpoints = {Path(p).name for p in checkpoints}
+    ckpt_present = required_checkpoints.issubset(named_checkpoints) and all(
         x["status"] == "present" for x in artifacts["checkpoints"])
     if artifacts["nsd_design"]["status"] == "present" and artifacts["fmri"]["status"] == "present":
         from alignment import checked_alignment
@@ -109,8 +113,10 @@ def create_manifest(upstream: Path, fmri: Path, images: Path,
         "schema": "brainit-inventory-v1",
         "source": {"paper": ARXIV, "code_url": UPSTREAM_REPO,
                    "inspected_revision": UPSTREAM_HEAD_INSPECTED,
-                   "actual_revision": sha, "git_dirty": dirty},
+                   "actual_revision": sha, "git_dirty": dirty,
+                   "upstream_root": str(upstream)},
         "subjects_1_based": subject_numbers,
+        "minimum_required_checkpoint_names": sorted(required_checkpoints),
         "subjects_internal_zero_based": [n - 1 for n in subject_numbers],
         "artifacts": artifacts, "fmri_alignment": shape,
         "source_stimulus_alignment": alignment,
