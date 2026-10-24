@@ -21,6 +21,9 @@ data PoliticalRelation : Set where
   productionSupply : PoliticalRelation
   announcedStrategicPartnership : PoliticalRelation
   proposedUncompletedAcquisition : PoliticalRelation
+  audiencePrepaymentSelfReport : PoliticalRelation
+  prospectiveSponsorOffer : PoliticalRelation
+  externalPlatformSupplier : PoliticalRelation
   financialEntitlement : PoliticalRelation
   politicalDonation : PoliticalRelation
   inKindTransportSupport : PoliticalRelation
@@ -275,6 +278,46 @@ bannonPalmerCanonicalOwner =
 
 bannonPalmerCanonicalDocument : String
 bannonPalmerCanonicalDocument = "US DOJ EFTA01615861"
+
+-- RadioInfo's original 28 July 2026 interview is a first-person
+-- business-model disclosure, NOT a payment ledger or an independent audit.
+kyleSubscriberFinanceSelfReport : RelationshipReceipt
+kyleSubscriberFinanceSelfReport = relationship-receipt
+  "Kyle Sandilands Live prospective subscribers" "Kyle Sandilands Live"
+  audiencePrepaymentSelfReport namedActorSelfReport
+  "Steve Ahern / RadioInfo, 2026-07-28: interview with Kyle Sandilands"
+  "https://radioinfo.com.au/news/weve-already-got-the-bills-paid-for-the-next-two-and-a-half-years-kyle-sandilands-new-show/"
+  "Kyle reports tens of thousands of prepaid annual subscriptions, close to AUD 2m gross and enough to cover projected costs about 2.5 years. No independent subscriber ledger, refunds, retention or bank reconciliation was provided." false false false
+
+harveyNormanProspectiveSponsorship : RelationshipReceipt
+harveyNormanProspectiveSponsorship = relationship-receipt
+  "Harvey Norman (as described by Kyle)" "Kyle Sandilands Live promotional prizes"
+  prospectiveSponsorOffer namedActorSelfReport
+  "Steve Ahern / RadioInfo, 2026-07-28"
+  "https://radioinfo.com.au/news/weve-already-got-the-bills-paid-for-the-next-two-and-a-half-years-kyle-sandilands-new-show/"
+  "Kyle says Harvey Norman conveyed general willingness to help and that EV companies proposed prizes. This is an attributed approach, not verified provision, signed sponsorship or equity investment." false false false
+
+kyleUscreenPlatform : RelationshipReceipt
+kyleUscreenPlatform = relationship-receipt
+  "Uscreen" "Kyle Sandilands Live app/video distribution"
+  externalPlatformSupplier namedActorSelfReport
+  "Steve Ahern / RadioInfo, 2026-07-28"
+  "https://radioinfo.com.au/news/weve-already-got-the-bills-paid-for-the-next-two-and-a-half-years-kyle-sandilands-new-show/"
+  "Original reporter says KSL will use Uscreen.tv for multiscreen subscriber delivery. Platform/software supplier is not an identified shareholder or controller of editorial content." false false false
+
+-- Financial categories remain orthogonal: prepaid audience revenue, a
+-- contingent commercial offer, an ARN contractual share of net receipts,
+-- inherited ARN equity and capital subscription in KSL.
+data SubscriptionSelfReportEstablishesAuditedReceipts : Set where
+data BrandOfferEstablishesEquityInvestment : Set where
+
+reportedSubscriptionsNotAudited :
+  SubscriptionSelfReportEstablishesAuditedReceipts → ⊥
+reportedSubscriptionsNotAudited ()
+
+advertiserOfferNotEquity :
+  BrandOfferEstablishesEquityInvestment → ⊥
+advertiserOfferNotEquity ()
 
 -- Specifically ban transitive leaps of type funding→speaker→campaign
 -- or access→ideology→editorial control. No self-reports are silently
