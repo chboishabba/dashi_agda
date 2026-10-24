@@ -173,12 +173,16 @@ def action_candidates(world: dict) -> list[dict]:
             "promotion_authorised": False,
         })
     ready = [x for x in out if x["state"] == "candidate_admissible"]
+    # Dominance requires coverage of the ACTUAL evidence coordinates as well
+    # as consumer labels; targeting the same consumer with a different missing
+    # prerequisite does not make either search action redundant.
     for a in out:
         a["pareto"] = a in ready and not any(
             b["id"] != a["id"] and
             b["cost_band"] <= a["cost_band"] and
             b["access_risk"] <= a["access_risk"] and
             set(a["potential_consumer_ids"]) <= set(b["potential_consumer_ids"]) and
+            set(a["potential_artifacts"]) <= set(b["potential_artifacts"]) and
             (b["cost_band"] < a["cost_band"] or
              b["access_risk"] < a["access_risk"] or
              set(a["potential_consumer_ids"]) < set(b["potential_consumer_ids"]))
