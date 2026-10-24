@@ -47,6 +47,11 @@ def test_acquisition_frontier_does_not_claim_promotion():
     assert candidates["d_replay_static"]["state"] == "source_prerequisite_blocked"
     assert candidates["e_phase_matrices"]["state"] == "candidate_admissible"
     assert not any(x["promotion_authorised"] for x in candidates.values())
+    # Pareto must respect WHICH consumer is affected, not merely count leaves:
+    # Sanders phase matrices are not "dominated" by a cheaper neural-QC search.
+    assert candidates["a_original_motion_primary"]["pareto"]
+    assert candidates["b_rights_review"]["pareto"]
+    assert candidates["e_phase_matrices"]["pareto"]
 
 
 def test_shortest_hypothetical_paths_are_not_acquisitions():
