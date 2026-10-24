@@ -122,3 +122,33 @@ repairMustDistinguishE8AndPlate :
 repairMustDistinguishE8AndPlate refine adequate same =
   Repair.refinementRepairSeparatesWitness
     sameNumberDoesNotRecoverPhysicalRole adequate same
+
+
+------------------------------------------------------------------------
+-- External group-representation PRIOR ART, not a recovered E8 action:
+-- E6|SU3^3 adjoint: 78 = 8+8+8+27+27.
+-- E8|E6 x SU3 adjoint: 248 = 78+8+(27*3)+(27*3).
+-- In 5D, TWO further SU3 gauge octets contribute (2*8)*3
+-- massless vector polarization units. This equals 48 free-scalar
+-- units but says NOTHING about their physical KK masses or action.
+------------------------------------------------------------------------
+
+eSixTrinificationAdjointDimension :
+  78 ≡ (3 * 8) + (2 * 27)
+eSixTrinificationAdjointDimension = refl
+
+eEightToESixSUThreeAdjointDimension :
+  248 ≡ 78 + 8 + (2 * (27 * 3))
+eEightToESixSUThreeAdjointDimension = refl
+
+eEightSUThreeComplementDimension : 248 ∸ 8 ≡ 240
+eEightSUThreeComplementDimension = refl
+
+twoExtraSUThreeVectorCasimirUnits :
+  (2 * 8) * 3 ≡ 48
+twoExtraSUThreeVectorCasimirUnits = refl
+
+sixVectorlikeQuarksAndThreeVectorOctetsSameFreeUnits :
+  6 * 3 * 4 ≡ (3 * 8) * 3
+sixVectorlikeQuarksAndThreeVectorOctetsSameFreeUnits = refl
+
