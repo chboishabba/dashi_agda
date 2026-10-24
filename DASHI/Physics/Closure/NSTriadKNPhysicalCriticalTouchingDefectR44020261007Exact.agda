@@ -48,6 +48,25 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectR44020261007
 -- payment, NOT a kernel proof of failure of an independently specified
 -- ED predicate. Do not change the closed-status flag to true.
 --
+-- THE REAL ED PROVENANCE IS ALREADY FIXED (NOT AN OPAQUE CUT):
+-- R219.physicalModalED has E_m=||u_m||² and D_m=|m|²||u_m||².
+-- R109.pairKernel(p,q)=D_p E_q + E_p D_q.
+-- R469.selectedTriadValue routes that kernel through the selected
+-- ordered output fibre, and PhysicalCriticalRegionUniformFamilyProducer
+-- defines localED(k) as its fold. A selected Boolean may ONLY remove
+-- nonnegative terms. For the same fixed seed, sum E=sum D=4,
+-- so the GLOBAL selected pair ED<=2*4*4=32 and this output's
+-- selected localED(k)<=4 (only ordered (e_x,e_y),(e_y,e_x) can be
+-- nonzero, each ED kernel =2). Both bounds are INDEPENDENT of N.
+--
+-- Thus the literal B4 physical payment against this original ED
+-- source is mathematically impossible with cutoff-independent
+-- theta_D<1/2 and c_D: defect_N diverges, M_core is fixed,
+-- localED<=4. A generic source-attachment record still permits an
+-- arbitrary nonspecific localED and is NOT the original physical ED.
+-- This is a no-go for THIS auxiliary B4 full-fibre estimate, not
+-- a no-go for Navier-Stokes or for a redesigned R440 estimator.
+--
 -- Source/receipt: scripts/ns_b4_literal_padding_adversary.py
 -- Canonical fix: derive a zero-padding-invariant bound from the literal
 -- modal R440 weighted amplitude, preserving NS source identification;
