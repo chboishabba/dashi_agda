@@ -141,3 +141,12 @@ No valid environmental net-benefit calculation can omit:
 - **P6 health causal inference:** independent OPEN empirical study, unchanged by heat pump feasibility.
 
 **Max-cut:** prioritise one metered site–customer pair and pre/post intervention, rather than recursively adding new abstract model surfaces. P2 is as far as synthetic, non-proprietary inputs alone can take physical validation.
+
+
+### KPI boundary reassignment: a second exact finite result
+
+`DASHI.Environment.DataCentreThermalReuseMetricBoundaryExact` now includes a transparent lossless thought experiment: with the same 10MW IT, 12.5MW site and 2.4MW heat-pump electricity, external compressor bookkeeping gives PUE=1.25, ERF=8/12.5=0.64 and ERE=0.45; if the HP is actually installed/metered **inside** the data-centre boundary, its electricity contributes to facility electrical use (14.9MW), and 10.4MW is exported at the boundary, giving PUE=1.49 and conditional ERF=10.4/14.9≈0.698, but again ERE=(14.9-10.4)/10=0.45 in this lossless construction. The invariance of ERE does NOT imply economic/carbon equivalence, compliance or metric invariance in all facilities. This is a finite example of the importance of a declared meter boundary.
+
+The new CSV screening fixture additionally models temperature-dependent COP, finite network loss and high-temperature direct-HX exclusion. On the particular **synthetic** 10MW source with rack water 42→32C, 200kg/s nominal pure-water coolant, 35C direct/preheat and 75C HP sink, 90% network efficiency and 45% of ideal Carnot COP, it predicts roughly 9.54MW customer-delivered heat for 2.60MW extra compressor electricity. That is distinct from the **10.4MW no-network-loss fixed-COP envelope** and must not be substituted for a measured system. Heat-pump operating-point availability, exchanger UA, the hydraulic split and measured refrigerant/flow remain outstanding. The source geometry/source loop and offtaker geometry must be the **same actual physical objects** throughout any claimed comparison.
+
+The screening fixture's first priority is **hard negative tests** (zero customer, impossible temperature pinch, exceeded IT-source calorimetry, COP ≤1, non-positive IT, excess delivery, balance failure). Its integrated `--selftest` exercises these invariants. Repeated operation with different synthetic inputs is not a replication of an empirical finding.
