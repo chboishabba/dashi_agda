@@ -115,3 +115,25 @@ def test_unlocated_primary_material_is_not_promoted_by_dossier():
     report = audit.summary(w, d, m)
     assert report["original_fmri_result_reproduced"] is False
     assert w == before
+
+
+def test_full_strawman_control_includes_active_inference_and_HMM_ceiling():
+    w, d, m = fixtures()
+    report = audit.summary(w, d, m)
+    assert report["adversarial_comparators"] == ["M0", "M1a", "M1b", "M2"]
+    assert "non-identifiability" in report["highest_value_unconditional_gap"]
+    assert report["original_fmri_result_reproduced"] is False
+
+
+def test_losing_mechanistic_donor_does_not_leave_strong_M1_claim():
+    w, d, m = fixtures()
+    m["models"][1]["serious_endogenous_donors"] = []
+    with pytest.raises(ValueError, match="Mago 2026"):
+        audit.validate_research_contract(w, d, m)
+
+
+def test_generic_trace_no_go_is_required_for_agent_inference():
+    w, d, m = fixtures()
+    m["models"][2]["ontology_not_identified_by_finite_HMM_trace"] = False
+    with pytest.raises(ValueError, match="Fixed-Q trace"):
+        audit.validate_research_contract(w, d, m)
