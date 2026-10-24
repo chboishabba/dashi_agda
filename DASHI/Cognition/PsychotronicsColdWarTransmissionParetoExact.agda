@@ -303,7 +303,7 @@ kitaygorodskyOwn1974PhysicalComparators = Investigation.investigative-claim-rece
   Investigation.primaryCarrier
   Investigation.inspectedAndClaimLocated
   "Author recounts filming and ~30 demonstrations at three visits: iron-powder transfer to wood/match; airflow from hand gestures moving a brass wing; differential warmth / natural convection from human or lamp slowing reversing enclosed rotating vane. The approximate two-to-three-degree differential is HIS reported test, not independently measured in this review."
-  Investigation.sameAuthorDependent
+  Investigation.commonSourceDependent
   "1974 Russian journal native archive; Czech first-publication issue 2 (1974) acknowledged explicitly in publisher introduction"
   "Obtain original Czech page and independent original recording/lab logs to verify the measurements and matching of individual Pavlita apparatus; claimed insect/water phenomena not directly retested by the examples in this article"
   Investigation.supportsBoundedClaim
