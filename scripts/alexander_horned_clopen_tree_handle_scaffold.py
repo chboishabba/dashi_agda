@@ -24,12 +24,25 @@ R=lambda p:(p[2],p[0],p[1])
 assert tuple(R(c) for c in satellites)==satellites[1:]+satellites[:1]
 assert R(R(R((1,2,3))))==(1,2,3)
 
-# Straight spoke skeletons t*e_i for 1<=t<=8. Distinct
-# skeletons have distance^2=t^2+s^2>=2>(2eps)^2,
-# so radius-eps tubes outside the central ball do not meet.
-assert Q(2)>(2*eps)**2
-# Every spoke is >=9 units from any OFF-AXIS satellite centre.
-assert Q(81)>(Q(1)+eps)**2
+# REPAIR (2026-10-24): old t in [1,8] touched unit-ball
+# boundaries only at isolated points. That was NOT an attachment!
+# Use genuine radius-eps tubes with centreline t in [1/2,17/2].
+# Both complete endpoint disk sections are strictly INSIDE their
+# respective unit balls (positive-volume attaching overlap).
+start,end=Q(1,2),Q(17,2)
+assert start**2+eps**2 == Q(5,16) < 1
+assert (Q(9)-end)**2+eps**2 == Q(5,16) < 1
+# If any point of a tube is outside the central unit ball,
+# its axial t must exceed 3/4: t<=3/4 would imply
+# norm^2<= (3/4)^2+(1/4)^2=5/8<1.
+# At a shared point of tubes on distinct axes, the other tube
+# requires that same coordinate <=eps=1/4. Contradiction.
+assert Q(3,4)**2+eps**2 == Q(5,8) <1
+assert Q(3,4)>eps
+# Each tube remains separated from the two nonincident satellites:
+# its transverse coordinate has absolute value <= eps, whereas an
+# off-axis satellite has transverse coordinate 9.
+assert (Q(9)-eps)**2>1
 # Unit centre and three unit satellites are pairwise disjoint.
 assert Q(81)>4 and Q(162)>4
 
@@ -39,7 +52,8 @@ assert len(vertices)==4 and len(edges)==len(vertices)-1
 assert {'central'}|{b for a,b in edges}==set(vertices)
 assert {('central',(b+1)%3) for a,b in edges}==set(edges)
 
-print('PASS exact C3 axis-spoke geometry: radius 1/4 tubes and rational gaps')
+print('PASS exact C3 star: positive-volume collar overlap at BOTH ball endpoints')
+print('PASS exposed radius-1/4 tubes are pairwise disjoint outside central ball')
 print('PASS four vertices, three edges, connected acyclic star and equivariance')
 print('CONDITIONAL topology: collared boundary-connected sum along a tame tree gives B3')
 print('OPEN: actual wild horned satellite embeddings/collars, geometric van Kampen and pi1')
