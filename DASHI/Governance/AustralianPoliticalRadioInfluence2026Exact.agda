@@ -25,6 +25,12 @@ data PoliticalRelation : Set where
   prospectiveSponsorOffer : PoliticalRelation
   externalPlatformSupplier : PoliticalRelation
   financialEntitlement : PoliticalRelation
+  epbcReconsiderationRequest : PoliticalRelation
+  proceduralValidityDecision : PoliticalRelation
+  citedScientificMethod : PoliticalRelation
+  projectSpecificExpertModel : PoliticalRelation
+  nativeAudioPublication : PoliticalRelation
+  inferredNamedReferent : PoliticalRelation
   publicParliamentaryInquiry : PoliticalRelation
   historicalInstitutionalFunding : PoliticalRelation
   timedTargetedInformationRelease : PoliticalRelation
@@ -697,3 +703,80 @@ rowanDeanBOMNetZeroArgument = relationship-receipt
   "https://ipa.org.au/latest-news/peter-ridd-on-outsiders-news24-18-october-2026"
   "Dean's published remarks connect disputed temperature data and climate-policy credibility. An attributed broadcaster argument is not validation of the premise or evidence of coordinated instruction."
   false false false
+
+
+-- Native identifiers establish a stronger referent than generic shared
+-- ideology. Each carries its own author and authority status. This is
+-- cross-case comparison, not a scientific fact proof or court judgment.
+
+browseACFOriginalS78AApplication : RelationshipReceipt
+browseACFOriginalS78AApplication = relationship-receipt
+  "Australian Conservation Foundation through Environmental Justice Australia"
+  "Environment Minister, Browse to North West Shelf Development EPBC 2018/8319"
+  epbcReconsiderationRequest institutionRecord
+  "ACF/EJA signed EPBC section 78A reconsideration request, 18 February 2026"
+  "https://epbcpublicportal.environment.gov.au/_entity/sharepointdocumentlocation/dc7c83cd-ca6e-f111-ab0d-7ced8d33d5fd/2ab10dab-d681-4911-b881-cc99413f07b6?file=2018-8319-Reconsideration-Request.pdf"
+  "13-page primary request seeks reconsideration of 2019 controlling provisions using new modelled GBR harm. This is an administrative reconsideration request, not a filed civil court lawsuit or final merit finding."
+  false false false
+
+browse2026ValidityDecisionOnly : RelationshipReceipt
+browse2026ValidityDecisionOnly = relationship-receipt
+  "Commonwealth ministerial statement, 23 June 2026"
+  "Browse EPBC 2018/8319 reconsideration request"
+  proceduralValidityDecision institutionRecord
+  "Minister Murray Watt press statement, 23 June 2026"
+  "https://minister.dcceew.gov.au/watt/media-releases/administrative-decisions-regarding-browse-projects"
+  "Departmental delegate found ACF request procedurally valid and opened public-comment process. Minister expressly distinguishes this from any substantive decision on the reconsideration application."
+  false false false
+
+browseCitedAbramScienceMethod : RelationshipReceipt
+browseCitedAbramScienceMethod = relationship-receipt
+  "Nerilie Abram and coauthors, npj Climate Action, 13 October 2025"
+  "Perkins-Kirkpatrick February 2026 Browse expert attribution report"
+  citedScientificMethod institutionRecord
+  "ACF/EJA original 18 February request paragraph 6; original peer-reviewed method"
+  "https://doi.org/10.1038/s44168-025-00296-5"
+  "ACF request explicitly cites Abram and coauthors as original published project-attribution methodology. A method is not identical to the expert's Browse-specific numeric estimate or independently tested input dataset."
+  false false false
+
+perkinsKirkpatrickBrowseExpertModel : RelationshipReceipt
+perkinsKirkpatrickBrowseExpertModel = relationship-receipt
+  "Sarah Perkins-Kirkpatrick expert report dated 12 February 2026"
+  "ACF EPBC 2018/8319 application, 18 February"
+  projectSpecificExpertModel institutionRecord
+  "Original ACF/EJA s78A reconsideration request paragraphs 5 and 6; Annexure A cited"
+  "https://epbcpublicportal.environment.gov.au/_entity/sharepointdocumentlocation/dc7c83cd-ca6e-f111-ab0d-7ced8d33d5fd/2ab10dab-d681-4911-b881-cc99413f07b6?file=2018-8319-Reconsideration-Request.pdf"
+  "The request attributes to Perkins-Kirkpatrick a modelled increment of 29.35 million coral colonies lost per future mass-bleaching event from Browse lifetime emissions. This is a prediction in the proponent's legal evidence, not directly observed coral mortality or an adjudicated fact."
+  false false false
+
+riddSpecificBrowseReferentInference : RelationshipReceipt
+riddSpecificBrowseReferentInference = relationship-receipt
+  "Peter Ridd unnamed WA gas and approximately 30m GBR corals reference on 18 October Outsiders"
+  "ACF original Browse EPBC 2018/8319 expert-reconsideration claim"
+  inferredNamedReferent journalistCorroboration
+  "Distinct comparison: IPA edited interview transcript versus ACF/EJA 18 February 2026 application"
+  "https://ipa.org.au/latest-news/peter-ridd-on-outsiders-news24-18-october-2026"
+  "High-specificity match of WA gas and approximately 30m corals supports Browse as referent; Ridd did not himself name Woodside or EPBC ID in the transcript. This does not mean Ridd quoted or inspected the primary request."
+  false false false
+
+fordhamOriginalFourMinutePodcastCarrier : RelationshipReceipt
+fordhamOriginalFourMinutePodcastCarrier = relationship-receipt
+  "2GB / Ben Fordham Live on 2GB Breakfast"
+  "Dodgy data - Weather Bureau accused of climate conspiracy, dedicated episode"
+  nativeAudioPublication institutionRecord
+  "Apple Podcasts episode item 1000796975224, 18 Oct 2026 21:55 UTC = 19 Oct 07:55 Brisbane"
+  "https://podcasts.apple.com/sg/podcast/dodgy-data-weather-bureau-accused-of-climate-conspiracy/id157670116?i=1000796975224"
+  "Original 4-minute programme media identity is located but audio waveform and full speaker transcript not extracted. This is a publication receipt not proof of identical Sky audio, script source or headline authorship."
+  false false false
+
+data EPBCProcedureMeansFinalApprovalJudgment : Set where
+noProceduralPromotion : EPBCProcedureMeansFinalApprovalJudgment → ⊥
+noProceduralPromotion ()
+
+data AudioEpisodeLocatorMeansVerifiedSpeech : Set where
+noAudioLocatorSpeechPromotion : AudioEpisodeLocatorMeansVerifiedSpeech → ⊥
+noAudioLocatorSpeechPromotion ()
+
+data SameUnusualQuantityMeansDirectSourceConsulted : Set where
+noReferentInferenceToConsultation : SameUnusualQuantityMeansDirectSourceConsulted → ⊥
+noReferentInferenceToConsultation ()
