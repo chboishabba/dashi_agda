@@ -77,3 +77,10 @@ The Python fixture executes and asserts the distinct conversions. This clarifica
 **Physical implication:** standard linear acoustics + structural dynamics + measurement theory suffice for the next major advance; nothing so far requires new fundamental quantum, spacetime or exotic field theory. Computational fluid/thermal source modeling, wave propagation, FEM structure and uncertainty quantification can cross-pollinate existing DASHI physical infrastructure, but the model cannot be promoted to real-site exposure without real boundary conditions/calibration.
 
 **Planning implication:** share only measured, auditable acoustic-impact inferences. Do not transfer Brisbane City Council local rules to the Swanbank/Ipswich case without an explicit jurisdiction-specific mapping. Site-level claims must reference actual planning documents, not national averages or commentary.
+
+## 2026-10-24 thermal-reuse / noise mitigation cross-pollination
+
+See canonical additive roadmap `Docs/roadmaps/DataCentreThermalReuseMaxCut20261024.md` (additional source-authored 2025–2026 heat pump, exergy, Queensland commercial/industrial screening, absorption chiller, actual deployments, and 2026 EU baseline). A conservative, reproducible synthetic dispatch is at `scripts/datacentre_thermal_reuse_dispatch.py`. Its equal-source/different-demand obstruction and 100-kW first-law fixtures are formalised in `DASHI/Environment/DataCentreThermalReuseBalanceExact.agda`.
+
+This is a new physical remediation path, not a promotion of the earlier infrasound human-harm causal claim. An acoustically quieter internal liquid loop can shift noise to external compressors/pumps/fans. **Joint before/after outdoor spectral measurement remains required.** Heat export can reduce the facility's external thermal rejection, but seasonal mismatches and additional compressor electricity can negate presumed advantages. Thermal off-take, energy/carbon and public-health status are independently measured axes.
+
