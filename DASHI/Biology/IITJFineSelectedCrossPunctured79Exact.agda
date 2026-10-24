@@ -72,6 +72,34 @@ splitJoinNine
   (selectedFive a b c d e)
   (cornerFour f g h i) = refl
 
+-- The chosen missing-profile cyclic order is explicit. It has order five,
+-- but unlike the original D4 site rotation it MOVES the centre label.
+
+rotateFive : SelectedFive → SelectedFive
+rotateFive (selectedFive a b c d e) = selectedFive e a b c d
+
+rotateFiveFive :
+  (profile : SelectedFive) →
+  rotateFive (rotateFive (rotateFive (rotateFive (rotateFive profile)))) ≡ profile
+rotateFiveFive (selectedFive a b c d e) = refl
+
+markedCentreProfile : SelectedFive
+markedCentreProfile =
+  selectedFive Base.tri-high
+    Base.tri-mid Base.tri-mid Base.tri-mid Base.tri-mid
+
+C5RotationMovesCentre :
+  rotateFive markedCentreProfile ≡ markedCentreProfile → ⊥
+C5RotationMovesCentre ()
+
+sourceD4RotationFixesCentreSite :
+  Pointed.rotateSiteQuarter Pointed.centreSite ≡ Pointed.centreSite
+sourceD4RotationFixesCentreSite = refl
+
+-- These different orbit signatures rule out any identification that
+-- claims the specific source D4 quarter-turn IS our chosen C5 generator.
+-- Another transported action can be defined with an explicit rechart.
+
 -- Composition with the repo's already-proved Fin(3^9) codec.
 -- We don't assert that two independently named abstract carriers are equal:
 -- both conversions operate on the literal earlier source type.
