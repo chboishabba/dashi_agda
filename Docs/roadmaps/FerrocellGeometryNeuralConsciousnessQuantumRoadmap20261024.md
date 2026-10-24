@@ -520,3 +520,32 @@ via \([x]\mapsto x^8\). The projective quotient has ten points and eight nonzero
 - D3B.6 *actual source codec and finite operation producer*: implemented as committed Agda sources + independent exhaustive arithmetic.
 - D3B.7 *kernel acceptance*: outstanding exact-head Agda compilation and remaining field group-axiom/closure transport.
 - D3B.8 *experimental same-object*: only after actual source-specific optical, connectome or AI hidden-state interventions and measured consumer losses are available. Literature/citation authority, syntax, numerical reproduction, Agda kernel certification, and physical corroboration remain separate categories.
+
+
+## 2026-10-24 phase D3B.9–14: actual 4+1+4 jFine gauge and S3/zeta–Monster character weld
+
+**User-proposed decomposition:** **3^9 = 3^4 × 3 × 3^4**, realised on the original nine-trit source as **four corners, distinguished centre, four edges**. These three sets are each D4-stable; the relative shells are \(\mathbb F_3^4\times\mathbb F_3^4\) (81×81=6561). Use centre \(c\) as a **value gauge**, subtracting c from every edge/corner. The original state is exactly reopened by adding c; no new dimensions or source states. This differs from the earlier cross5/corner4 chart, and from the separate tenth completionJ coarse marker.
+
+**Existing authoritative sources:** JFinePhaseQuotientFieldExact, BalancedTernaryHarmonicCarrierExact, Base369 balanced-trit operations, OggSSPP2F4RecenteredTriXorS3Exact, C3FourierConjugationExact, C3CyclotomicAmplitudeAlgebraExact, Monster3BRegularC3BulkResidualFiftyThreeBidiExact and its independently sourced 3B character. **New same-source Agda producers on [IIT PR #1148](https://github.com/chboishabba/dashi_agda/pull/1148):** IITJFineFourOneFourS3ZetaGaugeExact and IITJFineS3RegularMonsterCharacterExact. [Full detailed plan/derivation](https://github.com/chboishabba/dashi_agda/blob/agent/iit-phi-integration-maxcut-20261013/docs/superpowers/plans/2026-10-24-iit-jfine-4-1-4-s3-zeta-gauge.md).
+
+The six value-affine permutations \(x\mapsto ax+b\) for \(a=\pm1\), \(b\in F3\) give **S3 = C3⋊C2** acting globally on all nine sites. In centre-gauge coordinates:
+\[
+(c,E,K)\mapsto(ac+b,\ aE,\ aK).
+\]
+C3 translations move c only, yielding one free C3 orbit of length3 for each relative configuration. Pointed ten-marker bulk has **10×6561=65610 free C3 orbits**. Independent local Python verified **all 19683** source roundtrips, **118098** S3-gauge transformations, and commutation with positional D4. S3 classes fix (19683, 1, 0) states for identity, reflection, nontrivial 3-cycle. Therefore the characteristic-zero S3 permutation decomposition of the fine source is
+\[
+3281·1 \oplus3280·\mathrm{sgn}\oplus6561·\mathrm{Std}_2
+\]
+and on the pointed bulk it is
+\[
+32810·1 \oplus32800·\mathrm{sgn}\oplus65610·\mathrm{Std}_2.
+\]
+Restricting to C3 gives phase multiplicities **(65610,65610,65610)**, the **same character** as the independently owned Monster3B regular bulk in \(W|_{C3}=53·1+65610·Reg(C3)\). This is a **real complex-character-level correspondence, now with a literal C3-set producer**; a noncanonical isomorphism of abstract complex C3 modules follows from semisimplicity. It is NOT a selected literal Monster 3B same-action linear intertwiner and does not supply the Monster normalizer, the 53 submodule or a consciousness mechanism.
+
+**S3/Zeta distinctions and decisive negative tests:**
+- The relevant S3 permutes *trit values* (F3 affine transformations), not the three unequal spatial blocks of sizes 4,1,4. Site D4 and value S3 commute as separate actions. The natural D4 permutation representations on edge4 versus corner4 have mirror fixed-point traces 2 and 0, so they are not naturally D4-equivalent despite being abstractly F3^4 with 81 states.
+- The \(\zeta,\zeta^2\) C3 eigenvalues require a scalar field of characteristic **not** 3 (e.g. Q(zeta3)/C). Over F3 and F81, \(X^3-1=(X-1)^3\), so no distinct third roots. Original Ogg elliptic F4 zeta lives in characteristic 2; the notation "zeta" alone is not a same-field identity. \(1+\zeta+\zeta^2=0\), while \(\zeta\cdot\zeta^2=1\), not zero. The Riemann zeta function is a different source entirely.
+- The original 5³ C5 lost profile remains separate from centre-reference C3 and original site D4 unless a genuine action intertwiner is supplied.
+- New empirical/formal high-alpha **normalizer discriminator**: a nontrivial value-S3 reflection fixes ten pointed states, hence has **trace 10** on the constructed 196830-dimensional permutation module. Compare this against an actual source-normalizer order-two element of the literal Monster module before claiming a same-normalizer representation. Agreement solely on C3 eigenspace sizes or \(\zeta\) exchange is insufficient.
+
+**Priority revision:** The F81 quartic and projective 80-way source routines are now present in IIT PR #1148 as IITF81F9ConcreteQuarticTowerExact and IITProjectiveF9Punctured80ConcreteExact, with source-written exhaustive closed cases; earlier plans calling them purely missing interfaces are stale. Exact-head Agda kernel verification remains unreported. New source-written S3/gauge + C3 set/character Agda modules and Python audit are committed and integrated; the independent local exhaustions passed. Next target is a **literal Monster module or normalizer action** aligned with the new free C3 basis, with exact-head kernel checks when feasible, rather than another character count. No physical neural, quantum or consciousness conclusion is licensed by this character identification.
