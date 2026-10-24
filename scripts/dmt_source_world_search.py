@@ -145,10 +145,10 @@ def action_candidates(world: dict) -> list[dict]:
             b["id"] != a["id"] and
             b["cost_band"] <= a["cost_band"] and
             b["access_risk"] <= a["access_risk"] and
-            b["potential_consumer_count"] >= a["potential_consumer_count"] and
+            set(a["potential_consumer_ids"]) <= set(b["potential_consumer_ids"]) and
             (b["cost_band"] < a["cost_band"] or
              b["access_risk"] < a["access_risk"] or
-             b["potential_consumer_count"] > a["potential_consumer_count"])
+             set(a["potential_consumer_ids"]) < set(b["potential_consumer_ids"]))
             for b in ready
         )
     return out
