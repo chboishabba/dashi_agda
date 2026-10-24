@@ -228,3 +228,32 @@ historicalIPAReceiptNotEditorialOrder = refl
 publishedBOMInterviewNotSecretCommand :
   A.provesHiddenCoordination A.skyOutsidersLloydRiddSameProgramme ≡ false
 publishedBOMInterviewNotSecretCommand = refl
+
+
+creightonOriginalCreditIsAttributedReuse :
+  A.kind A.creightonIPAOriginalArticle ≡ A.traceableClaimAmplification
+creightonOriginalCreditIsAttributedReuse = refl
+
+gasProducerLinksIPAOriginal :
+  A.kind A.senexLinksIPACreighton ≡ A.traceableClaimAmplification
+gasProducerLinksIPAOriginal = refl
+
+hancockSameJournalismNotIndependentData :
+  A.kind A.hancockReprintsJohnsonNightly ≡ A.traceableClaimAmplification
+hancockSameJournalismNotIndependentData = refl
+
+senexSameJournalismNotIndependentData :
+  A.kind A.senexLinksJohnsonNightly ≡ A.traceableClaimAmplification
+senexSameJournalismNotIndependentData = refl
+
+parliamentaryPublicPolicyCounterexample :
+  A.kind A.senateGasTaxInquiryPublicComparator ≡ A.editorialPublication
+parliamentaryPublicPolicyCounterexample = refl
+
+gasRepublishingDoesNotEstablishPolicyCopy :
+  A.LinkedIndustryArticleProvesPartyDrafting → ⊥
+gasRepublishingDoesNotEstablishPolicyCopy = A.linkedIndustryArticleNotPartyDrafting
+
+politicalLanguageDoesNotEstablishCommonSponsor :
+  A.CommonPoliticalArgumentProvesSharedSponsor → ⊥
+politicalLanguageDoesNotEstablishCommonSponsor = A.commonArgumentDoesNotProveSponsor
