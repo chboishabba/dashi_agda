@@ -12,7 +12,7 @@ module DASHI.Unified.HyperfabricK27SU2LevelFourOriginalSourceCutExact where
 -- belong to their other source owners. This is SOURCE arithmetic.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 
 import DASHI.Physics.QFT.SU2Level4Spin1RepReceipt as Original
 import DASHI.Physics.QFT.KacMoodyLevelReceipt as Levels
