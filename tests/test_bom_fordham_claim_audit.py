@@ -284,3 +284,45 @@ def test_google_ai_source_intake_reuses_political_radio_owner():
     assert "PR #1131" in docs
     assert "not its own mathematical owner" in docs
     assert "DASHI.Governance.GoogleAIModeMediaClaimIntake2026" not in source + checks
+
+
+def test_cross_pollination_reuses_woogaroo_climate_and_project2025_owners():
+    """A bounded effect question isn't a new claim of gas lobbying or US direction."""
+    political = POLITICAL_OWNER.read_text()
+    docs = RESEARCH.read_text()
+    for token in (
+        "independentOriginalClaimConcentration",
+        "donorAdjacentGasPolicyShift",
+        "project2025PolicyProposalVersusEnactment",
+        "springfieldResidentialGasDemandPersistence",
+    ):
+        assert token in political
+
+    for source_owner in (
+        "SensibLawSpringfieldGasLobbyingOwnershipSnowballExact",
+        "SensibLawAzureSpringfieldInducedGasDemandExact",
+        "HansonCapacityCriticismHyperformalismExact",
+        "ClimateGenealogyTypedCasesExact",
+        "GodsEyeViewWorldEpistemicSourceAtlasExact",
+        "GodsEyeViewDiagnosisDrivenActivistRollupExact",
+    ):
+        assert source_owner in docs
+
+    for bounded_claim in (
+        "10.1177/09636625231202117",
+        "10.1038/s41598-021-01714-4",
+        "8,000 gas connections",
+        "Bernard L. McNamee",
+        "Mandy M. Gunasekara",
+        "same-object",
+        "N_eff",
+        "Senex 8 May 2026",
+        "One Nation 9 June 2026",
+    ):
+        assert bounded_claim in docs
+
+    # No duplicated named company/donation source receipts are placed into
+    # the media file, and no unsupported lobbying→appliance causal edge exists.
+    assert "azureLnpDonation2019A = attributed-influence-edge" not in political
+    assert "springfieldRegisteredLobbyistMeeting2025 = attributed-influence-edge" not in political
+    assert "actual same-object policy-to-asset-to-household" not in political
