@@ -75,6 +75,64 @@ m81ToKernel5
   add3 (SSP.toTrit central) t ∷ᵥ
   t ∷ᵥ []ᵥ
 
+
+
+-- Four-trit subtraction cancellation uses the actual existing
+-- Monster/SSP mod-three trit addition, not an invented algebra.
+subAddCancellation : (a t : Trit) →
+  add3 (minus3 a t) t ≡ a
+subAddCancellation neg neg = refl
+subAddCancellation neg zer = refl
+subAddCancellation neg pos = refl
+subAddCancellation zer neg = refl
+subAddCancellation zer zer = refl
+subAddCancellation zer pos = refl
+subAddCancellation pos neg = refl
+subAddCancellation pos zer = refl
+subAddCancellation pos pos = refl
+
+addSubCancellation : (a t : Trit) →
+  minus3 (add3 a t) t ≡ a
+addSubCancellation neg neg = refl
+addSubCancellation neg zer = refl
+addSubCancellation neg pos = refl
+addSubCancellation zer neg = refl
+addSubCancellation zer zer = refl
+addSubCancellation zer pos = refl
+addSubCancellation pos neg = refl
+addSubCancellation pos zer = refl
+addSubCancellation pos pos = refl
+
+-- Constructive two-sided chart receipts. No bare Set or Bool assumed.
+-- Rewriting reuses the canonical SSP <> Trit conversion theorems.
+kernel5LeftRoundTrip :
+  (x : Kernel5) → m81ToKernel5 (kernel5ToM81 x) ≡ x
+kernel5LeftRoundTrip
+  (a ∷ᵥ b ∷ᵥ c ∷ᵥ d ∷ᵥ e ∷ᵥ []ᵥ)
+  rewrite SSP.toTrit-fromTrit (minus3 a e)
+        | SSP.toTrit-fromTrit (minus3 b e)
+        | SSP.toTrit-fromTrit (minus3 c e)
+        | SSP.toTrit-fromTrit (minus3 d e)
+        | subAddCancellation a e
+        | subAddCancellation b e
+        | subAddCancellation c e
+        | subAddCancellation d e
+  = refl
+
+m81RightRoundTrip :
+  (x : M81TimesF3) → kernel5ToM81 (m81ToKernel5 x) ≡ x
+m81RightRoundTrip
+  ((Cube.ternary27Point a b c , central) , t)
+  rewrite addSubCancellation (SSP.toTrit a) t
+        | addSubCancellation (SSP.toTrit b) t
+        | addSubCancellation (SSP.toTrit c) t
+        | addSubCancellation (SSP.toTrit central) t
+        | SSP.fromTrit-toTrit a
+        | SSP.fromTrit-toTrit b
+        | SSP.fromTrit-toTrit c
+        | SSP.fromTrit-toTrit central
+  = refl
+
 -- The ORIGINAL 3-point constant diagonal (Agda #1094 source).
 diagonalKernel5 : Trit → Kernel5
 diagonalKernel5 t =
