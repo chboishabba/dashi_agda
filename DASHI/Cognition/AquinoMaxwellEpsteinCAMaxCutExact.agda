@@ -898,8 +898,8 @@ descriptionsDoNotResolveContractIdentity :
 descriptionsDoNotResolveContractIdentity ()
 
 data AcronymInQuestion : Set where
-  CA : AcronymInQuestion
-  CIA : AcronymInQuestion
+  caAbbreviation : AcronymInQuestion
+  ciaAbbreviation : AcronymInQuestion
 
 record TranscriptCorrection : Set where
   constructor transcript-correction
@@ -909,12 +909,12 @@ record TranscriptCorrection : Set where
 open TranscriptCorrection public
 
 oralCorrection : TranscriptCorrection
-oralCorrection = transcript-correction CA
+oralCorrection = transcript-correction caAbbreviation
   "Q1458-Q1459; 27 March 2018, UK Commons DCMS"
 
-correctedAcronymIsCA : spokenCorrection oralCorrection ≡ CA
+correctedAcronymIsCA : spokenCorrection oralCorrection ≡ caAbbreviation
 correctedAcronymIsCA = refl
 
 correctedAcronymIsNotCIA :
-  spokenCorrection oralCorrection ≡ CIA → ⊥
+  spokenCorrection oralCorrection ≡ ciaAbbreviation → ⊥
 correctedAcronymIsNotCIA ()
