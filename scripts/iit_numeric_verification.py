@@ -37,6 +37,7 @@ from iit_projective_f9_pointed80_audit import audit as projective_pointed80_audi
 from iit_pgl2_f9_720_audit import audit as pgl2_f9_audit
 from iit_f81_f9_norm_inversion_audit import audit as f81_norm_inversion_audit
 from iit_f81_f9_quadratic_tower_audit import audit as f81_same_tower_audit
+from iit_jfine_four_one_four_s3_zeta_audit import audit as jfine_s3_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -233,6 +234,18 @@ def verify_numeric_results() -> dict:
     assert f81_tower["relative_Frobenius_9_equals_tower_conjugation"]
     assert f81_tower["relative_norm_10_equals_tower_norm"]
 
+    jfine_s3 = jfine_s3_audit()
+    assert jfine_s3["fine_size"] == 19683
+    assert jfine_s3["raw_4_1_4_cardinality"] == 19683
+    assert jfine_s3["all_fine_codec_roundtrips"] == 19683
+    assert jfine_s3["checked_S3_gauge_actions"] == 118098
+    assert jfine_s3["complex_irreps_fine"] == {
+        "trivial": 3281, "sign": 3280, "standard_2d": 6561}
+    assert jfine_s3["complex_irreps_pointed"] == {
+        "trivial": 32810, "sign": 32800, "standard_2d": 65610}
+    assert jfine_s3["pointed_C3_zeta_multiplicity_each"] == 65610
+    assert jfine_s3["D4_edge_corner_natural_modules_inequivalent"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -245,6 +258,7 @@ def verify_numeric_results() -> dict:
         "xor_grid": grid,
         "five_cube_relative_fibre": five_cube,
         "selected_punctured79": selected,
+        "jfine_four_one_four_s3_zeta": jfine_s3,
         "projective_f9_pointed80": projective,
         "projective_group_f9_720": pgl,
         "f81_norm_inversion": f81_norm,
