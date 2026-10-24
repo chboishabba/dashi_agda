@@ -150,14 +150,14 @@
       "status": "notLocated",
       "kind": "protocol",
       "source": "pnas2023",
-      "scope": "static 16-person exact BOLD_AAL, TR, censoring, nuisance, GFC statistic"
+      "scope": "Original n16 static-NIfTI image preprocessing, FD censoring, ROI mask, bolus alignment, nuisance and FCD statistics, not an automatically equivalent BOLD_AAL MAT pipeline"
     },
     {
       "id": "source_local_bytes",
       "status": "notLocated",
       "kind": "local_copy",
       "source": "pnas_gitrepo",
-      "scope": "Git SHA1 checked and locally SHA256 computed for all fMRI input arrays"
+      "scope": "Locally hashed 40 public parcelled BOLD_AAL MAT source files, suitable for independently identified exploratory/dynamic consumers; NOT an original static NIfTI requirement"
     },
     {
       "id": "data_use_review",
@@ -341,13 +341,12 @@
     },
     {
       "id": "c_static_reproduction",
-      "consumer": "participant-level independent GFC t15 reproduced",
+      "consumer": "Reproduce original PNAS static NIfTI+Schaefer GFC n16 effect from original processed voxel inputs, QC, code/workspace and authorized data use",
       "grade": "empirical",
       "requires": [
         "original_static_fd",
         "original_preproc",
         "data_use_review",
-        "source_local_bytes",
         "static_fmri_replay",
         "original_preprocessed_voxel_nifti",
         "original_schaefer_extended_mask",
@@ -463,7 +462,7 @@
       "targets": [
         "source_local_bytes"
       ],
-      "work": "Run rights-reviewed acquire_dmt_imaging_source.py in authorised network environment; verify Git hashes and local SHA256; do not redistribute",
+      "work": "Only rights-reviewed parcelled BOLD_AAL MAT acquisition and Git/SHA256 verification for exploratory/dynamic consumers; NOT an input prerequisite for voxelwise 2023 StaticGFC",
       "cost_band": 2,
       "access_risk": 3
     },
@@ -474,7 +473,6 @@
         "original_static_fd",
         "original_preproc",
         "data_use_review",
-        "source_local_bytes",
         "original_preprocessed_voxel_nifti",
         "original_schaefer_extended_mask",
         "effective_static_gfc_workspace"
@@ -867,6 +865,9 @@
     "autopromote_ontology": false,
     "source_metadata_not_measured_replay": true,
     "no_source_absence_globalisation": true,
-    "public_mat_is_not_original_static_nifti": true
+    "public_mat_is_not_original_static_nifti": true,
+    "parcelled_mat_not_required_for_original_static_nifti_replay": true,
+    "published_aggregate_statistic_not_replayed": true,
+    "independent_recruitment_not_inferred_from_source_lineage": true
   }
 }
