@@ -96,8 +96,8 @@
             "path": "scripts/ns_a_schwartz_fourier_same_object.py"
           }
         ],
-        "status": "local projected Fourier/Leray formula and convolution quadrature paid; standard distributional L² physical Fourier source identity gives |Pdiv(u⊗u)^hat|<=E|xi| and locally-L² E/(nu|xi|) low-frequency heat majorant; Agda Bishop transform, signed centered kernel high tail and continuation NOT kernel discharged",
-        "next": "Formalize standard finite-energy L2->L1 tensor Fourier/Plancherel distributional identity in same EuclideanFourierTrajectory, reuse canonicalProjectedInteraction; weld low-frequency physical source to signed centered A2 and show high-frequency dominance/continuation; never infer high control from low 1/|xi| estimate."
+        "status": "Physical local Fourier/Leray projected cell implemented; classical L2/Plancherel same-object distribution Fourier formula mathematically derived, and for H1 exact projected-source bound min(E|xi|,sqrt(ED)) yields globally-L2 stationary heat-inverse 8pi E^(3/2)sqrt(D)/nu². Formal Bishop transport, signed A2 double-resolvent and global A3 continuation remain unpaid.",
+        "next": "Use existing projected cell and Schwartz source witness; instantiate actual Bishop Fourier/Plancherel transform on SAME H1 continuum solution and transport standard physical min(E|xi|,sqrt(ED)) to signed A2. Do not treat H1-dependent estimate as global-in-time continuation."
       },
       {
         "id": "NS-B",
