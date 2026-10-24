@@ -111,6 +111,13 @@ def validate_world(world: dict) -> None:
             or tree["source_tree_sha1"] != canonical["source_tree_sha1"]
             or tree["files"] != canonical["files"]):
         raise ValueError("Source world diverges from independently pinned Git tree")
+    # Independently resolved through the original upstream git/commits tree
+    # pointer and recursive git/trees endpoint. The previous receipt wrongly
+    # copied the commit id into the tree field; these are distinct Git objects.
+    if (canonical["source_tree_sha1"] !=
+            "38bdb12d180303f1738b7c5b6d99f34f157c26f9"
+            or tree["source_tree_sha1"] == tree["source_commit"]):
+        raise ValueError("Git commit and original tree identities conflated")
     pinned_static = next(
         (x for x in canonical["files"] if x["path"] == "Scripts/StaticGFC.m"),
         None
