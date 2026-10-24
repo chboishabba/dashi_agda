@@ -40,6 +40,12 @@ For a plane travelling far-field sound wave, intensity is approximately p_rms^2/
 
 Idealized dBA inverse non-identifiability: using the standard analog A weighting approximation, a pure 31.5 Hz tone at about 74.53 dB SPL and a pure 125 Hz tone at about 51.19 dB SPL both yield 35 dB(A). Difference 23.34 dB flat SPL; no particular biological risk follows. The Agda module additionally proves a simple finite weighted-power collision, not a full acoustic inverse theorem.
 
+## Decibel interpretation audit: the 25,000% ambiguity
+
+Masley's critique quotes Jordan's approximate "25,000% higher than ambient" comparison and translates it into about 48 dB. The conversion only yields ~47.99 dB if the percentage represents a **pressure-amplitude ratio** of 251. If it represents an **intensity or spectral-power ratio**, the difference is ~24.00 dB. If the underlying units are a normalised digital spectrum (dBFS) or a background-subtracted estimate, neither value demonstrates an absolute environmental SPL. The original plotted quantity, spectral estimator, calibration, noise floor and baseline must be recovered before promoting the comparison.
+
+The Python fixture executes and asserts the distinct conversions. This clarification is not a claim that Jordan's field result was valid or invalid.
+
 ## Jordan experiment audit: steelman plus limitations
 
 - The documentary reports more than 100 initial participants and 74 retained after exclusions, and describes an approximately three-minute stimulus with an intended control condition.
