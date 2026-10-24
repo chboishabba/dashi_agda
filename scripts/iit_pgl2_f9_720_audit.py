@@ -40,12 +40,15 @@ def audit():
     stabilizer={p for p in perms if p[0]==0}
     assert len(stabilizer)==72
     generator=next(x for x in F81 if x!=zero and
-                   power(x,40)!=one and power(x,16)!=one)
+                   power(x,40)!=one and power(x,16)!=one and
+                   power(x,80)==one and power(x,8)!=one)
     def mulperm(g):
         return tuple(ids[project(multiply(
             g, one if point[0]=="infinity" else add(point[1],BETA)
         ))] for point in points)
     ten=mulperm(generator)
+    assert power(generator,80)==one
+    assert all(power(generator,80//prime)!=one for prime in (2,5))
     assert ten in perms
     five=tuple(ten[ten[i]] for i in range(10))
     def cycles(p):
