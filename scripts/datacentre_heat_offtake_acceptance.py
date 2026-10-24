@@ -43,8 +43,12 @@ def dispatch(h,plant=Plant()):
             min(plant.pinch_c,plant.evap_approach_c,plant.condenser_approach_c)>=0):
         raise ValueError('invalid plant configuration')
     site=h.it_mw+h.overhead_mw
-    cap=min(h.it_mw*plant.capture_fraction,
-            h.coolant_kg_s*CP*(h.rack_hot_c-h.rack_cold_c)/1000)
+    measured_loop_mw=h.coolant_kg_s*CP*(h.rack_hot_c-h.rack_cold_c)/1000
+    # This contract declares the loop as IT-origin heat only; heat from
+    # additional sources requires a different, metered control volume.
+    if measured_loop_mw>h.it_mw+1e-6:
+        raise ValueError('rack coolant calorimetry exceeds declared IT heat input')
+    cap=min(h.it_mw*plant.capture_fraction, measured_loop_mw)
     direct_feasible=(h.rack_hot_c>=h.direct_target_c+plant.pinch_c and
                      h.rack_cold_c>=h.direct_inlet_c+plant.pinch_c)
     direct=min(cap,h.direct_demand_mw/plant.pipe_eff) if direct_feasible else 0.
@@ -99,7 +103,7 @@ def read_csv(path):
 
 class TestGate(unittest.TestCase):
     def setUp(self):
-        self.h=Hour(10,2.5,42,32,300,2,25,35,8.4,75)
+        self.h=Hour(10,2.5,42,32,200,2,25,35,8.4,75)
     def test_balance_and_erf(self):
         d=dispatch(self.h)
         self.assertAlmostEqual(d['source_cap_mw'],8)
@@ -107,16 +111,16 @@ class TestGate(unittest.TestCase):
         self.assertAlmostEqual(d['erf_candidate'],.64)
         self.assertGreater(d['delivered_mw'],0)
     def test_pinch_fail(self):
-        h=Hour(10,2.5,40,32,300,2,25,38,8.4,75)
+        h=Hour(10,2.5,40,32,200,2,25,38,8.4,75)
         d=dispatch(h)
         self.assertFalse(d['direct_feasible'])
     def test_zero_offtaker(self):
-        h=Hour(10,2.5,42,32,300,0,25,35,0,75)
+        h=Hour(10,2.5,42,32,200,0,25,35,0,75)
         d=dispatch(h)
         self.assertEqual(d['source_boundary_mw'],0)
         self.assertEqual(d['hp_electric_mw'],0)
     def test_high_lift_cop_reject(self):
-        h=Hour(10,2.5,42,32,300,0,25,35,8.4,150)
+        h=Hour(10,2.5,42,32,200,0,25,35,8.4,150)
         self.assertEqual(dispatch(h,Plant(second_law_eff=.1))['hp_electric_mw'],0)
     def test_network_loss_explicit(self):
         d=dispatch(self.h,Plant(pipe_eff=.8))
@@ -126,9 +130,12 @@ class TestGate(unittest.TestCase):
         s=summary([self.h]*24)
         self.assertEqual(s['hours'],24)
         self.assertAlmostEqual(s['energy_mwh']['site_mw'],300)
+    def test_invalid_coolant_energy_source(self):
+        with self.assertRaises(ValueError):
+            dispatch(Hour(10,2.5,42,32,300,2,25,35,8.4,75))
     def test_invalid(self):
-        with self.assertRaises(ValueError):dispatch(Hour(0,2.5,42,32,300,2,25,35,8.4,75))
-        with self.assertRaises(ValueError):dispatch(Hour(10,2.5,30,32,300,2,25,35,8.4,75))
+        with self.assertRaises(ValueError):dispatch(Hour(0,2.5,42,32,200,2,25,35,8.4,75))
+        with self.assertRaises(ValueError):dispatch(Hour(10,2.5,30,32,200,2,25,35,8.4,75))
 
 def main():
     p=argparse.ArgumentParser()
@@ -140,7 +147,7 @@ def main():
         t=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(TestGate))
         if not t.wasSuccessful():raise SystemExit(1)
     if a.example:
-        rows=[Hour(10,2.5,42,32,300,2,25,35,8.4,75) for _ in range(24)]
+        rows=[Hour(10,2.5,42,32,200,2,25,35,8.4,75) for _ in range(24)]
     elif a.csv:rows=read_csv(a.csv)
     elif not a.selftest:p.error('choose --example, --csv or --selftest')
     else:return
