@@ -1,5 +1,33 @@
 # Cold War psychotronics transmission — source audit retained
 
+## Newly verified Soviet → US bibliographic dependency (24 October 2026)
+
+**Original source:** Soviet compilers **E. K. Naumov and L. V. Vilenskaya** prepared their bibliography in **Moscow, 1971**, circulated as [JPRS 55557 on 28 March 1972](https://documents2.theblackvault.com/documents/cia/ufos/C05516145.pdf). The *original compilers' preface* is visibly present at **PDF index 8 (printed p.1)** and their names on the report title leaf. JPRS is a **translation/custody carrier**, not creator of the Soviet original bibliographic analysis. The 1981 expanded bibliography with the same compilers is a different *edition*, not an independent source root.
+
+**Direct, inspected later use:** the **U.S. Air Force Foreign Technology Division** prepared ***Paraphysics R&D—Warsaw Pact (U)*, DST-1810S-202-78**, dated **30 March 1978** and later revised [4 February 1980](https://www.dia.mil/FOIA/FOIA-Electronic-Reading-Room/FileId/238544/). Its **original 1978** method Appendix III, printed **p.122 / PDF index 129**, names the Naumov/Vilenskaya bibliography and its JPRS 55557 translation as the seed. Analysts explicitly say they located original documents and other works by the same authors and followed bibliographies; only about **30%** of known relevant documents had full-content evaluation at the time. That is a **direct scholarly research-method / citation lineage** to the original Soviet compilers, **not** Soviet science being independently replicated by the US military. The unchanged Appendix III p.123 additionally discusses unreliable informants, biased interviewing and conspicuous missing detail; those **methodological cautions are themselves primary US-source reports**.
+
+**Edition correction, critical:** the same scan's discussion of Pavlita at **printed p.18 / PDF index 29** is stamped **“DST-1810S-202-78-Chg 1 / 4 February 1980”**, although other pages retain **30 March 1978**. It says conventional **static electricity may partly explain** the reported effects. Attribute this *particular passage to the 1980 amendment*, not to an uninspected March 1978 version or a measured independent trial. The original 1974 Kitaygorodsky iron/air/heat demonstrations remain physically and historically distinct first-person experimental reports.
+
+**Directed graph, preserving role and years:**
+
+```mermaid
+flowchart TD
+  Soviet["Naumov / Vilenskaya 1971 original source bibliography"]
+  JPRS["JPRS 55557, 28 March 1972 English carrier"]
+  USAF["US Air Force DST-1810S-202-78, 30 March 1978 original methods p122"]
+  Revision["Same report Change 1 / 4 Feb 1980, amended Pavlita analysis p18"]
+  Seed["Source-specific papers sought by original-author snowball"]
+  Soviet -->|"translation / edition carrier, not separate experiment"| JPRS
+  JPRS -->|"EXPLICIT citation as source-search seed"| USAF
+  USAF -->|"analysts describe sampling + source acquisition"| Seed
+  USAF -->|"document revision; amended pages"| Revision
+```
+
+**Public first-party methods missing:** the [1973 Prague original Part I JPRSL50221](https://ntrl.ntis.gov/NTRL/dashboard/searchResults/titleDetail/JPRSL50221.xhtml) remains publicly limited in print distribution; NTIS states government-only paper copies. Separate **1975 Monte Carlo** paper locators are now specific: Robert Pavlita, *Vertical Biomagnetic Field of Generator*, **p.203**, and Jana Pavlitová-Zapadlová, *Probe Controlled by Impulse from the Brain*, **p.206** in indexed congress papers. *Martin Ebon 1983* quotes from their translations but cannot substitute for native experiment pages. A third author pair D. Dean/E. Brame, *Physical Changes in Water by Laying-on-of-Hands?*, **p.200**, is an unexamined water research source, not an experiment by Pavlita or modern PAW.
+
+The **historical owner now has 21 attributed document instances**, including original compilers and translated/updated carriers, without creating a twenty-first independent experiment. [Critical review](psychotronics-literature-review-20261024.md) | [51-entry corpus](psychotronics-literature-corpus-20261024.csv) | [seven-effect comparison](psychotronics-pavlita-experiment-comparison-20261024.csv) | [Current Pareto](psychotronics-pareto-current.md). The Agda owner uses **a concrete directed `BoundedHistoricalEdge` and Ibrahim investigative claim receipt** for the citation. No new evidence ontology and no 5D extrapolation.
+
+
 > **Critical 1974 original recovered, 24 October 2026.** Physicist **Alexander I. Kitaygorodsky's own full first-person article** is in the native [*Nauka i Zhizn*, issue 10 (1974) publisher archive](https://www.nkj.ru/archive/articles/52740/). It explicitly identifies a first Czech ***Vesmír* issue 2 (1974)** publication. The same author's Russian text reports **iron dust on a match**, **hand-driven airflow on a vane**, **thermal convection inside a motor-vane box** (reported 2–3°C gradient). **These are different conventional physical mechanisms, not a single electrostatic explanation**, and the piece does not test water/plant/insect claims. Original Czech copy/films/logs unavailable. The original magazine's **1974** date is supported independently by a [1981 Naumov–Vilenskaya bibliography, printed p.36, entry 29](https://documents2.theblackvault.com/documents/cia/stargate/STARGATE%20%234%20176/Part0001/CIA-RDP96-00788R001300230001-3.pdf), which lists no.10 pp.65–68. A later historical bibliography's **1977** dating should not supersede these original/earlier references.
 >
 > The historical Agda consumer now contains **17 attributed source instances** (one new Kitaygorodsky original author-text), plus an existing Ibrahim claim receipt for what the author **reported**, not a new independent laboratory experiment. The comprehensive [45-record source corpus](psychotronics-literature-corpus-20261024.csv), [separate claim-level effect comparison](psychotronics-pavlita-experiment-comparison-20261024.csv), and [critical review](psychotronics-literature-review-20261024.md) supersede older statements that the entire negative experimental evidence existed only via 2017/2021 secondary histories.
@@ -7,7 +35,7 @@
 
 **Superseded as a priority plan by [the full critical literature review](psychotronics-literature-review-20261024.md) and [32-record source corpus](psychotronics-literature-corpus-20261024.csv).** The source graph remains an evidentiary supplement; documentary lineage is a component of the review, not its sole purpose.
 
-**Source owner now 17 historical instances, including six review-specific references with reported counter-literature; prior ten-source graph/links unchanged.**
+**Older snapshot: source owner then had 17 historical instances, including six review-specific references with reported counter-literature; prior ten-source graph/links unchanged.**
 
 **Current as of 24 October 2026.** This is a consumer-specific Pareto / snowball / Ibrahim graph over the **existing** DASHI research infrastructure. Historical-source owner: `DASHI/Cognition/PsychotronicsColdWarTransmissionParetoExact.agda`. Parent [psychotronics Pareto](psychotronics-pareto-current.md). Prior [attribution investigation](psychotronics-succor-punch-attribution-20261024.md).
 
