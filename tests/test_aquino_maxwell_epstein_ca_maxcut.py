@@ -713,3 +713,62 @@ def test_transcript_independent_chronology_not_personal_confirmations():
         "### EFTA01600824 transcript-first content audit",
     ):
         assert token in roadmap
+
+
+def test_black_2026_congress_primary_records_reuse_canonical_owners():
+    """Source-written structural checks; not a substitute for Agda kernel proof."""
+    black = (ROOT / "DASHI/Cognition/EpsteinBlackApolloSameObjectReceiptRound20261014Exact.agda").read_text()
+    consumer = OWNER.read_text()
+    source = (ROOT / "docs/research/aquino-epstein-surrounding-prior-art-audit-20261024.md").read_text()
+
+    for token in (
+        "blackJuneInterview2026 = black-2026-source-receipt",
+        "blackCommitteeReport119831 = black-2026-source-receipt",
+        "blackHouseResolution1543 = black-2026-source-receipt",
+        "blackDechertSECOriginal2021 = black-2026-source-receipt",
+        "blackApolloProxyConflicts2021 = black-2026-source-receipt",
+        "canonicalBlack2026HouseBoundary = black-2026-house-boundary",
+        "originalHouseTranscriptPaid = refl",
+        "witnessAwarenessDoesNotEstablishNegotiation = refl",
+        "signedNDAObjectStillMissing = refl",
+        "contemptReferralNotConviction = refl",
+        "directorPastEmploymentNotTasking = refl",
+        "black2026HouseDoesNotPayBannonFunding = refl",
+        "black2026HouseDoesNotPayWholeNetworkH3 = refl",
+        "H. Rept. 119-831",
+        "H. Res. 1543",
+        "2026-06-26",
+    ):
+        assert token in black
+    for token in (
+        "black2026OriginalCongressionalCase =",
+        "BlackApollo.canonicalBlack2026HouseBoundary",
+        "originalBlackInterviewAndHouseDispositionLocated = refl",
+        "house2026NDAContractBytesRemainUninspected = refl",
+        "house2026CommitteeIsNotTransactionReconciliation = refl",
+        "house2026PastCIAOfficeNotPresentDirection = refl",
+        "house2026DoesNotPayBannonProgrammeBridge = refl",
+        "house2026DoesNotPayCaseWideCommand = refl",
+    ):
+        assert token in consumer
+    for token in (
+        "ProvenanceClosureIndependenceExact",
+        "IbrahimSnowballParetoFrontierExact",
+        "2015 settlement/NDA",
+        "Apollo 2021 SEC DEF14A",
+        "H. Rept. 119-831",
+        "House vote text",
+    ):
+        assert token in source
+
+
+def test_house_source_families_are_not_double_counted_or_promoted():
+    black = (ROOT / "DASHI/Cognition/EpsteinBlackApolloSameObjectReceiptRound20261014Exact.agda").read_text()
+    audit = (ROOT / "docs/research/aquino-epstein-surrounding-prior-art-audit-20261024.md").read_text()
+    assert "report is not a second independent witness" in black
+    assert "Black's 2026 restatement is not a second review" in audit
+    assert "Past CIA employment is not evidence" in audit
+    assert "criminal contempt conviction" in audit
+    assert "executed2015NDABytesInspected : Bool" in black
+    assert "committeeContemptIsCriminalConviction : Bool" in black
+    assert "caseWideCovertCommandEstablished : Bool" in black
