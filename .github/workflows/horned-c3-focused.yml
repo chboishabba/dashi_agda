@@ -24,6 +24,7 @@ jobs:
       - name: Exact finite Python audits
         run: |
           python3 scripts/alexander_horned_c3_a5_probe.py
+          python3 scripts/alexander_horned_torsion_steelman_probe.py
           python3 scripts/alexander_horned_a5_c3_restriction_weld.py
           python3 scripts/alexander_horned_c3_voa_a5_action_probe.py
           python3 scripts/alexander_horned_c3_free_factor_probe.py
