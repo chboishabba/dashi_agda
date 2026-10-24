@@ -55,6 +55,44 @@ same continuum solution. Avoid repeatedly deriving heat/Young algebra.
 
 ## 2026-10-24 max-cut continuation — B4 ED no-go discharged, A finite-energy Fourier source identified
 
+### Algebraic single-row padding mechanism (source-shaped Lean receipt)
+
+Existing non-Round `dashi_lean4/NSUnforcedAnalyticCuts.lean` now
+contains `physicalR440_zero_padding_increment` and
+`physicalR440_shear_padding_increment`. They isolate the precise
+four-moment defect rather than merely plotting growing tables.
+
+Writing `V_X=W(M,M_X)` for raw modal mixed sums and
+`W_X=W(M,R_X)` for weighted R440 sums, the literal negative
+noncore/core work is
+
+```text
+D_NC = -[ n_C*W_N + n_N*W_C - r_N*V_C - r_C*V_N ].
+```
+
+Appending a ZERO-amplitude noncore cell at input rate `s`
+leaves `W_N` and `V_N` unchanged but changes
+`n_N -> n_N+1`, `r_N -> r_N+s`; therefore the EXACT
+one-row change is
+
+```text
+D_new - D_old = s*V_C-W_C.
+```
+
+For the smooth physical shear, `V_C=1,W_C=2`, so each added
+zero-amplitude noncore cell adds precisely `s-2` to the B4
+signed defect. This algebraic result explains the failure on the
+literal **same-object** R440 four-fold source. A positive replacement
+must eliminate the unphysical dependence on zero-amplitude
+incidences while retaining an exactly proved connection to NS
+critical production. It is not enough merely to restrict an
+arbitrary `FiniteSet` or rename a signed covariance.
+
+The Lean terms were committed, but exact-head Lean kernel receipts
+were NOT produced; the corresponding rational four-moment identity
+was independently checked and pinned in
+`tests/test_ns_b4_literal_padding_adversary.py`.
+
 ### B4: the ED qualification has been paid by existing theorem owners
 
 The canonical B4 full-output-fibre source reduction is still the exact
