@@ -1,3 +1,37 @@
+## 2026-10-25 physical T3 signed-work follow-through (post-Ibrahim cut)
+
+The paper's `J=curl(omega×u)`, `T3=||J||²_2` is
+identically the original unforced NS nonlinear VORTICITY source:
+`J=(u·grad)omega-(omega·grad)u
+   =nu Delta omega-partial_t omega`.
+Thus on one actual physical periodic solution,
+`P_enstrophy_nonlinear=-2<omega,J>` and the standard valid
+`|P_enstrophy_nonlinear|²<=4||omega||²*T3` holds.
+It gives a conditional amplitude bound, not W1/W2 compensation
+or a bound on T3. A nontrivial exact 3D real six-mode Fourier
+test yields physical enstrophy production **+8 or -8** on opposite
+phases while T3 is the SAME positive scalar. So T3 fails to
+identify signed production, even on physically realizable data.
+
+The earlier real Beltrami heat field has **T3=0**, physical
+`||Delta u||²>0`, `||omega||²>0` and `|grad xi|=N`;
+it also lies in the kernel of the original R735 mixed-helicity
+W1 field because H^-u=0 on both signed frequencies. W2 and
+separately typed same-helicity physics remain essential.
+Mathematical primary-source audit ranks the v4 paper's
+TICH OPEN CONJECTURE and the postulated T3→curvature link
+as unpaid, not as a source-produced Clay theorem.
+
+**Receipt:** 9 exact local SymPy tests passed across
+`tests/test_ns_ibrahim_beltrami_T3_noncoercivity.py`
+and `tests/test_ns_T3_physical_vorticity_source_signed_work.py`.
+The Agda rational Beltrami Lamb-zero identity is source-written,
+not independently kernel checked. The A1 existing source now
+returns actual `ℚᵘ` rational floor witnesses from Bishop
+density, but A1 real resolvent transport/A2/A3 are still unpaid.
+Full attribution chain in
+`Docs/research/ns_ab_pareto_snowball_ibrahim_20261025.md`.
+
 # 2026-10-25 IBRAHIM PARETO HIGH-ALPHA REBASE — SOURCE TICH / BELTRAMI KERNEL / W1 LIMIT
 
 **Grounded primary-source audit:** author-uploaded related Permana/
