@@ -89,3 +89,32 @@ consistent with the E6 subgroup literature (e.g. original E6 representation conv
 **Consequence:** our stronger CP³, S²×S⁴, S²×K3 spin-index parity receipts covered certain LIFTABLE gauge backgrounds, NOT all \(G_{\rm tri}\) bundles. The previous source's "all coefficients of X4/2 are integers" was likewise only for naive separately integral source symbols. The actual global CS/WZ completion must evaluate the correctly normalized spin/gauge anomaly and five-dimensional fermion eta on these *nonliftable diagonal-Z3 flux sectors*, including possible fractional individual SU3 instanton classes, torsion, quotient charge lattice and boundary inflow. Do not assert anomaly freedom or a universal \(\mathbb Z_2\) absence before that test; likewise do not infer failure from a speculative fractional value. The concrete \(T^2\) witness is a strict new TEST INPUT, not a computed 5D CS phase.
 
 This upgrades the prioritized research gate from the vague phrase "global quotient Γ" to a defined \(G_{\rm tri}\) and an explicit nonliftable bundle. It also prevents overindexing on the old Chi-phase half-unit or irrelevant 3D CS formulas: the new highest-information question is whether the specific original E6 27 + orbifold regulator + candidate one-boundary CS/WZ action is consistent on the *whole* faithful quotient gauge bundle class. The actual full gauged E6 adjoint is still a different action and has additional parity-even coset generators.
+
+
+## Even sharper: NONLIFTABLE gauge bundle preserving the actual orbifold parity
+
+**Corrective qualification:** the earlier simple bulk \`T²\` clock/shift witness proves global quotient obstruction in \`SU3³/Z3\`, but its cyclic shift matrix does NOT commute with \(P_L=P_R=\operatorname{diag}(-,-,+)\). Therefore it was *not* an explicit flat bundle for the **fixed-plane parity-even gauge subgroup** and must not be promoted as such.
+
+The faithful FIXED-PLANE source group is instead
+\[
+H_{\mathrm{even}}=
+\big(SU(3)_c\times S(U(2)\times U(1))_L
+              \times S(U(2)\times U(1))_R\big)/\mathbb Z_3^{\mathrm{diag}}
+\cong (SU(3)_c\times U(2)_L\times U(2)_R)/\mathbb Z_3^{\mathrm{diag}},
+\]
+where the relevant diagonal \(\mathbb Z_3\) acts through the concrete \(\mathrm{diag}(\omega,\omega,\omega)\) inside all three SU3 factors. It is contained in the parity-even cover. Its quotient matters even though the local gauge Lie algebra is unchanged.
+
+**Explicit boundary-compatible bundle:** take the equator of \(S^2\), parameter \(t\in[0,1]\), and define an SU3 loop *up to the centre*
+\[
+h(t)=\operatorname{diag}\big(e^{2\pi i t/3},
+  e^{2\pi i t/3},e^{-4\pi i t/3}\big).
+\]
+This commutes with \(\mathrm{diag}(-,-,+)\) for **every** \(t\), has determinant one and lies in \(S(U2\times U1)\). Form the quotient clutching transition
+\[
+g(t)=[(h(t),h(t),h(t))]\in H_{\mathrm{even}}.
+\]
+At \(t=0\), its lift equals the cover identity; at \(t=1\), it equals \((\omega I,\omega I,\omega I)\), which is **not** the cover identity but is the diagonal kernel. Thus \(g(1)=g(0)\) in the quotient: it is a legal \(S^1\to H_{\mathrm{even}}\) clutching LOOP defining a principal boundary group bundle over \(S^2\). Any lift starting at the identity uniquely ends at nontrivial deck \(\mathbb Z_3\), so it **cannot lift to the original three-factor cover**. Repeating the loop three times gives zero *deck obstruction*; it does not imply the original loop has order three in the full \(\pi_1(H)\).
+
+The exact matrix/commutator and endpoints are checked in \`scripts/check_kk_e6_orbifold_even_quotient_s2_clutch.py\`. This is now a **genuine orbifold-parity-compatible nonliftable-bundle test input**, stronger than the bulk \`T²\` clock/shift witness. It demonstrates precisely why all earlier CP³ and S²×S⁴/S²×K3 **liftable** spin-index successes and naive \`X4/2\` integrality do NOT settle the full global quantum anomaly on the actual faithful gauge group.
+
+The missing physical calculation is well posed: place the boundary gauge and matter sources on spin 4D/5D geometries supporting this nontrivial \(\mathbb Z_3\) obstruction (for example a product containing that \(S^2\) as a 2-cycle), construct the actual five-dimensional parity/APS eta and consistent CS plus first-plane Chi33 WZ functional, and test independence of gauge representatives and regulator at both fixed points. No assertion about the sign/phase on this bundle is made without those calculations. The nonconstant scalar Robin interval source and full18-even FEM from #1241 are separate classical producers.
