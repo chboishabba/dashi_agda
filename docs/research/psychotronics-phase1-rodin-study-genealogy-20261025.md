@@ -89,3 +89,10 @@ The [2010 TeslaTech ExtraOrdinary Technology conference programme](https://tesla
 ## Source inspection and proof boundary
 
 Source-derived numeric claims retained with their **original authors** and **sample/endpoint**. Original journal PDF page 2013 printed 094701-2 and Rodin/Volk 2010 pp 1/7 visually inspected; 2014 PDF direct open timeout; 2020/21 and 2022 abstracts read from PubMed/publisher with full bodies uninspected; 2024 full journal HTML and refs read, PDF direct timeout. No original data files, independent physical replication, biomedical meta-analysis, clinical benefit, patent design inheritance, Agda kernel or CI receipt. The documentary graph entries are not theorem/proof promotion and remain separated from source types in the canonical owner.
+
+
+---
+
+## 25 Oct original PDF: bounded noncitation and citation-scope audit
+
+Earlier Rodin-number audit left 2024 original journal PDF as an unresolved download timeout. The **actual original 7-page publisher PDF is now inspected** at printed pp5–7 and the 24-reference list audited: **no explicit citation to Pérez et al. RSI 84:094701 2013**; distinct 2013 frequency rows vs steady-state **2024 FEM model**; 2024 discussion invokes [24] Saikia et al. 2019 for up-to-60% Rodin-versus-Helmholtz assertion, while the publisher's original Saikia abstract instead documents EF/MF amyloid in-vitro endpoints and 15–38% EF-treated toxicity reductions. Full Saikia methods are uninspected, so preserve its distinct original biophysical scope and hold the 60% head-to-head provenance open. [Case report](psychotronics-phase1-2024-rodin-reference-absence-2002-croft-chronology-20261025.md), [7/7 exact Git blob source receipt](../receipts/psychotronics_phase1_rodin_original_pdf_citation_audit_20261025.json). This updates older '2024 PDF unavailable' status without inventing author behavior or a measured new field.
