@@ -316,6 +316,7 @@ data Black2026EvidenceRole : Set where
   committeeReportOfItsDispute : Black2026EvidenceRole
   houseProcedureRecorded : Black2026EvidenceRole
   corporateDisclosureOfReview : Black2026EvidenceRole
+  independentJudicialDocketEvent : Black2026EvidenceRole
 
 record Black2026SourceReceipt : Set where
   constructor black-2026-source-receipt
@@ -435,7 +436,7 @@ blackDoeNotHouseChallenge ()
 
 blackHouseSubpoenaChallengeDocket : Black2026SourceReceipt
 blackHouseSubpoenaChallengeDocket = black-2026-source-receipt
-  houseProcedureRecorded
+  independentJudicialDocketEvent
   "Black v House Committee on Oversight et al, DDC 1:26-cv-03084, docket and complaint filed 2026-09-03; https://dockets.justia.com/docket/district-of-columbia/dcdce/1:2026cv03084/296175"
   "2026-09-03" "2026-09-03"
   "The docket listing authenticates existence of the civil subpoena challenge and complaint. The publicly retrieved docket listing was last refreshed 2026-09-03; later judgment or dismissal is not confirmed here."
@@ -443,7 +444,7 @@ blackHouseSubpoenaChallengeDocket = black-2026-source-receipt
 
 blackDoeOctoberDismissalOriginalOrder : Black2026SourceReceipt
 blackDoeOctoberDismissalOriginalOrder = black-2026-source-receipt
-  houseProcedureRecorded
+  independentJudicialDocketEvent
   "Doe v Black, SDNY 23-cv-6418 (JGLC), 2026-10-15 ECF 485; https://cases.justia.com/federal/district-courts/new-york/nysdce/1:2023cv06418/602764/485/0.pdf"
   "2026-10-15" "2026-10-15"
   "Judge Clarke granted plaintiff-requested voluntary dismissal with prejudice under Fed. R. Civ. P. 41(a)(2), with defendant not opposing; court reserved ECF 440 fees motion. This is NOT a merits adjudication of the underlying allegations and does not dispose the separate DDC House subpoena action."
