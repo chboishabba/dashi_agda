@@ -114,6 +114,11 @@ mass_KK_1=mp.sqrt(ME*ME+1/b0**2)
 assert mass_KK_1>mp.mpf('1e8')
 M5=(MPL**2/(2*mp.pi*b0))**(mp.mpf(1)/3)
 assert b0*M5>1000
+# 5D U1 NDA perturbative cutoff, conventional estimate
+# Lambda_NDA = 24*pi^3/e5² (order-one conventions are not physical bounds).
+cutoff_NDA=24*mp.pi**3/(e5*e5)
+assert cutoff_NDA>1000/b0 and cutoff_NDA<M5
+assert 4*z/(2*mp.pi*b0)<cutoff_NDA
 radion_range=HBARC*MPL*b0*b0/mp.sqrt(2*C0*Uxx/3)
 assert radion_range<mp.mpf('1e-10')
 
@@ -131,7 +136,7 @@ assert 1**3+(-1)**3==0
 for name,value in [('z0',z),('Lambda_tuning',ELL),('radion_curvature',Uxx),
  ('Wilson_curvature',Utt),('electron_mass_GeV_input',ME),('electron_z_e',ze),
  ('electron_first_KK_mass_GeV',mass_KK_1),('radion_range_m',radion_range),
- ('b0_M5',b0*M5)]:
+ ('b0_M5',b0*M5),('U1_NDA_cutoff_GeV',cutoff_NDA),('compact_cutoff_ratio',b0*cutoff_NDA)]:
     print(name,mp.nstr(value,18))
 print('2D sampled minimum:',smallest,'min local optimizer:',min(fit))
 print('PASS light vectorlike QED zero mode, positive Hessian, analytic radial minimum, uniform x->0 repulsion')
