@@ -245,6 +245,10 @@ def verify_numeric_results() -> dict:
         "trivial": 32810, "sign": 32800, "standard_2d": 65610}
     assert jfine_s3["pointed_C3_zeta_multiplicity_each"] == 65610
     assert jfine_s3["D4_edge_corner_natural_modules_inequivalent"]
+    assert jfine_s3["D4_times_S3_orbits"] == 490
+    assert jfine_s3["D4_times_S3_orbit_histogram"] == {
+        3: 1, 6: 6, 12: 17, 24: 122, 48: 344}
+    assert jfine_s3["D4_times_S3_Burnside_numerator"] == 23520
 
     return {
         "contract": "iit_numeric_verification",
