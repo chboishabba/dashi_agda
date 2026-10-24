@@ -1,3 +1,27 @@
+> **PRIMARY DELIVERABLE / PHASE RECONCILIATION — 24 October 2026.**
+> The OpenAI September 8, 2026 release already asserts/provides
+> forced Navier–Stokes breakdown for official Clay alternatives **C and D**,
+> with a public Lean formalization. See
+> https://openai.com/index/navier-stokes-solution/ and
+> https://github.com/openai/NavierStokesAndEuler .
+> Our canonical `NSClayFacingCDMaxCut20261002Exact` and
+> `NSClayFacingCDReleasedAuditFrontier20261007Exact` already mark the
+> official coordinate/source-alignment audit complete and independent
+> DASHI Fourier/369/R406 reconstruction as optional.
+> **Therefore C/D proof discovery is not the Goal-1 critical path.**
+> Deliverables are (1) exact pinned released theorem/spec dependency
+> inventory, (2) reproducible independent kernel/build receipts,
+> (3) a conventional standalone D and C mathematical exposition with
+> precise attribution, and (4) independent referee/audit package.
+> Existing `ExternalClayNS/{ClaySpec,Gap,ClauseAudit,SubmissionAudit}.lean`
+> are the intended independent statement/bridge owners, to be
+> exact-head checked. Do not claim a fresh independent verification
+> without a successful build receipt. Original unforced A/B research
+> remains a separately valuable but **non-blocking** programme, with
+> the full-fibre B4 estimate disproved and the A3 continuation gap open.
+> Neither our audit status flags nor the OpenAI announcement alone
+> constitute independent mathematical refereeing or Clay adjudication.
+>
 > **Current 24 October A/B max-cut.** The original cutoff-uniform
 > full-output-fibre B4 payment is falsified against the *original*
 > R219/R469 selected-pair ED, not just an abstract payment interface.
