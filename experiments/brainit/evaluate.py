@@ -89,13 +89,75 @@ def two_way_feature_identification(recon_feat: np.ndarray,
     return float(better_than_distractor.sum() / (len(r) * (len(r) - 1)))
 
 
+
+def verify_source_receipts(recons_path: Path, images_path: Path, fmri_path: Path,
+                           design_path: Path, subject: int, condition: str,
+                           seed: int, branch: str, inference_receipt: Path | None,
+                           inventory_receipt: Path | None) -> dict:
+    """Require real inference output hashes AND upstream source/inventory identity.
+
+    The Python evaluator's direct API may be used in toy tests without these
+    receipts; those evaluations are visibly non-promotable. CLI requires both.
+    """
+    if inference_receipt is None and inventory_receipt is None:
+        return {"admitted": False, "reason": "No source/inference receipts supplied"}
+    if inference_receipt is None or inventory_receipt is None:
+        raise ValueError("Both actual inference and source inventory receipts are required")
+    run = json.loads(inference_receipt.read_text())
+    inv = json.loads(inventory_receipt.read_text())
+    if run.get("model_inference_executed") is not True or (
+        run.get("upstream_inference_returned_successfully") is not True
+    ):
+        raise ValueError("No successful upstream inference receipt")
+    if (run.get("condition"), run.get("seed"),
+        run.get("subject_internal_zero_based")) != (condition, seed, subject - 1):
+        raise ValueError("Input control condition/seed/subject receipt mismatch")
+    if inv.get("status") != "artifact_inventory_complete_not_replayed":
+        raise ValueError("Upstream artifacts are not fully identified")
+    if subject not in inv.get("subjects_1_based", []):
+        raise ValueError("Subject is outside frozen inventory")
+    expected = (("fmri", fmri_path), ("ground_truth", images_path),
+                ("nsd_design", design_path))
+    for key, file in expected:
+        if inv["artifacts"][key]["sha256"] != digest(file):
+            raise ValueError(f"Source hash changed since inventory: {key}")
+    if run.get("source_fmri_sha256") != digest(fmri_path):
+        raise ValueError("Stage input is not a control of admitted source fMRI")
+    stage_root = inference_receipt.parent.resolve()
+    staged_input = stage_root / "data/nsd_data/fmri_v2.npz"
+    if not staged_input.is_file() or digest(staged_input) != run.get(
+        "controlled_fmri_sha256"
+    ):
+        raise ValueError("Actual controlled fMRI input has changed")
+    actual_output = recons_path.resolve()
+    eligible = [
+        entry for entry in run.get("saved_arrays", [])
+        if (stage_root / entry["path"]).resolve() == actual_output
+        and entry["sha256"] == digest(actual_output)
+        and Path(entry["path"]).name in (
+            "enhanced_recons.npy", "semantic_recons.npy", "low_level_recons.npy")
+    ]
+    if not eligible or actual_output.name != f"{branch}_recons.npy":
+        raise ValueError("Reconstruction array is not a checked upstream output")
+    return {
+        "admitted": True, "source_inventory_sha256": digest(inventory_receipt),
+        "inference_receipt_sha256": digest(inference_receipt),
+        "upstream_git_commit": inv["source"]["actual_revision"],
+        "input_control": run["condition"],
+    }
+
 def evaluate(recons_path: Path, images_path: Path, fmri_path: Path,
              design_path: Path, subject: int, condition: str, seed: int,
              branch: str, gt_feat: Path | None = None,
              recon_feat: Path | None = None,
-             feature_source: str | None = None) -> dict:
+             feature_source: str | None = None,
+             inference_receipt: Path | None = None,
+             inventory_receipt: Path | None = None) -> dict:
     if not 1 <= subject <= 8:
         raise ValueError("subject is NSD 1-based (1..8)")
+    proof = verify_source_receipts(
+        recons_path, images_path, fmri_path, design_path,
+        subject, condition, seed, branch, inference_receipt, inventory_receipt)
     recons = unit_images(np.load(recons_path, allow_pickle=False))
     originals = np.load(images_path, mmap_mode="r", allow_pickle=False)
     alignment = checked_alignment(fmri_path, design_path)
@@ -149,7 +211,11 @@ def evaluate(recons_path: Path, images_path: Path, fmri_path: Path,
         "subject": subject, "condition": condition, "seed": seed,
         "branch": branch, "aggregate": aggregate,
         "feature_evaluation": feature_result, "rows": rows,
-        "replay_claim": "not independently re-run model here",
+        "source_and_inference_receipts": proof,
+        "benchmark_admissible": proof["admitted"],
+        "replay_claim": ("Model output receipts checked; independent metric algorithm"
+                         if proof["admitted"] else
+                         "Not an independently verified upstream model replay"),
     }
 
 
@@ -167,12 +233,16 @@ def main(argv=None):
     ap.add_argument("--feature-gt", type=Path)
     ap.add_argument("--feature-recons", type=Path)
     ap.add_argument("--feature-source", type=str)
+    ap.add_argument("--inference-receipt", type=Path, required=True,
+                    help="Generated by stage_conditions seeded wrapper after full run")
+    ap.add_argument("--inventory", type=Path, required=True,
+                    help="Complete source/inference checkpoint inventory")
     ap.add_argument("--out", type=Path, required=True)
     args = ap.parse_args(argv)
     report = evaluate(args.recons, args.images, args.fmri, args.design, args.subject,
                       args.condition, args.seed, args.branch,
                       args.feature_gt, args.feature_recons,
-                      args.feature_source)
+                      args.feature_source, args.inference_receipt, args.inventory)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
     print(json.dumps(report["aggregate"], indent=2))
