@@ -514,9 +514,21 @@ maxwellPROMISNetworkSearch = ProgrammeFrontier.promotion-search-candidate
   "Authenticated tasking/control bridge into Epstein-era activities"
   2 2 false false
 
+bannonEpsteinWorkProductSearch : ProgrammeFrontier.PromotionSearchCandidate
+bannonEpsteinWorkProductSearch = ProgrammeFrontier.promotion-search-candidate
+  "Steve Bannon"
+  "Jeffrey Epstein"
+  ProgrammeFrontier.institutionalWorkPackageSearch
+  "Existing BannonBridge pays sustained contact and attributed film-interview work at a bounded level"
+  "Exact 2018-2019 filmed session, Bates correspondence, edits, production or payment ID"
+  "Join one original primary message to the same primary audiovisual or production work product"
+  "Distinct authenticated agency/tasking or control evidence, not just media strategy"
+  0 1 false false
+
 caseProgrammeSearchFront : List ProgrammeFrontier.PromotionSearchCandidate
 caseProgrammeSearchFront =
-  aquinoToSCLObjectSearch ∷ maxwellPROMISNetworkSearch ∷ []
+  bannonEpsteinWorkProductSearch ∷ aquinoToSCLObjectSearch
+  ∷ maxwellPROMISNetworkSearch ∷ []
 
 -- Event-time employment/control is not inherited across the 1980/1990s
 -- to 2014--19 timeline. This receipt explicitly marks the unsourced
@@ -558,7 +570,7 @@ mundaneExplanationsFirst :
 mundaneExplanationsFirst = refl
 
 custodyNonPromotion :
-  Custody.organIsationalContinuityImpliesSameCarrierTransfer
+  Custody.organisationalContinuityImpliesSameCarrierTransfer
     Custody.canonicalMatrixBoundary ≡ false
 custodyNonPromotion = refl
 
