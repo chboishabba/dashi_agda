@@ -87,6 +87,59 @@ This is a **research verification programme**, not a single theorem that proves 
 
 Do not label a phase complete just because files or PRs exist. Use the strongest actual receipt for each stage and carry outstanding tasks forward unchanged.
 
+## Woogaroo / ITIR investigation machinery integration (2026-10-24)
+
+### Recovered prior art and what transfers (not case facts)
+
+| Prior owner | Actual existing contract | Case-consumer adaptation |
+|---|---|---|
+| [Woogaroo evidence-dependency matrix](../../../DASHI/Law/SensibLawWoogarooEvidenceDependencyMatrixExact.agda) | Separates source multiplicity, independence of underlying carriers, exact parcel/approval join, and consumer-specific statutory conclusions. Even a legally independent instrument does not independently replicate an ecological observation. | One document may prove **a procedural ruling** while leaving the underlying **abuse, technical transfer or intelligence operation** unproved. The same original witness published as multiple articles is still one witness. |
+| [Evidence provenance DAG](../../../DASHI/Law/EvidenceProvenanceDependencyDagExact.agda) | Derivation from common ultimate producer; BIDI consumer for independent corroboration requires original producer receipt. | Parliamentary testimony plus ten articles quoting it are not 11 independent observations. Trace statement -> first person/record -> quote -> report. |
+| [Provenance closure](../../../DASHI/Core/ProvenanceClosureIndependenceExact.agda) | Root-independent only relative to the *declared transitive dependency graph*. | Multiple source modalities do not establish independence if their reporting roots converge. Unknown upstream lineage stays unknown. |
+| [Source acquisition geometry](../../../DASHI/Core/SourceAcquisitionGeometryExact.agda) | Citation -> route -> full text -> inspection -> transcription are distinct. | A DOI, government portal link or case locator is not sufficient evidence that an alleged contract, film, or executable was read or acquired. |
+| [ITIR investigation Pareto](../../../DASHI/Core/ITIRInvestigationAcquisitionParetoExact.agda) | Five **mixed-direction** axes: information, dependency closure, coverage, provenance novelty (max), lawful cost (min). Candidate has no truth/authority. | Routes for original SCL/CA documents and Bannon film work product are *calibrated proposals*, never case findings or guilt rankings. |
+| [ITIR workbench projection](../../../DASHI/Core/ITIRInvestigationWorkbenchProjectionExact.agda) | Query-, matter-, viewer-scoped projection; showing/selecting/frontier sorting creates neither access nor evidence. | Existing Dioxus/wgpu/SLR visualisation may render the case; never use graph proximity, line thickness, node size, filter, click or color to confer culpability. |
+| [Multipart same-object reconstruction](../../../DASHI/Core/MultipartSameObjectReconstructionExact.agda) | Complete parts, admissibility, compatibility, and identity receipt required separately. | A reported PROMIS backdoor needs **the specific build, installation, contract, custody, and forensic artefact**; name matching and an alleged capability do not prove one deployed system. |
+| [Woogaroo preservation attribution rule](../../../Docs/WoogarooPreservationSourceAttribution.md) | Statutory authority + legal test + same-land evidence + application receipt + actual decision/outcome are distinct. | Court/FTC/regulatory **finding about one claim** cannot adjudicate a separate alleged intelligence purpose or broader conspiracy. |
+
+**Implementation:** These generic owners are now imported in the existing `DASHI/Cognition/AquinoMaxwellEpsteinCAMaxCutExact.agda`, with actual BIDI case evidence-dependency cuts for CA operating mechanism, Bannon film work product, Maxwell/PROMIS original executable, Aquino–SCL historical transfer and unified-command theory. Woogaroo's *case-specific* ecology facts are **not** imported into an Epstein case. No new core ontology, RNNN family or copy of the provenance DAG has been created.
+
+### Source card A — SCL / Cambridge Analytica
+
+- **S1, attributed firsthand testimony, original webpage inspected (not sworn finding of every proposition):** Christopher Wylie, [supplementary written evidence FKN0079 to UK DCMS, 2018](https://committees.parliament.uk/writtenevidence/89475/html/). Wylie states that Robert Mercer funded the company, Steve Bannon was installed as Vice President, SCL licensed IP to CA, a reciprocal exclusive service agreement existed, the entities shared operations, and IP/licence contracts involving AIQ were held by the committee. These are **Wylie's stated claims**, and **one original author root** despite their appearance in multiple articles. The document also points to potentially obtainable contracts and technical records: these need exact document IDs/signature and work-product verification.
+- **S2, independent institutional finding for a *different proposition*:** [FTC matter 182-3107 / Docket 9383](https://www.ftc.gov/legal-library/browse/cases-proceedings/182-3107-cambridge-analytica-llc-matter), decision December 2019, concerns deception in Facebook data collection for voter profiling and targeting. This pays regulatory findings on data collection; it is **not** independent corroboration that Aquino created SCL methods, nor direct inspection of SCL/CA IP licence.
+- **Residual A (not paid):** inspect the exact 2014 SCL/CA corporate licence, executed service contract, named product/version, work-performing personnel and date; then inspect actual transfer/deployment records and counterstatements. A single Wylie source must not become a fictitious independent corporate signature.
+
+### Source card B — Bannon / Epstein
+
+- **S3, prior DASHI owner:** `TrumpMarALagoBannonBridgeExact.agda` on #1131 encodes 2018–19 sustained correspondence, the media-rehabilitation/interview surface and a separately attributed international political-strategy surface. Those are **bounded claims from released/reporting material**. The holder has not been silently promoted to a newly inspected full Bates set in this PR.
+- **Index corpus:** [DOJ Epstein disclosures](https://www.justice.gov/epstein/doj-disclosures), and the [January 30, 2026 DOJ release explanation](https://www.justice.gov/opa/pr/department-justice-publishes-35-million-responsive-pages-compliance-epstein-files). DOJ warns that material submitted to the FBI by members of the public may be false. Corpus search and line-by-line provenance resolution are separate acquisition stages.
+- **Residual B (not paid):** join a dated primary-message Bates ID to the same original filmed segment, contract, editorial instruction, payment or delivery record; resolve custody/date/actual use. No automatic CA technique reuse, handler relation, criminal knowledge or intelligence coordination.
+
+### Consumer-specific first unpaid results
+
+| Consumer | Source state | Exact next discriminator | Still disallowed |
+|---|---|---|---|
+| SCL-to-CA *specific technique* | Wylie testimony and FTC independently pay **different propositions**; exact executed IP/work product not inspected | Corporate agreement and software/process lineage against deployed campaigns | Aquino authored/invented CA methods; 2016 election causation |
+| Bannon–Epstein deliverables | Broad direct-relation receipts on #1131; this pass does not newly read a complete raw message-to-film chain | Bates message to actual film/edit/contract/payment, event-time join | Bannon commanded or inherited Epstein intelligence operation |
+| Maxwell/PROMIS | House and Bua investigations document contested findings, no verified code/procurement link | Signed distribution instrument and exact-binary/installation forensic comparison | A proven backdoor or Maxwell-controlled global surveillance network |
+| Aquino–SCL | 1980 discussion proposal and unrelated institutional history | Dated explicit same-technique citation/personnel handoff | Project Stargate = MindWar; ideology = operational transfer |
+| Common intelligence command | Network edges and explanatory theories, with contrary DOJ/FBI review position | Specific sponsor + tasking + payment + target/artefact chain | One unified multigenerational controller |
+
+### Presentation acceptance (SLR / Dioxus)
+
+Render **query-indexed** evidence graph views if needed, not a standalone suspicion graph. For each edge display exact document ID, originating author/root, event versus document time, supported proposition, actual use/disposition, explicit contrary source, unresolved same-object and consumer tests. A missing/hidden/blocked route is not disproven, unavailable access never grants authority, and source-lookup/presentation never asserts culpability. The visual should be an optional projection of existing ITIR/SensibLaw matter state, not a second record of truth.
+
+### Next acceptance commands
+
+```sh
+pytest -q tests/test_aquino_maxwell_epstein_ca_maxcut.py
+scripts/run_agda29_parallel_check.sh DASHI/Cognition/AquinoMaxwellEpsteinCAMaxCutExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Cognition/Everything.agda
+```
+
+The repo's normative `Docs/AgentOperationalNotes.md` prescribes the Agda wrapper; final formal promotion additionally uses the repository-pinned Track A toolchain. **No command output is yet a local exact-head receipt**. A GitHub connector readback only audits source text.
+
 ## Acceptance / status
 
 ```sh
