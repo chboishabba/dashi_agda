@@ -25,6 +25,7 @@ data PoliticalRelation : Set where
   prospectiveSponsorOffer : PoliticalRelation
   externalPlatformSupplier : PoliticalRelation
   financialEntitlement : PoliticalRelation
+  publicParliamentaryInquiry : PoliticalRelation
   historicalInstitutionalFunding : PoliticalRelation
   timedTargetedInformationRelease : PoliticalRelation
   originalOpinionProduction : PoliticalRelation
@@ -656,7 +657,7 @@ senateGasTaxInquiryPublicComparator : RelationshipReceipt
 senateGasTaxInquiryPublicComparator = relationship-receipt
   "Australian Senate Select Committee on the Taxation of Gas Resources"
   "Public debate on gas levy, 22 April hearings to 7 May report"
-  editorialPublication institutionRecord
+  publicParliamentaryInquiry institutionRecord
   "Australian Parliament 7 May report, hearings 21/22/24 April"
   "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Taxation_of_Gas_Resources/TaxationofGasResources/Report/Chapter_1_-_Report"
   "Over 230 public submissions and competing evidence, no agreed committee recommendations on tax approach. Public common arguments are a competing explanatory channel; no proof Senex or IPA drafted One Nation's June policy."
