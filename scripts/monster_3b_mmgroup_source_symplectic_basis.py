@@ -196,7 +196,7 @@ def run():
         characteristic_zero_12_78_inferred_from_F7=False,
         # Characteristic 7 divides |Suz|, so semisimplicity for the
         # full normalizer is not inferred from this modular representation.
-source_blob_sha=SOURCE_BLOB_SHA,rank_commutator_form=rank_f3(gram),
+        source_blob_sha=SOURCE_BLOB_SHA,rank_commutator_form=rank_f3(gram),
                    normalizer_generators=[x["name"] for x in lift_rows],
                    characteristic_7_vector_action_available=True,
                    observed_actual_mmgroup_execution=True,
