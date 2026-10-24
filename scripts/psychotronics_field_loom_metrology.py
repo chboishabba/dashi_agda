@@ -137,7 +137,9 @@ def paired_analysis(record):
                         'moment_am2': m, 'moment_std_am2': um,
                         'moment_gradient_t_m': ga-gs,
                         'moment_calibration_id': p.get('moment_calibration_id',
-                                                        'unspecified_shared_calibration')})
+                                                        'unspecified_shared_calibration'),
+                        'moment_covariance_group_id': p.get('moment_covariance_group_id',
+                             p.get('moment_calibration_id', 'unspecified_shared_calibration'))})
     # A single instrument's common force systematic must not average away.
     # Per-pair reported systematic floors are pooled conservatively by max;
     # original calibration groups remain shared across all same-ID pairs.
