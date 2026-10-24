@@ -1,3 +1,122 @@
+# 2026-10-25 HIGHEST-ALPHA ORIGINAL-SOURCE T3 AUDIT — BELTRAMI KERNEL AND STATED POSTULATES
+
+## Original source roots and evidence distinctions
+Permana, Ibrahim and Lathief (May 6, 2026 author-uploaded manuscript,
+related to Zenodo v4 DOI 10.5281/zenodo.20049273), *Quantitative
+Regularity ... Geometric Depletion, Fractal Bounds, and Topological
+Damping*, §2.1 Eq (3), §2.2 Definitions 2.1/Lemma 2.2/Remark 2.3,
+§3.2 Definitions 3.1--3.3 and Remark 3.7:
+https://www.researchgate.net/publication/403818610_Quantitative_Regularity_of_the_3D_Incompressible_Navier-Stokes_Equations_on_the_Periodic_Torus_Geometric_Depletion_Fractal_Bounds_and_Topological_Damping
+This author-uploaded long-form source has more usable theorem text
+than the Zenodo v4 ABSTRACT. Preserve original author ownership.
+The earlier Zenodo v3 record (17 April 2026, DOI
+10.5281/zenodo.19632058) claims unrestricted global regularity in
+its abstract, while the related v4 says conditional small-data.
+Zenodo v3 metadata spells Hanif A. *Lathif*; v4 long form spells
+Hanif A. *Lathief*. Record them as source-written version variants
+rather than imagining independent witnesses or reassigning authorship.
+
+The original v4 Eq (3) defines
+  J=curl(omega cross u), T3(t)=integral_(T³) |J|² dx.
+It describes T3 as 'globally positive-definite'. Our mathematical
+check shows **nonnegative but not positive definite** on
+nonzero, mean-zero, smooth divergence-free physical velocity fields.
+More seriously, v4 Remark 3.7 asserts that elliptic regularity from
+T3 controls the homogeneous H² norm of velocity and direction
+curvature. Neither follows: the operator u↦curl(curl(u)×u) has a large
+Beltrami kernel. This is a direct SAME-DEFINITION counterexample,
+not a claim about a different invented 'topological invariant'.
+
+For every integer N>0, positive viscosity ν and amplitude A,
+  u_N(t,x,y,z)=(A/N)e^(-νN²t)(0,sin Nx,cos Nx)
+solves the FULL unforced incompressible NS equation with constant
+pressure. It is real, smooth, mean-zero and divergence-free on T³.
+  omega_N=curl u_N=N u_N,
+  omega_N×u_N=0, J=0 and T3(t)=0 at EVERY t.
+At t_N=1/(νN²)>0:
+  |omega_N|=A/e everywhere,
+  |grad xi_N|=N everywhere,
+  ||omega_N||²_2=A²/e²,
+  ||Delta u_N||²_2=A² N²/e²,
+  ||u_N||²_2=A²/(e²N²)   [normalized torus].
+Thus:
+  (i) T3=0 does not imply zero nontrivial velocity/enstrophy/H²;
+  (ii) no universal H² estimate ||Delta u||²_2 ≤ C*T3;
+  (iii) no universal curvature estimate
+        ||grad xi||_∞ ≤ Cν * sqrt(||omega||)
+       with Cν depending only on viscosity;
+  (iv) no universal bound ||omega||²_2 ≤ C(Ekin+T3).
+No finite fixed C pays these as N→∞.
+The genuine full-field identity is classical Beltrami theory
+(original mathematical phenomenon, not attributed as a Permana
+or DASHI discovery). The particular explicit parametric
+counterexample and its application to Eq (3)/Remark 3.7 are DASHI
+original analysis.
+
+**Critical attribution restraint:** The original v4 has
+Definition 2.1 *Topological Invariant Conservation Hypothesis
+(TICH)*, assuming nonlinear T3 terms are a divergence;
+Remark 2.3 explicitly calls proving that identity an OPEN CONJECTURE.
+Lemma 2.2's exponential T3 decay is CONDITIONAL on TICH.
+Definition 3.1's TAH alignment damping, Definition 3.2's
+DGMICH Muckenhoupt-A2 weight, and Definition 3.3's
+T3-curvature bound are other HYPOTHESES, not consequences
+already proved for all unforced NS data. Remark 3.7 explicitly
+labels its T3 curvature interpretation heuristic motivation for a
+formal postulate. Source page text alone does not grant these premises.
+On our Beltrami datum <xi,S[u]xi>=0, so the proposed T3-weighted
+*alignment* inequality is 0≤0, NOT contradicted. It is the
+claimed **general topological/coercive control** and any universal
+curvature production inference that the test excludes.
+This distinction protects genuinely conditional lemmas.
+
+The original 2026 Grujic direction PDE sources are a separate
+conditional geometric route. On this Beltrami field
+S[u]xi=0, grad(log|omega|)=0,
+Delta xi+|grad xi|²xi=0:
+harmonic-map heat terms cancel, despite arbitrarily large
+|grad xi|. This is a physical negative control against assuming
+viscosity alone produces conditional direction regularity; it does
+not falsify Grujic's assumptions, Constantin--Fefferman (1993),
+or Beirao da Veiga--Berselli (2002).
+
+## Formal/algorithmic receipt, highest-alpha action
+Existing reusable Agda owners:
+`NSTriadKNRationalLerayProjectionExact`,
+`NSTriadKNFourierBiotSavartExact`,
+`NSTriadKNFourierSelfModeVortexStretchingNoGoRound78Exact`.
+The ORIGINAL `NSTriadKNPermanaAlignmentRateAudit.agda`
+now contains a source-written exact rational cross-product theorem
+`beltramiLambVectorZero` (if omega=lambda*u then omega×u=0),
+and the manuscript's real proof-status boundary as comments.
+This is a polynomial algebra lemma, not a proof of the full
+real-trigonometric time-evolution theorem in Agda.
+
+`tests/test_ns_ibrahim_beltrami_T3_noncoercivity.py`:
+**5 locally executed SymPy tests passed** (exact unforced heat PDE,
+curl eigenrelation, T3 zero, active-region direction, H²/
+enstrophy noncoercivity, strain alignment zero). The committed
+source is a matching independent test; no exact-PR-head CI run
+nor cumulative Agda kernel certificate was available.
+The separate A1 improvement in
+`NSClayFacingAPhysicalSameObjectCutExact.agda`
+now returns a **genuine ℚᵘ witness** from Bishop rational density
+rather than erasing it to the ambient real, enabling a future
+constructive shell/resolvent attachment; kernel checking remains open.
+
+**Pareto decision:** exclude T3 *as a coercive quantity* and
+TICH/TAH/DGMICH assumptions as unpaid. Do not snowball more
+same-author publication or citation count as independent evidence.
+The positive B route is still actual R735 W1 signed global
+nonlinear commutator + W2 augmented critical payment, tested
+against earlier zero-padding, R823, output-sign and this field.
+The positive A route still requires the Bishop-real same-solution
+resolvent inequality, A2 physical signed majorant and A3
+unconditional continuation. The present counterexamples do
+not imply unrestricted 3D NS failure or its regularity.
+
+---
+
 # Navier–Stokes A/B — Pareto, citation snowball and Ibrahim attribution audit (25 October 2026)
 
 ## Scope and source policy
