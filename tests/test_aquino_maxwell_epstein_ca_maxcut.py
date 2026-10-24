@@ -678,3 +678,15 @@ def test_exact_doj_efta01600824_transcript_locator_paid_but_sha_open():
         "third-party ASR",
     ):
         assert token in roadmap
+
+
+def test_transcript_as_research_acceptance_gate():
+    original = PRIOR_FILM_OWNER.read_text()
+    case = OWNER.read_text()
+    assert "transcriptSufficientForThisResearchCut = refl" in original
+    assert "videoHashNotAnAcceptanceGate = refl" in original
+    assert "noBlackTransactionFromInterviewSpeech = refl" in original
+    assert "canonicalTranscriptContentCuts : List TimecodedTranscriptReceipt" in original
+    assert "bannonTranscriptNowAdequateForResearch = refl" in case
+    assert "bannonFilmSHAIsNotBlocking = refl" in case
+    assert "bannonTranscriptNotBlackPaymentEvidence = refl" in case
