@@ -35,6 +35,7 @@ open import Relation.Binary.PropositionalEquality
 
 import DASHI.Physics.YangMills.CompactLieGroupCore as GroupCore
 import DASHI.Physics.YangMills.CompactLieGroupDerived as Derived
+import DASHI.Physics.YangMills.CompactLieInnerC3Exact as Inner
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.SU3MatrixInstance as SU3
 import DASHI.Mathematics.Topology.AlexanderHornedC3CompactCommutatorRepresentationExact as Horn
@@ -103,19 +104,19 @@ conjugatePreservesGroupCommutator H t x y =
           (conjugatePreservesInverse H t x)))
       (conjugatePreservesInverse H t y))
 
--- The only selected finite-rotation input here is the inner action
--- cube.  SU3 T^3=I in sibling neutrino #1247 is already exact.
--- A generic group lemma T^3=I => Ad_T^3=id could replace this
--- field after kernel integration of the exact Q(zeta) target.
+-- The only finite-rotation input is now the actual group law
+-- T*T*T=I, NOT a separately assumed conjugation-cube theorem.
+-- Existing CompactLieInnerC3Exact derives Ad_T^3=id from this.
+-- SU3's exact source-specific T^3=I in sibling #1247 still needs
+-- a typed equality bridge to this certified matrix carrier.
 record InnerThreefoldAction
     (A : Set) (H : GroupCore.Group A) : Set₁ where
   field
     generator : A
-    cubeIdentity :
-      (x : A) →
-      Derived.conjugate H generator
-        (Derived.conjugate H generator
-          (Derived.conjugate H generator x)) ≡ x
+    generatorCubed :
+      GroupCore.multiply H
+        (GroupCore.multiply H generator generator)
+        generator ≡ GroupCore.identity H
 open InnerThreefoldAction public
 
 -- Instantiate the existing horn commutator address operator from
@@ -140,7 +141,9 @@ asHornSection {A = A} H section twist root = record
   ; Horn.twistUnit = Derived.conjugateIdentity H (generator twist)
   ; Horn.twistProduct = Derived.conjugateProduct H (generator twist)
   ; Horn.twistInverse = conjugatePreservesInverse H (generator twist)
-  ; Horn.twistCubed = cubeIdentity twist
+  ; Horn.twistCubed =
+      Inner.innerC3FromElementCube H
+        (generator twist) (generatorCubed twist)
   ; Horn.twistCommutator =
       conjugatePreservesGroupCommutator H (generator twist)
   }
