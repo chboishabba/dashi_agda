@@ -1,5 +1,10 @@
 ## 2026-10-24 P0 B4 adversarial discovery and A prior-art recut
 
+**SOURCE CORRECTION:** The official R63 scale classification uses the STRICT
+shell gap `j_low+3 < j_high` and `j_output+3 < j_p,j_q`. An initial
+non-strict local enumeration was superseded; only the corrected N9-N40
+receipts below are admissible.
+
 **STOP treating the original full-output-fibre B4 estimate as merely an
 unpaid Young inequality.** An exact physical finite-mode negative control now
 exists. Its status is **executed finite arithmetic plus analytic unboundedness
@@ -50,7 +55,7 @@ defect_N = r_N - 2 n_N
          = sum_(tau in Noncore_N) (|p_tau|^2+|q_tau|^2-2).
 ```
 
-For each integer `m>=6`, the incidence
+For each integer `m>=10`, the incidence
 `p=(m,0,0),q=(1-m,1,0)` is a deep high-high Noncore row with *zero*
 amplitude but strictly positive contribution `2m(m-1)`, provided
 `N>=m`. For all integer p with p+q=k the individual excess is
@@ -58,9 +63,9 @@ nonnegative. Hence
 `defect_N >= 2 sum_(m=6)^N m(m-1) -> +infinity`.
 
 By contrast all Core input indices at this fixed output are already
-present by cutoff 5: an input with maxnorm >=6 has both input shells at
-least 3 and is deep high-high. The Core-Core Young companion, including
-ALL zero-zero pairs, is constant at `M_core=10123708` for `N>=5`.
+present by cutoff 9: any new incidence beyond that has both input
+shells at least 4 and is deep high-high. The Core-Core Young companion, including
+ALL zero-zero pairs, is constant at `M_core=1345859672` for `N>=9`.
 
 Executed exact receipt from
 `scripts/ns_b4_literal_padding_adversary.py` (all integers/Fractions):
@@ -68,11 +73,11 @@ Executed exact receipt from
 | cutoff N | zero-amplitude Noncore rows | signed defect | literal M_core |
 | ---: | ---: | ---: | ---: |
 | 4 | 0 | 0 | 3306048 |
-| 5 | 218 | 18080 | 10123708 |
-| 8 | 3470 | 535344 | 10123708 |
-| 12 | 13518 | 4204080 | 10123708 |
-| 16 | 32910 | 17577776 | 10123708 |
-| 20 | 64718 | 53228080 | 10123708 |
+| 8 | 0 | 0 | 735927680 |
+| 9 | 682 | 185520 | 1345859672 |
+| 16 | 28318 | 16776416 | 1345859672 |
+| 36 | 372958 | 988633056 | 1345859672 |
+| 40 | 512926 | 1671172320 | 1345859672 |
 
 **No-go scope:** For this fixed global smooth state, any legitimate
 physical `ED_N(u)` bounded uniformly in cutoff N and finite constants
