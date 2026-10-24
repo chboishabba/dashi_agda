@@ -1110,3 +1110,93 @@ def test_canadian_partial_security_remediation_and_exposed_credentials_not_35m_d
         "canonical CA influence owner",
     ):
         assert token.lower() in study.lower()
+
+
+def test_canonical_disposition_freezes_research_not_primary_evidence():
+    """The only current acceptance ledger; historical source notes remain accessible."""
+    root = ROOT / "docs/research"
+    current = (root / "aquino-epstein-canonical-disposition-20261025.md").read_text()
+    for fragment in (
+        "STOP broad acquisition; CERTIFY and DISPOSE",
+        "Kogan-derived scores reached AIQ in aggregate",
+        "security-safeguards subissue resolved",
+        "NOT ESTABLISHED",
+        "P0 — certification and consistency",
+        "Reopen trigger:",
+        "newly produced **original, dated, independently attributable same-object artefact**",
+        "Agda",
+        "pytest",
+        "#1200",
+        "#1233",
+    ):
+        assert fragment in current
+    for filename in (
+        "aquino-maxwell-epstein-ca-maxcut-20261024.md",
+        "aquino-epstein-portfolio-maxcut-20261024.md",
+        "aquino-epstein-crosspollination-phase-decision-20261025.md",
+        "black-epstein-congress-2026-pareto-snowball.md",
+        "aquino-epstein-surrounding-prior-art-audit-20261024.md",
+    ):
+        old = (root / filename).read_text()
+        assert old.startswith("# ")
+        assert "CURRENT DISPOSITION — RESEARCH FREEZE (25 Oct 2026)" in old[:850]
+        assert "aquino-epstein-canonical-disposition-20261025.md" in old[:850]
+
+
+def test_canonical_source_state_snapshots_have_actual_boolean_field_alignment():
+    """Check record values, not just nearby mentions of a \N{LATIN SMALL LETTER R}efl witness."""
+    import re
+
+    def read_bool_snapshot(text, record, instance, constructor):
+        a = text.index(f"record {record} : Set where")
+        b = text.index(f"open {record} public", a)
+        fields = re.findall(r"^    (\w+) : Bool$", text[a:b], flags=re.MULTILINE)
+        assert fields, f"{record} has no auditable Bool fields"
+        pos = text.index(f"{instance} =", b)
+        end = text.index("\n\n", pos)
+        assignment = text[pos:end]
+        assert constructor in assignment
+        values = re.findall(r"\b(?:true|false)\b", assignment)
+        assert len(values) == len(fields), (record, len(fields), len(values))
+        return dict(zip(fields, values))
+
+    case = OWNER.read_text()
+    bank = (ROOT / "DASHI/Cognition/EpsteinBankingInfrastructureAcquisitionExact.agda").read_text()
+    canada = read_bool_snapshot(
+        case, "Canada2019AggregateScoreFinding",
+        "canonicalCanada2019AggregateScoreFinding", "canada-2019-aggregate-score-finding"
+    )
+    assert canada["sourceStatesScoresAtLeastPartlyDerivedFromKoganFacebookData"] == "true"
+    assert canada["canadianAndBCBodiesAreSingleJointSourceRoot"] == "true"
+    assert canada["individualKoganGSRScoreFileToNamedRiponRowMatched"] == "false"
+    assert canada["agencyFollowupConfirmedImplementedHere"] == "false"
+    assert canada["paidCrossNetworkEpsteinAquinoDirection"] == "false"
+
+    remediation = read_bool_snapshot(
+        case, "Canadian2019RemediationEvidenceCut",
+        "canonicalCanadian2019RemediationEvidenceCut", "canadian-2019-remediation-evidence-cut"
+    )
+    assert remediation["securitySafeguardsIssueDeclaredResolvedIn2019Report"] == "true"
+    assert remediation["sourceReportsAIQSuppliedSwornDeletionAffidavit"] == "true"
+    assert remediation["swornAffidavitIndependentlyVerifiesEveryPossibleDataCopyErased"] == "false"
+    assert remediation["entireConsentAndRemediationInvestigationUnconditionallyClosed"] == "false"
+
+    senate = read_bool_snapshot(
+        bank, "ChainReactionOversightAttributionCut",
+        "canonicalChainReactionOversightAttributionCut", "chain-reaction-oversight-attribution-cut"
+    )
+    assert senate["march2026FollowupOriginalLetterPublished"] == "true"
+    assert senate["februaryAndMarchAreSeparateInvestigatorRoots"] == "false"
+    assert senate["independentDEAInternalInterventionInstructionInspected"] == "false"
+    assert senate["originalOperationFinalDispositionVerified"] == "false"
+
+
+def test_senate_public_letters_do_not_claim_original_ocdetf_native_scan():
+    bank = (ROOT / "DASHI/Cognition/EpsteinBankingInfrastructureAcquisitionExact.agda").read_text()
+    for receipt in ("chainReactionWyden2026Questions", "chainReactionWydenMarch18"):
+        start = bank.index(f"{receipt} = chain-reaction-source-receipt")
+        block = bank[start:bank.index("\n\n", start)]
+        assert "laterSenateInquiryInterpretation" in block
+        assert "true false false" in block, receipt
+        assert "true true false" not in block, receipt
+    assert "chainReactionNativeScanVerifiedHere : Bool" in bank
