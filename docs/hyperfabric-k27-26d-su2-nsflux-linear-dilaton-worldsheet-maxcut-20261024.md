@@ -82,3 +82,77 @@ This explicitly identifies a finite-level quantum correction to the classical ba
 ## Independent high-value subsequent experiment
 
 Give the selected SU2 WZW k and level-corrected linear dilaton a precise physical worldsheet realization, compute Virasoro/BRST nilpotence and physical-state cohomology using existing VOA/TwistedModule owners, and compare the induced spacetime NS-NS background at alpha' corrected order. Fail closed if background level shift or stress does not match. Then ask if the 369 hyperfabric admits an action-preserving operator map at all; do not start from equal numerical labels.
+
+
+## 2026-10-24 source-snowball / explicit global-gerbe + affine VOA max-cut
+
+**Most relevant original source found on the WEB:** Michael B. Schulz, *T-folds, doubled geometry, and the SU(2) WZW model*, JHEP06(2012)158, https://arxiv.org/html/1106.6291v4 . The author's §2.1 and Appendix B already construct **the physical WZW target g,H and quantum current/Sugawara/primary states**, and §3–4 develop the much more appropriate **worldsheet momentum/winding doubled bundle** and `O(d,d)` generalized geometry for physical string transport. This is a stronger *operational* bridge to the user's hyperfabric and KK/p-adic refinement programme than 27 vs 26 numerology. DO NOT install a new Courant/T-duality framework merely from this citation: to use it one must implement a SAME sigma-model momentum-winding generalized metric `TM⊕T*M`, `B`-shift, patch cocycle and corresponding worldsheet Hamiltonian on the actual selected 26D fields. The existing original mathematical owners are the (SU(2)_k) affine-level `DASHI/Physics/QFT/KacMoodyLevelReceipt.agda`, `SU2Level4Spin1RepReceipt.agda` (literal k=4 j=0,1/2,1,3/2,2 and h=0,1/8,1/3,5/8,1), `LevelRankDualityReceipt.agda`, `DASHI/Moonshine/VertexOperatorAlgebraCore.agda` and `TwistedModuleModularity.agda`. The SU2_4 level/spin sources are **already present** and must be reused, not recreated from bare counting. Their separate SM-weak, p3 conductor and duality interpretations remain source-candidate and are NOT imported into physical bosonic string gauge coupling by notation.
+
+**Additional primary quantum source:** standard SU(2)_k affine Sugawara `h_j=j(j+1)/(k+2)`, `c=3k/(k+2)`, e.g. https://www.sciencedirect.com/science/article/abs/pii/S0550321306009321 (2007 original SU(2) extended-algebra analysis). See also https://www.conferences.itp.phys.ethz.ch/esi-school/Lecture_notes/WZW%20models.pdf for state/character expansions. Exact 2D WZW CFT **exists in published theory**, not source-created by our numerical representation checks. Linear dilaton bosonic central charge `D+6 alpha' V²` has external textbook/research authority. The April 2026 published Biswas DDF https://doi.org/10.1007/JHEP04(2026)076 treats a **LIGHT-LIKE** dilaton only: it is relevant to future physical-state algebra, but must NOT be silently substituted for this strictly SPACELIKE dilaton background.
+
+### NEW actual global target-space forms: B gerbe cannot be a single B2
+
+Use round S³ polar angle `0<=chi<=pi`, S² volume `omega2=sin(theta)dtheta^dvarphi`, radius r, `H=(2/r)vol_S³=2r² sin²(chi) dchi^omega2`. Set `f(chi)=chi-sin(2chi)/2`; then two regular patch potentials are
+
+```text
+B_N = r² f(chi) omega2       (regular at north chi=0)
+B_S = r² (f(chi)-pi) omega2  (regular at south chi=pi)
+dB_N = dB_S = H.
+B_N-B_S = pi r² omega2 on their overlap;
+int_S² (B_N-B_S) = 4 pi² r² = int_S³ H.
+```
+
+Because the overlap S² two-form has nonzero integral, it is **not** globally exact there; one cannot use a single globally smooth gauge 1-form to glue both patches. The correct global B is a **U(1) 2-gerbe connection / bundle-gerbe with higher patch data** (in string terminology, a B-field gerbe), and `[H/(4pi² alpha')]` has integer WZW level k. With source semiclassical convention `r²=k alpha'`, `int H/(4pi² alpha')=k`, (kin Z_{>0}). The exact local potential and flux calculation has been independently executed in SymPy (not yet kernel-proved in Agda/Lean). Do not confuse this U(1) gerbe cocycle with the **Z2** oriented-duad local sign or **C3** signed-neutral-phase rotation.
+
+### NEW actual explicit C22 on THE SAME nonflat source metric
+
+Choose product orientation `vol26 = vol_(R1,22)^volS³`, mostly-plus metric and `Phi=x¹/r` where x¹ is FLAT **spacelike**. For H=+(2/r)volS³, the Lorentzian Hodge convention then gives `*26H=-(2/r) vol_(R1,22)`. Define `beta22=dt^dx²^...^dx²²`, for which `dx¹^beta22=-vol_(R1,22)`. The **global smooth potential on the noncompact R1,22 factor**:
+
+```text
+C22 = -exp(-2Phi) beta22
+dC22 = -(2/r)exp(-2Phi) vol_(R1,22)
+     = exp(-2Phi) *26 H3 =: G23.
+```
+
+Thus the previous literal coupled NS-NS source background (all *leading* equations) now carries an actual **same-background B2/C22 dual potential**, not just degree-22 counting. `dG=0` is the B equation; `d(e^(2Phi)*G)=dH=0` uses Lorentzian `**=+1` on degree 3/23 under the stated orientation and a local Bianchi relation. The globally topologically nontrivial H has no global B2, whereas its dual G23 on noncompact R1,22 **is exact**, explaining why a global C22 can be given here without claiming global `B2`. This explicit POTENTIAL is a legitimate source-field representative; it is **not** the `K27` infinite-dimensional Lie generator corresponding to a 22-form. Source primal/dual potential construction itself is established Hodge/gerbe prior art.
+
+### Exact quantum CFT operational discriminators
+
+Script added: `scripts/check_k27_26d_global_gerbe_dual_cft.py`.
+Independent exact SymPy/Fraction and 50-digit mpmath reference run PASSED:
+- both patch potentials with `dB=H` and overlap class; full integral `4pi²r²`;
+- WZW integer levels (k=1..20);
+- explicit dilaton-weighted global C22 primitive on flat factor with the correct Lorentzian Hodge sign;
+- 20 source-exact SU2 WZW (c_{SU2}=3k/(k+2)) with (c_{matter}=26) when `alpha'V²=1/(k+2));
+- **135** SU2 integrable primary (k=1..15, `ell=0..k`) weights `ell(ell+2)/(4(k+2))`;
+- standard source SU2 affine modular matrices (12 levels) numerically satisfy `S²=I` and `(ST)³=S²` with 50-digit errors below `10^-42`.
+
+**IMPORTANT TEST STATUS**: the SymPy rational/analytic identities are exact; `S,T` modular identity checks are numerical, not symbolic nor a new theorem about the infinite algebra. The full noncompact linear-dilaton string partition function, physical Hilbert positivity, ghosts, complete BRST and modular sewing are **not** established by the affine-sector modular test. The checked local source version is mathematically equivalent to GitHub committed source; **the exact committed blob has NOT been byte-executed in this turn**. Original literature authorship is not claimed as DASHI novelty.
+
+### A finer α' / same-source negative test
+
+For classical r²=k alpha' and the **quantum-corrected** slope `alpha'V²=1/(k+2)`, the simple two-derivative dilaton equation gives a remaining residual (multiply by alpha'):
+
+```text
+alpha' [R-4V²-H²/12]
+  = 6/k - 4/(k+2) - 2/k
+  = 8/[k(k+2)] > 0 .
+```
+
+This is NOT evidence against the conformal WZW background: it demonstrates that substituting the exact worldsheet background charge into the *unshifted classical* target fields without the proper higher-order α'/field-redefinition corrections is invalid at finite k. A physical same-object bridge needs a source-specified renormalisation scheme and target-frame map. Merely renaming radius to `k+2` while holding H quantization and curvature fixed can also violate the global gerbe integer and local flux relationship; independently test each source-normalized term before accepting a level shift.
+
+### Strong remaining programme after this cut
+
+**E0 DONE:** discover primary WZW / doubly extended string geometry / exact CFT literature, cross-check original SU2 WZW level4 and VOA owners. No new 369 ontology.
+
+**E1 DONE exact geometric source test:** nonflat classical 26D metric/H/Phi EOM; explicit global patch B gerbe with integer WZW class; on exactly same background explicit global dual C22. Existing finite classical/check receipts and new SymPy exact test. Pending kernel proof of manifold/gerbe and differential-form operators.
+
+**E2 DONE source-selected exact worldsheet model (external theorem authority):** standard SU2_k affine CFT plus 23 free bosons (one spacelike background-charged) at `alpha'V²=1/(k+2)` has c26; source S/T modular group and all integrable modules are known. Repo has multiple actual SU2 level CFT-labelled donors. Agda/Lean **kernel-local VOA instantiation and physical BRST** are unproved.
+
+**E3 OPEN physical SAME quantum-classical target:** exhibit exact scheme-controlled map SU2_k WZW stress/OPE, target g/H gerbe, level shift and beta functions beyond tree order. Correct finite-k α' mismatch above is a concrete falsifier.
+
+**E4 OPEN genuine K27 generators and duality:** construct selected Lie generators and dual-potential action on this same global gerbe background, not just matching 22-form degree.
+
+**E5 OPEN hyperfabric operators and oriented fibre:** a 27-site ternary cube is not the SU2 group manifold or affine module. Also `SO(24)` little-group 299+276+1 is the **FLAT vacuum/tangent-space** decomposition, not a global `SO(24)` symmetry of the curved SU2-flux and preferred-gradient solution; this background BREAKS much of the flat Lorentz symmetry. M24-duad 2A/2B mismatch is a mathematical representation result on chosen natural M24 action, not an observed M24 symmetry of this curved target. Any 369 representation map must explicitly respect these distinctions.
+
+**E6 OPEN full spectrum/viability:** global worldsheet completion, physical BRST, modular invariant closed-string sector and noncompact coupling. `g_s=e^Phi` diverges at one end of the spacelike linear dilaton, and standard bosonic-string tachyon is not removed; this background is not a stable realistic observed vacuum. No YM/NS/RH/BSD/Hodge/P≠NP theorem is gained without the original analytic source estimates.
