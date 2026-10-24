@@ -89,3 +89,31 @@ Lean #84 `Integration/DASHITOE/HornWittenRegularityAndChargeCut.lean` appends so
 | R7 | Hosotani matter determinant, anomaly-safe field content and predictive independent measurement | **OPEN** |
 
 **Strongest remaining mathematical delivery:** either a source-coordinate meridian/collar construction with certified \(\ell_n\to0\) and fixed gauge compatibility, or a counterexample showing the intended embedding lacks that property. Do not claim the stage-by-stage handles themselves provide this length bound absent a metric/meridian witness.** No CI needed**, but Agda and Lean kernel proofs remain an independent task. No direct YM/NS/Clay solution follows from these finite bounds.
+
+
+## Exact TOPOLOGICAL mark discriminator (added after synthetic-collar test)
+
+The local synthetic straight-cylinder coordinate family now does more
+than declare `markMissing`: for each parent word of depths 0..6
+(\(1+2+4+8+16+32+64=127\) selected parent loops), the
+parent transverse circle has planar winding vector **(1,0)**
+around the two child tube cores at the next level, whereas the
+supposed Hatcher commutator \([m_{w0},m_{w1}]\) has
+abelianized winding vector **(0,0)**. The mismatch is checked from
+EXACT rational centre/radius inequalities
+`|c_parent-c_child0|=0<R_parent<|c_parent-c_child1|`.
+Thus the synthetic straight-cylinder control **provably fails**
+the original required Hatcher marking, despite passing all
+collar clearance and short-length checks. This is a real
+finite stage *topological* no-go for the control, not merely
+a comment about the absence of linking. The actual Hatcher
+two-tube replacement block must supply a different van Kampen
+inclusion map that sends parent to a child commutator.
+
+Updated script `check_horn_a5_single_branch_collar_cut.py`
+was byte-exact locally executed and has matching committed
+Git blob `e0e6b6cad6f3c5653c1097759facc12c76846ad2`.
+Local exact checks cover all 60 A5 permutations, 3600 A5
+commutator pairs, 8 selected local collar levels and these
+127 source-marking rejection controls. Source original
+A5 horn quotient remains owned by #1244.
