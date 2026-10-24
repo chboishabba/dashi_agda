@@ -39,6 +39,7 @@ import DASHI.Foundations.PolyhedralFiniteRestrictionInstancesExact as Poly
 import DASHI.Foundations.PolyhedralFixedSpaceSpectrumJ0To35Exact as Fixed
 import DASHI.Foundations.SU2SO3IrrepDimensionExact as SO3
 import DASHI.Mathematics.Topology.AlexanderHornedC3FiniteVOAActorExact as Actor
+import DASHI.Mathematics.Topology.AlexanderHornedC3VOAModeLiftExact as Modes
 
 -- Prove that the correct previous A5/C3 owner is being consumed:
 -- the icosahedral fixed-space probe is exactly the shared axial C3
@@ -175,3 +176,48 @@ externalMovesIdentitySlot D ()
 
 -- Distinguishes the two cyclic actors by which coordinate they move.
 -- Neither is a quotient character of perfect A5.
+
+------------------------------------------------------------------------
+-- SAME VOA STATE CONSUMER.  The two commuting order-three actions
+-- preserve all pointwise rational vertex modes, not merely an
+-- unrelated coordinate group action.  No function extensionality.
+------------------------------------------------------------------------
+
+internalExternalCommuteOnRationalStates :
+  (D : Actor.ActorFactorGroup) →
+  (selected : InternalC3Element D) →
+  (f : Modes.RationalState D) → ∀ x →
+  Actor.rightAct D (internalActor D selected)
+    (Actor.rightAct D (Actor.pureRotation D) f) x
+  ≡
+  Actor.rightAct D (Actor.pureRotation D)
+    (Actor.rightAct D (internalActor D selected) f) x
+internalExternalCommuteOnRationalStates D selected f x =
+  cong f (sym (internalExternalCommuteOnSlot D selected x))
+
+internalIntertwinesAllVertexModes :
+  (D : Actor.ActorFactorGroup) →
+  (selected : InternalC3Element D) →
+  ∀ (f g : Modes.RationalState D) n x →
+  Actor.rightAct D (internalActor D selected)
+    (Modes.vertexMode D f n g) x
+  ≡
+  Modes.vertexMode D
+    (Actor.rightAct D (internalActor D selected) f) n
+    (Actor.rightAct D (internalActor D selected) g) x
+internalIntertwinesAllVertexModes D selected =
+  Modes.allVertexModesIntertwineRightAction D
+    (internalActor D selected)
+
+externalIntertwinesAllVertexModes :
+  (D : Actor.ActorFactorGroup) →
+  ∀ (f g : Modes.RationalState D) n x →
+  Actor.rightAct D (Actor.pureRotation D)
+    (Modes.vertexMode D f n g) x
+  ≡
+  Modes.vertexMode D
+    (Actor.rightAct D (Actor.pureRotation D) f) n
+    (Actor.rightAct D (Actor.pureRotation D) g) x
+externalIntertwinesAllVertexModes D =
+  Modes.allVertexModesIntertwineRightAction D
+    (Actor.pureRotation D)
