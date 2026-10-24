@@ -30,6 +30,7 @@ from iit_pointed27_gluing_scan import gluing_summary
 from iit_ternary_affine_minimal_sufficiency import scan as ternary_affine_scan
 from iit_xor_369_stress_scan import stress_summary
 from iit_xor_grid_calibration import calibration_summary
+from iit_lattice_prime_power_audit import audit as prime_power_lattice_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -153,6 +154,21 @@ def verify_numeric_results() -> dict:
     assert stress["z9_recurrent_addition"]["iit_4_0_2023"]["distinct_phi_s"] == [expected9]
     assert stress["f3_squared_recurrent_addition"]["iit_4_0_2023"]["distinct_phi_s"] == [expected9]
 
+    # Existing larger-grid scaling is checked independently of IIT-phi.
+    lattice = prime_power_lattice_audit()
+    assert len(lattice["rows"]) == 26
+    def lattice_case(p, dim, n):
+        return next(row for row in lattice["rows"]
+                    if row["p"] == p and row["dim"] == dim and row["n"] == n)
+    assert lattice_case(2, 2, 10)["rank"] == 90
+    assert lattice_case(2, 3, 5)["rank"] == 125
+    assert lattice_case(3, 2, 3)["rank"] == 9
+    assert lattice_case(3, 3, 3)["rank"] == 18
+    assert all(c["all_basis_vectors"] for c in
+               lattice["prime_power_operator_certificates"])
+    assert lattice["binary_2D_n3_F4_equals_F_on_delta"]
+    assert lattice["binary_2D_n10_F128_delta_is_nonzero"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -163,6 +179,14 @@ def verify_numeric_results() -> dict:
         "boolean_minimality": boolean_minimality,
         "ternary_affine_minimality": ternary_minimality,
         "xor_grid": grid,
+        "large_grid": {"scanned_rows": len(lattice["rows"]),
+                       "payload_sha256": lattice["payload_sha256"],
+                       "scope": lattice["scope"],
+                       "basis_certificates": lattice["prime_power_operator_certificates"],
+                       "selected_cases": [lattice_case(2, 2, 10),
+                                          lattice_case(2, 3, 5),
+                                          lattice_case(3, 2, 3),
+                                          lattice_case(3, 3, 3)]},
         "matched_controls": matched,
         "algebra_369": {
             "z6_2023_phi_s": z6["iit_4_0_2023"]["distinct_phi_s"],
