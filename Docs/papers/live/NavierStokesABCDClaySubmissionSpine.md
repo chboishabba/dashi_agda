@@ -1,14 +1,16 @@
 > **24 October 2026 — decisive B4 auxiliary-estimate negative control.**
+> **Source-correction receipt:** the strict R63 shell-gap classifier,
+> not a non-strict surrogate, gives the corrected numbers below.
 > The *literal full-output-fibre* noncore/core R440 covariance changes
 > under cutoff padding by zero-velocity incidences. The explicit
 > divergence-free real shear field
 > `u_hat(±e_x)=u_hat(±e_y)=e_z` is a genuine global smooth unforced
 > NS solution, but at output `k=(1,1,0)` the exact signed B4 defect
-> rises from `535344` at cutoff 8 to `17577776` at cutoff 16 and
-> `53228080` at cutoff 20; the literal Core-Core Young companion is
-> fixed at `10123708` for cutoffs >=5. An infinite family of
+> rises from `0` at cutoff 8 to `988633056` at cutoff 36 and
+> `1671172320` at cutoff 40; the literal Core-Core Young companion is
+> fixed at `1345859672` for cutoffs >=9. An infinite family of
 > zero-amplitude noncore rows produces positive rate excess
-> `2 m(m-1)` for every m>=6. The old uniform B4 payment therefore
+> `2 m(m-1)` for every m>=10. The old uniform B4 payment therefore
 > cannot hold against ANY fixed cutoff-bounded local physical ED.
 > This does NOT disprove the Clay theorem; it falsifies a proposed
 > full-fibre auxiliary inequality (subject to confirming ED's actual
