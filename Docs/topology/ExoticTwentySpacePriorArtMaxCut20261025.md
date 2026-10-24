@@ -1,0 +1,172 @@
+# Exotic topological spaces: source-specific max-cut and prior-art reuse
+
+Date: 2026-10-25. Branch: `topology-exotic-spaces-prior-art-maxcut-20261025`,
+based on horned-sphere branch / PR #1244, NOT master. **Stacked work**.
+This is an implementation-plus-audit, NOT a claim that all twenty objects are now
+geometrically formalised or kernel-proved.
+
+## Exact, executed deliverables
+
+1. `DASHI/Mathematics/Topology/ExoticEndProfilesViaCantorExact.agda` imports
+   **existing** `DASHI.Foundations.CantorProjectiveCylinderMeasureExact`:
+   end codes for Cantor-tree (binary streams), Loch Ness (unit), Jacob's ladder
+   (two Boolean ends); staged genus markers; Cantor endpoint distinctness;
+   re-exported original dyadic cylinder refinement **proof**.
+   This is an end/genus presentation, not a topological realisation.
+2. `DASHI/Mathematics/Topology/ExoticAmbientLinkingNoGoExact.agda` imports
+   **existing** `AlexanderHornedC3FiniteStageExact` and `FiniteC3OrbitStabilizerExact`.
+   Two explicitly marked objects with the identical HornAddress carry different
+   linked bits; proves no function of address alone classifies every marker.
+   This is a concrete information-loss statement, NOT a realised linked/unlinked
+   embedding of the same Cantor set.
+3. `scripts/exotic_topology_exact_models.py`:
+   exact SymPy checks for six object families (Whitney umbrella, Ida,
+   von Seggern seashell, Simons cone, finite Seifert Euler formula, and
+   a chosen pinched-torus CW quotient). Executed locally: PASS.
+4. `scripts/exotic_topology_surface_exhaustions.py`:
+   concrete finite oriented compact-surface attachment schedules:
+   * Cantor tree: start disk, glue a pair of pants at every outgoing boundary;
+     stage n has genus 0, 2^n boundary circles, chi=2-2^n.
+   * Loch Ness: start disk; add one genus-one/two-boundary cobordism per stage;
+     genus n, one outgoing boundary, chi=1-2n.
+   * Jacob ladder: start annulus; add one genus-one/two-boundary
+     cobordism at BOTH ends per stage; genus 2n, two outgoing boundaries,
+     chi=-4n.
+   All attachments are along one entire boundary per connected cobordism,
+   so Euler characteristics add (the gluing circle has chi=0).
+   Executed locally: PASS at depths 0..12, including all 4096 Cantor
+   boundary words at depth 12. Global locally finite direct-limit
+   manifold and end-space homeomorphism proof NOT supplied.
+
+## Local exact fixtures: mathematical scope
+
+- Whitney: `(u,v)->(uv,u,v^2)`, image in `x^2=y^2 z`, Jacobian
+  cross-product `(2v,-2v^2,-u)` vanishes only at `(0,0)`.
+  Two source preimages at `u=0,v=+-3/5` coincide, while `(0,0,-1)`
+  satisfies the polynomial but does not lie in the REAL parametrised image.
+  Thus the algebraic locus is strictly larger than the parametrised image.
+- Simons cone: polynomial `sum(x_i^2)-sum(y_i^2)=0` on R^4+R^4;
+  gradient `(2x,-2y)` zero only at the origin; a unit-link sample passes.
+  NO geometric measure theory / calibration / area-minimization proof.
+- Ida: Idaszak/Francis parametrisation with (l,b,r1,r2)=(1,1,1/2,1).
+  Trigonometric simplification checks EXACTLY
+  `p(theta+pi,2pi-tau)=p(theta,tau)` in all three coordinates,
+  and denominator >=1-1/sqrt(2)>0. No global immersion rank proof.
+- Seashell: von Seggern source variant n=a=b=1,c=1/10, source domains as
+  published. Checks `x^2+y^2=radius^2` and matching u=0 / u=2pi seam.
+  NO assertion of global smoothness/embedding.
+- Seifert: uses classical disk-and-band identity
+  `chi=s-c=2-2g-b` on explicitly supplied sample diagram counts
+  (unknot, trefoil, figure-eight, Hopf-link annulus). No algorithm
+  deriving s from an actual oriented crossing diagram, nor a spanning
+  surface embedding.
+- Pinched torus: collapse one essential 1-cell of standard torus CW
+  decomposition, leaving cellular differential zero and
+  Betti numbers (1,1,1). No homeomorphism to a wedge is asserted
+  (homotopy equivalence does NOT make singular spaces homeomorphic).
+
+## Full 20-object acceptance matrix
+
+The labels mean: C=concrete local fixture, P=finite/presentation consumer,
+D=direct preexisting donor, OPEN=decisive geometric/analytic theorem missing.
+
+| Requested object | Status in this branch | Primary prior-art owner(s) | Decisive acceptance test still to discharge |
+| --- | --- | --- | --- |
+| Lakes of Wada | P/OPEN | Cantor clopen cylinders, horned ambient-linking no-go, C3 | Three *connected disjoint open* planar domains with identical actual topological boundary, proof at infinite limit |
+| Wild knot | D/OPEN | PR #1244 linking/collars; braid permutation donors | Source-specific embedded S^1, non-local-flat point and ambient isotopy obstruction |
+| Wild arc | D/OPEN | PR #1244 horn recursions | Injective interval embedding plus non-1-LCC / non-tameness witness |
+| Fox-Artin wild arc | D/OPEN | Horn group/proper-collar scripts | Fox-Artin specific iterated embedding and local 1-LCC/cellularity test; pi1 alone not enough |
+| Cantor tree surface | P/OPEN | CantorProjectiveCylinderMeasureExact; surface exhaustion script | Countable collared pants union is planar 2-manifold; end space is Cantor; exact end-genus map |
+| Jacob's ladder | P/OPEN | same finite stage glue library | Oriented connected 2-manifold, exactly two ends each with infinite genus |
+| Loch Ness monster | P/OPEN | same finite stage glue library | Oriented connected 2-manifold, exactly one end and infinite genus |
+| Warsaw circle | OPEN | homotopy/cochain/CW donors | Construct sine-curve closure with added arc; prove weak contractibility but not contractibility/CW type |
+| Whitehead theorem | OPEN | FiniteCochainComplexExact; real HoTT backend | Weak equivalence between actual CW complexes implies homotopy equivalence |
+| CW complex | P/OPEN | TernarySynthesisCellComplexExact | Arbitrary disks attached by maps with quotient topology and closure-finite/weak topology properties |
+| Schoenflies problem | D/OPEN | PR #1244 wild sphere, collars | Locally flat S^(n-1) embedding gives standard complementary closed n-balls; wildness cannot be ignored |
+| Ida surface | C/OPEN | ComplexManifold and geometric coordinate infrastructure | Smooth Klein quotient / global rank-two immersion theorem |
+| Riemann surface | D/OPEN | ComplexManifold, ProjectiveLineAtlasGluingExact | Realised Hausdorff second-countable local C charts / analytic transition maps; CP1 as first case |
+| Morin surface | OPEN | immersion/geometry candidate donors | Source parametrisation with rank two everywhere and sphere eversion regular homotopy |
+| Nielsen-Thurston | OPEN | genuine mapping-class and curve systems missing | Full periodic/reducible/pseudo-Anosov trichotomy and dynamical foliations |
+| Pinched torus | C/OPEN | QuotientSetoidSurface, finite cochains | Explicit torus quotient topology, singular point local topology, maps to cellular quotient |
+| Simons cone | C/OPEN | metric/smooth algebra donors | Source-specific area-minimizing proof (calibration/varifold / GMT) |
+| Seifert surface | C/OPEN | FiniteBraidRhizomeCalculus, finite cell donors | Real oriented knot diagram -> oriented embedded disk-band surface -> boundary knot |
+| Seashell surface | C/OPEN | analytic coordinate geometry | Source-specific parametrisation and domain boundary/singularity identification |
+| Whitney umbrella | C/OPEN | polynomial/singularity algebra donor | Formal polynomial map, image description, singular double-locus stratification |
+
+## Avoided false promotions
+
+- `DASHI.Topology.FiniteBraidRhizomeCalculus.Braid2` has swap^2=id:
+  it is only a two-strand *permutation shadow*, NOT the full braid group B2=Z.
+- `InverseLimitClopenRefinement.CompleteClopenAuthority` has abstract
+  `intersectionSingleton : Set`/`ultrametricComplete : Set` fields;
+  do not call mere fields proofs of metric completeness.
+- Triple C3 symmetry alone does not prove a Lakes-of-Wada boundary.
+- Source names `Wild` in the arithmetic/Monster lane concern wild
+  ramification, NOT wild ambient topological embeddings.
+- Explicit coordinates are not automatically embeddings or immersions.
+- Ring-simplified / Python-checked algebra is not an Agda/Lean kernel receipt.
+- Idaszak's Ida surface and Apéry/Morin eversion are different objects.
+- Simons-cone critical-point algebra does not prove area minimality.
+
+## Concrete maximal-reuse continuation cut
+
+1. Use the existing `proofs/horned_c3_lean` and its Hatcher van Kampen donor
+   for actual collared open covers; do not duplicate a separate abstract group.
+2. For the three infinite-type surfaces, realise the finite oriented cobordism
+   schedules as a locally finite collared union, prove connected orientable
+   Hausdorff second-countable 2-manifold, then identify proper rays/end space.
+   Apply Richards' classification only AFTER verifying genus/orientability/end.
+3. For Wada, require genuine planar topology in Lean/Mathlib:
+   nonempty pairwise-disjoint connected open sets U0,U1,U2 and
+   `frontier U0 = frontier U1 = frontier U2`; construct a source-selected
+   sequence of canals with *all three* boundary density properties.
+4. Fox-Artin: upgrade the source-selected nested 3D placements, record
+   local complements and 1-LCC rather than just global pi1.
+5. Warsaw/Whitehead: instantiate actual sine-curve compactum and a
+   CW/non-CW contrast. Do not treat ordinary finite cochain equality as
+   weak homotopy equivalence.
+6. For coordinate consumers: promote the actual real parametrisations using
+   the existing geometry analytic surface, and pass global rank/injectivity
+   obligations, with controlled singular exceptions (Whitney/Ida/Morin).
+7. Seifert/Nielsen: implement genuine braid group (crossing generator of
+   infinite order), combinatorial oriented diagrams, and mapping-class
+   actions before using current finite permutation shadows.
+
+## Source roots and authorship
+
+- J. W. Alexander, 1924, horned sphere; A. Hatcher, *Algebraic Topology*
+  Example 2B.2, for complementary group tower.
+- R. H. Fox and E. Artin, 1948, wild arcs; R. J. Daverman and G. A. Venema,
+  *Embeddings in Manifolds*, Chapter 2, for the local-cellularity distinction.
+- Ian Richards, 1963, *On the Classification of Noncompact Surfaces*:
+  https://people.dm.unipi.it/benedett/Richards.pdf
+- Brouwer (1910) and Wada as described by Yoneyama (1917), the original
+  three-lakes phenomenon. Modern source-specific example:
+  Martí-Pete, Rempe and Waterman, *Wandering Lakes of Wada*,
+  https://arxiv.org/abs/2108.10256
+- H. Whitney, umbrella/pinch point; MathWorld source formula
+  https://mathworld.wolfram.com/WhitneyUmbrella.html
+- Ray Idaszak / George Francis, Ida surface, as documented by
+  https://mathworld.wolfram.com/IdaSurface.html
+- D. von Seggern, seashell parametrisation, as documented by
+  https://mathworld.wolfram.com/Seashell.html
+- E. Bombieri, E. De Giorgi and E. Giusti for Simons-cone area minimality.
+- H. Seifert for oriented knot spanning-surface disk/band construction.
+- J. H. C. Whitehead for CW weak-equivalence theorem; Brown/Mazur
+  for generalized Schoenflies; Nielsen and Thurston for mapping classes;
+  F. Apéry and B. Morin for sphere eversion.
+- DASHI contributions here: typed reuse, precise scope separation, exact
+  finite/cellular/coordinate verifications and the implementation matrix.
+  Do not attribute any classical theorem's discovery to DASHI.
+
+## Verification receipts
+
+Executed locally (Python 3 + SymPy 1.14):
+```sh
+python3 scripts/exotic_topology_exact_models.py
+python3 scripts/exotic_topology_surface_exhaustions.py
+```
+Both reported PASS in the model workspace before source mirroring. Source
+code was committed on the stacked branch. Agda kernel typechecking,
+Lean typechecking and GitHub CI for this exact branch were NOT RUN and
+must not be labelled passed.
