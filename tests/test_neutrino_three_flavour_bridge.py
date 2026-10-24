@@ -127,6 +127,26 @@ class NeutrinoThreeFlavourTests(unittest.TestCase):
                 delta=NORM_TOL
             )
 
+    def test_dirac_cp_odd_discriminator_matches_phase_sum(self):
+        # Vacuum CP-odd appearance difference is physically observable
+        # in principle, unlike Majorana column rephasing.  No detector
+        # sensitivity, confidence interval or measured CP violation claimed.
+        alpha, beta, l_km, e_gev = 1, 0, 1300.0, 2.5
+        c = [self.u[beta][i]*self.u[alpha][i].conjugate() for i in range(3)]
+        predicted = 4*sum(
+            (c[i]*c[j].conjugate()).imag
+            * math.sin(2*PHASE_CONSTANT
+                       *(self.masses[i]-self.masses[j])*l_km/e_gev)
+            for i in range(3) for j in range(i)
+        )
+        difference = (
+            probability(self.u, self.masses, alpha, beta, l_km, e_gev) -
+            probability(self.u, self.masses, alpha, beta, l_km, e_gev,
+                        antineutrino=True)
+        )
+        self.assertAlmostEqual(difference, predicted, delta=NORM_TOL)
+        self.assertGreater(abs(difference), 1e-3)
+
     def test_exact_c4_three_flavour_norm_all_192_cases(self):
         for a in range(3):
             for phases in product(C4, repeat=3):
