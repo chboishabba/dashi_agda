@@ -54,7 +54,7 @@ foxArtinOriginal = A.mkDOISource
   "10.2307/1969408"
   "https://doi.org/10.2307/1969408"
   A.academicArticleSource
-  "primary owner for source-specific wild arcs and embedded wild cells; address trees and global pi1 do not alone certify local wildness"
+  "primary owner for wild arcs: Example 1.1* nontrivial complement pi1; Example 1.2 wild with open-3-cell complement; Example 1.3 trivial complement pi1 but not open-3-cell; global pi1 does not certify all local wildness"
   A.publicAttribution
 
 yoneyamaOriginal : A.AttributedSource
@@ -227,7 +227,7 @@ foxArtinGeometricLeaf = topologyParetoLeaf
   3 foxArtinOriginal
   "Alexander horned C3 PR #1244 finite horn embeddings/commutators"
   "Fox--Artin wild arc / wild knot"
-  "actual source-selected nested embedding, endpoint non-local-flatness and local 1-LCC or cellularity discriminator"
+  "literal Example 1.1* chain-stitch nested embedding (nontrivial complement pi1), then Example 1.2 local neighborhood inclusion maps and Example 1.3 trivial global pi1 but non-3-cell complement; do not identify these separate source examples"
   "wild arcs, wild knots, ambient Schoenflies obstruction"
   geometricSameObjectOpen true false
 
