@@ -65,3 +65,15 @@ podcastPartnerBuyoutNotRinehartEquity = refl
 noCommandFromCopyAccess :
   G.OriginalInterviewFileAccessIsProvenInstruction → ⊥
 noCommandFromCopyAccess = G.noRepublishedFileCommand
+
+boycottPressureNotDirectOwnership :
+  A.kind G.mfwKyleAdvertiserCampaign ≡ A.advertiserBoycottCampaign
+boycottPressureNotDirectOwnership = refl
+
+domainPrankStillAttributedAccount :
+  A.evidence G.kyleKarlDomainPrank ≡ A.namedActorSelfReport
+domainPrankStillAttributedAccount = refl
+
+blackBookIndexNotMeeting :
+  A.provesHiddenCoordination G.rupertEpsteinAddressBookIndex ≡ false
+blackBookIndexNotMeeting = refl
