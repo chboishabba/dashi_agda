@@ -266,6 +266,7 @@ def test_page_inspected_primary_source_cuts_have_explicit_bounded_propositions()
         'delaware2013FTCEntityFinding : CaseClaim',
         'caVersusCIAWitnessClarification : CaseClaim',
         'bannonScheduledBreakfast2019 : CaseClaim',
+        'bannonOctober2018Messages : CaseClaim',
         'epsteinEstateScheduleRoot : OriginRoot',
         'https://committees.parliament.uk/oralevidence/7803/html/ ; Q1273',
         'https://www.ftc.gov/system/files/documents/cases/d09389_comm_final_opinionpublic.pdf',
@@ -274,6 +275,8 @@ def test_page_inspected_primary_source_cuts_have_explicit_bounded_propositions()
         'oralLicensingSource = bounded-source',
         'ftcDelawareEntitySource = bounded-source',
         'estateBannonScheduleSource = bounded-source',
+        'bannonOctober2018MirrorSource = bounded-source',
+        'EFTA01615409',
         'observedScheduleOutcome = listedOnly',
         'listedAppointmentNotConfirmedMeeting = refl',
         'correctedAcronymIsCA = refl',
@@ -306,3 +309,13 @@ def test_wylie_repeat_evidence_and_schedule_never_pay_hidden_network():
     assert 'caseWholeH2Unpaid = refl' in source
     assert 'caseCovertH3Unpaid = refl' in source
     assert 'listedAppointmentNotConfirmedMeeting = refl' in source
+
+def test_bannon_2018_mirror_remains_derivative_carrier_not_new_witness():
+    source = OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    assert 'bounded-source bannonOctober2018Messages epsteinCorrespondenceRoot' in source
+    assert 'journalist-hosted four-page reproduction' in source.lower()
+    assert 'original DOJ-native custody and complete surrounding thread were not checked' in source
+    assert 'true false false false' in source
+    assert 'Poder360-hosted DOJ-labelled' in roadmap
+    assert 'not a new witness or an independently retrieved DOJ original' in roadmap
