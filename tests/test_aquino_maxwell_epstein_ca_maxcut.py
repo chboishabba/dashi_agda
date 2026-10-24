@@ -365,3 +365,31 @@ def test_fec_preliminary_enforcement_and_register_same_origin():
     assert "31 Dec 2013" in roadmap
     assert "4 June 2014" in roadmap
     assert "5–0 to close the file" in roadmap
+
+
+def test_wylie_senate_hacking_claim_is_not_independent_kompromat_proof():
+    source = OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    for token in (
+        "wylieKompromatStatement2018 : CaseClaim",
+        "wylieProjectRiponStatement2018 : CaseClaim",
+        "bounded-source wylieKompromatStatement2018 wylieRoot",
+        "bounded-source wylieProjectRiponStatement2018 wylieRoot",
+        "wylieSenateOrigin :",
+        "SourceStatementOrigin wylieSenateMay2018 wylieRoot",
+        "wylieAllegedSCLBlackOps = bounded-source",
+        "wylieRiponStatement = bounded-source",
+        "canonicalKompromatCut = alleged-kompromat-programme-cut",
+        "testimonyDoesNotProveBannonHackingDirection = refl",
+        "kompromatMethodDoesNotJoinEpsteinNetwork = refl",
+        "witnessReportingDoesNotPayIntelligenceCommand = refl",
+    ):
+        assert token in source
+    for phrase in (
+        "### SCL kompromat allegation:",
+        "PDF page 4 (index 3), paragraph 15",
+        "PDF page 5 (index 4), paragraph 19",
+        "one underlying witness/source-origin family",
+        "exact Epstein same-object tasking = UNPAID",
+    ):
+        assert phrase in roadmap
