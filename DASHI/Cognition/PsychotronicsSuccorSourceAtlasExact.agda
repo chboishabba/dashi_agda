@@ -851,6 +851,16 @@ zeroPointGoldeneyeMakerClaim = mkBound
   attributedAuthorReport
   "native reel/SKU, exact winding, field-versus-distance threshold, source current and independent laboratory measurements unpaid"
 
+zeroPointWebsiteLinksOriginalHandle : ClaimBound
+zeroPointWebsiteLinksOriginalHandle = mkBound
+  "The Zero Point Tech manufacturer's own illustrated GoldenEye shop page has an Instagram footer link directly to instagram.com/crystal_pyramids96, the user-screenshot posting handle"
+  zeroPointGoldeneye24PointLive
+  "Footer Instagram social navigation anchor resolved directly to https://www.instagram.com/crystal_pyramids96, 25 October 2026"
+  zeroPointCommercialRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "direct first-party shop-to-handle declared channel link is paid; platform account/session original Instagram reel is throttled and photographed SKU/serial, independent legal ownership and creator-to-product correspondence remain unpaid"
+
 wongPatentStarDesignClaim : ClaimBound
 wongPatentStarDesignClaim = mkBound
   "Wong 2019 published application describes audio-driven star-like copper winding with one 14-point implementation, not identical to marketed 24-point Starship"
@@ -1189,6 +1199,12 @@ zeroPointMakerVersionsAreDistinct = bounded-relation
   "Zero Point Tech indexed Dark Knight 24-point 50-W/sphere variant"
   "Zero Point Tech live GoldenEye 24-point 400-W advertised variant"
   documentaryDistinction zeroPointGoldeneyeMakerClaim false refl false refl
+
+zeroPointSiteExplicitlyLinksAccount : BoundedRelation
+zeroPointSiteExplicitlyLinksAccount = bounded-relation
+  "Zero Point Tech original illustrated product webpage"
+  "Instagram @crystal_pyramids96 original screenshot posting account"
+  contemporarySelfAttribution zeroPointWebsiteLinksOriginalHandle false refl false refl
 
 wongPatentIsNotStarshipInheritance : BoundedRelation
 wongPatentIsNotStarshipInheritance = bounded-relation
