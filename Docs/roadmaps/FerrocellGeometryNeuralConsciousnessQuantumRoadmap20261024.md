@@ -145,3 +145,29 @@ Every receipt record must contain \`repo, branch, full commit SHA, command, envi
 5. emit calibrated external-world receipts without upgrading to mental-state identity or phenomenology.
 
 That first bridge is a direct test of the geometrically mediated **access/function** hypothesis. A positive result narrows the physical mechanism. It does not prove subjective consciousness, just as a Ferrocell optical pattern does not reveal a hidden 5D state.
+
+
+## Additional high-value prior art: literal wave geometry (not another torus analogy)
+
+The earlier inventory understates an existing direct mathematical/empirical contact. \`DASHI/Biology/FiniteTorusVectorWaveGeometryExact.agda\` is **already on master** and explicitly distinguishes planar, radial/source, transverse/rotational and mixed/spiral vector-wave fields on a **finite 3x3 periodic carrier**, with finite-difference divergence/curl signatures. It cites:
+
+- Anup Das, Erfan Zabeh, Bard Ermentrout and Joshua Jacobs, *Planar, spiral, and concentric traveling waves distinguish behavioral states in human memory*, *Nature Communications* **17**, 5143 (11 April 2026), DOI \`10.1038/s41467-026-71386-z\`. The original experiments use human ECoG during memory tasks and describe measured planar, spiral and concentric neural traveling-wave patterns.
+- Lyle Muller, Alexandra N. Busch, Zachary W. Davis and John H. Reynolds, *Neural traveling waves in cortex: Network mechanisms and potential roles in neural computation*, *Neuron* **114**, 3156–3174 (2026), DOI \`10.1016/j.neuron.2026.06.019\`. The latter is a **review**, not independent replication of Das et al. and not the owner of DASHI's finite torus algebra.
+
+The Agda module **does not** identify a 3x3 periodic lattice with human cortical surface topology. A plotted spiral pattern is not a proof of nontrivial toroidal winding of a physical field; a wave's spatial rotation is also not equivalent to a spinning magnet or a 5D consciousness topology. The present opportunity is instead rigorous **source-coordinate discrimination**:
+
+\`\`\`
+measured neural ECoG wave  -> registration/projection -> finite vector-field estimator
+                                     |
+                                     v
+            divergence/curl + plane/radial/rotational/spiral classification
+                                     |
+                                     v
+                     memory-task/consumer prediction under holdouts
+\`\`\`
+
+The active P3→P4 experiment should reuse this owner before adding new geometry; compare its source-specific wave family against connectivity-only baselines, electrode-location shuffled nulls and task/subject held-outs. Distinguish spatial patterns driven by anatomy, stimulation or physiology from patterns introduced by projection. Retain separate notation for **two-dimensional periodic computational carriers**, **actual three-dimensional topology**, and **field-line/toroidal decomposition**.
+
+Additional cross-lane owner: \`Docs/support/reference/RelationRepresentationRealization.md\` and its \`DASHI/Reasoning/RelationRepresentationRealizationExact\` bridge distinguish relation-code success, dynamic adequacy, target-domain realisation and authority. Reuse that contract as a consumer test; geometric-reasoning fit alone cannot establish neuronal mechanism or phenomenal instantiation.
+
+**Changed priority:** *wave-geometry projection against human memory-task recordings*, conditional on source/data rights and access, is an independent P3/P4 candidate; it has a **shorter physical route** than interpreting Ferrocell rings as neural/consciousness toroids. Keep Ferrocell an optical control/analogy, not a source of neuronal evidence.
