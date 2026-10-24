@@ -131,11 +131,12 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- Original-published source instances are counted individually, including
 -- different dated reprints. Common author roots do not become experiments.
--- The older 40-instance regression had become stale after a two-source
--- addition; six further primary-source audit records now bring this to 48.
-sourceAtlasCountIsFortyEight :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 48
-sourceAtlasCountIsFortyEight = refl
+-- 48 primary source atlas instances preceded this user-supplied cloudbusting
+-- literature cut, which adds twelve different original/publication carriers.
+-- Multiple Reddit witnesses and the same 1953 event are NOT independent trials.
+sourceAtlasCountIsSixty :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 60
+sourceAtlasCountIsSixty = refl
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -426,6 +427,80 @@ crofts2003SourceDoesNotEstablishPhysics :
   Attribution.citationImportsProof Atlas.croftPowerWand2003 ≡ false
 crofts2003SourceDoesNotEstablishPhysics =
   Atlas.allSourcesRemainNonPromoting Atlas.croftPowerWand2003
+
+------------------------------------------------------------------------
+-- Exact source-status guards on the three unlike cloudbusting traditions.
+-- These are source-written Agda definitional regression expressions, not
+-- kernel receipts, controlled meteorology or human studies.
+------------------------------------------------------------------------
+
+reichAuthorAlsoRecordsNaturalWeatherFront :
+  Atlas.relationClass Atlas.reichReportHasNaturalWeatherFront ≡
+  Atlas.documentaryDistinction
+reichAuthorAlsoRecordsNaturalWeatherFront = refl
+
+reichReportedRainNotProofOfOrgoneCause :
+  Atlas.newPhysicsEstablished Atlas.reichReportHasNaturalWeatherFront ≡ false
+reichReportedRainNotProofOfOrgoneCause = refl
+
+archivalFindingAidDoesNotPromoteToMeasuredRain :
+  Atlas.historicalTransmissionProved Atlas.reichArchiveCatalogDoesNotProveRain ≡ false
+archivalFindingAidDoesNotPromoteToMeasuredRain = refl
+
+guardianRetellingNotAnotherMaineOperation :
+  Atlas.relationClass Atlas.guardianRetellingNotSecond1953Trial ≡
+  Atlas.documentaryDistinction
+guardianRetellingNotAnotherMaineOperation = refl
+
+modernResinQuartzBucketNotReichWaterPipes :
+  Atlas.relationClass Atlas.guardianModernBucketNotReichSameApparatus ≡
+  Atlas.documentaryDistinction
+modernResinQuartzBucketNotReichWaterPipes = refl
+
+croftChembusterAuthorialRootReused :
+  Atlas.root Atlas.croftModernPipeSelfAttributionClaim ≡
+  Atlas.root Atlas.croftOriginalGuide2003Claim
+croftChembusterAuthorialRootReused = refl
+
+adachiRetailCopyDoesNotVerifyWeatherControl :
+  Atlas.historicalTransmissionProved Atlas.adachiSellerNotIndependentWeatherObservation ≡ false
+adachiRetailCopyDoesNotVerifyWeatherControl = refl
+
+redditMindCloudNotOriginalReichMachine :
+  Atlas.relationClass Atlas.redditMindCloudNotReichPipeMachine ≡
+  Atlas.documentaryDistinction
+redditMindCloudNotOriginalReichMachine = refl
+
+redditBookInfluenceNotMeteorologicalExperiment :
+  Atlas.historicalTransmissionProved Atlas.redditBachReadingNotWeatherProof ≡ false
+redditBookInfluenceNotMeteorologicalExperiment = refl
+
+constableReaderTestimonyNotBookExperimentalReceipt :
+  Atlas.historicalTransmissionProved Atlas.redditConstableReadingNotWeatherProof ≡ false
+constableReaderTestimonyNotBookExperimentalReceipt = refl
+
+sladeMentalClaimNotBrainPhysicsAuthority :
+  Attribution.citationCreatesAuthority Atlas.sladeMindCloud1998 ≡ false
+sladeMentalClaimNotBrainPhysicsAuthority =
+  Atlas.allSourcesRemainNonAuthoritative Atlas.sladeMindCloud1998
+
+bachLiteratureNotSladeInventorship :
+  Atlas.relationClass Atlas.bachAndSladeNotDirectInventionChain ≡
+  Atlas.thematicResemblanceOnly
+bachLiteratureNotSladeInventorship = refl
+
+kateBushLiteraryCreditDoesNotCertifyWeather :
+  Atlas.historicalTransmissionProved Atlas.bushOriginalPeterMemoirAttribution ≡ false
+kateBushLiteraryCreditDoesNotCertifyWeather = refl
+
+wmoContextDoesNotPromoteOriginalReichWeatherCausation :
+  Atlas.historicalTransmissionProved Atlas.wmoStatementCannotProveReichMechanism ≡ false
+wmoContextDoesNotPromoteOriginalReichWeatherCausation = refl
+
+originalWindingGuideSiteNotAnAtmosphericDevice :
+  Atlas.relationClass Atlas.windingGuideDomainNotRainMachineProof ≡
+  Atlas.documentaryDistinction
+originalWindingGuideSiteNotAnAtmosphericDevice = refl
 
 ------------------------------------------------------------------------
 -- HOE_MATH / 5D SPIRITUALITY: NO NUMBER-ID OR ONTOLOGY TRANSFER
