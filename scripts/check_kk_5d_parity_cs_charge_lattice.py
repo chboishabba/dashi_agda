@@ -21,3 +21,10 @@ assert (6//2)==3
 print("PASS elementary q3/triality congruence; power sums n=0..3",power_sums)
 print("PASS necessary conventional half-shift integrality",half_shifts,"adjoint",3)
 print("LIMIT quotient (SU3xU1)/Z3 spin-CS lattice, gravitational/mixed terms, APS eta, light modes, bare integer levels and regulator still OPEN")
+
+# A charged SU3 fundamental contains THREE colour components in a PURE U1 trace.
+# Pure U1-gravity and U1^3 formal parity moments therefore need dim(R)=3:
+assert sum(charges)*3==12 and sum(q**3 for q in charges)*3==84
+assert sum(charges)*3//2==6 and sum(q**3 for q in charges)*3//2==42
+print("PASS colour-weighted U1-gravity and U1-cubic formal half moments",6,42)
+print("DO NOT identify unweighted [4,2,10,14] with four physical CS levels without trace normalization")
