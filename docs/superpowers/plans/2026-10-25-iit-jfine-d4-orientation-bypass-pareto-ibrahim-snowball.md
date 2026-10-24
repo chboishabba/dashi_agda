@@ -79,3 +79,58 @@ Preserve all independent first roots instead of collapsing repeated online table
 For any future snowball claim, record original author/source date, exact mathematical object and group action, carrier/lift, coefficient field, primary class character evidence, independent derived calculation, and proof/runtime status. A named literature result is not kernel acceptance; a new model-coded intertwiner is not the published normalizer; a computed character is not an observed quantum/optical effect.
 
 **Roadmap conclusion:** The apparent original H4 obstruction can indeed be bypassed **without increasing carrier cardinality**, by paying exactly one changed representation line. Both possible minimal rank-one variants have now been investigated. They fail the current Monster phase-involution acceptance test. The Pareto-optimal remaining Monster work is existing source-selected 6.Suz/Hom full action certification, not yet another same-size geometric model.
+
+
+## 25 October: stronger multiplier-A2 bypass matching the necessary Monster C4 fingerprint
+
+**Important dated supersession of earlier stopping rule:** The two *one-line B1/B2* refinements above are exact but Monster-incompatible. They do **not** exhaust all finite-action bypasses. A new, slightly larger **operator edit with zero additional trits** achieves a correct *necessary phase-preserving C4 fingerprint*. This does NOT contradict the one-line negative controls: we are now changing the E representation and the Heisenberg centre multiplier.
+
+The original source-relative character is `2A1+B1+B2+2E`. Modify the centre orientation, one trivial line and one E doublet:
+
+```
+2A1 + B1 + B2 + 2E
+        |
+        |  one A1 -> A2  (mirror sign on one invariant line)
+        |  one E  -> B1+B2  (quarter-turn on this pair Q -> -I2)
+        v
+A1 + A2 + 2B1 + 2B2 + E
+```
+
+In original source character coordinates `(tE,tC,bE,bC,XE,YE,XC,YC)`, change the *mirror* sign on tC (operator delta rank1) and the *quarter-turn* on the corner E pair to `-I2` (operator delta rank2). The new centre character is `χ=A2`: rotations preserve the central C3, reflections invert it and therefore **exchange ζ and ζ² sectors**. The new eight-dimensional symplectic form uses four hyperbolic pairs
+
+```
+(tE,tC), (bE,bC), (XC,YC), (XE,YE)
+```
+
+and obeys `RᵀΩR=Ω`, `MᵀΩM=-Ω`, with rankΩ=8. The **old** original site-D4 action is NOT preserved. The normalised Heisenberg centre `t=c+a·b` supports the exact GSp lift `(v,t)↦(gv,χ(g)t)`; translating back to the original existing H6 cocycle gives a quadratic central coboundary. Crucially, the chosen action has genuine D4 group laws, not merely matching dimensions.
+
+The source-typed model is `DASHI/Biology/IITJFineD4OrientedC4HeisenbergSteelmanExact.agda` importing the pre-existing `IITJFineD4OrientationLineH4BypassExact.OrientedEight` and prior `Monster3BFiniteHeisenbergCentralExtensionExact`. The standard-library-only executable is `scripts/iit_jfine_d4_oriented_c4_monster_necessary_bridge.py` integrated with the IIT numeric verifier. An independent current-turn local Python implementation `/mnt/data/d4_monster_c4_orientation_lift.py` ran 354294 exact Heisenberg generator law checks and 59049 D4 presentation relation checks; all passed. **No Agda kernel/typecheck, exact committed GitHub script replay, or actual Monster subgroup operation is asserted.**
+
+### Phase-preserving C4 character: strongest same-size candidate
+
+The original pointed marker is allowed to move under site D4; its quarter and half turns each fix exactly TWO marker choices (centre and unmarked). Under the NEW quotient representation:
+
+```
+fixed shell dimension r   = 2  => χζ(r)  = 2·3² = 18
+fixed shell dimension r²  = 6  => χζ(r²) = 2·3⁶ = 1458
+identity                 = 10·3⁸       = 65610
+```
+
+Thus the selected `ζ` eigenspace restricted to the *phase-preserving rotations C4* has **necessary** class character `[65610,18,1458,18]`, identical to the C4 restriction of the candidate `[65610,1458,18,1458,1458]` in #1250 (D4 class order differs). Its complex C4 eigenspace multiplicities are
+
+```
++1:16776,  -1:16758,  +i:16038,  -i:16038
+```
+
+All four are nonnegative integers, totaling 65610. An actual Monster selected-ζ representation could therefore be **compatible at this C4 character screen**, even though the previous one-line candidates are definitively excluded. The phase-inverting mirror has NO ordinary character on the individual ζ eigenspace: it maps ζ to ζ², so comparing its purported ζ trace against phase-preserving involution values `{66,90,1458}` would be a wrong-type calculation.
+
+This is the **maximal honest promotion**: *the finite H4 source-carrier model shares a necessary C4 character with one source-compatible Monster phase pattern*. A corresponding subgroup in the **actual** N(3B), its class fusion, induced involution on ζ⊕ζ², the 6.Suz full multiplicity, and the Hom-cocycle/source action remain UNPROVED. No source-derived element word or full C4→D4 normalizer embedding has been supplied. Original Wilson/Barraclough character theory is NOT reauthored by this model.
+
+### Revised Pareto and stop rules
+
+1. **Actual 6.Suz full-character selected 78-family matcher** and quotient descent on #1250 remains the top payoff. Its output, faithful/nonfaithful C2 branch and 12+78 isotypic/Hom action have greater authority than any finite new D4 coordinate model.
+2. **Actual phase-preserving C4 plus phase-inverting mirror in N(3B)** is now a focused actionable conditional target for the C4 steelman. Required source discriminator: element words/class fusion with `r²` in Monster 2A and `zr²` in 6D; (r) in 4B and (zr) in 12G as selected by #1250. Mirror must conjugate z to z⁻¹ and satisfy `mrm=r⁻¹` in the same selected normalizer. If this fails, the C4 steelman is excluded independently of its finite group laws.
+3. **Agda actual Gauge→character T and explicit GSp/H4 finite laws**: source-written structural proof target. Do not claim CI/kernel success. Reuse existing finite-H6 and oriented-sector owners, not duplicate group axiom theory.
+4. Ibrahim five-orbit and OEIS class42d echoes remain separate lower-leverage source acquisition. No group element/class data from a five-point quotient may be silently imported into eight-dimensional GSp modules.
+
+**Updated inference boundary:** The initial rank-one B1/B2 models are negative Monster controls. The multiplier-A2 model is a **positive necessary C4 screen**. Neither is the actual Monster 3B representation, and no speculative physical, quantum, neural or phenomenal result is promoted.
