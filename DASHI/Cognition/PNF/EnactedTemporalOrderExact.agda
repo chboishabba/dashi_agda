@@ -143,9 +143,9 @@ allPremisesSufficeWithinTheStipulation = refl
 
 _earlier?_ : Nat → Nat → Bool
 zero earlier? zero = false
-zero earlier? suc n = true
-suc m earlier? zero = false
-suc m earlier? suc n = m earlier? n
+zero earlier? (suc n) = true
+(suc m) earlier? zero = false
+(suc m) earlier? (suc n) = m earlier? n
 
 sourceC : Nat
 sourceC = 0
