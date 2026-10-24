@@ -57,7 +57,7 @@ continuation A3: spatial-temporal L2 remains supercritical under
 concentration. Existing physical same-object and Bishop source
 owners are unchanged.
 
-**Local receipt:** standalone matching Python scripts: 16 passed,
+**Local receipt:** standalone matching Python scripts: 15 passed (one local duplicate deselected),
 including 6 physical complex-field checks, 5 source-classifier/curl
 checks, 3 causal heat checks, 2 prior coarea checks. Exact-GitHub-head
 pytest and Lean/Agda kernel not performed, so do not mark source
