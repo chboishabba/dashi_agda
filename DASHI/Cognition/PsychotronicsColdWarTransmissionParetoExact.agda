@@ -248,6 +248,17 @@ pavlitova1975MonteCarlo = Source.mkNoDOISource
   "the daughter authored an independent paper and hypothesis; shared family/apparatus is not independent corroboration, and claimed polarity is not a calibrated ferromagnetic field"
   Source.publicAttribution
 
+naumovVilenskaya1971OriginalBib : Source.AttributedSource
+naumovVilenskaya1971OriginalBib = Source.mkNoDOISource
+  "E. K. Naumov and L. V. Vilenskaya (original Soviet compilers; do not credit US translator as original research author)"
+  "Bibliographies on Parapsychology (Psychoenergetics) and Related Subjects"
+  "original bibliography compiled Moscow 1971; JPRS 55557, dated 28 March 1972, original translated scan of 109 PDF pages, declassified document C00015462; source content and compilers introduction inspected at PDF indices 4,7,8"
+  "1971 compiled; 1972 translated"
+  "https://documents2.theblackvault.com/documents/cia/ufos/C05516145.pdf"
+  (Source.namedSourceKind "primary author-generated scholarly bibliography / US JPRS translated source carrier")
+  "original investigator literature catalogue and citation/referral root; its existence and later reuse show historical source discovery and publication circulation, not credibility or successful replication of listed parapsychological experiments"
+  Source.publicAttribution
+
 historicalDocuments : List Source.AttributedSource
 historicalDocuments =
   wimmer1940 ∷ sievers1940 ∷ ostranderSchroeder1970 ∷
@@ -258,9 +269,10 @@ historicalDocuments =
   canner2021 ∷ mills2009 ∷ tressoldiStorm2024 ∷
   kitaygorodsky1974OriginalReprint ∷
   airForceWarsawPact1978Amended1980 ∷
-  pavlita1975MonteCarlo ∷ pavlitova1975MonteCarlo ∷ []
+  pavlita1975MonteCarlo ∷ pavlitova1975MonteCarlo ∷
+  naumovVilenskaya1971OriginalBib ∷ []
 
-historicalDocumentsCount : Source.sourceCount historicalDocuments ≡ 20
+historicalDocumentsCount : Source.sourceCount historicalDocuments ≡ 21
 historicalDocumentsCount = refl
 
 ------------------------------------------------------------------------
@@ -378,6 +390,21 @@ amendedUSReportStaticHypothesis = Investigation.investigative-claim-receipt
   Investigation.supportsBoundedClaim
   true false false
 
+naumovBibliographyToUSAirForce : Investigation.InvestigativeClaimReceipt
+naumovBibliographyToUSAirForce = Investigation.investigative-claim-receipt
+  "Named Naumov/Vilenskaya Soviet bibliography was explicitly used as starting source for US Air Force Warsaw Pact psychotronics literature search"
+  "DST-1810S-202-78, original 30 March 1978 appendix printed p.122 (PDF index 129), identifying Soviet original bibliography and JPRS 55557 28 March 1972 in footnote"
+  "U.S. Air Force Foreign Technology Division report, methodological appendix explicitly naming original compilers"
+  "https://rviewer.com/wp-content/uploads/2022/01/PARAPHYSICS_RD-WARSAW_PACT.pdf"
+  Investigation.primaryCarrier
+  Investigation.inspectedAndClaimLocated
+  "Original 1978 unamended appendix reports snowball method: start with named bibliography, request interesting first originals, seek other same-author papers, then expand through references. It states only about 30 percent of known documents had reached full review. This is direct DOCUMENT CITATION/RESEARCH-METHOD TRANSMISSION, NOT replicated physical results."
+  Investigation.commonSourceDependent
+  "original 1971 Soviet compilers Naumov/Vilenskaya retained; US JPRS translation 1972 is separate carrier, not an independently compiled experiment"
+  "Compare individual claims with listed originals: a bibliography was used by US analysts, but we do not know which Pavlita text was directly inspected from that first bibliography"
+  Investigation.supportsBoundedClaim
+  true false false
+
 ------------------------------------------------------------------------
 -- Directed transmission edges. Wording reflects the exact consumer:
 -- correspondence / citation / request / independent mechanism control.
@@ -416,6 +443,14 @@ wimmerToSievers = historical-edge
   "Ursinus /dowsing/13/ Sievers letter description and German transcription, 20 Nov 1940, identifies the Wimmer review of seized dowsing literature"
   "The Ahnenerbe/SD administrative correspondence routed a named assessment; shared Nazi institutional activity, NOT paranormal success"
   "Obtain dated dispatch/receipt for particular paper versions if reconstructing exact correspondence movement"
+  false false false refl refl refl
+
+sovietBibliographyCitedByUSResearch : BoundedHistoricalEdge
+sovietBibliographyCitedByUSResearch = historical-edge
+  naumovVilenskaya1971OriginalBib airForceWarsawPact1978Amended1980 directCitation
+  "US Air Force original 1978 methodological appendix printed p.122 / PDF index129 explicitly names Naumov/Vilenskaya as its seed bibliography, footnote JPRS 55557 28 March 1972"
+  "Bibliographic / research-workflow transfer, not military adoption of a valid paraphysical effect; original Russian author-root vs US translation preserved"
+  "Verify item-by-item which downstream paragraphs came from which listed Soviet original experiments rather than from secondary accounts"
   false false false refl refl refl
 
 publicBookCitedByMilitaryReport : BoundedHistoricalEdge
