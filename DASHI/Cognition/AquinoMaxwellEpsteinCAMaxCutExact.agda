@@ -2049,3 +2049,57 @@ unverifiedOCDETFOutcomeIsNotSuppression = refl
 two2015RecordsDoNotCreateNDAJoin :
   separateBlack2015NDAAutomaticallyConnected canonicalFinanceInvestigationJoinBoundary ≡ false
 two2015RecordsDoNotCreateNDAJoin = refl
+
+
+------------------------------------------------------------------------
+-- FTC NOVEMBER 2019 FINAL ORDER / LAWFUL CUSTODY CROSS-POLLINATION
+-- The order's existence and legal requirements are source-backed; whether
+-- a particular sworn compliance response was furnished or all data
+-- actually destroyed is NOT established by inspecting the order itself.
+------------------------------------------------------------------------
+
+record FTCDataCustodyOrderBoundary : Set where
+  constructor ftc-data-custody-order-boundary
+  field
+    actualFTCOrderOriginalPageInspected : Bool
+    recipientDisclosureSwornStatementRequired : Bool
+    derivedDataAndWorkProductDeletionRequired : Bool
+    completionAffidavitRequired : Bool
+    regulatoryPreservationExceptionExplicit : Bool
+    complianceStatementPersonallyInspectedHere : Bool
+    dataDeletionCompletedAndIndependentlyVerified : Bool
+    specifiedDownstreamRiponDatasetNamedByOrder : Bool
+    orderProvesUnlawfulRetentionByAThirdParty : Bool
+    lawfulRedactedComplianceMetadataAcquisitionAdmissible : Bool
+open FTCDataCustodyOrderBoundary public
+
+canonicalFTCDataCustodyOrderBoundary : FTCDataCustodyOrderBoundary
+canonicalFTCDataCustodyOrderBoundary = ftc-data-custody-order-boundary
+  true true true true true false false false false true
+
+ftcCustodyOrderOfficiallyLocated :
+  actualFTCOrderOriginalPageInspected canonicalFTCDataCustodyOrderBoundary ≡ true
+ftcCustodyOrderOfficiallyLocated = refl
+
+ftcRequiredDeletionNotProvedCompleted :
+  dataDeletionCompletedAndIndependentlyVerified canonicalFTCDataCustodyOrderBoundary ≡ false
+ftcRequiredDeletionNotProvedCompleted = refl
+
+ftcOrderDoesNotIdentifyRiponRows :
+  specifiedDownstreamRiponDatasetNamedByOrder canonicalFTCDataCustodyOrderBoundary ≡ false
+ftcOrderDoesNotIdentifyRiponRows = refl
+
+ftcOrderDoesNotConvictThirdPartyPossessor :
+  orderProvesUnlawfulRetentionByAThirdParty canonicalFTCDataCustodyOrderBoundary ≡ false
+ftcOrderDoesNotConvictThirdPartyPossessor = refl
+
+ftcRedactedComplianceRouteAccepted :
+  lawfulRedactedComplianceMetadataAcquisitionAdmissible canonicalFTCDataCustodyOrderBoundary ≡ true
+ftcRedactedComplianceRouteAccepted = refl
+
+ftc2019OriginalOrderSource : Acquisition.SourceAcquisitionTarget
+ftc2019OriginalOrderSource = Acquisition.sourceAcquisitionTarget
+  "FTC Cambridge Analytica Docket 9383 Final Order issued November 25 2019"
+  "Order IV.A-C and V-VI, printed pp3-4; original PDF source page4 visually inspected"
+  Acquisition.directDigitalArchive Acquisition.nationalCatalogue
+  true true true
