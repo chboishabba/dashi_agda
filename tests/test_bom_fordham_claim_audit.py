@@ -399,3 +399,28 @@ def test_claim_root_ledger_documentation_uses_only_case_bounded_counts():
     assert "NOT a representative crawl" in docs
     assert "originator" in docs.lower()
     assert "actual transfer not established" in docs.lower()
+
+
+def test_directed_release_and_original_claim_amplification_are_not_collapsed():
+    media = POLITICAL_OWNER.read_text()
+    checks = POLITICAL_VALIDATION.read_text()
+    for original, kind in (
+        ("leyAimsTargetedMediaPreview", "timedTargetedInformationRelease"),
+        ("riddIndependentReefOpinion", "originalOpinionProduction"),
+        ("mooreAmplifiedRiddReefClaim", "traceableClaimAmplification"),
+        ("acmaReefOutsidersFinding", "enforcementFinding"),
+    ):
+        assert media.count(original + " : RelationshipReceipt") == 1
+        assert kind in media
+
+    for token in (
+        "reefReleaseIsTimedMediaAccess",
+        "riddOpinionNotAimsMeasurement",
+        "mooreRepostNotIndependentMeasurement",
+        "reefRegulatoryFindingIsSpecific",
+        "reefReleaseNotMinistryEditorialControl",
+        "riddDistributionNotCoordinatedCommand",
+    ):
+        assert token in checks
+    assert "BI-645, BI-646, BI-647" in media
+    assert "not proof" in media.lower()
