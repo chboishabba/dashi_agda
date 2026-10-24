@@ -100,6 +100,9 @@ def replay_si_csv(stream_bytes, raw, cal):
         um = _nonnegative(moment.get('moment_std_am2'), 'moment std')
         if m == 0 or (1 if m > 0 else -1) != sign:
             raise ValueError('moment polarity contradicts calibrated moment')
+        physical_magnet = moment.get('shared_magnitude_id')
+        if not isinstance(physical_magnet, str) or not physical_magnet.strip():
+            raise ValueError('physical shared-magnitude calibration ID required')
         force = _finite(row['force_n'], 'force')
         grad = _finite(row['gradient_t_m'], 'gradient')
         bin_sign = (1 if coil > 0 else -1) if condition == 'active' else 0
@@ -111,7 +114,8 @@ def replay_si_csv(stream_bytes, raw, cal):
         by_condition = pairs.setdefault(key, {})
         if condition in by_condition:
             raise ValueError('duplicate pair condition')
-        by_condition[condition] = (timestamp, force, grad, group, m, um, sign)
+        by_condition[condition] = (timestamp, force, grad, group, m, um, sign,
+                                   physical_magnet)
     if not rows:
         raise ValueError('empty sensor stream')
     output = []
@@ -122,7 +126,8 @@ def replay_si_csv(stream_bytes, raw, cal):
         if abs(a[0] - s[0]) > gap or a[3:] != s[3:]:
             raise ValueError('pair time or calibration identity mismatch')
         output.append({'pair_id':pid, 'session_id':sid,
-                       'moment_calibration_id':a[3], 'moment_am2':a[4],
+                       'moment_calibration_id':a[3],
+                       'moment_covariance_group_id':a[7], 'moment_am2':a[4],
                        'moment_std_am2':a[5],
                        'common_systematic_std_n':systematic,
                        'active':{'force_n':a[1], 'force_std_n':force_std,
