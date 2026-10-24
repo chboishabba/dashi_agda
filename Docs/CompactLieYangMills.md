@@ -166,3 +166,112 @@ These modules prove the logical bridges and keep the analytic antecedents explic
 12. `BalabanDashenGrossCalibration.agda` makes the generator, lattice-spacing, determinant, and coupling-scheme normalization factors explicit and proves the final convention map from their calibrated product.
 - one-step fluctuation, determinant, Ward, localization, and polymer estimates;
 - reflection-positive compatibility of the concrete multiscale blocking and effective measures.
+
+## 2026-10-24 Horned-C3 / PMNS cross-pollination: reuse the actual Lie stack
+
+**Source roles / dated prior art:** Hatcher, *Algebraic Topology*
+Example 2B.2, owns the injective free-group commutator tower for the
+Alexander horned exterior. Morikuni Gotô, *A Theorem on compact
+semi-simple groups*, JMSJ **1** (1949) 270–272,
+DOI https://doi.org/10.2969/jmsj/00130270, owns global
+**GROUP-commutator** surjectivity on compact connected semisimple
+Lie groups including SU(3). The distinct **LIE ALGEBRA** bracket
+surjectivity theorem is not a substitute; see Malkoun and Nahlus
+(2017), DOI https://doi.org/10.5802/jolt.980.
+The specific `T S1` CP-odd leptonic toy belongs to
+sibling neutrino PR #1247, not to an established QCD prediction.
+
+Original DASHI owners *already implemented*:
+
+- `CompactLieGroupCore.Group` and
+  `CompactLieGroupDerived`:
+  group multiplication, inverse, cancellation, conjugation and
+  conjugate-product transport.
+- `SUNMatrixCarrier`: typed `SUNMatrixElement`, determinants,
+  dagger inverse and certified matrix-group assembly.
+- `SU3MatrixInstance`: specialization to N=3, `dim su3=8`,
+  reuse `su3MatrixGroup`, not a new three-label group.
+- `SUNMatrixLieAlgebra` and `SUNMatrixLieGroup`:
+  exact Lie-bracket and adjoint-assembly surface.
+- `CompactLieAnalyticPackage` and `CompactLieStandardAuthority`:
+  topology, logarithm/exponential, BCH, Haar/Peter–Weyl and
+  quantitative bounds are expressly **standard-imported**
+  authorities, not locally independently proven by their record
+  declarations.
+- `QutritMatrixGates.Matrix3`: an already existing nine-cell
+  record carrier that may help eliminate function-extensionality
+  if choosing a record-backed concrete scalar-matrix instance.
+  It is NOT automatically a complete certified SU3 instance.
+
+New horn **PR #1244** code:
+
+`DASHI/Physics/YangMills/CompactLieInnerC3Exact.agda`
+derives `inverse(a b)=inverse(b) inverse(a)`,
+`conjugate(a,conjugate(b,x))=conjugate(a b,x)` and
+`T³=I => Ad_T³=id` directly from the pre-existing
+`Group` axioms. No Lie-analytic hypotheses are needed.
+`DASHI/Mathematics/Topology/AlexanderHornedC3SUNLieGroupReuseExact.agda`
+derives inversion and group-commutator equivariance from the
+original `CompactLieGroupDerived` lemmas and passes
+the **literal existing** `SU3.su3MatrixGroup` subtype
+into `AlexanderHornedC3CompactCommutatorRepresentationExact`.
+The only mathematical external input for recursive refinement
+is a *single-commutator section* (Gotô 1949) and selected
+`T³=I`, not separate unsupported group laws.
+
+The SU3 entry is a conditional bridge using
+`CertifiedSUNMatrixTheory` and `GotôGroupSection`.
+This does not instantiate the original matrix record's
+universal complex 3x3 laws, nor formalize analytic
+connectedness/semisimplicity or the global Gotô theorem
+in Agda. No `postulate` was added and NO kernel
+typecheck receipt is claimed here.
+
+New lepton **PR #1247** source:
+`NeutrinoExistingSUN3CarrierWeldExact.agda`.
+It imports the SAME `SUNMatrixCarrier`, not
+a shadow SU3. Given concrete 3x3 Q(ζ3) matrix
+operations, their compatibility and a finite-matrix
+function-extensionality law, it DERIVES
+`IsSpecialUnitary(TS1)`, `IsSpecialUnitary(T)`
+and the group-level `T³=I` from exact source-specific
+9+9+9+9+9 cyclotomic matrix equalities. The
+source-level exact proofs use the earlier
+`NeutrinoHornedSU3RootExact` owner, and a separate
+independent Python Fraction check verified 45 entries.
+
+The unfilled minimal matrix weld requires:
+
+1. A concrete certified `SUNMatrixTheory 3` for
+   `Flavour→Flavour→Q(ζ3)` (or a matching
+   nine-cell record instance) whose group operations
+   agree with the lepton source's product, dagger,
+   determinant, identity and scalar unit.
+2. A pointwise-to-whole-matrix equality principle
+   (or a nine-cell record equality lemma), explicitly
+   discharging Agda function extensionality.
+3. Separate analytically valid `SU(3)` topology
+   and Gotô *global* commutator-section authority.
+4. A group direct-limit universal-property object
+   and the three-copy geometric π₁ bridge if desired.
+5. A physical weak-current/lepton/Yukawa and
+   experimental likelihood discriminator. Using the
+   *same abstract SU3 Group* as a mathematical carrier
+   does **not** identify a lepton flavour SU3 with
+   the physical colour SU3 gauge symmetry.
+
+**Independent exact finite adversary:**
+A5 has 60 elements and the existing finite
+commutator section covers all 60/60; a local
+finite-permutation audit checked 7,200
+conjugation product/commutator identities
+and five levels of the corrected order-five
+horn root with C3 inner rotation.
+This tests generic group algebra, not SU3
+surjectivity or physics.
+
+Kernel status: new Agda sources SOURCE-WRITTEN;
+exact-head Agda suite and committed Python tests
+not run. The existing compact-Lie source's
+historic `machineChecked` proof-level tags do
+not constitute a new compiler run on these PRs.
