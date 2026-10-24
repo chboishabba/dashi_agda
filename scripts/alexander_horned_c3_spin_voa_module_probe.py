@@ -82,6 +82,6 @@ def check():
  print('PASS 18 actor samples x 180 slots: module covariance with pointwise vertex modes')
  print('PASS 18x18 full semidirect group-law samples x 180 slots')
  print('PASS C3 spin lift third power +1, path lift third power -1')
- print('Module rank: 360 complex components (NOT the 360-site scalar spin-cover VOA)')
+ print('Module dimension 720 over Q; 360 over Q(i) with RIGHT i structure (NOT the 360-site scalar spin-cover VOA)')
  print('NOT proven: literal Agda module instance, Moonshine/Monster correspondence, wild E geometry')
 if __name__=='__main__':check()
