@@ -68,6 +68,16 @@
       "url": "https://arxiv.org/abs/2510.25976",
       "lineage_root": "brainit2026",
       "authority": "viewed-stimulus decoding, not DMT subjective experiences"
+    },
+    {
+      "id": "pnas_static_script",
+      "kind": "primary_analysis_code",
+      "author": "Christopher Timmermann (script header, 2022)",
+      "title": "StaticGFC.m: ROI/global functional connectivity analysis script",
+      "url": "https://github.com/timmer500/DMT_Imaging/blob/b35701d88d904e2f602164ff2eae0fc879772078/Scripts/StaticGFC.m",
+      "git_blob_sha1": "f87d99f448848c3b0531fea0780ee241ebd77549",
+      "lineage_root": "pnas2023",
+      "authority": "Original source code lists all 20 pseudonymous source IDs and author-side preprocessing paths; NOT the four excluded IDs or a verified manuscript-matched execution"
     }
   ],
   "source_dependencies": [
@@ -90,6 +100,11 @@
       "from": "sanders2026",
       "to": "pnas2023",
       "type": "possible_shared_investigators_subject_overlap_unverified"
+    },
+    {
+      "from": "pnas_static_script",
+      "to": "pnas2023",
+      "type": "original_analysis_code_same_study"
     }
   ],
   "artifacts": [
@@ -193,6 +208,53 @@
       "kind": "protocol",
       "source": "pnas2023",
       "scope": "new ethics-approved protocol required, not part of 2023 imaging study"
+    },
+    {
+      "id": "source_subject_namespace",
+      "status": "present",
+      "kind": "analysis_code_coordinate",
+      "source": "pnas_static_script",
+      "locator": "https://github.com/timmer500/DMT_Imaging/blob/b35701d88d904e2f602164ff2eae0fc879772078/Scripts/StaticGFC.m#L6-L8",
+      "scope": "20 hard-coded pseudonymous subjects in upstream StaticGFC source, not eligibility or QC thresholds",
+      "subject_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S22",
+        "S23",
+        "S25"
+      ],
+      "git_blob_sha1": "f87d99f448848c3b0531fea0780ee241ebd77549"
+    },
+    {
+      "id": "source_static_analysis_code",
+      "status": "present",
+      "kind": "analysis_code",
+      "source": "pnas_static_script",
+      "locator": "https://github.com/timmer500/DMT_Imaging/blob/b35701d88d904e2f602164ff2eae0fc879772078/Scripts/StaticGFC.m",
+      "scope": "Archived MATLAB analysis source explicitly references author-local NIfTI/atlas directories; no exact same-object replay or 16-person exclusion execution"
+    },
+    {
+      "id": "dynamic_tapered_window_in_pinned_tree",
+      "status": "knownAbsent",
+      "kind": "source_code_dependency",
+      "source": "pnas_gitrepo",
+      "scope": "A standalone implementation of tapered_sliding_window used by Scripts/dRSFC.m is NOT in the recursively inspected b35701d source Git tree. May exist outside this repository; do not infer global nonexistence.",
+      "negative_search_receipt": "Pinned DMTImagingPinnedSourceTree20261024.json enumerates 56 files; no path/base name tapered_sliding_window; Scripts/dRSFC.m calls this function"
     }
   ],
   "claims": [
@@ -285,6 +347,33 @@
       "requires": [
         "concealed_target_protocol"
       ]
+    },
+    {
+      "id": "c_verified_source_namespace",
+      "consumer": "Source-code-listed 20 pseudonymous IDs coincide exactly with 20 paired DMT/placebo Git MAT prefixes",
+      "grade": "source_metadata",
+      "requires": [
+        "source_subject_namespace",
+        "git_tree"
+      ]
+    },
+    {
+      "id": "c_original_static_code_located",
+      "consumer": "Original author-side static GFC source program is publicly versioned, not execution-equivalent to reported main result",
+      "grade": "source_metadata",
+      "requires": [
+        "source_static_analysis_code"
+      ]
+    },
+    {
+      "id": "c_dynamic_replay_from_tree_alone",
+      "consumer": "Self-contained dynamic source replay from pinned repository alone",
+      "grade": "empirical",
+      "requires": [
+        "source_local_bytes",
+        "original_preproc",
+        "dynamic_tapered_window_in_pinned_tree"
+      ]
     }
   ],
   "actions": [
@@ -293,7 +382,9 @@
       "kind": "institutional_source_recovery",
       "needs": [
         "primary_paper",
-        "git_tree"
+        "git_tree",
+        "source_subject_namespace",
+        "source_static_analysis_code"
       ],
       "targets": [
         "original_static_fd",
@@ -668,13 +759,37 @@
     "original_joint_n": 12,
     "readme_unspecified_n": 15,
     "sanders_interviews": 23,
-    "sanders_phase_matrices": 21
+    "sanders_phase_matrices": 21,
+    "original_source_script_pseudonyms": [
+      "S01",
+      "S02",
+      "S03",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S19",
+      "S22",
+      "S23",
+      "S25"
+    ],
+    "distinct_lineage_roots": 3
   },
   "safety": {
     "send_email": false,
     "publish_participant_files": false,
     "assume_licence": false,
     "autopromote_ontology": false,
-    "source_metadata_not_measured_replay": true
+    "source_metadata_not_measured_replay": true,
+    "no_source_absence_globalisation": true
   }
 }
