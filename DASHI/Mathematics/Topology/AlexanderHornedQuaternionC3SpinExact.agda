@@ -34,6 +34,7 @@ import DASHI.Physics.YangMills.BalabanP33RationalQuaternionCoreExact as Q
 import DASHI.Mathematics.Topology.AlexanderHornedC3AmbientRotationExact as Ambient
 import DASHI.Mathematics.Algebra.CayleyDicksonRationalComplexQuaternionExact as CD
 import DASHI.Mathematics.Topology.QuaternionHopfUnitOrbitExact as Hopf
+import DASHI.Algebra.FiniteQuaternionDoubleCover as Q8
 
 rotor : Q.RationalQuaternion
 rotor = Q.quat ½ ½ ½ ½
@@ -134,3 +135,66 @@ selectedRotorPreservesExistingHopfScalar :
     ≡ Hopf.pairHopfScalar pair
 selectedRotorPreservesExistingHopfScalar pair =
   Hopf.hopfScalarRightUnitInvariant pair rotor rotorHasUnitNorm
+
+------------------------------------------------------------------------
+-- An explicit same-carrier bridge to the existing FINITE quaternion
+-- double-cover owner Q8 -> V4.  Our rotor belongs to the larger
+-- Hurwitz/binary-tetrahedral group, not to Q8 itself; conjugation by
+-- it normalizes Q8 and cyclically permutes i,j,k.  Q8 alone cannot
+-- contain this 120-degree rotor.  This distinction is essential.
+------------------------------------------------------------------------
+
+basisAsQuaternion : Q8.QuaternionBasis → Q.RationalQuaternion
+basisAsQuaternion Q8.basisOne = Q.oneQ
+basisAsQuaternion Q8.basisI = Q.quat 0ℚ 1ℚ 0ℚ 0ℚ
+basisAsQuaternion Q8.basisJ = Q.quat 0ℚ 0ℚ 1ℚ 0ℚ
+basisAsQuaternion Q8.basisK = Q.quat 0ℚ 0ℚ 0ℚ 1ℚ
+
+cycleQuaternionBasis : Q8.QuaternionBasis → Q8.QuaternionBasis
+cycleQuaternionBasis Q8.basisOne = Q8.basisOne
+cycleQuaternionBasis Q8.basisI = Q8.basisJ
+cycleQuaternionBasis Q8.basisJ = Q8.basisK
+cycleQuaternionBasis Q8.basisK = Q8.basisI
+
+rotorConjugatesActualQ8Basis :
+  (b : Q8.QuaternionBasis) →
+  Q._*q_ (Q._*q_ rotor (basisAsQuaternion b)) rotorInverse
+    ≡ basisAsQuaternion (cycleQuaternionBasis b)
+rotorConjugatesActualQ8Basis Q8.basisOne =
+  Q.quaternionExt
+    ℚRing.solve-∀ ℚRing.solve-∀ ℚRing.solve-∀ ℚRing.solve-∀
+rotorConjugatesActualQ8Basis Q8.basisI =
+  Q.quaternionExt
+    ℚRing.solve-∀ ℚRing.solve-∀ ℚRing.solve-∀ ℚRing.solve-∀
+rotorConjugatesActualQ8Basis Q8.basisJ =
+  Q.quaternionExt
+    ℚRing.solve-∀ ℚRing.solve-∀ ℚRing.solve-∀ ℚRing.solve-∀
+rotorConjugatesActualQ8Basis Q8.basisK =
+  Q.quaternionExt
+    ℚRing.solve-∀ ℚRing.solve-∀ ℚRing.solve-∀ ℚRing.solve-∀
+
+cycleV4 : Q8.V4Rotation → Q8.V4Rotation
+cycleV4 Q8.identityRotation = Q8.identityRotation
+cycleV4 Q8.halfTurnX = Q8.halfTurnY
+cycleV4 Q8.halfTurnY = Q8.halfTurnZ
+cycleV4 Q8.halfTurnZ = Q8.halfTurnX
+
+cycleBasisDescendsToExistingV4Rotation :
+  (b : Q8.QuaternionBasis) →
+  Q8.basisRotation (cycleQuaternionBasis b)
+    ≡ cycleV4 (Q8.basisRotation b)
+cycleBasisDescendsToExistingV4Rotation Q8.basisOne = refl
+cycleBasisDescendsToExistingV4Rotation Q8.basisI = refl
+cycleBasisDescendsToExistingV4Rotation Q8.basisJ = refl
+cycleBasisDescendsToExistingV4Rotation Q8.basisK = refl
+
+cycleV4Cubed : ∀ x →
+  cycleV4 (cycleV4 (cycleV4 x)) ≡ x
+cycleV4Cubed Q8.identityRotation = refl
+cycleV4Cubed Q8.halfTurnX = refl
+cycleV4Cubed Q8.halfTurnY = refl
+cycleV4Cubed Q8.halfTurnZ = refl
+
+-- To identify this tetrahedral C3 with the *particular* A5
+-- 3-cycle used in a 180-coordinate VOA, one still needs the
+-- explicit A4 -> A5 permutation embedding and axis transport.
