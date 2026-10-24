@@ -52,7 +52,6 @@ anyDual := ForAny(matches,r -> r.exactDualSym2);
 if not anySym and not anyDual then
   Print("Source-level finding: 78 is neither Sym² nor dual Sym² of faithful 12.\n");
 fi;
-B := x -> (if x then return "true"; else return "false"; fi; end);
 # GAP syntax-safe standalone boolean emitter.
 BoolText := function(b)
   if b then return "true"; else return "false"; fi;
