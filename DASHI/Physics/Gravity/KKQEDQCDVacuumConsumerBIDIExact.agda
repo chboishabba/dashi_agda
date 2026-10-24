@@ -183,3 +183,69 @@ repairMustTrackWilsonHessian :
 repairMustTrackWilsonHessian refine adequate same =
   Repair.refinementRepairSeparatesWitness
     radionPassCannotDetermineWilsonPass adequate same
+
+
+------------------------------------------------------------------------
+-- LATER global holonomy cut: local Hessian ≠ chosen Wilson global min.
+-- These truth labels are SELECTED PYTHON CONSUMER TEST outcomes, not
+-- Agda proofs of a continuum one-loop determinant.
+--
+-- The paired six-flavour QCD multiplet has positive radion and local
+-- EM/SU3 Wilson Hessians but a strictly LOWER SU3 centre phase;
+-- adding TWO split heavy vectorlike colour fundamental hyper-like
+-- multiplets (for 8 total fundamental Dirac flavours) repairs the
+-- fixed-radius theta_EM=0 global colour phase in a Fourier tail proof.
+--
+-- Original SUSY field-content authority is EXTERNAL; the local
+-- WittenIndexSUSYBoundarySurface remains targets-only, and neither
+-- these arithmetic identities nor finite witnesses claim supercharge,
+-- parity anomaly, soft breaking action or experimental validation.
+------------------------------------------------------------------------
+
+data SelectedQCDHolonomyCandidate : Set where
+  sixPairedQCDFlavours : SelectedQCDHolonomyCandidate
+  eightFlavoursWithTwoSplitExotics : SelectedQCDHolonomyCandidate
+
+localRadionEMAndColourHessianPositive :
+  SelectedQCDHolonomyCandidate → Bool
+localRadionEMAndColourHessianPositive sixPairedQCDFlavours = true
+localRadionEMAndColourHessianPositive eightFlavoursWithTwoSplitExotics = true
+
+identityColourHolonomyGlobalAtChosenRadiusAndEMZero :
+  SelectedQCDHolonomyCandidate → Bool
+identityColourHolonomyGlobalAtChosenRadiusAndEMZero
+  sixPairedQCDFlavours = false
+identityColourHolonomyGlobalAtChosenRadiusAndEMZero
+  eightFlavoursWithTwoSplitExotics = true
+
+localHessianDoesNotDetermineGlobalColourVacuum :
+  Transport.ClaimNonTransportWitness
+    localRadionEMAndColourHessianPositive
+    identityColourHolonomyGlobalAtChosenRadiusAndEMZero
+localHessianDoesNotDetermineGlobalColourVacuum =
+  Descent.consumerNonDescentWitness
+    sixPairedQCDFlavours eightFlavoursWithTwoSplitExotics
+    refl trueNotFalse
+
+noGlobalHolonomyPromotionFromLocalHessian :
+  Transport.ClaimTransport
+    localRadionEMAndColourHessianPositive
+    identityColourHolonomyGlobalAtChosenRadiusAndEMZero → ⊥
+noGlobalHolonomyPromotionFromLocalHessian =
+  Transport.claimNonTransportWitnessBlocksTransport
+    localHessianDoesNotDetermineGlobalColourVacuum
+
+fiveDimensionalVectorMultipletFreeCount : 3 + 1 ≡ 4
+fiveDimensionalVectorMultipletFreeCount = refl
+
+fiveDimensionalHypermultipletFreeCount : 2 * 2 ≡ 4
+fiveDimensionalHypermultipletFreeCount = refl
+
+eightFundamentalFlavoursEvenNumber : 6 + 2 ≡ 8
+eightFundamentalFlavoursEvenNumber = refl
+
+eightFundamentalFlavoursPairedScalarUnits : 8 * 3 * 4 ≡ 96
+eightFundamentalFlavoursPairedScalarUnits = refl
+
+-- Neither counting identity constructs 5D supersymmetry nor determines
+-- the mixed SU3/U1 Chern-Simons quantization or chiral SM zero modes.
