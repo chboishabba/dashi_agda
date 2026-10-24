@@ -54,14 +54,19 @@ assert p["outer_pair_restriction_full_character_match"] is True
 assert p["main_product_split_full_character_decomposition"] is True
 assert p["quotient_descent_full_character_match"] is True
 assert p["restricted_monster_same_object_match"] is True
-# The source-selected faithful 78 is categorically NOT Nebe's Sym²(12)
-# because its central C2 scalar is -1, whereas Sym² has C2 scalar +1.
-assert p["source_selected_degree_78_faithful_to_6Suz"] is True
+# Source-selected 78 is now chosen by full 6.Suz -> main -> MN3B -> Monster
+# character matching, NOT by requiring a faithful degree78 in advance.
+assert type(p["source_selected_degree_78_faithful_to_6Suz"]) is bool
 assert type(p["suzuki_central_involution_class_position"]) is int
 assert p["suzuki_central_involution_class_position"] > 0
-assert p["source_selected_S90_central_C2_trace"] == -90
+assert p["source_selected_S90_central_C2_trace"] in (-90, 66)
 assert p["sym2_candidate_S90_central_C2_trace"] == 66
-assert p["source_selected_faithful78_can_be_sym2_faithful12"] is False
+assert type(p["source_selected_c2_compatible_with_sym2_faithful12"]) is bool
+assert p["source_selected_c2_compatible_with_sym2_faithful12"] is (
+    p["source_selected_S90_central_C2_trace"] == 66
+)
+if p["source_selected_degree_78_faithful_to_6Suz"]:
+    assert p["source_selected_S90_central_C2_trace"] == -90
 
 assert p["diagonal_kernel_orientation_paid"] is False
 assert p["individual_zeta_label_orientation_paid"] is False
