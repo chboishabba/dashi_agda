@@ -1,5 +1,7 @@
 # KK source/EM/radion max-cut — constructive one-loop Minkowski circle (2026-10-24)
 
+**Priority correction (same-order graviton quantum contribution):** The single physically preferred free one-loop candidate includes **one 5D graviton (-5), one separate 5D Maxwell (-3), one massless scalar (-1), and three massive 5D Dirac fields (+12)**. Its potential has a positive stable Minkowski-radius minimum at z0 = **1.6975217111**. Two massive Dirac fields without the -5 graviton correction constitute only a matter-loop truncation. Every quantitative physical result below is for the graviton-counted primary spectrum unless explicitly labelled otherwise.
+
 **Primary executable:** `scripts/check_kk_casimir_bidi_consumer.py`; **5D neutral-source reduction:** `scripts/check_kk_neutral_source_reduction.py`; earlier `scripts/check_kk_jordan_sourced_sphere.py`. This is the **gravity critical path**; Alexander horns PR #1244 are an optional global-topology countermodel, not a dependency.
 
 ## Source and attribution
@@ -17,7 +19,7 @@ Take a circle `y ~ y+2pi`, `ds5^2 = gJ_mu_nu dxmu dxnu+b^2(dy+kappa A_mu dxmu)^2
 1. five-dimensional Einstein gravity plus a renormalised constant bulk vacuum-energy density `Lambda5`;
 2. one massless real periodic 5D scalar field `Phi`;
 3. one independent massless periodic 5D Maxwell field `B_A`, with `B_mu` its 4D massless photon zero mode and `B_5` a separate Wilson-line modulus;
-4. TWO massive periodic 5D Dirac fermions of the same bulk mass `mF`, neutral under `B_A` for the freely computed vacuum potential;
+4. THREE massive periodic 5D Dirac fermions of the same bulk mass `mF`, neutral under `B_A` for the freely computed vacuum potential;
 5. (for sources) standard 5D massive test worldlines, optionally coupled to `B_A`, homogeneously distributed in the circle coordinate at long wavelengths and constrained to zero KK gravitational momentum `p5=0`. This is a classical source EFT, not the entire Standard Model.
 
 At background `<Phi>=<Psi>=<B_A>=0`, the circle translation is unbroken. The graviphoton `A_mu` remains massless by 5D diffeomorphism/gauge invariance; the independent photon `B_mu` remains massless by independent 5D Maxwell gauge invariance. This is NOT a Higgs or winding/Stueckelberg phase condensate. Vector zero-mode masslessness is protected by these symmetries, subject to regulator and vacuum respecting them; full quantum anomaly and other sector audits remain open.
@@ -42,7 +44,7 @@ With background circle radius b0 and Einstein frame `gE=(b/b0)gJ`, define `x=b/b
 
 `V_E(b)=(c0/b0^4)*U(x)`,
 `U(x)=ell/x+[-a+d*f(z0*x)]/x^6`,
-`a=4,d=8`, `ell=2pi*Lambda5*b0^5/c0`.
+`a=9,d=12`, `ell=2pi*Lambda5*b0^5/c0`.
 
 A flat stable static 4D vacuum requires `U(1)=0, U'(1)=0, U''(1)>0`. Algebraically these are
 
@@ -56,7 +58,7 @@ For `0<a/d<1`, `h(z)=f(z)-z*f'(z)/5` decreases strictly from 1 to 0 as z grows, 
 
 Hence the stationary-Minkowski root is UNIQUE for this free-field coefficient choice. The curvature is positive by the same positive series (not merely a finite-difference numerical observation). The numeric primary root is
 
-`z0=2.781857711663267, ell=0.944998195882, U''(1)=24.0201001031`.
+`z0=1.69752171111651, ell=1.14266825367, U''(1)=23.619407163`.
 
 The positive renormalised Lambda5 **must be tuned** against the loop vacuum energy; zero cosmological constant is NOT automatic or technically natural. The vacuum is a local finite-radius minimum, not a proof of global cosmological stability or ultraviolet completion. All calculations are one-loop, expanded about a flat background. Einstein-graviton fluctuations and gauge/matter corrections change the spectrum/counterterms; a separate illustrative counting with graviton -5 and THREE massive Dirac fermions gives a new local minimum at `z0=1.6975217111`, but it is NOT the same 5D action as the primary candidate.
 
@@ -66,7 +68,7 @@ The canonically normalised scalar is `varphi=sqrt(3/2)*M_Pl*log(b/b0)`, with `M_
 
 `m_rad² = (2*c0/(3*M_Pl²*b0^4))*U''(1)`.
 
-For primary model `sqrt(2*c0*U''/3)=0.0284535886633`, so the Compton range is `lambda_rad = M_Pl*b0² /0.0284535886633` in natural units.
+For primary model `sqrt(2*c0*U''/3)=0.0282152653406`, so the Compton range is `lambda_rad = M_Pl*b0² /0.0282152653406` in natural units.
 
 There is now a source-side SAME-ACTION bridge: from standard 5D massive worldline action `-m integral ds5`, conserved covariant fifth momentum is `p5 proportional to b²(dot y+kappa*A_mu dot xmu)`. Neutral worldlines with `p5=0` satisfy `dy=-kappa*A_mu dxmu`, and the entire fifth-direction metric block drops from `ds5²`, leaving `ds_J²` exactly. Consequently they couple minimally to the Jordan metric; in Einstein frame `A(varphi)=exp[-varphi/(sqrt6*M_Pl)]` and the radion-matter coupling is `beta=-1/(sqrt6*M_Pl)`. A long-wavelength uniform distribution of such source worldlines can be U(1)-invariant. This proves *test-worldline / dust coupling*, NOT that all Standard Model fields, material stress, pressure and rotating Earth configurations share the same universal coupling.
 
@@ -74,7 +76,7 @@ For dust, the linearised static exterior and interior equation is `(nabla²-m_ra
 
 `F_rad/F_Newton = [(z-1)+(z+1)*exp(-2z)]*(1+z)/(2*z^3)`, `z=R/lambda_rad`.
 
-At `b0=1e-24m` the primary model gives `lambda_rad=4.3368604e-13m`, a scalar-to-Newton force of approximately `3.40e-20` at the Earth surface and `3.12e-22` at the Sun surface; `mF~8.73658e7 GeV`, `b0*M5~2.893888e6`, supplying significant semiclassical hierarchy. These values are **not empirical fits**. No full solar Shapiro-delay integration, laboratory force geometry, nuclear/atomic coupling check or same-physical-matter source is certified.
+At `b0=1e-24m` the primary model gives `lambda_rad=4.3734922e-13m`, a scalar-to-Newton force of approximately `3.432e-20` at the Earth surface and `3.143e-22` at the Sun surface; `mF~5.33116e7 GeV`, `b0*M5~2.893888e6`, supplying significant semiclassical hierarchy. These values are **not empirical fits**. No full solar Shapiro-delay integration, laboratory force geometry, nuclear/atomic coupling check or same-physical-matter source is certified.
 
 ## Two-consumer BIDI verdict
 
@@ -114,4 +116,4 @@ For an electron, `e/m_e ~ 592.608 GeV^-1`, versus `sqrt(2)/M_Pl ~5.808e-19 GeV^-
 
 Executable: `python3 scripts/check_kk_geometric_charge_mass_nogo.py`. Local symbolic reduction and high-precision charge/mass magnitude checks passed.
 
-**Revised physical decision:** treat the graviphoton A_mu as a mathematically interesting, ultraweak independent U1 (not QED), and B_mu as the massless photon in the explicit two-Dirac + scalar + Maxwell candidate. Claiming original geometric EM unification is *not* supported without a new matter mechanism defeating this precise no-go while preserving the experimental consumer.
+**Revised physical decision:** treat the graviphoton A_mu as a mathematically interesting, ultraweak independent U1 (not QED), and B_mu as the massless photon in the explicit three-Dirac + scalar + Maxwell + gravity candidate. Claiming original geometric EM unification is *not* supported without a new matter mechanism defeating this precise no-go while preserving the experimental consumer.
