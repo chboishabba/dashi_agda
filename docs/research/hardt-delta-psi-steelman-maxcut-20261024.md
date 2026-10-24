@@ -943,3 +943,246 @@ parent historical/source genealogy changes. A parent merge-forward,
 overlap/conflict review and exact-head acceptance check are required
 before review/merge. No parent integration or CI kernel proof is
 claimed.
+
+
+---
+
+## 2026-10-25 Nobel optogenetics cross-PR physical causality max-cut
+
+**Source identity, authorship and chronological distinction**
+
+The Nobel Assembly awarded **Karl Deisseroth, Peter Hegemann and Georg Nagel**
+the 2026 Nobel Prize in Physiology or Medicine on **5 October 2026**, for
+discoveries concerning light-gated ion channels and optogenetics
+[original Nobel institute release](https://news.ki.se/the-nobel-prize-to-the-pioneers-of-optogenetics-peter-hegemann-georg-nagel-and-karl-deisseroth).
+This is *recognition in 2026*, **not** a newly discovered 2026 physical
+interaction; the experiments and individual coauthor credit predate the award.
+
+The original scientifically relevant roots are:
+1. **Nagel, Szellas, Huhn, Kateriya, Adeishvili, Berthold, Ollig, Hegemann
+   and Bamberg (2003)**, *Channelrhodopsin-2, a directly light-gated
+   cation-selective membrane channel*, PNAS 100:13940–13945,
+   DOI https://doi.org/10.1073/pnas.1936192100.
+   Demonstrates membrane channel current from light acting on
+   expressed channelrhodopsin, not brain-to-brain action.
+2. **Boyden, Zhang, Bamberg, Nagel and Deisseroth (2005)**,
+   *Millisecond-timescale, genetically targeted optical control of
+   neural activity*, Nature Neuroscience 8:1263–1268,
+   DOI https://doi.org/10.1038/nn1525.
+   Shows expressed opsin plus physically delivered light controls
+   neuronal spikes/synaptic activity. Attribute experimental
+   paper to ALL authors, not Nobel winners alone.
+3. **Liu et al. (2012)** Nature DOI https://doi.org/10.1038/nature11028,
+   optogenetically activates hippocampal engram-tagged neurons
+   and obtains memory-associated behavioural responses.
+   **Ramirez et al. (2013)** Science
+   DOI https://doi.org/10.1126/science.1239073,
+   manipulation of a memory-associated neuronal ensemble
+   in a false-memory paradigm. Those original engram sources
+   already own the empirical claims in sibling PR #1238.
+   Observed freezing and behavioral responses are NOT direct
+   proof of a particular subjective conscious state.
+4. **Scott F. Owen, Max H. Liu, Anatol C. Kreitzer (2019)**,
+   *Thermal constraints on in vivo optogenetic manipulations*,
+   Nature Neuroscience 22:1061–1065,
+   DOI https://doi.org/10.1038/s41593-019-0422-3.
+   Original measured illuminated-brain thermal artefact
+   (~0.2–2C in tested protocols) and changes in spiking/behavior
+   **even without interpreting effects as opsin-only**.
+   This is a mandatory physical confound owner, not conjecture.
+5. **Lamiae Abdeladim, Uday K. Jagadisan, Hyeyoung Shin,
+   Mora B. Ogando, Hillel Adesnik and coauthors (2026)**,
+   *Probing inter-areal computations with a two-photon holographic
+   mesoscope*, Nature Neuroscience 29:2023–2035, online
+   **3 August 2026**, DOI https://doi.org/10.1038/s41593-026-02350-9.
+   Original technique reads and *writes* selected spatial/temporal
+   ensembles in the brains of mice and measures downstream
+   neurons in other mouse cortical areas. In a stated example,
+   70% of directly targeted cells responded under one specific
+   laser dose/pulse configuration; decoding holographic
+   stimulus identity from separate visual regions was above
+   chance. Other regions were separated by hundreds of
+   microns to millimeters, within connected mouse cortex.
+   **'Remote cortical area' is not remotely located persons.**
+   Real targeted information has a physical light-delivery
+   address and anatomical/synaptic causal pathways;
+   measured calcium signals are not proof of a separate
+   quantum/nonlocal field.
+6. An independent related technique donor is the 2026
+   human iPSC **cardiomyocyte** (NOT brain) all-optical
+   holographic closed-loop study,
+   DOI https://doi.org/10.1038/s44172-026-00779-1:
+   physical targeted illumination plus explicitly observed
+   wavefront feedback. This is an engineering feedback
+   example, not a human mental-interface experiment.
+
+**Actual prior repository owners inspected, not presumed**
+
+- **Diamond PR #1238**:
+  DASHI/Biology/OptogeneticMemoryObservationBoundaryExact.agda
+  supplies the abstract physically delivered light -> neuron
+  -> behavior composition with a separate InterventionEvidence
+  required for actual observed behaviour. It does not infer
+  subjective state.
+- **Also PR #1238**:
+  DASHI/Biology/Levin/MitopolaritonOptogeneticFactorialExact.agda
+  already has a four-arm rational difference-in-differences
+  interaction and proves an additive-null contrast for
+  **71/87/103 THz mitochondrial mid-IR vs opsin stimulation**.
+  This is a separate PREPRINT proposal/source-physics hypothesis,
+  **not** the Nobel channelrhodopsin experiment,
+  **not** direct evidence of delta-wave communication,
+  and **not** a proven mitochondrial-to-memory physical identity.
+- **Existing core on default branch**:
+  CoarseFineFabricCalculusExact owns the consumer-fibre
+  nonfactorability theorem; ContrastiveInterventionResponseExact
+  owns baseline/intervention distinctions.
+- **Hardt PR #1252**:
+  the new local theorem imports the canonical Core
+  CoarseFineFabricCalculusExact to avoid a second consumer calculus.
+  Since #1238 is a *sibling unmerged PR*, this #1252 child does
+  NOT import its optogenetic source modules or assert they exist
+  on its base. The original #1238 source path is instead
+  cross-referenced for eventual controlled consolidation.
+
+**Exact finite causal discriminator (new local work)**
+
+Let G be actual opsin expression (0/1), L actual delivered light (0/1),
+Y a declared binary observation and A the locally measured
+neural-activity consumer. In a minimal genuine opsin-specific
+model, Y=G*L. But a recording artefact that is correlated with
+expression and illumination can produce exactly the same
+*entire four-condition (G,L) table* Y=G*L. An alternative
+ordinary non-opsin light/thermal response Y=L is also real
+and can be distinguished by an expression-negative light-only
+control.
+
+For the standard 2x2 factorial interaction
+D = Y(1,1)-Y(1,0)-Y(0,1)+Y(0,0),
+
+    model                  four-arm 00,01,10,11      interaction
+    genuine gated neuron    0,0,0,1                   +1
+    light-only heating      0,1,0,1                    0
+    opsin-correlated pickup 0,0,0,1                   +1
+
+Thus even a perfectly measured D=1 **does not uniquely identify
+downstream synaptic propagation**. This is original bounded
+source-model nonidentifiability based on standard causal
+experimental design, not a theorem about actual optics.
+The two mechanisms are further distinguished by a
+**hypothetical, separately selective pathway perturbation**:
+the true network-mediated response changes while a pure
+optical pickup response remains. In a real experiment this
+perturbation must also be shown not to directly alter sensor
+gain, fluorophore, heating, calcium readout, viability,
+network background or the selected subject group.
+A model that merely ASSUMES perfect pharmacological/
+anatomical selectivity proves no biology.
+
+New source-written proof:
+DASHI/Cognition/HardtOptogeneticNobelCausalCutExact.agda.
+It constructs a collision of active response with the
+expression-negative readout and a separate downstream
+readout collision for physically distinct mechanism models.
+Both derive no-universal-decoder claims by importing
+Core.CoarseFineFabricCalculusExact.
+**No Agda kernel check, empirical photon-dose receipt,
+or actual experiment is implied.**
+
+New source-written bounded Python:
+scripts/check_hardt_optogenetic_nobel_causal_cut.py,
+tests/test_hardt_optogenetic_nobel_causal_cut.py.
+It compares full 2x2 source-response tables of genuine
+network output, ordinary illumination/heat and
+opsin-correlated optical pickup; enumerates **343**
+exact additive-null factorial response matrices;
+demonstrates conditional downstream perturbation and
+failure to decode an independent concealed target;
+requires opsin identity, exact local light delivery,
+light/heating and recording nuisance, circuit response
+and independently observed outcome for scientific
+claim promotion. A local mathematically equivalent
+finite four-table/343-grid calculation was performed,
+but exact GitHub source/test bytes, Agda kernel and
+optical experimental data were **not** run/acquired here.
+
+**What the Nobel result DOES NOT entail**
+
+Nobel recognition establishes substantial preexisting
+causal neural-circuit science, not psychic assassination,
+no-light photoactivation, real-time inter-person
+telepathy, human remote activation or the alleged
+80% Hardt group statistic. Physical wavelength, opsin
+expression, *delivered photon flux*, neural photocurrent,
+recorded response and spatial source address must be
+separately present. Downstream neuronal effects need
+specific neural anatomical pathways and controls;
+a meaningful calcium readout also needs artifacts
+and fluorescent cross-excitation assessed.
+
+Even a spectacularly accurate BRAIN-IT viewed-image
+decoder or holographically optically written mouse
+cortical pattern is NOT evidence for independent
+concealed target information. A secret photographic
+target associated with a human has neither a known
+optogenetic receptor/illumination channel nor an
+independent physical address mechanism.
+
+**Updated prioritized Pareto**
+
+- **P0 historical/source**: retain 2003 channel,
+  2005 neuronal implementation, 2012/2013 memory,
+  2019 heat confound, Aug 2026 mesoscale inter-areal
+  perturbation and 5 Oct 2026 Nobel recognition as
+  **separate original source roots**. No double count
+  of repeated claims or retrospective Nobel authorship.
+- **P0 exact causal**: validate finite expression×light
+  negative control and independent downstream
+  intervention response. Source-written Agda and
+  synthetic Python are now committed; kernel/exact-byte
+  acceptance remains OPEN.
+- **P1 real optical intervention**: original paper
+  stimulus/dose, spatial light pattern, cell expression,
+  thermal/sham and calcium/spiking source plus
+  controls. Actual 2026 mesoscope datasets and
+  DOI-specific analysis replay are UNACQUIRED.
+- **P1 own brain cross-lane**: #1238 owns light->neuron
+  ->behaviour, #1252 owns optical-to-Hardt causal
+  discriminator, #1121 Brain-IT owns fMRI consumer
+  inference and #9 dashiBRAIN owns finite consumer
+  /commutation runtime. No cross-modality identity.
+- **P2 same-object physical bridge**: if neural
+  photocurrent is measured, separately forward-project
+  to EEG/MEG magnetic field using #1238 physical
+  current->field->sensor; require actual tissue,
+  geometry, timebase, sensor transfer/calibration.
+  An optogenetic phenotype is not itself a measured
+  external biomagnetic field.
+- **P3 distant-target/quantum hypothesis**: independent
+  physical arriving signal, selective receiver
+  mechanism, safe blinded randomized target response,
+  registered effect size/replication; ordinary brain
+  inter-areal synaptic transfer and optical illumination
+  are baseline models, not exotic results.
+- **P4 integrative source/kernel review**: a realistic
+  experimental comparator could be the August 2026
+  original mesoscope for *within-brain* causal
+  transfer, but do not prioritize a Hardt-target
+  protocol before measurable source/receiver physics.
+  Merge/fix active #1242 parent divergence; no
+  CI/Agda green claims before exact-head checks.
+
+**Implications/intuition**
+
+The positive scientific payoff here is sizeable and
+fully ordinary: patterned optogenetic writes/reads
+can empirically validate source-target input/output
+transfer functions and causality, while calibrated
+EEG/MEG and diamond NV technologies measure much
+weaker secondary physical fields. These form two
+different ends of a legitimate programme. Their
+intersection is an instrumented neural source,
+not a mysterious common quantum observer or
+long-distance brainwave. The new extraordinary-
+physics steelman has a *testable higher bar*, not
+additional supporting evidence.
