@@ -4,7 +4,7 @@
 Only coded ordinal events are accepted, not raw experience-report text. Erowid
 report use needs written rights-holder permission including applicable AI use.
 Default execution is synthetic; a real-data run requires a separate, exact-byte
-SHA256-bound reviewer receipt. Such a receipt is an admission control, not a
+canonical-content-SHA256-bound reviewer receipt. Such a receipt is an admission control, not a
 machine-verifiable legal determination or evidence of independent entities.
 """
 from __future__ import annotations
