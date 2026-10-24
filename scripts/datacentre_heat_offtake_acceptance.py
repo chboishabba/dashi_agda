@@ -75,6 +75,23 @@ def dispatch(h,plant=Plant()):
                 site_mw=site,it_mw=h.it_mw,
                 erf_candidate=reused/site,pue=site/h.it_mw)
 
+def alternate_hp_meter_boundary(d):
+    """Pure accounting thought experiment: relocate HP meter inside facility.
+
+    Assumes all exported heat qualifies as useful reuse at the handoff point.
+    Pipeline loss, downtime, legal meter layout and offsite use still need audits.
+    """
+    site,source,drive,it=(d['site_mw'],d['source_boundary_mw'],
+                          d['hp_electric_mw'],d['it_mw'])
+    internal_pue=(site+drive)/it
+    internal_erf=(source+drive)/(site+drive)
+    internal_ere=(1-internal_erf)*internal_pue
+    external_ere=(1-source/site)*(site/it)
+    assert isclose(internal_ere,external_ere,abs_tol=1e-10)
+    return dict(external_pue=site/it,external_erf_candidate=source/site,
+                internal_pue=internal_pue,internal_erf_candidate=internal_erf,
+                unchanged_ideal_ere=external_ere)
+
 def summary(hours,plant=Plant()):
     outcomes=[dispatch(h,plant) for h in hours]
     if not outcomes:raise ValueError('at least one hourly row required')
@@ -122,6 +139,13 @@ class TestGate(unittest.TestCase):
     def test_high_lift_cop_reject(self):
         h=Hour(10,2.5,42,32,200,0,25,35,8.4,150)
         self.assertEqual(dispatch(h,Plant(second_law_eff=.1))['hp_electric_mw'],0)
+
+    def test_hp_boundary_reassignment(self):
+        d=dispatch(self.h)
+        b=alternate_hp_meter_boundary(d)
+        self.assertGreater(b['internal_pue'],b['external_pue'])
+        self.assertGreater(b['internal_erf_candidate'],b['external_erf_candidate'])
+        self.assertAlmostEqual(b['unchanged_ideal_ere'],.45)
     def test_network_loss_explicit(self):
         d=dispatch(self.h,Plant(pipe_eff=.8))
         self.assertGreater(d['network_loss_mw'],0)
