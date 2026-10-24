@@ -929,3 +929,17 @@ Biot-Savart data, fluid vorticity != electromagnetic current,
 finite Fourier inversion != subject-specific spatial leadfield,
 same band != same source, and measured magnetic field !=
 experimental receiver actuation.
+
+
+### Parent-stack 49-behind integration gate
+
+A fresh GitHub compare as of 25 October 2026 shows the live #1252
+Hardt child branch is 38 commits ahead and **49 commits behind**
+its ongoing psychotronics #1242 parent (merge base
+6ca3940b14ecccd8bbeada108e51b08fd961b0aa).
+This does NOT revoke its existing finite Python receipts or source
+documents, but the child is not synchronized with the latest
+parent historical/source genealogy changes. A parent merge-forward,
+overlap/conflict review and exact-head acceptance check are required
+before review/merge. No parent integration or CI kernel proof is
+claimed.
