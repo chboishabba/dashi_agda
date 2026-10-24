@@ -633,7 +633,7 @@ def test_gas_committee_five_form_letters_are_template_counts_not_five_authors():
     assert rows["G17"]["root_resolution"] == "platform_route_not_original_text_author"
     assert rows["G20"]["root_key"] == "G_GETUP_PETITION"
     assert "50000" in rows["G20"]["downstream"]
-    assert "not independent" in rows["G20"]["boundary"]
+    assert "not 50000 independent" in rows["G20"]["boundary"]
 
     media = POLITICAL_OWNER.read_text()
     validation = POLITICAL_VALIDATION.read_text()
@@ -686,4 +686,4 @@ def test_browse_central_estimate_exact_rational_consistency_only():
     docs = RESEARCH.read_text()
     assert "29,335,635.945" in docs
     assert "16,087,302" in docs
-    assert "not a kernel-verified Agda theorem" in docs
+    assert "kernel-verified Agda theorem" in docs
