@@ -20,10 +20,6 @@ acmaMpoxIsRegulatoryFinding :
   A.evidence A.acmaMpoxFinding ≡ A.regulatoryDetermination
 acmaMpoxIsRegulatoryFinding = refl
 
-bannonPalmerIsDisputedSourceClaim :
-  A.evidence A.palmerBannonConflict ≡ A.disputedDocumentClaim
-bannonPalmerIsDisputedSourceClaim = refl
-
 arnFinancialInterestIsNotPoliticalTransfer :
   A.kind A.arnSandilandsRevenue ≡ A.financialEntitlement
 arnFinancialInterestIsNotPoliticalTransfer = refl
@@ -55,6 +51,25 @@ noFordhamDirection = A.noFordhamCommandLeap
 noNewRadioRevenueDirection : A.MediaRevenueShareImpliesEditorialOrders → ⊥
 noNewRadioRevenueDirection = A.noRevenueControlLeap
 
-noPalmerHistoricalAutopromotion :
-  A.ClaimAbout2019AdsProvesBannonDeployment → ⊥
-noPalmerHistoricalAutopromotion = A.noPalmerClaimPromotion
+
+-- Legal operator is a registry entry; whether it proves all shareholders
+-- is a separate private-share-register inquiry.
+legalOperatorIsRegistrySource :
+  A.evidence A.newShowLegalOperator ≡ A.institutionRecord
+legalOperatorIsRegistrySource = refl
+
+newShowInterestIsFirstPersonNotEquityEvidence :
+  A.evidence A.sandilandsSelfReportedOwnership ≡ A.namedActorSelfReport
+newShowInterestIsFirstPersonNotEquityEvidence = refl
+
+arnIsNetRevenueCounterparty :
+  A.kind A.arnSandilandsRevenue ≡ A.financialEntitlement
+arnIsNetRevenueCounterparty = refl
+
+aiimsIsProductionNotEquity :
+  A.kind A.aiimsProduction ≡ A.editorialPublication
+aiimsIsProductionNotEquity = refl
+
+nineStrategicPartnerNotOwner :
+  A.kind A.nineTaptStrategicPartnership ≡ A.financialEntitlement
+nineStrategicPartnerNotOwner = refl
