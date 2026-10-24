@@ -257,3 +257,20 @@ gasRepublishingDoesNotEstablishPolicyCopy = A.linkedIndustryArticleNotPartyDraft
 politicalLanguageDoesNotEstablishCommonSponsor :
   A.CommonPoliticalArgumentProvesSharedSponsor → ⊥
 politicalLanguageDoesNotEstablishCommonSponsor = A.commonArgumentDoesNotProveSponsor
+
+
+riddCrossDomainIsAttributedArgument :
+  A.kind A.riddBOMGasLitigationArgument ≡ A.originalOpinionProduction
+riddCrossDomainIsAttributedArgument = refl
+
+deanClimatePolicyIsAttributedArgument :
+  A.evidence A.rowanDeanBOMNetZeroArgument ≡ A.namedActorSelfReport
+deanClimatePolicyIsAttributedArgument = refl
+
+riddClaimDoesNotProveGasLitigationCausality :
+  A.provesPolicyCausation A.riddBOMGasLitigationArgument ≡ false
+riddClaimDoesNotProveGasLitigationCausality = refl
+
+deanClaimDoesNotProvePoliticalCoordination :
+  A.provesHiddenCoordination A.rowanDeanBOMNetZeroArgument ≡ false
+deanClaimDoesNotProvePoliticalCoordination = refl
