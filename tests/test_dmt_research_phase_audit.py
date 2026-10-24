@@ -163,3 +163,23 @@ def test_erowid_source_reuse_does_not_pretend_raw_narratives_are_available(tmp_p
     monkeypatch.setattr(Path, "read_text", intercepted_read)
     with pytest.raises(ValueError, match="falsely promoted"):
         audit.validate_research_contract(w, d, m)
+
+
+def test_motif_hyperfabric_integrated_into_shared_model_design():
+    w, d, m = fixtures()
+    report = audit.summary(w, d, m)
+    assert m["motif_observation_hyperfabric"] == (
+        "Docs/receipts/DMTMotifObservationHyperfabric20261025.json")
+    assert set(report["motif_hyperfabric_admitted"]) == {
+        "e_published_motif_summary",
+        "e_synthetic_recurrence_counterexample",
+        "e_published_cross_study_description",
+    }
+    assert report["original_fmri_result_reproduced"] is False
+
+
+def test_motif_hyperfabric_dependency_cannot_be_silently_dropped():
+    w, d, m = fixtures()
+    del m["motif_observation_hyperfabric"]
+    with pytest.raises(ValueError, match="Hyperfabric"):
+        audit.validate_research_contract(w, d, m)
