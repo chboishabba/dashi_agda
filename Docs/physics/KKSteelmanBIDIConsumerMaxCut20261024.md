@@ -152,3 +152,25 @@ parent identities with max errors `4.99e-15` and
 `7.84e-15` respectively. These are local arithmetic
 probes, *not* an exact-head Agda/Lean kernel
 certificate or actual physical experiment.
+
+## 2026-10-24 horned/PMNS C3 phase-audit consequences (consumer-only)
+
+Neutrino PR #1247 identified a decisive **basis-rephasing
+equivalence**: a nontrivial orbit `Ad_T(A)≠A` can have
+the identical charged-current probabilities, Jarlskog CP
+invariant and Wilson traces for all C3-conjugate source words.
+An SU3 matrix orbit is therefore not a LARES-2, electromagnetic,
+or gravitational observable and cannot be treated as a new
+physical charge without a **gauge-invariant relative**
+interaction/source/geometry.
+
+Separate field issue: the exact rational cyclotomic matrix
+group SU3(Q(zeta3)) is **not** the ambient connected compact
+analytic SU3(C) of Gotô's theorem. The necessary analytic
+embedding and any induced smooth flat connection remain
+uninstantiated physical geometry. None of this is a KK U1
+graviphoton, colour gauge dynamics, or a radion/source-matched
+Einstein equation. No physical gate in this BIDI programme is
+paid by the source-written horned/neutrino steelman.
+The consumer should link, not duplicate, the canonical
+phase-gate register in PR #1247.
