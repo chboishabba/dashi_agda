@@ -33,6 +33,7 @@ jobs:
           python3 scripts/alexander_horned_c3_spin_fixed_axis_padic_probe.py
           python3 scripts/alexander_horned_c3_maschke_prime_comparison.py
           python3 scripts/alexander_horned_c3_spin_cyclotomic_intertwiner_audit.py
+          python3 scripts/alexander_horned_c3_f7_full_actor_reynolds.py
           python3 scripts/alexander_horned_c3_spin_voa_module_probe.py
           python3 scripts/alexander_horned_mixedprime_congruence_audit.py
           python3 scripts/alexander_horned_ore_residual_alternating_probe.py
