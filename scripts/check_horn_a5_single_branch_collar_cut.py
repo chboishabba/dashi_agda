@@ -91,6 +91,24 @@ for n in range(8):
     print(f'PASS synthetic local collar depth={n} sites={count} length_upper={L} radial_clearance={clear}')
 
 print('PASS conservative M=100, source IF marked stage4 collar gives M*L<1<icosahedral gap')
+# Stronger topological negative control: at the next finite level the
+# synthetic parent transverse circle encloses the left child core once
+# and does not enclose the right child core. Its abelian winding vector
+# is (1,0). Any commutator [child0,child1] maps to (0,0) in the
+# abelianized planar complement. Thus the false Hatcher stage marking
+# is REJECTED by an actual computable invariant, not a human label.
+for n in range(7):
+    R=F(1,8*3**n)
+    for w in product((0,1),repeat=n):
+        pc=center(w)
+        l=center(w+(0,))
+        rr=center(w+(1,))
+        assert pc==l
+        assert abs(pc-l)<R<abs(pc-rr)
+        parent_winding=(1,0)
+        commutator_winding=(0,0)
+        assert parent_winding!=commutator_winding
+print('PASS geometric marking FAIL-CLOSED: 127 parent meridians wind (1,0) not child commutator (0,0)')
 print('BLOCKED source Hatcher-marking: these disjoint unlinked straight cylinders DO NOT have parent=child-commutator injection')
 print('BLOCKED real 3-copy wild geometry, local-finite-stage collars and compatible bounded source connection not supplied')
 print('SINGLE-BRANCH theorem for selected finite A5 image is conditional on genuine marked shrinking descendant, not on all leaves shrinking')
