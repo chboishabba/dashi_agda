@@ -12,7 +12,7 @@ import json
 import re
 from fractions import Fraction as Q
 from itertools import product
-from math import isclose, sin, pi
+from math import isclose, sin, pi, isfinite
 from pathlib import Path
 
 
@@ -172,8 +172,8 @@ def validate_receipt(candidate):
         errors.append("placeholder values cannot be promoted as experimental receipts")
     try:
         f=float(candidate.get("sampling_hz",0))
-        if f <= 8.0:
-            errors.append("sampling_hz must exceed twice 4 Hz")
+        if isinstance(candidate.get("sampling_hz"), bool) or not isfinite(f) or f <= 8.0:
+            errors.append("sampling_hz must be finite and exceed twice 4 Hz")
     except (TypeError,ValueError):
         errors.append("sampling_hz must be numeric")
     modality=candidate.get("recording_modality")
