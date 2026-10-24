@@ -95,3 +95,28 @@ This is a much stronger actual SOURCE REPAIR. **However:** the comparison interv
 The source reference (b_0=10^{-24})m corresponds to inverse radius (1/b_0=1.973269804	imes10^8) GeV using (hbar c=0.1973269804	imes10^{-15}) GeV·m. For a *hypothetical* normalized (v=10)TeV scalar source on physical interval (L=pi b_0), the dimensionless derivative parameter is (epsilon=vLapprox1.59207456	imes10^{-4}), (epsilon^2approx2.5347014	imes10^{-8}). If the bulk and endpoint coefficients are chosen with matching source action normalisation so that the zero-mode effective stationarity relation holds, then in (u=y/Lin[0,1]), the scalar E-L equation has form (f_{uu}=epsilon^2partial_fV_6) and the Robin derivative is likewise (epsilon^2partial_f W). Its leading symmetric t-profile around the old homogeneous source is (t(u)=t_0+rac12epsilon^2 partial_tV_6(t_0)(u-rac12)^2+O(epsilon^4)) **up to a constant of order (epsilon^2)** determined by higher-order solvability. The leading end-minus-midpoint shift in the t field is (epsilon^2partial_tV_6/8approx4.6703923	imes10^{-10}), so a homogeneous source might be an *excellent approximation* in that restricted weakly coupled/short-interval regime while NEVER an exact bulk field solution. Source `scripts/check_kk_e6_orbifold_small_interval_scale.py` checks this dimensionful-reference expansion but does not derive physical five-dimensional couplings from E6.
 
 For orbifold-ODD Dirichlet scalar modes with a uniform background and canonical kinetic source, the Poincaré gap is (m_{KK,1}=1/b_0approx1.97	imes10^8)GeV; any selected potential Hessian bounded below by (-10v^2) still leaves (m_{1}^2ge b_0^{-2}-10v^2>0). This is a **conditional** gap criterion, not a proof of the source's spatially varying full 5D Hessian or other brane/ghost/gauge sectors. The physical boundary potential and odd gradient-energy scaling must be fixed BEFORE a full stability/quantum/stress promotion. In particular, the hypothetical dimensionless length-one BVP above cannot be identified with the physical microscopic source by relabeling y.
+
+
+## Stronger full 18-real parity-even INTERVAL Hessian (not the old homogeneous Hessian)
+
+A later executable **\`scripts/check_kk_e6_orbifold_interval_even_hessian.py\`** directly consumes the new NONCONSTANT Robin BVP \(a(y),b(y),t(y)\) and the literal original six-invariant V6 in ALL 36 original real matrix coordinates. For **every** mesh node it builds the exact-autodiff bulk 36×36 real Hessian, projects onto ALL **18 parity-even scalar zero-mode fields** (8 real Phi, 10 real Chi), and adds:
+
+1. the full scalar interval gradient kinetic stiffness;
+2. the selected bulk Hessian weighted by the interval FEM quadrature;
+3. the actual endpoint \(W(\Chi)\) full 36×36 Hessian projected onto the even fields;
+4. the canonical finite-element mass matrix for the generalized self-adjoint eigenproblem.
+
+The source contains **the complete 18-component interval fluctuation quadratic form**, not merely the earlier three-amplitude Hessian or spatially constant 18×18 source Hessian. With 32 and 64 finite elements on the expressly DIMENSIONLESS comparison interval, it computes:
+
+| Lowest eigenvalue group | 32 elements | 64 elements |
+| --- | --- | --- |
+| first gauge-like eigenvalue | about 0.0001753 | about 0.00004385 |
+| seventh gauge-like eigenvalue | about 0.0041894 | about 0.0010492 |
+| **eighth/first massive physical scalar eigenvalue** | **2.08297334** | **2.07994900** |
+| all lowest 18 negative? | **none detected** | **none detected** |
+
+Seven near-zero eigenvalues converge toward zero at roughly the expected \(h^2\) FEM rate, corresponding to the seven **unbroken-orbit complement** gauge transformations that preserve the selected orbifold parity and are broken by the VEV source. The eighth is separated by a gap \(\approx2.08\) in the selected dimensionless canonical scalar normalisation. This is a substantially stronger LOCAL classical numerical result: **no negative low modes were observed in the complete 18-real even scalar interval operator**, along the corrected NONCONSTANT background, with the actual localized boundary Hessian. The full original 36-real homogeneous matrix Hessian had two negative odd components; that homogeneous matrix is NOT the correct interval spectral operator.
+
+This remains a **two-mesh numerical receipt**, not a rigorous continuum spectral gap: the high-frequency bound/interval eigensolver, ghost/gauge fixing, exact physical kinetic metric, full orbifold odd scalar/gauge towers, global anomaly/GS axion and quantum corrections are not certified. A careful continuum physical proof should exploit the one-dimensional Sturm–Liouville self-adjoint operator and bounded local potential Hessian, gauge-orbit zero modes, and a validated first-positive-eigenvalue enclosure. Most importantly, the length-one numerical coefficients are not automatically those of the b0=10^-24m five-dimensional source; physical normalization and Einstein boundary/junction conditions remain independent obligations.
+
+**Updated steelman priority:** (1) global spin/quotient Green–Schwarz/CS anomaly and fixed-plane matter; (2) source-dimensional scalar/fermion/gauge action and rigorous 18-even/odd interval spectral enclosures; (3) renormalized new orbifold Casimir and metric+brane first variations; (4) global radion/Wilson/VEV vacuum; (5) held-out PPN/fifth-force/LARES discrimination. This branch has supplied a strong **classical scalar source and its tested functional Hessian**, not an entire E6 quantum unification.
