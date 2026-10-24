@@ -1,3 +1,88 @@
+# 2026-10-24 A/B physical source max-cut — read FIRST
+
+**Primary objective remains original unforced A and B.** No Clay
+promotion. This update reuses actual historical owners rather than
+creating RNNN aliases. Executable source and mathematical arguments:
+`Docs/research/ns_ab_ri_euler_no_go_and_physical_stretch_20261024.md`,
+`scripts/ns_physical_vorticity_partition.py`,
+`scripts/ns_a_physical_duhamel_maximal_l2.py`.
+
+**B substantial same-field mathematical step:** a complex physical
+Fourier calculation with the exact R63 strict LH/HL/HH/CC classifier
+and nested R236 deep/critical decision proves, by vector-curl
+identities and finite signed summation, that nonlinear enstrophy
+production equals physical vortex stretching on arbitrary tested
+finite real divergence-free trigonometric fields. It also exposes the
+actual classwise curl/transport **compensation**, not just the total.
+For p=(1,0,0), q=(0,1,64), the classwise triples
+(P,T,S,residual=P-T-S) are:
+LH=(4,0,0,4), HL=(-16392,-4,-16384,-4),
+HH=(4,4,0,0), CC=0. Total P=S=-16384,
+total T=residual=0. Naively demanding classwise P=S is false.
+The script checks the vector curl identity at *all generated
+outputs* before contracting, energy/transport cancellation, and
+partition sum equalities, without zero-padding sensitivity.
+
+**Important PRE-EXISTING reusable Agda phase proofs:**
+`NSTriadKNComplex3RealityLawsRound35Exact` proves
+conjugation-compatible Leray projection;
+`NSTriadKNCurlRealityHelicalTransportRound93Exact` proves
+Fourier curl/reality/helical transport;
+`NSTriadKNExactComplexModalTransfer` contains a genuine complex
+real/imag exact ring;
+`NSTriadKNLuoGalerkinFourierVorticityConvolutionExact`
+contains the rational factored-phase vorticity interaction;
+`NSTriadKNLuoProjectedConvectionOfficialParsevalUpgradeExact`
+already reuses physical hard-high projector, Parseval and derivative
+commutation, with explicit incidence multiplicity and energy-flux
+agreement fields STILL requiring inhabitants. Reuse all of these.
+The remaining B task is the **exact same-source assembly** from
+this physical curl/enstrophy function to R236's literal selected
+consumer, including the distinct differentiated Com term, into
+R685/R690's mixed-helical commutator with exact compensation,
+then a positive signed cutoff-uniform B1/B2/B3/B7 estimate.
+The new classifier test is not an Agda proof of that attachment.
+
+**A full-time nonlinear source improvement:** From existing physical
+H1 stationary Stokes `Vhat=Fhat/(nu|xi|²)` and energy estimate,
+the actual causal heat response `What=h_a*Vhat`,
+`h_a(t)=a e^{-at}1_{t>=0}`, `a=nu|xi|²`, is an L2 contraction
+by Jensen+Tonelli. Hence for an unforced energy solution wherever
+the distributional Duhamel identity is justified,
+`||What||²_(L²[0,T] L²xi) <= 4 sqrt(2) pi E0² sqrt(T)/nu^(5/2)`.
+Source `scripts/ns_a_physical_duhamel_maximal_l2.py` has exact
+nonstationary and sign-changing kernel checks. This does NOT
+close the signed centered double-resolvent A2 or scale-critical
+continuation A3: spatial-temporal L2 remains supercritical under
+concentration. Existing physical same-object and Bishop source
+owners are unchanged.
+
+**Local receipt:** standalone matching Python scripts: 16 passed,
+including 6 physical complex-field checks, 5 source-classifier/curl
+checks, 3 causal heat checks, 2 prior coarea checks. Exact-GitHub-head
+pytest and Lean/Agda kernel not performed, so do not mark source
+commits kernel-proved.
+
+**Next max-cut acceptance tests:**
+1. Construct the actual Agda phase-preserving nonlinear/curl
+   and selected Bony+Com adapter by consuming Round35/Round93/
+   OfficialParseval and the original R236/R685/R690 theorem terms.
+   Pin the +8, -16384, classwise +4/-4 and old shear projection
+   negative-control witnesses; the target must express every
+   compensation, not merely numerical agreement.
+2. Instantiate A's same-physical-continuum Fourier/Plancherel
+   transformation and causal Duhamel semigroup in existing Bishop
+   carriers. Do NOT rederive scalar kernels.
+3. Close a genuinely cutoff-uniform, viscosity-dependent, scale-critical
+   signed physical estimate sufficient for A3/B7, without assuming
+   the desired continuation. Ri's stronger viscosity-uniform headline
+   estimate remains excluded conditionally by the released Euler
+   blowup and inviscid limit.
+4. Only actual kernel builds and direct unrestricted continuation
+   proofs authorize an A/B theorem-complete status.
+
+---
+
 ## 2026-10-24 completed local physical PHASE-preserving realification check
 
 The fifth test `test_exact_real_imag_six_vector_bridge_preserves_work`
