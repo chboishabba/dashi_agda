@@ -192,5 +192,51 @@ heatPumpDeliveryNotIdenticalToCapturedSource :
   hpOutputKilowatt ≡ hpEvaporatorKilowatt → ⊥
 heatPumpDeliveryNotIdenticalToCapturedSource ()
 
+-- Two facilities can have exactly the same available heat, but not
+-- the same realised benefit: availability of a coincident thermal offtaker
+-- is not encoded by the waste-heat quantity.
+data DemandCase : Set where
+  matchedOfftaker : DemandCase
+  noConcurrentOfftaker : DemandCase
+
+heatAvailableKilowatt : DemandCase → Nat
+heatAvailableKilowatt _ = 8000
+
+heatActuallyRecoveredKilowatt : DemandCase → Nat
+heatActuallyRecoveredKilowatt matchedOfftaker = 8000
+heatActuallyRecoveredKilowatt noConcurrentOfftaker = 0
+
+sameHeatPotential :
+  heatAvailableKilowatt matchedOfftaker
+  ≡ heatAvailableKilowatt noConcurrentOfftaker
+sameHeatPotential = refl
+
+differentRealisedHeat :
+  heatActuallyRecoveredKilowatt matchedOfftaker
+  ≡ heatActuallyRecoveredKilowatt noConcurrentOfftaker → ⊥
+differentRealisedHeat ()
+
+-- Hypothetical 50 C multistage absorption example at thermal COP 0.35.
+-- It uses 6000 kW of heat to provide 2100 kW of chilling and must reject
+-- 8100 kW at the absorption condenser/absorber, before auxiliaries.
+-- This DOES NOT prove that outdoor noise, water usage, or total energy fall.
+absorptionDriveKilowatt : Nat
+absorptionDriveKilowatt = 6000
+
+absorptionChillKilowatt : Nat
+absorptionChillKilowatt = 2100
+
+absorptionRejectKilowatt : Nat
+absorptionRejectKilowatt = 8100
+
+absorptionBalanceExact :
+  absorptionRejectKilowatt
+  ≡ absorptionDriveKilowatt + absorptionChillKilowatt
+absorptionBalanceExact = refl
+
+absorptionCOPThirtyFiveHundredths :
+  100 * absorptionChillKilowatt ≡ 35 * absorptionDriveKilowatt
+absorptionCOPThirtyFiveHundredths = refl
+
 -- No model of carbon savings, a real Queensland facility, noise reduction,
 -- thermal storage dispatch, or legal compliance is proven by this witness.
