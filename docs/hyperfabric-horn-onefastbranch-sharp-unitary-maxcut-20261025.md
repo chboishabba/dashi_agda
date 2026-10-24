@@ -54,3 +54,18 @@ A complete 3D source proof must exhibit the actual linked Hatcher Z-block; its v
 A NONFLAT physical Wilson connection needs more: the Hatcher pi1 commutator identity holds on holonomy automatically only for FLAT monodromy. If actual loop concatenation is used instead, the chosen root loop and its word representative differ by a homotopy whose curvature/Stokes defect must be explicitly bounded. Existing FlatFormalDiskHolonomySurface owns those analytic interfaces.
 
 This cut discharges a sharper CONDITIONAL mathematical constraint but not the source geometry, source physical metric, a Witten/Monster/369 same-object map, a neutrino prediction or a Clay theorem. Continue the actual linked Z-block marked-meridian construction rather than adding another C3/27 numerology layer.
+
+
+## Further exact sharpness certificate: the factor 2 cannot be universally reduced
+
+The bound d([A,B])<=2d(A) is OPTIMAL as a uniform all-unitary constant, not merely a convenient improvement. Consider, in SU(3),
+A_n=diag(z_n,z_n^-1,1), z_n=(n+i)/(n-i), and
+B=[[0,1,0],[-1,0,0],[0,0,1]]. Then B A_n B^-1=A_n^-1
+and [A_n,B]=A_n². Consequently
+
+    [d([A_n,B])/d(A_n)]²
+       = |z_n+1|² = 4n²/(n²+1) -> 4.
+
+The ratio tends to 2 as n→∞. Exact rational tests n=1,2,5,10,100,1000 PASS in the latest GitHub #1249 source script; independent explicit 3×3 SU3 numerical matrices corroborate the formula. Lean #84 source now states the rational optimality ratio and exact positive deficit 4/(n²+1); Lean kernel remains unverified.
+
+This validates why the general selected one-branch geometric rate cutoff is precisely q<1/2 *for this universal per-level bound*. Geometry or representation-specific restrictions could still improve the factor, but cannot be assumed. It is an acceptance criterion, not proof the actual linked Hatcher blocks contract at q<1/2.
