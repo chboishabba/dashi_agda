@@ -34,6 +34,16 @@ class TestNobelOpticalCausality(unittest.TestCase):
     def test_independent_hidden_target(self):
         self.assertTrue(m.independent_channel_and_target_gate()["remote_person_target_address_not_inferred"])
 
+    def test_2x2x2_opsin_vs_spin_triple_interaction(self):
+        r=m.three_factor_spin_vs_opsin_discriminator()
+        self.assertEqual(r["pure_opsin_magnetic_field_three_factor_interaction"],0)
+        self.assertEqual(r["declared_spin_receptor_three_factor_interaction"],1)
+
+    def test_2187_lower_order_nulls(self):
+        self.assertEqual(
+            m.three_factor_spin_vs_opsin_discriminator()["at_most_pairwise_exact_nulls_checked"],
+            2187)
+
     def test_fail_closed_experimental_promotion(self):
         self.assertEqual(m.mechanism_manifest()["claim"]["claim_promotion"],"NOT_AUTHORIZED")
 
