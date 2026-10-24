@@ -1,3 +1,21 @@
+> **24 Oct 2026 — exact B4 no-go supersedes historical payment
+> search.** The original full-fibre signed noncore/core R440 covariance
+> is not cutoff-uniform against bounded physical ED: on the smooth
+> shear `u_hat(±e_x)=u_hat(±e_y)=e_z` its defect is
+> `988633056` at N=36 and `1671172320` at N=40 while
+> `M_core=1345859672` stabilizes for N>=9. The classifier
+> uses STRICT +3 shell separation. The zero-padding mechanism has
+> an infinite positive subfamily `2m(m-1)` for m>=10.
+> See `scripts/ns_b4_literal_padding_adversary.py` and the
+> canonical NSProofControl roadmap. The no-go is conditional on ED
+> being bounded for this fixed state; it is not a Clay counterexample.
+> Search instead for zero-padding-invariant signed original-R440
+> estimates, keeping exact same-source PDE meaning.
+>
+> For A, the local continuum projected Fourier cell and single
+> convolution energy-square quadrature are already present. The
+> genuine gap is actual Fourier-transform/source population and
+> physical majorant/continuation, not new local Leray algebra.
 > **2026-10-24 canonical A/B supersession notice.** The original ladder below
 > is preserved for historical provenance. It is NOT the default live queue:
 > the older L3 finite-dimensional flow/selected-slot compiler inventory was
