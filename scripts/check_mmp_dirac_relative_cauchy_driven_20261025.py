@@ -141,8 +141,8 @@ def main():
     for steps in (90,180,360):
         z=scenario(balanced,steps)
         conv.append((steps,z['time_dependent_gauge_error'],z['Kubo_vs_centered_response_error']))
-    assert conv[0][1]>3.8*conv[1][1]>3.8*3.8*conv[2][1]
-    assert conv[0][2]>3.7*conv[1][2]>3.7*3.7*conv[2][2]
+    assert conv[0][1]>3.8*conv[1][1] and conv[1][1]>3.8*conv[2][1]
+    assert conv[0][2]>3.7*conv[1][2] and conv[1][2]>3.7*conv[2][2]
     out['step_refinement']=conv
     print(json.dumps(out,indent=2))
     print('PASS finite driven Wilson-Dirac gauge, CAR, Ward, Dyson/Kubo, balanced Wilson negative control')
