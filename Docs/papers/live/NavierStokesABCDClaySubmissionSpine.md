@@ -1,3 +1,21 @@
+> **Original unforced A/B frontier reconciliation — 24 October 2026.**
+> Merged PR #1091 already proves the canonical pair/resolvent/Gram
+> and signed R440 representation reductions. Merged PR #1234 already
+> defines a source-attached B4 analytic **interface**, but the signed
+> cutoff-uniform physical inequality has no exhibited theorem inhabitant.
+> The canonical A analysis is not waiting for another resolvent algebra:
+> it needs population from the actual Euclidean NS Fourier integrand
+> (A1a), the high heat/output identification (A1b), real finite-energy
+> low/high convolution majorants (A2a,b), and physical continuation (A3).
+> B still needs B1/B2/B3 physical shell payments, a strict physical B4
+> payment, B7 cutoff-uniform integrated control and continuation.
+> The R823 negative-reserve source chain is auxiliary, not a substitute.
+> The `NSUnforcedAnalyticCuts.lean` scalar stability and pairwise Young
+> bounds are mathematical refinements, not evidence that A2/B4 is paid.
+> See `Docs/roadmaps/NSProofControl20260915.md` for the current
+> quantified proof acceptance tests and the six-route non-RNNN workflow.
+> No whole-space A or periodic B Clay theorem is claimed or kernel
+> verified in this audit.
 > **Canonical R823 source reconciliation — 24 October 2026.** Earlier
 > passages below identifying a still-open *real Galerkin ODE*, *real R853
 > physical carrier*, *R760 original-multiplicity cell* or *real integrated
