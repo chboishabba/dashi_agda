@@ -87,10 +87,10 @@ nativeAQFTTimeSliceStillTargetOnly : Set
 nativeAQFTTimeSliceStillTargetOnly =
   AQFT.TimeSliceTheoremStatus
 
-// Existing native Bishop/constructed-real residual: once a true same-
-// background, same-parametrix REGULATOR DIFFERENCE is supplied and proved
-// Cauchy, this owner ALREADY constructs its renormalized limit. Completeness
-// does not itself manufacture the residual tail estimate.
+-- Existing native Bishop/constructed-real residual: once a true same-
+-- background, same-parametrix REGULATOR DIFFERENCE is supplied and proved
+-- Cauchy, this owner ALREADY constructs its renormalized limit. Completeness
+-- does not itself manufacture the residual tail estimate.
 nativeCasimirResidualSequenceOwner : Set₁
 nativeCasimirResidualSequenceOwner =
   Casimir.ResidualRegulatorSequence
