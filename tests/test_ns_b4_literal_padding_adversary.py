@@ -180,3 +180,21 @@ def test_existing_R681_cross_gradient_is_zero_padding_invariant():
         p=(m,0,0)
         q=(1-m,1,0)
         assert signed_normal_form(rows+[(p,q,F(0))])==before
+
+
+def test_R681_is_not_the_old_B4_defect_same_output_shear():
+    # On the SAME smooth physical shear and output:
+    # R681 weighted physical input-rate work = 2,
+    # |k|²*W(M,M) = 2, cross-gradient = 0.
+    # The deprecated full-fibre B4 signed noncore/core defect is
+    # 185520 at N9 and 1671172320 at N40.
+    # Therefore direct equality of R681's PAD-INVARIANT physical
+    # output-relative work with the old B4 defect is FALSE.
+    # An admissible repair must use a compensated global recombination
+    # over all physical classes/outputs, not merely rename B4.
+    output_heat_relative=Fraction(0)
+    for n in (9,16,40):
+        assert Fraction(module.certificate(n)["signed_defect"]) > 0
+        assert Fraction(module.certificate(n)["signed_defect"]) != output_heat_relative
+    assert output_heat_relative==(
+        Fraction(2)-Fraction(sum(x*x for x in module.K))*Fraction(1))
