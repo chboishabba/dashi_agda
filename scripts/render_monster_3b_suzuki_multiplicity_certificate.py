@@ -99,7 +99,21 @@ def validate(payload: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("expected two distinct positive central order-three class positions")
 
     p12 = _positions(payload, "faithful_degree_12_positions")
+    if payload.get("degree_78_family_filter") != "faithful_to_6Suz":
+        raise ValueError("degree78 selected family must explicitly be faithful to 6.Suz")
     p78 = _positions(payload, "degree_78_positions")
+    more78 = payload.get("nonfaithful_degree_78_positions")
+    all78 = payload.get("all_degree_78_positions")
+    if (not isinstance(more78, list) or len(more78) < 1
+        or any(type(i) is not int or i <= 0 for i in more78)
+        or len(set(more78)) != len(more78)
+        or set(p78) & set(more78)):
+        raise ValueError("separate nonfaithful degree78 family missing or overlaps faithful pair")
+    if (not isinstance(all78, list)
+        or any(type(i) is not int or i <= 0 for i in all78)
+        or len(set(all78)) != len(all78)
+        or set(all78) != set(p78) | set(more78)):
+        raise ValueError("degree78 complete inventory does not partition into two distinct families")
     l12 = _labels(payload, "faithful_degree_12_atlas_labels")
     l78 = _labels(payload, "degree_78_atlas_labels")
     r12 = _rows(payload, "degree_12_rows", 12, p12, l12)
@@ -117,6 +131,8 @@ def validate(payload: dict[str, Any]) -> dict[str, Any]:
         "l78": l78,
         "r12": r12,
         "r78": r78,
+        "nonfaithful78": more78,
+        "all78": all78,
         "fusion_length": fusion_length,
     }
 
@@ -164,6 +180,17 @@ faithfulDegree12AtlasLabels : List String
 faithfulDegree12AtlasLabels = {string_list(v['l12'])}
 degree78AtlasLabels : List String
 degree78AtlasLabels = {string_list(v['l78'])}
+
+-- These are the 2 faithful degree78 source-family coordinates in the
+-- Monster quotient matcher, NOT Gabriele Nebe's nonfaithful Sym²(12).
+sourceSelectedDegree78FaithfulToSixSuz : Bool
+sourceSelectedDegree78FaithfulToSixSuz = true
+nonfaithfulDegree78Positions : List Nat
+nonfaithfulDegree78Positions = {nat_list(v['nonfaithful78'])}
+completeDegree78Inventory : List Nat
+completeDegree78Inventory = {nat_list(v['all78'])}
+faithfulSymSquareFamilyInterchangePaid : Bool
+faithfulSymSquareFamilyInterchangePaid = false
 
 sixSuzToOuterFusionLength : Nat
 sixSuzToOuterFusionLength = {v['fusion_length']}
