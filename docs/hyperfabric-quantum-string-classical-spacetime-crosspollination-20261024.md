@@ -353,3 +353,52 @@ Our exact `P3^3→P3^6→P3^9` extends graph axes rather than refining one fixed
 #1241 supplies a physically appropriate *distinct* N=3^k periodic circle lattice, exact Wilson-link gauge covariance, and fixed Fourier-band `O(N^-2)` KK spectral/heat error. Full unbounded Casimir/QCD stress requires an independent regulator-uniform limit. It also rewrites the selected QED+QCD stationary vacuum failure as an uncancelled five-dimensional internal pressure. The new local calculation therefore does NOT upgrade this branch's finite hyperfabric toy to physical KK, Einstein, string or QCD.
 
 Original dimensional deconstruction prior art: Arkani-Hamed, Cohen, Georgi, PRL 86 (2001) 4757, DOI 10.1103/PhysRevLett.86.4757. The sibling physical theorem owners remain independent until merged and typechecked.
+
+
+## FINAL 2026-10-24 SOURCE-SELECTED ACTION RESULT: DO NOT REBUILD THIS IN A NEW TOE WRAPPER
+
+**Authoritative focused ledger:** `docs/hyperfabric-27-minus-1-physical-action-k27-source-maxcut-20261024.md`.
+
+This new tranche **independently derives** Lambert–West's original `125/121`
+dilaton kinetic mismatch for the selected simple 27D Einstein–Hilbert
++ 3-form action under single-circle reduction, instead of merely
+recording it as an external source. Exact metric ansatz:
+`G_(d+1)=diag(exp(2aσ)g_d, exp(2bσ))`.
+Common string-frame exponents for R and H³ force `b=-2a`.
+After the conformal scalar curvature and integration by parts:
+`K_actual=(d-1)(d-6)a²`, while normalised string-frame
+`Phi=-(d-4)aσ/2` requires `K_required=(d-4)²a²`.
+The exact gap is `(d−10)a²`; at d=26, ratio
+`500/484=125/121`; at d=10, ratio 1. This **falsifies the
+literal unmodified selected simple 27D action** as a reduction to
+the conventional tree-level 26D bosonic string-frame action.
+The stronger and distinct Glennon/West 2024–25 `K27=D24+++`
+symmetry/brane/coset comparison remains the next physical owner;
+no universal impossibility result asserted.
+
+Exact chosen action *partial success*: constant-radius 27D
+`-F4²/(2·4!)` with y-leg potential `C_{μνy}=r B_{μν}`
+reduces to 26D `-H3²/12`; 162 exact-rational Lorentzian
+backgrounds pass. Its naive extension to variable radius
+fails because `d(rB)=rH+dr∧B`. This is a same-source
+positive/negative pair—not all Einstein/dilaton physics.
+
+Original path-graph *independent* representation no-go:
+`L δ_origin=6δ_origin−sum_neighbor δ`; the origin scalar
+line and the 26 non-origin SITE span are not closed under L.
+The **different** 26-dimensional mean-zero wave space is invariant
+and self-adjoint in positive `G=I-J/27`, with eight distinct
+positive eigenvalues. Since the real compact F4 traceless Albert 26
+is irreducible, it cannot simultaneously carry this non-scalar,
+self-adjoint, F4-equivariant *unchanged* L. A different/symmetry-broken
+Hamiltonian is allowed and requires a new physical selected object.
+
+**Source-rooted owners and new receipts**:
+- `DASHI/Unified/Hyperfabric27MinusOneOriginalPathInvariantNoGoExact.agda` — original-cube non-origin adjacency no-go, source-written; Agda kernel unverified.
+- `scripts/check_hyperfabric_27_26_action_obstruction.py` — exact Git blob `97472debda8443394c09f94b2229396570a481b1`, executed PASS 676 bilinear pairings, eigenspaces and source-path leakage.
+- `scripts/check_27d_3form_26d_string_sector.py` — exact Git blob `b40fa7889866ff843ff3343a1bb1aeb48cf26c68`, executed PASS 162 test backgrounds and variable-radion counterexample.
+- `scripts/check_27d_bosonic_m_dilaton_125_121.py` — exact Git blob `96f2f1eb91d487b3ddc18acd785ade4261132801`, executed PASS 102 exact rational source coefficients, derived `125/121`.
+- Lean #84 `Integration/DASHITOE/BosonicM27CoefficientCut.lean`, exact blob `e3377919e2e3557a6e2bb47f25d7998696a9d98f`, theorem source-written, Lake/kernel unverified.
+- External physics roots: Horowitz/Susskind 2000/2001; Lambert/West 2001; Glennon/West 2024/25; Glennon 2025; conventional bosonic tree string-frame action source. Attribution labels the `125/121` as originally published.
+
+**Changed Pareto**: selected original 27D action has a **resolved negative** physical verdict, not a vague open dimensional-comparison question. To proceed toward actual unification, source-select a DIFFERENT K27-preserving action and prove the same target stress, dilaton normalization, gauge/Bianchi, BRST/anomaly and observables. Do not feed finite 26 modes into YM/NS/Clay without the canonical source estimates.
