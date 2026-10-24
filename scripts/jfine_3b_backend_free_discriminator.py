@@ -111,13 +111,22 @@ def audit():
         if cl=='identity' and (a!=O or b!=O):assert chi==(0,0)
     assert result[1]['chi_coefficients_1_zeta']==(0,65610)
     assert result[2]['chi_coefficients_1_zeta']==(-65610,-65610)
+    # Concrete negative control: twist the full D4 multiplicity action by
+    # its determinant/sign character, leaving EVERY Heisenberg element fixed.
+    # The E modules are literally identical but reflection traces change.
+    # Therefore no D4-intertwiner exists between the two D4 extensions.
+    sign=(1,1,1,-1,-1)
+    twisted=[x*s for x,s in zip(vecs[2],sign)]
+    twisted_mult=d4_decompose(twisted)
+    assert twisted_mult=={'A1':7110,'A2':9540,'B1':8280,'B2':8280,'E2':16200}
+    assert twisted!=vecs[2]
     return dict(status="exact integer/cyclotomic finite test passed",model="constructed geometric H6⋊D4 JFine action",
                 mmgroup_required=False,Heisenberg_order=3**13,
                 central_fusion_3B_trace_sourced=53,
                 Monster_c3_sector_dimensions=(65663,65610,65610),
                 D4_class_order=classes,D4_char90=vecs[0],D4_char729=vecs[1],
                 D4_char65610=vecs[2],D4_irreps90=mult[0],D4_irreps729=mult[1],
-                D4_irreps65610=mult[2],D4_elements=rows,
+                D4_irreps65610=mult[2],D4_elements=rows,\n                same_E_different_D4_counterexample=dict(\n                  Heisenberg_action_identical=True,twist='orientation character of D4 on multiplicity',\n                  twisted_D4_character_65610=twisted,\n                  twisted_D4_irreps_65610=twisted_mult,\n                  exists_D4_intertwiner=False),
                 exact_mixed_Weyl_traces=result,
                 actual_Monster_N3B_same_action=False,
                 actual_Monster_basis_intertwiner=False,
