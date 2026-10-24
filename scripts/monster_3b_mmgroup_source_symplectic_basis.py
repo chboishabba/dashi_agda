@@ -164,7 +164,39 @@ def run():
     # 24 normalizer generator images in a DIFFERENT implementation path.
     from monster_3b_mmgroup_weyl_word_alignment import check_words
     checked=check_words(manifest)
-    checked.update(source_blob_sha=SOURCE_BLOB_SHA,rank_commutator_form=rank_f3(gram),
+    # SAME source copy of N(3B), acting on the actual 196884-dimensional
+    # Monster vector module over F7 (primitive third root zeta=2).
+    # This checks real zeta eigenspace transport, NOT 12+78 in char zero.
+    from mmgroup import MMV
+    V7=MMV(7)
+    specs=[("A",0,0),("A",0,1),("B",0,1),("C",0,1),
+           ("T",0,0),("X",1,0),("Y",1,0),("Z",1,0)]
+    nonzero_samples=0
+    for tag,i,j in specs:
+        v=V7(tag,i,j)
+        projected=5*(v+4*(v*z)+2*(v*(z**2)))
+        if projected*z!=2*projected:
+            raise RuntimeError("actual MMV(7) zeta projector eigenrelation failed")
+        if projected==0*v:
+            continue
+        nonzero_samples+=1
+        for g in (A[0],A[1],B[0],B[1]):
+            if (projected*g)*z!=2*(projected*g):
+                raise RuntimeError("actual E generator does not preserve zeta sector")
+        for lift in lift_rows:
+            h=MM(lift["word"])
+            expected=2 if lift["central_image"]==1 else 4
+            if (projected*h)*z!=expected*(projected*h):
+                raise RuntimeError("actual normalizer lift has wrong phase transport")
+    if not nonzero_samples:
+        raise RuntimeError("no sampled nonzero actual Monster zeta vectors")
+    checked.update(
+        actual_MMV7_nonzero_zeta_samples=nonzero_samples,
+        actual_MMV7_phase_transport_checked=True,
+        characteristic_zero_12_78_inferred_from_F7=False,
+        # Characteristic 7 divides |Suz|, so semisimplicity for the
+        # full normalizer is not inferred from this modular representation.
+source_blob_sha=SOURCE_BLOB_SHA,rank_commutator_form=rank_f3(gram),
                    normalizer_generators=[x["name"] for x in lift_rows],
                    characteristic_7_vector_action_available=True,
                    observed_actual_mmgroup_execution=True,
