@@ -387,7 +387,7 @@ state spaces, no new full VOA/Jacobi kernel certificate,
 and no Monster 3B recognition result.
 
 
-## 2026-10-24 decisive follow-on: SAME quartz spin matrix and full F7 actor
+## 2026-10-24 decisive follow-on: SAME quaternion spin matrix and full F7 actor
 
 **Stronger actual same-object representation owner**
 `DASHI/Mathematics/Topology/AlexanderHornedC3SpinCyclotomicIntertwinerExact.agda`
