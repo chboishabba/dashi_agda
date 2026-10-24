@@ -993,3 +993,223 @@ algebra and an **adversarial countermodel** against extrapolating
 any compatible `Z3` plus `Z2×Z2` residuals to a finite
 group.  Original IceCube observational authorship and global-fit
 parameter provenance remain separate from these new calculations.
+
+## 24 October 2026 max-cut round 5 — RECOVERY of existing CP-violating sector
+
+### Corrected prior-art verdict: CP algebra and Jarlskog already existed
+
+The previous roadmap statement that "the CP-violating sector is absent"
+was overly broad.  Source inspection on the repository's base
+`master` found these original owner modules and their actual scope:
+
+| Existing source file | Owned prior art | Negative/promotional scope |
+| --- | --- | --- |
+| `DASHI/Physics/Closure/CPPhaseStructuralOriginReceipt.agda` | Atkin–Lehner `w7` action on the CM `D=-7` point, `arctan(sqrt(7))` structural CP candidate | `physicalCPPhasePromoted=false`, Yukawa eigenbasis and physical CP authority missing |
+| `DASHI/Physics/Closure/CPPhaseFromArcTanSqrt7Receipt.agda` | One-loop-corrected candidate phase `1.1596 rad` | diagnostic only; physical CP and CKM promotion false |
+| `DASHI/Physics/Closure/CKMGateAbRetirementReceipt.agda` | Experimental tension and isogeny audit of pure CM CKM angle | pure `arctan(sqrt(7))` physical CKM-angle claim **retired** after 5.4σ HFLAV 2023 comparison |
+| `DASHI/Physics/Closure/HeckeCharacterPhaseReceipt.agda` | Nontrivial `p=29` Hecke character CP-phase diagnostic | wrong physical phase comparison, no phase authority, physical promotion false |
+| `DASHI/Physics/Closure/Y13ComplexEntryReceipt.agda` | Complex `Y_{13}` Yukawa texture entry with phase candidate | `y13PhysicalValue=false` and `physicalCKMPromoted=false` |
+| `DASHI/Physics/Closure/JarlskogDiagnosticAnalysis.agda` | Jarlskog invariant diagnostic and error budget | 11.26× CKM target overshoot and unresolved eigenbasis; `physicalCPDerived=false` |
+| `DASHI/Physics/Closure/CKMPredictionFrontierReceipt.agda` | Genuine symbolic CKM/Jarlskog requirements | no physical numeric phase or Jarlskog derived |
+| `DASHI/Moonshine/C3CyclotomicAmplitudeAlgebraExact.agda` | Exact `Q(ζ3)` multiplication, conjugation and norm | valid universal complex-phase donor, *not* itself a leptonic mass operator |
+
+The new lepton CP route **imports** the canonical CKM phase/Jarlskog
+receipts, explicitly preserving their promotion-false proof fields.
+It also reuses the SAME `Q(ζ3)` scalar owner rather than reconstructing
+a phase ring.  A CKM-specific Hecke phase is **not** mapped to a
+physical PMNS phase by shared notation or modular analogy.
+
+### New exact complex same-lepton-space construction
+
+`DASHI/Physics/QFT/NeutrinoExistingCPSectorLeptonBridgeExact.agda`:
+
+- Uses already-selected Pythagorean rational sine/cosine fixtures
+  `(161/289,240/289)`, `(240/1609,1591/1609)`,
+  `(20/29,21/29)`.  These are **post-hoc near-data inputs**.
+- Replaces the previous real `δ=0` operator with the standard
+  three-flavour PDG complex matrix `U=R23 R13(δ) R12`, where
+  **`exp(+iδ)=ζ3`** and `exp(-iδ)=ζ3²`.  This is an
+  intentionally fixed, testable **δ=120° toy branch**, NOT a
+  first-principles angle selection or a transported CKM phase.
+- Gives **9 closed row- and 9 closed column-unitarity proof clauses**
+  over the existing rational cyclotomic algebra.
+- Builds `Hν=U diag(0,7537,251100) U†` on the SAME chosen
+  lepton flavour basis (mass-squared units 10^-8 eV²), with 9
+  corresponding exact eigenvector clauses.
+- Defines the rephasing-invariant quartet
+  `Q=U_e1 U_mu2 conj(U_e2) conj(U_mu1)` and proves its exact
+  cyclotomic ζ coefficient:
+  ```
+  coeff_ζ(Q) = 9859116742272000/292590225473523169
+             ≈ 0.03369598805
+  Im_C(Q)    = sqrt(3)/2 * coeff_ζ(Q)
+             ≈ +0.029181581660378.
+  ```
+  The ordinary-complex imaginary part requires the standard
+  analytic embedding `ζ=-1/2+i*sqrt(3)/2`.  The rational
+  cyclotomic coefficient and its nonzero status are exact algebraic
+  facts in the selected model.  CP conjugation `ζ↔ζ²` flips its
+  sign while keeping the mixing angles fixed.
+- The source explicitly imports the original CKM diagnostics and
+  demonstrates their `false` promotion flags, retaining the
+  quark/lepton same-object boundary.
+
+**Source-written** proofs are not described as Agda-kernel verified.
+Independent Python `Fraction` evaluation of the exact `Q(ζ)`
+operations passed **9/9 row unitarity, 9/9 neutral eigen equations,
+exact quartet coefficient and conjugation sign**, using the
+independently specified original mixing formulas.
+
+### Full CP-sensitive weak-basis invariant, not merely a phase label
+
+`DASHI/Physics/QFT/NeutrinoExistingCPMassCommutatorExact.agda`
+defines the **same-space** charged and neutral squared-mass
+commutator for `H_l=diag(1,4,9)` (**arbitrary illustrative masses**,
+not empirical charged lepton mass inputs):
+
+```
+C = [H_l,H_nu] = H_l H_nu - H_nu H_l
+Tr(C³) = 3(C_eμ C_μτ C_τe + C_eτ C_τμ C_μe)
+```
+
+This yields an exact nonzero CP-odd cyclotomic value:
+
+```
+coeff_ζ(Tr(C³))
+ = 3272103619391689547963065344000000
+   /292590225473523169
+
+coeff_ζ(Tr(C³))/coeff_ζ(Q)
+ = 331886081170152000
+ = 6 * (charged mass-difference product)
+     * (neutrino mass²-difference product)
+```
+
+It is **pure imaginary** after embedding in ordinary `C`;
+complex conjugation flips its sign.  This explicitly links
+CP violation to a noncommuting *pair of mass operators* rather
+than merely assigning a complex character to a state.
+
+Historical priority belongs to **Cecilia Jarlskog**:
+*Phys. Rev. Lett.* **55**, 1039 (1985),
+https://doi.org/10.1103/PhysRevLett.55.1039
+and *Phys. Rev. D* **35**, 1685 (1987),
+https://doi.org/10.1103/PhysRevD.35.1685.
+Our new computation is an **example/consumer** of that standard
+invariant, not discovery of the CP test or a physics measurement.
+
+### Adversarial finite-group check still fails WITH CP violation
+
+`DASHI/Physics/QFT/NeutrinoExistingCPFiniteResidualNoGoExact.agda`
+uses the same charged `T=diag(1,ζ,ζ²)` and neutrino
+`S1=U diag(1,-1,-1)U†=2|u1><u1|-I`.  The field trace
+of `tr(TS1)` can be reduced to
+
+```
+Tr_{Q(ζ)/Q}(tr(TS1))
+ = 3 S1_ee + 1
+ = 6 |U_e1|² - 2
+ = 442358853598/216225930001
+ ∈ (2,3).
+```
+
+It is **unchanged** from the earlier real `δ=0` example
+because `U_e1=c12 c13` is fixed, despite the new nonzero J.
+The standard finite-order/algebraic-integrality theorem consequently
+makes `TS1` infinite-order **for this chosen exact model**.
+Hence a nonzero Jarlskog does NOT by itself construct a finite
+group selecting the mixing angles.  Only the explicit arithmetic
+has source-written Agda proofs; the number-theory theorem itself
+remains an external mathematical input awaiting an Agda authority.
+
+### IceCube: a stronger CP-identifiability no-go
+
+`DASHI/Physics/QFT/NeutrinoExistingCPAstroConjugationNoGoExact.agda`
+reuses the **existing**
+`C3CyclotomicAmplitudeAlgebraExact.normConjugationInvariant`
+theorem to establish
+
+```
+Pbar_ab(U) = Σ_i |U_ai|² |U_bi|² = Pbar_ab(conj(U))
+f_earth(U,source) = f_earth(conj(U),source)
+```
+
+for **every** rational source flux triple, even though
+`J(U)=-J(conj(U)) != 0`.  Thus the CP-conjugate
+`δ=+120°/-120°` models are **exactly degenerate** in
+standard long-baseline **phase-averaged vacuum** flavour
+composition.  IceCube's PRL 137 (2026) 081002 arrival-flavour
+measurement, however valuable for source models, cannot *by itself*
+resolve that CP-odd sign under the stated standard approximations.
+An actual matter, energy-dependent, or coherent CP-sensitive
+observable is needed.  No event-likelihood work has been performed.
+
+Independent Fraction calculation gives for pion source `(1:2:0)`
+`(.331059,.337086,.331855)`; pure neutron source `(1:0:0)`
+`(.547260,.222958,.229782)`, identical for complex-conjugate U.
+These model ratios differ from the independently computed
+`NuFIT central δ=212°` benchmark, as expected: they are
+**not derived empirical PMNS predictions**.
+
+### Source updates (specific CP observational root)
+
+- PDG 2025 neutrino mixing review explicitly defines the
+  leptonic Jarlskog rephasing invariant, discusses CP-phase
+  uncertainties by ordering and separates it from Majorana phases:
+  https://pdg.lbl.gov/2025/reviews/rpp2025-rev-neutrino-mixing.pdf
+- NuFIT 6.1 (2025), data files and global CP dependence:
+  https://www.nu-fit.org/?q=node%2F309
+- T2K **15 September 2026** original experiment update
+  https://t2k-experiment.org/publications/results-from-the-t2k-experiment-on-neutrino-mixing-including-a-new-far-detector-muon-like-sample/
+  reports a normal-ordering best-fit `δ_CP=-2.18 rad` with
+  strong uncertainties.  This is independent original experimental
+  source context; no broad CP discovery is inferred here.
+- Vladimir Tello, "*Strong CP phase and the PMNS phase in Dirac
+  left-right symmetry*", accepted by *Physical Review D*
+  **19 October 2026**, https://doi.org/10.1103/mmvw-gcct ,
+  develops conditional CKM/QCD–PMNS **theory-specific**
+  correlations under generalized parity and a leptonic reality
+  constraint.  Interesting for *conditional* same-object
+  cross-sector work, but none of those physical assumptions has
+  been built or shown to hold in DASHI.  It does not license
+  direct equality of a Hecke CKM phase and a neutrino phase.
+
+### Refined max-cut priority
+
+**Paid mathematically at source/integer-execution level:** existing
+complex-phase and CKM CP owners recovered; nonzero lepton-sector
+Jarlskog quartet; actual complex Hermitian neutral mass-squared
+operator diagonalized by selected U; nonzero CP-odd mass-commutator
+cubic trace; persistent finite-group no-go; all-source phase-averaged
+CP-conjugation degeneracy.  Retain the 2026 original IceCube,
+T2K, NuFIT and PDG authorities separately.
+
+**Open R0:** exact-head Agda compiler/typechecking of
+`NeutrinoExistingCPSectorLeptonBridgeExact.agda`,
+`NeutrinoExistingCPMassCommutatorExact.agda`,
+`NeutrinoExistingCPFiniteResidualNoGoExact.agda`,
+`NeutrinoExistingCPAstroConjugationNoGoExact.agda`;
+run checked-out `test_neutrino_existing_cp_sector_bridge.py`.
+Any claimed `solve []` proof is SOURCE-WRITTEN until kernel receipt.
+
+**Open R1:** choose a **specific** residual/CP transformation and
+finite flavour-group representation *before* fitting U, derive
+the complex weak-basis mass operators and PMNS nonzero J with
+bounded parameters; the chosen 120° phase is a model hypothesis,
+not a consequence of C3 alone.  Test the finite-group trace
+obstruction and any residual breaking.
+
+**Open R2:** physical charged lepton Yukawas, weak charged-current
+production/detection, continuous vacuum and matter propagation,
+including neutrino vs antineutrino asymmetry; numerical CP-odd
+invariant by itself does not imply an observed effect.
+
+**Open R3:** official NuFIT6.1 correlated `χ²`/CP and
+T2K+NOvA likelihoods, preserving source/non-overlap; profile all
+phases/orderings and any parameter-free candidate.  Never fit an
+unversioned `δ=120°` to a 2026 best-fit point by assertion.
+
+**Open R4:** IceCube PRL 2026 arrival flavour likelihood is
+CP-sign-blind under standard vacuum averaging, so prioritize
+CP-sensitive beam data for the leptonic invariant; keep
+IceTracks-DR2-v2 source-location dataset as its separate consumer.
