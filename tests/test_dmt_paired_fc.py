@@ -128,7 +128,9 @@ def test_original_static_cohort_policy_rejects_15_even_with_fake_gate(tmp_path, 
         "source_repo": "SYNTHETIC", "git_source_blob_checks_passed": True}
     monkeypatch.setitem(sys.modules, "preflight_dmt_imaging_data", shim)
     manifest = {
-        "analysis": "original_static_gfc",
+        "analysis": module.EXPLORATORY_PARCELLED_ANALYSIS,
+        "input_representation": "BOLD_AAL_MAT",
+        "source_metric_relationship": "exploratory_not_source_equivalent",
         "motion_eligible_subjects": [f"S{i:02d}" for i in range(1, 16)],
         "motion_exclusion_source_reference": "SYNTHETIC QC ONLY",
         "alignment_preprocessing_source_reference": "SYNTHETIC ALIGNMENT ONLY",
@@ -137,4 +139,45 @@ def test_original_static_cohort_policy_rejects_15_even_with_fake_gate(tmp_path, 
     file = tmp_path / "manifest.json"
     file.write_text(json.dumps(manifest))
     with pytest.raises(ValueError, match="16-person"):
+        module.evaluate_verified_manifest(tmp_path, file)
+
+
+def test_real_label_cannot_be_forged_by_parcelled_mat(tmp_path, monkeypatch):
+    shim = types.ModuleType("preflight_dmt_imaging_data")
+    shim.check_manifest = lambda root, manifest, receipt: {
+        "status": "admissible_manifest_only", "source_commit": "SYNTHETIC",
+        "source_repo": "SYNTHETIC", "git_source_blob_checks_passed": True}
+    monkeypatch.setitem(sys.modules, "preflight_dmt_imaging_data", shim)
+    import json
+    fake = {
+        "analysis": "original_static_gfc",
+        "motion_eligible_subjects": sorted(module.PUBLISHED_STATIC_GFC.get(
+            "eligible_subject_count", 16) * ["S01"]),
+        "motion_exclusion_source_reference": "synthetic",
+        "alignment_preprocessing_source_reference": "synthetic",
+    }
+    file = tmp_path / "fake.json"
+    file.write_text(json.dumps(fake))
+    with pytest.raises(ValueError, match="voxelwise preprocessed NIfTI"):
+        module.evaluate_verified_manifest(tmp_path, file)
+
+
+def test_parcelled_candidate_requires_explicit_non_equivalence(tmp_path, monkeypatch):
+    shim = types.ModuleType("preflight_dmt_imaging_data")
+    shim.check_manifest = lambda root, manifest, receipt: {
+        "status": "admissible_manifest_only", "source_commit": "SYNTHETIC",
+        "source_repo": "SYNTHETIC", "git_source_blob_checks_passed": True}
+    monkeypatch.setitem(sys.modules, "preflight_dmt_imaging_data", shim)
+    import json
+    fake = {"analysis": module.EXPLORATORY_PARCELLED_ANALYSIS,
+            "motion_eligible_subjects": ["S01"] * 16,
+            "motion_exclusion_source_reference": "synthetic",
+            "alignment_preprocessing_source_reference": "synthetic"}
+    file = tmp_path / "fake.json"
+    file.write_text(json.dumps(fake))
+    with pytest.raises(ValueError, match="released parcelled"):
+        module.evaluate_verified_manifest(tmp_path, file)
+    fake["input_representation"] = "BOLD_AAL_MAT"
+    file.write_text(json.dumps(fake))
+    with pytest.raises(ValueError, match="Source equivalence not established"):
         module.evaluate_verified_manifest(tmp_path, file)
