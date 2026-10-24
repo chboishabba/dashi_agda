@@ -175,3 +175,82 @@ is nontrivial and perfect, with no nontrivial abelian characters.
 A reviewable true-topology proof should present the explicit
 collar-thickened open sets and verify all contractible overlaps.
 The Agda kernel cannot infer their existence from the above prose.
+
+
+## 2026-10-24 formal topology library import and tested geometry placement
+
+The three-piece van Kampen calculation now has a **real Lean topology
+library consumer**, rather than only an Agda record of presumed group
+laws. See
+`proofs/horned_c3_lean/HornedC3/ThreeArmVanKampen.lean`.
+It imports the externally authored, kernel-proved
+`Hatcher.VanKampen.freeProductEquivFundamentalGroupOfRelationsTrivial`
+and
+`relationSubgroup_eq_bot_of_overlap_subsingleton`
+from Deicyde/hatcher-at, pinned at
+`fb20d71b6a7561c80f66350c14af118f3962377a`.
+That source's mathematics, authorship and published formal proof are
+NOT original to DASHI. The DASHI consumer assembles their theorem for
+three actual open sets `U : Fin 3 -> Set X`, requiring open cover,
+path-connected members and intersections, a common basepoint and
+trivial off-diagonal overlap fundamental groups. When given those
+particular certificates it returns a group isomorphism from the real
+cover free product to the real `FundamentalGroup X x0`, preserving
+the inclusion-induced map.
+
+**Critical limitation:** no inhabitant of that `ThreeArmCollarCover`
+has yet been constructed for the actual Hatcher three-copy complement.
+The source-written Lean consumer is not itself locally typechecked.
+It therefore does NOT close the wild-embedding, collar
+contractibility, finite-stage compatibility or limiting pi1 theorem.
+
+The independently executed Python exact-fraction audit
+`scripts/alexander_horned_c3_collars_audit.py` confirms the following
+concrete placement: central center (0,0,0), satellite centers 9e1,
+9e2, 9e3, radius-one envelopes, three radial tube *candidate boxes*
+with longitudinal coordinates [3/4,17/2] and transverse bounds
+[-1/8,1/8]. Exact inequalities establish pairwise separation of
+satellite envelopes, disjointness of the three tube boxes, avoidance
+of foreign satellite envelopes, and intended overlap with each
+tube's own satellite envelope and the central ball. The squares
+of satellite--central and satellite--satellite center distances are
+respectively 81 and 162, source-written as exact Agda identities in
+`AlexanderHornedC3SatellitePlacementExact.agda`. Neither calculation
+constructs a tubular collar attaching to the *wild ball* along a
+specific tame disk, nor proves its intersection is contractible.
+
+The focused kernel acceptance commands are:
+
+    bash scripts/check_alexander_horned_c3_exact_head.sh
+    cd proofs/horned_c3_lean && lake update && lake build
+
+The GitHub Actions attempt is in
+`.github/workflows/horned-c3-focused.yml`. Never report a check as
+kernel-verified unless exact-head log receipts from the relevant
+compiler have been returned. This session's runtime has neither an
+Agda nor a Lean executable and the newly requested workflow runs
+had not returned a successful job receipt at the time of writing.
+
+## Jordan and VOA scope
+
+`AlexanderHornedC3JordanActionExact.agda` proves that on any
+commutative magma satisfying the Jordan identity, the componentwise
+threefold product again satisfies that identity and cyclic coordinate
+permutation preserves the product. It does NOT establish full Jordan
+vector-space axioms or any physical/Monster/Albert identification.
+This is an auxiliary representation of the same abstract C3, not a
+geometric source map.
+
+The existing
+`DASHI/Moonshine/VertexOperatorAlgebraCore.agda`,
+`DASHI/Moonshine/VertexOperatorAlgebraLinearActionReceiptExact.agda`,
+`DASHI/Moonshine/Base369Monster3BVOAActionPhaseAdapterBidiExact.agda`
+and
+`DASHI/Biology/MoonshineWeightTwoGriessProductSchemaExact.agda`
+are candidate consumers. To connect the actual geometric automorphism
+to their state actions, a **specified group representation**
+`pi1(E) semidirect C3 -> Aut(V)` is required. An order-three
+symmetry, Jordan shape, character coincidence or Griess dimension
+alone does not supply that representation. A VOA tensor cube might
+admit permutation symmetry once tensor-product and grading axioms
+are supplied, but it is not used in the fundamental-group proof.
