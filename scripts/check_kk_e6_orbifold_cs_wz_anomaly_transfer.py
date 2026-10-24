@@ -63,6 +63,14 @@ assert remaining==(I6,0)
 theta,alpha=s.symbols("thetaChi alpha")
 WZ=-theta*X4/2
 assert s.expand(WZ.subs(theta,theta+2*alpha)-WZ)==s.expand(-alpha*X4)
+# Full boundary-local consistency for INDEPENDENT allowed even
+# gauge parameters at each endpoint, not just constant zero mode:
+alpha0,alpha1=s.symbols("alpha0 alphaPi")
+fermion_variation=(alpha0+alpha1)*X4/2
+bulk_CS_variation=(alpha0-alpha1)*X4/2
+local_WZ_variation=-alpha0*X4
+assert s.expand(fermion_variation+bulk_CS_variation+
+                local_WZ_variation)==0
 coeff={str(z):s.expand(X4).coeff(z)
        for z in (x*x,x*y,y*y,p1,c2c,c2L,c2R)}
 assert sorted(coeff.values())==sorted([40,64,40,16,2,2,2])
