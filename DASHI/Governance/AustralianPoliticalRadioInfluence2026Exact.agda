@@ -29,6 +29,9 @@ data PoliticalRelation : Set where
   proceduralValidityDecision : PoliticalRelation
   citedScientificMethod : PoliticalRelation
   projectSpecificExpertModel : PoliticalRelation
+  documentedFormLetterFamily : PoliticalRelation
+  petitionSupportAggregation : PoliticalRelation
+  reportedPrivateDocumentCustody : PoliticalRelation
   nativeAudioPublication : PoliticalRelation
   inferredNamedReferent : PoliticalRelation
   publicParliamentaryInquiry : PoliticalRelation
@@ -780,3 +783,38 @@ noAudioLocatorSpeechPromotion ()
 data SameUnusualQuantityMeansDirectSourceConsulted : Set where
 noReferentInferenceToConsultation : SameUnusualQuantityMeansDirectSourceConsulted → ⊥
 noReferentInferenceToConsultation ()
+
+
+-- The Senate publishes counts of submitted advocacy templates *supporting*
+-- a gas export levy. This is a control case for the difference between
+-- independent participants, independently authored texts, and independent
+-- evidence. No implication that advocacy on this side is invalid or insincere.
+gasTaxSenateFiveTemplateFamilies : RelationshipReceipt
+gasTaxSenateFiveTemplateFamilies = relationship-receipt
+  "Australian Senate Select Committee on the Taxation of Gas Resources"
+  "Five gas export levy form-letter template categories (272, 13, 52, 15, 14 copies)"
+  documentedFormLetterFamily institutionRecord
+  "Senate final report, 7 May 2026, Chapter 1 paragraphs 1.5-1.8"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Taxation_of_Gas_Resources/TaxationofGasResources/Report/Chapter_1_-_Report"
+  "Committee counted 366 submitted form letters in five template categories. Friends of the Earth Melbourne is the stated campaign route for the 13-copy type; DoGooder the platform for 52. Authors of three other templates are unknown. Template counts are not counts of independent arguments or evidence, nor a judgement of signatories."
+  false false false
+
+gasTaxGetUpPetitionAggregate : RelationshipReceipt
+gasTaxGetUpPetitionAggregate = relationship-receipt
+  "GetUp! petition submission to Australian gas taxation select committee"
+  "Comments from approximately 50000 supporters appended to a submission"
+  petitionSupportAggregation institutionRecord
+  "Senate final report, 7 May 2026, paragraph 1.9"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Taxation_of_Gas_Resources/TaxationofGasResources/Report/Chapter_1_-_Report"
+  "Committee reported the petition-attached comments supported a 25 percent export levy. Petition participation is not 50000 independently produced economic analyses; distinctness from any other submission group is unmeasured."
+  false false false
+
+novaClaimsFullBOMAuditCopy : RelationshipReceipt
+novaClaimsFullBOMAuditCopy = relationship-receipt
+  "Joanne Nova, 18 October 2026 CFACT article"
+  "Unpublished Tom Berger / Geoff Sherrington forensic BOM audit"
+  reportedPrivateDocumentCustody namedActorSelfReport
+  "Jo Nova publicly claims copy held and conditioned publication on author permission"
+  "https://www.cfact.org/2026/10/18/boms-scientific-scandal-the-raw-data-is-not-raw/"
+  "A named journalist/commentator reports having the complete original audit and says she may publish once permission is obtained, possibly after edits. This is a claimed source-custody route, not an inspected original, a full methodological disclosure, or proof that all audit assertions are accurate."
+  false false false
