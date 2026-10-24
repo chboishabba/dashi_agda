@@ -91,7 +91,18 @@ def evaluate(p):
                    for x,y,z in product(range(p),repeat=3))
         assert (len(roots)==0 or len(roots)==2)
         if p==5:assert roots==[]
-        if p==7:assert roots==[2,4]
+        if p==7:
+            assert roots==[2,4]
+            P2=scale(pow((2-4)%p,-1,p),
+                     add(M,scale(-4,I2,p),p),p)
+            P4=scale(pow((4-2)%p,-1,p),
+                     add(M,scale(-2,I2,p),p),p)
+            assert matmul(P2,P2,p)==P2 and matmul(P4,P4,p)==P4
+            assert matmul(P2,P4,p)==zero(2)
+            assert add(P2,P4,p)==I2
+            assert rank(P2,p)==rank(P4,p)==1
+            assert matmul(M,P2,p)==scale(2,P2,p)
+            assert matmul(M,P4,p)==scale(4,P4,p)
         if p==2:assert roots==[] and not sign_visible
     return {'characteristic':p,'Maschke':p!=3,'roots':roots,
             'cyclotomic_fixed_dimension':1 if p==3 else 0,
