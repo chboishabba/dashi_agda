@@ -16,6 +16,7 @@ targets=(
   DASHI/Mathematics/Topology/AlexanderHornedQuaternionC3SpinExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedSpin360720Exact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3SpinLiftSplitExact.agda
+  DASHI/Mathematics/Topology/AlexanderHornedC3MaschkeR3Exact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3MaschkeReynoldsExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3ModularJordanF3Exact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3R3HodgeEquivarianceExact.agda
