@@ -53,10 +53,10 @@ record SpinProjectiveQuotient : Set₁ where
 
 open SpinProjectiveQuotient public
 
-projectiveImage : SpinProjectiveQuotient → Source _ → Projective _
+projectiveImage : (Q : SpinProjectiveQuotient) → Source Q → Projective Q
 projectiveImage Q x = projective Q (spinImage Q x)
 
-spinObservable : SpinProjectiveQuotient → Source _ → Spin _
+spinObservable : (Q : SpinProjectiveQuotient) → Source Q → Spin Q
 spinObservable Q = spinImage Q
 
 cubeProjectivelyInvisible :
