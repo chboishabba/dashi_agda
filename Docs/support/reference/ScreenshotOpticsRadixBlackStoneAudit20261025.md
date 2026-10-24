@@ -7,17 +7,17 @@ and limited **finite mathematical formalisation**, not a calibrated flight test,
 a new proof of pi, an archaeological assay, or proof/disproof of a religious
 belief. Authoritative canonical ownership remains:
 
-- Maths: \`DASHI.Foundations.BaseTwelveCircleRepresentationBoundaryExact\`,
-  cross-linking \`DASHI.Foundations.Base369CirclePhase\`,
-  \`DASHI.Geometry.Base369SectorUnrollingFinite\`,
-  \`DASHI.Foundations.NumberRoleBoundary\`, and
-  \`DASHI.Foundations.P13UnitGroupC12Witness\`.
-- Optics: existing \`DASHI.Physics.Optics.DiffuserImagingObserverDynamicRangeExact\`,
-  \`DASHI.Physics.Optics.DiffuserNoiseStableRecoveryExact\`, and
-  \`DASHI.Physics.Optics.OpticalPhenomenaKernelBridge\`. The atlas imports a
+- Maths: `DASHI.Foundations.BaseTwelveCircleRepresentationBoundaryExact`,
+  cross-linking `DASHI.Foundations.Base369CirclePhase`,
+  `DASHI.Geometry.Base369SectorUnrollingFinite`,
+  `DASHI.Foundations.NumberRoleBoundary`, and
+  `DASHI.Foundations.P13UnitGroupC12Witness`.
+- Optics: existing `DASHI.Physics.Optics.DiffuserImagingObserverDynamicRangeExact`,
+  `DASHI.Physics.Optics.DiffuserNoiseStableRecoveryExact`, and
+  `DASHI.Physics.Optics.OpticalPhenomenaKernelBridge`. The atlas imports a
   **specific already-owned clipping non-recovery proof**, not a GOES model.
-- Provenance: \`DASHI.Core.AttributedSourceCore\`; new
-  \`DASHI.Culture.ScreenshotOpticsRadixBlackStoneAttributionExact\` is a
+- Provenance: `DASHI.Core.AttributedSourceCore`; new
+  `DASHI.Culture.ScreenshotOpticsRadixBlackStoneAttributionExact` is a
   non-promoting source and evidence-role adapter.
 
 No Agda/kernel verification is claimed merely from writing these files.
@@ -28,10 +28,10 @@ explicitly attributed or held.
 
 | Screenshot | What is visible | Correct attribution / status |
 |---|---|---|
-| \`1000018617.png\` | In-cockpit display; **comment** from \`evgenekb_\` says GOES-451M has higher resolution and clean high-magnification output. | The commenter is the author of **the comment**, not demonstrably the creator of the display/video. No original instrument log, test sequence, lens/sensor spec, independent baseline or date calibration is visible. |
-| \`1000018618.png\` | \`basetwelvegeometry\` circle/polygon; equal-length annotations resembling \`0.5 sqrt(2)\`; caption proposes a base-12 Cartesian geometry and "discrete pi". | Original source of *the particular claim* is the attributed account/comment; it is not yet evidence of a new circle theorem. "12 June" is visible with no verified year. |
-| \`1000018619.png\` | Graph-paper approximate polygon; \`sphinyzw\` objects that notation does not alter the object; \`basetwelvegeometry\` responds that twelfths lack repeating decimals. | Preserve **both** authors distinctly: sceptical comment and author's reply. The absence-of-repeats claim is false without denominator conditions. |
-| \`1000018620.png\` | Close-up of purported Black Stone in a silver surround; cropped theological comment cites a statement of Umar. | Commenter's handle absent; object/location/date cannot be authenticated solely from crop. Separate literal hadith text from the contemporary commenter's explanation. |
+| `1000018617.png` | In-cockpit display; **comment** from `evgenekb_` says GOES-451M has higher resolution and clean high-magnification output. | The commenter is the author of **the comment**, not demonstrably the creator of the display/video. No original instrument log, test sequence, lens/sensor spec, independent baseline or date calibration is visible. |
+| `1000018618.png` | `basetwelvegeometry` circle/polygon; equal-length annotations resembling `0.5 sqrt(2)`; caption proposes a base-12 Cartesian geometry and "discrete pi". | Original source of *the particular claim* is the attributed account/comment; it is not yet evidence of a new circle theorem. "12 June" is visible with no verified year. |
+| `1000018619.png` | Graph-paper approximate polygon; `sphinyzw` objects that notation does not alter the object; `basetwelvegeometry` responds that twelfths lack repeating decimals. | Preserve **both** authors distinctly: sceptical comment and author's reply. The absence-of-repeats claim is false without denominator conditions. |
+| `1000018620.png` | Close-up of purported Black Stone in a silver surround; cropped theological comment cites a statement of Umar. | Commenter's handle absent; object/location/date cannot be authenticated solely from crop. Separate literal hadith text from the contemporary commenter's explanation. |
 
 Separate outside sources, NOT independent confirmations of all screenshot details:
 
@@ -65,7 +65,7 @@ of \(D(y)\) is **not an injectivity, SNR, angular resolution or ground-truth
 recognition certificate**.
 
 Existing formal theorem (owned by
-\`DiffuserImagingObserverDynamicRangeExact\`):
+`DiffuserImagingObserverDynamicRangeExact`):
 
 \[
   Q(a)=Q(b)\implies F(Q(a))=F(Q(b))
@@ -113,7 +113,7 @@ are **12 equal sides**, the polygon's perimeter has exact squared length
  P=12s=6\sqrt2,\qquad P^2=72.
 \]
 
-\`twelveSidePerimeterSquaredIs72\` checks the **rational squared-length
+`twelveSidePerimeterSquaredIs72` checks the **rational squared-length
 arithmetic**, conditional on those side-count and length premises. A finite
 polygon's perimeter is not the circumference of a circle. The screenshot does
 not establish regularity, circumscription/inscription geometry, a radius, or
@@ -160,7 +160,7 @@ Separate four propositions:
    status — theological assertions, not empirically certified by the photo
    or material analysis.
 
-The atlas keeps \`classicalTextWitness\` and \`scientificPhysicalAssay\`
+The atlas keeps `classicalTextWitness` and `scientificPhysicalAssay`
 different constructors and proves they cannot be silently identified. This
 is a type distinction about *evidence roles*, not a proof that any religion
 is true or false.
@@ -180,17 +180,17 @@ is true or false.
 **Held:** complete irrationality/real-circle theory port; direct GOES-451M
 measurements/controlled comparison; authenticated screenshot source video;
 physical same-object geology; external historical triangulation. None can be
-paid by adding a Boolean \`true\`, an uninhabited certificate type, or a
+paid by adding a Boolean `true`, an uninhabited certificate type, or a
 borrowed unrelated proof.
 
 **Source-writing is not kernel verification.** Run, in the repository's
 established Agda environment:
 
-\`\`\`sh
+```sh
 agda -i . DASHI/Foundations/BaseTwelveCircleRepresentationBoundaryExact.agda
 agda -i . DASHI/Culture/ScreenshotOpticsRadixBlackStoneAttributionExact.agda
-\`\`\`
+```
 
-These commands have not been executed in the present environment (no \`agda\`
+These commands have not been executed in the present environment (no `agda`
 executable was available). Do not promote the branch to kernel-verified from
 static inspection.
