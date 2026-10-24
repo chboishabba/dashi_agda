@@ -284,3 +284,22 @@ Standard references: local-field roots of unity and Hensel
 lifting (e.g. MIT 18.785, 2021, Problem Set 4, problem 5;
 the theorem that Qp has p-1 roots of unity for odd p),
 https://ocw.mit.edu/courses/18-785-number-theory-i-fall-2021/.
+
+
+## 8. Profinite completion is NOT the product of this no-go
+
+A further rigorous distinction: the project has a compatible
+surjection `G -> A5^3` in the abstract commutator-tower
+construction. Since `A5^3` is a nontrivial FINITE group,
+the full profinite completion of G is NONTRIVIAL.
+
+Yet `pro-p(G)=1` for every p. There is no contradiction:
+the inverse system of *all* finite quotients can see
+non-solvable finite groups, whereas every finite p-group
+is solvable. The full profinite completion of G is therefore
+NOT pro-p for any p, and cannot be recovered by merely taking
+the product of its pro-p completions (which is trivial).
+
+This also explains why nonabelian finite VOA and p-adic
+matrix actors can retain real information that all flat
+abelian/p-group-valued holonomies lose.
