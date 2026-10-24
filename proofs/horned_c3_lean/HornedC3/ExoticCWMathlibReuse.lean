@@ -37,7 +37,7 @@ def RealisedCW.ofMathlib (C : Set X) [Topology.CWComplex C] :
   ⟨C, inferInstance⟩
 
 /-- Reexport the proof obligation in the source's own type. -/
-theorem RealisedCW.hasCW (R : RealisedCW (X := X)) :
+def RealisedCW.hasCW (R : RealisedCW (X := X)) :
     Topology.CWComplex R.carrier :=
   R.cw
 
@@ -48,7 +48,7 @@ structure RecognisedExoticCW where
   realised : RealisedCW (X := X)
   sameCarrier : realised.carrier = underlying
 
-theorem RecognisedExoticCW.provedCW
+def RecognisedExoticCW.provedCW
     (R : RecognisedExoticCW (X := X)) :
     Topology.CWComplex R.underlying := by
   rw [← R.sameCarrier]
