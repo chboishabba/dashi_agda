@@ -2103,3 +2103,114 @@ ftc2019OriginalOrderSource = Acquisition.sourceAcquisitionTarget
   "Order IV.A-C and V-VI, printed pp3-4; original PDF source page4 visually inspected"
   Acquisition.directDigitalArchive Acquisition.nationalCatalogue
   true true true
+
+
+------------------------------------------------------------------------
+-- 2019 CANADIAN FEDERAL+BC JOINT PRIVACY REGULATOR ORIGINAL FINDINGS
+--
+-- Stronger than the earlier two-arm *possibility*: the 2019 regulators
+-- expressly FOUND aggregate delivery/use of OCEAN scores derived in part
+-- from Aleksandr Kogan's Facebook source to AIQ for US campaign work.
+-- The agencies issued ONE JOINT report; this is one investigative producer,
+-- not two independent forensic audits. Underlying file/row identities and
+-- any individual electoral causal effects are NOT publicly authenticated.
+------------------------------------------------------------------------
+
+canadianJointAIQOriginal2019 : Acquisition.SourceAcquisitionTarget
+canadianJointAIQOriginal2019 = Acquisition.sourceAcquisitionTarget
+  "Canada OPC/BC OIPC, Joint Investigation of AggregateIQ, PIPEDA Findings 2019-004 and P19-03, 2019-11-26"
+  "https://www.priv.gc.ca/en/opc-actions-and-decisions/investigations/investigations-into-businesses/2019/pipeda-2019-004/ ; executive summary and findings paragraphs 25-32, 62, 68-70, 94, conclusion"
+  Acquisition.directDigitalArchive Acquisition.nationalCatalogue
+  true true true
+
+record Canada2019AggregateScoreFinding : Set where
+  constructor canada-2019-aggregate-score-finding
+  field
+    originalJointRegulatorReportInspected : Bool
+    canadianAndBCBodiesAreSingleJointSourceRoot : Bool
+    sourceStatesAIQReceivedMillionsOfUSVoterOCEANScores : Bool
+    sourceStatesScoresAtLeastPartlyDerivedFromKoganFacebookData : Bool
+    investigatorsFoundAIQKnewSCLUsedKoganData : Bool
+    investigatorsFoundAIQAwareOfOCEANScores : Bool
+    investigatorsFoundUSCampaignConsentFailures : Bool
+    investigatorsFoundInadequateSafeguardsAffectingAbout35m : Bool
+    agencyRecommendationsConditionallyResolved : Bool
+    agencyFollowupConfirmedImplementedHere : Bool
+    rawKoganFacebookAppRecordsAtAIQIndependentlyProved : Bool
+    individualKoganGSRScoreFileToNamedRiponRowMatched : Bool
+    oneCampaignElectionOutcomeCausedByScores : Bool
+    paidCrossNetworkEpsteinAquinoDirection : Bool
+open Canada2019AggregateScoreFinding public
+
+canonicalCanada2019AggregateScoreFinding : Canada2019AggregateScoreFinding
+canonicalCanada2019AggregateScoreFinding = canada-2019-aggregate-score-finding
+  true true true true true true true true true false false false false false
+
+canadaRegulatorsPayAggregateKoganDerivedAIQScores :
+  sourceStatesScoresAtLeastPartlyDerivedFromKoganFacebookData
+    canonicalCanada2019AggregateScoreFinding ≡ true
+canadaRegulatorsPayAggregateKoganDerivedAIQScores = refl
+
+canadaRegulatorsPayAIQAwareness :
+  investigatorsFoundAIQKnewSCLUsedKoganData
+    canonicalCanada2019AggregateScoreFinding ≡ true
+canadaRegulatorsPayAIQAwareness = refl
+
+canadaJointReportNotTwoIndependentRoots :
+  canadianAndBCBodiesAreSingleJointSourceRoot
+    canonicalCanada2019AggregateScoreFinding ≡ true
+canadaJointReportNotTwoIndependentRoots = refl
+
+canadaKoganRawAppBytesStillNotProvenAtAIQ :
+  rawKoganFacebookAppRecordsAtAIQIndependentlyProved
+    canonicalCanada2019AggregateScoreFinding ≡ false
+canadaKoganRawAppBytesStillNotProvenAtAIQ = refl
+
+canadaAggregateFindingDoesNotPaySpecificRiponRow :
+  individualKoganGSRScoreFileToNamedRiponRowMatched
+    canonicalCanada2019AggregateScoreFinding ≡ false
+canadaAggregateFindingDoesNotPaySpecificRiponRow = refl
+
+canadaConditionalResolutionIsNotVerifiedFollowup :
+  agencyFollowupConfirmedImplementedHere
+    canonicalCanada2019AggregateScoreFinding ≡ false
+canadaConditionalResolutionIsNotVerifiedFollowup = refl
+
+canadaScoreFindingDoesNotPayElectionCausality :
+  oneCampaignElectionOutcomeCausedByScores
+    canonicalCanada2019AggregateScoreFinding ≡ false
+canadaScoreFindingDoesNotPayElectionCausality = refl
+
+canadaScoreFindingDoesNotPayEpsteinAquinoProgramme :
+  paidCrossNetworkEpsteinAquinoDirection
+    canonicalCanada2019AggregateScoreFinding ≡ false
+canadaScoreFindingDoesNotPayEpsteinAquinoProgramme = refl
+
+-- UPDATE TO PRIOR TWO-ARM FRONTIER WITHOUT COLLAPSING SOURCE SCOPES:
+-- The aggregate model-source provenance was found by regulators in 2019.
+-- The row-level GSR model/file→Ripon parser/deployment proof is STILL open.
+record TwoArmCanadianPromotionCut : Set where
+  constructor two-arm-canadian-promotion-cut
+  field
+    gsrDerivedAggregateScoresAtAIQOfficiallyFound : Bool
+    aiqUsedSensitivePsychographicDataWithoutVerifiedConsent : Bool
+    namedVersionFileDigestInPublicRegulatorReport : Bool
+    originatingSpecificModelOutputMappedToRiponImport : Bool
+    specificDeploymentOrElectoralOutcomeCausallyProved : Bool
+open TwoArmCanadianPromotionCut public
+
+canonicalTwoArmCanadianPromotionCut : TwoArmCanadianPromotionCut
+canonicalTwoArmCanadianPromotionCut =
+  two-arm-canadian-promotion-cut true true false false false
+
+aggregateSourceLineageNowPaid :
+  gsrDerivedAggregateScoresAtAIQOfficiallyFound canonicalTwoArmCanadianPromotionCut ≡ true
+aggregateSourceLineageNowPaid = refl
+
+regulatoryAggregateFindingDoesNotProvideOriginalRowHash :
+  namedVersionFileDigestInPublicRegulatorReport canonicalTwoArmCanadianPromotionCut ≡ false
+regulatoryAggregateFindingDoesNotProvideOriginalRowHash = refl
+
+aggregateProvenanceIsNotSpecificConsumerDataIdentity :
+  originatingSpecificModelOutputMappedToRiponImport canonicalTwoArmCanadianPromotionCut ≡ false
+aggregateProvenanceIsNotSpecificConsumerDataIdentity = refl
