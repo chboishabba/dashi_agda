@@ -40,6 +40,16 @@ assert s.simplify(kappa2-1).is_positive
 assert s.simplify(3-kappa2).is_positive
 assert s.simplify((5+s.sqrt(5))/2-kappa2).is_positive
 print('PASS icosahedral nonidentity gap²=(5-sqrt5)/2 > 1, gap≈',float(s.sqrt(kappa2)))
+# Cross-PR falsifier: the sibling #1247 *selected* W has a nonzero
+# ζ3 coefficient in Tr(W). Hence Im Tr(W) = b*sqrt(3)/2 !=0.
+# EVERY element of the standard real icosahedral A5<SO(3)<SU(3)
+# has REAL trace; SU3 conjugation preserves it. Thus source W is
+# NOT conjugate into THIS A5 subgroup and must remain independent.
+original_zeta_coefficient=-F(19836986431118,181846007130841)
+imaginary_trace_squared=F(3,4)*original_zeta_coefficient**2
+assert original_zeta_coefficient!=0 and imaginary_trace_squared>0
+print('PASS selected #1247 W has Im(trace)^2=',imaginary_trace_squared,'>0, so NOT conjugate to chosen real SO3 A5')
+
 
 # Every nontrivial commutator requires BOTH inputs nonidentity.
 for a,b in product(A5,repeat=2):
