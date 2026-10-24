@@ -287,3 +287,72 @@ exhaustive finite proofs, not a postulated `linear` Bool.
 The no-Maschke nilpotent witness and C3 group law are thus
 supported by an actual source-written F3-LINEAR action,
 although the Agda exact-head kernel receipt remains open.
+
+
+## 2026-10-24 completion: MINIMAL F7 spin4, faithful wreath spin12, scope of C3 projectors
+
+The constructive bottleneck beyond ordinary Maschke has now been
+paid in the exact finite witness library:
+`Docs/topology/AlexanderHornedMinimalSpinF7C3E8MaxCut20261024.md`.
+
+- `scripts/alexander_horned_icosian_f49_minimal_spin.py`
+  constructs F49=F7(sqrt5), 120 golden-ratio unit icosians
+  (8+16+96), their 2x2 determinant-one matrix algebra,
+  scalar-restricts to faithful GL4(F7), and builds the
+  *ACTUAL SAME GROUP* bijective map to existing SL2(F5)
+  using (2,3,5) generators and all 14400 products.
+  Central -1 acts as -I4. No rank <=3 representation
+  of 2I over F7 can be nontrivial, because order-5
+  elements generate 2I and 5 divides none of
+  |GL1(F7)|, |GL2(F7)|, |GL3(F7)|.
+  Thus 4 is the MINIMAL nontrivial F7 degree.
+- The 2D spin actor exists over F49 and its Frobenius
+  conjugate has a genuinely different order-5 trace;
+  restricting scalars gives the 4D F7 module.
+  Do NOT claim a 2D full-2I spin representation over
+  bare F7 from the earlier C3/2T rotor example.
+- `scripts/alexander_horned_full_actor_f7_spin12.py`
+  builds a faithful GL12(F7) block-monomial representation
+  of (2I)^3 rtimes C3: the C3 block permutation reveals
+  the phase, each faithful GL4 block reveals one factor.
+  The diagonal central (-1,-1,-1) maps to -I12.
+  Faithful 12D is proved; **minimal 12D is NOT asserted**.
+- `scripts/alexander_horned_f7_spin12_horn_meridian_bidi.py`
+  welds the PREVIOUS actual commutator root q of the
+  binary Hatcher source to the new SAME 2I quotient:
+  m^3 maps to diag(-I4,I4,I4) != I12, but to identity
+  in its A5 projectivization. The group-quotient
+  statement is finite/abstract, not a wild pi1 theorem.
+- `scripts/alexander_horned_f7_spin_c3_projector_scope.py`
+  corrects a crucial FULL-group invariant trap.
+  The central sign ± splits 360 sites into full-actor
+  invariant 180+180 even/odd spaces.
+  The further six rank-60 C3×C2 joint Fourier spaces
+  are subgroup eigensectors ONLY: the C3 Fourier
+  projectors do NOT commute with arbitrary nonuniform
+  2I^3 factors. A literal counterexample was locally
+  computed. The 180± subspaces may further decompose;
+  no irreducibility claim is made.
+
+Independent LOCAL Python arithmetic passed: 120 finite
+icosians, exact 120-element SL2F5 isomorphism, 14400
+quaternion and matrix products, determinant-one, F49/F7
+Galois trace descent, degree obstruction, 18x18 selected
+full-actor 12x12 products, six projector idempotents
+and explicit noncentral counterexample, same root cube
+in spin12 vs A5. No typecheck/CI status promoted.
+
+Attribution: unit icosians and binary group sources
+precede DASHI; see Choi & Lee 2018, DOI
+10.3390/sym10080326, and the classical McKay
+correspondence. Our finite F49/F7 scalar restriction
+and exact group-map calculation is a new computational
+derivation on these prior mathematical roots.
+
+PRIORITY now moves to the GEOMETRIC SAME-OBJECT task:
+concrete C3-invariant three-copy wild-ball embedding
+with attaching collars and van Kampen stage identification.
+The earlier `C3OrbitSolidExact` already makes arbitrary
+seed-orbit set invariance exact, but it does not construct
+the actual Hatcher wild seed or its gluing. Do not spend
+more cycles proving an abstract C3 extension splits.
