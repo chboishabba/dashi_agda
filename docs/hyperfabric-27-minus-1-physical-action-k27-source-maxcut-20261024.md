@@ -588,3 +588,51 @@ but full gravity+dilaton FAIL; C4 K27 true nonlinear
 dual generators/physical observer remain open;
 A3 unmodified 27D 125/121 FAIL still binding. YM/NS/RH
 physical source estimates unchanged.
+
+
+## 2026-10-24 D0-D5 higher-alpha: ACTUAL nonflat 26D coupled source solution
+
+The highest-value consumer has now changed. Rather than only a flat-background
+B-sector with failed gravity, a standard
+`M26=R^(1,22)×S³_r`, `H3=(2/r)vol_S³`,
+`Phi=x_spacelike/r` NONFLAT genuine continuum target yields
+`Ric_S³=2/r²`, `H_i mn H_j^mn=8/r²`,
+`R=6/r²`, `H²=24/r²`, `|dPhi|²=1/r²`,
+zero dilaton Hessian, and covariantly constant S³ volume flux.
+Therefore **ALL chosen leading NS–NS metric, Kalb–Ramond and
+dilaton field equations** from the original 26D string-frame
+action are satisfied. This is an instance of already-established
+SU(2) WZW/linear dilaton prior source physics, not a new vacuum.
+
+New `scripts/check_k27_26d_su2_flux_linear_dilaton.py`
+derives sphere Ricci directly from the exact orthonormal
+SU2 structure constants and verifies all coefficients
+at six rational radii. Independent local execution PASS.
+Global H is a nontrivial S³ flux, so B2 needs patchwise
+gerbe data and flux quantization, not a global B potential.
+Lean #84 `K27NonflatNSNSLinearDilatonCut.lean`
+adds source-conditional general rational EOM identities.
+Agda/Lean kernels UNVERIFIED. The old flat test failure
+remains a valid negative control, **not** a global
+no-go for coupled nonflat string-frame physics.
+
+WORLD-SHEET QUANTUM CUT: for integer WZW k≥1,
+`c_SU2=3k/(k+2)`. With 23 noncompact coordinate
+bosons incl. one spacelike background charge V,
+`c_matter=23+6 alpha' V²+3k/(k+2)`.
+Critical bosonic ghosts require `alpha' V²=1/(k+2)`.
+The leading geometric circle/sphere relation
+`r²=k alpha', V²=1/r²` gives `1/k` instead:
+exact finite-k central charge residual
+`12/[k(k+2)]>0`. Tested for 30 levels PASS.
+This is a **genuine α' worldsheet-versus-classical
+same-background discriminator**: adjust the quantum
+background as required and demonstrate actual
+CFT/operator/target map, not mere c arithmetic.
+
+Canonical detailed source, proof/test and roadmap:
+`docs/hyperfabric-k27-26d-su2-nsflux-linear-dilaton-worldsheet-maxcut-20261024.md`.
+The 26D K27/Hodge/M24 signed-duad atlas is the separate
+`docs/hyperfabric-k27-26d-bfield-22dual-m24-signed-duad-maxcut-20261024.md`.
+Neither creates a 27D E27/K27 lift, a fully quantized
+physical solution, nor YM/NS/RH/Clay estimates.
