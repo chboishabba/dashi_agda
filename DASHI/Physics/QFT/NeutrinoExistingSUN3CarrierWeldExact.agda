@@ -44,7 +44,7 @@ Lepton3Matrix : Set
 Lepton3Matrix =
   Flavour.Flavour → Flavour.Flavour → C.Cyclotomic3
 
-record ExactLeptonSUN3Weld : Set₁ where
+record ExactLeptonSUN3Weld : Set₂ where
   field
     -- The SAME literal row/column table carrier as the existing
     -- Q(zeta3) CP/leptonic SU3 source; not a new Matrix wrapper.
