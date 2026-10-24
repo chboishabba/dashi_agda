@@ -187,8 +187,8 @@ degree78AtlasLabels = {string_list(v['l78'])}
 
 -- All source candidate degrees78; actual Monster selection is deferred
 -- to the independent main -> MN3B -> Monster FULL character matcher.
-sourceSelectedDegree78FaithfulToSixSuz : Bool
-sourceSelectedDegree78FaithfulToSixSuz = false
+selectedMonsterDegree78CharacterIdentifiedHere : Bool
+selectedMonsterDegree78CharacterIdentifiedHere = false
 faithfulDegree78Positions : List Nat
 faithfulDegree78Positions = {nat_list(v['faithful78']) if v['faithful78'] else '[]'}
 nonfaithfulDegree78Positions : List Nat
