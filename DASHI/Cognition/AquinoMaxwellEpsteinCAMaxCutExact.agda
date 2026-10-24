@@ -17,6 +17,8 @@ import DASHI.Core.MultipartSameObjectReconstructionExact as Multipart
 import DASHI.Culture.MissingDeceasedCommonObjectProgrammeDiscriminatorExact as Common
 import DASHI.Culture.MissingDeceasedCommonProgrammePromotionParetoExact as ProgrammeFrontier
 import DASHI.Culture.MissingDeceasedTwentyScientistRound48AntiEchoChamberMethodologyExact as AntiEcho
+import DASHI.Culture.MissingDeceasedTwentyScientistRound50ProfessionalEvidenceRoomExact as EvidenceRoom
+import DASHI.Culture.MissingDeceasedTwentyScientistRound43NarrativeEvidenceStrataExact as Narrative
 import DASHI.Core.EventTimeCapabilityAlignmentBidiExact as EventTime
 import DASHI.Core.CapabilityFragilityConfoundersBidiExact as Fragility
 import DASHI.Culture.MissingDeceasedCustodyEventTimeMatrixExact as Custody
@@ -666,3 +668,110 @@ caseAntiPanopticon = refl
 caseNarrativeNotAuthority :
   AntiEcho.narrativeSummaryCannotCreateSourceAuthority ≡ true
 caseNarrativeNotAuthority = refl
+
+
+------------------------------------------------------------------------
+-- PROFESSIONAL EVIDENCE ROOM: ONE SOURCE, THREE DISTINCT USES
+--
+-- FKN0079 is a discoverable, attributable public submission but this case
+-- cut has no retained native HTML snapshot, cryptographic digest or exact
+-- signed corporate agreement. Those absent receipts stay explicitly open.
+------------------------------------------------------------------------
+
+wylieEvidenceRoomItem : EvidenceRoom.SharedEvidenceRoomItem
+wylieEvidenceRoomItem = EvidenceRoom.shared-evidence-room-item
+  "WYLIE-DCMS-FKN0079"
+  "https://committees.parliament.uk/writtenevidence/89475/html/"
+  "not acquired: independent archived native artifact"
+  "public HTML original indexed and cited; no durable native bytes in this PR"
+  "exact preservation/retrieval timestamp not retained"
+  "attributed first-person parliamentary written evidence, not corporate finding"
+  "UK Parliament evidence submission FKN0079"
+  "Christopher Wylie author root; Parliamentary publication is not a second eyewitness"
+  "Wylie asserts SCL-to-CA intellectual property and staffing relationship"
+  "assertion about 2013-2014 organisations, NOT a signed implemented contract"
+  "UNCOMPUTED: no native bytes in case branch"
+  "source date 2018; underlying claimed event period 2013-2014"
+  "other published repetitions of Wylie share the same source origin"
+  "scope limited to what Wylie asserts; independent corporate instrument open"
+  "does not by itself prove Aquino-specific technique or unified covert tasking"
+  "public parliamentary HTML; only lawful, nonintrusive source acquisition"
+  "native capture, revision and digest unresolved"
+  "avoid victim/bystander data, false association and reputational harm"
+  "corrections must preserve original wording and cite a specific later revision"
+
+wylieInvestigatorGate : EvidenceRoom.InvestigatorGate
+wylieInvestigatorGate = EvidenceRoom.investigator-gate
+  "WYLIE-DCMS-FKN0079"
+  "Exact SCL/CA executed method transfer and participant event-time control"
+  "Acquire original dated 2014 contract, corporate register, full memo and implementation"
+  true true false false
+  "Wylie testimony supports attributed statements; signed operational handoff is still unpaid"
+  "counter-source search scope not completely executed for the specific CA version"
+  "inspect source-specific license, authors, source lineage and versioned work product"
+  false
+
+unverifiedMasterPlanPublicationGate : EvidenceRoom.JournalistGate
+unverifiedMasterPlanPublicationGate = EvidenceRoom.journalist-gate
+  "PROPOSED-UNIFIED-AQUINO-MAXWELL-EPSTEIN-CA"
+  "Claim that all named parties participated in one directed intelligence exploitation programme"
+  false
+  "no independently authenticated programme/tasking chain acquired"
+  "multiple narrators, conflicting interests and source-copying risk"
+  "distinct programme eras and legal entities; no whole-network same-object"
+  "right-of-reply status unresolved; no adverse-person publication action authorised"
+  "historical accountability only within source-bounded, verifiable evidence"
+  "avoid imputing child abuse/intelligence employment from association or faith"
+  "victim confidentiality and relevant survivor privacy protected"
+  "clearly attribute speculation to proponents; distinguish disputes and findings"
+  "publish corrections and attach original claim revision"
+  "NOT READY: unsupported causal allegation"
+
+investigationNotPublication :
+  EvidenceRoom.investigativeLeadDoesNotAutomaticallyBecomePublishable ≡ true
+investigationNotPublication = refl
+
+admissibilityNotHistory :
+  EvidenceRoom.legalAdmissibilityDoesNotEqualHistoricalTruth ≡ true
+admissibilityNotHistory = refl
+
+publishedClaimNotAdmissible :
+  EvidenceRoom.publishableClaimDoesNotAutomaticallyBecomeAdmissibleEvidence
+    ≡ true
+publishedClaimNotAdmissible = refl
+
+sameItemDifferentGates :
+  EvidenceRoom.sameNativeItemMayHaveDifferentConsumerStatuses ≡ true
+sameItemDifferentGates = refl
+
+-- Explicitly render case-level narrative status rather than rewarding
+-- stylistic cohesion. This is DASHI synthesis using cited prior-owner facts.
+caseObservedLocalLink : Narrative.NarrativeProposition
+caseObservedLocalLink = Narrative.narrative-proposition
+  Narrative.directlyEvidenced
+  "Existing DASHI source-bounded receipts record Bannon/Epstein media collaboration and SCL/CA corporate relationships as separate local edges."
+  "TrumpMarALagoBannonBridgeExact and BannonCambridgeAnalyticaInfluenceInfrastructureExact"
+  "Direct existence of local relationships is not direct whole-network intelligence control."
+
+caseBoundedMethodInference : Narrative.NarrativeProposition
+caseBoundedMethodInference = Narrative.narrative-proposition
+  Narrative.boundedInference
+  "Some institutional practices recur across military psychological operations, commercial political marketing and reputation management."
+  "Across-source methodological comparison in this case; not authored as an external-source finding"
+  "Similarity does not identify an exact transferred method, common programme, sponsor or custodian."
+
+caseUnsupportedUnifiedCommand : Narrative.NarrativeProposition
+caseUnsupportedUnifiedCommand = Narrative.narrative-proposition
+  Narrative.unsupported
+  "Aquino, Robert Maxwell, Jeffrey Epstein and Bannon followed one continuous intelligence command."
+  "No inspected exact whole-network tasking/payment/programme/custody chain"
+  "The theory remains a proposition to test, not an adjudicated historical fact."
+
+caseNarrativeStrata : List Narrative.NarrativeProposition
+caseNarrativeStrata =
+  caseObservedLocalLink ∷ caseBoundedMethodInference ∷
+  caseUnsupportedUnifiedCommand ∷ []
+
+caseStrataDoNotPromoteProgramme :
+  Narrative.narrativeCannotSkipPromotionGate ≡ true
+caseStrataDoNotPromoteProgramme = refl
