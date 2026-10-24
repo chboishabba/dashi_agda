@@ -1,3 +1,61 @@
+> **24 Oct 2026 — strengthened source-specific B4 no-go.**
+> R219/R109/R469 fixes the original physical output-local ED to a
+> nonnegative selected pair sum, at most 4 for the globally smooth
+> fixed four-mode shear, independently of cutoff. Since the actual
+> full-fibre signed B4 defect diverges while its literal core
+> companion stabilizes, the original strict cutoff-uniform B4
+> physical payment is FALSE on that admissible state.
+> The exact one-zero-incidence formula in the existing non-numbered
+> Lean analytical owner is `delta_defect=s*V_core-W_core`, yielding
+> `s-2` for this shear. This is NOT a Clay counterexample.
+>
+> **A update:** under finite energy and enstrophy, the SAME physical
+> Fourier nonlinear source has the standard bound
+> `min(E*|xi|,sqrt(E*D))`, implying a globally square-integrable
+> direct heat-inverse response with upper squared norm
+> `(8*pi/nu²)*E^(3/2)*sqrt(D)`. The signed centered A2 and
+> global A3 continuation remain unproved. Start at canonical A/B
+> owners; no new numbered proof wrappers.
+> **24 Oct 2026 — exact B4 no-go supersedes historical payment
+> search.** The original full-fibre signed noncore/core R440 covariance
+> is not cutoff-uniform against bounded physical ED: on the smooth
+> shear `u_hat(±e_x)=u_hat(±e_y)=e_z` its defect is
+> `988633056` at N=36 and `1671172320` at N=40 while
+> `M_core=1345859672` stabilizes for N>=9. The classifier
+> uses STRICT +3 shell separation. The zero-padding mechanism has
+> an infinite positive subfamily `2m(m-1)` for m>=10.
+> See `scripts/ns_b4_literal_padding_adversary.py` and the
+> canonical NSProofControl roadmap. The no-go is conditional on ED
+> being bounded for this fixed state; it is not a Clay counterexample.
+> Search instead for zero-padding-invariant signed original-R440
+> estimates, keeping exact same-source PDE meaning.
+>
+> For A, the local continuum projected Fourier cell and single
+> convolution energy-square quadrature are already present. The
+> genuine gap is actual Fourier-transform/source population and
+> physical majorant/continuation, not new local Leray algebra.
+> **2026-10-24 canonical A/B supersession notice.** The original ladder below
+> is preserved for historical provenance. It is NOT the default live queue:
+> the older L3 finite-dimensional flow/selected-slot compiler inventory was
+> developed before the later Round71 real physical trajectory, R830 and
+> R823 decision sources. It must not reopen solved finite-real-ODE work.
+> The latest A/B source reduction is in
+> [`NSProofControl20260915.md`](../../../Docs/roadmaps/NSProofControl20260915.md),
+> using merged [PR #1091](https://github.com/chboishabba/dashi_agda/pull/1091)
+> and [PR #1234](https://github.com/chboishabba/dashi_agda/pull/1234).
+> For B, the live source is
+> `NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda`: exact
+> signed noncore/core R440 term and sharp principal half are already
+> derived; a cutoff-uniform *physical* remainder payment is not.
+> B1/2/3 producers, B7 and continuum continuation are separate.
+> For A, canonical resolvent/Gram/saturation mathematics is already
+> established; the actual continuum Fourier interaction, low/high
+> finite-energy majorants, and whole-space continuation remain.
+> **Do not promote any historical `checked` label into a current kernel
+> receipt or Clay result.** Start with
+> `python scripts/ns_canonical_focus.py --route B4` or `--route A`.
+
+---
 # Highest-alpha lemma ladder to a Clay-submissible periodic proof
 
 [Back to the paper-corpus overview](README.md)

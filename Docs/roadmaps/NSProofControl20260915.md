@@ -1,829 +1,502 @@
-# Navier–Stokes proof-control record — live A/B/C/D coordinator
+# 2026-10-24 A/B physical source max-cut — read FIRST
 
-Status: authoritative live routing/control document; non-promoting.
+**Primary objective remains original unforced A and B.** No Clay
+promotion. This update reuses actual historical owners rather than
+creating RNNN aliases. Executable source and mathematical arguments:
+`Docs/research/ns_ab_ri_euler_no_go_and_physical_stretch_20261024.md`,
+`scripts/ns_physical_vorticity_partition.py`,
+`scripts/ns_a_physical_duhamel_maximal_l2.py`.
 
-Current-state date: `2026-09-23 AEST`.
+**B substantial same-field mathematical step:** a complex physical
+Fourier calculation with the exact R63 strict LH/HL/HH/CC classifier
+and nested R236 deep/critical decision proves, by vector-curl
+identities and finite signed summation, that nonlinear enstrophy
+production equals physical vortex stretching on arbitrary tested
+finite real divergence-free trigonometric fields. It also exposes the
+actual classwise curl/transport **compensation**, not just the total.
+For p=(1,0,0), q=(0,1,64), the classwise triples
+(P,T,S,residual=P-T-S) are:
+LH=(4,0,0,4), HL=(-16392,-4,-16384,-4),
+HH=(4,4,0,0), CC=0. Total P=S=-16384,
+total T=residual=0. Naively demanding classwise P=S is false.
+The script checks the vector curl identity at *all generated
+outputs* before contracting, energy/transport cancellation, and
+partition sum equalities, without zero-padding sensitivity.
 
-This is the default answer source for current NS proof-search state. Historical
-round/PR detail remains append-only in `CrossLaneProofArchaeologyLedgerExact`.
-Inspect exact owners only for a named unpaid theorem or field.
+**Important PRE-EXISTING reusable Agda phase proofs:**
+`NSTriadKNComplex3RealityLawsRound35Exact` proves
+conjugation-compatible Leray projection;
+`NSTriadKNCurlRealityHelicalTransportRound93Exact` proves
+Fourier curl/reality/helical transport;
+`NSTriadKNExactComplexModalTransfer` contains a genuine complex
+real/imag exact ring;
+`NSTriadKNLuoGalerkinFourierVorticityConvolutionExact`
+contains the rational factored-phase vorticity interaction;
+`NSTriadKNLuoProjectedConvectionOfficialParsevalUpgradeExact`
+already reuses physical hard-high projector, Parseval and derivative
+commutation, with explicit incidence multiplicity and energy-flux
+agreement fields STILL requiring inhabitants. Reuse all of these.
+The remaining B task is the **exact same-source assembly** from
+this physical curl/enstrophy function to R236's literal selected
+consumer, including the distinct differentiated Com term, into
+R685/R690's mixed-helical commutator with exact compensation,
+then a positive signed cutoff-uniform B1/B2/B3/B7 estimate.
+The new classifier test is not an Agda proof of that attachment.
 
-## Operating hierarchy
+**A full-time nonlinear source improvement:** From existing physical
+H1 stationary Stokes `Vhat=Fhat/(nu|xi|²)` and energy estimate,
+the actual causal heat response `What=h_a*Vhat`,
+`h_a(t)=a e^{-at}1_{t>=0}`, `a=nu|xi|²`, is an L2 contraction
+by Jensen+Tonelli. Hence for an unforced energy solution wherever
+the distributional Duhamel identity is justified,
+`||What||²_(L²[0,T] L²xi) <= 4 sqrt(2) pi E0² sqrt(T)/nu^(5/2)`.
+Source `scripts/ns_a_physical_duhamel_maximal_l2.py` has exact
+nonstationary and sign-changing kernel checks. This does NOT
+close the signed centered double-resolvent A2 or scale-critical
+continuation A3: spatial-temporal L2 remains supercritical under
+concentration. Existing physical same-object and Bishop source
+owners are unchanged.
+
+**Local receipt:** standalone matching Python scripts: 15 passed (one local duplicate deselected),
+including 6 physical complex-field checks, 5 source-classifier/curl
+checks, 3 causal heat checks, 2 prior coarea checks. Exact-GitHub-head
+pytest and Lean/Agda kernel not performed, so do not mark source
+commits kernel-proved.
+
+**Next max-cut acceptance tests:**
+1. Construct the actual Agda phase-preserving nonlinear/curl
+   and selected Bony+Com adapter by consuming Round35/Round93/
+   OfficialParseval and the original R236/R685/R690 theorem terms.
+   Pin the +8, -16384, classwise +4/-4 and old shear projection
+   negative-control witnesses; the target must express every
+   compensation, not merely numerical agreement.
+2. Instantiate A's same-physical-continuum Fourier/Plancherel
+   transformation and causal Duhamel semigroup in existing Bishop
+   carriers. Do NOT rederive scalar kernels.
+3. Close a genuinely cutoff-uniform, viscosity-dependent, scale-critical
+   signed physical estimate sufficient for A3/B7, without assuming
+   the desired continuation. Ri's stronger viscosity-uniform headline
+   estimate remains excluded conditionally by the released Euler
+   blowup and inviscid limit.
+4. Only actual kernel builds and direct unrestricted continuation
+   proofs authorize an A/B theorem-complete status.
+
+---
+
+## 2026-10-24 completed local physical PHASE-preserving realification check
+
+The fifth test `test_exact_real_imag_six_vector_bridge_preserves_work`
+in `tests/test_ns_physical_vorticity_production_exact.py` performs the
+ENTIRE six-mode Leray/curl/production computation a second way, using
+explicit rational pairs `(Re,Im)` and multiplication
+`(a,b)*(c,d)=(ac-bd,ad+bc)`, with `i` represented by `(-b,a)`.
+It reproduces +8 nonlinear enstrophy and +8 vorticity stretching
+independently of SymPy's native complex arithmetic.
+
+**Local Python receipt:** 5 passed in 0.56 s on a matching standalone
+test (SymPy 1.14.0). This proves exact arithmetic correctness of the
+specific finite witness and rejects naive real-part projection; it
+does NOT yet give an Agda theorem transporting the full complex
+physical Galerkin field into Round42's rational real carrier or R236.
+The concrete phase-preserving adapter is the B representation cut
+that should precede the actual quantitative analytic payment.
+
+---
+## 2026-10-24 exact PHASE discriminator: real-only Round42 input is insufficient
+
+`NSTriadKNLuoGalerkinFourierVorticityConvolutionExact` explicitly
+uses a rational **real** vector carrier and states that the common
+complex phase `i` is factored out; full reality pairing is not
+provided there. The already-proved Round42/43 scaling theorems remain
+valid in their stated rational carrier, but source equality to actual
+complex Fourier production cannot be achieved by simply taking real
+parts of coefficients.
+
+**New exact test** `test_real_part_only_map_loses_helical_phase_and_stretching`
+in `tests/test_ns_physical_vorticity_production_exact.py`:
+the original six-mode physical complex u has nonlinear enstrophy
+production +8; replacing each Fourier coefficient by its componentwise
+real part yields production 0 on the same modes. The other tests
+check transverse reality, energy 0, sign reversal, zero padding,
+cubic amplitude scaling and direct vorticity-stretching equality.
+Locally **4 pytest passed** on a matching standalone copy.
+
+**Bridge acceptance** before Round42/43→Round39/R236/R685/R690
+consumer: map complex coefficients via exact `(Re,Im)` doubling or
+conjugate-pair realification, prove preservation of all i factors,
+Fourier signs, physical Leray/curl, work pairing and Bony selector;
+then identify the signed selected critical production and actual
+residual. This is a narrower genuine same-object weld, NOT a
+reconstruction of the already-proved rational algebra.
+
+---
+## 2026-10-24 important B PRE-EXISTING PROOF OWNER reconciliation
+
+The newly committed positive-vortex-stretching six-mode witness is an
+**independent exact physical calibration**, NOT the origin of the amplitude
+scaling theorem. The repository ALREADY contains:
+
+- `NSTriadKNLuoVorticityStretchingSignExact`: source-written
+  symmetric-strain/antisymmetric cancellation and enstrophy sign laws;
+  original literature Constantin–Fefferman and Evan Miller.
+- `NSTriadKNHHBadLiteralProductionDissipationScalingRound42Exact`:
+  genuine Agda terms for the inverse-SQUARE frequency scaling of
+  physical literal vorticity production versus dissipation, with
+  explicit source-owned semantic caveats.
+- `NSTriadKNHHBadAmplitudeHomogeneityRound43Exact`:
+  genuine source-written Agda terms for amplitude-trilinear
+  production versus amplitude-quadratic viscous charge.
+- `NSTriadKNHHBadRestrictedGainDensityRound39Exact` and
+  `NSTriadKNHHBadLiteralPositiveGainRound43Exact`: prior original
+  `rawGain`/positive-gain consumers. Their source-exact weld to
+  the physical vorticity production is explicitly NOT automatic.
+- `NSVorticityStretchingExactReceipt` is ledger-only, NOT a
+  verified general Euler/NS field identity.
+
+**Revised cut:** reuse these originals first and require an exact
+`physical NS curl/Leray production → Round42/43 vorticity interaction
+→ Round39 rawGain → R236 selected critical production/R685/R690`
+same-object diagram, recording each leftover compensation. The
+nontrivial six-mode witness (+8 enstrophy) and zero-shear witness (0
+physical production despite -4 unprojected R681) are complementary
+adversarial gates. Do not reconstruct the already-proved homogeneous
+algebra or confuse a static receipt with a proof.
+
+---
+# 2026-10-24 decisive A/B max-cut — DO NOT IMPORT RI AS A3
+
+**Read first.** Full source/argument/provenance:
+`Docs/research/ns_ab_ri_euler_no_go_and_physical_stretch_20261024.md`.
+
+**A RESEARCH DECISION:** Ri arXiv:2601.15685v1 Theorem 1.1 (1.3)
+claims a global H^s estimate with a bound depending only on s, not
+viscosity. For the smooth compact-support datum of OpenAI's released
+unforced Euler singularity (existing source owner
+`NSOpenAI2026EulerToClayFourAlternativeBidiExact`), choose s>5/2.
+Pre-singularity inviscid convergence + weak lower semicontinuity would
+give the same global-in-time-on-[0,T*) H^s bound on Euler, hence a
+uniform C¹ bound via Sobolev embedding. This contradicts the released
+Euler blowup. **The claimed viscosity-uniform estimate is incompatible
+with the released Euler theorem and standard inviscid convergence.**
+Do NOT import Ri's Theorem 1.1 as A3. This does NOT refute
+positive-viscosity NS regularity at fixed ν. Distinguish all source
+statuses. The new `dashi_lean4/NSEulerRiUniformViscosityNoGo.lean`
+proves only an abstract conditional upper-bound transfer; actual
+Sobolev and inviscid-limit welds are not kernel checked.
+
+**B EXACT NONVANISHING PHYSICAL REGRESSION:**
+`tests/test_ns_physical_vorticity_production_exact.py` (locally 3
+passed, exact SymPy). Six real/transverse Fourier coefficients
+±(1,0,0), ±(0,1,2), ±(1,1,2) give zero nonlinear kinetic energy
+production, +8 nonlinear enstrophy production, and +8 from twice
+physical vortex stretching. Flip a phase → -8, zero-pad → unchanged.
+State has E=10, enstrophy=38 and palinstrophy=198. Under u→a u,
+stretching ∝a³, viscous dissipation ∝a²; at a=50, ν=1,
+instantaneous enstrophy derivative=10000. So fixed constant
+dissipation-only payment fails even on smooth physical initial data.
+This is NOT a blowup example.
+
+**LIVE B TARGET:** prove actual source-equality/compensation between
+Leray-projected physical spectral production and R236's selected
+critical production through R685/R690 with original carrier
+definitions and all complementary regions. R685 proves mixed
+commutator-minus-tangent, not this u/omega identification; R690 is
+finite signed sum, NOT a physical analytic estimate. The old full
+fibre B4 payment is false. The nonzero enstrophy witness is a
+mandatory acceptance test for any purported same-object bridge.
+
+**LIVE A TARGET:** same physical continuum Fourier transform and
+scale-critical continuation for fixed positive ν. Ri's purported
+uniform-ν shortcut is excluded, but his *local* frequency identities
+may still be useful after independent checking. Never promote
+conditional pre-blowup estimates to uniform global bounds without a
+noncircular continuation argument.
+
+**Verification:** local SymPy/pytest passed (3 tests); GitHub
+commits are source-written; no independent exact-head Lean/Agda
+kernel check this cut. A/B universal regularity NOT established.
+---
+## 2026-10-24 next max-cut — exact coarea calibration and Ri proof entry
+
+**Executed local Python:** `python -m pytest -q` on the new
+`tests/test_ns_threshold_coarea_gaussian_exact.py` calculations:
+2 passed (SymPy). The radial Gaussian f=exp(-|x|²) has
+level |x|=sqrt(-log a); the coarea integrand is
+8*pi*a*(-log a)^(3/2). With t=-log a its integral is
+3*sqrt(2)*pi^(3/2)/4, exactly the bulk integral
+of |grad f|². The critical-root gradient split is likewise checked,
+`|grad(f^(3/4)xi)|²=(9/16)f^(-1/2)|grad f|²+
+ f^(3/2)|grad xi|²` for orthogonal polar derivatives.
+**Scope:** exact calibration, NOT a general measure-theoretic coarea
+proof or physical R236/R685/R690 same-object proof.
+
+**Ri critical A source check:** Myong-Hwan Ri, arXiv:2601.15685v1,
+Theorem 1.1 (equation 1.3) claims a global inhomogeneous H^s
+estimate for d>=3, s>=d/2-1, constant C(s) independent of viscosity
+and dimension; Section 3 starts from a maximal local regularity
+interval and high-frequency identity (3.6). The manuscript's Fourier
+convention is unitary with +i phase, unlike our earlier Gaussian
+source script using an unnormalized -i convention. Any import must
+account for phase and (2pi) normalization, and audit the transition
+from high-frequency bounds to global time-uniform H^s with no
+circular dependence on the unknown maximal regularity interval.
+No result of Ri promoted to an independently proven A3 theorem.
+
+**Single decisive B continuation:** formalize the full threshold
+identity under coarea/trace assumptions, then prove precise identity
+of physical vortex-stretching production with the R236 consumer
+AFTER the actual helical/physical operator conversion. This is the
+same-source bridge, not another amplitude-independent counting
+covariance. Physical shell payment and universal continuation still
+open.
+
+---
+## 2026-10-24 implementation receipts — 4-paper primary text and threshold B donor
+
+Current canonical reference inventory: `Docs/research/ns_ab_four_primary_papers_20261024.md`, whose links resolve to the **full arXiv HTML** v1/v3/v1/v2 manuscripts, not merely abstracts. Do not repeat the erroneous Shahmurov 'Large-Data Global Regularity Part II' title attached to arXiv:2605.01873; its current source expressly disclaims unrestricted 3D regularity.
+
+Source-attributed new executable tests:
+`tests/test_ns_shahmurov_vorticity_primary_calibration.py`
+tests a nonzero-vorticity region of the *physical* smooth shear against Shahmurov's Lemma 2.1 and checks the exact p=3/2 root.
+`tests/test_ns_shahmurov_enstrophy_layer_cake.py` checks p=2 threshold layer-cake coefficients for vortex stretching, endpoint mass, and directional dissipation. This provides an explicit intermediate path to the standard enstrophy balance. The coarea measure-theoretic passage and exact R236/R685/R690 **same-object** connection are NOT proved by these finite/symbolic tests.
+
+Phase: **P0 primary corpus/version/author disambiguation achieved**; **P1 full analytical validation of Ri and Shahmurov open**; **P2 same-carrier formal theorem open**; **P3 physical signed A2/B7 and global continuation open**. Local SymPy checks cover only the stated elementary calibration, no exact-head pytest/Lean/Agda kernel receipt.
+
+Priority remains A/B. Ri: independently audit Lemma 2.1 and high-frequency energy proof before importing Theorem 1.1; its viscosity-independent theorem has strong consequences and requires line-by-line verification. Shahmurov: formalize the full threshold balance on the physical vorticity carrier, then prove link to R236; do not assume it bounds vortex stretching. Cheskidov–Hou: initial-trace negative control. Constantin–Ignatova–Vicol: strictly conditional exclusion given all hypotheses.
+
+---
+# 2026-10-24 A/B-FIRST CORRECTION — literature and C/D cross-pollination
+
+**Override the prior C/D-first priority statement below.** User-selected
+research goal is original **unforced A/B**. OpenAI's released forced C/D
+proofs are existing cross-pollination donors, *not* the next publication
+task and not a formal implication of unforced global regularity.
+
+## New primary-source literature audit (authorship preserved)
+- Myong-Hwan Ri, "Global regularity for the Navier-Stokes equations
+  with application to global solvability for the Euler equations",
+  arXiv:2601.15685 (2026-01-22): explicitly claims unrestricted
+  large-data global regularity on R^d, d>=3 via sparse
+  inverse-logarithmic frequency weights and rescaled frequency tails.
+  **Unverified preprint claim, not a confirmed theorem.** High-priority
+  candidate for direct comparison with A2 scaling and B signed shell
+  control; check the critical norm bound for circular use of regularity.
+- Rishad Shahmurov, "Large-Data Global Regularity for Three-Dimensional
+  Navier--Stokes II: A Direct First-Threshold Continuation Proof for the
+  Full System", arXiv:2605.01873 (2026-05-03): claims a first-threshold
+  critical-packet continuation theorem using angular Littlewood--Paley
+  triads, rigidity, phase control and leakage accounting. This is a
+  **claimed complete proof, not verified here**. Compare B1/B2/B3/B7
+  source-weight and compensated signed identity against its threshold
+  envelope; verify Part I hypotheses and data generality.
+- Alexey Cheskidov and Hedong Hou, "Global existence of smooth solutions
+  to the Navier-Stokes equations for initial data with infinite energy",
+  arXiv:2610.18797 (2026-10-13): constructs global solutions smooth for
+  t>0, with only H^{-s} continuity at t=0 in the leading theorem.
+  Distinguish weak/very-weak continuity from official A/B requirements,
+  which include smoothness through t=0 and energy/boundedness clauses.
+  It is not automatically Clay B.
+- Peter Constantin, Mihaela Ignatova and Vlad Vicol,
+  "Regularity of asymptotically axisymmetric solutions to the 3D
+  Navier-Stokes equations with analytic forcing", arXiv:2609.20803:
+  proves rigidity excluding OpenAI-type singular profiles when the
+  forcing is analytic/zero under its precise axisymmetry/Type-II
+  hypotheses. Import as an **adversarial profile discriminator**, not
+  arbitrary-data A/B regularity.
+
+## C/D donor integration — two-way negative control
+- OpenAI, "Finite time blowup for Navier–Stokes" (2026-09-08),
+  https://github.com/openai/NavierStokesAndEuler : source is smooth
+  forced PDE, not unforced; the constructed forcing is essential to the
+  exhibited singular dynamics. Its proof tools (anisotropic rescaling,
+  profile/core/tail separation, Leray pressure, uniqueness and
+  finite-slab comparison) should be reused in A/B only after proving
+  same-source f=0 identities. Never set f=0 syntactically in a
+  constructed forced solution.
+- Compare the unforced vorticity equation and critical norms with the
+  released unforced Euler blowup, noting that missing viscous damping
+  prevents direct transplantation.
+- First actual B discriminator is already in
+  `tests/test_ns_b_projection_same_shear_discriminator.py`:
+  raw unprojected R681 has global relative work -4 while projected
+  helical amplitudes vanish on the same shear; require an exact R685/R690
+  compensated physical R236 identity before estimating shell terms.
+
+## Acceptance order (no more numbered aliases)
+1. Audit Ri critical norm and Shahmurov first-threshold proof against
+   literal unconstrained initial-data A/B statements; identify a
+   concrete importable lemma or a failed quantifier.
+2. Trace the literal R236 physical production through R685/R690 and
+   Leray projection, including residuals, to a signed cutoff-uniform
+   inequality. No count-centered B4 revival.
+3. Transport the existing Schwartz/H1 same-object Fourier extension
+   to the actual Bishop continuum trajectory; produce scale-critical
+   A2 and noncircular A3 continuation.
+4. Reuse formalized C/D analytic components as lemma donors with
+   attribution, not proof of an unrelated unforced implication.
+Status: literature sources inspected; no independent verification of
+new preprint proof claims or kernel check of A/B complete result.
+---
+# 2026-10-24 GOAL-1 PHASE GATE — C/D released theorem, A/B independent research
+
+**Read this before the A/B frontier entries below.** Primary external
+source: OpenAI, "On the Navier-Stokes Millennium Prize Problem",
+2026-09-08, https://openai.com/index/navier-stokes-solution/ and
+https://github.com/openai/NavierStokesAndEuler (released Lean code).
+OpenAI explicitly reports a forced whole-space blowup (Clay C) and a
+forced periodic blowup (Clay D) for every positive viscosity.
+Attribute the original construction and Lean certificate to OpenAI;
+DASHI's source-coordinate audits and independent-specification bridges
+are derivative verification/integration contributions, not independent
+discovery of the released blowup.
+
+**Milestone distinction:**
+- M0 official C/D source statement and coordinates: **DONE in the
+  existing source audit** (`NSClayFacingCDMaxCut20261002Exact`,
+  `NSClayFacingCDReleasedAuditFrontier20261007Exact`).
+- M1 released Lean theorem/artifact available: **DONE upstream**;
+  the upstream README exposes both C/D and build instructions.
+  Independent exact-head build by this session: **NOT WITNESSED**.
+- M2 independent spec/bridge/submission spine: **EXISTING OWNERS**
+  `ExternalClayNS/ClaySpec.lean`, `Gap.lean`,
+  `ClauseAudit.lean`, `SubmissionAudit.lean`, and
+  `Docs/papers/live/NavierStokesABCDClaySubmissionSpine.md`.
+  Source-written existence does not equal current kernel receipt.
+- M3 conventional mathematical exposition plus fresh independently
+  reproducible kernel/audit receipt: **PUBLICATION/AUDIT WORK**,
+  not another C/D theorem-discovery programme.
+- M4 independent refereeing, Clay adjudication: **EXTERNAL**;
+  do not conflate announced result, proof certificate, referee acceptance
+  and prize decision.
+
+**Critical-path decision:** For the primary Clay-facing deliverable,
+FREEZE original A/B research as NON-BLOCKING. Publish/audit D first
+(shorter periodic route via periodisation), then C; both are already
+available in released upstream proof. Do not require DASHI independent
+Fourier/369/R406 construction for M2/M3.
+
+**Parallel optional research:** A remains same-physical-solution
+Fourier/Plancherel plus scale-critical A2/A3; B remains genuine
+compensated R236/R685/R690 physical signed production and estimates.
+The falsified count-centered B4 estimate must never be a gate.
+C/D success is not evidence of A/B universal unforced regularity.
+
+**Next bounded actions:** Pin upstream commit and theorem namespace,
+run upstream `lake exe cache get && lake build` and the independent
+`ExternalClayNS` certificate build, record stdout/toolchain/hash;
+produce one conventional D candidate/admissibility/uniqueness/breakdown
+proof and C counterpart with numbered lemma-to-Lean links. Keep
+remaining questions strictly limited to missing proof receipts or
+exposition, rather than spawning more RNNN layers.
+
+---
+## 2026-10-24 projection gate on physical B recombination (new exact discriminator)
+
+**New exact finite check:** `tests/test_ns_b_projection_same_shear_discriminator.py`
+committed on the existing PR #1240 branch. The four Fourier modes
+`uhat(±e_x)=uhat(±e_y)=e_z` yield nine possible supported output
+frequencies under H+×H−, including the zero output. The eight nonzero
+mixed-output vectors are all longitudinal: for EVERY k≠0,
+`P_k M_k = M_k-k(k·M_k)/|k|²=0`.
+Nevertheless, the unprojected literal R681 physical output-relative
+work summed over those outputs is **−4**, not zero.
+
+This is a **necessary projection/representation discriminator**, not
+proof that projected H+×H− is automatically the physical convection
+operator. For the same real shear, `u·∇u=0` pointwise and
+`∂_t u=Δu` for viscosity one. Thus any source-equal representation
+of the genuine *projected* NS nonlinear forcing or energy-production
+functional must vanish on this witness; the unprojected R681 signed
+work fails that calibration.
+
+**Next proof cut:** open the actual R685 commutator/tangent and R690
+global compensated consumers; write the exact same-source equality
+between their final Leray-projected physical functional and the
+original R236 selected Bony critical-production functional, including
+all class boundaries and any residual. Only after proving this identity
+may one attempt a cutoff-uniform signed estimate. Do not infer
+cancellation from a raw sum and do not insert Leray projection into
+R681 as an unproved equivalence.
+
+Receipt: independent local SymPy output enumeration verified all
+eight projected vectors exactly zero and global raw relative value
+−4; source-written regression committed. No checked-out PR-head pytest,
+Agda or Lean kernel check has occurred in this cut. No Clay promotion.
+
+---
+
+# Navier–Stokes A/B canonical mathematical roadmap
+**Current: 24 October 2026 · source-first / fail-closed**
+
+This is the LIVE owner and acceptance plan, not a list of historical RNNN files. The complete chronological research record has been preserved verbatim in [NS proof-control historical archive](archive/NSProofControlHistoricalThrough20261024.md). Revisit old theorems only by exact-declaration lookup or an explicitly identified missing source lemma.
+
+Run `python scripts/ns_canonical_focus.py --route A`, `--route B` or `--route B4`. No new `RoundNNN`/numbered Lean proof wrappers without mathematical necessity.
+
+## Current results and actual obligations
+
+| Mathematical track | Established mathematics / source receipts | Open deliverable that changes the theorem |
+|---|---|---|
+| **Original B4 full-fibre uniform payment** | **Falsified as an auxiliary inequality** against actual R109/R219/R469 physical ED by one globally smooth divergence-free shear. The exact literal defect for cutoff N≥9 is `(8/3)N²(2N+1)(3N²+N−2)−840480`, growing as 16N⁵. Core companion = 1,345,859,672 (fixed); output local ED ≤ 4. The theorem is **ordinary exact calculation**, not kernel-verified Agda. | **Retire the proposed bound.** Do not attempt a sharper Young inequality or hide a cutoff-growing scalar as physical ED. |
+| **B existing source algebra** | Real fixed-output physical-heat normal form plus original R681 cross-gradient, R684 input Laplacian, R685 forcing-commutator minus tangent and R690 global sum-before-time-integral identities; all source-written prior art. | A source-exact **compensated global identity** from the original selected R236 critical-production functional to the usable R685/R690 quantity, retaining every missing Bony class and tangent term. **Naive R681=old B4 is false.** |
+| **B analysis after compensation** | Principal half-bound and shell/Galerkin/compactness compilers exist. | A truly homogeneous, cutoff-uniform **signed** global cross-gradient/commutator spacetime payment, plus actual B1–B3/B7 source estimates and continuation. These are open. |
+| **A continuum source** | Actual local Leray-projected divergence cell; standard L² product Fourier identity, exact Schwartz vortex calibration and strong H¹-density stability of the stationary Stokes response. | Kernel-verified **same-physical-solution** Fourier/Plancherel distribution map in the existing Bishop/Agda Euclidean trajectory, not a free `Set`-valued meaning. |
+| **A physical direct response bound** | For `E=||u||²₂, D=||∇u||²₂`, `|F[Pdiv(u⊗u)]|≤min(E|ξ|,sqrt(ED))`; direct stationary heat-inverse squared Fourier L² bound `8π E^(3/2)sqrt(D)/ν²`. Strong H¹ variation squared ≤ `8πAB/ν²` for actual tensor/convection L¹ differences A,B. The unforced energy inequality gives a finite-horizon source-response bound. | Transfer to the **canonical signed centered A2 double-resolvent** on one actual NS solution, and prove a *scale-critical* sufficient spacetime estimate. |
+| **A3 / B continuum regularity** | Classical continuation / compactness interfaces already formalized conditionally. | Uniform noncircular critical control for **all** qualifying data and a complete global smooth continuation theorem. **Neither Clay A nor B is proved.** |
+
+## Exact falsification / anti-promotion receipts
+
+1. **B4 same physical datum:** on the `2π` torus, `u(t)=2e^{-t}(cos x+cos y)e_z` is an exact smooth unforced solution. Original mixed-helicity source has zero-amplitude padding rows even though the underlying velocity remains fixed. `scripts/ns_b4_literal_padding_adversary.py` implements strict R63 classification and the all-cutoff degree-five formula. Corresponding `tests/test_ns_b4_literal_padding_adversary.py` checks power sums, ED provenance and zero-row increments. The original Agda primitive output fibre includes zero-input incidences; `NonZeroPhysicalTriad` is a separate predicate.
+2. **B physical global discriminator:** R681 uncentered weighted work is zero-padding invariant, **not equal** to the old B4 defect. Exact H± calculation for the same shear has eight nonzero mixed outputs: four `k=(±1,±1,0)` with `W(M,M)=1` and output-relative rate work zero, and four `k=(±2,0,0),(0,±2,0)` with `W(M,M)=1/2` and output-relative work `−1` each. The **global output-relative R681 work sums to −4, not zero**. Those latter mixed amplitudes are longitudinal; do not silently replace unprojected R681 mixed amplitudes by physical Leray-forcing terms. The R685 forcing/tangent compensation is therefore a real proof obligation, not automatic summation cancellation.
+3. **A critical-scaling discriminator:** under `u_λ(x,t)=λu(λx,λ²t)`, `E_λ=E/λ`, `D_λ=λD`, and direct stationary Stokes Fourier response squared L² scales as `1/λ`. It is *supercritical* and cannot alone produce a global A3 continuation criterion.
+
+### Pointwise W2 sign gate (physical R850 snapshot; separate from B4)
+
+The existing R741 and R815/R853 identities on one literal rational
+physical packet give `signedRate = 6*(Combined - PacketSurplus)`.
+R850's actual radius-four 3-4-5 finite snapshot, at `nu=delta=1`,
+has `C=-557627/125`, `P=0`, `D=15834`. Therefore
 
 ```text
-1. this current control / producer summary
-2. canonical archaeology ledger / PR chronology
-3. exact owner only for the named unpaid theorem/field
+Combined - PacketSurplus = 12 C - P + D = -4712274/125 < 0
+signedRate = 6*(Combined-PacketSurplus) = -28273644/125.
 ```
 
-Always keep `MathematicalStatus`, `StatementStatus`, and `CertificationStatus`
-separate. Source code, a conditional compiler, another prover receipt, or a
-Boolean status field cannot manufacture a theorem or kernel receipt.
-
-## Coordinator ownership
-
-```text
-merged #937   canonical A/B/C/D baseline + S0/S1/S2a state
-open   #948   completed S2b finite/same-object packet representation
-open   #957   live S2b2 quantitative analytic successor
-#920          R571 -> Aug-5 paired-second-moment representation transplant
-#945          Gate-A cross-prover receipt/status surface
-#947          local Hermitian G0' splice
-#890          retained comparable/P3 route + negative controls
-#883 branch   append-only proof-archaeology/bookkeeping surface
-```
-
-## Four lane meanings — frozen
-
-```text
-A — unforced whole-space R^3 regularity       independent theorem obligation
-B — unforced periodic T^3 regularity          active proof-discovery lane
-C — forced whole-space R^3 breakdown          released-proof integration lane
-D — forced periodic T^3 breakdown             released-proof integration lane
-```
-
-This control plane tracks all four lanes.  The active internal proof-discovery
-lane remains B, A is audited bidirectionally against B, and C/D are
-released-proof integration lanes with their own source-alignment and
-same-object adapter residuals.
-
-Firewalls:
-
-```text
-B does not imply A;
-A does not imply B;
-forced C/D do not settle A/B;
-source-proof presence is not DASHI same-object payment.
-```
-
-Typed all-four mission owner:
-
-`DASHI/Physics/Closure/NSGlobalFourAlternativeMissionExact.agda`
-
-Canonical literal Clay proposition endpoint:
-
-`DASHI/Physics/Closure/NSClayLiteralABCDExact.agda`
-
-This is now the theorem-facing A/B/C/D surface.  It replaces the old practice
-of treating `PaymentA/B/C/D` scheduler tokens as if they were the Clay
-propositions themselves.  The legacy tokens remain only for compatibility;
-new terminal consumers should use `LiteralFourAlternativeCompletion` or
-`AnyOneClayResolution`.
-
-Typed current control-plane receipt:
-
-`DASHI/Physics/Closure/NSProofControlABCD20260916ReceiptExact.agda`
-`DASHI/Physics/Closure/NSProofControlABCD20260916ReceiptRegression.agda`
-
-Typed released-proof/source-alignment owners for C/D:
-
-```text
-NSTriadKNClayForcedBreakdownFormulationRound523Exact
-NSClayFourAlternativeReleasedProofBidiExact
-NSOpenAI2026ComparatorClayCDSourceExactAlignment
-NSOpenAI2026ReleasedClayCDTorus369BidiExact
-```
-
-Current all-four ledger:
-
-```text
-four-alternative mission implemented          true
-official any-one criterion separated          true
-C external released proof present             true
-D external released proof present             true
-C/D source alignment to Clay coordinates      closed
-DASHI independent Agda reconstruction of C/D  false
-C/D released-field -> DASHI Fourier/R406 weld false
-CMI prize / DASHI discovery claim             false
-all four internally paid                      false
-```
-
-# A — whole-space unforced: proof discovery deferred, portability BIDI ACTIVE
-
-A is no longer scheduler-idle. Fresh whole-space PDE proof search remains
-deferred while B exposes a sharper theorem spine, but every material B advance
-is now audited bidirectionally for A portability.
-
-Typed owner:
-
-`DASHI/Physics/Closure/NSABPortabilityBidiStatusExact.agda`
-
-Current firewall/status:
-
-```text
-B -> A implication allowed                 false
-A -> B implication allowed                 false
-A portability audit active                 true
-whole-space same-object transport observed false
-```
-
-The audit classifies each B theorem family as one of:
-
-```text
-domainIndependentCandidate
-torusSpecificRealization
-mixedNeedsFactorization
-unresolvedWholeSpaceTransport
-```
-
-Current coordinates include:
-
-```text
-R104 signed Abel/layer-cake algebra        domain-independent candidate
-R98 packet-boundary cancellation           mixed; selector algebra vs finite Fourier realization
-#957 low/collar/remote shell split         torus-specific realization
-R291/R573 signed Hermitian linearization   domain-independent candidate
-S2b2d0 output-local fixed-output reduction domain-independent candidate
-S2b2d1a damped-tangent residual identity   domain-independent analytic candidate
-S2b2d1b0 coherent-work scalar split        domain-independent analytic candidate
-S2b2d1b1 endpoint compiler                 domain-independent modulo ordinary calculus/FTC
-S2b2d1b2 coherent-covariance payment       unresolved whole-space transport
-#920 paired-second-moment compiler         mixed; generic centered algebra vs periodic realization
-R568/R572/R503 commutator chain            mixed; analytic core vs output-fibre/lattice plumbing
-R541/R573/R584/R503 ordered-kernel cone    mixed; signed consumer core vs periodic realization
-```
-
-The `S2b2d0` result is important for BIDI: once an output is selected, the
-periodic exact-shell 0/1 weight disappears completely on that fixed-output
-fibre. The hard local analytic object is therefore the ordinary unweighted
-fixed-output mixed commutator; `shellIndex` only decides which outputs are
-active.
-
-`S2b2d1a` sharpens this again without proving A from B: the unweighted
-commutator is exactly the forcing residual in the generic damped mixed-product
-tangent identity. Its algebra does not mention the periodic shell selector.
-
-`S2b2d1b0` then pushes that exact vector identity through the same real-Hermitian
-consumer and isolates, for any common rate, an endpoint/tangent term plus one
-signed coherent-covariance residual. `S2b2d1b1` constructs the actual fixed-
-output derivative on the R408 trajectory and compiles the endpoint term to a
-self-energy endpoint difference given ordinary derivative-of-zero and scalar
-FTC authority. Therefore the only genuinely nonlinear local d1b theorem left
-is the coherent-covariance payment `S2b2d1b2`. None of these classifications
-promotes B to A.
-
-BIDI questions:
-
-```text
-B -> A:
-  quotient paid B objects into domain-independent analytic core
-  + torus/lattice/cutoff realization
-  + explicit whole-space transport obligations.
-
-A -> B:
-  use the whole-space formulation to detect where a B lemma is accidentally
-  over-specialized to a finite lattice rather than structurally necessary.
-```
-
-No portability classification is a theorem transport. A changes from
-"portability audit" to active proof construction only when a named R^3 transport
-obligation is concrete enough to attack without pretending B already proves A.
-
-# B — periodic unforced: ACTIVE
-
-## B_comm
-
-Working routing assumption:
-
-```text
-recent L0-L6 obligations recoverable          true
-commit-specific Agda receipt                  false / not observed
-```
-
-Under that assumption the signed nested compiler chain
-
-```text
-R573 nested spacetime budget -> R568 -> R572 -> R503
-```
-
-is reconstruction/certification debt. An owner merely accepting R568 is not a
-producer. Do not reopen broad commutator archaeology unless an exact recovery
-field fails.
-
-## B_phase — current strict state
-
-```text
-R104 abstract signed-critical compiler                       DONE
-R414 literal-R406 remainder chosen definitionally            DONE
-R516/R517 critical radial/norm realization                   DONE
-S0 literal finite X_N,D_N,N_N fold                           DONE source
-S1a finite pointwise critical-energy algebra                 DONE source
-fixed nonzero cutoff mode carrier without S4                 DONE source
-S1b integrated-energy compiler given calculus                DONE conditional source
-concrete scalar FTC                                          OPEN infrastructure
-concrete integrateTo linearity                               OPEN infrastructure
-S2a literal N_N -> R39/R98 projected pairing                 DONE source
-S2b0 projected pairing -> R104 BandTransfer                  DONE source
-S2b1 full R104 layer-cake -> physical upper-shell flux       DONE source
-S2b2a packet-complement antisymmetry                         DONE source
-adjacent shellIndex -> Euclidean gap                         REFUTED source negative control
-S2b2b upper packet = exact-shell collar + remote             DONE source
-S2b2c0 low + collar + remote physical flux identity          DONE source
-S2b2c1 two-shell low/remote integer Euclidean gap            DONE source
-S2b2c2a integer gap -> live rational C3.normSquared          DONE source
-S2b2c2b literal low/remote R98 spectral datum                SOURCE-WRITTEN / certification pending
-S2b2d0 output-local collar weight -> active unweighted fibre DONE source
-S2b2d1a fixed-output damped tangent = decay + commutator      SOURCE-WRITTEN / certification pending
-S2b2d1b0 exact coherent-work/covariance scalar split          DONE source
-S2b2d1b1 literal fixed-output endpoint compiler               DONE conditional source
-concrete endpoint zero-derivative + scalar FTC               OPEN infrastructure
-S2b2d1b2 quantitative signed coherent covariance payment      OPEN PRIMARY
-S2b2d2 cutoff-uniform sum of fixed-output budgets             OPEN after d1b2
-S3 cutoff-uniform initial critical ceiling                   OPEN
-S4 positive retained viscosity 0 < 2*nu-a                   OPEN
-```
-
-No unconditional physical R104 slice or Clay promotion is claimed.
-
-## S0 / S1 — already reduced to standard-analysis infrastructure
-
-On the live R240 finite trajectory:
-
-```text
-X_N(t) = sum_k w(k)|u_N(k,t)|^2
-D_N(T) = int sum_k w(k)|k|^2|u_N(k,t)|^2 dt
-N_N(T) = int 2 sum_k w(k) Re<N_k(u_N),u_N(k)> dt
-w(k)   = 2^(shellIndex k).
-```
-
-S1a source-writes
-
-```text
-X'_N = N'_N - (2 nu)D'_N.
-```
-
-S1b source-writes the compiler
-
-```text
-X_N(T) + (2 nu)D_N(T) = X_N(0) + N_N(T)
-```
-
-given ordinary scalar FTC and integration congruence/additivity/scaling.
-Concrete authorities remain infrastructure/certification leaves, not nonlinear
-NS proof-search targets.
-
-# S2 — signed critical production
-
-## S2a/S2b1 representation — CLOSED SOURCE
-
-The selected same-object route is complete:
-
-```text
-literal N_N
- -> R39/R98 projected pairing
- -> R104 BandTransfer
- -> literal shell sort/permutation
- -> reject-zero full/nonzero cutoff bridge
- -> upper-shell selector
- -> canonical suffix / strict-jump tail
- -> recursive-prefix weld
- -> normalized physical R98 upper-shell boundary-flux layer-cake.
-```
-
-No Schur/Wiener/positive-part majorant, cardinality tax, or quantitative R406
-bound enters this representation chain.
-
-## S2b2 — PRIMARY nonlinear theorem
-
-Integrated target:
-
-```text
-N_N(T)
-  <= a D_N(T)
-     + literalR406RemainderIntegral(N,T).
-```
-
-#957 establishes the exact physical decomposition
-
-```text
-low    : shellIndex < j
-collar : shellIndex = j
-remote : shellIndex >= j+1
-
-F_low + F_collar + F_remote = 0.
-```
-
-The tempting adjacent-shell spectral-gap shortcut is permanently rejected by
-
-```text
-(2,2,2): shellIndex=1, |k|_2^2=12
-(3,0,0): shellIndex=2, |k|_2^2=9.
-```
-
-For `j=suc K`, the two-shell low/remote geometry instead gives
-
-```text
-shell(low) < j       -> |low|_2^2 <= 3*(2^K)^2
-j+1 <= shell(remote) -> 4*(2^K)^2 <= |remote|_2^2.
-```
-
-### S2b2c2a — DONE SOURCE: live rational norm transport
-
-`NSTriadKNRationalIntegerEmbeddingModeNormScaleExact` proves that for an
-arbitrary additive rational `IntegerEmbedding`, with `c = E(1)`,
-
-```text
-C3.normSquared I k
-  = c^2 * natAsRational(modeNatNormSquared k).
-```
-
-Because `c^2 >= 0`, the concrete `3 < 4` low/remote ordering transports to the
-same live `C3.normSquared` used by R407 viscosity. No separate calibration
-receipt is introduced.
-
-### S2b2c2b — REMOTE packet datum: SOURCE-WRITTEN, certification pending
-
-`NSTriadKNLowRemoteSpectralDatumRound98Exact` constructs the literal
-`R98.SpectralCrossDissipationDatum` on the same low/remote packets with
-
-```text
-E_P = (1/2) sum_P |u_k|^2
-D_P = nu sum_P |k|^2 |u_k|^2
-
-lambda_low    = 2*nu*omega_low
-lambda_remote = 2*nu*omega_remote.
-```
-
-It uses only ordinary physical `0 <= nu`, not S4's later `0 < 2*nu-a`.
-Existing R98 spectral-cross coercivity is therefore the remote compiler once
-this source surface is actually certified.
-
-### S2b2d0 — DONE SOURCE: periodic collar weight disappears on fixed output
-
-`NSTriadKNOutputLocalSelectorFixedOutputReductionExact` first proves the generic
-output-local theorem. For any Boolean selector depending only on the final
-output:
-
-```text
-selected(output)=true
-  -> weighted fixed-output commutator = ordinary unweighted fixed-output commutator
-
-selected(output)=false
-  -> weighted fixed-output commutator = 0.
-```
-
-The exact-shell collar is only a corollary. This removes `shellIndex` from the
-hard local analytic theorem and strengthens the A/B portability cut.
-
-### S2b2d1a — DONE SOURCE: exact damped-tangent residual identity
-
-`NSTriadKNFixedOutputMixedCommutatorDampedTangentExact` combines R231 and R230:
-
-```text
-sum_{p+q=k} dampedMixedTangent(p,q)
-  = sum_{p+q=k} variableViscousDecay(p,q)
-    + sum_{p+q=k} unweightedMixedCommutator(p,q).
-```
-
-This is an exact finite identity before norms. It removes the ambiguity about
-what the d1 commutator is dynamically: it is the forcing residual in the
-mixed-product tangent equation.
-
-R229 is the controlling no-go. Cellwise lower bounds on the viscous rates do
-not imply favorable damping of the coherent fixed-output sum; an explicit
-finite witness gives adverse signed covariance. Therefore d1a does not close
-the payment merely by inserting viscosity.
-
-The retained P3/raw-curl partner route is not silently identified with d1a:
-P3's compressed cells are quadratic velocity blocks, while the R230 commutator
-is cubic after inserting physical NS forcing. Any useful bridge must be a typed
-same-object theorem, not analogy.
-
-### S2b2d1b0 — DONE SOURCE: exact coherent-work decomposition
-
-`NSTriadKNFixedOutputCoherentCovarianceWorkExact` pushes d1a through the same
-real-Hermitian scalar consumer. For any common rate `lambda` it proves exactly
-
-```text
-W(M,C)
-  = W(M,T)
-    + lambda W(M,M)
-    - W(M, D + lambda M),
-```
-
-where `M` is the coherent fixed-output mixed-product sum, `T` its damped
-tangent, `D` the variable viscous-decay sum, and `C` the fixed-output
-commutator. The final term is the signed coherent covariance residual. No sign
-or inequality is assumed.
-
-### S2b2d1b1 — DONE CONDITIONAL SOURCE: endpoint term is ordinary calculus
-
-`NSTriadKNFixedOutputMixedEndpointCompilerExact` constructs the actual R408
-mixed-cell derivatives, folds them on the literal fixed-output fibre, and uses
-R94/R381/R292 to identify that tangent with the same physical damped tangent
-used in d1a. It then proves, given ordinary derivative-of-zero and scalar FTC
-authorities,
-
-```text
-integral W(M,T) dt
-  = Re<M(T),M(T)> - Re<M(0),M(0)>.
-```
-
-Thus the endpoint term is infrastructure/certification debt, not a new NS
-estimate. Concrete zero-derivative and FTC inhabitants remain explicitly open.
-
-### 2026-09-23 H2 weighted-carrier correction
-
-The endpoint-aware A3 audit has now separated two carriers that earlier
-bookkeeping risked conflating.
-
-The literal R406/R557 route is resolvent weighted.  The exact live temporal identity, **given the scalar FTC authority already isolated by R564/R565**, is now composed theorem-by-theorem in
-`NSTriadKNR406ExactEndpointNormalFormExact`:
-
-```text
-2 * integral R406
-  = integral FactoredFull
-    - integral SelfGram
-    - (SelfFlux(T) - SelfFlux(0)).
-```
-
-This uses R557 plus the same-object R570 self-flux tangent/FTC weld and
-introduces no new Navier--Stokes estimate.
-
-Separately, `NSTriadKNA3D1bDivisionFreeTransportExact` composes d1b0 with the
-existing covariance-centering identity.  On one fixed-output fibre it proves
-the division-free normalization
-
-```text
-n * W(M,commutator) + A3SignedPairDifference
-  = n * W(M,tangent) + (sum rates) * W(M,M).
-```
-
-Thus the current unweighted A3 pair-difference scalar is NOT definitionally
-the literal weighted R406/factored-full scalar.  The mean-rate self-work term
-and fibre-cardinality normalization are real algebraic coordinates, and R406
-also carries the nonseparable spectator resolvent
-`1 / (rate_alpha + rate_beta)`.
-
-The canonical weighted boundary owner
-`NSTriadKNA3WeightedR406EndpointCutExact` therefore keeps
-
-```text
-a3PairDifferenceIsLiteralFactoredFullSameObjectClosed = false
-unweightedD1b0DirectlyPaysWeightedR406Pointwise       = false
-```
-
-while recording the endpoint side as closed modulo ordinary scalar FTC.
-
-Consequently, do NOT classify
-
-```text
-integral R406 = endpoint + integral (4 * unweighted A3)
-```
-
-as representation plumbing.  The generic endpoint-aware compiler remains a
-valid conditional consumer, but the unit-coefficient A3/R406 equality is not
-derived by d1b0+d1b1.
-
-The actual weighted live producer remains R568:
-
-```text
-4 * integral GlobalForcingFull_resolvent <= B(T),
-```
-
-with R570/R572 compiling it to the existing R406/R503 consumer.  The unweighted
-A3/separation theorem is therefore a candidate donor to that weighted theorem,
-not already its same-object representation.
-
-This correction does not add a new theorem claim; it sharpens where any new
-analytic bridge would have to land.
-
-### S2b2d1b2 — PRIMARY analytic leaf: signed coherent covariance payment
-
-The only genuinely nonlinear fixed-output theorem remaining in d1b is now
-
-```text
-signed coherent covariance W(M, D + lambda M)
-  -> theorem-bearing fixed-output budget B_k
-  -> R432/R487 FixedOutputSignedCrossPayment.
-```
-
-The common rate may be chosen to optimize the later budget, but R229 forbids
-inferring a favorable coherent sign merely from cellwise nonnegative excess
-rates. R232 separately rules out a generic pointwise half-derivative gain.
-R432/R487 already own the cardinality-free downstream compiler once theorem-
-bearing local budgets exist.
-
-Same-object audit on 2026-09-16: the new
-`NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact` owner already closes
-the division-free finite algebra
-
-```text
-n * W(M, variableDecay) + (sum rates) * W(M,M)
-  = - sum_{i<j} (r_i-r_j)(w_i-w_j)
-```
-
-on the literal fixed-output mixed-helicity fibre. Thus the live local payment
-is no longer an unspecified covariance residual; it is the theorem-bearing
-signed pair-difference budget for that exact family. R472/R480 remain useful
-older R432 producers, but their own status lines still keep the physical
-snapshot/same-object weld false, so they do not currently close d1b2 by alias.
-The next search should be for a same-carrier pair-difference payment or a proof
-that the existing physical snapshot weld is exactly this d1b2 family.
-
-Recovered pair-difference archaeology: `NSTriadKNFixedOutputPairDifferenceDebtExact`
-and `NSTriadKNFixedOutputPairDifferenceAggregateExact` already close the finite
-Complex3 complete-graph identity and the literal R574 norm-sum aggregate:
-
-```text
-||sum_i B_i||^2 + PairDiffMass(B) = n * sum_i ||B_i||^2
-PairDiffMass(fixed output) = literal R574 pair-norm mass.
-```
-
-These are exactly the right vocabulary for the d1b2 pair-difference side, but
-their status lines keep the physical lower-bound/payment leaf false. So the
-follow-up is not new finite algebra.
-
-The P3 compiler `NSTriadKNFixedOutputPairDifferencePaymentExact` is also already
-present: an R574 lower-separation premise for the same fixed-output aggregate
-implies the same-output Gram-debt payment. Its status line keeps
-`fixedOutputPhysicalLowerSeparationClosed = false`, so the remaining leaf is the
-physical lower-separation/payment input and its attachment to d1b2's
-rate-weighted signed pair-difference carrier.
-
-The literal geometric donor immediately upstream is
-`NSTriadKNCenteredPartnerDifferenceAdapterExact`: it proves the R205 compressed
-partner difference is the R574/R446 difference value and, on the fixed-output
-carrier, rewrites each slot-kernel difference as two exact amplitude-increment
-branches via `fixedOutputSlotKernelDifferenceTelescopesByAmplitudeIncrements`.
-`NSTriadKNCenteredPartnerSlotDefectExact` then records the norm-level identity
-
-```text
-||B_alpha - B_beta||^2 = 4 ||K_alpha - K_beta||^2.
-```
-
-So the quotient/same-object/amplitude-telescope/slot-defect normalization is
-already source-written. The named open field is now specifically the
-radial/Pluecker lower weld for that slot defect:
-
-```text
-roundCenteredPartnerRadialPlueckerDefectWeldClosed = false
-roundCenteredPartnerSlotDefectRadialPlueckerLowerBoundClosed = false.
-```
-
-That is the next literal search vocabulary for the lower-separation input; it
-is not a request to rebuild the R205/R574 adapter or the norm-four identity.
-
-Literal search also finds the older Luo `CenteredPairCell` compiler in
-`NSTriadKNLuoPhysicalCenteredCommutatorAssemblyExact`; keep it as a structural
-donor, not a live splice. The current same-object adapter still records
-
-```text
-roundCenteredPartnerCenteredPairCellConstructed = false
-roundCenteredPartnerCutoffUniformAggregateClosed = false.
-```
-
-So any promotion through the old centered compiler still needs the live
-centered-partner cell weld, not merely the existence of the historical
-`CenteredPairCell` record.
-
-Guardrail donors around the radial/Pluecker weld are already in-repo.
-`NSTriadKNExternalHHSquareGapGramRound128Exact` closes the exact polynomial
-square-gap/Pluecker identity, but keeps the ordered drop/payment false:
-
-```text
-round128LowOutputTimesHighInputPolynomialIdentityClosed = true
-round128OrderedDropPluckerRemainderClosed = false.
-```
-
-And `NSTriadKNFixedOutputConcreteSlotCollisionWitnessExact` closes the concrete
-distinct-incidence same-slot collision witness. Therefore the live lower weld
-cannot be an incidence-label-only radial/Pluecker coercivity claim:
-
-```text
-roundFixedOutputConcreteDistinctCCCollisionWitnessConstructed = true
-roundFixedOutputIncidenceOnlyRadialPlueckerCoercivityRefuted = false.
-```
-
-The lower weld must see the actual quotient slot defect / amplitude-increment
-data, not merely raw fixed-output incidence separation.
-
-#### Recovered historical donor: R571 -> Aug-5 paired second moment
-
-Do not search for a missing centered scalarization adapter. PR #920 already
-source-wrote the representation chain
-
-```text
-R571 physical multiplier difference
- -> R571/R311/R27 radial same-object weld
- -> paired Taylor identity
- -> paired second-order defect
- -> absolute-magnitude PairedSecondMomentSample
- -> finite family-scoped paired-second-moment compiler.
-```
-
-`NSTriadKNR571PhysicalSecondMomentEnvelopeSplitExact` shows that the remaining
-physical leaves of that donor route are only
-
-```text
-radial Taylor:
-  |L| <= |y| A1
-  |R+|,|R-| <= |y|^2 A2
-
-state side:
-  |g+ - g-| <= |y| G2
-  |g+|,|g-| <= G1.
-```
-
-PR #945 records theorem-bearing Lean receipts for the periodic-B A1/A2 radial
-mathematics. It keeps the Agda sample/same-object transport distinct, and it
-identifies the existing finite-path difference theorem as G2 donor and the
-Waleffe amplitude-energy theorem as an older G1 magnitude donor. The G0'
-local Hermitian vector->scalar splice is source-written, and the R579 local
-Hermitian Young owner now pays the same-carrier scalar G1 magnitude step
-without square roots or a fibre-cardinality factor. The remaining state-side
-work on this donor lane is therefore not a generic `|g_\pm| <= G1` search:
-it is the G2 physical-gradient crosswalk plus any cutoff-uniform
-shifted-coefficient/family transport needed to attach the local G1 envelope to
-the live physical family.
-
-For S2b2d1b2 this route remains a candidate donor only. Any attachment must land
-on the same coherent-covariance carrier without losing the signed cancellation.
-Otherwise retain #920/#945 as provenance donors and prove d1b2 directly. Do not
-reopen their representation/scalarization chain.
-
-#### Current signed consumer / ordered-kernel min-cut
-
-The later R541/R573/R584/R503 cone has already pushed the live nested
-four-sign carrier through the signed Hermitian consumer before norm. The
-canonical status owner is
-`NSTriadKNLiteralR406SpectatorWeightedClassNormEverythingExact`, with the
-local exact producers
-`NSTriadKNWeightedNestedSignedCrossThreeOrbitBidiExact`,
-`NSTriadKNDirectCompanionThreeOrbitSignedRowBidiExact`,
-`NSTriadKNNestedFactoredFullToOrderedOrientedForceBidiExact`, and
-`NSTriadKNOrderedOrientedForceToR503BidiExact`.
-
-The recorded same-object facts are:
-
-```text
-R329 -> R572 single-cell same-slot weld                 closed
-signed Hermitian consumer three-orbit reduction          closed
-live R503 direct companion rewritten as ordered kernel   closed
-OrderedOrientedSpacetimeBudget -> R503                  closed
-outer forcing Gram route mandatory for R503              false
-independent amplitude budget required                    false
-```
-
-Thus the narrowest current analytic field on the direct R503 route is:
-
-```text
-cutoff-uniform bound for
-  2 * integratedOrderedOrientedForce,
-where H(alpha,beta) = w(alpha,beta) Re <G_alpha,D_beta>.
-```
-
-This is the signed-consumer version of the same operating rule:
-
-```text
-pair / cancel -> scalarize -> envelope -> majorize.
-```
-
-Do not take the nested forcing norm-square as the primary route before this
-consumer: the homogeneity audit records that doing so changes the quintic
-signed cross into a sextic object and opens a degree-seven derivative
-remainder. The Gram/class-norm surfaces remain optional diagnostics or
-producer routes only if they descend to the signed ordered-kernel budget.
-
-# C/D — forced breakdown: RELEASED-PROOF INTEGRATION LANES
-
-C and D are not proof-discovery blockers for A/B.  They are separate
-Fefferman/Clay alternatives and now have released external theorem sources
-recorded in-repo.  The current task is accounting and same-object integration,
-not re-proving C/D by analogy and not using them to pay A/B.
-
-`NSTriadKNClayForcedBreakdownFormulationRound523Exact` records the exact source
-coordinates for:
-
-```text
-C: R^3 smooth forced breakdown with rapid spatial/space-time decay and
-   bounded-energy no-global-smooth-solution consumer.
-D: T^3 smooth periodic forced breakdown with rapid time-decay of all forcing
-   derivatives and no-global-periodic-smooth-solution consumer.
-```
-
-`NSOpenAI2026ComparatorClayCDSourceExactAlignment` records:
-
-```text
-released C exactly matches Clay C                  true
-released D exactly matches Clay D                  true
-released C/D source alignment closed               true
-released concrete field -> DASHI Fourier closed    false
-released forcing -> literal R406 comparison closed false
-independent Agda reconstruction of released proof   false
-CMI award / DASHI prize claim                       false
-```
-
-`NSClayFourAlternativeReleasedProofBidiExact` records the all-four firewall:
-
-```text
-A internally paid                                  false
-B internally paid                                  false
-C external released proof present                  true
-D external released proof present                  true
-forced breakdown pays unforced A/B                 impossible / rejected
-public theorem creates DASHI same-object payment   false
-first released-integration residual                released field -> DASHI Fourier
-```
-
-Therefore the narrow C/D integration route is:
-
-```text
-external released C/D theorem/source receipt
-  -> exact Clay C/D coordinate alignment        closed
-  -> concrete released field/forcing extraction open
-  -> DASHI Fourier/369/R406 same-object weld    open
-  -> optional internal Agda reconstruction       open
-  -> CMI/prize adjudication                      external, not a repo flag.
-```
-
-This released-proof lane should be kept synchronized with the A/B control
-plane, but it must not be used to infer unforced global regularity or to
-overwrite the B ordered-kernel frontier.
-
-### S2b2d2 — global aggregation after local payments
-
-Once d1b2 exists, the next residual is exactly R488's second node:
-
-```text
-4 * sum_k B_k <= B(T)
-```
-
-with no output-count factor. Do not search this global theorem before the local
-fixed-output family exists.
-
-# S3 / S4
-
-S3: S0 already supplies the literal initial functional; remaining payment is a
-cutoff-uniform initial-critical ceiling.
-
-S4: prove `0 < 2*nu-a` only after S2b2 produces `a`. Do not close S4 ahead of
-S2b2 except conditionally.
-
-# Historical/provenance routes — append-only
-
-```text
-A1-A9 / ESS / Abel-defect manuscript route     historicalAlternativeRoute
-R179-R214 comparable / P3 route                retainedComparator + negativeControls
-R303/R353/R372 signed-resolvent route          serious precursor; production identity stayed input
-#890 incidence/P3 work                         retained theorem-bearing comparator
-P1/P2/P3 fixed-output pair-difference chain    finite/R574/payment compiler donor; lower separation open
-Luo centered pair compiler                     structural donor; live centered-partner cell weld open
-#920 R571/Aug-5 paired-second-moment transplant theorem-bearing representation donor
-#945/#947 Gate-A/G0' work                      cross-prover + same-object donor surfaces
-R579 local Hermitian G1 envelope               same-carrier scalar magnitude donor
-R541/R573/R584/R503 ordered-kernel cone        selected signed-consumer same-object cone
-Round523 forced C/D source formulation         exact Clay C/D coordinate owner
-OpenAI2026 C/D released source alignment       external theorem/source receipt + firewall
-OpenAI2026 D torus/369 seam                    released D -> DASHI Fourier/R406 residual owner
-R576/R577 positive Gram/Schur route            fallbackProducerRoute
-constant shell-localization payment            refuted as sufficient by R214
-adjacent max-shell -> Euclidean gap             refuted by #957 explicit witness
-R229 cellwise damping -> coherent damping       refuted by exact signed covariance witness
-modern signed/nested commutator route           selected B_comm producer family
-```
-
-# Current Pareto allocation — A/B/C/D, B primary
-
-```text
-P0  keep this tracker + #957 + #883 archaeology summary synchronized
-P1  B_phase S2b2d1b2: quantitative signed coherent-covariance fixed-output payment
-P2  standard-analysis/certification: endpoint zero derivative + scalar FTC + S1b calculus
-P3  static/certification validation of d1a/d1b0/d1b1 + S2b2c2b remote datum + d0 reduction
-P4  A/B portability BIDI audit on each paid B theorem family (non-promoting)
-P5  C/D released-proof accounting: released field/forcing -> DASHI Fourier/R406 weld
-P6  B_phase S3/S4
-P7  B_comm reconstruction/certification
-P8  certify recovered S0/S1/S2/#957 source surfaces
-```
-
-Operating rule:
-
-```text
-track A/B/C/D in this control plane;
-A/B remain independent from C/D;
-A proof discovery deferred, A portability BIDI active;
-never restart broad NS archaeology;
-start every search from a named unpaid theorem/field;
-preserve failed/superseded routes as append-only provenance;
-B new mathematics starts at S2b2d1b2 coherent covariance only;
-C/D source alignment is closed but representation/reconstruction/adjudication remain distinct;
-preserve signed/local components before norms;
-only after d1b2 search the cutoff-uniform sum d2;
-never infer B -> A or A -> B without explicit same-object transport.
-```
-
-# Certification boundary
-
-```text
-source-written theorem
-  != validation source/root
-  != workflow target
-  != observed successful commit-specific Agda receipt.
-```
-
-Merged #937 is the coordinator baseline. Draft #948 owns the completed S2b
-representation. Draft #957 owns the live S2b2 analytic delta plus the current
-A/B portability audit.
-
-No unconditional Clay Navier–Stokes promotion is made here.
+This disproves **unrestricted pointwise W2 nonnegativity** on that
+physical rational snapshot. To claim a short-time **real integrated**
+W2 counterexample, cross-check the Lean R823 physical trajectory and
+the EXACT real R815/R853 same-object identification; Agda's
+`round853RealTrajectoryCarrierWeldClosed=false` remains a gate.
+Do not create another W2 proof record or attempt a universal
+pointwise inequality invalidated by this datum. This is a
+research-route discriminator, not an unforced Clay proof.
+
+### Time and critical-regularity authority boundaries
+
+R690/R691 prove rational-valued identities for abstract `Time:Set`,
+`integrateTo:(Time→ℚ)→Time→ℚ` and supplied integration laws.
+They are not *by themselves* real-time Lebesgue/Bochner estimates.
+Existing pointwise mass bounds `≤36ED` are quartic positive
+mass estimates, not the signed quintic commutator needed by the
+compensated global B theorem.
+
+For A the current scalar `H¹` direct Fourier majorant controls
+`L²_xi`, but its **critical** `Ḣ^{1/2}` high-frequency envelope has
+the unresolved logarithmic tail
+`(4π E D/ν²) ∫_{sqrt(D/E)}^∞ dr/r`.
+That is a deficiency of the *majorant*, not a counterexample to
+any sharper cancellation estimate. No scale-critical A3 control follows.
+## Smallest meaningful next cuts
+
+**Cut 1 — B exact compensation owner.** Start at `NSTriadKNR650RateKernelCommutatorEndpointRound685Exact.agda` and `NSTriadKNR650GlobalSignedRateLiftInputLaplacianRound690Exact.agda`. Audit original critical-production source against total forcing, tangent, output-rate and Bony-class correction terms, using the eight-output smooth-shear discriminator. Establish an **actual same-object global identity**, or record a decisive mismatch. Neither file supplies its marked-open spacetime inequality.
+
+**Cut 2 — A actual Fourier owner.** Use `NSTriadKNEuclideanCanonicalProjectedInteractionExact.agda`, `NSWholeSpaceFiniteConvolutionSingleLimitExact.agda` and `NSWholeSpacePhysicalMajorantDominationProducerExact.agda` to transport the classical `L²·L²→L¹` tensor/Fourier identity and quantified strong-H¹ Stokes response continuity into the existing Bishop spatial Fourier source. Avoid another local Leray derivation or arbitrary `Set` record.
+
+**Cut 3 — hard analytic continuation frontier.** For B obtain the missing signed, homogeneous and cutoff-uniform global payment on the *corrected* source, with B1–B3 and B7. For A pay the **signed** A2 centered resolvent and a critical spacetime regularity criterion without assuming a uniform H¹ bound. These are major open Navier–Stokes problems, not bookkeeping tasks with a guaranteed small round count.
+
+## Verification, attribution and scope
+
+- Executed finite checks and standard analytical derivations are not Lean/Agda kernel certificates. New committed source tests and proof declarations still need exact-head validation.
+- The earlier R823 real Galerkin counterexample addresses an **auxiliary reserve shortcut**, not positive periodic B.
+- Forced C/D official theorem alternatives and their imported Lean axioms are a separate audit.
+- No source/author credit is supplied by filename alone. Retain original theorem owners and track mathematical origin when reusing external prior art.
+- Never mark A/B globally closed, or change canonical `clayPromotion=false`, without an unrestricted theorem checked against the official quantifiers.

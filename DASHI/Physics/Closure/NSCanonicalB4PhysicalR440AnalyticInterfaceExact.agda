@@ -22,6 +22,26 @@ module DASHI.Physics.Closure.NSCanonicalB4PhysicalR440AnalyticInterfaceExact whe
 -- manufactured here.
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+-- 2026-10-24 SOURCE ADMISSIBILITY NEGATIVE CONTROL
+--
+-- This interface is CONDITIONAL: LocalEDBelongsToSource is externally
+-- supplied, not a theorem that a physical ED payment exists.
+-- The original R219/R109/R469 selected-pair ED for the fixed globally
+-- smooth shear uhat(±e_x)=uhat(±e_y)=e_z is <=4 at k=(1,1,0)
+-- for every N, yet its actual full-fibre noncore/core R440 defect
+-- grows unbounded with N while the Core-Core Young companion is
+-- constant from N>=9. No finite cutoff-independent cD and thetaD<1/2
+-- can pay this inequality for a physical source class containing
+-- that shear and the original modal ED meaning.
+--
+-- A freely chosen cutoff-growing scalar localED does NOT discharge
+-- the same-source predicate. Retain this interface for an actually
+-- redesigned padding-invariant physical estimate after proving
+-- its identity with critical NS production; do not promote B4.
+-- See scripts/ns_b4_literal_padding_adversary.py and NSProofControl.
+------------------------------------------------------------------------
+
 open import DASHI.Physics.Closure.NSCanonicalB4PhysicalR440PaymentResidualExact as B4 using ()
 
 record CanonicalB4PhysicalR440AnalyticPayment
