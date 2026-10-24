@@ -9,7 +9,7 @@ module DASHI.Mathematics.Topology.ExoticSourceGenealogyParetoExact where
 -- geometric and Lean/Agda kernel obligations.
 --
 -- Primary source objects inspected 2026-10-25:
---   Richards 1963, DOI 10.2307/1993768
+--   Richards 1963, DOI 10.2307/1993768\n--   Brahana 1921, DOI 10.2307/1968030 (prior compact surface source)\n--   Kerekjarto 1923, DOI from later digital edition 2013
 --   Fox--Artin 1948, DOI 10.2307/1969408
 --   Yoneyama 1917, original Tohoku Math J publication (no DOI
 --     verified by this atlas)
@@ -113,9 +113,40 @@ mccarthyLeanSphere = A.mkNoDOISource
   "source-written and upstream-checked sphere reduced-homology supplier on TopCat.sphere; local DASHI v4.28.0 reduced-to-ordinary and kernel revision join still required"
   A.publicAttribution
 
+
+-- Snowball from Richards' own bibliography: these are NOT 1963
+-- discoveries. Richards (p. 260) credits the compact bordered-surface
+-- theorem to Brahana and describes Kerékjártó's earlier classification
+-- outline (noting gaps and providing a corrected argument).
+brahanaOriginal : A.AttributedSource
+brahanaOriginal = A.mkDOISource
+  "H. R. Brahana"
+  "Systems of Circuits on Two-Dimensional Manifolds"
+  "Annals of Mathematics 23(2), 144-168"
+  "1921"
+  "10.2307/1968030"
+  "https://doi.org/10.2307/1968030"
+  A.academicArticleSource
+  "older primary source, credited by Richards for compact bordered-surface classification; owner of genus/Euler/boundary finite stage classification"
+  A.publicAttribution
+
+kerekjartoOriginal : A.AttributedSource
+kerekjartoOriginal = A.mkDOISource
+  "Bela Kerekjarto"
+  "Vorlesungen uber Topologie: I, Flachentopologie"
+  "Springer, Grundlehren der mathematischen Wissenschaften 8"
+  "1923; digital eBook DOI edition 2013"
+  "10.1007/978-3-642-50825-7"
+  "https://doi.org/10.1007/978-3-642-50825-7"
+  A.academicBookSource
+  "older ideal-boundary/noncompact-surface classification ancestor according to Richards; DOI belongs to the 2013 electronic reissue, NOT the 1923 printed object; Richards notes earlier proof gaps"
+  A.publicAttribution
+
 originalsAndImplementation : List A.AttributedSource
 originalsAndImplementation =
   richardsOriginal ∷
+  brahanaOriginal ∷
+  kerekjartoOriginal ∷
   foxArtinOriginal ∷
   yoneyamaOriginal ∷
   bombieriDeGiorgiGiustiOriginal ∷
@@ -123,7 +154,7 @@ originalsAndImplementation =
   hatcherBook ∷
   mccarthyLeanSphere ∷ []
 
-originalCount : A.sourceCount originalsAndImplementation ≡ 7
+originalCount : A.sourceCount originalsAndImplementation ≡ 9
 originalCount = refl
 
 exoticTopologyAtlas : A.AttributedSourceAtlas
