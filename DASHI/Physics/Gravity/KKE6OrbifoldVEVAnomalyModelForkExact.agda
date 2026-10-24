@@ -86,7 +86,7 @@ full27CountStill = refl
 evenTrinificationGaugeCount : 8 + 4 + 4 ≡ 16
 evenTrinificationGaugeCount = refl
 
-sourceElectroweakGaugeKernel : 8 - 4 ≡ 4
+sourceElectroweakGaugeKernel : 4 + 4 ≡ 8
 sourceElectroweakGaugeKernel = refl
 
 -- Under inner parity in FULL E6, the adjoint (3,3,3) and
