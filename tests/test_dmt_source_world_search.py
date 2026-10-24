@@ -153,3 +153,53 @@ def test_source_roots_count_lineage_not_documents():
     assert snap["independent_lineage_roots"] == 3
     assert snap["artifact_status_counts"] == {
         "knownAbsent": 1, "notLocated": 11, "present": 5}
+
+
+def test_candidate_tip_selectively_reopens_without_changing_world():
+    w = world()
+    before = copy.deepcopy(w)
+    proposal = {
+        "source_id": "pnas2023",
+        "source_locator": "https://example.org/SYNTHETIC-ONLY-qc.csv",
+        "source_revision": "SYNTHETIC-TEST",
+        "candidate_sha256": "f" * 64,
+        "access_scope": "UNVERIFIED SYNTHETIC",
+        "observation_time": "2026-10-24",
+        "verification_method": "NONE -- fixture",
+    }
+    result = engine.candidate_source_receipt(w, "original_static_fd", proposal)
+    assert result["status"] == "candidate_tip_not_admitted"
+    assert result["world_mutated"] is False
+    assert result["artifact_status_after"] == "notLocated"
+    consumers = {x["consumer"] for x in result["would_reopen_consumers"]}
+    assert consumers == {
+        "c_original_static_inclusion", "c_original_dynamic_inclusion",
+        "c_original_joint_inclusion", "c_static_reproduction"}
+    assert "c_external_entity" not in consumers
+    assert w == before
+
+
+def test_candidate_tip_cannot_assert_authority_or_fix_known_absent():
+    w = world()
+    evidence = {
+        "source_id": "pnas2023",
+        "source_locator": "https://example.org/not-a-real-source",
+        "source_revision": "synthetic",
+        "candidate_sha256": "0" * 64,
+        "access_scope": "none",
+        "observation_time": "2026-10-24",
+        "verification_method": "unverified",
+    }
+    bad = dict(evidence, source_id="sanders2026")
+    with pytest.raises(ValueError, match="differs"):
+        engine.candidate_source_receipt(w, "original_static_fd", bad)
+    with pytest.raises(ValueError, match="notLocated"):
+        engine.candidate_source_receipt(
+            w, "dynamic_tapered_window_in_pinned_tree",
+            dict(evidence, source_id="pnas_gitrepo"))
+    with pytest.raises(ValueError, match="notLocated"):
+        engine.candidate_source_receipt(w, "source_subject_namespace",
+                                        dict(evidence, source_id="pnas_static_script"))
+    with pytest.raises(ValueError, match="SHA256"):
+        engine.candidate_source_receipt(
+            w, "original_static_fd", dict(evidence, candidate_sha256="invented"))
