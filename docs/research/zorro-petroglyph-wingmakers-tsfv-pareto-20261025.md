@@ -76,12 +76,13 @@ This is a **classical selection-bias demonstration**, not a concrete implementat
 
 - `DASHI/Cognition/ZorroPetroglyphSourceCutExact.agda`: canonical original source roots, differentiated 2001 and 2014 claims, filing vs adjudication, explicit constructor nonidentities, concrete claim receipts. Imports pre-existing provenance-closure and released-artifact owners. Source written; **not Agda kernel checked**.
 - `DASHI/Quantum/ZorroTSFVPostselectionNoSignalExact.agda`: imports existing TSFV, two-boundary and history/caustic owners; provides exact 2x2 finite count equalities and explicit causal-claim nonidentities. This is a **finite classical construction**, not physically selected TSVF; **not Agda kernel checked**.
-- `scripts/zorro_tsfv_source_temporal_audit.py`: deterministic register, shared-root deduplication, 2x2 independent/selected probabilities, 12 focused Python regression cases and optional user SRT SHA-256 check. Independently run only where an actual runtime receipt is explicitly added; do not infer green from a created GitHub file.
+- `scripts/zorro_tsfv_source_temporal_audit.py`: deterministic register, shared-root deduplication, 2x2 independent/selected probabilities, 12 focused Python regression cases and optional user SRT SHA-256 check. **12/12 PASS from the exact-GitHub-source Python script, with SRT hash verified**. Separate `scripts/zorro_tsfv_qubit_abl_exact.py` supplies an exact rational 2D qubit/ABL vs Born-marginal example, **7/7 PASS**. Original code blobs matched local `git hash-object`; [full 19-test local verification receipt](../receipts/zorro-tsfv-exact-local-python-20261025.md). No Agda or CI receipt.
 
 **Acceptance commands:**
 
 ```sh
 python3 scripts/zorro_tsfv_source_temporal_audit.py --self-test --transcript '/path/to/transcript-2026-10-24 (4).srt' --json
+python3 scripts/zorro_tsfv_qubit_abl_exact.py
 agda -i . DASHI/Cognition/ZorroPetroglyphSourceCutExact.agda
 agda -i . DASHI/Quantum/ZorroTSFVPostselectionNoSignalExact.agda
 ```
