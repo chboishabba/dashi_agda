@@ -22,7 +22,8 @@ def integral5(form): return form.get((0,1,2,3,4),0)
 
 # Mixed U1 triple CS: S5 = k/(2pi)^2 int A1^F2^F3.
 # On T5 A1=theta dx0, F2=2pi p dx1^dx2, F3=2pi q dx3^dx4.
-k,p,q,theta=sp.symbols("k p q theta",integer=True)
+k,p,q=sp.symbols("k p q",integer=True)
+theta=sp.symbols("theta",real=True)
 A={(0,):theta};F2={(1,2):2*sp.pi*p};F3={(3,4):2*sp.pi*q}
 S5=sp.simplify(k*integral5(wedge(wedge(A,F2),F3))/(2*sp.pi)**2)
 assert sp.simplify(S5-k*p*q*theta)==0
