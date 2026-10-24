@@ -1200,3 +1200,52 @@ The **three-copy actual wild-embedding pi1** and geometric
 flat-bundle identification remain OPEN. New exact local
 stand-ins PASS 36/36 selected cross-PR tests, 10/10 SymPy
 universal matrix laws, no Agda kernel or CI promotion.
+
+## 2026-10-24 maximal-return horn physical regularity gate
+
+**Concrete novel mathematical question rather than more C3 encoding:**
+Does the actual three-copy wild exterior admit a
+compatible family of local geometric representative
+loops for *every* Hatcher binary generator, with
+\(\max_{|w|=n}\ell(\gamma_w)\to0\)?
+The abstract source group and finite numerical
+VOA/commutator probes DO NOT prove this metric condition.
+
+If YES, a bounded SU3 connection in compatible local
+frames on their accumulation neighborhood satisfies
+\(\|Hol(\gamma_w)-I\|\le M\ell(\gamma_w)\to0\).
+But unitary group commutator compression forces
+\(\|Hol(m_{root})-I\|\le
+ (2\epsilon_n)^{2^n}/2\); hence all such
+nontrivial root holonomies are **excluded**.
+For the selected CP toy W, δ=\(\|W-I\|_{op}\)≈
+1.43818847527, and at every depth some descendant
+must have gap at least \((2δ)^{1/2^n}/2\to1/2\).
+So the representation constructed with Gotô cannot
+automatically be realized by a bounded smoothly
+extendible physical connection on an arbitrarily
+shrinking horn geometry. That is a *conditional,
+quantitative obstruction*, not a contradiction of
+abstract group existence or a full finite-energy
+no-go for singular boundary defects.
+
+**Owner-side reproducible numeric stand-in:**
+`scripts/alexander_horned_c3_su3_regularization_no_go_probe.py`,
+independent of sibling unmerged branch imports.
+The analytic proof should reuse existing
+`DASHI/Geometry/FlatFormalDiskHolonomySurface.agda`
+operator-norm/holonomy-limit targets rather than
+importing a new normed analysis authority.
+
+**Physics cross-cut:** Selected W has a conditional
+gauge-invariant unpolarized two-path fringe
+\(P_+(0)≈0.67048481558\), but one \(\pi_1(S^1)\)
+loop suffices to reproduce it; a first-level
+noncommuting pair can be reproduced by \(F_2\).
+Distinguishing *horned* structure requires
+compatible all-depth geometry or multiscale
+regularity, not a single Wilson trace. New physical
+decision-grade owner in sibling #1247:
+`Docs/physics/HornedSU3ObservableRegularityParetoMaxCut20261024.md`.
+No actual wild-embedding metric estimate or
+Agda kernel result is claimed.
