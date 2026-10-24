@@ -198,3 +198,16 @@ python3 scripts/check_noncompact_static_dirac_state_nogo_20261024.py
 ```
 
 These scripts' locally equivalent calculations passed. Neither PR-head CI nor any full 4D Einstein-Maxwell-Dirac quantum saddle is claimed.
+
+
+## 2026-10-24 quantum teleportation / information-transfer cross-pollination (new P3Q)
+
+**Source and implementation:** [`MMPQuantumTeleportationChannelCrossPollination20261024.md`](MMPQuantumTeleportationChannelCrossPollination20261024.md). Previous DASHI teleportation obligations are ALREADY owned by sibling PR #1163: `CausalTransportFTLObligationsExact` and `CausalTransport2026SourceAtlasExact`. TPS/input/output structure has separate proof owner #1128, and 100-spatial-channel optics is the independent published Lou et al. 2026 PRL 137 080801 experiment. Gao–Jafferis–Wall 2016/2017 and Maldacena–Stanford–Yang 2017 are **holographic traversability/teleportation donors**, distinct from Maldacena–Milekhin–Popov 4D charged-fermion wormholes.
+
+**New computed selected finite channel, not an assumed wormhole one:** use the SAME finite Wilson–Dirac Hamiltonian skeleton as PR #1248, choose explicit 2-spinor input/output site subspaces, and project `K=Pout exp(-iHt) Pin`. A CPTP erasure completion is provided by `I-K†K≥0`, with gauge-covariant K and positive Choi. Local expanded numerical fixture PASS (12 sites, q12, best time 12.52 over stated 0–30 scan, mean spin-qubit success ~0.210412, accepted-output ideal-corrected entanglement fidelity ~0.976177, weighted fidelity ~0.205399). **Not** a physically normalized asymptotic 4D wormhole scattering experiment, capacity measurement, or causal front-speed theorem. The reduced committed checker `scripts/check_mmp_teleportation_channel_bridge_20261024.py` requires an independent exact-head run.
+
+**Separate Bell LOCC comparison:** resource Bell pair, Bell measurement with 1/4 each of four outcomes, Bob pre-classical-message I/2, then two classical bits and Pauli correction; expanded local script recovers four tested states at machine precision. This does NOT move the source particle through a wormhole, provide FTL communication, or generate exotic gravitational energy. QET likewise remains separate.
+
+**Add P3Q gates:** (i) select physical encoding/TPS with matching observable same object; (ii) compute flux-normalized 4D in/out Dirac scattering or causal Green function on the P1/P2 *same-state* geometry; (iii) channel Choi/gauge/CPTP, transmission-vs-fidelity-vs-erasure, qubit and optional multimode covariance; (iv) signal front time, injected probe backreaction, charged-current conservation; (v) infer physical C3 drive change only after Maxwell/plasma source determines `δW_ren`, `δS`, `δF`. This phase depends on P1/P2 for a PHYSICAL claim, but source-free finite-channel validation can proceed in parallel. Horned nonabelian topology, Monster and 12/24 counts are not relevant without a true same-operator weld.
+
+**Pareto update:** the single most useful next physical inference is to compute a state-consistent 4D retarded *fermion* response/mode scattering from the GLOBAL magnetic loop and self-consistent metric, then report **both** quantum channel loss and fidelity with physically identifiable endpoints. Do not promote holographic wormhole teleportation or external LOCC experiments to MMP geometry by analogy.
