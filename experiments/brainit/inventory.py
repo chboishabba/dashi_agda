@@ -53,16 +53,17 @@ def upstream_commit(root: Path) -> tuple[str | None, bool | None]:
 
 def create_manifest(upstream: Path, fmri: Path, images: Path,
                     mapping: Path, checkpoints: list[Path],
-                    subject_numbers: list[int]) -> dict:
+                    subject_numbers: list[int], design: Path | None = None) -> dict:
     upstream = upstream.expanduser().resolve()
     sha, dirty = upstream_commit(upstream)
     artifacts = {
         "fmri": file_record(fmri), "ground_truth": file_record(images),
-        "v2c_mapping": file_record(mapping),
+        "v2c_mapping": file_record(mapping), "nsd_design": file_record(design),
         "checkpoints": [file_record(p) for p in checkpoints],
     }
     status = "incomplete"
     shape = None
+    alignment = None
     if artifacts["fmri"]["status"] == "present":
         with np.load(fmri, allow_pickle=False) as data:
             for key in ("multi_sub_fmri", "num_voxels_subjects", "type_sample"):
@@ -82,7 +83,18 @@ def create_manifest(upstream: Path, fmri: Path, images: Path,
                        for x in ("fmri", "ground_truth", "v2c_mapping"))
     ckpt_present = bool(checkpoints) and all(
         x["status"] == "present" for x in artifacts["checkpoints"])
-    if base_present and ckpt_present and sha and dirty is False and shape is not None:
+    if artifacts["nsd_design"]["status"] == "present" and artifacts["fmri"]["status"] == "present":
+        from alignment import checked_alignment
+        a = checked_alignment(fmri, design)
+        alignment = {
+            "n_shared_samples": a["n_shared_samples"],
+            "upstream_gt_order_matches_fmri_rows":
+                a["upstream_inference_gt_order_matches_fmri_rows"],
+            "requires_explicit_reordering":
+                not a["upstream_inference_gt_order_matches_fmri_rows"],
+        }
+    if (base_present and ckpt_present and sha and dirty is False
+            and shape is not None and alignment is not None):
         try:
             imgs = np.load(images, mmap_mode="r", allow_pickle=False)
             # This source file may contain all NSD stimuli, rather than only test stimuli.
@@ -101,6 +113,7 @@ def create_manifest(upstream: Path, fmri: Path, images: Path,
         "subjects_1_based": subject_numbers,
         "subjects_internal_zero_based": [n - 1 for n in subject_numbers],
         "artifacts": artifacts, "fmri_alignment": shape,
+        "source_stimulus_alignment": alignment,
         "status": status,
         "independent_model_inference_performed": False,
         "paper_metric_reproduced": False,
@@ -114,6 +127,8 @@ def main(argv=None):
     ap.add_argument("--fmri", type=Path, required=True)
     ap.add_argument("--images", type=Path, required=True)
     ap.add_argument("--mapping", type=Path, required=True)
+    ap.add_argument("--design", type=Path,
+                    help="NSD original experiment/nsd_expdesign.mat")
     ap.add_argument("--checkpoint", type=Path, action="append", default=[])
     ap.add_argument("--subjects", type=int, nargs="+", default=[1, 2, 5, 7])
     ap.add_argument("--out", type=Path, required=True)
@@ -123,7 +138,8 @@ def main(argv=None):
     ):
         ap.error("subjects must be unique NSD 1-based IDs from 1 through 8")
     manifest = create_manifest(args.upstream, args.fmri, args.images,
-                               args.mapping, args.checkpoint, args.subjects)
+                               args.mapping, args.checkpoint, args.subjects,
+                               args.design)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     print(manifest["status"])
