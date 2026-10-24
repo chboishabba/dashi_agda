@@ -516,3 +516,31 @@ relation says `1/k` and leaves
 `delta c=12/[k(k+2)]`. This is a clear quantum
 correction and source-consistent future test.
 No direct terminal Clay payment.
+
+
+## WZW / global gerbe / doubled phase-space late source cut (2026-10-24)
+
+The canonical source dossier
+`docs/hyperfabric-k27-26d-su2-nsflux-linear-dilaton-worldsheet-maxcut-20261024.md`
+now records source-authorized **global** north/south
+S3 B patches, quantized H, and explicit global
+C22 on the same actual 26D nonflat NSNS source.
+Existing SU2_k integrable CFT source-owner files
+`KacMoodyLevelReceipt`,
+`SU2Level4Spin1RepReceipt`,
+`LevelRankDualityReceipt`, `VertexOperatorAlgebraCore`
+and `TwistedModuleModularity` are the available
+Agda reuse targets. Source: Michael B. Schulz,
+arXiv:1106.6291 (2012): 2D WZW action plus
+`TM ⊕ T*M` doubled momentum/winding/string
+Hamiltonian; not another numerical 3/6/9 geometry.
+Next true hyperfabric bridge: operator-preserving
+worldsheet momentum/winding generalized metric
+and source B-gerbe patch descent on an *actual*
+selected target. No categorical C3→Z2 orientation
+homomorphism produces a nontrivial sign:
+coprime group orders; U1 B-gerbe is another
+distinct higher-gauge object.
+The actual nonflat source breaks GLOBAL SO24
+even though the FLAT massless state space
+has SO24 299+276+1.
