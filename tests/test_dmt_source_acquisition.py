@@ -25,7 +25,7 @@ def test_local_source_blob_verification_and_corruption_rejection(tmp_path):
     (local/"fMRI").mkdir(parents=True)
     (local/"fMRI"/"LongS01DMT.mat").write_bytes(payload)
     digest = hashlib.sha1(
-        b"blob " + str(len(payload)).encode("ascii") + b"\\0" + payload
+        b"blob " + str(len(payload)).encode("ascii") + b"\0" + payload
     ).hexdigest()
     receipt = {
         "source_repository": "timmer500/DMT_Imaging",
