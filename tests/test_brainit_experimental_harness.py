@@ -26,7 +26,8 @@ def toy_source(tmp_path):
     type_sample = np.array([1, 2, 1, 2, 2, 2])
     np.savez_compressed(src / "data/nsd_data/fmri_v2.npz",
                         multi_sub_fmri=x, num_voxels_subjects=np.array([2, 4]),
-                        type_sample=type_sample)
+                        type_sample=type_sample,
+                        type_desc=np.array({0: "no measurement"}, dtype=object))
     rng = np.random.default_rng(47)
     images = rng.integers(0, 255, size=(6, 24, 24, 3), dtype=np.uint8)
     np.save(src / "data/nsd_data/nsd_images_224.npy", images)
@@ -62,6 +63,9 @@ def test_isolated_real_fmri_controls_keep_other_subjects_unaltered(tmp_path):
     assert np.array_equal(zero["multi_sub_fmri"][:, 2:], source["multi_sub_fmri"][:, 2:])
     receipt = stage(src, tmp_path / "staged", "deranged", 0, 40, test=True)
     assert receipt["model_inference_executed"] is False
+    with np.load(tmp_path / "staged/data/nsd_data/fmri_v2.npz",
+                 allow_pickle=False) as staged:
+        assert set(staged.files) == {"multi_sub_fmri", "num_voxels_subjects", "type_sample"}
     assert receipt["source_fmri_sha256"] == original_sha
     assert digest(fmri) == original_sha
     assert (tmp_path / "staged/results/saved_models").is_symlink()
