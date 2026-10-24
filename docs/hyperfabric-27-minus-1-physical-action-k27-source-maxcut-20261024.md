@@ -636,3 +636,40 @@ The 26D K27/Hodge/M24 signed-duad atlas is the separate
 `docs/hyperfabric-k27-26d-bfield-22dual-m24-signed-duad-maxcut-20261024.md`.
 Neither creates a 27D E27/K27 lift, a fully quantized
 physical solution, nor YM/NS/RH/Clay estimates.
+
+
+## Latest Pareto source target supersedes A6 'no nonflat 26D exemplar'
+
+The direct **26D** branch now has one complete selected
+*leading-order* NSNS Einstein/B/dilaton solution on
+`R^(1,22) × S3_r` and an exact sourced **global H-flux
+gerbe with explicit dual C22** on that same background.
+Source and observed exact Python are indexed in
+`docs/hyperfabric-k27-26d-su2-nsflux-linear-dilaton-worldsheet-maxcut-20261024.md`.
+The standard SU2_k WZW CFT with free/linear-dilaton
+bosons has published Sugawara states and a central
+charge-completing slope; this remains a
+SOURCE-AUTHORITY (not repo-kernel reproof).
+The original 27D EH+3form 125/121 mismatch
+and original Albert/path Laplacian
+same-symmetry no-go remain untouched.
+
+Explicit original formal donor recovered:
+`DASHI/Physics/QFT/SU2Level4Spin1RepReceipt.agda`
+owns all five `SU2_4` integrable j values and
+the actual h_j formula. The new source consumer
+`DASHI/Unified/HyperfabricK27SU2LevelFourOriginalSourceCutExact.agda`
+imports that exact original theorem owner and
+checks the k4/j2 high-weight term plus
+central-charge split
+`22 ordinary flat bosons + one background-charge
+boson (c=2) + SU2_4(c=2) =26`.
+Kernel **unverified**; it is not a physical
+SM SU2 or p3 conductor3 identification.
+
+The true terminal physical leaves now are
+global gerbe and string alpha' scheme-controlled
+same-object CFT–target identification, BRST
+physical state/observables, and K27 full
+Lie generators. No new 27D ontology or
+Clay wrapper is justified.
