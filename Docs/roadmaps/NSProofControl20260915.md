@@ -1,3 +1,38 @@
+## 2026-10-24 next max-cut — exact coarea calibration and Ri proof entry
+
+**Executed local Python:** `python -m pytest -q` on the new
+`tests/test_ns_threshold_coarea_gaussian_exact.py` calculations:
+2 passed (SymPy). The radial Gaussian f=exp(-|x|²) has
+level |x|=sqrt(-log a); the coarea integrand is
+8*pi*a*(-log a)^(3/2). With t=-log a its integral is
+3*sqrt(2)*pi^(3/2)/4, exactly the bulk integral
+of |grad f|². The critical-root gradient split is likewise checked,
+`|grad(f^(3/4)xi)|²=(9/16)f^(-1/2)|grad f|²+
+ f^(3/2)|grad xi|²` for orthogonal polar derivatives.
+**Scope:** exact calibration, NOT a general measure-theoretic coarea
+proof or physical R236/R685/R690 same-object proof.
+
+**Ri critical A source check:** Myong-Hwan Ri, arXiv:2601.15685v1,
+Theorem 1.1 (equation 1.3) claims a global inhomogeneous H^s
+estimate for d>=3, s>=d/2-1, constant C(s) independent of viscosity
+and dimension; Section 3 starts from a maximal local regularity
+interval and high-frequency identity (3.6). The manuscript's Fourier
+convention is unitary with +i phase, unlike our earlier Gaussian
+source script using an unnormalized -i convention. Any import must
+account for phase and (2pi) normalization, and audit the transition
+from high-frequency bounds to global time-uniform H^s with no
+circular dependence on the unknown maximal regularity interval.
+No result of Ri promoted to an independently proven A3 theorem.
+
+**Single decisive B continuation:** formalize the full threshold
+identity under coarea/trace assumptions, then prove precise identity
+of physical vortex-stretching production with the R236 consumer
+AFTER the actual helical/physical operator conversion. This is the
+same-source bridge, not another amplitude-independent counting
+covariance. Physical shell payment and universal continuation still
+open.
+
+---
 ## 2026-10-24 implementation receipts — 4-paper primary text and threshold B donor
 
 Current canonical reference inventory: `Docs/research/ns_ab_four_primary_papers_20261024.md`, whose links resolve to the **full arXiv HTML** v1/v3/v1/v2 manuscripts, not merely abstracts. Do not repeat the erroneous Shahmurov 'Large-Data Global Regularity Part II' title attached to arXiv:2605.01873; its current source expressly disclaims unrestricted 3D regularity.
