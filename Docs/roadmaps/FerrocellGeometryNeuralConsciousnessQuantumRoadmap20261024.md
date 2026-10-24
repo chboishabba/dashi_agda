@@ -402,3 +402,33 @@ For all binary 2D toroidal side lengths \(n\), \(\dim\ker F=n\), \(\operatorname
 - **P4 memory / P6 Ferrocell and quantum:** periodic XOR's algebra is reusable only as an **adversarial null**. It does not imply corresponding neural long-term memory, magneto-optical polarisation, toroidal magnetic topology, zero-point energy, entanglement or a consciousness-generating mechanism.
 
 **Next cut:** a source-versioned comparison of exact IIT computations at tractable network sizes, plus analytic bounds for growing lattices. Measured neuron-/task-level dynamical comparisons remain the physical priority. Do not spend the next increment on rederiving the existing n≤10 ranks or cardinality of the 27-point cube.
+
+
+## 2026-10-24 J+1 / JCoarse/JFine max-cut on the ternary 5³ lost five dimensions
+
+**Critical same-object upgrade from [IIT PR #1148](https://github.com/chboishabba/dashi_agda/pull/1148):** the earlier n=5, d=3, \(\mathbb F_3\) **125-site** rank=120, nullity=5 measurement is now identified with **one five-slot diagonal cyclic profile**, not merely a deficit of five numeric dimensions.
+
+Let \(F=S_x+S_y+S_z\). Let \(W=\mathbb F_3^{\mathbb Z/5}\) and \(Jg(i,j,k)=g(i+j+k\pmod 5)\). Extract \(P x(s)\) by summing the corresponding **25-site** diagonal plane. Arithmetic gives \(PJ=I_W\), \(FJ=0\), \(PF=0\). A full exact finite-operator certificate, verified on **all 125 standard basis vectors**, is:
+
+\[
+\boxed{F^{80}=I-JP.}
+\]
+
+Hence **\(\ker F=\mathrm{im}J\) (5 dims), \(\mathrm{im}F=\ker P\) (120 dims), \(V=\mathrm{im}F\oplus\mathrm{im}J\), \(F^{80}=\mathrm{id}\) on the 120-dimensional retained part**. The source is exactly recoverable from observed updated state plus lost residual:
+
+\[
+x=F^{79}(Fx)+J(Px).
+\]
+
+This is a literal **coarse/relative-fine reopening** witness for the extant \`DASHI/Core/CoarseFineRelativeFibreExact\` pattern, with \(F(x)\) the 120-dimensional *retained dynamical observation* and \(P(x)\) the *five-trit relative residual*. Calling \(P\) a *geometric coarse diagonal profile* is also valid but belongs to a different observation ordering: do not conflate the two uses of "coarse".
+
+**Interpretation of the user's "+1":** \(5^1=5\) independent trits is **one C5-indexed profile packet** across \(5^3=125\) spatial sites. Relative to the 120-dimensional retained observation, \(120+(1\times5)=125\). It is **not** \(125+5=130\) physical directions, a fourth \(5\)-site spatial axis (\(5^4\)), or one extra scalar. \`JPlusOneScaleBridge.FreshUnitExtension\` is instantiated as an **addition shape** for this packet, and original harmonic JCoarse=9/JFine=19683 remain *distinct* typed models with their original source authorship and no illicit same-cardinality transfer.
+
+**Owners and provenance:**
+- Pre-existing large-grid rule \`scripts/iit_ternary_lattice_scaling.py\` and 5³ rank; pre-existing j/+1 abstractions \`JPlusOneScaleBridge\`, \`JFineCoarseRelativeScaleExact\`, \`JCoarseFineConsumerReductionBridgeExact\`.
+- New [IIT #1148 source+auditor](https://github.com/chboishabba/dashi_agda/blob/agent/iit-phi-integration-maxcut-20261013/docs/superpowers/plans/2026-10-24-iit-5cube-jplusone-coarse-fine.md); \`scripts/iit_j_coarse_fine_5cube_audit.py\` uses the original existing matrix/rank owner and full finite 125-basis F80 check.
+- New \`IITFiveCubeJCoarseFineRelativeBridgeExact.agda\` derives generic **conditional** exact coarse/fine reopening and plus-one-packet arithmetic from a supplied operator certificate. It is imported in the #1148 production aggregate; **concrete Agda 5³ kernel and exact-head compiler receipts are unclosed**. An independent local source-faithful Python 125-column check passed, but the exact newly committed GitHub script has not independently run in an exact-head checkout.
+
+**Countercontrols:** ternary 3³ rank18/kernel9, 4³ rank60/kernel4, 5³ rank120/kernel5. n=8 has an algebraically predicted kernel56 by the full \(\mathbb F_9^\times\) Fourier characters. The one-profile structure is **model-specific** and changes with size/algebra/boundaries. Finite ternary residuals alone do not establish J-invariant modular interpretation, LLM latent geometric reasoning, brain memory/phenomenal consciousness, physical 5D spacetime, magnetic monopoles, quantum coherence or vacuum energy.
+
+**Priority/phase D3B.5:** Source algebra/finite arithmetic and a conditional typed reopening are now implemented; next cut is a kernel-checked concrete 125-site spectral/projector certificate **only if required by downstream consumers**, and an independent measured-state model if the geometry is to advance from mathematical analogy to neurobiology. Do not reopen already-paid j harmonic scales or rerun the old numerical 5³ rank as an achievement.
