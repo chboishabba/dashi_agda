@@ -81,7 +81,7 @@ actionNotFreeAtA free =
 equivarianceDoesNotForceFreeAction :
   (∀ {x} → (∀ g → encode (action g x) ≡ action g (encode x)) → FreeAt x) → ⊥
 equivarianceDoesNotForceFreeAction claimed =
-  actionNotFreeAtA (claimed encoderEquivariant)
+  actionNotFreeAtA (claimed (λ g → encoderEquivariant g representationA))
 
 ------------------------------------------------------------------------
 -- No claim: that this finite witness determines a perceptual neural
