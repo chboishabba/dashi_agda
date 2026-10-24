@@ -6,6 +6,7 @@ derived pair. A valid input connects the same JSON rows, apparatus,
 configuration, instrument, calibration IDs and source-stream byte hashes.
 All files remain self-submitted; no independent external attribution here.
 """
+import csv
 import hashlib
 import json
 import math
@@ -91,7 +92,7 @@ def verify_pair_source(meta, pairs):
                 replay_result = replay_si_csv(stream_bytes, raw, cal)
                 if replay_result['pairs'] != pairs:
                     replay_failures.append('raw_stream_reduction_does_not_equal_pairs')
-            except (ValueError, TypeError, KeyError, OverflowError) as exc:
+            except (ValueError, TypeError, KeyError, OverflowError, csv.Error) as exc:
                 replay_failures.append('deterministic_raw_reduction_failed:' + type(exc).__name__)
         if cal.get('gradient_calibration_fractional_std')!=meta.get('gradient_calibration_fractional_std'):
             failures.append('field_scale_calibration_not_same_as_pair_metadata')
