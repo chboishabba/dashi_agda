@@ -1,3 +1,5 @@
+> **2026-10-24 PRIOR-ART REBASE / SCOPE CORRECTION:** This file is a *data-centre-specific case study*, not the primary thermal/acoustic physics or technology roadmap. Canonical cross-domain prior art and the current service-first research cut live at [CrossDomainThermalAcousticCaloricPriorArt20261024.md](CrossDomainThermalAcousticCaloricPriorArt20261024.md). Existing `ThermodynamicStatisticalLaws`, `ContinuumMaterialLaws`, observer/multiscale acoustic transport, bioacoustic sensor-mixture non-identifiability, passive refrigeration, Rocketdyne material qualification, and **unmerged MAGNOTHERM PR #1158** take ownership precedence. No new general law or experimental authority is claimed by the finite models below. Data centres are one optional industrial heat/noise consumer among many.
+
 # Data-centre acoustics–thermal heat-reuse SOTA: 2026-10-24 max-cut
 
 **Status:** source-attributed literature audit plus a conservation-verified illustrative site model. NO measured site-specific physical, financial, epidemiological or legal outcome claimed. This is a direct extension of `Docs/roadmaps/DataCentreAcousticExposure20261024.md`.
