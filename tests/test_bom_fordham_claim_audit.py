@@ -338,10 +338,10 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
 
-    assert len(rows) == 36
+    assert len(rows) == 38
     assert len({row["edge_id"] for row in rows}) == len(rows)
     assert Counter(row["case_id"] for row in rows) == {
-        "BOM2026": 13, "REEF2021": 10, "GAS2026": 13
+        "BOM2026": 15, "REEF2021": 10, "GAS2026": 13
     }
     fields = (
         "edge_id", "case_id", "upstream", "downstream", "relation",
@@ -395,7 +395,7 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
 def test_claim_root_ledger_documentation_uses_only_case_bounded_counts():
     docs = RESEARCH.read_text()
     assert "australian_climate_claim_origin_edges_20261025.csv" in docs
-    assert "36 bounded relationship rows" in docs
+    assert "38 bounded relationship rows" in docs
     assert "NOT a representative crawl" in docs
     assert "originator" in docs.lower()
     assert "actual transfer not established" in docs.lower()
@@ -484,7 +484,7 @@ def test_international_republication_is_not_fresh_climate_evidence():
 def test_canonical_origin_keys_do_not_miscount_common_republication():
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
-    assert len(rows) == 36
+    assert len(rows) == 38
     assert all(row["root_key"] and row["root_resolution"] for row in rows)
     by_id = {row["edge_id"]: row for row in rows}
     assert by_id["G05"]["root_key"] == by_id["G06"]["root_key"] == "G_CREIGHTON_OPINION"
@@ -494,10 +494,10 @@ def test_canonical_origin_keys_do_not_miscount_common_republication():
     assert by_id["G09"]["root_key"] == "MULTI"
     assert by_id["G10"]["root_key"] == "MULTI"
     assert by_id["G13"]["root_key"] == "MULTI"
-    # The 18 root labels are manually assigned within this purposive case
+    # The 20 root labels are manually assigned within this purposive case
     # graph, not a statistic of Australian media or distinct truth sources.
     labeled = {r["root_key"] for r in rows if r["root_key"] != "MULTI"}
-    assert len(labeled) == 18
+    assert len(labeled) == 20
     assert sum(r["root_key"] == "MULTI" for r in rows) == 6
 
 
@@ -526,7 +526,7 @@ def test_senex_hancock_ipa_information_path_has_explicit_public_countercase():
     assert "No new Agda ontology" in doc
     assert "Stephen Johnson" in doc and "Adam Creighton" in doc
     assert "230+ submissions" in doc
-    assert "18 distinct single-root keys" in doc
+    assert "20 distinct single-root keys" in doc
 
 
 def test_one_nation_gas_policy_is_not_dated_before_public_inquiry():
@@ -535,3 +535,23 @@ def test_one_nation_gas_policy_is_not_dated_before_public_inquiry():
     assert "One Nation's **9 June**" in doc
     assert "7 May precedes 8 May" in doc
     assert "actual transfer not established" in doc.lower()
+
+
+def test_two_independent_political_frames_inside_single_sky_interview():
+    media = POLITICAL_OWNER.read_text()
+    validation = POLITICAL_VALIDATION.read_text()
+    documentation = RESEARCH.read_text()
+    with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
+        keyed = {r["edge_id"]: r for r in csv.DictReader(stream)}
+
+    assert keyed["B14"]["root_key"] == "B_RIDD_2026_INTERVIEW"
+    assert keyed["B15"]["root_key"] == "B_DEAN_2026_SHOW_FRAME"
+    assert keyed["B14"]["root_key"] != keyed["B15"]["root_key"]
+    assert "not verified" in keyed["B14"]["boundary"]
+    for name in ("riddBOMGasLitigationArgument", "rowanDeanBOMNetZeroArgument"):
+        assert media.count(name + " : RelationshipReceipt") == 1
+    for name in ("riddCrossDomainIsAttributedArgument", "deanClimatePolicyIsAttributedArgument",
+                 "riddClaimDoesNotProveGasLitigationCausality", "deanClaimDoesNotProvePoliticalCoordination"):
+        assert name in validation
+    assert "unspecified Western Australian gas project" in documentation
+    assert "20 labelled single-source keys" in documentation
