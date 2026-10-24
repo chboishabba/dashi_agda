@@ -58,3 +58,23 @@ For complete coverage: mixed central C3 values `-78-66ζ`, `-12+66ζ` have norm5
 - **Exact locally checked:** eight simple C2/C3/C6 central character cases and the -90 vs 66 obstruction arithmetic.
 - **Source-written but unexecuted here:** CTblLib runtime, generated source receipts, new Agda central-sign theorem, actual selected Monster normalizer Hom action.
 - **Open:** original matched source receipt, actual selected 78 identification and central phase orientation, actual full normalizer action/cocycle and concrete intertwiner.
+
+
+## 25 October decisive implementation supplement: source-controlled 78 selection
+
+**Evidence hierarchy:** Original Barraclough–Wilson §5.1 allows `eta-hat in Irr(6.Suz)` without a faithfulness restriction. The original authors' separately preserved character-table/quotient data are published at https://www.rwb.me.uk/table/index.html, including `N3BetcTables.tar.gz`; treat the archived table as SOURCE rather than assuming our local helper's 78 filter describes their construction. The in-repo GAP/CTblLib path has NOT yet been executed in this environment.
+
+**Source-driven matcher algorithm** now committed directly in the pre-existing `scripts/monster_3b_suzuki_main_quotient_match.g`:
+
+1. Retain the original source-faithful degree12 pair (its occurrence remains independently checked).
+2. Enumerate all `Irr(6.Suz.2)` of degree156 and restrict their full class functions to `6.Suz`. Accept candidate pairs only when they consist of two distinct degree78 irreducibles, each with multiplicity one. No source-faithfulness/central-C3 prefilter is made for degree78.
+3. Tensor each qualifying outer pair with the exact published 1458 main-table Heisenberg character. Demand exactly two degree113724 irreducibles, each multiplicity one, then exactly one full-character quotient descent to `MN3B`.
+4. Restrict the actual Monster degree196883 ordinary character to `MN3B`; require the descended degree113724 candidate to occur positively. **If zero or multiple degree78 families survive, report error/ambiguous, not a fabricated unique selection.**
+5. Only after that derive the 78 family's faithfulness and its central-C2 scalar. The selected degree90 trace is either `-90` (C2 acts -1 on 78) or `+66` (C2 acts +1); the exact C2 equality to Nebe Sym² is a NECESSARY check, not a full Suzuki character isomorphism.
+6. Preserve distinct original extra-special central and diagonal-q-kernel coordinates; keep individual ζ versus ζ² orientation explicitly unpaid.
+
+**Receipts and fail-closed schemas:** `render_monster_3b_suzuki_main_quotient_match.py` and its shell regression now validate whichever selected C2 result the original full character calculation produces; they do not hardcode faithfulness. The lower-level candidate inventor `monster_3b_suzuki_multiplicity_characters.g` enumerates ALL degree78 irreducibles with variable count and records faithful and nonfaithful subsets, including C3-trivial classes; its renderer and checker consume the complete inventory without assuming exactly two 78s TOTAL. The original conditional central-C2 no-go Agda module is now named semantically as a **hypothetical faithful-family** statement rather than an actual Monster source-selection finding.
+
+**Observed local evidence:** Synthetic full-selection acceptance tests (both faithful/nonfaithful survivors, five fail-closed negative controls) pass. The earlier eight central C2/C3/C6 cyclotomic families pass. These are local finite tests only, not an authentic GAP/CTblLib source receipt, Agda proof check, or actual Monster intertwiner.
+
+**Updated Pareto:** Source table availability and published generic 6.Suz machinery are NO LONGER gaps. Only the actual execution/source trace of the above deterministic family-selection matcher, plus the full character-to-linear action/intertwiner bridge (existing PR #1098 owner), remain open. Avoid another custom representation/model unless the matcher returns a concrete unresolved class-map/identity.
