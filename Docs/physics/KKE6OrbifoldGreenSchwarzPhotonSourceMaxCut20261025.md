@@ -1,4 +1,7 @@
 # E6-derived orbifold 27: one anomalous U1 direction and a photon-preserving local Green–Schwarz repair
+
+**FOLLOW-ON BOUNDARY HIGGS ERRATUM (2026-10-25):** The cited 18-real even Hessian was calculated for the INTEGRATED HOMOGENEOUS zero-mode potential, not separate 5D interior/Robin equations. The old t=.0246 spatially constant field has bulk t-force +0.147406469832 ≠0. The later `KKE6OrbifoldIntervalBoundaryELMaxCut20261025.md` constructs a nonconstant length-one normalized classical comparison BVP; its 3-field FEM Hessian is positive but the full 18-real interval functional and anomaly-safe global quantum action are still OPEN.
+
 2026-10-25. **Owning PR:** [Agda KK #1241](https://github.com/chboishabba/dashi_agda/pull/1241). **Original repo donors:** [E6 first-Tits #1106](https://github.com/chboishabba/dashi_agda/pull/1106), \`Ternary27TrinificationInvariantTwoVEVPotentialExact\`, \`Ternary27TrinificationTwoNeutralVEVBreakingExact\`; existing \`AnomalyCancellationVerificationReceipt\`, \`StandardModelFiniteAnomalyHyperchargeCheck\`, \`GravitationalAnomalyCancellationReceipt\`, original 3D CS and [QFT stress #1165](https://github.com/chboishabba/dashi_agda/pull/1165). **Other source-critical documents:** \`KKE6OrbifoldChiralSourceMaxCut20261024.md\`, \`KKTOEPhysicalModelForkPareto20261024.md\`.
 
 ## Root attribution — not a discovery of Green–Schwarz or E6
