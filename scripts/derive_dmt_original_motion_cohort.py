@@ -19,6 +19,14 @@ REJECT_FRACTION = 0.20
 STATIC_START = 240
 STATIC_END = 480
 WHOLE_END = 840
+# Exact primary StaticGFC.m source coordinates (Git blob
+# f87d99f448848c3b0531fea0780ee241ebd77549).
+# Source-file identity is not motion eligibility.
+SOURCE_PSEUDONYMS = frozenset([
+    "S01", "S02", "S03", "S06", "S07", "S08", "S09", "S10",
+    "S11", "S12", "S13", "S14", "S15", "S16", "S17", "S18",
+    "S19", "S22", "S23", "S25",
+])
 
 
 def excluded(fd, begin, end):
@@ -43,8 +51,8 @@ def derive_motion_cohorts(payload):
     if payload.get("tr_seconds") != TR_SECONDS or payload.get("bolus_start_tr") != 240:
         raise ValueError("Source bolus/TR alignment not established")
     participants = payload.get("participants")
-    if not isinstance(participants, dict) or len(participants) != 20:
-        raise ValueError("Must have all twenty known original participant IDs")
+    if not isinstance(participants, dict) or set(participants) != SOURCE_PSEUDONYMS:
+        raise ValueError("Must match exactly twenty author-listed pseudonymous IDs")
     static, dynamic = [], []
     audit = {}
     for subject in sorted(participants):
