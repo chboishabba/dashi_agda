@@ -63,6 +63,11 @@ def _rows(
         p2 = row.get("second_central_phase")
         if {p1, p2} != {"zeta", "zetaSquared"}:
             raise ValueError(f"{key} central phases must be inverse nontrivial C3 phases")
+        faithful = row.get("faithful_to_6Suz")
+        if type(faithful) is not bool:
+            raise ValueError(f"{key} must report a boolean faithfulness-to-6.Suz status")
+        if degree == 12 and faithful is not True:
+            raise ValueError("degree-12 candidate must be faithful to 6.Suz")
         seen_positions.append(pos)
         seen_labels.append(label)
     if sorted(seen_positions) != sorted(positions):
@@ -94,9 +99,9 @@ def validate(payload: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("expected two distinct positive central order-three class positions")
 
     p12 = _positions(payload, "faithful_degree_12_positions")
-    p78 = _positions(payload, "faithful_degree_78_positions")
+    p78 = _positions(payload, "degree_78_positions")
     l12 = _labels(payload, "faithful_degree_12_atlas_labels")
-    l78 = _labels(payload, "faithful_degree_78_atlas_labels")
+    l78 = _labels(payload, "degree_78_atlas_labels")
     r12 = _rows(payload, "degree_12_rows", 12, p12, l12)
     r78 = _rows(payload, "degree_78_rows", 78, p78, l78)
 
@@ -152,13 +157,13 @@ secondCentralOrderThreeClass = {v['central'][1]}
 
 faithfulDegree12Positions : List Nat
 faithfulDegree12Positions = {nat_list(v['p12'])}
-faithfulDegree78Positions : List Nat
-faithfulDegree78Positions = {nat_list(v['p78'])}
+degree78Positions : List Nat
+degree78Positions = {nat_list(v['p78'])}
 
 faithfulDegree12AtlasLabels : List String
 faithfulDegree12AtlasLabels = {string_list(v['l12'])}
-faithfulDegree78AtlasLabels : List String
-faithfulDegree78AtlasLabels = {string_list(v['l78'])}
+degree78AtlasLabels : List String
+degree78AtlasLabels = {string_list(v['l78'])}
 
 sixSuzToOuterFusionLength : Nat
 sixSuzToOuterFusionLength = {v['fusion_length']}
