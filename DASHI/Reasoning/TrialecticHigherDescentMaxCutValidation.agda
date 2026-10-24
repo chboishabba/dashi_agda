@@ -1,0 +1,107 @@
+module DASHI.Reasoning.TrialecticHigherDescentMaxCutValidation where
+
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Reasoning.TrialecticSetEffectiveDescentExact as Effective
+import DASHI.Reasoning.TrialecticRelationalSiteTransportEnrichmentFrontierExact as Transport
+import DASHI.Reasoning.TrialecticGrothendieckContextFibrationBridgeExact as Context
+import DASHI.Reasoning.TrialecticDiscreteGroupoidPresheafBaselineExact as Discrete
+import DASHI.Reasoning.TrialecticC3GlobalNaturalityNoGoExact as C3NoGo
+import DASHI.Reasoning.TrialecticC3EdgeResidualRepairExact as C3Repair
+import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyExact as Expansion
+import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact as Ledger
+
+setBoundary : Effective.TrialecticSetEffectiveDescentBoundary
+setBoundary = Effective.canonicalTrialecticSetEffectiveDescentBoundary
+
+transportBoundary : Transport.TrialecticRelationalSiteTransportEnrichmentBoundary
+transportBoundary = Transport.canonicalTrialecticRelationalSiteTransportEnrichmentBoundary
+
+contextBoundary : Context.TrialecticGrothendieckContextFibrationBridgeBoundary
+contextBoundary = Context.canonicalTrialecticGrothendieckContextFibrationBridgeBoundary
+
+discreteBoundary : Discrete.TrialecticDiscreteGroupoidPresheafBaselineBoundary
+discreteBoundary = Discrete.canonicalTrialecticDiscreteGroupoidPresheafBaselineBoundary
+
+c3NoGoBoundary : C3NoGo.TrialecticC3GlobalNaturalityNoGoBoundary
+c3NoGoBoundary = C3NoGo.canonicalTrialecticC3GlobalNaturalityNoGoBoundary
+
+c3RepairBoundary : C3Repair.TrialecticC3EdgeResidualRepairBoundary
+c3RepairBoundary = C3Repair.canonicalTrialecticC3EdgeResidualRepairBoundary
+
+expansionBoundary : Expansion.TrialecticCarryDepthExpansionPolicyBoundary
+expansionBoundary = Expansion.canonicalTrialecticCarryDepthExpansionPolicyBoundary
+
+refinementBoundary : Ledger.TrialecticHigherDescentRefinementBoundary
+refinementBoundary = Ledger.canonicalTrialecticHigherDescentRefinementBoundary
+
+setLevelRealizationPaid : Effective.globalRealizationConstructed setBoundary ≡ true
+setLevelRealizationPaid = refl
+
+observationalUniquenessPaid : Effective.observationalUniquenessPaid setBoundary ≡ true
+observationalUniquenessPaid = refl
+
+strictRecordUniquenessNotClaimed : Effective.strictRecordEqualityUniquenessClaimed setBoundary ≡ false
+strictRecordUniquenessNotClaimed = refl
+
+edgeTransportCoveragePaid : Transport.threeEdgeObjectsCovered transportBoundary ≡ true
+edgeTransportCoveragePaid = refl
+
+fullSiteCoverageNotPaid : Transport.existingTransportCoversAllSiteObjects transportBoundary ≡ false
+fullSiteCoverageNotPaid = refl
+
+globalVertexTransportFibresRequired : Transport.newGlobalVertexFiberMorphismsRequired transportBoundary ≡ true
+globalVertexTransportFibresRequired = refl
+
+contextIndexedFibrationBridgePaid :
+  Context.cellPresheafInstantiatesContextIndexedObservation contextBoundary ≡ true
+contextIndexedFibrationBridgePaid = refl
+
+fullSiteDiscreteGroupoidBaselinePaid :
+  Discrete.fullSiteDiscreteGroupoidBaselinePaid discreteBoundary ≡ true
+fullSiteDiscreteGroupoidBaselinePaid = refl
+
+equalityRestrictionFunctorsPaid :
+  Discrete.restrictionFunctorOnEqualityMorphismsPaid discreteBoundary ≡ true
+equalityRestrictionFunctorsPaid = refl
+
+edgeCycleNotSiteRestriction :
+  Discrete.edgeCycleIsSiteRestriction discreteBoundary ≡ false
+edgeCycleNotSiteRestriction = refl
+
+participantANotEnoughForGlobalC3 :
+  C3NoGo.participantANotSufficientForB c3NoGoBoundary ≡ true
+participantANotEnoughForGlobalC3 = refl
+
+naiveGlobalC3NaturalityNotPaid :
+  C3NoGo.naiveGlobalC3NaturalityPaid c3NoGoBoundary ≡ false
+naiveGlobalC3NaturalityNotPaid = refl
+
+selectedT6ResidualRepairsRotatedEdge :
+  C3Repair.selectedResidualReconstructsWholeRotatedEdge c3RepairBoundary ≡ true
+selectedT6ResidualRepairsRotatedEdge = refl
+
+fullOldT9RetentionNotRequiredForRotatedEdge :
+  C3Repair.oldFullT9EdgeRequiredForRotatedEdgeConsumer c3RepairBoundary ≡ false
+fullOldT9RetentionNotRequiredForRotatedEdge = refl
+
+carryExpansionPolicyPaid :
+  Expansion.explicitExpansionPolicyConstructed expansionBoundary ≡ true
+carryExpansionPolicyPaid = refl
+
+carrySeedDoesNotSelectUniqueT18PlusFace :
+  Expansion.carrySeedUniquelyDeterminesNextStructuredState expansionBoundary ≡ false
+carrySeedDoesNotSelectUniqueT18PlusFace = refl
+
+allDepthCoherenceStillNotAutomatic :
+  Expansion.allDepthCoherenceAutomatic expansionBoundary ≡ false
+allDepthCoherenceStillNotAutomatic = refl
+
+transportEnrichedPresheafStillOpen :
+  Ledger.transportEnrichedGroupoidPresheafReady refinementBoundary ≡ false
+transportEnrichedPresheafStillOpen = refl
+
+baseEnlargementOrEquivariantLayerStillRequired :
+  Ledger.baseEnlargementOrEquivariantLayerStillRequired refinementBoundary ≡ true
+baseEnlargementOrEquivariantLayerStillRequired = refl

@@ -3,30 +3,34 @@ module DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact where
 ------------------------------------------------------------------------
 -- TRIALECTIC HIGHER-DESCENT PROMOTION LEDGER
 --
--- This module records exactly what the current relational/trialectic stack has
--- constructed after the structured 27-cell / Grothendieck / attached-2-cell
--- tranche, and what is still missing before stronger categorical language is
--- licensed.
+-- Current paid layers:
+--   * non-discrete finite Grothendieck site;
+--   * explicit triadic relational sheaf and T^3/T^9/T^18 descent;
+--   * attached irreducible 2-cell and face mediation interface;
+--   * relational-depth bidescent;
+--   * edge-patch extensional transport groupoid action;
+--   * nonconstant Set-valued site presheaf;
+--   * concrete cyclic restriction/transport coherence and action 2-cells;
+--   * concrete C3 transition cocycle;
+--   * Set-level global realization for every compatible local family;
+--   * observational uniqueness of those global realizations;
+--   * exact obstruction showing the existing three-edge transport index does
+--     not cover globalABC or the three vertex objects of the seven-object site;
+--   * exact adapter into the generic context-indexed split-fibration-shaped
+--     observation calculus;
+--   * a full-site equality/discrete-groupoid presheaf baseline, with every
+--     existing restriction arrow functorial on equality morphisms;
+--   * exact proof that the cyclic AB->BC->CA transition is NOT a restriction
+--     arrow of the present Grothendieck base category.
 --
--- Positive results:
---   * genuine non-discrete finite Grothendieck site;
---   * explicit triadic relational sheaf interface;
---   * T^3 overlap sections, T^9 edge sections, T^18 global boundary section;
---   * exact gluing/restriction recovery;
---   * attached irreducible 2-cell beyond ordinary Cech one-skeleton descent;
---   * explicit face-mediation interface to a next-depth T^3 cell;
---   * independent relational-depth bidescent interface with commuting squares.
---
--- Still open:
---   * a transport groupoid with typed composition/identity/inverse laws;
---   * a groupoid-valued presheaf over the relational site;
---   * restriction/transport pseudofunctorial coherence;
---   * overlap cocycle 2-morphisms and their coherence;
---   * descent morphisms and effective descent;
---   * uniqueness up to typed isomorphism/equivalence;
---   * coherent iteration of the attached 2-cell across all depths.
---
--- Therefore "2-sheaf", "higher stack", and "hypersheaf" remain unpromoted.
+-- The next wall is therefore specifically TRANSPORT-ENRICHED groupoid descent,
+-- not mere groupoid-valued existence.  The equality-groupoid baseline is paid,
+-- but the existing C3 chart transition lives outside the site's arrow type.
+-- A nontrivial completion must either enlarge the base category with chart
+-- symmetries or add a separate equivariant/transport layer coherent with site
+-- restriction, then provide non-discrete global/vertex fibre morphisms and
+-- pseudofunctor/cocycle coherence.  Effective stack descent, typed-iso
+-- uniqueness and coherent all-depth face mediation remain open.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -43,6 +47,10 @@ import DASHI.Reasoning.TrialecticGrothendieckTransportCoherenceExact as Transpor
 import DASHI.Core.RelationalTransportActionTwoCellExact as ActionTwoCell
 import DASHI.Reasoning.TrialecticGrothendieckTransitionCocycleExact as TransitionCocycle
 import DASHI.Reasoning.TrialecticGrothendieckAttachedTwoCellDescentExact as TwoCell
+import DASHI.Reasoning.TrialecticSetEffectiveDescentExact as SetEffective
+import DASHI.Reasoning.TrialecticRelationalSiteTransportEnrichmentFrontierExact as SiteTransport
+import DASHI.Reasoning.TrialecticGrothendieckContextFibrationBridgeExact as ContextBridge
+import DASHI.Reasoning.TrialecticDiscreteGroupoidPresheafBaselineExact as Discrete
 
 data HigherDescentFeature : Set where
   finiteGrothendieckSite : HigherDescentFeature
@@ -57,6 +65,9 @@ data HigherDescentFeature : Set where
   cyclicRestrictionTransportCoherence : HigherDescentFeature
   transportActionTwoCellCalculus : HigherDescentFeature
   cyclicTransitionCocycleTwoCell : HigherDescentFeature
+  setLevelEffectiveDescentRealization : HigherDescentFeature
+  observationalGlobalUniqueness : HigherDescentFeature
+  fullSiteTransportCoverageObstruction : HigherDescentFeature
 
   transportGroupoid : HigherDescentFeature
   groupoidValuedPresheaf : HigherDescentFeature
@@ -82,6 +93,9 @@ featureConstructed nonconstantSetValuedSitePresheaf = true
 featureConstructed cyclicRestrictionTransportCoherence = true
 featureConstructed transportActionTwoCellCalculus = true
 featureConstructed cyclicTransitionCocycleTwoCell = true
+featureConstructed setLevelEffectiveDescentRealization = true
+featureConstructed observationalGlobalUniqueness = true
+featureConstructed fullSiteTransportCoverageObstruction = true
 
 featureConstructed transportGroupoid = false
 featureConstructed groupoidValuedPresheaf = false
@@ -106,6 +120,14 @@ attachedTwoCellConstructed :
   featureConstructed attachedIrreducibleTwoCell ≡ true
 attachedTwoCellConstructed = refl
 
+setEffectiveDescentConstructed :
+  featureConstructed setLevelEffectiveDescentRealization ≡ true
+setEffectiveDescentConstructed = refl
+
+siteTransportCoverageObstructionConstructed :
+  featureConstructed fullSiteTransportCoverageObstruction ≡ true
+siteTransportCoverageObstructionConstructed = refl
+
 higherStackStillOpen :
   featureConstructed certifiedHigherStack ≡ false
 higherStackStillOpen = refl
@@ -118,88 +140,104 @@ hypersheafStillOpen = refl
 -- Existing donor boundaries are threaded explicitly.
 ------------------------------------------------------------------------
 
-grothendieckBoundary :
-  Groth.RelationalStageTwelveGrothendieckBoundary
-grothendieckBoundary =
-  Groth.canonicalRelationalStageTwelveGrothendieckBoundary
+grothendieckBoundary : Groth.RelationalStageTwelveGrothendieckBoundary
+grothendieckBoundary = Groth.canonicalRelationalStageTwelveGrothendieckBoundary
 
-siteBoundary :
-  Site.RelationalStageTwelveSiteBoundary
-siteBoundary =
-  Site.canonicalRelationalStageTwelveSiteBoundary
+siteBoundary : Site.RelationalStageTwelveSiteBoundary
+siteBoundary = Site.canonicalRelationalStageTwelveSiteBoundary
 
-cellDescentBoundary :
-  CellDescent.TrialecticGrothendieckThreeCellDescentBoundary
-cellDescentBoundary =
-  CellDescent.canonicalTrialecticGrothendieckThreeCellDescentBoundary
+cellDescentBoundary : CellDescent.TrialecticGrothendieckThreeCellDescentBoundary
+cellDescentBoundary = CellDescent.canonicalTrialecticGrothendieckThreeCellDescentBoundary
 
-twoCellBoundary :
-  TwoCell.TrialecticGrothendieckAttachedTwoCellBoundary
-twoCellBoundary =
-  TwoCell.canonicalTrialecticGrothendieckAttachedTwoCellBoundary
+twoCellBoundary : TwoCell.TrialecticGrothendieckAttachedTwoCellBoundary
+twoCellBoundary = TwoCell.canonicalTrialecticGrothendieckAttachedTwoCellBoundary
 
-transportBoundary :
-  Transport.RelationalTransportDescentBoundary
-transportBoundary =
-  Transport.canonicalRelationalTransportDescentBoundary
+transportBoundary : Transport.RelationalTransportDescentBoundary
+transportBoundary = Transport.canonicalRelationalTransportDescentBoundary
 
+transportGroupoidActionBoundary : GroupoidAction.RelationalTransportGroupoidActionBoundary
+transportGroupoidActionBoundary = GroupoidAction.canonicalRelationalTransportGroupoidActionBoundary
 
-transportGroupoidActionBoundary :
-  GroupoidAction.RelationalTransportGroupoidActionBoundary
-transportGroupoidActionBoundary =
-  GroupoidAction.canonicalRelationalTransportGroupoidActionBoundary
+cellPresheafBoundary : CellPresheaf.TrialecticGrothendieckCellPresheafBoundary
+cellPresheafBoundary = CellPresheaf.canonicalTrialecticGrothendieckCellPresheafBoundary
 
+transportCoherenceBoundary : TransportCoherence.TrialecticGrothendieckTransportCoherenceBoundary
+transportCoherenceBoundary = TransportCoherence.canonicalTrialecticGrothendieckTransportCoherenceBoundary
 
-cellPresheafBoundary :
-  CellPresheaf.TrialecticGrothendieckCellPresheafBoundary
-cellPresheafBoundary =
-  CellPresheaf.canonicalTrialecticGrothendieckCellPresheafBoundary
+actionTwoCellBoundary : ActionTwoCell.RelationalTransportActionTwoCellBoundary
+actionTwoCellBoundary = ActionTwoCell.canonicalRelationalTransportActionTwoCellBoundary
 
-transportCoherenceBoundary :
-  TransportCoherence.TrialecticGrothendieckTransportCoherenceBoundary
-transportCoherenceBoundary =
-  TransportCoherence.canonicalTrialecticGrothendieckTransportCoherenceBoundary
+transitionCocycleBoundary : TransitionCocycle.TrialecticGrothendieckTransitionCocycleBoundary
+transitionCocycleBoundary = TransitionCocycle.canonicalTrialecticGrothendieckTransitionCocycleBoundary
 
+bidescentBoundary : Bidescent.RelationalDepthBidescentBoundary
+bidescentBoundary = Bidescent.canonicalRelationalDepthBidescentBoundary
 
-actionTwoCellBoundary :
-  ActionTwoCell.RelationalTransportActionTwoCellBoundary
-actionTwoCellBoundary =
-  ActionTwoCell.canonicalRelationalTransportActionTwoCellBoundary
+setEffectiveDescentBoundary : SetEffective.TrialecticSetEffectiveDescentBoundary
+setEffectiveDescentBoundary = SetEffective.canonicalTrialecticSetEffectiveDescentBoundary
 
-transitionCocycleBoundary :
-  TransitionCocycle.TrialecticGrothendieckTransitionCocycleBoundary
-transitionCocycleBoundary =
-  TransitionCocycle.canonicalTrialecticGrothendieckTransitionCocycleBoundary
+siteTransportEnrichmentBoundary : SiteTransport.TrialecticRelationalSiteTransportEnrichmentBoundary
+siteTransportEnrichmentBoundary = SiteTransport.canonicalTrialecticRelationalSiteTransportEnrichmentBoundary
 
-bidescentBoundary :
-  Bidescent.RelationalDepthBidescentBoundary
-bidescentBoundary =
-  Bidescent.canonicalRelationalDepthBidescentBoundary
+contextFibrationBridgeBoundary :
+  ContextBridge.TrialecticGrothendieckContextFibrationBridgeBoundary
+contextFibrationBridgeBoundary =
+  ContextBridge.canonicalTrialecticGrothendieckContextFibrationBridgeBoundary
 
-existingStackPromotionObligation :
-  Disambiguation.StackPromotionObligation
-existingStackPromotionObligation =
-  Disambiguation.currentStackPromotionObligation
+discreteGroupoidBaselineBoundary :
+  Discrete.TrialecticDiscreteGroupoidPresheafBaselineBoundary
+discreteGroupoidBaselineBoundary =
+  Discrete.canonicalTrialecticDiscreteGroupoidPresheafBaselineBoundary
+
+contextIndexedFibrationBridgeConstructed :
+  ContextBridge.cellPresheafInstantiatesContextIndexedObservation
+    contextFibrationBridgeBoundary
+  ≡ true
+contextIndexedFibrationBridgeConstructed = refl
+
+fullSiteDiscreteGroupoidBaselineConstructed :
+  Discrete.fullSiteDiscreteGroupoidBaselinePaid
+    discreteGroupoidBaselineBoundary
+  ≡ true
+fullSiteDiscreteGroupoidBaselineConstructed = refl
+
+cyclicEdgeTransportIsNotSiteRestriction :
+  Discrete.edgeCycleIsSiteRestriction
+    discreteGroupoidBaselineBoundary
+  ≡ false
+cyclicEdgeTransportIsNotSiteRestriction = refl
+
+existingStackPromotionObligation : Disambiguation.StackPromotionObligation
+existingStackPromotionObligation = Disambiguation.currentStackPromotionObligation
 
 ------------------------------------------------------------------------
 -- Exact next cut.
+--
+-- Compatibility note: the historical constructor names are retained.  In the
+-- refined ledger, `supplyGlobalVertexFiberGroupoids` means NON-DISCRETE /
+-- transport-enriched global+vertex fibres; the equality/discrete fibres are
+-- already paid.  `defineRestrictionFunctors` likewise means functors coherent
+-- with that transport enrichment, not the already-paid Set/equality maps.
 ------------------------------------------------------------------------
 
 data NextHigherDescentObligation : Set where
-  indexTransportOverRelationalSite : NextHigherDescentObligation
-  proveCocycleCoherence : NextHigherDescentObligation
-  constructDescentMorphisms : NextHigherDescentObligation
-  proveEffectiveDescent : NextHigherDescentObligation
+  supplyGlobalVertexFiberGroupoids : NextHigherDescentObligation
+  defineRestrictionFunctors : NextHigherDescentObligation
+  proveGeneralPseudofunctorCoherence : NextHigherDescentObligation
+  proveGeneralCocycleCoherence : NextHigherDescentObligation
+  constructGroupoidDescentMorphisms : NextHigherDescentObligation
+  proveEffectiveGroupoidDescent : NextHigherDescentObligation
   proveUniquenessUpToTypedIso : NextHigherDescentObligation
   connectTwoCellMediationAcrossDepth : NextHigherDescentObligation
 
-nextHigherDescentObligations :
-  List NextHigherDescentObligation
+nextHigherDescentObligations : List NextHigherDescentObligation
 nextHigherDescentObligations =
-  indexTransportOverRelationalSite
-  ∷ proveCocycleCoherence
-  ∷ constructDescentMorphisms
-  ∷ proveEffectiveDescent
+  supplyGlobalVertexFiberGroupoids
+  ∷ defineRestrictionFunctors
+  ∷ proveGeneralPseudofunctorCoherence
+  ∷ proveGeneralCocycleCoherence
+  ∷ constructGroupoidDescentMorphisms
+  ∷ proveEffectiveGroupoidDescent
   ∷ proveUniquenessUpToTypedIso
   ∷ connectTwoCellMediationAcrossDepth
   ∷ []
@@ -210,7 +248,7 @@ nextHigherDescentObligations =
 
 data CurrentTrancheIsEffectiveStack : Set where
 data CurrentTrancheIsHypersheaf : Set where
-data AttachedTwoCellAloneSuppliesCocycleCoherence : Set where
+data SetEffectiveDescentAutomaticallySuppliesGroupoidDescent : Set where
 
 currentTrancheDoesNotPromoteToEffectiveStack :
   CurrentTrancheIsEffectiveStack → ⊥
@@ -220,9 +258,15 @@ currentTrancheDoesNotPromoteToHypersheaf :
   CurrentTrancheIsHypersheaf → ⊥
 currentTrancheDoesNotPromoteToHypersheaf ()
 
-attachedTwoCellDoesNotByItselfSupplyCocycleCoherence :
-  AttachedTwoCellAloneSuppliesCocycleCoherence → ⊥
-attachedTwoCellDoesNotByItselfSupplyCocycleCoherence ()
+setEffectiveDescentDoesNotCreateGroupoidDescent :
+  SetEffectiveDescentAutomaticallySuppliesGroupoidDescent → ⊥
+setEffectiveDescentDoesNotCreateGroupoidDescent ()
+
+------------------------------------------------------------------------
+-- Stable historical boundary surface.  Keep constructor and field names fixed
+-- for downstream imports.  `groupoidPresheafReady = false` continues to mean
+-- the desired TRANSPORT-ENRICHED presheaf, not the newly paid discrete baseline.
+------------------------------------------------------------------------
 
 record TrialecticHigherDescentPromotionBoundary : Set where
   constructor trialectic-higher-descent-promotion-boundary
@@ -239,32 +283,49 @@ record TrialecticHigherDescentPromotionBoundary : Set where
     cyclicRestrictionTransportCoherenceReady : Bool
     actionTwoCellCalculusReady : Bool
     cyclicTransitionCocycleReady : Bool
+    setLevelEffectiveDescentReady : Bool
+    observationalGlobalUniquenessReady : Bool
+    siteTransportCoverageObstructionReady : Bool
     strictTransportGroupoidReady : Bool
     groupoidPresheafReady : Bool
+    generalPseudofunctorCoherenceReady : Bool
     cocycleTwoMorphismsReady : Bool
+    groupoidDescentMorphismsReady : Bool
     effectiveStackReady : Bool
     coherentAllDepthIterationReady : Bool
     hypersheafReady : Bool
+
+open TrialecticHigherDescentPromotionBoundary public
 
 canonicalTrialecticHigherDescentPromotionBoundary :
   TrialecticHigherDescentPromotionBoundary
 canonicalTrialecticHigherDescentPromotionBoundary =
   trialectic-higher-descent-promotion-boundary
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    false
-    false
-    false
-    false
-    false
-    false
+    true true true true true true true true true true true true
+    true true true
+    false false false false false false false false
+
+------------------------------------------------------------------------
+-- Refined additive boundary.  This records the new paid baselines without
+-- changing the historical constructor surface above.
+------------------------------------------------------------------------
+
+record TrialecticHigherDescentRefinementBoundary : Set where
+  constructor trialectic-higher-descent-refinement-boundary
+  field
+    contextIndexedFibrationBridgeReady : Bool
+    fullSiteDiscreteGroupoidBaselineReady : Bool
+    equalityRestrictionFunctorsReady : Bool
+    cyclicEdgeTransportIsSiteRestriction : Bool
+    discreteBaselineCapturesC3Transport : Bool
+    transportEnrichedGroupoidPresheafReady : Bool
+    nonDiscreteGlobalVertexFibresStillRequired : Bool
+    baseEnlargementOrEquivariantLayerStillRequired : Bool
+
+open TrialecticHigherDescentRefinementBoundary public
+
+canonicalTrialecticHigherDescentRefinementBoundary :
+  TrialecticHigherDescentRefinementBoundary
+canonicalTrialecticHigherDescentRefinementBoundary =
+  trialectic-higher-descent-refinement-boundary
+    true true true false false false true true
