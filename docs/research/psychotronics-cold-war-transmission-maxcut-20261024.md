@@ -39,12 +39,11 @@ flowchart TD
   A -. reported by authors .-> B
   B -->|"EXACT citation: selected bibliography #5"| C
   B -->|"independent review of book, not psychic replication"| D
-  E -. "later separate institutional record family" .-> C
   F -. "similar historical ambition, no transmission documented" .-> A
   C -. "no sourced design transfer" .-> G
 ```
 
-**The dotted links are NOT transmitted original hardware or proven communication.** The 1985 arrow is chronological/contextual only and must not be interpreted as 1985 informing a report published in 1975. For avoidance of ambiguity, no time-forward 1985→1975 documentary dependence is asserted or encoded in Agda. The actual directed documentary edges in the typed graph are Wimmer→Sievers, 1970 book→1975 report, and book→contemporary review. Czech requests are represented **separately** as reported requests, not invented letters of acceptance.
+**The dotted links are NOT transmitted original hardware or proven communication.** The unconnected 1985 Czech military archive node is a later, separate record family: no impossible 1985→1975 citation arrow exists. The actual directed documentary edges in the typed graph are Wimmer→Sievers, 1970 book→1975 report, and book→contemporary review. Czech requests are represented **separately** as reported requests, not invented letters of acceptance.
 
 Later combined editions and online chapter transcriptions provide additional access to book passages, but they are **the same authorial testimony**. A 1997 combined *Psychic Discoveries* edition's chapter 26 uses **p.285** for Pavlita's devices; the scanned **1973 British *PSI* edition's chapter 28 starts p.368**. These are **edition-specific locators**, not a claim that original 1970 pagination is identical. The first 1970 text and each original Pavlita report remain to be checked against the reprints.
 
