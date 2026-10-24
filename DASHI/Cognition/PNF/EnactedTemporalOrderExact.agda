@@ -1,4 +1,5 @@
-{-# OPTIONS --safe #-}
+-- Imported legacy owner is not declared --safe; this module contains no
+-- postulates or holes but does not claim transitive Safe Agda certification.
 module DASHI.Cognition.PNF.EnactedTemporalOrderExact where
 
 -- Source: Jeremy Rodgers, "Experienced Temporal Passage: Enacted
