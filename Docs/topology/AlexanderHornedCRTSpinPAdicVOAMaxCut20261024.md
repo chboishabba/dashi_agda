@@ -351,3 +351,50 @@ with this abstract G before any geometric claim can be
 promoted. The faithful family is a theorem about the
 specified *abstract group*, NOT wild topology proved
 by p-adic matrix numerics.
+
+
+## 2026-10-24 strict Spin(3) 360/720 cover audit
+
+The precise standard theorem is **Spin(3)=SU(2) -> SO(3) TWO-to-ONE**.
+SO(3) rotations themselves close at **360deg/2pi**. The
+identity-starting path lift of a full 360deg rotation ends at
+the central quaternion `-1` (not `+1`), so spin-half
+amplitudes close at **720deg/4pi**. This is why a 360deg
+SO(3) *loop* is noncontractible even though its endpoint
+is the identity rotation; the doubled 720deg loop is
+contractible. `pi1(SO3)=C2` is NOT `pi1(horn exterior)`.
+
+Previously established owners:
+- `Foundations/SU2SO3IrrepDimensionExact.agda` proves the
+  spin-half highest-weight-one representation does not
+  descend to SO3 and integer-spin even-weight lane does.
+- `Algebra/FiniteQuaternionDoubleCover.agda` has exact
+  kernel/fibres for FINITE `Q8->V4`, not the full continuous
+  SU2->SO3 cover.
+- `Algebra/CliffordSpinLift.agda`, `Physics/SpinAssumptions.agda`,
+  `Algebra/ContinuousSpin31LorentzCover.agda` carry
+  conditional/status/other-signature interfaces; these
+  are not completed topological double-cover proofs.
+- `AlexanderHornedQuaternionC3SpinExact.agda` already
+  proves q=(1+i+j+k)/2 has `q^3=-1` and
+  `(-q)^3=+1`, with both inducing the *same actual*
+  120deg spatial map.
+
+NEW exact finite witness owner
+`AlexanderHornedSpin360720Exact.agda`
+reuses Q8->V4, proves `rho(-1)=rho(+1)`,
+`-1!=+1`, `(-1)^2=+1`, `i^2=-1`,
+and imports the pre-existing spin-half descent and
+threefold horn rotor theorems. Reproducible exact
+Fraction audit: `scripts/alexander_horned_spin_360_720_audit.py`.
+It does NOT construct the universal-cover path-lift
+theorem or the geometric horned pi1.
+
+Full source/proof boundary:
+`Docs/topology/AlexanderHornedSpin360720CoverAudit20261024.md`.
+
+**Number trap**: the 360-coordinate finite spin VOA
+`Fun(C3×2I,Q)` has vector-space dimension 360,
+which has NOTHING to do with the 360-degree SO3
+period. Its 180-coordinate A5 quotient likewise
+is NOT a half-turn interpretation.
