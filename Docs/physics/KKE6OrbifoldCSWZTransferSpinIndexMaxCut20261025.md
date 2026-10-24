@@ -1,0 +1,71 @@
+# E6-derived trinification orbifold: bulk CS transfer + one Chi33 WZ source
+**Date:** 2026-10-25. **Owner:** [physical KK #1241](https://github.com/chboishabba/dashi_agda/pull/1241). **Original mathematical donor:** [E6 first-Tits/trinification #1106](https://github.com/chboishabba/dashi_agda/pull/1106) (separate unmerged PR: no illicit Agda import). **TOE:** [Agda #1217](https://github.com/chboishabba/dashi_agda/pull/1217), [Lean #80](https://github.com/chboishabba/dashi_lean4/pull/80). This document supersedes the old inference that the half-period Chi33 WZ obstruction inevitably requires an independent charge-one scalar.
+
+## Attribution and old CS owners
+
+Original physical results are NOT ours: Slansky 1981 (E6 27/trinification), Arkani-Hamed/Cohen/Georgi 2001 (orbifold anomaly localization), Scrucca/Serone/Silvestrini/Zwirner 2002 (fixed-plane anomaly), **von Gersdorff & Quirós, *Localized anomalies in orbifold gauge theories*, Phys Rev D 68 (2003) 105002, DOI 10.1103/PhysRevD.68.105002** (4-form/CS redistribution versus globally surviving anomaly and GS two-form), and **Christopher T. Hill, *Exact equivalence of the gauged Wess-Zumino-Witten term and the Yang-Mills Chern-Simons term*, Phys Rev D 73 (2006) 126009, DOI 10.1103/PhysRevD.73.126009** (five-dimensional boundary CS/WZW interplay). Early parity/orbifold anomalies: Barbieri/Contino/Creminelli/Rattazzi/Scrucca, PRD 66 (2002) 024025, DOI 10.1103/PhysRevD.66.024025. The 5D global parity/CS and eta regularization are still NOT paid by any of these papers for OUR selected gauge+matter source.
+
+Existing repo KacMoodyLevelReceipt, CSLevelFlowFullReceipt, BulkBoundarySU3Receipt and FermionicLoopCSShiftReceipt are real PRIOR finite/local/topological source owners, but mainly 2+1D CS/WZW and explicitly conditional levels; they cannot be copied as a new 4+1D spin CS functional. The selected mixed U1 5-form test in \`scripts/check_kk_minkowski_cs5_same_source.py\` is a correct specialized test, not a full \`SU3³\` functional.
+
+## Exact 27 ZERO-MODE anomaly in the declared local trace basis
+
+Source is **gauged SU3c×SU3L×SU3R**, not 78-dimensional full gauged E6. One 5D Dirac 27 on S1/Z2 with \(P_c=I,P_L=P_R=\operatorname{diag}(-1,-1,+1)\) and the original source-compatible opposite Phi/Chi parities gives a chiral 16 and SM-subgroup vectorlike 10+1. The source's EXACT enumerated, pre-VEV UV chiral anomaly polynomial factors in the \`U1_L\` and CENTRAL \`U1_R\` curvature variables \(x=F_L,y=F_R\) as
+\[
+P_3=(x-y)(40x^2+64xy+40y^2),\qquad P_{\rm grav}=16(x-y).
+\]
+The selected mixed \`SU3c²U1\`, \`SU2L²U1\`, \`SU2R²U1\` triangular source coefficients are each \(2(x-y)\) in the **source's own index/trace-normalization convention**. We can package the symbolic local formal polynomial as \(I_6^{\mathrm{trace}}=(x-y)X_4\), with
+\[
+X_4=40x^2+64xy+40y^2+16p_1+2(c_{2c}+c_{2L}+c_{2R}).
+\]
+**CRITICAL:** \(p_1,c_2\) in this display are FORMAL source coefficient tags, NOT already normalized integral characteristic classes. The precise index/anomaly polynomial has e.g. cubic/6 and gravitational/24 \(\hat A\)-normalizations, and the nonabelian fundamental Dynkin-to-c2 normalization differs by factors of two. This \`X4\` is a trace-ring consumer, NOT a complete integral \(\Omega^{\mathrm{spin}}_6(BG)\) action. Always distinguish **index** from triangle coefficients and consistent/covariant anomaly representatives.
+
+## New correct fixed-plane allocation — the half-phase problem is not universal
+
+The initial source test used **symmetric** fixed-plane anomaly assignment \((I_6/2,I_6/2)\). Trying a WZ counterterm separately on EACH plane with a charge-two Chi33 phase required, schematically, \(-\theta_\Chi X_4/4\) per plane. Its mixed source coefficient \(2/4=1/2\) implied a \(-1\) under a 2π phase winding when evaluated on a hypothetical unit mixed-instanton background. That was a **conditional failure of that symmetric two-WZ ansatz**, not a general global no-go.
+
+A 5D CS term can transfer anomaly between endpoints without changing its integrated sum. Choose its local descent to contribute \((+I_6/2,-I_6/2)\). Then the total anomaly is:
+\[
+(I_6/2,I_6/2)+(+I_6/2,-I_6/2)=(I_6,0).
+\]
+The ORIGINAL Chi33 Higgs phase has charges \((U_L,U_R)=(+2,-2)\) and \(\delta\theta_\Chi=2(\lambda_L-\lambda_R)\). One fixed-plane Wess–Zumino coupling \(-\theta_\Chi X_4/2\) consequently transforms as \(-(\lambda_L-\lambda_R)X_4\) at that plane. Its infinitesimal variation cancels ALL of the locally transferred \(I_6\), and nothing needs cancelling at the other plane. Explicitly for independently variable endpoint gauge parameters \(\alpha_0,\alpha_\pi\):
+\[
+\delta\Gamma_{\rm 27}=\tfrac12(\alpha_0+\alpha_\pi)X_4,\quad
+\delta S_{\rm CS}=\tfrac12(\alpha_0-\alpha_\pi)X_4,\quad
+\delta S_{\rm WZ}=-\alpha_0X_4,
+\quad \sum\delta=0.
+\]
+This is a FINITE **consistent-local-variation SOURCE ANSATZ**; it assumes the chosen regulator supports the claimed endpoint distribution and an allowed 5D orbifold CS action. It is not itself a nonperturbative gauge invariance proof.
+
+All coefficients of the SOURCE \`X4/2\` are integers: Abelian \(20,32,20\), gravitational \(8\), and each nonabelian mixed coefficient \(1\). Thus on the **NAIVE INTEGRAL SYMBOL RING** the one-brane \(2\pi\) Chi-phase winding does not flip the path integral's phase. The previous "Chi33 has charge two, so we must add charge-one axion" inference is NOT justified at this level. Source executable: \`scripts/check_kk_e6_orbifold_cs_wz_anomaly_transfer.py\`, which enumerates all 27 original charges and checks boundary cancellation for **independent endpoint parameters**.
+
+This does NOT mean those coefficients automatically meet the TRUE integral spin/quotient gauge-CS levels. The physical gauge group is a quotient of SU2×U1 factors inside SU3; spin classes, mixed nonabelian trace normalization, torsion and APS eta/5D parity require separate work. A local Bardeen/descent choice must also be constructed before identifying the actual CS5 functional. A single Chi33 phase cannot cover configurations where Chi33 vanishes; a nonlinear Higgs/WZ EFT must specify its domain and UV completion.
+
+## Stronger global test on actual spin six-manifold families
+
+\`scripts/check_kk_e6_orbifold_spin_index_test_families.py\` tests a meaningful class of nontrivial **global gauge backgrounds**, not simply free integer coefficients.
+
+**1. Spin CP3**: \(\mathbb CP^3\) is spin with \(p_1=4h^2\) and \(h^3=1\). For charge \(q\) in line bundle \(\mathcal O(q)\), the 6D Dirac index is
+\[
+\mathrm{ind}\,D_{\mathcal O(q)}=\int_{\mathbb CP^3}\hat A(T)\operatorname{ch}(\mathcal O(q))=(q^3-q)/6.
+\]
+For arbitrary integers \(m,n\) defining central \(U1_L,U1_R\) line-bundle fluxes, the actual chiral 27 index is
+\[
+I(m,n)=\frac{(m-n)(40m^2+64mn+40n^2-16)}{6}
+=\frac43(m-n)(5m^2+8mn+5n^2-2).
+\]
+**For every \(m,n\in\mathbb Z\), this index is EVEN.** Reason: \(d=m-n\); modulo three \(5m^2+8mn+5n^2-2\equiv2d^2+1\), and \(d(2d^2+1)=0\) for all \(d\in\{0,1,2\}\). Hence the numerator's \(d(5m^2+8mn+5n^2-2)\) is divisible by 3, so \(I\) is twice an integer. The script checks all 9 residue classes and an independent \([-15,15]^2\) rational index test. Finite Agda \`KKE6OrbifoldCSWZTransferConsumerExact.agda\` supplies a *three-case mod-three residue theorem*, NOT the physical index theorem.
+
+**2. Spin S2×S4** with integer central-U1 \(m,n\) flux on S2 and a unit SU3c, SU2L or SU2R instanton on S4: the source's chiral mixed **index** coefficient in the fundamental-index-one convention is \(4(m-n)k\), always even. Note that this differs from the source's \(2(m-n)\) **triangle Dynkin-half convention**: 6D Chern character/integral \(c_2\) has its own normalization. The script checks each representation/multiplicity explicitly.
+
+**3. Spin S2×K3** with \(\hat A(K3)=2\) gives gravitational-U1 index \(32(m-n)\), also even.
+
+These are nontrivial TEST FAMILIES of spin backgrounds and strongly improve the viability of the required half-CS anomaly-transfer level. They do **not** establish that every spin \(\Omega^{\rm spin}_6(BG)\) generator, finite-quotient/torsion bundle, interval-boundary eta phase or chiral 5D fermion regulator passes. No globally defined CS5+WZ quantum functional is claimed.
+
+## BIDI / physically relevant consequences
+
+- **The best steelman improves:** anomaly-free IR chiral16+vectorlike10+1, selected source-compatible two E32/E33 VEVs and a single tree-level photon after even E21, and now one candidate CS+single-WZ local/naive-lattice anomaly repair using the ALREADY OWNED Chi33 Higgs phase. No separate charge-one field is forced by the original naive mod2 test.
+- **No automatic physics:** that WZ term is a boundary interaction; its gauge-covariant nonlinear Higgs field and spin/quotient action must be established **along the SAME scalar/gauge path**, not just at the chosen vacuum. The original scalar has nonconstant Robin profile, and the existing \`Docs/physics/KKE6OrbifoldIntervalBoundaryELMaxCut20261025.md\` corrected the old integrated zero-mode stationary claim. Need incorporate the WZ boundary response into source field variations and metric stress; cannot reuse the prior comparison BVP without modification.
+- **No CS/flat vacuum magical repair:** flat F=R=0 classical CS vanishes, so the old smooth-S1 D>409 one-loop source no-go remains valid for THAT source and radius. The new orbifold Higgs/WZ theory has an entirely different spectrum/regulator and cannot inherit the smooth circle Casimir.
+- **Next decisive payoff:** (1) compute physically normalized 5D SU3³ orbifold CS + local WZ with actual Bardeen descent, full gauge quotient integral spin bordism/APS eta and interval regulator; (2) correct boundary scalar/gauge/fermion dynamics including WZ and use old #1165 same-metric-path action→stress; (3) coupled orbit/radion/holonomy effective vacuum and gravity/PPN/LARES discriminators. The 78-dimensional full E6 gauge adjoint retains another 30 parity-even coset generators and has not been constructed physically here.
+
+**Status:** Exact rational and SymPy source polynomial, anomaly allocation, 2π naive phase and CP3/instantons/K3 test-family algebra locally reproduced; source scripts and finite Agda BIDI committed on #1241 (kernel typecheck NOT performed). No proof of full gauged E6, measured mass/particle spectrum, anomaly-free global 5D quantum theory or experimental gravity anomaly. Earlier claims of an *unconditional* Chi33 charge-two obstruction should be marked SUPERSEDED, not deleted or misattributed.
