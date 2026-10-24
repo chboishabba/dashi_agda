@@ -35,6 +35,26 @@ def test_literal_b4_padding_exact_certificates():
     assert results[36]["defect_exceeds_half_companion"]
     assert results[40]["defect_exceeds_half_companion"]
 
+def test_entire_literal_B4_defect_is_degree_five_for_every_N_ge9():
+    # Independent rectangular-fibre power-sum identity.
+    # x,y in [1-N,N], z in [-N,N].
+    for n in (9,10,16,24,36,40):
+        sx=2*n*(n*n-1)//3
+        sz=n*(n+1)*(2*n+1)//3
+        full=2*(2*(2*n)*(2*n+1)*sx+(2*n)**2*sz)
+        assert full==8*n*n*(2*n+1)*(3*n*n+n-2)//3
+        assert module.closed_form_defect(n)==full-840480
+        assert module.certificate(n)["signed_defect"]==str(
+            module.closed_form_defect(n))
+    # The exact formula permits huge N checks without an N^3 enumeration.
+    for n in (41,100,1_000,1_000_000):
+        poly=8*n*n*(2*n+1)*(3*n*n+n-2)//3-840480
+        assert module.closed_form_defect(n)==poly
+    import pytest
+    with pytest.raises(ValueError):
+        module.closed_form_defect(8)
+
+
 def test_no_renormalization_by_ignoring_zero_cells():
     n8=module.certificate(16)
     n16=module.certificate(40)
@@ -114,17 +134,18 @@ def test_any_fixed_uniform_payment_coefficient_eventually_fails():
     # fixed cD (even extremely large), the explicit noncore positive
     # subfamily has cubic growth and core mass stabilizes.
     Mcore=Fraction(module.certificate(9)["literal_core_companion"])
+    # Exact degree-five formula proves the stronger global no-go.
+    # Keep the old cubic one-ray subfamily as an independent lower check.
     def lower_subfamily(N):
-        # 2*sum_(m=10)^N m(m-1) = (2/3)*(N^3-N-720).
-        # Closed form prevents O(N) execution for huge adversarial cD.
-        return 0 if N < 10 else 2*(N*(N*N-1)-720)//3
+        return 0 if N<10 else 2*(N*(N*N-1)-720)//3
     assert lower_subfamily(40)==42160
     for cD in (Fraction(0),Fraction(1),Fraction(10**12),
-               Fraction(10**30)):
-        N=20
-        while lower_subfamily(N) <= Mcore/2 + 4*cD:
+               Fraction(10**30),Fraction(10**100)):
+        N=9
+        while module.closed_form_defect(N) <= Mcore/2 + 4*cD:
             N*=2
-        assert lower_subfamily(N)>Mcore/2+4*cD
+        assert module.closed_form_defect(N)>Mcore/2+4*cD
+        assert module.closed_form_defect(N)>=lower_subfamily(N)
 
 
 def test_literal_four_moment_single_zero_row_increment():
