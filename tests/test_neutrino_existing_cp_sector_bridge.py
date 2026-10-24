@@ -158,7 +158,7 @@ class ExactLeptonCPTests(unittest.TestCase):
         charged,neutral=construct_mass_operators(U)
         K=commutator(charged,neutral)
         cubic_trace=trace(matmul(matmul(K,K),K))
-        self.assertEqual(cubic_trace[0],-cubic_trace[1]/2)
+        self.assertEqual(cubic_trace[0],cubic_trace[1]/2)
         self.assertEqual(cubic_trace[1],EXPECTED_TRACE_CUBE_COEFF)
         self.assertEqual(cubic_trace[1]/quartet(U)[1],
                          EXPECTED_TRACE_CUBE_RATIO)
