@@ -132,6 +132,25 @@ class SameLeptonResidualTests(unittest.TestCase):
         self.assertNotEqual(a.denominator,1)
         self.assertNotEqual(b.denominator,1)
 
+    def test_galois_trace_noninteger_stronger_finite_order_no_go(self):
+        # Let tau=tr(T*S1)=a+b*zeta in Q(zeta), where
+        # tr_{Q(zeta)/Q}(tau)=2a-b.  A finite-order TS1 would have
+        # algebraic-integer eigenvalues -> integral trace tau; the
+        # Galois trace of an algebraic integer must be an integer.
+        # Here 2 < 2a-b < 3, so its trace cannot be integral.
+        s=residual(SIGNS[0])
+        numerator_a=N[0][0]**2-N[0][1]**2-N[0][2]**2
+        numerator_b=N[1][0]**2-N[1][1]**2-N[1][2]**2
+        numerator_c=N[2][0]**2-N[2][1]**2-N[2][2]**2
+        self.assertEqual(F(numerator_a, D*D),s[0][0])
+        self.assertEqual(F(numerator_b, D*D),s[1][1])
+        self.assertEqual(F(numerator_c, D*D),s[2][2])
+        field_trace_num=2*(numerator_a-numerator_c) - (numerator_b-numerator_c)
+        self.assertEqual(field_trace_num, 372023795875918)
+        q=F(field_trace_num, D*D)
+        self.assertTrue(F(2)<q<F(3))
+        self.assertNotEqual(q.denominator,1)
+
     def test_phase_averaged_sources_and_rank(self):
         p=born_average(U)
         pion=(F(1,3),F(2,3),F(0))
