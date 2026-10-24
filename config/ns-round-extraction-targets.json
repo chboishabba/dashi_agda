@@ -96,8 +96,8 @@
             "path": "scripts/ns_a_schwartz_fourier_same_object.py"
           }
         ],
-        "status": "Physical local Fourier/Leray projected cell implemented; classical L2/Plancherel same-object distribution Fourier formula mathematically derived, and for H1 exact projected-source bound min(E|xi|,sqrt(ED)) yields globally-L2 stationary heat-inverse 8pi E^(3/2)sqrt(D)/nu². Formal Bishop transport, signed A2 double-resolvent and global A3 continuation remain unpaid.",
-        "next": "Use existing projected cell and Schwartz source witness; instantiate actual Bishop Fourier/Plancherel transform on SAME H1 continuum solution and transport standard physical min(E|xi|,sqrt(ED)) to signed A2. Do not treat H1-dependent estimate as global-in-time continuation."
+        "status": "Existing physical continuum local Fourier/Leray cell plus finite-energy direct Stokes response; strong H1-source continuity quantified: ||Stokes(u)-Stokes(v)||²_L2xi <=8pi AB/nu² from L1 tensor and convection differences. Bishop formal transform, signed centered A2 and global A3 still open.",
+        "next": "Reuse the strong H1 continuity to instantiate physical EuclideanFourierTrajectory via divergence-free Schwartz density and physical Plancherel; prove same-object Bishop Fourier mapping then signed centered A2 and continuation. Do not rederive local projector or use free FourierTransformVelocity:Set."
       },
       {
         "id": "NS-B",
@@ -128,8 +128,8 @@
             "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
           }
         ],
-        "status": "full-fibre B4 proposed uniform inequality no-go against actual selected-pair ED; signed R440 algebra and principal-half still valid; redesigned positive B estimate, B1/2/3, B7 and continuation remain",
-        "next": "Retire defective full-fibre physical B4 uniform-payment claim; rederive direct zero-padding invariant physical R440 source and exact critical-production bridge; pursue B123 and B7 independently."
+        "status": "Historical full-fibre B4 uniform payment is false against literal R219/R469 ED; the padding-invariant SAME-PHYSICAL-RATE output-heat and cross-gradient normal forms ALREADY exist in FixedOutputPhysicalOutputRateNormalForm and R681/R684/R685/R690, but quantitative cross-gradient/spacetime estimate and B123/B7/continuation remain.",
+        "next": "Follow existing physical output-heat normal form -> R681 cross-gradient -> R684 input Laplacian -> R685 commutator/tangent -> R690 global signed integrated sum; assess remaining quantitative rate-kernel payment only, and independently B123/B7/continuation."
       },
       {
         "id": "NS-B4",
@@ -146,19 +146,19 @@
         "support": [
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSCanonicalB4PhysicalR440AnalyticInterfaceExact.agda"
+            "path": "DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalOutputRateNormalFormExact.agda"
           },
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact.agda"
+            "path": "DASHI/Physics/Closure/NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact.agda"
           },
           {
             "repo": "chboishabba/dashi_agda",
             "path": "scripts/ns_b4_literal_padding_adversary.py"
           }
         ],
-        "status": "physical B4 full-fibre strict-half cutoff-uniform inequality mathematically falsified for actual R219/R469 selected-pair ED: fixed smooth shear has localED<=4, core companion fixed, defect_N->infinity; source Agda/kernel negative theorem still unverified",
-        "next": "Do not prove falsified B4 full-fibre estimate. Reuse R440 raw weighted amplitude, which is zero-padding invariant, and prove a SAME-SOURCE equivalence to a genuinely admissible critical-production estimate; redesign B4 positive owner and retain no-go receipt."
+        "status": "Original literal full-fibre R440 noncore/core strict-half payment mathematically ruled out by smooth physical shear and localED<=4; existing zero-padding-invariant physical output heat normal form and R681 cross-gradient rate identity present, but NOT an automatic replacement proof for critical B4.",
+        "next": "Do not prove false full-fibre B4. Reuse existing FixedOutputPhysicalOutputRateNormalForm and R681/R684/R685 to identify a padding-invariant quantitative physical candidate; establish SAME R236 critical-production equivalence before inserting B4 analytic interface; then bound cross-gradient work uniformly."
       },
       {
         "id": "NS-B-RESERVE",
