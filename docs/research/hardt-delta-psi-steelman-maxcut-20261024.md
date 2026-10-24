@@ -757,3 +757,46 @@ program execution receipts for synthetic causal source models,
 not an observation of any human subject or target. Do not interpret
 four fibres as four independent physical observations or as an
 experimental nonlocal result.
+
+
+---
+
+## 2026-10-25 SOTA: delta OPM motion and source separation
+
+**Scientific priority correction:** delta EEG/MEG spans 0.5–4 Hz, but OPM head-motion contamination can extend through ~3 Hz (and beyond in some systems). Consequently an apparent delta-band signal, even one coherent across people, does not establish a neural magnetic source, much less physical influence on another participant. The new priority is specific source-versus-motion identifiability, with an original-data intake and blinded causal-receiver design.
+
+### Original experimental source roots and precise claim limits
+
+- **Olivia R. Christiano and Sebastian Michelmann** (8 May 2026), *Reliability and signal comparison of OPM-MEG, fMRI & iEEG in a repeated movie viewing paradigm*, *Imaging Neuroscience* 4, DOI https://doi.org/10.1162/IMAG.a.1218 . The study analyses real OPM power/reliability in multiple bands **including delta 0.5–4 Hz**, alongside independently sourced human fMRI/iEEG. In its cited Table 1, maximum within-person OPM delta test-retest correlation is **r=0.08** for that particular reported contrast: statistical reliability is not perfect decoding. Source-author OSF analysis https://osf.io/urjvb . All participants viewed the same movie; shared sensory drive remains an expected common cause.
+- **Lukas Rier, Sebastian Michelmann and their colleagues**, *Test-Retest Reliability of the Human Connectome: An OPM-MEG study*, original open-science dataset https://doi.org/10.5281/zenodo.7525341 . Ten subjects were recorded twice during a 600-second *Dog Day Afternoon* movie segment; available sensor-location/orientation and defaced-anatomy objects support genuine source-specific reconstructions. The deposited raw ZIP is approximately **8.2 GB**. These bytes have **not been downloaded, hashed or replayed** here. Rights and methods remain under the original authors/custodians.
+- **Xinchi Yu, Dongxue Zhang and coauthors** (July 2026), *Unleashing the potential of OPM-MEG to study event-related fields against low-frequency artifacts: the case of sentence processing*, *Biomedical Signal Processing and Control* 120:110149, DOI https://doi.org/10.1016/j.bspc.2026.110149 . Motion can produce artifacts up to around **3 Hz**. Their nine-OPM setup with **1 Hz high-pass** and evoked-biased DSS aids N400 recovery, with original materials https://osf.io/cnbs9 . A 1 Hz high-pass sacrifices 0.5–1 Hz portions of delta; a 4 Hz high-pass discards the entire 0.5–4 Hz delta passband. These authors do NOT claim full-band delta recovery or any extraordinary target effect.
+- **Original OPM interference review** https://pmc.ncbi.nlm.nih.gov/articles/PMC8803550/ : movement through residual magnetic-field gradients generates large low-frequency signals, and reference-channel gradiometry may fail to capture source-specific local interference. Do not assume subtraction of any reference automatically preserves the biological signal.
+- **Meaghan Spedden, Maike Schmidt, George O'Neill and colleagues**, 2026 human brain/spinal/EMG recordings https://doi.org/10.5281/zenodo.20824565 and https://doi.org/10.5281/zenodo.19029856 . Distinct source-root: genuine concurrent human OPM brain and spinal cord activity plus surface EMG during rest and hand contraction. This supplies a *physically connected human neural-to-effector* comparator more direct than fly MaleCNS to human-field extrapolation, but NOT a source for distant neural effect or psi.
+- **Wilson, Jackson Kimball and GNOME colleagues**, *Physical Review D* 113:115027, 15 June 2026, DOI https://doi.org/10.1103/dd54-6vkw . Twelve stations and 69 days of an explicit solar-axion-halo interaction search span roughly 0.05–20 Hz, with **no statistically significant candidate**. Same-frequency coverage does not imply a common neural or target-sensitive source and cannot be used as a measured delta-brain coupling.
+- **Original July 2026 preprint**, *Wearable magnetoencephalography in an open environment*, DOI https://doi.org/10.64898/2026.07.28.740707 . Authors describe active compensation and gradiometry in open environments; retain PREPRINT status, distinct from peer-reviewed independent replication.
+
+### Exact synthetic source-identification cut
+
+Let x = (b, m, a), for biomagnetic neural field, motion artefact field, and ambient background. A single calibrated-looking sensor measuring y1 = b+m+a does **not** identify b: the fine states (1,0,0), (0,1,0), (0,0,1) produce identical y1. If a *brain-blind, physically calibrated* second reference measures y2=m+a, then b=y1-y2. However if the reference is also sensitive to brain, y2=b+m+a, naive gradiometry destroys the biological contribution; furthermore b identification does not identify m versus a separately. The general criterion that requested linear target c*x factors through sensor matrix H*x iff ker(H) is contained in ker(c), or rank([H;c])=rank(H), is standard linear algebra rather than novel DASHI mathematics.
+
+**New original source-specific checker:** scripts/check_hardt_delta_opm_motion_maxcut.py . An independently executed equivalent local standard-library implementation passed **2,028 exact-rational source/target rowspace fixtures**. Its 2 Hz construction demonstrates a neural-only and movement-only source with identical observed traces. Its synthetic predictor, trained where motion aligns with assigned sender pattern, fits perfectly, then fails on motion-reversed held-out trials; a true separately calibrated brain-blind reference recovers the declared source. A separate movie shared-cue fixture produces perfectly identical responses with **no person-to-person coupling**.
+
+**Original code/test commits:** scripts/check_hardt_delta_opm_motion_maxcut.py and tests/test_hardt_delta_opm_motion_maxcut.py . A separately run local equivalent standard-library test suite had **six tests pass**, including sample-rank, motion reversal, shared stimulus, absent receipt, wrong 40-Hz/cardiac modality, and placeholder rejection. **Exact committed GitHub-blob replay not claimed for those new files yet**, and Agda kernel/CI remain unexecuted.
+
+### Real-data receipt gate
+
+The checker accepts an optional experimental JSON manifest and refuses promotion for missing author/source/version, invalid or missing SHA-256-format values, subject/session/trial and source geometry, missing 0.5–4 Hz noise PSD, incorrect EEG/OPM/MEG modality, insufficient sample rate, absent reference timestamps, absent pose/movement, missing held-out or sham/blinding manifests, absent independent event unit, and unsealed analysis plan. 40-Hz SNR and cardiac-NV figures are explicitly not delta head-sensor noise receipts. A correctly shaped 64-hex digest still needs a separate actual-byte verification: this is a **metadata review admission**, not validation of instrument performance or physical causation.
+
+### Max-cut roadmap and acceptance
+
+**P0: observational ambiguity now exposed**; completed bounded mathematical sensor/movement/common-input negative controls, no human source observation.
+
+**P1: acquire original human neural recordings** by reading source rights and metadata, then separately importing and hashing the Christiano–Michelmann/Rier OPM source files and author-defined 0.5–4 Hz results. The 8.2-GB raw archive was *not* downloaded; source availability does not equal a DASHI run. Reuse #1121 Brain-IT for consumer-relative observation and dashiBRAIN #9 for finite collision/commutation checks, without conflating fMRI with OPM.
+
+**P1: independent physically connected human effector control** may use the Spedden brain/spinal/EMG recordings with same-trial time alignment, original physiological mechanisms, source permissions and independent sham/noise comparators. This is a bridge to existing dashiBRAIN #5/#7 *methodology*, not an empirical identity with fly anatomy.
+
+**P2: causal distant-target admission**, only for harmless, consenting participants or hardware targets: independently randomized source assignment, physical source+receiver and leakage controls, preregistered valid unit and estimator, target identity selection, distance/orientation sensitivity and independent replication. Shared movie drive and head-motion have to be controlled before invoking any new-field explanation.
+
+**P3: model-specific speculative theory** remains contingent on independent empirical receiver effects, specified source/target coupling, energy/retardation, constraints and no-signalling compatibility. A 2026 axion null search or an invented scalar Lagrangian is not an observed neural channel.
+
+**Historical/evidentiary firewall:** The BioCybernaut/Hardt Instagram reel demonstrates first-party publication of the alleged story. None of these neural or spin experiments independently verifies any assassination, target, historical operative, 80% denominator or associated military operation. The users' original supplied clip and caption remain separate from the original scientists' independently published data. No Agda kernel or new empirical receipt is asserted.
