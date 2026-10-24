@@ -512,3 +512,9 @@ duplicate its complete Jordan identity/classification machinery**.
 - **A6**: preferred consumer 26D `K27` direct string
   effective theory, existing worldsheet/Monster/BRST owners,
   and canonical YM/NS source analytic problems separately.
+
+
+## 2026-10-24 direct cross-repo comparison: actual Albert 26 compression versus OWN zero-mean path quotient
+The existing source-owned `scripts/check_hyperfabric_27_minus_1_operator_cut.py` gives 26 nonconstant eigenmodes of the *actual nonperiodic spatial cube* graph Laplacian, with EIGHT distinct nonzero eigenvalues `{1,2,3,4,5,6,7,9}` and exact 26-coordinate metric `G=I−J/27`. DO NOT identify this quotient with the exceptional Albert's 26 nontrivial F3³ homogeneous character lines merely by the common dimension.
+
+On independent original SOURCE `chboishabba/dashi_lean4` PR #52, the Griess-1990 homogeneous ALBERT multiplication admits positive Hermitian real-form involution `τ(e_a)=e_-a` and 13 selected source-selfadjoint `H_a=L_(e_a+e_-a)` on 27D, with spectrum `2:1, −1:10, 1/2:16`. The distinguished UNIT line and 26 nontrivial grades are mixed, so its 26D **compression** `K_a=QH_aQ` (not invariant restriction) has spectrum `+1:1, −1:9, 1/2:16` (THREE distinct). The path quotient and selected Albert compression therefore fail unitary equivalence even after any nonzero affine re-scaling and shift, since spectral distinct-value counts 8 ≠3. Exact Python `/mnt/data/check_griess1990_realform_hamiltonian.py` PASS; Lean repo committed `scripts/check_griess1990_albert_positive_realform_hamiltonian.py` on #52. Algebra source: Griess (1990), J Algebra 131 281–293; distinction maintained from FLM Monster 196884 Griess VOA and the C27 spectral charges. This is an explicit negative physical-operator discriminator, not an argument against every possible further intertwiner or metric.
