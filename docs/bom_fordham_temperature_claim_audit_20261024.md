@@ -224,3 +224,25 @@ source concern / complaint
 - `DASHI/Governance/AustralianPoliticalRadioInfluence2026Exact.agda` now explicitly distinguishes KSL legal registration, self-reported retained ownership, producer AIIMS, Nine↔Tapt commercial association and a **proposed** ARN buyout. Prior Bannon–Palmer canonical owner remains only in PR #1131.
 
 **End-state:** no identified external Sandilands investor currently established; documented commercial distribution/revenue-share and in-house operating structure; specific ABC Ombudsman editorial failures established; 2024 alleged threats and message authenticity contested; three Bondi events remain strictly typed. Future direct receipts can update this graph without conflating network adjacency with a coordinated operation.
+
+### Additional equity-audit discovery: presenter-service companies did own ARN shares
+
+The 2025 ARN Media annual report's **share register as at 3 February 2026** contains two exact company-level entries: **Quasar Media Services Pty Ltd: 3,161,166 shares, 1.01%** and **Henderson Media Pty Ltd: 3,161,166 shares, 1.01%**. Original company annual report reproduced as HTML https://financialfilings.com/filings/arn-media-limited/annual-report/2026/37381126/ . ARN's own **18 March 2026** termination notice https://arn.com.au/market-announcement-termination-of-contract-with-quasar-media-and-mr-sandilands/ identifies Quasar as the Kyle broadcasting-services contractor. Its **3 March** announcement https://arn.com.au/market-annoucement-the-kyle-jackie-o-show/ identifies Henderson Media as Jackie's separate services firm.
+
+This supplies direct **historic contractor ↔ old-broadcaster equity** evidence, far stronger than speculation about a billionaire investor in KSL. It does **not** show either firm still held those shares in October after the termination/settlement, nor does it convert a share in ARN into a share in Kyle Sandilands Live Pty Ltd. The contractors' ultimate beneficial owners, share class/vesting and disposals are not established by this top-twenty list. A February register is an equity **snapshot**, not a perpetually valid ownership claim.
+
+The same ARN report lists **Samuel Terry Asset Management 71,169,009 shares**, **Seven West Media Investments 45,517,739 (14.54%)**, **Grant Broadcasters 35,934,891 (11.48%)**, plus nominee holdings. ACMA's February 2026 media-interest notice https://www.acma.gov.au/updates-media-interests-snapshot tracks **Seven West being acquired by Southern Cross Media Group** and its continuing **14.54% ARN interest**, while **SGH/Kerry Stokes** held approximately **20.06% Southern Cross**. That is a real two-tier equity relationship, not an editorial-instruction pathway.
+
+**Conflicting News Corp historical records:** ACMA says News Corp Australia **ceased** substantial-holder status in ARN December 2025; ARN's annual-report substantial-holder table labelled 3 February 2026 still names `News (Sydney) 43,736,386`. Public aggregators also often show 13.97%. These cannot all be treated as one verified **October** beneficial holding. Resolve via original substantial-holder cessation notice and effective dates; don't assert either that News definitely still directs ARN or that it has zero residual share exposure. Share-register nominee, substantial-holder and ultimate-control entities need distinct definitions.
+
+### Formal change from earlier investor reasoning
+
+- `newShowLegalOperator` → **legalOperatorRegistration** (ABR proves operator exists, *not* ultimate equity)
+- `quasarARNHistoricalEquity` / `hendersonARNHistoricalEquity` → **historicEquityHolding** (February 2026 snapshot only)
+- `southernCrossARNIndirect` / `stokesSouthernCrossStake` → two separately sourced equity edges (no transitively inferred editorial control)
+- `aiimsProduction` → **productionSupply** (not equity)
+- `nineTaptStrategicPartnership` → **announcedStrategicPartnership** (not continued shareholding and not proof every announced collaboration executed)
+- `kyleProposedARNBuyout` → **proposedUncompletedAcquisition** (reporting ≠ completed financing)
+- `arnSandilandsRevenue` → **financialEntitlement**, explicitly 19.9% **net revenue** conditional, not equity
+
+This is a productive second-order outcome: owner topology, former presenter equity, production chain, licensing, residual revenue incentives and direct political messaging are all distinct object kinds that can feed actual network tests, without claiming one hidden command structure.
