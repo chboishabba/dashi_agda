@@ -44,6 +44,9 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenc
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as PhysicalRate
 import DASHI.Physics.Closure.NSTriadKNR650RateKernelInputLaplacianCollapseRound684Exact as R684
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalOutputRateNormalFormExact as OutputRate
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredCovarianceFactorExact as Centered
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredMultiplierVectorCovarianceExact as Vector
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -164,6 +167,65 @@ inputLaplacianWorkIsCommutatorMinusTangent physicalSystem S output =
       physicalSystem S output))
     (fixedOutputPhysicalRateKernelIsCommutatorMinusTangent
       physicalSystem S output)
+
+------------------------------------------------------------------------
+-- Reuse the existing NO-CARDINALITY fixed-output heat-rate normal form.
+--
+-- R685's system is the literal finite physical Galerkin system, not an
+-- abstract newly hypothesized Fourier field. The existing OutputRate
+-- theorem carries the same velocity, projected nonlinearity, fibre and
+-- mixed-product cell into a decomposition whose rate weights do NOT
+-- depend on counting zero-amplitude incidences:
+--
+--   W(M,commutator)
+--     = W(M,tangent)
+--       + (nu/2)|k|² W(M,M)
+--       + (nu/2) W(M,Σ |p-q|² A_pq).
+--
+-- This is an exact adaptation of the ALREADY PROVED OutputRate source,
+-- not a new estimate or proof of the missing R690 spacetime payment.
+------------------------------------------------------------------------
+
+r685PhysicalNoCardinalityRateNormalForm :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (S : Helical.HelicalModeScalars F) →
+  (output : Z3.FourierMode) →
+  let
+    system = Field30.finiteSystem physicalSystem
+    E = Field30.physicalEmbedding physicalSystem
+    I = Field30.physicalInverseSquare physicalSystem
+    nu = Field30.viscosity physicalSystem
+    cutoff = Audit.cutoff system
+    velocity = Audit.velocityAt system
+    forcing = Audit.projectedNonlinearity system
+    rho = Centered.modalViscousRate nu I
+    mixed = Work.fixedOutputMixedProduct S velocity cutoff output
+    centered =
+      Vector.weightedVectorSum
+        (Vector.centeredFrequencyMultiplier E)
+        (D1a.mixedProductCell S velocity)
+        (Output.physicalOutputFiber cutoff output)
+  in
+  Work.coherentWork mixed
+      (Work.fixedOutputCommutator S velocity forcing cutoff output)
+  ≡
+    Work.coherentWork mixed
+      (Work.fixedOutputDampedTangent
+        rho S velocity forcing cutoff output)
+    + OutputRate.outputHeatRate nu I output
+        * Work.coherentWork mixed mixed
+    + OutputRate.halfViscosity nu
+        * Work.coherentWork mixed centered
+r685PhysicalNoCardinalityRateNormalForm physicalSystem S output =
+  OutputRate.literalFixedOutputCommutatorPhysicalRateNormalForm
+    (Field30.physicalEmbedding physicalSystem)
+    (Field30.physicalInverseSquare physicalSystem)
+    (Field30.viscosity physicalSystem)
+    S
+    (Audit.velocityAt (Field30.finiteSystem physicalSystem))
+    (Audit.projectedNonlinearity (Field30.finiteSystem physicalSystem))
+    (Audit.cutoff (Field30.finiteSystem physicalSystem))
+    output
 
 ------------------------------------------------------------------------
 -- Status.
