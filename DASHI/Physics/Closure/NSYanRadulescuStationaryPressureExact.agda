@@ -55,7 +55,7 @@ sourcePressureOfDivergenceFreeForce :
     PressureAttached ForceAttached ContractionAttached →
   divf ≡ zero →
   lap ≡ (zero - contraction)
-sourcePressureOfDivergenceFreeForce _-_ witness hZero =
+sourcePressureOfDivergenceFreeForce {contraction = contraction} _-_ witness hZero =
   trans
     (SameSourceForcedPressure.exactForcedPressureEquation witness)
-    (cong (λ d → d - _) hZero)
+    (cong (λ d → _-_ d contraction) hZero)
