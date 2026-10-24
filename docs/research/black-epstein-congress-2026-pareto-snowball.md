@@ -1,5 +1,8 @@
 # Black–Epstein 2026 congressional proceedings: Pareto/Ibrahim/snowball cut
 
+> **CURRENT DISPOSITION — RESEARCH FREEZE (25 Oct 2026):** [canonical acceptance/debt ledger](aquino-epstein-canonical-disposition-20261025.md) supersedes historical round priorities in this document. The original-source details below remain a provenance archive; do **not** reopen aggregate GSR/Kogan-to-AIQ research or promote whole-network coordination without a new original same-object discriminator. Next gate: typecheck/test and bounded corrections, not another broad snowball.
+
+
 Date: 24 October 2026. Parent case: PR #1245, stacked on #1131. **This is a source-attribution investigation note, not an allegation of adjudicated sex-trafficking participation or covert programme membership.**
 
 ## New original-root priority (not in earlier March-only audit)
