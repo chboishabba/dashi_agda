@@ -45,6 +45,24 @@ def test_positive_periodic_maintains_own_math_boundary():
     assert select_route("A", nav)["route"] == "NS-A"
 
 
+def test_ABB4_land_at_source_mathematics_not_abstract_residual_records():
+    nav = load_navigation()
+    expected = {
+        "A": "NSClayFacingAPureAnalysisFrontier20261007Exact.agda",
+        "B": "NSClayFacingBPureAnalysisFrontier20261005Exact.agda",
+        "B4": "NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda",
+    }
+    for route, suffix in expected.items():
+        selected = select_route(route, nav)
+        assert selected["owner"]["path"].endswith(suffix)
+        assert selected["kernel_certified_by_navigation"] is False
+        assert len(selected["support"]) <= 3
+    b4 = select_route("B4", nav)
+    assert any("NSCanonicalB4PhysicalR440AnalyticInterfaceExact" in x["path"]
+               for x in b4["support"])
+    assert "uninhabited" in b4["status"]
+
+
 def test_unknown_round_rejected_without_guessing_authority():
     with pytest.raises(ValueError, match="Do not create another Round"):
         select_route("R99999", load_navigation())
