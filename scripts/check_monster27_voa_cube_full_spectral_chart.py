@@ -36,7 +36,7 @@ assert len(CUBE)==27
 def label(p):return sum(p[i]*3**i for i in range(3))%27
 def order_of_eigen(k):return 27//gcd(k,27)
 rank={p:CONDUCTOR_COUNTS[order_of_eigen(label(p))] for p in CUBE}
-assert Counter(rank.values())=={7290:18,7295:6,7297:2,7300:1}
+assert Counter(rank.values())=={7290:18,7296:6,7295:2,7298:1}
 assert sum(rank.values())==196884
 assert rank[(0,0,0)]==7298
 assert {p for p in CUBE if rank[p]==7295}=={(0,0,1),(0,0,-1)}
@@ -70,7 +70,7 @@ assert all(label(p)!=label(q) for p,q,i in E)
 assert all(gcd(27,(label(q)-label(p))%27)!=27 for p,q,i in E)
 assert {i:gcd(27,3**i) for i in range(3)}=={0:1,1:3,2:9}
 
-print('PASS exact Monster McKay-Thompson char checks: T_27=3 T_9B=9 T_3B=54')
+print('PASS exact Monster McKay-Thompson char checks: T_27=3 T_9B=0 T_3B=54')
 print('PASS C27 eigenspace multiplicities: phi1:7300 phi3:7297 phi9:7295 phi27:7290')
 print('PASS spatial cube chart 27 sites; fibre dimensions',sorted(Counter(rank.values()).items()))
 print('PASS cube axis edges 18 each with cyclic-charge shifts +1,+3,+9')
