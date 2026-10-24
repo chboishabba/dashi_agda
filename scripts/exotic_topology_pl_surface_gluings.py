@@ -154,6 +154,11 @@ def glue(a, b, which_a=0, which_b=0, with_transport=False):
     right_vertices = {v for tri in b.triangles for v in tri}
     left_map = {v: rename[uf.find(v)] for v in left_vertices}
     right_map = {v: rename[uf.find(v + offset)] for v in right_vertices}
+    # Each input triangulated subspace embeds in the glued finite
+    # surface; vertex identifications occur ACROSS the two pieces,
+    # never between two distinct vertices of the same input.
+    assert len(set(left_map.values())) == len(left_map)
+    assert len(set(right_map.values())) == len(right_map)
     return result, left_map, right_map
 
 
