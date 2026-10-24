@@ -11,6 +11,7 @@ import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact
 import DASHI.Moonshine.Monster3BNormalizerCocycleCancellationExact as Cocycle
 import DASHI.Moonshine.Monster3BJFineGeometricD4InvolutionNoGoExact as JFineNoGo
 import DASHI.Moonshine.Monster3BJFineD4CandidateMultiplicityExact as JFineRepair
+import DASHI.Moonshine.Monster3BJFineNineCellSymmetricSquareD4Exact as SymTwelve
 import DASHI.Moonshine.Monster3BMultiplicityCharacterSafeReconstructionExact as Safe
 import DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact as Gap
 import DASHI.Wikimedia.IbrahimMonsterSSP14GlobalInversionOrbitWeldValidation
@@ -129,3 +130,24 @@ signedJFineD4CorrectedHalfTurnTrace =
 signedJFineD4CorrectedQuarterTrace : 9 * 2 ≡ 18
 signedJFineD4CorrectedQuarterTrace =
   JFineRepair.fibreTensorQuarterTurn
+
+------------------------------------------------------------------------
+-- Cross-pollinated nine-cell / Suzuki dimension owner:
+-- valid D4 9+3->12, symmetric square ->78, character-compatible 90.
+-- Central C2 false-promotion gate excludes faithful 78 = Sym² faithful12.
+------------------------------------------------------------------------
+
+nineCellSymmetricSquareSourceDegree :
+  12 + 78 ≡ 90
+nineCellSymmetricSquareSourceDegree = SymTwelve.signedRepairIdentity
+
+nineCellSymmetricSquareSourceQuarterTrace :
+  9 * 2 ≡ 18
+nineCellSymmetricSquareSourceQuarterTrace =
+  SymTwelve.sourceNecessaryQuarterTurn
+
+faithfulSuzukiSymSquareCannotBeFaithfulSeventyEight :
+  SymTwelve.negative SymTwelve.*sign SymTwelve.negative
+  ≡ SymTwelve.negative → ⊥
+faithfulSuzukiSymSquareCannotBeFaithfulSeventyEight =
+  SymTwelve.symmetricSquareCannotHaveFaithfulCentralMinus
