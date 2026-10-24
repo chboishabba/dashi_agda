@@ -71,7 +71,7 @@ def test_six_region_source_defined_rate_difference_identity():
     assert {region(*pair) for pair in PAIRS}=={"DFL","DHH","Core"}
     assert S.expand(covariance(A,PAIRS,nu)+nu*sum(blocks.values()))==0
     assert blocks[("DFL","DHH")]==-162531800
-    assert blocks[("Core","DHH")] if False else True
+    assert blocks[("DHH","Core")]==-227598336
 
 def test_quartic_scaling_and_zero_padding_negative_control():
     nu=S.Integer(2); old=covariance(A,PAIRS,nu)
