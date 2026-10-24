@@ -169,3 +169,18 @@ The probe is FAIL CLOSED and has **not** been executed in this environment (mmgr
 Pure F3 symplectic Gram-Schmidt self-test passed in local Python. Actual mmgroup runtime not observed (package not installed and package index DNS inaccessible); GAP/Agda unchecked. No source-coordinate Monster phase-eigenspace basis, literal Monster-to-JFine intertwiner T or `Hom_E` 90-dimensional character/cocycle has yet been constructed or certified. The concrete group-word inputs ARE available now. The next producer should use `MMV(7)` actual vector actions and the source-derived normalizer/E words on one selected 3B element; not the earlier unrelated Hurwitz g3 word unless a conjugator is supplied.
 
 Current proof owner routing: generic Heisenberg/Stone–von Neumann/projectors/cocycle remain in pre-existing Monster owners; D4-symmetric JFine chart is on PR #1148; generic FDRep/Hom/Weil transport is on open PR #1098 and companion Lean #47; source-specific executable group-to-module seam belongs to this PR #1250. Preserve Wilson 1988 and Barraclough–Wilson 2007 character attribution independently from the new 2026 same-group construction.
+
+
+## Matrix-free W_zeta↔JFine intertwiner producer (source-written, not executed)
+
+`scripts/monster_3b_mmgroup_matrix_free_intertwiner.py` consumes the actual source-aligned E/N word manifest emitted by the new symplectic adapter. Over `GF(7)`, where `ζ=2`, it computes the joint idempotent
+```
+P = (1 + 4z + 2z²)/3 · product_{i=1}^6 (1+B_i+B_i²)/3
+```
+(the characteristic-7 inverse of 3 is 5). A deterministic scan of original mmgroup basis vectors builds exactly 90 linearly independent projections by vectorised **exact GF7 Gaussian elimination**; its stopping rule FAILS if rank90 is not reached. The source generator words act on those literal selected vectors. The implicit map `T(u,j) = s_j A_1^{-u_1}...A_6^{-u_6}` then supplies 65610 exact, constructible vectors. Because MMV uses right actions, the source module convention is `T(u,j)·A_i=T(u-e_i,j)`, `T(u,j)·B_i=ζ^{u_i}T(u,j)`; this reversal must not be silently confused with the left-set JFine action. A mathematically complete rank argument requires the verified 90 joint-weight multiplicity, Weyl isotypy and the source 65610-dimensional zeta sector, not just checking a handful of columns. The producer records that it has not formed a giant dense matrix nor tested all 65610 columns by brute force.
+
+This new script is a real **algorithm for constructing** a same-source actual Monster E intertwiner with the JFine Heisenberg fibre, but without mmgroup execution it is NOT a completed numerical output and not an Agda/Lean kernel theorem.
+
+**Important characteristic separation:** `GF7` contains primitive third roots and characteristic 7 is coprime to `|E|=3^13`, so E's representation is semisimple. However 7 divides `|Suz|`, so `GF7` reduction cannot on its own certify Wilson's characteristic-zero irreducible `12+78` normalizer factorisation or full normalizer semisimplicity. The `Hom_E` action and projective cocycle must be computed on the actual same-source lifts, then compared to published characteristic-zero character information with a valid lifting/independence argument.
+
+**Final Pareto update:** Actual group word acquisition is CLOSED by the 2026 original source; a full symplectic E/N generator compiler and matrix-free 90×729 intertwiner **producers are implemented**; successful execution and characteristic-zero normalizer multiplicity/cocycle certification remain open. Do not label source-writing as having run those computations.
