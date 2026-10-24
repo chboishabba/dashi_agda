@@ -362,6 +362,14 @@ blackDechertSECOriginal2021 = black-2026-source-receipt
   "Independent counsel hired by Apollo Conflicts Committee reviewed Black-Epstein personal work; corporate investigative report and witness restatement derive from the same underlying inquiry, not independent forensic examinations."
   true true false
 
+blackApolloProxyConflicts2021 : Black2026SourceReceipt
+blackApolloProxyConflicts2021 = black-2026-source-receipt
+  corporateDisclosureOfReview
+  "Apollo 2021 DEF 14A SEC filing, Conflicts Committee and board disclosures; https://www.sec.gov/Archives/edgar/data/1411494/000119312521247884/d218583ddef14a.htm"
+  "2020-2021" "2021-08-18"
+  "Apollo identifies Ducey, Krongard and Richards as Conflicts Committee; publicly states Krongard's former senior CIA office. Corporate disclosure establishes historical director-role overlap only, not agency tasking or operational influence in the Dechert review."
+  true true false
+
 record Black2026HouseBoundary : Set where
   constructor black-2026-house-boundary
   field
