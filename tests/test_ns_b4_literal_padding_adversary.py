@@ -219,3 +219,50 @@ def test_R681_is_not_the_old_B4_defect_same_output_shear():
         assert Fraction(module.certificate(n)["signed_defect"]) != output_heat_relative
     assert output_heat_relative==(
         Fraction(2)-Fraction(sum(x*x for x in module.K))*Fraction(1))
+
+
+def test_ALL_physical_shear_mixed_outputs_and_global_R681_rate():
+    """Source-faithful H± cross products on ALL 16 supported ordered pairs.
+
+    Important: besides four cross-axis outputs k=(±1,±1,0), four
+    same-axis k=(±2,0,0),(0,±2,0) are also NONZERO before projection.
+    R681's global raw/output-heat response is therefore -4, NOT zero.
+    This is still zero-padding invariant, unlike old B4. Do not infer
+    global cancellation without literal R685 commutator/tangent proof.
+    """
+    import sympy as S
+    ex=S.Matrix([1,0,0])
+    ey=S.Matrix([0,1,0])
+    ez=S.Matrix([0,0,1])
+    supported=(ex,-ex,ey,-ey)
+    out={}
+    for p in supported:
+        for q in supported:
+            plus=(ez+S.I*p.cross(ez))/2
+            minus=(ez-S.I*q.cross(ez))/2
+            k=tuple(p+q)
+            out[k]=out.get(k,S.zeros(3,1))+plus.cross(minus)
+    assert len(out)==9
+    assert out[(0,0,0)]==S.zeros(3,1)
+    assert sum(int(out[k]!=S.zeros(3,1)) for k in out)==8
+    total_relative=S.Integer(0)
+    for k,mixed in out.items():
+        coherent=S.simplify(2*sum(S.conjugate(v)*v for v in mixed))
+        if k==(0,0,0):
+            assert coherent==0
+            continue
+        # Each populated input has norm squared one, so every active
+        # physical incidence has input heat rate 2.
+        raw_R440_work=2*coherent
+        output_heat_work=sum(z*z for z in k)*coherent
+        relative=S.simplify(raw_R440_work-output_heat_work)
+        if sum(z*z for z in k)==2:
+            assert coherent==1 and relative==0
+        else:
+            assert sum(z*z for z in k)==4
+            assert coherent==S.Rational(1,2)
+            assert relative==-1
+        total_relative+=relative
+    assert total_relative==-4
+    # In particular, GLOBAL sum over outputs does not magically
+    # cancel the output-relative signed normal form.
