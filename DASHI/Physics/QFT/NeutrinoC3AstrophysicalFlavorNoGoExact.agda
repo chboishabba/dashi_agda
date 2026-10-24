@@ -128,9 +128,9 @@ record SourceCounts : Set where
 open SourceCounts public
 
 sourceCount : SourceCounts → Three.Flavour → ℤ
-sourceCount s Three.electron = + electronCount s
-sourceCount s Three.muon = + muonCount s
-sourceCount s Three.tau = + tauCount s
+sourceCount s Three.electron = + (electronCount s)
+sourceCount s Three.muon = + (muonCount s)
+sourceCount s Three.tau = + (tauCount s)
 
 totalCount : SourceCounts → Nat
 totalCount s = electronCount s + muonCount s + tauCount s
