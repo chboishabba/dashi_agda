@@ -5,6 +5,8 @@ import Base369 as Base
 import DASHI.Biology.JFinePhaseQuotientFieldExact as Fine
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.PointedTernaryBulkExact as Pointed
+import DASHI.Biology.DialecticalSheetSpiralExact as Sheet
+import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Analysis.RiemannQuarticPuncturedKernel4EnumerationExact as Punctured
 
 ------------------------------------------------------------------------
@@ -181,6 +183,131 @@ fromAfterToPointedJFine :
   fromPointedJFine (toPointedJFine state) ≡ state
 fromAfterToPointedJFine (coarse , fine) =
   cong₂ _,_ (markerAfterChannel coarse) (packAfterUnpackJFine fine)
+
+
+
+------------------------------------------------------------------------
+-- FULL POINTED-SHEET ISOMORPHISM, not just 10 coarse marker mapping.
+-- The source Sheet3 and PhaseFineTable9 use differently named trit types,
+-- so give an explicit coordinate codec instead of assuming definitional
+-- equality. D4 sheet actions can then be transported through this chart,
+-- but source C3^2 translations remain an independent action.
+------------------------------------------------------------------------
+
+toKernelTrit : Base.TriTruth → Triadic.KernelTrit
+toKernelTrit Base.tri-low = Triadic.negativeTrit
+toKernelTrit Base.tri-mid = Triadic.zeroTrit
+toKernelTrit Base.tri-high = Triadic.positiveTrit
+
+fromKernelTrit : Triadic.KernelTrit → Base.TriTruth
+fromKernelTrit Triadic.negativeTrit = Base.tri-low
+fromKernelTrit Triadic.zeroTrit = Base.tri-mid
+fromKernelTrit Triadic.positiveTrit = Base.tri-high
+
+baseAfterKernel : (t : Base.TriTruth) → fromKernelTrit (toKernelTrit t) ≡ t
+baseAfterKernel Base.tri-low = refl
+baseAfterKernel Base.tri-mid = refl
+baseAfterKernel Base.tri-high = refl
+
+kernelAfterBase : (t : Triadic.KernelTrit) → toKernelTrit (fromKernelTrit t) ≡ t
+kernelAfterBase Triadic.negativeTrit = refl
+kernelAfterBase Triadic.zeroTrit = refl
+kernelAfterBase Triadic.positiveTrit = refl
+
+toLiteralSheet : Fine.PhaseFineTable9 → Sheet.Sheet3
+toLiteralSheet (Fine.phaseFineTable9 a b c d e f g h i) =
+  Sheet.sheet3
+    (toKernelTrit a) (toKernelTrit b) (toKernelTrit c)
+    (toKernelTrit d) (toKernelTrit e) (toKernelTrit f)
+    (toKernelTrit g) (toKernelTrit h) (toKernelTrit i)
+
+fromLiteralSheet : Sheet.Sheet3 → Fine.PhaseFineTable9
+fromLiteralSheet (Sheet.sheet3 a b c d e f g h i) =
+  Fine.phaseFineTable9
+    (fromKernelTrit a) (fromKernelTrit b) (fromKernelTrit c)
+    (fromKernelTrit d) (fromKernelTrit e) (fromKernelTrit f)
+    (fromKernelTrit g) (fromKernelTrit h) (fromKernelTrit i)
+
+fromAfterToLiteralSheet :
+  (sheet : Fine.PhaseFineTable9) →
+  fromLiteralSheet (toLiteralSheet sheet) ≡ sheet
+fromAfterToLiteralSheet (Fine.phaseFineTable9 a b c d e f g h i)
+  rewrite baseAfterKernel a | baseAfterKernel b | baseAfterKernel c
+        | baseAfterKernel d | baseAfterKernel e | baseAfterKernel f
+        | baseAfterKernel g | baseAfterKernel h | baseAfterKernel i = refl
+
+toAfterFromLiteralSheet :
+  (sheet : Sheet.Sheet3) →
+  toLiteralSheet (fromLiteralSheet sheet) ≡ sheet
+toAfterFromLiteralSheet (Sheet.sheet3 a b c d e f g h i)
+  rewrite kernelAfterBase a | kernelAfterBase b | kernelAfterBase c
+        | kernelAfterBase d | kernelAfterBase e | kernelAfterBase f
+        | kernelAfterBase g | kernelAfterBase h | kernelAfterBase i = refl
+
+fineFromTable : Fine.PhaseFineTable9 → Harmonic.FineFrequency
+fineFromTable table = Fine.encodeTritDigits (Fine.digitsFromTable table)
+
+tableFromFine : Harmonic.FineFrequency → Fine.PhaseFineTable9
+tableFromFine fine = Fine.tableFromDigits (Fine.decodeTritDigits fine)
+
+tableAfterFineFromTable :
+  (table : Fine.PhaseFineTable9) →
+  tableFromFine (fineFromTable table) ≡ table
+tableAfterFineFromTable table =
+  trans
+    (cong Fine.tableFromDigits
+      (Fine.decodeAfterEncodeTritDigits (Fine.digitsFromTable table)))
+    (Fine.tableAfterDigits table)
+
+fineAfterTableFromFine :
+  (fine : Harmonic.FineFrequency) →
+  fineFromTable (tableFromFine fine) ≡ fine
+fineAfterTableFromFine fine =
+  trans
+    (cong Fine.encodeTritDigits
+      (Fine.digitsAfterTable (Fine.decodeTritDigits fine)))
+    (Fine.encodeAfterDecodeTritDigits fine)
+
+toActualPointedSheet :
+  Harmonic.ElementaryHarmonicChannel → Pointed.PointedTernarySheet
+toActualPointedSheet (coarse , fine) =
+  toPointedMarker coarse , toLiteralSheet (tableFromFine fine)
+
+fromActualPointedSheet :
+  Pointed.PointedTernarySheet → Harmonic.ElementaryHarmonicChannel
+fromActualPointedSheet (marker , sheet) =
+  fromPointedMarker marker , fineFromTable (fromLiteralSheet sheet)
+
+fromAfterToActualPointedSheet :
+  (state : Harmonic.ElementaryHarmonicChannel) →
+  fromActualPointedSheet (toActualPointedSheet state) ≡ state
+fromAfterToActualPointedSheet (coarse , fine) =
+  cong₂ _,_
+    (markerAfterChannel coarse)
+    (trans
+      (cong fineFromTable
+        (fromAfterToLiteralSheet (tableFromFine fine)))
+      (fineAfterTableFromFine fine))
+
+toAfterFromActualPointedSheet :
+  (state : Pointed.PointedTernarySheet) →
+  toActualPointedSheet (fromActualPointedSheet state) ≡ state
+toAfterFromActualPointedSheet (marker , sheet) =
+  cong₂ _,_
+    (channelAfterMarker marker)
+    (trans
+      (cong toLiteralSheet
+        (tableAfterFineFromTable (fromLiteralSheet sheet)))
+      (toAfterFromLiteralSheet sheet))
+
+-- A transported D4 action exists by conjugating the existing Pointed
+-- action with the exact codec; it does NOT imply the new C5 rotation
+-- is physically or canonically part of the original square symmetry.
+transportedQuarterTurn :
+  Harmonic.ElementaryHarmonicChannel →
+  Harmonic.ElementaryHarmonicChannel
+transportedQuarterTurn state =
+  fromActualPointedSheet (Pointed.rotatePointedQuarter (toActualPointedSheet state))
 
 ------------------------------------------------------------------------
 -- 79 is 3^4 - 2.  The F81 inverse theorem is a FINITE-FIELD result
