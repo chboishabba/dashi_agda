@@ -40,6 +40,7 @@ from iit_f81_f9_quadratic_tower_audit import audit as f81_same_tower_audit
 from iit_jfine_four_one_four_s3_zeta_audit import audit as jfine_s3_audit
 from iit_jfine_d4_s3_mixed_character_audit import audit as jfine_d4_s3_mixed_audit
 from iit_jfine_heisenberg_four_pair_audit import audit as heisenberg_four_pair_audit
+from iit_jfine_d4_symplectic_obstruction_audit import audit as d4_symplectic_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -279,6 +280,17 @@ def verify_numeric_results() -> dict:
     assert not h4["original_D4_mirror_preserves_chosen_cocycle"]
     assert not h4["source_monster_representation_intertwiner"]
 
+    d4_symplectic = d4_symplectic_audit()
+    assert d4_symplectic["all_rank_eight_forms_excluded"]
+    assert all(v["max_rank"] == 6 for v in d4_symplectic["multiplier_forms"].values())
+    assert d4_symplectic["minimal_extra_dimensions"] == 2
+    assert d4_symplectic["repaired_rank"] == 10
+    assert d4_symplectic["source_restriction_rank"] == 6
+    assert d4_symplectic["h6_sized_rank"] == 12
+    assert d4_symplectic["d4_acts_symplectically_on_repair"]
+    assert d4_symplectic["value_s3_reflection_cannot_lift_as_group_automorphism"]
+    assert not d4_symplectic["actual_monster_intertwiner"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -294,6 +306,7 @@ def verify_numeric_results() -> dict:
         "jfine_four_one_four_s3_zeta": jfine_s3,
         "jfine_d4_value_s3_mixed_character": mixed,
         "jfine_heisenberg_four_pair": h4,
+        "jfine_d4_symplectic_obstruction": d4_symplectic,
         "projective_f9_pointed80": projective,
         "projective_group_f9_720": pgl,
         "f81_norm_inversion": f81_norm,
