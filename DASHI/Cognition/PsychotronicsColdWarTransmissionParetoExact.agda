@@ -215,6 +215,39 @@ kitaygorodsky1974OriginalReprint = Source.mkNoDOISource
   "Original author's public first-person description of about 30 Pavlita demonstrations over three visits, recordings and separate physical recreations: trace iron powder makes a match respond to a magnet; hand-induced airflow rotates a brass vane; differential warming of an enclosed motor/vane by a human or lamp creates convection and stops/reverses motion at reportedly 2–3 C difference. Actual original experiment video/lab notebook unavailable; no water or insect experiment is reproduced by this text"
   Source.publicAttribution
 
+airForceWarsawPact1978Amended1980 : Source.AttributedSource
+airForceWarsawPact1978Amended1980 = Source.mkNoDOISource
+  "U.S. Air Force, Air Force Systems Command, Foreign Technology Division (institutional report preparer; no individual author credited on cover)"
+  "Paraphysics R&D—Warsaw Pact (U), DST-1810S-202-78"
+  "original report cover 30 March 1978 and revised Change 1 edition 4 February 1980; declassified 144-page scan public mirror; physically inspected PDF index 0,29,57; printed p.18 static electricity text belongs to 1980 Change 1 revision"
+  "1978 base / 1980 Change 1"
+  "https://rviewer.com/wp-content/uploads/2022/01/PARAPHYSICS_RD-WARSAW_PACT.pdf"
+  Source.governmentSource
+  "institutional US analytic account: reports poorly controlled/lightly documented experiments; amended p18 discusses Pavlita suspended motion and apparent magnetisation and says reported effects might partly be static electricity; printed p46 in base 1978 notes poor quantitative usefulness of popular press. Same institutional intelligence channel as earlier US reports, not an independent experiment or effectiveness demonstration"
+  Source.publicAttribution
+
+pavlita1975MonteCarlo : Source.AttributedSource
+pavlita1975MonteCarlo = Source.mkNoDOISource
+  "Robert Pavlita (original congress author)"
+  "Vertical Biomagnetic Field of Generator"
+  "Second International Congress on Psychotronic Research, Monte Carlo, 30 June–4 July 1975, attributed original paper at p.203 in later journal congress index; Martin Ebon 1983 reproduces translated summary of alleged 600 mm high × 60 mm wide cylindrical enclosure, wooden/glass rod and apparent nonmagnetic-object response; original full congress pages not read"
+  "1975 conference; 1977 index; 1983 interpretive quotation"
+  "https://www.imagomundi.biz/wp-content/uploads/2018/09/Psychotronik_1_Jahrgang_1977_Heft_34_optimized.pdf"
+  (Source.namedSourceKind "indexed original conference contribution via later source")
+  "exact original author/title/page and mediated geometry/claim. The quote from Ebon 1983 is secondary witness to a translation, not the original full congress paper or calibrated magnetic characterization, and cannot count as independent Pavlita demonstration"
+  Source.publicAttribution
+
+pavlitova1975MonteCarlo : Source.AttributedSource
+pavlitova1975MonteCarlo = Source.mkNoDOISource
+  "Jana Pavlitová-Zapadlová (original congress author, distinct from father Robert Pavlita)"
+  "Probe Controlled by Impulse from the Brain"
+  "Second International Congress on Psychotronic Research, Monte Carlo, 30 June–4 July 1975, later journal index p.206; Martin Ebon 1983 attributes a proposed human-induced magnetic polarity effect to this separate original author; full primary congress pages not inspected"
+  "1975 conference; 1977 index; 1983 interpretive quotation"
+  "https://www.imagomundi.biz/wp-content/uploads/2018/09/Psychotronik_1_Jahrgang_1977_Heft_34_optimized.pdf"
+  (Source.namedSourceKind "indexed original conference contribution via later source")
+  "the daughter authored an independent paper and hypothesis; shared family/apparatus is not independent corroboration, and claimed polarity is not a calibrated ferromagnetic field"
+  Source.publicAttribution
+
 historicalDocuments : List Source.AttributedSource
 historicalDocuments =
   wimmer1940 ∷ sievers1940 ∷ ostranderSchroeder1970 ∷
@@ -223,9 +256,11 @@ historicalDocuments =
   pragueJPRS1974 ∷ soucek2020 ∷ vasiliev1963English ∷
   clercaudioHistoricalQuote ∷ kholodnyi2017 ∷ kuchinov2021 ∷
   canner2021 ∷ mills2009 ∷ tressoldiStorm2024 ∷
-  kitaygorodsky1974OriginalReprint ∷ []
+  kitaygorodsky1974OriginalReprint ∷
+  airForceWarsawPact1978Amended1980 ∷
+  pavlita1975MonteCarlo ∷ pavlitova1975MonteCarlo ∷ []
 
-historicalDocumentsCount : Source.sourceCount historicalDocuments ≡ 17
+historicalDocumentsCount : Source.sourceCount historicalDocuments ≡ 20
 historicalDocumentsCount = refl
 
 ------------------------------------------------------------------------
@@ -321,6 +356,25 @@ reported1955FrenchCoinage = Investigation.investigative-claim-receipt
   Investigation.commonSourceDependent
   "a term of art, not proof that the underlying hypothesised energy exists"
   "Retrieve 1954 original and 1955 magazine issue, then Rejdak's exact first use"
+  Investigation.supportsBoundedClaim
+  true false false
+
+------------------------------------------------------------------------
+-- VERSIONED SAME-OBJECT HISTORICAL REPORT + SEPARATE FAMILY AUTHORS
+------------------------------------------------------------------------
+
+amendedUSReportStaticHypothesis : Investigation.InvestigativeClaimReceipt
+amendedUSReportStaticHypothesis = Investigation.investigative-claim-receipt
+  "U.S. Air Force Foreign Technology Division reports poorly controlled Pavlita-related motion and suggests static electricity as a possible conventional contributor"
+  "DST-1810S-202-78-Chg 1, 4 February 1980, printed p.18, PDF index 29, Pavlita paragraph"
+  "U.S. Air Force Systems Command Foreign Technology Division, amendment of 1978 original report"
+  "https://rviewer.com/wp-content/uploads/2022/01/PARAPHYSICS_RD-WARSAW_PACT.pdf"
+  Investigation.primaryCarrier
+  Investigation.inspectedAndClaimLocated
+  "direct institution-authored analytical passage, not a new Pavlita trial; its page is stamped Change 1 4 February 1980, so the statement must not be assigned to the base 30 March 1978 version without comparison"
+  Investigation.commonSourceDependent
+  "same report identifier DST-1810S-202-78, later 1980 version of print page 18"
+  "recover the original 1978 version of page 18 if a strict before/after version-diff is needed; original Pavlita tests/notes not obtained"
   Investigation.supportsBoundedClaim
   true false false
 
