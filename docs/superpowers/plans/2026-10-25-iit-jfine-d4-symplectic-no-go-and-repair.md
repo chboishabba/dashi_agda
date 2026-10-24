@@ -134,3 +134,10 @@ This is a decisive **group nonisomorphism** even though the underlying pointed c
 | New source-D4-stable H3 × C3² | 6561 | **18 × degree 27** | 19683 |
 
 The two models have the same **6561** linear-character count and the same order; neither matches the other's nonlinear representation spectrum. This is a stronger acceptance discriminator than 19683 or zeta-sector dimension coincidences. The repaired H6 same-model symplectic map is now finite-verified, but **actual source Monster H6 subgroup attachment and the actual Monster W/intertwiner remain unproved**. Kernel formalisation of this exact chart and central correction is the next Agda-specific cut.
+
+
+## Source-written Agda necessary-condition elimination (proof-assistant boundary)
+
+Added `DASHI/Biology/IITJFineD4SymplecticMultiplicityObstructionExact.agda` and imported it from the existing IIT integration aggregate. It **reuses** the pre-existing `TernaryMonsterSymmetryCandidateExact.D4IrrepKind` and `rawNineMultiplicity` owners (it does not introduce competing D4 species). The new typed source shell records `2A1+B1+B2+2E`.
+
+The concrete theorem `noCompatibleNecessaryMultiplicity` eliminates all four central-multiplier cases using Agda's impossible patterns: `EvenMultiplicity 1` is empty in the untwisted case; `MatchedMultiplicity 2 0` or `MatchedMultiplicity 2 1` is empty in the three nontrivial cases. These are nonvacuous, source-irrep-indexed **necessary conditions**. The module explicitly does **not** claim to have kernel-derived the representation-theoretic implication from a full-rank alternating matrix to those conditions. The universal semisimple nondegenerate χ-valued pairing lemma and finite matrix interpretation remain Agda proof obligations. New Agda module and aggregate import are source-written but **not typechecked** in the present runtime; the exhaustive independent Python invariant-form matrix calculation remains the primary locally executed certificate.
