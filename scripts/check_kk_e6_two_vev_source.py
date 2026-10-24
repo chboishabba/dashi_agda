@@ -17,7 +17,15 @@ assert 16*3+36 == 4*3+12*4+24 == 84
 # If they are literal dynamical scalar multiplets: 108-12=96 uneaten.
 assert 2*27*2==108 and 16*3+108==4*3+12*4+96==156
 print("PASS distinct physical field choices: selected 2x(3x3 complex) =84 total modes; full 2x(E6 27 complex) =156")
-print("PASS E6 two-VEV DOF: 16 massless 5D vector + 36 scalar = 4 massless vector + 12 massive 5D vector + 24 real Higgs = 84")
+assert 24*3+36 == 8*3+4*3+12*4+24 ==108
+assert 24*3+108 ==8*3+4*3+12*4+96 ==180
+# If full E6 (78) is physically gauged, the E6->SU3^3 coset has
+# 54 more generators; one published E6->trinification route needs a
+# REAL 650 Higgs, which is an entirely DIFFERENT action/determinant.
+assert 78-24==54 and 78-12==66
+assert 78*3+650+108 ==12*3+66*4+(650+108-66)==992
+print("PASS source-specific branches: LR 3x3=84, SU3^3 3x3=108, SU3^3 full27=180, E6+650+2x27=992 total free d.o.f.")
+print("LIMIT full-E6 650 is one published proposed Higgs option, not the same PR1106 source")
 Z=mp.zeta(5);b=mp.mpf('1e-24')/mp.mpf('0.1973269804e-15')
 def f(z):
     if z==0:return mp.mpf(1)
