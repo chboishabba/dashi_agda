@@ -206,5 +206,6 @@
     "formal_model": "DASHI hypothesis-design and model-comparison work, not claimed original Timmermann/Sanders mathematics",
     "generic_Markov_trace": "standard stochastic identities, not unique evidence for conscious-agent metaphysics"
   },
-  "tests_not_yet_run": true
+  "empirical_predictions_tested": false,
+  "synthetic_contract_tests": "code-validated separately; not evidence of model fit"
 }
