@@ -213,3 +213,15 @@ The earlier shorthand "only flat-GR / 2D toy worldsheet" **undercounted existing
 - `DASHI/Moonshine/VertexOperatorAlgebraCore.agda` and `GradedVertexOperatorAlgebraBoundary.agda` already distinguish full VOA vacuum, Virasoro/Jacobi locality/modes from finite graded traces and modular character arithmetic. The model in `TrivialRationalGradedVertexAlgebraExact.agda` is genuinely a trivial VOA example, not the full Monster VOA or a worldsheet quantum string model.
 
 **Corrected phase accounting:** H3 classical GR has an actual *nonflat finite* source-matched benchmark and a separate flat continuum-benchmark in Lean #68; the frontier is now the continuum/same-action/sourced nonflat physical solution, NOT elementary nonflat finite-model existence. H3 strings has a concrete positive-tension Nambu membrane and typed 10D CY dimensional/fibre reduction ladder; the frontier is the **selected 2D string worldsheet**, worldsheet constraints, quantum conformal anomaly/BRST, exact selected physical compactification and matching of string spectrum/low-energy effective stress. This distinction is source-rooted: the membrane and CY records must not be cited as already discharging full string theory.
+
+
+### Concrete Agda cross-owner theorem imports (no abstraction factory)
+
+`DASHI/Unified/HyperfabricGRStringExistingDonorWeldExact.agda` is now SOURCE-WRITTEN as the one thin compile-facing integration owner. It imports canonical `master` modules and re-exports only:
+- actual `NonconstantWarpedLorentzianModel.computedPositiveCurvature`;
+- actual 16-component `DiscreteWarpedEinsteinMatterModel.computedEinsteinEqualsMatterStress`;
+- actual nonzero `DiscreteWarpedEinsteinMatterModel.computedMatterSourceNonzero`;
+- actual `GRQFTNambuGotoSurfaceActionExact.fixtureDomainWallEquationOfState`;
+- actual `CalabiYau369CompactFibreBridge.canonicalDimension369` spacetime dimension `=10`.
+
+This is an **already-owned finite theorem connection**, not a proof of continuum GR, Einstein/QFT same-action physics, or a 2D string. The new file has not received an Agda exact-head kernel receipt in this environment; use the repository-pinned Agda runner on the new owner as the acceptance gate. No selected Monster 729 action or smooth manifold data is manufactured by these imports.
