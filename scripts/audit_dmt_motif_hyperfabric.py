@@ -161,6 +161,9 @@ def classify_edge(edge, sites):
 
 
 def candidate_reopening(hyperfabric, site_id):
+    # A dry-run must also validate the exact currently admitted source status:
+    # it may not be used with a forged report, permission or cohort object.
+    validate(hyperfabric, load(WORLD), load(EROWID))
     sites = {s["id"]: s for s in hyperfabric["sites"]}
     if site_id not in sites:
         raise ValueError("Unknown fibre site")
