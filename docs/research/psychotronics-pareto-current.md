@@ -1,5 +1,8 @@
 # Psychotronics / pictured-device Pareto frontier — canonical current status
 
+**Audit companion:** [21-row scientific source/claim/experiment matrix](psychotronics-physics-crosspollination-source-matrix-20261024.csv), kept distinct from the original 51-row *historical* source corpus. Its mechanism and scientist fibres are reference/provenance edges, **not 21 new experiments or 21 independent historical witnesses**.
+
+
 ## PR #1242 repo-wide source/mechanism reassessment — Amy, antigravity, missing scientists (24 October 2026)
 
 **Canonical new deliverable:** [Amy Eskridge × missing-scientist science × Field Loom crosswalk](psychotronics-missing-scientists-physics-crosswalk-20261024.md). This audits the **existing repository owners**, the 2018 HAL5 35-page original deck, original Li–Torr 1991/1992 theory, Podkletnov–Nieminen 1992 reported weight-loss experiment, NASA R. H. Eskridge/Nelson/Schoenfeld **2021 POAMS preliminary** study, 2008 rotating-superconductor null, and 2024 nN-range stationary electromagnetic-force null, alongside real diamagnetic and 2025 microscale acoustic levitation. It also crosswalks Loureiro (plasma modelling), Chavez (diagnostic inverse modelling), LeBlanc (sensor-control/interlocks), Reza (materials), Maiwald (spectroscopy and qualification), other science owners, and McCasland's bounded integration roles. Original authorship, historical association, ordinary mechanism, alleged anomaly, actual observation, and uninspected source each remain separate.
