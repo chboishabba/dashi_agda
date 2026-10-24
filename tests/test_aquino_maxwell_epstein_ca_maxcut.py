@@ -646,3 +646,35 @@ def test_wyden_march2026_assertions_are_not_adjudicated_or_film_custody():
         "EFTA00977823",
     ):
         assert token in source
+
+
+def test_exact_doj_efta01600824_transcript_locator_paid_but_sha_open():
+    source = OWNER.read_text()
+    original = PRIOR_FILM_OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    for token in (
+        "bannonOriginalReelIndex = located-video-transcript-index",
+        "EFTA01600824.mov",
+        "dojReelIdentifierLocated = refl",
+        "publishedTimecodedTranscriptLocated = refl",
+        "dojReelHashStillUncomputed = refl",
+        "transcriptWithoutReviewNotCertified = refl",
+        "originalReelIdDoesNotPay2019ContractJoin = refl",
+    ):
+        assert token in original
+    for token in (
+        "bannonIdentifiedDOJReelIndex = BannonBridge.bannonOriginalReelIndex",
+        "bannonDOJIdentifierNowLocated = refl",
+        "bannonTimecodedTranscriptNowLocated = refl",
+        "bannonDOJHashStillUnverified = refl",
+    ):
+        assert token in source
+    for token in (
+        "### Lightweight film provenance: real DOJ identifier",
+        "1,753",
+        "EFTA01600824.mov",
+        "sha256: null",
+        "scripts/hash_media_receipt.py",
+        "third-party ASR",
+    ):
+        assert token in roadmap
