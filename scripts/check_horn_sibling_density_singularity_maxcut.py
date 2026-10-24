@@ -48,9 +48,9 @@ def coefficients(gaps):
 for small in combinations(range(3), 2):
     gaps = [F(1, 4) if k in small else F(2) for k in range(3)]
     assert envelope(gaps, [F(0)] * 3) == 1
-# Negative control: only one short sibling does NOT suffice.
+# PRODUCT-ONLY depth-three negative control: a single short sibling can\n# still certify rejection via the EXISTING shorter-depth linear sibling bound.\n# See check_horn_optimal_sibling_stopping_tail.py; no blanket one-short no-go.
 assert envelope([F(1, 4), F(2), F(2)], [F(0)] * 3) == 4
-print('PASS source-conditional 3-stage TWO small-sibling gap <=1/4 root <=1; 3 placements')
+print('PASS product-only 3-stage TWO small siblings; shorter one-sibling stops may be sharper')
 
 # Sparse density, arbitrary placement: >=2m of first 3m gaps <=1/4
 # forces flat d(root)<=2^(1-m), independent of selected leaf length.
