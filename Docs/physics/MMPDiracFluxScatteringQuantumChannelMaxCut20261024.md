@@ -33,7 +33,7 @@ These numbers are geometrized/dimensionless; they are NOT milliseconds, photon t
 
 ## Numeric results and controls
 
-**Local executed source-equivalent scripts (GitHub exact-head runner not claimed):**
+**Local executed source-equivalent scripts (GitHub exact-head runner not claimed; results below use local-mass flux eigenmodes at the finite RN endpoints):**
 - `scripts/check_mmp_dirac_flux_scattering_20261024.py`: effective metric read from shared shooting owner with optional `with_profile=True`; analytically validated finite constant-mass Dirac square barrier above/below threshold; exact V=0 massless reflectionlessness; J-unitary transfer / R+T=1; open U1 phase covariance; cutoff values R_out=60,120,240.
 - `scripts/check_mmp_dirac_scattering_precision_20261024.py`: cutoff R_out=120,240,480 vs step width 0.30,0.15,0.075 at E=0.55,n=2. **The transfer discretization converges** (T≈0.9987228783,0.9987229111,0.9987229198); separate RN exterior truncation does NOT converge to infinity for all low energies.
 
@@ -41,13 +41,13 @@ At selected `R_out=240` and conserved-energy E measured with asymptotic RN clock
 
 | E | LLL n=0 T | massive n=1 T | massive n=2 T | selected n1/n2 mean successful η | ideal postselected entanglement fidelity |
 |---|---:|---:|---:|---:|---:|
-| 0.20 | 1 | 0.997363 | 0.00002778 | 0.498695 | 0.505277 |
-| 0.55 | 1 | 0.999814 | 0.998723 | 0.999268 | 0.99999993 |
-| 1.00 | 1 | 0.999883 | 0.999540 | 0.999711 | ~1.00000000 |
+| 0.20 | 1 | 0.99986528 | 0.000034463 | 0.49994987 | 0.50587071 |
+| 0.55 | 1 | 0.999999994 | 0.999999997 | 0.999999995 | ~1.00000000 |
+| 1.00 | 1 | 0.9999999996 | 0.99999999999 | 0.9999999998 | ~1.00000000 |
 
-The **selected two-mode channel** assumes coherent preparation of two *different angular modes*, K=diag(t1,t2), and an explicit erasure flag. Its successful transmission is input-dependent if |t1|≠|t2|, so it is not an input-independent ideal erasure channel. Completing with Kraus operators from sqrt(I−K†K) makes the channel CPTP. In particular η≈0.4987 at E=.2 is **NOT** a high-fidelity arbitrary qubit link: the two modes have nearly maximal selective attenuation and the conditional normalized entanglement fidelity is only ≈0.5053.
+The **selected two-mode channel** assumes coherent preparation of two *different angular modes*, K=diag(t1,t2), and an explicit erasure flag. Its successful transmission is input-dependent if |t1|≠|t2|, so it is not an input-independent ideal erasure channel. Completing with Kraus operators from sqrt(I−K†K) makes the channel CPTP. In particular η≈0.49995 at E=.2 is **NOT** a high-fidelity arbitrary qubit link: the two modes have nearly maximal selective attenuation and the conditional normalized entanglement fidelity is only ≈0.50587.
 
-**Source of uncertainty and scope:** Exterior cutoff sensitivity remains tangible at E=.2: n1 T=0.986447 (R=120), 0.997363 (R=240), 0.999743 (R=480). n2 T≈(2.45,2.78,3.39)×10^-5. Do NOT extrapolate any displayed value to infinity without a Coulomb-tail/long-range scattering boundary prescription and quantified numerical limit. Optical profile interpolation, finite KK truncation, q/L, state, assumed renormalization, and original geometry sourcing introduce independent, larger model uncertainty.
+**Source of uncertainty and scope:** With flux-normalized local-mass outgoing/incoming lead spinors, E=.20 n1 T=0.99982692 (R=120), 0.99986528 (R=240), 0.99985399 (R=480); n2 T≈(3.4642,3.4463,3.4478)×10^-5. Earlier preliminary values (n1 .986447/.997363/.999743 and n2 2.45/2.78/3.39×10^-5) used **inappropriately massless spinors at the finite-radius cutoff**, so must be regarded as a boundary-mismatch diagnostic, NOT the primary physical approximation. Do NOT extrapolate any displayed value to infinity without a Coulomb-tail/long-range scattering boundary prescription and quantified numerical limit. Optical profile interpolation, finite KK truncation, q/L, state, assumed renormalization, and original geometry sourcing introduce independent, larger model uncertainty.
 
 **Signal-front causality:** the continuum Dirac PDE is first-order symmetric-hyperbolic, principal speeds ±1 in optical z. A local mass perturbation does not alter its principal characteristics; therefore a retarded disturbance in the reduced system cannot propagate outside its optical light cone. An energy-resolved scattering coefficient or group/Wigner delay is NOT a speed-of-light or FTL measurement. The result does not establish no chronological pathologies in an unconstructed same-universe geometry.
 
@@ -69,3 +69,10 @@ python3 scripts/check_mmp_teleportation_channel_bridge_20261024.py
 ```
 
 Locally equivalent tests PASS. Until exact GitHub runner output appears, they are **source-written acceptance commands**, not GitHub CI certification.
+
+
+### Boundary-condition correction and residual Jost obligation (documented supersession)
+
+The preliminary finite-radius scattering calculation used *massless* `σx` eigenvectors at the numerical boundary, although the spherically reduced massive term there remains `V_n=N(R) sqrt(n(n+|q|))/R ≠0`. That mismatch generates an artificial reflection contribution, particularly at lower E and smaller R. The corrected finite-radius boundary is the locally propagating massive Dirac eigenbasis with `k=sqrt(E²−V_n(R)²)`, flux-normalized spinors `(sqrt((E+V)/(2k)),±sqrt((E−V)/(2k)))` satisfying `u±†σx u±=±1`. Choose n>0 only when E>|V_n(R)|; n=0 keeps exact massless basis. The corrected matrix `B=U_out^{-1} M U_in` retains flux conservation. Exact constant-mass barrier and free massless tests deliberately use the correct massless *exterior* lead, as they must.
+
+This correction is **not** the exact RN infinity solution, since `V_n(r)` still changes beyond the finite matching boundary. Replacing its tail by a constant-mass lead is an adiabatic finite-radius approximation. At E=.55,n2,R=240, midpoint step .30/.15/.075 yields corrected T=0.9999999968138/0.9999999967746/0.9999999967638; residual changes mostly at high precision. The range of cutoff values at E=.20 is now small but NONZERO, so the infinite-radius analytic Jost problem and full physical return-path S-matrix remain open. Finite-radius success near unity is not a validated independent physical-capacity measurement.
