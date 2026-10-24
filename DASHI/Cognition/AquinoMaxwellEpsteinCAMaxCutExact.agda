@@ -13,9 +13,14 @@ import DASHI.Law.EvidenceProvenanceDependencyDagExact as Provenance
 import DASHI.Core.ProvenanceClosureIndependenceExact as RootClosure
 import DASHI.Core.AffectedDependencyClosureExact as Affected
 import DASHI.Core.SourceAcquisitionGeometryExact as Acquisition
-import DASHI.Core.ITIRInvestigationAcquisitionParetoExact as ITIR
-import DASHI.Core.ITIRInvestigationWorkbenchProjectionExact as Workbench
 import DASHI.Core.MultipartSameObjectReconstructionExact as Multipart
+import DASHI.Culture.MissingDeceasedCommonObjectProgrammeDiscriminatorExact as Common
+import DASHI.Culture.MissingDeceasedCommonProgrammePromotionParetoExact as ProgrammeFrontier
+import DASHI.Culture.MissingDeceasedTwentyScientistRound48AntiEchoChamberMethodologyExact as AntiEcho
+import DASHI.Core.EventTimeCapabilityAlignmentBidiExact as EventTime
+import DASHI.Core.CapabilityFragilityConfoundersBidiExact as Fragility
+import DASHI.Culture.MissingDeceasedCustodyEventTimeMatrixExact as Custody
+import DASHI.Cognition.TrumpMarALagoBannonBridgeExact as BannonBridge
 
 ------------------------------------------------------------------------
 -- AQUINO / MAXWELL / EPSTEIN / CA: EXISTING-CARRIER ATTRIBUTION MAX-CUT
@@ -241,12 +246,6 @@ independentRootsAuthority = RootClosure.canonicalProvenanceClosureBoundary
 acquisitionStagesAuthority : Acquisition.SourceAcquisitionBoundary
 acquisitionStagesAuthority = Acquisition.canonicalSourceAcquisitionBoundary
 
-investigationParetoAuthority : ITIR.InvestigationAcquisitionBoundary
-investigationParetoAuthority = ITIR.canonicalInvestigationAcquisitionBoundary
-
-investigationUIAuthority : Workbench.InvestigationWorkbenchBoundary
-investigationUIAuthority = Workbench.canonicalInvestigationWorkbenchBoundary
-
 multipartIdentityAuthority : Multipart.MultipartReconstructionBoundary
 multipartIdentityAuthority = Multipart.canonicalMultipartReconstructionBoundary
 
@@ -391,41 +390,6 @@ canonicalCaseCuts =
   cambridgeLegalEntityCut ∷ sclTransferCut ∷ bannonWorkProductCut ∷ promisExecutableCut
   ∷ aquinoHistoricalTransferCut ∷ commandHierarchyCut ∷ []
 
--- The only instantiated Pareto routes are proposals about where to search;
--- numeric axes are scenario/routing calibration, NEVER truth/guilt scores.
--- Keep the mixed five-dimensional ITIR order, not a scalar leaderboard.
-sclCAOriginalContractRoute : ITIR.InvestigationCandidate
-sclCAOriginalContractRoute = ITIR.investigation-candidate
-  "case:SCL-CA-executed-contract" "obligation:direct-transfer"
-  "route:company-registries-parliamentary-production" "access:lawful-public"
-  "genealogy:corporate-original-not-Wylie-reprint" "axes:illustrative-calibration"
-  5 5 4 5 3
-  true refl false refl false refl
-
-bannonActualFilmRoute : ITIR.InvestigationCandidate
-bannonActualFilmRoute = ITIR.investigation-candidate
-  "case:Bannon-Epstein-work-product" "obligation:same-work-product"
-  "route:DOJ-Bates-raw-attachments" "access:lawful-public-redacted"
-  "genealogy:direct-correspondence-distinct-from-media-recaps" "axes:illustrative-calibration"
-  5 4 5 4 3
-  true refl false refl false refl
-
-candidateRoutes : List ITIR.InvestigationCandidate
-candidateRoutes = sclCAOriginalContractRoute ∷ bannonActualFilmRoute ∷ []
-
-caseFiveAxisAuthority : ITIR.DirectMixedParetoView
-caseFiveAxisAuthority = ITIR.investigationParetoView
-
-caseMissingSourceIsNotAbsence :
-  ITIR.notLocatedMeansKnownAbsent ITIR.canonicalInvestigationAcquisitionBoundary
-    ≡ false
-caseMissingSourceIsNotAbsence = refl
-
-caseUIIsNotEvidence :
-  Workbench.uiMayConstructAcquisitionResult
-    Workbench.canonicalInvestigationWorkbenchBoundary ≡ false
-caseUIIsNotEvidence = refl
-
 caseReprintsNotIndependent :
   Provenance.multipleReceiptsAutomaticallyIndependent
     Provenance.canonicalProvenanceDagBoundary ≡ false
@@ -455,3 +419,183 @@ eventTimeOverlapDoesNotPayCommand ()
 
 analogyDoesNotPayProgramme : TechnicalAnalogyImpliesSameProgramme → ⊥
 analogyDoesNotPayProgramme ()
+
+
+------------------------------------------------------------------------
+-- MISSING/DECEASED-SCIENTIST INVESTIGATION SPINE (PRIMARY RESEARCH INDEX)
+--
+-- These are *methodological* imports, not evidence that the scientists'
+-- events share a cause with the historical Epstein network. H0/H1/H2/H3
+-- describe claim promotion relative to the exact tested question, not a
+-- globally transferable ordinal truth or culpability scale.
+------------------------------------------------------------------------
+
+-- The original programme-discriminator owns the essential negative gates.
+caseCommonObjectMethodDoesNotPayCoordination :
+  Common.programmeIdentityPaysTargeting ≡ false
+caseCommonObjectMethodDoesNotPayCoordination = refl
+
+caseTechnicalAdjacencyDoesNotPaySameObject :
+  Common.technicalAdjacencyPaysCommonProgramme ≡ false
+caseTechnicalAdjacencyDoesNotPaySameObject = refl
+
+caseSourceRepetitionDoesNotPayIndependence :
+  Common.sourceRepetitionPaysIndependentCorroboration ≡ false
+caseSourceRepetitionDoesNotPayIndependence = refl
+
+caseRequiresActualOperationalEvidence :
+  Common.coordinatedTargetingRequiresOperationalEvidence ≡ true
+caseRequiresActualOperationalEvidence = refl
+
+-- Case-local status: the SCL/CA firm relationship and Bannon media contact
+-- are real *bounded* bridges under their existing owner. This is NOT a
+-- universal common-programme inference joining Aquino, the Maxwells, etc.
+bannonFilmContactPriorOwner : BannonBridge.BridgeReceipt
+bannonFilmContactPriorOwner = BannonBridge.bannonMediaRehabReceipt
+
+bannonEpsteinContactLocatedInOwner :
+  BannonBridge.relationshipOrInstitutionalEdgePaid
+    bannonFilmContactPriorOwner ≡ true
+bannonEpsteinContactLocatedInOwner = refl
+
+bannonEpsteinToCommonProgrammeUnpaid :
+  BannonBridge.sameObjectWithOtherInvestigationEstablished
+    bannonFilmContactPriorOwner ≡ false
+bannonEpsteinToCommonProgrammeUnpaid = refl
+
+-- The programme hypothesis ladder remains indexed by scope. A pair-level
+-- filmed interview does not identify the alleged programme extending back
+-- through Robert Maxwell and Aquino and forward into political microtargeting.
+data InvestigationScope : Set where
+  boundedDirectMediaWork : InvestigationScope
+  boundedSCLCorporateContinuity : InvestigationScope
+  proposedCrossGenerationalIntelligenceCommand : InvestigationScope
+
+record ProgrammeHypothesisCut : Set where
+  constructor programme-hypothesis-cut
+  field
+    scope : InvestigationScope
+    donorHypothesis : Common.HypothesisClass
+    currentPaidRelationship : String
+    literalWholeProgrammeIdentifierPaid : Bool
+    operationalDirectionPaid : Bool
+    firstUnpaid : String
+open ProgrammeHypothesisCut public
+
+historicalCommonCommandCut : ProgrammeHypothesisCut
+historicalCommonCommandCut = programme-hypothesis-cut
+  proposedCrossGenerationalIntelligenceCommand Common.H1
+  "Bounded interpersonal, corporate and media relationships; these are different objects with different source roots"
+  false false
+  "One literal historical common-command/programme object, joined across relevant actors and event periods; then tasking/control records paying the claimed operation"
+
+-- Original programme-search distance/cost fields are *hypothesis-specific*.
+-- Do not invent scores or convert ranking into evidence; all paid flags are
+-- false for these speculative cross-network programme transfers.
+aquinoToSCLObjectSearch : ProgrammeFrontier.PromotionSearchCandidate
+aquinoToSCLObjectSearch = ProgrammeFrontier.promotion-search-candidate
+  "Michael Aquino / Paul Vallely MindWar authorship"
+  "SCL / Cambridge Analytica"
+  ProgrammeFrontier.institutionalWorkPackageSearch
+  "1980 authored proposal and later SCL informational-operations work, separately supported"
+  "Specific contemporaneous named implementation/manual/contract/product ID"
+  "Dated literal cross-institution same-work-package/implementation artefact"
+  "Tasking/control/operation receipt if a concrete common object is found"
+  1 1 false false
+
+maxwellPROMISNetworkSearch : ProgrammeFrontier.PromotionSearchCandidate
+maxwellPROMISNetworkSearch = ProgrammeFrontier.promotion-search-candidate
+  "Robert Maxwell alleged PROMIS distribution"
+  "Later Epstein-linked institutional infrastructure"
+  ProgrammeFrontier.programmeIdentifierSecondPersonSearch
+  "House/Bua contested official claims and named historical PROMIS software"
+  "Exact distributable PROMIS build, installation, procurement and customer ID"
+  "A verified same-build/custody/contract link; allegations of a backdoor do not establish an installation"
+  "Authenticated tasking/control bridge into Epstein-era activities"
+  2 2 false false
+
+caseProgrammeSearchFront : List ProgrammeFrontier.PromotionSearchCandidate
+caseProgrammeSearchFront =
+  aquinoToSCLObjectSearch ∷ maxwellPROMISNetworkSearch ∷ []
+
+-- Event-time employment/control is not inherited across the 1980/1990s
+-- to 2014--19 timeline. This receipt explicitly marks the unsourced
+-- later implementation of a *specific* method as temporally unresolved.
+aquinoLaterSCLControl : EventTime.EventTimeCapabilityReceipt
+aquinoLaterSCLControl = EventTime.event-time-capability-receipt
+  "Michael Aquino and named 1980 MindWar proposal"
+  "A specific SCL or Cambridge Analytica deployed influence system"
+  EventTime.unresolvedTime
+  "MindWar 1980; existing SCL/CA owner; no common implementation ID paid"
+  "Temporal proximity and shared vocabulary do not provide an event-time role, authorship or access receipt"
+
+bannonCAMethodLaterUse : EventTime.EventTimeCapabilityReceipt
+bannonCAMethodLaterUse = EventTime.event-time-capability-receipt
+  "Steve Bannon, Cambridge Analytica executive relationship"
+  "Actual methods and datasets in the 2018-2019 Epstein documentary/media work"
+  EventTime.unresolvedTime
+  "Existing BannonBridge and Cambridge Analytica source carriers"
+  "Earlier CA role and later media collaboration are supported independently; exact technique reuse, specific object and custody remain unlocated"
+
+eventTimeNonPromotion :
+  EventTime.historicalExpertiseImpliesEventTimePossession
+    EventTime.canonicalEventTimeAlignmentBoundary ≡ false
+eventTimeNonPromotion = refl
+
+-- Test ordinary competing explanations before construing hidden transfer.
+-- Licensing is not equivalent to Aquino intellectual lineage or a covert
+-- state command. A partially evidenced transition must retain its limits.
+sclIPLicensingAlternative : Fragility.FragilityReceipt
+sclIPLicensingAlternative = Fragility.fragility-receipt
+  "SCL / Cambridge Analytica operating and intellectual-property structures"
+  Fragility.contractOrIPTransition Fragility.partial
+  "Wylie DCMS attributed testimony (2018), FTC 2019 distinct finding"
+  "Ordinary corporate licensing/personnel/service arrangements can explain common techniques and coordination without requiring the specific MindWar paper; executed licence and identical deployed artefact are still acquisition debt"
+
+mundaneExplanationsFirst :
+  Fragility.mundaneTransitionMustBeTestedBeforeTargetingPromotion
+    Fragility.canonicalFragilityBoundary ≡ true
+mundaneExplanationsFirst = refl
+
+custodyNonPromotion :
+  Custody.organIsationalContinuityImpliesSameCarrierTransfer
+    Custody.canonicalMatrixBoundary ≡ false
+custodyNonPromotion = refl
+
+-- Claim-indexed anti-echo-chamber discipline. No new source sweep is
+-- asserted; missing contrary records and inaccessible originals are explicit.
+caseAdversarialSearch : AntiEcho.ClaimSearchBoundary
+caseAdversarialSearch = AntiEcho.claim-search-boundary
+  "Aquino-to-SCL specific method transfer"
+  "Original 1980 MindWar paper and original SCL/CA contract/manual"
+  "Ordinary SCL service/licensing origins and independently developed influence methods"
+  "Any dated contradiction of explicit programme or person identity"
+  "1980 author root distinct from 2014 corporate root and 2018 Wylie testimony"
+  "Public programme/contract records and counter-institutional explanations"
+  "Original cross-institution implementation and transfer records not inspected"
+  false true false
+
+caseHypothesisTest : AntiEcho.HypothesisTestBoundary
+caseHypothesisTest = AntiEcho.hypothesis-test-boundary
+  AntiEcho.oneCommonProgramme
+  "One verified pre-event work product identifying shared control, access and participants"
+  "Different executed methods; disjoint company roles; alternative origins"
+  "An original same-object common-programme receipt is missing"
+  "Inspect dated signed source-specific contracts, product versions and tasking"
+  "Search for contrary company provenance, mundane licensing and different programme identity"
+
+caseCounterEvidenceRequired :
+  AntiEcho.counterSourceSearchRequired ≡ true
+caseCounterEvidenceRequired = refl
+
+caseSearchAbsenceNotHistoricalAbsence :
+  AntiEcho.searchEngineNoHitDoesNotEqualHistoricalAbsence ≡ true
+caseSearchAbsenceNotHistoricalAbsence = refl
+
+caseAntiPanopticon :
+  AntiEcho.bystanderCollectionMustRemainOutOfScope ≡ true
+caseAntiPanopticon = refl
+
+caseNarrativeNotAuthority :
+  AntiEcho.narrativeSummaryCannotCreateSourceAuthority ≡ true
+caseNarrativeNotAuthority = refl
