@@ -72,10 +72,6 @@ def test_woogaroo_and_itir_prior_art_consumed_by_existing_owner():
             ROOT / "DASHI/Core/ProvenanceClosureIndependenceExact.agda",
         "DASHI.Core.SourceAcquisitionGeometryExact as Acquisition":
             ROOT / "DASHI/Core/SourceAcquisitionGeometryExact.agda",
-        "DASHI.Core.ITIRInvestigationAcquisitionParetoExact as ITIR":
-            ROOT / "DASHI/Core/ITIRInvestigationAcquisitionParetoExact.agda",
-        "DASHI.Core.ITIRInvestigationWorkbenchProjectionExact as Workbench":
-            ROOT / "DASHI/Core/ITIRInvestigationWorkbenchProjectionExact.agda",
         "DASHI.Core.MultipartSameObjectReconstructionExact as Multipart":
             ROOT / "DASHI/Core/MultipartSameObjectReconstructionExact.agda",
     }
@@ -94,7 +90,6 @@ def test_bidi_source_independence_and_acquisition_stages():
         "Provenance.independentProducerReceipt",
         "caseReprintsNotIndependent = refl",
         "caseMissingSourceIsNotAbsence = refl",
-        "caseUIIsNotEvidence = refl",
         "caseIdentityNeedsFullReconstruction = refl",
         "discoveryDoesNotPayInspection ()",
         "proceduralFindingDoesNotPaySubstantiveFact ()",
@@ -123,14 +118,71 @@ def test_per_consumer_witnesses_remain_unpaid_without_original_artefacts():
     assert source.count("false false false") >= 4
 
 
-def test_itir_pareto_are_candidacy_not_evidence():
+def test_missing_scientists_is_primary_programme_investigation_index():
     source = OWNER.read_text()
-    assert "sclCAOriginalContractRoute = ITIR.investigation-candidate" in source
-    assert "bannonActualFilmRoute = ITIR.investigation-candidate" in source
-    assert "caseFiveAxisAuthority = ITIR.investigationParetoView" in source
-    assert source.count("true refl false refl false refl") >= 2
-    assert "axes:illustrative-calibration" in source
-    assert "numeric axes are scenario/routing calibration" in source
+    owners = (
+        "DASHI.Culture.MissingDeceasedCommonObjectProgrammeDiscriminatorExact as Common",
+        "DASHI.Culture.MissingDeceasedCommonProgrammePromotionParetoExact as ProgrammeFrontier",
+        "DASHI.Culture.MissingDeceasedTwentyScientistRound48AntiEchoChamberMethodologyExact as AntiEcho",
+        "DASHI.Core.EventTimeCapabilityAlignmentBidiExact as EventTime",
+        "DASHI.Core.CapabilityFragilityConfoundersBidiExact as Fragility",
+        "DASHI.Culture.MissingDeceasedCustodyEventTimeMatrixExact as Custody",
+        "DASHI.Cognition.TrumpMarALagoBannonBridgeExact as BannonBridge",
+    )
+    for owner in owners:
+        assert f"import {owner}" in source
+    assert "import DASHI.Core.ITIRInvestigationAcquisitionParetoExact" not in source
+    assert "import DASHI.Core.ITIRInvestigationWorkbenchProjectionExact" not in source
+
+
+def test_scope_indexed_h0_to_h3_nonpromotion():
+    source = OWNER.read_text()
+    for token in (
+        "caseCommonObjectMethodDoesNotPayCoordination = refl",
+        "caseTechnicalAdjacencyDoesNotPaySameObject = refl",
+        "caseSourceRepetitionDoesNotPayIndependence = refl",
+        "caseRequiresActualOperationalEvidence = refl",
+        "BannonBridge.relationshipOrInstitutionalEdgePaid",
+        "bannonEpsteinContactLocatedInOwner = refl",
+        "bannonEpsteinToCommonProgrammeUnpaid = refl",
+        "historicalCommonCommandCut = programme-hypothesis-cut",
+        "proposedCrossGenerationalIntelligenceCommand Common.H1",
+        "false false",
+    ):
+        assert token in source
+
+
+def test_primary_programme_frontier_and_event_time_custody():
+    source = OWNER.read_text()
+    for token in (
+        "bannonEpsteinWorkProductSearch = ProgrammeFrontier.promotion-search-candidate",
+        "aquinoToSCLObjectSearch = ProgrammeFrontier.promotion-search-candidate",
+        "maxwellPROMISNetworkSearch = ProgrammeFrontier.promotion-search-candidate",
+        "caseProgrammeSearchFront : List ProgrammeFrontier.PromotionSearchCandidate",
+        "aquinoLaterSCLControl = EventTime.event-time-capability-receipt",
+        "bannonCAMethodLaterUse = EventTime.event-time-capability-receipt",
+        "EventTime.unresolvedTime",
+        "eventTimeNonPromotion = refl",
+        "sclIPLicensingAlternative = Fragility.fragility-receipt",
+        "mundaneExplanationsFirst = refl",
+        "custodyNonPromotion = refl",
+    ):
+        assert token in source
+
+
+def test_anti_echo_chamber_disconfirming_search_is_explicitly_unfinished():
+    source = OWNER.read_text()
+    for token in (
+        "caseAdversarialSearch = AntiEcho.claim-search-boundary",
+        "caseHypothesisTest = AntiEcho.hypothesis-test-boundary",
+        "AntiEcho.oneCommonProgramme",
+        "false true false",
+        "caseCounterEvidenceRequired = refl",
+        "caseSearchAbsenceNotHistoricalAbsence = refl",
+        "caseAntiPanopticon = refl",
+        "caseNarrativeNotAuthority = refl",
+    ):
+        assert token in source
 
 
 def test_constructive_shared_root_refutation_reuses_existing_proof():
