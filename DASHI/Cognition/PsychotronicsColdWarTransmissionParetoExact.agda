@@ -204,6 +204,17 @@ tressoldiStorm2024 = Source.mkDOISource
   "authors report small favourable anomalous-perception meta-analytic signal with methodological claims; NOT verification of Pavlita generator, Kirlian aura, 5D, or physical EM transfer"
   Source.publicAttribution
 
+kitaygorodsky1974OriginalReprint : Source.AttributedSource
+kitaygorodsky1974OriginalReprint = Source.mkNoDOISource
+  "Alexander I. Kitaygorodsky (original physicist and first-person experimenter); Nauka i Zhizn Russian magazine editor as 1974 republisher"
+  "Opyty s tarakanami [Experiments with Cockroaches]"
+  "Nauka i Zhizn no.10 (1974), magazine's native original-text archive; editorial explicitly identifies prior Czech Vesmír no.2 (1974) publication of Kitaygorodsky's article. Russian republication belongs to same author-root as Czech original, not separate replication"
+  "1974"
+  "https://www.nkj.ru/archive/articles/52740/"
+  Source.academicArticleSource
+  "Original author's public first-person description of about 30 Pavlita demonstrations over three visits, recordings and separate physical recreations: trace iron powder makes a match respond to a magnet; hand-induced airflow rotates a brass vane; differential warming of an enclosed motor/vane by a human or lamp creates convection and stops/reverses motion at reportedly 2–3 C difference. Actual original experiment video/lab notebook unavailable; no water or insect experiment is reproduced by this text"
+  Source.publicAttribution
+
 historicalDocuments : List Source.AttributedSource
 historicalDocuments =
   wimmer1940 ∷ sievers1940 ∷ ostranderSchroeder1970 ∷
@@ -211,9 +222,10 @@ historicalDocuments =
   pehekKylerFaust1976 ∷ kirkus1970 ∷
   pragueJPRS1974 ∷ soucek2020 ∷ vasiliev1963English ∷
   clercaudioHistoricalQuote ∷ kholodnyi2017 ∷ kuchinov2021 ∷
-  canner2021 ∷ mills2009 ∷ tressoldiStorm2024 ∷ []
+  canner2021 ∷ mills2009 ∷ tressoldiStorm2024 ∷
+  kitaygorodsky1974OriginalReprint ∷ []
 
-historicalDocumentsCount : Source.sourceCount historicalDocuments ≡ 16
+historicalDocumentsCount : Source.sourceCount historicalDocuments ≡ 17
 historicalDocumentsCount = refl
 
 ------------------------------------------------------------------------
@@ -278,7 +290,22 @@ reported1972SovietEvaluation = Investigation.investigative-claim-receipt
   "Kuchinov cites Kholodnyi; Kholodnyi quotes Azarov and names physicist Alexander Kitaygorodsky. Original 1972 notebook/circuit/film was NOT acquired."
   Investigation.commonSourceDependent
   "same reported 1972 visit, not the distinct 1985 ministerial Soviet-GDR requests"
-  "Acquire 1974 Vesmir Kitaygorodsky original and Azarov account, film and physical control descriptions"
+  "First-person Kitaygorodsky 1974 Russian magazine republication recovered separately in this owner, but original Czech pages and videos, Azarov 1972 logs and matching of every Pavlita apparatus remain outstanding"
+  Investigation.supportsBoundedClaim
+  true false false
+
+kitaygorodskyOwn1974PhysicalComparators : Investigation.InvestigativeClaimReceipt
+kitaygorodskyOwn1974PhysicalComparators = Investigation.investigative-claim-receipt
+  "Kitaygorodsky first-person 1974 report of conventional physical recreation of three classes of Pavlita demonstrations"
+  "Nauka i Zhizn no.10 1974 Russian republication of author-original Vesmír no.2 1974 essay, main body apparatus and repeat paragraphs"
+  "A. I. Kitaygorodsky; original experimenter and reporting author"
+  "https://www.nkj.ru/archive/articles/52740/"
+  Investigation.primaryCarrier
+  Investigation.inspectedAndClaimLocated
+  "Author recounts filming and ~30 demonstrations at three visits: iron-powder transfer to wood/match; airflow from hand gestures moving a brass wing; differential warmth / natural convection from human or lamp slowing reversing enclosed rotating vane. The approximate two-to-three-degree differential is HIS reported test, not independently measured in this review."
+  Investigation.sameAuthorDependent
+  "1974 Russian journal native archive; Czech first-publication issue 2 (1974) acknowledged explicitly in publisher introduction"
+  "Obtain original Czech page and independent original recording/lab logs to verify the measurements and matching of individual Pavlita apparatus; claimed insect/water phenomena not directly retested by the examples in this article"
   Investigation.supportsBoundedClaim
   true false false
 
