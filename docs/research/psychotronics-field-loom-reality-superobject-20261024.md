@@ -10,6 +10,8 @@
 
 **Not one physical force:** Maxwell electromagnetism, fluid mechanics, ultrasound, interfacial electrowetting, electrochemistry, gas-plasma kinetics and human perceptual reporting coexist but retain different validity ranges. Shared waveforms or a torus shape do not identify them with psychic fields, hidden dimensions or new energy sources.
 
+**Precise prior-art ownership:** the actual reactor/chemistry/plant chain belongs to `DASHI/Environment/PlasmaActivatedWaterSameObjectPrimarySourceExact.agda` and `DASHI/Environment/PlasmaActivatedWaterSameObjectSnowballExact.agda`; energetic performance stays in `DASHI/Environment/PlasmaActivatedWaterPrimaryProcessEnergySourceExact.agda` and isotope-N uptake in `DASHI/Environment/PlasmaActivatedWaterIsotopeMassBalanceSnowballFrontierExact.agda`. Plasma/MHD field validity regimes remain with `DASHI/Physics/Plasma/MHDMaxwellLorentzReductionBidiExact.agda`, Maxwell and optics with their original DASHI owners. Field Loom contributes a new systems proposal, **not evidence** that the named component studies were performed on the same physical machine, or that any paranormal effect exists. A torus, waveform number or shared label does **not automatically** establish common physical mechanisms, historical inheritance or an experimental cause.
+
 ## The actual architecture
 
 ```mermaid
