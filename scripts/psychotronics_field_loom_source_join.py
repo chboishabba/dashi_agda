@@ -79,6 +79,9 @@ def verify_pair_source(meta, pairs):
                 if (g.get('moment_am2')!=p.get('moment_am2')
                     or g.get('moment_std_am2')!=p.get('moment_std_am2')):
                     failures.append('moment_calibration_not_same_as_pair')
+                if ('moment_covariance_group_id' in p and
+                    g.get('shared_magnitude_id') != p.get('moment_covariance_group_id')):
+                    failures.append('shared_magnet_covariance_group_not_in_calibration')
         if stream_bytes is None:
             replay_failures.append('instrument_stream_unavailable_for_reduction')
         elif raw.get('pair_to_stream_reducer') != VERSION:
