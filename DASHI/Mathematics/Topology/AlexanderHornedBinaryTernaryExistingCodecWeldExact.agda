@@ -111,3 +111,34 @@ binaryThenTernaryAndTernaryThenBinaryAgree =
 ternaryAntipodeSquare :
   ∀ t → Dihedral.antipode (Dihedral.antipode t) ≡ t
 ternaryAntipodeSquare = Dihedral.antipodeOrderTwo
+
+
+------------------------------------------------------------------------
+-- ADDITIVE GROUP OBSTRUCTION: REUSE REAL EXISTING C2/C3 CARRIERS.
+-- A lossless digit codec does not preserve addition across 2-adic
+-- and 3-adic groups. The finite generator-order obstruction is
+-- literal, not a mere interpreted Boolean receipt.
+------------------------------------------------------------------------
+
+import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
+import DASHI.Algebra.FiniteQuaternionDoubleCover as FiniteQ8
+
+c3HasNoNontrivialElementOfOrderTwo :
+  ∀ x → C3._∙_ x x ≡ C3.c0 → x ≡ C3.c0
+c3HasNoNontrivialElementOfOrderTwo C3.c0 proof = refl
+c3HasNoNontrivialElementOfOrderTwo C3.c1 ()
+c3HasNoNontrivialElementOfOrderTwo C3.c2 ()
+
+c2HasNoNontrivialElementOfOrderThree :
+  ∀ s →
+  FiniteQ8.signMultiply
+    (FiniteQ8.signMultiply s s) s
+    ≡ FiniteQ8.positiveSign →
+  s ≡ FiniteQ8.positiveSign
+c2HasNoNontrivialElementOfOrderThree FiniteQ8.positiveSign p = refl
+c2HasNoNontrivialElementOfOrderThree FiniteQ8.negativeSign ()
+
+-- Infinite version (classical topological group fact):
+-- Hom_cont(Z_2, Z_3) = 0 = Hom_cont(Z_3,Z_2), because every
+-- finite quotient of a pro-2 group is a 2-group and of a
+-- pro-3 group a 3-group. Not proven in this finite Agda file.
