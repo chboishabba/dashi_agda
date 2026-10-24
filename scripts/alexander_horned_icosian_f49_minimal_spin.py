@@ -78,6 +78,11 @@ def mul49(a,b):
             ea(em(a[2],b[0]),em(a[3],b[2])),
             ea(em(a[2],b[1]),em(a[3],b[3])))
 assert len({embed(q) for q in icosians})==120
+# Hamilton quaternion norm=1 implies determinant 1; check literal
+# determinant rather than relying only on that classical identity.
+assert all(es(em(embed(q)[0],embed(q)[3]),
+              em(embed(q)[1],embed(q)[2]))==ONE for q in icosians)
+
 for a in icosians:
     for b in icosians:assert embed(qm(a,b))==mul49(embed(a),embed(b))
 def fldmatrix(z):return ((z[0],5*z[1]%P),(z[1],z[0]))
