@@ -1,3 +1,36 @@
+## 2026-10-24 important B PRE-EXISTING PROOF OWNER reconciliation
+
+The newly committed positive-vortex-stretching six-mode witness is an
+**independent exact physical calibration**, NOT the origin of the amplitude
+scaling theorem. The repository ALREADY contains:
+
+- `NSTriadKNLuoVorticityStretchingSignExact`: source-written
+  symmetric-strain/antisymmetric cancellation and enstrophy sign laws;
+  original literature Constantin–Fefferman and Evan Miller.
+- `NSTriadKNHHBadLiteralProductionDissipationScalingRound42Exact`:
+  genuine Agda terms for the inverse-SQUARE frequency scaling of
+  physical literal vorticity production versus dissipation, with
+  explicit source-owned semantic caveats.
+- `NSTriadKNHHBadAmplitudeHomogeneityRound43Exact`:
+  genuine source-written Agda terms for amplitude-trilinear
+  production versus amplitude-quadratic viscous charge.
+- `NSTriadKNHHBadRestrictedGainDensityRound39Exact` and
+  `NSTriadKNHHBadLiteralPositiveGainRound43Exact`: prior original
+  `rawGain`/positive-gain consumers. Their source-exact weld to
+  the physical vorticity production is explicitly NOT automatic.
+- `NSVorticityStretchingExactReceipt` is ledger-only, NOT a
+  verified general Euler/NS field identity.
+
+**Revised cut:** reuse these originals first and require an exact
+`physical NS curl/Leray production → Round42/43 vorticity interaction
+→ Round39 rawGain → R236 selected critical production/R685/R690`
+same-object diagram, recording each leftover compensation. The
+nontrivial six-mode witness (+8 enstrophy) and zero-shear witness (0
+physical production despite -4 unprojected R681) are complementary
+adversarial gates. Do not reconstruct the already-proved homogeneous
+algebra or confuse a static receipt with a proof.
+
+---
 # 2026-10-24 decisive A/B max-cut — DO NOT IMPORT RI AS A3
 
 **Read first.** Full source/argument/provenance:
