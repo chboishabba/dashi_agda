@@ -184,3 +184,36 @@ This new script is a real **algorithm for constructing** a same-source actual Mo
 **Important characteristic separation:** `GF7` contains primitive third roots and characteristic 7 is coprime to `|E|=3^13`, so E's representation is semisimple. However 7 divides `|Suz|`, so `GF7` reduction cannot on its own certify Wilson's characteristic-zero irreducible `12+78` normalizer factorisation or full normalizer semisimplicity. The `Hom_E` action and projective cocycle must be computed on the actual same-source lifts, then compared to published characteristic-zero character information with a valid lifting/independence argument.
 
 **Final Pareto update:** Actual group word acquisition is CLOSED by the 2026 original source; a full symplectic E/N generator compiler and matrix-free 90×729 intertwiner **producers are implemented**; successful execution and characteristic-zero normalizer multiplicity/cocycle certification remain open. Do not label source-writing as having run those computations.
+
+
+## 24 Oct backend-free max-cut: mmgroup optional, not a theorem prerequisite
+
+The abstract/character-theoretic selected Monster 3B result needs **NO mmgroup, GAP matrices, or dense 65610-dimensional generator matrices**. For sourced actual extraspecial (E=3_+^{1+12}) and selected central class 3B (z), the full characteristic-zero Monster character has `chi_W(z)=chi_W(z²)=53` and `dim(W)=196883`, giving `dim(W_zeta)=65610=90×729`. Nondegenerate extraspecial commutator pairing implies each noncentral (g∈E) is conjugate inside E to (zg), so on the ζ-sector `chi(g)=ζ chi(g)`, i.e. zero. Central values are `65610 ζ^t`. Thus the **complete** E-character is `90 χ_H`. Character determination for finite complex representations yields an abstract E-equivariant isomorphism `W_zeta|E ≅ H_zeta⊗C^90`; this is a mathematical theorem under the actual subgroup/source restriction, not a concrete basis map of an independent Monster presentation. A basis-independent existence theorem is the correct product at this level.
+
+The existing `Monster3BActualKernelCharacterPromotionExact`, `Monster3BFiniteStoneVonNeumann*`, `Monster3BFiniteProjectorModelExact`, `Monster3BMultiplicityEvaluationExact`, `Monster3BActualMultiplicityEvaluationFromRecognitionExact`, `Monster3BNormalizerCocycleCancellationExact`, open Agda #1098 and Lean #47 already own the corresponding **generic** construction. The new script `scripts/jfine_3b_backend_free_discriminator.py` is an exact finite *consumer*, not a new Stone–von Neumann or normalizer theorem owner.
+
+### Stronger full-sector D4 character fingerprint, computed without mmgroup
+
+Using the D4-stable JFine source chart on original pointed nine-site values, the geometric D4 representations on multiplicity S (dim 90), Heisenberg fibre H (dim 729), and their selected ζ-sector product P (dim 65610) have conjugacy-character rows (classes `[1,r²,r±,s,rs]`):
+
+```
+chi_S = [ 90, 10, 10,  30,  30 ]
+       = 30 A1 + 0 A2 + 10 B1 + 10 B2 + 20 E2
+
+chi_H = [729, 81,  9,  81,  81 ]
+       = 144 A1 + 63 A2 + 99 B1 + 99 B2 + 162 E2
+
+chi_P = [65610,810,90,2430,2430]
+       = 9540 A1 + 7110 A2 + 8280 B1 + 8280 B2 + 16200 E2.
+```
+
+This is now an **independent exact obstruction/screen** for identifying a proposed Monster D4 subgroup and ζ-sector action: unless its classwise phase-restricted character matches the last five values under a proved class map, no D4-equivariant isomorphism from this specified JFine geometric model can exist. But because Wilson's 12+78 refers to a *different full 6.Suz/inertia representation*, the D4 fingerprint is NOT evidence that the 12/78 constituents individually split into these D4 irreps. A match of all five D4 character values is necessary and sufficient for isomorphism **as complex D4 modules only**, still not a full N(3B)-equivariant Monster action identification.
+
+The new executable performs exact integer fixed-point counts for all eight D4 elements, complete D4 irreducible character inner products, and mixed Weyl+D4 traces in the ring `Z[ζ]` represented by integer pairs `(a,b)` for `a+bζ`, with `ζ²=-1-ζ`. It checks pure noncentral Heisenberg traces zero, central traces `65610 ζ, 65610 ζ²`, and the exact representation degrees. Locally tested successfully with Python standard library only, without GAP/mmgroup/CI. Historical sources for the *Monster* character remain Wilson and Barraclough--Wilson; geometric fingerprints are the repo's new computation.
+
+### Exact revised roadmap / stop rule
+
+1. **Already theorem/character scope:** extraspecial 3B inclusion from published Monster work, 729 irreducible Schrödinger type, 90-copy abstract E-sector isomorphism, Wilson's 12+78 N-character, projective Weil/Hom abstract compilers and correction that 53 is not N-stable.
+2. **New fully finite/model scope:** pointed E action, D4-stable 2+6 coordinate chart, full 90/729/65610 geometric D4 character and mixed-character fingerprints. No mmgroup dependency.
+3. **Only conditional/concrete same-object residual:** identify a PARTICULAR actual Monster D4 subgroup with geometric D4 generators and prove its ζ-phase-restricted character, or exhibit an explicit source-coordinate E/N intertwiner T and 90 multiplicity action. Existing class-fusion or generator-word engines are optional means of doing this, **not** necessary for the abstract representation-theory proof. A normalizer-compatible T cannot be inferred from the E-isomorphism alone; transporting an action through an arbitrary E-isomorphism defines a new action, not an identification with the pre-existing geometric D4 action.
+4. **No false completion:** no successful actual Monster linear normalizer matrices, full classwise same-action Hom character, explicit N-intertwiner or formal typecheck receipt is claimed. Old mmgroup producers remain optional computational programs; their absence does not block mathematical E/isotypic or finite D4 outcomes.
