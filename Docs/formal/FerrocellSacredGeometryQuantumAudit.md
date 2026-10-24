@@ -76,3 +76,9 @@ Optional quantum-specific study must **define the observable first**. If the cla
 - **Local Python audit:** `python3 scripts/ferrocell_symmetry_audit.py --self-test --json out.json`; observed `m0=0.5`, `m4=0.25`, `m3=m6=m9=0` in the uniform ideal model, and `m6=0.0625` with only sixfold illumination modulation (similarly `m3=0.0625`). Symmetry errors are `~1e-15` floating point.
 - **Agda source state:** exact definitions/proofs supplied, but **no Agda kernel compilation performed in this session**; do not label them kernel verified.
 - **Video state:** screenshots are visual observations supplied by the user; actual Ferrocell identity and internal optical structure remain **unverified**.
+
+## Integrated geometry / neural-causality roadmap (2026-10-24)
+
+The expanded full-thread prior-art archaeology, formal/empirical phase gates and attribution ledger are owned by [`Docs/roadmaps/FerrocellGeometryNeuralConsciousnessQuantumRoadmap20261024.md`](../roadmaps/FerrocellGeometryNeuralConsciousnessQuantumRoadmap20261024.md). It explicitly incorporates merged MaleCNS physical hyperfabric and latent consumer owners (#959, #946), active dashiBRAIN real benchmark / Brain-IT (#7, #9), geometric reasoning/teleodynamics (#1095), IIT (#1148), trauma-memory/effective-topology/conscious-access modules, and merged zero-point work (#701). The new roadmap is **not** a proof that neural geometry causes phenomenal consciousness; it makes the relevant observational and causal gates precise.
+
+**MaleCNS version correction:** the official September 2026 *Cell* version of record (DOI `10.1016/j.cell.2026.08.015`) and 2025 bioRxiv preprint (DOI `10.1101/2025.10.09.680999`) contain different counts; preserve publication and data release identity, do not silently merge them. The 2025 Cogitate Consortium adversarial comparison of IIT and GNWT (DOI `10.1038/s41586-025-08888-1`) anchors the cross-theory experimental model-comparison gate.
