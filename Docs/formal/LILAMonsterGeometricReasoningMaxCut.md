@@ -163,3 +163,11 @@ action complexity + residual complexity
 ```
 
 with the precise score algebra supplied by a concrete experiment. This is a proposed DASHI definition, not an attributed Sophontic metric and not an empirical result.
+
+## 2026-10-24 selected graph discriminator for 243=3+240
+
+Cross-branch consumer: [KK/Casimir #1241](https://github.com/chboishabba/dashi_agda/pull/1241), source `scripts/check_kk_240_243_e8_portal_casimir_bidi.py`. This does NOT claim #1241 is merged into this branch.
+
+Our source-owned `T5E8RelativeComplementCandidateExact.agda` already makes the 3^5=243 → three diagonal +240 remaining states exact, while correctly withholding E8 recognition/action intertwining. The downstream executable tests a specific *natural* graph embedding question. The non-diagonal 240 states of P3^5 have induced degree distribution `5:40,6:70,7:80,8:50`; the C3^5 periodic version has `9:30,10:210`; classical E8 root inner-product-1 adjacency is **56-regular** on 240 roots. Therefore NO graph isomorphism exists from either of these selected ternary edge operators to that E8 root graph. It is not a universal impossibility of alternative 240-state equivariant recognition and does not refute the original purely arithmetic construction.
+
+The *same numeral* 240 also appears as the ideal-plate Casimir pressure denominator and ~240 in a QED+QCD one-loop stationary-radion defect; different physical quantities/units/operators. Neither is an E8-root action witness. Attribution stays with original classical E8/Casimir results, this source's arithmetic carrier, and selected downstream computation respectively. Agda kernel of this downstream module remains unverified.
