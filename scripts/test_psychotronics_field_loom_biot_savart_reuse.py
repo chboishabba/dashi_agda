@@ -103,6 +103,18 @@ class ReuseAndReference(unittest.TestCase):
             # Relative to field strength over characteristic length 0.1m.
             self.assertLess(abs(div)*.1/max(1e-15,sqrt(sum(t*t for t in b))),2e-4)
 
+    def test_reject_nonfinite_or_invalid_coil_inputs(self):
+        for args in (
+            (float('nan'),0.,0.,.1,0.,100,1.),
+            (0.,0.,0.,float('nan'),0.,100,1.),
+            (0.,0.,0.,.1,0.,-100,1.),
+            (0.,0.,0.,.1,0.,100,float('inf')),
+        ):
+            with self.assertRaises(ValueError):
+                loop_b(*args)
+        with self.assertRaises(ValueError):
+            loop_b(0.,0.,0.,.1,0.,100,1.,steps=8)
+
     def test_reject_ideal_wire_singularity(self):
         with self.assertRaises(ValueError):
             theta=pi/256  # first existing midpoint quadrature segment
