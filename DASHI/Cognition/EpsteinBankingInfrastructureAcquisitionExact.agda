@@ -181,7 +181,6 @@ data ChainReactionSourceRole : Set where
   federalIntelligenceLeadProduct : ChainReactionSourceRole
   derivativePublicTranscriptIndex : ChainReactionSourceRole
   laterSenateInquiryInterpretation : ChainReactionSourceRole
-open ChainReactionSourceRole public
 
 record ChainReactionSourceReceipt : Set where
   constructor chain-reaction-source-receipt
