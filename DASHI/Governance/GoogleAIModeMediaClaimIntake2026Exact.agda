@@ -181,3 +181,39 @@ data OriginalInterviewFileAccessIsProvenInstruction : Set where
 noRepublishedFileCommand :
   OriginalInterviewFileAccessIsProvenInstruction → ⊥
 noRepublishedFileCommand ()
+
+mfwKyleAdvertiserCampaign : A.RelationshipReceipt
+mfwKyleAdvertiserCampaign = A.relationship-receipt
+  "Mad F***ing Witches / #VileKyle" "Advertisers on Kyle and Jackie O"
+  A.advertiserBoycottCampaign A.journalistCorroboration
+  "MFW first-party campaigns; Guardian 9 Oct 2024; Money Magazine 2026"
+  "https://www.theguardian.com/media/2024/oct/09/kyle-and-jackie-o-show-advertisers-back-out-violent-misogyny-accusations-campaign-mfw-ntwnfb"
+  "MFW explicitly targeted commercial sponsorship of broadcasts; some named advertisers withdrew or reviewed, and ARN acknowledged objectionable programming. MFW's larger asserted count/cost remains an attributed estimate with many alternative reasons for ad churn."
+  false false false
+
+kyleKarlDomainPrank : A.RelationshipReceipt
+kyleKarlDomainPrank = A.relationship-receipt
+  "Bruno Bouchet / Kyle management" "Kyle-and-Karl speculative domains"
+  A.disputedAuthorshipClaim A.namedActorSelfReport
+  "Bouchet explanation reported by News.com.au, July 2026"
+  "https://www.news.com.au/entertainment/celebrity-life/best-7-i-spent-wild-truth-behind-kyle-and-karl-show-finally-revealed/news-story/67b17fe0f26e56c5d002df9c1f8f22cb"
+  "Bouchet reports buying the domains to create speculation, for about AUD7. Registered domain names do not establish an actual joint political-media venture."
+  false false false
+
+rupertEpsteinAddressBookIndex : A.RelationshipReceipt
+rupertEpsteinAddressBookIndex = A.relationship-receipt
+  "Secondary Epstein black-book index" "Rupert Murdoch"
+  A.disputedAuthorshipClaim A.journalistCorroboration
+  "EpsteinsBlackBook.com named index; primary page provenance not independently inspected"
+  "https://epsteinsblackbook.com/names/rupert-murdoch"
+  "A secondary index labels Murdoch page 39 with two telephone numbers. This is a lead for authenticated facsimile check and neither an Epstein meeting nor a route to Alan Jones/Fordham."
+  false false false
+
+alanJonesKyleDumpButton : A.RelationshipReceipt
+alanJonesKyleDumpButton = A.relationship-receipt
+  "The Kyle and Jackie O Show" "Alan Jones guest interview"
+  A.editorialPublication A.journalistCorroboration
+  "QNews, 2022, original aired-interview account"
+  "https://qnews.com.au/secret-alan-jones-recordings-before-kyle-jackie-walkout/"
+  "Article reports that Jones was cut off and broadcast broke for nine minutes after he referenced studio recordings. It supplies no authenticated content of the cut segment or proof of a concealed offence."
+  false false false
