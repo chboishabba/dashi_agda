@@ -296,6 +296,46 @@ paid78 := selected78.paid;
 main78DescendingPos := dec78.support[paid78[1]];
 mn3b78Pos := desc78[paid78[1]];
 
+# THE DECISIVE full-character comparison, on the ACTUAL selected 78
+# family.  Both direct Sym² and contragredient Sym² of the source
+# faithful12 are tested across all 6.Suz classes using the real
+# second-power map, not centre signs, zeta phase counts or dimensions.
+powerMap2Six := PowerMap(six, 2);
+if powerMap2Six = fail or Length(powerMap2Six) <> Length(OrdersClassRepresentatives(six)) then
+  Error("source 6.Suz second power map not available for Sym² equality");
+fi;
+selectedDirectSym2Pairs := [];
+selectedDualSym2Pairs := [];
+for i in p12 do
+  symValues := List([1..Length(powerMap2Six)], k ->
+    (sixIrr[i][k]^2 + sixIrr[i][powerMap2Six[k]]) / 2);
+  dualValues := List(symValues, v -> GaloisCyc(v,-1));
+  if symValues[1] <> 78 or dualValues[1] <> 78 then
+    Error("degree12 second symmetrization/dual did not have degree78");
+  fi;
+  for j in p78 do
+    if symValues = List(sixIrr[j],v -> v) then
+      Add(selectedDirectSym2Pairs,[i,j]);
+    fi;
+    if dualValues = List(sixIrr[j],v -> v) then
+      Add(selectedDualSym2Pairs,[i,j]);
+    fi;
+  od;
+od;
+selectedDirectSym2Count := Length(selectedDirectSym2Pairs);
+selectedDualSym2Count := Length(selectedDualSym2Pairs);
+if selectedDirectSym2Count > 2 or selectedDualSym2Count > 2 then
+  Error("unexpected multiple full-character Sym²12 matches");
+fi;
+# The FAMILY has both conjugate halves; direct/dual matching at this
+# level should be all-or-none. Keep failure explicit rather than a
+# partial equality that happens to match just one half.
+if selectedDirectSym2Count = 1 or selectedDualSym2Count = 1 then
+  Error("partial selected conjugate78 Sym² family equality");
+fi;
+selected78IsNebeSym2Family :=
+  selectedDirectSym2Count = 2 and selectedDualSym2Count = 2;
+
 # Exact 6.Suz central involution signature is an independent discriminator.
 # A faithful 12 contributes -12. A faithful78 contributes -78, while
 # Nebe's Sym²(faithful12) contributes +78; do not fix either in advance.
@@ -343,6 +383,9 @@ selectedMultiplicityC2Trace := -12 + selected78C2Trace;
 sym2CandidateMultiplicityC2Trace := -12 + 78;
 selectedSym2C2Compatible :=
   selectedMultiplicityC2Trace = sym2CandidateMultiplicityC2Trace;
+if selected78IsNebeSym2Family and not selectedSym2C2Compatible then
+  Error("full selected Sym² family equality contradicts centre-C2 sign");
+fi;
 
 SourceBoolText := function(b)
   if b then return "true"; else return "false"; fi;
@@ -394,6 +437,9 @@ PrintTo(output,
   "  \"suzuki_central_involution_class_position\": ", central2Class, ",\n",
   "  \"suzuki_central_order_three_class_position\": ", central3Class, ",\n",
   "  \"common_729_necessary_equal_C3_phase_pair_count\": ", common729C3PairCount, ",\n",
+  "  \"selected_78_direct_sym2_full_character_pair_count\": ", selectedDirectSym2Count, ",\n",
+  "  \"selected_78_dual_sym2_full_character_pair_count\": ", selectedDualSym2Count, ",\n",
+  "  \"selected_78_is_nebe_sym2_family_full_character_equal\": ", SourceBoolText(selected78IsNebeSym2Family), ",\n",
   "  \"source_selected_S90_central_C2_trace\": ", selectedMultiplicityC2Trace, ",\n",
   "  \"sym2_candidate_S90_central_C2_trace\": ", sym2CandidateMultiplicityC2Trace, ",\n",
   "  \"source_selected_c2_compatible_with_sym2_faithful12\": ", SourceBoolText(selectedSym2C2Compatible), ",\n",
