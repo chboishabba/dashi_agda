@@ -143,9 +143,20 @@ def optional_brain_runtime(path):
     assert original.fibre_count == local["fibre_count"]
     assert original.ambiguous_fibre_count == local["ambiguous_fibres"]
     assert original.collision is not None
+    # Reuse the ORIGINAL dashiBRAIN commutation audit, too. One physically
+    # declared active intervention cannot be a state-independent function
+    # of the passive quotient when mechanisms share the observation.
+    states=[(w,passive(w)) for w in worlds]
+    def fine_step(pair):
+        w,q=pair
+        return (w,(q[0],intervene(w,1),q[2]))
+    comm=module.audit_commutation(states,fine_step,lambda pair:pair[1],
+                                  lambda q:q)
+    assert comm.state_count==16 and comm.mismatches==4
     return {"status":"ORIGINAL_RUNTIME_REUSED", "original_path":str(path),
             "factorises":original.factorises_on_sample,
             "ambiguous_fibres":original.ambiguous_fibre_count,
+            "sham_coarse_step_mismatches":comm.mismatches,
             "file_is_not_verified_as_official_without_git_blob_check":True}
 
 
