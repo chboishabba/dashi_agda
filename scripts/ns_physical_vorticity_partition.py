@@ -43,6 +43,7 @@ def budget(u):
     omega={k:I*vec(k).cross(v) for k,v in u.items()}
     bt=defaultdict(lambda:S.Integer(0))
     rt=defaultdict(lambda:S.Integer(0))
+    corrections=defaultdict(lambda:[S.Integer(0)]*4)
     total=energy=transport=stretch=S.Integer(0)
     for k in {add(p,q) for p in u for q in u}:
         conv=S.zeros(3,1); adv=S.zeros(3,1); vortex=S.zeros(3,1)
@@ -71,14 +72,26 @@ def budget(u):
             cell=S.simplify(2*S.re(conjdot(uk,pair))*norm2(k))
             bt[bony(p,q)]+=cell
             rt[r236(p,q)]+=cell
+            advCell=-I*vec(q).dot(up)*omega[q]
+            stretchCell=I*vec(q).dot(omega[p])*u[q]
+            Tcell=2*S.re(conjdot(wk,advCell))
+            Scell=2*S.re(conjdot(wk,stretchCell))
+            delta=S.simplify(cell-Tcell-Scell)
+            tag=bony(p,q)
+            corrections[tag]=[
+                corrections[tag][i]+value for i,value
+                in enumerate((cell,Tcell,Scell,delta))]
     assert S.simplify(energy)==S.simplify(transport)==0
     assert S.simplify(total-stretch)==0
     assert S.simplify(sum(bt.values())-total)==0
     assert S.simplify(sum(rt.values())-total)==0
+    assert S.simplify(sum(v[3] for v in corrections.values()))==0
+    assert S.simplify(sum(v[1] for v in corrections.values()))==0
     return {"production":S.simplify(total),"stretch":S.simplify(stretch),
             "transport":S.simplify(transport),"energy":S.simplify(energy),
             "bony":{k:S.simplify(v) for k,v in bt.items()},
-            "r236":{k:S.simplify(v) for k,v in rt.items()}}
+            "r236":{k:S.simplify(v) for k,v in rt.items()},
+            "class_correction":{k:tuple(map(S.simplify,v)) for k,v in corrections.items()}}
 
 def field(p,q):
     """Transverse six-mode rational/integer-coefficient calibration."""
