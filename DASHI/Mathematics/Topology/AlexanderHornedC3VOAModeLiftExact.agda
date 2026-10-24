@@ -29,6 +29,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (ℤ)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ)
 import DASHI.Moonshine.TrivialRationalGradedVertexAlgebraExact as Seed
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Data.Rational.Base using (_+_)
 import DASHI.Mathematics.Topology.AlexanderHornedC3FiniteVOAActorExact as Actor
 
@@ -74,6 +75,21 @@ modeAssociative : (D : Actor.ActorFactorGroup) →
       (vertexMode D f Seed.minusOne g) Seed.minusOne h x
 modeAssociative D f g h x =
   Seed.minusOneProductAssociative (f x) (g x) (h x)
+
+-- A Jordan identity on the EXACT SAME finite VOA state carrier.
+-- Pointwise commutative associative products are Jordan. This is not
+-- an exceptional Albert or Monster/Griess recognition claim.
+sameStateJordanIdentity : (D : Actor.ActorFactorGroup) →
+  ∀ (f g : RationalState D) x →
+  vertexMode D
+    (vertexMode D f Seed.minusOne f) Seed.minusOne
+    (vertexMode D g Seed.minusOne f) x
+  ≡ vertexMode D
+      (vertexMode D
+        (vertexMode D f Seed.minusOne f) Seed.minusOne g)
+      Seed.minusOne f x
+sameStateJordanIdentity D f g x =
+  ℚRing.solve-∀ (f x) (g x)
 
 modeTranslationDerivation : (D : Actor.ActorFactorGroup) →
   ∀ (f g : RationalState D) x →
