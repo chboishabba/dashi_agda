@@ -1,3 +1,56 @@
+# 2026-10-24 decisive A/B max-cut — DO NOT IMPORT RI AS A3
+
+**Read first.** Full source/argument/provenance:
+`Docs/research/ns_ab_ri_euler_no_go_and_physical_stretch_20261024.md`.
+
+**A RESEARCH DECISION:** Ri arXiv:2601.15685v1 Theorem 1.1 (1.3)
+claims a global H^s estimate with a bound depending only on s, not
+viscosity. For the smooth compact-support datum of OpenAI's released
+unforced Euler singularity (existing source owner
+`NSOpenAI2026EulerToClayFourAlternativeBidiExact`), choose s>5/2.
+Pre-singularity inviscid convergence + weak lower semicontinuity would
+give the same global-in-time-on-[0,T*) H^s bound on Euler, hence a
+uniform C¹ bound via Sobolev embedding. This contradicts the released
+Euler blowup. **The claimed viscosity-uniform estimate is incompatible
+with the released Euler theorem and standard inviscid convergence.**
+Do NOT import Ri's Theorem 1.1 as A3. This does NOT refute
+positive-viscosity NS regularity at fixed ν. Distinguish all source
+statuses. The new `dashi_lean4/NSEulerRiUniformViscosityNoGo.lean`
+proves only an abstract conditional upper-bound transfer; actual
+Sobolev and inviscid-limit welds are not kernel checked.
+
+**B EXACT NONVANISHING PHYSICAL REGRESSION:**
+`tests/test_ns_physical_vorticity_production_exact.py` (locally 3
+passed, exact SymPy). Six real/transverse Fourier coefficients
+±(1,0,0), ±(0,1,2), ±(1,1,2) give zero nonlinear kinetic energy
+production, +8 nonlinear enstrophy production, and +8 from twice
+physical vortex stretching. Flip a phase → -8, zero-pad → unchanged.
+State has E=10, enstrophy=38 and palinstrophy=198. Under u→a u,
+stretching ∝a³, viscous dissipation ∝a²; at a=50, ν=1,
+instantaneous enstrophy derivative=10000. So fixed constant
+dissipation-only payment fails even on smooth physical initial data.
+This is NOT a blowup example.
+
+**LIVE B TARGET:** prove actual source-equality/compensation between
+Leray-projected physical spectral production and R236's selected
+critical production through R685/R690 with original carrier
+definitions and all complementary regions. R685 proves mixed
+commutator-minus-tangent, not this u/omega identification; R690 is
+finite signed sum, NOT a physical analytic estimate. The old full
+fibre B4 payment is false. The nonzero enstrophy witness is a
+mandatory acceptance test for any purported same-object bridge.
+
+**LIVE A TARGET:** same physical continuum Fourier transform and
+scale-critical continuation for fixed positive ν. Ri's purported
+uniform-ν shortcut is excluded, but his *local* frequency identities
+may still be useful after independent checking. Never promote
+conditional pre-blowup estimates to uniform global bounds without a
+noncircular continuation argument.
+
+**Verification:** local SymPy/pytest passed (3 tests); GitHub
+commits are source-written; no independent exact-head Lean/Agda
+kernel check this cut. A/B universal regularity NOT established.
+---
 ## 2026-10-24 next max-cut — exact coarea calibration and Ri proof entry
 
 **Executed local Python:** `python -m pytest -q` on the new
