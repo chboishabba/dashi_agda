@@ -101,3 +101,23 @@ newShowOperatorIsNotOwnership = refl
 proposedBuyoutIsNotCompleted :
   A.kind A.kyleProposedARNBuyout ≡ A.proposedUncompletedAcquisition
 proposedBuyoutIsNotCompleted = refl
+
+subscriberFundingIsAttributedOnly :
+  A.evidence A.kyleSubscriberFinanceSelfReport ≡ A.namedActorSelfReport
+subscriberFundingIsAttributedOnly = refl
+
+harveyNormanOfferIsNotRealisedCash :
+  A.kind A.harveyNormanProspectiveSponsorship ≡ A.prospectiveSponsorOffer
+harveyNormanOfferIsNotRealisedCash = refl
+
+uscreenPlatformIsNotEquity :
+  A.kind A.kyleUscreenPlatform ≡ A.externalPlatformSupplier
+uscreenPlatformIsNotEquity = refl
+
+reportedCustomersAreNotAuditedBankBalance :
+  A.SubscriptionSelfReportEstablishesAuditedReceipts → ⊥
+reportedCustomersAreNotAuditedBankBalance = A.reportedSubscriptionsNotAudited
+
+advertiserInterestNotCapitalStake :
+  A.BrandOfferEstablishesEquityInvestment → ⊥
+advertiserInterestNotCapitalStake = A.advertiserOfferNotEquity
