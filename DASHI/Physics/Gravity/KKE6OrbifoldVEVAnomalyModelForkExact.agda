@@ -162,3 +162,64 @@ sameFirstTitsCarrierNotSamePhysicalGaugeSource =
 -- Source status. Fixed-point anomaly/CS, the actual full spin-gauge
 -- action, a unique photon after EW symmetry breaking, an E6-complete
 -- Higgs/fermion scalar potential, and NEW orbifold Casimir all OPEN.
+
+
+------------------------------------------------------------------------
+-- COMPLETE selected diagonal SU3R parity family: I or 2 negative
+-- signs, while P_c=I and P_L=(-,-,+) keep colour and SU2L.
+-- Source executable exhaustively computes actual anomaly sums:
+--   I: colour cubic +4, UV Abelian cubic 0;
+--   every nontrivial SU3R involution: colour cubic 0,
+--                                    U1L^3=+40,U1R^3=-40.
+-- The physical ANOMALY calculation is in Python; this is the exact
+-- finite consumer-indexed NO-SIMULTANEOUS-PASS theorem, not a
+-- kernel proof of continuum triangle diagrams.
+------------------------------------------------------------------------
+
+data RightDiagonalInvolution : Set where
+  rightIdentity
+  rightMinusMinusPlus
+  rightMinusPlusMinus
+  rightPlusMinusMinus : RightDiagonalInvolution
+
+colourCubicSourcePass : RightDiagonalInvolution → Bool
+colourCubicSourcePass rightIdentity = false
+colourCubicSourcePass rightMinusMinusPlus = true
+colourCubicSourcePass rightMinusPlusMinus = true
+colourCubicSourcePass rightPlusMinusMinus = true
+
+uvAbelianCubicSourcePass : RightDiagonalInvolution → Bool
+uvAbelianCubicSourcePass rightIdentity = true
+uvAbelianCubicSourcePass rightMinusMinusPlus = false
+uvAbelianCubicSourcePass rightMinusPlusMinus = false
+uvAbelianCubicSourcePass rightPlusMinusMinus = false
+
+noDiagonalRightInvolutionPassesBothUVConsumers :
+  (r : RightDiagonalInvolution) →
+  colourCubicSourcePass r ≡ true →
+  uvAbelianCubicSourcePass r ≡ true → ⊥
+noDiagonalRightInvolutionPassesBothUVConsumers rightIdentity c u =
+  falseIsNotTrue c
+noDiagonalRightInvolutionPassesBothUVConsumers rightMinusMinusPlus c u =
+  falseIsNotTrue u
+noDiagonalRightInvolutionPassesBothUVConsumers rightMinusPlusMinus c u =
+  falseIsNotTrue u
+noDiagonalRightInvolutionPassesBothUVConsumers rightPlusMinusMinus c u =
+  falseIsNotTrue u
+
+-- A 5D Dirac scalar bilinear is ODD under gamma5 orbifold spinor
+-- reflection. The earlier smooth-circle CONSTANT Dirac mass cannot
+-- be imported: new odd mass profile or boundary/multiplet dynamics
+-- needs its own physical source. Source is the gamma-matrix test
+-- check_kk_orbifold_bulk_mass_parity.py, not a Clifford proof here.
+data OrbifoldBulkDiracMassSource : Set where
+  oldEvenConstantBulkMass
+  newlySourcedOddKinkMass : OrbifoldBulkDiracMassSource
+
+orbifoldReflectionAdmissibleMass :
+  OrbifoldBulkDiracMassSource → Bool
+orbifoldReflectionAdmissibleMass oldEvenConstantBulkMass = false
+orbifoldReflectionAdmissibleMass newlySourcedOddKinkMass = true
+
+-- "admissible mass parity" is only one necessary condition;
+-- no quantum-consistent kink/brane mass operator is asserted.
