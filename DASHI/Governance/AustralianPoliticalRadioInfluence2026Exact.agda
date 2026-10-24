@@ -358,6 +358,10 @@ data IndirectEffect : Set where
   policyInformationPipeline : IndirectEffect
   institutionalTrustImpact : IndirectEffect
   fundingForFutureIndependentMedia : IndirectEffect
+  independentOriginalClaimConcentration : IndirectEffect
+  donorAdjacentGasPolicyShift : IndirectEffect
+  project2025PolicyProposalVersusEnactment : IndirectEffect
+  springfieldResidentialGasDemandPersistence : IndirectEffect
 
 record BoundedEffectQuestion : Set where
   constructor bounded-effect-question
@@ -379,6 +383,14 @@ openSecondOrder =
     "Can 2GB's BOM headline predict measured trust loss when listeners receive the full official correction?" false
   ∷ bounded-effect-question socialMediaDistribution
     "Which actual transcript chunks were clipped and syndicated, preserving source roots and timing?" false
+  ∷ bounded-effect-question independentOriginalClaimConcentration
+    "For BOM and GBR narratives, how many truly independent claim producers exist after deduplicating syndication, shared transcripts, and downstream copies? Compare original-versus-effective source diversity, not raw URL counts; ClimateGenealogyTypedCasesExact is the owner of tobacco/API method parallels." false
+  ∷ bounded-effect-question donorAdjacentGasPolicyShift
+    "HansonCapacityCriticismHyperformalismExact owns the June 2026 gas-reservation reversal. What contemporaneous industry consultation record, actual policy text and donor-beneficiary join (Senex 49% Hancock) distinguish alignment from influence?" false
+  ∷ bounded-effect-question project2025PolicyProposalVersusEnactment
+    "GodsEyeViewDiagnosisDrivenActivistRollupExact and GodsEyeViewWorldEpistemicSourceAtlasExact own the 2023 Heritage chapter packet. What chapter-author wording and dated US policy action match, and is Australian uptake an independent analogy or a proven transferred instruction?" false
+  ∷ bounded-effect-question springfieldResidentialGasDemandPersistence
+    "SensibLawSpringfieldGasLobbyingOwnershipSnowballExact and SensibLawAzureSpringfieldInducedGasDemandExact own source evidence and missing records for local network, developer, gas endpoints and fixed-charge demand; identify any true same-object policy-to-asset-to-household bridge before asserting lobbying causation." false
   ∷ []
 
 -- Source joins first surfaced by user-provided Google AI Mode answer,
