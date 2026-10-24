@@ -162,6 +162,31 @@ transverseSpansZeroSum x y z totalZero =
   where
     open import Relation.Binary.PropositionalEquality using (subst)
 
+-- The complement is not merely represented by a suggestive formula:
+-- its actual residual vector has zero coordinate sum, so the
+-- explicit transverse parametrization recovers EVERY residual.
+residualHasZeroSum : ∀ v → traceSum (residual v) ≡ 0ℚ
+residualHasZeroSum (Ambient.xyz x y z) = solve-∀ x y z
+
+residualIsInConstructedTransversePlane : ∀ v →
+  transverse
+    (Ambient.first (residual v))
+    (0ℚ - Ambient.third (residual v))
+  ≡ residual v
+residualIsInConstructedTransversePlane v =
+  transverseSpansZeroSum
+    (Ambient.first (residual v))
+    (Ambient.second (residual v))
+    (Ambient.third (residual v))
+    (residualHasZeroSum v)
+
+-- The explicitly parameterized transverse plane is stable under
+-- the SAME coordinate permutation, with companion coordinates.
+transverseRotationStability : ∀ a b →
+  Ambient.rotateXYZ (transverse a b)
+    ≡ transverse (0ℚ - b) (a - b)
+transverseRotationStability = rotationIsCyclotomicOnTransverse
+
 -- Existing realified-sector donor has dimension one plus two;
 -- here those sectors are constructed as actual rational
 -- coordinate submodules, not just a matching dimension.
