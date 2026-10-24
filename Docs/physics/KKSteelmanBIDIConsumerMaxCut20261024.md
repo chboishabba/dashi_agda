@@ -79,3 +79,76 @@ BIDI consumer cases:
 - physically admissible Earth KK: still requires same-action stress-energy, smooth boundary matching, physical matter coupling and observables. Horned-sphere results do NOT discharge these physical obligations.
 
 This is a **cross-branch donor reference**, not a typed import into PR #1241: an actual merge or identical verified source ancestry is required before a typechecked KK module can use PR #1244 directly. Avoid duplicate topology definitions; retain the reusable theorem in the owning PR #1244. Existing BIDI/consumer owners remain the canonical transport theory.
+
+## 2026-10-24 cross-PR update: positive SU(3) flat-holonomy donor
+
+**Owner/branches, not merged imports:**
+- <https://github.com/chboishabba/dashi_agda/pull/1244> horned
+  source owner: `AlexanderHornedC3CompactCommutatorRepresentationExact.agda`;
+  `scripts/alexander_horned_c3_su3_constructive_probe.py`.
+- <https://github.com/chboishabba/dashi_agda/pull/1247> CP/nonzero
+  lepton target owner: `NeutrinoHornedSU3RootExact.agda` and
+  `NeutrinoExistingCPSectorLeptonBridgeExact.agda`.
+
+**New original source root:** Morikuni Gotô, "*A Theorem on compact
+semi-simple groups*," *J. Math. Soc. Japan* **1**(3), 270–272
+(1949), DOI **10.2969/jmsj/00130270**. Every element of
+compact connected semisimple `SU(3)` is a single commutator.
+Via Hatcher's original iterated commutator free-group limit,
+this produces a genuine **abstract infinite-image, nonabelian**
+group homomorphism from the chosen horned `G_A` to SU(3),
+mapping its root meridian to any chosen infinite-order
+`A∈SU(3)`. The selected nonzero-CP lepton `A=TS1`
+is such an element: its special unitarity is independently
+checked exactly over Q(ζ3), and its infinite order follows
+from the previously computed nonintegral Galois trace.
+
+For the three-factor abstract horn group `G=G_A*G_A*G_A`,
+the sector rotation `r` and the order-three target
+`T=diag(1,ζ,ζ²)` give a genuinely equivariant map
+`R:G⋊C3→SU3` by `ρ_i(g)=T^iρ_0(g)T^-i` and
+`R(g,k)=ρ(g)T^k`.
+This **corrects** the prior "non-Abelian infinite-image
+representation construction missing" statement:
+mathematical existence is PAID; geometric/physical selection
+is emphatically NOT.
+
+A fundamental BIDI distinction survives:
+- For the perfect source `G`, any homomorphism
+  `G→U(1)` is trivial, hence all its meridians are
+  invisible to *flat Abelian* holonomy.
+- The semidirect **extension** `K=G⋊C3` has
+  abelianization `K_ab≅C3`. A character
+  `K→U(1)` **can** detect the external threefold
+  rotation; it cannot detect any source-group meridian.
+  Thus "Abelian holonomy cannot see the C3 rotation"
+  would be too broad. It is the *perfect kernel G*,
+  not the entire semidirect extension, that has no
+  Abelian characters.
+- Flat `SU(3)` holonomy can detect selected source
+  meridians and has zero local curvature in a
+  corresponding smooth-flat model. This is not a
+  new electromagnetic flux, strong interaction, or
+  Earth gravity effect. A faithful representation,
+  density in SU(3), a source-specific regularity or
+  energy minimizer, and any physical gauge or mass
+  dynamics remain open.
+
+**Geometry:** if PR #1244 eventually proves that
+an *actual smooth open three-manifold exterior* has
+`pi1≅G`, an abstract representation into SU(3)
+induces a flat SU(3) local system (standard covering
+space construction). But neither a choice of that
+physical holonomy nor a real Earth external source
+is supplied. It cannot be treated as a 5D KK photon
+(the KK graviphoton has `U(1)` gauge structure in the
+specified circle reduction), nor as a physical
+LARES-2 model. The old physical-observable/steelman
+BIDI gate is completely unchanged.
+
+Independent numerical finite-depth Schur/commutator
+audits: 31 five-level and 255 eight-level source
+parent identities with max errors `4.99e-15` and
+`7.84e-15` respectively. These are local arithmetic
+probes, *not* an exact-head Agda/Lean kernel
+certificate or actual physical experiment.
