@@ -308,3 +308,29 @@ symmetry, Jordan shape, character coincidence or Griess dimension
 alone does not supply that representation. A VOA tensor cube might
 admit permutation symmetry once tensor-product and grading axioms
 are supplied, but it is not used in the fundamental-group proof.
+
+
+### Additional point-set collar lemma (Lean)
+
+`proofs/horned_c3_lean/HornedC3/ThreeArmCollarIntersections.lean`
+now defines actual subsets `U_i = C union S_i` and proves:
+
+    for i != j, if S_i ∩ S_j = empty, then U_i ∩ U_j = C;
+    for i != j, (U_i ∩ U_j) ∩ U_k = C for any k.
+
+It also proves openness of each `U_i` from open `C` and `S_i`,
+and common-basepoint membership when the point lies in `C`.
+This discharges the **set-theoretic incidence step** for any three-arm
+cover satisfying its separation hypothesis. The exact rational
+tube-envelope audit supports how to arrange the sectors, but does
+not itself furnish the open sets of the *wild complement* or a
+contractibility proof for `C`.
+
+Remaining geometric certificates, stated without inventing proof:
+(1) actual `E_n` cover `C_n union S_(0,n) union S_(1,n) union S_(2,n)`;
+(2) `C_n` open, contractible and containing the fixed basepoint;
+(3) each `S_(i,n)` open, pairwise disjoint and with the expected
+local-stage fundamental group; (4) van Kampen generator and stage-map
+compatibility; (5) nested-limit homeomorphism and compactness
+transport. After (1)–(3), the external kernel-proved van Kampen
+consumer gives the stage free-product isomorphism.
