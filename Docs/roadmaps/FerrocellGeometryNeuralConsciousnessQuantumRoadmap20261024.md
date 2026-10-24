@@ -432,3 +432,14 @@ This is a literal **coarse/relative-fine reopening** witness for the extant \`DA
 **Countercontrols:** ternary 3³ rank18/kernel9, 4³ rank60/kernel4, 5³ rank120/kernel5. n=8 has an algebraically predicted kernel56 by the full \(\mathbb F_9^\times\) Fourier characters. The one-profile structure is **model-specific** and changes with size/algebra/boundaries. Finite ternary residuals alone do not establish J-invariant modular interpretation, LLM latent geometric reasoning, brain memory/phenomenal consciousness, physical 5D spacetime, magnetic monopoles, quantum coherence or vacuum energy.
 
 **Priority/phase D3B.5:** Source algebra/finite arithmetic and a conditional typed reopening are now implemented; next cut is a kernel-checked concrete 125-site spectral/projector certificate **only if required by downstream consumers**, and an independent measured-state model if the geometry is to advance from mathematical analogy to neurobiology. Do not reopen already-paid j harmonic scales or rerun the old numerical 5³ rank as an achievement.
+
+
+### D3B.5 dependent-coordinate +1 and dual J coarse/fine reopening (source correction)
+
+The **best geometrical interpretation** of the 5³ lost five modes is the injective **graph** \(\Gamma_s=\{(i,j,k,s):s=i+j+k\bmod5\}\subset(\mathbb Z/5)^4\). It contains precisely **125 valid sites**, not all 625 sites of a free 4D torus. The extra \(s\) is one *dependent* five-valued address coordinate; its five labels index the 25-site diagonal planes. The lost modes are exactly \(g(s)\), a five-trit field on the added label. Verified by finite graph construction in the IIT #1148 numeric auditor; this is not evidence for physical five-dimensional spacetime.
+
+The existing J-type relative-fibre bridge can be oriented both ways from \(x=F^{79}(Fx)+J(Px)\):
+- geometric **coarse \(P(x)\)** (five-slot profile), **relative fine \(F(x)\)** (120-dimensional retained dynamics);
+- observable **coarse \(F(x)\)**, **relative fine \(P(x)\)** (five-trit missing residual).
+
+This illustrates why coarse/fine is consumer-relative, as already formalised in \`CoarseFineRelativeFibreExact\`. In both orientations, 120+5=125 *already existing* vector dimensions; the original harmonic JCoarse9/JFine19683 and stage/McKay literal +1 are distinct. Detailed proof/experiment and attribution: [IIT #1148 J+1 plan](https://github.com/chboishabba/dashi_agda/blob/agent/iit-phi-integration-maxcut-20261013/docs/superpowers/plans/2026-10-24-iit-5cube-jplusone-coarse-fine.md). All source-written Agda results still need an exact-head kernel check, and the source-specific physical/neural/IIT gates remain unclosed.
