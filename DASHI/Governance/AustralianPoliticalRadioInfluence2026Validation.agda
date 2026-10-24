@@ -176,3 +176,30 @@ noReportedFundingToEquityLeap = A.noRumourToEquity
 noInstructionsFromInterviewCopy :
   A.OriginalInterviewFileAccessIsProvenInstruction → ⊥
 noInstructionsFromInterviewCopy = A.noRepublishedFileCommand
+
+
+-- Case-bounded source-originality witnesses. Equality reductions check
+-- the explicit classifications only, not the independent historical facts.
+reefReleaseIsTimedMediaAccess :
+  A.kind A.leyAimsTargetedMediaPreview ≡ A.timedTargetedInformationRelease
+reefReleaseIsTimedMediaAccess = refl
+
+riddOpinionNotAimsMeasurement :
+  A.kind A.riddIndependentReefOpinion ≡ A.originalOpinionProduction
+riddOpinionNotAimsMeasurement = refl
+
+mooreRepostNotIndependentMeasurement :
+  A.kind A.mooreAmplifiedRiddReefClaim ≡ A.traceableClaimAmplification
+mooreRepostNotIndependentMeasurement = refl
+
+reefRegulatoryFindingIsSpecific :
+  A.evidence A.acmaReefOutsidersFinding ≡ A.regulatoryDetermination
+reefRegulatoryFindingIsSpecific = refl
+
+reefReleaseNotMinistryEditorialControl :
+  A.provesEditorialControl A.leyAimsTargetedMediaPreview ≡ false
+reefReleaseNotMinistryEditorialControl = refl
+
+riddDistributionNotCoordinatedCommand :
+  A.provesHiddenCoordination A.mooreAmplifiedRiddReefClaim ≡ false
+riddDistributionNotCoordinatedCommand = refl
