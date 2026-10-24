@@ -64,7 +64,7 @@ receipt = {
     "gpu_kernel_determinism_proved": False,
 }
 (root / "inference_receipt.json").write_text(
-    json.dumps(receipt, indent=2, sort_keys=True) + "\\n")
+    json.dumps(receipt, indent=2, sort_keys=True) + chr(10))
 '''
 
 
