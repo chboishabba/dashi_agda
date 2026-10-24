@@ -14,6 +14,7 @@ import DASHI.Moonshine.Monster3BJFineD4CandidateMultiplicityExact as JFineRepair
 import DASHI.Moonshine.Monster3BJFineNineCellSymmetricSquareD4Exact as SymTwelve
 import DASHI.Moonshine.Monster3BZetaSuzukiDiagonalNormCutsetExact as ZetaDiagonal
 import DASHI.Moonshine.Monster3BZeroZetaSquaredC3SeparationExact as PhaseZero
+import DASHI.Moonshine.Monster3BSuzukiSelectedFaithful78C2Exact as Faithful78C2
 import DASHI.Moonshine.Monster3BMultiplicityCharacterSafeReconstructionExact as Safe
 import DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact as Gap
 import DASHI.Wikimedia.IbrahimMonsterSSP14GlobalInversionOrbitWeldValidation
@@ -153,3 +154,18 @@ faithfulSuzukiSymSquareCannotBeFaithfulSeventyEight :
   ≡ SymTwelve.negative → ⊥
 faithfulSuzukiSymSquareCannotBeFaithfulSeventyEight =
   SymTwelve.symmetricSquareCannotHaveFaithfulCentralMinus
+
+------------------------------------------------------------------------
+-- 6.Suz source-family no-go on the CENTRAL INVOLUTION, independent
+-- of C3 norm and unaffected by the earlier phase-label gauge choice.
+-- This is not a real GAP execution receipt or Monster intertwiner.
+------------------------------------------------------------------------
+
+sourceSelectedFaithful78NotNebeSymSquared78 :
+  Faithful78C2.sourceSelectedMultiplicityCentreTrace
+  ≡ Faithful78C2.nebeSymSquareMultiplicityCentreTrace → ⊥
+sourceSelectedFaithful78NotNebeSymSquared78 =
+  Faithful78C2.sourceSelectedNotNebeAsSixSuz
+
+centralC2TraceDiscriminator : 66 + 90 ≡ 2 * 78
+centralC2TraceDiscriminator = Faithful78C2.centralTraceDifference
