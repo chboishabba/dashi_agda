@@ -54,7 +54,10 @@ def controlled_fmri(path: Path, condition: str, subject_index: int,
     with np.load(path, allow_pickle=False) as ds:
         if not all(k in ds.files for k in REQUIRED):
             raise ValueError("Source NPZ missing required fields")
-        arrays = {key: np.array(ds[key], copy=True) for key in ds.files}
+        # The official prepare_fmri.py emits a large single-subject array and
+        # a pickled object 'type_desc'. Inference reads ONLY these three
+        # numeric keys. Repacking all keys is unsafe/needlessly memory-heavy.
+        arrays = {key: np.array(ds[key], copy=True) for key in REQUIRED}
     x = arrays["multi_sub_fmri"]
     sizes = arrays["num_voxels_subjects"].astype(int)
     if x.ndim != 2 or len(sizes) == 0 or any(sizes <= 0):
@@ -120,6 +123,8 @@ def stage(upstream: Path, out: Path, condition: str,
         "controlled_fmri_sha256": digest(controlled),
         "permutation_over_test_rows": permutation if condition == "deranged" else None,
         "condition_applied_to_actual_fmri": True,
+        "npz_content_scope": "inference-only keys; original other keys untouched",
+        "stimulus_row_order_verified_against_experiment_design": False,
         "model_inference_executed": False,
         "note": "Seed controls RNG only; PyTorch GPU operations may remain nondeterministic.",
         "shell_command_from_staged_root":
