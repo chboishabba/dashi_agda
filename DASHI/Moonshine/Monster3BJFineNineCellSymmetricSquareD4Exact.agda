@@ -17,7 +17,7 @@ module DASHI.Moonshine.Monster3BJFineNineCellSymmetricSquareD4Exact where
 --
 -- The symmetric-square character identity is classical representation theory
 -- (see Serre). The natural 6.Suz degree12 and 78 symmetrizations are discussed
--- in the source literature, BUT the actual selected 6.Suz 78 need not equal
+-- in Gabriele Nebe, Symmetrizations of quadratic and Hermitian forms\n-- (2025), DOI 10.1007/s10801-025-01399-2, section 6.\n-- The actual selected Monster 3B 6.Suz 78 need not equal
 -- Sym² of its 12; quotient kernel/central phases require source matching.
 --
 -- This module has no postulate, no Monster intertwiner axiom, and no
