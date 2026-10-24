@@ -81,15 +81,15 @@ normal-ordering selection as indispensable premises.
 
 - Parameter-free candidate: `1/31 = 0.0322580645161...`
 - Reported best-fit ratio: `7.537 / 251.1 = 0.0300159299084...`
-- An over-generous componentwise rectangular upper ratio:
+- The componentwise Cartesian-rectangle upper ratio:
   `7.823 / 245.0 = 0.0319306122449...`
 - Exact integer certificate: `31 * 7823 = 242513 < 245000`;
   gap `2487` in the cross-product numerator; therefore
   `1/31 > 7823/245000`.
 - Hence **the exact 1/31 normal-ordering candidate is incompatible
-  even with the Cartesian product of the published marginal 3-sigma
+  with the Cartesian product of the published individually profiled 1D 3-sigma
   parameter intervals**.  This is *not* a separately calculated
-  correlated confidence level or hypothesis-test p-value.
+  correlated confidence level, 2D 3-sigma region or hypothesis-test p-value.
   In particular, one cannot simply retain
   `NeutrinoMixingRatioLane.predictionInCurrentWindow` for this
   convention/version without an actual widened or differently defined
@@ -370,3 +370,17 @@ asymmetries must be modelled separately before detector comparisons.
 Majorana column phases cancel from these vacuum oscillation
 probabilities; lepton-number-violation remains an independent
 observable target.
+
+### Statistical interpretation correction
+
+A `3σ` *one-parameter profile interval* (customarily
+`Δχ²≤9`) and a `3σ` *two-parameter joint confidence contour*
+do **not** generally use the same `Δχ²` threshold.
+Therefore the Cartesian product of the two published NuFIT marginal
+intervals is **not** a calibrated two-dimensional 3σ confidence
+region, and its boundaries do not justify a free-standing claim
+of `>3σ` global significance or a calculated p-value.
+The exact comparison `1/31 > 7823/245000` remains correct as
+an interval statement, and the IO signed/magnitude witness remains
+correct as a Cartesian-interval existence statement.  The actual
+correlated significance is still an open NuFIT-grid calculation.
