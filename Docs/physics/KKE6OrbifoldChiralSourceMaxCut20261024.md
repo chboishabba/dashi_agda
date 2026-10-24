@@ -65,7 +65,7 @@ The eleven RIGHT modes form an **SM-subgroup vectorlike 10 plus neutral singlet*
 
 ## Independent exact local four-dimensional anomaly checks
 
-\`scripts/check_kk_e6_orbifold_vev_anomaly_gate.py\` enumerates **all 27 states** with exact rational hypercharges and left/right parity signs, derives the L/R even-generator stabiliser in an actual SU3 Hermitian matrix basis, tests the real source six-invariant potential under sign flip, and verifies the IR anomaly coefficients:
+`scripts/check_kk_e6_orbifold_vev_anomaly_gate.py` enumerates **all 27 states** with exact rational hypercharges and left/right parity signs, derives the L/R even-generator stabiliser in an actual SU3 Hermitian matrix basis, tests the real source six-invariant potential under sign flip, and verifies the IR anomaly coefficients:
 
 | Post-VEV unbroken gauge consumer | Selected integrated 4D coefficient |
 | --- | ---: |
@@ -102,7 +102,7 @@ The same exact zero-mode spectrum yields NONZERO integrated coefficients in its 
 
 These are normalisation-relative source coefficients, not measured anomalies. For a gauge zero mode whose gauge transformation has the SAME value at both fixed planes, a bulk five-dimensional CS descent generates **opposite-sign endpoint variations**. Regardless of bulk coefficient k, they sum to zero. The NONZERO integrated 4D anomaly is therefore NOT cancelled by classical 5D bulk CS inflow alone.
 
-Explicit source test \`scripts/check_kk_e6_orbifold_fixed_plane_anomaly.py\` checks a symmetric representative: local orbifold anomaly \((A/2,A/2)\) plus CS inflow \((-k,+k)\) gives equations \(A/2-k=0\), \(A/2+k=0\), which imply \(A=0\). For each nonzero A above, NO k solves the pair. The integrated argument is independent of precisely how anomaly density is distributed between endpoints: endpoint inflow sums to zero. **To make this UV gauge action admissible**, one needs physically specified additional boundary/bulk fermions, a consistent anomaly-cancelling Wess–Zumino/Green–Schwarz/Goldstone sector, or modified gauge/boundary symmetry—not an arbitrary change in CS level.
+Explicit source test `scripts/check_kk_e6_orbifold_fixed_plane_anomaly.py` checks a symmetric representative: local orbifold anomaly \((A/2,A/2)\) plus CS inflow \((-k,+k)\) gives equations \(A/2-k=0\), \(A/2+k=0\), which imply \(A=0\). For each nonzero A above, NO k solves the pair. The integrated argument is independent of precisely how anomaly density is distributed between endpoints: endpoint inflow sums to zero. **To make this UV gauge action admissible**, one needs physically specified additional boundary/bulk fermions, a consistent anomaly-cancelling Wess–Zumino/Green–Schwarz/Goldstone sector, or modified gauge/boundary symmetry—not an arbitrary change in CS level.
 
 This is a stronger source-obstruction than simply finding a locally integral five-dimensional half-CS shift in the earlier smooth-circle model. It keeps the original #1241 5D CS parity work useful without falsely treating it as a completed orbifold anomaly cure.
 
@@ -131,5 +131,5 @@ The #1106 comparison potential acts on TWO truncated complex bifundamentals (36 
 
 - **Independently reproduced exact SymPy/Fraction script** for parity matrices, source six-invariant potential, 8 even L/R gauge generators, 4-dimensional VEV stabiliser, 27 charge/parity enumeration, IR and UV gauge anomaly coefficients, and 46 even FULL-E6 adjoint counterexample: PASS.
 - **Independent exact fixed-plane inflow script** for selected 16+10+1 grouping and nonzero-integrated-anomaly CS-only no-go: PASS.
-- **Finite Agda BIDI** \`DASHI/Physics/Gravity/KKE6OrbifoldVEVAnomalyModelForkExact.agda\`: selected matrix parity multiplication and typed "IR ≠ UV" / "SU3³ gauge ≠ full E6" non-descents; SOURCE-WRITTEN, KERNEL UNVERIFIED. Its concrete anomaly Boolean is a LABEL from source script, NOT a kernel proof of continuum triangle diagrams or orbifold APS.
+- **Finite Agda BIDI** `DASHI/Physics/Gravity/KKE6OrbifoldVEVAnomalyModelForkExact.agda`: selected matrix parity multiplication and typed "IR ≠ UV" / "SU3³ gauge ≠ full E6" non-descents; SOURCE-WRITTEN, KERNEL UNVERIFIED. Its concrete anomaly Boolean is a LABEL from source script, NOT a kernel proof of continuum triangle diagrams or orbifold APS.
 - No full 5D anomaly-inflow model, physically viable scalar/superpartner masses, full gauged E6, experimentally calibrated fermion family or chiral Standard Model construction has been established. Retain Slansky, Arkani-Hamed/Cohen/Georgi and Scrucca et al source priority separately from original repository checks.
