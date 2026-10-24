@@ -311,8 +311,31 @@ fi;
 if sixIrr[p78[1]][central2Class] <> sixIrr[p78[2]][central2Class] then
   Error("selected conjugate78 pair has inconsistent central C2 scalar");
 fi;
+# Scalar C3 fingerprints are compared on the SAME literal order-three
+# centre class of 6.Suz. Existence of equal phases is NECESSARY for a
+# common extended 729 action and common diagonal descent; it is NOT
+# sufficient for actual source-coordinate same-object equivalence.
+central3Classes := Filtered(ClassPositionsOfCentre(six), i ->
+  OrdersClassRepresentatives(six)[i] = 3);
+if Length(central3Classes) <> 2 then
+  Error("exact two nonidentity central C3 Suzuki classes required");
+fi;
+central3Class := central3Classes[1];
+common729C3MatchedPairs := [];
+for i in p12 do
+  for j in p78 do
+    if sixIrr[i][central3Class] * 78 = sixIrr[j][central3Class] * 12 then
+      Add(common729C3MatchedPairs, [i,j]);
+    fi;
+  od;
+od;
+common729C3PairCount := Length(common729C3MatchedPairs);
+if common729C3PairCount > 2 then
+  Error("unexpected excess central C3 alignments");
+fi;
+
 selected78C2Trace := sixIrr[p78[1]][central2Class];
-if not selected78C2Trace in [-78,78] then
+if not (selected78C2Trace in [-78,78]) then
   Error("selected irreducible 78 is not central C2 scalar +/-1");
 fi;
 selected78Faithful := ForAll(p78, i -> IsFaithfulCharacter(sixIrr[i]));
@@ -369,6 +392,8 @@ PrintTo(output,
   "  \"degree_78_atlas_labels\": [\"", sixLabels[p78[1]], "\", \"", sixLabels[p78[2]], "\"],\n",
   "  \"source_selected_degree_78_faithful_to_6Suz\": ", SourceBoolText(selected78Faithful), ",\n",
   "  \"suzuki_central_involution_class_position\": ", central2Class, ",\n",
+  "  \"suzuki_central_order_three_class_position\": ", central3Class, ",\n",
+  "  \"common_729_necessary_equal_C3_phase_pair_count\": ", common729C3PairCount, ",\n",
   "  \"source_selected_S90_central_C2_trace\": ", selectedMultiplicityC2Trace, ",\n",
   "  \"sym2_candidate_S90_central_C2_trace\": ", sym2CandidateMultiplicityC2Trace, ",\n",
   "  \"source_selected_c2_compatible_with_sym2_faithful12\": ", SourceBoolText(selectedSym2C2Compatible), ",\n",
