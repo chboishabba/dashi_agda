@@ -178,6 +178,32 @@ class NeutrinoThreeFlavourTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "WrongType"):
             require_point_source_v2(DatasetKind.OSCILLATION_FIT)
 
+    def test_phase_averaged_cosmic_flavour_source_predictions(self):
+        # Standard incoherent astrophysical vacuum approximation.
+        # F_source -> F_earth using Pbar(a,b)=sum_i |U_ai|^2|U_bi|^2.
+        # This is not a fit to IceCube Collaboration PRL 137 081002 (2026).
+        born = [[abs(self.u[a][i])**2 for i in range(3)]
+                for a in range(3)]
+        averaged = [[sum(born[a][i]*born[b][i] for i in range(3))
+                     for b in range(3)] for a in range(3)]
+        for a in range(3):
+            self.assertAlmostEqual(sum(averaged[a]), 1.0, delta=NORM_TOL)
+        pion, neutron = (1/3, 2/3, 0), (1, 0, 0)
+        def at_earth(source):
+            return tuple(sum(source[a]*averaged[a][b] for a in range(3))
+                         for b in range(3))
+        p = at_earth(pion)
+        n = at_earth(neutron)
+        self.assertAlmostEqual(p[0], 0.3263378, delta=2e-6)
+        self.assertAlmostEqual(p[1], 0.3432196, delta=2e-6)
+        self.assertAlmostEqual(p[2], 0.3304426, delta=2e-6)
+        self.assertAlmostEqual(n[0], 0.5481454, delta=2e-6)
+        self.assertAlmostEqual(n[1], 0.2154341, delta=2e-6)
+        self.assertAlmostEqual(n[2], 0.2364206, delta=2e-6)
+        self.assertGreater(abs(p[0]-n[0]), 0.2)
+        # Paper's best-fit Earth fractions (.30,.37,.33) are not
+        # an independent likelihood or a source model calibration.
+
     def test_normal_and_inverted_ordering_denominators_not_silently_swapped(self):
         # NuFIT 6.1: for IO the tabulated delta(m^2)3l is delta(m^2)32.
         io_m32 = -2.483e-3
