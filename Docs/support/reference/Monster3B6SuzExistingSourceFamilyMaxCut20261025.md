@@ -78,3 +78,52 @@ For complete coverage: mixed central C3 values `-78-66ζ`, `-12+66ζ` have norm5
 **Observed local evidence:** Synthetic full-selection acceptance tests (both faithful/nonfaithful survivors, five fail-closed negative controls) pass. The earlier eight central C2/C3/C6 cyclotomic families pass. These are local finite tests only, not an authentic GAP/CTblLib source receipt, Agda proof check, or actual Monster intertwiner.
 
 **Updated Pareto:** Source table availability and published generic 6.Suz machinery are NO LONGER gaps. Only the actual execution/source trace of the above deterministic family-selection matcher, plus the full character-to-linear action/intertwiner bridge (existing PR #1098 owner), remain open. Avoid another custom representation/model unless the matcher returns a concrete unresolved class-map/identity.
+
+## 25 October source-selected FULL-character implementation (strongest cut so far)
+
+The primary Barraclough–Wilson Section 5.1 construction tensors the 729
+Heisenberg extension with **arbitrary** `eta in Irr(6.Suz)`, not only the faithful
+ones. The reference 6.Suz CTblLib table has 210 conjugacy classes
+([Breuer/CTblLib table metadata](https://www.math.rwth-aachen.de/homes/Thomas.Breuer/ctbllib/ctbltoc/data/6.Suz.html)).
+The original complete 3B paper and table download are linked in this ledger.
+
+**Actual code on PR #1250:**
+- The **existing** `scripts/monster_3b_suzuki_main_quotient_match.g` now
+  locates all candidate outer degree156 character restrictions that are two
+  distinct irreducible degree78s of 6.Suz; the faithful-78 shortcut is gone.
+- For each, reuse the original 1458 main Heisenberg character, test exact
+  product decomposition into degree113724, unique main -> MN3B
+  full-character pullback and positive actual restricted Monster multiplicity.
+  **Zero/multiple survivors cause failure rather than an invented result.**
+- The selected family's faithfulness and C2 value `-90` (faithful78) versus
+  `+66` (nonfaithful78) are source **outputs**.
+- It now computes the precise **full 6.Suz ordinary class-function** equality
+  of the selected degree78 family with both
+  `Sym²(12)` and `Sym²(12)*` using the character identity
+  `chi_Sym²(g) = (chi12(g)^2+chi12(g²))/2`, CTblLib `PowerMap(six,2)`,
+  and `GaloisCyc(_, -1)`. Both conjugate rows must match. A C2 match is only
+  a necessary screen and does not set the full equality flag.
+- It records the count of pairwise equal central-C3 scalars for selected
+  degree12/degree78 rows. This is **necessary** for a *common* selected
+  degree729 extension descending through one diagonal kernel, NOT sufficient
+  for an inertia-group or Monster linear intertwiner.
+- Exact typed/JSON receipt renderer and canonical shell checker reject
+  contradictory full-character counts, C2 signatures, invalid phase
+  pair counts or a spurious selected-Sym² flag.
+- Local backend-free Python control `scripts/test_monster_3b_suzuki_source_family_selection.py`
+  exercises faithful/nonfaithful selection, ambiguity/negative controls,
+  C2 vs C3 independence, full-character vs centre-only non-identity and
+  paired-phase compatibility. Independent local eight-case cyclotomic
+  receipt is linked in the conversation.
+
+**Status:** these are source-written GAP/Agda and local synthetic/exact
+arithmetic checks, not an executed GAP table result or kernel-checked
+selected Monster action. GAP is not installed in the current execution
+environment. The highest-value independent acceptance test remains the
+published Barraclough/Wilson table and the actual `6.Suz` CTblLib runtime
+receipt; all generic Schur/Hom/projective-normalizer proof owners are
+already in PR #1098. No `mmgroup` needed for these class-function tests.
+
+**Correction to prior paragraphs:** they describe the historical faithful-78
+prefilter and its central-C2 mismatch, NOT an established Monster-selected
+faithful78. The revised all-78 source-selection supersedes those statements.
