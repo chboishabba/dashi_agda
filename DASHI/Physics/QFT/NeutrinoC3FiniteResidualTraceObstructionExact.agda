@@ -21,7 +21,8 @@ module DASHI.Physics.QFT.NeutrinoC3FiniteResidualTraceObstructionExact where
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _*_) renaming (_*_ to _*ℕ_)
+open import Agda.Builtin.Nat using (Nat)
+import Agda.Builtin.Nat as N
 open import Data.Nat using (_≤ᵇ_)
 open import Data.Integer using (ℤ; +_; _+_; _-_; _*_)
 open import Data.Empty using (⊥)
@@ -117,11 +118,11 @@ fieldTraceNumeratorExact :
 fieldTraceNumeratorExact = refl
 
 fieldTraceStrictlyAboveTwo :
-  (372023795875918 ≤ᵇ (2 *ℕ commonTraceDenominator)) ≡ false
+  (372023795875918 ≤ᵇ ((N._*_ 2 commonTraceDenominator))) ≡ false
 fieldTraceStrictlyAboveTwo = refl
 
 fieldTraceStrictlyBelowThree :
-  (3 *ℕ commonTraceDenominator ≤ᵇ 372023795875918) ≡ false
+  ((N._*_ 3 commonTraceDenominator) ≤ᵇ 372023795875918) ≡ false
 fieldTraceStrictlyBelowThree = refl
 
 ------------------------------------------------------------------------
