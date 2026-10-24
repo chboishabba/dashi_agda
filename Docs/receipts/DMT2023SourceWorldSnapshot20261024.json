@@ -390,5 +390,20 @@
   "public_mat_alone_static_result_plan": null,
   "bibliographic_lineage_roots": 3,
   "participant_independence_certified": false,
-  "independently_reproduced_original_statistic": false
+  "independently_reproduced_original_statistic": false,
+  "verification": {
+    "as_of_date": "2026-10-24",
+    "method": "Read-only code-mode JavaScript cross-file audit of current connected GitHub repository branch blobs; graph/source snapshot and source-written test contract inspection",
+    "status": "passed_static_source_world_crosscheck_only",
+    "source_world_git_blob": "fcf0fb53c85a960e2fff6d80954bff9f24aeba80",
+    "source_tree_git_blob": "314d6cf3e7512af03ddb473a3bdfb4551cb01e00",
+    "source_search_runtime_git_blob": "945c3ab1f65e6726f13df58578f90c6b2bd987e7",
+    "source_world_python_tests_written": 18,
+    "parcelled_fc_python_tests_written": 11,
+    "source_world_python_pytest_current_head_executed": false,
+    "paired_fc_python_pytest_current_head_executed": false,
+    "agda_kernel_current_head_checked": false,
+    "original_human_data_replay_completed": false,
+    "assertion": "Internal source graph equality and five-action dependency plan verified; synthetic test code and Agda source existence alone cannot close tests or human measurement."
+  }
 }
