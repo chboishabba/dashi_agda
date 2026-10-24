@@ -873,3 +873,29 @@ def test_portfolio_maxcut_is_multi_lane_not_black_nda_centric():
     ):
         assert token in portfolio
     assert "aquino-epstein-portfolio-maxcut-20261024.md" in roadmap
+
+
+def test_canadian_ripon_sworn_testimony_does_not_promote_score_producer():
+    case = OWNER.read_text()
+    portfolio = (ROOT / "docs/research/aquino-epstein-portfolio-maxcut-20261024.md").read_text()
+    for token in (
+        "riponSilvesterCanadian113 = ripon-pipeline-testimony",
+        "riponMassinghamCanadian117 = ripon-pipeline-testimony",
+        "ETHI-113 2018-06-12",
+        "ETHI-117 2018-09-27",
+        "RiponScoreProducerDisplayBoundary",
+        "canonicalRiponScoreProducerDisplayBoundary =",
+        "riponScoreDisplayPaidAsWitnessStatement = refl",
+        "riponSCLSupplierClaimPreserved = refl",
+        "riponNoProducerAttributionWithoutDataset = refl",
+        "riponScoreDisplayDoesNotCertifyFacebookOrigin = refl",
+        "riponScoreDisplayNoElectionOutcomeProof = refl",
+    ):
+        assert token in case
+    for token in (
+        "score-file version",
+        "different individual source",
+        "page-image screenshot requests returned a 403",
+        "exact dataset fingerprint is still open",
+    ):
+        assert token in portfolio
