@@ -316,7 +316,7 @@ def test_bannon_2018_mirror_remains_derivative_carrier_not_new_witness():
     roadmap = ROADMAP.read_text()
     assert 'bounded-source bannonOctober2018Messages epsteinCorrespondenceRoot' in source
     assert 'journalist-hosted four-page reproduction' in source.lower()
-    assert 'original DOJ-native custody and complete surrounding thread were not checked' in source
+    assert 'exact DOJ-native custody and complete surrounding thread were not checked' in source
     assert 'true false false false' in source
     assert 'Poder360-hosted DOJ-labelled' in roadmap
     assert 'not a new witness or an independently retrieved DOJ original' in roadmap
@@ -437,7 +437,7 @@ def test_ripon_has_separate_witness_and_committee_origins():
 def test_ripon_direct_corporate_contract_not_inferred_from_code_crossing():
     source = OWNER.read_text()
     roadmap = ROADMAP.read_text()
-    assert "not direct CA privity" in source
+    assert "not unauthorized influence, CA contractual privity" in source
     assert "unauthorized influence" in source
     assert "original code bytes" in source.lower() or "original code" in source.lower()
     assert "silvesterAIQBoltonDeployment2018" in source
@@ -580,10 +580,10 @@ def test_unpaid_deduplicated_case_reel_join_stays_narrow():
     for token in (
         "actualSignedAgreementStillUnverified = refl",
         "reelBytesHashStillUnverified = refl",
-        "bannonEpsteinWorkProductCut = case-dependency-cut",
+        "bannonWorkProductCut = case-dependency-cut",
         "April 3 2019 EFTA00809863-Indyke letter located",
-        "Film already exists.",
-        "source timestamps",
+        "Prior owner pays filmed interview",
+        "dated Jun-Jul 2019 House shoot messages",
         "preExistingFilmedInterviewIsPaid = refl",
         "caseWholeH2Unpaid = refl",
         "caseCovertH3Unpaid = refl",
@@ -675,7 +675,7 @@ def test_exact_doj_efta01600824_transcript_locator_paid_but_sha_open():
         "EFTA01600824.mov",
         "sha256: null",
         "scripts/hash_media_receipt.py",
-        "third-party ASR",
+        "publicly indexed timecoded ASR transcript",
     ):
         assert token in roadmap
 
