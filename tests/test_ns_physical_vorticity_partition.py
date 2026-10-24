@@ -55,3 +55,16 @@ def test_general_superposed_triads_and_zero_padding():
     padded={**combined,(100,0,0):S.zeros(3,1),
                         (-100,0,0):S.zeros(3,1)}
     assert mod.budget(padded)==a
+
+def test_classwise_curl_and_transport_need_signed_compensation():
+    r=mod.budget(mod.field((1,0,0),(0,1,64)))
+    # (enstrophy production, vorticity transport, stretching, residual)
+    assert r["class_correction"]=={
+       "LH":(4,0,0,4),
+       "HL":(-16392,-4,-16384,-4),
+       "HH":(4,4,0,0)}
+    assert sum(v[3] for v in r["class_correction"].values())==0
+    assert sum(v[1] for v in r["class_correction"].values())==0
+    assert sum(v[2] for v in r["class_correction"].values())==-16384
+    # These are physical Bony classifier contributions, not R685's
+    # separate mixed-helicity/commutator source.
