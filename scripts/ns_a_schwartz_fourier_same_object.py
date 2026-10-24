@@ -169,6 +169,18 @@ def certificate():
     scale_response=S.simplify(
         (8*S.pi/nu**2)*(EE/ell)**S.Rational(3,2)*S.sqrt(ell*DD))
     assert S.simplify(scale_response-total_global/ell)==0
+
+    # Critical regularity audit: the same scalar majorants DO NOT yield
+    # the scale-invariant dot-H^(1/2) Fourier norm in 3D. Its high-r
+    # envelope contains the logarithmically divergent integral
+    # 4*pi*E*D/nu² * int_(r*,infinity) dr/r.
+    Rcrit=S.symbols("Rcrit",positive=True)
+    crit_log_tail=S.simplify(
+       4*S.pi*EE*DD/nu**2*(S.log(Rcrit)-S.log(cutoff)))
+    assert S.simplify(S.diff(crit_log_tail,Rcrit) -
+       4*S.pi*EE*DD/(nu**2*Rcrit))==0
+    # The finite E,D response bound therefore cannot be promoted to
+    # critical H^(1/2) solely by multiplying its Fourier majorant by r.
     return {
         "schema":"ns.a.schwartz-fourier-same-object.v1",
         "convention":"F[f](xi)=integral exp(-i*x.dot(xi)) f(x) dx",
@@ -200,6 +212,8 @@ def certificate():
         "Navier_Stokes_scaling_E_lambda":"E/lambda",
         "Navier_Stokes_scaling_D_lambda":"lambda*D",
         "Navier_Stokes_scaling_response_L2_squared":"response_L2_squared/lambda",
+        "Hhalf_critical_high_frequency_envelope_log_tail":str(crit_log_tail),
+        "Hhalf_critical_primitive_diverges":"log(Rcrit) as Rcrit->infinity; not a source regularity proof",
         "exact_nonzero_projected_frequency":"(1,0,1)",
         "source_only_not_claimed":[
             "general FourierTransformVelocity for every solution",
