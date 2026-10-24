@@ -1,3 +1,106 @@
+# 2026-10-24 A/B DECISIVE SAME-SOURCE RECUT — DO NOT REOPEN OLD LEAVES
+
+**Research goal is original unforced Clay A/B**. This update supersedes
+the older source notes below describing the H² logarithmic Fourier bound
+as the primary A branch and the covariance↔R685 rate weld as missing
+algebra. Original authorship of classical Sobolev, Leray and Bony
+machinery remains with those sources; DASHI owns only these exact
+compositions and source tests.
+
+## B: NEW SOURCE-WRITTEN CORRECTED CRITICAL-TOUCHING THEOREM
+In ORIGINAL owners
+`NSTriadKNFixedOutputPhysicalCoherentCovarianceLiveExact.agda` and
+`NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLiveExact.agda`,
+the physical mixed-product fibre has M=Σ Aτ (bilinear in velocity),
+D=-Σ rτ Aτ, n=length fibre, R=Σrτ. The R236 covariance:
+  C=n W(M,D)+R W(M,M)
+   = R W(M,M)-n K,
+  K=Σ rτ W(M,Aτ)
+   = W(M,commutator)-W(M,tangent)  [original R685 owner].
+R236's six region-pair blocks already give
+  C=ν(deepOnlySigned+criticalTouchingSigned).
+The new actual theorem composition states, **without dividing by ν**,
+  ν criticalTouchingSigned
+   = R W(M,M)
+     - n[W(M,commutator)-W(M,tangent)]
+     - ν deepOnlySigned.
+This includes the original deep complement, fibre-rate centering and
+physical commutator/tangent endpoint. The previously falsified
+padding-dependent B4 *inequality* has NOT been rehabilitated.
+
+**Exact local numerical regression:** literal same-output triads
+k=(64,1,0) with DFL, DHH and Core rates, ν=2:
+covariance=780398656, signed deepOnly=162531800,
+signed criticalTouching=227667528. Hence ν critical=455335056,
+equal to covariance−ν deepOnly. Algebraic checks also confirm
+the rate/kernel and complex-work same-object arithmetic.
+`tests/test_ns_original_r236_r685_rate_bridge.py`.
+Agda source-written theorem terms committed; **kernel unchecked**
+(no Agda toolchain available). R690 provides the later global signed
+sum but no estimate; original B1/B2/B3/B4/B7 quantitative obligations
+are not thereby proved.
+
+**Distinct cubic enstrophy firewall:** physical vortex stretching
+is degree 3 in velocity. Mixed-helicity covariance C is degree 4.
+An uncompensated universal C=stretching equality is impossible
+on a nonzero-stretching datum by amplitude scaling. Abstract
+no-go proof is source-written in
+`dashi_lean4/NSUnforcedAnalyticCuts.lean` (kernel unchecked).
+The exact classical curl identity is now source-written in
+`NSTriadKNFourierBiotSavartExact.agda`: ordered curl defects
+cancel under (p,q) input swap for transverse modes. For R236 this
+occurs on the MERGED deep-far-low region, deep-high-high, and Core,
+not on oriented LH and HL separately. Numerical regression corrected
+the earlier overly strong oriented-region assertion.
+`tests/test_ns_r236_swap_closed_production.py`.
+
+## A: STRONGER GENUINE CRITICAL SPATIAL FOURIER ESTIMATE
+The previously derived pointwise bound
+`min(E r,sqrt(E D))` had a logarithmically divergent Hhalf radial
+*majorant*. That does NOT obstruct the actual physical source. From
+dual homogeneous Sobolev `L^(3/2) -> dot H^(-1/2)` and
+`H1 -> L6`, with actual physical
+`V=(-ν Δ)^(-1)P div(u⊗u)`, one has
+  ||V||_{dot H^(1/2)}
+    <= K/ν ||u||_L3²
+    <= K/ν sqrt(E D).
+This bound is invariant under 3D NS spatial scaling and requires
+only divergence-free H¹, not H² or a frequency cutoff. The source
+field is unchanged; no unrelated `FourierTransformVelocity : Set`.
+Causal heat-kernel contraction further yields
+  int_0^T ||W(t)||²_{dot H^(1/2)} dt
+    <= K² E0²/(2ν³),
+for the actual nonlinear Duhamel W under the energy inequality.
+Derivation and exact exponent/scaling audits:
+`scripts/ns_a_critical_h1_dual_sobolev.py`,
+`tests/test_ns_a_critical_h1_dual_sobolev.py`.
+The older conditional `scripts/ns_a_critical_h2_log_majorant.py`
+is retained for comparison only; it is NOT the canonical A input.
+
+**Still unpaid A3:** time-`L² dot Hhalf` scales as λ⁻², so its
+uniform-in-T energy estimate is NOT a scale-critical spacetime
+Serrin/Kato continuation norm. The energy interpolation gives
+`L⁴_t L³_x`, where 2/4+3/3=3/2>1. Need actual
+unconditional critical continuation control, not scalar-bound
+repackaging. Bishop/Agda same-continuum-trajectory formal inhabitant
+and direct A3 are still missing.
+
+## Verification and phase
+- New source-written B finite algebra proof terms and tests in
+  current PR #1240. Local SymPy independently checked the all-vector
+  swap polynomial identity, corrected three-region cancellations,
+  exact B six-block corrected-rate identity, and A radial integrals/
+  scaling. Exact current GitHub head pytest and Agda/Lean kernel are
+  **NOT WITNESSED** in this cut.
+- Proof phase: B **same-fibre equality source-written**; its strict
+  cutoff-uniform global signed estimate and continuation remain OPEN.
+  A **physical H1 critical-spatial bound analytically available**;
+  same-trajectory Bishop theorem and A3 continuation remain OPEN.
+- Never promote bool status fields or algebraic source strings to
+  a completed unrestricted Clay A/B theorem.
+
+---
+
 # 2026-10-24 A/B physical source max-cut — read FIRST
 
 **Primary objective remains original unforced A and B.** No Clay
