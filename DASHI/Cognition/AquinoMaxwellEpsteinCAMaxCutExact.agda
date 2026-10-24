@@ -1816,3 +1816,77 @@ chainReactionNoBlackNDAShortcut = refl
 chainReactionNoUnifiedCaseProgramme :
   Banking.aquinoSCLOrMaxwellPROMISSharedOperationPaid chainReactionFinanceOriginalOwner ≡ false
 chainReactionNoUnifiedCaseProgramme = refl
+
+
+------------------------------------------------------------------------
+-- CANADIAN PARLIAMENT FIRST-PERSON RIPON PIPELINE DISCRIMINATOR.
+-- ETHI-113 and ETHI-117 are independently spoken accounts of two AIQ
+-- principals within one institution; not two independent dataset audits.
+-- PDF text from Parliament was available; screenshot request was denied,
+-- so original-page image authentication is NOT claimed.
+------------------------------------------------------------------------
+
+data RiponCanadianWitness : Set where
+  jeffSilvesterUnderOath : RiponCanadianWitness
+  zackMassinghamUnderOath : RiponCanadianWitness
+
+record RiponPipelineTestimony : Set where
+  constructor ripon-pipeline-testimony
+  field
+    riponSpeaker : RiponCanadianWitness
+    riponParliamentarySource : String
+    riponSpeakerClaim : String
+    riponSourceTranscriptIndexed : Bool
+    riponOriginalPageImageVerifiedHere : Bool
+    riponExactScoreDatasetOriginVerified : Bool
+open RiponPipelineTestimony public
+
+riponSilvesterCanadian113 : RiponPipelineTestimony
+riponSilvesterCanadian113 = ripon-pipeline-testimony
+  jeffSilvesterUnderOath
+  "Canada ETHI-113 2018-06-12 PDF pp 15 and 25; https://www.ourcommons.ca/Content/Committee/421/ETHI/Evidence/EV9968993/ETHIEV113-E.PDF"
+  "Silvester says AIQ wrote Ripon code to display five SCL-supplied psychographic scoring columns with entries between zero and one; says AIQ did not calculate the scores. When asked whether the source was improperly obtained Facebook information he says it may be so, but he does not know."
+  true false false
+
+riponMassinghamCanadian117 : RiponPipelineTestimony
+riponMassinghamCanadian117 = ripon-pipeline-testimony
+  zackMassinghamUnderOath
+  "Canada ETHI-117 2018-09-27 PDF pp 2 and 10; https://www.ourcommons.ca/Content/Committee/421/ETHI/Evidence/EV10046597/ETHIEV117-E.PDF"
+  "Massingham says SCL defined the score values shown in the Ripon CRM, and modelling happened in SCL's data ecosystem, not inside the display product. Distinct speaker within same company, not an independent code fingerprint."
+  true false false
+
+record RiponScoreProducerDisplayBoundary : Set where
+  constructor ripon-score-producer-display-boundary
+  field
+    displayedScoresAdmittedByAIQWitnesses : Bool
+    valuesSuppliedBySCLAccordingToWitnesses : Bool
+    AIQClaimsToHaveGeneratedSourceScores : Bool
+    exactKoganRFileJoinedToRiponRow : Bool
+    actualFacebookInputToSpecificScoreVerified : Bool
+    directCAAIQContractRequiredForDisplay : Bool
+    scoringInterfaceProvesInfluenceOnElection : Bool
+open RiponScoreProducerDisplayBoundary public
+
+canonicalRiponScoreProducerDisplayBoundary : RiponScoreProducerDisplayBoundary
+canonicalRiponScoreProducerDisplayBoundary =
+  ripon-score-producer-display-boundary true true false false false false false
+
+riponScoreDisplayPaidAsWitnessStatement :
+  displayedScoresAdmittedByAIQWitnesses canonicalRiponScoreProducerDisplayBoundary ≡ true
+riponScoreDisplayPaidAsWitnessStatement = refl
+
+riponSCLSupplierClaimPreserved :
+  valuesSuppliedBySCLAccordingToWitnesses canonicalRiponScoreProducerDisplayBoundary ≡ true
+riponSCLSupplierClaimPreserved = refl
+
+riponNoProducerAttributionWithoutDataset :
+  exactKoganRFileJoinedToRiponRow canonicalRiponScoreProducerDisplayBoundary ≡ false
+riponNoProducerAttributionWithoutDataset = refl
+
+riponScoreDisplayDoesNotCertifyFacebookOrigin :
+  actualFacebookInputToSpecificScoreVerified canonicalRiponScoreProducerDisplayBoundary ≡ false
+riponScoreDisplayDoesNotCertifyFacebookOrigin = refl
+
+riponScoreDisplayNoElectionOutcomeProof :
+  scoringInterfaceProvesInfluenceOnElection canonicalRiponScoreProducerDisplayBoundary ≡ false
+riponScoreDisplayNoElectionOutcomeProof = refl
