@@ -9,6 +9,7 @@ Yu et al. (2026), 10.1016/j.bspc.2026.110149; prior OPM gradiometry.
 from __future__ import annotations
 import argparse
 import json
+import re
 from fractions import Fraction as Q
 from itertools import product
 from math import isclose, sin, pi
@@ -140,6 +141,14 @@ REQUIRED_RECEIPTS = (
 def validate_receipt(candidate):
     missing=[k for k in REQUIRED_RECEIPTS if not candidate.get(k)]
     errors=[]
+    for name in ("raw_data_sha256", "heldout_split_manifest_sha256",
+                 "control_and_blind_manifest_sha256"):
+        val=candidate.get(name)
+        if val is not None and not re.fullmatch(r"[0-9a-fA-F]{64}", str(val)):
+            errors.append(name + " must be 64 hexadecimal characters")
+    if any(str(v).strip().lower() in ("dummy", "placeholder", "synthetic-placeholder")
+           for v in candidate.values()):
+        errors.append("placeholder values cannot be promoted as experimental receipts")
     try:
         f=float(candidate.get("sampling_hz",0))
         if f <= 8.0:
