@@ -31,6 +31,8 @@ jobs:
           python3 scripts/alexander_horned_c3_spin_split_cocycle_probe.py
           python3 scripts/alexander_horned_c3_spin_dirac_probe.py
           python3 scripts/alexander_horned_c3_spin_fixed_axis_padic_probe.py
+          python3 scripts/alexander_horned_c3_maschke_field_comparison.py
+          python3 scripts/alexander_horned_c3_full_actor_maschke_f7.py
           python3 scripts/alexander_horned_c3_maschke_prime_comparison.py
           python3 scripts/alexander_horned_c3_spin_cyclotomic_intertwiner_audit.py
           python3 scripts/alexander_horned_c3_f7_full_actor_reynolds.py
