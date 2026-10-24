@@ -80,6 +80,8 @@ The eleven RIGHT modes form an **SM-subgroup vectorlike 10 plus neutral singlet*
 
 ## Decisive upstream anomaly obstruction
 
+For the UV anomaly table, the **central** pre-VEV U(1)_R generator is diag(−1,−1,2), unlike the final hypercharge projection T_R=diag(−4,2,2), which also contains an SU(2)_R Cartan component. This distinction is necessary: a generator used as an independent U(1)_R factor must commute with SU(2)_R. The table below uses the commuting UV generator, not the final Y_R projection.
+
 The orbifold gauge symmetry **before** E32/E33 breaking is
 \[
 SU(3)_c\times SU(2)_L\times U(1)_L\times SU(2)_R\times U(1)_R.
@@ -90,9 +92,9 @@ The same exact zero-mode spectrum yields NONZERO integrated coefficients in its 
 | UV unbroken orbifold gauge anomaly | Coefficient |
 | --- | ---: |
 | \(U(1)_L^3\) | +40 |
-| \(U(1)_R^3\) | −256 |
+| \(U(1)_R^3\) | −40 |
 | \(U(1)_L^2U(1)_R\) | +8 |
-| \(U(1)_LU(1)_R^2\) | +64 |
+| \(U(1)_LU(1)_R^2\) | −8 |
 | gravitational-\(U(1)_L\) | +16 |
 | gravitational-\(U(1)_R\) | −16 |
 | \(SU(3)_c^2U(1)_L\) | +2 |
