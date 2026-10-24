@@ -11,6 +11,8 @@ import json
 import math
 from pathlib import Path
 from psychotronics_field_loom_covariance import correlated_residual_gls
+from psychotronics_field_loom_source_join import verify_pair_source
+from psychotronics_field_loom_factorial import audit_settings
 
 MU0 = 4e-7 * math.pi
 G0 = 9.80665
@@ -146,6 +148,15 @@ def paired_analysis(record):
     gls = correlated_residual_gls(results, common_force_std_n=sys_floor,
             gradient_calibration_fractional_std=float(gradient_fraction))
     provenance_ok = all(_readback_receipt(meta, k) for k in ('raw_data', 'calibration'))
+    source_join = verify_pair_source(meta, pairs)
+    provenance_ok = provenance_ok and source_join['bytes_and_exact_pair_source_join']
+    factorial_settings = record.get('factorial_settings')
+    try:
+        design = audit_settings(factorial_settings)
+        design_identifiable = design['interaction_identifiable_with_separated_thermal_proxy']
+    except (KeyError, TypeError, ValueError):
+        design = None
+        design_identifiable = False
     run_count = len(set(p.get('session_id') for p in pairs if isinstance(p.get('session_id'), str) and p['session_id']))
     obligations = []
     for k in ('instrument_serial', 'configuration_revision', 'calibration_revision',
@@ -165,6 +176,11 @@ def paired_analysis(record):
         obligations.append('unidentified_shared_moment_calibration_source')
     if not provenance_ok:
         obligations.append('missing_or_unmatched_original_raw_and_calibration_file_hashes')
+    obligations.extend(source_join['unpaid_source_joins'])
+    if not design_identifiable:
+        obligations.append('unidentifiable_coil_dipole_heating_factorial')
+    if meta.get('raw_to_pairs_reducer_verified') is not True:
+        obligations.append('unverified_raw_to_pair_reduction')
     if len(results) < 4 or run_count < 2:
         obligations.append('insufficient_predefined_pair_or_session_coverage')
     if meta['origin'] == 'synthetic':
@@ -183,6 +199,8 @@ def paired_analysis(record):
         'abs_residual_over_total_std': gls['abs_residual_over_total_std'],
         'covariance_method': gls['method'],
         'input_bytes_hash_verified': provenance_ok,
+        'same_object_source_join': source_join,
+        'factorial_identifiability': design,
         'submission_ready_for_independent_metrology_review': not obligations,
         'unpaid_obligations': obligations,
         'self_declared_dossier_checklist_complete': not obligations,
