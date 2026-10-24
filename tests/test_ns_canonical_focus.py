@@ -60,7 +60,10 @@ def test_ABB4_land_at_source_mathematics_not_abstract_residual_records():
     b4 = select_route("B4", nav)
     assert any("NSCanonicalB4PhysicalR440AnalyticInterfaceExact" in x["path"]
                for x in b4["support"])
-    assert "uninhabited" in b4["status"]
+    assert "zero-amplitude" in b4["status"]
+    assert "not closed" in b4["status"]
+    assert any("ns_b4_literal_padding_adversary.py" in x["path"]
+               for x in b4["support"])
 
 
 def test_unknown_round_rejected_without_guessing_authority():
