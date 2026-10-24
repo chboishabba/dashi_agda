@@ -1,3 +1,25 @@
+> **2026-10-24 canonical A/B supersession notice.** The original ladder below
+> is preserved for historical provenance. It is NOT the default live queue:
+> the older L3 finite-dimensional flow/selected-slot compiler inventory was
+> developed before the later Round71 real physical trajectory, R830 and
+> R823 decision sources. It must not reopen solved finite-real-ODE work.
+> The latest A/B source reduction is in
+> [`NSProofControl20260915.md`](../../../Docs/roadmaps/NSProofControl20260915.md),
+> using merged [PR #1091](https://github.com/chboishabba/dashi_agda/pull/1091)
+> and [PR #1234](https://github.com/chboishabba/dashi_agda/pull/1234).
+> For B, the live source is
+> `NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda`: exact
+> signed noncore/core R440 term and sharp principal half are already
+> derived; a cutoff-uniform *physical* remainder payment is not.
+> B1/2/3 producers, B7 and continuum continuation are separate.
+> For A, canonical resolvent/Gram/saturation mathematics is already
+> established; the actual continuum Fourier interaction, low/high
+> finite-energy majorants, and whole-space continuation remain.
+> **Do not promote any historical `checked` label into a current kernel
+> receipt or Clay result.** Start with
+> `python scripts/ns_canonical_focus.py --route B4` or `--route A`.
+
+---
 # Highest-alpha lemma ladder to a Clay-submissible periodic proof
 
 [Back to the paper-corpus overview](README.md)
