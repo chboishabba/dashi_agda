@@ -187,7 +187,19 @@ nufitFixtureSource =
 
 iceCubeDataSource : String
 iceCubeDataSource =
-  "IceCube Collaboration IceTracks-DR2 (2026), doi:10.7910/DVN/MMIIZA"
+  "IceCube Collaboration, IceTracks-DR2-v2, SkyLLH v26.1.0 (September 2026); public 2008-2022 source-search sample, not a neutrino-oscillation fit"
+
+iceCubeResponseVersion : String
+iceCubeResponseVersion =
+  "v2 corrects IC86 highest true-energy bin to [8.6,8.7) in log10 GeV and per-season sin(declination) smearing bins"
+
+nobelOriginalAuthority : String
+nobelOriginalAuthority =
+  "NobelPrize.org, Physics 2026 official press release, 2026-10-06, award attribution to Francis Halzen"
+
+collaborationOriginalAuthority : String
+collaborationOriginalAuthority =
+  "IceCube Collaboration, Abbasi et al., arXiv:2605.19040, original DR2 methods and collective authorship"
 
 claimBoundary : String
 claimBoundary =
