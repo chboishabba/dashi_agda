@@ -801,3 +801,75 @@ def test_black_sdny_oct2026_order_is_not_ddc_congress_challenge_disposition():
     assert "fees motion (ECF 440)" in audit
     assert "at the plaintiff's request" in audit
     assert "D.D.C." in audit and "S.D.N.Y." in audit
+
+
+def test_chain_reaction_is_existing_banking_owner_lead_not_criminal_finding():
+    banking = (ROOT / "DASHI/Cognition/EpsteinBankingInfrastructureAcquisitionExact.agda").read_text()
+    case = OWNER.read_text()
+    for token in (
+        "chainReaction2015Memo = chain-reaction-source-receipt",
+        "chainReactionThirdPartyIndex = chain-reaction-source-receipt",
+        "chainReactionWyden2026Questions = chain-reaction-source-receipt",
+        "EFTA00173953", "NY-NYS-0829", "OFC-TP-15-12392",
+        "memoLeadOnlyCaveatRetained : Bool",
+        "nativeMemoScanPageAuthenticated : Bool",
+        "namedBankWireMatchedToExistingLedger : Bool",
+        "investigationTerminationMotiveProven : Bool",
+        "chainReactionLeadNotAdjudication = refl",
+        "chainReactionTerminationNotEstablished = refl",
+        "chainReactionNoAutoBlackLedgerJoin = refl",
+        "chainReactionNoGlobalProgrammeTransfer = refl",
+    ):
+        assert token in banking
+    for token in (
+        "import DASHI.Cognition.EpsteinBankingInfrastructureAcquisitionExact as Banking",
+        "chainReactionFinanceOriginalOwner = Banking.canonicalChainReactionPromotionBoundary",
+        "chainReaction2015MemoSourceIdentified = refl",
+        "chainReactionInvestigationNotAdjudication = refl",
+        "chainReactionStillNeedsTransactionFingerprint = refl",
+        "chainReactionNoBlackNDAShortcut = refl",
+        "chainReactionNoUnifiedCaseProgramme = refl",
+    ):
+        assert token in case
+
+
+def test_ripon_intermediary_countermodel_stops_unsigned_contract_promotion():
+    case = OWNER.read_text()
+    for token in (
+        "silvesterWrittenOriginal2018 = ripon-independent-chain-evidence",
+        "dcmsRiponOCEANReview2019 = ripon-independent-chain-evidence",
+        "koganSeparateDelivery2018 = ripon-independent-chain-evidence",
+        "ftcOriginalCorporateContracts2019 = ripon-independent-chain-evidence",
+        "FKN0086",
+        "90210/html/",
+        "committees.parliament.uk/oralevidence/7853/html/",
+        "RiponIntermediaryCountermodel",
+        "canonicalRiponIntermediaryCountermodel =",
+        "riponSCLContractAndReportedCAEcosystemFlowCompatible = refl",
+        "riponCommitteeDataFlowIsNotSignedCAContract = refl",
+        "riponNamedKoganOutputToAIQImportStillUnpaid = refl",
+        "riponDoesNotCreateAquinoTransfer2026 = refl",
+        "riponDoesNotCreateBannonEpsteinMediaUse2026 = refl",
+    ):
+        assert token in case
+    assert "silvesterWritten2018" in case and "dcmsReport2019" in case
+
+
+def test_portfolio_maxcut_is_multi_lane_not_black_nda_centric():
+    portfolio = (ROOT / "docs/research/aquino-epstein-portfolio-maxcut-20261024.md").read_text()
+    roadmap = ROADMAP.read_text()
+    for token in (
+        "AIQ–SCL–CA technical operation",
+        "Banking + OCDETF original programme",
+        "Bannon–Epstein media production",
+        "Black 2015 NDA and financial service scope",
+        "Maxwell/PROMIS",
+        "Aquino–SCL technique genealogy",
+        "Cross-network covert hierarchy H2/H3",
+        "source-state countermodel",
+        "not a finished investigative product",
+        "FKN0086",
+        "EFTA00173953",
+    ):
+        assert token in portfolio
+    assert "aquino-epstein-portfolio-maxcut-20261024.md" in roadmap
