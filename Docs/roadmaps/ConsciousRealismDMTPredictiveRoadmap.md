@@ -126,3 +126,23 @@ No source acquisition, code-clone, Agda typecheck or fMRI inference was possible
 4. Work backward into Agda only for genuine errors, needed kernel checks or a live empirically motivated theorem. Preserve the existing Klüver appendix without making it the primary programme.
 
 **Stop adding speculative theory wrappers until a real, source-locked dataset benchmark or a falsifiable physical experimental contract is admitted.**
+
+## 2026-10-24 executable paired-fMRI exploratory benchmark (after Brain-IT contact)
+
+**New production owner:** \`scripts/evaluate_dmt_paired_fc.py\` and synthetic tests \`tests/test_dmt_paired_fc.py\`. This is a *new DASHI exploratory consumer-specific estimator*, not a replication of a published 2023 table/figure or a reimplementation of Beliy et al. Brain-IT. It is grounded in the author-script BOLD_AAL layout (parcel × time) and the *metric type* in \`timmer500/DMT_Imaging/Scripts/StaticGFC.m\` / \`dRSFC.m\`; the original paper's filtering, masking, motion exclusion, exact acquisition timing and nuisance regressors remain separately unverified.
+
+**The mathematical consumer:** per subject/condition, form Pearson correlations across parcels over time, Fisher transform non-diagonal finite coefficients, optionally count diagonal zeros as in the original static-GFC convention, and compare **paired within-subject** DMT minus placebo summary. A paired t statistic and 95% t confidence interval use **subject**, not 112×112 edges or temporal windows, as the independent unit. The code rejects nonfinite/flat channels, perfect-correlation singularities, unexpectedly shaped 112-parcel arrays and mismatched paired time axes. These are source-inspired preprocessing choices, not claims of exact paper equivalence.
+
+**Real-data admission:** a rights-reviewed participant/session manifest must first pass the existing source SHA256/Git blob lock and train/test subject separation. Its \`motion_eligible_subjects\` list must identify exactly **15 distinct subjects**, and \`motion_exclusion_source_reference\` must point to independent QC/motion evidence. The tool will not infer 15 subjects from 20 DMT/placebo file pairs. The fMRI replay is fail-closed without these receipts.
+
+Commands (only after legitimate receipt and dataset acquisition):
+
+\`\`\`sh
+python -m pytest -q tests/test_dmt_brainit_consumer_cut.py tests/test_dmt_paired_fc.py
+python3 scripts/evaluate_dmt_paired_fc.py --data-root PERMITTED_DATA_ROOT --manifest APPROVED_MANIFEST.json --output exploratory_fc.json
+\`\`\`
+
+Requires \`numpy\` and \`scipy\`. The prototype was exercised in a local Python environment with **5 passing synthetic tests** (MATLAB variable loading, diagonal convention, subject-level paired estimator, missing-pair/QC refusal and blocked preflight via injected gate). The GitHub exact-head test/Agda kernel receipts are **still open**, and the new evaluator has not run on actual participant files. The independently reviewed dashiBRAIN PR #9 **consumer-retention runtime and its six tests** were mirrored byte-for-byte from the current GitHub blobs, with a local **6/6 pass**; this proves its finite Python module's test success, NOT neural reconstruction accuracy or the sibling \`functional_bridge.py\` suite.
+
+**Follow-on after data admission:** run held-out M0/M1/M2 *predictive* modelling. The paired-FC t statistic is merely an initial data/schema/condition contact, not a Hoffman-specific prediction test; a detectable condition difference is consistent with ordinary pharmacology and cannot identify independent agents.
+
