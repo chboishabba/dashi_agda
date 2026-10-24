@@ -5,6 +5,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Biology.IITCubeConcreteTorusImageExact as Cube
 import DASHI.Biology.IITXORGridTwoStepDynamicsExact as BinaryGrid
+import DASHI.Biology.IITXORGridAdversarialExact as Grid
 
 ------------------------------------------------------------------------
 -- Existing-source theorem reuse, not a new finite-grid semantics:
@@ -20,8 +21,8 @@ import DASHI.Biology.IITXORGridTwoStepDynamicsExact as BinaryGrid
 ------------------------------------------------------------------------
 
 binary2x2Extinction :
-  (state : BinaryGrid.Grid.Grid2x2) →
-  BinaryGrid.Grid.gridStep (BinaryGrid.Grid.gridStep state)
+  (state : Grid.Grid2x2) →
+  Grid.gridStep (Grid.gridStep state)
   ≡ BinaryGrid.zeroGrid
 binary2x2Extinction = BinaryGrid.twoStepNilpotence
 
