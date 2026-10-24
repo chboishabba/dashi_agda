@@ -2,8 +2,10 @@
 """Explicit source-D4 repaired-form -> existing six-pair H6 MODEL symplectic weld.
 
 Reuse IITJFineD4EquivariantHeisenbergGaugeExact and the source-D4
-alternating-form audit. The D4 lift has a quadratic central correction,
-so it is NOT the raw site D4 on the centre and is NOT the Monster action.
+alternating-form audit. The D4 lift is defined using a symmetrised centre chart, but the
+correction VANISHES for these orthogonal simultaneous D4 operators.
+The original site-D4 fixes the centre in this repaired model; this is
+NOT an actual Monster normalizer action.
 """
 import itertools
 import json
@@ -82,6 +84,46 @@ def h3_centre_and_isomorphism_checks():
     assert checked==177147
     return checked
 
+
+def source_d4_action(m,s,c):
+    v=vecmat(m,embed_source8(s))
+    assert all(v[j]==0 for j in (3,5,10,11))
+    return tuple(v[j] for j in SOURCE_SLOT),c
+
+def d4_cocycle_and_source_group_action_checks():
+    # Every D4 generator is the *same* signed orthogonal 6x6 matrix
+    # on translations and modulations, preserving b.a' itself.
+    G=x.identity(6)
+    basis6=[tuple(row) for row in G]
+    for m in (x.R12,x.M12):
+        columns=[]
+        for e in basis6:
+            ap,bp=to_standard(vecmat(m,from_standard(e,ZERO)))
+            aq,bq=to_standard(vecmat(m,from_standard(ZERO,e)))
+            assert bp==ZERO and aq==ZERO and ap==bq
+            columns.append(ap)
+        L=[list(col) for col in zip(*columns)]
+        assert x.product(x.transpose(L),L)==x.identity(6)
+        for a in itertools.product(range(3),repeat=6):
+            b=tuple(reversed(a))
+            ap,bp=to_standard(vecmat(m,from_standard(a,b)))
+            assert dot(a,b)==dot(ap,bp)
+            assert lift(m,(a,b,1))==(ap,bp,1)
+    generators=[(tuple([0]*8),1)]+[
+      (tuple(int(i==j) for j in range(8)),0) for i in range(8)]
+    checked=0
+    for state in itertools.product(range(3),repeat=9):
+        s=state[:8];c=state[8]
+        for m in (x.R12,x.M12):
+            for t,tc in generators:
+                lhs=source_d4_action(m,*source_product(s,c,t,tc))
+                rhs=source_product(*source_d4_action(m,s,c),
+                                   *source_d4_action(m,t,tc))
+                assert lhs==rhs
+                checked+=1
+    assert checked==354294
+    return checked
+
 def audit():
     basis=[]
     for i in range(6):
@@ -115,6 +157,7 @@ def audit():
     o=x.product(x.product(x.transpose(A),x.O12),A)
     assert x.rank(o)==6
     concrete_group_isomorphism_checks=h3_centre_and_isomorphism_checks()
+    actual_source_d4_group_action_checks=d4_cocycle_and_source_group_action_checks()
     assert 3**6+18*(3**3)**2==3**9
     assert 3**8+2*(3**4)**2==3**9
     return {
@@ -135,9 +178,12 @@ def audit():
       "chosen_H4_nonlinear_irrep_degree":81,
       "basis_pair_checks":basis_pairs,
       "D4_H6_generator_group_law_checks":automorphism_checks,
-      "D4_lift_needs_central_quadratic_correction":True,
+      "D4_lift_needs_central_quadratic_correction":False,
+      "D4_simultaneous_translation_modulation_orthogonal":True,
+      "source_D4_preserves_selected_repaired_group_cocycle":True,
+      "source_D4_repaired_group_generator_checks":actual_source_d4_group_action_checks,
       "exact_imported_symbol_api_verified":True,
-      "original_JFine_D4_centre_action_intertwined":False,
+      "original_JFine_D4_centre_action_intertwined":True,
       "actual_Monster_normalizer_identified":False,
       "agda_kernel_checked":False}
 if __name__=="__main__":print(json.dumps(audit(),indent=2,sort_keys=True))
