@@ -33,6 +33,7 @@ data InfluenceEdgeKind : Set where
   fecCoordinationAllegationDisposition : InfluenceEdgeKind
   bannonLeaveEUIntroduction : InfluenceEdgeKind
   aiqSclCambridgeAnalyticaWorkingRelation : InfluenceEdgeKind
+  canadianJointPrivacyRegulatorAIQFinding : InfluenceEdgeKind
   breitbartDataConfigIntersection : InfluenceEdgeKind
   psychographicEffectivenessUnresolved : InfluenceEdgeKind
   electionOutcomeCausationUnresolved : InfluenceEdgeKind
@@ -139,6 +140,15 @@ aiqWorkingRelationReceipt = influence-receipt
   "The Committee found clear evidence of a close working relationship among Cambridge Analytica, SCL and AggregateIQ, including software/data infrastructure and contractual relations."
   true true false false
 
+
+canadianJointRegulatorAIQReceipt : InfluenceReceipt
+canadianJointRegulatorAIQReceipt = influence-receipt
+  canadianJointPrivacyRegulatorAIQFinding
+  "Canada OPC + BC OIPC ONE joint investigation 2019-11-26, PIPEDA Findings 2019-004, paras 25-32, 68-70, 94, 95-107"
+  "independent joint privacy-regulator findings (one investigation, not two)"
+  "Canadian regulators concluded AIQ received and used OCEAN psychographic scores for millions of US voters, derived at least in part from data collected by Aleksandr Kogan; reviewed documents indicated AIQ knew of the Kogan source. Investigators found inadequate consent and data safeguards. This pays aggregate score supply and scoped privacy noncompliance, not raw Facebook dataset custody, a particular scored row/version, political efficacy, Aquino origin or Epstein funding."
+  true false false true
+
 breitbartConfigReceipt : InfluenceReceipt
 breitbartConfigReceipt = influence-receipt
   breitbartDataConfigIntersection
@@ -183,6 +193,7 @@ canonicalInfluenceReceipts =
   ∷ fecDispositionReceipt
   ∷ leaveEUIntroductionReceipt
   ∷ aiqWorkingRelationReceipt
+  ∷ canadianJointRegulatorAIQReceipt
   ∷ breitbartConfigReceipt
   ∷ psychographicEffectivenessReceipt
   ∷ electionOutcomeBoundaryReceipt
