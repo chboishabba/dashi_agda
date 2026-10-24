@@ -1,3 +1,77 @@
+# 2026-10-25 next max-cut — R735 W1 finite-time energy-only obstruction
+
+This extends the physical R699 energy-only test to the ACTUAL
+R691/R735 W1 endpoint on the same unforced NS heat-shear trajectory.
+Original literature: Navier--Stokes heat/energy identity (Leray),
+helical spectral projectors (Lei--Lin--Zhou), source-defined
+R691/R735 in DASHI. The explicit finite-time Fourier construction
+and exact arithmetic are DASHI's independent work.
+
+For N>=2 let
+ u_N(0,x,y,z)=2/sqrt(2N) Σ_(j=1)^N cos(jx)e_z.
+At ν=1 this is smooth, real, divergence-free, mean zero, and
+(u_N·grad)u_N=0. Thus
+ u_N(t)=2/sqrt(2N) Σ_j exp(-j²t) cos(jx)e_z
+is an exact unforced NS solution. Let a_N²=1/(2N).
+Original Fourier kinetic energy
+  E_N(0)=2N a_N²=1.
+Integrated enstrophy is
+  ∫_0^∞ D_N(t)dt
+    =Σ_(j=1)^N 2a_N²*j² *∫_0^∞exp(-2j²t)dt
+    =N a_N²=1/2.
+
+For the original physical helical mixed fold with identical canonical
+input/output cutoff N, the only nonzero input products at k>0
+come from p,q>0. Because
+  (H+_(p,0,0) a_N e_z)
+    × (H-_(q,0,0) a_N e_z)
+    = -i a_N² e_x/2=-i e_x/(4N),
+the exact positive k coefficient for k=2,...,N is
+  M_k(0)=-i (k-1) e_x/(4N)
+and negative -k is its conjugate.
+Therefore
+  E_M,N(0)=2Σ_(k=2)^N ((k-1)/(4N))²
+    =((N-1)(2N-1))/(48N).
+
+At the FIXED positive time T=log2, a Fourier coefficient decays by
+the exact rational factor 2^(-j²).
+The actual same-output coefficient is
+  M_k(T)=-i/(4N) Σ_(p=1)^(k-1)
+    2^(-(p²+(k-p)²)) e_x.
+The full mixed output L² energy is at most
+  ||u_N(T)||_(ell1)² ||u_N(T)||_(ell2)²
+    <= [2a_N Σ_j 2^(-j²)]²
+       [2a_N² Σ_j 2^(-2j²)]
+    <= (2a_N)² * (2a_N²/3)
+    =2/(3N²),
+using 2^(-j²)<=2^(-j) and 2^(-2j²)<=4^(-j).
+
+Since the exact projected nonlinear forcing vanishes,
+the SOURCE R691 global commutator is zero on this trajectory.
+R691/R735 W1 therefore reduces EXACTLY to
+  W_N(T)+E_M,N(T)=E_M,N(0).
+Thus
+  W_N(log2)>=((N-1)(2N-1))/(48N)-2/(3N²)
+which diverges linearly with N although kinetic energy=1 and the
+entire dissipation budget=1/2 at every N. For a fixed T>0 this
+disproves the universal energy-only form of the W1 bound across
+arbitrary SMOOTH initial data. It does NOT disprove a
+data-dependent W1 bound for any fixed datum, does NOT contradict the
+H^(3/4) initial ceiling, and is not blowup.
+
+Local exact Fraction tests (4 passed) check the time-decayed
+convolution at T=log2, terminal estimate, energy identity, unbounded
+lower bound and ordered-pair count. The matching regression is
+`tests/test_ns_r735_w1_energy_only_heat_shear_no_go.py`.
+No checked-head Agda/Lean kernel proof is claimed.
+
+**Next viable B analytical source:** genuinely signed physical
+nonlinear global commutator compensation compatible with R735 W2,
+and the true normalized helical H^(3/4) initial-data attachment
+to the rational R699 carrier. No energy-only shortcut.
+
+---
+
 # PREFERRED STRONGER RESULT — H^(3/4) SUFFICES, R699 INITIAL WITNESS
 
 The earlier ell1/ell2 Young proof (s>3/2) below is valid, but NOT
