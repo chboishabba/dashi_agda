@@ -61,6 +61,49 @@ fordhamTapt = relationship-receipt
   "https://taptmedia.com.au/tapt-media-launches-as-australias-premier-independent-audio-powerhouse/"
   "2GB/3AW/4BC/6PR ownership transferred from Nine to Laundy Family Office. Ex-Liberal MP Craig Laundy is Arthur Laundy's son, not evidence of editorial orders." false false false
 
+-- The legal operator, shareholder and distribution financier are
+-- separate concepts. ABR confirms an entity but does NOT publish its
+-- private member register or ultimate beneficial owner.
+newShowLegalOperator : RelationshipReceipt
+newShowLegalOperator = relationship-receipt
+  "Kyle Sandilands Live programme" "Kyle Sandilands Live Pty Ltd (ABN 24 699 610 261)"
+  broadcasterOwnership institutionRecord
+  "Australian Business Register, active since 29 June 2026"
+  "https://abr.business.gov.au/ABN/View?id=24699610261"
+  "Public ABR register confirms company identity, active date and GST status; no current shareholding extract available from this source." false false false
+
+sandilandsSelfReportedOwnership : RelationshipReceipt
+sandilandsSelfReportedOwnership = relationship-receipt
+  "Kyle Sandilands" "Kyle Sandilands Live business"
+  broadcasterOwnership namedActorSelfReport
+  "RadioInfo first-person interview, August 2026"
+  "https://radioinfo.com.au/news/weve-already-got-the-bills-paid-for-the-next-two-and-a-half-years-kyle-sandilands-new-show/"
+  "Kyle said interested billionaires approached but team chose to keep ownership; Guardian independently described his stake as 100 percent as of August 7. ASIC member register not obtained; this does not license naming secret investors." false false false
+
+aiimsProduction : RelationshipReceipt
+aiimsProduction = relationship-receipt
+  "AIIMS Creator Hub" "At Home With Kyle / Kyle Sandilands Live"
+  editorialPublication institutionRecord
+  "AIIMS Creator Hub direct production announcement, 24 July 2026"
+  "https://aiims.group/aiims-creator-hub-kyle-sandilands-live/"
+  "AIIMS says it filmed, directed and produced At Home With Kyle. A paid contractor or co-production role is not a disclosed equity investment." false false false
+
+nineTaptStrategicPartnership : RelationshipReceipt
+nineTaptStrategicPartnership = relationship-receipt
+  "Nine Entertainment" "Laundy Family Office / Tapt Media"
+  financialEntitlement institutionRecord
+  "Nine January 2026 radio divestiture statement"
+  "https://newmedia.com.au/nine-announces-sale-of-radio-assets/"
+  "Despite divestiture, parties announced continuing 9News radio journalism, ad-sales, marketing, Stan Sport and pub promotion collaborations. Not proof Nine still owns Tapt." false false false
+
+kyleProposedARNBuyout : RelationshipReceipt
+kyleProposedARNBuyout = relationship-receipt
+  "Kyle Sandilands" "Proposed ARN takeover / $90m outside capital"
+  disputedAuthorshipClaim journalistCorroboration
+  "News.com.au reported April 2026 take-private concept"
+  "https://www.news.com.au/entertainment/tv/radio/kyle-sandilands-plots-arn-takeover-but-still-needs-90-million-investor/news-story/ee29d7ba21ef87a7af1cbfb7987f07a5"
+  "Reported proposal sought about AUD 90m in investors plus AUD 10m personal contribution, with Laundy discussions/speculation. No identified committed external backer or completed ARN acquisition." false false false
+
 kiisARN : RelationshipReceipt
 kiisARN = relationship-receipt
   "KIIS 106.5" "ARN Media"
@@ -72,10 +115,10 @@ kiisARN = relationship-receipt
 arnSandilandsRevenue : RelationshipReceipt
 arnSandilandsRevenue = relationship-receipt
   "ARN Media" "Kyle Sandilands Live"
-  financialEntitlement journalistCorroboration
-  "ABC News, 10 August 2026, new-show launch and settlement"
-  "https://www.abc.net.au/news/2026-08-10/kyle-sandilands-live-chris-minns-first-episode-start/107015998"
-  "ABC reports ARN to receive 19.9 percent of Kyle Sandilands Live revenue for three years in exchange for 1.5m AUD promotional advertising; a commercial financial interest, not proven editorial command." false false false
+  financialEntitlement institutionRecord
+  "ARN Media ASX announcement, 17 June 2026"
+  ""https://www.marketindex.com.au/asx/a1n/announcements/settlement-of-legal-proceedings-with-mr-sandilands-2A1677721"
+  "ARN's 17 June ASX original notice grants a 19.9% share of NET revenue for at most 3 years, subject to agreed thresholds/caps, in return for AUD 1.5m promotional advertising; not an equity share, with noncompete to March 2027 and AUD 12.09m settlement." false false false
 
 arnNewsCorpExit : RelationshipReceipt
 arnNewsCorpExit = relationship-receipt
@@ -165,13 +208,17 @@ acmaParalympicsFinding = relationship-receipt
   "https://www.acma.gov.au/articles/2023-03/kiis-1065-paralympics-comments-breach-decency-standards"
   "ACMA found decency breaches for disparaging Paralympic athletes and threats to a journalist in separate segment. These are distinct agency findings." false false false
 
-palmerBannonConflict : RelationshipReceipt
-palmerBannonConflict = relationship-receipt
-  "Steve Bannon" "Clive Palmer 2019 climate/China advertising"
-  disputedAuthorshipClaim disputedDocumentClaim
-  "2026-02-02 Guardian inspection of released Epstein-linked messages"
-  "https://www.theguardian.com/us-news/2026/feb/02/clive-palmer-denies-steve-bannons-claim-he-was-behind-billionaires-controversial-2019-australian-election-ad-strategy"
-  "A DOJ-released message attributed to Bannon CLAIMS he prompted 2019 climate/China ads, explicitly denied by Palmer's representative. Presence of a claim does not verify performance; original EFTA exact ID and identity/chain still to check." false false false
+-- Do not re-encode this source receipt here. PR #1131 already owns
+-- EFTA01615861, the Bannon claim, direct phone-contact acknowledgement
+-- and Palmer's denial, plus separate SMS/advertising deployment evidence.
+-- Its unmerged source module remains an external cross-branch owner and is
+-- deliberately not imported into this master-based case.
+bannonPalmerCanonicalOwner : String
+bannonPalmerCanonicalOwner =
+  "PR#1131:DASHI/Cognition/BannonFaragePalmerAutomatedInfluenceReceiptsExact.agda#bannonPalmerReceipt"
+
+bannonPalmerCanonicalDocument : String
+bannonPalmerCanonicalDocument = "US DOJ EFTA01615861"
 
 -- Specifically ban transitive leaps of type funding→speaker→campaign
 -- or access→ideology→editorial control. No self-reports are silently
@@ -182,7 +229,6 @@ data MessagingSelfReportImpliesPaidContract : Set where
 data SimilarClimateFramingImpliesFordhamDirection : Set where
 data RinehartRelationImpliesEntireOneNationPolicyCapture : Set where
 data MediaRevenueShareImpliesEditorialOrders : Set where
-data ClaimAbout2019AdsProvesBannonDeployment : Set where
 
 noFundToEditorialLeap : FundingImpliesEditorialControl → ⊥
 noFundToEditorialLeap ()
@@ -196,8 +242,6 @@ noUniversalPolicyCaptureLeap : RinehartRelationImpliesEntireOneNationPolicyCaptu
 noUniversalPolicyCaptureLeap ()
 noRevenueControlLeap : MediaRevenueShareImpliesEditorialOrders → ⊥
 noRevenueControlLeap ()
-noPalmerClaimPromotion : ClaimAbout2019AdsProvesBannonDeployment → ⊥
-noPalmerClaimPromotion ()
 
 -- Candidate indirect influences, not exact causation.
 data IndirectEffect : Set where
