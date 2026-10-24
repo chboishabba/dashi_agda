@@ -4,7 +4,7 @@
 
 ## Outcome of source investigation
 
-**38 document/source instances** are represented by a canonical `AttributedSource`; **18 screenshots** are keyed to SHA-256 of uploaded PNG files, not original social-media reels. These counts are *not* 38 independent confirmations or 18 separate experiments. Crosswalk preserved: earlier batch 10 stills / 2 accounts; later batch 8 stills / 6 more accounts.
+**40 document/source instances** are represented by a canonical `AttributedSource`; **18 screenshots** are keyed to SHA-256 of uploaded PNG files, not original social-media reels. These counts are *not* 40 independent confirmations or 18 separate experiments. Crosswalk preserved: earlier batch 10 stills / 2 accounts; later batch 8 stills / 6 more accounts.
 
 There are four different, non-identical objects that superficially share a coil or ring:
 - Bernd Nindl's **sphere-topped resonator** (fifth image of eight, `1000018569.png`) with pale serpentine bands and violet light; exact circuit unknown. The **seventh** image `1000018567.png` is a different open-loop clip with a creator reply naming an **Oudin Oscillator**. The historical resonator *family* is well documented; no reel/circuit continuity receipt shows the two are one construction.
@@ -29,7 +29,7 @@ The **[Revive Pro Tech iTorus i9 Heart Stone listing](https://reviveprotech.com/
 
 The peer-reviewed bibliographic coordinate for **Oleg D. Jefimenko**, *Operation of electric motors from atmospheric electric field*, *American Journal of Physics* **39**, 776–779 (1971), DOI [10.1119/1.1986281](https://doi.org/10.1119/1.1986281), was cross-checked with the West Virginia University author bibliography. It is the **same research lineage** as Jefimenko's 1973 book; the original 1971 article's full text was not page-inspected in this cut. It is therefore an improved original-source locator, **not new independent replication** or evidence for the viral “Pignatelli” label.
 
-All four newly discovered source families live in the *existing* source atlas with claim ceilings. **Five** additional document instances were added in this tranche: official app listing, reseller Heart Stone page, Aurumaya homepage, separate Aurumaya shop page, and 1971 AJP article. The previous 21 grew to 26, four copper-star discovery carriers brought that to 30, and two Openhand documents brought that to 32; **six source instances in the current psychometrics cut bring this to 38 document instances**, not 38 independent source roots. The 18 screenshot hashes and existing user-provided original pixels are unchanged.
+All four newly discovered source families live in the *existing* source atlas with claim ceilings. **Five** additional document instances were added in this tranche: official app listing, reseller Heart Stone page, Aurumaya homepage, separate Aurumaya shop page, and 1971 AJP article. The previous 21 grew to 26, four copper-star discovery carriers brought that to 30, and two Openhand documents brought that to 32; **six psychometric/HeartMath sources brought this to 38, and two sham-control sources bring this to 40 document instances**, not 38 independent source roots. The 18 screenshot hashes and existing user-provided original pixels are unchanged.
 
 ## High-alpha new identification: first-batch copper-star and metallic sphere
 
@@ -115,14 +115,51 @@ A deliberately **unrun** protocol is now a typed `TorusPhenomenologyExperiment` 
 
 **Next Pareto pivot:** Since questionnaire instruments are already known and the original coil source candidate exists, **do not** create another questionnaire or spiritual ontology. Acquire native video, exact physical SKU/driver and independently recorded coil field before any participant testing; audit and adapt a published instrument only when that intervention is actually specified and ethics/feasibility are available.
 
+## Max-cut 9: source-verified causal design and exact-rational rank
+
+**Highest-leverage correction to the original four-arm sketch:** A powered Starship/Rodin or toroidal amplifier may generate both an electromagnetic field and **audible/tactile cues** (the Zero Point Tech maker text explicitly advertises magnet movement like a speaker). The original proposed powered/sham/sound-only/quiet-meditation arms did *not* prove field and sensory mechanisms are independently manipulable. Merely increasing the number of groups does not remove causal confounding.
+
+The formal regression now contains a second **synthetic nonfactorability** theorem: two causal explanations, *all apparent benefit caused by EM* versus *all apparent benefit caused by sensory cues*, can produce the **same** observed active-vs-sham contrast when both factors switch together. This is mathematical counterexample logic and **no human response data**.
+
+To make the combinatorial consequence concrete, `scripts/psychotronics_design_rank_audit.py` defines the exact linear design `[1, E, C, E*C]`, where `E` is independently verified actual electromagnetic exposure and `C` is the independently measured perceptible sensory cue. Gaussian elimination with rational arithmetic yields:
+
+| Synthetic design rows | Structural rank of 4-column model | What remains nonidentifiable |
+|---|---:|---|
+| Sham no field/no cue (00) and powered field + cue (11) | **2/4** | Field, cue and interaction contributions are entangled |
+| Add cue without field (01), a third distinct condition | **3/4** | Field main effect versus field×cue interaction still entangled |
+| Independently realizable 2×2: 00, 10, 01, 11 | **4/4** | Coefficients identifiable under the *stated linear model*, if actual conditions are physically achievable and observed |
+| Duplicate 00 and 11 as four nominal arms | **2/4** | Merely adding groups/subjects does not improve design rank |
+
+A full-rank design is not a certificate of **clinical or causal identification**. Real independent EM and cue interventions, sham leakage control, reliable masking, safety/ethics, sampling adequacy, model adequacy, reproducibility and validated outcome transport are still separately required.
+
+The predeclared **field-specific contrast** should be expressed as `E[Y | do(E=1), C=c] - E[Y | do(E=0), C=c]` at fixed, credibly matched `c`, where `Y` is a *named self-reported state* (e.g. appropriately validated NADA-S), not a “5D dimension” or mystical scalar reading. If the active generator also changes heat, noise, magnetic sphere motion, vibration, user expectancy or sham cues, the attempted field-specific estimand **is not identified by the observed arm difference**. If actual independent manipulation cannot be achieved safely, **stop at the bench gate**; do not recruit participants or present a sham as blinded.
+
+**Literature precedent, preserving original researchers and evidence type:**
+
+- **Shupak et al., 2006**, [*Exposure to a specific pulsed low-frequency magnetic field*](https://doi.org/10.1155/2006/842162), *Pain Research & Management* 11(2):85–90, reports an **actual double-blind trial** in a limited rheumatoid arthritis/fibromyalgia sample (n=31) using a coil system whose active and sham modes were described as free from detectable sound/vibration. This shows one *different* apparatus can be masked, **not** that the pictured Starship moving-magnet device can.
+- **Du et al., 15 July 2026**, [*Active vs. sham pulsed electromagnetic field therapy*](https://doi.org/10.3389/fspor.2026.1847412), *Frontiers in Sports and Active Living* 8:1847412, is a **registered study protocol, not an efficacy outcome**. It proposes verifying sham/no-field with a gaussmeter while matching indicator, sound, heat, vibration and interaction. The clinical condition is shoulder-tendon injury; it is not evidence of altered states or any iTorus claim.
+
+These are **two additional attributed source instances with different original author roots**, increasing atlas inventory to **40 documents**; original screenshot PNGs remain **18**, source-author independence and source-role ceilings intact.
+
+### Bench-first go/no-go gate (before any human subjective study)
+
+1. Recover exact unit model/SKU/revision and original media, separately for the **24-point Starship sphere**, **iTorus torus**, and **Bernd HV Oudin** apparatus. The Oudin/plasma apparatus must NOT be used for human exposure; high-voltage discharge is out of scope.
+2. With qualified personnel, instrument **driver voltage/current, near-field magnetometry**, background sensor noise, spatial orientation, frequency spectrum, acoustic spectrum, fixture vibration, thermal drift, display cues and off/sham leakage. No particular safe exposure limit or field radius is invented in this roadmap.
+3. Define and validate a sham that matches all cues except the **predeclared EM exposure channel**; demonstrate feasibility for a specific electrical unit, not an arbitrary commercial product-family claim. Record independent assessor and participant condition guesses, masking failures and hardware integrity.
+4. If no independently variable field/cue pair is possible, consider a well-masked *two-arm total-device* comparison as a **compound intervention only** and label it such. No inference separating magnetic action from audio, expectations or other cues is allowed.
+5. If a safe separable design passes, obtain ethics approval, preregister one primary state outcome and intended contrast, verify psychometric transfer to this context, and only then collect controlled human data. Report effect sizes/uncertainty and adverse outcomes; do not infer “5D” physics.
+
+**This cut pays the *logic and apparatus-dependent acceptance conditions*, not the apparatus, field maps, participant outcomes, or finished randomized experiment.**
+
 ## Minimal Pareto cutset
 
 | Order | Open specific obligation | What is paid | Lowest-cost discriminating next evidence | Exit condition |
 |---|---|---|---|---|
-| 0 | Preserve attribution, uploaded-object IDs, source role, document/version custody | **Paid source-side:** 38 attributed document instances; 18 actual PNG hashes; common-root distinctions | Review corresponding author-title-year/canonical URLs and three Agda modules | Formal kernel (when available) plus no source role/independence/authority promotion; **CI expressly out of scope** |
+| 0 | Preserve attribution, uploaded-object IDs, source role, document/version custody | **Paid source-side:** 40 attributed document instances; 18 actual PNG hashes; common-root distinctions | Review corresponding author-title-year/canonical URLs and three Agda modules | Formal kernel (when available) plus no source role/independence/authority promotion; **CI expressly out of scope** |
 | 1 | **Original copper star / sphere** now has a source-matched Starship/Rodin retail candidate | Indexed 24-point maker product + 1.25-inch magnetic sphere + 50-W amplifier, one Mini audio-vibration comparator, third-party Rodin caption and store directory | Native creator-to-store provenance, uninterrupted reel, photographed variant SKU and motion/reference with drive OFF/ON | Distinguish a mechanically vibrating neodymium sphere from camera reflections or asserted exotic force; no field/health validation inferred |
 | 1b | **Fifth Bernd tower:** Oudin-family resonator, segmented winding, or flashover/reflection | Visible sphere, repeated wavy bands, several luminous patches; Oudin primary literature and other builds exist | Original post/reel, schematic showing sphere-secondary-primary connection, unobstructed slow/ordinary frame sequence | One *same device* record tells whether arcs attach to winding, dielectric or other electrodes and which circuit it is |
 | 1c | Earlier independent purported spinning free-air “orb” | User report and earlier unrelated stills | Original continuous footage with stationary landmarks and exposure details | Distinguish physical rotating body, moving streamer tips, air ion-wind spinner or camera aliasing; no invented rotor |
+| 1d | Coil active/sham sensory masking **feasibility** | Sound/vibration induced by moving magnets is maker-described; synthetic rank proof shows 2-arm field+cue confounding; Shupak 2006 actually masked a different silent device, Du 2026 merely proposes matching | Bench-test exact coil driver, field, vibrational/acoustic sham leakage, thermal and participant sensory cues; assert independent E and C only when measured | If independent variation fails: compound intervention only; do not claim EM-specific causality |
 | 2 | iTorus i9 multiple advertised field radii and coil ratings | Exact *source-page* conflicts now paid: 55 / 30 / 24 ft in one reseller listing, and 7.0 vs 8.5 Ω/channel across manufacturer/reseller model pages; app explicitly markets Rife | Resolve exact pictured SKU/driver/revision, real resistance-vs-frequency, and specify an operational detection/exposure threshold; then supervise calibrated vector-magnetometer grid, waveform and off/sham sweep | A reproducible `B(x,t)` spectrum and field threshold for one matched actual specimen. Neither product copy nor app frequencies pay a physiological effect |
 | 3 | Aurumaya/Croft circuit inheritance and vendor terminology | Maker explicitly names Croft; house catalogue independently *documents* 15Hz/333Mhz/369/432Mhz/Tesla words across distinct pages (one maker root) | Original and current coil winding diagram, pulse waveform, driver voltage/current; manufacturer frequency calibration | Same-function/same-wiring claim tested; literal emitted MHz must be measured and distinguished from labelled sacred cubits; no transfer to visible HV corona |
 | 4 | “Pignatelli” label and atmospheric electrostatic motor | Jefimenko 1973 already established *different* small atmosphere-driven motors | Original creator/inventor circuit provenance, charged collector current, shaft-load torque and angular speed | Identify creator apparatus, then distinguish `P_elec = V I` input/collector losses from `P_shaft = τ ω`; voltage without current/loaded power insufficient |
