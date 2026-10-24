@@ -263,3 +263,26 @@ lake env lean QuantumChannels/MMPDiracChargeSuperselection.lean
 lake env lean QuantumChannels/MMPDiracFockParityChannelRegression.lean
 ```
 No Lean binary installed and no pinned exact-head kernel/CI receipt yet. **Main P1/P2 full global 4D fermion state/Einstein–Maxwell–Dirac fixed point remains OPEN.**
+
+
+## SOTA/Pareto recut as of October 24 2026: global Hadamard, 2026 QI capacity and LLL rails
+
+**Direct source and tested result:** [`MMP2026SOTAFermionHadamardDualRailCapacitySnowball20261024.md`](MMP2026SOTAFermionHadamardDualRailCapacitySnowball20261024.md). This is the accountable original-root/snowball ledger and distinguishes MMP 2018/2023 original paper family, MMP-specific Freivogel–Fumagalli–Tomašević (2026) scattering and Sadhukhan (2026) linear Hall/anomaly descendants, *versus* GJW/MSY and Lu–Yang–Zheng (PRD **accepted 22 October 2026**) holographic OTOC/capacity lineage, and Bennett–DiVincenzo–Smolin 1997 original erasure capacity lineage. Do not promote paper reprints, analogies or finite toy operators into independent proof receipts.
+
+**P1 physical Hadamard source critical path sharpened:** Capoferri–Murro (2025, DOI 10.1002/mana.12032) give global microlocal Dirac propagator and Hadamard quasifree covariances under a **Cauchy-compact globally hyperbolic 4-manifold** premise. Our single-universe magnetic handle/exterior is not automatically Cauchy compact; pay the noncompact extension/asymptotic microlocal admissibility or use another source with appropriate hypotheses. Zahn (2014) provides charged locally covariant renormalization/conserved current/stress/finite ambiguity; a 2026 spinor heat-kernel/effective-action source pays local counterterm methodology, **not** a global state. P2 quantum fixed point requires same-state nonlocal 4D stress and actual Maxwell field-line return. Kanai–Maeda–Yoshida (2026) restricted perturbative higher-derivative EFT near-horizon no-go does NOT refute sourced Casimir MMP solution.
+
+**P3Q default rail promotion:** use two independently addressable, equal-electric-charge spin-c `S²` LLL *zero modes* `q>=2`, not two arbitrarily selected massive modes `n=1,n=2` unless needed as adversarial control. The `|q|` index multiplicity is established external sphere-Dirac theorem; Lean #85 `MMPMonopoleLLLDualRailCapacity.lean` now constructs two finite mode LABELS conditional on q>=2 and proves exact balanced-erasure threshold algebra. It neither constructs physical wavefunctions nor 4D spin/charge scattering. This shows **q=12/24 is not preferential** for qubit dimension; large physical q may still be needed to control semiclassical throat.
+
+**P3Q receiver + environment source rather than fidelity alone:** newly committed `check_mmp_dualrail_coherent_information_20261024.py` constructs one fixed-charge Stinespring isometry into two fermion rails/vacuum receiver and loss-mode environment, checks CPTP/Choi and complementary partial traces, computes `I_c(I/2)=S(B)-S(E)` from exact same-state spectra. q12 old effective massive n1/n2 at E=.20 yields I_c≈−0.000683 bits; E=.55 gives ≈+0.999999991 bits; two ideal LLL rails yield +1 bit (all conditional on model). For equal T, **external** erasure theorem gives Q=max(0,2T−1) bits/use, but unequal-loss I_c of a selected input is NOT optimized capacity. New `check_mmp_dualrail_erasure_degradability_20261024.py` explicitly constructs CPTP degrade/antidegrade maps across T=1/2; the local fixtures PASS.
+
+**SOTA Gaussian nonpromotion:** Negari–Salek PRL 137 080201 (2026) provide an antidegradability SDP and Gaussian extendibility/entanglement-breaking classification. The selected fixed-charge 3-output erasure channel is NOT automatically their general fermionic Gaussian channel under the same algebra, so no Gaussian classification is inherited without an actual Gaussian representation/physical source map.
+
+**Immediate max-cut:** (1) exact-head replay of new committed Python scripts and Lean #85 (no tools to run kernel here); (2) *global actual four-dimensional Hadamard/renormalized charged-Dirac state on one-universe return-path geometry* and Ward source closure, applying correct microlocal assumptions; (3) backreacted Einstein–Maxwell fixed point; (4) full same-object LLL retarded/LSZ transport plus receiver/environment coherent information and timed signal; (5) sourced three physical plasma EM/MHD drive control. Do not divert to new generic topology/TOE numerology or transplant holographic OTOC capacity to MMP.
+
+Acceptance:
+```sh
+python3 scripts/check_mmp_dualrail_coherent_information_20261024.py
+python3 scripts/check_mmp_dualrail_erasure_degradability_20261024.py
+lake env lean QuantumChannels/MMPMonopoleLLLDualRailCapacity.lean  # separate Lean #85 branch
+```
+No exact-head CI/Lean kernel or 4D semiclassical state solution is claimed in this round.
