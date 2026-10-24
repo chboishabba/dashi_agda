@@ -119,3 +119,37 @@ def test_source_world_mutation_of_exact_git_inventory_fails():
     w["observed_git_tree"]["files"][0]["git_blob_sha1"] = "0" * 40
     with pytest.raises(ValueError, match="diverges"):
         engine.validate_world(w)
+
+
+def test_20_author_code_subject_ids_match_git_pairs_without_qc_promotion():
+    w = world()
+    ids = next(a for a in w["artifacts"] if a["id"] == "source_subject_namespace")
+    assert len(ids["subject_ids"]) == 20
+    assert w["counts"]["distinct_lineage_roots"] == 3
+    assert len(w["sources"]) == 7
+    evidence = {c["consumer"]: c for c in engine.claim_status(w)}
+    assert evidence["c_verified_source_namespace"]["state"] == "source_attested_only"
+    assert evidence["c_original_static_inclusion"]["state"] == "acquisition_blocked"
+    ids["subject_ids"][0] = "S99"
+    with pytest.raises(ValueError, match="disagree"):
+        engine.validate_world(w)
+
+
+def test_missing_dynamic_helper_is_known_absent_only_in_pinned_tree():
+    w = world()
+    helper = next(a for a in w["artifacts"]
+                  if a["id"] == "dynamic_tapered_window_in_pinned_tree")
+    assert helper["status"] == "knownAbsent"
+    assert "pinned" in helper["scope"] or "source Git tree" in helper["scope"]
+    assert "negative_search_receipt" in helper
+    result = engine.hypothetical_plan(w, "c_dynamic_replay_from_tree_alone")
+    assert result["status"] == "no_declared_source_route"
+    assert result["evidence_created"] is False
+
+
+def test_source_roots_count_lineage_not_documents():
+    snap = engine.snapshot(world())
+    assert snap["source_records"] == 7
+    assert snap["independent_lineage_roots"] == 3
+    assert snap["artifact_status_counts"] == {
+        "knownAbsent": 1, "notLocated": 11, "present": 5}
