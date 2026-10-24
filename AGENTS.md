@@ -100,3 +100,23 @@ transform on one continuum NS solution, with the low/high physical
 envelope and continuation. Never use an arbitrary `Set`-typed
 transform equality or a free-variable positive R9 Gram majorant
 as proof.
+### Source-fixed B4 no-go and A H¹ physical Fourier source (24 October 2026)
+
+The prior ED-source ambiguity is now paid: the original R219/R109/R469
+selected-pair local ED on the fixed smooth shear is at most 4 for every
+cutoff (and the global pair bound is 32), while full-fibre signed R440
+defect diverges and literal core companion freezes. **Do not attempt
+to prove the impossible original full-fibre strict B4 estimate.**
+Inspect `NSUnforcedAnalyticCuts.physicalR440_zero_padding_increment`,
+the exact evaluator, and the source owner. Search for a padding-invariant
+same-object R440 critical-production formulation instead; don't substitute
+another diagnostic simply because its bound is easy.
+
+On whole-space A, use the standard same-physical-u L² tensor Fourier
+identity and the H¹ nonlinear-source estimate
+`|F[P div(u⊗u)]| <= min(E*|xi|, sqrt(E*D))`.
+This yields a globally L² direct heat-inverse Fourier envelope
+`8*pi*E^(3/2)*sqrt(D)/nu²` for its squared norm. This is not global
+regularity, is not already the signed centered-resolvent A2, and
+still needs Agda Bishop Fourier/Plancherel transport. See the roadmap
+and `scripts/ns_a_schwartz_fourier_same_object.py`.
