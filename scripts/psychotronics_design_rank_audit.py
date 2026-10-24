@@ -69,6 +69,10 @@ def predict(rows: Iterable[Sequence[int]], beta: Sequence[int]) -> list[int]:
 def audit() -> dict[str, int | bool]:
     # Sham=0 field and cue, active=1 field *and* cue.
     coupled = design(["off_no_cue", "field_with_cue"])
+    # Matched-cue RCT: the *conditional* EM contrast at C=1 is identifiable
+    # from 01 versus 11, even without estimating EM main vs interaction.
+    # This requires a real, safely masked, measured identical cue level.
+    matched_cue = design(["cue_with_no_field", "field_with_cue"])
     # Adding sound-only distinguishes a cue main effect but cannot
     # distinguish EM main effect from EM×cue interaction.
     partial = design(["off_no_cue", "cue_with_no_field", "field_with_cue"])
@@ -80,6 +84,7 @@ def audit() -> dict[str, int | bool]:
     ])
 
     assert rank_exact(coupled) == 2
+    assert rank_exact(matched_cue) == 2
     assert rank_exact(partial) == 3
     assert rank_exact(orthogonal) == 4
 
@@ -89,6 +94,16 @@ def audit() -> dict[str, int | bool]:
     assert predict(orthogonal, (0, 1, 0, 0)) != predict(
         orthogonal, (0, 0, 1, 0)
     )
+
+    # Two distinct coefficient vectors yield the *same* pair of
+    # matched-cue predictions (and same conditional field contrast);
+    # beta_EM and beta_EMxCue individually remain unidentified.
+    assert predict(matched_cue, (0, 1, 0, 0)) == [0, 1]
+    assert predict(matched_cue, (0, 0, 0, 1)) == [0, 1]
+    matched_contrast = tuple(b - a for a, b in zip(
+        matched_cue[0], matched_cue[1]
+    ))
+    assert matched_contrast == (0, 1, 0, 1)
 
     # In partial design, field-only and interaction-only also coincide.
     assert predict(partial, (0, 1, 0, 0)) == [0, 0, 1]
@@ -104,6 +119,9 @@ def audit() -> dict[str, int | bool]:
 
     return {
         "coupled_two_arm_rank": rank_exact(coupled),
+        "matched_cue_two_arm_rank": rank_exact(matched_cue),
+        "matched_cue_conditional_EM_contrast_exists": True,
+        "EM_main_and_interaction_separately_identified_by_two_arms": False,
         "partial_three_arm_rank": rank_exact(partial),
         "independently_manipulated_two_by_two_rank": rank_exact(orthogonal),
         "duplicate_four_arm_rank": rank_exact(duplicate),
