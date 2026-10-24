@@ -61,7 +61,9 @@
       "uncertainty": "participant-cluster bootstrap with seed preregistered",
       "tuning_budget": "equal/complexity-matched and independently predeclared",
       "failure": "Any absent modality, unmeasured variable, or unidentifiable dose coefficient is masked explicitly, never imputed as a new observed outcome",
-      "model_specificity": "M2 prediction supports distinctive theory only if restricted M1 cannot match same held-out observations under comparably justified priors and capacity"
+      "model_specificity": "M2 prediction supports distinctive theory only if restricted M1 cannot match same held-out observations under comparably justified priors and capacity",
+      "inference_rule": "A restricted M2 held-out score advantage against a limited M1 is NOT unique evidence for external conscious agency; include a comparably expressive source-independent endogenous HMM ceiling and a mechanistic active-inference comparator. Before any ontology promotion require non-observational or intervention-based discriminators.",
+      "multiple_comparisons": "Predeclare primary comparator and control familywise/multiple comparisons; do not select the most flattering M2 contrast post hoc."
     },
     "known_design_boundaries": [
       "Original 2023 uses bolus 20mg DMT vs placebo; nonzero dose-response curve cannot be inferred solely from one active dose",
@@ -119,7 +121,35 @@
       ],
       "falsification": "Fails prespecified held-out improvement and calibration thresholds against M0, or can match M2 and removes claimed distinctive prediction",
       "nonpromotion": "Endogenous dynamics need not explain philosophical ontology; flexible M1 can observationally simulate M2",
-      "data_ready": false
+      "data_ready": false,
+      "serious_endogenous_donors": [
+        {
+          "doi": "10.1093/nc/niaf069",
+          "authors": "Jonas Mago, George Deane and coauthors (2026)",
+          "title": "Computational spirits: a neuroscientific account of psychedelic entity encounters",
+          "role": "conceptual active-inference agency attribution, sensory attenuation, counterfactual depth and cultural priors",
+          "evidence": "theory without mathematical implementation or new empirical dataset",
+          "not_an_empirical_reproduction": true
+        },
+        {
+          "doi": "10.1093/nc/niag015",
+          "authors": "James W Sanders and coauthors (2026)",
+          "title": "Micro-phenomenology of immersion and perceived presences under DMT",
+          "role": "temporal observation target (presence after sensory/spatial integration), not direct corroboration of active-inference mechanism",
+          "cohort_independence_unknown": true
+        }
+      ],
+      "required_mechanistic_steelman": [
+        "M1a: implement an explicitly bounded active-inference candidate with two distinct prior dimensions: counterfactual richness / depth, and sensory precision / self-other agency attribution, following Mago et al's conceptual account; do not claim authors provided an executable model",
+        "M1b: include a generic matched-capacity HMM/state-space observational equivalence ceiling: any finite M2 latent Q/emission-only observation model can be relabelled as an endogenous stochastic latent model with the same observed law",
+        "Prespecify culturally conditioned priors, familiarity and expectancy as potential explanatory covariates only if actually collected; unknowns stay unobserved",
+        "Account for retrospective temporal ordering uncertainty, interviews/coder reliability, subject overlap and independent cohort provenance"
+      ],
+      "conditional_predictions": [
+        "If operational sensory precision/counterfactual depth are measurable and modulated under controlled conditions, a restricted M1a predicts agency-attribution shifts attributable to those variables, with parameter bounds predeclared",
+        "Multisensory/3D perceptual development can precede presence onset even in wholly endogenous generative models; temporal ordering alone is not a model discriminator",
+        "M1b can exactly emulate a finite fixed-Q hidden-state emission distribution; a generic M2 trace identity thus cannot uniquely identify latent ontology"
+      ]
     },
     {
       "id": "M2",
@@ -143,7 +173,14 @@
       ],
       "falsification": "Measured violations of frozen trace law/assumptions within accuracy limits, or no matched held-out predictive advantage against M1",
       "nonpromotion": "Generic Markov trace identities also hold for ordinary stochastic models; without distinct exclusion of M1 the outcome is nonidentifiability, not agent evidence",
-      "data_ready": false
+      "data_ready": false,
+      "extra_adversarial_requirements": [
+        "Supply a prediction impossible under the predeclared serious endogenous mechanistic M1a, rather than merely outperforming M0",
+        "Report a generic matched-capacity M1b HMM observational-equivalence ceiling, with a rational exact counterexample when appropriate",
+        "If the distinguishing prediction is concealed-target information, move it into prospective M3 with leakage and blinding controls; no retrospective fMRI or presence report can stand in",
+        "Formal fixed-Q nesting constraints must be separately measured and operationally identified across conditions; condition-specific Q(c) changes cannot be hidden under the fixed-Q proof"
+      ],
+      "ontology_not_identified_by_finite_HMM_trace": true
     }
   ],
   "independent_consumers": [
@@ -183,7 +220,9 @@
       "recover real 16-person static or a separately declared available observational cohort",
       "freeze exact observable roles and preprocessing",
       "freeze split seed/fraction, model complexity, prediction event sets, uncertainty rule and numerical pass threshold",
-      "document confirmatory vs exploratory endpoints"
+      "document confirmatory vs exploratory endpoints",
+      "Declare mechanism-specific, observable counterfactual that distinguishes M2 from bounded active-inference M1a, or preregister a null/observational equivalence result",
+      "Include a generic endogenous HMM M1b equivalence control and report whether the M2 family is a constrained subset of that control"
     ],
     "model_lock": "design candidates; NOT preregistered because measurements and exact choices remain unresolved",
     "publication_outcomes": [
@@ -204,8 +243,11 @@
     "DMT_data": "Timmermann et al 2023 and original producer roles",
     "phenomenology": "Sanders et al 2026 distinct publication; participant overlap unverified",
     "formal_model": "DASHI hypothesis-design and model-comparison work, not claimed original Timmermann/Sanders mathematics",
-    "generic_Markov_trace": "standard stochastic identities, not unique evidence for conscious-agent metaphysics"
+    "generic_Markov_trace": "standard stochastic identities, not unique evidence for conscious-agent metaphysics",
+    "active_inference_2026": "Mago et al., Neuroscience of Consciousness (2026), DOI 10.1093/nc/niaf069, conceptual active-inference paper; not a new neuroimaging dataset or executable validated competitor."
   },
   "empirical_predictions_tested": false,
-  "synthetic_contract_tests": "code-validated separately; not evidence of model fit"
+  "synthetic_contract_tests": "code-validated separately; not evidence of model fit",
+  "steelman_adversarial_dossier": "Docs/receipts/DMTSteelmanDiscriminatorValue20261024.json",
+  "adversarial_rational_witness": "scripts/audit_dmt_steelman_identifiability.py"
 }
