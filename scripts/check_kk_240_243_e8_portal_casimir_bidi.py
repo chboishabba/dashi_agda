@@ -125,6 +125,35 @@ m48=z48/(2*mp.pi*b0)
 print('selected QED+QCD D=',mp.nstr(D,22))
 print('restricted free-real-scalar DOF minimum=',n_min,
       '48-scalar degenerate mass in GeV=',mp.nstr(m48,15))
+
+# E6 trinification physical DONOR, not an identified E8 theory:
+# E6 adjoint under SU3^3: 78=(8+8+8)+27+27.
+# E8 under E6 x SU3: 248=(78+8)+(27*3)+(27*3).
+# If the first SU3^3 factor is SU3_colour, TWO additional unbroken
+# SU3 vector octets have 2*8*3=48 massless 5D vector polarizations.
+# Their free KK Casimir sign is -48 and the D shift +5*48=+240.
+# This balances the +48 light-quark/gluon net *massless-limit* count.
+# It does NOT imply E8 roots, hypercharge, chirality, or collider validity.
+assert 78==8+8+8+27+27
+assert 248==78+8+27*3+27*3
+assert 248-8==240
+extra_vector_generators=2*8
+extra_vector_polarizations=extra_vector_generators*3
+assert extra_vector_polarizations==48
+assert delta + 5*extra_vector_polarizations>0
+assert delta+5*extra_vector_polarizations<mp.mpf('1e-6')
+# The same free-field normalisation that tuned 48 real bosons at 86GeV
+# also tunes sixteen vectors, since 16*3=48 Casimir polarizations.
+assert abs(delta+5*extra_vector_polarizations*h(z48))<mp.mpf('1e-28')
+print('E6->SU3^3 gauge adjoint=24 +54; E8->E6xSU3 adjoint=86+162=248')
+print('TWO extra SU3 octets -> 16 5D vectors = 48 free bosonic units')
+print('massless-limit residual after these vectors:',
+      mp.nstr(delta+240,17))
+print('toy degenerate VECTOR mass to tune residual GeV:',
+      mp.nstr(m48,15))
+print('FAIL full physical trinification: mass generation, Higgs sector, '
+      'EW chirality, interaction loops and visible-vector bounds not paid')
+
 print('PASS portal 1 or 2 scalar DOF cannot rescue same-radius vacuum')
 print('NOTE if Higgs vev, portal mass or boundary data depend on radion, '
       'new terms enter D: rerun with a single consistent 5D action')
