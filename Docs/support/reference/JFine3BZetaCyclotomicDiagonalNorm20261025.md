@@ -1,3 +1,5 @@
+> **25 Oct 2026: ZERO / ζ / ζ² refinement.** The four fingerprints correspond exactly to C3 Fourier eigenspace dimensions (1,ζ,ζ²): (0,12,78), (0,90,0), (0,78,12), (0,0,90). The leading 0 denotes an **empty trivial-character eigenspace**, not a scalar zero eigenvalue or a vanished state. In the full Monster W restriction the balanced regular bulk (65610,65610,65610) instead has nonempty eigenspaces and zero nonidentity trace. This distinction reuses existing balanced-trit zero fibres, phase0=ζ^0=1, and exact cyclotomic evaluation. See [Zero / ζ / ζ² Fourier crosswalk](./Monster3BZeroZetaZetaSquaredFourierCrosswalk20261025.md). The original common-729 diagonal-kernel equal-phase constraint remains conditional and separate.
+
 # Monster 3B / Suzuki 12+78: cyclotomic norm and diagonal descent
 
 ## Primary provenance and existing owners
