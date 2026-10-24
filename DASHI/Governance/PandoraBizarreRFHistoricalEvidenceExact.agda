@@ -161,6 +161,17 @@ koslovRand = Source.mkNoDOISource
   "Experiment-based negative/methodological review: primate results not convincing, EEG probe antenna artifact possible; separates possible weapon/interrogation inquiry from actual demonstrated response"
   Source.publicAttribution
 
+heilmeier1977 : Source.AttributedSource
+heilmeier1977 = Source.mkNoDOISource
+  "George H. Heilmeier, Director, Defense Advanced Research Projects Agency"
+  "Letter to Senator Warren G. Magnuson concerning Project Pandora"
+  "Primary signed two-page ARPA letter, 1977-09-15, National Security Archive document 28798; physically inspected both pages"
+  "1977"
+  "https://nsarchive.gwu.edu/sites/default/files/documents/rhwvuj-tzy4b/14.pdf"
+  Source.archivalSource
+  "1977 agency-accounting assertion: total $4,615,000, DARPA held only technical progress reports and minutes, raw records amassed by original researchers, unknown raw-record disposition; March 1970 programme terminated and equipment assets transferred to WRAIR for disposition. Statement disclaiming mind-control-project awareness must be read next to 1967 discussion of possible future weapons research: interpretive tension, not proved false oath or functional technology"
+  Source.publicAttribution
+
 senateMoscow1979 : Source.AttributedSource
 senateMoscow1979 = Source.mkNoDOISource
   "United States Senate Committee on Commerce, Science, and Transportation"
@@ -224,7 +235,7 @@ sourceAtlas = Source.mkSourceAtlas
    byronOperational1966 ∷ byronFinal1966 ∷ arpaInitial1966 ∷
    cesaroSeptember1967 ∷ johnstonBizarre ∷ stateViralStudy1965 ∷
    georgeWashington1966 ∷ pandoraApril1969 ∷ pandoraHumanMinutes ∷
-   koslovRand ∷ senateMoscow1979 ∷ hopkins1976To1978Study ∷
+   koslovRand ∷ heilmeier1977 ∷ senateMoscow1979 ∷ hopkins1976To1978Study ∷
    odniExperts ∷ odni2025 ∷ recall2026 ∷ [])
   "Bounded original-document roots, no fabricated modern source-to-device bridge"
 
@@ -253,6 +264,11 @@ data ProgrammeObject : Set where
   originalPrimateHighDoseExperiment : ProgrammeObject
   correctedLowDoseReplication : ProgrammeObject
   tumsEmbassyFieldMeasurements : ProgrammeObject
+  pandoraResearchersRawRecords : ProgrammeObject
+  darpaProgressAndMinutes : ProgrammeObject
+  wrairFacilityAssetsDisposition : ProgrammeObject
+  wrairPlannedExpandedFacility1969 : ProgrammeObject
+  darpa1977DisavowalStatement : ProgrammeObject
 
 data ProgrammeTopic : Set where bioelectronicsAndEffects : ProgrammeTopic
 
@@ -285,6 +301,11 @@ data LinkKind : Set where
   sourceReportedPreliminaryOutcome : LinkKind
   subsequentDoseReassessment : LinkKind
   sourceReferenceChronologyConflict : LinkKind
+  originalResearcherRecordCustodyStatement : LinkKind
+  agencyProgressOnlyStatement : LinkKind
+  historicalEquipmentDispositionTransfer : LinkKind
+  expansionFacilityUnderConstructionReport : LinkKind
+  disputedRetrospectiveCharacterisation : LinkKind
 
 record BoundedLineageEdge : Set where
   constructor boundedLineageEdge
@@ -297,6 +318,52 @@ record BoundedLineageEdge : Set where
     withheldClaim : String
 
 open BoundedLineageEdge public
+
+pandoraRecordsOriginalResearcherCustody : BoundedLineageEdge
+pandoraRecordsOriginalResearcherCustody = boundedLineageEdge
+  arpaPandora pandoraResearchersRawRecords originalResearcherRecordCustodyStatement heilmeier1977
+  "In his 15 Sep 1977 signed response DARPA director Heilmeier said original researchers amassed the raw data; the agency did not know what disposition was made"
+  "Does NOT establish raw data survived or went with equipment to WRAIR; actual researcher archive and retention schedule remain unknown"
+
+pandoraAgencyProgressNotRaw : BoundedLineageEdge
+pandoraAgencyProgressNotRaw = boundedLineageEdge
+  arpaPandora darpaProgressAndMinutes agencyProgressOnlyStatement heilmeier1977
+  "DARPA says it received technical progress reports and had declassified Pandora minutes and technical reports"
+  "Its original source-claim is a statement by 1977 DARPA, not an authenticated exhaustive researcher files inventory"
+
+pandoraAssetsTransferredToWRAIR : BoundedLineageEdge
+pandoraAssetsTransferredToWRAIR = boundedLineageEdge
+  arpaPandora wrairFacilityAssetsDisposition historicalEquipmentDispositionTransfer heilmeier1977
+  "Heilmeier reports that on closure March 1970 all Pandora programme assets transferred to Walter Reed Army Institute of Research for disposition"
+  "Assets do not mean raw experimental data and transfer for disposition does not mean the equipment remained operational"
+
+pandoraFacilityExpansionProposed1969 : BoundedLineageEdge
+pandoraFacilityExpansionProposed1969 = boundedLineageEdge
+  walterReedMicrowaveTestFacility wrairPlannedExpandedFacility1969
+  expansionFacilityUnderConstructionReport koslovRand
+  "Samuel Koslov 4 Nov 1969 described a new facility nearing completion with three extra exposure chambers and ancillary laboratories"
+  "The 1969 state is contemporaneous description, not a completion record or evidence of post-1970 work; 1977 DARPA professed no knowledge of later rebuilding"
+
+pandoraRetrospectiveAccountTension : BoundedLineageEdge
+pandoraRetrospectiveAccountTension = boundedLineageEdge
+  arpaPandora darpa1977DisavowalStatement disputedRetrospectiveCharacterisation heilmeier1977
+  "DARPA director in 1977 denied awareness of DoD work probing microwave mind-control possibilities; Cesaro 1967 recorded recommendation to study possible weapon applications to behavioural effects"
+  "The difference between a 1967 recommendation and a 1977 claim about actual sponsored projects prevents inferring a strict factual contradiction, deliberate deception, or operational capability"
+
+-- Documentary possession, programme hardware, and experiment performance are
+-- different kinds of object. Asset transfer does not prove transfer of data.
+data RecordOrEquipmentKind : Set where
+  rawExperimentalObservations : RecordOrEquipmentKind
+  equipmentAssetForDisposition : RecordOrEquipmentKind
+  agencyTechnicalReport : RecordOrEquipmentKind
+
+assetTransferIsNotRawDataTransfer :
+  equipmentAssetForDisposition ≡ rawExperimentalObservations → ⊥
+assetTransferIsNotRawDataTransfer ()
+
+agencyReportDoesNotResolveRawExperiment :
+  agencyTechnicalReport ≡ rawExperimentalObservations → ⊥
+agencyReportDoesNotResolveRawExperiment ()
 
 pandoraApparatusActuallyConstructed : BoundedLineageEdge
 pandoraApparatusActuallyConstructed = boundedLineageEdge
