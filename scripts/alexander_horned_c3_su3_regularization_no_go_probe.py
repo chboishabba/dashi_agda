@@ -22,17 +22,23 @@ from math import log,exp
 from fractions import Fraction
 import numpy as np
 from scipy.linalg import eigvals
-import sys
-from pathlib import Path
-sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"tests"))
-from test_neutrino_horned_su3_positive_bridge import residual_target
-from test_neutrino_existing_cp_sector_bridge import ZERO
-
-def to_complex(z):
-    return float(z[0])+float(z[1])*complex(-.5,np.sqrt(3)/2)
+# Cross-PR numeric fixture is replicated HERE to keep the horn
+# owner branch independently executable before sibling PR #1247 merges.
+# The six exact source rationals and ζ phase belong to that sibling.
+from math import pi
 def selected_matrix():
-    _,_,A=residual_target()
-    return np.array([[to_complex(z) for z in row] for row in A])
+    z=np.exp(2j*pi/3)
+    s12,c12=161/289,240/289
+    s13,c13=240/1609,1591/1609
+    s23,c23=20/29,21/29
+    U=np.array([
+        [c12*c13,s12*c13,s13*np.conj(z)],
+        [-s12*c23-c12*s23*s13*z,c12*c23-s12*s23*s13*z,s23*c13],
+        [s12*s23-c12*c23*s13*z,-c12*s23-s12*c23*s13*z,c23*c13]
+    ],dtype=complex)
+    T=np.diag([1,z,z*z])
+    S=2*np.outer(U[:,0],np.conj(U[:,0]))-np.eye(3)
+    return T@S
 def leaf_lower_bound(d,n):
     return .5*exp(log(2*d)/(2**n))
 def root_upper_bound_log(eps,n):
