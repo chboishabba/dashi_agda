@@ -487,3 +487,36 @@ The user's exact relation is 79 = 81 − (3 − 1) = 3^4 − 2. This is the fiel
 In the actual IIT #1148 owner, DASHI/Biology/IITField81Inverse79ContractExact.agda now proves the **conditional** left-inverse law from a supplied field/Fermat80 certificate. It is imported by the main IIT aggregate. Existing punctured Kernel4 (80 states), selected 5+4 JFine codec (19683), projective F9 10×8 (80), full projective PGL2(F9) 720 and infinity-stabilizer 72 remain the concrete interlocking sources. The Singer generator selector was strengthened to demand actual order 80, rather than trusting a partial exclusion. This is implementation of a proof interface, not a completed Agda kernel proof of the quartic F81 multiplication.
 
 **Outstanding exact source closure:** construct field81 multiplication as a literal four-trit Agda operation and prove the laws/Fermat80; then inhabit the already typed Projective80Trivialisation between the actual punctured four-trit source and the original 10×8 projective scalar chart; kernel-check aggregate at exact SHA. Only after that ask for source-specific Monster/neural/optical intertwiners.
+
+
+## 2026-10-24 final source-identification lift: 79 as F81 inverse, Frobenius9 norm and literal P1(F9) chart
+
+The user's observation **\(81-79=3-1=2\)** is exactly right, but its inverse mechanism is the general \(q-2\) finite-field rule, NOT an inferred new 3−1 universal geometric law. Since \(|F81^\times|=80\), \(x^{-1}=x^{79}\) for all nonzero elements, and \(79\equiv-1\bmod80\). Integer 81 itself represents zero in characteristic 3 and is not invertible. This inverse involution fixes **exactly +1 and −1**.
+
+More significant is the **same-object extension field proof** against the repo's chosen quartic \(X^4+X+2\):
+\[
+\gamma=(0,1,2,2),\quad \gamma^2=-1,\quad
+\beta=(0,0,1,1),\quad \beta^2=1+\gamma.
+\]
+Consequently the actual 81-element quartic can be recharted into the original Ogg p3/F9-shaped coordinates as \(F9[\beta]\), not just compared by cardinality. Independent arithmetic checked the exact 81-element bijection and **6,561 addition + 6,561 multiplication pair** preservation, including Frobenius9 relative conjugation and norm10.
+
+\[
+\operatorname{Frob}_{81/9}(x)=x^9,\quad
+N_{81/9}(x)=x^{10},\quad
+x^{-1}=x^9/N(x),\quad
+F81^\times/F9^\times\cong\ker N\cong C_{10}
+\]
+via \([x]\mapsto x^8\). The projective quotient has ten points and eight nonzero vectors per point. On the norm-one subgroup, **relative Frobenius acts as inversion**. The C5 subgroup gives the previously identified two five-orbits. This is *mathematically real* structure beyond 79/80/72 cardinalities.
+
+**New concrete formal owners on [IIT #1148](https://github.com/chboishabba/dashi_agda/pull/1148):**
+- \`IITF81F9ConcreteQuarticTowerExact.agda\` explicitly implements source \`Kernel4\` ↔ Ogg-shaped quadratic F9 tower, literal trit field operations, Frobenius9, norm10 and exhaustive *source-written* finite proofs of inverse79/Fermat80/projective norm-one identities.
+- \`IITProjectiveF9Punctured80ConcreteExact.agda\` fills the previously open **actual** \`Projective80Trivialisation\` record with an 80-to-80 two-sided Agda case table between the original punctured four-trit codec and (P1(F9) pointed chart × original punctured two-trit eight-scalar source). This is stronger than a generic hypothetical 80-element equivalence.
+- \`IITF81F9NormInverseBridgeExact.agda\` collects the abstract normative theorem on the actual source carrier; \`scripts/iit_f81_f9_norm_inversion_audit.py\` and \`scripts/iit_f81_f9_quadratic_tower_audit.py\` are wired to the numeric aggregator.
+- [Detailed current source/acceptance ledger](https://github.com/chboishabba/dashi_agda/blob/agent/iit-phi-integration-maxcut-20261013/docs/superpowers/plans/2026-10-24-iit-jfine-79-80-72-selected-pointed.md).
+
+**Proof-status discipline:** the new explicit Agda case equations are source-written but have **not** passed a pinned exact-head Agda kernel build in this environment; independent local arithmetic passed, GitHub exact script replay remains open. The generic nonzero-product-closed \`PuncturedF81PowerLaws\` transport into the actual source-specific chart still requires the kernel proof/instance. No J cusp ≡ classical modular j, Monster invariant representation, original D4=C5 action, neural/physical/quantum mechanism or phenomenal consciousness inference follows automatically.
+
+**Phase update:**
+- D3B.6 *actual source codec and finite operation producer*: implemented as committed Agda sources + independent exhaustive arithmetic.
+- D3B.7 *kernel acceptance*: outstanding exact-head Agda compilation and remaining field group-axiom/closure transport.
+- D3B.8 *experimental same-object*: only after actual source-specific optical, connectome or AI hidden-state interventions and measured consumer losses are available. Literature/citation authority, syntax, numerical reproduction, Agda kernel certification, and physical corroboration remain separate categories.
