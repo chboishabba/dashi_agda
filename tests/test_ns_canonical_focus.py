@@ -122,3 +122,27 @@ def test_guard_blocks_new_numbered_modules_but_not_existing_owner_edits():
         "NSBControl/Rational345R823DecisionFreeze.lean"
     ]
     assert new_round_units(["docs/round854.md", "NSCanonicalClayResidualExact.agda"]) == []
+
+
+def test_physical_frontiers_are_not_promoted_by_abstract_compilers():
+    """A canonical interface is not a physical A/B estimate receipt."""
+    closure = ROOT / "DASHI/Physics/Closure"
+    a = (closure / "NSClayFacingAPureAnalysisFrontier20261007Exact.agda").read_text()
+    assert "aPureLeafClosed a1ActualCanonicalPairPopulation = false" in a
+    assert "aPureLeafClosed a1HighFrequencyHeatEnvelopeWeld = false" in a
+    assert "aPureLeafClosed a2LowPhysicalMajorantDomination = false" in a
+    assert "aPureLeafClosed a2HighPhysicalMajorantDomination = false" in a
+
+    b = (closure / "NSClayFacingBPureAnalysisFrontier20261005Exact.agda").read_text()
+    for name in ("b1PhysicalProducerClosed", "b2PhysicalProducerClosed",
+                 "b3PhysicalProducerClosed"):
+        assert f"{name} = false" in b
+    assert "pureAnalysisFrontierClosed = false" in b
+
+    literal_b4 = (closure / "NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda").read_text()
+    assert "b4DefectR440PhysicalPaymentClosed = false" in literal_b4
+    interface = (closure / "NSCanonicalB4PhysicalR440AnalyticInterfaceExact.agda").read_text()
+    assert "signedPhysicalR440Payment :" in interface
+    assert "analyticPaymentImpliesCanonicalPayment :" in interface
+    # These are expected red research gates. A proven physical source theorem
+    # should update both the owner and this explicit evidence gate.
