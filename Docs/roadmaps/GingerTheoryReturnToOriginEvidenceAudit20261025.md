@@ -1,3 +1,5 @@
+> **Byte-level provenance + operational companion:** [GingerTheoryFrequencyClaimsOriginalSourceCut20261025.md](../Investigations/GingerTheoryFrequencyClaimsOriginalSourceCut20261025.md) records the SHA-256 of the user-supplied SRT/six screenshots, original timestamps/source joins and the 6-test [2×2 sound/RF interaction analysis](../../scripts/frequency_joint_interaction_audit.py). This roadmap remains the canonical phase/status owner, not a replacement for instrument-verified physical outcomes.
+
 # Back to the original question: @itsgingertheory reel source and inference audit
 Date: 2026-10-25 (Brisbane)
 Original creator object: https://www.instagram.com/reel/DbqY4jLxuhs/
