@@ -53,3 +53,15 @@ noEditorialControlFromSecurityDeed = G.noFinanceCommand
 
 noPodcastCapitalFromReport : G.ReportedPodcastBackerIsAuditedCapital → ⊥
 noPodcastCapitalFromReport = G.noRumourToEquity
+
+headquartersLeaseIsNotGiftOfTitle :
+  A.kind G.rinehartOneNationHeadOffice ≡ A.commercialLeaseArrangement
+headquartersLeaseIsNotGiftOfTitle = refl
+
+podcastPartnerBuyoutNotRinehartEquity :
+  A.kind G.stefanovicIbrahimOwnershipSettlement ≡ A.ownershipBuyoutSettlement
+podcastPartnerBuyoutNotRinehartEquity = refl
+
+noCommandFromCopyAccess :
+  G.OriginalInterviewFileAccessIsProvenInstruction → ⊥
+noCommandFromCopyAccess = G.noRepublishedFileCommand
