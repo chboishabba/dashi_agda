@@ -1062,3 +1062,51 @@ def test_march_wyden_ocdetf_same_investigator_and_confidential_tip_claim_only():
         assert token in bank
     assert "same Wyden investigation root" in study
     assert "independently authenticated DOJ blocking instruction" in study
+
+
+def test_canadian_score_finding_routes_through_canonical_ca_owner():
+    ca = (ROOT / "DASHI/Cognition/BannonCambridgeAnalyticaInfluenceInfrastructureExact.agda").read_text()
+    case = OWNER.read_text()
+    for token in (
+        "canadianJointPrivacyRegulatorAIQFinding : InfluenceEdgeKind",
+        "canadianJointRegulatorAIQReceipt = influence-receipt",
+        "PIPEDA Findings 2019-004",
+        "true false false true",
+        "∷ canadianJointRegulatorAIQReceipt",
+    ):
+        assert token in ca
+    for token in (
+        "canonicalCanadianAIQCAInfluenceOwner = CA.canadianJointRegulatorAIQReceipt",
+        "canadianRegulatorFindingAlsoInCanonicalCAOwner = refl",
+        "canadianSpecificTechniqueTransferNotPaidByRegulator = refl",
+    ):
+        assert token in case
+
+
+def test_canadian_partial_security_remediation_and_exposed_credentials_not_35m_download():
+    case = OWNER.read_text()
+    study = (ROOT / "docs/research/kogan-aiq-canadian-regulator-source-cut-20261025.md").read_text()
+    for token in (
+        "record Canadian2019RemediationEvidenceCut : Set where",
+        "regulatorsFoundGitLabExposedAccessKeys : Bool",
+        "reportedExternalDatabasesHeldAbout35mPersons : Bool",
+        "reportSaysResearcherDeniedDownloadingThoseExternalDatabases : Bool",
+        "securitySafeguardsIssueDeclaredResolvedIn2019Report : Bool",
+        "sourceReportsAIQSuppliedSwornDeletionAffidavit : Bool",
+        "entireConsentAndRemediationInvestigationUnconditionallyClosed : Bool",
+        "canonicalCanadian2019RemediationEvidenceCut = canadian-2019-remediation-evidence-cut",
+        "canadian2019SecurityIssueAlreadyReportedResolved = refl",
+        "canadian2019SwornAffidavitActuallyReported = refl",
+        "canadianAffidavitIsNotGlobalCopyErasureCertification = refl",
+        "canadianSecurityResolutionIsNotEntireInvestigationClosure = refl",
+        "canadian35mDatabaseVulnerabilityNot35mKoganRecords = refl",
+    ):
+        assert token in case
+    for token in (
+        "did not download those databases",
+        "sworn deletion affidavit",
+        "security-safeguards issue as resolved",
+        "the whole consent investigation",
+        "canonical CA influence owner",
+    ):
+        assert token.lower() in study.lower()
