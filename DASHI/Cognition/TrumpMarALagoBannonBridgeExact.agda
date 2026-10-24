@@ -411,3 +411,134 @@ transcriptWithoutReviewNotCertified = refl
 originalReelIdDoesNotPay2019ContractJoin :
   april2019CounselAgreementIdentifiedToThisReel bannonOriginalReelIndex ≡ false
 originalReelIdDoesNotPay2019ContractJoin = refl
+
+------------------------------------------------------------------------
+-- TRANSCRIPT-FIRST CONTENT AUDIT (EFTA01600824, 2026-10-24)
+--
+-- Research acceptance: a located timecoded ASR transcript is sufficient
+-- for source-bounded scene and attributed-statement analysis. Optional
+-- byte SHA-256 is NOT a blocker. ASR's machine speaker labels and its
+-- paraphrases cannot authenticate off-screen identities, financial facts,
+-- or a separate Black/Apollo or Aquino intelligence programme.
+------------------------------------------------------------------------
+
+data InterviewStatementRole : Set where
+  filmProductionDirection : InterviewStatementRole
+  attributedFinancialOrScientificClaim : InterviewStatementRole
+  interviewerQuestionNotHistoricalFinding : InterviewStatementRole
+  contemporaryAccountNeedsExternalDateAudit : InterviewStatementRole
+  genericNamedAssociation : InterviewStatementRole
+
+record TimecodedTranscriptReceipt : Set where
+  constructor timecoded-transcript-receipt
+  field
+    timeStart : String
+    timeEnd : String
+    source : String
+    role : InterviewStatementRole
+    boundedContent : String
+    timecodedTextLocated : Bool
+    underlyingHistoricalClaimVerified : Bool
+    newDirectLeonBlackAgreementPaid : Bool
+    anyIntelligenceCommandPaid : Bool
+open TimecodedTranscriptReceipt public
+
+stagedOffCameraInterview : TimecodedTranscriptReceipt
+stagedOffCameraInterview = timecoded-transcript-receipt
+  "00:00:14" "00:00:34"
+  "EFTA01600824 third-party timecoded ASR transcript opening"
+  filmProductionDirection
+  "Off-camera interviewer's questions were not intended to be heard in the polished presentation; interlocutors discuss recording both ways and restating prompts. This supports intentional staged interview instructions, not final editorial execution or legal copyright ownership."
+  true false false false
+
+rockefellerAccessNarrative : TimecodedTranscriptReceipt
+rockefellerAccessNarrative = timecoded-transcript-receipt
+  "00:00:53" "00:05:30"
+  "EFTA01600824 ASR; first-person Rockefeller University/Trilateral self-description"
+  attributedFinancialOrScientificClaim
+  "Epstein gives self-attributed recollections about Rockefeller University institutional ties, David Rockefeller and finance/institutional access. Such recollection is a participant statement, not a board roster or an independently verified appointment."
+  true false false false
+
+mercerSurnameReference : TimecodedTranscriptReceipt
+mercerSurnameReference = timecoded-transcript-receipt
+  "00:10:07" "00:10:22"
+  "EFTA01600824 ASR, surname Mercer in a banking analogy"
+  genericNamedAssociation
+  "Transcript has Epstein addressing Bannon about his old boss Mercer and understanding of banking. A surname reference does not document a new Bannon-Mercer-Epstein contract, does not identify Robert Maxwell, and does not transfer CA datasets."
+  true false false false
+
+aiAsComplexityNarrative : TimecodedTranscriptReceipt
+aiAsComplexityNarrative = timecoded-transcript-receipt
+  "00:22:52" "00:24:31"
+  "EFTA01600824 ASR, neural networks and AI analogy"
+  attributedFinancialOrScientificClaim
+  "Participant explains contemporary neural networks and opaque decision making as an analogy to complexity. This is speech about AI, not a primary grant, code, investment, deployed dataset or programmatic command."
+  true false false false
+
+bearLehmanJailCallNarrative : TimecodedTranscriptReceipt
+bearLehmanJailCallNarrative = timecoded-transcript-receipt
+  "00:27:28" "00:37:43"
+  "EFTA01600824 ASR juxtaposed with official FDIC 2000-2009 crisis history"
+  contemporaryAccountNeedsExternalDateAudit
+  "Epstein self-reports jail collect calls to Bear Stearns leadership and a JPMorgan contact after learning of financial crisis; ASR intermixes Bear acquisition and Lehman bankruptcy. FDIC places Bear acquisition in March 2008 and Lehman bankruptcy on September 15 2008. Exact dates/call logs and whether narration conflates events remain unpaid."
+  true false false false
+
+santaFeComplexityDonorNarrative : TimecodedTranscriptReceipt
+santaFeComplexityDonorNarrative = timecoded-transcript-receipt
+  "01:08:44" "01:13:38"
+  "EFTA01600824 ASR, Santa Fe/Los Alamos research narrative"
+  attributedFinancialOrScientificClaim
+  "Epstein narrates Santa Fe research financing, Los Alamos scientists and computational complexity work. No original grant, university accounting entry, collaborator authorship or technical program transfer is verified by speech alone."
+  true false false false
+
+donorEthicsLegalityExchange : TimecodedTranscriptReceipt
+donorEthicsLegalityExchange = timecoded-transcript-receipt
+  "01:53:34" "01:55:40"
+  "EFTA01600824 ASR, institutional donors and source-of-funds questioning"
+  interviewerQuestionNotHistoricalFinding
+  "Bannon's questioning of whether institutions should accept Epstein's funding and responses claiming lawful earnings record competing rhetorical positions. Neither speaker's self-justification nor the question pays an external legal or financial finding."
+  true false false false
+
+canonicalTranscriptContentCuts : List TimecodedTranscriptReceipt
+canonicalTranscriptContentCuts =
+  stagedOffCameraInterview ∷ rockefellerAccessNarrative
+  ∷ mercerSurnameReference ∷ aiAsComplexityNarrative
+  ∷ bearLehmanJailCallNarrative ∷ santaFeComplexityDonorNarrative
+  ∷ donorEthicsLegalityExchange ∷ []
+
+record TranscriptResearchAcceptance : Set where
+  constructor transcript-research-acceptance
+  field
+    existingExternalTimecodedASRIsSufficient : Bool
+    researchRequiresMediaVendoring : Bool
+    researchRequiresVideoSHA256 : Bool
+    researcherInspectedOriginalVideoToVerifyASR : Bool
+    externalTimecodesAndSourceRolesIndexed : Bool
+    exactSceneConnectedToIndykeAgreement : Bool
+    transcriptProvesBlackTransactions : Bool
+open TranscriptResearchAcceptance public
+
+canonicalTranscriptResearchAcceptance : TranscriptResearchAcceptance
+canonicalTranscriptResearchAcceptance = transcript-research-acceptance
+  true false false false true false false
+
+transcriptSufficientForThisResearchCut :
+  existingExternalTimecodedASRIsSufficient
+    canonicalTranscriptResearchAcceptance ≡ true
+transcriptSufficientForThisResearchCut = refl
+
+videoHashNotAnAcceptanceGate :
+  researchRequiresVideoSHA256 canonicalTranscriptResearchAcceptance ≡ false
+videoHashNotAnAcceptanceGate = refl
+
+verbatimTranscriptNotVendored :
+  researchRequiresMediaVendoring canonicalTranscriptResearchAcceptance ≡ false
+verbatimTranscriptNotVendored = refl
+
+noBlackTransactionFromInterviewSpeech :
+  transcriptProvesBlackTransactions canonicalTranscriptResearchAcceptance ≡ false
+noBlackTransactionFromInterviewSpeech = refl
+
+original2019AgreementNotProvenByNarrative :
+  exactSceneConnectedToIndykeAgreement canonicalTranscriptResearchAcceptance ≡ false
+original2019AgreementNotProvenByNarrative = refl
