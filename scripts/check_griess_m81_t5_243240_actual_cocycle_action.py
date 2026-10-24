@@ -46,7 +46,12 @@ for i in range(3):
   assert P**3==Permutation(80)
   gens.append(P)
 G=PermutationGroup(gens)
-assert G.order()==151632
+gradeidx={x:i for i,x in enumerate(V)}
+gradegens=[Permutation([gradeidx[shear(x,i,j)] for x in V])
+           for i in range(3) for j in range(3) if i!=j]
+H=PermutationGroup(gradegens)
+assert H.order()==5616
+assert G.order()==151632 and G.order()//H.order()==27
 assert sorted(map(len,G.orbits()))==[1,1,1,78]
 def shift(m,lam):
  x,t=m
