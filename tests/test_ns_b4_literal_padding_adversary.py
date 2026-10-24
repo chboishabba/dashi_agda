@@ -122,3 +122,21 @@ def test_any_fixed_uniform_payment_coefficient_eventually_fails():
         while lower_subfamily(N) <= Mcore/2 + 4*cD:
             N*=2
         assert lower_subfamily(N)>Mcore/2+4*cD
+
+
+def test_literal_four_moment_single_zero_row_increment():
+    # Agda literal residual R_NC = nC*R_N+nN*R_C-rN*M_C-rC*M_N,
+    # followed by negative coherent work. Replacing one zero-amplitude
+    # noncore triad affects ONLY nN and rN; modal sums remain unchanged.
+    def defect(nN,nC,rN,rC,vN,vC,wN,wC):
+        return -(nC*wN+nN*wC-rN*vC-rC*vN)
+    for (nN,nC,rN,rC,vN,vC,wN,wC,s) in (
+        (1,3,5,7,Fraction(1,3),1,Fraction(3,7),2,10),
+        (100,9,400,20,0,1,0,2,1024),
+        (0,2,0,4,0,1,0,2,8),
+    ):
+        diff=(defect(nN+1,nC,rN+s,rC,vN,vC,wN,wC)
+             -defect(nN,nC,rN,rC,vN,vC,wN,wC))
+        assert diff==s*vC-wC
+        if vC==1 and wC==2:
+            assert diff==s-2
