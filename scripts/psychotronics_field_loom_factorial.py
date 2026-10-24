@@ -8,7 +8,7 @@ from fractions import Fraction
 from psychotronics_design_rank_audit import rank_exact
 
 
-COLUMNS = ('intercept','coil_sign','dipole_sign','coil_times_dipole','coil_heating_proxy')
+COLUMNS = ('intercept','coil_sign','dipole_sign','coil_times_dipole','coil_energised_indicator')
 
 
 def model_row(coil_sign, dipole_sign):
@@ -16,6 +16,7 @@ def model_row(coil_sign, dipole_sign):
         raise ValueError('coil sign must be -1, 0, or 1')
     if type(dipole_sign) is not int or dipole_sign not in (-1, 1):
         raise ValueError('dipole sign must be -1 or 1')
+    # sign² is a coil-energised indicator, NOT measured I²R heating.
     return (1, coil_sign, dipole_sign, coil_sign * dipole_sign, coil_sign ** 2)
 
 
@@ -26,7 +27,9 @@ def audit_settings(settings):
     rows = [model_row(s['coil_sign'],s['dipole_sign']) for s in settings]
     r = rank_exact(rows)
     return {'rows':len(rows),'parameters':len(COLUMNS),'rank':r,
-            'interaction_identifiable_with_separated_thermal_proxy':r==len(COLUMNS),
+            'five_term_indicator_model_identifiable':r==len(COLUMNS),
+            'coil_sign_squared_is_actual_I_squared_R_or_temperature':False,
+            'measured_current_amplitude_and_thermal_drift_identified':False,
             'actual_coil_current_measured':False,
             'dipole_polarity_experimentally_verified':False,
             'claimed_anomalous_force_established':False}
