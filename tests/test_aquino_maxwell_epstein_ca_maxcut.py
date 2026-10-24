@@ -131,3 +131,20 @@ def test_itir_pareto_are_candidacy_not_evidence():
     assert source.count("true refl false refl false refl") >= 2
     assert "axes:illustrative-calibration" in source
     assert "numeric axes are scenario/routing calibration" in source
+
+
+def test_constructive_shared_root_refutation_reuses_existing_proof():
+    source = OWNER.read_text()
+    assert "import DASHI.Core.AffectedDependencyClosureExact as Affected" in source
+    for token in (
+        "data ReprintCarrier : Set where",
+        "statementToExcerptA : ReprintDependency firstPersonStatement excerptA",
+        "statementToExcerptB : ReprintDependency firstPersonStatement excerptB",
+        "reprintSystem = RootClosure.provenanceSystem ReprintDependency ReprintRoot",
+        "twoExcerptsShareOneRoot = RootClosure.sharedUpstreamRoot",
+        "(Affected.affectedStep statementToExcerptA Affected.affectedRefl)",
+        "(Affected.affectedStep statementToExcerptB Affected.affectedRefl)",
+        "sharedReprintRootRefutesIndependence =",
+        "RootClosure.sharedUpstreamRootRefutesIndependence twoExcerptsShareOneRoot",
+    ):
+        assert token in source
