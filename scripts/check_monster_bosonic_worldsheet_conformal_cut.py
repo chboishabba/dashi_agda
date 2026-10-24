@@ -18,7 +18,8 @@ def string_charge_budget():
     assert 10 + 16 - 26 == 0  # distinct optional internal c=16 model, not Monster c=24
     assert 24 + 10 - 26 == 8  # naive Monster c24 + 10 free bosons is anomalous
     assert 24 + 2 - 26 == 0  # NOT 24+10-26
-    print("PASS sourced bosonic c24+2-26=0; 10D/CY and Monster c24 cannot be conflated")
+    assert 10 + 5 - 26 + 11 == 0  # separate RNS: ten bosons, ten fermions, superghosts
+    print("PASS bosonic Monster c24+2-26=0; distinct RNS 10+5-26+11=0")
 
 def torus_edges():
     return tuple(product(range(3), repeat=2))
