@@ -407,3 +407,24 @@ both have coefficient rank one. A source-owned actual Wada example,
 Fox-Artin local wildness, and Richards end-space realisations remain
 separate geometric obligations. Native Lean #86 is draft and NOT
 freshly kernel typechecked in this environment.
+
+
+### Native Lean #86 final additions (same dated cut)
+
+On actual `dashi_lean4` carriers, not reconstructed in Agda:
+- `Synthesis/ExoticTopologyWhitneyRealImage.lean`: source-written
+  complete real semialgebraic image iff `x²=y²z ∧ z≥0`, with
+  explicit inverse parameters in the two `y=0/y≠0` cases.
+- `Synthesis/ExoticTopologyCP1SphereH2Acceptance.lean`: the
+  literal rational ordinary-singular-H₂ hypothesis for
+  `TopCat.sphere 2` compiles via existing native functorial
+  transport into an exact conditional CP¹ H₂ isomorphism.
+- `scripts/exotic_topology_lean_donor_audit.py`: local SymPy PASS,
+  including 225 rational Whitney-inverse checks, integral tetrahedral
+  boundary-matrix rank, rational pairing and negative controls.
+
+All added Lean proof sources remain uncompiled in this runtime, and
+the Hatcher reduced-homology donor still needs a matched ordinary/reduced
+chain comparison plus source pin reconciliation. Existing Agda
+CW-cellular and pants modules remain authoritative for their respective
+finite carriers; neither repository's proof is automatically the other's.
