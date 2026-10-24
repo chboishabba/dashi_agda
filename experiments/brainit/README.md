@@ -70,6 +70,8 @@ python experiments/brainit/evaluate.py \
   --fmri "$UPSTREAM/data/nsd_data/fmri_v2.npz" \
   --design "$UPSTREAM/data/nsd_data/experiment/nsd_expdesign.mat" \
   --subject 1 --condition paired --seed 20261024 --branch enhanced \
+  --inference-receipt /path/to/brainit-runs/paired/inference_receipt.json \
+  --inventory /path/to/receipts/inventory.json \
   --out /path/to/receipts/paired.json
 ```
 
@@ -81,6 +83,12 @@ python experiments/brainit/compare.py \
   --control /path/to/receipts/deranged.json \
   --seed 20261024 --draws 2000 --out /path/to/receipts/contrast.json
 ```
+
+The command-line evaluator fails closed without a successful output-hash
+`inference_receipt.json` and complete, actual `inventory.json`; the direct
+Python API allows receipt-free synthetic tests but marks them non-admissible.
+The seeded wrapper writes the inference receipt **only after** upstream
+inference returns successfully, including SHA-256 of saved reconstruction arrays.
 
 The evaluator computes mean per-image pixel correlation and grayscale gaussian-weighted SSIM after independent 425×425 interpolation. The original paper's metric code uses `torchvision` and additional CLIP/AlexNet/LPIPS models; this lightweight calculation is **not claimed bit-identical to the published tables**. The optional `--feature-gt`, `--feature-recons`, `--feature-source` path computes an explicitly labeled N-candidate two-way identification rate; it must **not** be relabeled as published 1000-way CLIP. A real full benchmark needs the original candidate-pool and encoder/distractor implementation.
 
