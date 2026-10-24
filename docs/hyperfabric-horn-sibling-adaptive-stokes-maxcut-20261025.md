@@ -325,3 +325,81 @@ curvature blow-up or energy density. For a nontrivial flat source,
 the obstruction to globally bounded compatible presentations is
 a topological/global-regularity issue. Specify the allowed gauge
 class, physical metric and boundary conditions before discussing energy.
+
+
+## 2026-10-25 correction and stronger final Pareto result: OPTIMAL stopping / QUALITATIVE sibling tail
+
+**Correct the priority/novelty of the previous finite 2-of-3 example.**
+The two-short-siblings conclusion is valid, but is DERIVABLE from the
+earlier sharp single-short-descendant criterion already in #1249/#84:
+among any two selected short siblings in three levels, at least one
+occurs at k=0 or k=1; its gap<=1/4 implies respectively
+d(root)<=2^(k+1)*d(sibling)<=1. This is not independent new
+mathematics and must be attributed to the pre-existing one-branch
+theorem. The old 'one short sibling does not suffice' negative control
+was a claim ONLY about the deliberately loose fixed depth-three
+PRODUCT envelope. Taken as a general theorem it would be FALSE:
+one source-marked sibling at depth k alone suffices whenever
+d(B_k)<=2^(-k-1). At k=0, d(B_0)=1/4 actually gives root<=1/2.
+A single short sibling at k=2 with gap=1/4 does NOT suffice under
+that criterion (its direct upper bound is 2).
+
+For full source-adaptive strength use BOTH commutator estimates
+
+    d([A,B]) <= 2*d(B)
+    d([A,B]) <= c(B)*d(A), c(B)=2*min(1,d(B)),
+
+and STOP at any prefix. With eta_k real source curved defects,
+P_j=prod_(i<j)c(B_i), E_j=sum_(i<j)P_i eta_i, each n permits
+
+    d(root) <= E_n + 2*P_n,                           (leaf stop)
+    d(root) <= E_j + P_j*eta_j + 2*P_j*d(B_j)    (sibling stop, j<n).
+
+The minimum over ALL valid stops is the genuinely sharper root
+budget. It is source conditional: eta_j must be real based Stokes
+data, while for FLAT monodromy eta_j=0.
+
+**New qualitative eventual-tail theorem.** If along any *correctly
+marked* infinite branch there exist N and epsilon<1/2 such that
+d(B_k)<=epsilon for ALL k>=N, then c(B_k)<=2epsilon<1
+eventually. Hence
+
+    d(root) <= 2*(prod_(i<N)c(B_i))*(2epsilon)^(n-N) ->0
+
+for flat holonomy. Thus root=I WITHOUT the sibling lengths being
+geometrically exponential, WITHOUT sibling holonomy tending to zero
+and WITHOUT any shrinking chosen terminal leaf. As an immediate
+necessary condition on EVERY branch of any abstract representation
+with nontrivial W root,
+
+    limsup_(k->infty) d(B_k) >= 1/2.
+
+This is a new analytical restriction on recursive nontrivial unitary
+holonomies, not a proof that the actual Hatcher meridians have bounded
+or shrinking Euclidean arclength. If genuine marked sibling-loop
+lengths merely tend to zero and a compatible uniform M exists, their
+gaps tend to zero and the theorem applies; NO fixed q<1 is needed.
+
+**Independent exact countercontrol of novelty:**
+with first 5 sibling gaps uncontrolled (=2) and EVERY later
+sibling gap=2/5, the optimized bound crosses strictly below 1
+at source depth 21. Every individual sibling gap is ABOVE its
+prior one-fast-branch rejection threshold 2^(-k-1).
+Thus the eventual-tail certificate is not just the old one-leaf
+criterion in disguise. For the weaker leaf-only PRODUCT stop,
+the exact crossing depths for uncontrolled prefixes K=0,2,5,8
+and thereafter constant gap=2/5 are respectively 4,12,24,36.
+
+New committed executable:
+scripts/check_horn_optimal_sibling_stopping_tail.py.
+Exact independent local Fraction regression PASSED; exact committed
+Python blob execution and Lean kernel are not claimed.
+
+**Updated source-max-cut conclusion:** The largest gain is now
+qualitative: investigate actual #1244 Hatcher-linked meridian
+sibling lengths that tend to zero, rather than insisting a
+numerical geometric contraction ratio be delivered first.
+The remaining obstacle is SAME-OBJECT based generator identification
+and complement clearance, plus based Stokes homotopy area for
+curved source physics. Respect Alexander 1924, Hatcher, Gotô,
+Lippert, original #1244 geometry, and #1247 selected-W provenance.
