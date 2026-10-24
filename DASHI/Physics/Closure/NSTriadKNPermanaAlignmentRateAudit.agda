@@ -46,6 +46,29 @@ module DASHI.Physics.Closure.NSTriadKNPermanaAlignmentRateAudit where
 -- viscous damping of |omega|. Conditional logarithmic BMO, relative
 -- alignment or strain-geometry criteria are not thereby falsified.
 --
+-- SOURCE-DIRECT status (verified against the author-uploaded May-06
+-- manuscript transcription, ResearchGate text, section 2.1/2.2/3.2):
+-- v4 Equation (3) explicitly sets T3=∫|curl(omega×u)|², so it is
+-- merely NONNEGATIVE, not strictly positive-definite on nonzero flow.
+-- Definition 2.1 *assumes* the nonlinear T3 terms are a divergence
+-- (Topological Invariant Conservation Hypothesis, TICH). Remark 2.3
+-- calls that cancellation an OPEN CONJECTURE: it is not a theorem
+-- derived from the periodic divergence theorem alone.
+-- Definition 3.1 introduces separate Turbulence Alignment Hypothesis
+-- (TAH); Definition 3.2 assumes an A2 Muckenhoupt weight/DGMICH;
+-- Definition 3.3 *postulates* curvature coefficient
+-- C_nu <= C T3^(1/2) E^(-1/2), rather than deriving it from NS.
+-- For the explicit Beltrami family above, T3=0 even with
+-- |omega|=A/e and |grad xi|=n; thus that T3-to-curvature
+-- postulate cannot be universal if C_nu represents curvature.
+-- Alignment inequality |<xi,S xi>|<=Cnu T3 E^(1/5)|omega|^(.9)
+-- is NOT contradicted by this example, since <xi,S xi>=0 as well.
+-- These are source HYPOTHESES and an exact SAME-EQUATION negative
+-- control, not a proof that all conditional conclusions are false.
+-- Related v3 author metadata Zenodo says "Hanif A., Lathif";
+-- v4 says "Hanif A., Lathief". Preserve version spelling rather
+-- than mechanically normalizing two primary-source records.
+--
 -- The present Agda file retains the pre-existing T3 finite-carrier
 -- checks. The dynamic field algebra here is SOURCE-WRITTEN COMMENT
 -- with an exact locally executed SymPy regression (4 passed);
