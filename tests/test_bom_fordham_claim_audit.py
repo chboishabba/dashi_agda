@@ -338,10 +338,10 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
 
-    assert len(rows) == 25
+    assert len(rows) == 27
     assert len({row["edge_id"] for row in rows}) == len(rows)
     assert Counter(row["case_id"] for row in rows) == {
-        "BOM2026": 11, "REEF2021": 10, "GAS2026": 4
+        "BOM2026": 13, "REEF2021": 10, "GAS2026": 4
     }
     fields = (
         "edge_id", "case_id", "upstream", "downstream", "relation",
@@ -395,7 +395,7 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
 def test_claim_root_ledger_documentation_uses_only_case_bounded_counts():
     docs = RESEARCH.read_text()
     assert "australian_climate_claim_origin_edges_20261025.csv" in docs
-    assert "25 bounded relationship rows" in docs
+    assert "27 bounded relationship rows" in docs
     assert "NOT a representative crawl" in docs
     assert "originator" in docs.lower()
     assert "actual transfer not established" in docs.lower()
@@ -468,3 +468,14 @@ def test_single_bom_sky_clip_ipa_publication_and_old_donor_not_collapsed():
     assert "historicalInstitutionalFunding" in media
     assert "4.5m" in media
     assert "no same-object payment" in RESEARCH.read_text()
+
+
+def test_international_republication_is_not_fresh_climate_evidence():
+    with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
+        entries = {r["edge_id"]: r for r in csv.DictReader(stream)}
+    assert entries["B12"]["relation"] == "explicit_international_translation"
+    assert entries["B12"]["evidence_grade"] == "first_party_translation_credit"
+    assert entries["B13"]["relation"] == "news_digest_reference"
+    assert entries["B13"]["evidence_grade"] == "named_source_linking"
+    assert "No independent BOM ledger verification" in entries["B12"]["boundary"]
+    assert "not independent audits" in RESEARCH.read_text()
