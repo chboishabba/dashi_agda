@@ -72,3 +72,12 @@ def test_amplitude_scaling_shows_no_dissipation_only_uniform_payment():
     # At viscosity 1, d/dt ||omega||_2^2 = 8 a^3 - 396 a^2.
     assert 8*50**3-2*198*50**2==10_000
     # This is an *instantaneous* smooth trigonometric datum, not blowup.
+
+def test_real_part_only_map_loses_helical_phase_and_stretching():
+    physical=seed()
+    real_only={m:v.applyfunc(S.re) for m,v in physical.items()}
+    assert exact_budget(physical)==(0,8,8)
+    assert exact_budget(real_only)==(0,0,0)
+    # Real vector coordinates in the existing Round42 input carrier
+    # are not automatically the real physical Fourier field: imaginary
+    # Fourier phases must be preserved by paired real/imag components.
