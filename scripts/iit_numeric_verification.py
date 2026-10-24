@@ -35,6 +35,8 @@ from iit_j_coarse_fine_5cube_audit import audit as five_cube_fibre_audit
 from iit_jfine_selected_punctured79_audit import audit as selected_punctured79_audit
 from iit_projective_f9_pointed80_audit import audit as projective_pointed80_audit
 from iit_pgl2_f9_720_audit import audit as pgl2_f9_audit
+from iit_f81_f9_norm_inversion_audit import audit as f81_norm_inversion_audit
+from iit_f81_f9_quadratic_tower_audit import audit as f81_same_tower_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -216,6 +218,21 @@ def verify_numeric_results() -> dict:
     assert pgl["order5_moves_completion_infinity"]
     assert not pgl["C5_in_affine_stabilizer"]
 
+    f81_norm = f81_norm_inversion_audit()
+    assert f81_norm["q_minus_two_inverse_exponent"] == 79
+    assert f81_norm["subfield_F9_elements"] == 9
+    assert f81_norm["norm_one_group_size"] == 10
+    assert f81_norm["uniform_scalar_fibre_size"] == 8
+    assert f81_norm["norm_one_frobenius_equals_inverse"]
+    assert f81_norm["inverse_via_conjugate_over_norm"]
+    assert f81_norm["inverse_involution_orbits"] == {"fixed":2, "pairs":4}
+    f81_tower = f81_same_tower_audit()
+    assert f81_tower["field_elements_bijectively_mapped"] == 81
+    assert f81_tower["ordered_pairs_addition_checked"] == 6561
+    assert f81_tower["ordered_pairs_multiplication_checked"] == 6561
+    assert f81_tower["relative_Frobenius_9_equals_tower_conjugation"]
+    assert f81_tower["relative_norm_10_equals_tower_norm"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -230,6 +247,8 @@ def verify_numeric_results() -> dict:
         "selected_punctured79": selected,
         "projective_f9_pointed80": projective,
         "projective_group_f9_720": pgl,
+        "f81_norm_inversion": f81_norm,
+        "f81_same_quadratic_tower": f81_tower,
         "large_grid": {"scanned_rows": len(lattice["rows"]),
                        "payload_sha256": lattice["payload_sha256"],
                        "scope": lattice["scope"],
