@@ -244,7 +244,7 @@ wallMaskingAsDefensiveProposal : BoundedLineageEdge
 wallMaskingAsDefensiveProposal = boundedLineageEdge
   moscowEmbassyCounterSurveillance moscowEmbassyCounterSurveillance
   defensiveAudioCountermeasureProposal wiesner1964
-  "1964 White House memorandum proposes intentional low-frequency or broadband wall masking to defeat embedded listening devices, separate from tracking external RF beam"
+  "1964 White House memorandum proposes intentional masking sounds in walls to defeat embedded listening devices; no frequency or installed apparatus established, separate from tracking external RF beam"
   "No documented implementation or behavioural targeting; acoustic masking is a security countermeasure, not evidence of RF-to-acoustic mind control"
 
 data MoscowSignalIntentHypothesis : Set where
