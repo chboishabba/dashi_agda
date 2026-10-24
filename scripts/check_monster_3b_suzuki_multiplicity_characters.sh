@@ -35,16 +35,16 @@ assert p["monster_same_object_match_paid"] is False
 
 assert len(p["faithful_degree_12_positions"]) == 2
 assert len(set(p["faithful_degree_12_positions"])) == 2
-assert len(p["faithful_degree_78_positions"]) == 2
-assert len(set(p["faithful_degree_78_positions"])) == 2
+assert len(p["degree_78_positions"]) == 2
+assert len(set(p["degree_78_positions"])) == 2
 assert len(p["faithful_degree_12_atlas_labels"]) == 2
 assert len(set(p["faithful_degree_12_atlas_labels"])) == 2
-assert len(p["faithful_degree_78_atlas_labels"]) == 2
-assert len(set(p["faithful_degree_78_atlas_labels"])) == 2
+assert len(p["degree_78_atlas_labels"]) == 2
+assert len(set(p["degree_78_atlas_labels"])) == 2
 
 for rows, degree, labels in (
     (p["degree_12_rows"], 12, p["faithful_degree_12_atlas_labels"]),
-    (p["degree_78_rows"], 78, p["faithful_degree_78_atlas_labels"]),
+    (p["degree_78_rows"], 78, p["degree_78_atlas_labels"]),
 ):
     assert len(rows) == 2
     assert sorted(r["atlas_label"] for r in rows) == sorted(labels)
@@ -53,11 +53,14 @@ for rows, degree, labels in (
         assert isinstance(r["position"], int) and r["position"] > 0
         assert isinstance(r["atlas_label"], str) and r["atlas_label"]
         assert {r["first_central_phase"], r["second_central_phase"]} == {"zeta", "zetaSquared"}
+        assert type(r.get("faithful_to_6Suz")) is bool
+        if degree == 12:
+            assert r["faithful_to_6Suz"] is True
 PY
 
 grep -F 'faithfulDegree12AtlasLabels' \
   build/generated/DASHI/Moonshine/Generated/Monster3BSuzukiMultiplicityCharacterCertificate.agda >/dev/null
-grep -F 'faithfulDegree78AtlasLabels' \
+grep -F 'degree78AtlasLabels' \
   build/generated/DASHI/Moonshine/Generated/Monster3BSuzukiMultiplicityCharacterCertificate.agda >/dev/null
 grep -F 'monsterSameObjectMatchPaid = false' \
   build/generated/DASHI/Moonshine/Generated/Monster3BSuzukiMultiplicityCharacterCertificate.agda >/dev/null
