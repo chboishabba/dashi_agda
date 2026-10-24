@@ -135,3 +135,21 @@ The #1106 comparison potential acts on TWO truncated complex bifundamentals (36 
 - **Independent exact fixed-plane inflow script** for selected 16+10+1 grouping and nonzero-integrated-anomaly CS-only no-go: PASS.
 - **Finite Agda BIDI** `DASHI/Physics/Gravity/KKE6OrbifoldVEVAnomalyModelForkExact.agda`: selected matrix parity multiplication and typed "IR ≠ UV" / "SU3³ gauge ≠ full E6" non-descents; SOURCE-WRITTEN, KERNEL UNVERIFIED. Its concrete anomaly Boolean is a LABEL from source script, NOT a kernel proof of continuum triangle diagrams or orbifold APS.
 - No full 5D anomaly-inflow model, physically viable scalar/superpartner masses, full gauged E6, experimentally calibrated fermion family or chiral Standard Model construction has been established. Retain Slansky, Arkani-Hamed/Cohen/Georgi and Scrucca et al source priority separately from original repository checks.
+
+
+## Later restricted parity search and five-dimensional mass-source veto
+
+**No parity-only repair inside this exact diagonal family:** `scripts/check_kk_e6_orbifold_parity_scan_no_go.py` exhausts ALL determinant-one diagonal involutions (P_Rin SU3_R) while fixing (P_c=1) and (P_L=mathrm{diag}(-,-,+)) so colour and the selected (SU2_L) survive. The source exact-rational coefficient table is:
+
+| (P_R) | (SU3_c^3) | (U1_L^3) | canonical (U1_R^3) |
+| --- | ---: | ---: | ---: |
+| (I) | +4 | 0 | 0 (full (SU3_R), no central (U1_R) distinguished) |
+| (mathrm{diag}(-,-,+)) | 0 | +40 | −40 |
+| (mathrm{diag}(-,+,-)) | 0 | +40 | −40 |
+| (mathrm{diag}(+,-,-)) | 0 | +40 | −40 |
+
+Hence **none of those four candidates eliminates all of the pre-VEV gauge anomalies for one 27**. This is a restricted family and does NOT rule out different gauge parities, representations, boundary spectator matter or a consistent anomaly-cancelling Goldstone/Green–Schwarz sector. The canonical UV generators are (T_L=mathrm{diag}(-1,-1,2)) and (U1_R=mathrm{diag}(-1,-1,2)) for the selected (mathrm{diag}(-,-,+)) projector; DO NOT conflate the latter with the final hypercharge (T_R=mathrm{diag}(-4,2,2)), which has an (SU2_R) Cartan component before VEV breaking.
+
+**Old smooth-circle mass sector does NOT transport:** `scripts/check_kk_orbifold_bulk_mass_parity.py` verifies explicitly (gamma^5gamma^0gamma^5=-gamma^0). Under the candidate reflection (Psi(-y)=gamma^5ho(P)Psi(y)), the 5D Dirac bilinear (arPsiPsi) is odd; an ordinary constant-even bulk Dirac mass coefficient would make the term odd and is FORBIDDEN. A parity-odd kink/background mass or compatible boundary/multiplet mixing changes the action and is a possible new source, not presently constructed. The previous 3/4/9TeV smooth-circle Dirac and spurion mass input cannot simply be imported into the chiral orbifold quantum determinant.
+
+**Updated Pareto conclusion:** the positive chiral (16_L) plus SM-vectorlike (10_R+1_R), old E32/E33 parity-compatible source quartic, and IR anomaly cancellation justify this as the leading **research candidate**, but its UV pre-VEV anomaly and source-derived mass parity make it **NOT an admissible completed physical theory**. The next model change must pay boundary/fixed-plane UV gauge consistency without erasing the chiral 16, then introduce an allowed mass/VEV structure, derive one EM photon and compute NEW interval Casimir/metric stress. The exact finite source status is also recorded in `KKE6OrbifoldVEVAnomalyModelForkExact.agda`; the Agda file is kernel UNVERIFIED.
