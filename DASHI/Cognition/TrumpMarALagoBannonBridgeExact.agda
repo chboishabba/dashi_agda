@@ -543,3 +543,50 @@ noBlackTransactionFromInterviewSpeech = refl
 original2019AgreementNotProvenByNarrative :
   exactSceneConnectedToIndykeAgreement canonicalTranscriptResearchAcceptance ≡ false
 original2019AgreementNotProvenByNarrative = refl
+
+------------------------------------------------------------------------
+-- SFI / FDIC HISTORICAL SOURCE CALIBRATION.
+-- Government and institutional records are independent of the interview's
+-- self-claims; a later donor is not necessarily a founding scientist, and
+-- date mismatches require careful event decomposition, not guilt inference.
+------------------------------------------------------------------------
+
+record HistoricalSourceComparator : Set where
+  constructor historical-source-comparator
+  field
+    sourceURL : String
+    historicalFinding : String
+    originalInstitutionalOrRegulatorAuthor : Bool
+    confirmsEpsteinPersonalDonorOrCallClaim : Bool
+    dischargesAnyCommonIntelligenceCommand : Bool
+open HistoricalSourceComparator public
+
+santaFeOfficialHistory : HistoricalSourceComparator
+santaFeOfficialHistory = historical-source-comparator
+  "https://www.santafe.edu/about/history"
+  "Institutional history says George Cowan's group developed the institute in 1982-1984, incorporated May 1984, first workshops autumn 1984; early 1990s support cannot prove original foundation in 1984."
+  true false false
+
+fdic2008OriginalTimeline : HistoricalSourceComparator
+fdic2008OriginalTimeline = historical-source-comparator
+  "https://www.fdic.gov/history/2000-2009"
+  "FDIC dates JPMorgan acquisition of Bear Stearns to March 24 2008 and Lehman bankruptcy to September 15 2008; a retold collect-call story combining these stages requires exact call-date logs and chronology reconciliation."
+  true false false
+
+epsteinSelfBiographicalRecord : HistoricalSourceComparator
+epsteinSelfBiographicalRecord = historical-source-comparator
+  "https://yirah.fi/epstein/en/document/EFTA00304519"
+  "DOJ-recorded one-page promotional biography EFTA00304519 claims former Rockefeller board service and Santa Fe support. It is a source for self-presentation, NOT independent verification of appointments, charitable expenditure or programme governance."
+  false false false
+
+early1990sSFIClaimIsNot1984Founding :
+  confirmsEpsteinPersonalDonorOrCallClaim santaFeOfficialHistory ≡ false
+early1990sSFIClaimIsNot1984Founding = refl
+
+officialFinancialTimelineIsNotJailCallLog :
+  confirmsEpsteinPersonalDonorOrCallClaim fdic2008OriginalTimeline ≡ false
+officialFinancialTimelineIsNotJailCallLog = refl
+
+promotionalBioNotIndependentInstitution :
+  originalInstitutionalOrRegulatorAuthor epsteinSelfBiographicalRecord ≡ false
+promotionalBioNotIndependentInstitution = refl
