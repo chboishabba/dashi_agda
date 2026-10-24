@@ -52,6 +52,8 @@ def test_acquisition_frontier_does_not_claim_promotion():
     assert candidates["a_original_motion_primary"]["pareto"]
     assert candidates["b_rights_review"]["pareto"]
     assert candidates["e_phase_matrices"]["pareto"]
+    assert candidates["h_effective_static_code"]["pareto"]
+    assert candidates["g_voxel_and_atlas_source"]["state"] == "source_prerequisite_blocked"
 
 
 def test_shortest_hypothetical_paths_are_not_acquisitions():
@@ -61,7 +63,8 @@ def test_shortest_hypothetical_paths_are_not_acquisitions():
     assert static["status"] == "conditional_plan_only"
     assert static["hypothetical_actions"] == [
         "a_original_motion_primary", "b_rights_review",
-        "c_source_bytes", "d_replay_static"]
+        "c_source_bytes", "g_voxel_and_atlas_source",
+        "h_effective_static_code", "d_replay_static"]
     assert static["evidence_created"] is False
     precursor = engine.hypothetical_plan(w, "c_temporal_replication")
     assert precursor["hypothetical_actions"] == ["e_phase_matrices"]
@@ -152,7 +155,7 @@ def test_source_roots_count_lineage_not_documents():
     assert snap["source_records"] == 7
     assert snap["independent_lineage_roots"] == 3
     assert snap["artifact_status_counts"] == {
-        "knownAbsent": 1, "notLocated": 11, "present": 5}
+        "knownAbsent": 2, "notLocated": 14, "present": 5}
 
 
 def test_candidate_tip_selectively_reopens_without_changing_world():
@@ -203,3 +206,32 @@ def test_candidate_tip_cannot_assert_authority_or_fix_known_absent():
     with pytest.raises(ValueError, match="SHA256"):
         engine.candidate_source_receipt(
             w, "original_static_fd", dict(evidence, candidate_sha256="invented"))
+
+
+def test_author_static_result_requires_nifti_atlas_and_effective_workspace():
+    w = world()
+    claims = {x["consumer"]: x for x in engine.claim_status(w)}
+    static = claims["c_static_reproduction"]
+    assert static["state"] == "acquisition_blocked"
+    assert {"original_preprocessed_voxel_nifti",
+            "original_schaefer_extended_mask",
+            "effective_static_gfc_workspace"} <= set(static["missing"])
+    assert engine.hypothetical_plan(
+        w, "c_public_mat_reproduces_original_static")["status"] == "no_declared_source_route"
+    artifact = next(x for x in w["artifacts"]
+                    if x["id"] == "original_static_nifti_and_mask_in_pinned_tree")
+    assert artifact["status"] == "knownAbsent"
+    assert "b35701d" in artifact["scope"]
+    assert "negative_search_receipt" in artifact
+
+
+def test_pareto_needs_source_object_coverage_not_only_consumer_overlap():
+    w = world()
+    actions = {x["id"]: x for x in engine.action_candidates(w)}
+    qc = actions["a_original_motion_primary"]
+    code = actions["h_effective_static_code"]
+    assert set(qc["potential_consumer_ids"]) >= set(code["potential_consumer_ids"])
+    assert not set(qc["potential_artifacts"]) >= set(code["potential_artifacts"])
+    assert qc["pareto"] and code["pareto"]
+    # All closures still depend on producing the underlying evidence.
+    assert code["promotion_authorised"] is False
