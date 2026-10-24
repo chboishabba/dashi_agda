@@ -304,3 +304,24 @@ are negative controls. Explicitly retain Gotô/Hatcher/Alexander/Lippert,
 #1244 and #1247 ownership; never promote linked-picture analogy,
 numerical simulation, conditional type theory or citation into
 kernel/source physics.
+
+
+### Essential gauge-frame / physical interpretation firewall
+
+The M_n above is the norm of a *connection coefficient in a compatible
+single-valued gauge along source loops*, not a gauge-invariant local
+curvature scalar. New negative control
+`scripts/check_horn_flat_pure_gauge_norm_false_positive.py`:
+on the punctured plane define
+`g_n(theta)=diag(e^(in theta),e^(-in theta),1) in SU(3)` with integer n.
+Then the smooth globally single-valued PURE gauge
+`A_n=g_n^-1 dg_n=diag(in,-in,0)dtheta` has curvature F=0,
+holonomy I on every circular loop and orthonormal angular coefficient
+norm n/r. It may be arbitrarily large while gauge-equivalent to ZERO.
+Local equivalent symbolic checks PASS. Therefore the inverse
+source-growth theorem is a **no-bounded-compatible-frame** statement,
+not by itself proof of physical singularity, finite-action failure,
+curvature blow-up or energy density. For a nontrivial flat source,
+the obstruction to globally bounded compatible presentations is
+a topological/global-regularity issue. Specify the allowed gauge
+class, physical metric and boundary conditions before discussing energy.
