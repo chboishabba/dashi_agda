@@ -90,3 +90,28 @@ The 53-dimensional C3-trivial residual is **not an N(3B)-stable 53-dimensional s
 5. **Second missing data:** actual normalizer inertia lifts and projective cocycle for the 90-dimensional Hom; verify the SOURCE 12+78 character **on this same action**.
 6. **Formalisation:** transport this new POINTED action through PR #1148's source types and integrate with PR #1098's existing linear FDRep/character/Hom code. The current PR uses standalone scripts to avoid a divergent second Heisenberg or Stone–von Neumann owner.
 7. **Evidence discipline:** no Agda/Lean CI or GAP/AtlasRep success is claimed here. Do not promote an Agda source-written theorem to kernel proof without an exact-head receipt. Do not promote the group's mathematical identification into a physics/quantum/consciousness result without independent same-object physical data.
+
+
+## Representation transport closes the *existence* question, not the explicit-data question
+
+Given the abstract `E`-isomorphism `T:P_ζ→W_ζ` established by complete character equality above, let `I=C_{N(3B)}(z)` be the actual phase-preserving inertia group. Define
+
+  `ρ_pointed^I(n) := T^(-1) ρ_W(n)|_(W_ζ) T`  for `n∈I`.
+
+This is automatically an honest `I`-representation with all relations, and `T` is an exact `I` intertwiner *by construction*. This proves abstract existence of an inertia action on the JFine ζ-sector, not that the simple site-reflection/coordinate permutations previously constructed happen to realize it. Source-coordinate operators on `W_ζ` and `T` are still required to compute that transported action or compare it to a predefined geometric action. Full N(3B) inversion must act on the **paired** ζ/ζ² sectors, not separately on either.
+
+The associated multiplicity space is canonically the **abstract** `Hom_E(H_ζ,W_ζ)` (dim 90). Choosing a projective lift of `I` to `H_ζ` induces the compensated projective action on the Hom space. Wilson's published `12+78` determines its relevant source character after the specific lift and central phase convention are fixed; it does not determine a preferred `Fin90` basis. This is the exact distinction between an existence theorem and a computationally explicit representation.
+
+## Reusable theorem owners (do not duplicate)
+
+| Mathematical primitive | Existing owner | New consumer |
+|---|---|---|
+| Heisenberg multiplication and nondegenerate commutator | `Monster3BFiniteHeisenbergCentralExtensionExact` and group-law/nondegeneracy siblings | Pointed chart action; character proof |
+| Generator-level Weyl identities | `Monster3BFiniteHeisenbergGeneratorsExact` | Exhaustive pointed action and sparse projectors |
+| Scalar commutant / Stone–von Neumann | `Monster3BFiniteHeisenbergCommutantExact`, `Monster3BFiniteStoneVonNeumannUniquenessBidiExact` | Abstract E-isomorphism |
+| Point projectors, tensor coordinate recovery | `Monster3BFiniteProjectorModelExact`, `Monster3BMultiplicityEvaluationExact` | Sparse generator-intertwiner compiler |
+| Projective inverse-cocycle tensor cancellation | `Monster3BNormalizerCocycleCancellationExact` | Source-derived inertia/Hom action |
+| (S_3,D_4), nine-site orbit and Burnside counts | IIT PR #1148 `IITJFineFourOneFourS3ZetaGaugeExact`; earlier repository orbit techniques | Fixed-point and character discriminator |
+| Finite linear FDRep, isotypic/Hom action | Open PR #1098 actual linear compiler and companion Lean #47 receipts | Source-coordinate proof boundary |
+
+This ownership table **is the reusable interface extraction plan**: implement adapters only where an action is proven on the same source object. No duplicate general Burnside, Schur, Stone–von Neumann, or cocycle axioms are introduced into the Agda tree by this PR.
