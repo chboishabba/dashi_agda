@@ -157,7 +157,7 @@
             "path": "scripts/ns_b4_literal_padding_adversary.py"
           }
         ],
-        "status": "Original literal full-fibre R440 noncore/core strict-half payment mathematically ruled out by smooth physical shear and localED<=4; existing zero-padding-invariant physical output heat normal form and R681 cross-gradient rate identity present, but NOT an automatic replacement proof for critical B4.",
+        "status": "FALSIFIED original literal full-fibre R440 noncore/core strict-half payment: fixed globally smooth shear has localED<=4, companion fixed for N>=9, signed defect diverges. Existing R681 output-heat alternative is exact prior art, but naive equality with old B4 is false and positive replacement is open.",
         "next": "Retire disproved full-fibre B4 payment. R681 output-relative work is NOT equal to the old B4 defect (explicit smooth shear: 0 vs positive); search existing R685/R690 global compensation over original Bony classes and prove exact total-source identity before any uniform bound."
       },
       {
