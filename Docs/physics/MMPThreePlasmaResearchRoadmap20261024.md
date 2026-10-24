@@ -34,6 +34,18 @@
 
 **Phase decision**: P0 3D finite Maxwell/Dirac regression now done at local-Python level. **Stop dimension-hopping**. P1 actual noncompact same-universe spin-c background, selected global 4D Hadamard covariance and renormalized gauge/current/stress including angular components remain unresolved; P2 same-source Einstein and Maxwell global fixed point remains unresolved; P3Q physical source-selected two S² LLL rails, gauge-invariant asymptotic encoding and channel capacity remain unresolved; P4 must solve actual plasma material currents/ion dynamics and boundaries, not merely three prescribed classical link currents; P5 empirical gravity-channel measurement remains unvalidated. Convergence in lattice size, regulator and covariant renormalization must precede any physical promotion.
 
+## Oct 25 2026: P1/P2 same-source product no-go and actual curved null geometry
+
+**New most informative physics acceptance:** [restricted one-source Einstein-null / Maxwell-Wilson-current obstruction](../../scripts/check_mmp_product_same_source_einstein_maxwell_obstruction_20261025.py), [independently computed 4D warped Einstein-null identity](../../scripts/check_mmp_warped_null_curvature_identity_20261025.py), [full original-attributed source ledger and assumptions](MMPSameSourceProductNullCurrentObstructionMaxCut20261025.md).
+
+The **constant-radius ultrastatic** `S1×S2` kinematic state is now rejected as a self-consistent Einstein–Maxwell–ideal massless-LLL background for every nonzero monopole index `q` in the **declared restricted sector**: `G_kk=0`, magnetic Maxwell `T_kk=0`, while `T_kk,LLL∝B2(alpha)`. At the only Wilson-phase stationary point `B2'(alpha)=0`, `B2(1/2)=-1/12`; at `B2(alpha)=0` the phase-induced persistent current is nonzero, contradicting the purely magnetic static Maxwell equation. The same energy determines both stress and current. This is NOT a no-go for MMP's nonconstant throat or additional 4D modes/counterterms; cosmological constant alone does not alter the radial null contraction.
+
+The independent full symbolic metric calculation verifies for `ds²=-N(x)²dt²+dx²+r(x)²dΩ²` the exact `G_kk=2[(N'/N)r'-r'']/r`, and at a flaring throat `r'=0,r''>0` obtains negative `G_kk`. Thus P1/P2 must use the **same globally selected nonconstant geometry** rather than a constant-radius circle×sphere proxy. This is an upstream rejection constraint, not a quantum matter solution.
+
+**Prior-art reuse:** native Wilson/Hadamard source bridge, local optical-circle state functional, 4D Einstein tensor and finite Maxwell Hodge/charge obligations; original MMP 2018/2023 (actual wormhole), Zahn (charged Dirac locally covariant renormalization), established massless fermion Casimir. Also repaired four malformed `//` comments in `MMPWilsonHadamardSameBackgroundBidiExact.agda` to parse-compatible `--`; no Agda or Lean kernel/CI claim.
+
+**Revised Pareto:** stop generic finite lattice dimensional escalation (1D→2D→3D already accomplished); spend the primary effort on P1 same noncompact handle spin-c Hadamard state, complete covariant 4D stress and current, and P2 global Einstein+Maxwell constraints. The new scripts are source-written PR acceptance; independent expanded local symbolic prototypes passed, **not** exact-PR-head execution.
+
 ## End-to-end scientific question
 
 Can one **globally defined, Hadamard-admissible, charged-fermion quantum state**, on a consistently charged and spin-c equipped two-ended spacetime, generate its own renormalized stress and induced current such that the semiclassical Einstein–Maxwell equations close; and can three separate, internally and/or externally driven plasma/EM regions create a **distinct measurable change to that state or geometry**?
