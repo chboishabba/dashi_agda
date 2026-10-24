@@ -133,6 +133,29 @@ def certificate():
     asserted_spacetime_upper=(
         4*S.sqrt(2)*S.pi*E0**2*S.sqrt(T)/nu**S.Rational(5,2))
     assert S.simplify(spacetime_upper-asserted_spacetime_upper)==0
+
+    # Strong H1 -> L2_xi same-source continuity (the density bridge):
+    # G=u⊗u-v⊗v in L1, ||G||_1 <= A where
+    # A=(||u||_2+||v||_2)||u-v||_2.
+    # f=(u·grad)u-(v·grad)v in L1, ||f||_1 <= B where
+    # B=||u-v||_2||grad u||_2 + ||v||_2||grad(u-v)||_2.
+    # Fourier projected source difference <= min(A*r,B).
+    # Thus stationary Stokes-response difference <= min(A/(nu*r),B/(nu*r²)).
+    # The EXACT squared L2_xi bound is (8*pi/nu²)*A*B.
+    # In particular, strong H1 convergence u_n->u proves convergence of
+    # the actual physical Stokes source in L2_xi, not merely a free
+    # Set-valued transform "source attachment".
+    AA, BB=S.symbols("tensor_L1_difference convective_L1_difference",
+                     positive=True)
+    continuity_crossover=BB/AA
+    continuity_low=S.integrate(
+        4*S.pi*rr**2*(AA/(nu*rr))**2,(rr,0,continuity_crossover))
+    continuity_high=S.integrate(
+        4*S.pi*rr**2*(BB/(nu*rr**2))**2,
+        (rr,continuity_crossover,S.oo))
+    continuity_bound=S.simplify(continuity_low+continuity_high)
+    assert S.simplify(continuity_bound-
+        8*S.pi*AA*BB/nu**2)==0
     return {
         "schema":"ns.a.schwartz-fourier-same-object.v1",
         "convention":"F[f](xi)=integral exp(-i*x.dot(xi)) f(x) dx",
@@ -157,6 +180,10 @@ def certificate():
         "arbitrary_H1_global_fourier_resolvent_L2_squared_bound":str(total_global),
         "Leray_energy_inequality_spacetime_response_L2_squared_upper":str(spacetime_upper),
         "time_bound_needs_no_uniform_H1":"true; requires integral D(t) finite only",
+        "strong_H1_source_continuity_low":"A*|xi|",
+        "strong_H1_source_continuity_high":"B",
+        "strong_H1_Stokes_L2_xi_difference_squared_bound":str(continuity_bound),
+        "strong_H1_continuity_assumptions":"A=(||u||2+||v||2)||u-v||2; B=||u-v||2||grad u||2+||v||2||grad(u-v)||2",
         "exact_nonzero_projected_frequency":"(1,0,1)",
         "source_only_not_claimed":[
             "general FourierTransformVelocity for every solution",
