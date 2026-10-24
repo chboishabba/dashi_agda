@@ -128,3 +128,58 @@ qedChargeOwner = Charge.SMWeylMultiplet → Charge.SMWeylMultiplet
 
 maxwellLawOwner : Set₁
 maxwellLawOwner = Laws.MaxwellFieldLaw
+
+
+------------------------------------------------------------------------
+-- 2026-10-24 strongest selected QED+QCD+SU3^3 finite BIDI collision.
+--
+-- Source-side numeric predicate attribution:
+--   scripts/check_kk_light_qed_dirac_same_action.py
+--   scripts/check_kk_e6_trinification_joint_radion_wilson.py
+-- For the SELECTED one-loop spectra, both can be retuned to a
+-- stationary positive-curvature RADION at theta_EM=0, but only the
+-- QED-only toy has POSITIVE electromagnetic Wilson curvature.
+--
+-- These constructors label SOURCE-WRITTEN finite candidate outcomes;
+-- they do not kernel-prove the continuum one-loop determinants.
+------------------------------------------------------------------------
+
+data RadionWilsonCandidate : Set where
+  priorLightQEDOnly : RadionWilsonCandidate
+  selectedQEDQCDWithTwoExtraMasslessSU3 : RadionWilsonCandidate
+
+radionStationarityOnly : RadionWilsonCandidate → Bool
+radionStationarityOnly priorLightQEDOnly = true
+radionStationarityOnly selectedQEDQCDWithTwoExtraMasslessSU3 = true
+
+emWilsonLocalStability : RadionWilsonCandidate → Bool
+emWilsonLocalStability priorLightQEDOnly = true
+emWilsonLocalStability selectedQEDQCDWithTwoExtraMasslessSU3 = false
+
+trueNotFalse : true ≡ false → ⊥
+trueNotFalse ()
+
+radionPassCannotDetermineWilsonPass :
+  Transport.ClaimNonTransportWitness
+    radionStationarityOnly emWilsonLocalStability
+radionPassCannotDetermineWilsonPass =
+  Descent.consumerNonDescentWitness
+    priorLightQEDOnly selectedQEDQCDWithTwoExtraMasslessSU3
+    refl trueNotFalse
+
+noSteelmanWilsonPromotionFromRadionOnly :
+  Transport.ClaimTransport
+    radionStationarityOnly emWilsonLocalStability → ⊥
+noSteelmanWilsonPromotionFromRadionOnly =
+  Transport.claimNonTransportWitnessBlocksTransport
+    radionPassCannotDetermineWilsonPass
+
+repairMustTrackWilsonHessian :
+  (refine : RadionWilsonCandidate → Bool) →
+  Repair.RefinementRepairs
+    radionStationarityOnly refine emWilsonLocalStability →
+  refine priorLightQEDOnly
+    ≡ refine selectedQEDQCDWithTwoExtraMasslessSU3 → ⊥
+repairMustTrackWilsonHessian refine adequate same =
+  Repair.refinementRepairSeparatesWitness
+    radionPassCannotDetermineWilsonPass adequate same
