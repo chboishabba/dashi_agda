@@ -27,7 +27,7 @@ module DASHI.Physics.QFT.NeutrinoC3AstrophysicalFlavorNoGoExact where
 -- IceCube likelihood or source inference is constructed.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat) renaming (_+_ to _+ℕ_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; +_; _+_; _*_)
 open import Data.Empty using (⊥)
@@ -133,7 +133,7 @@ sourceCount s Three.muon = + (muonCount s)
 sourceCount s Three.tau = + (tauCount s)
 
 totalCount : SourceCounts → Nat
-totalCount s = electronCount s + muonCount s + tauCount s
+totalCount s = (electronCount s +ℕ muonCount s) +ℕ tauCount s
 
 pionSource : SourceCounts
 pionSource = sourceCounts 1 2 0
