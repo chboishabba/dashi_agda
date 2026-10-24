@@ -1,0 +1,30 @@
+{
+  "script": "scripts/matbg_bm_quantum_geometry.py",
+  "script_sha256": "6538c8628f3bcffe0adb19cc55ebd1e355b85e168200a6f4663061d6dd72c6dc",
+  "execution_environment": "Python with numpy.linalg.eigh",
+  "model": "rank-two central-band projector geometry on BM plane-wave model",
+  "source_model": "10.1073/pnas.1108174108",
+  "sota_inspiration_not_same_object": "10.1038/s41467-026-74848-6",
+  "coordinate": "dimensionless q=k/k_theta",
+  "finite_difference_dq": 0.001,
+  "reference_point_q": [0.2, 0.15],
+  "shell_convergence": {
+    "2": {"gxx": 1.100898224351797, "gyy": 1.7296273563303368, "gxy": -0.4012981898670699, "trace_metric": 2.830525580682134, "traced_berry_curvature": 4.0870085094013575e-15},
+    "3": {"gxx": 1.1521537517698288, "gyy": 1.774432277197688, "gxy": -0.430905678866963, "trace_metric": 2.9265860289675167, "traced_berry_curvature": 1.9253281152535606e-13},
+    "4": {"gxx": 1.1524404114951123, "gyy": 1.7746422885725086, "gxy": -0.43108491285332007, "trace_metric": 2.927082700067621, "traced_berry_curvature": -4.830198063352983e-13}
+  },
+  "coarse_scan_shell3": {
+    "minimum_trace_metric": 2.6090576996110237,
+    "minimum_at_q": [0.05, 0.05],
+    "maximum_trace_metric": 55.23293896045926,
+    "maximum_at_q": [0.85, 0.44999999999999996]
+  },
+  "assertions_passed": true,
+  "promotion_boundaries": {
+    "experimental_quantum_metric_calibration": false,
+    "interacting_quantum_geometry": false,
+    "same_sample_superconductivity": false,
+    "chern_number_from_local_scan": false,
+    "agda_kernel_receipt": false
+  }
+}

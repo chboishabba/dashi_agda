@@ -1,0 +1,65 @@
+{
+  "model": "finite-grid THF self-consistency obstruction replay",
+  "script_sha256": "532d92811cf27c5a3a7d423c3de361b2fe91f9da0061a0caab2a7b5cf08fef8d",
+  "source_doi": "10.1038/s41586-026-10378-x",
+  "target_total_filling": 0.5,
+  "grid": {
+    "k_points_per_axis": 3,
+    "omega_points": 101,
+    "omega_window_meV": [-140.0, 0.0],
+    "delta_n_f_grid": [-0.15, -0.05, 0.05, 0.15, 0.25, 0.35],
+    "mu_grid_meV": [-10, -5, 0, 5, 10, 15, 20, 25, 30]
+  },
+  "cases": [
+    {
+      "kmax_nm_inverse": 0.04,
+      "V_meV": 0.0,
+      "best": {
+        "residual_norm": 0.3711765887520629,
+        "delta_n_f": 0.35,
+        "delta_n_c": -0.22499999999999998,
+        "mu_meV": 10.0,
+        "residual_f": 0.3688381631572225,
+        "residual_c": 0.04159891148124084,
+        "baseline_f": 3.971223473692968,
+        "baseline_c": 7.9560332916378735
+      }
+    },
+    {
+      "kmax_nm_inverse": 0.04,
+      "V_meV": 45.0,
+      "best": {
+        "residual_norm": 0.6548573409329657,
+        "delta_n_f": 0.35,
+        "delta_n_c": -0.22499999999999998,
+        "mu_meV": 0.0,
+        "residual_f": 0.6099648338936933,
+        "residual_c": 0.23828772185497427,
+        "baseline_f": 3.971223473692968,
+        "baseline_c": 7.9560332916378735
+      }
+    },
+    {
+      "kmax_nm_inverse": 0.08,
+      "V_meV": 45.0,
+      "best": {
+        "residual_norm": 0.13281777311953444,
+        "delta_n_f": -0.04999999999999999,
+        "delta_n_c": 0.175,
+        "mu_meV": 25.0,
+        "residual_f": -0.007892315664156768,
+        "residual_c": -0.13258307663457441,
+        "baseline_f": 3.5139535569344282,
+        "baseline_c": 6.616617855991573
+      }
+    }
+  ],
+  "assertions_passed": true,
+  "interpretation": "coarse finite quadrature does not close self-consistency and is strongly cutoff/notation sensitive; full source-faithful solve remains normalization/discretization gated",
+  "promotion_boundaries": {
+    "full_self_consistent_solution": false,
+    "source_identifies_V_with_Y": false,
+    "qtm_experimental_fit": false,
+    "same_sample_entropy": false
+  }
+}
