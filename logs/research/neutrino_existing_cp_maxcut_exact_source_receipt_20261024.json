@@ -41,8 +41,8 @@
     "finite-residual-Galois-trace": true,
     "finite-residual-Galois-trace-between-2-and-3": true,
     "CP-conjugate-9-Born-invariant": true,
-    "CP-conjugate-astrophysical-3x3-invariant": true,
-    "original-quark-CP-nonpromotion-import": true
+    "original-quark-CP-nonpromotion-import": true,
+    "CP-conjugate-astrophysical-matrix-follows-from-9-Born-identities": true
   },
   "status": {
     "source_readback": "PASS",
@@ -54,5 +54,10 @@
     "NuFIT_correlated_profile_likelihood": "NOT_RUN",
     "IceCube_flavour_likelihood": "NOT_RUN",
     "algebraic_integer_general_theorem_kernel_proof": "NOT_RUN"
-  }
+  },
+  "method_notes": [
+    "All six angle fractions are read from the exact Agda source, and complex matrix operations are independently evaluated with rational pairs.",
+    "The 3x3 astrophysical CP conjugation identity follows algebraically from nine independently computed scalar norm-conjugation equalities; it is not counted as a second independent dataset or an independently executed IceCube likelihood.",
+    "Rational and matrix computations do not constitute an Agda kernel receipt."
+  ]
 }
