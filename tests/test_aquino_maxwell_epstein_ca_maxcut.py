@@ -471,3 +471,53 @@ def test_ripon_independent_nix_and_kogan_origins_without_false_dataset_join():
         "full file-level GSR→Ripon identity is NOT verified",
     ):
         assert token in roadmap
+
+
+def test_reporting_roots_distinguish_original_upguard_vickery_from_dcms_derivative():
+    source = OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    for token in (
+        "upguardVickeryResearchRoot : OriginRoot",
+        "guardianInterviewReportingRoot : OriginRoot",
+        "apInvestigativeReviewRoot : OriginRoot",
+        "riponSourceCodePublicExposure2018 : CaseClaim",
+        "bannonEpsteinVideoPublished2026 : CaseClaim",
+        "associatedPressBlackmailCounterReview2026 : CaseClaim",
+        "bounded-source riponSourceCodePublicExposure2018 upguardVickeryResearchRoot",
+        "bounded-source bannonEpsteinVideoPublished2026 guardianInterviewReportingRoot",
+        "bounded-source associatedPressBlackmailCounterReview2026 apInvestigativeReviewRoot",
+        "upguardRiponCodeReportingCut = external-object-evidence-cut",
+        "bannonFilmedInterviewReportingCut = external-object-evidence-cut",
+        "associatedPressContraryReviewCut = external-object-evidence-cut",
+        "riponTechnicalRootShared = refl",
+    ):
+        assert token in source
+    for token in (
+        "### Reporting audit and root-lineage correction (2026-10-24)",
+        "UpGuard, 26 Mar 2018",
+        "Ripon_canvas",
+        "Ripon_dialer",
+        "Same underlying repository/acquisition",
+        "Associated Press review, 8 Feb 2026",
+        "14 hours of different Epstein video clips",
+    ):
+        assert token in roadmap
+
+
+def test_video_and_press_reporting_are_not_native_bytes_or_tasking():
+    source = OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    for token in (
+        "upguardBlogIsNotOriginalGitTree = refl",
+        "newsOfFilmIsNotOriginalFootage = refl",
+        "filmedInterviewNotCovertTasking = refl",
+        "pressReviewDoesNotProveUniversalAbsence = refl",
+        "videoCompilationIsNotBannonReel ()",
+        "Bannon-Epstein interview",
+        "originalNativeObjectHeldByThisPR : Bool",
+        "broaderIntelligenceProgrammePaid : Bool",
+    ):
+        assert token in source
+    assert "Only use documentary segments relevant to inquiry" in roadmap
+    assert "Do not attempt retrieval of exposed personal records, passwords or secret keys" in roadmap
+    assert "AP's contrary review" in roadmap
