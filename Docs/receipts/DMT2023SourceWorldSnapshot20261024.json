@@ -1,6 +1,6 @@
 {
   "source_world": "DMT-2023-empirical-source-world",
-  "snapshot_version": "2026-10-24-primary-code-reconciliation",
+  "snapshot_version": "2026-10-24-primary-nifti-same-object-correction",
   "derivation": "read-only evaluation against pinned Git tree; no scientific computation or data acquisition",
   "source_records": 7,
   "independent_lineage_roots": 3,
@@ -8,9 +8,9 @@
   "original_script_git_sha1": "f87d99f448848c3b0531fea0780ee241ebd77549",
   "source_script_20_ids_match_20_mat_pairs": true,
   "artifact_status_counts": {
-    "knownAbsent": 1,
-    "notLocated": 11,
-    "present": 5
+    "present": 5,
+    "notLocated": 14,
+    "knownAbsent": 2
   },
   "claims": [
     {
@@ -91,14 +91,20 @@
         "original_preproc",
         "data_use_review",
         "source_local_bytes",
-        "static_fmri_replay"
+        "static_fmri_replay",
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask",
+        "effective_static_gfc_workspace"
       ],
       "missing": [
         "original_static_fd",
         "original_preproc",
         "data_use_review",
         "source_local_bytes",
-        "static_fmri_replay"
+        "static_fmri_replay",
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask",
+        "effective_static_gfc_workspace"
       ],
       "state": "acquisition_blocked"
     },
@@ -170,6 +176,25 @@
         "dynamic_tapered_window_in_pinned_tree"
       ],
       "state": "acquisition_blocked"
+    },
+    {
+      "consumer": "c_public_mat_reproduces_original_static",
+      "grade": "empirical",
+      "required_artifact_ids": [
+        "original_static_nifti_and_mask_in_pinned_tree",
+        "effective_static_gfc_workspace",
+        "original_static_fd",
+        "source_local_bytes",
+        "static_fmri_replay"
+      ],
+      "missing": [
+        "original_static_nifti_and_mask_in_pinned_tree",
+        "effective_static_gfc_workspace",
+        "original_static_fd",
+        "source_local_bytes",
+        "static_fmri_replay"
+      ],
+      "state": "acquisition_blocked"
     }
   ],
   "action_frontier": [
@@ -189,9 +214,10 @@
         "c_original_dynamic_inclusion",
         "c_original_joint_inclusion",
         "c_static_reproduction",
-        "c_dynamic_replay_from_tree_alone"
+        "c_dynamic_replay_from_tree_alone",
+        "c_public_mat_reproduces_original_static"
       ],
-      "potential_consumer_count": 5,
+      "potential_consumer_count": 6,
       "cost_band": 3,
       "access_risk": 1,
       "research_action": "Search publisher SI, original deposited scripts and QC metadata first; record unavailable exact artifacts; no automated messaging; respect custodian-controlled access",
@@ -230,9 +256,10 @@
       "potential_consumer_ids": [
         "c_data_acquisition",
         "c_static_reproduction",
-        "c_dynamic_replay_from_tree_alone"
+        "c_dynamic_replay_from_tree_alone",
+        "c_public_mat_reproduces_original_static"
       ],
-      "potential_consumer_count": 3,
+      "potential_consumer_count": 4,
       "cost_band": 2,
       "access_risk": 3,
       "research_action": "Run rights-reviewed acquire_dmt_imaging_source.py in authorised network environment; verify Git hashes and local SHA256; do not redistribute",
@@ -247,15 +274,19 @@
         "original_static_fd",
         "original_preproc",
         "data_use_review",
-        "source_local_bytes"
+        "source_local_bytes",
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask",
+        "effective_static_gfc_workspace"
       ],
       "potential_artifacts": [
         "static_fmri_replay"
       ],
       "potential_consumer_ids": [
-        "c_static_reproduction"
+        "c_static_reproduction",
+        "c_public_mat_reproduces_original_static"
       ],
-      "potential_consumer_count": 1,
+      "potential_consumer_count": 2,
       "cost_band": 4,
       "access_risk": 3,
       "research_action": "Run original n16 post-bolus static GFC with matched source preprocessing, compare source t/p/CI, publish discrepancy",
@@ -297,17 +328,60 @@
       "research_action": "Not currently admitted: no preregistered leakage-controlled experiment or distinct prediction",
       "promotion_authorised": false,
       "pareto": false
+    },
+    {
+      "id": "g_voxel_and_atlas_source",
+      "kind": "primary_source_recovery",
+      "state": "source_prerequisite_blocked",
+      "missing_prerequisites": [
+        "data_use_review"
+      ],
+      "potential_artifacts": [
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask"
+      ],
+      "potential_consumer_ids": [
+        "c_static_reproduction"
+      ],
+      "potential_consumer_count": 1,
+      "cost_band": 4,
+      "access_risk": 3,
+      "research_action": "Locate same-object NIfTI preprocessed inputs and 112-region Schaefer/subcortical atlas identified by author StaticGFC.m. Treat published BOLD_AAL as separate representation, not a replacement; no unapproved redistribution",
+      "promotion_authorised": false,
+      "pareto": false
+    },
+    {
+      "id": "h_effective_static_code",
+      "kind": "source_preprocessing_recovery",
+      "state": "candidate_admissible",
+      "missing_prerequisites": [],
+      "potential_artifacts": [
+        "effective_static_gfc_workspace"
+      ],
+      "potential_consumer_ids": [
+        "c_static_reproduction",
+        "c_public_mat_reproduces_original_static"
+      ],
+      "potential_consumer_count": 2,
+      "cost_band": 3,
+      "access_risk": 1,
+      "research_action": "Recover actual executed static-GFC code revision/workspace and specific upstream xdata/ydata/network/FDR assignments, MATLAB/NIfTI dependencies and exclusions. Current script is not self-contained.",
+      "promotion_authorised": false,
+      "pareto": true
     }
   ],
   "live_pareto_source_routes": [
     "a_original_motion_primary",
     "b_rights_review",
-    "e_phase_matrices"
+    "e_phase_matrices",
+    "h_effective_static_code"
   ],
   "static_gfc_conditional_plan": [
     "a_original_motion_primary",
     "b_rights_review",
     "c_source_bytes",
+    "g_voxel_and_atlas_source",
+    "h_effective_static_code",
     "d_replay_static"
   ],
   "phenomenology_conditional_plan": [
@@ -318,5 +392,6 @@
   "no_status_promoted": true,
   "no_network_acquisition": true,
   "no_contact_or_email": true,
-  "source_claims_are_not_independent_replications": true
+  "source_claims_are_not_independent_replications": true,
+  "public_mat_alone_static_result_plan": null
 }
