@@ -168,3 +168,93 @@ accessBenefitDoesNotCreateUniversalBankerMotive ()
 
 fbi302ExistenceDoesNotCreateInterviewContent : FBI302ExistenceImpliesInterviewContent → ⊥
 fbi302ExistenceDoesNotCreateInterviewContent ()
+
+
+------------------------------------------------------------------------
+-- 2015 OCDETF "CHAIN REACTION" SOURCE-ROOT ADAPTER
+-- Distinguish an original lead-only intelligence memo, a third-party text
+-- extraction, and a Senate interpretation of it. No reidentification of
+-- redacted targets, no transaction credentials or raw financial reports.
+------------------------------------------------------------------------
+
+data ChainReactionSourceRole : Set where
+  federalIntelligenceLeadProduct : ChainReactionSourceRole
+  derivativePublicTranscriptIndex : ChainReactionSourceRole
+  laterSenateInquiryInterpretation : ChainReactionSourceRole
+
+record ChainReactionSourceReceipt : Set where
+  constructor chain-reaction-source-receipt
+  field
+    chainReactionRole : ChainReactionSourceRole
+    chainReactionLocator : String
+    chainReactionEventDate : String
+    chainReactionPublicationDate : String
+    chainReactionScopedClaim : String
+    chainReactionDocumentIdentifierLocated : Bool
+    chainReactionNativeScanVerifiedHere : Bool
+    chainReactionCriminalFindingPaid : Bool
+open ChainReactionSourceReceipt public
+
+chainReaction2015Memo : ChainReactionSourceReceipt
+chainReaction2015Memo = chain-reaction-source-receipt
+  federalIntelligenceLeadProduct
+  "DOJ Dataset 9 EFTA00173953; May 18 2015 OFC-TP-15-12392 / SODOFC-15-12392; OCDETF NY-NYS-0829; public original access age-gated"
+  "2015-05-18" "2026 DOJ disclosure"
+  "Index and text identify an OCDETF multi-database Target Profile for operation Chain Reaction. Its own warning labels it a lead product, not a finished investigation or evidentiary finding; the full original scan is not verified in this source-writing pass."
+  true false false
+
+chainReactionThirdPartyIndex : ChainReactionSourceReceipt
+chainReactionThirdPartyIndex = chain-reaction-source-receipt
+  derivativePublicTranscriptIndex
+  "https://tommycarstensen.com/epstein/data/documents/set9/00173/EFTA00173953.html"
+  "2015-05-18" "third-party index current 2026"
+  "Public OCR/extracted rendition of the same DOJ EFTA document, not a second OCDETF investigator or independent transaction witness. Extraction contains errors; do not promote redacted names or parsed currency strings."
+  true false false
+
+chainReactionWyden2026Questions : ChainReactionSourceReceipt
+chainReactionWyden2026Questions = chain-reaction-source-receipt
+  laterSenateInquiryInterpretation
+  "https://www.finance.senate.gov/ranking-members-news/wyden-questions-dea-over-mystery-epstein-investigation"
+  "2026-02-25" "2026-02-26"
+  "Wyden asks DEA for the unredacted memorandum, underlying charges and the disposition of the inquiry. Senator's expressed suspicion of intervention is an allegation, not an independent finding on termination motive."
+  true true false
+
+record ChainReactionPromotionBoundary : Set where
+  constructor chain-reaction-promotion-boundary
+  field
+    namedOriginalMemoIndexed : Bool
+    memoLeadOnlyCaveatRetained : Bool
+    senateInquiryActuallyPublished : Bool
+    nativeMemoScanPageAuthenticated : Bool
+    unredactedTargetsDisclosedHere : Bool
+    namedBankWireMatchedToExistingLedger : Bool
+    completedOperationDispositionVerified : Bool
+    independentlyAdjudicatedDrugOffence : Bool
+    investigationTerminationMotiveProven : Bool
+    epsteinBlackNdaSameTransactionPaid : Bool
+    aquinoSCLOrMaxwellPROMISSharedOperationPaid : Bool
+open ChainReactionPromotionBoundary public
+
+canonicalChainReactionPromotionBoundary : ChainReactionPromotionBoundary
+canonicalChainReactionPromotionBoundary = chain-reaction-promotion-boundary
+  true true true false false false false false false false false
+
+chainReactionNamedSourcePaid :
+  namedOriginalMemoIndexed canonicalChainReactionPromotionBoundary ≡ true
+chainReactionNamedSourcePaid = refl
+
+chainReactionLeadNotAdjudication :
+  independentlyAdjudicatedDrugOffence canonicalChainReactionPromotionBoundary ≡ false
+chainReactionLeadNotAdjudication = refl
+
+chainReactionTerminationNotEstablished :
+  investigationTerminationMotiveProven canonicalChainReactionPromotionBoundary ≡ false
+chainReactionTerminationNotEstablished = refl
+
+chainReactionNoAutoBlackLedgerJoin :
+  epsteinBlackNdaSameTransactionPaid canonicalChainReactionPromotionBoundary ≡ false
+chainReactionNoAutoBlackLedgerJoin = refl
+
+chainReactionNoGlobalProgrammeTransfer :
+  aquinoSCLOrMaxwellPROMISSharedOperationPaid canonicalChainReactionPromotionBoundary ≡ false
+chainReactionNoGlobalProgrammeTransfer = refl
