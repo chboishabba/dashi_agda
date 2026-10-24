@@ -1,5 +1,8 @@
 # Field Loom × Amy Eskridge × missing-scientists physics: source-typed audit and revised deliverables
 
+**Machine-readable companion:** [21-row independent science / experiment / missing-scientist source matrix](psychotronics-physics-crosspollination-source-matrix-20261024.csv), indexed separately from the pre-existing **51 historical** psychotronics literature rows. Each row records original author, carrier inspection grade, bounded proposition, ordinary-physics comparison, admissible cross-pollination, failure/identity boundary, existing repository owner and next deliverable. Two historical roots are cross-references, **not new independent original sources**.
+
+
 **24 October 2026. Owner:** DASHI synthesis, **not** a transfer of original scientific authorship. **Scope:** PR #1242 as of `b9ccb873edc12e3151053bb872034155aae83e02`, relevant pre-existing `DASHI/Culture` / `DASHI/Physics` modules, repository investigation matrices, and primary-publication/experimental constraint references. This is a **technical and source review**, not a bench experiment, a new force discovery, a forensic conclusion, an Agda-kernel receipt, or a systematic literature meta-analysis.
 
 ## Finding and necessary roadmap correction
