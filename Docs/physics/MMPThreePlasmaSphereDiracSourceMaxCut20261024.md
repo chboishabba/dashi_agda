@@ -97,3 +97,11 @@ Thus P=0 closes the **Israel surface-shell** matching at that radius, with const
 **Current highest-leverage kernel/physics leaf:** A common Hadamard/heat-kernel-subtracted, gauge/diffeomorphism-covariant curved-space spin-c Dirac functional W_ren[g,A;state] across BOTH mouths. Derive T_ab, angular/dilaton response, Aμ current, Hall/Euler/Schwinger contributions and trace anomaly from its SINGLE variation, then solve its nonlocal Einstein–Maxwell–Dirac BVP. Jochen Zahn, *The renormalized locally covariant Dirac field*, Reviews in Mathematical Physics 26 (2014), DOI 10.1142/S0129055X13300124, is appropriate primary field-renormalization authority. The Sadhukhan 2026 perturbation papers are first-order response donors, not nonlinear global source receipts.
 
 **Acceptance:** `python3 scripts/check_mmp_israel_rn_junction_20261024.py`; `python3 scripts/check_pointed_monopole_c3_roles_20261024.py`; previous source checker. Nothing here asserts kernel certification or experimental realization.
+
+
+## Exact prior-art bridge actually present in recent sibling PRs (2026-10-24 review)
+
+- **PR #1235**: `DASHI/Mathematics/Topology/HopfU1TransitionCocycleExact.agda` has an actual algebraic U1 transition cocycle, and `HopfU1PrincipalBundleObligationsExact.agda` states smooth local-triviality, curvature, Chern integrality and principal action requirements. The latter does not universally inhabit them: a U1 subgroup is not a fully sourced Dirac monopole field.
+- **PR #1239**: `DASHI/Physics/Electromagnetism/KaluzaKleinGaugeShiftExact.agda` proves local additive gauge invariance of dy+κA. This is a mathematical connection donor, not the required sourced physical Maxwell/Dirac action.
+- **PR #1215**: actual finite SU2 curvature/stress spatial C3 covariance; this must be distinguished from a moving three-region plasma *spatiotemporal* C3-symmetric source.
+- **The new classical two-mouth junction identity** is stronger than generic stress-matching, but does not import these sibling donors into one compiled proof or pay the global fermion-state continuity.
