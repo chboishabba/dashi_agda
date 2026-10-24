@@ -33,10 +33,11 @@ factorVecCandidateIsOneOver31 =
 -- delta m^2_21: 7.236 ... 7.823 x 10^(-5) eV^2
 -- delta m^2_31: 2.450 ... 2.576 x 10^(-3) eV^2
 --
--- The Cartesian rectangle of these intervals is an over-approximation
--- of the correlated joint confidence region.  Thus exclusion from the
--- rectangle is a conservative interval statement, NOT a new chi-square
--- or independent 3 sigma hypothesis test.
+-- These are *individually profiled* 1D Delta-chi-square=9 ranges.
+-- Their Cartesian rectangle is NOT itself a 2D "3 sigma" region:
+-- 2D confidence contours can use different Delta-chi-square thresholds.
+-- The exact interval inequality below is valid, but does NOT supply an
+-- independent p-value, correlated global fit or 2D significance claim.
 ------------------------------------------------------------------------
 
 solarLower : Nat
