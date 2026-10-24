@@ -161,11 +161,11 @@ faithfulSuzukiSymSquareCannotBeFaithfulSeventyEight =
 -- This is not a real GAP execution receipt or Monster intertwiner.
 ------------------------------------------------------------------------
 
-sourceSelectedFaithful78NotNebeSymSquared78 :
-  Faithful78C2.sourceSelectedMultiplicityCentreTrace
+hypotheticalFaithful78NotNebeSymSquared78 :
+  Faithful78C2.faithfulFamilyMultiplicityCentreTrace
   ≡ Faithful78C2.nebeSymSquareMultiplicityCentreTrace → ⊥
-sourceSelectedFaithful78NotNebeSymSquared78 =
-  Faithful78C2.sourceSelectedNotNebeAsSixSuz
+hypotheticalFaithful78NotNebeSymSquared78 =
+  Faithful78C2.faithfulFamilyNotNebeAsSixSuz
 
 centralC2TraceDiscriminator : 66 + 90 ≡ 2 * 78
 centralC2TraceDiscriminator = Faithful78C2.centralTraceDifference
