@@ -163,3 +163,10 @@ python3 scripts/check_horned_vs_mmp_magnetic_topology_20261024.py
 python3 scripts/check_three_drives_helicity_axial_anomaly_20261024.py
 python3 scripts/check_fermion_axial_pump_nec_budget_20261024.py
 ```
+
+
+### P4 milestone sharpened — actual three localized field regions
+
+A self-contained local-physics surrogate is now **committed**, `scripts/check_three_localized_field_helicity_20261024.py`: three separate Gaussian twisted vector potentials, exact `div B=0`, positive helicity density, exact cross-helicity integral with independently executed 3D Gauss–Hermite quadrature (≈1.3e-15 agreement). Balanced C3 phase drive has zero integrated anomaly pump even when packets overlap; amplitude envelope creates a nonzero `E·B` source and formally exchanges axial charge with helicity.
+
+**Next required promotion is NOT more C3 numerology:** replace prescribed packets with material-consistent Maxwell–MHD/plasma dynamics (external/internally rotating E,B, real matter current, finite walls, supplied work, surface helicity flux), then compute the *in-in* fermionic `δ<T_kk>_ren` including ordinary Maxwell positive NEC, causal state prep, fermion mass/chirality relaxation and signal backreaction. A positive axial-charge measurement cannot be counted as negative quantum energy. Wild-horn topology remains optional P6.
