@@ -1,5 +1,11 @@
 # FIELD LOOM — a reality-compatible psychotronics super-object
 
+## S1 timestamp counterbalance preflight
+
+The deterministic [S1 active/sham time-order audit](psychotronics-s1-drift-counterbalance-maxcut-20261025.md) is now part of the evidence-intake consumer, separate from exact five-parameter current-sign/polarity model rank. Source-native timestamps produce signed active-minus-sham lags for each `± current × ± moment` cell. Both orders and exact aggregate time-gap cancellation per cell are required for **a narrow constant linear force-drift symmetry test**; the original four-pair synthetic sample fails that new gate, an eight-pair balanced synthetic sample passes. This is **not** hardware verification, actual gradient calibration, continuous `I²R` / temperature lag, an independently identified magnet, or a proof of no drift.
+
+
+
 ## S1 operational interface now executable but not yet empirically validated
 
 Read the [source-owned stream-to-pairs and signed uncertainty specification](psychotronics-s1-replay-signed-moment-weld-20261025.md). The existing `psychotronics_field_loom_coils.py` remains the **numerical** source for ideal finite circular filament fields, while the existing `NSTriadKNFourierBiotSavartExact` and `NSTriadKNMaxwellFluidBiotSavartBridgeExact` remain the **formal** current/field amplitude owners; this is no new Biot–Savart implementation.
