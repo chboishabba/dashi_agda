@@ -283,6 +283,8 @@ def verify_numeric_results() -> dict:
 
     d4_symplectic = d4_symplectic_audit()
     assert d4_symplectic["all_rank_eight_forms_excluded"]
+    assert d4_symplectic["original_GaugeFourOneFour_source_chart_roundtrips"] == 19683
+    assert d4_symplectic["source_chart_D4_action_equivariant"]
     assert all(v["max_rank"] == 6 for v in d4_symplectic["multiplier_forms"].values())
     assert d4_symplectic["minimal_extra_dimensions"] == 2
     assert d4_symplectic["repaired_rank"] == 10
