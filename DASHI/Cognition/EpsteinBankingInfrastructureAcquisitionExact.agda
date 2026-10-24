@@ -191,7 +191,7 @@ record ChainReactionSourceReceipt : Set where
     chainReactionPublicationDate : String
     chainReactionScopedClaim : String
     chainReactionDocumentIdentifierLocated : Bool
-    chainReactionNativeScanVerifiedHere : Bool
+    chainReactionNativeScanVerifiedHere : Bool  -- native federal memo scan, not Senate HTML correspondence
     chainReactionCriminalFindingPaid : Bool
 open ChainReactionSourceReceipt public
 
@@ -217,7 +217,7 @@ chainReactionWyden2026Questions = chain-reaction-source-receipt
   "https://www.finance.senate.gov/ranking-members-news/wyden-questions-dea-over-mystery-epstein-investigation"
   "2026-02-25" "2026-02-26"
   "Wyden asks DEA for the unredacted memorandum, underlying charges and the disposition of the inquiry. Senator's expressed suspicion of intervention is an allegation, not an independent finding on termination motive."
-  true true false
+  true false false
 
 record ChainReactionPromotionBoundary : Set where
   constructor chain-reaction-promotion-boundary
@@ -271,7 +271,7 @@ chainReactionWydenMarch18 = chain-reaction-source-receipt
   "https://www.finance.senate.gov/ranking-members-news/wyden-sounds-alarm-as-dag-blanche-intervenes-to-conceal-details-of-mystery-epstein-investigation"
   "2026-03-18" "2026-03-18"
   "Wyden says his office received a confidential tip that DEA was ready to disclose a fuller OCDETF memo and that Deputy AG Blanche intervened. This proves the senator made the assertion and correspondence was sent, NOT that intervention or unlawful withholding was independently authenticated."
-  true true false
+  true false false
 
 record ChainReactionOversightAttributionCut : Set where
   constructor chain-reaction-oversight-attribution-cut
