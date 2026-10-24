@@ -32,6 +32,8 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionCoreExact as Q
 import DASHI.Mathematics.Topology.AlexanderHornedC3AmbientRotationExact as Ambient
+import DASHI.Mathematics.Algebra.CayleyDicksonRationalComplexQuaternionExact as CD
+import DASHI.Mathematics.Topology.QuaternionHopfUnitOrbitExact as Hopf
 
 rotor : Q.RationalQuaternion
 rotor = Q.quat ½ ½ ½ ½
@@ -104,3 +106,31 @@ negativeRotorHasSameConjugation x y z =
 -- Hypercomplex rotor action is not an element of pi1(exterior).
 -- The no-order-three-in-G result uses the independent injective
 -- free-group tower, not an SO(3) or Spin(3) calculation.
+
+------------------------------------------------------------------------
+-- Reuse an ACTUAL EXISTING unit-quaternion/Hopf group-action consumer.
+-- The right-action on a quaternion pair is NOT the conjugation
+-- rotation above: these are two distinct actions of the same
+-- quaternion element, and we do not identify their fibres.
+------------------------------------------------------------------------
+
+rotorHasUnitNorm : CD.quaternionNormSq rotor ≡ 1ℚ
+rotorHasUnitNorm = ℚRing.solve-∀
+
+selectedRotorIsExistingUnitQuaternion : Hopf.UnitQuaternion
+selectedRotorIsExistingUnitQuaternion =
+  Hopf.unitQuaternion rotor rotorHasUnitNorm
+
+selectedRotorPreservesExistingHopfQuaternion :
+  ∀ pair →
+  Hopf.pairHopfQuaternion (Hopf.rightMultiplyPair pair rotor)
+    ≡ Hopf.pairHopfQuaternion pair
+selectedRotorPreservesExistingHopfQuaternion pair =
+  Hopf.hopfQuaternionRightUnitInvariant pair rotor rotorHasUnitNorm
+
+selectedRotorPreservesExistingHopfScalar :
+  ∀ pair →
+  Hopf.pairHopfScalar (Hopf.rightMultiplyPair pair rotor)
+    ≡ Hopf.pairHopfScalar pair
+selectedRotorPreservesExistingHopfScalar pair =
+  Hopf.hopfScalarRightUnitInvariant pair rotor rotorHasUnitNorm
