@@ -77,3 +77,48 @@ def test_selected_shear_is_genuine_unforced_solution_and_modal_R440_is_invariant
     assert all(rweighted[j]==(sum(x*x for x in module.K)*M[j][0],
                              sum(x*x for x in module.K)*M[j][1])
                for j in range(3))
+
+
+def test_physical_local_ED_source_cannot_absorb_padding():
+    # Exactly R219 physicalModalED + R109 pairKernel + R469 selectedTriadValue.
+    # E(±e_x)=E(±e_y)=1, D=squared_frequency*E=1.
+    modes={module.P, module.Q, tuple(-v for v in module.P),
+           tuple(-v for v in module.Q)}
+    energy={p:Fraction(1) for p in modes}
+    dissipation={p:Fraction(sum(c*c for c in p))*energy[p] for p in modes}
+    assert sum(energy.values())==4
+    assert sum(dissipation.values())==4
+
+    def pair_ed(p,q):
+        return dissipation[p]*energy[q]+energy[p]*dissipation[q]
+
+    fixed_output_pairs={(p,q) for p in modes for q in modes
+                        if tuple(p[j]+q[j] for j in range(3))==module.K}
+    assert fixed_output_pairs=={(module.P,module.Q),
+                                (module.Q,module.P)}
+    selected_output_ED=sum(pair_ed(p,q) for p,q in fixed_output_pairs)
+    assert selected_output_ED==4
+    assert sum(pair_ed(p,q) for p in modes for q in modes)==32
+
+    for n in (9,16,24,36,40):
+        r=module.certificate(n)
+        assert r["physical_modal_energy"]=="4"
+        assert r["physical_modal_dissipation"]=="4"
+        assert r["literal_R109_global_selected_ED_bound"]=="32"
+        assert r["literal_R219_R469_output_localED_bound"]=="4"
+    assert Fraction(module.certificate(40)
+                    ["necessary_cD_lower_bound_at_theta_half"])>0
+
+def test_any_fixed_uniform_payment_coefficient_eventually_fails():
+    # Strict half-margin thetaD<1/2; output local ED<=4. For arbitrary
+    # fixed cD (even extremely large), the explicit noncore positive
+    # subfamily has cubic growth and core mass stabilizes.
+    Mcore=Fraction(module.certificate(9)["literal_core_companion"])
+    def lower_subfamily(N):
+        return sum(2*m*(m-1) for m in range(10,N+1))
+    for cD in (Fraction(0),Fraction(1),Fraction(10**12),
+               Fraction(10**30)):
+        N=20
+        while lower_subfamily(N) <= Mcore/2 + 4*cD:
+            N*=2
+        assert lower_subfamily(N)>Mcore/2+4*cD
