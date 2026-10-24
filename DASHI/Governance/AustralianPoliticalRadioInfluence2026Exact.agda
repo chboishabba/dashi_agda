@@ -25,6 +25,7 @@ data PoliticalRelation : Set where
   prospectiveSponsorOffer : PoliticalRelation
   externalPlatformSupplier : PoliticalRelation
   financialEntitlement : PoliticalRelation
+  historicalInstitutionalFunding : PoliticalRelation
   timedTargetedInformationRelease : PoliticalRelation
   originalOpinionProduction : PoliticalRelation
   traceableClaimAmplification : PoliticalRelation
@@ -558,4 +559,49 @@ acmaReefOutsidersFinding = relationship-receipt
   "ACMA television broadcaster investigations, 26 April 2023: BI-645, BI-646, BI-647"
   "https://www.acma.gov.au/investigations-tv-broadcasters"
   "ACMA found specific accuracy/misrepresentation and news-commentary distinction breaches for Outsiders across relevant regional and subscription licences. Do not generalise findings to every Sky programme or equate with 2026 BOM broadcast."
+  false false false
+
+
+-- Current source genealogy: the single October 18 Outsiders appearance is
+-- a direct byline and audio clip join to the BOM audit's archival journalism.
+-- Neither direct Lloyd broadcast reuse nor IPA distribution pays any other
+-- broadcaster's editorial instruction or a specific donor-funded programme.
+skyOutsidersLloydRiddSameProgramme : RelationshipReceipt
+skyOutsidersLloydRiddSameProgramme = relationship-receipt
+  "Sky News Outsiders / Rowan Dean"
+  "Graham Lloyd audio excerpt and Peter Ridd interview, BOM, 18 Oct 2026"
+  editorialPublication institutionRecord
+  "IPA hosted first-party Outsiders episode transcript, 18 October 2026"
+  "https://ipa.org.au/latest-news/peter-ridd-on-outsiders-news24-18-october-2026"
+  "Host introduces Lloyd audio from original reporting then Ridd; transcribed named turns support broadcast presence and later publication. No evidence this broadcast instructed Fordham's different 19 Oct programme."
+  false false false
+
+ipaHostsBOMOutsidersTranscript : RelationshipReceipt
+ipaHostsBOMOutsidersTranscript = relationship-receipt
+  "Sky Outsiders 18 October 2026 discussion featuring Ridd and Lloyd"
+  "Institute of Public Affairs own website transcript"
+  traceableClaimAmplification institutionRecord
+  "IPA first-party publication, 18 October 2026"
+  "https://ipa.org.au/latest-news/peter-ridd-on-outsiders-news24-18-october-2026"
+  "IPA transcribes and distributes programme content; publishing the interview does not generate independent evidence of the BOM observation or show who funded production."
+  false false false
+
+ipaRiddResearchFellowship : RelationshipReceipt
+ipaRiddResearchFellowship = relationship-receipt
+  "Peter Ridd"
+  "Institute of Public Affairs Project for Real Science"
+  professionalAffiliation institutionRecord
+  "IPA announcement of Ridd's unpaid fellow role, 2021"
+  "https://ipa.org.au/publications-ipa/peter-ridds-fight-for-real-science-is-not-over"
+  "IPA itself announced Ridd's unpaid research fellowship and separate solicitation of donations. No source-derived attribution of any Hancock payment to the individual fellowship."
+  false false false
+
+hancockToIPAHistoricalFunding : RelationshipReceipt
+hancockToIPAHistoricalFunding = relationship-receipt
+  "Hancock Prospecting"
+  "Institute of Public Affairs"
+  historicalInstitutionalFunding journalistCorroboration
+  "Christiane Barro, The New Daily, 24 July 2018, about 2016-17 receipts"
+  "https://www.thenewdaily.com.au/news/national/2018/07/24/ipa-membership-donors"
+  "Reporting identifies AUD4.5m historical IPA donations across two years. Neither current 2026 funding, nor an earmark for Ridd, Sky, Lloyd or Fordham, follows from this organizational record."
   false false false
