@@ -1,3 +1,17 @@
+## 2026-10-24 implementation receipts — 4-paper primary text and threshold B donor
+
+Current canonical reference inventory: `Docs/research/ns_ab_four_primary_papers_20261024.md`, whose links resolve to the **full arXiv HTML** v1/v3/v1/v2 manuscripts, not merely abstracts. Do not repeat the erroneous Shahmurov 'Large-Data Global Regularity Part II' title attached to arXiv:2605.01873; its current source expressly disclaims unrestricted 3D regularity.
+
+Source-attributed new executable tests:
+`tests/test_ns_shahmurov_vorticity_primary_calibration.py`
+tests a nonzero-vorticity region of the *physical* smooth shear against Shahmurov's Lemma 2.1 and checks the exact p=3/2 root.
+`tests/test_ns_shahmurov_enstrophy_layer_cake.py` checks p=2 threshold layer-cake coefficients for vortex stretching, endpoint mass, and directional dissipation. This provides an explicit intermediate path to the standard enstrophy balance. The coarea measure-theoretic passage and exact R236/R685/R690 **same-object** connection are NOT proved by these finite/symbolic tests.
+
+Phase: **P0 primary corpus/version/author disambiguation achieved**; **P1 full analytical validation of Ri and Shahmurov open**; **P2 same-carrier formal theorem open**; **P3 physical signed A2/B7 and global continuation open**. Local SymPy checks cover only the stated elementary calibration, no exact-head pytest/Lean/Agda kernel receipt.
+
+Priority remains A/B. Ri: independently audit Lemma 2.1 and high-frequency energy proof before importing Theorem 1.1; its viscosity-independent theorem has strong consequences and requires line-by-line verification. Shahmurov: formalize the full threshold balance on the physical vorticity carrier, then prove link to R236; do not assume it bounds vortex stretching. Cheskidov–Hou: initial-trace negative control. Constantin–Ignatova–Vicol: strictly conditional exclusion given all hypotheses.
+
+---
 # 2026-10-24 A/B-FIRST CORRECTION — literature and C/D cross-pollination
 
 **Override the prior C/D-first priority statement below.** User-selected
