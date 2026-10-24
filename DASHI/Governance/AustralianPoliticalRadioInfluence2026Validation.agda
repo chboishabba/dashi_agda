@@ -67,9 +67,37 @@ arnIsNetRevenueCounterparty :
 arnIsNetRevenueCounterparty = refl
 
 aiimsIsProductionNotEquity :
-  A.kind A.aiimsProduction ≡ A.editorialPublication
+  A.kind A.aiimsProduction ≡ A.productionSupply
 aiimsIsProductionNotEquity = refl
 
 nineStrategicPartnerNotOwner :
-  A.kind A.nineTaptStrategicPartnership ≡ A.financialEntitlement
+  A.kind A.nineTaptStrategicPartnership ≡ A.announcedStrategicPartnership
 nineStrategicPartnerNotOwner = refl
+
+quasarShareHoldingAsDated :
+  A.kind A.quasarARNHistoricalEquity ≡ A.historicEquityHolding
+quasarShareHoldingAsDated = refl
+
+quasarServiceIsNotNewShowEquity :
+  A.kind A.quasarKyleService ≡ A.productionSupply
+quasarServiceIsNotNewShowEquity = refl
+
+hendersonShareHoldingAsDated :
+  A.kind A.hendersonARNHistoricalEquity ≡ A.historicEquityHolding
+hendersonShareHoldingAsDated = refl
+
+southernCrossARNEquityAsDated :
+  A.kind A.southernCrossARNIndirect ≡ A.historicEquityHolding
+southernCrossARNEquityAsDated = refl
+
+stokesSouthernCrossEquityAsDated :
+  A.kind A.stokesSouthernCrossStake ≡ A.historicEquityHolding
+stokesSouthernCrossEquityAsDated = refl
+
+newShowOperatorIsNotOwnership :
+  A.kind A.newShowLegalOperator ≡ A.legalOperatorRegistration
+newShowOperatorIsNotOwnership = refl
+
+proposedBuyoutIsNotCompleted :
+  A.kind A.kyleProposedARNBuyout ≡ A.proposedUncompletedAcquisition
+proposedBuyoutIsNotCompleted = refl
