@@ -96,14 +96,23 @@ def budget(u):
     assert S.simplify(sum(v[3] for v in corrections.values()))==0
     # Each R236 region is closed under (p,q) <-> (q,p). The
     # pairwise curl defect therefore cancels INSIDE each region.
-    assert all(S.simplify(v[3])==0 for v in rcorrections.values())
+    merged_regions=defaultdict(lambda:[S.Integer(0)]*4)
+    for name,values in rcorrections.items():
+        key="deep-far-low" if name in ("deep-LH","deep-HL") else name
+        merged_regions[key]=[S.simplify(x+y)
+                             for x,y in zip(merged_regions[key],values)]
+    # LH and HL exchange under input swap; only the MERGED deep-far-low
+    # region is invariant. Deep-HH and critical are swap-invariant alone.
+    assert all(S.simplify(v[3])==0 for v in merged_regions.values())
     assert S.simplify(sum(v[1] for v in corrections.values()))==0
     return {"production":S.simplify(total),"stretch":S.simplify(stretch),
             "transport":S.simplify(transport),"energy":S.simplify(energy),
             "bony":{k:S.simplify(v) for k,v in bt.items()},
             "r236":{k:S.simplify(v) for k,v in rt.items()},
             "class_correction":{k:tuple(map(S.simplify,v)) for k,v in corrections.items()},
-            "region_correction":{k:tuple(map(S.simplify,v)) for k,v in rcorrections.items()}}
+            "region_correction":{k:tuple(map(S.simplify,v)) for k,v in rcorrections.items()},
+            "merged_region_correction":{k:tuple(map(S.simplify,v))
+                                        for k,v in merged_regions.items()}}
 
 def field(p,q):
     """Transverse six-mode rational/integer-coefficient calibration."""
