@@ -136,12 +136,43 @@ def anti_certificate():
     assert checked==177147
     return checked
 
+
+# This T is the literal original Gauge.FourOneFour edge4/corner4 ->
+# (tE,tC,bE,bC,XE,YE,XC,YC) map, not an abstract character isomorphism.
+# Over F3 its rows are orthogonal with weights 1,1,1,1,2,2,1,1.
+def matvec(A,v):
+    return tuple(sum(a*b for a,b in zip(row,v))%3 for row in A)
+
+def source_chart_certificate():
+    weights=(1,1,1,1,2,2,1,1)
+    D=[[int(i==j)*weights[i] for j in range(8)] for i in range(8)]
+    assert product(T,transpose(T))==D
+    inverse=product(transpose(T),D)
+    assert product(T,inverse)==identity(8)
+    assert product(inverse,T)==identity(8)
+    states=0
+    for raw in itertools.product(range(3),repeat=8):
+        char=matvec(T,raw)
+        assert matvec(inverse,char)==raw
+        for source,repair in ((R,R10),(M,M10)):
+            observed=matvec(T,matvec(source,raw))
+            embedded=matvec(J,char)
+            predicted=matvec(repair,embedded)
+            assert observed==tuple(predicted[j] for j in (0,1,2,4,6,7,8,9))
+        states+=1
+    assert states==6561
+    return states*3
+
 def audit():
+    source_roundtrips=source_chart_certificate()
     x={f"r={r},m={m}":all_forms(r,m) for r in (1,2) for m in (1,2)}
     assert all(v["max_rank"]==6 for v in x.values())
     return {"schema":"jfine-d4-symplectic-maxcut-v1","field":3,
       "source":"dashi_agda IIT PR #1148 existing D4 operators",
       "shell_character":"2A1+B1+B2+2E",
+      "original_GaugeFourOneFour_source_chart_roundtrips":source_roundtrips,
+      "source_chart_D4_action_equivariant":True,
+      "source_T_inverse_weights":[1,1,1,1,2,2,1,1],
       "multiplier_forms":x,"all_rank_eight_forms_excluded":True,
       "minimal_extra_dimensions":2,"repaired_rank":rank(O10),
       "source_restriction_rank":rank(O8),"h6_sized_rank":rank(O12),
