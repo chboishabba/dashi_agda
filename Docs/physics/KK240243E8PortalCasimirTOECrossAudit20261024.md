@@ -67,3 +67,20 @@ This tranche:
 - Both repository roadmaps updated with exact PR attribution and physically scoped failure conditions.
 
 **Highest-alpha next:** physical source-select the *full* QED+QCD+chiral-EW one-loop 5D action, derive the Higgs/portal background and radion-dependent masses as ONE field theory, then check energy, 5D pressure and both Wilson/Higgs/radion Hessians against existing collider/QCD/stability constraints. A lower-priority alternative is upgrading the ternary-to-E₈ candidate only for a declared representation/operator consumer; its 240 count is not a substitute for the physical vacuum.
+
+
+## Physically structured alternative: E₆ trinification, not bare 240 numerology
+
+The standard exceptional-group branching (Slansky, *Group theory for unified model building*, *Physics Reports* **79** (1981), 1–128, DOI **10.1016/0370-1573(81)90092-2**, Table of E₈ maximal subgroups and E₆ ⊃ SU₃³) yields
+
+`E8 adjoint 248 -> (78,1)+(1,8)+(27,3)+(27bar,3bar)`, hence `248=78+8+81+81` and the **SU₃-adjoint complement** has dimension `240=248-8`. The separate E₆ trinification restriction contains
+
+`E6 adjoint 78 -> (8,1,1)+(1,8,1)+(1,1,8)+(3,3,3)+(3bar,3bar,3bar)`,
+
+i.e. `78=24+54`. These are bona fide **representation-theoretic decompositions**, stronger than the unrelated number 240.
+
+Choose one SU₃ factor as colour and hypothetically keep the other two SU₃ vector octets in a free periodic 5D ultraviolet spectrum. They supply `2*8=16` additional spin-1 vectors with `16*3=48` 5D massless bosonic polarizations. Existing six colour-triplet 5D vectorlike Dirac quarks have `6*3*4=72` fermion units. With THREE total SU₃ vector octets, `3*8*3=72` bosonic units, so the **leading massless free-Casimir coefficient balances**. In the previous *nonzero quark-mass* selected fixed-radius model, `D_QCD+240≈+2.10123e-10`, so exact stationarity still needs a small mass-dependent correction or model/radius revision. Treating all sixteen new vectors as 48 degenerate bosonic free polarization modes, the same source-mass equation would require `m_vector≈86.3077 GeV` at b0=10^-24 m. This is only **a mathematical compensator solution**, not a viable physical E₆/trinification vacuum: realistic gauge mass generation, charged current couplings, precision EW, collider limits, proton physics, symmetry breaking, anomaly cancellation, full E₆/E₈ coset towers and interactions have NOT been supplied.
+
+In particular, merely declaring all 248 E₈ adjoint gauge bosons massless would contribute 744 5D vector polarization units, **not 240**; that model overcompensates the selected QCD residual. The natural E₈ 240-root graph (degree56) still cannot be equated with the natural 240 non-diagonal ternary graph (degrees5–8/9–10). The physically useful bridge is a specified gauge-representation decomposition and constrained mass spectrum, NOT a cardinal identification.
+
+The old single gauge-singlet scalar Higgs portal contributes at most 5 free stationary units and cannot do this alone. This makes **SU₃³ with carefully sourced symmetry breaking** a more structural, but much higher-risk, candidate for testing than adding 48 unrelated scalars. No experiment or phenomenological feasibility has been claimed for extra ∼86 GeV gauge bosons.
