@@ -273,3 +273,40 @@ the worldsheet `O(3,3)` momentum/B patch Hamiltonian,
 and BRST state spectrum for a 26D string; no leap
 from SU2_4 CS conformal blocks to physical
 Monster/AdS3 gravity or the original 27-site cube.
+
+
+## Witten principal SU2_4 ⊂ SU3_1 operator extension is now source-tested
+
+Primary literature Lacki/Zaugg 1989 DOI
+10.1016/0370-2693(89)90662-X, rather than
+hypothetical 369 colour from counts. A new
+actual `sl2⊂sl3` rational 3×3 principal
+embedding has trace index4 and adjoint `3+5`,
+which induces source affine SU2_4 level
+from SU3_1 level1. Conformal c matches
+`3·4/6=8/4=2`.
+Source SU3_1 vacuum restriction `0⊕4`,
+two distinct fundamental/antifundamental
+restrictions to WZW label2 yield
+`D4=|chi0+chi4|²+2|chi2|²`.
+Actual source exact modular branching,
+D4 S/T and 27/81 SU3_1 Verlinde/associativity
+checks all PASS on independent local SymPy
+source. After Z2 simple-current extension
+the pointed category is SU3_1 C3, which
+does NOT exist as three invertible objects
+in unextended SU2_4.
+
+This corrects the roadmap's previous
+“only 5 different SU2 labels; SU3 candidate
+still just 3 numerically suggested”: there
+is a genuine established CONFORMAL EXTENSION.
+It does **not** identify the SU3 sigma target
+dim8 with the round SU2 S3 target dim3
+or solve the full 26D quantum string BRST,
+nor provide an SU3_1 physical colour
+gauge group/Monster c24 quantum gravity.
+Canonical original and repo owner matrix:
+`docs/hyperfabric-witten-d4-conformal-su2-4-su3-1-current-embedding-maxcut-20261024.md`.
+Native Agda/Lean branch proof sources committed
+but Agda/Lake kernel UNVERIFIED.
