@@ -54,6 +54,8 @@ def _admit(data, approval_receipt):
         return "synthetic_construction_only"
     if data["mode"] != "authorized_research":
         raise ValueError("Unrecognized corpus mode")
+    if data["source_collection_id"].startswith("synthetic:"):
+        raise ValueError("Synthetic collection cannot be relabeled as real research")
     if not isinstance(approval_receipt, dict) or set(approval_receipt) != {
         "schema", "dataset_sha256", "source_collection_id", "rights_holder",
         "permission_document_sha256", "reviewer_reference", "scope_reference",
