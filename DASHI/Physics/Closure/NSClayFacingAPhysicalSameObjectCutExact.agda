@@ -107,6 +107,39 @@ physicalViscousHeatAdmitsPositiveRationalFloor fluid point
   BishopReal._⋆ rational , lowerPositive , lowerBelowHeat
 
 ------------------------------------------------------------------------
+-- UNIFORM SHELL FLOOR (a stronger A1 application than a pointwise floor).
+--
+-- Fix an output-frequency shell |xi|² >= radiusSquared > 0.
+-- A single positive rational can be chosen BELOW nu*radiusSquared;
+-- its value is INDEPENDENT of xi within that shell. The downstream
+-- comparison nu*radiusSquared <= nu*|xi|² and the real inverse-cube
+-- antitone inequality are still explicit owner obligations. The
+-- rational is chosen by the already-pinned Bishop density theorem,
+-- NOT by claiming nu*radiusSquared is itself rational.
+------------------------------------------------------------------------
+
+physicalShellHeatAdmitsPositiveRationalFloor :
+  (fluid : Heat.PositiveViscosity) →
+  (radiusSquared : BishopReal.ℝ) →
+  BishopReal._<_ BishopReal.0ℝ radiusSquared →
+  Σ BishopReal.ℝ
+    (λ floor →
+      BishopReal._<_ BishopReal.0ℝ floor ×
+      BishopReal._<_ floor
+        (BishopReal._*_ (Heat.viscosity fluid) radiusSquared))
+physicalShellHeatAdmitsPositiveRationalFloor
+    fluid radiusSquared radiusSquaredPositive
+  with BishopP.fast-density-of-ℚ
+    BishopReal.0ℝ
+    (BishopReal._*_ (Heat.viscosity fluid) radiusSquared)
+    (BishopP.posx⇒0<x
+      (BishopP.posx,y⇒posx*y
+        (BishopP.0<x⇒posx (Heat.viscosityPositive fluid))
+        (BishopP.0<x⇒posx radiusSquaredPositive)))
+... | rational , floorPositive , floorBelowShellHeat =
+  BishopReal._⋆ rational , floorPositive , floorBelowShellHeat
+
+------------------------------------------------------------------------
 -- High-frequency physical identification.
 ------------------------------------------------------------------------
 
