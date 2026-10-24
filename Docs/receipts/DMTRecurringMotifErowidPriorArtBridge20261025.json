@@ -1,0 +1,227 @@
+{
+  "schema": "dashi-dmt-erowid-motif-prior-art-bridge-v1",
+  "date": "2026-10-25",
+  "purpose": "Recover existing DMT psychedelic recurring-motif formalisation and distinguish real published Erowid summary data from toy recurring cycles, raw corpus, phase timelines, neural source or ontology",
+  "original_published_research": {
+    "id": "noah2024",
+    "doi": "10.3389/fpsyg.2024.1397064",
+    "authors": [
+      "Sean Noah",
+      "Miranda Shen",
+      "Earth Erowid",
+      "Fire Erowid",
+      "Michael Silver"
+    ],
+    "journal": "Frontiers in Psychology",
+    "published": "2024-12-06",
+    "publication_url": "https://doi.org/10.3389/fpsyg.2024.1397064",
+    "source_role": "primary author-published quantitative summary of Erowid archive narratives; includes Erowid Center contributors; NOT independent brain imaging, not raw corpus admitted",
+    "reported_dataset": {
+      "reports": 39586,
+      "substances": 103,
+      "psychedelic_substances": 30,
+      "dmt_reports": 1121,
+      "sentences": 2246254,
+      "visual_effect_sentences": 143520,
+      "visual_effect_fraction_rounded": 0.0652,
+      "visual_sentence_threshold": 0.75,
+      "embedded_dimensions": 1536,
+      "gpt4_seed_labels": 10000,
+      "permutation_test_repetitions": 10000,
+      "source": "publication reported values, not locally reconstructed or independently sampled"
+    },
+    "published_categories": [
+      "Pattern",
+      "Movement",
+      "Color",
+      "Entities",
+      "Global visual alterations",
+      "Distortion",
+      "Affect",
+      "Other"
+    ],
+    "reported_entity_seed_types": [
+      "entities",
+      "aliens",
+      "angels",
+      "demons",
+      "elves",
+      "God"
+    ],
+    "claims_paid": [
+      "Distinct psychedelic compounds have different observed self-report visual-effect sentence profiles under the authors' classification pipeline",
+      "The authors' taxonomy explicitly included an Entities category; 1,121 DMT reports contributed to the entire archive analysis",
+      "An Erowid primary quantitative literature route was ALREADY attributed in original repository prior-art"
+    ],
+    "claims_not_paid": [
+      "Public summary proves between-person independence beyond Erowid corpus",
+      "Observed report-level recurrence frequency implies within-report temporal cyclic transitions",
+      "Categorized entity descriptions represent independent conscious entities",
+      "Text embeddings or seed sentence frequency uniquely identify serotonin receptor targets",
+      "Erowid 1,121 DMT reports correspond to Timmermann 2023 20 humans or Sanders 2026 23 interviews",
+      "We have acquired or computed the raw 39,586 narratives"
+    ]
+  },
+  "raw_data_governance": {
+    "original_archive": "https://www.erowid.org/experiences/",
+    "permission_url": "https://www.erowid.org/general/about/about_copyrights.shtml",
+    "source_statement": "The scientific article says Erowid research partners can use the Erowid API; the Erowid copyright policy requires prior permission for mining/distilling aggregate Experience Vault data",
+    "permitted_current_work": "Study published aggregate tables/categories and openly licensed paper, with full attribution",
+    "not_permitted_to_assume": "unrestricted scraping, local corpus downloading, model training or redistribution",
+    "original_research_partner_api_not_assumed_available": true,
+    "raw_report_corpus_acquired": false,
+    "permission_obtained": false
+  },
+  "already_in_repo": [
+    {
+      "path": "DASHI/Biology/VisualMotifTransitionOperator.agda",
+      "observed_definitions": [
+        "baselineMotifRegime",
+        "reweightedMotifRegime",
+        "latticeMotif",
+        "tunnelMotif",
+        "faceMotif",
+        "immersiveSceneMotif",
+        "reportedProfile"
+      ],
+      "what_is_formal": "finite toy transition dynamics: baseline lattice drains to quiet; reweighted lattice→tunnel→face→lattice; immersive scene fixed; synthetic profile numbers; two latent mechanisms same observed motif count",
+      "what_is_NOT_formal": "measured Erowid motif transitions or empirical recurrent classes"
+    },
+    {
+      "path": "DASHI/Biology/PsychedelicAttractorReweightingBoundary.agda",
+      "observed_definitions": [
+        "baselineAttractorCosts",
+        "reweightedAttractorCosts",
+        "nextMotif",
+        "motifCycleReturns"
+      ],
+      "what_is_formal": "toy routing-cost profile and stipulated geometric→agent→boundary-dissolution cycle",
+      "what_is_NOT_formal": "observed brain mechanism or drug-specific calibrated transition law"
+    },
+    {
+      "path": "DASHI/Biology/PsychedelicVisualOperatorAlgebra.agda",
+      "observed_definitions": [
+        "VisualParameterProfile",
+        "AnchoringRegime",
+        "TemporalVisualState",
+        "visualOperatorOrderResidual"
+      ],
+      "what_is_formal": "separate gain/retention/deformation/pattern completion/endogenous generation/coupling, anchoring and noncommutative visual operations",
+      "what_is_NOT_formal": "measurement-calibrated visual model"
+    },
+    {
+      "path": "DASHI/Biology/TernaryVisualMotifSemiconjugacyExact.agda",
+      "observed_definitions": [
+        "ternaryMotifSemiconjugacy",
+        "motifPeriodInheritedFromTernary"
+      ],
+      "what_is_formal": "exact finite three-cycle semiconjugacy to motif labels",
+      "what_is_NOT_formal": "evidence of a biological ternary mechanism"
+    },
+    {
+      "path": "DASHI/Biology/TernaryMotifNeuralObservationQuotientExact.agda",
+      "observed_definitions": [
+        "negativeAndZeroShareCoarseObservation",
+        "negativeAndZeroHaveDifferentMotifs"
+      ],
+      "what_is_formal": "toy model demonstrating coarse observation underdetermines motif/microscopic phase",
+      "what_is_NOT_formal": "participant-level fMRI identification"
+    },
+    {
+      "path": "DASHI/Biology/ConsciousAccessRound3SourceAtlas.agda",
+      "observed_definitions": [
+        "shenVisualReportsSource"
+      ],
+      "what_is_formal": "pre-existing attributed original Noah/Shen/Erowid/Silver paper DOI",
+      "what_is_NOT_formal": "owned raw copyrighted corpus"
+    },
+    {
+      "path": "Docs/support/reference/ConsciousAccessRound3VisualMorphogenesis.md",
+      "observed_definitions": [
+        "Recurrent motifs and post-acute adaptation",
+        "Visual operator algebra",
+        "Sources"
+      ],
+      "what_is_formal": "source-facing legacy research/finite motif description",
+      "what_is_NOT_formal": "new independent empirical experimental cohort"
+    },
+    {
+      "path": "Docs/support/reference/ConsciousAccessRound6CrossPollination.md",
+      "observed_definitions": [
+        "Exact transition-system bridge",
+        "Neural observation quotient"
+      ],
+      "what_is_formal": "same period/finite quotient not same empirical mechanism",
+      "what_is_NOT_formal": "dosing-induced actual three-phase generator"
+    }
+  ],
+  "empirical_consumer_fibres": [
+    {
+      "id": "E1_substance_motif_frequency",
+      "existing_source": "Noah 2024 published substance/category profiles",
+      "measured_unit": "self-selected report or sentence depending original estimator; avoid sentence pseudoreplication",
+      "status": "published_summary_available",
+      "hypothesis": "Category frequencies depend on substances and report context",
+      "comparison": "hierarchical report-clustered baseline and covariate-adjusted alternatives",
+      "next_object": "authors' public summary / supplementary effect proportions and category seeds"
+    },
+    {
+      "id": "E2_entity_relative_motif",
+      "existing_source": "Noah 2024 explicit Entities category",
+      "measured_unit": "reports and authors' selected visual sentences, not externally validated agents",
+      "status": "published_taxonomy_only",
+      "hypothesis": "Entity report presence conditional on pattern, movement and other categories can be described across substances",
+      "comparison": "expected by endogenous M1a and M1b as well as M2; test predictive residuals and confounds",
+      "next_object": "rights-cleared report-level multi-label co-occurrence and substance/dose/setting strata"
+    },
+    {
+      "id": "E3_temporal_motif_recurrence",
+      "existing_source": "toy motif operators; Erowid reports may contain narrative order but published 2024 study reports frequencies not transition histories",
+      "measured_unit": "person-report time-stamped onset/offset if actually recorded; retrospective narration is not a measured Markov sequence",
+      "status": "not_empirically_measured_from_published_study",
+      "hypothesis": "transition kernel P(substance, context; motif_i→motif_j) may have recurrent classes or metastable modes",
+      "comparison": "M0 stationary frequency/null shuffled report; M1a endogenous perceptual transition; M1b expressive HMM; M2 additional independently source-mapped constraints",
+      "next_object": "permitted raw report narratives + independently validated onset coding, compared separately to Sanders participant-phase matrices"
+    },
+    {
+      "id": "E4_cross_modal_agent_stage",
+      "existing_source": "Noah Erowid visual categories + Sanders retrospective phase study + Timmermann EEG-fMRI",
+      "measured_unit": "distinct nonmatching cohorts and data-generating methods, unless a documented same-participant crosswalk exists",
+      "status": "hypothesis_bridge_only",
+      "hypothesis": "visual patterns/space/agency motifs may organize different facets of psychedelic reports",
+      "comparison": "cannot compare transition frequencies or neural associations directly from independent report corpora without alignment/calibration",
+      "next_object": "prospective joint subject-matched visual+agency+neural repeated measures or separate carefully adjusted cohort model"
+    },
+    {
+      "id": "E5_ontology",
+      "existing_source": "none",
+      "status": "not_identified",
+      "hypothesis": "external independent entities cannot be inferred from recurring motif reports",
+      "comparison": "same finite stochastic observable process has equally likely endogenous and agent-semantic labellings",
+      "next_object": "ethically approved independent causal or information-discriminator experiment"
+    }
+  ],
+  "pareto_recommendation": {
+    "status": "restore as separate published-summary modality, not merge into 2023 imaging core cohort",
+    "lowest_cost_now": [
+      "audit Noah 2024 published Table1 and Figure6 categories and methods",
+      "reuse existing original Agda motif-theory owners; do not duplicate toy cycle theorem",
+      "add published Entities and contextual covariates as separately typed *report* observables in M0/M1/M2 candidate dictionary"
+    ],
+    "conditional_access": [
+      "raw Erowid API with prior Erowid permission",
+      "independent coder agreement/report-level chronology",
+      "rights-safe aggregated derived source receipts"
+    ],
+    "not_a_required_original_GFC_prerequisite": true
+  },
+  "provenance": {
+    "lineage": "Erowid report archive -> Noah et al 2024 study; same corpus not independent participant replication; Erowid coauthors are original archive contributors",
+    "further_dependencies": "Sanders2026 source separate but subject overlap unverified; Timmermann2023 research subjects different source identifier, no asserted equivalence",
+    "original_DMT_source_world_counts_unchanged": true
+  },
+  "no_dataset_downloaded": true,
+  "no_outreach": true,
+  "no_empirical_markov_kernel_fitted": true,
+  "no_ontology_promotion": true
+}
