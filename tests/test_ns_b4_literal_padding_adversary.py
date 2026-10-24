@@ -274,3 +274,22 @@ def test_ALL_physical_shear_mixed_outputs_and_global_R681_rate():
     assert total_relative==-4
     # In particular, GLOBAL sum over outputs does not magically
     # cancel the output-relative signed normal form.
+
+
+def test_R850_source_negative_is_exact_pointwise_W2_gap():
+    # Source attribution:
+    # R741: W2 <= 0? Its desired inequality is
+    # PacketSurplus <= Combined, i.e. Combined-PacketSurplus >= 0.
+    # R853: R815/R823 signedRate = 6*(Combined-PacketSurplus).
+    # R850: SAME physical rational snapshot has C,P,D values below
+    # at viscosity=margin=1; negative selected rate is exact.
+    # This is pointwise and rational; a real-time integrated W2 no-go
+    # still requires same-source REAL R853 transport along one
+    # physical Galerkin trajectory (separately in Lean R823 owner).
+    C=Fraction(-557627,125)
+    P=Fraction(0)
+    D=Fraction(15834)
+    combined_minus_surplus = 12*C-P+D
+    assert combined_minus_surplus==Fraction(-4712274,125)
+    assert combined_minus_surplus<0
+    assert 6*combined_minus_surplus==Fraction(-28273644,125)
