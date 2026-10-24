@@ -334,3 +334,55 @@ local-stage fundamental group; (4) van Kampen generator and stage-map
 compatibility; (5) nested-limit homeomorphism and compactness
 transport. After (1)–(3), the external kernel-proved van Kampen
 consumer gives the stage free-product isomorphism.
+
+
+## 2026-10-24 actual finite VOA representation max-cut
+
+The specific source group and cyclic action now have a concrete
+nonabelian finite quotient and a mathematically genuine, if
+non-CFT-type, **180-dimensional c=0 VOA** representation.
+The detailed theorem, constructive proof, source audit and exact
+kernel are in
+`Docs/topology/AlexanderHornedC3VOARealizationMaxCut.md`.
+
+Let `G=G_A*G_A*G_A` (the **abstract** three-root commutator direct
+limit) and `K=G semidirect C3`.
+The exact finite A5 commutator section from the existing script
+constructs a compatible surjection `G_A -> A5` at every stage,
+thus `K -> A5^3 semidirect C3`.
+On `V=Fun(C3 x A5,C)`, the latter finite group acts by
+permuting coordinate idempotents, preserving the pointwise
+commutative product, vacuum, modes and zero conformal vector.
+By the classical finite-dimensional commutative VOA construction,
+this yields a genuine nontrivial action of the abstract `K`
+on a specified VOA, **without** asserting that this VOA is
+`V-natural`.
+
+The action is faithful on the finite quotient and retains all
+`A5^3 semidirect C3` labels. Its exact kernel on `K` is
+`ker(q) x {0}`, so it necessarily loses some infinite-group
+information: `m^5 != 1` in the injective source free-group
+tower, but the selected root meridian has finite image order
+five. `m^5` therefore acts trivially on the whole VOA.
+This supplies a concrete no-descent instance of the existing BIDI
+consumer pattern, distinct from the earlier abelian-character
+no-go. The quotient and VOA construction are mathematically
+explicit; their corresponding full Agda kernel-level objects
+are not yet built.
+
+New exact algebraic Agda source:
+`AlexanderHornedC3FiniteVOAActorExact.agda`,
+`AlexanderHornedC3VOAModeLiftExact.agda`, and
+`AlexanderHornedC3VOAKernelBidiExact.agda`.
+The second reuses the repository's pre-existing exact rational
+trivial-VOA mode theorems, not a newly asserted `preservesModes`
+flag. Their proof statements distinguish pointwise equality from
+equality of functions. The finite permutation audit is
+`scripts/alexander_horned_c3_voa_a5_action_probe.py`.
+
+This **resolves the abstract same-group existence question** but
+does NOT supply (1) an actual geometric `pi1(S3\H)` identification
+or (2) a map into the Monster or any selected 3B action on
+`V-natural`. The geometric Lean collar proof and exact-head
+Agda/Lean compiler receipts remain independent highest-alpha
+tasks. See the full source/consumer matrix in the new document.
