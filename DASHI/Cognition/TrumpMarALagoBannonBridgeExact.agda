@@ -315,3 +315,53 @@ legalEngagementCannotBePromotedToExecuted = refl
 filmCannotBePromotedToIntelligenceDirection :
   concludedIntelligenceOrBlackmailOperation canonicalBannonMediaProductionFrontier ≡ false
 filmCannotBePromotedToIntelligenceDirection = refl
+
+------------------------------------------------------------------------
+-- MINIMAL VIDEO PROVENANCE RECEIPT: HASH / TIMECODE / TRANSCRIPT
+-- NO VIDEO FILES IN THIS REPOSITORY.
+--
+-- Original/released object identity and SHA-256 of a specific third-party
+-- rendition are DISTINCT; re-encoding changes a cryptographic digest.
+-- Two YouTube uploads are source *locators*, not proof of matching bytes.
+-- Third-party chapter descriptions are NOT a verbatim timecoded transcript.
+------------------------------------------------------------------------
+
+record LightweightFilmObjectReceipt : Set where
+  constructor lightweight-film-object-receipt
+  field
+    declaredManifest : String
+    publicRenditionLocator : String
+    vendorFullFilmRequiredForAnalysis : Bool
+    publicRenditionSHA256ComputedHere : Bool
+    dojNativeMasterSHA256ComputedHere : Bool
+    transcriptTextAcquired : Bool
+    thirdPartyChapterIndexLocated : Bool
+    chapterIndexIsVerbatimTranscript : Bool
+    namedReelToContractAndShootJoined : Bool
+open LightweightFilmObjectReceipt public
+
+canonicalLightweightFilmObjectReceipt : LightweightFilmObjectReceipt
+canonicalLightweightFilmObjectReceipt = lightweight-film-object-receipt
+  "docs/research/bannon-epstein-video-manifest-20261024.json"
+  "2026-02-01 YouTube copy oIEYmflX090; source copy only, not DOJ media file ID"
+  false false false false true false false
+
+videoNeedNotBeVendored :
+  vendorFullFilmRequiredForAnalysis canonicalLightweightFilmObjectReceipt ≡ false
+videoNeedNotBeVendored = refl
+
+noUncomputedSHA256Fabrication :
+  publicRenditionSHA256ComputedHere canonicalLightweightFilmObjectReceipt ≡ false
+noUncomputedSHA256Fabrication = refl
+
+chapterTimestampsNotVerbatimTranscript :
+  chapterIndexIsVerbatimTranscript canonicalLightweightFilmObjectReceipt ≡ false
+chapterTimestampsNotVerbatimTranscript = refl
+
+noTranscriptClaimWithoutBytes :
+  transcriptTextAcquired canonicalLightweightFilmObjectReceipt ≡ false
+noTranscriptClaimWithoutBytes = refl
+
+reelToAgreementJoinNotConferredByHash :
+  namedReelToContractAndShootJoined canonicalLightweightFilmObjectReceipt ≡ false
+reelToAgreementJoinNotConferredByHash = refl
