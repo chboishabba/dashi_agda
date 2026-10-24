@@ -1,5 +1,12 @@
 # Psychotronics, invisible-energy devices and Cold War esotericism — a critical literature review
 
+## Additional primary-source critique, 25 October — specific DOI/numbered bibliography, no global dismissal
+
+[Original-page 2024-to-2019 claim-versus-citation audit](psychotronics-phase1-2024-reference-and-2003-winding-maxcut-20261025.md): in Ramírez-Galindo et al.'s 2024 p5 original discussion, the assertion of a Rodin-vs-Helmholtz *up to 60%* advantage is indexed as **reference 24**, Saikia et al. (2019), *Electric Field Disruption of Amyloid Aggregation*, DOI 10.1021/acschemneuro.8b00490. The latter's **accessible publisher abstract** covers electric/magnetic field amyloid aggregation and 15–38% reduced electric-field-treated peptide toxicity in vitro; it **does not identify** the Rodin-vs-Helmholtz comparator. Its paywalled complete work was **not inspected**, so the exact causal/percentage bridge stays an **unpaid source-support question** rather than a finding of deception or a refutation of every bioelectromagnetics result. Also 2024 **ref12** identifies **F. P. Perez et al. 2008** heat shock/senescence, not **H. Pérez et al. 2013** with the original Rodin coil/lymphocyte Table I. Avoid conflating common surnames, 2013/2024 matched source numbers or repeated labs.
+
+The 2003 original Don Croft [PowerWand piece](https://www.croftzappers.com/the-don-croft-archives) specifies **cloud-busters.com** as a public winding-guide location and named builder contributors, distinct from his separately preserved 1999 Gentry/Flanagan testimony. Actual original guide author and historical files not recovered. This is better investigative detail, not a new psychic effect proof or licence to associate named contributors with alleged secret programmes. The literature-first Pareto now holds 41 curated source roles / 61 relation edges, with all author credits preserved.
+
+
 **Published-field same-number clue:** 2013 Pérez/Córdova-Fraga Table I and 2024 Ramírez-Galindo/Pérez-Olivas/Córdova-Fraga Table II repeat exactly three `(current, experimental mT)` pairs—`(1.60,4.13)`, `(1.25,3.05)` and `(0.60,1.16)`—despite different theoretical values. This is a meaningful bibliographic **possible shared-data** flag; the later model, source date and raw acquisition remain separate unverified aspects. Do not double-count exact tabulated field readings as independent calibration studies without the original measurement provenance. [Original tables and claim boundaries](psychotronics-phase1-rodin-study-genealogy-20261025.md).
 
 
