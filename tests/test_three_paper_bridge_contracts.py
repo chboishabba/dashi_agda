@@ -37,6 +37,8 @@ def test_finite_order_proof_reuses_original_generic_owner():
         "featureBagCannotRecoverDirectedOrder",
         "relabelledBagCannotRecoverOrder",
         "prefixSuffixLaw",
+        "receptionEC",
+        "calibratedReadoutIfEstimatesCorrect",
         "laterRetrievalDoesNotChangeAdmission",
         "absentUptakeFailsStipulatedAdmission",
     ]:
