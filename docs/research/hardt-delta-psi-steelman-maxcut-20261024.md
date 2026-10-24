@@ -560,3 +560,125 @@ rowspace theorem credited to prior mathematics; local exact
 synthetic checker and this literature integration attributed
 only to this programme. Neither an attractive hypothesis nor a
 source-written theorem declaration becomes human evidence.
+
+
+---
+
+## 2026-10-24 brain-related cross-PR causal recut: do-effects versus brain decoding
+
+All references below preserve source authorship, date, repo/PR/head and
+evidence status. They are donors, not automatically merged code or
+independently corroborating experiments. Hardt #1252 stays based on
+psychotronics #1242 only.
+
+### Actual source-owner reuse and ceilings
+
+| Existing owner | Actual result | Present bounded transfer |
+|---|---|---|
+| [Agda Brain-IT #1121](https://github.com/chboishabba/dashi_agda/pull/1121), head 15071f583ba731ab716d93a115affa6b9c5ae2f2 | BrainITConsumerRelativeExact imports Core.CoarseFineFabricCalculusExact; no universal fine Laplacian decoder from a coarse fMRI-like toy. Its BrainITScientificProgramme is the proper NSD/checkpoint/subject-split owner, and published T2/T3/T7 rows are author-reported rather than executed checkpoints | A reconstructed VIEWED image is not an independently concealed target, physical emitted field, arbitrary thought or causal remote effect |
+| [dashiBRAIN #9](https://github.com/chboishabba/dashiBRAIN/pull/9), head 0193695b5447f37d1ac0f60f379b0fe8cb99fbb0 | Original finite consumer-retention and commuting-square functions, consumer_retention.py blob 384a9b1d7082857000128635259c9b1a9d989f80; previous exact-content run 6/6 tests passed; no NSD model replay | New optional external runtime adapter calls actual functions if user provides checked-out source; no vendoring into #1252 |
+| [Agda DMT #1243](https://github.com/chboishabba/dashi_agda/pull/1243) | Exactly decoded viewed stimulus can still collide on independent concealed target; leakage changes consumer | Relevant independent target-label/photograph addressability null; no DMT participant or extra-dimensional actor promoted |
+| [dashiBRAIN #7](https://github.com/chboishabba/dashiBRAIN/pull/7) and merged [#5](https://github.com/chboishabba/dashiBRAIN/pull/5) | Source-bound MaleCNS connectome, structural/functional and effector separation; held-out model tests; 1,209/1,620 targeted identities recovered, 411 outstanding, and discovery d=2 MAE 0.131358 but R² below zero | Positive example of REAL locally connected sensorimotor chains; fly calcium, anatomy and effector cannot become human BOLD/delta/field measurements by analogy |
+| [Agda cognition #946](https://github.com/chboishabba/dashi_agda/pull/946), BrainCognitionObservationSpineExact | Memory content, action, motor policy, functional readout and latent neurostate are distinct consumers; one structural d=2 code is not universal | Use the exact desired receiver input and do-response as consumer, never generic mind-state identity |
+| [Merged thalamocortical #616](https://github.com/chboishabba/dashi_agda/pull/616) | ContrastiveHistoryResidualExact and ContrastiveInterventionResponseExact; original source Leow et al. Science 2026 DOI 10.1126/science.aeg4720 distinguishes neural encoding from optogenetic perturbation | Reuse the actual generic contrastive intervention function and non-descent theorem; a good baseline decoder does not identify response to a new intervention |
+| [Merged oscillator #909](https://github.com/chboishabba/dashi_agda/pull/909) | Separate amplitude, phase, frequency, spectral and hidden-state consumer fits and Kuramoto/Hebb/Oja comparisons with source-specific nulls | Phase coherence in a model cannot establish a physically specified radiating brain moment or coupling to receiver |
+| [IIT #1148](https://github.com/chboishabba/dashi_agda/pull/1148) | Finite causal network and observer semantics, not actual physical same-state source | Integrated structure does not create new nonlocal field, address or physiological evidence |
+| [Diamond #1238](https://github.com/chboishabba/dashi_agda/pull/1238) | Original Omar et al. 2026 cardiac NV MCG calibration and source-field readout adapters | Measured heart magnetism is not a measured free-space human delta EEG emission/receiver response |
+
+Original Brain-IT: Roman Beliy, Amit Zalcher, Jonathan Kogman,
+Navve Wasserman and Michal Irani, ICLR 2026,
+https://proceedings.iclr.cc/paper_files/paper/2026/hash/c9fd326fd03eaf52f672c31cde9658af-Abstract-Conference.html
+and original model implementation
+https://github.com/WeizmannVision/brainit-fmri.
+The paper learns across previously recorded fMRI subjects and images;
+its shared across-brains transformer is a software/representation
+operation, NOT a psychic synchronization or live brain-to-brain field.
+
+Original MaleCNS: Berg et al., Cell (3 Sep 2026),
+DOI 10.1016/j.cell.2026.08.015, 166,700 anatomically
+reconstructed male Drosophila CNS neurons. Species, modality, neural
+structure, function and physically executed effector remain distinct.
+
+### New exact finite mathematical cut: observational and intervention equivalence differ
+
+For an exogenous cue U and measured input X/output Y, compare:
+
+    DIRECT: X=U; Y=X.
+    COMMON CAUSE ONLY: X=U; Y=U.
+
+Both models generate identical passive observations (X,Y)=(U,U)
+with perfect observed predictor accuracy. For U=0 after the actively
+imposed intervention do(X:=1), direct-cause Y becomes 1 but common-
+cause-only Y stays 0. The observed state cannot uniquely determine
+the response. This is standard causal-inference mathematics; the
+new contribution is its explicit source-specific DASHI countermodel,
+not an original universal theorem about neuroscience.
+
+New source-written Agda file:
+DASHI/Cognition/HardtBrainInterventionNonidentifiabilityExact.agda.
+It imports existing Core.CoarseFineFabricCalculusExact and
+Core.ContrastiveInterventionResponseExact. Gives an explicit
+projection collision and no-universal-observation-to-intervention
+consumer decoder, plus contrastive-response non-descent.
+Human-source, blinded trial and replication receipt types remain
+uninhabited. **No Agda kernel/typecheck receipt.**
+
+New Python file:
+scripts/check_hardt_brain_crosspr_causal_cut.py.
+Builds exactly 16 invented worlds (two cues × two causal
+mechanisms × two viewed-image labels × two concealed targets).
+They collapse to four passive observation fibres; each fibre
+contains a do-response collision. A viewed-stimulus consumer
+factors; an independently concealed target does not; adding
+leaked target labels restores a trivial decoder.
+When invoked with --brain-runtime, it dynamically imports
+the ACTUAL dashiBRAIN #9 file supplied by a checked-out original
+repo and checks both its consumer and commutation runtime.
+No unmerged copy or shadow consumer engine is introduced.
+
+A separately authored equivalent standard-library 16-world
+prototype ran locally and passed: 16 worlds, four observational
+fibres, four ambiguous intervention fibres, correct viewed-image
+and concealed-target/leakage controls, exact direct 1 vs
+confounded 0 on the same passive witness. This does NOT certify
+exact GitHub script execution or optional source runtime invocation.
+The prior dashiBRAIN #9 six-test remote-byte receipt belongs to
+its own PR and is not rebranded as this branch's run.
+
+### Positive control and physical experiment requirements
+
+A legitimate communication-positive control is an engineered
+EEG -> packet/network -> TMS chain, as in Rao et al., 2014,
+DOI 10.1371/journal.pone.0111332 and Jiang et al., 2019,
+DOI 10.1038/s41598-019-41895-7. Their measured target links
+are engineered and explicit; their achieved task accuracies
+are not evidence of an unaided brain signal.
+
+The user-supplied Hardt story alleges target-identifying
+photographs/handwriting: these are source statements, not a
+measured causal address. To advance this physical hypothesis
+require a separately calibrated neural source (not BOLD alone),
+target-specific incoming physical observable, sham and baseline,
+controlled intervention, held-out effect and replication. Only
+benign/consensual tests. A source-identified field and nonlinear
+receiver response would constitute a legitimate classical steelman,
+but must actually be measured on the same physical unit.
+
+### Ranked next deliverables: phase/claim ceilings
+
+| Phase | What is delivered | Next source-specific payment |
+|---|---|---|
+| B0 | Historical primary-publisher attribution and latest source corrections | Original first-person witness, alleged 80% denominator and corroborated events; still UNKNOWN |
+| B1 | Exact finite observational-vs-do collision, original generic calculus reuse, optional runtime adapter | Agda check, exact GitHub script execution, checked-out dashiBRAIN #9 source path |
+| B2 | Source-to-observable identifiability from #1252 and real modality boundaries from Brain-IT/MaleCNS | Original EEG/MEG or OPM human source geometry and 0.5-4Hz calibrated sensor PSD; no fly/BOLD substitution |
+| B3 | Safe pre-registered causal test protocol | Independent concealed targets, real intervention outcomes, sham/leakage and replication |
+| B4 | Specified extra-field/operationally-nonlocal research discriminators | A genuinely measured model-specific residual and independently reproducible explanatory power |
+| B5 | Reproducible scientific deliverable, nulls and limits included | All source/custody, rights, numerical uncertainty, kernel/runtime and physical-claim receipts |
+
+**Roadmap judgement:** Logical consumer non-identifiability and the
+observational-vs-intervention distinction can now be source-written
+without inventing a new brain model. A real targeted physiological
+effect remains wholly unverified. The highest-impact science is
+a measured SAME-object source→field→receiver→intervention chain,
+not another duplicate 369 or quantum ontology. Historical allegations
+stay as attributed, uncorroborated testimony.
