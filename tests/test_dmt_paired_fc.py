@@ -92,3 +92,45 @@ def test_source_attribution_and_disclosure():
     assert "preflight_dmt_imaging_data" in text
     assert "full_preprocessing_reproduction" in text
     assert "subjective_qualia_or_entity_identification" in text
+
+def test_original_pnas_static_window_is_eight_minutes_after_injection():
+    t = np.arange(840, dtype=np.float64)
+    matrix = np.vstack([t, t + 1, t + 2, t + 3, t + 4, t + 5])
+    window = module.declared_static_window(matrix)
+    assert window.shape == (6, 240)
+    assert window[0, 0] == 240
+    assert window[0, -1] == 479
+    with pytest.raises(ValueError):
+        module.declared_static_window(matrix[:, :450])
+    assert module.PUBLISHED_STATIC_GFC["eligible_subject_count"] == 16
+    assert module.ORIGINAL_DYNAMIC_ELIGIBLE_N == 13
+    assert module.PUBLIC_REPO_README_SURVIVED_MOTION_N == 15
+    assert module.ORIGINAL_JOINT_EEG_FMRI_N == 12
+
+
+def test_pnas_aggregate_arithmetic_is_consistent_but_not_reproduced():
+    audited = load_script("scripts/audit_dmt_pnas2023_published_gfc.py").audit()
+    assert audited["implied_n"] == 16
+    assert round(audited["verified_p_two_sided"], 3) == 0.007
+    assert audited["status"] == "published_aggregate_arithmetic_consistent"
+    assert audited["same_paper_result_reproduced"] is False
+    assert audited["participant_ids_recovered"] is False
+
+
+def test_original_static_cohort_policy_rejects_15_even_with_fake_gate(tmp_path, monkeypatch):
+    shim = types.ModuleType("preflight_dmt_imaging_data")
+    shim.check_manifest = lambda root, manifest, receipt: {
+        "status": "admissible_manifest_only", "source_commit": "SYNTHETIC",
+        "source_repo": "SYNTHETIC", "git_source_blob_checks_passed": True}
+    monkeypatch.setitem(sys.modules, "preflight_dmt_imaging_data", shim)
+    manifest = {
+        "analysis": "original_static_gfc",
+        "motion_eligible_subjects": [f"S{i:02d}" for i in range(1, 16)],
+        "motion_exclusion_source_reference": "SYNTHETIC QC ONLY",
+        "alignment_preprocessing_source_reference": "SYNTHETIC ALIGNMENT ONLY",
+    }
+    import json
+    file = tmp_path / "manifest.json"
+    file.write_text(json.dumps(manifest))
+    with pytest.raises(ValueError, match="16-person"):
+        module.evaluate_verified_manifest(tmp_path, file)
