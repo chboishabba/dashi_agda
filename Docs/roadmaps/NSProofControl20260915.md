@@ -1,3 +1,74 @@
+# 2026-10-25 A/B PARETO / SNOWBALL / IBRAHIM ACTUAL PHYSICAL RECUT
+
+**Read direct research owner:** `Docs/research/ns_ab_pareto_snowball_ibrahim_20261025.md`.
+This applies the pre-existing
+`SnowballAttributionProvenanceInvariantExact` and
+`IbrahimSnowballParetoFrontierExact` policies to A/B literature;
+it does not confuse that Ibrahim provenance work with **Sage A.
+Ibrahim**, a coauthor of the Permana/Lathief/Ibrahim NS manuscript.
+Original root/year/version/source/proof-status are preserved.
+
+**NEW nontrivial physical no-go to the proposed viscosity-only
+direction-curvature estimate:** exact unforced NS smooth mean-zero,
+real, divergence-free periodic heat shear:
+  u_n=(A/n) exp(-nu n²t) (0,sin nx,cos nx).
+At positive time t_n=1/(nu n²), the ENTIRE domain has
+  |omega_n|=A/e, |grad xi_n|=n.
+Choosing fixed A>e*Omega puts every point in any fixed high-intensity
+region |omega|>Omega. Thus **no C_nu depending only on viscosity**
+can satisfy |grad xi| <= C_nu |omega|^(1/2) for every smooth NS
+datum. Normalized initial kinetic energy A²/n² decreases, initial
+enstrophy A² stays fixed. This falsifies a strong unconditional
+interpretation of the Permana/Lathief/Ibrahim April v3 claim, not
+a separately quantified T3-/initial-smoothness-conditioned theorem.
+The later May v4 Zenodo record advertises conditional small-data
+regularity, not an independent full regularity proof. The repo
+already had T3 derivative and trace-free strain sign controls;
+reuse them rather than duplicating their proof.
+
+**Further exact same-field harmonic-map cancellation:** in this
+physical solution `S[u_n]xi_n=0`,
+`grad log|omega_n|=0`,
+`Delta xi_n+|grad xi_n|² xi_n=0` and `dt xi_n=0`.
+Therefore the viscosity-induced harmonic-map heat terms and
+cross-diffusion exactly cancel on a rapidly varying direction;
+no automatic direction rigidity follows from diffusion alone.
+This offers a useful negative control for conditional
+Grujic arXiv:2609.05720 (direction PDE companion to conditional
+arXiv:2607.08866) and the earlier 1993 Constantin–Fefferman and
+2002 Beirao da Veiga–Berselli criteria. The conditional geometric
+theorems remain valid only on their actual hypotheses.
+
+**Source-genealogical Pareto order after screening:**
+1. B positive: prove original R735 W1 signed nonlinear commutator
+   plus W2 augmented critical payment on same arbitrary physical
+   trajectory, without importing Ibrahim's unproved universal
+   alignment or old R823/R236 counterexample-broken assumptions.
+2. A positive: constructive Bishop-real shell floor now source
+   written; next physical inverse-resolvent/Gram identification,
+   then A2 low/high same-solution majorant and A3 scale-critical
+   continuation. R735 progress cannot replace these.
+3. Literature as conditional producer/consumer, not global proof:
+   Cheskidov–Dai 2025 dyadic high-frequency vorticity criterion,
+   Grujic 2026 critical-profile log-BMO theorem plus companion
+   direction PDE, Koutanaei 2026 explicit conditional global
+   depletion/propagation frontier. Original 1993/2002 direction
+   results are distinct true roots, not citations providing
+   independent support for later universal claims.
+4. Additional survey breadth or DOI/QID metadata only when a
+   concrete source comparison can pay one of (1)–(3).
+
+**Execution receipt:** committed matching
+`tests/test_ns_permana_ibrahim_direction_rigidity_heat_shear.py`
+and original `NSTriadKNPermanaAlignmentRateAudit.agda`
+source note. Six independent local SymPy tests passed on a
+matching standalone copy. This is exact PDE-based falsification of
+the viscosity-only assumption, **not** a kernel inhabitant of all
+abstract A/B proof leaves. No exact-branch Agda/Lean kernel receipt
+or unrestricted global A/B continuation is claimed.
+
+---
+
 # 2026-10-25 CURRENT MAX-CUT — A1 CONSTRUCTIVE SHELL RATE / B R735 FIXED-TIME NO-GO
 
 **Continue original A/B, reuse actual proof owners.** This supersedes any
