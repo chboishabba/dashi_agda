@@ -243,3 +243,107 @@ Dynkin node count or target coordinates to a physical identity.
 source blobs above, verified Git object SHA-1 via Git blob framing;
 Agda kernel, Lean/Lake, full continuum action and physical/Clay
 promotion NOT checked/claimed.
+
+
+## A3 MATHEMATICALLY RESOLVED FOR THE SELECTED SIMPLE 27D ACTION: DERIVED 125/121
+
+**Material advance**: the earlier roadmap labelled Lambert–West 125/121 an
+externally sourced comparison. The branch now **derives it exactly** from the
+27D Einstein–Hilbert + one-circle-polarized four-form classical ansatz.
+External discovery/priority and originality remain with Horowitz–Susskind,
+Lambert–West and later Glennon/West; DASHI implements independent exact
+coefficient diagnostics and the same-object boundary. This is a
+**source-matched negative result for one definite action**, not a new
+in-principle no-go for all possible 27D theories.
+
+Take total spacetime dimension `D=d+1` and metric
+
+```text
+ds²_(d+1) = exp(2aσ) g_{μν} dx^μ dx^ν + exp(2bσ)dy² .
+```
+
+The fields are y-independent, and only the y-legged 27D four-form
+component contributes to the 26D three-form `H3`. Set KK vector and
+additional non-electric components to zero. The dimensional density
+prefactors after contracting inverse metrics are
+
+```text
+EH:  exp(P_R σ),  P_R = (d-2)a + b.
+H3:  exp(P_H σ),  P_H = (d-6)a - b.
+P_R=P_H iff b=-2a. Common exponent P=(d-4)a.
+The source string-frame dilaton then satisfies Phi=-(d-4)a σ/2.
+```
+
+For `R_(d+1)`, a conformal transformation of a one-dimensional
+warped-product metric yields **before integration by parts**
+
+```text
+R_(d+1) = exp(-2aσ) [
+   R_d
+   - 2 (b+(d-1)a) Box_g σ
+   - (2b²+2(d-2)ab+(d-1)(d-2)a²) |dσ|_g² ].
+```
+
+After multiplying by `sqrt(-G)` and integrating `Box_g σ` with
+weight `exp(P_R σ)`, the kinetic scalar coefficient is exactly
+
+```text
+K = (d-1)a [(d-2)a + 2b].
+b = -2a ⇒ K_actual = (d-1)(d-6)a².
+Standard 26D string-frame action requires
+K_required = 4 (dPhi/dσ)² = (d-4)² a².
+K_actual − K_required = (d-10)a².
+```
+
+At `d=26`, `a=1`, `b=-2`: `P_R=P_H=22`,
+`K_actual=25*20=500`; `K_required=22²=484`.
+Therefore `500/484=125/121`, *exactly the Lambert–West
+source-observed dilaton error*. At `d=10`, both are `36`,
+which explains this obstruction's striking 10D-versus-26D split.
+This ratio is insensitive to rescaling the auxiliary scalar σ when
+the common prefactor `exp(-2Phi)` is held fixed. A different
+field content/action, higher derivatives, independent scalar, or
+nontrivial symmetry structure **may** evade it but then requires
+an honest new source action and a new K27/physical comparison.
+
+### Exact execution and typed Lean source
+
+New original reference executable:
+`scripts/check_27d_bosonic_m_dilaton_125_121.py`, exact Git blob
+`96f2f1eb91d487b3ddc18acd785ade4261132801`
+(run locally, git-blob hash independently matched):
+102 exact rational `(d,a,b)` comparisons PASS;
+`K_actual−K_required=(d−10)a²` PASS;
+`d=26` ratio `125/121` PASS; `d=10` ratio 1 PASS;
+common R/H prefactor condition `b=-2a` PASS.
+
+Cross-repo Lean PR #84 adds
+`Integration/DASHITOE/BosonicM27CoefficientCut.lean`,
+Git blob `e3377919e2e3557a6e2bb47f25d7998696a9d98f`.
+It source-writes ring/linear-arithmetic proofs of the full general
+dimension identity, the common-exponent restriction, the 26D ratio
+and 10D success. **Lean/Lake kernel NOT RUN** in this environment;
+the **geometric Ricci scalar transformation is a documented premise**
+of the finite coefficient algebra, not itself constructed as an
+analytic Lorentz-manifold theorem in that Lean file.
+
+### Revised roadmap impact
+
+- **A3 classical bosonic M proposal**: the source-selected simple
+  EH+4form action now FAILS its literal full 26D string-frame
+  dilaton normalization test by 125/121, with a derived formula,
+  not just an external citation. Physical promotion stops for
+  *that specified unmodified action*. The H3 kinetic term alone
+  still has a genuine constant-radius positive truncation.
+- **A4 alternative action**: a new concrete 27D physical field
+  content, metric ansatz, form coupling, K27 invariance and
+  anomalies must be source-selected and produce an exact
+  no-mismatch reduction; distinguish Glennon's *no obvious
+  K27-preserving extension* from an absolute impossibility.
+- **A5 hyperfabric/Albert**: independently no exact original
+  path-L/H `F4`-equivariant irreducible identification; these
+  are different model changes. Changing the string action
+  does not automatically repair the F4 path symmetry obstruction.
+- **A6 downstream Clay**: no direct payment, since this is a
+  negative constraint on one higher-dimensional effective
+  action, not a uniform YM or NS continuum theorem.
