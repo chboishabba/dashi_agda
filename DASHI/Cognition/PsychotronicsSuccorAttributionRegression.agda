@@ -350,6 +350,15 @@ goldeneyeIsDifferentAdvertisedVersion :
   Atlas.documentaryDistinction
 goldeneyeIsDifferentAdvertisedVersion = refl
 
+makerWebsiteDeclaresOriginalPosterHandle :
+  Atlas.relationClass Atlas.zeroPointSiteExplicitlyLinksAccount ≡
+  Atlas.contemporarySelfAttribution
+makerWebsiteDeclaresOriginalPosterHandle = refl
+
+makerSiteToHandleDoesNotProveOriginalVideoSKU :
+  Atlas.historicalTransmissionProved Atlas.zeroPointSiteExplicitlyLinksAccount ≡ false
+makerSiteToHandleDoesNotProveOriginalVideoSKU = refl
+
 wongPatentIsOnlyDesignFamilyAnalogy :
   Atlas.relationClass Atlas.wongPatentIsNotStarshipInheritance ≡
   Atlas.hardwareAnalogyOnly
