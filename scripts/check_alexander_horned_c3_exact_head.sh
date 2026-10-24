@@ -11,6 +11,7 @@ targets=(
   DASHI/Mathematics/Topology/AlexanderHornedC3AmbientRotationExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3SatellitePlacementExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3JordanActionExact.agda
+  DASHI/Mathematics/Topology/AlexanderHornedTorsionFreeStageTransportExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedA5C3CharacterRestrictionExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedA5C3RestrictionWeldExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3FiniteVOAActorExact.agda
