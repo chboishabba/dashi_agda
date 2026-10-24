@@ -43,6 +43,8 @@ def signature(samples: Sequence[float], harmonics=range(13)) -> dict[str, float]
 
 
 def audit(n: int = 72) -> dict:
+    if n % 8:
+        raise ValueError("audit samples must be a multiple of eight for exact sector rotations")
     baseline = model(n)
     quarter = [baseline[(j + n // 4) % n] for j in range(n)]
     polarised = model(n, polariser=math.pi / 4)
