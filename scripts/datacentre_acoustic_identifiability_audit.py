@@ -42,6 +42,18 @@ def flat_level(tones):
     return combined_level_db(t.db_spl for t in tones)
 
 
+def claimed_percent_to_db(percent_increase: float, ratio_kind: str):
+    """A percent comparison needs a named amplitude or power quantity."""
+    if percent_increase < 0:
+        raise ValueError("negative percent increase not supported")
+    ratio = 1 + percent_increase / 100.0
+    if ratio_kind == "pressure_amplitude":
+        return 20 * log10(ratio)
+    if ratio_kind == "acoustic_power":
+        return 10 * log10(ratio)
+    raise ValueError("specify pressure_amplitude or acoustic_power")
+
+
 def same_la_example(la_target=35.0):
     low = Tone(31.5, la_target - a_weight_db(31.5))
     high = Tone(125.0, la_target - a_weight_db(125.0))
@@ -58,4 +70,7 @@ if __name__ == "__main__":
         print(f"{tone.hz:6.1f} Hz | A {a_weight_db(tone.hz):6.2f} dB | "
               f"flat {tone.db_spl:6.2f} dB SPL | LA {a_weighted_level([tone]):.2f} dBA")
     print(f"Unweighted SPL difference: {low.db_spl-high.db_spl:.2f} dB")
+    print("25,000% above baseline maps to different decibels by quantity:")
+    print(f"pressure amplitude: {claimed_percent_to_db(25000, 'pressure_amplitude'):.2f} dB")
+    print(f"acoustic power: {claimed_percent_to_db(25000, 'acoustic_power'):.2f} dB")
     print("Equal LA is NOT equal spectra; no biological inference follows.")
