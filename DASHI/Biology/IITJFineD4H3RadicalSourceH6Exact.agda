@@ -101,9 +101,10 @@ record AdmissionBoundary : Set where
     concreteSource8CarrierConstructed : Bool
     sourceIntoH6ProductHomSourceWritten : Bool
     H3TimesC3SquaredTwoSidedCodecSourceWritten : Bool
+    originalGaugeFourOneFourToCharacterMapKernelProved : Bool
     concreteD4AutomorphismAgdaKernelChecked : Bool
     universalD4RankBoundAgdaKernelChecked : Bool
     actualMonsterNormalizerRepresentationIdentified : Bool
 
 currentBoundary : AdmissionBoundary
-currentBoundary = admissionBoundary true true true true false false false
+currentBoundary = admissionBoundary true true true true false false false false
