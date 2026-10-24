@@ -52,7 +52,7 @@ Passing the phase test is not sufficient for quotient descent, irreducible row o
 
 ## Implemented and verified
 
-- `scripts/monster_3b_zeta_diagonal_fingerprint_maxcut.py`: exact local exhaustive four-case Q(zeta) arithmetic, norm/Galois/rank and 24 common-kernel phase assignments (2 h × 3 k × 2 signs per row). Each direct Sym² branch has no compatible assignment; each dual branch has four.
+- `scripts/monster_3b_zeta_diagonal_fingerprint_maxcut.py`: exact local exhaustive four-case Q(zeta) arithmetic, norm/Galois/rank and 48 common-kernel phase assignments (2 h × 3 k × 2 signs in each of four rows). Each direct Sym² branch has no compatible assignment; each dual branch has four.
 - `DASHI/Moonshine/Monster3BZetaSuzukiDiagonalNormCutsetExact.agda`: imports the existing cyclotomic, gauge and original diagonal-kernel sources, proves source-written finite exclusion of ordinary Sym² under the common-psi condition; lists all four trace/norm results. Imported by the Monster validation owner. Agda was NOT run in this session.
 - `scripts/monster_3b_suzuki_sym2_character_screen.g`: supplements the full table `Sym²/dual` equality test with central-C3 equality, explicitly rejecting logically inconsistent paired phases. GAP was NOT run locally.
 
