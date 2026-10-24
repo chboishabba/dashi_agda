@@ -133,6 +133,17 @@ def main():
     assert np.linalg.norm(H(ag,vg)-
         (G(mid)@H(a,v)@G(mid).conj().T-
          np.diag(np.repeat(cdot(mid),2))))<1e-12
+    # Gauge-invariant lattice electric field E_j = -Adot_j - (V_j-V_(j+1)).
+    physicalE=-.2*fdot(mid)*unbalanced
+    agdot=.2*fdot(mid)*unbalanced+cdot(mid)-np.roll(cdot(mid),-1)
+    gaugedE=-agdot-(vg-np.roll(vg,-1))
+    assert np.linalg.norm(gaugedE-physicalE)<1e-12
+    assert abs(np.exp(1j*sum(ag))-np.exp(1j*sum(a)))<1e-12
+    # Pure time-dependent U1 gauge has E=0 and no physical response.
+    pure=evolve(0.,np.zeros(N),gauge=True)
+    base=expm(-1j*H0*T)
+    assert np.linalg.norm(pure-G(T)@base@G(0).conj().T)<1e-4
+
     out={'three_balanced':scenario(balanced),
          'three_unbalanced':scenario(unbalanced)}
     assert out['three_balanced']['local_density_change']>1e-4
