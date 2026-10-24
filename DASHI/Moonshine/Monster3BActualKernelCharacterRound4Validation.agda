@@ -147,7 +147,7 @@ nineCellSymmetricSquareSourceQuarterTrace =
   SymTwelve.sourceNecessaryQuarterTurn
 
 faithfulSuzukiSymSquareCannotBeFaithfulSeventyEight :
-  SymTwelve.negative SymTwelve.*sign SymTwelve.negative
+  SymTwelve._*sign_ SymTwelve.negative SymTwelve.negative
   ≡ SymTwelve.negative → ⊥
 faithfulSuzukiSymSquareCannotBeFaithfulSeventyEight =
   SymTwelve.symmetricSquareCannotHaveFaithfulCentralMinus
