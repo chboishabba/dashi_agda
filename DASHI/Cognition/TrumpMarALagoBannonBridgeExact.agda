@@ -196,3 +196,122 @@ victimAccountDoesNotCreateAdjacentKnowledge ()
 priorInfluenceInfrastructureDoesNotCreateLaterTechniqueReuse :
   PriorInfluenceInfrastructureImpliesLaterTechniqueReuse → ⊥
 priorInfluenceInfrastructureDoesNotCreateLaterTechniqueReuse ()
+
+
+------------------------------------------------------------------------
+-- BANNON / EPSTEIN FILM ORIGINAL-OBJECT RECONCILIATION — 2026-10-24
+--
+-- Prior media/correspondence receipt ABOVE already pays existence of
+-- filming and reputation-management interactions. Do NOT duplicate that
+-- fact as a fresh discovery in a parallel Aquino-specific source model.
+--
+-- An indexed DOJ-produced April 3 2019 engagement letter and an original
+-- House-Oversight iMessage export sharpen *production terms* and *shooting
+-- schedule*. They do not determine whether Bannon signed the letter,
+-- attorney-client or Kovel privilege was legally effective, whether the
+-- terms covered any named released video segment, or final ownership.
+-- Neither record supplies knowledge or participation in abuse.
+------------------------------------------------------------------------
+
+data BannonProductionArtifact : Set where
+  actualInterviewFootagePreviouslyKnown : BannonProductionArtifact
+  april2019IndykeLetter : BannonProductionArtifact
+  juneJuly2019ProductionMessages : BannonProductionArtifact
+
+record BannonProductionEvidence : Set where
+  constructor bannon-production-evidence
+  field
+    artifact : BannonProductionArtifact
+    sourceLocator : String
+    narrowSupportedFinding : String
+    documentarySourceTextLocated : Bool
+    originalPageImageInspectedThisCut : Bool
+    signedOrExecutedAgreementEstablished : Bool
+    legalPrivilegeEffectivenessEstablished : Bool
+    sameReleasedFilmReelIdentified : Bool
+    originalVideoHashOrProductionManifestHeld : Bool
+    espionageOrCriminalParticipationPaid : Bool
+open BannonProductionEvidence public
+
+existingFilmEvidence : BannonProductionEvidence
+existingFilmEvidence = bannon-production-evidence
+  actualInterviewFootagePreviouslyKnown
+  "Existing bannonMediaRehabReceipt and released 2026 news/DOJ video coverage"
+  "Released text and video already source-bounded in this owner; no new proof of filming needed."
+  true false false false false false false
+
+indyke2019LetterEvidence : BannonProductionEvidence
+indyke2019LetterEvidence = bannon-production-evidence
+  april2019IndykeLetter
+  "DOJ Dataset 9 EFTA00809863-EFTA00809866, April 3 2019; https://www.justice.gov/epstein/files/DataSet%209/EFTA00809863.pdf"
+  "DOJ-indexed four-page lawyer letter addressed to Bannon describes consultant litigation support, confidentiality and putative Indyke control/ownership of resulting video or other materials; extracted text inspected via public EFTA mirror. PDF page images, handwritten/actual execution, later assent and enforceability NOT inspected or established."
+  true false false false false false false
+
+juneJulyProductionMessagesEvidence : BannonProductionEvidence
+juneJulyProductionMessagesEvidence = bannon-production-evidence
+  juneJuly2019ProductionMessages
+  "House Oversight 027794-027848 iMessage export, https://media-cdn.rollcall.com/epstein-files/House_Oversight_027794-027847.pdf"
+  "PDF inspected: 15 June 2019 shooting subject-expert and crew discussions; 6 July 2019 03:59 proposed island filming and reply yes; 16:37 Epstein says All canceled. Planning and cancellation are paid; a resulting completed island shoot is NOT paid."
+  true true false false false false false
+
+-- Only the earlier broad fact of filming is an established bounded
+-- relationship. These additional artefacts pay proposed terms and planning.
+bannonFilmingAlreadyPaid :
+  relationshipOrInstitutionalEdgePaid bannonMediaRehabReceipt ≡ true
+bannonFilmingAlreadyPaid = refl
+
+noNewProofNeededThatVideoExists :
+  documentarySourceTextLocated existingFilmEvidence ≡ true
+noNewProofNeededThatVideoExists = refl
+
+letterLocatedButExecutionOpen :
+  signedOrExecutedAgreementEstablished indyke2019LetterEvidence ≡ false
+letterLocatedButExecutionOpen = refl
+
+letterCannotByItselfCreateLegalPrivilege :
+  legalPrivilegeEffectivenessEstablished indyke2019LetterEvidence ≡ false
+letterCannotByItselfCreateLegalPrivilege = refl
+
+july6ProposedShootNotCompletedShoot :
+  sameReleasedFilmReelIdentified juneJulyProductionMessagesEvidence ≡ false
+july6ProposedShootNotCompletedShoot = refl
+
+letterAndMessageDoNotIdentifyFilmReel :
+  sameReleasedFilmReelIdentified indyke2019LetterEvidence ≡ false
+letterAndMessageDoNotIdentifyFilmReel = refl
+
+-- Scope the actual remaining work to original reel/production file,
+-- executed counsel agreement, and same-session join, rather than the
+-- already-paid premise that extensive filming occurred.
+record BannonMediaProductionFrontier : Set where
+  constructor bannon-media-production-frontier
+  field
+    releasedInterviewExistencePaid : Bool
+    engagementLetterTextLocated : Bool
+    july6ProductionPlanningMessagesLocated : Bool
+    originalCounselLetterSignatureVerified : Bool
+    specificVideoReelFileIdAndHashVerified : Bool
+    counselLetterCoversReleasedReel : Bool
+    contemporaneousFilmingSessionJoinedToMessage : Bool
+    concludedIntelligenceOrBlackmailOperation : Bool
+open BannonMediaProductionFrontier public
+
+canonicalBannonMediaProductionFrontier : BannonMediaProductionFrontier
+canonicalBannonMediaProductionFrontier = bannon-media-production-frontier
+  true true true false false false false false
+
+videoExistenceDebtRetired :
+  releasedInterviewExistencePaid canonicalBannonMediaProductionFrontier ≡ true
+videoExistenceDebtRetired = refl
+
+exactFilmReelObjectStillUnpaid :
+  specificVideoReelFileIdAndHashVerified canonicalBannonMediaProductionFrontier ≡ false
+exactFilmReelObjectStillUnpaid = refl
+
+legalEngagementCannotBePromotedToExecuted :
+  originalCounselLetterSignatureVerified canonicalBannonMediaProductionFrontier ≡ false
+legalEngagementCannotBePromotedToExecuted = refl
+
+filmCannotBePromotedToIntelligenceDirection :
+  concludedIntelligenceOrBlackmailOperation canonicalBannonMediaProductionFrontier ≡ false
+filmCannotBePromotedToIntelligenceDirection = refl
