@@ -200,3 +200,24 @@ def test_constructive_shared_root_refutation_reuses_existing_proof():
         "RootClosure.sharedUpstreamRootRefutesIndependence twoExcerptsShareOneRoot",
     ):
         assert token in source
+
+
+def test_four_competing_hypotheses_have_explicit_counter_searches():
+    source = OWNER.read_text()
+    for name in (
+        "caseIndependentNetworksTest", "caseLocalSubclustersTest",
+        "caseOneCrossGenerationalProgrammeTest", "caseOperationalDirectionTest",
+    ):
+        assert f"{name} = AntiEcho.hypothesis-test-boundary" in source
+    for clazz in (
+        "AntiEcho.distributedIndependentProgrammes",
+        "AntiEcho.linkedSubclusters",
+        "AntiEcho.oneCommonProgramme",
+        "AntiEcho.coordinatedTargeting",
+    ):
+        assert clazz in source
+    assert "caseCompetingHypotheses : List AntiEcho.HypothesisTestBoundary" in source
+    assert "caseWholeH2Unpaid = refl" in source
+    assert "caseCovertH3Unpaid = refl" in source
+    assert "NOT scientist targeting" in source
+    assert "Robert Maxwell/Robert Mercer" in source
