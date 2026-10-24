@@ -1,7 +1,7 @@
 module DASHI.Environment.DataCentreThermalReuseBalanceExact where
 
 -- Energy-quantity and source-grade boundary for data-centre thermal reuse.
--- 2026-10-24. Illustrative integer kW witness, NOT a surveyed project.
+-- 2026-10-24. Illustrative integer 100-kW witness, NOT a surveyed project.
 -- Distinguishes heat REUSED from heat CREATED by compressor electricity.
 -- The older noise/EM evidence owner remains independent.
 
@@ -131,65 +131,65 @@ noSiteReceiptsPaid =
                           false false false false false false
 
 -- Exact illustrative balance in kW, with no refrigeration or pipe losses.
--- IT = 10000, non-IT site overhead = 2500, total site = 12500.
--- Of IT heat, 2000 goes directly to a cool incoming sink, 6000 enters
--- heat pump evaporator, and 2000 remains uncaptured.
--- HP compressor power = 2400; HP hot delivery = 8400.
--- Heat delivered = 2000+8400 = 10400.
--- Unrecovered IT + non-IT site overhead = 2000+2500 = 4500.
--- Total electric input = 12500+2400=14900; exported+ambient=14900.
+-- IT = 100, non-IT site overhead = 25, total site = 125 (100-kW units).
+-- Of IT heat, 20 goes directly to a cool incoming sink, 60 enters
+-- heat pump evaporator, and 20 remains uncaptured.
+-- HP compressor power = 24; HP hot delivery = 84.
+-- Heat delivered = 20+84 = 104.
+-- Unrecovered IT + non-IT site overhead = 20+25 = 45.
+-- Total electric input = 125+24=149; exported+ambient=149.
 
-itKilowatt : Nat
-itKilowatt = 10000
+itHundredKilowatt : Nat
+itHundredKilowatt = 100
 
-siteOverheadKilowatt : Nat
-siteOverheadKilowatt = 2500
+siteOverheadHundredKilowatt : Nat
+siteOverheadHundredKilowatt = 25
 
-sitePowerKilowatt : Nat
-sitePowerKilowatt = itKilowatt + siteOverheadKilowatt
+sitePowerHundredKilowatt : Nat
+sitePowerHundredKilowatt = itHundredKilowatt + siteOverheadHundredKilowatt
 
-directReuseKilowatt : Nat
-directReuseKilowatt = 2000
+directReuseHundredKilowatt : Nat
+directReuseHundredKilowatt = 20
 
-hpEvaporatorKilowatt : Nat
-hpEvaporatorKilowatt = 6000
+hpEvaporatorHundredKilowatt : Nat
+hpEvaporatorHundredKilowatt = 60
 
-uncapturedITKilowatt : Nat
-uncapturedITKilowatt = 2000
+uncapturedITHundredKilowatt : Nat
+uncapturedITHundredKilowatt = 20
 
-hpElectricKilowatt : Nat
-hpElectricKilowatt = 2400
+hpElectricHundredKilowatt : Nat
+hpElectricHundredKilowatt = 24
 
-hpOutputKilowatt : Nat
-hpOutputKilowatt = hpEvaporatorKilowatt + hpElectricKilowatt
+hpOutputHundredKilowatt : Nat
+hpOutputHundredKilowatt = hpEvaporatorHundredKilowatt + hpElectricHundredKilowatt
 
-totalExportKilowatt : Nat
-totalExportKilowatt = directReuseKilowatt + hpOutputKilowatt
+totalExportHundredKilowatt : Nat
+totalExportHundredKilowatt = directReuseHundredKilowatt + hpOutputHundredKilowatt
 
-residualAmbientKilowatt : Nat
-residualAmbientKilowatt = uncapturedITKilowatt + siteOverheadKilowatt
+residualAmbientHundredKilowatt : Nat
+residualAmbientHundredKilowatt = uncapturedITHundredKilowatt + siteOverheadHundredKilowatt
 
 itPartitionExact :
-  itKilowatt ≡ directReuseKilowatt + hpEvaporatorKilowatt + uncapturedITKilowatt
+  itHundredKilowatt ≡ directReuseHundredKilowatt + hpEvaporatorHundredKilowatt + uncapturedITHundredKilowatt
 itPartitionExact = refl
 
 hpFirstLawExact :
-  hpOutputKilowatt ≡ hpEvaporatorKilowatt + hpElectricKilowatt
+  hpOutputHundredKilowatt ≡ hpEvaporatorHundredKilowatt + hpElectricHundredKilowatt
 hpFirstLawExact = refl
 
 wholeFacilityFirstLawExact :
-  sitePowerKilowatt + hpElectricKilowatt
-  ≡ totalExportKilowatt + residualAmbientKilowatt
+  sitePowerHundredKilowatt + hpElectricHundredKilowatt
+  ≡ totalExportHundredKilowatt + residualAmbientHundredKilowatt
 wholeFacilityFirstLawExact = refl
 
 copThreePointFiveExact :
-  10 * hpOutputKilowatt ≡ 35 * hpElectricKilowatt
+  10 * hpOutputHundredKilowatt ≡ 35 * hpElectricHundredKilowatt
 copThreePointFiveExact = refl
 
 -- Positive electric drive invalidates the naive idea that delivered HP heat
 -- is the same quantity as the captured waste-heat stream.
 heatPumpDeliveryNotIdenticalToCapturedSource :
-  hpOutputKilowatt ≡ hpEvaporatorKilowatt → ⊥
+  hpOutputHundredKilowatt ≡ hpEvaporatorHundredKilowatt → ⊥
 heatPumpDeliveryNotIdenticalToCapturedSource ()
 
 -- Two facilities can have exactly the same available heat, but not
@@ -199,43 +199,43 @@ data DemandCase : Set where
   matchedOfftaker : DemandCase
   noConcurrentOfftaker : DemandCase
 
-heatAvailableKilowatt : DemandCase → Nat
-heatAvailableKilowatt _ = 8000
+heatAvailableHundredKilowatt : DemandCase → Nat
+heatAvailableHundredKilowatt _ = 80
 
-heatActuallyRecoveredKilowatt : DemandCase → Nat
-heatActuallyRecoveredKilowatt matchedOfftaker = 8000
-heatActuallyRecoveredKilowatt noConcurrentOfftaker = 0
+heatActuallyRecoveredHundredKilowatt : DemandCase → Nat
+heatActuallyRecoveredHundredKilowatt matchedOfftaker = 80
+heatActuallyRecoveredHundredKilowatt noConcurrentOfftaker = 0
 
 sameHeatPotential :
-  heatAvailableKilowatt matchedOfftaker
-  ≡ heatAvailableKilowatt noConcurrentOfftaker
+  heatAvailableHundredKilowatt matchedOfftaker
+  ≡ heatAvailableHundredKilowatt noConcurrentOfftaker
 sameHeatPotential = refl
 
 differentRealisedHeat :
-  heatActuallyRecoveredKilowatt matchedOfftaker
-  ≡ heatActuallyRecoveredKilowatt noConcurrentOfftaker → ⊥
+  heatActuallyRecoveredHundredKilowatt matchedOfftaker
+  ≡ heatActuallyRecoveredHundredKilowatt noConcurrentOfftaker → ⊥
 differentRealisedHeat ()
 
 -- Hypothetical 50 C multistage absorption example at thermal COP 0.35.
 -- It uses 6000 kW of heat to provide 2100 kW of chilling and must reject
 -- 8100 kW at the absorption condenser/absorber, before auxiliaries.
 -- This DOES NOT prove that outdoor noise, water usage, or total energy fall.
-absorptionDriveKilowatt : Nat
-absorptionDriveKilowatt = 6000
+absorptionDriveHundredKilowatt : Nat
+absorptionDriveHundredKilowatt = 60
 
-absorptionChillKilowatt : Nat
-absorptionChillKilowatt = 2100
+absorptionChillHundredKilowatt : Nat
+absorptionChillHundredKilowatt = 21
 
-absorptionRejectKilowatt : Nat
-absorptionRejectKilowatt = 8100
+absorptionRejectHundredKilowatt : Nat
+absorptionRejectHundredKilowatt = 81
 
 absorptionBalanceExact :
-  absorptionRejectKilowatt
-  ≡ absorptionDriveKilowatt + absorptionChillKilowatt
+  absorptionRejectHundredKilowatt
+  ≡ absorptionDriveHundredKilowatt + absorptionChillHundredKilowatt
 absorptionBalanceExact = refl
 
 absorptionCOPThirtyFiveHundredths :
-  100 * absorptionChillKilowatt ≡ 35 * absorptionDriveKilowatt
+  100 * absorptionChillHundredKilowatt ≡ 35 * absorptionDriveHundredKilowatt
 absorptionCOPThirtyFiveHundredths = refl
 
 -- No model of carbon savings, a real Queensland facility, noise reduction,
