@@ -328,6 +328,42 @@ r685PhysicalRateKernelIsOutputHeatPlusDifference
         (cong (_- tangent) commutatorIsTangentPlusOutputHeat)
         (solve (tangent ∷ common ∷ difference ∷ [])))
 
+-- Compose directly with R684's original *input-Laplacian* physical
+-- work, exactly the rate currency summed/integrated by R690.
+-- The good output-heat self-work is separated from the signed
+-- difference-frequency work before any output sum or estimate.
+r685InputLaplacianIsOutputHeatPlusDifference :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (S : Helical.HelicalModeScalars F) →
+  (output : Z3.FourierMode) →
+  let
+    system = Field30.finiteSystem physicalSystem
+    E = Field30.physicalEmbedding physicalSystem
+    I = Field30.physicalInverseSquare physicalSystem
+    nu = Field30.viscosity physicalSystem
+    cutoff = Audit.cutoff system
+    velocity = Audit.velocityAt system
+    items = Output.physicalOutputFiber cutoff output
+    value = D1a.mixedProductCell S velocity
+    mixed = Work.fixedOutputMixedProduct S velocity cutoff output
+    centered =
+      Vector.weightedVectorSum
+        (Vector.centeredFrequencyMultiplier E) value items
+  in
+  nu * Work.coherentWork mixed
+    (R684.inputLaplacianVector I value cutoff output)
+  ≡
+    OutputRate.outputHeatRate nu I output
+      * Work.coherentWork mixed mixed
+    + OutputRate.halfViscosity nu
+      * Work.coherentWork mixed centered
+r685InputLaplacianIsOutputHeatPlusDifference physicalSystem S output =
+  trans
+    (sym (R684.fixedOutputPhysicalRateKernelIsInputLaplacianWork
+      physicalSystem S output))
+    (r685PhysicalRateKernelIsOutputHeatPlusDifference
+      physicalSystem S output)
+
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
