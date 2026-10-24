@@ -33,7 +33,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Mathematics.Topology.AlexanderHornedC3FiniteStageExact as Horn
 import DASHI.Mathematics.Topology.AlexanderHornedProPSolvableBlindExact as Solv
 
-record SeparatedIntegralCongruenceActor : Set₁ where
+record SeparatedIntegralCongruenceActor : Set₂ where
   field
     Matrix : Set
     identityMatrix : Matrix
