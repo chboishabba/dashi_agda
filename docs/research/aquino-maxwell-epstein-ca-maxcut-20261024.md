@@ -121,6 +121,7 @@ Do not label a phase complete just because files or PRs exist. Use the strongest
 
 | Consumer | Source state | Exact next discriminator | Still disallowed |
 |---|---|---|---|
+| Cambridge Analytica legal entity identity | Original counsel-memo/FEC PDF contents not fully inspected | Match Delaware/UK entity IDs, exact names, dated registers and distinct incorporation/formation events | Equating LLC/LLP/UK company or inferring concealment from mismatched summaries |
 | SCL-to-CA *specific technique* | Wylie testimony and FTC independently pay **different propositions**; exact executed IP/work product not inspected | Corporate agreement and software/process lineage against deployed campaigns | Aquino authored/invented CA methods; 2016 election causation |
 | Bannon–Epstein deliverables | Broad direct-relation receipts on #1131; this pass does not newly read a complete raw message-to-film chain | Bates message to actual film/edit/contract/payment, event-time join | Bannon commanded or inherited Epstein intelligence operation |
 | Maxwell/PROMIS | House and Bua investigations document contested findings, no verified code/procurement link | Signed distribution instrument and exact-binary/installation forensic comparison | A proven backdoor or Maxwell-controlled global surveillance network |
