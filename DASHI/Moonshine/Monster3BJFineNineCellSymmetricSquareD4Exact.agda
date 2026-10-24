@@ -110,9 +110,9 @@ data CentralSign : Set where
 
 infixl 7 _*sign_
 _*sign_ : CentralSign → CentralSign → CentralSign
-positive *sign_ y = y
-negative *sign_ positive = negative
-negative *sign_ negative = positive
+positive *sign y = y
+negative *sign positive = negative
+negative *sign negative = positive
 
 faithfulCentralMinusSquaresToPlus :
   negative *sign_ negative ≡ positive
