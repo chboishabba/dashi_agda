@@ -220,3 +220,58 @@ finish the geometric C3 horned-ball realization in Lean,
 and if a Monster-specific consumer is demanded, identify an
 actual source-to-VOA action map rather than creating another
 phase-label interface.
+
+
+## Repo-native vertex mode proof reuse (additional exact cut)
+
+The first repo search surfaced the Moonshine/3B interfaces, but a
+second search found stronger *already implemented* local algebra:
+
+* `DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda`
+  owns proof-bearing `vacuumMinusOneIdentity`, `creationMinusOne`,
+  `minusOneProductCommutative`, `minusOneProductAssociative`,
+  `translationActsAsDerivationOnMinusOneProduct`, and
+  `conformalModesVanish`. We do not re-prove these scalar identities.
+* `DASHI/Moonshine/FiniteDifferentialVertexAlgebraExact.agda`
+  and `SquareZeroDifferentialVertexAlgebraExact.agda` are
+  the genuine nonzero-derivation generalisations, but are not
+  needed for this zero-derivation finite-dimensional VOA.
+* NEW `DASHI/Mathematics/Topology/AlexanderHornedC3VOAModeLiftExact.agda`
+  literally imports the trivial rational seed, defines every
+  integer mode at each coordinate using `Seed.trivialMode`,
+  inherits the seed's vacuum/creation/product/translation/
+  conformal proofs coordinatewise, and proves that the *same*
+  finite semidirect action commutes with every integer mode
+  and preserves vacuum, conformal vector and translation.
+  This is not an opaque `preservesModes : Set` label:
+  `allVertexModesIntertwineRightAction` has an equality
+  conclusion quantified over actor, states, integer mode and coordinate.
+  The target is rational; standard extension of scalars to C
+  constructs the complex finite-dimensional VOA discussed above.
+* NEW `AlexanderHornedC3VOAKernelBidiExact.agda` reuses
+  `FormalClaimTransportGeometryExact` and
+  `ConsumerDescentMinimalObserverExact`: given the source
+  nonidentity meridian power in the actor kernel, the finite
+  actor cannot be inverted to recover all source group elements,
+  and every observation factoring through that actor also
+  identifies the kernel pair. The exact `m^5` certificate
+  is supplied by the classical free group injectivity plus
+  the explicit finite A5 quotient, not by the generic record.
+
+The pointwise proofs do not implicitly use function extensionality:
+they establish equality on all coordinates. Conversion to an
+equality of entire functions would need suitable extensionality
+or the appropriate observational equivalence.
+
+### Exact-head commands
+
+    python3 scripts/alexander_horned_c3_voa_a5_action_probe.py
+    bash scripts/check_alexander_horned_c3_exact_head.sh
+
+Status must remain source-written until successful exact-head
+kernel receipts; the finite independent Python check in this chat
+ran 2,000 deterministic action/product tests and the complete 60
+A5-element commutator coverage, with root image order five.
+The committed standalone script's 4,000-case regression and
+five-stage recursion were added but have not been separately
+executed in the remote CI environment.
