@@ -1,3 +1,38 @@
+## 2026-10-24 projection gate on physical B recombination (new exact discriminator)
+
+**New exact finite check:** `tests/test_ns_b_projection_same_shear_discriminator.py`
+committed on the existing PR #1240 branch. The four Fourier modes
+`uhat(±e_x)=uhat(±e_y)=e_z` yield nine possible supported output
+frequencies under H+×H−, including the zero output. The eight nonzero
+mixed-output vectors are all longitudinal: for EVERY k≠0,
+`P_k M_k = M_k-k(k·M_k)/|k|²=0`.
+Nevertheless, the unprojected literal R681 physical output-relative
+work summed over those outputs is **−4**, not zero.
+
+This is a **necessary projection/representation discriminator**, not
+proof that projected H+×H− is automatically the physical convection
+operator. For the same real shear, `u·∇u=0` pointwise and
+`∂_t u=Δu` for viscosity one. Thus any source-equal representation
+of the genuine *projected* NS nonlinear forcing or energy-production
+functional must vanish on this witness; the unprojected R681 signed
+work fails that calibration.
+
+**Next proof cut:** open the actual R685 commutator/tangent and R690
+global compensated consumers; write the exact same-source equality
+between their final Leray-projected physical functional and the
+original R236 selected Bony critical-production functional, including
+all class boundaries and any residual. Only after proving this identity
+may one attempt a cutoff-uniform signed estimate. Do not infer
+cancellation from a raw sum and do not insert Leray projection into
+R681 as an unproved equivalence.
+
+Receipt: independent local SymPy output enumeration verified all
+eight projected vectors exactly zero and global raw relative value
+−4; source-written regression committed. No checked-out PR-head pytest,
+Agda or Lean kernel check has occurred in this cut. No Clay promotion.
+
+---
+
 # Navier–Stokes A/B canonical mathematical roadmap
 **Current: 24 October 2026 · source-first / fail-closed**
 
