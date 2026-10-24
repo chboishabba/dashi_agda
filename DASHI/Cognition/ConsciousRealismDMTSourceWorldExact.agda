@@ -26,6 +26,26 @@ primaryPNAS = Attribution.mkDOISource
   "Original study source, not an independently reproduced neuroimaging result"
   Attribution.publicAttribution
 
+-- Separate original author-written code object. It is not a second human
+-- cohort or a proof that the script generated the published n=16 statistic.
+primaryStaticGFCCode : Attribution.AttributedSource
+primaryStaticGFCCode = Attribution.mkNoDOISource
+  "Christopher Timmermann"
+  "StaticGFC.m: group-level functional connectivity code"
+  "timmer500/DMT_Imaging, blob f87d99f448848c3b0531fea0780ee241ebd77549"
+  "2022"
+  "https://github.com/timmer500/DMT_Imaging/blob/b35701d88d904e2f602164ff2eae0fc879772078/Scripts/StaticGFC.m"
+  (Attribution.namedSourceKind "primary analysis code, shared 2023 DMT experimental root")
+  "20 original pseudonymous source-coordinate IDs only; not n=16 eligibility or a licensed dataset"
+  Attribution.publicAttribution
+
+sourceCodeObservationArtifact : Source.SourceArtifact
+sourceCodeObservationArtifact = Source.sourceArtifact
+  "DMT2023:StaticGFC:author-pseudonym-list"
+  Source.documentaryArtifact
+  "Git blob f87d99f448848c3b0531fea0780ee241ebd77549"
+  "timmer500/DMT_Imaging commit b35701d88d904e2f602164ff2eae0fc879772078"
+
 primarySourceSnowball : Snowball.SourceRoleSnowballReceipt primaryPNAS
 primarySourceSnowball = Snowball.canonicalSourceRoleSnowballReceipt primaryPNAS
 
@@ -109,7 +129,7 @@ data Depends : DMTWorldNode → DMTWorldNode → Set where
 sourceWorldDependencies : Acquire.AcquisitionDependencyGraph DMTWorldNode
 sourceWorldDependencies = Acquire.acquisition-dependency-graph
   Depends
-  "Doc/receipts/DMT2023SourceWorld.json; source-specific consumer dependencies"
+  "Docs/receipts/DMT2023SourceWorld.json; source-specific consumer dependencies"
 
 qcSelectivelyReopensStatic :
   Acquire.SelectiveAcquisitionReopening
