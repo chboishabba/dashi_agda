@@ -1362,10 +1362,13 @@ koganRole = ripon-role-statement
   "UK DCMS 2018-04-24 Q2012-Q2018: R/statistical output sent to SCL"
   false false false
 
-riponNamedByTwoDistinctWitnesses :
+silvesterNamesRipon :
   paysSpecificRiponSoftwareRole silvesterRole ≡ true
-  × paysSpecificRiponSoftwareRole nixRole ≡ true
-riponNamedByTwoDistinctWitnesses = refl , refl
+silvesterNamesRipon = refl
+
+nixNamesRipon :
+  paysSpecificRiponSoftwareRole nixRole ≡ true
+nixNamesRipon = refl
 
 koganDeliveryDoesNotPayDirectAIQKnowledge :
   paysDirectKoganAIQCollaboration koganRole ≡ false
