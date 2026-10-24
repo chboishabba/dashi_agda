@@ -374,3 +374,31 @@ No package/PyPhi, Agda compiler, hidden model checkpoints, neuron-matched causal
 - [Torque #1164](https://github.com/chboishabba/dashi_agda/pull/1164), **merged**, supplies the physically *typed* oriented-bracket formalism that the IIT #1148 \`IITGridTorqueC3HolonomyHandoffExact\` symbolically reuses. The port-phase intertwiner has no causal/quantitative physical torque-amplitude or optical Berry-phase proof by itself.
 
 **Pareto decision:** preserve those links as conditional reusable methods; spend the next empirical cut on calibrated state/observation/wiring dynamics (neural or LLM). Do not start an unrequested bridge treating \`F₂\` Walsh, \`F₃\` C3 and full continuous optical Fourier coefficients as the same representation without an explicit intertwiner.
+
+
+## 2026-10-24 follow-up: the EXISTING larger XOR-grid programme and arithmetic correction
+
+**Correction to prior summaries:** the \(2\times2\) XOR transition's theorem \(F^2=0\) was always a claim about one exact small fixture. It is **not** a claim that recurrent XOR grids generally extinguish. [Agda IIT #1148](https://github.com/chboishabba/dashi_agda/pull/1148) already has **larger periodic lattice scaling** in \`scripts/iit_lattice_scaling_experiment.py\` (binary/ternary 2D side lengths 2–10; selected ternary 3D cube) and \`scripts/iit_ternary_lattice_scaling.py\` (binary/ternary 2D side lengths 2–10, 3D 2–5; stacked-face control). The maximum explicitly generated networks are 100 (2D) and 125 (3D) sites. These are finite-matrix **rank/geometry/slab-proxy** sweeps, not exhaustive IIT system-MIP or full cause–effect structure computations at those sizes.
+
+Source history also matters: [Aaronson 2014](https://scottaaronson.blog/?m=201405) used expander and XOR networks as adversarial older-IIT examples; [Tononi 2014](https://learniit.org/corpus/tononi-2014a) discusses an illustrative physically realised \(1000\times1000\) lattice with appropriate gates, **e.g. majority activation**, even all off. The million-site example is theoretical, not an empirical dataset or a PyPhi computation. The DASHI **toroidal east+south XOR update** is a different specified gate/boundary model; do not claim a same-object reproduction of Tononi's physical hypothetical from its linear rank.
+
+### Newly identified high-leverage algebra (rather than re-enumeration)
+
+For \((\mathbb Z/n)^d\) periodic spatial cells over \(\mathbb F_p\), \(F=S_1+\cdots+S_d\), commuting coordinate shifts, **when \(n=p^k\)**:
+\[
+F^{p^k}=dI \pmod p.
+\]
+Consequently binary 2D power-of-two-side XOR grids erase every state after at most \(n\) steps, but binary **3D** power-of-two-side grids satisfy \(F^n=I\); ternary 2D power-of-three-side grids satisfy \(F^n=-I\), while ternary **3D** power-of-three-side grids satisfy \(F^n=0\). A binary 2D **10×10** torus has one-step rank 90 and is not nilpotent. A binary 3D **5³** torus has full rank 125. A ternary 3D **3³** torus has rank 18 and \(F^3=0\).
+
+For all binary 2D toroidal side lengths \(n\), \(\dim\ker F=n\), \(\operatorname{rank}F=n^2-n\); for ternary 2D the nullity is \(n\) if \(n\) is even and 0 if odd. In particular extrapolating that *different* periodic binary law to 1000×1000 gives rank **999,000** analytically, not from a million-site executed experiment.
+
+**Existing Agda donor reused:** \`IITCubeConcreteTorusImageExact.bop3Neg\` (literal ternary 3×3 face \(B^3=-I\)). [IIT #1148](https://github.com/chboishabba/dashi_agda/pull/1148) now owns \`IITLatticePrimePowerSourceBridgeExact.agda\` (source-written six-step/injectivity corollaries), \`scripts/iit_lattice_prime_power_audit.py\`, and a focused original-source [roadmap](https://github.com/chboishabba/dashi_agda/blob/agent/iit-phi-integration-maxcut-20261013/docs/superpowers/plans/2026-10-24-iit-large-grid-original-comparison.md). It also consumes its numeric audit from \`iit_numeric_verification.py\`. Separate independent local Python verified 26 cases and 8 prime-power identities on all basis vectors. **No Agda kernel proof of the general arbitrary-\(n\) Frobenius statement or exact-head newly committed script run is claimed.**
+
+### Roadmap consequences and revised Pareto priorities
+
+- **P3B expanded:** establish the *local gate, spatial dimension, field characteristic, side length and boundary conditions* as first-class model coordinates. Recurrent topology alone cannot determine **persistence**; one-step rank/nullity cannot determine full temporal information survival. A zero-state point estimate does not determine experience.
+- **P5 IIT:** compare the **same physical network/TPM** under source-pinned IIT 3.0/4.0 versions and matched states/partitions; don't convert original \(O(n)\) geometric separation scaling or a declared slab proxy into numerical **Φ**. The present 100/125-site sweeps don't calculate big-Phi.
+- **P3A AI geometric reasoning:** future-trajectory and equivariance tests are needed after a paired-perturbation benchmark. Periodic XOR demonstrates that the same local syntax can imply different representational dynamics when the fabric changes.
+- **P4 memory / P6 Ferrocell and quantum:** periodic XOR's algebra is reusable only as an **adversarial null**. It does not imply corresponding neural long-term memory, magneto-optical polarisation, toroidal magnetic topology, zero-point energy, entanglement or a consciousness-generating mechanism.
+
+**Next cut:** a source-versioned comparison of exact IIT computations at tractable network sizes, plus analytic bounds for growing lattices. Measured neuron-/task-level dynamical comparisons remain the physical priority. Do not spend the next increment on rederiving the existing n≤10 ranks or cardinality of the 27-point cube.
