@@ -319,3 +319,49 @@ def test_bannon_2018_mirror_remains_derivative_carrier_not_new_witness():
     assert 'true false false false' in source
     assert 'Poder360-hosted DOJ-labelled' in roadmap
     assert 'not a new witness or an independently retrieved DOJ original' in roadmap
+
+
+def test_three_independent_legal_objects_are_not_one_universal_ip_bridge():
+    source = OWNER.read_text()
+    for token in (
+        "ftcServicesAndLicencesDescribed : CaseClaim",
+        "fecDecember2013LLCStatement : CaseClaim",
+        "fecForeignNationalReasonToBelieve : CaseClaim",
+        "fecCaseClosedWithoutFinalLiability : CaseClaim",
+        "fecEnforcementRoot : OriginRoot",
+        "gsrSCLDataSubscription : CorporateInstrument",
+        "sclCAOperatingServices : CorporateInstrument",
+        "sclCAIPLicence : CorporateInstrument",
+        "gsr2014Agreement = instrument-source-receipt",
+        "sclCAServiceAgreement = instrument-source-receipt",
+        "sclCAIPAgreement = instrument-source-receipt",
+        "canonicalInstrumentStack : List InstrumentSourceReceipt",
+        "ftcAgreementNotOriginalSignedInstrument = refl",
+        "sclCAOperatingAgreementNotAquinoMethod = refl",
+        "sclCAIPLicenceNotEpsteinDataset = refl",
+    ):
+        assert token in source
+
+
+def test_fec_preliminary_enforcement_and_register_same_origin():
+    source = OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    for token in (
+        "fecCorporateDate = date-and-source-role",
+        "ftcCorporateDate = date-and-source-role",
+        "counselMemoDate = date-and-source-role",
+        "uninspectedCharterCannotSettleDifferentLegalActs = refl",
+        "fecReasonToBelieveReceipt = fec-stage-receipt",
+        "fecClosureReceipt = fec-stage-receipt",
+        "fecReasonToBelieveNotFinalGuilt = refl",
+        "fecClosureDoesNotRewriteOriginalFindings = refl",
+        "https://www.fec.gov/files/legal/murs/7382/7382_33.pdf",
+        "https://www.fec.gov/data/legal/matter-under-review/7351/",
+    ):
+        assert token in source
+    assert "### FTC/FEC cross-source contract and enforcement resolution" in roadmap
+    assert "FTC **default-based** privacy/deception liability" in roadmap
+    assert "two agencies quoting the same registry" in roadmap
+    assert "31 Dec 2013" in roadmap
+    assert "4 June 2014" in roadmap
+    assert "5–0 to close the file" in roadmap
