@@ -25,5 +25,18 @@ Date: 24 October 2026. Parent case: PR #1245, stacked on #1131. **This is a sour
 - H3 common covert command: **unpaid**. Black congressional contempt concerns subpoena compliance, not covert command.
 - Contrary evidence, legal defences and procedural outcomes must be audited symmetrically, not treated as a single echo chamber.
 
+## Historical verification caveat (superseded in part by update above)
+
 ## Verification limitations
 Original congressional **public press statements** and secondary reporting read on 24 October 2026. The full committee transcript, court complaint, complete subpoena exhibits and original House vote record are **not independently page-verified in this cut**. No fresh original EFTA binary is claimed inspected. No Agda kernel/pytest execution, victim media download or protected data acquisition. Documentary finding vs testimonial allegation vs litigant denial are separate typed source roles pending implementation in the canonical owners.
+
+
+## Updated 24 Oct 2026 — original congressional records acquired and inspected
+
+The previous "not page-verified" caveat below is superseded **for the identified documents only**:
+- Original [49-page House interview transcript](https://oversight.house.gov/wp-content/uploads/2026/07/Leon-Black-Final-Transcript-7.16.26.pdf), released July 17: inspected pages 14, 28, 41–42 (June 26 hearing). Reported 2015 NDA terms acknowledged by Black at p41; he says p42 that Epstein was told about the dispute but **did not negotiate it**. This is a participant claim about involvement, not a verified NDA or evidence of extortion by the counterparty.
+- Original [26-page House Report 119-831](https://www.govinfo.gov/content/pkg/CRPT-119hrpt831/pdf/CRPT-119hrpt831.pdf): inspected printed pages 1–2, 12, 17, 23; distinguishes committee subpoena position, its references to Black testimony, and actual text/documents still unproduced. The reported 2015 terms have **the same testimony root**, not a second independent corroborating transaction.
+- Original [Congressional Record H5931, H. Res. 1543](https://www.govinfo.gov/content/pkg/CREC-2026-09-16/html/CREC-2026-09-16-pt1-PgH5931.htm): direct original record of House resolution adoption without objection Sept 16. A referral does not prove prosecutorial charges or guilt; DOJ filing outcome is not authenticated here.
+- [Original 2021 Apollo/SEC Dechert memorandum](https://www.sec.gov/Archives/edgar/data/1411494/000119312521016405/d118102dex991.htm) and [2021 Apollo SEC proxy](https://www.sec.gov/Archives/edgar/data/1411494/000119312521247884/d218583ddef14a.htm): prior financial/governance roots, not confirmation of criminal allegations. Apollo Conflicts Committee membership included Ducey, Krongard and Richards. Krongard's former CIA work is established by corporate filings; **no source here identifies intelligence direction of the review**.
+
+The *unobtained original objects* now reduce to the actual 2015 NDA/settlement bytes and payment records, original subpoena exhibits/court pleadings if claiming judicial outcomes, specific Wyden cited EFTA messages, and any direct Bannon-Black film payment/custody keys. See [complete surrounding prior-art audit](aquino-epstein-surrounding-prior-art-audit-20261024.md). No media hash, sensitive NDA or protected victim identity vendored. This is **original-web-document read + source-written typed guards**, not Agda kernel certification.
