@@ -29,6 +29,11 @@ M=[row[:] for row in M0]
 assert M[3][3]==2   # Original corner B2 flips under axis mirror.
 M[3][3]=1           # Only new choice: make it B1, keeping quarter turn.
 MRAW=mm(mm(TINV,M),T)
+# Dual equally minimal bypass: move B1 -> B2 instead of B2 -> B1.
+M_DUAL=[row[:] for row in M0]
+assert M_DUAL[2][2]==1
+M_DUAL[2][2]=2
+MRAW_DUAL=mm(mm(TINV,M_DUAL),T)
 PAIRS=((0,1),(2,3),(4,6),(5,7))
 OMEGA=[[0]*8 for _ in range(8)]
 for i,j in PAIRS: OMEGA[i][j]=1;OMEGA[j][i]=2
@@ -49,11 +54,11 @@ def action(g,v,c):return mv(g,v),c
 def kernel_dim(A,sign):
     return 8-rank([[(A[i][j]-sign*int(i==j))%P for j in range(8)] for i in range(8)])
 
-def orbit_certificate():
+def orbit_certificate(mirror=M):
     g=eye(8);fine=pointed=0;classes={}
     for k in range(4):
         for mirrored in (False,True):
-            h=mm(g,M) if mirrored else g
+            h=mm(g,mirror) if mirrored else g
             plus=kernel_dim(h,1);minus=kernel_dim(h,-1)
             marker=10 if (k==0 and not mirrored) else 4 if mirrored else 2
             # Value-S3 translations are fixed-point-free on centre; its
@@ -82,6 +87,11 @@ def audit():
     assert rank(OMEGA)==8
     defect=[[(MRAW[i][j]-source.M[i][j])%P for j in range(8)] for i in range(8)]
     assert rank(defect)==1
+    dual_defect=[[(MRAW_DUAL[i][j]-source.M[i][j])%P for j in range(8)] for i in range(8)]
+    assert rank(dual_defect)==1
+    assert mm(M_DUAL,M_DUAL)==I
+    assert mm(mm(M_DUAL,R),M_DUAL)==mm(mm(R,R),R)
+    assert mm(mm(tr(M_DUAL),OMEGA),M_DUAL)==OMEGA
     checked=0
     for v in tuples(range(P),repeat=8):
         assert mv(TINV,mv(T,v))==v
@@ -104,6 +114,18 @@ def audit():
                 assert action(g,*mul(v,c,w,d))==mul(*action(g,v,c),*action(g,w,d))
                 count+=1
     assert count==354294
+    dual_count=0
+    for state in tuples(range(P),repeat=9):
+        v=state[:8];centre=state[8]
+        for w,d in gens:
+            assert action(M_DUAL,*mul(v,centre,w,d))==mul(*action(M_DUAL,v,centre),*action(M_DUAL,w,d))
+            dual_count+=1
+    assert dual_count==177147
+    dual_orbit=orbit_certificate(M_DUAL)
+    assert dual_orbit['fine_joint_orbits']==535
+    assert dual_orbit['moving_marker_pointed_joint_orbits']==4576
+    assert dual_orbit['zeta_D4_phase_character']=={
+       'identity':65610,'half':162,'quarter':18,'axis':324,'diagonal':2916}
     return {'schema':'jfine-d4-single-line-orientation-bypass-v1',
       'source_sheet_states':19683,'relative_chart_roundtrips':checked,
       'new_trits':0,'source_geometric_reflection_preserved':False,
