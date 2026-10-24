@@ -596,6 +596,61 @@ caseHypothesisTest = AntiEcho.hypothesis-test-boundary
   "Inspect dated signed source-specific contracts, product versions and tasking"
   "Search for contrary company provenance, mundane licensing and different programme identity"
 
+------------------------------------------------------------------------
+-- Four discriminating models; none is dismissed simply for lacking a
+-- positive source in a narrow search window. These records specify planned
+-- tests, NOT executed source sweeps or observations of wrongdoing.
+------------------------------------------------------------------------
+
+caseIndependentNetworksTest : AntiEcho.HypothesisTestBoundary
+caseIndependentNetworksTest = AntiEcho.hypothesis-test-boundary
+  AntiEcho.distributedIndependentProgrammes
+  "Distinct ordinary corporate influence, media brokerage, historical PsyOps and disputed software procurement"
+  "A shared dated operational tasking/custody record joining all relevant objects would disfavor independence"
+  "Explicit cross-network same-object receipt unlocated"
+  "Compare original contracts, methods, actual participants and dates without presumed inheritance"
+  "Search for original same-build or same-task IDs contradicting independent organisational development"
+
+caseLocalSubclustersTest : AntiEcho.HypothesisTestBoundary
+caseLocalSubclustersTest = AntiEcho.hypothesis-test-boundary
+  AntiEcho.linkedSubclusters
+  "Bannon-CA corporate relationship and Bannon-Epstein media contact; separately Aquino-Vallely coauthorship"
+  "A document proves local links do not imply no broader chain, but isolated independent lineages limit the inference"
+  "Specific cross-cluster same-object transfer remains unpaid"
+  "Reconcile released 2018-2019 correspondence against contracts and film objects"
+  "Search for disjoint rights/custody, incompatible method/version and unconnected decision authority"
+
+caseOneCrossGenerationalProgrammeTest : AntiEcho.HypothesisTestBoundary
+caseOneCrossGenerationalProgrammeTest = AntiEcho.hypothesis-test-boundary
+  AntiEcho.oneCommonProgramme
+  "An exact common programme, work package, product or named governing agreement spanning relevant participants"
+  "Distinct original objects with independently verified causes, custodians and timetables pressure this model"
+  "No single exact object connecting Aquino, Robert Maxwell and Epstein to SCL/CA is inspected"
+  "Obtain programme identifiers, original archived papers, licenses, binaries and role/date receipts"
+  "Test mistaken entity joins (Robert Maxwell/Robert Mercer), posthumous attribution and unbroken custody assumptions"
+
+caseOperationalDirectionTest : AntiEcho.HypothesisTestBoundary
+caseOperationalDirectionTest = AntiEcho.hypothesis-test-boundary
+  AntiEcho.coordinatedTargeting
+  "For this different case the proposed operation is common covert exploitation/tasking, NOT scientist targeting"
+  "Separate financial/contract paths, ordinary media production and contrary official findings"
+  "Authenticated sponsor, instruction, recipient, specific coercive act and outcome receipt all missing"
+  "Require independently sourced tasking, payment, artefact handling and recorded use on one common programme"
+  "Test falsifiable timelines against documented ordinary activity and contrary agency reviews"
+
+caseCompetingHypotheses : List AntiEcho.HypothesisTestBoundary
+caseCompetingHypotheses =
+  caseIndependentNetworksTest ∷ caseLocalSubclustersTest ∷
+  caseOneCrossGenerationalProgrammeTest ∷ caseOperationalDirectionTest ∷ []
+
+caseWholeH2Unpaid :
+  literalWholeProgrammeIdentifierPaid historicalCommonCommandCut ≡ false
+caseWholeH2Unpaid = refl
+
+caseCovertH3Unpaid :
+  operationalDirectionPaid historicalCommonCommandCut ≡ false
+caseCovertH3Unpaid = refl
+
 caseCounterEvidenceRequired :
   AntiEcho.counterSourceSearchRequired ≡ true
 caseCounterEvidenceRequired = refl
