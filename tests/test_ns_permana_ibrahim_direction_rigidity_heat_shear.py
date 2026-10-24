@@ -56,3 +56,25 @@ def test_no_universal_viscosity_only_curvature_constant():
         assert float(S.N(magnitude))>3.0
     assert ratios==sorted(ratios)
     assert ratios[-1]/ratios[0]>30
+
+def test_constant_high_vorticity_magnitude_everywhere_destroys_uniform_curvature_rate():
+    # Stronger than the localized-point example: the WHOLE TORUS
+    # is a high-vorticity region for any fixed threshold < A/e.
+    x,t,nu,A=S.symbols("x t nu A",positive=True,real=True)
+    for n in (2,3,5,12,40):
+        factor=A*S.exp(-nu*n*n*t)
+        u=S.Matrix((0,factor*S.sin(n*x)/n,
+                       factor*S.cos(n*x)/n))
+        omega=S.Matrix((0,-S.diff(u[2],x),S.diff(u[1],x)))
+        direction=S.Matrix((0,S.sin(n*x),S.cos(n*x)))
+        assert S.simplify(S.diff(u,t)-nu*S.diff(u,x,2))==S.zeros(3,1)
+        assert S.simplify(omega-factor*direction)==S.zeros(3,1)
+        assert S.simplify((omega.T*omega)[0]-factor**2)==0
+        assert S.simplify(
+            (S.diff(direction,x).T*S.diff(direction,x))[0]-n*n)==0
+        # t_n=1/(nu*n²)>0; vorticity magnitude A/e and |grad xi|=n
+        # at EVERY spatial point.
+        tN=1/(nu*n*n)
+        assert S.simplify(factor.subs(t,tN)-A*S.exp(-1))==0
+    n=S.symbols("n",positive=True)
+    assert S.limit(n/S.sqrt(A/S.E),n,S.oo)==S.oo
