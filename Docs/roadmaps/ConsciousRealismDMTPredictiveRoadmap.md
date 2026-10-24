@@ -1,5 +1,14 @@
 # Conscious realism × DMT — predictive research roadmap
 
+## 2026-10-25 source-root snowball and validated temporal admissions (latest decision)
+
+**Read first:** [source-root/Ibrahim/Pareto evidence frontier](../receipts/DMTSourceRootSnowballIbrahimPareto20261025.md) and [v2 implementation receipt](../receipts/DMTTemporalMotifEvaluatorMaxcut20261025.md). The rights-gated temporal motif evaluator is now v2 and the exact GitHub blob-identical code and tests passed **20/20 local synthetic checks**; it uses prescribed vocabulary, source-specific report groups, leave-one-independent-person-or-author-group-out evaluation, strict chronology and external digest-bound reviewer attestation. No Erowid corpus was accessed, no external rights were granted, no human data fitted and no Agda kernel check claimed. Mere reviewer receipt strings do not prove permission.
+
+**Highest leverage change from 2026-10-25 original-source snowball:** Niedernhuber et al., *Journal of Psychopharmacology*, 22 Sep 2026, DOI `10.1177/02698811261481062`, reports **n=25 randomized DMT/harmine vs harmine vs placebo EEG microstate transition** findings, with code and data locators advertised by the publisher (GitHub `marianiedernhuber/DMT_microstates`, Zenodo `10.5281/zenodo.18850896`; another Zenodo metadata record calls `18850897` a version DOI). These exact binary data and permissions have **not** been checked. This is a different observable fibre from Erowid narrative frequencies and represents an apparently higher-feasibility neural transition reproduction, *not* a test of external entity claims. Sanders et al. (2026) give n=23 interviews, n=21 complete phase matrices and explicitly tie imaging methods to Timmermann 2023, so independent participant replication cannot be assumed; phase matrices are request-only. Lewis-Healey et al. 2026 n=19 EEG+Temporal Experience Tracing offers another original time-resolved, request-only source; Sawicka et al. Sep 2026 vortex preprint is not yet cohort-independent verified. Update the Pareto front on time-grain, measured-object accessibility, source lineage and direct model discrimination, never nominal paper counts. Separate EEG microstates, retrospective phases, subjective TET traces and static Erowid sentences.
+
+**Immediate cut after this:** verify Zenodo record/version, data file hashes, licensing and source code commit; recreate an original EEG transition statistic with participant-level placebo/harmine controls; separately request Sanders phase matrices/codebook/crosswalk, and fit source-matched bounded M1a before any M2 predictive claim. Retain original PNAS static GFC exact replay as a different unresolved source-method obligation. Do not build more toy motif cycles.
+
+
 
 ## 2026-10-25 Hyperfabric source-compatibility max-cut: recurring themes → typed evidence
 
