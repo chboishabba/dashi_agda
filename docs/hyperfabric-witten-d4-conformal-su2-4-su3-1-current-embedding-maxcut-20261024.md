@@ -100,3 +100,69 @@ New Lean #84 `WittenSU2FourSU3OneD4EmbeddingCut.lean`: branch/D4 on actual `Fin5
 6. **Clay** — no analytic YM/NS/RH/Hodge/BSD/P≠NP source estimate or target is paid by finite Verlinde or branching arithmetic.
 
 **Phase gate:** W1/W2 FINITE SUCCESS, and constructive conformal C3 extension in original external literature; W3 source target/VOA/current mode transport open; W4 physical bulk/quantum/experiment open. No exact-head Agda/Lake typecheck available. Keep current PRs draft and attribute the 1989 embedding to original authors.
+
+
+## 2026-10-24 attached-worker horn topology / Witten C3 INTEGRATION (highest-value additional no-go)
+
+The canonical new #1249 integrated source report is
+`docs/hyperfabric-horn-witten-su3-regularity-charge-maxcut-20261024.md`. It preserves the independently authored,
+50/50-receipt-bearing PRs **horn #1244** and **neutrino/Wilson
+#1247** instead of vendoring or retroactively claiming their
+calculations; their original Hatcher/Gotô/Hosotani sources remain
+attributed. The independently tested sibling
+`W=TS1` has `||W-I||op≈1.43818847527`,
+nontrivial exact Q(zeta3) Wilson trace, and is
+**NONCENTRAL** (not one of 1, zeta3I, zeta3²I).
+Selected source toy Wilson interference is not horn-specific:
+ordinary S1 and free F2 are negative controls.
+
+**Decisive new selected scope**: the source Hatcher
+infinite binary commutator group is PERFECT, so every
+group homomorphism from the horn subgroup G to the
+SU3_1 pointed simple-object FUSION GROUP C3 is TRIVIAL.
+After adjoining the external semidirect C3 rotation,
+a C3 group charge could record ONLY that external
+rotation, not original horn meridians. Therefore
+the mathematically valid `SU2_4⊂SU3_1`
+`D4` fixed-point extension and its C3 fusion
+DO NOT directly solve the horn representation
+problem, despite genuine common SU3 notation.
+This is a group-homomorphism no-go only, not
+a categorical nonabelian defect/functor impossibility.
+
+**More consequential geometric gate**: from Hatcher
+`m_w=[m_w0,m_w1]` and elementary unitary
+`d([X,Y])≤2d(X)d(Y)`, fixed source
+root delta>0 forces `max_{|w|=n} d(U_w)
+≥ (2delta)^(1/2^n)/2→1/2`.
+If physically corresponding local loops are
+uniformly shrinking and the connection is
+uniformly bounded in compatible frames, then
+holonomies would converge to identity:
+**contradiction**. The actual geometric
+shrinking-length hypothesis for the intended
+three-copy wild exterior is STILL OPEN.
+At illustrative `ell_n=2^-n`, n12
+requires `M≥2048.528334`; this is
+conditional NOT measured or proven
+metric behaviour. The existing
+`FlatFormalDiskHolonomySurface` must own
+real analysis, holonomy-to-identity and
+Stokes proof consumers, not a new fake
+SU3 gauge field.
+
+New source regression
+`check_horn_witten_su3_holonomy_regularity_discriminator.py`
+checks exact selected trace noncentre,
+horn root gap/depth quantification, 9
+one-stage and 81 two-stage C3-commutator
+triviality cases and Wilson-character
+counterfactual. Lean #84
+`HornWittenRegularityAndChargeCut.lean`
+holds source-written generic commutator-to-
+abelian proof and envelope/centre math.
+NO completed physical/VOA/Horn/WZW
+intertwiner or kernel typecheck. **Priority
+H2 geometry shrinks vs nonsmooth escape
+now outranks more cyclic representation
+identities.**
