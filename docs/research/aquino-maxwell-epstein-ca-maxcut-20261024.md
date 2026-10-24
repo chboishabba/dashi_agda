@@ -2,6 +2,56 @@
 
 Date: 2026-10-24. Status: **source-bounded formal interface; not an historical proof**.
 
+## Primary investigation index: missing/deceased-scientist object-first programme
+
+**This section supersedes the earlier ITIR-first routing for this case.** ITIR/SensibLaw interface references are archived context, not current acceptance gates, implementation prerequisites, or a requested new UI. No ITIR, SLR or Dioxus work is scheduled in this cut.
+
+Read these actual prior owners before creating more investigation types:
+
+1. [MissingDeceasedCommonObjectProgrammeDiscriminatorExact](../../DASHI/Culture/MissingDeceasedCommonObjectProgrammeDiscriminatorExact.agda) — object-first H0/H1/H2/H3, alternative explanation debt, event and same-object joins. The *methodology* transfers, not the specific scientist case facts.
+2. [MissingDeceasedCommonProgrammePromotionParetoExact](../../DASHI/Culture/MissingDeceasedCommonProgrammePromotionParetoExact.agda) — documentary distance to H2 and separate operational H3 gate; candidates aren't proof.
+3. [MissingDeceasedTwentyScientistRound48AntiEchoChamberMethodologyExact](../../DASHI/Culture/MissingDeceasedTwentyScientistRound48AntiEchoChamberMethodologyExact.agda) — source-family roots, support/qualification/contradiction, claim-indexed counter-source search, source-coverage and anti-panopticon non-promotion.
+4. [EventTimeCapabilityAlignmentBidiExact](../../DASHI/Core/EventTimeCapabilityAlignmentBidiExact.agda) + [CapabilityFragilityConfoundersBidiExact](../../DASHI/Core/CapabilityFragilityConfoundersBidiExact.agda) + [MissingDeceasedCustodyEventTimeMatrixExact](../../DASHI/Culture/MissingDeceasedCustodyEventTimeMatrixExact.agda) — the literal operating capability, custody and event-time access cannot be inherited from a former role or corporate association.
+5. [MissingDeceasedPrimaryObjectAcquisitionExact](../../DASHI/Culture/MissingDeceasedPrimaryObjectAcquisitionExact.agda) — primary locator, original bytes in custody, documentary inspection, same object and operational receipts are distinct; apply its stages via existing general SourceAcquisitionGeometry before claiming completeness.
+6. [MissingDeceasedUAPAdversarialClaimDiscriminatorExact](../../DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda) — competing operational prediction, ordinary/control prediction and first missing causal bridge; source-specific UFO claims are not imported or validated.
+
+**Formal implementation:** the existing `DASHI/Cognition/AquinoMaxwellEpsteinCAMaxCutExact.agda` now directly imports (1), (2), (3), event-time, fragility, custody, and the pre-existing `TrumpMarALagoBannonBridgeExact`. It replaces its prior local ITIR candidate-scheduling interface with the original programme-promotion search candidate, including source-caveated Bannon film, Aquino/SCL and Maxwell/PROMIS routes. Woogaroo's proven dependency/independence method remains a supporting reference; Woogaroo land/ecological facts do not transfer.
+
+### H0–H3: exact scope is mandatory
+
+| Hypothesis level | The question *for this case* | Existing evidence and open payment |
+|---|---|---|
+| **H0: independent occurrences** | Do repeated surveillance/influence/financial practices arise in institutions without one common programme? | Live competing explanation, not disproven by resemblance, proximity or association |
+| **H1: bounded related networks** | Can named parties be linked by dated interpersonal, organisational or media relationships? | Yes for certain local edges (e.g. Bannon–Epstein media contact; SCL–CA corporate history); does **not** pay a cross-generational command |
+| **H2: literal shared work object** | Can a specific historical instruction, company contract, executable, custody/production file, programme identifier or task be shown to be *the same object* used across the actors whose coordination is alleged? | **Some local pair-level collaborations exist**, but no inspected literal **whole-network** intelligence programme/object bridges Aquino, Robert Maxwell and Epstein through to CA/Bannon |
+| **H3: directed covert operation** | Does independently attributable tasking, command, payments, custody and use tie an H2 object to the *specific alleged* intelligence exploitation/blackmail operation? | Not established by the current source set; an intelligence agency being capable of PsyOps is not the required tasking receipt |
+
+**Critical scope qualification:** the scientist investigation's H3 is *coordinated targeting of scientists*. Here H3 is *claimed common covert direction*, which must be independently defined and tested. Borrowing the discriminator **does not import the original targets, crimes, hypothesised motives, or outcomes**. A direct Bannon–Epstein film collaboration, even if primary-file linked, does not make the separate Aquino/Maxwell decades-long claim H2 or H3.
+
+### Five operational consumers (object-first, not guilt-first)
+
+| Consumer | Known bounded carrier | Required next evidence | Ordinary/adversarial control |
+|---|---|---|---|
+| CA entity identity / IP transfer | Wylie FKN0079 + independently sourced FTC deceptive-collection finding | Exact 2014 corporate identifiers, executed SCL/CA contract, licensed work product and event-time personnel | Ordinary corporate licensing/succession; 2013/2014 formation discrepancies can reflect *different entities or legal acts* |
+| Bannon/Epstein media object | #1131 media relationship receipt, 2018–19 correspondence as attributed | Original Bates message paired with actual film footage/edit/production/payment with same identity/time/custody | Ordinary reputation-management film production; no automatic use of CA datasets or intelligence direction |
+| Robert Maxwell / PROMIS | House investigation and disputed Bua review describe contested propositions | Software version/build, exact installation, contract/payment, chain of custody and independent backdoor analysis | Distinguish vendor dispute, story transmission, and genuinely compromised code |
+| Aquino / SCL | Real 1980 *MindWar* proposal; separate 2010s SCL operations | Contemporaneous explicit operational/manual/personnel/software handoff joining specific objects across decades | Independent techniques, broad military/advertising influence traditions, ordinary convergent practices |
+| Proposed unified network | Heterogeneous relationship graph, no common authority paid | Same historical programme object followed by source-specific sponsor/tasking/actions and actual leverage | Different independent institutional networks; historical continuity through intermediaries unproved |
+
+### Anti-echo-chamber execution and falsification protocol
+
+For **each** proposition, record original source root, source type, source date versus event date, full artifact access and page/span, whether the statement is a witness claim versus an independently established fact, and a real contrary-source search/coverage report. Index claims, not lists of potentially implicated private individuals. A disputed agency finding remains attributed to the agency; court procedure remains procedural; H0 remains live when a stronger hypothesis lacks its required object. Lack of a search hit is **not** evidence of a cover-up.
+
+**Next empirical max-cut:** (i) actual Bannon film original records joined to dated message IDs; (ii) corporate-entity and exact SCL–CA work-product lineage with a competing mundane transfer explanation; (iii) Maxwell/PROMIS original code/contract procurement; (iv) Aquino→SCL explicit document transfer. Stop broadening the roster until at least one source-specific same-object join is paid.
+
+### Updated completion gates
+
+- **G0 prior-art lookup:** completed for named owners, exact repository paths recovered.
+- **G1 typed case adapter:** source-written, new missing-scientist imports and source-scope H1/H2/H3 non-promotion. Needs actual Agda kernel checks.
+- **G2 independent original-file cards:** Wylie testimony, FTC decision, then the *full and page-resolved* 2014 counsel memorandum/FEC corporate records, original Bannon film documents and original disputed PROMIS technical records. Unread PDFs stay `uninspected`.
+- **G3 adversarial model comparison:** independent / linked local subclusters / one exact common programme / actually directed operation; include counterevidence, event-time custody and corporate-transition alternatives.
+- **G4 evidence-labelled dossier:** source-root/dependency graph and explicit hypothesis disposition per proposed link; any optional UI is downstream, not a gate here.
+
 ## Canonical prior art (DO NOT fork its ontologies)
 
 This is a **stacked delta on [Epstein/psychedelics PR #1131](https://github.com/chboishabba/dashi_agda/pull/1131)**, whose head at branch creation was `e99d0be8fd68aa248100a2e44ef2377b1bd4e7f4`. That branch has established:
@@ -82,12 +132,12 @@ This is a **research verification programme**, not a single theorem that proves 
 
 - **M1, verified technical slice:** exact-head local Agda + pytest receipts and stable stacked diff.
 - **M2, traceable evidence slice:** claim-indexed primary-source cards for SCL/CA and Bannon/Epstein with dates, contradictory records, provenance roots and exportable edges.
-- **M3, adversarial finding:** typed and documented conclusion on H1/H2/H3 per tested chain; report missing links even if no theory is confirmed.
-- **M4, publication:** source-linked dossier and network visualization whose edge styles encode *kind of evidence*, not merely strength of suspicion.
+- **M3, adversarial finding:** typed and documented conclusion on H0/H1/H2/H3 per tested chain; report missing links even if no theory is confirmed.
+- **M4, publication:** source-linked dossier with provenance/identity/hypothesis dispositions; any visualization is optional and downstream.
 
 Do not label a phase complete just because files or PRs exist. Use the strongest actual receipt for each stage and carry outstanding tasks forward unchanged.
 
-## Woogaroo / ITIR investigation machinery integration (2026-10-24)
+## Supporting Woogaroo provenance discipline (not primary investigation index)
 
 ### Recovered prior art and what transfers (not case facts)
 
@@ -97,12 +147,10 @@ Do not label a phase complete just because files or PRs exist. Use the strongest
 | [Evidence provenance DAG](../../DASHI/Law/EvidenceProvenanceDependencyDagExact.agda) | Derivation from common ultimate producer; BIDI consumer for independent corroboration requires original producer receipt. | Parliamentary testimony plus ten articles quoting it are not 11 independent observations. Trace statement -> first person/record -> quote -> report. |
 | [Provenance closure](../../DASHI/Core/ProvenanceClosureIndependenceExact.agda) | Root-independent only relative to the *declared transitive dependency graph*. | Multiple source modalities do not establish independence if their reporting roots converge. Unknown upstream lineage stays unknown. |
 | [Source acquisition geometry](../../DASHI/Core/SourceAcquisitionGeometryExact.agda) | Citation -> route -> full text -> inspection -> transcription are distinct. | A DOI, government portal link or case locator is not sufficient evidence that an alleged contract, film, or executable was read or acquired. |
-| [ITIR investigation Pareto](../../DASHI/Core/ITIRInvestigationAcquisitionParetoExact.agda) | Five **mixed-direction** axes: information, dependency closure, coverage, provenance novelty (max), lawful cost (min). Candidate has no truth/authority. | Routes for original SCL/CA documents and Bannon film work product are *calibrated proposals*, never case findings or guilt rankings. |
-| [ITIR workbench projection](../../DASHI/Core/ITIRInvestigationWorkbenchProjectionExact.agda) | Query-, matter-, viewer-scoped projection; showing/selecting/frontier sorting creates neither access nor evidence. | Existing Dioxus/wgpu/SLR visualisation may render the case; never use graph proximity, line thickness, node size, filter, click or color to confer culpability. |
 | [Multipart same-object reconstruction](../../DASHI/Core/MultipartSameObjectReconstructionExact.agda) | Complete parts, admissibility, compatibility, and identity receipt required separately. | A reported PROMIS backdoor needs **the specific build, installation, contract, custody, and forensic artefact**; name matching and an alleged capability do not prove one deployed system. |
 | [Woogaroo preservation attribution rule](../../Docs/WoogarooPreservationSourceAttribution.md) | Statutory authority + legal test + same-land evidence + application receipt + actual decision/outcome are distinct. | Court/FTC/regulatory **finding about one claim** cannot adjudicate a separate alleged intelligence purpose or broader conspiracy. |
 
-**Implementation:** These generic owners are now imported in the existing `DASHI/Cognition/AquinoMaxwellEpsteinCAMaxCutExact.agda`, with a **constructive declared-shared-root nonindependence countermodel** using `AffectedDependencyClosureExact` and `ProvenanceClosureIndependenceExact`, plus actual BIDI case evidence-dependency cuts for CA operating mechanism, Bannon film work product, Maxwell/PROMIS original executable, Aquino–SCL historical transfer and unified-command theory. Woogaroo's *case-specific* ecology facts are **not** imported into an Epstein case. No new core ontology, RNNN family or copy of the provenance DAG has been created.
+**Implementation:** The remaining generic provenance/acquisition owners are now imported in the existing `DASHI/Cognition/AquinoMaxwellEpsteinCAMaxCutExact.agda`, with a **constructive declared-shared-root nonindependence countermodel** using `AffectedDependencyClosureExact` and `ProvenanceClosureIndependenceExact`, plus actual BIDI case evidence-dependency cuts for CA operating mechanism, Bannon film work product, Maxwell/PROMIS original executable, Aquino–SCL historical transfer and unified-command theory. Woogaroo's *case-specific* ecology facts are **not** imported into an Epstein case. No new core ontology, RNNN family or copy of the provenance DAG has been created.
 
 ### Source card A — SCL / Cambridge Analytica
 
@@ -128,21 +176,9 @@ Do not label a phase complete just because files or PRs exist. Use the strongest
 | Aquino–SCL | 1980 discussion proposal and unrelated institutional history | Dated explicit same-technique citation/personnel handoff | Project Stargate = MindWar; ideology = operational transfer |
 | Common intelligence command | Network edges and explanatory theories, with contrary DOJ/FBI review position | Specific sponsor + tasking + payment + target/artefact chain | One unified multigenerational controller |
 
-### Existing ITIR / SensibLaw / Dioxus destination contracts
+### Deferred presentation / ITIR references
 
-This *already* has a product-level owner outside this repository:
-- [ITIR-suite user stories](https://github.com/chboishabba/ITIR-suite/blob/main/docs/user_stories.md), particularly **ITIR-US-08 Public Media Narrative Validation** (URL/transcript + source provenance + typed claims + counterevidence + abstentions), **ITIR-US-01/02** (creation-time context and what was knowable then), **SL-US-04** (claim type enforcement), and **SL-US-08** (competing narrative comparison). The E.B. Johnson Cargill/Owsley reel is a suitable intake **candidate**, not yet an ingested canonical transcript in this cut; a screenshot is not a complete source version.
-- [ITIR-suite evidence attribution frames](https://github.com/chboishabba/ITIR-suite/blob/main/docs/planning/evidence_attribution_frame_contract_v2_20260212.md): `PROPOSITION`, `ASSERTION`, `EVIDENCE`, `REASONING`; edge kinds `ATTRIBUTED_TO`, `SUPPORTS`, `CITES_SAME_RECORD`, `EVALUATES`, each with explicit basis. Reuse these frames rather than reify a suspicion graph.
-- [Canonical text/span evidence](https://github.com/chboishabba/ITIR-suite/blob/main/docs/planning/canonical_text_span_evidence_contract_20260407.md): `document_id`, `text_revision_id`, `chunk_id`, deterministic start/end offsets and source artefact pointer. Reference a canonical revision/span, not a fragment with no reconstruction path.
-- [Investigation graph taxonomy](https://github.com/chboishabba/ITIR-suite/blob/main/docs/planning/bush_investigation_graphs_sl_io_context_20260210.md): SensibLaw ingests law/rulings as authority but treats testimony as attributed assertions. ITIR event, provenance and narrative graphs are distinct; normative edges never turn a witness's claim into an adjudicated fact.
-- [ITIR MCP/Dioxus contract](https://github.com/chboishabba/ITIR-suite/blob/main/docs/planning/itir_mcp_dioxus_contract_20260326.md): transport via backend/native gateway, with web/WASM limitations; UI consumes read-safe tools and cannot mutate semantic authority. Legacy documentation mentioning Svelte is not the target renderer.
-- [SensibLaw identity-evidence acceptance](https://github.com/chboishabba/SensibLaw/blob/main/docs/architecture/IDENTITY_EVIDENCE_YIELD_ACCEPTANCE.md): admitted entity-identity proofs and their actual factor-bearing utilisation have separate counts. Merely finding `Maxwell` in text does not establish Robert Maxwell, Robert Mercer, or a causal link.
-
-**Cross-repo implementation state:** these existing contracts were inspected, but no code is written to ITIR-suite, SensibLaw, slr or itir-dioxus in this PR. Before requesting a new UI feature, run an end-to-end source-item fixture through the real ITIR MCP/SLR/SensibLaw ingestion and read-model seam. Test the unsupported identity and independence cases as negative examples. If a public media transcript is absent, the workflow must return `unacquired`, not a generated transcript or unsupported verdict.
-
-### Presentation acceptance (SLR / Dioxus)
-
-Render **query-indexed** evidence graph views if needed, not a standalone suspicion graph. For each edge display exact document ID, originating author/root, event versus document time, supported proposition, actual use/disposition, explicit contrary source, unresolved same-object and consumer tests. A missing/hidden/blocked route is not disproven, unavailable access never grants authority, and source-lookup/presentation never asserts culpability. The visual should be an optional projection of existing ITIR/SensibLaw matter state, not a second record of truth.
+The former ITIR/SensibLaw/Dioxus integration notes are intentionally **not active**. They remain discoverable in prior commits and cross-repository documentation, but no new ingestion, renderer, widget, dashboard, or SLR task is authorized by this research cut. The case is evaluated through the missing-scientist object-first evidence and adversarial-hypothesis model above.
 
 ### Next acceptance commands
 
@@ -156,10 +192,6 @@ The repo's normative `Docs/AgentOperationalNotes.md` prescribes the Agda wrapper
 
 ## Acceptance / status
 
-```sh
-pytest -q tests/test_aquino_maxwell_epstein_ca_maxcut.py
-agda -i . DASHI/Cognition/AquinoMaxwellEpsteinCAMaxCutExact.agda
-agda -i . DASHI/Cognition/Everything.agda
-```
+Use the maintained `scripts/run_agda29_parallel_check.sh` wrapper for draft feedback, followed by pinned Track A for promotion. Preserve exact commit SHA and raw command output. The tests below do not substitute for historical source inspection.
 
 Source-written plus static review **is not** an Agda kernel receipt. A connected GitHub write alone is **not** a local pytest receipt. Run exact-head commands in an Agda-equipped checkout to upgrade this status. Existing PR #1131 remains the source owner for the large Epstein/CA corpus; this stacked branch supplies only the attribution reconciliation and acquisition frontier.
