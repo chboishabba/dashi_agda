@@ -258,3 +258,76 @@ Per user preference no Agda typechecking or CI attempted.
 Do not mislabel all-stage algebraic arguments as
 Agda kernel proofs or compare unrelated 'E_n'/Monster
 objects by matching 3, 12, 27, 120 or 360 numbers.
+
+
+## 2026-10-25 source-supported inward cap + literal separator sphere breakthrough
+
+**Primary-source progress:** Franca Lippert, *The Alexander Horned
+Sphere and Bing's Hooked Rug*, §2.1–§2.2 (Figure 2, pp. 2–4),
+https://www.maths.gla.ac.uk/~mpowell/WriteUp_Franca.pdf,
+describes horn-stage homeomorphisms becoming the identity
+away from shrinking attachment support; the wild sphere is
+locally flat off its Cantor ends. Hatcher, *Algebraic Topology*,
+Example 2B.2, pp. 170–172 gives the genuine individual
+exterior meridian/commutator van Kampen group.
+
+Consequently we can choose a classical supported Alexander
+construction that leaves an initial round B0 inward cap
+unchanged. New
+`scripts/alexander_horned_supported_stable_cap_certificate.py`
+checks explicit coordinates for B0 radius 3/4 in a unit
+reference satellite:
+  Phi(u,v,s)=(-sqrt((3/4)^2-u²-v²)+s,u,v),
+  u²+v²<=1/16, |s|<=1/8.
+It is a genuine local TWO-SIDED collar with an inverse
+chart, not a symbolic `ClopenWitness` label.
+The corrected spoke endpoint t=8.5 with disk radius
+1/4 has squared satellite-centred norm 5/16<9/16,
+so overlaps the ACTUAL cap-preserved wild B0, not
+merely the outer reference unit container.
+The local exact script passed 797 rational chart tests.
+The source-supported infinite horn attachments still
+have to be instantiated to declare an executable
+infinite-coordinate embedding.
+
+A much sharper geometric van Kampen separator is now
+available: three literal disjoint spheres
+  S_i={|x-9e_i|=4}.
+Their *only* contact with the constructed solid is the
+respective straight spoke, and on each sphere the
+intersection is the single transverse disk GRAPH
+  t=9-sqrt(16-u²-v²),   u²+v²<=1/16.
+Its near axial range is 5<=t<8.5. The far root
+is outside the tube; all other reference balls/tubes
+lie beyond the sphere. Radius-1/4 collars around the
+three S_i are disjoint. New
+`scripts/alexander_horned_three_sector_separator_spheres.py`
+and an independent exact-Fraction local equivalent
+passed 197 rational cross-sectional checks; all-radius
+claims follow from exact monotone square-root bounds.
+
+Thus `S_i∩E=S²\closed(D²)`, an OPEN DISK, so the
+exterior open-cover overlap is simply connected.
+This is the proper geometric van Kampen cut; a PLANE
+minus disk would instead have pi1=Z and must not
+be used as though it were simply connected.
+
+New comprehensive source-attributed proof note:
+`Docs/topology/AlexanderHornedSupportedCapSeparatorVanKampen20261025.md`.
+It spells out how a threefold collared boundary
+connected sum can yield B3 and, using the standard
+unknotted-tree-neighbourhood/side-cap equivalences,
+`pi1(E)=G_A*G_A*G_A` with outer C3.
+This is a **paper-level source-supported geometric
+proof scheme** with exact local geometry; the native
+infinite horn support map and all ambient deformation
+retractions are NOT machine-proved or explicitly
+coordinate-constructed in the repo.
+
+This discharges the earlier vague *existence of a tame
+cap as an unexplained input* by pointing to and using the
+actual supported original horn construction. The
+remaining max-cut is no longer 'find separating spheres',
+but instantiate its *supported infinite attachment*
+and the complement-piece homeomorphisms as concrete
+same-object maps. No Agda/CI work per user request.
