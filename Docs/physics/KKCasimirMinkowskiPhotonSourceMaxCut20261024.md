@@ -60,7 +60,7 @@ Hence the stationary-Minkowski root is UNIQUE for this free-field coefficient ch
 
 `z0=1.69752171111651, ell=1.14266825367, U''(1)=23.619407163`.
 
-The positive renormalised Lambda5 **must be tuned** against the loop vacuum energy; zero cosmological constant is NOT automatic or technically natural. The vacuum is a local finite-radius minimum, not a proof of global cosmological stability or ultraviolet completion. All calculations are one-loop, expanded about a flat background. Einstein-graviton fluctuations and gauge/matter corrections change the spectrum/counterterms; a separate illustrative counting with graviton -5 and THREE massive Dirac fermions gives a new local minimum at `z0=1.6975217111`, but it is NOT the same 5D action as the primary candidate.
+The positive renormalised Lambda5 **must be tuned** against the loop vacuum energy; zero cosmological constant is NOT automatic or technically natural. The vacuum is a local finite-radius minimum, not a proof of global cosmological stability or ultraviolet completion. The preferred spectrum includes the **free** 5D graviton contribution at one-loop order. Gravitational and charged-matter *interaction* corrections, counterterm/renormalisation assumptions, charged-spectrum contributions and Wilson-line fluctuations can shift this calculation and are not verified here. A two-Dirac matter-only truncation is shown solely as a separate diagnostic, not the full primary action.
 
 ## Positive radion mass and source
 
@@ -80,7 +80,7 @@ At `b0=1e-24m` the primary model gives `lambda_rad=4.3734922e-13m`, a scalar-to-
 
 ## Two-consumer BIDI verdict
 
-| Consumer | Primary two-Dirac + neutral scalar + Maxwell candidate |
+| Consumer | Primary gravity + Maxwell + scalar + three-Dirac candidate |
 |---|---|
 | Finite compact circle and stable stationary Minkowski vacuum at one loop | PASS under renormalized EFT assumptions and cosmological tuning |
 | Positive radion curvature / mass | PASS at computed minimum |
