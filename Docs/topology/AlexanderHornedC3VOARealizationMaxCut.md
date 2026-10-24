@@ -298,3 +298,35 @@ from an associative commutative algebra. It does NOT
 identify that algebra with the exceptional 27-dimensional
 Albert algebra, the full weight-two Griess algebra, a
 Monster 3B eigenspace or the physical horned exterior.
+
+
+## General finite-automorphism no-go: why V-natural cannot be faithful
+
+Frenkel–Lepowsky–Meurman establish
+`Aut_VOA(V-natural) = Monster`, a finite simple group.
+See *Vertex Operator Algebras and the Monster* (1988),
+and Scott Carnahan, *Why do the symmetries of the monster vertex
+algebra form a finite simple group?*, arXiv:2206.15391.
+
+The group `G` above contains an infinite cyclic subgroup generated
+by a Hatcher meridian `m`, since `m` lies in a free group at
+finite stage and the connecting maps are injective. Therefore
+for **every** homomorphism `rho:G -> Aut(V-natural)`, its finite
+image contains `rho(m)` of some finite order `d>=1`. Hence
+
+    rho(m^d) = 1,      m^d != 1 in G.
+
+So **NO faithful full-horned-group action exists on V-natural**,
+irrespective of how clever the selected 3B/normalizer mapping is.
+A nontrivial and structurally meaningful quotient action is still
+possible in principle, but requires an actual Monster-targeted
+homomorphism and VOA state-action intertwiner. The finite-c=0
+construction above intentionally provides such a quotient
+representation on a DIFFERENT, explicit VOA.
+
+This no-go is a classical group-cardinality inference, not a
+Monster embedding obstruction for a particular finite quotient:
+we have NOT checked whether the proposed A5³ ⋊ C3 embeds in Monster
+or realizes a selected 3B normalizer. It also does not rule out
+faithful actions on a VOA with an infinite automorphism group,
+where separate structural conditions apply.
