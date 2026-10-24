@@ -2214,3 +2214,68 @@ regulatoryAggregateFindingDoesNotProvideOriginalRowHash = refl
 aggregateProvenanceIsNotSpecificConsumerDataIdentity :
   originatingSpecificModelOutputMappedToRiponImport canonicalTwoArmCanadianPromotionCut ≡ false
 aggregateProvenanceIsNotSpecificConsumerDataIdentity = refl
+
+
+------------------------------------------------------------------------
+-- ORIGINAL CANADIAN §4.5 SECURITY REMEDIATION SCOPE CORRECTION
+-- At Nov 26 2019 publication the regulators already had an AIQ sworn
+-- deletion affidavit and regarded the *security safeguards issue* as
+-- resolved. Their broader consent/remediation programme was described
+-- as conditionally resolved, with later follow-up planned. The exposed
+-- GitLab repository could expose keys to 35m-person databases; the
+-- researcher reported NOT downloading those external databases.
+------------------------------------------------------------------------
+
+canonicalCanadianAIQCAInfluenceOwner : CA.InfluenceReceipt
+canonicalCanadianAIQCAInfluenceOwner = CA.canadianJointRegulatorAIQReceipt
+
+canadianRegulatorFindingAlsoInCanonicalCAOwner :
+  CA.relationPaid canonicalCanadianAIQCAInfluenceOwner ≡ true
+canadianRegulatorFindingAlsoInCanonicalCAOwner = refl
+
+canadianSpecificTechniqueTransferNotPaidByRegulator :
+  CA.techniqueTransferPaid canonicalCanadianAIQCAInfluenceOwner ≡ false
+canadianSpecificTechniqueTransferNotPaidByRegulator = refl
+
+record Canadian2019RemediationEvidenceCut : Set where
+  constructor canadian-2019-remediation-evidence-cut
+  field
+    regulatorsFoundGitLabExposedAccessKeys : Bool
+    reportedExternalDatabasesHeldAbout35mPersons : Bool
+    reportSaysResearcherDeniedDownloadingThoseExternalDatabases : Bool
+    securitySafeguardsIssueDeclaredResolvedIn2019Report : Bool
+    sourceReportsAIQSuppliedSwornDeletionAffidavit : Bool
+    swornAffidavitIndependentlyVerifiesEveryPossibleDataCopyErased : Bool
+    entireConsentAndRemediationInvestigationUnconditionallyClosed : Bool
+    postSixMonthImplementationFollowupIndependentlyInspected : Bool
+    everyOneOf35mPeopleProvedToBeKoganDerivedScore : Bool
+open Canadian2019RemediationEvidenceCut public
+
+canonicalCanadian2019RemediationEvidenceCut : Canadian2019RemediationEvidenceCut
+canonicalCanadian2019RemediationEvidenceCut = canadian-2019-remediation-evidence-cut
+  true true true true true false false false false
+
+canadian2019SecurityIssueAlreadyReportedResolved :
+  securitySafeguardsIssueDeclaredResolvedIn2019Report
+    canonicalCanadian2019RemediationEvidenceCut ≡ true
+canadian2019SecurityIssueAlreadyReportedResolved = refl
+
+canadian2019SwornAffidavitActuallyReported :
+  sourceReportsAIQSuppliedSwornDeletionAffidavit
+    canonicalCanadian2019RemediationEvidenceCut ≡ true
+canadian2019SwornAffidavitActuallyReported = refl
+
+canadianAffidavitIsNotGlobalCopyErasureCertification :
+  swornAffidavitIndependentlyVerifiesEveryPossibleDataCopyErased
+    canonicalCanadian2019RemediationEvidenceCut ≡ false
+canadianAffidavitIsNotGlobalCopyErasureCertification = refl
+
+canadianSecurityResolutionIsNotEntireInvestigationClosure :
+  entireConsentAndRemediationInvestigationUnconditionallyClosed
+    canonicalCanadian2019RemediationEvidenceCut ≡ false
+canadianSecurityResolutionIsNotEntireInvestigationClosure = refl
+
+canadian35mDatabaseVulnerabilityNot35mKoganRecords :
+  everyOneOf35mPeopleProvedToBeKoganDerivedScore
+    canonicalCanadian2019RemediationEvidenceCut ≡ false
+canadian35mDatabaseVulnerabilityNot35mKoganRecords = refl
