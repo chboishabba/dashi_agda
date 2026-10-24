@@ -188,11 +188,9 @@ copThreePointFiveExact = refl
 
 -- Positive electric drive invalidates the naive idea that delivered HP heat
 -- is the same quantity as the captured waste-heat stream.
-data HeatPumpDeliveredEqualsWasteStream : Set where
-
-noPromotionFromHeatPumpOutputToRecoveredWaste :
-  HeatPumpDeliveredEqualsWasteStream → ⊥
-noPromotionFromHeatPumpOutputToRecoveredWaste ()
+heatPumpDeliveryNotIdenticalToCapturedSource :
+  hpOutputKilowatt ≡ hpEvaporatorKilowatt → ⊥
+heatPumpDeliveryNotIdenticalToCapturedSource ()
 
 -- No model of carbon savings, a real Queensland facility, noise reduction,
 -- thermal storage dispatch, or legal compliance is proven by this witness.
