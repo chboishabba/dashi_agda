@@ -169,6 +169,16 @@ def validate_research_contract(world, dossier, cards):
         raise ValueError("Erowid report/corpus or transition kernel falsely promoted")
     if "reported_dataset" not in motif["original_published_research"]:
         raise ValueError("Erowid published summary missing")
+    motif_hyperfabric_path = "Docs/receipts/DMTMotifObservationHyperfabric20261025.json"
+    if cards.get("motif_observation_hyperfabric") != motif_hyperfabric_path:
+        raise ValueError("Hyperfabric source-measurement and rights boundaries disconnected")
+    motif_spec = importlib.util.spec_from_file_location(
+        "dmt_motif_hyperfabric",
+        ROOT / "scripts/audit_dmt_motif_hyperfabric.py")
+    motif_module = importlib.util.module_from_spec(motif_spec)
+    motif_spec.loader.exec_module(motif_module)
+    hyperfabric = json.loads((ROOT / motif_hyperfabric_path).read_text(encoding="utf8"))
+    motif_module.validate(hyperfabric, world, motif)
     external = cards["independent_consumers"]
     if _ids(external, label="external experimental consumer") != {"M3", "M4"}:
         raise ValueError("Information channel and ontology consumers conflated")
@@ -226,6 +236,12 @@ def summary(world, dossier, cards):
         "highest_value_unconditional_gap": "exact finite observation non-identifiability and mechanics-specific M1a versus M2 discriminator",
         "active_inference_source_status": "conceptual published theory; new-data or formal-executable validation not claimed",
         "independent_unapproved_consumers": [x["id"] for x in cards["independent_consumers"]],
+        "cross_source_motif_hyperfabric": "source-attested aggregate and toy non-identification only; no report chronology or participant-linked neural/agency effect",
+        "motif_hyperfabric_admitted": [
+            "e_published_motif_summary",
+            "e_synthetic_recurrence_counterexample",
+            "e_published_cross_study_description",
+        ],
         "data_fetched": False, "original_fmri_result_reproduced": False,
         "data_use_permission_granted": False, "pre_registration_completed": False,
         "source_specific_tests_are_not_scientific_results": True,
