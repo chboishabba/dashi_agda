@@ -21,7 +21,7 @@
 ## Actual next work and exit criteria
 
 **P0 — certification and consistency (must precede merge).**
-1. Freeze new source enumeration. Inspect the 17-file PR diff against its parent and fix **real** inaccurate source claims, stale frontiers or invalid Agda definitions; no new generic source ontology.
+1. Freeze new source enumeration. Inspect the full changed-file PR diff against its parent and fix **real** inaccurate source claims, stale frontiers or invalid Agda definitions; no new generic source ontology.
 2. On a checkout with tools, run `pytest -q tests/test_aquino_maxwell_epstein_ca_maxcut.py tests/test_hash_media_receipt.py`, and the repository's Agda semantic preflight/typecheck for the affected `DASHI/Cognition/Everything.agda` closure. The source-assertion tests alone are not a compiler or epistemic check.
 3. Record exact command, tool versions, pass/fail diagnostics and parent/head SHA. Only kernel-checked terms are proof-certified. Any unresolved Agda error keeps PR draft.
 4. Review the parent #1131 for existing owners and target compatibility; do not merge child into an unreviewed target. GitHub's `mergeable` flag alone is **not** acceptance.
@@ -52,4 +52,4 @@
 - FTC 2019 CA opinion: https://www.ftc.gov/system/files/documents/cases/d09389_comm_final_opinionpublic.pdf
 - FTC 2019 final order: https://search.ftc.gov/system/files/documents/cases/d09389_comm_final_orderpublic.pdf
 - UK DCMS AIQ/Ripon: https://publications.parliament.uk/pa/cm201719/cmselect/cmcumeds/1791/179107.htm
-- Original original-Black/financial analyses and distinct legal dockets: see existing `docs/research/aquino-epstein-surrounding-prior-art-audit-20261024.md`.
+- Original Black/financial analyses and distinct legal dockets: see existing `docs/research/aquino-epstein-surrounding-prior-art-audit-20261024.md`.
