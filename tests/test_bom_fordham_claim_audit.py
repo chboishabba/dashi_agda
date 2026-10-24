@@ -169,3 +169,23 @@ def test_recent_friendlyjordies_independent_abc_findings():
         assert token in body
     assert "editorialFailureNotCriminalThreat" in checks
     assert "screenshotProvenanceRequired" in checks
+
+
+def test_arn_presenter_contractors_are_historical_equity_not_ksl_investors():
+    body = POLITICAL_OWNER.read_text()
+    vals = POLITICAL_VALIDATION.read_text()
+    research = RESEARCH.read_text()
+    for token in (
+        "quasarARNHistoricalEquity",
+        "hendersonARNHistoricalEquity",
+        "quasarKyleService",
+        "southernCrossARNIndirect",
+        "stokesSouthernCrossStake",
+        "3,161,166",
+        "historicEquityHolding",
+    ):
+        assert token in body or token in research
+    assert "newShowOperatorIsNotOwnership" in vals
+    assert "proposedBuyoutIsNotCompleted" in vals
+    assert "quasarServiceIsNotNewShowEquity" in vals
+    assert "ACMA says News Corp Australia" in research
