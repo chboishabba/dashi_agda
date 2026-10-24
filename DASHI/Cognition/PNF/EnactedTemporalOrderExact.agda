@@ -13,6 +13,7 @@ module DASHI.Cognition.PNF.EnactedTemporalOrderExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥)
 import DASHI.Core.IntersectionalNonFactorability as NF
 
@@ -131,3 +132,41 @@ allPremisesSufficeWithinTheStipulation :
   stipulatedAdmission
     (admission true true true true true true true laterUnavailable) ≡ true
 allPremisesSufficeWithinTheStipulation = refl
+
+
+-- Rodgers Section 5.2: the original source-to-receiver model uses C at 0ms
+-- with 80ms delay and E at 50ms with 10ms delay. Hence C occurs first but
+-- E arrives first. We formalise the exact finite arithmetic without granting
+-- a receiver an oracle for the actual source time. A physical consumer must
+-- separately establish calibration and permissible local information.
+
+_earlier?_ : Nat → Nat → Bool
+zero earlier? zero = false
+zero earlier? suc n = true
+suc m earlier? zero = false
+suc m earlier? suc n = m earlier? n
+
+sourceC : Nat
+sourceC = 0
+sourceE : Nat
+sourceE = 50
+channelDelayC : Nat
+channelDelayC = 80
+channelDelayE : Nat
+channelDelayE = 10
+receivedC : Nat
+receivedC = sourceC + channelDelayC
+receivedE : Nat
+receivedE = sourceE + channelDelayE
+
+sourceCE : (sourceC earlier? sourceE) ≡ true
+sourceCE = refl
+
+receptionEC : (receivedE earlier? receivedC) ≡ true
+receptionEC = refl
+
+calibratedSourceTimestampsMatchArrivals :
+  (sourceC + channelDelayC ≡ receivedC) →
+  (sourceE + channelDelayE ≡ receivedE) →
+  (sourceC earlier? sourceE) ≡ true
+calibratedSourceTimestampsMatchArrivals _ _ = sourceCE
