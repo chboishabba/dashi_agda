@@ -181,5 +181,5 @@ canonicalThreeSubjectBoundary =
 -- Reuse, not identification: the finite radix/ratio lemma is already owned
 -- by the foundation module and imported explicitly.
 sameHalfAcrossRadices :
-  Radix.baseTenHalf Radix.≈ Radix.baseTwelveHalf
+  Radix._≈_ Radix.baseTenHalf Radix.baseTwelveHalf
 sameHalfAcrossRadices = Radix.sameHalfAcrossRadices
