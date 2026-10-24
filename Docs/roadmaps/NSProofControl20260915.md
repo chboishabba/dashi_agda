@@ -1,3 +1,78 @@
+## 2026-10-24 acceptance cut: exact N⁵ B4 counterexample and scaling-critical A frontier
+
+### B4 — closed-form certificate, not extrapolation
+
+Source fidelity audited against both
+`NSTriadKNPhysicalTriadEnumeration.physicalTriadEnumeration` and
+`NSTriadKNPhysicalOutputFiber.physicalOutputFiber`: the primitive
+resonant cutoff carrier includes all ordered lattice pairs, including
+zero modes; nonzero constraints belong to a separate semantic layer.
+Strict R63 Bony and R236 selection classify all new modes beyond
+cutoff 9 as deep-high-high Noncore at output `k=(1,1,0)`.
+
+For the *same* fixed real divergence-free smooth shear
+`u(t)=2 exp(-t)(cos x+cos y)e_z`, the two active ordered cells remain
+Core and every other incidence has zero mixed amplitude.
+At integer cutoff `N>=9`, the complete output fibre is exactly
+`px,py∈[1-N,N]`, `pz∈[-N,N]`, `q=k-p`; each input rate excess is
+`|p|²+|q|²-2=2[px(px-1)+py(py-1)+pz²]`.
+Elementary finite power sums yield
+
+```text
+sum_{p in full fibre} (inputRate(p,k-p)-2)
+  = (8/3) N² (2N+1) (3N²+N-2).
+sum_{p in saturated core} (inputRate(p,k-p)-2)
+  = 840480  (one exact finite enumeration at N=9).
+D_noncore(N) = (8/3) N²(2N+1)(3N²+N-2) - 840480,  N>=9.
+D_noncore(N)/N⁵ -> 16.
+```
+
+This exact degree-five identity is **stronger** than the previous
+cubic one-ray lower bound. It reproduces the independently checked
+N9/N16/N24/N36/N40 literal values. Core companion mass is
+`1345859672` for N>=9 and the original output R219/R469 local ED
+is at most `4`. Therefore the old full-fibre strict-half B4 estimate
+has no cutoff-independent finite coefficients against that original
+ED on this globally smooth physical state.
+
+The script `scripts/ns_b4_literal_padding_adversary.py` now returns
+`closed_form_defect(N)` in constant time for arbitrarily large cutoff
+N>=9, and its regression independently recomputes the rectangular
+power sums. This is ordinary exact mathematics/source audit, NOT a
+kernel-verified Agda theorem and NOT a Clay regularity counterexample.
+**Do not schedule any more rounds attempting the disproved estimate.**
+
+### A — direct source bound is supercritical, A3 still not closed
+
+The existing same-physical-velocity H¹ Fourier-Stokes response obeys
+`||Vhat||²_L2xi <= (8pi/nu²) E^(3/2) sqrt(D)`.
+Under actual NS scaling `u_lambda(x,t)=lambda*u(lambda*x,lambda²*t)`,
+
+```text
+E_lambda = E/lambda,  D_lambda = lambda*D,
+||Vhat_lambda||²_L2xi = ||Vhat||²_L2xi / lambda.
+```
+
+Thus this excellent physical low/high response bound gets *smaller*
+under concentration while enstrophy gets arbitrarily larger. It is
+a supercritical bound, not a scale-critical Serrin/BKM estimate.
+Existing rigorous H¹ density and finite-horizon L² source-response
+are useful for A1/A2 but do not supply the universal A3 continuation
+input. The actual next A result must strengthen signed A2 to a
+scale-critical (or stronger) spacetime control, with no circular
+assumption of smooth continuation or finite H¹ supremum.
+
+**Remaining irreducible physical work (do not rename as RNNN):**
+1. B: exact globally compensated physical critical-production
+   identity using existing R681/R685/R690, then a truly signed
+   cutoff-uniform cross-gradient estimate and B123/B7 continuation.
+2. A: kernel-verified SAME-continuum-solution Fourier/Plancherel
+   carrier; signed centered double-resolvent A2 that yields a
+   scale-critical A3 sufficient norm for arbitrary data.
+3. Proof validation: run actual Lean/Agda kernel on exact pinned
+   theorem dependencies before claiming formal closure.
+
+---
 # Current A/B mathematical handoff — 24 October 2026
 
 > **Read this section first.** The many dated sections below preserve
