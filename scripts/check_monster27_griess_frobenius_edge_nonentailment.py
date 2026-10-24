@@ -5,7 +5,7 @@ EXTERNAL: FLM actual Vnatural2 weight2 rational Monster action, published
 27A/B, 9B, 3B twining q coefficients and Griess unit/invariant pairing.
 THIS FILE'S sparse products are *countermodels*, NOT the Vnatural algebra.
 They show common source-compatible axioms don't force specific cube-edge
-mode-one amplitudes. Full 196884 dimension, sparse arithmetic only.
+mode-one amplitudes. Full 196884 dimension; normalization <e,e>=c/8=3 for c=24. Sparse arithmetic.
 """
 from collections import Counter
 from itertools import product
@@ -22,7 +22,7 @@ def basis(k,i=0):
  assert 0<=i<rank(k)
  return (k,i)
 def pairing(a,b):
- return int((a[0]+b[0])%N==0 and a[1]==b[1])
+ return 3 if a==e and b==e else int((a[0]+b[0])%N==0 and a[1]==b[1])
 def dual(a):return ((-a[0])%N,a[1])
 # C(1,3,-4) is an invariant totally symmetric trilinear form.
 a,b,c=basis(1),basis(3),basis(23)
@@ -32,7 +32,7 @@ def multiply(u,v,t=Fraction(0)):
  if u==e:return {v:Fraction(1)}
  if v==e:return {u:Fraction(1)}
  out={}
- if pairing(u,v):out[e]=Fraction(1)
+ if pairing(u,v):out[e]=Fraction(pairing(u,v),3)
  if t and u!=v and u in triangle and v in triangle:
   w=next(x for x in triangle if x!=u and x!=v)
   dw=dual(w)
@@ -57,8 +57,11 @@ for t in (Fraction(0),Fraction(1),Fraction(7,3)):
 
 cube=set(product((-1,0,1),repeat=3))
 address=lambda p:(p[0]+3*p[1]+9*p[2])%27
-edges={(p,tuple(q),i) for p in cube for i in range(3)
-       for q in [list(p)] if not (q.__setitem__(i,q[i]+1)) and q[i]<=1}
+edges=set()
+for p in cube:
+ for axis in range(3):
+  q=list(p);q[axis]+=1
+  if q[axis]<=1:edges.add((p,tuple(q),axis))
 assert len(cube)==27 and len(edges)==54
 assert all((address(q)-address(p))%N==3**i for p,q,i in edges)
 assert all((address(p)+address(q))%N!=0 for p,q,i in edges)
