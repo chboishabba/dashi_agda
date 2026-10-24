@@ -239,3 +239,27 @@ Local expanded equivalents executed PASS. No current GitHub exact-head CI or Agd
 
 
 **Physical boundary correction:** the finite RN radial boundary has nonzero local reduced Dirac mass even though the true limit is massless as R→∞. Match to *unit-current massive lead eigenvectors* at finite radius to avoid fabricated cutoff reflection. The corrected tests were executed locally and supersede the preliminary massless-lead values. This is still a finite-radius adiabatic/Jost approximation, not a rigorous infinity scattering limit; same-universe loop and global 4D state remain open. See [MMPDiracFluxScatteringQuantumChannelMaxCut20261024.md](MMPDiracFluxScatteringQuantumChannelMaxCut20261024.md).
+
+
+## 2026-10-24 dashi_lean4 source audit and P3Q formal-encoding max-cut
+
+**New cross-repo owners:** dashi_lean4 merged #37 (concrete complex Majorana CAR / even-parity `|00>,|11>` qubit), merged #61/#76 (same-global-state finite-marginal, partial-trace associativity and g-TPS HS projectors), open #68 (corrected Schmidt-cut RT and flat-vacuum Jacobson, not source-identified with MMP), open #80/#84 (TOE/physical provenance and source-owner cut), and **new draft dashi_lean4 #85** (fermionic-loss parity false herald and U1 charge-superselection). See [full sourced discriminator](MMPLeanFockParityQuantumSourceCrossPollination20261024.md).
+
+**P3Q binding correction:** The preexisting q12 scattering matrix `diag(t1,t2)` is a **single-particle, fixed-charge angular-mode qubit**, while Lean #37's even parity code is a **two-complex-fermion Fock occupation logical qubit** `|00>,|11>`. Their transmission probabilities, erasure/accepted outcomes, and gauge superselection differ. For independent fermionic attenuations, strict no-environment-loss Fock success `(1+T1*T2)/2`, parity-only accepted `(1+T1*T2+(1-T1)(1-T2))/2`; false success `(1-T1)(1-T2)/2`, exact source-written Lean algebra plus executed finite Fock Kraus/Choi model. A parity-only receiver *cannot* conclude no loss from an even output, and a single charged Dirac mode is not automatically an experimentally manipulable Majorana zero mode.
+
+**P3Q gauge-charge stronger discriminator:** The parity-code basis |00>,|11> differs in **ordinary electromagnetic U1 charge by 2** if both modes are ordinary charge-1 Dirac fermions. Without a physical reference/dressing, global U1 half-turn phase twirling removes that coherence; fixed-charge dual rail |10>,|01> retains it. Actual source references: Schuch–Verstraete–Cirac PRL 92 (2004) 087904 DOI 10.1103/PhysRevLett.92.087904 and Bartlett–Rudolph–Spekkens RMP 79 (2007) 555 DOI 10.1103/RevModPhys.79.555. A superconducting condensate/charge reference or a gauge-invariant larger relational state could pay the missing bridge but is NOT implicitly supplied by MMP 4D number-conserving Einstein–Maxwell–Dirac.
+
+**Default decision:** select one-particle **equal-charge** dual-rail as first physical quantum channel to attempt; treat Majorana parity code as a distinct optional mathematical consumer requiring charge reference, explicit second quantization, environment no-loss readout, and same-source physical fermion modes. Do not conflate high conditional fidelity with successful transfer, even output parity with survival, or mathematical RT entropy with a Lorentzian physical wormhole.
+
+**Executed local receipt:** `/mnt/data/check_mmp_fock_parity_channel_20261024.py` PASS 4×4 Fock, 3×2 logical/erasure Choi and probability conservation; q12 E=.20 R240 gives false parity-only acceptance 6.7358×10^-5; adversarial T1=.2,T2=.7 gives 0.12; total loss example accepts even parity with probability 1 while single-particle transmission is zero. `/mnt/data/check_mmp_charge_superselection_20261024.py` PASS phase twirl, relative charge, purity. Agda source-written acceptance:
+```sh
+python3 scripts/check_mmp_lean_fock_parity_channel_20261024.py
+python3 scripts/check_mmp_charge_sector_coherence_20261024.py
+```
+Lean #85 source-written theorem targets:
+```sh
+lake env lean QuantumChannels/MMPDiracFockParityChannel.lean
+lake env lean QuantumChannels/MMPDiracChargeSuperselection.lean
+lake env lean QuantumChannels/MMPDiracFockParityChannelRegression.lean
+```
+No Lean binary installed and no pinned exact-head kernel/CI receipt yet. **Main P1/P2 full global 4D fermion state/Einstein–Maxwell–Dirac fixed point remains OPEN.**
