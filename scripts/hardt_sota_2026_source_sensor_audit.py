@@ -135,6 +135,35 @@ def evidence_versions_and_units():
             "scope":"study and hypothesis denominators have different estimands; author-classified outcomes"}
 
 
+
+def phase_cycle_adversarial_design():
+    """Exact 2x2 parity projection, inspired by *method*, not copied from
+    Wang et al. 2026 xenon NMR apparatus. Four samples do not prove calibration.
+    """
+    levels=(-2,-1,0,1,2)
+    orientations=tuple(product((-1,1),repeat=2))
+    checked=0
+    for a,b,c,d in product(levels,repeat=4):
+        signal={(s,t):Q(a+b*s+c*t+d*s*t)
+                for s,t in orientations}
+        interaction=sum((s*t*signal[s,t] for s,t in orientations),Q(0))/4
+        assert interaction==d
+        checked+=1
+    assert checked==625
+    # If labels are scheduled to correlate with chronological drift, a
+    # *zero* true interaction may appear nonzero despite exact projection.
+    confounded_schedule=((-1,1),(1,-1),(-1,-1),(1,1))
+    temporal_drift=tuple(range(4))
+    fake=sum(Q(s*t*k) for k,(s,t) in zip(temporal_drift,confounded_schedule))/4
+    assert fake==Q(1)
+    # Reversal-pair plus randomized/repeated temporal blocks, blinded label
+    # ordering and measured drift are needed before physical promotion.
+    return {"factorial_coefficients_checked":checked,
+            "orthogonal_parity_recovers_interaction":True,
+            "zero_interaction_order_correlated_drift_false_signal":str(fake),
+            "scope":"finite synthetic factorial phase cycle; NOT xenon apparatus replay"}
+
+
 def group_independence():
     n=100
     effective={str(rho):str(Q(n,1)/(1+(n-1)*rho))
@@ -151,7 +180,8 @@ def main():
          "source_observability":joint_sensor_source_audit(),
          "frequency_calibration":spectral_band_admission(),
          "versioned_evidence":evidence_versions_and_units(),
-         "group_denominator":group_independence()}
+         "group_denominator":group_independence(),
+         "phase_cycling":phase_cycle_adversarial_design()}
     print(json.dumps(out,indent=2,sort_keys=True))
 
 
