@@ -1,5 +1,13 @@
 # FIELD LOOM — a reality-compatible psychotronics super-object
 
+## S1 operational interface now executable but not yet empirically validated
+
+Read the [source-owned stream-to-pairs and signed uncertainty specification](psychotronics-s1-replay-signed-moment-weld-20261025.md). The existing `psychotronics_field_loom_coils.py` remains the **numerical** source for ideal finite circular filament fields, while the existing `NSTriadKNFourierBiotSavartExact` and `NSTriadKNMaxwellFluidBiotSavartBridgeExact` remain the **formal** current/field amplitude owners; this is no new Biot–Savart implementation.
+
+The S1 consumer can now intake a versioned, SI CSV stream with exact active/sham paired observations, bounded monotone timestamps, signed current and magnet polarity, source-linked calibrations and a separately recorded *same physical magnet* moment uncertainty even across polarity reversal. It checks exact replay against the signed source envelope and derives an exact rank-five five-term experimental design only from recorded arms. **This does not yet establish authentic instrument identity, sample condition or effective gravity.** The fixed magnetic dipole rule excludes Egely/Vértesy's VSM hysteresis, nonlinear ferrofluid and superconducting-material constitutive models absent additional laws and calibration. The next build is a safe qualified S1 force/field fixture, not S4–S6 integration or high-voltage human exposure.
+
+
+
 ## Existing Biot–Savart mathematics ownership (25 October corrective audit)
 
 The Field Loom should **not** treat `psychotronics_field_loom_coils.py` as the repository's first or only Biot–Savart owner. See the [in-repo exact Fourier, Maxwell/fluid, MHD and filament numeric owner crosswalk](psychotronics-biot-savart-prior-art-weld-20261025.md) and import-only `FieldLoomExistingBiotSavartReuseExact.agda`. Source-owned `NSTriadKNFourierBiotSavartExact` already proves exact rational modewise inverse-curl/transversality; `NSTriadKNMaxwellFluidBiotSavartBridgeExact` already ties magnetostatic current and fluid vorticity to the same inverse-curl amplitude. Retain **their proof status as existing source claims, not freshly kernel-checked here**.
