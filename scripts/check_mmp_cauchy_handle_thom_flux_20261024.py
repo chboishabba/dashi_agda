@@ -55,9 +55,35 @@ for radius in (0,.3,.7):
     ang=np.linspace(0,2*math.pi,401)
     assert abs(math.cos(ang[-1])-math.cos(ang[0]))<1e-13
     assert abs(math.sin(ang[-1])-math.sin(ang[0]))<1e-13
+# Spin structures form an H1(Sigma,Z2)=Z2 torsor; independent flat
+# U1 connections are classified by H1(Sigma,U1)=U1. A magnetic Chern
+# number q in H2(Sigma,Z) does NOT determine either return-loop phase.
+# This test uses the *separate* massless 1+1D Dirac Bernoulli Casimir,
+# not a four-dimensional negative gravitational stress.
+def bernoulli2(alpha):
+    u=alpha%1.
+    return u*u-u+1/6
+phase_cases=[]
+for q in (2,12,24):
+    for spin_phase in (0.,.5):
+        for wilson in (0.,1/3,2/3):
+            alpha=(spin_phase+wilson)%1.
+            phase_cases.append({'q':q,'spin_phase':spin_phase,
+              'flat_wilson_fraction':wilson,'alpha':alpha,
+              'B2':bernoulli2(alpha)})
+assert abs(bernoulli2(.5)+1/12)<1e-14
+assert abs(bernoulli2(.5+1/3)-1/36)<1e-14
+assert abs(bernoulli2(.5+2/3)-1/36)<1e-14
+for spin in (0.,.5):
+    for w in (0.,1/3,2/3):
+        vals=[z['B2'] for z in phase_cases
+              if z['spin_phase']==spin and z['flat_wilson_fraction']==w]
+        assert max(vals)-min(vals)<1e-14
+
 out={'spatial_manifold':'(S1xS2) minus a point = R3#(S1xS2)',
      'spatial_ends':1,'CW_Betti_numbers':betti,
      'smooth_bump_radial_moment':norm,'flux_cases':flux,
+     'spin_flat_wilson_phase_cases':phase_cases,
      'closed_magnetic_fieldlines':'S1 orbits in product tubular neighbourhood',
      'external_math_authority':'Poincare duality, compact Thom form, Nomizu-Ozeki, ultrastatic Cauchy theorem',
      'open':'full chosen Maxwell current, gauge twisted 4D Dirac state, global Hadamard magnetic-loop Casimir stress, Einstein equations, stability'}
