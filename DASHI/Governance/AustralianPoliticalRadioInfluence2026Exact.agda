@@ -152,6 +152,14 @@ stokesSouthernCrossStake = relationship-receipt
   "https://www.acma.gov.au/updates-media-interests-snapshot"
   "ACMA attributes approximately 20.06% Southern Cross interest to SGH and Kerry Stokes after merger. Path to ARN is two distinct equity edges, not a claim of controlling every radio presenter." false false false
 
+stokesSouthernCrossSeptemberUpdate : RelationshipReceipt
+stokesSouthernCrossSeptemberUpdate = relationship-receipt
+  "SGH Ltd / Kerry Stokes" "Southern Cross Media Group"
+  historicEquityHolding institutionRecord
+  "ACMA media interests update, 11 September 2026"
+  "https://www.acma.gov.au/updates-media-interests-snapshot"
+  "ACMA upgraded the stated SGH/Southern Cross interest from 20.06 percent to 23.19 percent in September; this is a dated revision of the February snapshot, NOT a second independent holding to sum." false false false
+
 kiisARN : RelationshipReceipt
 kiisARN = relationship-receipt
   "KIIS 106.5" "ARN Media"
