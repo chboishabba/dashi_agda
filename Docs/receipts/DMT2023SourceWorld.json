@@ -255,6 +255,27 @@
       "source": "pnas_gitrepo",
       "scope": "A standalone implementation of tapered_sliding_window used by Scripts/dRSFC.m is NOT in the recursively inspected b35701d source Git tree. May exist outside this repository; do not infer global nonexistence.",
       "negative_search_receipt": "Pinned DMTImagingPinnedSourceTree20261024.json enumerates 56 files; no path/base name tapered_sliding_window; Scripts/dRSFC.m calls this function"
+    },
+    {
+      "id": "original_preprocessed_voxel_nifti",
+      "status": "notLocated",
+      "kind": "source_input",
+      "source": "pnas_static_script",
+      "scope": "Source-listed preprocessed per-condition per-subject post1 MNI152 scrubbed_FD_040/clean_with_intact/*.nii.gz images; different materialisation than released BOLD_AAL parcelled .mat files."
+    },
+    {
+      "id": "original_schaefer_extended_mask",
+      "status": "notLocated",
+      "kind": "source_input",
+      "source": "pnas_static_script",
+      "scope": "Author-side Schaeff1007NExt.nii.gz ROI mask (Schaefer with extended subcortical labels), absent as a file from pinned 56-file Git tree; coordinate-specific source exactness."
+    },
+    {
+      "id": "effective_static_gfc_workspace",
+      "status": "notLocated",
+      "kind": "source_execution_state",
+      "source": "pnas_static_script",
+      "scope": "Original executable MATLAB variables and source/version: xdata,ydata,fdrcorrection and nets used before their in-file definitions; runtime toolbox load_nii, newFDR, export_fig etc. Exact effect generation cannot be inferred from script text alone."
     }
   ],
   "claims": [
@@ -319,7 +340,10 @@
         "original_preproc",
         "data_use_review",
         "source_local_bytes",
-        "static_fmri_replay"
+        "static_fmri_replay",
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask",
+        "effective_static_gfc_workspace"
       ]
     },
     {
@@ -373,6 +397,21 @@
         "source_local_bytes",
         "original_preproc",
         "dynamic_tapered_window_in_pinned_tree"
+      ]
+    },
+    {
+      "id": "c_public_mat_reproduces_original_static",
+      "consumer": "Independent published t(15) static GFC replay from publicly deposited BOLD_AAL MAT files ALONE",
+      "grade": "empirical",
+      "requires": [
+        "original_static_fd",
+        "original_preproc",
+        "source_local_bytes",
+        "data_use_review",
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask",
+        "effective_static_gfc_workspace",
+        "static_fmri_replay"
       ]
     }
   ],
@@ -430,7 +469,10 @@
         "original_static_fd",
         "original_preproc",
         "data_use_review",
-        "source_local_bytes"
+        "source_local_bytes",
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask",
+        "effective_static_gfc_workspace"
       ],
       "targets": [
         "static_fmri_replay"
@@ -464,6 +506,34 @@
       "work": "Not currently admitted: no preregistered leakage-controlled experiment or distinct prediction",
       "cost_band": 4,
       "access_risk": 4
+    },
+    {
+      "id": "g_voxel_and_atlas_source",
+      "kind": "primary_source_recovery",
+      "needs": [
+        "source_static_analysis_code",
+        "data_use_review"
+      ],
+      "targets": [
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask"
+      ],
+      "work": "Locate same-object NIfTI preprocessed inputs and 112-region Schaefer/subcortical atlas identified by author StaticGFC.m. Treat published BOLD_AAL as separate representation, not a replacement; no unapproved redistribution",
+      "cost_band": 4,
+      "access_risk": 3
+    },
+    {
+      "id": "h_effective_static_code",
+      "kind": "source_preprocessing_recovery",
+      "needs": [
+        "source_static_analysis_code"
+      ],
+      "targets": [
+        "effective_static_gfc_workspace"
+      ],
+      "work": "Recover actual executed static-GFC code revision/workspace and specific upstream xdata/ydata/network/FDR assignments, MATLAB/NIfTI dependencies and exclusions. Current script is not self-contained.",
+      "cost_band": 3,
+      "access_risk": 1
     }
   ],
   "observed_git_tree": {
@@ -782,7 +852,8 @@
       "S23",
       "S25"
     ],
-    "distinct_lineage_roots": 3
+    "distinct_lineage_roots": 3,
+    "static_author_script_blob_sha1": "f87d99f448848c3b0531fea0780ee241ebd77549"
   },
   "safety": {
     "send_email": false,
@@ -790,6 +861,7 @@
     "assume_licence": false,
     "autopromote_ontology": false,
     "source_metadata_not_measured_replay": true,
-    "no_source_absence_globalisation": true
+    "no_source_absence_globalisation": true,
+    "public_mat_is_not_original_static_nifti": true
   }
 }
