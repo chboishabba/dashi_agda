@@ -54,9 +54,9 @@ ALPHA=1/mp.mpf('137.035999084')
 QED=mp.sqrt(4*mp.pi*ALPHA)
 R_EARTH=mp.mpf('6371000')
 R_SUN=mp.mpf('695700000')
-for name,a,d in [('geometric_U1_only',1,4),
-                 ('independent_bulk_photon',4,8),
-                 ('photon_and_graviton_loops',9,12)]:
+for name,a,d in [('primary_graviton_photon_scalar_three_Dirac',9,12),
+                 ('matter_only_two_Dirac_truncation',4,8),
+                 ('geometric_U1_only',1,4)]:
     z,L,U2=solve(a,d)
     coeff=mp.sqrt(mp.mpf(2)/3*C0*U2)
     print(f'MODEL {name}: bosons -{a}, massive fermions +{d}, z0={mp.nstr(z,16)}, Lambda={mp.nstr(L,12)}, U2={mp.nstr(U2,12)}, radionPrefactor={mp.nstr(coeff,12)}')
@@ -74,7 +74,7 @@ for name,a,d in [('geometric_U1_only',1,4),
         if rad=='1e-24':
             assert efifth<mp.mpf('1e-10') and sfifth<mp.mpf('1e-10')
             assert gKK<mp.mpf('1e-9')
-    if name=='independent_bulk_photon':
+    if name in ('primary_graviton_photon_scalar_three_Dirac','matter_only_two_Dirac_truncation'):
         b=mp.mpf('1e-24')/HC
         e5=QED*mp.sqrt(2*mp.pi*b)
         assert abs(e5/mp.sqrt(2*mp.pi*b)-QED)<mp.mpf('1e-50')
