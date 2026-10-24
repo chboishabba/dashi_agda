@@ -84,6 +84,8 @@ data OriginRoot : Set where
   epsteinCorrespondenceRoot : OriginRoot
   epsteinEstateScheduleRoot : OriginRoot
   fecEnforcementRoot : OriginRoot
+  silvesterTestimonyRoot : OriginRoot
+  dcmsCommitteeFinalReportRoot : OriginRoot
 
 data CaseClaim : Set where
   sclCAOperatingContinuity : CaseClaim
@@ -105,6 +107,10 @@ data CaseClaim : Set where
   fecCaseClosedWithoutFinalLiability : CaseClaim
   wylieKompromatStatement2018 : CaseClaim
   wylieProjectRiponStatement2018 : CaseClaim
+  silvesterAIQRiponDevelopment2018 : CaseClaim
+  silvesterAIQBoltonDeployment2018 : CaseClaim
+  dcmsRiponRepositoryReview2019 : CaseClaim
+  dcmsICOBrexitCounterFinding2019 : CaseClaim
 
 record BoundedSource : Set where
   constructor bounded-source
@@ -195,6 +201,30 @@ canonicalSources =
     "https://nsarchive.gwu.edu/sites/default/files/documents/5686049/Christopher-Wylie-Statement-for-the-Record-for.pdf ; printed p5 paragraph 19 / PDF page index 4"
     "2018-05-16" "2013-2015"
     "Wylie testified that Bannon oversaw Project Ripon, which aimed to scale psychological profiling for campaigns using earlier Cambridge psychology research. Original project implementation/approval and individual role receipts are separate acquisitions; this does not prove Aquino or Epstein operational links."
+    true false false false
+  ∷ bounded-source silvesterAIQRiponDevelopment2018 silvesterTestimonyRoot
+    attributedFirstPersonTestimony
+    "https://committees.parliament.uk/oralevidence/7969/html/ ; Q2776-Q2783 Q2949-Q2955"
+    "2018-05-16" "2014-2015"
+    "Jeff Silvester testified AIQ built Ripon political CRM for SCL, under conditional code-transfer/ownership terms. He said AIQ had not contracted directly with CA and disclaimed authentication of an unsigned proposed AIQ-CA agreement. His testimony is independent witness-origin from Wylie's statements; signed contract/code remain separate artifacts."
+    true false false false
+  ∷ bounded-source silvesterAIQBoltonDeployment2018 silvesterTestimonyRoot
+    attributedFirstPersonTestimony
+    "https://committees.parliament.uk/oralevidence/7969/html/ ; Q2783-Q2784"
+    "2018-05-16" "2014"
+    "Silvester stated SCL asked AIQ to deploy the Ripon CRM to the John Bolton Super PAC's servers, and AIQ helped load client data. This pays the specific first-person claim about deployment, not unauthorized influence, CA contractual privity, or independently inspected server logs."
+    true false false false
+  ∷ bounded-source dcmsRiponRepositoryReview2019 dcmsCommitteeFinalReportRoot
+    congressionalFinding
+    "https://publications.parliament.uk/pa/cm201719/cmselect/cmcumeds/1791/179107.htm ; paragraphs 149-162"
+    "2019" "2013-2016"
+    "UK Commons DCMS report describes original AIQ repository material supplied by Chris Vickery, Ripon source location scl.ripon.us, SCL/CA/AIQ code and data interplay, including OCEAN scores. The committee inspected/analyzed the materials, but repository bytes were not acquired here. Parliamentary analysis partly rests on separate Vickery, AIQ and ICO sources: avoid treating it as independent evidence of every constituent statement."
+    true false false false
+  ∷ bounded-source dcmsICOBrexitCounterFinding2019 dcmsCommitteeFinalReportRoot
+    congressionalFinding
+    "https://publications.parliament.uk/pa/cm201719/cmselect/cmcumeds/1791/179107.htm ; paragraph 157 quoting ICO"
+    "2019" "2016 referendum"
+    "UK Commons DCMS report quotes the ICO as finding no evidence at that time of SCL Elections/CA data analytics work for EU referendum campaigns and no unlawful UK-citizen data activity in the stated AIQ-SCL relationship. Here the ICO text is a committee-reported counterfinding, not a separately inspected original ICO report."
     true false false false
   ∷ bounded-source mindWarAuthored aquinoVallelyRoot
     attributedAuthorProposal
@@ -1171,3 +1201,104 @@ kompromatMethodDoesNotJoinEpsteinNetwork = refl
 witnessReportingDoesNotPayIntelligenceCommand :
   operationalIntelligenceCommandPaid canonicalKompromatCut ≡ false
 witnessReportingDoesNotPayIntelligenceCommand = refl
+
+
+------------------------------------------------------------------------
+-- LOCAL LITERAL RIPON OBJECT: A DOCUMENTED TECHNICAL / CONTRACTUAL
+-- SUBCLUSTER, NOT THE AQUINO-MAXWELL-EPSTEIN COMMON PROGRAMME.
+--
+-- Two distinct witness roots + DCMS source-object report. The DCMS report
+-- depends in part on the same witness, an ICO conclusion and the Vickery
+-- acquired repository, so its full assertions are NOT independent third
+-- producer receipts until lineage is resolved per proposition.
+------------------------------------------------------------------------
+
+silvesterRiponEvidence : BoundedSource
+silvesterRiponEvidence = bounded-source silvesterAIQRiponDevelopment2018
+  silvesterTestimonyRoot attributedFirstPersonTestimony
+  "UK Commons Q2776-Q2783 and Q2949-Q2955, 2018-05-16"
+  "2018-05-16" "2014-2015"
+  "AIQ built and conditionally transferred Ripon CRM software to SCL; asserted non-privity with CA"
+  true false false false
+
+dcmsRiponProjectReport : BoundedSource
+dcmsRiponProjectReport = bounded-source dcmsRiponRepositoryReview2019
+  dcmsCommitteeFinalReportRoot congressionalFinding
+  "UK Commons Final Report 2019 HC 1791 chapter 4, paragraphs 149-162"
+  "2019" "2014 onward"
+  "Committee reported Ripon repository inspection, scl.ripon.us linkage and OCEAN-related data; original code bytes not personally preserved in this case branch"
+  true false false false
+
+record ScopedRiponObjectPayment : Set where
+  constructor scoped-ripon-object-payment
+  field
+    namedRiponProductPaid : Bool
+    contractorSCLRelationPaid : Bool
+    clientSpecificDeploymentTestimonyLocated : Bool
+    committeeReviewedCodeLineageLocated : Bool
+    actualSourceTreeBytesRetainedHere : Bool
+    fullCodeTransferSignaturesRetainedHere : Bool
+    personalBannonSourceCodeControlPaid : Bool
+    riponSameProgrammeAsAquinoPaid : Bool
+    riponSameProgrammeAsEpsteinPaid : Bool
+    commonIntelligenceOperationPaid : Bool
+open ScopedRiponObjectPayment public
+
+localRiponObject : ScopedRiponObjectPayment
+localRiponObject = scoped-ripon-object-payment
+  true true true true false false false false false false
+
+localH2ProgrammeObjectPaid :
+  namedRiponProductPaid localRiponObject ≡ true
+localH2ProgrammeObjectPaid = refl
+
+localRiponDeveloperToSCLRelationPaid :
+  contractorSCLRelationPaid localRiponObject ≡ true
+localRiponDeveloperToSCLRelationPaid = refl
+
+riponSourceTreeNotInCaseCustody :
+  actualSourceTreeBytesRetainedHere localRiponObject ≡ false
+riponSourceTreeNotInCaseCustody = refl
+
+riponPersonalBannonCodeControlUnpaid :
+  personalBannonSourceCodeControlPaid localRiponObject ≡ false
+riponPersonalBannonCodeControlUnpaid = refl
+
+riponDoesNotPromoteAquinoLink :
+  riponSameProgrammeAsAquinoPaid localRiponObject ≡ false
+riponDoesNotPromoteAquinoLink = refl
+
+riponDoesNotPromoteEpsteinLink :
+  riponSameProgrammeAsEpsteinPaid localRiponObject ≡ false
+riponDoesNotPromoteEpsteinLink = refl
+
+localRiponH2NotGlobalH3 :
+  commonIntelligenceOperationPaid localRiponObject ≡ false
+localRiponH2NotGlobalH3 = refl
+
+-- Test the same-object *scoping* on the specific part of the network.
+-- 'H2' here means the admitted local Ripon software programme, not an
+-- object identity spanning every historical actor in the user theory.
+data RiponIdentityScope : Set where
+  aiqSCLRiponSoftware : RiponIdentityScope
+  aquinoMaxwellEpsteinCommonProgramme : RiponIdentityScope
+
+record RiponSameObjectBoundary : Set where
+  constructor ripon-same-object-boundary
+  field
+    scope : RiponIdentityScope
+    sourceBackedLocalProgramme : Bool
+    intergenerationalBridgePaid : Bool
+open RiponSameObjectBoundary public
+
+localRiponScope : RiponSameObjectBoundary
+localRiponScope = ripon-same-object-boundary
+  aiqSCLRiponSoftware true false
+
+unifiedNetworkScope : RiponSameObjectBoundary
+unifiedNetworkScope = ripon-same-object-boundary
+  aquinoMaxwellEpsteinCommonProgramme false false
+
+scopedH2DoesNotChangeWholeNetworkH2 :
+  intergenerationalBridgePaid localRiponScope ≡ false
+scopedH2DoesNotChangeWholeNetworkH2 = refl
