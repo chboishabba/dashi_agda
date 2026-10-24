@@ -1037,3 +1037,80 @@ agda -i . DASHI/Physics/YangMills/CompactLieInnerC3Exact.agda
 agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3SUNLieGroupReuseExact.agda
 python3 -m unittest discover -s tests -p 'test_alexander_horned_c3_sun_reuse.py' -v
 ```
+
+
+## 2026-10-24 C3 steelman: strict spin action versus 720-degree angular path
+
+See canonical attributions, exact data and proof-status ledger:
+`Docs/topology/AlexanderHornedC3SpinLiftSteelman20261024.md`.
+
+**P0 mathematical break:** restricting Spin3->SO3 to the
+actual 120deg C3 subgroup gives a SPLIT central extension
+`C6 ≅ C3×C2`, since `H²(C3,C2)=0`. The old rational
+quaternion `q=(1+i+j+k)/2` (order 6, q³=-1) is the
+identity-started +120deg PATH lift, NOT a homomorphic C3
+generator. The same rotation's other lift `-q` has
+order 3, giving a genuine spin-equivariant C3 action.
+Neither lift changes the torsion-free source exterior G.
+
+**Agda exact source:** `AlexanderHornedC3SpinLiftSplitExact.agda`
+reuses EXISTING `FiniteC3OrbitStabilizerExact`, Q8 signs
+and ambient horn C3. It constructs the six-element spin
+preimage, a strict homomorphic C3 section, unique
+order-three generator lift, a nonhomomorphic path-section,
+and proves by all nine cases that the path's central
+carry cocycle is an EXPLICIT coboundary.
+No continuous covering-space Agda kernel certificate
+has been created.
+
+**A same-coordinate Dirac field consumer exists** on ANY
+C3-invariant open subset E of R3:
+`Tψ(x)=U(-q)ψ(R^-1 x)`,
+`T³=1` and `DT=TD` on
+compactly supported two-component spinors.
+The Gaussian-rational `spin_dirac_probe.py` checked
+all three Pauli/Dirac coefficient identities and
+125 exact finite position/spinor samples.
+This requires `R(E)=E` for the *actual* wild
+embedding, not a completed fundamental-group theorem,
+nor any spectral domain/self-adjointness statement.
+
+**Fixed-axis and characteristic-3 discriminator:**
+`tr(U(-q))=-1`, `det(U(-q)-I)=3`; fixed-axis
+C3-invariant spinor values vanish in characteristic
+zero. On each free 3-position orbit with two spin
+components, the exact averaging projector
+`P0=(I+T+T²)/3` is idempotent of rank 2.
+The Q3 2D cyclotomic block has zero fixed dimension,
+whereas reducing it modulo 3 yields a unipotent
+representation with a 1D fixed subspace. This is
+Maschke failure, not a new characteristic-zero zero
+mode or Monster eigenspace. The existing C3Fourier/
+C3CyclotomicRealDescent/3B projector owners are
+literature/technique donors, NOT the same spinor operator.
+
+**Spinor MODULE over SAME finite scalar VOA:**
+`V=Fun(C3×A5,Q)` has 180 scalar sites;
+`M=Fun(C3×A5,H_Q)` has 720 rational coordinates.
+It admits a right-Q(i) spinor complex structure,
+yielding 360 dimensions over Q(i), which is NOT
+`Fun(C3×2I,Q)`, the distinct old 360-site spin
+charge algebra. For `g=(a,k)`, spinor right pullback
+is `r^k ψ(g.x)` with r=-q, and preserves scalar
+pointwise vertex-module multiplication. The existing
+finite semidirect actor is reused. The finite
+`spin_voa_module_probe.py` checked 18 sampled
+actors, 18x18 group pairs, 180 sites and sign
+periodicity. No Monster-VOA module is identified.
+
+**Full A5 global obstruction still non-split:**
+`2I->A5` remains globally non-split even though
+its restriction to any C3 subgroup splits. Hence
+C3 alone is NOT a test of the global spin Schur
+class. Continue using an actual 2I/A5 same-object
+map for this, not an order-three phase analogy.
+
+Independent local finite probes PASS, CI files updated,
+but no successful exact-head Agda/Lean workflow
+receipt returned. The geometric `R(B)=B` and
+van Kampen identification remain open.
