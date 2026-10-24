@@ -1,5 +1,14 @@
 # Psychotronics / pictured-device Pareto frontier — canonical current status
 
+> **HISTORICAL TRANSMISSION PARETO REBASE · 24 October 2026.** The next high-information consumer is original-author transmission and historical source custody, NOT additional 5D/PEMF trial formalisation. [Cold War / Nazi-era source-and-edge atlas](psychotronics-cold-war-transmission-maxcut-20261024.md) is the current historical cut, implemented as a thin reuse of `IbrahimSnowballInvestigativeClaimSourceLineageBidiExact`, `IbrahimSnowballParetoFrontierExact`, `SnowballAttributionProvenanceInvariantExact` and `EmpiricalSourceDiligenceAdmissionExact`.
+>
+> **New result:** 1970 Ostrander/Schroeder public book → 1975 Maire/LaMothe government analytic report is a **direct inspected bibliographic citation** (DST-1810S-387-75 printed p.69, scan index 66, reference 5). Wimmer 1940 → Sievers 1940 is a documented intra-administration source-reference edge. The 1985 Czech ministry requests to Soviet and East German intelligence remain **archivist-described requests**, not verified accepted cooperation or hardware transfer. **Neither shared occult motifs nor military classification establish Nazi→Soviet technology transmission.**
+>
+> **Stop expanding abstract psychotronics ontology and human-trial designs.** First pay original Pavlita/Rejdák first-party experiments and 1973 Prague proceedings (1974 JPRS catalogue known, original technical pages not acquired), followed by primary 1985 Czech correspondence and Vasiliev's Soviet protocols. iTorus, Starship coil, Bernd's Oudin tower, Aurumaya/Croft and Kirlian field controls remain distinct downstream *physical* consumers only.
+>
+> **Count discipline:** the existing 40 psychotronics source-atlas entries and 18 conversation screenshot hashes are unchanged. The *separate* historical consumer currently names **10 attributed source instances**, not 10 corroborations or an automatically combined 50-source validated science atlas. Originals, English translations, US report mirrors, historical reviews and archival summaries retain their separate roles.
+
+
 **As of 2026-10-24; owner:** `DASHI/Cognition/PsychotronicsSuccorSourceAtlasExact.agda`, `PsychotronicsScreenshotDiscriminationExact.agda`, and `PsychotronicsSuccorAttributionRegression.agda`. This is the current **decision document**, not an additional ontology or a completed physical study. [Append-only historical/source audit](psychotronics-succor-punch-attribution-20261024.md).
 
 ## Outcome of source investigation
@@ -151,6 +160,20 @@ These are **two additional attributed source instances with different original a
 5. If a safe separable design passes, obtain ethics approval, preregister one primary state outcome and intended contrast, verify psychometric transfer to this context, and only then collect controlled human data. Report effect sizes/uncertainty and adverse outcomes; do not infer “5D” physics.
 
 **This cut pays the *logic and apparatus-dependent acceptance conditions*, not the apparatus, field maps, participant outcomes, or finished randomized experiment.**
+
+## Historical transmission first — current max-cut ranking
+
+| Rank | Source dependency | Current paid receipt | First unfulfilled obligation |
+|---|---|---|---|
+| **H0 closed, bounded** | 1970 public book → 1975 Maire/LaMothe US report | Scanned **bibliography p.69 #5**, with independent book and report authors/dates | Claim-specific page-to-page sources, not the existence of citation itself |
+| **H1** | Original Pavlita/Rejdák generators and 1973 Prague research | 1970 chapter and 1975 analysis report a device; NTIS 1974 conference translation is catalogued | Original apparatus description, participant paper, exact physical controls, translations and version chain |
+| **H2** | Czechoslovak 1985 defence interest → Soviet/GDR assistance requests | Czech official archival-custodian summary, exact ministerial and October dates | Actual outgoing/incoming records; request is not accepted collaboration |
+| **H3** | Soviet experiments and Western translations | Vasiliev 1962 original / 1963 English bibliographic identity | Primary actual protocol, criticisms, replication and shielding/control claims |
+| **H4 low until consumer** | 1940 Ahnenerbe dowsing correspondence | Wimmer and Sievers original dated letters, real direct citation | Further correspondence only if it changes an actual institutional link |
+| **H5 contingent** | East Bloc science → Reich/Welz/Croft/Rodin/iTorus | Cultural similarities and independently documented manufacturer terminology | Actual dated first-party bibliography, cited original diagram, exact build genealogy |
+| **H6 deferred** | PEMF/coherence/5D psychological study | Existing prior 40-entry atlas, rank/cue confounding and psychometric trial plans | Acquire exact measured unit first; no more hypothesised participants or abstract stage categories |
+
+**Historical status is based on original provenance, not evidentiary hype.** See the new [historical graph](psychotronics-cold-war-transmission-maxcut-20261024.md) for the complete source table and non-promotion guarantees. The *existing* detailed table below continues to describe device-level dependencies, but **no longer determines what to work on first**.
 
 ## Minimal Pareto cutset
 
