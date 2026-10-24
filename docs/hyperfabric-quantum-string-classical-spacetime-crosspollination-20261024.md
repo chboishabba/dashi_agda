@@ -489,3 +489,30 @@ Moonshine Tate276 nor signed-zero C3 fibre is thereby
 identified. New executable finite 276-basis SO24/ATLAS
 tests, sympy local dual B-field tests, and Agda source
 class-theorem owner in PR #1249. Kernel unverified.
+
+
+## 2026-10-24 selected physically nonflat 26D target instead of 27D dimension speculation
+
+See detailed source and executable at
+`docs/hyperfabric-k27-26d-su2-nsflux-linear-dilaton-worldsheet-maxcut-20261024.md`.
+The standard `R^(1,22)×S³` round SU2 group manifold
+with nonzero NS H=(2/r)vol and **spacelike** Phi=x¹/r
+satisfies all chosen **leading 26D continuum NSNS field
+equations** with genuine nonflat Ricci, nonzero stress,
+nonzero dilaton gradient. Exact source curvature using
+SU2 bracket and covariant flux EOM executed PASS for six
+rational radii. Global B gerbe/flux quantization remains
+real, not a single globally defined B2 potential.
+
+Cross-pollination path: original SU2/Spin, GR metric/stress,
+Hodge/Bianchi, VOA current-algebra and KK source owners,
+without identifying this target SU2 S³ manifold with the
+original discrete C3³ hypervoxel or asserting Monster
+physical state/action identity. WZW SU2_k finite central
+charge `3k/(k+2)` plus 23 flat/one spacelike linear
+dilaton requires `alpha'V²=1/(k+2)` for c26,
+whereas the uncorrected two-derivative geometric
+relation says `1/k` and leaves
+`delta c=12/[k(k+2)]`. This is a clear quantum
+correction and source-consistent future test.
+No direct terminal Clay payment.
