@@ -1,5 +1,13 @@
 # FIELD LOOM — a reality-compatible psychotronics super-object
 
+## Quantitative S1/S6 engineering advance — not an experimental success
+
+See [the full 20-fibre donor survey and quantitative S1/S6 protocol](psychotronics-s1-s6-twenty-scientist-maxcut-20261024.md), with runnable `psychotronics_field_loom_metrology.py` and `psychotronics_field_loom_observability.py`. The first now closes **mathematical design** quantities, including signed point-dipole `F_z=m_z ∂_z B_z`, ratio to gravity, exact-midpoint anti-Helmholtz gradient, paired active/sham ordinary-model residual, uncertainty floors, original raw/calibration byte hashes, anti-claim and independently verified control requirements. It cannot convert synthetic values into physical results. The second calculates actual two-coil source-to-sensor response rank for 9/27/81 ideal measurements, showing why a central-plane Bz-only 9-sensor array is rank-deficient and why a volume with 27 sampling sites still cannot control more than the two original independent coil currents.
+
+**Changed sequencing:** undertake low-risk S1 calibration and actuator/sensor placement before committing to a toroidal display shell or 27-site fabrication; keep plasma, EHD high voltage and humans isolated. Instrument-grade standards, calibration, safety and actual measurements remain **unpaid**. New scientifically attributable design donors are W. N. McCasland's original 1989 observability/fault-tolerance work and Daining Fang's **coauthored** 2025 elastic-wave mode design (appropriate only to acoustic/mount mechanics, not gravitational field synthesis). Preserve their original authorship and the existing 20-person investigation's event-evidence firewall.
+
+
+
 ## Additional donor audit: historical antigravity is not a Field Loom physical mode
 
 See the [repo-wide Amy Eskridge / missing-scientist physics crosswalk](psychotronics-missing-scientists-physics-crosswalk-20261024.md). The earlier Field Loom design understated extensive in-repo `DASHI/Culture/AmyEskridge*`, `DASHI/Physics/ExoticGravity/Antigravity*`, `POAMSScientificMechanismBoundaryExact`, and scientist-specific modelling, I&C, materials, imaging and spectroscopy owners. These are now explicit **references rather than newly reinvented machinery**.
