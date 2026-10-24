@@ -142,7 +142,8 @@ def paired_analysis(record):
         if not isinstance(meta.get(k), str) or not meta[k].strip():
             obligations.append('missing_' + k)
     for k in ('independent_field_map', 'force_calibration', 'thermal_and_vibration_controls',
-              'current_power_log', 'blinded_sham', 'independent_replication'):
+              'current_power_log', 'blinded_sham', 'polarity_factorial_verified',
+              'ambient_field_reference_verified', 'independent_replication'):
         if meta.get(k) is not True:
             obligations.append('unverified_' + k)
     if not provenance_ok:
@@ -172,6 +173,13 @@ def _selftest():
     assert abs(b['anti_coil_center_gradient_T_per_m'] + .010790115426878553) < 1e-13
     assert .0109 < b['force_to_weight_abs'] < .0111
     assert .90 < b['moment_for_weight_Am2_abs'] < .92
+    from psychotronics_field_loom_coils import loop_b
+    def anti_axis(z):
+        return (loop_b(0, 0, z, .1, -.05, 100, 1)[2] +
+                loop_b(0, 0, z, .1, +.05, 100, -1)[2])
+    h = .001
+    numerical_gradient = (anti_axis(h) - anti_axis(-h)) / (2*h)
+    assert abs(numerical_gradient / b['anti_coil_center_gradient_T_per_m'] - 1) < .0002
     p = {'pair_id': 'p1', 'session_id': 's1', 'moment_am2': .01,
          'moment_std_am2': .0001, 'common_systematic_std_n': .000002,
          'active': {'force_n': -.000108, 'force_std_n': 1e-6,
