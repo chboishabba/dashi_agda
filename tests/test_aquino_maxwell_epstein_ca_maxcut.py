@@ -1041,7 +1041,7 @@ def test_canada_paid_aggregate_is_not_private_raw_data_or_proven_outcome():
     assert "canadaAggregateFindingDoesNotPaySpecificRiponRow = refl" in case
     assert "two-arm-canadian-promotion-cut true true false false false" in case
     assert "kogan-aiq-canadian-regulator-source-cut-20261025.md" in roadmap
-    assert "aggregate Kogan-derived AIQ lineage" in portfolio
+    assert "Kogan-derived AIQ lineage" in portfolio
     assert "P0 aggregate link source finding CLOSED" in roadmap
     assert "whole-network" in portfolio.lower()
 
