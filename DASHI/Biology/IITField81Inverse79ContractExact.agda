@@ -1,6 +1,7 @@
 module DASHI.Biology.IITField81Inverse79ContractExact where
 
 open import DASHI.Core.Prelude
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 ------------------------------------------------------------------------
 -- Explicit finite-field multiplicative contract for 3^4 = 81.
