@@ -5,3 +5,6 @@ module DASHI.Papers.Everything where
 -- contracts without moving them into implementation namespaces.
 
 import DASHI.Papers.NavierStokes.Everything
+
+-- Original source identities and non-promoting cross-paper source roles.
+import DASHI.Papers.ThreePaperSourceAtlas20261025Exact
