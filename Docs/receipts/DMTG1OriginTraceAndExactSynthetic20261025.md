@@ -11,6 +11,11 @@
 
 ## Completed mathematical and documentary discriminators
 
+### Independent enumerative arithmetic check (performed outside the GitHub checkout)
+
+A separate local Python/NumPy count-cube implementation with the *original MATLAB axis convention* (next/current/previous) was compared against a separately implemented simple positive-support G1 count function. Enumerating all (3^n) label sequences for (n=3,4,5,6,7) (total **3,267** sequences) gave **maximum absolute G1 difference = 0.0** in the local run. This verifies the *mathematical count-index equivalence on this bounded synthetic domain*, NOT the exact GitHub-file runtime, missing-state/epsilon behaviour of the original MATLAB, or any original study participant data. The test sources committed in this PR are still pending their own Python execution receipt.
+
+
 An independent local Python arithmetic calculation on the constructed 12-label sequence `[1,2,3,2,1,2,1,3,2,1,3,1]` yields `G1=2.7725887222397807`, consistent with `4 log 2=2.772588722239781`. A repeating `1→2→3` cycle, a deterministic alternating sequence and a constant single-state sequence yield `G1=0` on their stated supports. Reversal leaves this three-label conditional-dependence statistic unchanged. These results belong to synthetic mathematics, not to the original EEG patients; 14 dedicated regression cases were committed, **not run at current GitHub head**.
 
 The source-level join is now precise: author participant IDs align with 25 Zenodo recording pairs; the original three-condition MATLAB pipeline is located; the exact original G1 estimator in its donor package is located; an independent original Python software formulation matches the statistic. None of this alone establishes:
