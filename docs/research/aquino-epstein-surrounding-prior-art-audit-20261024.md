@@ -53,3 +53,11 @@ Existing general machinery audited:
 
 ## Repo implementation and verification
 Within pre-existing `EpsteinBlackApolloSameObjectReceiptRound20261014Exact`: original-source role receipts for transcript, committee report, House resolution, Apollo Dechert/SEC and corporate governance; explicitly encoded false fields for contract byte custody, crime verdict, payment allocation and cross-programme command. Existing `AquinoMaxwellEpsteinCAMaxCutExact` consumes that owner; no duplicate Black source ontology. Add structural regression guards, update case roadmap. Source-written/read-back validation only; full Agda, scripts and court-document authentication not claimed.
+
+## Additional exact litigation identity guard — 15 October 2026
+
+Two separate case identifiers (not merely two news articles):
+- **Black v. House Committee on Oversight**, D.D.C. **1:26-cv-03084**, [docket listing](https://dockets.justia.com/docket/district-of-columbia/dcdce/1:2026cv03084/296175): complaint filed Sep 3 2026 to challenge House subpoena. Public Justia listing retrieved was last updated September 3, so a later final federal disposition has **not** been verified in this audit. Complaint existence is not a court finding that the subpoenas were invalid.
+- **Doe v. Black**, S.D.N.Y. **23-cv-6418 (JGLC)**, original [ECF 485 order dated Oct 15 2026](https://cases.justia.com/federal/district-courts/new-york/nysdce/1:2023cv06418/602764/485/0.pdf), **one-page signed order inspected**. At the plaintiff's request (ECF 481) and without Black's opposition (ECF 483), the court dismissed the civil action **with prejudice** under Rule 41(a)(2); a fees motion (ECF 440) was expressly left for later. This is not a trial finding on whether alleged misconduct occurred, not a dismissal of the D.D.C. action and not confirmation of a general acquittal. The civil plaintiff's identity need not be further pursued.
+
+Typed proceeding identifiers and court-record source roles added in the existing Black owner, consumed by the case owner; no new parallel court ontology. Preserve the original petition/docket as distinct from judicial order and from the House contempt resolution. **P0 court-source join closed for the Oct 15 SDNY dismissal; DDC final status remains open.**
