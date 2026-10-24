@@ -106,7 +106,7 @@ for p in (.0,.2,.35,.5,1.0):
     gradient=source_gradient36(a,b,t)
     indices=[7,18+8,18+3]
     assert max(abs(np.delete(gradient,indices)))<1e-10
-    assert max(abs(gradient[indices]-rhs(p,sol.sol(p))[3:]))<1e-10
+    assert max(abs(gradient[indices]-rhs(p,sol.sol(p))[3:,0]))<1e-10
 
 # Necessary Gauss/current check: variations of the scalar source
 # along each Hermitian su3L/su3R generator are orthogonal to the
