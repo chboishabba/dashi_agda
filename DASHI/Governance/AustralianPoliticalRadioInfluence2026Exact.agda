@@ -25,6 +25,11 @@ data PoliticalRelation : Set where
   prospectiveSponsorOffer : PoliticalRelation
   externalPlatformSupplier : PoliticalRelation
   financialEntitlement : PoliticalRelation
+  securedStakeFinancing : PoliticalRelation
+  reportedUnverifiedFunding : PoliticalRelation
+  mediaRedistribution : PoliticalRelation
+  reportedMeeting : PoliticalRelation
+  publishedCorrespondence : PoliticalRelation
   politicalDonation : PoliticalRelation
   inKindTransportSupport : PoliticalRelation
   policyConsultation : PoliticalRelation
