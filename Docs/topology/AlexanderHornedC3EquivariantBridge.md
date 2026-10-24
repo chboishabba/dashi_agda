@@ -439,3 +439,65 @@ Do not promote identical C3 phase counts to Monster 3B identity.
 
 Canonical detailed proof/source ledger:
 `Docs/topology/AlexanderHornedA5C3RestrictionVOAWeld20261024.md`.
+
+
+## Torsion versus twisted horns, primary-source audit
+
+Hatcher's printed pages 171–172 explicitly verify that the
+**standard** Alexander horned-ball exterior has a free-group
+injective tower `F_(2^n) -> F_(2^(n+1))` and is their compactness
+limit. Thus the classical exterior group is **torsion-free**:
+every element belongs to some free stage; nonzero powers of a
+nontrivial free-stage word remain nontrivial by injectivity.
+Its simultaneously trivial abelianization makes it perfect,
+not trivial. Perfectness alone does NOT establish torsion-free
+(for example A5 itself is perfect and has order-three elements).
+
+The **three-root abstract group** has the same property because
+its tower is three independent copies of these injective free
+maps. That is an abstract mathematical fact, distinct from
+certifying the proposed three-copy wild embedding and its pi1.
+
+The phrase 'twisting horn' denotes geometry, not a relation
+`m^3=1` in the fundamental group. The analogous braid
+`b=sigma1 sigma2` maps to an order-three permutation, but
+`b^3` is a nontrivial full twist: its B3 exponent sum is 6,
+not 0. Likewise a 120-degree ambient rotation is an element
+of an AUTOMORPHISM group, not a loop class in the complement.
+Other 3-manifolds can have torsion fundamental groups:
+`pi1(RP3)=C2` or `pi1(L(3,1))=C3`. None of these imply a
+new relation in the Alexander exterior.
+
+An independent finite A5 audit chooses the root meridian image
+to be an actual order-three 3-cycle `s=(0 1 2)`. It finds A5
+generating children whose commutator is s. Therefore
+`q(m)^3=1=q(m^3)`, yet `m^3 != 1` in the abstract source.
+This sharpens the earlier order-five kernel witness. An actual
+geometric source interpretation still requires the collar
+van Kampen stage maps.
+
+New exact owner:
+`AlexanderHornedTorsionFreeStageTransportExact.agda` proves
+torsion-free transport given power-preserving injective stage
+embeddings covering the target, plus the impossibility of an
+order-three source lift of a nontrivial C3 quotient image.
+The target's torsion-freeness is NOT a premise of that lemma.
+`scripts/alexander_horned_torsion_steelman_probe.py` provides
+a finite reduced-word and A5 quotient check; the standalone
+independent local equivalent check passed.
+
+**Riebe source warning:** Riebe (1968), `The Fundamental
+Groups of the Complements of Some Solid Horned Spheres`,
+abstract describes groups G^k that are free of countably
+infinite rank. Such a group cannot be identified with the
+NONTRIVIAL PERFECT classical Hatcher exterior group, as a
+nontrivial free group has nonzero abelianization. Access to
+the primary thesis PDF failed (403), so this is an unresolved
+source/object-identification issue; do not promote it as a
+contradiction in either author's mathematical proof or as a
+direct justification of this specific G. Detailed analysis:
+`Docs/topology/AlexanderHornedTorsionTwistSteelman20261024.md`.
+
+Kernel typechecks and actual three-copy geometric van Kampen
+are still independently required. This finding changes no
+Monster or Jordan/VOA promotion status.
