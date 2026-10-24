@@ -60,7 +60,7 @@ Selected P(earlier | accepted, filter 0)   = (1, 0)
 Selected P(earlier | accepted, filter 1)   = (0, 1)
 ```
 
-This is a selection-bias demonstration, **not** a concrete implementation of ABL Hilbert-space amplitudes. The Agda finite theorem and standard-library Python checker explicitly keep this limited status. The mathematical result is a counterexample to an implication between *types of statements*; it does not establish physical no-signalling for all possible new dynamics.
+This is a **classical selection-bias demonstration**, not a concrete implementation of ABL Hilbert-space amplitudes. The separate exact-rational **projective-qubit ABL** checker now supplies a genuine 2D Hilbert-space example with |+> initial state, intermediate Z measurement and later Z basis postselection. It derives the joint table [[1/2,0],[0,1/2]], conditional tables (1,0)/(0,1), and the Born marginal (1/2,1/2). Neither check demonstrates free control of the later measurement *outcome*, nor earlier-event intervention. The mathematical result is a counterexample to an implication between *types of statements*; it does not establish physical no-signalling for all possible new dynamics.
 
 ## Pareto / Ibrahim / snowball next-action frontier
 
