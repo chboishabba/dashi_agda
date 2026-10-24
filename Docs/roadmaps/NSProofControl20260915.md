@@ -1,3 +1,110 @@
+# 2026-10-25 priority gate: B NO-CARDINALITY RATE ALREADY PROVED — R690 FIRST
+
+**User objective:** unforced NS A/B; no detour to C/D publication.
+Original authorship of the Navier–Stokes PDE, Fourier/heat semigroup,
+Littlewood–Paley/Bony classification, Sobolev embeddings, and the
+pre-existing DASHI R685/R690/OutputRate theorem terms is preserved.
+This cut's original contribution is an independent theorem-owner
+**specialization, scalar padding-cocycle proof and adversarial test**.
+No original Clay regularity theorem is claimed.
+
+## B true minimal route (supersedes six-block covariance as analytic target)
+
+The pre-existing source
+`NSTriadKNFixedOutputPhysicalOutputRateNormalFormExact.agda`
+ALREADY proves a genuinely padding-invariant same-output identity:
+  r_(p,q)=ν(|p|²+|q|²)=ν|k|²/2+ν|p-q|²/2.
+For M_k=Σ A_(p,q), work W=2 Re Hermitian pairing,
+  K_k=Σ r_(p,q) W(M_k,A_(p,q))
+     =ν|k|²/2 W(M_k,M_k)
+       +ν/2 W(M_k,Σ|p-q|² A_(p,q)).
+The full R685 commutator/tangent rate identity also supplies
+  K_k=W(M_k,commutator_k)-W(M_k,tangent_k).
+**Reuse, do not rebuild, these existing exact source owners.**
+
+New actual R685 specialization (same physical Galerkin system,
+velocity, projected nonlinear forcing, literal output fibre):
+`r685PhysicalModalRateIsOutputRate`,
+`r685PhysicalNoCardinalityRateNormalForm`,
+`r685PhysicalRateKernelIsOutputHeatPlusDifference`,
+`r685InputLaplacianIsOutputHeatPlusDifference`.
+They apply the pre-existing `OutputRate` proof to R685/R684's
+actual input-Laplacian work, which is the quantity later summed in
+R690. The resulting exact global signed **candidate integrand**
+(for the existing R690 factor 8) is
+  4ν Σ_k [ |k|² W(M_k,M_k)
+            + W(M_k,Σ_(p+q=k)|p-q|² A_(p,q)) ].
+The FIRST summand is nonnegative for ν>0; the SECOND work can be
+negative on arbitrary complex mixed-cell data. Hence no sign/payment
+can be inferred by inspecting multiplier positivity alone. R690
+already performs output SUM BEFORE integration/estimation; reuse it.
+
+**Historical R236 firewall:** The previous source-written six-block
+identity
+  ν criticalTouching = R W(M,M)-nK-ν deepOnly
+is algebraically correct as a conditional source compilation, but
+the source-defined n and R depend on ZERO-amplitude fibre padding.
+It is NOT a uniform physical energy estimate. No changes to its
+valid algebra or historical attribution. New general scalar-list
+proofs in `NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact`:
+`pairAgainstHeadAppendZero`, `pairDifferenceAppendZero`,
+`centeredPairCovarianceAppendZero`, exhibiting exactly
+  C_padded-C = r_new W(M,M)-Σ r_i W(M,A_i).
+On the already existing physical shear k=(1,1,0) with two core
+cells, this equals r_new-2 even when every added velocity amplitude
+vanishes. For a high-high-to-low row
+p=(N,0,0), q=(1-N,1,0), r_new=2N²-2N+2,
+the single-row core-touching increment is 2N²-2N; the
+actual full literal cube grows even faster (already fully proved by
+`scripts/ns_b4_literal_padding_adversary.py`).
+Physical energy/dissipation remain E=D=4. Auxiliary bound falsified,
+**NOT** NS regularity. Crucial distinction: adding one incidence is a
+partial-fibre algebra test; the existing all-cutoff cube computation
+is the actual cutoff theorem.
+
+**Nonnegativity firewall:** with abstract complex cells one can have
+W(M,Σ|p-q|² A)<0 while |p-q|²>=0; see
+`tests/test_ns_b_output_rate_signed_frequency_negative_control.py`.
+That test is NOT yet a helical physical-realizability theorem and
+cannot establish a physical sign failure by itself.
+
+**Next B theorem with actual effect:** prove for ALL literal Galerkin
+trajectories, cutoffs and physical selected helical modes an integrated
+cutoff-uniform **signed** estimate on the R690 no-cardinality global
+input-Laplacian/commutator integrand sufficient to discharge B's
+continuation criterion. Positivity of a subterm or finite algebra
+alone is not it. Avoid another n-weighted R236 B4 attempt.
+`NSTriadKNR650GlobalSignedRateLiftInputLaplacianRound690Exact`
+already defines/sums/integrates the precise signed object; there is
+no mathematical reason to duplicate the aggregator.
+
+## A actual remaining continuation hinge
+
+The previous cut's physical H¹ dual-Sobolev estimate is good:
+  ||(-νΔ)^(-1)Pdiv(u⊗u)||²_(dot H½) <=K² E D/ν²,
+and its causal Duhamel L²_t dot H½ bound is independent of T.
+But under NS scaling the squared spacetime norm scales λ^-2,
+so it cannot substitute for critical Serrin/BKM/global A3.
+The already provided whole-space Schwartz/Fourier source owner and
+Bishop canonical continuum carriers remain source targets.
+The next theorem must CONTROL a same-solution continuation-critical
+norm noncircularly, not merely improve an L² source majorant.
+
+## Execution/verification boundary
+
+Independent exact local Python/SymPy tests:
+`/mnt/data/ns_ab_current_cut_checks.py`: **5 passed** (algebraic
+padding cocycle, shear critical-fibre row, output-rate decomposition,
+negative signed-frequency-work witness, scaling).
+The additional GitHub regression files are source-written; an
+independent exact-PR-head pytest was not available in this environment.
+**No Agda/Lean kernel typecheck** of new source terms (toolchains
+absent), and no universal cutoff-uniform B estimate or A3 proof.
+This is a significantly narrower analytic roadmap, not
+a completed unrestricted Clay A/B proof.
+
+---
+
 # 2026-10-24 A/B DECISIVE SAME-SOURCE RECUT — DO NOT REOPEN OLD LEAVES
 
 **Research goal is original unforced Clay A/B**. This update supersedes
