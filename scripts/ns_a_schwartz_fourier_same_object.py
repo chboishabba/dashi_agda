@@ -122,6 +122,17 @@ def certificate():
     total_global=S.simplify(low_global+high_global)
     assert S.simplify(total_global-
         8*S.pi*EE**S.Rational(3,2)*S.sqrt(DD)/nu**2)==0
+    # Standard unforced Leray energy inequality:
+    # E(t) <= E0, ∫_0^T D(t)dt <= E0/(2*nu).
+    # Apply Holder to the *same* instantaneous stationary Stokes
+    # response bound, for a.e. t where u(t)∈H1.
+    E0, T=S.symbols("E0 T",positive=True)
+    spacetime_upper=S.simplify(
+        (8*S.pi/nu**2)*E0**S.Rational(3,2)*
+        S.sqrt(T)*S.sqrt(E0/(2*nu)))
+    asserted_spacetime_upper=(
+        4*S.sqrt(2)*S.pi*E0**2*S.sqrt(T)/nu**S.Rational(5,2))
+    assert S.simplify(spacetime_upper-asserted_spacetime_upper)==0
     return {
         "schema":"ns.a.schwartz-fourier-same-object.v1",
         "convention":"F[f](xi)=integral exp(-i*x.dot(xi)) f(x) dx",
@@ -144,6 +155,8 @@ def certificate():
         "arbitrary_H1_source_bound":"min(E*|xi|, sqrt(E*D))",
         "arbitrary_H1_crossover_frequency":"sqrt(D/E)",
         "arbitrary_H1_global_fourier_resolvent_L2_squared_bound":str(total_global),
+        "Leray_energy_inequality_spacetime_response_L2_squared_upper":str(spacetime_upper),
+        "time_bound_needs_no_uniform_H1":"true; requires integral D(t) finite only",
         "exact_nonzero_projected_frequency":"(1,0,1)",
         "source_only_not_claimed":[
             "general FourierTransformVelocity for every solution",
