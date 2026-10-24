@@ -88,19 +88,20 @@ queenslandNoisePolicy = sourceBoundClaim
   "Acoustic environmental values, receptor objectives, sleep and amenity"
   "A statutory objective does not itself establish a concrete site compliant or noncompliant"
 
-data EvidenceClaimCategory : Set where
-  acousticNoiseClaim : EvidenceClaimCategory
-  rfBiologicalClaim : EvidenceClaimCategory
-  intelligenceHistoryClaim : EvidenceClaimCategory
+data PhysicalClaimCategory : Set where
+  acousticNoiseClaim : PhysicalClaimCategory
+  rfBiologicalClaim : PhysicalClaimCategory
 
-claimChannel : EvidenceClaimCategory → PhysicalChannel
+claimChannel : PhysicalClaimCategory → PhysicalChannel
 claimChannel acousticNoiseClaim = airbornePressure
 claimChannel rfBiologicalClaim = electricMagneticField
-claimChannel intelligenceHistoryClaim = electricMagneticField
 
--- The third mapping is only a requested investigative domain, NOT evidence
--- that historical programmes used a particular contemporary device.
--- Source matching, waveform, apparatus and operational evidence remain open.
+data HistoricalClaimCategory : Set where
+  intelligenceHistoryClaim : HistoricalClaimCategory
+
+-- Historical documentary records are not a physical measurement channel.
+-- Neither the existence of ARTICHOKE nor a contemporary RF carrier
+-- identifies a common device, waveform, subject or operation.
 
 -- Minimal *linear weighted-power proxy*, not a dB(A) meter.
 -- Positive toy weights 2 and 3 stand for two different band sensitivities.
