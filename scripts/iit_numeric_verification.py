@@ -39,6 +39,7 @@ from iit_f81_f9_norm_inversion_audit import audit as f81_norm_inversion_audit
 from iit_f81_f9_quadratic_tower_audit import audit as f81_same_tower_audit
 from iit_jfine_four_one_four_s3_zeta_audit import audit as jfine_s3_audit
 from iit_jfine_d4_s3_mixed_character_audit import audit as jfine_d4_s3_mixed_audit
+from iit_jfine_heisenberg_four_pair_audit import audit as heisenberg_four_pair_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -265,6 +266,19 @@ def verify_numeric_results() -> dict:
     assert mixed["D4_commutes_with_value_S3"]
     assert not mixed["original_Monster_action_intertwined"]
 
+    h4 = heisenberg_four_pair_audit()
+    assert h4["group_order"] == 19683
+    assert h4["centre_order"] == 3
+    assert h4["symplectic_quotient_order"] == 6561
+    assert h4["exhaustive_elements"] == 19683
+    assert h4["quotient_nonzero_witnesses_checked"] == 6560
+    assert h4["H6_729_basis_splits_into_H4_81_blocks"] == 9
+    assert h4["source_H6_zero_tail_embedding"]
+    assert h4["global_C3_value_cycle_is_central_left_translation"]
+    assert not h4["global_S3_value_sign_is_group_automorphism"]
+    assert not h4["original_D4_mirror_preserves_chosen_cocycle"]
+    assert not h4["source_monster_representation_intertwiner"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -279,6 +293,7 @@ def verify_numeric_results() -> dict:
         "selected_punctured79": selected,
         "jfine_four_one_four_s3_zeta": jfine_s3,
         "jfine_d4_value_s3_mixed_character": mixed,
+        "jfine_heisenberg_four_pair": h4,
         "projective_f9_pointed80": projective,
         "projective_group_f9_720": pgl,
         "f81_norm_inversion": f81_norm,
