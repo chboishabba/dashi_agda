@@ -70,5 +70,25 @@ for name,val in (
  ("electron_light_theta_scale",2*mp.pi*me*b0),
  ("indicative_alpha_s_1overb0",alpha_hi)
 ): print(name,mp.nstr(val,19))
+
+# BIDI repair Pareto: at the SAME radius, free periodic REAL bosonic
+# polarizations contribute at most +5 each to the compatibility residual.
+# No extra fermion or 5D model change allowed in this restricted comparison.
+def h(s):
+    return f(s)-s*fp(s)/5
+assert abs(h(mp.mpf('0'))-1)<mp.mpf('1e-40')
+for s in map(mp.mpf,('0.00001','0.5','1','3','10')):
+    assert 0<h(s)<1
+assert delta+47*5<0
+repair_mass_parameter=mp.findroot(
+    lambda v:48*5*h(v)+delta,
+    (mp.mpf('1e-6'),mp.mpf('1e-5')))
+assert repair_mass_parameter>0
+assert abs(48*5*h(repair_mass_parameter)+delta)<mp.mpf('1e-35')
+print("minimum_added_free_periodic_real_boson_units_same_radius",48)
+print("illustrative_48_boson_mass_GeV",
+      mp.nstr(repair_mass_parameter/(2*mp.pi*b0),16))
+print("WARNING 48 unexplained light scalar polarizations are not an established physical model")
+
 print("PASS restricted same-radius, zero-holonomy QCD vacuum no-go")
 print("NO claim about arbitrary KK spectra, interacting QCD, chirality or Earth.")
