@@ -1,3 +1,26 @@
+> **Superseding 2026-10-24 proof consistency result:** Ri's
+> viscosity-INDEPENDENT Theorem 1.1 bound (1.3), in its stated
+> all-viscosities/all-smooth-data form, is inconsistent with OpenAI's
+> released unforced Euler C¹ blowup (for s>5/2), using standard smooth
+> pre-blowup inviscid convergence and Sobolev embedding. This is a
+> conditional mathematical incompatibility assuming the released Euler
+> result, NOT a disproof of fixed-positive-viscosity NS regularity.
+> See `Docs/research/ns_ab_ri_euler_no_go_and_physical_stretch_20261024.md`
+> and source-written Lean
+> `dashi_lean4/NSEulerRiUniformViscosityNoGo.lean` (kernel unchecked).
+> Earlier text below assigning Ri's global A3 estimate as a candidate
+> import is superseded; only his independently validated local
+> frequency identities remain potential donors.
+>
+> **B acceptance witness:** `tests/test_ns_physical_vorticity_production_exact.py`
+> computes an actual nonzero physical 3D triad with exact enstrophy
+> production +8, independently matching twice the vorticity
+> stretching integral; zero-padding leaves it invariant. The same
+> smooth datum has positive *instantaneous* enstrophy derivative for
+> a large amplitude at ν=1. This forbids a naive uniform
+> dissipation-only pointwise stretching estimate, NOT subtle
+> integrated compensation or global B regularity.
+
 # NS A/B four-paper primary-source integration ledger — 2026-10-24
 
 **Authority rule.** Original authors own every theorem below. arXiv HTML pages are primary manuscript versions, not independent theorem validation. DASHI owns only the mappings, logical discriminators, exact elementary checks, and eventual independently checked formal proofs. Do not describe a claimed theorem as a kernel result or transfer hypotheses between problems.
