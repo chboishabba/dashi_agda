@@ -46,6 +46,15 @@ class TestDeltaOPM(unittest.TestCase):
         self.assertFalse(res["admissible_for_experimental_review"])
         self.assertIn("not a measured delta-band sensor noise spectrum",res["hard_errors"])
 
+    def test_nonfinite_sampling_fails_preflight(self):
+        for sample in ("NaN", "Infinity", "-Infinity", True):
+            candidate={k:"dummy" for k in m.REQUIRED_RECEIPTS}
+            candidate.update(recording_modality="human-OPM-MEG",
+                             sampling_hz=sample)
+            result=m.validate_receipt(candidate)
+            self.assertFalse(result["admissible_for_experimental_review"])
+            self.assertTrue(any("sampling_hz" in error for error in result["hard_errors"]))
+
     def test_full_synthetic_manifest_is_not_empirical_evidence(self):
         x={k:"synthetic-placeholder" for k in m.REQUIRED_RECEIPTS}
         x.update(recording_modality="human-OPM-MEG",sampling_hz=128)
