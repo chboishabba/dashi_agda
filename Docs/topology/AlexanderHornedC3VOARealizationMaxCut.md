@@ -623,3 +623,115 @@ SL2(F5) is NOT automatically a 2D Z5 integral lift.
 the particular three-copy geometric exterior pi1
 identification. No faithfulness of G or equivalence to
 Monster 3B is promoted.
+
+## 2026-10-24 cross-PR infinite-order and selected A5 witness correction
+
+**Triggered by neutrino CP/PMNS PR #1247:**
+https://github.com/chboishabba/dashi_agda/pull/1247
+
+### Source audit: selected quotient meridian initially had the wrong order
+
+The original `scripts/alexander_horned_c3_a5_probe.py`
+and `scripts/alexander_horned_c3_voa_a5_action_probe.py`
+selected their root as the **first** nonidentity commutator of a
+pair generating A5.  Independent exact permutation enumeration
+established that this initial root is
+
+```
+(2,1,3,0,4)    # order THREE, not five.
+```
+
+This contradicted the VOA script's subsequent `assert root_order==5`
+and the prior illustrative kernel witness `m^5`.
+
+**Owner-side correction:** Both scripts now select the FIRST
+order-**five** commutator for which the selected pair generates A5.
+Independent exhaustive lexicographic search found
+
+```
+root g = (2,0,3,4,1), order(g)=5
+a      = (0,1,3,4,2)
+b      = (2,3,0,1,4)
+[a,b]  = g
+<a,b>  = A5 (all 60 elements)
+```
+
+The 60/60 commutator section is unchanged in principle.  Selecting
+the required root *before* constructing the compatible descendant
+commutator section repairs the finite quotient data, not the
+Hatcher free-group/directed-colimit mathematics.
+
+Added `tests/test_alexander_horned_c3_a5_order_selection.py`
+to prevent treating a generic generating-pair commutator as an
+order-five witness, and to assert both probe selection rules agree.
+
+**Execution grade:** Independent locally executed permutation
+enumeration confirms the corrected root and the order-three
+failure of the previous choice.  Both updated GitHub Python scripts
+were source-read-back, but their full exact-head test commands
+and the Agda/Lean kernel jobs have not been rerun following
+the correction.  Superseded `order-five root PASS` claims made
+without the selector condition should be regarded as **invalid
+for the original code**, not inherited as fresh receipts.
+
+### Relation to neutrino CP residual product
+
+- The Hatcher source meridian `m` has **infinite order** in
+  the abstract injective free-group colimit `G`; `m^5 !=1`.
+- Its new selected **finite quotient** `q(m)=g` has
+  `g^5=1`, hence the concrete c=0 VOA actor loses `m^5`.
+- The geometric C3 rotation `r` has order three in
+  `Aut(G)` and nontrivial class in `Out(G)` in the
+  **three-copy** horned model.  It is NOT an order-three
+  element of the torsion-free source group `G`.
+  The semidirect extension `G ⋊ C3` DOES have an
+  actual order-three rotation element.
+- The neutrino toy uses complex 3×3 matrices:
+  `T=diag(1,ζ,ζ²)` (order three),
+  `S1=U diag(1,-1,-1) U†` (order two), and
+  `TS1` is infinite-order by its computed nonintegral
+  Galois trace.
+- In an additional direct exact rational cyclotomic
+  calculation, `(TS1)^5 != I`; specifically its
+  `(0,0)` entry is approximately
+  `0.3402566114 - 0.1159850079i`, not 1.
+- Therefore any `A5^3`-quotient representation that tries
+  to send **this selected** `q(m)` to `TS1` is
+  impossible: fifth powers would have to agree.
+  PR #1247 now encodes this as an abstract Agda
+  homomorphism-transport no-go and a committed
+  exact-`Fraction` Python regression.
+
+This **does not prohibit** every representation of the infinite
+horn group into a matrix group.  Nor does it prove that
+`TS1` is itself a horned-complement loop or that the
+VOA acts on physical lepton states.  A different infinite-image
+representation requires the full compatible commutator tower,
+same-space C3 equivariance and a source-specified physical
+operator identification.  The horn group is perfect, so it
+cannot support a nontrivial *abelian* character
+`G → U(1)` or `G → C3`, even though nonabelian
+A5 quotients and the outer C3 action exist.
+
+### Attribution correction
+
+The original classical horned sphere belongs to
+**J. W. Alexander (1924)**; its commutator-tower
+proof is in **A. Hatcher, Algebraic Topology**
+Example 2B.2, pp. 170–172.  Norman W. Riebe's
+1968 higher-order horn groups and finite
+A5 representations are **related prior art, not the
+same source group**; do not identify Riebe's
+groups with Hatcher's group just because both
+contain the word "horned."
+
+Acceptance (postfix):
+
+```sh
+python3 scripts/alexander_horned_c3_a5_probe.py
+python3 scripts/alexander_horned_c3_voa_a5_action_probe.py
+python3 -m unittest discover -s tests -p 'test_alexander_horned_c3_a5_order_selection.py' -v
+```
+
+No merge, CI, Agda, Lean, actual geometric collar proof, or
+physical neutrino/VOA equivalence is asserted from this update.
