@@ -82,3 +82,55 @@ See `docs/hyperfabric-k27-26d-su2-nsflux-linear-dilaton-worldsheet-maxcut-202610
 
 This is an actual improvement in **selected leading 26D physical continuum source**, not a reason to lift ATLAS p276 unoriented duads to the physical B2 module. Existing 2A/2B no-go stands.
 Worldsheet finite-level Sugawara `k+2` correction means the unshifted classical slope leaves `c−26=12/[k(k+2)]`; a genuine quantized CFT candidate must use the corrected charge and still pay state/BRST/global string conditions. The 27D E27/K27 missing-dual-generator issue remains independent.
+
+
+## Final global-curved target correction / positive full-source dual (2026-10-24)
+
+**Target SAME-BACKGROUND advance:** the subsequent selected
+`R^(1,22)×S3_r`, `H=(2/r)volS3`,
+`Phi=x¹/r` leading continuum solution now has **explicit
+patch potentials B_N/B_S** with nontrivial gerbe flux
+`∫S3 H=4pi²r²` and **explicit global noncompact C22**:
+
+```text
+vol26=vol_(R1,22) ^ volS3,
+*26 H3=-(2/r)vol_(R1,22),
+beta22=dt ^ dx² ^...^ dx²²,
+C22=-exp(-2Phi) beta22,
+dC22=exp(-2Phi) *26 H3.
+```
+
+The local duality comes from the **same** nonflat
+g/H/Phi that solved the leading NSNS field equations.
+Although the gerbe H is non-exact on S3 and no global
+B2 exists, the dual 23-form on noncompact R1,22
+is exact and admits the explicit C22. This
+distinguishes differential-form source data from
+the still-unbuilt `K27` 22-form **Lie generator**.
+
+Existing SO24 transverse `299+276+1=576` is
+the *flat-space massless little-group* decomposition.
+The actual S3 flux / spacelike gradient background
+breaks global SO24 symmetry; its 276 two-form
+polarisations are NOT automatically one global
+M24-equivariant field multiplet in this curved source.
+The original Atlas M24 p276 versus oriented Λ²
+2A/2B character mismatch remains a rigorous
+comparison of the stated **abstract 24-point natural actions**.
+
+**No Z2/C3/U1 identity:** oriented duad is a Z2
+sign local system, user signed-neutral phases rotate by
+C3, and the NS gerbe has U(1) 2-form cocycle.
+A rotation C3 cannot supply a nontrivial
+Z2 reversal via a group homomorphism
+(coprime orders). Lean #84 writes the
+`threeCycleCannotBeOrientationFlip` group proof,
+source-written/kernel unverified. A more elaborate
+semantic functor would need to explain its own
+group-action changes and observed observables.
+
+See the already-updated worldsheet dossier
+`docs/hyperfabric-k27-26d-su2-nsflux-linear-dilaton-worldsheet-maxcut-20261024.md`
+and new exact Python
+`scripts/check_k27_26d_global_gerbe_dual_cft.py`.
+No direct YM/NS/RH/Clay promotion.
