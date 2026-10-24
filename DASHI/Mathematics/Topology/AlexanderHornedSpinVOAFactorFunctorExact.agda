@@ -31,7 +31,7 @@ import DASHI.Mathematics.Topology.AlexanderHornedC3VOAModeLiftExact as Mode
 import DASHI.Mathematics.Topology.AlexanderHornedC3AmbientRotationExact as Triple
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
 
-record SurjectiveFiniteFactorMap : Set₁ where
+record SurjectiveFiniteFactorMap : Set₂ where
   field
     Source : Actor.ActorFactorGroup
     Target : Actor.ActorFactorGroup
