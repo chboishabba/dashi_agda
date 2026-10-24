@@ -18,6 +18,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Unnormalised using (ℚᵘ)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import Real as BishopReal
@@ -93,10 +94,10 @@ nearOriginPhysicalBound D I =
 physicalViscousHeatAdmitsPositiveRationalFloor :
   (fluid : Heat.PositiveViscosity) →
   (point : Heat.PuncturedEuclideanFrequency) →
-  Σ BishopReal.ℝ
-    (λ lower →
-      BishopReal._<_ BishopReal.0ℝ lower ×
-      BishopReal._<_ lower
+  Σ ℚᵘ
+    (λ rational →
+      BishopReal._<_ BishopReal.0ℝ (BishopReal._⋆ rational) ×
+      BishopReal._<_ (BishopReal._⋆ rational)
         (Heat.viscousHeatRate fluid (Heat.frequency point)))
 physicalViscousHeatAdmitsPositiveRationalFloor fluid point
   with BishopP.fast-density-of-ℚ
@@ -104,7 +105,7 @@ physicalViscousHeatAdmitsPositiveRationalFloor fluid point
     (Heat.viscousHeatRate fluid (Heat.frequency point))
     (Heat.viscousHeatRatePositive fluid point)
 ... | rational , lowerPositive , lowerBelowHeat =
-  BishopReal._⋆ rational , lowerPositive , lowerBelowHeat
+  rational , lowerPositive , lowerBelowHeat
 
 ------------------------------------------------------------------------
 -- UNIFORM SHELL FLOOR (a stronger A1 application than a pointwise floor).
@@ -122,10 +123,10 @@ physicalShellHeatAdmitsPositiveRationalFloor :
   (fluid : Heat.PositiveViscosity) →
   (radiusSquared : BishopReal.ℝ) →
   BishopReal._<_ BishopReal.0ℝ radiusSquared →
-  Σ BishopReal.ℝ
-    (λ floor →
-      BishopReal._<_ BishopReal.0ℝ floor ×
-      BishopReal._<_ floor
+  Σ ℚᵘ
+    (λ rational →
+      BishopReal._<_ BishopReal.0ℝ (BishopReal._⋆ rational) ×
+      BishopReal._<_ (BishopReal._⋆ rational)
         (BishopReal._*_ (Heat.viscosity fluid) radiusSquared))
 physicalShellHeatAdmitsPositiveRationalFloor
     fluid radiusSquared radiusSquaredPositive
@@ -137,7 +138,7 @@ physicalShellHeatAdmitsPositiveRationalFloor
         (BishopP.0<x⇒posx (Heat.viscosityPositive fluid))
         (BishopP.0<x⇒posx radiusSquaredPositive)))
 ... | rational , floorPositive , floorBelowShellHeat =
-  BishopReal._⋆ rational , floorPositive , floorBelowShellHeat
+  rational , floorPositive , floorBelowShellHeat
 
 ------------------------------------------------------------------------
 -- High-frequency physical identification.
