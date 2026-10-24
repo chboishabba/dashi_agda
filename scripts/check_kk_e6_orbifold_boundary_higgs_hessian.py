@@ -11,6 +11,13 @@ For t=0.0246,lambda=4,mu2=3+1.5t²:
   Chi=b E33+t E21,b²=1-2t²;
   exact restricted-stationary solution of cubic E32,E33,E21
   and numerically full 36-real gradient=0.
+IMPORTANT CORRECTION (2026-10-25): This evaluates an INTEGRATED
+CONSTANT-ZERO-MODE potential and its homogeneous Hessian, NOT the
+complete 5D interval Euler-Lagrange equations. At t=.0246 the
+separate BULK t-force is ~+.14740647 and boundary source force cancels
+it only AFTER zero-mode integration. A constant field therefore FAILS
+the five-dimensional bulk E-L and Robin boundary equations. New actual
+comparison model: check_kk_e6_orbifold_interval_higgs_bvp.py.
 Hessian in 36 REAL bulk coordinates has 2 negative directions,
 BOTH ORBIFOLD-ODD: these are not 4D constant zero modes.
 Physical zero-mode scalar sector is 18 real EVEN coordinates,
@@ -83,5 +90,10 @@ print("even_modes",len(even),"even_Hessian_(negative,zero,positive)",
 print("smallest_even_positive_curvature",min(z for z in eigens if z>1e-8))
 print("odd_modes",len(odd),"odd_Hessian_negative",sum(odd_eigens<-1e-8),
       "odd_minimum",min(odd_eigens))
-print("PASS stationarity and positive-semidefinite 18-real orbifold-even scalar zero-mode Hessian")
+bulk_force=t*(6-13*t*t)
+boundary_force=-2*mu2*t+4*quartic*t**3
+assert abs(bulk_force)>.14 and abs(bulk_force+boundary_force)<1e-12
+print("NONZERO BULK E-L t-force at old constant profile:",bulk_force)
+print("ZERO-MODE source cancellation only; NOT a 5D Robin interval vacuum")
+print("PASS stationary HOMOGENEOUS TRUNCATION and parity-even 18-real zero-mode Hessian")
 print("OPEN odd interval KK tower positivity (odd modes have no constant zero mode); no all-field/quantum/global vacuum proof")
