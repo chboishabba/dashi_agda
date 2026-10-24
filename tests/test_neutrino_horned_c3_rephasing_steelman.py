@@ -82,6 +82,22 @@ class HornC3RephasingNoGo(unittest.TestCase):
                     product(product(ROOTS[b],p),conjugate(ROOTS[a])))
                 self.assertEqual(qnorm(v),qnorm(p))
 
+    def test_horn_C3_conjugate_root_wilson_traces_equal(self):
+        # For an equivariant rho(r(g))=T rho(g) T^{-1}, every
+        # conjugacy-class character tr rho(r(g)) is identical.
+        # The same holds for simultaneous rotation of a multiword
+        # Wilson product; nontrivial matrix orbit is not an invariant.
+        from test_neutrino_horned_su3_positive_bridge import residual_target
+        _,_,A=residual_target()
+        X=A; Y=c3conj(X); Z=c3conj(Y)
+        self.assertNotEqual(X,Y)
+        self.assertEqual(c3conj(Z),X)
+        tr=lambda M: sumq(M[k][k] for k in range(3))
+        self.assertEqual(tr(X),tr(Y))
+        self.assertEqual(tr(Y),tr(Z))
+        self.assertEqual(tr(mm(X,Y)),tr(mm(Y,Z)))
+        self.assertEqual(tr(mm(Y,Z)),tr(mm(Z,X)))
+
     def test_source_flux_identical(self):
         U=pmns();V=phased(U)
         for source in ((F(1,3),F(2,3),F(0)),
