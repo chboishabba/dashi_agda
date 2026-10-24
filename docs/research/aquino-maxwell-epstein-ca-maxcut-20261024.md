@@ -38,6 +38,18 @@ Read these actual prior owners before creating more investigation types:
 | Aquino / SCL | Real 1980 *MindWar* proposal; separate 2010s SCL operations | Contemporaneous explicit operational/manual/personnel/software handoff joining specific objects across decades | Independent techniques, broad military/advertising influence traditions, ordinary convergent practices |
 | Proposed unified network | Heterogeneous relationship graph, no common authority paid | Same historical programme object followed by source-specific sponsor/tasking/actions and actual leverage | Different independent institutional networks; historical continuity through intermediaries unproved |
 
+### Professional evidence room and narrative output
+
+The missing-scientists [Round50 Professional Evidence Room](../../DASHI/Culture/MissingDeceasedTwentyScientistRound50ProfessionalEvidenceRoomExact.agda) has three separate consumers over a single preserved item: **investigator lead**, **lawyer authentication/admissibility**, and **journalist publication/ethics**. The case source owner now directly reuses `SharedEvidenceRoomItem`, `InvestigatorGate` and `JournalistGate`.
+
+- The Wylie parliamentary submission is represented as one source-root item with a **native locator**; full native snapshot/digest and signed licence remain **UNCOMPUTED/UNACQUIRED**. A source item may be citeable and useful for a bounded claim before archival custody is complete; this does not manufacture an original contract.
+- The investigator gate records original source identity and proposition scope but keeps **independent corroboration and counter-source completion false** for a full technical-transfer conclusion.
+- The sensational proposed whole-network allegation remains **NOT READY** for an affirmative published conclusion. This is not censorship or proof of absence; it requires source-specific documentation, right of reply where relevant and appropriate safeguards against reputational harm and privacy violations.
+- Existing [Round43 Narrative Evidence Strata](../../DASHI/Culture/MissingDeceasedTwentyScientistRound43NarrativeEvidenceStrataExact.agda) provide `directlyEvidenced`, `boundedInference` and `unsupported` classifications, now instantiated separately for local network links, method comparisons and the unsupported unified-command theory. A coherent narrative cannot skip H2/H3 payment.
+- The Berkeley Protocol, Heuer/ACH, source-family independence and professional-role attribution remain their original authors' methodological contributions; DASHI's typed combination and specific case-state entries are repository synthesis. No document is falsely attributed as authoring new DASHI mathematical assertions.
+
+**This is the first deliverable-facing research output:** one shareable source-bound dossier with visible disagreement, traceable original source roots, scenario predictions, contemporaneous role/custody, bounded negative-search coverage and explicit unresolved items. The investigation can stop with `unresolved` rather than inventing a conclusive narrative.
+
 ### Anti-echo-chamber execution and falsification protocol
 
 For **each** proposition, record original source root, source type, source date versus event date, full artifact access and page/span, whether the statement is a witness claim versus an independently established fact, and a real contrary-source search/coverage report. Index claims, not lists of potentially implicated private individuals. A disputed agency finding remains attributed to the agency; court procedure remains procedural; H0 remains live when a stronger hypothesis lacks its required object. Lack of a search hit is **not** evidence of a cover-up.
