@@ -69,3 +69,51 @@ def test_bondi_media_and_false_hanson_attribution_are_separate_roots():
     assert "fabricated quotes attributed to Pauline Hanson" in docs
     assert "not anti-Muslim words" in docs
     assert "Latham" in docs and "underlying allegation" not in owner
+
+
+POLITICAL_OWNER = ROOT / "DASHI/Governance/AustralianPoliticalRadioInfluence2026Exact.agda"
+POLITICAL_VALIDATION = ROOT / "DASHI/Governance/AustralianPoliticalRadioInfluence2026Validation.agda"
+
+
+def test_direct_2026_ownership_and_revenue_do_not_collapse():
+    body = POLITICAL_OWNER.read_text()
+    docs = RESEARCH.read_text()
+    for required in (
+        "fordhamTapt",
+        "kiisARN",
+        "arnSandilandsRevenue",
+        "arnNewsCorpExit",
+        "19.9 percent",
+        "ceased to be substantial holder",
+        "2026-05-01",
+    ):
+        assert required in body or required in docs
+    assert "noRevenueControlLeap" in body
+
+
+def test_first_person_messaging_and_disputed_work_status():
+    body = POLITICAL_OWNER.read_text()
+    val = POLITICAL_VALIDATION.read_text()
+    assert "kyleHansonMessaging" in body
+    assert "namedActorSelfReport" in body
+    assert "ashbyKyleQualification" in body
+    assert "namedActorDenial" in body
+    assert "noPaidCampaignPromotion" in val
+
+
+def test_funding_event_attendance_and_climate_are_typed_distinct():
+    body = POLITICAL_OWNER.read_text()
+    for term in (
+        "hancockAdvance",
+        "advanceBannonAssociate",
+        "harnwellBannon",
+        "rinehartHansonPolicy",
+        "plimerOneNation",
+        "palmerBannonConflict",
+        "acmaMpoxFinding",
+        "acmaParalympicsFinding",
+        "noFordhamCommandLeap",
+    ):
+        assert term in body
+    assert "noPalmerClaimPromotion" in body
+    assert "noConferenceCommand" in POLITICAL_VALIDATION.read_text()
