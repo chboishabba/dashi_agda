@@ -230,3 +230,73 @@ canonicalBlackApolloAcquisition =
   ∷ black-apollo-acquisition black2026TranscriptReconciliation 95 true
     "Reconcile Black's June 2026 House Oversight testimony against Dechert, Senate Finance/Treasury and USVI settlement records claim by claim."
   ∷ []
+
+------------------------------------------------------------------------
+-- 2026 WYDEN FOLLOW-UP: ATTRIBUTED CONGRESSIONAL INVESTIGATIVE QUESTIONS,
+-- NOT ADJUDICATED CRIMINAL OR TAX LIABILITY.
+-- This supplements (does not replace) the original Dechert, Senate/Treasury
+-- and DOJ-EFTA payment/work-product owners already in the Black atlas.
+------------------------------------------------------------------------
+
+data Wyden2026Question : Set where
+  comparativeProfessionalCompensation : Wyden2026Question
+  allegedIntermediatedPaymentsToWomen : Wyden2026Question
+  allegedSurveillanceOfWomen : Wyden2026Question
+  giftTaxAndCharityQuestions : Wyden2026Question
+
+record Wyden2026ClaimReceipt : Set where
+  constructor wyden-2026-claim-receipt
+  field
+    questionedIssue : Wyden2026Question
+    originalCongressionalLocator : String
+    documentaryReference : String
+    narrowAttribution : String
+    congressionalQuestionLocated : Bool
+    sourceUnderlyingItemInspectedForThisClaim : Bool
+    independentLiabilityOrCriminalVerdictPaid : Bool
+    linksToBannonFilmProgrammePaid : Bool
+open Wyden2026ClaimReceipt public
+
+wydenWomenPaymentsQuestion : Wyden2026ClaimReceipt
+wydenWomenPaymentsQuestion = wyden-2026-claim-receipt
+  allegedIntermediatedPaymentsToWomen
+  "Senator Ron Wyden letter dated 2026-03-20, released 2026-03-23, US Senate Finance Committee"
+  "https://www.finance.senate.gov/imo/media/doc/senator_wyden_letter_to_leon_black_redacted.pdf ; references EFTA00977823"
+  "Wyden characterizes selected emails as raising serious questions about payments through Epstein. The cited redacted email and complete accounts have not been independently reviewed here for this issue; allegation is not a conviction."
+  true false false false
+
+wydenSurveillanceQuestion : Wyden2026ClaimReceipt
+wydenSurveillanceQuestion = wyden-2026-claim-receipt
+  allegedSurveillanceOfWomen
+  "US Senate Finance Committee press release 2026-03-23 reporting Wyden letter"
+  "https://www.finance.senate.gov/ranking-members-news/continuing-epstein-investigation-wyden-questions-leon-black-over-new-revelations-in-epstein-files-appearance-of-hush-money-payments-and-surveillance-of-women"
+  "Wyden's office reports evidence suggesting Epstein and associates surveilled women on Black's behalf. This is a politician's public investigative allegation, requiring source-specific email and conduct checks."
+  true false false false
+
+wydenCompensationComparator : Wyden2026ClaimReceipt
+wydenCompensationComparator = wyden-2026-claim-receipt
+  comparativeProfessionalCompensation
+  "Wyden letter dated 2026-03-20, published by Finance Committee 2026-03-23"
+  "Letter cites EFTA00621341 Paul Weiss billing and EFTA01915809 wire receipt"
+  "Wyden says the stated Epstein fees were far higher than comparable professional advice and questions their rationale. The original amount and comparator scope, not motive, are bounded question objects."
+  true false false false
+
+wydenGiftTaxQuestion : Wyden2026ClaimReceipt
+wydenGiftTaxQuestion = wyden-2026-claim-receipt
+  giftTaxAndCharityQuestions
+  "Senate Finance letter 2026-03-20 and public summary 2026-03-23"
+  "Letter cites Black-related gift, charitable and trust materials in released DOJ corpus"
+  "Senator raises potential mischaracterisation of payments and tax issues, but does not furnish a tax-court ruling or audit conclusion in these public statements."
+  true false false false
+
+wydenClaimIsNotAdjudication :
+  independentLiabilityOrCriminalVerdictPaid wydenWomenPaymentsQuestion ≡ false
+wydenClaimIsNotAdjudication = refl
+
+wydenSurveillanceClaimNotBannonFilmEvidence :
+  linksToBannonFilmProgrammePaid wydenSurveillanceQuestion ≡ false
+wydenSurveillanceClaimNotBannonFilmEvidence = refl
+
+wydenOriginalMessageStillUninspectedHere :
+  sourceUnderlyingItemInspectedForThisClaim wydenWomenPaymentsQuestion ≡ false
+wydenOriginalMessageStillUninspectedHere = refl
