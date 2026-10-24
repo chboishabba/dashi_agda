@@ -4,12 +4,16 @@
   "note": "Lightweight acquisition index only. No video footage or transcript text is vendored.",
   "prior_art_owner": "DASHI/Cognition/TrumpMarALagoBannonBridgeExact.agda",
   "canonical_original_reel": {
-    "status": "not_identified",
-    "doj_data_set": "10 (reported)",
-    "doj_video_object_id": null,
-    "filename": null,
+    "status": "doj_native_reel_locator_identified_but_bytes_not_fetched",
+    "doj_data_set": "10",
+    "doj_video_object_id": "EFTA01600824",
+    "filename": "EFTA01600824.mov",
+    "source_url": "https://www.justice.gov/epstein/files/DataSet%2010/EFTA01600824.mov",
+    "source_technical_path_reported_by_independent_index": "datasets/dataset10/VOL00010/NATIVES/0001/EFTA01600824.mov",
     "sha256": null,
-    "size_bytes": null
+    "size_bytes": null,
+    "content_hash_verified": false,
+    "source_access_note": "DOJ website redirected this lookup to its age-verification page; media bytes and digest were not acquired."
   },
   "candidate_public_renditions": [
     {
@@ -32,13 +36,18 @@
     }
   ],
   "transcript": {
-    "kind": "not_acquired",
-    "source_url": null,
+    "kind": "third_party_machine_generated_timecoded_transcript",
+    "source_url": "https://www.tommycarstensen.com/epstein/data/transcripts/EFTA01600824.html",
+    "secondary_source_url": "https://epstein-data.com/transcripts/transcripts?efta_number=EFTA01600824",
     "sha256": null,
     "byte_count": null,
-    "language": null,
-    "source_video_rendition_id": null,
-    "verified_against_reel": false
+    "language": "en (third-party classifier)",
+    "reported_duration_seconds": 7066.3893125,
+    "reported_segment_count": 1753,
+    "source_video_rendition_id": "EFTA01600824",
+    "verified_against_reel": false,
+    "text_vendored": false,
+    "summary": "Identified and publicly linked; third-party ASR variants are derivative of the same media original, and their text has not been hash-verified or manually aligned here."
   },
   "chapter_index": {
     "kind": "third_party_description_not_transcript",
@@ -74,9 +83,9 @@
     "any_cross_object_join_requires_explicit_identifiers": true
   },
   "open_identifiers": [
-    "Official DOJ video filename or reel ID",
-    "Verified SHA-256 of exact disclosed rendition, not YouTube ID",
-    "Transcript with lawful source and exact timing/alignment",
-    "Filming date, contract acceptance, and evidence joining same reel to messages"
-  ]
+    "SHA-256 and byte count for the exact DOJ EFTA01600824.mov rendition; stream/hash without vendoring",
+    "Speaker/timecode validation of EFTA01600824 third-party ASR transcript",
+    "Filming date and signed/implemented April 2019 Indyke letter; join EFTA01600824 to same 2019 shooting records"
+  ],
+  "discovery_source": "https://www.tommycarstensen.com/epstein/data/transcripts/EFTA01600824.html"
 }
