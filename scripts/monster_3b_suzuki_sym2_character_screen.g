@@ -20,10 +20,20 @@ if pow2 = fail or Length(labels)<>Length(irr) then
 fi;
 faithful := chi -> ClassPositionsOfKernel(chi) = [1];
 p12 := Filtered([1..Length(irr)],i -> irr[i][1]=12 and faithful(irr[i]));
-p78 := Filtered([1..Length(irr)],i -> irr[i][1]=78 and faithful(irr[i]));
-if Length(p12)<>2 or Length(p78)<>2 then
-  Error("expected faithful 6.Suz 12ab/78ab character families");
+p78 := Filtered([1..Length(irr)],i -> irr[i][1]=78);
+if Length(p12)<>2 or Length(p78)<2 then
+  Error("expected two faithful degree12 and at least two degree78 characters");
 fi;
+# DO NOT filter 78 by faithfulness: Sym^2 of a faithful 6.Suz 12
+# kills the central order-two element, hence descends through 3.Suz.
+central2 := Filtered(ClassPositionsOfCentre(tbl),
+  i -> OrdersClassRepresentatives(tbl)[i]=2);
+if Length(central2)<>1 then Error("expected unique central involution"); fi;
+for a in p12 do
+  if irr[a][central2[1]]<>-12 then
+    Error("a faithful degree12 6.Suz character must act as -I on centre C2");
+  fi;
+od;
 central3 := Filtered(ClassPositionsOfCentre(tbl),
   i -> OrdersClassRepresentatives(tbl)[i]=3);
 if Length(central3)<>2 then Error("expected two nonidentity C3 centre classes"); fi;
@@ -41,7 +51,8 @@ for a in p12 do
     isSym := squares = List(irr[b],x -> x);
     isDual := dualSquares = List(irr[b],x -> x);
     Add(matches,rec(p12:=a,p78:=b,lab12:=labels[a],lab78:=labels[b],
-      exactSym2:=isSym,exactDualSym2:=isDual,
+      exactSym2:=isSym,exactDualSym2:=isDual,faithful78:=faithful(irr[b]),
+      centralInvolution78:=irr[b][central2[1]],
       phase12First:=irr[a][central3[1]]/12,
       phase78First:=irr[b][central3[1]]/78,
       squaredCentralPhase:=irr[a][central3[1]]^2/144));
@@ -49,6 +60,11 @@ for a in p12 do
 od;
 anySym := ForAny(matches,r -> r.exactSym2);
 anyDual := ForAny(matches,r -> r.exactDualSym2);
+# The mathematical central involution obstruction must reject any
+# claimed faithful 78 symmetric-square identification.
+if ForAny(matches,r -> (r.exactSym2 or r.exactDualSym2) and r.faithful78) then
+  Error("a faithful 78 cannot be Sym² of faithful 12: central C2 acts trivially");
+fi;
 if not anySym and not anyDual then
   Print("Source-level finding: 78 is neither Sym² nor dual Sym² of faithful 12.\n");
 fi;
