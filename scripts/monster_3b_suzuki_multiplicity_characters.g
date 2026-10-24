@@ -138,7 +138,7 @@ fi;
 JoinIntPositions := xs -> JoinStringsWithSeparator(List(xs,String),",");
 JoinAtlasLabels := xs ->
   JoinStringsWithSeparator(List(xs,
-    i -> Concatenation("\\\"",labels[i],"\\\"")),",");
+    i -> Concatenation("\"",labels[i],"\"")),",");
 
 output := OutputTextFile("build/monster_3b_suzuki_multiplicity_characters.json", false);
 SetPrintFormattingStatus(output, false);
