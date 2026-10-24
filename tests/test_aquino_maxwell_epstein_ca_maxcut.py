@@ -1200,3 +1200,61 @@ def test_senate_public_letters_do_not_claim_original_ocdetf_native_scan():
         assert "true false false" in block, receipt
         assert "true true false" not in block, receipt
     assert "chainReactionNativeScanVerifiedHere : Bool" in bank
+
+
+def test_original_ftc_kogan_nix_consents_and_uk_aiq_finance_use_canonical_ca_owner():
+    ca = (ROOT / "DASHI/Cognition/BannonCambridgeAnalyticaInfluenceInfrastructureExact.agda").read_text()
+    case = OWNER.read_text()
+    for token in (
+        "ftcKoganNixSeparateIndividualConsents : InfluenceEdgeKind",
+        "ukElectoralAIQActualCampaignPayments : InfluenceEdgeKind",
+        "ftcKoganNixIndividualConsentReceipt = influence-receipt",
+        "ukElectoralAiqPaymentsReceipt = influence-receipt",
+        "C-4693 (Kogan) / C-4694 (Nix)",
+        "GBP675315.18",
+        "Grimes successfully appealed",
+        "∷ ftcKoganNixIndividualConsentReceipt",
+        "∷ ukElectoralAiqPaymentsReceipt",
+    ):
+        assert token in ca
+    for token in (
+        "ftcKoganNixConsentCanonicalOwner = CA.ftcKoganNixIndividualConsentReceipt",
+        "ukAIQPaymentCanonicalOwner = CA.ukElectoralAiqPaymentsReceipt",
+        "canonicalOriginalElectionRegulatorySplit =",
+        "ukElectoralAiqPaymentsExistAtRegulatorScope = refl",
+        "koganFTCConsentDoesNotAdmitComplaintAllegations = refl",
+        "grimesSanctionNotStillInForce = refl",
+        "campaignPaymentsDoNotIdentifyGSRInputFile = refl",
+        "ukLeaveEUNoProvenDirectCAContract = refl",
+        "campaignRecordsDoNotPayCaseWideCovertCommand = refl",
+    ):
+        assert token in case
+
+
+def test_pareto_ibrahim_stop_condition_and_original_appeal_are_reported():
+    report = (ROOT / "docs/research/aquino-epstein-canonical-disposition-20261025.md").read_text()
+    for token in (
+        "Kogan C-4693",
+        "Nix C-4694",
+        "neither admitted nor denied",
+        "GBP 675,315.18",
+        "GBP 50,000",
+        "GBP 100,000",
+        "July 19, 2019",
+        "GBP 61,000",
+        "Leave.EU",
+        "no evidence at that time",
+        "Ibrahim/snowball",
+        "source root fails to move an acceptance gate",
+        "Saturated",
+    ):
+        assert token in report
+
+
+def test_us_personal_consents_do_not_multiply_into_private_facebook_dataset_custody():
+    case = OWNER.read_text()
+    assert "personalFTCOrdersAreAdjudicatedAdmissionOfComplaint : Bool" in case
+    assert "executedComplianceDeclarationsExaminedHere : Bool" in case
+    assert "uk2016AIQInvoicesIdentifyGSRScoreFile : Bool" in case
+    assert "sourcePaysEpsteinAquinoCommonCommand : Bool" in case
+    assert "original-election-regulatory-split" in case
