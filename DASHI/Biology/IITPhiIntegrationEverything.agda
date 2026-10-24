@@ -23,6 +23,7 @@ import DASHI.Biology.IITJFineSelectedCrossPunctured79Exact
 import DASHI.Biology.IITJFineFourOneFourS3ZetaGaugeExact
 import DASHI.Biology.IITJFineS3RegularMonsterCharacterExact
 import DASHI.Biology.IITJFineS3Heisenberg90x729CodecExact
+import DASHI.Biology.IITJFineD4EquivariantHeisenbergGaugeExact
 import DASHI.Biology.IITProjectiveF9Pointed80Exact
 import DASHI.Biology.IITField81Inverse79ContractExact
 import DASHI.Biology.IITF81F9NormInverseBridgeExact
