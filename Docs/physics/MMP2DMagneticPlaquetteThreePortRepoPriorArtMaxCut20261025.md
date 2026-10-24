@@ -98,3 +98,13 @@ Local source SHA-256:
 - **P5/P6:** No external gravity measurement, exotic stress or traversability. Optional horned/C3/Monster content is not on the source-closure critical path without an actual same-object morphism.
 
 **Largest remaining hard gate:** P1 selected 4D globally Hadamard-renormalized Dirac state, and then P2 one same-state Einstein–Maxwell fixed point. Finite gauge coupling is not a substitute.
+
+
+## Additional 2025–2026 SOTA calibration: topological gauge-matter diagnostics
+
+Original-root lineage (not DASHI inventions or proof inputs):
+- **Bharadwaj, Rosanowski, Singh, di Tucci, Peng, Jansen, Funcke, Luo**, *Hamiltonian lattice QED3 with one and two flavors of Wilson fermions: Topological structure and response*, arXiv:2603.05616 (original preprint 5 March 2026), **Physical Review D accepted 10 September 2026**, DOI `10.1103/kc9m-xv9h`. Their gauge-invariant Chern/current-correlator diagnostics concern a quantum Hamiltonian QED3 with Gauss-law matter/gauge coupling. Our **classical** continuous link fields and finite spectral CAR covariance neither reproduce a many-body gauge Hilbert space nor establish an integer Chern invariant.
+- **Rosanowski, Crippa, Funcke, Itaboraí, Jansen, Singh**, *2+1D QED at finite density on a quantum computer*, PRD **114** 014501 (1 July 2026), DOI `10.1103/3ntp-l3s7`, develops gauge-invariant state/constraint preparation in a small **quantum hardware** lattice, not a physical source for our semiclassical externally driven port.
+- **Bender, Emonts, Zohar, Cirac**, *Real-time dynamics in 2+1d compact QED using complex periodic Gaussian states*, arXiv:2006.10038 (2020), a separate variational *compact gauge quantum-state* route; we do not conflate their Gaussian gauge ansatz with our finite fermion projector.
+
+**Roadmap promotion gate:** treat nonzero local `C theta`/plaquette magnetic energy as a dynamical finite Maxwell observable, **not** a quantized magnetic bundle or Chern phase. To test topology, implement a parameter family of gapped **gauge-invariant** ground states, a bundle over twisted boundary phases, and curvature/Chern or physically measurable Hall-response consistency; independently benchmark lattice-size, discretization, fermion flavor, backreaction and charge sector. Even proving a lattice Chern number would not provide exotic negative stress, 4D magnetic-return topology or traversability. Do not displace P1 globally selected 4D Hadamard state.
