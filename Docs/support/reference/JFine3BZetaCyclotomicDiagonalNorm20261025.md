@@ -61,3 +61,13 @@ Passing the phase test is not sufficient for quotient descent, irreducible row o
 The kernel *subgroup* and the matched outer **character families** are already owned in-repo. The new four-to-two phase reduction should not re-open the historical `<t1*t2>` versus inverse nomenclature. The shortest next source-specific check is to use the existing selected 12ab/78ab character-table and main-quotient producer to confirm the **chosen common psi**, select the equal-centre-phase pair, and validate full class-function descent and its 12+78 Hom character. No mmgroup or dense Monster matrices are needed for that character-level comparison. An actual Monster basis intertwiner, normalizer cocycle and physical mechanism remain unproved.
 
 **No physics promotion:** the cyclotomic norm gap is exact representation arithmetic and does not identify a new physical interference process, quantum observation, Riemann-zeta identity or Monster-driven laboratory effect.
+
+## New reason the old D4 model survives the quotient correction
+
+The finite 12-dimensional JFine D4 operators are **orthogonal signed permutations**; their induced operators on Sym²(12) are also orthogonal signed permutations. Their contragredient matrices are therefore exactly the original matrices, giving an explicit D4-equivariant invariant pairing and
+`Sym²(U12)|D4 ≅ (Sym²(U12))*|D4`.
+Hence changing from direct to dual Sym² to meet the diagonal central-phase gate **does not alter** the locally checked D4 character `[90,18,2,18,18]` or the previous rational D4 intertwiner. No new D4 construction is needed.
+
+This self-duality is ONLY over D4. A 6.Suz central order-three element separates the representations: its scalar on Sym² is ζ^(2a), whereas on the dual it is ζ^(-2a). The source 6.Suz/Monster quotient action does not follow from D4 real character agreement. Exact signed-generator consumer: `scripts/monster_3b_zeta_d4_dual_local_test.py`; independent local test passed.
+
+Further exact prior-art connections, not additional claims: `C3FourierConjugationExact` and `C3CyclotomicRealDescentExact` already prove phase inversion exchanges the Fourier rows but fixes norm/trace, while `MonsterC3CyclotomicEvaluationExact` carries the exact integer phase-multiplicity projector coordinates. The new norm selector is a specific consumer of those results.
