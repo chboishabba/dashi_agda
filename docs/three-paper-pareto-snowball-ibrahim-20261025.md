@@ -13,13 +13,13 @@ The two Navier–Stokes sources are **not** independent confirmations of the sam
 
 ## Existing authoritative owners and what was reused
 
-- [NS canonical residual scheduler](../../DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda): A1/A2/A3, periodic B, C/D, all with nonpromotion gates. A3 is the only consumer of the new Miller adapter; do not create a replacement Clay theorem owner.
-- [NS canonical A3](../../DASHI/Physics/Closure/NSCanonicalA3ContinuationResidualExact.agda): requires a literal continuation predicate on the original selected physical source.
-- [NS exact strain eigenbundle](../../DASHI/Physics/Closure/NSExactStrainEigenbundleHarnessBoundary.agda): Biot–Savart / Leray / finite-symbol harness; this is not a proof of a cutoff-uniform physical direction field.
-- [NS banded vorticity](../../DASHI/Physics/Fluid/BandedVorticityCrossPollination.agda): signed finite atoms, not continuum vorticity.
-- [History-conditioned choice](../../DASHI/Core/HistoryConditionedChoiceExact.agda) and [intersectional nonfactorability](../../DASHI/Core/IntersectionalNonFactorability.agda): the latter is the actual proof dependency for Rodgers's order-erasure witness.
-- [Temporal restriction before quotient](../../DASHI/Cognition/PNF/DemandLocalWildcardTemporalOrderExact.agda): the source-order / arrival-order distinction must not be erased by a coarse history quotient.
-- [Consciousness instantiation boundary](../../DASHI/Governance/ConsciousnessAbstractionInstantiationBoundaryExact.agda): code equivalence, physical implementation, actual uptake and phenomenology are different claims.
+- [NS canonical residual scheduler](../DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda): A1/A2/A3, periodic B, C/D, all with nonpromotion gates. A3 is the only consumer of the new Miller adapter; do not create a replacement Clay theorem owner.
+- [NS canonical A3](../DASHI/Physics/Closure/NSCanonicalA3ContinuationResidualExact.agda): requires a literal continuation predicate on the original selected physical source.
+- [NS exact strain eigenbundle](../DASHI/Physics/Closure/NSExactStrainEigenbundleHarnessBoundary.agda): Biot–Savart / Leray / finite-symbol harness; this is not a proof of a cutoff-uniform physical direction field.
+- [NS banded vorticity](../DASHI/Physics/Fluid/BandedVorticityCrossPollination.agda): signed finite atoms, not continuum vorticity.
+- [History-conditioned choice](../DASHI/Core/HistoryConditionedChoiceExact.agda) and [intersectional nonfactorability](../DASHI/Core/IntersectionalNonFactorability.agda): the latter is the actual proof dependency for Rodgers's order-erasure witness.
+- [Temporal restriction before quotient](../DASHI/Cognition/PNF/DemandLocalWildcardTemporalOrderExact.agda): the source-order / arrival-order distinction must not be erased by a coarse history quotient.
+- [Consciousness instantiation boundary](../DASHI/Governance/ConsciousnessAbstractionInstantiationBoundaryExact.agda): code equivalence, physical implementation, actual uptake and phenomenology are different claims.
 - Lean's existing `NSAWholeSpace`, `NSCanonicalLeaves`, `NSBQuantitative` and `NSCutset` libraries remain the quantitative PDE owners. This tranche introduces `NSPaperBridges` as an **opt-in leaf**, not a parallel physical-analysis spine.
 
 ## Pareto, ranked by missing bridge / expected downstream use
