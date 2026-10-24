@@ -883,3 +883,49 @@ The existing in-repo Biot-Savart owner should compare its actual geometry and un
 **Highest-information next cut:** successful exact source accession of the 1.4MB June v2 spinal Biot-Savart ZIP and physical array/units comparison to the existing in-repo source operator. This is much higher value than downloading all participants or another unsupported field ontology. Once paid, undertake separate correct-frequency and independent-control tests in *human* OPM/EMG/EEG data.
 
 **Implications if ordinary physics succeeds:** better source-calibrated human biomagnetometry, motion artefact suppression, spinal/brain connectivity analysis and receptor-specific quantum biosensing. **Implications if a new local mediator survived replication:** constrained new source/receiver interaction rather than retroactively proven assassinations. **Implications of an operational nonlocal effect:** a profound need to amend standard causal/quantum dynamics, supported only by independent prospective evidence. No such empirical effect is established by this round.
+
+
+### Actual in-repo Biot-Savart owner typecheck — critical correction
+
+GitHub source files were opened, not inferred from PR naming:
+DASHI/Physics/Closure/NSTriadKNFourierBiotSavartExact.agda
+constructs a rational finite *fluid* Fourier inverse-curl
+B_k(omega)=|k|^{-2}(k cross omega), with phase convention, vector
+transversality and vorticity/velocity reconstruction. This is a
+legitimate source of **cross-product and transverse projection
+algebra**, but it is NOT itself the **physical, spatial, current
+dipole -> OPM magnetic field** source/receiver leadfield in Spedden
+et al. v2. These operators have different units, source objects,
+coordinate systems and boundary/continuum assumptions.
+
+The correct physical typing owner is already
+DASHI/Physics/Measurement/CausalBioelectromagneticExperimentExact.agda
+on diamond PR #1238. It has the abstraction
+Intervention -> Current -> MagneticField -> Datum and an explicit
+CalibrationReceipt requiring agreement with *actual* datum.
+DASHI/Physics/Measurement/BioEMNonidentifiabilityExact.agda is
+a separate exact finite inverse obstruction. The earlier
+DiamondMCGCausalBioEMMaxCut20261022.md explicitly treats the NS
+Fourier Biot-Savart import as an **algebraic donor** for a
+finite Fourier model, not a torso/spinal tissue continuum
+calibration theorem.
+
+**P0 updated same-object adapter:** once the v2 Spedden ZIP is
+physically present, inspect geometries_experimental_withbrain.mat
+and leadfield_experimental_bslaw_experimental.mat; bind physical
+source current dipole units/orientations, actual OPM channel
+axes, translation/rotation/magnetic constant and source-sensor
+distance to an observation map. Independently check numeric
+forward matrix entries vs author-supplied physical leadfield
+with proper tolerance and a held-out source orientation.
+Only THEN is a magnetic-field source model eligible for the
+BioEM CalibrationReceipt, and only if an actual recording also
+pays datum compatibility. The fluid Fourier operator may
+contribute generic vector identities but supplies neither
+physical device calibration nor observed neural current.
+
+**No hidden same-object promotion:** v1 BEM != v2 physical
+Biot-Savart data, fluid vorticity != electromagnetic current,
+finite Fourier inversion != subject-specific spatial leadfield,
+same band != same source, and measured magnetic field !=
+experimental receiver actuation.
