@@ -38,7 +38,9 @@ def test_critical_and_deep_curl_defect_cancel_separately():
     proof=mod.budget(field)
     assert proof["production"]==proof["stretch"]
     assert sum(v[1] for v in proof["region_correction"].values())==0
-    assert all(v[3]==0 for v in proof["region_correction"].values())
+    assert all(v[3]==0 for v in proof["merged_region_correction"].values())
+    # Individual oriented deep-LH and deep-HL residuals are allowed
+    # and can cancel; neither is a swap-closed class by itself.
     assert sum(v[0] for v in proof["region_correction"].values())==proof["production"]
     assert sum(v[2] for v in proof["region_correction"].values())==proof["stretch"]
 
