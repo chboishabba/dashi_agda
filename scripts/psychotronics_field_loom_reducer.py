@@ -27,7 +27,7 @@ def _finite(value, label):
 
 def _nonnegative(value, label, positive=False):
     x = _finite(value, label)
-    if x <= 0 if positive else x < 0:
+    if (positive and x <= 0) or (not positive and x < 0):
         raise ValueError('negative or zero ' + label)
     return x
 
