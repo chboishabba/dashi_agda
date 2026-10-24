@@ -1177,3 +1177,219 @@ now checked. Then splitting spheres and an actual
 simply-connected-overlap van Kampen for the full
 threefold exterior. User requested local Python rather
 than Agda/CI, so no new kernel claim.
+
+
+## 2026-10-25 source-supported inward cap + literal separator sphere breakthrough
+
+**Primary-source progress:** Franca Lippert, *The Alexander Horned
+Sphere and Bing's Hooked Rug*, §2.1–§2.2 (Figure 2, pp. 2–4),
+https://www.maths.gla.ac.uk/~mpowell/WriteUp_Franca.pdf,
+describes horn-stage homeomorphisms becoming the identity
+away from shrinking attachment support; the wild sphere is
+locally flat off its Cantor ends. Hatcher, *Algebraic Topology*,
+Example 2B.2, pp. 170–172 gives the genuine individual
+exterior meridian/commutator van Kampen group.
+
+Consequently we can choose a classical supported Alexander
+construction that leaves an initial round B0 inward cap
+unchanged. New
+`scripts/alexander_horned_supported_stable_cap_certificate.py`
+checks explicit coordinates for B0 radius 3/4 in a unit
+reference satellite:
+  Phi(u,v,s)=(-sqrt((3/4)^2-u²-v²)+s,u,v),
+  u²+v²<=1/16, |s|<=1/8.
+It is a genuine local TWO-SIDED collar with an inverse
+chart, not a symbolic `ClopenWitness` label.
+The corrected spoke endpoint t=8.5 with disk radius
+1/4 has squared satellite-centred norm 5/16<9/16,
+so overlaps the ACTUAL cap-preserved wild B0, not
+merely the outer reference unit container.
+The local exact script passed 797 rational chart tests.
+The source-supported infinite horn attachments still
+have to be instantiated to declare an executable
+infinite-coordinate embedding.
+
+A much sharper geometric van Kampen separator is now
+available: three literal disjoint spheres
+  S_i={|x-9e_i|=4}.
+Their *only* contact with the constructed solid is the
+respective straight spoke, and on each sphere the
+intersection is the single transverse disk GRAPH
+  t=9-sqrt(16-u²-v²),   u²+v²<=1/16.
+Its near axial range is 5<=t<8.5. The far root
+is outside the tube; all other reference balls/tubes
+lie beyond the sphere. Radius-1/4 collars around the
+three S_i are disjoint. New
+`scripts/alexander_horned_three_sector_separator_spheres.py`
+and an independent exact-Fraction local equivalent
+passed 197 rational cross-sectional checks; all-radius
+claims follow from exact monotone square-root bounds.
+
+Thus `S_i∩E=S²\closed(D²)`, an OPEN DISK, so the
+exterior open-cover overlap is simply connected.
+This is the proper geometric van Kampen cut; a PLANE
+minus disk would instead have pi1=Z and must not
+be used as though it were simply connected.
+
+New comprehensive source-attributed proof note:
+`Docs/topology/AlexanderHornedSupportedCapSeparatorVanKampen20261025.md`.
+It spells out how a threefold collared boundary
+connected sum can yield B3 and, using the standard
+unknotted-tree-neighbourhood/side-cap equivalences,
+`pi1(E)=G_A*G_A*G_A` with outer C3.
+This is a **paper-level source-supported geometric
+proof scheme** with exact local geometry; the native
+infinite horn support map and all ambient deformation
+retractions are NOT machine-proved or explicitly
+coordinate-constructed in the repo.
+
+This discharges the earlier vague *existence of a tame
+cap as an unexplained input* by pointing to and using the
+actual supported original horn construction. The
+remaining max-cut is no longer 'find separating spheres',
+but instantiate its *supported infinite attachment*
+and the complement-piece homeomorphisms as concrete
+same-object maps. No Agda/CI work per user request.
+
+
+## 2026-10-25 completed orbifold C3 semantic bridge
+
+The genuinely EXTERNAL order-three subgroup has an
+actual topological interpretation once the wild
+exterior E is realized as R-invariant. The point
+x0=(20,20,20) is fixed by the ambient R and lies
+outside the compact C3-symmetric scaffold.
+For the global quotient orbifold `[E/C3]`,
+the Borel fibre sequence `E->E_hC3->BC3`
+has a section induced by x0. Hence
+  pi1^orb([E/C3]) ~= pi1(E) rtimes C3.
+Under the supported Hatcher triple-gluing
+identification this becomes
+  (G_A*G_A*G_A) rtimes C3.
+The source `pi1(E)` remains torsion-free;
+external finite C3 is ORBIFOLD STABILIZER data.
+This is NOT generally the ordinary fundamental
+group of the coarse quotient space `E/C3`.
+This also clarifies the discrete spin3 lift versus
+continuous 360°/720° rotation-path distinction.
+Primary expository root: Caramello,
+*Introduction to Orbifolds*, arXiv:1909.08699.
+`scripts/alexander_horned_orbifold_split_c3.py`
+locally checks the fixed-point and semidirect group
+law in the exact 2I finite quotient.
+
+Other NEW source-grounded geometric commitments:
+Lippert §2.2 supplies supported horn homeomorphisms,
+preserving an inward tame cap of B0; a real radius-3/4
+cap chart and positive-volume collar overlap were
+locally certified, as were three radius-4 separating
+spheres with ONE transverse disk each. They yield
+simply connected van Kampen overlaps
+`(S²\\closed D²)×I`, rather than the non-simply
+connected PLANE-minus-disk overlaps.
+Complete report:
+`Docs/topology/AlexanderHornedSupportedCapSeparatorVanKampen20261025.md`.
+
+The paper-level wild topology still depends on the
+classical supported Hatcher construction and standard
+tree/collar neighbourhood equivalences; local Python
+does not turn these into Agda kernel proofs. No CI
+or Agda typecheck was performed per user request.
+
+
+## 2026-10-25 roadmap reset: FINITE vs INFINITE physical observables
+
+New source-audited decision report:
+`Docs/topology/AlexanderHornedRoadmapRealWorldImplications20261025.md`.
+
+**Critical Hatcher object discriminator:** `B_n` is a
+locally-flat/tame finite horned BALL with simply connected
+exterior (Schoenflies), whereas Hatcher's stage enclosure
+`X_n` is a genus-`2^n` handlebody with nontrivial
+exterior `Y_n` and `pi1(Y_n)=F_(2^n)`.
+For three independent sectors, stage group rank is
+`3*2^n`. The ideal limit `B=intersection X_n` is
+the source of the perfect but nontrivial exterior group.
+Do NOT use a finite printed B_n and falsely advertise
+the complement group of X_n or the ideal limit.
+Original: Hatcher Example 2B.2 (printed pp171-172)
+and locally-flat Schoenflies.
+
+**Essential noncommutation of limit/abelianization:**
+Each source meridian becomes a child commutator, so
+H1(Y_n)->H1(Y_(n+1)) is the ZERO map despite each
+H1(Y_n)=Z^(3*2^n). Thus H1(E)=0 while
+pi1(E) is nontrivial. In R3 the exterior also has
+H2(E)=Z from the sphere at infinity; in S3 the
+complement of the compact contractible ball is
+reduced-acyclic. Do not call R3 exterior fully acyclic.
+
+**Flat U1 vs nonabelian holonomy**:
+Hom(perfect G,U1)=1; each isolated finite free stage
+has nontrivial U1 characters that cannot be carried
+compatibly through all commutator refinements.
+In contrast existing 2I=SL2(F5) perfect quotient
+has an order-six root q with q^3=-I, recursively
+compatible child commutators and spin-character
+Wilson trace -2. Nonflat Maxwell connections can
+still have Wilson loops on contractible paths.
+A one-level Q8 commutator [i,j]=-I works, but
+Q8 cannot extend recursively: [Q8,Q8]=C2.
+The perfect 2I target is essential for ALL scales.
+Executable finite audit:
+`scripts/alexander_horned_scale_holonomy_maxcut.py`.
+
+**Actual experiment/control roadmap:** finite sculpture,
+finite X_n handlebody, and unlinked/tame controls must be
+labelled DIFFERENT specimens. A synthetic SU2/optical
+control circuit may implement recursive commutator
+identities and observe relative Wilson phases; this is
+not direct observation of the infinite wild pi1.
+Prior published physical feasibility roots: Lucien
+Grillet's FOUR-level 20cm PLA/PVA horned sculpture,
+Bridges 2022; Q. Liang et al. Nature Physics
+(2024), DOI 10.1038/s41567-024-02644-4
+synthetic SU2 nonabelian AB in a 1D ladder, and
+Sugawa et al. npj Quantum Information (2021)
+nonabelian Wilson-loop measurements.
+No original DASHI experiment currently exists.
+
+**Quantitative synthetic signature:**
+`scripts/alexander_horned_su2_controls_noise_probe.py`
+verifies exact quaternion algebra
+`tr([A,B]) = 2-4 sin²(alpha) sin²(beta)` for
+orthogonal-axis SU2 controls; at alpha=beta=pi/2
+this is -2 versus commuting U1 +2. Angular control
+errors change the trace; a lone global -1 spinor sign
+must be measured against a reference. One SU2
+commutator does not prove the whole tower's perfectness.
+
+**Hard acceptance gates:** actual supported Hatcher
+infinite horn coordinates and cap, the three piecewise
+open-cover/van Kampen homotopy maps, CAD models with
+known finite stage group, calibration/flatness controls,
+specified Maxwell/Dirac operator and boundary data.
+No implication of gravity anomalies, free energy,
+superluminal communication, quantum consciousness or
+new physical zero modes.
+
+The work priority is a dual track: geometry source
+same-object closure plus practical finite nonabelian
+control experiment; defer Agda typecheck/CI by request.
+
+
+## 2026-10-25 dual-track implementation max-cut — GEOMETRIC PAPER THEOREM + EXECUTED GAUGE SIMULATOR
+
+**GEOMETRY:** New `Docs/topology/AlexanderHornedC3SameObjectGluingTheorem20261025.md` supplies the full source-attributed paper-level existence argument for a 3-sector equivariant wild B3: choose the Hatcher/Lippert horn seed with an unchanged inward tame disk, attach three rotated supported copies to the central unit ball with actual tame radius-1/4 collars, cut by three radius-4 spheres and use classical boundary-connected sum and van Kampen. The NEW explicit stereographic coordinates
+  sigma(t,u,v)=(u/(t-5),v/(t-5))
+map each geometric cut-sphere exterior overlap homeomorphically to the OPEN disk `|y|<16+sqrt(255)`; inverse
+  t=(13+5|y|²)/(1+|y|²), u=8y1/(1+|y|²), v=8y2/(1+|y|²).
+It contracts by `H_s(y)=(1-s)y`, so a collar overlap is simply connected. That removes a vague topological-overlap assumption and uses actual source-defined tubes/caps. The usual tame-collar replacement argument identifies satellite-side pi1 with original Hatcher `G_A`; the round-star control establishes central-side pi1 trivial. The cut-and-paste theorem then yields `pi1(E)=G_A*G_A*G_A` and outer C3 at a fixed basepoint. Original wild embedding / its stage theorem and standard 3-manifold lemmas remain EXTERNAL CLASSICAL theorem inputs, and an indexed infinite coordinate map / kernel proof is STILL NOT coded. Code: `scripts/alexander_horned_C3_same_object_separator_atlas.py`. Locally validated 2601 stereographic and 797 cap-chart samples, with exact rational identities and explicit inverse.
+
+**EXECUTED SYNTHETIC SU2 GAUGE MODEL:** New `scripts/alexander_horned_c3_finite_SU2_gauge_simulator.py` constructs all 120 binary-icosahedral unit quaternions over Q(phi), checks all group products, finds exact commutator witnesses for ALL 120, selects `q=(1+i+j+k)/2` whose cube is `-1`, and assigns Hatcher child meridians compatibly through selectable finite depth. Ideal selected root-cube Wilson halftrace is `-1` for all depths; matched commuting U1 halftrace `+1`; Q8 yields central `-1` at ONE level but cannot maintain full recursion. Model applies independent gate-axis-angle noise and Bernoulli controlled-U readout shots. A locally executed source-equivalent 50-trial/300-shot/1.5deg simulation returned depth-0..5 observed halftraces `[-0.9999,-0.9995,-0.9955,-0.9828,-0.9437,-0.8032]` with gate costs `3*4^n`. They are **synthetic** predicted readouts, not laboratory measurements. Added six `test_alexander_horned_C3_gauge_simulator.py` tests for C3 factors, commutator compatibility, gauge conjugacy invariance, Wilson orientation limitation and reproducibility; equivalent local test suite PASS 6/6.
+
+**TRUE C3-UNITARY LAB ACTOR:** New `scripts/alexander_horned_C3_three_channel_SU2_actor.py` realizes `(2I)^3 rtimes C3` faithfully on THREE complex SU2 spin doublets, so `(2I)^3 rtimes C3 -> U(6)` by 2x2 quaternion matrices and C3 block permutation. It carries the selected cube as `diag(-I2,I2,I2)`, which disappears in A5 quotient. Independent equivalent local test PASS all 120 SU2 matrices, 300 products and sampled actor associativity. This complements the earlier minimal GL4(F7)/full GL12(F7) arithmetic actors but is more experimentally actionable.
+
+**TRUE PHYSICAL BRIDGE, NOT AUTOMATIC SPIN CURVATURE:** a homomorphism `rho:pi1(E)->2I->SU2` supplies an AUXILIARY flat SU2 local system `(E_tilde x SU2)/pi1(E)`, by standard flat-bundle/holonomy reconstruction (Goldman-Millson 1988; standard Riemann–Hilbert). This proves mathematical existence of a specified flat nonabelian connection on the ideal wild exterior, but NOT a physically realized connection or an effect of the Euclidean Levi-Civita spin connection. Wilson trace alone is invariant under conjugation and cannot distinguish q from q^-1; additional matrix tomography is gauge-frame-dependent. A graph circuit has its OWN finite free-group topology and must not be advertised as a measurement of the infinite horned complement.
+
+**PHASE GATES NOW:** (0) source/provenance — done; (1) abstract free group/C3/2I/spin — mathematical and finite done; (2) geometric existence — classical paper-level gluing proof supplied, entire infinite ambient map code still open; (3) geometric van Kampen — explicit cut atlas complete, standard source collar/round-star homeomorphism invoked rather than kernel-certified; (4) runnable finite synthetic gauge emulator — DONE / locally executed; (5) full three-channel C3 complex actor — DONE / finite locally verified; (6) physical apparatus/actual gauge measurement — NOT DONE; (7) specified PDE spectral experiment — NOT DONE. No Agda or CI work by user request. Full technical protocol `Docs/topology/AlexanderHornedC3GaugeSimulatorExperimentProtocol20261025.md`.
