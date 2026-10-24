@@ -10,6 +10,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
+from psychotronics_field_loom_reducer import replay_si_csv, VERSION
 
 
 def _read_bounded(path, max_bytes):
@@ -31,6 +32,9 @@ def verify_pair_source(meta, pairs):
     """Return source identity receipt; no positive physics or source authenticity."""
     failures = []
     certified_offset = None
+    replay_failures = []
+    replay_result = None
+    stream_bytes = None
     try:
         rb = _read_bounded(meta['raw_data_file'], 64*1024*1024)
         cb = _read_bounded(meta['calibration_file'], 2*1024*1024)
@@ -59,6 +63,8 @@ def verify_pair_source(meta, pairs):
             sb=_read_bounded(stream,256*1024*1024)
             if _sha256(sb)!=stream_hash:
                 failures.append('instrument_stream_hash_mismatch')
+            else:
+                stream_bytes = sb
         # All moment/gradient groups must refer to the same calibration source.
         groups=cal.get('moment_calibration_groups')
         if not isinstance(groups,dict):
@@ -73,6 +79,17 @@ def verify_pair_source(meta, pairs):
                 if (g.get('moment_am2')!=p.get('moment_am2')
                     or g.get('moment_std_am2')!=p.get('moment_std_am2')):
                     failures.append('moment_calibration_not_same_as_pair')
+        if stream_bytes is None:
+            replay_failures.append('instrument_stream_unavailable_for_reduction')
+        elif raw.get('pair_to_stream_reducer') != VERSION:
+            replay_failures.append('unimplemented_or_missing_raw_stream_reducer_version')
+        else:
+            try:
+                replay_result = replay_si_csv(stream_bytes, raw, cal)
+                if replay_result['pairs'] != pairs:
+                    replay_failures.append('raw_stream_reduction_does_not_equal_pairs')
+            except (ValueError, TypeError, KeyError, OverflowError) as exc:
+                replay_failures.append('deterministic_raw_reduction_failed:' + type(exc).__name__)
         if cal.get('gradient_calibration_fractional_std')!=meta.get('gradient_calibration_fractional_std'):
             failures.append('field_scale_calibration_not_same_as_pair_metadata')
         max_systematic=max((p.get('common_systematic_std_n',float('nan')) for p in pairs), default=float('nan'))
@@ -89,7 +106,11 @@ def verify_pair_source(meta, pairs):
     return {
         'bytes_and_exact_pair_source_join':not failures,
         'calibration_reported_common_force_offset_std_n':certified_offset if not failures else None,
-        'unpaid_source_joins':sorted(set(failures)),
+        'raw_stream_replayed_to_pairs':not failures and not replay_failures and replay_result is not None,
+        'factorial_settings_from_source':(replay_result['factorial_settings'] if
+            replay_result is not None and not replay_failures and not failures else None),
+        'reducer_version':VERSION if replay_result is not None and not replay_failures else None,
+        'unpaid_source_joins':sorted(set(failures + replay_failures)),
         'independent_instrument_authentication':False,
         'independent_operator_and_replicate_authenticated':False,
         'gravitational_observation_established':False,
