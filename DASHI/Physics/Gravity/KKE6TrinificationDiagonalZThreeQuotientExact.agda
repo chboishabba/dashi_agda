@@ -130,3 +130,28 @@ same27DoesNotDetermineGlobalGaugeBundle =
 
 liftableBundleSpinIndexPaysGlobalCS : Bool
 liftableBundleSpinIndexPaysGlobalCS = false
+
+
+------------------------------------------------------------------------
+-- Selected global PSU3 fractional instanton cancellation:
+-- all 3 projected PSU3 factors of (SU3^3)/Z3_diag inherit the
+-- SAME class B in H²(X,Z3). In standard PSU3 instanton convention
+-- fractional q_i ≡ (int B cup B)/3 mod1. Therefore equal-weight
+-- sum q_c + q_L + q_R is INTEGRAL modulo one, for all three
+-- residues of B². This is a finite Z3 source computation, NOT
+-- a theorem of the 5D physical CS or global APS eta invariant.
+-- Script: check_kk_e6_z3_fractional_instanton_mixed_wz.py
+------------------------------------------------------------------------
+
+threeProjectedFractionalChargesSumToZeroModThree :
+  (r : ZThree) → addZ3 r (addZ3 r r) ≡ z0
+threeProjectedFractionalChargesSumToZeroModThree z0 = refl
+threeProjectedFractionalChargesSumToZeroModThree z1 = refl
+threeProjectedFractionalChargesSumToZeroModThree z2 = refl
+
+individualFractionalChargeCanRemainNonzero :
+  addZ3 z1 z0 ≡ z1
+individualFractionalChargeCanRemainNonzero = refl
+
+allQuotientMixedAbelianSpinCSPeriodsCertified : Bool
+allQuotientMixedAbelianSpinCSPeriodsCertified = false
