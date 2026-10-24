@@ -1,4 +1,18 @@
 # Charged-fermion gravity and three dynamically driven plasma regions: research roadmap
+
+## October 25 — Pareto/Ibrahim/Snowball effective BVP source audit
+
+**Source-first/Pareto result:** [new original-root/source-genealogy and dependency ledger](MMPParetoIbrahimSnowballSameStateBVP20261025.md) and [executed Einstein-null/full-interior native BVP acceptance](../../scripts/check_mmp_effective_bvp_radial_same_state_cut_20261025.py). This is a new discriminator for the existing 2026-10-24 `check_mmp_global_effective_bvp_replay_20261024.py` model—not another finite lattice simulator.
+
+**Analytic same-source identity:** `Gkk−8πTkk=C_radial/r²`, where `C_radial` is the canonical reduced BVP radial constraint. **Geometric finite-segment integral** `∫(r/N)Gkk dx=−2[r'/N]` must equal the `8πTkk` integral when the *same* effective BVP solution satisfies Einstein. Local tests q=10/12/24 passed everywhere sampled: maximal radial `C` 5.62e-12/4.27e-12/4.37e-12; maximal Einstein k.k. mismatch 1.22e-13/4.05e-14/1.35e-14; integral source/boundary discrepancies ≲1e-12. Local executed new checker SHA256 `cd064d8cc2cf6c97ffb0d59ad0c65bc945095f2ddea9a8aa94972d48f438a882`. No exact-head GitHub workflow or kernel proof. The canonical BVP is not duplicated in the PR.
+
+**What this closes:** the reduced effective BVP's *interior* radial Einstein identity, not its 4D quantum physical origin. **What it rejects:** a two-ended reflected/spherical RN-junction interior is not already the one-ended `(S1×S2)\{pt}` handle; the exterior shared-mouth topology and field/spin-c glue must be built before claiming a physical same-universe MMP solution.
+
+**Fresh high-alpha independent literature root:** Weinbaum, *Obstructions to traversable wormholes in Einstein-Dirac theory*, PRD 114 084004 (5 Oct 2026), DOI `10.1103/g89c-gqyf`, challenges **classical positive-frequency** Einstein–Dirac models and electromagnetic self-interaction, not MMP's quantized Casimir vacuum. Kontou, *Wormhole Restrictions from Quantum Energy Inequalities*, Universe 10 (2024) 291, DOI `10.3390/universe10070291`, independently constrains MMP with doubled smeared null energy conditions. Topological-censorship root Friedman–Schleich–Witt PRL 71 (1993) and **1995 erratum** retain their independent theorem/correction roles. Gérard–Stoskopf general free Hadamard existence, Zahn covariantly renormalized charged current/stress, Freivogel–Fumagalli–Tomašević (2026 arXiv:2606.12528) conditional scattering are **different** proof obligations, not interchangeable corroboration.
+
+**Updated highest-Pareto path:** P0 same one-ended exterior-mouth/global magnetic bundle → P1 physically selected global charged spin-c Hadamard covariance rather than generic existence → P1 Zahn-type same-state renormalized current/stress plus Kontou QEI → P2 full global Einstein–Maxwell constraints/fixed point → then physical fermionic transmission/three-region plasma. Preserve DOI/arXiv original sources; QID/DDC unknown not guessed; stop unproductive extra finite simulations.
+
+
 **As of:** 2026-10-24  
 **Implementation lane:** draft PR #1248 (`research/mmp-s2-fermion-three-plasma-maxcut-20261024`)  
 **Base:** `master`  
