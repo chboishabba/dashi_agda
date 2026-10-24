@@ -772,3 +772,32 @@ def test_house_source_families_are_not_double_counted_or_promoted():
     assert "executed2015NDABytesInspected : Bool" in black
     assert "committeeContemptIsCriminalConviction : Bool" in black
     assert "caseWideCovertCommandEstablished : Bool" in black
+
+
+def test_black_sdny_oct2026_order_is_not_ddc_congress_challenge_disposition():
+    black = (ROOT / "DASHI/Cognition/EpsteinBlackApolloSameObjectReceiptRound20261014Exact.agda").read_text()
+    consumer = OWNER.read_text()
+    audit = (ROOT / "docs/research/aquino-epstein-surrounding-prior-art-audit-20261024.md").read_text()
+    for symbol in (
+        "independentJudicialDocketEvent : Black2026EvidenceRole",
+        "blackHouseSubpoenaChallengeDocket = black-2026-source-receipt",
+        "blackDoeOctoberDismissalOriginalOrder = black-2026-source-receipt",
+        "blackDoeNotHouseChallenge ()",
+        "voluntaryDismissalNotTrialFinding = refl",
+        "feesMotionNotResolvedByDismissal = refl",
+        "separateDocketNotResolvedByDoeDismissal = refl",
+        "ddcFinalDispositionStillUnverified = refl",
+        "23-cv-6418",
+        "1:26-cv-03084",
+    ):
+        assert symbol in black
+    for symbol in (
+        "BlackApollo.canonicalBlack2026DistinctCourtCaseBoundary",
+        "blackDoeOrderNotHouseCaseDisposition = refl",
+        "blackDoeDismissalNotMeritsTrialFinding = refl",
+        "ddcHouseSubpoenaJudgmentNotYetVerified = refl",
+    ):
+        assert symbol in consumer
+    assert "fees motion (ECF 440)" in audit
+    assert "at the plaintiff's request" in audit
+    assert "D.D.C." in audit and "S.D.N.Y." in audit
