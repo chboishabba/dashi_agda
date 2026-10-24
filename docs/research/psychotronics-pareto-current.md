@@ -1,5 +1,11 @@
 # Psychotronics / pictured-device Pareto frontier — canonical current status
 
+## Missing-scientists assay crosswalk (bounded; not a new programme claim)
+
+The [literature review's missing-scientists section](psychotronics-literature-review-20261024.md) now joins *historical original scientist → paper → apparatus → conventional/extraordinary mechanism → controls* to the existing `DASHI/Culture/MissingDeceasedTwentyScientistScienceCapabilityBidiExact` scientific-work reconstruction and Round48/Round49 anti-echo-chamber methodology. It does **not** join historical Pavlita/Kitaygorodsky/Czech Ahnenerbe records to a retained contemporary person's **same named programme** or to any **individual event**.
+
+**Promotion firewall:** technical analogy or documented East Bloc scientific history ≠ cross-person H2; original apparatus/project/contract/roster identity and an explicit second retained person are required. Neither H2 nor H3 in `MissingDeceasedCommonProgrammePromotionStateExact` is paid by this review; event attribution separately needs pre-event operational evidence. Keep the missing/deceased cohort denominator fixed, preserve ordinary-event alternatives and do not recast coauthors as missing persons. No additional formal modules, participant speculation or CI.
+
 ## Current literature-review max-cut — 24 October 2026
 
 **Research direction:** Source-specific *critical literature review*, grounded apparatus/experimental comparators and actual historical knowledge transmission. The [main review](psychotronics-literature-review-20261024.md) now has a **51-row attributed bibliography** in [the review corpus](psychotronics-literature-corpus-20261024.csv) and a [seven-claim matched-phenomenon table](psychotronics-pavlita-experiment-comparison-20261024.csv). These inventories contain alternative document versions and overlapping authorship; they are **not independent empirical replications**.
