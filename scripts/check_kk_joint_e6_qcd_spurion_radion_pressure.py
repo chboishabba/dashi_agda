@@ -64,7 +64,7 @@ def D_paired(z):
     return 5*(9-4*h(z)-4*h(4*z)-4*h(ze)) + \
       8*(15-15*h(zG)) + \
       60*mp.fsum(h(zS)-h(q) for q in zq) + \
-      240*(h(zS)-h(zEx))
+      120*(h(zS)-h(zEx))
 def D_LR():
     return 5*12 +20*mp.fsum(h(x) for x in zV)+5*mp.fsum(h(x) for x in zH)
 def D_joint(z):
