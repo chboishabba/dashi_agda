@@ -107,6 +107,13 @@ def validate_world(world: dict) -> None:
             or tree["source_tree_sha1"] != canonical["source_tree_sha1"]
             or tree["files"] != canonical["files"]):
         raise ValueError("Source world diverges from independently pinned Git tree")
+    pinned_static = next(
+        (x for x in canonical["files"] if x["path"] == "Scripts/StaticGFC.m"),
+        None
+    )
+    if (pinned_static is None or
+            sources["pnas_static_script"]["git_blob_sha1"] != pinned_static["git_blob_sha1"]):
+        raise ValueError("Original 20-subject namespace not bound to exact author-script Git blob")
     files = tree["files"]
     if len(files) != 56 or len({x["path"] for x in files}) != 56:
         raise ValueError("Expected complete, unique 56-file upstream tree")
