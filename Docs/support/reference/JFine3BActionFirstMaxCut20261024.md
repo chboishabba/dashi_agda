@@ -7,8 +7,8 @@
 - The nine-trit 4+1+4 and 90×729×3 codecs belong to the previous IIT/JFine PR; this note does not claim an equivariant Monster identification.
 
 ## Exact finite character certificate
-Let H be the canonical finite Heisenberg group of order 3^13, with coordinates (x,b,t), x,b∈F3^6, t∈F3, and multiplication (x,b,t)(y,c,s)=(x+y,b+c,t+s+b·y).
-On complex-valued functions F3^6→C, fix ζ=exp(2πi/3) and define ρ(x,b,t)f(u)=ζ^(t+b·u) f(u+x), with convention on group law adjusted to the chosen operator ordering. The character is zero off the centre and equals 729 ζ^t at (0,0,t). Hence
+Let H be the canonical finite Heisenberg group of order 3^13, with coordinates (x,b,t), x,b∈F3^6, t∈F3, and multiplication (x,b,t)(y,c,s)=(x+y,b+c,t+s+c·x).
+On complex-valued functions F3^6→C, fix ζ=exp(2πi/3) and define ρ(x,b,t)f(u)=ζ^(t+b·u) f(u+x), using the operator-order convention displayed here. The character is zero off the centre and equals 729 ζ^t at (0,0,t). Hence
 
  ⟨χ,χ⟩_H = 3×729²/3^13 = 1.
 
