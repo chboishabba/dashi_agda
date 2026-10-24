@@ -100,6 +100,22 @@ def audit():
     assert len(seen_joint)==19683
     assert joint_hist=={3:1,6:6,12:17,24:122,48:344}
     assert sum(joint_hist.values())==490
+    # Structural Heisenberg-multiplicity rechart of source-actual C3 orbits.
+    # No Weyl/Suzuki action or actual Monster-module identity is smuggled in.
+    def to90_729(marker,edges,corners):
+        return ((marker,edges[0],edges[1]),
+                (edges[2],edges[3],*corners))
+    def from90_729(label,six):
+        marker,a,b=label
+        return marker,(a,b,six[0],six[1]),tuple(six[2:])
+    count=0
+    for marker,edges,corners in product(
+        range(10), product(range(3),repeat=4),product(range(3),repeat=4)
+    ):
+        assert from90_729(*to90_729(marker,edges,corners)) == (
+            marker,edges,corners)
+        count+=1
+    assert count==65610==90*729
     ret={
       "scope":"finite pointed S3 complex permutation module, not Monster or IIT Phi",
       "fine_size":19683,
@@ -113,6 +129,8 @@ def audit():
       "complex_irreps_pointed":{"trivial":10*m_trivial,"sign":10*m_sign,
                                  "standard_2d":10*m_std},
       "pointed_C3_zeta_multiplicity_each":65610,
+      "heisenberg_90_by_729_chart_roundtrips":count,
+      "heisenberg_actual_Weyl_action_identified":False,
       "pointed_states":196830,
       "D4_mirror_fixed_sites_edge_corner":[2,0],
       "D4_times_S3_orbits":490,
