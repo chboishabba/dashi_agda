@@ -1,5 +1,8 @@
 # Aquino / Robert Maxwell / Epstein / Bannon / Cambridge Analytica: attribution max-cut
 
+> **CURRENT DISPOSITION — RESEARCH FREEZE (25 Oct 2026):** [canonical acceptance/debt ledger](aquino-epstein-canonical-disposition-20261025.md) supersedes historical round priorities in this document. The original-source details below remain a provenance archive; do **not** reopen aggregate GSR/Kogan-to-AIQ research or promote whole-network coordination without a new original same-object discriminator. Next gate: typecheck/test and bounded corrections, not another broad snowball.
+
+
 Date: 2026-10-24. Status: **source-bounded formal interface; not an historical proof**.
 
 ## Primary investigation index: missing/deceased-scientist object-first programme
