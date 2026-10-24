@@ -457,8 +457,8 @@ sclCorporateWorkProductTarget = Acquisition.sourceAcquisitionTarget
 
 bannonEpsteinFilmWorkProductTarget : Acquisition.SourceAcquisitionTarget
 bannonEpsteinFilmWorkProductTarget = Acquisition.sourceAcquisitionTarget
-  "Epstein-Bannon raw 2018-2019 production correspondence and edit/contract chain"
-  "Match Bates IDs and complete film work products to date, authors, custody"
+  "DOJ indexed production correspondence and exact video reel/counsel agreement custody; film existence already established in parent owner"
+  "April 3 2019 EFTA00809863-Indyke letter located; July 2019 HOUSE_OVERSIGHT_027794-027848 shoot planning located. Acquire actual signed acceptance and original released reel ID/hash/session/terms join"
   Acquisition.directDigitalArchive Acquisition.nationalCatalogue
   false false false
 
@@ -518,9 +518,9 @@ sclTransferCut = case-dependency-cut
 bannonWorkProductCut : CaseDependencyCut
 bannonWorkProductCut = case-dependency-cut
   epsteinBannonActualWorkProduct
-  "DOJ indexed communications -> produced film/edit/contract/payment objects"
+  "Prior owner pays filmed interview + located Apr 3 2019 Indyke/EFTA engagement text + dated Jun-Jul 2019 House shoot messages; exact released reel join still unpaid"
   true true true false false
-  "Recover specific deliverable, responsible editor, custody and date, then compare with any CA technical artefact; correspondence alone cannot establish method reuse."
+  "Film already exists. Match signed/assented engagement letter, specific reel ID and footage ownership, source timestamps, actual edit/crew/production records and the planned-versus-completed July 6 shoot; no automatic CA method reuse."
 
 promisExecutableCut : CaseDependencyCut
 promisExecutableCut = case-dependency-cut
@@ -608,6 +608,37 @@ caseRequiresActualOperationalEvidence = refl
 -- Case-local status: the SCL/CA firm relationship and Bannon media contact
 -- are real *bounded* bridges under their existing owner. This is NOT a
 -- universal common-programme inference joining Aquino, the Maxwells, etc.
+-- The actual interview/video was ALREADY paid in the canonical owner
+-- before this case-specific max-cut. Work continues only on exact-object
+-- source/custody and contractual disposition of individual reels.
+bannonExistingProductionChain : BannonBridge.BannonMediaProductionFrontier
+bannonExistingProductionChain = BannonBridge.canonicalBannonMediaProductionFrontier
+
+preExistingFilmedInterviewIsPaid :
+  BannonBridge.releasedInterviewExistencePaid
+    bannonExistingProductionChain ≡ true
+preExistingFilmedInterviewIsPaid = refl
+
+preExistingAprilCounselLetterLocated :
+  BannonBridge.engagementLetterTextLocated
+    bannonExistingProductionChain ≡ true
+preExistingAprilCounselLetterLocated = refl
+
+preExistingJulyShootingMessagesLocated :
+  BannonBridge.july6ProductionPlanningMessagesLocated
+    bannonExistingProductionChain ≡ true
+preExistingJulyShootingMessagesLocated = refl
+
+actualSignedAgreementStillUnverified :
+  BannonBridge.originalCounselLetterSignatureVerified
+    bannonExistingProductionChain ≡ false
+actualSignedAgreementStillUnverified = refl
+
+reelBytesHashStillUnverified :
+  BannonBridge.specificVideoReelFileIdAndHashVerified
+    bannonExistingProductionChain ≡ false
+reelBytesHashStillUnverified = refl
+
 bannonFilmContactPriorOwner : BannonBridge.BridgeReceipt
 bannonFilmContactPriorOwner = BannonBridge.bannonMediaRehabReceipt
 
@@ -678,7 +709,7 @@ bannonEpsteinWorkProductSearch = ProgrammeFrontier.promotion-search-candidate
   "Jeffrey Epstein"
   ProgrammeFrontier.institutionalWorkPackageSearch
   "Existing BannonBridge pays sustained contact; Guardian/CBS February 2026 describe actual released 2019 filmed interview from DOJ Data Set 10, video object exists but film bytes not inspected here"
-  "Original DOJ Data Set 10 Bannon reel object ID, filming date/edit/timestamp and 2018-2019 Bates correspondence, production or payment ID still needed"
+  "DOJ Dataset 9 EFTA00809863-866 engagement letter and House Oversight_027794-027848 production planning now located in prior owner; original reel ID/hash, signed assent, filming/edit dates, actual terms and same-reel join remain open"
   "Join one original primary message to the same primary audiovisual or production work product"
   "Distinct authenticated agency/tasking or control evidence, not just media strategy"
   0 1 false false
@@ -775,7 +806,7 @@ caseLocalSubclustersTest = AntiEcho.hypothesis-test-boundary
   "Bannon-CA corporate relationship and Bannon-Epstein actual film object reported in February 2026; separately Aquino-Vallely coauthorship; no same dataset crossing paid"
   "A document proves local links do not imply no broader chain, but isolated independent lineages limit the inference"
   "Specific cross-cluster same-object transfer remains unpaid"
-  "Weld official Data Set 10 film ID and session metadata to dated 2018-2019 correspondence, without linking unrelated videos or assuming the calendar appointment occurred"
+  "Prior owner now holds Apr 3 counsel terms and June-July primary shoot scheduling. Match official released Bannon reel identity, signed/assented terms, session metadata and completed shoot; do not conflate cancelled island plans or other videos"
   "Search for disjoint rights/custody, incompatible method/version and unconnected decision authority"
 
 caseOneCrossGenerationalProgrammeTest : AntiEcho.HypothesisTestBoundary
