@@ -156,6 +156,19 @@ def certificate():
     continuity_bound=S.simplify(continuity_low+continuity_high)
     assert S.simplify(continuity_bound-
         8*S.pi*AA*BB/nu**2)==0
+
+    # THE critical-scaling obstruction is essential to any A3 claim.
+    # Under the actual NS scaling u_lambda(x)=lambda*u(lambda*x):
+    #   E_lambda=E/lambda, D_lambda=lambda*D,
+    #   V_lambda(x)=lambda V(lambda*x) for the stationary Stokes response,
+    #   ||Vhat_lambda||²_L2xi = ||Vhat||²_L2xi/lambda.
+    # This low/high Fourier response control is supercritical in 3D;
+    # the energy bound can decrease while D_lambda becomes arbitrarily
+    # large. It cannot itself bound the scale-critical continuation norm.
+    ell=S.symbols("lambda",positive=True)
+    scale_response=S.simplify(
+        (8*S.pi/nu**2)*(EE/ell)**S.Rational(3,2)*S.sqrt(ell*DD))
+    assert S.simplify(scale_response-total_global/ell)==0
     return {
         "schema":"ns.a.schwartz-fourier-same-object.v1",
         "convention":"F[f](xi)=integral exp(-i*x.dot(xi)) f(x) dx",
@@ -184,6 +197,9 @@ def certificate():
         "strong_H1_source_continuity_high":"B",
         "strong_H1_Stokes_L2_xi_difference_squared_bound":str(continuity_bound),
         "strong_H1_continuity_assumptions":"A=(||u||2+||v||2)||u-v||2; B=||u-v||2||grad u||2+||v||2||grad(u-v)||2",
+        "Navier_Stokes_scaling_E_lambda":"E/lambda",
+        "Navier_Stokes_scaling_D_lambda":"lambda*D",
+        "Navier_Stokes_scaling_response_L2_squared":"response_L2_squared/lambda",
         "exact_nonzero_projected_frequency":"(1,0,1)",
         "source_only_not_claimed":[
             "general FourierTransformVelocity for every solution",
