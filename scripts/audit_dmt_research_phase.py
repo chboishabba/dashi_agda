@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DOSSIER = ROOT / "Docs/receipts/DMT2023DeweyIbrahimAcquisitionDecision20261024.json"
 CARDS = ROOT / "Docs/receipts/DMTRestrictedModelCards20261024.json"
+STEELMAN = ROOT / "Docs/receipts/DMTSteelmanDiscriminatorValue20261024.json"
 SOURCE_ENGINE = ROOT / "scripts/dmt_source_world_search.py"
 REQUIRED_MODELS = ("M0", "M1", "M2")
 EXPECTED_CONSUMERS = ("c_static_reproduction", "c_temporal_replication")
@@ -117,6 +118,41 @@ def validate_research_contract(world, dossier, cards):
     m2 = cards["models"][2]
     if "fixed Q" not in m2["transition"] or "Markov" not in m2["nonpromotion"]:
         raise ValueError("M2 lacks fixed-Q versus generic Markov no-uniqueness boundary")
+    # A weak M0 or generic semantic HMM fit cannot be a compelling
+    # counterfactual. Require original Mago theoretical donor attribution and
+    # a matched-capacity endogenous ceiling in all source-admitted designs.
+    steelman_path = "Docs/receipts/DMTSteelmanDiscriminatorValue20261024.json"
+    if cards.get("steelman_adversarial_dossier") != steelman_path:
+        raise ValueError("DMT M1/M2 design omits steelman discriminator ledger")
+    m1 = cards["models"][1]
+    donors = m1.get("serious_endogenous_donors", [])
+    if not any(d.get("doi") == "10.1093/nc/niaf069"
+               and d.get("not_an_empirical_reproduction") is True
+               for d in donors):
+        raise ValueError("Mago 2026 endogenous active-inference source role lost")
+    if not any("M1b" in requirement and "HMM" in requirement
+               for requirement in m1.get("required_mechanistic_steelman", [])):
+        raise ValueError("Matched endogenous HMM observational ceiling lost")
+    if m2.get("ontology_not_identified_by_finite_HMM_trace") is not True:
+        raise ValueError("Fixed-Q trace incorrectly elevated to ontology")
+    steelman = json.loads(STEELMAN.read_text(encoding="utf8"))
+    if steelman.get("schema") != "dashi-dmt-steelman-discriminator-v1":
+        raise ValueError("Source-steelman research priority schema changed")
+    if steelman.get("model_cards") != "Docs/receipts/DMTRestrictedModelCards20261024.json":
+        raise ValueError("Steelman dossier disconnected from model cards")
+    model_ids = {x["id"] for x in steelman["adversarial_model_families"]}
+    if model_ids != {"M0", "M1a", "M1b", "M2"}:
+        raise ValueError("Missing active-inference or observational-ceiling comparator")
+    sources = {x["doi"]: x for x in steelman["primary_roots"]}
+    if ("10.1093/nc/niaf069" not in sources or
+            "10.1093/nc/niag015" not in sources):
+        raise ValueError("Unattributed active-inference or temporal primary study")
+    if steelman["status"].get("new_human_data_recovered") is not False:
+        raise ValueError("Source-steelman dossier improperly promotes human data")
+    if steelman["status"].get("empirical_discriminator_computed") is not False:
+        raise ValueError("Source-steelman synthetic witness improperly claims measured model discrimination")
+    if not steelman["critical_no_go"]["implementation"].startswith("scripts/"):
+        raise ValueError("Missing domain-specific rational equivalence witness")
     external = cards["independent_consumers"]
     if _ids(external, label="external experimental consumer") != {"M3", "M4"}:
         raise ValueError("Information channel and ontology consumers conflated")
@@ -169,6 +205,10 @@ def summary(world, dossier, cards):
             world, "c_public_mat_reproduces_original_static"
         )["status"],
         "frozen_model_families": [m["id"] for m in cards["models"]],
+        "adversarial_comparators": [x["id"] for x in json.loads(
+            STEELMAN.read_text(encoding="utf8"))["adversarial_model_families"]],
+        "highest_value_unconditional_gap": "exact finite observation non-identifiability and mechanics-specific M1a versus M2 discriminator",
+        "active_inference_source_status": "conceptual published theory; new-data or formal-executable validation not claimed",
         "independent_unapproved_consumers": [x["id"] for x in cards["independent_consumers"]],
         "data_fetched": False, "original_fmri_result_reproduced": False,
         "data_use_permission_granted": False, "pre_registration_completed": False,
