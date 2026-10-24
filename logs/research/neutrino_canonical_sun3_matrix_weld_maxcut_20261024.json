@@ -51,7 +51,12 @@
     "exact_Qzeta_T_cube_identity": true,
     "exact_Qzeta_AdT_cube_A_identity": true,
     "exact_matrix_entry_checks": 45,
-    "neutrino_Galois_trace": "442358853598/216225930001"
+    "neutrino_Galois_trace": "442358853598/216225930001",
+    "selected_AdT_moves_CP_residual": true,
+    "AdT_minus_identity_root_emu_in_1_zeta": [
+      "7429123333440/6270551970029",
+      "2394922626720/6270551970029"
+    ]
   },
   "strict_status": {
     "source_blob_readback": "PASS",
@@ -64,15 +69,17 @@
     "formal_Goto_section": "OPEN",
     "horn_geometry_same_object_pi1": "OPEN",
     "physical_PMNS_QCD_color_identity": "NOT_CLAIMED",
-    "parameter_free_neutrino_prediction": "NOT_DERIVED"
+    "parameter_free_neutrino_prediction": "NOT_DERIVED",
+    "exact_cyclic_orbit_three": "ALGEBRAICALLY_FOLLOWS_FROM_T_CUBE_AND_NONZERO_ORBIT_DIFFERENCE; AGDA_SOURCE_WRITTEN"
   },
   "schema": "dashi.neutrino-canonical-sun3-matrix-weld-maxcut/v1",
   "branch": "chatgpt/neutrino-icecube-maxcut-20261024",
   "new_source_blobs": {
-    "DASHI/Physics/QFT/NeutrinoHornedSU3RootExact.agda": "35167b7da9c2e8e23df83e7def47ee0714b50489",
-    "DASHI/Physics/QFT/NeutrinoExistingSUN3CarrierWeldExact.agda": "c1efb5d1780566e361dd76786e2d62cbc3578c63"
+    "DASHI/Physics/QFT/NeutrinoHornedSU3RootExact.agda": "9bbcf68c5a550e1a6f658bd743729aa514fab70d",
+    "DASHI/Physics/QFT/NeutrinoExistingSUN3CarrierWeldExact.agda": "c1efb5d1780566e361dd76786e2d62cbc3578c63",
+    "tests/test_neutrino_horned_su3_positive_bridge.py": "8c18570146c5cba5eeb67ad0881cd2a4ee3a674d"
   },
-  "proof_payment": "45 selected exact pointwise matrix identities. Conditional derived IsSpecialUnitary(A), IsSpecialUnitary(T), group-valued T³=I using same SUNMatrixElement carrier.",
+  "proof_payment": "45 selected exact pointwise matrix identities. Conditional derived IsSpecialUnitary(A), IsSpecialUnitary(T), group-valued T³=I using same SUNMatrixElement carrier. Selected CP root has a demonstrably nontrivial threefold orbit: Ad_T(A)_e_mu != A_e_mu by an exact nonzero cyclotomic difference.",
   "open_matrix_contract": [
     "CertifiedSUNMatrixTheory 3 (Flavour→Flavour→Cyclotomic3) Cyclotomic3",
     "identity, multiplication, dagger, determinant, and scalar-one operational matches",
