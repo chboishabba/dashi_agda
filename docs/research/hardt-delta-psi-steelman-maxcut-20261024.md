@@ -342,3 +342,221 @@ assumption breaks, rather than retrospectively redefining 'delta influence'.
 other mediator exists at the receiver with measured uncertainty; *then*
 characterise a nonlinear biological or hardware transfer function.
 Receiver gain without input discrimination is not a standalone explanation.
+
+
+---
+
+## 2026 SOTA source/sensor re-cut — 24 October 2026
+
+**Source audit and date:** these original source authors and distinct
+instruments remain separate. The following results originate in those
+papers, not in the new DASHI code; only the explicitly synthetic exact
+rational models and source synthesis are new local work. Original reel,
+caption and same-speaker interviews still do not verify any alleged
+operation or effect.
+
+### Recent original scientific papers and provenance ceilings
+
+1. **Neural magnetometry, real EEG/OPM/SQUID** — *Optically pumped
+   magnetometers enhance neuroimaging performance—An EEG, OPM, and
+   SQUID-MEG study*, iScience 29, 115489, published online 26 March 2026,
+   DOI https://doi.org/10.1016/j.isci.2026.115489. Authors report
+   task-dependent OPM SNR improvement up to 205% over EEG and 40% over
+   SQUID-MEG, with 10–16 OPM sensors outperforming 56 EEG electrodes
+   in an **auditory steady-state 40 Hz** paradigm. **Does not establish
+   0.5–4 Hz delta calibration, external neural causation, or universal
+   OPM superiority.** The 2026 Omar-et-al. diamond study
+   DOI https://doi.org/10.1126/sciadv.aeg5281 measures nearby
+   **cardiac** currents; do not transfer its scalar cardiac instrument
+   sensitivity as brain delta source amplitude.
+
+2. **Multi-source inverse methods** — Jurkowska, Dreszer, Lewandowska,
+   Tolpa and Piotrowski, *Multi-source neural activity indices for EEG/MEG
+   localization*, NeuroImage 339 (1 October 2026), 122126,
+   DOI https://doi.org/10.1016/j.neuroimage.2026.122126.
+   Original two-stage source-localization/beamforming method, simulated
+   and EEG-oddball example, with an MNE-Python extension. Hecker's
+   *invertmeeg* preprint (posted 9 March 2026), DOI
+   https://doi.org/10.64898/2026.03.06.710103, provides a consistent
+   interface to 112 inverse solvers and benchmarks 106 methods over
+   simulation scenarios. Neither reports a single universally best
+   estimator or a unique solution to any arbitrary EEG inverse problem.
+
+3. **Real new-physics spin-sensitive comparator** — Yuanhong Wang,
+   Xingming Huang, Jiaxi Li, Wenzhong Wang, Xiang Kang, Yuanxing Liu,
+   Lei Cong, Dmitry Budker, Min Jiang and Xinhua Peng,
+   *Magnetic resonance searches for Earth-sourced exotic nuclear
+   spin-dependent interactions*, Science Advances 12:eaeg0974,
+   online 16 September 2026,
+   DOI https://doi.org/10.1126/sciadv.aeg0974.
+   A dedicated dual-xenon NMR source model, reversal and phase cycling
+   suppress systematics over 200-fold; final reported static-equivalent
+   signal **-4.1 ± 12.8 fT** is consistent with zero, alongside
+   force-model-specific bounds. This is the ORIGINAL experimental
+   literature. The new DASHI parity fixture below is NOT their
+   apparatus, signal model, observation or analysis replay.
+
+4. **Actual overlapping frequency domain but different source physics**
+   — Wilson, Jackson Kimball and GNOME colleagues, *Search for a
+   solar-bound axion halo using the global network of optical
+   magnetometers for exotic physics searches*, Physical Review D
+   113:115027, 15 June 2026,
+   DOI https://doi.org/10.1103/dd54-6vkw.
+   Search frequency approximately **0.05–20 Hz** overlaps human delta
+   0.5–4 Hz, with 69 days and 12 shielded stations; **no significant
+   solar-axion candidate**. This constrains the authors' specific
+   solar-axion and spin-coupling assumptions, NOT every imagined
+   brain-specific interaction or Hardt's historical testimony.
+
+5. **Parapsychology original-source version correction** — Patrizio
+   Tressoldi and Lance Storm, *Outcomes of Preregistered Studies
+   Related to Extra-Sensory Perception, and Mind-Matter Interaction:
+   A Systematic Review*, **OSF preprint v3 9 October 2026**,
+   DOI https://doi.org/10.31234/osf.io/ha4np_v3,
+   supersedes **v2, 1 May 2026**
+   DOI https://doi.org/10.31234/osf.io/ha4np_v2.
+   Latest v3's AUTHORS classify **15/46 studies (32.6%)** with at
+   least one positive confirmation, and **17/81 hypotheses (21.0%)**
+   positive. Earlier v2 **17/46 positive studies** is a superseded
+   number, NOT a second evidence root. Distinguish study versus
+   hypothesis as the denominator and the authors' classification
+   versus independently reproduced physical effect. Source-level
+   preregistrations, methods, multiplicity and effect sizes need
+   independent acquisition before a reliable effect synthesis.
+   Neither version tests Hardt's alleged lethal operation.
+
+6. **Open data candidates, not accessed in this PR** — BIDS-supported
+   public MEG example ds000247 (resting state) catalogued at
+   https://bids.neuroimaging.io/datasets/examples.html;
+   NEMAR https://www.nemar.org/ ; the 2026 multi-centre MEG-EEG
+   dataset DOI https://doi.org/10.1038/s41597-026-07350-9.
+   Merely identifying a dataset does not mean its actual bytes,
+   licensing, subjects, timestamps, EEG/MEG channel geometry or noise
+   were acquired and validated.
+
+### Source-identification: exact strongest finite result
+
+Let x be a physical neural source vector, E the calibrated linear
+sensor-forward map, and b*x one particular external physical field
+or source quantity one wants to predict. Under the declared finite
+linear model, the **classical** rowspace/kernel duality theorem gives:
+
+    b*x uniquely determined by E*x for all x
+      iff ker(E) subset ker(b)
+      iff rank([E;b]) = rank(E).
+
+This theorem is standard linear algebra; DASHI owns the particular
+finite model, exact checker and research selection, not prior mathematics.
+
+In a concrete rational 3-source fixture choose:
+ 
+    E_EEG = [1,1,0]
+    E_OPM = [1,0,1]
+    b_selected = [0,1,-1] = E_EEG - E_OPM
+    b_other = [0,0,1]
+
+Each measurement alone fails to determine b_selected; the two together
+do. But the **same joint readings** are compatible with distinct
+source states separated by n = (-1,1,1), because both E rows vanish on
+n, while b_other*n = 1. Thus identifying **one** external observable
+does NOT identify all fields or a unique original source.
+
+The new repository file
+scripts/hardt_sota_2026_source_sensor_audit.py includes rational
+Gauss–Jordan, nullspace construction, rowspace-vs-kernel equivalence,
+and adversarial witnesses. **3,380** tiny-source/target cases
+were executed in an equivalent local standard-library reference and
+passed. Sensor labels are illustrative; actual forward matrices must
+be derived from anatomical conductivity and source/sensor coordinates.
+
+### Low-frequency noise gate — do not inherit 40 Hz performance
+
+The checker verifies that a 0.5–4 Hz delta band overlaps GNOME's
+published search range, but not the 40 Hz OPM auditory paradigm.
+No calibration is admitted from this frequency comparison alone.
+
+In an explicitly **HYPOTHETICAL** stationary-white-noise example,
+set ASD=5 fT/sqrt(Hz) in 0.5–4 Hz. Then band-limited RMS
+is 5 sqrt(3.5) ≈9.354 fT. The difference of two independent
+equal-PSD sensors has ≈13.229 fT RMS. **Neither 5 fT/sqrt(Hz nor its
+low-frequency flatness is attributed to an actual published instrument.**
+Replace placeholders with original calibrated spectra, environmental
+noise, motion, head position and timestamp alignment before claiming
+detection or exclusion.
+
+### Imported phase-reversal inspiration and adversarial drift
+
+Inspired BY methodology, NOT results, of Wang et al. 2026. For a
+synthetic two-reversal factorial signal
+
+    y(s,t) = a+b*s+c*t+d*s*t,   s,t in {-1,1}
+
+the exact interaction estimate d is one-quarter the sum of
+s*t*y(s,t) across four conditions. **625** rational integer
+coefficient combinations passed local exact checks. But when a
+zero-actual-interaction trial's phase condition order correlates with
+chronological drift, the same parity estimator gives an apparent
+**d=1**. Reversal alone does NOT exclude time/order confounds:
+randomized/time-balanced blocks, baseline drift and sham source
+reversals are separate experimental obligations. This fixture does
+not reproduce the xenon experiment's physical source or measured field.
+
+### Denominators and independence
+
+- One Hardt group of 100 participants is not automatically 100
+  independent attempts, 100 recipients or 100 observed outcomes.
+- For a *hypothetical* exchangeable participant-level measurement
+  with intra-group correlation rho, N_eff=100/(1+99*rho):
+  rho=0 ->100, rho=1/3 ->50/17 (≈2.94), rho=1 ->1.
+  No participant-level data from Hardt exist in our source evidence.
+- A version-stable registry must distinguish paper, study,
+  preregistered hypothesis, analysed outcome and independent
+  experimental group. Even the v3 17/81 and 15/46 totals do not
+  identify allocation of 17 positive hypotheses to 15 studies
+  (the synthetic allocations [3,1×14] or [2,2,1×13] are both possible).
+  This does NOT estimate a physical probability of psi.
+
+### Phase, roadmap and owner first
+
+**F0 source provenance:** creator/source roots established, exact
+v3 review correction obtained. Unnamed alleged operative,
+primary programme documents, 80% denominator and independent cause of
+death records are UNACQUIRED. Use #1242 existing historical genealogy.
+
+**F1 mathematical/source audit:** complete at synthetic finite level:
+observability/no-identification witness, frequency mismatch, phase
+cycling with adversarial drift, unit-of-analysis correction. New code
+and expanded markdown are source-written and committed on #1252.
+Equivalent local Python arithmetic PASS; exact committed-blob replay
+and Agda kernel/CI NOT asserted.
+
+**F2 real-data calibration:** high-value next: reusable MNE-BIDS
+EEG/MEG source-geometry and subject-specific field estimator with
+measured **0.5–4 Hz PSD**, original file hashes/rights, held-out
+source/target condition, controls for shared cues and interference.
+#1238 diamond remains CARDIAC instrument owner. No actual
+EEG–OPM or neural dataset was ingested in this PR.
+
+**F3 new physical carrier discrimination:** use the legitimate NMR
+and GNOME spin-search methodology as experimental DONORS, not
+retrospective evidence. Need a specified source/receiver spin
+coupling, interaction range, conservation, target selection, sensor
+signature, and independently reproduced field residual. GNOME
+solar-axion null cannot exclude a different source operator.
+
+**F4 causality:** only safe, benign, fully consenting or
+hardware-only hidden-target tasks with preregistered allocation and
+leakage-free blinding. No harmful, fatal or coercive experimental
+proposal; nothing establishes a remote action.
+
+**Highest ROI:** calibrated physical source and external receiver
+input plus original 2026 EEG/MEG source inverse benchmarks and
+same-instrument negative controls. More 369/torus or unspecified
+new-particle identity is lower priority absent new data.
+
+**Attribution and verification fence:** external experimental
+observations credited to original researchers; standard
+rowspace theorem credited to prior mathematics; local exact
+synthetic checker and this literature integration attributed
+only to this programme. Neither an attractive hypothesis nor a
+source-written theorem declaration becomes human evidence.
