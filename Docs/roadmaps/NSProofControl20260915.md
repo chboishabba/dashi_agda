@@ -1,3 +1,96 @@
+## 2026-10-24 next max-cut: recover the already-proved B4 alternative; quantify A Fourier H¹ density
+
+### B: do NOT reconstruct the zero-padding-invariant output-rate identity
+
+**Existing original-source proofs, now the default route:**
+
+1. `NSTriadKNFixedOutputPhysicalOutputRateNormalFormExact.agda`
+   already replaces the cutoff-dependent *arithmetic fibre mean* by the
+   physical output heat rate `lambda_k=(nu/2)|k|²`, with a literal
+   one-fibre signed coherent-work equality and no cardinality factor.
+2. `NSTriadKNFixedOutputCrossGradientCovarianceExact.agda`
+   already expresses centered-square differences as `-4` times
+   cross-gradient differences `p·q`. This is signed identity, not
+   positivity or a norm estimate.
+3. `NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact.agda`
+   proves the literal physical rate identity
+   `sum_(p+q=k) r_pq w_pq = nu|k|² W(M,M)
+    - 2nu sum_(p+q=k) (p·q)w_pq`,
+   where `r_pq=nu(|p|²+|q|²)` and each `w_pq` is the SAME coherent
+   physical work. Its source status explicitly marks the remaining
+   quantitative cross-gradient payment FALSE.
+4. `NSTriadKNR650RateKernelInputLaplacianCollapseRound684Exact.agda`
+   identifies this with **one** input-Laplacian coherent work;
+   `NSTriadKNR650RateKernelCommutatorEndpointRound685Exact.agda`
+   identifies the same kernel with commutator-minus-tangent.
+5. `NSTriadKNR650GlobalSignedRateLiftInputLaplacianRound690Exact.agda`
+   already sums over physical outputs BEFORE time integration, without
+   a cardinality tax. Its *global spacetime analytic payment* remains
+   explicitly FALSE.
+
+These are **prior proof owners**, not new RNNN obligations. B4's original
+full-fibre *noncore/core count-weighted strict-half estimate* is
+mathematically false for the physical R219/R469 selected-pair ED
+(certified finite computation plus a simple unboundedness proof);
+however the existing output-rate/cross-gradient identities are
+NOT automatically the same functional as that disproved partial B4
+defect. Before replacing the B4 consumer, prove an exact physical
+same-object relation to the R236 critical-production balance on its
+original selected Bony rows. Any mismatch must remain explicit.
+
+**One decisive future B research cut:** identify the actual surviving
+cross-gradient correlation `sum(p·q)w_pq` on the original coherent
+physical carrier; derive a cutoff-independent signed bound, preferably
+after the R690 global output sum rather than estimating each Bony
+subregion in isolation. If that produces a correction to the
+critical-production B4 interface, prove the full source equality
+before consuming it. DO NOT mint an R691 alias or repeat R681.
+
+Regression: `tests/test_ns_b4_literal_padding_adversary.py` now
+checks arbitrary signed physical triad rates and zero-cell padding
+against the **already-proved R681** source equality, alongside
+the strict R63 original-B4 negative-control certificate.
+
+### A: actual nonlinear Fourier source extends continuously from Schwartz
+
+For physical divergence-free `u,v∈H¹(R³)` define
+
+```text
+A(u,v)=(||u||2+||v||2)||u-v||2
+B(u,v)=||u-v||2||grad u||2+||v||2||grad(u-v)||2.
+
+||F[Pdiv(u⊗u-v⊗v)](xi)|| <= min(A(u,v)|xi|, B(u,v))
+||F[(-nu Delta)^(-1)Pdiv(u⊗u-v⊗v)]||²_L²xi
+      <= 8*pi*A(u,v)*B(u,v)/nu².
+```
+
+This follows by `L²·L²⊂L¹`, divergence-free product rule,
+Plancherel/distribution Fourier, contraction of the Leray symbol
+and the two-regime radial integral split at `r=B/A`.
+If `A=0` or `B=0`, use the zero limiting case; no division is needed
+in the final inequality. For divergence-free smooth Schwartz
+approximations `u_n→u` strongly in `H¹`, `A_n→0`, `B_n→0`.
+Thus the **actual physical stationary Fourier-Stokes response**
+converges in `L²xi`, providing a quantitative source extension
+from the nontrivial Gaussian calibration to arbitrary divergence-free
+`H¹` states. The mathematical statement is rigorous using standard
+Fourier theory; its Agda Bishop/formal measurable-transform term
+is not yet constructed or kernel checked.
+
+This is stronger than only an `L²` distributional Fourier identity.
+Still missing for official A: same-source space/time Fourier
+trajectory in the actual continuum solution, **signed centered
+double-resolvent A2**, a genuinely sufficient global high-frequency
+estimate, and A3 continuation. The instantaneous Stokes-response
+bound is NOT a Duhamel or a uniform-in-time smoothness result.
+
+**Execution/provenance:** exact R63 cutoff values and direct Schwartz
+nonlinearity/normalization/radial integral identities were independently
+reproduced offline; the new committed Python regressions and Lean/Agda
+source have NOT been verified by a full checked-out exact-head
+Agda/Lean kernel run. No Clay status promoted.
+
+---
 ## 2026-10-24 additional A max-cut: full-frequency physical H¹ source majorant
 
 The low-frequency-only estimate has a second, already-standard,
