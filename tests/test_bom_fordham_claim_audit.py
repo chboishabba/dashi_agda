@@ -338,10 +338,10 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
 
-    assert len(rows) == 27
+    assert len(rows) == 36
     assert len({row["edge_id"] for row in rows}) == len(rows)
     assert Counter(row["case_id"] for row in rows) == {
-        "BOM2026": 13, "REEF2021": 10, "GAS2026": 4
+        "BOM2026": 13, "REEF2021": 10, "GAS2026": 13
     }
     fields = (
         "edge_id", "case_id", "upstream", "downstream", "relation",
@@ -395,7 +395,7 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
 def test_claim_root_ledger_documentation_uses_only_case_bounded_counts():
     docs = RESEARCH.read_text()
     assert "australian_climate_claim_origin_edges_20261025.csv" in docs
-    assert "27 bounded relationship rows" in docs
+    assert "36 bounded relationship rows" in docs
     assert "NOT a representative crawl" in docs
     assert "originator" in docs.lower()
     assert "actual transfer not established" in docs.lower()
@@ -479,3 +479,59 @@ def test_international_republication_is_not_fresh_climate_evidence():
     assert entries["B13"]["evidence_grade"] == "named_source_linking"
     assert "No independent BOM ledger verification" in entries["B12"]["boundary"]
     assert "not independent audits" in RESEARCH.read_text()
+
+
+def test_canonical_origin_keys_do_not_miscount_common_republication():
+    with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
+        rows = list(csv.DictReader(stream))
+    assert len(rows) == 36
+    assert all(row["root_key"] and row["root_resolution"] for row in rows)
+    by_id = {row["edge_id"]: row for row in rows}
+    assert by_id["G05"]["root_key"] == by_id["G06"]["root_key"] == "G_CREIGHTON_OPINION"
+    assert by_id["G07"]["root_key"] == by_id["G08"]["root_key"] == "G_JOHNSON_REPORT"
+    assert by_id["B03"]["root_key"] == by_id["B12"]["root_key"] == "B_NOVA_COMMENTARY"
+    assert by_id["G01"]["root_key"] == "MULTI"
+    assert by_id["G09"]["root_key"] == "MULTI"
+    assert by_id["G10"]["root_key"] == "MULTI"
+    assert by_id["G13"]["root_key"] == "MULTI"
+    # The 18 root labels are manually assigned within this purposive case
+    # graph, not a statistic of Australian media or distinct truth sources.
+    labeled = {r["root_key"] for r in rows if r["root_key"] != "MULTI"}
+    assert len(labeled) == 18
+    assert sum(r["root_key"] == "MULTI" for r in rows) == 6
+
+
+def test_senex_hancock_ipa_information_path_has_explicit_public_countercase():
+    media = POLITICAL_OWNER.read_text()
+    proofs = POLITICAL_VALIDATION.read_text()
+    doc = RESEARCH.read_text()
+    for receipt in (
+        "creightonIPAOriginalArticle",
+        "senexLinksIPACreighton",
+        "hancockReprintsJohnsonNightly",
+        "senexLinksJohnsonNightly",
+        "senateGasTaxInquiryPublicComparator",
+    ):
+        assert media.count(receipt + " : RelationshipReceipt") == 1
+    for witness in (
+        "creightonOriginalCreditIsAttributedReuse",
+        "gasProducerLinksIPAOriginal",
+        "hancockSameJournalismNotIndependentData",
+        "senexSameJournalismNotIndependentData",
+        "parliamentaryPublicPolicyCounterexample",
+        "gasRepublishingDoesNotEstablishPolicyCopy",
+        "politicalLanguageDoesNotEstablishCommonSponsor",
+    ):
+        assert witness in proofs
+    assert "No new Agda ontology" in doc
+    assert "Stephen Johnson" in doc and "Adam Creighton" in doc
+    assert "230+ submissions" in doc
+    assert "18 distinct single-root keys" in doc
+
+
+def test_one_nation_gas_policy_is_not_dated_before_public_inquiry():
+    doc = RESEARCH.read_text()
+    assert "Senate committee **7 May** report" in doc
+    assert "One Nation's **9 June**" in doc
+    assert "7 May precedes 8 May" in doc
+    assert "actual transfer not established" in doc.lower()
