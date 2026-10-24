@@ -442,3 +442,29 @@ def test_original_bom_clips_and_historical_ipa_finance_use_different_types():
     assert "Hancock Prospecting" in docs
     assert "no same-object payment" in docs
     assert "Fordham's production" in docs
+
+
+def test_single_bom_sky_clip_ipa_publication_and_old_donor_not_collapsed():
+    media = POLITICAL_OWNER.read_text()
+    validation = POLITICAL_VALIDATION.read_text()
+    for name in (
+        "skyOutsidersLloydRiddSameProgramme",
+        "ipaHostsBOMOutsidersTranscript",
+        "ipaRiddResearchFellowship",
+        "hancockToIPAHistoricalFunding",
+    ):
+        assert media.count(name + " : RelationshipReceipt") == 1
+
+    for name in (
+        "outsidersLloydRiddSameProgrammeIsPublished",
+        "ipaOwnTranscriptIsDerivativePublication",
+        "riddFellowshipIsNamedInstitutionalRelation",
+        "historicHancockIPAIsNotCurrentEarmarkedPayment",
+        "historicalIPAReceiptNotEditorialOrder",
+        "publishedBOMInterviewNotSecretCommand",
+    ):
+        assert name in validation
+
+    assert "historicalInstitutionalFunding" in media
+    assert "4.5m" in media
+    assert "no same-object payment" in RESEARCH.read_text()
