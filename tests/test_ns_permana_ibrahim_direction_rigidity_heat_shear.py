@@ -78,3 +78,17 @@ def test_constant_high_vorticity_magnitude_everywhere_destroys_uniform_curvature
         assert S.simplify(factor.subs(t,tN)-A*S.exp(-1))==0
     n=S.symbols("n",positive=True)
     assert S.limit(n/S.sqrt(A/S.E),n,S.oo)==S.oo
+
+def test_rotating_shear_has_uniform_enstrophy_and_vanishing_kinetic_energy():
+    # Normalized torus spatial averages for the stronger N-mode
+    # transverse rotating field (both y,z amplitudes A/N).
+    n,A,nu=S.symbols("n A nu",positive=True)
+    tN=1/(nu*n*n)
+    mean_kinetic_at_tN=A*A*S.exp(-2)/(n*n)
+    mean_enstrophy_at_tN=A*A*S.exp(-2)
+    assert S.simplify(n*n*mean_kinetic_at_tN
+                      -mean_enstrophy_at_tN)==0
+    assert S.limit(mean_kinetic_at_tN,n,S.oo)==0
+    assert S.simplify(mean_enstrophy_at_tN-A*A*S.exp(-2))==0
+    # Uniform upper kinetic/enstrophy ceilings cannot alone bound
+    # |grad xi|: this same family has |grad xi|=N for all x at tN.
