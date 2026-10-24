@@ -223,8 +223,11 @@ def test_no_invented_ai_mode_claims_or_external_investors():
     media = POLITICAL_OWNER.read_text()
     checks = POLITICAL_VALIDATION.read_text()
     assert "https://share.google/aimode/Ux4UtsL535FOH9STw" in documentation
-    assert "NOT INGESTED" in documentation
-    assert "No source claim, citation, transcript" in documentation
+    # The original October 24 acquisition failure is now superseded by
+    # the user-supplied transcript; its generated claims are not evidence.
+    assert "SUPERSEDED by 25 October uploaded transcript" in documentation
+    assert "Google AI Mode transcript acquired" in documentation
+    assert "80b27d5b866a0a906142a6c66f3e090ad39342ecbe4173f088ef48ea61adbfcc" in documentation
     for receipt in (
         "kyleSubscriberFinanceSelfReport",
         "harveyNormanProspectiveSponsorship",
@@ -235,3 +238,49 @@ def test_no_invented_ai_mode_claims_or_external_investors():
     assert "advertiserOfferNotEquity" in media
     assert "subscriberFundingIsAttributedOnly" in checks
     assert "advertiserInterestNotCapitalStake" in checks
+
+
+def test_google_ai_source_intake_reuses_political_radio_owner():
+    """No source-specific Agda files for one AI-generated answer."""
+    governance = ROOT / "DASHI/Governance"
+    for obsolete in (
+        "GoogleAIModeMediaClaimIntake2026Exact.agda",
+        "GoogleAIModeMediaClaimIntake2026Validation.agda",
+    ):
+        assert not (governance / obsolete).exists()
+
+    source = POLITICAL_OWNER.read_text()
+    checks = POLITICAL_VALIDATION.read_text()
+    docs = RESEARCH.read_text()
+    # Every retained relationship has a direct, source-graded owner here;
+    # other speculative leads stay only in the narrative evidence ledger.
+    for receipt in (
+        "rinehartBannonDevineEvent",
+        "advanceSheahanBannonConversation",
+        "rinehartMcWilliamSecuredMediaStake",
+        "rinehartStefanovicPodcastFundingClaim",
+        "stefanovicRobinsonPublication",
+        "hansonRepublishedRobinson",
+        "mandelsonXstrataEpsteinTaxEmail",
+        "jonesGillardRecordedRemark",
+        "rinehartOneNationHeadOffice",
+        "stefanovicIbrahimOwnershipSettlement",
+        "mfwKyleAdvertiserCampaign",
+    ):
+        assert source.count(receipt + " : RelationshipReceipt") == 1
+
+    for proof in (
+        "rinehartStakeIsSecuredFinancing",
+        "stefanovicFundingRemainsReported",
+        "hansonRepostIsRedistribution",
+        "sheahanChatRemainsReported",
+        "taxEvidenceIsCorrespondence",
+        "headquartersIsReportedLease",
+        "podcastBuyoutNotRinehartEquity",
+        "MFWPressureIsAdvertiserCampaign",
+    ):
+        assert proof in checks
+
+    assert "PR #1131" in docs
+    assert "not its own mathematical owner" in docs
+    assert "DASHI.Governance.GoogleAIModeMediaClaimIntake2026" not in source + checks
