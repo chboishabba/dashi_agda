@@ -131,9 +131,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- The atlas deliberately has eleven source instances. The five named-source
 -- / original-author Croft passages still share a single authorial root.
-sourceAtlasCountIsThirtyEight :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 38
-sourceAtlasCountIsThirtyEight = refl
+sourceAtlasCountIsForty :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 40
+sourceAtlasCountIsForty = refl
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -741,3 +741,28 @@ moreGroupsDoNotEnsureMasking ()
 confoundedContrastDoesNotProveFieldCause :
   ActiveShamContrastProvesMagneticCause → ⊥
 confoundedContrastDoesNotProveFieldCause ()
+
+------------------------------------------------------------------------
+-- Two actual provenance instances of sham control: real measured trial
+-- versus protocol proposing a later trial, distinct original author roots.
+------------------------------------------------------------------------
+
+clinicalSilentShamIsNotLoudCoilReceipt :
+  Atlas.relationClass Atlas.silentShamDoesNotCertifyLoudCoil ≡
+  Atlas.historicalMechanismPrecedentOnly
+clinicalSilentShamIsNotLoudCoilReceipt = refl
+
+proposedShamIsNotCompletedDeviceStudy :
+  Atlas.relationClass Atlas.futureShamProposalDoesNotGiveObservedTrial ≡
+  Atlas.thematicResemblanceOnly
+proposedShamIsNotCompletedDeviceStudy = refl
+
+clinicalAndProtocolSourcesDiffer :
+  Atlas.root Atlas.shupakShamScope ≡
+  Atlas.root Atlas.duShamDesignProposal → ⊥
+clinicalAndProtocolSourcesDiffer ()
+
+protocolCannotImportAClinicalResult :
+  Attribution.citationImportsProof Atlas.duAssessorBlindedProtocol2026 ≡ false
+protocolCannotImportAClinicalResult =
+  Atlas.allSourcesRemainNonPromoting Atlas.duAssessorBlindedProtocol2026
