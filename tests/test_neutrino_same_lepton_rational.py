@@ -167,11 +167,24 @@ class SameLeptonResidualTests(unittest.TestCase):
         self.assertAlmostEqual(float(neutron_earth[0]),0.54726022,places=7)
 
     def test_cp_zero_is_a_model_limitation(self):
-        # For all-real U the vacuum Jarlskog CP invariant is identically 0.
-        j=(U[0][0]*U[1][1]*U[0][1]*U[1][0])
-        self.assertEqual(j.imag if hasattr(j,'imag') else 0,0)
-        self.assertEqual(U[0][0]*U[1][1]*U[0][1]*U[1][0]-
-                         U[0][0]*U[1][1]*U[0][1]*U[1][0],0)
+        # The invariant Im(U_e1 U_mu2 conj(U_e2) conj(U_mu1))
+        # is 0 for our actual REAL matrix; the complex PMNS from
+        # nonzero delta_CP has a genuinely different imaginary part.
+        j=(complex(U[0][0])*complex(U[1][1])*
+           complex(U[0][1]).conjugate()*
+           complex(U[1][0]).conjugate())
+        self.assertEqual(j.imag, 0.0)
+        s12,c12=F(161,289),F(240,289)
+        s13,c13=F(240,1609),F(1591,1609)
+        s23,c23=F(20,29),F(21,29)
+        phase=complex(math.cos(math.radians(212)),
+                      math.sin(math.radians(212)))
+        u_e1=complex(c12*c13)
+        u_e2=complex(s12*c13)
+        u_mu1=-complex(s12*c23)-complex(c12*s23*s13)*phase
+        u_mu2=complex(c12*c23)-complex(s12*s23*s13)*phase
+        jcp=(u_e1*u_mu2*u_e2.conjugate()*u_mu1.conjugate()).imag
+        self.assertGreater(abs(jcp),0.01)
 
 
 if __name__=="__main__":
