@@ -17,9 +17,16 @@ PhysicalCriticalTouchingDefectNoncoreCore20261007Exact,
 PhysicalCriticalTouchingLiteralCompanion20261007Exact and
 PhysicalCriticalTouchingDefectR44020261007Exact.
 
-This falsifies cutoff-uniform payment if local ED of this unchanged physical
-state stays uniformly bounded. A free cutoff-dependent 'localED' record
-input is NOT such a bound. No Clay claim or kernel certification.
+The EXISTING literal R219/R469 selected-pair local ED is exactly bounded
+at this fixed state: energy_m = ||u_m||^2 and dissipation_m = |m|^2||u_m||^2.
+Both total 4. R109 bounds the GLOBAL selected-pair payment by 2*4*4=32,
+and at output k=(1,1,0) the only nonzero ordered pairs are (P,Q),(Q,P),
+each of kernel value 2: actual localED <= 4 for ANY Boolean selector.
+Thus the full-fibre B4 signed defect disproves the desired cutoff-uniform
+payment against the pre-existing physical ED currency, not merely an arbitrary
+ED chosen after the fact. The generic B4 analytic interface still accepts a
+free source-attachment predicate and is not a proof of an actual ED payment.
+This refutes an auxiliary estimate, NOT the Clay theorem.
 """
 from fractions import Fraction
 from itertools import product
@@ -63,6 +70,16 @@ def certificate(N):
     active_zero=2*Fraction(11,8)*sum(abs(rate-2) for rate in zeros)
     companion=Fraction(zero_zero)+active_zero
     assert defect>=0
+    physical_modal_energy = 4
+    physical_modal_dissipation = 4
+    selected_pair_global_ED_upper_bound = 2 * physical_modal_energy * physical_modal_dissipation
+    selected_pair_output_ED_upper_bound = 2 * 2
+    assert selected_pair_global_ED_upper_bound == 32
+    assert selected_pair_output_ED_upper_bound == 4
+    # For any nonnegative thetaD < 1/2, cD >= 0, and this same physical
+    # selected-pair ED <=4, a necessary condition on cD at this cutoff is:
+    # cD > (defect - M_core/2)/4 if the numerator is positive.
+    min_cD_at_half_margin = max(Fraction(0), (defect - companion / 2) / 4)
     return {
         "cutoff":N,"output":K,"core_rows":len(core),
         "noncore_zero_amplitude_rows":nN,
@@ -71,6 +88,11 @@ def certificate(N):
         "literal_core_companion":str(companion),
         "defect_over_companion":str(defect/companion) if companion else None,
         "defect_exceeds_half_companion":bool(2*defect>companion),
+        "physical_modal_energy":"4",
+        "physical_modal_dissipation":"4",
+        "literal_R109_global_selected_ED_bound":"32",
+        "literal_R219_R469_output_localED_bound":"4",
+        "necessary_cD_lower_bound_at_theta_half":str(min_cD_at_half_margin),
     }
 
 def main():
@@ -94,7 +116,7 @@ def main():
         "padding_invariant_R440_weighted_amplitude":"2*M",
         "padding_invariant_modal_coherent_heat_work":"2",
         "output_heat_centered_R440_work":"0",
-        "not_claimed":["Clay B false","kernel proof","cutoff-growing ED ruled out"],
+        "not_claimed":["Clay B false","kernel proof","arbitrary free-source ED payment ruled out"],
         "cutoffs":results,
     },indent=2))
 
