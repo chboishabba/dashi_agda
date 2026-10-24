@@ -25,7 +25,8 @@ from fractions import Fraction as F
 from itertools import product
 P=(-1,-1,1)
 QL=(-1,-1,2)
-QR=(-4,2,2)
+QR=(-4,2,2)  # R contribution to final hypercharge Y/6
+UR=(-1,-1,2) # CENTRAL pre-VEV U1_R commuting with the surviving SU2_R
 assert P[0]*P[1]*P[2]==1
 rows=[]
 for c,l in product(range(3),range(3)):
@@ -33,10 +34,10 @@ for c,l in product(range(3),range(3)):
                      p=P[l],YL=-QL[l],YR=0,Y=-QL[l]))
 for c,r in product(range(3),range(3)):
     rows.append(dict(block="B",colour="bar3",l=None,r=r,
-                     p=P[r],YL=0,YR=QR[r],Y=QR[r]))
+                     p=P[r],YL=0,YR=UR[r],Y=QR[r]))
 for l,r in product(range(3),range(3)):
     rows.append(dict(block="C",colour="1",l=l,r=r,
-                     p=P[l]*P[r],YL=QL[l],YR=-QR[r],
+                     p=P[l]*P[r],YL=QL[l],YR=-UR[r],
                      Y=QL[l]-QR[r]))
 assert len(rows)==27
 nleft=sum(v["p"]==-1 for v in rows)
@@ -114,7 +115,7 @@ for tag,fn in (
  ('ULUR2',lambda w:w["YL"]*w["YR"]**2),
  ('gravUL',lambda w:w["YL"]),('gravUR',lambda w:w["YR"])):
     UV[tag]=sum((F(-w["p"]*fn(w)) for w in rows),F(0))
-assert UV=={'UL3':40,'UR3':-256,'UL2UR':8,'ULUR2':64,'gravUL':16,'gravUR':-16}
+assert UV=={'UL3':40,'UR3':-40,'UL2UR':8,'ULUR2':-8,'gravUL':16,'gravUR':-16}
 for key,q in (('ccUL','YL'),('ccUR','YR')):
     UV[key]=sum((F(-w["p"]*w[q],6) for w in rows if w["colour"]!="1"),F(0))
 assert UV["ccUL"]==2 and UV["ccUR"]==-2
