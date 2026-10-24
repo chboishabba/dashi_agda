@@ -141,8 +141,7 @@ allFourPhaseDimensionsAreNinety dualZetaSquared = refl
 -- Distinguish zero fixed-phase multiplicity from an empty 90-space.
 candidateZeroFixedStillHasNinetyDimensions :
   (candidate : SuzukiNinetyCandidate) →
-  rootOneMultiplicity (candidatePhaseTriple candidate)
-    ≡ 0
+  (rootOneMultiplicity (candidatePhaseTriple candidate) ≡ 0)
   × (rootOneMultiplicity (candidatePhaseTriple candidate)
       + rootZetaMultiplicity (candidatePhaseTriple candidate)
       + rootZetaSquaredMultiplicity (candidatePhaseTriple candidate)
