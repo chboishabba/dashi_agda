@@ -21,6 +21,7 @@ import DASHI.Biology.IITLatticePrimePowerSourceBridgeExact
 import DASHI.Biology.IITFiveCubeJCoarseFineRelativeBridgeExact
 import DASHI.Biology.IITJFineSelectedCrossPunctured79Exact
 import DASHI.Biology.IITProjectiveF9Pointed80Exact
+import DASHI.Biology.IITField81Inverse79ContractExact
 import DASHI.Biology.IITF81F9NormInverseBridgeExact
 import DASHI.Biology.IITXORGridFibreCircuitBridgeExact
 import DASHI.Biology.IITXORGridSynthesisFabricExact
