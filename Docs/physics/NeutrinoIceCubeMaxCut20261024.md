@@ -1440,3 +1440,233 @@ python3 -m unittest discover -s tests -p 'test_alexander_horned_c3_a5_order_sele
 python3 -m unittest discover -s tests -p 'test_neutrino_horned_fifth_power_bridge.py' -v
 agda -i . DASHI/Physics/QFT/NeutrinoHornedExteriorFifthPowerNoGoExact.agda
 ```
+
+## 24 October 2026 — breakthrough / positive horned-SU(3) infinite-image representation
+
+### Prior impasse resolved, but *physical* prediction does NOT follow
+
+Earlier: a selected horned-source meridian `m` has
+infinite order, but the selected finite `A5³`
+quotient sends `m` to an order-five element and
+therefore cannot send its quotient meridian to the
+CP-nonzero lepton residual `A=TS1` with `A^5!=I`.
+That finite-quotient no-go is still valid.
+
+**New positive mathematical result:**
+Original theorem by **Morikuni Gotô**,
+*A Theorem on compact semi-simple groups*,
+*J. Math. Soc. Japan* **1** (1949), 270–272,
+https://doi.org/10.2969/jmsj/00130270 :
+every element of SU(3), a connected compact semisimple
+Lie group, is a single group commutator.
+
+Hatcher's original *Algebraic Topology* Example 2B.2
+defines the Hatcher horn exterior abstract group as
+an injective direct limit of free groups with
+`x_w ↦ [x_w0,x_w1]`.
+An arbitrary chosen `A∈SU(3)` admits a commutator
+factorization `A=[X,Y]` by Gotô.
+Choose new pairs recursively for *all* descendants.
+Each stage assignment is compatible with the actual
+Hatcher generator substitution, so the group colimit
+universal property supplies an honest
+`rho_A:G_A→SU(3)` with `rho_A(m)=A`.
+This is NOT a map through the finite A5³ quotient.
+
+More constructively, choose
+`A=V diag(λ0,λ1,λ2)V†`
+with determinant 1, `P` the determinant-one
+3-cycle permutation matrix, and `D` diagonal
+with eigenvalues proportional to
+`(1,1/λ1,λ0)`; then
+`[P,D]=diag(λ0,λ1,λ2)`, and
+`[V P V†,V D V†]=A`.
+Normalize `det(D)=1` by a common cube-root phase.
+This formula makes the classical Gotô SU(3) case
+explicit rather than merely assuming surjectivity.
+
+### The chosen CP-nonzero neutrino operator is an exact SU(3) input
+
+**New** `NeutrinoHornedSU3RootExact.agda` reuses
+`NeutrinoExistingCPSectorLeptonBridgeExact` and
+the canonical Q(ζ3) algebra:
+
+```
+U = PDG-type selected complex 3x3 PMNS fixture, δ=+120deg
+T = diag(1,ζ,ζ²),                   T³=I
+S1 = 2 |u1><u1| - I
+A = T S1
+```
+
+The new source expresses all **18** two-sided
+unitarity clauses and an explicit 3×3 determinant
+formula `det(A)=1` over exact Q(ζ3).
+Separate independent Python **Fraction** arithmetic
+verified, on precisely the same six rational angles:
+
+```
+U U†=I; U†U=I
+S1†=S1; S1²=I; det(S1)=1
+A A†=I; A†A=I; det(A)=1
+A^5 != I
+Tr_{Q(ζ)/Q}(tr(A))
+ = 442358853598/216225930001
+ ∈ (2,3).
+```
+
+The trace and algebraic-integer theorem from the
+earlier PR work imply `A` has **infinite order**;
+the exact fifth-power calculation is an
+independent bounded witness. Thus
+`rho_A(G_A)` is infinite. Since `G_A`
+is perfect, its nontrivial image is **perfect
+and nonabelian**. No conflict with the previously
+proved absence of nontrivial Abelian
+`G_A→U(1)` characters.
+
+### Same 3D complex space and exact threefold symmetry
+
+For the new three-root abstract free-product
+`G=G_A * G_A * G_A` used in horned **PR #1244**,
+assign to factor `j` the conjugate representation
+
+```
+rho_j(g) = T^j rho_A(g) T^{-j}.
+```
+
+Because `T³=1` this intertwines the
+cyclic factor rotation `r` and the target
+inner action `Ad_T`.
+The semidirect product homomorphism is
+
+```
+R : G ⋊ C3 -> SU(3)
+R(g,j)=rho(g) T^j
+R(r)=T
+R(m_(0,empty))=A=TS1.
+```
+
+In particular the image **contains S1=T^-1 A**,
+as well as T, and is infinite and nonabelian.
+
+That is a genuine positive **abstract group
+representation existence** construction, not
+merely same cardinality, a braid permutation
+shadow or a finite quotient.
+The fact that the C3 rotation is *outer in
+the source* but acts by conjugation in
+ambient SU(3) is not a contradiction:
+outer-ness is relative to the *source group*;
+the target representation need not preserve it.
+
+Existing original mathematical source owners,
+not the new analysis, retain authorship of
+the group-colimit universal property,
+Gotô commutator theorem, and standard Jarlskog
+CP invariant.
+
+### Critical discriminator: mathematically too universal
+
+The horned representation can send its chosen
+meridian to **EVERY A∈SU(3)**, not just the
+120-degree leptonic matrix. Therefore the
+existence result has **no ability by itself**
+to select a real-world CP phase, neutrino mass
+ratio or mixing angles.  It solves only an
+**existence/interface impasse**, NOT physical
+neutrino or Monster/VOA identity.
+
+A genuinely predictive follow-on would require
+source-specific and independently motivated
+selection constraints: a geometric connection or
+holonomy choice, regularity/energy functional,
+actual lepton Yukawa/mass textures, a charged-current
+map, an action preserving the right physics, and
+a measured likelihood discriminator. A flat
+SU(3) representation, if eventually realized on
+a verified smooth horned complement, is not by
+itself a Yang–Mills/Einstein/PMNS dynamics model.
+
+### Code locations and independent finite checks
+
+**Existing horned owner PR #1244:**
+
+- `DASHI/Mathematics/Topology/AlexanderHornedC3CompactCommutatorRepresentationExact.agda`
+  imports the native HornAddress/Word, constructs
+  recursive commutator images at *every* finite
+  address, proves word-expansion compatibility
+  and C3 rotational equivariance conditional
+  on a supplied commutator section and target
+  automorphism. Source-written Agda.
+- `scripts/alexander_horned_c3_su3_constructive_probe.py`
+  computes the explicit Schur-spectral SU(3)
+  commutator factorization; no full test-run
+  receipt of the **committed** script yet.
+- `logs/research/alexander_horned_su3_goto_constructive_receipt_20261024.json`
+  binds author/source roles, cross-PR blobs and
+  independent numerical evidence.
+
+**Neutrino target owner PR #1247:**
+
+- `DASHI/Physics/QFT/NeutrinoHornedSU3RootExact.agda`
+  source-writes 18 unitarity equalities and
+  exact determinant-one of the chosen root.
+- `tests/test_neutrino_horned_su3_positive_bridge.py`
+  exact Q(ζ3) Fraction regression verifying
+  determinant, unitary, CP quartet, finite
+  powers and threefold equivariance (NOT YET
+  run as an exact-head committed test).
+- Existing CP, finite-order Galois trace,
+  source likelihood, and negative A5 quotient
+  modules remain unmodified and attributed.
+
+The independent **locally executed** NumPy/SciPy
+construction measured five levels, **31**
+commutator parent relations and 32 leaves,
+worst residual `4.99e-15`, max determinant
+defect `2.56e-15`. A separate eight-level
+run checked 255 parent relations and 256
+leaves, worst residual `7.84e-15`. All
+three conjugate sector root refinements
+held to residual `<4.8e-15`.
+The exact algebraic check of `A∈SU3`
+used Python Fraction, not floats. No
+claim about uniform all-depth numerical
+error, closure/density, continuity of
+the chosen section, or experimental data.
+
+### Reprioritized paid/open boundary
+
+**NOW PAID in ordinary mathematics:**
+an infinite-image, nonabelian C3-equivariant
+representation of the abstract 3-sector Hatcher
+horn group into SU(3), with the *specific*
+CP-odd selected neutrino `TS1` as a root
+meridian image and T as its rotation generator.
+This was previously an open existence question.
+
+**STILL OPEN:**
+exact-head Agda compilation of these new
+source-written proofs; formal source-group
+colimit/universal property and spectral/Gotô
+theorem in Agda/Lean; exact-head committed
+Python regression execution; the actual
+wild 3-ball geometry / pi1 and flat-connection
+selection; a literal physical lepton/charged
+current operator intertwiner; finite-energy
+dynamics and experimental PMNS CP/angle
+likelihood comparisons. The mathematical
+existence proof **does not predict** any of
+the observed parameters.
+
+Run on their respective branch heads:
+
+```sh
+# PR #1244
+python3 scripts/alexander_horned_c3_su3_constructive_probe.py
+agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3CompactCommutatorRepresentationExact.agda
+
+# PR #1247
+python3 -m unittest discover -s tests -p 'test_neutrino_horned_su3_positive_bridge.py' -v
+agda -i . DASHI/Physics/QFT/NeutrinoHornedSU3RootExact.agda
+```
