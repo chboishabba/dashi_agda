@@ -1,3 +1,11 @@
+# 24 OCTOBER 2026: D4 PRIOR-ART + 6.SUZ SYMMETRIC-SQUARE RESOLUTION (LATEST)
+
+The current most productive result is the **D4-only** exact nine-cell (9+3→12→\mathrm{Sym}^2(12)=78→90) bridge, not the older geometric 90-point permutation or numerical 90=12+78. Of three exact 12-dimensional D4 symmetric-square candidates, exactly one contains the original raw nine-cell D4 module. An explicit rational intertwiner connects the (U_{12}\oplus\mathrm{Sym}^2(U_{12})) D4 representation to the prior signed 90-dimensional repair. See [JFine3BD4NineCellSuzukiSym2GF20261024.md](./JFine3BD4NineCellSuzukiSym2GF20261024.md).
+
+**Scope firewall:** Faithful complex degree12 of 6.Suz has central involution -I; its symmetric square has central involution +I. Thus a faithful degree78 of full 6.Suz cannot be this Sym²; nonfaithful degree78 candidates must be included in the source character search. Corrected CTblLib producer/renderer/checker and a full Sym²/dual Sym² source-character screen are source-written but not GAP-executed. Historical Barraclough GF31/GF103/GF223 finite-field constructions are original work distinct from our local modular-rank tests. Monster 12G is an ATLAS conjugacy class, not a finite field.
+
+---
+
 # CURRENT DECISION — 24 OCTOBER 2026 (supersedes the exploratory cuts below)
 
 **The originally proposed geometric D4 extension is mathematically ruled out** on the selected Monster 3B phase sector using the ordinary Monster character values on involutions and order-six elements. ATLAS power maps restrict every 3B-commuting involution's zeta trace to `{66,90,1458}`, whereas the original geometry demands half-turn `810` and reflections `2430`. There is no need for mmgroup, GAP, class-algebra fusion or actual Monster matrices to close this no-go.
