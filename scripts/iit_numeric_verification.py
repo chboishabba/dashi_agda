@@ -41,6 +41,7 @@ from iit_jfine_four_one_four_s3_zeta_audit import audit as jfine_s3_audit
 from iit_jfine_d4_s3_mixed_character_audit import audit as jfine_d4_s3_mixed_audit
 from iit_jfine_heisenberg_four_pair_audit import audit as heisenberg_four_pair_audit
 from iit_jfine_d4_symplectic_obstruction_audit import audit as d4_symplectic_audit
+from iit_jfine_d4_heisenberg_h6_model_weld import audit as d4_h6_weld_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -292,6 +293,15 @@ def verify_numeric_results() -> dict:
     assert d4_symplectic["quadratically_corrected_value_anti_automorphism_generator_checks"] == 177147
     assert not d4_symplectic["actual_monster_intertwiner"]
 
+    d4_h6_weld = d4_h6_weld_audit()
+    assert d4_h6_weld["source_subspace_commutator_rank"] == 6
+    assert d4_h6_weld["source_subspace_centre_order"] == 27
+    assert d4_h6_weld["D4_H6_generator_group_law_checks"] == 338
+    assert d4_h6_weld["basis_pair_checks"] == 144
+    assert d4_h6_weld["H3_C3sq_nonlinear_irrep_degree"] == 27
+    assert d4_h6_weld["chosen_H4_nonlinear_irrep_degree"] == 81
+    assert not d4_h6_weld["original_JFine_D4_centre_action_intertwined"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -308,6 +318,7 @@ def verify_numeric_results() -> dict:
         "jfine_d4_value_s3_mixed_character": mixed,
         "jfine_heisenberg_four_pair": h4,
         "jfine_d4_symplectic_obstruction": d4_symplectic,
+        "jfine_d4_h6_model_weld": d4_h6_weld,
         "projective_f9_pointed80": projective,
         "projective_group_f9_720": pgl,
         "f81_norm_inversion": f81_norm,
