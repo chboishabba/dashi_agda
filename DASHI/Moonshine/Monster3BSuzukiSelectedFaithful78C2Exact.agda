@@ -73,13 +73,14 @@ centralTraceDifference = refl
 -- the SAME two C3 phases and the SAME 90-zeta norm can occur
 -- for inequivalent 6.Suz C2 characters. A C3 equality alone
 -- cannot supply an isomorphism as 6.Suz representations.
-record Selected6SuzFamilyBoundary : Set where
-  constructor selected6SuzFamilyBoundary
-  field
-    originalSameObjectMatcherFindsFaithfulnessFromSource : Set
-    originalSameObjectMatcherActuallyRan : Set
-    actualMonster78OccurrencePaidHere : Set
-    originalMonsterNormalizerIntertwinerPaidHere : Set
-
--- Uninhabited semantic obligations above are deliberately NOT
--- implemented by numerical equalities or booleans in this module.
+-- IMPORTANT: an earlier draft here contained fields such as
+--   actualMonster78OccurrencePaidHere : Set
+-- inside a generic record. These are NOT proof obligations: the type Set
+-- is inhabited by arbitrary ordinary types (for example Nat), so filling
+-- such a field proves absolutely nothing about Monster occurrences.
+-- Removed rather than quietly exporting a misleading 'paid' certificate.
+--
+-- A source-selected 78 witness must instead be constructed from the
+-- original 6.Suz -> main -> MN3B -> Monster exact character-table/quotient
+-- certificate and fed into the existing proof-relevant owner in PR #1098.
+-- No such source-run witness is produced in this module.
