@@ -899,3 +899,66 @@ def test_canadian_ripon_sworn_testimony_does_not_promote_score_producer():
         "exact dataset fingerprint is still open",
     ):
         assert token in portfolio
+
+
+def test_crosspollination_reuses_original_generic_proof_carriers():
+    case = OWNER.read_text()
+    readme = (ROOT / "docs/research/aquino-epstein-crosspollination-phase-decision-20261025.md").read_text()
+    for import_line in (
+        "import DASHI.Core.SourceAcquisitionGeometryExact as Acquisition",
+        "import DASHI.Core.EventTimeCapabilityAlignmentBidiExact as EventTime",
+        "import DASHI.Culture.MissingDeceasedCommonObjectProgrammeDiscriminatorExact as Common",
+        "import DASHI.Cognition.EpsteinBlackPaymentScopeReconciliation20261014Exact as BlackScope",
+    ):
+        assert import_line in case
+    for token in (
+        "ftcGSRSCLCommissionSource = Acquisition.sourceAcquisitionTarget",
+        "ocdetfOriginalDocumentAcquisition = Acquisition.sourceAcquisitionTarget",
+        "ftcPrimaryInspectionPaid = refl",
+        "ocdetfOriginalPageInspectionStillUnpaid = refl",
+        "canonicalSCLTwoArmExactObjectCut = scl-two-arm-exact-object-cut",
+        "ftcGSRContractAndRiponInterfaceBothLocated = refl",
+        "sharedSCLHubDoesNotProveSpecificDataset = refl",
+        "threeDifferentFTCContractsDoNotCreateDirectAIQCAContract = refl",
+        "sclProgrammeDoesNotProveAquinoOriginalTechnique = refl",
+        "sclProgrammeDoesNotProveBannonEpsteinReuse = refl",
+        "localNamedRiponWitnesses = Common.cross-person-programme-receipt",
+        "bannonBlackProgrammeNonJoin = Common.cross-person-programme-receipt",
+        "localRiponNamesDoNotPayWholeCommand = refl",
+        "gsrSCL2014ContractTime = EventTime.event-time-capability-receipt",
+        "bannonEpstein2019ProductionTime = EventTime.event-time-capability-receipt",
+        "blackExistingScopeReconciliation = BlackScope.canonicalScopeReconciliation",
+        "blackScopeDifferenceDoesNotResolveOCDETF = refl",
+        "black2016TransactionClassificationStillOpen = refl",
+        "canonicalFinanceInvestigationJoinBoundary =",
+        "financialEventTimeOverlapNotTransactionIdentity = refl",
+        "unverifiedOCDETFOutcomeIsNotSuppression = refl",
+        "two2015RecordsDoNotCreateNDAJoin = refl",
+    ):
+        assert token in case
+    for token in (
+        "FTC's legal findings",
+        "two-arm intermediary/lineage problem",
+        "SourceAcquisitionGeometryExact",
+        "EventTimeCapabilityAlignmentBidiExact",
+        "CrossPersonProgrammeReceipt",
+        "SCLTwoArmExactObjectCut",
+    ):
+        assert token in readme or token in case
+
+
+def test_crosspollination_source_roots_and_hypothesis_gates():
+    portfolio = (ROOT / "docs/research/aquino-epstein-portfolio-maxcut-20261024.md").read_text()
+    report = (ROOT / "docs/research/aquino-epstein-crosspollination-phase-decision-20261025.md").read_text()
+    for token in (
+        "June 4 2014",
+        "unopposed summary decision after CA default",
+        "original version-labelled output file",
+        "Black annual total is not proof",
+        "2016 $6.3m",
+        "Global H2/H3 gate",
+        "Agda kernel",
+    ):
+        assert token in report
+    assert "source-state countermodel" in portfolio
+    assert "source-identical" in report
