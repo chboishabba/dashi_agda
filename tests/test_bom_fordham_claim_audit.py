@@ -338,10 +338,10 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
 
-    assert len(rows) >= 21
+    assert len(rows) == 25
     assert len({row["edge_id"] for row in rows}) == len(rows)
     assert Counter(row["case_id"] for row in rows) == {
-        "BOM2026": 9, "REEF2021": 8, "GAS2026": 4
+        "BOM2026": 11, "REEF2021": 10, "GAS2026": 4
     }
     fields = (
         "edge_id", "case_id", "upstream", "downstream", "relation",
@@ -395,7 +395,7 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
 def test_claim_root_ledger_documentation_uses_only_case_bounded_counts():
     docs = RESEARCH.read_text()
     assert "australian_climate_claim_origin_edges_20261025.csv" in docs
-    assert "21 bounded relationship rows" in docs
+    assert "25 bounded relationship rows" in docs
     assert "NOT a representative crawl" in docs
     assert "originator" in docs.lower()
     assert "actual transfer not established" in docs.lower()
@@ -424,3 +424,21 @@ def test_directed_release_and_original_claim_amplification_are_not_collapsed():
         assert token in checks
     assert "BI-645, BI-646, BI-647" in media
     assert "not proof" in media.lower()
+
+
+def test_original_bom_clips_and_historical_ipa_finance_use_different_types():
+    with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
+        by_id = {row["edge_id"]: row for row in csv.DictReader(stream)}
+
+    assert by_id["B10"]["relation"] == "direct_clip_reuse_in_transcript"
+    assert by_id["B11"]["relation"] == "hosted_interview_republication"
+    assert by_id["B10"]["downstream"].startswith("Sky News Outsiders")
+    assert by_id["R09"]["evidence_grade"] == "ipa_first_party_press_release"
+    assert by_id["R10"]["relation"] == "historical_institutional_donation"
+    assert "not payment to Ridd or Sky" in by_id["R10"]["boundary"]
+
+    docs = RESEARCH.read_text()
+    assert "Peter Ridd on Outsiders News24" in docs
+    assert "Hancock Prospecting" in docs
+    assert "no same-object payment" in docs
+    assert "Fordham's production" in docs
