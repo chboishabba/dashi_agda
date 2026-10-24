@@ -15,6 +15,7 @@ import exotic_topology_surface_exhaustions as exhaustions
 import exotic_topology_warsaw_contour as warsaw
 import exotic_topology_cw_donor_reuse as cw
 import exotic_topology_binary_ternary_pants as codec
+import exotic_topology_pl_surface_gluings as pl
 
 class ExoticMaxCutTests(unittest.TestCase):
     def test_whitney_real_parametric_image_caution(self):
@@ -57,5 +58,18 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertFalse(r['uniform_ternary_measure_preserved'])
         self.assertEqual(r['weights'],{'3':'1/2','6':'1/4','9':'1/4'})
         self.assertIsNone(codec.decode('1'))
+
+
+    def test_actual_finite_pl_surface_vertex_links(self):
+        result = pl.audit(4)
+        self.assertTrue(result['status'].startswith('PASS'))
+        self.assertEqual([x['boundaries'] for x in result['families']['cantor']], [1,2,4,8,16])
+        self.assertEqual([x['genus'] for x in result['families']['loch']], [0,1,2,3,4])
+        self.assertEqual([x['genus'] for x in result['families']['jacob']], [0,2,4,6,8])
+        self.assertTrue(all(x['vertex_links_verified'] for family in result['families'].values() for x in family))
+
+    def test_wrongly_oriented_shared_edge_rejected(self):
+        with self.assertRaises(AssertionError):
+            pl.inspect(pl.Mesh([(0,1,2),(0,1,3)], 'same-orientation-shared-edge'))
 
 if __name__ == '__main__': unittest.main()
