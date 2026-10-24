@@ -22,10 +22,14 @@ data PhysicalChannel : Set where
   atmosphericEmission : PhysicalChannel
 
 data EvidenceStage : Set where
+  creatorClaimOnly : EvidenceStage
+  methodologicalReview : EvidenceStage
+  proceduralStandard : EvidenceStage
   facilityActivity : EvidenceStage
   calibratedSourceEmission : EvidenceStage
   ambientMeasurement : EvidenceStage
   attributableReceptorExposure : EvidenceStage
+  modelledHealthImpact : EvidenceStage
   observedOutcome : EvidenceStage
   identifiedCausalEffect : EvidenceStage
 
@@ -52,7 +56,7 @@ gingerReel : SourceBoundClaim
 gingerReel = sourceBoundClaim
   "itsgingertheory: Frequency is only the tip of the data center..."
   "https://www.instagram.com/reel/DbqY4jLxuhs/"
-  creatorInvestigation facilityActivity
+  creatorInvestigation creatorClaimOnly
   "Creator statements and on-screen bibliography photographed 2026-10-24"
   "Displayed review, commercial article, advocacy quotation or animal study does not establish the spoken human causal chain"
 
@@ -68,7 +72,7 @@ wheelerNarrativeReview : SourceBoundClaim
 wheelerNarrativeReview = sourceBoundClaim
   "Wheeler, Everett, Williamson, Prybutok (2026): ILFN Data Center Environments"
   "https://doi.org/10.3390/cleantechnol8040126"
-  peerReviewedReview ambientMeasurement
+  peerReviewedReview methodologicalReview
   "A-weighted metrics discount low frequencies; operational ILFN spectrum and human outcome research gaps"
   "Review analogy does not itself measure site exposure or prove illness"
 
@@ -76,7 +80,7 @@ environmentEvidenceMap : SourceBoundClaim
 environmentEvidenceMap = sourceBoundClaim
   "Environmental Pressures and Modelled Health Pathways of Data Centers in the AI Era (2026)"
   "https://doi.org/10.3390/environments13100568"
-  peerReviewedReview attributableReceptorExposure
+  peerReviewedReview methodologicalReview
   "36 included studies and 112 quantitative estimates; none reaches directly observed health outcome"
   "Absence in this eligible evidence map is not proof of zero risk"
 
@@ -84,7 +88,7 @@ queenslandNoisePolicy : SourceBoundClaim
 queenslandNoisePolicy = sourceBoundClaim
   "Queensland Environmental Protection (Noise) Policy 2019"
   "https://www.legislation.qld.gov.au/view/whole/html/2026-01-28/sl-2019-0154"
-  regulatorOrPlanningInstrument attributableReceptorExposure
+  regulatorOrPlanningInstrument proceduralStandard
   "Acoustic environmental values, receptor objectives, sleep and amenity"
   "A statutory objective does not itself establish a concrete site compliant or noncompliant"
 
