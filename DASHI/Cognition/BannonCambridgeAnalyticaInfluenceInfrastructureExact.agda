@@ -35,6 +35,7 @@ data InfluenceEdgeKind : Set where
   aiqSclCambridgeAnalyticaWorkingRelation : InfluenceEdgeKind
   canadianJointPrivacyRegulatorAIQFinding : InfluenceEdgeKind
   ftcKoganNixSeparateIndividualConsents : InfluenceEdgeKind
+  ftc2020BannonCivilDemandInvestigation : InfluenceEdgeKind
   ukElectoralAIQActualCampaignPayments : InfluenceEdgeKind
   breitbartDataConfigIntersection : InfluenceEdgeKind
   psychographicEffectivenessUnresolved : InfluenceEdgeKind
@@ -168,6 +169,38 @@ ukElectoralAiqPaymentsReceipt = influence-receipt
   "Regulator lists five June 2016 payments for AIQ campaign services: three Vote Leave-sourced payments reported in Grimes' returns totalling GBP675315.18, a separate GBP50000 Clake payment, and a GBP100000 Vote Leave-to-Veterans for Britain payment. Vote Leave paid GBP61000 fines and withdrew its appeal; Grimes successfully appealed his GBP20000 sanction in July 2019. This does not identify Facebook/GSR source files or prove electoral outcome effects."
   true false false false
 
+
+------------------------------------------------------------------------
+-- FTC v. BANNON 2020 DISTINCT ORIGINAL FEDERAL COURT PROCEEDING
+-- Federal FTC petition and reply are ONE government litigant/root.
+-- Bannon's response is a separate *adversarial* litigant statement,
+-- neither a judicial finding nor an independent examination of his data.
+------------------------------------------------------------------------
+
+ftc2020BannonCIDPetitionReceipt : InfluenceReceipt
+ftc2020BannonCIDPetitionReceipt = influence-receipt
+  ftc2020BannonCivilDemandInvestigation
+  "FTC v. Stephen K. Bannon, DDC 1:20-mc-00111-CRC, FTC petition ECF1 2020-11-09; https://www.ftc.gov/system/files/documents/cases/01_redacted_petition_memo_iso_exhibits_proposed_order.pdf"
+  "original FTC court pleading / agency investigative allegation, NOT civil or criminal merits judgment"
+  "FTC formally sought to enforce Bannon's 2019 civil investigative demand for a hearing about possible individual responsibility for Cambridge Analytica's data practices. FTC petition says he answered interrogatories and supplied documents during January-February 2020 but contested his later hearing attendance. Neither those underlying responses nor a final merits disposition is authenticated here."
+  true false false false
+
+ftc2020BannonRespondentOppositionReceipt : InfluenceReceipt
+ftc2020BannonRespondentOppositionReceipt = influence-receipt
+  ftc2020BannonCivilDemandInvestigation
+  "FTC v. Stephen K. Bannon, DDC 1:20-mc-00111-CRC, Bannon opposition ECF12 2020-12-09; https://www.ftc.gov/system/files/documents/cases/12_bannon_opposition_to_petition_to_enforce_cid.pdf"
+  "original independent opposing litigant pleading / attributed defence, NOT judicial exoneration"
+  "Bannon denied involvement in or knowledge of Cambridge Analytica's alleged Facebook data wrongdoing and asserted prior document production and Fifth Amendment burdens. His sworn interrogatories and the case's ultimate outcome were not independently audited; his denial and the FTC's assertions must both remain visible."
+  true false false false
+
+ftc2020BannonReplyReceipt : InfluenceReceipt
+ftc2020BannonReplyReceipt = influence-receipt
+  ftc2020BannonCivilDemandInvestigation
+  "FTC v. Stephen K. Bannon, DDC 1:20-mc-00111-CRC, FTC reply ECF13 2020-12-18; https://www.ftc.gov/system/files/documents/cases/13_ftcs_reply_iso_petition.pdf"
+  "same FTC prosecutor root as original petition; reply is not independent corroboration"
+  "FTC disputed the respondent's delay, Fifth Amendment and duplicative-testimony arguments and again requested enforcement of the hearing demand. Pleadings establish litigants' positions and procedural requests, not a resolved personal-liability finding or a Bannon-to-Epstein technology transfer."
+  true false false false
+
 breitbartConfigReceipt : InfluenceReceipt
 breitbartConfigReceipt = influence-receipt
   breitbartDataConfigIntersection
@@ -214,6 +247,9 @@ canonicalInfluenceReceipts =
   ∷ aiqWorkingRelationReceipt
   ∷ canadianJointRegulatorAIQReceipt
   ∷ ftcKoganNixIndividualConsentReceipt
+  ∷ ftc2020BannonCIDPetitionReceipt
+  ∷ ftc2020BannonRespondentOppositionReceipt
+  ∷ ftc2020BannonReplyReceipt
   ∷ ukElectoralAiqPaymentsReceipt
   ∷ breitbartConfigReceipt
   ∷ psychographicEffectivenessReceipt
