@@ -1254,3 +1254,189 @@ blindness to CP-conjugation sign).
 DASHI C3/Monster/Hecke, finding a finite group whose actual lepton
 residual action selects the observed mixing, physical lepton
 masses/Yukawas, or reproducing experimental CP-violation likelihoods.
+
+## 24 October 2026 — max-cut: horned-sphere infinite order versus neutrino residual infinite order
+
+### Correct source object and attribution
+
+Sibling <https://github.com/chboishabba/dashi_agda/pull/1244>
+is a different, not-yet-merged PR whose genuine prior art had been
+overlooked in the previous lepton-flavour roadmaps.
+
+Original classical source: **J. W. Alexander (1924)**,
+the horned sphere; **Allen Hatcher**, *Algebraic Topology*,
+Example 2B.2, pp.170–172, owns the direct-limit free-group
+commutator construction of the horned exterior.  Hatcher's
+nontrivial group is locally free and **perfect**, and is
+**torsion-free** because every nonidentity element comes from a
+nonidentity free-group element that survives an injective tower
+map.  In particular a selected meridian `m` has
+`m^n != 1` for all positive integers n, although it is
+itself an iterated commutator at arbitrarily deep levels.
+
+**N. W. Riebe (1968)** provides related but *different*
+horned-sphere constructions and A5 representation prior art;
+Riebe's examples must not be conflated with Hatcher's
+abstract perfect group or counted as independent observations
+of the same physical system.
+
+The three-C3-labelled copy construction is explicitly a new
+DASHI group `G = G_A * G_A * G_A`, and its geometric
+boundary-connected-sum/exterior identification remains
+uncertified by the geometric kernel.  The C3 rotation
+`r` satisfies `r^3=id` in `Aut(G)` and defines an exact
+order-three class in `Out(G)` under its group-theoretic
+noninnerness argument.  It is **not an internal order-three
+element of the torsion-free G**.  The semidirect
+extension `G ⋊_r C3`, in contrast, *does* include an
+internal rotation element of order three.
+
+Because `G` is perfect, all Abelian characters
+`G → U(1)` and `G → C3` vanish, even though
+the nonabelian quotient `G → A5³` and the
+external rotation are nontrivial.  Three matching phase
+labels cannot create a nontrivial horned-loop-to-PMNS
+Abelian character.
+
+### Important bug found AND fixed upstream in PR #1244
+
+Two A5 quotient probes selected the first nonidentity
+commutator of a pair generating A5.  An independent finite
+permutation audit found that the *original selected root*
+was `(2,1,3,0,4)`, which has **order three**.
+This invalidated the VOA probe's asserted `order(root)==5`
+and made its selected `m^5` kernel witness unsupported.
+The general compatible finite A5 quotient remained valid,
+but the claimed particular fifth-power witness required
+correction.
+
+Both owner-side scripts were fixed to require a
+generating commutator of **order five**, selecting
+
+```
+g=(2,0,3,4,1)
+a=(0,1,3,4,2)
+b=(2,3,0,1,4)
+[a,b]=g; <a,b>=A5; g^5=1.
+```
+
+An upstream regression
+`tests/test_alexander_horned_c3_a5_order_selection.py`
+now asserts the two source scripts choose the **same**
+order-five root. The corrected files were read back from
+GitHub branch `alexander-horned-c3-equivariant-20261024`;
+their full committed Python script and Agda/Lean kernel
+suites have not been rerun.  The independent original
+order-three and corrected order-five finite permutation
+calculations **were** executed and passed locally.
+
+### Sharp new cross-PR no-descent: fifth powers do not match
+
+The selected quotient actor sees `q(m)=g` with
+`g^5=1`.  The selected nonzero-CP neutrino residual
+operator is
+
+```
+T=diag(1,ζ,ζ²)
+S1=U diag(1,-1,-1) U†
+A=T S1
+```
+
+Here the post-hoc `U` and its CP phase `120°`
+are inherited from the **same** exact lepton toy model
+within PR #1247, not observed horned topology.
+
+Independent local `Fraction` arithmetic using
+`Q(ζ)`, `ζ²=-1-ζ`, computed `A^5`
+without floating-point approximation.  Its `(e,e)`
+entry in ordinary complex numbers is approximately
+
+```
+(A^5)_ee = 0.3402566114304599 - 0.11598500790728489 i
+```
+
+so **`(TS1)^5 != I`** exactly.  The full exact
+rational `(1,ζ)` coordinates and source blob SHAs
+are preserved in
+`logs/research/neutrino_horned_fifth_power_cross_pr_receipt_20261024.json`.
+
+The source-written conditional theorem
+`DASHI/Physics/QFT/NeutrinoHornedExteriorFifthPowerNoGoExact.agda`
+proves a mathematically genuine group-homomorphism fact:
+for any actor-to-matrix homomorphism, a source actor's
+fifth-power identity propagates to its matrix image.
+Consequently, the **selected** finite `A5³` quotient
+meridian cannot map to `TS1`, because that would force
+`(TS1)^5=I`.  This is sharper and more constructive
+than merely invoking the nonintegral Galois trace.
+
+`tests/test_neutrino_horned_fifth_power_bridge.py`
+is the corresponding source-written exact Python regression,
+pinning the corrected root and the `TS1^5` witness.
+It has not received an exact-head committed test-run receipt.
+
+### What the cross-PR result does and does not establish
+
+It **establishes** three compatible, different kinds of order:
+
+1. Infinite-order loops in torsion-free `G`.
+2. An order-three **outer automorphism** and finite
+   `A5³ ⋊ C3` actor that can forget nontrivial powers.
+3. An infinite-order **matrix** operator `TS1` from
+   the constructed, CP-nonzero lepton Hamiltonian.
+
+It **excludes** the specific claim that our currently
+constructed finite `A5³` VOA actor transports its
+order-five quotient meridian to this particular `TS1`.
+
+It **does not exclude** a different, infinite-image,
+nonabelian representation `G → SU(3)` or another lepton
+Hilbert-space action.  Such a construction would have to
+provide: compatible images for *every* commutator
+refinement `m_w=[m_(w0),m_(w1)]` on one group action;
+actual C3 **semidirect-equivariant** transport
+`ρ(r(g))=Tρ(g)T^-1`;
+an appropriately defined physical lepton
+Hamiltonian/charged-current coupling; and a measured
+discriminator.  It cannot bypass perfectness with a
+scalar `G→C3` map, nor get physical mass predictions
+from group element order alone.
+
+The original Hatcher group, three-copy geometric
+realisation, `A5³` finite quotient, VOA action,
+lepton PMNS matrix and astrophysical observation
+must remain separately attributed to their actual
+mathematical, source-written, kernel and experimental
+authorities.
+
+### Pareto cuts paid, next gates
+
+**Paid:** original horned topology and group owners
+recovered; independent source-root distinction with Riebe;
+contradictory A5 root-order assertion discovered and
+fixed on **its owner branch**; exact fifth-power
+matrix witness; consumer-side conditional Agda no-descent;
+source-bound cross-PR evidence receipt; both roadmaps updated.
+
+**Open:** exact-head Agda/Python and Lean kernel jobs on
+both branches; genuine geometric `π1` isomorphism of
+the three-copy wild exterior; actual nonabelian
+`G→SU3` compatible commutator-tower action if worth
+pursuing; real, calibrated charged-current neutrino
+physical model; correlated NuFIT/T2K/IceCube data fits.
+Finite VOA versus V-natural and Monster recognition
+are separate downstream questions—not entitlements
+from a shared (C3) glyph.
+
+Run on their respective checked-out branch heads:
+
+```sh
+# Horned owner PR #1244
+python3 scripts/alexander_horned_c3_a5_probe.py
+python3 scripts/alexander_horned_c3_voa_a5_action_probe.py
+python3 -m unittest discover -s tests -p 'test_alexander_horned_c3_a5_order_selection.py' -v
+
+# Neutrino CP consumer PR #1247
+python3 -m unittest discover -s tests -p 'test_neutrino_horned_fifth_power_bridge.py' -v
+agda -i . DASHI/Physics/QFT/NeutrinoHornedExteriorFifthPowerNoGoExact.agda
+```
