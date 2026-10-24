@@ -114,13 +114,21 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         req_true(p, key)
     req_false(p, "diagonal_kernel_orientation_paid")
     req_false(p, "individual_zeta_label_orientation_paid")
-    req_true(p, "source_selected_degree_78_faithful_to_6Suz")
-    req_false(p, "source_selected_faithful78_can_be_sym2_faithful12")
+    selected_faithful = p.get("source_selected_degree_78_faithful_to_6Suz")
+    if type(selected_faithful) is not bool:
+        raise ValueError("selected 78 faithfulness must be a bool from the matched source")
+    c2_sym2_compatible = p.get("source_selected_c2_compatible_with_sym2_faithful12")
+    if type(c2_sym2_compatible) is not bool:
+        raise ValueError("source-selected Sym² C2 compatibility must be a bool")
     central2_pos = req_int(p, "suzuki_central_involution_class_position")
     source_trace = req_int(p, "source_selected_S90_central_C2_trace", positive=False)
     sym2_trace = req_int(p, "sym2_candidate_S90_central_C2_trace", positive=False)
-    if source_trace != -90 or sym2_trace != 66:
-        raise ValueError("faithful selected 78 and Sym²(12) must have distinct C2 traces")
+    if source_trace not in (-90, 66) or sym2_trace != 66:
+        raise ValueError("selected degree78 has invalid central C2 scalar")
+    if c2_sym2_compatible != (source_trace == 66):
+        raise ValueError("C2 Sym² compatibility must follow the selected C2 trace")
+    if selected_faithful and source_trace != -90:
+        raise ValueError("faithful degree78 cannot have positive C2 involution")
 
     return {
         "base_pos": base_pos,
@@ -142,6 +150,8 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         "central2_pos": central2_pos,
         "source_trace": source_trace,
         "sym2_trace": sym2_trace,
+        "selected_faithful": selected_faithful,
+        "c2_sym2_compatible": c2_sym2_compatible,
     }
 
 
@@ -192,22 +202,21 @@ sixSuzDegree12AtlasLabels = {agda_pair_string(v['labels12'])}
 sixSuzDegree78AtlasLabels : List String
 sixSuzDegree78AtlasLabels = {agda_pair_string(v['labels78'])}
 
--- This is a *source-selected faithful* 78 family, unlike Gabriele Nebe's
--- irreducible Sym²(12) which descends to 3.Suz (central C2 acts +1).
+-- Chosen source 78 family is selected by full class-function restriction,
+-- main quotient descent and actual Monster occurrence, NOT by a
+-- presupposed faithful 6.Suz character filter.
 sixSuzCentralInvolutionClassPosition : Nat
 sixSuzCentralInvolutionClassPosition = {v['central2_pos']}
-selectedFaithful78CentralInvolutionNegative : Bool
-selectedFaithful78CentralInvolutionNegative = true
-selectedFaithful90CentralC2NegativeMagnitude : Nat
-selectedFaithful90CentralC2NegativeMagnitude = {-v['source_trace']}
-candidateSymSquare90CentralC2PositiveMagnitude : Nat
-candidateSymSquare90CentralC2PositiveMagnitude = {v['sym2_trace']}
-selectedFaithful78IsNotSymSquare12 : Bool
-selectedFaithful78IsNotSymSquare12 = true
-selectedC2CharacterCannotEqualSymSquareC2 : 12 + 78 ≡ 90
-selectedC2CharacterCannotEqualSymSquareC2 = refl
-symSquareCandidateC2TraceMagnitude : 78 ≡ 12 + 66
-symSquareCandidateC2TraceMagnitude = refl
+selectedDegree78FaithfulToSixSuz : Bool
+selectedDegree78FaithfulToSixSuz = {str(v['selected_faithful']).lower()}
+selectedC2SymSquareNecessaryCompatibility : Bool
+selectedC2SymSquareNecessaryCompatibility = {str(v['c2_sym2_compatible']).lower()}
+selectedMultiplicityCentralC2TraceMagnitude : Nat
+selectedMultiplicityCentralC2TraceMagnitude = {abs(v['source_trace'])}
+selectedMultiplicityCentralC2TraceNegative : Bool
+selectedMultiplicityCentralC2TraceNegative = {str(v['source_trace'] < 0).lower()}
+candidateSymSquareCentralC2PositiveMagnitude : Nat
+candidateSymSquareCentralC2PositiveMagnitude = {v['sym2_trace']}
 
 outer12PairPosition : Nat
 outer12PairPosition = {v['outer12']}
