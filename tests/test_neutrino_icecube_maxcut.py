@@ -55,6 +55,18 @@ class NeutrinoMaxCutTests(unittest.TestCase):
         max_abs_ratio = Fraction(IO_SOLAR_HIGH, -delta_m31)
         self.assertLess(PREDICTION, max_abs_ratio)
 
+    def test_inverted_ordering_absolute_ratio_rectangle_witness(self):
+        # Independent marginal IO intervals (units 1e-8 eV^2).
+        solar, abs_m32 = 7600, 243200
+        self.assertTrue(7236 <= solar <= 7822)
+        self.assertTrue(242100 <= abs_m32 <= 254700)
+        abs_m31 = abs_m32 - solar
+        self.assertEqual(abs_m31, 235600)
+        self.assertEqual(Fraction(solar, abs_m31), PREDICTION)
+        # Positive magnitude match is not a signed m31 ratio match,
+        # a joint-confidence statement, or a model fit.
+        self.assertEqual(Fraction(solar, -abs_m31), -PREDICTION)
+
     def test_four_phase_two_flavour_probability_conservation(self):
         for real, imag in PHASES:
             self.assertEqual(real**2 + imag**2, 1)
