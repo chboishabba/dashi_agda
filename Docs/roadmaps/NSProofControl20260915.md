@@ -1,3 +1,58 @@
+## 2026-10-24 additional A max-cut: full-frequency physical H¹ source majorant
+
+The low-frequency-only estimate has a second, already-standard,
+same-source physical input. Let `u∈H¹(R³)^3` be distributionally
+divergence free, `E=||u||²_L²`, and `D=||grad u||²_L²`.
+
+1. Divergence form and `u⊗u∈L¹` give
+   `|F[P div(u⊗u)](xi)| ≤ E*|xi|`.
+2. The original smooth-field identity
+   `div(u⊗u)=(u·grad)u` extends as an `L¹` identity for
+   `u∈H¹`. Pointwise
+   `|(u·grad)u|≤|u|*|grad u|`; Cauchy–Schwarz implies
+   `||div(u⊗u)||_1≤sqrt(E*D)`.
+   Fourier boundedness and Leray contraction give
+   `|F[P div(u⊗u)](xi)|≤sqrt(E*D)`.
+3. Therefore, with the **same physical source** and `nu>0`,
+
+```text
+source(xi) <= min(E*|xi|, sqrt(E*D)).
+heat_inverse(xi) <= (1/nu) min(E/|xi|, sqrt(E*D)/|xi|²).
+crossover r_* = sqrt(D/E) (if E,D>0).
+
+int_(R3) |heat_inverse(xi)|² dxi
+ <= (4*pi/nu²) [
+      int_0^r_* E² dr
+      + int_r_*^∞ (E*D/r²) dr
+    ]
+ = (8*pi/nu²) E^(3/2) sqrt(D).
+```
+
+This **globally square-integrable** direct stationary viscous-response
+majorant controls both zero and infinite frequency from finite energy
+and enstrophy, without an arbitrary Fourier flux field and without
+a nonintegrable positive independent-R9 Gram pair. Its physical
+space norm differs by the conventional inverse-Plancherel factor
+`(2*pi)^(-3/2)`, since the convention is the unnormalized
+`Ff(xi)=int exp(-ix·xi)f(x)dx`.
+
+Source proof combines elementary standard Plancherel/Fourier-product
+continuity, divergence-form identity, Hölder and radial integration.
+Exact symbolic crossover/integral arithmetic was independently
+checked locally and is asserted in
+`scripts/ns_a_schwartz_fourier_same_object.py` and its test.
+This is **not a new global regularity theorem**: the bound depends
+on D(t), which is not known uniformly in time in the desired
+regularity conclusion. Nor does it automatically control the canonical
+A2 signed *centered double resolvent* or ensure the A3 continuation
+criterion. The next meaningful A cut is to replace the old
+source-free Bishop `FourierTransformVelocity:Set` field by a checked
+Plancherel/distribution Fourier source, and weld these direct
+physical low/high bounds into the actual signed A2 estimate on the
+same continuum solution. Avoid repeatedly deriving heat/Young algebra.
+
+---
+
 ## 2026-10-24 max-cut continuation — B4 ED no-go discharged, A finite-energy Fourier source identified
 
 ### B4: the ED qualification has been paid by existing theorem owners
