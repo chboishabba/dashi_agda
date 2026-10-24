@@ -145,3 +145,9 @@ Keep **all** original-claim dimensions and source carriers, not just the later C
 5. **Contemporary suspected directed-energy device originals if available** (reliable custody/serial, original labs, waveform and incident-level exposure), assessed separately from 2022 expert scientific plausibility, 2025 component judgments and 2026 political recall.
 
 **PARETO STOP:** zero value in further aggregating derivative “MKUltra was real” commentary; similarly, adding more synthetic thermodynamic identities does not advance sound/health causation. Distinguish direct primary source, retrospective analyst, political claim, reporter's named/anonymous source and real experiment. Retain the original creator's actual statements as allegations and original authors' research as independently attributed.
+
+
+### Original 2026 low-frequency auditory physiology – return to the reel's physical source
+
+Carlos Jurado and Torsten Marquardt, `Infrasound sensation is mediated by intracochlear electrical potentials`, *Scientific Reports*, published 24 April 2026 (final version June 2026), DOI [10.1038/s41598-026-50179-w](https://doi.org/10.1038/s41598-026-50179-w), is **original human non-invasive auditory research** with an accompanying physical cochlear circuit model. It gives a legitimate mechanism by which acoustic pressure below ~16Hz at sufficiently high intensity can be perceived, mediated by outer-hair-cell-generated electrical potentials. Distinct limits: not evidence that every data centre produces a given receptor dose, no autoimmune/fertility/chromosomal diagnosis, no microwaves and no MKULTRA technology. The term *electrical potential* in a cochlear signal transduction mechanism does not equate to an externally transmitted RF field. Keep this 2026 primary experiment separate from later narrative reviews and the user's actually displayed 2008/09 RF screenshots.
+
