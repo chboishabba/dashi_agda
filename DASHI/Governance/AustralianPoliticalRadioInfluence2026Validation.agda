@@ -314,3 +314,26 @@ fourMinutePodcastLocatorDoesNotProveWords = A.noAudioLocatorSpeechPromotion
 similarNumDoesNotProveSourceConsulted :
   A.SameUnusualQuantityMeansDirectSourceConsulted → ⊥
 similarNumDoesNotProveSourceConsulted = A.noReferentInferenceToConsultation
+
+
+-- Source-dependence control: five template types, many participants,
+-- not one independent empirical analysis per submission.
+gasTemplateFamiliesAreDistinctFromIndependentModels :
+  A.kind A.gasTaxSenateFiveTemplateFamilies ≡ A.documentedFormLetterFamily
+gasTemplateFamiliesAreDistinctFromIndependentModels = refl
+
+getupPetitionCountsSupportNotIndependentModels :
+  A.kind A.gasTaxGetUpPetitionAggregate ≡ A.petitionSupportAggregation
+getupPetitionCountsSupportNotIndependentModels = refl
+
+unpublishedAuditPossessionNotSourceInspection :
+  A.kind A.novaClaimsFullBOMAuditCopy ≡ A.reportedPrivateDocumentCustody
+unpublishedAuditPossessionNotSourceInspection = refl
+
+noConspiracyFromTemplateCounts :
+  A.provesHiddenCoordination A.gasTaxSenateFiveTemplateFamilies ≡ false
+noConspiracyFromTemplateCounts = refl
+
+noProvenAuditFromPersonalCustodyReport :
+  A.provesPolicyCausation A.novaClaimsFullBOMAuditCopy ≡ false
+noProvenAuditFromPersonalCustodyReport = refl
