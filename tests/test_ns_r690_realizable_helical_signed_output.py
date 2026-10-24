@@ -76,3 +76,24 @@ def test_single_output_not_global_sign():
     total=s.simplify(sum(certificate(u,k)[2] for k in outputs if k!=(0,0,0)))
     assert total==192-16*s.sqrt(2)>0
     # A negative fixed-output work is NOT a negative global R690 work.
+
+def test_full_R690_global_heat_endpoint_identity():
+    # The SAME physical unforced heat field; full output sum includes
+    # all 26 nonzero frequencies (not just the negative local k).
+    t=s.symbols("t",real=True,nonnegative=True)
+    u={p:v*s.exp(-sq(p)*t) for p,v in seed().items()}
+    outputs={tuple(p[j]+q[j] for j in range(3)) for p in u for q in u}
+    outputs.discard((0,0,0))
+    assert len(outputs)==26
+    total=s.simplify(sum(certificate(u,k)[2] for k in outputs))
+    expected=8*(3*s.exp(24*t)+6*s.exp(20*t)
+                -(3+2*s.sqrt(2))*s.exp(16*t)
+                +10*s.exp(12*t)+6*s.exp(8*t)+2)*s.exp(-32*t)
+    assert s.simplify(total-expected)==0
+    # This is the R691 signed mixed-energy endpoint for the real
+    # heat solution: every nonlinear commutator vanishes.
+    mixed_initial=12-s.sqrt(2)
+    assert s.simplify(s.integrate(total,(t,0,s.oo))-mixed_initial)==0
+    assert s.simplify(8*s.integrate(total,(t,0,s.oo))
+                      -(96-8*s.sqrt(2)))==0
+    assert s.simplify(total.subs(t,0)-(192-16*s.sqrt(2)))==0
