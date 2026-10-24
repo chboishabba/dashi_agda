@@ -84,6 +84,15 @@ def validate_world(world: dict) -> None:
     tree = world["observed_git_tree"]
     if tree["source_commit"] != sources["pnas_gitrepo"]["git_commit"]:
         raise ValueError("Source tree not revision-locked")
+    # Guard against a stale or copied world inventing a different source file
+    # inventory: its independent source-tree receipt must match exactly.
+    canonical_path = (Path(__file__).resolve().parents[1] /
+                      "Docs/receipts/DMTImagingPinnedSourceTree20261024.json")
+    canonical = json.loads(canonical_path.read_text(encoding="utf8"))
+    if (tree["source_commit"] != canonical["source_commit"]
+            or tree["source_tree_sha1"] != canonical["source_tree_sha1"]
+            or tree["files"] != canonical["files"]):
+        raise ValueError("Source world diverges from independently pinned Git tree")
     files = tree["files"]
     if len(files) != 56 or len({x["path"] for x in files}) != 56:
         raise ValueError("Expected complete, unique 56-file upstream tree")
