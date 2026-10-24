@@ -347,3 +347,168 @@ analytic Lorentz-manifold theorem in that Lean file.
 - **A6 downstream Clay**: no direct payment, since this is a
   negative constraint on one higher-dimensional effective
   action, not a uniform YM or NS continuum theorem.
+
+
+## 2026-10-24 follow-on maximal cut: coefficient repair vs 27D FIELD DYNAMICS and K27
+
+**SOURCE-FIRST correction:** this section supersedes any loose reading that a
+radion-dependent `dr∧B` is **inevitable** in dimensional reduction.
+Natural target B-form `B_{μν}=C_{μν y}` has `H=dB` even
+for varying radius (the metric's inverse-radius prefactor still varies).
+The alternative *field redefinition* `C_{μν y}=r(x)B_{μν}`
+induces `F_{μνρy}=rH_{μνρ}+(dr∧B)_{μνρ}`.
+Our prior variable-r counterexample proves only that the latter
+rescaling cannot be used without its derivative compensation. The
+independent **125/121 dilaton coefficient mismatch remains** under
+the natural unrescaled component identification; it did not rely on
+`dr∧B`.
+
+### Exact attempted minimal correction: an additional 27D scalar
+
+Start with the previously selected `D=d+1` action schematic
+
+```text
+S = ∫ d^(d+1)x sqrt(-G) [ R(G) - F4²/(2*4!) ],
+G = exp(2aσ) g_d ⊕ exp(2bσ) dy²,  b = -2a.
+```
+
+A NEW minimally coupled real 27D scalar `χ` with canonical
+source `-1/2 |dχ|_G²` is a physically DIFFERENT theory.
+The formal one-field ansatz `χ=kσ` would shift the reduced scalar
+kinetic coefficient by `-k²/2` in the common string-frame measure:
+
+```text
+K_old = (d-1)(d-6)a²,
+K_target=(d-4)²a²,
+k² = 2(K_old-K_target) = 2(d-10)a².
+At d=26: k² = 32 a² (k=±4 sqrt(2) a over the reals).
+Then 500a² - 16a² = 484a².
+At d=10: k=0; at d<10 no real k for a≠0.
+```
+
+**Strong epistemic boundary:** this is an off-shell ACTION COEFFICIENT
+repair, NOT a known 27D consistent single-scalar truncation, a physical
+source action or a `K27` invariant uplift. In particular, the independent
+free 27D scalar EOM still requires `Box_G χ=0`. With `χ=kσ`,
+
+```text
+Box_G χ = k exp(-2aσ)
+          [ Box_g σ + ((d-2)a+b) |dσ|_g² ].
+```
+
+For `d=26,a=1,b=-2`, selected flat g and `σ=t`,
+`Box_g σ=0`, `|dσ|²_g=-1`: thus
+`Box_G χ=-22k exp(-2t) ≠ 0` for any nonzero k.
+This is a **literal off-shell counterexample** to assuming that the
+supplementary free-field EOM automatically follows from an arbitrary
+radius background. It does NOT claim to exhaust all solutions of the
+coupled full Einstein/scalar equations or prove universal impossibility
+of a 27D interacting-scalar theory. The reduction changes field content
+and requires a source-justified K27 action on χ and all other fields.
+
+**Executed exact finite receipt:** new script
+`scripts/check_27d_scalar_repair_consistency.py` (510 rational
+(d,a) coefficient examples; d26 k²32, d10 k²0, d<10 negative slope
+square; flat-base χ EOM counterexample; natural versus rescaled B
+form). Equivalent local source run PASS; the committed branch file was
+not byte-replayed, so DO NOT claim an exact Git-blob execution.
+
+**Cross-prover Lean #84:** its existing
+`Integration/DASHITOE/BosonicM27CoefficientCut.lean` now source-writes
+`supplementalScalarSlopeSquared`,
+`scalarRepairFormalCoefficient`, `scalarSlopeSquaredAtTwentySix`,
+`scalarSlopeSquaredAtTen` and
+`freeScalarOffShellResidualNonzero`, as algebraic consumers of the
+original correct d−10 gap. Lean kernel/lake still UNVERIFIED.
+
+### K27 source-owner obstruction is MORE specific than the 125/121 ratio
+
+Keith Glennon, *Bosonic M-Theory From a Kac-Moody Algebra Perspective*
+(2025), https://arxiv.org/abs/2501.03000, §§VII–VIII:
+- Source: `K27=D24+++` in 26D has physical **2-form Kalb–Ramond**
+  and a **22-form dual Kalb–Ramond potential**, along with the
+  corresponding dual dilaton/graviton generators in its level
+  decomposition.
+- The natural candidate `E27` level-one 27D *three-form* requires a
+  **22-form dual potential** for `F4`, since `27-3-2=22`;
+  26D B2 likewise requires `26-2-2=22`. The **equal index rank
+  does not imply the needed generator is present or is the same
+  representation**.
+- Glennon's proposed `K27→E27` generator correspondence requires
+  `[R^{c1c2}, R_{d1..d22}]=0`, but his candidate E27 image is
+  argued to have a nonvanishing higher-level commutator. He explicitly
+  states the full level-eight E27 algebra was not computationally
+  available to verify this specific relation directly (§VII).
+  Treat “K27 is not a subalgebra of E27” as a *source argument
+  within a proposed correspondence*, not an Agda/Lean kernel theorem.
+- §VIII independently argues the prescribed E27 decomposition lacks
+  the correct purely antisymmetric 22-form dual generator and the
+  appropriate dual-graviton rank, so its standard first-order duality
+  equations cannot be inhabited in the stated field content.
+  A freely added scalar correcting one kinetic number does not pay
+  these dual-generator and coset obligations.
+
+**The better physical Pareto:** pursue the ALREADY ESTABLISHED
+`K27` **26D closed-bosonic-string effective theory** on its source
+space, and attach any 27D alternative only if an explicitly new,
+representation-preserving field extension is supplied. Do not invent
+another speculative 27D action or a new `E27` computation from a
+cardinal match with the 27-site spatial hypervoxel.
+
+### Lean #52 prior art: genuine 27-dimensional ALBERT PRODUCT, not just 27 sites
+
+The open [Lean Albert PR #52](https://github.com/chboishabba/dashi_lean4/pull/52),
+inspected head `9478679475bd7bb91af287cedb580470296433f1`,
+contains `scripts/check_griess1990_albert_f3cubed_homogeneous_product.py`
+and actual native rational Albert product/trace and S3
+Hamiltonian theorems. It implements and attributes R. L. Griess Jr.
+(1990), DOI 10.1016/0021-8693(90)90176-O, with
+`e_x ∘ e_y = (-2)^(-c(x,y)) ω^(g(x,y)) e_(x+y)`,
+for x,y in the abstract CHARACTER group `F3³`.
+
+For unit `e_0`, every nonzero `a` (26 choices) satisfies
+`e_a ∘ e_0=e_a`, `e_a ∘ e_(-a)=e_0`,
+`e_a∘e_a=e_(-a)`. This proves that the 26-dimensional non-unit
+homogeneous grade SPAN is **not a Jordan ideal/subalgebra**:
+its product leaks into the unit. It is a genuine **operation-level
+source comparison** with our separately proven original path
+`L δ_origin=6δ_origin−∑neighbours`, where the 26 non-origin
+SITE span also leaks into the distinguished origin.
+
+**But the two leakages are different operators.** The Griess
+homogeneous 27 is a complex `Q(ω)`-based exceptional Jordan
+algebra; the Cube27 is a real finite graph with 54 open path edges;
+`F3³` addition gives periodic C3³ with 81 edges. The Albert
+left-multiplication by non-unit elements generally breaks full F4
+symmetry; **it is NOT claimed F4 equivariant**, consistent with the
+existing conditional Schur/spectral no-go for *unchanged graph L*
+as full irreducible F4 intertwiner. No physical 26D Lorentzian,
+bosonic worldsheet, Monster VOA or Jordan-to-path Hamiltonian
+intertwiner is manufactured by comparing these source formulas.
+
+The new Agda test
+`scripts/check_27_origin_albert_griess_product_cut.py`
+reuses the EXACT previously sourced multiplication formula and
+checks all 26 nonzero/opposite products and 13 pairs with exact
+rational/Eisenstein coefficient arithmetic. Equivalent local test
+PASS. Lean #52 remains the canonical algebra owner; **do not
+duplicate its complete Jordan identity/classification machinery**.
+
+### Revised phase statuses (supersede ambiguous “alternative action” requests)
+
+- **A3**: original simple gravity+three-form *fails* 125/121.
+- **A3b**: additional free scalar *formally repairs coefficient*
+  at k²=32a² but independently fails automatic free EOM
+  on an explicit off-shell background; new source field dynamics
+  and K27 invariance UNPAID.
+- **A4**: source-level E27/K27 dual-generator, commutator and
+  coset mismatch is a stronger independent boundary. Its full
+  level-eight commutator was not provided as an explicit source
+  computation; do not pretend to have proved one.
+- **A5**: actual Griess/Albert 27→1+26 Jordan operation known on
+  Lean #52, showing source-real unit mixing. Same-object
+  Jordan↔Cube27↔physical string *operator/inner product*
+  intertwiner still open.
+- **A6**: preferred consumer 26D `K27` direct string
+  effective theory, existing worldsheet/Monster/BRST owners,
+  and canonical YM/NS source analytic problems separately.
