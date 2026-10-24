@@ -1,3 +1,31 @@
+## 2026-10-24 exact PHASE discriminator: real-only Round42 input is insufficient
+
+`NSTriadKNLuoGalerkinFourierVorticityConvolutionExact` explicitly
+uses a rational **real** vector carrier and states that the common
+complex phase `i` is factored out; full reality pairing is not
+provided there. The already-proved Round42/43 scaling theorems remain
+valid in their stated rational carrier, but source equality to actual
+complex Fourier production cannot be achieved by simply taking real
+parts of coefficients.
+
+**New exact test** `test_real_part_only_map_loses_helical_phase_and_stretching`
+in `tests/test_ns_physical_vorticity_production_exact.py`:
+the original six-mode physical complex u has nonlinear enstrophy
+production +8; replacing each Fourier coefficient by its componentwise
+real part yields production 0 on the same modes. The other tests
+check transverse reality, energy 0, sign reversal, zero padding,
+cubic amplitude scaling and direct vorticity-stretching equality.
+Locally **4 pytest passed** on a matching standalone copy.
+
+**Bridge acceptance** before Round42/43→Round39/R236/R685/R690
+consumer: map complex coefficients via exact `(Re,Im)` doubling or
+conjugate-pair realification, prove preservation of all i factors,
+Fourier signs, physical Leray/curl, work pairing and Bony selector;
+then identify the signed selected critical production and actual
+residual. This is a narrower genuine same-object weld, NOT a
+reconstruction of the already-proved rational algebra.
+
+---
 ## 2026-10-24 important B PRE-EXISTING PROOF OWNER reconciliation
 
 The newly committed positive-vortex-stretching six-mode witness is an
