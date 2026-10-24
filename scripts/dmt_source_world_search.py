@@ -222,6 +222,50 @@ def hypothetical_plan(world: dict, claim_id: str) -> dict:
             "hypothetical_actions": [], "evidence_created": False}
 
 
+def candidate_source_receipt(world: dict, artifact_id: str, receipt: dict) -> dict:
+    """Preview consumer-specific reopening; NEVER mark the artifact as present.
+
+    A string, hash, URL or asserted custodian signature is not independently
+    verified evidence. High-stakes contents and reuse rights need external
+    source review; this only describes the consequent consumer obligations.
+    """
+    validate_world(world)
+    artifacts = {a["id"]: a for a in world["artifacts"]}
+    if artifact_id not in artifacts:
+        raise ValueError("Unknown source artifact coordinate")
+    a = artifacts[artifact_id]
+    if a["status"] != "notLocated":
+        raise ValueError("Only notLocated coordinates accept candidate source tips")
+    required = {"source_id", "source_locator", "source_revision",
+                "candidate_sha256", "access_scope", "observation_time",
+                "verification_method"}
+    if not isinstance(receipt, dict) or any(not receipt.get(k) for k in required):
+        raise ValueError("Missing provenance or access coordinates")
+    if receipt["source_id"] != a["source"]:
+        raise ValueError("Proposed source identity differs from required primary root")
+    if not re.fullmatch(r"[0-9a-f]{64}", receipt["candidate_sha256"]):
+        raise ValueError("Candidate hash must be 64 lower-case SHA256 characters")
+    if not receipt["source_locator"].startswith(("https://", "doi:", "git:")):
+        raise ValueError("Source locator is not in a supported external namespace")
+    consumers = [
+        {"consumer": c["id"],
+         "remaining_obligations_after_hypothetical_acquisition":
+             [x for x in c["requires"] if x != artifact_id and
+              artifacts[x]["status"] != "present"],
+         "source_evidence_is_sufficient_for_scientific_claim": False}
+        for c in world["claims"] if artifact_id in c["requires"]
+    ]
+    return {
+        "artifact_id": artifact_id,
+        "status": "candidate_tip_not_admitted",
+        "candidate_provenance": receipt,
+        "would_reopen_consumers": consumers,
+        "external_source_rights_and_identity_verified": False,
+        "world_mutated": False,
+        "artifact_status_after": "notLocated",
+    }
+
+
 def snapshot(world: dict) -> dict:
     return {
         "world_id": world["world_id"],
@@ -242,9 +286,20 @@ def main() -> int:
     parser.add_argument("--world", type=Path, default=DEFAULT_WORLD)
     parser.add_argument("--consumer", help="Compute a conditional shortest acquisition route")
     parser.add_argument("--out", type=Path, help="Optional local JSON snapshot file")
+    parser.add_argument("--candidate-artifact", help="Preview reopening for one evidence coordinate")
+    parser.add_argument("--candidate-receipt", type=Path, help="JSON evidence tip (dry-run only)")
     args = parser.parse_args()
     world = load_world(args.world)
-    result = hypothetical_plan(world, args.consumer) if args.consumer else snapshot(world)
+    if bool(args.candidate_artifact) != bool(args.candidate_receipt):
+        parser.error("Candidate artifact and candidate receipt must be supplied together")
+    if args.candidate_artifact and args.consumer:
+        parser.error("Use either a consumer plan or a candidate evidence tip")
+    if args.candidate_artifact:
+        result = candidate_source_receipt(
+            world, args.candidate_artifact,
+            json.loads(args.candidate_receipt.read_text(encoding="utf8")))
+    else:
+        result = hypothetical_plan(world, args.consumer) if args.consumer else snapshot(world)
     rendered = json.dumps(result, indent=2, sort_keys=True)
     if args.out:
         args.out.write_text(rendered + "\n", encoding="utf8")
