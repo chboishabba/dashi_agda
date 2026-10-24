@@ -13,6 +13,10 @@ assert len(vmass)==12 and len(hmass)==24
 assert Counter(vmass)=={s.Rational(1,4):4,s.Rational(1,2):7,s.Rational(5,6):1}
 assert Counter(hmass)=={4:6,6:8,8:10}
 assert 16*3+36 == 4*3+12*4+24 == 84
+# Two FULL complex E6 27s have 108 real coordinates, not 36.
+# If they are literal dynamical scalar multiplets: 108-12=96 uneaten.
+assert 2*27*2==108 and 16*3+108==4*3+12*4+96==156
+print("PASS distinct physical field choices: selected 2x(3x3 complex) =84 total modes; full 2x(E6 27 complex) =156")
 print("PASS E6 two-VEV DOF: 16 massless 5D vector + 36 scalar = 4 massless vector + 12 massive 5D vector + 24 real Higgs = 84")
 Z=mp.zeta(5);b=mp.mpf('1e-24')/mp.mpf('0.1973269804e-15')
 def f(z):
