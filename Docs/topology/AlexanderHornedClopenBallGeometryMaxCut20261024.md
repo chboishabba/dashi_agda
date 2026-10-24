@@ -175,14 +175,18 @@ the exact centre 0 and satellite positions 9e_i.
 New `scripts/alexander_horned_clopen_tree_handle_scaffold.py`
 checks that the three radial handle cores
 
-    H_i = {t e_i: 1 <= t <= 8}, i=x,y,z
+    H_i = {t e_i: 1/2 <= t <= 17/2}, i=x,y,z
 
-with radius epsilon=1/4 have disjoint interiors outside
-the central unit ball. For different axes, closest
-core distance squared is >=2>(2eps)^2.
-Off-axis satellite separation is >=9; unit scaffold
-balls and other tubes are disjoint by strict rational
-inequalities. The connection graph has 4 vertices
+with radius epsilon=1/4 overlap their incident UNIT
+balls through positive-volume cross-sectional disks,
+since 1/4+1/16=5/16<1 at BOTH endpoints.
+The older [1,8] cores were tangent at isolated points
+and therefore did NOT define proper topological handles.
+Outside the central ball, distinct tubes cannot
+intersect because each axis coordinate must exceed
+3/4 on its own tube while the other tube bounds that
+coordinate by 1/4. Nonincident satellite balls also
+remain separate. The connection graph has 4 vertices
 (central and three satellites) and 3 edges, is a TREE,
 and its full geometry is C3-cyclically symmetric.
 
@@ -265,3 +269,53 @@ ball theorem?', and not 'can we prove R(B)=B once more?',
 but 'can our EXISTING cylinder tree be equipped with
 source-defined ambient 3D linkage plus collared
 handle/gluing geometry that yields Hatcher's pi1?'.
+
+## 2026-10-24 exact-head geometric/free-product correction
+
+The previous `t=1..8` tube geometry is INVALID as a
+boundary-connected sum: tangency is not a collared
+attachment. The corrected original Python scaffold uses
+`t=1/2..17/2` and proves positive-volume overlaps,
+disjointness of tube portions exposed outside the central
+ball, and separation from off-axis satellite balls.
+
+The new `alexander_horned_three_sector_geometric_vankampen_probe.py`
+proves by an all-stage free-word NORMAL-FORM argument that
+the disjoint two-child commutator substitutions are injective:
+for ANY reduced source word w,
+`|expand(w)| = 4 |w|`. Independent local Python checked
+18,112 reduced examples and exact C3 naturality.
+Categorically the resulting group is
+`G_three = G_A * G_A * G_A`, NOT `G_A^3`:
+the previous nonabelian finite `(2I)^3` actor is a QUOTIENT
+of the free product, not a presentation of its source.
+
+A further NEW theorem: the abstract sector cycle has
+exact order 3 in `Out(G_three)`, since the retraction
+onto sector 0 annihilates rotated sector-0 meridians
+but never annihilates conjugates of a nontrivial
+sector-0 meridian. The literal SL2(F5) witness checks
+120/120 conjugates. The outer-action claim does NOT
+yet promote to the actual geometric exterior.
+
+`alexander_horned_tame_cantor_ball_cylinders.py`
+also supplies GENUINE nested Euclidean balls for the
+tame symbolic `C3×Z2` comparator. The depth-n children
+fit strictly inside parents with explicit margin
+`L_n/15` and have gap `4L_n/15`. All 511
+finite cylinders through depth 8 were locally checked.
+They fit inside satellite unit balls, away from the
+corrected spoke collars and scaled linked curves.
+
+Finally the Hopf/unlinked comparison loops were translated
+radially outward by 1/4 and uniformly scaled by 1/8,
+so both entire local link pairs really FIT inside
+each satellite unit ball (maximum squared radius 53/64).
+These loops remain a source-defined local linking
+comparison, not Hatcher's horned attaching loops.
+
+Full source/proof/geometry report:
+`Docs/topology/AlexanderHornedThreeSectorGeometricVanKampenMaxCut20261024.md`.
+A collared tame disk in each actual Hatcher satellite
+and simply-connected overlap for the exterior van Kampen
+remain the decisive SAME-OBJECT geometric suppliers.
