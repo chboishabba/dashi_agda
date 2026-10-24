@@ -313,6 +313,11 @@ def verify_numeric_results() -> dict:
     d4_line_bypass = d4_line_bypass_audit()
     assert d4_line_bypass["new_trits"] == 0
     assert d4_line_bypass["mirror_rank_one_operator_defect"] == 1
+    assert d4_line_bypass["dual_mirror_rank_one_operator_defect"] == 1
+    assert d4_line_bypass["dual_twisted_H4_automorphism_checks"] == 177147
+    assert d4_line_bypass["dual_twisted_phase_D4_character"] == {
+        "identity":65610, "half":162, "quarter":18,
+        "axis":324, "diagonal":2916}
     assert d4_line_bypass["twisted_symplectic_rank"] == 8
     assert d4_line_bypass["twisted_D4_acts_by_H4_automorphisms"]
     assert not d4_line_bypass["source_geometric_reflection_preserved"]
