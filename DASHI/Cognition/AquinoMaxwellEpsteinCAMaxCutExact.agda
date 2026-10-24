@@ -461,7 +461,7 @@ sclCorporateWorkProductTarget = Acquisition.sourceAcquisitionTarget
 bannonEpsteinFilmWorkProductTarget : Acquisition.SourceAcquisitionTarget
 bannonEpsteinFilmWorkProductTarget = Acquisition.sourceAcquisitionTarget
   "DOJ indexed production correspondence and exact video reel/counsel agreement custody; film existence already established in parent owner"
-  "April 3 2019 EFTA00809863-Indyke letter located; July 2019 HOUSE_OVERSIGHT_027794-027848 shoot planning located. Acquire actual signed acceptance and original released reel ID/hash/session/terms join"
+  "April 3 2019 EFTA00809863-Indyke letter located; July 2019 HOUSE_OVERSIGHT_027794-027848 shoot planning located. Verify actual signed acceptance, compute a hash for exact DOJ EFTA01600824.mov without vendoring and join filming session/terms"
   Acquisition.directDigitalArchive Acquisition.nationalCatalogue
   false false false
 
@@ -523,7 +523,7 @@ bannonWorkProductCut = case-dependency-cut
   epsteinBannonActualWorkProduct
   "Prior owner pays filmed interview + located Apr 3 2019 Indyke/EFTA engagement text + dated Jun-Jul 2019 House shoot messages; exact released reel join still unpaid"
   true true true false false
-  "Film already exists. Match signed/assented engagement letter, specific reel ID and footage ownership, source timestamps, actual edit/crew/production records and the planned-versus-completed July 6 shoot; no automatic CA method reuse."
+  "Film already exists. Match signed/assented engagement letter with known EFTA01600824.mov, its uncomputed exact-byte digest, source timestamps, actual edit/crew/production records and the planned-versus-completed July 6 shoot; no automatic CA method reuse."
 
 promisExecutableCut : CaseDependencyCut
 promisExecutableCut = case-dependency-cut
@@ -1484,7 +1484,7 @@ upguardRiponCodeReportingCut = external-object-evidence-cut
 bannonFilmedInterviewReportingCut : ExternalObjectEvidenceCut
 bannonFilmedInterviewReportingCut = external-object-evidence-cut
   "Underlying released DOJ Data Set 10 filmed interview; journalists report and excerpt, underlying footage is one film origin"
-  "Real filmed Bannon-Epstein interview described by Guardian, CBS and Free Press; no joined production metadata, named camera date or source byte hash in this PR"
+  "Real filmed Bannon-Epstein interview described by journalists; source now identified as DOJ Data Set 10 EFTA01600824.mov, with publicly indexed timecoded ASR; native digest, production metadata and named camera date remain open"
   false false true false
 
 associatedPressContraryReviewCut : ExternalObjectEvidenceCut
