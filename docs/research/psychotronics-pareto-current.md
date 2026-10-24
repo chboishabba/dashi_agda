@@ -1,5 +1,17 @@
 # Psychotronics / pictured-device Pareto frontier — canonical current status
 
+## 24 October hard S1/S6 max-cut — quantitative force and observability receipts
+
+**New implementation-linked capstone:** [S1/S6 metrology and full 20-fibre scientist survey](psychotronics-s1-s6-twenty-scientist-maxcut-20261024.md). Source-owned theory and engineering are joined without introducing another generic antigravity ontology or attributing any person's event to the engineering.
+
+**S1 force budget paid numerically** (not as observed field): ideal 0.1 m radius/spacing, 100-turn, 1 A coil pair gives `B_helmholtz(0)=0.899176 mT` and `dBz/dz_anti(0)=−0.0107901 T/m`. For an *assumed fixed* dipole `m_z=0.01 A m²`, `|F|=0.107901 mN`, about **1.10%** of a 1 g test object's standard weight; `0.908855 A m²` would be required to equal that weight in this approximation, **not** guarantee stable levitation. Induced dipoles, ferrofluid bulk and superconductors demand different constitutive models. Existing `psychotronics_field_loom_coils.py` is cross-tested against the new closed-form midpoint derivative. Source files `scripts/psychotronics_field_loom_metrology.py` and `scripts/psychotronics_field_loom_observability.py` include reproducible synthetic self-tests and hard negative claim-status gates.
+
+**S6 observability preflight paid numerically**, *not* a 27-actuator prototype: with only two independently addressed coils, the 9-channel Bz midplane response has rank **1**, the 27-channel volumetric Bz matrix rank **2**, and the 81-channel/27-site 3-axis field matrix rank **2**. Model condition numbers for the latter two: about **6.65** and **5.50**, respectively; no real noise-weighted calibration. In a real experiment the rank/condition may degrade. This is the most useful transfer from **William Neil McCasland's own original 1989** fault-tolerant sensor/actuator selection paper; the actual implementation is a bounded static sensor-geometry analysis, **not** his exact Gramian algorithm nor evidence for 27 free physical degrees of freedom. **Daining Fang**, as coauthor in the original 2025 [Ren et al. elastic-metamaterial inverse-design publication](https://doi.org/10.1016/j.jmps.2025.106144), is an independent possible **S2 acoustic/mount modal-design** donor, not a Maxwell/gravity solution.
+
+**Updated practical order:** S1 get real source/force/calibration dataset, independently review and bound residual; S6 choose sensor geometry and noise/failure model *before* construction; S2 acoustics and S3 professional PAW only with original sourced component and safe qualified laboratory; G only after admissible gravitational observation; H only exact available first-party papers. **I** complete 20-fibre technical audit documents all scientist names; *no common-programme/event link or crime inference* is promoted. H1 restricted body, real data, and independent replication remain materially unpaid. Do not consume more design-only code as though it were bench receipts.
+
+
+
 **Audit companion:** [21-row scientific source/claim/experiment matrix](psychotronics-physics-crosspollination-source-matrix-20261024.csv), kept distinct from the original 51-row *historical* source corpus. Its mechanism and scientist fibres are reference/provenance edges, **not 21 new experiments or 21 independent historical witnesses**.
 
 
