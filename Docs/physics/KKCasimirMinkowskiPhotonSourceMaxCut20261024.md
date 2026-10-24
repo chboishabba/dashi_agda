@@ -102,3 +102,16 @@ python3 scripts/check_kk_jordan_sourced_sphere.py
 ```
 
 Local Python/SymPy/mpmath verification passed; the scripts are committed to PR #1241, exact-head Agda compilation and full 5D numerical source solution are not claimed.
+
+
+## Stronger radius-independent strict-geometric-photon obstruction
+
+The previous comparison of g_KK with the observed electromagnetic coupling is *weaker* than the following same-theory mass/charge test. For a free 5D scalar/fermion mode with nonnegative bare bulk mass squared, periodic fifth momentum n/b0 gives `m4,n²=m5²+(n/b0)²` and canonical geometric U1 coupling `q_n=sqrt(2)*n/(M_Pl*b0)`. Therefore for all n and b0,
+
+`|q_n|/m4,n <= sqrt(2)/M_Pl`.
+
+For an electron, `e/m_e ~ 592.608 GeV^-1`, versus `sqrt(2)/M_Pl ~5.808e-19 GeV^-1`: a factor ~`1.02e21` in the wrong direction. This is not repaired merely by changing the radius! It is the classical KK **unrealistic charge-to-mass / Planck mass problem**, consistent with the original literature and the modern review by João Baptista, *Test particles in Kaluza–Klein models* (2025), DOI `10.1088/1361-6382/ad9b67`. Domain: minimally coupled non-tachyonic 5D mode with standard spacelike KK momentum and no tuned mass cancellations / brane-localised or exotic matter. It is NOT a theorem excluding all higher-dimensional unification or the separately introduced Maxwell B_mu.
+
+Executable: `python3 scripts/check_kk_geometric_charge_mass_nogo.py`. Local symbolic reduction and high-precision charge/mass magnitude checks passed.
+
+**Revised physical decision:** treat the graviphoton A_mu as a mathematically interesting, ultraweak independent U1 (not QED), and B_mu as the massless photon in the explicit two-Dirac + scalar + Maxwell candidate. Claiming original geometric EM unification is *not* supported without a new matter mechanism defeating this precise no-go while preserving the experimental consumer.
