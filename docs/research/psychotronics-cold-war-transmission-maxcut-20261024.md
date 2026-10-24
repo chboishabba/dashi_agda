@@ -1,8 +1,13 @@
 # Cold War psychotronics transmission — source audit retained
 
+> **Critical 1974 original recovered, 24 October 2026.** Physicist **Alexander I. Kitaygorodsky's own full first-person article** is in the native [*Nauka i Zhizn*, issue 10 (1974) publisher archive](https://www.nkj.ru/archive/articles/52740/). It explicitly identifies a first Czech ***Vesmír* issue 2 (1974)** publication. The same author's Russian text reports **iron dust on a match**, **hand-driven airflow on a vane**, **thermal convection inside a motor-vane box** (reported 2–3°C gradient). **These are different conventional physical mechanisms, not a single electrostatic explanation**, and the piece does not test water/plant/insect claims. Original Czech copy/films/logs unavailable. The original magazine's **1974** date is supported independently by a [1981 Naumov–Vilenskaya bibliography, printed p.36, entry 29](https://documents2.theblackvault.com/documents/cia/stargate/STARGATE%20%234%20176/Part0001/CIA-RDP96-00788R001300230001-3.pdf), which lists no.10 pp.65–68. A later historical bibliography's **1977** dating should not supersede these original/earlier references.
+>
+> The historical Agda consumer now contains **17 attributed source instances** (one new Kitaygorodsky original author-text), plus an existing Ibrahim claim receipt for what the author **reported**, not a new independent laboratory experiment. The comprehensive [45-record source corpus](psychotronics-literature-corpus-20261024.csv), [separate claim-level effect comparison](psychotronics-pavlita-experiment-comparison-20261024.csv), and [critical review](psychotronics-literature-review-20261024.md) supersede older statements that the entire negative experimental evidence existed only via 2017/2021 secondary histories.
+
+
 **Superseded as a priority plan by [the full critical literature review](psychotronics-literature-review-20261024.md) and [32-record source corpus](psychotronics-literature-corpus-20261024.csv).** The source graph remains an evidentiary supplement; documentary lineage is a component of the review, not its sole purpose.
 
-**Source owner now 16 historical instances, including six review-specific references with reported counter-literature; prior ten-source graph/links unchanged.**
+**Source owner now 17 historical instances, including six review-specific references with reported counter-literature; prior ten-source graph/links unchanged.**
 
 **Current as of 24 October 2026.** This is a consumer-specific Pareto / snowball / Ibrahim graph over the **existing** DASHI research infrastructure. Historical-source owner: `DASHI/Cognition/PsychotronicsColdWarTransmissionParetoExact.agda`. Parent [psychotronics Pareto](psychotronics-pareto-current.md). Prior [attribution investigation](psychotronics-succor-punch-attribution-20261024.md).
 
