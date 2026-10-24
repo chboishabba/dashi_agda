@@ -64,6 +64,7 @@ data SourceRole : Set where
   regulatoryFinding : SourceRole
   judicialProceduralDecision : SourceRole
   congressionalFinding : SourceRole
+  parliamentaryCommitteeFinding : SourceRole
   disputedAgencyReview : SourceRole
   releasedCorrespondence : SourceRole
   crossSourceHypothesis : SourceRole
@@ -215,13 +216,13 @@ canonicalSources =
     "Silvester stated SCL asked AIQ to deploy the Ripon CRM to the John Bolton Super PAC's servers, and AIQ helped load client data. This pays the specific first-person claim about deployment, not unauthorized influence, CA contractual privity, or independently inspected server logs."
     true false false false
   ∷ bounded-source dcmsRiponRepositoryReview2019 dcmsCommitteeFinalReportRoot
-    congressionalFinding
+    parliamentaryCommitteeFinding
     "https://publications.parliament.uk/pa/cm201719/cmselect/cmcumeds/1791/179107.htm ; paragraphs 149-162"
     "2019" "2013-2016"
     "UK Commons DCMS report describes original AIQ repository material supplied by Chris Vickery, Ripon source location scl.ripon.us, SCL/CA/AIQ code and data interplay, including OCEAN scores. The committee inspected/analyzed the materials, but repository bytes were not acquired here. Parliamentary analysis partly rests on separate Vickery, AIQ and ICO sources: avoid treating it as independent evidence of every constituent statement."
     true false false false
   ∷ bounded-source dcmsICOBrexitCounterFinding2019 dcmsCommitteeFinalReportRoot
-    congressionalFinding
+    parliamentaryCommitteeFinding
     "https://publications.parliament.uk/pa/cm201719/cmselect/cmcumeds/1791/179107.htm ; paragraph 157 quoting ICO"
     "2019" "2016 referendum"
     "UK Commons DCMS report quotes the ICO as finding no evidence at that time of SCL Elections/CA data analytics work for EU referendum campaigns and no unlawful UK-citizen data activity in the stated AIQ-SCL relationship. Here the ICO text is a committee-reported counterfinding, not a separately inspected original ICO report."
@@ -1223,7 +1224,7 @@ silvesterRiponEvidence = bounded-source silvesterAIQRiponDevelopment2018
 
 dcmsRiponProjectReport : BoundedSource
 dcmsRiponProjectReport = bounded-source dcmsRiponRepositoryReview2019
-  dcmsCommitteeFinalReportRoot congressionalFinding
+  dcmsCommitteeFinalReportRoot parliamentaryCommitteeFinding
   "UK Commons Final Report 2019 HC 1791 chapter 4, paragraphs 149-162"
   "2019" "2014 onward"
   "Committee reported Ripon repository inspection, scl.ripon.us linkage and OCEAN-related data; original code bytes not personally preserved in this case branch"
