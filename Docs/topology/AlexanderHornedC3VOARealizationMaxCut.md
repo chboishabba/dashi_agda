@@ -544,3 +544,82 @@ No successful exact-head Agda kernel/Lean geometry
 receipt has been returned; the actual three-copy
 wild-complement identification remains open and
 PR #1244 must stay draft.
+
+
+## 2026-10-24 max-cut: true spin-icosahedral / CRT / integral p-adic congruence bridges
+
+Consolidated technical report, with exact primary source attribution:
+`Docs/topology/AlexanderHornedCRTSpinPAdicVOAMaxCut20261024.md`.
+
+**Previously built donor owners** include the genuine
+`SixWheelCRTExact`, `Base369BinaryTernaryRefinement`,
+`BinaryBalancedTernarySubcarrierExact`,
+`U1AsSU2AbelianRestrictionExact`,
+`NonAbelianFusionFromSpin` (conditional!),
+literal quaternion/Hopf/Q8, and
+`BinaryPolyhedralMcKayDimensionExact` (E8-dimensional
+skeleton ONLY). These were inspected and reused, not reinvented.
+
+**New literal 2I (spin) finite quotient**:
+`scripts/alexander_horned_spin_icosahedral_bridge.py`
+enumerates SL2(F5) (120), its FIVE Q8 subgroups and their
+normalizer order 24, their conjugation action on five
+subgroups (all 60 A5 elements, exact kernel +/-I),
+non-splitting by the unique involution, and actual
+order-six rotor whose cube is -I. It also enumerates a
+commutator pair for EVERY 2I element (120/120) and a
+root pair generating the full 120. Thus a compatible
+three-root Hatcher abstract group -> 2I^3 quotient can
+be explicitly defined stage-by-stage. The root cube
+remains nontrivial central -I in 2I and is erased in
+the old 180-dimensional A5 quotient.
+
+**Concrete strict VOA improvement**:
+functions on C3×A5 (180 coordinates) embed via pullback
+into functions on C3×2I (360 coordinates). Old rational
+pointwise vertex modes, action and the observer now live
+on compatible SAME coordinate charts. New
+`AlexanderHornedSpinVOAFactorFunctorExact.agda` proves
+the nine actual sector/phase naturality cases, mode
+equivariance, and injectivity pointwise from a proven
+surjective group factor. New
+`AlexanderHornedBinaryIcosahedralSpinSignBidiExact.agda`
+proves the central sign cannot be recovered from the
+projective A5 observer; the exact finite group supplier is
+currently a Python receipt, not an Agda 120-element group
+instance. Neither actor equals the Monster VOA.
+
+**Mixed binary/ternary**:
+`AlexanderHornedMixedPrimeCRTWeldExact.agda` reuses
+the genuine old 2×3 CRT, 2^a3^b resolution lattice,
+and bit-in-balanced-trit subcarrier. Adds the *reverse*
+fixed 2-bit encoding of three balanced trits with
+11 explicitly unused, proves roundtrip on image,
+and proves sector-rotation commutes with binary horn
+cylinder forgetting. The whole inverse-limit CRT
+`C3×Z2 = lim Z/(3·2^n)` is a classical math
+consequence, not asserted as an already kernel-proved
+Agda ring equivalence. Independent finite CRT audit
+`alexander_horned_mixedprime_congruence_audit.py`
+passed 6,141 finite states n0..10, general 2^a3^b
+for a,b=1..4.
+
+**Real low-rank p-adic restriction**:
+classical congruence kernel GL_n(Zp)->GL_n(Fp)
+is pro-p. A perfect horned G maps trivially to any
+solvable group and any pro-p group. Since GL2(F2)
+derived series is 6→3→1 and GL2(F3) is
+48→24→8→2→1 (exhaustively computed), ANY integral
+G->GL2(Z2) or G->GL2(Z3) is trivial.
+The source-level
+`AlexanderHornedPadicCongruenceNoGoExact.agda`
+uses the old finite-solvable meridian theorem and
+separating congruence reductions. This does NOT
+block higher-rank/noncompact Qp representations or
+ordinary nonabelian A5/2I finite quotient matrices.
+SL2(F5) is NOT automatically a 2D Z5 integral lift.
+
+**Still open:** exact-head Agda kernel receipts and
+the particular three-copy geometric exterior pi1
+identification. No faithfulness of G or equivalence to
+Monster 3B is promoted.
