@@ -501,3 +501,56 @@ direct justification of this specific G. Detailed analysis:
 Kernel typechecks and actual three-copy geometric van Kampen
 are still independently required. This finding changes no
 Monster or Jordan/VOA promotion status.
+
+
+## 2026-10-24 p-adic / hypercomplex max-cut
+
+Source-audited complete branch:
+`Docs/topology/AlexanderHornedPadicHypercomplexMaxCut20261024.md`.
+
+- Actual **binary** horn branch address is a low-to-high
+  `Z_2` prefix stream, independent of the three `C3`
+  root sectors. Existing newest-first Agda suffix orientation
+  must be reversed for chronological low-order digits.
+  `AlexanderHornedBinaryPadicCylinderExact.agda` inhabits
+  the pre-existing p-adic `CylinderSystem`, proves prefix
+  truncation and sector-rotation compatibility. No exterior
+  p-adic metric identification is claimed.
+- Actual rational quaternion `q=(1+i+j+k)/2` satisfies
+  `q^3=-1`, `(-q)^3=1` and, by conjugation, gives
+  the SAME ambient `(x,y,z)->(z,x,y)` rotation. New
+  `AlexanderHornedQuaternionC3SpinExact.agda` reuses
+  the existing rational quaternion, Cayley-Dickson/Hopf
+  and Q8->V4 sources, including conjugation cycling
+  `i->j->k->i`. This is not a finite-order loop lift.
+- More generally, recursive horn meridian images into
+  EVERY finite-derived-length **solvable** group are trivial.
+  `AlexanderHornedProPSolvableBlindExact.agda` proves
+  it by induction down the derived series using the real
+  commutator recursion. With meridian generation, abstract
+  `G` has trivial finite-p-group quotients and
+  `pro-p(G)=1` for all primes, even though its wild
+  endpoint space is nontrivial `Z_2`.
+- For the semidirect extension `H=G⋊C3_ext`,
+  `pro-3(H)=C3_ext`, and `pro-p(H)=1` for other p.
+  However bare Q3 lacks a primitive cube root, so
+  scalar `Hom(H,Q3^×)=1`; nontrivial C3 matrices
+  over Q3 and scalar phases after `Q3(zeta3)`
+  remain available. Group quotient versus field-local
+  eigenphase must not be confused.
+- The **nonabelian** existing A5^3 quotient admits
+  rational permutation matrices over EVERY Qp.
+  Thus trivial pro-p completion does not preclude
+  p-adic linear/finite-VOA actors. Finite images do not
+  recover all of G or identify Monster 3B states.
+- An independent exact-fraction and finite enumeration
+  audit PASSED (quaternion C3 signed lifts, 2-adic
+  binary prefixes through depth 7, 60/60 A5 commutators,
+  60-dimensional nonabelian regular representation).
+  Committed `scripts/alexander_horned_padic_hypercomplex_audit.py`.
+
+Proof boundary remains unchanged: new Agda sources await
+exact-head kernel receipts, and the actual three-copy horn
+complement's collared van Kampen and limit pi1 identification
+are not kernel-certified. Avoid overindexing on 369,
+octonionic analogies or uninhabited spin/VOA interfaces.
