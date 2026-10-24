@@ -42,16 +42,27 @@ def generated_order(generators):
     return len(seen)
 
 
+def permutation_order(g):
+    value = ID
+    for n in range(1, 61):
+        value = compose(value, g)
+        if value == ID:
+            return n
+    raise AssertionError("A5 permutation failed finite-order check")
+
+
 def build_witnesses():
     witnesses, root = {}, None
     for a in A5:
         for b in A5:
             g = commutator(a, b)
             witnesses.setdefault(g, (a, b))
-            if root is None and g != ID and generated_order((a, b)) == len(A5):
+            if (root is None and permutation_order(g) == 5
+                    and generated_order((a, b)) == len(A5)):
                 root = (g, a, b)
     assert len(A5) == 60 and len(witnesses) == 60
     assert root is not None
+    assert permutation_order(root[0]) == 5
     return witnesses, root
 
 
@@ -89,6 +100,7 @@ def verify(depth=5):
                 assert c3_rotate(c3_rotate(c3_rotate(q))) == q
     root_g = root[0]
     assert root_g != ID
+    assert permutation_order(root_g) == 5
     assert c3_rotate(in_factor(root_g, 0)) == in_factor(root_g, 1)
     assert in_factor(root_g, 0) != in_factor(root_g, 1)
     print("A5 order: 60; commutator coverage: 60/60; root pair generates A5")
