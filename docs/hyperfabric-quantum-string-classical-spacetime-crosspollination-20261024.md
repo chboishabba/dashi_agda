@@ -343,3 +343,13 @@ B2 next theorem: source-select a concrete 27D membrane action with actual Lorent
 B3 separate next theorem: reproduce/assume under clearly attributed boundaries selected bosonic worldsheet Virasoro+bc nilpotence and physical BRST quotient, or choose RNS separately. All 26 bosonic target coordinates must be from selected X-maps/fields, NOT from 26 hypervoxel labels.
 B4 optional physical identification: same-object 26D target, Albert Jordan product/F4 and original hyperfabric 26-mode operator. Require an equivariant Lorentz-causal action, matching inner products, dynamics, energy/stress, physical observables and controlled continuum limit. A positive-definite 26-graph-wave operator cannot be declared Minkowski without metric conversion and independent action.
 B5 all Clay connections fail closed until the canonically selected YM/NS/RH operators and original continuum/analytic estimates are attached. No evidence here closes a Clay problem.
+
+## Operator-sensitive compact S1 handoff to KK #1241
+
+Source consumer: [KK/Casimir/QED/QCD #1241](https://github.com/chboishabba/dashi_agda/pull/1241), `Docs/physics/TOEKKQCDCircleSpectralStressBIDIMaxCut20261024.md`. This is a CROSS-BRANCH provenance reference, not a typed import.
+
+Our exact `P3^3→P3^6→P3^9` extends graph axes rather than refining one fixed-dimensional fifth circle: its first nonzero Laplacian eigenvalue remains 1, multiplicity grows 3→6→9; the untwisted smooth S1 first level has degeneracy two. Same 27-site counts do not identify P3^3 (54 edges), C3^3 (81 edges) and C27 (27 edges).
+
+#1241 supplies a physically appropriate *distinct* N=3^k periodic circle lattice, exact Wilson-link gauge covariance, and fixed Fourier-band `O(N^-2)` KK spectral/heat error. Full unbounded Casimir/QCD stress requires an independent regulator-uniform limit. It also rewrites the selected QED+QCD stationary vacuum failure as an uncancelled five-dimensional internal pressure. The new local calculation therefore does NOT upgrade this branch's finite hyperfabric toy to physical KK, Einstein, string or QCD.
+
+Original dimensional deconstruction prior art: Arkani-Hamed, Cohen, Georgi, PRL 86 (2001) 4757, DOI 10.1103/PhysRevLett.86.4757. The sibling physical theorem owners remain independent until merged and typechecked.
