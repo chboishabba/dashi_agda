@@ -103,6 +103,8 @@ data CaseClaim : Set where
   fecDecember2013LLCStatement : CaseClaim
   fecForeignNationalReasonToBelieve : CaseClaim
   fecCaseClosedWithoutFinalLiability : CaseClaim
+  wylieKompromatStatement2018 : CaseClaim
+  wylieProjectRiponStatement2018 : CaseClaim
 
 record BoundedSource : Set where
   constructor bounded-source
@@ -181,6 +183,18 @@ canonicalSources =
     "https://www.fec.gov/data/legal/matter-under-review/7351/ ; Commission voted 5-0 to close file (2021)"
     "2021-09/10" "2014 election-cycle allegations"
     "The Commission later voted to close the file after the 2019 reason-to-believe determination. Closure and the disposition records must be assessed at named allegation/respondent granularity. No inference of a final FEC liability decision follows from the earlier reason-to-believe vote."
+    true false false false
+  ∷ bounded-source wylieKompromatStatement2018 wylieRoot
+    attributedFirstPersonTestimony
+    "https://nsarchive.gwu.edu/sites/default/files/documents/5686049/Christopher-Wylie-Statement-for-the-Record-for.pdf ; printed p4 paragraph 15 / PDF page index 3"
+    "2018-05-16" "during Wylie SCL/CA association, ca. 2013-2014"
+    "Wylie testified he had heard of and seen documents relating to SCL/CA procurement of hacked material and kompromat, sometimes described internally as special intelligence services; he said Bannon was vice president at the time of some events. This is witness allegation, not independent proof of hacking, Bannon tasking, Epstein contact or intelligence command. Same author root as March 2018 oral and FKN0079 written evidence."
+    true false false false
+  ∷ bounded-source wylieProjectRiponStatement2018 wylieRoot
+    attributedFirstPersonTestimony
+    "https://nsarchive.gwu.edu/sites/default/files/documents/5686049/Christopher-Wylie-Statement-for-the-Record-for.pdf ; printed p5 paragraph 19 / PDF page index 4"
+    "2018-05-16" "2013-2015"
+    "Wylie testified that Bannon oversaw Project Ripon, which aimed to scale psychological profiling for campaigns using earlier Cambridge psychology research. Original project implementation/approval and individual role receipts are separate acquisitions; this does not prove Aquino or Epstein operational links."
     true false false false
   ∷ bounded-source mindWarAuthored aquinoVallelyRoot
     attributedAuthorProposal
@@ -906,6 +920,7 @@ data SourceStatementClass : Set where
   wylieOral2018 : SourceStatementClass
   ftcDelawareFinding2019 : SourceStatementClass
   counselMemoIndexed2014 : SourceStatementClass
+  wylieSenateMay2018 : SourceStatementClass
 
 -- Wylie's written and oral testimony are two distinct statements with
 -- one author root, *not* two independent firsthand attestations.
@@ -916,6 +931,8 @@ data SourceStatementOrigin : SourceStatementClass → OriginRoot → Set where
     SourceStatementOrigin wylieOral2018 wylieRoot
   ftcEntityOrigin :
     SourceStatementOrigin ftcDelawareFinding2019 ftcRoot
+  wylieSenateOrigin :
+    SourceStatementOrigin wylieSenateMay2018 wylieRoot
 
 -- The counsel memo is only indexed in this cut. Its complete 22MB PDF
 -- has NOT been inspected. Therefore no author-root or signed agreement
@@ -1104,3 +1121,53 @@ fecReasonToBelieveNotFinalGuilt = refl
 fecClosureDoesNotRewriteOriginalFindings :
   provesFinalLiability fecClosureReceipt ≡ false
 fecClosureDoesNotRewriteOriginalFindings = refl
+
+
+------------------------------------------------------------------------
+-- WYLIE'S MAY 2018 SENATE STATEMENT IS EVIDENCE OF HIS ASSERTIONS,
+-- NOT INDEPENDENT EVIDENCE OF THE ALLEGED OPERATIONS OR BANNON'S
+-- KNOWLEDGE/RESPONSIBILITY. 'KomproMAT' vocabulary alone cannot
+-- join CA's alleged services to the separate Epstein network.
+------------------------------------------------------------------------
+
+wylieAllegedSCLBlackOps : BoundedSource
+wylieAllegedSCLBlackOps = bounded-source wylieKompromatStatement2018 wylieRoot
+  attributedFirstPersonTestimony
+  "Wylie Senate Judiciary prepared statement 2018-05-16, paragraph 15, PDF p4"
+  "2018-05-16" "2013-2014"
+  "Witness says he saw relevant documents and was informed of hacking/kompromat, with Bannon as VP during some events. Original incident case IDs, victims, records, actual commission and direction are not acquired."
+  true false false false
+
+wylieRiponStatement : BoundedSource
+wylieRiponStatement = bounded-source wylieProjectRiponStatement2018 wylieRoot
+  attributedFirstPersonTestimony
+  "Wylie Senate Judiciary prepared statement 2018-05-16, paragraph 19, PDF p5"
+  "2018-05-16" "2013-2015"
+  "Witness states Bannon oversaw Project Ripon; independent signed original tasking, source code and delivery logs uninspected."
+  true false false false
+
+record AllegedKompromatProgrammeCut : Set where
+  constructor alleged-kompromat-programme-cut
+  field
+    firstPersonStatementLocated : Bool
+    independentlyAuthenticatedHackedArtifactLocated : Bool
+    namedBannonOrderOrKnowledgeEstablished : Bool
+    sameObjectEpsteinTaskingPaid : Bool
+    operationalIntelligenceCommandPaid : Bool
+open AllegedKompromatProgrammeCut public
+
+canonicalKompromatCut : AllegedKompromatProgrammeCut
+canonicalKompromatCut = alleged-kompromat-programme-cut
+  true false false false false
+
+testimonyDoesNotProveBannonHackingDirection :
+  namedBannonOrderOrKnowledgeEstablished canonicalKompromatCut ≡ false
+testimonyDoesNotProveBannonHackingDirection = refl
+
+kompromatMethodDoesNotJoinEpsteinNetwork :
+  sameObjectEpsteinTaskingPaid canonicalKompromatCut ≡ false
+kompromatMethodDoesNotJoinEpsteinNetwork = refl
+
+witnessReportingDoesNotPayIntelligenceCommand :
+  operationalIntelligenceCommandPaid canonicalKompromatCut ≡ false
+witnessReportingDoesNotPayIntelligenceCommand = refl
