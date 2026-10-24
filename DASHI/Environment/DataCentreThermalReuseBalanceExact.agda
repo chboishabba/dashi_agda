@@ -130,7 +130,7 @@ noSiteReceiptsPaid =
   physicalSiteObligations false false false false false
                           false false false false false false
 
--- Exact illustrative balance in kW, with no refrigeration or pipe losses.
+-- Exact illustrative balance in 100-kW units, with no refrigeration or pipe losses.
 -- IT = 100, non-IT site overhead = 25, total site = 125 (100-kW units).
 -- Of IT heat, 20 goes directly to a cool incoming sink, 60 enters
 -- heat pump evaporator, and 20 remains uncaptured.
