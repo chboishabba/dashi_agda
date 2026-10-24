@@ -1,5 +1,9 @@
 # Field Loom × Amy Eskridge × missing-scientists physics: source-typed audit and revised deliverables
 
+**Measured-evidence status refinement (25 October):** [S1 deterministic stream replay and common magnet calibration source](psychotronics-s1-replay-signed-moment-weld-20261025.md) makes the *software* raw→pairs transformation reviewable, but none of the named scientists' historical/experimental hypotheses receives new physical validation. Amy's historical original presentation remains distinct from Li & Torr primary theory, R. H. Eskridge's NASA POAMS study, and Egely/Vértesy VSM original claim. The shared `Biot–Savart` formalism is classical magnetostatics, not experimental antigravity and not any missing scientist's original discovery.
+
+
+
 **McCasland original-source snowball (25 October):** official [MIT DSpace dissertation record](https://dspace.mit.edu/entities/publication/d3dd1a12-847b-4fbc-a150-7e269eb60ee0) identifies William Neil McCasland, *Sensor and actuator selection for fault-tolerant control of flexible structures* (MIT PhD, institutional 1989 issue; 13.62-MB PDF `20463278-MIT.pdf`, checksum MD5 `c7653040983e687d71e9632a0b09f809`). The **1989 American Control Conference** original authored six-page paper, *Fault-tolerant sensor and actuator selection for control of flexible structures*, pp.1111–1116, is a separate carrier/possible same-author derivative and its bibliographic abstract is indexed by NASA and [J-GLOBAL](https://jglobal.jst.go.jp/en/detail?JGLOBAL_ID=200902071772165788). Original full-body downloads were **not inspected** (MIT PDF endpoint returned 429); no equation or algorithm is attributed verbatim, no independent experiment is counted twice. Those are **two additional bibliography/provenance rows**, not two new scientists or demonstrations. The 20-person fibre denominator stays **20**; the technical-source comparator matrix now has **23 rows**.
 
 
