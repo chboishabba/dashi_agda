@@ -44,6 +44,24 @@ def rank(rows):
     return len(rref(rows)[1]) if rows else 0
 
 
+def null_basis(rows):
+    """Build exact source-nullspace witnesses independently of rank admission."""
+    reduced, pivots = rref(rows)
+    n = len(rows[0])
+    basis = []
+    for j in range(n):
+        if j in pivots:
+            continue
+        vector = [Q(0)] * n
+        vector[j] = Q(1)
+        for i, p in enumerate(pivots):
+            vector[p] = -reduced[i][j]
+        assert all(sum(Q(a)*b for a,b in zip(row,vector)) == 0 for row in rows)
+        basis.append(vector)
+    assert len(basis) == n-rank(rows)
+    return basis
+
+
 def field_identifiable(sensors, target):
     """True iff requested linear source contrast factors through sensors."""
     return rank(sensors + [target]) == rank(sensors)
@@ -69,7 +87,10 @@ def source_vs_artifact():
             continue
         for target in vectors:
             mat=[row1,row2]
-            assert field_identifiable(mat, list(target)) == (rank(mat) == rank(mat+[target]))
+            by_rank = field_identifiable(mat, list(target))
+            by_null = all(sum(Q(a)*n for a,n in zip(target,vector)) == 0
+                          for vector in null_basis(mat))
+            assert by_rank == by_null
             exhaustive += 1
     assert exhaustive == 26 * 26 * 3
     return {"source_coordinates":["brain","motion","background"],
