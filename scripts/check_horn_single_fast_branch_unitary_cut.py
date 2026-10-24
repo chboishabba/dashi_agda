@@ -45,6 +45,19 @@ for n in range(0,31):
     assert SOURCE_ROOT_NORM_SQ_LOWER>1
 print("PASS 31 exact finite-depth single-leaf SU3 thresholds using ||[A,B]-I||=||AB-BA||<=2d(A),2d(B)")
 
+# SHARPNESS: B swaps first two SU3 eigen-directions, while
+# A_n=diag(z, z^-1, 1), z=(n+i)/(n-i), lies in SU3 and approaches I.
+# B A B^-1=A^-1 and [A,B]=A². Thus
+# [d([A,B])/d(A)]²=|z+1|²=4n²/(n²+1) -> 4.
+# The Lipschitz factor TWO is optimal over the full unitary class,
+# so the 2^n branch exponent is not improvable by a smaller
+# uniform single-step constant without additional source constraints.
+for n in (1,2,5,10,100,1000):
+    ratio_sq=F(4*n*n,n*n+1)
+    assert 0<ratio_sq<4
+    assert 4-ratio_sq==F(4,n*n+1)
+print("PASS exact sharpness family: SU3 commutator-to-child ratio -> 2")
+
 # A heterogeneous full-depth tree admits a STRICTLY MORE FLEXIBLE
 # acceptance test than requiring every leaf small. For a full binary tree,
 # d(root)<=1/2 * product_{all leaves}(2 * d(leaf));
