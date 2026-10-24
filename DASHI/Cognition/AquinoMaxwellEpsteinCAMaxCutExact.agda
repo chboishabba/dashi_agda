@@ -677,8 +677,8 @@ bannonEpsteinWorkProductSearch = ProgrammeFrontier.promotion-search-candidate
   "Steve Bannon"
   "Jeffrey Epstein"
   ProgrammeFrontier.institutionalWorkPackageSearch
-  "Existing BannonBridge pays sustained contact and attributed film-interview work at a bounded level"
-  "Exact 2018-2019 filmed session, Bates correspondence, edits, production or payment ID"
+  "Existing BannonBridge pays sustained contact; Guardian/CBS February 2026 describe actual released 2019 filmed interview from DOJ Data Set 10, video object exists but film bytes not inspected here"
+  "Original DOJ Data Set 10 Bannon reel object ID, filming date/edit/timestamp and 2018-2019 Bates correspondence, production or payment ID still needed"
   "Join one original primary message to the same primary audiovisual or production work product"
   "Distinct authenticated agency/tasking or control evidence, not just media strategy"
   0 1 false false
@@ -772,10 +772,10 @@ caseIndependentNetworksTest = AntiEcho.hypothesis-test-boundary
 caseLocalSubclustersTest : AntiEcho.HypothesisTestBoundary
 caseLocalSubclustersTest = AntiEcho.hypothesis-test-boundary
   AntiEcho.linkedSubclusters
-  "Bannon-CA corporate relationship and Bannon-Epstein media contact; separately Aquino-Vallely coauthorship"
+  "Bannon-CA corporate relationship and Bannon-Epstein actual film object reported in February 2026; separately Aquino-Vallely coauthorship; no same dataset crossing paid"
   "A document proves local links do not imply no broader chain, but isolated independent lineages limit the inference"
   "Specific cross-cluster same-object transfer remains unpaid"
-  "Reconcile released 2018-2019 correspondence against contracts and film objects"
+  "Weld official Data Set 10 film ID and session metadata to dated 2018-2019 correspondence, without linking unrelated videos or assuming the calendar appointment occurred"
   "Search for disjoint rights/custody, incompatible method/version and unconnected decision authority"
 
 caseOneCrossGenerationalProgrammeTest : AntiEcho.HypothesisTestBoundary
@@ -791,10 +791,10 @@ caseOperationalDirectionTest : AntiEcho.HypothesisTestBoundary
 caseOperationalDirectionTest = AntiEcho.hypothesis-test-boundary
   AntiEcho.coordinatedTargeting
   "For this different case the proposed operation is common covert exploitation/tasking, NOT scientist targeting"
-  "Separate financial/contract paths, ordinary media production and contrary official findings"
+  "Separate financial/contract paths, ordinary media production, DOJ/FBI July 2025 no-credible-blackmail-evidence review position and AP Feb 2026 investigative contrary analysis"
   "Authenticated sponsor, instruction, recipient, specific coercive act and outcome receipt all missing"
   "Require independently sourced tasking, payment, artefact handling and recorded use on one common programme"
-  "Test falsifiable timelines against documented ordinary activity and contrary agency reviews"
+  "Test claimed intelligence tasking against exact dates, ordinary activity, actual DOJ/FBI memo scope and AP's bounded February 2026 review, not against mere contact or a theoretically impossible universal negative"
 
 caseCompetingHypotheses : List AntiEcho.HypothesisTestBoundary
 caseCompetingHypotheses =
