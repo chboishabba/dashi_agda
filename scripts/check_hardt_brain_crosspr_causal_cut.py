@@ -15,6 +15,7 @@ from collections import defaultdict
 import argparse
 import importlib.util
 import json
+import hashlib
 
 
 @dataclass(frozen=True)
@@ -129,6 +130,11 @@ def optional_brain_runtime(path):
     if path is None:
         return {"status":"NOT_IMPORTED","reason":"dashiBRAIN #9 file not present locally; no vendoring"}
     path=Path(path)
+    raw=path.read_bytes()
+    observed_blob=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\\0"+raw).hexdigest()
+    expected_blob="384a9b1d7082857000128635259c9b1a9d989f80"
+    if observed_blob != expected_blob:
+        raise ValueError("dashiBRAIN original runtime blob mismatch: "+observed_blob)
     spec=importlib.util.spec_from_file_location("external_brain_consumer_retention",path)
     if spec is None or spec.loader is None:
         raise ValueError(f"Cannot load external original runtime: {path}")
@@ -157,7 +163,8 @@ def optional_brain_runtime(path):
             "factorises":original.factorises_on_sample,
             "ambiguous_fibres":original.ambiguous_fibre_count,
             "sham_coarse_step_mismatches":comm.mismatches,
-            "file_is_not_verified_as_official_without_git_blob_check":True}
+            "official_source_git_blob_verified":True,
+            "source_git_blob_sha1":observed_blob}
 
 
 def main():
