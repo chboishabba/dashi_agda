@@ -722,3 +722,38 @@ Separately run the Agda module with the source project toolchain:
 Execution honesty: the earlier 16-world local equivalent passed;
 neither these new GitHub exact bytes nor the five-test suite nor Agda
 was executed/typechecked here. Do not claim success from file creation.
+
+
+### Subsequent exact-Git-blob verification receipt — 2026-10-24
+
+This supersedes the above statements that the new committed Python
+and optional original dashiBRAIN runtime had **not** been exercised.
+The Agda/non-empirical caveats remain unchanged.
+
+**Completed actual local verification against exact source bytes:**
+
+- dashi_agda #1252 checker Git blob
+  18eecf93ccb7d36ed3b4861e19b4928ce92abd7a: exact reconstructed
+  local file matches and executes.
+- dashi_agda #1252 test Git blob
+  63edaed47cefc74dfe7326e3fc16d3d95cac87ff:
+  exact reconstructed local test source matches.
+- dashiBRAIN #9 ORIGINAL module Git blob
+  384a9b1d7082857000128635259c9b1a9d989f80:
+  exact reconstructed source matches and passes the adapter's
+  native Git-object-hash admission before code import.
+
+Observed original-source bridge: 16 invented worlds; four passive
+observation fibres; four intervention-collision fibres; original
+audit_consumer_retention returns factorises_on_sample=false;
+original audit_commutation returns **four** mismatches for the
+explicit stationary coarse comparator; viewed image retained,
+concealed independent target not retained, leaked target retained.
+The local test suite ran **5/5 PASS** in 0.002s on exact Git-blobs.
+Read immutable [JSON execution receipt](../receipts/hardt-brain-crosspr-exact-python-20261024.json).
+
+No GitHub Actions or Agda kernel was executed. These are exact
+program execution receipts for synthetic causal source models,
+not an observation of any human subject or target. Do not interpret
+four fibres as four independent physical observations or as an
+experimental nonlocal result.
