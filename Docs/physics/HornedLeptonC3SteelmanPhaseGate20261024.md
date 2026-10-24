@@ -205,3 +205,72 @@ At current branch read-back:
 
 See corresponding machine-readable
 `logs/research/neutrino_horn_c3_steelman_phase_receipt_20261024.json`.
+
+## 2026-10-24 P4 max-cut: observational and regularity priorities
+
+A new decision-grade **high-payoff** roadmap is at
+`Docs/physics/HornedSU3ObservableRegularityParetoMaxCut20261024.md`.
+It preserves the earlier rephasing no-go but adds a genuine
+**independent gauge-invariant toy observable**, the precisely
+bounded horn regularity obstruction, and source-derived
+spectral-selection priorities. This is the canonical consumer,
+not another C3 group or cloned Wilson module.
+
+**Biggest mathematical opportunity (first):** conditional
+shrinking-horn gauge regularity obstruction. For unitary
+holonomies \(U_w\) with \(U_w=[U_{w0},U_{w1}]\),
+\(\|[X,Y]-I\|\le2\|X-I\|\|Y-I\|\).
+At level n, if every leaf has defect at most ε_n, then
+\(\|U_{root}-I\|\le(2ε_n)^{2^n}/2\).
+The actual nontrivial root has norm gap δ≈1.43818847527,
+therefore SOME descendant at every depth has defect
+at least \((2δ)^{1/2^n}/2\to1/2\).
+Thus if actual physical representative loops shrink
+uniformly in length and the connection remains bounded
+in compatible frames, such a nontrivial root is impossible.
+**Uniform shrinking actual geometric loops are still
+an unverified hypothesis**, NOT a consequence of Hatcher's
+abstract free-group tower. Source analytic prior owner:
+`DASHI/Geometry/FlatFormalDiskHolonomySurface.agda`.
+
+**Highest engineering/experimental prototype (second):**
+non-Abelian two-arm interference from canonical
+`SUNWilsonClassFunction`/ `SUNWilsonAction`.
+Selected *post hoc* W=TS1 has exact
+\(Tr(W)=(176093404722400-19836986431118ζ)/181846007130841\).
+An unpolarized qutrit with two 50:50 transports (I,W)
+has \(P_+(0)=434928608401/648677790003≈0.670484816\),
+vs 1 for identity W. Gauge invariant and nontrivial
+*in the specified toy*; not a physical PMNS prediction.
+An ordinary single puncture/circle can reproduce **any**
+single-loop W. Even a nontrivial commutator loop in the
+two-generator free group is not horn-specific.
+Horn identification requires nested geometric source
+and multi-scale compatible loops. Prior experimental
+sources: Nat Commun 2019 DOI 10.1038/s41467-019-10974-8;
+npj Quantum Inf 2021 DOI 10.1038/s41534-021-00483-2.
+
+**Highest physics mechanism prospect (third):**
+original Hosotani 1989 Wilson-line quantum potential,
+DOI 10.1016/0003-4916(89)90015-8.
+Pure classical \(F=0\) exterior Yang-Mills stress/action
+does **not** select W; source-specified matter/geometry,
+renormalized spectral determinant and symmetry/anomaly
+authority are required. Synthetic S1 ring heat trace
+for chosen W at t=.2 is 2.25351710695 vs 3.00223408384
+for W=I: a distinct gauge-invariant spectrum, but
+another proof the effect is not inherently horn-specific.
+No chiral SM lepton SU3 gauge anomaly cancellation is
+asserted. This route reuses existing Dashi covariant
+spectral/KK machinery only after a same-object action.
+
+**Revised P4 acceptance:** source-defined (not fitted)
+physical connection/boundary or loop-effective action,
+anomaly-safe matter currents, actual geometric pi1 and
+physical loop family, a strictly gauge-invariant
+*horn-specific* observable, and a quantitative outcome
+not reproducible by a trivial/ordinary-puncture
+counterfactual. P5 then compares source experiment
+likelihoods. A finite synthetic demonstration is a
+valuable engineering outcome, **not** physical horned
+spacetime or neutrino mass discovery.
