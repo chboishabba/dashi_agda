@@ -800,3 +800,8 @@ The checker accepts an optional experimental JSON manifest and refuses promotion
 **P3: model-specific speculative theory** remains contingent on independent empirical receiver effects, specified source/target coupling, energy/retardation, constraints and no-signalling compatibility. A 2026 axion null search or an invented scalar Lagrangian is not an observed neural channel.
 
 **Historical/evidentiary firewall:** The BioCybernaut/Hardt Instagram reel demonstrates first-party publication of the alleged story. None of these neural or spin experiments independently verifies any assassination, target, historical operative, 80% denominator or associated military operation. The users' original supplied clip and caption remain separate from the original scientists' independently published data. No Agda kernel or new empirical receipt is asserted.
+
+
+### Final finite verification correction for 2026-10-25
+
+The 2,028 source/target cases are no longer tautological repeated rank checks. The latest checker also explicitly builds a nullspace basis and, for each candidate target, verifies agreement between **rank-increment admission** and **annihilation of every nullspace direction**, with exact rational arithmetic and per-vector source-kernel validation. The strengthened equivalent local script passed all six standard-library regression tests. This remains a mathematically verified synthetic reference, not a real magnetic measurement or Agda kernel proof. The separate committed GitHub source has this nullspace cross-check, but has not been independently executed from its exact remote blob here.
