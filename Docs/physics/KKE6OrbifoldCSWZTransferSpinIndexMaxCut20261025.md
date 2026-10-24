@@ -69,3 +69,23 @@ These are nontrivial TEST FAMILIES of spin backgrounds and strongly improve the 
 - **Next decisive payoff:** (1) compute physically normalized 5D SU3³ orbifold CS + local WZ with actual Bardeen descent, full gauge quotient integral spin bordism/APS eta and interval regulator; (2) correct boundary scalar/gauge/fermion dynamics including WZ and use old #1165 same-metric-path action→stress; (3) coupled orbit/radion/holonomy effective vacuum and gravity/PPN/LARES discriminators. The 78-dimensional full E6 gauge adjoint retains another 30 parity-even coset generators and has not been constructed physically here.
 
 **Status:** Exact rational and SymPy source polynomial, anomaly allocation, 2π naive phase and CP3/instantons/K3 test-family algebra locally reproduced; source scripts and finite Agda BIDI committed on #1241 (kernel typecheck NOT performed). No proof of full gauged E6, measured mass/particle spectrum, anomaly-free global 5D quantum theory or experimental gravity anomaly. Earlier claims of an *unconditional* Chi33 charge-two obstruction should be marked SUPERSEDED, not deleted or misattributed.
+
+
+## Highest-value extra global cut: the original E6 27 is FAITHFUL only on (SU3³)/Z3_diag
+
+Original source E6 #1106 actually specifies the **same first-Tits action** on three 3×3 blocks \((X,Y,Z)\): \(X\mapsto A X B^{-1}\), \(Y\mapsto B Y C^{-1}\), \(Z\mapsto C Z A^{-1}\). For the centres of SU3c/L/R, with exponents \(a,b,c\in\mathbb Z_3\), the central characters of the three \(9\)-dimensional blocks are
+\[
+a-b,\quad c-a,\quad b-c\pmod 3.
+\]
+All three vanish **iff** \(a=b=c\). An exact exhaustive 3³=27 enumeration in \`scripts/check_kk_e6_trinification_global_z3_quotient.py\` therefore identifies the kernel as precisely \(\{(0,0,0),(1,1,1),(2,2,2)\}\). Formal finite owner \`DASHI/Physics/Gravity/KKE6TrinificationDiagonalZThreeQuotientExact.agda\` proves all 27 kernel conditions by cases. Accordingly the source's **faithfully acting compact gauge group** is
+\[
+G_{\mathrm{tri}}=\big(SU(3)_c\times SU(3)_L\times SU(3)_R\big)/\mathbb Z_3^{\mathrm{diag}},
+\]
+consistent with the E6 subgroup literature (e.g. original E6 representation conventions and Slansky's review). This is not a discovery of the subgroup; it is a necessary actual-group identification for our previously unspecified \(\Gamma\).
+
+**Explicit nonliftable bundle discriminator.** Let \(\omega=e^{2\pi i/3}\) and in SU3 take
+\(C=\operatorname{diag}(1,\omega,\omega^2)\) and \(S\) the cyclic permutation matrix. Their commutator is \(CSC^{-1}S^{-1}=\omega I\). The two SU3³ holonomies \(H_1=(C,C,C)\) and \(H_2=(S,S,S)\) have nontrivial commutator \((\omega I,\omega I,\omega I)\) IN THE COVER but **commute in \(G_{\rm tri}\)**. They therefore define an ordinary flat quotient holonomy pair on \(T^2\) with nonzero \(\mathbb Z_3\) obstruction to a commuting SU3³ lift. The finite 27 matter acts consistently on the quotient because the diagonal centre acts trivially. This nonliftable quotient bundle is a genuine missing class in the earlier global test set.
+
+**Consequence:** our stronger CP³, S²×S⁴, S²×K3 spin-index parity receipts covered certain LIFTABLE gauge backgrounds, NOT all \(G_{\rm tri}\) bundles. The previous source's "all coefficients of X4/2 are integers" was likewise only for naive separately integral source symbols. The actual global CS/WZ completion must evaluate the correctly normalized spin/gauge anomaly and five-dimensional fermion eta on these *nonliftable diagonal-Z3 flux sectors*, including possible fractional individual SU3 instanton classes, torsion, quotient charge lattice and boundary inflow. Do not assert anomaly freedom or a universal \(\mathbb Z_2\) absence before that test; likewise do not infer failure from a speculative fractional value. The concrete \(T^2\) witness is a strict new TEST INPUT, not a computed 5D CS phase.
+
+This upgrades the prioritized research gate from the vague phrase "global quotient Γ" to a defined \(G_{\rm tri}\) and an explicit nonliftable bundle. It also prevents overindexing on the old Chi-phase half-unit or irrelevant 3D CS formulas: the new highest-information question is whether the specific original E6 27 + orbifold regulator + candidate one-boundary CS/WZ action is consistent on the *whole* faithful quotient gauge bundle class. The actual full gauged E6 adjoint is still a different action and has additional parity-even coset generators.
