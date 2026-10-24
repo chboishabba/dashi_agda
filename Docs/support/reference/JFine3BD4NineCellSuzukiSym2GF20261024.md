@@ -1,3 +1,5 @@
+> **25 Oct phase refinement:** the original four C3 fingerprints are not four equally viable Monster-diagonal candidates. If 12 and 78 share one extended 729 representation and the same paid quotient kernel, their central phases must agree, retaining only 90ζ / 90ζ². The zeta-field norm distinguishes direct Sym² (5292) from dual Sym² (8100) without fixing phase naming. See [zeta diagonal norm cutset](./JFine3BZetaCyclotomicDiagonalNorm20261025.md). This remains a conditional common-factor/quotient result, not a measured Monster same-object action.
+
 # JFine–Monster 3B: reuse of D4, 12+78, 12G and finite-field owners
 **Audit date:** 2026-10-24. **Status:** exact finite D4 computation completed locally; 6.Suz class-identity screen source-written; no GAP/Agda kernel receipt.
 
