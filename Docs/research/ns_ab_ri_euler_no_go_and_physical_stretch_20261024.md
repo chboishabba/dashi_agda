@@ -1,3 +1,87 @@
+# 25 October 2026 source-owner audit: R735/R823/physical R690 signs
+
+This note is an amendment to the earlier research audit, not a new
+Navier–Stokes theorem claim.
+
+**Existing prior art:** `NSTriadKNR650GlobalMixedEnergyBalanceRound691Exact`
+already proves global weighted work as signed global coherent commutator
+minus the mixed-energy endpoint. `NSTriadKNR650GlobalMixedEnergyEndpointUpperRound699Exact`
+already removes the terminal mixed mass for an upper estimate, subject
+to real cutoff-uniform commutator/initial-mass inputs. `NSTriadKNR650SharedWeightedQuarticCutRound735Exact`
+already reduces the preferred positive B attempt to two shared-weighted
+analytic leaves W1 and W2; it does not discharge either estimate.
+The later original-multiplicity real-time auxiliary-reserve negative
+control is **source-written** in
+`chboishabba/dashi_lean4/NSBControl/Rational345R823DecisionFreeze.lean`,
+`literalPhysicalReserveIntegralCounterexample`; no independent exact-head
+Lean kernel build was available in this audit. The historical Agda R832
+rational-time flags do not supersede the newer real Lean definitions.
+Do not reintroduce the falsified universal R823 reserve inequality.
+
+**New original exact physical helical fixture:** The signed R690
+output work need not be positive even in a fully realizable unforced
+NS solution. At p=(1,1,0), q=(1,-1,0), r=(0,2,0),
+s=(2,-2,0), assign Fourier velocity amplitudes
+u_p=u_q=u_r=e_z, u_s=-e_z, and conjugates at negatives;
+all other coefficients zero. The field is real and transverse,
+has only z-velocity depending on x,y, and therefore
+(u·grad)u=0 identically. The exact solution is
+u_m(t)=exp(-|m|²t)u_m(0), pressure constant.
+For H±_m=(P_m ± i m×/|m|)/2 and
+A_(m,n)=H+_m u_m × H-_n u_n,
+at k=(2,0,0), with four contributing ordered inputs,
+r_(m,n)=(4,4,12,12):
+```text
+K_k(0) = sum_tau r_tau * 2Re <M_k,A_tau> = 8-6sqrt(2) < 0,
+output-heat self-work   = 2-sqrt(2) > 0,
+difference-frequency work = 6-5sqrt(2) < 0.
+```
+For any t, the heat flow yields
+`K_k(t) = -d/dt ||M_k(t)||²`. Hence its integral is
+`||M_k(0)||²-||M_k(T)||²`, and is negative for small T>0
+but nonnegative over the full infinite time horizon.
+Summing ALL 26 nonzero generated Fourier outputs yields at t=0
+`K_global(0)=192-16sqrt(2)>0`; the exact integrated global
+identity is
+`int_0^infinity K_global(t)dt = 12-sqrt(2)`,
+and its original R690 factor-eight value is `96-8sqrt(2)`.
+This is a POSITIVE global witness, not evidence of a global signed
+inequality failure. Code: `tests/test_ns_r690_realizable_helical_signed_output.py`,
+four exact independent locally passing tests.
+
+**External attribution & transfer limit:** Luca Eliseo Pavesi,
+2026-07-04 v3, Zenodo record 21194906, publishes an abstract
+claiming `|Pi(K)| <= C sqrt(E_tail E)/K` with absolute C on arbitrary
+smooth data. For standard NS spectral kinetic flux, our independent
+real transverse six-mode datum gives `Pi(1)=4,E=10,E_tail=6`.
+Under amplitude scaling u→a u, flux grows a³ and RHS a²; no
+absolute data-independent C is possible. This only audits the
+LITERAL UNCONDITIONAL ABSTRACT formula with the STANDARD flux
+definition; it does not refute differently normalized fluxes or
+conditional helicity-dominance propositions. Code:
+`tests/test_ns_pavesi_unconditional_flux_scaling_audit.py`.
+Original paper remains attributed to Pavesi, not DASHI.
+
+**A research status grounded in actual owners:** `NSClayFacingAPureAnalysisFrontier20261007Exact`
+already marks canonical resolvents/near-origin infrastructure
+and signed-Lebesgue compilers as closed *source infrastructure*.
+Its actual uninhabited proof leaves are A1 physical continuum pair
+population and high-frequency heat identification, A2 low/high
+physical majorant domination, A3 a noncircular continuation estimate
+and literal solution assembly. The `PhysicalEnvelopeInputs`
+record in `NSWholeSpacePhysicalMajorantDominationProducerExact`
+still explicitly carries the domination and integrability witnesses;
+the source-written status flags are false. Physical H¹ dual
+Sobolev and Duhamel `L²_t dot-H½` are known standard auxiliary
+estimates but do not automatically inhabit those signed
+double-resolvent witnesses or A3.
+
+**Verified scope:** Five local symbolic tests passed; commits are
+source-written tests and roadmap notes, NOT Agda/Lean kernel proof
+receipts. No unrestricted positive A/B theorem proved.
+
+---
+
 # 2026-10-24 final max-cut amendment: exact B source equality / critical A source
 
 The original mathematical contributions named below remain attributed
