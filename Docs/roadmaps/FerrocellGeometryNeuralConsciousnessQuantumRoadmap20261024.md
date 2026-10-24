@@ -171,3 +171,64 @@ The active P3→P4 experiment should reuse this owner before adding new geometry
 Additional cross-lane owner: \`Docs/support/reference/RelationRepresentationRealization.md\` and its \`DASHI/Reasoning/RelationRepresentationRealizationExact\` bridge distinguish relation-code success, dynamic adequacy, target-domain realisation and authority. Reuse that contract as a consumer test; geometric-reasoning fit alone cannot establish neuronal mechanism or phenomenal instantiation.
 
 **Changed priority:** *wave-geometry projection against human memory-task recordings*, conditional on source/data rights and access, is an independent P3/P4 candidate; it has a **shorter physical route** than interpreting Ferrocell rings as neural/consciousness toroids. Keep Ferrocell an optical control/analogy, not a source of neuronal evidence.
+
+
+## P3A — AI geometric reasoning comparator: Sophontic, LILA and DASHI (2026-10-24)
+
+**Do not conflate three sources:** (1) Sophontic, Inc. / Julian D. Michels; (2) Anatolii Kornienko / SPUTNIKAI sovereign-lila-e8 engineering; (3) DASHI's own implementation, formal adapters and experiments. Neither has independent authority to speak for the other.
+
+### Original company root and claim status
+- **Sophontic original public website:** \`https://sophontic.ai/\`, \`https://sophontic.ai/about/\` and \`https://sophontic.ai/evals/\`, checked 2026-10-24. Company calls the method "reasoning as geometry", asserts training internal geometry, reports a roughly **124M parameter prototype** and model performance beyond competitors allegedly up to **60× its size** on unspecified reasoning comparisons, and advertises a **paired canonical/perturbed evaluation** ("flip rate") where a load-bearing fact changes.
+- Website advertises the model as **"Releasing soon"** and eval kit as **"Available at launch"**. These pages do **not** provide the actual model checkpoint, frozen full benchmark, training budget/compute, baseline protocols, model cards, complete pairwise predictions, variability/seeds, or independently reproducible 60× comparison. Treat the numbers as **attributed promotional developer claims**, not independent benchmark proof.
+- Sophontic's advertised 60× is a **parameter-size ratio**, not a demonstrated 60× performance score. Its purported sample-efficiency, training-cost and mechanism improvements are separately testable hypotheses; no source-proof upgrade here.
+- The public ConvergeMini example changes the truth of a premise; the company calls its metric "flip rate" and says an item-level hit with pair failure is insufficient. Our own canonical paired correctness metric is precisely defined and **not assumed numerically identical** to the unreleased Sophontic evaluator.
+- **Sovereign-LILA-E8** (Anatolii Kornienko / SPUTNIKAI; \`https://github.com/SPUTNIKAI/sovereign-lila-e8\`): repository-authored E8-root soft quantisation and attention-bias implementation and self-reported TinyStories loss/long-context results. Do **not** attribute Sophontic's claims to Kornienko, or infer either model's accuracy from the other's output.
+- **DASHI**: owns the formal counterexample, candidate selection, transfer/decoder demands, source/version audit, and local preliminary grokking tests. Do not transfer upstream architecture authorship merely because code is vendored.
+
+### Reuse (already constructed in open branch #1095 and Lean #44)
+
+- \`DASHI/Reasoning/SemanticInterventionEquivarianceExact.agda\`: \`E(Tx)=rho(T)(E x)\` with decoder compatibility and output-level equivariance.
+- \`DASHI/Reasoning/GeometricReasoningCandidateSelectionExact.agda\`: alternative unstructured, LILA-E8 and Monster/generic geometric candidate families, held-out comparison and action-compression **DASHI proposal** (NOT Sophontic's metric).
+- \`DASHI/Reasoning/GeometricReasoningSurfaceResidualExact.agda\`: residual-backed representation, exact reopen and consumer-specific collision.
+- \`DASHI/Cognition/Teleodynamics/TeleodynamicSemanticActionBridgeExact.agda\`: pair correctness → action fit → decoded equivariance → held-out composition → future-language separation → same-object recognition.
+- \`DASHI/Cognition/Teleodynamics/LilaE8QuantizerExact.agda\`, \`LilaE8AttentionBiasExact.agda\`: source-constrained E8 variants, but a finite 240-count pattern does not identify an E8 representation or human-language mechanism.
+- \`DASHI/Reasoning/GrokkingGeometricCrystallisationAttributionExact.agda\`: authority split. \`Docs/formal/NonEpsteinGeometricReasoningLILAHandoff20261012.md\` records pinned DASHIg \`013962fb839e83ce8e4b35486fe1a79792c96db8\` pilot (modular multiplication p=97, weight decay .22/.30, n=2/architecture); inconclusive, **not** a 60× result.
+- Cross-domain use of the AI candidate does **not** prove neural physical geometry, consciousness, quantum coherence, E8 spacetime symmetry or Monster charge. It can transfer a **testing methodology** into neuroscience only after an independent measurement/realisation map.
+
+### New tiny regression owner and synthetic receipt (this PR branch)
+
+\`DASHI/Reasoning/GeometricPairedBenchmarkNonCollapseExact.agda\` expresses two functions that give identical correct answers to one canonical/perturbed pair yet differ under a nuisance variation and fail the same action-equivariance test differently. The finite formal statement is:
+\`\`\`
+PairedCorrect (memorisedPair)            -- holds
+PairedCorrect (factSensitive)            -- holds
+samePairObservation                       -- holds
+NuisanceStable (factSensitive)            -- holds
+NuisanceStable (memorisedPair)            -- contradiction
+PremiseFlipEquivariant (factSensitive)    -- holds
+PremiseFlipEquivariant (memorisedPair)    -- contradiction
+\`\`\`
+**No claim of Agda kernel compilation:** kernel receipt requires exact branch head, installed compiler and standard library. This is a **DASHI-authored toy counterexample**, not Sophontic code/data or an evaluation of its unavailable weights.
+
+Companion script \`scripts/geometric_pair_nuisance_audit.py\` emits an exact JSON fixture digest, pair-pass, nuisance stability and premise-flip equivariance for two synthetic models. A fully observed/annotated pair would defeat the superficial lookup. Thus Sophontic's *concept of paired perturbations* is useful; a paired pass on a restricted sample is not proof of geometric mechanism.
+
+### High-alpha held-out experiment matrix
+
+| Contrast | Specific test | Reject/retain criterion |
+|---|---|---|
+| Ordinary memorisation vs causal rule | Held-out synonyms, grammar order, distractor density, load-bearing changed fact | Joint canonical+perturbed correctness on unseen pairs + nuisance stability |
+| Encoded geometry vs output-only pair | Intervene on semantic premise and fit transformations layer by layer | \`E(Tx)≈rho(T)E(x)\` with independently fixed metric/decoder and nontrivial control |
+| Nearest-root coincidence vs E8 action | Test root reflections, group composition and equivariance, non-root control codebooks matched for capacity | Same-object action certificate or report action-identification failure |
+| Sophontic performance claim | Freeze weights, baseline models, tasks, tokens, compute, seeds, capacity and evaluation identities when released | Source-specific replay, uncertainty and honest param-vs-score distinction; no premature 60× endorsement |
+| LILA engineering ablation | Compare geometric-bias/quantiser toggles at equal training budget to capacity-matched alternatives | Held-out model metrics and prospective checkpoints, ordinary regularisation baselines |
+| Neural analogue | Matched geometry/control perturbation against connectome functional consumer | P3 physical registration/intervention; AI result alone does not promote biological identity |
+| Consciousness assertion | Contrast task behaviour/access/phenomenal hypotheses under matched causal implementations | No claim unless physical/psychophysical predictions discriminate beyond behavioural success |
+
+**Integration note:** add P3A after P3 in sequence as a *parallel methodological comparator*, not as an experimental prerequisite for P4/P5. No new C3/E8/Monster theorem is needed to advance P3A; the next hard requirement is real checkpoint/benchmark availability and same-intervention model-level evidence.
+
+**Target acceptance commands** (commands not automatically counted as receipts):
+\`\`\`sh
+python3 scripts/geometric_pair_nuisance_audit.py
+agda -i . -i /path/to/agda-stdlib DASHI/Reasoning/GeometricPairedBenchmarkNonCollapseExact.agda
+# On #1095 branch with its own head-locked toolchain:
+agda -i . -i /path/to/agda-stdlib DASHI/Reasoning/GeometricReasoningSemanticInterventionRegression.agda
+\`\`\`
