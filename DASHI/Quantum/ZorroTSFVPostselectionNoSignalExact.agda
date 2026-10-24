@@ -106,5 +106,8 @@ record ControlledEarlierEffectEvidence : Set₁ where
     interventionalDistributionDifference : Set
     independentlyReplicated : Set
 
--- No constructor is provided here for a physical receipt; putting a Set
--- in a field is a statement of an obligation, not an inhabitant of it.
+-- This record is a SCHEMA, not a scientific receipt: an arbitrary caller
+-- could choose trivial predicates (such as top) for all of its fields.
+-- It is deliberately not used as an authority to promote signalling.
+-- A same-object calibration/experimental authority must be supplied by a
+-- separately reviewed external-data consumer before any physical claim.
