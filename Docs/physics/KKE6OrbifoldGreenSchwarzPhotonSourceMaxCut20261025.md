@@ -84,3 +84,12 @@ Independent local SymPy full27 charge/polynomial factorization, VEV charge vecto
 Finite Agda \`DASHI/Physics/Gravity/KKE6OrbifoldGreenSchwarzConsumerExact.agda\` imports the original SM anomaly and orbifold BIDI owners and proves coefficient arithmetic and source-indexed non-transport. The continuum polynomial is **not Agda kernel-proved**; code is source-written and exact-head kernel check UNVERIFIED. Nor has an action with global gauge/spin anomaly freedom or experimental particle-spectrum viability been established.
 
 The scientifically valuable advance here is **not discovering Green–Schwarz**. It is locating a specific one-direction, photon-preserving candidate repair for an explicit otherwise anomalous 27 zero-mode construction, with a quantified global-periodicity and electroweak-VEV payment. A failure of its global quantization would itself be a sharp source-specific no-go.
+
+
+## 2026-10-25 improved electroweak source: fully stationary even-18 scalar vacuum
+
+The earlier correct warning that the original #1106 V6 has positive E21 curvature has now been acted on, not merely reiterated. New executable `scripts/check_kk_e6_orbifold_boundary_higgs_source.py` uses the LITERAL original six-invariant V6, and `scripts/check_kk_e6_orbifold_boundary_higgs_hessian.py` independently checks the FULL 36-real scalar gradient/Hessian with torch autodiff on the SOURCE-SELECTED orbifold projection. Canonical `Docs/physics/KKE6OrbifoldBoundaryHiggsHessianMaxCut20261025.md` has exact formulas and attribution.
+
+An actual orbifold-fixed-plane gauge-invariant reduced-group term `-mu² Tr(P2 Chi P2 Chi†)+lambda [Tr(P2 Chi P2 Chi†)]²` can produce the EW candidate, but only by changing the old action and allowing original Phi E32 and Chi E33 magnitudes to relax. Set `Phi=a E32`, `Chi=b E33+t E21`; exact stationarity requires `a²=1-t²/2`, `b²=1-2t²`, `mu²=3+(2 lambda-13/2)t²`. For illustrative `lambda=4,t=.0246,mu²=3.00090774`, the FULL 36-real scalar gradient vanishes, with parity-even projected 18×18 Hessian having **0 negative, 7 Goldstone zero, 11 strictly positive** directions (smallest positive about .0036216304). This matches 8 even L/R generators → 1 photon, and preserves the GS direction's neutrality under Y.
+
+Full 36 Hessian has 2 negative directions in the **orbifold-odd** 18-real sector, which has NO constant four-dimensional zero modes. Their full positive KK-gradient tower must still be computed. No full interval source, global minimum, regulator-complete GS/CS, measured EW parameters or full gauged E6 is thereby proved.
