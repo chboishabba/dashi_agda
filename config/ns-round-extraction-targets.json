@@ -85,19 +85,19 @@
         "support": [
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSClayFacingAPhysicalSameObjectCutExact.agda"
+            "path": "DASHI/Physics/Closure/NSTriadKNEuclideanCanonicalProjectedInteractionExact.agda"
           },
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda"
+            "path": "DASHI/Physics/Closure/NSWholeSpaceFiniteConvolutionSingleLimitExact.agda"
           },
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
+            "path": "DASHI/Physics/Closure/NSWholeSpaceConvolutionEnergyTonelliExact.agda"
           }
         ],
-        "status": "existing canonical resolvents, signed Gram, near-origin and high-frequency analytic bounds; actual continuum Fourier population, physical envelope domination and A3 continuation remain open",
-        "next": "A1a: construct same-solution actual Euclidean Fourier integrand -> canonical projected pair (not arbitrary Set evidence); then A1b heat, A2 low/high finite-energy envelopes, A3 continuation."
+        "status": "local canonical projected convolution/Leray cell and Q-bound already theorem-bearing; actual spatial Fourier transform/convolution identity, low/high finite-energy domination, and unrestricted continuation remain unpaid",
+        "next": "Reuse canonicalProjectedInteraction and formula weld; prove actual u(x,t)->u_hat(t,xi) transform and Fourier convolution on SAME solution. For A2 use single convolution fibre energy, not divergent positive R9 Gram-pair product; bridge quadratures, low/high majorants and continuation."
       },
       {
         "id": "NS-B",
@@ -128,8 +128,8 @@
             "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
           }
         ],
-        "status": "principal half estimate, signed B4 source reduction and finite shell compilers exist; B1/2/3 physical estimates, B4 uniform payment, B7 integrated control and continuation inputs open",
-        "next": "Prefer B4 literal signed noncore/core R440 payment, quantified uniformly in state/output/cutoff, with theta_D<1/2 and homogeneous local-ED control; separately B1/2/3 and B7."
+        "status": "B4 full-output-fibre physical payment candidate has a fixed-state zero-padding obstruction (subject to actual local ED cutoff behavior). Principal half and algebraic representation intact. B1/2/3, B7 and continuation remain independent.",
+        "next": "P0 determine exact localED source and apply fixed-state B4 adversary; if ED genuinely cutoff-uniform, retire current full-fibre B4 estimate and derive a zero-padding-invariant same-object alternative. Parallel B1/2/3, B7, continuation."
       },
       {
         "id": "NS-B4",
@@ -150,15 +150,15 @@
           },
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Exact.agda"
+            "path": "DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact.agda"
           },
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSCanonicalB4PhysicalR440PaymentResidualExact.agda"
+            "path": "scripts/ns_b4_literal_padding_adversary.py"
           }
         ],
-        "status": "literal noncore/core R440 expression and principal <=1/2 M_core proved; merged PR #1234 gives exact analytic socket only, signed cutoff-uniform physical estimate uninhabited",
-        "next": "Prove literal -W(M,n_C R440_N+n_N R440_C-r_N M_C-r_C M_N) <= theta_D M_core+c_D ED with 0<=theta_D<1/2 and constants independent of cutoff; source-attach to PR #1234 interface."
+        "status": "2026-10-24 exact fixed physical seed negative control: full-output-fibre zero-amplitude incidence centering causes signed defect to grow unboundedly with cutoff while literal core companion stabilizes; uniform B4 payment impossible if local ED fixed-state bounded. Current analytic socket is conditional and not closed.",
+        "next": "First rule out the full-fibre zero-padding no-go against the EXACT proposed source ED; do NOT build Young/cardinality bound. Prefer a same-object, zero-padding-invariant physical weighted-amplitude rate centered on active amplitudes or direct modal heat work; prove identity before attempting uniform estimate."
       },
       {
         "id": "NS-B-RESERVE",
