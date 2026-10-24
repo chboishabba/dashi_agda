@@ -2363,6 +2363,9 @@ ftc2020BannonCourtPetitionOriginalOwner = CA.ftc2020BannonCIDPetitionReceipt
 ftc2020BannonOppositionOriginalOwner : CA.InfluenceReceipt
 ftc2020BannonOppositionOriginalOwner = CA.ftc2020BannonRespondentOppositionReceipt
 
+ftc2020BannonJudicialShowCauseOriginalOwner : CA.InfluenceReceipt
+ftc2020BannonJudicialShowCauseOriginalOwner = CA.ftc2020BannonJudicialShowCauseReceipt
+
 ftc2020BannonReplyOriginalOwner : CA.InfluenceReceipt
 ftc2020BannonReplyOriginalOwner = CA.ftc2020BannonReplyReceipt
 
@@ -2404,6 +2407,11 @@ bannonContraryOriginalPleadingRetained :
   bannonOriginalOpposingDefenceLocated
     canonicalBannonFTCCIDAdversarialBoundary ≡ true
 bannonContraryOriginalPleadingRetained = refl
+
+ftcBannonActualCourtSchedulingOrderPaid :
+  proceduralShowCauseOrderIndexed
+    canonicalBannonFTCCIDAdversarialBoundary ≡ true
+ftcBannonActualCourtSchedulingOrderPaid = refl
 
 ftcBannonCivilCIDIsNotAdjudicatedGuilt :
   bannonPersonallyFoundLiableForCADataScheme
