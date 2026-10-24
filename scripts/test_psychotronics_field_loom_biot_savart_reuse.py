@@ -15,7 +15,7 @@ pedagogical Biot–Savart derivation, not the origin of the physical law.
 NIST CODATA 2022: mu_0 is measured, not exact after SI 2019; the existing
 model retains legacy mu_0=4*pi*1e-7 only to preserve illustration.
 """
-from math import hypot, sqrt, pi, isfinite
+from math import hypot, sqrt, pi, cos, sin
 import unittest
 
 from psychotronics_field_loom_coils import MU0, loop_b, pair_b
@@ -105,7 +105,8 @@ class ReuseAndReference(unittest.TestCase):
 
     def test_reject_ideal_wire_singularity(self):
         with self.assertRaises(ValueError):
-            loop_b(.1,0.,0.,.1,0.,100,1.)
+            theta=pi/256  # first existing midpoint quadrature segment
+            loop_b(.1*cos(theta),.1*sin(theta),0.,.1,0.,100,1.)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
