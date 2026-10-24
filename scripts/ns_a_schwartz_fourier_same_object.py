@@ -105,6 +105,23 @@ def certificate():
         4*S.pi*rr**2*(energy/(nu*rr)),(rr,0,R))
     assert S.simplify(radial_L2-4*S.pi*R*(energy/nu)**2)==0
     assert S.simplify(radial_L1-2*S.pi*R**2*energy/nu)==0
+    # Stronger UNIVERSAL physical H1 Fourier-source estimate:
+    # For divergence-free u in H1, f=(u·grad)u in L1 by Cauchy-Schwarz,
+    # ||f||_1 <= ||u||_2 ||grad u||_2 = sqrt(E*D).
+    # Hence |F[P f](xi)| <= min(E*|xi|, sqrt(E*D)).
+    # The physical inverse-heat/stationary resolvent upper is
+    # 1/nu * min(E/r, sqrt(E*D)/r²). Its Fourier L2 NORM SQUARED
+    # is bounded by 8*pi*E^(3/2)*sqrt(D)/nu².
+    EE, DD = S.symbols("E D",positive=True)
+    cutoff=S.sqrt(DD/EE)
+    low_global=S.integrate(
+        4*S.pi*rr**2*(EE/(nu*rr))**2,(rr,0,cutoff))
+    high_global=S.integrate(
+        4*S.pi*rr**2*(S.sqrt(EE*DD)/(nu*rr**2))**2,
+        (rr,cutoff,S.oo))
+    total_global=S.simplify(low_global+high_global)
+    assert S.simplify(total_global-
+        8*S.pi*EE**S.Rational(3,2)*S.sqrt(DD)/nu**2)==0
     return {
         "schema":"ns.a.schwartz-fourier-same-object.v1",
         "convention":"F[f](xi)=integral exp(-i*x.dot(xi)) f(x) dx",
@@ -124,6 +141,9 @@ def certificate():
         "arbitrary_L2_zero_frequency_resolvent_bound":"E/(nu*|xi|), xi!=0",
         "low_ball_resolvent_L2_norm_squared_bound":str(radial_L2),
         "low_ball_resolvent_L1_norm_bound":str(radial_L1),
+        "arbitrary_H1_source_bound":"min(E*|xi|, sqrt(E*D))",
+        "arbitrary_H1_crossover_frequency":"sqrt(D/E)",
+        "arbitrary_H1_global_fourier_resolvent_L2_squared_bound":str(total_global),
         "exact_nonzero_projected_frequency":"(1,0,1)",
         "source_only_not_claimed":[
             "general FourierTransformVelocity for every solution",
