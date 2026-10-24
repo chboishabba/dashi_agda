@@ -6,7 +6,7 @@ Cooling water assumed pure, cp=4.186 kJ/(kg K); glycol needs measured cp.
 Heat-pump electricity is external to the data-centre for KPI purposes.
 """
 from dataclasses import dataclass
-from math import isclose
+from math import isclose, isfinite
 import argparse,csv,json,unittest
 from datetime import datetime,timedelta,timezone
 
@@ -35,6 +35,12 @@ class Plant:
     pipe_eff:float=.9
 
 def dispatch(h,plant=Plant()):
+    readings=tuple(getattr(h,k) for k in Hour.__dataclass_fields__)
+    settings=tuple(getattr(plant,k) for k in Plant.__dataclass_fields__)
+    if not all(isfinite(x) for x in readings+settings):
+        raise ValueError('non-finite site, sensor, demand or plant reading')
+    if min(h.direct_inlet_c,h.direct_target_c,h.high_target_c)<=-273.15:
+        raise ValueError('nonphysical receiver temperature')
     if min(h.it_mw,h.overhead_mw,h.coolant_kg_s,h.direct_demand_mw,h.high_demand_mw)<0 or h.it_mw==0:
         raise ValueError('invalid site electrical power or demand')
     if not h.rack_hot_c>h.rack_cold_c>-273.15: raise ValueError('invalid coolant temperature')
@@ -66,9 +72,12 @@ def dispatch(h,plant=Plant()):
     delivery=(direct+hp_hot)*plant.pipe_eff
     net_loss=(direct+hp_hot)-delivery
     ambient=site-reused
-    assert isclose(site+hp_el,ambient+delivery+net_loss,abs_tol=1e-8)
-    assert delivery <= h.direct_demand_mw+h.high_demand_mw+1e-8
-    assert -1e-9<=reused<=site+1e-9
+    if not isclose(site+hp_el,ambient+delivery+net_loss,abs_tol=1e-8):
+        raise ValueError('whole-system first-law violation')
+    if delivery > h.direct_demand_mw+h.high_demand_mw+1e-8:
+        raise ValueError('delivery exceeds declared offtake')
+    if not -1e-9<=reused<=site+1e-9:
+        raise ValueError('invalid reuse and source boundary')
     return dict(source_cap_mw=cap,source_boundary_mw=reused,
                 delivered_mw=delivery,hp_electric_mw=hp_el,network_loss_mw=net_loss,
                 ambient_reject_mw=ambient,cop=cop if hp_source else 0,
@@ -88,7 +97,8 @@ def alternate_hp_meter_boundary(d):
     internal_erf=(source+drive)/(site+drive)
     internal_ere=(1-internal_erf)*internal_pue
     external_ere=(1-source/site)*(site/it)
-    assert isclose(internal_ere,external_ere,abs_tol=1e-10)
+    if not isclose(internal_ere,external_ere,abs_tol=1e-10):
+        raise ValueError('boundary reassignment violated ideal ERE accounting')
     return dict(external_pue=site/it,external_erf_candidate=source/site,
                 internal_pue=internal_pue,internal_erf_candidate=internal_erf,
                 unchanged_ideal_ere=external_ere)
@@ -213,6 +223,15 @@ class TestGate(unittest.TestCase):
                 writer.writerow(dict(base,timestamp_utc='2026-10-24T10:00:00+00:00'))
             with self.assertRaises(ValueError):read_csv(path)
         finally:os.unlink(path)
+    def test_nonfinite_and_absolute_zero_rejected(self):
+        from dataclasses import replace
+        for h in [replace(self.h, rack_hot_c=float('nan')),
+                  replace(self.h, direct_demand_mw=float('inf')),
+                  replace(self.h, high_target_c=-274.)]:
+            with self.assertRaises(ValueError):dispatch(h)
+        for plant in [Plant(capture_fraction=float('nan')),
+                      Plant(max_hp_electric_mw=float('inf'))]:
+            with self.assertRaises(ValueError):dispatch(self.h,plant)
     def test_invalid(self):
         with self.assertRaises(ValueError):dispatch(Hour(0,2.5,42,32,200,2,25,35,8.4,75))
         with self.assertRaises(ValueError):dispatch(Hour(10,2.5,30,32,200,2,25,35,8.4,75))
