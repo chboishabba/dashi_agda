@@ -170,3 +170,64 @@ Both reported PASS in the model workspace before source mirroring. Source
 code was committed on the stacked branch. Agda kernel typechecking,
 Lean typechecking and GitHub CI for this exact branch were NOT RUN and
 must not be labelled passed.
+
+
+## Further constructive max-cut (same stacked branch)
+
+### Warsaw circle: an ACTUAL compactum definition
+
+`scripts/exotic_topology_warsaw_contour.py` implements the following
+source-specific construction, rather than an arbitrary finite sine sample:
+
+```
+S = {(x, sin(1/x)): 0<x<=1} union ({0} x [-1,1])
+A = segments [(0,-1)->(0,-2), (0,-2)->(1,-2),
+              (1,-2)->(1,sin(1))]
+W = S union A
+```
+
+**Exact witness of the entire vertical limiting segment:** for any
+`t in [-1,1]`, take `x_n = 1/(2*pi*n + asin(t))`, `n>=1`.
+Then `x_n>0`, `x_n->0` and `sin(1/x_n)=t`. Conversely every cluster
+value along `x->0` lies in [-1,1], and away from x=0 graph continuity
+identifies all closure points. Hence S is exactly the graph closure.
+The graph has bounded coordinates in [0,1]x[-1,1] and S is closed,
+so is compact. The added polygonal arc A is compact, is disjoint from S
+away from its two endpoints (sin never goes below -1, and the x=1
+cross-section contains only sin(1)), and connects the two indicated points.
+W is therefore a compact connected planar continuum with the expected
+Warsaw-circle defining shape. The script symbolically verified the
+closure sequence identity/limit. The noncontractibility and vanishing
+of ALL homotopy groups remain unformalised; neither finite cochains nor
+point-set compactness prove them.
+
+### C3 versus Wada: an explicit counterexample
+
+`ExoticWadaC3BoundaryNoGoExact.agda` imports the SAME pre-existing
+`FiniteC3OrbitStabilizerExact` and assigns the three sectors the
+boundary-ray incidences (01),(12),(20). It proves all nine instances
+of incidence equivariance under cyclic rotation and exhibits ray 0
+where sectors 0 and 1 differ. Hence sector-permutation symmetry is
+insufficient for identical boundaries even at incidence level.
+This is NOT a full Euclidean realization theorem and does not exclude
+source-selected Wada constructions with special interleaved canals.
+
+### Two stronger positive mathematical identifications
+
+1. **Whitney REAL image, not just equation.** For F(x,y,z)=x²-y²z,
+   the parametrisation P(u,v)=(uv,u,v²) has precisely the semialgebraic
+   image `{F=0 and z>=0}`. Inclusion is immediate. Conversely if
+   y!=0, take u=y and v=x/y; the polynomial equality gives v²=z.
+   If y=0, F=0 forces x=0; take u=0 and v=sqrt(z). Note that
+   grad F=(2x,-2yz,-y²) vanishes on the ENTIRE z-axis, while
+   the parametrisation's differential rank drops only at (u,v)=(0,0).
+   This separates implicit algebraic singularities, real image and
+   source-parameter immersion defects.
+2. **Simons cone spherical link.** On the link with |x|²+|y|²=1
+   and |x|²-|y|²=0, necessarily |x|²=|y|²=1/2.
+   Thus its link is exactly S³(1/sqrt(2)) x S³(1/sqrt(2))
+   as a subset of S⁷. Its minimality is a completely independent
+   and still open formal target.
+
+The typed Agda consumers above are source-written and have NOT been
+typechecked in this environment.
