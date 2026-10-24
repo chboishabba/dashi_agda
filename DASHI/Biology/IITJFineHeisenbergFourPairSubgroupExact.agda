@@ -174,11 +174,26 @@ centralShiftEqualsSourceModelProduct :
   (q : Gauge.FourOneFour) →
   modelProduct4 modelCentreGenerator q ≡ sourceCentralShift q
 centralShiftEqualsSourceModelProduct
-  (Gauge.fourOneFour Base.tri-low e k) = refl
+  (Gauge.fourOneFour Base.tri-low
+    (Gauge.fourTrit a b d e) (Gauge.fourTrit f g h i))
+  rewrite fromAfterToTrit a | fromAfterToTrit b
+        | fromAfterToTrit d | fromAfterToTrit e
+        | fromAfterToTrit f | fromAfterToTrit g
+        | fromAfterToTrit h | fromAfterToTrit i = refl
 centralShiftEqualsSourceModelProduct
-  (Gauge.fourOneFour Base.tri-mid e k) = refl
+  (Gauge.fourOneFour Base.tri-mid
+    (Gauge.fourTrit a b d e) (Gauge.fourTrit f g h i))
+  rewrite fromAfterToTrit a | fromAfterToTrit b
+        | fromAfterToTrit d | fromAfterToTrit e
+        | fromAfterToTrit f | fromAfterToTrit g
+        | fromAfterToTrit h | fromAfterToTrit i = refl
 centralShiftEqualsSourceModelProduct
-  (Gauge.fourOneFour Base.tri-high e k) = refl
+  (Gauge.fourOneFour Base.tri-high
+    (Gauge.fourTrit a b d e) (Gauge.fourTrit f g h i))
+  rewrite fromAfterToTrit a | fromAfterToTrit b
+        | fromAfterToTrit d | fromAfterToTrit e
+        | fromAfterToTrit f | fromAfterToTrit g
+        | fromAfterToTrit h | fromAfterToTrit i = refl
 
 -- Concrete noncommutativity / non-equivariance tests use source D4
 -- and value-S3 transformations on the original relative gauge.
