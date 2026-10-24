@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Actual Monster 3B central-phase probe from a published mmgroup word.
 
-Primary computational source: Heiko Dietrich, Melissa Lee, Tomasz Popiel
-(2023), The maximal subgroups of the Monster, accompanying code:
-https://github.com/melissa-maths/M/blob/main/other_gens.py
-Related 3B source: Martin Seysen, mmgroup applications/Hurwitz/
-hurwitz_monster_samples.py, first 'g3' word. This one is a genuine
-Monster element, NOT a source-aligned E=3^(1+12) generating set.
+Primary computational source: Martin Seysen, mmgroup
+applications/Hurwitz/find_generators.py (find_type_3B, tests chi=53),
+applications/Hurwitz/hurwitz_monster_samples.py (first literal g3 word),
+source blob f618df5f903b08d212e4d03b95617159f7fd5842.
+This is a genuine Monster 3B element, NOT a source-aligned
+E=3^(1+12) generating set.
 
 Dependency: mmgroup (not installed in the local evaluation environment).
 No successful run, rank receipt, or Monster intertwiner is asserted.
