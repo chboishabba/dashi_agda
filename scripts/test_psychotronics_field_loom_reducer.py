@@ -103,12 +103,14 @@ class ReducerTest(unittest.TestCase):
             join=verify_pair_source(meta,derived['pairs'])
             self.assertTrue(join['bytes_and_exact_pair_source_join'])
             self.assertTrue(join['raw_stream_replayed_to_pairs'])
+            self.assertFalse(join['temporal_counterbalance_from_source']['balanced_linear_order_by_active_arm'])
             self.assertEqual(len(join['factorial_settings_from_source']),6)
             # Deliberately false externally supplied arms must be ignored.
             record={'metadata':meta,'pairs':derived['pairs'], 'factorial_settings':[]}
             analysed=paired_analysis(record)
             self.assertTrue(analysed['raw_stream_to_pair_replay_passed'])
             self.assertEqual(analysed['factorial_identifiability']['rank'],5)
+            self.assertIn('unbalanced_active_sham_time_order_by_arm', analysed['unpaid_obligations'])
             self.assertEqual(analysed['factorial_settings_source'],
                              'replayed_hashed_raw_sensor_stream')
             self.assertFalse(analysed['submission_ready_for_independent_metrology_review'])
