@@ -68,10 +68,40 @@ def run():
                            norm_c3=C3[0]**2-C3[0]*C3[1]+C3[1]**2,
                            centre_c2=trace))
     assert all(x["norm_c3"]==8100 for x in centre)
+    # Two 78-row candidates may share all tested central C2/C3 values
+    # while differing on an ordinary NONCENTRAL class. Therefore matching
+    # centre and cyclotomic norm cannot replace all-class equality.
+    same_centre_sym2 = (78, 78, 78, 78, 6)
+    same_centre_other = (78, 78, 78, 78, 8)
+    assert same_centre_sym2[:4] == same_centre_other[:4]
+    assert same_centre_sym2 != same_centre_other
+    # The producer's conjugate outer family has two class-function matches
+    # for both Sym² and dual Sym², or none; a single isolated match fails.
+    def source_full_character_equal(direct_count, dual_count):
+        if direct_count not in (0,2) or dual_count not in (0,2):
+            raise ValueError("partial or excess conjugate-pair match")
+        return direct_count == dual_count == 2
+    assert source_full_character_equal(2,2)
+    assert not source_full_character_equal(0,0)
+    assert not source_full_character_equal(2,0)
+    for d,v in [(1,2),(2,1),(-1,0),(4,2)]:
+        try: source_full_character_equal(d,v)
+        except ValueError: pass
+        else: raise AssertionError("accepted invalid full-character counts")
+    # Equal-centre phase pairs: both nontrivial families admit two matches;
+    # a trivial-centre candidate cannot align with faithful 12.
+    for p in (1,2):
+        faithful_12 = [p, (-p)%3]
+        same_phase_78 = [p, (-p)%3]
+        trivial_78 = [0,0]
+        assert sum(int(a==b) for a in faithful_12 for b in same_phase_78)==2
+        assert sum(int(a==b) for a in faithful_12 for b in trivial_78)==0
     return dict(status="LOCAL_SYNTHETIC_SELECTION_AND_CENTRAL_CHARACTER_PASS",
                 faithful_path=fa,nonfaithful_path=na,
                 expected_negative_controls=5,
                 phase_examples=centre,
+                source_full_character_synthetic_control=True,
+                common729_C3_equal_phase_synthetic_control=True,
                 source_genuine_Monster_receipt_present=False,
                 gap_executed=False,agda_kernel_verified=False)
 
