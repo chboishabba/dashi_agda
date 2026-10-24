@@ -17,6 +17,17 @@ import DASHI.Governance.InstitutionalAnomalousAlteredStateProgramAtlasExact as H
 mkUltraOwner : History.ProgrammeFamily
 mkUltraOwner = History.mkultraMksearchFamily
 
+wiesner1964 : Source.AttributedSource
+wiesner1964 = Source.mkNoDOISource
+  "Jerome B. Wiesner, White House / President's Foreign Intelligence Advisory Board"
+  "Bugging of the U.S. Embassy, Moscow"
+  "Primary White House memorandum to Clark Clifford, 1964-06-24; National Security Archive document 28785"
+  "1964"
+  "https://nsarchive.gwu.edu/document/28785-document-1-white-house-jerome-wiesner-report-clark-clifford-bugging-us-embassy"
+  Source.archivalSource
+  "Inspected hidden listening equipment and recommended defensive wall-injected masking sound, acoustic security and electromagnetic reflection shielding; these were counter-surveillance proposals, not exposure treatments or demonstrated behavioural influence"
+  Source.publicAttribution
+
 mk119Memo : Source.AttributedSource
 mk119Memo = Source.mkNoDOISource
   "CIA Technical Services Division / Research Branch (author redacted)"
@@ -143,7 +154,7 @@ sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Cold War bioelectronic research and contemporary AHI original-object lineage"
   "DASHI.Governance.PandoraBizarreRFHistoricalEvidenceExact"
-  (mk119Memo ∷ cesaroPandora ∷ johnstonBizarre ∷ stateViralStudy1965 ∷
+  (wiesner1964 ∷ mk119Memo ∷ cesaroPandora ∷ johnstonBizarre ∷ stateViralStudy1965 ∷
    georgeWashington1966 ∷ pandoraApril1969 ∷ pandoraHumanMinutes ∷
    koslovRand ∷ odniExperts ∷ odni2025 ∷ recall2026 ∷ [])
   "Bounded original-document roots, no fabricated modern source-to-device bridge"
@@ -165,6 +176,7 @@ data ProgrammeObject : Set where
   modernAnomalousHealthInquiry : ProgrammeObject
   stateMoscowViralStudy : ProgrammeObject
   navyBigBoy : ProgrammeObject
+  moscowEmbassyCounterSurveillance : ProgrammeObject
 
 data ProgrammeTopic : Set where bioelectronicsAndEffects : ProgrammeTopic
 
@@ -189,6 +201,7 @@ data LinkKind : Set where
   fundedHumanObservation : LinkKind
   completedOccupationalComparison : LinkKind
   noControlledHumanIrradiationInThisRecord : LinkKind
+  defensiveAudioCountermeasureProposal : LinkKind
 
 record BoundedLineageEdge : Set where
   constructor boundedLineageEdge
@@ -226,6 +239,22 @@ modernDeviceNotPaid = boundedLineageEdge
   "A 2025 public analytic judgement considered possible foreign RF capability"
   "No verified declassified chain from 1960s apparatus to AHI device or contemporary commercial infrastructure"
 
+
+wallMaskingAsDefensiveProposal : BoundedLineageEdge
+wallMaskingAsDefensiveProposal = boundedLineageEdge
+  moscowEmbassyCounterSurveillance moscowEmbassyCounterSurveillance
+  defensiveAudioCountermeasureProposal wiesner1964
+  "1964 White House memorandum proposes intentional low-frequency or broadband wall masking to defeat embedded listening devices, separate from tracking external RF beam"
+  "No documented implementation or behavioural targeting; acoustic masking is a security countermeasure, not evidence of RF-to-acoustic mind control"
+
+data MoscowSignalIntentHypothesis : Set where
+  intendedNeurophysiologicalInfluence : MoscowSignalIntentHypothesis
+  activateOrInterrogateImplantedListeningDevices : MoscowSignalIntentHypothesis
+  jamOrConfuseRadioInterception : MoscowSignalIntentHypothesis
+  otherOrUnknownIntent : MoscowSignalIntentHypothesis
+
+-- Multiple contemporary hypotheses were investigated. This constructor
+-- taxonomy cannot select which interpretation is actually true.
 
 moscowCoverStory : BoundedLineageEdge
 moscowCoverStory = boundedLineageEdge
