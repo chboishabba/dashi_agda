@@ -195,6 +195,17 @@ def verify_numeric_results() -> dict:
     assert not selected["C5_natural_translation_into_C3xC3"]
     assert not selected["79_is_SSP15_prime"]
 
+    projective = projective_pointed80_audit()
+    assert projective["projective_line_F9_points"] == 10
+    assert projective["ordinary_affine_points"] == 9
+    assert projective["nonzero_vectors_per_line"] == 8
+    assert projective["affine_part"] == 72
+    assert projective["completion_fibre"] == 8
+    assert projective["nonzero_source_roundtrip"] == 80
+    assert projective["punctured_F81_count"] == 80
+    assert not projective["original_modular_j_identification"]
+    assert not projective["original_Monster_action_identified"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -207,6 +218,7 @@ def verify_numeric_results() -> dict:
         "xor_grid": grid,
         "five_cube_relative_fibre": five_cube,
         "selected_punctured79": selected,
+        "projective_f9_pointed80": projective,
         "large_grid": {"scanned_rows": len(lattice["rows"]),
                        "payload_sha256": lattice["payload_sha256"],
                        "scope": lattice["scope"],
