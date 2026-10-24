@@ -104,3 +104,69 @@ H1 frontier is a **kernel-certified** formalization and a physically
 selected/scale-indexed operator comparison. H2 remains real Hamiltonian /
 observables identification and physically defensible dynamics, not the
 already-solved finite orthogonality calculation.
+
+
+## 2026-10-24 cross-repo max-cut recut (Agda + Lean4 exact-head archaeology)
+
+### The FOUR inequivalent uses of 27/729
+
+Do not conflate these different concrete mathematical objects:
+
+1. **Spatial Cube27**: `Ternary27Point = {-1,0,1}^3`, exactly **27 points/sites** and 54 nearest-neighbour edges on `P3^3`. See merged Agda #656, #666 and canonical `Base369Ternary27HypervoxelFabricGeometryExact`.
+2. **Relational T^27**: Agda #1133 constructs **27 ternary coordinates**, not 27 states/sites. There are `3^27` ambient states; its **policy-completed** global section carries `T^18` free coordinates, `3^18` states, with a selected C3 structural completion. Its exact graph sheaf, effective higher-stack, groupoid and finite hypersheaf are already source-written in the owning sibling, but remain distinct from a physical spatial hypercubic graph.
+3. **729 = 3^6**: two spatial Cube27 factors have **729 pairs**. The separately sourced GF(3^6), Monster-3B X6 Heisenberg representation **degree 729**, and Schrödinger model also have size/dimension 729 but are not canonically the spatial pair graph or a Monster VOA eigenspace without a map preserving multiplication and action. Agda #1105 gives an ATLAS-derived *selected* GF729 linear operator/intertwiner by executable finite conjugacy, not a global Monster physical representation. `729*90=65610` counts the selected zeta-sector BASIS LABELS after recognition, not every vector of a 65610-dimensional linear space.
+4. **Monster C27 charge chart, PR #1239**: the *original spatial 27 sites* are an explicitly chosen address chart for 27 cyclic charge eigenvalues on actual `V^natural_2` (dimension 196884). Source-reported eigenvalue ranks 7298 at charge zero, 7295 for primitive order 3, 7296 for order 9, 7290 for order 27; sum is 196884. Every original spatial nearest-neighbour bond changes chosen charge; an uncharged block-diagonal hop cannot represent it. **Onsite full-weight-two VOA at each site** and **one VOA partitioned among differently charged sites** are separate candidate theories. The charged vertex link `V^natural` mode remains an actual same-object open producer; neither chart yields an AdS3 dual or physical string automatically.
+
+`T^9` in the base three-cube interaction/appraisal product contains `3^9=19683` states. Its number matches the separate *three spatial Cube27-factor* path product explored in this PR, but the roles/factorizations must be identified rather than coerced by cardinality.
+
+### Additional mathematical operator realization (new in PR #1249)
+
+`scripts/check_hyperfabric_27_729_19683_refinement.py` tests the **actual original path graph** `P3^n` for `n=3,6,9`. Write `L_n` for its combinatorial graph Laplacian, `I_{k,n}f(x,y)=f(x)` for pullback across added ternary coordinates, and `R_{n,k}F(x)=3^{-(n-k)} sum_y F(x,y)` for averaging. For k=3,n=6 and k=6,n=9, exact arithmetic verifies
+
+```text
+R I = id
+L_n I = I L_k
+R L_n = L_k R
+```
+
+on every site, for nonseparable test fields on the fine lattice as well as arbitrary selected coarse test fields. The identity follows from **a product graph and the new-axis constant zero mode / cancellation of summed edge terms**; it is a principled mathematical coarse/fine commuting-square, NOT a physical spatial renormalisation theorem. Operator-level free cylinder consistency is stronger than equal cardinalities.
+
+**Negative control:** change one family of new-direction links to sign `-1` (a toy flat-charge transport obstruction). The constant fine field has naive averaged twisted Laplacian `4/3` at every coarse site, while the coarse ordinary Laplacian of its mean is zero:
+
+```text
+R L_twisted I(1) = 4/3   !=   L_coarse R I(1) = 0.
+```
+
+Thus an actual physical gauge connection needs a connection-compatible section/restriction or an explicit residual, not naive scalar averaging. The differing periodic C3 versus path P3 Laplacians and the Monster C27 charged-edge no-go remain **independent** obstructions, not redundant copies of this one.
+
+**Reproduction**: `python3 scripts/check_hyperfabric_27_729_19683_refinement.py`; exact rational/integer checks are not Agda kernel theorems. Mathematical identity extends to arbitrary finite product paths by elementary edge cancellation, but a general Agda/Lean proof and its source-physical attachment are separate deliveries.
+
+### Cross-repository theorem archaeology (not generic claims of incompleteness)
+
+| Lane / authoritative owner | Actual available constructions at declared scope | Primitive same-object frontier |
+|---|---|---|
+| **369 and T27 relational geometry** — Agda #1133 | exact policy-completed `T^27` graph, 18 free trits, sheaf/presheaf, groupoid, higher-stack/hypersheaf, native C3 and non-descent of hidden policies | spatial Cube27-to-T27 **typed** representation and physical action compatibility; not new sheaf scaffolding |
+| **729/Monster** — Agda #1105, #1162, #1239; Lean #47 | GF729 primitive selected action executable; group/character/projector and generic FDRep/isotypic/Hom compilers; 27-charge multiplicity arithmetic and original-cube edge no-go | actual same-grade VOA fixed-zeta `H_zeta` and `W_zeta` linear action and chosen-phase character transport, `Hom_E` normalizer lifts, physical vertex/gauge links, physical state/action |
+| **Quantum mereology** — Agda #1208; Lean #61, #76 | finite heterogeneous TPS/marginals, source g-TPS, finite HS projections and metric formulas (per source author), physical Hamiltonian **example** in Agda #1217/Lean #80 | same physical selected Hilbert/state/g-TPS/Hamiltonian and operational observables; minimizer pullback, thermodynamic limit, nontrivial continuum and same-state holographic gravity |
+| **GR & holography** — Agda #898, #905 and flat-GR owners; Lean #68 | intrinsic curvature/causal boundary interfaces, finite flat mostly-plus model, corrected **independent Bell tree** RT equality, nonempty full-domain **flat Lambda=0 Jacobson** benchmark, units calibration | real smooth same-causal-spacetime and sourced *nonflat* Einstein-matter solution with QFT stress, backreaction, matter sourcing; RT benchmark does not imply AdS/CFT |
+| **KK and string-adjacent** — Agda #1239, #1241, #1248 | five-dimensional reduction and radion/source/Casimir **candidate** models, selected negative controls, separate independent Maxwell photon; VOA modular/defect, finite C27 charge and braids | physical worldsheet `(Sigma,h,X,g,B,Phi)`, Polyakov/Nambu–Goto dynamics, Weyl/BRST/anomaly conditions, modular consistency, string spectrum, compactification/vacuum and same-observable 4D match. 5D KK ≠ automatically critical string theory |
+| **YM** — merged #1230, #1233; open #1165; TOE #1217/#80 | canonical CMP109 residual classification, finite gauge/RG/Hamiltonian compilers and conditional source-Native R457/R131 compilers | real pinned Yang–Mills construction and CMP109 source histories, R114/R119/R122/R124/R127 literal stress/OS semantics, continuum reflection-positive source, **cutoff-uniform physical mass gap**. Graph discrete spectral gap cannot substitute |
+| **NS** — merged #1233, #1234; main canonical A/B/C/D scheduler | A/B decomposition and exact non-vacuous B4 R440 analytic interface; existing R406/resolvent/Luo source machinery | B4 physical signed cutoff-uniform R440 inequality and continuation, and A same-object physical Fourier identification/domination; no 27-site P3 Laplacian implies 3D unrestricted smoothness |
+| **RH** — Agda #1211 and RH source owners | zero-free, fourth-harmonic and Riemann signed quartic target infrastructure | actual zeta analytic same-object and required signed far-minus-mu estimate; neither finite C3 characters nor Eisenstein lattice counting prove RH |
+| **BSD / arithmetic** — Agda #1006; Lean #69/#73 | genuine Eisenstein norm, `j=0` CM point-group action, inert prime local factor and generic split Jacobi compiler | selected split cubic character certificate, primary Jacobi trace, Hecke/Groessencharacter Euler factors; actual Selmer/Ш and BSD rank formula still separate |
+| **Hodge / P!=NP** — Agda #1006/#1129 and other existing owners | finite Hodge/geometry and complexity proof grammar; reductions; P9 quotation frontier | primitive algebraic-cycle lift on an actual smooth projective variety; for P!=NP actual resource-valid lower bound, not complexity of representation alone |
+
+**Source status discipline:** PR #1230, #1233, #1234 are merged on master; PR #1133, #1105, #1162, #1165, #1217, #1239, #1241, #1248 are separate open Agda branches; #47, #61, #68, #69, #76, #80 remain separate Lean4 branches where confirmed. Do not treat open branch sources as merged imports or imported Agda formal-source rows as local Lean proof terms, or vice versa. Native Agda/Lean exact-head kernel runs were not performed as part of this PR.
+
+### Max-cut phases and deliverables — avoid a new ontology
+
+| Phase | Deliverable | Acceptance / falsification | State |
+|---|---|---|---|
+| **0: genealogy & disambiguation** | 27 spatial vs 27 *trits* vs GF729 vs Monster-C27 chart with exact repo/branch owners | no cardinality-to-action coercion; preserve signed-zero fine fibre, p-adic non-Archimedean distinction | source-audited in roadmap |
+| **1: finite same-operator bridge** | original P3^3 standing-wave basis, `C^{27}` path-graph quantum walk and `P3^3→P3^6→P3^9` average/pullback | exact eigenbasis/unitary, `RI=id`, both Laplacian squares; periodic/path counterexample and twisted-link `4/3` no-go | exact Python reference calculations; Agda kernel not verified |
+| **2: selected SAME physical realization** | link the actual chosen Hamiltonian/state and operator of PR #1217/#80 to the path/periodic/729 representation and observables | source-selected Hamiltonian, amplitudes & Born probabilities, matrix-element action intertwiner; reject if mismatch | unpaid; do not create a replacement generic QFT layer |
+| **3: quantum/spacetime/string branches** | from one selected physical action, attach metric/causal boundary, stress, and where warranted a worldsheet/action; leverage Lean #68/#76 and Agda #1165/#1241 donors | *nonflat* Einstein matter; same-state QFT stress/backreaction; for string, real Weyl/BRST/modular/target-spectrum and controlled low-energy limit | selected finite/flat/conditional models exist; full same-action realization unpaid |
+| **4: productive Clay BIDI** | feed physical operator maps directly into canonical YM & NS theorem owners, arithmetic maps only into RH/BSD/Hodge/P≠NP when relevant | YM cutoff-uniform selected OS/mass gap; NS physical A/B/B4/continuation; RH actual signed estimate etc | open at listed primitive leaves; no wholesale new theorem wrapper chain |
+| **5: scientific discrimination** | chosen held-out observables / limit control / source calibration and comparison to standard effective models | independently replayable source-tied data, alternative-model comparison, physical units and errors | no universal empirical claim |
+
+**Pareto:** mathematical next task is to *formally* certify the currently exact Python `P3^3→P3^6` Laplacian commuting squares and twisted-link counterexample using existing path/hypervoxel owners. The **physical** next task is NOT a new 729-dimensional encoding: test whether the literal selected interacting quantum 369 Hamiltonian and actual Monster grade-two operators admit the required edge/charge/observable intertwiner. In parallel attack canonical YM source physical gap and NS B4/A, not artificial cross-domain analogies. String worldsheet remains a clearly separate, conditional branch.
