@@ -221,3 +221,55 @@ an explicit discretization/operator-preserving
 map from the original hypervoxel to the
 actual WZW momenta, winding and gerbe charts,
 not to postulate its existence.
+
+
+## 2026-10-24 Witten 1989 vs Witten 2007 theorem-owner integration
+
+Do NOT overindex a single word “Witten”. The source-grounded current
+programme owns TWO radically different 3D/2D constructions:
+
+- **Witten 1989** CS/Jones, `SU2_4` 3D topological Chern–Simons
+  with a 5-dimensional chiral torus conformal-block space
+  controlled by the SU2_4 affine WZW S/Verlinde fusion category.
+  The standard chiral 2D WZW current algebra can also be used
+  as the INTERACTING worldsheet factor of our independently
+  selected 26D bosonic string on S3. The full worldsheet is a
+  nonchiral sigma model with left/right and ghosts, NOT the
+  3D CS bulk.
+- **Witten 2007** AdS3 pure/chiral gravity candidate with
+  holomorphic Monster `Vnatural` c24, one chiral VOA
+  irreducible module, partition J. Existing original Agda
+  sibling PR #1239 already implements source J finite coefficients,
+  Virasoro primary subtraction, B3/SL2Z and many literal
+  Monster C27 projectors. This is a still-conjectural
+  GRAVITY bulk dual; Maloney–Witten 2007/2010 supply
+  an explicit caution about unphysical naive saddle sums.
+
+The new source-specific exact script
+`scripts/check_witten_su2_4_cs_wzw_monster_chiral_cut.py`
+checks the real Witten 1989 SU2_4 S matrix in `Q(sqrt3)`,
+all 125 SU2_4 Verlinde fusion coefficients and 625
+associativity equations, quantum dimensions
+`[1,sqrt3,2,sqrt3,1]` (squared dimension12),
+and Gauss–Milgram framing anomaly phase
+`exp(2pi i c/8)=i`.
+Holomorphic c24 Monster has one chiral module and
+trivial phase1: **not directly the same modular
+tensor category** (5 vs1, i vs1). Both can be
+ingredients of a larger specified construction,
+but not identified merely because CS and AdS3
+both have 3D bulks and modular boundary CFTs.
+
+An equivalent exact local script executed PASS; new
+Agda thin consumer of `SU2Level4Spin1RepReceipt`
+and `JCoefficientCharacterBridge` plus Lean fusion
+ring sources are **kernel unverified**.
+Canonical new source and roadmap:
+`docs/hyperfabric-witten-cs-wzw-monster-ads3-source-maxcut-20261024.md`.
+
+Correct physical acceptance remains exact **same WZW**
+SU2_k current modes, k+2 scheme, global S3 H gerbe,
+the worldsheet `O(3,3)` momentum/B patch Hamiltonian,
+and BRST state spectrum for a 26D string; no leap
+from SU2_4 CS conformal blocks to physical
+Monster/AdS3 gravity or the original 27-site cube.
