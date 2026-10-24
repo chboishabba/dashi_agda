@@ -89,9 +89,46 @@ open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Rational.Base using (ℚ; 0ℚ)
+open import Data.Rational.Tactic.RingSolver using (solve)
+import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
+import DASHI.Physics.Closure.NSTriadKNFourierBiotSavartExact as BS
+import DASHI.Physics.Closure.NSTriadKNFourierSelfModeVortexStretchingNoGoRound78Exact as SelfMode
 open import Data.Nat.Base using (_<_; z≤n; s≤s)
 import Data.Integer.Base as Int
 open import Data.Integer.Base using (+_)
+
+------------------------------------------------------------------------
+-- ACTUAL REUSE OF EXISTING PHYSICAL CROSS-PRODUCT CARRIER.
+--
+-- Classical Beltrami property curl u = λ u gives pointwise Lamb
+-- vector ω×u=0. Exact polynomial content is transported here through
+-- existing RationalLeray Vector3 and FourierBiotSavart cross (the same
+-- owner used in the Round78 self-stretching no-go).
+-- This is the algebraic core of the real smooth heat-shear witness.
+-- The trigonometric function/evolution and L² integral are verified
+-- separately in tests; no fictitious Agda time-evolution kernel proof
+-- or global Navier--Stokes regularity theorem is claimed.
+------------------------------------------------------------------------
+
+beltramiLambVectorZero :
+  (lambda : ℚ) (velocity : V.Vector3) →
+  BS.cross (V.scale lambda velocity) velocity
+    ≡ V.v3 0ℚ 0ℚ 0ℚ
+beltramiLambVectorZero lambda (V.v3 ux uy uz) =
+  V.vectorExt
+    (solve (lambda ∷ ux ∷ uy ∷ uz ∷ []))
+    (solve (lambda ∷ ux ∷ uy ∷ uz ∷ []))
+    (solve (lambda ∷ ux ∷ uy ∷ uz ∷ []))
+
+-- Do not promote any T3-based coercivity from this identity: on
+-- Beltrami velocity fields ω×u=0 and its curl vanishes, while
+-- directional curvature, enstrophy, and helicity may be nonzero.
+-- The particular oscillatory heat-shear family has |grad ξ|=n
+-- at all spatial points even though proposed T3≡0.
+-- This does not falsify separate T3-dependent alignment estimates
+-- whose LEFT side also vanishes on the given field.
 
 data ManuscriptVersion : Set where
   ssrnApril11 : ManuscriptVersion
