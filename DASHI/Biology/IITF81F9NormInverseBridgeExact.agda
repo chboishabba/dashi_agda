@@ -99,7 +99,7 @@ projectiveExponent8HasFrobeniusInverse laws a =
 ------------------------------------------------------------------------
 
 record SourceProjectiveNormOneWeld
-    (laws : PuncturedF81PowerLaws) : Set where
+    (laws : PuncturedF81PowerLaws) : Set₁ where
   field
     originalPunctured80Chart :
       Projective.Projective80Trivialisation
