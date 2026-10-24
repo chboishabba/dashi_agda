@@ -58,6 +58,41 @@ chaeChoe1999 = Attribution.mkNoDOISource
   "Historical two-component vorticity regularity predecessor cited by Miller; not independently re-proved here"
   Attribution.publicAttribution
 
+constantinFefferman1993 : Attribution.AttributedSource
+constantinFefferman1993 = Attribution.mkDOISource
+  "Peter Constantin; Charles Fefferman"
+  "Direction of Vorticity and the Problem of Global Regularity for the Navier-Stokes Equations"
+  "Indiana University Mathematics Journal 42(3), 775-789 (1993)"
+  "1993"
+  "10.1512/iumj.1993.42.42034"
+  "https://doi.org/10.1512/iumj.1993.42.42034"
+  Attribution.academicArticleSource
+  "Geometric direction-of-vorticity precursor; original theorem distinct from Miller's locally varying plane criterion"
+  Attribution.publicAttribution
+
+beiraoBerselli2002 : Attribution.AttributedSource
+beiraoBerselli2002 = Attribution.mkDOISource
+  "Hugo Beirao da Veiga; Luigi C. Berselli"
+  "On the regularizing effect of the vorticity direction in incompressible viscous flows"
+  "Differential and Integral Equations 15(3), 345-356 (2002)"
+  "2002"
+  "10.57262/die/1356060864"
+  "https://doi.org/10.57262/die/1356060864"
+  Attribution.academicArticleSource
+  "Vorticity-direction Sobolev criterion that Miller compares; not Miller's theorem and not a DASHI proof"
+  Attribution.publicAttribution
+
+wangGalerkin2026 : Attribution.AttributedSource
+wangGalerkin2026 = Attribution.mkNoDOISource
+  "Weinan Wang"
+  "Formalization of the Galerkin Construction for the Two-Dimensional Navier-Stokes Equations in Lean"
+  "arXiv:2609.33033, submitted 2026-09-27"
+  "2026"
+  "https://arxiv.org/abs/2609.33033"
+  Attribution.academicArticleSource
+  "Independent 2D Lean formalisation reference; source of potential general Hilbert-space transport tools, NOT a solution to 3D A3 or proof imported into this repository"
+  Attribution.publicAttribution
+
 openaiForced2026 : Attribution.AttributedSource
 openaiForced2026 = Attribution.mkNoDOISource
   "OpenAI"
@@ -77,6 +112,9 @@ threePaperAtlas = Attribution.mkSourceAtlas
     ∷ yanRadulescu2021
     ∷ rodgers2026
     ∷ chaeChoe1999
+    ∷ constantinFefferman1993
+    ∷ beiraoBerselli2002
+    ∷ wangGalerkin2026
     ∷ openaiForced2026
     ∷ [])
   "Each row is a source role with distinct assumptions and original authorship. Reprints, bibliography edges and typed reconstruction are not independent corroboration, kernel proofs, or physical admission."
