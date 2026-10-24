@@ -15,8 +15,11 @@ import unittest
 REQUIRED = ('technology', 'study_uri', 'source_kind', 'test_object',
             'test_protocol', 'mode', 'load_kw', 'hot_c', 'cold_c',
             'electric_kw', 'auxiliary_kw', 'calibration_ref', 'service_id')
+THERMAL_DRIVE_FIELDS = ('drive_kind', 'thermal_drive_kw',
+                        'thermal_drive_source_c', 'thermal_drive_calibration_ref')
 KINDS = {'independent_measurement', 'author_experiment', 'simulation',
          'vendor_claim', 'literature_secondary'}
+DRIVES = {'electrical', 'heat_driven', 'hybrid'}
 
 
 @dataclass(frozen=True)
@@ -34,10 +37,22 @@ class Point:
     auxiliary_kw: float
     calibration_ref: str
     service_id: str
+    drive_kind: str = 'electrical'
+    thermal_drive_kw: float = 0.0
+    thermal_drive_source_c: float = float('nan')
+    thermal_drive_calibration_ref: str = ''
 
     @property
     def plug_cop(self):
+        if self.drive_kind != 'electrical':
+            return None
         return self.load_kw / (self.electric_kw + self.auxiliary_kw)
+
+    @property
+    def thermal_cop(self):
+        if self.drive_kind == 'electrical':
+            return None
+        return self.load_kw / self.thermal_drive_kw
 
     def validate(self):
         text_fields = (self.technology, self.study_uri, self.test_object,
@@ -52,22 +67,41 @@ class Point:
             raise ValueError('non-finite measurement')
         if (self.load_kw <= 0 or self.electric_kw < 0 or
                 self.auxiliary_kw < 0 or
-                self.electric_kw + self.auxiliary_kw <= 0 or
                 self.hot_c <= self.cold_c or self.cold_c <= -273.15):
             raise ValueError('non-physical declared service point')
+        if self.drive_kind not in DRIVES:
+            raise ValueError('unknown driving-energy category')
+        if self.drive_kind == 'electrical':
+            if self.electric_kw + self.auxiliary_kw <= 0 or self.thermal_drive_kw != 0:
+                raise ValueError('missing electric input or hidden thermal drive')
+        else:
+            if (not math.isfinite(self.thermal_drive_kw) or
+                    self.thermal_drive_kw <= 0 or
+                    not math.isfinite(self.thermal_drive_source_c) or
+                    self.thermal_drive_source_c <= -273.15 or
+                    not self.thermal_drive_calibration_ref.strip()):
+                raise ValueError('thermal-drive heat, source temperature and meter reference required')
+            if self.drive_kind == 'heat_driven' and self.electric_kw != 0:
+                raise ValueError('heat-driven actuation cannot hide electrical actuator input')
+            if self.drive_kind == 'hybrid' and self.electric_kw <= 0:
+                raise ValueError('hybrid must disclose electrical actuator input')
 
 
 def read_points(path):
     with open(path, encoding='utf-8', newline='') as stream:
         reader = csv.DictReader(stream)
-        if not set(REQUIRED).issubset(reader.fieldnames or []):
-            raise ValueError('missing columns')
+        if not set(REQUIRED + THERMAL_DRIVE_FIELDS).issubset(reader.fieldnames or []):
+            raise ValueError('missing columns: driving-energy class and thermal source required')
         points = []
         for row in reader:
             row = dict(row)
-            for key in ('load_kw', 'hot_c', 'cold_c', 'electric_kw', 'auxiliary_kw'):
+            for key in ('load_kw', 'hot_c', 'cold_c', 'electric_kw',
+                        'auxiliary_kw', 'thermal_drive_kw'):
                 row[key] = float(row[key])
-            point = Point(**{key: row[key] for key in REQUIRED})
+            row['thermal_drive_source_c'] = (
+                float(row['thermal_drive_source_c'])
+                if row['thermal_drive_source_c'].strip() else float('nan'))
+            point = Point(**{key: row[key] for key in REQUIRED + THERMAL_DRIVE_FIELDS})
             point.validate()
             points.append(point)
     if not points:
@@ -89,15 +123,26 @@ def compare(points):
             abs(p.load_kw - first.load_kw) > 1e-9 or
             p.test_protocol != first.test_protocol):
             raise ValueError('unmatched service / load / test protocol')
+    has_nonelectric_drive = any(p.drive_kind != 'electrical' for p in points)
     return {'service_id': first.service_id,
             'not_a_meta_analysis': True,
+            'rank_by_electric_cop_prohibited': has_nonelectric_drive,
+            'different_source_grades_must_not_be_ranked_as_replications':
+                len({p.source_kind for p in points}) > 1,
             'unpaid': ['instrument certificate validation',
                        'load uncertainty and seasonal part-load performance',
                        'material lifetime, water, embodied inputs and noise spectrum',
-                       'same-protocol independent testing and cost normalization'],
+                       'same-protocol independent testing and cost normalization',
+                       'thermal-drive source heat/exergy and auxiliary cooling rejection',
+                       'same temperature points do not establish equal cycle physics'],
             'observations': [dict(technology=p.technology, uri=p.study_uri,
                                   kind=p.source_kind, test_object=p.test_object,
-                                  declared_plug_cop=round(p.plug_cop, 6),
+                                  drive_kind=p.drive_kind,
+                                  declared_electric_plug_cop=(
+                                      round(p.plug_cop, 6) if p.plug_cop is not None else None),
+                                  declared_thermal_cop=(
+                                      round(p.thermal_cop, 6) if p.thermal_cop is not None else None),
+                                  total_service_energy_rank_allowed=False,
                                   declared_experimental_source=(
                                       p.source_kind in {'independent_measurement',
                                                         'author_experiment'}))
@@ -115,7 +160,7 @@ class Checks(unittest.TestCase):
                   'simulation', 'model-B', 'protocol-01', 'cooling',
                   10, 35, 5, 3, 2, 'MODEL-CAL', 'S-01')
         d = compare([self.a, b])
-        self.assertEqual([x['declared_plug_cop'] for x in d['observations']], [2, 2])
+        self.assertEqual([x['declared_electric_plug_cop'] for x in d['observations']], [2, 2])
         self.assertFalse(d['observations'][1]['declared_experimental_source'])
 
     def test_reject_unmatched_temperature(self):
@@ -132,6 +177,35 @@ class Checks(unittest.TestCase):
         b = Point(**{**vars(self.a), 'electric_kw': 0, 'auxiliary_kw': 0})
         with self.assertRaises(ValueError):
             compare([b])
+
+    def test_heat_driven_does_not_get_electric_cop(self):
+        b = Point(**{**vars(self.a), 'technology': 'thermal-absorption',
+                     'drive_kind': 'heat_driven', 'thermal_drive_kw': 20.0,
+                     'thermal_drive_source_c': 80.0,
+                     'thermal_drive_calibration_ref': 'HEAT-METER-01',
+                     'electric_kw': 0.0, 'auxiliary_kw': 0.3})
+        d = compare([self.a,b])
+        self.assertTrue(d['rank_by_electric_cop_prohibited'])
+        self.assertIsNone(d['observations'][1]['declared_electric_plug_cop'])
+        self.assertAlmostEqual(d['observations'][1]['declared_thermal_cop'], 0.5)
+
+    def test_reject_unmetered_thermal_source(self):
+        b = Point(**{**vars(self.a), 'drive_kind': 'heat_driven',
+                     'thermal_drive_kw': 20.0, 'electric_kw': 0.0,
+                     'thermal_drive_source_c': 80.0,
+                     'thermal_drive_calibration_ref': ''})
+        with self.assertRaises(ValueError):
+            compare([b])
+
+    def test_hybrid_keeps_energy_drives_separate(self):
+        b = Point(**{**vars(self.a), 'drive_kind': 'hybrid',
+                     'thermal_drive_kw': 20.0,
+                     'thermal_drive_source_c': 80.0,
+                     'thermal_drive_calibration_ref': 'HEAT-METER-02'})
+        result = compare([b])
+        self.assertTrue(result['rank_by_electric_cop_prohibited'])
+        self.assertIsNone(result['observations'][0]['declared_electric_plug_cop'])
+        self.assertEqual(result['observations'][0]['declared_thermal_cop'], 0.5)
 
     def test_reject_unmatched_protocol(self):
         b = Point(**{**vars(self.a), 'test_protocol': 'different'})
