@@ -80,7 +80,7 @@ class ReducerTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td)
             stream=root/'instrument.csv'
-            stream.write_text("\\n".join(rows())+"\\n",encoding='utf-8')
+            stream.write_text("\n".join(rows())+"\n",encoding='utf-8')
             cal=calibration()
             cal.update({'apparatus_id':'fixture-A','configuration_revision':'revA',
                         'instrument_serial':'S-1','calibration_revision':'C-1',
