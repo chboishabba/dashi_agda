@@ -1,3 +1,29 @@
+> **Current 24 October A/B max-cut.** The original cutoff-uniform
+> full-output-fibre B4 payment is falsified against the *original*
+> R219/R469 selected-pair ED, not just an abstract payment interface.
+> The correct physical output-rate and cross-gradient identities are
+> ALREADY sourced in `NSTriadKNFixedOutputPhysicalOutputRateNormalFormExact`,
+> R681, R684, R685 and R690. They preserve literal triad-rate work
+> under zero-amplitude padding; the outstanding step is a **quantitative
+> signed global cross-gradient estimate** and compensated recombination
+> into the original R236 B4 critical production. A direct equality
+> between R681's output-relative work and the obsolete B4 defect is
+> demonstrably false on the same globally smooth shear.
+>
+> For A, the true finite-energy continuum nonlinear source has a
+> physical Fourier transform and a quantitative strong-H1 stability
+> bound for its stationary Stokes response:
+> `||Vhat(u)-Vhat(v)||²_L2xi <=(8*pi/nu²)*A(u,v)*B(u,v)`
+> with `A=(||u||2+||v||2)||u-v||2` and
+> `B=||u-v||2||grad u||2+||v||2||grad(u-v)||2`.
+> This supports extension from Schwartz to all divergence-free H1
+> physical states. It has not yet been inhabited as a checked Bishop
+> Fourier theorem, nor does it discharge the signed centered A2
+> double-resolvent or global A3 regularity.
+>
+> Authoritative concise handoff: first screen of
+> `Docs/roadmaps/NSProofControl20260915.md`. Do not restart
+> historical RNNN machinery. No Clay theorem promotion.
 > **A physical Fourier majorant strengthened further (24 October).**
 > For divergence-free u∈H¹(R³), E=||u||²₂ and D=||grad u||²₂,
 > the same physical projected nonlinear Fourier source satisfies
