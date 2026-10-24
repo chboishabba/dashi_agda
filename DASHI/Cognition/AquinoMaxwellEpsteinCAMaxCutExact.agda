@@ -1678,3 +1678,25 @@ house2026DoesNotPayBannonProgrammeBridge = refl
 house2026DoesNotPayCaseWideCommand :
   BlackApollo.caseWideCovertCommandEstablished black2026OriginalCongressionalCase ≡ false
 house2026DoesNotPayCaseWideCommand = refl
+
+------------------------------------------------------------------------
+-- 2026 LEGAL-CASE IDENTITY: the SDNY October voluntary Doe dismissal is
+-- NOT the DDC September challenge to House Oversight subpoenas.
+------------------------------------------------------------------------
+
+blackCivilCaseIdentityReceipt :
+  BlackApollo.Black2026DistinctCourtCaseBoundary
+blackCivilCaseIdentityReceipt =
+  BlackApollo.canonicalBlack2026DistinctCourtCaseBoundary
+
+blackDoeOrderNotHouseCaseDisposition :
+  BlackApollo.sdnyOrderAdjudicatesHouseSubpoenaCase blackCivilCaseIdentityReceipt ≡ false
+blackDoeOrderNotHouseCaseDisposition = refl
+
+blackDoeDismissalNotMeritsTrialFinding :
+  BlackApollo.sdnyDismissalIsTrialFactFinding blackCivilCaseIdentityReceipt ≡ false
+blackDoeDismissalNotMeritsTrialFinding = refl
+
+ddcHouseSubpoenaJudgmentNotYetVerified :
+  BlackApollo.ddcFinalDispositionIndependentlyVerified blackCivilCaseIdentityReceipt ≡ false
+ddcHouseSubpoenaJudgmentNotYetVerified = refl
