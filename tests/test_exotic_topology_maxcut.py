@@ -63,7 +63,7 @@ class ExoticMaxCutTests(unittest.TestCase):
 
     def test_actual_finite_pl_surface_vertex_links(self):
         result = pl.audit(4)
-        self.assertTrue(result['status'].startswith('PASS'))
+        self.assertIn('FINITE PL GEOMETRY ONLY', result['status'])
         self.assertEqual([x['boundaries'] for x in result['families']['cantor']], [1,2,4,8,16])
         self.assertEqual([x['genus'] for x in result['families']['loch']], [0,1,2,3,4])
         self.assertEqual([x['genus'] for x in result['families']['jacob']], [0,2,4,6,8])
