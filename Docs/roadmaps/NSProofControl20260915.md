@@ -1,3 +1,83 @@
+# 2026-10-25 CURRENT MAX-CUT — A1 CONSTRUCTIVE SHELL RATE / B R735 FIXED-TIME NO-GO
+
+**Continue original A/B, reuse actual proof owners.** This supersedes any
+older roadmap wording claiming the A1 generic rational heat-rate
+*equality* or R735 W1 *energy-only* payment follows from prior algebra.
+Original attribution: Murray/Bishop rational density; Navier/Stokes,
+Leray heat-energy, helical spectral decomposition, M. Riesz periodic
+operator bounds. The finite test witnesses and integrations are
+independent DASHI work. A mathematical derivation, symbolic fixture,
+source-written Agda term and kernel-verified proof are distinct.
+
+**A1 genuine SOURCE-WRITTEN code in original
+`NSClayFacingAPhysicalSameObjectCutExact.agda`:**
+`physicalViscousHeatAdmitsPositiveRationalFloor` and
+`physicalShellHeatAdmitsPositiveRationalFloor` use the pinned
+`RealProperties.fast-density-of-ℚ` to construct embedded rational
+strict positive lower floors for respectively
+the actual `Heat.viscousHeatRate fluid xi` and the single SHELL
+rate `Heat.viscosity fluid * radiusSquared`.
+The latter q is INDEPENDENT of xi on a fixed high-frequency shell
+|xi|²≥radiusSquared>0. In particular this works for irrational
+positive viscosity: the old
+`PhysicalHighFrequencyEnvelopeData.physicalOutputHeatRateMeaning`
+cannot be inhabited for generic real ξ/ν since it insists that an
+embedded rational equal ν|xi|². The correct next theorem is a
+**real** monotone inverse/curvature bound from the shell-wide rational
+floor, then a new same-object producer/attachment; DO NOT substitute
+an arbitrary rational a in the old source record. Bishop positive
+reciprocal and ratio donors ALREADY EXIST in
+`BishopPositiveCrossReciprocalUpperExact`,
+`BishopStrictRatioInterpolationExact`. Low-frequency signed A2
+and A3 noncircular continuation are still open.
+`tests/test_ns_a_bishop_real_rational_heat_floor.py` provides
+4 exact local SymPy checks at ν=sqrt(2), actual a=sqrt(2),
+and q=7/5, including cubic reciprocal dominance and a uniform
+frequency-shell sample. Agda kernel **not run**.
+
+**B R735 W1 FINITE-TIME physical negative control:**
+`tests/test_ns_r735_w1_energy_only_heat_shear_no_go.py`
+(4 exact locally passing Fraction-based tests) constructs true
+smooth unforced heat solutions
+`u_N(0)=2/sqrt(2N) * sum_{j=1}^N cos(jx) e_z`.
+For every N, E0=1 and ∫_0∞ D(t)dt=1/2. In the literal same-N
+H+×H- mixed-output definition, initially
+`E_M,N(0)=((N-1)(2N-1))/(48N)`.
+At the FIXED physical time T=log(2),
+`E_M,N(T)≤2/(3N²)` by Fourier heat decay + Young.
+Since the true nonlinear commutator is identically ZERO,
+the *existing* R691 identity yields
+`W_N(T)+E_M,N(T)=E_M,N(0)`, so
+`W_N(log(2))≥((N-1)(2N-1))/(48N)-2/(3N²)`,
+unbounded across the family. Therefore any R735 W1 payment
+with finite bound depending ONLY on E0, integrated enstrophy and T
+and uniform across arbitrary smooth initial data is FALSE.
+Important quantifiers: each fixed datum u_N has a perfectly finite
+cutoff uniform bound depending on its H^(3/4) norm, so the
+H^(3/4) R699 theorem and local/global *data-dependent* W1 are
+NOT refuted. This is not Clay B blowup and cannot refute a
+state-sensitive signed W1/W2 compensation theorem.
+
+**B positive work remaining:** R699 initial mass has a standard
+`H^(3/4)` data-dependent cutoff-independent ANALYTICAL estimate,
+but physical normalized-real helical multiplier/Young/Plancherel
+Agda attachment is NOT kernel inhabited. R735 general W1 still
+requires a genuine globally signed nonlinear commutator bound
+not reducible to E0. R735 W2 needs positive-margin augmented
+critical weighted estimate with exact R406 same-object physics.
+R823 reserve and R236 padding-dependent B4 shortcuts remain
+excluded by existing physical counterexamples. No number of
+conditional compilers replaces these estimates.
+
+**Tests/verification:** 8 new exact local checks pass (4 physical W1
+heat-shear, 4 rational/Bishop numerical-floor) with independent
+scripts; committed test files match the modeled formulas, but
+no exact-branch pytest run or Agda/Lean kernel check occurred.
+No universal A/B regularity theorem proved. Preserve priority
+on genuine W1/W2 analytics and continuum A1/A2/A3.
+
+---
+
 # 2026-10-25 IMPORTANT R699 SHARPENING — H^(3/4), NOT H^s>3/2, IS SUFFICIENT
 
 The s>3/2 ell1/ell2 theorem in the previous current-turn
