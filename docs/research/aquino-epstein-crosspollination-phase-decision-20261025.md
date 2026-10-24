@@ -1,5 +1,8 @@
 # Aquino / Maxwell / Epstein / Cambridge Analytica — cross-pollination and phase decision
 
+> **CURRENT DISPOSITION — RESEARCH FREEZE (25 Oct 2026):** [canonical acceptance/debt ledger](aquino-epstein-canonical-disposition-20261025.md) supersedes historical round priorities in this document. The original-source details below remain a provenance archive; do **not** reopen aggregate GSR/Kogan-to-AIQ research or promote whole-network coordination without a new original same-object discriminator. Next gate: typecheck/test and bounded corrections, not another broad snowball.
+
+
 **As-of:** 2026-10-25, Brisbane; continuation of draft #1245 stacked upon #1131. **Objective:** maximise new explanatory reach per original-source object, reuse existing Agda owners, and separate official findings, witness claims, software observations, allegations and explicit absences of verified joins. This is a source-state analysis, **not** a discovery of a case-wide covert operation.
 
 ## A. Most productive realised cross-pollination — the SCL two-arm bottleneck
