@@ -338,10 +338,10 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
 
-    assert len(rows) == 38
+    assert len(rows) == 45
     assert len({row["edge_id"] for row in rows}) == len(rows)
     assert Counter(row["case_id"] for row in rows) == {
-        "BOM2026": 15, "REEF2021": 10, "GAS2026": 13
+        "BOM2026": 21, "REEF2021": 10, "GAS2026": 14
     }
     fields = (
         "edge_id", "case_id", "upstream", "downstream", "relation",
@@ -395,7 +395,7 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
 def test_claim_root_ledger_documentation_uses_only_case_bounded_counts():
     docs = RESEARCH.read_text()
     assert "australian_climate_claim_origin_edges_20261025.csv" in docs
-    assert "38 bounded relationship rows" in docs
+    assert "45 bounded relationship rows" in docs
     assert "NOT a representative crawl" in docs
     assert "originator" in docs.lower()
     assert "actual transfer not established" in docs.lower()
@@ -484,7 +484,7 @@ def test_international_republication_is_not_fresh_climate_evidence():
 def test_canonical_origin_keys_do_not_miscount_common_republication():
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
-    assert len(rows) == 38
+    assert len(rows) == 45
     assert all(row["root_key"] and row["root_resolution"] for row in rows)
     by_id = {row["edge_id"]: row for row in rows}
     assert by_id["G05"]["root_key"] == by_id["G06"]["root_key"] == "G_CREIGHTON_OPINION"
@@ -494,11 +494,11 @@ def test_canonical_origin_keys_do_not_miscount_common_republication():
     assert by_id["G09"]["root_key"] == "MULTI"
     assert by_id["G10"]["root_key"] == "MULTI"
     assert by_id["G13"]["root_key"] == "MULTI"
-    # The 20 root labels are manually assigned within this purposive case
+    # The 24 root labels are manually assigned within this purposive case
     # graph, not a statistic of Australian media or distinct truth sources.
     labeled = {r["root_key"] for r in rows if r["root_key"] != "MULTI"}
-    assert len(labeled) == 20
-    assert sum(r["root_key"] == "MULTI" for r in rows) == 6
+    assert len(labeled) == 24
+    assert sum(r["root_key"] == "MULTI" for r in rows) == 9
 
 
 def test_senex_hancock_ipa_information_path_has_explicit_public_countercase():
@@ -526,7 +526,7 @@ def test_senex_hancock_ipa_information_path_has_explicit_public_countercase():
     assert "No new Agda ontology" in doc
     assert "Stephen Johnson" in doc and "Adam Creighton" in doc
     assert "230+ submissions" in doc
-    assert "20 distinct single-root keys" in doc
+    assert "24 distinct single-root keys" in doc
 
 
 def test_one_nation_gas_policy_is_not_dated_before_public_inquiry():
@@ -555,3 +555,62 @@ def test_two_independent_political_frames_inside_single_sky_interview():
         assert name in validation
     assert "unspecified Western Australian gas project" in documentation
     assert "20 labelled single-source keys" in documentation
+
+
+def test_browse_epbc_primary_request_cannot_promote_expert_claim_to_decision():
+    media = POLITICAL_OWNER.read_text()
+    validation = POLITICAL_VALIDATION.read_text()
+    docs = RESEARCH.read_text()
+    for named in (
+        "browseACFOriginalS78AApplication",
+        "browse2026ValidityDecisionOnly",
+        "browseCitedAbramScienceMethod",
+        "perkinsKirkpatrickBrowseExpertModel",
+        "riddSpecificBrowseReferentInference",
+        "fordhamOriginalFourMinutePodcastCarrier",
+    ):
+        assert media.count(named + " : RelationshipReceipt") == 1
+    for proof in (
+        "browseRequestIsNotCourtJudgment",
+        "validityOnlyNotFinalDecision",
+        "abramMethodPrecedesSpecificBrowseEstimate",
+        "specificExpertModelNotMeasurement",
+        "unnamedRiddGasReferentIsInferred",
+        "fourMinuteAudioLocatorNotTranscript",
+        "epbcProceduralStatusDoesNotProveMerits",
+        "fourMinutePodcastLocatorDoesNotProveWords",
+        "similarNumDoesNotProveSourceConsulted",
+    ):
+        assert proof in validation
+    assert "2018/8319" in media and docs
+    assert "29.35" in media and docs
+    assert "10.1038/s44168-025-00296-5" in media and docs
+    assert "not a substantive merits decision" in docs.lower()
+    assert "ANNEXURE" not in media.upper() or "Annexure" in media
+
+
+def test_fordham_publication_time_and_browse_original_root_split():
+    import datetime
+    from zoneinfo import ZoneInfo
+
+    with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
+        items = {row["edge_id"]: row for row in csv.DictReader(stream)}
+    assert len(items) == 45
+    assert items["B16"]["root_key"] == "MULTI"
+    assert items["B21"]["root_key"] == "MULTI"
+    assert items["G14"]["root_key"] == "MULTI"
+    assert items["B17"]["root_key"] == "B_ACF_BROWSE_REQUEST"
+    assert items["B18"]["root_key"] == "B_ABRAM_2025_METHOD"
+    assert items["B19"]["root_key"] == "B_PERKINS_BROWSE_EXPERT"
+    assert items["B20"]["root_key"] == "B_FORDHAM_AUDIO"
+    assert items["B20"]["root_resolution"] == "native_publication_identity_no_spoken_quote"
+
+    utc = datetime.datetime(2026, 10, 18, 21, 55, tzinfo=datetime.timezone.utc)
+    brisbane = utc.astimezone(ZoneInfo("Australia/Brisbane"))
+    assert (brisbane.year, brisbane.month, brisbane.day, brisbane.hour, brisbane.minute) == (2026, 10, 19, 7, 55)
+
+    docs = RESEARCH.read_text()
+    assert "38 selected edges" in docs  # preserved historical audit prior to this acquisition
+    assert "45 curated edges" in docs  # updated current state
+    assert "not a court lawsuit" in docs
+    assert "not an adjudicated fact" in docs
