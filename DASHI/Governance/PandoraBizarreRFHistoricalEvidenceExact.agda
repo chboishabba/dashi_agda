@@ -269,6 +269,7 @@ data ProgrammeObject : Set where
   wrairFacilityAssetsDisposition : ProgrammeObject
   wrairPlannedExpandedFacility1969 : ProgrammeObject
   darpa1977DisavowalStatement : ProgrammeObject
+  pandoraMcIlwainExperimentalReassessment : ProgrammeObject
 
 data ProgrammeTopic : Set where bioelectronicsAndEffects : ProgrammeTopic
 
@@ -306,6 +307,8 @@ data LinkKind : Set where
   historicalEquipmentDispositionTransfer : LinkKind
   expansionFacilityUnderConstructionReport : LinkKind
   disputedRetrospectiveCharacterisation : LinkKind
+  contemporaryExperimentalReassessment : LinkKind
+  originalExperimentalEnvironmentalConfound : LinkKind
 
 record BoundedLineageEdge : Set where
   constructor boundedLineageEdge
@@ -318,6 +321,32 @@ record BoundedLineageEdge : Set where
     withheldClaim : String
 
 open BoundedLineageEdge public
+
+pandoraKoslovObservedOriginalRecords : BoundedLineageEdge
+pandoraKoslovObservedOriginalRecords = boundedLineageEdge
+  originalPrimateHighDoseExperiment pandoraMcIlwainExperimentalReassessment
+  contemporaryExperimentalReassessment koslovRand
+  "Koslov's 4 Nov 1969 letter identifies Major James T McIlwain as presenter of original PANDORA animal records, including four operantly conditioned animals, seven special-signal exposures, two square, one triangular and one continuous-wave control; these counts are Koslov's recollection, not newly recovered per-animal source data"
+  "Koslov considered behavioural changes nonspecific and EEG results possibly artifacts; his 8-hour review is NOT original raw participant-by-trial experiment receipts or independent replication"
+
+pandoraBigBoyNoiseAsRecordedConfound : BoundedLineageEdge
+pandoraBigBoyNoiseAsRecordedConfound = boundedLineageEdge
+  navyBigBoy arpaPandora originalExperimentalEnvironmentalConfound pandoraApril1969
+  "April 21 1969 detailed meeting minutes explicitly report high ship noise, PA interruptions in the quiet testing room and unstable line voltage during Saratoga human observational assessments"
+  "Environmental acoustic noise as a confound does NOT prove a sound-and-RF biological interaction or establish any RF-related medical outcome"
+
+data ExperimentOrInstrumentRecord : Set where
+  originalRawAnimalTrialTrace : ExperimentOrInstrumentRecord
+  reviewerSummaryOfAnimalTraces : ExperimentOrInstrumentRecord
+  custodialEquipmentInventory : ExperimentOrInstrumentRecord
+
+reviewIsNotRawParticipantData :
+  reviewerSummaryOfAnimalTraces ≡ originalRawAnimalTrialTrace → ⊥
+reviewIsNotRawParticipantData ()
+
+assetInventoryIsNotExperimentTrace :
+  custodialEquipmentInventory ≡ originalRawAnimalTrialTrace → ⊥
+assetInventoryIsNotExperimentTrace ()
 
 pandoraRecordsOriginalResearcherCustody : BoundedLineageEdge
 pandoraRecordsOriginalResearcherCustody = boundedLineageEdge
