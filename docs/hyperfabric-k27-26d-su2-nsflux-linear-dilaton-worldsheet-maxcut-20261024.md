@@ -156,3 +156,68 @@ This is NOT evidence against the conformal WZW background: it demonstrates that 
 **E5 OPEN hyperfabric operators and oriented fibre:** a 27-site ternary cube is not the SU2 group manifold or affine module. Also `SO(24)` little-group 299+276+1 is the **FLAT vacuum/tangent-space** decomposition, not a global `SO(24)` symmetry of the curved SU2-flux and preferred-gradient solution; this background BREAKS much of the flat Lorentz symmetry. M24-duad 2A/2B mismatch is a mathematical representation result on chosen natural M24 action, not an observed M24 symmetry of this curved target. Any 369 representation map must explicitly respect these distinctions.
 
 **E6 OPEN full spectrum/viability:** global worldsheet completion, physical BRST, modular invariant closed-string sector and noncompact coupling. `g_s=e^Phi` diverges at one end of the spacelike linear dilaton, and standard bosonic-string tachyon is not removed; this background is not a stable realistic observed vacuum. No YM/NS/RH/BSD/Hodge/P≠NP theorem is gained without the original analytic source estimates.
+
+
+### Latest E1→E3 concrete WORLD-SHEET HAMILTONIAN same-object bridge
+
+Source: Schulz (2012), https://arxiv.org/html/1106.6291v4 ,
+§1, §3, Appendix B. The original physical phase-space
+model is not a generic 27/729 symbolic analogue:
+`(v,p)∈TM⊕T*M`, with local worldsheet quadratic
+Hamiltonian
+`E_B(v,p)=vᵀg v+(p+Bv)ᵀg^{-1}(p+Bv)`.
+On the ACTUAL round S3 gerbe charts already constructed,
+`ΔB=B_N−B_S=pi r² ω2`. Under the
+same-source patch change
+`(v,p_S)→(v,p_N)`,
+`p_N=p_S−ΔB v` for this convention,
+the full quadratic form agrees exactly:
+`E_(B_N)(v,p_N)=E_(B_S)(v,p_S)`.
+The antisymmetry of ΔB also preserves the
+natural `O(3,3)` pairing on `T⊕T*`.
+
+**New exact executed test**:
+`scripts/check_k27_wzw_gerbe_od3_hamiltonian.py`
+calculates the ENTIRE symbolic 6×6 `O(3,3)` B-shift
+`T^T eta T=eta`, the conjugate
+generalized metric
+`T^T M(g,B_N) T=M(g,B_S)`,
+and 27 exact equatorial (three radius × three
+winding × three momentum) phase-space examples.
+Independent local symbolic script PASS.
+This is a real physical model patch law, although
+the standard B-transform theory is external
+prior mathematics. The published source's
+worldsheet action/Hamiltonian remains distinct
+from DashI finite 27-site graph Laplacian
+and the Monster VOA operator.
+
+**Crucial global boundary**:
+because `∫overlap_S2 ΔB=4pi²r²≠0`,
+ΔB is not globally exact on the whole overlap;
+the patch relationship is locally canonical,
+but global consistency requires the higher
+U(1) gerbe rather than one global shift by
+a globally defined 1-form.
+This is a genuine geometric/descent cut for
+the user's hyperfabric formalism.
+`O(3,3)` B-transform, `Z2` oriented
+duad sign, `C3` signed-zero phase,
+and the later proposed `O(26,26)`/K27
+target representation are separate.
+No physical 369→WZW equivalence follows.
+
+**Repository follow-through**:
+Lean #84
+`Integration/DASHITOE/K27GerbeWZWC3OrientationCut.lean`
+now contains direct ring-identity **SOURCE-WRITTEN**
+local Hamiltonian and O(2,2) pairing invariance
+in the B-supported angular tangent plane.
+No Agda/Lake exact-head kernel receipt.
+The exact GitHub Python blob was not executed
+byte-for-byte; equivalent local SymPy run PASS.
+The next honest physical cut is to *select*
+an explicit discretization/operator-preserving
+map from the original hypervoxel to the
+actual WZW momenta, winding and gerbe charts,
+not to postulate its existence.
