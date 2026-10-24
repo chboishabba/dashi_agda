@@ -98,3 +98,203 @@ Non-injurious/consensual only: no proposal to test an alleged assassination abil
 **Next optimal cut:** (a) use source tracing to recover witness/manuscript/denominator, in parallel with (b) instrument-specific *real* brain/heart magnetic source/source-current verification and preregistered benign controls. No larger formal carrier or new particle ontology until a discriminating measurement chooses it.
 
 **Verification scope:** source-written Agda and local Python exact arithmetic only. No CI/Agda kernel, new physical dataset, nonlocal result, human study or attribution-to-military group independently validated.
+
+
+---
+
+## 2026-10-24 source/current/target identifiability and operational max-cut (continuation)
+
+**New committed work.** \`DASHI/Cognition/HardtDeltaSourceTargetBoundaryExact.agda\` and
+\`scripts/check_hardt_delta_source_target_maxcut.py\`. The latter was written
+against a locally executed equivalent standard-library reference. **The
+committed GitHub blob and exact-head Agda were not executed/typechecked in this
+connector session.** Mathematical arithmetic is synthetic, not an observation
+of Hardt, a targeted person or an extraordinary effect. No CI or experiment.
+
+### Source identity: scalp delta voltage does not determine emitter physics
+
+The current 2026 review *Inferring neural sources from electroencephalography:
+foundations and frontiers*, J. Neural Eng. 23:011002 (2026),
+DOI [10.1088/1741-2552/ae3e16](https://doi.org/10.1088/1741-2552/ae3e16),
+documents the real ill-posed current-source inverse, distributed brain sources,
+conductivity/anatomical dependencies and the complementarity of scalp EEG vs
+MEG. EEG power alone is NOT an emitted free-space magnetic-field amplitude.
+
+For finite illustrative source x=(x1,x2), let E(x)=x1+x2 be a scalp-like
+projection and M(x)=x1-x2 a different projected source/field observable.
+The three source states (1,0), (0,1), (1/2,1/2) all yield E=1 yet have M=1,
+-1, 0. Hence no universal E-only decoder can recover M under these assumptions.
+A second independent calibrated M observation makes THIS toy inverse
+injective via x=((E+M)/2,(E-M)/2). The Agda module contains a finite
+no-universal-E-to-source proof and an unaddressed receiver model; the Python
+checker exercises the stronger rational examples. This is an **original
+bounded synthetic counterexample**, not the reviewed authors' theorem, nor a
+real EEG head/current model.
+
+### Addressability: a photograph is not a physical target coordinate
+
+Suppose one of M otherwise identically coupled receiver sites is meant to be
+selected, with source and interaction law invariant under permutations of those
+receivers. Then the M outcome weights are identical. If they sum to unity,
+p_i = 1/M. To target an individual, symmetry must be broken by
+physical geometry, a receiver-specific coupling, a pre-established shared
+physical key, or a communicative/control channel. An asserted photo/handwriting
+link is not itself a specified source-to-target operator.
+
+The standard-library checker enumerates rational exchangeable probabilities
+for M=2/3/4, denominator 12. For each M there is exactly one
+permutation-invariant distribution, p_i=1/M, among 13/91/455 candidates.
+This is an **exchangeability theorem given its assumptions**; differential
+distance, shielding, tissue, source-target relationship or another explicit
+channel might break it. It does not rule out all proposed fields.
+
+A stronger **conditional information-theoretic gate** uses Fano's inequality.
+For a *uniformly selected, concealed* T in {1,...,M}, an observation Z which
+correctly decodes the target with probability q (error e=1-q) obeys
+
+    I(T;Z) >= log2(M) - h2(e) - e*log2(M-1).
+
+For M=100 and *hypothetical target identification accuracy* q=.8, this lower
+bound is about **4.596 bits**; at uniform-chance q=.01 the lower bound is zero.
+These numbers are NOT the video's alleged 80% success statistic (which
+concerns alleged outcomes, NOT demonstrated target-identification accuracy).
+The point: source-to-receiver *address* information is a mathematical
+requirement for selective outcomes, independent of whether the carrier is
+Maxwell, a new local field, or a different mechanism.
+
+### Exact two-qubit quantum test (more faithful than previous classical grid)
+
+The previous script's 875 rational stochastic-channel cases tested a
+CLASSICAL marginal analogue only. The new script now also constructs a genuine
+Bell density matrix for |Phi+>, two **rational** local Kraus operators
+K0=diag(1,3/5) and K1=(4/5)|0><1|, satisfying
+K0^T K0 + K1^T K1=I. It computes
+
+    Tr_A [sum_j (K_j tensor I) rho_AB (K_j^T tensor I)]
+      = Tr_A rho_AB = I/2
+
+exactly over Fractions. Separate local outcome projectors produce different
+**conditional** B states; summing over unpublished outcomes restores I/2.
+This is a **concrete two-qubit instance**, not an Agda formalisation of all
+complex-Hilbert CPTP maps and not a quantum experiment. The general no-
+signalling identity is established external standard quantum theory.
+
+A genuinely controllable nonlocal influence cannot merely invoke ordinary
+entanglement. For actual candidate departures from standard linear quantum
+dynamics, source owners are N. Gisin (1990), DOI
+[10.1016/0375-9601(90)90786-N](https://doi.org/10.1016/0375-9601(90)90786-N),
+J. Polchinski (1991), DOI [10.1103/PhysRevLett.66.397](https://doi.org/10.1103/PhysRevLett.66.397),
+and C. Simon, V. Buzek & N. Gisin (2001),
+DOI [10.1103/PhysRevLett.87.170405](https://doi.org/10.1103/PhysRevLett.87.170405).
+They demonstrate how specific nonlinear changes raise operational-signalling
+problems and constraints. Cite their actual scoped findings, NOT a theorem
+forbidding every logically imaginable post-quantum theory.
+
+### Strong real-world positive comparator: engineered brain-to-brain interfaces
+
+Rao, Stocco, Bryan, Sarma, Youngquist, Wu & Prat (2014),
+*A Direct Brain-to-Brain Interface in Humans*, PLOS ONE, DOI
+[10.1371/journal.pone.0111332](https://doi.org/10.1371/journal.pone.0111332),
+report EEG sender motor-imagery decoding, **Internet data transport**, and
+receiver TMS to influence a cooperation task. All transmission steps are
+specified physical interventions, not free-standing delta transmission.
+
+Jiang, Stocco, Losey, Abernethy, Prat & Rao (2019),
+*BrainNet: A Multi-Person Brain-to-Brain Interface for Direct Collaboration
+Between Brains*, Scientific Reports 9:6115, DOI
+[10.1038/s41598-019-41895-7](https://doi.org/10.1038/s41598-019-41895-7),
+used two EEG senders, Internet transmission and TMS to a third receiver,
+reporting a particular task average accuracy **81.25% across five
+3-participant groups**. The similarity between 81.25% and the reel's 80% is
+numerical only: DIFFERENT sources, denominators, endpoints, interventions
+and no historical shared-origin record. These experiments show actual
+multi-person neural-input coupling when there IS an engineered target channel.
+
+### Shared-cue and information-alignment controls
+
+Leahy et al. (2025), *Environmental effects on inter-brain coupling*,
+DOI [10.3389/fnhum.2025.1627457](https://doi.org/10.3389/fnhum.2025.1627457),
+found environmental factors affect hyperscanning coupling and stressed
+shared-input confounding. Varlet & Grootswagers (2024),
+DOI [10.3389/fnhum.2024.1385624](https://doi.org/10.3389/fnhum.2024.1385624),
+used EEG hyperscanning simulations to show synchrony can be a poor proxy for
+matching information content; source authors retain credit.
+
+A four-row exhaustive synthetic factorial model sets concealed target T and
+independent nuisance X. A blind receiver reporting X scores 2/4 correct,
+whereas a leaked post hoc report copying T scores 4/4. This is a leakage
+negative control, not evidence of psi either way.
+
+### Randomized binary-outcome gate and look-elsewhere correction
+
+For purely illustrative 10 active vs 10 sham trials with observed binary
+successes 8 and 3, conditioning on 11 total successes gives exact
+randomization upper-tail probability **293/8398 ~= 0.0348893** via
+hypergeometric enumeration. Neither arm's observations occurred in reality.
+This is not a 0.8 causal-effect estimator: no actual allocation, observation,
+independent unit, outcome definition, or preregistered primary test exists.
+
+With **20 independent** null analyses each testing at uncorrected alpha=0.05,
+the probability of >=1 false positive is 1-0.95^20 ~= **0.641514**.
+Independence is a stated simplifying assumption: correlated frequency, lag,
+window and outcome searches require the actual joint null or a valid
+familywise/FDR correction, not this scalar.
+
+**Correct unit of analysis:** distinguish 100 people, number of groups,
+number of truly independent randomizations, outcome measurements and
+event-specific denominators. Trials from one coordinated group are NOT
+100 independent experimental replicates.
+
+### Strongest physical/causal hypothesis rank (after new work)
+
+| Model | Evidence/source status | Highest-value live gate |
+|---|---|---|
+| Shared cues/selection/confounding | Well-known alternatives; **live controls supplied** | preregistered hidden outcome, sham, leakage audit |
+| EEG-assisted **engineered** brain-to-brain communication | **Already demonstrated** by Rao et al. and Jiang et al. with an explicit network + TMS | source-identical decoder, packet channel, receiver stimulation and effect |
+| Direct Maxwell interaction | Biological source fields real; bare EEG source nonidentifiable | joint EEG/MEG/field geometry and calibrated receiver transfer; test nonlinear threshold with measured nuisance floor |
+| New local mediator | Consistent class of **hypothetical** equations, not detected | source/receiver operators and target labeling; retarded propagation, energy and environmental/fifth-force constraints |
+| Operational nonlocal/postlinear influence | No reliable source-specific observation; standard quantum marginal boundary | candidate-specific mathematically consistent dynamics and independently replicated **benign** random allocation with excluded channels |
+
+The Yukawa-type mediator donor Tsai et al. (2024), *Constraints on fifth forces
+and ultralight dark matter from OSIRIS-REx target asteroid Bennu*,
+[doi:10.1038/s42005-024-01779-3](https://doi.org/10.1038/s42005-024-01779-3),
+constrains **specified** ultralight/matter-coupled interactions. It is not an
+exclusion of every unspecified neural-only coupling, and it does not
+support a newly observed source or mind-target connection.
+
+### Roadmap / phase / acceptance (no new unowned ontology)
+
+**Phase H0 historical:** Hardt reel attribution and 2020 same-claim roots
+recovered; the original unnamed operative, documents, denominator and
+claimed causal record remain unverified. Route through #1242's typed
+source genealogy. **No crimes assigned to anyone.**
+
+**Phase F1 mathematical discrimination:** achieved at finite model level:
+EEG inverse non-injectivity, conditional target exchange symmetry, conditional
+information bound, exact Bell local-channel marginal, blinded vs leaked
+outcome, exact randomization null. The new Agda is **source-written only**;
+local equivalent Python passed; committed Python and Agda exact-head receipt
+still unpaid. No claim that a bounded counterexample is a universal
+impossibility result.
+
+**Phase E2 sensor calibration:** #1238 owns all system-specific diamond-MCG
+physics. Seek source-defined EEG and MEG/head-source geometry as distinct
+neural-input branch. Do NOT reverse-project cardiac 7/13/26 pT/sqrt(Hz)
+as delta brain signal or a receiver's causal response.
+
+**Phase E3 causality:** safe passive target or fully consenting benign
+receiver, concealed preregistered source intervention, leakage-free
+randomization, calibrated time and propagation, source-vs-target distance
+and target selectivity, actual sham and replication. No testing alleged
+injury or fatal effects.
+
+**Phase T4 novel theory:** only admit a new local mediator if it survives
+source-specific experimental discrimination; only admit a nonlocal
+operational model if actual replicated intervention statistics independently
+justify changing quantum/causal theory.
+
+**Pareto recommendation:** finish source identity and paper-specific
+measurement intake; test a **source-defined, instrument-identical** EEG->current
+->field->receiver chain and engineered BCI as positive control. Stop
+promoting neural synchrony to physical propagation, photographs to
+target coordinates, or hypothesis types to empirical receipts.
