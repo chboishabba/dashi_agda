@@ -12,7 +12,15 @@ module DASHI.Physics.Gravity.KKE6OrbifoldBoundaryHiggsConsumerExact where
 -- V6(E32,E33+t E21)=3 t²+t⁴ (positive EW source curvature).
 -- A boundary term for the orbifold-even Chi 2x2 allows a selected
 -- nonzero t, but original E32/E33 amplitudes MUST respond.
--- The full 36-real stationary source has two NEGATIVE curvatures,
+-- IMPORTANT 2026-10-25 source correction: the prior gradient/Hessian are
+-- for the spatially HOMOGENEOUS integrated zero-mode potential,
+-- NOT a genuine solution of five-dimensional interior E-L plus
+-- Robin boundary conditions. At t=.0246 the BULK t-gradient is
+-- t(6-13t²)=+.147406469832, which cancels endpoint force ONLY
+-- after integration. New owning BIDI is
+-- KKE6OrbifoldIntervalBoundaryELConsumerExact and selected script
+-- check_kk_e6_orbifold_interval_higgs_bvp.py.
+-- The homogeneous full 36-real scalar matrix source has two NEGATIVE curvatures,
 -- both PARITY ODD; only 18 physical constant scalar modes are even.
 -- The selected EVEN 18x18 Hessian has 7 gauge zeros, 11 positive,
 -- zero negative, conditional on the source trial parameters.
