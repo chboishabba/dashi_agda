@@ -176,3 +176,18 @@ python3 scripts/iit_numeric_verification.py
 agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/EverythingIITPhiIntegrationMaxCut.agda
 \`\`\`
 Required receipts: full branch commit, stdout/exit status, toolchain, numeric formalism version, input/source digest, and any failing dependency. A source-written Agda proof is not a passed compiler run; finite recurrent-state dynamics do not independently settle IIT's interpretive premises.
+
+
+## Task 12 — Large-grid correction / prime-power exact dynamics (2026-10-24)
+
+**Canonical source-and-result audit:** [\`docs/superpowers/plans/2026-10-24-iit-large-grid-original-comparison.md\`](./2026-10-24-iit-large-grid-original-comparison.md).
+
+The 2×2 nilpotence theorem added in Task 11 is **not a universal recurrent XOR-grid theorem**. The already existing \`iit_lattice_scaling_experiment.py\` / \`iit_ternary_lattice_scaling.py\` cover **2D n=2..10 (100 sites)** and **3D n=2..5 (125 sites)** over F₂/F₃, computing exact linear-algebra ranks and declared-slab cut proxies, **not large-grid exact IIT Phi**.
+
+With periodic \`F = sum S_i\` over F_p and \`n=p^k\`, characteristic-p Frobenius gives \`F^n=(d mod p)I\` for d coordinate directions. So binary 2D 4×4/8×8 extinguish but binary 3D 4³ is periodic/invertible; ternary 2D 3×3 has \`F³=-I\`, while ternary 3D 3³ extinguishes at \`F³=0\`. The previously owned \`IITCubeConcreteTorusImageExact.bop3Neg\` is reused in source-written \`IITLatticePrimePowerSourceBridgeExact\`, with six-step identity and injectivity as finite Agda candidate results. **No new general Agda kernel receipt claimed.**
+
+Independent local Python arithmetic checked **26 size/field/dimension cases**, with **eight prime-power matrix identities on every basis vector**. On the IIT branch the newly committed \`scripts/iit_lattice_prime_power_audit.py\` is also called by \`scripts/iit_numeric_verification.py\`, but an exact GitHub checkout execution and Agda kernel execution still need separate receipts. **Time-dependent state loss is not inferred from one-step kernel dimension.**
+
+Original 2014 source correction: Tononi's illustrative physically realised lattice used **e.g. majority-input gate rules** on a hypothetical **1000×1000** grid. DASHI's cyclic east+south sum is a mathematical alternative, not that physical example or a computation of its complete IIT 3.0 conceptual structure. Its analytic 1000×1000 binary rank formula is *extrapolation*, not an executed million-node experiment. Historical IIT 3.0, IIT 4.0 2023 and IIT 4.0 2026 must remain distinct.
+
+Remaining frontier: match actual spatial wiring and gate/TPM to the historical theory's premises (if that reproduction is worth computational expense); pin theory version, partition/causal noising and state; run source-faithful full CES at tractable sizes; then measure scaling bounds rather than substituting geometric slab counts for Phi. Prioritize calibrated neural/memory/AI consumers over new 27-cardinality scans or another Boolean truth table.
