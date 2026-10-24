@@ -474,3 +474,42 @@ this environment. The companion Agda branch is stacked and stale
 relative to parent #1244, and no kernel cross-prover identity
 is asserted. The original authors and external Mathlib/Hatcher
 proof owners are retained.
+
+
+## 2026-10-25 reconciled stack, corrected ancestry and Richards theorem cut
+
+The child PR #1254 was merged **non-destructively** with the
+inspected parent #1244 head `97cda338ed87c70304135fddd62093a8f78852a2`
+in merge commit `f0a45715e976b34512b311667b51c02c425b0639`
+without overlapping path edits. Direct compare at that point:
+35 commits ahead, zero behind parent, 17 changed topology paths.
+The parent may advance after this snapshot; do not infer
+permanent merge readiness from this receipt. PR remains draft.
+
+The earlier first-loop Cantor scheduler was insufficient:
+same finite manifold invariants and b=2^n need not
+mean every old branch split. The repaired
+`exotic_topology_pl_frontier_lineage.py` uses EXACT marked boundary
+vertices and maps through existing oriented PL gluing.
+It enforces `p->p0,p1` on every old boundary *once*,
+and deliberately tests a genuine valid four-boundary PL
+counterexample with incorrect ancestry. Old count-only
+checks remain useful geometry regression, not end-space proof.
+
+`Docs/topology/ExoticInfiniteSurfaceEndSpaceConditionalTheorem20261025.md`
+now gives the eight-step mathematical conditional route
+from collared nested finite PL surfaces through
+Richards' nested proper unbounded complementary region
+end topology and planar/nonplanar end data to the
+three canonical surface types. Each still-open geometric
+hypothesis and kernel obligation is explicit. Companion
+Lean #86 source-writes the tower-to-stream two-sided
+equivalence on existing `Integration.Address` carriers.
+
+Attribution: compact bordered-surface classification
+Brahana (1921); ideal-boundary predecessor Kerékjártó
+(1923); full triangulable noncompact surface theorem and
+realization Richards (1963). The paper route is a
+mathematical conditional argument, not a new Lean/Agda
+kernel receipt. The new tests have **NOT** been freshly
+run on the exact updated SHA.
