@@ -1888,3 +1888,66 @@ typecheck or exact-head committed test execution.
 `logs/research/neutrino_canonical_sun3_matrix_weld_maxcut_20261024.json`
 records the latest source/test blob SHAs and
 the nonzero two-coordinate witness.
+
+## 2026-10-24 final local-Python max-cut receipt (no CI)
+
+**Verified by executing the exact GitHub Python source bytes**, not
+merely reimplementing the arithmetic: the assistant read seven
+pre-existing Python files plus the newly written symbolic one
+from their original PR branches, reconstructed each locally and
+matched its SHA-1 Git blob hash before execution.
+
+`logs/research/neutrino_sun3_local_python_exact_head_receipt_20261024.json`
+records all hashes, the Python version and precise tests. Results:
+
+| Concrete local operation | Source-matched result |
+| --- | --- |
+| Horn A5 order-selector tests | 4/4 PASS |
+| Horn compact-Lie group-reuse tests | 4/4 PASS |
+| Leptonic exact cyclotomic CP/mass tests | 11/11 PASS |
+| Neutrino CP-positive SU3 target tests | 7/7 PASS |
+| Combined unittest run | **26/26 PASS** |
+| Horn A5 stage script | PASS, 60/60 commutators |
+| Horn c=0 finite VOA semidirect action | PASS, 4,000 deterministic cases |
+| Horn SU3 spectral commutator probe (5 levels) | PASS, 31 parent relations; worst residual 4.985e-15 |
+| Horn SU3 spectral probe (8 levels) | PASS, 255 parent relations; worst residual 7.837e-15 |
+| New universal Q(zeta3) 3x3 SymPy symbolic algebra | **10/10 exact symbolic identities PASS** |
+
+New code
+`scripts/audit_neutrino_sun3_symbolic_matrix_laws.py`
+uses **indeterminate 3x3 matrices over Q(ζ3)** with
+`ζ²=-1-ζ` and symbolic polynomial expansion, verifying:
+
+1. Scalar conjugation involutive;
+2. Scalar conjugation multiplicative;
+3. Left/right matrix identities;
+4. Matrix associativity;
+5. Dagger involutive;
+6. Dagger reverses matrix products;
+7. `det(A B)=det(A)det(B)`;
+8. `det(A†)=conj(det(A))`;
+9. `det(I)=1`.
+
+The split left/right identity makes ten individually tested
+boolean certificates. SymPy 1.14.0 reduces every coefficient
+difference to the **zero polynomial**, not to an approximate
+floating-point residual. This substantially validates the
+general finite-matrix laws needed by the existing
+`SUNMatrixCarrier.CertifiedSUNMatrixTheory` socket,
+at **symbolic external verification grade** only.
+Proofs in Agda and the actual function-backed
+matrix extensionality or nine-cell record remain open.
+
+Use the symbolic script as an efficient local computational
+stand-in **rather than introducing CI**. The original
+`CompactLieGroupCore`, `SUNMatrixCarrier`,
+`SU3MatrixInstance`, `QutritMatrixGates.Matrix3`
+and cyclotomic scalar owners remain authoritative.
+
+**Closed here:** actual committed-script execution and
+reproducible branch/blob attribution for the selected 26
+cases; universal finite-matrix polynomial-law evidence.
+**Open:** Agda typechecking, concrete typed
+`ExactLeptonSUN3Weld` instance, imported global
+Gotô/colimit proof, physically selected holonomy or
+lepton interaction, experimental likelihoods.
