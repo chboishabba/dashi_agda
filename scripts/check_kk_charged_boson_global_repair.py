@@ -61,13 +61,20 @@ tail=mp.fsum(n*n*abs(bos*harmonic(n,kb*z)-q*harmonic(n,kq*z))
              for n in range(2,N+1))
 assert first>tail>0
 # Scan finite landscape AND locally optimize from many points.
+# Double-precision vectorised scan is exploratory; stationarity uses mpmath.
+nfloat=np.arange(1,N+1,dtype=float)
+def ffast(w,t):
+    nw=nfloat*w
+    return float(np.sum(np.exp(-nw)*(1+nw+nw*nw/3)*np.cos(nfloat*t)/nfloat**5)/float(Z))
+def fast_U(x,t):
+    return float(L)/x+(-a+d*ffast(float(z)*x,0)+q*ffast(float(kq*z)*x,t)-bos*ffast(float(kb*z)*x,t))/x**6
 minimum=(float('inf'),0,0)
 for xx in np.geomspace(.04,30,145):
     for tt in np.linspace(0,float(mp.pi),25):
-        val=float(U(mp.mpf(xx),mp.mpf(tt)))
+        val=fast_U(float(xx),float(tt))
         if val<minimum[0]: minimum=(val,xx,tt)
 assert minimum[0]>-1e-9
-def fun(v): return float(U(mp.mpf(float(np.exp(v[0]))),mp.mpf(float(v[1]))))
+def fun(v): return fast_U(float(np.exp(v[0])),float(v[1]))
 starts=[(float(np.log(x)),float(t)) for x in (.2,.5,.85,1,1.3,2,5)
         for t in (0,float(mp.pi)/2,float(mp.pi))]
 fits=[minimize(fun,v,method='L-BFGS-B',bounds=[(-4,5),(0,float(mp.pi))],
