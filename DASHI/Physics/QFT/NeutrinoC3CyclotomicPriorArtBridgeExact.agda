@@ -300,3 +300,40 @@ data PhysicalPMNSIdentification : Set where
 physicalPMNSIdentificationNotConstructed :
   PhysicalPMNSIdentification → ⊥
 physicalPMNSIdentificationNotConstructed ()
+
+------------------------------------------------------------------------
+-- PARETO NO-GO: C3 is a FINITE phase group, not continuous propagation.
+--
+-- Physical vacuum oscillation uses exp[-i Δm² L/(2E)] for real-valued
+-- L/E.  If a homomorphism from a 3-divisible time/source group to C3
+-- obeys h(t)=h(t/3)^3, its image is TRIVIAL.  Thus the nontrivial
+-- discrete C3 phase triple can be a phase sample, internal charge, or
+-- broken/residual flavour symmetry, but cannot by itself represent
+-- all continuous L/E evolution with nonzero mass splitting.
+------------------------------------------------------------------------
+
+cubePhase : C3.C3Phase → C3.C3Phase
+cubePhase p = C3.multiplyPhase p (C3.multiplyPhase p p)
+
+everyC3CubeIsIdentity :
+  (p : C3.C3Phase) → cubePhase p ≡ C3.phase0
+everyC3CubeIsIdentity C3.phase0 = refl
+everyC3CubeIsIdentity C3.phase1 = refl
+everyC3CubeIsIdentity C3.phase2 = refl
+
+record CubicallyDivisibleFlow (Time : Set) : Set where
+  field
+    thirdOf : Time → Time
+    phaseAt : Time → C3.C3Phase
+    tripleScalingLaw :
+      (t : Time) → phaseAt t ≡ cubePhase (phaseAt (thirdOf t))
+
+open CubicallyDivisibleFlow public
+
+divisibleTimeCannotHaveNontrivialC3Phase :
+  {Time : Set} →
+  (flow : CubicallyDivisibleFlow Time) →
+  (t : Time) → phaseAt flow t ≡ C3.phase0
+divisibleTimeCannotHaveNontrivialC3Phase flow t
+  rewrite tripleScalingLaw flow t =
+  everyC3CubeIsIdentity (phaseAt flow (thirdOf flow t))
