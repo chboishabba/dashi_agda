@@ -61,3 +61,32 @@ The article's actual *Data availability* statement is **"Data from this manuscri
 ## Current permission/acquisition status
 
 Primary PNAS 2023 paper expressly deposits fMRI, EEG and scripts at GitHub, but no explicit machine-readable **licence/consent/reuse permission** appears in the pinned source tree. GitHub's licensing guidance says a public repository without a licence defaults to retained copyright; reading/forking is distinct from unrestricted derivative redistribution. Treat internal scholarly reproduction and external redistribution as **separate legal/consent consumers** requiring jurisdiction- and use-appropriate review. The GitHub connector was able to return one .mat source blob as base64 with its exact Git identifier, **but no participant array was transferred to the local scientific-computation container or independently analysed** because the container network is restricted. A claim that the source files are unavailable online would be false; a claim that a human-data replay is complete would also be false.
+
+## Pinned acquisition command (execution environment and rights permitting)
+
+The source-locked acquisition helper is `scripts/acquire_dmt_imaging_source.py`. It requires a **nonempty written rights/consent/use review record before cloning**, checks out exactly commit `b35701d88d904e2f602164ff2eae0fc879772078`, refuses an existing destination, and verifies **every** acquired file's expected size and Git SHA1 object identity against the committed source-tree receipt. It never commits participant files or infers clinical-consent rights. Synthetic tests `tests/test_dmt_source_acquisition.py` cover missing-review refusal and corruption failure.
+
+```sh
+python scripts/acquire_dmt_imaging_source.py \
+    --destination /secure/approved/DMT_Imaging \
+    --rights-review-record /secure/approved/reuse_review.txt
+python scripts/preflight_dmt_imaging_data.py \
+    --data-root /secure/approved/DMT_Imaging \
+    --manifest /secure/approved/analysis_manifest.json
+python scripts/evaluate_dmt_paired_fc.py \
+    --data-root /secure/approved/DMT_Imaging \
+    --manifest /secure/approved/analysis_manifest.json
+```
+
+The source-locked exact Python acquisition and new post-correction synthetic tests were **committed, not executed against raw files in this environment**. The only freshly executed arithmetic receipt is the public-paper aggregate check: `python scripts/audit_dmt_pnas2023_published_gfc.py` returned p=0.007169260405410824 from t=3.11 and df=15. No participant values are implied.
+
+The source repository's accompanying right to view/fork and the paper's GitHub data-deposit statement are documented, but a specific request for permission to rehost, publicise any participant-derived products, or redistribute derivatives is **not closed** by a nonempty `reuse_review.txt`. A real review must state purpose/jurisdiction/consent/security/outputs and resolve restrictions where needed.
+
+### Exact next external custodian request (not sent)
+Ask the corresponding original-study data custodian for:
+- **Subject ID lists and FD/scrubbing masks** behind original static eight-minute **n=16**, original full-session dynamic **n=13**, joint EEG/fMRI **n=12**, and the README's separate **n=15**; include session date/condition mapping and revisions.
+- Frozen **112-parcel** static whole-brain GFC calculation, treatment of diagonal, used time samples/bolus alignment, preprocessing version and results table sufficient to reproduce **t(15)=3.11, p=0.007, CI [0.028,0.15]**.
+- Express scope of reuse/redistribution of Git-deposited human fMRI/EEG data and scripts, privacy/consent constraints, preferred acknowledgement and publication policy.
+- From the 2026 Sanders et al. corresponding authors separately, anonymised **21** phase matrices, **125** category codebook, phase timing and participant-lineage crosswalk (published access rule: reasonable request).
+
+If the request cannot be fulfilled, report the exact-source admission block rather than guessing the subject list or substituting a secondary n=15/14 analysis.
