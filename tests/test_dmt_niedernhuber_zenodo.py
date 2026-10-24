@@ -43,7 +43,8 @@ class TestNiedernhuberZenodo(unittest.TestCase):
     def test_listing_is_not_participant_or_condition_replay(self):
         result = audit(self.source)
         self.assertEqual(result["hash_matched_local_files"], 0)
-        self.assertFalse(result["file_prefixes_are_participants"])
+        self.assertTrue(result["original_author_code_declares_prefixes_as_participant_ids"])
+        self.assertFalse(result["participant_and_condition_mapping_independently_replayed"])
         self.assertFalse(result["published_microstate_statistic_reproduced"])
 
     def test_primary_doi_mismatch(self):
@@ -57,6 +58,18 @@ class TestNiedernhuberZenodo(unittest.TestCase):
 
     def test_cannot_promote_participants(self):
         self.assert_bad(lambda s: s["consumer_ceiling"].update(original_transition_reproduced=True))
+
+    def test_author_original_source_code_identity(self):
+        self.assertEqual(self.source["original_analysis_code"]["commit"],
+                         "c5c064d109563e97127403a8fbb340009ba1e88b")
+        self.assertTrue(self.source["consumer_ceiling"]["source_code_g1_export_identified"])
+
+    def test_different_source_author_participant_list(self):
+        self.assert_bad(lambda s: s["file_pairs"][0].update(file_prefix="9999"))
+
+    def test_missing_original_matlab_blob(self):
+        self.assert_bad(lambda s: s["original_analysis_code"]["source_files"][0].update(
+            git_blob_sha1="0" * 40))
 
     def test_duplicate_file(self):
         def edit(s):
