@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OWNER = ROOT / "DASHI/Cognition/AquinoMaxwellEpsteinCAMaxCutExact.agda"
 ROLLUP = ROOT / "DASHI/Cognition/Everything.agda"
 ROADMAP = ROOT / "docs/research/aquino-maxwell-epstein-ca-maxcut-20261024.md"
+PRIOR_FILM_OWNER = ROOT / "DASHI/Cognition/TrumpMarALagoBannonBridgeExact.agda"
 
 
 def test_existing_prior_art_reused_not_cloned():
@@ -521,3 +522,71 @@ def test_video_and_press_reporting_are_not_native_bytes_or_tasking():
     assert "Only use documentary segments relevant to inquiry" in roadmap
     assert "Do not attempt retrieval of exposed personal records, passwords or secret keys" in roadmap
     assert "AP's contrary review" in roadmap
+
+
+def test_bannon_filming_already_paid_in_original_owner_not_rediscovered():
+    original = PRIOR_FILM_OWNER.read_text()
+    source = OWNER.read_text()
+    for token in (
+        "bannonCorrespondenceReceipt : BridgeReceipt",
+        "bannonMediaRehabReceipt : BridgeReceipt",
+        "bannonPoliticalMessagingReceipt : BridgeReceipt",
+        "bannonInternationalStrategyReceipt : BridgeReceipt",
+        "Released texts and video show Bannon advising Epstein",
+        "bannonFilmingAlreadyPaid = refl",
+        "videoExistenceDebtRetired = refl",
+    ):
+        assert token in original
+    for token in (
+        "bannonExistingProductionChain = BannonBridge.canonicalBannonMediaProductionFrontier",
+        "preExistingFilmedInterviewIsPaid = refl",
+        "preExistingAprilCounselLetterLocated = refl",
+        "preExistingJulyShootingMessagesLocated = refl",
+    ):
+        assert token in source
+
+
+def test_canonical_bannon_production_source_chain_and_legal_limits():
+    original = PRIOR_FILM_OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    for token in (
+        "indyke2019LetterEvidence = bannon-production-evidence",
+        "juneJulyProductionMessagesEvidence = bannon-production-evidence",
+        "existingFilmEvidence = bannon-production-evidence",
+        "EFTA00809863-EFTA00809866",
+        "House Oversight 027794-027848",
+        "letterLocatedButExecutionOpen = refl",
+        "letterCannotByItselfCreateLegalPrivilege = refl",
+        "july6ProposedShootNotCompletedShoot = refl",
+        "letterAndMessageDoNotIdentifyFilmReel = refl",
+        "exactFilmReelObjectStillUnpaid = refl",
+        "legalEngagementCannotBePromotedToExecuted = refl",
+        "filmCannotBePromotedToIntelligenceDirection = refl",
+    ):
+        assert token in original
+    for token in (
+        "### Bannon–Epstein filming: existing-owner audit",
+        "EFTA00809863–EFTA00809866",
+        "HOUSE_OVERSIGHT_027794–027848",
+        "existence of filmmaking (paid before #1245)",
+        "DOJ PDF page images not accessible",
+        "source root for the April letter is its author/producer",
+    ):
+        assert token in roadmap
+
+
+def test_unpaid_deduplicated_case_reel_join_stays_narrow():
+    source = OWNER.read_text()
+    for token in (
+        "actualSignedAgreementStillUnverified = refl",
+        "reelBytesHashStillUnverified = refl",
+        "bannonEpsteinWorkProductCut = case-dependency-cut",
+        "April 3 2019 EFTA00809863-Indyke letter located",
+        "Film already exists.",
+        "source timestamps",
+        "preExistingFilmedInterviewIsPaid = refl",
+        "caseWholeH2Unpaid = refl",
+        "caseCovertH3Unpaid = refl",
+    ):
+        assert token in source
+    assert "not a verified signed/accepted contract" not in source  # forbid fabricated acceptance
