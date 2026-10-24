@@ -1642,3 +1642,39 @@ blackPaymentDoesNotCreateBannonFilmFunding ()
 blackPaymentDoesNotCreateUnifiedProgramme :
   BlackPaymentImpliesBannonCAEpsteinCommonCommand → ⊥
 blackPaymentDoesNotCreateUnifiedProgramme ()
+
+
+------------------------------------------------------------------------
+-- HOUSE 2026 CASE CONSUMER: reuse the Black source owner, not a new
+-- payment/command model. Congressional procedure is a distinct object
+-- from testimony, contractual bytes, or an operational intelligence chain.
+------------------------------------------------------------------------
+
+black2026OriginalCongressionalCase :
+  BlackApollo.Black2026HouseBoundary
+black2026OriginalCongressionalCase =
+  BlackApollo.canonicalBlack2026HouseBoundary
+
+originalBlackInterviewAndHouseDispositionLocated :
+  BlackApollo.houseResolutionRecorded black2026OriginalCongressionalCase ≡ true
+originalBlackInterviewAndHouseDispositionLocated = refl
+
+house2026NDAContractBytesRemainUninspected :
+  BlackApollo.executed2015NDABytesInspected black2026OriginalCongressionalCase ≡ false
+house2026NDAContractBytesRemainUninspected = refl
+
+house2026CommitteeIsNotTransactionReconciliation :
+  BlackApollo.exactNDAtoBlackPaymentLedgerJoinPaid black2026OriginalCongressionalCase ≡ false
+house2026CommitteeIsNotTransactionReconciliation = refl
+
+house2026PastCIAOfficeNotPresentDirection :
+  BlackApollo.corporateDirectorPastCIARoleIsCurrentTasking black2026OriginalCongressionalCase ≡ false
+house2026PastCIAOfficeNotPresentDirection = refl
+
+house2026DoesNotPayBannonProgrammeBridge :
+  BlackApollo.blackCommitteeInquiryJoinsBannonFilm black2026OriginalCongressionalCase ≡ false
+house2026DoesNotPayBannonProgrammeBridge = refl
+
+house2026DoesNotPayCaseWideCommand :
+  BlackApollo.caseWideCovertCommandEstablished black2026OriginalCongressionalCase ≡ false
+house2026DoesNotPayCaseWideCommand = refl
