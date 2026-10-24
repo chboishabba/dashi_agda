@@ -88,6 +88,12 @@ def main():
         "seed_is_real_transverse":True,
         "physical_helical_reciprocals_at_active_modes": "1,1",
         "normalization":"full ordered physical output fibre, zero cells retained",
+        "physical_shear_solution":"u(t,x,y,z)=2*exp(-t)*(cos(x)+cos(y))*e_z on 2pi-periodic torus; pressure constant",
+        "nonlinear_physical_forcing":"zero identically",
+        "padding_invariant_modal_M":"(-i/2,-i/2,0)",
+        "padding_invariant_R440_weighted_amplitude":"2*M",
+        "padding_invariant_modal_coherent_heat_work":"2",
+        "output_heat_centered_R440_work":"0",
         "not_claimed":["Clay B false","kernel proof","cutoff-growing ED ruled out"],
         "cutoffs":results,
     },indent=2))
