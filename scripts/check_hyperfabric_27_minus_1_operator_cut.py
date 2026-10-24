@@ -90,6 +90,20 @@ def check():
             lhs = metric(ai, exact_reduced_laplacian(aj))
             rhs = metric(exact_reduced_laplacian(ai), aj)
             assert lhs == rhs
+
+    # Exact positive-definite pullback metric: G=I_26-J_26/27.
+    # On the 26-vector of ones the eigenvalue is 1/27; on its
+    # 25-dimensional sum-zero orthogonal complement the eigenvalue is 1.
+    one26 = {p: Q(1) for p in NONORIGIN}
+    assert metric(one26, one26) == Q(26,27)
+    samples = [basis(NONORIGIN[0]), one26,
+               {p: Q((3*i*i-7*i) % 11-5) for i,p in enumerate(NONORIGIN)}]
+    for a in samples:
+        euclid_norm = sum((a[p]*a[p] for p in NONORIGIN), Q(0))
+        assert metric(a, a) >= euclid_norm / 27
+    assert metric(basis(NONORIGIN[0]), basis(NONORIGIN[0])) == Q(26,27)
+    print('PASS G positive definite: eigenvalues 1 (mult 25), 1/27 (mult 1); no timelike axis')
+
     constant = {x: Q(1) for x in SITES}
     assert is_zero(lap(constant)) and is_zero(project(constant))
     delta_origin = {x: Q(int(x == O)) for x in SITES}
