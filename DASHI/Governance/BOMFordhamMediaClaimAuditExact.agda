@@ -115,6 +115,40 @@ hansonMention = source-root
   publisherOwnedProgramme
   "Interview transcript contains Fordham's question about Pauline Hanson Please Explain cartoons. A topical mention does not establish Fordham-Hanson organisational affiliation."
 
+-- Additional distinct roots: documented media framing is not a verdict
+-- about audience effect, guest accuracy, institutional coordination or intent.
+bondiFordhamPoliticalSegment : SourceRoot
+bondiFordhamPoliticalSegment = source-root
+  "Ben Fordham Live / 2GB podcast listing" "2025-12-18"
+  "'We're angry' - PM slammed over response to Bondi terror attack"
+  "https://music.amazon.co.uk/podcasts/2686e400-47fa-4f4f-94b3-b95934a496b2/episodes/b7dd042e-cf37-47eb-bfc6-b79cc0dcf598/ben-fordham-live-on-2gb-breakfast---highlights-%E2%80%98we%E2%80%99re-angry%E2%80%99---pm-slammed-over-response-to-bondi-terror-attack%E2%9D%97"
+  publisherOwnedProgramme
+  "Fordham show published a three-minute post-Bondi segment framed as criticism of the Prime Minister's response. Listing does not establish particular anti-Muslim speech, a complete spoken transcript or central coordination."
+
+fordhamLathamArchive : SourceRoot
+fordhamLathamArchive = source-root
+  "2GB / Ben Fordham interviewing Mark Latham" "2GB archive (undated in page)"
+  "Groups using government funding to spread Islamic radicalisation"
+  "https://www.2gb.com/?p=75904"
+  publisherOwnedProgramme
+  "2GB archived a Mark Latham interview describing a Bankstown poetry performance criticising Pauline Hanson and alleging publicly funded radicalisation. Latham owns the quoted allegations; hosting is not verification of them."
+
+aapBondiHansonFabrication : SourceRoot
+aapBondiHansonFabrication = source-root
+  "Matthew Elmas / AAP FactCheck" "2025-12-15"
+  "Disinformation operation targets Bondi terrorist attack"
+  "https://prod-ss.aap.com.au/factcheck/disinformation-operation-targets-bondi-terrorist-attack/"
+  journalistReport
+  "AAP finds fake post-Bondi Hanson quotes falsely proposing mass Muslim citizenship stripping and identifies a foreign-run Facebook operation. It does not attribute that operation to Hanson, Fordham, Bannon or TPAU."
+
+tpaustFirstParty : SourceRoot
+tpaustFirstParty = source-root
+  "Turning Point Australia" "website accessed 2026-10-24"
+  "About"
+  "https://tpaust.com.au/about/"
+  ownershipPrimary
+  "Organisation's own account describes Joel Jammal's leadership, Nigel Farage event organising and conservative media activity. Self-description is not evidence of any Fordham affiliation."
+
 data DataLayer : Set where
   paperOriginal : DataLayer
   digitisedHistoricalObservation : DataLayer
