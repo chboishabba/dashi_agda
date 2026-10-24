@@ -94,4 +94,22 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertEqual(len(bad), 2 * len(old))
         self.assertNotEqual(bad, {p + (b,) for p in old for b in (0, 1)})
 
+
+    def test_real_wrong_lineage_while_geometric_manifold_still_valid(self):
+        # Construct an ACTUAL all-valid triangulated mesh with four
+        # boundaries but the wrong ancestry: split the left child
+        # repeatedly, leaving the right child unsplit.
+        pants = pl.sphere_with_holes(3)
+        wrong = lineage.mark_initial(pl.disk(), [()])
+        wrong = lineage.attach(wrong, pants, (), ((0,), (1,)))
+        wrong = lineage.attach(wrong, pants, (0,), ((0, 0), (0, 1)))
+        wrong = lineage.attach(wrong, pants, (0, 0),
+                               ((0, 0, 0), (0, 0, 1)))
+        self.assertEqual(wrong.verify((0, 4))['boundaries'], 4)
+        self.assertEqual(len(wrong.frontier), 4)
+        self.assertNotEqual(
+            set(wrong.frontier),
+            {(0, 0), (0, 1), (1, 0), (1, 1)})
+        self.assertIn((1,), wrong.frontier)
+
 if __name__ == '__main__': unittest.main()
