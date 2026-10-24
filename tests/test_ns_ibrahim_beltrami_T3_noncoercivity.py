@@ -61,3 +61,21 @@ def test_alignment_is_zero_so_claimed_T3_alignment_not_refuted():
         assert s.simplify(strain*xi)==s.zeros(3,1)
         assert s.simplify((xi.T*strain*xi)[0])==0
         assert s.simplify(s.diff(xi,x,2)+n*n*xi)==s.zeros(3,1)
+
+def test_T3_zero_does_not_control_velocity_H2_or_directional_curvature():
+    # The author-uploaded v4 manuscript, Remark 3.7, appeals to an
+    # elliptic H2 control from T3. Beltrami flows lie in J's kernel.
+    # On the normalized periodic torus at t=1/(nu*n²):
+    # ||Delta u||² = A² n²/e², ||omega||²=A²/e²,
+    # T3=0, ||grad xi||∞=n.
+    for n in (2,5,20,100):
+        (x,t,A,nu),u,w=datum(n)
+        t_n=1/(nu*n*n)
+        lap_u=s.diff(u,x,2)
+        lap_sq=s.simplify((lap_u.T*lap_u)[0])
+        assert s.simplify(
+            lap_sq.subs(t,t_n)-A*A*n*n*s.exp(-2))==0
+        assert s.simplify((w.T*w)[0].subs(t,t_n)-A*A*s.exp(-2))==0
+        assert s.simplify(w.cross(u))==s.zeros(3,1)
+    # Therefore no finite multiplier C can ensure
+    # ||u||_dotH²² <= C*T3 for all smooth divergence-free u.
