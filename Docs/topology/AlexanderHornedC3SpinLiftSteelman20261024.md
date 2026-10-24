@@ -529,3 +529,66 @@ Remaining high-value cut is an executable Agda kernel
 receipt and genuine same-object geometric R(B)=B for
 the exact embedded horned ball, NOT another abstract
 C3 split-obstruction proof.
+
+
+## 2026-10-24 clopen-ball / real 3D gluing Pareto correction
+
+We found significant prior art:
+`Geometry/SSP369ClopenBallBridge`,
+`Foundations/InverseLimitClopenRefinement`,
+`Foundations/Base369PrefixUltrametricExact`,
+`Foundations/CantorFiniteClopenPremeasureExact`,
+`Foundations/CantorProjectiveCylinderMeasureExact`,
+`Geometry/ProObjectSemantics`,
+`Analysis/NonArchimedeanPadicCylinderBorelSourceExact`.
+
+The real binary Cantor measure/finite clopen algebra owners
+are more relevant than the ternary 3/6/9 authority tags.
+In particular the old
+`SSP369ClopenBallBridge.canonicalClopenAuthority`
+uses label constructors, not a topological openness proof;
+the old `InverseLimitClopenRefinement` stores
+`intersectionSingleton : Set` and
+`ultrametricComplete : Set` obligation fields, not
+automatically inhabited certificates.
+
+New `AlexanderHornedC3ClopenCylinderMassExact.agda`
+welds the ACTUAL three-sector binary horn addresses with
+the EXISTING Cantor cylinder mass, with exact
+`1/(3*2^n)` normalization, child mass consistency,
+rotation invariance, decidable finite prefix-cylinder
+membership and complement, and cylinder nesting.
+This is intrinsic wild-END topology, not an ambient
+R3 ball or global decomposition of the CONNECTED exterior.
+Indeed any continuous map from connected exterior
+to totally disconnected K=C3×Z2 must be constant.
+
+New local exact witness
+`scripts/alexander_horned_clopen_linking_impasse_probe.py`
+uses the same clopen address system for two different
+3D link configurations with signed intersection-linking
+numbers -1 and 0; the same oriented Hopf clasp can be
+rotated into all 3 disjoint sectors with rational margin
+proofs. The local linking witness is NOT Hatcher's
+global perfect commutator tower/van Kampen receipt.
+
+New local rational scaffold
+`scripts/alexander_horned_clopen_tree_handle_scaffold.py`
+uses the already source-defined 0 and 9e_i ball centres,
+three axis-aligned radius-1/4 disjoint spoke cores and
+a 4-vertex/3-edge C3-invariant TREE. Under genuine
+collared topological B3 seed + tame attachments,
+standard boundary connected sum yields a B3.
+The wild satellite embeddings, attaching collars and
+pi1 transition maps are still NOT constructed.
+
+The old `AlexanderHornedC3OrbitSolidExact` ALREADY
+makes any 3-phase seed orbit's set union R-invariant.
+Hence the priority is no longer a standalone `R(B)=B`
+conditional lemma, but constructing an actual embedded
+wild topological 3-ball under that orbit and verifying
+the complement Hatcher group via genuine geometric
+van Kampen. Full audit/provenance/acceptance:
+`Docs/topology/AlexanderHornedClopenBallGeometryMaxCut20261024.md`.
+
+No Agda kernel/CI receipt claimed at user request.
