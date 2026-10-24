@@ -1,0 +1,32 @@
+{
+  "permutation_spine": {
+    "normal_form": "(row mod 3, column mod 3, reflection mod 2)",
+    "normal_form_count": 18,
+    "distinct_permutation_matrices": 18,
+    "row_order_three": true,
+    "column_order_three": true,
+    "translations_commute": true,
+    "transpose_order_two": true,
+    "transpose_row_to_column": true,
+    "transpose_column_to_row": true,
+    "all_324_products_match_semidirect_law": true,
+    "identified_finite_group_shape": "C3^2 semidirect C2"
+  },
+  "first_tits_sl3_intersection": {
+    "coordinate_cycle_matrix_P": [[0,1,0],[0,0,1],[1,0,0]],
+    "determinant_P_mod3": 1,
+    "P_order_three": true,
+    "row_shift_formula": "rowShift(X)=P X",
+    "column_shift_formula": "columnShift(X)=X P^-1",
+    "row_formula_checked_on_all_3pow9_F3_tables": true,
+    "column_formula_checked_on_all_3pow9_F3_tables": true,
+    "interpretation": "the cube C3^2 translations are literal determinant-one left/right coordinate-cycle actions on an M3(F3) sector, compatible with the first-Tits/trinification SL3 factors"
+  },
+  "formal_owners": [
+    "DASHI/Biology/IITCubeDiagonalStabilizerExact.agda",
+    "DASHI/Biology/IITCubePermutationStabilizer18Exact.agda",
+    "DASHI/Mathematics/Algebra/Ternary27FirstTitsAlbertExact.agda",
+    "DASHI/Biology/IITCubeFirstTitsSL3TranslationIntersectionExact.agda"
+  ],
+  "boundary": "Finite same-action intersection only. It does not promote the selected cube dynamics to full E6 invariance or identify continuous/DHR/physical gauge semantics. Newest Agda owners remain kernel-unverified in this runtime."
+}
