@@ -943,3 +943,97 @@ Wild three-copy geometric π₁, a continuous flat
 SU(3) local system on that specific manifold, a
 physical lepton/VOA same-object map and neutrino
 likelihood fits are still independent obligations.
+
+## 2026-10-24 follow-up: original DASHI compact-Lie group cross-pollination
+
+We **already have** a full generic Yang–Mills group/Lie stack in
+`SUNMatrixCarrier`, `SUNMatrixLieAlgebra`, `SUNMatrixLieGroup`,
+`SU3MatrixInstance`, `CompactLieGroupCore` and
+`CompactLieGroupDerived` (see `Docs/CompactLieYangMills.md`).
+The positive Gotô/Hatcher horn representation MUST consume
+those named original theorem owners, not invent an incompatible
+`SU3` constructor or confuse `[X,Y]=XY-YX` in the Lie algebra
+with `[x,y]=xyx^-1y^-1` in the group.
+
+### New group-native source owners
+
+1. `DASHI/Physics/YangMills/CompactLieInnerC3Exact.agda`:
+   elementary identities **derived** from the existing
+   certified `Group`: inversion of a product,
+   composition of inner conjugations, and
+   `T*T*T=I => Ad_T^3=id`.
+   This replaces a source-written, separately assumed
+   inner-automorphism cube with an actual group power law.
+2. `DASHI/Mathematics/Topology/AlexanderHornedC3SUNLieGroupReuseExact.agda`:
+   derives conjugation preservation of inversion and of
+   the GROUP commutator, instantiates the pre-existing
+   `AlexanderHornedC3CompactCommutatorRepresentationExact`
+   on the literal `SU3.su3MatrixGroup` carrier, and
+   exposes a *separately provided* `GotôGroupSection`.
+   It does not create another subgroup or representation
+   with a coincidentally similar name.
+3. `tests/test_alexander_horned_c3_sun_reuse.py`:
+   exact A5 permutation controls of the group-level laws,
+   all group commutator roots, and five-level C3 horn refinement.
+
+Independent exact local audit: A5 60 elements, commutator
+section 60/60, **7,200** product/commutator
+inner-conjugation identities, 32 five-level leaves with
+C3-equivariant refinement, selected meridian order 5,
+selected inner-rotation order 3 — **PASS**.
+This is a finite nonabelian adversarial check and NOT a
+proof of the analytic SU(3) Gotô theorem.
+
+### The lepton target is now welded to that canonical interface
+
+Sibling <https://github.com/chboishabba/dashi_agda/pull/1247>
+added exact T³, unitarity and determinant source clauses to
+`NeutrinoHornedSU3RootExact.agda`, then
+`NeutrinoExistingSUN3CarrierWeldExact.agda`
+transports them into the *existing* Yang–Mills
+`SUNMatrixElement` subtype **given** a certified
+concrete function-backed 3x3 matrix theory, operation
+compatibilities and extensionality.  The source
+DERIVES special-unitary membership of both
+`A=TS1` and `T`, and derives T³ as an equality
+in the original SU3 group, rather than accepting
+those as independent witnesses.
+
+Independent exact Fraction calculation verified
+**45** matrix-entry equalities, determinant one
+for A and T, T³=I and Ad_T³(A)=A.
+The function extensionality, the concrete
+`CertifiedSUNMatrixTheory 3` instance, the
+analytic global Gotô section and exact-head Agda
+compiler remain distinct UNPAID obligations.
+The nine-cell `QutritMatrixGates.Matrix3` record
+is viable prior art for a function-extensionality-free
+presentation, but has not itself been equipped with
+all the SU3 matrix axioms in this PR.
+
+### Mathematical and physical promotion boundary
+
+Original group commutator surjectivity belongs to
+Morikuni Gotô, *J. Math. Soc. Japan* (1949),
+DOI 10.2969/jmsj/00130270.
+Lie-algebra bracket surjectivity, a DISTINCT fact,
+is treated for example by Malkoun–Nahlus,
+*Journal of Lie Theory* **27** (2017) 1027–1032,
+DOI 10.5802/jolt.980.
+
+The horn group's abstract infinite-image
+C3-equivariant representation remains an existence
+result. Since Gotô supplies factorizations for
+**every** SU3 target, it does not select the physical
+lepton mixing matrix; mathematical `SU3` also
+does not mean physical QCD colour `SU3`.
+A source-specific geometric holonomy/energy
+selection, experimentally predictive mass mechanism,
+kernel receipts and neutrino likelihoods remain open.
+
+**Commands / not asserted as run:**
+```sh
+agda -i . DASHI/Physics/YangMills/CompactLieInnerC3Exact.agda
+agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3SUNLieGroupReuseExact.agda
+python3 -m unittest discover -s tests -p 'test_alexander_horned_c3_sun_reuse.py' -v
+```
