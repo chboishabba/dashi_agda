@@ -141,3 +141,32 @@ The two models have the same **6561** linear-character count and the same order;
 Added `DASHI/Biology/IITJFineD4SymplecticMultiplicityObstructionExact.agda` and imported it from the existing IIT integration aggregate. It **reuses** the pre-existing `TernaryMonsterSymmetryCandidateExact.D4IrrepKind` and `rawNineMultiplicity` owners (it does not introduce competing D4 species). The new typed source shell records `2A1+B1+B2+2E`.
 
 The concrete theorem `noCompatibleNecessaryMultiplicity` eliminates all four central-multiplier cases using Agda's impossible patterns: `EvenMultiplicity 1` is empty in the untwisted case; `MatchedMultiplicity 2 0` or `MatchedMultiplicity 2 1` is empty in the three nontrivial cases. These are nonvacuous, source-irrep-indexed **necessary conditions**. The module explicitly does **not** claim to have kernel-derived the representation-theoretic implication from a full-rank alternating matrix to those conditions. The universal semisimple nondegenerate χ-valued pairing lemma and finite matrix interpretation remain Agda proof obligations. New Agda module and aggregate import are source-written but **not typechecked** in the present runtime; the exhaustive independent Python invariant-form matrix calculation remains the primary locally executed certificate.
+
+
+## 25 October exact-head executable audit and strengthened concrete group isomorphism
+
+**Correction to first committed H6 script:** the initial `iit_jfine_d4_heisenberg_h6_model_weld.py` referred to undefined helper attributes `x.eye/x.mm/x.tr/x.R8/x.M8`. The owner module exports `identity/product/transpose/R/M`; these imports/references have now been corrected in the committed branch. The first version was **not executable as committed**, regardless of the correctness of an independent equivalent local calculation. Do not treat the older local receipt as exact-head script execution evidence.
+
+An independent local F3 reconstruction on 25 October then passed *all four* alternating-form solution-space distributions, `rank(T)=8`, exact D4 source intertwiners, rank 10 and 12 repairs, 144 basis-pair form comparisons, 338 D4 lifted Heisenberg generator-pair products, and the new **177147 source subgroup–generator products**. This checks the mathematical algorithm, **not yet an exact GitHub checkout execution**. The same checks are integrated into `iit_numeric_verification.py`.
+
+**Explicit proof of `H3 × C3²`, not just counts.** Use source D4 character coordinates `s=(tE,tC,bE,bC,XE,YE,XC,YC)`. Under the repaired 12D form and its standard six-pair Heisenberg coordinates, the D4-stable source subgroup is
+```
+a6 = (tC,0,0,XC,YC,0)
+b6 = (tE,bE,bC,XE,YE,0)
+c  = original central trit
+```
+and its inherited group law is
+```
+(s,c)(s',c') =
+  (s+s', c+c' + tE*tC' + XE*XC' + YE*YC').
+```
+Hence the literal group isomorphism
+```
+toH3xC3sq(s,c) =
+  ((tC,XC,YC), (tE,XE,YE), c, (bE,bC))
+```
+with a literal two-sided inverse and separately additive last two central trits. The committed H6 script tests *every* 3^9 source element against nine generators (177147 compatibility checks). The centre order 3^3=27 and nonlinear degree-27 spectrum then follow from the standard extraspecial H3 × abelian-C3² character law. Unlike the original selected H4 (centre order3, nonlinear degree81), these are genuinely **nonisomorphic** group objects.
+
+**Elementary algebraic rank-bound proof without relying on enumeration alone:** in characteristic three, 3 does not divide 8=|D4|. The source shell is semisimple `2A1+B1+B2+2E`. The 4D sum of one-dimensional sectors `U=2A1+B1+B2` is orthogonal to the 4D E-isotypic part under every χ-valued alternating form. For χ=trivial, B1 and B2 are radical; for χ=A2, the two A1 directions are radical; for χ=B1, B2 is radical and the two A1 copies can pair with only one B1 direction, leaving another radical direction; χ=B2 is analogous. Thus `dim(rad ω)≥2` and `rank ω≤6` in every case. This argument upgrades the finite enumeration into a general proof for **the specified source D4 module**. The Agda file currently formalises the necessary multiplicity contradictions; the invariant-form-to-necessary-condition implication and concrete rank matrices are NOT Agda kernel-certified.
+
+**Proof boundary:** source-written Python and Agda are committed and locally reconstructed arithmetic was executed; Agda full typecheck and exact-head GitHub checked-out scripts have not been executed here. No inference about the literal Monster 3B normalizer, its 6.Suz faithful-family restriction, or any quantum/biological physical mechanism is made.
