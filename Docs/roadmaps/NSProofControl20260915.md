@@ -1,3 +1,75 @@
+# 2026-10-25 IBRAHIM PARETO HIGH-ALPHA REBASE — SOURCE TICH / BELTRAMI KERNEL / W1 LIMIT
+
+**Grounded primary-source audit:** author-uploaded related Permana/
+Ibrahim/Lathief v4 source, §2.1 Eq 3, §2.2 Definition 2.1/
+Remark 2.3, §3.2 Definitions 3.1–3.3 and Remark 3.7, explicitly
+states **TICH is a hypothesis whose nonlinear cancellation is an
+open conjecture**, with other TAH, DGMICH and T3→curvature postulates.
+The source's Eq 3 is `T3=||curl(omega×u)||²_2`.
+The cited May version is CONDITIONAL, not a second independent
+global A/B proof. Preserve v3 metadata "Hanif A. Lathif" and v4
+"Hanif A. Lathief" as source-specific spellings.
+
+**Exact physical obstruction:** original unforced Beltrami heat
+shear u_N=(A/N)e^(-nu N²t)(0,sin Nx,cos Nx) satisfies
+`omega_N=N u_N`, so `omega_N×u_N=0`, **T3(t)=0** for ALL t.
+At t_N=1/(nu N²)>0 it has
+`|omega|=A/e` at every point,
+`||grad xi||∞=N`,
+`||Delta u||²_2=A²N²/e²`,
+`||omega||²_2=A²/e²`,
+`||u||²_2=A²/(e²N²)`.
+Thus T3 is NONNEGATIVE but NOT STRICTLY POSITIVE DEFINITE on
+nonzero physical fields, and cannot by itself bound H², enstrophy,
+or direction curvature. The separate T3-weighted *alignment*
+inequality is **not contradicted** because the physical stretching
+scalar vanishes. This is a same-source counterexample to any
+universal T3 coercivity or viscosity-only direction-production
+step, not to explicitly conditional geometric regularity criteria.
+The original rational polynomial counterpart
+`beltramiLambVectorZero` is source-written in the existing
+`NSTriadKNPermanaAlignmentRateAudit.agda`, with no Agda kernel
+receipt. The true trigonometric PDE, T3 and physical helical
+computations are in
+`tests/test_ns_ibrahim_beltrami_T3_noncoercivity.py`,
+**6 independently locally passing exact SymPy tests**.
+
+**B novel shared-weighted firewall:** this same solution is PURE
+positive-helicity: `H+ u_k=u_k`, `H- u_k=0` for every Fourier
+mode. The ORIGINAL mixed W1 field
+`M_k=Σ(H+u_p)×(H-u_q)` therefore vanishes identically despite
+nonzero physical enstrophy and arbitrarily rapid vorticity
+direction. R735 W1 mixed-mass upper bounds are not universal
+physical coercivity. Full W2 and same-helicity/critical channels
+MUST remain; this does not disprove combined W1/W2.
+
+**A genuinely stronger constructive interface:** the original
+`NSClayFacingAPhysicalSameObjectCutExact.agda` now preserves
+the witness type **ℚᵘ** returned by Bishop
+`fast-density-of-ℚ` for both physical pointwise and SHELL heat
+floors. It previously erased a rational witness to
+`Σ BishopReal.ℝ`, making practical bridge to the rational
+resolvent harder. This strengthens proof-data provenance but
+does not typecheck/solve Bishop-real inverse-curvature transport
+nor A2/A3. The former exact-rational equals generic ν|xi|²
+record is still uninhabitable and must NOT be imported.
+
+**Pareto STOP rules:** TICH, TAH, DGMICH and T3-coercivity are
+unpaid/invalid shortcuts; source-written conditional claims
+have no effect on R735 W1/W2 or A1/A2/A3. Next positive work
+must pay actual signed global R735 W1 + W2 on arbitrary NS
+trajectories, or physical Bishop-real A1 real resolvent,
+A2 signed majorant and A3 continuation. Attribution travels
+with each claim; primary original source roots ≠ reprints ≠
+mathematical counterexample ≠ kernel-certified proof.
+
+Full evidence/source genealogy:
+`Docs/research/ns_ab_pareto_snowball_ibrahim_20261025.md`.
+No Agda/Lean kernel build or complete unforced A/B regularity
+was achieved by this cut.
+
+---
+
 # 2026-10-25 A/B PARETO / SNOWBALL / IBRAHIM ACTUAL PHYSICAL RECUT
 
 **Read direct research owner:** `Docs/research/ns_ab_pareto_snowball_ibrahim_20261025.md`.
