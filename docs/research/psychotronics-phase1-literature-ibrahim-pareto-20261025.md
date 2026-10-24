@@ -1,5 +1,11 @@
 # Phase 1, recut by user instruction: literary landscape, attribution, Pareto, Ibrahim and snowball
 
+## 25 October 2026 — current Phase-1 original-source graph / table independence
+
+**Live cross-index: [38 source-role entries](psychotronics-phase1-literature-landscape-20261025.csv) and [54 directed documentary edges](psychotronics-phase1-lineage-edges-20261025.csv)**, with no source ID reused as an independent experiment. The dedicated [2013 versus 2024 Rodin magnetic-table concordance](psychotronics-phase1-rodin-2013-2024-magnetometry-provenance-audit-20261025.md) and [three-row machine-readable comparison](psychotronics-phase1-rodin-field-table-concordance-20261025.csv) identify **three identical rounded experimental current–field pairs** across papers from an overlapping Guanajuato team; **data/session independence remains unproven**, not an allegation of fabrication. 2013 reported 1.60/4.13, 1.25/3.05, 0.60/1.16 (A/mT), matched in 2024; the theoretical columns differ. Treat E54 as *reported value concordance*, not proof of reuse or second independent measurement. The 2010 Rodin & Volk original's lack-of-controlled-publications observation was **time-bounded**, superseded by real 2013/2024 **ordinary Maxwell** instruments without proving novel scalar/gravity/clinical phenomena. The separately [dated-byline Croft/Flanagan/Gentry original-source investigation](psychotronics-phase1-flanagan-gentry-mobius-original-source-maxcut-20261025.md) preserves testimony vs first-party handoff boundaries. **Phase 1 remains source-landscape/Ibrahim/Pareto**, not new apparatus, social video, physical metrology or Agda/CI.
+
+
+
 ## 25 October fresh original-publication discovery: Rodin physical-field and biology journal family, 2013–2024
 
 **The central corrective for this Phase-1 literature landscape:** [2010 Rodin and Greg Volk](https://www.naturalphilosophy.org/pdf/abstracts/abstracts_5352.pdf) were speaking **as of 2010** when they wrote that disciplined quantitative controlled coil investigations were not then published. By **2013**, a Guanajuato-centred team **did publish real instrumented Rodin magnetic-field measurements and cultured-cell exposures**, and further source-owned papers followed in 2014, online 2020/print 2021, 2022 and a 2024 issue/2025 electronic rehosting. This is **genuine conventional magnetic-field/in-vitro original research**, not confirmation of orgone, quantum consciousness, scalar waves, antigravity, zero-point energy or a 24-point commercial Starship. The named studies retain original authorship, controls, biological sample boundaries and common team-dependence. The new [full original-publication audit](psychotronics-phase1-rodin-study-genealogy-20261025.md) is canonical for this source cluster.
@@ -16,12 +22,12 @@
 
 **Document-only Pareto effect:** A1 now has its **2010→2013→2014→2020→2022→2024 academically traceable sequel**, so 'find any experimental Rodin paper' is paid. The higher marginal value is **critical appraisal of original 2013/2014 biological confounds, longitudinal group dependence, 2024 named-citation genealogy and older Rodin/Powell original text**. The first-party **Gentry/Flanagan coil-instruction** frontier remains independently A2-high. No original footage, no new instrument work or CI demanded.
 
-**Counts:** [38 source-role rows](psychotronics-phase1-literature-landscape-20261025.csv), [53 directed relation entries](psychotronics-phase1-lineage-edges-20261025.csv), cross-indexed to existing larger literature/source atlas. Older 22/28 and 31/39 were snapshot counts, **not current**.
+**Counts:** [38 source-role rows](psychotronics-phase1-literature-landscape-20261025.csv), [54 directed relation entries](psychotronics-phase1-lineage-edges-20261025.csv), cross-indexed to existing larger literature/source atlas. Older 22/28 and 31/39 were snapshot counts, **not current**.
 
 
 ## 25 October follow-on: earlier dated Croft byline and genuinely cited Japanese coil prior art
 
-**The source graph is now [38 source-role objects](psychotronics-phase1-literature-landscape-20261025.csv) and [53 directed source relationship entries](psychotronics-phase1-lineage-edges-20261025.csv), with overlaps/derivatives explicitly conserved.** Read the [complete original-claim/source-critical max-cut](psychotronics-phase1-flanagan-gentry-mobius-original-source-maxcut-20261025.md).
+**The source graph is now [38 source-role objects](psychotronics-phase1-literature-landscape-20261025.csv) and [54 directed source relationship entries](psychotronics-phase1-lineage-edges-20261025.csv), with overlaps/derivatives explicitly conserved.** Read the [complete original-claim/source-critical max-cut](psychotronics-phase1-flanagan-gentry-mobius-original-source-maxcut-20261025.md).
 
 A **Croft-authored article internally dated 9 December 2002** was recovered in a later [Docsbay textual carrier](https://docsbay.net/doc/1283478/livea-cherish-s-ruminations-and-is-my-cb-working-advice-7-20-02); it states that **Gentry Smith** gave Croft written Möbius coil directions, allegedly learned from **Patrick Flanagan**. That is an *earlier dated content witness* for the Croft-authored claim in the undated-after-Feb-2008-context Welz dispute; it is **not** an independent person witness nor evidence Flanagan transferred an exact geometry. The hosting page title confusingly includes July 2002, but its actual Croft article body is explicitly headed **December 9, 2002**; the native first-host date remains uninspected. Newly scoped P1-23/E29–E30.
 
@@ -58,8 +64,8 @@ The original prompt emerged from **two uploaded screenshot sets (18 PNG hashes, 
 A modern maker's claim that a design descends from Rodin, Croft, Reich, Tesla, Rife, Pavlita, psychotronics, Lakhovsky or "quantum/369" supplies **a new researchable statement**; it does not by itself establish the technical or scientific equivalence of those names. Technical observations, historical genealogy, institutional custody, public allegations, consumer rhetoric and experimental proof must remain noninterchangeable.
 
 **Curated Phase-1 evidence ledgers created in this cut:**
-- [31 source-role records, original roots and limitations](psychotronics-phase1-literature-landscape-20261025.csv).
-- [39 directed documentary relationship hypotheses/evidence states](psychotronics-phase1-lineage-edges-20261025.csv).
+- [38 source-role records, original roots and limitations](psychotronics-phase1-literature-landscape-20261025.csv).
+- [54 directed documentary relationship hypotheses/evidence states](psychotronics-phase1-lineage-edges-20261025.csv).
 These are *a scoped slice / cross-index* of the existing 42-source-instance Agda screenshot-era atlas and the 61-row historical psychotronics corpus. **Do not add these three denominators**: sources recur across ledgers; a catalogue row and an original paper do not become independent trials. Each edge contains its exact source root and acceptance ceiling. The canonical general review remains [psychotronics-literature-review-20261024.md](psychotronics-literature-review-20261024.md); the [existing history](psychotronics-succor-punch-attribution-20261024.md) is an append-only diary. This Phase-1 file is an **integrative review and choice function**, not a claim to have exhausted all world literature.
 
 ## Landscape 1 — 1940s/1950s Reich versus 1990s Welz versus 2002 Croft
