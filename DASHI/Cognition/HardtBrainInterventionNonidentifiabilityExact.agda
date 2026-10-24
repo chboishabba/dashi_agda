@@ -7,7 +7,7 @@ import DASHI.Core.CoarseFineFabricCalculusExact as Fabric
 import DASHI.Core.ContrastiveInterventionResponseExact as Intervention
 
 ------------------------------------------------------------------------
--- HARDT/BR AIN-IT/THALAMOCORTICAL CROSS-PR FINITE CAUSAL CUT
+-- HARDT/BRAIN-IT/THALAMOCORTICAL CROSS-PR FINITE CAUSAL CUT
 --
 -- THIS IS A SOURCE-INDEPENDENT MATHEMATICAL COUNTEREXAMPLE, NOT A
 -- HUMAN EEG, fMRI, MEG, DELTA TRAINING, MIND-READING OR PSI RESULT.
@@ -41,7 +41,7 @@ observedOutcome w = sharedCue w
 passiveObservation : TrialWorld → Bool × Bool
 passiveObservation w = observedStimulus w , observedOutcome w
 
--- Intervention false is the untreated state (for the witness cue=false).
+-- The contrast is do(X=0) versus do(X=1). For the witness U=0,\n-- the do(X=0) arm coincides with passive observation; this is NOT an\n-- assertion that a forced-zero intervention is sham for every U.
 -- In the direct model the receiving outcome follows a forced input.
 -- In the shared-cause model it remains driven by its independent cue.
 -- The toy is a finite structural causal model, not human neural physics.
