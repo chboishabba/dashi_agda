@@ -16,7 +16,7 @@ module DASHI.Moonshine.Monster3BSuzukiSelectedFaithful78C2Exact where
 --   irreducible Sym² of faithful 6.Suz degree12 is degree78 but
 --   central C2 acts trivially; it factors through 3.Suz.
 --
--- A faithful irreducible 6.Suz degree12 and a faithful irreducible
+-- IF a faithful irreducible 6.Suz degree12 and a faithful irreducible
 -- 6.Suz degree78 each have central involution scalar -1.
 -- Their direct-sum degree90 centre trace is -90.
 -- In 12 ⊕ Sym²(12), the 12 contributes -12 and 78 contributes +78,
@@ -38,14 +38,14 @@ open import Data.Empty using (⊥)
 import DASHI.Moonshine.Monster3BJFineNineCellSymmetricSquareD4Exact as Nine
 
 data SourceSuzuki78Family : Set where
-  faithfulSelected78 nebeSymmetricSquare78 : SourceSuzuki78Family
+  hypotheticalFaithful78 nebeSymmetricSquare78 : SourceSuzuki78Family
 
 centreC2Sign78 : SourceSuzuki78Family → Nine.CentralSign
-centreC2Sign78 faithfulSelected78 = Nine.negative
+centreC2Sign78 hypotheticalFaithful78 = Nine.negative
 centreC2Sign78 nebeSymmetricSquare78 = Nine.positive
 
 faithful78CentralSignCannotEqualSymSquare :
-  centreC2Sign78 faithfulSelected78
+  centreC2Sign78 hypotheticalFaithful78
     ≡ centreC2Sign78 nebeSymmetricSquare78 → ⊥
 faithful78CentralSignCannotEqualSymSquare ()
 
@@ -55,16 +55,16 @@ faithful78CentralSignCannotEqualSymSquare ()
 data SignedTrace : Set where
   positiveTrace negativeTrace : Nat → SignedTrace
 
-sourceSelectedMultiplicityCentreTrace : SignedTrace
-sourceSelectedMultiplicityCentreTrace = negativeTrace 90
+faithfulFamilyMultiplicityCentreTrace : SignedTrace
+faithfulFamilyMultiplicityCentreTrace = negativeTrace 90
 
 nebeSymSquareMultiplicityCentreTrace : SignedTrace
 nebeSymSquareMultiplicityCentreTrace = positiveTrace 66
 
-sourceSelectedNotNebeAsSixSuz :
-  sourceSelectedMultiplicityCentreTrace
+faithfulFamilyNotNebeAsSixSuz :
+  faithfulFamilyMultiplicityCentreTrace
     ≡ nebeSymSquareMultiplicityCentreTrace → ⊥
-sourceSelectedNotNebeAsSixSuz ()
+faithfulFamilyNotNebeAsSixSuz ()
 
 centralTraceDifference : 66 + 90 ≡ 2 * 78
 centralTraceDifference = refl
@@ -76,9 +76,9 @@ centralTraceDifference = refl
 record Selected6SuzFamilyBoundary : Set where
   constructor selected6SuzFamilyBoundary
   field
-    originalSameObjectMatcherSelectsFaithful78 : Set
+    originalSameObjectMatcherFindsFaithfulnessFromSource : Set
     originalSameObjectMatcherActuallyRan : Set
-    originalActualMonster78OccurrencePaidHere : Set
+    actualMonster78OccurrencePaidHere : Set
     originalMonsterNormalizerIntertwinerPaidHere : Set
 
 -- Uninhabited semantic obligations above are deliberately NOT
