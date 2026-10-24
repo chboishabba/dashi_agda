@@ -74,7 +74,7 @@ stoneComment =
 goesSecondaryReport : Source.AttributedSource
 goesSecondaryReport =
   Source.mkNoDOISource
-    "Thomas Newdick / The War Zone"
+    "Piotr Butowski / The War Zone"
     "Enhanced Version Of Russia's Ka-52 Attack Helicopter Appears"
     "defence reporting, 21 July 2023"
     "2023"
