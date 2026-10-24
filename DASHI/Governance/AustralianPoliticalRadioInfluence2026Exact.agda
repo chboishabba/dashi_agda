@@ -16,6 +16,11 @@ import DASHI.Governance.BOMFordhamMediaClaimAuditExact as BOM
 
 data PoliticalRelation : Set where
   broadcasterOwnership : PoliticalRelation
+  legalOperatorRegistration : PoliticalRelation
+  historicEquityHolding : PoliticalRelation
+  productionSupply : PoliticalRelation
+  announcedStrategicPartnership : PoliticalRelation
+  proposedUncompletedAcquisition : PoliticalRelation
   financialEntitlement : PoliticalRelation
   politicalDonation : PoliticalRelation
   inKindTransportSupport : PoliticalRelation
@@ -67,7 +72,7 @@ fordhamTapt = relationship-receipt
 newShowLegalOperator : RelationshipReceipt
 newShowLegalOperator = relationship-receipt
   "Kyle Sandilands Live programme" "Kyle Sandilands Live Pty Ltd (ABN 24 699 610 261)"
-  broadcasterOwnership institutionRecord
+  legalOperatorRegistration institutionRecord
   "Australian Business Register, active since 29 June 2026"
   "https://abr.business.gov.au/ABN/View?id=24699610261"
   "Public ABR register confirms company identity, active date and GST status; no current shareholding extract available from this source." false false false
@@ -83,7 +88,7 @@ sandilandsSelfReportedOwnership = relationship-receipt
 aiimsProduction : RelationshipReceipt
 aiimsProduction = relationship-receipt
   "AIIMS Creator Hub" "At Home With Kyle / Kyle Sandilands Live"
-  editorialPublication institutionRecord
+  productionSupply institutionRecord
   "AIIMS Creator Hub direct production announcement, 24 July 2026"
   "https://aiims.group/aiims-creator-hub-kyle-sandilands-live/"
   "AIIMS says it filmed, directed and produced At Home With Kyle. A paid contractor or co-production role is not a disclosed equity investment." false false false
@@ -91,7 +96,7 @@ aiimsProduction = relationship-receipt
 nineTaptStrategicPartnership : RelationshipReceipt
 nineTaptStrategicPartnership = relationship-receipt
   "Nine Entertainment" "Laundy Family Office / Tapt Media"
-  financialEntitlement institutionRecord
+  announcedStrategicPartnership institutionRecord
   "Nine January 2026 radio divestiture statement"
   "https://newmedia.com.au/nine-announces-sale-of-radio-assets/"
   "Despite divestiture, parties announced continuing 9News radio journalism, ad-sales, marketing, Stan Sport and pub promotion collaborations. Not proof Nine still owns Tapt." false false false
@@ -99,10 +104,53 @@ nineTaptStrategicPartnership = relationship-receipt
 kyleProposedARNBuyout : RelationshipReceipt
 kyleProposedARNBuyout = relationship-receipt
   "Kyle Sandilands" "Proposed ARN takeover / $90m outside capital"
-  disputedAuthorshipClaim journalistCorroboration
+  proposedUncompletedAcquisition journalistCorroboration
   "News.com.au reported April 2026 take-private concept"
   "https://www.news.com.au/entertainment/tv/radio/kyle-sandilands-plots-arn-takeover-but-still-needs-90-million-investor/news-story/ee29d7ba21ef87a7af1cbfb7987f07a5"
   "Reported proposal sought about AUD 90m in investors plus AUD 10m personal contribution, with Laundy discussions/speculation. No identified committed external backer or completed ARN acquisition." false false false
+
+-- 2025 annual report, register date 3 February 2026; historic
+-- shares should not be carried as a current ownership percentage without
+-- new substantial holder notices / revised registry extracts.
+quasarARNHistoricalEquity : RelationshipReceipt
+quasarARNHistoricalEquity = relationship-receipt
+  "Quasar Media Services Pty Ltd" "ARN Media Limited"
+  historicEquityHolding institutionRecord
+  "ARN Media 2025 annual report, share register 3 February 2026"
+  "https://financialfilings.com/filings/arn-media-limited/annual-report/2026/37381126/"
+  "ARN's published top-twenty register lists 3,161,166 Quasar shares (1.01%). ARN's 18 March company announcement separately says Quasar was Sandilands' broadcaster service contractor; ownership, custody, beneficial control, vesting and subsequent disposition require share-ledger/contract detail." false false false
+
+quasarKyleService : RelationshipReceipt
+quasarKyleService = relationship-receipt
+  "Quasar Media Services Pty Ltd" "Kyle Sandilands / ARN broadcaster services"
+  productionSupply institutionRecord
+  "ARN first-party termination of contract with Quasar Media, 18 March 2026"
+  "https://arn.com.au/market-announcement-termination-of-contract-with-quasar-media-and-mr-sandilands/"
+  "ARN says Quasar provided contracted broadcasting services for Kyle. The service relationship ends March 2026; existence of old ARN shares does not establish continued control or a KSL investment." false false false
+
+hendersonARNHistoricalEquity : RelationshipReceipt
+hendersonARNHistoricalEquity = relationship-receipt
+  "Henderson Media Pty Ltd" "ARN Media Limited"
+  historicEquityHolding institutionRecord
+  "ARN 2025 annual report 3 February 2026"
+  "https://financialfilings.com/filings/arn-media-limited/annual-report/2026/37381126/"
+  "Top-twenty register lists 3,161,166 shares (1.01%) for Henderson Media, former Jackie O service counterparty. This is not a share in KSL and not automatically her personal beneficial ownership." false false false
+
+southernCrossARNIndirect : RelationshipReceipt
+southernCrossARNIndirect = relationship-receipt
+  "Southern Cross Media Group (after Seven West merger)" "ARN Media"
+  historicEquityHolding institutionRecord
+  "ACMA Media Interests snapshot, February 2026"
+  "https://www.acma.gov.au/updates-media-interests-snapshot"
+  "ACMA records Southern Cross acquired 14.54% ARN through Jan 2026 Seven West merger; distinct from a station licence transfer, and does not prove Southern Cross or Kerry Stokes directs Kyle's new platform." false false false
+
+stokesSouthernCrossStake : RelationshipReceipt
+stokesSouthernCrossStake = relationship-receipt
+  "SGH / Kerry Stokes" "Southern Cross Media Group"
+  historicEquityHolding institutionRecord
+  "ACMA Media Interests snapshot, February 2026"
+  "https://www.acma.gov.au/updates-media-interests-snapshot"
+  "ACMA attributes approximately 20.06% Southern Cross interest to SGH and Kerry Stokes after merger. Path to ARN is two distinct equity edges, not a claim of controlling every radio presenter." false false false
 
 kiisARN : RelationshipReceipt
 kiisARN = relationship-receipt
@@ -126,7 +174,7 @@ arnNewsCorpExit = relationship-receipt
   broadcasterOwnership institutionRecord
   "ACMA updates to Media Interests, December 2025"
   "https://www.acma.gov.au/updates-media-interests-snapshot"
-  "Regulator confirms News Corp ceased to be substantial holder in ARN in December 2025; some market aggregator sites still display stale 13.97 percent stakes. This is a documented exited investment, not 2026 control." false false false
+  "ACMA records News Corp ceased substantial-holder status December 2025. ARN annual report nevertheless lists 43.7m News shares on its 3 February 2026 substantial-holder notice table; the incompatible dates/notices demand reconciliation, not categorical assertion of zero beneficial shares." false false false
 
 hancockAdvance : RelationshipReceipt
 hancockAdvance = relationship-receipt
