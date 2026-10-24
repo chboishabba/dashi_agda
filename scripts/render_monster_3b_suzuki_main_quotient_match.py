@@ -120,6 +120,12 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
     c2_sym2_compatible = p.get("source_selected_c2_compatible_with_sym2_faithful12")
     if type(c2_sym2_compatible) is not bool:
         raise ValueError("source-selected Sym² C2 compatibility must be a bool")
+    central3_pos = req_int(p, "suzuki_central_order_three_class_position")
+    common729_pairs = req_int(
+        p, "common_729_necessary_equal_C3_phase_pair_count", positive=False
+    )
+    if common729_pairs not in (0, 1, 2):
+        raise ValueError("invalid equal-centre C3 pair count")
     central2_pos = req_int(p, "suzuki_central_involution_class_position")
     source_trace = req_int(p, "source_selected_S90_central_C2_trace", positive=False)
     sym2_trace = req_int(p, "sym2_candidate_S90_central_C2_trace", positive=False)
@@ -148,6 +154,8 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         "mult12": mult12,
         "mult78": mult78,
         "central2_pos": central2_pos,
+        "central3_pos": central3_pos,
+        "common729_pairs": common729_pairs,
         "source_trace": source_trace,
         "sym2_trace": sym2_trace,
         "selected_faithful": selected_faithful,
@@ -207,6 +215,10 @@ sixSuzDegree78AtlasLabels = {agda_pair_string(v['labels78'])}
 -- presupposed faithful 6.Suz character filter.
 sixSuzCentralInvolutionClassPosition : Nat
 sixSuzCentralInvolutionClassPosition = {v['central2_pos']}
+sixSuzCentralOrderThreeClassPosition : Nat
+sixSuzCentralOrderThreeClassPosition = {v['central3_pos']}
+common729NecessaryEqualC3PhasePairCount : Nat
+common729NecessaryEqualC3PhasePairCount = {v['common729_pairs']}
 selectedDegree78FaithfulToSixSuz : Bool
 selectedDegree78FaithfulToSixSuz = {str(v['selected_faithful']).lower()}
 selectedC2SymSquareNecessaryCompatibility : Bool
