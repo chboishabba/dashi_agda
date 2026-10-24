@@ -87,6 +87,8 @@ data OriginRoot : Set where
   fecEnforcementRoot : OriginRoot
   silvesterTestimonyRoot : OriginRoot
   dcmsCommitteeFinalReportRoot : OriginRoot
+  nixWitnessRoot : OriginRoot
+  koganWitnessRoot : OriginRoot
 
 data CaseClaim : Set where
   sclCAOperatingContinuity : CaseClaim
@@ -112,6 +114,8 @@ data CaseClaim : Set where
   silvesterAIQBoltonDeployment2018 : CaseClaim
   dcmsRiponRepositoryReview2019 : CaseClaim
   dcmsICOBrexitCounterFinding2019 : CaseClaim
+  nixAIQHistoricalRiponConfirmation : CaseClaim
+  koganSeparateStatisticalDelivery : CaseClaim
 
 record BoundedSource : Set where
   constructor bounded-source
@@ -226,6 +230,18 @@ canonicalSources =
     "https://publications.parliament.uk/pa/cm201719/cmselect/cmcumeds/1791/179107.htm ; paragraph 157 quoting ICO"
     "2019" "2016 referendum"
     "UK Commons DCMS report quotes the ICO as finding no evidence at that time of SCL Elections/CA data analytics work for EU referendum campaigns and no unlawful UK-citizen data activity in the stated AIQ-SCL relationship. Here the ICO text is a committee-reported counterfinding, not a separately inspected original ICO report."
+    true false false false
+  ∷ bounded-source nixAIQHistoricalRiponConfirmation nixWitnessRoot
+    attributedFirstPersonTestimony
+    "https://committees.parliament.uk/oralevidence/8065/html/ ; Q3259-Q3266"
+    "2018-06-06" "2014"
+    "Former CA chief Alexander Nix told Parliament AIQ built Ripon for them, a voter-engagement platform for audience targeting. He said he could not describe its technical implementation. His testimony is an independent speaker origin, though both Silvester/Nix may describe the same project and no original signed IP transfer is inspected."
+    true false false false
+  ∷ bounded-source koganSeparateStatisticalDelivery koganWitnessRoot
+    attributedFirstPersonTestimony
+    "https://committees.parliament.uk/oralevidence/7853/html/ ; Q2012-Q2018"
+    "2018-04-24" "2014-2015"
+    "Kogan says his team produced predictions using R, delivered password-protected spreadsheet-like files to SCL, and that he did not know AIQ or how Ripon used them downstream. A Kogan->AIQ direct personal relationship and identical dataset import are not paid by his own testimony."
     true false false false
   ∷ bounded-source mindWarAuthored aquinoVallelyRoot
     attributedAuthorProposal
@@ -1303,3 +1319,58 @@ unifiedNetworkScope = ripon-same-object-boundary
 scopedH2DoesNotChangeWholeNetworkH2 :
   intergenerationalBridgePaid localRiponScope ≡ false
 scopedH2DoesNotChangeWholeNetworkH2 = refl
+
+
+------------------------------------------------------------------------
+-- MULTI-WITNESS, SINGLE-SOFTWARE IDENTIFIER; THE DIRECT DEVELOPER
+-- (SILVESTER), COMPANY EXECUTIVE (NIX) AND UPSTREAM MODELLER (KOGAN)
+-- HAVE DIFFERENT FIRST-PERSON COVERAGE. CODE-CUSTODY / DATA-IDENTITY
+-- REMAINS A SEPARATE BIDI CONSUMER.
+------------------------------------------------------------------------
+
+data RiponRole : Set where
+  developerSilvester : RiponRole
+  commissioningExecutiveNix : RiponRole
+  upstreamModelProducerKogan : RiponRole
+
+record RiponRoleStatement : Set where
+  constructor ripon-role-statement
+  field
+    role : RiponRole
+    root : OriginRoot
+    locatedTranscript : String
+    paysSpecificRiponSoftwareRole : Bool
+    paysDirectKoganAIQCollaboration : Bool
+    paysIdenticalDatasetFingerprint : Bool
+open RiponRoleStatement public
+
+silvesterRole : RiponRoleStatement
+silvesterRole = ripon-role-statement
+  developerSilvester silvesterTestimonyRoot
+  "UK DCMS 2018-05-16 Q2776-Q2784"
+  true false false
+
+nixRole : RiponRoleStatement
+nixRole = ripon-role-statement
+  commissioningExecutiveNix nixWitnessRoot
+  "UK DCMS 2018-06-06 Q3259-Q3266"
+  true false false
+
+koganRole : RiponRoleStatement
+koganRole = ripon-role-statement
+  upstreamModelProducerKogan koganWitnessRoot
+  "UK DCMS 2018-04-24 Q2012-Q2018: R/statistical output sent to SCL"
+  false false false
+
+riponNamedByTwoDistinctWitnesses :
+  paysSpecificRiponSoftwareRole silvesterRole ≡ true
+  × paysSpecificRiponSoftwareRole nixRole ≡ true
+riponNamedByTwoDistinctWitnesses = refl , refl
+
+koganDeliveryDoesNotPayDirectAIQKnowledge :
+  paysDirectKoganAIQCollaboration koganRole ≡ false
+koganDeliveryDoesNotPayDirectAIQKnowledge = refl
+
+originalDatasetFingerprintStillUnpaid :
+  paysIdenticalDatasetFingerprint koganRole ≡ false
+originalDatasetFingerprintStillUnpaid = refl
