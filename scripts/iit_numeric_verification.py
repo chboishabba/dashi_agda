@@ -33,6 +33,7 @@ from iit_xor_grid_calibration import calibration_summary
 from iit_lattice_prime_power_audit import audit as prime_power_lattice_audit
 from iit_j_coarse_fine_5cube_audit import audit as five_cube_fibre_audit
 from iit_jfine_selected_punctured79_audit import audit as selected_punctured79_audit
+from iit_projective_f9_pointed80_audit import audit as projective_pointed80_audit
 
 
 def _xor2(a: int, b: int) -> int:
