@@ -1,4 +1,7 @@
 # Aquino–Maxwell–Epstein–CA: surrounding repository prior-art audit and source-root max-cut
+
+> **CURRENT DISPOSITION — RESEARCH FREEZE (25 Oct 2026):** [canonical acceptance/debt ledger](aquino-epstein-canonical-disposition-20261025.md) supersedes historical round priorities in this document. The original-source details below remain a provenance archive; do **not** reopen aggregate GSR/Kogan-to-AIQ research or promote whole-network coordination without a new original same-object discriminator. Next gate: typecheck/test and bounded corrections, not another broad snowball.
+
 24 October 2026. Case #1245; parent #1131. Work is original-document / attribution / exact-object analysis; **NOT** an adjudicated conspiracy finding or a new ontology.
 
 ## Repository audit method and scope
