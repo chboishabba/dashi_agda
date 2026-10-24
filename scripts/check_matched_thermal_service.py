@@ -98,7 +98,7 @@ def compare(points):
             'observations': [dict(technology=p.technology, uri=p.study_uri,
                                   kind=p.source_kind, test_object=p.test_object,
                                   declared_plug_cop=round(p.plug_cop, 6),
-                                  eligible_for_empirical_comparison=(
+                                  declared_experimental_source=(
                                       p.source_kind in {'independent_measurement',
                                                         'author_experiment'}))
                              for p in points]}
@@ -116,7 +116,7 @@ class Checks(unittest.TestCase):
                   10, 35, 5, 3, 2, 'MODEL-CAL', 'S-01')
         d = compare([self.a, b])
         self.assertEqual([x['declared_plug_cop'] for x in d['observations']], [2, 2])
-        self.assertFalse(d['observations'][1]['eligible_for_empirical_comparison'])
+        self.assertFalse(d['observations'][1]['declared_experimental_source'])
 
     def test_reject_unmatched_temperature(self):
         b = Point(**{**vars(self.a), 'technology': 'different', 'hot_c': 45})
