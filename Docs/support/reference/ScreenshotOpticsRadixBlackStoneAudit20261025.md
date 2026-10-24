@@ -119,6 +119,26 @@ polygon's perimeter is not the circumference of a circle. The screenshot does
 not establish regularity, circumscription/inscription geometry, a radius, or
 an equality with \(2\pi r\).
 
+
+**Ambiguous decimal point in the reel.** Writing `0.5` does not specify
+one-half if *the numerals themselves are base twelve*: `(0.5)_{12}=5/12`,
+whereas `(0.5)_{10}=1/2=(0.6)_{12}`. Accordingly, if the visible
+`0.5 sqrt(2)` is truly written in dozenal, the squared side length is
+`25/72` and twelve equal sides imply **P² = 50**, not 72:
+
+\[
+s_{\mathrm{dozenal}}=\frac5{12}\sqrt2,\quad
+P=12s=5\sqrt2,\quad P^2=50.
+\]
+
+The separate exact Agda theorem
+`twelveDozenalDotFivePerimeterSquaredIs50` checks this interpretation.
+The same rendered token `12` itself means *fourteen* if parsed in base
+twelve (`(12)_{12}=14` decimal); actual side count must be obtained by
+counting, not by reading an unspecified numeral. Both perimeter theorems
+are conditional on **twelve counted sides**, not on what the author
+meant by an ambiguous printed numeral.
+
 For a genuine regular inscribed dodecagon of radius \(r\), a *separate*
 standard analytic calculation gives
 
@@ -169,8 +189,9 @@ is true or false.
 
 **Delivered source-written:**
 
-- finite exact base-10/base-12 fraction equality and conditional 12-sided
-  perimeter-squared arithmetic;
+- finite exact base-10/base-12 fraction equality, proof that identical
+  printed dot-five notation has different values across radices, and
+  both conditional 12-sided perimeter-squared readings (72 and 50);
 - explicit separation of radix/C12/P13 roles;
 - seven-entry attributed source atlas, distinguishable evidence roles and
   reuse of the existing clipping postprocessing theorem;
