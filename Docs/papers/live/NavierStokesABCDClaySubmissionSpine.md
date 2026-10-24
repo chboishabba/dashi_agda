@@ -1,3 +1,17 @@
+> **A physical Fourier majorant strengthened further (24 October).**
+> For divergence-free u∈H¹(R³), E=||u||²₂ and D=||grad u||²₂,
+> the same physical projected nonlinear Fourier source satisfies
+> `|F[Pdiv(u⊗u)](xi)| <= min(E|xi|,sqrt(E D))`.
+> Its direct stationary Stokes/heat-inverse Fourier response has
+> a global squared L² bound `(8*pi/nu²)*E^(3/2)*sqrt(D)`.
+> By the existing unforced energy inequality, on every finite
+> horizon `[0,T]` the time integral is at most
+> `4*sqrt(2)*pi*E0²*sqrt(T)/nu^(5/2)`.
+> This is a standard same-source finite-energy/H¹ estimate and
+> remains distinct from the canonical signed centered A2
+> double-resolvent and A3 global smooth continuation.
+> The exact Fourier Schwartz calibration and radial integrals
+> have executable SymPy receipts; no Agda/Lean kernel proof claimed.
 > **24 Oct 2026 — physical B4 source-defined no-go now resolved.**
 > The original R219 modal ED, R109 pair kernel, R469 selected-triad
 > transport and physical uniform-family localED definition fix the
