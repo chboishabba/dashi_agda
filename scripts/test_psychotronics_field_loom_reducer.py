@@ -122,6 +122,31 @@ class ReducerTest(unittest.TestCase):
             self.assertFalse(verify_pair_source(meta,derived['pairs'])
                              ['raw_stream_replayed_to_pairs'])
 
+    def test_source_time_order_counterbalances_each_active_arm(self):
+        # Four-pair fixture has every active after sham, thus linear drift alias.
+        single = replay()
+        self.assertFalse(single['temporal_counterbalance']['balanced_linear_order_by_active_arm'])
+        arms = ((1,1),(-1,1),(1,-1),(-1,-1))
+        fixture = [HEADER]
+        t = 10
+        for session in (0,1):
+            for idx,(current,sign) in enumerate(arms):
+                sequence = (('sham',0),('active',current)) if session == 0 else (
+                            ('active',current),('sham',0))
+                for condition,coil in sequence:
+                    fixture.append(f'p{idx}_{session},s{session},{condition},{t},{coil},{sign},0,0,{"pos" if sign==1 else "neg"}')
+                    t += 5
+        result = replay(fixture)
+        self.assertEqual(len(result['pairs']),8)
+        balance = result['temporal_counterbalance']
+        self.assertTrue(balance['balanced_linear_order_by_active_arm'])
+        self.assertTrue(all(x['signed_gap_sum_ns'] == 0 for x in balance['arm_order_counts'].values()))
+        corrupted = fixture[:]
+        cells = corrupted[-1].split(',')
+        cells[3] = str(int(cells[3]) + 1)
+        corrupted[-1] = ','.join(cells)
+        self.assertFalse(replay(corrupted)['temporal_counterbalance']['balanced_linear_order_by_active_arm'])
+
     def test_header_and_calibration_must_be_exact(self):
         with self.assertRaises(ValueError): replay([HEADER+',extra']+rows()[1:])
         c=calibration();c['coil_sham_max_abs_a']=.2
