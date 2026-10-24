@@ -991,3 +991,74 @@ def test_ftc_final_order_is_duty_not_completed_deletion():
         "lawfully redacted",
     ):
         assert token in report
+
+
+def test_canadian_2019_regulators_pay_aggregate_kogan_derived_aiq_scores():
+    """Joint first-party regulator finding closes aggregate edge, not individual file custody."""
+    case = OWNER.read_text()
+    evidence = (ROOT / "docs/research/kogan-aiq-canadian-regulator-source-cut-20261025.md").read_text()
+    for token in (
+        "canadianJointAIQOriginal2019 = Acquisition.sourceAcquisitionTarget",
+        "PIPEDA Findings 2019-004",
+        "canonicalCanada2019AggregateScoreFinding = canada-2019-aggregate-score-finding",
+        "sourceStatesScoresAtLeastPartlyDerivedFromKoganFacebookData : Bool",
+        "investigatorsFoundAIQKnewSCLUsedKoganData : Bool",
+        "investigatorsFoundUSCampaignConsentFailures : Bool",
+        "investigatorsFoundInadequateSafeguardsAffectingAbout35m : Bool",
+        "canadaRegulatorsPayAggregateKoganDerivedAIQScores = refl",
+        "canadaRegulatorsPayAIQAwareness = refl",
+        "canadaJointReportNotTwoIndependentRoots = refl",
+        "canadaKoganRawAppBytesStillNotProvenAtAIQ = refl",
+        "canadaAggregateFindingDoesNotPaySpecificRiponRow = refl",
+        "canadaConditionalResolutionIsNotVerifiedFollowup = refl",
+        "canadaScoreFindingDoesNotPayElectionCausality = refl",
+        "canadaScoreFindingDoesNotPayEpsteinAquinoProgramme = refl",
+        "canonicalTwoArmCanadianPromotionCut =",
+        "aggregateSourceLineageNowPaid = refl",
+        "regulatoryAggregateFindingDoesNotProvideOriginalRowHash = refl",
+        "aggregateProvenanceIsNotSpecificConsumerDataIdentity = refl",
+    ):
+        assert token in case
+    for token in (
+        "The regulators",
+        "one *joint* investigation",
+        "derived at least in part",
+        "specific",
+        "raw",
+        "conditionally resolved",
+        "H2/H3",
+    ):
+        assert token.lower() in evidence.lower()
+
+
+def test_canada_paid_aggregate_is_not_private_raw_data_or_proven_outcome():
+    case = OWNER.read_text()
+    portfolio = (ROOT / "docs/research/aquino-epstein-portfolio-maxcut-20261024.md").read_text()
+    roadmap = ROADMAP.read_text()
+    assert "specificGSRScoreFileEqualsRiponInput : Bool" in case
+    assert "sharedSCLHubDoesNotProveSpecificDataset = refl" in case
+    assert "individualKoganGSRScoreFileToNamedRiponRowMatched : Bool" in case
+    assert "canadaAggregateFindingDoesNotPaySpecificRiponRow = refl" in case
+    assert "two-arm-canadian-promotion-cut true true false false false" in case
+    assert "kogan-aiq-canadian-regulator-source-cut-20261025.md" in roadmap
+    assert "aggregate Kogan-derived AIQ lineage" in portfolio
+    assert "P0 aggregate link source finding CLOSED" in roadmap
+    assert "whole-network" in portfolio.lower()
+
+
+def test_march_wyden_ocdetf_same_investigator_and_confidential_tip_claim_only():
+    bank = (ROOT / "DASHI/Cognition/EpsteinBankingInfrastructureAcquisitionExact.agda").read_text()
+    study = (ROOT / "docs/research/kogan-aiq-canadian-regulator-source-cut-20261025.md").read_text()
+    for token in (
+        "chainReactionWydenMarch18 = chain-reaction-source-receipt",
+        "Wyden",
+        "2026-03-18",
+        "confidential tip",
+        "canonicalChainReactionOversightAttributionCut =",
+        "marchAllegationIsNotAuthenticatedIntervention = refl",
+        "wydenFollowupsDoNotCreateIndependentSecondSource = refl",
+        "ocdetfOutcomeNotProvenBySenateComplaint = refl",
+    ):
+        assert token in bank
+    assert "same Wyden investigation root" in study
+    assert "independently authenticated DOJ blocking instruction" in study
