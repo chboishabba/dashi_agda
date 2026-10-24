@@ -147,3 +147,85 @@ The exact relation is 79=81-(3-1)=3^4-2. The set F81 has 81 elements; puncturing
 New Agda producer: DASHI/Biology/IITField81Inverse79ContractExact.agda provides an explicit conditional multiplicative law and the inverse79Left proof assuming a supplied nonzero Fermat80 certificate. It is imported into IITPhiIntegrationEverything. This proves the correct interface-level implication but does **not** construct the literal quartic multiplication or discharge Fermat80 in the Agda kernel. That concrete field proof remains an open obligation.
 
 The primitive generator selection in scripts/iit_pgl2_f9_720_audit.py was strengthened to explicitly check multiplicative order 80 before using it to produce the Singer C10. The independent local F81 unit-inverse and projective checks remain valid as finite computational evidence, distinct from exact-head GitHub script execution or Agda compiler receipts.
+
+
+## 2026-10-24 max-cut: 79, relative norm, and **concrete** Agda source codecs
+
+### Refined arithmetic: 81-79 = 3-1 without confusing field elements and integers
+
+Let K=F81=F3[X]/(X^4+X+2) with its **unique** subfield L=F9. For x≠0,
+
+\[
+x^{80}=1,\qquad x^{-1}=x^{79}=x^{81-2},
+\quad 81-79=2=3-1.
+\]
+
+The equation with 3−1 is characteristic-three arithmetic coincidence; inversion in a general Fq has exponent q−2, *not* q−(p−1). The integer 81 maps to zero in characteristic 3 and **has no field reciprocal**; 79 is a power **exponent**, not the reciprocal of 81. Also 79≡−1(mod80), making inversion an involution. Its fixed nonzero elements are exactly +1 and −1; the C10 norm-one subgroup has two fixed points and four swapped pairs.
+
+The true extension-field/Galois connection is:
+
+\[
+\operatorname{Frob}_{K/L}(x)=x^9,\quad
+N_{K/L}(x)=x\,x^9=x^{10}\in L^\times,
+\]
+\[
+x^{-1}=\frac{x^9}{N_{K/L}(x)};\qquad
+N(y)=1\Longrightarrow y^9=y^{-1}.
+\]
+
+The **canonical projective group quotient** admits the stronger explicit norm-one identity
+\[
+K^\times/L^\times
+\ \cong\ \ker(N_{K/L}) \cong C_{10},
+\quad [x]\longmapsto x^{8}.
+\]
+Kernel of \(x\mapsto x^8\) is precisely \(L^\times\) (eight elements); image comprises all ten norm-one points, with exactly eight sources per image. The C5 subgroup has two five-cycles on the projective ten-point carrier. None of these facts implies an SSP p79 lane or Monster action.
+
+### Same-original-quartic source arithmetic, not just abstract finite fields
+
+A **specific registered tower basis has been independently verified** inside the **same** old DASHI quartic \(X^4+X+2\):
+- \(\gamma=(0,1,2,2)\) in the original four-trit polynomial coefficient order, with \(\gamma^2=-1\) and \(\gamma^9=\gamma\), hence \(L=\mathbb F_3[\gamma]\cong F9\).
+- \(\beta=(0,0,1,1)\), with \(\beta^2=1+\gamma\), which is nonsquare in L; hence \(K=L[\beta]\).
+- Literal two-sided coefficient conversion:
+\[
+(a_0+a_1\gamma)+(b_0+b_1\gamma)\beta
+\longleftrightarrow
+(c_0,c_1,c_2,c_3)
+=(a_0,\ a_1+b_1,\ -a_1+b_0+b_1,\ -a_1+b_0-b_1).
+\]
+The inverse is
+\[
+(a_0,a_1,b_0,b_1)
+=(c_0,\ c_1+c_2-c_3,\ c_1+c_3,\ c_3-c_2).
+\]
+All expressions are over F3. **Independent exact local executable** \`/mnt/data/f81_f9_tower_same_object_audit.py\` checked a bijection on all 81 elements, **6561** pairs of additions and **6561** pairs of multiplications, plus Frobenius9 conjugation and norm10.
+
+### New in-kernel-candidate implementations, with accurate authority statuses
+
+The earlier typed \`Projective80Trivialisation\` and \`PuncturedF81PowerLaws\` records were not sufficient for a concrete source-level proof. This round implements more:
+
+1. **DASHI/Biology/IITF81F9ConcreteQuarticTowerExact.agda**: explicit F3 addition/multiplication, actual original Ogg F9-shaped coordinates, concrete quadratic-tower multiplication, actual \`TriadicPAdicCodec.Kernel4\` forward/backward basis transformations, transported quartic addition and multiplication. It adds **exhaustive closed Agda proof cases** for all 81 two-sided carrier maps, all 81 Frobenius9 and norm10 statements, and all 80 punctured-state Fermat80, inverse79, norm-one quotient, inversion involution and Frobenius/inverse identities. This is stronger than numerical cardinalities: source original carrier is the actual PuncturedKernel4.
+2. **DASHI/Biology/IITProjectiveF9Punctured80ConcreteExact.agda**: **constructive 80-case** forward/backward lookup from literal \`RiemannQuarticTriadicCodecKernelBridgeExact.PuncturedKernel4\` to original \`IITProjectiveF9Pointed80Exact.ProjectiveF9Chart × OggSSPP2PuncturedKernel2BidiExact.PuncturedKernel2\`; two-sided proofs enumerated, and the previously uninhabited **\`Projective80Trivialisation\` record is now inhabited as Agda source**. Lookup tables derive from the same tower basis/division; no equal-cardinality shortcut.
+3. **DASHI/Biology/IITF81F9NormInverseBridgeExact.agda**: reusable algebraic theorems for inverse79 and Frobenius9 inversion on norm-one, now a conditional abstraction over the original PuncturedKernel4 type. Not a competing field. The concrete companion above provides the exact source-level finite computations, although the abstract closed-under-multiplication record still requires a separate kernel transport instance.
+4. **scripts/iit_f81_f9_norm_inversion_audit.py** and **scripts/iit_f81_f9_quadratic_tower_audit.py**: source-faithful finite arithmetic; wired into \`scripts/iit_numeric_verification.py\`; the original selected/punctured, 5cube, P1(F9) and PGL2(F9) audits remain reused.
+5. **Integration:** all new Agda files imported by \`IITPhiIntegrationEverything.agda\`. No parallel reimplementation of the 2×2 XOR model, raw 125-node rank, original JFine source codec, Ogg p3 Frobenius, or historic Monster modules.
+
+### Independent local receipts / exact-head admission
+
+- /mnt/data/f81_f9_norm_inversion_receipt.json: 81 field elements, 80 units; norm-one 10, F9 scalar fibres 8, both fixed inversion units ±1; 80 same-object quotient cases; C5 two orbits.
+- /mnt/data/f81_f9_tower_same_object_receipt.json: source quartic↔F9 tower bijection on 81 elements and **13,122** individual binary operation comparisons (6561 additions plus 6561 multiplications); Frobenius and norm.
+- A separate local check matched the **actual source** 80 punctured Kernel4 field vectors with chosen F9 projective quotient slopes and nonzero scalars, all 80 forward/backward pairs.
+
+**REMAINING BLOCKER**: the environment lacks the pinned Agda compiler/stdlib checkout, and GitHub access here is through the connector (container cannot clone). Thus **source-written exhaustive Agda equations are not yet a recorded Agda kernel pass**, and newly committed GitHub Python scripts have not received an exact-head checkout run. Never claim these as proven/CI-green solely from their code or independent local Python results. Importantly, there is now no *conceptual need* to invent another field carrier to unblock that check: the explicit source code and exhaustive test cases are committed.
+
+**Acceptance commands when compiler is present:**
+\`\`\`sh
+python3 scripts/iit_f81_f9_norm_inversion_audit.py
+python3 scripts/iit_f81_f9_quadratic_tower_audit.py
+python3 scripts/iit_numeric_verification.py
+agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Biology/IITF81F9ConcreteQuarticTowerExact.agda
+agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Biology/IITProjectiveF9Punctured80ConcreteExact.agda
+agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/EverythingIITPhiIntegrationMaxCut.agda
+\`\`\`
+
+**Next Pareto cut after the exact compiler receipt:** transport the verified **concrete quartic** operations and proofs of nonzero-product closure into the abstract \`PuncturedF81PowerLaws\` and the source-specific projective norm-one intertwiner. Full Monster module, actual modular j-cusp, neural/AI source traces, quantum observables and IIT Φ remain independent requirements, not consequences of the 79 arithmetic.
