@@ -1,3 +1,120 @@
+# 2026-10-25 A/B MAX-CUT — CURRENT OWNER RECONCILIATION
+
+**READ FIRST / supersedes earlier R690-first claims below.** The user-selected
+target is unforced A/B. Prior algebra should be REUSED, never redone as a
+new RNNN. Mathematicians/source authorship preserved; a repo theorem name,
+a source-written Lean/Agda proof, independent kernel typecheck, accepted
+external result and unrestricted Clay theorem are DIFFERENT claims.
+
+## B: existing later owners dominate our R690 work
+
+- **R691** `NSTriadKNR650GlobalMixedEnergyBalanceRound691Exact` already
+  proves original weighted work = global coherent commutator integral -
+  terminal-minus-initial mixed energy. Do not rediscover this as new
+  nonlinear coercivity.
+- **R699** `NSTriadKNR650GlobalMixedEnergyEndpointUpperRound699Exact`
+  already isolates the initial mixed mass using terminal nonnegativity,
+  with the cutoff-uniform commutator and initial-mass ceilings still
+  typed as **uninhabited inputs**.
+- **R735** `NSTriadKNR650SharedWeightedQuarticCutRound735Exact` already
+  defines the preferred TWO shared-weighted analytical leaves: W1
+  (weighted plus terminal mixed endpoint payment) and W2
+  (augmented critical weighted growth/payment). These are conditional
+  proof compilers, NOT automatically supplied estimates.
+- **R817/R823/R828–R853** explore the signed-orbit/reserve route.
+  Importantly the newer real-time literal Lean owner
+  `chboishabba/dashi_lean4/NSBControl/Rational345R823DecisionFreeze.lean`
+  already includes `literalPhysicalReserveIntegralCounterexample`
+  with the real R760 original-multiplicity physical reserve/demand
+  semantics and the actual radius-4 Galerkin ODE. This is SOURCE-WRITTEN,
+  its exact-head independent kernel receipt is STILL unwitnessed here;
+  it refutes an **auxiliary universal reserve claim**, not Clay B.
+  Do not revisit the historical Agda R832 'real ODE outstanding'
+  ledger as authority over later Lean source. Do not revive the R823
+  universal reserve shortcut in a supposed positive B argument.
+- `NSClayFacingBPostReserveMaxCut20261002Exact` independently records
+  six positive-route leaves: B1, B2, B3, B4 strict critical signed
+  operator, B7 actual R406 equality, and B continuum continuation.
+  Check the REAL interfaces/quantifiers before reducing this to 'one
+  remaining estimate'. The older full-fibre count-centered B4 payment
+  is falsified under zero-amplitude padding; its source-written
+  corrected R236/R685 equality is algebra, not a rescue.
+
+## NEW realizable physical signed R690 discriminator
+
+`tests/test_ns_r690_realizable_helical_signed_output.py`
+(3 independently executed exact SymPy tests; original fixture). Take
+Fourier modes p1=(1,1,0), q1=(1,-1,0), p2=(0,2,0),
+q2=(2,-2,0), their conjugate negatives; modal velocities
+u_p1=u_q1=u_p2=e_z, u_q2=-e_z. All have real-valued
+trigonometric u pointing along z, independent of z, so the
+UNFORCED Navier–Stokes convection vanishes, and each mode follows
+the exact heat trajectory exp(-|p|²t). The physical helical source
+is LITERALLY the existing canonical projector
+`H±=(P ± i p×/|p|)/2` and mixed product H+u_p×H-u_q.
+For output k=(2,0,0), the four ordered active incidences give
+rτ={4,4,12,12}, and at t=0:
+  K_k=Σ rτ W(M,Aτ)=8-6 sqrt(2) <0,
+  physical output-heat self-work=2-sqrt(2)>0,
+  signed difference-frequency work=6-5 sqrt(2)<0.
+Thus **the difference term can dominate even on an actual smooth
+unforced NS solution**: outputwise R690 rate-work positivity is FALSE.
+At this output the mixed norm initially grows since
+`d||M_k||²/dt=-K_k>0`, and for sufficiently small positive T,
+`int_0^T K_k<0`; as T→∞ the same integral equals the initial
+mixed norm, which is positive. Crucially the FULL global signed
+sum over all 26 nonzero output modes for this particular seed is
+`192-16 sqrt(2)>0` at t=0. **Do NOT claim a global R690 sign
+counterexample from this single output.** This is a source-realizable
+gate against careless positivity or per-output absolute-value
+arguments, and supports the existing R691/R735 sum/endpoint-first route.
+
+## External 2026 flux claim negative control (conditional on its meaning)
+
+Luca Eliseo Pavesi, `Global Regularity for the Three-Dimensional
+Incompressible Navier–Stokes Equations via Geometric Frustration and
+Helical Quasi-Trapping`, Zenodo 21194906 (2026-07-04 v3),
+https://zenodo.org/records/21194906 , claims in its abstract an
+unconditional spectral flux inequality
+`|Pi(K)| <= C sqrt(E_>K) sqrt(E)/K` with ABSOLUTE C.
+Our independently evaluated physical real/transverse six-mode triad
+has conventional standard nonlinear kinetic spectral flux
+`Pi(1)=4`, E=10, E_(>1)=6. Scaling velocity u→a u:
+left side=4a³, asserted right side=C sqrt(60) a².
+No fixed absolute C can satisfy this for all a>0.
+`tests/test_ns_pavesi_unconditional_flux_scaling_audit.py`
+(1 independent local SymPy test). Thus its ABSTRACT'S stated
+unconditional bound is incompatible with conventional flux if
+universal over unnormalized smooth data; this is not a blanket
+refutation of different flux definitions or the author's distinct
+helicity-dominance CONDITIONAL results. Original attribution remains
+Pavesi; the scaling discriminator is DASHI's independent calculation.
+Neither preprint is imported as proven global regularity.
+
+## Remaining concrete positive A/B max-cut
+
+- **A:** physical H¹→dot-H½ stationary Stokes and L²_t Duhamel
+  estimates ALREADY known from prior cut; they are supercritical
+  in spacetime. Audit the REAL Bishop two-seam owners and prove an
+  unconditional same-solution critical continuation bound before
+  marking A3 closed. Do not translate a static scalar inequality into
+  a finished Clay A.
+- **B:** prioritize the ORIGINAL R735 W1 and W2 analytic inputs
+  and B-post-reserve B1/B2/B3/B4/B7/continuation requirements;
+  use R690's no-cardinality normal form as a convenient exact
+  coordinate, NOT a sufficient uniform bound. Test proposed signed
+  payments against (i) the exact zero-padding shear, (ii) the new
+  REALIZABLE negative output-rate heat shear, and (iii) the already
+  source-written R823 rational-345 integrated physical reserve
+  counterexample. Avoid another proof 'by finite algebra alone'.
+- **Verification:** 4 local exact SymPy tests passed on the new
+  physical negative-output and external-flux witness modules. These
+  sources are committed to PR #1240. No Agda/Lean kernel toolchain or
+  exact-PR-head test run in this runtime. No direct unrestricted
+  A/B theorem or rigorous uniform signed global estimate is claimed.
+
+---
+
 # 2026-10-25 priority gate: B NO-CARDINALITY RATE ALREADY PROVED — R690 FIRST
 
 **User objective:** unforced NS A/B; no detour to C/D publication.
