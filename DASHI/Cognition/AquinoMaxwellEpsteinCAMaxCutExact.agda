@@ -71,6 +71,9 @@ data SourceRole : Set where
   estateScheduleCarrier : SourceRole
   preliminaryElectionEnforcement : SourceRole
   electionMatterClosure : SourceRole
+  sourceCodeDiscoveryReport : SourceRole
+  reportingAboutReleasedFilm : SourceRole
+  reviewOfInvestigativeRecords : SourceRole
 
 -- Source roots represent original authors or record-producing bodies.
 -- Reposting a witness statement does not create another witness.
@@ -89,6 +92,9 @@ data OriginRoot : Set where
   dcmsCommitteeFinalReportRoot : OriginRoot
   nixWitnessRoot : OriginRoot
   koganWitnessRoot : OriginRoot
+  upguardVickeryResearchRoot : OriginRoot
+  guardianInterviewReportingRoot : OriginRoot
+  apInvestigativeReviewRoot : OriginRoot
 
 data CaseClaim : Set where
   sclCAOperatingContinuity : CaseClaim
@@ -116,6 +122,9 @@ data CaseClaim : Set where
   dcmsICOBrexitCounterFinding2019 : CaseClaim
   nixAIQHistoricalRiponConfirmation : CaseClaim
   koganSeparateStatisticalDelivery : CaseClaim
+  riponSourceCodePublicExposure2018 : CaseClaim
+  bannonEpsteinVideoPublished2026 : CaseClaim
+  associatedPressBlackmailCounterReview2026 : CaseClaim
 
 record BoundedSource : Set where
   constructor bounded-source
@@ -242,6 +251,24 @@ canonicalSources =
     "https://committees.parliament.uk/oralevidence/7853/html/ ; Q2012-Q2018"
     "2018-04-24" "2014-2015"
     "Kogan says his team produced predictions using R, delivered password-protected spreadsheet-like files to SCL, and that he did not know AIQ or how Ripon used them downstream. A Kogan->AIQ direct personal relationship and identical dataset import are not paid by his own testimony."
+    true false false false
+  ∷ bounded-source riponSourceCodePublicExposure2018 upguardVickeryResearchRoot
+    sourceCodeDiscoveryReport
+    "https://www.upguard.com/breaches/aggregate-iq-part-one ; published 2018-03-26"
+    "2018-03-26" "UpGuard reported discovery 2018-03-20"
+    "Firsthand security researchers describe the exposed AIQ GitLab and project names Ripon_canvas and Ripon_dialer, campaign configuration and messaging integrations. The private repository, hashes, personal data and credentials are not acquired in this branch. UK Parliament's later description substantially relies on Vickery/UpGuard upstream and cannot independently multiply this particular discovery."
+    true false false false
+  ∷ bounded-source bannonEpsteinVideoPublished2026 guardianInterviewReportingRoot
+    reportingAboutReleasedFilm
+    "https://www.theguardian.com/us-news/2026/feb/05/steve-bannon-jeffrey-epstein-files-interview ; Guardian 2026-02-05"
+    "2026-02-05" "film recorded circa 2019; public release 2026-01/02"
+    "Guardian reports and describes an actual roughly two-hour filmed Bannon-Epstein interview seen after DOJ disclosure. CBS 2026-02-10 reports DOJ Data Set 10 and Free Press compilation of 14 hours of different Epstein video objects; 14 hours is NOT an authenticated duration of one Bannon interview. This branch has not inspected DOJ-native video bytes, timestamps, edit history or a same-object join to the February 2019 scheduled breakfast."
+    true false false false
+  ∷ bounded-source associatedPressBlackmailCounterReview2026 apInvestigativeReviewRoot
+    reviewOfInvestigativeRecords
+    "https://www.pbs.org/newshour/nation/ap-review-on-what-the-epstein-files-show-about-the-fbi-investigation-of-possible-sex-trafficking ; AP via PBS 2026-02-08"
+    "2026-02-08" "underlying FBI/DOJ investigations 2005-2025"
+    "AP reviewed DOJ/FBI records and reported scant investigative evidence for a wider operation trafficking victims to powerful men. This is a reported review and important contrary evidence, NOT proof that no blackmail or exploitation ever occurred, and not a denial of Epstein and Maxwell's established sexual-abuse crimes. Syndications of the same AP piece are one AP journalist/root family."
     true false false false
   ∷ bounded-source mindWarAuthored aquinoVallelyRoot
     attributedAuthorProposal
@@ -1377,3 +1404,93 @@ koganDeliveryDoesNotPayDirectAIQKnowledge = refl
 originalDatasetFingerprintStillUnpaid :
   paysIdenticalDatasetFingerprint koganRole ≡ false
 originalDatasetFingerprintStillUnpaid = refl
+
+
+------------------------------------------------------------------------
+-- 2026 REPORTING MAX-CUT: ORIGINAL-SOURCE ROOTS / REPRINTS / MOVING
+-- OBJECT STATUS. Public reporting is not a transfer of private voter
+-- records, victim media, raw keys, code credentials, or criminal guilt.
+------------------------------------------------------------------------
+
+record ExternalObjectEvidenceCut : Set where
+  constructor external-object-evidence-cut
+  field
+    describedSourceRoot : String
+    narrowSupportedDescription : String
+    originalNativeObjectHeldByThisPR : Bool
+    independentSecondWitnessToSameRoot : Bool
+    historicalEventOccurrenceSupported : Bool
+    broaderIntelligenceProgrammePaid : Bool
+open ExternalObjectEvidenceCut public
+
+upguardRiponCodeReportingCut : ExternalObjectEvidenceCut
+upguardRiponCodeReportingCut = external-object-evidence-cut
+  "Chris Vickery/UpGuard initial discovery 2018-03-20, report 2018-03-26"
+  "Original investigator describes publicly exposed Ripon_canvas, Ripon_dialer, and campaign configuration; DCMS committee later reports on that same discovered repository."
+  false false true false
+
+bannonFilmedInterviewReportingCut : ExternalObjectEvidenceCut
+bannonFilmedInterviewReportingCut = external-object-evidence-cut
+  "Underlying released DOJ Data Set 10 filmed interview; journalists report and excerpt, underlying footage is one film origin"
+  "Real filmed Bannon-Epstein interview described by Guardian, CBS and Free Press; no joined production metadata, named camera date or source byte hash in this PR"
+  false false true false
+
+associatedPressContraryReviewCut : ExternalObjectEvidenceCut
+associatedPressContraryReviewCut = external-object-evidence-cut
+  "AP reporters Sisak, Caruso and Neumeister, review published 2026-02-08"
+  "AP reports FBI documentary review found scant evidence of systematic supply of victims to powerful people; memo contents not independently re-reviewed in this PR"
+  false false true false
+
+upguardBlogIsNotOriginalGitTree :
+  originalNativeObjectHeldByThisPR upguardRiponCodeReportingCut ≡ false
+upguardBlogIsNotOriginalGitTree = refl
+
+newsOfFilmIsNotOriginalFootage :
+  originalNativeObjectHeldByThisPR bannonFilmedInterviewReportingCut ≡ false
+newsOfFilmIsNotOriginalFootage = refl
+
+filmedInterviewNotCovertTasking :
+  broaderIntelligenceProgrammePaid bannonFilmedInterviewReportingCut ≡ false
+filmedInterviewNotCovertTasking = refl
+
+pressReviewDoesNotProveUniversalAbsence :
+  broaderIntelligenceProgrammePaid associatedPressContraryReviewCut ≡ false
+pressReviewDoesNotProveUniversalAbsence = refl
+
+-- Typed category separation: fourteen hours of mixed DOJ video material
+-- is not the timestamp, reel identity or duration of the Bannon interview.
+data ReleasedVideoUnit : Set where
+  bannonInterviewSequence : ReleasedVideoUnit
+  fullDataSet10VideoCompilation : ReleasedVideoUnit
+
+videoCompilationIsNotBannonReel :
+  bannonInterviewSequence ≡ fullDataSet10VideoCompilation → ⊥
+videoCompilationIsNotBannonReel ()
+
+-- Source-origin accounting: the committee and UpGuard may be different
+-- publications yet both rely on Vickery's same repository acquisition.
+data RiponDiscoveryCarrier : Set where
+  upguardMarch2018Report : RiponDiscoveryCarrier
+  ukCommittee2019Account : RiponDiscoveryCarrier
+
+record RootDependency : Set where
+  constructor root-dependency
+  field
+    carrier : RiponDiscoveryCarrier
+    upstreamTechnicalProducer : String
+open RootDependency public
+
+originalDiscoveryRoot : RootDependency
+originalDiscoveryRoot = root-dependency upguardMarch2018Report
+  "Vickery/UpGuard 2018-03-20 AggregateIQ repository acquisition"
+
+committeeTechnicalRoot : RootDependency
+committeeTechnicalRoot = root-dependency ukCommittee2019Account
+  "Vickery/UpGuard 2018-03-20 AggregateIQ repository acquisition"
+
+-- These values exhibit declared common lineage, not proof that the
+-- committee supplied no additional independent tests or conclusions.
+riponTechnicalRootShared :
+  upstreamTechnicalProducer originalDiscoveryRoot ≡
+  upstreamTechnicalProducer committeeTechnicalRoot
+riponTechnicalRootShared = refl
