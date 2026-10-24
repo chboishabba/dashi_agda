@@ -612,4 +612,4 @@ def test_fordham_publication_time_and_browse_original_root_split():
     docs = RESEARCH.read_text()
     assert "45 curated edges" in docs  # current sample after acquisition
     assert "not a court lawsuit" in docs
-    assert "not a legal finding" in docs.lower() or "not an adjudicated fact" in media.lower()
+    assert "not a court lawsuit" in docs and "not a substantive merits decision" in docs.lower()
