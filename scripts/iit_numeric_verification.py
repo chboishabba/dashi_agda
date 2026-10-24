@@ -299,6 +299,7 @@ def verify_numeric_results() -> dict:
     assert d4_h6_weld["D4_H6_generator_group_law_checks"] == 338
     assert d4_h6_weld["basis_pair_checks"] == 144
     assert d4_h6_weld["H3_C3sq_nonlinear_irrep_degree"] == 27
+    assert d4_h6_weld["source_H3_times_C3sq_concrete_generator_checks"] == 177147
     assert d4_h6_weld["chosen_H4_nonlinear_irrep_degree"] == 81
     assert not d4_h6_weld["original_JFine_D4_centre_action_intertwined"]
 
