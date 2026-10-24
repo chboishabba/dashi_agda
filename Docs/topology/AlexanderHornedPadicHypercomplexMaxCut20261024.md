@@ -303,3 +303,84 @@ the product of its pro-p completions (which is trivial).
 This also explains why nonabelian finite VOA and p-adic
 matrix actors can retain real information that all flat
 abelian/p-group-valued holonomies lose.
+
+
+## 2026-10-24 impasse break: finite alternating separation and existing codec/actor reuse
+
+Canonical source ledger:
+`Docs/topology/AlexanderHornedOreResidualFiniteImpassBreak20261024.md`.
+
+The earlier theorem `pro-p(G)=1` for all p is CONSISTENT
+with a much stronger **positive** result: the abstract
+Hatcher-type injective free-group/commutator direct limit
+is RESIDUALLY FINITE (indeed finite-alternating separated).
+For any nontrivial finite-stage word, residual finiteness
+of free groups detects it in a finite quotient embedded
+faithfully in an alternating group A_m. Ore's 2010
+commutator-surjectivity theorem for simple finite groups
+lets that quotient assignment extend through EVERY
+subsequent binary horn subdivision, since
+`x_w -> [x_w0,x_w1]`. Backward stage maps come by
+precomposition; their directed colimit yields a
+whole-source finite quotient detecting the selected word.
+Therefore the canonical map from abstract G to its
+FULL profinite completion is INJECTIVE, despite every
+pro-p and prosolvable completion being trivial.
+
+The new `AlexanderHornedOreFiniteTargetExtensionExact.agda`
+proves that precise word-evaluation invariance through
+one and arbitrary finite horn refinements, for a
+target with genuine group laws and a chosen Ore
+commutator section. The actual finite A_m proof and
+colimit homomorphism remains an external mathematical
+theorem/formal-import obligation, NOT kernel-certified
+by that local source alone.
+
+The existing `PolyhedralRegularRepresentationShiftExact`,
+`AlexanderHornedC3FiniteVOAActorExact` and
+`AlexanderHornedC3VOAModeLiftExact` now have a
+same-actor consumer
+`AlexanderHornedNonabelianRegularPadicReuseExact.agda`
+proving faithfulness of a selected group-factor
+regular action by observing its identity coordinate,
+plus equivariance of the EXISTING rational vertex modes.
+Every finite A_m quotient embeds in GL_|A_m|(Z),
+hence in GL_|A_m|(Q_p) for every p. The collection of
+such finite-dimensional actors is JOINTLY faithful,
+but no ONE finite A5 or fixed-dimensional VOA is
+claimed faithful on G. The infinite product of these
+weight-zero state algebras is not automatically a VOA.
+
+The existing
+`BinaryBalancedTernarySubcarrierExact`,
+`VerifiedFiniteTritCoder`,
+`Base369BinaryTernaryRefinement` and
+`BalancedTernaryC2C3DihedralCodecBridgeExact`
+are now consumed by
+`AlexanderHornedBinaryTernaryExistingCodecWeldExact.agda`:
+  - actual Horn Bit -> existing strict nonzero balanced trit;
+  - arbitrary trit -> two machine bits (11 rejected);
+  - existing commuting 2^a*3^b resolution diamond;
+  - exact finite C2 versus C3 order obstacles.
+These digit maps do NOT give a continuous additive
+isomorphism `Z2 =~ Z3`. Both are Cantor spaces,
+but Hom_cont(Z2,Z3)=Hom_cont(Z3,Z2)=0 as
+topological GROUPS, via coprime pro-p images.
+
+The existing `Physics.QFT.NonAbelianFusionFromSpin`
+is a CONDITIONAL Rep(SU2)-fusion upgrade from an
+abelian CM source, NOT an automatic A5/3D-horn
+representation. Existing SFGC `CliffordToM2Iso`
+provides a genuine BASIS bijection, not multiplication
+compatibility of entire algebras. No redundant
+quaternion/Cayley-Dickson/Hopf or 369 owner was created.
+
+Independent local finite computation PASSED 60 A5
+commutator-section witnesses and 336 free-word
+naturality comparisons across four stages. The
+committed finite script, the focused workflow and
+the exact-head Agda runner now include the new owners.
+No successful exact-head Agda kernel/Lean geometry
+receipt has been returned; the actual three-copy
+wild-complement identification remains open and
+PR #1244 must stay draft.
