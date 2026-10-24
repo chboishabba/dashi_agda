@@ -332,3 +332,26 @@ For any UNITARY A,B, the elementary exact identity ||[A,B]-I||op=||AB-BA||op giv
 Exact local rational rates for hypothetical M=100,L0=1: q=1/8 depth4, q=1/5 depth6, q=1/4 depth7, q=1/3 depth12; q>=1/2 gives no crossing. Additional heterogenous *complete* binary tree certificate 2 d(root)<=∏(2 epsilon_leaf), checked across nine exact test trees, complements one-branch criterion. Agda Python reference PASS; current remote Git script exists. Lean new native theorem source conditional on explicit normed-commutator/flatness premises, **Lean/Lake kernel UNVERIFIED**.
 
 For CURVED connections, π1 group relations do not imply equality of Wilson matrices on homotopic loops unless a curvature/homotopy (non-Abelian Stokes) error is controlled; a genuine literal loop concatenation is another possible source but must match the independently selected root loop. No claim of actual linked three-dimensional Z-block, Witten/Monster/TOE source action or Clay estimate.
+
+
+## New nonflat physical-interface cut: exact curvature/homotopy defect propagation
+
+For a CURVED unitary gauge connection, the fundamental-group equality m_w=[m_w0,m_w1] does NOT establish equal holonomy matrices for independently selected geometric representatives. On an actual linked, based Hatcher Z-block let
+
+    eta_w = ||Hol(gamma_w) - [Hol(gamma_w0),Hol(gamma_w1)]||op.
+
+The eta_w must be independently produced from a genuine geometric homotopy plus transported curvature/non-Abelian-Stokes estimate, not set to zero because of the group relation. The optimal unitary commutator bound then implies for ANY chosen descendant branch of depth n
+
+    d(Uroot) <= 2^n d(Uleaf) + sum_{k=0}^{n-1} 2^k eta_(ancestor at depth k).
+
+If d(Uleaf)<=M Lleaf, the exact rejection condition for the previously certified selected d(W)>1 is
+
+    2^n M Lleaf + sum_{k=0}^{n-1} 2^k eta_k <= 1.
+
+This is a concrete acceptance test for either (i) a FLAT connection with eta=0, or (ii) a curved connection with REAL source-controlled homotopy defects. It prevents the prior physically invalid promotion of pi1 identities into arbitrary Wilson-loop equalities.
+
+New committed exact Fraction script: scripts/check_horn_curved_branch_stokes_defect_cut.py checks the recurrence equals the explicitly weighted sum for 21 arbitrary heterogeneous depth fixtures; rejects a HYPOTHETICAL n=12 source with q=1/3, M=100, L0=1, eta_k=(1/100)(1/3)^k, whose exact bound is 8508407/10628820 ≈0.80050 <1. It also deliberately FAILS CLOSED for eta_root=2 and for the critical q=1/2. No selected geometric homotopy area, curvature, flatness, connection stress or physical source bound was constructed.
+
+Lean #84 new Integration/DASHITOE/HornCurvedBranchDefectCut.lean source-writes an arbitrary branch error-envelope induction, proves monotonicity, and derives the finite source conditional curved-rejection theorem. The matrix norm/Stokes-to-eta analytical bridge is EXTERNAL/UNPAID and Lean/Lake kernel/typecheck NOT RUN.
+
+The logical next producer is now a geometry+connection DOUBLE certificate: genuinely linked/marked Hatcher loops of quantitative length together with explicit based homotopy surfaces and their area/transported-curvature error, or a genuine failure of these in the selected three-copy embedding. Simply matching lengths or a symbolic commutator is not enough for nonflat physics.
