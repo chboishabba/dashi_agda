@@ -84,7 +84,7 @@ def test_direct_2026_ownership_and_revenue_do_not_collapse():
         "arnSandilandsRevenue",
         "arnNewsCorpExit",
         "19.9 percent",
-        "ceased to be substantial holder",
+        "ACMA records News Corp ceased",
         "2026-05-01",
     ):
         assert required in body or required in docs
