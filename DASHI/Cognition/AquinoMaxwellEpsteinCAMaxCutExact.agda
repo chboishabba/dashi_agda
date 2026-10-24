@@ -26,6 +26,7 @@ import DASHI.Cognition.TrumpMarALagoBannonBridgeExact as BannonBridge
 import DASHI.Cognition.EpsteinBlackAgreementInvoiceWorkJoin20261015Exact as BlackWork
 import DASHI.Cognition.EpsteinBlackInvoiceWireSettlement20261015Exact as BlackWire
 import DASHI.Cognition.EpsteinBlackApolloSameObjectReceiptRound20261014Exact as BlackApollo
+import DASHI.Cognition.EpsteinBankingInfrastructureAcquisitionExact as Banking
 
 ------------------------------------------------------------------------
 -- AQUINO / MAXWELL / EPSTEIN / CA: EXISTING-CARRIER ATTRIBUTION MAX-CUT
@@ -1700,3 +1701,118 @@ blackDoeDismissalNotMeritsTrialFinding = refl
 ddcHouseSubpoenaJudgmentNotYetVerified :
   BlackApollo.ddcFinalDispositionIndependentlyVerified blackCivilCaseIdentityReceipt ≡ false
 ddcHouseSubpoenaJudgmentNotYetVerified = refl
+
+
+------------------------------------------------------------------------
+-- TRANSFER-CHAIN / LEAD-PRODUCT PARETO 2026-10-24
+-- New original source roots folded into established case and bank owners.
+------------------------------------------------------------------------
+
+data Ripon2018SourceRoot : Set where
+  silvesterWritten2018 : Ripon2018SourceRoot
+  dcmsReport2019 : Ripon2018SourceRoot
+  koganOral2018 : Ripon2018SourceRoot
+  ftcAdministrative2019 : Ripon2018SourceRoot
+
+record RiponIndependentChainEvidence : Set where
+  constructor ripon-independent-chain-evidence
+  field
+    chainRoot : Ripon2018SourceRoot
+    chainOriginalLocator : String
+    chainNarrowAssertion : String
+    chainSourceLocated : Bool
+    chainNativeDataBytesAuditedHere : Bool
+    chainDirectCAAIQContractExecutedPaid : Bool
+open RiponIndependentChainEvidence public
+
+silvesterWrittenOriginal2018 : RiponIndependentChainEvidence
+silvesterWrittenOriginal2018 = ripon-independent-chain-evidence
+  silvesterWritten2018
+  "UK Commons FKN0086 https://committees.parliament.uk/writtenevidence/90210/html/"
+  "Silvester says AIQ worked for SCL, SCL required IP transfer of the Ripon CRM, AIQ billed SCL; he disputes the unsigned purported direct CA-AIQ agreement and says he did not use Kogan Facebook source data. Same author as his oral testimony, not a second independent witness."
+  true false false
+
+dcmsRiponOCEANReview2019 : RiponIndependentChainEvidence
+dcmsRiponOCEANReview2019 = ripon-independent-chain-evidence
+  dcmsReport2019
+  "UK DCMS HC1791 chapter4 paragraphs 157-160 https://publications.parliament.uk/pa/cm201719/cmselect/cmcumeds/1791/179107.htm"
+  "Committee describes Vickery-origin repository debug logs importing OCEAN scores into Ripon and code from a CA-controlled domain. It also preserves the ICO's narrower contrary findings. Committee analysis is not independent native Git custody and is not proof of an executed direct AIQ-CA agreement."
+  true false false
+
+koganSeparateDelivery2018 : RiponIndependentChainEvidence
+koganSeparateDelivery2018 = ripon-independent-chain-evidence
+  koganOral2018
+  "UK Commons Kogan 2018-04-24 Q2014 https://committees.parliament.uk/oralevidence/7853/html/"
+  "Kogan describes R-generated scores sent as password-protected spreadsheet files to SCL and says he did not know how Ripon was used. His output-to-SCL statement does not identify the exact spreadsheet ingested by AIQ."
+  true false false
+
+ftcOriginalCorporateContracts2019 : RiponIndependentChainEvidence
+ftcOriginalCorporateContracts2019 = ripon-independent-chain-evidence
+  ftcAdministrative2019
+  "FTC matter 182-3107, Docket 9383; https://www.ftc.gov/legal-library/browse/cases-proceedings/182-3107-cambridge-analytica-llc-matter"
+  "FTC administrative finding against CA and source account of GSR-SCL data subscription, SCL-CA services and separate IP licence; these contracts cannot be collapsed into a signed direct AIQ-CA contract."
+  true false false
+
+-- This witness is deliberately only a *consistent evidence-state model*:
+-- SCL contracts and downstream CA-origin data can coexist with the absence
+-- of a verified DIRECT AIQ-CA signed contract. It is not a theorem that
+-- source data did or did not pass through a particular chain in reality.
+record RiponIntermediaryCountermodel : Set where
+  constructor ripon-intermediary-countermodel
+  field
+    silvesterReportsSCLDirectContract : Bool
+    dcmsReportsCAEcosystemDataFlow : Bool
+    directAIQCAAgreementAuthenticated : Bool
+    namedKoganOutputEqualsAIQImportProven : Bool
+    namedRiponProvesAquinoMethodTransfer : Bool
+    namedRiponProvesEpsteinMediaUse : Bool
+open RiponIntermediaryCountermodel public
+
+canonicalRiponIntermediaryCountermodel : RiponIntermediaryCountermodel
+canonicalRiponIntermediaryCountermodel =
+  ripon-intermediary-countermodel true true false false false false
+
+riponSCLContractAndReportedCAEcosystemFlowCompatible :
+  silvesterReportsSCLDirectContract canonicalRiponIntermediaryCountermodel ≡ true
+riponSCLContractAndReportedCAEcosystemFlowCompatible = refl
+
+riponCommitteeDataFlowIsNotSignedCAContract :
+  directAIQCAAgreementAuthenticated canonicalRiponIntermediaryCountermodel ≡ false
+riponCommitteeDataFlowIsNotSignedCAContract = refl
+
+riponNamedKoganOutputToAIQImportStillUnpaid :
+  namedKoganOutputEqualsAIQImportProven canonicalRiponIntermediaryCountermodel ≡ false
+riponNamedKoganOutputToAIQImportStillUnpaid = refl
+
+riponDoesNotCreateAquinoTransfer2026 :
+  namedRiponProvesAquinoMethodTransfer canonicalRiponIntermediaryCountermodel ≡ false
+riponDoesNotCreateAquinoTransfer2026 = refl
+
+riponDoesNotCreateBannonEpsteinMediaUse2026 :
+  namedRiponProvesEpsteinMediaUse canonicalRiponIntermediaryCountermodel ≡ false
+riponDoesNotCreateBannonEpsteinMediaUse2026 = refl
+
+-- The OCDETF 2015 identifier is owned by pre-existing banking acquisition,
+-- not by a new Black/NDA or secret-hierarchy duplicate owner.
+chainReactionFinanceOriginalOwner : Banking.ChainReactionPromotionBoundary
+chainReactionFinanceOriginalOwner = Banking.canonicalChainReactionPromotionBoundary
+
+chainReaction2015MemoSourceIdentified :
+  Banking.namedOriginalMemoIndexed chainReactionFinanceOriginalOwner ≡ true
+chainReaction2015MemoSourceIdentified = refl
+
+chainReactionInvestigationNotAdjudication :
+  Banking.independentlyAdjudicatedDrugOffence chainReactionFinanceOriginalOwner ≡ false
+chainReactionInvestigationNotAdjudication = refl
+
+chainReactionStillNeedsTransactionFingerprint :
+  Banking.namedBankWireMatchedToExistingLedger chainReactionFinanceOriginalOwner ≡ false
+chainReactionStillNeedsTransactionFingerprint = refl
+
+chainReactionNoBlackNDAShortcut :
+  Banking.epsteinBlackNdaSameTransactionPaid chainReactionFinanceOriginalOwner ≡ false
+chainReactionNoBlackNDAShortcut = refl
+
+chainReactionNoUnifiedCaseProgramme :
+  Banking.aquinoSCLOrMaxwellPROMISSharedOperationPaid chainReactionFinanceOriginalOwner ≡ false
+chainReactionNoUnifiedCaseProgramme = refl
