@@ -66,6 +66,18 @@ Later combined editions and online chapter transcriptions provide additional acc
 - `IbrahimSnowballParetoFrontierExact.ParetoFrontierLeaf` supplies rank/status, paid source, unpaid residual, test and downstream consumer. **Local ranks here do not change** the separate globally governed 2014 first-link historical dump/pruning frontier.
 - `IntersectionalNonFactorability` provides a **synthetic two-world counterexample**: the same modern 'invisible energy machine' vocabulary can occur with or without actual historical contact. It demonstrates the inferential limit of motif matching; no claim that absence has been historically proved.
 
+## 2026 literature-review delta to this narrow transmission graph
+
+The [current 36-record literature corpus](psychotronics-literature-corpus-20261024.csv) and [critical review](psychotronics-literature-review-20261024.md) add three crucial first-party versus secondary distinctions to this historical supplement.
+
+**Exact first-party source locator:** Robert Pavlita and Jana Pavlitová-Zapadlová, *Inductive Effect of the Human Organism on Matter*, **1973 Prague proceedings Part I p.64**, indexed in the combined contents of the 6 September 1974 JPRS translation. The digitised Part II contains a shared table of contents, not the Part I paper's experiment body. Its actual apparatus methods, figures and results have **not** been inspected.
+
+**Reported Soviet-led negative institutional appraisal:** Veronika Kindlová's Czech Radio Plus feature, [republished 15 August 2026](https://plus.rozhlas.cz/statni-bezpecnost-spolupracovala-i-s-psychotroniky-jeden-chtel-atomovy-hrib-9455137) from an April 2025 programme, says Czechoslovak StB supplied Pavlita an experimental laboratory in operation **Mefisto**, then closed it after months without extraordinary results following assessment by a Soviet-led commission. This is a **journalist-source historical summary**, distinct from a native StB/1972 lab file and distinct from 1985 Czech defence approaches to Soviet/GDR intelligence. It can corroborate the reported *institutional storyline* without serving as an independently verified electrical experiment.
+
+**Proponent technical counter-history:** Serge Kernbach's [2013 authored preprint](https://arxiv.org/abs/1312.1148) reports the conceptual progression from Pavlita passive shapes to later Soviet Beridze-Stakhovsky/Cerpan and Akimov spin/torsion devices; also raises hypothetical Nazi-era microwave research as a postwar precursor. These are **attributed historical and physical hypotheses**; without actual first-party apparatus logs or transmission receipts they do not establish functioning exotic radiation or a Nazi→Soviet technology transfer. Preserve Kernbach's authorship, the distinction between standard microwave biological effects and alleged torsion radiation, and the post-1970 dates of the later claimed systems.
+
+The strongest remaining scientific-literature cut is now **paired inspection of the original Pavlita paper and original negative-investigation materials on the same effects**, not speculative reconstruction of a hidden uninterrupted technology chain.
+
 ## Priority and stop conditions
 
 | Rank | Exact remaining obligation | Paid today | Close only when |
