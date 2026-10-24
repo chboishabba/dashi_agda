@@ -127,6 +127,46 @@ class C3NeutrinoBridgeTests(unittest.TestCase):
              Fraction(M[0][2]**2, 9)}
         )
 
+    def test_astrophysical_flat_fourier_washes_out_source_mixture(self):
+        f3_born = tuple(
+            tuple(norm(f3_entry(a, i)) for i in range(3))
+            for a in range(3)
+        )
+        deco_num = tuple(
+            tuple(sum(f3_born[a][i]*f3_born[b][i]
+                      for i in range(3)) for b in range(3))
+            for a in range(3)
+        )
+        self.assertEqual(deco_num, ((3, 3, 3),)*3)
+        for source in ((1, 2, 0), (1, 0, 0)):
+            total = sum(source)
+            fractions = tuple(
+                Fraction(sum(source[a]*deco_num[a][b] for a in range(3)),
+                         9*total)
+                for b in range(3)
+            )
+            self.assertEqual(fractions, (Fraction(1, 3),)*3)
+
+    def test_astrophysical_rational_mixer_retains_some_source_information(self):
+        born_nums = [[x*x for x in row] for row in M]
+        deco_num = tuple(
+            tuple(sum(born_nums[a][i]*born_nums[b][i]
+                      for i in range(3)) for b in range(3))
+            for a in range(3)
+        )
+        self.assertEqual(deco_num,
+                         ((33, 24, 24), (24, 33, 24), (24, 24, 33)))
+        pion, neutron = (1, 2, 0), (1, 0, 0)
+        def at_earth(source):
+            return tuple(Fraction(
+                sum(source[a]*deco_num[a][b] for a in range(3)),
+                81 * sum(source))
+                for b in range(3))
+        self.assertEqual(at_earth(pion),
+                         (Fraction(9, 27), Fraction(10, 27), Fraction(8, 27)))
+        self.assertEqual(at_earth(neutron),
+                         (Fraction(11, 27), Fraction(8, 27), Fraction(8, 27)))
+
     def test_born_probability_cannot_be_signed_zero(self):
         # Additive cancellation yields exactly nonnegative Born intensity 0;
         # unlike signed ledgers, measured |amplitude|² has no +/- zero.
