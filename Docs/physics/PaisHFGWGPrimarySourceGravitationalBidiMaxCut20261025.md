@@ -122,3 +122,28 @@ Acceptance:
 - Original Instagram video unavailable via public fetch; SRT provenance and any unsighted figures remain clearly scoped.
 
 **Terminal boundary:** genuine small gravitational radiation from time-changing electromagnetic/matter stress is allowed by established GR; claimed practical Pais field amplification / extremely strong device GW output remains unverified. This report adds a bounded physical discriminator and source-owner integration map, not a demonstration or total no-go.
+
+
+## Late repo audit: canonical antigravity + gravitational-wave owners already on master
+
+**Important correction to the initial donor map:** there is already a substantial **native** exotic-gravity/BIDI/gravitational-wave programme on master, not just generic weak-field spin-two and sibling KK PRs. The precise prior-art owners found and inspected are:
+
+1. DASHI/Physics/GR/GravitationalWaveTheoryTestBidiExact.agda — typed WaveTestFamily and WaveTestResidual, including missingCalibratedData, missingGRWaveformComparator, missingAlternativeComparator, missingDetectorResponse, missingPropagationModel, missingPopulationModel and missingSystematicErrorBudget. This is the correct test-side owner for the Pais HFGWG comparison. GW *detection* has a channel and a comparator, not merely an RF/drive-frequency label.
+2. DASHI/Physics/GR/GravitationalPredictionObservationBidiExact.agda — a sourceModelCarrier, propagationModelCarrier and detectorResponseCarrier are joined to the SAME observable and calibrated observation channel. This is a better existing consumer than a fresh generic "GW BIDI" ontology.
+3. DASHI/Interop/GravitationalObservationUnificationBidiCrossPollinationExact.agda — maps observation acquisition, gravity-source theorem, ordinary momentum/NS confounding, gauge/YM source and optional universal residual into *different* roles. Preserve the lane split.
+4. DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyScopeBidiExact.agda — explicit laboratory apparatus vs W4 theorem-facing stress-energy **non-descent**. A measured source T_mu_nu does not by itself inhabit general GR closure and vice versa. Reuse this exact scope distinction to prevent Pais source diagrams being promoted into physical ADM metrics.
+5. DASHI/Physics/ExoticGravity/AntigravityMaterialBidiCrossPollinationExact.agda — existing claim taxonomy explicitly separates reduced weight, free fall, remote field, inertial response, thrust and engineered metric/clock response; rotating/high-field/coherent material regimes do not validate the claim. The Pais proposal explicitly targets GW **strain/energy at independent detectors**; none of the six ordinary antigravity outcomes follows automatically from GW emission.
+6. DASHI/Physics/ExoticGravity/EngineeredInertialGravitationalBidiExact.agda — selected mechanism/observable family, including ordinary stress-energy and mass-current weak-field response, alternate EHD/impulse/inertia claims, and required same-object experiment controls.
+7. DASHI/Culture/AmyEskridgeGravityMechanismCrossPollinationExact.agda and DASHI/Culture/AmyEskridgeAntigravityObservationBidiCrossPollinationExact.agda — the user's existing historical Amy Eskridge research supplies **viewpoint and mechanism-family association only**, with explicit barriers against treating public discussion or allegations as theory validation. Pais may be compared as a separate patented high-field/resonance proposal, but neither shared technique nor a common institutional theme establishes Eskridge↔Pais contact, collaboration or causal lineage.
+
+### Revised native integration priority
+
+Use **GravitationalPredictionObservationBidiExact** and **GravitationalWaveTheoryTestBidiExact** as the source-side acceptance *consumers*, not a newly invented BIDI datatype. Reuse AntigravityLaboratoryStressEnergyScopeBidiExact for the intermediate laboratory stress receipt; use the existing EM/plasma/acoustics donors only for actual measured field/material producer inputs. An implementation beyond the bounded scalar Python fixture should construct a Pais-specific source model that returns a frequency-resolved GW TT-strain function and error budget to those consumers.
+
+The direct discriminators should include:
+- measured B, L, phase/frequency, acoustic displacement, rotating cavity mode and current/plasma diagnostics -> measured total energy-current-stress with ordinary conservation;
+- source and detector on the same observable (h_plus / h_cross and TT angular pattern at defined R and frequency), with explicit mechanical/RF calibration and propagation;
+- explicit negative comparators for ordinary Maxwell cross-energy, RF/acoustic pickup, EHD force/thrust and thermal/drift signals; a claimed thrust or weight change must use its own typed gravity-vs-momentum consumer and must NOT be inferred from the GW channel;
+- distinguish original Pais statements, Navy advocacy, later reporting, laboratory data and calibrated physical theory **as separate authorities**.
+
+Thus the new PR should remain a SOURCE-BOUNDED external audit plus numerically tested null fixture. No Agda file is added because creating duplicate vocabulary would contravene maximum reuse. The next useful Agda task is a **specific adapter** into the existing GR prediction/observation fields after a defensible physical source model is specified, not another grand-unification receipt. This correction does not change P0/P1 receipts or claim an actual Pais/Eskridge historical connection.
