@@ -325,3 +325,48 @@ passed.  Independent numerical C4 and PMNS algebra checks were
 performed locally; the *new committed nine-test suite itself* and
 Agda kernel compilation have not been executed as GitHub branch files
 in this runtime.  No evidence grade is inflated to PASS on that basis.
+
+
+### Exact inverted-ordering interpretation control (subsequent cut)
+
+The **absolute-magnitude** `1/31` ratio is not even
+componentwise excluded by the *inverted* NuFIT 6.1 intervals.  Take
+the exact integer witness, all in units of 10^-8 eV²:
+
+```
+Delta m21² = +7600      in [7236,7822]
+Delta m32² = -243200    with |Delta m32²| in [242100,254700]
+Delta m31² = -235600    since Delta m31² = Delta m32² + Delta m21²
+|Delta m21² / Delta m31²| = 7600/235600 = 1/31
+Delta m21² / Delta m31² = -1/31   (signed)
+```
+
+The two component values are in the individual 3σ marginal
+intervals, but there is **no assertion** that the pair lies in a
+correlated 3σ joint region.  This counterexample blocks an
+overgeneralized statement that every order/convention falsifies
+`1/31`.  NuFIT's preferred ordering and independent model selection
+remain separate matters.
+
+### Physical CP discriminator (new numeric regression)
+
+The continuous-complex PDG PMNS regression additionally checks the
+vacuum neutrino-versus-antineutrino appearance asymmetry
+
+```
+P(nu_alpha->nu_beta) - P(anti-nu_alpha->anti-nu_beta)
+ = 4 * sum_{i>j} Im[c_i conj(c_j)] sin[phi_i - phi_j],
+c_i = U(beta,i) conj(U(alpha,i)).
+```
+
+For supplied NuFIT 6.1 NO *best-fit parameters* and the illustrative
+vacuum point L=1300 km, E=2.5 GeV, the muon-to-electron channel
+difference is about +0.01416008.  Independent numerical paths
+matched within 4e-17.  The choice of baseline and energy is a
+simulation fixture; **no measured CP asymmetry, experimental
+sensitivity, matter-corrected event rate or discovery significance**
+has been derived here.  In particular matter-induced ν/anti-ν
+asymmetries must be modelled separately before detector comparisons.
+Majorana column phases cancel from these vacuum oscillation
+probabilities; lepton-number-violation remains an independent
+observable target.
