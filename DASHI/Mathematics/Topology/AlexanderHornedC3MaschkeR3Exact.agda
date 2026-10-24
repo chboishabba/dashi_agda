@@ -155,12 +155,12 @@ transverseSpansZeroSum :
   ∀ x y z → x + y + z ≡ 0ℚ →
   transverse x (0ℚ - z) ≡ vec x y z
 transverseSpansZeroSum x y z totalZero =
-  vecExt (solve-∀ x y z)
-    (subst (λ t → (0ℚ - z) - x ≡ t) (sym totalZero)
-       (solve-∀ x y z))
+  vecExt refl
+    (subst (λ t → (t - z) - x ≡ y)
+      totalZero (solve-∀ x y z))
     (solve-∀ x y z)
   where
-    open import Relation.Binary.PropositionalEquality using (subst; sym)
+    open import Relation.Binary.PropositionalEquality using (subst)
 
 -- Existing realified-sector donor has dimension one plus two;
 -- here those sectors are constructed as actual rational
