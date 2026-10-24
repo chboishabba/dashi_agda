@@ -590,3 +590,59 @@ def test_unpaid_deduplicated_case_reel_join_stays_narrow():
     ):
         assert token in source
     assert "not a verified signed/accepted contract" not in source  # forbid fabricated acceptance
+
+
+def test_black_epstein_existing_transaction_chain_is_reused_not_reauthored():
+    source = OWNER.read_text()
+    for owner in (
+        "EpsteinBlackAgreementInvoiceWorkJoin20261015Exact as BlackWork",
+        "EpsteinBlackInvoiceWireSettlement20261015Exact as BlackWire",
+        "EpsteinBlackApolloSameObjectReceiptRound20261014Exact as BlackApollo",
+    ):
+        assert owner in source
+    for token in (
+        "blackPreExistingAgreementWork = BlackWork.canonicalWorkJoinBoundary",
+        "blackPreExistingSettledWire = BlackWire.canonicalWireBoundary",
+        "blackPreExistingApolloNuance = BlackApollo.canonicalApolloNuanceBoundary",
+        "blackServicesDocumented = refl",
+        "blackInvoiceDocumented = refl",
+        "black2014InvoiceAndReceiptMatched = refl",
+        "blackPaymentNotIdentifiedAsChecklistFee = refl",
+        "blackInvoiceAndWireNotMeasuredTaxBenefit = refl",
+        "apolloNeverAutomaticallyBannonPayer = refl",
+        "bannonFilmAlreadyEstablishedByDifferentOwner = refl",
+        "bannonOriginalReelHashNotReplacedByBlackReceipts = refl",
+        "blackPaymentDoesNotCreateBannonFilmFunding ()",
+        "blackPaymentDoesNotCreateUnifiedProgramme ()",
+    ):
+        assert token in source
+
+
+def test_film_needs_only_receipt_hash_and_optional_transcript():
+    prior = PRIOR_FILM_OWNER.read_text()
+    for token in (
+        "canonicalLightweightFilmObjectReceipt = lightweight-film-object-receipt",
+        "docs/research/bannon-epstein-video-manifest-20261024.json",
+        "videoNeedNotBeVendored = refl",
+        "noUncomputedSHA256Fabrication = refl",
+        "chapterTimestampsNotVerbatimTranscript = refl",
+        "noTranscriptClaimWithoutBytes = refl",
+        "reelToAgreementJoinNotConferredByHash = refl",
+    ):
+        assert token in prior
+
+
+def test_wyden_march2026_assertions_are_not_adjudicated_or_film_custody():
+    root = ROOT / "DASHI/Cognition/EpsteinBlackApolloSameObjectReceiptRound20261014Exact.agda"
+    source = root.read_text()
+    for token in (
+        "wydenWomenPaymentsQuestion = wyden-2026-claim-receipt",
+        "wydenSurveillanceQuestion = wyden-2026-claim-receipt",
+        "wydenCompensationComparator = wyden-2026-claim-receipt",
+        "wydenGiftTaxQuestion = wyden-2026-claim-receipt",
+        "wydenClaimIsNotAdjudication = refl",
+        "wydenSurveillanceClaimNotBannonFilmEvidence = refl",
+        "wydenOriginalMessageStillUninspectedHere = refl",
+        "EFTA00977823",
+    ):
+        assert token in source
