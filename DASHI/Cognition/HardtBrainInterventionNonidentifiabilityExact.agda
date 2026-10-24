@@ -41,7 +41,7 @@ observedOutcome w = sharedCue w
 passiveObservation : TrialWorld → Bool × Bool
 passiveObservation w = observedStimulus w , observedOutcome w
 
--- The contrast is do(X=0) versus do(X=1). For the witness U=0,\n-- the do(X=0) arm coincides with passive observation; this is NOT an\n-- assertion that a forced-zero intervention is sham for every U.
+-- The contrast is do(X=0) versus do(X=1). For the witness U=0,\n-- the do(X=0) arm coincides with passive observation; this is NOT an\n-- assertion that forced-zero intervention is sham for every U.
 -- In the direct model the receiving outcome follows a forced input.
 -- In the shared-cause model it remains driven by its independent cue.
 -- The toy is a finite structural causal model, not human neural physics.
@@ -49,15 +49,34 @@ interventionOutcome : Bool → TrialWorld → Bool
 interventionOutcome imposed (world cue directEffect) = imposed
 interventionOutcome imposed (world cue sharedCauseOnly) = cue
 
--- The actual existing generic intervention-response definition is reused.
--- It contrasts sham/control(false) and do(true) in the declared toy.
+-- The generic ContrastiveInterventionResponse requires a true State
+-- preserving transition, not a map directly from State to observed Bool.
+-- Keep the original physical/causal world while recording the imposed X.
+record InterventionState : Set where
+  constructor intervention-state
+  field
+    currentInput : Bool
+    originalWorld : TrialWorld
+open InterventionState public
+
+setInterventionInput : Bool → InterventionState → InterventionState
+setInterventionInput b (intervention-state _ w) = intervention-state b w
+
+readInterventionOutcome : InterventionState → Bool
+readInterventionOutcome (intervention-state b w) =
+  interventionOutcome b w
+
+-- The inherited generic helper now receives its actual function types:
+-- State=InterventionState; Intervention=Bool; Observation=Bool.
 causalResponse : TrialWorld → Bool → Bool × Bool
-causalResponse =
+causalResponse w action =
   Intervention.ContrastiveInterventionResponse
-    (λ b → b)
-    interventionOutcome
+    readInterventionOutcome
+    setInterventionInput
     false
     (λ control treated → control , treated)
+    (intervention-state false w)
+    action
 
 sameCueDirect : TrialWorld
 sameCueDirect = world false directEffect
@@ -96,11 +115,12 @@ noUniversalDoDecoder =
 -- theorem. The same two worlds refute baseline-only intervention response.
 noBaselineResponseDescent :
   Intervention.ResponseDescendsThroughBaseline
-    (λ b → b) interventionOutcome false
+    readInterventionOutcome setInterventionInput false
     (λ control treated → control , treated) true → ⊥
 noBaselineResponseDescent =
   Intervention.responseCollisionBlocksBaselineDescent
-    {x = sameCueDirect} {y = sameCueConfounded}
+    {x = intervention-state false sameCueDirect}
+    {y = intervention-state false sameCueConfounded}
     refl differentCausalResponse
 
 ------------------------------------------------------------------------
