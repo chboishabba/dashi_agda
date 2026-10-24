@@ -1,4 +1,7 @@
 # Physical E6-derived trinification orbifold: exact VEV parity, chiral 16 + vectorlike 10+1 and UV anomaly blocker
+
+**FOLLOW-ON VALIDITY CORRECTION (2026-10-25):** The old E32/E33/E21 constant-profile 18-even Hessian was a stationary HOMOGENEOUS ZERO-MODE effective potential only, not a 5D bulk+boundary solution. The selected source V6 bulk t-force t(6−13t²) is nonzero at the old t=.0246 trial. A new dimensionless Robin interval BVP and its source-current checks are recorded in `KKE6OrbifoldIntervalBoundaryELMaxCut20261025.md`. Global UV GS anomaly and actual five-dimensional metric/fermion quantum vacuum remain unresolved.
+
 2026-10-24. **Canonical source implementation:** [KK #1241](https://github.com/chboishabba/dashi_agda/pull/1241). **Existing first-Tits original code:** [E6 #1106](https://github.com/chboishabba/dashi_agda/pull/1106). **Parent strategy:** [KKTOEPhysicalModelForkPareto20261024.md](KKTOEPhysicalModelForkPareto20261024.md).
 
 ## Why this is the most productive cross-PR candidate
