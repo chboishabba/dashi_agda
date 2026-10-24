@@ -1,5 +1,9 @@
 # Field Loom × Amy Eskridge × missing-scientists physics: source-typed audit and revised deliverables
 
+**Next chronological measurement repair:** [25 October S1 source/GLS/factorial/rank corrections](psychotronics-s1-metrology-repair-20261025.md) supersede any simplistic independence assumption for repeated force pairs. Original 20-scientist science and event/source attribution are unchanged; neither more sophisticated statistical code nor cited 1989/2025 engineering authors proves a new gravitational interaction.
+
+
+
 **Machine-readable companion:** [21-row independent science / experiment / missing-scientist source matrix](psychotronics-physics-crosspollination-source-matrix-20261024.csv), indexed separately from the pre-existing **51 historical** psychotronics literature rows. Each row records original author, carrier inspection grade, bounded proposition, ordinary-physics comparison, admissible cross-pollination, failure/identity boundary, existing repository owner and next deliverable. Two historical roots are cross-references, **not new independent original sources**.
 
 
