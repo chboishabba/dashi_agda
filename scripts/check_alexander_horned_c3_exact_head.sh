@@ -18,6 +18,7 @@ targets=(
   DASHI/Mathematics/Topology/AlexanderHornedMixedPrimeCRTWeldExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedBinaryIcosahedralSpinSignBidiExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedPadicCongruenceNoGoExact.agda
+  DASHI/Mathematics/Topology/AlexanderHornedSpinVOAFactorFunctorExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedNonabelianRegularPadicReuseExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedBinaryTernaryExistingCodecWeldExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedOreFiniteTargetExtensionExact.agda
