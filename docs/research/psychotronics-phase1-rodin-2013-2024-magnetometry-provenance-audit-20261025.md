@@ -13,6 +13,9 @@ This is an attribution and data-independence audit of two separately published, 
 
 ## Exact reported numbers side by side: a previously uncatalogued source-dependence flag
 
+**Machine-readable comparison:** [three original-reported value joins](psychotronics-phase1-rodin-field-table-concordance-20261025.csv) preserve the two papers' own source IDs, current, frequency (where printed), model/theory and experiment values. The matching flag is an *exact at reported precision* test only. `reused_raw_trace_proved=false` marks the present evidence ceiling, **not** a negative experimental finding.
+
+
 Both articles report the following common three current settings and **identical two-decimal measured magnetic field values**:
 
 | Current, A | 2013 Table I **theoretical**, mT | 2013 Table I **experimental**, mT | 2024 Table II **theoretical**, mT | 2024 Table II **simulated**, mT | 2024 Table II **experimental**, mT |
