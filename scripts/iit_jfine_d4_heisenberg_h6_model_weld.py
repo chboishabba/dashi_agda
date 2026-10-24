@@ -32,6 +32,56 @@ def lift(m,g):
     ap,bp=to_standard(vecmat(m,from_standard(a,b)))
     return ap,bp,(t-dot(ap,bp))%3
 
+
+# A literal group isomorphism, not merely a rank or cardinality count.
+# Original eight shell coordinates in the SOURCE character chart:
+# (tE,tC,bE,bC,XE,YE,XC,YC).
+# The source subgroup has three standard H3 pairs (tC,tE),(XC,XE),
+# (YC,YE), and two independent central coordinates bE,bC.
+SOURCE_SLOT=(0,1,2,4,6,7,8,9)
+def embed_source8(s):
+    v=[0]*12
+    for i,j in enumerate(SOURCE_SLOT): v[j]=s[i]
+    return tuple(v)
+
+def source_product(s,c,ss,cc):
+    a,b=to_standard(embed_source8(s))
+    aa,bb=to_standard(embed_source8(ss))
+    ap,bp,cp=hprod((a,b,c),(aa,bb,cc))
+    v=from_standard(ap,bp)
+    assert all(v[j]==0 for j in (3,5,10,11))
+    return tuple(v[j] for j in SOURCE_SLOT),cp
+
+def to_h3_times_c3sq(s,c):
+    return (s[1],s[6],s[7]),(s[0],s[4],s[5]),c,(s[2],s[3])
+
+def from_h3_times_c3sq(h):
+    a,b,c,z=h
+    return (b[0],a[0],z[0],z[1],b[1],b[2],a[1],a[2]),c
+
+def h3_times_c3sq_product(h,k):
+    a,b,c,z=h;aa,bb,cc,zz=k
+    return plus(a,aa),plus(b,bb),(c+cc+dot(b,aa))%3,plus(z,zz)
+
+def h3_centre_and_isomorphism_checks():
+    generators=[(tuple([0]*8),1)]+[
+      (tuple(int(i==j) for j in range(8)),0) for i in range(8)]
+    checked=0
+    # Each source group element (including centre) tested against all
+    # nine generating elements: this proves product compatibility on
+    # the generators. The generic formula follows by bilinearity.
+    for state in itertools.product(range(3),repeat=9):
+        s=state[:8];c=state[8]
+        h=to_h3_times_c3sq(s,c)
+        assert from_h3_times_c3sq(h)==(s,c)
+        for t,tc in generators:
+            lhs=to_h3_times_c3sq(*source_product(s,c,t,tc))
+            rhs=h3_times_c3sq_product(h,to_h3_times_c3sq(t,tc))
+            assert lhs==rhs
+            checked+=1
+    assert checked==177147
+    return checked
+
 def audit():
     basis=[]
     for i in range(6):
@@ -64,6 +114,7 @@ def audit():
     assert x.product(M,A)==x.product(A,x.M)
     o=x.product(x.product(x.transpose(A),x.O12),A)
     assert x.rank(o)==6
+    concrete_group_isomorphism_checks=h3_centre_and_isomorphism_checks()
     assert 3**6+18*(3**3)**2==3**9
     assert 3**8+2*(3**4)**2==3**9
     return {
@@ -75,6 +126,8 @@ def audit():
       "source_subspace_group_order":19683,
       "source_subspace_centre_order":27,
       "source_subspace_model_type":"H3 x C3^2 (not extraspecial H4)",
+      "source_H3_times_C3sq_concrete_generator_checks":concrete_group_isomorphism_checks,
+      "source_H3_times_C3sq_two_sided_source_chart":True,
       "H3_C3sq_linear_irreps":6561,
       "H3_C3sq_nonlinear_irreps":18,
       "H3_C3sq_nonlinear_irrep_degree":27,
