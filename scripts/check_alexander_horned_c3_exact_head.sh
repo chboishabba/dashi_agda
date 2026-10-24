@@ -20,6 +20,7 @@ targets=(
   DASHI/Mathematics/Topology/AlexanderHornedC3ModularJordanF3Exact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3R3HodgeEquivarianceExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3SpinCyclotomicIntertwinerExact.agda
+  DASHI/Mathematics/Topology/AlexanderHornedC3F7FullActorMaschkeExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedProPSolvableBlindExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedMixedPrimeCRTWeldExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedBinaryIcosahedralSpinSignBidiExact.agda
