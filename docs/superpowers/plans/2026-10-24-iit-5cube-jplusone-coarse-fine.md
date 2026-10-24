@@ -118,3 +118,13 @@ python3 scripts/iit_numeric_verification.py
 agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/EverythingIITPhiIntegrationMaxCut.agda
 \`\`\`
 Record exact SHA, Python/Agda versions, output hashes, and whether the run consumed the same original source matrix. J coarse/fine is a **reuse contract**, not numerical or physical identity.
+
+
+### Two consumer-relative coarse/fine orderings (additional max-cut)
+
+The Agda bridge now exports **both** structurally exact reopening contracts from the same conditional \(F^{80}=I-JP\) producer:
+
+1. **Geometric coarse first:** coarse \(P(x)\) (five-slot diagonal profile), relative fine \(F(x)\) (120-dimensional retained dynamics), reopening \((g,y)\mapsto F^{79}y+Jg\). This closely matches the intended *coarse point with relative fine assignment* interpretation, but is not the old J harmonic carrier.
+2. **Dynamics-observation coarse first:** coarse \(F(x)\) (the actually seen one-step output), relative fine \(P(x)\) (five missing trits), with the same reopening equation. This is the direct consumer-relative non-descent view: two source states differing by a kernel profile have the same update output but differ for a \(P\)-sensitive consumer.
+
+Neither orientation automatically becomes the sole correct ontology. Both require the **same concrete 5³ operator certificate**; changing observation \(Q\) or target \(T\) changes which residual qualifies as necessary. In either ordering, no independent state dimensions are added to the original 125.
