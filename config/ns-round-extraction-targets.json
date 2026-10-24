@@ -157,7 +157,7 @@
             "path": "scripts/ns_b4_literal_padding_adversary.py"
           }
         ],
-        "status": "falsified original full-fibre B4 physical payment: exact literal defect D_N=(8/3)N²(2N+1)(3N²+N−2)−840480 for all N≥9, grows as 16N⁵; fixed core companion 1345859672, original selected localED≤4. R681 output-relative work is distinct, not a drop-in replacement.",
+        "status": "falsified original full-fibre B4 physical payment: exact literal defect D_N=(8/3)N²(2N+1)(3N²+N−2)−840480 for all N≥9, grows as 16N⁵; fixed core companion 1345859672, original selected localED<=4. R681 output-relative work is distinct, not a drop-in replacement.",
         "next": "Use existing R681→R684→R685→R690 and prove compensated same-source GLOBAL physical critical-production identity before any signed cutoff-uniform estimate. Do NOT resurrect the disproved full-fibre B4 strict-half payment."
       },
       {
