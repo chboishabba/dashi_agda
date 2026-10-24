@@ -1,0 +1,63 @@
+{
+  "schema": "dashi.neutrino-existing-cp-maxcut-evidence/v1",
+  "date": "2026-10-24",
+  "repo": "chboishabba/dashi_agda",
+  "ref": "chatgpt/neutrino-icecube-maxcut-20261024",
+  "source_blobs": {
+    "DASHI/Physics/QFT/NeutrinoExistingCPSectorLeptonBridgeExact.agda": "8837b0a9394ea4b4ca531f4d85fbeb13e8537d70",
+    "DASHI/Physics/QFT/NeutrinoExistingCPMassCommutatorExact.agda": "df212d0acb6473011fd15eda05d52f6964040ce7",
+    "DASHI/Physics/QFT/NeutrinoExistingCPFiniteResidualNoGoExact.agda": "9d2d1e8ab1455b81b3efd1e3acff4a8ead623ee0",
+    "DASHI/Physics/QFT/NeutrinoExistingCPAstroConjugationNoGoExact.agda": "042bf1a7f39184600f1e131f5005d15336a08f94",
+    "tests/test_neutrino_existing_cp_sector_bridge.py": "daa2ee3bf70fd72574da6ebb563aac22e60ff0c3"
+  },
+  "attribution": {
+    "mathematics": "C. Jarlskog (1985,1987) rephasing and mass-commutator CP invariants; standard cyclotomic field identities",
+    "existingDASHI": "CPPhaseStructuralOriginReceipt; HeckeCharacterPhaseReceipt; Y13ComplexEntryReceipt; JarlskogDiagnosticAnalysis; CKMGateAbRetirementReceipt; C3CyclotomicAmplitudeAlgebraExact",
+    "newDASHI": "complex lepton PMNS toy on common mass-operator space with zeta root chosen, exact CP-odd quartet, nonzero cubic commutator, finite-group obstruction and phase-averaged astro CP degeneracy",
+    "experimentalInputs": "NuFIT6.1 (2025) measured-parameter fixtures; no exact likelihood run"
+  },
+  "exact_values": {
+    "Jarlskog_zeta_coeff": "9859116742272000/292590225473523169",
+    "Jarlskog_imag_ordinary_complex": 0.029181581660378004,
+    "cubic_commutator_zeta_coeff": "3272103619391689547963065344000000/292590225473523169",
+    "quadratic_Galois_trace": "442358853598/216225930001",
+    "pion_source_Earth_approx": [
+      0.33105872906776673,
+      0.33708630627777564,
+      0.3318549646544576
+    ]
+  },
+  "checks": {
+    "raw-source-six-angle-fractions": true,
+    "exact-3x3-row-unitarity": true,
+    "exact-3x3-column-unitarity": true,
+    "exact-3x3-neutral-eigenbasis": true,
+    "Jarlskog-zeta-coefficient": true,
+    "Jarlskog-conjugation-odd": true,
+    "Jarlskog-nonzero": true,
+    "mass-commutator-trace-cube": true,
+    "mass-commutator-pure-imaginary": true,
+    "mass-commutator-ratio": true,
+    "finite-residual-Galois-trace": true,
+    "finite-residual-Galois-trace-between-2-and-3": true,
+    "CP-conjugate-9-Born-invariant": true,
+    "original-quark-CP-nonpromotion-import": true,
+    "CP-conjugate-astrophysical-matrix-follows-from-9-Born-identities": true
+  },
+  "status": {
+    "source_readback": "PASS",
+    "independent_V8_fraction_execution": "PASS",
+    "Agda_kernel": "NOT_RUN",
+    "committed_python_suite": "NOT_RUN",
+    "physical_PMNS_prediction": "NOT_DERIVED",
+    "experimental_leptonic_CP_observation": "NOT_CLAIMED",
+    "NuFIT_correlated_profile_likelihood": "NOT_RUN",
+    "IceCube_flavour_likelihood": "NOT_RUN",
+    "algebraic_integer_general_theorem_kernel_proof": "NOT_RUN"
+  },
+  "method_notes": [
+    "All six angle fractions are read from the exact Agda source, and complex matrix operations are independently evaluated with rational pairs.",
+    "The 3x3 astrophysical CP conjugation identity follows algebraically from nine independently computed scalar norm-conjugation equalities; it is not counted as a second independent dataset or an independently executed IceCube likelihood.",
+    "Rational and matrix computations do not constitute an Agda kernel receipt."
+  ]
+}
