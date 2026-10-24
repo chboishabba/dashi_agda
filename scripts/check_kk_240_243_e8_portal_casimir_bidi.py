@@ -149,8 +149,9 @@ print('E6->SU3^3 gauge adjoint=24 +54; E8->E6xSU3 adjoint=86+162=248')
 print('TWO extra SU3 octets -> 16 5D vectors = 48 free bosonic units')
 print('massless-limit residual after these vectors:',
       mp.nstr(delta+240,17))
-print('toy degenerate VECTOR mass to tune residual GeV:',
+print('FORMAL scalar-like 48-unit effective mass, NOT a valid 5D vector mass GeV:',
       mp.nstr(m48,15))
+print('FAIL Higgsed 5D vector reinterpretation: 4 massive rather than 3 massless polarizations')
 print('FAIL full physical trinification: mass generation, Higgs sector, '
       'EW chirality, interaction loops and visible-vector bounds not paid')
 
