@@ -76,3 +76,38 @@ The D4 permutation action on the 196830-element pointed set can be **linearised*
 ### Local independent finite receipt
 
 An independent local script at /mnt/data/independent_jfine_79_check.py was executed, not just described. It exhaustively checked the chosen cross/corner roundtrip for all 19683 nine-trit states; independently checked the quartic's nonzero multiplication has no zero divisors, every nonzero inverse via x^79, F9-subfield size 9, 72 distinct affine maps and the eigenvalue-order distribution 0:5,8:12,16:12,40:48,80:48. Its JSON receipt is /mnt/data/independent_jfine_79_receipt.json. This is independent arithmetic verification **not** an execution of the exact GitHub script and **not** a kernel-checked Agda proof.
+
+
+## Decisive further identification: projective 9+1 and punctured 72+8
+
+The user observed **9×8=72**. The natural missing object is the projective line \(\mathbb P^1(\mathbb F_9)\), of **9 ordinary points plus the point at infinity**, with eight nonzero F9-scalars per projective line. Because \(\mathbb F_{81}\) is a degree-2 extension of F9, \(\mathbb F_{81}\) can be identified with the homogeneous coordinate vector space \(\mathbb F_9^2\) after choosing a basis \(1,\beta\). Thus:
+
+\[
+\mathbb F_{81}^\times / \mathbb F_9^\times
+\cong \mathbb P^1(\mathbb F_9),\qquad
+|\mathbb P^1(\mathbb F_9)|=9+1=10,
+\]
+\[
+|\mathbb F_{81}^\times|=80=(9+1)\times8=9\times8+8=72+8.
+\]
+
+**Exact constructive finite witness:** using the same quartic F81 and the unique nine-element subfield \(F9=\{x:x^9=x\}\), choose \(\beta=X\notin F9\). Every vector \(z\in F81\) has unique \(z=a+\beta b\) with \(a,b\in F9\). For \(z\ne0\):
+- if \(b=0\), project to \(\infty\), store nonzero scalar \(a\in F9^\times\);
+- if \(b\ne0\), project to affine slope \(a/b\in F9\), store nonzero scalar \(b\).
+- reconstruction is \(z=b(a/b+\beta)\), or \(z=a\cdot1\) at infinity.
+
+This establishes an **exact 80-element two-sided trivialisation**, conditional only on the chosen basis/affine chart. The *projective quotient itself* is canonical given the F9 subfield, whereas its designation of infinity and chosen scalar representatives are not canonical without a chart. The finite independent Python audit confirmed ten lines, eight nonzero vectors per line, 72 affine and eight completion elements, with all 80 reconstruction roundtrips.
+
+**Stronger old-source reuse:** the new Agda IITProjectiveF9Pointed80Exact constructs an actual two-sided isomorphism between the original Harmonic.CoarseChannel and **F9-shaped affine nine plus point infinity** using the already existing OggSSPP3F9FrobeniusCandidateNoGoExact.F9Point source carrier; completionJ goes *exactly* to its chart infinity. The actual older OggSSPP2PuncturedKernel2BidiExact eight-state carrier and actual punctured four-trit eighty-state carrier are both named in a typed Projective80Trivialisation obligation. The concrete 80-way section/retraction is **currently verified by finite arithmetic, not inhabited by an Agda field operation**. The original Ogg F9 source models a Frobenius action and does not prove external identification with supersingular moduli.
+
+**Important correction to potential overclaim:** \(\mathbb P^1(F9)\) is not the modular function \(j\) or the modular curve itself; calling the distinguished finite projective point \(\infty\) a completion of the local harmonic chart does **not** make it the cusp of a classically sourced elliptic modular curve without a geometric moduli map. We have now proved a set-chart identification and given a complete finite projective quotient calculation, **not** a moonshine/Monster equivariant identification.
+
+The observation 9×8=72 alone could also denote the distinct affine group AGL(1,9). There are now TWO independent, equally numbered 72-element structures:
+1. nonzero homogeneous-coordinate vectors above the nine *affine projective points* (nine eight-element fibres);
+2. affine bijections \(z\mapsto az+b\) of F9, with a∈F9×, b∈F9.
+
+They have equal cardinality but **are not the same set/action by definition**; the first is 72 points in F81×, the second is 72 functions acting on F9. Neither number promotes a physical or Monster claim.
+
+**Pre-existing projective-geometric proof donors:** ProjectiveLineHomogeneousPairExact, ProjectiveLineAffineChartsExact and ProjectiveLineAtlasHomogeneousWeldExact own general projective coordinate/overlap constructions over an abstract ComplexFieldPresentation. Our P1(F9) uses finite-field coordinate laws, so do not silently import a CP1/complex theorem as an F9 theorem; transport requires the specific field-presentation instance.
+
+**Acceptance:** run scripts/iit_projective_f9_pointed80_audit.py and the aggregate numeric verifier at the exact PR head; compile IITProjectiveF9Pointed80Exact.agda with source-pinned Agda. Independent local arithmetic receipt is /mnt/data/independent_f9_projective_receipt.json. A genuine same-structure J to modular curve/Moonshine or physically measured system is still unproven.
