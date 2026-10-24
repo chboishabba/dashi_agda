@@ -36,6 +36,7 @@ data InfluenceEdgeKind : Set where
   canadianJointPrivacyRegulatorAIQFinding : InfluenceEdgeKind
   ftcKoganNixSeparateIndividualConsents : InfluenceEdgeKind
   ftc2020BannonCivilDemandInvestigation : InfluenceEdgeKind
+  ftc2020BannonJudicialShowCauseOrder : InfluenceEdgeKind
   ukElectoralAIQActualCampaignPayments : InfluenceEdgeKind
   breitbartDataConfigIntersection : InfluenceEdgeKind
   psychographicEffectivenessUnresolved : InfluenceEdgeKind
@@ -193,6 +194,15 @@ ftc2020BannonRespondentOppositionReceipt = influence-receipt
   "Bannon denied involvement in or knowledge of Cambridge Analytica's alleged Facebook data wrongdoing and asserted prior document production and Fifth Amendment burdens. His sworn interrogatories and the case's ultimate outcome were not independently audited; his denial and the FTC's assertions must both remain visible."
   true false false false
 
+
+ftc2020BannonJudicialShowCauseReceipt : InfluenceReceipt
+ftc2020BannonJudicialShowCauseReceipt = influence-receipt
+  ftc2020BannonJudicialShowCauseOrder
+  "FTC v. Stephen K. Bannon, DDC 1:20-mc-00111-CRC, Judge Christopher R. Cooper, 2020-11-18 ECF5; https://www.ftc.gov/system/files/documents/cases/05_order_to_show_cause_0.pdf"
+  "signed original federal judicial PROCEDURAL order, separate court producer from FTC litigant"
+  "Court found good cause to schedule an order-to-show-cause hearing about enforcing the 2019 FTC civil investigative demand, not to adjudicate consumer-privacy misconduct or enter a final enforcement disposition. The original November 18 order is visibly signed as the judge's court order; the outcome of later hearings is not authenticated in this acquisition."
+  true false false false
+
 ftc2020BannonReplyReceipt : InfluenceReceipt
 ftc2020BannonReplyReceipt = influence-receipt
   ftc2020BannonCivilDemandInvestigation
@@ -248,6 +258,7 @@ canonicalInfluenceReceipts =
   ∷ canadianJointRegulatorAIQReceipt
   ∷ ftcKoganNixIndividualConsentReceipt
   ∷ ftc2020BannonCIDPetitionReceipt
+  ∷ ftc2020BannonJudicialShowCauseReceipt
   ∷ ftc2020BannonRespondentOppositionReceipt
   ∷ ftc2020BannonReplyReceipt
   ∷ ukElectoralAiqPaymentsReceipt
