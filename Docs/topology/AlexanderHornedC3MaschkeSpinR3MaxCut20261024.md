@@ -247,7 +247,7 @@ External sources:
   https://math.ucr.edu/home/baez/icosidodecahedron/23.html
 
 
-## 2026-10-24 decisive follow-on: SAME quartz spin matrix and full F7 actor
+## 2026-10-24 decisive follow-on: SAME quaternion spin matrix and full F7 actor
 
 **Stronger actual same-object representation owner**
 `DASHI/Mathematics/Topology/AlexanderHornedC3SpinCyclotomicIntertwinerExact.agda`
