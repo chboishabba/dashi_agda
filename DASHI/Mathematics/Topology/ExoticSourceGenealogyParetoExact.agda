@@ -30,6 +30,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as A
+import DASHI.Core.GenericReceipt as Receipt
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snow
 
 richardsOriginal : A.AttributedSource
@@ -134,7 +135,7 @@ exoticTopologyAtlas = A.mkSourceAtlas
 
 attributionDoesNotPromote :
   (validation : String) →
-  DASHI.Core.GenericReceipt.promotesClaim
+  Receipt.promotesClaim
     (A.attributedSourceAtlasReceipt exoticTopologyAtlas validation)
   ≡ false
 attributionDoesNotPromote = A.attributedSourceAtlasReceiptNonPromoting exoticTopologyAtlas
