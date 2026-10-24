@@ -30,6 +30,11 @@ if labels = fail or Length(labels) <> Length(irr) then
   Error("6.Suz ATLAS labels missing");
 fi;
 classOrders := OrdersClassRepresentatives(six);
+classSizes := SizesConjugacyClasses(six);
+groupOrder := Size(six);
+if Sum(classSizes) <> groupOrder or classSizes[1] <> 1 then
+  Error("source group order/class sizes mismatch");
+fi;
 pow2 := PowerMap(six,2);
 if pow2 = fail or Length(pow2) <> Length(classOrders) then
   Error("actual class second power map required");
@@ -71,7 +76,13 @@ out := OutputTextFile(
 SetPrintFormattingStatus(out,false);
 AppendTo(out,"{\n");
 AppendTo(out,"  \"table_id\":\"6.Suz\",\n");
-AppendTo(out,"  \"class_orders\":[");
+AppendTo(out,"  \"group_order\":",String(groupOrder),",\n");
+AppendTo(out,"  \"class_sizes\":[");
+for k in [1..Length(classSizes)] do
+  AppendTo(out,String(classSizes[k]));
+  if k < Length(classSizes) then AppendTo(out,","); fi;
+od;
+AppendTo(out,"],\n  \"class_orders\":[");
 for k in [1..Length(classOrders)] do
   AppendTo(out,String(classOrders[k]));
   if k < Length(classOrders) then AppendTo(out,","); fi;
