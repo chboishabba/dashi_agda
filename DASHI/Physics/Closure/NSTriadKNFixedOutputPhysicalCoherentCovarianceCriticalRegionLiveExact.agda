@@ -15,6 +15,7 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceCriti
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.List.Base using (length)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -27,6 +28,8 @@ import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30E
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceLiveExact as LiveOwner
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceBonyLiveExact as RateLive
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Pair
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianCriticalRegionPairBlocksExact as Region
 
 F : C3.RealField _
@@ -112,6 +115,33 @@ module LiveRegion
       (trans
         (solve (nu ∷ sixRegionSignedTotal ∷ []))
         (cong (nu *_) negativeRegionExpansion))
+
+  ------------------------------------------------------------------------
+  -- Original six R236 physical covariance blocks to the *same* R685
+  -- rate-kernel currency. This is exact, without discarding the
+  -- finite-fibre rate-centering companion or the damped tangent endpoint.
+  -- The sixth-block quantity remains quartic in velocity amplitudes;
+  -- it must not be confused with cubic physical enstrophy production.
+  ------------------------------------------------------------------------
+
+  originalSixRegionCovarianceIsCorrectedCommutatorRate :
+    (0ℚ - nu * sixRegionSignedTotal)
+    ≡
+      Pair.rateSum Live.rate (Live.fibre output)
+        * Work.coherentWork (Live.mixed output) (Live.mixed output)
+      - Pair.natAsRational (length (Live.fibre output))
+        * ( Work.coherentWork (Live.mixed output)
+              (Work.fixedOutputCommutator
+                S Live.velocity (Audit.projectedNonlinearity Live.system)
+                Live.cutoff output)
+          - Work.coherentWork (Live.mixed output)
+              (Work.fixedOutputDampedTangent
+                Live.rho S Live.velocity
+                (Audit.projectedNonlinearity Live.system)
+                Live.cutoff output) )
+  originalSixRegionCovarianceIsCorrectedCommutatorRate =
+    trans (sym liveCovarianceIsNegativeViscositySixRegionBlocks)
+      (Live.covarianceIsCommutatorMinusTangent output)
 
 liveD1b2PhysicalR236SixBlockNormalFormClosed : Bool
 liveD1b2PhysicalR236SixBlockNormalFormClosed = true
