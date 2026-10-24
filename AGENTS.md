@@ -120,3 +120,24 @@ This yields a globally L² direct heat-inverse Fourier envelope
 regularity, is not already the signed centered-resolvent A2, and
 still needs Agda Bishop Fourier/Plancherel transport. See the roadmap
 and `scripts/ns_a_schwartz_fourier_same_object.py`.
+
+### Canonical B4 next proof path and A Fourier density (24 October)
+
+The padding-invariant alternative is NOT new: inspect
+`NSTriadKNFixedOutputPhysicalOutputRateNormalFormExact`,
+`NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact`,
+`NSTriadKNR650RateKernelInputLaplacianCollapseRound684Exact`,
+`NSTriadKNR650RateKernelCommutatorEndpointRound685Exact`, and
+`NSTriadKNR650GlobalSignedRateLiftInputLaplacianRound690Exact`.
+Those existing source proofs use physical output heat rate and
+`sum(p·q)*coherent_work`, avoiding the false fibre-mean B4 payment.
+Quantitative signed physical cross-gradient bound AND exact equivalence
+to the original selected B4 critical-production consumer remain
+independent obligations. Do not recreate this prior art as RNNN units.
+
+For A, the strong H1 density inequality
+`||Fourier[Stokes(u)-Stokes(v)]||²_L2xi <=8*pi*A(u,v)*B(u,v)/nu²`
+with actual tensor/convection L1 differences is already derived
+mathematically and checked by exact symbolic integration. It is NOT
+a Bishop kernel receipt or A2 signed resolvent estimate.
+Read `scripts/ns_a_schwartz_fourier_same_object.py` and roadmap first.
