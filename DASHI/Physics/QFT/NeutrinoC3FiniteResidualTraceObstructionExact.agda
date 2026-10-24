@@ -23,7 +23,7 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _*_)
 open import Data.Nat using (_≤ᵇ_)
-open import Data.Integer using (ℤ; +_; _-_)
+open import Data.Integer using (ℤ; +_; _+_; _-_; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.QFT.NeutrinoSameLeptonMassOperatorRationalExact as R
@@ -93,6 +93,36 @@ traceInEisensteinIsComputedPair :
         (+ 213694885170400)
         (+ 55365974464882)
 traceInEisensteinIsComputedPair = refl
+
+------------------------------------------------------------------------
+-- STRICTER / CHEAPER TRACE-OF-TRACE OBSTRUCTION (uses existing
+-- C3CyclotomicAmplitudeAlgebraExact.trace = 2u - v):
+--
+-- Tr_{Q(zeta)/Q}(tr(T*S1)) = (2A-B)/D^2.
+-- 2A-B = 372023795875918 strictly BETWEEN 2*D² and 3*D².
+-- If T*S1 had finite order its trace would be algebraic integral;
+-- the Galois trace of an algebraic integer is integral; an integer
+-- strictly between 2 and 3 is impossible.
+-- This avoids needing the full classification O_K=Z[zeta] in the
+-- *external* mathematical argument, but importing the general
+-- algebraic-integrality/field-trace theorem into Agda is STILL open.
+------------------------------------------------------------------------
+
+fieldTraceNumerator : ℤ
+fieldTraceNumerator =
+  (+ 2) * traceNumeratorA - traceNumeratorB
+
+fieldTraceNumeratorExact :
+  fieldTraceNumerator ≡ + 372023795875918
+fieldTraceNumeratorExact = refl
+
+fieldTraceStrictlyAboveTwo :
+  (372023795875918 ≤ᵇ (2 * commonTraceDenominator)) ≡ false
+fieldTraceStrictlyAboveTwo = refl
+
+fieldTraceStrictlyBelowThree :
+  (3 * commonTraceDenominator ≤ᵇ 372023795875918) ≡ false
+fieldTraceStrictlyBelowThree = refl
 
 ------------------------------------------------------------------------
 -- The NO-GO corollary stated in the roadmap additionally consumes
