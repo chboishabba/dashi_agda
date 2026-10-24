@@ -1,0 +1,144 @@
+{
+  "schema": "dashi.local-python-exact-source-standin/v1",
+  "date": "2026-10-24",
+  "repository": "chboishabba/dashi_agda",
+  "branches": {
+    "horn": "alexander-horned-c3-equivariant-20261024",
+    "neutrino": "chatgpt/neutrino-icecube-maxcut-20261024"
+  },
+  "verification_method": "GitHub fetch_file SHA cross-checked against locally reconstructed Git blob SHA-1 of actual Python file contents (sha1('blob '+len+'\\0'+bytes)); Python 3.13.5 executed these byte-identical local files; no CI and no Agda kernel invoked.",
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sympy": "1.14.0",
+    "network_from_python": "unavailable",
+    "Agda": "not invoked"
+  },
+  "source_blobs": [
+    {
+      "branch": "alexander-horned-c3-equivariant-20261024",
+      "path": "scripts/alexander_horned_c3_a5_probe.py",
+      "git_blob_sha": "4e30c491d47562797c23efa6b17667ff33118794"
+    },
+    {
+      "branch": "alexander-horned-c3-equivariant-20261024",
+      "path": "scripts/alexander_horned_c3_voa_a5_action_probe.py",
+      "git_blob_sha": "3385de02da737ac463a73b23fa71c3de96a0cbf9"
+    },
+    {
+      "branch": "alexander-horned-c3-equivariant-20261024",
+      "path": "scripts/alexander_horned_c3_su3_constructive_probe.py",
+      "git_blob_sha": "a2afad5b7c1733149990d0d070a5793c24562f4d"
+    },
+    {
+      "branch": "alexander-horned-c3-equivariant-20261024",
+      "path": "tests/test_alexander_horned_c3_a5_order_selection.py",
+      "git_blob_sha": "1c1df6e10db4eb4ed0f314e4a6dc5eec0e004ce8"
+    },
+    {
+      "branch": "alexander-horned-c3-equivariant-20261024",
+      "path": "tests/test_alexander_horned_c3_sun_reuse.py",
+      "git_blob_sha": "20680f9e8cb552029cf3fce306d0e0ec449e4d6c"
+    },
+    {
+      "branch": "chatgpt/neutrino-icecube-maxcut-20261024",
+      "path": "tests/test_neutrino_existing_cp_sector_bridge.py",
+      "git_blob_sha": "daa2ee3bf70fd72574da6ebb563aac22e60ff0c3"
+    },
+    {
+      "branch": "chatgpt/neutrino-icecube-maxcut-20261024",
+      "path": "tests/test_neutrino_horned_su3_positive_bridge.py",
+      "git_blob_sha": "8c18570146c5cba5eeb67ad0881cd2a4ee3a674d"
+    },
+    {
+      "branch": "chatgpt/neutrino-icecube-maxcut-20261024",
+      "path": "scripts/audit_neutrino_sun3_symbolic_matrix_laws.py",
+      "git_blob_sha": "f3c955970d6bfccf6b55c28d1d8909acd6d7b156"
+    }
+  ],
+  "executed": {
+    "unittest_discovery": {
+      "files": [
+        "tests/test_alexander_horned_c3_a5_order_selection.py",
+        "tests/test_alexander_horned_c3_sun_reuse.py",
+        "tests/test_neutrino_existing_cp_sector_bridge.py",
+        "tests/test_neutrino_horned_su3_positive_bridge.py"
+      ],
+      "count": 26,
+      "passed": 26,
+      "failed": 0,
+      "errors": 0,
+      "elapsed_seconds": 0.292,
+      "grade": "ACTUAL LOCALLY EXECUTED COMMITTED BLOB FILES"
+    },
+    "horn_a5_stage": {
+      "command": "python scripts/alexander_horned_c3_a5_probe.py",
+      "status": "PASS",
+      "order_five_root": true,
+      "commutator_coverage": "60/60",
+      "depth": 5
+    },
+    "horn_finite_VOA": {
+      "command": "python scripts/alexander_horned_c3_voa_a5_action_probe.py",
+      "status": "PASS",
+      "deterministic_cases": 4000,
+      "coordinate_algebra_size": 180,
+      "VOA_description": "c=0 commutative differential algebra, not CFT-type Monster"
+    },
+    "horn_SU3_depth5": {
+      "command": "python scripts/alexander_horned_c3_su3_constructive_probe.py",
+      "status": "PASS",
+      "parents": 31,
+      "leaves": 32,
+      "max_commutator_error": 4.9850145806131525e-15,
+      "max_unitarity_defect": 4.5978515173820066e-15,
+      "max_determinant_defect": 2.5631488888267375e-15,
+      "max_C3_twist_error": 4.755853591381347e-15
+    },
+    "horn_SU3_depth8": {
+      "command": "PYTHONPATH=scripts python -c 'from alexander_horned_c3_su3_constructive_probe import run; run(depth=8)'",
+      "status": "PASS",
+      "parents": 255,
+      "leaves": 256,
+      "max_commutator_error": 7.836612150722834e-15,
+      "max_unitarity_defect": 5.705031062431451e-15,
+      "max_determinant_defect": 2.9981161145699657e-15
+    },
+    "symbolic_matrix": {
+      "command": "python scripts/audit_neutrino_sun3_symbolic_matrix_laws.py",
+      "status": "PASS",
+      "time_seconds": 2.879,
+      "method": "SymPy symbolic polynomial identity under ζ²=-ζ-1 in 3×3 matrix entries, not a finite sample",
+      "passed": [
+        "qzeta_conjugation_involutive",
+        "qzeta_conjugation_multiplicative",
+        "matrix_identity_left",
+        "matrix_identity_right",
+        "matrix_associativity",
+        "matrix_dagger_involutive",
+        "matrix_dagger_antihom",
+        "matrix_determinant_multiplicative",
+        "matrix_determinant_dagger",
+        "matrix_identity_determinant_one"
+      ],
+      "failed": []
+    }
+  },
+  "source_attribution": {
+    "algebra": "Classical commutative ring, 3×3 matrix, involutive conjugation and group identities; no new mathematical theorem of novelty from SymPy",
+    "commutator": "Morikuni Gotô, 1949, J. Math. Soc. Japan 1(3), DOI 10.2969/jmsj/00130270",
+    "horn": "Allen Hatcher, Algebraic Topology, Example 2B.2; Alexander 1924; related Riebe 1968 distinct",
+    "CP": "Cecilia Jarlskog, PRL 55 (1985) 1039; original NuFIT input provenance separate",
+    "existing_repo": "DASHI SUNMatrixCarrier / SU3MatrixInstance / CompactLieGroupDerived and other canonical owners",
+    "new_contribution": "Cross-PR same-object test execution with Git blob matching and symbolic proof-search stand-in"
+  },
+  "open": [
+    "Exact-head Agda typechecking and formal proof transport NOT RUN",
+    "CertifiedSUNMatrixTheory 3 concrete function-backed Q(zeta3) instance not yet inhabited",
+    "Function extensionality or record-backed finite matrix equality not yet discharged",
+    "Gotô global commutator theorem and Hatcher direct limit not kernel imported",
+    "Wild-geometric three-copy pi1, physical charged currents and original neutrino likelihoods not proved",
+    "SymPy polynomial identities are external verified calculations, NOT Agda kernel certificates"
+  ]
+}
