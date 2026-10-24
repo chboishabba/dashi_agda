@@ -172,6 +172,27 @@ ostranderCitedByDIA = Investigation.investigative-claim-receipt
   true false false
 
 ------------------------------------------------------------------------
+-- Claim-level source-diligence gate: actual bibliography carrier inspected.
+------------------------------------------------------------------------
+
+bookReportCitationDiligence : Diligence.SourceDiligence
+bookReportCitationDiligence = Diligence.source-diligence
+  "Explicit 1970 book citation in 1975 US intelligence report"
+  maireLaMothe1975
+  Diligence.primaryProposition
+  true refl
+  "opened 69-page public PDF scan, visually inspected report title/author and selected bibliography pages"
+  Diligence.primaryLocated
+  "PDF index 66, printed p.69, selected bibliography reference 5"
+  "report published September 1975; information cutoff 15 April 1975"
+  "exact printed DST-1810S-387-75 report same-object title/date/author checked"
+  "1970 publication predates 1975 report, not reverse"
+  "actual bibliography citation establishes documentary dependence only"
+  "contemporary Kirkus review and original Prentice-Hall library metadata separate existence/wording from paranormal experimental validity"
+  "no reader may infer book experiments were independently replicated by US government"
+  "concrete citation graph; no 1985 Czech ministry event attributed to this 1975 report"
+
+------------------------------------------------------------------------
 -- Directed transmission edges. Wording reflects the exact consumer:
 -- correspondence / citation / request / independent mechanism control.
 ------------------------------------------------------------------------
