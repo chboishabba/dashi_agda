@@ -56,7 +56,7 @@ Therefore the **one-loop potential diverges positively at small radius for every
 
 ### Stronger global-minimum consumer
 
-The new script samples the two-variable landscape x in [0.04,30], theta in [0,pi] (145x25 grid), and independently optimizes it from 21 initial conditions. Both find the tuned x=1,theta=0 solution as the lowest sampled value (optimizer minimum approximately zero). This is substantial computational evidence of **no deeper finite-radius one-loop minimum**, BUT it is **not** a certified inequality `U(x,theta)>=0` for every real x>0 and every theta. The needed bounded-interval derivative or interval-arithmetic proof of that global inequality remains OPEN. A vacuum tunnelling/lifetime calculation in the full gravity EFT is also OPEN.
+The new script samples the two-variable landscape x in [0.0001,1000], theta in [0,pi] (260x49 grid), and independently optimizes it from 21 initial conditions. Both find the tuned x=1,theta=0 solution as the lowest sampled value (optimizer minimum approximately zero). This is substantial computational evidence of **no deeper finite-radius one-loop minimum**, BUT it is **not** a certified inequality `U(x,theta)>=0` for every real x>0 and every theta. The needed bounded-interval derivative or interval-arithmetic proof of that global inequality remains OPEN. A vacuum tunnelling/lifetime calculation in the full gravity EFT is also OPEN.
 
 Consequently we now distinguish: positive Hessian (verified), asymptotic small-radius repulsion uniformly over Wilson phase (proved by positive-series triangle inequality), numerical global survey (sampled), absolute stability and UV completion (not proved).
 
