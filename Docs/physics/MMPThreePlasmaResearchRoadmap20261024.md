@@ -312,3 +312,6 @@ python3 scripts/check_mmp_cauchy_handle_thom_flux_20261024.py
 agda -i . DASHI/Physics/QFT/MMPDiracCauchyNoncompactCompactDoubleBidiExact.agda
 ```
 No exact-head GitHub workflow, Agda kernel, globally Hadamard charged source, Einstein–Maxwell fixed point or real plasma device is claimed.
+
+
+**Additional q/holonomy/NS critical discriminator (same noncompact Cauchy handle):** `H¹(Sigma;Z₂)=Z₂` provides two spin structures along the S¹ handle generator, `H¹(Sigma;U1)=U1` supplies variable flat Wilson phase and `H²(Sigma;Z)=Z` independently fixes magnetic flux q. Exact q does NOT fix the full loop fermion boundary condition. New `check_mmp_cauchy_handle_thom_flux_20261024.py` computes Bernoulli `B₂(α_spin+α_Wilson)` for q=2,12,24: NS α=.5 gives negative -1/12, ±1/3 holonomy gives positive +1/36, independent of q. The loop Casimir energy is still a SOURCE-specific 2D approximation; the true 4D charged-fermion spin-c wavefunctions and negative stress are NOT constructed. An actual three-region plasma drive would need to source `δα_Wilson`, not merely a different B or magnetic helicity.
