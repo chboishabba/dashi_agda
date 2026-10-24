@@ -113,7 +113,7 @@ rows78 := RowsFor(degree78);
 # central order-three class, with the two classes giving inverse phases.
 for row in Concatenation(rows12, rows78) do
   if not (row.firstCentralPhase in ["zeta", "zetaSquared"]) then
-    Error("faithful Suzuki candidate is not pure zeta/zeta^2 on first central C3 class");
+    Error("Suzuki candidate is not pure zeta/zeta^2 on first central C3 class");
   fi;
   if not (row.secondCentralPhase in ["zeta", "zetaSquared"]) then
     Error("faithful Suzuki candidate is not pure zeta/zeta^2 on second central C3 class");
@@ -130,7 +130,7 @@ if rows12[1].atlasLabel = rows12[2].atlasLabel then
   Error("faithful degree-12 candidates have duplicate ATLAS labels");
 fi;
 if rows78[1].atlasLabel = rows78[2].atlasLabel then
-  Error("faithful degree-78 candidates have duplicate ATLAS labels");
+  Error("degree-78 candidates have duplicate ATLAS labels");
 fi;
 
 output := OutputTextFile("build/monster_3b_suzuki_multiplicity_characters.json", false);
@@ -156,6 +156,7 @@ for k in [1..Length(rows12)] do
     "    {\"position\": ", r.position,
     ", \"atlas_label\": \"", r.atlasLabel, "\"",
     ", \"degree\": 12",
+    ", \"faithful_to_6Suz\": ", r.faithfulToSixSuz,
     ", \"first_central_phase\": \"", r.firstCentralPhase, "\"",
     ", \"second_central_phase\": \"", r.secondCentralPhase, "\"}"
   );
@@ -169,6 +170,7 @@ for k in [1..Length(rows78)] do
     "    {\"position\": ", r.position,
     ", \"atlas_label\": \"", r.atlasLabel, "\"",
     ", \"degree\": 78",
+    ", \"faithful_to_6Suz\": ", r.faithfulToSixSuz,
     ", \"first_central_phase\": \"", r.firstCentralPhase, "\"",
     ", \"second_central_phase\": \"", r.secondCentralPhase, "\"}"
   );
@@ -178,5 +180,5 @@ od;
 PrintTo(output, "  ]\n}\n");
 CloseStream(output);
 
-Print("6.Suz faithful 12/78 multiplicity-character candidate receipt written with ATLAS labels.\n");
+Print("6.Suz faithful12 and degree78 candidate receipt written with kernels.\n");
 QUIT;
