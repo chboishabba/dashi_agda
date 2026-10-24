@@ -1114,3 +1114,51 @@ Independent local finite probes PASS, CI files updated,
 but no successful exact-head Agda/Lean workflow
 receipt returned. The geometric `R(B)=B` and
 van Kampen identification remain open.
+
+## 2026-10-24 max-cut execution receipt — local Python instead of CI
+
+**A genuine execution upgrade, not another source-written claim.**
+Both PRs' relevant GitHub Python files were reconstructed locally, and
+their Git blob SHA-1 values recomputed over the exact bytes
+(`sha1("blob "+size+"\\0"+bytes)`), then cross-checked by an
+independent connector read-back at the target branch heads. All eight
+blobs, including the newly committed SymPy verifier, matched.
+
+Local Python 3.13.5, NumPy 2.3.5, SciPy 1.17.0 and SymPy 1.14.0:
+
+- **26/26 committed Python unittest cases PASS** (four owner files):
+  horn A5 root 4/4, original compact-Lie group reuse 4/4,
+  leptonic complex CP 11/11, and nontrivial SU3 root 7/7.
+- **Original horn A5 stage probe PASS**: 60/60 commutators,
+  corrected selected root of order five, binary depth 5.
+- **Original horn finite VOA actor probe PASS**: 4,000
+  deterministic semidirect-product/action tests and
+  180-coordinate algebra invariance; c=0 commutative
+  construction only, not a CFT-type Monster VOA.
+- **Original Schur SU3 horn probe PASS**, depth 5 (31
+  parents / 32 leaves), maximum commutator residual
+  4.9850e-15, unitarity defect 4.5979e-15, determinant
+  defect 2.5631e-15; an unmodified import run at depth
+  8 passed 255/255 parent relations, 256 leaves, worst
+  residual 7.8366e-15.
+- **Symbolic Q(zeta3) matrix verifier PASS**:
+  ten independent polynomial identities for arbitrary
+  3x3 entries, including associativity, dagger
+  anti-homomorphism, determinant product and conjugation.
+  This is stronger than a numerical finite sample but
+  **not** an Agda proof of `CertifiedSUNMatrixTheory`.
+
+New reproducible owner receipt:
+`logs/research/horned_local_python_exact_head_receipt_20261024.json`.
+Sibling owner PR #1247 has a matching evidence receipt and the
+executed SymPy script
+`scripts/audit_neutrino_sun3_symbolic_matrix_laws.py`.
+
+**Reconciled grade change**: Older `committed Python tests NOT RUN`
+statements in previous chronological iterations refer to their
+historical state and are superseded for these **specifically
+blob-matched tests**. Agda/Lean kernel certification, fully
+instantiated concrete `SUNMatrixTheory 3`, Gotô's theorem
+formalization, geometric horn pi1 identity, QCD/PMNS physical
+connection and original likelihood fits remain unverified.
+No CI requirements have been introduced.
