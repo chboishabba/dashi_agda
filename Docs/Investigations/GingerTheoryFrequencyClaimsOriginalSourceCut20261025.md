@@ -83,3 +83,13 @@ P6 **HISTORICAL EXISTENCE PAID / operational link OPEN:** MKULTRA/ARTICHOKE and 
 P7 **APPLICATION-SPECIFIC:** thermal/water/noise/process mitigation and caloric technology comparative viability with true same-service load, using existing owners.
 
 **Max-cut conclusion:** no additional finite "frequency" analogy, energy calculator or source repetition can pay P3–P6. One real source-to-receptor exposure experiment with original instrument evidence has greater expected discriminating value than another data-centre modelling tranche. Meanwhile improve independently valuable industrial energy work within its existing caloric/regenerative owner.
+
+
+## Runnable interaction discriminator (separate from safety or experimental authority)
+
+`scripts/frequency_joint_interaction_audit.py` computes the **descriptive** four-arm contrast
+`(combined - sound-only) - (RF-only - sham)` on separate independent experimental units. Each row requires the same `study_id`, `protocol_ref` and `calibration_ref`, with unique unit identifiers, binary arm labels, finite outcomes and at least two observations per arm. It rejects cross-study/changed-instrument silent joins, duplicates, missing factorial cells and NaNs. Input receipts are locators, **not authenticated originals**. The tool reports a descriptive standard error but refuses causal, physiological, field-coupling or intentional-deployment promotion.
+
+Synthetic test (no subjects or physical exposure): `python scripts/frequency_joint_interaction_audit.py --selftest`. Locally compiled and **six unit tests passed** against the matching 5801-byte companion at `/mnt/data/joint_field_discriminator.py`. GitHub runner and Agda kernel CI remain unchecked. `--synthetic` deliberately inserts a known +4 interaction and observes it numerically; a statistical interaction by itself is *never* evidence of covert manipulation or a clinical adverse effect.
+
+This is an analysis protocol for a genuinely future, independently approved experiment with calibrated sound and RF doses, thermal and acoustic sideband controls, randomization, proper shams and preregistered endpoint; it does not authorise uncontrolled exposures or infer a general medical hazard from ordinary telecom/wave operation.
