@@ -15,6 +15,9 @@ A **different source lineage**, UK Commons DCMS final report (HC 1791, chapter 4
 
 **Most useful conceptual result:** the relationship is a *two-arm intermediary/lineage problem*, not a direct CA–AIQ signing problem and not an ancestry claim about Aquino. The FTC supplies much stronger historical contract/accountability specificity than generic political-warfare comparison. It does not independently authenticate specific witness-produced score files. Provenance receipt classes should distinguish **contracted schema**, **observed software display**, **actual identical source object**, **campaign deployment**, and **causal persuasion**.
 
+
+**Formal case witness:** `canonicalSCLTwoArmExactObjectCut : SCLTwoArmExactObjectCut` captures source-backed contractual and score-display arms with the unmatched dataset and unverified campaign row explicitly false; `FinanceInvestigationJoinBoundary` analogously keeps the OCDETF lead distinct from Black's historical wire totals. This is a constructive scoped evidence-state countermodel, not proof of an external negative.
+
 ## B. Additional existing-owner cross-pollinations and evidence thresholds
 
 | Bridge | Reused repository owner | What the bridge actually adds | Promotion gate / expected falsifier |
