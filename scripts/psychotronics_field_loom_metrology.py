@@ -10,6 +10,9 @@ import hashlib
 import json
 import math
 from pathlib import Path
+from psychotronics_field_loom_covariance import correlated_residual_gls
+from psychotronics_field_loom_source_join import verify_pair_source
+from psychotronics_field_loom_factorial import audit_settings
 
 MU0 = 4e-7 * math.pi
 G0 = 9.80665
@@ -122,19 +125,46 @@ def paired_analysis(record):
         predicted = m * (ga - gs)
         measured = fa - fs
         residual = measured - predicted
-        stat_var = ufa ** 2 + ufs ** 2 + (ga - gs) ** 2 * um ** 2 + m ** 2 * (uga ** 2 + ugs ** 2)
+        # Measurement/readout and per-pair gradient noise only. Shared magnetic
+        # moment and field-scale calibration belong OFF-diagonal in covariance.
+        stat_var = ufa ** 2 + ufs ** 2 + m ** 2 * (uga ** 2 + ugs ** 2)
         if stat_var <= 0:
             raise ValueError('zero random uncertainty gives unbounded weight')
         results.append({'pair_id': pid, 'measured_delta_force_n': measured,
                         'predicted_dipole_delta_force_n': predicted,
                         'residual_n': residual, 'random_std_n': math.sqrt(stat_var),
-                        'common_systematic_std_n': systematic})
-    weights = [1 / (p['random_std_n'] ** 2) for p in results]
-    mean = sum(w * p['residual_n'] for w, p in zip(weights, results)) / sum(weights)
-    random_std = 1 / math.sqrt(sum(weights))
+                        'common_systematic_std_n': systematic,
+                        'moment_am2': m, 'moment_std_am2': um,
+                        'moment_gradient_t_m': ga-gs,
+                        'moment_calibration_id': p.get('moment_calibration_id',
+                                                        'unspecified_shared_calibration'),
+                        'moment_covariance_group_id': p.get('moment_covariance_group_id',
+                             p.get('moment_calibration_id', 'unspecified_shared_calibration'))})
+    # A single instrument's common force systematic must not average away.
+    # Per-pair reported systematic floors are pooled conservatively by max;
+    # original calibration groups remain shared across all same-ID pairs.
+    source_join = verify_pair_source(meta, pairs)
     sys_floor = max(p['common_systematic_std_n'] for p in results)
-    total_std = math.hypot(random_std, sys_floor)
+    cal_floor = source_join.get('calibration_reported_common_force_offset_std_n')
+    if cal_floor is not None:
+        sys_floor = max(sys_floor, cal_floor)
+    gradient_fraction = meta.get('gradient_calibration_fractional_std', 0.)
+    if isinstance(gradient_fraction, bool) or not isinstance(gradient_fraction, (int, float)) or not math.isfinite(gradient_fraction) or gradient_fraction < 0:
+        raise ValueError('invalid gradient_calibration_fractional_std')
+    gls = correlated_residual_gls(results, common_force_std_n=sys_floor,
+            gradient_calibration_fractional_std=float(gradient_fraction))
     provenance_ok = all(_readback_receipt(meta, k) for k in ('raw_data', 'calibration'))
+    provenance_ok = provenance_ok and source_join['bytes_and_exact_pair_source_join']
+    # Do not use caller-supplied nominal arm labels to claim identifiability.
+    # The only admissible factorial coordinates are replayed from the same
+    # hashed instrument stream that produced the analysed force pairs.
+    factorial_settings = source_join.get('factorial_settings_from_source')
+    try:
+        design = audit_settings(factorial_settings)
+        design_identifiable = design['five_term_indicator_model_identifiable']
+    except (KeyError, TypeError, ValueError):
+        design = None
+        design_identifiable = False
     run_count = len(set(p.get('session_id') for p in pairs if isinstance(p.get('session_id'), str) and p['session_id']))
     obligations = []
     for k in ('instrument_serial', 'configuration_revision', 'calibration_revision',
@@ -143,11 +173,32 @@ def paired_analysis(record):
             obligations.append('missing_' + k)
     for k in ('independent_field_map', 'force_calibration', 'thermal_and_vibration_controls',
               'current_power_log', 'blinded_sham', 'polarity_factorial_verified',
-              'ambient_field_reference_verified', 'independent_replication'):
+              'ambient_field_reference_verified', 'independent_replication',
+              'moment_calibration_documented', 'calibration_correlation_model_verified',
+              'measurement_timebase_verified'):
         if meta.get(k) is not True:
             obligations.append('unverified_' + k)
+    if 'gradient_calibration_fractional_std' not in meta:
+        obligations.append('missing_shared_gradient_scale_calibration_model')
+    if any(p['moment_calibration_id'] == 'unspecified_shared_calibration' for p in results):
+        obligations.append('unidentified_shared_moment_calibration_source')
     if not provenance_ok:
         obligations.append('missing_or_unmatched_original_raw_and_calibration_file_hashes')
+    obligations.extend(source_join['unpaid_source_joins'])
+    if not design_identifiable:
+        obligations.append('unidentifiable_coil_dipole_energised_indicator_factorial')
+    # Full rank in signed field controls does not prevent time-drift
+    # confounding if all shams precede actives. Require opposite orders
+    # with exact time-gap cancellation in every active-sign x dipole arm.
+    temporal = source_join.get('temporal_counterbalance_from_source')
+    if not temporal or not temporal.get('balanced_linear_order_by_active_arm'):
+        obligations.append('unbalanced_active_sham_time_order_by_arm')
+    if not source_join.get('raw_stream_replayed_to_pairs'):
+        obligations.append('unverified_raw_to_pair_reduction')
+    # Deterministic replay still cannot independently authenticate an
+    # original sensor, a calibration certificate, or its named operator.
+    if meta.get('independent_raw_reducer_review') is not True:
+        obligations.append('missing_independent_raw_reducer_review')
     if len(results) < 4 or run_count < 2:
         obligations.append('insufficient_predefined_pair_or_session_coverage')
     if meta['origin'] == 'synthetic':
@@ -157,12 +208,27 @@ def paired_analysis(record):
     return {
         'origin': meta['origin'], 'apparatus_id': meta['apparatus_id'],
         'pair_count': len(results), 'session_count': run_count,
-        'paired_results': results, 'weighted_residual_n': mean,
-        'random_std_n': random_std, 'undiluted_systematic_floor_n': sys_floor,
-        'total_std_n': total_std, 'abs_residual_over_total_std': abs(mean) / total_std,
+        'paired_results': results, 'weighted_residual_n': gls['weighted_residual_n'],
+        'random_std_n': gls['random_std_n'],
+        'shared_moment_calibration_std_n': gls['shared_moment_calibration_std_n'],
+        'shared_gradient_scale_std_n': gls['shared_gradient_scale_std_n'],
+        'undiluted_systematic_floor_n': gls['shared_force_offset_std_n'],
+        'total_std_n': gls['total_std_n'],
+        'abs_residual_over_total_std': gls['abs_residual_over_total_std'],
+        'covariance_method': gls['method'],
         'input_bytes_hash_verified': provenance_ok,
+        'same_object_source_join': source_join,
+        'factorial_identifiability': design,
+        'temporal_counterbalance': source_join.get('temporal_counterbalance_from_source'),
+        'time_order_drift_control_claim': 'linear within-arm signed-pair lag check only; thermal/nonlinear drift unmeasured',
+        'factorial_settings_source': 'replayed_hashed_raw_sensor_stream' if
+            source_join.get('raw_stream_replayed_to_pairs') else 'unverified',
+        'raw_stream_to_pair_replay_passed':source_join.get('raw_stream_replayed_to_pairs', False),
         'submission_ready_for_independent_metrology_review': not obligations,
         'unpaid_obligations': obligations,
+        'self_declared_dossier_checklist_complete': not obligations,
+        'independent_measurement_authentication_performed_by_this_program': False,
+        'gravitational_result_admissible': False,
         'claim_grade': 'model comparison only; no antigravity, anomalous force or detection certified',
     }
 
@@ -195,6 +261,9 @@ def _selftest():
     doubled = dict(p, pair_id='p2', session_id='s2')
     r2 = paired_analysis({'metadata': record['metadata'], 'pairs': [p, doubled]})
     assert r2['undiluted_systematic_floor_n'] == r['undiluted_systematic_floor_n']
+    assert r2['shared_moment_calibration_std_n'] == r['shared_moment_calibration_std_n']
+    assert r2['random_std_n'] < r['random_std_n']
+    assert not r2['gravitational_result_admissible']
     try:
         paired_analysis({'metadata': record['metadata'], 'pairs': [p, p]})
     except ValueError:

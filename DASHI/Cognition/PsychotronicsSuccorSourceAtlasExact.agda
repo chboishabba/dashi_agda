@@ -333,6 +333,32 @@ zeroPointMiniProductIndexed = Source.mkNoDOISource
   "seller explicitly describes phone-input coil with moveable included neodymium magnet vibrating audibly like speaker around 100-1000 Hz; corroborates intended conventional magnet-vibration principle within maker's OWN catalogue, not field magnitude or photographed device SKU"
   Source.publicAttribution
 
+-- Openable original seller page: DIFFERENT 400-W GoldenEye variant,
+-- not the 50-W indexed Dark Knight photographed candidate.
+zeroPointGoldeneye24PointLive : Source.AttributedSource
+zeroPointGoldeneye24PointLive = Source.mkNoDOISource
+  "Zero Point Tech / crystalpyramids96.com"
+  "24-point Icositetragram Starship GoldenEye energy-matrix harmonizer"
+  "live original seller page with product illustrations and marketing specifications, inspected 25 October 2026"
+  "undated versioned listing; live 2026-10-25"
+  "https://crystalpyramids96.com/products/energy-matrix-harmonizer-24-point-starship-coil-sedona-red-rock-vortex-edition"
+  Source.practitionerSource
+  "separate 24-point 7-inch GoldenEye version advertises a 400-W amplifier and up-to-40-foot field; not the indexed 50-W Dark Knight, no physically calibrated output, original screenshot SKU unverified"
+  Source.publicAttribution
+
+-- Published patent applicant owns original design text; no mechanical
+-- identity or independent effects are imported through citation.
+wongStarAmplifierPatent : Source.AttributedSource
+wongStarAmplifierPatent = Source.mkNoDOISource
+  "Dennis Yat Wong"
+  "Electromagnetic resonant frequency coil ion emitter"
+  "published US patent application US20190269877A1, filed 2018-03-05 published 2019-09-05; FIG. 1 description explicitly offers 14 radial sleeves; aggregator legal status abandoned, not legal finding"
+  "2019"
+  "https://patents.google.com/patent/US20190269877A1/en"
+  (Source.namedSourceKind "published US patent application")
+  "amplified audio drives copper winding on star-like pillars; historical apparatus-family analogy, not 24-point Zero Point Tech inventor lineage, field/ion calibration, or proven therapeutic results"
+  Source.publicAttribution
+
 rodinSocialRelay : Source.AttributedSource
 rodinSocialRelay = Source.mkNoDOISource
   "Pictame (third-party social-media index; captions attributed to @crystal_pyramids96 and @ipyramids, not independently authenticated)"
@@ -486,6 +512,7 @@ sourceAtlas = Source.mkSourceAtlas
    itorusAppPublisher ∷ itorusHeartStoneReseller ∷
    aurumayaHomeCatalogue ∷ aurumayaShopCatalogue ∷ jefimenko1971 ∷
    zeroPointStarshipProductIndexed ∷ zeroPointMiniProductIndexed ∷
+   zeroPointGoldeneye24PointLive ∷ wongStarAmplifierPatent ∷
    rodinSocialRelay ∷ merchantStoreDirectory ∷
    openhand2026FiveD ∷ openhand2026RealitySplit ∷
    hanleyNADA2018 ∷ macleanMEQ2012 ∷ nourEDI2016 ∷
@@ -506,6 +533,7 @@ data LineageRoot : Set where
   guilleminotHistoricalManualRoot jefimenkoAuthorRoot : LineageRoot
   itorusAppPublisherRoot itorusRetailCopyRoot : LineageRoot
   zeroPointCommercialRoot rodinSocialMirrorRoot merchantDirectoryRoot : LineageRoot
+  wongPublishedPatentRoot : LineageRoot
   openhandAuthorRoot : LineageRoot
   hanleyPsychometricsRoot macleanPsychometricsRoot nourPsychometricsRoot : LineageRoot
   kervadecAscValidationRoot stockerAscRevisionRoot : LineageRoot
@@ -812,6 +840,36 @@ zeroPointMiniMagnetResponse = mkBound
   Diligence.primaryProposition
   attributedAuthorReport
   "not the exact 24-point product, no external field magnitude measurement, induction/vibration possible without special crystal energy"
+
+zeroPointGoldeneyeMakerClaim : ClaimBound
+zeroPointGoldeneyeMakerClaim = mkBound
+  "Illustrated 24-point GoldenEye Starship manufacturer listing names a 400-W amplifier and up-to-40-ft field, but neither the original screenshot variant nor calibrated physical power and fields"
+  zeroPointGoldeneye24PointLive
+  "GoldenEye 7-inch specification, WHAT YOU'RE ACTUALLY BUYING and HOW IT WORKS sections"
+  zeroPointCommercialRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "native reel/SKU, exact winding, field-versus-distance threshold, source current and independent laboratory measurements unpaid"
+
+zeroPointWebsiteLinksOriginalHandle : ClaimBound
+zeroPointWebsiteLinksOriginalHandle = mkBound
+  "The Zero Point Tech manufacturer's own illustrated GoldenEye shop page has an Instagram footer link directly to instagram.com/crystal_pyramids96, the user-screenshot posting handle"
+  zeroPointGoldeneye24PointLive
+  "Footer Instagram social navigation anchor resolved directly to https://www.instagram.com/crystal_pyramids96, 25 October 2026"
+  zeroPointCommercialRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "direct first-party shop-to-handle declared channel link is paid; platform account/session original Instagram reel is throttled and photographed SKU/serial, independent legal ownership and creator-to-product correspondence remain unpaid"
+
+wongPatentStarDesignClaim : ClaimBound
+wongPatentStarDesignClaim = mkBound
+  "Wong 2019 published application describes audio-driven star-like copper winding with one 14-point implementation, not identical to marketed 24-point Starship"
+  wongStarAmplifierPatent
+  "US20190269877A1 detailed description FIG. 1 with 14 radial sleeves and FIG. 5 amplifier"
+  wongPublishedPatentRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "specific lineage/licence, original design equivalence, patented ion assertions and medical effects unverified"
 
 rodinAttributedSocialCaption : ClaimBound
 rodinAttributedSocialCaption = mkBound
@@ -1135,6 +1193,24 @@ candidateCopperStarIdentification = bounded-relation
   "Instagram @crystal_pyramids96 copper-star and centre-ball screenshots 1000018562-8564"
   "Zero Point Tech indexed 24-point Starship Rodin/Dark Knight coil with dancing neodymium sphere"
   multiFeatureCatalogueMatchUnconfirmed zeroPointStarshipSphereClaim false refl false refl
+
+zeroPointMakerVersionsAreDistinct : BoundedRelation
+zeroPointMakerVersionsAreDistinct = bounded-relation
+  "Zero Point Tech indexed Dark Knight 24-point 50-W/sphere variant"
+  "Zero Point Tech live GoldenEye 24-point 400-W advertised variant"
+  documentaryDistinction zeroPointGoldeneyeMakerClaim false refl false refl
+
+zeroPointSiteExplicitlyLinksAccount : BoundedRelation
+zeroPointSiteExplicitlyLinksAccount = bounded-relation
+  "Zero Point Tech original illustrated product webpage"
+  "Instagram @crystal_pyramids96 original screenshot posting account"
+  contemporarySelfAttribution zeroPointWebsiteLinksOriginalHandle false refl false refl
+
+wongPatentIsNotStarshipInheritance : BoundedRelation
+wongPatentIsNotStarshipInheritance = bounded-relation
+  "Dennis Yat Wong 2019 14-point star coil audio-amplifier application"
+  "Zero Point Tech 24-point Starship product family"
+  hardwareAnalogyOnly wongPatentStarDesignClaim false refl false refl
 
 rodinNamedBySocialRelay : BoundedRelation
 rodinNamedBySocialRelay = bounded-relation

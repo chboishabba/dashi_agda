@@ -335,6 +335,50 @@ rodinMirrorCannotBecomeSameCreatorReceipt :
 rodinMirrorCannotBecomeSameCreatorReceipt = refl
 
 ------------------------------------------------------------------------
+-- Recovering the original pictured copper-star manufacturer's 24-point
+-- devices does not turn a dated third-party 14-point PATENT into proof
+-- of inherited winding design or therapeutic/ion experiments.
+------------------------------------------------------------------------
+
+liveGoldeneyeAndIndexedDarkKnightShareSellerOnly :
+  Atlas.root Atlas.zeroPointGoldeneyeMakerClaim ≡
+  Atlas.root Atlas.zeroPointStarshipSphereClaim
+liveGoldeneyeAndIndexedDarkKnightShareSellerOnly = refl
+
+goldeneyeIsDifferentAdvertisedVersion :
+  Atlas.relationClass Atlas.zeroPointMakerVersionsAreDistinct ≡
+  Atlas.documentaryDistinction
+goldeneyeIsDifferentAdvertisedVersion = refl
+
+makerWebsiteDeclaresOriginalPosterHandle :
+  Atlas.relationClass Atlas.zeroPointSiteExplicitlyLinksAccount ≡
+  Atlas.contemporarySelfAttribution
+makerWebsiteDeclaresOriginalPosterHandle = refl
+
+makerSiteToHandleDoesNotProveOriginalVideoSKU :
+  Atlas.historicalTransmissionProved Atlas.zeroPointSiteExplicitlyLinksAccount ≡ false
+makerSiteToHandleDoesNotProveOriginalVideoSKU = refl
+
+wongPatentIsOnlyDesignFamilyAnalogy :
+  Atlas.relationClass Atlas.wongPatentIsNotStarshipInheritance ≡
+  Atlas.hardwareAnalogyOnly
+wongPatentIsOnlyDesignFamilyAnalogy = refl
+
+wongPatentDoesNotProveHistoricalTransmission :
+  Atlas.historicalTransmissionProved Atlas.wongPatentIsNotStarshipInheritance ≡ false
+wongPatentDoesNotProveHistoricalTransmission = refl
+
+wongApplicationCannotCreateScientificAuthority :
+  Attribution.citationCreatesAuthority Atlas.wongStarAmplifierPatent ≡ false
+wongApplicationCannotCreateScientificAuthority =
+  Atlas.allSourcesRemainNonAuthoritative Atlas.wongStarAmplifierPatent
+
+liveSellerListingCannotCreateScientificProof :
+  Attribution.citationImportsProof Atlas.zeroPointGoldeneye24PointLive ≡ false
+liveSellerListingCannotCreateScientificProof =
+  Atlas.allSourcesRemainNonPromoting Atlas.zeroPointGoldeneye24PointLive
+
+------------------------------------------------------------------------
 -- HOE_MATH / 5D SPIRITUALITY: NO NUMBER-ID OR ONTOLOGY TRANSFER
 --
 -- Original hoe_math Levels source and its Spiral Dynamics/AQAL lineage

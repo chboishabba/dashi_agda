@@ -4,14 +4,22 @@
 Not a measured device, coil/thermal/safety certification, magnetic material
 model or levitation result. 3x3x3 samples are a grid, not mystical 27 sites.
 """
-from math import cos, sin, pi, sqrt
+from math import cos, sin, pi, sqrt, isfinite
 
+# Historical/illustrative SI approximation, not an exact defining constant.
+# NIST CODATA 2022: mu0=1.25663706127(20)e-6 N A^-2; SI 2019 made mu0 measured.
+# Keep the earlier model coefficient unchanged to preserve its synthetic
+# regression baseline. Any physical sensor/calibration receipt must use a
+# documented constant revision and uncertainty budget.
 MU0 = 4e-7*pi
 
 def loop_b(x, y, z, radius_m, centre_z_m, turns, ampere, steps=256):
     """Approximate ideal thin-wire ring B [tesla]; do not sample on the wire."""
-    if radius_m <= 0 or steps < 24:
-        raise ValueError('invalid geometry or integration resolution')
+    if (type(steps) is not int or steps < 24
+            or not all(isfinite(value) for value in
+                       (x, y, z, radius_m, centre_z_m, turns, ampere))
+            or radius_m <= 0 or turns <= 0):
+        raise ValueError('invalid or nonfinite geometry, coil or integration input')
     sumx = sumy = sumz = 0.0
     dt = 2*pi/steps
     for k in range(steps):
