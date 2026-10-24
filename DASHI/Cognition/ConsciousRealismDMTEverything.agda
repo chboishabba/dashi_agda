@@ -11,3 +11,7 @@ import DASHI.Cognition.ConsciousRealismDMTBrainITConsumerExact
 
 -- Source-specific missing-record states, selective reopening and attribution.
 import DASHI.Cognition.ConsciousRealismDMTSourceWorldExact
+
+-- Reuse established typed/evidence hyperfabric for Erowid motif summaries,
+-- temporal report and Sanders/fMRI evidence with no implicit transport.
+import DASHI.Biology.DMTMotifObservationHyperfabricExact
