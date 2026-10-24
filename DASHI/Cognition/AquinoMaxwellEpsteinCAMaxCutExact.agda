@@ -2388,6 +2388,7 @@ record BannonFTCCIDAdversarialBoundary : Set where
     collectiveAquinoPROMISHierarchyPaid : Bool
     federalPetitionSaysCIDIssuedSeptember25 : Bool
     signedCourtOrderSaysCIDIssuedSeptember24 : Bool
+    petitionAnnexExhibit2CIDIndexedAtSeptember24 : Bool
     exactOriginalCIDIssueDateReconciledWithNativeCID : Bool
 open BannonFTCCIDAdversarialBoundary public
 
@@ -2395,7 +2396,7 @@ canonicalBannonFTCCIDAdversarialBoundary : BannonFTCCIDAdversarialBoundary
 canonicalBannonFTCCIDAdversarialBoundary =
   bannon-ftc-cid-adversarial-boundary
   true true true true true true true false false false false false false false
-  true true false
+  true true true false
 
 -- Date inconsistency is preserved as a source-to-source discrepancy, NOT
 -- invented as proof of two separate civil demands.
@@ -2406,6 +2407,10 @@ ftcBannonOriginalDateDiscrepancyRecorded = refl
 ftcBannonJudicialDateDiscrepancyRecorded :
   signedCourtOrderSaysCIDIssuedSeptember24 canonicalBannonFTCCIDAdversarialBoundary ≡ true
 ftcBannonJudicialDateDiscrepancyRecorded = refl
+
+ftcBannonCIDOriginalExhibitLocated :
+  petitionAnnexExhibit2CIDIndexedAtSeptember24 canonicalBannonFTCCIDAdversarialBoundary ≡ true
+ftcBannonCIDOriginalExhibitLocated = refl
 
 ftcBannonCIDOriginalIssueDateUnpaid :
   exactOriginalCIDIssueDateReconciledWithNativeCID canonicalBannonFTCCIDAdversarialBoundary ≡ false
