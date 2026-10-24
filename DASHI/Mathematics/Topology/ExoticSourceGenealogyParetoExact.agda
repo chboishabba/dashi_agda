@@ -1,0 +1,240 @@
+module DASHI.Mathematics.Topology.ExoticSourceGenealogyParetoExact where
+
+------------------------------------------------------------------------
+-- SOURCE GENEALOGY / IBRAHIM FIRST-LINK / SNOWBALL / PARETO
+--
+-- DO NOT treat a citation, DOI, source network edge, DDC, QID, or
+-- Pareto rank as importing a theorem.  Reuse the ORIGINAL attributed
+-- source and snowball attribution owners, with explicitly open
+-- geometric and Lean/Agda kernel obligations.
+--
+-- Primary source objects inspected 2026-10-25:
+--   Richards 1963, DOI 10.2307/1993768
+--   Fox--Artin 1948, DOI 10.2307/1969408
+--   Yoneyama 1917, original Tohoku Math J publication (no DOI
+--     verified by this atlas)
+--   Bombieri--De Giorgi--Giusti 1969, DOI 10.1007/BF01404309
+--   Mardesic 1978 ICM survey (no DOI verified by this atlas)
+--   Hatcher textbook (no DOI verified by this atlas)
+--   Jack McCarthy's Hatcher-at Lean sphere homology module,
+--     different toolchain/Mathlib revision from DASHI.
+--
+-- The first-link route is a DOCUMENT/DONOR traversal, NOT evidence
+-- that every citation edge implies a dependency or a proof.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
+
+import DASHI.Core.AttributedSourceCore as A
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snow
+
+richardsOriginal : A.AttributedSource
+richardsOriginal = A.mkDOISource
+  "Ian Richards"
+  "On the Classification of Noncompact Surfaces"
+  "Transactions of the American Mathematical Society 106(2), 259-269"
+  "1963"
+  "10.2307/1993768"
+  "https://doi.org/10.2307/1993768"
+  A.academicArticleSource
+  "primary owner: classified surfaces by orientability, genus, ideal-boundary/end data; not imported without surface realisation and a suitable formal classification theorem"
+  A.publicAttribution
+
+foxArtinOriginal : A.AttributedSource
+foxArtinOriginal = A.mkDOISource
+  "Ralph H. Fox; Emil Artin"
+  "Some Wild Cells and Spheres in Three-Dimensional Space"
+  "Annals of Mathematics 49(4), 979-990"
+  "1948"
+  "10.2307/1969408"
+  "https://doi.org/10.2307/1969408"
+  A.academicArticleSource
+  "primary owner for source-specific wild arcs and embedded wild cells; address trees and global pi1 do not alone certify local wildness"
+  A.publicAttribution
+
+yoneyamaOriginal : A.AttributedSource
+yoneyamaOriginal = A.mkNoDOISource
+  "Kunizo Yoneyama"
+  "Theory of Continuous Set of Points (not finished)"
+  "Tohoku Mathematical Journal, First Series 12, 43-158"
+  "1917"
+  "https://www.jstage.jst.go.jp/article/tmj1911/12/0/12_0_43/_article"
+  A.academicArticleSource
+  "historical publication of the classical common-boundary lakes construction attributed to Wada; source does not imply current DASHI domains satisfy frontier equality"
+  A.publicAttribution
+
+bombieriDeGiorgiGiustiOriginal : A.AttributedSource
+bombieriDeGiorgiGiustiOriginal = A.mkDOISource
+  "Enrico Bombieri; Ennio De Giorgi; Enrico Giusti"
+  "Minimal Cones and the Bernstein Problem"
+  "Inventiones Mathematicae 7, 243-268"
+  "1969"
+  "10.1007/BF01404309"
+  "https://doi.org/10.1007/BF01404309"
+  A.academicArticleSource
+  "primary minimising-cone theorem donor; Simons polynomial/gradient/link calculation is not a calibration or minimality proof"
+  A.publicAttribution
+
+mardesicShapeSurvey : A.AttributedSource
+mardesicShapeSurvey = A.mkNoDOISource
+  "Sibe Mardesic"
+  "Shape Theory"
+  "Proceedings of the International Congress of Mathematicians, Helsinki"
+  "1978"
+  "https://citeseerx.ist.psu.edu/document?doi=1689fd7674a0d927b89aad5f68c1cfa6456d01d4&repid=rep1&type=pdf"
+  A.academicArticleSource
+  "historical shape-theory survey: Warsaw circle weak homotopy versus noncontractibility; this survey is NOT an original proof of Borsuk's underlying shape theory"
+  A.publicAttribution
+
+hatcherBook : A.AttributedSource
+hatcherBook = A.mkNoDOISource
+  "Allen Hatcher"
+  "Algebraic Topology"
+  "Cambridge University Press; freely distributed author text"
+  "2002"
+  "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+  A.academicBookSource
+  "classical sphere, CW and algebraic-topology theorem source; geometric theorem must retain its own Lean/Agda proof or separately typechecked import"
+  A.publicAttribution
+
+mccarthyLeanSphere : A.AttributedSource
+mccarthyLeanSphere = A.mkNoDOISource
+  "Jack McCarthy"
+  "Hatcher/Sphere/Homology.lean: reducedHomology_sphere"
+  "Deicyde/hatcher-at; Mathlib/Lean v4.34.1 source"
+  "2026"
+  "https://github.com/Deicyde/hatcher-at/blob/main/Hatcher/Sphere/Homology.lean"
+  A.namedSourceKind "Lean proof implementation"
+  "source-written and upstream-checked sphere reduced-homology supplier on TopCat.sphere; local DASHI v4.28.0 reduced-to-ordinary and kernel revision join still required"
+  A.publicAttribution
+
+originalsAndImplementation : List A.AttributedSource
+originalsAndImplementation =
+  richardsOriginal ∷
+  foxArtinOriginal ∷
+  yoneyamaOriginal ∷
+  bombieriDeGiorgiGiustiOriginal ∷
+  mardesicShapeSurvey ∷
+  hatcherBook ∷
+  mccarthyLeanSphere ∷ []
+
+originalCount : A.sourceCount originalsAndImplementation ≡ 7
+originalCount = refl
+
+exoticTopologyAtlas : A.AttributedSourceAtlas
+exoticTopologyAtlas = A.mkSourceAtlas
+  "Exotic topology original-root / implementation-donor atlas"
+  "DASHI.Mathematics.Topology.ExoticSourceGenealogyParetoExact"
+  originalsAndImplementation
+  "source roots, proof implementations and missing source-specific same-object tests; DOI bibliographic identity does not grant theorem use"
+
+attributionDoesNotPromote :
+  (validation : String) →
+  DASHI.Core.GenericReceipt.promotesClaim
+    (A.attributedSourceAtlasReceipt exoticTopologyAtlas validation)
+  ≡ false
+attributionDoesNotPromote = A.attributedSourceAtlasReceiptNonPromoting exoticTopologyAtlas
+
+richardsSnowballReceipt : Snow.SourceRoleSnowballReceipt richardsOriginal
+richardsSnowballReceipt = Snow.canonicalSourceRoleSnowballReceipt richardsOriginal
+
+foxArtinSnowballReceipt : Snow.SourceRoleSnowballReceipt foxArtinOriginal
+foxArtinSnowballReceipt = Snow.canonicalSourceRoleSnowballReceipt foxArtinOriginal
+
+hatcherSnowballReceipt : Snow.SourceRoleSnowballReceipt mccarthyLeanSphere
+hatcherSnowballReceipt = Snow.canonicalSourceRoleSnowballReceipt mccarthyLeanSphere
+
+------------------------------------------------------------------------
+-- Typed, CONSUMER-DRIVEN first-link routing. Not a proof dependency.
+------------------------------------------------------------------------
+
+data PaymentStatus : Set where
+  primaryRootLocated : PaymentStatus
+  consumerBuiltConditional : PaymentStatus
+  geometricSameObjectOpen : PaymentStatus
+  kernelImportOpen : PaymentStatus
+
+record TopologyParetoLeaf : Set where
+  constructor topologyParetoLeaf
+  field
+    rank : Nat
+    primary : A.AttributedSource
+    donor : String
+    consumer : String
+    remainingReceipt : String
+    fanout : String
+    status : PaymentStatus
+    doiOrIdentifierNotProof : Bool
+    rankNotProof : Bool
+open TopologyParetoLeaf public
+
+sphereHomologyLeaf : TopologyParetoLeaf
+sphereHomologyLeaf = topologyParetoLeaf
+  1 mccarthyLeanSphere
+  "dashi_lean4 native CP1≃TopCat.sphere 2 + Hatcher-at reducedHomology_sphere"
+  "Synthesis.ExoticTopologyCP1SphereH2Acceptance"
+  "pin-reconciled ordinary/reduced rational H2 comparison and actual import or separately kernel-checked port at exact Mathlib revision"
+  "CP1/S2 homology, finite cellular-to-singular comparison, sphere CW consumers"
+  kernelImportOpen true false
+
+richardsRealisationLeaf : TopologyParetoLeaf
+richardsRealisationLeaf = topologyParetoLeaf
+  2 richardsOriginal
+  "existing Agda pants/frontier and Lean Integration.Address finite prefix carriers"
+  "Cantor tree / Jacob's ladder / Loch Ness monster"
+  "locally finite collared oriented 2-manifold union; realised decorated end-space equivalence; application of source-owned classification"
+  "three noncompact surfaces, infinite handles, genus/ends invariants"
+  geometricSameObjectOpen true false
+
+foxArtinGeometricLeaf : TopologyParetoLeaf
+foxArtinGeometricLeaf = topologyParetoLeaf
+  3 foxArtinOriginal
+  "Alexander horned C3 PR #1244 finite horn embeddings/commutators"
+  "Fox--Artin wild arc / wild knot"
+  "actual source-selected nested embedding, endpoint non-local-flatness and local 1-LCC or cellularity discriminator"
+  "wild arcs, wild knots, ambient Schoenflies obstruction"
+  geometricSameObjectOpen true false
+
+warsawShapeLeaf : TopologyParetoLeaf
+warsawShapeLeaf = topologyParetoLeaf
+  4 mardesicShapeSurvey
+  "dashi_lean4 literal real sine-closure WarsawCircleSpace"
+  "Warsaw weak-contractibility / non-CW type"
+  "vertical closure and continuum proofs, vanishing homotopy groups, noncontractibility via proper shape/Čech comparison"
+  "CW/Whitehead negative-control family"
+  geometricSameObjectOpen true false
+
+wadaCommonBoundaryLeaf : TopologyParetoLeaf
+wadaCommonBoundaryLeaf = topologyParetoLeaf
+  5 yoneyamaOriginal
+  "dashi_lean4 WadaThreeDomains and Agda C3-incidence no-go"
+  "Lakes of Wada"
+  "actual three connected disjoint planar open domains and a proved common nonempty frontier"
+  "planar wild boundaries; equivariance not sufficient"
+  geometricSameObjectOpen true false
+
+simonsMinimalityLeaf : TopologyParetoLeaf
+simonsMinimalityLeaf = topologyParetoLeaf
+  6 bombieriDeGiorgiGiustiOriginal
+  "native Simons polynomial, spherical link and singular-gradient algebra"
+  "area-minimising Simons cone"
+  "geometric measure theory: currents/calibration/area minimality, not merely singular-link equations"
+  "minimal cones, singular GMT and geometric variation"
+  geometricSameObjectOpen true false
+
+paretoLeafCount : Nat
+paretoLeafCount = 6
+
+-- Routing metadata never imports mathematical proofs.
+allLeavesRemainConsumerSpecific : Bool
+allLeavesRemainConsumerSpecific = true
+
+unresolvedQID : String
+unresolvedQID = "not inspected for this source atlas; no substitute QID"
+
+unresolvedDewey : String
+unresolvedDewey = "not inspected for these source objects; no fabricated DDC"
