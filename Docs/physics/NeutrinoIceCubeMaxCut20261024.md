@@ -384,3 +384,158 @@ The exact comparison `1/31 > 7823/245000` remains correct as
 an interval statement, and the IO signed/magnitude witness remains
 correct as a Cartesian-interval existence statement.  The actual
 correlated significance is still an open NuFIT-grid calculation.
+
+## 2026-10-24 max-cut round 3 — C3/zeta/zero existing prior-art recovery
+
+### Why the `1,i,-i` choice must not become canonical
+
+The initial four-phase finite proof in this PR used the **Cartesian**
+C4-phase tuple `(1,i,-i)`.  That was a valid finite
+interference *fixture*, but the repository already owns a stronger
+native symmetric ternary construction.
+
+**Native C3 owner graph, in precedence order:**
+
+1. `DASHI/Reasoning/RelationalTernaryPhaseGeometry.agda`:
+   `EisensteinWave`, `rootOne`, `rootOmega`,
+   `rootOmegaSquared`, `normE`, `ternaryRootsCancel`,
+   `ternarySymmetricIntensityIsZero`; symmetric alternatives
+   **0, 2π/3, 4π/3**, distinct from the ordered C4 half-circle.
+2. `DASHI/Moonshine/C3CyclotomicAmplitudeAlgebraExact.agda`:
+   rational **Q(ζ3)**, norms, conjugation, root identities.
+   Original mathematics attributed to L. C. Washington,
+   *Introduction to Cyclotomic Fields*, 2nd ed., 1997;
+   DOI 10.1007/978-1-4612-1934-7.
+3. `DASHI/Moonshine/Monster3BCyclotomicLinearAlgebraExact.agda`:
+   existing exact **1+ζ+ζ²=0** and additive/multiplicative algebra.
+4. `DASHI/Moonshine/C3FourierConjugationExact.agda`:
+   original roots/finite characters attributed to Terras (1999)
+   and Serre (1977); characters
+   `[1,1,1], [1,ζ,ζ²], [1,ζ²,ζ]`.
+5. `DASHI/Biology/Physical/C3CubeCyclotomicFourierExact.agda`:
+   an already-defined exact **27-site C3³ transform and inverse**.
+   No need to build another 27-site Fourier object.
+6. `DASHI/Algebra/Quantum/QutritMatrixGates.agda` and
+   `DASHI/Algebra/Quantum/OrdinaryComplexQutrit.agda`:
+   actual abstract 3x3 complex-star-semirings and qutrit gates
+   with normative Fourier authority boundaries.
+7. `DASHI/Moonshine/Monster369ZetaSameObjectWeldExact.agda`:
+   selected cyclotomic scalar on literal VOA/3B model is already
+   the same named *scalar* but not a source-independent equality
+   between neutrino mass eigenstates, Monster eigenspaces,
+   geometrical sites or IceCube events.
+8. `DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchRound5Exact.agda`:
+   explicitly keeps `zeroIsFourthEigenphase = false`.
+   This is a particularly important negative prior-art receipt.
+
+### Exactly what `ζ, ζ², 0` means
+
+The three *unit phases* are **1, ζ, ζ²**, all with squared norm
+one, and `1+ζ+ζ²=0`.  The resulting **additive** amplitude zero
+has squared norm zero.  It is NOT the third physical neutrino mass,
+a fourth phase, a negative zero probability, or an arbitrary
+spin/charge label.  The phase-zero *angle* is represented by the
+multiplicative **identity 1**, which is not additive zero.  A
+signed-zero bookkeeping carrier may retain history, but the
+Born-probability quotient sends all zero amplitudes to nonnegative
+zero intensity.
+
+### Newly contributed exact C3 interference donor
+
+`DASHI/Physics/QFT/NeutrinoC3CyclotomicPriorArtBridgeExact.agda`:
+
+- Imports the **actual existing** `C3.C3Phase` symbolic phase type,
+  `RelationalTernaryPhaseGeometry.EisensteinWave` exact arithmetic
+  and the earlier three-flavour mixer.
+- Exhibits the literal symbolic-to-Eisenstein phase identification
+  and `1+ζ+ζ²=0`, root norm one vs zero norm zero.
+- Computes amplitudes `A_beta_alpha = sum_i M_ai M_bi ζ^(ki)`,
+  divided by `9`; their squared norms divide by `81`.
+- Exhausts all **3 source flavours × 3³ phase triples = 81** exact
+  integral identities `Σ_beta |A_beta_alpha|²=81` for the
+  previously supplied **toy** mixer `M/3`.
+- Gives the nontrivial `(1,ζ,ζ²)` witness:
+  `[P(e->e),P(e->μ),P(e->τ)] = [9,36,36]/81` =
+  `[1/9,4/9,4/9]`.  Its conjugate input swaps ζ and ζ²
+  without affecting these probabilities for the real toy mixer.
+- Encodes the C3 Fourier character-entry norms
+  `|F_ab|²=1`; this normalized matrix would have
+  `|U_e3|²=1/3`.  The earlier rational toy `M/3`
+  instead has `|U_e3|²=4/9`.  Neither is the measured PMNS
+  matrix; both exceed the loose `sin²θ13<0.03` empirical screen.
+  The source comparison is NuFIT 6.1 IC24+SK, for which
+  `sin²θ13≈0.0225`.  This is an **algebraic model-screening no-go**,
+  not a confidence-level computation.
+- Proves a conditional **3-divisibility obstruction**:
+  because `p³=1` for every p in C3, any phase-valued
+  homomorphism obeying `f(t)=f(t/3)^3` has image only `1`.
+  Real additive propagation time is 3-divisible.
+  Thus nontrivial C3-valued oscillation phases cannot represent
+  all continuous `L/E` propagation with nonzero mass splittings.
+  Discrete samples, internal symmetries, broken residual symmetry,
+  continuous U(1) completion and C3-equivariant **selection**
+  remain possible hypotheses, not settled physics.
+
+**Independent executed arithmetic** (2026-10-24): Python integer
+enumeration completed 81/81 conservation cases and 9/9 C3 character
+inner products; also reproduced `[9,36,36]`,
+`1+ζ+ζ²=0`, `1/3` and `4/9` reactor entries, and
+`p³=1` for all three phases.  This is NOT Agda kernel verification.
+The committed `tests/test_neutrino_c3_cyclotomic_bridge.py` contains
+eight tests, but the exact committed script has not yet been run by a
+local checked-out GitHub branch; do not label that as executed.
+
+### Literature source roots and claim roles
+
+| Dated original root | Who originated the relevant claim | Appropriate use; prohibited promotion |
+| --- | --- | --- |
+| Altarelli & Feruglio (2005), **Tri-Bimaximal Neutrino Mixing from Discrete Symmetry in Extra Dimensions**, arXiv:hep-ph/0504165 / Nucl. Phys. B 720 (2005) 64 | Named paper authors | A4 flavour model with scalar alignment and corrections; no claim of exactly observed θ13=0 today |
+| Altarelli & Feruglio (2006), **Tri-Bimaximal Neutrino Mixing, A4 and the Modular Symmetry**, arXiv:hep-ph/0512103 / Nucl. Phys. B 741 (2006) 215 | Named paper authors | Model-specific A4 sectors and explicit symmetry breaking; not guaranteed new mass spectrum |
+| Altarelli & Feruglio (2010), **Discrete Flavor Symmetries and Models of Neutrino Mixing**, Rev. Mod. Phys. 82, 2701, DOI 10.1103/RevModPhys.82.2701 | Named review authors; synthesis of prior original models | Broad prior art; re-tellings are not independent original proof roots |
+| Ma & Wegman (2011), **Nonzero theta13 for neutrino mixing in the context of A4 symmetry**, PRL 107 061803 / DOI 10.1103/PhysRevLett.107.061803 | Named paper authors | Post-ideal correction to original A4 flavour patterns; source-specific model and parameter constraints |
+| Walter Grimus (2013), **Discrete symmetries, roots of unity, and lepton mixing**, arXiv:1301.0495 | Named paper author | Vanishing-sum and residual-symmetry group theory directly relevant to ζ cancellation; not a claim that any C3 Fourier matrix is observed |
+| NuFIT 6.1 (2025) plus Esteban et al. JHEP 12 (2024) 216 | NuFIT global-fit collaboration | Physical PMNS mixing targets, measured θ13 and χ² authority (separate from detector event source) |
+| Bari group **2026.a Preliminary**, as of 15 Oct 2026, https://global-nu.org/results.html | Bari global-analysis team | Contemporary independent **analysis** useful as adversarial comparison; preliminary, no full χ² data release yet; does NOT add an independent experimental detector or supersede NuFIT automatically |
+
+Links:
+https://arxiv.org/abs/hep-ph/0504165
+https://arxiv.org/abs/hep-ph/0512103
+https://arxiv.org/abs/1301.0495
+https://doi.org/10.1103/PhysRevLett.107.061803
+https://doi.org/10.1103/RevModPhys.82.2701
+https://www.nu-fit.org/?q=node%2F309
+https://global-nu.org/data.html
+
+### Reset Pareto research roadmap after this recovery
+
+**P0 (now paid at source level):** exact original C3/Eisenstein
+representation recognition, 81/81 three-flavour conservation case
+definitions, physical reactor **counterexample to naive F3 and M/3
+identifications**, and the C3-continuous-time divisibility
+obstruction.  This corrects the prior overindexing on C4 phases.
+
+**P1 (highest-value remaining formal theorem):** actual exact-head
+Agda compile of the imported C3, QFT and probability owner chain;
+then construct the **continuous complex** (or suitably completed
+rational-cyclotomic) PMNS plus individual charged-lepton/neutrino mass
+matrices and their residual symmetry actions on the **same** lepton
+space.  A single C3 set or character chart is not enough.
+
+**P2 (highest-value empirical discriminator):** choose a *specific*
+A4/S4 modular/residual model, derive full nontrivial
+`U_e3`, `θ12`, `θ23`, `δCP` and mass splittings with physical
+sources, then compare with versioned NuFIT profiles or the published
+Bari likelihood when available.  Avoid overfitting and post-hoc
+extra operators; register model parameters and priors beforehand.
+
+**P3:** keep the weak-interaction neutrino source, charged-current
+production/detection, continuous propagation and detector likelihood
+separate but linked by real same-object spectral/operator maps.
+IceTracks-DR2-v2 is source astronomy, whereas DeepCore/JUNO/T2K
+oscillation fits are the appropriate mixing tests.
+
+**P4:** only after the same-lepton-action construction, ask whether
+the Monster/3B/C3, qutrit, or 27-hypervoxel representations induce
+the physical flavour-sector mass operator.  Without actual
+intertwining, those are donors and potential no-go targets, not
+physics derivations.
