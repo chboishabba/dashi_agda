@@ -184,7 +184,7 @@ arnSandilandsRevenue = relationship-receipt
   "ARN Media" "Kyle Sandilands Live"
   financialEntitlement institutionRecord
   "ARN Media ASX announcement, 17 June 2026"
-  ""https://www.marketindex.com.au/asx/a1n/announcements/settlement-of-legal-proceedings-with-mr-sandilands-2A1677721"
+  "https://www.marketindex.com.au/asx/a1n/announcements/settlement-of-legal-proceedings-with-mr-sandilands-2A1677721"
   "ARN's 17 June ASX original notice grants a 19.9% share of NET revenue for at most 3 years, subject to agreed thresholds/caps, in return for AUD 1.5m promotional advertising; not an equity share, with noncompete to March 2027 and AUD 12.09m settlement." false false false
 
 arnNewsCorpExit : RelationshipReceipt
