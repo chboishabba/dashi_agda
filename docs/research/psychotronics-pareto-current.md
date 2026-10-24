@@ -1,5 +1,8 @@
 # Psychotronics / pictured-device Pareto frontier — canonical current status
 
+**McCasland original-source snowball (25 October):** official [MIT DSpace dissertation record](https://dspace.mit.edu/entities/publication/d3dd1a12-847b-4fbc-a150-7e269eb60ee0) identifies William Neil McCasland, *Sensor and actuator selection for fault-tolerant control of flexible structures* (MIT PhD, institutional 1989 issue; 13.62-MB PDF `20463278-MIT.pdf`, checksum MD5 `c7653040983e687d71e9632a0b09f809`). The **1989 American Control Conference** original authored six-page paper, *Fault-tolerant sensor and actuator selection for control of flexible structures*, pp.1111–1116, is a separate carrier/possible same-author derivative and its bibliographic abstract is indexed by NASA and [J-GLOBAL](https://jglobal.jst.go.jp/en/detail?JGLOBAL_ID=200902071772165788). Original full-body downloads were **not inspected** (MIT PDF endpoint returned 429); no equation or algorithm is attributed verbatim, no independent experiment is counted twice. Those are **two additional bibliography/provenance rows**, not two new scientists or demonstrations. The 20-person fibre denominator stays **20**; the technical-source comparator matrix now has **23 rows**.
+
+
 ## 25 October S1/S6 correction — shared-error covariance and actual source joins
 
 **New authoritative statistical/measurement cut:** [S1 source, covariance and phase repair](psychotronics-s1-metrology-repair-20261025.md). The earlier S1 pair model treated magnetic-moment calibration errors as independent per repeated pair; this was too optimistic. Source-written [correlated GLS](../../scripts/psychotronics_field_loom_covariance.py) now retains shared moment-group, force-bias and field-scale error instead of forcing each into a shrinking diagonal. Independently checked with a local NumPy covariance example: 16 repeats with a shared `u_m g = 10⁻⁵ N`, shared force offset `4×10⁻⁶ N`, per-reading `2×10⁻⁷ N` yield a total standard uncertainty of about **1.07704×10⁻⁵ N**, not a vanishing statistical uncertainty.
@@ -27,7 +30,7 @@
 
 
 
-**Audit companion:** [21-row scientific source/claim/experiment matrix](psychotronics-physics-crosspollination-source-matrix-20261024.csv), kept distinct from the original 51-row *historical* source corpus. Its mechanism and scientist fibres are reference/provenance edges, **not 21 new experiments or 21 independent historical witnesses**.
+**Audit companion:** [23-row scientific source/claim/experiment matrix](psychotronics-physics-crosspollination-source-matrix-20261024.csv), kept distinct from the original 51-row *historical* source corpus. Its mechanism and scientist fibres are reference/provenance edges, **not 21 new experiments or 21 independent historical witnesses**.
 
 
 ## PR #1242 repo-wide source/mechanism reassessment — Amy, antigravity, missing scientists (24 October 2026)
