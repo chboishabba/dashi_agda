@@ -575,6 +575,144 @@ perezHeatShock2008 = Source.mkDOISource
   "2008 uses 50 MHz 0.5 W repeated EM-field shock in primary human T lymphocytes AND fibroblast lines, thus not irrelevant to lymphocyte biology; nevertheless different field and heat-shock/senescence endpoint from H. Perez et al 2013 100-2500 Hz Rodin-coil protocol; named as 2024 RMF reference 12"
   Source.publicAttribution
 
+------------------------------------------------------------------------
+-- Literature-first cloudbusting recovery: unlike traditions, original
+-- author roots, separate publisher/museum custody and 1953 event records.
+-- All citations remain source claims, not experiments on cloud causation.
+------------------------------------------------------------------------
+
+reichCoreEllsworth1954 : Source.AttributedSource
+reichCoreEllsworth1954 = Source.mkNoDOISource
+  "Wilhelm Reich"
+  "Cosmic Orgone Engineering (CORE), vol VI nos 1-4, OROP Ellsworth"
+  "July 1954 author publication reproducing 8 July 1953 protocol; 92-page later transcription PDF pages 57 and 59 inspected"
+  "1954"
+  "https://www.quebecorgone.com/wilhelm_reich_books/Wilhelm-Reich_-_Cosmic-Orgone-Engineering-1954.pdf"
+  Source.archivalSource
+  "claims 5 and 6 July 1953 preparations, 6 July 10:45-11:52 ten-tube water-cable use, rain about 22:00, and an incoming western weather front, then conjectures causal atmospheric orgone response; protocol not controlled weather-causation proof"
+  Source.publicAttribution
+
+reichCloudArchiveIndex : Source.AttributedSource
+reichCloudArchiveIndex = Source.mkNoDOISource
+  "Wilhelm Reich Infant Trust"
+  "Index of the Wilhelm Reich Archives, Orgone Institute Boxes 24 and 25"
+  "Original archival finding aid hosted by Wilhelm Reich Museum; PDF pages 85 and 86 inspected, individual listed items not obtained"
+  "2011"
+  "https://wilhelmreichmuseum.org/wp-content/uploads/2023/03/Index-of-the-Wilhelm-Reich-Archives.pdf"
+  Source.archivalSource
+  "lists Reich apparatus and rules, William Moise original operations records, Ellsworth 1953 files, Southworth construction correspondence and 24 July 1953 Bangor Daily News clipping; catalogue confirms custody rather than rain causality"
+  Source.publicAttribution
+
+hamblingWeatherwatch2011 : Source.AttributedSource
+hamblingWeatherwatch2011 = Source.mkNoDOISource
+  "David Hambling"
+  "Weatherwatch: Wilhelm Reich's cloudbuster"
+  "The Guardian, 6 July 2011 EDT / 7 July 2011 AEST; photo separately credited Robert F. Bukaty / AP"
+  "2011"
+  "https://www.theguardian.com/news/2011/jul/06/weatherwatch-cloudbuster"
+  Source.archivalSource
+  "2011 secondary journalism repeats 1953 Maine story and contrasts Reich water tubes with generic modern resin-quartz copper-pipe bucket, but no independent measurement or verified maker source"
+  Source.publicAttribution
+
+kiddexRedditMind2023 : Source.AttributedSource
+kiddexRedditMind2023 = Source.mkNoDOISource
+  "u/Kiddex77 and separately attributed r/energy_work commenters"
+  "Anybody heard of Cloudbusting?"
+  "Original Reddit discussion 2023 with later comments/edits; entire user-supplied Pasted text.txt and live public thread examined"
+  "2023"
+  "https://www.reddit.com/r/energy_work/comments/15v97ae/anybody_heard_of_cloudbusting/"
+  Source.practitionerSource
+  "OP describes purely mental intentional cloud-dissipation practice, with distinct commenters crediting Richard Bach, Trevor Constable and Neil Slade; testimonials are not independent meteorological evidence"
+  Source.publicAttribution
+
+bachIllusions1977 : Source.AttributedSource
+bachIllusions1977 = Source.mkNoDOISource
+  "Richard Bach"
+  "Illusions: The Adventures of a Reluctant Messiah"
+  "1977 original fiction; publisher later ebook identifies original copyright, user Reddit readers explicitly name its cloud-vaporising episode"
+  "1977"
+  "https://www.everand.com/book/769548154/Illusions-The-Adventures-of-a-Reluctant-Messiah"
+  Source.archivalSource
+  "fictional mentor/student mental cloud-dissipation episode in a novel, NOT a real cloud experiment or a claim of a verified nonlocal effect"
+  Source.publicAttribution
+
+constableCosmicPulse1976 : Source.AttributedSource
+constableCosmicPulse1976 = Source.mkNoDOISource
+  "Trevor James Constable"
+  "The Cosmic Pulse of Life"
+  "Original USA 1976 Merlin Press / UK 1977 edition National Library of New Zealand catalogue, original full book uninspected"
+  "1976"
+  "https://natlib.govt.nz/records/21985756"
+  Source.archivalSource
+  "book is an original named influence in later Reddit testimony; 1977 reviewer links some Reich cloudbuster and speculative UFO traditions; book's specific mental technique pages unread"
+  Source.publicAttribution
+
+sladeMindCloud1998 : Source.AttributedSource
+sladeMindCloud1998 = Source.mkNoDOISource
+  "Neil Slade"
+  "Cloudbusting and claimed brain self-control"
+  "author-maintained webpage claims first publication 7 June 1998 and retains 2007 reader reports, edits and advertising"
+  "1998"
+  "https://www.neilslade.com/cloud.html"
+  Source.practitionerSource
+  "original practitioner describes visualisation without tubes and supposed amygdala/brain-mediated cloud dissolution; reader testimonials do not validate selective weather effects or clinical neuroscience"
+  Source.publicAttribution
+
+croftMoonbustingEarly2002 : Source.AttributedSource
+croftMoonbustingEarly2002 = Source.mkNoDOISource
+  "Don Croft"
+  "Moonbusting Part 2"
+  "original named Croft article preserved by educate-yourself.org, internal as-of-March-2002 claim, full original HTML opening failed"
+  "2002"
+  "https://educate-yourself.org/dc/adcmoonbustingpt2.shtml"
+  Source.practitionerSource
+  "author compares water-grounded original Reich tubes with resin-base portable modern Chembuster and asserts far-reaching cloud/chemtrail action; date and claimed physical efficacy unpaid"
+  Source.publicAttribution
+
+adachiEditedChembusterIndex : Source.AttributedSource
+adachiEditedChembusterIndex = Source.mkNoDOISource
+  "Ken Adachi"
+  "Orgone Generators: Chembusters, Powerwands, Pyramids, Domes, Ground Cones and Tower Busters"
+  "publisher and seller index since Jan 2002 with explicit subsequent content and prices edited at least through April 2011; separate Don Croft named original maker"
+  "2011"
+  "https://educate-yourself.org/dc/orgonegenindex.shtml"
+  Source.practitionerSource
+  "author describes six copper or iron pipes, quartz crystals and resin-metal bucket device, attributed to Croft, and asserts cloud control; these are later maker/publisher assertions not weather efficacy data"
+  Source.publicAttribution
+
+wmoWeatherModification2025 : Source.AttributedSource
+wmoWeatherModification2025 = Source.mkNoDOISource
+  "World Meteorological Organization"
+  "WMO Statement on Weather Modification"
+  "14 June 2025 institutional statement specifying evidence review through June 2024, first-party original read"
+  "2025"
+  "https://public.wmo.int/content/wmo-statement-weather-modification"
+  Source.academicArticleSource
+  "limits evidence to specific weather modification interventions including glaciogenic seeding; warns enormous weather energy excludes casual creation or redirection of large weather systems; not a direct test of Reich, Croft, or mind-only clouds"
+  Source.publicAttribution
+
+peterReichDreams1973 : Source.AttributedSource
+peterReichDreams1973 = Source.mkNoDOISource
+  "Peter Reich"
+  "A Book of Dreams"
+  "Harper and Row release 25 April 1973 per contemporary Kirkus review; memoir full text uninspected"
+  "1973"
+  "https://www.kirkusreviews.com/book-reviews/a/peter-reich-2/a-book-of-dreams/"
+  Source.archivalSource
+  "son's memory and historical depiction of his father Wilhelm's rainmaker apparatus, later directly credited as inspiration by Kate Bush, not proof clouds were caused"
+  Source.publicAttribution
+
+bushCloudbusting1985 : Source.AttributedSource
+bushCloudbusting1985 = Source.mkNoDOISource
+  "Kate Bush"
+  "Cloudbusting, original author credit to Peter Reich's A Book of Dreams"
+  "1985 Kate Bush Club first-person source quoted by 2015 Dazed original-participant article; newsletter actual issue not inspected"
+  "1985"
+  "https://dev2.dazeddigital.com/music/article/27217/1/the-story-behind-kate-bush-s-cloudbusting-video"
+  Source.archivalSource
+  "musician acknowledges direct creative influence from Peter Reich memoir for a song/video, independent cultural authorship but not meteorological demonstration"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -597,7 +735,13 @@ sourceAtlas = Source.mkSourceAtlas
    heartmathEnergeticCommunication ∷
    shupakShamClinical2006 ∷ duAssessorBlindedProtocol2026 ∷
    croftBigSecret2002 ∷ croftPowerWand2003 ∷ saikiaAmyloid2019 ∷
-   perezRodinRSI2013 ∷ ramirezRodinRMF2024 ∷ perezHeatShock2008 ∷ [])
+   perezRodinRSI2013 ∷ ramirezRodinRMF2024 ∷ perezHeatShock2008 ∷
+   reichCoreEllsworth1954 ∷ reichCloudArchiveIndex ∷
+   hamblingWeatherwatch2011 ∷ kiddexRedditMind2023 ∷
+   bachIllusions1977 ∷ constableCosmicPulse1976 ∷ sladeMindCloud1998 ∷
+   croftMoonbustingEarly2002 ∷ adachiEditedChembusterIndex ∷
+   wmoWeatherModification2025 ∷ peterReichDreams1973 ∷
+   bushCloudbusting1985 ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -619,6 +763,9 @@ data LineageRoot : Set where
   heartmathInstituteRoot : LineageRoot
   shupakClinicalAuthorRoot duProtocolAuthorRoot : LineageRoot
   saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
+  reichOriginalAuthorRoot guardianHamblingRoot redditKiddexForumRoot : LineageRoot
+  bachFictionRoot constableBookRoot sladePractitionerRoot adachiPublisherRoot : LineageRoot
+  wmoInstitutionRoot peterReichMemoirRoot kateBushArtistRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -1217,6 +1364,121 @@ ramirez2024Ref12Claim = mkBound
   "true author intent and original 2008 full method details not verified; do not infer deliberate omission"
 
 ------------------------------------------------------------------------
+-- Cloudbusting source-specific propositions. These are original authors'
+-- declarations or custody/critical-source observations, never causal proofs.
+------------------------------------------------------------------------
+
+reich1953EventProtocolClaim : ClaimBound
+reich1953EventProtocolClaim = mkBound
+  "Reich says 6 July 1953 ten-tube water-cable drawing ended 11:52 and rain started about 22:00, explicitly with a west-origin weather front"
+  reichCoreEllsworth1954
+  "CORE OROP Ellsworth digital PDF p57 and p59 (images inspected), protocol reportedly written 8 July 1953"
+  reichOriginalAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "source-independent contemporaneous rainfall map and counterfactual device-caused-front mechanism absent"
+
+reichCloudArchiveCustodyClaim : ClaimBound
+reichCloudArchiveCustodyClaim = mkBound
+  "Reich Infant Trust Box 24/25 original finding aid lists original cloudbuster instructions, 1953 OROP Ellsworth and 1953 Bangor Daily News clipping"
+  reichCloudArchiveIndex
+  "Index of Wilhelm Reich Archives original PDF pp85-86; listed item pages NOT read"
+  reichMuseumRoot
+  Diligence.primaryProposition
+  institutionalHistoricalInterpretation
+  "catalogue listing is not the item contents or independent meteorological certification"
+
+hamblingModernObjectClaim : ClaimBound
+hamblingModernObjectClaim = mkBound
+  "David Hambling 2011 reports old Reich water pipes and a later six-pipe-like quartz bucket device claimed to operate without a human"
+  hamblingWeatherwatch2011
+  "Guardian Weatherwatch 6 July EDT / 7 July AEST 2011 paragraphs on original and later apparatus"
+  guardianHamblingRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "actual maker/source of modern generic device, safety comparison and weather causal demonstration missing"
+
+redditMindCloudIntentionClaim : ClaimBound
+redditMindCloudIntentionClaim = mkBound
+  "2023 Reddit original OP describes mentally focusing on a cloud; diverse commenters credit 1977 Bach, 1976 Constable and 1998 Slade"
+  kiddexRedditMind2023
+  "u/Kiddex77 original OP and separate named Reddit users in user-supplied full thread"
+  redditKiddexForumRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "no independent physical cloud effect, no controlled causal demonstration or direct person-to-person inventorship"
+
+bachOriginalFictionCloudClaim : ClaimBound
+bachOriginalFictionCloudClaim = mkBound
+  "Bach 1977 Illusions is fiction with a mental cloud-vaporising teacher/student narrative cited by later Reddit readers"
+  bachIllusions1977
+  "Original 1977 book copyright and later edition summary; specific teacher/student episode described by Reddit readers"
+  bachFictionRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "fiction is not laboratory evidence or direct Slade original author copying"
+
+constableBookClaim : ClaimBound
+constableBookClaim = mkBound
+  "Original 1976 Constable Cosmic Pulse of Life book is a named Reddit reading influence and is discussed by contemporary 1977 reviewer in relation to Reich"
+  constableCosmicPulse1976
+  "National Library of New Zealand original bibliographic catalogue 1976/77; book content unread"
+  constableBookRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "specific original page of mental-vaporisation method and genuine weather effects not verified"
+
+sladeMindVisualisationClaim : ClaimBound
+sladeMindVisualisationClaim = mkBound
+  "Neil Slade first-person site self-dates 1998 and teaches no-apparatus mental cloud visualisation while asserting dormant brain/amygdala powers"
+  sladeMindCloud1998
+  "Original neilslade.com/cloud.html main article and later 2007 self-reported reader testimonies"
+  sladePractitionerRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "neural mediation and anomalous meteorological causality wholly unverified"
+
+croftModernPipeSelfAttributionClaim : ClaimBound
+croftModernPipeSelfAttributionClaim = mkBound
+  "Croft original claimed modern Chembuster is resin-based portable variant of Reich water-tube historical cloudbuster"
+  croftMoonbustingEarly2002
+  "Don Croft Moonbusting Part 2 indexed original-attributed text, date of entire page and full HTML unpaid"
+  croftAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "actual inherited engineering pathway and 150-mile atmospheric effect not demonstrated"
+
+adachiCommercialChembusterClaim : ClaimBound
+adachiCommercialChembusterClaim = mkBound
+  "Adachi continuously updated product index describes Croft-associated six-pipe metal-resin-crystal Chembuster and weather marketing"
+  adachiEditedChembusterIndex
+  "Orgone generator index, editor and seller 2002-2011 page, specific 2011 changed prices"
+  adachiPublisherRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "any claimed physical benefit or exact 2002 invention date cannot follow from a revised 2011 sales page"
+
+wmoCausalLimitsClaim : ClaimBound
+wmoCausalLimitsClaim = mkBound
+  "2025 WMO statement limits evidence to some specified physical seeding regimes and cautions against claims of large-scale weather creation"
+  wmoWeatherModification2025
+  "WMO institutional weather modification fact sheet 14 June 2025, source scope through June 2024"
+  wmoInstitutionRoot
+  Diligence.primaryProposition
+  experimentalMechanismElsewhere
+  "statement not a direct instrument-specific trial disproving or proving 1953 Reich cloudbuster or mind-only cloud influence"
+
+bushPeterOriginalReadingClaim : ClaimBound
+bushPeterOriginalReadingClaim = mkBound
+  "Kate Bush 1985 original artist account explicitly credits Peter Reich's 1973 memoir A Book of Dreams as creative source for Cloudbusting"
+  bushCloudbusting1985
+  "Kate Bush Club 1985 first-person words as quoted by Dazed 2015, original issue uninspected"
+  kateBushArtistRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "creative source attribution cannot certify Reich meteorology or song/movie events"
+
+------------------------------------------------------------------------
 -- Cross-pollination edges. A documentary source naming BOTH objects
 -- licenses only the stated textual co-occurrence, not downstream physics.
 ------------------------------------------------------------------------
@@ -1281,6 +1543,95 @@ perezRamirezTableOverlapUnresolved = bounded-relation
   "2013 Pérez RSI measured current-to-field three-point source table"
   "2024 Ramírez-Galindo RMF same three rounded measured values"
   documentaryDistinction ramirez2024ReusedNumbersQuestion false refl false refl
+
+------------------------------------------------------------------------
+-- Original cloudbusting term has three unlike methods. Source link/credit
+-- is not apparatus equivalence or physical effect; each pair remains bounded.
+------------------------------------------------------------------------
+
+reichReportHasNaturalWeatherFront : BoundedRelation
+reichReportHasNaturalWeatherFront = bounded-relation
+  "Reich 1953 reported cloudbuster use and subsequent rain"
+  "Reich's same report explicitly records a western weather front"
+  documentaryDistinction reich1953EventProtocolClaim false refl false refl
+
+reichArchiveCatalogDoesNotProveRain : BoundedRelation
+reichArchiveCatalogDoesNotProveRain = bounded-relation
+  "Reich Museum Box 24/25 source catalogue"
+  "Reich device-to-weather-effect hypothesis"
+  documentaryDistinction reichCloudArchiveCustodyClaim false refl false refl
+
+guardianRetellingNotSecond1953Trial : BoundedRelation
+guardianRetellingNotSecond1953Trial = bounded-relation
+  "David Hambling 2011 original journalist story"
+  "Wilhelm Reich original 1953 Ellsworth account"
+  documentaryDistinction hamblingModernObjectClaim false refl false refl
+
+guardianModernBucketNotReichSameApparatus : BoundedRelation
+guardianModernBucketNotReichSameApparatus = bounded-relation
+  "2011 reported resin-and-crystal modern Chembuster"
+  "1953 original Reich hollow-tubes-and-water apparatus"
+  documentaryDistinction hamblingModernObjectClaim false refl false refl
+
+croftModernChembusterNotReichMethod : BoundedRelation
+croftModernChembusterNotReichMethod = bounded-relation
+  "Croft resin modern Chembuster"
+  "Reich original water-connected cloudbuster"
+  documentaryDistinction croftModernPipeSelfAttributionClaim false refl false refl
+
+adachiSellerNotIndependentWeatherObservation : BoundedRelation
+adachiSellerNotIndependentWeatherObservation = bounded-relation
+  "Ken Adachi product catalogue and descriptions"
+  "Don Croft original practitioner claimed Chembuster effect"
+  commercialSpecificationOnly adachiCommercialChembusterClaim false refl false refl
+
+redditMindCloudNotReichPipeMachine : BoundedRelation
+redditMindCloudNotReichPipeMachine = bounded-relation
+  "Mental cloud visualisation in u/Kiddex77 post"
+  "Physical tube-and-water Reich 1953 device"
+  documentaryDistinction redditMindCloudIntentionClaim false refl false refl
+
+redditBachReadingNotWeatherProof : BoundedRelation
+redditBachReadingNotWeatherProof = bounded-relation
+  "Reddit users' direct credits to Bach 1977 novel"
+  "Bach fictional cloud-vaporising lesson"
+  explicitlyAttributedReading redditMindCloudIntentionClaim false refl false refl
+
+redditConstableReadingNotWeatherProof : BoundedRelation
+redditConstableReadingNotWeatherProof = bounded-relation
+  "Reddit user credits Trevor James Constable 1976 original"
+  "Constable original speculative book, full text unread"
+  explicitlyAttributedReading redditMindCloudIntentionClaim false refl false refl
+
+redditSladeReadingNotWeatherProof : BoundedRelation
+redditSladeReadingNotWeatherProof = bounded-relation
+  "Reddit user credits Neil Slade mental cloud technique"
+  "Neil Slade 1998 original practitioner claim"
+  explicitlyAttributedReading redditMindCloudIntentionClaim false refl false refl
+
+bachAndSladeNotDirectInventionChain : BoundedRelation
+bachAndSladeNotDirectInventionChain = bounded-relation
+  "Bach 1977 fictional no-apparatus cloud method"
+  "Slade 1998 practitioner no-apparatus method"
+  thematicResemblanceOnly bachOriginalFictionCloudClaim false refl false refl
+
+bushOriginalPeterMemoirAttribution : BoundedRelation
+bushOriginalPeterMemoirAttribution = bounded-relation
+  "Kate Bush 1985 Cloudbusting source statement"
+  "Peter Reich 1973 A Book of Dreams"
+  explicitlyAttributedReading bushPeterOriginalReadingClaim false refl false refl
+
+wmoStatementCannotProveReichMechanism : BoundedRelation
+wmoStatementCannotProveReichMechanism = bounded-relation
+  "WMO 2025 source-specific real weather-modification methods"
+  "Reich 1953 original orgone-rain causality claim"
+  documentaryDistinction wmoCausalLimitsClaim false refl false refl
+
+windingGuideDomainNotRainMachineProof : BoundedRelation
+windingGuideDomainNotRainMachineProof = bounded-relation
+  "Croft 2003 cloud-busters.com Mobius-winding referral"
+  "Reich 1953 cloudbuster or modern Chembuster sky effect"
+  documentaryDistinction croftOriginalGuide2003Claim false refl false refl
 
 croftCloudbusterRelation : BoundedRelation
 croftCloudbusterRelation =
