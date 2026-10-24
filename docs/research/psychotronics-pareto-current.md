@@ -1,5 +1,17 @@
 # Psychotronics / pictured-device Pareto frontier — canonical current status
 
+## 25 October S1/S6 correction — shared-error covariance and actual source joins
+
+**New authoritative statistical/measurement cut:** [S1 source, covariance and phase repair](psychotronics-s1-metrology-repair-20261025.md). The earlier S1 pair model treated magnetic-moment calibration errors as independent per repeated pair; this was too optimistic. Source-written [correlated GLS](../../scripts/psychotronics_field_loom_covariance.py) now retains shared moment-group, force-bias and field-scale error instead of forcing each into a shrinking diagonal. Independently checked with a local NumPy covariance example: 16 repeats with a shared `u_m g = 10⁻⁵ N`, shared force offset `4×10⁻⁶ N`, per-reading `2×10⁻⁷ N` yield a total standard uncertainty of about **1.07704×10⁻⁵ N**, not a vanishing statistical uncertainty.
+
+**Evidence/data join repaired at document level:** [hashed pair/stream/calibration crosscheck](../../scripts/psychotronics_field_loom_source_join.py) explicitly matches analysed pair JSON to hashed submitted pair source, instrument source-stream hash, apparatus/serial/configuration, moment calibration ID/revision and reported force floor. This **does not** independently authenticate the instrument or execute the still-unverified raw-stream-to-pair reduction. Synthetic data always remain classified synthetic and physically inadmissible. [Exact 5-column coil × dipole polarity/heating factorial](../../scripts/psychotronics_field_loom_factorial.py) requires rank five for that *proposed* linear model; nominal two-arm active/sham repeats have rank two. A checked design matrix does not mean the fields were physically measured.
+
+**S6 near-singular correction:** the two-column smallest singular value now uses the Cauchy–Binet sum of squared minors, rather than cancellation-prone Gram eigenvalue subtraction near rank one. The prior exhaustive single-sensor failure layout is retained as **ideal numerical design**.
+
+**Offline [unified regression suite](../../scripts/test_psychotronics_field_loom_gate.py) is committed but not claimed executed from the GitHub blobs**. The current container cannot reach GitHub for checkout; only independent local numerical/algebraic checks are completed in this continuation. No Agda/CI, physical force or clinical experiment performed. **Pareto next cut remains authentic instrument raw acquisition/calibration**; H historical manuscript acquisition and G gravitational observation are separate unpaid tracks. The PR stays draft.
+
+
+
 **S6 fault-tolerant selection now computed:** exhaustive `27 choose 4 = 17,550` candidate Bz-only four-site layouts; maximise minimum two-coil-response singular value after **any single sensor loss**. The ideal selected symmetric upper/lower-plane four-sensor arrangement retains **rank 2** after each failure (worst `σmin≈1.95463×10⁻⁴ T/A`, condition `≈5.66`). This uses **existing coil response and a bounded McCasland-inspired robustness objective**, not a source-authored 1989 algorithm, actual noise model, certified array or proof that arbitrary 27-node patterns are producible. See [full protocol/20-fibre audit](psychotronics-s1-s6-twenty-scientist-maxcut-20261024.md).
 
 
