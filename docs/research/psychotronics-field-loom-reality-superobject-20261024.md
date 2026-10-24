@@ -1,5 +1,8 @@
 # FIELD LOOM — a reality-compatible psychotronics super-object
 
+**Sensor placement refinement:** S6 now has a *computed*, ideal failure-robust four-sensor candidate (2 upper + 2 lower sampling planes) selected exhaustively from the 27 grid positions under a one-failed-sensor maximin singular-value objective. This supports **reconstructing only the two coil currents**, not independently commanding 27 fields. Treat as prebuild design only; ambient three-axis calibration, noise covariance, magnetic mounting, vibration and heat must be measured before selecting physical sensors. Source/proof and numerical receipts in the [S1/S6 audit](psychotronics-s1-s6-twenty-scientist-maxcut-20261024.md).
+
+
 ## Quantitative S1/S6 engineering advance — not an experimental success
 
 See [the full 20-fibre donor survey and quantitative S1/S6 protocol](psychotronics-s1-s6-twenty-scientist-maxcut-20261024.md), with runnable `psychotronics_field_loom_metrology.py` and `psychotronics_field_loom_observability.py`. The first now closes **mathematical design** quantities, including signed point-dipole `F_z=m_z ∂_z B_z`, ratio to gravity, exact-midpoint anti-Helmholtz gradient, paired active/sham ordinary-model residual, uncertainty floors, original raw/calibration byte hashes, anti-claim and independently verified control requirements. It cannot convert synthetic values into physical results. The second calculates actual two-coil source-to-sensor response rank for 9/27/81 ideal measurements, showing why a central-plane Bz-only 9-sensor array is rank-deficient and why a volume with 27 sampling sites still cannot control more than the two original independent coil currents.
