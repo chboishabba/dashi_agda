@@ -132,7 +132,7 @@ profileSensitiveConsumer :
     (relativeReopening witness)
     (projectedLostProfile witness)
 profileSensitiveConsumer witness pair =
-  Fibre.fine-sensitive-consumer
+  Fibre.fineSensitiveConsumer
     (x pair)
     (y pair)
     (sameTransition pair)
