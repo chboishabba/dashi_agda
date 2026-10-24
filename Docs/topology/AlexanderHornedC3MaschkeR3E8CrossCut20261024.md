@@ -247,7 +247,7 @@ Monster or quantum-conscience claims.
 
 To avoid relying only on Python to classify the bad-characteristic
 case, `DASHI/Mathematics/Topology/AlexanderHornedC3Mod3JordanExact.agda`
-now defines the ACTUAL finite three-element additive carrier
+now defines the ACTUAL finite three-element field carrier (addition, multiplication, inverses and finite-law proofs)
 `F3={f0,f1,f2}`, the two-vector carrier `F3²`, the
 SAME cyclotomic companion operator
 
@@ -274,3 +274,16 @@ The good-characteristic source owner remains the rational
 `AlexanderHornedC3MaschkeR3Exact` and the characteristic
 5/7 field test. No artificial one-to-one identification
 of finite F3 with Q or R carriers is promoted.
+
+### Closing the coefficient-field linearity gate
+
+The F3 module now contains literal multiplication and explicit
+constructor-normalised proofs for additive/multiplicative
+associativity, commutativity, distributivity, identities and
+nonzero inverses, plus ALL 81 cases of additivity and
+ALL 27 cases of scalar homogeneity of the SAME cyclic
+companion operator. These clauses are source-generated
+exhaustive finite proofs, not a postulated `linear` Bool.
+The no-Maschke nilpotent witness and C3 group law are thus
+supported by an actual source-written F3-LINEAR action,
+although the Agda exact-head kernel receipt remains open.
