@@ -19,9 +19,9 @@
 # execution coordinate; the label is an external character identity coordinate.
 # Neither one by itself proves occurrence in the Monster restriction.
 #
-# This producer identifies the faithful degree-12 and the degree-78 6.Suz
-# candidates and records their central phases and order-two kernel status.
-# Never infer degree-78 faithfulness: Sym²(faithful 12) kills central C2.  It does NOT infer
+# This producer pins faithful 12/78 as used by the historical Monster
+# quotient matcher, while separately inventorying nonfaithful degree78.
+# Nebe's Sym²(faithful12) is nonfaithful, not a replacement for faithful78.  It does NOT infer
 # that every candidate occurs in the Monster restriction; that same-object
 # match remains a separate payment.
 
@@ -54,16 +54,18 @@ end;
 
 faithful12 := Filtered([1..Length(irr)], i ->
   irr[i][1] = 12 and IsFaithfulCharacter(irr[i]));
-degree78 := Filtered([1..Length(irr)], i ->
-  irr[i][1] = 78);
-
-# CTblLib's published 6.Suz examples use the ATLAS families 12ab and 78ab.
-# Fail closed if a future table version changes that exact candidate count.
-if Length(faithful12) <> 2 then
-  Error("expected exactly two faithful degree-12 irreducibles in 6.Suz");
+# Faithful degree78 is the SAME family used by the source-to-Monster
+# quotient matcher; nonfaithful degree78 (including Sym²(12)) is distinct.
+faithful78 := Filtered([1..Length(irr)], i ->
+  irr[i][1] = 78 and IsFaithfulCharacter(irr[i]));
+allDegree78 := Filtered([1..Length(irr)], i -> irr[i][1] = 78);
+nonfaithful78 := Filtered(allDegree78, i ->
+  not IsFaithfulCharacter(irr[i]));
+if Length(faithful12) <> 2 or Length(faithful78) <> 2 then
+  Error("expected two faithful 12 and two faithful 78, as in source matcher");
 fi;
-if Length(degree78) <> 2 then
-  Error("expected exactly two degree-78 irreducibles in 6.Suz");
+if Length(nonfaithful78) < 1 then
+  Error("expected at least one nonfaithful 78 for Nebe Sym² contrast");
 fi;
 
 fusion := FusionConjugacyClasses(tbl, outer);
@@ -107,7 +109,7 @@ RowsFor := function(positions)
 end;
 
 rows12 := RowsFor(faithful12);
-rows78 := RowsFor(degree78);
+rows78 := RowsFor(faithful78);
 
 # Every selected candidate must carry a pure nontrivial C3 scalar on each
 # central order-three class, with the two classes giving inverse phases.
@@ -142,7 +144,10 @@ PrintTo(output,
   "  \"label_source\": \"CTblLib AtlasLabelsOfIrreducibles(short)\",\n",
   "  \"central_order_three_classes\": [", central3[1], ", ", central3[2], "],\n",
   "  \"faithful_degree_12_positions\": ", faithful12, ",\n",
-  "  \"degree_78_positions\": ", degree78, ",\n",
+  "  \"degree_78_positions\": ", faithful78, ",\n",
+  "  \"degree_78_family_filter\": \"faithful_to_6Suz\",\n",
+  "  \"all_degree_78_positions\": ", allDegree78, ",\n",
+  "  \"nonfaithful_degree_78_positions\": ", nonfaithful78, ",\n",
   "  \"faithful_degree_12_atlas_labels\": [\"", rows12[1].atlasLabel, "\", \"", rows12[2].atlasLabel, "\"],\n",
   "  \"degree_78_atlas_labels\": [\"", rows78[1].atlasLabel, "\", \"", rows78[2].atlasLabel, "\"],\n",
   "  \"fusion_length\": ", Length(fusion), ",\n",
