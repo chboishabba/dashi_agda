@@ -79,3 +79,23 @@ def test_T3_zero_does_not_control_velocity_H2_or_directional_curvature():
         assert s.simplify(w.cross(u))==s.zeros(3,1)
     # Therefore no finite multiplier C can ensure
     # ||u||_dotH²² <= C*T3 for all smooth divergence-free u.
+
+def test_pure_positive_helicity_is_in_original_R735_mixed_carrier_kernel():
+    # The exact field is a positive-helicity curl eigenfield at both
+    # signed Fourier frequencies, using the original normalized
+    # H±=(P±i k×/|k|)/2, not a free unconstrained helical scalar.
+    t,A,nu=s.symbols('t A nu',positive=True,real=True)
+    for n in (1,2,7,19):
+        a=A/s.Integer(n)*s.exp(-nu*n*n*t)
+        p=s.Matrix([n,0,0])
+        up=s.Matrix([0,-s.I*a/2,a/2])
+        hp=(up+s.I*p.cross(up)/n)/2
+        hm=(up-s.I*p.cross(up)/n)/2
+        assert s.simplify(hp-up)==s.zeros(3,1)
+        assert s.simplify(hm)==s.zeros(3,1)
+        minus=s.Matrix([-n,0,0])
+        uminus=s.conjugate(up)
+        assert s.simplify((uminus-s.I*minus.cross(uminus)/n)/2)==s.zeros(3,1)
+    # Every H- input is zero; hence M_k=sum H+u_p × H-u_q=0.
+    # This is a null test for the W1 mixed carrier, NOT evidence
+    # W2's remaining same-helicity/critical channels are zero.
