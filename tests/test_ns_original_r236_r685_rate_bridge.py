@@ -82,3 +82,13 @@ def test_quartic_scaling_and_zero_padding_negative_control():
     # leaving all actual nonzero physical amplitudes and M unchanged.
     padded=PAIRS+(((4096,0,0),(-4032,1,0)),)
     assert covariance(A+(0,),padded,nu)!=old
+
+
+def test_selected_critical_deep_compensation():
+    nu=S.Integer(2)
+    blocks=six_pair_blocks(A,PAIRS)
+    deep=-sum(value for tags,value in blocks.items() if 'Core' not in tags)
+    critical=-sum(value for tags,value in blocks.items() if 'Core' in tags)
+    assert deep==162531800
+    assert critical==227667528
+    assert S.expand(nu*critical-(covariance(A,PAIRS,nu)-nu*deep))==0
