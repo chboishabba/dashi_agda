@@ -10,6 +10,7 @@ agda --version
 targets=(
   DASHI/Mathematics/Topology/AlexanderHornedC3AmbientRotationExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3SatellitePlacementExact.agda
+  DASHI/Mathematics/Topology/AlexanderHornedC3JordanActionExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3FiniteStageExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3ComplementActionExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3OrbitSolidExact.agda
