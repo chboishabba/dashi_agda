@@ -226,3 +226,29 @@ This is **already owned**, not new: `DASHI/Wikimedia/IbrahimMonster3BSuzukiNinet
 Using the sourced nontrivial central order-three scalar in the degree-12 representation of (6.Suz), the `12+78` multiplicity character at that element is NOT rational/integer, for any permitted eigenphase of the 78 block. An honest 90-point permutation character would instead be a nonnegative integer counting fixed points. Therefore a full source-normalizer `Fin 90 -> Fin 90` permutation-basis identification is **mathematically impossible**, even though the restricted *geometric D4 subgroup* acts by permutations on our chosen coordinates. This is a decisive negative result. A genuine non-permutation linear (90)-dimensional action is required; a suitable monomial action carrying phases may still exist but is not established. This rules out a major false-positive route regardless of whether mmgroup can be run.
 
 The strongest steelman consequently is: existing `E`-module equivalence with a 90-dimensional multiplicity **vector space**; geometric D4 action gives an exact separately testable character fingerprint; an actual normalizer extension must mix/phase the multiplicity coordinates consistently with the published nonintegral central character. A `D4` trace match would show D4 equivalence only. The abstract `12+78` isotypic type is source-backed, but its *same chosen geometric coordinate action* is not established. Stop demanding an mmgroup matrix for the former, and stop asserting the latter from a `Fin90` permutation chart.
+
+
+### Cheapest remaining actual-D4 test: eight class triples, no Monster matrices
+
+For any source-certified embedding `j:D4→C_N(3B)(z)`, the projector of the actual Monster degree-196883 character onto the selected ζ phase is
+
+  `chi_zeta(j(g)) = (chi(j(g)) + zeta² chi(zj(g)) + zeta chi(z²j(g)))/3`.
+
+If ordinary input trace values `A=chi(j(g))`, `B=chi(zj(g))`, `C=chi(z²j(g))` are integers, write `chi_zeta(j(g))` exactly in `Z[zeta]` as
+
+  `((A-B)/3) + ((C-B)/3) zeta`.
+
+Thus our geometric JFine D4 model passes the full classwise **D4-character test** iff, on each of the five class types with a realized eight-element mapping, `A-B=3·(65610,810,90,2430,2430)` respectively and `C=B`, with all three source-aligned group elements identified. Ordinary identity triple `(196883,53,53)` recovers `65610` exactly.
+
+`scripts/monster_3b_d4_phase_character_certificate.py` is a BACKEND-INDEPENDENT arithmetic checker accepting eight actual group-element/class-position/trace triples with independent source and embedding witness references. It rejects missing class rows, malformed positions, nonintegral projected ζ values, wrong identity dimension and unequal D4 class inventories. It **cannot certify authenticity** of a claimed embedding or class position merely from a URL in JSON. The local `--selftest` passes identity arithmetic plus malformed-input negative controls; the source's actual other seven triple inputs are NOT currently provided or verified. Existing GAP/CTblLib `scripts/monster_3b_five_orbit_d4_n3b_screen.g` is the correct related subgroup discovery owner, but its old five-orbit signature is a DIFFERENT test.
+
+### Explicit obstruction: E-character equality does not determine a normalizer lift
+
+In the exact constructed `H6⋊D4` model, multiply D4's **multiplicity-space** representation by its orientation/sign character, leaving every E element's operator unchanged. Both group representations therefore have the literally SAME E action and complete E character. However their full phase-sector D4 characters are respectively
+```
+     geometric: [65610,810,90, 2430, 2430]
+  sign-twisted: [65610,810,90,-2430,-2430].
+```
+A D4-equivariant intertwiner between them is impossible because character values differ. The sign-twisted irreducible multiplicities are `7110 A1+9540 A2+8280 B1+8280 B2+16200 E2`. The exact finite Python producer checks this negative control. The geometric D4 action on the Schrödinger fibre is implemented by honest six-coordinate permutations preserving the F3 bilinear pairing, so this CONSTRUCTED D4 Weil multiplier/cocycle is trivial. No conclusion about the actual Monster inertia Weil cocycle is inferred.
+
+This sharply proves WHY the remaining source-selected normalizer action is genuine additional data rather than redundant. It is not a reason to demand mmgroup: a verified source character restriction on the chosen subgroup suffices for abstract D4 module equivalence, and a concrete source-coordinate map can be computed by any appropriate algebra backend if required.
