@@ -1951,3 +1951,49 @@ cases; universal finite-matrix polynomial-law evidence.
 `ExactLeptonSUN3Weld` instance, imported global
 Gotô/colimit proof, physically selected holonomy or
 lepton interaction, experimental likelihoods.
+
+## 2026-10-24 final steelman/phase-gate consolidation — supersedes physical C3 orbit promotion
+
+**Decision owner:** `Docs/physics/HornedLeptonC3SteelmanPhaseGate20261024.md`,
+with actual SHA-matched local test receipt
+`logs/research/neutrino_horn_c3_steelman_phase_receipt_20261024.json`.
+
+**Mathematical phase P2 PAID** (ordinary source-attributed Gotô/Hatcher
+group existence, finite tested algebra); **Agda kernel P3 OPEN**;
+**same-object wild geometry P3b OPEN**; **physical predictive dynamics
+P4 UNSTARTED**; **original-data validation P5 OPEN**.
+
+**Critical falsification of a potential physical claim:**
+the exact threefold `Ad_T(A)` matrix orbit is nontrivial,
+but `U↦TU` is charged-lepton *row rephasing*. Nine Born
+entries, Jarlskog J, all vacuum oscillation probabilities,
+decohered source flux and horn single-word Wilson characters
+are unchanged. A nontrivial matrix/holonomy orbit is NOT three
+physical generations and NOT a new oscillation signal.
+The tested source `NeutrinoHornedC3RephasingNoGoExact.agda`
+records nine Born clauses, 9 Hamiltonian covariance clauses,
+exact CP quartet and character identities, still SOURCE-WRITTEN.
+
+**Second field/analytic obstruction:** Gotô's theorem applies
+to connected compact **SU3(C)**, not to the countable
+`SU3(Q(zeta3))` subgroup of exact scalar matrices.
+For diagonal `T`, one standard cyclic commutator recipe needs
+a **ninth root of unity** to restore determinant one;
+`Phi9(X)=X^6+X^3+1` is irreducible over Q of degree 6
+versus degree 2 for Q(zeta3). This is a *recipe-specific*
+field extension witness, NOT a theorem excluding every
+rational cyclotomic commutator factorization.
+The correct mathematical move is an exact
+`Q(zeta3)→C` embedding followed by Gotô in ambient SU3(C).
+
+**Actual local execution upgrade:** 36/36 selected cross-PR
+Git-blob-matched tests PASS (prior 26 plus 7 new row-rephasing/
+Wilson tests and 3 field-degree tests); 10/10 original symbolic
+universal 3×3 Q(zeta3) laws PASS. No CI work, no Agda kernel,
+NuFIT likelihood or physical-data claim.
+
+**Next Pareto cut:** a source-specified gauge-invariant
+interaction/holonomy discriminator, or explicitly retire
+CP-generation physical promotion. Do not manufacture another
+C3/Monster/KK analogue to pay a missing physical observable.
+See decision register for deliverable owners and acceptance tests.
