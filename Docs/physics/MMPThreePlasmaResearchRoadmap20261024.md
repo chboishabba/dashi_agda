@@ -286,3 +286,29 @@ python3 scripts/check_mmp_dualrail_erasure_degradability_20261024.py
 lake env lean QuantumChannels/MMPMonopoleLLLDualRailCapacity.lean  # separate Lean #85 branch
 ```
 No exact-head CI/Lean kernel or 4D semiclassical state solution is claimed in this round.
+
+
+## 2026-10-24 Cauchy prior-art/max-cut REVISION — resolves over-broad P1 blocker
+
+**Canonical in-repo audit, theorem lineage and executable fixtures:** [`MMPCauchyPriorArtNoncompactDiracThomHandleMaxCut20261024.md`](MMPCauchyPriorArtNoncompactDiracThomHandleMaxCut20261024.md). Users correctly pointed out the extensive existing DASHI Cauchy stack; it should not be reimplemented.
+
+**Do not conflate types:** `Geometry/LCP/Cauchy`, `Analysis/BishopFastCauchyCommonCompletion` and `CarrierSchwingerFunctionCauchyReceipt` handle sequence/field approximation convergence. `Physics/Gravity/PenroseGlobalCausalityAuthorityExact` and `PenroseGlobalHorismosContradictionExact` (merged #898, follow-up #905) own Lorentzian noncompact **Cauchy hypersurface/global hyperbolicity** roles, but source-authority theorem coordinates are NOT locally re-proved continuum geometry. `Physics/QFT/AQFTCarrierAlgebraQuotientSurface` owns an explicitly **open** full Cauchy time-slice algebra isomorphism, not an already proved QFT state.
+
+**Source-paid P0 geometric existence (not Einstein equations):** on `Sigma=(S1×S2)\{pt} ≅ R3#(S1×S2)`, one-ended noncompact `H1=H2=Z`; construct complete asymptotically Euclidean Riemannian `h` via smooth core/exterior collar gluing, then `g=-dt²+h` is globally hyperbolic with each `t=const` a noncompact Cauchy hypersurface (standard ultrastatic complete-slice theorem). On a tubular S1×D2 neighbourhood of the core loop, choose `F=c_q exp[-1/(1-r²)] dx∧dy` with smooth zero extension, normalized to `∫S²F/(2π)=q`, `dF=0`. Its magnetic field runs along **closed return orbits** in a local product metric. Standard Poincaré duality, de Rham/Thom and Misner–Wheeler 1957 retain mathematical/scientific authorship. This is a **true same-universe topology/flux model**, not a Maxwell `d*F=J` or Einstein/fermion backreaction solution, and has NOT been identified with the older C1 two-RN-exterior numerical geometry.
+
+**P0 local noncompact-Cauchy evolution hurdle partly closed at source level:** Capoferri–Murro *Math. Nachr.* 298 (2025) Remark **3.8(2)** explicitly uses smooth spatial collar **doubling** of the compact finite-time causal hull of compactly supported noncompact-Cauchy Dirac data, finite propagation and uniqueness, to reduce it to a compact-Cauchy Cauchy problem on bounded time windows. Its theorem does **not** apply directly to global nonlocal vacuum/Casimir loop correlations. New `MMPDiracCauchyNoncompactCompactDoubleBidiExact.agda` REUSES actual source owners and composes local-data matching plus uniqueness into a conditional same-observable finite-time result. `check_mmp_cauchy_compact_doubling_20261024.py` has a locally executed 1+1D exact chiral propagation fixture: max same-collar local solution / finite-rank kernel error 0 for R10,a1.6,b2.4,|t|≤5, and outside-diamond seam wrap produces mismatch 0.367879. No 4D physical field is asserted.
+
+**P1 EXISTENCE vs SELECTED STATE corrected:** Gérard–Stoskopf *Rev. Math. Phys.* 34 (2022) 2250008, DOI 10.1142/S0129055X22500088, gives general **free** Dirac Hadamard existence on arbitrary globally hyperbolic spin spacetimes and pure constructive methods under bounded-geometry hypotheses. Thus 'compact Cauchy is an existential barrier' is **retired**. Exact applicability to the physically selected charged/twisted spin-c connection and, critically, to a **global NS/Casimir fermion loop state with necessary negative stress** remains OPEN. Zahn 2014 pays external local renormalized current/stress framework; do not treat existence of SOME Hadamard state as existence of the desired semiclassical solution.
+
+**Updated irreducible P1/P2 chain:** select an explicit complete/asymptotically flat **same** spin-c/gauge-twisted handle geometry, prove actual charged Dirac Cauchy propagation and selected CAR/Hadamard covariance with global closed-loop Wilson holonomy; compute SAME-state renormalized `<T>,<J>` including gauge/diffeomorphism Ward and finite counterterm prescription; satisfy **both** Maxwell `dF=0,d*F=*J` and Einstein `G=8πG(T_EM+<T>_ren)` on that selected metric. A source-paid global existence theorem is not a numerical value or negative energy estimate.
+
+**New executed local cut:** `check_mmp_cauchy_handle_thom_flux_20261024.py` numerically checks CW H1/H2, Thom magnetic flux for q0,1,2,12,24,-3 and closed S1 fieldline family; direct analytic support `dF=0`, q12 Chern ≈11.99999999999994. Underlying topology and complete-metric/global-hyperbolic theorems are EXTERNAL original mathematical prior art, not code-generated proofs.
+
+Acceptance:
+```sh
+python3 scripts/check_mmp_cauchy_compact_doubling_20261024.py
+python3 scripts/check_mmp_cauchy_handle_thom_flux_20261024.py
+# Optional after selecting actual Agda project library:
+agda -i . DASHI/Physics/QFT/MMPDiracCauchyNoncompactCompactDoubleBidiExact.agda
+```
+No exact-head GitHub workflow, Agda kernel, globally Hadamard charged source, Einstein–Maxwell fixed point or real plasma device is claimed.
