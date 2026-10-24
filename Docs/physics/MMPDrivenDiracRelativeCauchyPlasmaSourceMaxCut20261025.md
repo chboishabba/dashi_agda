@@ -123,3 +123,22 @@ The late source's support begins at 2.28, so no external disturbance at 1.7 can 
 **Committed self-contained companion source:** [`scripts/check_mmp_three_independent_retarded_source_ports_20261025.py`](https://github.com/chboishabba/dashi_agda/blob/research/mmp-s2-fermion-three-plasma-maxcut-20261024/scripts/check_mmp_three_independent_retarded_source_ports_20261025.py). The local expanded run PASSED; the exact committed smoke checker has not been independently executed as GitHub CI. It leaves the true materials source, 4D microcausal CAR Dirac response, local renormalization, Ward identities and backreaction **OPEN**.
 
 **Key promotion distinction:** source 3's exactly zero *earlier-time* response derives from temporal support, while a balanced *total Wilson phase* can still support nonzero local response. These are different negative controls and should both be retained in future physical Maxwell–MHD experiments.
+
+
+### Actual cross-port Jacobian, not just norm summaries
+
+Selected rows are local density readouts at sites `j=1,4,7`, columns are independent source envelopes `i=1,2,3`. At observation **t=1.7**, finite model susceptibility:
+```
+         source1       source2       source3 (future)
+site 1   +0.023412441  -0.000001735   0
+site 4   +0.001229863  -0.044602278   0
+site 7   -0.000057859  +0.000129596   0
+```
+At **t=3.2**:
+```
+         source1       source2       source3
+site 1   -0.018955382  -0.000294773  +0.000288721
+site 4   +0.001261704  +0.055991796  -0.000010926
+site 7   -0.000519738  +0.002728978  -0.021250543
+```
+These are derivatives of final expected lattice occupations with respect to independently chosen **source amplitudes at zero drive**, not measured fermion transport probabilities. Spatial cross-coupling and later nonzero entries should be used to reject a false three-independent-scalar-channel simplification. The full 9×3 response and both time slices are in the executed local JSON; all 9 density derivatives sum to zero columnwise by finite U1 conservation.
