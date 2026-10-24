@@ -34,6 +34,7 @@ from iit_lattice_prime_power_audit import audit as prime_power_lattice_audit
 from iit_j_coarse_fine_5cube_audit import audit as five_cube_fibre_audit
 from iit_jfine_selected_punctured79_audit import audit as selected_punctured79_audit
 from iit_projective_f9_pointed80_audit import audit as projective_pointed80_audit
+from iit_pgl2_f9_720_audit import audit as pgl2_f9_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -206,6 +207,15 @@ def verify_numeric_results() -> dict:
     assert not projective["original_modular_j_identification"]
     assert not projective["original_Monster_action_identified"]
 
+    pgl = pgl2_f9_audit()
+    assert pgl["group_order"] == 720
+    assert pgl["affine_infinity_stabilizer_order"] == 72
+    assert pgl["homogeneous_space_index"] == 10
+    assert pgl["Singer_order10_cycle_lengths"] == [10]
+    assert pgl["Singer_order5_cycle_lengths"] == [5, 5]
+    assert pgl["order5_moves_completion_infinity"]
+    assert not pgl["C5_in_affine_stabilizer"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -219,6 +229,7 @@ def verify_numeric_results() -> dict:
         "five_cube_relative_fibre": five_cube,
         "selected_punctured79": selected,
         "projective_f9_pointed80": projective,
+        "projective_group_f9_720": pgl,
         "large_grid": {"scanned_rows": len(lattice["rows"]),
                        "payload_sha256": lattice["payload_sha256"],
                        "scope": lattice["scope"],
