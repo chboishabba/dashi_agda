@@ -43,7 +43,7 @@ external result and unrestricted Clay theorem are DIFFERENT claims.
 ## NEW realizable physical signed R690 discriminator
 
 `tests/test_ns_r690_realizable_helical_signed_output.py`
-(3 independently executed exact SymPy tests; original fixture). Take
+(4 independently executed exact SymPy tests; original fixture). Take
 Fourier modes p1=(1,1,0), q1=(1,-1,0), p2=(0,2,0),
 q2=(2,-2,0), their conjugate negatives; modal velocities
 u_p1=u_q1=u_p2=e_z, u_q2=-e_z. All have real-valued
@@ -65,7 +65,13 @@ At this output the mixed norm initially grows since
 mixed norm, which is positive. Crucially the FULL global signed
 sum over all 26 nonzero output modes for this particular seed is
 `192-16 sqrt(2)>0` at t=0. **Do NOT claim a global R690 sign
-counterexample from this single output.** This is a source-realizable
+counterexample from this single output.**
+ The same exact heat
+trajectory gives the stronger COMPLETE 26-output integral
+`∫_0^∞ Σ_(k≠0) K_k(t)dt = 12-sqrt(2)` and R690's
+eightfold value `96-8sqrt(2)`, confirming R691's original
+mixed-energy endpoint. This is checked in the fourth local test,
+not inferred from a static single output. This is a source-realizable
 gate against careless positivity or per-output absolute-value
 arguments, and supports the existing R691/R735 sum/endpoint-first route.
 
@@ -107,7 +113,7 @@ Neither preprint is imported as proven global regularity.
   REALIZABLE negative output-rate heat shear, and (iii) the already
   source-written R823 rational-345 integrated physical reserve
   counterexample. Avoid another proof 'by finite algebra alone'.
-- **Verification:** 4 local exact SymPy tests passed on the new
+- **Verification:** 5 local exact SymPy tests passed on the new
   physical negative-output and external-flux witness modules. These
   sources are committed to PR #1240. No Agda/Lean kernel toolchain or
   exact-PR-head test run in this runtime. No direct unrestricted
