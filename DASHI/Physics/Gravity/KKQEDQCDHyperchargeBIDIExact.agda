@@ -17,7 +17,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Integer.Base as Z using (ℤ; +_; -[1+_])
+open import Data.Integer.Base as Z using (ℤ; +_; -[1+_]; _+_)
 
 import DASHI.Physics.Closure.U1YChargeAssignmentTableReceipt as U1Y
 import DASHI.Physics.Closure.HiggsElectroweakBoundary as Higgs
