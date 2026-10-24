@@ -64,6 +64,22 @@ flowchart LR
 - **Plasma liquid chemistry:** use source-specific `n_i=V_liquid (c_i^after−c_i^before)` only when species-selective assays and positive volume are grounded. Nitrogen uptake by plants is *separate*: DASHI's existing isotope mass-balance frontier is not paid by nitrate concentration. Report feed gas, humidity, volume, dose, wall and delivered power, electrode metal erosion, pH, NO3−, NO2−, NH4+, H2O2 and any applicable biological-safety contaminants.
 - **Programmed resonance:** electronics can coordinate phase/frequency across actuators, but interacting systems may have different resonance bands, nonlinearities, sensor latency and mechanical cross-talk. A single magic frequency cannot be assumed to activate every channel.
 
+## S1 quantitative model implemented (NOT hardware): field shaping, not magic torus flux
+
+Runnable source: [`scripts/psychotronics_field_loom_coils.py`](../../scripts/psychotronics_field_loom_coils.py). This is a simple numerical **Biot–Savart line-integral approximation** for circular filaments; it is not finite-element magnetics, an inverse controller, an actual 27-channel actuator driver, an experimental dataset or a claim of stable levitation.
+
+The local example uses **two 100-turn coils**, each with radius **0.10 m**, centre spacing **0.10 m**, and currents **±1.0 A**. These values are **invented illustrative model parameters**, not design ratings for physical hardware. The local executed numerical test gave:
+
+| Mode / computed check | Synthetic model output | Meaning and limitation |
+|---|---|---|
+| Helmholtz-like equal currents | `B_z(0) = 0.0008991763 T` | Agrees with analytic circular-loop pair at centre to displayed precision; not measured |
+| Near-centre 3×3×3 samples (`x,y,z ∈ {-0.015,0,+0.015} m`) | `|B| min ≈ 0.0008983570 T`, `max ≈ 0.0009010886 T` | Nominal near-uniform field in the small measured region; model excludes actual coil geometry, hardware heat, materials |
+| Anti-Helmholtz-like opposing currents | `B_z(0) ≈ 0`, `∂B_z/∂z ≈ -0.01076135 T/m` | Field gradient can be created without claiming a monopole; no force levitation or particle capture certified |
+
+**Engineering implication:** the apparent contradiction between a toroidal structure and a sphere that moves in the hole disappears by separating **the structural toroidal frame / flux-confined toroidal winding** from **independent oriented coils that create actual field in the centre**. Force/torque on a specific magnetic object is not established until its moment, inertia, orientation, drag, current waveform and magnetic/thermal safety are measured. For stable levitation an active feedback plant is a separate higher-order control task; no self-sustaining passive levitation or gravity cancellation follows.
+
+The original [`scripts/psychotronics_field_loom_feasibility.py`](../../scripts/psychotronics_field_loom_feasibility.py) checks mutually exclusive subsystem modes, synthetic joule boundaries, and sample nitrate mass-delta, **not plasma yield, biological effectiveness or hazardous-equipment certification**. Both local engineering snippets are runnable standard-library Python, not an Agda-kernel result or a real device experiment.
+
 ## Three realistic delivery tiers
 
 **Tier A — *Field Loom demonstrator* (first cut; high feasibility).** Encased separated magnetic coils, sealed ferrofluid optical cartridge, LED illumination, camera, optional **externally isolated** acoustic particle or water-flow demonstration. PC/controller logs drive currents, Hall map, audio/vibration and video timestamps. This is the minimum physical "wow" machine with no plasma/human exposure. Success = **replicable, quantitatively tracked field-to-motion and field-to-image transfer**; no claim of unmeasured radiation/health effect.
