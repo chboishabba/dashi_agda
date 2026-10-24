@@ -2,7 +2,7 @@
 
 **Review:** 25 October 2026, PR #1242; user-selected documentary **Pareto, Ibrahim, original-source snowball**. This investigation concerns the genealogy and claims behind eight creator accounts and 18 screenshot-hash records. Original scientific work and construction methods remain attributed to their authors; the contributor here authors **document comparisons, source-dependence audits and acceptance gates**, not the underlying inventions. **No original video/actual device, hardware, metrology, CI or Agda required for Phase 1.**
 
-**Ledger version:** [46 source-role rows](psychotronics-phase1-literature-landscape-20261025.csv) and [70 directed relationship entries](psychotronics-phase1-lineage-edges-20261025.csv). These are overlapping document/source/claim edges **not 46 witnesses, 70 independent corroborations or independent experiments**. This memo adds P1-42–46 and E62–70 to the earlier Croft/Flanagan Gentry, journal citation and 2013–24 magnetic-field original-body audits.
+**Ledger version at this memo's first commit:** 46 source-role rows and 70 directed relationship entries. A concurrent original-2008-paper audit subsequently advanced the shared [source-role ledger to 47](psychotronics-phase1-literature-landscape-20261025.csv) and [directed relationship ledger to 72](psychotronics-phase1-lineage-edges-20261025.csv). These are chronological snapshots, not separate experiment counts. These are overlapping document/source/claim edges **not 46 witnesses, 70 independent corroborations or independent experiments**. This memo adds P1-42–46 and E62–70 to the earlier Croft/Flanagan Gentry, journal citation and 2013–24 magnetic-field original-body audits.
 
 ## Original early participant documents: recoverable authors versus lost antecedent
 
