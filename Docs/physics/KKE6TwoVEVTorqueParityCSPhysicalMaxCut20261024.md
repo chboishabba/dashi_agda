@@ -84,3 +84,14 @@ Likewise gauging physical colour SU3_C is another EIGHT massless vectors, alread
 The last example is a DIFFERENT published E6-source candidate, relying on a real 650 to break E6→SU3³ (Babu/Bajc/Susic 2023/2024), not already present as a physical 5D scalar in #1106. This table is free-field DOF bookkeeping, NOT a massless-Casimir coefficient for all modes: many are gauge-Higgs massive and may decouple, and actual 5D mass/Higgs/ghost spectra depend on the specific same action. The source-to-physics model selection must happen BEFORE attempting a universal radion or Wilson determinant.
 
 When two entire 27s plus a 650 are used, the selected 36-coordinate scalar Hessian from the #1106 comparison potential cannot certify stability of the other **722** real Higgs coordinates (650+72), nor their cosmological-stress effects. This exposes a much larger physical representation-realisation obligation than the original 48-unit octet shortcut.
+
+
+## Physical trace and mixed Hessian corrections (latest)
+
+For the selected eight Dirac **colour fundamentals**, the unweighted integer charge moment list (8,4,20,28) and half-moments (4,2,10,14) are a **combinatorial test**, NOT four physical 5D Chern–Simons levels. In a pure U1/gravitational trace every fundamental has THREE colour components, so the appropriately colour-multiplied formal half-moments are sum(3 q3)/2=**6** and sum(3 q3³)/2=**42**, respectively. The mixed U1–SU3² coefficient instead contains the fundamental Dynkin-index trace and requires separately declared normalization. The required spin CS integrality lattice of the quotient group remains entirely unproved. This latest correction supersedes interpreting (4,2,10,14) directly as correctly normalized CS coefficients.
+
+A second necessary consumer is the FULL mixed Hessian in (radion b, E6 VEVs v32/v33, EM/colour phases). Even if separate scalar-Higgs and radion Hessian blocks are positive, positivity of their joint fluctuation matrix requires the **Schur complement**
+H_eff,rr = H_rr - H_rPhi (H_PhiPhi)^(-1) H_Phir > 0
+(and the remaining mixed Wilson blocks likewise). check_kk_e6_two_vev_source.py includes an explicit SYNTHETIC 3×3 counterexample with H_PhiPhi=diag(4,6), H_rr=15, H_rPhi=(8,0): both separate blocks are positive but Schur =15-16=-1. The cross entry 8 is **NOT** a measured or source-derived value. This demonstrates why inheriting the #1106 scalar-local spectrum and a positive #1241 radion curvature does NOT prove a common E6 KK vacuum.
+
+In the selected classical spectator scalar EFT, Δsoft²<0 is an adjustable coefficient and the physical m_S² remains positive; that only guarantees an isolated tree-level scalar origin for nonnegative quartic, not quantum stability of all coloured scalars and electroweak states. A complete gauge-invariant, spin-regulated quantum action is still a distinct source obligation.
