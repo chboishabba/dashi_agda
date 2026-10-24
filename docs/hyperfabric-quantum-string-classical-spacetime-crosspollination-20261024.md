@@ -402,3 +402,65 @@ Hamiltonian is allowed and requires a new physical selected object.
 - External physics roots: Horowitz/Susskind 2000/2001; Lambert/West 2001; Glennon/West 2024/25; Glennon 2025; conventional bosonic tree string-frame action source. Attribution labels the `125/121` as originally published.
 
 **Changed Pareto**: selected original 27D action has a **resolved negative** physical verdict, not a vague open dimensional-comparison question. To proceed toward actual unification, source-select a DIFFERENT K27-preserving action and prove the same target stress, dilaton normalization, gauge/Bianchi, BRST/anomaly and observables. Do not feed finite 26 modes into YM/NS/Clay without the canonical source estimates.
+
+
+## Follow-on physical same-object result (2026-10-24): scalar repair ≠ 27D K27 theory
+
+The canonical **focused** owner is
+`docs/hyperfabric-27-minus-1-physical-action-k27-source-maxcut-20261024.md`.
+Do not retell its full source atlas here.
+
+**New A3b exact arithmetic:** supplementing the selected 27D
+Einstein–Hilbert+3-form by a new canonically normalized real
+`χ` with `-1/2(∂χ)²`, *then imposing* `χ=kσ`
+would repair the reduced 26D string-frame coefficient for
+`k²=32a²` (`a` the warp normalization), since
+`500a²-k²/2=484a²`. This is only an OFF-SHELL
+action coefficient. The independent free 27D scalar EOM
+`Box_Gχ=0` is not implied by the ansatz; an explicit flat-base
+`σ=t` has `Box_Gχ=-22ak exp(-2aσ)≠0` for `a,k≠0`.
+No source-authored K27-preserving action or consistent
+physical single-scalar truncation was constructed.
+
+**Correction to earlier variable-radius rhetoric:** in the natural
+form potential chart `B=C_{..y}`, `F_{...y}=dB`
+for variable radius with no extraneous `dr∧B`. The
+`dr∧B` term arises from choosing the OPTIONAL rescaled
+`C_{..y}=r(x)B`, and invalidates only a naive use of that
+rescaled chart. The separate 125/121 dilaton no-go still holds.
+
+**Direct source (K27) owner:** Glennon 2025 §VII explicitly
+admits that the proposed E27 commutator at level eight was
+not computed. His §VIII argues the E27 field content lacks the
+required 22-form dual three-form and dual-graviton fields.
+A scalar coefficient patch does not address these symmetry/duality
+fields, and “K27 not subalgebra of E27” is an attributed source
+argument, not a kernel-certified unconditional Lie-algebra theorem.
+The high-value selected consumer is the *known 26D K27
+closed-bosonic string* rather than an invented 27D tensor action.
+
+**True Jordan operation source donor:** Lean4 #52 already
+implements the original Griess 1990 `F3³` homogeneous Albert product.
+For all 26 nonzero `a`, `e_a e_-a=e0`
+and `e_a e0=e_a`; the non-unit 26-dimensional homogeneous
+span is not a Jordan subalgebra. This operation-level leakage
+is distinct from, but a useful *structural comparison* with,
+the original Cube27 graph Laplacian's origin/nonorigin coupling.
+Preserve original attribution and separate the 54-edge path
+graph, 81-edge periodic group, complex Albert Jordan algebra,
+physical 26D string target and `K27` Kac–Moody symmetry.
+
+New Agda tests: `scripts/check_27d_scalar_repair_consistency.py`
+(510 selected rational checks and wave EOM negative control) and
+`scripts/check_27_origin_albert_griess_product_cut.py`
+(all 26 source-original Griess unit/opposite identities).
+Equivalent local scripts PASSED; committed blob byte-replay
+not established. Lean #84 appended source-written formal
+scalar-slope and nonzero free-EOM coefficient proofs,
+Lean/Lake kernel UNVERIFIED.
+
+**Pareto after the cut:** A3 original no-go done; A3b
+arithmetic repair done but dynamical consistency blocked;
+A4 K27 algebra/source commutator unverified; A5 actual
+Albert multiplication exists in sibling #52, same-operator
+physical cross-transport unpaid; retain YM/NS independently.
