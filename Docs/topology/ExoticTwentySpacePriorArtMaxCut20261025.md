@@ -269,7 +269,7 @@ Critical external prior-art found at **Mathlib Topology/CWComplex**:
 Mathlib DOES already implement genuine classical `Topology.CWComplex` and
 relative CW structures (maps from finite-dimensional real disks, attaching
 boundaries, closure finiteness and weak topology), finite construction
-helpers `CWComplex.mkFinite_map` and related constructors, and categorical
+helpers `CWComplex.mkFinite` and related constructors, and categorical
 `TopCat.CWComplex` via colimits. Thus do **not** rebuild a universal
 CW library here. `proofs/horned_c3_lean/HornedC3/ExoticCWMathlibReuse.lean`
 now imports these sources, records that a recognized space carries
@@ -339,3 +339,71 @@ torsion counterexample, an Ida seam, a no-false-GMT-minimality guard,
 a no-false-Warsaw-homotopy guard, and biased binary/ternary measure.
 No Agda or Lean kernel execution has been observed; draft PR remains
 draft. Pinned Mathlib API compatibility must be checked before merging.
+
+
+## 2026-10-25 dashi_lean4 actual topology donor audit
+
+Companion native Lean draft: https://github.com/chboishabba/dashi_lean4/pull/86
+Source branch: `agent/exotic-topology-cw-sphere-reuse-20261025`.
+
+**Correction to earlier Agda-only inventory:** direct reads of the separate
+`chboishabba/dashi_lean4` repository found genuine theorem-bearing objects:
+- `Synthesis/MillenniumHodgeCP1Quotient.lean`: actual Mathlib
+  `Projectivization ℂ (Fin 2 → ℂ)`, explicit quotient/charts.
+- `Synthesis/MillenniumHodgeCP1TopologicalSphere.lean`: native
+  `CP1 ≃ₜ Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1`.
+- `Synthesis/MillenniumHodgeCP1SingularTransport.lean`: actual
+  `TopCat` singular chain and `H₂` functorial isomorphisms.
+- `Synthesis/MillenniumHodgeSphereSimplicialBoundaryH2.lean`: literal
+  `SSet.boundary 3`, finite tetrahedral cycle-space = Q.
+- `Synthesis/MillenniumHodgeCP1CellularH2.lean`: finite cellular
+  **cohomology** H² = Q on separate cochains.
+- `Integration/UltrametricCensus.lean`, `Spine/FiniteReindex.lean`,
+  `Integration/ObserverQuotient.lean`: existing exact finite donors.
+
+`dashi_lean4` GitHub code search is unindexed; empty results in previous
+repository-wide string searches are therefore NOT evidence of absence.
+
+**New cross-repo completion:** Native Lean #86 now builds a source-written
+homeomorphism from the ALREADY-PROVED `CP1 ≃ₜ UnitSphere2` to the
+**literal** Mathlib `TopCat.sphere 2` carrier by ULift.
+`Mathlib/Topology/Category/TopCat/Sphere.lean` (v4.28.0) defines
+`sphere n = diskBoundary (n+1)`, where `diskBoundary n` is
+`TopCat.of (ULift (Metric.sphere (0 : EuclideanSpace ℝ (Fin n)) 1))`.
+The exact existing `CP1` sphere is the n=2 case. Lean #86 also adds
+a finite nondegenerate evaluation pairing on the original CP1-cellular
+H² and tetrahedral H₂ providers; that is **not** the singular comparison.
+
+**Exact pinned Mathlib check:** `dashi_lean4/lakefile.toml` declares
+mathlib v4.28.0, and its tracked manifest pins
+`8f9d9cff6bd728b17a24e163c9402775d9e6a365`.
+The *actual source* contains `Topology.CWComplex` and constructors
+`Topology.CWComplex.mkFinite`, `Topology.CWComplex.mkFiniteType`;
+the earlier `CWComplex.mkFinite_map` name was wrong.
+Native Lean #86 now consumes these exact classes rather than building
+a new general CW layer. The repo's `lean-toolchain` currently reads
+`v4.35.0-rc3`, which must be reconciled/preflight-checked against its
+mathlib v4.28 pin; no silent package retargeting.
+
+**Higher-value Hatcher donor:** `Deicyde/hatcher-at/Hatcher/Sphere/Homology.lean`,
+original Lean author **Jack McCarthy**, contains
+`Hatcher.Sphere.reducedHomology_sphere`, supplying reduced homology
+on literal `TopCat.sphere n`, source-attributed to Hatcher's
+Corollary 2.14. The upstream hatcher-at environment is Mathlib/Lean
+v4.34.1; do NOT directly import its proof in Lean v4.28.0 or
+promote external source metadata to an actual target-revision theorem.
+Use explicit pin-consistent dual-environment acceptance.
+
+Native Lean #86 additionally constructs the real Whitney polynomial
+and Simons cone unit-link algebra and a *genuine topological* Wada
+three-domain frontier acceptance type, distinguishing actual
+`frontier (U i)` from the finite Agda three-sector incidence shadow.
+
+**Remaining decisive join:** choose a compatible, actual homology/cohomology
+comparison on `TopCat.sphere 2`, then connect the native tetrahedral
+normalized chains and the CP1 cellular cochain model to that SAME
+singular complex; do not identify `H²` and `H₂` merely because
+both have coefficient rank one. A source-owned actual Wada example,
+Fox-Artin local wildness, and Richards end-space realisations remain
+separate geometric obligations. Native Lean #86 is draft and NOT
+freshly kernel typechecked in this environment.
