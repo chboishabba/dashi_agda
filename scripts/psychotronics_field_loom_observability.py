@@ -17,8 +17,14 @@ def gram_2x2(response):
     d = sum(v*v for u,v in response)
     delta = sqrt((a-d)**2+4*b*b)
     lmax = max(0., (a+d+delta)/2)
-    lmin = max(0., (a+d-delta)/2)
-    smax,smin = sqrt(lmax),sqrt(lmin)
+    smax = sqrt(lmax)
+    # Cauchy-Binet: det(AᵀA) = Σ_{i<j}(u_i v_j - u_j v_i)².
+    # Using (trace - delta)/2 directly loses precision near rank one.
+    from math import fsum
+    minors = fsum((u * w - x * v) ** 2
+                  for i, (u, v) in enumerate(response)
+                  for x, w in response[i+1:])
+    smin = sqrt(minors) / smax if smax > 0 else 0.0
     return {'measurement_rows':len(response),'parameter_count':2,
             'numerical_rank':int(smax>1e-12)+int(smin>max(1e-14,1e-6*smax)),
             'condition_number':smax/smin if smin>0 else None,
@@ -70,6 +76,10 @@ def audit():
     volume=gram_2x2(response_grid((-.015,0.,.015)))
     vector=gram_2x2(response_grid((-.015,0.,.015),('x','y','z')))
     assert mid['numerical_rank']==1
+    assert gram_2x2([(1.,2.), (2.,4.), (3.,6.)])['numerical_rank']==1
+    near = gram_2x2([(1.,1.), (1.,1.+1e-7), (1.,1.-1e-7)])
+    assert near['singular_values_t_per_A'][1]>0
+    assert gram_2x2([(0.,0.),(0.,0.)])['numerical_rank']==0
     assert volume['numerical_rank']==2
     assert vector['numerical_rank']==2
     assert mid['measurement_rows']==9 and volume['measurement_rows']==27 and vector['measurement_rows']==81

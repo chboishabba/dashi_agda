@@ -1,5 +1,35 @@
 # FIELD LOOM — a reality-compatible psychotronics super-object
 
+## S1 timestamp counterbalance preflight
+
+The deterministic [S1 active/sham time-order audit](psychotronics-s1-drift-counterbalance-maxcut-20261025.md) is now part of the evidence-intake consumer, separate from exact five-parameter current-sign/polarity model rank. Source-native timestamps produce signed active-minus-sham lags for each `± current × ± moment` cell. Both orders and exact aggregate time-gap cancellation per cell are required for **a narrow constant linear force-drift symmetry test**; the original four-pair synthetic sample fails that new gate, an eight-pair balanced synthetic sample passes. This is **not** hardware verification, actual gradient calibration, continuous `I²R` / temperature lag, an independently identified magnet, or a proof of no drift.
+
+
+
+## S1 operational interface now executable but not yet empirically validated
+
+Read the [source-owned stream-to-pairs and signed uncertainty specification](psychotronics-s1-replay-signed-moment-weld-20261025.md). The existing `psychotronics_field_loom_coils.py` remains the **numerical** source for ideal finite circular filament fields, while the existing `NSTriadKNFourierBiotSavartExact` and `NSTriadKNMaxwellFluidBiotSavartBridgeExact` remain the **formal** current/field amplitude owners; this is no new Biot–Savart implementation.
+
+The S1 consumer can now intake a versioned, SI CSV stream with exact active/sham paired observations, bounded monotone timestamps, signed current and magnet polarity, source-linked calibrations and a separately recorded *same physical magnet* moment uncertainty even across polarity reversal. It checks exact replay against the signed source envelope and derives an exact rank-five five-term experimental design only from recorded arms. **This does not yet establish authentic instrument identity, sample condition or effective gravity.** The fixed magnetic dipole rule excludes Egely/Vértesy's VSM hysteresis, nonlinear ferrofluid and superconducting-material constitutive models absent additional laws and calibration. The next build is a safe qualified S1 force/field fixture, not S4–S6 integration or high-voltage human exposure.
+
+
+
+## Existing Biot–Savart mathematics ownership (25 October corrective audit)
+
+The Field Loom should **not** treat `psychotronics_field_loom_coils.py` as the repository's first or only Biot–Savart owner. See the [in-repo exact Fourier, Maxwell/fluid, MHD and filament numeric owner crosswalk](psychotronics-biot-savart-prior-art-weld-20261025.md) and import-only `FieldLoomExistingBiotSavartReuseExact.agda`. Source-owned `NSTriadKNFourierBiotSavartExact` already proves exact rational modewise inverse-curl/transversality; `NSTriadKNMaxwellFluidBiotSavartBridgeExact` already ties magnetostatic current and fluid vorticity to the same inverse-curl amplitude. Retain **their proof status as existing source claims, not freshly kernel-checked here**.
+
+**The real-space circular coil remains a different numerical test object.** Its already-existing line-integral producer now has an **independent elliptic-loop test** for off-axis field, axial analytic special case, signed current reversal, superposition and approximate divergence consistency. An explicit Fourier-to-free-space filament equivalence, absolute coil calibration, physical force/inertia and real instrument data are still missing. The code's `MU0 = 4*pi*1e-7` is a **conventional illustration**, not exact post-2019 SI. We did not replace prior numeric core or create new independent vector-field ontology.
+
+
+
+## Repair to S1 experimental admissibility (25 October)
+
+The original ideal permanent-dipole force estimate remains a **conditional numerical model**. Its later paired-residual implementation has been corrected: see [GLS uncertainty, source-object join and factorial-identification audit](psychotronics-s1-metrology-repair-20261025.md). Shared magnetic-moment calibration, common force offset and common field-scale errors cannot be treated as independent across repeated observations. A source hash alone cannot establish that analysis pairs were derived from that source; submitted pairs and calibration now must match source-byte identities, though independent stream→pair derivation and actual instrument authentication remain open. The exact five-parameter `coil sign × dipole sign + current-even heating` model needs rank five to separate its terms, and field/cue parity, mechanical response and uncertainty must still be measured.
+
+**Correct S1 phase:** numerical architecture, conservative provenance intake and statistical estimator have improved, **not bench validated**. The independent gravimetric channel remains unpaid under the existing Amy/exotic-gravity consumers, and Source/CI/Python files in GitHub are not laboratory result receipts. Continue to isolate HV/corona/plasma and human-sensing modules from the S1 low-risk field survey.
+
+
+
 **Sensor placement refinement:** S6 now has a *computed*, ideal failure-robust four-sensor candidate (2 upper + 2 lower sampling planes) selected exhaustively from the 27 grid positions under a one-failed-sensor maximin singular-value objective. This supports **reconstructing only the two coil currents**, not independently commanding 27 fields. Treat as prebuild design only; ambient three-axis calibration, noise covariance, magnetic mounting, vibration and heat must be measured before selecting physical sensors. Source/proof and numerical receipts in the [S1/S6 audit](psychotronics-s1-s6-twenty-scientist-maxcut-20261024.md).
 
 
