@@ -275,3 +275,26 @@ A5-element commutator coverage, with root image order five.
 The committed standalone script's 4,000-case regression and
 five-stage recursion were added but have not been separately
 executed in the remote CI environment.
+
+
+## Jordan on exactly the same VOA states
+
+There is a small but genuine positive cross-pollination, with
+no exceptional-algebra inference: the coordinate product on
+`Fun(C3×A5,C)` is associative and commutative, so it
+automatically satisfies the Jordan identity
+
+    (f*f) * (g*f) = ((f*f)*g)*f.
+
+In `AlexanderHornedC3VOAModeLiftExact.agda`,
+`sameStateJordanIdentity` is an exact rational polynomial
+identity on the **same state carrier and same (-1) mode**
+as the C3-equivariant VOA action. The earlier
+`AlexanderHornedC3JordanActionExact.agda` is a more
+abstract triple-of-Jordan-identities donor.
+
+This uses the elementary *special Jordan* algebra coming
+from an associative commutative algebra. It does NOT
+identify that algebra with the exceptional 27-dimensional
+Albert algebra, the full weight-two Griess algebra, a
+Monster 3B eigenspace or the physical horned exterior.
