@@ -89,3 +89,21 @@ def test_leray_energy_gives_finite_T_spacetime_source_response():
     assert S.simplify(via_holder-expected)==0
     assert ("sqrt(T)" in module.certificate()[
         "Leray_energy_inequality_spacetime_response_L2_squared_upper"])
+
+
+def test_strong_H1_density_same_source_stokes_continuity():
+    # Two fields u,v: A controls L1(u⊗u-v⊗v), B controls the L1
+    # difference of (u·grad)u and (v·grad)v. The Leray/Stokes
+    # Fourier response then has low A/(nu*r), high B/(nu*r²).
+    A,B,nu,r=S.symbols("A B nu r",positive=True)
+    rc=B/A
+    low=S.integrate(4*S.pi*r*r*(A/(nu*r))**2,(r,0,rc))
+    high=S.integrate(4*S.pi*r*r*(B/(nu*r*r))**2,(r,rc,S.oo))
+    assert S.simplify(low+high-8*S.pi*A*B/nu**2)==0
+    report=module.certificate()
+    assert report["strong_H1_source_continuity_low"]=="A*|xi|"
+    assert report["strong_H1_source_continuity_high"]=="B"
+    assert ("tensor_L1_difference" in
+            report["strong_H1_Stokes_L2_xi_difference_squared_bound"])
+    assert ("convective_L1_difference" in
+            report["strong_H1_Stokes_L2_xi_difference_squared_bound"])
