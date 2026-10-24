@@ -13,3 +13,13 @@ Plan: `docs/superpowers/plans/2026-10-16-dashi-toe-universal-realization.md`
 Ruling: legacy `DASHI/Unified/Everything.agda` on the branch already contains unrelated malformed/incomplete-looking clauses in the fetched source. Do not rewrite that broad owner without compiler evidence; export through the focused TOE rollup in this tranche. Cost if wrong: one additional import remains to be added after the legacy owner is repaired/typechecked.
 
 Verification boundary: local environment has no `agda`, `lean`, or `lake`; shell network cannot resolve GitHub, so no local checkout or kernel run was possible. GitHub compare confirms the Agda branch is ahead of master with only intended additions. Status is SOURCE-WRITTEN / SOURCE-REVIEWED / KERNEL-UNVERIFIED.
+
+## Physical KK QCD same-action stress handoff from #1241
+
+Selected-source consumer [#1241](https://github.com/chboishabba/dashi_agda/pull/1241), original hyperfabric graph donor [#1249](https://github.com/chboishabba/dashi_agda/pull/1249), source-native QFT/Casimir stress [#1165](https://github.com/chboishabba/dashi_agda/pull/1165). Cross-branch provenance, NOT merged theorem imports.
+
+`TOEGaugeQFTGRRealizationExact` and `TOEPrimitiveMaxCutExact` already correctly leave common universal action, stress-variation commutation and calibration unpaid. The new selected physics cut concretely measures two gaps:
+(1) 27 same-cardinality path/periodic graphs are not the physical compact-circle operator; a different N=3^k single-cycle Fourier discretization yields certified fixed-band O(N^-2) KK spectral and heat errors plus U1 Wilson covariance, but does NOT transport the full renormalized infinite Casimir determinant.
+(2) The old QED-only tuned Casimir potential becomes inconsistent when the selected SU3 gluon + six light quark sector is inserted. For `V_E=(c0/b0^4)[ell/x+W(x)/x^6]`, same-action `V_J=x²V_E`; imposing `ell=-W(1)` gives zero 4D vacuum energy but `p5=-c0[W'(1)-5W(1)]/(2pi b0^5)`. The selected spectrum has `D≈-240`, so a flat Ricci-flat 4D×S1 product FAILS the 5D T55 source consumer. This is an effective-stress identity, not a physically completed quantum 5D Einstein source.
+
+External deconstruction (Arkani-Hamed/Cohen/Georgi 2001) and classical Casimir variation retain original attribution. Python mathematical tests locally reproduced PASS; new Agda source-written unverified; no actual continuum QCD, chiral 5D Standard Model or measured satellite claim.
