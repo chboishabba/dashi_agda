@@ -8,3 +8,6 @@ module DASHI.Cognition.ConsciousRealismDMTEverything where
 import DASHI.Cognition.ConsciousRealismDMTSourceAtlasExact
 import DASHI.Cognition.ConsciousRealismDMTIdentifiabilityExact
 import DASHI.Cognition.ConsciousRealismDMTBrainITConsumerExact
+
+-- Source-specific missing-record states, selective reopening and attribution.
+import DASHI.Cognition.ConsciousRealismDMTSourceWorldExact
