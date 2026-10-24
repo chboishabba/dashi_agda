@@ -48,7 +48,7 @@ def check(q: int) -> dict:
         source_null=(c*Fp/(12*math.pi)+4*t/N**2)/(4*math.pi*rad*rad)
         einstein_mismatch=gkk-8*math.pi*source_null
         geometric_weight=(rad/N)*gkk
-        return (rad,v,F,N,constraint,einstein_mismatch,geometric_weight,source_null)
+        return (rad,v,F,N,constraint,einstein_mismatch,geometric_weight,source_null,Fp,rpp)
     points=np.linspace(0,x_end,81)
     samples=[fields(float(x)) for x in points]
     maxconstraint=max(abs(z[4]) for z in samples)
@@ -57,10 +57,27 @@ def check(q: int) -> dict:
     integrated_source=8*math.pi*quad(lambda x:fields(x)[0]/fields(x)[3]*fields(x)[7],0,x_end,epsabs=2e-8,limit=300)[0]
     # Geometric differential identity, *not* assuming Einstein's source.
     bound=-2*(fields(x_end)[1]/fields(x_end)[3] - fields(0)[1]/fields(0)[3])
+    # Diagnose classical RN matching in proper radial coordinate. Matching
+    # g and first derivatives does not imply C2 match after sharp removal
+    # of the effective quantum source at the interface.
+    at=fields(x_end)
+    radius,velocity,redshift,Nend=at[:4]
+    M=out['mass_RN']
+    f=velocity*velocity
+    A=M/radius**2-Q**2/radius**3
+    rn_F=A/math.sqrt(f)
+    rn_rpp=A
+    rn_Fp=-2*M/radius**3+3*Q**2/radius**4-A*A/f
+    c1_error=max(abs(velocity-math.sqrt(f)),abs(redshift-rn_F))
+    c2_rpp_jump=float(at[9]-rn_rpp)
+    c2_loglapse_second_jump=float(at[8]-rn_Fp)
     ident_error=abs(integrated_g-bound)
     source_error=abs(integrated_source-bound)
     return dict(q=q,x_end=x_end,r_end=out['match_radius'],
                 radial_constraint_max=maxconstraint,einstein_null_mismatch_max=maxmismatch,
+                rn_junction_C1_max=c1_error,
+                rn_junction_r_second_derivative_jump=c2_rpp_jump,
+                rn_junction_loglapse_second_derivative_jump=c2_loglapse_second_jump,
                 geometric_budget=integrated_g,einstein_source_budget=integrated_source,
                 finite_segment_boundary=bound,geometric_identity_abs_err=ident_error,
                 source_vs_geometric_abs_err=source_error,
@@ -77,6 +94,9 @@ def main():
     must(max(v['radial_constraint_max'] for v in results)<4e-6, 'Existing BVP radial constraint fails along path')
     must(max(v['einstein_null_mismatch_max'] for v in results)<4e-6, 'Effective Einstein radial null mismatch')
     must(max(v['source_vs_geometric_abs_err'] for v in results)<4e-6, 'Source and geometry budgets disagree')
+    must(max(v['rn_junction_C1_max'] for v in results)<2e-8, 'RN junction first derivatives do not match')
+    must(min(abs(v['rn_junction_r_second_derivative_jump']) for v in results)>2e-5,
+         'Fixture changed: expected sharp-cutoff C2 jump no longer present; re-audit source')
     # Prove exact algebra behind the numerical radial-null validator, not just
     # a pointwise floating-point coincidence. The on-shell constraint controls
     # the difference of source-side and geometry-side Einstein k.k.
