@@ -1,5 +1,21 @@
 # Phase 1, recut by user instruction: literary landscape, attribution, Pareto, Ibrahim and snowball
 
+## Major primary attribution recovery after initial draft — Croft's own historical lineage (Phase-1 A2 partially paid)
+
+A **high-alpha first-party author statement has now been recovered** inside [The Don Croft Archives at Croft Zappers](https://www.croftzappers.com/the-don-croft-archives), in a response to a query alleging misappropriation of Karl Welz's orgonite formula. The original *speaker* is **Don Croft**; the *publisher/archival custodian* is Croft Zappers drawing on Ken Adachi and defunct Etheric Warriors material. A neighbouring item is dated **17 February 2008**, but the *specific subsequent response's original post date is not independently authenticated*; do not put 2008 on every line.
+
+Croft says, in order and with differing evidence grades:
+
+1. He experimented with Serge Kahili King's layered foil/plastic construction from **summer 1997**, a named reading/interpretive source, then learned of Welz's product via a customer's report about **a year and a half later**. The customer's alleged disappointment about the metal-in-epoxy composition is **one Croft-relayed statement by an unnamed person**.
+2. He says **he and his daughter Nora** then modified coarse metal shaving/resin devices with crystals; Croft acknowledges Welz's original use of the concept and says he credited him. This is an actual **first-person genealogy** Welz→Croft at idea/market-intelligence level; it is not proof of unique orgone physical properties.
+3. Croft states he **visited Welz in Atlanta in March 2003** and reached a friendly understanding. That is **Croft's self-report of an event and of Welz's alleged opinion**; no Welz statement, documentary meeting record, or legal dispute outcome is present. Separately, Croft and preserved Croft Zappers text dispute Welz's naming/trademark rights. Preserve both opposed viewpoints without adjudicating copyright/trademark law from their claims.
+4. **Most novel for the Succor Punch itself:** Croft says **Gentry Smith gave him Möbius-coil instructions in late 1999**, and asserts **Gentry had obtained those instructions from Patrick Flanagan** while working with him earlier. This creates a *specific candidate technical transmission chain* **Patrick Flanagan → Gentry Smith → Don Croft (1999) → Croft's 2002 Mobius Succor Punch**. It is only Croft's attributed account, not original Gentry/Flanagan testimony, not proof Flanagan originated the exact geometry, and not authentication of the unusual psychic functions. The next real Ibrahim purchases are **dated Gentry/Flanagan first-party writings or correspondence**, not more Croft-derived blog recirculations.
+
+**Important fork:** a line about Gentry's school science fair and an alleged federal theft in Croft's story is an additional **unsupported narrative**, not an experimentally or institutionally documented event; do not use it to infer suppression or a common intelligence programme. User attribution rules explicitly forbid promotion from a personal claim or shared terminology to a proven criminal or state event.
+
+**Changed Phase-1 Pareto:** A2 Welz→Croft **direct actor acknowledgement is now paid**; the newly constrained missing chain is **Gentry/Flanagan original coil provenance** and any first-party Welz response to the claimed 2003 meeting/dispute. See new [P1-22](psychotronics-phase1-literature-landscape-20261025.csv) and [E24–E28](psychotronics-phase1-lineage-edges-20261025.csv). This is a documentary advance that does **not** require a same-device video or an instrument.
+
+
 **Date:** 25 October 2026. **Repo/PR:** `chboishabba/dashi_agda`, draft #1242. **This is the authoritative Phase-1 roadmap, overriding the 'original reel + bench first' instructions in earlier addenda.** Their historical work remains preserved as audit trail and as possible *future engineering research*, but **neither acquiring original same-device video, matching an exact SKU, constructing a physical device, nor source-controlled electrical/mechanical measurements are Phase-1 prerequisites or the default next action**. This recut is documentary, historical, methodological and comparative, per user instruction.
 
 ## Original question and bounded scope
@@ -9,8 +25,8 @@ The original prompt emerged from **two uploaded screenshot sets (18 PNG hashes, 
 A modern maker's claim that a design descends from Rodin, Croft, Reich, Tesla, Rife, Pavlita, psychotronics, Lakhovsky or "quantum/369" supplies **a new researchable statement**; it does not by itself establish the technical or scientific equivalence of those names. Technical observations, historical genealogy, institutional custody, public allegations, consumer rhetoric and experimental proof must remain noninterchangeable.
 
 **Curated Phase-1 evidence ledgers created in this cut:**
-- [21 source-role records, original roots and limitations](psychotronics-phase1-literature-landscape-20261025.csv).
-- [23 directed documentary relationship hypotheses/evidence states](psychotronics-phase1-lineage-edges-20261025.csv).
+- [22 source-role records, original roots and limitations](psychotronics-phase1-literature-landscape-20261025.csv).
+- [28 directed documentary relationship hypotheses/evidence states](psychotronics-phase1-lineage-edges-20261025.csv).
 These are *a scoped slice / cross-index* of the existing 42-source-instance Agda screenshot-era atlas and the 61-row historical psychotronics corpus. **Do not add these three denominators**: sources recur across ledgers; a catalogue row and an original paper do not become independent trials. Each edge contains its exact source root and acceptance ceiling. The canonical general review remains [psychotronics-literature-review-20261024.md](psychotronics-literature-review-20261024.md); the [existing history](psychotronics-succor-punch-attribution-20261024.md) is an append-only diary. This Phase-1 file is an **integrative review and choice function**, not a claim to have exhausted all world literature.
 
 ## Landscape 1 — 1940s/1950s Reich versus 1990s Welz versus 2002 Croft
@@ -61,7 +77,7 @@ These original patent texts are stronger documentary evidence than internet anec
 
 ## Ibrahim/snowball investigation protocol: explicit graph, no adjacency fallacy
 
-**Seed objects:** screenshot-specific accounts and maker/product names; **first outward frontier:** author-credited original product descriptions and dated publications; **second frontier:** footnotes, patent forward/back citations, coauthor papers, contemporaneous reprints and manuscript custody. Every extracted edge is classified in [the 23-edge ledger](psychotronics-phase1-lineage-edges-20261025.csv) as:
+**Seed objects:** screenshot-specific accounts and maker/product names; **first outward frontier:** author-credited original product descriptions and dated publications; **second frontier:** footnotes, patent forward/back citations, coauthor papers, contemporaneous reprints and manuscript custody. Every extracted edge is classified in [the 28-edge ledger](psychotronics-phase1-lineage-edges-20261025.csv) as:
 
 1. **Direct document-to-document citation** (e.g., 2026 patent lists Nunez 2017 and Dennis Wong 2019; 2023 paper references Rodin/Volk 2010). This proves **bibliography inclusion**, not reading/copying/testing by an inventor.
 2. **Named first-person influence or contemporary maker acknowledgement** (Croft's stated 2002 design; Aurumaya credit; named 2023 builder references). The proposition proved is *the person said they used or followed X*, not objective efficacy.
