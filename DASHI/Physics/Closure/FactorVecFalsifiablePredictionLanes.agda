@@ -158,6 +158,17 @@ open MuonGMinus2ResidualLane public
 
 ------------------------------------------------------------------------
 -- Lane 3: neutrino mass/mixing discrete ratio.
+--
+-- EMPIRICAL AUTHORITY WARNING (2026-10-24): the proposed 1/31 ratio is a
+-- falsifiable mathematical candidate, not a successful measured prediction.
+-- The fields 'predictionInCurrentWindow' and 'acceptedAtChi2Dof≤2' below
+-- are obligations passed in by a caller, not calibrated measurement proofs.
+-- The literal 1/31 NO candidate is outside even the independent marginal
+-- 3-sigma *rectangle* of NuFIT 6.1 IC24+SK; see the exact comparison in
+-- DASHI.Physics.QFT.NeutrinoIceCubeMaxCutExact and its provenance roadmap
+-- Docs/physics/NeutrinoIceCubeMaxCut20261024.md.
+-- No reordered IO denominator, post-hoc tolerance, or C3 argument silently
+-- repairs the selected normal-ordering test.
 ------------------------------------------------------------------------
 
 record NeutrinoMixingRatioLane : Set₁ where
