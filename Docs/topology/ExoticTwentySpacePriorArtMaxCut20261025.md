@@ -231,3 +231,111 @@ source-selected Wada constructions with special interleaved canals.
 
 The typed Agda consumers above are source-written and have NOT been
 typechecked in this environment.
+
+
+## CW prior-art correction and decisive Mathlib reuse (2026-10-25)
+
+User was correct that genuine CW-related work is already in DASHI;
+earlier inventory was incomplete. In particular:
+
+- `DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineCellularH2Exact.agda`
+  already constructs rational cellular degree-two cochains from the standard
+  0-cell/2-cell CW decomposition of S²=CP¹, proves `H²=Q` in the
+  FINITE CELLULAR MODEL, and welds its generator to projective-line
+  cycle classes. **The module explicitly disclaims a cellular-to-singular
+  comparison for an actual topological CP¹.**
+- `DASHI/Reasoning/TernarySynthesisCellComplexExact.agda` has literal
+  0/1/2 cell incidence and triangle-boundary laws, plus a proof-carrying
+  PNF realisation interface.
+- `DASHI/Mathematics/Topology/FiniteCochainComplexExact.agda` already proves
+  differential-squared-zero, identity/composition cochain map laws,
+  closed/exact transport, and homotopy-related statements.
+- `DASHI/Topology/VisualPersistentHomologyCore.agda` has typed finite
+  persistence signatures, although it does not construct topological
+  cubical complexes.
+- `DASHI/Topology/TernaryPantsFrontierExact.agda` and
+  `TernaryCylinderPantsGeometryExact.agda` provide ternary 3/6/9
+  frontier indexing and a **COMPOSED 1-to-3 cobordism** combinatorial
+  correspondence. That is a four-boundary surface at the geometric
+  level, not one conventional three-boundary pair of pants; the
+  existing code denies a Euclidean embedding theorem.
+
+Critical external prior-art found at **Mathlib Topology/CWComplex**:
+
+- https://leanprover-community.github.io/mathlib4_docs/Mathlib/Topology/CWComplex/Classical/Basic.html
+- https://leanprover-community.github.io/mathlib4_docs/Mathlib/Topology/CWComplex/Classical/Finite.html
+- https://leanprover-community.github.io/mathlib4_docs/Mathlib/Topology/CWComplex/Abstract/Basic.html
+
+Mathlib DOES already implement genuine classical `Topology.CWComplex` and
+relative CW structures (maps from finite-dimensional real disks, attaching
+boundaries, closure finiteness and weak topology), finite construction
+helpers `CWComplex.mkFinite_map` and related constructors, and categorical
+`TopCat.CWComplex` via colimits. Thus do **not** rebuild a universal
+CW library here. `proofs/horned_c3_lean/HornedC3/ExoticCWMathlibReuse.lean`
+now imports these sources, records that a recognized space carries
+actual `Topology.CWComplex` data, and rejects a finite-incidence
+receipt as an authority substitute. No claim the supplied Mathlib
+dependencies on the currently pinned Hatcher project compile this
+consumer until run on that exact revision.
+
+`ExoticCWExistingDonorWeldExact.agda` creates an ACTUAL typed
+instance of the existing generic three-term cochain complex by reusing the
+already-proved CP¹ degree-two cellular cochains. It uses the original
+CP¹ `H²` round trips and point-cycle generator theorem, rather
+than manufacturing a new cohomology quotient. Agda typecheck OPEN.
+
+`scripts/exotic_topology_cw_donor_reuse.py` uses exact integer boundary
+matrices and Smith normal forms. Verified locally: 11 canonical finite
+cell complexes (point, circle, sphere, torus, pinched torus, RP²,
+Moore Z/3, pants spine, handle spine, interval, filled triangle);
+`∂₁∂₂=0`; rational Betti numbers; **integer torsion in H₁** when
+the differential to C₀ vanishes. For example, point and RP² share
+rational Betti numbers (1,0,0), but only RP² has Z/2 in H₁. A
+homology coincidence therefore DOES NOT make a CW/homeomorphism or
+Whitehead theorem. Finite surface-stage Euler identities are reconciled
+with one-vertex 1D CW spines of rank `2g+b-1`, depths 0..12, WITHOUT
+promoting a topological deformation retraction proof.
+
+## Reuse between binary Cantor and 3/6/9 pants frontiers
+
+`ExoticBinaryTernaryPantsCodecExact.agda` imports the existing
+`TernaryPantsFrontierExact` and `CantorProjectiveCylinderMeasureExact`
+(and existing 369 ultrametric address carrier). It establishes a
+prefix-free **finite word code** `3 ↦ 0,` `6 ↦ 10,` `9 ↦ 11`
+with an Agda source-written decode-after-encode round-trip, explicitly
+rejecting a dangling leading `1`. The resulting binary words are the
+literal original Cantor-cylinder representation. This is not a
+depth-preserving map.
+
+The infinite prefix-code maps constitute a **mathematical Cantor-space
+homeomorphism**: concatenate each source ternary digit's finite code for
+ternary-to-binary; greedily parse binary prefixes `0,10,11` for the inverse.
+Every infinite binary stream admits a unique infinite parsing, with one
+ternary digit requiring at most two input bits; conversely the first m
+binary bits depend on at most m ternary symbols. These prefix bounds prove
+continuity of both inverse maps in the product/cylinder topologies.
+This topological argument is written, not a kernel-verified infinite-stream
+map or continuity proof.
+
+`scripts/exotic_topology_binary_ternary_pants.py` PASSED all finite
+prefix-code antichains and exact dyadic Kraft sums through depth 8
+(6561 words). The **crucial negative discriminator** is measure:
+the ordinary fair-bit Cantor cylinder measure pushes to the nonuniform
+ternary Bernoulli weights (1/2,1/4,1/4), **not**
+the uniform ternary distribution (1/3,1/3,1/3).
+For example, ternary word (3,6) maps to binary 010 of dyadic
+mass 1/8, versus uniform ternary mass 1/9. Thus the canonical
+Cantor end spaces can be homeomorphic while their selected measures
+do NOT match under this map. No metric/isometric equivalence is
+inferred. The 3-fold symmetry does not automatically commute with this
+specific non-symmetric code.
+
+## Local regression authority
+
+`python -m unittest discover -s tests -p 'test_exotic_topology_maxcut.py' -v`
+ran locally with 8/8 tests passing. These explicitly include a
+non-chain-complex (∂² ≠ 0) rejection, an RP²-versus-point
+torsion counterexample, an Ida seam, a no-false-GMT-minimality guard,
+a no-false-Warsaw-homotopy guard, and biased binary/ternary measure.
+No Agda or Lean kernel execution has been observed; draft PR remains
+draft. Pinned Mathlib API compatibility must be checked before merging.
