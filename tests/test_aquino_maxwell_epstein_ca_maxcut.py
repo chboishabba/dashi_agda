@@ -690,3 +690,26 @@ def test_transcript_as_research_acceptance_gate():
     assert "bannonTranscriptNowAdequateForResearch = refl" in case
     assert "bannonFilmSHAIsNotBlocking = refl" in case
     assert "bannonTranscriptNotBlackPaymentEvidence = refl" in case
+
+
+def test_transcript_independent_chronology_not_personal_confirmations():
+    original = PRIOR_FILM_OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    for token in (
+        "santaFeOfficialHistory = historical-source-comparator",
+        "fdic2008OriginalTimeline = historical-source-comparator",
+        "epsteinSelfBiographicalRecord = historical-source-comparator",
+        "early1990sSFIClaimIsNot1984Founding = refl",
+        "officialFinancialTimelineIsNotJailCallLog = refl",
+        "promotionalBioNotIndependentInstitution = refl",
+        "stagedOffCameraInterview = timecoded-transcript-receipt",
+        "donorEthicsLegalityExchange = timecoded-transcript-receipt",
+    ):
+        assert token in original
+    for token in (
+        "May 1984",
+        "15 September 2008",
+        "EFTA00304519",
+        "### EFTA01600824 transcript-first content audit",
+    ):
+        assert token in roadmap
