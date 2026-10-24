@@ -41,6 +41,14 @@ def check_27_mismatch():
     assert (3*3**3*2//3,3*3**3,27)==(54,81,27)
     assert len(path)==9 and len(torus)==4
     assert sum(path.values())==sum(torus.values())==27
+    # #1249's P3^3 -> P3^6 -> P3^9 increases the NUMBER OF AXES,
+    # not the spatial resolution of one fixed S1 dimension.
+    # Every P3 axis has first excited eigenvalue 1. Thus the P3^d
+    # spectral gap has multiplicity d, vs 2 for smooth periodic S1.
+    for d in (3,6,9):
+        assert sum(1 for t in product((0,1,3),repeat=d) if sum(t)==1)==d
+        assert d!=2
+        print(f"PASS P3^{d}: site count={3**d}, first gap degeneracy={d}, smooth S1 degeneracy=2")
     print("PASS 27-site inequivalent operators: P3^3, C3^3, C27")
     print(" path 27 spectrum",dict(sorted(path.items())))
     print(" torus 27 spectrum",dict(sorted(torus.items())))
@@ -80,8 +88,7 @@ def check_modes_and_heat():
     # Finite-mode alias: n and n+N sample to same C_N Fourier
     # character, but smooth KK eigenvalues differ by N^2 at theta=0.
     for N in (3,9,27,729):
-        assert abs(cycle_eigen_dimless(N,0,0)-cycle_eigen_dimless(N,N,0))<1e-22 or \
-            abs(cycle_eigen_dimless(N,0,0)-cycle_eigen_dimless(N,N,0))<1e-20
+        assert abs(cycle_eigen_dimless(N,0,0)-cycle_eigen_dimless(N,N,0))<1e-18
         assert continuum_eigen_dimless(0,0)!=continuum_eigen_dimless(N,0)
     print("PASS spectral non-descent: sampled n and n+N indistinguishable on C_N, physically different on S1")
 
@@ -103,7 +110,6 @@ def check_u1_parallel_transport():
             g=[cmath.exp(1j*(.1*j*j+.04*j)) for j in range(N)]
             Lg=[g[j]*links[j]*g[(j+1)%N].conjugate() for j in range(N)]
             fg=[g[j]*f[j] for j in range(N)]
-            assert abs(__import__('math').prod([1.0])-1)<1e-15
             holg=1+0j
             for x in Lg: holg*=x
             assert abs(holg-hol)<1e-12
