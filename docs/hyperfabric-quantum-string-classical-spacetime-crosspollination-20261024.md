@@ -170,3 +170,33 @@ Thus an actual physical gauge connection needs a connection-compatible section/r
 | **5: scientific discrimination** | chosen held-out observables / limit control / source calibration and comparison to standard effective models | independently replayable source-tied data, alternative-model comparison, physical units and errors | no universal empirical claim |
 
 **Pareto:** mathematical next task is to *formally* certify the currently exact Python `P3^3→P3^6` Laplacian commuting squares and twisted-link counterexample using existing path/hypervoxel owners. The **physical** next task is NOT a new 729-dimensional encoding: test whether the literal selected interacting quantum 369 Hamiltonian and actual Monster grade-two operators admit the required edge/charge/observable intertwiner. In parallel attack canonical YM source physical gap and NS B4/A, not artificial cross-domain analogies. String worldsheet remains a clearly separate, conditional branch.
+
+
+### Gauge-theoretic correction and positive repair (exact file checked 2026-10-24)
+
+The previously reported uniform `-1` sign on the `(-1,0)` edges of one added axis is **pure gauge** on the entire cubical product. Define a site sign `g(y)=+1` when the selected added coordinate is `-1`, and `g(y)=-1` when it is `0` or `+1`. Then the twisted operator is *conjugate* to the ordinary one:
+
+```text
+L_A = G L G,     G^2 = 1.
+I_A f(x,y) = g(y) f(x)
+R_A F(x) = (1/27) sum_y g(y) F(x,y).
+R_A I_A = id;       L_A I_A = I_A L_coarse;
+R_A L_A = L_coarse R_A.
+```
+
+The naive mean's nonzero `4/3` defect in that gauge therefore diagnoses **gauge-unsafe averaging**, NOT physical curvature. The **corrected covariant projection repairs it exactly**. This is a material improvement on the simple noncommuting diagram.
+
+A separately selected *single negative edge* around a genuine 4-edge square in `P3^6` has a `Z2` plaquette Wilson product `-1`, gauge invariant under every vertex sign redefinition. The updated executable exhaustively tests all `2^4` sign assignments on that square and shows none defines a nonzero global parallel sign section. This is an actual lattice gauge holonomy/flatness obstruction (for the declared discrete `Z2` model), **not a selected interacting SU(2) Yang-Mills construction, continuum field strength, mass gap or string anomaly**.
+
+The committed script `scripts/check_hyperfabric_27_729_19683_refinement.py` has been independently executed in the local container at its **exact Git blob** `e9c2e52af6d986b8aa584ea3f3f5f875a7e14a0b` and reports:
+
+```text
+PASS P3^3 <-> P3^6: RI=1, L I=I L, R L=L R, exact
+PASS P3^6 <-> P3^9: RI=1, L I=I L, R L=L R, exact
+PASS sign-twisted added-edge obstruction: naive R L_A != L R, defect=4/3
+PASS flat Z2 twist: covariant I_A/R_A restore both exact Laplacian squares
+PASS nontrivial Z2 plaquette holonomy -1: no global nonzero parallel sign section
+BOUNDARY free graph operators only; selected physical gauge/GR/string/YM/NS remains unpaid
+```
+
+This numerical/exhaustive exact finite fixture tests concrete fields and loop assignments; the general all-fields product graph identity is justified mathematically by `L_(X×Y)=L_X⊗I+I⊗L_Y`, `L_Y 1=0` and `sum_y L_Y F(x,y)=0` from undirected edge-pair cancellation. Kernel certification of a general formal theorem remains separately open. Highest next formal cut: lift the positive flat gauge transport and negative Wilson-loop no-section counterexample into the *existing* selected discrete gauge/path operators rather than installing another formal-claim wrapper.
