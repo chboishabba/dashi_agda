@@ -12,6 +12,8 @@ targets=(
   DASHI/Mathematics/Topology/AlexanderHornedC3SatellitePlacementExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3JordanActionExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3FiniteVOAActorExact.agda
+  DASHI/Mathematics/Topology/AlexanderHornedC3VOAModeLiftExact.agda
+  DASHI/Mathematics/Topology/AlexanderHornedC3VOAKernelBidiExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3FiniteStageExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3ComplementActionExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3OrbitSolidExact.agda
