@@ -66,3 +66,21 @@ New artifacts on #1241:
 5. Build a conserved pressure-supported rotating material Earth and actual held-out geodetic observable only after the full gauge/matter source is admissible.
 
 Spatial SO3 torque / Hodge and Hopf circle geometry provide separate legitimate donor structures, not a shortcut past these source-specific physical equations. **No accepted TOE, complete E6 symmetry breaking, empirical antigravity, or satellite anomaly is claimed.**
+
+
+## Additional crucial source distinction: selected LR 3×3 vs complete 27 and gauged E6
+
+The preceding **84** counts ONLY the gauged SU3_L×SU3_R sixteen-generator sector, with TWO selected 3×3 complex bifundamentals (36 real). The source #1106 calls them two selected components/directions from 27 carriers; it does not automatically prove that 2 entire complex 27-plet scalar multiplets have the SAME 36-real-coordinate Hessian. If one elects full dynamical 27s, there are **2×27×2=108** real scalars and 96 uneaten after the 12 LR Higgs Goldstones: 16×3+108 = 4×3+12×4+96 = **156** free bosonic polarization units. The 72 previously omitted real scalar modes have UNPAID masses/interactions and cannot inherit the selected 24-Higgs comparison spectrum.
+
+Likewise gauging physical colour SU3_C is another EIGHT massless vectors, already separately counted in #1241's QCD baseline. The source-branch count table is:
+
+| Declared physically gauged group and Higgs source | Before | After | Units |
+| --- | --- | --- | --- |
+| SU3_L×SU3_R, 2 selected complex 3×3 | 16×3+36 | 4×3+12×4+24 | **84** |
+| SU3_C×SU3_L×SU3_R, 2 selected complex 3×3 | 24×3+36 | 8×3+4×3+12×4+24 | **108** |
+| SU3_C×SU3_L×SU3_R, 2 entire complex 27s | 24×3+108 | 8×3+4×3+12×4+96 | **180** |
+| FULL E6 gauge algebra (78), illustrative real 650 Higgs E6→SU3³ plus two entire complex 27s | 78×3+(650+108) | 12×3+66×4+(758−66) | **992** |
+
+The last example is a DIFFERENT published E6-source candidate, relying on a real 650 to break E6→SU3³ (Babu/Bajc/Susic 2023/2024), not already present as a physical 5D scalar in #1106. This table is free-field DOF bookkeeping, NOT a massless-Casimir coefficient for all modes: many are gauge-Higgs massive and may decouple, and actual 5D mass/Higgs/ghost spectra depend on the specific same action. The source-to-physics model selection must happen BEFORE attempting a universal radion or Wilson determinant.
+
+When two entire 27s plus a 650 are used, the selected 36-coordinate scalar Hessian from the #1106 comparison potential cannot certify stability of the other **722** real Higgs coordinates (650+72), nor their cosmological-stress effects. This exposes a much larger physical representation-realisation obligation than the original 48-unit octet shortcut.
