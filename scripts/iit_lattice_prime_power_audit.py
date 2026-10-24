@@ -113,6 +113,18 @@ def audit():
         "binary_2D_n3_F4_equals_F_on_delta": True,
         "binary_2D_n10_F128_delta_is_nonzero": True,
         "not_historical_physical_grid": True,
+        "analytic_million_site_landmarks_not_matrix_runs": {
+            "binary_2D_side_1000": {
+                "sites": 1000**2, "rank": 1000**2-1000,
+                "nullity": 1000, "non_nilpotent": True,
+                "same_as_2014_majority_gate_example": False,
+            },
+            "binary_2D_side_1024": {
+                "sites": 1024**2, "rank": 1024**2-1024,
+                "nullity": 1024, "all_states_zero_by_step_1024": True,
+                "reason": "Frobenius for n=2^10; no million-site matrix allocated",
+            },
+        },
         "general_agda_kernel_receipt": False,
     }
     blob = json.dumps(result, sort_keys=True, separators=(",", ":")).encode()
