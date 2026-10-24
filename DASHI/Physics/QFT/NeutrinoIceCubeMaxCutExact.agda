@@ -77,6 +77,45 @@ normalBestFitBelowCandidate :
 normalBestFitBelowCandidate = refl
 
 ------------------------------------------------------------------------
+-- Inverted ordering convention: NuFIT reports delta m32^2 < 0.
+-- Thus delta m31^2 = delta m32^2 + delta m21^2 < 0.
+-- For absolute-valued splitting ratios |m31^2| = |m32^2| - m21^2.
+-- A positive 1/31 comparison is meaningful only AFTER explicitly
+-- choosing the absolute-magnitude convention.  An exact interval
+-- witness (within both marginal 3-sigma IO intervals) is below; it
+-- establishes mere componentwise compatibility, NOT a correlated fit.
+-- Source units remain 10^(-8) eV^2.
+------------------------------------------------------------------------
+
+ioSolarWitness : Nat
+ioSolarWitness = 7600
+
+ioM32AbsWitness : Nat
+ioM32AbsWitness = 243200
+
+ioM31AbsWitness : Nat
+ioM31AbsWitness = ioM32AbsWitness - ioSolarWitness
+
+ioWitnessSolarLower : (7236 ≤ᵇ ioSolarWitness) ≡ true
+ioWitnessSolarLower = refl
+
+ioWitnessSolarUpper : (ioSolarWitness ≤ᵇ 7822) ≡ true
+ioWitnessSolarUpper = refl
+
+ioWitnessAtmLower : (242100 ≤ᵇ ioM32AbsWitness) ≡ true
+ioWitnessAtmLower = refl
+
+ioWitnessAtmUpper : (ioM32AbsWitness ≤ᵇ 254700) ≡ true
+ioWitnessAtmUpper = refl
+
+ioWitnessM31AbsIs235600 : ioM31AbsWitness ≡ 235600
+ioWitnessM31AbsIs235600 = refl
+
+ioMagnitudeRatioCanMatchOneOver31 :
+  (31 * ioSolarWitness) ≡ ioM31AbsWitness
+ioMagnitudeRatioCanMatchOneOver31 = refl
+
+------------------------------------------------------------------------
 -- Exact four-phase, maximal two-flavour vacuum toy.
 --
 -- U = Hadamard and mass-phase = 1, i, -1, -i.  Appearance amplitude
