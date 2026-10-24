@@ -2347,3 +2347,85 @@ campaignRecordsDoNotPayCaseWideCovertCommand :
   sourcePaysEpsteinAquinoCommonCommand
     canonicalOriginalElectionRegulatorySplit ≡ false
 campaignRecordsDoNotPayCaseWideCovertCommand = refl
+
+
+------------------------------------------------------------------------
+-- FTC v BANNON 2020 PROCEDURAL DISCRIMINATOR
+-- Use exact original CA receipts, not a duplicate investigation ontology.
+-- Both the FTC and Bannon supplied opposing original legal pleadings.
+-- Neither petition/response/reply is a court finding of personal
+-- deceptive-data liability or a bridge to his later Epstein film.
+------------------------------------------------------------------------
+
+ftc2020BannonCourtPetitionOriginalOwner : CA.InfluenceReceipt
+ftc2020BannonCourtPetitionOriginalOwner = CA.ftc2020BannonCIDPetitionReceipt
+
+ftc2020BannonOppositionOriginalOwner : CA.InfluenceReceipt
+ftc2020BannonOppositionOriginalOwner = CA.ftc2020BannonRespondentOppositionReceipt
+
+ftc2020BannonReplyOriginalOwner : CA.InfluenceReceipt
+ftc2020BannonReplyOriginalOwner = CA.ftc2020BannonReplyReceipt
+
+record BannonFTCCIDAdversarialBoundary : Set where
+  constructor bannon-ftc-cid-adversarial-boundary
+  field
+    ftc2019DemandAnd2020PetitionIdentified : Bool
+    ftcOriginalPetitionAndReplyAreSameLitigantSourceRoot : Bool
+    bannonOriginalOpposingDefenceLocated : Bool
+    agencyReportsDocumentsAndInterrogatories : Bool
+    bannonDisputesKnowledgeOfDataMisconduct : Bool
+    agencyContestedHearingNonappearance : Bool
+    proceduralShowCauseOrderIndexed : Bool
+    underlyingInterrogatoryAnswersActuallyInspected : Bool
+    finalCivilDemandEnforcementDispositionAuthenticated : Bool
+    bannonPersonallyFoundLiableForCADataScheme : Bool
+    bannonDenialJudiciallyProvesInnocence : Bool
+    ftcPetitionJudiciallyProvesLiability : Bool
+    caInvestigationProvesEpstein2019FilmMethodReuse : Bool
+    collectiveAquinoPROMISHierarchyPaid : Bool
+open BannonFTCCIDAdversarialBoundary public
+
+canonicalBannonFTCCIDAdversarialBoundary : BannonFTCCIDAdversarialBoundary
+canonicalBannonFTCCIDAdversarialBoundary =
+  bannon-ftc-cid-adversarial-boundary
+  true true true true true true true false false false false false false false
+
+ftcBannonDirectAgencyInvestigationSourcePaid :
+  ftc2019DemandAnd2020PetitionIdentified
+    canonicalBannonFTCCIDAdversarialBoundary ≡ true
+ftcBannonDirectAgencyInvestigationSourcePaid = refl
+
+ftcReplyIsNotIndependentNewAgencyProducer :
+  ftcOriginalPetitionAndReplyAreSameLitigantSourceRoot
+    canonicalBannonFTCCIDAdversarialBoundary ≡ true
+ftcReplyIsNotIndependentNewAgencyProducer = refl
+
+bannonContraryOriginalPleadingRetained :
+  bannonOriginalOpposingDefenceLocated
+    canonicalBannonFTCCIDAdversarialBoundary ≡ true
+bannonContraryOriginalPleadingRetained = refl
+
+ftcBannonCivilCIDIsNotAdjudicatedGuilt :
+  bannonPersonallyFoundLiableForCADataScheme
+    canonicalBannonFTCCIDAdversarialBoundary ≡ false
+ftcBannonCivilCIDIsNotAdjudicatedGuilt = refl
+
+bannonResponseNotJudicialExoneration :
+  bannonDenialJudiciallyProvesInnocence
+    canonicalBannonFTCCIDAdversarialBoundary ≡ false
+bannonResponseNotJudicialExoneration = refl
+
+ftcBannonCaseOutcomeStillUnverified :
+  finalCivilDemandEnforcementDispositionAuthenticated
+    canonicalBannonFTCCIDAdversarialBoundary ≡ false
+ftcBannonCaseOutcomeStillUnverified = refl
+
+ftcBannonCIDDoesNotPayEpsteinMediaTransfer :
+  caInvestigationProvesEpstein2019FilmMethodReuse
+    canonicalBannonFTCCIDAdversarialBoundary ≡ false
+ftcBannonCIDDoesNotPayEpsteinMediaTransfer = refl
+
+ftcBannonCIDDoesNotPayWholeNetworkH3 :
+  collectiveAquinoPROMISHierarchyPaid
+    canonicalBannonFTCCIDAdversarialBoundary ≡ false
+ftcBannonCIDDoesNotPayWholeNetworkH3 = refl
