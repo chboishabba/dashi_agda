@@ -180,6 +180,9 @@ def test_candidate_tip_selectively_reopens_without_changing_world():
         "c_original_static_inclusion", "c_original_dynamic_inclusion",
         "c_original_joint_inclusion", "c_static_reproduction"}
     assert "c_external_entity" not in consumers
+    assert "c_public_mat_reproduces_original_static" not in consumers
+    assert result["source_scope_blocked_consumers_not_reopened"] == [
+        "c_public_mat_reproduces_original_static"]
     assert w == before
 
 
@@ -256,3 +259,21 @@ def test_known_absent_same_tree_artifact_cannot_be_claimed_as_acquired():
         "original_static_nifti_and_mask_in_pinned_tree")
     with pytest.raises(ValueError, match="Scoped knownAbsent"):
         engine.validate_world(w)
+
+
+def test_scoped_absence_does_not_count_as_live_search_consumer():
+    w = world()
+    claim = {c["consumer"]: c for c in engine.claim_status(w)}
+    assert claim["c_public_mat_reproduces_original_static"]["state"] == "source_scope_blocked"
+    assert claim["c_dynamic_replay_from_tree_alone"]["state"] == "source_scope_blocked"
+    assert claim["c_static_reproduction"]["state"] == "acquisition_blocked"
+    assert claim["c_public_mat_reproduces_original_static"][
+        "known_absent_in_declared_source_scope"] == [
+            "original_static_nifti_and_mask_in_pinned_tree"]
+    for action in engine.action_candidates(w):
+        assert "c_public_mat_reproduces_original_static" not in action[
+            "potential_consumer_ids"]
+        assert "c_dynamic_replay_from_tree_alone" not in action[
+            "potential_consumer_ids"]
+
+
