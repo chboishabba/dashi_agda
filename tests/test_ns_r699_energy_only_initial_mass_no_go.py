@@ -42,8 +42,6 @@ def test_unforced_shear_exact_cutoff_mixed_mass_grows_at_fixed_energy():
         mass=2*sum((S.Rational(1,4)*a2*a2*(k-1)**2 for k in range(2,N+1)))
         exact=S.Rational((N-1)*(2*N-1),48*N)
         assert mass==exact
-        assert S.limit(S.Rational((N-1)*(2*N-1),48*N)/N,
-                       N) if False else True
     n=S.symbols('n',integer=True,positive=True)
     assert S.limit(((n-1)*(2*n-1)/(48*n))/n,n,S.oo)==S.Rational(1,24)
 
