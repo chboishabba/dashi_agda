@@ -27,6 +27,33 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectR44020261007
 -- allowance plus local ED remains the analytic theorem.
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+-- 2026-10-24 NEGATIVE CONTROL / DO NOT PROMOTE FULL-FIBRE B4 PAYMENT
+--
+-- For the fixed smooth unforced shear u0=2(cos x+cos y)e_z, k=(1,1,0),
+-- two active Core mixed-helicity cells have rate 2, M=(-i/2,-i/2,0).
+-- Every OTHER incidence is zero in amplitude, but the full enumeration
+-- still contributes zero-cell counts and input-rate sums to noncore
+-- centering. Exact physical negative-control arithmetic gives
+--
+--    defect_N = sum_Noncore (|p|^2+|q|^2-2) -> +infinity,
+--
+-- while the literal Core-Core Young companion freezes at 10123708
+-- for N>=5. In particular, defect_16=17577776.
+--
+-- Hence the proposed defect <= theta*M_core + c*localED CANNOT be cutoff
+-- uniform IF localED is a genuine bounded physical quantity on this
+-- fixed smooth state. The analytic interface currently does not source
+-- localED, so this is a conditional NO-GO for the intended physical
+-- payment, NOT a kernel proof of failure of an independently specified
+-- ED predicate. Do not change the closed-status flag to true.
+--
+-- Source/receipt: scripts/ns_b4_literal_padding_adversary.py
+-- Canonical fix: derive a zero-padding-invariant bound from the literal
+-- modal R440 weighted amplitude, preserving NS source identification;
+-- zero rows must not create spectral damping work.
+------------------------------------------------------------------------
+
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
