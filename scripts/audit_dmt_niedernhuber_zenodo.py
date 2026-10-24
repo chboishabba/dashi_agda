@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "Docs/receipts/DMTNiedernhuberZenodoListing20261025.json"
-EXPECTED_MANIFEST_GIT_BLOB = "8d54f93208db8144f8989c5ebca2a031b463393b"
+EXPECTED_MANIFEST_GIT_BLOB = "0d9ecaf1e5623ec8a02e76594bba5e068114e4fb"
 PAPER = "10.1177/02698811261481062"
 VERSION = "10.5281/zenodo.18850897"
 HEX_MD5 = re.compile(r"[0-9a-f]{32}\Z")
@@ -60,6 +60,24 @@ def validate_source(source):
             files[f["name"]] = f["md5"]
     if len(files) != 50:
         raise ValueError("Incomplete primary record listing")
+    if sorted(p["file_prefix"] for p in pairs) != sorted(AUTHOR_PARTICIPANT_IDS):
+        raise ValueError("Zenodo listing differs from original authors' stated participant-ID list")
+    owner = source.get("original_analysis_code", {})
+    if (owner.get("commit") != AUTHOR_CODE_COMMIT or
+            owner.get("repository") != "marianiedernhuber/DMT_microstates"):
+        raise ValueError("Primary analysis code commit/source changed")
+    file_receipts = owner.get("source_files", [])
+    if ({x.get("path"): x.get("git_blob_sha1") for x in file_receipts}
+            != AUTHOR_FILE_SHA or len(file_receipts) != len(AUTHOR_FILE_SHA)):
+        raise ValueError("Original published code identity not fully pinned")
+    for k in ("source_code_declares_25_participants",
+              "source_code_declares_three_condition_loop", "source_code_g1_export_identified"):
+        if source["consumer_ceiling"].get(k) is not True:
+            raise ValueError("Original author code statement missing: " + k)
+    for k in ("participant_identity_and_arms_verified_from_recording_contents",
+              "original_pipeline_dependencies_verified"):
+        if source["consumer_ceiling"].get(k) is not False:
+            raise ValueError("Unexecuted author analysis misrepresented as reproduced")
     if any(source["consumer_ceiling"].get(k) is not False for k in (
             "local_bytes_verified", "clinical_condition_crosswalk_verified",
             "microstate_label_arrays_verified", "original_transition_reproduced",
@@ -119,7 +137,10 @@ def audit(source, materialized_dir=None, rights_receipt=None):
         "original_listing_file_pairs": 25, "listed_recording_files": len(files),
         "hash_matched_local_files": matched,
         "rights_and_ethics_externally_verified_by_script": False,
-        "file_prefixes_are_participants": False,
+        "original_author_code_declares_prefixes_as_participant_ids": True,
+        "participant_and_condition_mapping_independently_replayed": False,
+        "original_author_code_commit": AUTHOR_CODE_COMMIT,
+        "original_markov_export_identified": "coh.stats(idx).markov.G1",
         "three_arm_condition_crosswalk_located": False,
         "published_microstate_statistic_reproduced": False,
         "phenomenological_motif_or_agent_observation": False,
