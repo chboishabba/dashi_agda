@@ -161,7 +161,7 @@ def paired_analysis(record):
     factorial_settings = source_join.get('factorial_settings_from_source')
     try:
         design = audit_settings(factorial_settings)
-        design_identifiable = design['interaction_identifiable_with_separated_thermal_proxy']
+        design_identifiable = design['five_term_indicator_model_identifiable']
     except (KeyError, TypeError, ValueError):
         design = None
         design_identifiable = False
@@ -186,7 +186,7 @@ def paired_analysis(record):
         obligations.append('missing_or_unmatched_original_raw_and_calibration_file_hashes')
     obligations.extend(source_join['unpaid_source_joins'])
     if not design_identifiable:
-        obligations.append('unidentifiable_coil_dipole_heating_factorial')
+        obligations.append('unidentifiable_coil_dipole_energised_indicator_factorial')
     if not source_join.get('raw_stream_replayed_to_pairs'):
         obligations.append('unverified_raw_to_pair_reduction')
     # Deterministic replay still cannot independently authenticate an
