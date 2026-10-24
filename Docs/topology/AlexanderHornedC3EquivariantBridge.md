@@ -1250,3 +1250,48 @@ remaining max-cut is no longer 'find separating spheres',
 but instantiate its *supported infinite attachment*
 and the complement-piece homeomorphisms as concrete
 same-object maps. No Agda/CI work per user request.
+
+
+## 2026-10-25 completed orbifold C3 semantic bridge
+
+The genuinely EXTERNAL order-three subgroup has an
+actual topological interpretation once the wild
+exterior E is realized as R-invariant. The point
+x0=(20,20,20) is fixed by the ambient R and lies
+outside the compact C3-symmetric scaffold.
+For the global quotient orbifold `[E/C3]`,
+the Borel fibre sequence `E->E_hC3->BC3`
+has a section induced by x0. Hence
+  pi1^orb([E/C3]) ~= pi1(E) rtimes C3.
+Under the supported Hatcher triple-gluing
+identification this becomes
+  (G_A*G_A*G_A) rtimes C3.
+The source `pi1(E)` remains torsion-free;
+external finite C3 is ORBIFOLD STABILIZER data.
+This is NOT generally the ordinary fundamental
+group of the coarse quotient space `E/C3`.
+This also clarifies the discrete spin3 lift versus
+continuous 360°/720° rotation-path distinction.
+Primary expository root: Caramello,
+*Introduction to Orbifolds*, arXiv:1909.08699.
+`scripts/alexander_horned_orbifold_split_c3.py`
+locally checks the fixed-point and semidirect group
+law in the exact 2I finite quotient.
+
+Other NEW source-grounded geometric commitments:
+Lippert §2.2 supplies supported horn homeomorphisms,
+preserving an inward tame cap of B0; a real radius-3/4
+cap chart and positive-volume collar overlap were
+locally certified, as were three radius-4 separating
+spheres with ONE transverse disk each. They yield
+simply connected van Kampen overlaps
+`(S²\\closed D²)×I`, rather than the non-simply
+connected PLANE-minus-disk overlaps.
+Complete report:
+`Docs/topology/AlexanderHornedSupportedCapSeparatorVanKampen20261025.md`.
+
+The paper-level wild topology still depends on the
+classical supported Hatcher construction and standard
+tree/collar neighbourhood equivalences; local Python
+does not turn these into Agda kernel proofs. No CI
+or Agda typecheck was performed per user request.
