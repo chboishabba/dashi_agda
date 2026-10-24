@@ -428,3 +428,49 @@ the Hatcher reduced-homology donor still needs a matched ordinary/reduced
 chain comparison plus source pin reconciliation. Existing Agda
 CW-cellular and pants modules remain authoritative for their respective
 finite carriers; neither repository's proof is automatically the other's.
+
+
+### 2026-10-25 native Lean #86: actual quotient / Warsaw / end-profile expansion
+
+The separate Lean repo now has **real point-set source constructions**
+in draft PR https://github.com/chboishabba/dashi_lean4/pull/86 :
+
+- `Synthesis/ExoticTopologyPinchedTorusQuotient.lean` defines a
+  genuine topological quotient of `S¹×S¹`, collapsing one selected
+  meridian. It source-writes a continuous quotient-map proof,
+  meridian collapse and off-meridian separation. Our earlier
+  Agda/Python pinched-torus cellular Betti vector (1,1,1) is
+  still a DIFFERENT object until a cellular/singular same-object
+  comparison is supplied.
+- `Synthesis/ExoticTopologyWarsawCircle.lean` defines the
+  actual closure of the topologist's sine graph in `ℝ²`,
+  adjoins the selected polygonal closing arc and makes a
+  subspace carrier. The vertical-limit formula was checked
+  symbolically but still needs kernel proof of closure membership;
+  weak contractibility, noncontractibility and failure of CW
+  type are independent OPEN acceptance theorems.
+- `Synthesis/ExoticTopologySurfaceExhaustions.lean` reuses
+  `Integration.Address.Addr n Bool` for literal finite Cantor
+  boundaries and supplies source-written finite-stage
+  Euler/genus/graph-spine theorems for Cantor tree, Loch Ness
+  monster and Jacob's ladder. This is NOT Richards classification,
+  a global collared surface or a homeomorphism of end spaces.
+- `Synthesis/ExoticTopologySeashellParametric.lean` reuses the
+  existing Lean real `Point3`, imports Mathlib trigonometry,
+  and source-writes radial and seam identities.
+
+Thus the revised classification of the original twenty objects is:
+`CP1/S2` topologically realised in preexisting Lean main,
+`pinched torus` has a new literal quotient-topology carrier,
+`Warsaw circle` has a new literal planar closed-set construction,
+`Whitney` and `Seashell` have source-specific coordinate
+realisations, and `Simons` has exact algebraic link data.
+The other requested spaces, including the full infinite-type
+surfaces, remain finite models or stated acceptance contracts
+where no same-object geometrical proof was supplied.
+
+All newly authored Lean theorem sources remain uncompiled in
+this environment. The companion Agda branch is stacked and stale
+relative to parent #1244, and no kernel cross-prover identity
+is asserted. The original authors and external Mathlib/Hatcher
+proof owners are retained.
