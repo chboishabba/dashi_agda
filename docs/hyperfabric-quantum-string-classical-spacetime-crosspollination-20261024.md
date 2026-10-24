@@ -288,3 +288,32 @@ This is an **already-owned finite theorem connection**, not a proof of continuum
 **S5: empirical/discriminating predictions.** Source-chosen observables, dimensional normalizations, unitary+positive physical Hilbert space, anomaly absence, measured spectra/couplings or gravity benchmark, alternative-model comparisons. Reuse #1241 KK and #897 Dark Dimension **bounded tests** only where a selected string compactification actually produces their fields.
 
 **Top theorem leaf:** Not `24+2=26` or `Polyakov density is 2D-scale invariant` (both elementary). It is the *actual physical state/BRST cohomology representation* with an explicit same-object map from the existing Monster VOA/II11 and an operator-preserving comparison to the intended 369 or 4D physical consumer. If the source's physical output is only a mathematically meaningful Monster Lie algebra rather than a four-dimensional observed theory, explicitly report that narrower success.
+
+
+## 2026-10-24 27−1 operator and string cross-cut
+
+### Already-owned original source results
+- DASHI/Wikimedia/IbrahimTernary27OriginTraceless26AlbertShapeBidiExact.agda proves a TWO-SIDED bijection between the actual 27-site {-1,0,1}^3 path hypervoxel and one selected centre site plus an explicit 26-constructor non-origin site carrier. It expressly does not prove that the selected centre is the Albert identity or that an F4/E6/Jordan product is transported.
+- DASHI/Foundations/ExceptionalAlbertFreudenthalResidualExact.agda separately records the actual exceptional Lie/Jordan dimensions Albert 27=1+26, F4 52=26+26, E6 78=52+26 and Freudenthal 56=1+1+27+27. Those representation structures are not thereby the spatial cube.
+- DASHI/Wikimedia/IbrahimA027907PathCubeTernaryExceptionalThirteenSnowballExact.agda proves the path-ADJACENCY eigenband multiplicity pattern 1,3,6,7,6,3,1 and 27=1+13+13. Its sqrt(2)-weighted adjacency bands are not the combinatorial GRAPH LAPLACIAN spectrum.
+
+### Newly verified 26-dimensional same-operator chart
+Let C={-1,0,1}^3, o=(0,0,0), V=Q^C, L the ordinary undirected path-graph Laplacian. The one-dimensional L kernel is the global constant function, NOT the delta-function at the centre site. The zero-mean subspace V0={f: sum_C f=0} is exactly 26-dimensional and L invariant.
+Define q(f)(p)=f(p)-f(o) for non-origin p, and r(a)(o)= -sum(a)/27, r(a)(p)=a(p)-sum(a)/27. They are mutual inverses between V0 and Q^26, while r(q(f))=f-mean(f)*1 on all V. This is a genuine same-operator 26-coordinate identification, NOT Albert-algebra or physical 26D bosonic-string identification.
+For D the 26x26 PRINCIPAL origin-deleted matrix of the original 27x27 Laplacian, and b the 26-vector indicating the six original centre neighbours, the true reduced operator is A=qLr = D + 1*b^T. The rank-one term is REQUIRED. D alone is a different Dirichlet-puncture system. The pulled-back inner product is G=I-J/27 and A^T G = G A. The full L tensor eigenvalues are 0,1,2,3,4,5,6,7,9 with multiplicities 1,3,3,4,6,3,3,3,1. The nonzero spectrum is thus 26 modes.
+
+### Separate genuine antipodal 13+13 spectral decomposition
+Spatial inversion I(x,y,z)=(-x,-y,-z) preserves actual P3^3 adjacency, fixes only o and pairs exactly 26 nonorigin sites into 13 pairs. Since I and L commute, V0 splits as 13-dimensional inversion-even mean-zero modes plus 13-dimensional inversion-odd modes, both invariant under L. Independent basis candidates are delta_p+delta_-p-2*delta_o and delta_p-delta_-p, one per opposite pair. This is a natural 13+13 MODE decomposition, but its involution parity is NOT string worldsheet chirality, BRST ghost number, physical helicity or the earlier A027907 parity identity merely because the dimension matches.
+
+### Direct implementation and execution
+- DASHI/Unified/Hyperfabric27MinusOneAntipodalSameCarrierCutExact.agda now reuses the original spatial point and existing Ibrahim scalar+26 bijection to prove antipodal involution, unique fixed origin and exact preservation of all three types of path-grid adjacency. It also imports the earlier 26=2*13 and exceptional dimension theorem. SOURCE-WRITTEN and exact-head AGDA KERNEL UNVERIFIED.
+- scripts/check_hyperfabric_27_minus_1_operator_cut.py adds exact Fraction checks of 26x26 q/r identities, D-vs-A defect, G-adjointness on all basis pairs, all 27 wave eigenmodes and orthogonality, and 13+13 inversion preservation. An equivalent file ran locally and every printed PASS check succeeded; no Agda, Lean or CI executed.
+
+### Critical interpretation / no promotion
+Twenty-six non-origin SITES, 26 graph nonconstant MODES, a 26-dimensional traceless ALBERT representation, 26 bosonic target DIMENSIONS and conformal matter charge c=26 are independent typed consumers. The bosonic no-ghost calculation 24+2-26=0 belongs to selected Monster VOA plus II(1,1) plus bc ghosts; the conventional lightcone reduction D-2=24 concerns physical transverse oscillator polarizations after constraints, NOT deleting two spatial cube sites. The TEN-dimensional RNS/CY branch c10+5-26+11=0 is yet another distinct construction. Retain signed-zero fine orientation: remove a chosen scalar wave mode, not an arbitrary sign/zero provenance state.
+
+### Max-cut next tasks
+Phase H1 (finite): kernel-certify qLr=A, G positivity and G-adjointness and the 13+13 inversion-eigenspace decomposition using canonical 27 graph and existing theorem owner. Avoid replacing the original owner's source provenance.
+Phase H2 (selected matter): compare the ACTUAL selected 369 Coulomb/Monster/VOA Hamiltonians with A, not just shared size. A positive physical bridge needs matching eigenvalues, commutators/vertex modes, inner product, time evolution, observables and a genuine action-preserving map; negative result should record a quantified residual.
+Phase H3 (string): test the published Borcherds actual physical-state/BRST construction or a separate selected RNS model with its own worldsheet action, normal ordering, modularity and anomaly. Do not infer a 26D string from the 27-1 chart.
+Phase H4 (YM/NS/RH etc.): only consume this math if it attaches to each original source-specific operator and preserves physically required continuum cut-off estimates or analytic objects; otherwise leave unchanged.
