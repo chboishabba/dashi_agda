@@ -10,7 +10,7 @@ The FULL output-fibre R440 noncore/core covariance includes ZERO velocity
 incidences in n_noncore and the rate sum. Defect is exactly
   sum_(p in noncore) (|p|²+|k-p|²-2).
 The literal Young core/core companion mass is computed from ALL core pairs,
-including zero-zero pairs; it becomes fixed for N>=5.
+including zero-zero pairs; it becomes fixed for N>=9.
 
 Source definitions: PhysicalParabolicCriticalRegionRoutingExact,
 PhysicalCriticalTouchingDefectNoncoreCore20261007Exact,
@@ -36,9 +36,9 @@ def shell(p):
 
 def region(p,q):
     a,b,c=shell(p),shell(q),shell(K)
-    if a+3 <= b: return "noncore" if 3*a <= 2*b else "core"
-    if b+3 <= a: return "noncore" if 3*b <= 2*a else "core"
-    if c+3 <= a and c+3 <= b:
+    if a+3 < b: return "noncore" if 3*a <= 2*b else "core"
+    if b+3 < a: return "noncore" if 3*b <= 2*a else "core"
+    if c+3 < a and c+3 < b:
         return "noncore" if 5*c <= 4*max(a,b) else "core"
     return "core"
 
@@ -75,13 +75,13 @@ def certificate(N):
 
 def main():
     ap=argparse.ArgumentParser()
-    ap.add_argument("--cutoffs",nargs="+",type=int,default=[4,5,6,8,12,16,20])
+    ap.add_argument("--cutoffs",nargs="+",type=int,default=[4,8,9,16,24,36,40])
     ns=ap.parse_args().cutoffs
     results=[certificate(n) for n in ns]
     for r in results:
-        if r["cutoff"]>=5:
-            assert r["core_rows"]==882
-            assert r["literal_core_companion"]=="10123708"
+        if r["cutoff"]>=9:
+            assert r["core_rows"]==5474
+            assert r["literal_core_companion"]=="1345859672"
     print(json.dumps({
         "schema":"ns.r440.zero-padding.v1",
         "state":"u_hat(±e_x)=u_hat(±e_y)=e_z; all other modes zero",
