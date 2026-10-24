@@ -682,3 +682,43 @@ effect remains wholly unverified. The highest-impact science is
 a measured SAME-object source→field→receiver→intervention chain,
 not another duplicate 369 or quantum ontology. Historical allegations
 stay as attributed, uncorroborated testimony.
+
+
+### Cross-repository acceptance/security hardening (same branch)
+
+The optional dashiBRAIN PR #9 adapter performs Git blob SHA-1
+verification on the original runtime file bytes with the Git object
+header before loading code, expecting
+384a9b1d7082857000128635259c9b1a9d989f80. A file with a
+different hash must fail BEFORE its module is executed. SHA-1 here
+identifies the already named Git source object; it is not a claim of
+cryptographic authorship/identity for historical events or a
+production-grade malicious-code review.
+
+New targeted source-written suite
+tests/test_hardt_brain_crosspr_causal_cut.py specifies five independent
+unit regressions: exact finite causal nonidentifiability (16 worlds,
+four fibres), viewed-vs-independent-target collision/leakage,
+source-modality WrongType refusal, absence-of-original-runtime
+honest status, and mismatched Git blob fail-closed behaviour.
+
+Acceptance commands when a local repository checkout is available:
+
+    python -m unittest discover -s tests -p 'test_hardt_brain_crosspr_causal_cut.py'
+    python scripts/check_hardt_brain_crosspr_causal_cut.py
+    python scripts/check_hardt_brain_crosspr_causal_cut.py --brain-runtime /path/to/checked-out/dashiBRAIN/dashi/analysis/consumer_retention.py
+
+The third command only accepts the pinned source Git blob and
+calls its ORIGINAL audit_consumer_retention and audit_commutation,
+not an inlined reimplementation. Its exact 16-world expectation for
+the intentionally stationary sham coarse step is four
+commutation mismatches. This is a *synthetic* commutation failure,
+not real EEG/fMRI neural-dynamics evidence.
+
+Separately run the Agda module with the source project toolchain:
+
+    agda -i . DASHI/Cognition/HardtBrainInterventionNonidentifiabilityExact.agda
+
+Execution honesty: the earlier 16-world local equivalent passed;
+neither these new GitHub exact bytes nor the five-test suite nor Agda
+was executed/typechecked here. Do not claim success from file creation.
