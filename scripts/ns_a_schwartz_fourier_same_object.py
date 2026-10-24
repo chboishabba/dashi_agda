@@ -90,6 +90,21 @@ def certificate():
     # E ξ_perp² =2, E |ξ|² ξ_perp² =10 for standard 3D normal.
     assert S.simplify(dissipation-5*energy)==0
     assert all(expr.is_finite for expr in (energy,dissipation))
+    # General finite-energy A low-output estimate, independent of this
+    # selected Gaussian datum. For every u in L2(R3), u⊗u is in L1:
+    # |FT(u⊗u)(xi)|_F <= integral |u|^2 = E. The Leray projection
+    # contracts, hence |P_xi FT(div(u⊗u))| <= |xi| E as a distribution
+    # (pointwise representative for nonzero xi). Thus the zero-forcing
+    # heat-resolvent multiplier has bound E/(nu*|xi|). The square is
+    # LOCALLY integrable in three dimensions; the same bound is not
+    # globally integrable at large xi.
+    R, nu, rr=S.symbols("R nu r",positive=True)
+    radial_L2=S.integrate(
+        4*S.pi*rr**2*(energy/(nu*rr))**2,(rr,0,R))
+    radial_L1=S.integrate(
+        4*S.pi*rr**2*(energy/(nu*rr)),(rr,0,R))
+    assert S.simplify(radial_L2-4*S.pi*R*(energy/nu)**2)==0
+    assert S.simplify(radial_L1-2*S.pi*R**2*energy/nu)==0
     return {
         "schema":"ns.a.schwartz-fourier-same-object.v1",
         "convention":"F[f](xi)=integral exp(-i*x.dot(xi)) f(x) dx",
@@ -105,6 +120,10 @@ def certificate():
         "total_energy":str(energy),
         "total_H1_seminorm_squared":str(dissipation),
         "finite_energy":True,
+        "arbitrary_L2_physical_projected_source_bound":"|F(Pdiv(u⊗u))(xi)| <= |xi|*E",
+        "arbitrary_L2_zero_frequency_resolvent_bound":"E/(nu*|xi|), xi!=0",
+        "low_ball_resolvent_L2_norm_squared_bound":str(radial_L2),
+        "low_ball_resolvent_L1_norm_bound":str(radial_L1),
         "exact_nonzero_projected_frequency":"(1,0,1)",
         "source_only_not_claimed":[
             "general FourierTransformVelocity for every solution",
