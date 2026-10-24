@@ -115,13 +115,37 @@ def randomization_fixture():
             "20_independent_tests_nominal_0.05_familywise_probability":float(familywise),
             "scope":"no measured outcomes; exchangeability and independent-test assumptions explicit"}
 
+
+def target_address_information_bound():
+    """Fano lower bound on mutual information IF a decoder really identifies
+    one of M uniformly random concealed target labels with success p.
+    This is NOT Hardt's alleged 80% outcome rate or a new data observation.
+    """
+    from math import log2
+    def entropy_bit(p):
+        if p in (0.,1.):return 0.
+        return -p*log2(p)-(1-p)*log2(1-p)
+    m=100
+    p=.8
+    error=1-p
+    lower=max(0.,log2(m)-entropy_bit(error)-error*log2(m-1))
+    chance=1/m
+    chance_bound=max(0.,log2(m)-entropy_bit(1-chance)-(1-chance)*log2(m-1))
+    assert abs(chance_bound)<1e-10
+    assert abs(lower-4.59605677087144)<1e-10
+    return {"M":m,"assumed_concealed_target_identification_accuracy":p,
+            "Fano_mutual_information_lower_bound_bits":lower,
+            "chance_accuracy_bits_lower_bound":chance_bound,
+            "scope":"conditional hypothetical target-label decoding; NOT the alleged 80% causal success statistic"}
+
 def main():
     result={"status":"SYNTHETIC_EXACT_MATH_ONLY",
             "source_inverse":source_nonidentifiability(),
             "target_addressability":anonymous_target_symmetry(),
             "quantum":exact_two_qubit_no_signalling(),
             "leakage":leakage_fixture(),
-            "randomization":randomization_fixture()}
+            "randomization":randomization_fixture(),
+            "target_information":target_address_information_bound()}
     print(json.dumps(result,indent=2,sort_keys=True))
 
 if __name__=="__main__":
