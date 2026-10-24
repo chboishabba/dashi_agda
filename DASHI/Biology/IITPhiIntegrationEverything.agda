@@ -25,6 +25,7 @@ import DASHI.Biology.IITJFineS3RegularMonsterCharacterExact
 import DASHI.Biology.IITJFineS3Heisenberg90x729CodecExact
 import DASHI.Biology.IITJFineD4EquivariantHeisenbergGaugeExact
 import DASHI.Biology.IITJFineD4SymplecticMultiplicityObstructionExact
+import DASHI.Biology.IITJFineD4H3RadicalSourceH6Exact
 import DASHI.Biology.IITJFineD4S3MixedCharacterExact
 import DASHI.Biology.IITJFineHeisenbergFourPairSubgroupExact
 import DASHI.Biology.IITProjectiveF9Pointed80Exact
