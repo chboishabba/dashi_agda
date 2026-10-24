@@ -166,3 +166,93 @@ intertwiner or kernel typecheck. **Priority
 H2 geometry shrinks vs nonsmooth escape
 now outranks more cyclic representation
 identities.**
+
+
+## 2026-10-25 stronger NEW geometric max-cut: exact source Wilson norm and diameter countercontrol
+
+Canonically grounded continuation:
+`docs/hyperfabric-horn-finite-length-trace-regularity-maxcut-20261025.md`.
+**Exact no-eigensolver selected SU3 certificate** from the original
+sibling #1247 Q(zeta3) trace:
+`ReTr(W)=221179426799/216225930001`;
+`||W-I||_op²>= (6-2ReTrW)/3
+=854996726408/648677790003 >1`.
+This is source arithmetic plus the standard
+unitary Frobenius/operator inequality. Thus the
+fixed physical representative W would have
+delta_op>1 without numerical eigenvalue software.
+
+**Finite-depth no-go rather than only asymptotic**:
+the universal commutator envelope
+`E_(n+1)(eps)=2(E_n(eps))²` has
+`E_n(1/2)=1/2` exactly for EVERY finite n.
+If at any complete Hatcher depth all true
+holonomy leaves have norm-gap <=1/2,
+the selected root delta>1 is impossible.
+A concrete analytic source-geometric witness
+would be `sup_len_depth(n)=ell_n`,
+`sup_compatible_connection_norm=M`,
+and `M ell_n<=1/2` with genuinely
+matched, whisker-conjugated source generators.
+Neither `ell_n` nor M is already certified
+for the 3-copy wild exterior; Euclidean
+handle *diameters* alone do not supply
+path-length bounds.
+
+**Strong new counterexample proving need for LENGTH**:
+on smooth Euclidean R², take SU3 gauge
+`A=(i diag(1,-1,0)/2)(-y dx + x dy)`
+with nonzero bounded constant curvature
+and the radius 1/n circle traversed n² times.
+Image diameter 2/n->0, pointwise norm
+||A|| <=1/(2n)->0, but length=2pi*n,
+and holonomy diag(-1,-1,1) at every n.
+The original ordinary smooth SU3 gauge
+theory is prior art; our concrete exact
+high-winding negative control is the new
+selected regression. It is NONFLAT
+and HIGHLY REPEATED, NOT an actual simple
+Hatcher meridian nor a flat-horn countermodel.
+Do not infer physical singularity from it.
+
+**New source discrepancy explicitly quarantined:**
+Hatcher, *Algebraic Topology* Example 2B.2,
+p.172 explicitly states the direct-limit
+horn complement is nontrivial with TRIVIAL
+abelianization and “highly nonfree”.
+The 1968 N. W. Riebe institutional
+abstract describes its `G^k` groups as
+free countably infinite rank. They cannot
+refer to one isomorphic nontrivial marked
+group because a free group has nonzero
+abelianization; Riebe's full thesis PDF is
+access-restricted, so differing spaces/
+constructions/abstract wording remain
+UNRESOLVED, not an error proved.
+
+**Executed receipt**: new
+`scripts/check_horn_geometry_length_trace_maxcut.py`
+local source PASS: exact rational trace and
+operator-gap bound, 33 exact fixed-depth
+envelope checks, numeric consistency for
+seven selected depths, seven exact high-winding
+negative controls. GitHub committed file exists
+and math source is locally reproduced;
+**byte-exact Git blob execution is not claimed**.
+Lean #84 `HornWittenRegularityAndChargeCut.lean`
+appends source-written rational selected
+gap/cutoff and radius/winding source lemmas.
+Lean/Lake KERNEL UNVERIFIED.
+
+**True Pareto** is to construct/verify an
+actual source MARKED meridian loop family
+with unitary whisker/basepoint compatibility,
+controlled tube clearance and rigorous
+metric *length* bounds (or exhibit a
+nonshrinking escape), before promoting
+any horn-specific Witten/Neutrino/KK
+physical claims. D4 SU2_4⊂SU3_1 and
+Hatcher's perfect group no-abelian
+charge map remain independent mathematical
+constraints; no new CS, Monster, Clay or
+experiment theorem is paid by this regression.
