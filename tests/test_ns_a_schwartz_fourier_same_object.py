@@ -122,3 +122,19 @@ def test_ns_scaling_prevents_mistaking_direct_stokes_bound_for_A3():
     result=module.certificate()
     assert result["Navier_Stokes_scaling_E_lambda"]=="E/lambda"
     assert result["Navier_Stokes_scaling_D_lambda"]=="lambda*D"
+
+
+def test_scalar_envelope_does_not_pay_scale_critical_Hhalf():
+    # The previous finite L2 bound is not a homogeneous H^(1/2)
+    # estimate: weighting |F V|² by |xi| adds a high-r ∫dr/r tail.
+    E,D,nu,r,R=S.symbols("E D nu r R",positive=True)
+    cross=S.sqrt(D/E)
+    high_source=S.sqrt(E*D)/(nu*r*r)
+    weighted_integrand=S.simplify(
+        4*S.pi*r*r * r * high_source**2)
+    assert S.simplify(weighted_integrand-
+        4*S.pi*E*D/(nu*nu*r))==0
+    primitive=4*S.pi*E*D/nu**2*(S.log(R)-S.log(cross))
+    assert S.simplify(S.diff(primitive,R)-
+        4*S.pi*E*D/(nu*nu*R))==0
+    assert ("Hhalf_critical_primitive_diverges" in module.certificate())
