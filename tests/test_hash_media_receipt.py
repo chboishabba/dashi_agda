@@ -14,9 +14,9 @@ def test_manifest_has_no_fake_media_sha_or_verbatim_transcript():
     x = json.loads(MANIFEST.read_text(encoding="utf-8"))
     assert x["controls"]["do_not_vendor_video"]
     assert x["canonical_original_reel"]["sha256"] is None
-    assert x["canonical_original_reel"]["doj_video_object_id"] is None
+    assert x["canonical_original_reel"]["doj_video_object_id"] == "EFTA01600824"\n    assert x["canonical_original_reel"]["filename"] == "EFTA01600824.mov"\n    assert x["canonical_original_reel"]["source_url"].endswith("/DataSet%2010/EFTA01600824.mov")
     assert x["transcript"]["sha256"] is None
-    assert x["transcript"]["kind"] == "not_acquired"
+    assert x["transcript"]["kind"] == "third_party_machine_generated_timecoded_transcript"\n    assert x["transcript"]["source_video_rendition_id"] == "EFTA01600824"\n    assert x["transcript"]["reported_segment_count"] == 1753\n    assert x["transcript"]["verified_against_reel"] is False
     assert x["chapter_index"]["kind"] == "third_party_description_not_transcript"
     assert len(x["candidate_public_renditions"]) >= 2
     for item in x["candidate_public_renditions"]:
