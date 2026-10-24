@@ -43,6 +43,7 @@ from iit_jfine_heisenberg_four_pair_audit import audit as heisenberg_four_pair_a
 from iit_jfine_d4_symplectic_obstruction_audit import audit as d4_symplectic_audit
 from iit_jfine_d4_heisenberg_h6_model_weld import audit as d4_h6_weld_audit
 from iit_jfine_d4_single_line_orientation_bypass import audit as d4_line_bypass_audit
+from iit_jfine_d4_oriented_c4_monster_necessary_bridge import audit as d4_c4_steelman_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -330,6 +331,19 @@ def verify_numeric_results() -> dict:
         "axis": 2916, "diagonal": 324}
     assert not d4_line_bypass["actual_Monster_normalizer_same_object"]
 
+    d4_c4_steelman = d4_c4_steelman_audit()
+    assert d4_c4_steelman["quarter_operator_delta_rank"] == 2
+    assert d4_c4_steelman["mirror_operator_delta_rank"] == 1
+    assert d4_c4_steelman["nondegenerate_similitude_form_rank"] == 8
+    assert d4_c4_steelman["D4_centre_multiplier_mirror"] == 2
+    assert d4_c4_steelman["D4_H4_generator_product_checks"] == 354294
+    assert d4_c4_steelman["D4_group_relations_checks"] == 59049
+    assert d4_c4_steelman["zeta_phase_preserving_C4_character"] == {
+        "identity":65610, "r":18, "r2":1458, "r3":18}
+    assert d4_c4_steelman["necessary_3B_C4_character_match"]
+    assert not d4_c4_steelman["actual_Monster_3B_D4_embedding_identified"]
+    assert not d4_c4_steelman["character_match_is_sufficient_for_subgroup"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -348,6 +362,7 @@ def verify_numeric_results() -> dict:
         "jfine_d4_symplectic_obstruction": d4_symplectic,
         "jfine_d4_h6_model_weld": d4_h6_weld,
         "jfine_d4_single_line_orientation_bypass": d4_line_bypass,
+        "jfine_d4_oriented_c4_monster_necessary_bridge": d4_c4_steelman,
         "projective_f9_pointed80": projective,
         "projective_group_f9_720": pgl,
         "f81_norm_inversion": f81_norm,
