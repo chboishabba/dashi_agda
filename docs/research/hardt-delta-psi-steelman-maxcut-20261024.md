@@ -805,3 +805,81 @@ The checker accepts an optional experimental JSON manifest and refuses promotion
 ### Final finite verification correction for 2026-10-25
 
 The 2,028 source/target cases are no longer tautological repeated rank checks. The latest checker also explicitly builds a nullspace basis and, for each candidate target, verifies agreement between **rank-increment admission** and **annihilation of every nullspace direction**, with exact rational arithmetic and per-vector source-kernel validation. The strengthened equivalent local script passed all six standard-library regression tests. This remains a mathematically verified synthetic reference, not a real magnetic measurement or Agda kernel proof. The separate committed GitHub source has this nullspace cross-check, but has not been independently executed from its exact remote blob here.
+
+
+---
+
+## 2026-10-25 consolidated physical steelman and phase roadmap
+
+**Claim/evidence boundary.** Hardt/BioCybernaut owns its uncorroborated first-party allegation. The external original researchers own biological, OPM, quantum spin and human-stimulation experiments. This section does not turn a cited experiment into DASHI-authored data, invent the identity of an alleged historical operative, or promote a mathematical toy to actual remote influence.
+
+### Key latest original scientific donors and their ceilings
+
+| Original authors and sources | Actual SOTA evidence | No permitted inference |
+|---|---|---|
+| Spedden, Schmidt, O'Neill et al., *Coherent oscillations across the human brain, spinal cord, and muscle network*, *Current Biology*, 21 September 2026, DOI https://doi.org/10.1016/j.cub.2026.07.070 | Nine subjects with simultaneous OPM brain/spinal and EMG, anatomically and physiologically coherent **10–35Hz** dynamics during hand contraction | Does NOT establish delta 0.5–4Hz or remote brain-to-brain interaction |
+| Original Spedden et al. June 2026 data v2: https://zenodo.org/records/20824565 and https://zenodo.org/records/20824827 | **Seven plus two subject archives**, 64 triaxial OPM sensors sampling 1500Hz, APB EMG at 1000Hz, TTL synchronization; **v2 changes the original spinal forward model from BEM to Biot-Savart**, with three orthogonal current-dipole axes and a 1.4MB leadfields ZIP. Original official ZIP MD5 **0b6ceaa0db22ce9cb94ad46ee05deb5a**; only OP00212 is fully individually registered | v1 BEM is NOT the current leadfield; no publisher checksum is a locally verified bytes receipt. This is spinal field geometry, not a human distant mental-target field |
+| Fresnel, Penault, Moulin, Blaquart, Carvallo and Bouisset, *Scientific Reports* 16:14368 (2026), DOI https://doi.org/10.1038/s41598-026-44440-5 | 62-person replicated magnetic-field-induced perceptual responses, 20/50/60Hz, with 20Hz **global** 50% magnetophosphene criterion near **31.5mT RMS**; evidence mainly retinal | Not a delta-wave human emission, same neural tissue endpoint, or quantitative threshold for an unmodeled weak-field biochemical receptor |
+| Meng, Nie, Berger, von Grafenstein, Weber, Essen, Rizzato, Einholz, Schleicher and Bucher, *Nature Biotechnology*, 29 May 2026, DOI https://doi.org/10.1038/s41587-026-03158-5 | Genuine cryptochrome/iLOV flavoprotein radical-pair optical readout and **radiofrequency-driven** spin chemistry with magnetic gradients; a source-grounded quantum-biological RECEPTOR possibility | Not human in-vivo remote reception or 0.5–4Hz delta response. Sample resonance examples involve ~1470MHz and ~52.5mT, a different regime |
+| Lam and Malkemper, *Magnetosensation: the unsolved mystery*, *Physiological Reviews* 106:2383–2439 (2026), DOI https://doi.org/10.1152/physrev.00032.2025; Krylov *Biological Reviews* 101:893–910 (2026), DOI https://doi.org/10.1111/brv.70108 | Animal and molecular evidence across magnetite, radical-pair and electroreception; review explicitly notes mixed/unreproduced human claims and limitations of explaining ALL weak-field effects by one mechanism | No generic established human delta transceiver, no photographic targeting |
+| Christiano and Michelmann *Imaging Neuroscience* (2026), DOI https://doi.org/10.1162/IMAG.a.1218; Yu/Zhang et al., DOI https://doi.org/10.1016/j.bspc.2026.110149 | Actual delta OPM reliability, and head-movement artefacts extending to ~3Hz; shared movie drive remains a plausible common cause | No inference from same delta frequency, source-reliability statistic or high-pass-filtered N400 to nonlocal physiology |
+| Omar/Benke et al. diamond cardiac MCG, *Science Advances* (2026), DOI https://doi.org/10.1126/sciadv.aeg5281; Wilson/Kimball GNOME solar axion search *PRD* (2026), DOI https://doi.org/10.1103/dd54-6vkw | Actual instruments can sense tiny cardiac B; GNOME 12-station search of a SPECIFIC solar axion coupling found no significant signal over 0.05–20Hz | A quantum sensor being sensitive is not a brain emitter or receiver; a solar-axion null is NOT a test of all neural-only scalar/spin hypotheses |
+
+### Physical intuition and the genuinely steelmanned alternatives
+
+**Observation versus intervention:** A magnetometer reads a field; it does not imply that field changes a nervous system. A field-driven perception requires a receiver-specific dose/frequency/geometry/coupling, and source-to-target information requires a physically distinguishable address. A photograph/handwriting association is not itself a physical channel or target coordinate.
+
+**Magnitude example under EXPLICIT, deliberately favourable magnetic assumptions only:**
+Assume (not measure) 100fT PEAK at 10cm for one brain, 100 perfectly phase-aligned geometrically co-oriented sources, 10m target, 2Hz. In a quasistatic identical localized dipole model:
+
+    B_target_peak <= (100fT) * (0.1/10)^3 * 100
+                  = 0.01fT = 1e-17T.
+
+Under a DIFFERENT ideal uniform time-varying axial B across a circular receiver of radius 0.1m, Faraday induction has
+E_peak = pi * f * R * B_peak = ~6.283e-18 V/m. A separate ideal uniform-field calculation from Fresnel et al.'s **20Hz** global 31.5mT_RMS published perceptual comparator gives an E_RMS ratio of ~4.45e16. **This is not a same-frequency, same-geometry biological threshold comparison.** It establishes physical-scale intuition only; it does NOT rule out a different source, a tuned weak-field receptor, or a genuinely novel non-Maxwell mediator. This conditional arithmetic was exercised locally with five source-independent tests (5/5), not observed as human biology. New branch source: scripts/hardt_physical_coupling_reality_cut.py; tests/test_hardt_physical_coupling_reality_cut.py.
+
+**Mechanism ladder:**
+
+M0: shared input, leakage, selection and non-independent trials; common-sensory and motion controls first.
+
+M1: ordinary Maxwell source fields plus classical stimulation: source J, geometry B, target induced E, receiver transfer and independently observed changes are ALL separate gates.
+
+M2: weak-field spin chemistry / animal magnetoreception: real source-credited biochemistry makes this a physically legitimate stronger STEELMAN than simply citing clinical TMS thresholds. But no actual human receptor/transduction/target selectivity or measured Hardt receiver exists.
+
+M3: engineered real brain-to-brain interface: EEG->network->TMS is an established positive channel (Jiang et al. 2019 DOI 10.1038/s41598-019-41895-7); 81.25% specific task accuracy has no identity to Hardt's purported 80%.
+
+M4: hypothetical NEW LOCAL spin/scalar field: explicit neural source and target operators, propagation, energy and range, external constraints, source-to-target address information, negative controls. GNOME null excludes only its tested hypothesis.
+
+M5: genuinely operational nonlocal response: standard local CPTP quantum operations cannot send controllable information by entanglement alone. A new theory needs consistent probability, signalling and experimentally replicated harmless intervention.
+
+Nonlinear receiver amplification cannot create sender-specific information out of a physically identical input under a stated Markov model. Perfect 100-person phase coherence would multiply ideal field AMPLITUDE by N in the stated geometry (not imply an amplification of causal target information). An alleged 80% outcome with no independent denominator is not a causal efficacy statistic.
+
+### Original-source accession: Biot-Savart v2 is the new P0
+
+The 2026 author record explicitly supersedes its older v1 BEM model. It lists a small 1.4MB ZIP named Leadfields meshes.zip with the MAT objects
+geometries_experimental_withbrain.mat,
+leadfield_experimental_bslaw_experimental.mat,
+and T.mat. The publisher-reported MD5 is
+0b6ceaa0db22ce9cb94ad46ee05deb5a.
+
+Actual raw ZIP acquisition was attempted but blocked by DNS/network access. **No actual byte-level MD5, local SHA-256, MAT-array inspection, participant signal or source reanalysis is claimed.** The original publisher's metadata is recorded as SOURCE_PAGE_ONLY_NO_BYTES in
+docs/receipts/hardt_spedden_biot_savart_v2_manifest_20261025.json.
+A new optional --v2-leadfields-zip gate in scripts/hardt_physical_coupling_reality_cut.py checks publisher MD5 plus expected original ZIP members and CRC before declaring this ORIGINAL forward-model package admitted. A valid package is STILL not recorded human signals or a proof about physical distant targeting.
+
+The existing in-repo Biot-Savart owner should compare its actual geometry and unit conventions to this source only AFTER successful source-array acquisition. In particular, 64 triaxial head/spinal OPM, 1500Hz vs 1000Hz EMG timestamps and TTL, individual OP00212 geometry vs shared reference anatomy, and spinal three-axis current-dipole orientation are not optional details.
+
+### Final phase/deliverable/go-no-go plan (owner-first)
+
+| Phase | Responsible lane and deliverable | Explicit acceptance | Status 25 October 2026 |
+|---|---|---|---|
+| H0 historicity | #1242 original Hardt publication/witness root | actual alleged witness, 80%-denominator, event-level independent records | Original reel confirmed, ALLEGED events uncorroborated |
+| P0 source custody | #1252 + existing Biot-Savart: accession v2 Spedden leadfields with publisher MD5/local SHA; inspect coordinate units and matrix shapes | Source file physically present, version correct, independent geometry/digest receipt, license evaluated | Metadata pinned, code validator committed; source bytes BLOCKED |
+| P1 real human connected physiology | original Spedden brain/spinal/EMG physically connected study; reuse #1238 and dashiBRAIN method owners only | sample/montage/reference/TTL identity, 10–35Hz held-out cross-spectral transfer, correct participant and anatomical forward operator | Original researchers report result; independent replay OPEN |
+| P2 actual 0.5–4Hz neural-field source | Christiano/Michelmann OPM and Yu/Zhang nuisance/pose | real low-frequency sensor noise/geometry, motion/common stimulus/sham/time-shifted holdout, residual uncertainty | synthetic rank/motion cut done, data replay OPEN |
+| P3 physically scoped magnetic response | M1 induction vs M2 radical-pair/photobiology vs an explicit M4 local mediator | SAME source/frequency/receiver endpoint and calibrated noninjurious response, independent thermal/RF/optical nuisance | distinct real donor mechanisms, no Hardt receiver measurement |
+| P4 independent remote information/causality | controlled benign, consented or hardware-only hidden-target experiment | preregistrations, sealed target allocations, no normal communication/leakage, correct independent trial count, independent replication | NOT READY |
+| P5 formal/publication | exact-head Agda, Python/metadata checks, original-data/rights disclosure and nulls | certified source-local proof and same-object experimental receipts, reproducible negative and positive results | local 5/5 synthetic new checks; exact committed bytes, kernel and empirical open |
+
+**Highest-information next cut:** successful exact source accession of the 1.4MB June v2 spinal Biot-Savart ZIP and physical array/units comparison to the existing in-repo source operator. This is much higher value than downloading all participants or another unsupported field ontology. Once paid, undertake separate correct-frequency and independent-control tests in *human* OPM/EMG/EEG data.
+
+**Implications if ordinary physics succeeds:** better source-calibrated human biomagnetometry, motion artefact suppression, spinal/brain connectivity analysis and receptor-specific quantum biosensing. **Implications if a new local mediator survived replication:** constrained new source/receiver interaction rather than retroactively proven assassinations. **Implications of an operational nonlocal effect:** a profound need to amend standard causal/quantum dynamics, supported only by independent prospective evidence. No such empirical effect is established by this round.
