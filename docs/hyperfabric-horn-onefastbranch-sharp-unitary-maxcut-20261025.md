@@ -69,3 +69,26 @@ and [A_n,B]=A_n². Consequently
 The ratio tends to 2 as n→∞. Exact rational tests n=1,2,5,10,100,1000 PASS in the latest GitHub #1249 source script; independent explicit 3×3 SU3 numerical matrices corroborate the formula. Lean #84 source now states the rational optimality ratio and exact positive deficit 4/(n²+1); Lean kernel remains unverified.
 
 This validates why the general selected one-branch geometric rate cutoff is precisely q<1/2 *for this universal per-level bound*. Geometry or representation-specific restrictions could still improve the factor, but cannot be assumed. It is an acceptance criterion, not proof the actual linked Hatcher blocks contract at q<1/2.
+
+
+## New nonflat physical-interface cut: exact curvature/homotopy defect propagation
+
+For a CURVED unitary gauge connection, the fundamental-group equality m_w=[m_w0,m_w1] does NOT establish equal holonomy matrices for independently selected geometric representatives. On an actual linked, based Hatcher Z-block let
+
+    eta_w = ||Hol(gamma_w) - [Hol(gamma_w0),Hol(gamma_w1)]||op.
+
+The eta_w must be independently produced from a genuine geometric homotopy plus transported curvature/non-Abelian-Stokes estimate, not set to zero because of the group relation. The optimal unitary commutator bound then implies for ANY chosen descendant branch of depth n
+
+    d(Uroot) <= 2^n d(Uleaf) + sum_{k=0}^{n-1} 2^k eta_(ancestor at depth k).
+
+If d(Uleaf)<=M Lleaf, the exact rejection condition for the previously certified selected d(W)>1 is
+
+    2^n M Lleaf + sum_{k=0}^{n-1} 2^k eta_k <= 1.
+
+This is a concrete acceptance test for either (i) a FLAT connection with eta=0, or (ii) a curved connection with REAL source-controlled homotopy defects. It prevents the prior physically invalid promotion of pi1 identities into arbitrary Wilson-loop equalities.
+
+New committed exact Fraction script: scripts/check_horn_curved_branch_stokes_defect_cut.py checks the recurrence equals the explicitly weighted sum for 21 arbitrary heterogeneous depth fixtures; rejects a HYPOTHETICAL n=12 source with q=1/3, M=100, L0=1, eta_k=(1/100)(1/3)^k, whose exact bound is 8508407/10628820 ≈0.80050 <1. It also deliberately FAILS CLOSED for eta_root=2 and for the critical q=1/2. No selected geometric homotopy area, curvature, flatness, connection stress or physical source bound was constructed.
+
+Lean #84 new Integration/DASHITOE/HornCurvedBranchDefectCut.lean source-writes an arbitrary branch error-envelope induction, proves monotonicity, and derives the finite source conditional curved-rejection theorem. The matrix norm/Stokes-to-eta analytical bridge is EXTERNAL/UNPAID and Lean/Lake kernel/typecheck NOT RUN.
+
+The logical next producer is now a geometry+connection DOUBLE certificate: genuinely linked/marked Hatcher loops of quantitative length together with explicit based homotopy surfaces and their area/transported-curvature error, or a genuine failure of these in the selected three-copy embedding. Simply matching lengths or a symbolic commutator is not enough for nonflat physics.
