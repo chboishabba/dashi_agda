@@ -110,7 +110,7 @@ pragueJPRS1974 = Source.mkNoDOISource
   "1973 conference; 1974 translation"
   "https://ntrl.ntis.gov/NTRL/dashboard/searchResults/titleDetail/JPRSL50221.xhtml"
   Source.archivalSource
-  "specific original participant paper acquisition target; contents include biological electrodynamics, image currents and subjective states; listing establishes publication/report existence, not experimental truth"
+  "1974 JPRS Part I catalogue, plus combined Part I/II contents in publicly indexed Part II, identifies Robert Pavlita and Jana Pavlitova-Zapadlova original paper Inductive Effect of the Human Organism on Matter, Part I p.64. This PAYS author/paper/volume location, NOT body, experiment methods or claimed effect."
   Source.publicAttribution
 
 soucek2020 : Source.AttributedSource
