@@ -24,11 +24,12 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLi
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; trans; subst; sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -38,6 +39,9 @@ import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30E
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceLiveExact as LiveOwner
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceCriticalRegionLiveExact as RegionLive
 import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianCriticalRegionPairBlocksExact as Region
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Pair
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -105,6 +109,72 @@ module LiveRegionPayment
       ∷ deepHighHighCoreSigned
       ∷ coreCoreSigned
       ∷ [])
+
+  ------------------------------------------------------------------------
+  -- EXACT PHYSICAL B / original selected critical-touching R236 consumer.
+  --
+  -- This is the requested *correctly typed* same-carrier bridge:
+  --
+  --   nu * criticalTouching
+  --      = (sum r_tau) W(M,M)
+  --        - n [ W(M,commutator) - W(M,tangent) ]
+  --        - nu * deepOnly.
+  --
+  -- The (sum r_tau) self-work is the finite-fibre centering companion.
+  -- The deepOnly term is the literal R236 deep-block complement.
+  -- This is a quartic covariance identity, not a cubic enstrophy identity
+  -- or a cutoff-uniform upper estimate.
+  ------------------------------------------------------------------------
+
+  physicalR685RateKernel : ℚ
+  physicalR685RateKernel =
+    Work.coherentWork (Live.mixed output)
+      (Work.fixedOutputCommutator
+        S Live.velocity (Audit.projectedNonlinearity Live.system)
+        Live.cutoff output)
+    - Work.coherentWork (Live.mixed output)
+      (Work.fixedOutputDampedTangent
+        Live.rho S Live.velocity
+        (Audit.projectedNonlinearity Live.system)
+        Live.cutoff output)
+
+  physicalRateCenteringCompanion : ℚ
+  physicalRateCenteringCompanion =
+    Pair.rateSum Live.rate (Live.fibre output)
+      * Work.coherentWork (Live.mixed output) (Live.mixed output)
+
+  originalCriticalTouchingIsCorrectedR685Rate :
+    Field30.viscosity physicalSystem * criticalTouchingSigned
+    ≡
+      (physicalRateCenteringCompanion
+      - Pair.natAsRational (length (Live.fibre output))
+          * physicalR685RateKernel)
+      - Field30.viscosity physicalSystem * deepOnlySigned
+  originalCriticalTouchingIsCorrectedR685Rate =
+    let
+      nu = Field30.viscosity physicalSystem
+      d = deepOnlySigned
+      c = criticalTouchingSigned
+      centered = physicalRateCenteringCompanion
+      n = Pair.natAsRational (length (Live.fibre output))
+      K = physicalR685RateKernel
+
+      totalIsGrouped :
+        Live.coherentCovarianceNumerator output
+        ≡ nu * (d + c)
+      totalIsGrouped =
+        trans Exact.liveCovarianceIsSixSignedPhysicalRegionBlocks
+          (cong (nu *_) totalSignedIsDeepPlusCritical)
+
+      totalIsRate :
+        nu * (d + c) ≡ centered - n * K
+      totalIsRate =
+        trans (sym totalIsGrouped)
+          (Live.covarianceIsCommutatorMinusTangent output)
+    in
+      trans
+        (solve (nu ∷ d ∷ c ∷ []))
+        (cong (λ total → total - nu * d) totalIsRate)
 
   record PhysicalCriticalRegionPayment : Set where
     constructor physical-critical-region-payment
