@@ -114,6 +114,13 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         req_true(p, key)
     req_false(p, "diagonal_kernel_orientation_paid")
     req_false(p, "individual_zeta_label_orientation_paid")
+    req_true(p, "source_selected_degree_78_faithful_to_6Suz")
+    req_false(p, "source_selected_faithful78_can_be_sym2_faithful12")
+    central2_pos = req_int(p, "suzuki_central_involution_class_position")
+    source_trace = req_int(p, "source_selected_S90_central_C2_trace", positive=False)
+    sym2_trace = req_int(p, "sym2_candidate_S90_central_C2_trace", positive=False)
+    if source_trace != -90 or sym2_trace != 66:
+        raise ValueError("faithful selected 78 and Sym²(12) must have distinct C2 traces")
 
     return {
         "base_pos": base_pos,
@@ -132,6 +139,9 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         "mn78": mn78,
         "mult12": mult12,
         "mult78": mult78,
+        "central2_pos": central2_pos,
+        "source_trace": source_trace,
+        "sym2_trace": sym2_trace,
     }
 
 
@@ -181,6 +191,23 @@ sixSuzDegree12AtlasLabels : List String
 sixSuzDegree12AtlasLabels = {agda_pair_string(v['labels12'])}
 sixSuzDegree78AtlasLabels : List String
 sixSuzDegree78AtlasLabels = {agda_pair_string(v['labels78'])}
+
+-- This is a *source-selected faithful* 78 family, unlike Gabriele Nebe's
+-- irreducible Sym²(12) which descends to 3.Suz (central C2 acts +1).
+sixSuzCentralInvolutionClassPosition : Nat
+sixSuzCentralInvolutionClassPosition = {v['central2_pos']}
+selectedFaithful78CentralInvolutionNegative : Bool
+selectedFaithful78CentralInvolutionNegative = true
+selectedFaithful90CentralC2NegativeMagnitude : Nat
+selectedFaithful90CentralC2NegativeMagnitude = {-v['source_trace']}
+candidateSymSquare90CentralC2PositiveMagnitude : Nat
+candidateSymSquare90CentralC2PositiveMagnitude = {v['sym2_trace']}
+selectedFaithful78IsNotSymSquare12 : Bool
+selectedFaithful78IsNotSymSquare12 = true
+selectedC2CharacterCannotEqualSymSquareC2 : 12 + 78 ≡ 90
+selectedC2CharacterCannotEqualSymSquareC2 = refl
+symSquareCandidateC2TraceMagnitude : 78 ≡ 12 + 66
+symSquareCandidateC2TraceMagnitude = refl
 
 outer12PairPosition : Nat
 outer12PairPosition = {v['outer12']}
