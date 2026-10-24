@@ -26,7 +26,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _-_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -240,6 +240,93 @@ r685PhysicalNoCardinalityRateNormalForm physicalSystem S output =
     (Audit.projectedNonlinearity (Field30.finiteSystem physicalSystem))
     (Audit.cutoff (Field30.finiteSystem physicalSystem))
     output
+
+------------------------------------------------------------------------
+-- Original R685 rate kernel itself in the padding-invariant output
+-- coordinates. This composes the pre-existing SAME-PHYSICAL-FIBRE
+-- weighted-rate/commutator theorem with the OutputRate normal form.
+-- No division by fibre length, no mean, no supplementary hypothesis.
+------------------------------------------------------------------------
+
+r685PhysicalRateKernelIsOutputHeatPlusDifference :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (S : Helical.HelicalModeScalars F) →
+  (output : Z3.FourierMode) →
+  let
+    system = Field30.finiteSystem physicalSystem
+    E = Field30.physicalEmbedding physicalSystem
+    I = Field30.physicalInverseSquare physicalSystem
+    nu = Field30.viscosity physicalSystem
+    cutoff = Audit.cutoff system
+    velocity = Audit.velocityAt system
+    items = Output.physicalOutputFiber cutoff output
+    value = D1a.mixedProductCell S velocity
+    mixed = Work.fixedOutputMixedProduct S velocity cutoff output
+    centered =
+      Vector.weightedVectorSum
+        (Vector.centeredFrequencyMultiplier E) value items
+    weighted =
+      Pair.weightedWorkSum
+        (PhysicalRate.physicalCellRate physicalSystem)
+        (Pair.cellWork mixed value) items
+  in
+  weighted
+    ≡ OutputRate.outputHeatRate nu I output
+        * Work.coherentWork mixed mixed
+      + OutputRate.halfViscosity nu
+        * Work.coherentWork mixed centered
+r685PhysicalRateKernelIsOutputHeatPlusDifference
+    physicalSystem S output =
+  let
+    system = Field30.finiteSystem physicalSystem
+    E = Field30.physicalEmbedding physicalSystem
+    I = Field30.physicalInverseSquare physicalSystem
+    nu = Field30.viscosity physicalSystem
+    cutoff = Audit.cutoff system
+    velocity = Audit.velocityAt system
+    forcing = Audit.projectedNonlinearity system
+    rho = R94.physicalDecayRate physicalSystem
+    items = Output.physicalOutputFiber cutoff output
+    value = D1a.mixedProductCell S velocity
+    mixed = Work.fixedOutputMixedProduct S velocity cutoff output
+    centered =
+      Vector.weightedVectorSum
+        (Vector.centeredFrequencyMultiplier E) value items
+    tangent =
+      Work.coherentWork mixed
+        (Work.fixedOutputDampedTangent
+          rho S velocity forcing cutoff output)
+    common =
+      OutputRate.outputHeatRate nu I output
+        * Work.coherentWork mixed mixed
+    difference =
+      OutputRate.halfViscosity nu
+        * Work.coherentWork mixed centered
+
+    weightedIsCommutatorMinusTangent :
+      Pair.weightedWorkSum
+        (PhysicalRate.physicalCellRate physicalSystem)
+        (Pair.cellWork mixed value) items
+      ≡
+      Work.coherentWork mixed
+        (Work.fixedOutputCommutator S velocity forcing cutoff output)
+        - tangent
+    weightedIsCommutatorMinusTangent =
+      fixedOutputPhysicalRateKernelIsCommutatorMinusTangent
+        physicalSystem S output
+
+    commutatorIsTangentPlusOutputHeat :
+      Work.coherentWork mixed
+        (Work.fixedOutputCommutator S velocity forcing cutoff output)
+      ≡ tangent + common + difference
+    commutatorIsTangentPlusOutputHeat =
+      r685PhysicalNoCardinalityRateNormalForm
+        physicalSystem S output
+  in
+    trans weightedIsCommutatorMinusTangent
+      (trans
+        (cong (_- tangent) commutatorIsTangentPlusOutputHeat)
+        (solve (tangent ∷ common ∷ difference ∷ [])))
 
 ------------------------------------------------------------------------
 -- Status.
