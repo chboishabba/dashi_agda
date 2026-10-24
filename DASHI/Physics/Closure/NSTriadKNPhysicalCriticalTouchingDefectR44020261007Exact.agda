@@ -73,6 +73,19 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectR44020261007
 -- zero rows must not create spectral damping work.
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+-- 2026-10-24 NO REINVENTED B4 NORMAL FORM
+-- The padding-invariant real input-rate/output-heat identity is ALREADY
+-- proved in NSTriadKNFixedOutputPhysicalOutputRateNormalFormExact and
+-- NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact.
+-- R684/R685 identify the same rate kernel with the input Laplacian
+-- and commutator minus tangent; R690 sums before time integration.
+-- The quantitative cross-gradient/spacetime estimate is UNPAID, and
+-- this existing rate kernel is not automatically equivalent to the
+-- ORIGINAL selected R236 critical B4 work, whose full-fibre centered
+-- strict-half payment is disproved by the fixed smooth shear.
+-- A replacement must prove same-source equality to B4 first.
+------------------------------------------------------------------------
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
