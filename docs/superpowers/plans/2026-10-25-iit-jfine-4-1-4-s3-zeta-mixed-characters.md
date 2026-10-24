@@ -84,3 +84,57 @@ Therefore the representation is not generally semisimple in characteristic3; the
 **Outstanding formal:** exact-head Agda compiler receipt; optionally kernel-reify the 48 fixed-point counts and character orthogonality using a source-specified complex/cyclotomic number ring if another programme actually consumes a normalizer-module comparison. The numerical tables alone are not a kernel-verified literal decomposition.
 
 **High-value next physical test:** only if a real neural/AI/optical source supplies both a registered 3×3 map and controlled transformations, test D4 and value-S3 separate intervention equivariance, retained consumers and uncertainty. No observed consciousness, IIT Phi, exceptional Lie group, hidden physical axis, \(\mathbb F_{81}\) multiplication on both blocks, quantum coherence, or Monster representation is inferred from equal counts/spectral vocabulary.
+
+
+## Next higher-value result: a chosen four-pair extraspecial Heisenberg group
+
+**Mathematically strong, but action-specific.** The source-typed \`FourOneFour\` chart can be endowed with an actual group law, not only a finite-set factorisation. Let \(A=B=\mathbb F_3^4\), \(Z=\mathbb F_3\), and define
+
+\[
+H_4=A\times Z\times B,\qquad
+(a,c,b)\cdot(a',c',b')
+=(a+a',c+c'+b\cdot a',b+b').
+\]
+
+The centre is exactly \(Z\), and the commutator \((a,b),(a',b')\mapsto b\cdot a'-b'\cdot a\) is a **nondegenerate alternating form** on \(A\oplus B\). This gives the standard exponent-three extraspecial group of order \(3^{1+8}=\mathbf{19683}\). Its complex irreducible degree multiset is \(\mathbf{6561}\) linear characters plus **two** nonlinear irreducibles of degree \(3^4=\mathbf{81}\), with nontrivial central characters \(\zeta,\zeta^2\); \(\sum_\chi\chi(1)^2=6561+2\cdot81^2=19683\).
+
+**Actual source-reuse:** the earlier \`DASHI/Moonshine/Monster3BFiniteHeisenbergCentralExtensionExact\` has an **explicit standard SIX-pair model** \(H_6\) of order \(3^{1+12}\) with dot-product cocycle, plus separate source proofs for group laws, nondegeneracy and Stone–von Neumann modelling. The new \`DASHI/Biology/IITJFineHeisenbergFourPairSubgroupExact.agda\` converts the *actual original* centre-gauged nine-trit source into the **first four translation + first four modulation coordinates** of that model with the trailing two pairs set to zero. It has a source-level inverse projection back to \`FourOneFour\`, which composes with the prior actual JFine sheet codec. This is a **coordinate-level subgroup candidate** of the *model*, not the literal Monster group. The first-four Weyl generators preserve the two passive coordinates of \(X_6=\mathbb F_3^6\); hence its 729-dimensional Schrödinger basis splits into **nine** invariant blocks of 81 basis vectors upon restricting to \(H_4\). The classical Stone–von Neumann uniqueness theorem identifies each nontrivial-central-character block as the unique 81-dimensional corresponding model irrep, assuming the specified complex/cyclotomic representation.
+
+A substantial arithmetic compatibility now follows:
+
+\[
+\begin{aligned}
+65610&=10\cdot3^8=10\cdot81^2
+     =810\cdot81\\
+     &=90\cdot729=90\cdot9\cdot81.
+\end{aligned}
+\]
+
+As an **H4 MODEL**, the \(\zeta\)-sector of ten copies of the left regular \(H_4\)-module consists of 810 copies of its degree-81 nontrivial irrep. The \(\zeta\)-sector of 90 copies of the existing degree-729 H6 Schrödinger MODEL, restricted to the first-four-pair subgroup, consists of the same number of H4 irreps. Therefore an **abstract noncanonical H4 module intertwiner exists in the model category over characteristic zero** by the finite Stone–von Neumann theorem. There is NOT yet an explicitly source-coordinate-checked map between these models, nor an external-world identification of the literal Monster representation \(W\) or its full \(3B\)-normalizer action.
+
+**Crucial scope:** source \`D_4\) mirror and global balanced-value **S3 reflection do NOT act by automorphisms** of this chosen H4 cocycle. The original global C3 value cycle acts by **left multiplication by the central C3 generator**, which is a representation action but *not a group automorphism* (it moves the identity). The original \(\mathbb F_3^9\) additive-group law is not the noncommutative H4 group law. All this is checked with explicit counterexamples, avoiding the false inference that every previously constructed D4/S3 action automatically extends to the extraspecial group.
+
+**Independent local finite receipts:** \`scripts/iit_jfine_heisenberg_four_pair_audit.py\` (implemented and wired into IIT numeric verifier) checks 19683 group states, 6560 nonzero quotient vectors, 729 coordinate cocycle configurations, source H6 zero-tail embedding, and sign/mirror non-homomorphism witnesses. This verifies a **chosen finite model**, not a kernel-checked original Monster action.
+
+### Same previous 79/80 F81 source, now a literal trace-Heisenberg pairing
+
+The two four-trit blocks may be assigned the **same previous chosen field** \(K=\mathbb F_{81}=\mathbb F_3[X]/(X^4+X+2)\). Its trace \(K\to\mathbb F_3\), \(\mathrm{Tr}(x)=x+x^3+x^9+x^{27}\), has Gram matrix on basis \(1,X,X^2,X^3\)
+
+\[
+G=\begin{pmatrix}
+1&0&0&0\\
+0&0&0&1\\
+0&0&1&0\\
+0&1&0&0
+\end{pmatrix},\qquad G^{-1}=G.
+\]
+
+Thus the *exact dual-coordinate map* \(b=(b_0,b_1,b_2,b_3)\mapsto b^\vee=(b_0,b_3,b_2,b_1)\) satisfies
+
+\[
+b\cdot a'=\operatorname{Tr}_{K/\mathbb F_3}(b^\vee a').
+\]
+
+This is an **explicit algebraic correspondence** between the previous \(3^4-2=79\) finite-field inversion programme and the new H4 central 3-cocycle, rather than just repeating 81/79 cardinalities. The new source \`scripts/iit_jfine_f81_trace_heisenberg_bridge.py\` checks all **6561 ordered four-trit pairs**, and the independent local receipt reproduces the same Gram matrix. The field structure and dual basis remain chosen, not canonical under the original D4 action.
+
+**Highest remaining proof/physics gates:** (1) exact-head Agda compilation and source-check of H4→H6 group-law homomorphism, rather than just the carrier embedding/finite arithmetic; (2) kernel-level F81 trace-dual pairing and Schrödinger restriction; (3) a literal Monster \(3B\) restriction isomorphism, not just matching H4 model characters; (4) calibrated neural/AI/optical consumer observation if physical application is proposed. No quantum-consciousness, magnetic torus, zero-point or phenomenological claim is implied by central \(\zeta\).
