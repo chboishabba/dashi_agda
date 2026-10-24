@@ -58,3 +58,17 @@ def test_zero_coefficients_do_not_alter_any_physical_budget():
     for m in ((10,0,0),(-10,0,0),(0,10,0),(0,-10,0)):
         padded[m]=S.zeros(3,1)
     assert exact_budget(padded)==exact_budget(original)
+
+def test_amplitude_scaling_shows_no_dissipation_only_uniform_payment():
+    field=seed()
+    energy=sum(S.simplify(cdot(v,v)) for v in field.values())
+    enstrophy=sum(sum(x*x for x in m)*cdot(v,v) for m,v in field.items())
+    palinstrophy=sum(sum(x*x for x in m)**2*cdot(v,v)
+                     for m,v in field.items())
+    assert (energy,enstrophy,palinstrophy)==(10,38,198)
+    for amp in (S.Integer(1),S.Integer(2),S.Integer(50)):
+        scaled={m:amp*v for m,v in field.items()}
+        assert exact_budget(scaled)==(0,8*amp**3,8*amp**3)
+    # At viscosity 1, d/dt ||omega||_2^2 = 8 a^3 - 396 a^2.
+    assert 8*50**3-2*198*50**2==10_000
+    # This is an *instantaneous* smooth trigonometric datum, not blowup.
