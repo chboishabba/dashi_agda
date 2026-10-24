@@ -132,3 +132,12 @@ def test_ontology_and_original_replay_have_no_silent_incidence():
     assert "e_mechanistic_M2_test" in outcome["blocked_edges"]
     assert "e_concealed_target_test" in outcome["blocked_edges"]
     assert "M4_independent_external_ontology" not in outcome["published_or_constructed_admitted"]
+
+
+def test_dry_run_rejects_forged_source_status_before_search():
+    h, _, _ = fixture()
+    bad = copy.deepcopy(h)
+    next(x for x in bad["sites"]
+         if x["id"] == "erowid_sequenced_report")["state"] = "present_source_statement"
+    with pytest.raises(ValueError, match="promoted"):
+        mod.candidate_reopening(bad, "erowid_reuse_authority")
