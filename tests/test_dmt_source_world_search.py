@@ -98,3 +98,24 @@ def test_dangling_artifacts_and_unsafe_actuation_are_rejected():
     w["safety"]["send_email"] = True
     with pytest.raises(ValueError, match="External contact"):
         engine.validate_world(w)
+
+
+def test_agda_source_world_instantiates_existing_reopening():
+    path = ROOT/"DASHI/Cognition/ConsciousRealismDMTSourceWorldExact.agda"
+    text = path.read_text(encoding="utf8")
+    assert "import DASHI.Core.AttributedSourceCore" in text
+    assert "import DASHI.Core.EvidenceAcquisitionSelectiveReopeningExact" in text
+    assert "import DASHI.Core.CostedResidualInformationChoiceExact" in text
+    assert "Acquire.obligationFromNotLocated" in text
+    assert "Acquire.oneEdgeAcquisitionReopening" in text
+    assert "qcDoesNotDirectlyEstablishExternalAgent" in text
+    assert "phaseMatricesDoNotDirectlyEstablishExternalAgent" in text
+    focus = (ROOT/"DASHI/Cognition/ConsciousRealismDMTEverything.agda").read_text()
+    assert "ConsciousRealismDMTSourceWorldExact" in focus
+
+
+def test_source_world_mutation_of_exact_git_inventory_fails():
+    w = world()
+    w["observed_git_tree"]["files"][0]["git_blob_sha1"] = "0" * 40
+    with pytest.raises(ValueError, match="diverges"):
+        engine.validate_world(w)
