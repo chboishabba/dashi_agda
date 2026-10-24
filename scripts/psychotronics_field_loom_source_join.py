@@ -30,6 +30,7 @@ def _digest_ok(value):
 def verify_pair_source(meta, pairs):
     """Return source identity receipt; no positive physics or source authenticity."""
     failures = []
+    certified_offset = None
     try:
         rb = _read_bounded(meta['raw_data_file'], 64*1024*1024)
         cb = _read_bounded(meta['calibration_file'], 2*1024*1024)
@@ -77,12 +78,17 @@ def verify_pair_source(meta, pairs):
         max_systematic=max((p.get('common_systematic_std_n',float('nan')) for p in pairs), default=float('nan'))
         if (not isinstance(max_systematic,(int,float)) or not math.isfinite(max_systematic)
             or not isinstance(cal.get('common_force_offset_std_n'),(int,float))
+            or isinstance(cal.get('common_force_offset_std_n'),bool)
+            or not math.isfinite(cal['common_force_offset_std_n'])
             or cal['common_force_offset_std_n']<max_systematic):
             failures.append('force_systematic_floor_under_calibration_source')
+        else:
+            certified_offset = cal['common_force_offset_std_n']
     except (OSError,ValueError,KeyError,TypeError,json.JSONDecodeError) as err:
         failures.append('source_replay_unavailable_or_invalid:'+type(err).__name__)
     return {
         'bytes_and_exact_pair_source_join':not failures,
+        'calibration_reported_common_force_offset_std_n':certified_offset if not failures else None,
         'unpaid_source_joins':sorted(set(failures)),
         'independent_instrument_authentication':False,
         'independent_operator_and_replicate_authenticated':False,
