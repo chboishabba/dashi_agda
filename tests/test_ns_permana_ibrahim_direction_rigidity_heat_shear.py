@@ -92,3 +92,27 @@ def test_rotating_shear_has_uniform_enstrophy_and_vanishing_kinetic_energy():
     assert S.simplify(mean_enstrophy_at_tN-A*A*S.exp(-2))==0
     # Uniform upper kinetic/enstrophy ceilings cannot alone bound
     # |grad xi|: this same family has |grad xi|=N for all x at tN.
+
+def test_direction_equation_harmonic_map_terms_cancel_exactly():
+    # Grujic (arXiv:2609.05720) isolates harmonic-map heat flow,
+    # cross-diffusion and tangential strain. On this actual
+    # unforced NS trajectory, S xi = 0 and
+    # Delta xi + |grad xi|² xi = 0, while |grad xi|=N.
+    # The normalized direction is time independent for all t>=0.
+    x,t,A,nu=S.symbols("x t A nu",positive=True,real=True)
+    for n in (2,3,7,19):
+        factor=A*S.exp(-nu*n*n*t)
+        u=S.Matrix([0,factor*S.sin(n*x)/n,
+                     factor*S.cos(n*x)/n])
+        xi=S.Matrix([0,S.sin(n*x),S.cos(n*x)])
+        grad_u=S.Matrix([[0,0,0],
+                         [S.diff(u[1],x),0,0],
+                         [S.diff(u[2],x),0,0]])
+        strain=S.simplify((grad_u+grad_u.T)/2)
+        assert S.simplify(strain*xi)==S.zeros(3,1)
+        grad_sq=S.simplify(
+            (S.diff(xi,x).T*S.diff(xi,x))[0])
+        assert grad_sq==n*n
+        assert S.simplify(
+            S.diff(xi,x,2)+grad_sq*xi)==S.zeros(3,1)
+        assert S.diff(xi,t)==S.zeros(3,1)
