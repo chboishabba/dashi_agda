@@ -74,3 +74,62 @@ A physical 26D bosonic worldsheet based on `SU2_4` uses it as an interacting chi
 | W6 Clay and other QFT | Witten Laplacian YM lane and original YM, NS source estimates | **Independent**; no finite CS fusion rule resolves 4D mass gap or Navier–Stokes |
 
 **Highest-ROI next mathematical producer**: formalize one genuine source-selected WZW affine-current/fusion category as a native proof and the corresponding CS conformal-block map. Do NOT spend another cut recreating c24 q-series, SU2_4 integrable labels or the braid B3 modular group homomorphism. **Highest-ROI physical producer**: full 26D WZW worldsheet BRST and same background/target α' scheme + flux gerbe, or separately 3D AdS gravity partition and twisted Monster boundary observables. A physical bridge from one to the other is optional and requires a selected bulk/string setup.
+
+
+## 2026-10-24 highest-alpha ACTUAL conformal embedding found from latest PR scan
+
+Canonical detailed source and proof ledger:
+`docs/hyperfabric-witten-d4-conformal-su2-4-su3-1-current-embedding-maxcut-20261024.md`.
+New original 1989 authority: J. Lacki/Ph. Zaugg,
+doi:10.1016/0370-2693(89)90662-X, `SU(2)_4⊂SU(3)_1`
+conformal embedding with D4 modular invariant.
+This directly **uses** original default Agda `SU2Level4Spin1RepReceipt`,
+`SU3FromAnyon3FoldReceipt`, `BulkBoundarySU3Receipt`,
+`LevelRankDualityReceipt`. Source k4 SU2 and k1 SU3 have
+equal `c=2` because the source principal
+`sl2⊂sl3` fundamental-trace Dynkin index is **4**.
+Actual rational Lie matrices give `[h,e]=2e,[h,f]=-2f,[e,f]=h`,
+`tr3(e f)=4 tr2(E12 E21)`,
+and `sl3 adjoint=spin1(3) ⊕ spin2(5)`.
+Exact local SymPy bracket/ladder/rank run PASS.
+
+Actual source branching of **three** SU3_1 simples (vacuum,3,3bar)
+into the original **five** SU2_4 sectors:
+`vac→0⊕4`, `3→2`, `3bar→2`.
+Hence `D4=B^T B` gives
+`|chi0+chi4|²+2|chi2|²`, and the
+exact SOURCE modular equalities `B S_SU2=S_SU3 B`,
+`[S_SU2,D4]=0`, T-compatible support,
+`S_SU2²=I`, `S_SU3²=charge conjugation`.
+Original bosonic label4 has h=1 and forms
+an order-two simple current; the extension
+`A=0⊕4` SPLITS original fixed doubled-spin2
+into two distinct quantum-dimension-one sectors.
+After extension, SU3_1 fusion is **C3**,
+not before. Exact 27 SU3 Verlinde coefficients
+and 81 extended associativity checks PASS
+on exact local SymPy source (committed scripts
+`check_witten_su2_4_su3_1_d4_embedding_exact.py`
+and `check_witten_principal_sl2_su3_index4_currents.py`).
+
+**NO IDENTIFICATION**: this does not turn original
+signed-zero C3 or horned sphere C3 into a WZW modular tensor
+category, nor same-object Monster C27, Albert 27,
+physical SU3_colour, 5D E6 Higgs/CS or any 26D sigma
+observable. The published extension/affine-OPE theorem
+belongs to 1989 original authors, NOT locally proved
+by the finite matrices. New Agda real original-sector
+branch owner `HyperfabricWittenD4SU3OriginalOwnerCutExact.agda`;
+Lean source `WittenSU2FourSU3OneD4EmbeddingCut.lean`,
+`WittenPrincipalSU2SU3MatrixCut.lean`. Kernel unverified.
+
+Latest PR audits: Agda #1217 5D parity/CS physical gates,
+#1239 Monster C27 729-call source & actual Griess mode
+producer (48 edges open), #1244 C3 rational/F3 Maschke,
+#1106 Albert/E6 actual product/gauge action;
+Lean #52 exact Peirce triality source cross-slot
+341/512 residual; #80 physical TOE realization;
+#85 Dirac actual charge superselection.
+All are sibling source evidence only, no impossible
+unmerged typed imports. See precise heads/source
+and next phase gates in canonical new D4 ledger.
