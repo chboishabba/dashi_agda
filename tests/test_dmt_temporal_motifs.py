@@ -73,6 +73,21 @@ class TestTemporalMotifs(unittest.TestCase):
                 "ai_processing_in_scope": True,
                 "temporal_analysis_in_scope": True}
 
+    def test_synthetic_source_cannot_relabel_with_receipt(self):
+        f = fixture(); f["mode"] = "authorized_research"
+        with self.assertRaises(ValueError):
+            evaluate(f, self.receipt(f))
+
+    def test_attested_real_execution_is_not_permission_proof(self):
+        f = fixture(); f["mode"] = "authorized_research"
+        f["source_collection_id"] = "controlled:illustrative-nonhuman-only"
+        for report in f["reports"]:
+            report["source_collection_id"] = f["source_collection_id"]
+        out = evaluate(f, self.receipt(f))
+        self.assertEqual(out["independence_units"], 3)
+        self.assertTrue(out["permission_legality_not_automatically_established"])
+        self.assertEqual(out["admission_status"], "separate_reviewer_attestation_required_external_verification")
+
     def test_explicit_scope_required(self):
         f = fixture(); f["mode"] = "authorized_research"
         receipt = self.receipt(f); receipt["ai_processing_in_scope"] = False
