@@ -247,7 +247,7 @@ senexSameJournalismNotIndependentData :
 senexSameJournalismNotIndependentData = refl
 
 parliamentaryPublicPolicyCounterexample :
-  A.kind A.senateGasTaxInquiryPublicComparator ≡ A.editorialPublication
+  A.kind A.senateGasTaxInquiryPublicComparator ≡ A.publicParliamentaryInquiry
 parliamentaryPublicPolicyCounterexample = refl
 
 gasRepublishingDoesNotEstablishPolicyCopy :
