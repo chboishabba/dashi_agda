@@ -71,6 +71,18 @@ def d4_decompose(chi):
     return {k:int(v) for k,v in out.items()}
 
 def audit():
+    # D4 presentation and exact symplectic-pairing preservation on six axes.
+    # The geometric permutation lifts on the fibre therefore form a true
+    # D4 representation: the associated selected geometric cocycle is 1.
+    assert power(Q,4)==tuple(range(6))
+    assert power(M,2)==tuple(range(6))
+    assert compose(M,compose(Q,M))==power(Q,3)
+    for p in (Q,M):
+        for i in range(6):
+            for j in range(6):
+                ei=tuple(int(i==k) for k in range(6))
+                ej=tuple(int(j==k) for k in range(6))
+                assert omega(perm(ei,p),perm(ej,p))==int(i==j)
     elements=list(elems())
     assert len({p for _,_,p,_ in elements})==8
     classes=('identity','half','quarter','axis','diagonal')
@@ -121,7 +133,7 @@ def audit():
     assert twisted_mult=={'A1':7110,'A2':9540,'B1':8280,'B2':8280,'E2':16200}
     assert twisted!=vecs[2]
     return dict(status="exact integer/cyclotomic finite test passed",model="constructed geometric H6⋊D4 JFine action",
-                mmgroup_required=False,Heisenberg_order=3**13,
+                mmgroup_required=False,D4_geometric_Weil_cocycle="trivial exact permutation lift",Heisenberg_order=3**13,
                 central_fusion_3B_trace_sourced=53,
                 Monster_c3_sector_dimensions=(65663,65610,65610),
                 D4_class_order=classes,D4_char90=vecs[0],D4_char729=vecs[1],
