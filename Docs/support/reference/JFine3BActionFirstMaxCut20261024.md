@@ -252,3 +252,42 @@ In the exact constructed `H6⋊D4` model, multiply D4's **multiplicity-space** r
 A D4-equivariant intertwiner between them is impossible because character values differ. The sign-twisted irreducible multiplicities are `7110 A1+9540 A2+8280 B1+8280 B2+16200 E2`. The exact finite Python producer checks this negative control. The geometric D4 action on the Schrödinger fibre is implemented by honest six-coordinate permutations preserving the F3 bilinear pairing, so this CONSTRUCTED D4 Weil multiplier/cocycle is trivial. No conclusion about the actual Monster inertia Weil cocycle is inferred.
 
 This sharply proves WHY the remaining source-selected normalizer action is genuine additional data rather than redundant. It is not a reason to demand mmgroup: a verified source character restriction on the chosen subgroup suffices for abstract D4 module equivalence, and a concrete source-coordinate map can be computed by any appropriate algebra backend if required.
+
+
+## 24 Oct max-cut further closure: actual-table *class algebra* before a group model
+
+The previous selected-C3-only screen for actual D4 actions remains a valid conditional route but over-asked for an AtlasRep group and class identification. We have now source-written a strictly stronger CHEAP first pass in `scripts/monster_3b_jfine_d4_class_algebra_screen.g` that needs only `CTblLib CharacterTable("MN3B")`, `CharacterTable("M")`, the stored fusion, and `MatClassMultCoeffsCharTable`. It does **not** require `mmgroup`, an AtlasRep group or a 196883-dimensional matrix. References: GAP Reference Manual §§71.12-7,71.12-9 (class structure coefficients); Thomas Breuer, CTblLib; Wilson 1988 and Barraclough–Wilson 2007 for original Monster normalizer work.
+
+### Mathematical justification of the exact table-only test
+
+In the full 3B normalizer, the two nonidentity elements `z,z²` of the actual E centre form one conjugacy class of size two `C_z`. For ANY conjugacy class `C_i` of N, the UNORDERED PAIR of ambient class indices of `z*g,z²*g` is invariant as `g` varies inside `C_i`: conjugation by N may swap z and z² but preserves their set. If the class algebra has
+```
+K_(C_z) K_(C_i) = Σ_k c_(z,i,k) K_(C_k),
+```
+then for a fixed `g in C_i` the exact multiplicity among the two products in class k is
+```
+    n_k = c_(z,i,k) * |C_k| / |C_i|  (integer 0,1,2; Σ_k n_k=2).
+```
+Hence the literal source character values at both products are reconstructible as an unordered pair using character-table entries alone.
+
+For `g` of order 1, 2, or 4, *g centralizes z* iff both products `zg,z²g` have order `3*order(g)`. If g instead inverts z, the two product orders equal `order(g)`. This strictly separates a phase-preserving D4 from a phase-swapping D4 using ONLY class orders.
+
+For a phase-preserving candidate class, let `A=χ_W(g)`, and `{B,C}={χ_W(zg),χ_W(z²g)}` from the class algebra. The required **integer-real** JFine D4 character forces `B=C`, in which case the ζ-phase projection reduces to the exact integer `(A-B)/3`. It must equal `[65610,810,90,2430,2430]` on the five canonical D4 classes. This is a strictly stronger screen than ordinary degree-196883 D4 character containment and does not require selecting absolute ζ versus ζ².
+
+`PossibleClassFusions(CharacterTable(D4),MN3B)` enumerates candidate class maps. The screen returns all surviving literal maps; if the output is exhaustive, no unresolved source values remain, and none survive, there is a **table-level obstruction** to any D4 in `C_N(z)` carrying *this exact geometric JFine ζ-sector character*. Surviving fusions are only candidates: they are NOT actual subgroup constructions or normalizer-equivariant intertwiners. The producer FAILS on unknown character tables/fusion, missing central 3B class or nonintegral class-product multiplicities. It is not claimed to have run with GAP here.
+
+### Independent exact local test of the class-algebra method
+
+`scripts/check_monster_3b_jfine_class_algebra_principle.py` was executed locally against the concrete finite group `S3×C4` (order24) with normal size-two 3-cycle class. It directly built all 12 conjugacy classes, multiplied all class sums, checked `n_k=c_k|C_k|/|C_i|` against actual element products, and correctly separated 4 phase-preserving coprime-order classes from 4 phase-swapping ones. It also checked the projected degree-one ζ-sector character of the standard S3 two-dimensional representation. **This validates the algorithm on a real small group, not any Monster class triple.** Its local receipt is `monster_3b_jfine_class_algebra_principle_receipt.json`.
+
+### Second, stronger route if table-only screening retains candidates
+
+`scripts/monster_3b_jfine_phase_preserving_d4_screen.g` reuses the actual-3B/E GAP construction owner via a newly guarded exit; the original `monster_3b_actual_kernel_structure.g` behaves identically when run standalone. The downstream script searches **inside `Centralizer(G,z)` only** and checks all eight projected D4 characters against the geometric model using unambiguous ambient class values. On a search cap or ambiguous class data it reports INCONCLUSIVE, not a false no-go. This group route is optional *after* the table-only elimination.
+
+### Material status and follow-up priority
+
+1. Reused, not reconstructed: finite H, scalar commutant, Stone–von Neumann, source phase-resolved 8748 and 56862 dimension sectors, sourced 12+78, generic Hom/cocycle and JFine D4 gauge owner.
+2. Executed locally: original exact finite JFine/D4/H certificate, selected phase arithmetic controls, and S3×C4 class-algebra algorithm positive/negative controls.
+3. Source-written, NOT executed: CTblLib-only 3B centre class-algebra D4 screen; source-reused AtlasRep actual 3B centralizer screen; optional 2026 mmgroup generator / matrix-free T route.
+4. Only source-specific missing outcome: actual MN3B class-fusion survivor/no-go receipt for THIS geometric D4 character, followed (only for a survivor) by an actual embedding and the same-object linear Hom/inertia intertwiner. Geometric full `Fin90` permutation remains ruled out for the source 6.Suz character regardless of D4 compatibility.
+5. No claim of GAP, Agda or full N(3B) source-coordinate T execution is made. Keep original author attribution and do not turn a possible class fusion into an actual subgroup.
