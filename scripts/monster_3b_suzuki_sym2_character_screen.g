@@ -1,5 +1,5 @@
 # Character-theoretic 78 = Sym^2(12) / Sym^2(12*) screen.
-# Reuses exactly the existing 6.Suz faithful 12/78 character families.
+# Reuses the existing 6.Suz faithful degree-12 and ALL degree-78 characters; the latter may descend to 3.Suz.
 # No mmgroup, subgroup matrix model or complex 196883 representation.
 #
 # Primary sources: Barraclough and Wilson (2007), character table of N(3B);
@@ -77,7 +77,7 @@ SetPrintFormattingStatus(out,false);
 AppendTo(out,"{\n");
 AppendTo(out,"  \"source\":\"CTblLib 6.Suz ordinary Irr, PowerMap(2), central classes\",\n");
 AppendTo(out,"  \"checked_full_character_equalities\":true,\n");
-AppendTo(out,"  \"faithful12_count\":2,\n  \"faithful78_count\":2,\n");
+AppendTo(out,"  \"faithful12_count\":2,\n  \"degree78_total_count\":",String(Length(p78)),",\n");
 AppendTo(out,"  \"symmetric_square_match_exists\":",BoolText(anySym),",\n");
 AppendTo(out,"  \"dual_symmetric_square_match_exists\":",BoolText(anyDual),",\n");
 AppendTo(out,"  \"rows\":[\n");
@@ -87,7 +87,7 @@ for k in [1..Length(matches)] do
     ",\"position78\":",String(r.p78),
     ",\"atlas_label12\":\"",r.lab12,
     "\",\"atlas_label78\":\"",r.lab78,
-    "\",\"sym2_equal\":",BoolText(r.exactSym2),
+    "\",\"faithful78\":",BoolText(r.faithful78),\n    ",\"central_involution78_trace\":",String(r.centralInvolution78),\n    ",\"sym2_equal\":",BoolText(r.exactSym2),
     ",\"dual_sym2_equal\":",BoolText(r.exactDualSym2),
     ",\"central_phase12\":\"",String(r.phase12First),
     "\",\"central_phase78\":\"",String(r.phase78First),
