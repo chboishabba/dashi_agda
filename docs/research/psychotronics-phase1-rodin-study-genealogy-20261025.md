@@ -1,5 +1,20 @@
 # Rodin coil: original 2010 mathematical source → ordinary published field biology, 2013–2024
 
+## Key numerical source-dependence check: 2013 and 2024 field tables
+
+The [2013 original Table I](https://pubmed.ncbi.nlm.nih.gov/24089844/) and [2024 original Table II](https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0035-001X2024000300006) share **all three published pairs of current and measured field in the later table**:
+
+| Current (A) | 2013 measured (mT) | 2024 measured (mT) | 2013 theory (mT) | 2024 theory (mT) |
+|---:|---:|---:|---:|---:|
+| 1.60 | 4.13 | 4.13 | 3.80 | 3.90 |
+| 1.25 | 3.05 | 3.05 | 2.97 | 3.01 |
+| 0.60 | 1.16 | 1.16 | 1.42 | 1.30 |
+
+The original 2013 frequencies for these points are 100, 800 and 2450 Hz. The 2024 table adds simulations (4.08, 3.00, 1.10 mT); the calculated predictions are different. Original researchers **Pérez-Olivas and Córdova-Fraga** occur in both author lists. An exact three-pair two-decimal match is a strong **published-number identity clue**, not independent confirmation of separate field acquisition. The 2024 paper also describes a three-dimensional mapping apparatus; this comparison alone does not settle whether its map and selected tabulated points were generated in a new session or how the older numerical values were used.
+
+**Author-provenance and independent-study status remain distinct:** source data may have common origin; original acquisition logs, figure provenance and editorial cross-references have not been obtained. Do not count these table measurements twice. The highest-value next phase-1 *document* is a source-specific methods/figure-data reconciliation between the original papers, not new measurements. Phase-1 lineage ledger edge E54 records this independently checkable match.
+
+
 **Phase:** documentary literature survey only, 25 October 2026, DASHI PR #1242. **Original task:** investigate the copper/star/sphere and 3–6–9/Rodin/VBM lineages from the 18 user-supplied screenshots, via original works and Pareto/Ibrahim rather than demanding original device footage, current/force hardware or independent bench work. This is an evidence-qualified **source lineage**, not a claim of a new physical force or original scientific discovery by DASHI.
 
 ## Material finding and corrected state of literature
