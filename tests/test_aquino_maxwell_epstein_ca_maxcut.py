@@ -441,3 +441,33 @@ def test_ripon_direct_corporate_contract_not_inferred_from_code_crossing():
     assert "original code bytes" in source.lower() or "original code" in source.lower()
     assert "silvesterAIQBoltonDeployment2018" in source
     assert "Direct contractual link **disputed/denied by Silvester**" in roadmap
+
+
+def test_ripon_independent_nix_and_kogan_origins_without_false_dataset_join():
+    source = OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    for token in (
+        "nixWitnessRoot : OriginRoot",
+        "koganWitnessRoot : OriginRoot",
+        "nixAIQHistoricalRiponConfirmation : CaseClaim",
+        "koganSeparateStatisticalDelivery : CaseClaim",
+        "bounded-source nixAIQHistoricalRiponConfirmation nixWitnessRoot",
+        "bounded-source koganSeparateStatisticalDelivery koganWitnessRoot",
+        "data RiponRole : Set where",
+        "silvesterRole = ripon-role-statement",
+        "nixRole = ripon-role-statement",
+        "koganRole = ripon-role-statement",
+        "silvesterNamesRipon = refl",
+        "nixNamesRipon = refl",
+        "koganDeliveryDoesNotPayDirectAIQKnowledge = refl",
+        "originalDatasetFingerprintStillUnpaid = refl",
+    ):
+        assert token in source
+    for token in (
+        "### Independent witnesses at the Ripon boundary",
+        "Q3259–Q3266",
+        "Q2012–Q2018",
+        "MUR7350_24",
+        "full file-level GSR→Ripon identity is NOT verified",
+    ):
+        assert token in roadmap
