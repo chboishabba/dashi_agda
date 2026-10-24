@@ -498,6 +498,83 @@ duAssessorBlindedProtocol2026 = Source.mkDOISource
   "trial protocol explicitly proposes matching active and sham heat/vibration/indicators/interaction and magnetic detector verification, but does not supply completed observations or proof of successful blinding at another manufacturer's device"
   Source.publicAttribution
 
+------------------------------------------------------------------------
+-- Original-source Phase-1 critical document joins.
+-- The 2013/2024 published numbers and 2024 numbered citations are NOT
+-- independently replicated measurements or adjudications of misconduct.
+-- Croft's 2002 and 2003 instructions are ONE Croft narrator root.
+------------------------------------------------------------------------
+
+croftBigSecret2002 : Source.AttributedSource
+croftBigSecret2002 = Source.mkNoDOISource
+  "Don Croft"
+  "The Big Secret"
+  "15 August 2002 dated article; exact original educate-yourself.org URL retained by Ken Adachi and Croft Zappers later reprint"
+  "2002"
+  "https://www.croftzappers.com/the-don-croft-archives"
+  Source.archivalSource
+  "author stated he would not publish Mobius construction instructions at that time; NOT proof he contradicted a later different-design public guide or that described paranormal claims occurred"
+  Source.publicAttribution
+
+croftPowerWand2003 : Source.AttributedSource
+croftPowerWand2003 = Source.mkNoDOISource
+  "Don Croft"
+  "The PowerWand, Everyman's Weapon Against Tyranny"
+  "26 January 2003 byline; original educate-yourself.org/dc/adc52thepowerwand26jan03.shtml; Croft Zappers preserves author text"
+  "2003"
+  "https://www.croftzappers.com/the-don-croft-archives"
+  Source.archivalSource
+  "first-person author referral to www.cloud-busters.com for Mobius-wrapping directions; explicitly thanks Ben Morton, Suze Hooten and Bruce Stenulson, mentions Mark Hooten; this is Croft testimony not their original statements or verified claims"
+  Source.publicAttribution
+
+saikiaAmyloid2019 : Source.AttributedSource
+saikiaAmyloid2019 = Source.mkDOISource
+  "Jahnu Saikia; Gaurav Pandey; Sajitha Sasidharan; Ferrin Antony; Harshal B. Nemade; Sachin Kumar; Nitin Chaudhary; Vibin Ramakrishnan"
+  "Electric Field Disruption of Amyloid Aggregation: Potential Noninvasive Therapy for Alzheimer's Disease"
+  "ACS Chemical Neuroscience 10(5):2250-2262; online 15 February 2019; original ACS publisher metadata and abstract read, full article uninspected"
+  "2019"
+  "10.1021/acschemneuro.8b00490"
+  "https://doi.org/10.1021/acschemneuro.8b00490"
+  Source.academicArticleSource
+  "authors report external electric/magnetic effects on amyloid peptide aggregation and 15-38 percent reduced toxicity of electric-field-treated peptides in cultured-cell settings; abstract does not itself describe a Rodin-versus-Helmholtz 60 percent comparison"
+  Source.publicAttribution
+
+perezRodinRSI2013 : Source.AttributedSource
+perezRodinRSI2013 = Source.mkDOISource
+  "H. Pérez; T. Cordova-Fraga; S. López-Briones; J. C. Martínez-Espinosa; E. F. Rosas; A. Espinoza; J. C. Villagómez-Castro; M. Sosa; S. Topsu; J. J. Bernal-Alvarado"
+  "Portable device for magnetic stimulation: Assessment survival and proliferation in human lymphocytes"
+  "Review of Scientific Instruments 84, 094701; online 9 September 2013; original publisher pages read in rehosted author manuscript"
+  "2013"
+  "10.1063/1.4819796"
+  "https://doi.org/10.1063/1.4819796"
+  Source.academicArticleSource
+  "Table I measured magnetic field at 1.60A=4.13mT, 1.25A=3.05mT, 0.60A=1.16mT; gadolinium-containing cultured lymphocyte exposures; no independent later source-stream date or clinical effect"
+  Source.publicAttribution
+
+ramirezRodinRMF2024 : Source.AttributedSource
+ramirezRodinRMF2024 = Source.mkDOISource
+  "A. D. Ramírez-Galindo; H. A. Pérez-Olivas; G. Basurto-Islas; A. Hernández-Rayas; F. González López; T. Cordova-Fraga"
+  "Vortex magnetic induction: Mathematical, geometric and experimental characterization"
+  "Revista Mexicana de Física 70(3):030901, May-June 2024 issue; original PDF read, SciELO electronic edition 22 September 2025 SAME work"
+  "2024"
+  "10.31349/RevMexFis.70.030901"
+  "https://doi.org/10.31349/RevMexFis.70.030901"
+  Source.academicArticleSource
+  "Table II repeats three current and measured-field pairs from 2013; original discussion cites ref24 Saikia 2019 for purported Rodin/Helmholtz 60 percent effect; ref12 names F. P. Perez 2008 not H. Perez 2013; no source-level evidence of two independent sets"
+  Source.publicAttribution
+
+perezHeatShock2008 : Source.AttributedSource
+perezHeatShock2008 = Source.mkDOISource
+  "F. P. Perez et al."
+  "Electromagnetic field therapy delays cellular senescence and death by enhancement of the heat shock response"
+  "Experimental Gerontology 43 (2008), 307; original article identified as reference 12 in 2024 printed bibliography; full paper uninspected"
+  "2008"
+  "10.1016/j.exger.2008.01.004"
+  "https://doi.org/10.1016/j.exger.2008.01.004"
+  Source.academicArticleSource
+  "named by 2024 RMF reference 12; different credited author/title and year from the H. Pérez et al. 2013 human lymphocyte Rodin source; citation existence not proof either biology claim"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -518,7 +595,9 @@ sourceAtlas = Source.mkSourceAtlas
    hanleyNADA2018 ∷ macleanMEQ2012 ∷ nourEDI2016 ∷
    kervadecFiveDASC2026 ∷ stockerASCRevision2026 ∷
    heartmathEnergeticCommunication ∷
-   shupakShamClinical2006 ∷ duAssessorBlindedProtocol2026 ∷ [])
+   shupakShamClinical2006 ∷ duAssessorBlindedProtocol2026 ∷
+   croftBigSecret2002 ∷ croftPowerWand2003 ∷ saikiaAmyloid2019 ∷
+   perezRodinRSI2013 ∷ ramirezRodinRMF2024 ∷ perezHeatShock2008 ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -539,6 +618,7 @@ data LineageRoot : Set where
   kervadecAscValidationRoot stockerAscRevisionRoot : LineageRoot
   heartmathInstituteRoot : LineageRoot
   shupakClinicalAuthorRoot duProtocolAuthorRoot : LineageRoot
+  saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -1062,6 +1142,81 @@ coronaAlternative = mkBound
   "actual footage, electrode geometry, power supply, frame-time series and spectroscopy needed to identify video apparatus"
 
 ------------------------------------------------------------------------
+-- The exact 2024 numbered references and current-field triplet are
+-- publication statements, not independent data-custody evidence.
+------------------------------------------------------------------------
+
+croftOriginalGuide2003Claim : ClaimBound
+croftOriginalGuide2003Claim = mkBound
+  "On 26 January 2003 Don Croft referred readers to cloud-busters.com for Mobius winding instructions, and named multiple contemporary builder contributors"
+  croftPowerWand2003
+  "The PowerWand, January 26 2003: item 4 Mobius Coil, introductory thanks, paragraph naming Mark Hooten"
+  croftAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "archived original guide version and author, original Gentry Smith and Patrick Flanagan authored instruction relationship unverified"
+
+croftAugustNoPublishedGuideClaim : ClaimBound
+croftAugustNoPublishedGuideClaim = mkBound
+  "Don Croft's 15 August 2002 article says Mobius winding instructions would not be made public, before his dated January 2003 external guide referral"
+  croftBigSecret2002
+  "The Big Secret, August 15 2002, opening paragraph on withholding coil plans"
+  croftAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "same winding instructions, original disclosure circumstances, contemporaneous native-host versions unavailable"
+
+saikiaStudySpecificClaim : ClaimBound
+saikiaStudySpecificClaim = mkBound
+  "Original Saikia et al 2019 ACS abstract reports electric/magnetic fields on amyloid peptide and electric-field-treated in vitro toxicity, not an identified Rodin versus Helmholtz 60 percent test"
+  saikiaAmyloid2019
+  "Original ACS publisher abstract, DOI 10.1021/acschemneuro.8b00490"
+  saikia2019ResearchRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "full paywalled article and exact specific coil comparator remain uninspected; cannot universally exclude a full-text comparison"
+
+perez2013TableClaim : ClaimBound
+perez2013TableClaim = mkBound
+  "Pérez et al 2013 original Table I records three exact current/magnetic-field pairs also present in 2024 Table II"
+  perezRodinRSI2013
+  "Review of Scientific Instruments 094701-2 Table I at 1.60, 1.25 and 0.60 A"
+  guanajuatoRodinResearchRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "source timestamps, original sensor logs and cross-paper reuse provenance unavailable"
+
+ramirez2024ReusedNumbersQuestion : ClaimBound
+ramirez2024ReusedNumbersQuestion = mkBound
+  "2024 Ramirez-Galindo Table II repeats 2013 experimental B values 4.13, 3.05, 1.16 mT at currents 1.60, 1.25, 0.60 A despite different theoretical values"
+  ramirezRodinRMF2024
+  "Original published journal PDF p5 Table II, compared with Pérez et al 2013 p094701-2 Table I"
+  guanajuatoRodinResearchRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "shared data or independently reacquired unknown; repeated rounded numbers do not establish improper publication conduct"
+
+ramirez2024Ref24Claim : ClaimBound
+ramirez2024Ref24Claim = mkBound
+  "2024 Rodin paper Discussion attributes a claimed up-to-60-percent Rodin/Helmholtz advantage to numbered reference 24, actually Saikia et al 2019 ACS electric-field amyloid study"
+  ramirezRodinRMF2024
+  "Published PDF p5 Discussion and p7 reference 24; Saikia original ACS abstract"
+  guanajuatoRodinResearchRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "full Saikia original article/any matched comparator and 60-percent source not identified; no inference of intentional miscitation"
+
+ramirez2024Ref12Claim : ClaimBound
+ramirez2024Ref12Claim = mkBound
+  "2024 paper intro invokes human lymphocyte claim as numbered reference 12, but bibliography 12 is F. P. Perez 2008 heat-shock paper not H. Pérez 2013 RSI Rodin lymphocyte source"
+  ramirezRodinRMF2024
+  "Original journal PDF p1 Introduction and p6 numbered reference 12, independently checked original 2013 and 2008 article identifiers"
+  guanajuatoRodinResearchRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "true author intent and original 2008 full method details not verified; do not infer deliberate omission"
+
+------------------------------------------------------------------------
 -- Cross-pollination edges. A documentary source naming BOTH objects
 -- licenses only the stated textual co-occurrence, not downstream physics.
 ------------------------------------------------------------------------
@@ -1092,6 +1247,40 @@ record BoundedRelation : Set where
     historicalTransmissionProved : Bool
     historicalTransmissionProvedIsFalse : historicalTransmissionProved ≡ false
 open BoundedRelation public
+
+------------------------------------------------------------------------
+-- Phase-1 source-critical joins: every relation is non-promoting.
+------------------------------------------------------------------------
+
+croftJanGuideNotGentryProof : BoundedRelation
+croftJanGuideNotGentryProof = bounded-relation
+  "Croft January 2003 original named website guide"
+  "Gentry Smith / Patrick Flanagan alleged earlier original winding plan"
+  contemporarySelfAttribution croftOriginalGuide2003Claim false refl false refl
+
+croftInstructionPublicationDatesDistinct : BoundedRelation
+croftInstructionPublicationDatesDistinct = bounded-relation
+  "Croft August 2002 no-guide publication claim"
+  "Croft January 2003 external winding-guide citation"
+  documentaryDistinction croftAugustNoPublishedGuideClaim false refl false refl
+
+ramirezRef24NotValidatedCoilComparison : BoundedRelation
+ramirezRef24NotValidatedCoilComparison = bounded-relation
+  "Ramírez-Galindo et al 2024 claimed Rodin-vs-Helmholtz 60-percent effect with ref24"
+  "Saikia et al 2019 in vitro electric-field amyloid study, full text uninspected"
+  documentaryDistinction ramirez2024Ref24Claim false refl false refl
+
+ramirezRef12NotPerez2013 : BoundedRelation
+ramirezRef12NotPerez2013 = bounded-relation
+  "2024 Introduction human lymphocyte claim referenced as 12"
+  "Bibliography 12 F. P. Perez 2008 not 2013 H. Pérez Rodin paper"
+  documentaryDistinction ramirez2024Ref12Claim false refl false refl
+
+perezRamirezTableOverlapUnresolved : BoundedRelation
+perezRamirezTableOverlapUnresolved = bounded-relation
+  "2013 Pérez RSI measured current-to-field three-point source table"
+  "2024 Ramírez-Galindo RMF same three rounded measured values"
+  documentaryDistinction ramirez2024ReusedNumbersQuestion false refl false refl
 
 croftCloudbusterRelation : BoundedRelation
 croftCloudbusterRelation =
