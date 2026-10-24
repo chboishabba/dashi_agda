@@ -1,5 +1,9 @@
 # Phase 1 original coil-winding origins — Flanagan, Gentry, Croft, and independent Möbius/Klein branches
 
+**Current ledger correction (25 October):** Subsequent parallel original-source work expanded the Phase-1 graph to **[38 source roles](psychotronics-phase1-literature-landscape-20261025.csv)** and **[54 edges](psychotronics-phase1-lineage-edges-20261025.csv)**. The `31/39` figures below refer to the **snapshot when this specific Flanagan/Gentry survey was first compiled** and must not be advertised as present totals. The later [2013/2024 Rodin table concordance](psychotronics-phase1-rodin-2013-2024-magnetometry-provenance-audit-20261025.md) is a separate, partly same-author scientific source-dependence object; neither it nor broader academic Rodin work corroborates a Croft/Gentry/Flanagan personal transfer.
+
+
+
 **25 October 2026 (Brisbane) · PR #1242 · documentary max-cut.** This report follows the user's explicit Phase-1 scope: **literature review, critical landscape, Pareto/Ibrahim source-root snowball and attribution**. Do **not** substitute native video, owner-controlled electronics/force testing, the optional Field Loom, new Agda theorem development or hardware construction as Phase-1 acceptance gates. Source additions appear in the [31-record source-role ledger](psychotronics-phase1-literature-landscape-20261025.csv) (P1-23–P1-31) and [39-edge original/dependency ledger](psychotronics-phase1-lineage-edges-20261025.csv) (E29–E39). Their original roots overlap earlier 61-row literature and existing screenshot-era Agda inventories; **the counts are classifications, not numbers of independent corroborations**.
 
 ## Highest-alpha new timing: a Croft document internally dated 9 December 2002
