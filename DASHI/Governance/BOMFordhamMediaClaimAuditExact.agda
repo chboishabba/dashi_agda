@@ -1,0 +1,254 @@
+module DASHI.Governance.BOMFordhamMediaClaimAuditExact where
+
+-- Case-specific source and claim audit, 24 October 2026.
+-- DASHI owns only the typed decomposition and nonpromotion proofs.
+-- BOM owns its institutional statements; Berger/Sherrington own the audit
+-- allegations; 2GB owns its program description; reporters own reporting.
+-- No audit data, audio transcript, institutional motive, or covert connection
+-- is created by this module.
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
+
+import DASHI.Governance.TypedGenealogyEdgeExact as Typed
+
+data RootRole : Set where
+  institutionalAccount : RootRole
+  publisherOwnedProgramme : RootRole
+  ownershipPrimary : RootRole
+  journalistReport : RootRole
+  independentCommentary : RootRole
+  thirdPartyReportedAudit : RootRole
+
+record SourceRoot : Set where
+  constructor source-root
+  field
+    authorOrInstitution : String
+    published : String
+    title : String
+    locator : String
+    role : RootRole
+    boundedFinding : String
+open SourceRoot public
+
+bomStatement : SourceRoot
+bomStatement = source-root
+  "Australian Bureau of Meteorology" "2026-10-22"
+  "The science and truth of Australia's long-term temperature record"
+  "https://www.bom.gov.au/the-science-and-truth-of-australias-long-term-temperature-record"
+  institutionalAccount
+  "BOM confirms 4 post-1910 duplicated months affecting ACORN-SAT (fewer than 200 daily observations in more than 7 million), all pre-1946 handwritten records later manually digitised; says impact is statistically negligible. Cause under examination, punch-card-era transcription a possibility; disputes fraudulent manipulation."
+
+bomMethods : SourceRoot
+bomMethods = source-root
+  "Australian Bureau of Meteorology" "2026-10 (ACORN-SAT v2.7)"
+  "Long-term temperature record: ACORN-SAT"
+  "https://www.bom.gov.au/climate/data/acorn-sat/"
+  institutionalAccount
+  "Explains paper-to-digital transcriptions, separate original observational records, and trend-homogenisation using station changes, instruments and neighbouring sites."
+
+fordhamProgramme : SourceRoot
+fordhamProgramme = source-root
+  "Ben Fordham / 2GB" "2026-10-19 AEST"
+  "'Dodgy data' - Weather Bureau accused of climate conspiracy"
+  "https://www.2gb.com/dodgy-data-weather-bureau-accused-of-climate-conspiracy/"
+  publisherOwnedProgramme
+  "2GB publishes an accusatory title and describes BOM errors discovered after an outside audit. The programme's full spoken words have not been audited against a transcript here."
+
+fordhamPodcast : SourceRoot
+fordhamPodcast = source-root
+  "Ben Fordham Live / Apple Podcasts listing" "2026-10-18 21:55 UTC"
+  "'Dodgy data' - Weather Bureau accused of climate conspiracy"
+  "https://podcasts.apple.com/sg/podcast/dodgy-data-weather-bureau-accused-of-climate-conspiracy/id157670116?i=1000796975224"
+  publisherOwnedProgramme
+  "Listings establish four-minute episode identity and publication time; they are not independent validation of the underlying audit or the spoken claims."
+
+auditReporting : SourceRoot
+auditReporting = source-root
+  "Graham Lloyd / The Australian, discussed by Joanne Nova" "2026-10-18"
+  "BOM's scientific scandal: The raw data is not raw"
+  "https://www.cfact.org/2026/10/18/boms-scientific-scandal-the-raw-data-is-not-raw/"
+  thirdPartyReportedAudit
+  "Reports Berger/Sherrington audit allegations and archival check of Sydney Observatory August 1867/1907 duplicates; full Berger/Sherrington original audit not acquired, so counts of additional anomalous patterns remain allegations."
+
+taptFirstParty : SourceRoot
+taptFirstParty = source-root
+  "Tapt Media / Laundy Family Office" "2026-05-01"
+  "Tapt Media launches as Australia's premier independent audio powerhouse"
+  "https://taptmedia.com.au/tapt-media-launches-as-australias-premier-independent-audio-powerhouse/"
+  ownershipPrimary
+  "Confirms completion of Laundy Family Office purchase of the 2GB/3AW/4BC/6PR network from Nine and rebranding to Tapt Media."
+
+abcSale : SourceRoot
+abcSale = source-root
+  "ABC News / Ben Butler" "2026-01-30"
+  "Nine Radio sold for cut-price $56m to pub tycoon Arthur Laundy"
+  "https://www.abc.net.au/news/2026-01-30/nine-radio-sold-to-arthur-laundy-talk-radio-shrinking-audience/106286352"
+  journalistReport
+  "Independent reporting of the proposed $56m radio sale and Laundy family connections, not evidence of political command over a presenter."
+
+bondiCoverage : SourceRoot
+bondiCoverage = source-root
+  "RadioInfo Australia" "2026-08-24"
+  "2GB takes home Kennedy Award for coverage of Bondi Beach terror attack"
+  "https://radioinfo.com.au/news/2gb-takes-home-kennedy-award-for-coverage-of-bondi-beach-terror-attack/"
+  journalistReport
+  "Documents Ben Fordham, Mark Levy and Will Bottom's award-winning live 2025 Bondi Beach attack coverage; makes no finding that coverage was inflammatory or centrally coordinated."
+
+kyleCompetition : SourceRoot
+kyleCompetition = source-root
+  "RadioInfo Australia" "2026-03-17"
+  "Triple M goes to 2GB for what's happening at KIIS"
+  "https://radioinfo.com.au/news/triple-m-goes-to-2gb-for-whats-happening-at-kiis/"
+  journalistReport
+  "Documents Sydney breakfast radio commercial rivalry involving Fordham and Kyle Sandilands; rivalry is not coordination."
+
+hansonMention : SourceRoot
+hansonMention = source-root
+  "Senator Sarah Henderson (participant-published interview)" "2026-10-21"
+  "Breakfast with Ben Fordham, 2GB, 21 October 2026"
+  "https://sarahhenderson.com.au/breakfast-with-ben-fordham-2gb-21-october-2026/"
+  publisherOwnedProgramme
+  "Interview transcript contains Fordham's question about Pauline Hanson Please Explain cartoons. A topical mention does not establish Fordham-Hanson organisational affiliation."
+
+data DataLayer : Set where
+  paperOriginal : DataLayer
+  digitisedHistoricalObservation : DataLayer
+  adjustedACORNSAT : DataLayer
+  nationalTrend : DataLayer
+
+data StatementStatus : Set where
+  institutionAcknowledged : StatementStatus
+  institutionHypothesised : StatementStatus
+  independentlyReported : StatementStatus
+  allegationNotReproduced : StatementStatus
+  notShown : StatementStatus
+
+record BoundedClaim : Set where
+  constructor bounded-claim
+  field
+    subject : String
+    layer : DataLayer
+    status : StatementStatus
+    root : SourceRoot
+    exactScope : String
+open BoundedClaim public
+
+confirmedDuplicate : BoundedClaim
+confirmedDuplicate = bounded-claim
+  "Four post-1910 duplicated months" digitisedHistoricalObservation
+  institutionAcknowledged bomStatement
+  "BOM confirms fewer than 200 affected daily values in ACORN-SAT input, all historical pre-1946."
+
+possiblePunchCards : BoundedClaim
+possiblePunchCards = bounded-claim
+  "Punch-card-related transcription" digitisedHistoricalObservation
+  institutionHypothesised bomStatement
+  "Potential mechanism suggested by BOM, not a forensically established causal account."
+
+trendNegligibleBOMPosition : BoundedClaim
+trendNegligibleBOMPosition = bounded-claim
+  "Negligible long-term trend impact" nationalTrend
+  institutionAcknowledged bomStatement
+  "This is BOM's own stated impact analysis, not an independently reproduced result in this module."
+
+sydney1867ReportedError : BoundedClaim
+sydney1867ReportedError = bounded-claim
+  "Sydney Observatory August 1867/1907 duplication" digitisedHistoricalObservation
+  independentlyReported auditReporting
+  "An archival cross-check is reported; 1867 lies before ACORN-SAT's 1910 start. Do not include it in the BOM's four post-1910 months."
+
+widerManipulationAllegation : BoundedClaim
+widerManipulationAllegation = bounded-claim
+  "Deliberate / widespread data manipulation" digitisedHistoricalObservation
+  allegationNotReproduced auditReporting
+  "Berger/Sherrington assertions and interpretations require the source-complete audit, affected station/date IDs and reproducible comparators."
+
+-- The source-audit has not obtained the original Berger/Sherrington report.
+-- This is an acquisition obligation, not evidence the report does not exist.
+data OriginalAuditReceiptStatus : Set where
+  notAcquired : OriginalAuditReceiptStatus
+  exactVersionAcquired : OriginalAuditReceiptStatus
+
+canonicalOriginalAuditStatus : OriginalAuditReceiptStatus
+canonicalOriginalAuditStatus = notAcquired
+
+-- Reuse the existing typed genealogy calculus. Every installed edge
+-- supports ONLY the named relation, never a hidden command or method transfer.
+fordhamTo2GB : Typed.TypedGenealogyEdge
+fordhamTo2GB = Typed.typedGenealogyEdge
+  "BOM-M1" "Ben Fordham" "2GB"
+  Typed.personnelContinuity Typed.primary
+  (Typed.sourceReceipt "2GB" "Ben Fordham 2GB programme"
+    "2026-10-19" (locator fordhamProgramme)
+    "Published programme and identified presenter" ∷ [])
+  "Fordham hosts and publishes the programme via 2GB."
+
+radioToTapt : Typed.TypedGenealogyEdge
+radioToTapt = Typed.typedGenealogyEdge
+  "BOM-M2" "2GB" "Tapt Media / Laundy Family Office"
+  Typed.organisationalContinuity Typed.primary
+  (Typed.sourceReceipt "Tapt Media / Laundy Family Office"
+    "Tapt Media launches" "2026-05-01" (locator taptFirstParty)
+    "Direct first-party ownership/brand announcement" ∷ [])
+  "Ownership of 2GB transferred from Nine to Laundy/Tapt on 1 May 2026."
+
+fordhamAuditBroadcast : Typed.TypedGenealogyEdge
+fordhamAuditBroadcast = Typed.typedGenealogyEdge
+  "BOM-M3" "Berger/Sherrington audit allegations (as reported)"
+  "2GB Ben Fordham 2026-10-19 segment"
+  Typed.audienceAdjacency Typed.primary
+  (Typed.sourceReceipt "2GB" "Dodgy data" "2026-10-19"
+    (locator fordhamProgramme)
+    "2GB programme headline and text identify the allegation being broadcast" ∷ [])
+  "A same-topic media amplification edge, not proof of investigation authorship, deliberate falsehood, or secret coordination."
+
+-- Claims about institutional transfer must never be installed as factual
+-- genealogy edges solely from narrative similarity or ownership.
+data UnresolvedOrganisationalHypothesis : Set where
+  fordhamTPUSA : UnresolvedOrganisationalHypothesis
+  fordhamTPAU : UnresolvedOrganisationalHypothesis
+  fordhamBannon : UnresolvedOrganisationalHypothesis
+  fordhamHansonCoordination : UnresolvedOrganisationalHypothesis
+  fordhamBondiCovertMobilisation : UnresolvedOrganisationalHypothesis
+
+record NonPromotionBoundary : Set where
+  constructor nonpromotion-boundary
+  field
+    rawDigitisationErrorImpliesDeliberateFraud : Bool
+    publishedAccusatoryHeadlineProvesFraud : Bool
+    homogenisationIsHistoricalTranscription : Bool
+    unverifiedCauseIsEstablishedCause : Bool
+    publisherOwnershipProvesEditorialDirection : Bool
+    sameRhetoricProvesTPUSAOrBannonControl : Bool
+    bondiCoverageProvesInflammatoryContent : Bool
+    topicMentionProvesHansonCollaboration : Bool
+    radioRivalryProvesKyleCoordination : Bool
+    correctionNeedsSameObjectDataComparison : Bool
+open NonPromotionBoundary public
+
+canonicalNonPromotionBoundary : NonPromotionBoundary
+canonicalNonPromotionBoundary = nonpromotion-boundary
+  false false false false false false false false false true
+
+data DuplicateImpliesFraud : Set where
+data RhetoricImpliesBannonControl : Set where
+data OwnershipImpliesEditorialOrder : Set where
+data BondiCoverageImpliesInflammatorySpeech : Set where
+
+duplicateDoesNotProveFraud : DuplicateImpliesFraud → ⊥
+duplicateDoesNotProveFraud ()
+
+rhetoricDoesNotProveBannonControl : RhetoricImpliesBannonControl → ⊥
+rhetoricDoesNotProveBannonControl ()
+
+ownershipDoesNotProveEditorialOrder : OwnershipImpliesEditorialOrder → ⊥
+ownershipDoesNotProveEditorialOrder ()
+
+bondiCoverageDoesNotProveInflammatorySpeech :
+  BondiCoverageImpliesInflammatorySpeech → ⊥
+bondiCoverageDoesNotProveInflammatorySpeech ()
