@@ -50,8 +50,9 @@ class TestDeltaOPM(unittest.TestCase):
         x={k:"synthetic-placeholder" for k in m.REQUIRED_RECEIPTS}
         x.update(recording_modality="human-OPM-MEG",sampling_hz=128)
         res=m.validate_receipt(x)
-        self.assertTrue(res["admissible_for_experimental_review"])
+        self.assertFalse(res["admissible_for_experimental_review"])
         self.assertIn("does not establish causal",res["note"])
+        self.assertIn("placeholder values cannot be promoted as experimental receipts",res["hard_errors"])
 
 
 if __name__=="__main__":
