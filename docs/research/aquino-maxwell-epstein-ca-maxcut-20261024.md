@@ -62,6 +62,32 @@ This cut inspected **two UK Parliament HTML witness records**, **the FTC 16-page
 
 **Next acquisition Pareto:** (1) complete 2014 legal memo, signed CA/SCL IP agreement and Delaware entity ID; (2) House/DOJ primary Bannon messaging joined to actual film-production artefacts; (3) PROMIS executed distribution contract/executable; (4) Aquino-specific authorship/implementation handoff. No broader speculative personnel sweep.
 
+### FTC/FEC cross-source contract and enforcement resolution (2026-10-24, next max-cut)
+
+This cut upgrades **exact signed-object search quality**, not complete original-contract custody. It directly inspects [FTC Commission Opinion 6 Dec 2019](https://www.ftc.gov/system/files/documents/cases/d09389_comm_final_opinionpublic.pdf), **printed page 5 / zero-indexed PDF page 4** (CCCSUF ¶¶17–22, complaint ¶¶14–16), and [FEC MUR 7382 factual/legal analysis](https://www.fec.gov/files/legal/murs/7382/7382_33.pdf), **PDF page 6 (index 5), FEC printed analysis page 2 line 3 and footnote 3**, plus [FEC MUR 7351 official disposition](https://www.fec.gov/data/legal/matter-under-review/7351/).
+
+**What the FTC legally finds/describes:** Three DISTINCT instruments must not be collapsed into an unspecified influence-tech transfer:
+
+| Literal object | Executing parties / documented function | Paid by inspected primary regulatory finding | Still not paid |
+|---|---|---|---|
+| GS Data and Technology Subscription Agreement, **4 June 2014** | GSR to SCL Elections; signed for SCL by Nix; Facebook-app-derived profile/score and voter-registration matching | FTC opinion p5 CCCSUF 17–21 names the agreement, date, signatory and purpose | Original signed bytes, source code/data custody and precise deployed versions |
+| **SCL–CA Services Agreement** | SCL Elections for Cambridge Analytica, including voter-list construction, demographic/behavioural data and psychological profiles | FTC opinion p5 CCCSUF ¶21 describes services | Original agreement, signing date, actual project-specific deliverables |
+| **Separate SCL–CA IP licence** | SCL Elections licenses *all its IP* to CA | FTC opinion p5 explicitly describes a separate IP agreement | Signed instrument, assigned IP schedule/version, whether an additional CA→SCL reciprocal grant/assignment was executed |
+
+The IP direction SCL→CA is now documented **both** in the FTC default-case findings and an indexed 2014 counsel-memo excerpt. It is not necessarily opposed to Wylie's 2018 **attributed** description of assignment to CA and a later licensing back to SCL. **Do not declare a contradiction or collapse all contract steps into one contract.** Neither the FTC's summary nor Wylie's testimony substitutes for inspected originals. These FTC statements belong to **one FTC source root**, even though they report multiple contracts.
+
+**Exact LLC formation:** FEC's [2019 Factual and Legal Analysis p2 line3 n3](https://www.fec.gov/files/legal/murs/7382/7382_33.pdf) specifies **31 Dec 2013** and cites the **Delaware Division of Corporations register (viewed 19 July 2018)**. FTC's 2019 opinion says Delaware formed **December 2013**. This is strong agreement between institutional documents, but FEC's legal date comes from an underlying state registry; two agencies quoting the same registry are **not independent registry-origin evidence**. The indexed 2014 counsel memorandum says **June 2014** (possible legal act/identity misunderstanding). **Acquire original CA Delaware charter/file ID and complete counsel memo** to close this exact entity date conflict. No invented fraud conclusion.
+
+**FEC procedural sequence — a needed contrary legal limit:**
+
+- The FEC [MUR 7351 docket](https://www.fec.gov/data/legal/matter-under-review/7351/) records a **4–0 'reason to believe'** vote on specified foreign-national election-participation allegations against CA and various other respondents (2019), authorising investigation. That is **not a finding of final liability**, much less a criminal conviction.
+- The FEC subsequently voted **5–0 to close the file** in 2021; see the matter-level disposition and respondent-specific allegation treatment. Closure does not retroactively refute all earlier factual material or prove violations. In particular, MUR 7357 lists *Dismissed-Other* for particular corporate-contribution/coordination allegations. Do not mix those allegations with the separate foreign-national issue.
+- The FTC **default-based** privacy/deception liability finding is a **different case, law and procedural standard** from the FEC investigation. It cannot pay unlawful election coordination or intelligence direction.
+
+**What has genuinely advanced:** We have now identified three explicit legal work objects, one dated executed-as-described signatory chain, an exact Delaware date backed by a registry citation, and a staged enforcement outcome. Thus the highest-value immediate acquisition is *not* another secondary CA article; it is the actual three signed agreements, their appendices/licence schedules, original registrar entry, plus product/deployment evidence.
+
+**Next literature-source frontier:** The May 2018 US Senate [Christopher Wylie written statement, National Security Archive OCR](https://nsarchive.gwu.edu/media/17976/ocr) is additional *author-origin Wylie testimony*, not an independent eyewitness. It uses the language of an assignment to CA and licence-back, plus Project Ripon and the GSR work. Record those as his statements with one Wylie root. It does not establish Aquino-origin technology or Bannon's later use of the same data with Epstein.
+
 ### Professional evidence room and narrative output
 
 The missing-scientists [Round50 Professional Evidence Room](../../DASHI/Culture/MissingDeceasedTwentyScientistRound50ProfessionalEvidenceRoomExact.agda) has three separate consumers over a single preserved item: **investigator lead**, **lawyer authentication/admissibility**, and **journalist publication/ethics**. The case source owner now directly reuses `SharedEvidenceRoomItem`, `InvestigatorGate` and `JournalistGate`.
@@ -206,7 +232,7 @@ Do not label a phase complete just because files or PRs exist. Use the strongest
 | Consumer | Source state | Exact next discriminator | Still disallowed |
 |---|---|---|---|
 | Cambridge Analytica legal entity identity | FTC Commission opinion **inspected**, says Delaware formation December 2013; 2014 counsel-memo/FEC full PDFs remain uninspected | Match 2014 counsel memo with original Delaware entity ID, actual filing and distinct formation/operating events | Equating company names/legal acts or presuming concealment |
-| SCL-to-CA *specific technique* | Wylie testimony and FTC independently pay **different propositions**; exact executed IP/work product not inspected | Corporate agreement and software/process lineage against deployed campaigns | Aquino authored/invented CA methods; 2016 election causation |
+| SCL-to-CA *specific technique* | FTC **inspected p5** and describes THREE discrete agreements: GSR→SCL data subscription dated 4 Jun 2014; SCL→CA services; SCL→CA separate IP licence. Wylie provides additional same-witness descriptions; no signed source bytes inspected | Obtain original agreements/IP schedule and specific deployed product version; verify any CA→SCL reciprocal licensing | Aquino authored/invented CA methods; CA software automatically reused in later Epstein media work |
 | Bannon–Epstein deliverables | **Inspected House-released 14 Feb 2019 email schedule** naming breakfast with Bannon for 16 Feb; primary message→film chain still absent | Confirm meeting separately; join dated original communications with actual film/edit/contract/payment | Calendar entry proves actual attendance, Bannon acted as handler or inherited an intelligence operation |
 | Maxwell/PROMIS | House and Bua investigations document contested findings, no verified code/procurement link | Signed distribution instrument and exact-binary/installation forensic comparison | A proven backdoor or Maxwell-controlled global surveillance network |
 | Aquino–SCL | 1980 discussion proposal and unrelated institutional history | Dated explicit same-technique citation/personnel handoff | Project Stargate = MindWar; ideology = operational transfer |
