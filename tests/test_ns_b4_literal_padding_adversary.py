@@ -115,7 +115,10 @@ def test_any_fixed_uniform_payment_coefficient_eventually_fails():
     # subfamily has cubic growth and core mass stabilizes.
     Mcore=Fraction(module.certificate(9)["literal_core_companion"])
     def lower_subfamily(N):
-        return sum(2*m*(m-1) for m in range(10,N+1))
+        # 2*sum_(m=10)^N m(m-1) = (2/3)*(N^3-N-720).
+        # Closed form prevents O(N) execution for huge adversarial cD.
+        return 0 if N < 10 else 2*(N*(N*N-1)-720)//3
+    assert lower_subfamily(40)==42160
     for cD in (Fraction(0),Fraction(1),Fraction(10**12),
                Fraction(10**30)):
         N=20
