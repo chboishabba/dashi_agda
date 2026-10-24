@@ -19,8 +19,9 @@
 # execution coordinate; the label is an external character identity coordinate.
 # Neither one by itself proves occurrence in the Monster restriction.
 #
-# This producer identifies the faithful degree-12 and degree-78 6.Suz
-# candidates and records their central order-three phases.  It does NOT infer
+# This producer identifies the faithful degree-12 and the degree-78 6.Suz
+# candidates and records their central phases and order-two kernel status.
+# Never infer degree-78 faithfulness: Sym²(faithful 12) kills central C2.  It does NOT infer
 # that every candidate occurs in the Monster restriction; that same-object
 # match remains a separate payment.
 
@@ -53,16 +54,16 @@ end;
 
 faithful12 := Filtered([1..Length(irr)], i ->
   irr[i][1] = 12 and IsFaithfulCharacter(irr[i]));
-faithful78 := Filtered([1..Length(irr)], i ->
-  irr[i][1] = 78 and IsFaithfulCharacter(irr[i]));
+degree78 := Filtered([1..Length(irr)], i ->
+  irr[i][1] = 78);
 
 # CTblLib's published 6.Suz examples use the ATLAS families 12ab and 78ab.
 # Fail closed if a future table version changes that exact candidate count.
 if Length(faithful12) <> 2 then
   Error("expected exactly two faithful degree-12 irreducibles in 6.Suz");
 fi;
-if Length(faithful78) <> 2 then
-  Error("expected exactly two faithful degree-78 irreducibles in 6.Suz");
+if Length(degree78) <> 2 then
+  Error("expected exactly two degree-78 irreducibles in 6.Suz");
 fi;
 
 fusion := FusionConjugacyClasses(tbl, outer);
@@ -93,6 +94,7 @@ RowsFor := function(positions)
     chi := irr[p];
     Add(rows, rec(
       position := p,
+      faithfulToSixSuz := IsFaithfulCharacter(chi),
       atlasLabel := labels[p],
       degree := chi[1],
       firstCentralValue := chi[central3[1]],
@@ -105,9 +107,9 @@ RowsFor := function(positions)
 end;
 
 rows12 := RowsFor(faithful12);
-rows78 := RowsFor(faithful78);
+rows78 := RowsFor(degree78);
 
-# Every faithful candidate must carry a pure nontrivial C3 scalar on each
+# Every selected candidate must carry a pure nontrivial C3 scalar on each
 # central order-three class, with the two classes giving inverse phases.
 for row in Concatenation(rows12, rows78) do
   if not (row.firstCentralPhase in ["zeta", "zetaSquared"]) then
@@ -140,9 +142,9 @@ PrintTo(output,
   "  \"label_source\": \"CTblLib AtlasLabelsOfIrreducibles(short)\",\n",
   "  \"central_order_three_classes\": [", central3[1], ", ", central3[2], "],\n",
   "  \"faithful_degree_12_positions\": ", faithful12, ",\n",
-  "  \"faithful_degree_78_positions\": ", faithful78, ",\n",
+  "  \"degree_78_positions\": ", degree78, ",\n",
   "  \"faithful_degree_12_atlas_labels\": [\"", rows12[1].atlasLabel, "\", \"", rows12[2].atlasLabel, "\"],\n",
-  "  \"faithful_degree_78_atlas_labels\": [\"", rows78[1].atlasLabel, "\", \"", rows78[2].atlasLabel, "\"],\n",
+  "  \"degree_78_atlas_labels\": [\"", rows78[1].atlasLabel, "\", \"", rows78[2].atlasLabel, "\"],\n",
   "  \"fusion_length\": ", Length(fusion), ",\n",
   "  \"source_native_729_tensor_factorisation\": true,\n",
   "  \"atlas_label_position_alignment_paid\": true,\n",
