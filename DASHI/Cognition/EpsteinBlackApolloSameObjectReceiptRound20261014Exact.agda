@@ -419,3 +419,65 @@ black2026HouseDoesNotPayBannonFunding = refl
 black2026HouseDoesNotPayWholeNetworkH3 :
   caseWideCovertCommandEstablished canonicalBlack2026HouseBoundary ≡ false
 black2026HouseDoesNotPayWholeNetworkH3 = refl
+
+------------------------------------------------------------------------
+-- OCTOBER 2026 COURT DISPOSITION / SEPTEMBER SUBPOENA CHALLENGE
+-- Two distinct federal dockets must never be joined by party surname.
+------------------------------------------------------------------------
+
+data Black2026CourtProceeding : Set where
+  blackHouseSubpoenaChallengeDDC : Black2026CourtProceeding
+  separateDoeBlackCivilActionSDNY : Black2026CourtProceeding
+
+blackDoeNotHouseChallenge :
+  separateDoeBlackCivilActionSDNY ≡ blackHouseSubpoenaChallengeDDC → ⊥
+blackDoeNotHouseChallenge ()
+
+blackHouseSubpoenaChallengeDocket : Black2026SourceReceipt
+blackHouseSubpoenaChallengeDocket = black-2026-source-receipt
+  houseProcedureRecorded
+  "Black v House Committee on Oversight et al, DDC 1:26-cv-03084, docket and complaint filed 2026-09-03; https://dockets.justia.com/docket/district-of-columbia/dcdce/1:2026cv03084/296175"
+  "2026-09-03" "2026-09-03"
+  "The docket listing authenticates existence of the civil subpoena challenge and complaint. The publicly retrieved docket listing was last refreshed 2026-09-03; later judgment or dismissal is not confirmed here."
+  true true false
+
+blackDoeOctoberDismissalOriginalOrder : Black2026SourceReceipt
+blackDoeOctoberDismissalOriginalOrder = black-2026-source-receipt
+  houseProcedureRecorded
+  "Doe v Black, SDNY 23-cv-6418 (JGLC), 2026-10-15 ECF 485; https://cases.justia.com/federal/district-courts/new-york/nysdce/1:2023cv06418/602764/485/0.pdf"
+  "2026-10-15" "2026-10-15"
+  "Judge Clarke granted plaintiff-requested voluntary dismissal with prejudice under Fed. R. Civ. P. 41(a)(2), with defendant not opposing; court reserved ECF 440 fees motion. This is NOT a merits adjudication of the underlying allegations and does not dispose the separate DDC House subpoena action."
+  true true false
+
+record Black2026DistinctCourtCaseBoundary : Set where
+  constructor black-2026-distinct-court-case-boundary
+  field
+    sdnyDismissalOrderInspected : Bool
+    plaintiffRequestedDismissal : Bool
+    defendantDidNotOpposeDismissal : Bool
+    sdnyDismissalIsTrialFactFinding : Bool
+    sdnyCourtResolvedFeesMotion : Bool
+    ddcComplaintDocketIdentified : Bool
+    ddcFinalDispositionIndependentlyVerified : Bool
+    sdnyOrderAdjudicatesHouseSubpoenaCase : Bool
+open Black2026DistinctCourtCaseBoundary public
+
+canonicalBlack2026DistinctCourtCaseBoundary : Black2026DistinctCourtCaseBoundary
+canonicalBlack2026DistinctCourtCaseBoundary = black-2026-distinct-court-case-boundary
+  true true true false false true false false
+
+voluntaryDismissalNotTrialFinding :
+  sdnyDismissalIsTrialFactFinding canonicalBlack2026DistinctCourtCaseBoundary ≡ false
+voluntaryDismissalNotTrialFinding = refl
+
+feesMotionNotResolvedByDismissal :
+  sdnyCourtResolvedFeesMotion canonicalBlack2026DistinctCourtCaseBoundary ≡ false
+feesMotionNotResolvedByDismissal = refl
+
+separateDocketNotResolvedByDoeDismissal :
+  sdnyOrderAdjudicatesHouseSubpoenaCase canonicalBlack2026DistinctCourtCaseBoundary ≡ false
+separateDocketNotResolvedByDoeDismissal = refl
+
+ddcFinalDispositionStillUnverified :
+  ddcFinalDispositionIndependentlyVerified canonicalBlack2026DistinctCourtCaseBoundary ≡ false
+ddcFinalDispositionStillUnverified = refl
