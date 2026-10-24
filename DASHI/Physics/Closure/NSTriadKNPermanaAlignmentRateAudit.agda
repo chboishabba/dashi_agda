@@ -1,6 +1,48 @@
 module DASHI.Physics.Closure.NSTriadKNPermanaAlignmentRateAudit where
 
 ------------------------------------------------------------------------
+-- 2026-10-25 PERMANA / IBRAHIM SAME-SOURCE PHYSICAL NEGATIVE CONTROL
+--
+-- Source: Permana, Lathief, Ibrahim, Zenodo 19632058 v3 abstract
+-- (17 April 2026) advertises high-vorticity directional curvature
+-- |grad xi| <= C_nu |omega|^(1/2). A separate 6 May 2026 v4 record,
+-- Zenodo 20049273, changes the claimed conclusion to CONDITIONAL
+-- small-data regularity. Versions are same-author family, not two
+-- independent confirmations. See exact executable regression
+-- tests/test_ns_permana_ibrahim_direction_rigidity_heat_shear.py.
+--
+-- In fact choose for each n>0 the smooth periodic, zero-mean,
+-- divergence-free and UNFORCED heat shear
+--
+-- u_n(t,x) = (A/n)exp(-nu n²t) (0,sin(nx),cos(nx)).
+--
+-- Its nonlinearity (u.nabla)u is identically zero. With
+-- omega_n=curl u_n,
+--   omega_n(t,x)=A exp(-nu n²t)(0,sin(nx),cos(nx)),
+--   |omega_n(t,x)|=A exp(-nu n²t) for EVERY x,
+--   xi_n=(0,sin(nx),cos(nx)), |grad xi_n|=n for EVERY x.
+-- At t_n=1/(nu n²)>0, |omega_n|=A/e independent of n,
+-- while |grad xi_n|=n→infinity. Choose A>e*Omega for any fixed
+-- high-vorticity threshold Omega. The entire physical domain is
+-- in the high-vorticity region. Its kinetic mass is A²/n², its
+-- enstrophy is A² (normalized torus averages) at time zero.
+--
+-- Thus the claimed curvature estimate CANNOT be universal with
+-- C_nu depending only on viscosity, and cannot be derived solely
+-- from the PDE/viscous smoothing with no further data-dependent
+-- geometry/regularity premise. This does not refute the manuscript
+-- if C_nu secretly depends on T3, high Sobolev data or other
+-- hypotheses, nor classical conditional Constantin--Fefferman
+-- or Beirão da Veiga--Berselli regularity results.
+--
+-- The present Agda file retains the pre-existing T3 finite-carrier
+-- checks. The dynamic field algebra here is SOURCE-WRITTEN COMMENT
+-- with an exact locally executed SymPy regression (4 passed);
+-- it is NOT a new Agda kernel theorem. Never mark v3/v4 global
+-- regularity proved or promote citations into independent proof.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 -- PROVENANCE
 -- Authors: Bryan P. Permana; Sage A. Ibrahim; Hanif A. Lathief.
 -- Title: "Quantitative Resolution of Global Regularity for 3D
