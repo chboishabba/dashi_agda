@@ -124,6 +124,8 @@ def test_missing_scientists_is_primary_programme_investigation_index():
         "DASHI.Culture.MissingDeceasedCommonObjectProgrammeDiscriminatorExact as Common",
         "DASHI.Culture.MissingDeceasedCommonProgrammePromotionParetoExact as ProgrammeFrontier",
         "DASHI.Culture.MissingDeceasedTwentyScientistRound48AntiEchoChamberMethodologyExact as AntiEcho",
+        "DASHI.Culture.MissingDeceasedTwentyScientistRound50ProfessionalEvidenceRoomExact as EvidenceRoom",
+        "DASHI.Culture.MissingDeceasedTwentyScientistRound43NarrativeEvidenceStrataExact as Narrative",
         "DASHI.Core.EventTimeCapabilityAlignmentBidiExact as EventTime",
         "DASHI.Core.CapabilityFragilityConfoundersBidiExact as Fragility",
         "DASHI.Culture.MissingDeceasedCustodyEventTimeMatrixExact as Custody",
@@ -221,3 +223,36 @@ def test_four_competing_hypotheses_have_explicit_counter_searches():
     assert "caseCovertH3Unpaid = refl" in source
     assert "NOT scientist targeting" in source
     assert "Robert Maxwell/Robert Mercer" in source
+
+
+def test_shared_native_evidence_item_not_promoted_to_source_truth():
+    source = OWNER.read_text()
+    for token in (
+        "wylieEvidenceRoomItem = EvidenceRoom.shared-evidence-room-item",
+        "UNCOMPUTED: no native bytes in case branch",
+        "Christopher Wylie author root; Parliamentary publication is not a second eyewitness",
+        "wylieInvestigatorGate = EvidenceRoom.investigator-gate",
+        "true true false false",
+        "unverifiedMasterPlanPublicationGate = EvidenceRoom.journalist-gate",
+        "NOT READY: unsupported causal allegation",
+        "investigationNotPublication = refl",
+        "admissibilityNotHistory = refl",
+        "publishedClaimNotAdmissible = refl",
+        "sameItemDifferentGates = refl",
+    ):
+        assert token in source
+
+
+def test_source_bounded_narrative_strata_are_separate():
+    source = OWNER.read_text()
+    for token in (
+        "caseObservedLocalLink = Narrative.narrative-proposition",
+        "Narrative.directlyEvidenced",
+        "caseBoundedMethodInference = Narrative.narrative-proposition",
+        "Narrative.boundedInference",
+        "caseUnsupportedUnifiedCommand = Narrative.narrative-proposition",
+        "Narrative.unsupported",
+        "caseNarrativeStrata : List Narrative.NarrativeProposition",
+        "caseStrataDoNotPromoteProgramme = refl",
+    ):
+        assert token in source
