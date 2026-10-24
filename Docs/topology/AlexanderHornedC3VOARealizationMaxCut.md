@@ -330,3 +330,56 @@ we have NOT checked whether the proposed A5³ ⋊ C3 embeds in Monster
 or realizes a selected 3B normalizer. It also does not rule out
 faithful actions on a VOA with an infinite automorphism group,
 where separate structural conditions apply.
+
+
+## 2026-10-24 reuse: existing A5 to C3 (j=0..35) restriction
+
+A literal repository search found no theorem named `A35`; the likely
+existing mathematical owner is
+`Foundations/PolyhedralFiniteRestrictionInstancesExact.agda`
+with its `icosahedralC3` probe, built from
+`IcosahedralSO3RestrictionJ0To35Exact.agda` and
+`PolyhedralFixedSpaceSpectrumJ0To35Exact.agda`.
+Those are **existing** Serre/Fulton–Harris finite-group restriction
+calculations, not original horned-VOA discoveries.
+
+The arrow is `C3 ↪ A5` with representation restriction from A5
+to C3. There is no nontrivial homomorphism `A5 -> C3`.
+The horn-sector C3 remains another, independent action. Selecting
+one order-three element s of A5, its diagonal action
+`((s,s,s),0)` commutes with the outer horn-sector rotation
+`((1,1,1),1)` in `A5^3 ⋊ C3`. Together they generate
+`C3_internal × C3_external` on the **same** finite VOA
+coordinate algebra `Q^{C3 × A5}`.
+
+The exact A5 3-cycle action on 180 points is free for all nine
+subgroup elements except the identity: there are **20 orbits of 9**.
+The complexified permutation representation is therefore twenty
+regular representations of `C3×C3`, with each of the nine
+cyclotomic eigenspaces of dimension 20. The A5 character table
+computes the same internal fixed dimension
+`1·1 + 3·1 + 3·1 + 4·2 + 5·1=20`; the j=0..35 third-turn
+character average is imported, not recomputed.
+
+Exact new owner modules:
+`AlexanderHornedA5C3RestrictionWeldExact.agda` proves internal
+versus external C3 commutation on the same finite actor's slots
+and pointwise rational vertex modes, internal period three,
+nonidentity, and exact reuse of the prior j-scan character average;
+`AlexanderHornedA5C3CharacterRestrictionExact.agda` reuses
+the actual A5 third-turn irrep table and fixed-space formula.
+Finite audit: `scripts/alexander_horned_a5_c3_restriction_weld.py`.
+Independent local finite reproduction PASSED for all 180
+coordinates, all nine subgroup phases, 20 orbits, 60/60 A5
+commutators and 36 j values.
+
+**Still unproved**: identifying the existing abstract icosahedral
+representation with the particular finite Q[A5] regular-VOA
+carrier by a same-object intertwiner; an Agda 60-element
+permutation-group instance of the generic factor actor; an
+explicit ambient SO3 axis-alignment transporter; geometric
+horned exterior pi1, and all exact-head Agda kernel receipts.
+Do not promote identical C3 phase counts to Monster 3B identity.
+
+Canonical detailed proof/source ledger:
+`Docs/topology/AlexanderHornedA5C3RestrictionVOAWeld20261024.md`.
