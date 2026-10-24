@@ -81,3 +81,23 @@ Negative control: the third source is inactive before `t=2.28`, and a third-port
 5. **P0 evidence governance**: rerun full **committed** checker at the exact PR SHA in a known Python environment; build formal Agda/Lean source interfaces only with explicit external hypotheses and exact-kernel receipts. The executable was locally run, not by a GitHub runner.
 
 **Bottom line:** this max-cut closes a narrow but important earlier omission: gauge-field evolution now includes fermion-current feedback and conserved source charges. It does NOT close the 4D renormalized Dirac state, self-consistent wormhole or plasma-gravity gates.
+
+## Additional closed-loop linear response acceptance (2026-10-25)
+
+**Committed:** [same-coupled-background tangent/Kubo-like three-port checker](../../scripts/check_mmp_three_port_backreaction_tangent_20261025.py), locally executed file SHA-256 `cc5fa584c29e7e40900810f32a50b623eb3fb03f122be3c3db880d930ddc0cc9`.
+
+For the SAME 18×18 reference Hamiltonian `H0` and ground-state projector `P0`, its tangent equations contain BOTH `[H0,delta P]` and `[delta h,P0]`, with `delta h = sum_j delta theta_j partial_theta_j h`. The induced material link current is computed by differentiation of the SAME fermionic Hamiltonian:
+
+```text
+delta J_j = Tr(delta P * partial_theta_j h) +
+            delta theta_j * Tr(P0 * partial_theta_j^2 h)
+delta E_j_dot = -delta J_j + I_j
+```
+
+This closes a first-order *dynamical* retarded source-response loop, rather than reusing a prescribed-field Kubo result. The computed responses satisfy linearized Gauss law and superpose across the three source ports; a third pulse beginning after time 2.28 has zero response at time 1.7.
+
+**Actual local validation:** at final time 3.4 the first/second/third source density-response norms are 0.00606879 / 0.02696654 / 0.00653500 per unit input. At finite amplitude `epsilon=0.02`, central finite-difference errors are 1.81e-7 / 2.10e-8 / 8.81e-10; halving `epsilon` to 0.01 reduces the first and second errors almost fourfold, compatible with quadratic truncation. Three-port linear superposition residual is 1.24e-14. The **source-only** tangent comparison (deliberately deleting `-delta J`) violates the full Gauss constraint by norm 0.004202 and differs in electric field by norm 0.003321. This is a carefully labelled negative control, **not** an alternate physical solution.
+
+This linear checker remains finite matrix / 1+1D electrostatic only. A tangent linear response on fixed flat ring with hand-prescribed sources does not imply a true curved 4D Hadamard retarded response, exact light-cone locality, physical MHD, quantized gauge field, or spacetime gravity. It does not use an Einstein stress tensor.
+
+**Second acceptance:** `python3 scripts/check_mmp_three_port_backreaction_tangent_20261025.py`.
