@@ -91,6 +91,10 @@ def verify(path):
     if key not in data:key='native_27x27_map'
     M=s.Matrix([[s.Rational(q) for q in row] for row in data[key]])
     assert M.shape==(27,27) and M.det()!=0
+    N=s.Matrix([[s.Rational(q) for q in row] for row in
+        data['explicit_native_to_source_inverse']]) if (
+            'explicit_native_to_source_inverse' in data) else M.inv()
+    assert M*N==s.eye(27) and N*M==s.eye(27)
     nativeGram=s.diag(*([F(1)]*3+[F(2)]*24))
     sourceGram=s.diag(F(3),*sum(([F(6),F(6)] for _ in reps),[]))
     for k in range(13):
@@ -101,6 +105,31 @@ def verify(path):
         lhs=M*source_coords(srcprod(basis[i],basis[j]))
         rhs=native(M[:,i],M[:,j])
         assert lhs==rhs,('Jordan product',i,j,lhs-rhs)
+    # Source-selected actual A=(Z/3)^3 rational actor: three genuine
+    # Griess character generators. Rather than recompute thousands of
+    # target octonion products, check 3×729 SOURCE basis identities; the
+    # already-verified Jordan isomorphism transports them to native.
+    baseProducts=[[source_coords(srcprod(basis[i],basis[j]))
+        for j in range(27)] for i in range(27)]
+    phaseR=s.Matrix([[0,-1],[1,-1]])
+    for h in range(3):
+        T=s.eye(27)
+        for k,a in enumerate(reps):
+            T[1+2*k:3+2*k,1+2*k:3+2*k]=phaseR**a[h]
+        assert T**3==s.eye(27) and T[:,0]==s.eye(27)[:,0]
+        for i,j in product(range(27),repeat=2):
+            lhs=T*baseProducts[i][j]
+            xs=[(k,T[k,i]) for k in range(27) if T[k,i]!=0]
+            ys=[(k,T[k,j]) for k in range(27) if T[k,j]!=0]
+            rhs=s.zeros(27,1)
+            for k,a in xs:
+                for l,b in ys:
+                    rhs+=a*b*baseProducts[k][l]
+            assert lhs==rhs,(h,i,j)
+    # Actual adversarial certificate test; no blank success receipts.
+    altered=M.copy();altered[0,1]+=1
+    assert altered.T*nativeGram*altered!=sourceGram
+    print('PASS 3x729 actual source A-character product identities and adversarial matrix mutation')
     print('PASS independent Griess1990 -> native rational Albert certificate')
     print('PASS 729/729 products, invertibility, unit and 27D trace Gram')
     print('UNPAID Agda/Lean kernel and all Monster/KK/physical intertwiners')
