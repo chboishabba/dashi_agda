@@ -37,6 +37,12 @@ assert len(p["faithful_degree_12_positions"]) == 2
 assert len(set(p["faithful_degree_12_positions"])) == 2
 assert len(p["degree_78_positions"]) == 2
 assert len(set(p["degree_78_positions"])) == 2
+assert p["degree_78_family_filter"] == "faithful_to_6Suz"
+assert len(p["nonfaithful_degree_78_positions"]) >= 1
+assert not (set(p["nonfaithful_degree_78_positions"]) & set(p["degree_78_positions"]))
+assert set(p["all_degree_78_positions"]) == (
+    set(p["nonfaithful_degree_78_positions"]) | set(p["degree_78_positions"])
+)
 assert len(p["faithful_degree_12_atlas_labels"]) == 2
 assert len(set(p["faithful_degree_12_atlas_labels"])) == 2
 assert len(p["degree_78_atlas_labels"]) == 2
@@ -54,8 +60,7 @@ for rows, degree, labels in (
         assert isinstance(r["atlas_label"], str) and r["atlas_label"]
         assert {r["first_central_phase"], r["second_central_phase"]} == {"zeta", "zetaSquared"}
         assert type(r.get("faithful_to_6Suz")) is bool
-        if degree == 12:
-            assert r["faithful_to_6Suz"] is True
+        assert r["faithful_to_6Suz"] is True
 PY
 
 grep -F 'faithfulDegree12AtlasLabels' \
