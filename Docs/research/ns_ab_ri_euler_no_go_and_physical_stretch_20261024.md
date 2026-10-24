@@ -66,7 +66,6 @@ By dual homogeneous Sobolev embedding
   L^(3/2)(R³) -> dot H^(-1/2)(R³),
 and L³ interpolation between L² and L⁶ followed by Sobolev:
   ||V||_{dot H^(1/2)}
-    <= (K/ν) ||u||³_L3?  NO: exponent is **2**, precisely
     <= (K/ν) ||u||_L3²
     <= (K/ν) ||u||_L2 ||grad u||_L2.
 K collects the standard Sobolev constants. No f=0 forcing
