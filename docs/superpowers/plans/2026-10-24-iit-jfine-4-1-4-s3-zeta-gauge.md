@@ -156,3 +156,39 @@ Both shells are **abstract** F3^4 and could each be equipped with a *chosen* F81
 **Run locally with Python:** \`python3 scripts/iit_jfine_four_one_four_s3_zeta_audit.py\` and \`python3 scripts/iit_numeric_verification.py\`. Then, with source-pinned toolchain, check \`IITPhiIntegrationEverything.agda\`. A separate local exhaustive Python source-faithful audit was completed this turn; exact-head execution of the newly committed GitHub script and exact-head Agda kernel check remain unrecorded. This is a scope distinction, not a plan to ignore later failures.
 
 **Pareto:** do not build a second \(3^9\) carrier, a second Monster zeta phase source, or another numerology index. The next substantive bridge is the literal bulk C3 set/module intertwiner and its normalizer action, plus empirical consumer discrimination if the connection is proposed as physical.
+
+
+## D4×S3 simultaneous motif quotient: 490 unlabeled ternary nine-sheet patterns
+
+As an independent output useful to geometric reasoning and optics null models, classify the **same actual 19,683 labelled sheets** under both original D4 square-site operations and newly defined S3 balanced-trit value transformations. These commute and give a 48-element action.
+
+The eight D4 site permutations have:
+- identity: one element with 9 cycles (0 even);
+- quarter turns: two elements with 3 cycles (2 even) each;
+- half turn: one with 5 cycles (4 even);
+- reflections: four with 6 cycles (3 even) each.
+
+For each spatial permutation, an S3 identity value permutation fixes \(3^{\#\text{site cycles}}\) sheets. Each of the three transpositions of trit values fixes \(3^{\#\text{even site cycles}}\) sheets. The two 3-cycles of values fix zero sheets under these D4 permutations, because no site cycle has length divisible by three. Burnside yields
+\[
+\begin{aligned}
+48\,N
+&=3^9+2\cdot3^3+3^5+4\cdot3^6\\
+&\quad+3(3^0+2\cdot3^2+3^4+4\cdot3^3)\\
+&=23520,\quad\boxed{N=490}.
+\end{aligned}
+\]
+
+An entirely separate literal orbit enumeration of all 19,683 labelled sheets agrees. Joint orbit-size histogram:
+- 1 class of size 3;
+- 6 classes of size 6;
+- 17 classes of size 12;
+- 122 classes of size 24;
+- 344 classes of size 48.
+
+The total count is \(3+36+204+2928+16512=19683\). The new Python same-source auditor and IIT numeric regression check **both** the Burnside numerator and the complete orbit histogram. The Agda gauge module contains an exact *arithmetic* witness \(48\times490=23520\), not a full Agda group-action Burnside theorem.
+
+**Interpretation:** These are symmetry classes under the chosen finite action, not automatically physical modes, neuronal cell types, black-box geometric reasoning abilities, or Ferrocell images. A real measurement would need its own noise-tolerant pattern estimator, optical instrument response and match to a declared action before any equivalence claim.
+
+## Latest source-check status
+
+The IIT owner branch already contains nontrivial Agda constructions **IITF81F9ConcreteQuarticTowerExact** and **IITProjectiveF9Punctured80ConcreteExact**, filling earlier purely interface-level descriptions. These are source-written exhaustive cases; no exact-head Agda kernel receipt was run in this session. The newest 4+1+4 and Monster-character codecs are also source-written and incorporated into the IIT aggregate. Independent exhaustive local Python under /mnt/data/iit_jfine_4_1_4_s3_zeta_audit.py passed all 19,683 roundtrips, 118,098 S3 value-gauge tests, direct 490 joint-orbit enumeration and closed-form Burnside count. Separate exact GitHub script replay is not claimed.
