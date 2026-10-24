@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "id": "bannon_epstein_2019_interview_public_rendition",
+  "note": "Lightweight acquisition index only. No video footage or transcript text is vendored.",
+  "prior_art_owner": "DASHI/Cognition/TrumpMarALagoBannonBridgeExact.agda",
+  "canonical_original_reel": {
+    "status": "not_identified",
+    "doj_data_set": "10 (reported)",
+    "doj_video_object_id": null,
+    "filename": null,
+    "sha256": null,
+    "size_bytes": null
+  },
+  "candidate_public_renditions": [
+    {
+      "label": "djvlad February 1 2026 YouTube upload",
+      "url": "https://www.youtube.com/watch?v=oIEYmflX090",
+      "producer_type": "third_party_upload",
+      "sha256": null,
+      "byte_count": null,
+      "hash_status": "not_computed",
+      "same_bytes_as_doj_original": "not_proven"
+    },
+    {
+      "label": "John Ward February 1 2026 YouTube upload",
+      "url": "https://www.youtube.com/watch?v=7sDK2Cyq-Ck",
+      "producer_type": "third_party_upload",
+      "sha256": null,
+      "byte_count": null,
+      "hash_status": "not_computed",
+      "same_bytes_as_doj_original": "not_proven"
+    }
+  ],
+  "transcript": {
+    "kind": "not_acquired",
+    "source_url": null,
+    "sha256": null,
+    "byte_count": null,
+    "language": null,
+    "source_video_rendition_id": null,
+    "verified_against_reel": false
+  },
+  "chapter_index": {
+    "kind": "third_party_description_not_transcript",
+    "source_url": "https://www.youtube.com/watch?v=oIEYmflX090",
+    "verified_against_audio": false,
+    "anchors": [
+      {
+        "at": "00:25:24",
+        "topic": "2008 financial crisis discussion"
+      },
+      {
+        "at": "00:34:39",
+        "topic": "Bear Stearns discussion"
+      },
+      {
+        "at": "01:09:00",
+        "topic": "Manhattan Project analogy"
+      },
+      {
+        "at": "01:54:40",
+        "topic": "Source's chapter label concerning origin of money"
+      }
+    ]
+  },
+  "controls": {
+    "do_not_vendor_video": true,
+    "do_not_vendor_verbatim_transcript_without_rights_and_accuracy_review": true,
+    "hash_exact_bytes_not_abstract_video": true,
+    "reencoded_renditions_need_distinct_hashes": true,
+    "source_url_not_sha256": true,
+    "chapter_index_not_transcript": true,
+    "source_owner_not_apollo_or_leon_black": true,
+    "any_cross_object_join_requires_explicit_identifiers": true
+  },
+  "open_identifiers": [
+    "Official DOJ video filename or reel ID",
+    "Verified SHA-256 of exact disclosed rendition, not YouTube ID",
+    "Transcript with lawful source and exact timing/alignment",
+    "Filming date, contract acceptance, and evidence joining same reel to messages"
+  ]
+}
