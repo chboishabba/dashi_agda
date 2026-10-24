@@ -1,3 +1,69 @@
+# PREFERRED STRONGER RESULT — H^(3/4) SUFFICES, R699 INITIAL WITNESS
+
+The earlier ell1/ell2 Young proof (s>3/2) below is valid, but NOT
+optimal and should NOT determine the initial regularity requirement.
+The actual mixed product permits an L4/L4 physical-space argument.
+
+Let P_N be the repository's SHARP rectangular Fourier input cutoff
+`|p_j|<=N` on T³, and let H± be the **genuine normalized**
+curl/helical order-zero Fourier multipliers. On divergence-free
+Fourier velocities set
+  M_N = (H+ P_N u0) × (H- P_N u0)
+with normalized torus Plancherel; this is EXACTLY the source-defined
+H+×H- mixed incidence after convolution and output summation.
+
+By the pointwise cross-product inequality and Hölder:
+  ||M_N||_(L2)²
+    <= ||H+ P_N u0||_(L4)² ||H- P_N u0||_(L4)².
+The periodic Calderon--Zygmund/Riesz-transform theorem gives
+`||H±||_(L4->L4)<=C_H4`. The **rectangular** sharp partial sum
+`P_N` has `sup_N ||P_N||_(L4->L4)<=C_P4`, since each 1D
+interval Fourier partial sum is a difference of two modulated Riesz
+projections (M. Riesz theorem) and the 3D cube is their tensor
+product. These operator bounds are nontrivial classical analytic
+facts; do NOT replace them by the FALSE assertion that a Dirichlet
+kernel has uniformly bounded L1 norm.
+
+The 3D periodic Sobolev embedding `H^(3/4)->L4` yields
+  sup_N sum_k |M_(N,k)|²
+    <= (C_H4 C_P4 C_Sob)⁴ ||u0||_(H^(3/4))⁴.
+
+Furthermore by H^0/H^1 interpolation, for u0∈H¹:
+  ||u0||_(H^(3/4))⁴ <= ||u0||_(L2) ||u0||_(H¹)³,
+so with E0=||u0||²_L2 and D0=||grad u0||²_L2:
+  sup_N E_(M,N)(0)
+    <= C * sqrt(E0) * (E0+D0)^(3/2),
+where C depends only on the fixed universal torus/operator
+normalizations and not on N, T, solution history or viscosity.
+
+Restricting the mixed output to R699's canonical nonzero output
+cutoff only decreases the nonnegative mass. This PROVES the standard
+physical smooth/H¹ initial-data ceiling analytically at lower regularity
+than the earlier s>3/2 ell1 proof; it is not a universal positive
+R735 W1 for general NONLINEAR evolution.
+
+**Exact computational check:** `tests/test_ns_r699_h34_l4_physical_endpoint.py`
+passed 2 independent local SymPy checks. It computes FULL Fourier
+coefficients of |H±P_N u|², exact L4 fourth powers and mixed L2
+mass for genuine collinear real divergence-free modes, verifies
+Hölder exactly and the endpoint s=3/4 exponent. It does NOT prove
+the general L4 operator bounds, which are the classical theorems
+above.
+
+**Source attribution:** periodic Fourier partial sum boundedness is
+M. Riesz/Hilbert-transform theory (see
+https://doi.org/10.1007/s00591-025-00390-z and classical harmonic
+analysis texts); helical multiplier Lp boundedness derives from
+periodic Riesz-transform/Calderon--Zygmund theory; H^s->Lp is
+classical Sobolev. The original H± representation retains
+Lei--Lin--Zhou attribution. DASHI owns the source-join and fixture.
+The original rational-parameter Agda R699 record STILL needs
+physical-real helical normalization and norm inequalities before
+kernel certification. Do not claim that the SOURCE CODE now contains
+the full proof term or that R735 W1/W2 are closed.
+
+---
+
 # Navier–Stokes B: cutoff-uniform initial mixed mass (R699/R724/R735)
 
 **25 October 2026; A/B original programme; source-specific mathematical note.**
