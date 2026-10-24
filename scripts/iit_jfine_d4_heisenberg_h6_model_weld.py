@@ -38,18 +38,18 @@ def audit():
         e=tuple(int(i==j) for j in range(6))
         basis.extend([(e,ZERO,0),(ZERO,e,0)])
     basis.append((ZERO,ZERO,1))
-    for u in x.eye(12):
+    for u in x.identity(12):
         a,b=to_standard(u)
         assert from_standard(a,b)==tuple(u)
     basis_pairs=0
-    for u,v in itertools.product(x.eye(12),repeat=2):
+    for u,v in itertools.product(x.identity(12),repeat=2):
         a,b=to_standard(u);aa,bb=to_standard(v)
         assert (dot(b,aa)-dot(bb,a))%3==pair(u,v,x.O12)
         basis_pairs+=1
     R,M=x.R12,x.M12
-    assert x.mm(x.mm(x.mm(R,R),R),R)==x.eye(12)
-    assert x.mm(M,M)==x.eye(12)
-    assert x.mm(x.mm(M,R),M)==x.mm(x.mm(R,R),R)
+    assert x.product(x.product(x.product(R,R),R),R)==x.identity(12)
+    assert x.product(M,M)==x.identity(12)
+    assert x.product(x.product(M,R),M)==x.product(x.product(R,R),R)
     automorphism_checks=0
     for g in (R,M):
         for u,v in itertools.product(basis,repeat=2):
@@ -59,9 +59,10 @@ def audit():
     # cardinality mapping. The D4-stable group preimage has centre 3^(1+2).
     A=[row[:] for row in x.A]+[[0]*8 for _ in range(2)]
     assert x.rank(A)==8
-    assert x.mm(R,A)==x.mm(A,x.R8)
-    assert x.mm(M,A)==x.mm(A,x.M8)
-    o=x.mm(x.mm(x.tr(A),x.O12),A)
+    assert x.rank(x.T)==8
+    assert x.product(R,A)==x.product(A,x.R)
+    assert x.product(M,A)==x.product(A,x.M)
+    o=x.product(x.product(x.transpose(A),x.O12),A)
     assert x.rank(o)==6
     assert 3**6+18*(3**3)**2==3**9
     assert 3**8+2*(3**4)**2==3**9
@@ -82,6 +83,7 @@ def audit():
       "basis_pair_checks":basis_pairs,
       "D4_H6_generator_group_law_checks":automorphism_checks,
       "D4_lift_needs_central_quadratic_correction":True,
+      "exact_imported_symbol_api_verified":True,
       "original_JFine_D4_centre_action_intertwined":False,
       "actual_Monster_normalizer_identified":False,
       "agda_kernel_checked":False}
