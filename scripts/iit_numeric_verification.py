@@ -32,6 +32,7 @@ from iit_xor_369_stress_scan import stress_summary
 from iit_xor_grid_calibration import calibration_summary
 from iit_lattice_prime_power_audit import audit as prime_power_lattice_audit
 from iit_j_coarse_fine_5cube_audit import audit as five_cube_fibre_audit
+from iit_jfine_selected_punctured79_audit import audit as selected_punctured79_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -181,6 +182,18 @@ def verify_numeric_results() -> dict:
     assert five_cube["coarse_fine_exact_reopening"]
     assert five_cube["not_identified_with_j_harmonic_9_or_19683"]
 
+    selected = selected_punctured79_audit()
+    assert selected["exhaustive_fine_codec_roundtrips"] == 19683
+    assert selected["pointed_states"] == 196830
+    assert selected["F81_nonzero_states"] == 80
+    assert selected["inverse_exponent"] == 79
+    assert selected["AGL1_F9_order"] == 72
+    assert selected["5cube_minimal_retained_period"] == 80
+    assert selected["5cube_eigenvalue_order_multiplicities"] == {
+        0: 5, 8: 12, 16: 12, 40: 48, 80: 48}
+    assert not selected["C5_natural_translation_into_C3xC3"]
+    assert not selected["79_is_SSP15_prime"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -192,6 +205,7 @@ def verify_numeric_results() -> dict:
         "ternary_affine_minimality": ternary_minimality,
         "xor_grid": grid,
         "five_cube_relative_fibre": five_cube,
+        "selected_punctured79": selected,
         "large_grid": {"scanned_rows": len(lattice["rows"]),
                        "payload_sha256": lattice["payload_sha256"],
                        "scope": lattice["scope"],
