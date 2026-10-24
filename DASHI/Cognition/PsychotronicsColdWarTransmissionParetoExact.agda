@@ -136,14 +136,84 @@ vasiliev1963English = Source.mkNoDOISource
   "bibliographically verified Soviet experiment-author source and English dissemination; catalogue only, actual primary protocol and field-shielding experiments not independently inspected"
   Source.publicAttribution
 
+clercaudioHistoricalQuote : Source.AttributedSource
+clercaudioHistoricalQuote = Source.mkNoDOISource
+  "Institut Metapsychique International; reproducing Fernand Clerc in Toute la Radio"
+  "La parapsychologie hier, aujourd'hui, demain"
+  "retrospective institutional essay preserves 1954 La Vie des Metiers proposal quoted in Toute la Radio no.192 of 12 January 1955; 1954/55 originals not separately acquired"
+  "1981 historical essay; 1954/55 embedded contemporary quotations"
+  "https://www.metapsychique.org/la-parapsychologie-hier-aujourdhui-demain/"
+  Source.institutionalSource
+  "attributed semantic predecessor to Rejdak's 1967/1970 use of psychotronique; historic quotation not experimental psi evidence"
+  Source.publicAttribution
+
+kholodnyi2017 : Source.AttributedSource
+kholodnyi2017 = Source.mkNoDOISource
+  "Yuri I. Kholodnyi"
+  "History of psychotronic weapons: appearance, development and threat of recurrence"
+  "Byulleten V zashchitu nauki 19 (2017), pp.140-162; search-index excerpts available, original PDF URL currently returns 404"
+  "2017"
+  "https://klnran.ru/wp-content/uploads/2017/04/BVZN_19.pdf"
+  (Source.namedSourceKind "critical historical science-policy article")
+  "secondary retrospective account quoting Yuri Azarov and Kitaygorodsky on reported 1972 conventional experiments; not the original 1972 lab log or independent modern replication"
+  Source.publicAttribution
+
+kuchinov2021 : Source.AttributedSource
+kuchinov2021 = Source.mkNoDOISource
+  "Eugene Kuchinov"
+  "Quesalid's Knots: A Guide to the Soviet Union's Esoteric Research Institutes"
+  "V-A-C Sreda 2021 cultural-history essay; full original online text and footnotes inspected"
+  "2021"
+  "https://sreda.v-a-c.org/en/read-01"
+  (Source.namedSourceKind "independent historical interpretive essay")
+  "explicitly cites Kholodnyi 2017 pp.144-150 for Azarov and Kitaygorodsky's reported 1972 field/reconstruction; NOT an independent 1972 experimental dataset"
+  Source.publicAttribution
+
+canner2021 : Source.AttributedSource
+canner2021 = Source.mkNoDOISource
+  "Stephen Canner"
+  "The Comet, the Typist, and the Psychotronic Think Tank"
+  "2021 independent cultural-history article with participant recollections/original personal-archive photos"
+  "2021"
+  "https://mediatedsignals.com/2021/04/26/the-comet-the-typist-and-the-psychotronic-think-tank-a-tale-of-the-new-age/"
+  (Source.namedSourceKind "historical narrative and interview-based report")
+  "documents a historian-mediated link between the 1970 book, Max Toth, Drbal, 1973 conference and 1974 Pyramid Power; underlying Toth contemporary documentation not acquired"
+  Source.publicAttribution
+
+mills2009 : Source.AttributedSource
+mills2009 = Source.mkDOISource
+  "Allan Mills"
+  "Kirlian Photography"
+  "History of Photography 33(3), 278-287, 2009"
+  "2009"
+  "10.1080/03087290802582988"
+  "https://doi.org/10.1080/03087290802582988"
+  Source.academicArticleSource
+  "historical technical interpretation: ordinary corona discharge is real; psychic/health inference and poor repeatability challenged"
+  Source.publicAttribution
+
+tressoldiStorm2024 : Source.AttributedSource
+tressoldiStorm2024 = Source.mkDOISource
+  "Patrizio E. Tressoldi; Lance Storm"
+  "Stage 2 Registered Report: Anomalous perception in a Ganzfeld condition"
+  "F1000Research 10:234, final revised version 2024; meta-analysis of 113 reports dated 1974-2020"
+  "2024 revised version"
+  "10.12688/f1000research.51746.4"
+  "https://doi.org/10.12688/f1000research.51746.4"
+  Source.academicArticleSource
+  "authors report small favourable anomalous-perception meta-analytic signal with methodological claims; NOT verification of Pavlita generator, Kirlian aura, 5D, or physical EM transfer"
+  Source.publicAttribution
+
 historicalDocuments : List Source.AttributedSource
 historicalDocuments =
   wimmer1940 ∷ sievers1940 ∷ ostranderSchroeder1970 ∷
   maireLaMothe1975 ∷ czechArchive1985 ∷
   pehekKylerFaust1976 ∷ kirkus1970 ∷
-  pragueJPRS1974 ∷ soucek2020 ∷ vasiliev1963English ∷ []
+  pragueJPRS1974 ∷ soucek2020 ∷ vasiliev1963English ∷
+  clercaudioHistoricalQuote ∷ kholodnyi2017 ∷ kuchinov2021 ∷
+  canner2021 ∷ mills2009 ∷ tressoldiStorm2024 ∷ []
 
-historicalDocumentsCount : Source.sourceCount historicalDocuments ≡ 10
+historicalDocumentsCount : Source.sourceCount historicalDocuments ≡ 16
 historicalDocumentsCount = refl
 
 ------------------------------------------------------------------------
@@ -191,6 +261,41 @@ bookReportCitationDiligence = Diligence.source-diligence
   "contemporary Kirkus review and original Prentice-Hall library metadata separate existence/wording from paranormal experimental validity"
   "no reader may infer book experiments were independently replicated by US government"
   "concrete citation graph; no 1985 Czech ministry event attributed to this 1975 report"
+
+------------------------------------------------------------------------
+-- CLAIM-SPECIFIC RIVAL INTERPRETATIONS: ISOLATE THE 1972 EVENT.
+-- Two later publications are a CHAIN, not two independent trials.
+------------------------------------------------------------------------
+
+reported1972SovietEvaluation : Investigation.InvestigativeClaimReceipt
+reported1972SovietEvaluation = Investigation.investigative-claim-receipt
+  "Secondary historical account of Soviet-Czech investigation of Pavlita's psychotronic devices in 1972"
+  "Kholodnyi 2017 pp.144-150 as cited/recounted in Kuchinov 2021 footnotes 20,22-26"
+  "Kuchinov 2021 discussion of Yuri Azarov's first-person retrospective account"
+  "https://sreda.v-a-c.org/en/read-01"
+  Investigation.secondaryCarrier
+  Investigation.inspectedAndClaimLocated
+  "Kuchinov cites Kholodnyi; Kholodnyi quotes Azarov and names physicist Alexander Kitaygorodsky. Original 1972 notebook/circuit/film was NOT acquired."
+  Investigation.commonSourceDependent
+  "same reported 1972 visit, not the distinct 1985 ministerial Soviet-GDR requests"
+  "Acquire 1974 Vesmir Kitaygorodsky original and Azarov account, film and physical control descriptions"
+  Investigation.supportsBoundedClaim
+  true false false
+
+reported1955FrenchCoinage : Investigation.InvestigativeClaimReceipt
+reported1955FrenchCoinage = Investigation.investigative-claim-receipt
+  "Clerc's French term psychotronique preceded Rejdak's Czech use"
+  "La Vie des Metiers Nov 1954 and Toute la Radio no.192 12 January 1955, quoted in later IMI institutional essay"
+  "IMI retrospective reproducing named Fernand Clerc original"
+  "https://www.metapsychique.org/la-parapsychologie-hier-aujourdhui-demain/"
+  Investigation.secondaryCarrier
+  Investigation.inspectedAndClaimLocated
+  "first-party contemporary periodical pages not acquired; later essay retains exact named author/date"
+  Investigation.commonSourceDependent
+  "a term of art, not proof that the underlying hypothesised energy exists"
+  "Retrieve 1954 original and 1955 magazine issue, then Rejdak's exact first use"
+  Investigation.supportsBoundedClaim
+  true false false
 
 ------------------------------------------------------------------------
 -- Directed transmission edges. Wording reflects the exact consumer:
