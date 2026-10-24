@@ -60,9 +60,7 @@ A : V2 → V2
 A (v2 x y) = v2 (neg3 y) (x -3 y)
 
 N : V2 → V2
-N (v2 x y) =
-  let (v2 a b) = A (v2 x y)
-  in v2 (a -3 x) (b -3 y)
+N (v2 x y) = v2 ((neg3 y) -3 x) ((x -3 y) -3 y)
 
 AThreeIsIdentity : ∀ x → A (A (A x)) ≡ x
 AThreeIsIdentity (v2 f0 f0) = refl
