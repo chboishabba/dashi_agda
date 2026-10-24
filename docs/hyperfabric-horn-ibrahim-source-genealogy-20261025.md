@@ -36,3 +36,26 @@ P0: In PR #1244's actual linked three-sector same-object geometry, produce local
 P1: Produce BASED homotopy surfaces parent -> transported child commutator wholly in open exterior, with Jacobian area and transported curvature norm. Only then apply the exact Stokes K acceptance budget. P2: source-selected physical matter/bundle action, domain, multi-scale observable and ordinary ring/F2 controls. P3: exact-head Lean/Agda kernel checks.
 
 Stop snowballing at derivative restatements. Resume only on an original record, actual geometric map, new independent data, a verified negative control, or a source that changes an acceptance test. Keep authorship, document existence, claim, external support, source-written code, kernel proof and physical experiment distinct.
+
+
+## Amendment: mathematical originality and qualified source gate (same date)
+
+The finite 2-of-3 sibling result is a valid exact regression,
+but NOT a new independent mathematical theorem: the sharp
+single-short-descendant theorem already in earlier Agda #1249 /
+Lean #84 rejects the same configurations. The old product-only
+one-short negative control was too loosely described and is
+superseded by the optimized prefix stopping audit in
+scripts/check_horn_optimal_sibling_stopping_tail.py.
+
+Novel source-conditional mathematical consequences are the
+heterogeneous sibling PRODUCT/curvature envelope, the **eventual
+epsilon<1/2 tail** without any exponential source geometric rate,
+the corresponding nontrivial-root limsup sibling >=1/2 necessity,
+the exact source curvature K budget, and the compatible-gauge
+necessary growth bound. These are consequences of standard unitary
+commutator estimates, not new claims of original Hatcher/Gotô
+theorems or proof of a three-sector physical model. At the
+geometry frontier, first-link acquisition prioritises identifying
+the SAME Hatcher meridians in #1244's source-supported atlas
+with lengths merely tending to zero (not necessarily q^n).
