@@ -1,3 +1,22 @@
+## 2026-10-24 completed local physical PHASE-preserving realification check
+
+The fifth test `test_exact_real_imag_six_vector_bridge_preserves_work`
+in `tests/test_ns_physical_vorticity_production_exact.py` performs the
+ENTIRE six-mode Leray/curl/production computation a second way, using
+explicit rational pairs `(Re,Im)` and multiplication
+`(a,b)*(c,d)=(ac-bd,ad+bc)`, with `i` represented by `(-b,a)`.
+It reproduces +8 nonlinear enstrophy and +8 vorticity stretching
+independently of SymPy's native complex arithmetic.
+
+**Local Python receipt:** 5 passed in 0.56 s on a matching standalone
+test (SymPy 1.14.0). This proves exact arithmetic correctness of the
+specific finite witness and rejects naive real-part projection; it
+does NOT yet give an Agda theorem transporting the full complex
+physical Galerkin field into Round42's rational real carrier or R236.
+The concrete phase-preserving adapter is the B representation cut
+that should precede the actual quantitative analytic payment.
+
+---
 ## 2026-10-24 exact PHASE discriminator: real-only Round42 input is insufficient
 
 `NSTriadKNLuoGalerkinFourierVorticityConvolutionExact` explicitly
