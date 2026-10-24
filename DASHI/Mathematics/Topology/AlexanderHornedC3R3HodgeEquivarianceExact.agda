@@ -27,6 +27,7 @@ import Tactic.RingSolver as Solver
 import DASHI.Physics.Foundations.R3HodgeCrossExact as Hodge
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as V3
 import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as Ring
+import DASHI.Foundations.RealAnalysisAxioms as Real
 import DASHI.Mathematics.Topology.AlexanderHornedC3AmbientRotationExact as Ambient
 
 rotateV3 : V3.SU2LieAlgebra → V3.SU2LieAlgebra
@@ -42,7 +43,7 @@ rotateV3Cubed (V3.su2Lie x y z) = refl
 
 -- Mapping the actual ambient R3 triple into SU2's 3-axis
 -- Lie-coordinate carrier is compatible with the SAME rotation.
-asLieVector : Ambient.Triple Ring.ℝ → V3.SU2LieAlgebra
+asLieVector : Ambient.Triple Real.ℝ → V3.SU2LieAlgebra
 asLieVector (Ambient.xyz x y z) = V3.su2Lie x y z
 
 sameAmbientRotation : ∀ v →
