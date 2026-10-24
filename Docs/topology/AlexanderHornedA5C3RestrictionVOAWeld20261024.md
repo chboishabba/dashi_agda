@@ -170,3 +170,13 @@ the diagonal order-three VOA operator is the finite image
 of an infinite-order exterior-group operator. The action is
 genuine on the *specified finite quotient VOA*, but not faithful
 on G. None of this gives a geometric Monster 3B embedding.
+
+
+**Stronger no-embedding consequence:** because the kernel of the
+projection `G ⋊ C3_ext -> C3_ext` is torsion-free, its restriction
+to ANY finite subgroup of the source semidirect product must be
+injective. Consequently all finite subgroups of `G⋊C3_ext` have
+order at most three, so `C3×C3` cannot embed there at all.
+The 9-element faithful action is strictly a quotient phenomenon.
+This is a stronger operational discriminator than contrasting
+two abstract labels `C3`.
