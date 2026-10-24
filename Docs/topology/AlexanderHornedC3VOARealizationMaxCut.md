@@ -1162,3 +1162,41 @@ instantiated concrete `SUNMatrixTheory 3`, Gotô's theorem
 formalization, geometric horn pi1 identity, QCD/PMNS physical
 connection and original likelihood fits remain unverified.
 No CI requirements have been introduced.
+
+## 2026-10-24 cross-owner steelman correction: conjugation orbit vs physical character
+
+Neutrino consumer PR #1247 now contains canonical
+`Docs/physics/HornedLeptonC3SteelmanPhaseGate20261024.md`,
+`NeutrinoHornedC3RephasingNoGoExact.agda` and two local
+source-hash-matched Python regressions.
+
+**Important new no-go:** The genuine nontrivial three-element
+SU3 matrix orbit under `Ad_T` does NOT imply three physically
+different measured horn holonomies: for ANY C3-equivariant
+rho satisfying `rho(r(g))=T rho(g) T^-1`, the
+gauge-invariant character/Wilson trace obeys
+`tr rho(r(g))=tr rho(g)` for all horn words g.
+Simultaneously rotated word products are likewise conjugate.
+The selected PMNS implementation is additionally a charged-
+lepton row rephasing; J, all vacuum transition probabilities,
+source flavour ratios and covariantly rotated Hnu agree EXACTLY.
+
+**Second source-grade boundary:** original Gotô 1949 theorem
+provides single commutators in connected compact **SU3(C)**,
+not automatically in the countable cyclotomic-rational
+SU3(Q(zeta3)) group. Standard cyclic witness of diagonal T
+already needs a primitive ninth root of unity not in Q(zeta3).
+Keep abstract ambient SU3 existence PAID but exact-field
+closure/Agda concrete bridge OPEN. Do not claim a general
+nonexistence theorem for all Q(zeta3) commutator sections.
+
+This is a physical *falsifier* of the naive three-orbit
+interpretation, not a retraction of valid Hatcher/Gotô group
+algebra, the finite A5 quotient, or the nontrivial C3 outer
+source action. The strong physical steelman must exhibit
+an independent, gauge-invariant relative geometry, source,
+boundary condition or interaction with a measurable response.
+The **three-copy actual wild-embedding pi1** and geometric
+flat-bundle identification remain OPEN. New exact local
+stand-ins PASS 36/36 selected cross-PR tests, 10/10 SymPy
+universal matrix laws, no Agda kernel or CI promotion.
