@@ -298,3 +298,47 @@ measurement intake; test a **source-defined, instrument-identical** EEG->current
 ->field->receiver chain and engineered BCI as positive control. Stop
 promoting neural synchrony to physical propagation, photographs to
 target coordinates, or hypothesis types to empirical receipts.
+
+
+### Nonlinear receiver steelman: exact data-processing bound
+
+The ordinary-science steelman deserves its strongest possible receiver: a
+high-gain, nonlinear or stochastic threshold that might react to a tiny field.
+Under the **explicit** Markov assumption
+`T (sender assignment) -> S (physical receiver input) -> Y (observed receiver outcome)`,
+with no other information about T entering the receiver, the established
+data-processing inequality gives `I(T;Y) <= I(T;S)`. Attribute this
+pre-existing theorem to information theory, not to DASHI. Source:
+[Yury Polyanskiy and Yihong Wu's MIT 6.441 course materials](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/)
+and [Cambridge Information Theory lecture notes](https://www.cl.cam.ac.uk/teaching/2021/InfoTheory/InfoTheoryNotes2020.pdf).
+
+For an EXACT binary Markov kernel write `s_t=P(S=1|T=t)` and
+`k_s=P(Y=1|S=s)`. Then
+
+```
+P(Y=1|T=1) - P(Y=1|T=0) = (s_1-s_0)(k_1-k_0).
+```
+
+Because probabilities give `|k_1-k_0| <= 1`, the binary total-variation
+discrimination of the receiver output does not exceed that of its physical
+input. In particular, `s_0=s_1 => y_0=y_1`, regardless of deterministic
+thresholds or independent noise. A real neural receiver can be complex or
+nonlinear, but an isolated receiver cannot conjure sender-identity
+information out of a physically indistinguishable input.
+
+**Executed local equivalent:** all **625** rational choices
+`(s_0,s_1,k_0,k_1) in {0,1/4,1/2,3/4,1}^4` satisfy exact output-difference
+factorisation and total-variation contraction. The test was added to the
+committed standard-library checker; exact GitHub blob execution remains
+unverified.
+
+This is a CONDITIONAL no-go for **information-free incoming signals**,
+NOT for all ultraweak signals, receiver nonlinear gain, contextual coupling,
+pre-shared information, another incoming channel, or new laws outside the
+declared Markov model. A positive result must independently identify which
+assumption breaks, rather than retrospectively redefining 'delta influence'.
+
+**Priority effect:** first establish that a sender-dependent source field or
+other mediator exists at the receiver with measured uncertainty; *then*
+characterise a nonlinear biological or hardware transfer function.
+Receiver gain without input discrimination is not a standalone explanation.
