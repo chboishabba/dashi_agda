@@ -65,3 +65,47 @@ It is smooth and FLAT on \(Y\); single winding circles of radius \(r\to0\) have 
 | F7: physically calibrated gravity, anomaly, global energy, experiment, Clay | OPEN |
 
 **Pareto next:** prove or disprove the Hatcher-word preserving all-level exterior straight-tube collar geometry with one convergent marked path of quantitative loop lengths; then choose the physical admissibility class for the flat bundle (uniformly bounded, boundary defect, L² connection/curvature, energy, etc.). Existing k4 conformal/VOA and the experimental synthetic Wilson interference remain independent.
+
+
+## CRITICAL correction: arbitrary nonflat Wilson holonomies do NOT obey Hatcher π1 identities
+
+The Hatcher relation `m_w=[m_w0,m_w1]` is a statement in the ABSTRACT
+fundamental group. The replacement
+`Hol_A(γ_w)=[Hol_A(γ_w0),Hol_A(γ_w1)]`
+is valid for a **flat connection** (or a chosen explicit homotopy whose
+non-Abelian Stokes curvature defect is established to vanish). For a
+nonflat connection, Hol_A depends on GEOMETRIC loop representatives,
+not just their homotopy classes. Therefore no general bounded
+nonflat-holonomy no-go follows solely from Hatcher's π1 presentation.
+
+**Executed same-source failure control:** new
+`scripts/check_horn_curvature_homotopy_firewall.py`,
+Git blob `4876fffbcc823aebf929c6b0bd6ef29b42591ece`, byte-exact
+local execution PASS. On CONTRACTIBLE R², let
+`A=i H (-y dx + x dy)/2`,
+`H=diag(1,-1,0)`, with smooth bounded nonzero curvature
+`F=i H dx^dy`. Two circles of radii 1/2 and 1/3
+are both trivial elements of π1(R²) yet have
+`Hol=diag(exp(iπ/4),exp(-iπ/4),1)` and
+`diag(exp(iπ/9),exp(-iπ/9),1)`, which differ.
+A nontrivial holonomy therefore is NOT a group
+homomorphism from π1(R²) in this model.
+
+**Strength of this current cut:** all A5 single-branch results
+above explicitly use a TRUE group homomorphism
+`ρ=q:G→A5→SO3→SU3`, and its standard flat-bundle realization.
+They remain valid. To extend an analogous result to a physical
+nonflat connection, introduce a SOURCE GEOMETRIC loop-homotopy
+\(H_w\) and a quantitatively controlled curvature/surface
+transport defect from nonabelian Stokes, and propagate its
+accumulated error through the binary tree. Existing
+`DASHI.Geometry.FlatFormalDiskHolonomySurface` on master
+owns the **UNPAID** nonabelian-Stokes and transport-norm
+analytical interfaces: no silent identification, no fictitious
+zero-curvature residual.
+
+This is an important conditional refinement to any older
+draft text saying merely "bounded connection + Hatcher commutator
+tower" without ALSO explicitly requiring flatness (or the exact
+homotopy-defect certificate). It does not undermine the genuine
+positive smooth-flat SU3 associated-bundle construction.
