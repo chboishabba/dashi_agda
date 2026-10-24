@@ -189,3 +189,49 @@ def test_arn_presenter_contractors_are_historical_equity_not_ksl_investors():
     assert "proposedBuyoutIsNotCompleted" in vals
     assert "quasarServiceIsNotNewShowEquity" in vals
     assert "ACMA says News Corp Australia" in research
+
+
+def test_direct_original_abc_ombudsman_five_findings_and_seven_actions():
+    source = FRIENDLY.read_text()
+    proofs = FRIENDLY_CHECKS.read_text()
+    for token in (
+        "ombudsmanOriginalExecutiveSummary",
+        "39e8eeeffed7acde9a54d3ccc2f2a6fb",
+        "finding1DoublePresentation",
+        "finding2JasonVerification",
+        "finding3SweeperApproval",
+        "finding4BrendanContext",
+        "finding5InstitutionalIntegrity",
+        "canonicalFiveOmbudsmanFindings",
+        "r1RemoveProgrammes",
+        "r2BroaderInquiry",
+        "r3PublishCorrection",
+        "r4NamedAnonymityApprover",
+        "r5LegalVersusEditorialRisk",
+        "r6FactcheckAndUpwardReferral",
+        "r7JuniorTeamSupport",
+        "canonicalSevenOmbudsmanRecommendations",
+        "institutionalAcceptanceDoesNotPayCompletion",
+    ):
+        assert token in source
+    assert "acceptanceDoesNotVerifyCompletion" in proofs
+    assert "findingFiveIsInstitutionalIntegrity" in proofs
+
+
+def test_no_invented_ai_mode_claims_or_external_investors():
+    documentation = RESEARCH.read_text()
+    media = POLITICAL_OWNER.read_text()
+    checks = POLITICAL_VALIDATION.read_text()
+    assert "https://share.google/aimode/Ux4UtsL535FOH9STw" in documentation
+    assert "NOT INGESTED" in documentation
+    assert "No source claim, citation, transcript" in documentation
+    for receipt in (
+        "kyleSubscriberFinanceSelfReport",
+        "harveyNormanProspectiveSponsorship",
+        "kyleUscreenPlatform",
+    ):
+        assert receipt in media
+    assert "reportedSubscriptionsNotAudited" in media
+    assert "advertiserOfferNotEquity" in media
+    assert "subscriberFundingIsAttributedOnly" in checks
+    assert "advertiserInterestNotCapitalStake" in checks
