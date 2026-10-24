@@ -14,6 +14,8 @@ module DASHI.Mathematics.Topology.AlexanderHornedC3MaschkeReynoldsExact where
 --   Moonshine.C3CyclotomicRealDescentExact : fixed real line
 --      and irreducible rational conjugate-pair plane;
 --   Moonshine.C3FourierConjugationExact : cyclotomic rows;
+-- Donor provenance is kept in the source comments / roadmap, not
+-- as unused imports that expand this module's kernel dependency graph.
 --   Physics.Foundations.R3HodgeCrossExact : same ordered
 --      R3 axes, SU2 cross/Hodge owner on an axiomatic real
 --      scalar (NOT definitionally identical to Rational).
@@ -36,11 +38,6 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Mathematics.Topology.AlexanderHornedC3AmbientRotationExact as R3
-import DASHI.Analysis.NormalizedFibreAveragingExact as Averaging
-import DASHI.Moonshine.C3CyclotomicRealDescentExact as Cyclotomic
-import DASHI.Moonshine.C3FourierConjugationExact as Fourier
-import DASHI.Physics.Foundations.R3HodgeCrossExact as Hodge
-import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterIsotypicBypassExact as MathlibSource
 
 third : ℚ
 third = + 1 / 3
