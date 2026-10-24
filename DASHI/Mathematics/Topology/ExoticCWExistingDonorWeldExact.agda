@@ -17,10 +17,12 @@ module DASHI.Mathematics.Topology.ExoticCWExistingDonorWeldExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Agda.Builtin.Sigma using (_,_)
 open import Data.Rational.Base using (ℚ; 0ℚ)
 
 import DASHI.Mathematics.Topology.FiniteCochainComplexExact as Cochain
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineCellularH2Exact as CP1
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineCycleClassExact as Cycle
 
 -- C^0=Q, C^1=0 represented by Unit, C^2=Q;
 -- both differentials vanish. The 0-cochain and 2-cochain
@@ -73,7 +75,7 @@ cp1H2RoundTripRight = CP1.cochainH2RightInverse
 -- The original P1 cycle-class-to-H² identification is inherited.
 cp1PointIsCellularGenerator :
   CP1.p1H11ToCellularH2
-    (DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineCycleClassExact.p1CycleClass
-      DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineCycleClassExact.pointCycle)
+    (Cycle.p1CycleClass
+      Cycle.pointCycle)
     ≡ CP1.cellularPointGenerator
 cp1PointIsCellularGenerator = CP1.pointCycleClassWeldsToCellularGenerator
