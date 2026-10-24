@@ -14,8 +14,8 @@ HEADER = 'pair_id,session_id,condition,time_ns,coil_current_a,dipole_sign,force_
 
 def calibration():
     return {'moment_calibration_groups': {
-        'pos': {'moment_am2': .01, 'moment_std_am2': .001},
-        'neg': {'moment_am2': -.01, 'moment_std_am2': .001}},
+        'pos': {'moment_am2': .01, 'moment_std_am2': .001, 'shared_magnitude_id':'magnet-A'},
+        'neg': {'moment_am2': -.01, 'moment_std_am2': .001, 'shared_magnitude_id':'magnet-A'}},
         'force_readout_std_n':1e-6, 'gradient_readout_std_t_m':1e-4,
         'common_force_offset_std_n':2e-6,
         'coil_sham_max_abs_a':.002, 'coil_active_min_abs_a':.1,
@@ -48,6 +48,7 @@ class ReducerTest(unittest.TestCase):
         self.assertEqual(result['pairs'][0]['active']['gradient_std_t_m'],1e-4)
         self.assertEqual(result['pairs'][2]['moment_am2'],-.01)
         self.assertFalse(result['instrument_origin_authenticated'])
+        self.assertEqual(len({p['moment_covariance_group_id'] for p in result['pairs']}),1)
 
     def reject(self, line_index, col_index, new_value):
         lines=rows()
