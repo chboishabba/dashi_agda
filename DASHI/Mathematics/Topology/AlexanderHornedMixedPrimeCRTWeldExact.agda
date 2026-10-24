@@ -111,3 +111,35 @@ hornBinaryTernaryCodeRoundTrip b
 
 -- The 2^n*3 address stage is an actual finite set. Do NOT
 -- derive any addition/multiplication from this codec alone.
+
+
+------------------------------------------------------------------------
+-- REVERSE LOSSLESS FINITE CODE: one balanced trit -> two horn bits.
+-- 00, 01, 10 encode {-1, 0, +1}; 11 is deliberately UNUSED.
+-- This is a codec inverse ON ITS IMAGE, not a (Z3,+) -> (Z2,+)
+-- group homomorphism and not a base-conversion theorem.
+------------------------------------------------------------------------
+
+open import Data.Product using (_×_; _,_)
+open import Agda.Builtin.Maybe using (Maybe; just; nothing)
+
+ternaryAsBinaryPair : Trit.SSPTrit → Horn.Bit × Horn.Bit
+ternaryAsBinaryPair Trit.sspNegOne = Horn.left , Horn.left
+ternaryAsBinaryPair Trit.sspZero   = Horn.left , Horn.right
+ternaryAsBinaryPair Trit.sspPosOne = Horn.right , Horn.left
+
+binaryPairAsTernary : Horn.Bit × Horn.Bit → Maybe Trit.SSPTrit
+binaryPairAsTernary (Horn.left , Horn.left) = just Trit.sspNegOne
+binaryPairAsTernary (Horn.left , Horn.right) = just Trit.sspZero
+binaryPairAsTernary (Horn.right , Horn.left) = just Trit.sspPosOne
+binaryPairAsTernary (Horn.right , Horn.right) = nothing
+
+ternaryBinaryTwoBitRoundTrip :
+  ∀ t → binaryPairAsTernary (ternaryAsBinaryPair t) ≡ just t
+ternaryBinaryTwoBitRoundTrip Trit.sspNegOne = refl
+ternaryBinaryTwoBitRoundTrip Trit.sspZero = refl
+ternaryBinaryTwoBitRoundTrip Trit.sspPosOne = refl
+
+binaryPairUnusedCode :
+  binaryPairAsTernary (Horn.right , Horn.right) ≡ nothing
+binaryPairUnusedCode = refl
