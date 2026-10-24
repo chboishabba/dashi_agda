@@ -145,21 +145,31 @@ def claim_status(world: dict) -> list[dict]:
     out = []
     for c in world["claims"]:
         missing = [x for x in c["requires"] if a[x]["status"] != "present"]
+        source_scope_absences = [
+            x for x in c["requires"] if a[x]["status"] == "knownAbsent"
+        ]
         out.append({
             "consumer": c["id"], "grade": c["grade"],
             "required_artifact_ids": c["requires"], "missing": missing,
-            "state": "acquisition_blocked" if missing else (
-                "source_attested_only" if c["grade"] in ("source_claim", "source_metadata")
-                else "requires_independent_validation"
-            ),
+            "known_absent_in_declared_source_scope": source_scope_absences,
+            "state": "source_scope_blocked" if source_scope_absences
+                     else ("acquisition_blocked" if missing else (
+                         "source_attested_only" if c["grade"] in ("source_claim", "source_metadata")
+                         else "requires_independent_validation"
+                     )),
         })
     return out
 
 
 def action_candidates(world: dict) -> list[dict]:
     status = {x["id"]: x["status"] for x in world["artifacts"]}
-    unclosed = [c for c in world["claims"] if any(
-        status[x] != "present" for x in c["requires"])]
+    # An acquisition cannot rescue a claim whose declared original-tree
+    # source requirements are already known absent in that same revision.
+    # Such a consumer can be reopened only through a DIFFERENT source-scope
+    # claim, not by counting its other prerequisites as live gain.
+    unclosed = [c for c in world["claims"]
+                if any(status[x] != "present" for x in c["requires"])
+                and not any(status[x] == "knownAbsent" for x in c["requires"])]
     out = []
     for action in world["actions"]:
         missing = [x for x in action["needs"] if status[x] != "present"]
@@ -262,12 +272,21 @@ def candidate_source_receipt(world: dict, artifact_id: str, receipt: dict) -> di
               artifacts[x]["status"] != "present"],
          "source_evidence_is_sufficient_for_scientific_claim": False}
         for c in world["claims"] if artifact_id in c["requires"]
+        and not any(artifacts[x]["status"] == "knownAbsent"
+                    for x in c["requires"] if x != artifact_id)
+    ]
+    excluded_scoped_consumers = [
+        c["id"] for c in world["claims"]
+        if artifact_id in c["requires"]
+        and any(artifacts[x]["status"] == "knownAbsent"
+                for x in c["requires"] if x != artifact_id)
     ]
     return {
         "artifact_id": artifact_id,
         "status": "candidate_tip_not_admitted",
         "candidate_provenance": receipt,
         "would_reopen_consumers": consumers,
+        "source_scope_blocked_consumers_not_reopened": excluded_scoped_consumers,
         "external_source_rights_and_identity_verified": False,
         "world_mutated": False,
         "artifact_status_after": "notLocated",
