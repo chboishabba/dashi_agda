@@ -109,8 +109,24 @@ motifEvidenceFabric = record
   ; edgeStalk = λ _ → Evidence.RecordStatus
   ; incidence = AdmissibleIncidence
   ; restrict = λ _ status → status
-  ; edgeProvenance = λ edge →
-      "DMT/Erowid fibre source dependencies, no measurement promotion" ∷ []
+  ; edgeProvenance = λ where
+      categoryProfileConsumer →
+        "Sean Noah; Miranda Shen; Earth Erowid; Fire Erowid; Michael Silver (2024), DOI 10.3389/fpsyg.2024.1397064" ∷ []
+      recurrentMotifConsumer →
+        "Erowid archival report chronology requires separate primary-report and authorised-use evidence, not present" ∷ []
+      publishedStudyComparison →
+        "Noah/Shen/Erowid/Silver (2024) DOI 10.3389/fpsyg.2024.1397064" ∷
+        "Sanders et al. (2026) DOI 10.1093/nc/niag015; participant crosswalk unverified" ∷ []
+      pairedIndividualComparison →
+        "Original Erowid reports and Sanders individual-phase source, with permission and cohort-identity receipts unlocated" ∷ []
+      originalNeuralReplay →
+        "Christopher Timmermann et al. (2023) DOI 10.1073/pnas.2218949120; original voxel and QC not acquired" ∷ []
+      finiteToyNonidentification →
+        "DASHI.Biology.VisualMotifTransitionOperator; constructed symbolic recurrence, not fitted Erowid data" ∷ []
+      mechanisticModelComparison →
+        "Mago et al. (2026) DOI 10.1093/nc/niaf069; conceptual endogenous M1a source, not an empirical fit" ∷ []
+      concealedInformationTest →
+        "Future ethical preregistration and leakage-controlled acquisition required; no original study evidence" ∷ []
   ; edgeSalience = λ _ → 0
   ; fabricLabel = "DMT cross-source observation and rights hyperfabric"
   }
