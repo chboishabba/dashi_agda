@@ -1,5 +1,9 @@
 # Psychotronics, invisible-energy devices and Cold War esotericism — a critical literature review
 
+> **24 October follow-on: comprehensive Amy/missing-scientist science audit.** See [the source-typed mechanism and phase crosswalk](psychotronics-missing-scientists-physics-crosswalk-20261024.md) for Amy Eskridge's **2018 HAL5** historical device families, original Li–Torr and Podkletnov hypotheses, **R. H. Eskridge's 2021 NASA POAMS study** (not an Amy-authored paper), independent negative experimental literature, conventional diamagnetic/acoustic levitation, and the existing DASHI missing-scientist science owners. This is a *separate* scientific-mathematical/engineering comparator layer; it does not add historical Pavlita reproductions, prove common secret-programme lineage or establish extraordinary force, antigravity, psychic efficacy or event attribution. Existing source-author and claim-specific columns remain authoritative.
+
+
+
 **Date:** 24 October 2026. **Scope:** a targeted multi-language critical/scoping literature review, not a systematic meta-analysis, device experiment, or paranormal proof. The companion [51-record source corpus](psychotronics-literature-corpus-20261024.csv) records original author/root, publication, acquisition level, source role, bounded proposition and exact locator. The prior [Cold War transmission graph](psychotronics-cold-war-transmission-maxcut-20261024.md) and [master Pareto roadmap](psychotronics-pareto-current.md) remain navigational parents.
 
 ## Future-engineering cross-pollination: a plausible “sci-fi super-object”
