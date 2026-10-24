@@ -37,6 +37,7 @@ def paired_contrast(paired_reports: list[dict], control_reports: list[dict],
     subjects = set()
     conditions = set()
     all_keys = set()
+    all_verified = True
     for p, c in zip(paired_reports, control_reports):
         if p.get("schema") != "brainit-reconstruction-evaluation-v1" or c.get(
             "schema") != "brainit-reconstruction-evaluation-v1":
@@ -45,6 +46,15 @@ def paired_contrast(paired_reports: list[dict], control_reports: list[dict],
             raise ValueError("Need paired signal versus explicit input control")
         if p["metric_version"] != c["metric_version"]:
             raise ValueError("Metric implementations mismatch")
+        if bool(p.get("benchmark_admissible")) != bool(c.get("benchmark_admissible")):
+            raise ValueError("Cannot compare certified and uncertified inference receipts")
+        all_verified = all_verified and bool(p.get("benchmark_admissible"))
+        if p.get("benchmark_admissible"):
+            pi = p["source_and_inference_receipts"]
+            ci = c["source_and_inference_receipts"]
+            if (pi["source_inventory_sha256"] != ci["source_inventory_sha256"]
+                or pi["upstream_git_commit"] != ci["upstream_git_commit"]):
+                raise ValueError("Matched conditions use different model/dataset inventory")
         if p["artifact_hashes"]["images"] != c["artifact_hashes"]["images"]:
             raise ValueError("Reference images differ between conditions")
         a, b = _index(p), _index(c)
@@ -78,6 +88,9 @@ def paired_contrast(paired_reports: list[dict], control_reports: list[dict],
         "conditions": sorted(conditions),
         "subjects_observed_only": sorted(subjects),
         "n_test_rows": len(all_keys),
+        "benchmark_admissible": all_verified,
+        "status": "source-verified condition contrast" if all_verified
+                  else "synthetic or unverified source condition contrast",
         "n_bootstrap_draws": draws, "bootstrap_seed": seed,
         "uncertainty_scope": "stimulus-level resampling within observed subjects; "
                              "not an across-subject population confidence interval",
