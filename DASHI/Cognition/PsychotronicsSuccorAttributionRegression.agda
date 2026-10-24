@@ -629,3 +629,115 @@ psiClaimCannotFollowFromPsychedelicPhenomenology :
   Evidence.PsychedelicPhenomenologyPromotesRemoteViewing → ⊥
 psiClaimCannotFollowFromPsychedelicPhenomenology =
   Evidence.psychedelicPhenomenologyDoesNotPromoteRemoteViewing
+
+------------------------------------------------------------------------
+-- PARETO COVARIATION COUNTEREXAMPLE, SOURCE-SPECIFIC AND SYNTHETIC.
+--
+-- If the coil drive and perceptible coil cues always switch together,
+-- subjective improvement (even if genuine) cannot distinguish an
+-- electromagnetic cause from the audible/tactile cue mechanism.
+--
+-- This is a different obstruction from the earlier coarse unity-report
+-- nonfactorability witness: here even an active-vs-sham *difference*
+-- fails causal attribution when the physical causes covary.
+------------------------------------------------------------------------
+
+data SyntheticCausalExplanation : Set where
+  effectFromFieldOnly : SyntheticCausalExplanation
+  effectFromSensoryCueOnly : SyntheticCausalExplanation
+
+data SyntheticObservedTwoArmContrast : Set where
+  activeBeatsShamBySameAmount : SyntheticObservedTwoArmContrast
+
+-- Both models predict the same pairwise observation by construction.
+predictedTwoArmContrast :
+  SyntheticCausalExplanation → SyntheticObservedTwoArmContrast
+predictedTwoArmContrast _ = activeBeatsShamBySameAmount
+
+data AttributionTarget : Set where
+  electromagneticAttribution : AttributionTarget
+  audibleTactileAttribution : AttributionTarget
+
+causalExplanation : SyntheticCausalExplanation → AttributionTarget
+causalExplanation effectFromFieldOnly = electromagneticAttribution
+causalExplanation effectFromSensoryCueOnly = audibleTactileAttribution
+
+twoDistinctExplanationsSameContrast :
+  causalExplanation effectFromFieldOnly ≡
+  causalExplanation effectFromSensoryCueOnly → ⊥
+twoDistinctExplanationsSameContrast ()
+
+twoArmEffectDoesNotIdentifyPhysicalMechanism :
+  INF.FactorsThrough predictedTwoArmContrast causalExplanation → ⊥
+twoArmEffectDoesNotIdentifyPhysicalMechanism =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      effectFromFieldOnly
+      effectFromSensoryCueOnly
+      refl
+      twoDistinctExplanationsSameContrast)
+
+------------------------------------------------------------------------
+-- No empirical trial is added. The factorial design is only a *proposed*
+-- separation of electromagnetic drive and sensory cues, subject to a
+-- bench-tested ability to manipulate or credibly mask those two channels
+-- without differential expectation, heat, vibration, noise or risk.
+------------------------------------------------------------------------
+
+data NominalExposure : Set where
+  noEmField emFieldOn : NominalExposure
+
+data NominalCue : Set where
+  noPerceptibleCue matchedSensoryCue : NominalCue
+
+record SyntheticFactorialArm : Set where
+  constructor synthetic-factorial-arm
+  field
+    electromagnetic : NominalExposure
+    sensory : NominalCue
+open SyntheticFactorialArm public
+
+factorial00 factorial10 factorial01 factorial11 : SyntheticFactorialArm
+factorial00 = synthetic-factorial-arm noEmField noPerceptibleCue
+factorial10 = synthetic-factorial-arm emFieldOn noPerceptibleCue
+factorial01 = synthetic-factorial-arm noEmField matchedSensoryCue
+factorial11 = synthetic-factorial-arm emFieldOn matchedSensoryCue
+
+fieldStatusDiffersWithCuesFixed :
+  electromagnetic factorial00 ≡ electromagnetic factorial10 → ⊥
+fieldStatusDiffersWithCuesFixed ()
+
+cueStatusDiffersWithFieldFixed :
+  sensory factorial00 ≡ sensory factorial01 → ⊥
+cueStatusDiffersWithFieldFixed ()
+
+-- These are mathematically distinct design cells; making them
+-- acoustically indistinguishable, physically feasible and safe is
+-- precisely the missing real-world receipt.
+record DeviceExperimentFeasibility : Set where
+  constructor device-experiment-feasibility
+  field
+    samePhysicalCoilIdentity : String
+    activeShamFieldSensorTrace : String
+    separateSensoryCueManipulation : String
+    amplifierAndTransducerSpectra : String
+    humanBlindingCredibilityAssessment : String
+    independentElectricalSafetyApproval : String
+    shamInterferenceAndLeakageAudit : String
+    participantConsentAndOversight : String
+
+data FactorialDesignProvesRealWorldManipulation : Set where
+data MoreGroupsGuaranteeBlinding : Set where
+data ActiveShamContrastProvesMagneticCause : Set where
+
+formalCellsDoNotBuildPhysicalDevice :
+  FactorialDesignProvesRealWorldManipulation → ⊥
+formalCellsDoNotBuildPhysicalDevice ()
+
+moreGroupsDoNotEnsureMasking :
+  MoreGroupsGuaranteeBlinding → ⊥
+moreGroupsDoNotEnsureMasking ()
+
+confoundedContrastDoesNotProveFieldCause :
+  ActiveShamContrastProvesMagneticCause → ⊥
+confoundedContrastDoesNotProveFieldCause ()
