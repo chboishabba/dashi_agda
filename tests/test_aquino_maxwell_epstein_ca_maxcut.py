@@ -1325,10 +1325,12 @@ def test_ftc_bannon_cid_conflicting_original_issue_dates_are_not_silently_reconc
         "federalPetitionSaysCIDIssuedSeptember25 : Bool",
         "signedCourtOrderSaysCIDIssuedSeptember24 : Bool",
         "exactOriginalCIDIssueDateReconciledWithNativeCID : Bool",
+        "petitionAnnexExhibit2CIDIndexedAtSeptember24 : Bool",
+        "ftcBannonCIDOriginalExhibitLocated = refl",
         "ftcBannonOriginalDateDiscrepancyRecorded = refl",
         "ftcBannonJudicialDateDiscrepancyRecorded = refl",
         "ftcBannonCIDOriginalIssueDateUnpaid = refl",
     ):
         assert marker in case
-    for marker in ("September 25, 2019", "September 24, 2019", "not two proven CIDs", "silently selecting one"):
+    for marker in ("September 25, 2019", "September 24, 2019", "not two proven CIDs", "The same November 9 FTC petition", "better supported", "Exhibit 2"):
         assert marker in report
