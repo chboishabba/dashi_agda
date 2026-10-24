@@ -1,3 +1,5 @@
+> **Repository ownership:** [GingerTheoryReturnToOriginEvidenceAudit20261025.md](../roadmaps/GingerTheoryReturnToOriginEvidenceAudit20261025.md) is the canonical cross-domain *narrative and phase/status* owner (O0–O7). This investigation file is its *primary-evidence supplement*: exact user-supplied screenshot/SRT hashes, time-coded claim-to-source join, corrected source lineage, and the separately tested factorial interaction discriminator. Maintain original-source claims here; avoid an independent competing phase authority.
+
 # Original question recovered: @itsgingertheory data-centre / electromagnetic / intelligence claims
 Source-origin and physical-claim cut, 25 October 2026
 Status: provenance-audited, **not** clinical or national-security causal proof.
