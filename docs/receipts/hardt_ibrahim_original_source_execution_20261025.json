@@ -25,7 +25,6 @@
     "carrier_instances": 13,
     "edges": 7,
     "explicit_negative_joins": 6,
-    "roddin_2013_2024_matching_rounded_current_field_pairs": 3,
     "source_actor_roots_for_hardt_assassination_claim": 1,
     "independent_victim_event_or_trial_records_acquired": 0,
     "original_hardt_unpublished_manuscript_acquired": false,
@@ -33,7 +32,8 @@
     "github_json_connector_runtime_checks": "11/11 PASS",
     "exact_github_script_and_tests_local_python_regressions": "10/10 PASS on reconstructed relationship-matched fixture",
     "exact_original_github_json_rerun_under_python": false,
-    "agda_kernel_typechecked": false
+    "agda_kernel_typechecked": false,
+    "rodin_2013_2024_matching_rounded_current_field_pairs": 3
   },
   "original_primary_source": {
     "original_author": "James V. Hardt",
