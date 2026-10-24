@@ -544,3 +544,31 @@ distinct higher-gauge object.
 The actual nonflat source breaks GLOBAL SO24
 even though the FLAT massless state space
 has SO24 299+276+1.
+
+
+## Highest-value source WZW operational patch result
+
+The 2026-10-24 K27/WZW owner now actually checks the
+standard Schulz (2012) `TM⊕T*M` worldsheet
+Hamiltonian `v^T g v+(p+Bv)^Tg^-1(p+Bv)`
+on **both** source-selected SU2 S3 gerbe patches.
+Explicit B-transform with
+`p_N=p_S-(B_N-B_S)v`
+preserves the entire O(3,3) generalized metric
+and tangent-cotangent pairing; 6×6 symbolic
+identities plus 27 concrete phase-space
+examples PASS locally. New source script
+`check_k27_wzw_gerbe_od3_hamiltonian.py`,
+focused canonical WZW dossier
+`docs/hyperfabric-k27-26d-su2-nsflux-linear-dilaton-worldsheet-maxcut-20261024.md`,
+and Lean #84 thin rational local patch proofs
+SOURCE-WRITTEN/kernel-unverified.
+
+This is the specific classical sigma-model
+same-object field/momentum patch construction
+previously missing from the generic hyperfabric
+roadmap; it is not a 369/27-site graph
+equivalence or quantum BRST completion.
+Global B patch difference represents
+quantized U(1) gerbe data and cannot be removed
+by one global gauge 1-form.
