@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ORIBFOLD-PARITY-COMPATIBLE NONLIFTABLE faithful E6-derived gauge bundle.
+"""ORBIFOLD-PARITY-COMPATIBLE NONLIFTABLE faithful E6-derived gauge bundle.
 
 Original E6 #1106 first-Tits SU3^3 action on 27 has kernel
 Z3_diag. In KK #1241 choose P_c=I and P_L=P_R=diag(-,-,+);
@@ -17,8 +17,9 @@ Thus g(t) is a closed LOOP in the quotient boundary gauge group.
 Its unique lift in H0 starting at identity ends at
 (omega I,omega I,omega I), nontrivial deck Z3, so this boundary-
 admissible principal H bundle on S² CANNOT lift to an H0 bundle.
-Three concatenations close in the cover, giving an order-three
-component in π1(H) (the lift-end obstruction).
+Three concatenations lift to a closed loop in the cover: the
+image of the loop under the deck-group obstruction map to Z3 has
+order three, NOT necessarily the element itself in π1(H).
 
 This demonstrates a real previously unpaid GLOBAL CS/eta test family
 for the SELECTED orbifold, unlike the separate bulk clock-shift T²
