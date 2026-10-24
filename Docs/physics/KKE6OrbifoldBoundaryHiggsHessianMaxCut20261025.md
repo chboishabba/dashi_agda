@@ -1,4 +1,7 @@
 # Source-complete LOCAL electroweak Higgs vacuum on the selected E6-derived orbifold
+
+**IMPORTANT 2026-10-25 CORRECTION — ZERO-MODE-TRUNCATION ONLY:** The 36-real gradient and 18-even Hessian in this document are taken for the INTEGRATED spatially constant four-dimensional effective potential. They are NOT a solution to the separate five-dimensional interior E-L equations and fixed-plane Robin conditions. At the reported t=0.0246, the bulk t-force is +0.147406469832 and does not vanish. See the new physical owner [KKE6OrbifoldIntervalBoundaryELMaxCut20261025.md](KKE6OrbifoldIntervalBoundaryELMaxCut20261025.md) and executable `check_kk_e6_orbifold_interval_higgs_bvp.py` for a nonconstant dimensionless interval solution and its strict physical-normalization limits. The old 7+11 even Hessian count remains a correct claim about that HOMOGENEOUS TRUNCATION, not a complete 5D scalar-stability proof.
+
 2026-10-25. Canonical [KK PR #1241](https://github.com/chboishabba/dashi_agda/pull/1241); original 2-VEV source [first-Tits E6 PR #1106](https://github.com/chboishabba/dashi_agda/pull/1106). This is **TREE-LEVEL LOCAL** Hessian research, not an anomaly-safe full E6/SM theory, complete five-dimensional spectral vacuum, or numerical prediction of observed Higgs parameters.
 
 ## Original exact first-Tits source and a gauge-allowed new boundary term
