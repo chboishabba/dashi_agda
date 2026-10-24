@@ -300,3 +300,114 @@ wydenSurveillanceClaimNotBannonFilmEvidence = refl
 wydenOriginalMessageStillUninspectedHere :
   sourceUnderlyingItemInspectedForThisClaim wydenWomenPaymentsQuestion ≡ false
 wydenOriginalMessageStillUninspectedHere = refl
+
+
+------------------------------------------------------------------------
+-- 2026 HOUSE OVERSIGHT ORIGINAL-OBJECT UPDATE (REPORT 119-831)
+--
+-- Separate original record of a witness's words, committee's assertions,
+-- corporate disclosure, and House procedural disposition.  Neither the
+-- record's authenticity nor a vote certifies underlying NDAs or crimes.
+-- Formal receipts prove only the explicitly encoded source-state fields.
+------------------------------------------------------------------------
+
+data Black2026EvidenceRole : Set where
+  witnessInterviewOnRecord : Black2026EvidenceRole
+  committeeReportOfItsDispute : Black2026EvidenceRole
+  houseProcedureRecorded : Black2026EvidenceRole
+  corporateDisclosureOfReview : Black2026EvidenceRole
+
+record Black2026SourceReceipt : Set where
+  constructor black-2026-source-receipt
+  field
+    black2026Role : Black2026EvidenceRole
+    black2026OriginalLocator : String
+    black2026EventDate : String
+    black2026PublishedDate : String
+    black2026LimitedProposition : String
+    black2026OriginalSourceLocated : Bool
+    black2026SourceInspected : Bool
+    black2026ProvesUnderlyingOffence : Bool
+open Black2026SourceReceipt public
+
+blackJuneInterview2026 : Black2026SourceReceipt
+blackJuneInterview2026 = black-2026-source-receipt
+  witnessInterviewOnRecord
+  "House Oversight Leon Black Final Transcript 7.16.26, interview pp 14-15, 28, 41-42; https://oversight.house.gov/wp-content/uploads/2026/07/Leon-Black-Final-Transcript-7.16.26.pdf"
+  "2026-06-26" "2026-07-17"
+  "Witness confirmed reported terms of a 2015 NDA; described Epstein as informed but not the negotiator; stated separate Dechert conclusions as his account. Neither the agreement nor independent transfer records are enclosed."
+  true true false
+
+blackCommitteeReport119831 : Black2026SourceReceipt
+blackCommitteeReport119831 = black-2026-source-receipt
+  committeeReportOfItsDispute
+  "H. Rept. 119-831, 2026-09-15, printed pp 2, 12, 17, 23; https://www.govinfo.gov/content/pkg/CRPT-119hrpt831/pdf/CRPT-119hrpt831.pdf"
+  "2026-09-15" "2026-09-15"
+  "Committee says one NDA was produced, describes 2015 terms through Black's June witness testimony and advocates referral. The report is not a second independent witness to the 2015 terms."
+  true true false
+
+blackHouseResolution1543 : Black2026SourceReceipt
+blackHouseResolution1543 = black-2026-source-receipt
+  houseProcedureRecorded
+  "Congressional Record 2026-09-16 H5931, H. Res. 1543; https://www.govinfo.gov/content/pkg/CREC-2026-09-16/html/CREC-2026-09-16-pt1-PgH5931.htm"
+  "2026-09-16" "2026-09-16"
+  "House adopted H. Res. 1543 without objection to recommend contempt referral for subpoena compliance; not a DOJ charge, criminal conviction or finding on the contents of any NDA."
+  true true false
+
+blackDechertSECOriginal2021 : Black2026SourceReceipt
+blackDechertSECOriginal2021 = black-2026-source-receipt
+  corporateDisclosureOfReview
+  "SEC 2021-01-25 Apollo Form 8-K Exhibit 99.1, Dechert LLP dated 2021-01-22; https://www.sec.gov/Archives/edgar/data/1411494/000119312521016405/d118102dex991.htm"
+  "2021-01-22" "2021-01-25"
+  "Independent counsel hired by Apollo Conflicts Committee reviewed Black-Epstein personal work; corporate investigative report and witness restatement derive from the same underlying inquiry, not independent forensic examinations."
+  true true false
+
+record Black2026HouseBoundary : Set where
+  constructor black-2026-house-boundary
+  field
+    publicInterviewLocated : Bool
+    interview2015TermsWitnessConfirmed : Bool
+    interviewEpsteinAwarenessAsserted : Bool
+    interviewEpsteinNegotiationProved : Bool
+    executed2015NDABytesInspected : Bool
+    houseCommitteeReportInspected : Bool
+    houseResolutionRecorded : Bool
+    missingNDAContentsIndependentlyVerified : Bool
+    exactNDAtoBlackPaymentLedgerJoinPaid : Bool
+    committeeContemptIsCriminalConviction : Bool
+    corporateDirectorPastCIARoleIsCurrentTasking : Bool
+    blackCommitteeInquiryJoinsBannonFilm : Bool
+    caseWideCovertCommandEstablished : Bool
+open Black2026HouseBoundary public
+
+canonicalBlack2026HouseBoundary : Black2026HouseBoundary
+canonicalBlack2026HouseBoundary = black-2026-house-boundary
+  true true true false false true true false false false false false false
+
+originalHouseTranscriptPaid :
+  publicInterviewLocated canonicalBlack2026HouseBoundary ≡ true
+originalHouseTranscriptPaid = refl
+
+witnessAwarenessDoesNotEstablishNegotiation :
+  interviewEpsteinNegotiationProved canonicalBlack2026HouseBoundary ≡ false
+witnessAwarenessDoesNotEstablishNegotiation = refl
+
+signedNDAObjectStillMissing :
+  executed2015NDABytesInspected canonicalBlack2026HouseBoundary ≡ false
+signedNDAObjectStillMissing = refl
+
+contemptReferralNotConviction :
+  committeeContemptIsCriminalConviction canonicalBlack2026HouseBoundary ≡ false
+contemptReferralNotConviction = refl
+
+directorPastEmploymentNotTasking :
+  corporateDirectorPastCIARoleIsCurrentTasking canonicalBlack2026HouseBoundary ≡ false
+directorPastEmploymentNotTasking = refl
+
+black2026HouseDoesNotPayBannonFunding :
+  blackCommitteeInquiryJoinsBannonFilm canonicalBlack2026HouseBoundary ≡ false
+black2026HouseDoesNotPayBannonFunding = refl
+
+black2026HouseDoesNotPayWholeNetworkH3 :
+  caseWideCovertCommandEstablished canonicalBlack2026HouseBoundary ≡ false
+black2026HouseDoesNotPayWholeNetworkH3 = refl
