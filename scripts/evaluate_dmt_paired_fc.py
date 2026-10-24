@@ -132,6 +132,7 @@ PUBLISHED_STATIC_GFC = {
     "target_p_two_sided": 0.007,
     "target_ci95": [0.028, 0.15],
 }
+EXPLORATORY_PARCELLED_ANALYSIS = "exploratory_parcelled_static_fc"
 ORIGINAL_DYNAMIC_ELIGIBLE_N = 13
 PUBLIC_REPO_README_SURVIVED_MOTION_N = 15
 ORIGINAL_JOINT_EEG_FMRI_N = 12
@@ -155,24 +156,31 @@ def declared_static_window(bold: np.ndarray) -> np.ndarray:
 
 def evaluate_verified_manifest(data_root: Path, manifest_path: Path,
                                source_receipt: Path | None = None) -> dict:
-    """Source-checked real-data admission; not source-equivalent ML/paper replay."""
+    """Admission for BOLD_AAL exploratory comparison; NEVER source-equivalent PNAS replay."""
     from preflight_dmt_imaging_data import check_manifest
     gate = check_manifest(data_root, manifest_path, source_receipt)
     if gate["status"] != "admissible_manifest_only":
         raise ValueError("File/right/source preflight blocked: " + repr(gate["errors"]))
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     analysis = manifest.get("analysis")
-    if analysis != PUBLISHED_STATIC_GFC["analysis"]:
-        raise ValueError("Only original_static_gfc is source-targeted in this evaluator")
+    if analysis == PUBLISHED_STATIC_GFC["analysis"]:
+        raise ValueError("Original StaticGFC requires voxelwise preprocessed NIfTI and "
+                         "Schaeff1007NExt atlas, not source-released BOLD_AAL MAT")
+    if analysis != EXPLORATORY_PARCELLED_ANALYSIS:
+        raise ValueError("This evaluator admits only exploratory_parcelled_static_fc")
+    if manifest.get("input_representation") != "BOLD_AAL_MAT":
+        raise ValueError("Input is not explicitly the released parcelled BOLD_AAL MAT representation")
+    if manifest.get("source_metric_relationship") != "exploratory_not_source_equivalent":
+        raise ValueError("Source equivalence not established; exploratory analysis required")
     eligibility = manifest.get("motion_eligible_subjects")
     if (not isinstance(eligibility, list)
             or len(eligibility) != PUBLISHED_STATIC_GFC["eligible_subject_count"]
             or len(set(eligibility)) != len(eligibility)):
-        raise ValueError("Original static GFC requires an independently justified 16-person eligible set")
+        raise ValueError("Exploratory n16 comparison requires an independently justified 16-person eligible set")
     if not manifest.get("motion_exclusion_source_reference"):
         raise ValueError("Original motion exclusion requires an author/QC provenance receipt")
     if not manifest.get("alignment_preprocessing_source_reference"):
-        raise ValueError("Original static GFC requires a verified preprocessing/time-alignment receipt")
+        raise ValueError("Exploratory comparison requires a verified preprocessing/time-alignment receipt")
     file_pairs = pair_verified_files(manifest, eligibility)
     matrices = {s: (load_parcelled_mat(data_root / row["DMT"]),
                     load_parcelled_mat(data_root / row["placebo"]))
@@ -181,8 +189,12 @@ def evaluate_verified_manifest(data_root: Path, manifest_path: Path,
               for person, (dmt, pcb) in matrices.items()}
     result = paired_effects(sliced)
     result["analysis"] = analysis
+    result["input_representation"] = "BOLD_AAL_MAT"
+    result["source_metric_relationship"] = "exploratory_not_source_equivalent"
+    result["original_source_input_match"] = False
+    result["original_source_execution_reproduced"] = False
     result["published_original_static_gfc_target"] = PUBLISHED_STATIC_GFC.copy()
-    result["source_analysis_cohort_count"] = len(eligibility)
+    result["reference_original_static_cohort_count"] = len(eligibility)
     result["source_analysis_window_tr"] = [240, 480]
     result["matching_paper_measurement_reproduced"] = False
     result.update({
