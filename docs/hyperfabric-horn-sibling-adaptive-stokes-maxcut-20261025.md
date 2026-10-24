@@ -163,3 +163,22 @@ remain EXTERNAL premises; Lean/Lake and Agda kernel were not executed.
 | True linked geometric length+area certificate | OPEN |
 | Physical SU3 selection/prediction, full topological observable | OPEN |
 | Lean/Agda kernel verification | NOT RUN |
+
+
+## Snowball source-discriminator (2026-10-25 literature pass)
+
+The related **Antoine necklace** literature does provide nested *linked*
+solid-torus models and some explicit iterated-function-system coordinate
+data (see Rushing, *Topological Embeddings*; Daverman & Venema,
+*Embeddings in Manifolds*, §2.1; and
+https://ifsdb.github.io/ifs/antoines-necklace/).
+These are useful candidate **geometric test controls**, not an identified
+source for Hatcher's exact marked once-punctured-torus generator injections.
+The Antoine-necklace meridian/winding system must NOT silently be
+substituted for the Alexander-horned-sphere Hatcher Z-block group.
+The new audit should apply three discriminators to every candidate:
+(1) actual ambient link/isotopy class; (2) induced based parent word in
+the complementary pi1; (3) arclength and clearance for the SAME
+marked sibling representatives. A contracting IFS satisfies neither
+(1) nor (2) merely by being contracting. This prevents a geometric
+picture from being promoted into the required same-object theorem.
