@@ -66,6 +66,13 @@ for a,b,c,d in product(range(3),repeat=4):
         fusion[b,c,x]*fusion[a,x,d] for x in range(3))
 assert all(simplify(S3[0,a]/S3[0,0]-1)==0 for a in range(3))
 print("PASS 27 exact SU3_1 Verlinde coefficients C3 and 81 associativity checks")
+# The extended pointed SU3_1 category has quantum dimensions 1,1,1
+# and spins (1,omega,omega). Its Gauss-Milgram phase equals the
+# source SU2_4 phase i; matching *framing* is required for a local
+# bosonic extension, not a Monster c24 equivalence (phase 1).
+framing_SU3=simplify((1+2*omega)/sqrt(3))
+assert framing_SU3==I
+print("PASS exact SU3_1 framing phase i = SU2_4 phase i; not Monster c24 phase 1")
 
 # SU2_4 simple currents only 0 and 4 (d=1). In the EXTENDED SU3_1
 # there are 0,1,2 invertible sectors, after resolution of j=1 fixed point.
