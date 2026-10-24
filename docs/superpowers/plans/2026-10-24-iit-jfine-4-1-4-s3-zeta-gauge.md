@@ -192,3 +192,26 @@ The total count is \(3+36+204+2928+16512=19683\). The new Python same-source aud
 ## Latest source-check status
 
 The IIT owner branch already contains nontrivial Agda constructions **IITF81F9ConcreteQuarticTowerExact** and **IITProjectiveF9Punctured80ConcreteExact**, filling earlier purely interface-level descriptions. These are source-written exhaustive cases; no exact-head Agda kernel receipt was run in this session. The newest 4+1+4 and Monster-character codecs are also source-written and incorporated into the IIT aggregate. Independent exhaustive local Python under /mnt/data/iit_jfine_4_1_4_s3_zeta_audit.py passed all 19,683 roundtrips, 118,098 S3 value-gauge tests, direct 490 joint-orbit enumeration and closed-form Burnside count. Separate exact GitHub script replay is not claimed.
+
+
+## Highest-value further source rechart: 65610 = 90 × 729
+
+The repo **already has an actual Monster 3B Heisenberg multiplicity owner** \`Monster3BHeisenbergMultiplicityExact\`, including exact
+\[
+10\cdot3^8=90\cdot3^6=65610,\qquad 90=12+78,\quad3^6=729.
+\]
+
+Our new 4+1+4 normalized fine chart makes the rechart explicit on the **actual pointed harmonic source**, not a fresh Fin65610:
+
+\[
+\underbrace{(\mathrm{Coarse}_{10}\times \mathbb F_3^8)}_{\text{free C3 orbit labels}}
+\cong
+\underbrace{(\mathrm{Coarse}_{10}\times\mathbb F_3^2)}_{\text{90 labels}}
+\times\underbrace{\mathbb F_3^6}_{\text{729 fibre}}.
+\]
+
+Choose as the two relative trits north and east edge values; leave south and west relative edge values plus all four relative corners as the six-trit internal fibre. The choice is a chart, **not D4-canonical**. The new Agda module \`IITJFineS3Heisenberg90x729CodecExact.agda\` constructs both inverse functions on the literal earlier \`C3Regular.OrbitLabel\` source and composes the original 196830 pointed source into \(\mathrm{NinetyLabel}\times\mathrm{SixTrit}\times\mathrm{Centre3}\) with proof candidates. The numeric audit exhaustively verifies all 65610 pointed free-C3 orbit labels under both directions.
+
+This reaches the *same finite carrier shape* as the 729×90 Heisenberg/Suzuki multiplicity in the existing Monster source. It does **not** show the 729-component is the nonlinear representation of an extraspecial group \(3^{1+12}\), or that 90 carries the actual 12+78 Suzuki action. The next meaningful algebraic task is a **source-actual Weyl/Heisenberg intertwiner** compatible with the chosen C3 action, plus selected normalizer involution; do not fabricate those by dimensional coincidence.
+
+**Pareto frontier upgrade:** the previous unresolved problem "how to produce an actual 65610-dimensional free-C3 carrier" is now discharged at the **finite pointed-set/action** level, and the 90×729 *set* shape is also explicit. The unmet task is action matching to the source-literal Moonshine representation, not capacity or count.
