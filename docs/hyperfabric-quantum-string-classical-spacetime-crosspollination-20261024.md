@@ -225,3 +225,66 @@ The earlier shorthand "only flat-GR / 2D toy worldsheet" **undercounted existing
 - actual `CalabiYau369CompactFibreBridge.canonicalDimension369` spacetime dimension `=10`.
 
 This is an **already-owned finite theorem connection**, not a proof of continuum GR, Einstein/QFT same-action physics, or a 2D string. The new file has not received an Agda exact-head kernel receipt in this environment; use the repository-pinned Agda runner on the new owner as the acceptance gate. No selected Monster 729 action or smooth manifold data is manufactured by these imports.
+
+
+## 2026-10-24 source-first STRING / 2D WEYL / MONSTER / RNS max-cut correction
+
+**Critical correction to earlier research summary:** There is already extensive genuine prior art relevant to worldsheet conformal physics in the **master** Agda tree and in separate open sibling PRs. This section audits that work before deciding the remaining theorem producer. It does not pretend that a typed worldsheet-target **interface** is a constructed quantum CFT or that the physical CFT/BRST machinery is absent merely because no file is named `PolyakovWorldsheet.agda`.
+
+### Existing actual source owners, ordered by mathematical authority
+
+| Original current owner | Already constructed/source-written content | What it does **not** by itself prove |
+|---|---|---|
+| `DASHI/Moonshine/VertexOperatorAlgebraCore.agda` | graded state, vertex modes, vacuum, conformal vector, locality, Jacobi, Virasoro **typed obligations**, mode/group-action and character interfaces | an actual nontrivial full `V^natural` VOA or worldsheet quantum model |
+| `DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda`; `MonsterGradedVOABridgeExact.agda` | graded-trace/dimension identity given a supplied group-equivariant VOA with trace data; strong separation of graded representations vs vertex algebra | full VOA construction, analytic modularity or genus-zero from traces alone |
+| `DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda` | concrete **c=0** rational one-dimensional vertex-algebra seed: vacuum, selected modes, creation, translation, commutative associative (-1)-product, zero conformal action | full `V^natural`, physical string CFT, or general VOA Jacobi proof |
+| `DASHI/Moonshine/VNaturalOrbifoldConstruction.agda` | proof-relevant FLM Leech `V_Lambda^+ ⊕ (V_Lambda^T)^+` fixed/twisted summands, explicit selected `centralCharge24` and locality/Jacobi assembly requirements | unconditional construction of `V^natural` without inhabited external source/assembly fields |
+| `DASHI/Moonshine/TwistedModuleModularity.agda` | source-native commuting-pair `S:(g,h)↦(h,g^-1)`, `T:(g,h)↦(g,gh)`, twisted-sector/traces and *conditional* SL2Z covariance/projective multiplier interfaces | construction of all analytic twisted traces and projective modular action |
+| `DASHI/Biology/MoonshineMonsterLieStringBigradingExact.agda` | genuine finite Borcherds root-prefix arithmetic `c(mn)`: `1,0,196884,21493760` on selected (m,n); exact stage ordering through VOA ⊗ Lorentzian lattice → physical BRST quotient → Lie bracket → denominator | actual selected positive physical-state BRST cohomology and complete denominator identity from finite prefix alone |
+| `DASHI/Moonshine/RankOneHeisenbergFockWindowExact.agda` and existing rank-one Fock grading owners | exact finite creation/annihilation and truncated commutator/number eigenvectors | completed Fock module, Virasoro/OPE normal-ordering on all modes |
+| `DASHI/Physics/QFT/VOAMoonshineBridgeReceiptSurface.agda` | K3 sigma/SCFT, chiral CFT net, full holomorphic factorisation and 4D extraction **target surfaces** with explicit open obligations | nontrivial K3 compactification or genuine 2D quantum sigma model (this module also has postulates: do not promote it into a safe theorem) |
+| Agda #1239 (`docs/monster-c24-virasoro-primary-ads3-maxcut.md`, `docs/monster-ads3-gravity-witten-kk-braid-maxcut.md`) | exact finite q-series and selected primary/descendant subtraction, braid/SL2Z representation tests and explicit AdS3/Witten proposal authority | full Monster CFT unitary modular functor or proved AdS3 Einstein gravity dual |
+| `DASHI/Physics/Foundations/GRQFTNambuGotoSurfaceActionExact.agda` | actual **2+1D MEMBRANE** positive-tension domain-wall stress law, with source-matching conditional Israel bubble model | **1+1D STRING** Polyakov quantum worldsheet, Weyl criticality |
+| `DASHI/Geometry/CalabiYau369CompactFibreBridge.agda`, `CalabiYauPhysicalProducerCutset.agda` | typed **3+6+1 =10 target dimensional** reading, CY structural geometry, compactification/physical anomaly and spectrum contracts | nontrivial selected Ricci-flat compactification, consistent 10D RNS string spectrum |
+| `DASHI/Physics/Closure/DarkDimensionStringPromotionBoundaryExact.agda` | source-attributed observational/swamp-land/KK dark-dimension model with empirically falsifiable vs framework-identification split | a proof of string-theory origin or necessary dark-dimension consequence |
+
+**Disambiguate Weyl before borrowing it:** an E8/Coxeter *Weyl group*, a finite qutrit/Weyl (Heisenberg) unitary pair and **local 2D worldsheet Weyl metric rescaling** are different objects. Similarly Virasoro/algebraic vertex actions, quantum consistency of the worldsheet path integral, and Brown–Henneaux *AdS3 boundary CFT* are related via potential translations but are not definitionally the same sector.
+
+### Two precise conformal-charge paths (published PRIOR theory, not DASHI discoveries)
+
+1. **Borcherds/Moonshine bosonic chiral construction**: standard `V^natural` (c=24) and rank-2 Lorentzian even lattice `II_{1,1}` (c=2) form **matter c=26**; ordinary bosonic reparametrization `bc` ghosts have c=-26. Their **signed anomaly budget** is `24+2-26=0`. This is the correct *matter/ghost* prerequisite for the source's no-ghost/physical-state construction; the published theorem is older external mathematics. It does not mean the physical spatial hypervoxel must have 26 sites or that the 27 Monster charges are 26 target dimensions. Source: Borcherds, *Monstrous moonshine and monstrous Lie superalgebras*, Invent. Math. 109 (1992), DOI 10.1007/BF01232032; original author PDF https://math.berkeley.edu/~reb/papers/monster/monster.pdf .
+2. **10D RNS (superstring) construction**: 10 free bosons contribute c=10; 10 worldsheet Majorana partners contribute c=5; reparametrization ghosts c=-26 and superghosts `beta,gamma` c=+11. The independent signed condition is `10+5-26+11=0`. The CY candidate's 9 spatial+time=10 label fits the *dimension counting* of this second family but supplies NO spin-structure, superconformal current, worldsheet fermion coupling, NS/R sectors, GSO choice, target beta functions, modular invariant spectrum, or compactification. Monster c24 is not simply an extra sector on that ten-dimensional sigma model: `24+10-26=8 !=0` for the naïve bosonic combo. Source: covariant RNS literature, e.g. PTEP 2015 `033B11` and 2025 `033B02`.
+
+**Why the arithmetic does not close BRST:** c_total=0 is a necessary perturbative conformal-anomaly condition within a specified conventional CFT/ghost model; one must still construct the stress OPE/Virasoro algebra, the ghost Fock representation, normal ordering and intercept, nilpotent BRST charge, BRST cohomology positivity/no-ghost theorem under exact hypotheses, sewing/modular consistency, and gauge/anomaly/physical-state operators. The original Borcherds theorem is externally established; this Agda integration does not kernel-reprove it.
+
+### New owner-first exact cut in this PR
+
+- `DASHI/Unified/HyperfabricMonsterBosonicWorldsheetExistingOwnerCutExact.agda` **imports actual earlier** `VNaturalOrbifoldConstruction`, `MoonshineMonsterLieStringBigradingExact`, and `CalabiYau369CompactFibreBridge`; proves the ordinary exact signed-charge *magnitude* equations `24+2=26`, `10+5+11=26` with explicit provenance; consumes the already-owned `(1,1)` and `(1,2)` Monster Lie coefficient theorems; proves `24+10 !=26` by constructor contradiction; requires the chosen Vnatural `centralCharge24` source input rather than constructing it. Agda file is **source-written, kernel-UNVERIFIED**.
+- `scripts/check_monster_bosonic_worldsheet_conformal_cut.py` gives a **nontrivial 2D classical Polyakov-kinetic-density** finite test, not just a 2D embedding sketch. On the existing periodic `C3×C3` nine-site source sheet choose `X(i,j)=(i-1,j-1,((i+j)%3)-1)` in the original **27-site path Cube27 target**, with local positive conformal metric `h_ab(x)=w(x)^2 diag(4,9)`. For discrete forward gradients and finite local area/inverse metric,
+
+  ```text
+  sqrt(det h) = 6 w(x)^2
+  h^(11) = 1 / (4 w(x)^2)
+  h^(22) = 1 / (9 w(x)^2)
+  sqrt(det h) (h^(11)|d1X|^2 + h^(22)|d2X|^2)
+    = 6 (|d1X|^2 /4 + |d2X|^2 /9).
+  ```
+
+  Therefore the **classical kinetic density at each site** is invariant under independent positive local scale changes `w(x)`; exact rational calculation gives a positive total sample `S=78`. This is an exact *2D conformal cancellation* for that selected discretization, not full diffeomorphism invariance, a continuum `∫Sigma sqrt(h) h^ab ∂X∂X` limit, a true dynamic worldsheet metric, or the quantum Weyl anomaly. A membrane `p+1=3` kinetic density would scale as `w^(3-2)=w`, showing why the existing positive-tension membrane cannot be silently substituted. Note also that Nambu-Goto **area** is not invariant under arbitrary rescaling of the *induced* metric; the Polyakov intrinsic 2D auxiliary metric has the separate classical Weyl redundancy.
+- A local **equivalent exact-rational replay** of the source-shaped 9-cell worldsheet calculations passed with `S=78` and both critical-charge identities, as well as the prior finite Monster Lie multiplicities. This is **not** an Agda/Lake kernel receipt, or confirmation of a full quantum worldsheet. The branch script has not been independently fetched and run byte-for-byte in this session.
+
+### Updated Pareto max-cut for string theory without inventing another framework
+
+**S0: repository archaeological freeze — done.** Canonical current owners mapped. Worldsheet, conformal VOA, orbifold/twisted modularity, Monster Lie/no-ghost, 10D CY, RNS, membrane, KK, AdS3 CFT and empirical source claims are explicitly separated by theory and provenance.
+
+**S1: finite positive/negative tests — DONE at exact finite arithmetic.** Actual 9-site 2D Weyl kinetic-density fixture into the true Cube27; independent c26 bosonic-Monster and c15 RNS worldsheet accounting; fails the naïve `c=24 + 10` bosonic amalgam. Implemented in same existing hyperfabric PR. New Agda file needs exact-head kernel certification.
+
+**S2: choose ONE **source-owned** quantum string construction before further formalization.** Best already-near term is **Borcherds c24+2 bosonic**: instantiate physical `V^natural⊗V_{II1,1}` and the actual *published* no-ghost theorem through existing `VNaturalOrbifoldConstruction`, `TwistedModuleModularity`, `MoonshineMonsterLieStringBigradingExact` and `VertexOperatorAlgebraCore`. Target the genuine state/VOA restriction and physical-state quotient on the SAME carriers; cannot close with c-number or finite root prefixes alone. **Do not conflate** with selected physical 369 Coulomb Hilbert space, Monster 27-charge chart or the 3x3 spatial paths.
+
+**S3: decide 2D worldsheet physical target.** If selected is the 10D RNS/CY route, derive actual `X:Sigma→M`, worldsheet spin/fermion/super-Virasoro and bc/beta-gamma, GSO and modular consistency with a selected 10D target/CY stabilization. This is not the same job as the Bosonic Moonshine no-ghost theorem; record a **separate** theorem lane, not a hybrid constructed from counting.
+
+**S4: selected QFT/GR/AdS3 and gauge consumers.** Use common stress/action and metric owners from Agda #1165, nonflat finite GR, Lean #68 flat benchmark; for AdS3 Witten's conjectural Monster dual require bulk state/action/saddle/partition and marked boundary modular observable. For YM require real continuum pinned construction/OS/mass gap, for NS physical signed estimate and continuation. No string result can be turned into Clay by a common colour/charge label.
+
+**S5: empirical/discriminating predictions.** Source-chosen observables, dimensional normalizations, unitary+positive physical Hilbert space, anomaly absence, measured spectra/couplings or gravity benchmark, alternative-model comparisons. Reuse #1241 KK and #897 Dark Dimension **bounded tests** only where a selected string compactification actually produces their fields.
+
+**Top theorem leaf:** Not `24+2=26` or `Polyakov density is 2D-scale invariant` (both elementary). It is the *actual physical state/BRST cohomology representation* with an explicit same-object map from the existing Monster VOA/II11 and an operator-preserving comparison to the intended 369 or 4D physical consumer. If the source's physical output is only a mathematically meaningful Monster Lie algebra rather than a four-dimensional observed theory, explicitly report that narrower success.
