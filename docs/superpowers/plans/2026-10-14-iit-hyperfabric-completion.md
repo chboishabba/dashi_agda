@@ -141,3 +141,38 @@ agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/EverythingIITPhiIn
 ```
 
 The first command establishes finite numerical/combinatorial regression targets only. A fresh PyPhi oracle run establishes full-CES numerical values for selected fixtures. The final command (or equivalent CI kernel evidence) establishes formal Agda validity.
+
+
+## Task 11 — XOR-grid recurrence-versus-dynamics counterexample (2026-10-24)
+
+**Reason for cut:** The XOR-grid model's causal wiring has directed cycles, but the selected linear Boolean dynamics **erase every initial condition after two updates**. This is a source-derived fact stronger than a generic "network topology differs from local gate" boundary. It is a check against treating recurrent connectivity, C3 port holonomy, graph cut, instantaneous \`phi_s\`, lasting information, or phenomenal consciousness as interchangeable.
+
+**Original owners and priority:** reuse \`IITXORGridAdversarialExact.gridStep\` and the exact \`IITXORGridFibreCircuitBridgeExact.northWestNorthEastCircuit\`. New bounded DASHI consequence in \`IITXORGridTwoStepDynamicsExact.agda\`, wired into \`IITPhiIntegrationEverything.agda\`; independent executable enumeration \`scripts/iit_xor_grid_two_step_audit.py\` imports the canonical numerical \`grid2x2_step\` instead of reimplementing the grid.
+
+With \`x=(NW,NE,SW,SE)∈F₂⁴\`:
+\`\`\`
+F(x) = (NE⊕SW, NW⊕SE, NW⊕SE, NE⊕SW)
+F²(x) = (0,0,0,0)          for every one of the 16 possible x
+Im(F) = {(p,q,q,p) : p,q∈F₂}     exactly 4 outcomes
+each image outcome has 4 preimages
+\`\`\`
+This is a **nilpotent index-2** state transition despite genuine directed 2-edge circuits. A state has no nonzero periodic orbit under this chosen map. The statement is about the small *DASHI fixture*, not arbitrary square grids or the entire class of physically implemented XOR systems.
+
+**Independent checked toy enumeration:** all 16 states, 4 one-step outputs (4 preimages per output), all second iterates zero; computed with a separate 2026-10-24 Python enumeration. **Actual exact-head PR script run and Agda kernel check remain separate pending receipts** in this environment.
+
+**Source origins (keep distinct):**
+- Scott Aaronson, "Why I Am Not An Integrated Information Theorist (or, The Unconscious Expander)" and follow-up critique, *Shtetl-Optimized* (2014), \`https://scottaaronson.blog/?m=201405\`. Original critic, not author of DASHI's 2×2 computational proof.
+- Giulio Tononi, "Why Scott should stare at a blank wall and reconsider (or, the conscious grid)" (2014), \`https://learniit.org/corpus/tononi-2014a\`. Direct response defends the IIT interpretation of constructed XOR grids; do not attribute that view to Aaronson.
+- Larissa Albantakis et al., "Integrated information theory (IIT) 4.0: Formulating the properties of phenomenal existence in physical terms", *PLoS Computational Biology* 19(10), e1011465 (2023), DOI \`10.1371/journal.pcbi.1011465\`. IIT's original 2023 formal model, not proof of phenomenal identity in the DASHI grid.
+- Current PyPhi formalism \`https://pyphi.readthedocs.io/en/latest/theory/formalism-versions.html\`: 2023 versus 2026 system-phi definitions must be versioned. Its documented canonical three-XOR example gives 2023 \`phi_s=1.5\` versus 2026 \`phi_s=0\` (different from the 2x2 grid), while cause–effect structure can remain nonempty. Under the repo's 2x2 numerical reference: 2023 \`phi_s∈{0,0.5}\`, positive at 4/16 states, and 2026 \`phi_s=0\` at all 16 states. **These are numerical-source/reference results, not Agda theorems or claims of consciousness.**
+
+**Cross-PR source boundary:** The consumer-relative geometry/learning crosslinks in [#1246](https://github.com/chboishabba/dashi_agda/pull/1246) (Ferrocell/qualia roadmap), [#1095](https://github.com/chboishabba/dashi_agda/pull/1095) (semantic-action geometric reasoning), and [dashiBRAIN #7](https://github.com/chboishabba/dashiBRAIN/pull/7) remain sibling branches. No unmerged module is imported or reported as merged. The XOR grid informs **experimental null design**, not a realised correspondence between neurons, ferrofluid, quantum entanglement or a phenomenological field.
+
+**Acceptance (on this exact IIT branch, with pinned dependencies):**
+\`\`\`sh
+python3 scripts/iit_xor_grid_two_step_audit.py
+python3 scripts/iit_xor_grid_calibration.py
+python3 scripts/iit_numeric_verification.py
+agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/EverythingIITPhiIntegrationMaxCut.agda
+\`\`\`
+Required receipts: full branch commit, stdout/exit status, toolchain, numeric formalism version, input/source digest, and any failing dependency. A source-written Agda proof is not a passed compiler run; finite recurrent-state dynamics do not independently settle IIT's interpretive premises.
