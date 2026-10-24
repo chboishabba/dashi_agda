@@ -241,3 +241,36 @@ a distinct falsifiable target.
 No new foundational C3 spin cover, no speculative
 'physical zero mode' and no accidental promotion of
 Monster or quantum-conscience claims.
+
+
+## 2026-10-24 additional native characteristic-three proof
+
+To avoid relying only on Python to classify the bad-characteristic
+case, `DASHI/Mathematics/Topology/AlexanderHornedC3Mod3JordanExact.agda`
+now defines the ACTUAL finite three-element additive carrier
+`F3={f0,f1,f2}`, the two-vector carrier `F3²`, the
+SAME cyclotomic companion operator
+
+    A(a,b)=(-b,a-b),
+
+and its nilpotent part `N=A-I`. It proves by exhaustive
+nine-vector pattern matching:
+
+    A³ v = v  for all v,
+    N² v = 0  for all v,
+    N(1,0) != 0,
+    A(1,2)=(1,2), (1,2)!=0,
+
+and the literal C3 group action composition law, borrowing
+the existing `FiniteC3OrbitStabilizerExact` multiplication.
+Together with the standard theorem that the ONLY simple
+F3[C3] module is trivial, this gives a genuine nonsplit
+self-extension in the underlying 2D representation.
+We retain the distinction between this finite Agda
+source-written theorem and successful Agda kernel verification;
+no compiler success was returned.
+
+The good-characteristic source owner remains the rational
+`AlexanderHornedC3MaschkeR3Exact` and the characteristic
+5/7 field test. No artificial one-to-one identification
+of finite F3 with Q or R carriers is promoted.
