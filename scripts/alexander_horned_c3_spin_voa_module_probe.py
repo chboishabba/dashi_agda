@@ -16,7 +16,7 @@ s=tuple(-v for v in q)
 
 def qm(a,b):
  x,y,z,w=a; X,Y,Z,W=b
- return (x*X-y*Y-z*Z-w*W,x*Y+y*X+z*W-y*Z,
+ return (x*X-y*Y-z*Z-w*W,x*Y+y*X+z*W-w*Z,
          x*Z-y*W+z*X+w*Y,x*W+y*Z-z*Y+w*X)
 def powq(a,n):
  r=E
