@@ -175,6 +175,27 @@ class ExactLeptonCPTests(unittest.TestCase):
             cubic_trace[1],6*mass_product*charged_product*quartet(U)[1]
         )
 
+    def test_nonzero_cp_does_not_make_selected_C3_residual_group_finite(self):
+        # T=diag(1,zeta,zeta²); S1=2|u1><u1|-I.
+        # tr(T S1)=a+b*zeta, with a,b rational because delta=120deg.
+        # Its rational field trace is 2*a-b, not an integer.
+        # By the classical algebraic-integer theorem TS1 has infinite
+        # order. That theorem is not newly proved here.
+        U=pmns(ROOT_ZETA)
+        self.assertNotEqual(quartet(U)[1],F(0))
+        def field_norm(z):
+            a,b=z
+            return a*a-a*b+b*b
+        diagonal=[2*field_norm(U[a][0])-1 for a in range(3)]
+        a=diagonal[0]-diagonal[2]
+        b=diagonal[1]-diagonal[2]
+        q=2*a-b
+        self.assertEqual(q,F(442358853598,216225930001))
+        self.assertEqual(q,F(372023795875918,181846007130841))
+        self.assertEqual(q,6*field_norm(U[0][0])-2)
+        self.assertTrue(F(2)<q<F(3))
+        self.assertNotEqual(q.denominator,1)
+
     def test_cp_conserving_real_branch_has_zero_cp_odd_invariant(self):
         U=pmns(ROOT_ONE)
         self.assertEqual(quartet(U)[1],0)
