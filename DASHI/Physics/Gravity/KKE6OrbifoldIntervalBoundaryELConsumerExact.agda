@@ -36,15 +36,14 @@ module DASHI.Physics.Gravity.KKE6OrbifoldIntervalBoundaryELConsumerExact where
 open import DASHI.Core.Prelude
 open import Data.Nat.Base using (_+_; _*_)
 import DASHI.Physics.Gravity.KKE6OrbifoldBoundaryHiggsConsumerExact as Earlier
-import DASHI.Physics.Closure.Ternary27TrinificationInvariantTwoVEVPotentialExact as E6V
 import DASHI.Core.FormalClaimTransportGeometryExact as Transport
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ConsumerFibreRepairExact as Repair
 
-actualPriorSource :
-  E6V.TrinificationInvariantTwoVEVPotentialLocalReceipt
-actualPriorSource =
-  E6V.canonicalTrinificationInvariantTwoVEVPotentialLocalReceipt
+-- IMPORTANT: the original E6V six-invariant theorem owner is on
+-- UNMERGED PR #1106 and is NOT present on this KK #1241 branch.
+-- Its formula is independently re-evaluated in the Python source,
+-- but no unmerged cross-branch Agda module is imported here.
 
 originalHiggsEvenRealZeroModes : 2 * (4 + 5) ≡ 18
 originalHiggsEvenRealZeroModes = refl
