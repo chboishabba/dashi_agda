@@ -113,6 +113,8 @@ def verify_pair_source(meta, pairs):
         'raw_stream_replayed_to_pairs':not failures and not replay_failures and replay_result is not None,
         'factorial_settings_from_source':(replay_result['factorial_settings'] if
             replay_result is not None and not replay_failures and not failures else None),
+        'temporal_counterbalance_from_source':(replay_result['temporal_counterbalance'] if
+            replay_result is not None and not replay_failures and not failures else None),
         'reducer_version':VERSION if replay_result is not None and not replay_failures else None,
         'unpaid_source_joins':sorted(set(failures + replay_failures)),
         'independent_instrument_authentication':False,
