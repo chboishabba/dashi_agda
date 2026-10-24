@@ -338,10 +338,10 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
 
-    assert len(rows) == 45
+    assert len(rows) == 52
     assert len({row["edge_id"] for row in rows}) == len(rows)
     assert Counter(row["case_id"] for row in rows) == {
-        "BOM2026": 21, "REEF2021": 10, "GAS2026": 14
+        "BOM2026": 22, "REEF2021": 10, "GAS2026": 20
     }
     fields = (
         "edge_id", "case_id", "upstream", "downstream", "relation",
@@ -395,7 +395,7 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
 def test_claim_root_ledger_documentation_uses_only_case_bounded_counts():
     docs = RESEARCH.read_text()
     assert "australian_climate_claim_origin_edges_20261025.csv" in docs
-    assert "45 bounded relationship rows" in docs
+    assert "52 bounded relationship rows" in docs
     assert "NOT a representative crawl" in docs
     assert "originator" in docs.lower()
     assert "actual transfer not established" in docs.lower()
@@ -484,7 +484,7 @@ def test_international_republication_is_not_fresh_climate_evidence():
 def test_canonical_origin_keys_do_not_miscount_common_republication():
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
-    assert len(rows) == 45
+    assert len(rows) == 52
     assert all(row["root_key"] and row["root_resolution"] for row in rows)
     by_id = {row["edge_id"]: row for row in rows}
     assert by_id["G05"]["root_key"] == by_id["G06"]["root_key"] == "G_CREIGHTON_OPINION"
@@ -494,10 +494,10 @@ def test_canonical_origin_keys_do_not_miscount_common_republication():
     assert by_id["G09"]["root_key"] == "MULTI"
     assert by_id["G10"]["root_key"] == "MULTI"
     assert by_id["G13"]["root_key"] == "MULTI"
-    # The 24 root labels are manually assigned within this purposive case
+    # The 30 source/template family labels are manually assigned within this purposive case
     # graph, not a statistic of Australian media or distinct truth sources.
     labeled = {r["root_key"] for r in rows if r["root_key"] != "MULTI"}
-    assert len(labeled) == 24
+    assert len(labeled) == 30
     assert sum(r["root_key"] == "MULTI" for r in rows) == 9
 
 
@@ -526,7 +526,7 @@ def test_senex_hancock_ipa_information_path_has_explicit_public_countercase():
     assert "No new Agda ontology" in doc
     assert "Stephen Johnson" in doc and "Adam Creighton" in doc
     assert "230+ submissions" in doc
-    assert "24 distinct single-root keys" in doc
+    assert "30 selected source/template family labels" in doc
 
 
 def test_one_nation_gas_policy_is_not_dated_before_public_inquiry():
@@ -554,7 +554,7 @@ def test_two_independent_political_frames_inside_single_sky_interview():
                  "riddClaimDoesNotProveGasLitigationCausality", "deanClaimDoesNotProvePoliticalCoordination"):
         assert name in validation
     assert "unspecified Western Australian gas project" in documentation
-    assert "24 labelled single-source keys" in documentation
+    assert "30 selected source/template family labels" in documentation
 
 
 def test_browse_epbc_primary_request_cannot_promote_expert_claim_to_decision():
@@ -595,7 +595,7 @@ def test_fordham_publication_time_and_browse_original_root_split():
 
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         items = {row["edge_id"]: row for row in csv.DictReader(stream)}
-    assert len(items) == 45
+    assert len(items) == 52
     assert items["B16"]["root_key"] == "MULTI"
     assert items["B21"]["root_key"] == "MULTI"
     assert items["G14"]["root_key"] == "MULTI"
@@ -610,6 +610,80 @@ def test_fordham_publication_time_and_browse_original_root_split():
     assert (brisbane.year, brisbane.month, brisbane.day, brisbane.hour, brisbane.minute) == (2026, 10, 19, 7, 55)
 
     docs = RESEARCH.read_text()
-    assert "45 curated edges" in docs  # current sample after acquisition
+    assert "52 evidence edges" in docs  # current sample after acquisition
     assert "not a court lawsuit" in docs
     assert "not a court lawsuit" in docs and "not a substantive merits decision" in docs.lower()
+
+
+def test_gas_committee_five_form_letters_are_template_counts_not_five_authors():
+    with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
+        rows = {row["edge_id"]: row for row in csv.DictReader(stream)}
+    templates = {"G15":272, "G16":13, "G17":52, "G18":15, "G19":14}
+    assert sum(templates.values()) == 366
+    for ref, count in templates.items():
+        row = rows[ref]
+        assert row["relation"] == "documented_form_letter_template_repeat"
+        assert row["evidence_grade"] == "senate_committee_primary_report_paragraph_1_6"
+        assert str(count) in row["downstream"]
+        assert row["root_key"].startswith("G_TEMPLATE_")
+    # Three template creators are explicitly unknown; a technology platform
+    # is not established as the author of the campaign text it transmitted.
+    for ref in ("G15", "G18", "G19"):
+        assert rows[ref]["root_resolution"] == "committee_template_identity_author_unknown"
+    assert rows["G17"]["root_resolution"] == "platform_route_not_original_text_author"
+    assert rows["G20"]["root_key"] == "G_GETUP_PETITION"
+    assert "50000" in rows["G20"]["downstream"]
+    assert "not independent" in rows["G20"]["boundary"]
+
+    media = POLITICAL_OWNER.read_text()
+    validation = POLITICAL_VALIDATION.read_text()
+    for name in ("gasTaxSenateFiveTemplateFamilies", "gasTaxGetUpPetitionAggregate"):
+        assert media.count(name + " : RelationshipReceipt") == 1
+    for proof in (
+        "gasTemplateFamiliesAreDistinctFromIndependentModels",
+        "getupPetitionCountsSupportNotIndependentModels",
+        "noConspiracyFromTemplateCounts",
+    ):
+        assert proof in validation
+
+
+def test_bom_report_custody_is_not_access_to_original_audit():
+    with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
+        item = {r["edge_id"]:r for r in csv.DictReader(stream)}["B22"]
+    assert item["root_key"] == "B_AUDIT_ATR"
+    assert item["relation"] == "reported_private_copy_and_permission_constraint"
+    assert "not released or inspected" in item["boundary"]
+    media = POLITICAL_OWNER.read_text()
+    validation = POLITICAL_VALIDATION.read_text()
+    assert media.count("novaClaimsFullBOMAuditCopy : RelationshipReceipt") == 1
+    assert "unpublishedAuditPossessionNotSourceInspection" in validation
+    assert "noProvenAuditFromPersonalCustodyReport" in validation
+
+
+def test_browse_central_estimate_exact_rational_consistency_only():
+    """Checks conditional arithmetic, NOT ecological validity or uncertainty."""
+    from fractions import Fraction as Q
+    browse_emissions_mt = Q("1597.41")
+    tcre_c_per_million_mt = Q("0.45") / 1_000_000
+    gbr_dhw_per_c = Q("4.4")
+    cover_fraction_per_dhw = Q("0.035")
+    hectares = 1_060_000
+    colonies_per_hectare = 250_000
+
+    warming = browse_emissions_mt * tcre_c_per_million_mt
+    dhw = warming * gbr_dhw_per_c
+    cover_loss_fraction = dhw * cover_fraction_per_dhw
+    estimated_colonies = cover_loss_fraction * hectares * colonies_per_hectare
+    assert warming == Q(1437669, 2000000000)
+    assert estimated_colonies == Q(5867127189, 200)  # 29,335,635.945
+    assert abs(estimated_colonies - 29_350_000) / 29_350_000 < Q(1, 2000)
+
+    # The paper's independently described Scarborough example (~16m)
+    # uses the same method but a *different project emissions input*.
+    scarborough = Q(876) * tcre_c_per_million_mt * gbr_dhw_per_c * cover_fraction_per_dhw * hectares * colonies_per_hectare
+    assert scarborough == 16_087_302
+
+    docs = RESEARCH.read_text()
+    assert "29,335,635.945" in docs
+    assert "16,087,302" in docs
+    assert "not a kernel-verified Agda theorem" in docs
