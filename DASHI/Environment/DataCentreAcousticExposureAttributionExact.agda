@@ -10,7 +10,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Empty using (⊥)
+open import Data.Empty using (⊥)
 
 import DASHI.Planning.DataCentreUrbanResourceConflictExact as Planning
 import DASHI.Biology.AvianMagnetoreceptionEMExposureTransportExact as EM
