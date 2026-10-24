@@ -28,6 +28,29 @@ int_(R3) |heat_inverse(xi)|² dxi
  = (8*pi/nu²) E^(3/2) sqrt(D).
 ```
 
+**Finite-time physical spacetime corollary, using the SAME real NS
+velocity and the standard unforced energy inequality:** Let E(t)
+and D(t) be its kinetic energy and enstrophy, with
+`E(t)<=E0` and `2 nu int_0^T D(t) dt <= E0`.
+For the instantaneous stationary Stokes inverse
+`V(t)=(-nu Delta)^(-1) P div(u(t)⊗u(t))`,
+the direct Fourier estimate above gives
+
+```text
+int_0^T ||Vhat(t)||²_L2(xi) dt
+  <= (8*pi/nu²) E0^(3/2) int_0^T sqrt(D(t))dt
+  <= (8*pi/nu²) E0^(3/2) sqrt(T) sqrt(E0/(2nu))
+   = 4*sqrt(2)*pi*E0²*sqrt(T)/nu^(5/2).
+```
+
+No time-uniform H¹ bound has been assumed. This is a standard
+energy/Hölder corollary and gives a genuine finite-time
+`L²_t L²_xi` source-response currency. It is NOT an exact Duhamel
+estimate, not the canonical signed centered A2 double-resolvent,
+and not A3 global smooth continuation; it holds for an energy-class
+solution for a.e. time where H¹ is available. The exact coefficient
+was checked symbolically and added to the A SymPy receipt/test.
+
 This **globally square-integrable** direct stationary viscous-response
 majorant controls both zero and infinite frequency from finite energy
 and enstrophy, without an arbitrary Fourier flux field and without
