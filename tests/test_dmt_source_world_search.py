@@ -19,7 +19,10 @@ def test_original_source_tree_and_lineages_are_exact():
     w = world()
     assert len(w["observed_git_tree"]["files"]) == 56
     assert len([x for x in w["observed_git_tree"]["files"]
-                if x["path"].startswith("fMRI/")]) == 40
+                if x["path"].startswith("fMRI/LongS")
+                and x["path"].endswith(("DMT.mat", "PCB.mat"))]) == 40
+    assert any(x["path"] == "fMRI/temp"
+               for x in w["observed_git_tree"]["files"])
     assert w["counts"]["repository_paired_subjects"] == 20
     assert w["counts"]["original_pnas_static_n"] == 16
     assert w["counts"]["readme_unspecified_n"] == 15
