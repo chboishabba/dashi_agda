@@ -8,6 +8,7 @@ Heat-pump electricity is external to the data-centre for KPI purposes.
 from dataclasses import dataclass
 from math import isclose
 import argparse,csv,json,unittest
+from datetime import datetime,timedelta,timezone
 
 CP=4.186
 @dataclass(frozen=True)
@@ -112,11 +113,32 @@ def summary(hours,plant=Plant()):
                 ])
 
 def read_csv(path):
+    """Reject unmapped or unaligned records; IDs are claims, not verified receipts."""
     with open(path,newline='',encoding='utf-8') as f:
         rdr=csv.DictReader(f)
         fields=set(Hour.__dataclass_fields__)
-        if not fields.issubset(rdr.fieldnames or []):raise ValueError('missing columns '+str(fields-set(rdr.fieldnames or [])))
-        return [Hour(**{k:float(row[k]) for k in fields}) for row in rdr]
+        provenance={'timestamp_utc','source_site_id','offtaker_id',
+                    'source_meter_id','offtaker_meter_id','calibration_receipt_ref'}
+        missing=(fields|provenance)-set(rdr.fieldnames or [])
+        if missing:raise ValueError('missing hourly columns '+str(sorted(missing)))
+        rows=list(rdr)
+    if not rows:raise ValueError('no recorded hours')
+    initial=None
+    previous=None
+    records=[]
+    for row in rows:
+        ids=tuple(row[x].strip() for x in sorted(provenance-{'timestamp_utc'}))
+        if not all(ids):raise ValueError('empty site, meter, or calibration provenance')
+        if initial is None: initial=ids
+        if initial!=ids:raise ValueError('cross-site, cross-meter or changed calibration join')
+        dt=datetime.fromisoformat(row['timestamp_utc'].replace('Z','+00:00'))
+        if dt.tzinfo is None or dt.utcoffset()!=timedelta(0):
+            raise ValueError('timestamp_utc must be explicitly in UTC')
+        if previous is not None and dt-previous!=timedelta(hours=1):
+            raise ValueError('nonconsecutive, repeated or missing UTC hourly bin')
+        previous=dt
+        records.append(Hour(**{k:float(row[k]) for k in fields}))
+    return records
 
 class TestGate(unittest.TestCase):
     def setUp(self):
@@ -157,6 +179,16 @@ class TestGate(unittest.TestCase):
     def test_invalid_coolant_energy_source(self):
         with self.assertRaises(ValueError):
             dispatch(Hour(10,2.5,42,32,300,2,25,35,8.4,75))
+
+    def test_csv_requires_original_provenance(self):
+        import tempfile, os
+        fd,path=tempfile.mkstemp(suffix='.csv')
+        try:
+            with os.fdopen(fd,'w') as o:
+                o.write(','.join(Hour.__dataclass_fields__)+'\\n')
+                o.write(','.join(['10','2.5','42','32','200','2','25','35','8.4','75'])+'\\n')
+            with self.assertRaises(ValueError):read_csv(path)
+        finally:os.unlink(path)
     def test_invalid(self):
         with self.assertRaises(ValueError):dispatch(Hour(0,2.5,42,32,200,2,25,35,8.4,75))
         with self.assertRaises(ValueError):dispatch(Hour(10,2.5,30,32,200,2,25,35,8.4,75))
