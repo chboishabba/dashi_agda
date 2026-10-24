@@ -30,6 +30,7 @@ module DASHI.Mathematics.Topology.AlexanderHornedA5C3RestrictionWeldExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Integer using (+_) renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -52,9 +53,11 @@ existingA5C3FixedSpaceIsSharedFormula j = refl
 
 existingC3CharacterAverageReused :
   (j : SO3.AngularMomentum0To35) →
-  Poly.icosahedralFixedDimension j Poly.icosahedralC3
-    ≡ Fixed.fixedDimension j Fixed.C3Probe
-existingC3CharacterAverageReused = existingA5C3FixedSpaceIsSharedFormula
+  (+ 3) *ℤ (+ (Poly.icosahedralFixedDimension j Poly.icosahedralC3))
+    ≡ (+ (SO3.jDimension j))
+      +ℤ ((+ 2) *ℤ Fixed.thirdTurnCharacter (SO3.jNat j))
+existingC3CharacterAverageReused j =
+  Fixed.c3CharacterAverageExact j
 
 -- The supplied factor must be a genuine group and a genuine
 -- order-three element. No dimension or icosahedral LABEL is
