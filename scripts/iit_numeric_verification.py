@@ -31,6 +31,7 @@ from iit_ternary_affine_minimal_sufficiency import scan as ternary_affine_scan
 from iit_xor_369_stress_scan import stress_summary
 from iit_xor_grid_calibration import calibration_summary
 from iit_lattice_prime_power_audit import audit as prime_power_lattice_audit
+from iit_j_coarse_fine_5cube_audit import audit as five_cube_fibre_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -169,6 +170,17 @@ def verify_numeric_results() -> dict:
     assert lattice["binary_2D_n3_F4_equals_F_on_delta"]
     assert lattice["binary_2D_n10_F128_delta_is_nonzero"]
 
+    five_cube = five_cube_fibre_audit()
+    assert five_cube["sites"] == 125
+    assert five_cube["rank"] == 120
+    assert five_cube["lost_kernel_dimensions"] == 5
+    assert five_cube["retained_core_dimensions"] == 120
+    assert five_cube["diagonal_coarse_profile_dimensions"] == 5
+    assert five_cube["tested_basis_vectors"] == 125
+    assert five_cube["eighty_step_equals_identity_minus_section_projection"]
+    assert five_cube["coarse_fine_exact_reopening"]
+    assert five_cube["not_identified_with_j_harmonic_9_or_19683"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -179,6 +191,7 @@ def verify_numeric_results() -> dict:
         "boolean_minimality": boolean_minimality,
         "ternary_affine_minimality": ternary_minimality,
         "xor_grid": grid,
+        "five_cube_relative_fibre": five_cube,
         "large_grid": {"scanned_rows": len(lattice["rows"]),
                        "payload_sha256": lattice["payload_sha256"],
                        "scope": lattice["scope"],
