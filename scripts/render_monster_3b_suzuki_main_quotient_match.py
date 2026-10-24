@@ -126,6 +126,15 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
     )
     if common729_pairs not in (0, 1, 2):
         raise ValueError("invalid equal-centre C3 pair count")
+    full_direct = req_int(p, "selected_78_direct_sym2_full_character_pair_count", positive=False)
+    full_dual = req_int(p, "selected_78_dual_sym2_full_character_pair_count", positive=False)
+    full_nebe = p.get("selected_78_is_nebe_sym2_family_full_character_equal")
+    if type(full_nebe) is not bool:
+        raise ValueError("full 6.Suz Sym²12 selected-family equality must be bool")
+    if full_direct not in (0,2) or full_dual not in (0,2):
+        raise ValueError("selected conjugate78 Sym² family must match both or neither")
+    if full_nebe != (full_direct == 2 and full_dual == 2):
+        raise ValueError("full Sym² equality boolean disagrees with exact class functions")
     central2_pos = req_int(p, "suzuki_central_involution_class_position")
     source_trace = req_int(p, "source_selected_S90_central_C2_trace", positive=False)
     sym2_trace = req_int(p, "sym2_candidate_S90_central_C2_trace", positive=False)
@@ -133,6 +142,8 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("selected degree78 has invalid central C2 scalar")
     if c2_sym2_compatible != (source_trace == 66):
         raise ValueError("C2 Sym² compatibility must follow the selected C2 trace")
+    if full_nebe and (not c2_sym2_compatible or selected_faithful):
+        raise ValueError("selected Sym² is nonfaithful and must have central +66")
     if selected_faithful and source_trace != -90:
         raise ValueError("faithful degree78 cannot have positive C2 involution")
 
@@ -156,6 +167,9 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         "central2_pos": central2_pos,
         "central3_pos": central3_pos,
         "common729_pairs": common729_pairs,
+        "full_direct": full_direct,
+        "full_dual": full_dual,
+        "full_nebe": full_nebe,
         "source_trace": source_trace,
         "sym2_trace": sym2_trace,
         "selected_faithful": selected_faithful,
@@ -219,6 +233,12 @@ sixSuzCentralOrderThreeClassPosition : Nat
 sixSuzCentralOrderThreeClassPosition = {v['central3_pos']}
 common729NecessaryEqualC3PhasePairCount : Nat
 common729NecessaryEqualC3PhasePairCount = {v['common729_pairs']}
+selected78DirectSym2FullClassCharacterMatchCount : Nat
+selected78DirectSym2FullClassCharacterMatchCount = {v['full_direct']}
+selected78DualSym2FullClassCharacterMatchCount : Nat
+selected78DualSym2FullClassCharacterMatchCount = {v['full_dual']}
+selected78NebeSym2FullClassCharacterEqual : Bool
+selected78NebeSym2FullClassCharacterEqual = {str(v['full_nebe']).lower()}
 selectedDegree78FaithfulToSixSuz : Bool
 selectedDegree78FaithfulToSixSuz = {str(v['selected_faithful']).lower()}
 selectedC2SymSquareNecessaryCompatibility : Bool
