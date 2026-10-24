@@ -115,16 +115,27 @@ def replay_si_csv(stream_bytes, raw, cal):
         if condition in by_condition:
             raise ValueError('duplicate pair condition')
         by_condition[condition] = (timestamp, force, grad, group, m, um, sign,
-                                   physical_magnet)
+                                   physical_magnet, coil)
     if not rows:
         raise ValueError('empty sensor stream')
     output = []
+    temporal_arms = {}
     for (pid, sid), conditions in sorted(pairs.items()):
         if set(conditions) != {'active', 'sham'}:
             raise ValueError('incomplete pair')
         a, s = conditions['active'], conditions['sham']
-        if abs(a[0] - s[0]) > gap or a[3:] != s[3:]:
+        if abs(a[0] - s[0]) > gap or a[3:8] != s[3:8]:
             raise ValueError('pair time or calibration identity mismatch')
+        # Drift-alias audit computed from original recorded ordering.
+        # Cancel pair time differences within each active-current/magnet arm,
+        # not just overall. This cannot eliminate nonlinear physical drift.
+        arm = ('+' if a[8] > 0 else '-') + ('+' if a[6] > 0 else '-')
+        signed_gap = a[0] - s[0]
+        counts = temporal_arms.setdefault(arm, {'active_after_sham': 0,
+                                                'active_before_sham': 0,
+                                                'signed_gap_sum_ns': 0})
+        counts['active_after_sham' if signed_gap > 0 else 'active_before_sham'] += 1
+        counts['signed_gap_sum_ns'] += signed_gap
         output.append({'pair_id':pid, 'session_id':sid,
                        'moment_calibration_id':a[3],
                        'moment_covariance_group_id':a[7], 'moment_am2':a[4],
@@ -136,6 +147,15 @@ def replay_si_csv(stream_bytes, raw, cal):
                                'gradient_t_m':s[2], 'gradient_std_t_m':gradient_std}})
     if not output:
         raise ValueError('no completed pair')
+    balanced = len(temporal_arms) == 4 and all(
+        counts['active_after_sham'] > 0 and counts['active_before_sham'] > 0
+        and counts['signed_gap_sum_ns'] == 0
+        for counts in temporal_arms.values())
     return {'pairs':output, 'factorial_settings':settings,
+            'temporal_counterbalance': {
+                'balanced_linear_order_by_active_arm': balanced,
+                'arm_order_counts': temporal_arms,
+                'meaning': 'exact signed-gap cancellation per active coil × moment sign; not independent drift control'
+            },
             'row_count':rows, 'reducer_version':VERSION,
             'instrument_origin_authenticated':False}
