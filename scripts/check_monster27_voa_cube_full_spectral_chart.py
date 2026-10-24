@@ -2,7 +2,7 @@
 """Exact full Monster Vnatural weight2 order27 spectral multiplicities and
 balanced 3x3x3 cube CHART. Provenance:
 ATLAS 27A/B power to 9B and 3B;
-McKay-Thompson q coefficients 27AB:3, 9B:9, 3B:54;
+McKay-Thompson q coefficients 27AB:3, 9B:0, 3B:54;
 FLM grade2 dimension 196884, rational 196883 constituent.
 This is a cyclic spectral chart, NOT cube geometry or VOA fusion.
 """
@@ -12,11 +12,8 @@ from math import gcd, comb
 from fractions import Fraction
 
 DIM=196884
-CHAR={0:196884,1:3,3:9,9:54}
-CONDUCTOR_COUNTS={1:7300,3:7297,9:7295,27:7290}
-def ramanujan(d,j):
- return sum(1 if (k*j)%d==0 else 0 for k in []) if False else sum(
-  complex(0) for k in []) # overwritten by exact Mobius version below
+CHAR={0:196884,1:3,3:0,9:54}
+CONDUCTOR_COUNTS={1:7298,3:7295,9:7296,27:7290}
 def mobius(n):
  fac=[];d=2
  while d*d<=n:
@@ -41,9 +38,9 @@ def order_of_eigen(k):return 27//gcd(k,27)
 rank={p:CONDUCTOR_COUNTS[order_of_eigen(label(p))] for p in CUBE}
 assert Counter(rank.values())=={7290:18,7295:6,7297:2,7300:1}
 assert sum(rank.values())==196884
-assert rank[(0,0,0)]==7300
-assert {p for p in CUBE if rank[p]==7297}=={(0,0,1),(0,0,-1)}
-assert all(rank[p]==7295 for p in CUBE if p[0]==0 and p[1]!=0)
+assert rank[(0,0,0)]==7298
+assert {p for p in CUBE if rank[p]==7295}=={(0,0,1),(0,0,-1)}
+assert all(rank[p]==7296 for p in CUBE if p[0]==0 and p[1]!=0)
 assert all(rank[p]==7290 for p in CUBE if p[0]!=0)
 
 # Braid M on a chosen spatial xy sheet and cyclic charge operator are
