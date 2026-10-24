@@ -110,6 +110,42 @@ Run `python scripts/ns_canonical_focus.py --route A`, `--route B` or `--route B4
 2. **B physical global discriminator:** R681 uncentered weighted work is zero-padding invariant, **not equal** to the old B4 defect. Exact H± calculation for the same shear has eight nonzero mixed outputs: four `k=(±1,±1,0)` with `W(M,M)=1` and output-relative rate work zero, and four `k=(±2,0,0),(0,±2,0)` with `W(M,M)=1/2` and output-relative work `−1` each. The **global output-relative R681 work sums to −4, not zero**. Those latter mixed amplitudes are longitudinal; do not silently replace unprojected R681 mixed amplitudes by physical Leray-forcing terms. The R685 forcing/tangent compensation is therefore a real proof obligation, not automatic summation cancellation.
 3. **A critical-scaling discriminator:** under `u_λ(x,t)=λu(λx,λ²t)`, `E_λ=E/λ`, `D_λ=λD`, and direct stationary Stokes Fourier response squared L² scales as `1/λ`. It is *supercritical* and cannot alone produce a global A3 continuation criterion.
 
+### Pointwise W2 sign gate (physical R850 snapshot; separate from B4)
+
+The existing R741 and R815/R853 identities on one literal rational
+physical packet give `signedRate = 6*(Combined - PacketSurplus)`.
+R850's actual radius-four 3-4-5 finite snapshot, at `nu=delta=1`,
+has `C=-557627/125`, `P=0`, `D=15834`. Therefore
+
+```text
+Combined - PacketSurplus = 12 C - P + D = -4712274/125 < 0
+signedRate = 6*(Combined-PacketSurplus) = -28273644/125.
+```
+
+This disproves **unrestricted pointwise W2 nonnegativity** on that
+physical rational snapshot. To claim a short-time **real integrated**
+W2 counterexample, cross-check the Lean R823 physical trajectory and
+the EXACT real R815/R853 same-object identification; Agda's
+`round853RealTrajectoryCarrierWeldClosed=false` remains a gate.
+Do not create another W2 proof record or attempt a universal
+pointwise inequality invalidated by this datum. This is a
+research-route discriminator, not an unforced Clay proof.
+
+### Time and critical-regularity authority boundaries
+
+R690/R691 prove rational-valued identities for abstract `Time:Set`,
+`integrateTo:(Time→ℚ)→Time→ℚ` and supplied integration laws.
+They are not *by themselves* real-time Lebesgue/Bochner estimates.
+Existing pointwise mass bounds `≤36ED` are quartic positive
+mass estimates, not the signed quintic commutator needed by the
+compensated global B theorem.
+
+For A the current scalar `H¹` direct Fourier majorant controls
+`L²_xi`, but its **critical** `Ḣ^{1/2}` high-frequency envelope has
+the unresolved logarithmic tail
+`(4π E D/ν²) ∫_{sqrt(D/E)}^∞ dr/r`.
+That is a deficiency of the *majorant*, not a counterexample to
+any sharper cancellation estimate. No scale-critical A3 control follows.
 ## Smallest meaningful next cuts
 
 **Cut 1 — B exact compensation owner.** Start at `NSTriadKNR650RateKernelCommutatorEndpointRound685Exact.agda` and `NSTriadKNR650GlobalSignedRateLiftInputLaplacianRound690Exact.agda`. Audit original critical-production source against total forcing, tangent, output-rate and Bony-class correction terms, using the eight-output smooth-shear discriminator. Establish an **actual same-object global identity**, or record a decisive mismatch. Neither file supplies its marked-open spacetime inequality.
