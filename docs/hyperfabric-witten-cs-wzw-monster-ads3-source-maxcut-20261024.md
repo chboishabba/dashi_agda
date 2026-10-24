@@ -133,3 +133,41 @@ Lean #52 exact Peirce triality source cross-slot
 All are sibling source evidence only, no impossible
 unmerged typed imports. See precise heads/source
 and next phase gates in canonical new D4 ledger.
+
+
+## Horned geometry/regularity (worker #1247/#1244) overrides Witten C3 overpromotion
+
+The newest exact Witten D4 algebra connects two
+chiral RCFTs with a genuine C3 pointed SU3_1
+fusion category; **it does not give a group
+homomorphism from the perfect Hatcher horn
+group into that abelian C3 charge group**.
+`G_ab=0` for the classical horned
+exterior and `(G³⋊C3)_ab=C3` for
+the independently specified three-copy
+semidirect algebra; the latter external
+C3 sees ROTATION only. The selected
+sibling Wilson W belongs to an ambient
+non-Abelian SU3 gauge representation,
+is noncentral, and already gives an
+ordinary S1 same-fringe counterexample.
+Such SU3 holonomy cannot become an
+SU3_1 anyon label, a Monster C27 charge
+or an actual 3D CS Wilson operator from
+sharing a group name. With the Hatcher
+binary commutator tower, a NONTRIVIAL
+selected root blocks jointly (i) uniformly
+shrinking representative loops and (ii)
+a uniformly bounded compatible unitary
+connection. Geometry is the high-leverage
+next formal producer, not further
+Witten C3 count identities.
+
+Canonical exact-genealogy, new cross
+regression and phase frontier:
+`docs/hyperfabric-horn-witten-su3-regularity-charge-maxcut-20261024.md`.
+Original worker horn and neutrino
+test receipts remain in their own PRs;
+Lean source theorem and Agda script
+in #1249/#84 explicitly unverified for
+kernel/physical promotion.
