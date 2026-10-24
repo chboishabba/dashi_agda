@@ -518,3 +518,73 @@ duplicate its complete Jordan identity/classification machinery**.
 The existing source-owned `scripts/check_hyperfabric_27_minus_1_operator_cut.py` gives 26 nonconstant eigenmodes of the *actual nonperiodic spatial cube* graph Laplacian, with EIGHT distinct nonzero eigenvalues `{1,2,3,4,5,6,7,9}` and exact 26-coordinate metric `G=I−J/27`. DO NOT identify this quotient with the exceptional Albert's 26 nontrivial F3³ homogeneous character lines merely by the common dimension.
 
 On independent original SOURCE `chboishabba/dashi_lean4` PR #52, the Griess-1990 homogeneous ALBERT multiplication admits positive Hermitian real-form involution `τ(e_a)=e_-a` and 13 selected source-selfadjoint `H_a=L_(e_a+e_-a)` on 27D, with spectrum `2:1, −1:10, 1/2:16`. The distinguished UNIT line and 26 nontrivial grades are mixed, so its 26D **compression** `K_a=QH_aQ` (not invariant restriction) has spectrum `+1:1, −1:9, 1/2:16` (THREE distinct). The path quotient and selected Albert compression therefore fail unitary equivalence even after any nonzero affine re-scaling and shift, since spectral distinct-value counts 8 ≠3. Exact Python `/mnt/data/check_griess1990_realform_hamiltonian.py` PASS; Lean repo committed `scripts/check_griess1990_albert_positive_realform_hamiltonian.py` on #52. Algebra source: Griess (1990), J Algebra 131 281–293; distinction maintained from FLM Monster 196884 Griess VOA and the C27 spectral charges. This is an explicit negative physical-operator discriminator, not an argument against every possible further intertwiner or metric.
+
+
+## 2026-10-24 C0–C6 positive/negative 26D string-field and M24 max-cut
+
+**Canonical new source owner**:
+`docs/hyperfabric-k27-26d-bfield-22dual-m24-signed-duad-maxcut-20261024.md`
+links original Glennon/West K27, ATLAS M24 p24 and p276, original Leech/M24 Agda theorems, the 26D source string-frame action and all finite tests.
+
+**Source-real positive**: `d(e^-2Phi *26 H3)=0` admits a local
+dual 22-form `G23=dC22=e^-2Phi*H3`. The new executable
+`scripts/check_k27_26d_B2_dual22_dilaton.py`
+tests four exact nonconstant dilaton/field solutions on fixed
+26D Lorentzian background, source Hodge signs, Bianchi,
+Euler–Lagrange B-EOM and dual local potential. Importantly
+the full *flat* Einstein equation has a nonzero H-stress
+residual, so no fake sourced GR solution is asserted.
+The 27D 4form Hodge *rank* compatibility is positive,
+but does not provide the K27 dual **algebra generator**.
+
+**Actual 24 transverse physical representation**:
+`26−2=24`,
+`299+276+1=24²=576`,
+`Lambda²(R24) ≅_SO24 Lambda²²(R24)` via signed Hodge
+complement with exactly 276 oriented pair labels.
+This consumes original Agda
+`LeechWeightTwo196608BridgeExact` 299 and
+`OggSSP2BM24DuadPair24AuthorityExact` 276 without
+promoting them to the physical graviton/B operator.
+
+**Strong SOURCE-ACTION no-go**: ATLAS original M24 involutions
+2A/2B on its actual UNORIENTED 276 duad module have
+characters 36/12, whereas the ORIENTED string B-field
+exterior-square of the same 24-point action has traces
+20/−12. Thus no M24-equivariant same-original-action
+isomorphism `p276≈Lambda²(R24)` exists over characteristic
+zero. This eliminates that **specific** prior dimension
+identification and, absent a new map, any attempt to
+call the Moonshine 2B Tate multiplicity 276 a physical
+B field. 3A and 3B controls match selected traces but
+cannot repair the 2A/2B mismatch.
+
+**Positive salvage**: oriented duad orientation-line fibre,
+i.e. `[i,j]=-[j,i]`, provides exactly the wedge-square
+signed permutation action on the **same unordered-pair
+address set**, and the 24D SO proper-orientation Hodge
+map intertwines it with its 22-form dual. This is a
+substantive model candidate for earlier signed/oriented
+hyperfabric work, but **Z2 duad orientation ≠ C3
+signed-neutral triple zero** without an explicit typed map.
+The original ATLAS **unoriented** p276 is not this
+signed orientation-line representation.
+
+**Observed exact reference execution**:
+`scripts/check_k27_26d_24d_polarization_m24.py`
+and `scripts/check_k27_26d_B2_dual22_dilaton.py`
+passed equivalent local source checks. GitHub branch files
+and original ATLAS result URLs verified, but committed Git
+blobs have not been byte-executed. New Agda
+`HyperfabricK27StringLittleGroupM24DuadDiscriminatorExact.agda`
+imports original 299/276 theorem owners and proves
+the arithmetic 2A character mismatch; **Agda kernel
+not run**, external ATLAS group/class result attributed.
+
+**Rank priorities:** C0/C2 finite/source algebra PASS;
+C3 ordinary M24 276 identification FAIL with a precise
+orientation-line repair; C1 chosen 26D *B sector* PASS
+but full gravity+dilaton FAIL; C4 K27 true nonlinear
+dual generators/physical observer remain open;
+A3 unmodified 27D 125/121 FAIL still binding. YM/NS/RH
+physical source estimates unchanged.
