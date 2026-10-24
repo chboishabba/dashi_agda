@@ -1186,3 +1186,67 @@ not a mysterious common quantum observer or
 long-distance brainwave. The new extraordinary-
 physics steelman has a *testable higher bar*, not
 additional supporting evidence.
+
+
+### Nobel channelrhodopsin vs 2026 flavoprotein spin chemistry — distinct photon→physics interfaces
+
+A nontrivial SOTA intersection with the earlier radical-pair receptor
+steelman is Meng, Nie, Berger, von Grafenstein, Weber, Essen, Rizzato,
+Einholz, Schleicher and Bucher, *Optically detected and radio wave-
+controlled spin chemistry in flavoproteins*, Nature Biotechnology
+(29 May 2026), DOI https://doi.org/10.1038/s41587-026-03158-5.
+Original authors measured light-generated radical-pair-related
+magnetic/RF responses in **isolated cryptochrome and iLOV proteins**,
+with measured photoluminescence and resonances. Their sample
+contains actual optical excitation, controlled laboratory B/RF
+and protein chemistry, not an observed neural action.
+
+**No protein identity or transfer promotion:**
+- Channelrhodopsin: photons gate a membrane **ion channel**
+  expressed in cells, driving an electrical current.
+- Cryptochrome/iLOV: photons initiate **spin-correlated radical-pair
+  chemistry** measured by optical/RF responses under controlled
+  magnetic fields. A downstream ion channel, neuron, human
+  magnetoreceptor or behavior is NOT implied.
+- Diamond NV: optically read **solid-state spin defect** as a
+  calibrated magnetic SENSOR. It is yet another distinct
+  transducer, despite shared ODMR mathematics.
+
+To make this distinction actionable, the committed Python
+scripts/check_hardt_optogenetic_nobel_causal_cut.py now includes
+a finite three-factor G × L × B gate, with G=expressed receptor,
+L=actual physical light delivery and B=measured magnetic
+perturbation (distinct from the brain's uncalibrated 2Hz story).
+In the exact **invented** toy response:
+  optogenetic photocurrent Y=G*L has zero triple difference;
+  separately declared spin-sensitive Y=G*L*B has triple
+  difference +1.
+The test enumerates **2,187** complete seven-coefficient
+additive plus PAIRWISE factorial null models and proves each
+has zero three-way contrast. This is standard full
+finite-difference/inclusion-exclusion algebra, not a new
+quantum-mechanical result. Locally equivalent exact integer
+arithmetic verified 2,187 nulls with 0 versus +1 checks;
+two regression cases added to the GitHub test suite.
+
+A measured nonzero triple interaction could STILL arise from
+protein-specific heating, illumination bleaching,
+field/RF induction, assay electronics or unmodelled
+three-factor artefacts. Even an identified spin-chemical
+response does not imply neuronal receiver transduction
+or person-selective targeting. Actual source-specific field
+amplitudes, optical dose, protein expression, biochemical
+endpoint, negative controls and independent repetition
+are prerequisite receipts. The actual 2026 cryptochrome
+ODMR experiments use controlled *MHz/GHz* RF excitations
+and mT magnetic biases; a 0.5–4Hz brain delta signal is
+a different physical carrier/frequency, not an observed
+low-frequency receiver effect.
+
+**Additional explicit distinction:** the previous numerical
+3-way fixture and the earlier 343 additive 2×2 examples are
+MATH/SYNTHETIC checks, not 2,187 human or protein trials.
+Current planned Python regression count is **nine** source-written
+tests; those exact GitHub-byte tests have not been run and
+the Agda module has no kernel receipt. The locally equivalent
+seven initial and two new 3-way mathematical checks passed.
