@@ -45,11 +45,24 @@ def run():
            ('invalid character degree',{'degree12':[{'label':'12','values':[[0,0]]+a[1:]}]}),
            ('duplicated labels',{'degree78':[{'label':'x','values':b},
                                           {'label':'x','values':dual}]})]
+    cases.append(('fake Suzuki table without source class sizes',
+                  {'table_id':'6.Suz'}))
+    cases.append(('invalid claimed source group order',
+                  {'group_order':7,'class_sizes':[1]*6}))
     for name,patch in cases:
         trial=copy.deepcopy(base);trial.update(patch)
         try:m.check(trial)
         except ValueError:pass
         else:raise AssertionError(f'Invalid candidate accepted: {name}')
+    # Independently check scalar-product arithmetic on honest 1D characters.
+    c1=[m.raw(roots[y]) for t,y in group]
+    c2=[m.raw([(-1 if t else 1)*roots[y][0],
+                (-1 if t else 1)*roots[y][1]]) for t,y in group]
+    orth=m.raw([0,0]); norm=m.raw([0,0])
+    for q,v in zip(c1,c2):
+        orth=m.add(orth,m.mul(q,m.conj(v)))
+        norm=m.add(norm,m.mul(q,m.conj(q)))
+    assert orth==m.raw([0,0]) and norm==m.raw([6,0])
     return {'status':'PASS','group':'C2 x C3','class_count':len(group),
         'matches':list(map(list,sorted(matches))),
         'negative_controls':len(cases),
