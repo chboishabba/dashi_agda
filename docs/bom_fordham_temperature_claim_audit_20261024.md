@@ -248,3 +248,57 @@ The same ARN report lists **Samuel Terry Asset Management 71,169,009 shares**, *
 - `arnSandilandsRevenue` → **financialEntitlement**, explicitly 19.9% **net revenue** conditional, not equity
 
 This is a productive second-order outcome: owner topology, former presenter equity, production chain, licensing, residual revenue incentives and direct political messaging are all distinct object kinds that can feed actual network tests, without claiming one hidden command structure.
+
+
+---
+
+## 24 October 22:53 Brisbane: Google AI Mode intake failure / primary-owner progress
+
+### External shared-conversation intake: NOT INGESTED
+
+Submitted user link: `https://share.google/aimode/Ux4UtsL535FOH9STw`.
+
+**Acquisition attempt**: browsing direct open returned `DisabledError`; public searches of the literal share ID yielded no content-bearing result. A separate direct connection did not resolve the URL in the isolated runtime. Google's own description at https://share.google/ confirms that share.google is an app-oriented redirect; Google Search Help https://support.google.com/websearch/answer/16517651?co=GENIE.Platform%3DAndroid&hl=en-DE explains that AI Mode shares can expose an entire thread and are user-managed. The presence of a shared link **does not** establish what its answers say. No source claim, citation, transcript, external-file hash or actor edge is created from this inaccessible link.
+
+**Priority**: conditional P0 only when the user supplies the rendered AI Mode text, an export (.md/.txt/.pdf), or screenshots containing actual answer and citation URLs. After that, each original cited source must be acquired separately, with the AI Mode answer retained as a tertiary *discovery* surface. Do not reverse-engineer supposed contents from the topic of surrounding discussion, and do not fabricate an AI Mode citation.
+
+### First-party original ABC Ombudsman executive summary acquired through web
+
+Original publisher listing: https://www.abc.net.au/about/ombudsman/activity-reports/four-corners-ombudsman-investigation-exec-summary/107181998 . Original **five-page PDF**: https://live-production.wcms.abc-cdn.net.au/39e8eeeffed7acde9a54d3ccc2f2a6fb .
+
+**Signed by Fiona Cameron 20 August 2026; publicly posted 22 September 2026.** Pages 1–3 visually inspected. Contains actual findings, recommendations, methodology (broadcast originals, transcripts, fact-check paperwork, scripts, internal correspondence; eight formal interviews), and annexure with 1 July Board terms of reference.
+
+| Finding | Original report page | Exact documented editorial defect | Standard |
+| --- | --- | --- | --- |
+| F1 | 1 | One person appeared in two significantly different ways in *Cocaine Nation*; viewers misled | accuracy 2.2 |
+| F2 | 1 | Source “Jason” was not reasonably verified as a trafficker, nor were his substantive claims, while the programme presented role/account as fact | accuracy 2.1, 2.2 |
+| F3 | 2 | Disguise/anonymity of the “sweeper” was not escalated for senior approval | fair and honest dealing 5.9c |
+| F4 | 2 | Source “Brendan” identity/cook status and reporter relationship in *Meth Highway* insufficiently independently checked/disclosed | accuracy 2.2 |
+| F5 | 2 | Cumulative source, approval, fact-check and management oversight failures misled the audience across both programmes | independence/integrity 1.1 |
+
+Original seven recommendations (pp2–3): R1 remove both programmes; R2 broader investigation; R3 visible correction; R4 clarify standard 5.9, responsible senior anonymity approver and source context; R5 train legal-risk versus editorial-risk distinction; R6 strengthen fact-check and upwards referrals; R7 support junior teams working on high-risk programmes.
+
+**Important difference:** ABC's 22 September institutional response https://www.abc.net.au/about/media-centre/statements-and-responses/abc-response-to-ombudsman-review-of-cocaine-nation/107182808 says all seven were **accepted** and implementation was complete or underway. The executive summary itself does not independently certify completion of all seven. The PDF's terms of reference investigate **editorial source misrepresentation**, NOT whether Fazal transmitted criminal threats or authored the 2022 Shanks firebombing. Existing source-owner constraints remain intact.
+
+**Code changes**: `FriendlyjordiesABCFazalSourceAudit2026Exact.agda` now owns `ombudsmanOriginalExecutiveSummary`, 5 finding rows with source/standard/page coordinates, and 7 separate recommendations with institutional acceptance separated from verified completion. Its validation file provides source-specific equation witnesses and a negative acceptance→independent-completion boundary. No additional governance ontology invented.
+
+### Source-level KSL venture financing detail: who actually funded launch?
+
+The strongest **first-person interview**, Steve Ahern, RadioInfo **28 July 2026**:
+https://radioinfo.com.au/news/weve-already-got-the-bills-paid-for-the-next-two-and-a-half-years-kyle-sandilands-new-show/ .
+
+Kyle says the business had tens of thousands of prepaid subscribers (reported close to **AUD 2 million**, pricing approximately AUD 100/year) and that Bruno Bouchet said this could cover their planned costs for about **2.5 years**. These are **un-audited self-reports**; neither original bank statements nor subscriber ledger, refunds, currency variation, cost budget, churn or net sales are available. Subscription prepayment is **customer financing**, not the sale of shareholder equity.
+
+The same interview reports potential prize/promotional support from **Harvey Norman** and approaches by two electric-car companies. These are Kyle's attributed statements describing **approaches**, not independently proved signed contracts, in-kind consideration, share investment, direct political funding or delivery of vehicles. Kyle also identified **Uscreen.tv** as technology underlying the cross-device streaming service; a vendor relationship, not a named shareholder.
+
+His interest in a possible future platform carrying other presenters was explicitly **aspirational**, not a report of completed external-host onboarding. Earlier billionaire-investor approaches likewise were not accepted, according to his own interview. **The only evidenced completed outside-commercial-rights arrangement remains ARN's June public settlement** (conditional 19.9% **net revenue** entitlement, advertising allowance), distinct from both subscriber revenue and direct shareholder investment. Operator ABR registration still does not establish exact current share register.
+
+**Cross-pollination**: `AustralianPoliticalRadioInfluence2026Exact.agda` now types `kyleSubscriberFinanceSelfReport`, `harveyNormanProspectiveSponsorship`, and `kyleUscreenPlatform` separately, with no automatic conversion of self-reported subscribers into audited sales, or prospective sponsor interest into equity. Its validation and the source-guard Python test enforce the provenance boundaries.
+
+### Remaining max-cut (costed, no speculative network completion)
+
+- **P0/source truth now closed**: original ABC Ombudsman executive summary located, visual pages checked, standard-specific findings and recommendations represented. This does NOT mean all historical ABC/2014-warning questions are closed.
+- **P0/financial categorisation closed**: KSL customer prepayments, ARN contractual net-revenue interest, supplier/service providers, former ARN presenter-contractor shareholdings, third-party investment *approaches* and the actual KSL legal operator are represented distinctly.
+- **P1/valuable original**: obtain the KSL company's ASIC historical/current member register (if available via appropriate lawful/public access), ARN notice on disposition of Quasar/Henderson's older shares, or specific signed sponsorship terms; these might alter exact current cap-table or campaign influence conclusions.
+- **P1/ABC institutional outcome**: source-specific evidence documenting completion of recommendations R2/R4/R5/R6/R7; compare procedure in actual ABC 2024 complaint materials and 2026 oversight response, without assuming criminal liability.
+- **Conditional on content availability**: the submitted Google AI Mode shared thread. No content attached until its text is accessible. If supplied, parse all primary citations and assign each proposition to its original owner, with disputed summaries/copies given separate relation types.
