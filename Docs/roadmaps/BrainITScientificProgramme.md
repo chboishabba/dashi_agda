@@ -12,6 +12,25 @@ This is the **programme-level owner** for scientific milestones. The supporting 
 is an implementation and provenance ledger, not the project's strategic thesis.
 Existing CMS/HEPData, Drosophila/connectome, generic coarse-fine theorem, and conscious-access modules are **optional method donors**, never prerequisites to constructing an independent human-fMRI benchmark or proving biological claims. Cross-project conceptual similarity cannot be promoted to same-object evidence.
 
+## 24 October 2026 — executable max-cut receipt (no CI requirement)
+
+**Implemented in the same PR:** `experiments/brainit/{inventory,alignment,stage_conditions,evaluate,compare,probe,transfer}.py`, end-user operational instructions in `experiments/brainit/README.md`, and synthetic regression owners `tests/test_brainit_experimental_harness.py`, `tests/test_brainit_probe_transfer.py`.
+
+| Phase | Deliverable now source-written | Experimental admission still absent |
+| --- | --- | --- |
+| D0 | Prior Agda consumer theorem and Brain-IT source boundary, independent formal test fixtures | Exact-head Agda kernel receipt and fresh pytest verification |
+| D1 | SHA-256 artifact inventory, actual NSD experiment-design row alignment, subject/stimulus-resolved independent PixCorr/SSIM evaluator | Local NSD files, stable checkpoint digests, GPU inference, original learned-feature evaluator replay |
+| D2 | Isolated true-input paired/deranged/zero fMRI staging, seeded upstream wrapper, paired stimulus bootstrap comparison | Actual condition-specific image generations, matched seeds/runtime, false-positive and leakage analysis |
+| D3 | Train-only cluster-mean ridge feature probe with size-matched random partitions and explicit nonoverlapping stimulus IDs | Frozen real train/test fMRI and independently attributed CLIP/VGG features; direct Brain-IT-compatible V2C ablations |
+| D4 | Exact-hash/checkpoint-gated within-subject calibration curve aggregation | Independently trained/adapted 15/30/60-minute checkpoints and multi-subject held-out transfer |
+| D5/D6 | Go/no-go and publication acceptance already specified | Measured effects and external replication; no novelty claim paid |
+
+**Important source-derived risk:** the authors' `prepare_fmri.py` creates shared fMRI rows ordered by `subjectim[0][:1000]`, while `full_inference.py` selects ground-truth images via `type_sample==2` (global ascending index). Their equality is **not guaranteed by source alone**. New `alignment.py` verifies actual `nsd_expdesign.mat` stimulus identities and emits the exact row-to-image permutation; the independent evaluator uses this correspondence. This is a verification requirement, **not a claim the published results are wrong**.
+
+**Metric honesty:** independent Python pixel correlation/SSIM after skimage resize is intentionally not identified with the original `torchvision`/learned-feature suite or 1000-way CLIP. Optional 2-way feature identification is labeled by the supplied encoder/source and candidate count. Real inference is GPU-dependent and cannot be declared finished based on the synthetic tests.
+
+**Scope correction:** CMS and Drosophila work are methodological donors at most, not schedule dependencies. No CI edits requested; no completion/certification status is conferred by creating source files. The next paid scientific milestone remains an independently replayed real NSD inference run with source-aligned held-out stimulus identities.
+
 ## North-star research question
 
 **Which stimulus-relevant properties are retained by brain measurements and learned functional clusters, how much reconstruction improvement comes from neural evidence rather than the generative image prior, and which representations generalise under limited subject-specific calibration?**
