@@ -1,3 +1,75 @@
+# 2026-10-24 A/B-FIRST CORRECTION — literature and C/D cross-pollination
+
+**Override the prior C/D-first priority statement below.** User-selected
+research goal is original **unforced A/B**. OpenAI's released forced C/D
+proofs are existing cross-pollination donors, *not* the next publication
+task and not a formal implication of unforced global regularity.
+
+## New primary-source literature audit (authorship preserved)
+- Myong-Hwan Ri, "Global regularity for the Navier-Stokes equations
+  with application to global solvability for the Euler equations",
+  arXiv:2601.15685 (2026-01-22): explicitly claims unrestricted
+  large-data global regularity on R^d, d>=3 via sparse
+  inverse-logarithmic frequency weights and rescaled frequency tails.
+  **Unverified preprint claim, not a confirmed theorem.** High-priority
+  candidate for direct comparison with A2 scaling and B signed shell
+  control; check the critical norm bound for circular use of regularity.
+- Rishad Shahmurov, "Large-Data Global Regularity for Three-Dimensional
+  Navier--Stokes II: A Direct First-Threshold Continuation Proof for the
+  Full System", arXiv:2605.01873 (2026-05-03): claims a first-threshold
+  critical-packet continuation theorem using angular Littlewood--Paley
+  triads, rigidity, phase control and leakage accounting. This is a
+  **claimed complete proof, not verified here**. Compare B1/B2/B3/B7
+  source-weight and compensated signed identity against its threshold
+  envelope; verify Part I hypotheses and data generality.
+- Alexey Cheskidov and Hedong Hou, "Global existence of smooth solutions
+  to the Navier-Stokes equations for initial data with infinite energy",
+  arXiv:2610.18797 (2026-10-13): constructs global solutions smooth for
+  t>0, with only H^{-s} continuity at t=0 in the leading theorem.
+  Distinguish weak/very-weak continuity from official A/B requirements,
+  which include smoothness through t=0 and energy/boundedness clauses.
+  It is not automatically Clay B.
+- Peter Constantin, Mihaela Ignatova and Vlad Vicol,
+  "Regularity of asymptotically axisymmetric solutions to the 3D
+  Navier-Stokes equations with analytic forcing", arXiv:2609.20803:
+  proves rigidity excluding OpenAI-type singular profiles when the
+  forcing is analytic/zero under its precise axisymmetry/Type-II
+  hypotheses. Import as an **adversarial profile discriminator**, not
+  arbitrary-data A/B regularity.
+
+## C/D donor integration — two-way negative control
+- OpenAI, "Finite time blowup for Navier–Stokes" (2026-09-08),
+  https://github.com/openai/NavierStokesAndEuler : source is smooth
+  forced PDE, not unforced; the constructed forcing is essential to the
+  exhibited singular dynamics. Its proof tools (anisotropic rescaling,
+  profile/core/tail separation, Leray pressure, uniqueness and
+  finite-slab comparison) should be reused in A/B only after proving
+  same-source f=0 identities. Never set f=0 syntactically in a
+  constructed forced solution.
+- Compare the unforced vorticity equation and critical norms with the
+  released unforced Euler blowup, noting that missing viscous damping
+  prevents direct transplantation.
+- First actual B discriminator is already in
+  `tests/test_ns_b_projection_same_shear_discriminator.py`:
+  raw unprojected R681 has global relative work -4 while projected
+  helical amplitudes vanish on the same shear; require an exact R685/R690
+  compensated physical R236 identity before estimating shell terms.
+
+## Acceptance order (no more numbered aliases)
+1. Audit Ri critical norm and Shahmurov first-threshold proof against
+   literal unconstrained initial-data A/B statements; identify a
+   concrete importable lemma or a failed quantifier.
+2. Trace the literal R236 physical production through R685/R690 and
+   Leray projection, including residuals, to a signed cutoff-uniform
+   inequality. No count-centered B4 revival.
+3. Transport the existing Schwartz/H1 same-object Fourier extension
+   to the actual Bishop continuum trajectory; produce scale-critical
+   A2 and noncircular A3 continuation.
+4. Reuse formalized C/D analytic components as lemma donors with
+   attribution, not proof of an unrelated unforced implication.
+Status: literature sources inspected; no independent verification of
+new preprint proof claims or kernel check of A/B complete result.
+---
 # 2026-10-24 GOAL-1 PHASE GATE — C/D released theorem, A/B independent research
 
 **Read this before the A/B frontier entries below.** Primary external
