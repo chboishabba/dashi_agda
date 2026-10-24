@@ -70,3 +70,15 @@ The character of the **ordinary duad permutation module** at `g∈M24` counts un
 ### Pareto next
 
 **Do not manufacture a new 27-dimensional ontology.** In 26D, certify one source-selected nonflat B/φ/g common-action solution (existing nonflat finite GR donor may help), then attach the exact same physical local duality operators and K27 level-one/dual-level generators. Separately test whether user-signed-zero fine fibres can model an **orientation local system** without conflating C3 with Z2 or nonoriented M24 p276 with antisymmetric B. Crosspolinate only if concrete fields/operators commute.
+
+
+## Major stronger subsequent consumer: nonflat coupled EOM now available
+
+A later same-PR reference model (source: standard SU2 WZW/linear dilaton) closes the *leading-order* NS-NS EOM that the earlier flat B-only example could not.
+See `docs/hyperfabric-k27-26d-su2-nsflux-linear-dilaton-worldsheet-maxcut-20261024.md`.
+`M26=R^(1,22)×S3_r`, `H=(2/r)vol_S3`,
+`Phi=x_spacelike/r`, original 26D string-frame equations:
+`E_g=0`, `E_B=0`, `E_phi=0`; sphere curvature and H-squared genuinely nonzero. SU2 orthonormal-frame curvature/parallel flux and 6 rational radii source-checked. Global B must be patchwise, with quantized H class.
+
+This is an actual improvement in **selected leading 26D physical continuum source**, not a reason to lift ATLAS p276 unoriented duads to the physical B2 module. Existing 2A/2B no-go stands.
+Worldsheet finite-level Sugawara `k+2` correction means the unshifted classical slope leaves `c−26=12/[k(k+2)]`; a genuine quantized CFT candidate must use the corrected charge and still pay state/BRST/global string conditions. The 27D E27/K27 missing-dual-generator issue remains independent.
