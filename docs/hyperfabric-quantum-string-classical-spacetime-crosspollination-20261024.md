@@ -572,3 +572,37 @@ equivalence or quantum BRST completion.
 Global B patch difference represents
 quantized U(1) gerbe data and cannot be removed
 by one global gauge 1-form.
+
+
+## Witten source-owner cutoff (2026-10-24) — third-party original lineage
+
+The repository already contains an extensive “Witten”
+programme, but not one single named physical operator:
+(1) Witten 1989 Chern–Simons/Jones → chiral
+WZW/Verlinde block theory (existing SU2 k levels/k4
+integrable source owners);
+(2) Witten 2007 proposed Monster c24/AdS3 pure gravity
+(existing substantial sibling Agda #1239 J, Virasoro,
+C27, braid/SL2Z and conditional gravity source);
+(3) Witten SUSY index in QFT master (targets only);
+(4) Witten Laplacian in YM master (false/open receipts);
+(5) Maloney–Witten 2007 physics adversary for
+the gravity saddle sum.
+
+An exact selected Witten 1989 `SU2_4`
+Verlinde source ring was run locally:
+S²=I, 125 fusion coefficients, 625 fusion
+associativity checks, quantum dimensions
+1,√3,2,√3,1; Gauss–Milgram framing `i`.
+It is **not** the 2007 holomorphic c24 Monster
+1-simple-sector modular category (framing1).
+Agda+Lean typed/numerical sources committed,
+kernel unverified. For details see
+`docs/hyperfabric-witten-cs-wzw-monster-ads3-source-maxcut-20261024.md`.
+
+The next string source bridge is the ACTUAL SU2
+affine VOA/worldsheet state/BRST/g,H,Φ,gerbe
+and worldsheet momentum/winding Hamiltonian,
+not another modular/cube label comparison.
+Original physical work and attribution to Witten,
+FLM, Verlinde, Maloney–Witten retained.
