@@ -134,6 +134,12 @@ class HornedSU3PositiveTargetTests(unittest.TestCase):
         def conjT(x):
             return matmul(matmul(T,x),adjoint(T))
         first,second,third=A,conjT(A),conjT(conjT(A))
+        self.assertNotEqual(first,second)
+        # Real and zeta coordinate witness: C3 rotation actually
+        # moves the selected CP residual, not just Ad_T³=identity.
+        delta=add(second[0][1],minus(first[0][1]))
+        self.assertEqual(delta[0],F(7429123333440,6270551970029))
+        self.assertEqual(delta[1],F(2394922626720,6270551970029))
         self.assertEqual(conjT(first),second)
         self.assertEqual(conjT(second),third)
         self.assertEqual(conjT(third),first)
