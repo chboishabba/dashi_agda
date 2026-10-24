@@ -128,3 +128,16 @@ The Agda bridge now exports **both** structurally exact reopening contracts from
 2. **Dynamics-observation coarse first:** coarse \(F(x)\) (the actually seen one-step output), relative fine \(P(x)\) (five missing trits), with the same reopening equation. This is the direct consumer-relative non-descent view: two source states differing by a kernel profile have the same update output but differ for a \(P\)-sensitive consumer.
 
 Neither orientation automatically becomes the sole correct ontology. Both require the **same concrete 5³ operator certificate**; changing observation \(Q\) or target \(T\) changes which residual qualifies as necessary. In either ordering, no independent state dimensions are added to the original 125.
+
+
+### The geometrically strongest "+1": a constrained fourth *address* coordinate
+
+One can make the analogy literal **at the level of index charts** without adding independent physical/state dimensions. Define:
+
+\[
+\Gamma_s=\{(i,j,k,s)\in(\mathbb Z/5)^4:\ s=i+j+k\bmod5\}.
+\]
+
+The graph map \( (i,j,k)\mapsto(i,j,k,i+j+k)\) is injective, with inverse the projection to the first three coordinates. Thus \(|\Gamma_s|=5^3=125\), whereas the unconstrained ambient fourth-coordinate address space has \(5^4=625\) points. The fourth *address label* is dependent, not a fourth independent spatial axis. Its five possible values label the five disjoint 25-site diagonal planes, and the missing modes are precisely the **functions \(g(s)\)** on that label.
+
+This is the strongest defensible geometric formulation of “\(5^3\) + one” here: **three free cyclic address coordinates plus one dependent chart coordinate**, carrying a five-trit consumer residual. Neither cardinality \(125+5\) nor physical dimension \(4\) follows. The Python audit now checks graph injectivity and the 125-vs-625 distinction alongside \(F^{80}=I-JP\).
