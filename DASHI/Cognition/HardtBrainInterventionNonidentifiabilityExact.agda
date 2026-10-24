@@ -51,15 +51,13 @@ interventionOutcome imposed (world cue sharedCauseOnly) = cue
 
 -- The actual existing generic intervention-response definition is reused.
 -- It contrasts sham/control(false) and do(true) in the declared toy.
-causalResponse : TrialWorld → Bool × Bool
+causalResponse : TrialWorld → Bool → Bool × Bool
 causalResponse =
   Intervention.ContrastiveInterventionResponse
     (λ b → b)
     interventionOutcome
     false
     (λ control treated → control , treated)
-    -- Agda's final two function arguments are state then intervention.
-    -- Defined pointwise below through eta expansion.
 
 sameCueDirect : TrialWorld
 sameCueDirect = world false directEffect
