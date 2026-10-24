@@ -124,3 +124,53 @@ data OutstandingConsumer : Set where
   originalE6FermionMassAndLocalGlobalCS
   fullyRegulatedSameMetricRadionEffectiveAction
   selectedEmpiricalGravityObservable : OutstandingConsumer
+
+
+------------------------------------------------------------------------
+-- 2026-10-25 all 18 parity-EVEN field FUNCTIONAL Hessian BIDI.
+-- Previous 7+11 labels described spatially homogeneous Hessian;
+-- the NEW selected test includes 1D scalar gradient stiffness and
+-- endpoint W'' along the NONCONSTANT Robin classical source.
+-- Two-grid generalized FEM eigenproblem N=32 and N=64 sees
+-- seven near-zero gauge directions (~h² convergence) and the
+-- first positive eigenvalue near +2.08. Source script:
+-- check_kk_e6_orbifold_interval_even_hessian.py
+-- The continuum operator, renormalized QFT and physical kinetic
+-- source are NOT proved in the Agda kernel.
+------------------------------------------------------------------------
+
+data IntervalHessianConsumer : Set where
+  oldHomogeneousEighteenMatrix
+  selectedNonconstantEighteenFunctionalFEM : IntervalHessianConsumer
+
+evenSourceFieldCount : IntervalHessianConsumer → Nat
+evenSourceFieldCount _ = 18
+
+physicalNonconstantGradientAndEndpointHessianIncluded :
+  IntervalHessianConsumer → Bool
+physicalNonconstantGradientAndEndpointHessianIncluded
+  oldHomogeneousEighteenMatrix = false
+physicalNonconstantGradientAndEndpointHessianIncluded
+  selectedNonconstantEighteenFunctionalFEM = true
+
+sameScalarCountNotSameDifferentialOperator :
+  Transport.ClaimNonTransportWitness
+    evenSourceFieldCount
+    physicalNonconstantGradientAndEndpointHessianIncluded
+sameScalarCountNotSameDifferentialOperator =
+  Descent.consumerNonDescentWitness
+    oldHomogeneousEighteenMatrix
+    selectedNonconstantEighteenFunctionalFEM
+    refl falseNotTrue
+
+selectedNumericalLowEigenSpectrumNonnegative : Bool
+selectedNumericalLowEigenSpectrumNonnegative = true
+
+selectedContinuumSpectralGapKernelCertified : Bool
+selectedContinuumSpectralGapKernelCertified = false
+
+selectedPhysicalFiveDimensionalGaugeQuantumVacuumCertified : Bool
+selectedPhysicalFiveDimensionalGaugeQuantumVacuumCertified = false
+
+twoMeshSelectedZeroAndPositiveModes : 7 + 11 ≡ 18
+twoMeshSelectedZeroAndPositiveModes = refl
