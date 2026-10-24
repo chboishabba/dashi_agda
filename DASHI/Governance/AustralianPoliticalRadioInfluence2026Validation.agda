@@ -2,6 +2,7 @@ module DASHI.Governance.AustralianPoliticalRadioInfluence2026Validation where
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (_+_; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Governance.AustralianPoliticalRadioInfluence2026Exact as A
@@ -337,3 +338,26 @@ noConspiracyFromTemplateCounts = refl
 noProvenAuditFromPersonalCustodyReport :
   A.provesPolicyCausation A.novaClaimsFullBOMAuditCopy ≡ false
 noProvenAuditFromPersonalCustodyReport = refl
+
+
+-- Finite arithmetic only. The premises are external source-reported counts
+-- and model coefficients. Even a kernel-checked refl does not make them
+-- empirical truths, prove producer independence, or validate coral ecology.
+gasCommitteeOriginalTemplateTotals :
+  272 + 13 + 52 + 15 + 14 ≡ 366
+gasCommitteeOriginalTemplateTotals = refl
+
+-- Browse conditional best estimate:
+-- 1597.41 Mt CO2 * 0.45 C/1e6 Mt * 4.4 DHW/C * 0.035
+-- * 1,060,000 ha * 250,000 colonies/ha
+-- = 5,867,127,189 / 200 colonies = 29,335,635.945.
+-- Decimal factors become integer numerator with denominator 1e14.
+browseConditionalModelNumeratorExact :
+  159741 * 45 * 44 * 35 * 1060000 * 250000
+    ≡ 2933563594500000000000
+browseConditionalModelNumeratorExact = refl
+
+browseConditionalModelScaleExact :
+  5867127189 * 500000000000
+    ≡ 2933563594500000000000
+browseConditionalModelScaleExact = refl
