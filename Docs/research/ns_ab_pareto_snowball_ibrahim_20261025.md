@@ -55,10 +55,27 @@ This does NOT refute a version where C_nu hides dependence on
 an evolving T3, higher initial norms, a separate alignment
 hypothesis, or some other explicitly named scale-dependent control.
 
+**Exact Grujić direction-equation cross-pollination.** On the same
+field the symmetric physical strain annihilates the unit direction,
+`S[u_n]xi_n=0`. Because `|omega_n|` is spatially constant,
+`grad(log|omega_n|)=0`. Moreover
+`Delta xi_n=-n² xi_n` while `|grad xi_n|²=n²`, so
+`Delta xi_n+|grad xi_n|² xi_n=0`.
+Thus every tangential strain, magnitude-gradient cross-diffusion,
+and harmonic-map heat contribution in the vorticity-direction
+equation cancels. The normalized direction is EXACTLY independent
+of time while the magnitude decays exponentially. This shows
+viscous damping does not by itself regularize all normalized
+direction oscillations, but does NOT refute Grujić's *conditional*
+critical-profile logarithmic-BMO analysis or any separately proved
+tangential-strain/phase hypothesis.
+
 Executable: `tests/test_ns_permana_ibrahim_direction_rigidity_heat_shear.py`,
-4 locally passing SymPy tests, including the global-constant-magnitude
-example. Neither these tests nor the comments in the original Agda
-owner constitute a kernel proof of an unbounded-function theorem.
+**6 locally passing SymPy tests**, including the high-vorticity
+full-domain witness, independent kinetic/enstrophy normalizations
+and exact harmonic-map cancellation. Neither these tests nor the
+comments in the original Agda owner constitute an Agda kernel
+proof of the universal quantified mathematical statement.
 
 ## Source genealogy: separate ROOTS, not independent votes
 
