@@ -98,3 +98,12 @@ agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/EverythingIITPhiIn
 \`\`\`
 
 **Phase verdict:** our earlier "recurrent XOR grid extinguishes itself" result is *correct only for the specified 2×2 source fixture*. An arbitrary larger recurrent XOR square **need not extinguish**. The higher-priority achievement is the source-versioned characteristic/dimension/size discriminator, not additional small truth-table enumeration.
+
+
+### Symbolic million-site comparison added after the finite audit
+
+The prime-power audit script now also emits **analytic, not executed-matrix** landmarks:
+- \`n=1000\`, binary **periodic east-plus-south XOR**: \(N=1{,}000{,}000\), one-step \(\operatorname{rank} F=999{,}000\), \(\dim\ker F=1000\), and \(F\) is **not nilpotent** because side length 1000 has an odd factor. This is **not** Tononi's proposed physical majority-input gate configuration even though its spatial site count matches.
+- \`n=1024=2^{10}\`, same **periodic XOR**: \(N=1{,}048{,}576\), one-step \(\operatorname{rank}F=1{,}047{,}552\), nullity \(1024\), and \(F^{1024}=0\) for every state by the characteristic-two Frobenius identity.
+
+These are closed-form consequences, not physical measurements, not allocations of million-by-million transition matrices, and not full IIT computations. A **2.4% difference in side length** (1000 versus 1024) here changes the nilpotence class because arithmetic periodicity is part of the specified model; no inference about actual neural substrates or consciousness follows.
