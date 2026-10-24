@@ -153,7 +153,10 @@ def paired_analysis(record):
             gradient_calibration_fractional_std=float(gradient_fraction))
     provenance_ok = all(_readback_receipt(meta, k) for k in ('raw_data', 'calibration'))
     provenance_ok = provenance_ok and source_join['bytes_and_exact_pair_source_join']
-    factorial_settings = record.get('factorial_settings')
+    # Do not use caller-supplied nominal arm labels to claim identifiability.
+    # The only admissible factorial coordinates are replayed from the same
+    # hashed instrument stream that produced the analysed force pairs.
+    factorial_settings = source_join.get('factorial_settings_from_source')
     try:
         design = audit_settings(factorial_settings)
         design_identifiable = design['interaction_identifiable_with_separated_thermal_proxy']
@@ -182,8 +185,12 @@ def paired_analysis(record):
     obligations.extend(source_join['unpaid_source_joins'])
     if not design_identifiable:
         obligations.append('unidentifiable_coil_dipole_heating_factorial')
-    if meta.get('raw_to_pairs_reducer_verified') is not True:
+    if not source_join.get('raw_stream_replayed_to_pairs'):
         obligations.append('unverified_raw_to_pair_reduction')
+    # Deterministic replay still cannot independently authenticate an
+    # original sensor, a calibration certificate, or its named operator.
+    if meta.get('independent_raw_reducer_review') is not True:
+        obligations.append('missing_independent_raw_reducer_review')
     if len(results) < 4 or run_count < 2:
         obligations.append('insufficient_predefined_pair_or_session_coverage')
     if meta['origin'] == 'synthetic':
@@ -204,6 +211,9 @@ def paired_analysis(record):
         'input_bytes_hash_verified': provenance_ok,
         'same_object_source_join': source_join,
         'factorial_identifiability': design,
+        'factorial_settings_source': 'replayed_hashed_raw_sensor_stream' if
+            source_join.get('raw_stream_replayed_to_pairs') else 'unverified',
+        'raw_stream_to_pair_replay_passed':source_join.get('raw_stream_replayed_to_pairs', False),
         'submission_ready_for_independent_metrology_review': not obligations,
         'unpaid_obligations': obligations,
         'self_declared_dossier_checklist_complete': not obligations,
