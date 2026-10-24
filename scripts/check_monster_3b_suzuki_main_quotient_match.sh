@@ -61,6 +61,19 @@ assert type(p["suzuki_central_involution_class_position"]) is int
 assert p["suzuki_central_involution_class_position"] > 0
 assert p["source_selected_S90_central_C2_trace"] in (-90, 66)
 assert p["sym2_candidate_S90_central_C2_trace"] == 66
+assert p["selected_78_direct_sym2_full_character_pair_count"] in (0, 2)
+assert p["selected_78_dual_sym2_full_character_pair_count"] in (0, 2)
+assert type(p["selected_78_is_nebe_sym2_family_full_character_equal"]) is bool
+assert p["selected_78_is_nebe_sym2_family_full_character_equal"] is (
+    p["selected_78_direct_sym2_full_character_pair_count"] == 2
+    and p["selected_78_dual_sym2_full_character_pair_count"] == 2
+)
+assert p["common_729_necessary_equal_C3_phase_pair_count"] in (0, 1, 2)
+assert type(p["suzuki_central_order_three_class_position"]) is int
+assert p["suzuki_central_order_three_class_position"] > 0
+if p["selected_78_is_nebe_sym2_family_full_character_equal"]:
+    assert p["source_selected_c2_compatible_with_sym2_faithful12"] is True
+    assert p["source_selected_degree_78_faithful_to_6Suz"] is False
 assert type(p["source_selected_c2_compatible_with_sym2_faithful12"]) is bool
 assert p["source_selected_c2_compatible_with_sym2_faithful12"] is (
     p["source_selected_S90_central_C2_trace"] == 66
