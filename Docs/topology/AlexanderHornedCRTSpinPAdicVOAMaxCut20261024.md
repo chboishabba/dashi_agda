@@ -283,3 +283,71 @@ Locally run equivalent full finite Python probes PASS:
 Committed scripts have CI entries, but NO GitHub Actions
 Agda/Lean exact-head SUCCESS returned in this session.
 PR #1244 remains draft.
+
+
+## New literature-backed break: residual alternating finite quotients
+
+Original source roots:
+- The residual finiteness of finite-rank FREE GROUPS
+  (classical theorem; e.g. Magnus/Karrass/Solitar).
+- The Ore conjecture, proven by Liebeck, O'Brien, Shalev and
+  Tiep, *The Ore conjecture*, JEMS 12 (2010), 939–1008,
+  DOI 10.4171/JEMS/220, https://ems.press/journals/jems/articles/3979.
+  Every element of each nonabelian finite simple group is
+  a single commutator, in particular every A_n for n>=5.
+- Their 2011 extension to finite quasisimple groups,
+  DOI 10.1112/blms/bdr043, identifies exceptional covers;
+  do not automatically assume every arbitrary central
+  cover has universal commutator width one.
+
+For any nontrivial element x in the ABSTRACT horn colimit
+G, choose a free stage F_(3*2^n) containing a nontrivial
+representative w of x (injectivity prevents collapse).
+Because that finite-rank free group is residually finite,
+there is a finite group H and a hom F_n->H distinguishing w.
+
+Embed H into a finite alternating group A_m:
+Cayley embeds H into S_|H|; the map S_d -> A_(d+2)
+corrects odd parity by swapping two fresh points, and
+is an injection. Increase m to at least 5 as needed.
+So obtain a stage hom F_n -> A_m separating w.
+
+Ore's theorem makes EVERY selected stage generator
+image in A_m a commutator of two chosen elements.
+Assign those two values to its two new horn generators
+at stage n+1. The resulting hom F_(n+1) -> A_m
+commutes with the commutator substitution F_n->F_(n+1).
+Repeat indefinitely using finite choice on the finite
+set A_m. The stage map thus extends uniquely along the
+direct limit, giving q_x:G->A_m with q_x(x)!=1.
+
+Consequences for the ABSTRACT source G:
+  (1) G is residually alternating, hence RESIDUALLY FINITE.
+  (2) The natural map G->its FULL profinite completion
+      is INJECTIVE (stronger than merely nontrivial).
+  (3) For every prime p, composing the family q_x with
+      regular permutation matrices
+        A_m->GL_(|A_m|)(Z)->GL_(|A_m|)(Qp)
+      gives a FAMILY of finite-dimensional nonabelian
+      p-adic matrix observers separating EVERY x!=1.
+  (4) Each individual quotient may have a large kernel.
+      No single finite-dimensional faithful GL_n(Qp)
+      representation is established by this argument.
+  (5) All pro-p completions remain trivial because
+      alternating simple targets are NOT p-groups.
+      No contradiction with faithful FULL profinite recovery.
+
+Companion existing repo audit:
+`scripts/alexander_horned_ore_residual_alternating_probe.py`
+now exercises one finite A5 commutator section and four
+extension stages. Its finite test is NOT a kernel proof of
+unbounded residual separability, and the abstract proof
+above still relies on the two credited theorems and
+injectivity of the free tower.
+
+The ACTUAL three-copy geometric complement still needs
+its open-cover / van Kampen / compactness identification
+with this abstract G before any geometric claim can be
+promoted. The faithful family is a theorem about the
+specified *abstract group*, NOT wild topology proved
+by p-adic matrix numerics.
