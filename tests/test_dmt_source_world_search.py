@@ -280,3 +280,16 @@ def test_scoped_absence_does_not_count_as_live_search_consumer():
             "potential_consumer_ids"]
 
 
+
+
+def test_source_commit_tree_and_blob_identifiers_are_distinct():
+    w = world()
+    tree = w["observed_git_tree"]
+    assert tree["source_commit"] == "b35701d88d904e2f602164ff2eae0fc879772078"
+    assert tree["source_tree_sha1"] == "38bdb12d180303f1738b7c5b6d99f34f157c26f9"
+    assert tree["source_commit"] != tree["source_tree_sha1"]
+    assert len(tree["files"]) == 56
+    altered = copy.deepcopy(w)
+    altered["observed_git_tree"]["source_tree_sha1"] = altered["observed_git_tree"]["source_commit"]
+    with pytest.raises(ValueError, match="diverges|conflated"):
+        engine.validate_world(altered)
