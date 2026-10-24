@@ -81,7 +81,11 @@ if mn3bToMonster = fail then
 fi;
 
 # ----------------------------------------------------------------------
-# Source-native faithful 12a/b and 78a/b candidate families.
+# Source-faithful 12 family and ALL degree-78 candidate families.
+# Barraclough--Wilson Section 5.1 permits ANY eta in Irr(6.Suz).
+# Thus DO NOT preselect a faithful degree78 before the exact quotient
+# and Monster-character occurrence test. Nebe's Sym²12=78 is
+# nonfaithful to 6.Suz and must remain in the search.
 # ----------------------------------------------------------------------
 
 IsFaithfulCharacter := function(chi)
@@ -90,58 +94,59 @@ end;
 
 p12 := Filtered([1..Length(sixIrr)], i ->
   sixIrr[i][1] = 12 and IsFaithfulCharacter(sixIrr[i]));
-p78 := Filtered([1..Length(sixIrr)], i ->
-  sixIrr[i][1] = 78 and IsFaithfulCharacter(sixIrr[i]));
-if Length(p12) <> 2 or Length(p78) <> 2 then
-  Error("expected exactly two faithful 12 and two faithful 78 characters in 6.Suz");
+all78 := Filtered([1..Length(sixIrr)], i -> sixIrr[i][1] = 78);
+if Length(p12) <> 2 or Length(all78) < 2 then
+  Error("faithful 12 pair or source degree78 candidate inventory unavailable");
 fi;
-
-# Keep original source-selected FAITHFUL 78 route intact: do NOT silently
-# replace with Gabriele Nebe's Sym²(12), which factors through 3.Suz.
-# A faithful 6.Suz 12/78 has central involution scalar -1 on BOTH.
-central2Classes := Filtered(ClassPositionsOfCentre(six), i ->
-  OrdersClassRepresentatives(six)[i] = 2);
-if Length(central2Classes) <> 1 then
-  Error("unique central involution class of 6.Suz is unavailable");
-fi;
-central2Class := central2Classes[1];
-if ForAny(p12, i -> sixIrr[i][central2Class] <> -12) then
-  Error("faithful 12 must have central involution trace -12");
-fi;
-if ForAny(p78, i -> sixIrr[i][central2Class] <> -78) then
-  Error("faithful 78 must have central involution trace -78");
-fi;
-selectedMultiplicityC2Trace := -12 - 78;
-sym2CandidateMultiplicityC2Trace := -12 + 78;
-if selectedMultiplicityC2Trace <> -90 or
-   sym2CandidateMultiplicityC2Trace <> 66 then
-  Error("Suzuki central C2 discriminator arithmetic failed");
-fi;
-
 sum12 := sixIrr[p12[1]] + sixIrr[p12[2]];
-sum78 := sixIrr[p78[1]] + sixIrr[p78[2]];
 
-# Identify the outer irreducibles restricting exactly to the two conjugate
-# Suzuki pairs.  This binds 12a/b -> one degree-24 6.Suz.2 character and
-# 78a/b -> one degree-156 6.Suz.2 character by full class-function equality.
+# ----------------------------------------------------------------------
+
+# Identify outer character pairs via FULL class-function restriction,
+# without assuming which 78 family occurs in the Monster quotient.
+# ----------------------------------------------------------------------
+
 OuterRestriction := function(chi)
   return ClassFunction(six, List(sixToOuter, c -> chi[c]));
 end;
 
 outer12Pair := Filtered([1..Length(outerIrr)], i ->
   outerIrr[i][1] = 24 and OuterRestriction(outerIrr[i]) = sum12);
-outer78Pair := Filtered([1..Length(outerIrr)], i ->
-  outerIrr[i][1] = 156 and OuterRestriction(outerIrr[i]) = sum78);
 if Length(outer12Pair) <> 1 then
-  Error("expected one 6.Suz.2 character restricting to 12a+12b");
-fi;
-if Length(outer78Pair) <> 1 then
-  Error("expected one 6.Suz.2 character restricting to 78a+78b");
+  Error("expected one 6.Suz.2 character restricting to faithful12a+12b");
 fi;
 outer12Pos := outer12Pair[1];
-outer78Pos := outer78Pair[1];
+
+Pair78OnSix := function(outerPos)
+  local restricted, multiplicities, support;
+  restricted := OuterRestriction(outerIrr[outerPos]);
+  multiplicities := List(sixIrr, chi -> ScalarProduct(six, restricted, chi));
+  if ForAny(multiplicities, x -> not IsInt(x) or x < 0) then
+    Error("outer degree156 restriction is not a nonnegative six-Suz character");
+  fi;
+  support := Filtered([1..Length(multiplicities)], k -> multiplicities[k] <> 0);
+  if Length(support) <> 2 or
+     ForAny(support, k -> sixIrr[k][1] <> 78 or multiplicities[k] <> 1) then
+    return fail;
+  fi;
+  return support;
+end;
+
+outer78Families := [];
+for i in [1..Length(outerIrr)] do
+  if outerIrr[i][1] = 156 then
+    pair := Pair78OnSix(i);
+    if pair <> fail then
+      Add(outer78Families, rec(outerPos:=i, sixPositions:=pair));
+    fi;
+  fi;
+od;
+if Length(outer78Families) = 0 then
+  Error("no source 6.Suz.2 degree156 characters restrict to 78+78");
+fi;
 
 # ----------------------------------------------------------------------
+
 # Identify Barraclough's fused degree-1458 main-table character.
 #
 # The extraspecial centre is NOT selected merely by order and class size.  The
@@ -206,29 +211,14 @@ DecomposeMain := function(chi)
 end;
 
 prod12 := ProductCharacter(base1458, InflateOuterToMain(outerIrr[outer12Pos]));
-prod78 := ProductCharacter(base1458, InflateOuterToMain(outerIrr[outer78Pos]));
 dec12 := DecomposeMain(prod12);
-dec78 := DecomposeMain(prod78);
-
-if Sum(dec12.support, i -> dec12.coeffs[i] * mainIrr[i][1]) <> 1458 * 24 then
-  Error("1458 x 24 product degree reconstruction failed");
-fi;
-if Sum(dec78.support, i -> dec78.coeffs[i] * mainIrr[i][1]) <> 1458 * 156 then
-  Error("1458 x 156 product degree reconstruction failed");
-fi;
-
-# Source expectation: the outer-paired products split into two constituents of
-# equal degree.  Keep this as an executable check, not an assumed row number.
 if Length(dec12.support) <> 2 or
    ForAny(dec12.support, i -> dec12.coeffs[i] <> 1 or mainIrr[i][1] <> 17496) then
-  Error("1458 x (12a+12b) did not split as two multiplicity-one degree-17496 main characters");
-fi;
-if Length(dec78.support) <> 2 or
-   ForAny(dec78.support, i -> dec78.coeffs[i] <> 1 or mainIrr[i][1] <> 113724) then
-  Error("1458 x (78a+78b) did not split as two multiplicity-one degree-113724 main characters");
+  Error("1458 x faithful12 outer pair did not split into two degree17496 rows");
 fi;
 
 # ----------------------------------------------------------------------
+
 # Determine descent through qGtoN3B by exact full class-function pullback.
 # This is the quotient-kernel compatibility test; no phase equality is guessed.
 # ----------------------------------------------------------------------
@@ -251,32 +241,95 @@ FindMN3BDescent := function(mainPos)
 end;
 
 desc12 := List(dec12.support, FindMN3BDescent);
-desc78 := List(dec78.support, FindMN3BDescent);
 paid12 := Filtered([1..Length(desc12)], k -> desc12[k] <> fail);
-paid78 := Filtered([1..Length(desc78)], k -> desc78[k] <> fail);
 if Length(paid12) <> 1 then
-  Error("expected exactly one of the two degree-17496 main characters to descend to MN3B");
+  Error("expected one degree17496 main constituent to descend to MN3B");
 fi;
-if Length(paid78) <> 1 then
-  Error("expected exactly one of the two degree-113724 main characters to descend to MN3B");
-fi;
-
 main12DescendingPos := dec12.support[paid12[1]];
 mn3b12Pos := desc12[paid12[1]];
-main78DescendingPos := dec78.support[paid78[1]];
-mn3b78Pos := desc78[paid78[1]];
 
-# ----------------------------------------------------------------------
-# Same-object Monster restriction check.
-# ----------------------------------------------------------------------
-
-monster196883 := Filtered([1..Length(monsterIrr)], i -> monsterIrr[i][1] = 196883);
+# Use the ACTUAL restricted Monster character to SELECT the 78 family,
+# instead of presupposing faithful/nonfaithful 6.Suz irreducibles.
+monster196883 := Filtered([1..Length(monsterIrr)], i ->
+  monsterIrr[i][1] = 196883);
 if Length(monster196883) <> 1 then
-  Error("expected exactly one Monster irreducible of degree 196883");
+  Error("expected unique Monster degree196883 character");
 fi;
 restrictedMonster := ClassFunction(mn3b,
   List(mn3bToMonster, c -> monsterIrr[monster196883[1]][c]));
 monsterMults := List(mn3bIrr, psi -> ScalarProduct(mn3b, restrictedMonster, psi));
+
+surviving78Families := [];
+for family in outer78Families do
+  product78 := ProductCharacter(base1458,
+    InflateOuterToMain(outerIrr[family.outerPos]));
+  trial78 := DecomposeMain(product78);
+  if Length(trial78.support) = 2 and
+     ForAll(trial78.support, i ->
+       trial78.coeffs[i] = 1 and mainIrr[i][1] = 113724) then
+    trialDesc78 := List(trial78.support, FindMN3BDescent);
+    trialPaid78 := Filtered([1..Length(trialDesc78)],
+                           k -> trialDesc78[k] <> fail);
+    if Length(trialPaid78) = 1 then
+      trialMN3B := trialDesc78[trialPaid78[1]];
+      if IsInt(monsterMults[trialMN3B]) and
+         monsterMults[trialMN3B] > 0 then
+        Add(surviving78Families,
+          rec(outerPos:=family.outerPos,
+              sixPositions:=family.sixPositions,
+              split:=trial78,
+              descend:=trialDesc78,
+              paid:=trialPaid78));
+      fi;
+    fi;
+  fi;
+od;
+if Length(surviving78Families) <> 1 then
+  Error("Monster full-character restriction did not select exactly ONE degree78 family");
+fi;
+selected78 := surviving78Families[1];
+outer78Pos := selected78.outerPos;
+p78 := selected78.sixPositions;
+dec78 := selected78.split;
+desc78 := selected78.descend;
+paid78 := selected78.paid;
+main78DescendingPos := dec78.support[paid78[1]];
+mn3b78Pos := desc78[paid78[1]];
+
+# Exact 6.Suz central involution signature is an independent discriminator.
+# A faithful 12 contributes -12. A faithful78 contributes -78, while
+# Nebe's Sym²(faithful12) contributes +78; do not fix either in advance.
+central2Classes := Filtered(ClassPositionsOfCentre(six), i ->
+  OrdersClassRepresentatives(six)[i] = 2);
+if Length(central2Classes) <> 1 then
+  Error("central 6.Suz involution class unavailable");
+fi;
+central2Class := central2Classes[1];
+if ForAny(p12, i -> sixIrr[i][central2Class] <> -12) then
+  Error("source selected faithful12 did not have C2 trace -12");
+fi;
+if sixIrr[p78[1]][central2Class] <> sixIrr[p78[2]][central2Class] then
+  Error("selected conjugate78 pair has inconsistent central C2 scalar");
+fi;
+selected78C2Trace := sixIrr[p78[1]][central2Class];
+if not selected78C2Trace in [-78,78] then
+  Error("selected irreducible 78 is not central C2 scalar +/-1");
+fi;
+selected78Faithful := ForAll(p78, i -> IsFaithfulCharacter(sixIrr[i]));
+selectedMultiplicityC2Trace := -12 + selected78C2Trace;
+sym2CandidateMultiplicityC2Trace := -12 + 78;
+selectedSym2C2Compatible :=
+  selectedMultiplicityC2Trace = sym2CandidateMultiplicityC2Trace;
+
+SourceBoolText := function(b)
+  if b then return "true"; else return "false"; fi;
+end;
+
+# ----------------------------------------------------------------------
+
+# Same-object Monster restriction check.
+# ----------------------------------------------------------------------
+
 if not IsInt(monsterMults[mn3b12Pos]) or monsterMults[mn3b12Pos] <= 0 then
   Error("descended degree-17496 constituent does not occur in restricted Monster character");
 fi;
@@ -314,11 +367,11 @@ PrintTo(output,
   "  \"qg_to_n3b_kernel_outer_class_position\": ", qKernelOuterClass, ",\n",
   "  \"degree_12_atlas_labels\": [\"", sixLabels[p12[1]], "\", \"", sixLabels[p12[2]], "\"],\n",
   "  \"degree_78_atlas_labels\": [\"", sixLabels[p78[1]], "\", \"", sixLabels[p78[2]], "\"],\n",
-  "  \"source_selected_degree_78_faithful_to_6Suz\": true,\n",
+  "  \"source_selected_degree_78_faithful_to_6Suz\": ", SourceBoolText(selected78Faithful), ",\n",
   "  \"suzuki_central_involution_class_position\": ", central2Class, ",\n",
   "  \"source_selected_S90_central_C2_trace\": ", selectedMultiplicityC2Trace, ",\n",
   "  \"sym2_candidate_S90_central_C2_trace\": ", sym2CandidateMultiplicityC2Trace, ",\n",
-  "  \"source_selected_faithful78_can_be_sym2_faithful12\": false,\n",
+  "  \"source_selected_c2_compatible_with_sym2_faithful12\": ", SourceBoolText(selectedSym2C2Compatible), ",\n",
   "  \"outer_12_pair_position\": ", outer12Pos, ",\n",
   "  \"outer_78_pair_position\": ", outer78Pos, ",\n",
   "  \"main_12_split_positions\": [", dec12.support[1], ", ", dec12.support[2], "],\n",
