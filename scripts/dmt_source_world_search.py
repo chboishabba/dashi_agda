@@ -56,6 +56,8 @@ def validate_world(world: dict) -> None:
     # Source-record count differs from the number of independent empirical
     # roots. A primary paper, its author script, and a reuse study must never
     # be counted as three independent participant acquisitions.
+    # These are bibliographic provenance roots, NOT necessarily independent
+    # participant cohorts. Sanders participant overlap is unverified.
     distinct_roots = {v["lineage_root"] for v in sources.values()}
     if (world.get("counts", {}).get("distinct_lineage_roots") != len(distinct_roots)
             or not set(distinct_roots) <= sources.keys()):
@@ -91,6 +93,8 @@ def validate_world(world: dict) -> None:
             raise ValueError("Action has a missing prerequisite")
         if not set(act["targets"]) <= artifacts.keys():
             raise ValueError("Action has nonexistent potential evidence output")
+        if any(artifacts[x]["status"] == "knownAbsent" for x in act["targets"]):
+            raise ValueError("Scoped knownAbsent artifact cannot become a new source via this action")
         if act["cost_band"] not in (1, 2, 3, 4) or act["access_risk"] not in (1, 2, 3, 4):
             raise ValueError("Costs/risks must remain declared ordinal policy bands")
         if any(artifacts[x]["status"] == "knownAbsent" for x in act["needs"]):
@@ -274,7 +278,8 @@ def snapshot(world: dict) -> dict:
     return {
         "world_id": world["world_id"],
         "source_records": len(world["sources"]),
-        "independent_lineage_roots": len({s["lineage_root"] for s in world["sources"]}),
+        "bibliographic_lineage_roots": len({s["lineage_root"] for s in world["sources"]}),
+        "participant_independence_certified": False,
         "source_file_objects": len(world["observed_git_tree"]["files"]),
         "artifact_status_counts": {k: sum(a["status"] == k for a in world["artifacts"])
                                    for k in sorted(STATES)},
