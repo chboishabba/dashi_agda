@@ -1,4 +1,7 @@
 # TOE × E6 × KK: outcome-ranked physical steelman and hard admissibility fork
+
+**2026-10-25 PRIORITY ERRATUM:** The subsequent E6/E32/E33+E21 positive 18-real zero-mode Hessian is NOT yet a genuine five-dimensional source vacuum: its old spatially constant profile violates the separate bulk E-L and Robin boundary equations. The corrected source-first implementation on KK #1241 constructs a *nonconstant dimensionless comparison-interval* BVP with all 36 original V6 bulk gradient components and zero gauge y-current checked, positive 3-field local FEM Hessian; dimensionful physical interval, all 18-even functional Hessian, anomalies/CS and stress remain OPEN. See `Docs/physics/KKE6OrbifoldIntervalBoundaryELMaxCut20261025.md`. Do not promote a sum-of-potentials critical point into source-level 5D stationarity.
+
 2026-10-24. Canonical physical owner: [KK #1241](https://github.com/chboishabba/dashi_agda/pull/1241).
 Sources: E6 [#1106](https://github.com/chboishabba/dashi_agda/pull/1106), TOE [#1217](https://github.com/chboishabba/dashi_agda/pull/1217), QFT/Casimir stress [#1165](https://github.com/chboishabba/dashi_agda/pull/1165), Lean TOE [#80](https://github.com/chboishabba/dashi_lean4/pull/80).
 This is a scientific MODEL-SELECTION document, not a claim of a completed TOE or a new original physical index theorem.
