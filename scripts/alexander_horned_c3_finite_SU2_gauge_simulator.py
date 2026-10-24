@@ -71,6 +71,13 @@ def build():
    c=comm(a,b);sec.setdefault(c,(a,b))
    if c==q and rootpair is None and len(generated((a,b)))==120:rootpair=a,b
  assert len(sec)==120 and rootpair
+ # Evaluate Q8 one-stage sign and verify the derived subgroup cannot
+ # generate noncentral child values at the next refinement.
+ I=(Z,O,Z,Z);J=(Z,Z,O,Z)
+ assert comm(I,J)==NEG
+ K=mul(I,J)
+ q8={ID,NEG,I,inv(I),J,inv(J),K,inv(K)}
+ assert len(q8)==8 and {comm(a,b) for a in q8 for b in q8}=={ID,NEG}
  return group,q,sec,rootpair
 def tower(q,sec,rootpair,depth):
  levels=[{():q}]
