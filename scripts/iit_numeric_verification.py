@@ -246,6 +246,8 @@ def verify_numeric_results() -> dict:
     assert jfine_s3["pointed_C3_zeta_multiplicity_each"] == 65610
     assert jfine_s3["D4_edge_corner_natural_modules_inequivalent"]
     assert jfine_s3["D4_times_S3_orbits"] == 490
+    assert jfine_s3["heisenberg_90_by_729_chart_roundtrips"] == 65610
+    assert not jfine_s3["heisenberg_actual_Weyl_action_identified"]
     assert jfine_s3["D4_times_S3_orbit_histogram"] == {
         3: 1, 6: 6, 12: 17, 24: 122, 48: 344}
     assert jfine_s3["D4_times_S3_Burnside_numerator"] == 23520
