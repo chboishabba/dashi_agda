@@ -77,17 +77,33 @@ reynolds v = diagonal (mean v)
 residual : Vec3 → Vec3
 residual v = sub v (reynolds v)
 
--- Pointwise equality is proved on the ACTUAL coordinates.
+-- Explicit vector extensionality, no functional extensionality.
+vecExt :
+  ∀ {a b c x y z} →
+  a ≡ x → b ≡ y → c ≡ z →
+  vec a b c ≡ vec x y z
+vecExt refl refl refl = refl
+
+thirdOfTriple : ∀ a → third * (a + a + a) ≡ a
+thirdOfTriple = solve-∀
+
+sumCyclic : ∀ a b c →
+  third * (c + a + b) ≡ third * (a + b + c)
+sumCyclic = solve-∀
+
+plusMinusCancel : ∀ a b → b + (a - b) ≡ a
+plusMinusCancel = solve-∀
+
+zeroSumPlane : ∀ a b →
+  a + (b - a) + (0ℚ - b) ≡ 0ℚ
+zeroSumPlane = solve-∀
+
+thirdZeroSumPlane : ∀ a b →
+  third * (a + (b - a) + (0ℚ - b)) ≡ 0ℚ
+thirdZeroSumPlane = solve-∀
+
 reynoldsPreservesDiagonal : ∀ a → reynolds (diagonal a) ≡ diagonal a
-reynoldsPreservesDiagonal a =
-  let theorem : ∀ t → third * (t + t + t) ≡ t
-      theorem = solve-∀
-  in
-    -- The same scalar equality appears in each coordinate.
-    case theorem a of λ where
-      refl → refl
-  where
-    open import Relation.Binary.PropositionalEquality using (cong)
+reynoldsPreservesDiagonal a rewrite thirdOfTriple a = refl
 
 reynoldsIdempotent : ∀ v → reynolds (reynolds v) ≡ reynolds v
 reynoldsIdempotent v =
@@ -96,13 +112,8 @@ reynoldsIdempotent v =
 -- R(x,y,z)=(z,x,y). Its average is invariant.
 reynoldsCommutesWithActualRotation : ∀ v →
   reynolds (Ambient.rotateXYZ v) ≡ reynolds v
-reynoldsCommutesWithActualRotation (Ambient.xyz x y z) =
-  let theorem : ∀ a b c →
-        third * (c + a + b) ≡ third * (a + b + c)
-      theorem = solve-∀
-  in
-    case theorem x y z of λ where
-      refl → refl
+reynoldsCommutesWithActualRotation (Ambient.xyz x y z)
+  rewrite sumCyclic x y z = refl
 
 rotationPreservesReynolds : ∀ v →
   Ambient.rotateXYZ (reynolds v) ≡ reynolds v
@@ -111,32 +122,22 @@ rotationPreservesReynolds v = refl
 -- Actual splitting as a direct-vector-space identity:
 -- every x is its invariant average plus transverse residual.
 reynoldsPlusResidual : ∀ v → add (reynolds v) (residual v) ≡ v
-reynoldsPlusResidual (Ambient.xyz x y z) =
-  let theorem : ∀ a m → m + (a - m) ≡ a
-      theorem = solve-∀
-  in
-    case theorem x (third * (x + y + z))
-       , theorem y (third * (x + y + z))
-       , theorem z (third * (x + y + z)) of λ where
-       (refl , refl , refl) → refl
-  where
-    open import Data.Product using (_,_)
+reynoldsPlusResidual (Ambient.xyz x y z)
+  rewrite plusMinusCancel x (third * (x + y + z))
+        | plusMinusCancel y (third * (x + y + z))
+        | plusMinusCancel z (third * (x + y + z)) = refl
 
 -- Actual complement plane, not only an abstract rank-two label.
 transverse : ℚ → ℚ → Vec3
 transverse a b = vec a (b - a) (0ℚ - b)
 
 transverseHasZeroSum : ∀ a b → traceSum (transverse a b) ≡ 0ℚ
-transverseHasZeroSum = solve-∀
+transverseHasZeroSum = zeroSumPlane
 
 reynoldsKillsTransverse : ∀ a b →
   reynolds (transverse a b) ≡ zero
-reynoldsKillsTransverse a b =
-  let theorem : ∀ x y →
-        third * (x + (y - x) + (0ℚ - y)) ≡ 0ℚ
-      theorem = solve-∀
-  in
-    case theorem a b of λ where refl → refl
+reynoldsKillsTransverse a b
+  rewrite thirdZeroSumPlane a b = refl
 
 -- On (a,b) in the transverse basis, the SAME ambient rotation is
 -- represented by the genuine rational cyclotomic companion matrix.
@@ -146,12 +147,20 @@ companionAction a b = transverse (0ℚ - b) (a - b)
 rotationIsCyclotomicOnTransverse :
   ∀ a b → Ambient.rotateXYZ (transverse a b) ≡ companionAction a b
 rotationIsCyclotomicOnTransverse a b =
-  let theorem : ∀ x y → y - (0ℚ - x) ≡ y + x
-      theorem = solve-∀
-  in
-    -- Coordinates reduce by rational-ring polynomial equality.
-    case theorem b a of λ where
-      refl → refl
+  vecExt (solve-∀ a b) (solve-∀ a b) (solve-∀ a b)
+
+-- The Reynolds kernel is EXACTLY the plane: recover the two
+-- coordinates a=x, b=-z from any zero-sum triple.
+transverseSpansZeroSum :
+  ∀ x y z → x + y + z ≡ 0ℚ →
+  transverse x (0ℚ - z) ≡ vec x y z
+transverseSpansZeroSum x y z totalZero =
+  vecExt (solve-∀ x y z)
+    (subst (λ t → (0ℚ - z) - x ≡ t) (sym totalZero)
+       (solve-∀ x y z))
+    (solve-∀ x y z)
+  where
+    open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 -- Existing realified-sector donor has dimension one plus two;
 -- here those sectors are constructed as actual rational
