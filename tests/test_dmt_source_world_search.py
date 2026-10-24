@@ -63,7 +63,7 @@ def test_shortest_hypothetical_paths_are_not_acquisitions():
     assert static["status"] == "conditional_plan_only"
     assert static["hypothetical_actions"] == [
         "a_original_motion_primary", "b_rights_review",
-        "c_source_bytes", "g_voxel_and_atlas_source",
+        "g_voxel_and_atlas_source",
         "h_effective_static_code", "d_replay_static"]
     assert static["evidence_created"] is False
     precursor = engine.hypothetical_plan(w, "c_temporal_replication")
@@ -153,7 +153,8 @@ def test_missing_dynamic_helper_is_known_absent_only_in_pinned_tree():
 def test_source_roots_count_lineage_not_documents():
     snap = engine.snapshot(world())
     assert snap["source_records"] == 7
-    assert snap["independent_lineage_roots"] == 3
+    assert snap["bibliographic_lineage_roots"] == 3
+    assert snap["participant_independence_certified"] is False
     assert snap["artifact_status_counts"] == {
         "knownAbsent": 2, "notLocated": 14, "present": 5}
 
@@ -235,3 +236,23 @@ def test_pareto_needs_source_object_coverage_not_only_consumer_overlap():
     assert qc["pareto"] and code["pareto"]
     # All closures still depend on producing the underlying evidence.
     assert code["promotion_authorised"] is False
+
+
+def test_original_static_is_not_blocked_by_unrelated_parcelled_mat_copy():
+    w = world()
+    original = next(x for x in w["claims"] if x["id"] == "c_static_reproduction")
+    replay = next(x for x in w["actions"] if x["id"] == "d_replay_static")
+    assert "source_local_bytes" not in original["requires"]
+    assert "source_local_bytes" not in replay["needs"]
+    assert "original_preprocessed_voxel_nifti" in original["requires"]
+    assert engine.hypothetical_plan(w, "c_static_reproduction")["hypothetical_actions"] == [
+        "a_original_motion_primary", "b_rights_review",
+        "g_voxel_and_atlas_source", "h_effective_static_code", "d_replay_static"]
+
+
+def test_known_absent_same_tree_artifact_cannot_be_claimed_as_acquired():
+    w = world()
+    next(x for x in w["actions"] if x["id"] == "h_effective_static_code")["targets"].append(
+        "original_static_nifti_and_mask_in_pinned_tree")
+    with pytest.raises(ValueError, match="Scoped knownAbsent"):
+        engine.validate_world(w)
