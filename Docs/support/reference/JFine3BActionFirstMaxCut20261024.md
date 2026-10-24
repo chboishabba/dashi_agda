@@ -115,3 +115,31 @@ The associated multiplicity space is canonically the **abstract** `Hom_E(H_ζ,W_
 | Finite linear FDRep, isotypic/Hom action | Open PR #1098 actual linear compiler and companion Lean #47 receipts | Source-coordinate proof boundary |
 
 This ownership table **is the reusable interface extraction plan**: implement adapters only where an action is proven on the same source object. No duplicate general Burnside, Schur, Stone–von Neumann, or cocycle axioms are introduced into the Agda tree by this PR.
+
+
+## Max-cut correction: existing owners, finite D4 no-go and equivariant repair
+
+**Prior art:** Merged PRs #464, #666, #700, #974, #995 already own the Heisenberg group, Schrödinger action, 3B normalizer character restriction, 12+78 character data and original D4 subgroup screen. Existing actual-kernel structure, scalar commutant, Stone–von Neumann uniqueness/multiplicity, actual-sector recognition/evaluation, cocycle-cancellation and source linear-Hom owners remain the owners of these results. Open PR #1098 and companion Lean #47 source-write generic FDRep, Schur, Maschke, isotypic, tensor, character and induced normalizer-Hom theorems. Generic Heisenberg was not a missing theorem.
+
+**Actual data boundary:** The AtlasRep producer constructs/tests the extraspecial group, not the 196883-dimensional Monster action. The type `ActualZetaSectorRecognition` and the `ActualLinearMultiplicityAcquisition` / `Selected3BNormalizerMonsterActionWeld` records are conditional proof contracts; none by themselves supplies selected Monster linear matrices, a concrete source-coordinate 65610-dimensional T, an actual inertia lift or its projective cocycle. The sourced 12+78 character split is owned, but its specific same-object Hom action/Fin90 transport remains unobserved. Do not promote a source-written interface to a kernel-verified inhabitant.
+
+**Old-chart negative result:** The original chart `(N-C,E-C;S-C,W-C,NW-C,NE-C,SW-C,SE-C)` picks two adjacent edge coordinates as multiplicity labels. Six of eight spatial D4 elements mix label and fibre coordinates. Their conjugates of an E fibre translation move a multiplicity label, whereas every element of the selected E fixes that label. Therefore full positional D4 does **not** normalize the old selected E action. Its geometric D4 normalizer has order two. This does not refute abstract Monster E-isotypy.
+
+**New D4-stable chart:** On centre-relative edge values N,E,S,W over F3 define
+```
+label a=(N-S)/2, b=(E-W)/2
+fibre x=(N+S)/2, y=(E+W)/2, NW,NE,SW,SE
+N=x+a, S=x-a, E=y+b, W=y-b.
+```
+Since 1/2=2 in F3, this is a concrete two-sided 2+6 split. The full square group D4 preserves the summands. On labels and fibre:
+```
+Q: (a,b;x,y,NW,NE,SW,SE) -> (-b,a;y,x,SW,NW,SE,NE)
+M: (a,b;x,y,NW,NE,SW,SE) -> (a,-b;x,y,NE,NW,SE,SW)
+```
+The fibre transforms by six-coordinate permutations P, so the previously established Heisenberg action normalizes under `(a_H,b_H,t) -> (P a_H,P b_H,t)` and preserves its dot/cocycle. Global value-S3 also normalizes this E; C3 is the E centre and value inversion swaps nontrivial phases.
+
+Source-typed Agda owner: `DASHI/Biology/IITJFineD4EquivariantHeisenbergGaugeExact.agda` on *existing* IIT PR #1148; imported by `IITPhiIntegrationEverything`. The module contains exhaustive base-F3 pair identities, two-sided chart, and Q/M equivariance proofs. No Agda kernel receipt claimed.
+
+Exact finite Python owner: `scripts/jfine_3b_d4_equivariant_chart.py` on this PR. An independent local run enumerated all 196830 original states and 1574640 D4 conjugation equations, passed. The D4 character of its 90 label permutation module is (identity 90, quarter 10, half 10, reflection 30), with decomposition `30 A1 + 10 B1 + 10 B2 + 20 E2`. This is **not** Wilson's 12+78, and no actual Monster D4 subgroup is identified.
+
+**Revised critical path:** obtain literal same-object Monster W_zeta / E / phase-preserving inertia action or source-coordinate generators; use existing recognition/projector/Hom/character compilers and test ranks, class characters, and projective cocycle. The existing `monster_3b_five_orbit_d4_n3b_screen.g` covers subgroup/fusion experiments but not this 90-dimensional same-object Hom action. Do not generate parallel Stone-von Neumann/Schur/Burnside or cocycle owners.
