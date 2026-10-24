@@ -250,3 +250,37 @@ Attribution rule: classical source roots, source-written
 definitions, finite computational receipts, kernel-certified
 results, same-object identifications and physical claims are
 six separately maintained statuses.
+
+## 7. Stronger 3-adic scalar-versus-group phase discriminator
+
+The original semidirect source H has a nontrivial **C3**
+quotient, and thus nontrivial pro-3 completion. However its
+scalar *one-dimensional* phase representation depends on the
+chosen coefficient field.
+
+For the bare field Q3, roots of unity are just ±1, so
+
+    Hom(H,Q3^times) = {trivial}.
+
+The nontrivial C3 phase has no scalar eigenvalue zeta3 in Q3.
+Passing to the ramified quadratic field Q3(zeta3) creates
+the two nontrivial third-root characters, and the rational
+two-dimensional cyclotomic representation can split after
+scalar extension. Q7 is another scalar field with primitive
+third roots (3 divides 7-1).
+
+The group-level map H->C3 is still present over ALL fields.
+A three-cycle permutation matrix over Q3 is well-defined,
+has order 3, and its nontrivial rational invariant block
+has dimension two; it need not diagonalize over Q3.
+
+Do not conflate:
+1. nontrivial pro-3 group quotient (true),
+2. a Q3-valued one-dimensional scalar phase (false),
+3. a matrix actor over Q3 (true),
+4. a selected Monster VOA 3B eigenspace (same-object open).
+
+Standard references: local-field roots of unity and Hensel
+lifting (e.g. MIT 18.785, 2021, Problem Set 4, problem 5;
+the theorem that Qp has p-1 roots of unity for odd p),
+https://ocw.mit.edu/courses/18-785-number-theory-i-fall-2021/.
