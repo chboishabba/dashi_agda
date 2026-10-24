@@ -6,7 +6,7 @@
 - Barraclough and Wilson, *The Character Table of a Maximal Subgroup of the Monster* (2007), DOI 10.1112/S1461157000001352: extraspecial inertia and `6.Suz` irreducible-character constructions.
 - R. W. Barraclough, *Some Calculations Related to the Monster Group* (PhD thesis, 2005), §5.3: historical GF31 eigenvalue reconstruction for degree729 and GF103/GF223 rational degree1458 checks. https://webspace.maths.qmul.ac.uk/r.a.wilson/RWBphd.pdf
 - GAP/CTblLib 6.Suz character tables, source positions and class power maps: https://www.gap-system.org/Packages/ctbllib.html .
-- Source-established symmetric-square identity `chi_Sym²U(g)=(chi_U(g)^2+chi_U(g²))/2`. For the covering Suzuki 12, see *Symmetrizations of quadratic and Hermitian forms* (2025), DOI 10.1007/s10801-025-01399-2. Its degree78 example need not be a **faithful** 6.Suz constituent.
+- Source-established symmetric-square identity `chi_Sym²U(g)=(chi_U(g)^2+chi_U(g²))/2`. For the covering Suzuki 12, see **Gabriele Nebe**, *Symmetrizations of quadratic and Hermitian forms* (2025), DOI 10.1007/s10801-025-01399-2. Its degree78 example need not be a **faithful** 6.Suz constituent.
 - Monster ATLAS power maps: https://brauer.maths.qmul.ac.uk/Atlas/v3/spor/M/; OEIS A007247 (4B q¹ 52), A058485 (12G q¹ -2), and A007257 (6D q¹ -2) are *transcriptions*, not original character proofs.
 
 ## Reused in-repo mathematical owners
@@ -68,7 +68,7 @@ The earlier source producer `scripts/monster_3b_suzuki_multiplicity_characters.g
 
 ## External source confirmation: actual irreducible Sym²(12) in the Suzuki cover
 
-The open-access peer-reviewed paper *Symmetrizations of quadratic and Hermitian forms*, `Journal of Algebraic Combinatorics` 61, article 29 (20 March 2025), DOI `10.1007/s10801-025-01399-2`, §6, **explicitly constructs** the symmetrization of its unitary degree-12 character of `6.Suz`. Its partition (2) row names irreducible character `χ_80` of degree78, and §6 separately calls out the degree-78 representations as **faithful to 3.Suz**, not to the 6.Suz central involution. Direct source: https://link.springer.com/article/10.1007/s10801-025-01399-2
+Gabriele Nebe's open-access peer-reviewed paper *Symmetrizations of quadratic and Hermitian forms*, `Journal of Algebraic Combinatorics` 61, article 29 (20 March 2025), DOI `10.1007/s10801-025-01399-2`, §6, **explicitly constructs** the symmetrization of its unitary degree-12 character of `6.Suz`. Its partition (2) row names irreducible character `χ_80` of degree78, and §6 separately calls out the degree-78 representations as **faithful to 3.Suz**, not to the 6.Suz central involution. Direct source: https://link.springer.com/article/10.1007/s10801-025-01399-2
 
 This resolves an uncertainty at *Suzuki character existence* level: `Sym²(12)=78` is not simply a proposed tensor dimension and does **exist as a sourced irreducible character**. It confirms the central-involution argument: on 12 the central involution is -I; on the 78 symmetric square it is +I, so the 78 descends to `3.Suz`.
 
