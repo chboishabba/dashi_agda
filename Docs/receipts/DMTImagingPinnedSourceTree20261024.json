@@ -3,7 +3,7 @@
   "source_doi": "10.1073/pnas.2218949120",
   "source_repository": "timmer500/DMT_Imaging",
   "source_commit": "b35701d88d904e2f602164ff2eae0fc879772078",
-  "source_tree_sha1": "b35701d88d904e2f602164ff2eae0fc879772078",
+  "source_tree_sha1": "38bdb12d180303f1738b7c5b6d99f34f157c26f9",
   "inventory_method": "GitHub API git-tree recursive enumeration at locked commit, inspected through connected GitHub; participant arrays never downloaded",
   "inventory": {
     "file_count": 56,
@@ -327,5 +327,6 @@
     "Git SHA1 identifies repository blobs but is not a locally recomputed SHA256 of participant files.",
     "No standard license/notice file in this commit's tree; permission and consent must be checked independently.",
     "No published statistics or behavioural/subjective reports have been independently recomputed."
-  ]
+  ],
+  "source_tree_verified_by": "GitHub git/commits/{commit}.tree.sha + recursive git/trees/{sha}, 2026-10-24; 56 exact blob paths/sizes verified, tree.truncated=false"
 }
