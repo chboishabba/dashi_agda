@@ -245,3 +245,83 @@ External sources:
   https://homepage.univie.ac.at/Dietrich.Burde/papers/burde_16_coho_course.pdf
 - Binary icosahedral historical group source:
   https://math.ucr.edu/home/baez/icosidodecahedron/23.html
+
+
+## 2026-10-24 decisive follow-on: SAME quartz spin matrix and full F7 actor
+
+**Stronger actual same-object representation owner**
+`DASHI/Mathematics/Topology/AlexanderHornedC3SpinCyclotomicIntertwinerExact.agda`
+reuses the LITERAL Cayley-Dickson rational Gaussian-complex
+and rational quaternion carriers. Let q=(1+i+j+k)/2,
+V=U(-q) in the standard Gaussian 2x2 quaternion realization,
+and A=[[0,-1],[1,-1]]. The explicit invertible change-of-basis
+matrix and its inverse are
+
+    T    = [[1, -(1+i)/2], [0, (1-i)/2]],
+    T^-1 = [[1, i],       [0, 1+i]].
+
+The new owner proves V*T = T*A and both inverse laws
+by componentwise rational polynomial identities.
+An independent local exact Gaussian-rational probe
+also passed modulo 3, 5 and 7 (over the corresponding
+Gaussian quotient algebras). Since det(T)=(1-i)/2
+and its norm is 1/2, T remains invertible modulo
+every odd prime. This **pays** the former same-carrier
+gap between the actual Horn coherent quaternion rotor
+and the cyclotomic companion field-comparison matrix
+at odd characteristic. p=2 is deliberately excluded.
+Script:
+`scripts/alexander_horned_c3_spin_cyclotomic_intertwiner_audit.py`.
+
+**Full finite-group Maschke break** is stronger than
+the C3-only character calculation:
+
+    Gprojective=A5^3 rtimes C3, |Gprojective|=648000
+    Gspin=2I^3 rtimes C3,      |Gspin|=5184000.
+
+Both orders are 3 modulo 7. Therefore **Maschke applies
+to every linear representation of BOTH full actors over F7**.
+In characteristic 5, C3 alone is semisimple, but the
+full A5 and 2I actors are modular. In characteristic
+2 the central spin sign collapses. Characteristic 7
+is thus the smallest prime simultaneously avoiding
+2,3,5, preserving +/- spin, and allowing full finite
+spin/projective-actor semisimplicity.
+
+NEW exact arithmetic owner
+`AlexanderHornedC3F7FullActorMaschkeExact.agda`
+proves both group orders and their division-with-remainder
+formulas, the 180/360 coordinate double-fibre identity
+and its rational normalized mean coefficient.
+Maschke's theorem itself is attributed to the pre-existing
+pinned mathlib/classical source; not falsely reconstructed
+as a new Agda theorem.
+
+**Same finite module / projector diagram:**
+with pi:OmegaS=C3x2I -> OmegaA=C3xA5 (2:1),
+the uniform average on either function space over F7
+is the projection to constant invariant functions.
+Each finite group acts transitively on its coordinate set.
+Since 180 mod7=5 and 360 mod7=3,
+
+    180^-1 = 3 mod7, 360^-1 = 5 mod7,
+    2 * 360^-1 = 180^-1 mod7.
+
+Therefore for EVERY f on OmegaA,
+
+    P_S(pi^* f) = pi^* (P_A f).
+
+The full finite SL2(F5) quotient, five Q8 subgroups,
+360->180 fibre counts, normalized averages and
+group translations were checked independently with
+exact finite arithmetic:
+`scripts/alexander_horned_c3_f7_full_actor_reynolds.py`.
+This is a genuine equivariant, mode-compatible finite
+algebraic result, not a claim that the actual selected
+Monster VOA or physical Dirac spectrum is realized.
+
+Proof levels: these three new Agda modules are SOURCE
+WRITTEN, not exact-head kernel checked. The scripts
+were independently reproduced locally and committed.
+Geometric horned R(B)=B, analytic Dirac domains,
+and 3-copy exterior pi1 are still independent gates.
