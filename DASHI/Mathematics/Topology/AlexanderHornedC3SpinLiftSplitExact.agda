@@ -235,3 +235,26 @@ bothProjectToExistingHornAxisRotation =
 -- The continuous angular *path* and the spin structure on the wild
 -- complement are not constructed here. The ambient SO3 path at
 -- intermediate angles need not preserve the selected horn embedding.
+
+------------------------------------------------------------------------
+-- Uniqueness at odd order: among the TWO lifts of the selected
+-- spatial generator, precisely ONE obeys the actual C3 relation.
+------------------------------------------------------------------------
+
+uniqueOrderThreeGeneratorLift :
+  ∀ a →
+  forgetSign a ≡ C3.c1 →
+  ((a * a) * a) ≡ unit →
+  a ≡ discreteLiftGenerator
+uniqueOrderThreeGeneratorLift
+  (spinC3 C3.c0 Q8.positiveSign) () cubeIdentity
+uniqueOrderThreeGeneratorLift
+  (spinC3 C3.c0 Q8.negativeSign) () cubeIdentity
+uniqueOrderThreeGeneratorLift
+  (spinC3 C3.c1 Q8.positiveSign) projection cubeIdentity = refl
+uniqueOrderThreeGeneratorLift
+  (spinC3 C3.c1 Q8.negativeSign) projection ()
+uniqueOrderThreeGeneratorLift
+  (spinC3 C3.c2 Q8.positiveSign) () cubeIdentity
+uniqueOrderThreeGeneratorLift
+  (spinC3 C3.c2 Q8.negativeSign) () cubeIdentity
