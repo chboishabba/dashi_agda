@@ -305,3 +305,72 @@ checks. Mathematical deductions can use credited
 classical theorems. Original repo authorship and
 same-object evidence remain separate. No Agda
 kernel or CI activity by explicit user request.
+
+
+## Extra spin / Chern class completion: gauge sectors vs geometry
+
+This is a significant consequence of the RIGHT
+Alexander-duality groups, not a speculative physical mechanism.
+
+E=R3\\B is an open orientable smooth 3-manifold
+(Euclidean R3 restricted away from a compact topological ball).
+It inherits a globally trivial tangent bundle and
+its ambient Euclidean spin structure. Since
+H1(E;Z)=0, universal coefficients give
+H^1(E;Z/2)=Hom(H1,Z/2)=0. Spin structures on
+an oriented spin manifold form a TORSOR for
+H^1(E;Z/2), so E has exactly ONE spin structure
+up to isomorphism. The exterior's nontrivial
+perfect pi1 does NOT give alternative Z2-valued
+spin twists around its nontrivial loops.
+
+In the globally fixed Euclidean frame the ordinary
+Levi-Civita connection (and its lifted spin
+connection) is flat with trivial loop holonomy.
+The sign change in a 360-degree PATH OF ROTATIONS
+in SO3 is NOT automatically holonomy around a
+spatial loop in this flat exterior. It is the
+Spin3 double-cover path phenomenon, a distinct
+object. Thus a nontrivial 2I flat monodromy
+would be an ADDITIONAL chosen SU2 gauge connection,
+not forced by wild embedding or the metric.
+
+On the other hand, for B compact contractible,
+H^2(E;Z)=Z as proved from Alexander duality
+for B union {infinity}. Complex line bundles
+(principal U1 bundles) over E are classified
+by c1 in H^2(E;Z)=Z. Nonzero classes can
+carry curvature/monopole-like magnetic flux
+through a surrounding S2. They cannot carry
+FLAT U1 connections: a flat bundle's integral
+c1 is torsion, and Z has no nonzero torsion.
+This is the same flux classification available
+in the exterior of a ROUND ordinary ball,
+and therefore is NOT a distinctive wild topology
+observable. It also reconciles 'no flat Abelian
+holonomy' with 'nonzero physical Maxwell flux'.
+
+Original/reference ownership:
+- Hatcher, Example 2B.2 and Alexander duality.
+- John Baez, *Torsors* (spin structures as H1(Z/2) torsor):
+  https://math.ucr.edu/home/baez/torsors.html
+- Standard locally-flat 3D geometry/tangent frame:
+  Dionne Ibarra, *A note on a short proof of the
+  parallelizability of orientable 3-manifolds*,
+  arXiv:2207.12149 (stronger theorem than needed;
+  our E subset R3 is automatically parallelized).
+- Laurentiu Maxim, notes on circle bundles:
+  https://web.math.wisc.edu/~lmaxim/754notes.pdf,
+  line bundles classified by H2 integral.
+- Flat line-bundle curvature class: de Rham
+  image of c1 vanishes, so c1 is torsion;
+  here only c1=0 can be flat.
+
+Acceptance guardrail:
+Distinctive wild-spin effects require a specific
+nonabelian connection AND measurable Wilson/Dirac
+effects with controlled locality and gauge coupling.
+Unique spin structure does not erase the existence
+of nontrivial SU2 FLAT BUNDLES (via 2I quotient);
+it only rules out distinct untwisted spin
+structures indexed by Hom(pi1,Z2).
