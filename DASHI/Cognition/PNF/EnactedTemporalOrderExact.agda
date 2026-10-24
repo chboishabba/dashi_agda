@@ -165,8 +165,19 @@ sourceCE = refl
 receptionEC : (receivedE earlier? receivedC) ≡ true
 receptionEC = refl
 
-calibratedSourceTimestampsMatchArrivals :
-  (sourceC + channelDelayC ≡ receivedC) →
-  (sourceE + channelDelayE ≡ receivedE) →
-  (sourceC earlier? sourceE) ≡ true
-calibratedSourceTimestampsMatchArrivals _ _ = sourceCE
+arrivalCEquals80ms : receivedC ≡ 80
+arrivalCEquals80ms = refl
+
+arrivalEEquals60ms : receivedE ≡ 60
+arrivalEEquals60ms = refl
+
+-- Conditional on *correct calibrated estimates* of source times, the local
+-- reader recovers the source order. The present file does not supply a model
+-- or empirical proof that a listener knows these estimates.
+calibratedReadoutIfEstimatesCorrect :
+  (estimatedC estimatedE : Nat) →
+  estimatedC ≡ sourceC →
+  estimatedE ≡ sourceE →
+  (estimatedC earlier? estimatedE) ≡ true
+calibratedReadoutIfEstimatesCorrect estimatedC estimatedE hC hE
+  rewrite hC | hE = sourceCE
