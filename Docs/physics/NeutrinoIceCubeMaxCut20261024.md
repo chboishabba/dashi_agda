@@ -1670,3 +1670,183 @@ agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3CompactCommutatorRepresent
 python3 -m unittest discover -s tests -p 'test_neutrino_horned_su3_positive_bridge.py' -v
 agda -i . DASHI/Physics/QFT/NeutrinoHornedSU3RootExact.agda
 ```
+
+## 24 October 2026 max-cut: the existing DASHI SU(3)/Lie-group stack WAS the owner
+
+### Reuse-first audit results
+
+The earlier phrase "construct a new SU(3) group and adjoint"
+was an incorrect ownership assumption. The canonical base
+repo already defines:
+
+- `DASHI/Physics/YangMills/SUNMatrixCarrier.agda`:
+  `CertifiedSUNMatrixTheory`, `IsSpecialUnitary`,
+  `SUNMatrixElement`, `sunMatrixGroup`.
+- `SUNMatrixLieAlgebra.agda`: traceless anti-Hermitian
+  matrix Lie bracket `XY-YX`.
+- `SUNMatrixLieGroup.agda`: group adjoint
+  conjugation, exponential/logarithm authority.
+- `SU3MatrixInstance.agda`: literal N=3 specialisation,
+  dimension eight, `su3MatrixGroup`.
+- `CompactLieGroupCore.agda`,
+  `CompactLieGroupDerived.agda`:
+  generic group and existing conjugation laws.
+- `CompactLieAnalyticPackage.agda` and
+  `CompactLieStandardAuthority.agda`:
+  explicit **standardImported** topological/analytic
+  authorities, not privately kernel-proven construction.
+- `QutritMatrixGates.agda`:
+  nine-cell `Matrix3`, qutrit phase/cycle gates,
+  potential finite-matrix record donor; not yet
+  certified as the SU3 carrier.
+
+The necessary horn generator substitution is a **GROUP**
+commutator `xyx^{-1}y^{-1}`, not the Lie-algebra
+bracket `XY-YX`. Gotô (1949) applies to the former.
+Separate later Lie-algebra results cannot substitute for it.
+
+### Concrete new Lie-transport code
+
+Sibling horn owner PR **#1244** now contains:
+
+`DASHI/Physics/YangMills/CompactLieInnerC3Exact.agda`
+with source-written proofs of the inverse-of-product,
+composition-of-inner-conjugation and **T³=I ⇒ Ad_T³=id**,
+reusing canonical `CompactLieGroupCore.Group` axioms.
+`DASHI/Mathematics/Topology/AlexanderHornedC3SUNLieGroupReuseExact.agda`
+uses original `CompactLieGroupDerived` to derive
+conjugation-preservation of inversion and
+group commutators, then binds the *existing*
+`SU3.su3MatrixGroup` directly into the horned
+recursive-address representation.  The imported
+Gotô commutator section remains explicit.
+
+This removes separately assumed algebraic laws
+from the source horn representation rather than
+reencoding them under a new symbol.
+
+**Lepton owner PR #1247** now contains:
+
+`DASHI/Physics/QFT/NeutrinoHornedSU3RootExact.agda`
+supplemented with exact, nine-clause-per-identity
+matrix evidence for
+`T†T=TT†=I`, `det(T)=1`,
+and `T³=I` using the literal existing
+`Q(ζ3)` algebra.
+
+`DASHI/Physics/QFT/NeutrinoExistingSUN3CarrierWeldExact.agda`
+then consumes the actual YM
+`CertifiedSUNMatrixTheory 3`,
+not a shadow group. It **derives** rather than
+assumes `IsSpecialUnitary(TS1)`,
+`IsSpecialUnitary(T)`, and the
+`Group`-valued `T³=I` law directly from
+the existing 18+18+9 pointwise cyclotomic
+root/rotation proofs, using transport lemmas
+for matrix multiplication, dagger, determinant,
+identity and scalar one.
+
+### Exact status of the *last* concrete matrix gap
+
+The weld is a **conditional** theorem:
+`ExactLeptonSUN3Weld` is a record of
+
+1. an existing certified matrix theory specifically
+   for `Flavour→Flavour→Q(ζ3)`;
+2. equations matching its operations with the
+   explicit lepton `productMatrix`, adjoint,
+   determinant, identity and one;
+3. function-matrix extensionality to turn
+   `∀a b, M a b=N a b` into `M=N`
+   at the raw function matrix type.
+
+None of those authority fields has been falsely
+filled by a `refl` or fabricated from a
+`Bool true` certificate. The repository's
+generic `SU3MatrixInstance` gives the
+**group assembly once supplied** matrix laws,
+not an automatic concrete nine-cell Q(ζ3)
+matrix realization.  Existing ternary finite
+function owners explicitly distinguish pointwise
+invariance from propositional function equality.
+Alternatively, the actual nine-cell
+`QutritMatrixGates.Matrix3` donor could remove
+the function-extensionality need if full field,
+matrix and group laws were certified on it.
+
+**Independent local exact Fraction check PASS**:
+`U†U=UU†=I`,
+`S1†=S1`, `S1²=I`,
+`A†A=AA†=I`,
+`det(A)=1`,
+`T†T=TT†=I`,
+`det(T)=1`,
+`T³=I`,
+and `Ad_T³(A)=A`.
+The 45 selected entry equalities for A and T
+were independently confirmed using the
+specific earlier rational angles and ζ coefficients.
+
+**Separate independent finite adversary**:
+A5 group of 60 elements, 60/60 commutator
+section, 7,200 inner-conjugation identities,
+five levels of group commutator horn
+refinement under an order-three inner twist:
+PASS exact finite permutation arithmetic.
+This checks transfer identities, NOT global SU3
+commutator-section existence, physical
+leptonic CP or the full Agda source.
+
+### Reduced max-cut roadmap
+
+PAID MATHEMATICALLY (ordinary mathematics, sources
+attributed): the original group-combinatorics,
+the Gotô/Hatcher infinite-image existence result,
+the source-selected lepton matrix A∈SU3,
+and C3 conjugation-equivariant three-copy action.
+
+PAID AT SOURCE-WRITTEN AGDA LEVEL ONLY:
+canonical Group conjugation/inverse/C3
+transport, horn adapter into the SAME original
+SU3 carrier, 45 explicit cyclotomic target
+matrix entries, and conditional proof
+transport into `SUNMatrixElement`.
+
+OPEN R0 KERNEL: compile source HEADs of
+both PRs, run exact-head committed Python
+tests, report version/exit/source hashes.
+No Agda executable is present in the
+available local execution container.
+
+OPEN R1 CONCRETE MATRIX: fill the named
+`ExactLeptonSUN3Weld` input using an existing
+nine-cell qutrit matrix type (preferred if
+closed) or a certified function matrix theory
+with explicit extensionality. This is the
+real remaining **algebraic same-object weld**.
+
+OPEN R2 GLOBAL ANALYTIC: import/prove Gotô's
+surjectivity and formalize the direct-limit
+universal property in the Agda theorem stack.
+The math is published, but the kernel socket
+has no inhabitant in these new files.
+
+OPEN R3 PHYSICAL: geometry π₁ of the
+threefold wild complement and its selected
+holonomy, physical lepton mass/Yukawa/charged
+current dynamics and independent neutrino
+CP/angle/data likelihood predictions.
+Mathematical SU3 on flavour labels is
+NOT a discovery of QCD colour gauge SU3,
+and an arbitrary target element A has
+no PMNS parameter-selection power.
+
+Sources: Gotô 1949 DOI
+10.2969/jmsj/00130270;
+Hatcher *Algebraic Topology* Example 2B.2;
+Malkoun and Nahlus, *Journal of Lie Theory*
+**27** (2017), DOI 10.5802/jolt.980,
+for the DIFFERENT Lie-algebra bracket result.
+Existing Yang–Mills, C3/369, CKM, qutrit,
+and neutrino source owners retain their
+original authorship and theorem grades.
