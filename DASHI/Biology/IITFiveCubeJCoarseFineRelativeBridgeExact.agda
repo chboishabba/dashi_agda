@@ -5,6 +5,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
 import DASHI.Core.CoarseFineDepthDecompositionExact as Depth
 import DASHI.Biology.JFineCoarseRelativeScaleExact as JScale
+import DASHI.Foundations.JPlusOneScaleBridge as JPlusOne
 
 ------------------------------------------------------------------------
 -- Exact algebraic transport of the 5^3 F3 lattice decomposition.
@@ -90,6 +91,21 @@ relativeReopening {V} {G} witness =
 retainedPlusLostDimension : Depth.CoarseFineDecomposition
 retainedPlusLostDimension =
   Depth.coarse-fine-decomposition 120 5 125 refl
+
+-- A single new *profile packet* has width five; it is not one scalar
+-- coordinate, and not the literal +1 arithmetic in the stage/McKay lanes.
+oneFiveSlotPacketReconstruction : 120 + 1 * 5 ≡ 125
+oneFiveSlotPacketReconstruction = refl
+
+oneFreshCoarseProfileShape : JPlusOne.FreshUnitExtension
+oneFreshCoarseProfileShape = record
+  { carrierValue = 120
+  ; freshValue = 5
+  ; joinedValue = 125
+  ; joinExact = refl
+  ; interpretation =
+      "One extra relative profile packet of five trits completes 120 retained dimensions to 125; no fourth spatial axis or J harmonic carrier identity"
+  }
 
 sourceDimensionsReconstruct :
   Depth.absoluteComponent retainedPlusLostDimension
