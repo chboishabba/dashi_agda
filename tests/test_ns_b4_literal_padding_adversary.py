@@ -143,3 +143,40 @@ def test_literal_four_moment_single_zero_row_increment():
         assert diff==s*vC-wC
         if vC==1 and wC==2:
             assert diff==s-2
+
+
+def test_existing_R681_cross_gradient_is_zero_padding_invariant():
+    # Existing Agda R681 theorem, *not* a newly proposed identity:
+    # r_pq=|p|²+|q|²=|k|²-2(p·q), on each literal p+q=k.
+    # For any signed coherent cell-work weights w, this produces the
+    # source-equivalent raw weighted physical R440 aggregate.
+    from fractions import Fraction as F
+    rows=[
+        ((1,0,0),(0,1,0),F(1,2)),
+        ((2,0,1),(-1,1,-1),F(-3,7)),
+        ((-4,1,0),(5,0,0),F(11,9)),
+    ]
+    k=module.K
+    for p,q,w in rows:
+        assert tuple(p[j]+q[j] for j in range(3)) == k
+        input_rate=sum(x*x for x in p)+sum(x*x for x in q)
+        output_rate=sum(x*x for x in k)
+        dot=sum(p[j]*q[j] for j in range(3))
+        assert input_rate == output_rate-2*dot
+        assert input_rate*w == output_rate*w-2*dot*w
+
+    def signed_normal_form(triads):
+        raw=sum((sum(x*x for x in p)+sum(x*x for x in q))*w
+                for p,q,w in triads)
+        weighted_output=sum(x*x for x in k)*sum(w for _,_,w in triads)
+        cross=-2*sum(sum(p[j]*q[j] for j in range(3))*w
+                     for p,q,w in triads)
+        assert raw==weighted_output+cross
+        return raw
+    before=signed_normal_form(rows)
+    # Zero amplitudes with arbitrarily large input rates never alter
+    # this genuine physical rate/heat source, unlike full-fibre centering.
+    for m in (10,100,1000):
+        p=(m,0,0)
+        q=(1-m,1,0)
+        assert signed_normal_form(rows+[(p,q,F(0))])==before
