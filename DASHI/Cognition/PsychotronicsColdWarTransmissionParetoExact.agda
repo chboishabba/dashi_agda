@@ -465,9 +465,9 @@ transmissionCitationPaid = Pareto.pareto-frontier-leaf
 firstUnpaidEasternPrimary : Pareto.ParetoFrontierLeaf
 firstUnpaidEasternPrimary = Pareto.pareto-frontier-leaf
   1 Pareto.currentHighestAlpha
-  "Pavlita original design/claims and 1970 book exact page-to-original-document citation trail"
-  "1975 US analytic report describes generators on pp.46-49; cites the 1970 book in selected bibliography"
-  "Acquire and inspect primary Pavlita/Rejdak contemporaneous technical publications or 1973 Prague conference proceedings; map which Maire paragraphs rely on book vs independent Eastern Bloc sources"
+  "Specific Pavlita and Pavlitova-Zapadlova 1973 Part I p.64 paper; 1972 rival Soviet/Czech physical experiment and 1970 popular-report genealogy"
+  "First-party Pavlita/Pavlitova-Zapadlova 1973 conference paper title/coauthor identified in JPRS Part I p.64 combined contents; 1975 US report separately cites 1970 book in bibliography; journalist-origin Czech Radio Mefisto account and later critical author narrative locate a purported 1972 negative evaluation"
+  "Acquire exact JPRS Part I p.64 body, native 1972 Mefisto commission/Azarov observations and 1974 Vesmir original, then compare apparatus, conditions, controls and claim-specific citations. Part II contains a combined TOC, not this Part I paper body"
   "Only claim-specific original-first lineage and diagram comparison, no popularity-based promotion"
   "Separates first-party apparatus from Western secondary retellings"
   false
