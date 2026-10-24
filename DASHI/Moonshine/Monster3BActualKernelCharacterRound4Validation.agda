@@ -9,6 +9,8 @@ import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannMultiplicityExact as StoneC
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Existing
 import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact as Evaluation
 import DASHI.Moonshine.Monster3BNormalizerCocycleCancellationExact as Cocycle
+import DASHI.Moonshine.Monster3BJFineGeometricD4InvolutionNoGoExact as JFineNoGo
+import DASHI.Moonshine.Monster3BJFineD4CandidateMultiplicityExact as JFineRepair
 import DASHI.Moonshine.Monster3BMultiplicityCharacterSafeReconstructionExact as Safe
 import DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact as Gap
 import DASHI.Wikimedia.IbrahimMonsterSSP14GlobalInversionOrbitWeldValidation
@@ -108,3 +110,22 @@ projectiveTensorCancellationAvailable :
       (Cocycle.pureTensor action h s)
 projectiveTensorCancellationAvailable =
   Cocycle.compensatedTensorActionIsHonestOnPureTensors
+
+------------------------------------------------------------------------
+-- Added selected-3B JFine character obstruction and finite linear repair.
+-- The source-character inputs and actual group embedding retain distinct
+-- status; these proofs assert no actual Monster D4 subgroup exists.
+------------------------------------------------------------------------
+
+geometricJFineD4HalfTurnCannotBeMonsterSelectedPhase :
+  JFineNoGo.GeometricD4HalfTurnSourceWitness → ⊥
+geometricJFineD4HalfTurnCannotBeMonsterSelectedPhase =
+  JFineNoGo.noSelectedMonster3BGeometricD4HalfTurn
+
+signedJFineD4CorrectedHalfTurnTrace : 81 * 18 ≡ 1458
+signedJFineD4CorrectedHalfTurnTrace =
+  JFineRepair.fibreTensorHalfTurn
+
+signedJFineD4CorrectedQuarterTrace : 9 * 2 ≡ 18
+signedJFineD4CorrectedQuarterTrace =
+  JFineRepair.fibreTensorQuarterTurn
