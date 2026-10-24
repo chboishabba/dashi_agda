@@ -766,3 +766,30 @@ protocolCannotImportAClinicalResult :
   Attribution.citationImportsProof Atlas.duAssessorBlindedProtocol2026 ≡ false
 protocolCannotImportAClinicalResult =
   Atlas.allSourcesRemainNonPromoting Atlas.duAssessorBlindedProtocol2026
+
+------------------------------------------------------------------------
+-- MINIMAL CONDITIONAL ESTIMAND: 01 VS 11 NEEDS NO FOUR-CELL FACTORIAL
+-- WHEN THE SENSORY CUE IS TRULY THE SAME AND EM DIFFERS.
+-- This mathematical possibility is NOT a real-world masking receipt.
+-- Full 2x2 is needed to separately estimate EM main and EMxCue
+-- interaction in the declared four-parameter model.
+------------------------------------------------------------------------
+
+matchedCueHasSameNominalSensoryState :
+  sensory factorial01 ≡ sensory factorial11
+matchedCueHasSameNominalSensoryState = refl
+
+matchedCueChangesNominalEmExposure :
+  electromagnetic factorial01 ≡ electromagnetic factorial11 → ⊥
+matchedCueChangesNominalEmExposure ()
+
+data MatchedNominalCueMeansInstrumentalMasking : Set where
+data ConditionalFieldContrastEqualsFieldMainEffect : Set where
+
+formalCueEqualityIsNotAnAcousticMeasurement :
+  MatchedNominalCueMeansInstrumentalMasking → ⊥
+formalCueEqualityIsNotAnAcousticMeasurement ()
+
+oneConditionalContrastDoesNotIdentifyInteraction :
+  ConditionalFieldContrastEqualsFieldMainEffect → ⊥
+oneConditionalContrastDoesNotIdentifyInteraction ()
