@@ -103,37 +103,30 @@ globallyIntegralSpinQuotientCSTransferCertified : Bool
 globallyIntegralSpinQuotientCSTransferCertified = false
 
 data ModThree : Set where
-  zero one two : ModThree
+  resZero resOne resTwo : ModThree
 
 _modThreeTimes_ : ModThree → ModThree → ModThree
-zero modThreeTimes_ _ = zero
-one modThreeTimes_ x = x
-two modThreeTimes_ zero = zero
-two modThreeTimes_ one = two
-two modThreeTimes_ two = one
+resZero modThreeTimes_ _ = resZero
+resOne modThreeTimes_ x = x
+resTwo modThreeTimes_ resZero = resZero
+resTwo modThreeTimes_ resOne = resTwo
+resTwo modThreeTimes_ resTwo = resOne
 
 modThreeSquare : ModThree → ModThree
 modThreeSquare x = x modThreeTimes_ x
 
--- Residue-level expression d (2d²+1) = 0 mod 3,
--- where d ≡ m−n mod 3. This reduces the global CP3
--- EVEN index computation to THREE small source cases.
-data ModThreeIndexIsZero : ModThree → Set where
-  modThreeIndexCase : (d : ModThree) →
-    ModThreeIndexIsZero d
-
--- The operative EXACT proof uses a computation table, not axioms.
+-- Actual CP3 source index parity requires d*(2*d^2+1)=0 mod3.
 modThreeTwiceSquarePlusOne : ModThree → ModThree
-modThreeTwiceSquarePlusOne zero = one
-modThreeTwiceSquarePlusOne one = zero
-modThreeTwiceSquarePlusOne two = zero
+modThreeTwiceSquarePlusOne resZero = resOne
+modThreeTwiceSquarePlusOne resOne = resZero
+modThreeTwiceSquarePlusOne resTwo = resZero
 
 cpThreeSpinHalfIndexModThreeCondition :
   (d : ModThree) →
-  d modThreeTimes_ (modThreeTwiceSquarePlusOne d) ≡ zero
-cpThreeSpinHalfIndexModThreeCondition zero = refl
-cpThreeSpinHalfIndexModThreeCondition one = refl
-cpThreeSpinHalfIndexModThreeCondition two = refl
+  d modThreeTimes_ (modThreeTwiceSquarePlusOne d) ≡ resZero
+cpThreeSpinHalfIndexModThreeCondition resZero = refl
+cpThreeSpinHalfIndexModThreeCondition resOne = refl
+cpThreeSpinHalfIndexModThreeCondition resTwo = refl
 
 cpThreeGlobalSpinIndexTestIsNotFullBordism : Bool
 cpThreeGlobalSpinIndexTestIsNotFullBordism = true
