@@ -153,3 +153,31 @@ noFinanceCommand : SecuredMediaFinanceProvesEditorialOrders → ⊥
 noFinanceCommand ()
 noRumourToEquity : ReportedPodcastBackerIsAuditedCapital → ⊥
 noRumourToEquity ()
+
+-- The Google transcript conflated owning a party's rented premises with gifting it.
+-- AAP and ABC identify a market-rate rental claim, not a free HQ transfer.
+rinehartOneNationHeadOffice : A.RelationshipReceipt
+rinehartOneNationHeadOffice = A.relationship-receipt
+  "Hanrine / Rinehart-owned property" "One Nation national headquarters premises"
+  A.commercialLeaseArrangement A.journalistCorroboration
+  "AAP, 5 Oct 2026, and One Nation/Hancock statements"
+  "https://aapnews.aap.com.au/news/one-nation-to-shuffle-deck-rent-gina-rinehart-office"
+  "Rinehart-linked entity purchased roughly AUD8m Brisbane premises. One Nation and Hancock say it rents space at commercial rate; lease terms and actual rent have not been independently audited. Building ownership is NOT donation of the title to party."
+  false false false
+
+-- Ownership belongs to its real corporate entity and date, not an
+-- unattributed billionaire or the network that formerly employed talent.
+stefanovicIbrahimOwnershipSettlement : A.RelationshipReceipt
+stefanovicIbrahimOwnershipSettlement = A.relationship-receipt
+  "Karl Stefanovic / Keshnee Ibrahim podcast partners" "123 Podcast Pty Ltd"
+  A.ownershipBuyoutSettlement A.journalistCorroboration
+  "AAP 9 Oct 2026; RadioInfo 11 Oct 2026"
+  "https://radioinfo.com.au/podcast-info/karl-stefanovic-podcast-to-resume-unfettered/"
+  "The company had 45% interests for Stefanovic and the Ibrahim side; reports say a court dispute ended in confidential buyout by Stefanovic. Payment amount and current ultimate register not obtained; this is NOT proof Rinehart was equity holder."
+  false false false
+
+-- Source-root transfer remains a question even when re-publication is certain.
+data OriginalInterviewFileAccessIsProvenInstruction : Set where
+noRepublishedFileCommand :
+  OriginalInterviewFileAccessIsProvenInstruction → ⊥
+noRepublishedFileCommand ()
