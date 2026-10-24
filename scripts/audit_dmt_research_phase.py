@@ -48,7 +48,7 @@ def validate_research_contract(world, dossier, cards):
         raise ValueError("Model cards do not use the declared primary-acquisition dossier")
     if not dossier.get("no_outreach") or not dossier.get("no_data_fetched"):
         raise ValueError("Acquisition dossier must not invent correspondence or data access")
-    if cards.get("status") != "pre_empirical_design_only" or cards.get("tests_not_yet_run") is not True:
+    if cards.get("status") != "pre_empirical_design_only" or cards.get("empirical_predictions_tested") is not False:
         raise ValueError("Model-card design must not assert fitted empirical results")
     if cards.get("primary_study_doi") != "10.1073/pnas.2218949120":
         raise ValueError("Unexpected original study DOI")
@@ -135,7 +135,7 @@ def summary(world, dossier, cards):
     actions = engine.action_candidates(world)
     selected = [x for x in actions if x["pareto"]]
     phase_a = {
-        "phase_0": "foundation_substantially_paid; focused historical Python suite 37/37, later code changes need separate verification",
+        "phase_0": "foundation_substantially_paid; regression execution reported separately from empirical-model tests",
         "phase_1": "active_primary_evidence_acquisition",
         "phase_2": "source_gated_original_reproduction_and_design_only_M0_M1_M2",
         "phase_3": "held_out_empirical_models_not_admitted",
