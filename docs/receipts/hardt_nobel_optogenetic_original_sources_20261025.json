@@ -1,0 +1,114 @@
+{
+  "title": "Hardt delta × 2026 Nobel optogenetics original-source and physical causal discriminators",
+  "prepared_date": "2026-10-25",
+  "status": "AUTHORED_SYNTHETIC_MODEL_ONLY",
+  "git_owner": {
+    "repo": "chboishabba/dashi_agda",
+    "branch": "research/hardt-delta-psi-steelman-maxcut-20261024",
+    "pr": 1252
+  },
+  "roots": [
+    {
+      "kind": "institutional Nobel announcement",
+      "date": "2026-10-05",
+      "original_source": "Karolinska Institutet/Nobel Assembly",
+      "url": "https://news.ki.se/the-nobel-prize-to-the-pioneers-of-optogenetics-peter-hegemann-georg-nagel-and-karl-deisseroth",
+      "scope": "Award to Deisseroth, Hegemann, Nagel; not authorship of all original channel/opsin studies"
+    },
+    {
+      "kind": "original primary biochemical experiment",
+      "date": "2003",
+      "authors": "Nagel, Szellas, Huhn, Kateriya, Adeishvili, Berthold, Ollig, Hegemann, Bamberg",
+      "doi": "10.1073/pnas.1936192100",
+      "scope": "ChR2 directly light-gated cation channel"
+    },
+    {
+      "kind": "original primary neural experiment",
+      "date": "2005",
+      "authors": "Boyden, Zhang, Bamberg, Nagel, Deisseroth",
+      "doi": "10.1038/nn1525",
+      "scope": "Expressed opsin and physically delivered light modulate mammalian neuronal spiking/synapses"
+    },
+    {
+      "kind": "primary memory/engram experiment",
+      "date": "2012",
+      "authors": "Liu et al.",
+      "doi": "10.1038/nature11028",
+      "scope": "Opsin-targeted hippocampal engram activation and behavioural responses; distinct from subjective experience"
+    },
+    {
+      "kind": "primary false-memory experiment",
+      "date": "2013",
+      "authors": "Ramirez et al.",
+      "doi": "10.1126/science.1239073",
+      "scope": "Optogenetic control of engram-related mouse behaviour"
+    },
+    {
+      "kind": "primary artefact experiment",
+      "date": "2019",
+      "authors": "Owen, Liu, Kreitzer",
+      "doi": "10.1038/s41593-019-0422-3",
+      "scope": "Illumination thermal effects confound optogenetic mechanism attribution"
+    },
+    {
+      "kind": "primary 2026 inter-areal mouse study",
+      "date": "2026-08-03",
+      "authors": "Abdeladim, Jagadisan, Shin, Ogando, Adesnik et al.",
+      "doi": "10.1038/s41593-026-02350-9",
+      "scope": "Holographic light address to opsin-expressing mouse cortical ensembles; connected downstream cortical response, not inter-person nonlocality"
+    },
+    {
+      "kind": "separate preprint hypothesis",
+      "date": "2026",
+      "authors": "Yang, Gu, Song",
+      "doi": "10.64898/2026.09.10.750628",
+      "scope": "Mitochondrial IR polariton proposal; not same light-gated opsin physical source, independent replication unpaid"
+    }
+  ],
+  "repo_prior_art": [
+    {
+      "pr": 1238,
+      "path": "DASHI/Biology/OptogeneticMemoryObservationBoundaryExact.agda",
+      "role": "Physical light→neural→behaviour abstract forward and empirical evidence receipt"
+    },
+    {
+      "pr": 1238,
+      "path": "DASHI/Biology/Levin/MitopolaritonOptogeneticFactorialExact.agda",
+      "role": "Prior rational four-arm additive null, different mid-IR vs opsin interventions"
+    },
+    {
+      "pr": 1252,
+      "path": "DASHI/Cognition/HardtOptogeneticNobelCausalCutExact.agda",
+      "role": "New finite active-vs-light-only and downstream-blocked observation collision; source-written"
+    },
+    {
+      "pr": 1252,
+      "path": "scripts/check_hardt_optogenetic_nobel_causal_cut.py",
+      "role": "New 343 additive-null fixtures, full 2×2 mechanism collision and independent-secret target witness"
+    },
+    {
+      "pr": 1252,
+      "path": "tests/test_hardt_optogenetic_nobel_causal_cut.py",
+      "role": "Seven source-written synthetic regression tests; not exact GitHub-byte executed"
+    }
+  ],
+  "mathematical_scope": {
+    "opsin_specific_response": "G*L",
+    "ordinary_light_response": "L",
+    "opsin_correlated_artifact": "G*L",
+    "diD_neural": 1,
+    "diD_heat": 0,
+    "diD_artifact": 1,
+    "fully_additive_grid_checked_locally": 343,
+    "conclusion": "Complete passive 2x2 contrast alone can fail to distinguish neural propagation from an opsin-correlated optical readout; selective independent controls required",
+    "kernel_checked": false,
+    "exact_new_git_blob_executed": false,
+    "real_optical_dataset_processed": false
+  },
+  "empirical_claims": {
+    "hardt_assassinations_verified": false,
+    "blinded_distant_influence_observed": false,
+    "channel_receptor_in_humans_for_delta_transfer_demonstrated": false
+  },
+  "next_priority": "Paper-specific holographic mouse stimulation and downstream source data, exact light field/cell target, opsin expression, off-target heating and readout controls, selective pathway intervention, later source-to-B bioEM calibration; do not infer nonlocal human communication."
+}
