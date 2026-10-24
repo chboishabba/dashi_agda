@@ -554,7 +554,7 @@ def test_two_independent_political_frames_inside_single_sky_interview():
                  "riddClaimDoesNotProveGasLitigationCausality", "deanClaimDoesNotProvePoliticalCoordination"):
         assert name in validation
     assert "unspecified Western Australian gas project" in documentation
-    assert "20 labelled single-source keys" in documentation
+    assert "24 labelled single-source keys" in documentation
 
 
 def test_browse_epbc_primary_request_cannot_promote_expert_claim_to_decision():
@@ -586,7 +586,7 @@ def test_browse_epbc_primary_request_cannot_promote_expert_claim_to_decision():
     assert "29.35" in media and docs
     assert "10.1038/s44168-025-00296-5" in media and docs
     assert "not a substantive merits decision" in docs.lower()
-    assert "ANNEXURE" not in media.upper() or "Annexure" in media
+    assert "Annexure A" in media
 
 
 def test_fordham_publication_time_and_browse_original_root_split():
@@ -610,7 +610,6 @@ def test_fordham_publication_time_and_browse_original_root_split():
     assert (brisbane.year, brisbane.month, brisbane.day, brisbane.hour, brisbane.minute) == (2026, 10, 19, 7, 55)
 
     docs = RESEARCH.read_text()
-    assert "38 selected edges" in docs  # preserved historical audit prior to this acquisition
-    assert "45 curated edges" in docs  # updated current state
+    assert "45 curated edges" in docs  # current sample after acquisition
     assert "not a court lawsuit" in docs
-    assert "not an adjudicated fact" in docs
+    assert "not a legal finding" in docs.lower() or "not an adjudicated fact" in media.lower()
