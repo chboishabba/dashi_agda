@@ -138,8 +138,11 @@ field81Order = refl
 unitGroupOrder : 81 ≡ 80 + 1
 unitGroupOrder = refl
 
-inverseExponentGap : 81 ≡ 79 + (3 - 1)
+inverseExponentGap : 81 ≡ 79 + 2
 inverseExponentGap = refl
+
+ternaryPredecessorGap : 3 ≡ 2 + 1
+ternaryPredecessorGap = refl
 
 inverseAsMinusOneModulo80 : 79 + 1 ≡ 80
 inverseAsMinusOneModulo80 = refl
