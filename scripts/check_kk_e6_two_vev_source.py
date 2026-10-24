@@ -82,3 +82,22 @@ full=Hphi.row_join(cross.T).col_join(cross.row_join(s.Matrix([[Hrr]])))
 assert full.det()<0
 print("PASS mixed-Hessian counterexample: positive isolated radion and 2 Higgs blocks, but Schur complement",schur,"negative")
 print("BOUNDARY cross entries 8,0 are adversarial synthetic—not source #1106 physical couplings")
+
+
+# Stronger same-photon no-go: gauge KINETIC MIXING alone is an
+# invertible change of basis; it cannot reduce the dimension of the
+# massless neutral-vector kernel. Only an actual extra mass source,
+# identification of gauge groups, or projection can remove it.
+mix=s.Rational(1,3)
+kinetic=s.Matrix([[1,0,mix],[0,1,0],[mix,0,1]])  # B, W3, Y
+assert kinetic.det()==1-mix**2>0
+T=kinetic.inv() # nonsingular, no need explicit sqrt to test nullity
+assert (T.T*mass*T).rank()==mass.rank()==1
+assert len((T.T*mass*T).nullspace())==2
+# Physical additional B-charged Higgs (or Stückelberg) mass then
+# changes the source and old independent B5/Maxwell Casimir spectrum.
+bCharge=s.Matrix([1,0,0])
+newMass=mass+v*v*(bCharge*bCharge.T)
+assert newMass.rank()==2
+assert len(newMass.nullspace())==1
+print("PASS no-go: positive kinetic mixing cannot remove second photon; extra B mass needs a changed action/holonomy determinant")
