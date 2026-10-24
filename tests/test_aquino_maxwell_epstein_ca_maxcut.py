@@ -1316,3 +1316,19 @@ def test_ftc_bannon_adversarial_original_docs_not_two_independent_findings():
         "H2/H3 remains unestablished",
     ):
         assert marker.lower() in report.lower()
+
+
+def test_ftc_bannon_cid_conflicting_original_issue_dates_are_not_silently_reconciled():
+    case = OWNER.read_text()
+    report = (ROOT / "docs/research/aquino-epstein-canonical-disposition-20261025.md").read_text()
+    for marker in (
+        "federalPetitionSaysCIDIssuedSeptember25 : Bool",
+        "signedCourtOrderSaysCIDIssuedSeptember24 : Bool",
+        "exactOriginalCIDIssueDateReconciledWithNativeCID : Bool",
+        "ftcBannonOriginalDateDiscrepancyRecorded = refl",
+        "ftcBannonJudicialDateDiscrepancyRecorded = refl",
+        "ftcBannonCIDOriginalIssueDateUnpaid = refl",
+    ):
+        assert marker in case
+    for marker in ("September 25, 2019", "September 24, 2019", "not two proven CIDs", "silently selecting one"):
+        assert marker in report
