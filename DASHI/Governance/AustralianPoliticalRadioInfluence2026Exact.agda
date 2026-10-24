@@ -672,3 +672,28 @@ linkedIndustryArticleNotPartyDrafting ()
 data CommonPoliticalArgumentProvesSharedSponsor : Set where
 commonArgumentDoesNotProveSponsor : CommonPoliticalArgumentProvesSharedSponsor → ⊥
 commonArgumentDoesNotProveSponsor ()
+
+
+-- Direct BOM -> gas-policy / reef rhetorical cross-pollination in a single
+-- first-party-transcribed 18 October 2026 programme. The actor's statement
+-- is owned by the actor; this transcript cannot prove the legal or scientific
+-- accuracy of a referenced WA gas action, nor identify an unnamed project.
+riddBOMGasLitigationArgument : RelationshipReceipt
+riddBOMGasLitigationArgument = relationship-receipt
+  "Peter Ridd, Sky Outsiders interview, 18 October 2026"
+  "BOM data criticisms connected rhetorically to unspecified WA gas litigation and reef impacts"
+  originalOpinionProduction namedActorSelfReport
+  "IPA first-party hosting of Sky Outsiders speaker-labelled edited transcript"
+  "https://ipa.org.au/latest-news/peter-ridd-on-outsiders-news24-18-october-2026"
+  "Ridd himself draws connection from alleged BOM QA faults to conservation litigation against a WA gas project and disputed reef-impact claims. The transcript does not identify a case, prove litigation merits, or independently corroborate causal claims."
+  false false false
+
+rowanDeanBOMNetZeroArgument : RelationshipReceipt
+rowanDeanBOMNetZeroArgument = relationship-receipt
+  "Rowan Dean, Sky Outsiders host, 18 October 2026"
+  "Claimed BOM raw-data errors linked rhetorically to net-zero policy"
+  originalOpinionProduction namedActorSelfReport
+  "IPA published first-party speaker-labelled edited interview transcript"
+  "https://ipa.org.au/latest-news/peter-ridd-on-outsiders-news24-18-october-2026"
+  "Dean's published remarks connect disputed temperature data and climate-policy credibility. An attributed broadcaster argument is not validation of the premise or evidence of coordinated instruction."
+  false false false
