@@ -702,3 +702,233 @@ action to a physical lepton flavour Hamiltonian with source,
 propagation and detection and a discriminating observation.
 Until then the native C3 work is an excellent mathematical donor,
 not an empirical derivation of neutrino dynamics.
+
+## 2026-10-24 max-cut round 4 — same-object lepton mass operators, finite-group obstruction
+
+### Original scholarly authority and reuse ownership
+
+**Separate dated original scholarly roots**:
+
+- Renato M. Fonseca and Walter Grimus, "Classification of lepton mixing
+  matrices from finite residual symmetries," *JHEP* **09** (2014) 033,
+  DOI https://doi.org/10.1007/JHEP09(2014)033 ;
+  preprint https://arxiv.org/abs/1405.3678.
+  Their result concerns which **finite-group** charged-lepton and
+  Majorana-neutrino residual symmetries can determine mixing, and
+  uses root-of-unity sums.  It does **not** claim that an arbitrary
+  orthogonal mixing matrix generates a finite flavour group.
+- Claudia Hagedorn and Johannes König, "Lepton and quark mixing from a
+  stepwise breaking of flavor and CP," *Phys. Rev. D* **100**
+  (2019) 075036,
+  https://doi.org/10.1103/PhysRevD.100.075036 .
+  Their stepwise residual breaking and CP analysis is substantive
+  physical model-building prior art, not attributable to DASHI.
+- A. Giarnetti, S. Marciano, D. Meloni, "Constraining the Neutrino
+  Mixing Matrix via Single-Sector Charged-Lepton Rotations in the
+  JUNO Precision Era," *Symmetry* **18** (2026) 954,
+  https://doi.org/10.3390/sym18060954 .
+  Their 2026 study uses NuFIT 6.1 and highlights precision/sector
+  corrections; cite original named authors, not a broad QFT slogan.
+- Lawrence C. Washington, *Introduction to Cyclotomic Fields*,
+  2nd ed. (1997): cyclotomic field integer arithmetic,
+  including \\(\\mathcal O_{\\mathbb Q(\\zeta_3)}
+  =\\mathbb Z[\\zeta_3]\\).
+  Standard theorem: finite-order complex matrices have root-of-unity
+  eigenvalues, hence algebraic-integer traces.  These are original
+  general mathematical results, NOT newly proved by the present PR.
+- NuFIT 6.1 (November 2025 data freeze) is the empirical global-fit
+  **input authority**, including JUNO-related updates.  The IceCube
+  2026 source flavour measurement remains a distinct experimental root.
+
+Existing actual repository donors: `TriadicDepthOneCharacters`,
+`RelationalTernaryPhaseGeometry`, `C3CyclotomicAmplitudeAlgebraExact`,
+`NeutrinoC3CyclotomicPriorArtBridgeExact`, the original
+`StandardModelLawBoundary`, and the earlier QFT finite-mixer modules.
+No new 3-cycle representation, signed-zero species or 27-site ontology
+is introduced.
+
+### Concrete new same-lepton-space model (NOT parameter-free)
+
+`DASHI/Physics/QFT/NeutrinoSameLeptonMassOperatorRationalExact.agda`
+uses one flavour coordinate space `{electron,muon,tau}`.
+Its **rational reconstruction choices** are the Pythagorean pairs:
+
+```
+(s12,c12) = (161/289, 240/289)
+(s13,c13) = (240/1609, 1591/1609)
+(s23,c23) = (20/29, 21/29)
+U = R23 R13 R12    with δ_CP=0
+M = D U;   D = 13,485,029
+M = [[ 11073360,  7428379, 2011440],
+     [ -6592029,  7336560, 9195980],
+     [  3971380, -8534640, 9655779]]
+```
+
+Exact integer calculations:
+
+```
+M M^T = M^T M = D² I
+D² = 181846007130841
+
+H_charged = diag(1,4,9)                (ARBITRARY dimensionless masses)
+H_neutral = M diag(0,7537,251100) M^T / D²
+H_neutral U = U diag(0,7537,251100).
+```
+
+Neutrino eigenvalues are **source-selected mass-squared
+differences** in units 10^-8 eV², with *arbitrary common offset zero*.
+They are NOT independently derived absolute neutrino masses, Yukawa
+couplings, or a mass-generation theory.  The charged-lepton
+eigenvalues `1,4,9` are simply arbitrary distinguishable
+labels, NOT the observed masses.  The construction has
+`[H_charged,H_neutral]_(e,mu)=-15166183339406582640/D² ≠ 0`,
+so it genuinely exhibits a noncommuting eigenbasis pair on one
+specified space.
+
+The charged-lepton residual `T=diag(1,ζ,ζ²)` is sourced from the
+existing canonical C3 phase module and preserves diagonal
+`H_charged`.  The neutrino residuals
+
+```
+S1=U diag( 1,-1,-1) U^T
+S2=U diag(-1, 1,-1) U^T
+S3=U diag(-1,-1, 1) U^T
+```
+
+satisfy `S1²=S2²=I`, `S1 S2=S3`, and commute with
+`H_neutral`, using this same `U` and same flavour labels.
+They are **constructed from U**, so their existence cannot
+independently explain why nature chooses those U entries.
+A neutral *mass-squared* operator does not determine Dirac versus
+Majorana status; a genuine Majorana mass matrix has a separate
+congruence condition `S^T M_nu S=M_nu`.
+
+Local exact-rational and source-derived BigInt checks show
+
+```
+sin²theta12 = 0.3103530849
+sin²theta13 = 0.0222489948
+sin²theta23 = 0.4756242568
+J_CP = 0        (real matrix)
+```
+
+These angles were *selected post hoc* to approximate NuFIT 6.1,
+not derived from C3.  CP=0 is a clear omitted physical feature
+compared with the supplied nonzero `deltaCP=212°` global-fit
+best-fit input; no statement of CP=0 exclusion confidence is made.
+
+### Important algebraic-number-theory new no-go: generated group is infinite
+
+The finite-order/trace-integrality test proves a stronger
+mathematical claim for **THIS ONE exact rational reconstruction**.
+
+With `T=diag(1,ζ,ζ²)` and
+`S1=U diag(1,-1,-1) U^T`, the product `TS1` has
+
+```
+tr(TS1) = a + b ζ
+a = 213694885170400 / 181846007130841 ≈ 1.1751420256
+b =  55365974464882 / 181846007130841 ≈ 0.3044662643
+```
+
+The `ζ²=-1-ζ` identity was used to obtain those coefficients.
+An **independent exact BigInt evaluation of the committed Agda
+`M` entries** verified the full residual matrices and trace
+numerators.  `NeutrinoC3FiniteResidualTraceObstructionExact.agda`
+now records these numerator computations and exact integer interval
+checks `1<a<2`, `0<b<1`.
+
+The classical deductive chain is:
+
+1. If `TS1` had finite order, all of its eigenvalues would be roots
+   of unity, so `tr(TS1)` would be an algebraic integer.
+2. `tr(TS1)∈Q(ζ)`; the algebraic integers of `Q(ζ)` are
+   `Z[ζ]`, with **integer** coefficients in the basis `1,ζ`.
+3. But `a∈(1,2)` is **not an integer**.  Hence this exact
+   `tr(TS1)` is not an algebraic integer.
+4. So `TS1` has **infinite order**, hence
+   `<T,S1>` is an **infinite group**.
+
+This is a valid conditional-on-standard-number-theory mathematical
+deduction about the **explicit rational example**, not an Agda
+kernel proof of the general integrality theorem, not an empirical
+theory of particle masses and not an impossibility theorem for
+*all* finite flavour groups.  It is an adversarial counterexample to
+the shortcut "charged Z3 + neutral Klein => finite flavour group".
+Original finite-group model classifications retain their full scope.
+
+### Independent exact-head source-validation receipt
+
+The GitHub connector returned the literal committed Agda source
+blob `1fc22e949a107f639a5e91e44f2db16a29a6cd0a`
+for `NeutrinoSameLeptonMassOperatorRationalExact.agda`.
+An **independent JavaScript BigInt exact evaluator**, parsing
+the nine `mixNum` definitions from that returned source,
+computed:
+
+- 9/9 row and 9/9 column Gram equalities;
+- 9/9 eigenvector equations for the chosen mass-squared operator;
+- operator symmetry and off-diagonal witness;
+- both involution-square identities;
+- `S1*S2=D²*S3` and commutation of S1 and S2 with Hnu;
+- trace coefficients and the exact denominator above.
+
+Each comparison returned `true`.  The original Python/SymPy
+calculation independently agreed on the integer values.
+This is **source-executed arithmetic verification**, NOT
+a run of the Agda compiler, and not a run of the committed new
+Python test file.  It must not be reported as kernel-certified.
+
+The committed Python file
+`tests/test_neutrino_same_lepton_rational.py`
+contains exact Fraction controls of the same statements, the
+CP-zero construction and the infinite-group trace obstruction.
+It has not been executed from the exact branch in this runtime.
+
+### Updated Pareto max-cut deliverables (do not reopen paid toy work)
+
+**R0 exact-head kernel payment**:
+```sh
+agda -i . DASHI/Physics/QFT/NeutrinoIceCubeMaxCutExact.agda
+agda -i . DASHI/Physics/QFT/NeutrinoThreeFlavourFiniteExact.agda
+agda -i . DASHI/Physics/QFT/NeutrinoC3CyclotomicPriorArtBridgeExact.agda
+agda -i . DASHI/Physics/QFT/NeutrinoC3AstrophysicalFlavorNoGoExact.agda
+agda -i . DASHI/Physics/QFT/NeutrinoSameLeptonMassOperatorRationalExact.agda
+agda -i . DASHI/Physics/QFT/NeutrinoC3FiniteResidualTraceObstructionExact.agda
+python -m unittest discover -s tests -p 'test_neutrino*.py' -v
+```
+Collect exact Agda version, branch SHA, input source SHAs, stdout
+and exit code; no missing result should be silently promoted.
+
+**R1 actual finite flavour dynamics**: instead of reconstructing
+`S` *from* fitted `U`, choose a source-specific finite group
+representation and residual breaking, then **derive** the mass
+texture and mixing, including nonzero theta13, the CP phase and
+a neutrino mass-squared ratio before looking at the empirical fit.
+The trace obstruction rules out the exact rational reconstruction's
+literal finite closure and provides a sharp check on new candidates.
+
+**R2 physically continuous action**: construct the complex 3x3
+same-lepton-space PMNS with genuine charged-current production,
+continuous `L/E` propagation, material effects and physical
+detector response.  The current Agda matrix is rational and CP-even,
+although the earlier Python PDG numerical bridge can calculate
+CP-odd vacuum observables.
+
+**R3 model-to-data same-object comparison**: obtain versioned NuFIT
+published correlated Δχ² grids and their re-use licence, then test
+literal `1/31` NO and IO conventions and any pre-registered texture
+models.  The previous NO *marginal* interval comparison was valid but
+is NOT a 2D confidence-level fit.
+
+**R4 high-energy flavour verification**: use IceCube Collaboration
+PRL 137, 081002 (2026), original event/topology-level flavour
+likelihood and nuisance parameters; source pion/neutron hypothesis
+posteriors, not a loose Euclidean distance to the published best-fit
+triplet.  IceTracks-DR2-v2 is a separate point-source dataset.
+
+**R5 Monster/369 only on an actual consumer**: require a literal
+equivariant map of the physical lepton mass operators into any
+C3/3B/VOA/729 model, preserving spectrum, charged-current
+couplings, symmetries and observable predictions.  Otherwise
+reuse the cyclotomic scalar as mathematics, not an identification.
