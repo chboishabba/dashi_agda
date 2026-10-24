@@ -287,3 +287,81 @@ Four different uses of "geometry" now have direct, **non-interchangeable** owner
 - **Phenomenal:** Oizumi–Lim–Kanai's conditional relational geometry of qualia and alternative conscious-access/phenomenology theories.
 
 A productive cross-domain theorem is an **explicitly typed preservation or obstruction** of a measurable map. A matching circle, C3 chart, 240-element set, "coherence tensor", wave, quantum vocabulary or equal scalar is not one.
+
+
+## P3B/P5B — XOR-grid / IIT causal-fabric max-cut, 2026-10-24
+
+**Disposition:** The existing XOR-grid producer is **[dashi_agda PR #1148](https://github.com/chboishabba/dashi_agda/pull/1148)** (open/unmerged; \`agent/iit-phi-integration-maxcut-20261013\`). Other explicit consumers are [geometric reasoning #1095](https://github.com/chboishabba/dashi_agda/pull/1095), [P vs NP #1129](https://github.com/chboishabba/dashi_agda/pull/1129) and the **merged** [torque/right-hand-rule #1164](https://github.com/chboishabba/dashi_agda/pull/1164). None of those sibling PR modules is silently imported into this branch. This is a **prior-art consolidation**, not a request to recreate the already-paid XOR truth tables or 27-site encodings.
+
+### Historical original roots and formalism versions
+
+- **Scott Aaronson (2014):** original expander/XOR-network critique of IIT and subsequent discussion, [Shtetl-Optimized May 2014](https://scottaaronson.blog/?m=201405). His criticism attacks how large integration could be attributed to intuitively simple mechanisms and asks whether the interpretation is adequate.
+- **Giulio Tononi (2014):** original response, [Why Scott should stare at a blank wall and reconsider (or, the conscious grid)](https://learniit.org/corpus/tononi-2014a). He defends the proposed phenomenological interpretation of suitable large grids, including apparently quiescent states. This is *Tononi's stated inference from then-current IIT*, not empirical corroboration of grid consciousness and not Aaronson's position.
+- **Larissa Albantakis et al. (2023):** [IIT 4.0](https://doi.org/10.1371/journal.pcbi.1011465), original causal-structure formalism. **Current [PyPhi version guide](https://pyphi.readthedocs.io/en/latest/theory/formalism-versions.html)** distinguishes IIT_3_0, IIT_4_0_2023 and IIT_4_0_2026; the 2026 intrinsic-information requirement changes deterministic system-\`phi_s\` while not automatically erasing distinctions/relations or big-Phi. NEVER quote a historical graph-cut or \`phi_s\` as a 2026 big-Phi or a direct consciousness measurement.
+- Attribution ledger: (original author, dated source/edition, what they argue, mathematical definition, factual/experimental corroboration, repo rewrite/contribution, exact-head proof and numerical receipt, scope). DASHI owns its **finite** 2×2 and 3×3×3 constructions; no original historical large-grid theorem or physical implementation is thereby inherited.
+
+### Already existing theorem owners; do not duplicate
+
+| Exact sibling owner | Actual formal/research role | No automatic promotion |
+|---|---|---|
+| \`IITXORGridAdversarialExact\` | Small 2×2 canonical XOR transition and parity consumer-non-descent; a grid/cut-count counterexample | Four-node cut ≠ IIT \`phi_s\`, let alone big-Phi |
+| \`IITXORGridFibreCircuitBridgeExact\`, \`IITXORGridSynthesisFabricExact\` | Causal source→target wiring graph, ordered A/B sockets, local two-input/one-output gate | Directed graph cycles ≠ dynamic persistent or neural recurrent firing |
+| \`IITXORGridOrientationLiftExact\`, \`IITXORGridLoopHolonomyExact\`, \`IITGridTorqueC3HolonomyHandoffExact\` | \`F₂\` XOR output is port-swap invariant, \`F₃\` antisymmetric difference reverses sign, chosen symbolic C3 path phase flips by conjugation | Symbolic phase ≠ magnetic field polarity, Berry phase, physical torque, neuron dynamics or 5D field |
+| \`IITBooleanParityMinimalSufficiencyExact\` | Only XOR/XNOR are Boolean **bipermutative** two-input truth tables | Invertibility in each input with the other fixed ≠ invertibility of a joint two→one observation |
+| \`IITTernaryAffineMinimalSufficiencyExact\` | Twelve \`F₃\` affine bipermutative gates, 6 symmetric and 6 antisymmetric | Equal IIT score on one restricted fabric ≠ universal same mechanism |
+| \`IITCubeConcreteTorusImageExact\`, \`IITCubeDiagonalStabilizerExact\` | A specified 3×3×3 finite field map/graph image with concrete stabilizer and C3×C3 translations | A finite toroidal carrier is not cortical or Ferrocell 3D torus topology |
+| \`IITFullStructureHigherFaceNonDescentExact\`, \`IITFaceAwareTriadicCausalPairExact\`, \`IITFaceAwareTriadicGridSynthesisWeldExact\` | Pairwise observer collision; matched 3-bit transition laws identical when any input is zero, differentiated by cubic ABC term at 111 | Pairwise observational equality ≠ true dynamics identity or any consciousness identity |
+| \`IIT4FiniteExecutableKernelExact\`, \`IITFaceAwarePyPhiGoldenCalibrationExact\` | Versioned finite system \`phi_s\` and external PyPhi golden three-XOR CES receipts | Finite numerical reference ≠ actual package replay, Agda theorem or completed big-Phi source |
+| \`IITBrainMaleCNSConsumerBoundaryExact\`, \`LILACubeEmpiricalSameObjectReceiptExact\` | Blocks biological/AI implementation claims without measured consumer or actual model-trajectory receipts | No hidden-state/biology identity merely from E8/27 or IIT score |
+
+### **New exact dynamic result** owned on IIT #1148
+
+The new source-written \`DASHI/Biology/IITXORGridTwoStepDynamicsExact.agda\` is deliberately in **the original XOR owner branch**, along with \`scripts/iit_xor_grid_two_step_audit.py\` and the production aggregator import. Its 2×2 state law is:
+
+\`\`\`
+x = (a,b,c,d)
+F(x) = (b XOR c, a XOR d, a XOR d, b XOR c)
+F(F(x)) = (0,0,0,0)                  for ALL 16 states x
+Im(F)   = {(p,q,q,p) : p,q in F2}    exactly 4 states
+|F^-1(p,q,q,p)| = 4                  for each image state
+\`\`\`
+
+There are *genuine directed two-edge circuits* in the source graph, but **no nonzero persistence after two updates**: feedback/wiring is not sufficient for enduring activity. An independent enumerator checked 16/16 F²=0 and 4 equal image fibres. The exact-head imported new Python command and Agda kernel command are **not** claimed executed by this roadmap; do not confuse an independently coded arithmetic check with an exact script run.
+
+This is a scientifically productive counterexample for state-dependent effective neural topology, finite attractor models, memory access, and purported learned recurrent geometric reasoning. It is a property of the **small constructed XOR rule**, not a conclusion about all Tononi/Aaronson large-grid models.
+
+### Version-sensitive IIT numerical results to reproduce, NOT reinterpret
+
+| Exact fixture | Repo's 2023 finite reference \`phi_s\` | Current 2026 \`phi_s\` | Boundary |
+|---|---|---|---|
+| Recurrent XOR 2×2 grid, 16 states | 12 zero; 4 positive at 0.5 bits | 16 zero | Not necessarily empty full cause-effect structure |
+| Recurrent three-XOR canonical PyPhi TPM at 000 | 1.5 | 0.0 | Upstream golden: 4 distinctions, 15 relations, structure Phi 9.5 under the recorded calibration |
+| Matched face-aware triadic vs pairwise TPM | Partly discriminated by scalar; collisions retained | No new execution claimed | Direct source-faithful +ABC PyPhi full-CES replay remains an external/required receipt |
+
+Source-level numbers appear on IIT #1148, notably \`IITXORGridFibreCalibrationExact\`, \`IITFaceAwarePyPhiGoldenCalibrationExact\`, \`IITParityGluingTerminalMaxCut20261017Exact\`. They are **not** measurements of a live neural network. Any new result must pin theory version, exact TPM/state, subsystem and partition convention, and PyPhi implementation/version.
+
+### Update to phase order and deliverables
+
+- **P3B — Recurrent topology vs retained dynamics (parallel to P3):** take source-registered finite and physical graphs, vary only wiring \`H\` or local law \`mu\` separately, and measure state persistence, attractor structure, observed consumers \`T\`, effective network reachability and intervention response. Required ordinary control: 2×2 XOR with structurally recurrent edges but \`F²=0\`. **Deliverable D3B:** reproducible graph/dynamics/observation contrast with topology-matched and local-law-matched nulls and held-out trajectories.
+- **P3A — AI learned representation geometry:** compare the same paired-perturbation/semantic action outputs against the stronger *future-trace*, nuisance and dynamical-factorization tests. XOR grid demonstrates that a short-pair snapshot can collapse hidden/internal state and that a current structural cycle is not an ongoing computation.
+- **P4 — Memory/trauma:** do not equate static connectivity with stable memory access. Test measured context-controlled recovery, delayed dynamics and consumer retention, as separately typed in existing trauma and brain owners; no diagnostic promotion.
+- **P5B — IIT vs conscious-access, teleodynamics, relational qualia:** compare genuinely matched causal state transition models and source-versioned system/integration quantities. Separate neural efficacy, conscious-access report and phenomenal-theory interpretation. Historical conscious-grid thought experiments become *adversarial models*, not facts about consciousness.
+- **P6 — Quantum, Ferrocell, ZPF:** XOR, C3 path phase and equal-cube geometry are classical finite constructions. No entanglement, quantum tunnelling, zero-point coupling, magneto-optical mechanism or consciousness causation follows from their mere presence. Require specific quantum signatures and same-object physical apparatus.
+
+**Fastest useful next cut after source closure:** D3B on a *measured* network with a known causal/state-dependent transition (or Clark–Abbott–Sompolinsky open neural data), not another 2×2 XOR recurrence encoding. P5 comparisons need a validated same-TPM/experiment producer; computation of multiple \`phi\` definitions on different models/versions is not an adequate comparison.
+
+### Execution acceptance (not executed here)
+
+\`\`\`sh
+# In IIT #1148 exact head:
+python3 scripts/iit_xor_grid_two_step_audit.py
+python3 scripts/iit_xor_grid_calibration.py
+python3 scripts/iit_face_aware_triadic_experiment.py
+python3 scripts/iit_face_aware_pyphi_batch.py
+agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/EverythingIITPhiIntegrationMaxCut.agda
+
+# In the separate geometric reasoning branch #1095:
+agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Reasoning/GeometricReasoningSemanticInterventionRegression.agda
+\`\`\`
+
+No package/PyPhi, Agda compiler, hidden model checkpoints, neuron-matched causal TPMs or conscious-report datasets were installed or replayed by this documentation update. Missing receipts remain real gates. Source provenance and downstream inference authority are independent.
