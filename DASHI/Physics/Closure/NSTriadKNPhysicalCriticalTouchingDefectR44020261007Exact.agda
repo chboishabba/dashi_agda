@@ -41,6 +41,26 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectR44020261007
 -- while the literal Core-Core Young companion freezes at 1345859672
 -- for N>=9. In particular, defect_40=1671172320.
 --
+-- EXACT ALL-CUTOFF POLYNOMIAL (for the original output fibre):
+-- for every integer N>=9, both active inputs remain fixed, and every
+-- mode newly admitted after N=9 is deep high-high/noncore under the
+-- strict R63 classifier.  Output k=(1,1,0) has lattice-pair domain
+--   px,py in [1-N,N], pz in [-N,N], q=k-p.
+-- The rate excess equals
+--   (|p|²+|q|²-2) = 2[px(px-1)+py(py-1)+pz²].
+-- Explicit power sums over that box yield
+--   fullExcess_N=(8/3)N²(2N+1)(3N²+N-2).
+-- Saturated CORE excess at N=9 is exactly 840480 (finite literal
+-- enumeration). Consequently the literal signed noncore/core defect is
+--
+--   defect_N=(8/3)N²(2N+1)(3N²+N-2)-840480
+--           =16N^5+lower-degree terms, for ALL N>=9.
+--
+-- With Core-Core companion=1345859672 and original output localED<=4,
+-- this gives an exact degree-five physical no-go for cutoff-independent
+-- c_D, theta_D<1/2. Source proof is exact algebra + finite enumeration,
+-- not yet an Agda-kernel certificate. See script/test v2.
+--
 -- Hence the proposed defect <= theta*M_core + c*localED CANNOT be cutoff
 -- uniform IF localED is a genuine bounded physical quantity on this
 -- fixed smooth state. The analytic interface currently does not source
