@@ -153,6 +153,22 @@ def validate_research_contract(world, dossier, cards):
         raise ValueError("Source-steelman synthetic witness improperly claims measured model discrimination")
     if not steelman["critical_no_go"]["implementation"].startswith("scripts/"):
         raise ValueError("Missing domain-specific rational equivalence witness")
+    # Reuse the prior Noah/Shen/Erowid original source and existing finite
+    # motif operators. Frequency summaries cannot identify transition laws.
+    motif_path = "Docs/receipts/DMTRecurringMotifErowidPriorArtBridge20261025.json"
+    if cards.get("recurring_motif_prior_art") != motif_path:
+        raise ValueError("Existing Erowid recurring motif prior art is disconnected")
+    motif = json.loads((ROOT / motif_path).read_text(encoding="utf8"))
+    if motif.get("original_published_research", {}).get("doi") != "10.3389/fpsyg.2024.1397064":
+        raise ValueError("Original Noah/Shen/Erowid paper attribution lost")
+    if "Entities" not in motif["original_published_research"]["published_categories"]:
+        raise ValueError("Published Erowid entity category lost")
+    if (motif["raw_data_governance"]["raw_report_corpus_acquired"] is not False or
+            motif["raw_data_governance"]["permission_obtained"] is not False or
+            motif["no_empirical_markov_kernel_fitted"] is not True):
+        raise ValueError("Erowid report/corpus or transition kernel falsely promoted")
+    if "reported_dataset" not in motif["original_published_research"]:
+        raise ValueError("Erowid published summary missing")
     external = cards["independent_consumers"]
     if _ids(external, label="external experimental consumer") != {"M3", "M4"}:
         raise ValueError("Information channel and ontology consumers conflated")
