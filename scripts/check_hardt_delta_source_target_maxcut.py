@@ -138,6 +138,30 @@ def target_address_information_bound():
             "chance_accuracy_bits_lower_bound":chance_bound,
             "scope":"conditional hypothetical target-label decoding; NOT the alleged 80% causal success statistic"}
 
+
+def nonlinear_receiver_data_processing_cut():
+    """Exact binary Markov-kernel total-variation contraction.
+    For sender T -> physical arrival S -> receiver observation Y,
+    a T-independent local receiver stochastic map K cannot increase
+    input distinguishability; no claim that all physical processes are Markov.
+    """
+    grid=[Q(i,4) for i in range(5)]
+    checked=0
+    for s0,s1,k0,k1 in product(grid, repeat=4):
+        # s_t = Pr(S=1|T=t), k_s = Pr(Y=1|S=s)
+        y0=(1-s0)*k0+s0*k1
+        y1=(1-s1)*k0+s1*k1
+        assert y1-y0 == (s1-s0)*(k1-k0)
+        assert abs(y1-y0) <= abs(s1-s0)
+        if s0==s1:
+            assert y0==y1
+        checked+=1
+    assert checked==625
+    return {"rational_markov_kernel_cases":checked,
+            "receiver_TV_no_greater_than_field_input_TV":True,
+            "zero_sender_distinguishability_stays_zero":True,
+            "scope":"conditional Markov T->S->Y, no extra receiver access to T; nonlinear thresholds included as discrete kernels"}
+
 def main():
     result={"status":"SYNTHETIC_EXACT_MATH_ONLY",
             "source_inverse":source_nonidentifiability(),
@@ -145,7 +169,8 @@ def main():
             "quantum":exact_two_qubit_no_signalling(),
             "leakage":leakage_fixture(),
             "randomization":randomization_fixture(),
-            "target_information":target_address_information_bound()}
+            "target_information":target_address_information_bound(),
+            "receiver_data_processing":nonlinear_receiver_data_processing_cut()}
     print(json.dumps(result,indent=2,sort_keys=True))
 
 if __name__=="__main__":
