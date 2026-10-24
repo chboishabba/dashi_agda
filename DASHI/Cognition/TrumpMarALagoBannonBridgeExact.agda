@@ -343,7 +343,7 @@ open LightweightFilmObjectReceipt public
 canonicalLightweightFilmObjectReceipt : LightweightFilmObjectReceipt
 canonicalLightweightFilmObjectReceipt = lightweight-film-object-receipt
   "docs/research/bannon-epstein-video-manifest-20261024.json"
-  "2026-02-01 YouTube copy oIEYmflX090; source copy only, not DOJ media file ID"
+  "DOJ Data Set 10 EFTA01600824.mov plus separate 2026-02-01 third-party YouTube re-encodes"
   false false false false true false false
 
 videoNeedNotBeVendored :
@@ -365,3 +365,49 @@ noTranscriptClaimWithoutBytes = refl
 reelToAgreementJoinNotConferredByHash :
   namedReelToContractAndShootJoined canonicalLightweightFilmObjectReceipt ≡ false
 reelToAgreementJoinNotConferredByHash = refl
+
+------------------------------------------------------------------------
+-- EXACT DOJ ORIGINAL REEL IDENTIFIER + TRANSCRIPT LOCATORS LOCATED
+-- 2026-10-24. This retires *identifier discovery*, NOT content hashing.
+------------------------------------------------------------------------
+
+record LocatedVideoTranscriptIndex : Set where
+  constructor located-video-transcript-index
+  field
+    dojReelObjectId : String
+    dojMediaURL : String
+    thirdPartyTimecodedTranscriptURL : String
+    originalDOJReelIdentifierLocated : Bool
+    sourceVideoContentDigestVerified : Bool
+    thirdPartyTimecodedTranscriptLocated : Bool
+    transcriptManuallyVerifiedAgainstReel : Bool
+    mayConfuseTwoIndependentASROutputsWithTwoMediaSources : Bool
+    april2019CounselAgreementIdentifiedToThisReel : Bool
+open LocatedVideoTranscriptIndex public
+
+bannonOriginalReelIndex : LocatedVideoTranscriptIndex
+bannonOriginalReelIndex = located-video-transcript-index
+  "EFTA01600824"
+  "https://www.justice.gov/epstein/files/DataSet%2010/EFTA01600824.mov"
+  "https://www.tommycarstensen.com/epstein/data/transcripts/EFTA01600824.html"
+  true false true false false false
+
+dojReelIdentifierLocated :
+  originalDOJReelIdentifierLocated bannonOriginalReelIndex ≡ true
+dojReelIdentifierLocated = refl
+
+publishedTimecodedTranscriptLocated :
+  thirdPartyTimecodedTranscriptLocated bannonOriginalReelIndex ≡ true
+publishedTimecodedTranscriptLocated = refl
+
+dojReelHashStillUncomputed :
+  sourceVideoContentDigestVerified bannonOriginalReelIndex ≡ false
+dojReelHashStillUncomputed = refl
+
+transcriptWithoutReviewNotCertified :
+  transcriptManuallyVerifiedAgainstReel bannonOriginalReelIndex ≡ false
+transcriptWithoutReviewNotCertified = refl
+
+originalReelIdDoesNotPay2019ContractJoin :
+  april2019CounselAgreementIdentifiedToThisReel bannonOriginalReelIndex ≡ false
+originalReelIdDoesNotPay2019ContractJoin = refl
