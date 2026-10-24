@@ -9,6 +9,7 @@ import DASHI.Physics.YangMills.CompactLieGroupDerived as Derived
 import DASHI.Physics.YangMills.CompactLieLatticeGauge as Wilson
 import DASHI.Physics.QFT.MMPDiracCauchyNoncompactCompactDoubleBidiExact as Cauchy
 import DASHI.Physics.QFT.AQFTCarrierAlgebraQuotientSurface as AQFT
+import DASHI.Physics.QuantumVacuum.CasimirResidualCauchyToLimitExact as Casimir
 
 ------------------------------------------------------------------------
 -- Source provenance / DO NOT DOUBLE COUNT:
@@ -85,6 +86,15 @@ nativeNoncompactCauchyBoundary =
 nativeAQFTTimeSliceStillTargetOnly : Set
 nativeAQFTTimeSliceStillTargetOnly =
   AQFT.TimeSliceTheoremStatus
+
+// Existing native Bishop/constructed-real residual: once a true same-
+// background, same-parametrix REGULATOR DIFFERENCE is supplied and proved
+// Cauchy, this owner ALREADY constructs its renormalized limit. Completeness
+// does not itself manufacture the residual tail estimate.
+nativeCasimirResidualSequenceOwner : Set₁
+nativeCasimirResidualSequenceOwner =
+  Casimir.ResidualRegulatorSequence
+
 
 -- Conditional theorem: a specified common point-split reference and
 -- a smooth physical two-point difference give a well-defined finite
