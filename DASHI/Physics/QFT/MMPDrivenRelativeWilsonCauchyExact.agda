@@ -32,7 +32,7 @@ timeField :
   ∀ {G : Set} →
   (H : Group.Group G) →
   (base source : G) →
-  Wilson.GaugeField BackgroundStep
+  Wilson.GaugeField {G = G} BackgroundStep
 timeField H base source .initial .final undriven = base
 timeField H base source .initial .final driven = source
 timeField H base source .final .initial reverseUndriven =
