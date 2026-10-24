@@ -95,6 +95,7 @@ data CaseClaim : Set where
   delaware2013FTCEntityFinding : CaseClaim
   caVersusCIAWitnessClarification : CaseClaim
   bannonScheduledBreakfast2019 : CaseClaim
+  bannonOctober2018Messages : CaseClaim
 
 record BoundedSource : Set where
   constructor bounded-source
@@ -143,6 +144,12 @@ canonicalSources =
     "https://oversightdemocrats.house.gov/imo/media/doc/epstein-production-3rd-tranch_456.pdf ; PDF page 2 (index 1)"
     "email timestamp 2019-02-14; publicly released 2025" "2019-02-16 07:00"
     "A redacted contemporaneous schedule emailed to Epstein lists a 7:00 a.m. breakfast with Steve Bannon on Saturday February 16, 2019. The listed appointment is an original-document datum; it does not establish attendance, conversation, production work, intelligence tasking or criminal conduct."
+    true false false false
+  ∷ bounded-source bannonOctober2018Messages epsteinCorrespondenceRoot
+    releasedCorrespondence
+    "https://static.poder360.com.br/2026/01/conversa-divulgada-doj-eua-epstein-steve-bannon.pdf ; EFTA01615409-01615412"
+    "iMessage date 2018-10-12; copy hosted 2026" "2018-10-12"
+    "A journalist-hosted four-page reproduction bearing DOJ EFTA identifiers depicts messages labelled Steve Bannon discussing Bolsonaro, other political actors and contacts. The reproduced images were visually inspected, but exact DOJ-native custody and complete surrounding thread were not checked. These messages are not independent corroboration of earlier summaries of the same underlying correspondence and do not establish Cambridge Analytica product reuse, covert tasking or criminal participation."
     true false false false
   ∷ bounded-source mindWarAuthored aquinoVallelyRoot
     attributedAuthorProposal
@@ -828,6 +835,14 @@ ftcDelawareEntitySource = bounded-source delaware2013FTCEntityFinding ftcRoot
   "https://www.ftc.gov/system/files/documents/cases/d09389_comm_final_opinionpublic.pdf ; p3"
   "2019-12-06" "2013-12"
   "FTC opinion records Delaware CA formed December 2013, within an administrative default proceeding."
+  true false false false
+
+bannonOctober2018MirrorSource : BoundedSource
+bannonOctober2018MirrorSource = bounded-source bannonOctober2018Messages
+  epsteinCorrespondenceRoot releasedCorrespondence
+  "https://static.poder360.com.br/2026/01/conversa-divulgada-doj-eua-epstein-steve-bannon.pdf ; EFTA01615409-EFTA01615412"
+  "2018-10-12; hosted 2026" "2018-10-12"
+  "Four-page EFTA-labelled press-hosted reproduction inspected; political messages, not independent evidence of CAs operational tech transfer or intelligence command."
   true false false false
 
 estateBannonScheduleSource : BoundedSource
