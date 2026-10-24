@@ -1,0 +1,228 @@
+{
+  "source_world": "DMT-2023-empirical-source-world",
+  "derived_from": "Docs/receipts/DMT2023SourceWorld.json",
+  "derivation": "direct client-side audit of the explicitly declared graph and status values, not human data or Agda theorem",
+  "source_file_count": 56,
+  "root_count": 6,
+  "evidence_statuses": {
+    "present": 3,
+    "notLocated": 11
+  },
+  "claims": [
+    {
+      "id": "c_public_2023",
+      "grade": "source_claim",
+      "missing_evidence": [],
+      "state": "source_attested_only"
+    },
+    {
+      "id": "c_public_files",
+      "grade": "source_metadata",
+      "missing_evidence": [],
+      "state": "source_attested_only"
+    },
+    {
+      "id": "c_original_static_inclusion",
+      "grade": "subject_specific",
+      "missing_evidence": [
+        "original_static_fd",
+        "original_preproc"
+      ],
+      "state": "acquisition_blocked"
+    },
+    {
+      "id": "c_original_dynamic_inclusion",
+      "grade": "subject_specific",
+      "missing_evidence": [
+        "original_static_fd",
+        "original_full_fd"
+      ],
+      "state": "acquisition_blocked"
+    },
+    {
+      "id": "c_original_joint_inclusion",
+      "grade": "subject_specific",
+      "missing_evidence": [
+        "original_static_fd",
+        "original_eeg_qc"
+      ],
+      "state": "acquisition_blocked"
+    },
+    {
+      "id": "c_data_acquisition",
+      "grade": "research_access",
+      "missing_evidence": [
+        "data_use_review",
+        "source_local_bytes"
+      ],
+      "state": "acquisition_blocked"
+    },
+    {
+      "id": "c_static_reproduction",
+      "grade": "empirical",
+      "missing_evidence": [
+        "original_static_fd",
+        "original_preproc",
+        "data_use_review",
+        "source_local_bytes",
+        "static_fmri_replay"
+      ],
+      "state": "acquisition_blocked"
+    },
+    {
+      "id": "c_published_precursor",
+      "grade": "source_claim",
+      "missing_evidence": [],
+      "state": "source_attested_only"
+    },
+    {
+      "id": "c_temporal_replication",
+      "grade": "empirical",
+      "missing_evidence": [
+        "sanders_phase_data",
+        "sanders_codebook",
+        "participant_lineage"
+      ],
+      "state": "acquisition_blocked"
+    },
+    {
+      "id": "c_external_entity",
+      "grade": "ontology",
+      "missing_evidence": [
+        "concealed_target_protocol"
+      ],
+      "state": "acquisition_blocked"
+    }
+  ],
+  "actions": [
+    {
+      "id": "a_original_motion_primary",
+      "kind": "institutional_source_recovery",
+      "ready": true,
+      "prerequisites_not_located": [],
+      "potential_consumer_ids": [
+        "c_original_static_inclusion",
+        "c_original_dynamic_inclusion",
+        "c_original_joint_inclusion",
+        "c_static_reproduction"
+      ],
+      "hypothetical_targets": [
+        "original_static_fd",
+        "original_full_fd",
+        "original_eeg_qc",
+        "original_preproc"
+      ],
+      "cost_band": 3,
+      "access_risk": 1,
+      "executed": false,
+      "pareto_now": true
+    },
+    {
+      "id": "b_rights_review",
+      "kind": "context_provenance_audit",
+      "ready": true,
+      "prerequisites_not_located": [],
+      "potential_consumer_ids": [
+        "c_data_acquisition",
+        "c_static_reproduction"
+      ],
+      "hypothetical_targets": [
+        "data_use_review"
+      ],
+      "cost_band": 2,
+      "access_risk": 1,
+      "executed": false,
+      "pareto_now": true
+    },
+    {
+      "id": "c_source_bytes",
+      "kind": "data_acquisition",
+      "ready": false,
+      "prerequisites_not_located": [
+        "data_use_review"
+      ],
+      "potential_consumer_ids": [
+        "c_data_acquisition",
+        "c_static_reproduction"
+      ],
+      "hypothetical_targets": [
+        "source_local_bytes"
+      ],
+      "cost_band": 2,
+      "access_risk": 3,
+      "executed": false,
+      "pareto_now": false
+    },
+    {
+      "id": "d_replay_static",
+      "kind": "empirical_replication",
+      "ready": false,
+      "prerequisites_not_located": [
+        "original_static_fd",
+        "original_preproc",
+        "data_use_review",
+        "source_local_bytes"
+      ],
+      "potential_consumer_ids": [
+        "c_static_reproduction"
+      ],
+      "hypothetical_targets": [
+        "static_fmri_replay"
+      ],
+      "cost_band": 4,
+      "access_risk": 3,
+      "executed": false,
+      "pareto_now": false
+    },
+    {
+      "id": "e_phase_matrices",
+      "kind": "controlled_source_recovery",
+      "ready": true,
+      "prerequisites_not_located": [],
+      "potential_consumer_ids": [
+        "c_temporal_replication"
+      ],
+      "hypothetical_targets": [
+        "sanders_phase_data",
+        "sanders_codebook",
+        "participant_lineage"
+      ],
+      "cost_band": 3,
+      "access_risk": 3,
+      "executed": false,
+      "pareto_now": true
+    },
+    {
+      "id": "f_entity_story",
+      "kind": "deferred_experiment",
+      "ready": false,
+      "prerequisites_not_located": [
+        "concealed_target_protocol"
+      ],
+      "potential_consumer_ids": [],
+      "hypothetical_targets": [],
+      "cost_band": 4,
+      "access_risk": 4,
+      "executed": false,
+      "pareto_now": false
+    }
+  ],
+  "live_pareto_source_routes": [
+    "a_original_motion_primary",
+    "b_rights_review",
+    "e_phase_matrices"
+  ],
+  "static_gfc_conditional_dependency_order": [
+    "a_original_motion_primary",
+    "b_rights_review",
+    "c_source_bytes",
+    "d_replay_static"
+  ],
+  "phenomenology_conditional_dependency_order": [
+    "e_phase_matrices"
+  ],
+  "external_entity_discriminator_route": "not declared; no current empirical closure path",
+  "no_network_execution": true,
+  "no_email_or_custodian_contact": true,
+  "no_status_promoted": true
+}
