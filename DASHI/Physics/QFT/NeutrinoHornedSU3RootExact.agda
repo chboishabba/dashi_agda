@@ -137,6 +137,77 @@ selectedTSDeterminantOne :
 selectedTSDeterminantOne =
   C.cyclotomic3Ext (solve []) (solve [])
 
+------------------------------------------------------------------------
+-- Direct discharge of the NEW compact-Lie inner-C3 prerequisite.
+-- T is a real SU(3) diagonal matrix over the existing Q(zeta3)
+-- exact amplitude carrier, not an extra order-three automorphism
+-- assumed independently. Its literal cube has 9 entries of I.
+-- These entries become the group-valued T³=I after the certified
+-- Q(zeta3) 3x3 matrix-realization equality is supplied.
+------------------------------------------------------------------------
+
+chargedRotationT : Flavour → Flavour → C.Cyclotomic3
+chargedRotationT a b = C.multiply (phaseT a) (kronecker a b)
+
+chargedRotationTAdjoint : Flavour → Flavour → C.Cyclotomic3
+chargedRotationTAdjoint a b = C.conjugate (chargedRotationT b a)
+
+chargedRotationCubeIsIdentity :
+  (a b : Flavour) →
+  productMatrix chargedRotationT
+    (productMatrix chargedRotationT chargedRotationT) a b
+    ≡ kronecker a b
+chargedRotationCubeIsIdentity electron electron = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationCubeIsIdentity electron muon = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationCubeIsIdentity electron tau = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationCubeIsIdentity muon electron = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationCubeIsIdentity muon muon = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationCubeIsIdentity muon tau = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationCubeIsIdentity tau electron = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationCubeIsIdentity tau muon = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationCubeIsIdentity tau tau = C.cyclotomic3Ext (solve []) (solve [])
+
+chargedRotationSpecialDeterminant :
+  determinant3 chargedRotationT ≡ C.one
+chargedRotationSpecialDeterminant =
+  C.cyclotomic3Ext (solve []) (solve [])
+
+chargedRotationUnitaryRight :
+  (a b : Flavour) →
+  productMatrix chargedRotationT chargedRotationTAdjoint a b
+    ≡ kronecker a b
+chargedRotationUnitaryRight electron electron = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationUnitaryRight electron muon = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationUnitaryRight electron tau = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationUnitaryRight muon electron = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationUnitaryRight muon muon = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationUnitaryRight muon tau = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationUnitaryRight tau electron = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationUnitaryRight tau muon = C.cyclotomic3Ext (solve []) (solve [])
+chargedRotationUnitaryRight tau tau = C.cyclotomic3Ext (solve []) (solve [])
+
+chargedRotationUnitaryLeft :
+  (a b : Flavour) →
+  productMatrix chargedRotationTAdjoint chargedRotationT a b
+    ≡ kronecker a b
+chargedRotationUnitaryLeft electron electron = C.cyclotomic3Ext (solve []) (solve [])
+
+chargedRotationUnitaryLeft electron muon = C.cyclotomic3Ext (solve []) (solve [])
+
+chargedRotationUnitaryLeft electron tau = C.cyclotomic3Ext (solve []) (solve [])
+
+chargedRotationUnitaryLeft muon electron = C.cyclotomic3Ext (solve []) (solve [])
+
+chargedRotationUnitaryLeft muon muon = C.cyclotomic3Ext (solve []) (solve [])
+
+chargedRotationUnitaryLeft muon tau = C.cyclotomic3Ext (solve []) (solve [])
+
+chargedRotationUnitaryLeft tau electron = C.cyclotomic3Ext (solve []) (solve [])
+
+chargedRotationUnitaryLeft tau muon = C.cyclotomic3Ext (solve []) (solve [])
+
+chargedRotationUnitaryLeft tau tau = C.cyclotomic3Ext (solve []) (solve [])
+
 -- Original analytic determinant-one complex embedding of Q(zeta3)
 -- maps this algebraic unitarity result into the usual SU(3).
 -- Complete complex analytic embedding is a separate existing
