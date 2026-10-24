@@ -98,3 +98,28 @@ The committed GitHub self-contained smoke checker `scripts/check_mmp_dirac_relat
 5. Make all three plasma regions genuinely dynamic Maxwell–MHD materials and attach input/output LLL modes and environmental Fock loss to the SAME physical response. Compare zero drive, pure time-dependent gauge, balanced local drive, nonbalanced Wilson drive, and independent ordinary EM pickup. Do not reclassify mathematical wormhole theory as an observed antigravity or faster-than-light device.
 
 **Source-originality ledger:** Sanders, Zahn, Finster–Murro–Röken, Wilson and the microlocal/Hadamard/Cauchy authors own the published physics/math; the finite lattice source/Agda path adapter is a DASHI bounded implementation. Existing Boltzmann/finite CAR/Cauchy/majorana/Hadamard matrix papers remain separately typed. Original source existence ≠ physical device ≠ Agda kernel receipt ≠ numerical confirmation of Einstein equations.
+
+
+## Second independent-source cut: three separately timed pulses and causal ports
+
+The first numerical fixture used three separate spatial localized profiles but one shared envelope. To avoid counting spatial separation as independently dynamic source timing, this follow-on uses **three individually specified pulse supports**:
+```
+source 1: t ∈ (0.20,1.18)
+source 2: t ∈ (1.04,2.12)
+source 3: t ∈ (2.28,3.04)
+```
+with `f_i(t)=sin²(π(t−a_i)/(b_i−a_i))` within its support, zero elsewhere, and independent amplitudes ε_i. The source is an imposed external lattice gauge potential `A_j(t)=∑ ε_i f_i(t) g_(i,j)` with three spatial Gaussian bond profiles centered at j=1,4,7; **it is not yet self-consistent Maxwell–MHD**.
+
+The causal 9×3 density response `χ_(j,i)(tobs)=∂_(ε_i)Tr(n_j P(tobs))|_(ε=0)` is obtained **twice**, by physical finite unitary evolution and the retarded Duhamel/Kubo commutator on the SAME initial CAR ground projector. Three selected detector sites 1,4,7 form a useful 3×3 port submatrix. Local expanded script `/mnt/data/mmp_rce_maxcut/check_mmp_three_independent_retarded_sources_20261025.py` executed PASS.
+
+| Independent source | Response norm at observation t=1.7 | Response norm at t=3.2 | Early/late maximal finite-diff residual |
+|---|---:|---:|---:|
+| 1, early | 0.0348686161 | 0.0296211069 | <8×10^-7 |
+| 2, middle | 0.0656515824 | 0.0795465123 | <1.2×10^-6 |
+| 3, late | **0 exactly** | 0.0317380383 | <5×10^-7 |
+
+The late source's support begins at 2.28, so no external disturbance at 1.7 can be attributed to it: this is an exact **retarded time-order negative control** in the selected finite model. It is NOT a proof of a continuum 4D microcausal light cone or propagation velocity. Combined independent amplitudes (0.18,−0.14,0.11) give final energy gain `0.002744940709`, total charge error `3.87e−14`, final local density-change norm `0.0130482758` and observed nontrivial instantaneous Wilson angle magnitude `0.139526685` over selected times.
+
+**Committed self-contained companion source:** [`scripts/check_mmp_three_independent_retarded_source_ports_20261025.py`](https://github.com/chboishabba/dashi_agda/blob/research/mmp-s2-fermion-three-plasma-maxcut-20261024/scripts/check_mmp_three_independent_retarded_source_ports_20261025.py). The local expanded run PASSED; the exact committed smoke checker has not been independently executed as GitHub CI. It leaves the true materials source, 4D microcausal CAR Dirac response, local renormalization, Ward identities and backreaction **OPEN**.
+
+**Key promotion distinction:** source 3's exactly zero *earlier-time* response derives from temporal support, while a balanced *total Wilson phase* can still support nonzero local response. These are different negative controls and should both be retained in future physical Maxwell–MHD experiments.
