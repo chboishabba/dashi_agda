@@ -1,0 +1,78 @@
+{
+  "created_on": "2026-10-24",
+  "repository": "chboishabba/dashi_agda",
+  "original_attribution": [
+    {
+      "author": "Morikuni Gotô",
+      "year": 1949,
+      "title": "A Theorem on compact semi-simple groups",
+      "doi": "10.2969/jmsj/00130270",
+      "claim": "SU(3) group commutator surjectivity, external theorem"
+    },
+    {
+      "author": "Allen Hatcher",
+      "title": "Algebraic Topology, Example 2B.2",
+      "claim": "original binary commutator horned exterior direct limit"
+    },
+    {
+      "author": "Joseph Malkoun and Nazih Nahlus",
+      "year": 2017,
+      "doi": "10.5802/jolt.980",
+      "claim": "Lie-algebra bracket surjectivity, a DISTINCT theorem"
+    },
+    {
+      "author": "Cecilia Jarlskog",
+      "year": 1985,
+      "doi": "10.1103/PhysRevLett.55.1039",
+      "claim": "basis-independent CP-odd mixing invariant"
+    }
+  ],
+  "prior_source_blobs": {
+    "CompactLieGroupCore.agda": "dfdfa07506d443656d1eaa0942320eea8009a055",
+    "CompactLieGroupDerived.agda": "88101b9c18758f1aea83d2dd93a27f9c3c08738f",
+    "SUNMatrixCarrier.agda": "07528c87b326a06df53b63026acac8b51c2f7084",
+    "SU3MatrixInstance.agda": "1d65476b3d2d2cfec772ef4f53c80b5bf47cd0a9",
+    "QutritMatrixGates.agda": "795f440d223ff8189d49bc0d2882279e1f10bf68"
+  },
+  "execution_scope": "Independent locally executed Python Fraction 3x3 complex-cyclotomic calculations and exhaustive exact A5 permutation group checks; this is NOT a run of the committed GitHub test scripts",
+  "independent_results": {
+    "A5_60_group_elements": true,
+    "A5_commutator_section_60_of_60": true,
+    "A5_inner_conjugation_checks_7200": true,
+    "A5_five_level_32_leaves": true,
+    "selected_A5_meridian_order": 5,
+    "selected_inner_rotation_order": 3,
+    "exact_Qzeta_U_both_unitary": true,
+    "exact_Qzeta_S1_Hermitian": true,
+    "exact_Qzeta_A_both_unitary": true,
+    "exact_Qzeta_det_A_one": true,
+    "exact_Qzeta_T_both_unitary": true,
+    "exact_Qzeta_det_T_one": true,
+    "exact_Qzeta_T_cube_identity": true,
+    "exact_Qzeta_AdT_cube_A_identity": true,
+    "exact_matrix_entry_checks": 45,
+    "neutrino_Galois_trace": "442358853598/216225930001"
+  },
+  "strict_status": {
+    "source_blob_readback": "PASS",
+    "external_Goto_math": "PUBLISHED_STANDARD",
+    "new_Agda_sources": "SOURCE_WRITTEN",
+    "Agda_kernel": "NOT_RUN",
+    "committed_Python_scripts": "NOT_RUN",
+    "SU3_concrete_matrix_theory": "OPEN",
+    "Agda_function_matrix_extensionality": "OPEN",
+    "formal_Goto_section": "OPEN",
+    "horn_geometry_same_object_pi1": "OPEN",
+    "physical_PMNS_QCD_color_identity": "NOT_CLAIMED",
+    "parameter_free_neutrino_prediction": "NOT_DERIVED"
+  },
+  "schema": "dashi.horned-lie-group-reuse-maxcut/v1",
+  "branch": "alexander-horned-c3-equivariant-20261024",
+  "new_source_blobs": {
+    "DASHI/Physics/YangMills/CompactLieInnerC3Exact.agda": "90d4d37bf005b1735fa667a63acc7b1ec69305fc",
+    "DASHI/Mathematics/Topology/AlexanderHornedC3SUNLieGroupReuseExact.agda": "0460bc4c72c2775a264656cf55bbd2874c7c9cb1",
+    "tests/test_alexander_horned_c3_sun_reuse.py": "20680f9e8cb552029cf3fce306d0e0ec449e4d6c"
+  },
+  "proof_payment": "inverse of product and inner conjugation composition from canonical Group axioms; T³=I ⇒ Ad_T³=id; reuse canonical SU3 matrix Group and preserve Hatcher group commutators",
+  "honesty": "Gotô section and certified finite matrix operations are sourced interfaces. Group-derived source is not claimed kernel-typechecked."
+}
