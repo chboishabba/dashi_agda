@@ -34,6 +34,8 @@ data InfluenceEdgeKind : Set where
   bannonLeaveEUIntroduction : InfluenceEdgeKind
   aiqSclCambridgeAnalyticaWorkingRelation : InfluenceEdgeKind
   canadianJointPrivacyRegulatorAIQFinding : InfluenceEdgeKind
+  ftcKoganNixSeparateIndividualConsents : InfluenceEdgeKind
+  ukElectoralAIQActualCampaignPayments : InfluenceEdgeKind
   breitbartDataConfigIntersection : InfluenceEdgeKind
   psychographicEffectivenessUnresolved : InfluenceEdgeKind
   electionOutcomeCausationUnresolved : InfluenceEdgeKind
@@ -149,6 +151,23 @@ canadianJointRegulatorAIQReceipt = influence-receipt
   "Canadian regulators concluded AIQ received and used OCEAN psychographic scores for millions of US voters, derived at least in part from data collected by Aleksandr Kogan; reviewed documents indicated AIQ knew of the Kogan source. Investigators found inadequate consent and data safeguards. This pays aggregate score supply and scoped privacy noncompliance, not raw Facebook dataset custody, a particular scored row/version, political efficacy, Aquino origin or Epstein funding."
   true false false true
 
+
+ftcKoganNixIndividualConsentReceipt : InfluenceReceipt
+ftcKoganNixIndividualConsentReceipt = influence-receipt
+  ftcKoganNixSeparateIndividualConsents
+  "FTC personal consent dockets C-4693 (Kogan) / C-4694 (Nix), Matter 182-3106/182-3107, final 2019-12-18; https://www.ftc.gov/legal-library/browse/cases-proceedings/182-3106-182-3107-aleksandr-kogan-alexander-nix-matter"
+  "two separately issued final CONSENT orders within one FTC investigation; not a corporate default finding or independent second investigative team"
+  "FTC final individual orders prohibit covered-data misrepresentation and require recipient statements and destruction of GSRApp data and derivative models, subject to preservation rules. Kogan/Nix did not admit complaint allegations, except jurisdiction facts; order publication does not show actual compliance or adjudication of personal allegations."
+  true false false false
+
+ukElectoralAiqPaymentsReceipt : InfluenceReceipt
+ukElectoralAiqPaymentsReceipt = influence-receipt
+  ukElectoralAIQActualCampaignPayments
+  "UK Electoral Commission original Vote Leave/BeLeave/Veterans for Britain investigation, 2018, with 2019-08-14 appeal update and 2020-05-07 litigation-cost update; https://www.electoralcommission.org.uk/cy/node/619"
+  "independent UK statutory campaign-finance regulator with subsequently corrected judicial/civil enforcement dispositions"
+  "Regulator lists five June 2016 payments for AIQ campaign services: three Vote Leave-sourced payments reported in Grimes' returns totalling GBP675315.18, a separate GBP50000 Clake payment, and a GBP100000 Vote Leave-to-Veterans for Britain payment. Vote Leave paid GBP61000 fines and withdrew its appeal; Grimes successfully appealed his GBP20000 sanction in July 2019. This does not identify Facebook/GSR source files or prove electoral outcome effects."
+  true false false false
+
 breitbartConfigReceipt : InfluenceReceipt
 breitbartConfigReceipt = influence-receipt
   breitbartDataConfigIntersection
@@ -194,6 +213,8 @@ canonicalInfluenceReceipts =
   ∷ leaveEUIntroductionReceipt
   ∷ aiqWorkingRelationReceipt
   ∷ canadianJointRegulatorAIQReceipt
+  ∷ ftcKoganNixIndividualConsentReceipt
+  ∷ ukElectoralAiqPaymentsReceipt
   ∷ breitbartConfigReceipt
   ∷ psychographicEffectivenessReceipt
   ∷ electionOutcomeBoundaryReceipt
