@@ -14,7 +14,7 @@ def potential(q,r,L,levels=4,winding=40):
 def potential_prime(q,r,L):
     h=1e-4*r
     return (potential(q,r+h/2,L)-potential(q,r-h/2,L))/h
-def run(q,L=20.,extent=100.):
+def run(q,L=20.,extent=100.,with_profile=False):
     Q=q/2.; c=abs(q);t=-PI*c/(12*L*L)
     def V(rad):return potential(q,rad,L)
     def throat(a):return Q**2/a**2-(1+4*t-2*V(a))
@@ -49,11 +49,15 @@ def run(q,L=20.,extent=100.):
     anec=2*quad(weighted_nec,0,x,epsabs=1e-7)[0]
     lighttime=2*quad(lambda xx:math.exp(-sol.sol(xx)[3]),0,x,epsabs=2e-7)[0]
     assert anec<0
-    return dict(q=q,throat_radius=a,match_x=x,match_radius=float(rad),
+    result=dict(q=q,throat_radius=a,match_x=x,match_radius=float(rad),
       mass_RN=float(M),Q=Q,Ktt_jump=float(Kdifference),
       radial_constraint=float(constraint),radial_ANEC=float(anec),
       interior_radial_lighttime=float(lighttime),external_horizon_radius=float(horizon),
       model='classical GR + fixed Polyakov state + finite KK Dirac tower, cut off at RN junction')
+    if with_profile:
+        result['numerical_profile']=sol
+        result['lapse_scale_to_RN_clock']=math.sqrt(f)/math.exp(logN)
+    return result
 def main():
     values=[run(q) for q in (10,11,12,13,24)]
     for d in values:
