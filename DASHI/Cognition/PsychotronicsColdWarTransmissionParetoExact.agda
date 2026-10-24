@@ -52,7 +52,7 @@ ostranderSchroeder1970 = Source.mkNoDOISource
   "Prentice-Hall, Englewood Cliffs, 1970; publisher/year/title corroborated by library catalogue; later 1973 PSI edition distinct from original"
   "1970"
   "https://books.google.com/books/about/Psychic_discoveries_behind_the_Iron_Curt.html?id=Od4vAAAAYAAJ"
-  Source.academicBookSource
+  (Source.namedSourceKind "popular-reporting book")
   "original popular-reporting book about Soviet/Czechoslovak paranormal claims and Kirlian/psychotronic topics; original experiments are not supplied by its existence"
   Source.publicAttribution
 
@@ -101,13 +101,49 @@ kirkus1970 = Source.mkNoDOISource
   "independent contemporary circulation/reception evidence for 1970 publication and topics; repeats the book's extraordinary claims without validating them"
   Source.publicAttribution
 
+
+pragueJPRS1974 : Source.AttributedSource
+pragueJPRS1974 = Source.mkNoDOISource
+  "1973 Prague First Conference on Psychotronic Research contributors; translated by U.S. Joint Publications Research Service"
+  "Proceedings of the Conference on Psychotronic Research (1st), Part I"
+  "original 1973 Prague conference, 1974 JPRS translation/report JPRSL50221, National Technical Reports Library metadata; catalog inspected; full conference papers not acquired"
+  "1973 conference; 1974 translation"
+  "https://ntrl.ntis.gov/NTRL/dashboard/searchResults/titleDetail/JPRSL50221.xhtml"
+  Source.archivalSource
+  "specific original participant paper acquisition target; contents include biological electrodynamics, image currents and subjective states; listing establishes publication/report existence, not experimental truth"
+  Source.publicAttribution
+
+soucek2020 : Source.AttributedSource
+soucek2020 = Source.mkDOISource
+  "Ivan Souček"
+  "Medical Pluralism During and After Socialism: A Study of Psychotronics in the Former Czechoslovakia"
+  "Český lid 107(1), 51-69; original peer-reviewed 2020 sociohistorical fieldwork/analysis, visibly inspected pp.51,58"
+  "2020"
+  "10.21104/CL.2020.1.03"
+  "https://ceskylid.avcr.cz/media/articles/712/submission/original/712-2425-1-SM.pdf"
+  Source.academicArticleSource
+  "independent sociohistorical account of Rejdák and psychotronics institutionalisation; original ethnography and cited histories support cultural analysis, not bioenergy efficacy"
+  Source.publicAttribution
+
+vasiliev1963English : Source.AttributedSource
+vasiliev1963English = Source.mkNoDOISource
+  "Leonid L. Vasiliev (original author; English translation authorised and revised by him)"
+  "Experiments in Mental Suggestion"
+  "1962 Leningrad University Russian original, 1963 authorised English translation, Institute for the Study of Mental Images; Wellcome catalogue (item in closed stores)"
+  "1962 original; 1963 translation"
+  "https://wellcomecollection.org/works/ygf3wazt"
+  Source.academicBookSource
+  "bibliographically verified Soviet experiment-author source and English dissemination; catalogue only, actual primary protocol and field-shielding experiments not independently inspected"
+  Source.publicAttribution
+
 historicalDocuments : List Source.AttributedSource
 historicalDocuments =
   wimmer1940 ∷ sievers1940 ∷ ostranderSchroeder1970 ∷
   maireLaMothe1975 ∷ czechArchive1985 ∷
-  pehekKylerFaust1976 ∷ kirkus1970 ∷ []
+  pehekKylerFaust1976 ∷ kirkus1970 ∷
+  pragueJPRS1974 ∷ soucek2020 ∷ vasiliev1963English ∷ []
 
-historicalDocumentsCount : Source.sourceCount historicalDocuments ≡ 7
+historicalDocumentsCount : Source.sourceCount historicalDocuments ≡ 10
 historicalDocumentsCount = refl
 
 ------------------------------------------------------------------------
