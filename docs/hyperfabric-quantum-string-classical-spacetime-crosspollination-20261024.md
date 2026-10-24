@@ -464,3 +464,28 @@ arithmetic repair done but dynamical consistency blocked;
 A4 K27 algebra/source commutator unverified; A5 actual
 Albert multiplication exists in sibling #52, same-operator
 physical cross-transport unpaid; retain YM/NS independently.
+
+
+## Additional literal 26D physical consumer and Monster/M24 split (2026-10-24)
+
+Detailed and provenance-audited source:
+`docs/hyperfabric-k27-26d-bfield-22dual-m24-signed-duad-maxcut-20261024.md`.
+The 26D `K27` bosonic-string action is the correct selected downstream
+rather than an imagined universal 27D string completion:
+`d(e^-2Phi *H3)=0` locally yields a **dual 22-form**,
+with a nonconstant-dilaton exact B-sector positive fixture
+and a **failed** metric Einstein equation for that test source.
+The physical 24 transverse closed-string tensor decomposes
+`299 symmetric traceless +276 antisymmetric +1 scalar =576`.
+This reuses existing Leech (299) and M24 duad (276) owner
+counts but **does not identify their physical representations**.
+
+ATLAS 2A/2B character values disprove original M24
+**unoriented** duad p276 ~= SO24 antisymmetric physical
+B2 as an M24-equivariant map: 36≠20; 12≠−12.
+An oriented signed-duad line **does** model Lambda²
+and Hodge maps it to Lambda²², but neither actual
+Moonshine Tate276 nor signed-zero C3 fibre is thereby
+identified. New executable finite 276-basis SO24/ATLAS
+tests, sympy local dual B-field tests, and Agda source
+class-theorem owner in PR #1249. Kernel unverified.
