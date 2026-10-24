@@ -1,5 +1,8 @@
 # Psychotronics / pictured-device Pareto frontier — canonical current status
 
+**S6 fault-tolerant selection now computed:** exhaustive `27 choose 4 = 17,550` candidate Bz-only four-site layouts; maximise minimum two-coil-response singular value after **any single sensor loss**. The ideal selected symmetric upper/lower-plane four-sensor arrangement retains **rank 2** after each failure (worst `σmin≈1.95463×10⁻⁴ T/A`, condition `≈5.66`). This uses **existing coil response and a bounded McCasland-inspired robustness objective**, not a source-authored 1989 algorithm, actual noise model, certified array or proof that arbitrary 27-node patterns are producible. See [full protocol/20-fibre audit](psychotronics-s1-s6-twenty-scientist-maxcut-20261024.md).
+
+
 ## 24 October hard S1/S6 max-cut — quantitative force and observability receipts
 
 **New implementation-linked capstone:** [S1/S6 metrology and full 20-fibre scientist survey](psychotronics-s1-s6-twenty-scientist-maxcut-20261024.md). Source-owned theory and engineering are joined without introducing another generic antigravity ontology or attributing any person's event to the engineering.
