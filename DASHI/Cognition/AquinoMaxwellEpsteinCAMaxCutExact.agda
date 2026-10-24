@@ -68,6 +68,8 @@ data SourceRole : Set where
   releasedCorrespondence : SourceRole
   crossSourceHypothesis : SourceRole
   estateScheduleCarrier : SourceRole
+  preliminaryElectionEnforcement : SourceRole
+  electionMatterClosure : SourceRole
 
 -- Source roots represent original authors or record-producing bodies.
 -- Reposting a witness statement does not create another witness.
@@ -81,6 +83,7 @@ data OriginRoot : Set where
   dojFBIMemoRoot : OriginRoot
   epsteinCorrespondenceRoot : OriginRoot
   epsteinEstateScheduleRoot : OriginRoot
+  fecEnforcementRoot : OriginRoot
 
 data CaseClaim : Set where
   sclCAOperatingContinuity : CaseClaim
@@ -96,6 +99,10 @@ data CaseClaim : Set where
   caVersusCIAWitnessClarification : CaseClaim
   bannonScheduledBreakfast2019 : CaseClaim
   bannonOctober2018Messages : CaseClaim
+  ftcServicesAndLicencesDescribed : CaseClaim
+  fecDecember2013LLCStatement : CaseClaim
+  fecForeignNationalReasonToBelieve : CaseClaim
+  fecCaseClosedWithoutFinalLiability : CaseClaim
 
 record BoundedSource : Set where
   constructor bounded-source
@@ -150,6 +157,30 @@ canonicalSources =
     "https://static.poder360.com.br/2026/01/conversa-divulgada-doj-eua-epstein-steve-bannon.pdf ; EFTA01615409-01615412"
     "iMessage date 2018-10-12; copy hosted 2026" "2018-10-12"
     "A journalist-hosted four-page reproduction bearing DOJ EFTA identifiers depicts messages labelled Steve Bannon discussing Bolsonaro, other political actors and contacts. The reproduced images were visually inspected, but exact DOJ-native custody and complete surrounding thread were not checked. These messages are not independent corroboration of earlier summaries of the same underlying correspondence and do not establish Cambridge Analytica product reuse, covert tasking or criminal participation."
+    true false false false
+  ∷ bounded-source ftcServicesAndLicencesDescribed ftcRoot
+    regulatoryFinding
+    "https://www.ftc.gov/system/files/documents/cases/d09389_comm_final_opinionpublic.pdf ; PDF page index 4 / printed page 5, CCCSUF 17-22"
+    "2019-12-06" "2014-06 and contemporaneous 2014 SCL/CA arrangements"
+    "FTC default-case opinion reports a June 4 2014 GSR-SCL data agreement, an SCL-to-CA services agreement, and a SEPARATE SCL-to-CA IP licence. The opinion describes these agreements but is not their original signed artifact. These agreements do not pay Aquino methodological origin or later Epstein use."
+    true false false false
+  ∷ bounded-source fecDecember2013LLCStatement fecEnforcementRoot
+    preliminaryElectionEnforcement
+    "https://www.fec.gov/files/legal/murs/7382/7382_33.pdf ; PDF page index 5 / FEC factual/legal analysis p2 line 3 note 3"
+    "2019-07-24" "2013-12-31"
+    "FEC background cites the Delaware Division of Corporations as recording CA LLC organized December 31 2013. This is a separate official report but the underlying entity fact derives from the same state registry, not an independent second company charter."
+    true false false false
+  ∷ bounded-source fecForeignNationalReasonToBelieve fecEnforcementRoot
+    preliminaryElectionEnforcement
+    "https://www.fec.gov/data/legal/matter-under-review/7351/ ; case disposition and 2019 Commission determinations"
+    "2019-07-24" "2014 election cycle"
+    "FEC voted reason to believe 4-0 concerning Cambridge Analytica and certain participants under foreign-national election participation rules. This is preliminary regulatory investigation threshold, NOT a final adjudication or conviction."
+    true false false false
+  ∷ bounded-source fecCaseClosedWithoutFinalLiability fecEnforcementRoot
+    electionMatterClosure
+    "https://www.fec.gov/data/legal/matter-under-review/7351/ ; Commission voted 5-0 to close file (2021)"
+    "2021-09/10" "2014 election-cycle allegations"
+    "The Commission later voted to close the file after the 2019 reason-to-believe determination. Closure and the disposition records must be assessed at named allegation/respondent granularity. No inference of a final FEC liability decision follows from the earlier reason-to-believe vote."
     true false false false
   ∷ bounded-source mindWarAuthored aquinoVallelyRoot
     attributedAuthorProposal
@@ -933,3 +964,143 @@ correctedAcronymIsCA = refl
 correctedAcronymIsNotCIA :
   spokenCorrection oralCorrection ≡ ciaAbbreviation → ⊥
 correctedAcronymIsNotCIA ()
+
+
+------------------------------------------------------------------------
+-- EXACT 2014 CONTRACT STACK, BY DISTINCT SOURCE OBJECT (NOT ONE
+-- PSYCHOLOGICAL-WARFARE TECHNOLOGY OR A CLAIM OF ORIGINAL SIGNED CUSTODY).
+------------------------------------------------------------------------
+
+data CorporateInstrument : Set where
+  gsrSCLDataSubscription : CorporateInstrument
+  sclCAOperatingServices : CorporateInstrument
+  sclCAIPLicence : CorporateInstrument
+
+record InstrumentSourceReceipt : Set where
+  constructor instrument-source-receipt
+  field
+    instrument : CorporateInstrument
+    parties : String
+    datedInstrument : String
+    source : String
+    opinionDescribesAgreement : Bool
+    originalSignedInstrumentInCustody : Bool
+    aquinoTechniqueOriginPaid : Bool
+    usedInBannonEpstein2018MediaPaid : Bool
+open InstrumentSourceReceipt public
+
+gsr2014Agreement : InstrumentSourceReceipt
+gsr2014Agreement = instrument-source-receipt
+  gsrSCLDataSubscription
+  "Global Science Research Ltd and SCL Elections Ltd, signed for SCL by Alexander Nix"
+  "2014-06-04; GSR creates scores and matches Facebook users and US voter records"
+  "FTC opinion p5, CCCSUF 17-21 / complaint 14-15"
+  true false false false
+
+sclCAServiceAgreement : InstrumentSourceReceipt
+sclCAServiceAgreement = instrument-source-receipt
+  sclCAOperatingServices
+  "SCL Elections and Cambridge Analytica LLC"
+  "2014-era, exact execution date not in inspected FTC text"
+  "FTC opinion p5, CCCSUF 21 / complaint 15"
+  true false false false
+
+sclCAIPAgreement : InstrumentSourceReceipt
+sclCAIPAgreement = instrument-source-receipt
+  sclCAIPLicence
+  "SCL Elections agreed to license all of its IP to Cambridge Analytica LLC"
+  "2014-era, exact executed copy/date not inspected"
+  "FTC opinion p5, CCCSUF 21 / complaint 15"
+  true false false false
+
+canonicalInstrumentStack : List InstrumentSourceReceipt
+canonicalInstrumentStack =
+  gsr2014Agreement ∷ sclCAServiceAgreement ∷ sclCAIPAgreement ∷ []
+
+ftcAgreementNotOriginalSignedInstrument :
+  originalSignedInstrumentInCustody sclCAIPAgreement ≡ false
+ftcAgreementNotOriginalSignedInstrument = refl
+
+sclCAOperatingAgreementNotAquinoMethod :
+  aquinoTechniqueOriginPaid sclCAServiceAgreement ≡ false
+sclCAOperatingAgreementNotAquinoMethod = refl
+
+sclCAIPLicenceNotEpsteinDataset :
+  usedInBannonEpstein2018MediaPaid sclCAIPAgreement ≡ false
+sclCAIPLicenceNotEpsteinDataset = refl
+
+-- FTC independently characterises company/legal acts, but its December
+-- 2013 date and the FEC citation of the Delaware registry may share that
+-- original *state register* upstream; agency count != root independence
+-- for the underlying incorporation record.
+data IncorporationClaim : Set where
+  caDelawareDecember2013 : IncorporationClaim
+  counselMemoJune2014Description : IncorporationClaim
+
+record DateAndSourceRole : Set where
+  constructor date-and-source-role
+  field
+    formationClaim : IncorporationClaim
+    carrier : String
+    completePrimaryCharterInspected : Bool
+    legalActSameObjectWeldPaid : Bool
+open DateAndSourceRole public
+
+fecCorporateDate : DateAndSourceRole
+fecCorporateDate = date-and-source-role
+  caDelawareDecember2013
+  "FEC July 2019 factual/legal analysis p2 n3: Delaware registry viewed 2018-07-19"
+  false false
+
+ftcCorporateDate : DateAndSourceRole
+ftcCorporateDate = date-and-source-role
+  caDelawareDecember2013
+  "FTC Commission Opinion December 2019 p3: original registry not itself retained"
+  false false
+
+counselMemoDate : DateAndSourceRole
+counselMemoDate = date-and-source-role
+  counselMemoJune2014Description
+  "2014-07-22 legal memo index excerpt p6, full 22MB original uninspected"
+  false false
+
+uninspectedCharterCannotSettleDifferentLegalActs :
+  legalActSameObjectWeldPaid counselMemoDate ≡ false
+uninspectedCharterCannotSettleDifferentLegalActs = refl
+
+-- Separate FEC stages: 'reason to believe' allowed investigation but
+-- does not assert final liability. Later closing the file must not be
+-- retroactively rewritten as a guilty verdict (or a blanket acquittal).
+data FECProceduralStage : Set where
+  reasonToBelieve2019 : FECProceduralStage
+  fileClosed2021 : FECProceduralStage
+  finalAdjudication : FECProceduralStage
+
+record FECStageReceipt : Set where
+  constructor fec-stage-receipt
+  field
+    stage : FECProceduralStage
+    stageLocator : String
+    sourceDates : String
+    provesFinalLiability : Bool
+open FECStageReceipt public
+
+fecReasonToBelieveReceipt : FECStageReceipt
+fecReasonToBelieveReceipt = fec-stage-receipt
+  reasonToBelieve2019
+  "FEC MUR 7351/7357 July 2019 reason-to-believe votes"
+  "2019-07-24" false
+
+fecClosureReceipt : FECStageReceipt
+fecClosureReceipt = fec-stage-receipt
+  fileClosed2021
+  "FEC MUR 7351/7357 5-0 closure vote, 2021 record"
+  "2021-09" false
+
+fecReasonToBelieveNotFinalGuilt :
+  provesFinalLiability fecReasonToBelieveReceipt ≡ false
+fecReasonToBelieveNotFinalGuilt = refl
+
+fecClosureDoesNotRewriteOriginalFindings :
+  provesFinalLiability fecClosureReceipt ≡ false
+fecClosureDoesNotRewriteOriginalFindings = refl
