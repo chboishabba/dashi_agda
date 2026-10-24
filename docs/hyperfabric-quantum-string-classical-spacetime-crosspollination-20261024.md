@@ -61,3 +61,46 @@ Use a compatible diagram of **typed fibres over refinement scale and local physi
 **Phase H4:** separately import an identified YM or NS consumer. Target YM source-selected gauge action and cutoff-uniform physical mass, or NS physical R568/R406 operator/estimate. For RH demand actual analytic identity and bound. Do not open a new chain of RNNN wrappers.
 
 **Acceptance discipline:** local arithmetic receipt + exact Agda 2.9 focused receipt + direct source-theorem comparison + physical same-object/intertwiner receipt; release only claims for which all required gates are paid. No new Clay/TOE status is granted by this finite cut.
+
+
+## Additional same-graph quantum constructor (2026-10-24)
+
+`scripts/check_hyperfabric_path27_quantum_walk.py` (exact rationals, no
+floating point) constructs a **genuine finite Hilbert toy on the ORIGINAL
+P3^3 adjacency**. One-dimensional real standing modes are
+
+`(1,1,1)`, `(1,0,-1)`, `(1,-2,1)` with graph-Laplacian
+eigenvalues `0,1,3` and squared norms `3,2,6`, respectively.
+Their tensor products give a full 27-vector orthogonal basis, exact
+Fourier-like synthesis/reconstruction, and diagonalize the PATH Laplacian,
+not the periodic C3 Laplacian.
+
+For the explicitly **chosen** Hamiltonian `H=L(P3^3)` on
+`C^27`, exact real-rational time-`pi` propagation satisfies
+
+`U(pi)=exp(-i*pi*H)=((2/3)J3-I3) tensor ((2/3)J3-I3) tensor ((2/3)J3-I3)`.
+
+This is a real symmetric unitary involution:
+`U^dagger U=I` and `U^2=I`. A central-position delta state
+evolves to amplitude `-1/27` at the centre and `8/27` at each
+corner, giving exactly `1/729` and `64/729` Born probabilities,
+respectively. The full probability sum is exactly 1. Exact rational
+checks cover 27 eigen-equations, every mode overlap, full completeness,
+27x27 orthogonality and evolution of a nonconstant state.
+
+Run: `python3 scripts/check_hyperfabric_path27_quantum_walk.py`.
+
+**Interpretation:** This pays a meaningful *finite same-graph mathematical*
+discrete/wave construction. It does NOT pay a unique physical Hamiltonian,
+experimental calibration, scaling/continuum QFT, Lorentz causal dynamics,
+nontrivial physical strings, or YM/NS/RH Clay consumers.
+The P3 and periodic C3 eigenbases each span the same site vector space,
+but the two selected Laplace operators differ. Reconciliation means choosing
+an operator or paying an operator-valued residual, not confusing the bases.
+
+**Updated phase accounting:** H1's finite-source standing-wave basis and toy
+quantum unitary now have a constructive reference calculation. The outstanding
+H1 frontier is a **kernel-certified** formalization and a physically
+selected/scale-indexed operator comparison. H2 remains real Hamiltonian /
+observables identification and physically defensible dynamics, not the
+already-solved finite orthogonality calculation.
