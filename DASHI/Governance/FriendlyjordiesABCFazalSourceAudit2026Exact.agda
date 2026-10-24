@@ -92,6 +92,137 @@ abcMediaWatchOriginal = Typed.sourceReceipt
   "https://www.abc.net.au/mediawatch/episodes/four/106962434"
   "Original reporting on anonymised sources, later ABC steps and 2024 complaints; it remains commentary/evidence on distinct episodes."
 
+-- Verified first-party 5-page original (published 22 Sept; signed 20 Aug)
+-- inspected page-wise, not inferred from headlines or Michael West reporting.
+ombudsmanOriginalExecutiveSummary : Typed.SourceReceipt
+ombudsmanOriginalExecutiveSummary = Typed.sourceReceipt
+  "Fiona Cameron / ABC Ombudsman"
+  "Ombudsman Investigation Report: Four Corners, Cocaine Nation and Meth Highway (executive summary)"
+  "signed 2026-08-20; ABC published 2026-09-22"
+  "https://live-production.wcms.abc-cdn.net.au/39e8eeeffed7acde9a54d3ccc2f2a6fb"
+  "Original five-page executive summary, pages 1-3 containing findings 1-5, seven recommendations, methodology and scope; annexure Board terms of reference July 1. Editorial-standard determinations only, not threat/criminal adjudications."
+
+record ExactEditorialFinding : Set where
+  constructor exact-editorial-finding
+  field
+    findingId : String
+    programme : String
+    editorialStandard : String
+    pageInOriginal : String
+    narrowOutcome : String
+    root : Typed.SourceReceipt
+    decidesThreatOrArson : Bool
+open ExactEditorialFinding public
+
+finding1DoublePresentation : ExactEditorialFinding
+finding1DoublePresentation = exact-editorial-finding
+  "F1" "Cocaine Nation" "accuracy 2.2" "PDF page 1"
+  "One person appeared in two significantly different roles/presentations, materially misleading viewers."
+  ombudsmanOriginalExecutiveSummary false
+
+finding2JasonVerification : ExactEditorialFinding
+finding2JasonVerification = exact-editorial-finding
+  "F2" "Cocaine Nation" "accuracy 2.1 and 2.2" "PDF page 1"
+  "Insufficient independent checking of source Jason's trafficker status/substantive account, with failure to disclose verification limits."
+  ombudsmanOriginalExecutiveSummary false
+
+finding3SweeperApproval : ExactEditorialFinding
+finding3SweeperApproval = exact-editorial-finding
+  "F3" "Cocaine Nation" "fair and honest dealing 5.9c" "PDF page 2"
+  "Disguise and anonymous-source decision for the sweeper was not submitted for required higher editorial approval."
+  ombudsmanOriginalExecutiveSummary false
+
+finding4BrendanContext : ExactEditorialFinding
+finding4BrendanContext = exact-editorial-finding
+  "F4" "Meth Highway" "accuracy 2.2" "PDF page 2"
+  "Unverified Brendan identity/cook status and reporter relationship undisclosed to audience; materially misleading framing of risk."
+  ombudsmanOriginalExecutiveSummary false
+
+finding5InstitutionalIntegrity : ExactEditorialFinding
+finding5InstitutionalIntegrity = exact-editorial-finding
+  "F5" "both Four Corners programmes" "independence and integrity 1.1" "PDF page 2"
+  "Cumulative breakdown in editorial oversight, upward referral, sources, verification and fact checking significantly misled audiences."
+  ombudsmanOriginalExecutiveSummary false
+
+canonicalFiveOmbudsmanFindings : List ExactEditorialFinding
+canonicalFiveOmbudsmanFindings =
+  finding1DoublePresentation
+  ∷ finding2JasonVerification
+  ∷ finding3SweeperApproval
+  ∷ finding4BrendanContext
+  ∷ finding5InstitutionalIntegrity
+  ∷ []
+
+data RecommendationState : Set where
+  recommended : RecommendationState
+  abcReportsCompleted : RecommendationState
+  abcReportsInProgress : RecommendationState
+  completionNotIndependentlyAudited : RecommendationState
+
+record OmbudsmanRecommendation : Set where
+  constructor ombudsman-recommendation
+  field
+    recommendationId : String
+    pageInOriginal : String
+    requiredAction : String
+    ombudsmanRecommended : Bool
+    abcPubliclyAccepted : Bool
+    independentlyVerifiedImplementation : Bool
+open OmbudsmanRecommendation public
+
+r1RemoveProgrammes : OmbudsmanRecommendation
+r1RemoveProgrammes = ombudsman-recommendation "R1" "PDF p2"
+  "Remove both Four Corners episodes; already removed before the ombudsman executive summary."
+  true true false
+
+r2BroaderInquiry : OmbudsmanRecommendation
+r2BroaderInquiry = ombudsman-recommendation "R2" "PDF p2"
+  "Investigate both broadcasts more comprehensively, beyond only the Ombudsman's scoped anonymous-source examples."
+  true true false
+
+r3PublishCorrection : OmbudsmanRecommendation
+r3PublishCorrection = ombudsman-recommendation "R3" "PDF p2"
+  "Publish visible Corrections and Clarifications acknowledging material misrepresentation."
+  true true false
+
+r4NamedAnonymityApprover : OmbudsmanRecommendation
+r4NamedAnonymityApprover = ombudsman-recommendation "R4" "PDF p2"
+  "Amend standard 5.9 anonymity guidance to identify responsible senior officer, required source verification and audience context."
+  true true false
+
+r5LegalVersusEditorialRisk : OmbudsmanRecommendation
+r5LegalVersusEditorialRisk = ombudsman-recommendation "R5" "PDF p2"
+  "Train team to balance legal/source-protection risk with continued factual verification and editorial accountability."
+  true true false
+
+r6FactcheckAndUpwardReferral : OmbudsmanRecommendation
+r6FactcheckAndUpwardReferral = ombudsman-recommendation "R6" "PDF p3"
+  "Set clear fact-checking and higher editorial escalation expectations."
+  true true false
+
+r7JuniorTeamSupport : OmbudsmanRecommendation
+r7JuniorTeamSupport = ombudsman-recommendation "R7" "PDF p3"
+  "Ensure management support for less experienced reporters on high-risk investigations."
+  true true false
+
+canonicalSevenOmbudsmanRecommendations : List OmbudsmanRecommendation
+canonicalSevenOmbudsmanRecommendations =
+  r1RemoveProgrammes
+  ∷ r2BroaderInquiry
+  ∷ r3PublishCorrection
+  ∷ r4NamedAnonymityApprover
+  ∷ r5LegalVersusEditorialRisk
+  ∷ r6FactcheckAndUpwardReferral
+  ∷ r7JuniorTeamSupport
+  ∷ []
+
+-- ABC acceptance and its stated implementation progress cannot prove
+-- that all seven recommendations were independently checked and delivered.
+data InstitutionalAcceptanceImpliesAuditedCompletion : Set where
+institutionalAcceptanceDoesNotPayCompletion :
+  InstitutionalAcceptanceImpliesAuditedCompletion → ⊥
+institutionalAcceptanceDoesNotPayCompletion ()
+
 data CaseType : Set where
   institutionalPublicResponse : CaseType
   allegedWitnessedWarning : CaseType
