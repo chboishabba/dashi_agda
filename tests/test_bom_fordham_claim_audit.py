@@ -109,11 +109,63 @@ def test_funding_event_attendance_and_climate_are_typed_distinct():
         "harnwellBannon",
         "rinehartHansonPolicy",
         "plimerOneNation",
-        "palmerBannonConflict",
+        "bannonPalmerCanonicalOwner",
         "acmaMpoxFinding",
         "acmaParalympicsFinding",
         "noFordhamCommandLeap",
     ):
         assert term in body
-    assert "noPalmerClaimPromotion" in body
+    assert "EFTA01615861" in body
+    assert "palmerBannonConflict = relationship-receipt" not in body
     assert "noConferenceCommand" in POLITICAL_VALIDATION.read_text()
+
+
+FRIENDLY = ROOT / "DASHI/Governance/FriendlyjordiesABCFazalSourceAudit2026Exact.agda"
+FRIENDLY_CHECKS = ROOT / "DASHI/Governance/FriendlyjordiesABCFazalSourceAudit2026Validation.agda"
+
+
+def test_single_owner_for_bannon_palmer_and_source_root():
+    body = POLITICAL_OWNER.read_text()
+    assert 'BannonFaragePalmerAutomatedInfluenceReceiptsExact' in body
+    assert 'EFTA01615861' in body
+    assert "palmerBannonConflict = relationship-receipt" not in body
+    assert "bannonPalmerCanonicalOwner" in body
+
+
+def test_new_show_legal_operator_and_investor_state():
+    body = POLITICAL_OWNER.read_text()
+    for token in (
+        "newShowLegalOperator",
+        "sandilandsSelfReportedOwnership",
+        "aiimsProduction",
+        "nineTaptStrategicPartnership",
+        "kyleProposedARNBuyout",
+        "Kyle Sandilands Live Pty Ltd",
+        "ABN 24 699 610 261",
+        "NET revenue",
+        "thresholds/caps",
+    ):
+        assert token in body
+
+
+def test_recent_friendlyjordies_independent_abc_findings():
+    body = FRIENDLY.read_text()
+    checks = FRIENDLY_CHECKS.read_text()
+    for token in (
+        "friendlyjordiesGovernanceWitness",
+        "SensibLawFriendlyjordiesSourceTotalityExact",
+        "breaking my silence",
+        "2026-10-22",
+        "2026-10-23",
+        "Cocaine Nation",
+        "Meth Highway",
+        "abcOmbudsmansDetermination",
+        "lamestreamCountercheck",
+        "reportedWithDenial",
+        "shanksHomeArsonNov2022",
+        "bondiJunctionAttackApr2024",
+        "bondiBeachAttackDec2025",
+    ):
+        assert token in body
+    assert "editorialFailureNotCriminalThreat" in checks
+    assert "screenshotProvenanceRequired" in checks
