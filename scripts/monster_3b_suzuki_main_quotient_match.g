@@ -96,6 +96,28 @@ if Length(p12) <> 2 or Length(p78) <> 2 then
   Error("expected exactly two faithful 12 and two faithful 78 characters in 6.Suz");
 fi;
 
+# Keep original source-selected FAITHFUL 78 route intact: do NOT silently
+# replace with Gabriele Nebe's Sym²(12), which factors through 3.Suz.
+# A faithful 6.Suz 12/78 has central involution scalar -1 on BOTH.
+central2Classes := Filtered(ClassPositionsOfCentre(six), i ->
+  OrdersClassRepresentatives(six)[i] = 2);
+if Length(central2Classes) <> 1 then
+  Error("unique central involution class of 6.Suz is unavailable");
+fi;
+central2Class := central2Classes[1];
+if ForAny(p12, i -> sixIrr[i][central2Class] <> -12) then
+  Error("faithful 12 must have central involution trace -12");
+fi;
+if ForAny(p78, i -> sixIrr[i][central2Class] <> -78) then
+  Error("faithful 78 must have central involution trace -78");
+fi;
+selectedMultiplicityC2Trace := -12 - 78;
+sym2CandidateMultiplicityC2Trace := -12 + 78;
+if selectedMultiplicityC2Trace <> -90 or
+   sym2CandidateMultiplicityC2Trace <> 66 then
+  Error("Suzuki central C2 discriminator arithmetic failed");
+fi;
+
 sum12 := sixIrr[p12[1]] + sixIrr[p12[2]];
 sum78 := sixIrr[p78[1]] + sixIrr[p78[2]];
 
@@ -292,6 +314,11 @@ PrintTo(output,
   "  \"qg_to_n3b_kernel_outer_class_position\": ", qKernelOuterClass, ",\n",
   "  \"degree_12_atlas_labels\": [\"", sixLabels[p12[1]], "\", \"", sixLabels[p12[2]], "\"],\n",
   "  \"degree_78_atlas_labels\": [\"", sixLabels[p78[1]], "\", \"", sixLabels[p78[2]], "\"],\n",
+  "  \"source_selected_degree_78_faithful_to_6Suz\": true,\n",
+  "  \"suzuki_central_involution_class_position\": ", central2Class, ",\n",
+  "  \"source_selected_S90_central_C2_trace\": ", selectedMultiplicityC2Trace, ",\n",
+  "  \"sym2_candidate_S90_central_C2_trace\": ", sym2CandidateMultiplicityC2Trace, ",\n",
+  "  \"source_selected_faithful78_can_be_sym2_faithful12\": false,\n",
   "  \"outer_12_pair_position\": ", outer12Pos, ",\n",
   "  \"outer_78_pair_position\": ", outer78Pos, ",\n",
   "  \"main_12_split_positions\": [", dec12.support[1], ", ", dec12.support[2], "],\n",
