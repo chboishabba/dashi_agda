@@ -57,7 +57,7 @@ def test_T3_quartic_and_stretching_cubic_amplitude():
         assert (P,Swork,E,T)==(
             a**3*old[0],a**3*old[1],a*a*old[2],a**4*old[3])
 
-def test_T3_nonnegaive_even_when_signed_stretching_changes_sign():
+def test_T3_nonnegative_even_when_signed_stretching_changes_sign():
     P1,_,_,T1=certificate(datum(1))
     P2,_,_,T2=certificate(datum(-1))
     assert P1==8 and P2==-8
