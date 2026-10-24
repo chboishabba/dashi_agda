@@ -19,6 +19,7 @@ import DASHI.Biology.IITXORGridAdversarialExact
 import DASHI.Biology.IITXORGridTwoStepDynamicsExact
 import DASHI.Biology.IITLatticePrimePowerSourceBridgeExact
 import DASHI.Biology.IITFiveCubeJCoarseFineRelativeBridgeExact
+import DASHI.Biology.IITJFineSelectedCrossPunctured79Exact
 import DASHI.Biology.IITXORGridFibreCircuitBridgeExact
 import DASHI.Biology.IITXORGridSynthesisFabricExact
 import DASHI.Biology.IITXORGridOrientationLiftExact
