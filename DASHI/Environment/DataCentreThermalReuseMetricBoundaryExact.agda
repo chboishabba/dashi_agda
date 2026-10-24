@@ -86,6 +86,47 @@ missingOfftakeMeansZeroRealised :
   ≡ 0
 missingOfftakeMeansZeroRealised = refl
 
+
+-- Boundary sensitivity: relocate the SAME lossless heat-pump compressor inside
+-- the declared data-centre KPI boundary. Then its 24 units of electricity
+-- are included in site energy, and the full 104 units leave as reused heat.
+-- Illustrative onsite-PUE = 149/100 = 1.49; onsite-ERF = 104/149.
+-- This is a metering-location thought experiment, NOT a real ISO audit.
+hypotheticalInternalHPsiteElectric : Nat
+hypotheticalInternalHPsiteElectric =
+  fixtureDataCentreElectric + Thermal.hpElectricHundredKilowatt
+
+hypotheticalInternalHPheatBoundary : Nat
+hypotheticalInternalHPheatBoundary = fixtureDelivered
+
+internalHPPUEOnePointFourNine :
+  100 * hypotheticalInternalHPsiteElectric ≡ 149 * fixtureIT
+internalHPPUEOnePointFourNine = refl
+
+internalHPheatPlusUnreusedEqualsSite :
+  hypotheticalInternalHPheatBoundary + 45
+  ≡ hypotheticalInternalHPsiteElectric
+internalHPheatPlusUnreusedEqualsSite = refl
+
+internalHPERFNotSixtyFour :
+  100 * hypotheticalInternalHPheatBoundary
+  ≡ 64 * hypotheticalInternalHPsiteElectric → ⊥
+internalHPERFNotSixtyFour ()
+
+-- Although site PUE and ERF BOTH change with compressor meter placement,
+-- the simplified energy-reuse effectiveness (ERE) stays 45/100 here
+-- because the imported and reused compressor quantities cancel exactly.
+-- This only holds for the declared lossless boundary reassignment.
+externalUnreusedPower : Nat
+externalUnreusedPower = 45
+
+internalUnreusedPower : Nat
+internalUnreusedPower = 45
+
+sameUnreusedPower :
+  externalUnreusedPower ≡ internalUnreusedPower
+sameUnreusedPower = refl
+
 -- The numerical identity is NOT a measurement source. Units, network heat
 -- losses, external HP boundary, offsite beneficial use and facility/nonfacility
 -- transfers must be audited before any actual ERF/ERE/PUE claim.
