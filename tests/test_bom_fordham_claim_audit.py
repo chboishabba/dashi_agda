@@ -54,3 +54,18 @@ def test_nonpromotion_regressions_and_bondi_distinction():
     assert "2025 Bondi Beach" in docs
     assert "1867 is pre-1910" in docs
     assert "postdates the episode" in docs
+
+
+def test_bondi_media_and_false_hanson_attribution_are_separate_roots():
+    owner = OWNER.read_text()
+    docs = RESEARCH.read_text()
+    for name in [
+        "bondiFordhamPoliticalSegment",
+        "fordhamLathamArchive",
+        "aapBondiHansonFabrication",
+        "tpaustFirstParty",
+    ]:
+        assert name in owner
+    assert "fabricated quotes attributed to Pauline Hanson" in docs
+    assert "not anti-Muslim words" in docs
+    assert "Latham" in docs and "underlying allegation" not in owner
