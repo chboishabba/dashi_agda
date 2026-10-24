@@ -49,6 +49,29 @@ def region(p,q):
         return "noncore" if 5*c <= 4*max(a,b) else "core"
     return "core"
 
+# Closed-form all-N proof, not curve fitting.
+# For output k=(1,1,0), the full ordered fibre is the rectangular box
+# p_x,p_y ∈ {1-N,...,N}, p_z ∈ {-N,...,N}; q=k-p.
+# Rate excess S(p,q)-2 is 2[p_x(p_x-1)+p_y(p_y-1)+p_z²].
+# Sum over the box:
+#  Σ_{x=1-N}^N x(x-1) = 2N(N²-1)/3
+#  Σ_{z=-N}^N z² = N(N+1)(2N+1)/3,
+# giving FULL(N)=(8/3)N²(2N+1)(3N²+N-2).
+# Strict R63 shells guarantee every added row beyond cutoff N=9
+# is Noncore: if |p|∞>9 or |q|∞>9 then both input shells >=4,
+# while the fixed k shell is 0, hence this is deep HH -> Noncore.
+# The finite Core rows are fixed from N=9 onward, with exact
+# rate-excess CORE=840480, checked by the literal N=9 enumeration.
+CORE_RATE_EXCESS = 840480
+
+def closed_form_defect(N):
+    """Exact degree-five literal defect for every integer cutoff N>=9."""
+    if N < 9:
+        raise ValueError("strict R63 core is not yet saturated below cutoff 9")
+    all_fibre_rate_excess = (
+        8 * N*N * (2*N+1) * (3*N*N+N-2) // 3)
+    return all_fibre_rate_excess - CORE_RATE_EXCESS
+
 def certificate(N):
     if N < 1: raise ValueError("cutoff must be positive")
     core,noncore=[],[]
@@ -63,6 +86,9 @@ def certificate(N):
     rN=sum(rate for _,rate in noncore)
     # w_(active ordered cell)=2Re<M,A>=1/2; all noncore w=0.
     defect=Fraction(rN-2*nN)
+    if N >= 9:
+        assert defect == closed_form_defect(N)
+        assert sum(rate-2 for _,rate in core) == CORE_RATE_EXCESS
     # ||M||²=1/2, ||A||²=||B||²=3/16, r_A=r_B=2.
     zeros=sorted(r for p,r in core if p not in (P,Q))
     count=len(zeros)
@@ -85,6 +111,7 @@ def certificate(N):
         "noncore_zero_amplitude_rows":nN,
         "noncore_rate_sum":rN,
         "signed_defect":str(defect),
+        "all_cutoffs_ge9_exact_degree5":str(closed_form_defect(N)) if N>=9 else None,
         "literal_core_companion":str(companion),
         "defect_over_companion":str(defect/companion) if companion else None,
         "defect_exceeds_half_companion":bool(2*defect>companion),
@@ -105,7 +132,9 @@ def main():
             assert r["core_rows"]==5474
             assert r["literal_core_companion"]=="1345859672"
     print(json.dumps({
-        "schema":"ns.r440.zero-padding.v1",
+        "schema":"ns.r440.zero-padding.v2",
+        "degree5_all_N_ge9":"(8/3)*N^2*(2*N+1)*(3*N^2+N-2)-840480",
+        "fixed_core_rate_excess":CORE_RATE_EXCESS,
         "state":"u_hat(±e_x)=u_hat(±e_y)=e_z; all other modes zero",
         "seed_is_real_transverse":True,
         "physical_helical_reciprocals_at_active_modes": "1,1",
