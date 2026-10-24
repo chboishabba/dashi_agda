@@ -1,3 +1,15 @@
+# CURRENT DECISION — 24 OCTOBER 2026 (supersedes the exploratory cuts below)
+
+**The originally proposed geometric D4 extension is mathematically ruled out** on the selected Monster 3B phase sector using the ordinary Monster character values on involutions and order-six elements. ATLAS power maps restrict every 3B-commuting involution's zeta trace to `{66,90,1458}`, whereas the original geometry demands half-turn `810` and reflections `2430`. There is no need for mmgroup, GAP, class-algebra fusion or actual Monster matrices to close this no-go.
+
+**A conditional repaired signed-monomial 90-space D4 representation exists** with `23A1+5A2+13B1+13B2+18E`, keeping the same Heisenberg fibre and producing phase-sector character `[65610,1458,18,1458,1458]`. The order-four value 18 is forced by the ATLAS 4B/12G power pairing and q-series values 51/-3, under the fixed six-coordinate fibre lift. This does NOT prove an actual Monster D4 embedding or the full Suzuki normalizer 12+78 linear action.
+
+**Authoritative current theorem/proof boundary:** [JFine3BInvolutionNoGoAndLinearRepair20261024.md](./JFine3BInvolutionNoGoAndLinearRepair20261024.md). New Python: `scripts/monster_3b_jfine_involution_character_nogo.py`, `scripts/jfine_3b_linear_multiplicity_d4_repair.py`; source-typed Agda owners: `Monster3BJFineGeometricD4InvolutionNoGoExact.agda` and `Monster3BJFineD4CandidateMultiplicityExact.agda` wired through `Monster3BActualKernelCharacterRound4Validation.agda`.
+
+The following document remains as historical work/proof-ownership context. Its earlier proposal to seek a character match for the **old** geometric D4 via class-algebra screening is **superseded** by the direct no-go. The previous GAP and mmgroup scripts are optional source corroboration, not the active mathematical critical path.
+
+---
+
 # JFine / Monster 3B: action-first max-cut (24 October 2026)
 
 ## Source attribution and owner audit
