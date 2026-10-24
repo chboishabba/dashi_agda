@@ -99,8 +99,76 @@ def run():
     check_level(3, 6)
     check_level(6, 9)
     check_gauge_obstruction()
+    check_gauge_covariant_repair()
+    check_curved_plaquette_flux()
     print("BOUNDARY free graph operators only; selected physical gauge/GR/string/YM/NS remains unpaid")
 
+
+
+def gauge_sign(point, first_new_axis):
+    # A Z2 gauge choice: + on -1 slice, - on 0,+1 slices.
+    # This realizes the *flat* sign twist; no Wilson curvature is implied.
+    return 1 if point[first_new_axis] == -1 else -1
+
+
+def check_gauge_covariant_repair():
+    keep, total = 3, 6
+    src = lambda x: 3*x[0] - 2*x[1] + x[2]**2 + 1
+    fine = lambda x: x[0]*x[3] + 2*x[1] - x[4]**2 + x[5]
+
+    def g(x):
+        return gauge_sign(x, keep)
+
+    def covariant_lift(f):
+        return lambda x: g(x)*f(x[:keep])
+
+    def covariant_average(f):
+        return average_last(lambda x: g(x)*f(x), keep, total)
+
+    lift = covariant_lift(src)
+    assert all(twisted_laplace(lift, x, keep) ==
+               g(x)*laplace(src, x[:keep]) for x in sites(total))
+    projected_lift = covariant_average(lift)
+    assert all(projected_lift(x) == src(x) for x in sites(keep))
+
+    # The entire flat twisted operator is conjugate to the ordinary one.
+    assert all(twisted_laplace(fine, x, keep) ==
+               g(x)*laplace(lambda y: g(y)*fine(y), x)
+               for x in sites(total))
+    projected = covariant_average(fine)
+    projected_L = covariant_average(lambda x: twisted_laplace(fine, x, keep))
+    assert all(projected_L(x) == laplace(projected, x)
+               for x in sites(keep))
+    print("PASS flat Z2 twist: covariant I_A/R_A restore both exact Laplacian squares")
+
+
+def check_curved_plaquette_flux():
+    # One negative edge and three positive edges around a square:
+    # genuine nontrivial Z2 Wilson loop, not removable by site signs.
+    p = (0, 0, 0, 0, 0, 0)
+    q = (0, 0, 0, 1, 0, 0)
+    r = (0, 0, 0, 1, 1, 0)
+    s = (0, 0, 0, 0, 1, 0)
+    loop = (p, q, r, s, p)
+    negative = frozenset((p, q))
+    def u(a, b):
+        return -1 if frozenset((a, b)) == negative else 1
+    edges = list(zip(loop, loop[1:]))
+    assert all(sum(abs(a[i]-b[i]) for i in range(6)) == 1
+               for a, b in edges)
+    assert u(p,q)*u(q,r)*u(r,s)*u(s,p) == -1
+    # Gauge-invariant Wilson product; exhaustive 2^4 parallel-section no-go.
+    for labels in product((-1, 1), repeat=4):
+        local = dict(zip((p, q, r, s), labels))
+        gauge_product = 1
+        satisfied = True
+        for a, b in edges:
+            edge = local[a]*u(a,b)*local[b]
+            gauge_product *= edge
+            satisfied = satisfied and edge == 1
+        assert gauge_product == -1
+        assert not satisfied
+    print("PASS nontrivial Z2 plaquette holonomy -1: no global nonzero parallel sign section")
 
 if __name__ == "__main__":
     run()
