@@ -76,3 +76,18 @@ This is a genuine exact finite-group construction and solves the **necessary loc
 ## Source-level status
 
 Local Python arithmetic and signed finite-group checks were executed and passed in this turn. Original character values/power maps were checked against OEIS/ATLAS sources. No actual GAP/AtlasRep/mmgroup run, Agda/Lean kernel receipt, Monster normalizer embedding, or concrete Monster intertwiner is claimed.
+
+
+## 24 Oct original-D4 and 12+78 cross-pollination addendum
+
+See the canonical new owner [JFine3BD4NineCellSuzukiSym2GF20261024.md](./JFine3BD4NineCellSuzukiSym2GF20261024.md). The repaired signed 90-space is not merely an arbitrary `D4` character: using the pre-existing raw nine-cell permutation `3A1+B1+B2+2E` (NOT the `SO3 j4=1+Reg(D4)` nine-space), an exact selected `D4` model is
+```
+  U12     = V9 ⊕ A1 ⊕ B1 ⊕ B2    = 4A1+2B1+2B2+2E
+  Sym²U12 = dim78               character [78,14,2,14,14]
+  S90     = U12 ⊕ Sym²U12       character [90,18,2,18,18].
+```
+There are exactly three possible 12-dimensional D4 characters yielding this 90 via Sym²; this is the unique root containing the original raw nine-cell permutation representation. Local Python constructs exact matrices, verifies a rational D4 intertwiner to the previous 90 repair and checks full canonical basis rank in characteristic 31,103,223.
+
+**Critical faithful-central sign barrier:** Sym² of a faithful complex 6.Suz 12 kills the central involution and cannot be a faithful 6.Suz 78. The source 78 may instead factor through 3.Suz, but selected full class identity and Barraclough–Wilson quotient descent remain to be checked. The new CTblLib `monster_3b_suzuki_sym2_character_screen.g` does that full character comparison on ALL degree78 characters, and the earlier `monster_3b_suzuki_multiplicity_characters.g` + renderer/checker have been corrected to refrain from demanding degree78 faithfulness.
+
+**Terminology:** Monster class 12G has character -3 inferred from the 12G q-series coefficient -2 and powers to Monster 4B and 3B. GF31,GF103,GF223 refer instead to Barraclough's historical finite-field program; crossfield tests of our D4 model are not reproductions of those matrices. No actual Suzuki or Monster same-object proof is claimed.
