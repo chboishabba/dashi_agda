@@ -1,3 +1,80 @@
+# 2026-10-25 A/B MAX-CUT: R699 INITIAL MASS PAID ANALYTICALLY, ENERGY-ONLY ROUTE EXCLUDED
+
+**Research source:** `Docs/research/ns_r699_initial_mass_cutoff_young_20261025.md`.
+Original helical decomposition (Lei--Lin--Zhou, 2015), discrete Young,
+Sobolev and Cauchy--Schwarz attribution retained. New physical data
+calculations/tests are DASHI contributions, not original analytic
+theorems or an unrestricted Clay A/B solution.
+
+**B / rigorously established MATHEMATICAL initial-data ceiling:**
+For genuine norm-one helical projectors H± and any fixed divergence-free
+u0∈H^s(T³), s>3/2, the literal original mixed field
+M_N(k)=Σ_(p+q=k)(H+u0_N(p))×(H-u0_N(q))
+satisfies the cutoff UNIFORM bound
+  sup_N Σ_(k≠0,|k|∞≤N)|M_N(k)|²
+     ≤ [Σ_p(1+|p|²)^(-s)] ||u0||_(H^s)² ||u0||_2².
+Proof: projector norm ≤1, cross-product norm ≤product,
+discrete Young ell1*ell2→ell2, weighted Cauchy--Schwarz.
+This directly provides the analytical standard-data bound requested by
+R699's `CutoffUniformInitialMixedMassCeiling`. For unforced
+z-direction x/y heat shears, R691's nonlinear commutator vanishes and
+W_N(T)+E_M,N(T)=E_M,N(0), so the R735 **W1 inequality is settled on
+this restricted exact-solution class**, uniformly in cutoff and T.
+
+**ANALYTIC VS KERNEL boundary:** R699's Agda record is still UNINHABITED
+in source for the general physical NS system. The unconstrained
+`HelicalModeScalars` rational record does NOT itself entail
+orthogonal norm-one projectors on every real Fourier mode. Requires
+physically normalized real/complex helical law, literal initial
+trajectory tracing, cutoff extension, ell1/ell2 inequality, and a
+rational ceiling value for the resulting real constant before R699
+can be marked kernel-proved. Do NOT flip the false status boolean.
+
+**Exact negative control:** Smooth real UNFORCED heat shears
+  u_N=2/sqrt(2N) Σ_(n=1)^N cos(nx)e_z,
+have normalized kinetic energy E=1, but the SAME-N canonical
+helical mixed initial mass is
+  E_M,N(0)=((N-1)(2N-1))/(48N) ~N/24.
+Full generated-output mass=N/12+1/(24N). Therefore a bound on
+initial mixed mass in terms of E0 ALONE with data-independent
+constant is FALSE; the H^s datum-dependence cannot be silently
+removed. This varies initial data with N; it does not violate
+uniformity in cutoff for a FIXED smooth datum, nor Clay B.
+`tests/test_ns_r699_initial_mixed_mass_young.py` and
+`tests/test_ns_r699_energy_only_initial_mass_no_go.py`:
+**6 locally passed exact tests** (SymPy 1.14.0; matching independent
+local calculations). No exact-GitHub-head pytest or Agda/Lean kernel
+run witnessed.
+
+**Actual remaining B critical leaves:** R735 W1 for arbitrary
+physical trajectories still needs a cutoff-uniform bound on the
+globally SIGNED nonlinear coherent commutator. R735 W2 still
+needs a noncircular positive-margin augmented critical weighted
+payment; the auxiliary R823 universal reserve shortcut is
+source-written-refuted on an exact real Galerkin trajectory in
+`dashi_lean4`, pending independent kernel verification. Reuse R691,
+R699, R735, R817 and later Lean proof owners; NEVER reintroduce
+padding-dependent R236 B4 or outputwise positive R690.
+
+**Actual remaining A interfaces:** `NSClayFacingAPhysicalSameObjectCutExact`
+and `NSClayFacingATwoPhysicalSeamCompilerExact` still require
+source-exact canonical continuum pair population, high-frequency
+same-object physical heat rate, and low/high majorant domination.
+The high-frequency source record stores a rational `outputHeatRate`
+and demands exact Bishop-real equality with ν|xi|²; this equality
+cannot simply be assumed at GENERIC real frequencies with
+irrational rates. The correct real-continuum producer must either
+use a genuine Bishop-real rate/curvature bound or justified rational
+brackets (and show their effect on the existing theorem). The
+physical H¹→dot-H½/Duhamel estimate is good but no A3 continuation.
+
+**Phase:** one standard-data hypothesis paid mathematically; direct
+formal instantiation and BOTH universal W1/W2 positive inequalities
+open; original A1/A2/A3 research open; no unrestricted Clay A/B
+theorem, typecheck receipt or proof-complete status.
+
+---
+
 # 2026-10-25 A/B MAX-CUT — CURRENT OWNER RECONCILIATION
 
 **READ FIRST / supersedes earlier R690-first claims below.** The user-selected
