@@ -1,5 +1,10 @@
 # Original screenshot objects, contemporary source identity and claim-to-assay return — 25 October 2026
 
+## Scope correction after user instruction: Phase 1 is documentary, NOT measurements
+
+The previous text below was written under an over-narrow video-plus-metrology interpretation. **For Phase 1, every 'native reel / exact SKU / bench current or sphere displacement' item is optional background, NOT a requirement, leading task, stopping condition, or acceptance gate.** The authoritative forward roadmap is [Phase 1 literature/Pareto/Ibrahim review](psychotronics-phase1-literature-ibrahim-pareto-20261025.md), whose outputs are a source landscape, original author chronology, citation and transmission edges, contested source accounts and critical interpretation. This file remains a descriptive first-stage picture-to-source mapping, not a task prescription.
+
+
 ## HIGH-ALPHA original-account identity correction: first-party outbound link
 
 The original [GoldenEye Zero Point Tech manufacturer page](https://crystalpyramids96.com/products/energy-matrix-harmonizer-24-point-starship-coil-sedona-red-rock-vortex-edition) has a **first-party footer Instagram link**, and following its link target resolves to **`https://www.instagram.com/crystal_pyramids96`**: **exactly the posting handle represented by the first screenshot batch**. This is now a **source-express, maker-site-to-creator-handle association**, not just domain/brand spelling resemblance or a third-party caption mirror. Direct reading of the Instagram profile/reel itself was throttled: the page owner has linked that handle, but **the exact pictured SKU/variant, visual episode date, social platform ownership authentication, raw reel and physical signal remain unpaid**. Do not upgrade the `ScreenshotDiscriminationExact` record's `originalMediaURLInspected`, `exactSKUIdentified` or `ownershipConfirmed` independent verification flags on a retailer-origin link alone.
