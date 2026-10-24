@@ -16,6 +16,7 @@ import DASHI.Biology.IIT4FiniteRelationExact
 import DASHI.Biology.IIT4FiniteCauseEffectStructureExact
 import DASHI.Core.IntegrationConsumerDescentOrderExact
 import DASHI.Biology.IITXORGridAdversarialExact
+import DASHI.Biology.IITXORGridTwoStepDynamicsExact
 import DASHI.Biology.IITXORGridFibreCircuitBridgeExact
 import DASHI.Biology.IITXORGridSynthesisFabricExact
 import DASHI.Biology.IITXORGridOrientationLiftExact
