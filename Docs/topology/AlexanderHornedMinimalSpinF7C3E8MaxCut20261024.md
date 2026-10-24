@@ -301,3 +301,66 @@ van Kampen. Full audit/provenance/acceptance:
 `Docs/topology/AlexanderHornedClopenBallGeometryMaxCut20261024.md`.
 
 No Agda kernel/CI receipt claimed at user request.
+
+
+## 2026-10-24 concrete geometry and OUTER-sector C3 improvement
+
+Primary Hatcher Example 2B.2 pp171–172 inspected directly, with
+the actual punctured-torus meridian commutator and injective
+van Kampen stage maps. New source/technical roadmap:
+`Docs/topology/AlexanderHornedThreeSectorGeometricVanKampenMaxCut20261024.md`.
+
+**Source group identity now sharpened**:
+`G_three = G_A * G_A * G_A` (free product), as an
+independent three-copy filtered colimit of the Hatcher
+free-stage commutator towers, NOT the direct product
+`G_A^3`. `(2I)^3⋊C3` is its finite direct-product
+QUOTIENT actor, consistent with the old 12D spin
+representation. All-stage injectivity follows from
+literal reduced-word fourfold expansion, as each
+parent's two child letters occupy a disjoint alphabet.
+Independent local audit checked 18,112 reduced words,
+including exact sector-rotation commutation.
+
+**ABSTRACT outer-action CLOSED**:
+the C3 permuting the three free factors has exact
+order 3 in `Out(G_three)`. Proof: retract onto
+factor zero; rotated nontrivial factor-zero meridian
+becomes identity, whereas the retraction of ANY inner
+conjugate remains a nontrivial conjugate.
+The SL2(F5) meridian witness and 120/120 conjugate
+check are in
+`scripts/alexander_horned_three_sector_outer_c3_witness.py`.
+Only its geometric `Out(pi1(exterior))` incarnation
+awaits an equivariant pi1 same-object isomorphism.
+This is POSITIVE outer symmetry progress, not an
+asserted nonsplit central spin cover of C3.
+
+**Concrete geometric bug corrected**:
+previous radial thin-spoke cores t∈[1,8] merely
+TOUCHED the central and satellite unit spheres;
+they did not define an attached 1-handle!
+Patched original
+`scripts/alexander_horned_clopen_tree_handle_scaffold.py`
+to cores t∈[1/2,17/2], radius 1/4.
+Each full endpoint disk is inside the relevant unit ball,
+with radius² 5/16 <1; exposed tube components remain
+disjoint. Scaled outward Hopf/unlinked loop pairs
+fit INSIDE unit satellites without meeting spokes.
+
+**Genuine Euclidean clopen control, not tags**:
+`scripts/alexander_horned_tame_cantor_ball_cylinders.py`
+constructs strictly nested actual 3D balls for every
+binary cylinder with child containment margin >0 and
+positive sibling separation at all depths, as a
+TAME comparator. 511 finite cylinders checked. Its
+identical symbolic `C3×Z2` ends do NOT force wildness
+or exterior π1, a key topological discriminator.
+
+NEXT P0: source-specific Hatcher wild satellite B3
+with its actual tame attachment disk/collar. Distinct
+from the standard unit satellite BALL geometric overlap
+now checked. Then splitting spheres and an actual
+simply-connected-overlap van Kampen for the full
+threefold exterior. User requested local Python rather
+than Agda/CI, so no new kernel claim.
