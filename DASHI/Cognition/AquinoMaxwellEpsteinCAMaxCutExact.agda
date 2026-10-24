@@ -9,6 +9,12 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.BannonCambridgeAnalyticaInfluenceInfrastructureExact as CA
 import DASHI.Cognition.EpsteinMasterPlanAttributionBoundaryExact as Plan
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
+import DASHI.Law.EvidenceProvenanceDependencyDagExact as Provenance
+import DASHI.Core.ProvenanceClosureIndependenceExact as RootClosure
+import DASHI.Core.SourceAcquisitionGeometryExact as Acquisition
+import DASHI.Core.ITIRInvestigationAcquisitionParetoExact as ITIR
+import DASHI.Core.ITIRInvestigationWorkbenchProjectionExact as Workbench
+import DASHI.Core.MultipartSameObjectReconstructionExact as Multipart
 
 ------------------------------------------------------------------------
 -- AQUINO / MAXWELL / EPSTEIN / CA: EXISTING-CARRIER ATTRIBUTION MAX-CUT
@@ -212,3 +218,200 @@ noGuiltByAllegation ()
 
 noUnifiedCommandFromNetworkPath : NetworkPathImpliesUnifiedCommand → ⊥
 noUnifiedCommandFromNetworkPath ()
+
+
+------------------------------------------------------------------------
+-- WOOGAROO / INVESTIGATION CROSS-POLLINATION (CASE CONSUMER, NO NEW CORE)
+--
+-- Woogaroo's evidence-dependency matrix is source calibration: several
+-- documents sourced from one ecological observation do not give independent
+-- project evidence; statutory instruments and site identity have different
+-- roles. The generic owners below already implement this discipline. Here
+-- we consume them for this case rather than importing Woogaroo's legal
+-- facts as evidence of an unrelated historical network.
+------------------------------------------------------------------------
+
+dependencyProvenanceAuthority : Provenance.ProvenanceDagBoundary
+dependencyProvenanceAuthority = Provenance.canonicalProvenanceDagBoundary
+
+independentRootsAuthority : RootClosure.ProvenanceClosureBoundary
+independentRootsAuthority = RootClosure.canonicalProvenanceClosureBoundary
+
+acquisitionStagesAuthority : Acquisition.SourceAcquisitionBoundary
+acquisitionStagesAuthority = Acquisition.canonicalSourceAcquisitionBoundary
+
+investigationParetoAuthority : ITIR.InvestigationAcquisitionBoundary
+investigationParetoAuthority = ITIR.canonicalInvestigationAcquisitionBoundary
+
+investigationUIAuthority : Workbench.InvestigationWorkbenchBoundary
+investigationUIAuthority = Workbench.canonicalInvestigationWorkbenchBoundary
+
+multipartIdentityAuthority : Multipart.MultipartReconstructionBoundary
+multipartIdentityAuthority = Multipart.canonicalMultipartReconstructionBoundary
+
+-- BIDI: requests for independent corroboration must return to the original
+-- producer; multiple indexed PDFs of one witness/claim do not suffice.
+caseIndependentProducerRequirement :
+  Provenance.reverseProvenance Provenance.independentCorroborationConsumer
+    ≡ Provenance.independentProducerReceipt
+caseIndependentProducerRequirement = refl
+
+-- These are explicit stage states for *this* pass. A recoverable URL is not
+-- evidence of full-text extraction or of a specific historical allegation.
+-- Unlocated carriers are proposed targets, not documents asserted to exist.
+sclCorporateWorkProductTarget : Acquisition.SourceAcquisitionTarget
+sclCorporateWorkProductTarget = Acquisition.sourceAcquisitionTarget
+  "Original signed SCL/Cambridge Analytica agreements, 2013-2015"
+  "Exact executed signatures / governing schedules not acquired in this pass"
+  Acquisition.directDigitalArchive Acquisition.physicalHolding
+  false false false
+
+bannonEpsteinFilmWorkProductTarget : Acquisition.SourceAcquisitionTarget
+bannonEpsteinFilmWorkProductTarget = Acquisition.sourceAcquisitionTarget
+  "Epstein-Bannon raw 2018-2019 production correspondence and edit/contract chain"
+  "Match Bates IDs and complete film work products to date, authors, custody"
+  Acquisition.directDigitalArchive Acquisition.nationalCatalogue
+  false false false
+
+promisMaxwellExecutableTarget : Acquisition.SourceAcquisitionTarget
+promisMaxwellExecutableTarget = Acquisition.sourceAcquisitionTarget
+  "Alleged Maxwell-linked PROMIS installation, version, contract and backdoor"
+  "No authenticated executable or matched procurement record inspected in this pass"
+  Acquisition.nationalCatalogue Acquisition.physicalHolding
+  false false false
+
+aquinoSCLTransferTarget : Acquisition.SourceAcquisitionTarget
+aquinoSCLTransferTarget = Acquisition.sourceAcquisitionTarget
+  "Hypothetical 1980 MindWar-to-SCL personnel/manual/technical transfer"
+  "Unlocated exact handoff; not established by shared terminology"
+  Acquisition.directDigitalArchive Acquisition.nationalCatalogue
+  false false false
+
+-- A question-indexed matrix, as in Woogaroo, avoids inventing source counts:
+-- one verified legal fact, one factual contact and a named general method do
+-- not sum to three independent observations of covert coordination.
+data CaseConsumer : Set where
+  historicalDocumentExists : CaseConsumer
+  sclCATechniqueDeployment : CaseConsumer
+  epsteinBannonActualWorkProduct : CaseConsumer
+  maxwellPROMISBackdoor : CaseConsumer
+  aquinoSCLTransfer : CaseConsumer
+  coordinatedIntelligenceCommand : CaseConsumer
+
+record CaseDependencyCut : Set where
+  constructor case-dependency-cut
+  field
+    consumer : CaseConsumer
+    sourceOrRoute : String
+    needsIndependentProducer : Bool
+    needsExactArtifactOrSubjectJoin : Bool
+    needsEventTimeContinuity : Bool
+    sourceEvidenceSufficient : Bool
+    consumerConclusionPaid : Bool
+    firstUnpaidConsumerObligation : String
+open CaseDependencyCut public
+
+sclTransferCut : CaseDependencyCut
+sclTransferCut = case-dependency-cut
+  sclCATechniqueDeployment
+  "Original SCL/CA contract, personnel and dated system deployment"
+  true true true false false
+  "Join source-specific method to an actual executed personnel/technical transfer; Wylie testimony and FTC finding alone cannot identify Aquino as the source."
+
+bannonWorkProductCut : CaseDependencyCut
+bannonWorkProductCut = case-dependency-cut
+  epsteinBannonActualWorkProduct
+  "DOJ indexed communications -> produced film/edit/contract/payment objects"
+  true true true false false
+  "Recover specific deliverable, responsible editor, custody and date, then compare with any CA technical artefact; correspondence alone cannot establish method reuse."
+
+promisExecutableCut : CaseDependencyCut
+promisExecutableCut = case-dependency-cut
+  maxwellPROMISBackdoor
+  "House/Bua claims -> named version, installation, procurement and executable"
+  true true true false false
+  "Obtain same-build software + contract/installation identity and a demonstrated backdoor; disputed reports are evidence of disagreement, not an executable."
+
+aquinoHistoricalTransferCut : CaseDependencyCut
+aquinoHistoricalTransferCut = case-dependency-cut
+  aquinoSCLTransfer
+  "MindWar 1980 discussion proposal -> SCL operational artefact"
+  true true true false false
+  "Require dated operational citation, handoff, deployment or code with attributable lineage; no generic shared-psyops promotion."
+
+commandHierarchyCut : CaseDependencyCut
+commandHierarchyCut = case-dependency-cut
+  coordinatedIntelligenceCommand
+  "Claim-specific sponsor, tasking, instruction, deliverable and payment chain"
+  true true true false false
+  "Trace one actual common source of control across cases; network paths and repeated buzzwords do not fill the gap."
+
+canonicalCaseCuts : List CaseDependencyCut
+canonicalCaseCuts =
+  sclTransferCut ∷ bannonWorkProductCut ∷ promisExecutableCut
+  ∷ aquinoHistoricalTransferCut ∷ commandHierarchyCut ∷ []
+
+-- The only instantiated Pareto routes are proposals about where to search;
+-- numeric axes are scenario/routing calibration, NEVER truth/guilt scores.
+-- Keep the mixed five-dimensional ITIR order, not a scalar leaderboard.
+sclCAOriginalContractRoute : ITIR.InvestigationCandidate
+sclCAOriginalContractRoute = ITIR.investigation-candidate
+  "case:SCL-CA-executed-contract" "obligation:direct-transfer"
+  "route:company-registries-parliamentary-production" "access:lawful-public"
+  "genealogy:corporate-original-not-Wylie-reprint" "axes:illustrative-calibration"
+  5 5 4 5 3
+  true refl false refl false refl
+
+bannonActualFilmRoute : ITIR.InvestigationCandidate
+bannonActualFilmRoute = ITIR.investigation-candidate
+  "case:Bannon-Epstein-work-product" "obligation:same-work-product"
+  "route:DOJ-Bates-raw-attachments" "access:lawful-public-redacted"
+  "genealogy:direct-correspondence-distinct-from-media-recaps" "axes:illustrative-calibration"
+  5 4 5 4 3
+  true refl false refl false refl
+
+candidateRoutes : List ITIR.InvestigationCandidate
+candidateRoutes = sclCAOriginalContractRoute ∷ bannonActualFilmRoute ∷ []
+
+caseFiveAxisAuthority : ITIR.DirectMixedParetoView
+caseFiveAxisAuthority = ITIR.investigationParetoView
+
+caseMissingSourceIsNotAbsence :
+  ITIR.notLocatedMeansKnownAbsent ITIR.canonicalInvestigationAcquisitionBoundary
+    ≡ false
+caseMissingSourceIsNotAbsence = refl
+
+caseUIIsNotEvidence :
+  Workbench.uiMayConstructAcquisitionResult
+    Workbench.canonicalInvestigationWorkbenchBoundary ≡ false
+caseUIIsNotEvidence = refl
+
+caseReprintsNotIndependent :
+  Provenance.multipleReceiptsAutomaticallyIndependent
+    Provenance.canonicalProvenanceDagBoundary ≡ false
+caseReprintsNotIndependent = refl
+
+caseIdentityNeedsFullReconstruction :
+  Multipart.localPartIdentityAloneCreatesWholeIdentity
+    Multipart.canonicalMultipartReconstructionBoundary ≡ false
+caseIdentityNeedsFullReconstruction = refl
+
+-- No construction of an external historical fact from route visibility,
+-- discovery, a candidate score, analogous legal structures, or missing text.
+data DiscoveredRouteImpliesInspectedPrimary : Set where
+data OfficialProceduralFindingImpliesUnderlyingScientificFinding : Set where
+data EventTimeOverlapImpliesOperationalControl : Set where
+data TechnicalAnalogyImpliesSameProgramme : Set where
+
+discoveryDoesNotPayInspection : DiscoveredRouteImpliesInspectedPrimary → ⊥
+discoveryDoesNotPayInspection ()
+
+proceduralFindingDoesNotPaySubstantiveFact :
+  OfficialProceduralFindingImpliesUnderlyingScientificFinding → ⊥
+proceduralFindingDoesNotPaySubstantiveFact ()
+
+eventTimeOverlapDoesNotPayCommand : EventTimeOverlapImpliesOperationalControl → ⊥
+eventTimeOverlapDoesNotPayCommand ()
+
+analogyDoesNotPayProgramme : TechnicalAnalogyImpliesSameProgramme → ⊥
+analogyDoesNotPayProgramme ()
