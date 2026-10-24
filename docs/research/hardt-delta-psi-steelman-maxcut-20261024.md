@@ -1250,3 +1250,16 @@ Current planned Python regression count is **nine** source-written
 tests; those exact GitHub-byte tests have not been run and
 the Agda module has no kernel receipt. The locally equivalent
 seven initial and two new 3-way mathematical checks passed.
+
+
+---
+
+## 25 October 2026 — exact optical execution and stacked-parent reconciliation
+
+**Integration verified.** From common ancestor 6ca3940b, the parent #1242 had 28 changed paths and Hardt child #1252 had 20, with zero path overlaps. A non-forced two-parent merge commit a63ef3f2 included the parent's then-current head af516609 and Hardt child 7a021243. The GitHub post-merge comparison was zero behind / 48 ahead. Future parent work can advance independently.
+
+**Agda source repair, kernel still unverified.** Inspection of the canonical ContrastiveInterventionResponseExact theorem found the earlier Hardt brain file passed Intervention -> TrialWorld -> Bool where a genuine Intervention -> State -> State transition was required. New commit 58a0d575 adds InterventionState (imposed input plus original world), setInterventionInput as a state transformation, and readInterventionOutcome as its observation, and reanchors the response non-descent proof on the new states. This is a substantive type-interface repair, NOT an Agda-kernel proof receipt; an Agda compiler is unavailable here.
+
+**Exact GitHub-source Python receipt.** The newly committed optogenetic checker blob bdd16c634efbb3746dabe5c7d29d18f86e486fd5 and its test blob 53c49cb82e4acdb524e187e4c2c54779510653de were reconstructed byte-for-byte, hash-matched, and actually executed together locally: 9/9 unittest cases PASS. The script itself exits successfully and checks 343 additive nulls, 2,187 lower-order three-factor nulls, the opsin/readout collision and independent concealed-target nonidentifiability. See docs/receipts/hardt_nobel_optogenetic_exact_git_blob_python_20261025.json. This supersedes the earlier 'equivalent only' status for these TWO files, not for other tests or Agda.
+
+**Next Pareto gates:** (R0) exact-head Agda typecheck of repaired brain and Nobel optical modules; (R1) original Spedden 2026 v2 leadfield bytes and actual magnetic source/sensor units; (R2) source-specific mouse holographic light, opsin, heating, direct optical pickup and downstream circuit controls, plus independently calibrated human 0.5–4Hz OPM motion controls; (R3) only after actual evidence, a benign preregistered distant-target causal test. None of the historical assassinations, unassisted distant neural influence or a new field has been corroborated. Source-written code and exact finite synthetic arithmetic must not be promoted to empirical effects.
