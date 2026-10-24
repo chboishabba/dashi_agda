@@ -1,3 +1,141 @@
+## 2026-10-24 max-cut continuation — B4 ED no-go discharged, A finite-energy Fourier source identified
+
+### B4: the ED qualification has been paid by existing theorem owners
+
+The canonical B4 full-output-fibre source reduction is still the exact
+Agda algebra. Its proposed `theta_D<1/2` physical ED payment is **false**
+when `localED` is the already-defined genuine R219/R469/R109
+selected-pair currency, on the fixed globally smooth shear state
+from the adversarial section below:
+
+- `R219.physicalModalED`: `E_m=||u_hat_m||²` and
+  `D_m=|m|²||u_hat_m||²`.
+- `R109.pairKernel(p,q)=D_p E_q+E_p D_q`; `R469.selectedTriadValue`
+  and `PhysicalCriticalRegionUniformFamilyProducer.localED` fold
+  this **nonnegative** kernel over one output fibre.
+- Only four modes are populated (`±e_x,±e_y`), each having E=D=1;
+  `sum E=sum D=4`. The global R109 selected-pair ED is `<=32`.
+- At `k=e_x+e_y` ONLY two ordered physical pairs can contribute:
+  `(e_x,e_y)` and `(e_y,e_x)`, each with pair kernel `2`.
+  Therefore `0<=localED_N(k)<=4` for **every cutoff N** and
+  every Boolean selector (independently of shell and helicity).
+- The previous strict-source R63 corrected computation has
+  `M_core_N=1345859672` for all `N>=9`, while
+  `defect_N>=2*sum_(m=10)^N m(m-1) -> +infinity`.
+  Consequently no cutoff-independent finite `c_D>=0` and
+  `0<=theta_D<1/2` can satisfy
+  `defect_N <= theta_D*M_core_N+c_D*localED_N(k)`.
+  This is a **mathematical no-go for the original full-fibre auxiliary
+  B4 inequality**, not an unforced Navier–Stokes counterexample.
+
+At N=40, merely permitting `theta_D=1/2` (weaker than the demanded
+strict inequality) already forces `c_D >=249560621` from localED<=4.
+No fixed `c_D` suffices as N grows.
+
+**Do not spend another cut trying to prove that estimate.** In the
+existing physical owner, preserve the exact literal R440 aggregate
+`R= sum_tau inputMass(tau)*A_tau`, which is invariant under padding
+with `A_tau=0`. The fixed witness has `R=2M`, while
+`|k|²=2`, so its actual output-relative heat work
+`W(M,R-|k|² M)=0`, despite the divergent full-fibre covariance.
+The next positive-B theorem must prove an exact *same-source* identity
+between a proposed zero-padding-invariant physical quantity and the
+original NS critical production; a new weighted covariance cannot be
+substituted merely because its bound looks easier. B1/2/3, B7 and B
+continuation remain open. The generic PR #1234 B4 interface permits
+a freely specified source-attachment predicate, so it must **not**
+override this fixed physical ED negative result.
+
+**New executed receipt:** the independently evaluated local script
+`ns_b4_padding_no_go.py` reproduced N=4,8,9,16,24,36,40 exact
+full-fibre values, and the source/maths ED bound was checked directly.
+Source changes:
+`scripts/ns_b4_literal_padding_adversary.py` and
+`tests/test_ns_b4_literal_padding_adversary.py`; committed tests
+themselves still require a normal checkout run. No kernel proof
+receipt from these Python checks.
+
+### A1/A2: actual finite-energy continuum Fourier source theorem
+
+There is MORE already-paid A source than the old A1 status implies:
+`NSTriadKNEuclideanCanonicalProjectedInteractionExact` constructs the
+pointwise divergence-form/Leray cell, and
+`NSWholeSpaceFiniteConvolutionSingleLimitExact` reduces product
+convergence to one energy quadrature. No more raw-cell records.
+
+The following *standard Fourier/Plancherel lemma* provides an exact
+mathematical physical-state producer, not just a chosen `Set` meaning:
+
+Let `u:R³->R³` be divergence-free in distributions with
+`u in L²(R³)`, and set `E=||u||²_L²<∞`. Then
+`u_i*u_j` (POINTWISE product) is in L¹. Write
+`G_ij(xi)=F[u_i u_j](xi)` for
+`Ff(xi)=∫exp(-i*x·xi)f(x)dx`.
+It has a continuous bounded representative and
+`||G(xi)||_F <= ∫||u(x)⊗u(x)||_F dx = E`.
+For Schwartz `u`, Fourier inversion and Fubini yield the **same**
+original Fourier interaction
+
+```text
+G_ij(xi) = (2*pi)^(-3) int_eta uhat_i(eta) uhat_j(xi-eta) d eta
+F[div(u⊗u)]_i(xi) = i*sum_j xi_j G_ji(xi)
+F[P div(u⊗u)]_i(xi) = i*sum_j (P_xi)_(i l) xi_j G_(j l)(xi),
+P_xi = I - (xi xi^T)/|xi|², xi!=0.
+```
+
+Approximate an arbitrary finite-energy `u` in `L²` by Schwartz
+`u_n`: `u_n⊗u_n -> u⊗u` in `L¹`, and their Fourier convolutions
+converge uniformly pointwise by L² Cauchy–Schwarz/Plancherel.
+Thus the same identity holds as a *tempered distribution* for
+finite-energy `u`, even where `uhat` has no pointwise classical
+values. This is the relevant same-solution **physical Fourier
+identification**, mathematically rigorous with standard Fourier
+normalization; constructing the corresponding Agda Bishop
+Fourier/Plancherel semantics and a kernel receipt is still unpaid.
+
+By Leray contraction `||P_xi||op<=1`,
+`|F[P div(u⊗u)](xi)| <= E|xi|`.
+For positive viscosity `nu`, the actual viscous-heat inverse has
+near-origin bound `E/(nu*|xi|)`; in THREE dimensions
+
+```text
+int_(|xi|<=R) (E/(nu*|xi|))^2 dxi
+    = 4*pi*R*(E/nu)^2 < infinity.
+int_(|xi|<=R) E/(nu*|xi|) dxi
+    = 2*pi*R^2*E/nu.
+```
+
+This supplies a **genuine finite-energy low-frequency bound for the
+physical projected nonlinear source**, no artificial positive R9
+Gram-pair integral and no L⁴-frequency hypothesis. It does NOT by
+itself control the more complicated canonical signed *centered
+resolvent* correction, nor the high-frequency tail or global
+continuation. Those are the precise remaining A2/A3 consumers.
+
+**Concrete nontrivial witness:** committed
+`scripts/ns_a_schwartz_fourier_same_object.py` and
+`tests/test_ns_a_schwartz_fourier_same_object.py` calculate the
+R³ Schwartz divergence-free datum
+`u=(-2y,2x,0)exp(-|x|²)`, its transform
+`uhat=i*pi^(3/2)(xi_y,-xi_x,0)exp(-|xi|²/4)`,
+and both a spatial-derivative and centered Gaussian-convolution
+derivation of
+`F[(u·grad)u]=i*(pi/2)^(3/2)*(xi_x,xi_y,0)exp(-|xi|²/8)`.
+The actual Leray projection is nonzero at `xi=(1,0,1)`;
+`||u||²_L²=2*(pi/2)^(3/2)`,
+`||grad u||²_L²=10*(pi/2)^(3/2)`.
+The exact symbolic spatial/convolution and finite-energy calculations
+were independently checked locally. This is a one-datum A1
+calibration, not unrestricted NS regularity.
+
+**Immediate real remaining acceptance cut:** instantiate the
+Fourier/Plancherel distribution identity on the SAME canonical
+`EuclideanFourierTrajectory` without `FourierTransformVelocity:Set`
+being freely chosen; then attach actual A2 signed kernel and
+low/high majorants. Do not create any new RNNN modules.
+
+---
+
 ## 2026-10-24 P0 B4 adversarial discovery and A prior-art recut
 
 **SOURCE CORRECTION:** The official R63 scale classification uses the STRICT
