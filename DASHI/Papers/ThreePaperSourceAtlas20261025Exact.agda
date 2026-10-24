@@ -7,6 +7,7 @@ module DASHI.Papers.ThreePaperSourceAtlas20261025Exact where
 -- resolver/identity check is not implied by putting it in this atlas.
 -- Related work is genealogy, not independent replication or source
 -- ownership of the DASHI constructions.
+open import Agda.Builtin.List using (List; []; _∷_)
 open import DASHI.Core.AttributedSourceCore as Attribution using ()
 open import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball using ()
 
