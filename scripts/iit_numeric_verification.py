@@ -38,6 +38,7 @@ from iit_pgl2_f9_720_audit import audit as pgl2_f9_audit
 from iit_f81_f9_norm_inversion_audit import audit as f81_norm_inversion_audit
 from iit_f81_f9_quadratic_tower_audit import audit as f81_same_tower_audit
 from iit_jfine_four_one_four_s3_zeta_audit import audit as jfine_s3_audit
+from iit_jfine_d4_s3_mixed_character_audit import audit as jfine_d4_s3_mixed_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -252,6 +253,18 @@ def verify_numeric_results() -> dict:
         3: 1, 6: 6, 12: 17, 24: 122, 48: 344}
     assert jfine_s3["D4_times_S3_Burnside_numerator"] == 23520
 
+    mixed = jfine_d4_s3_mixed_audit()
+    assert mixed["fine_D4_by_valueS3_orbits"] == 490
+    assert mixed["pointed_D4_by_valueS3_orbits"] == 4396
+    assert mixed["source_fine_states"] == 19683
+    assert mixed["source_pointed_states"] == 196830
+    assert mixed["spatial_rowcol_S3_wreath_C2_order"] == 72
+    assert mixed["spatial_72_by_valueS3_orbits"] == 84
+    assert mixed["spatial_72_is_not_AGL1F9_72"]
+    assert mixed["pointed_marker_moves"]
+    assert mixed["D4_commutes_with_value_S3"]
+    assert not mixed["original_Monster_action_intertwined"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -265,6 +278,7 @@ def verify_numeric_results() -> dict:
         "five_cube_relative_fibre": five_cube,
         "selected_punctured79": selected,
         "jfine_four_one_four_s3_zeta": jfine_s3,
+        "jfine_d4_value_s3_mixed_character": mixed,
         "projective_f9_pointed80": projective,
         "projective_group_f9_720": pgl,
         "f81_norm_inversion": f81_norm,
