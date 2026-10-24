@@ -113,3 +113,53 @@ These are committed **source-written targets** and are not represented as execut
 | 4 three-drive coupling | mathematical C3/braid donors only | explicit plasma-to-Dirac source coupling and differential prediction |
 | 5 experimentally identified gravity | historical constraints only | replicated external metric/free-fall/phase observable with nuisance exclusion |
 | 6 optional unification | disparate donors | same-object measurable or theorem-bearing impact on phases 1–5 |
+
+
+## Oct 24 Horned C3 / anomaly max-cut: new physical priority and evidence
+
+**Full source note:** [`Docs/physics/MMPAlexanderHornedC3HelicityPhysicalBidi20261024.md`](MMPAlexanderHornedC3HelicityPhysicalBidi20261024.md). Reuse PR #1244 horned exact finite / three-arm geometry, PR #1235 Hopf, PR #1239 braid/Pin/KK, PR #1215 C3 curvature rather than duplicating. They remain sibling branches and cannot be assumed compiled here.
+
+### Where horns genuinely matter
+
+- Alexander duality on *any* embedded S²⊂S³, even wild, gives two acyclic complementary regions: H1=0, H2=0, H²(Z)=0. This fails the ordinary U1 first-Chern-class flux consumer of spatial R×S² (H₂=Z). **Horned wild complement alone cannot be substituted for magnetically charged MMP throat.**
+- Its nontrivial perfect pi1 and PR #1244 finite A5³⋊C3 actor create an **optional non-Abelian holonomy / curved Dirac boundary-spectrum** target. Actual geometric collar/pi1 theorem, an SO3-to-spin/SU2 lift and smooth self-adjoint spectral limit are separate, still open. No physical stress from A5 representation alone.
+- Three ordinary 3D balls do not manufacture nontrivial Maxwell monopole charge. The 2D punctured braid, pointed base marker, Pin reflection and true S² flux are NOT identical. Constrained actual magnetic tubes/knotted field lines may introduce helicity, which deserves different physical scrutiny from horn topology.
+
+### The high-value P4 route that can actually source fermion response
+
+An analytic 3D periodic Beltrami model with three independently driven solenoidal field modes has exact
+`H=k Vol Σ_i f_i²`, `∫E·B= -(1/2)dH/dt`. For one massless Dirac species (closed volume/no boundary axial flow),
+`dQ5/dt = e²/(2pi²)∫E·B`, whence
+`d/dt[Q5 + e² H/(4pi²)]=0`.
+This is the established ABJ anomaly and Maxwell helicity evolution, **not** new exotic energy production.
+
+- **Negative control:** equal balanced 120° C3 phase rotation `f_i=a cos(ωt+2πi/3)` conserves total H and has zero *integrated* E·B. Rotation alone is NOT a net chiral pump.
+- **Constructive but limited response:** slowly or rapidly modulating envelope `u(t)` gives `∫E·B = -(3/2)k Vol uu'`, potentially source-driving chirality and a time-dependent quantum state.
+- **Adversarial NEC discriminator:** under one elementary *flat 1+1D continuum chemical-potential approximation* for free Dirac species, the chiral excitation contribution to energy is positive `Δρ=q μ5²/(2pi)` and adds positive `Δ(ρ+p_r)=q μ5²/pi`, weakening rather than improving the negative-NS-vacuum NEC. Threshold `μ5 L=pi/sqrt(3)` is formally algebraic but **not valid as an exact discrete finite-size circle transition**. These modes do not prove a positive or negative net 4D curved-space stress.
+- Therefore P4 next step = actual localized 3D plasma Maxwell/MHD response → physical E·B and relative helicity including boundary terms → an **in-in fermion state** → full renormalized stress *change*, not generic rotational-field energy or axial charge alone.
+
+### P0 promotion (executed locally, narrower than full exact-head receipt)
+
+- Added standalone, relative-path-independent `scripts/check_mmp_global_effective_bvp_replay_20261024.py` to PR #1248. Its independently equivalent local executable reproduced q=10,11,12,13,24 two-mouth **effective** geometries and RN Israel no-shell K mismatch within numerical tolerance; q12 R≈11.683162, M≈5.997338, radial ANEC≈-0.000511162. This no longer depends on the separate chat ZIP to replay the numerical BVP at current PR source.
+- Added `scripts/check_horned_vs_mmp_magnetic_topology_20261024.py` to check finite Alexander-duality bookkeeping and a concrete A5 perfect/C3 actor (the underlying topology theorem is externally sourced, not established by Python).
+- Added `scripts/check_three_drives_helicity_axial_anomaly_20261024.py` for symbolic balanced-null/envelope-source helicity/anomaly identities.
+- Added `scripts/check_fermion_axial_pump_nec_budget_20261024.py` for deliberately adversarial sign analysis in the restricted 1+1D free continuum Fock-state model.
+
+**All four corresponding local model checks ran and passed on 2026-10-24.** Actual GitHub exact-head execution / Agda/Lean kernel status is NOT established. Full P0 source/code provenance, mode truncation grid and physical scaling verification remain open. P1 global renormalized state is still the major mathematical bottleneck.
+
+### Updated decisions
+
+1. **Keep P1 global same-state 4D renormalization the primary mathematical critical path.** Do not attempt wild horn geometry before this.
+2. **Use exact pressure-zero no-Israel-shell geometry as a P2 numerical preconditioner**, never as proof that a fermion state vanishes naturally at junction.
+3. **Advance P4 through helicity/ABJ with a sign-adversarial renormalized null-stress test**, not directly through horn topology or a rotating-disk substitution.
+4. **Put horned wild C3 into P6 optional, with a narrow trigger:** physical non-Abelian connection on sourced geometry, actual spin/Dirac bundle, regulator/spectral convergence and a computed stress or transmission difference. Otherwise record the proven no-flux relevance boundary and avoid further expansion.
+5. **Preserve attribution:** Alexander 1924/Hatcher; MMP 2018/2023; Adler/Bell-Jackiw 1969; prior MathWorld/Alexander-duality and MHD helicity theory; original JMD/GF content separately. Code-written/locally run ≠ Agda kernel-certified or real apparatus.
+
+### New focused acceptance
+
+```sh
+python3 scripts/check_mmp_global_effective_bvp_replay_20261024.py
+python3 scripts/check_horned_vs_mmp_magnetic_topology_20261024.py
+python3 scripts/check_three_drives_helicity_axial_anomaly_20261024.py
+python3 scripts/check_fermion_axial_pump_nec_budget_20261024.py
+```
