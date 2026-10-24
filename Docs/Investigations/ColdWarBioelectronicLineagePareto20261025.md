@@ -83,3 +83,48 @@ The repository's Ibrahim policy is **coverage/frontier ownership**: quotient dup
 - Heat recovery, magnetocaloric refrigeration and industrial environmental mitigation remain useful engineering applications, **not evidence** for a state-directed manipulation mechanism.
 
 **Next high-value result requires original raw waveform/exposure/citation/contract object**, not an ever-larger genealogy narrative. The strongest positive historical payments and strongest original negative experimental controls are now in the same source ledger.
+
+
+## Multi-branch return-to-origin correction: completed humans, instrument nulls, masking and genuine human rights evidence
+
+The original @itsgingertheory/Benn Jordan investigation contains **four distinct data objects**: industrial sound at a receptor; physiological or epidemiological human endpoints; RF-specific biological effects; documentary/intelligence operations. A source payment in one does not automatically satisfy the others. Industrial caloric systems are an independent fifth *mitigation/energy* consumer.
+
+### More 1964–1969 primary-object evidence (rechecked against actual 11-page 1969 scan)
+
+| Date / first root | Activity class | Exactly what occurred or was recorded | Do not infer |
+| --- | --- | --- | --- |
+| 24 June 1964, **Jerome Wiesner to Clark Clifford**, `Bugging of the U.S. Embassy, Moscow`, https://nsarchive.gwu.edu/document/28785-document-1-white-house-jerome-wiesner-report-clark-clifford-bugging-us-embassy | **Security findings + countermeasure proposals** | Embassy listening devices had been discovered; White House technical adviser recommended inspecting walls and acoustically injecting **masking sounds into walls**, as well as electromagnetic-reflection shielding/monitors. The separate Soviet microwave beam's purpose remained uncertain. | Masking sound was deployed, a specific frequency was used, it was a public-space sonic attack, or acoustic masking was the intended effect of the external RF beam |
+| 9 Dec 1965 **State Department cable**, `Moscow Viral Study`, https://nsarchive.gwu.edu/document/28788-document-4-department-state-medical-office-cable-medical-services-moscow-viral-study | **Planned deceptive human sample recruitment** | Viral monitoring was a medical *cover explanation* for blood sampling from embassy personnel/family intended for microwave-exposure investigations. Record is a real ethical concern. | A diagnosis, causal effect, or deliberately irradiated human trial |
+| 27 Jan 1966 **State Medical Office contract memorandum**, `Request for Contract — George Washington University`, https://nsarchive.gwu.edu/document/28789-document-5-department-state-medical-office-memorandum-request-contract-george | **Named lab/contract and data-analysis plan** | Dr Cecil Jacobson's GWU cytogenetic laboratory offered an 11-month contract to code/evaluate human blood; contemplated later animal confirmation. | That all later experiments were conducted or biomarker results prove an RF disease |
+| 21 Apr 1969 **PANDORA meeting**, summary issued 16 May, https://nsarchive.gwu.edu/document/28794-document-10-arpa-meeting-summaryminutes-summary-pandora-meeting-attached-detailed; original scan https://nsarchive.gwu.edu/sites/default/files/documents/rhwvuj-tzy4b/10.pdf | **HUMAN OBSERVATIONAL STUDIES ACTUALLY DONE**, separately from future active RF trials | `Big Boy`: USS *Saratoga* crew comparisons and radar-field measurements, no significant differences on psychology, leukocyte/genetic or physical measures; exposures below prior assumptions. `Moscow Viral Study`: minutes describe **140 coded blood specimens** examined over 4 years, **four reported serious chromosomal abnormalities**, challenged by another specialist as methodologically questionable. | A causal chromosomal effect, a successful mind-control mechanism, or universal harm under all RF conditions |
+| Same April 1969 minutes | **Future deliberate-human-exposure plan**, not performed under this record | Four-person/small-group long-duration exposure with sham, blinding and protection protocols discussed, possible recruitment from Fort Detrick. The panel still described evidence as insufficient. | Conducted controlled human RF irradiation or sham success |
+
+**Why this matters:** previous drafts tended to write “PANDORA human experimentation proposed.” That is true about a future deliberate-exposure trial but incomplete about already executed **covert human blood collection and occupational observational testing**. Conversely, “secret human testing existed” cannot be repurposed as proof of a controlled experiment or of human injury from the tested signal.
+
+The PANDORA/BIZARRE participant- and contractor-specific source graph is now:
+`1964 embassy listening devices → 1964 masking/shielding recommendation`,
+`1965 TUMS/PANDORA concerns → 1965 State sampling cover → 1966 GWU cytogenetic contract → 1969 reported 140 human sample result`,
+`1969 ARPA Big Boy executed radar-worker observational study → documented null comparator`,
+`1965–69 PANDORA/BIZARRE primate intervention → 1967 low-level negative result → 1969 RAND methods critique`,
+and separately `1969 proposed induced human RF trials → implementation OPEN`.
+
+These arrows are *documented date/administrative/source* relationships, not a single tested physiological mechanism or contemporary commercial installation.
+
+### Competing same-site hypotheses are part of the steelman, not a distraction
+
+Contemporaneous documents entertained several explanations for the Soviet Moscow microwave beam: biological disruption, **activation/interrogation of implanted listening devices**, and interference with communications. Wiesner's wall-sound recommendation was a U.S. **countermeasure** to the independently observed hidden listening devices. The technical experiment to prioritize is therefore not simply positive/negative behavioural impact: original calibrated transmitted spectrum/receiver and **bug-coupling apparatus** would also distinguish signal intent. Signal intent itself is not directly readable from a radiated waveform.
+
+The legitimate Frey microwave-auditory mechanism is a third distinguishable experimental branch: pulsed RF can produce perceived sounds under specific fields; it does not make a 20–250 Hz airborne compressor spectrum the same exposure.
+
+### Ibrahim/pareto return: measured, administered and inferred objects
+
+**High-value payment already achieved**: original 1964 memo, two State Department sample/contract roots, 1969 actual *Saratoga* assessment, primary positive and negative primate memos, RAND negative experimental review and future protocol minutes. These substantially close historical *existence/roles/ethical concerns* while leaving biological efficacy and any modern device chain open.
+
+**Updated frontier:**
+- **First:** CIA 13 September 1967 `Summary of TUMS Power Density Measurements`, matched AF Avionics Laboratory 15 August 1967 calibration note, original RF field-instrument response and the ARPA 1966/67 `Initial Test Results` documents. This is the single highest-fanout common source for the original perceived positive result and corrected null level.
+- **Next:** original GWU Jacobson cytogenetics tables and Dr Bender/Oak Ridge criticism, plus Dr Joseph Kubis's complete *Saratoga* Big Boy report. These can distinguish exploratory biomarker flags from actual abnormalities and complete the performed-human-study evidence chain.
+- **Next:** ARPA Plan 562/Order 757, Walter Reed/Electrophysiology lab and PANDORA contractor apparatus records; Frey 1962 citation in actual contractor bibliography; MKULTRA 119 original CIA accession and survey bibliography.
+- **If disclosed:** authenticated later RF device/hardware procurement and independent measurement; specific incident same-place exposure logs with third-party validation. Newspaper citations and 2026 political recall statements do not by themselves pay an acquisition or a biological effect.
+- **In parallel:** Benn Jordan original data/field calibrations and acoustic controls, the studies @itsgingertheory *actually displays*, and adequately controlled primary RF-BBB biology; only these address the current environmental-health allegations. They are not downstream of a Cold War archive citation.
+
+**Snowball stopping condition:** no more article or book accumulation if the last novel source object only repeats PANDORA. Advance by recovering original methods, timing, instruments, calibration and whether experiments *actually happened*. Keep independently useful heat/cooling mitigation work with the general thermodynamic and MAGNOTHERM owners, not this historical lineage.
