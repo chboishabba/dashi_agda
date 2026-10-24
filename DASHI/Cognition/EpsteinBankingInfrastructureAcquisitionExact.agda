@@ -258,3 +258,49 @@ chainReactionNoAutoBlackLedgerJoin = refl
 chainReactionNoGlobalProgrammeTransfer :
   aquinoSCLOrMaxwellPROMISSharedOperationPaid canonicalChainReactionPromotionBoundary ≡ false
 chainReactionNoGlobalProgrammeTransfer = refl
+
+
+------------------------------------------------------------------------
+-- MARCH 18 2026 WYDEN/BLANCHE ORIGINAL LETTER: FOLLOW-UP IS ONE SENATE
+-- INQUIRY ROOT, NOT INDEPENDENT EVIDENCE OF INTERFERENCE OR PROSECUTION.
+------------------------------------------------------------------------
+
+chainReactionWydenMarch18 : ChainReactionSourceReceipt
+chainReactionWydenMarch18 = chain-reaction-source-receipt
+  laterSenateInquiryInterpretation
+  "https://www.finance.senate.gov/ranking-members-news/wyden-sounds-alarm-as-dag-blanche-intervenes-to-conceal-details-of-mystery-epstein-investigation"
+  "2026-03-18" "2026-03-18"
+  "Wyden says his office received a confidential tip that DEA was ready to disclose a fuller OCDETF memo and that Deputy AG Blanche intervened. This proves the senator made the assertion and correspondence was sent, NOT that intervention or unlawful withholding was independently authenticated."
+  true true false
+
+record ChainReactionOversightAttributionCut : Set where
+  constructor chain-reaction-oversight-attribution-cut
+  field
+    february2026SenateInquiryPublished : Bool
+    march2026FollowupOriginalLetterPublished : Bool
+    marchClaimReliedOnConfidentialTip : Bool
+    februaryAndMarchAreSeparateInvestigatorRoots : Bool
+    independentDEAInternalInterventionInstructionInspected : Bool
+    actualCourtFindingOfObstruction : Bool
+    originalOperationFinalDispositionVerified : Bool
+    originalRedactedMemoIsFinishedCriminalFinding : Bool
+open ChainReactionOversightAttributionCut public
+
+canonicalChainReactionOversightAttributionCut : ChainReactionOversightAttributionCut
+canonicalChainReactionOversightAttributionCut =
+  chain-reaction-oversight-attribution-cut true true true false false false false false
+
+marchAllegationIsNotAuthenticatedIntervention :
+  independentDEAInternalInterventionInstructionInspected
+    canonicalChainReactionOversightAttributionCut ≡ false
+marchAllegationIsNotAuthenticatedIntervention = refl
+
+wydenFollowupsDoNotCreateIndependentSecondSource :
+  februaryAndMarchAreSeparateInvestigatorRoots
+    canonicalChainReactionOversightAttributionCut ≡ false
+wydenFollowupsDoNotCreateIndependentSecondSource = refl
+
+ocdetfOutcomeNotProvenBySenateComplaint :
+  originalOperationFinalDispositionVerified
+    canonicalChainReactionOversightAttributionCut ≡ false
+ocdetfOutcomeNotProvenBySenateComplaint = refl
