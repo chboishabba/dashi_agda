@@ -203,3 +203,28 @@ reefReleaseNotMinistryEditorialControl = refl
 riddDistributionNotCoordinatedCommand :
   A.provesHiddenCoordination A.mooreAmplifiedRiddReefClaim ≡ false
 riddDistributionNotCoordinatedCommand = refl
+
+
+outsidersLloydRiddSameProgrammeIsPublished :
+  A.kind A.skyOutsidersLloydRiddSameProgramme ≡ A.editorialPublication
+outsidersLloydRiddSameProgrammeIsPublished = refl
+
+ipaOwnTranscriptIsDerivativePublication :
+  A.kind A.ipaHostsBOMOutsidersTranscript ≡ A.traceableClaimAmplification
+ipaOwnTranscriptIsDerivativePublication = refl
+
+riddFellowshipIsNamedInstitutionalRelation :
+  A.kind A.ipaRiddResearchFellowship ≡ A.professionalAffiliation
+riddFellowshipIsNamedInstitutionalRelation = refl
+
+historicHancockIPAIsNotCurrentEarmarkedPayment :
+  A.kind A.hancockToIPAHistoricalFunding ≡ A.historicalInstitutionalFunding
+historicHancockIPAIsNotCurrentEarmarkedPayment = refl
+
+historicalIPAReceiptNotEditorialOrder :
+  A.provesEditorialControl A.hancockToIPAHistoricalFunding ≡ false
+historicalIPAReceiptNotEditorialOrder = refl
+
+publishedBOMInterviewNotSecretCommand :
+  A.provesHiddenCoordination A.skyOutsidersLloydRiddSameProgramme ≡ false
+publishedBOMInterviewNotSecretCommand = refl
