@@ -1,4 +1,8 @@
-# Cold War psychotronics transmission — max-cut research deliverable
+# Cold War psychotronics transmission — source audit retained
+
+**Superseded as a priority plan by [the full critical literature review](psychotronics-literature-review-20261024.md) and [32-record source corpus](psychotronics-literature-corpus-20261024.csv).** The source graph remains an evidentiary supplement; documentary lineage is a component of the review, not its sole purpose.
+
+**Source owner now 16 historical instances, including six review-specific references with reported counter-literature; prior ten-source graph/links unchanged.**
 
 **Current as of 24 October 2026.** This is a consumer-specific Pareto / snowball / Ibrahim graph over the **existing** DASHI research infrastructure. Historical-source owner: `DASHI/Cognition/PsychotronicsColdWarTransmissionParetoExact.agda`. Parent [psychotronics Pareto](psychotronics-pareto-current.md). Prior [attribution investigation](psychotronics-succor-punch-attribution-20261024.md).
 
