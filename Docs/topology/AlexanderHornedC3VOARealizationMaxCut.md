@@ -735,3 +735,211 @@ python3 -m unittest discover -s tests -p 'test_alexander_horned_c3_a5_order_sele
 
 No merge, CI, Agda, Lean, actual geometric collar proof, or
 physical neutrino/VOA equivalence is asserted from this update.
+
+## 2026-10-24 max-cut: POSITIVE infinite-image SU(3) action on the abstract horned group
+
+### Why the earlier finite A5 no-go does not block SU(3)
+
+This is a materially stronger step than another analogy.
+Sibling neutrino/CP PR **#1247** had the exact
+**A5^3 finite quotient** fifth-power no-go: the selected
+horn image `q(m)` has order 5, whereas selected CP
+`A=T S1` has `A^5≠I`. This is a **factorization**
+obstruction through that PARTICULAR finite actor—not an
+obstruction to representations of the original infinite
+horned direct-limit group.
+
+Original first-hand Lie theorem:
+**Morikuni Gotô**, "*A Theorem on compact semi-simple groups*,"
+*Journal of the Mathematical Society of Japan*
+**1**(3) 270–272 (1949),
+https://doi.org/10.2969/jmsj/00130270 .
+His original theorem says that **each element of a
+connected compact semisimple group** is a commutator.
+`SU(3)` is such a group.
+
+Original topological algebra:
+**Allen Hatcher**, *Algebraic Topology*,
+Example 2B.2 pp.170–172,
+https://pi.math.cornell.edu/~hatcher/AT/AT.pdf .
+The Hatcher binary free-group tower has
+`F_n=Free({0,1}^n)` and injective substitutions
+
+```
+phi_n(x_w) = [x_w0, x_w1],
+G_A = colim_n(F_n,phi_n).
+```
+
+### An explicit finite-dimensional Gotô factorization
+
+For ANY `A∈SU(3)`, take a unitary spectral
+diagonalization `A=V diag(λ0,λ1,λ2) V†`, with
+`λ0 λ1 λ2=1`. Let the cyclic permutation
+matrix `P e_j=e_(j+1 mod 3)` (`det(P)=1`).
+Set diagonal factors
+
+```
+d0=1; d1=1/λ1; d2=λ0.
+D=det(diag(d0,d1,d2))^(-1/3) diag(d0,d1,d2).
+```
+
+The common unit complex cube-root scale makes
+`D∈SU(3)` without changing the commutator.
+Then
+
+```
+[P,D]=P D P^-1 D^-1
+      =diag(d2/d0,d0/d1,d1/d2)
+      =diag(λ0,λ1,λ2).
+X=V P V†, Y=V D V†; X,Y∈SU(3);
+[X,Y]=A.
+```
+
+This elementary matrix specialization is a constructive
+proof of the SU(3) case of Gotô's classical general
+theorem, not a newly discovered theorem credited to DASHI.
+Repeated spectral factorizations need not be unique or
+continuous as functions of `A`; **no such continuity**
+is required for an abstract discrete group homomorphism.
+
+### All-stage compatible horned representation
+
+For **arbitrary chosen root** `A∈SU(3)`, recursively set
+`A_empty=A` and choose the pair from the commutator
+factorization `A_w=[A_w0,A_w1]`.
+At stage `n`, the generator assignment
+`x_w↦A_w` extends uniquely to `rho_n:F_n→SU(3)`.
+By construction,
+`rho_(n+1)∘phi_n=rho_n`. The **universal property**
+of the group colimit gives
+
+```
+rho_A : G_A -> SU(3)
+rho_A(m_empty) = A.
+```
+
+**This answers the former infinite-image existence
+obligation affirmatively for the abstract group.**
+If `A` has infinite order then `rho_A(G_A)`
+is infinite. The group `G_A` is perfect, and a
+homomorphic image of a perfect group is perfect.
+Thus a nontrivial image is necessarily **nonabelian**;
+there is no conflict with the obstruction
+`Hom(G_A,U(1))=1`.
+
+### Three-sector C3 equivariance, on the SAME target space
+
+For the new DASHI three-copy model
+`G=G_A*G_A*G_A`, with cyclic factor rotation `r`,
+take the existing charged-lepton phase generator
+`T=diag(1,ζ,ζ²)∈SU(3)`, `T³=I`.
+Define on free factor `j∈{0,1,2}`
+
+```
+rho_j(g) = T^j rho_A(g) T^{-j}.
+```
+
+The free-product universal property supplies one
+representation `rho:G→SU(3)` and immediately gives
+`rho(r(g))=T rho(g) T^{-1}`.
+Consequently the **semidirect extension**
+`K=G⋊_r C3` has an ordinary homomorphism
+
+```
+R(g,j) = rho(g) T^j ∈ SU(3).
+```
+
+The target uses ONE specified 3D complex Hilbert space.
+In particular `R(r)=T`, `R(m_(0,empty))=A`.
+If `A=TS1` from PR #1247, its finite-group
+Galois-trace obstruction already proves infinite
+order, hence `R(K)` is an **infinite nonabelian**
+SU(3) subgroup. Note `T^{-1}A=S1`;
+the subgroup also contains both original residual
+generators T and S1. This is a genuine abstract
+equivariant **existence construction**, not merely
+matching representation dimensions.
+
+### Exact mathematical source and numerical receipts
+
+New source-written owner:
+`DASHI/Mathematics/Topology/AlexanderHornedC3CompactCommutatorRepresentationExact.agda`.
+
+It **reuses** the actual native `HornAddress`,
+`expandWord`, `rotateWord` and C3 type, accepts
+the Gotô commutator section and automorphism as
+explicit structure, recursively defines a value at
+each horn, and proves:
+
+- each address equals its two-children commutator;
+- every source-word horn refinement preserves target value;
+- every source-word C3 rotation corresponds to target twist;
+- zero new postulates and no imaginary SU(3) group kernel.
+
+The analytic instantiation (Gotô theorem / explicit
+spectral diagonalization) and the infinite colimit's
+universal property are **mathematical source inputs**,
+not falsely claimed as Agda kernel results.
+
+New real-matrix executable:
+`scripts/alexander_horned_c3_su3_constructive_probe.py`.
+Independent local Python/NumPy/SciPy calculation on the
+actual selected CP-nonzero neutrino `TS1`:
+
+```
+SU(3) initial unitary defect: 3.18e-16
+five binary refinements: 31 parent equations, 32 leaves
+worst commutator defect: 4.99e-15
+worst determinant defect: 2.56e-15
+worst unitarity defect: 4.60e-15
+three C3 arms: worst commutator defect < 4.8e-15
+||A^5-I|| ≈ 1.98957907 (not a fifth root of identity)
+```
+
+An **independent extended 8-level** calculation
+checked 255 parent commutator equations, 256 leaves
+with worst commutator defect `7.84e-15`.
+These are finite *numerical* residuals, not
+an infinite-tree kernel or exact SU(3) spectral proof.
+The exact Q(ζ3) determinant/unitality of the selected
+target was separately verified in Python **Fractions**
+and source-written in sibling PR #1247.
+
+### The decisive anti-overpromotion insight
+
+Since this theorem works for **EVERY A∈SU(3)**,
+the mere existence of a horned-group-to-SU(3)
+representation has **zero discriminating power**
+for a proposed PMNS phase. There is no source-side
+criterion selecting the phase `δ=120°`, the angle
+triplet or the physical lepton mass operator.
+The choices at each commutator split are enormous.
+Hence an *actual* claimed geometric/QFT identification
+must add strong constraints such as canonical geometric
+holonomy, finite-energy/smoothness, compatible
+charged-current and mass terms, same-object
+operator intertwining, or predictive restrictions
+which distinguish measured flavour parameters.
+
+**Most important no-go corrected:** the old roadmap
+entry "construct any infinite-image equivariant
+horned `G→SU(3)` representation" is PAID in ordinary
+mathematics for the **abstract direct-limit group**.
+The open problem is a **physically selected / geometrically
+grounded** representation, not its abstract existence.
+
+### Acceptance and remaining certification
+
+```sh
+python3 scripts/alexander_horned_c3_su3_constructive_probe.py
+agda -i . DASHI/Mathematics/Topology/AlexanderHornedC3CompactCommutatorRepresentationExact.agda
+```
+
+New source file and probe have GitHub source read-back
+but no exact-head Agda or committed-script runtime
+receipt at this point. The independently locally
+executed matching numerical construction did pass.
+Wild three-copy geometric π₁, a continuous flat
+SU(3) local system on that specific manifold, a
+physical lepton/VOA same-object map and neutrino
+likelihood fits are still independent obligations.
