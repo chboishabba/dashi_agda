@@ -256,3 +256,53 @@ def test_source_bounded_narrative_strata_are_separate():
         "caseStrataDoNotPromoteProgramme = refl",
     ):
         assert token in source
+
+
+def test_page_inspected_primary_source_cuts_have_explicit_bounded_propositions():
+    source = OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    for token in (
+        'sclCALicensingOralEvidence : CaseClaim',
+        'delaware2013FTCEntityFinding : CaseClaim',
+        'caVersusCIAWitnessClarification : CaseClaim',
+        'bannonScheduledBreakfast2019 : CaseClaim',
+        'epsteinEstateScheduleRoot : OriginRoot',
+        'https://committees.parliament.uk/oralevidence/7803/html/ ; Q1273',
+        'https://www.ftc.gov/system/files/documents/cases/d09389_comm_final_opinionpublic.pdf',
+        'https://oversightdemocrats.house.gov/imo/media/doc/epstein-production-3rd-tranch_456.pdf',
+        'Q1458-Q1459',
+        'oralLicensingSource = bounded-source',
+        'ftcDelawareEntitySource = bounded-source',
+        'estateBannonScheduleSource = bounded-source',
+        'observedScheduleOutcome = listedOnly',
+        'listedAppointmentNotConfirmedMeeting = refl',
+        'correctedAcronymIsCA = refl',
+        'correctedAcronymIsNotCIA ()',
+        'wylieOralOrigin :',
+        'wylieWrittenOrigin :',
+        'differentDescriptionsRequireOriginalAgreements ()',
+        'descriptionsDoNotResolveContractIdentity ()',
+    ):
+        assert token in source
+    for key in (
+        '### Acquired primary-source cut',
+        'December 2013',
+        'PDF page 2 (index 1)',
+        'Q1458–1459',
+        'FTC decision followed CA\'s default',
+        'H3 (specified coordinated',
+    ):
+        assert key in roadmap
+
+
+def test_wylie_repeat_evidence_and_schedule_never_pay_hidden_network():
+    source = OWNER.read_text()
+    # Multiple statements with the same origin root do not create independent witnesses.
+    assert 'bounded-source sclCALicensingOralEvidence wylieRoot' in source
+    assert 'bounded-source caVersusCIAWitnessClarification wylieRoot' in source
+    assert 'wylieWrittenOrigin :\n    SourceStatementOrigin wylieWritten2018 wylieRoot' in source
+    assert 'wylieOralOrigin :\n    SourceStatementOrigin wylieOral2018 wylieRoot' in source
+    assert 'true false false false' in source
+    assert 'caseWholeH2Unpaid = refl' in source
+    assert 'caseCovertH3Unpaid = refl' in source
+    assert 'listedAppointmentNotConfirmedMeeting = refl' in source
