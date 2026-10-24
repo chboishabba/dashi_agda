@@ -8,7 +8,7 @@ module DASHI.Foundations.BaseTwelveCircleRepresentationBoundaryExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _*_)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -41,6 +41,22 @@ baseTwelveHalf = fraction 6 12
 
 sameHalfAcrossRadices : baseTenHalf ≈ baseTwelveHalf
 sameHalfAcrossRadices = refl
+
+
+-- A radix label matters when *parsing* text.  A written "0.5" in base
+-- twelve denotes 5/12, not the decimal half.  The screenshot does not
+-- specify whether its .5*sqrt(2) annotation is decimal or dozenal.
+baseTwelveDotFive : RationalMeasurement
+baseTwelveDotFive = fraction 5 12
+
+samePrintedDotFiveHasDifferentValue :
+  baseTenHalf ≈ baseTwelveDotFive → ⊥
+samePrintedDotFiveHasDifferentValue ()
+
+-- The printed integer 12 is fourteen in positional base twelve;
+-- the *observed number of sides* cannot be inferred from a numeral token.
+twoDigitTwelveInRadixTwelve : 1 * 12 + 2 ≡ 14
+twoDigitTwelveInRadixTwelve = refl
 
 -- 0.4 in base twelve is 4/12 = 1/3.
 baseTwelveThird : RationalMeasurement
@@ -96,6 +112,17 @@ twelveSidePerimeterSquaredIs72 :
   perimeterSquaredConditional twelveEqualHalfRootTwoSides
     ≈ fraction 72 1
 twelveSidePerimeterSquaredIs72 = refl
+
+
+-- If instead the ".5" coefficient is interpreted in base twelve,
+-- s = (5/12)*sqrt(2) and s² = 25/72.  For twelve equal sides, P² = 50.
+twelveDozenalDotFiveSides : EqualSideSquareDatum
+twelveDozenalDotFiveSides = equalSideSquareDatum 12 25 72
+
+twelveDozenalDotFivePerimeterSquaredIs50 :
+  perimeterSquaredConditional twelveDozenalDotFiveSides
+    ≈ fraction 50 1
+twelveDozenalDotFivePerimeterSquaredIs50 = refl
 
 -- The p13 unit-group C12 in the repository, the 12-phase circle grid,
 -- and base-12 positional numerals are not identified without a map
