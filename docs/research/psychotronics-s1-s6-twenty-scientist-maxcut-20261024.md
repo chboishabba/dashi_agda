@@ -1,5 +1,9 @@
 # PR #1242 max-cut: S1 field/force metrology, S6 observability, and complete 20-fibre donor audit
 
+**Input contract update:** submission-to-review now also demands `polarity_factorial_verified` and `ambient_field_reference_verified` metadata booleans. Like all declared control flags, these are **not proof** of control execution. The S1 script's local self-test separately calls the original `psychotronics_field_loom_coils.loop_b` for a 1 mm centered finite-difference independent consistency comparison with the analytic axial gradient. The illustrative JSON below deliberately omits the new flags, so it remains `unverified` rather than silently implying actual measurements.
+
+
+
 **24 October 2026 · source-typed, implementation-backed revision.** Engineering analysis and synthetic tests, **no hardware**, no new gravity result, no independent scientific replication, no Agda/CI. Entry points: [force/metrology analyser](../../scripts/psychotronics_field_loom_metrology.py), [two-coil observability analyser](../../scripts/psychotronics_field_loom_observability.py), existing [coil Biot–Savart simulator](../../scripts/psychotronics_field_loom_coils.py) and [existing exact-rank owner](../../scripts/psychotronics_design_rank_audit.py).
 
 ## Hard S1 gain: field is not force; motion is not antigravity
