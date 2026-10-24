@@ -43,6 +43,7 @@ def budget(u):
     omega={k:I*vec(k).cross(v) for k,v in u.items()}
     bt=defaultdict(lambda:S.Integer(0))
     rt=defaultdict(lambda:S.Integer(0))
+    rcorrections=defaultdict(lambda:[S.Integer(0)]*4)
     corrections=defaultdict(lambda:[S.Integer(0)]*4)
     total=energy=transport=stretch=S.Integer(0)
     for k in {add(p,q) for p in u for q in u}:
@@ -74,7 +75,8 @@ def budget(u):
             pair=-I*vec(q).dot(up)*u[q]
             cell=S.simplify(2*S.re(conjdot(uk,pair))*norm2(k))
             bt[bony(p,q)]+=cell
-            rt[r236(p,q)]+=cell
+            region=r236(p,q)
+            rt[region]+=cell
             advCell=-I*vec(q).dot(up)*omega[q]
             stretchCell=I*vec(q).dot(omega[p])*u[q]
             Tcell=2*S.re(conjdot(wk,advCell))
@@ -84,17 +86,24 @@ def budget(u):
             corrections[tag]=[
                 corrections[tag][i]+value for i,value
                 in enumerate((cell,Tcell,Scell,delta))]
+            rcorrections[region]=[
+                rcorrections[region][i]+value for i,value
+                in enumerate((cell,Tcell,Scell,delta))]
     assert S.simplify(energy)==S.simplify(transport)==0
     assert S.simplify(total-stretch)==0
     assert S.simplify(sum(bt.values())-total)==0
     assert S.simplify(sum(rt.values())-total)==0
     assert S.simplify(sum(v[3] for v in corrections.values()))==0
+    # Each R236 region is closed under (p,q) <-> (q,p). The
+    # pairwise curl defect therefore cancels INSIDE each region.
+    assert all(S.simplify(v[3])==0 for v in rcorrections.values())
     assert S.simplify(sum(v[1] for v in corrections.values()))==0
     return {"production":S.simplify(total),"stretch":S.simplify(stretch),
             "transport":S.simplify(transport),"energy":S.simplify(energy),
             "bony":{k:S.simplify(v) for k,v in bt.items()},
             "r236":{k:S.simplify(v) for k,v in rt.items()},
-            "class_correction":{k:tuple(map(S.simplify,v)) for k,v in corrections.items()}}
+            "class_correction":{k:tuple(map(S.simplify,v)) for k,v in corrections.items()},
+            "region_correction":{k:tuple(map(S.simplify,v)) for k,v in rcorrections.items()}}
 
 def field(p,q):
     """Transverse six-mode rational/integer-coefficient calibration."""
@@ -106,3 +115,20 @@ def field(p,q):
     result={p:basis(p),q:basis(q),k:I*basis(k)}
     result.update({neg(m):S.conjugate(v) for m,v in list(result.items())})
     return result
+
+def ordered_curl_residual(p,q,up,uq):
+    """Polynomial ordered curl defect, with common Fourier phases factored."""
+    return vec(q).dot(up)*vec(p).cross(uq) + vec(q).dot(vec(p).cross(up))*uq
+
+def symbolic_swapped_curl_defect_certificate():
+    """Universal polynomial certificate over a commutative scalar ring.
+
+    By substitution this also holds over the repo's Complex3 scalar
+    carrier, but this Python test is NOT an Agda kernel transport term.
+    """
+    p=S.symbols("p0:3");q=S.symbols("q0:3")
+    up=S.symbols("u0:3");uq=S.symbols("v0:3")
+    p,q,up,uq=map(vec,(p,q,up,uq))
+    left=ordered_curl_residual(p,q,up,uq)+ordered_curl_residual(q,p,uq,up)
+    right=vec(p).dot(up)*vec(q).cross(uq)+vec(q).dot(uq)*vec(p).cross(up)
+    return all(S.expand(x)==0 for x in left-right)
