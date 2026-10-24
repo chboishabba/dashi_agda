@@ -156,7 +156,7 @@ SU3Elements Matrix Complex theory = SUN.SUNMatrixElement theory
 
 -- A Gotô-section package over the current SU3 matrix subtype.
 record SU3GotoInput (Matrix Complex : Set)
-    (theory : SUN.CertifiedSUNMatrixTheory 3 Matrix Complex) : Set₁ where
+    (theory : SUN.CertifiedSUNMatrixTheory 3 Matrix Complex) : Set₂ where
   field
     commutatorSection :
       GotôGroupSection (SUN.SUNMatrixElement theory)
