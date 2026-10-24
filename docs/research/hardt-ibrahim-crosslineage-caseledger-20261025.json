@@ -1,0 +1,342 @@
+{
+  "schema": "dashi.hardt_ibrahim_case_source_genealogy.v1",
+  "date": "2026-10-25",
+  "owner_pr": 1252,
+  "authority_rule": "Original speaker, original document, republisher, bibliography, instrument measurement and independent event witness are separate. First-party publication of extraordinary testimony does not validate its subject matter. Source/citation graph is case-specific; abstract owner DASHI.Wikimedia.IbrahimSnowballInvestigativeClaimSourceLineageBidiExact.",
+  "claims": [
+    {
+      "id": "H_GENERAL",
+      "label": "High waking delta purportedly influences people/events",
+      "proof_status": "Hardt-authored uncorroborated assertion",
+      "first_unpaid": "Hardt's cited unpublished manuscript plus any independently registered prospective intervention trials"
+    },
+    {
+      "id": "H_ASSASSINATION",
+      "label": "Unspecified psychic assassination anecdote / allegedly 80 percent",
+      "proof_status": "Hardt-attributed self-report via interviews/reel; witness, events and independent denominator unavailable",
+      "first_unpaid": "Original named event and attempt-level records, independent first-person witnesses and prespecified outcome counts"
+    },
+    {
+      "id": "H_ALPHA_80",
+      "label": "About 80 percent of Biocybernaut trainees strongest EEG alpha occipitally",
+      "proof_status": "Hardt's reported in-house observation; methodology/sample unavailable here",
+      "first_unpaid": "Original sample protocol/data if investigated"
+    },
+    {
+      "id": "C_GENTRY",
+      "label": "Gentry-to-Croft Mobius coil written instruction and alleged Flanagan prior source",
+      "proof_status": "Croft-authored testimony only",
+      "first_unpaid": "Gentry-authored original dated sketch/correspondence or Flanagan original instructions"
+    },
+    {
+      "id": "R_FIELD_TABLE",
+      "label": "2013 and 2024 Rodin coil experimental current/field tables",
+      "proof_status": "Three published rounded pairs identical; raw-measurement independence unresolved",
+      "first_unpaid": "2024 authors' original table-data source notes, 2013-2024 calibration/date/coil/session identifier"
+    },
+    {
+      "id": "H_PHASE_TORUS",
+      "label": "EEG alpha/theta torus in phase space and alleged visible halo",
+      "proof_status": "Hardt-authored metaphysical interpretation; physical toroidal field and visual perception not measured by 2017 article",
+      "first_unpaid": "Specify physically recorded vector field/optical light instead of phase-space geometric metaphor"
+    }
+  ],
+  "sources": [
+    {
+      "id": "H17_JOURNAL",
+      "author_root": "James V. Hardt",
+      "carrier": "EC Psychology and Psychiatry 5.1 original publisher PDF",
+      "date": "2017-08-24",
+      "url": "https://ecronicon.net/assets/ecpp/pdf/ECPP-05-00148.pdf",
+      "inspection": "original_pdf_text_and_pages_1_6_visually_inspected",
+      "type": "opinion_not_original_remote_trial",
+      "claims": [
+        "H_GENERAL",
+        "H_ALPHA_80",
+        "H_PHASE_TORUS"
+      ],
+      "original_author": "James V. Hardt",
+      "publication_authority": "original-publisher article",
+      "limits": "Includes named ref 10 manuscript but not manuscript body, measured distant field, witness or prospective outcome; p16 alpha 80 percent differs from alleged assassination rate"
+    },
+    {
+      "id": "H17_BLOG",
+      "author_root": "James V. Hardt",
+      "carrier": "Biocybernaut author-site textual counterpart",
+      "date": "online by 2017",
+      "url": "https://biocybernaut.com/blog/your-wealth-and-brain-waves/",
+      "inspection": "original_site_body_inspected",
+      "type": "same_author_text_carrier",
+      "claims": [
+        "H_GENERAL",
+        "H_ALPHA_80",
+        "H_PHASE_TORUS"
+      ],
+      "original_author": "James V. Hardt",
+      "publication_authority": "first-party blog",
+      "limits": "Says manuscript is unpublished; independent experiment not supplied; same author/reproduced article not replication"
+    },
+    {
+      "id": "H_MANUSCRIPT",
+      "author_root": "James V. Hardt",
+      "carrier": "cited manuscript How High Delta people can influence other people and the world around them",
+      "date": "not established; cited 2017",
+      "url": "https://ecronicon.net/assets/ecpp/pdf/ECPP-05-00148.pdf",
+      "inspection": "bibliography_reference_only_no_manuscript",
+      "type": "identified_not_acquired",
+      "claims": [
+        "H_GENERAL"
+      ],
+      "original_author": "James V. Hardt",
+      "publication_authority": "journal bibliography locator, NOT manuscript",
+      "limits": "Precise referenced title is not the content of the manuscript; no methods or results inspected"
+    },
+    {
+      "id": "H96_EEG",
+      "author_root": "James V. Hardt",
+      "carrier": "An Example of the Kundalini Experience Viewed Through Multi-Channel EEG conference proceedings reference",
+      "date": "1996",
+      "url": "https://ecronicon.net/assets/ecpp/pdf/ECPP-05-00148.pdf",
+      "inspection": "bibliography_reference_only",
+      "type": "separate_neurophenomenological_claim",
+      "claims": [],
+      "original_author": "James V. Hardt",
+      "publication_authority": "2017 author's citation of earlier conference abstract",
+      "limits": "EEG phenomenology not an independent remote influence trial"
+    },
+    {
+      "id": "H20_PODCAST",
+      "author_root": "James V. Hardt",
+      "carrier": "Derek Loudermilk interview/host page",
+      "date": "2020-12-24",
+      "url": "https://derekloudermilk.com/james-hardt/",
+      "inspection": "host_original_episode_page_inspected_audio_not_replayed",
+      "type": "interview_by_same_subject_with_independent_host",
+      "claims": [
+        "H_ASSASSINATION"
+      ],
+      "original_author": "Derek Loudermilk (host/publisher); James V. Hardt (speaker)",
+      "publication_authority": "original episode landing page",
+      "limits": "Host advertises remote-assassination topic; authorial identity of the claim remains Hardt, no independent witness or experiment"
+    },
+    {
+      "id": "H26_REEL",
+      "author_root": "James V. Hardt",
+      "carrier": "BioCybernaut creator Instagram reel and user-provided screenshots/SRT",
+      "date": "publisher post time unverified; acquired 2026-10-24",
+      "url": "https://www.instagram.com/reel/DchjvH2B98C/",
+      "inspection": "user_supplied_image_and_transcript_claim",
+      "type": "first_party_published_speaker_allegation",
+      "claims": [
+        "H_ASSASSINATION"
+      ],
+      "original_author": "James V. Hardt speaker; BioCybernaut creator publisher",
+      "publication_authority": "creator social post",
+      "limits": "100 persons in narrated group is not 100 independent attempts; 80 percent denominator, deaths and witnesses unavailable"
+    },
+    {
+      "id": "C02_ORIGINAL_TEXT",
+      "author_root": "Don Croft",
+      "carrier": "Croft-authored Succor Punch Dec 9 2002 internal byline preserved by later host",
+      "date": "2002-12-09_internal_byline_not_original_host_timestamp",
+      "url": "https://docsbay.net/doc/1283478/livea-cherish-s-ruminations-and-is-my-cb-working-advice-7-20-02",
+      "inspection": "later_hosted_original_author_text_inspected",
+      "type": "first_party_testimony_in_derivative_carrier",
+      "claims": [
+        "C_GENTRY"
+      ],
+      "original_author": "Don Croft",
+      "publication_authority": "later-hosted Croft-authored body",
+      "limits": "Page route misleadingly says 7-20-02; claims Gentry written instruction and Flanagan source, not their original documents"
+    },
+    {
+      "id": "C_ARCHIVE",
+      "author_root": "Don Croft",
+      "carrier": "Croft Zappers preservation of Don Croft archives",
+      "date": "later archival reproduction undated specific response",
+      "url": "https://www.croftzappers.com/the-don-croft-archives",
+      "inspection": "archived_first_person_account",
+      "type": "same_actor_republication",
+      "claims": [
+        "C_GENTRY"
+      ],
+      "original_author": "Don Croft; later archive custodian Croft Zappers",
+      "publication_authority": "archive hosting",
+      "limits": "Not independent Flanagan/Gentry confirmation; adjacent Feb 2008 date must not be attached to undated answer"
+    },
+    {
+      "id": "C_GENTRY_ORIGINAL",
+      "author_root": "Gentry Smith",
+      "carrier": "claimed original Mobius coil instructions",
+      "date": "alleged late 1999",
+      "url": "",
+      "inspection": "not_located",
+      "type": "missing_first_party_object",
+      "claims": [
+        "C_GENTRY"
+      ],
+      "original_author": "Gentry Smith (attributed by Croft; original unverified)",
+      "publication_authority": "none",
+      "limits": "No first-party original coil instructions; no attribution or physical performance established"
+    },
+    {
+      "id": "R13",
+      "author_root": "Pérez et al. Universidad de Guanajuato team",
+      "carrier": "Portable device for magnetic stimulation, Review of Scientific Instruments 84 094701, Table I",
+      "date": "2013",
+      "url": "https://doi.org/10.1063/1.4819796",
+      "inspection": "original_article_table_read_via_author_reproduced_copy",
+      "type": "published_field_measurement",
+      "claims": [
+        "R_FIELD_TABLE"
+      ],
+      "original_author": "Pérez et al. (2013)",
+      "publication_authority": "journal paper",
+      "limits": "Three rounded experimental pairs; no same-coil join to later paper demonstrated"
+    },
+    {
+      "id": "R24",
+      "author_root": "Ramírez-Galindo et al. Universidad de Guanajuato team",
+      "carrier": "Vortex magnetic induction, Rev Mex Fis 70 030901, Table II",
+      "date": "2024 issue, online 2025 date",
+      "url": "https://doi.org/10.31349/RevMexFis.70.030901",
+      "inspection": "original_journal_html_and_pdf_table_checked",
+      "type": "published_field_measurement_and_model",
+      "claims": [
+        "R_FIELD_TABLE"
+      ],
+      "original_author": "Ramírez-Galindo, Pérez-Olivas, Basurto-Islas, Hernández-Rayas, González López, Cordova-Fraga",
+      "publication_authority": "journal original",
+      "limits": "Three reported pairs match 2013 to two decimals; not proof of duplicated raw logs, misconduct or independent field replication"
+    },
+    {
+      "id": "WBS99",
+      "author_root": "Wilbert Brockhouse Smith attribution",
+      "carrier": "NEN 1999 Smith Coil article about caduceus ferrite winding",
+      "date": "1999",
+      "url": "https://padrak.com/ine/NEN_6_8_8.html",
+      "inspection": "republished_original_newsletter_text",
+      "type": "false_person_identity_negative_control",
+      "claims": [],
+      "original_author": "Planetary Association for Clean Energy / New Energy News; attributed W. B. Smith",
+      "publication_authority": "newsletter reproduction",
+      "limits": "Wilbert Brockhouse Smith not Gentry Smith; no historical handoff supported"
+    },
+    {
+      "id": "NOBEL26",
+      "author_root": "Nobel Assembly at Karolinska Institutet",
+      "carrier": "2026 prize original institutional announcement",
+      "date": "2026-10-05",
+      "url": "https://news.ki.se/the-nobel-prize-to-the-pioneers-of-optogenetics-peter-hegemann-georg-nagel-and-karl-deisseroth",
+      "inspection": "original_institutional_release",
+      "type": "original_public_recognition_not_original_2003_2005_experiment",
+      "claims": [],
+      "original_author": "Nobel Assembly / Karolinska Institutet",
+      "publication_authority": "institutional announcement",
+      "limits": "Original Nobel attribution doesn't create an unaided distant human neural channel"
+    }
+  ],
+  "edges": [
+    {
+      "from": "H17_JOURNAL",
+      "to": "H17_BLOG",
+      "relation": "same_authored_article_representation",
+      "state": "confirmed_common_source_text",
+      "claim": "H_GENERAL"
+    },
+    {
+      "from": "H17_JOURNAL",
+      "to": "H_MANUSCRIPT",
+      "relation": "reference_10_bibliographic_citation",
+      "state": "named_but_original_manuscript_uninspected",
+      "claim": "H_GENERAL"
+    },
+    {
+      "from": "H17_JOURNAL",
+      "to": "H96_EEG",
+      "relation": "reference_11_different_earlier_work",
+      "state": "bibliographic_only",
+      "claim": "H_GENERAL"
+    },
+    {
+      "from": "H20_PODCAST",
+      "to": "H26_REEL",
+      "relation": "same_speaker_recounts_related_phenomenon",
+      "state": "claim_overlap_not_identical_carrier_or_independent_witness",
+      "claim": "H_ASSASSINATION"
+    },
+    {
+      "from": "C02_ORIGINAL_TEXT",
+      "to": "C_ARCHIVE",
+      "relation": "single_Croft_actor_multiple_archival_carriers",
+      "state": "same_witness_not_independent_event_confirmation",
+      "claim": "C_GENTRY"
+    },
+    {
+      "from": "C02_ORIGINAL_TEXT",
+      "to": "C_GENTRY_ORIGINAL",
+      "relation": "Croft_reports_Gentry_wrote_instructions",
+      "state": "unverified_handoff_first_person_original_missing",
+      "claim": "C_GENTRY"
+    },
+    {
+      "from": "R13",
+      "to": "R24",
+      "relation": "three_exact_published_rounded_current_field_matches",
+      "state": "published_table_concordance_raw_measurement_independence_unresolved",
+      "claim": "R_FIELD_TABLE"
+    }
+  ],
+  "concordance": [
+    {
+      "current_a": "1.60",
+      "b2013_mt": "4.13",
+      "b2024_mt": "4.13",
+      "raw_trace_same_proved": false
+    },
+    {
+      "current_a": "1.25",
+      "b2013_mt": "3.05",
+      "b2024_mt": "3.05",
+      "raw_trace_same_proved": false
+    },
+    {
+      "current_a": "0.60",
+      "b2013_mt": "1.16",
+      "b2024_mt": "1.16",
+      "raw_trace_same_proved": false
+    }
+  ],
+  "explicit_nonjoins": [
+    {
+      "lhs": "H_ALPHA_80",
+      "rhs": "H_ASSASSINATION",
+      "reason": "2017 alpha occipital prevalence and alleged remote outcome share numerical 80 but not estimand, cohort or experiment"
+    },
+    {
+      "lhs": "H_PHASE_TORUS",
+      "rhs": "H_ASSASSINATION",
+      "reason": "phase-space attractor is not measured external electromagnetic torus or a target-specific channel"
+    },
+    {
+      "lhs": "C_GENTRY",
+      "rhs": "H_ASSASSINATION",
+      "reason": "coil genealogy and Hardt speaker anecdote lack original same-actor/same-device/same-transaction join"
+    },
+    {
+      "lhs": "R_FIELD_TABLE",
+      "rhs": "H_ASSASSINATION",
+      "reason": "applied-current classical millitesla fields in Rodin apparatus are not measured unaided neural output"
+    },
+    {
+      "lhs": "WBS99",
+      "rhs": "C_GENTRY",
+      "reason": "Wilbert Brockhouse Smith and Gentry Smith are different identity referents"
+    },
+    {
+      "lhs": "NOBEL26",
+      "rhs": "H_ASSASSINATION",
+      "reason": "optogenetic real physically illuminated neural control cannot prove unassisted remote lethal influence"
+    }
+  ]
+}
