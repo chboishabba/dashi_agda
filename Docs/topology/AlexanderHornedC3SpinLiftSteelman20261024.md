@@ -236,3 +236,89 @@ for the full global class.
 
 Source-written ≠ kernel-checked ≠ geometric proof
 ≠ experimental physical finding.
+
+
+## 6. New physical selection rule: fixed-axis zero, free-orbit rank two
+
+Let S=U(-q) be the genuine SU2 order-three lift. Its exact
+characteristic polynomial is
+
+   det(tI-S)=t^2+t+1,
+   tr(S)=-1, det(S)=1, det(S-I)=3.
+
+Consequently S has NO +1 eigenvector in characteristic
+zero. If x lies on the rotation-fixed diagonal axis,
+then an invariant field Tpsi=psi must obey Spsi(x)=psi(x),
+forcing psi(x)=0. This selection rule holds at ANY fixed
+point of the geometric C3 action on an invariant open E.
+Whether the intended wild exterior contains a specific
+fixed point remains a geometry/address question; for a
+compact R-invariant embedded ball its exterior contains
+all sufficiently distant fixed-axis points.
+
+For a THREE-POINT FREE spatial orbit, the spinor
+module dimension is 3*2=6 over C. The operator T acts
+by rotating slots while applying S to each spinor.
+Its invariant sector has complex dimension 2. The
+existing finite C3 Fourier-operator machinery yields
+
+    P0=(I+T+T^2)/3;
+    P0^2=P0,  T P0=P0,  rank(P0)=2.
+
+If D commutes with T, D also commutes with P0; this
+is a physically meaningful symmetry-sector
+decomposition on its test-function domain, not
+a proof of discrete eigenvalues or spectral gap.
+
+NEW exact regression:
+  scripts/alexander_horned_c3_spin_fixed_axis_padic_probe.py
+Independent local checks PASSED tr=-1, det=1,
+det(S-I)=3, T^3=1, idempotence/rank of P0
+in the exact Gaussian-rational 6x6 representation.
+
+Repo donor owners:
+  Moonshine/C3FourierConjugationExact.agda,
+  Moonshine/C3CyclotomicRealDescentExact.agda,
+  Moonshine/Monster3BFiniteSchrodingerCoordinateProjectorExact.agda.
+These show the known C3 character formulas and the
+cyclotomic conjugate-pair boundary. The NEW free
+Dirac spinor operator is NOT the already selected
+Monster-3B Schroedinger/VOA action: no same-object
+intertwiner is asserted by sharing projector algebra.
+
+### p=3 residue pitfall — invariants can APPEAR modulo 3
+
+The two-dimensional cyclotomic block has rational
+companion matrix C=[[0,-1],[1,-1]], C^3=I.
+Over Q and Q3, its characteristic polynomial
+t^2+t+1 has no root t=1; the invariant dimension
+is ZERO. Over F3, the polynomial becomes
+(t-1)^2; C mod 3 is a nontrivial unipotent
+order-three matrix with a ONE-dimensional
+fixed-vector space.
+
+This is genuine characteristic-3 failure of
+semisimplicity and of naive invariants-after-
+reduction. The averaging projector (I+T+T²)/3
+is not defined over F3, precisely where
+Maschke's theorem does not apply. Source:
+J. Milne, *Group Theory*, Maschke theorem
+(https://www.jmilne.org/math/CourseNotes/GT.pdf).
+Do not promote this mod-3 fixed vector to a
+characteristic-zero spinor state, a physical
+zero mode or a Monster three-phase eigenstate.
+
+### Same dimension is not same carrier
+
+The PREVIOUS '360-coordinate spin-refined finite
+VOA' means Fun(C3 x 2I,K), a commutative
+coordinate algebra of 360 coordinates.
+
+The NEW '180 spatial slots x 2 complex spinor
+components' also has dimension 360 over C,
+but is a module of spinor-valued states over
+Fun(C3 x A5,K), not the same 360-coordinate
+VOA. A group-equivariant linear intertwiner
+and vertex-module structure would be necessary
+to identify the two constructions; none is
+assumed merely from their equal dimensions.
