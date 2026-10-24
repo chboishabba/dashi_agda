@@ -66,13 +66,17 @@ def check(q: int) -> dict:
                 source_vs_geometric_abs_err=source_error,
                 exterior_status='two mouth local interior ends at RN junction; does not identify same-universe one end')
 
+def must(condition: bool, why: str):
+    if not condition:
+        raise RuntimeError(why)
+
 def main():
     results=[check(q) for q in (10,12,24)]
     print(json.dumps(results,indent=2))
-    assert max(v['geometric_identity_abs_err'] for v in results)<4e-6
-    assert max(v['radial_constraint_max'] for v in results)<4e-6, 'Existing BVP radial constraint fails along path'
-    assert max(v['einstein_null_mismatch_max'] for v in results)<4e-6
-    assert max(v['source_vs_geometric_abs_err'] for v in results)<4e-6
+    must(max(v['geometric_identity_abs_err'] for v in results)<4e-6, 'Geometric integrated null identity failed')
+    must(max(v['radial_constraint_max'] for v in results)<4e-6, 'Existing BVP radial constraint fails along path')
+    must(max(v['einstein_null_mismatch_max'] for v in results)<4e-6, 'Effective Einstein radial null mismatch')
+    must(max(v['source_vs_geometric_abs_err'] for v in results)<4e-6, 'Source and geometry budgets disagree')
     # Prove exact algebra behind the numerical radial-null validator, not just
     # a pointwise floating-point coincidence. The on-shell constraint controls
     # the difference of source-side and geometry-side Einstein k.k.
@@ -85,10 +89,10 @@ def main():
     tkk=(c*Fp/(12*sp.pi)+4*t/(N*N))/(4*sp.pi*r*r)
     pres=-c*F*F/(24*sp.pi)+2*t/(N*N)-U
     constraint=v*v-1+2*r*v*F+Q*Q/(r*r)-2*pres
-    assert sp.cancel(gkk-8*sp.pi*tkk-constraint/(r*r))==0
+    must(sp.cancel(gkk-8*sp.pi*tkk-constraint/(r*r))==0, 'Exact symbolic C/r² identity failed')
     # Wrongly omitting a supplied matter current/stress source must FAIL.
     shifted_source=results[1]['einstein_source_budget']+0.025
-    assert abs(shifted_source-results[1]['finite_segment_boundary'])>0.02
+    must(abs(shifted_source-results[1]['finite_segment_boundary'])>0.02, 'A deliberately wrong effective source was not rejected')
     print('PASS: canonical effective BVP radial constraint and independent geometric/source null budget; NOT 4D Hadamard gravity')
 
 if __name__ == '__main__':
