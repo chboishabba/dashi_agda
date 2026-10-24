@@ -50,6 +50,40 @@ johnstonBizarre = Source.mkNoDOISource
   "One early animal behavioural claim at excessive initial signal estimate; follow-up at corrected dose negative; independent verification called for. Opinion about modulation is not a human mechanism proof"
   Source.publicAttribution
 
+
+stateViralStudy1965 : Source.AttributedSource
+stateViralStudy1965 = Source.mkNoDOISource
+  "US Department of State, Medical Office"
+  "Medical Services: Moscow Viral Study"
+  "Secret cable 1965-12-09, National Security Archive item 28788"
+  "1965"
+  "https://nsarchive.gwu.edu/document/28788-document-4-department-state-medical-office-cable-medical-services-moscow-viral-study"
+  Source.archivalSource
+  "A misleading viral-study cover was proposed to obtain Moscow embassy employee/dependant blood for RF biological investigation; cable alone is not a clinical result"
+  Source.publicAttribution
+
+georgeWashington1966 : Source.AttributedSource
+georgeWashington1966 = Source.mkNoDOISource
+  "US Department of State, Medical Office"
+  "Request for Contract - George Washington University"
+  "1966-01-27, National Security Archive item 28789; Dr Cecil Jacobson, Human Cytogenetics Research Laboratory"
+  "1966"
+  "https://nsarchive.gwu.edu/document/28789-document-5-department-state-medical-office-memorandum-request-contract-george"
+  Source.archivalSource
+  "Describes an 11-month cytogenetic assay and classification of Moscow embassy blood samples, including separately planned animal confirmation; not a demonstrated radiation-health cause"
+  Source.publicAttribution
+
+pandoraApril1969 : Source.AttributedSource
+pandoraApril1969 = Source.mkNoDOISource
+  "ARPA PANDORA Science Advisory Committee; Lysle Peterson, Chair"
+  "Summary and Detailed Minutes of 21 April 1969"
+  "Meeting 1969-04-21, summary 1969-05-16; National Security Archive item 28794"
+  "1969"
+  "https://nsarchive.gwu.edu/document/28794-document-10-arpa-meeting-summaryminutes-summary-pandora-meeting-attached-detailed"
+  Source.archivalSource
+  "Executed Big Boy shipboard radar-exposure comparison: no significant group differences; GWU blood project reported 140 samples and four disputed chromosomal anomalies; further deliberate human irradiation remained prospective"
+  Source.publicAttribution
+
 pandoraHumanMinutes : Source.AttributedSource
 pandoraHumanMinutes = Source.mkNoDOISource
   "ARPA PANDORA Science Advisory Committee"
@@ -109,7 +143,8 @@ sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Cold War bioelectronic research and contemporary AHI original-object lineage"
   "DASHI.Governance.PandoraBizarreRFHistoricalEvidenceExact"
-  (mk119Memo ∷ cesaroPandora ∷ johnstonBizarre ∷ pandoraHumanMinutes ∷
+  (mk119Memo ∷ cesaroPandora ∷ johnstonBizarre ∷ stateViralStudy1965 ∷
+   georgeWashington1966 ∷ pandoraApril1969 ∷ pandoraHumanMinutes ∷
    koslovRand ∷ odniExperts ∷ odni2025 ∷ recall2026 ∷ [])
   "Bounded original-document roots, no fabricated modern source-to-device bridge"
 
@@ -128,6 +163,8 @@ data ProgrammeObject : Set where
   arpaPandora : ProgrammeObject
   arpaBizarre : ProgrammeObject
   modernAnomalousHealthInquiry : ProgrammeObject
+  stateMoscowViralStudy : ProgrammeObject
+  navyBigBoy : ProgrammeObject
 
 data ProgrammeTopic : Set where bioelectronicsAndEffects : ProgrammeTopic
 
@@ -148,6 +185,10 @@ data LinkKind : Set where
   proposalOnly : LinkKind
   thematicNeighborOnly : LinkKind
   deploymentNotPaid : LinkKind
+  documentedCoverStory : LinkKind
+  fundedHumanObservation : LinkKind
+  completedOccupationalComparison : LinkKind
+  noControlledHumanIrradiationInThisRecord : LinkKind
 
 record BoundedLineageEdge : Set where
   constructor boundedLineageEdge
@@ -184,6 +225,44 @@ modernDeviceNotPaid = boundedLineageEdge
   arpaBizarre modernAnomalousHealthInquiry deploymentNotPaid odni2025
   "A 2025 public analytic judgement considered possible foreign RF capability"
   "No verified declassified chain from 1960s apparatus to AHI device or contemporary commercial infrastructure"
+
+
+moscowCoverStory : BoundedLineageEdge
+moscowCoverStory = boundedLineageEdge
+  arpaPandora stateMoscowViralStudy documentedCoverStory stateViralStudy1965
+  "US State Department staff used the Moscow Viral Study medical explanation to arrange observational blood collection"
+  "Deceptive recruitment and biomarker analysis do not establish deliberate irradiation of participants or disease causation"
+
+moscowCytogeneticContract : BoundedLineageEdge
+moscowCytogeneticContract = boundedLineageEdge
+  arpaPandora stateMoscowViralStudy fundedHumanObservation georgeWashington1966
+  "Named 1966 11-month GWU laboratory assay contract and follow-on research; 1969 minutes subsequently report 140 examined blood samples"
+  "Four reportedly abnormal chromosomes in historical minutes lack accepted causal identification"
+
+navyBigBoyPerformed : BoundedLineageEdge
+navyBigBoyPerformed = boundedLineageEdge
+  arpaPandora navyBigBoy completedOccupationalComparison pandoraApril1969
+  "USS Saratoga crew had actual psychological, physical, leucocyte and radar survey tests; no significant differences found"
+  "Measured radar dose lower than predicted; negative study is not an absolute no-effect theorem"
+
+humanExposurePlanNotExecutedByTheseMinutes : BoundedLineageEdge
+humanExposurePlanNotExecutedByTheseMinutes = boundedLineageEdge
+  arpaPandora arpaPandora noControlledHumanIrradiationInThisRecord pandoraApril1969
+  "A future specially irradiated human group and blind controls were proposed in the 1969 minutes"
+  "The record of proposed protocols is not a performed deliberate human exposure experiment"
+
+data HumanStudyKind : Set where
+  executedAmbientExposureObservation : HumanStudyKind
+  executedBiologicalSampling : HumanStudyKind
+  proposedControlledIrradiation : HumanStudyKind
+
+sampledHumansAreNotProvenExperimentallyIrradiated :
+  executedBiologicalSampling ≡ proposedControlledIrradiation → ⊥
+sampledHumansAreNotProvenExperimentallyIrradiated ()
+
+observedOccupationalExposureIsNotDeliberatelyAppliedProtocol :
+  executedAmbientExposureObservation ≡ proposedControlledIrradiation → ⊥
+observedOccupationalExposureIsNotDeliberatelyAppliedProtocol ()
 
 -- Acoustic pressure oscillations, low-frequency modulation of microwave RF,
 -- and EEG/biopotential measurements are separately typed observables.
