@@ -138,6 +138,26 @@ assert equivalence[SN]==QN
 for a in SL:
     for b in SL:assert equivalence[s_mul(a,b)]==qm(equivalence[a],equivalence[b])
 
+# Genuine GALOIS/field descent, different from a mere dimension count:
+# F49/F7 is quadratic and Frobenius takes sqrt(5) to -sqrt(5).
+# The two 2D spin characters of 2I are Galois conjugates; an order-5
+# element has trace outside F7. Restriction of scalars produces the
+# four-dimensional F7 module, with character trace Tr_F49/F7.
+def frobenius(x):return E(x[0],-x[1])
+for a in product(range(7),repeat=2):
+    assert ep(a,7)==frobenius(a)
+galois_trace_witness=None
+for g in icosians:
+    mat=embed(g)
+    trace49=ea(mat[0],mat[3])
+    trace4=sum(restrict(mat)[i][i] for i in range(4))%P
+    assert trace4==(trace49[0]+frobenius(trace49)[0])%P
+    if g!=QI and qp(g,5)==QI and trace49!=frobenius(trace49):
+        galois_trace_witness=trace49
+assert galois_trace_witness is not None
+print("PASS Frobenius-paired 2D spin characters over F49; nontrivial order-5 trace",
+      galois_trace_witness)
+
 # Minimality: a nontrivial 2I representation in characteristic 7
 # has degree >=4, since order-5 elements generate ALL 120 source elements
 # yet no GL_d(F7), d <=3, contains 5-torsion.
