@@ -38,8 +38,8 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectR44020261007
 --
 --    defect_N = sum_Noncore (|p|^2+|q|^2-2) -> +infinity,
 --
--- while the literal Core-Core Young companion freezes at 10123708
--- for N>=5. In particular, defect_16=17577776.
+-- while the literal Core-Core Young companion freezes at 1345859672
+-- for N>=9. In particular, defect_40=1671172320.
 --
 -- Hence the proposed defect <= theta*M_core + c*localED CANNOT be cutoff
 -- uniform IF localED is a genuine bounded physical quantity on this
