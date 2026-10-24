@@ -322,3 +322,66 @@ VOA. A group-equivariant linear intertwiner
 and vertex-module structure would be necessary
 to identify the two constructions; none is
 assumed merely from their equal dimensions.
+
+
+## 7. Concrete SAME 180-address scalar VOA / spinor MODULE
+
+The earlier finite scalar vertex algebra owner has
+  V_Q = Fun(Omega,Q), Omega=C3_ext x A5,
+  dim_Q(V_Q)=180,
+with its pointwise weight-zero vacuum/mode product.
+
+Do not mutate this algebra into a spinor-valued VOA.
+Instead use the genuine left quaternion representation
+on the MODULE
+  M_Q=Fun(Omega,H_Q),
+  dim_Q(M_Q)=180*4=720.
+
+H_Q has an optional *right* Q(i)-module structure
+(compatible with left quaternion spin multiplication),
+so this is equivalently 360 dimensions over Q(i)
+after that right-complex structure is selected.
+This is NOT the 360-SITE scalar algebra
+  Fun(C3 x 2I,Q),
+which came from doubling the A5 charge coordinate.
+Even when dimensions coincide over particular fields,
+the carriers/actions/vertex structures differ.
+
+For actor (a,k) in A5^3 semidirect C3, let
+coordinateAction(a,k,x) be the PREEXISTING actual
+finite actor and r=-q be our coherent quaternion
+spin generator of order 3. Define RIGHT pullbacks
+
+  U_V(a,k)f(x)=f(coordinateAction(a,k,x));
+  U_M(a,k)psi(x)=r^k psi(coordinateAction(a,k,x)).
+
+Then exact centrality of rational scalars gives
+  U_M(g)[f*psi] = [U_V(g)f] * [U_M(g)psi],
+and the semidirect factor-law and r^3=1 give
+a genuine right action on the same X.
+
+For the known commutative trivial vertex-mode algebra,
+the only nonzero field mode is n=-1, whose action
+on M is precisely pointwise multiplication.
+Thus this is an algebraically legitimate MODULE
+consumer, not a newly claimed Monster VOA module.
+
+The path-selected rotor q instead gives a
+C6 action on M while preserving the C3 projection
+on V: three turns are minus identity on spinors,
+and identity on scalar vertex states.
+
+Exact source-target finite regression:
+  scripts/alexander_horned_c3_spin_voa_module_probe.py
+Independently executed locally:
+* all 180 slots, 18 sampled A5^3 rtimes C3 actors;
+* all 18x18 actor pair compositions x 180 slots;
+* module covariance with the pointwise vertex mode;
+* coherent third power +1, path third power -1.
+
+The infinite analytic Dirac field construction and
+this finite 180-slot VOA-module construction are
+SEPARATE consumers of the same SU2 spin rotor.
+There is no canonical identification of their
+state spaces, no new full VOA/Jacobi kernel certificate,
+and no Monster 3B recognition result.
