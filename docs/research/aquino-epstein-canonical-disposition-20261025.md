@@ -53,3 +53,24 @@
 - FTC 2019 final order: https://search.ftc.gov/system/files/documents/cases/d09389_comm_final_orderpublic.pdf
 - UK DCMS AIQ/Ripon: https://publications.parliament.uk/pa/cm201719/cmselect/cmcumeds/1791/179107.htm
 - Original Black/financial analyses and distinct legal dockets: see existing `docs/research/aquino-epstein-surrounding-prior-art-audit-20261024.md`.
+
+
+## 25 October certification repair tranche — exact local helper execution
+
+**Concrete repairs landed in this child PR:** the historical `tests/test_hash_media_receipt.py` originally contained **five literal escaped newlines** between `assert` statements instead of Python newline statement separators; these were corrected in-place, preserving its intended assertion values. Separately, six stale test expectations in `tests/test_aquino_maxwell_epstein_ca_maxcut.py` were aligned with the **already existing canonical source** (DOJ image custody exactness, denial of CA corporate privity, `bannonWorkProductCut` owner, actual filmed interview, dated June/July shoot messages and third-party timecoded ASR index). These are **11 individual assertion/syntax repairs**, not new claims.
+
+**Actual executable verification available in this turn:** exact GitHub files were copied into a scratch checkout-independent directory; each local `git hash-object` equalled the GitHub blob SHA of the current head file:
+
+| Path | Git blob SHA |
+|---|---|
+| `scripts/hash_media_receipt.py` | `169fb2a979ee00f85b60603752e531e922ab8d17` |
+| `tests/test_hash_media_receipt.py` | `a6d1a6b6fc62d89b10a65b56e6c84560168ae422` |
+| `docs/research/bannon-epstein-video-manifest-20261024.json` | `ceb66e08d9fd756ca5aea6a69cd2f008bb9dd6a1` |
+
+Environment: **Python 3.13.5, pytest 9.0.2**. Exact `pytest -q tests/test_hash_media_receipt.py` run **PASSED 4/4** (most recent observed run: **3.33 s**). This exercises only the optional local receipt helper and its manifest; it does **not** require or validate the DOJ video bytes.
+
+**Connector-side structural audits (not executable certification):** 53 case tests were inspected for direct source assertions and all **614** audited literal requirements were present after the six test corrections; all **22** qualified Agda module imports in the case owner were fetched in batches and **221** qualified uses in their actual imported source had matching textual declarations. These scans do not cover all Python runtime branches, module type signatures, import cycles, Agda implicit inference, source-truth status or kernel verification.
+
+**Still not claimed:** `pytest tests/test_aquino_maxwell_epstein_ca_maxcut.py` could not run without a full checkout of the parent and child files; the native `agda` executable was not installed, and direct git remote access failed due unresolved github.com hostname. The current GitHub PR may report mergeable, but no Actions pytest/typecheck workflow run was observed. **Keep draft until full-case pytest and actual Agda compiler closure are green.**
+
+**Proof of work vs historical facts:** executing these tests checks source integrity and a synthetic helper, not the substantive accuracy of regulatory findings or the H2/H3 claim. Do not misclassify the source-written `Bool`/`refl` guards as empirical observations or mathematical theorems.
