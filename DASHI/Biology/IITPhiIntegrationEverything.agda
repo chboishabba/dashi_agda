@@ -23,6 +23,8 @@ import DASHI.Biology.IITJFineSelectedCrossPunctured79Exact
 import DASHI.Biology.IITProjectiveF9Pointed80Exact
 import DASHI.Biology.IITField81Inverse79ContractExact
 import DASHI.Biology.IITF81F9NormInverseBridgeExact
+import DASHI.Biology.IITF81F9ConcreteQuarticTowerExact
+import DASHI.Biology.IITProjectiveF9Punctured80ConcreteExact
 import DASHI.Biology.IITXORGridFibreCircuitBridgeExact
 import DASHI.Biology.IITXORGridSynthesisFabricExact
 import DASHI.Biology.IITXORGridOrientationLiftExact
