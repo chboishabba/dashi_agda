@@ -41,8 +41,6 @@ def test_finite_order_proof_reuses_original_generic_owner():
         "absentUptakeFailsStipulatedAdmission",
     ]:
         assert term in text
-    for pair in itertools.permutations(["C", "E", "G"], 2):
-        pass
     pairs = list(itertools.permutations(["C", "E", "G"], 2))
     unordered = {frozenset(pair) for pair in pairs}
     assert len(pairs) == 6
