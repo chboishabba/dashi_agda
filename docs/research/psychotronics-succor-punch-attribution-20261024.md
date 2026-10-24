@@ -1,5 +1,8 @@
 # Succor Punch / psychotronics source genealogy — bounded max-cut
 
+**New 25 October Phase-1 Ibrahim source join:** Don Croft directly credits learning Welz's orgonite metal/resin idea through an online customer about a year and a half after summer 1997, and separately says **Gentry Smith taught him a Mobius winding in late 1999**, attributing the antecedent to **Patrick Flanagan**. Croft reports a meeting with Welz in March 2003 but it is not independently corroborated. Full attributed later-preserved personal response in [Croft archive](https://www.croftzappers.com/the-don-croft-archives); source date for this specific response unverified. **Claimed technical chain, not established exact-material design patent or physical phenomenon**. This pays a major source genealogy gap without requiring same-device footage or bench measurements. Phase-1 [review/roadmap](psychotronics-phase1-literature-ibrahim-pareto-20261025.md) / [22-source matrix](psychotronics-phase1-literature-landscape-20261025.csv) / [28-edge lineage](psychotronics-phase1-lineage-edges-20261025.csv) now supersede older counts.
+
+
 ## Phase 1 scope correction — source genealogy wins over physical acquisition
 
 Following the explicit user decision, **literature survey / landscape / Pareto / snowball / Ibrahim** is the Phase 1 target. Historical work in this append-only file is retained; earlier task ranks asking for native reels, exact SKU or measurements are **superseded** by [the literature-first research programme](psychotronics-phase1-literature-ibrahim-pareto-20261025.md) and its [curated sources](psychotronics-phase1-literature-landscape-20261025.csv) / [claim-specific edges](psychotronics-phase1-lineage-edges-20261025.csv). No additional instrument work required.
