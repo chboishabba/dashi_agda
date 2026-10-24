@@ -1,3 +1,56 @@
+# 2026-10-24 GOAL-1 PHASE GATE — C/D released theorem, A/B independent research
+
+**Read this before the A/B frontier entries below.** Primary external
+source: OpenAI, "On the Navier-Stokes Millennium Prize Problem",
+2026-09-08, https://openai.com/index/navier-stokes-solution/ and
+https://github.com/openai/NavierStokesAndEuler (released Lean code).
+OpenAI explicitly reports a forced whole-space blowup (Clay C) and a
+forced periodic blowup (Clay D) for every positive viscosity.
+Attribute the original construction and Lean certificate to OpenAI;
+DASHI's source-coordinate audits and independent-specification bridges
+are derivative verification/integration contributions, not independent
+discovery of the released blowup.
+
+**Milestone distinction:**
+- M0 official C/D source statement and coordinates: **DONE in the
+  existing source audit** (`NSClayFacingCDMaxCut20261002Exact`,
+  `NSClayFacingCDReleasedAuditFrontier20261007Exact`).
+- M1 released Lean theorem/artifact available: **DONE upstream**;
+  the upstream README exposes both C/D and build instructions.
+  Independent exact-head build by this session: **NOT WITNESSED**.
+- M2 independent spec/bridge/submission spine: **EXISTING OWNERS**
+  `ExternalClayNS/ClaySpec.lean`, `Gap.lean`,
+  `ClauseAudit.lean`, `SubmissionAudit.lean`, and
+  `Docs/papers/live/NavierStokesABCDClaySubmissionSpine.md`.
+  Source-written existence does not equal current kernel receipt.
+- M3 conventional mathematical exposition plus fresh independently
+  reproducible kernel/audit receipt: **PUBLICATION/AUDIT WORK**,
+  not another C/D theorem-discovery programme.
+- M4 independent refereeing, Clay adjudication: **EXTERNAL**;
+  do not conflate announced result, proof certificate, referee acceptance
+  and prize decision.
+
+**Critical-path decision:** For the primary Clay-facing deliverable,
+FREEZE original A/B research as NON-BLOCKING. Publish/audit D first
+(shorter periodic route via periodisation), then C; both are already
+available in released upstream proof. Do not require DASHI independent
+Fourier/369/R406 construction for M2/M3.
+
+**Parallel optional research:** A remains same-physical-solution
+Fourier/Plancherel plus scale-critical A2/A3; B remains genuine
+compensated R236/R685/R690 physical signed production and estimates.
+The falsified count-centered B4 estimate must never be a gate.
+C/D success is not evidence of A/B universal unforced regularity.
+
+**Next bounded actions:** Pin upstream commit and theorem namespace,
+run upstream `lake exe cache get && lake build` and the independent
+`ExternalClayNS` certificate build, record stdout/toolchain/hash;
+produce one conventional D candidate/admissibility/uniqueness/breakdown
+proof and C counterpart with numbered lemma-to-Lean links. Keep
+remaining questions strictly limited to missing proof receipts or
+exposition, rather than spawning more RNNN layers.
+
+---
 ## 2026-10-24 projection gate on physical B recombination (new exact discriminator)
 
 **New exact finite check:** `tests/test_ns_b_projection_same_shear_discriminator.py`
