@@ -47,7 +47,7 @@ def exact_barrier(E,m,L):
        math.sinh(math.sqrt(-d)*L)**2/(-d) if d<0 else L*L)
     return 1/(1+m*m*t)
 
-def scattering(E,mass,zmin,zmax,h=.2,Az=None):
+def scattering(E,mass,zmin,zmax,h=.2,Az=None,endpoint_mass=None):
     """Exact matrix exponential on every midpoint cell: J=sigma_x conserved."""
     steps=math.ceil((zmax-zmin)/h); dz=(zmax-zmin)/steps;transfer=identity.copy()
     for k in range(steps):
@@ -60,7 +60,18 @@ def scattering(E,mass,zmin,zmax,h=.2,Az=None):
         transfer=(np.exp(1j*a*dz)*P)@transfer
     flux_error=float(np.linalg.norm(transfer.conj().T@sx@transfer-sx))
     assert flux_error<3e-8,(E,flux_error)
-    B=U.conj().T@transfer@U
+    if endpoint_mass is None:
+        B=U.conj().T@transfer@U
+    else:
+        # Adiabatic finite-radius lead: positive-energy locally massive
+        # propagating spinors, with current normalized to +/-1.
+        assert E>abs(endpoint_mass), "No propagating lead for this energy/mass"
+        k=(E*E-endpoint_mass*endpoint_mass)**.5
+        a=((E+endpoint_mass)/(2*k))**.5
+        b=((E-endpoint_mass)/(2*k))**.5
+        lead=np.column_stack(((a,b),(a,-b)))
+        assert np.linalg.norm(lead.conj().T@sx@lead-np.diag([1.,-1.]))<1e-12
+        B=np.linalg.inv(lead)@transfer@lead
     reflection=-B[1,0]/B[1,1]
     transmission=np.linalg.det(B)/B[1,1]
     R=abs(reflection)**2;T=abs(transmission)**2
@@ -107,7 +118,7 @@ def main():
             values={}
             for n in (0,1,2):
                 fac=math.sqrt(n*(n+12))
-                result=scattering(energy,lambda z,fac=fac:fac*profile(z),-Z,Z,h=.2)
+                result=scattering(energy,lambda z,fac=fac:fac*profile(z),-Z,Z,h=.2,endpoint_mass=fac*float(profile(Z)))
                 values[str(n)]={k:v for k,v in result.items() if k not in ('r','t')}
                 if n==1:t1=result['t']
                 if n==2:t2=result['t']
@@ -121,7 +132,7 @@ def main():
         print('E=',E,'LLL T=',round(vals['0']['T'],8),'n1 T=',round(vals['1']['T'],7),
             'n2 T=',round(vals['2']['T'],7),'channel mean eta=',round(vals['two_mode_selected_channel']['mean_success'],7),
             'conditional Fe=',round(vals['two_mode_selected_channel']['conditional_Fe_ideal_local_correction'],7))
-    print('PASS: exact barrier, massless limit, J-unitarity, U1 gauge phase, effective RN geometry and CPTP two-mode loss')
+    print('PASS: exact barrier, massless limit, J-unitarity, U1 gauge phase, local-mass flux leads, effective RN geometry and CPTP loss')
     print('OPEN: cutoff->infinity, global 4D Dirac state, true closed return, physical encoding, causal wavepacket')
     result={'cases':cases,'authority':'bounded scattering on piecewise effective GR source, not full MMP 4D'}
     Path(__file__).with_suffix('.json').write_text(json.dumps(result,indent=2))
