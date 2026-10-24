@@ -106,3 +106,31 @@ More importantly, #1250's later source-aligned Monster character audit reportedl
 - actual Monster 3B / 6.Suz source-selected D4/Hom character: **OPEN / source-dependent**, subject to #1250's separate no-go and more recent 6.Suz family qualification.
 
 These are deliberately different proof objects. Use #1250's existing backend-free D4 character and actual-source screening producers rather than rebuilding or bypassing their authority checks.
+
+
+## Explicit six-pair model weld and a group-structure discriminator
+
+The companion source `scripts/iit_jfine_d4_heisenberg_h6_model_weld.py` closes the **abstract H6 model symplectic-coordinate** step that was previously left as an anticipated map. List the repaired 12D hyperbolic pairs as
+
+`(tE,tC), (bE,bE'), (bC,bC'), (XE,XC), (YE,YC), (u,v)`.
+
+Map to the original standard six translation/modulation pairs by taking **translation coordinates to be the six second entries** and **modulation coordinates to be the six first entries**. The source H6 form `ω((a,b),(a',b'))=b·a'−b'·a` then agrees exactly with the repaired D4 form, coefficient by coefficient. This is an **explicit symplectic basis permutation**, not an inference from equal dimensions.
+
+With source H6 multiplication `(a,b,c)(a',b',c')=(a+a',b+b',c+c'+b·a')`, introduce a symmetrised central coordinate `t=c+a·b`. For either repaired D4 generator `G`, act as `v→Gv`, `t→t`, then recover `c'=t−a'·b'`. The quadratic shift `a·b−a'·b'` is required to preserve the non-symmetrised source H6 law. Independent local checks certify **144 basis-pair symplectic identities**, **338 H6 basis-generator product identities**, and exact D4 relations `r⁴=m²=1, mrm=r⁻¹`. Bilinearity supplies the all-vector extension. The underlying quotient map intertwines the source eight-site D4 action; **the raw original-site centre coordinate does not** intertwine without the quadratic correction.
+
+The invariant source eight-plane's restricted commutator has rank six and radical dimension two. Consequently its central preimage in the repaired H6 MODEL is an exponent-three group with
+
+```
+group order: 3^9 = 19683
+centre order: 3^(1+2) = 27
+group type: H3 × C3^2  (NOT extraspecial H4)
+```
+
+This is a decisive **group nonisomorphism** even though the underlying pointed chart still has the same cardinality `3^9`. More sharply, the nontrivial complex irreducible dimensions differ:
+
+| Same-order mathematical model | Linear irreps | Nonlinear irreps | Degree-square sum |
+|---|---:|---|---:|
+| Previous chosen extraspecial H4 | 6561 | **2 × degree 81** | 19683 |
+| New source-D4-stable H3 × C3² | 6561 | **18 × degree 27** | 19683 |
+
+The two models have the same **6561** linear-character count and the same order; neither matches the other's nonlinear representation spectrum. This is a stronger acceptance discriminator than 19683 or zeta-sector dimension coincidences. The repaired H6 same-model symplectic map is now finite-verified, but **actual source Monster H6 subgroup attachment and the actual Monster W/intertwiner remain unproved**. Kernel formalisation of this exact chart and central correction is the next Agda-specific cut.
