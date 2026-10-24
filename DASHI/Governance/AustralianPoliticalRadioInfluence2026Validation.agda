@@ -274,3 +274,43 @@ riddClaimDoesNotProveGasLitigationCausality = refl
 deanClaimDoesNotProvePoliticalCoordination :
   A.provesHiddenCoordination A.rowanDeanBOMNetZeroArgument ≡ false
 deanClaimDoesNotProvePoliticalCoordination = refl
+
+
+-- Same-EPBC-object identification closes a referent gap, not the distinct
+-- empirical, legal, editorial or financial causal obligations.
+
+browseRequestIsNotCourtJudgment :
+  A.kind A.browseACFOriginalS78AApplication ≡ A.epbcReconsiderationRequest
+browseRequestIsNotCourtJudgment = refl
+
+validityOnlyNotFinalDecision :
+  A.kind A.browse2026ValidityDecisionOnly ≡ A.proceduralValidityDecision
+validityOnlyNotFinalDecision = refl
+
+abramMethodPrecedesSpecificBrowseEstimate :
+  A.kind A.browseCitedAbramScienceMethod ≡ A.citedScientificMethod
+abramMethodPrecedesSpecificBrowseEstimate = refl
+
+specificExpertModelNotMeasurement :
+  A.kind A.perkinsKirkpatrickBrowseExpertModel ≡ A.projectSpecificExpertModel
+specificExpertModelNotMeasurement = refl
+
+unnamedRiddGasReferentIsInferred :
+  A.kind A.riddSpecificBrowseReferentInference ≡ A.inferredNamedReferent
+unnamedRiddGasReferentIsInferred = refl
+
+fourMinuteAudioLocatorNotTranscript :
+  A.kind A.fordhamOriginalFourMinutePodcastCarrier ≡ A.nativeAudioPublication
+fourMinuteAudioLocatorNotTranscript = refl
+
+epbcProceduralStatusDoesNotProveMerits :
+  A.EPBCProcedureMeansFinalApprovalJudgment → ⊥
+epbcProceduralStatusDoesNotProveMerits = A.noProceduralPromotion
+
+fourMinutePodcastLocatorDoesNotProveWords :
+  A.AudioEpisodeLocatorMeansVerifiedSpeech → ⊥
+fourMinutePodcastLocatorDoesNotProveWords = A.noAudioLocatorSpeechPromotion
+
+similarNumDoesNotProveSourceConsulted :
+  A.SameUnusualQuantityMeansDirectSourceConsulted → ⊥
+similarNumDoesNotProveSourceConsulted = A.noReferentInferenceToConsultation
