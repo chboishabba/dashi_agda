@@ -93,7 +93,7 @@ This is a polynomial algebra lemma, not a proof of the full
 real-trigonometric time-evolution theorem in Agda.
 
 `tests/test_ns_ibrahim_beltrami_T3_noncoercivity.py`:
-**5 locally executed SymPy tests passed** (exact unforced heat PDE,
+**6 locally executed SymPy tests passed** (exact unforced heat PDE,
 curl eigenrelation, T3 zero, active-region direction, H²/
 enstrophy noncoercivity, strain alignment zero). The committed
 source is a matching independent test; no exact-PR-head CI run
@@ -103,6 +103,31 @@ The separate A1 improvement in
 now returns a **genuine ℚᵘ witness** from Bishop rational density
 rather than erasing it to the ambient real, enabling a future
 constructive shell/resolvent attachment; kernel checking remains open.
+
+## SAME PHYSICAL FIELD / ORIGINAL B R735 MIXED-CARRIER KERNEL
+
+The same real Beltrami field is **positive helicity** at both signed
+Fourier frequencies (no free helical scalar assumption).
+At k=±(N,0,0), `(i k×)u_k=N u_k`, hence
+`H+_k u_k=u_k` and `H-_k u_k=0`.
+Consequently every mixed incidence of R735 W1's original carrier
+`A_(p,q)=(H+_p u_p)×(H-_q u_q)` vanishes, and
+`M_k=Σ A_(p,q)=0` for all outputs/cutoffs. W1 mixed energy and
+rate vanish even though at t_N the enstrophy is A²/e²,
+homogeneous velocity H² squared is A²N²/e², and normalized
+direction gradient is N everywhere.
+
+This is an acceptance test: **W1 mixed-mass coercivity alone is
+false** on the physical solution class, and the full B continuation
+must retain W2 and separately typed same-helicity physical
+channels. This does NOT refute a complete signed combined
+W1/W2 scheme or any claim that W1 has a cutoff-independent
+upper bound on a restricted data class.
+
+The same six locally passing exact SymPy tests include an
+independent physical Fourier projector calculation, reusing the
+historical helical eigenspace theorem and the repository's
+`NSTriadKNPeriodicHelicalFourierInfrastructure` convention.
 
 **Pareto decision:** exclude T3 *as a coercive quantity* and
 TICH/TAH/DGMICH assumptions as unpaid. Do not snowball more
