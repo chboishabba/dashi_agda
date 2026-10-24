@@ -211,3 +211,28 @@ These scripts' locally equivalent calculations passed. Neither PR-head CI nor an
 **Add P3Q gates:** (i) select physical encoding/TPS with matching observable same object; (ii) compute flux-normalized 4D in/out Dirac scattering or causal Green function on the P1/P2 *same-state* geometry; (iii) channel Choi/gauge/CPTP, transmission-vs-fidelity-vs-erasure, qubit and optional multimode covariance; (iv) signal front time, injected probe backreaction, charged-current conservation; (v) infer physical C3 drive change only after Maxwell/plasma source determines `δW_ren`, `δS`, `δF`. This phase depends on P1/P2 for a PHYSICAL claim, but source-free finite-channel validation can proceed in parallel. Horned nonabelian topology, Monster and 12/24 counts are not relevant without a true same-operator weld.
 
 **Pareto update:** the single most useful next physical inference is to compute a state-consistent 4D retarded *fermion* response/mode scattering from the GLOBAL magnetic loop and self-consistent metric, then report **both** quantum channel loss and fidelity with physically identifiable endpoints. Do not promote holographic wormhole teleportation or external LOCC experiments to MMP geometry by analogy.
+
+
+## Oct 24 P3Q continuum current-flux max-cut — new deliverables and corrected clock
+
+**Implementation/source report:** [`MMPDiracFluxScatteringQuantumChannelMaxCut20261024.md`](MMPDiracFluxScatteringQuantumChannelMaxCut20261024.md). The arbitrary finite Wilson–Dirac site transfer benchmark is now supplemented by a **stationary current-normalized reduced continuum Dirac S-matrix** on the *same effective shooting geometry*; these are distinct test objects, so the earlier ~21% finite-lattice transfer must NOT be compared to the new energy-dependent `T(E)` as if they measured the same apparatus.
+
+**P0 improvement DONE as source:** `check_mmp_global_effective_bvp_replay_20261024.py` now exposes an optional `run(q,L,with_profile=True)` returning its dense ODE trajectory and lapse normalization to RN infinity; existing default call semantics are preserved. `check_mmp_dirac_flux_scattering_20261024.py` imports this profile, constructs optical z, `V_n=N sqrt(n(n+|q|))/r`, exact 2×2 Dirac transfer exponentials, current-unitary R/T, U1 open-path gauge test and physically explicit two-mode CPTP erasure selection. `check_mmp_dirac_scattering_precision_20261024.py` separates discretization from cutoff. Existing Bell LOCC and causal transport atlas #1163 are reused, not overwritten.
+
+**Clock conversion critical correction:** q=12, L=22.5163011 input uses throat-local t, but asymptotic-RN-normalized lapse scaling `λ=0.0139837728724`. Physical (in this dimensionless effective geometry) direct interior optical time = `20.5163011/λ=1467.150626`, *not* 20.5163. A hypothetical exterior return 2 in throat units would be 143.022918 in asymptotic time, and total circle 1610.173544. The previous conditional optical root remains a coordinate-covariant normalization equation **only if the exterior return is converted with the same time choice**. There is still no actual same-universe 4D magnetic return path.
+
+**Energy/current channel results (cutoff radius 240, NOT infinity):** n=0 LLL exact static massless reflectionless; E=.20: massive n1 T=.997363, n2 T=2.78×10^-5, selected n1/n2 mean success η=.498695, ideal conditional entanglement fidelity ≈.505277, with state-dependent erasure; E=.55: n1 T=.999814, n2 T=.998723, η=.999268, conditional fidelity ≈.99999993; E=1: both >.9995. J-unitarity and analytic massive barrier benchmark pass. These are dimensionless fixed-background single-particle predictions from the **effective, artificially cut-off source**, not MMP original full geometry. The assumed two-mode qubit remains a selected mathematical encoding without sourced physical preparation/detection.
+
+**Precision and external-tail gate OPEN:** second-order cell-width refinement at cutoff240, n2 E=.55 gives T=.9987228783/.9987229111/.9987229198 for step .30/.15/.075. RN outer cutoff E=.20 n1 gives T=.986447 (R=120), .997363 (R=240), .999743 (R=480); n2 stays ~10^-5 and changes relatively. Do not claim full `R∞` S-matrix convergence. A long-range asymptotic mode prescription and physical same-universe source are still prerequisites.
+
+**Causality:** static reduced Dirac principal characteristics travel at unit optical speed; a stationary transmission/phase/group delay number is NOT a signal-front/FTL receipt. No known theory or local numerical channel test substitutes for physical closed paths, full 4D covariant Dirac renormalization and quantum backreaction.
+
+**Next Pareto three cuts:** (1) exact-head reproducible S-matrix cutoff/grid tests and quantify long-range tail; (2) full 4D spin-c return path/state/point-split Wren and `<T>,<J>` from one source; (3) flux-normalized 4D scattering/channel on the **same physical** solution, with packet causality, detector/TPS, spin and gauge holonomy and three-plasma control. Horned nonabelian topology and generic ER=EPR analogies remain optional; q12 and q24 counts are not a source of quantum channel capacity.
+
+Acceptance:
+```sh
+python3 scripts/check_mmp_dirac_flux_scattering_20261024.py
+python3 scripts/check_mmp_dirac_scattering_precision_20261024.py
+```
+
+Local expanded equivalents executed PASS. No current GitHub exact-head CI or Agda/Lean certification claimed.
