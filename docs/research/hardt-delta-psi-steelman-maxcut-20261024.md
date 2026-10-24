@@ -104,8 +104,8 @@ Non-injurious/consensual only: no proposal to test an alleged assassination abil
 
 ## 2026-10-24 source/current/target identifiability and operational max-cut (continuation)
 
-**New committed work.** \`DASHI/Cognition/HardtDeltaSourceTargetBoundaryExact.agda\` and
-\`scripts/check_hardt_delta_source_target_maxcut.py\`. The latter was written
+**New committed work.** `DASHI/Cognition/HardtDeltaSourceTargetBoundaryExact.agda` and
+`scripts/check_hardt_delta_source_target_maxcut.py`. The latter was written
 against a locally executed equivalent standard-library reference. **The
 committed GitHub blob and exact-head Agda were not executed/typechecked in this
 connector session.** Mathematical arithmetic is synthetic, not an observation
