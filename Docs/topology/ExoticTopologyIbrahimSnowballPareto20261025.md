@@ -175,3 +175,25 @@ an Example 1.3 simply-connected arc.
 Primary source: Fox and Artin, Annals of Mathematics 49 (1948),
 979–990, DOI 10.2307/1969408;
 https://www.maths.gla.ac.uk/~mpowell/fox-artin.pdf
+
+
+### Positive finite group payment for Figure 6 / Example 1.1*
+
+The companion native Lean
+`Synthesis/ExoticTopologyFoxArtinS5Witness.lean`
+and independent script
+`scripts/exotic_topology_fox_artin_s5.py`
+in **dashi_lean4 PR #86** reconstruct Fox--Artin's exact page-983
+equation (2_n*) and its three-periodic 5-cycle representations.
+The independently executed Python solver checks all three
+residue classes (and 603 consecutive integer indices including
+negative n); every relation holds, and each source cycle is
+nontrivial of order 5.
+
+Accepted status: **actual finite S5-valued model of the source
+group presentation**, plus source-written Lean `by decide`
+statements. This strictly improves the prior-art audit for the
+user's specific figure. It is not yet a homomorphism out of the
+ACTUAL topological complement `pi1` without the geometric
+colimit/VK theorem. Nor does it decide the local endpoint
+wildness of source Examples 1.2 and 1.3.
