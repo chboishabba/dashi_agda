@@ -1,9 +1,8 @@
 {
   "source_world": "DMT-2023-empirical-source-world",
-  "snapshot_version": "2026-10-24-primary-nifti-same-object-correction",
+  "snapshot_version": "2026-10-24-2023-static-nifti-actual-input-cut",
   "derivation": "read-only evaluation against pinned Git tree; no scientific computation or data acquisition",
   "source_records": 7,
-  "independent_lineage_roots": 3,
   "source_file_objects": 56,
   "original_script_git_sha1": "f87d99f448848c3b0531fea0780ee241ebd77549",
   "source_script_20_ids_match_20_mat_pairs": true,
@@ -90,7 +89,6 @@
         "original_static_fd",
         "original_preproc",
         "data_use_review",
-        "source_local_bytes",
         "static_fmri_replay",
         "original_preprocessed_voxel_nifti",
         "original_schaefer_extended_mask",
@@ -100,7 +98,6 @@
         "original_static_fd",
         "original_preproc",
         "data_use_review",
-        "source_local_bytes",
         "static_fmri_replay",
         "original_preprocessed_voxel_nifti",
         "original_schaefer_extended_mask",
@@ -255,14 +252,13 @@
       ],
       "potential_consumer_ids": [
         "c_data_acquisition",
-        "c_static_reproduction",
         "c_dynamic_replay_from_tree_alone",
         "c_public_mat_reproduces_original_static"
       ],
-      "potential_consumer_count": 4,
+      "potential_consumer_count": 3,
       "cost_band": 2,
       "access_risk": 3,
-      "research_action": "Run rights-reviewed acquire_dmt_imaging_source.py in authorised network environment; verify Git hashes and local SHA256; do not redistribute",
+      "research_action": "Only rights-reviewed parcelled BOLD_AAL MAT acquisition and Git/SHA256 verification for exploratory/dynamic consumers; NOT an input prerequisite for voxelwise 2023 StaticGFC",
       "promotion_authorised": false,
       "pareto": false
     },
@@ -274,7 +270,6 @@
         "original_static_fd",
         "original_preproc",
         "data_use_review",
-        "source_local_bytes",
         "original_preprocessed_voxel_nifti",
         "original_schaefer_extended_mask",
         "effective_static_gfc_workspace"
@@ -379,7 +374,6 @@
   "static_gfc_conditional_plan": [
     "a_original_motion_primary",
     "b_rights_review",
-    "c_source_bytes",
     "g_voxel_and_atlas_source",
     "h_effective_static_code",
     "d_replay_static"
@@ -393,5 +387,8 @@
   "no_network_acquisition": true,
   "no_contact_or_email": true,
   "source_claims_are_not_independent_replications": true,
-  "public_mat_alone_static_result_plan": null
+  "public_mat_alone_static_result_plan": null,
+  "bibliographic_lineage_roots": 3,
+  "participant_independence_certified": false,
+  "independently_reproduced_original_statistic": false
 }
