@@ -208,6 +208,42 @@ chargedRotationUnitaryLeft tau muon = C.cyclotomic3Ext (solve []) (solve [])
 
 chargedRotationUnitaryLeft tau tau = C.cyclotomic3Ext (solve []) (solve [])
 
+------------------------------------------------------------------------
+-- The threefold symmetry is ACTUALLY NONTRIVIAL on our selected CP
+-- root, not merely an abstract automorphism with cube identity.
+-- Ad_T(A)_eμ differs from A_eμ by the exact (1,zeta) coefficient
+-- pair (7429123333440,2394922626720)/6270551970029.
+-- Original Jarlskog/CP physics is not implied by this group orbit.
+------------------------------------------------------------------------
+
+rotateByChargedT :
+  (Flavour → Flavour → C.Cyclotomic3) →
+  Flavour → Flavour → C.Cyclotomic3
+rotateByChargedT M =
+  productMatrix chargedRotationT
+    (productMatrix M chargedRotationTAdjoint)
+
+rotationDifferenceElectronMuon : C.Cyclotomic3
+rotationDifferenceElectronMuon =
+  L.add
+    (rotateByChargedT selectedTS electron muon)
+    (L.negate (selectedTS electron muon))
+
+rotationDifferenceRationalExact :
+  C.rationalCoeff rotationDifferenceElectronMuon
+    ≡ normalize 7429123333440 6270551970029
+rotationDifferenceRationalExact = solve []
+
+rotationDifferenceZetaExact :
+  C.zetaCoeff rotationDifferenceElectronMuon
+    ≡ normalize 2394922626720 6270551970029
+rotationDifferenceZetaExact = solve []
+
+chargedRotationActuallyMovesCPRoot :
+  rotateByChargedT selectedTS electron muon
+    ≡ selectedTS electron muon → ⊥
+chargedRotationActuallyMovesCPRoot ()
+
 -- Original analytic determinant-one complex embedding of Q(zeta3)
 -- maps this algebraic unitarity result into the usual SU(3).
 -- Complete complex analytic embedding is a separate existing
