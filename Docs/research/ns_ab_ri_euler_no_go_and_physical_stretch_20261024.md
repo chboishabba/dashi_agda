@@ -123,7 +123,7 @@ time-integrated estimate, more directly applicable to the actual
 mild equation than only the stationary response.
 
 ## Execution / acceptance
-- Local exact Python/SymPy tests: **16 passed** across the expanded
+- Local exact Python/SymPy tests: **15 passed**, with one duplicate local test deselected, across the expanded
   physical B suite and A Duhamel tests; source files were ported to
   the GitHub PR branch. The independently added B classwise test
   passed locally as the fifth physical-classifier test.
