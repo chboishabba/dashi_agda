@@ -541,7 +541,7 @@
   ],
   "observed_git_tree": {
     "source_commit": "b35701d88d904e2f602164ff2eae0fc879772078",
-    "source_tree_sha1": "b35701d88d904e2f602164ff2eae0fc879772078",
+    "source_tree_sha1": "38bdb12d180303f1738b7c5b6d99f34f157c26f9",
     "files": [
       {
         "path": "EEG/RegressorsInterpscrubbedIRASA_Central.mat",
@@ -823,7 +823,8 @@
         "size_bytes": 1,
         "git_blob_sha1": "8b137891791fe96927ad78e64b0aad7bded08bdc"
       }
-    ]
+    ],
+    "source_tree_verified_by": "Original GitHub commit tree.sha and full recursively enumerated 56-file blob inventory checked 2026-10-24"
   },
   "counts": {
     "repository_paired_subjects": 20,
