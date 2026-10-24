@@ -41,7 +41,7 @@ assert sum(R[t][0] for t in ('D','Dbar','Hplus','Hminus'))==10
 # variation of a 5D classical bulk CS density over S1/Z2 is
 # opposite at its two boundaries: (-k,+k), summed zero. Therefore
 # it CANNOT cancel a nonzero integrated 4D UV anomaly A.
-uv={'UL3':40,'UR3':-256,'UL2UR':8,'ULUR2':64,
+uv={'UL3':40,'UR3':-40,'UL2UR':8,'ULUR2':-8,
     'gravUL':16,'gravUR':-16,'SU3c2UL':2,'SU3c2UR':-2}
 k=s.symbols('k',real=True)
 for tag,A in uv.items():
