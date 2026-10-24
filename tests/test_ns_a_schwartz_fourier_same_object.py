@@ -59,3 +59,20 @@ def test_arbitrary_finite_energy_low_frequency_response_is_locally_L2():
         "|F(Pdiv(u⊗u))(xi)| <= |xi|*E")
     assert "R" in receipt["low_ball_resolvent_L2_norm_squared_bound"]
     assert "R" in receipt["low_ball_resolvent_L1_norm_bound"]
+
+
+def test_real_finite_H1_source_has_global_L2_heat_inverse_majorant():
+    # u∈H1, div u=0:
+    # |F[P(u·grad u)]|<=min(E*r,sqrt(E*D)).
+    # Divide by nu*r²: low E/(nu*r), high sqrt(E*D)/(nu*r²).
+    E,D,nu,r=S.symbols("E D nu r",positive=True)
+    rt=S.sqrt(D/E)
+    low=S.integrate(4*S.pi*r*r*(E/(nu*r))**2,(r,0,rt))
+    high=S.integrate(4*S.pi*r*r*(S.sqrt(E*D)/(nu*r*r))**2,
+                     (r,rt,S.oo))
+    expected=8*S.pi*E**S.Rational(3,2)*S.sqrt(D)/nu**2
+    assert S.simplify(low+high-expected)==0
+    receipt=module.certificate()
+    assert receipt["arbitrary_H1_source_bound"]=="min(E*|xi|, sqrt(E*D))"
+    assert "sqrt(D/E)"==receipt["arbitrary_H1_crossover_frequency"]
+    assert "D" in receipt["arbitrary_H1_global_fourier_resolvent_L2_squared_bound"]
