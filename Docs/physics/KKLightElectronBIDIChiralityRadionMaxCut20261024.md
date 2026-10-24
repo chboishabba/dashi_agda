@@ -112,3 +112,22 @@ The exact finite Agda module `KKCircleQEDChiralityConsumerExact.agda` reuses the
 - Continue testing `scripts/check_kk_charged_boson_global_repair.py` as a prior donor, but it is a DIFFERENT field spectrum: never carry its mass/radius numbers into this new QED-electron candidate.
 
 Critical frontier after this cut: obtain an admissible **electroweak-chiral source** (SU2L/Higgs/hypercharge and local anomaly inflow) without silently transporting the current smooth-circle Casimir vacuum; and independently replace static Helmholtz with a conservative spinning five-dimensional material source and controlled 4D geodesic observable. No invented new numbered encodings or unrelated horned prerequisite.
+
+
+## Additional BIDI: periodic domain walls can sacrifice the graviphoton
+
+`scripts/check_kk_s1_chirality_wall_obstruction.py` is an independently scoped analytic and SymPy sanity check. For a periodic illustrative scalar profile `X(ϑ)=v sin(ϑ)`, its nonzero circle-gradient norm obeys `∫(dX/dϑ)² dϑ=πv²>0`. The KK metric's covariant horizontal derivative is `D_μ X=∂_μX−κ A_μ∂_ϑX`, and the 5D kinetic term generates a positive quadratic `A_μA^μ` coefficient proportional to `κ²πv²` (after restoring metric normalisations). In a gauge-invariant treatment the wall-position Goldstone supplies the Stückelberg mode. Thus a nonuniform circle-localising vacuum generally **breaks the circle isometry and removes a strictly massless geometric graviphoton**. This is a scoped background/isometry obstruction, not a proof every localising model has exactly that mass. The independently gauged Maxwell zero mode `B_μ` can remain massless if the wall background is neutral under that gauge symmetry.
+
+The same sine-profile Dirac mass has `∮M dϑ=0`, so left/right separated solutions are **both** periodic when the Wilson phase is 0, despite their different localisation; net index remains zero. This challenges premature promotion of a kink/antikink mode as a single *exact* chiral electroweak generation on smooth S1.
+
+## Gauge-theory perturbative budget (new)
+
+For an independent five-dimensional U(1) field of coupling `e5²=2πb0 e4²`, a conventional five-dimensional naive-dimensional-analysis gauge cutoff is `Λ_NDA~24π³/e5²=12π²/(e4² b0)` (order-one normalisation/field content not fixed). With `e4²=4π/137.036` and `b0=10^-24m`, the estimate is
+- `b0 Λ_NDA≈1291.53`;
+- `Λ_NDA≈2.5485e11 GeV`;
+- `M5≈5.7104e14 GeV`, **higher than this gauge cutoff by ~2241**;
+- the 1/b0 KK mass ≈1.9733e8 GeV and heavy stabiliser masses ≈2.85e7 / 1.14e8 GeV are below this NDA gauge cutoff.
+
+Thus at the compactification scale, a perturbative gauge EFT **can** be self-consistent in this selected example, but it must not claim perturbative control all the way to the 5D gravitational scale. Matching to new charged-sector UV physics above the cutoff, its effect on Casimir coefficients and naturalness, is an open source obligation. See standard five-dimensional NDA discussions e.g. arXiv:hep-ph/0609274 and von Gersdorff/Hebecker-style radius-stabilisation analyses. The numerical cutoff is a rough estimate, not an experimentally established maximum energy.
+
+The committed light-electron checker now includes the NDA inequalities. Local matched Python tests passed; exact committed-head execution remains unverified.
