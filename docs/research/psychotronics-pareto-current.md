@@ -1,5 +1,13 @@
 # Psychotronics / pictured-device Pareto frontier — canonical current status
 
+## 25 October S1 linear time-drift alias: sourced counterbalance, not just rank
+
+**Accepted next max-cut:** [source-replayed time-order counterbalance and its physics limits](psychotronics-s1-drift-counterbalance-maxcut-20261025.md). The former 4-pair S1 synthetic input filled all signed field/magnet configurations with `rank=5` but always collected **sham before active**, so force-balance drift `d·(t_active−t_sham)` could imitate a field-on effect. The `S1-CSV-v1` reducer now audits **all four active current-sign × magnet-polarity arms** for both orders with exact signed-time-gap cancellation, using the original hashed timestamp rows. A 4-pair biased pattern fails the drift check; an 8-pair two-session reverse-order synthetic design passes. Six locally authored standalone reducer test groups passed. The existing source-join exports the audit only after exact replay, and the S1 report blocks checklist completion with `unbalanced_active_sham_time_order_by_arm` where unpaid.
+
+**Ceiling:** time-order symmetry is **not** a thermal, nonstationary, weighted-GLS or instrument timebase calibration. The source-only `sign(I)²` column is still a binary energised indicator, not measured `I²R`. No real force, physical gravity or historic magnetometry evidence was added. Existing exact Biot–Savart owners and the separate Egely–Vértesy material/susceptibility claims stay source-typed. The next high-value result still requires authentic real instrument current/force/field/temperature/vibration readings with source-native timing and blind/counterbalanced protocol.
+
+
+
 ## 25 October — ORIGINAL PR PURPOSE RESTORED: pictured-object first, then lineage and tests
 
 **Operational decision superseding archive-first ordering for #1242:** [Return-to-original-18-images same-object and claim-to-assay cut](psychotronics-original-image-identity-return-maxcut-20261025.md). Original request was **two batches / 18 uploaded stills / eight posting accounts**; the objective was to identify original copper/star/orb, 15 Hz Croft/Aurumaya, iTorus, Oudin/tower/plasma, vortex carafe and captioned electrostatic motor and evaluate their **claimed** origin and physical implications. Source/dated historical review, Pavlita/Egely and later Field Loom/antigravity are **separate donor investigations**, not the new starting question or acceptance criterion.
