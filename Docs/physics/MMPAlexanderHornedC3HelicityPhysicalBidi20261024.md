@@ -70,3 +70,17 @@ Spend research effort **first** on P0 replay and P1 source renormalization, then
 - Local horn finite A5/topological logic script: PASS for finite checks. The homology conclusion is taken from Alexander duality, not established anew by code.
 - Local three-field helicity/anomaly SymPy: PASS; proven identity for selected fields/normalizations, **not** a quantized physical plasma apparatus.
 - The 4D curved Dirac determinant, renormalized global in-in response, induced Hall/Schwinger current, regular two-mouth quantum source and real three-plasma coupling are still unpaid. Agda/Lean exact-head receipts not obtained for horned sibling PR #1244.
+
+
+## Stronger literal-three-region analytic Maxwell surrogate (post initial symbolic gate)
+
+`scripts/check_three_localized_field_helicity_20261024.py` replaces the extended periodic-only field test with **three individually localized, internally twisted, smooth vector-potential packets**. For each center `c_i=(c_ix,c_iy,0)`, define `u=x-c_ix`, `v=y-c_iy`, `g_i=exp(-(u²+v²+z²)/(2σ²))` and `A_i=g_i(-v,u,β)`. Then `B_i=curl A_i` obeys `div B_i=0` EXACTLY, and its local self-helicity density is `A_i·B_i=2β exp(-|x-c_i|²/σ²)`.
+
+For center separation `d=|c_i-c_j|`, the full-space cross-helicity is **analytically integrated**:
+`h_ij=∫ A_i·curl A_j d³x = β π^(3/2) σ³ exp(-d²/(4σ²)) (2-d²/(2σ²))`.
+For `i=j`, `h_0=2βπ^(3/2)σ³`. An independent 3D Gauss–Hermite numerical quadrature at `d=1.5,σ=1,β=0.7` matches `h_ij` within `1.4e-15` for a locally executed equivalent script.
+
+Three centers at an equilateral triangle of circumradius R have common `h_1=h_ij(d=√3R)`; the full helicity is
+`H=(h_0-h_1)Σ_i f_i²+h_1(Σ_i f_i)²`. For internal amplitudes `f_i=a cos(ωt+2πi/3)`, exact trig gives `H=3a²(h_0-h_1)/2` **independent of t**, even with overlap. Thus net `∫E·B=-H'/2=0`: pure symmetric phase rotation is a negative control. For `f_i=u(t)cos(ωt+2πi/3)`, `∫E·B=-(3/2)(h_0-h_1)uu'`; ideal closed-volume ABJ/helicity exchange follows.
+
+These fields model **three localized electromagnetic regions**, NOT a rotating disk and NOT dynamical self-consistent plasma equilibria. Gaussian tails overlap; no hard plasma-fluid boundary, charge/current sourcing, power budget or in-in Dirac state is constructed. Since ordinary Maxwell stress satisfies NEC, these fields alone do NOT provide negative null gravitational stress. This gate asks whether the induced *fermionic* quantum state has a source-derived `δ<T_kk>_ren` with the required sign; the simple chiral Fock response tested in `check_fermion_axial_pump_nec_budget_20261024.py` instead raises NEC.
