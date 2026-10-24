@@ -28,6 +28,26 @@
    a cardinality tax. Its *global spacetime analytic payment* remains
    explicitly FALSE.
 
+**Exact negative same-object discriminator:** on the SAME globally smooth
+four-mode shear, at output k=(1,1,0), the R681 input-rate work is
+W(M,R)=2, the physical output heat rate is |k|²=2, and W(M,M)=1.
+Thus R681's output-relative cross-gradient work
+W(M,R-|k|²M)=0 for ALL cutoffs, whereas the original physical
+full-fibre B4 noncore/core defect is 185520 at N=9 and
+1671172320 at N=40 (and unbounded as N grows).
+Consequently **a direct equality "R681 output-relative work = old
+B4 defect" is mathematically false**. The legitimate next step is
+a source-exact **compensated GLOBAL recombination**, potentially
+using the existing R685 commutator/tangent identity and R690
+sum-before-integration transport, in which all affected Bony classes
+and count-dependent terms are accounted for and cancel before
+any estimate. Merely replacing B4's defect field with R681's
+zero-padding-invariant observable changes the theorem.
+
+The exact mismatch is now a regression:
+`test_R681_is_not_the_old_B4_defect_same_output_shear`.
+No fresh RNNN proof representation is authorized by this discovery.
+
 These are **prior proof owners**, not new RNNN obligations. B4's original
 full-fibre *noncore/core count-weighted strict-half estimate* is
 mathematically false for the physical R219/R469 selected-pair ED
