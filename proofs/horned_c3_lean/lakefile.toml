@@ -1,0 +1,10 @@
+name = "horned_c3_topology"
+defaultTargets = ["HornedC3"]
+
+[[require]]
+name = "hatcher"
+git = "https://github.com/Deicyde/hatcher-at"
+rev = "fb20d71b6a7561c80f66350c14af118f3962377a"
+
+[[lean_lib]]
+name = "HornedC3"
