@@ -232,3 +232,58 @@ agda -i . -i /path/to/agda-stdlib DASHI/Reasoning/GeometricPairedBenchmarkNonCol
 # On #1095 branch with its own head-locked toolchain:
 agda -i . -i /path/to/agda-stdlib DASHI/Reasoning/GeometricReasoningSemanticInterventionRegression.agda
 \`\`\`
+
+
+## 2026 primary-source update: actual neural geometry and relational qualia (P3/P5)
+
+This source cut reinforces the direct neural route and blocks an inference from Sophontic commercial benchmark claims to physical or phenomenal consciousness.
+
+### Real neural attractor geometry with released data: P3 first-class producer
+
+**David G. Clark, L. F. Abbott and Haim Sompolinsky**, *Symmetries and continuous attractors in disordered neural circuits*, *Nature Neuroscience*, published **2026-10-14**, DOI \`10.1038/s41593-026-02452-4\` (original research). The authors model rodent head-direction cell tuning with heterogeneous/disordered-looking connectivity that nonetheless carries a latent circular symmetry. Dynamical mean-field analysis recovers classical ring-attractor ingredients and a quasi-continuous state manifold; they do **not** claim that circular patterns establish consciousness.
+
+Most valuable reproducible provenance:
+- Data: original Duszkiewicz et al. rodent electrophysiology and behavior deposited at **DANDI Dandiset 000939**; name original data owner separately from Clark et al.'s secondary analysis.
+- Analysis: \`https://github.com/davidclark1/symmetries-continuous-attractors\`, released with 11 figure-producing notebooks; cached intermediate products DOI \`10.5281/zenodo.21827768\`, code archived DOI \`10.5281/zenodo.21829584\`. Pin code commit, DANDI version/asset digests, preprocessing and null-generation controls before making reproduction claims.
+- Potential same-object contact with DASHI: \`DASHI/Biology/DynamicEffectiveTopology.agda\`, \`FiniteTorusVectorWaveGeometryExact.agda\`, \`BrainCognitionObservationSpineExact.agda\` and maleCNS source/functional registration. **Rodent head-direction circuits ≠ human memory ECoG ≠ fly MaleCNS**; same mathematics is not a shared biological dataset.
+- Experimental cut: reproduce paper's plotted attractor manifold/spectral degeneracy (or report discrepancy) with authors' released artefacts; perturb weight symmetry and neuron-type/morphology controls and evaluate held-out head-direction decoding. Preserve distinction between learned alignment and architectural inductive bias.
+- **Priority:** P3 evidence before proprietary Sophontic candidate/model testing when the latter's required artefacts remain unreleased.
+
+### Structural geometry of perceptual quality: P5 theory competitor, not consciousness detector
+
+**Masafumi Oizumi, Chanseok Lim and Ryota Kanai**, *Principal bundle geometry of qualia: Understanding the quality of consciousness from symmetry*, *PNAS Nexus* 5(9), pgag261, published **2026-09-08**, DOI \`10.1093/pnasnexus/pgag261\`. This is an **original theoretical paper** proposing that equivariance organizes a neural state space into group orbits and quotient signatures, with a hypothesis of neural/phenomenal relational-structure correspondence. Its claims are **conditional** on the relevant equivariant representation and psychophysical correspondence; the paper explicitly says its framework is a structural theory **in systems independently considered conscious, not a test of whether consciousness exists**.
+
+**Correction**: *PNAS Nexus* 5(9) pgag313, published **2026-09-29**, DOI \`10.1093/pnasnexus/pgag313\`, reports that an unrelated supplementary material file had originally been published and was replaced with the correct file; figure 4 reoriented. Formal archaeology must use the corrected supplement, not a stale downloaded pre-correction version.
+
+Reuse \`DASHI/Reasoning/SemanticInterventionEquivarianceExact.agda\`, \`DASHI/Reasoning/GeometricReasoningSurfaceResidualExact.agda\`, the 369 zero-fibre/quotient machinery, \`DASHI/Biology/DynamicEffectiveTopology.agda\`, IIT PR #1148 and teleodynamics PR #1095, with strict type separation:
+\`\`\`
+input symmetry G_X ---encoder---> neural representation Y
+      |                                  |
+      | group action                     | compatible representation action rho_Y
+      v                                  v
+intervened input ---- encoder ---> intervened neural state
+
+Y ---- quotient by G ----> Y/G (candidate invariant signature)
+ |                           |
+ | empirically matched       | hypothesised relational correspondence
+ v                           v
+neural observation ----> perceptual reports / similarity judgements
+\`\`\`
+
+Necessary assumption often missed in popular summaries: **equivariance is not sufficient to obtain a principal G-bundle**. One also needs the appropriate free/proper action, topological/smoothness and local-triviality conditions (or an adjusted orbifold/stratified framework for stabilisers). The authors themselves discuss free action in their idealisation. The DASHI-authored new finite witness \`DASHI/Biology/QualiaSymmetryPrincipalBundleBoundaryExact.agda\` uses a nontrivial C2 group acting trivially on a two-state representation: a fully equivariant encoder but a nonfree action with a nontrivial stabiliser. This does **not** refute the paper; it is an explicit proof-obligation firewall.
+
+**P5 deliverables expanded:**
+1. Mathematical source audit of the **corrected** principal-bundle assumptions and propositions; compare their actual group action and quotient structure against existing 369/C3 typed fibres without claiming identification.
+2. Relational **qualia structure** experiment under proper consent/report/representation provenance: perceptual similarity data plus neural representation geometry, with predeclared metric alignment, nuisance controls, and held-out prediction. Test predicted rigid orbit/attribute vs flexible quotient/signature variability across individuals.
+3. Compare against GNWT, IIT and teleodynamic predicted access/representation signatures under matched sensory stimuli, awareness reporting and neural measures; none automatically determines whether an AI or isolated optical material has subjective experience.
+4. New evidence needed before mechanistic **generation** language: physical cause/intervention in the realised neural network, observed changes in qualia relationships, and a separately defended physical/psychophysical sufficiency account.
+
+### Shared interpretation firewall
+
+Four different uses of "geometry" now have direct, **non-interchangeable** owners:
+- **Ferrocell:** magneto-optical measurement geometry.
+- **AI:** learned representation geometry and benchmark perturbation covariance (Sophontic / LILA / DASHI), no validated Sophontic model weights yet.
+- **Neuroscience:** anatomical/effective connectivity, state-space attractor geometry, neural travelling waves (Clark; Das et al.; MaleCNS).
+- **Phenomenal:** Oizumi–Lim–Kanai's conditional relational geometry of qualia and alternative conscious-access/phenomenology theories.
+
+A productive cross-domain theorem is an **explicitly typed preservation or obstruction** of a measurable map. A matching circle, C3 chart, 240-element set, "coherence tensor", wave, quantum vocabulary or equal scalar is not one.
