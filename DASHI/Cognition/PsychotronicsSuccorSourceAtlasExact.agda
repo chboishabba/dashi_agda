@@ -448,6 +448,30 @@ heartmathEnergeticCommunication = Source.mkNoDOISource
   "HeartMath is distinct from hoe_math. Heart-generated bioelectromagnetic fields are measurable with appropriate sensors, but the institute's stronger interpersonal information/coherence claims are separate hypotheses and are not established by its narrative"
   Source.publicAttribution
 
+shupakShamClinical2006 : Source.AttributedSource
+shupakShamClinical2006 = Source.mkDOISource
+  "N. M. Shupak; Julia C. McKay; Warren R. Nielson; Gary B. Rollman; Frank S. Prato; Alex W. Thomas"
+  "Exposure to a specific pulsed low-frequency magnetic field: a double-blind placebo-controlled study of effects on pain ratings in rheumatoid arthritis and fibromyalgia patients"
+  "Pain Research & Management 11(2), 85-90; N=31 across RA and FM populations; reported blinded low-frequency PEMF sham and active comparison"
+  "2006"
+  "10.1155/2006/842162"
+  "https://pubmed.ncbi.nlm.nih.gov/16770449/"
+  Source.academicArticleSource
+  "actual double-blind 2006 physical PEMF comparison using silent/no-vibration sham apparatus, not evidence that an audible Starship/Rodin coil could be equivalently masked or that a nondual outcome was tested"
+  Source.publicAttribution
+
+duAssessorBlindedProtocol2026 : Source.AttributedSource
+duAssessorBlindedProtocol2026 = Source.mkDOISource
+  "Tianzhu Du; Xu Hu; Yu Dan; Yu Zhou; Hongyuan Liu; Fei Wang; Jun Tao"
+  "Active vs. sham pulsed electromagnetic field therapy added to standardized conservative care for partial-thickness supraspinatus tears: study protocol for a randomized, assessor-blinded, sham-controlled trial"
+  "Frontiers in Sports and Active Living 8:1847412, published 15 July 2026; study protocol with planned recruitment, not published trial results"
+  "2026"
+  "10.3389/fspor.2026.1847412"
+  "https://doi.org/10.3389/fspor.2026.1847412"
+  Source.academicArticleSource
+  "trial protocol explicitly proposes matching active and sham heat/vibration/indicators/interaction and magnetic detector verification, but does not supply completed observations or proof of successful blinding at another manufacturer's device"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -466,7 +490,8 @@ sourceAtlas = Source.mkSourceAtlas
    openhand2026FiveD ∷ openhand2026RealitySplit ∷
    hanleyNADA2018 ∷ macleanMEQ2012 ∷ nourEDI2016 ∷
    kervadecFiveDASC2026 ∷ stockerASCRevision2026 ∷
-   heartmathEnergeticCommunication ∷ [])
+   heartmathEnergeticCommunication ∷
+   shupakShamClinical2006 ∷ duAssessorBlindedProtocol2026 ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -485,6 +510,7 @@ data LineageRoot : Set where
   hanleyPsychometricsRoot macleanPsychometricsRoot nourPsychometricsRoot : LineageRoot
   kervadecAscValidationRoot stockerAscRevisionRoot : LineageRoot
   heartmathInstituteRoot : LineageRoot
+  shupakClinicalAuthorRoot duProtocolAuthorRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -897,6 +923,26 @@ heartmathDistinguishedFromHoeMath = mkBound
   attributedAuthorReport
   "physiological field instrumentation and actual interpersonal causal effect require independent controls; this does not validate 5D or stage labels"
 
+shupakShamScope : ClaimBound
+shupakShamScope = mkBound
+  "Shupak et al. report a randomized, double-blind clinical PEMF comparison using a physically silent/no-vibration device and sham"
+  shupakShamClinical2006
+  "2006 publication Methods, active/sham controls; PubMed 16770449"
+  shupakClinicalAuthorRoot
+  Diligence.primaryProposition
+  externallyDescribedApparatus
+  "apparatus-specific masking precedent, not a demonstrated sham for a loud vibration-producing Starship coil; pain/anxiety in limited clinical populations cannot become validated 5D-consciousness efficacy"
+
+duShamDesignProposal : ClaimBound
+duShamDesignProposal = mkBound
+  "Du et al. propose that their sham PEMF device match active heat, vibration, light and interaction while differing in actual EM exposure"
+  duAssessorBlindedProtocol2026
+  "2026 study protocol Methods and Abstract, active versus sham handling and detector audit"
+  duProtocolAuthorRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "PROTOCOL ONLY, no completed outcome; no causal efficacy or successfully masked experiment has been established by this paper"
+
 reichSeparation : ClaimBound
 reichSeparation = mkBound
   "Museum distinguishes Reich's cloudbuster from later Welz/Croft orgonite, quartz-and-resin devices"
@@ -1124,6 +1170,16 @@ heartmathIsNotHoeMath : BoundedRelation
 heartmathIsNotHoeMath = bounded-relation
   "HeartMath Institute claimed interpersonal heart fields" "hoe_math developmental Levels presentation"
   documentaryDistinction heartmathDistinguishedFromHoeMath false refl false refl
+
+silentShamDoesNotCertifyLoudCoil : BoundedRelation
+silentShamDoesNotCertifyLoudCoil = bounded-relation
+  "2006 silent PEMF double-blind device precedent" "audibly vibrating Starship/Rodin coil"
+  historicalMechanismPrecedentOnly shupakShamScope false refl false refl
+
+futureShamProposalDoesNotGiveObservedTrial : BoundedRelation
+futureShamProposalDoesNotGiveObservedTrial = bounded-relation
+  "Du et al. 2026 planned matched PEMF sham" "completed iTorus sham-validated study"
+  thematicResemblanceOnly duShamDesignProposal false refl false refl
 
 -- Imported source-attribution laws are used directly; no new source/role
 -- ontology is needed. The proof obligations are the existing fields.
