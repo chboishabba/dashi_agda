@@ -80,3 +80,18 @@ in floating-point. This is a NUMBERIC REGRESSION with the original source, not a
 | Source-selected physical lepton/TOE/Monster and observational discriminator | **OPEN** |
 
 **Highest alpha next**: in horn #1244 geometry source, prove a genuine marked nested Hatcher-tube meridian family, respecting the van Kampen parent-to-child commutator relation, with quantitative arclength in the chosen ambient metric; then apply the correct FULL-DEPTH norm criterion for infinite-image W, not the A5 single-branch finite-image shortcut. Original source papers and module attribution remain attached to all claims.
+
+
+## Hatcher source Z-block: actual marking algebra certified, metric still open
+
+Original source Hatcher *Algebraic Topology* Example 2B.2 pp.171–172, https://pi.math.cornell.edu/~hatcher/AT/AT.pdf, specifies a region `Z` with `π1(Z)=F(a,b)`, obtained topologically from an open ball with two tubes deleted, where the incoming annulus's core curve maps to the **boundary of a once-punctured torus**, namely the nontrivial free word `[a,b]=aba^-1b^-1`. This is not the original synthetic *unlinked* parent meridian with winding (1,0), which failed against the required commutator's (0,0).
+
+New verified executable `scripts/check_hatcher_punctured_torus_marking_word.py`:
+- checks that the punctured-torus boundary has REDUCED nontrivial word `aba^-1b^-1` but trivial abelianization; contrasts the unlinked generator's nonzero abelianization;
+- checks **8 levels** of Hatcher's original binary free-group substitution: `2^n` distinct leaf generators, a nontrivial freely reduced root word of length `4^n`, zero abelianization;
+- derives the purely CONDITIONAL arclength budget: if a length `L0*q^n` (for q=1/5 as an illustrative input) were obtained for each properly based leaf path with ZERO extra stems, then concatenating the `4^n` letters would give root representative length at most `L0*(4q)^n`. Such a length bound is NOT established for the physical horn, as whiskers, linkages and all future-stage avoidance must be accounted for.
+
+Local exact test PASS and byte-equal Git blob `7a73fc6d68f55105de93ee416798f59127c03391`.
+The output is a sourced **2D punctured-torus marking witness**, NOT the ambient Hatcher linked three-dimensional Z-block, and neither proves the full free-group injection nor supplies a wild-sphere metric. The earlier synthetic-cylinder winding mismatch remains a valid negative control. The next acceptance object is a TRUE linked source-coordinate Z-block chart with explicit complement clearance and an all-level embedding.
+
+This is the same metric/homotopy gap whether the target is the worker's INFINITE-order W or the separate A5 finite-image representation; their geometric regularity criteria differ as the previous phase gates state.
