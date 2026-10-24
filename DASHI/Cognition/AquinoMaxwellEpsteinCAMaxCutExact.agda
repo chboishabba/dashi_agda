@@ -23,6 +23,9 @@ import DASHI.Core.EventTimeCapabilityAlignmentBidiExact as EventTime
 import DASHI.Core.CapabilityFragilityConfoundersBidiExact as Fragility
 import DASHI.Culture.MissingDeceasedCustodyEventTimeMatrixExact as Custody
 import DASHI.Cognition.TrumpMarALagoBannonBridgeExact as BannonBridge
+import DASHI.Cognition.EpsteinBlackAgreementInvoiceWorkJoin20261015Exact as BlackWork
+import DASHI.Cognition.EpsteinBlackInvoiceWireSettlement20261015Exact as BlackWire
+import DASHI.Cognition.EpsteinBlackApolloSameObjectReceiptRound20261014Exact as BlackApollo
 
 ------------------------------------------------------------------------
 -- AQUINO / MAXWELL / EPSTEIN / CA: EXISTING-CARRIER ATTRIBUTION MAX-CUT
@@ -1525,3 +1528,73 @@ riponTechnicalRootShared :
   upstreamTechnicalProducer originalDiscoveryRoot ≡
   upstreamTechnicalProducer committeeTechnicalRoot
 riponTechnicalRootShared = refl
+
+
+------------------------------------------------------------------------
+-- LEON BLACK CONTROL CASE: a different *documented* Epstein workstream.
+--
+-- Prior Black/Epstein work is extensive: signed-vs-draft agreement versions,
+-- EFTA00585292 USD20m 2014 invoice, EFTA01915809 settled-wire email,
+-- estate planning EFTA00583490 and later legal-review artefacts. They set
+-- an empirical standard for payer→agreement→invoice→wire→specific work.
+--
+-- They do NOT show that Bannon contracted under the Black arrangements,
+-- received Black-financed video work, used CA analytics, or shared a covert
+-- command. Those would require their own exact-object identifiers.
+------------------------------------------------------------------------
+
+blackPreExistingAgreementWork : BlackWork.WorkJoinBoundary
+blackPreExistingAgreementWork = BlackWork.canonicalWorkJoinBoundary
+
+blackPreExistingSettledWire : BlackWire.WireBoundary
+blackPreExistingSettledWire = BlackWire.canonicalWireBoundary
+
+blackPreExistingApolloNuance : BlackApollo.ApolloNuanceBoundary
+blackPreExistingApolloNuance = BlackApollo.canonicalApolloNuanceBoundary
+
+blackServicesDocumented :
+  BlackWork.paidServiceAgreementSurface blackPreExistingAgreementWork ≡ true
+blackServicesDocumented = refl
+
+blackInvoiceDocumented :
+  BlackWork.paidEstatePlanningInvoiceSurface blackPreExistingAgreementWork ≡ true
+blackInvoiceDocumented = refl
+
+black2014InvoiceAndReceiptMatched :
+  BlackWire.july2014InvoiceAndReceiptJoinPaid blackPreExistingSettledWire ≡ true
+black2014InvoiceAndReceiptMatched = refl
+
+blackPaymentNotIdentifiedAsChecklistFee :
+  BlackWork.exactInvoiceToChecklistItemPaid blackPreExistingAgreementWork ≡ false
+blackPaymentNotIdentifiedAsChecklistFee = refl
+
+blackInvoiceAndWireNotMeasuredTaxBenefit :
+  BlackWire.settledWireImpliesMeasuredTaxBenefit blackPreExistingSettledWire ≡ false
+blackInvoiceAndWireNotMeasuredTaxBenefit = refl
+
+apolloNeverAutomaticallyBannonPayer :
+  BlackApollo.apolloCorporationRetainedEpstein blackPreExistingApolloNuance ≡ false
+apolloNeverAutomaticallyBannonPayer = refl
+
+bannonFilmAlreadyEstablishedByDifferentOwner :
+  BannonBridge.releasedInterviewExistencePaid
+    BannonBridge.canonicalBannonMediaProductionFrontier ≡ true
+bannonFilmAlreadyEstablishedByDifferentOwner = refl
+
+bannonOriginalReelHashNotReplacedByBlackReceipts :
+  BannonBridge.specificVideoReelFileIdAndHashVerified
+    BannonBridge.canonicalBannonMediaProductionFrontier ≡ false
+bannonOriginalReelHashNotReplacedByBlackReceipts = refl
+
+-- Exact financial receipts within Black's *different* network do not fill
+-- a missing Bannon-film contract, video hash or Aquarius/CA reuse bridge.
+data BlackPaymentImpliesBannonFilmFunding : Set where
+data BlackPaymentImpliesBannonCAEpsteinCommonCommand : Set where
+
+blackPaymentDoesNotCreateBannonFilmFunding :
+  BlackPaymentImpliesBannonFilmFunding → ⊥
+blackPaymentDoesNotCreateBannonFilmFunding ()
+
+blackPaymentDoesNotCreateUnifiedProgramme :
+  BlackPaymentImpliesBannonCAEpsteinCommonCommand → ⊥
+blackPaymentDoesNotCreateUnifiedProgramme ()
