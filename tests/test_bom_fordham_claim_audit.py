@@ -687,3 +687,17 @@ def test_browse_central_estimate_exact_rational_consistency_only():
     assert "29,335,635.945" in docs
     assert "16,087,302" in docs
     assert "kernel-verified Agda theorem" in docs
+
+
+def test_finite_agda_template_and_browse_arithmetic_witnesses_declared():
+    """Declaration and source checks only; this is NOT a kernel typecheck."""
+    proofs = POLITICAL_VALIDATION.read_text()
+    assert "open import Agda.Builtin.Nat using (_+_; _*_)" in proofs
+    assert "gasCommitteeOriginalTemplateTotals" in proofs
+    assert "272 + 13 + 52 + 15 + 14 ≡ 366" in proofs
+    assert "browseConditionalModelNumeratorExact" in proofs
+    assert "159741 * 45 * 44 * 35 * 1060000 * 250000" in proofs
+    assert "2933563594500000000000" in proofs
+    assert "browseConditionalModelScaleExact" in proofs
+    assert "5867127189 * 500000000000" in proofs
+    assert "does not make them" in proofs
