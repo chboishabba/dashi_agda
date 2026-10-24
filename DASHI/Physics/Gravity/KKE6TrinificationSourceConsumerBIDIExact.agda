@@ -150,3 +150,39 @@ orientationLabelDoesNotDetermineCompactFibreAction :
 orientationLabelDoesNotDetermineCompactFibreAction =
   Descent.consumerNonDescentWitness
     spatialSOThreeTorque geometricCircleUOneShift refl differentOperators
+
+
+------------------------------------------------------------------------
+-- Do NOT conflate selected 3×3 bifundamental scalar components with
+-- TWO full complex E6 27-plet scalar multiplets, or with full gauged E6.
+-- Original E6 650 Higgs source is independent published model building,
+-- not an inhabitant derived from the first-Tits source owner.
+------------------------------------------------------------------------
+
+twoFullComplexTwentySevensRealCount : 2 * 27 * 2 ≡ 108
+twoFullComplexTwentySevensRealCount = refl
+
+suThreeCubedTwoSelectedBifundamentalsTotal :
+  24 * 3 + 36 ≡ 8 * 3 + 4 * 3 + 12 * 4 + 24
+suThreeCubedTwoSelectedBifundamentalsTotal = refl
+
+suThreeCubedTwoFullComplexTwentySevensTotal :
+  24 * 3 + 108 ≡ 8 * 3 + 4 * 3 + 12 * 4 + 96
+suThreeCubedTwoFullComplexTwentySevensTotal = refl
+
+eSixToTrinificationBrokenGeneratorCount :
+  78 ∸ 24 ≡ 54
+eSixToTrinificationBrokenGeneratorCount = refl
+
+eSixToSMBrokenGeneratorCount :
+  78 ∸ 12 ≡ 66
+eSixToSMBrokenGeneratorCount = refl
+
+fullESixPublished650PlusTwo27PhysicalBosonCount :
+  78 * 3 + 650 + 108
+    ≡ 12 * 3 + 66 * 4 + ((650 + 108) ∸ 66)
+fullESixPublished650PlusTwo27PhysicalBosonCount = refl
+
+-- Different source spectra can share algebraic rank/27-labels.
+-- Neither reuses a selected 36-coordinate mass Hessian for 108 or 758
+-- coordinates without an explicit action and same-spectrum receipt.
