@@ -28,7 +28,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
-open import Relation.Binary.PropositionalEquality using (cong₂)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -127,6 +128,69 @@ module GlobalSignedCancellation
         (λ selected member →
           allNonzero selected (Cube.there member))
 
+    ------------------------------------------------------------------------
+    -- Same R690 global signed object, expressed in the already-proved
+    -- output-heat plus difference-frequency coordinates.
+    -- No independent per-output ABS estimate or norm is introduced.
+    ------------------------------------------------------------------------
+
+    noCardinalityTerm :
+      (output : Z3.FourierMode) →
+      Z3.NonZeroMode output → ℚ
+    noCardinalityTerm output outputNonzero =
+      let
+        module One =
+          R689.FixedOutput
+            physicalSystem S viscosityPositive output outputNonzero
+      in
+      R687.eight * One.outputHeatSelfWork
+        + R687.eight * One.centeredDifferenceWork
+
+    sumNoCardinality :
+      (outputs : List Z3.FourierMode) →
+      ((output : Z3.FourierMode) →
+        output Cube.∈ outputs → Z3.NonZeroMode output) →
+      ℚ
+    sumNoCardinality [] allNonzero = 0ℚ
+    sumNoCardinality (output ∷ rest) allNonzero =
+      noCardinalityTerm output
+        (allNonzero output (Cube.here refl))
+      + sumNoCardinality rest
+        (λ selected member →
+          allNonzero selected (Cube.there member))
+
+    sameGlobalSignedObjectNoCardinality :
+      (outputs : List Z3.FourierMode) →
+      (allNonzero :
+        (output : Z3.FourierMode) →
+        output Cube.∈ outputs → Z3.NonZeroMode output) →
+      sumInputLaplacian outputs allNonzero
+      ≡ sumNoCardinality outputs allNonzero
+    sameGlobalSignedObjectNoCardinality [] allNonzero = refl
+    sameGlobalSignedObjectNoCardinality (output ∷ rest) allNonzero =
+      let
+        outputNZ = allNonzero output (Cube.here refl)
+        module One =
+          R689.FixedOutput
+            physicalSystem S viscosityPositive output outputNZ
+        tailNonzero =
+          λ selected member →
+            allNonzero selected (Cube.there member)
+        head :
+          inputLaplacianTerm output outputNZ
+          ≡ noCardinalityTerm output outputNZ
+        head =
+          trans
+            (cong (R687.eight *_) 
+              One.inputLaplacianIsOutputHeatPlusCenteredDifference)
+            (solve
+              (R687.eight ∷ One.outputHeatSelfWork
+              ∷ One.centeredDifferenceWork ∷ []))
+      in
+        cong₂ _+_
+          head
+          (sameGlobalSignedObjectNoCardinality rest tailNonzero)
+
     sumIdentity :
       (outputs : List Z3.FourierMode) →
       (allNonzero :
@@ -166,6 +230,16 @@ module GlobalSignedCancellation
     globalInputLaplacianWork =
       sumInputLaplacian outputs allOutputsNonzero
 
+    globalNoCardinalityWork : ℚ
+    globalNoCardinalityWork =
+      sumNoCardinality outputs allOutputsNonzero
+
+    globalInputLaplacianIsNoCardinality :
+      globalInputLaplacianWork ≡ globalNoCardinalityWork
+    globalInputLaplacianIsNoCardinality =
+      sameGlobalSignedObjectNoCardinality
+        outputs allOutputsNonzero
+
     globalPointwiseIdentity :
       globalSignedCancellation ≡ globalInputLaplacianWork
     globalPointwiseIdentity =
@@ -184,6 +258,22 @@ module GlobalSignedCancellation
     Nat → Time → ℚ
   globalInputLaplacianWork T R cutoff time =
     At.globalInputLaplacianWork T R cutoff time
+
+  globalNoCardinalityWork :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    Nat → Time → ℚ
+  globalNoCardinalityWork T R cutoff time =
+    At.globalNoCardinalityWork T R cutoff time
+
+  globalInputLaplacianIsNoCardinality :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    (cutoff : Nat) (time : Time) →
+    globalInputLaplacianWork T R cutoff time
+    ≡ globalNoCardinalityWork T R cutoff time
+  globalInputLaplacianIsNoCardinality T R cutoff time =
+    At.globalInputLaplacianIsNoCardinality T R cutoff time
 
   globalPointwiseIdentity :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
@@ -207,6 +297,26 @@ module GlobalSignedCancellation
     Nat → Time → ℚ
   integratedGlobalInputLaplacianWork T R cutoff terminal =
     integrateTo (globalInputLaplacianWork T R cutoff) terminal
+
+  integratedGlobalNoCardinalityWork :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    Nat → Time → ℚ
+  integratedGlobalNoCardinalityWork T R cutoff terminal =
+    integrateTo (globalNoCardinalityWork T R cutoff) terminal
+
+  integratedOriginalR690IsNoCardinality :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    (cutoff : Nat) (terminal : Time) →
+    integratedGlobalInputLaplacianWork T R cutoff terminal
+    ≡ integratedGlobalNoCardinalityWork T R cutoff terminal
+  integratedOriginalR690IsNoCardinality T R cutoff terminal =
+    R495.integrateCongruent integration
+      (globalInputLaplacianWork T R cutoff)
+      (globalNoCardinalityWork T R cutoff)
+      (globalInputLaplacianIsNoCardinality T R cutoff)
+      terminal
 
   integratedGlobalIdentity :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
