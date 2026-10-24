@@ -104,6 +104,39 @@ now returns a **genuine ℚᵘ witness** from Bishop rational density
 rather than erasing it to the ambient real, enabling a future
 constructive shell/resolvent attachment; kernel checking remains open.
 
+## POSITIVE SAME-SOURCE T3 ↔ SIGNED VORTICITY PRODUCTION
+
+For divergence-free u on T³, classical vector calculus gives
+J=curl(omega×u)=(u·grad)omega-(omega·grad)u.
+The UNFORCED vorticity equation gives the SAME physical source identity
+  J=nu Delta omega-partial_t omega.
+Thus the author-defined T3=||J||²_2 is the **squared nonlinear
+vorticity-source norm**, not a norm coercing omega or normalized
+vorticity direction. Periodic integration by parts yields
+  P_enstrophy_nonlinear = 2<omega,(omega·grad)u>
+    = -2<omega,J>
+and Cauchy--Schwarz gives the valid bound
+  |P_enstrophy_nonlinear|² <=4||omega||²_2 T3.
+This is reusable analytic prior art if T3 is controlled separately,
+NOT a W1/W2 payment or estimate of T3 from energy.
+
+The existing REAL transverse six-mode B datum
+p=(1,0,0),q=(0,1,2),k=(1,1,2), coefficients
+u_p=(0,1,1),u_q=(1,0,0),u_k=±i(1,-1,0),
+conjugate negatives, has physical nonlinear enstrophy rates
++8 and -8. Independently computing J=curl(omega×u) gives
+-2<omega,J>=±8, ||omega||²_2=38, and identical
+strictly POSITIVE T3 for both orientations. So T3 does not encode
+the sign of physical production.
+New `tests/test_ns_T3_physical_vorticity_source_signed_work.py`
+checks this exact finite Fourier identity, quartic T3 vs cubic
+stretching amplitude scaling, and the signed Cauchy inequality.
+Together with Beltrami tests, **9 independently locally executed
+SymPy checks passed**; no exact-head Agda/Lean kernel certificate.
+Original NS vector identity remains classical; DASHI owns the
+independent exact regression; manuscript authors own the T3
+definition, not this source identity.
+
 ## SAME PHYSICAL FIELD / ORIGINAL B R735 MIXED-CARRIER KERNEL
 
 The same real Beltrami field is **positive helicity** at both signed
