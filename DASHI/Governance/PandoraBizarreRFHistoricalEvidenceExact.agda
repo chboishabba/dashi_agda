@@ -11,6 +11,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Governance.InstitutionalAnomalousAlteredStateProgramAtlasExact as History
 
 mkUltraOwner : History.ProgrammeFamily
@@ -113,9 +114,13 @@ sourceAtlas = Source.mkSourceAtlas
   "Bounded original-document roots, no fabricated modern source-to-device bridge"
 
 sourceAtlasNeverPromotes :
+  GenericReceipt.promotesClaim
+    (Source.attributedSourceAtlasReceipt sourceAtlas
+      "No current same-actor apparatus or clinical exposure link is recovered")
+  ≡ false
+sourceAtlasNeverPromotes =
   Source.attributedSourceAtlasReceiptNonPromoting sourceAtlas
-    "No current same-actor apparatus or clinical exposure link is recovered" ≡ refl
-sourceAtlasNeverPromotes = refl
+    "No current same-actor apparatus or clinical exposure link is recovered"
 
 -- Named research objects. Topic similarity cannot be promoted to same project.
 data ProgrammeObject : Set where
