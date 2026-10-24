@@ -251,6 +251,14 @@ def test_ALL_physical_shear_mixed_outputs_and_global_R681_rate():
         if k==(0,0,0):
             assert coherent==0
             continue
+        # The original mixed cross-product is LONGITUDINAL at every
+        # nonzero output on this shear. It is not the physically
+        # Leray-projected NS nonlinear force (which vanishes identically).
+        wavevector=S.Matrix(k)
+        proj=S.simplify(mixed -
+            wavevector*(wavevector.dot(mixed))/
+              sum(z*z for z in k))
+        assert proj==S.zeros(3,1)
         # Each populated input has norm squared one, so every active
         # physical incidence has input heat rate 2.
         raw_R440_work=2*coherent
