@@ -1,3 +1,152 @@
+## 2026-10-24 P0 B4 adversarial discovery and A prior-art recut
+
+**STOP treating the original full-output-fibre B4 estimate as merely an
+unpaid Young inequality.** An exact physical finite-mode negative control now
+exists. Its status is **executed finite arithmetic plus analytic unboundedness
+argument**; no Agda/Lean kernel proof or Clay theorem promotion.
+
+### Literal B4 zero-padding counterexample (physical, real, transverse)
+
+Source owner:
+\`NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda\`
+(fixed mixed helical amplitudes and R440 input-rate vector) together with
+\`NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Exact.agda\`
+(negative bipartite covariance) and
+\`NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact.agda\`
+(literal Core-Core Young companion).
+
+Fix viscosity \`nu=1\`, output \`k=(1,1,0)\`, and a zero-mean real,
+divergence-free physical field
+
+\`\`\`text
+u_hat(+e_x)=u_hat(-e_x)=u_hat(+e_y)=u_hat(-e_y)=e_z
+u_hat(other k)=0.
+\`\`\`
+
+Equivalently on the 2*pi-periodic torus
+\`u_0(x,y,z)=2(cos(x)+cos(y)) e_z\`. This is even an **exact globally
+smooth shear solution** \`u(t)=exp(-t)*u_0\`: since \`partial_z u=0\` and
+\`u\` has only a z component, \`u.dot.grad u=0\`; with \`-Delta u_0=u_0\`,
+the PDE is the heat equation (constant pressure). Thus the adversary is
+not an inadmissible arbitrary packet.
+
+At \`k=e_x+e_y\` there are exactly TWO active ordered mixed-helicity
+cells \`(e_x,e_y),(e_y,e_x)\`, both Core, with literal rate
+\`r=|p|^2+|q|^2=2\`. Genuine norm-one helical projectors give
+
+\`\`\`text
+A=(-i/4,-i/4,+1/4), B=(-i/4,-i/4,-1/4)
+M=A+B=(-i/2,-i/2,0), ||M||^2=1/2
+w_A=w_B=2Re<M,A>=1/2
+\`\`\`
+
+All other incidences in the FULL cutoff output fibre have zero mixed
+amplitude, but continue contributing to \`n_N\` and
+\`r_N=sum_(tau in Noncore) (|p_tau|^2+|q_tau|^2)\`. The EXACT B4 signed
+noncore/core defect therefore is
+
+\`\`\`text
+defect_N = r_N - 2 n_N
+         = sum_(tau in Noncore_N) (|p_tau|^2+|q_tau|^2-2).
+\`\`\`
+
+For each integer \`m>=6\`, the incidence
+\`p=(m,0,0),q=(1-m,1,0)\` is a deep high-high Noncore row with *zero*
+amplitude but strictly positive contribution \`2m(m-1)\`, provided
+\`N>=m\`. For all integer p with p+q=k the individual excess is
+nonnegative. Hence
+\`defect_N >= 2 sum_(m=6)^N m(m-1) -> +infinity\`.
+
+By contrast all Core input indices at this fixed output are already
+present by cutoff 5: an input with maxnorm >=6 has both input shells at
+least 3 and is deep high-high. The Core-Core Young companion, including
+ALL zero-zero pairs, is constant at \`M_core=10123708\` for \`N>=5\`.
+
+Executed exact receipt from
+\`scripts/ns_b4_literal_padding_adversary.py\` (all integers/Fractions):
+
+| cutoff N | zero-amplitude Noncore rows | signed defect | literal M_core |
+| ---: | ---: | ---: | ---: |
+| 4 | 0 | 0 | 3306048 |
+| 5 | 218 | 18080 | 10123708 |
+| 8 | 3470 | 535344 | 10123708 |
+| 12 | 13518 | 4204080 | 10123708 |
+| 16 | 32910 | 17577776 | 10123708 |
+| 20 | 64718 | 53228080 | 10123708 |
+
+**No-go scope:** For this fixed global smooth state, any legitimate
+physical \`ED_N(u)\` bounded uniformly in cutoff N and finite constants
+\`theta_D<1/2,c_D\` cannot make
+\`defect_N<=theta_D*M_core+c_D*ED_N\` hold for every N. Allowing the
+opaque analytic interface's \`localED\` field to grow artificially like
+the zero-padding rate sum does NOT constitute a cutoff-uniform physical
+payment. The #1234 analytic record itself does not fix \`ED\`;
+discharge its actual physical source meaning **before** promoting this
+as a formal counterexample to a *fully specified* proposed inequality.
+
+**High-alpha next physical theorem, NOT another RNNN:** retire or
+redefine the full-fibre \`n_N W(M,D)+(sum r)W(M,M)\` covariance as a
+uniform-control target; use original same-source modal heat work
+\`W(M,sum r_tau A_tau)\` or a zero-padding-invariant amplitude-weighted
+centering. Both are unchanged by extra zero cells. However one must
+prove the replacement is the actual *unforced NS critical-production
+quantity* via the pre-existing R406/R440 same-object chain; do not
+rename a different expression as the B4 theorem. An active-support
+index filter by \`A_tau!=0\` may be discontinuous at zeros; prefer
+polynomial amplitude weighting or direct uncentered modal work.
+
+Regression: \`tests/test_ns_b4_literal_padding_adversary.py\`.
+Do not rerun general R579 Young, rebuild the R236 region classifier,
+or mint more Round files. If source ED is cutoff bounded, the
+**specific old B4 payment target is falsified**, and the positive B
+programme must switch to a corrected estimator; the Navier–Stokes Clay
+problem itself is unaffected.
+
+### A same-object and majorant already-paid layers
+
+The local Euclidean Fourier divergence-form cell and genuine canonical
+Leray projection are ALREADY constructed in
+\`NSTriadKNEuclideanCanonicalProjectedInteractionExact.agda\`:
+\`canonicalProjectedInteraction\` and
+\`canonicalProjectedInteractionFormulaWeld\`. The projected-cell
+\`|xi|^2\` estimate is in
+\`NSTriadKNEuclideanProjectedInteractionQWeldExact.agda\`.
+Do not reopen the *local algebra* or introduce another opaque
+\`RawInteractionMeaning : Set\` receipt.
+
+Actual unclosed A1a is narrower but more important: the continuum
+\`EuclideanFourierTrajectory\` currently accepts freely specified
+\`FourierTransformVelocity : Set\` and a term of that type; this is NOT
+the analytic theorem that the chosen \`velocityHat\` is the spatial
+Fourier transform of the SAME physical Navier--Stokes velocity.
+Construct that concrete transform (initially Schwartz/smooth/finite
+energy with justified integrability), the derivative/product
+convolution identity and the physical-time attachment. Do not
+promote only a Schwartz sample to arbitrary initial data.
+
+For A2 the repo already found a hidden **measure-dimension no-go**:
+\`NSWholeSpaceConvolutionEnergyTonelliExact.agda\` notes that a
+nonnegative Gram-pair bound on the FULL independent
+\`(xi,eta_alpha,eta_beta)\` carrier has a free \`R3\` variable and
+generally infinite integral. Integrate coherent/signed pair first
+or use the SINGLE genuine convolution fibre
+\`e(eta)e(xi-eta)\`, whose \`R6\` integral factors as
+\`(int_R3 e)^2\`. Finite translation quadrature and the convergence
+of the convolution mass from the energy limit are already in
+\`NSWholeSpaceFiniteConvolutionSingleLimitExact.agda\`. Remaining:
+instantiate its energy quadratures from the real Fourier field and
+bind to the actual low/high physical envelopes, with no fictitious
+positive \`R9\` majorant. A3 whole-space continuation still remains.
+
+**Revised priorities:** P0 B4 source-ED and zero-padding redesign;
+P0 A Fourier-transform same-solution theorem; P1 A single-fibre energy
+quadrature and low/high domination; P1 B1/2/3 and B7 physical
+budgets; P2 unforced A/B continuation. Existing canonical owners only,
+no new numbered proof files. No external paper authorship or kernel
+verification is implied by this DASHI negative-control calculation.
+
+---
+
 ## 2026-10-24 — Original unforced A+B proof archaeology and executable priorities
 
 **Verdict after cross-PR/current-owner audit.** The user's recollection of extensive prior
