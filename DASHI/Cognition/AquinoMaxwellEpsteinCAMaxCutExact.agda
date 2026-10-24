@@ -2386,12 +2386,30 @@ record BannonFTCCIDAdversarialBoundary : Set where
     ftcPetitionJudiciallyProvesLiability : Bool
     caInvestigationProvesEpstein2019FilmMethodReuse : Bool
     collectiveAquinoPROMISHierarchyPaid : Bool
+    federalPetitionSaysCIDIssuedSeptember25 : Bool
+    signedCourtOrderSaysCIDIssuedSeptember24 : Bool
+    exactOriginalCIDIssueDateReconciledWithNativeCID : Bool
 open BannonFTCCIDAdversarialBoundary public
 
 canonicalBannonFTCCIDAdversarialBoundary : BannonFTCCIDAdversarialBoundary
 canonicalBannonFTCCIDAdversarialBoundary =
   bannon-ftc-cid-adversarial-boundary
   true true true true true true true false false false false false false false
+  true true false
+
+-- Date inconsistency is preserved as a source-to-source discrepancy, NOT
+-- invented as proof of two separate civil demands.
+ftcBannonOriginalDateDiscrepancyRecorded :
+  federalPetitionSaysCIDIssuedSeptember25 canonicalBannonFTCCIDAdversarialBoundary ≡ true
+ftcBannonOriginalDateDiscrepancyRecorded = refl
+
+ftcBannonJudicialDateDiscrepancyRecorded :
+  signedCourtOrderSaysCIDIssuedSeptember24 canonicalBannonFTCCIDAdversarialBoundary ≡ true
+ftcBannonJudicialDateDiscrepancyRecorded = refl
+
+ftcBannonCIDOriginalIssueDateUnpaid :
+  exactOriginalCIDIssueDateReconciledWithNativeCID canonicalBannonFTCCIDAdversarialBoundary ≡ false
+ftcBannonCIDOriginalIssueDateUnpaid = refl
 
 ftcBannonDirectAgencyInvestigationSourcePaid :
   ftc2019DemandAnd2020PetitionIdentified
