@@ -15,10 +15,13 @@ module DASHI.Physics.Closure.NSClayFacingAPhysicalSameObjectCutExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; _≤_)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import Real as BishopReal
+import RealProperties as BishopP
 
 import DASHI.Physics.Closure.NSCanonicalEuclideanPeriodicSemanticCarriersExact as Canonical
 import DASHI.Physics.Closure.NSTriadKNEuclideanSignedFrequencyCarrierRealizationExact as Euclidean
@@ -68,6 +71,40 @@ nearOriginPhysicalBound :
         (Origin.saturationCell (saturationWeld D I))))
 nearOriginPhysicalBound D I =
   Origin.physicalKernelSaturationOriginBound (saturationWeld D I)
+
+------------------------------------------------------------------------
+-- ALL-REAL A1 HEAT FLOOR: constructive rational interpolation.
+--
+-- The legacy HighFrequencyEnvelopeData below requires a rational
+-- `outputHeatRate` whose Bishop embedding EQUALS ν|xi|². This cannot
+-- inhabit arbitrary physical real frequencies or arbitrary positive
+-- real viscosity (consider ν=sqrt(2), xi=(1,0,0)). Do NOT infer a
+-- universal same-object weld from it.
+--
+-- The correct all-real bridge is a positive rational STRICT LOWER
+-- bound for the actual, same-frequency viscous heat rate. Murray/
+-- Bishop constructive rational density already gives this without
+-- classical choice or a global lattice gap. The remaining real
+-- resolvent comparison and physical kernel identification are still
+-- mathematical obligations; this theorem only pays the floor
+-- existence step, with the original physical viscosity and frequency.
+------------------------------------------------------------------------
+
+physicalViscousHeatAdmitsPositiveRationalFloor :
+  (fluid : Heat.PositiveViscosity) →
+  (point : Heat.PuncturedEuclideanFrequency) →
+  Σ BishopReal.ℝ
+    (λ lower →
+      BishopReal._<_ BishopReal.0ℝ lower ×
+      BishopReal._<_ lower
+        (Heat.viscousHeatRate fluid (Heat.frequency point)))
+physicalViscousHeatAdmitsPositiveRationalFloor fluid point
+  with BishopP.fast-density-of-ℚ
+    BishopReal.0ℝ
+    (Heat.viscousHeatRate fluid (Heat.frequency point))
+    (Heat.viscousHeatRatePositive fluid point)
+... | rational , lowerPositive , lowerBelowHeat =
+  BishopReal._⋆ rational , lowerPositive , lowerBelowHeat
 
 ------------------------------------------------------------------------
 -- High-frequency physical identification.
