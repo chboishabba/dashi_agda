@@ -186,6 +186,20 @@ inputLaplacianWorkIsCommutatorMinusTangent physicalSystem S output =
 -- not a new estimate or proof of the missing R690 spacetime payment.
 ------------------------------------------------------------------------
 
+-- Under the actual rationalRealField, R94's physicalDecayRate is
+-- definitionally the same multiplier as the original OutputRate owner's
+-- modalViscousRate. This checks that the specialization above is not
+-- silently switching from the R685 physical viscosity operator to
+-- another physical rate.
+r685PhysicalModalRateIsOutputRate :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (mode : Z3.FourierMode) →
+  R94.physicalDecayRate physicalSystem mode
+  ≡ Centered.modalViscousRate
+      (Field30.viscosity physicalSystem)
+      (Field30.physicalInverseSquare physicalSystem) mode
+r685PhysicalModalRateIsOutputRate physicalSystem mode = refl
+
 r685PhysicalNoCardinalityRateNormalForm :
   (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
   (S : Helical.HelicalModeScalars F) →
