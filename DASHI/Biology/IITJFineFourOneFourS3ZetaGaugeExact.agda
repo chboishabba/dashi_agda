@@ -306,6 +306,31 @@ pointedRegularZetaMultiplicity = refl
 pointedThreePhaseSectors : 3 * 65610 ≡ 196830
 pointedThreePhaseSectors = refl
 
+-- Distinct D4 spatial and S3 value actions jointly classify
+-- three-colourings of the nine-sheet. D4 has site-cycle patterns:
+--   identity 9 cycles,
+--   2 quarter turns each 3 cycles/2 even cycles,
+--   half turn 5 cycles/4 even cycles,
+--   4 reflections each 6 cycles/3 even cycles.
+-- Over all six S3 value permutations, the two genuine 3-cycles have
+-- zero fixed nine-sheet colourings because D4's site cycle lengths are
+-- only 1,2,4; the identity fixes 3^cycles, each of 3 reflections on
+-- colour values fixes 3^even-site-cycles.
+--
+-- Burnside numerator 23520 gives 490 simultaneous D4 x S3 orbits.
+-- The numerical script independently enumerates all 19683 sheets.
+-- Only the integer arithmetic is source-written Agda here; the
+-- group fixed-point enumeration is a separately checked finite lemma.
+
+burnsideD4S3Numerator :
+  19683 + 2 * 27 + 243 + 4 * 729
+    + 3 * (1 + 2 * 9 + 81 + 4 * 27)
+  ≡ 23520
+burnsideD4S3Numerator = refl
+
+burnsideD4S3Orbits : 48 * 490 ≡ 23520
+burnsideD4S3Orbits = refl
+
 record FourOneFourS3ZetaBoundary : Set where
   constructor four-one-four-s3-zeta-boundary
   field
