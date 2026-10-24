@@ -289,6 +289,7 @@ def verify_numeric_results() -> dict:
     assert d4_symplectic["h6_sized_rank"] == 12
     assert d4_symplectic["d4_acts_symplectically_on_repair"]
     assert d4_symplectic["value_s3_reflection_cannot_lift_as_group_automorphism"]
+    assert d4_symplectic["quadratically_corrected_value_anti_automorphism_generator_checks"] == 177147
     assert not d4_symplectic["actual_monster_intertwiner"]
 
     return {
