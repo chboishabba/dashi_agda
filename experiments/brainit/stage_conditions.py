@@ -18,12 +18,16 @@ from inventory import digest
 
 CONDITIONS = ("paired", "deranged", "zero")
 REQUIRED = ("multi_sub_fmri", "num_voxels_subjects", "type_sample")
-SEED_WRAPPER = '''"""Deterministically seed the unmodified upstream CLI (best effort)."""
+SEED_WRAPPER = '''"""Seed upstream inference; hash outputs only after successful return."""
 import runpy
 import sys
 import random
+import hashlib
+import json
+from pathlib import Path
 import numpy as np
 import torch
+
 seed = int(sys.argv[1])
 sys.argv = ["inference/full_inference.py"] + sys.argv[2:]
 random.seed(seed)
@@ -31,8 +35,38 @@ np.random.seed(seed)
 torch.manual_seed(seed)
 if torch.cuda.is_available():
     torch.cuda.manual_seed_all(seed)
+
 runpy.run_path("inference/full_inference.py", run_name="__main__")
+
+root = Path.cwd()
+staged = json.loads((root / "control_receipt.json").read_text())
+outputs = sorted((root / "results/reconstructions").rglob("*.npy"))
+if not outputs:
+    raise RuntimeError("Upstream claimed inference success but saved no arrays")
+
+def sha256(path):
+    h = hashlib.sha256()
+    with path.open("rb") as file:
+        for chunk in iter(lambda: file.read(4 * 1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+receipt = {
+    **staged,
+    "model_inference_executed": True,
+    "saved_arrays": [
+        {"path": str(p.relative_to(root)), "sha256": sha256(p),
+         "bytes": p.stat().st_size}
+        for p in outputs
+    ],
+    "actual_inference_entrypoint": "inference/full_inference.py",
+    "upstream_inference_returned_successfully": True,
+    "gpu_kernel_determinism_proved": False,
+}
+(root / "inference_receipt.json").write_text(
+    json.dumps(receipt, indent=2, sort_keys=True) + "\\n")
 '''
+
 
 
 def derangement(n: int, seed: int) -> np.ndarray:
