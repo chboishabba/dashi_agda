@@ -256,3 +256,29 @@ Hatcher's perfect group no-abelian
 charge map remain independent mathematical
 constraints; no new CS, Monster, Clay or
 experiment theorem is paid by this regression.
+
+
+## 2026-10-25 final horn/Witten source correction and highest-alpha frontier
+
+Canonical focused owner: https://github.com/chboishabba/dashi_agda/blob/chatgpt/hyperfabric-wave-spacetime-cut-20261024/docs/hyperfabric-horn-a5-flat-bundle-onebranch-maxcut-20261025.md
+
+Historical owners: Hatcher's Alexander horn fundamental group; independent Agda horn #1244 owns the nontrivial A5 quotient and finite c=0 VOA; independent Agda neutrino/Wilson #1247 owns the selected noncentral W. Standard icosahedral A5 and flat-principal-bundle monodromy reconstruction are published prior mathematics.
+
+A new finite-image theorem gives a strictly stronger geometric filter for the A5 quotient: every nonidentity element of the standard faithful icosahedral A5 < SO3 < SU3 has operator-gap at least sqrt((5-sqrt5)/2)>1. A nontrivial root commutator forces both children nontrivial recursively, hence ONE sequence of genuinely marked descendant meridians with lengths tending to zero contradicts a compatible uniformly bounded FLAT connection realizing that finite-image representation. This is NOT the unrestricted SU3 result, which required a stronger full-depth small-leaf condition.
+
+A positive independent result is also necessary: the nontrivial representation of the classical Hatcher exterior's pi1 into SU3 automatically yields a smooth FLAT SU3 principal bundle with that holonomy on the OPEN exterior via the standard universal-cover construction. It need not have connection coefficients uniformly bounded near the excluded wild boundary. Thus abstract smooth-flat existence is positive, and the physical regularity requirement is the live issue. The SU3 principal bundle over this 3-manifold is topologically trivial by standard low-dimensional obstruction theory.
+
+Three genuine exact source regressions have passed locally with byte-for-byte Git blob hash verification:
+(A) A5 60 elements / 3600 commutator pairs / 8 synthetic collar stages / 127 topological parent-child WINDING mismatch controls; Git blob bce4f345d18912687bcf2d4a99d469376db39754.
+(B) smooth FLAT punctured-plane order-five single winding loops, shrinking length and connection coefficient norm growing as 1/r; Git blob b15a80bc228f213f3918c2fd3509499034620f34.
+(C) smooth bounded NONFLAT SU3 on simply connected R2 with different Wilson holonomies on homotopic contractible loops; Git blob 4876fffbcc823aebf929c6b0bd6ef29b42591ece.
+
+The synthetic geometric collar is explicitly NOT Hatcher marked: each of 127 parent circles has child-core winding (1,0) versus (0,0) for the required commutator, proving a literal topological rejection instead of a decorative failure flag.
+
+The selected separate #1247 W has nonzero imaginary trace because its exact zeta3 coefficient is nonzero. Every element, and every SU3 conjugate, of the chosen REAL icosahedral A5 < SO3 subgroup has real trace. Thus W cannot be identified with the A5-root holonomy in that representation. The original two selected math programmes must remain separately typed.
+
+MOST IMPORTANT PHYSICAL PRECONDITION: Hatcher's pi1 relation between meridians implies a relation between holonomies automatically ONLY for FLAT monodromy representations. With nonflat connection, Wilson holonomy depends on the geometric representative; a controlled non-Abelian Stokes/homotopy/curvature-defect estimate is essential. Earlier loose wording about arbitrary bounded nonflat connections is superseded. The original FlatFormalDiskHolonomySurface mathematical interface owns the unresolved Stokes/analytic terms.
+
+Lean #84 adds SOURCE-WRITTEN generic all-descendant-nontrivial, one-short-marked-descendant/finite-gap contradiction and selected Wilson nonreal trace certificate. Lean/Lake and Agda kernels not run; no actual source-coordinate three-copy Hatcher collars or uniform physical connection, no Witten/Monster/TOE identification and no Clay theorem.
+
+Current Pareto: construct genuinely linked Hatcher Z-block collars with van Kampen parent-as-commutator marking, collar clearance, arclength and compatible whisker/gauge data for ONE descending branch; if that exists, the finite A5 uniformly bounded flat realization fails. For general curved gauge fields, separately quantify homotopy-surface curvature defects.
