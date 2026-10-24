@@ -84,6 +84,51 @@ trajectories have nonzero `globalIntegratedCommutator`; R735 W2 also
 remains OPEN. In particular no argument here provides B1/B2/B3/B4
 signed coercivity, actual R406 B7 transport, or periodic continuation.
 
+## Sharp physical anti-shortcut: energy alone never bounds this endpoint
+
+For each integer N>=2, define the real trigonometric shear
+  u_N(x,y,z) = 2/sqrt(2N) sum_(n=1)^N cos(nx) e_z
+on T³, with viscosity ν=1. It is smooth, real, transverse,
+mean-zero, and solves the UNFORCED Navier–Stokes equation by heat
+evolution because (u_N·grad)u_N=0. Its nonzero initial Fourier
+coefficients at ±(n,0,0) are a_N e_z with
+a_N=1/sqrt(2N), so the NORMALIZED kinetic energy is exactly
+  sum_k |u_(N,k)|² = 2N a_N² = 1.
+
+For p,q>0 along the x-axis the TRUE normalized helical projector
+formula gives
+  (H+_p a_N e_z) × (H-_q a_N e_z)
+    = -(i/2) a_N² e_x = -(i/(4N))e_x.
+For p,q<0 it is the complex conjugate; opposite-sign ordered
+pairs have zero mixed product. For each k=2,...,N the original
+same-cutoff fixed-output mixed fold is therefore
+  M_k = -(i/(4N))(k-1)e_x,
+  M_-k = conjugate(M_k).
+The same-N nonzero output mixed-mass sum is EXACTLY
+  E_(M,N)(0)
+    = 2 sum_(k=2)^N ((k-1)/(4N))²
+    = ((N-1)(2N-1))/(48N) ~ N/24.
+If all generated outputs through 2N are included instead, the
+mass is N/12+1/(24N). In particular no DATA-INDEPENDENT
+inequality of the form
+  E_(M,N)(0) <= B(E_kinetic(u_N))
+for a fixed finite bound function B with B(1)<infinity can hold
+uniformly across all smooth initial data. This is a *physical*
+helicity-source counterexample to the energy-only shortcut,
+not a counterexample to global NS regularity or a universal
+data-dependent R699 bound.
+
+For each **fixed** smooth u_N, the H^s-dependent Young bound above
+still supplies a finite uniform ceiling across cutoffs. The family
+changes its initial data as N changes; never confuse these
+quantifiers. The H^s norms of u_N grow, so no contradiction arises.
+
+Three additional independent exact SymPy checks passed:
+`tests/test_ns_r699_energy_only_initial_mass_no_go.py`.
+They verify true spectral projector orientation, exact
+same-cutoff count, fixed L² energy, full-output sum and growth.
+No Agda/Lean kernel certification is inferred.
+
 ## Exact local verification and acceptance
 
 `python -m pytest -q /mnt/data/test_ns_r699_initial_mixed_mass_young.py`
