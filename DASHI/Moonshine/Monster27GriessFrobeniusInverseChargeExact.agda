@@ -57,13 +57,21 @@ record SourceGriessFrobeniusDuality
 
     -- True source-owned opposite-charge spectral states are required.
     -- A finite balanced-cube chart alone does not construct them.
+    chargeEigen :
+      (p : Cube.Ternary27Point) →
+      Griess.Carrier (Spoke.griess sameVOA) → Set
+
+    representativeHasCharge :
+      (p : Cube.Ternary27Point) →
+      chargeEigen p (Spoke.chargedRepresentative sameVOA p)
+
     inverseChargeDual :
       (p : Cube.Ternary27Point) →
       Griess.Carrier (Spoke.griess sameVOA)
 
     inverseChargeCertified :
       (p : Cube.Ternary27Point) →
-      Set
+      chargeEigen (oppositeSite p) (inverseChargeDual p)
 
     nondegeneratePairForChosenCharge :
       (p : Cube.Ternary27Point) →
