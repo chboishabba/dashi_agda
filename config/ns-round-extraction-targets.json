@@ -93,11 +93,11 @@
           },
           {
             "repo": "chboishabba/dashi_agda",
-            "path": "DASHI/Physics/Closure/NSWholeSpaceConvolutionEnergyTonelliExact.agda"
+            "path": "scripts/ns_a_schwartz_fourier_same_object.py"
           }
         ],
-        "status": "local canonical projected convolution/Leray cell and Q-bound already theorem-bearing; actual spatial Fourier transform/convolution identity, low/high finite-energy domination, and unrestricted continuation remain unpaid",
-        "next": "Reuse canonicalProjectedInteraction and formula weld; prove actual u(x,t)->u_hat(t,xi) transform and Fourier convolution on SAME solution. For A2 use single convolution fibre energy, not divergent positive R9 Gram-pair product; bridge quadratures, low/high majorants and continuation."
+        "status": "local projected Fourier/Leray formula and convolution quadrature paid; standard distributional L² physical Fourier source identity gives |Pdiv(u⊗u)^hat|<=E|xi| and locally-L² E/(nu|xi|) low-frequency heat majorant; Agda Bishop transform, signed centered kernel high tail and continuation NOT kernel discharged",
+        "next": "Formalize standard finite-energy L2->L1 tensor Fourier/Plancherel distributional identity in same EuclideanFourierTrajectory, reuse canonicalProjectedInteraction; weld low-frequency physical source to signed centered A2 and show high-frequency dominance/continuation; never infer high control from low 1/|xi| estimate."
       },
       {
         "id": "NS-B",
@@ -128,8 +128,8 @@
             "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
           }
         ],
-        "status": "B4 full-output-fibre physical payment candidate has a fixed-state zero-padding obstruction (subject to actual local ED cutoff behavior). Principal half and algebraic representation intact. B1/2/3, B7 and continuation remain independent.",
-        "next": "P0 determine exact localED source and apply fixed-state B4 adversary; if ED genuinely cutoff-uniform, retire current full-fibre B4 estimate and derive a zero-padding-invariant same-object alternative. Parallel B1/2/3, B7, continuation."
+        "status": "full-fibre B4 proposed uniform inequality no-go against actual selected-pair ED; signed R440 algebra and principal-half still valid; redesigned positive B estimate, B1/2/3, B7 and continuation remain",
+        "next": "Retire defective full-fibre physical B4 uniform-payment claim; rederive direct zero-padding invariant physical R440 source and exact critical-production bridge; pursue B123 and B7 independently."
       },
       {
         "id": "NS-B4",
@@ -157,8 +157,8 @@
             "path": "scripts/ns_b4_literal_padding_adversary.py"
           }
         ],
-        "status": "2026-10-24 exact fixed physical seed negative control: full-output-fibre zero-amplitude incidence centering causes signed defect to grow unboundedly with cutoff while literal core companion stabilizes; uniform B4 payment impossible if local ED fixed-state bounded. Current analytic socket is conditional and not closed.",
-        "next": "First rule out the full-fibre zero-padding no-go against the EXACT proposed source ED; do NOT build Young/cardinality bound. Prefer a same-object, zero-padding-invariant physical weighted-amplitude rate centered on active amplitudes or direct modal heat work; prove identity before attempting uniform estimate."
+        "status": "physical B4 full-fibre strict-half cutoff-uniform inequality mathematically falsified for actual R219/R469 selected-pair ED: fixed smooth shear has localED<=4, core companion fixed, defect_N->infinity; source Agda/kernel negative theorem still unverified",
+        "next": "Do not prove falsified B4 full-fibre estimate. Reuse R440 raw weighted amplitude, which is zero-padding invariant, and prove a SAME-SOURCE equivalence to a genuinely admissible critical-production estimate; redesign B4 positive owner and retain no-go receipt."
       },
       {
         "id": "NS-B-RESERVE",
