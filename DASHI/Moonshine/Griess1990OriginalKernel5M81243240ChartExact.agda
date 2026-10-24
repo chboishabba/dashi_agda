@@ -27,6 +27,7 @@ module DASHI.Moonshine.Griess1990OriginalKernel5M81243240ChartExact where
 -- Agda toolchain NOT run. Two-sided Agda proof receipt explicitly open.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; _*_; _+_)
 open import Data.Product using (_×_; _,_)
@@ -154,6 +155,42 @@ positiveDiagonalToUnit = refl
 negativeDiagonalToUnit :
   kernel5ToM81 (diagonalKernel5 neg) ≡ (m81Identity , neg)
 negativeDiagonalToUnit = refl
+
+
+-- Concrete source-level two-way equivalence witness: this DOES pay the
+-- actual Kernel5↔M81×Trit point-carrier roundtrip, not M81 multiplication.
+record Kernel5M81CarrierBidi : Set where
+  constructor kernel5-m81-carrier-bidi
+  field
+    leftInverse :
+      (x : Kernel5) → m81ToKernel5 (kernel5ToM81 x) ≡ x
+    rightInverse :
+      (x : M81TimesF3) → kernel5ToM81 (m81ToKernel5 x) ≡ x
+
+canonicalKernel5M81CarrierBidi : Kernel5M81CarrierBidi
+canonicalKernel5M81CarrierBidi =
+  kernel5-m81-carrier-bidi kernel5LeftRoundTrip m81RightRoundTrip
+
+m81IdentityKernel5 :
+  (t : Trit) → m81ToKernel5 (m81Identity , t) ≡ diagonalKernel5 t
+m81IdentityKernel5 neg = refl
+m81IdentityKernel5 zer = refl
+m81IdentityKernel5 pos = refl
+
+diagonalKernel5Forward :
+  (t : Trit) → kernel5ToM81 (diagonalKernel5 t) ≡
+    (m81Identity , t)
+diagonalKernel5Forward neg = refl
+diagonalKernel5Forward zer = refl
+diagonalKernel5Forward pos = refl
+
+diagonalKernel5Backward :
+  (x : Kernel5) → (t : Trit) →
+  kernel5ToM81 x ≡ (m81Identity , t) →
+  x ≡ diagonalKernel5 t
+diagonalKernel5Backward x t h =
+  trans (sym (kernel5LeftRoundTrip x))
+    (trans (cong m81ToKernel5 h) (m81IdentityKernel5 t))
 
 -- Agda #1094 defines this dependent relative-carrier on its own
 -- unmerged branch; keep the old Kernel5 and non-diagonal contract
