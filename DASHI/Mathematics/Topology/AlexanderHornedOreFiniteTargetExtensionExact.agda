@@ -133,12 +133,6 @@ evaluationSurvivesOneHornRefinement T old (H.combine w v) =
 
 -- Recursively build all future assignments, reusing the exact
 -- Horn address refinement rather than recreating a free group.
-iterateAssignment :
-  (T : CommutatorSectionTarget) →
-  H.HornAddress → Value T
-  → Assignment T
-iterateAssignment T address value a = value
-
 futureAssignments :
   (T : CommutatorSectionTarget) →
   (n : Nat) →
