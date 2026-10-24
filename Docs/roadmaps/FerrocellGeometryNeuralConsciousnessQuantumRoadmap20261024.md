@@ -365,3 +365,12 @@ agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Reasoning/Geometri
 \`\`\`
 
 No package/PyPhi, Agda compiler, hidden model checkpoints, neuron-matched causal TPMs or conscious-report datasets were installed or replayed by this documentation update. Missing receipts remain real gates. Source provenance and downstream inference authority are independent.
+
+
+### Other XOR-symmetry PRs — ruled out as near-term physical consumers
+
+- [Yang–Mills #574](https://github.com/chboishabba/dashi_agda/pull/574), **closed/unmerged**, constructs a Boolean four-cube \`(C2)^4\` Walsh-character sector in the source-specific lattice-gauge programme. [Yang–Mills #575](https://github.com/chboishabba/dashi_agda/pull/575), **closed/unmerged**, sharpens the conditional reflection-law cancellation and explicitly rejects the leap \`S4/degree invariance ⇒ XOR-convolution/Walsh diagonalisation\`. These are excellent *methodological donors* for symmetry certification and representation-observer stress tests; they provide no physical Ferrocell, cognitive, IIT-Phi or Yang–Mills continuum identification in this roadmap.
+- [Complexity #1129](https://github.com/chboishabba/dashi_agda/pull/1129), **open/unmerged**, reuses XOR for finite program-code/borrow/ripple control. Exact Boolean reversibility in one input does not establish a universal SAT lower bound. Do not propagate the IIT partial-integration metric as a complexity theorem.
+- [Torque #1164](https://github.com/chboishabba/dashi_agda/pull/1164), **merged**, supplies the physically *typed* oriented-bracket formalism that the IIT #1148 \`IITGridTorqueC3HolonomyHandoffExact\` symbolically reuses. The port-phase intertwiner has no causal/quantitative physical torque-amplitude or optical Berry-phase proof by itself.
+
+**Pareto decision:** preserve those links as conditional reusable methods; spend the next empirical cut on calibrated state/observation/wiring dynamics (neural or LLM). Do not start an unrequested bridge treating \`F₂\` Walsh, \`F₃\` C3 and full continuous optical Fourier coefficients as the same representation without an explicit intertwiner.
