@@ -61,11 +61,8 @@ faithful78 := Filtered([1..Length(irr)], i ->
 allDegree78 := Filtered([1..Length(irr)], i -> irr[i][1] = 78);
 nonfaithful78 := Filtered(allDegree78, i ->
   not IsFaithfulCharacter(irr[i]));
-if Length(faithful12) <> 2 or Length(faithful78) <> 2 then
-  Error("expected two faithful 12 and two faithful 78, as in source matcher");
-fi;
-if Length(nonfaithful78) < 1 then
-  Error("expected at least one nonfaithful 78 for Nebe Sym² contrast");
+if Length(faithful12) <> 2 or Length(allDegree78) < 2 then
+  Error("need faithful twelve pair and complete degree78 inventory");
 fi;
 
 fusion := FusionConjugacyClasses(tbl, outer);
@@ -80,7 +77,9 @@ PhaseLabel := function(chi, cls)
   local degree, value;
   degree := chi[1];
   value := chi[cls];
-  if value = degree * zeta then
+  if value = degree then
+    return "trivial";
+  elif value = degree * zeta then
     return "zeta";
   elif value = degree * zeta2 then
     return "zetaSquared";
@@ -109,31 +108,37 @@ RowsFor := function(positions)
 end;
 
 rows12 := RowsFor(faithful12);
-rows78 := RowsFor(faithful78);
+rows78 := RowsFor(allDegree78);
 
-# Every selected candidate must carry a pure nontrivial C3 scalar on each
-# central order-three class, with the two classes giving inverse phases.
+# Source character central-C3 scalar may be TRIVIAL on nonfaithful
+# degree78 characters; do NOT omit them before Monster quotient matching.
 for row in Concatenation(rows12, rows78) do
-  if not (row.firstCentralPhase in ["zeta", "zetaSquared"]) then
-    Error("Suzuki candidate is not pure zeta/zeta^2 on first central C3 class");
+  if row.firstCentralPhase = "other" or row.secondCentralPhase = "other" then
+    Error("central C3 character is not a pure order-three scalar");
   fi;
-  if not (row.secondCentralPhase in ["zeta", "zetaSquared"]) then
-    Error("faithful Suzuki candidate is not pure zeta/zeta^2 on second central C3 class");
-  fi;
-  if row.firstCentralPhase = row.secondCentralPhase then
-    Error("two nonidentity central C3 classes did not produce inverse phases");
+  if row.firstCentralPhase = "trivial" then
+    if row.secondCentralPhase <> "trivial" then
+      Error("trivial first central scalar has nontrivial second scalar");
+    fi;
+  elif row.firstCentralPhase = row.secondCentralPhase then
+    Error("nontrivial central C3 class scalars must be inverse phases");
   fi;
 od;
-
-# The two candidates in each degree must be separately labelled; this catches
-# accidental table-order/label collapse without guessing which member occurs in
-# the Monster restriction.
+if ForAny(rows12, r -> r.firstCentralPhase = "trivial") then
+  Error("faithful degree12 must not have trivial central C3 scalar");
+fi;
 if rows12[1].atlasLabel = rows12[2].atlasLabel then
-  Error("faithful degree-12 candidates have duplicate ATLAS labels");
+  Error("faithful 12 ATLAS labels not distinct");
 fi;
-if rows78[1].atlasLabel = rows78[2].atlasLabel then
-  Error("degree-78 candidates have duplicate ATLAS labels");
+if Length(Set(List(rows78,r -> r.atlasLabel))) <> Length(rows78) then
+  Error("degree78 atlas labels not unique");
 fi;
+
+# Strict JSON row output, with no assumptions about the number of 78s.
+JoinIntPositions := xs -> JoinStringsWithSeparator(List(xs,String),",");
+JoinAtlasLabels := xs ->
+  JoinStringsWithSeparator(List(xs,
+    i -> Concatenation("\\\"",labels[i],"\\\"")),",");
 
 output := OutputTextFile("build/monster_3b_suzuki_multiplicity_characters.json", false);
 SetPrintFormattingStatus(output, false);
@@ -144,12 +149,13 @@ PrintTo(output,
   "  \"label_source\": \"CTblLib AtlasLabelsOfIrreducibles(short)\",\n",
   "  \"central_order_three_classes\": [", central3[1], ", ", central3[2], "],\n",
   "  \"faithful_degree_12_positions\": ", faithful12, ",\n",
-  "  \"degree_78_positions\": ", faithful78, ",\n",
-  "  \"degree_78_family_filter\": \"faithful_to_6Suz\",\n",
-  "  \"all_degree_78_positions\": ", allDegree78, ",\n",
-  "  \"nonfaithful_degree_78_positions\": ", nonfaithful78, ",\n",
+  "  \"degree_78_positions\": [", JoinIntPositions(allDegree78), "],\n",
+  "  \"degree_78_family_filter\": \"all_character_degrees_no_faithfulness_filter\",\n",
+  "  \"all_degree_78_positions\": [", JoinIntPositions(allDegree78), "],\n",
+  "  \"nonfaithful_degree_78_positions\": [", JoinIntPositions(nonfaithful78), "],\n",
+  "  \"faithful_degree_78_positions\": [", JoinIntPositions(faithful78), "],\n",
   "  \"faithful_degree_12_atlas_labels\": [\"", rows12[1].atlasLabel, "\", \"", rows12[2].atlasLabel, "\"],\n",
-  "  \"degree_78_atlas_labels\": [\"", rows78[1].atlasLabel, "\", \"", rows78[2].atlasLabel, "\"],\n",
+  "  \"degree_78_atlas_labels\": [", JoinAtlasLabels(allDegree78), "],\n",
   "  \"fusion_length\": ", Length(fusion), ",\n",
   "  \"source_native_729_tensor_factorisation\": true,\n",
   "  \"atlas_label_position_alignment_paid\": true,\n",
@@ -185,5 +191,5 @@ od;
 PrintTo(output, "  ]\n}\n");
 CloseStream(output);
 
-Print("6.Suz faithful12 and degree78 candidate receipt written with kernels.\n");
+Print("6.Suz faithful12 and ALL degree78 candidate receipt written with kernels.\n");
 QUIT;
