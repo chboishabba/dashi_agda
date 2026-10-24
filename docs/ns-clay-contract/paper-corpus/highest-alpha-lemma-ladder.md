@@ -1,3 +1,21 @@
+> **24 Oct 2026 — strengthened source-specific B4 no-go.**
+> R219/R109/R469 fixes the original physical output-local ED to a
+> nonnegative selected pair sum, at most 4 for the globally smooth
+> fixed four-mode shear, independently of cutoff. Since the actual
+> full-fibre signed B4 defect diverges while its literal core
+> companion stabilizes, the original strict cutoff-uniform B4
+> physical payment is FALSE on that admissible state.
+> The exact one-zero-incidence formula in the existing non-numbered
+> Lean analytical owner is `delta_defect=s*V_core-W_core`, yielding
+> `s-2` for this shear. This is NOT a Clay counterexample.
+>
+> **A update:** under finite energy and enstrophy, the SAME physical
+> Fourier nonlinear source has the standard bound
+> `min(E*|xi|,sqrt(E*D))`, implying a globally square-integrable
+> direct heat-inverse response with upper squared norm
+> `(8*pi/nu²)*E^(3/2)*sqrt(D)`. The signed centered A2 and
+> global A3 continuation remain unproved. Start at canonical A/B
+> owners; no new numbered proof wrappers.
 > **24 Oct 2026 — exact B4 no-go supersedes historical payment
 > search.** The original full-fibre signed noncore/core R440 covariance
 > is not cutoff-uniform against bounded physical ED: on the smooth
