@@ -6,6 +6,17 @@
 
 **Verified state:** source-written Agda mathematical deductions, not kernel-certified; exact synthetic rational audits; no human DMT study or physical concentration-to-kernel map implemented. External data resources identified, not yet downloaded or reproduced. No independent entity established.
 
+## 2026-10-24 executable source library / world and governed proof-search
+
+The [source world](../receipts/DMT2023SourceWorld.json) is a read-only, source-attributed structured library whose Git nodes match the separately pinned [source-tree receipt](../receipts/DMTImagingPinnedSourceTree20261024.json). The [audit snapshot](../receipts/DMT2023SourceWorldSnapshot20261024.json) contains six source roots, 56 source-file identities, 14 evidence artifacts (3 source-located, 11 not located), 10 consumer claims (7 blocked) and six conditional actions. Existence of a source record is not evidence that its statistical result was independently reproduced.
+
+Run: python3 scripts/dmt_source_world_search.py. Use --consumer c_static_reproduction or --consumer c_temporal_replication to print a counterfactual shortest acquisition dependency plan. It NEVER performs acquisition, sends emails, changes evidence states or grants permission. Runtime checks attribution, all 56 pinned Git objects, claim prerequisites and proven absence versus unlocated evidence. Consumer-relative Pareto does not let a neural QC action suppress an incomparable temporal-phenomenology action.
+
+Original static GFC is conditionally reachable by: a_original_motion_primary then b_rights_review then c_source_bytes then d_replay_static (the first two can be done in parallel). Sanders phase modelling is a separate e_phase_matrices route. External-entity ontology has no declared admissible route. None of these actions is represented as accomplished simply because a plan exists.
+
+The focused Agda module DASHI.Cognition.ConsciousRealismDMTSourceWorldExact instantiates EXISTING AttributedSourceCore, EvidenceAcquisitionSelectiveReopeningExact, SourceConditionedObservationExact and CostedResidualInformationChoiceExact, proving typed selective reopening for original QC, rights and phase data. It is imported into the existing DMT aggregate. No Agda kernel pass or exact-head Python suite is claimed. Tests: python -m pytest -q tests/test_dmt_source_world_search.py.
+
+Attribution: Ibrahim, Danforth and Dodds (2017), DOI 10.1016/j.jocs.2016.12.001, originated the Wikipedia First Link Network work; this is a DASHI methodological source graph, NOT the historical Wikipedia first-link data or an independent experimental corroboration. Existing Ibrahim source genealogy / least privilege / nondimensional Pareto policies are retained rather than redefined.
 ## Research goal and evidence consumers
 
 **Primary question:** Does a *restricted* conscious-agent/trace-chain model deliver independently preregistered, quantitatively successful predictions that strong endogenous models cannot, rather than merely reinterpret stochastic observations?
