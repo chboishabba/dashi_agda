@@ -59,6 +59,25 @@ tenFreeBosonsNeedSixteenMoreUnits = refl
 monsterPlusTenNotBosonicCritical : 24 + 10 ≡ 26 → ⊥
 monsterPlusTenNotBosonicCritical ()
 
+-- Independent 10D RNS superstring budget. Ten worldsheet coordinate
+-- bosons give c=10, ten free Majorana partners c=10/2=5;
+-- superconformal beta-gamma ghosts give c=+11, bc gives c=-26.
+-- Unlike the Monster c=24 plus II11 c=2 bosonic route, this uses
+-- super-Virasoro, NS/R spin structure and GSO/BRST conditions not built here.
+rnsBosonCharge : Nat
+rnsBosonCharge = 10
+
+rnsFermionCharge : Nat
+rnsFermionCharge = 5
+
+rnsBetaGammaSuperghostCharge : Nat
+rnsBetaGammaSuperghostCharge = 11
+
+tenDimensionalRNSChargeBudget :
+  rnsBosonCharge + rnsFermionCharge + rnsBetaGammaSuperghostCharge
+    ≡ bosonicBCGhostNegativeChargeMagnitude
+tenDimensionalRNSChargeBudget = refl
+
 -- Reuse existing source-rooted Monster Lie root-multiplicity theorems,
 -- rather than recertifying a no-ghost theorem from a character coefficient.
 monsterLieRootOneOne : Lie.rootMultiplicity Lie.degreeOneOne ≡ 196884
