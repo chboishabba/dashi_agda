@@ -50,8 +50,18 @@ for a in p12 do
   for b in p78 do
     isSym := squares = List(irr[b],x -> x);
     isDual := dualSquares = List(irr[b],x -> x);
+    equalCentralPhase := irr[a][central3[1]]/12 = irr[b][central3[1]]/78;
+    # Source-level character constraint from SAME extended H_729 and the
+    # SAME diagonal quotient kernel acting trivially on both tensor factors.
+    if isSym and equalCentralPhase then
+      Error("direct Sym² cannot preserve a nontrivial central C3 phase");
+    fi;
+    if isDual and not equalCentralPhase then
+      Error("dual Sym² must preserve central C3 phase");
+    fi;
     Add(matches,rec(p12:=a,p78:=b,lab12:=labels[a],lab78:=labels[b],
       exactSym2:=isSym,exactDualSym2:=isDual,faithful78:=faithful(irr[b]),
+      sameCentralC3Phase:=equalCentralPhase,
       centralInvolution78:=irr[b][central2[1]],
       phase12First:=irr[a][central3[1]]/12,
       phase78First:=irr[b][central3[1]]/78,
@@ -89,6 +99,9 @@ for k in [1..Length(matches)] do
     "\",\"atlas_label78\":\"",r.lab78,
     "\",\"faithful78\":",BoolText(r.faithful78),\n    ",\"central_involution78_trace\":",String(r.centralInvolution78),\n    ",\"sym2_equal\":",BoolText(r.exactSym2),
     ",\"dual_sym2_equal\":",BoolText(r.exactDualSym2),
+    ",\"same_central_C3_phase\":",BoolText(r.sameCentralC3Phase),
+    ",\"common_H729_diagonal_phase_necessary\":",
+      BoolText(r.sameCentralC3Phase),
     ",\"central_phase12\":\"",String(r.phase12First),
     "\",\"central_phase78\":\"",String(r.phase78First),
     "\",\"square_phase12\":\"",String(r.squaredCentralPhase),"\"}");
