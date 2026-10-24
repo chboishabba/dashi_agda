@@ -4,6 +4,8 @@ This guards source/claim classifications, not climate-data computations, speaker
 intent, the original Berger/Sherrington audit, or Agda kernel typechecking.
 """
 from pathlib import Path
+import csv
+from collections import Counter
 
 ROOT = Path(__file__).resolve().parents[1]
 OWNER = ROOT / "DASHI/Governance/BOMFordhamMediaClaimAuditExact.agda"
@@ -326,3 +328,74 @@ def test_cross_pollination_reuses_woogaroo_climate_and_project2025_owners():
     assert "azureLnpDonation2019A = attributed-influence-edge" not in political
     assert "springfieldRegisteredLobbyistMeeting2025 = attributed-influence-edge" not in political
     assert "actual same-object policy-to-asset-to-household" not in political
+
+
+ORIGIN_EDGE_LEDGER = ROOT / "Docs/support/reference/australian_climate_claim_origin_edges_20261025.csv"
+
+
+def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers():
+    """Machine-check source families, chronology and non-causality boundaries."""
+    with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
+        rows = list(csv.DictReader(stream))
+
+    assert len(rows) >= 21
+    assert len({row["edge_id"] for row in rows}) == len(rows)
+    assert Counter(row["case_id"] for row in rows) == {
+        "BOM2026": 9, "REEF2021": 8, "GAS2026": 4
+    }
+    fields = (
+        "edge_id", "case_id", "upstream", "downstream", "relation",
+        "evidence_grade", "date_local_or_month", "locator", "boundary"
+    )
+    assert all(all(row.get(field) for field in fields) for row in rows)
+    assert all(row["locator"].startswith("https://") for row in rows)
+    assert all(len(row["boundary"]) >= 40 for row in rows)
+
+    # Reported interpretations are not the original science.
+    reef_opinion = next(row for row in rows if row["edge_id"] == "R03")
+    assert reef_opinion["relation"] == "named_alternative_interpretation"
+    assert "not AIMS conclusion" in reef_opinion["boundary"]
+
+    # An FOI-supported leak is real while Ridd's opinion commission is not proven.
+    selected_media = next(row for row in rows if row["edge_id"] == "R02")
+    assert selected_media["evidence_grade"] == "foi_reported_by_abc"
+    assert "distinct from Ridd" in selected_media["boundary"]
+
+    # ACMA specific 2023 determinations do not adjudicate entire Sky network.
+    acma = next(row for row in rows if row["edge_id"] == "R07")
+    assert acma["evidence_grade"] == "acma_determination"
+    assert "not all Sky" in acma["boundary"]
+
+    # The May primary policy statement precedes the June party policy. Their
+    # similarity is not documentary proof of transmission or a payment.
+    gas = next(row for row in rows if row["edge_id"] == "G01")
+    assert gas["relation"] == "argument_overlap_not_copy_proof"
+    assert gas["evidence_grade"] == "two_independent_primary_texts"
+    assert "2026-05-08/2026-06-09" in gas["date_local_or_month"]
+    assert "no proved" in gas["boundary"]
+
+    # Claims of provenance are not evidence just because many republications
+    # share the same origin; explicitly mark secondary byline propagation.
+    publications = [
+        row for row in rows if row["relation"] in {
+            "credited_guest_publication",
+            "explicit_author_republication",
+            "explicitly_credited_reporting",
+            "credited_crosspublication",
+        }
+    ]
+    assert len(publications) >= 5
+    assert all(
+        row["evidence_grade"] in {
+            "same_author_content", "named_original_reporter"
+        } for row in publications
+    )
+
+
+def test_claim_root_ledger_documentation_uses_only_case_bounded_counts():
+    docs = RESEARCH.read_text()
+    assert "australian_climate_claim_origin_edges_20261025.csv" in docs
+    assert "21 bounded relationship rows" in docs
+    assert "NOT a representative crawl" in docs
+    assert "originator" in docs.lower()
+    assert "actual transfer not established" in docs.lower()
