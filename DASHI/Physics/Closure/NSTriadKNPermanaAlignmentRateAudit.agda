@@ -35,6 +35,17 @@ module DASHI.Physics.Closure.NSTriadKNPermanaAlignmentRateAudit where
 -- hypotheses, nor classical conditional Constantin--Fefferman
 -- or Beirão da Veiga--Berselli regularity results.
 --
+-- On the SAME field, the physical strain annihilates the unit
+-- direction: S[u_n] xi_n = 0. The unit phase solves the harmonic-map
+-- stationary identity Delta xi_n + |grad xi_n|² xi_n = 0 because
+-- Delta xi_n=-n² xi_n and |grad xi_n|²=n². Spatial vorticity
+-- magnitude is constant, so the cross-diffusion 2nu grad log|omega|
+-- ·grad xi also vanishes. Thus the physical vorticity-direction
+-- evolution highlighted in Grujic, arXiv:2609.05720, permits arbitrarily
+-- fine *persistent phase oscillations* despite strictly positive
+-- viscous damping of |omega|. Conditional logarithmic BMO, relative
+-- alignment or strain-geometry criteria are not thereby falsified.
+--
 -- The present Agda file retains the pre-existing T3 finite-carrier
 -- checks. The dynamic field algebra here is SOURCE-WRITTEN COMMENT
 -- with an exact locally executed SymPy regression (4 passed);
