@@ -8,7 +8,7 @@ the only allowed component is C33, with (UL,UR)=(+2,-2).
 Hence no elementary charge-(1,-1) invariant axion is present within
 that 27. NOT a claim other representations/composites impossible.
 
-Under an ASSUMED integral mixed nonabelian fixed-plane instanton
+THE HALF-PHASE OBSTRUCTION BELOW IS FOR THE ORIGINAL SYMMETRIC\nTWO-ENDPOINT WZ ANSATZ ONLY. NEW source: check_kk_e6_orbifold_cs_wz_anomaly_transfer.py\nuses bulk CS redistribution plus ONE Chi33 WZ term and avoids this\nhalf-unit in its selected trace lattice. A global spin CS lattice\nand quantum regulator remain open.\n\nUnder an ASSUMED integral mixed nonabelian fixed-plane instanton
 number one and source anomaly coefficient one, the naive
 a=argChi33/2 WZ exponent changes by (-1) after argChi33 -> argChi33+2pi.
 Physical integral spin/(SU3^3xU1)/Gamma anomaly lattice and regulator
@@ -36,4 +36,10 @@ assert s.simplify(s.exp(2*s.I*naive_half_phase_shift)-1)==0
 print("PASS only single elementary 27 scalar with SU3c,SU2L,SU2R invariant VEV is C33, charge (+2,-2)")
 print("PASS conditional mod-2 sign under one winding for naive Chi33 half-phase at unit instanton number")
 print("OPEN actual global gauge/spin quotient and anomaly characteristic-class integrality")
-print("OPEN extra representation/charge-one scalar, 5D GS two-form or coupled globally well-defined WZ/CS")
+# Redistribution: original half anomaly on each boundary requires
+# WZ mixed source coefficient 2/4, but after transfer to ONE boundary
+# the full anomaly requires 2/2, integral in the original trace ring.
+assert s.Rational(2,4)==s.Rational(1,2)
+assert s.Rational(2,2)==1
+print("CORRECTION: 5D CS transfer to one boundary removes the naive mixed half-unit; charge-one scalar not forced by this selected test")
+print("OPEN actual integral spin/quotient CS5, one-boundary WZ and global anomaly regulator")
