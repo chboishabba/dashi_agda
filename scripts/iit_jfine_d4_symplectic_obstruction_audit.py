@@ -105,6 +105,37 @@ assert rank(O12)==12 and preserves(R12,O12) and preserves(M12,O12)
 # Global value reflection (c,v)->(-c,-v) cannot preserve a nonzero
 # Heisenberg commutator: omega(-v,-w)=omega(v,w), not -omega(v,w).
 assert O12[0][1]==1 and (-O12[0][1])%3==2
+# Unlike the uncorrected source reflection (a,c,b)->(-a,-c,-b),
+# the map (a,c,b)->(-a,-c+a.b,-b) reverses the multiplication order.
+# In the symmetrised central chart t=c+a.b this is simply (t,v)->(-t,-v).
+# Verify on all 3^9 states against 9 generators (the algebraic proof
+# extends by bilinearity); no source S3 group automorphism is inferred.
+def add4(x,y): return tuple((a+b)%3 for a,b in zip(x,y))
+def minus4(x): return tuple(-a%3 for a in x)
+def dot4(x,y): return sum(a*b for a,b in zip(x,y))%3
+def h4_mul(x,y):
+    a,c,b=x; aa,cc,bb=y
+    return add4(a,aa),(c+cc+dot4(b,aa))%3,add4(b,bb)
+def corrected_value_anti(x):
+    a,c,b=x
+    return minus4(a),(-c+dot4(a,b))%3,minus4(b)
+def anti_certificate():
+    zero=(0,)*4
+    gens=[(zero,1,zero)]
+    for i in range(4):
+        e=tuple(int(i==j) for j in range(4))
+        gens.extend([(e,0,zero),(zero,0,e)])
+    checked=0
+    for state in itertools.product(range(3),repeat=9):
+        x=(state[:4],state[4],state[5:])
+        assert corrected_value_anti(corrected_value_anti(x))==x
+        for y in gens:
+            assert corrected_value_anti(h4_mul(x,y))==h4_mul(
+                corrected_value_anti(y),corrected_value_anti(x))
+            checked+=1
+    assert checked==177147
+    return checked
+
 def audit():
     x={f"r={r},m={m}":all_forms(r,m) for r in (1,2) for m in (1,2)}
     assert all(v["max_rank"]==6 for v in x.values())
@@ -116,5 +147,6 @@ def audit():
       "source_restriction_rank":rank(O8),"h6_sized_rank":rank(O12),
       "d4_acts_symplectically_on_repair":True,
       "value_s3_reflection_cannot_lift_as_group_automorphism":True,
+      "quadratically_corrected_value_anti_automorphism_generator_checks":anti_certificate(),
       "actual_monster_intertwiner":False,"agda_kernel_checked":False}
 if __name__=="__main__":print(json.dumps(audit(),indent=2,sort_keys=True))
