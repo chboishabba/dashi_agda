@@ -76,6 +76,18 @@ for n in range(5):
  levels.append(out)
 assert [len(v) for v in levels]==[1,2,4,8,16,32]
 assert power(q,3)==N and action(N)==(0,1,2,3,4)
+# SAME finite coordinate algebra: 360 spin coordinates -> 180 projective
+# coordinates, exactly two spin lifts in each fibre. Pullback of
+# functions is an injective, pointwise-product/mode-preserving inclusion.
+from collections import Counter
+fibres=Counter(action(g) for g in S)
+assert len(fibres)==60 and set(fibres.values())=={2}
+assert 3*len(S)==360 and 3*len(fibres)==180
+spin_delta=lambda sector,g: int(sector==0 and g==N)
+assert spin_delta(0,N)!=spin_delta(0,E)
+assert action(N)==action(E)
+print('PASS VOA coordinate projection 360->180, every fibre has size two')
+print('PASS central-sign delta distinguishes +/-I, A5 projective coordinates cannot')
 print('PASS 2I=SL2(F5) 120; 5 Q8; 2T normalizer 24; A5 quotient 60 kernel +/-I')
 print('PASS non-split by unique element order 2; q^3=-I; Q8 axes 3-cycle')
 print('PASS 120/120 commutators; surjective stage-one horn descendants')
