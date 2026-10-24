@@ -1,5 +1,10 @@
 # Succor Punch / psychotronics source genealogy — bounded max-cut
 
+## Phase 1 scope correction — source genealogy wins over physical acquisition
+
+Following the explicit user decision, **literature survey / landscape / Pareto / snowball / Ibrahim** is the Phase 1 target. Historical work in this append-only file is retained; earlier task ranks asking for native reels, exact SKU or measurements are **superseded** by [the literature-first research programme](psychotronics-phase1-literature-ibrahim-pareto-20261025.md) and its [curated sources](psychotronics-phase1-literature-landscape-20261025.csv) / [claim-specific edges](psychotronics-phase1-lineage-edges-20261025.csv). No additional instrument work required.
+
+
 ## 25 October return-to-original max-cut — superseding scope/priority note
 
 **New canonical original-picture recovery:** [`psychotronics-original-image-identity-return-maxcut-20261025.md`](psychotronics-original-image-identity-return-maxcut-20261025.md). The two screenshot batches (18 uploaded PNG hashes, eight creator handles) remain the starting material. A **live first-party illustrated** Zero Point Tech **24-point GoldenEye/400-W** product family is now directly inspected, versus earlier indexed-only **24-point Dark Knight/50-W/1.25-inch dancing magnet** candidate; it is not correct to call these an identical pictured SKU. Dated third-party original [Wong US20190269877A1](https://patents.google.com/patent/US20190269877A1/en), filed 2018 published 2019, gives a star-wound/amplifier prior design-family comparator but NO lineage or inventor credit to the contemporary Zero Point maker. The 14-point figure is explicitly a nonlimiting implementation; patent abstract and figures do not prove therapeutic or ion-emission efficacy. These two new source instances are typed into the existing 42-entry `PsychotronicsSuccorSourceAtlasExact` with claim-specific denominators, roots and non-promotion proofs.
