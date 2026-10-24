@@ -34,6 +34,7 @@ open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
+import DASHI.Mathematics.Topology.AlexanderHornedC3AmbientRotationExact as Triple
 import DASHI.Foundations.PolyhedralFiniteRestrictionInstancesExact as Poly
 import DASHI.Foundations.PolyhedralFixedSpaceSpectrumJ0To35Exact as Fixed
 import DASHI.Foundations.SU2SO3IrrepDimensionExact as SO3
@@ -74,7 +75,7 @@ internalActor :
   InternalC3Element D → Actor.Actor D
 internalActor D selected =
   Actor.actor
-    (Actor.Triple.xyz (element selected)
+    (Triple.xyz (element selected)
       (element selected) (element selected))
     C3.c0
 
@@ -114,6 +115,29 @@ internalExternalCommuteOnSlot D selected (Actor.slot C3.c2 a) =
 -- More than numerical coincidence: the internal generator has
 -- actual order three on all coordinates, by the group multiplication
 -- and its supplied order-three witness.
+cubeElementActs : (D : Actor.ActorFactorGroup) →
+  (selected : InternalC3Element D) → ∀ a →
+  Actor.multiply D (element selected)
+    (Actor.multiply D (element selected)
+      (Actor.multiply D (element selected) a))
+    ≡ a
+cubeElementActs D selected a =
+  trans
+    (cong (Actor.multiply D (element selected))
+      (sym (Actor.associative D
+        (element selected) (element selected) a)))
+    (trans
+      (sym (Actor.associative D
+        (element selected)
+        (Actor.multiply D (element selected) (element selected)) a))
+      (trans
+        (cong (λ b → Actor.multiply D b a)
+          (sym (Actor.associative D
+            (element selected) (element selected) (element selected))))
+        (trans
+          (cong (λ b → Actor.multiply D b a) (orderThree selected))
+          (Actor.leftIdentity D a))))
+
 internalPeriodThreeOnSlot :
   (D : Actor.ActorFactorGroup) →
   (selected : InternalC3Element D) →
@@ -123,56 +147,11 @@ internalPeriodThreeOnSlot :
       (Actor.coordinateAction D (internalActor D selected) x))
     ≡ x
 internalPeriodThreeOnSlot D selected (Actor.slot C3.c0 a) =
-  cong (Actor.slot C3.c0)
-    (trans
-      (cong (Actor.multiply D (element selected))
-        (sym (Actor.associative D
-          (element selected) (element selected) a)))
-      (trans
-        (sym (Actor.associative D
-          (element selected)
-          (Actor.multiply D (element selected) (element selected)) a))
-        (trans
-          (cong (λ b → Actor.multiply D b a)
-            (sym (Actor.associative D
-              (element selected) (element selected) (element selected))))
-          (trans
-            (cong (λ b → Actor.multiply D b a) (orderThree selected))
-            (Actor.leftIdentity D a)))))
+  cong (Actor.slot C3.c0) (cubeElementActs D selected a)
 internalPeriodThreeOnSlot D selected (Actor.slot C3.c1 a) =
-  cong (Actor.slot C3.c1)
-    (trans
-      (cong (Actor.multiply D (element selected))
-        (sym (Actor.associative D
-          (element selected) (element selected) a)))
-      (trans
-        (sym (Actor.associative D
-          (element selected)
-          (Actor.multiply D (element selected) (element selected)) a))
-        (trans
-          (cong (λ b → Actor.multiply D b a)
-            (sym (Actor.associative D
-              (element selected) (element selected) (element selected))))
-          (trans
-            (cong (λ b → Actor.multiply D b a) (orderThree selected))
-            (Actor.leftIdentity D a)))))
+  cong (Actor.slot C3.c1) (cubeElementActs D selected a)
 internalPeriodThreeOnSlot D selected (Actor.slot C3.c2 a) =
-  cong (Actor.slot C3.c2)
-    (trans
-      (cong (Actor.multiply D (element selected))
-        (sym (Actor.associative D
-          (element selected) (element selected) a)))
-      (trans
-        (sym (Actor.associative D
-          (element selected)
-          (Actor.multiply D (element selected) (element selected)) a))
-        (trans
-          (cong (λ b → Actor.multiply D b a)
-            (sym (Actor.associative D
-              (element selected) (element selected) (element selected))))
-          (trans
-            (cong (λ b → Actor.multiply D b a) (orderThree selected))
-            (Actor.leftIdentity D a)))))
+  cong (Actor.slot C3.c2) (cubeElementActs D selected a)
 
 internalMovesIdentitySlot :
   (D : Actor.ActorFactorGroup) →
