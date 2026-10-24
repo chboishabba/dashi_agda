@@ -137,3 +137,29 @@ def test_generic_trace_no_go_is_required_for_agent_inference():
     m["models"][2]["ontology_not_identified_by_finite_HMM_trace"] = False
     with pytest.raises(ValueError, match="Fixed-Q trace"):
         audit.validate_research_contract(w, d, m)
+
+
+def test_existing_erowid_motif_source_remains_connected():
+    w, d, m = fixtures()
+    assert audit.validate_research_contract(w, d, m) is True
+    assert m["recurring_motif_prior_art"].endswith(
+        "DMTRecurringMotifErowidPriorArtBridge20261025.json")
+
+
+def test_erowid_source_reuse_does_not_pretend_raw_narratives_are_available(tmp_path, monkeypatch):
+    w, d, m = fixtures()
+    import json
+    from pathlib import Path
+    bridge_path = ROOT / m["recurring_motif_prior_art"]
+    b = json.loads(bridge_path.read_text(encoding="utf8"))
+    b["raw_data_governance"]["raw_report_corpus_acquired"] = True
+    replacement = tmp_path / "false_motif_bridge.json"
+    replacement.write_text(json.dumps(b), encoding="utf8")
+    original_read = Path.read_text
+    def intercepted_read(path, *args, **kwargs):
+        if Path(path) == bridge_path:
+            return original_read(replacement, *args, **kwargs)
+        return original_read(path, *args, **kwargs)
+    monkeypatch.setattr(Path, "read_text", intercepted_read)
+    with pytest.raises(ValueError, match="falsely promoted"):
+        audit.validate_research_contract(w, d, m)
