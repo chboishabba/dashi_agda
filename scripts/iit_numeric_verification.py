@@ -301,7 +301,11 @@ def verify_numeric_results() -> dict:
     assert d4_h6_weld["H3_C3sq_nonlinear_irrep_degree"] == 27
     assert d4_h6_weld["source_H3_times_C3sq_concrete_generator_checks"] == 177147
     assert d4_h6_weld["chosen_H4_nonlinear_irrep_degree"] == 81
-    assert not d4_h6_weld["original_JFine_D4_centre_action_intertwined"]
+    assert d4_h6_weld["original_JFine_D4_centre_action_intertwined"]
+    assert d4_h6_weld["source_D4_preserves_selected_repaired_group_cocycle"]
+    assert d4_h6_weld["D4_simultaneous_translation_modulation_orthogonal"]
+    assert not d4_h6_weld["D4_lift_needs_central_quadratic_correction"]
+    assert d4_h6_weld["source_D4_repaired_group_generator_checks"] == 354294
 
     return {
         "contract": "iit_numeric_verification",
