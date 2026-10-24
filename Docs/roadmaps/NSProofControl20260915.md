@@ -1,3 +1,44 @@
+## 2026-10-24 exact global-output audit: R681 alone is NOT a compensation
+
+The existing R681/R685/R690 source hierarchy is real prior art. To
+avoid falsely treating its global SUM as an automatically vanishing
+critical-production correction, exhaust the actual 4×4 ordered
+supported helical pairs of the *same* smooth shear
+`uhat(±e_x)=uhat(±e_y)=e_z` with physical H± projectors.
+
+Exact supported Fourier outputs and coherent mixed-product work:
+
+| output family k | number | W(M,M)=2||M||² | W(M,R)-|k|²W(M,M) each |
+| --- | ---: | ---: | ---: |
+| `(±1,±1,0)` | 4 | 1 | 0 |
+| `(±2,0,0)` and `(0,±2,0)` | 4 | 1/2 | -1 |
+| `(0,0,0)` | 1 | 0 | 0 |
+
+Every active physical pair has input Laplacian rate 2; the source
+mixed amplitude is computed from `(H+_p e_z)×(H-_q e_z)`.
+Consequently **the SUM of output-relative physical R681 rate work
+is -4**, not zero. The four same-axis outputs must not be dropped:
+their mixed cross products are *parallel to their output*, so Leray
+projection would kill them, but the literal unprojected R681 mixed
+carrier retains them. That exact distinction must be respected.
+
+The original count-centered B4 defect on each of the four cross-axis
+outputs separately grows like 16N^5, while the raw R681 output-rate
+work is zero at those outputs. Thus an identity
+`R681 = old B4 defect` is FALSE even before summing; moreover
+`sum_k R681-output-heat` does not automatically vanish. A successful
+global signed proof must supply the **actual R685 forcing commutator
+minus tangent** and R690 compensation on their original source
+carriers; summation alone is not an analytic payment.
+
+Exact 16-ordered-pair SymPy regression:
+`tests/test_ns_b4_literal_padding_adversary.py::
+test_ALL_physical_shear_mixed_outputs_and_global_R681_rate`.
+These exact finite identities were independently recomputed locally.
+Do not use the raw unprojected mixed field as the physical NS
+nonlinearity: on this shear the latter vanishes identically.
+
+---
 ## 2026-10-24 acceptance cut: exact N⁵ B4 counterexample and scaling-critical A frontier
 
 ### B4 — closed-form certificate, not extrapolation
