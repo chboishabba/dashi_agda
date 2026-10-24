@@ -15,8 +15,7 @@ module DASHI.Physics.Gravity.KKTrinificationFullSpectrumBIDIExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Nat using (Nat; _+_; _*_)
-open import Data.Nat.Base using (_∸_)
+open import Data.Nat.Base using (_*_; _∸_)
 
 import DASHI.Core.FormalClaimTransportGeometryExact as Transport
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
