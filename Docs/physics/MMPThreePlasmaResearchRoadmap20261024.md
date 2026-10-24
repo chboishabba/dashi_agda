@@ -4,6 +4,14 @@
 **Base:** `master`  
 **Scope:** physics-first, source-specific Einstein–Maxwell–Dirac / semiclassical test, not an antigravity-device assertion.
 
+## Update — 2026-10-25: coupled finite U(1) backreaction (P0/P4 bridge)
+
+**New owned deliverables:** [finite self-consistent electric-link/Dirac three-port checker](../../scripts/check_mmp_three_port_gauge_backreaction_20261025.py) and [full source and constraint ledger](MMPThreeSourceFiniteGaugeBackreactionMaxCut20261025.md). Unlike our previous three externally **prescribed** electromagnetic link potentials, the new 9-site two-component model solves `i Pdot=[h(theta),P]`, `theta_dot=g²E`, `E_dot=-J+Iext`, and the associated external-source charge equation, with explicit Gauss and energy-work constraints. Three independently timed link-current ports are retained. The resulting coupled-minus-source-only electric response is ~0.003322 in finite model units; locally executed Gauss residual ~4.9e-16, energy-work residual ~2.36e-15, source work +0.0014983.
+
+**Promotion boundary:** neither 1+1D electrostatic field dynamics nor the chosen neutralizing background/externally imposed sources is full 3+1D Maxwell–MHD matter, an actual charged curved 4D Hadamard state, a renormalized Einstein source or a measured gravity effect. Preserve Sanders/Zahn/Cauchy/Hadamard source attribution separately from the original Hebenstreit–Berges–Gelfand (2013) and Kasper–Hebenstreit–Berges (2014) real-time coupled gauge/fermion methods. Work is positive for this fixture, not evidence of NEC violation. Local Python fixture passed; no Agda kernel or exact-head GitHub CI receipt claimed.
+
+**Reordered immediate acceptance:** (1) freeze and rerun the new checker at exact PR SHA; (2) implement continuous spin-c Dirac Cauchy/Møller comparison on the same noncompact magnetic-return geometry and explicitly select a CAR Hadamard state; (3) fix local covariant current/tensor subtraction and Ward/counterterms; (4) couple 3D Maxwell–MHD to the same state and stress and test all Einstein/Maxwell constraints. P3Q dual-rail capacity and optional 12/24/horned/VOA structure remain downstream, with source-specific same-object gates.
+
 ## End-to-end scientific question
 
 Can one **globally defined, Hadamard-admissible, charged-fermion quantum state**, on a consistently charged and spin-c equipped two-ended spacetime, generate its own renormalized stress and induced current such that the semiclassical Einstein–Maxwell equations close; and can three separate, internally and/or externally driven plasma/EM regions create a **distinct measurable change to that state or geometry**?
