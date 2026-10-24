@@ -131,7 +131,7 @@ def optional_brain_runtime(path):
         return {"status":"NOT_IMPORTED","reason":"dashiBRAIN #9 file not present locally; no vendoring"}
     path=Path(path)
     raw=path.read_bytes()
-    observed_blob=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\\0"+raw).hexdigest()
+    observed_blob=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
     expected_blob="384a9b1d7082857000128635259c9b1a9d989f80"
     if observed_blob != expected_blob:
         raise ValueError("dashiBRAIN original runtime blob mismatch: "+observed_blob)
