@@ -90,3 +90,25 @@ for name,value in [('z_neutral',z),('z_charged',zq),('tuned_cosmological_term',e
 print('PASS coupled Minkowski, positive Hessian, Wilson global minimum and nontrivial fold')
 print('FAIL observed-electron consumer: all charged periodic 4D modes are extremely heavy and vectorlike')
 print('OPEN real 5D Earth matter source, full chiral charged spectrum, interactions and kernel proof')
+
+# GLOBAL STEELMAN FAILURE: local positive Hessian is NOT a global lower bound.
+# At x->0 the massive fermions become massless. At theta=pi,
+# f(0,pi)=-15/16, so coefficient -9+12-4*15/16=-3/4<0.
+collapse_coeff=-A+D-Q*mp.mpf(15)/16
+assert collapse_coeff==-mp.mpf(3)/4
+assert U(mp.mpf('.05'),mp.pi)<0
+def Wx(x):
+    return D*z*f(z*x,0,'z')+Q*zq*f(zq*x,mp.pi,'z')
+def W(x):
+    return -A+D*f(z*x)+Q*f(zq*x,mp.pi)
+def derivU(x):
+    return -ell/x**2+Wx(x)/x**6-6*W(x)/x**7
+barrier=mp.findroot(derivU,(mp.mpf('.27'),mp.mpf('.31')))
+height=U(barrier,mp.pi)
+assert 0<barrier<1 and height>0
+assert U(barrier-mp.mpf('.01'),mp.pi)<height
+assert U(barrier+mp.mpf('.01'),mp.pi)<height
+print('collapse_asymptotic_coefficient',collapse_coeff)
+print('collapse_barrier_x',mp.nstr(barrier,16),'dimensionless_height',mp.nstr(height,16))
+print('FAIL global-radius-stability consumer: U(x,pi) -> -infinity for x -> 0')
+print('OPEN bounce action / tunneling lifetime / UV stabilization; not identified with low-branch retuned Minkowski root')
