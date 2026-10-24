@@ -117,6 +117,28 @@ koslovRand = Source.mkNoDOISource
   "Experiment-based negative/methodological review: primate results not convincing, EEG probe antenna artifact possible; separates possible weapon/interrogation inquiry from actual demonstrated response"
   Source.publicAttribution
 
+senateMoscow1979 : Source.AttributedSource
+senateMoscow1979 = Source.mkNoDOISource
+  "United States Senate Committee on Commerce, Science, and Transportation"
+  "Microwave Irradiation of the U.S. Embassy in Moscow: Review of Its History and Health Studies 1953–1977"
+  "Committee print, April 1979; original scanned report mirrored by GWU National Security Archive document 15"
+  "1979"
+  "https://nsarchive.gwu.edu/sites/default/files/documents/rhwvuj-tzy4b/15.pdf"
+  Source.governmentSource
+  "Compiles State/GWU 1966–69 coded blood study and methodological negative reviews, PANDORA primate and Big Boy studies, lymphocyte cohort, and Johns Hopkins 1976–78 controlled-post observational epidemiology; no convincing detected causal effect at tested exposure levels, but cannot rule out later latent effects"
+  Source.publicAttribution
+
+hopkins1976To1978Study : Source.AttributedSource
+hopkins1976To1978Study = Source.mkNoDOISource
+  "Abraham Lilienfeld and team, Johns Hopkins University, for US State Department"
+  "Foreign Service Health Status Study, compared Moscow and Eastern European posts"
+  "Study conducted 1976–1978; 1979 US Senate committee print summarises methods/results; underlying investigator-level original data not retrieved"
+  "1978"
+  "https://nsarchive.gwu.edu/sites/default/files/documents/rhwvuj-tzy4b/15.pdf"
+  Source.governmentSource
+  "Measured morbidity/mortality retrospective comparison found no consistent dose-related excess; mortality follow-up relatively short and mixed symptom/disease differences acknowledged. This is not an independent new replication by the Senate"
+  Source.publicAttribution
+
 odniExperts : Source.AttributedSource
 odniExperts = Source.mkNoDOISource
   "Office of the Director of National Intelligence, IC Experts Panel"
@@ -156,7 +178,8 @@ sourceAtlas = Source.mkSourceAtlas
   "DASHI.Governance.PandoraBizarreRFHistoricalEvidenceExact"
   (wiesner1964 ∷ mk119Memo ∷ cesaroPandora ∷ johnstonBizarre ∷ stateViralStudy1965 ∷
    georgeWashington1966 ∷ pandoraApril1969 ∷ pandoraHumanMinutes ∷
-   koslovRand ∷ odniExperts ∷ odni2025 ∷ recall2026 ∷ [])
+   koslovRand ∷ senateMoscow1979 ∷ hopkins1976To1978Study ∷
+   odniExperts ∷ odni2025 ∷ recall2026 ∷ [])
   "Bounded original-document roots, no fabricated modern source-to-device bridge"
 
 sourceAtlasNeverPromotes :
@@ -177,6 +200,9 @@ data ProgrammeObject : Set where
   stateMoscowViralStudy : ProgrammeObject
   navyBigBoy : ProgrammeObject
   moscowEmbassyCounterSurveillance : ProgrammeObject
+  moscowEmbassyExposurePopulation : ProgrammeObject
+  johnsHopkinsEmbassyFollowup : ProgrammeObject
+  stateEmbassyLymphocyteSurvey : ProgrammeObject
 
 data ProgrammeTopic : Set where bioelectronicsAndEffects : ProgrammeTopic
 
@@ -202,6 +228,9 @@ data LinkKind : Set where
   completedOccupationalComparison : LinkKind
   noControlledHumanIrradiationInThisRecord : LinkKind
   defensiveAudioCountermeasureProposal : LinkKind
+  reportedMethodologicalRejection : LinkKind
+  conductedComparativeEpidemiology : LinkKind
+  observedHematologyWithoutDoseCorrelation : LinkKind
 
 record BoundedLineageEdge : Set where
   constructor boundedLineageEdge
@@ -280,10 +309,37 @@ humanExposurePlanNotExecutedByTheseMinutes = boundedLineageEdge
   "A future specially irradiated human group and blind controls were proposed in the 1969 minutes"
   "The record of proposed protocols is not a performed deliberate human exposure experiment"
 
+
+moscowGWUPeerReviewNegative : BoundedLineageEdge
+moscowGWUPeerReviewNegative = boundedLineageEdge
+  stateMoscowViralStudy moscowEmbassyExposurePopulation
+  reportedMethodologicalRejection senateMoscow1979
+  "Final GWU sample series ca 250 specimens from >71 employees/family; independent reviews rejected biological causal inference and State declined renewal in June 1969"
+  "The 1969 committee's earlier 140-sample report is a time-bounded intermediate observation, not a separate independent cohort"
+
+hopkinsActualFollowup : BoundedLineageEdge
+hopkinsActualFollowup = boundedLineageEdge
+  moscowEmbassyExposurePopulation johnsHopkinsEmbassyFollowup
+  conductedComparativeEpidemiology hopkins1976To1978Study
+  "Actual 1976–78 controlled-post retrospective human outcome study, not a proposal; no convincing exposure-linked clinical effect detected in the population/time frame studied"
+  "Cohort selection, medical ascertainment, dose uncertainty and late outcomes limit generality; no claim of RF impossibility or general public exposure safety"
+
+lymphocyteNullDoseCorrelation : BoundedLineageEdge
+lymphocyteNullDoseCorrelation = boundedLineageEdge
+  moscowEmbassyExposurePopulation stateEmbassyLymphocyteSurvey
+  observedHematologyWithoutDoseCorrelation senateMoscow1979
+  "Survey measured higher mean lymphocyte counts in Moscow, without timing/location correlation to measured microwave irradiation; etiology unresolved"
+  "Observed biomarker difference is not established RF-mediated disease or a proved alternative environmental cause"
+
 data HumanStudyKind : Set where
   executedAmbientExposureObservation : HumanStudyKind
   executedBiologicalSampling : HumanStudyKind
   proposedControlledIrradiation : HumanStudyKind
+  completedRetrospectiveEpidemiology : HumanStudyKind
+
+retrospectiveComparativeOutcomeNotControlledIrradiation :
+  completedRetrospectiveEpidemiology ≡ proposedControlledIrradiation → ⊥
+retrospectiveComparativeOutcomeNotControlledIrradiation ()
 
 sampledHumansAreNotProvenExperimentallyIrradiated :
   executedBiologicalSampling ≡ proposedControlledIrradiation → ⊥
