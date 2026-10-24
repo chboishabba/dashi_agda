@@ -1,5 +1,12 @@
 # Rodin coil: original 2010 mathematical source → ordinary published field biology, 2013–2024
 
+## Exact original-journal citation audit supplement: ref24 and ref12, plus source-custody clarification
+
+The [dedicated full audit](psychotronics-phase1-2024-reference-and-2003-winding-maxcut-20261025.md) reads **the actual printed original 2024 journal PDF**, p5 Discussion and p6–7 references, rather than relying only on publisher abstracts or SciELO webpage summaries. It identifies **[24] Saikia et al. 2019 ACS Chemical Neuroscience DOI 10.1021/acschemneuro.8b00490** as the cited support for a claimed Rodin/Helmholtz advantage **up to 60 percent**; the original ACS publisher **abstract** is a different author team's electric/magnetic amyloid experiment and **does not present** a named Rodin-to-Helmholtz effect-size comparator. The full Saikia article is paywalled and uninspected, so the right status is **claim-to-inspected-reference support unverified**, not a proved incorrect scientific paper. Separately, 2024 **[12] is F. P. Perez et al. 2008 heat shock/senescence**, not the 2013 **H. Pérez et al.** lymphocyte magnetic-stimulator paper despite thematic overlap. Retain both source roots and author/date variants.
+
+**Paper-specific magnetic field evidence:** the exact 2013 Table I / 2024 Table II current/experimental-B triplet match is screenshot-verified, but **2013 uses a Model 210 gaussmeter and 2024 describes an MLX90393 Hall XYZ mapper**, with different theoretical output and an additional 3D-scan design. Without source-native measurement dates/data, **shared published rounded numbers do not establish identical sessions, separately acquired sessions or improper conduct**. Biological claims also involve **gadolinium-containing sample medium** in the 2013 12-donor in-vitro protocol, which cannot be treated as field-only data. The field `B=∇×A` is not itself the field-gradient tensor or biological dose attribution; the 2024 paper's narrative connecting gradient to unique in-vitro advantage remains an original-author **hypothesis** until a source-documented, matched-dose/gradient comparison exists. This is **literature appraisal**, not a request for new measurements.
+
+
 ## Key numerical source-dependence check: 2013 and 2024 field tables
 
 The [2013 original Table I](https://pubmed.ncbi.nlm.nih.gov/24089844/) and [2024 original Table II](https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0035-001X2024000300006) share **all three published pairs of current and measured field in the later table**:
