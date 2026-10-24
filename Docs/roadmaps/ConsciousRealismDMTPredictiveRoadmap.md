@@ -146,3 +146,17 @@ Requires \`numpy\` and \`scipy\`. The prototype was exercised in a local Python 
 
 **Follow-on after data admission:** run held-out M0/M1/M2 *predictive* modelling. The paired-FC t statistic is merely an initial data/schema/condition contact, not a Hoffman-specific prediction test; a detectable condition difference is consistent with ordinary pharmacology and cannot identify independent agents.
 
+
+
+## Same-study EEG reproduction donor: separate fMRI and EEG admission sets
+
+**Source ownership and version:** the independent *software author* **Kiret Dhindsa** maintains [kiretd/dmt_eeg](https://github.com/kiretd/dmt_eeg), which attributes the primary empirical source to Timmermann, Roseman, Haridas, Rosas et al. (PNAS 2023 DOI 10.1073/pnas.2218949120). The README claims sensor-space reproductions of paper Fig. 4A/B/D/E and a subsequent MNE/fsaverage/sLORETA source-space pipeline. **These are self-reported implementation and validation claims in the donor README**; DASHI has not downloaded its dataset, executed its scripts or independently verified the figure values. The project describes 19 validation checks and mixed modality/atlas prerequisites, but none is a new experimental cohort.
+
+**Non-interchangeable eligibility:**
+- Primary Timmermann source: 20 completed participants; original fMRI group eligibility reported as **15** after motion rejection.
+- The Dhindsa software README uses **14 distinct EEG subject IDs** 02,03,06,08,09,10,12,13,14,15,17,18,22,23, excluding 01,07,11,16,19,25. The original paper separately describes EEG artifact rejection and **12** participants eligible for *joint* EEG/fMRI coupling analyses. These denominators are consumer/protocol specific. The donor's 14 EEG list does not identify the 15 fMRI subjects.
+- Later secondary papers using 14 cases, altered motion thresholds or preprocessing are **reanalyses of the same broad primary cohort**, not independent participant replications. Preserve source roots, acquisition years, extraction choices and original authorship.
+
+**Reproduction selection:** preferentially audit the primary 2023 fMRI/EKG-EEG provenance against the public file inventory, while using Dhindsa's sensor-space pipeline as an independently authored *software* baseline for its specific Figure-4 consumer if rights/access permit. Copy neither the donor's README results nor its validation checklist into DASHI as newly recomputed measurements. Substantive future reproduction must pin its exact commit, subject IDs, artifact exclusions, references/sampling, code dependencies, outputs and original/donor figure mappings before running. Dhindsa's source-space FC carries an **EEG→fsaverage/Schaefer** observation chain; do not identify it with BOLD_AAL fMRI parcellation or Brain-IT's learnt 128 V2C clusters.
+
+**Scientific priority:** where existing publicly documented code achieves the appropriate consumer, adapt its verified inputs/benchmark instead of independently reconstructing the whole EEG stack. The new paired-fMRI Python source owner covers a different narrow exploratory consumer and remains blocked pending motion inclusion and source-file hashes.
