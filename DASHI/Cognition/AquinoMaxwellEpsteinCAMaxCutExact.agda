@@ -2460,3 +2460,35 @@ ftcBannonCIDDoesNotPayWholeNetworkH3 :
   collectiveAquinoPROMISHierarchyPaid
     canonicalBannonFTCCIDAdversarialBoundary ≡ false
 ftcBannonCIDDoesNotPayWholeNetworkH3 = refl
+
+
+------------------------------------------------------------------------
+-- ZORRO PETROGLYPH / TSFV EVIDENCE CONSUMER -- 25 OCT 2026
+--
+-- A distinct bounded heritage case; existing Aquino/CA dispositions are
+-- unchanged. Documentary source-root identity and physical temporal
+-- implication are separate. The imported finite construction is CLASSICAL.
+-- Neither source identity proves an operational occult programme nor
+-- TSFV postselection proves a controllable earlier-event intervention.
+------------------------------------------------------------------------
+
+import DASHI.Cognition.ZorroPetroglyphSourceCutExact as ZorroHeritage
+import DASHI.Quantum.ZorroTSFVPostselectionNoSignalExact as ZorroTemporal
+
+zorroTwo2014DocumentsOneCorrespondenceRoot :
+  ZorroHeritage.sourceRoot ZorroHeritage.myhrvoldOutgoing2014 ≡
+  ZorroHeritage.sourceRoot ZorroHeritage.myhrvoldReply2014
+zorroTwo2014DocumentsOneCorrespondenceRoot =
+  ZorroHeritage.same2014ThreadRoot
+
+zorroReportedMovementIsNotPolishing :
+  ZorroHeritage.taskListReportsOneRockMoved ≡
+  ZorroHeritage.physicalPolishingCompleted → ⊥
+zorroReportedMovementIsNotPolishing =
+  ZorroHeritage.reportedMovementNotPolishing
+
+zorroTSFVPostselectionIsNotPastIntervention :
+  ZorroTemporal.backwardConditioning ≡
+  ZorroTemporal.freelyControlledEarlierIntervention → ⊥
+zorroTSFVPostselectionIsNotPastIntervention =
+  ZorroTemporal.conditioningNotIntervention
