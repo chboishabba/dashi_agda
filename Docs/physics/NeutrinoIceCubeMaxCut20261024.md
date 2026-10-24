@@ -932,3 +932,64 @@ equivariant map of the physical lepton mass operators into any
 C3/3B/VOA/729 model, preserving spectrum, charged-current
 couplings, symmetries and observable predictions.  Otherwise
 reuse the cyclotomic scalar as mathematics, not an identification.
+
+### Further Pareto contraction: Galois-trace obstruction needs less machinery
+
+A stronger (and shorter) proof of the same **specific** infinite-group
+conclusion uses the original `C3CyclotomicAmplitudeAlgebraExact.trace`
+already in DASHI.  For `z=a+bζ` in `Q(ζ)`, the field trace is
+
+```
+Tr_{Q(ζ)/Q}(z) = z + conjugate(z) = 2a-b.
+a = 213694885170400/181846007130841
+b = 55365974464882/181846007130841
+
+2a-b = 372023795875918/181846007130841
+     = 2 + 8331781614236/181846007130841
+     ∈ (2,3).
+```
+
+If `TS1` had finite order, its eigenvalues would be roots of
+unity and `z=tr(TS1)` would be an algebraic integer.  The
+field trace of an algebraic integer is an integer.  Since its
+computed field trace lies strictly between the consecutive integers
+2 and 3, `TS1` cannot have finite order.  Hence the group generated
+by `T,S1` is infinite.  This route does **not** require the
+stronger full ring-of-integers classification
+`O_{Q(ζ)}=Z[ζ]` as a separate hypothesis.
+
+`NeutrinoC3FiniteResidualTraceObstructionExact.agda` now
+records the source-derived `2A-B=372023795875918` and both
+strict bound comparisons.  The committed Python regression
+`test_galois_trace_noninteger_stronger_finite_order_no_go`
+independently reconstructs the coefficient from the exact rational
+residual S1 and checks nonintegrality.
+
+**Proof-status separation:** exact numerators and rational
+inequalities are source-written Agda + independently evaluated
+integer calculations; the general theorem "finite order =>
+algebraic-integer trace => integral Galois trace" has **not yet
+been formalized or kernel-verified in this repo**.  The mathematical
+paper-and-pencil consequence follows from those standard
+number-theory facts, and the original literature is attributed.
+It is an obstruction only for the specific rational
+reconstruction, NOT a new impossibility proof for all finite
+flavour symmetries.
+
+The new rational reconstruction is also **CP-even**:
+`jarlskogImaginaryPartIsZero` is source-written in the same-lepton
+module, and `commutatorElectronMuonNonzero` displays the genuine
+charged/neutral mass-basis difference.  Thus the current model
+pays a nontrivial same-space operator calculation while keeping
+the separate physical CP requirement explicitly unpaid.
+
+### Ownership/no-duplication rule
+
+Do not make a new `C3`, `Z[ζ]`, 27-site hypervoxel,
+bounded evidence database, proof authority system, or new
+"neutrino zero" species for this direction.  The exact
+bounded reconstruction is a **consumer** of the original phase
+algebra and an **adversarial countermodel** against extrapolating
+any compatible `Z3` plus `Z2×Z2` residuals to a finite
+group.  Original IceCube observational authorship and global-fit
+parameter provenance remain separate from these new calculations.
