@@ -185,8 +185,32 @@ class TestGate(unittest.TestCase):
         fd,path=tempfile.mkstemp(suffix='.csv')
         try:
             with os.fdopen(fd,'w') as o:
-                o.write(','.join(Hour.__dataclass_fields__)+'\\n')
-                o.write(','.join(['10','2.5','42','32','200','2','25','35','8.4','75'])+'\\n')
+                o.write(','.join(Hour.__dataclass_fields__)+'\n')
+                o.write(','.join(['10','2.5','42','32','200','2','25','35','8.4','75'])+'\n')
+            with self.assertRaises(ValueError):read_csv(path)
+        finally:os.unlink(path)
+    def test_csv_valid_aligned_pair_and_duplicate_rejection(self):
+        import tempfile, os
+        meta=dict(source_site_id='SYNTHETIC_SITE',
+                  offtaker_id='SYNTHETIC_CUSTOMER',
+                  source_meter_id='TEST_SOURCE_METER',
+                  offtaker_meter_id='TEST_DEMAND_METER',
+                  calibration_receipt_ref='UNVERIFIED_TEST_RECEIPT')
+        base=dict(self.h.__dict__,**meta)
+        with tempfile.NamedTemporaryFile('w',newline='',suffix='.csv',
+                                         delete=False) as f:
+            path=f.name
+            writer=csv.DictWriter(f,fieldnames=['timestamp_utc']+list(base))
+            writer.writeheader()
+            writer.writerow(dict(base,timestamp_utc='2026-10-24T10:00:00+00:00'))
+            writer.writerow(dict(base,timestamp_utc='2026-10-24T11:00:00+00:00'))
+        try:
+            self.assertEqual(len(read_csv(path)),2)
+            with open(path,'w',newline='') as f:
+                writer=csv.DictWriter(f,fieldnames=['timestamp_utc']+list(base))
+                writer.writeheader()
+                writer.writerow(dict(base,timestamp_utc='2026-10-24T10:00:00+00:00'))
+                writer.writerow(dict(base,timestamp_utc='2026-10-24T10:00:00+00:00'))
             with self.assertRaises(ValueError):read_csv(path)
         finally:os.unlink(path)
     def test_invalid(self):
