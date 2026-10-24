@@ -1,3 +1,106 @@
+## 2026-10-24 — Original unforced A+B proof archaeology and executable priorities
+
+**Verdict after cross-PR/current-owner audit.** The user's recollection of extensive prior
+art is correct: [merged #1091](https://github.com/chboishabba/dashi_agda/pull/1091)
+already reduces A to five physical leaves and B4 to one literal R440 payment;
+[merged #1234](https://github.com/chboishabba/dashi_agda/pull/1234) already
+defines the exact source-attached B4 analytic payment **interface**;
+[merged #1233](https://github.com/chboishabba/dashi_agda/pull/1233) already
+defines the canonical A/B proof-obligation ledger. Do NOT recreate any of these.
+
+**Proof versus interface.** A record taking arbitrary `Set`-valued
+Fourier-transform meaning, signed payment, physical-majorant domination,
+or continuation inputs is a conditional theorem *consumer*. A `refl`
+receipt proving a Boolean is `true` is not evidence that such a field
+was populated on every admissible physical Navier–Stokes solution.
+The audited canonical source still marks all five A theorem leaves open,
+and the B4 physical payment, B1/2/3 producer estimates, B7, and B
+continuation inputs open. There is no observed exact-head kernel receipt
+or unrestricted global A/B existence proof here. Keep Clay promotion false.
+
+### Canonical owners and exact evidence (not historical RNNN)
+
+| Obligation | Existing paid mathematics | Actual acceptance input | Owner |
+| --- | --- | --- | --- |
+| **A1a** | Physical Fourier trajectory types; canonical pair and signed off-diagonal Gram; origin saturation | Construct *the actual* Euclidean Fourier NS interaction and prove same-solution equality with canonical projected pair; no invented `Set` witness | `NSClayFacingAPureAnalysisFrontier20261007Exact.agda`, `NSTriadKNEuclideanPhysicalFourierNSExact.agda` |
+| **A1b** | Positive heat rate and high-frequency scale-relative curvature | Actual output heat rate = nu*|xi|² and physical cutoff/envelope alignment for all required interactions | `NSClayFacingAPhysicalSameObjectCutExact.agda` |
+| **A2-low** | Signed origin bound and convolution integration compiler | From finite energy, physical low majorant <= real low convolution envelope, including near xi=0 | `NSWholeSpacePhysicalMajorantDominationProducerExact.agda` |
+| **A2-high** | High-frequency curvature and inverse-sixth envelope algebra | Physical high majorant <= weighted high envelope; integrability of the actual source-state envelope | same |
+| **A3** | Compensated field and signed Lebesgue continuation compiler | A globally admissible physical continuation criterion for arbitrary smooth finite-energy datum; pressure/initial trace/smoothness verified | `NSCanonicalA3ContinuationResidualExact.agda` |
+| **B4** | Exact principal half bound, noncore/core covariance and literal R440 work reduction | For all physical states, cutoffs and outputs, `-W(M,n_C R440_N+n_N R440_C-r_N M_C-r_C M_N) <= thetaD*M_core+cD*ED` with `thetaD>=0`, `1/2+thetaD<1`, cutoff-independent constants; inhabit existing #1234 socket | `NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda`, `NSCanonicalB4PhysicalR440AnalyticInterfaceExact.agda` |
+| **B1/B2/B3** | Row extraction, shell folds, gap/component infrastructure | Actual DFL/DHH shell populations, signed Bernstein/L2 estimates, uniform local ED allocation | `NSClayFacingBPureAnalysisFrontier20261005Exact.agda` |
+| **B7** | Q4 pointwise-to-spacetime and E+ aggregation compilers | Literal Q4 Gram payment and E+ global amplitude sum with cutoff-independent bound, or genuine Q5 fallback | `NSCanonicalB7IntegratedControlResidualExact.agda` |
+| **B continuation** | Generic BKM/compactness and mean restoration compilers | Uniform bounds, Galerkin limit/pressure and global smooth continuation for arbitrary periodic initial data | `NSCanonicalBContinuationResidualExact.agda` |
+
+### Actual mathematical research programme, ordered by information gain
+
+**P0 — B4 physical no-go or constructive certificate.** Work ONLY on the
+literal live R440 noncore/core residual; retain the sign rather than
+taking |work|. First compute exact small-mode rational adversarial families
+(phases, amplitude rescalings, shell separation, increasing cutoff)
+against any proposed `thetaD<1/2` estimate. A raw pair-rate Young bound
+has an amplitude-independent term and therefore cannot be absorbed by
+homogeneous local ED; use amplitude-weighted R440 terms and exact physical
+shell geometry. A failed candidate is valuable negative evidence; do not
+relabel it as a conditional theorem closure. If a uniform producer is found,
+instantiate the PR #1234 **existing** analytic record and bridge to B4.
+
+**P0 parallel — A1a concrete Euclidean Fourier population.** The
+canonical pair-resolvents and signed Gram are ALREADY paid. The missing
+object is an actual Fourier transform/projection of the same continuum
+solution, including transformation of the nonlinearity and its signed
+integrand. Start with a Schwartz/smooth solution test family but do not
+promote a restricted solution class to the universal Clay A statement.
+Construct a proof of the literal carrier equality, not a new abstract
+resolvent field. Use the existing Bishop complex/Leray carrier.
+
+**P1 — A1b and A2.** With A1a fixed, prove low-frequency cancellation
+or integrable majorant (the scalar resolvent bound alone has
+`a^{-1}~|xi|^{-2}` and its stability estimate has
+`a^{-2}~|xi|^{-4}` singularities). Prove separately the high inverse-sixth
+weighted convolution estimate. Consume the already-present
+`PhysicalEnvelopeInputs`; do not rebuild Fubini/Young.
+
+**P1 parallel — B1/B2/B3 producer estimates.** Real signed
+shell-local physical estimates and cutoff-uniform local ED budgets;
+generic fold and cardinality-free compilers are already installed.
+
+**P2 — integrated B7 and full A/B continuation.** Pay Q4/E-positive
+or verified Q5, then apply the existing physical Galerkin/compactness
+compiler. For A, apply the actual finite-energy majorants and the
+whole-space continuation criterion. Arbitrary initial-data quantifiers
+and absence of circular Serrin/BKM inputs are mandatory.
+
+### Stop / attribution / proof acceptance
+
+- Main result should be a source-exact theorem at an existing *physical*
+  owner, not a ninth RNNN module or a new selected source predicate.
+- Distinguish mathematical theorem, source-written Agda/Lean term,
+  checked kernel output, and unbounded A/B Clay target. State only
+  evidence actually observed.
+- If a proposed B4 estimate fails on a physical rational witness,
+  preserve the exact negative-control receipt; do not force it through
+  Young's bound as a positive proof.
+- The real R823 counterexample is an **auxiliary reserve route**
+  (existing Lean R760/R823 decision), not B4 and not Clay B.
+- The selected Lean `NSUnforcedAnalyticCuts.lean` contributes scalar
+  saturation stability and finite pairwise Young bounds, but neither
+  pays A2 nor uniform B4. Its new declarations have NOT been kernel
+  typechecked in this session.
+
+**Default navigation:**
+
+```sh
+python scripts/ns_canonical_focus.py --route A
+python scripts/ns_canonical_focus.py --route B
+python scripts/ns_canonical_focus.py --route B4
+```
+
+The three commands now resolve to the *physical* frontier/defect
+source files, not the abstract canonical-record schedulers. Historical
+RNNN packages remain bounded evidence only. No CI requested or run.
+
+---
 ## 2026-10-24 original unforced A/B direct analytical cut
 
 **Theorem source:** `dashi_lean4/NSUnforcedAnalyticCuts.lean`, optional
