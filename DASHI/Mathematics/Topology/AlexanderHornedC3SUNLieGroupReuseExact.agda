@@ -127,8 +127,8 @@ asHornSection :
   (twist : InnerThreefoldAction A H) →
   (root : A) →
   Horn.CommutatorSectionGroup
-asHornSection H section twist root = record
-  { Horn.Carrier = _
+asHornSection {A = A} H section twist root = record
+  { Horn.Carrier = A
   ; Horn.identity = GroupCore.identity H
   ; Horn.multiply = GroupCore.multiply H
   ; Horn.inverse = GroupCore.inverse H
