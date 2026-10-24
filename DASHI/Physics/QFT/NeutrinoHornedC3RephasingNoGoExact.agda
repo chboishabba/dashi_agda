@@ -121,3 +121,41 @@ sameMassSquaredUpToChargedLeptonRephasing tau tau = C.cyclotomic3Ext (solve []) 
 -- To recover a physical C3 effect, an additional fixed reference
 -- interaction/source/measurement must break this rephasing
 -- redundancy. No such same-object source has been supplied.
+
+------------------------------------------------------------------------
+-- CHARACTER/WILSON-TRACE BOUNDARY.
+-- If rho(r(g))=T rho(g) T^-1, then for any horn group word g,
+-- tr rho(r(g)) = tr rho(g).  This is the standard invariance
+-- of characters under inner conjugation, NOT a claim of zero
+-- source holonomy.  Closed source-specific equalities below audit
+-- the selected CP matrix rather than asserting an unimported
+-- universal finite-matrix trace theorem.
+------------------------------------------------------------------------
+
+traceRootMatrix :
+  (Flavour → Flavour → C.Cyclotomic3) → C.Cyclotomic3
+traceRootMatrix M =
+  Root.sum3 (M electron electron) (M muon muon) (M tau tau)
+
+onceRotatedRoot : Flavour → Flavour → C.Cyclotomic3
+onceRotatedRoot = Root.rotateByChargedT Root.selectedTS
+
+twiceRotatedRoot : Flavour → Flavour → C.Cyclotomic3
+twiceRotatedRoot = Root.rotateByChargedT onceRotatedRoot
+
+rootCharacterUnchangedUnderFirstRotation :
+  traceRootMatrix onceRotatedRoot
+    ≡ traceRootMatrix Root.selectedTS
+rootCharacterUnchangedUnderFirstRotation =
+  C.cyclotomic3Ext (solve []) (solve [])
+
+rootCharacterUnchangedUnderSecondRotation :
+  traceRootMatrix twiceRotatedRoot
+    ≡ traceRootMatrix onceRotatedRoot
+rootCharacterUnchangedUnderSecondRotation =
+  C.cyclotomic3Ext (solve []) (solve [])
+
+-- The earlier exact proof
+-- Root.chargedRotationActuallyMovesCPRoot
+-- and these trace equalities are consistent:
+-- nontrivial matrix orbit != nontrivial class-function observable.
