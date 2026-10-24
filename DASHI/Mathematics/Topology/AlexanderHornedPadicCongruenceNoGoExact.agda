@@ -28,7 +28,7 @@ module DASHI.Mathematics.Topology.AlexanderHornedPadicCongruenceNoGoExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.Topology.AlexanderHornedC3FiniteStageExact as Horn
 import DASHI.Mathematics.Topology.AlexanderHornedProPSolvableBlindExact as Solv
@@ -82,9 +82,7 @@ eachFiniteCongruenceKillsMeridian A k address =
         target (finiteLevelHornActor A k) address
   in
     trans result (sym (reductionOfIdentity A k))
-  where
-    open import Relation.Binary.PropositionalEquality using (sym; trans)
-
+ 
 integralCongruenceHornMeridianTrivial :
   (A : SeparatedIntegralCongruenceActor) →
   ∀ address → meridianMatrix A address ≡ identityMatrix A
