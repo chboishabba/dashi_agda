@@ -17,6 +17,7 @@ module DASHI.Physics.Gravity.KKQEDQCDVacuumConsumerBIDIExact where
 
 open import DASHI.Core.Prelude
 open import Data.Nat.Base using (_*_; _∸_)
+open import Data.Integer.Base using (0ℤ)
 
 import DASHI.Core.FormalClaimTransportGeometryExact as Transport
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
@@ -89,13 +90,19 @@ netCountCorrect = refl
 fiveTimesNetCountCorrect : 5 * qcdNetCasimirCount ≡ 240
 fiveTimesNetCountCorrect = refl
 
+fortySevenUnitsOnlyCover235 : 47 * 5 ≡ 235
+fortySevenUnitsOnlyCover235 = refl
+
+fortyEightUnitsCover240 : 48 * 5 ≡ 240
+fortyEightUnitsCover240 = refl
+
 -- Already-paid source-side anomaly arithmetic is a CONDITIONED
 -- inherited physical charge table, not a derivation of chiral 5D
 -- quark representations from smooth S1 compactification.
 inheritedSU3MixedAnomalyCancels :
-  Anomaly.su3SquaredU1PerGenerationNumeratorOver6
-    ≡ Anomaly.su3SquaredU1PerGenerationNumeratorOver6
-inheritedSU3MixedAnomalyCancels = refl
+  Anomaly.su3SquaredU1PerGenerationNumeratorOver6 ≡ 0ℤ
+inheritedSU3MixedAnomalyCancels =
+  Anomaly.anomalyVerificationSU3MixedZero
 
 anomalyDoesNotPromoteFullSM :
   Anomaly.exactStandardModelPromoted
