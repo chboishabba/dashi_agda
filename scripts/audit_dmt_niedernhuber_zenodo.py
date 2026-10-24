@@ -22,6 +22,20 @@ VERSION = "10.5281/zenodo.18850897"
 HEX_MD5 = re.compile(r"[0-9a-f]{32}\Z")
 
 
+AUTHOR_CODE_COMMIT = "c5c064d109563e97127403a8fbb340009ba1e88b"
+AUTHOR_FILE_SHA = {
+    "check_counterbalance.r": "9716ab46f15782294e53ccf8e3588593653dbdfc",
+    "disemb_mc_mkcoh.m": "f1855919b8a8ef315413ecbf103dcad24fc81519",
+    "disemb_mc_backfit.m": "74f23cad7fc968e3a8b537bfa013ae62fb3b885e",
+    "disemb_mc_Rprep.m": "3f58dde834189972410165cdd06392dea9220b33",
+    "disemb_microstate.m": "83683cfadb5a6ca76f63a0a9ec7a227a45e61e85",
+}
+AUTHOR_PARTICIPANT_IDS = (
+    "1001 1002 1003 1004 1006 1009 1010 1011 1013 1014 1016 1019 1021 "
+    "1022 1023 1024 1025 1026 1027 1028 1029 1031 1038 1040 1041"
+).split()
+
+
 def git_blob_sha(data: bytes) -> str:
     return hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\0" + data).hexdigest()
 
