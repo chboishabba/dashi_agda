@@ -894,7 +894,7 @@ def test_canadian_ripon_sworn_testimony_does_not_promote_score_producer():
         assert token in case
     for token in (
         "score-file version",
-        "different individual source",
+        "distinct individual source",
         "page-image screenshot requests returned a 403",
         "exact dataset fingerprint is still open",
     ):
