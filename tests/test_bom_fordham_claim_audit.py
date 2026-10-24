@@ -1,0 +1,56 @@
+"""Static source-boundary regression for 2026-10 BOM/Fordham case.
+
+This guards source/claim classifications, not climate-data computations, speaker
+intent, the original Berger/Sherrington audit, or Agda kernel typechecking.
+"""
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+OWNER = ROOT / "DASHI/Governance/BOMFordhamMediaClaimAuditExact.agda"
+VALIDATION = ROOT / "DASHI/Governance/BOMFordhamMediaClaimAuditValidation.agda"
+RESEARCH = ROOT / "docs/bom_fordham_temperature_claim_audit_20261024.md"
+
+
+def test_existing_typed_genealogy_reused():
+    text = OWNER.read_text()
+    assert "import DASHI.Governance.TypedGenealogyEdgeExact as Typed" in text
+    for edge, kind in [
+        ("fordhamTo2GB", "Typed.personnelContinuity"),
+        ("radioToTapt", "Typed.organisationalContinuity"),
+        ("fordhamAuditBroadcast", "Typed.audienceAdjacency"),
+    ]:
+        assert edge in text and kind in text
+    # No candidate is installed as a strong transfer evidence edge.
+    assert "Typed.historicalTransfer Typed.primary" not in text
+    assert "Typed.directMethodTransfer Typed.primary" not in text
+
+
+def test_source_roots_preserve_chronology_and_not_obtained_audit():
+    text = OWNER.read_text()
+    assert "2026-10-19 AEST" in text
+    assert "2026-10-22" in text
+    assert "2026-05-01" in text
+    assert "canonicalOriginalAuditStatus = notAcquired" in text
+    assert "institutionHypothesised bomStatement" in text
+    assert "allegationNotReproduced auditReporting" in text
+
+
+def test_nonpromotion_regressions_and_bondi_distinction():
+    code = OWNER.read_text()
+    val = VALIDATION.read_text()
+    docs = RESEARCH.read_text()
+    required = [
+        "duplicateDoesNotProveFraud",
+        "rhetoricDoesNotProveBannonControl",
+        "ownershipDoesNotProveEditorialOrder",
+        "bondiCoverageDoesNotProveInflammatorySpeech",
+        "fordhamTPUSA", "fordhamTPAU", "fordhamBannon",
+    ]
+    for name in required:
+        assert name in code
+    assert "noFraudPromotion" in val
+    assert "noTPUSAPromotion" in val
+    assert "2024 Bondi Junction" in docs
+    assert "2025 Bondi Beach" in docs
+    assert "1867 is pre-1910" in docs
+    assert "postdates the episode" in docs
