@@ -72,12 +72,37 @@ def check(data):
         return ans
     rows12=get_rows('degree12',12)
     rows78=get_rows('degree78',78)
+    sizes=data.get('class_sizes')
+    order=data.get('group_order')
+    if tbl=='6.Suz' and (sizes is None or order is None):
+        raise ValueError('6.Suz source export must include full class sizes and group order')
+    if sizes is not None or order is not None:
+        if (not isinstance(sizes,list) or len(sizes)!=n
+            or any(type(z) is not int or z<1 for z in sizes)
+            or type(order) is not int or order<1
+            or sum(sizes)!=order or sizes[0]!=1):
+            raise ValueError('class sizes and group order not consistent')
+        # Independently test source claims of character irreducibility via
+        # exact class-weighted inner products, no floating-point rounding.
+        rows=rows12+rows78
+        for i,(name_i,chi) in enumerate(rows):
+            for j,(name_j,psi) in enumerate(rows):
+                scalar=(Q(0),Q(0))
+                for k,weight in enumerate(sizes):
+                    v=mul(chi[k],conj(psi[k]))
+                    scalar=add(scalar,(weight*v[0],weight*v[1]))
+                expected=order if i==j else 0
+                if scalar!=(Q(expected),Q(0)):
+                    raise ValueError('source irreducible character orthogonality fails: '
+                                     +name_i+' / '+name_j)
     c2=data.get('central_c2_zero_based')
     c3=data.get('central_c3_zero_based')
     if type(c2) is not int or c2 not in range(n) or orders[c2]!=2:
         raise ValueError('exact central involution class required')
     if type(c3) is not int or c3 not in range(n) or orders[c3]!=3:
         raise ValueError('exact central C3 class required')
+    if sizes is not None and (sizes[c2]!=1 or sizes[c3]!=1):
+        raise ValueError('the declared central classes must each have size one')
     roots2={(Q(12),Q(0)),(Q(-12),Q(0))}
     if any(r[c2] not in roots2 for _,r in rows12):
         raise ValueError('central C2 not scalar on 12')
