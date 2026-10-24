@@ -1,3 +1,33 @@
+> **24 October 2026 — decisive B4 auxiliary-estimate negative control.**
+> The *literal full-output-fibre* noncore/core R440 covariance changes
+> under cutoff padding by zero-velocity incidences. The explicit
+> divergence-free real shear field
+> `u_hat(±e_x)=u_hat(±e_y)=e_z` is a genuine global smooth unforced
+> NS solution, but at output `k=(1,1,0)` the exact signed B4 defect
+> rises from `535344` at cutoff 8 to `17577776` at cutoff 16 and
+> `53228080` at cutoff 20; the literal Core-Core Young companion is
+> fixed at `10123708` for cutoffs >=5. An infinite family of
+> zero-amplitude noncore rows produces positive rate excess
+> `2 m(m-1)` for every m>=6. The old uniform B4 payment therefore
+> cannot hold against ANY fixed cutoff-bounded local physical ED.
+> This does NOT disprove the Clay theorem; it falsifies a proposed
+> full-fibre auxiliary inequality (subject to confirming ED's actual
+> source semantics). Use `scripts/ns_b4_literal_padding_adversary.py`,
+> its regression and `Docs/roadmaps/NSProofControl20260915.md`.
+> The amplitude-weighted raw modal R440 sum stays `2*M`, with physical
+> centered output-heat work zero: the divergent covariance is a
+> zero-padding centering artifact. Research should use a genuinely
+> padding-invariant same-source estimate, not sharpen Young's bound.
+>
+> **A source audit correction:** `NSTriadKNEuclideanCanonicalProjectedInteractionExact`
+> already constructs the raw continuum Fourier divergence-form cell
+> and canonical Leray projection and provides their formula weld.
+> `NSWholeSpaceFiniteConvolutionSingleLimitExact` already removes
+> a separate convolution-quadrature limit. Actual spatial Fourier
+> transform identity, physical low/high domination and continuation
+> remain open; the full positive R9 Gram-pair majorant is invalid
+> because it has an independent nonintegrable frequency variable.
+> No kernel receipt or unforced Clay alternative is claimed.
 > **Original unforced A/B frontier reconciliation — 24 October 2026.**
 > Merged PR #1091 already proves the canonical pair/resolvent/Gram
 > and signed R440 representation reductions. Merged PR #1234 already
