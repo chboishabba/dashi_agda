@@ -109,7 +109,11 @@ def test_original_pnas_static_window_is_eight_minutes_after_injection():
 
 
 def test_pnas_aggregate_arithmetic_is_consistent_but_not_reproduced():
-    audited = load_script("scripts/audit_dmt_pnas2023_published_gfc.py").audit()
+    audit_spec = importlib.util.spec_from_file_location(
+        "dmt_gfc_published_audit", ROOT / "scripts/audit_dmt_pnas2023_published_gfc.py")
+    published = importlib.util.module_from_spec(audit_spec)
+    audit_spec.loader.exec_module(published)
+    audited = published.audit()
     assert audited["implied_n"] == 16
     assert round(audited["verified_p_two_sided"], 3) == 0.007
     assert audited["status"] == "published_aggregate_arithmetic_consistent"
