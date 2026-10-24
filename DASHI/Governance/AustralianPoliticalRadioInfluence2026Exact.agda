@@ -380,3 +380,120 @@ openSecondOrder =
   ∷ bounded-effect-question socialMediaDistribution
     "Which actual transcript chunks were clipped and syndicated, preserving source roots and timing?" false
   ∷ []
+
+-- Source joins first surfaced by user-provided Google AI Mode answer,
+-- then checked against separately attributed publications. The AI answer
+-- is NOT an evidentiary root; its URL, hash, locations and unresolved leads
+-- are recorded in docs/bom_fordham_temperature_claim_audit_20261024.md.
+-- Do not duplicate canonical DOJ EFTA01615861 (PR #1131).
+rinehartBannonDevineEvent : RelationshipReceipt
+rinehartBannonDevineEvent = relationship-receipt
+  "Gina Rinehart and Steve Bannon" "Miranda Devine Manhattan book launch"
+  conferenceCoAttendance journalistCorroboration
+  "Daanyal Saeed, Crikey, 6 Nov 2024"
+  "https://www.crikey.com.au/2024/11/06/australian-conservatives-normal-us-election/"
+  "Crikey reports both Rinehart and Bannon attended Devine's Manhattan book launch. Co-attendance supports proximity, NOT sponsorship or political direction."
+  false false false
+
+advanceSheahanBannonConversation : RelationshipReceipt
+advanceSheahanBannonConversation = relationship-receipt
+  "Matthew Sheahan / Advance" "Steve Bannon"
+  reportedMeeting journalistCorroboration
+  "Mike Seccombe, The Saturday Paper, 7 Feb 2026"
+  "https://www.thesaturdaypaper.com.au/news/politics/2026/02/07/did-steve-bannon-stop-labor-winning-2019"
+  "Article says Sheahan had been spotted chatting with Bannon in Washington; supplies no verified meeting agenda, strategic instruction, formal contract or causal campaign join."
+  false false false
+
+rinehartMcWilliamSecuredMediaStake : RelationshipReceipt
+rinehartMcWilliamSecuredMediaStake = relationship-receipt
+  "Gina Rinehart / Hancock-related financing" "Bruce McWilliam Southern Cross Media shares"
+  securedStakeFinancing journalistCorroboration
+  "Guardian business 27 May 2026; ASX security deed reported"
+  "https://www.theguardian.com/business/2026/may/27/gina-rinehart-pays-for-bruce-mcwilliam-purchase-southern-cross-media"
+  "About AUD26m financing for near-10% stake in Seven/Hit/Triple M parent, with relevant interest and contingent security/voting rights. Not direct outright ownership, and not editorial control."
+  false false false
+
+rinehartStefanovicPodcastFundingClaim : RelationshipReceipt
+rinehartStefanovicPodcastFundingClaim = relationship-receipt
+  "The Australian / The Front reporting" "Rinehart financing of Stefanovic podcast"
+  reportedUnverifiedFunding journalistCorroboration
+  "The Australian, The Front, 29 Jun 2026 AEST"
+  "https://podcasts.apple.com/za/podcast/did-the-ben-roberts-smith-drama-end-karl-stefanovics-career/id1614339406?i=1000774589371"
+  "Publisher says Rinehart 'appears' to have bankrolled the podcast; contract, amount, funding route and editorial conditions not acquired. Repeating publisher wording does NOT verify completed funding."
+  false false false
+
+stefanovicRobinsonPublication : RelationshipReceipt
+stefanovicRobinsonPublication = relationship-receipt
+  "The Karl Stefanovic Show" "Tommy Robinson interview"
+  editorialPublication journalistCorroboration
+  "ABC 24-26 June 2026"
+  "https://www.abc.net.au/news/2026-06-24/karl-stefanovic-tommy-robinson-podcast-interview-taken-offline/106834832"
+  "Podcast interview published then removed from Stefanovic platforms. Nine confirmed his departure 26 June. A platforming act is not evidence of Bannon oversight."
+  false false false
+
+hansonRepublishedRobinson : RelationshipReceipt
+hansonRepublishedRobinson = relationship-receipt
+  "Pauline Hanson official video channel" "Stefanovic-Robinson interview"
+  mediaRedistribution journalistCorroboration
+  "ABC/Guardian reporting 24-25 June 2026"
+  "https://www.abc.net.au/news/2026-06-24/karl-stefanovic-tommy-robinson-podcast-interview-taken-offline/106834832"
+  "Hanson republished a recording. Platform redistribution is observable, but publisher permission, a business agreement or command chain was not established."
+  false false false
+
+mandelsonXstrataEpsteinTaxEmail : RelationshipReceipt
+mandelsonXstrataEpsteinTaxEmail = relationship-receipt
+  "Peter Mandelson" "Jeffrey Epstein / forwarded Xstrata mining-tax correspondence"
+  publishedCorrespondence journalistCorroboration
+  "Ben Butler, ABC, 2 Feb 2026, reporting on released DOJ emails from June 2010"
+  "https://www.abc.net.au/news/2026-02-02/peter-mandelson-on-rudds-mining-super-profits-tax-epstein-files/106295236"
+  "A concrete Australian resource-tax information path: Mandelson emailed Epstein campaign analysis enclosing material from Xstrata chief Mick Davis. Does NOT prove Epstein directed Australia's mining lobby or Rudd's removal."
+  false false false
+
+jonesGillardRecordedRemark : RelationshipReceipt
+jonesGillardRecordedRemark = relationship-receipt
+  "Alan Jones at Sydney University Liberal Club dinner" "Julia Gillard / her late father"
+  editorialPublication journalistCorroboration
+  "ABC, 30 Sep 2012, contemporaneous recording and apology"
+  "https://www.abc.net.au/news/2012-09-30/jones-says-pms-dad-27died-of-shame27/4287770"
+  "The offensive recorded comment, Jones's subsequent apology and advertiser backlash are independently reported. This 2012 source predates the 2019 Bannon-Palmer claims; similar rhetoric is not proof of shared command."
+  false false false
+
+rinehartOneNationHeadOffice : RelationshipReceipt
+rinehartOneNationHeadOffice = relationship-receipt
+  "Hanrine / Rinehart-owned property" "One Nation national headquarters premises"
+  commercialLeaseArrangement journalistCorroboration
+  "AAP, 5 Oct 2026, and One Nation/Hancock statements"
+  "https://aapnews.aap.com.au/news/one-nation-to-shuffle-deck-rent-gina-rinehart-office"
+  "Rinehart-linked entity purchased roughly AUD8m Brisbane premises. One Nation and Hancock say it rents space at commercial rate; lease terms and actual rent have not been independently audited. Building ownership is NOT donation of the title to party."
+  false false false
+
+stefanovicIbrahimOwnershipSettlement : RelationshipReceipt
+stefanovicIbrahimOwnershipSettlement = relationship-receipt
+  "Karl Stefanovic / Keshnee Ibrahim podcast partners" "123 Podcast Pty Ltd"
+  ownershipBuyoutSettlement journalistCorroboration
+  "AAP 9 Oct 2026; RadioInfo 11 Oct 2026"
+  "https://radioinfo.com.au/podcast-info/karl-stefanovic-podcast-to-resume-unfettered/"
+  "The company had 45% interests for Stefanovic and the Ibrahim side; reports say a court dispute ended in confidential buyout by Stefanovic. Payment amount and current ultimate register not obtained; this is NOT proof Rinehart was equity holder."
+  false false false
+
+mfwKyleAdvertiserCampaign : RelationshipReceipt
+mfwKyleAdvertiserCampaign = relationship-receipt
+  "Mad F***ing Witches / #VileKyle" "Advertisers on Kyle and Jackie O"
+  advertiserBoycottCampaign journalistCorroboration
+  "MFW first-party campaigns; Guardian 9 Oct 2024; Money Magazine 2026"
+  "https://www.theguardian.com/media/2024/oct/09/kyle-and-jackie-o-show-advertisers-back-out-violent-misogyny-accusations-campaign-mfw-ntwnfb"
+  "MFW explicitly targeted commercial sponsorship of broadcasts; some named advertisers withdrew or reviewed, and ARN acknowledged objectionable programming. MFW's larger asserted count/cost remains an attributed estimate with many alternative reasons for ad churn."
+  false false false
+
+-- The following impossible promotions are *typed distinctions*, not empirical theorems.
+-- Their uninhabited types cannot establish real-world source facts.
+data EpsteinDocumentMentionProvesMeeting : Set where
+data ReportedPodcastBackerIsAuditedCapital : Set where
+data OriginalInterviewFileAccessIsProvenInstruction : Set where
+
+noMentionMeeting : EpsteinDocumentMentionProvesMeeting → ⊥
+noMentionMeeting ()
+noRumourToEquity : ReportedPodcastBackerIsAuditedCapital → ⊥
+noRumourToEquity ()
+noRepublishedFileCommand : OriginalInterviewFileAccessIsProvenInstruction → ⊥
+noRepublishedFileCommand ()
