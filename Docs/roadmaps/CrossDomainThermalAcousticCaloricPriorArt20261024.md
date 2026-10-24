@@ -1,3 +1,5 @@
+> **ORIGINAL INVESTIGATION ROOT / 25 October 2026:** [GingerTheoryFrequencyClaimsOriginalSourceCut20261025.md](../Investigations/GingerTheoryFrequencyClaimsOriginalSourceCut20261025.md) binds the user-provided SRT, six screenshot hashes, time-coded claims and original scientific/historical documents. The 2020 ANA article shown in the reel was *retracted and corrected/reissued in 2022* (DOI `10.1002/art.42330`): the correct overall ANA figures are 11.0%, 11.4% and 16.1%, not evidence of a data-centre-induced 300% rise. This root has precedence over general technological applications.
+
 # Cross-domain thermal, caloric, acoustic and multiphysics prior-art audit
 Date: 2026-10-24
 Status: repo archaeology + source-bounded external state of the art.
