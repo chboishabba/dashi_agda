@@ -80,3 +80,6 @@ import DASHI.Cognition.PNF.SensibLawCullenRegisteredS5BBlockExact
 import DASHI.Cognition.PNF.SensibLawCullenConsumerRelativeSourceAcquisitionExact
 import DASHI.Cognition.PNF.SensibLawCullenEdelman64SemanticStateCompilerExact
 import DASHI.Cognition.PNF.SensibLawCullenResidualAdmissionBidiExact
+
+-- Finite order-information and uptake/retrieval separation (Rodgers 2026).
+import DASHI.Cognition.PNF.EnactedTemporalOrderExact
