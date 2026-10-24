@@ -76,3 +76,16 @@ def test_real_finite_H1_source_has_global_L2_heat_inverse_majorant():
     assert receipt["arbitrary_H1_source_bound"]=="min(E*|xi|, sqrt(E*D))"
     assert "sqrt(D/E)"==receipt["arbitrary_H1_crossover_frequency"]
     assert "D" in receipt["arbitrary_H1_global_fourier_resolvent_L2_squared_bound"]
+
+
+def test_leray_energy_gives_finite_T_spacetime_source_response():
+    E0,T,nu=S.symbols("E0 T nu",positive=True)
+    # ||StokesInverse F_nonlin(t)||²_(L2_xi)
+    # <= (8pi/nu²) E(t)^(3/2) sqrt(D(t)).
+    # E(t)<=E0 and ∫_0^T D(t) <= E0/(2nu).
+    via_holder=(8*S.pi/nu**2)*E0**S.Rational(3,2)*(
+        S.sqrt(T)*S.sqrt(E0/(2*nu)))
+    expected=4*S.sqrt(2)*S.pi*E0**2*S.sqrt(T)/nu**S.Rational(5,2)
+    assert S.simplify(via_holder-expected)==0
+    assert ("sqrt(T)" in module.certificate()[
+        "Leray_energy_inequality_spacetime_response_L2_squared_upper"])
