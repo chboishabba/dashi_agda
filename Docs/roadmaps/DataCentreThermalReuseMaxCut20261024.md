@@ -92,3 +92,52 @@ Synthetic marginal-carbon crosscheck only: if 10.4MW useful heat displaces 90%-e
 - P6 **separate**: human health/noise causal study. Financial optimization does not constitute safety or risk proof.
 
 **Claim limitation:** the original @itsgingertheory/MKUltra historical hypothesis receives no new support from industrial heat-recovery feasibility. This new engineering programme can stand independently on established thermodynamics and actual industrial demonstration.
+
+
+## Round-2 max-cut closure: 2026-10-24
+
+**KPI and source-counterexample owner:** `DASHI.Environment.DataCentreThermalReuseMetricBoundaryExact`, composing the previous conserved site model. The exact 100-kW fixture proves:
+
+- `8 MW / 12.5 MW = 0.64` is the **illustrative ERF** only if the 8 MW source stream genuinely crosses the data-centre boundary and satisfies the standard's beneficial offsite reuse criteria.
+- `10.4 MW / 12.5 MW = 0.832` is NOT its ERF: 2.4 MW was newly supplied as external heat-pump compressor electricity.
+- `PUE = 12.5 / 10 = 1.25`; illustrative `ERE=(1-0.64)1.25=0.45`, which is a derived reuse metric, not a 45% reduction in measured physical electricity.
+- Actual site meter and ownership boundary, heat-meter calibration and distribution losses can alter accounting. A proposed heat customer does not count as delivered beneficial reuse.
+
+First-party boundary: ISO/IEC 30134-6:2021 (https://www.iso.org/standard/71717.html) remains published in October 2026; edition 2 is only an approved work item (https://www.iso.org/standard/94620.html). Clause excerpts exclude external heat-pump electricity from recovered data-centre source heat; internal reuse already improving PUE cannot be counted again in ERF. Distinguish heat at facility boundary from heat delivered to customer after pipe loss, and from the customer's avoided source energy.
+
+**New operational acceptance producer:** `scripts/datacentre_heat_offtake_acceptance.py` reads a meter-aligned hourly CSV with named IT power, overhead, rack hot/cold coolant temperature, coolant mass flow, direct and upgraded heating demand and target temperature. It enforces simple counterflow HX hot-end and cold-end pinch bounds; screens HP COP as second-law efficiency times temperature-lift Carnot COP; explicitly computes external HP electricity, network losses, energy conservation and candidate ISO ERF/PUE/ERE. This is a deliberately conservative screening fixture, NOT a design-certified UA sizing tool. Embedded self-tests cover conservation, pinch failure, no demand, nonviable high lift, network loss, zero-IT and calorimetry inconsistencies.
+
+**Important negative control:** earlier example `300 kg/s × 4.186 kJ/(kg K) × 10K = 12.558MW`, more than the declared `10MW` IT thermal source. That was inconsistent with the claimed IT-only loop. The acceptance fixture uses `200 kg/s` (~8.372MW hot-cold exchange) and rejects calorimetric IT-only records that exceed measured IT electrical input beyond tolerance. A real cooling loop that also receives UPS, pump or other outside heat requires a separately identified control volume and additional source meters, not silent clamping. Pure-water cp=4.186 is nominal and needs coolant-composition measurement; no physical Q at an actual facility is recovered here.
+
+### Newly discovered root sources
+
+- **Jeffrey D. Van Zetten, Michael E. Cholette, Keivan Bamdad (2026)**, *Energy and carbon savings in data centres through liquid-to-chip cooling with differential temperature control*, Advances in Applied Energy DOI [10.1016/j.adapen.2026.100269](https://doi.org/10.1016/j.adapen.2026.100269). Australian MELBOURNE measurement-validated DesignBuilder/EnergyPlus base, then conditional simulated ATC vs LTC 6–14% peak and 4–13% annual energy changes; PUE 1.22–1.25 to 1.18 predicted under increased coolant differential. Do not apply these improvements universally to Swanbank or any unmeasured site.
+- **Jinkyun Cho, Joo Hyun Moon (2026)**, *Thermodynamic optimization of adsorption cooling for low-grade data center waste heat: A calibrated white-box modeling approach*, Energy Conversion and Management DOI [10.1016/j.enconman.2026.121411](https://doi.org/10.1016/j.enconman.2026.121411). Adsorption MOF and silica-gel analysis in 50–75C range, 53–60C highlighted operating window; experimentally calibrated white-box model not universal commercial chiller performance.
+- **IEA Energy in Buildings and Communities Annex 100 (2026–2031)** [programme source](https://wi.iea-ebc.org/projects/project?AnnexID=100): current ongoing international collaboration specifically covering data-centre cooling, liquid cooling, heat recovery, heat pumps/storage and safe cooling operation. Provides continuing standards and engineering coordination; no results are imported from the programme merely because it exists.
+- **Cui, Du & Wang (2025)**, [10.1016/j.apenergy.2025.126407](https://doi.org/10.1016/j.apenergy.2025.126407): specific 50C hot inlet/32C cooling-water inlet, 50kW of chilled water at 18C, modelled Guangzhou mechanical cooling reduction 80.5% and 78MWh annual electricity savings. 80.5% applies to mechanical cooling duty, NOT entire facility PUE or site heat generation.
+- **ISO/IEC 30134-6:2021**, [primary standard](https://www.iso.org/standard/71717.html), ERF boundary and energy reuse definition. This is a metric definition, NOT an approval or on-site verification.
+- **Australian Government**, [data-centres equipment guide](https://www.energy.gov.au/business/equipment-guides/data-centres), directly names waste heat reuse and absorption chillers among options. This guidance does not show any particular Queensland financial success.
+
+### Revised counterfactual contract
+
+No valid environmental net-benefit calculation can omit:
+1. **Same compute:** same delivered IT service and uptime, not just same installed IT power (PUE alone can be misleading when IT efficiency changes).
+2. **Energy baseline:** current cooling compressor/chiller/fans/pumps and alternative customer's heat supplier, against the proposed liquid loops + heat pump + distribution + cooling auxiliaries.
+3. **Thermal feasibility:** stream temperatures at both HX ends, actual measured `m_dot*c_p*DeltaT`, detailed UA/pressure loss, part-load COP map, source heat captured and customer delivered heat.
+4. **Carbon:** temporal marginal grid factor and displaced baseline fuel/heat pump; account for refrigerant leakage and embodied equipment separately. Do not use average grid emissions as the mandatory marginal input.
+5. **Water:** evaporative cooling and heat rejection tradeoffs, drought/recycled-water restrictions, leakage/discharge; no sign inferred from the presence of a cooling tower or chiller.
+6. **Noise:** pre/post matched operating-state 1/3 octave + narrowband spectra at source and receptor, wind/background calibrated, independent external compressor/fan/pump/generator operational contributions. dBA scalar alone is insufficient.
+7. **Commercial:** cost of heat = (annualised capex + fixed O&M + electrical input and auxiliary cost + distribution/backup - justified avoided cooling costs - contracted revenues if treating net site economics) divided by actually delivered MWh, with site-specific contracts/tariffs and separable stakeholders; require hours and backup availability.
+8. **Community/planning:** applicable Ipswich/Queensland permissions, thermal infrastructure siting, public consultation status, off-taker facility safety, development-specific legal and ecological constraints.
+
+### Phase assessment after exact thermal metric and producer gating
+
+- **P0 provenance:** substantially paid. Known publications and deployments separated from simulation and forecast.
+- **P1 exact finite models:** source/electricity separation and metric cross-products committed. **Agda not typechecked; no CI/kernel-verified claim.**
+- **P2 runnable acceptance:** testable candidate screening completed using synthetic fixed settings, with measurement-calibration and source-physics contradictions explicitly fail-closed; no actual real-site scenario is closed.
+- **P3 same-site/offtaker physical join:** OPEN; needs dated source meter, valid coolant composition, legally relevant parcel/customer location, hourly customer duty and pipe corridor.
+- **P4 intervention outcome:** OPEN; must compare matched computation delivery and actual acoustics, water, reliability, marginal emissions, net energy and sensible heat release simultaneously.
+- **P5 economics/contracts/policy:** OPEN; source-grade and engineering concept are mature but project approvals, duties and contracts missing.
+- **P6 health causal inference:** independent OPEN empirical study, unchanged by heat pump feasibility.
+
+**Max-cut:** prioritise one metered site–customer pair and pre/post intervention, rather than recursively adding new abstract model surfaces. P2 is as far as synthetic, non-proprietary inputs alone can take physical validation.
