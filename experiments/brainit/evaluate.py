@@ -19,6 +19,7 @@ from skimage.metrics import structural_similarity
 from skimage.transform import resize
 
 from inventory import digest
+from alignment import checked_alignment
 
 METRIC_VERSION = "brainit-independent-pixcorr-ssim425-v1"
 
@@ -89,7 +90,7 @@ def two_way_feature_identification(recon_feat: np.ndarray,
 
 
 def evaluate(recons_path: Path, images_path: Path, fmri_path: Path,
-             subject: int, condition: str, seed: int,
+             design_path: Path, subject: int, condition: str, seed: int,
              branch: str, gt_feat: Path | None = None,
              recon_feat: Path | None = None,
              feature_source: str | None = None) -> dict:
@@ -97,14 +98,12 @@ def evaluate(recons_path: Path, images_path: Path, fmri_path: Path,
         raise ValueError("subject is NSD 1-based (1..8)")
     recons = unit_images(np.load(recons_path, allow_pickle=False))
     originals = np.load(images_path, mmap_mode="r", allow_pickle=False)
+    alignment = checked_alignment(fmri_path, design_path)
+    ids = np.asarray(alignment["row_global_image_ids"])
     with np.load(fmri_path, allow_pickle=False) as ds:
-        source_mask = ds["type_sample"] == 2
-        ids = np.flatnonzero(source_mask)
-        n_fmri = len(ds["multi_sub_fmri"])
-    if len(ids) != n_fmri or len(originals) != len(source_mask):
+        n_images = len(ds["type_sample"])
+    if len(originals) != n_images or len(recons) > len(ids):
         raise ValueError("Cannot prove fMRI / image test-row correspondence")
-    if len(recons) > len(ids):
-        raise ValueError("More reconstructions than labelled test samples")
     truth = unit_images(np.asarray(originals[ids[:len(recons)]]))
     if truth.shape != recons.shape:
         raise ValueError("Ground truth / reconstruction dimensions differ")
@@ -143,7 +142,10 @@ def evaluate(recons_path: Path, images_path: Path, fmri_path: Path,
         "subjects_are_nsd_one_based": True,
         "artifact_hashes": {"recon": digest(recons_path),
                             "images": digest(images_path),
-                            "fmri": digest(fmri_path)},
+                            "fmri": digest(fmri_path),
+                            "nsd_design": digest(design_path)},
+        "upstream_sorted_gt_order_matches_fmri":
+            alignment["upstream_inference_gt_order_matches_fmri_rows"],
         "subject": subject, "condition": condition, "seed": seed,
         "branch": branch, "aggregate": aggregate,
         "feature_evaluation": feature_result, "rows": rows,
@@ -156,6 +158,8 @@ def main(argv=None):
     ap.add_argument("--recons", type=Path, required=True)
     ap.add_argument("--images", type=Path, required=True)
     ap.add_argument("--fmri", type=Path, required=True)
+    ap.add_argument("--design", type=Path, required=True,
+                    help="Original NSD nsd_expdesign.mat to verify row identity")
     ap.add_argument("--subject", type=int, required=True, help="NSD number 1..8")
     ap.add_argument("--condition", choices=["paired", "deranged", "zero"], required=True)
     ap.add_argument("--seed", type=int, required=True)
@@ -165,7 +169,7 @@ def main(argv=None):
     ap.add_argument("--feature-source", type=str)
     ap.add_argument("--out", type=Path, required=True)
     args = ap.parse_args(argv)
-    report = evaluate(args.recons, args.images, args.fmri, args.subject,
+    report = evaluate(args.recons, args.images, args.fmri, args.design, args.subject,
                       args.condition, args.seed, args.branch,
                       args.feature_gt, args.feature_recons,
                       args.feature_source)
