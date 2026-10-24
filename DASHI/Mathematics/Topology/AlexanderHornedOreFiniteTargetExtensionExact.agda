@@ -43,6 +43,12 @@ record CommutatorSectionTarget : Set₁ where
     unit : Value
     multiply : Value → Value → Value
     invert : Value → Value
+    associative : ∀ a b c →
+      multiply (multiply a b) c ≡ multiply a (multiply b c)
+    leftIdentity : ∀ a → multiply unit a ≡ a
+    rightIdentity : ∀ a → multiply a unit ≡ a
+    leftInverse : ∀ a → multiply (invert a) a ≡ unit
+    rightInverse : ∀ a → multiply a (invert a) ≡ unit
     chooseLeft : Value → Value
     chooseRight : Value → Value
     sectionLaw : ∀ x →
