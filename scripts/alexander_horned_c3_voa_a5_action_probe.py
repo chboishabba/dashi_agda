@@ -54,11 +54,14 @@ def exhaustive_commutator_section():
         for b in A5:
             g = commutator(a, b)
             section.setdefault(g, (a, b))
-            if root is None and g != IDENTITY and generated_order((a, b)) == 60:
+            if root is None and order(g) == 5 and generated_order((a, b)) == 60:
                 root = (g, a, b)
     assert len(A5) == 60
     assert len(section) == 60
     assert root is not None
+    # This is a deliberate order-FIVE quotient, not the first
+    # generating A5 commutator, which can have order THREE.
+    assert order(root[0]) == 5
     return section, root
 
 
