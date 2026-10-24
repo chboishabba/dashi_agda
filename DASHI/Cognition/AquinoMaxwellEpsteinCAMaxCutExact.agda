@@ -2279,3 +2279,71 @@ canadian35mDatabaseVulnerabilityNot35mKoganRecords :
   everyOneOf35mPeopleProvedToBeKoganDerivedScore
     canonicalCanadian2019RemediationEvidenceCut ≡ false
 canadian35mDatabaseVulnerabilityNot35mKoganRecords = refl
+
+
+------------------------------------------------------------------------
+-- ORIGINAL-OBJECT PARETO 2026-10-25: UK CAMPAIGN FINANCE AND DISTINCT
+-- US FTC PERSONAL CONSENT ORDERS. The CA-owner receipts above are reused.
+-- All "true" values describe regulator/source assertions, not an
+-- independent theorem of historical truth or a conviction of a person.
+------------------------------------------------------------------------
+
+ftcKoganNixConsentCanonicalOwner : CA.InfluenceReceipt
+ftcKoganNixConsentCanonicalOwner = CA.ftcKoganNixIndividualConsentReceipt
+
+ukAIQPaymentCanonicalOwner : CA.InfluenceReceipt
+ukAIQPaymentCanonicalOwner = CA.ukElectoralAiqPaymentsReceipt
+
+record OriginalElectionRegulatorySplit : Set where
+  constructor original-election-regulatory-split
+  field
+    ftcCompanyCambridgeAnalyticaDefaultFindingPublished : Bool
+    ftcKoganIndividualFinalConsentOrderPublished : Bool
+    ftcNixIndividualFinalConsentOrderPublished : Bool
+    personalFTCOrdersAreAdjudicatedAdmissionOfComplaint : Bool
+    ftcIndividualOrdersRequireDerivativeDataDeletion : Bool
+    executedComplianceDeclarationsExaminedHere : Bool
+    ukRegulatorDocumentsFiveJune2016AIQPayments : Bool
+    ukVoteLeaveAppealWithdrawnAndFinesPaid : Bool
+    grimes2019AppealSucceeded : Bool
+    grimesOriginalSanctionRemainedInForce : Bool
+    ukLeaveEUDirectCambridgeAnalyticaContractFound : Bool
+    uk2016AIQInvoicesIdentifyGSRScoreFile : Bool
+    sourceGivesElectionCausalEffectOfScores : Bool
+    sourcePaysEpsteinAquinoCommonCommand : Bool
+open OriginalElectionRegulatorySplit public
+
+canonicalOriginalElectionRegulatorySplit : OriginalElectionRegulatorySplit
+canonicalOriginalElectionRegulatorySplit =
+  original-election-regulatory-split
+  true true true false true false true true true false false false false false
+
+ukElectoralAiqPaymentsExistAtRegulatorScope :
+  ukRegulatorDocumentsFiveJune2016AIQPayments
+    canonicalOriginalElectionRegulatorySplit ≡ true
+ukElectoralAiqPaymentsExistAtRegulatorScope = refl
+
+koganFTCConsentDoesNotAdmitComplaintAllegations :
+  personalFTCOrdersAreAdjudicatedAdmissionOfComplaint
+    canonicalOriginalElectionRegulatorySplit ≡ false
+koganFTCConsentDoesNotAdmitComplaintAllegations = refl
+
+grimesSanctionNotStillInForce :
+  grimesOriginalSanctionRemainedInForce
+    canonicalOriginalElectionRegulatorySplit ≡ false
+grimesSanctionNotStillInForce = refl
+
+campaignPaymentsDoNotIdentifyGSRInputFile :
+  uk2016AIQInvoicesIdentifyGSRScoreFile
+    canonicalOriginalElectionRegulatorySplit ≡ false
+campaignPaymentsDoNotIdentifyGSRInputFile = refl
+
+ukLeaveEUNoProvenDirectCAContract :
+  ukLeaveEUDirectCambridgeAnalyticaContractFound
+    canonicalOriginalElectionRegulatorySplit ≡ false
+ukLeaveEUNoProvenDirectCAContract = refl
+
+campaignRecordsDoNotPayCaseWideCovertCommand :
+  sourcePaysEpsteinAquinoCommonCommand
+    canonicalOriginalElectionRegulatorySplit ≡ false
+campaignRecordsDoNotPayCaseWideCovertCommand = refl
