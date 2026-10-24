@@ -393,3 +393,51 @@ def test_wylie_senate_hacking_claim_is_not_independent_kompromat_proof():
         "exact Epstein same-object tasking = UNPAID",
     ):
         assert phrase in roadmap
+
+
+def test_ripon_has_separate_witness_and_committee_origins():
+    source = OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    for token in (
+        "silvesterTestimonyRoot : OriginRoot",
+        "dcmsCommitteeFinalReportRoot : OriginRoot",
+        "parliamentaryCommitteeFinding : SourceRole",
+        "silvesterAIQRiponDevelopment2018 : CaseClaim",
+        "silvesterAIQBoltonDeployment2018 : CaseClaim",
+        "dcmsRiponRepositoryReview2019 : CaseClaim",
+        "dcmsICOBrexitCounterFinding2019 : CaseClaim",
+        "bounded-source silvesterAIQRiponDevelopment2018 silvesterTestimonyRoot",
+        "bounded-source dcmsRiponRepositoryReview2019 dcmsCommitteeFinalReportRoot",
+        "silvesterRiponEvidence = bounded-source",
+        "dcmsRiponProjectReport = bounded-source",
+        "localRiponObject = scoped-ripon-object-payment",
+        "localH2ProgrammeObjectPaid = refl",
+        "localRiponDeveloperToSCLRelationPaid = refl",
+        "riponSourceTreeNotInCaseCustody = refl",
+        "riponPersonalBannonCodeControlUnpaid = refl",
+        "riponDoesNotPromoteAquinoLink = refl",
+        "riponDoesNotPromoteEpsteinLink = refl",
+        "localRiponH2NotGlobalH3 = refl",
+        "scopedH2DoesNotChangeWholeNetworkH2 = refl",
+    ):
+        assert token in source
+    for token in (
+        "### Ripon: an actual local H2",
+        "Q2776–2784",
+        "Q2949–2955",
+        "scl.ripon.us",
+        "no H2 anywhere",
+        "local technical subcluster",
+        "Whole-network H2",
+    ):
+        assert token in roadmap
+
+
+def test_ripon_direct_corporate_contract_not_inferred_from_code_crossing():
+    source = OWNER.read_text()
+    roadmap = ROADMAP.read_text()
+    assert "not direct CA privity" in source
+    assert "unauthorized influence" in source
+    assert "original code bytes" in source.lower() or "original code" in source.lower()
+    assert "silvesterAIQBoltonDeployment2018" in source
+    assert "Direct contractual link **disputed/denied by Silvester**" in roadmap
