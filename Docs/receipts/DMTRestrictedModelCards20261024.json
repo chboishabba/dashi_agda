@@ -73,7 +73,8 @@
       "Do not use source-defined sample-specific statistics for held-out tuning",
       "No retrospective model family tightening after seeing test results",
       "Existing psychedelic motif Agda operators are finite stipulated transitions (lattice→tunnel→face), not transition kernels estimated from Erowid experience reports",
-      "Noah et al 2024 Erowid corpus includes a named Entities category and 1,121 DMT reports; authors' published category proportions are not person-level onsets, no proof of participant recurrence, and no evidence of independent external entities"
+      "Noah et al 2024 Erowid corpus includes a named Entities category and 1,121 DMT reports; authors' published category proportions are not person-level onsets, no proof of participant recurrence, and no evidence of independent external entities",
+      "Hyperfabric sites remain typed by sampling unit, time resolution, archival lineage, measurement status and access rights. Published Erowid category prevalences can support an aggregate report consumer but cannot transport directly to individual temporal recurrence, voxel-neural replay or M2 ontology."
     ]
   },
   "models": [
@@ -272,6 +273,8 @@
     "experimental_independence": "Erowid narrative cohort not a replication of original 2023 EEG-fMRI cohort. Do not infer cross-paper same-person matching or independence without evidence.",
     "rights": "Erowid requires prior permission for mining/distilled aggregate experience-report data; published author summary can be analysed with citation",
     "source_claim_ceiling": "substance-specific narrative feature proportions are source-supported; recurrent attractor processes remain untested toys",
-    "cannot_identify_external_agents": true
-  }
+    "cannot_identify_external_agents": true,
+    "fibre_admission": "Only e_published_motif_summary and the separate synthetic non-identification/cross-paper descriptive edges are source-admissible from currently located information. Sequenced Erowid reports require lawful access and chronological annotations."
+  },
+  "motif_observation_hyperfabric": "Docs/receipts/DMTMotifObservationHyperfabric20261025.json"
 }
