@@ -216,10 +216,10 @@ sphereHomologyLeaf = topologyParetoLeaf
 richardsRealisationLeaf : TopologyParetoLeaf
 richardsRealisationLeaf = topologyParetoLeaf
   2 richardsOriginal
-  "existing Agda pants/frontier and Lean Integration.Address finite prefix carriers"
+  "actual marked PL pants/handle triangulations and vertex transport; source-written Lean CompatibleCantorTower inverse limit reusing Integration.Address"
   "Cantor tree / Jacob's ladder / Loch Ness monster"
-  "locally finite collared oriented 2-manifold union; realised decorated end-space equivalence; application of source-owned classification"
-  "three noncompact surfaces, infinite handles, genus/ends invariants"
+  "finite manifold and every-old-frontier ancestry now source-written; NEXT actual collared direct-limit 2-manifold, Richards same-object end homeomorphism, decorated genus/nonplanar end proof, kernel-recognised classification"
+  "three noncompact surfaces and their decorated end types; conditional end-space argument in Docs/topology/ExoticInfiniteSurfaceEndSpaceConditionalTheorem20261025.md"
   geometricSameObjectOpen true false
 
 foxArtinGeometricLeaf : TopologyParetoLeaf
