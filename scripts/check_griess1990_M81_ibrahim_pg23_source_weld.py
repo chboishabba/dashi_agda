@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Agda-side independent source-donor reuse: Griess 1990 M81/PG(2,3).
 
-REUSES the existing Agda #1249 original homogeneous Albert source fixture
-scripts/check_27_origin_albert_griess_product_cut.py: its F3^3 carrier and
-g polynomial, instead of a second user-invented cocycle.
+REUSES the existing Agda #1239 independent Griess source-to-native
+certificate verifier and its original F3^3 phase polynomial. The #1249
+original fixture is on a separate PR branch and is NOT imported here.
 
 Original external source: Robert L. Griess Jr., Journal of Algebra 131
 (1990) 281–293, DOI 10.1016/0021-8693(90)90176-O.
@@ -16,8 +16,8 @@ from itertools import product,combinations
 from collections import Counter
 import runpy
 prior=runpy.run_path(str(Path(__file__).with_name(
-    'check_27_origin_albert_griess_product_cut.py')))
-V=prior['V']; g=prior['g']; add=prior['add']; neg=prior['neg']
+    'check_griess1990_rational_triality_crossprover_certificate.py')))
+V=prior['V']; g=prior['phase']; add=prior['add']; neg=prior['neg']
 origin=(0,0,0)
 assert len(V)==27
 def det(x,y,z):
