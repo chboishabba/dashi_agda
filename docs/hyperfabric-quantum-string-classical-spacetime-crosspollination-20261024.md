@@ -606,3 +606,42 @@ and worldsheet momentum/winding Hamiltonian,
 not another modular/cube label comparison.
 Original physical work and attribution to Witten,
 FLM, Verlinde, Maloney–Witten retained.
+
+
+## 2026-10-24 newest-PR cross-pollination/source actual Witten conformal algebra
+
+Primary new canonical D4 owner:
+`docs/hyperfabric-witten-d4-conformal-su2-4-su3-1-current-embedding-maxcut-20261024.md`.
+Genuine **published 1989** `SU2_4⊂SU3_1`
+conformal embedding is an operational
+chiral algebra extension linking existing
+SU2 k4/CS and SU3 k1/anyon three-fold
+owner labels (not a color/geometry theorem).
+Source rational `sl2→sl3` matrices have
+Dynkin index4, adjoint `3+5`;
+source branching `SU3 vacuum→(SU2 0+4)`,
+`fundamental,anti→SU2 label2`,
+giving exact `D4` partition
+`|chi0+chi4|²+2|chi2|²`.
+Local exact S/T modular, 27 source
+SU3 Verlinde and 81 associativity checks
+PASS. The 3 C3 invertible sectors arise
+after Z2 boson condensation/extension,
+not as original SU2_4 simple currents.
+
+Current unrepaired boundaries: original
+horned C3 (especially characteristic3
+nonsemisimple) and signed-zero C3 are NOT
+SU3_1 braided line categories; Monster
+C27→C3 reduction is many-to-one; the
+27-site P3³ graph is not the 3D SU3_1
+topological CS or quantum worldsheet.
+Actual 5D E6 source actions/CS and
+Albert trilinear triality residual in newest
+PRs #1217/#1241/#1106/Lean #52
+cannot be bypassed. The chosen nonflat
+SU2 WZW × linear-dilaton 26D string
+still needs source full current OPE/BRST
+and quantum-to-target gerbe/momentum
+transport. New Agda and Lean source proof
+modules remain kernel-UNVERIFIED.
