@@ -1997,3 +1997,43 @@ interaction/holonomy discriminator, or explicitly retire
 CP-generation physical promotion. Do not manufacture another
 C3/Monster/KK analogue to pay a missing physical observable.
 See decision register for deliverable owners and acceptance tests.
+
+## 2026-10-24 maximal-return physical steelman: next payoff is regularity
+
+**New decision owner:** `Docs/physics/HornedSU3ObservableRegularityParetoMaxCut20261024.md`.
+This replaces the looser "construct one gauge-invariant
+interaction" with three *discriminating* targets:
+1. Prove actual uniform small-loop geometry, or find
+   counterexample, and apply the conditional shrinking
+   horn holonomy no-go \(\|U_{root}-I\|\le
+   (2\epsilon_n)^{2^n}/2\). If a nontrivial root
+   persists while \(\ell_n\to0\), a uniformly
+   bounded, smoothly-extendible gauge connection
+   on those loops cannot represent it.
+2. Reuse the EXISTING `SUNWilsonClassFunction` as
+   observable; selected toy \(W=TS1\) has
+   \(P_+(0)=434928608401/648677790003\) for a
+   specified unpolarized 50:50 SU3 two-arm
+   interferometer, not physical neutrino data.
+   A single loop on \(S^1\) can reproduce this
+   EXACT signal; even an \(F_2\) commutator
+   can mimic a finite-depth two-loop test.
+   Horn specificity demands nested geometric source.
+3. Investigate a renormalized Wilson-line potential
+   from original Hosotani sources, not an invented
+   minimum: classical \(F=0\) YM energy has a
+   flat holonomy selection degeneracy. A vectorlike
+   ring model gives a nonzero gauge-invariant
+   heat-trace control; actual chiral lepton currents,
+   anomaly, boundaries and source geometry remain
+   open.
+
+New Agda finite consumer `NeutrinoHornedWilsonInterferenceExact.agda`
+records exact character and fringe; Python stand-ins
+`tests/test_neutrino_horned_wilson_regularization.py` and
+`scripts/check_neutrino_horned_wilson_spectral_selection.py`.
+Horn owner #1244 contains
+`scripts/alexander_horned_c3_su3_regularization_no_go_probe.py`.
+Existing Wilson and B0.2 analytic owners remain canonical.
+This neither retracts Gotô/Hatcher abstract existence nor
+promotes a quantum experiment/Agda kernel certification.
