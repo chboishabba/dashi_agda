@@ -316,6 +316,50 @@ chargedResidualHasUnitPhases muon = unitZeta
 chargedResidualHasUnitPhases tau = unitZetaSquared
 
 ------------------------------------------------------------------------
+-- Exact noncommutation of charged-lepton and neutral-sector operators.
+-- This is the actual eigenbasis mismatch, not a tag on three sites.
+-- H_l=(1,4,9), H_nu=M diag(delta m²) M^T/D².
+-- [H_l,H_nu]_(e,mu)=(1-4) H_nu_(e,mu) ≠ 0.
+------------------------------------------------------------------------
+
+commutatorElectronMuonNumerator : ℤ
+commutatorElectronMuonNumerator =
+  chargedMassSquared electron * massSquaredNum electron muon
+  - massSquaredNum electron muon * chargedMassSquared muon
+
+commutatorElectronMuonExact :
+  commutatorElectronMuonNumerator ≡ - (+ 15166183339406582640)
+commutatorElectronMuonExact = refl
+
+commutatorElectronMuonNonzero :
+  commutatorElectronMuonNumerator ≡ + 0 → ⊥
+commutatorElectronMuonNonzero ()
+
+------------------------------------------------------------------------
+-- CP-odd invariant warning: the real rational mixer necessarily has
+-- vanishing Jarlskog imaginary part, regardless of its near-data angles.
+-- We demonstrate it on the repository's native Eisenstein coordinates.
+-- All mix entries land on the REAL axis (omega coefficient zero).
+------------------------------------------------------------------------
+
+mixE : Flavour → MassBasis → Eisenstein.EisensteinWave
+mixE a i = Eisenstein.eisensteinWave (mixNum a i) (+ 0)
+
+jarlskogNumerator : Eisenstein.EisensteinWave
+jarlskogNumerator =
+  Eisenstein.mulE
+    (Eisenstein.mulE
+      (mixE electron mass1)
+      (mixE muon mass2))
+    (Eisenstein.mulE
+      (mixE electron mass2)
+      (mixE muon mass1))
+
+jarlskogImaginaryPartIsZero :
+  Eisenstein.omegaCoefficient jarlskogNumerator ≡ + 0
+jarlskogImaginaryPartIsZero = refl
+
+------------------------------------------------------------------------
 -- Crucial nonpromotion:
 -- * one rational near-data choice is not a prediction from C3/369;
 -- * neutrino H_nu mass squared does not decide Dirac vs Majorana;
