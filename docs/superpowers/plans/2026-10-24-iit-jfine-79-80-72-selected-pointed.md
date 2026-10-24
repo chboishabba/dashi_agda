@@ -138,3 +138,12 @@ There is a cyclic order-ten *Singer subgroup* coming from \(\mathbb F_{81}^{\tim
 **Exact local group receipt:** an independent finite-field script enumerated all 720 distinct fractional-linear permutations of the ten projective points from F9 matrices, found 72 infinity-fixing permutations, an order-ten cycle, and two order-five cycles. The new IIT owner script is scripts/iit_pgl2_f9_720_audit.py; its aggregate numerical verification is wired but fresh exact-head GitHub script execution is not claimed. The independent JSON is /mnt/data/independent_f9_projective_group_receipt.json.
 
 The older Hodge/complex projective owners ProjectiveLineHomogeneousPairExact, ProjectiveLineAffineChartsExact and ProjectiveLineAtlasHomogeneousWeldExact are **generic structural donors only**. The present F9 projective line is a finite-field object and is *not* the complex Riemann sphere or a physically measured Möbius field. Similar formal Möbius patterns in Ferrocell optics do not establish material/spacetime identity. This source/action distinction is essential under the attribution rules.
+
+
+## 2026-10-24: field inverse and gap of three minus one
+
+The exact relation is 79=81-(3-1)=3^4-2. The set F81 has 81 elements; puncturing zero leaves a multiplicative group of order 80. Finite-field Fermat then gives a^80=1 and a^79=a^(-1) for any nonzero a. The two units subtracted have **different roles**: remove zero, then reduce the exponent to obtain an inverse. No interpretation as two spatial degrees or a physically measured C3 symmetry is licensed by this arithmetic.
+
+New Agda producer: DASHI/Biology/IITField81Inverse79ContractExact.agda provides an explicit conditional multiplicative law and the inverse79Left proof assuming a supplied nonzero Fermat80 certificate. It is imported into IITPhiIntegrationEverything. This proves the correct interface-level implication but does **not** construct the literal quartic multiplication or discharge Fermat80 in the Agda kernel. That concrete field proof remains an open obligation.
+
+The primitive generator selection in scripts/iit_pgl2_f9_720_audit.py was strengthened to explicitly check multiplicative order 80 before using it to produce the Singer C10. The independent local F81 unit-inverse and projective checks remain valid as finite computational evidence, distinct from exact-head GitHub script execution or Agda compiler receipts.
