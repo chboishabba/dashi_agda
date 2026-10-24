@@ -1,3 +1,109 @@
+# 2026-10-24 final max-cut amendment: exact B source equality / critical A source
+
+The original mathematical contributions named below remain attributed
+to Jean Leray (projected NS/energy), Jean-Michel Bony (paraproducts),
+Bahouri–Chemin–Danchin (LP/Sobolev exposition), classical
+Hardy–Littlewood–Sobolev/Sobolev-duality and Gagliardo–Nirenberg
+interpolation, and the earlier DASHI theorem owners. This amendment
+is a source-coordination and exact finite-algebra integration;
+it does **not** claim independent discovery of these foundations.
+
+### B: the ORIGINAL selected critical-touching covariance is welded
+
+At one literal output fibre, Aτ is the existing mixed-helicity
+bilinear vector, M=Στ Aτ, rate rτ=ν(|pτ|²+|qτ|²),
+n=length fibre and R=Στ rτ. Write
+W(X,Y)=2 Re <X,Y>, D=−Στ rτ Aτ. Then exactly
+  C=n W(M,D)+R W(M,M)
+   =R W(M,M)−n Στ rτ W(M,Aτ).
+The existing R685 physical identity supplies
+  Στ rτ W(M,Aτ)=W(M,commutator)−W(M,tangent).
+R236's original same-carrier six-block theorem supplies
+  C=ν(Q_deepOnly+Q_criticalTouching).
+COMPOSING THESE ALREADY-EXISTING OWNERS yields
+  ν Q_criticalTouching =
+      R W(M,M)−n[W(M,commutator)−W(M,tangent)]
+      −ν Q_deepOnly.
+This is NOW a source-written Agda theorem named
+`originalCriticalTouchingIsCorrectedR685Rate` in the
+existing `NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLiveExact`.
+The rate and commutator expressions are exposed as theorem terms
+in `NSTriadKNFixedOutputPhysicalCoherentCovarianceLiveExact`.
+
+This is an exact physical quartic **identity**, not a strict upper
+estimate. The finite-fibre coefficients n and R can diverge under
+zero-amplitude cutoff padding, as proved by the older B4 adversary.
+Thus this mathematical weld does NOT solve B4 or B7; R690 still needs
+cutoff-uniform signed spacetime control and actual continuation.
+
+Local exact same-output sample ν=2, k=(64,1,0):
+DFL input pair (1,0,0)+(63,1,0),
+Core pair (32,0,0)+(32,1,0),
+DHH pair (2048,0,0)+(-1984,1,0), plus DFL swap.
+Abstract complex Aτ algebraic sample gives C=780398656,
+Qdeep=162531800, Qcrit=227667528; both sides νQcrit
+equal 455335056. This witnesses the identity on the source-defined
+physical rates/classifier but does **not** certify an actual
+helical-system realization of the chosen Aτ.
+
+The classical curl-convection defect is also corrected: its
+ordered residual cancels after p↔q pairing. The R236 deep far-low
+region must merge LH and HL; separate oriented LH and HL do not
+cancel. The other two swap-closed regions are DHH and Core.
+This is independent of the quartic covariance identity. There is
+no universal identity between the quartic covariance and cubic
+vortex stretching without nontrivial degree-restoring terms; the
+conditional all-amplitudes no-go is source-written in Lean.
+
+### A: no H² logarithmic premise required
+
+For the SAME divergence-free u∈H¹(R³), define
+  V=(-ν Δ)^(-1)P div(u⊗u).
+Fourier multiplier geometry yields
+  ||V||_{dot H^(1/2)}
+    <= ν^(-1) ||u⊗u||_{dot H^(-1/2)}.
+By dual homogeneous Sobolev embedding
+  L^(3/2)(R³) -> dot H^(-1/2)(R³),
+and L³ interpolation between L² and L⁶ followed by Sobolev:
+  ||V||_{dot H^(1/2)}
+    <= (K/ν) ||u||³_L3?  NO: exponent is **2**, precisely
+    <= (K/ν) ||u||_L3²
+    <= (K/ν) ||u||_L2 ||grad u||_L2.
+K collects the standard Sobolev constants. No f=0 forcing
+substitution or alternate Fourier field is introduced.
+This genuine spatially scale-critical source bound corrects the
+prior false conclusion that a divergent *pointwise envelope* made
+dot-H^(1/2) control impossible.
+
+For physical nonlinear mild Duhamel W, the frequency-by-frequency
+positive heat kernel a exp(-a(t-s)), a=ν|xi|², has mass ≤1.
+Weighted Jensen and Tonelli imply
+  ∫_0^T ||W(t)||²_{dot H^(1/2)} dt
+      <= ∫_0^T ||V(t)||²_{dot H^(1/2)} dt
+      <= K² E0²/(2ν³)
+under the unforced energy inequality. This is uniform in T.
+
+**Critical caveat:** the spatial dot-H^(1/2) norm is scaling
+critical, but its time-L² integral is NOT a continuation norm:
+under uλ(t,x)=λu(λ²t,λx), its square scales as λ^(-2).
+The energy class also gives only L⁴_tL³_x, with
+2/4+3/3=3/2>1, outside critical Serrin. The missing A3 is
+a noncircular critical spacetime or uniform-in-time bound.
+The canonical Bishop same-solution Fourier transport remains
+not kernel-checked. Do not claim Clay A from these estimates.
+
+**Computational receipt:** local independent SymPy/Python checks
+of the vector polynomial, merged-region cancellations,
+physical six-block compensated identity, three-region H²
+diagnostic and H¹ critical-exponent/scaling algebra:
+`pytest /tmp/test_ns_ab_maxcut_receipt.py` -> **5 passed**.
+PR-head tests and Agda/Lean kernel were NOT executed.
+The H²-log file is retained only as a dominated diagnostic;
+`scripts/ns_a_critical_h1_dual_sobolev.py` is the new source
+analysis note and checks.
+
+---
+
 # 2026-10-24 same-object physical max-cut: exact B class compensation + A Duhamel response
 
 **Original attribution:** The Fourier curl-vorticity identity and heat-kernel convolution bounds are classical Navier–Stokes mathematics (Temam and standard semigroup/Plancherel theory). Bony and Bahouri–Chemin–Danchin own Littlewood–Paley/paraproduct source ideas; DASHI's R63/R236 source owners implement the strict classifier. The new script/calibrations are DASHI integration checks, not new discovery of these identities. OpenAI C/D and Euler theorem source ownership is unchanged. No Clay A/B theorem asserted.
