@@ -1213,3 +1213,44 @@ unversioned `δ=120°` to a 2026 best-fit point by assertion.
 CP-sign-blind under standard vacuum averaging, so prioritize
 CP-sensitive beam data for the leptonic invariant; keep
 IceTracks-DR2-v2 source-location dataset as its separate consumer.
+
+### Source-verified CP round evidence receipt
+
+Independent *exact-source* V8 BigInt/Fraction-style rational computation
+on the branch read-back (no network source substitution) is preserved
+at
+
+`logs/research/neutrino_existing_cp_maxcut_exact_source_receipt_20261024.json`.
+
+This receipt binds the exact GitHub **blob SHAs** for the four newly
+added Agda modules and the Python test.  It extracts the **six**
+rational mixing inputs from the Agda source; independently evaluates
+15 exact algebraic checks, including:
+
+- complex row/column unitarity of `U` and mass-squared diagonalization;
+- nonzero `Q(ζ)` Jarlskog coefficient and sign under conjugation;
+- actual cubic charged/neutral squared-mass commutator trace
+  and its `331886081170152000` proportionality factor;
+- the nonintegral C3 residual finite-group Galois trace in `(2,3)`;
+- all 9 original Born norm-conjugation identities; phase-averaged
+  CP invariance follows algebraically from those identities, not
+  an independently acquired astrophysical data set;
+- four original CKM CP/nonpromotion-owner imports are visible.
+
+**PASS** exact-source rational arithmetic; **NOT RUN** Agda kernel,
+checked-out Python tests, NuFIT official correlated likelihood,
+T2K original CP profile reanalysis, IceCube event likelihood,
+and the abstract number-theory finite-order trace theorem in Agda.
+The receipt deliberately does not elevate a source-written
+`solve []` clause to a kernel typecheck.
+
+**What is now genuinely solved:** the mathematical existence of
+a nonzero complex leptonic CP-odd invariant on the SAME explicit
+charged/neutral operator example, and two discriminating mathematical
+no-go results (infinite selected residual group; IceCube phase-average
+blindness to CP-conjugation sign).
+
+**What is not solved:** predicting the physical PMNS CP phase from
+DASHI C3/Monster/Hecke, finding a finite group whose actual lepton
+residual action selects the observed mixing, physical lepton
+masses/Yukawas, or reproducing experimental CP-violation likelihoods.
