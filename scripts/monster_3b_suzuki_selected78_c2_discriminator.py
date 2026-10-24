@@ -3,14 +3,15 @@
 
 Reuses the existing character-table same-object matcher
 scripts/monster_3b_suzuki_main_quotient_match.g, NOT a new 6.Suz group
-construction. The existing matcher selects faithful Irr(6.Suz) of degrees
-12 and 78 and checks outer restriction, main 1458-product, quotient descent
+construction. The existing matcher selects faithful degree12 and scans ALL degree78
+outer character families; it checks main 1458-product, quotient descent
 and restriction to Monster. It now emits centre-C2 character data.
 
 Gabriele Nebe (2025), DOI 10.1007/s10801-025-01399-2: Sym² of a
 faithful 12 is a 78 irreducible of 3.Suz, not faithful to 6.Suz.
-Central C2 obstruction: selected faithful 12+78 has trace -90, while
-12+Sym²(12) has trace +66; DIFFERENCE=156.
+Conditional C2 discriminator: faithful 12+faithful78 has trace -90,
+while 12+Sym²(12) has trace +66; DIFFERENCE=156.
+The SOURCE matcher must decide whether selected 78 is faithful.
 
 No actual 6.Suz same-object result is claimed unless a real GAP receipt
 from the SOURCE matcher is supplied and verified.
@@ -52,18 +53,29 @@ def finite_test():
     return cases
 
 def source_check(p):
-    # Canonical full-receipt validator: rejects fabricated positive booleans
-    # or missing field commitments according to existing schema.
-    v=validate(p)
-    assert v["source_trace"]==-90 and v["sym2_trace"]==66
-    assert p["source_selected_faithful78_can_be_sym2_faithful12"] is False
+    # The actual selected 78 is determined by the FULL source table quotient
+    # matcher, which now searches all 78 families. The source C2 outcome can
+    # be -90 or +66; either must remain unpredetermined before execution.
+    v = validate(p)
+    trace = v["source_trace"]
+    compatible = v["c2_sym2_compatible"]
+    faithful = v["selected_faithful"]
+    assert trace in (-90, 66)
+    assert compatible == (trace == 66)
+    if faithful:
+        assert trace == -90
     return dict(status="SOURCE_DECLARED_GAP_RECEIPT_SCHEMA_VERIFIED",
-                caveat="schema checks do not authenticate an external GAP execution",
-                selected_degree78_labels=v["labels78"],selected_degree12_labels=v["labels12"],
-                selected_central_C2_character=-90,sym2_candidate_C2_character=66,
-                same_6Suz_irreducible_character=False,
-                orientation_resolved=False,
+                caveat="schema does not independently authenticate actual GAP execution",
+                selected_degree78_labels=v["labels78"],
+                selected_degree12_labels=v["labels12"],
+                selected_central_C2_character=trace,
+                Sym2_central_C2_character=66,
+                selected_faithful_to_6Suz=faithful,
+                Sym2_C2_necessary_compatibility=compatible,
+                full_6Suz_character_equal_to_Sym2="UNDETERMINED",
+                absolute_zeta_orientation_resolved=False,
                 actual_Monster_linear_intertwiner=False)
+
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
