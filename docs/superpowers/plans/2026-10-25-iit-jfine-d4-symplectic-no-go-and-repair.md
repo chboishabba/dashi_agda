@@ -91,3 +91,18 @@ It is not the source S3 reflection, which lacks the `a·b` correction. With symm
 4. **Physical consumer gate OPEN**: only after specified instrumentation/measurement of neural, optical, causal or quantum systems could a model be interpreted empirically; no consciousness, magnetism, or quantum-ζ effect follows from finite-character coincidences.
 
 The main high-leverage discovery is **an actual incompatibility plus an explicit minimal repair**, rather than another numerological identification. The correct physical-interpretation boundary has not moved.
+
+## Cross-lane correction: PR #1250 already has a different D4/H6 action
+
+The adjacent owner [JFine 3B action-first PR #1250](https://github.com/chboishabba/dashi_agda/pull/1250) must **not** be mistaken for a counterexample to the rank-eight result. In `scripts/jfine_3b_d4_equivariant_chart.py`, a D4-stable **two-label × six-fibre rechart** gives a D4 action on the *chosen 12D Heisenberg quotient* by simultaneously permuting **six translation and six modulation** axes. That representation differs from the natural eight-relative-site D4 quotient in this audit. Its symplectic pairing can be nondegenerate and D4-invariant because it includes both each six-coordinate module and its dual.
+
+The same PR's `reflect_heisenberg(a,b,t)=(-a,b,-t)` is a legitimate centre-inverting **automorphism** of the chosen H6 action: it is anti-symplectic on the quotient (multiplier -1). This does **not** equal the source H4 value-sign action `(a,c,b)→(-a,-c,-b)`, which acts by -I on *both* quotient blocks and is symplectic (multiplier +1). The source H4 sign is not an automorphism; the quadratic correction supplies an **anti**-automorphism. No contradiction exists once the actions, centres and charts remain separately typed.
+
+More importantly, #1250's later source-aligned Monster character audit reportedly **rules out its original chosen geometric D4** on the actual 3B phase sector via published involution/order-six character values; it discusses a *distinct conditional signed-monomial 90-space repair* and the unresolved source-selected 6.Suz linear-character family. Our new 8→10→12 **finite symplectic repair does not repair that actual Monster character obstruction**, certify its signed 90-module, or identify the faithful 6.Suz 78-character. Keep the active discriminators independent:
+
+- source eight-site D4-preserving Heisenberg extension: **NO**, all multipliers exhausted (this cut);
+- finite D4-stable symplectic 10/12D completion: **YES**, chosen model (this cut);
+- #1250 six-pair chosen geometric Heisenberg normalizer action: **YES at model level**, but **not the source eight-dimensional H4 action**;
+- actual Monster 3B / 6.Suz source-selected D4/Hom character: **OPEN / source-dependent**, subject to #1250's separate no-go and more recent 6.Suz family qualification.
+
+These are deliberately different proof objects. Use #1250's existing backend-free D4 character and actual-source screening producers rather than rebuilding or bypassing their authority checks.
