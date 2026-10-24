@@ -53,6 +53,161 @@ neg₃ f2 = f1
 _-₃_ : F3 → F3 → F3
 a -₃ b = a +₃ neg₃ b
 
+
+------------------------------------------------------------------------
+-- Literal field F3, with all core laws reduced to actual constructor
+-- normal forms. This is a complete finite field, not just a symbolic
+-- three-element group. These laws are generated exhaustively (3^n).
+------------------------------------------------------------------------
+
+_*₃_ : F3 → F3 → F3
+f0 *₃ a = f0
+f1 *₃ a = a
+f2 *₃ f0 = f0
+f2 *₃ f1 = f2
+f2 *₃ f2 = f1
+
+finiteFieldAddAssociative : ∀ a b c →
+  (a +₃ b) +₃ c ≡ a +₃ (b +₃ c)
+finiteFieldAddAssociative f0 f0 f0 = refl
+finiteFieldAddAssociative f0 f0 f1 = refl
+finiteFieldAddAssociative f0 f0 f2 = refl
+finiteFieldAddAssociative f0 f1 f0 = refl
+finiteFieldAddAssociative f0 f1 f1 = refl
+finiteFieldAddAssociative f0 f1 f2 = refl
+finiteFieldAddAssociative f0 f2 f0 = refl
+finiteFieldAddAssociative f0 f2 f1 = refl
+finiteFieldAddAssociative f0 f2 f2 = refl
+finiteFieldAddAssociative f1 f0 f0 = refl
+finiteFieldAddAssociative f1 f0 f1 = refl
+finiteFieldAddAssociative f1 f0 f2 = refl
+finiteFieldAddAssociative f1 f1 f0 = refl
+finiteFieldAddAssociative f1 f1 f1 = refl
+finiteFieldAddAssociative f1 f1 f2 = refl
+finiteFieldAddAssociative f1 f2 f0 = refl
+finiteFieldAddAssociative f1 f2 f1 = refl
+finiteFieldAddAssociative f1 f2 f2 = refl
+finiteFieldAddAssociative f2 f0 f0 = refl
+finiteFieldAddAssociative f2 f0 f1 = refl
+finiteFieldAddAssociative f2 f0 f2 = refl
+finiteFieldAddAssociative f2 f1 f0 = refl
+finiteFieldAddAssociative f2 f1 f1 = refl
+finiteFieldAddAssociative f2 f1 f2 = refl
+finiteFieldAddAssociative f2 f2 f0 = refl
+finiteFieldAddAssociative f2 f2 f1 = refl
+finiteFieldAddAssociative f2 f2 f2 = refl
+
+
+finiteFieldAddCommutative : ∀ a b → a +₃ b ≡ b +₃ a
+finiteFieldAddCommutative f0 f0 = refl
+finiteFieldAddCommutative f0 f1 = refl
+finiteFieldAddCommutative f0 f2 = refl
+finiteFieldAddCommutative f1 f0 = refl
+finiteFieldAddCommutative f1 f1 = refl
+finiteFieldAddCommutative f1 f2 = refl
+finiteFieldAddCommutative f2 f0 = refl
+finiteFieldAddCommutative f2 f1 = refl
+finiteFieldAddCommutative f2 f2 = refl
+
+
+finiteFieldAddRightIdentity : ∀ a → a +₃ f0 ≡ a
+finiteFieldAddRightIdentity f0 = refl
+finiteFieldAddRightIdentity f1 = refl
+finiteFieldAddRightIdentity f2 = refl
+
+
+finiteFieldAddInverse : ∀ a → a +₃ neg₃ a ≡ f0
+finiteFieldAddInverse f0 = refl
+finiteFieldAddInverse f1 = refl
+finiteFieldAddInverse f2 = refl
+
+
+finiteFieldMulAssociative : ∀ a b c →
+  (a *₃ b) *₃ c ≡ a *₃ (b *₃ c)
+finiteFieldMulAssociative f0 f0 f0 = refl
+finiteFieldMulAssociative f0 f0 f1 = refl
+finiteFieldMulAssociative f0 f0 f2 = refl
+finiteFieldMulAssociative f0 f1 f0 = refl
+finiteFieldMulAssociative f0 f1 f1 = refl
+finiteFieldMulAssociative f0 f1 f2 = refl
+finiteFieldMulAssociative f0 f2 f0 = refl
+finiteFieldMulAssociative f0 f2 f1 = refl
+finiteFieldMulAssociative f0 f2 f2 = refl
+finiteFieldMulAssociative f1 f0 f0 = refl
+finiteFieldMulAssociative f1 f0 f1 = refl
+finiteFieldMulAssociative f1 f0 f2 = refl
+finiteFieldMulAssociative f1 f1 f0 = refl
+finiteFieldMulAssociative f1 f1 f1 = refl
+finiteFieldMulAssociative f1 f1 f2 = refl
+finiteFieldMulAssociative f1 f2 f0 = refl
+finiteFieldMulAssociative f1 f2 f1 = refl
+finiteFieldMulAssociative f1 f2 f2 = refl
+finiteFieldMulAssociative f2 f0 f0 = refl
+finiteFieldMulAssociative f2 f0 f1 = refl
+finiteFieldMulAssociative f2 f0 f2 = refl
+finiteFieldMulAssociative f2 f1 f0 = refl
+finiteFieldMulAssociative f2 f1 f1 = refl
+finiteFieldMulAssociative f2 f1 f2 = refl
+finiteFieldMulAssociative f2 f2 f0 = refl
+finiteFieldMulAssociative f2 f2 f1 = refl
+finiteFieldMulAssociative f2 f2 f2 = refl
+
+
+finiteFieldMulCommutative : ∀ a b → a *₃ b ≡ b *₃ a
+finiteFieldMulCommutative f0 f0 = refl
+finiteFieldMulCommutative f0 f1 = refl
+finiteFieldMulCommutative f0 f2 = refl
+finiteFieldMulCommutative f1 f0 = refl
+finiteFieldMulCommutative f1 f1 = refl
+finiteFieldMulCommutative f1 f2 = refl
+finiteFieldMulCommutative f2 f0 = refl
+finiteFieldMulCommutative f2 f1 = refl
+finiteFieldMulCommutative f2 f2 = refl
+
+
+finiteFieldMulRightIdentity : ∀ a → a *₃ f1 ≡ a
+finiteFieldMulRightIdentity f0 = refl
+finiteFieldMulRightIdentity f1 = refl
+finiteFieldMulRightIdentity f2 = refl
+
+
+finiteFieldMulDistributive : ∀ a b c →
+  a *₃ (b +₃ c) ≡ (a *₃ b) +₃ (a *₃ c)
+finiteFieldMulDistributive f0 f0 f0 = refl
+finiteFieldMulDistributive f0 f0 f1 = refl
+finiteFieldMulDistributive f0 f0 f2 = refl
+finiteFieldMulDistributive f0 f1 f0 = refl
+finiteFieldMulDistributive f0 f1 f1 = refl
+finiteFieldMulDistributive f0 f1 f2 = refl
+finiteFieldMulDistributive f0 f2 f0 = refl
+finiteFieldMulDistributive f0 f2 f1 = refl
+finiteFieldMulDistributive f0 f2 f2 = refl
+finiteFieldMulDistributive f1 f0 f0 = refl
+finiteFieldMulDistributive f1 f0 f1 = refl
+finiteFieldMulDistributive f1 f0 f2 = refl
+finiteFieldMulDistributive f1 f1 f0 = refl
+finiteFieldMulDistributive f1 f1 f1 = refl
+finiteFieldMulDistributive f1 f1 f2 = refl
+finiteFieldMulDistributive f1 f2 f0 = refl
+finiteFieldMulDistributive f1 f2 f1 = refl
+finiteFieldMulDistributive f1 f2 f2 = refl
+finiteFieldMulDistributive f2 f0 f0 = refl
+finiteFieldMulDistributive f2 f0 f1 = refl
+finiteFieldMulDistributive f2 f0 f2 = refl
+finiteFieldMulDistributive f2 f1 f0 = refl
+finiteFieldMulDistributive f2 f1 f1 = refl
+finiteFieldMulDistributive f2 f1 f2 = refl
+finiteFieldMulDistributive f2 f2 f0 = refl
+finiteFieldMulDistributive f2 f2 f1 = refl
+finiteFieldMulDistributive f2 f2 f2 = refl
+
+
+finiteFieldInverseOne : f1 *₃ f1 ≡ f1
+finiteFieldInverseOne = refl
+
+finiteFieldInverseTwo : f2 *₃ f2 ≡ f1
+finiteFieldInverseTwo = refl
+
 record V2 : Set where
   constructor v2
   field
@@ -74,6 +229,128 @@ A (v2 a b) = v2 (neg₃ b) (a -₃ b)
 
 N : V2 → V2
 N v = sub (A v) v
+
+
+------------------------------------------------------------------------
+-- Actual field-LINEAR representation, not merely a set C3 action.
+-- Source A(v) = (-y,x-y) over F3 is additive and homogeneous.
+-- All 3^4 pairs and all 3^3 scalar-vector cases reduce to refl.
+------------------------------------------------------------------------
+
+scalar : F3 → V2 → V2
+scalar c (v2 a b) = v2 (c *₃ a) (c *₃ b)
+
+Aadditive : ∀ v w → A (add v w) ≡ add (A v) (A w)
+Aadditive (v2 f0 f0) (v2 f0 f0) = refl
+Aadditive (v2 f0 f0) (v2 f0 f1) = refl
+Aadditive (v2 f0 f0) (v2 f0 f2) = refl
+Aadditive (v2 f0 f0) (v2 f1 f0) = refl
+Aadditive (v2 f0 f0) (v2 f1 f1) = refl
+Aadditive (v2 f0 f0) (v2 f1 f2) = refl
+Aadditive (v2 f0 f0) (v2 f2 f0) = refl
+Aadditive (v2 f0 f0) (v2 f2 f1) = refl
+Aadditive (v2 f0 f0) (v2 f2 f2) = refl
+Aadditive (v2 f0 f1) (v2 f0 f0) = refl
+Aadditive (v2 f0 f1) (v2 f0 f1) = refl
+Aadditive (v2 f0 f1) (v2 f0 f2) = refl
+Aadditive (v2 f0 f1) (v2 f1 f0) = refl
+Aadditive (v2 f0 f1) (v2 f1 f1) = refl
+Aadditive (v2 f0 f1) (v2 f1 f2) = refl
+Aadditive (v2 f0 f1) (v2 f2 f0) = refl
+Aadditive (v2 f0 f1) (v2 f2 f1) = refl
+Aadditive (v2 f0 f1) (v2 f2 f2) = refl
+Aadditive (v2 f0 f2) (v2 f0 f0) = refl
+Aadditive (v2 f0 f2) (v2 f0 f1) = refl
+Aadditive (v2 f0 f2) (v2 f0 f2) = refl
+Aadditive (v2 f0 f2) (v2 f1 f0) = refl
+Aadditive (v2 f0 f2) (v2 f1 f1) = refl
+Aadditive (v2 f0 f2) (v2 f1 f2) = refl
+Aadditive (v2 f0 f2) (v2 f2 f0) = refl
+Aadditive (v2 f0 f2) (v2 f2 f1) = refl
+Aadditive (v2 f0 f2) (v2 f2 f2) = refl
+Aadditive (v2 f1 f0) (v2 f0 f0) = refl
+Aadditive (v2 f1 f0) (v2 f0 f1) = refl
+Aadditive (v2 f1 f0) (v2 f0 f2) = refl
+Aadditive (v2 f1 f0) (v2 f1 f0) = refl
+Aadditive (v2 f1 f0) (v2 f1 f1) = refl
+Aadditive (v2 f1 f0) (v2 f1 f2) = refl
+Aadditive (v2 f1 f0) (v2 f2 f0) = refl
+Aadditive (v2 f1 f0) (v2 f2 f1) = refl
+Aadditive (v2 f1 f0) (v2 f2 f2) = refl
+Aadditive (v2 f1 f1) (v2 f0 f0) = refl
+Aadditive (v2 f1 f1) (v2 f0 f1) = refl
+Aadditive (v2 f1 f1) (v2 f0 f2) = refl
+Aadditive (v2 f1 f1) (v2 f1 f0) = refl
+Aadditive (v2 f1 f1) (v2 f1 f1) = refl
+Aadditive (v2 f1 f1) (v2 f1 f2) = refl
+Aadditive (v2 f1 f1) (v2 f2 f0) = refl
+Aadditive (v2 f1 f1) (v2 f2 f1) = refl
+Aadditive (v2 f1 f1) (v2 f2 f2) = refl
+Aadditive (v2 f1 f2) (v2 f0 f0) = refl
+Aadditive (v2 f1 f2) (v2 f0 f1) = refl
+Aadditive (v2 f1 f2) (v2 f0 f2) = refl
+Aadditive (v2 f1 f2) (v2 f1 f0) = refl
+Aadditive (v2 f1 f2) (v2 f1 f1) = refl
+Aadditive (v2 f1 f2) (v2 f1 f2) = refl
+Aadditive (v2 f1 f2) (v2 f2 f0) = refl
+Aadditive (v2 f1 f2) (v2 f2 f1) = refl
+Aadditive (v2 f1 f2) (v2 f2 f2) = refl
+Aadditive (v2 f2 f0) (v2 f0 f0) = refl
+Aadditive (v2 f2 f0) (v2 f0 f1) = refl
+Aadditive (v2 f2 f0) (v2 f0 f2) = refl
+Aadditive (v2 f2 f0) (v2 f1 f0) = refl
+Aadditive (v2 f2 f0) (v2 f1 f1) = refl
+Aadditive (v2 f2 f0) (v2 f1 f2) = refl
+Aadditive (v2 f2 f0) (v2 f2 f0) = refl
+Aadditive (v2 f2 f0) (v2 f2 f1) = refl
+Aadditive (v2 f2 f0) (v2 f2 f2) = refl
+Aadditive (v2 f2 f1) (v2 f0 f0) = refl
+Aadditive (v2 f2 f1) (v2 f0 f1) = refl
+Aadditive (v2 f2 f1) (v2 f0 f2) = refl
+Aadditive (v2 f2 f1) (v2 f1 f0) = refl
+Aadditive (v2 f2 f1) (v2 f1 f1) = refl
+Aadditive (v2 f2 f1) (v2 f1 f2) = refl
+Aadditive (v2 f2 f1) (v2 f2 f0) = refl
+Aadditive (v2 f2 f1) (v2 f2 f1) = refl
+Aadditive (v2 f2 f1) (v2 f2 f2) = refl
+Aadditive (v2 f2 f2) (v2 f0 f0) = refl
+Aadditive (v2 f2 f2) (v2 f0 f1) = refl
+Aadditive (v2 f2 f2) (v2 f0 f2) = refl
+Aadditive (v2 f2 f2) (v2 f1 f0) = refl
+Aadditive (v2 f2 f2) (v2 f1 f1) = refl
+Aadditive (v2 f2 f2) (v2 f1 f2) = refl
+Aadditive (v2 f2 f2) (v2 f2 f0) = refl
+Aadditive (v2 f2 f2) (v2 f2 f1) = refl
+Aadditive (v2 f2 f2) (v2 f2 f2) = refl
+
+Ahomogeneous : ∀ t v → A (scalar t v) ≡ scalar t (A v)
+Ahomogeneous f0 (v2 f0 f0) = refl
+Ahomogeneous f0 (v2 f0 f1) = refl
+Ahomogeneous f0 (v2 f0 f2) = refl
+Ahomogeneous f0 (v2 f1 f0) = refl
+Ahomogeneous f0 (v2 f1 f1) = refl
+Ahomogeneous f0 (v2 f1 f2) = refl
+Ahomogeneous f0 (v2 f2 f0) = refl
+Ahomogeneous f0 (v2 f2 f1) = refl
+Ahomogeneous f0 (v2 f2 f2) = refl
+Ahomogeneous f1 (v2 f0 f0) = refl
+Ahomogeneous f1 (v2 f0 f1) = refl
+Ahomogeneous f1 (v2 f0 f2) = refl
+Ahomogeneous f1 (v2 f1 f0) = refl
+Ahomogeneous f1 (v2 f1 f1) = refl
+Ahomogeneous f1 (v2 f1 f2) = refl
+Ahomogeneous f1 (v2 f2 f0) = refl
+Ahomogeneous f1 (v2 f2 f1) = refl
+Ahomogeneous f1 (v2 f2 f2) = refl
+Ahomogeneous f2 (v2 f0 f0) = refl
+Ahomogeneous f2 (v2 f0 f1) = refl
+Ahomogeneous f2 (v2 f0 f2) = refl
+Ahomogeneous f2 (v2 f1 f0) = refl
+Ahomogeneous f2 (v2 f1 f1) = refl
+Ahomogeneous f2 (v2 f1 f2) = refl
+Ahomogeneous f2 (v2 f2 f0) = refl
+Ahomogeneous f2 (v2 f2 f1) = refl
+Ahomogeneous f2 (v2 f2 f2) = refl
 
 -- All nine finite cases are definitionally decidable.
 cubeIsIdentity : ∀ v → A (A (A v)) ≡ v
