@@ -24,6 +24,9 @@ receipt and the physical/geometric complement identification remain open.
   `DASHI/Moonshine/Base369Monster3BVOAActionPhaseAdapterBidiExact.agda`,
   `DASHI/Moonshine/Monster3BLiteralThreePhaseRegularResidualBidiExact.agda`,
   `DASHI/Moonshine/RankOneHeisenbergFockWindowExact.agda`,
+  `DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda`,
+  `DASHI/Moonshine/FiniteDifferentialVertexAlgebraExact.agda`,
+  `DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraExact.agda`,
   `DASHI/Mathematics/Topology/AlexanderHornedC3FiniteStageExact.agda`,
   `AlexanderHornedC3FreeFactorDetectorExact.agda`,
   `scripts/alexander_horned_c3_a5_probe.py`.
