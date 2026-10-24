@@ -1,5 +1,13 @@
 # FIELD LOOM — a reality-compatible psychotronics super-object
 
+## Existing Biot–Savart mathematics ownership (25 October corrective audit)
+
+The Field Loom should **not** treat `psychotronics_field_loom_coils.py` as the repository's first or only Biot–Savart owner. See the [in-repo exact Fourier, Maxwell/fluid, MHD and filament numeric owner crosswalk](psychotronics-biot-savart-prior-art-weld-20261025.md) and import-only `FieldLoomExistingBiotSavartReuseExact.agda`. Source-owned `NSTriadKNFourierBiotSavartExact` already proves exact rational modewise inverse-curl/transversality; `NSTriadKNMaxwellFluidBiotSavartBridgeExact` already ties magnetostatic current and fluid vorticity to the same inverse-curl amplitude. Retain **their proof status as existing source claims, not freshly kernel-checked here**.
+
+**The real-space circular coil remains a different numerical test object.** Its already-existing line-integral producer now has an **independent elliptic-loop test** for off-axis field, axial analytic special case, signed current reversal, superposition and approximate divergence consistency. An explicit Fourier-to-free-space filament equivalence, absolute coil calibration, physical force/inertia and real instrument data are still missing. The code's `MU0 = 4*pi*1e-7` is a **conventional illustration**, not exact post-2019 SI. We did not replace prior numeric core or create new independent vector-field ontology.
+
+
+
 ## Repair to S1 experimental admissibility (25 October)
 
 The original ideal permanent-dipole force estimate remains a **conditional numerical model**. Its later paired-residual implementation has been corrected: see [GLS uncertainty, source-object join and factorial-identification audit](psychotronics-s1-metrology-repair-20261025.md). Shared magnetic-moment calibration, common force offset and common field-scale errors cannot be treated as independent across repeated observations. A source hash alone cannot establish that analysis pairs were derived from that source; submitted pairs and calibration now must match source-byte identities, though independent stream→pair derivation and actual instrument authentication remain open. The exact five-parameter `coil sign × dipole sign + current-even heating` model needs rank five to separate its terms, and field/cue parity, mechanical response and uncertainty must still be measured.
