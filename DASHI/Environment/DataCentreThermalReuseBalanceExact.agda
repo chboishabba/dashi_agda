@@ -67,7 +67,7 @@ euReport2026 = heatSourceReceipt
 
 guangzhouAbsorption2025 : HeatSourceReceipt
 guangzhouAbsorption2025 = heatSourceReceipt
-  "Applied Energy research authors"
+  "Zhaopeng Cui; Shuai Du; Ruzhu Wang"
   "Switchable multistage absorption chiller for ultra-low-grade waste heat driven cooling in data centers (2025)"
   "https://doi.org/10.1016/j.apenergy.2025.126407"
   peerReviewedSimulation
@@ -76,7 +76,7 @@ guangzhouAbsorption2025 = heatSourceReceipt
 
 wasteHeatReview2025 : HeatSourceReceipt
 wasteHeatReview2025 = heatSourceReceipt
-  "Applied Energy review authors"
+  "Yueting Hao; Haojie Zhou; Tong Tian; Wei Zhang; Xin Zhou; Qingfei Shen; Tong Wu; Ji Li"
   "Data centers waste heat recovery technologies: Review and evaluation (2025)"
   "https://doi.org/10.1016/j.apenergy.2025.125489"
   peerReviewedReview
