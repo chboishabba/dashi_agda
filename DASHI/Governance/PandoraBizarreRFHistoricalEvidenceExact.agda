@@ -50,6 +50,50 @@ cesaroPandora = Source.mkNoDOISource
   "Established TUMS/ARPA/CIA/State multiagency administrative investigation and planned primate experiment, Air Force/APL/Walter Reed roles; NOT MK119 or a validated modern device"
   Source.publicAttribution
 
+byronOperational1966 : Source.AttributedSource
+byronOperational1966 = Source.mkNoDOISource
+  "Eugene V. Byron, Johns Hopkins University Applied Physics Laboratory"
+  "Operational Procedure for Project Pandora Microwave Test Facility (MRT-4-045/QM-66-071)"
+  "Original institutional report dated October 1966; DoD FOIA release is indexed but direct PDF access blocked at retrieval"
+  "1966"
+  "https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Other/Operational_Procedure_For_Project_Pandora.pdf"
+  Source.archivalSource
+  "Original equipment/control/field-monitor report identity verified from indexed scan excerpts; full pages not independently obtained. Apparatus documentation is not animal physiology or a modern operational technology transfer"
+  Source.publicAttribution
+
+byronFinal1966 : Source.AttributedSource
+byronFinal1966 = Source.mkNoDOISource
+  "Eugene V. Byron, Johns Hopkins University Applied Physics Laboratory"
+  "Project Pandora (U), Final Report (MRT-4-046/QM-66-072)"
+  "Original instrument and chamber evaluation dated November 1966; contained in same DoD FOIA assembly as Operational Procedure"
+  "1966"
+  "https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Other/Operational_Procedure_For_Project_Pandora.pdf"
+  Source.archivalSource
+  "Indexed original report discusses field nonuniformity, probe geometry and sample container reflections. Third-party indexed snippets, not full-page independently inspected; neither an in-vivo effect nor effective weapon result"
+  Source.publicAttribution
+
+arpaInitial1966 : Source.AttributedSource
+arpaInitial1966 = Source.mkNoDOISource
+  "Richard S. Cesaro / Advanced Research Projects Agency"
+  "Project PANDORA - Initial Test Results, Memorandum for Record"
+  "20 December 1966, citing original 15 Dec 1966 test report; text reproduced in secondary scans while official archival original awaits direct reinspection"
+  "1966"
+  "https://www.acalltoactions.com/_files/ugd/905ae8_0f91de6cd63343a5929e231def551d99.pdf"
+  Source.archivalSource
+  "Preliminary single-primate high-dose modulated RF performance slowdown report; physiological CNS-penetration assertion is author's interpretation, not direct brain recording. Reproduction does not establish independent repetition or clinical efficacy"
+  Source.publicAttribution
+
+cesaroSeptember1967 : Source.AttributedSource
+cesaroSeptember1967 = Source.mkNoDOISource
+  "Richard S. Cesaro, Advanced Research Projects Agency"
+  "Project BIZARRE - Memorandum for Director, Defense Research and Engineering"
+  "27 September 1967, three-page declassified scan, National Security Archive object 28792"
+  "1967"
+  "https://nsarchive.gwu.edu/sites/default/files/documents/rhwvuj-tzy4b/08.pdf"
+  Source.archivalSource
+  "Original scan personally inspected: reported high-dose modulated primate performance decrement; same-level unmodulated controls normal; <=0.05 mW/cm2 corrected Moscow signal and lower-dose primate null. Reference 2 says 20 December 1967 (future date) where separate original is reproduced as 20 December 1966; retain discrepancy"
+  Source.publicAttribution
+
 johnstonBizarre : Source.AttributedSource
 johnstonBizarre = Source.mkNoDOISource
   "Joseph Johnston, CIA representative on Project PANDORA/BIZARRE"
@@ -176,7 +220,9 @@ sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Cold War bioelectronic research and contemporary AHI original-object lineage"
   "DASHI.Governance.PandoraBizarreRFHistoricalEvidenceExact"
-  (wiesner1964 ∷ mk119Memo ∷ cesaroPandora ∷ johnstonBizarre ∷ stateViralStudy1965 ∷
+  (wiesner1964 ∷ mk119Memo ∷ cesaroPandora ∷
+   byronOperational1966 ∷ byronFinal1966 ∷ arpaInitial1966 ∷
+   cesaroSeptember1967 ∷ johnstonBizarre ∷ stateViralStudy1965 ∷
    georgeWashington1966 ∷ pandoraApril1969 ∷ pandoraHumanMinutes ∷
    koslovRand ∷ senateMoscow1979 ∷ hopkins1976To1978Study ∷
    odniExperts ∷ odni2025 ∷ recall2026 ∷ [])
@@ -203,6 +249,10 @@ data ProgrammeObject : Set where
   moscowEmbassyExposurePopulation : ProgrammeObject
   johnsHopkinsEmbassyFollowup : ProgrammeObject
   stateEmbassyLymphocyteSurvey : ProgrammeObject
+  walterReedMicrowaveTestFacility : ProgrammeObject
+  originalPrimateHighDoseExperiment : ProgrammeObject
+  correctedLowDoseReplication : ProgrammeObject
+  tumsEmbassyFieldMeasurements : ProgrammeObject
 
 data ProgrammeTopic : Set where bioelectronicsAndEffects : ProgrammeTopic
 
@@ -231,6 +281,10 @@ data LinkKind : Set where
   reportedMethodologicalRejection : LinkKind
   conductedComparativeEpidemiology : LinkKind
   observedHematologyWithoutDoseCorrelation : LinkKind
+  originalApparatusEngineeringReport : LinkKind
+  sourceReportedPreliminaryOutcome : LinkKind
+  subsequentDoseReassessment : LinkKind
+  sourceReferenceChronologyConflict : LinkKind
 
 record BoundedLineageEdge : Set where
   constructor boundedLineageEdge
@@ -243,6 +297,37 @@ record BoundedLineageEdge : Set where
     withheldClaim : String
 
 open BoundedLineageEdge public
+
+pandoraApparatusActuallyConstructed : BoundedLineageEdge
+pandoraApparatusActuallyConstructed = boundedLineageEdge
+  arpaPandora walterReedMicrowaveTestFacility originalApparatusEngineeringReport byronFinal1966
+  "JHU APL authored a genuine report on constructed 1966 Walter Reed laboratory electromagnetic exposure equipment and chamber test results"
+  "Full archive bundle retrieval still pending; no novel clinical efficacy or transfer to present-day commercial RF infrastructure"
+
+pandoraInitialAnimalReport : BoundedLineageEdge
+pandoraInitialAnimalReport = boundedLineageEdge
+  walterReedMicrowaveTestFacility originalPrimateHighDoseExperiment sourceReportedPreliminaryOutcome arpaInitial1966
+  "ARPA memorandum reports a single initial primate under higher-intensity modulated RF and observed task slowdown"
+  "No verified independent animal-level replication, direct neural endpoint, or effect at embassy dose"
+
+pandoraCorrectedLevelNull : BoundedLineageEdge
+pandoraCorrectedLevelNull = boundedLineageEdge
+  originalPrimateHighDoseExperiment correctedLowDoseReplication subsequentDoseReassessment cesaroSeptember1967
+  "ARPA reports normal comparable unmodulated performance and no overt degradation at tested weaker modulated levels; Moscow field reassessed <=0.05 mW/cm2"
+  "The summary only captures task performance; source attribution does not prove zero biological effect in every tissue/dose or intention of any Soviet transmitter"
+
+data ExperimentalOutcomeClaim : Set where
+  overtTaskPerformance : ExperimentalOutcomeClaim
+  directlyMeasuredNeuralResponse : ExperimentalOutcomeClaim
+  humanControlledBehavior : ExperimentalOutcomeClaim
+
+taskChangeIsNotDirectBrainMeasurement :
+  overtTaskPerformance ≡ directlyMeasuredNeuralResponse → ⊥
+taskChangeIsNotDirectBrainMeasurement ()
+
+taskChangeIsNotHumanControl :
+  overtTaskPerformance ≡ humanControlledBehavior → ⊥
+taskChangeIsNotHumanControl ()
 
 pandoraBizarre : BoundedLineageEdge
 pandoraBizarre = boundedLineageEdge
