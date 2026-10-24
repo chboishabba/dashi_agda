@@ -69,3 +69,16 @@ comm=lambda A,B:A*B-B*A
 assert comm(Jx,Jy)==Jz and comm(Jy,Jz)==Jx and comm(Jz,Jx)==Jy
 print("PASS torque so3 cannot be identified with KK fibre u1 by a nonzero Lie algebra homomorphism")
 print("OPEN full E6 27-family 5D action, physical mass source, gauge mixing, gauge fixing, 5D CS/anomaly, all-variable vacuum, quantum loops")
+
+# Schur-complement gate: positive standalone radion/Higgs blocks are insufficient.
+# A cross derivative must come from the SAME 5D action and be bounded:
+# H_eff=H_rr-H_rPhi*inv(H_PhiPhi)*H_Phir.
+Hphi=s.diag(4,6)
+cross=s.Matrix([[8,0]])
+Hrr=s.Integer(15)
+schur=s.simplify(Hrr-(cross*Hphi.inv()*cross.T)[0])
+assert schur==-1
+full=Hphi.row_join(cross.T).col_join(cross.row_join(s.Matrix([[Hrr]])))
+assert full.det()<0
+print("PASS mixed-Hessian counterexample: positive isolated radion and 2 Higgs blocks, but Schur complement",schur,"negative")
+print("BOUNDARY cross entries 8,0 are adversarial synthetic—not source #1106 physical couplings")
