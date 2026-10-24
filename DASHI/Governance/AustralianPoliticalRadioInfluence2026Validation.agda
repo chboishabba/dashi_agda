@@ -121,3 +121,58 @@ reportedCustomersAreNotAuditedBankBalance = A.reportedSubscriptionsNotAudited
 advertiserInterestNotCapitalStake :
   A.BrandOfferEstablishesEquityInvestment → ⊥
 advertiserInterestNotCapitalStake = A.advertiserOfferNotEquity
+
+
+-- Consolidated media source-join regressions. Evidence grades are source-local;
+-- these reduction witnesses cannot independently verify historical accounts.
+rinehartStakeIsSecuredFinancing :
+  A.kind A.rinehartMcWilliamSecuredMediaStake ≡ A.securedStakeFinancing
+rinehartStakeIsSecuredFinancing = refl
+
+stefanovicFundingRemainsReported :
+  A.kind A.rinehartStefanovicPodcastFundingClaim ≡ A.reportedUnverifiedFunding
+stefanovicFundingRemainsReported = refl
+
+hansonRepostIsRedistribution :
+  A.kind A.hansonRepublishedRobinson ≡ A.mediaRedistribution
+hansonRepostIsRedistribution = refl
+
+sheahanChatRemainsReported :
+  A.kind A.advanceSheahanBannonConversation ≡ A.reportedMeeting
+sheahanChatRemainsReported = refl
+
+taxEvidenceIsCorrespondence :
+  A.kind A.mandelsonXstrataEpsteinTaxEmail ≡ A.publishedCorrespondence
+taxEvidenceIsCorrespondence = refl
+
+sharedLaunchDoesNotProveControl :
+  A.provesHiddenCoordination A.rinehartBannonDevineEvent ≡ false
+sharedLaunchDoesNotProveControl = refl
+
+stakeLoanDoesNotProveEditorialOrders :
+  A.provesEditorialControl A.rinehartMcWilliamSecuredMediaStake ≡ false
+stakeLoanDoesNotProveEditorialOrders = refl
+
+headquartersIsReportedLease :
+  A.kind A.rinehartOneNationHeadOffice ≡ A.commercialLeaseArrangement
+headquartersIsReportedLease = refl
+
+podcastBuyoutNotRinehartEquity :
+  A.kind A.stefanovicIbrahimOwnershipSettlement ≡ A.ownershipBuyoutSettlement
+podcastBuyoutNotRinehartEquity = refl
+
+MFWPressureIsAdvertiserCampaign :
+  A.kind A.mfwKyleAdvertiserCampaign ≡ A.advertiserBoycottCampaign
+MFWPressureIsAdvertiserCampaign = refl
+
+noMeetingFromIndexReference :
+  A.EpsteinDocumentMentionProvesMeeting → ⊥
+noMeetingFromIndexReference = A.noMentionMeeting
+
+noReportedFundingToEquityLeap :
+  A.ReportedPodcastBackerIsAuditedCapital → ⊥
+noReportedFundingToEquityLeap = A.noRumourToEquity
+
+noInstructionsFromInterviewCopy :
+  A.OriginalInterviewFileAccessIsProvenInstruction → ⊥
+noInstructionsFromInterviewCopy = A.noRepublishedFileCommand
