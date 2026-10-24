@@ -1850,3 +1850,41 @@ for the DIFFERENT Lie-algebra bracket result.
 Existing Yang–Mills, C3/369, CKM, qutrit,
 and neutrino source owners retain their
 original authorship and theorem grades.
+
+### New exact nontriviality discriminator: the C3 orbit is not collapsed
+
+The chosen `T` has order exactly three, but that alone
+would not imply the inner action `Ad_T` moves a
+particular `SU3` state: a central element, or a
+chosen `A` commuting with `T`, could have
+`Ad_T(A)=A` even when `T³=1`.
+
+The `NeutrinoHornedSU3RootExact.agda`
+source now computes this exact CP-root witness:
+
+```
+A = T S1
+(Ad_T(A) - A)_(e,mu)
+  = (7429123333440 + 2394922626720*zeta)
+      /6270551970029
+  != 0.
+```
+
+The selected orbit has **exactly three** distinct
+points once the group order-three law is transported:
+`Ad_T³(A)=A` but `Ad_T(A)≠A`; an orbit
+under C3 has size 1 or 3. This is an exact
+mathematical group-action distinction,
+NOT a measured CP-phase observable or a
+proof of physical QCD color/flavour identity.
+
+The committed
+`tests/test_neutrino_horned_su3_positive_bridge.py`
+now includes the exact two-coordinate Fraction
+regression for this action. Independent local
+Fraction calculation PASS; no claimed Agda
+typecheck or exact-head committed test execution.
+
+`logs/research/neutrino_canonical_sun3_matrix_weld_maxcut_20261024.json`
+records the latest source/test blob SHAs and
+the nonzero two-coordinate witness.
