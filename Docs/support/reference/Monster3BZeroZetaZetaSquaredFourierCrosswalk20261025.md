@@ -1,3 +1,5 @@
+> **25 October 2026 — source-family correction:** the existing full Monster-to-6.Suz quotient matcher selects *faithful* degree-78 characters, while Nebe's Sym²(faithful12)=78 descends to 3.Suz and is nonfaithful to 6.Suz. Matching C3 phases or norm8100 cannot identify these two families: their degree90 central C2 traces are -90 and +66, respectively. See [the source-family max-cut audit](./Monster3B6SuzExistingSourceFamilyMaxCut20261025.md). The actual selected Monster pair requires the unexecuted GAP quotient receipt; earlier geometric/Sym² predictions are separate conditional constructions.
+
 # Zero / ζ / ζ²: reusing DASHI's original three-phase and zero-fibre work
 
 **Date:** 2026-10-25. **Latest proof consumer for PR #1250.** This is the intended cross-pollination, rather than an additional independent computation of the norm of `90ζ`.
