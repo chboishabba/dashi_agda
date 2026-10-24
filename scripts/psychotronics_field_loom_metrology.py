@@ -141,14 +141,17 @@ def paired_analysis(record):
     # A single instrument's common force systematic must not average away.
     # Per-pair reported systematic floors are pooled conservatively by max;
     # original calibration groups remain shared across all same-ID pairs.
+    source_join = verify_pair_source(meta, pairs)
     sys_floor = max(p['common_systematic_std_n'] for p in results)
+    cal_floor = source_join.get('calibration_reported_common_force_offset_std_n')
+    if cal_floor is not None:
+        sys_floor = max(sys_floor, cal_floor)
     gradient_fraction = meta.get('gradient_calibration_fractional_std', 0.)
     if isinstance(gradient_fraction, bool) or not isinstance(gradient_fraction, (int, float)) or not math.isfinite(gradient_fraction) or gradient_fraction < 0:
         raise ValueError('invalid gradient_calibration_fractional_std')
     gls = correlated_residual_gls(results, common_force_std_n=sys_floor,
             gradient_calibration_fractional_std=float(gradient_fraction))
     provenance_ok = all(_readback_receipt(meta, k) for k in ('raw_data', 'calibration'))
-    source_join = verify_pair_source(meta, pairs)
     provenance_ok = provenance_ok and source_join['bytes_and_exact_pair_source_join']
     factorial_settings = record.get('factorial_settings')
     try:
