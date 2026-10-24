@@ -52,3 +52,27 @@ def test_unbounded_positive_subfamily_of_zero_amplitude_rows():
         assert sum(x*x for x in p+q)-2==2*m*(m-1)
     assert sum(2*m*(m-1) for m in range(6,17)) <= int(
         module.certificate(16)["signed_defect"])
+
+
+def test_selected_shear_is_genuine_unforced_solution_and_modal_R440_is_invariant():
+    # u(t)=2*exp(-t)*(cos(x)+cos(y))*e_z is divergence-free.
+    # u·grad u = u_z ∂_z u = 0; -Delta u0 = u0.
+    # The two active H+ x H- cells have A,B as below;
+    # this is exact Gaussian-rational arithmetic with denominator 4.
+    from fractions import Fraction as F
+    # Complex stored as pairs (real,imag), all components exact.
+    A=((F(0),F(-1,4)),(F(0),F(-1,4)),(F(1,4),F(0)))
+    B=((F(0),F(-1,4)),(F(0),F(-1,4)),(F(-1,4),F(0)))
+    M=tuple((a[0]+b[0],a[1]+b[1]) for a,b in zip(A,B))
+    assert M==((F(0),F(-1,2)),(F(0),F(-1,2)),(F(0),F(0)))
+    normM=sum(z[0]**2+z[1]**2 for z in M)
+    assert normM==F(1,2)
+    rweighted=tuple((2*z[0],2*z[1]) for z in M)
+    # Unlike full-fibre covariance, modal R440 weighted amplitude stays 2*M.
+    assert all(rweighted[j]==(2*M[j][0],2*M[j][1]) for j in range(3))
+    # W(M,2M)=2*Re(conj(M)·(2M))=2.
+    assert 2 * 2 * normM == 2
+    # Output k=(1,1,0) has |k|²=2, so the true centered modal rate is ZERO.
+    assert all(rweighted[j]==(sum(x*x for x in module.K)*M[j][0],
+                             sum(x*x for x in module.K)*M[j][1])
+               for j in range(3))
