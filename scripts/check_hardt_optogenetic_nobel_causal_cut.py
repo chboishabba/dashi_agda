@@ -104,6 +104,43 @@ def independent_channel_and_target_gate():
             "local_optogenetic_target_spatial_address_requires_a_light_delivery_operator":True,
             "remote_person_target_address_not_inferred":True}
 
+
+def three_factor_spin_vs_opsin_discriminator():
+    """Three-way effect is a gate for a declared LIGHT-DEPENDENT field receptor,
+    NOT an estimate of a cryptochrome spin chemical response.
+    Variables: protein/receptor expression G, local illumination L,
+    local *measured* magnetic perturbation B. Binary toy only.
+    """
+    def third_difference(cells):
+        return sum(((-1)**(3-(g+l+b)))*cells[g,l,b]
+                   for g,l,b in product((0,1),repeat=3))
+    opsin={(g,l,b):g*l for g,l,b in product((0,1),repeat=3)}
+    spin_receptor={(g,l,b):g*l*b for g,l,b in product((0,1),repeat=3)}
+    assert third_difference(opsin)==0
+    assert third_difference(spin_receptor)==1
+    checked=0
+    # Every additive or at-most-pairwise polynomial gives zero DDD:
+    # baseline+single factors+pairwise interactions, all exact integers.
+    for coeffs in product((-1,0,1),repeat=7):
+        a,cg,cl,cb,cgl,cgb,clb=coeffs
+        null={(g,l,b):(a+cg*g+cl*l+cb*b+
+                           cgl*g*l+cgb*g*b+clb*l*b)
+              for g,l,b in product((0,1),repeat=3)}
+        assert third_difference(null)==0
+        checked+=1
+    assert checked==2187
+    return {
+      "pure_opsin_magnetic_field_three_factor_interaction":0,
+      "declared_spin_receptor_three_factor_interaction":1,
+      "at_most_pairwise_exact_nulls_checked":checked,
+      "three_factor_interaction_is_not_cryptochrome_specific_without_controls":True,
+      "required_physical_inputs":["actual illuminated protein expression",
+                                  "measured external B at original biological sample",
+                                  "background RF and temperature controls",
+                                  "photoluminescence/photo-current/neuronal outcome separately",
+                                  "receptor genetic and spectroscopy specificity"],
+      "scope":"exact invented 2x2x2 factorial; NO recombinant protein, brain, magnetoreception or human target data"}
+
 def mechanism_manifest():
     """Do NOT coerce stimulus physics across wavelength/band/identity."""
     return {
@@ -127,6 +164,7 @@ def main():
                       "mechanism_collisions":collision_audit(),
                       "additive_null":exhaustive_nulls(),
                       "independent_secret":independent_channel_and_target_gate(),
+                      "opsin_vs_spin":three_factor_spin_vs_opsin_discriminator(),
                       "experiment_gates":mechanism_manifest()},
                      sort_keys=True,indent=2))
 if __name__=="__main__":
