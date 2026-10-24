@@ -239,8 +239,11 @@ def audit(max_depth=4):
             if n == max_depth:
                 break
             if family == "cantor":
-                # Attach to each PRE-EXISTING boundary. Fresh pants
-                # boundaries are not processed until the NEXT stage.
+                # LEGACY MESH-INTEGRITY REGRESSION ONLY.
+                # WARNING: glue(..., which_a=0) may select a newborn
+                # boundary; the resulting stage's b=2^n does NOT
+                # certify Cantor branching. For true parentage use
+                # exotic_topology_pl_frontier_lineage.staged("cantor").
                 for _ in range(len(boundary_loops(mesh)[0])):
                     mesh = glue(mesh, pieces["pants"])
             elif family == "loch":
@@ -251,7 +254,7 @@ def audit(max_depth=4):
         families[family] = stages
     return {"fixtures": {k: inspect(v) for k, v in pieces.items()},
             "families": families,
-            "status": "PASS concrete finite oriented PL manifolds; infinite limit, end-space and classification OPEN"}
+            "status": "FINITE PL GEOMETRY ONLY; Cantor ancestry is NOT checked here (use exotic_topology_pl_frontier_lineage.py); infinite topology OPEN"}
 
 
 if __name__ == "__main__":
