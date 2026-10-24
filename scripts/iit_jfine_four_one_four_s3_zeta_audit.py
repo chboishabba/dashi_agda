@@ -76,6 +76,30 @@ def audit():
     fixes=lambda coords:sum(reflection(tuple(int(j==i) for j in range(9)))
        ==tuple(int(j==i) for j in range(9)) for i in coords)
     assert (fixes(EDGES),fixes(CORNERS))==(2,0)
+    # Independently compare Burnside and literal joint D4-site x S3-value
+    # orbits. The group has 8*6=48 elements.
+    identity=tuple(range(9))
+    d4=set()
+    rot=identity
+    for _ in range(4):
+        d4.add(rot)
+        d4.add(reflection(rot))
+        rot=rotation(rot)
+    assert len(d4)==8
+    burnside=sum(mult*(3**cycles+3*(3**even))
+        for mult,cycles,even in ((1,9,0),(2,3,2),(1,5,4),(4,6,3)))
+    assert burnside==23520 and burnside//48==490
+    seen_joint=set()
+    joint_hist=Counter()
+    for x in COORDS:
+        if x in seen_joint:continue
+        orbit={affine(tuple(x[i] for i in perm),a,b)
+               for perm in d4 for a,b in product((1,2),range(3))}
+        seen_joint.update(orbit)
+        joint_hist[len(orbit)]+=1
+    assert len(seen_joint)==19683
+    assert joint_hist=={3:1,6:6,12:17,24:122,48:344}
+    assert sum(joint_hist.values())==490
     ret={
       "scope":"finite pointed S3 complex permutation module, not Monster or IIT Phi",
       "fine_size":19683,
@@ -91,6 +115,9 @@ def audit():
       "pointed_C3_zeta_multiplicity_each":65610,
       "pointed_states":196830,
       "D4_mirror_fixed_sites_edge_corner":[2,0],
+      "D4_times_S3_orbits":490,
+      "D4_times_S3_orbit_histogram":dict(joint_hist),
+      "D4_times_S3_Burnside_numerator":burnside,
       "D4_edge_corner_natural_modules_inequivalent":True,
       "S3_value_and_D4_site_actions_commute":True,
       "over_F3_distinct_third_roots_exist":False,
