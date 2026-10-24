@@ -63,7 +63,7 @@ def test_source_locator_or_attributed_local_owner():
     assert ROADMAP.exists()
 
 
-def test_woogaroo_and_itir_prior_art_consumed_by_existing_owner():
+def test_shared_provenance_and_woogaroo_method_preserved_as_secondary():
     source = OWNER.read_text()
     owners = {
         "DASHI.Law.EvidenceProvenanceDependencyDagExact as Provenance":
@@ -89,7 +89,7 @@ def test_bidi_source_independence_and_acquisition_stages():
         "Provenance.reverseProvenance Provenance.independentCorroborationConsumer",
         "Provenance.independentProducerReceipt",
         "caseReprintsNotIndependent = refl",
-        "caseMissingSourceIsNotAbsence = refl",
+        "caseSearchAbsenceNotHistoricalAbsence = refl",
         "caseIdentityNeedsFullReconstruction = refl",
         "discoveryDoesNotPayInspection ()",
         "proceduralFindingDoesNotPaySubstantiveFact ()",
