@@ -107,3 +107,18 @@ def test_strong_H1_density_same_source_stokes_continuity():
             report["strong_H1_Stokes_L2_xi_difference_squared_bound"])
     assert ("convective_L1_difference" in
             report["strong_H1_Stokes_L2_xi_difference_squared_bound"])
+
+
+def test_ns_scaling_prevents_mistaking_direct_stokes_bound_for_A3():
+    # Genuine NS symmetry u_lambda=lambda*u(lambda*x,lambda²*t).
+    # For a spatial slice E_lambda=E/lambda, D_lambda=lambda*D;
+    # the Stokes response V_lambda=lambda*V(lambda*x) and its
+    # Fourier L2 norm squared scales like 1/lambda, while
+    # D_lambda becomes arbitrarily large at small spatial scales.
+    E,D,nu,lam=S.symbols("E D nu lam",positive=True)
+    base=(8*S.pi/nu**2)*E**S.Rational(3,2)*S.sqrt(D)
+    scaled=(8*S.pi/nu**2)*(E/lam)**S.Rational(3,2)*S.sqrt(lam*D)
+    assert S.simplify(scaled-base/lam)==0
+    result=module.certificate()
+    assert result["Navier_Stokes_scaling_E_lambda"]=="E/lambda"
+    assert result["Navier_Stokes_scaling_D_lambda"]=="lambda*D"
