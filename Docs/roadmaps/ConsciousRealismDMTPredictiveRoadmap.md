@@ -1,5 +1,44 @@
 # Conscious realism × DMT — predictive research roadmap
 
+## 2026-10-24 Steelman max-cut: biggest gaps and value of resolving them
+
+**Research outcome priority has changed, not the empirical permissions/state.** See [consumer-specific value and adversarial-source dossier](../receipts/DMTSteelmanDiscriminatorValue20261024.json), [revised M0/M1/M2 model cards](../receipts/DMTRestrictedModelCards20261024.json), [exact finite rational model counterexample](../../scripts/audit_dmt_steelman_identifiability.py) and [regression suite](../../tests/test_dmt_steelman_identifiability.py). Run the counterexample before attributing any fixed-Q trace signature to independent conscious agents.
+
+### First result: prove the ceiling of *observational* model identification
+
+For **any specified finite hidden Markov model** with initial state distribution `pi`, transition `Q` and observation kernel `E`, an *endogenous* hidden-state model can reuse exactly the same `pi`, `Q`, `E` while renaming the hidden states. Therefore the entire finite observed-word law is unchanged, for **every** sequence length. The new Fraction-based witness checks all 126 binary words of lengths 1–6 against both semantic interpretations (exact rational equality and normalization). This is a **synthetic demonstration of a standard general argument**, not a new theorem of physics, and not an implementation of Hoffman's conscious-agent theory or a neural model. Generic first-return/trace-chain identities derived from `Q` therefore cannot distinguish external ontology from a sufficiently expressive endogenous latent-state account. A positive predictive effect of a *restricted* M2 over a *restricted* M1a could still discriminate their mechanics, conditional on prespecified observable restrictions; it cannot by itself defeat the general latent M1b observation ceiling.
+
+### Serious adversary: Mago et al. active inference (2026)
+
+Jonas Mago, George Deane, Lars Sandved-Smith and colleagues, **'Computational spirits: a neuroscientific account of psychedelic entity encounters'**, *Neuroscience of Consciousness* (2026), DOI **10.1093/nc/niaf069**, propose an **endogenous active-inference account**: counterfactual richness/epistemic depth, altered sensory attenuation/precision, exogenous-source attribution and culturally patterned priors jointly contribute to entity experiences. The authors explicitly report that **no new data were generated or analysed and no formal mathematical implementation is provided**. Attribute this to its originating authors and treat it as a conceptual donor requiring independent formal specification and future empirical validation, NOT as an established empirical result. It is a stronger M1a comparator than a strawman regression baseline. Separate M1a (mechanistically restricted) from M1b (maximally observationally expressive endogenous HMM) in every held-out comparison.
+
+Sanders et al., DOI **10.1093/nc/niag015**, observe a typical progression from bodily to visual/auditory and three-dimensional immersion toward perceived presences in their 23 interviews (21 complete phase sequences); the temporal ordering is consistent with multiple mechanisms, including Mago's proposed endogenous model. Full participant×phase matrices, codebook reuse terms and experimental-cohort overlap are not admitted here. The Sanders study belongs to a broader DMT fMRI–EEG research programme; a separate paper is NOT proof of independent recruited participants. Davis et al. (2020), DOI **10.1177/0269881120916143**, is an original, self-selected retrospective encounter survey and must not be used as validation of the original imaging cohort.
+
+### Ranked outcome/Pareto cut (qualitative priority, not imaginary calibrated information gain)
+
+| Priority | Gap and requested outcome | Highest legitimate scientific payoff | Completion criterion / negative result |
+|---|---|---|---|
+| **P0 — unconditional mathematics** | M1b/M2 observational-equivalence no-go, then search for concrete independent M2 restriction | Stops false ontology promotion and focuses theory on a measurable discriminator, publishable as a scoped negative identification theorem | Exact argument + rational witness paid; an M2-specific observable still **missing** |
+| **P0 — endogenous mechanism** | Formalise credible bounded active-inference M1a; map counterfactual depth/sensory attenuation/self-other attribution to measured variables | Tests the hardest alternative, not an arbitrary weak null; may yield a reusable scientific model even if M2 loses | Source-attributed equations and parameters plus observable measurement contracts; do not invent unmeasured covariates |
+| **P0 dependent — primary phenomenology** | Actual Sanders phase matrices/codebook, blinded timing/annotation and cohort overlap | The clearest potential empirical discriminator in the near term, with independent value for agency and self/world research | Admissible participant-level phase/timing data, prespecified onset outcomes and held-out M1a versus M2 comparison; null is informative |
+| **P1 — original neural source** | Timmermann original FD/QC and voxel NIfTI/Schaefer/executed MATLAB workspace and rights | Restores integrity and original-paper reproducibility; gives honest neural features for later tests | Exact original n16 eligibility and participant-GFC replay or a bounded unavailable-from-public-tree result; not an ontology result |
+| **P2 separate study — concealed target** | Genuinely prospective independently blinded, ethics-approved target protocol | Largest **potential** unexpected information-channel outcome, but highest dependence on new permissions, design and replication | Approved preregistered target/negative controls/leakage/replication; even positive result does not uniquely identify a separate mind |
+
+### Non-promotion outcome table
+
+| Observed future result | Permitted inference | Not permitted |
+|---|---|---|
+| M2 outpredicts M0 but ties M1a/M1b | Shared latent dynamics, not unique mechanism | External entity validated |
+| M2 beats bounded mechanistic M1a but is emulated by M1b | Specific M1a falsified under predeclared measurement/complexity restrictions | All endogenous models ruled out |
+| M1a and M2 observationally tie | No measured model separation at that resolution | Entities proved absent |
+| Presence onset follows spatial/sensory immersion | Source-specific phenomenology or prediction if independently reproduced | Presence arose outside the brain |
+| Original GFC t(15) independently reproduces | Author-method neural contrast reproduced | Conscious realism distinguished from endogenous mechanisms |
+| Concealed target association survives leakage control and replication | A genuinely anomalous information dependency merits causal investigation | Specific independent conscious ontology proven |
+
+**Actual next max-cut:** (1) retain/extend the exact no-identification result and require a theory-specific restriction, (2) implement a non-strawman *source-attributed* M1a candidate with explicit unobserved covariates, (3) acquire real phase-sequence records and allow them to reject whichever bounded model fails, (4) continue the existing four Pareto source-acquisition actions in parallel. Prioritising these has greater chance of a meaningful finding than another set of Klüver variants, semantic equivalence wrappers or a claim that GFC itself proves an external agent.
+
+**Verification:** the six focused synthetic/source-contract suites now pass **57/57 tests** on locally SHA-matched GitHub source blobs: previous 48 plus six exact-witness tests and three extra adversarial model-card checks. The separate exact rational script enumerates 126 binary observed words, showing equality for each. No actual human participant file, permission or M1a/M2 fitted empirical result was produced. Kernel-checked Agda and complete original-paper replay remain outstanding, but CI is not a research-critical blocker.
+
 ## 2026-10-24 Phase 1 acquisition dossier and Phase 2B model-card acceptance — executed max-cut
 
 **New concrete deliverables:** [Dewey–Ibrahim source acquisition decision JSON](../receipts/DMT2023DeweyIbrahimAcquisitionDecision20261024.json) and [restricted M0/M1/M2 model cards](../receipts/DMTRestrictedModelCards20261024.json). The [runnable source/phase audit](../../scripts/audit_dmt_research_phase.py) validates these against the existing source-world validator; it does not introduce a competing ontology. [New regression tests](../../tests/test_dmt_research_phase_audit.py) enforce strict source-object ↔ producer ↔ consumer edges, QID/DDC no-promotion, same observables/splits, and the M2 fixed-Q versus ordinary Markov non-uniqueness boundary.
