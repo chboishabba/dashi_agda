@@ -91,3 +91,69 @@ The direct circle power recurrence is **already well-defined**, z_{n+1}=z_n^(99^
 An independent equivalent finite Python run passed the full 19683-state test, nine filtration levels, local idempotents, C3 transfer, and both factorial CRT checks. No Agda or Lean executable/kernel receipt was available during this implementation. For kernel validation, run the pinned project Agda compiler against the new module, then use existing relevant regression roots; do not infer kernel verification from a source-written refl or from a passed Python check.
 
 The concrete Agda normal-form functions are a basis for an additional universal quotient/ring-homomorphism theorem. They do not yet prove, internally to Agda, the complete universal quotient ring construction or all ring laws. This is a deliberately explicit finite source-level frontier, not a hidden postulate or an RH/9999 result.
+
+
+## 2026-10-25 continued max-cut — signed SSP/FRACTRAN × torque × RH roles
+
+### Source reuse rather than a new ontology
+
+- John H. Conway's FRACTRAN supplies the classical positive-integer fractional computation concept; DASHI's signed-SSP instruction/weave code is repo-specific and has distinct evidence/cost semantics.
+- Merged torque PR #1164 owns `Physics.Foundations.OrientedThreeAxisBracket369Exact`: the Levi-Civita sign for ordered (output,left,right) triple, balanced trit, and its conjugate C3 character. The bracket has genuine SO3/Hodge consumers but finite orientation alone supplies no force amplitude.
+- `Biology.SignedSSPFRACTRANWeaveExact` owns the fifteen Ogg lanes, signed multiplicity and inverse/mediated/forward orientation. `Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact` ALREADY proves signed negation ↔ spectral conjugation.
+- `Analysis.RiemannSSP15ProducerMarkedSignedFRACTRANExact` and `RiemannSSP15FilteredProvenanceCapstoneExact` ALREADY own the conditional RH producer-role to signed/pointed execution codec. Its O/j/s -> negative/zero/positive assignment is a CHOSEN role indexing, not an analytic fact about zeros or an external canonical SSP encoding.
+- Draft SSP-climbing-gym PR #1139 owns the p-native radix/inverse-limit machine; draft Goldbach 30→29 PR #1214 retains original Mike Dupont/meta-introspector AGPL authorship and signed/weak-stuttering machine work. Neither is vendored or reattributed here.
+- `Analysis.PickoverSignedSSPTorquePhaseBridgeExact` adds the explicit datatype intertwiner `Triadic.KernelTrit → BalancedTernary.Trit → OrientedThreeAxisBracket369Exact.BracketVoxel`. It compiles signed negation to torque input reversal modulo the C3 phase and reuses the existing torque reversal theorem rather than rebuilding its 27-case bracket table.
+- `Analysis.PickoverRHSSPTorqueRoleBridgeExact` maps the EXISTING conditionally producer-marked O/j/s instructions to phases ζ²/1/ζ, retains the j-role zero instruction effect and its independent pointed prime, and keeps analytic identity unpromoted.
+
+### Literal 99 FRACTRAN submachine
+
+The original integer FRACTRAN fraction `99/1` advances `99^k→99^(k+1)`; its reciprocal `1/99` is enabled at these states exactly for `k≥1`. The prime valuation is sparse:
+
+    v_3(99^k)=2k
+    v_11(99^k)=k
+    v_p(99^k)=0 for every other SSP/Ogg lane.
+
+No fictitious prime-99 or prime-101 Ogg lane is introduced. The external 101 CRT lane is genuinely absent from SSP15. The Agda signed valuation is a symbolic carrier for this prime-exponent orbit; the 3-token positive weave word `introducePrime 3; introducePrime 3; introducePrime 11` is a provenance-preserving PRESENTATION and the aggregate effect is *not* silently identified with an integer FRACTRAN interpreter.
+
+The coarse sign observation at both prime-3 and prime-11 lanes is `positive` for all `k≥1`. Our independently exact Machin intervals certify opposite REAL sine signs for `99^1` and `99^6`. Thus coarse signed SSP polarity cannot, by itself, determine even the small-exponent real phase. Full magnitudes or richer data might, if a valid real attachment exists.
+
+### Strong new quantitative torsion / torque correspondence
+
+Let `ζ_m=exp(2πi/m)`. From `99^(9999!)≡4950 mod9999`, the induced circle power map acts exactly on `μ9999`:
+
+    P(ζ_9999^k)=ζ_9999^(4950 k)=ζ_101^(50 k)
+    P²=P, kernel μ99, image μ101.
+
+The generator `ζ_9999` maps to `ζ_101^50`. The primitive generator `ζ_101 = ζ_9999^99` is fixed, since `50*99≡1 mod101`.
+
+Define a signed planar **oriented-area** observable on `μ101`:
+
+    sign det((1,0), (cos(2πt/101),sin(2πt/101)))
+     = zero if t=0
+     = positive if 1≤t≤50
+     = negative if 51≤t≤100.
+
+The oriented area is exactly the z-component of the R³ wedge/cross of two coplanar unit vectors, connecting to the selected torque/Hodge right-hand-rule convention. Inversion t→-t reverses the sign, matching the signed-SSP reciprocal and torque-bracket reversal laws. Zero remains a neutral third state; it is not forced into + or −.
+
+The Python audit exhausts all 9999 input torsion phases: **101 outputs**, every output has **99 preimages**, with **4950 positive / 99 neutral / 4950 negative** projected orientations. These are integer-only tests of the actual finite circle-group action, not approximations to `e^i`.
+
+The final same-object statement is still:
+
+    e^i is NOT known to be in μ9999;
+    orientation(P(e^i)) cannot be read from P|μ9999.
+
+An analytic attachment to the original phase must supply a signed semicircle separation or a rigorously bounded approximation. Neither the exact R³ torque wedge nor the 101 torsion projector supplies it automatically.
+
+### What returns to RH
+
+The three historical O/j/s source *roles* are exactly encoded as a negative/neutral/positive signed SSP tuple once the selected primitive-row producer certificate is supplied. This is an ACTION/PROVENANCE theorem on the role-code state, NOT the assertion that the analytic Riemann ζ zeros partition into three equal sign roles. The actual RH G2 signed method must attach to the literal determinant taper `q(u)` or the already-reduced scalar target; `RiemannG2C3MonsterEquivarianceAuditExact` warns that another raw three-channel C3 transform cannot discharge the remaining analytic q-level sign.
+
+**True next leaves:** (1) exact-head Agda kernel result for two new adapters plus the finite quotient (pending); (2) if RH, same-zeta Hardy/ξ multiplicity-aware zero consumer or the G21 scalar moment/TP2/determinant estimate; (3) if Pickover, a direct REAL phase-separating witness for `sin(99^(9999!))`. Do not confuse code, chosen role index, finite torsion, executable test and analytic proof authority.
+
+Verification (independently materially equivalent local Python PASS):
+
+    python3 scripts/check_pickover_eisenstein9_crt.py
+    python3 scripts/check_pickover_machin_factorial_phase.py
+    python3 scripts/check_pickover_ssp_torque_101.py
+
+The dedicated workflow now invokes the three scripts and focused Agda roots on the PR branch. No exact-head CI/kernel receipt has been observed in this session.
