@@ -713,6 +713,66 @@ bushCloudbusting1985 = Source.mkNoDOISource
   "musician acknowledges direct creative influence from Peter Reich memoir for a song/video, independent cultural authorship but not meteorological demonstration"
   Source.publicAttribution
 
+------------------------------------------------------------------------
+-- First-party original regional weather observations and exact place join
+-- (historical Maine rainfall is independently recorded, not rainmaking).
+------------------------------------------------------------------------
+
+noaaBangorGHCN1953 : Source.AttributedSource
+noaaBangorGHCN1953 = Source.mkNoDOISource
+  "NOAA National Centers for Environmental Information (GHCN-Daily station observations)"
+  "Bangor Maine USW00014606 original daily PRCP July 1953"
+  "original NCEI .dly weather-station fixed-width line USW00014606195307PRCP, source retrieved 25 October 2026"
+  "1953"
+  "https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USW00014606.dly"
+  Source.archivalSource
+  "Original station counts in tenths mm: 5 July 0, 6 July 66, 7 July 193, 8 July 46, 9 July 74. Independently establishes recorded regional Bangor rain, not Ellsworth onset or causal device effect."
+  Source.publicAttribution
+
+noaaBangorStationMetadata : Source.AttributedSource
+noaaBangorStationMetadata = Source.mkNoDOISource
+  "NOAA NCEI Climate Data Online (same institutional root as raw station)"
+  "Bangor International Airport Maine GHCND USW00014606 station metadata"
+  "original NOAA network ID and coordinates 44.79791 N, 68.81852 W; period of record starts 1953-01-01"
+  "1953"
+  "https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND%3AUSW00014606/detail"
+  Source.archivalSource
+  "Anchors exact raw .dly station and region; not another instrument stream or measurement in Ellsworth."
+  Source.publicAttribution
+
+ellsworthAmericanJuly1953 : Source.AttributedSource
+ellsworthAmericanJuly1953 = Source.mkNoDOISource
+  "The Ellsworth American (1953 newspaper publisher; item author unidentified)"
+  "Rain Monday Night Caused By Rainmakers"
+  "8 July 1953 article; searchable clipping reproduction in later Reich CORE printed documentary section, not original paper issue inspected"
+  "1953"
+  "https://rexresearch1.com/ReichOrgoneLibrary/ReichCORE.pdf"
+  Source.archivalSource
+  "Earlier press account of 6 July Reich/Orgone Institute cloudbuster demonstration and rain around 22:00; content may derive from institute press release, no independent observation proven"
+  Source.publicAttribution
+
+bangorLibraryNewspaperArchives : Source.AttributedSource
+bangorLibraryNewspaperArchives = Source.mkNoDOISource
+  "Bangor Public Library"
+  "Bangor Daily News newspaper archive 1832 to 2011 access route"
+  "current original archive-provider website; authenticated July 24 1953 Anthony R Shannon original newsprint has not been read"
+  "2026"
+  "https://bangorpubliclibrary.org/digital-content/newspapers-magazines/"
+  Source.archivalSource
+  "institutional route to original contemporary newspaper page, not newspaper body text or weather effect verification"
+  Source.publicAttribution
+
+ellsworthKansasFalseWeatherJoin : Source.AttributedSource
+ellsworthKansasFalseWeatherJoin = Source.mkNoDOISource
+  "ExtremeWeatherWatch (secondary NOAA-derived source for Ellsworth Kansas)"
+  "Ellsworth Kansas weather in 1953 — geographically inapplicable to Reich Maine"
+  "webpage headline merely Ellsworth; first line explicitly states Ellsworth Kansas; 25 Oct 2026 retrieval"
+  "2026"
+  "https://www.extremeweatherwatch.com/cities/ellsworth/year-1953"
+  Source.archivalSource
+  "same city spelling but Kansas location; July 1953 weather on that page cannot be assigned to Ellsworth Maine"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -741,7 +801,9 @@ sourceAtlas = Source.mkSourceAtlas
    bachIllusions1977 ∷ constableCosmicPulse1976 ∷ sladeMindCloud1998 ∷
    croftMoonbustingEarly2002 ∷ adachiEditedChembusterIndex ∷
    wmoWeatherModification2025 ∷ peterReichDreams1973 ∷
-   bushCloudbusting1985 ∷ [])
+   bushCloudbusting1985 ∷ noaaBangorGHCN1953 ∷
+   noaaBangorStationMetadata ∷ ellsworthAmericanJuly1953 ∷
+   bangorLibraryNewspaperArchives ∷ ellsworthKansasFalseWeatherJoin ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -766,6 +828,8 @@ data LineageRoot : Set where
   reichOriginalAuthorRoot guardianHamblingRoot redditKiddexForumRoot : LineageRoot
   bachFictionRoot constableBookRoot sladePractitionerRoot adachiPublisherRoot : LineageRoot
   wmoInstitutionRoot peterReichMemoirRoot kateBushArtistRoot : LineageRoot
+  noaaBangorWeatherRoot ellsworthAmericanPressRoot bangorLibraryRoot : LineageRoot
+  kansasWeatherPortalRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -774,6 +838,7 @@ data EvidenceCeiling : Set where
   experimentalMechanismElsewhere : EvidenceCeiling
   scopedValidatedSelfReport : EvidenceCeiling
   modernVisualIdentificationUnpaid : EvidenceCeiling
+  originalRegionalWeatherMeasurement : EvidenceCeiling
 
 record ClaimBound : Set where
   constructor claim-bound
@@ -1479,6 +1544,81 @@ bushPeterOriginalReadingClaim = mkBound
   "creative source attribution cannot certify Reich meteorology or song/movie events"
 
 ------------------------------------------------------------------------
+-- First-party weather readings independent of Reich's weather story:
+-- a small exact fixture for the *published historical dataset only*.
+------------------------------------------------------------------------
+
+record HistoricStationPrecipitation : Set where
+  constructor station-precipitation
+  field
+    evidenceSource : Source.AttributedSource
+    stationId : String
+    observedYear observedMonth observedDay : ℕ
+    tenthsMillimetre : ℕ
+open HistoricStationPrecipitation public
+
+bangorJuly5 : HistoricStationPrecipitation
+bangorJuly5 = station-precipitation noaaBangorGHCN1953 "USW00014606" 1953 7 5 0
+
+bangorJuly6 : HistoricStationPrecipitation
+bangorJuly6 = station-precipitation noaaBangorGHCN1953 "USW00014606" 1953 7 6 66
+
+bangorJuly7 : HistoricStationPrecipitation
+bangorJuly7 = station-precipitation noaaBangorGHCN1953 "USW00014606" 1953 7 7 193
+
+bangorJuly8 : HistoricStationPrecipitation
+bangorJuly8 = station-precipitation noaaBangorGHCN1953 "USW00014606" 1953 7 8 46
+
+bangorJuly9 : HistoricStationPrecipitation
+bangorJuly9 = station-precipitation noaaBangorGHCN1953 "USW00014606" 1953 7 9 74
+
+bangorJuly6Through8TotalTenthsMm :
+  tenthsMillimetre bangorJuly6 +
+  tenthsMillimetre bangorJuly7 +
+  tenthsMillimetre bangorJuly8 ≡ 305
+bangorJuly6Through8TotalTenthsMm = refl
+
+noaaBangorRainSourceClaim : ClaimBound
+noaaBangorRainSourceClaim = mkBound
+  "Original NOAA daily Bangor Maine station says July 6 PRCP 66, July 7 PRCP 193, July 8 PRCP 46 tenths-mm"
+  noaaBangorGHCN1953
+  "USW00014606195307PRCP line, days 6, 7 and 8, values from fixed-width 8-char GHCN fields"
+  noaaBangorWeatherRoot
+  Diligence.primaryProposition
+  originalRegionalWeatherMeasurement
+  "no station gauge at the claimed Graham Lake Dam draw point, no hourly Ellsworth rain onset or force/causal comparison"
+
+noaaBangorStationIdentityClaim : ClaimBound
+noaaBangorStationIdentityClaim = mkBound
+  "NOAA GHCND USW00014606 is Bangor International Airport Maine, not Ellsworth Kansas"
+  noaaBangorStationMetadata
+  "NCEI station details: Bangor Maine, 44.79791 north 68.81852 west, daily record starts Jan 1953"
+  noaaBangorWeatherRoot
+  Diligence.primaryProposition
+  institutionalHistoricalInterpretation
+  "same-agency metadata does not count as second original independent gauge"
+
+ellsworthJuly8PressClaim : ClaimBound
+ellsworthJuly8PressClaim = mkBound
+  "Earlier 8 July Ellsworth American anonymous rainmaker headline recounts the July 6 Orgone Institute intervention"
+  ellsworthAmericanJuly1953
+  "Clipping reproduced in Reich 1954 CORE documentary record; exact newspaper original issue not obtained"
+  ellsworthAmericanPressRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "anonymous reporter source independence from Orgone Institute and objective rain causation both unresolved"
+
+kansasEllsworthMisidentityClaim : ClaimBound
+kansasEllsworthMisidentityClaim = mkBound
+  "The historical 1953 weather page with URL slug cities/ellsworth is explicitly for Ellsworth Kansas, not Maine"
+  ellsworthKansasFalseWeatherJoin
+  "ExtremeWeatherWatch page opening location designation Ellsworth Kansas"
+  kansasWeatherPortalRoot
+  Diligence.primaryProposition
+  institutionalHistoricalInterpretation
+  "no geographic validity as evidence for original 1953 Maine operation"
+
+------------------------------------------------------------------------
 -- Cross-pollination edges. A documentary source naming BOTH objects
 -- licenses only the stated textual co-occurrence, not downstream physics.
 ------------------------------------------------------------------------
@@ -1632,6 +1772,35 @@ windingGuideDomainNotRainMachineProof = bounded-relation
   "Croft 2003 cloud-busters.com Mobius-winding referral"
   "Reich 1953 cloudbuster or modern Chembuster sky effect"
   documentaryDistinction croftOriginalGuide2003Claim false refl false refl
+
+------------------------------------------------------------------------
+-- Original atmospheric-data joins remain *observation only*; place and
+-- publication dependency are required for a legitimate case comparison.
+------------------------------------------------------------------------
+
+bangorOriginalObservedRainNotRainmakingProof : BoundedRelation
+bangorOriginalObservedRainNotRainmakingProof = bounded-relation
+  "NOAA original Bangor daily precipitation July 1953"
+  "Reich claimed 6 July 1953 Ellsworth device-caused rain"
+  documentaryDistinction noaaBangorRainSourceClaim false refl false refl
+
+noaaStationIdentityNotTwoWeatherExperiments : BoundedRelation
+noaaStationIdentityNotTwoWeatherExperiments = bounded-relation
+  "NOAA Bangor GHCN daily rain source"
+  "NOAA metadata for the same Bangor station USW00014606"
+  documentaryDistinction noaaBangorStationIdentityClaim false refl false refl
+
+ellsworthAmericanEarlierButNotIndependentWeatherTrial : BoundedRelation
+ellsworthAmericanEarlierButNotIndependentWeatherTrial = bounded-relation
+  "8 July Ellsworth American newspaper report, unnamed writer"
+  "24 July Bangor Daily News rainmaker report / Reich 1953 event"
+  documentaryDistinction ellsworthJuly8PressClaim false refl false refl
+
+kansasWeatherIsNotMaineReichEvent : BoundedRelation
+kansasWeatherIsNotMaineReichEvent = bounded-relation
+  "Ellsworth Kansas third-party 1953 weather"
+  "Ellsworth Maine 1953 cloudbuster operation"
+  documentaryDistinction kansasEllsworthMisidentityClaim false refl false refl
 
 croftCloudbusterRelation : BoundedRelation
 croftCloudbusterRelation =
