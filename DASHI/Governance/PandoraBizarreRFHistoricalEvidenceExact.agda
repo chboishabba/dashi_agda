@@ -161,6 +161,51 @@ koslovRand = Source.mkNoDOISource
   "Experiment-based negative/methodological review: primate results not convincing, EEG probe antenna artifact possible; separates possible weapon/interrogation inquiry from actual demonstrated response"
   Source.publicAttribution
 
+lilienfeld1978Original : Source.AttributedSource
+lilienfeld1978Original = Source.mkNoDOISource
+  "Abraham M. Lilienfeld; J. Tonascia; S. Tonascia; C. H. Libauer; G. M. Cauthen"
+  "Evaluation of Health Status of Foreign Service and Other Employees from Selected Eastern European Posts"
+  "Johns Hopkins University School of Hygiene and Public Health for US State Department, final report 1978, NTIS accession PB288163, government NTRL original record; 447 pages"
+  "1978"
+  "https://ntrl.ntis.gov/NTRL/dashboard/searchResults/titleDetail/PB288163.xhtml"
+  Source.archivalSource
+  "Original investigator human retrospective study: US NTIS lists 1827 Moscow employees/dependants and 2561 other Eastern European embassy comparators; original report available in public mirrored PDF, but full tables and individual matched dose methods not independently audited this round. Report authors conclude no adverse RF health effects shown in the studied cohort; disputed endpoint interpretation remains recorded by 2012 independent review"
+  Source.publicAttribution
+
+mallalieu1980PhysicalModel : Source.AttributedSource
+mallalieu1980PhysicalModel = Source.mkNoDOISource
+  "Robert C. Mallalieu, Johns Hopkins University Applied Physics Laboratory"
+  "A Model of the Microwave Intensity Distribution within the U.S. Embassy in Moscow, 1966–1977"
+  "Original APL report FS-80-166, August 1980; 81 pages and 53 references indexed in DOE/ER-0098; reprinted as section C of NTIA-SP-81-12"
+  "1980"
+  "https://www.gbppr.net/mil/havana/pb83155804.pdf"
+  Source.archivalSource
+  "Retrospective field reconstruction using validated dated and situated probe readings, geometry, reflections, antenna/probe verification, distinct 1966–1975 TUMS and 1975–1977 MUTS systems, building shielding and screened windows; text indexed but full source PDF not rendered from this access carrier"
+  Source.publicAttribution
+
+ntia1981Assessment : Source.AttributedSource
+ntia1981Assessment = Source.mkNoDOISource
+  "US National Telecommunications and Information Administration; Electromagnetic Radiation Management Advisory Council; US Department of State; Johns Hopkins Applied Physics Laboratory"
+  "Microwave Radiation at the U.S. Embassy in Moscow and Its Biological Implications: An Assessment"
+  "1981 US Department of Commerce original special publication NTIA-SP-81-12; Government Publishing Office catalogue item C 60.9:81-12; official NTIA Institute for Telecommunication Sciences index"
+  "1981"
+  "https://its.ntia.gov/publications/search-results"
+  Source.governmentSource
+  "Original official composite publication: repeats 1980 Mallalieu physical field model, State personnel assignment exposure model, and original 26 Aug 1980 ERMAC expert low-level health-risk assessment. Assembled source is not three independent replicated cohorts; ERMAC concluded harmful effects not anticipated at modelled particular levels. Full official PDF not directly rendered here"
+  Source.publicAttribution
+
+elwood2012Review : Source.AttributedSource
+elwood2012Review = Source.mkDOISource
+  "J. Mark Elwood"
+  "Microwaves in the cold war: the Moscow embassy study and its interpretation. Review of a retrospective cohort study"
+  "Environmental Health 11, article 85"
+  "2012"
+  "10.1186/1476-069X-11-85"
+  "https://doi.org/10.1186/1476-069X-11-85"
+  Source.academicArticleSource
+  "Original independently authored 2012 scholarly critical re-analysis of the 1978 investigator report; supports authors' no consistent demonstrated adverse exposure-effect association within cohort limitations. NOT a fresh or blinded independent human cohort replication"
+  Source.publicAttribution
+
 heilmeier1977 : Source.AttributedSource
 heilmeier1977 = Source.mkNoDOISource
   "George H. Heilmeier, Director, Defense Advanced Research Projects Agency"
@@ -235,7 +280,9 @@ sourceAtlas = Source.mkSourceAtlas
    byronOperational1966 ∷ byronFinal1966 ∷ arpaInitial1966 ∷
    cesaroSeptember1967 ∷ johnstonBizarre ∷ stateViralStudy1965 ∷
    georgeWashington1966 ∷ pandoraApril1969 ∷ pandoraHumanMinutes ∷
-   koslovRand ∷ heilmeier1977 ∷ senateMoscow1979 ∷ hopkins1976To1978Study ∷
+   koslovRand ∷ heilmeier1977 ∷ lilienfeld1978Original ∷
+   mallalieu1980PhysicalModel ∷ ntia1981Assessment ∷
+   senateMoscow1979 ∷ hopkins1976To1978Study ∷ elwood2012Review ∷
    odniExperts ∷ odni2025 ∷ recall2026 ∷ [])
   "Bounded original-document roots, no fabricated modern source-to-device bridge"
 
@@ -270,6 +317,10 @@ data ProgrammeObject : Set where
   wrairPlannedExpandedFacility1969 : ProgrammeObject
   darpa1977DisavowalStatement : ProgrammeObject
   pandoraMcIlwainExperimentalReassessment : ProgrammeObject
+  mallalieuRetrospectivePhysicalFieldModel : ProgrammeObject
+  ntia1981CompiledAssessment : ProgrammeObject
+  lilienfeldCompleted1978HumanReport : ProgrammeObject
+  laterScientificReviewOfSameCohort : ProgrammeObject
 
 data ProgrammeTopic : Set where bioelectronicsAndEffects : ProgrammeTopic
 
@@ -309,6 +360,11 @@ data LinkKind : Set where
   disputedRetrospectiveCharacterisation : LinkKind
   contemporaryExperimentalReassessment : LinkKind
   originalExperimentalEnvironmentalConfound : LinkKind
+  reconstructedHistoricalExposureField : LinkKind
+  priorStudyAnalyzedWithFollowupModel : LinkKind
+  originalHumanInvestigatorReport : LinkKind
+  expertReassessmentOfReusedFieldAndCohort : LinkKind
+  independentReviewerSameCohort : LinkKind
 
 record BoundedLineageEdge : Set where
   constructor boundedLineageEdge
@@ -321,6 +377,49 @@ record BoundedLineageEdge : Set where
     withheldClaim : String
 
 open BoundedLineageEdge public
+
+mallalieuReconstructedField : BoundedLineageEdge
+mallalieuReconstructedField = boundedLineageEdge
+  tumsEmbassyFieldMeasurements mallalieuRetrospectivePhysicalFieldModel
+  reconstructedHistoricalExposureField mallalieu1980PhysicalModel
+  "Mallalieu 1980 reconstructs physical field by source era and room/window/reflection/antenna geometry using validated historical measurements"
+  "A retrospective model is not the missing original CIA 13 Sep 1967 instrument time series and no individual person's measured absorbed dose is supplied"
+
+lilienfeldPerformedHealthReport : BoundedLineageEdge
+lilienfeldPerformedHealthReport = boundedLineageEdge
+  moscowEmbassyExposurePopulation lilienfeldCompleted1978HumanReport
+  originalHumanInvestigatorReport lilienfeld1978Original
+  "US government NTIS accession PB288163 identifies the original completed investigator study, authors and Moscow 1827 vs comparator 2561 subjects; no extra cohort inferred from 1979 Senate review"
+  "Finding of no observed adverse association is study-conditional; neither a proof of universal human RF safety nor of industrial sound exposure"
+
+ntiaCompositeReusesModel : BoundedLineageEdge
+ntiaCompositeReusesModel = boundedLineageEdge
+  mallalieuRetrospectivePhysicalFieldModel ntia1981CompiledAssessment
+  expertReassessmentOfReusedFieldAndCohort ntia1981Assessment
+  "NTIA publication packages independently authored original retrospective physical field model, State location exposure assignment and 1980 ERMAC expert judgement"
+  "Cannot count reprinting Mallalieu results as independent field measurement; ERMAC assessment does not create a newly observed clinical intervention"
+
+elwoodUsesSame1978Cohort : BoundedLineageEdge
+elwoodUsesSame1978Cohort = boundedLineageEdge
+  lilienfeldCompleted1978HumanReport laterScientificReviewOfSameCohort
+  independentReviewerSameCohort elwood2012Review
+  "Elwood 2012 independently evaluates original 1978 Lilienfeld study's methods and alternative interpretations"
+  "Independently authored review does not create new patient-year outcomes, new exposure groups or causal proof"
+
+data HistoricalStudyIdentity : Set where
+  original1978Cohort : HistoricalStudyIdentity
+  secondary1979ReportOfSameCohort : HistoricalStudyIdentity
+  retrospective2012ReviewOfSameCohort : HistoricalStudyIdentity
+
+-- Different publication objects, but ALL use the same underlying 1978
+-- retrospective cohort, so they do not become three independent samples.
+data ExperimentReplicationRole : Set where
+  genuinelyNewHumanCohort : ExperimentReplicationRole
+  interpretationOfExistingCohort : ExperimentReplicationRole
+
+reviewIsNotNewCohort :
+  interpretationOfExistingCohort ≡ genuinelyNewHumanCohort → ⊥
+reviewIsNotNewCohort ()
 
 pandoraKoslovObservedOriginalRecords : BoundedLineageEdge
 pandoraKoslovObservedOriginalRecords = boundedLineageEdge
