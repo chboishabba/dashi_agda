@@ -42,6 +42,10 @@ def test_finite_order_proof_reuses_original_generic_owner():
         "relabelledBagCannotRecoverOrder",
         "prefixSuffixLaw",
         "receptionEC",
+        "sameKernelResponseUnderOrderErasure",
+        "prefixIgnoresFutureSuffix",
+        "equalReceivedPrefixesGiveEqualOnlineStates",
+        "equalReceivedPrefixesGiveEqualObservedOutputs",
         "calibratedReadoutIfEstimatesCorrect",
         "laterRetrievalDoesNotChangeAdmission",
         "absentUptakeFailsStipulatedAdmission",
@@ -97,9 +101,12 @@ def test_atlas_uses_exact_original_roots_and_no_citation_promotion():
 
 
 def test_domain_rollups_are_linked_without_new_round_owners():
-    assert "EnactedTemporalOrderExact" in (
-        ROOT / "DASHI/Cognition/Everything.agda"
-    ).read_text()
+    cognition_rollup = (ROOT / "DASHI/Cognition/Everything.agda").read_text()
+    assert "EnactedTemporalOrderExact" in cognition_rollup
+    assert "EnactedTemporalOrderRegression" in cognition_rollup
+    regression = (ROOT / "DASHI/Cognition/PNF/EnactedTemporalOrderRegression.agda").read_text()
+    assert "sameCurrentStateForDifferentFuture" in regression
+    assert "sameCurrentObservationForDifferentFuture" in regression
     assert "NSMillerAnisotropicA3BridgeExact" in (
         ROOT / "DASHI/Papers/NavierStokes/Everything.agda"
     ).read_text()
