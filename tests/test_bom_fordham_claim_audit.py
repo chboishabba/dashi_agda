@@ -737,7 +737,7 @@ def test_readfearn_precision_countercheck_and_annex_index_are_distinct_sources()
     assert "test_integer_precision_preserves_a_nontrivial_degree_bin" in sensitivity
 
     docs = RESEARCH.read_text()
-    assert "not a station" in docs
+    assert "The two constructed histories are illustrative" in docs
     assert "source-content gap" in docs
     assert "706 KB" in docs
     assert "31 manually curated root-or-template labels" in docs
