@@ -119,3 +119,31 @@ these new commit receipts do not overwrite their priority.
   `simplify(diff(F,y)-g*exp(-rho))==0` for each -> **PASS**.
 - No `lake build`, Agda typecheck, pytest on a branch checkout, external
   empirical experiment, or deployed model run executed in this turn.
+
+
+### Late repo-audit: Miller versus existing vorticity-control consumers
+
+The actual master-branch sources `DASHI.Physics.Closure.NSCompactGammaBKMTimeIntegrability`,
+`NSVorticityAlignmentObstructionReceipt`, `NSVorticityNoMechanismReceipt`,
+and `NSStrainBMOBoundReceipt` were read. They expose an important
+**non-circularity test**, not an already-paid Miller theorem:
+
+- Compact-Gamma-to-BKM requires energy/dissipation, Bernstein weights,
+  weighted shell summation and a `NoBKMSobolevBootstrap` witness **before**
+  applying the established BKM continuation theorem.
+- The vorticity-alignment module records a *misaligned compressive-zone*
+  obstruction as still open. Its qualitative recorded sign is not a full
+  Lipschitz unit-field estimate in Miller's actual R³ theorem.
+- A periodic T³ strain BMO placeholder is not identical to the R³
+  locally anisotropic (L^4_tL^2_x) projection bound; domain, norm,
+  constants and source trajectories differ.
+- Do **not** derive Miller's projected-vorticity bound from a full
+  `L¹_t L∞_x` vorticity/BKM bound and then claim the result independently
+  establishes that BKM condition. The physical evidence chain must be
+  acyclic, source-matched and cutoff-uniform.
+
+The correct new physical leaf remains a same-unforced-solution,
+same-time-horizon direction field with uniform spatial derivative control
+and finite projected critical expenditure, with a separate PDE theorem
+identifying the limit/continuation. Earlier finite vortex trits and BMO
+receipts are useful falsification and geometry candidates only.
