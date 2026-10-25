@@ -1,0 +1,40 @@
+name: pickover-eisenstein9-crt-finite
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Mathematics/NumberTheory/EisensteinNineCRTPhaseMaxCutExact.agda'
+      - 'scripts/check_pickover_eisenstein9_crt.py'
+      - 'scripts/check_pickover_machin_factorial_phase.py'
+      - '.github/workflows/pickover-eisenstein9-crt-finite.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: pickover-eisenstein9-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  finite-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run exhaustive integer-ring and CRT certificates
+        run: python3 scripts/check_pickover_eisenstein9_crt.py
+      - name: Run independent exact Machin phase certificates
+        run: python3 scripts/check_pickover_machin_factorial_phase.py
+  finite-agda-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+      - name: Typecheck new finite bridge
+        run: agda -i . -l standard-library DASHI/Mathematics/NumberTheory/EisensteinNineCRTPhaseMaxCutExact.agda
