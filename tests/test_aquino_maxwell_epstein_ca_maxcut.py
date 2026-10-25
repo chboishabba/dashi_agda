@@ -1334,3 +1334,70 @@ def test_ftc_bannon_cid_conflicting_original_issue_dates_are_not_silently_reconc
         assert marker in case
     for marker in ("September 25, 2019", "September 24, 2019", "not two proven CIDs", "The same November 9 FTC petition", "better supported", "Exhibit 2"):
         assert marker in report
+
+
+def test_two_original_federal_operations_share_name_not_case_identity():
+    bank = (ROOT / "DASHI/Cognition/EpsteinBankingInfrastructureAcquisitionExact.agda").read_text()
+    case = OWNER.read_text()
+    report = (ROOT / "docs/research/aquino-epstein-canonical-disposition-20261025.md").read_text()
+    for fragment in (
+        "record ChainReactionFederalNameCollisionCut : Set where",
+        "hsiIPR2019FactSheetOriginalInspected : Bool",
+        "hsiIPR2019FactSheetSaysStartedJune2011 : Bool",
+        "hsiTargetIsCounterfeitGovernmentSupplyChain : Bool",
+        "house2022IsSecondIndependentHSIInvestigator : Bool",
+        "dea2015MemoCaseNYNYS0829Located : Bool",
+        "sameNameMeansSameInvestigation : Bool",
+        "agencyOverlapMeansSharedCaseIdentity : Bool",
+        "hsiCounterfeitCasesAreDEADrugOffenceDispositions : Bool",
+        "reportedJune2023DEAClosureHasSignedNativeInstrumentHere : Bool",
+        "canonicalChainReactionFederalNameCollisionCut =",
+        "sameOperationNameDoesNotPayCaseIdentity = refl",
+        "participatingFederalAgenciesDoNotPayCommonTasking = refl",
+        "hsiCounterfeitCasesDoNotDisposeDEAInquiry = refl",
+        "secondaryClosureDateNotNativeSignedDEADisposition = refl",
+        "hsiChainReaction2019NativeLocator : String",
+        "hsiChainReactionCongressionalCarrier : String",
+        "deaChainReactionDistinctCaseLocator : String",
+    ):
+        assert fragment in bank
+    for fragment in (
+        "canonicalFederalChainReactionHomonymOwner =",
+        "Banking.canonicalChainReactionFederalNameCollisionCut",
+        "chainReactionOriginalNameCollisionNotOneOperation = refl",
+        "hsiCounterfeitProceedingsNotEpsteinDrugDisposition = refl",
+        "reported2023DEAClosureStillNeedsOriginalInstrument = refl",
+    ):
+        assert fragment in case
+    for fragment in (
+        "original 1-page fact sheet",
+        "counterfeit microelectronics",
+        "16 participating agencies",
+        "CHRG-117hhrg50981",
+        "NY-NYS-0829 / C1-11-0049",
+        "16 June 2023",
+        "not an independent second HSI investigation",
+        "not personally authenticated",
+        "high-confidence false-positive removal",
+    ):
+        assert fragment.lower() in report.lower()
+
+
+def test_federal_homonym_record_positions_are_fail_closed():
+    import re
+    bank = (ROOT / "DASHI/Cognition/EpsteinBankingInfrastructureAcquisitionExact.agda").read_text()
+    start = bank.index("record ChainReactionFederalNameCollisionCut : Set where")
+    end = bank.index("open ChainReactionFederalNameCollisionCut public", start)
+    names = re.findall(r"^    ([A-Za-z0-9_]+) : Bool$", bank[start:end], re.M)
+    assert len(names) == 14
+    start = bank.index("canonicalChainReactionFederalNameCollisionCut =", end)
+    end = bank.index("\n\n", start)
+    values = re.findall(r"\b(?:true|false)\b", bank[start:end])
+    assert len(values) == len(names)
+    observed = dict(zip(names, values))
+    assert observed["hsiIPR2019FactSheetOriginalInspected"] == "true"
+    assert observed["house2022IsSecondIndependentHSIInvestigator"] == "false"
+    assert observed["sameNameMeansSameInvestigation"] == "false"
+    assert observed["agencyOverlapMeansSharedCaseIdentity"] == "false"
+    assert observed["reportedJune2023DEAClosureHasSignedNativeInstrumentHere"] == "false"
+    assert observed["sourceProvesEitherCoverupOrSameEpsteinBankTransfer"] == "false"
