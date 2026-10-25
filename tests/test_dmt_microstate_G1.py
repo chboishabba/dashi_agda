@@ -64,9 +64,14 @@ class TestOriginalG1(unittest.TestCase):
         with self.assertRaises(ValueError):
             synthetic_evaluate(f)
 
-    def test_gap_in_labels_rejected(self):
-        with self.assertRaises(ValueError):
-            g1_counts([1, 3, 1, 3, 3])
+    def test_missing_labels_compacted_as_original_MATLAB(self):
+        sparse = g1_counts([1, 3, 1, 3, 3])
+        dense = g1_counts([1, 2, 1, 2, 2])
+        self.assertAlmostEqual(sparse["g1"], dense["g1"], places=12)
+        self.assertEqual(sparse["k_observed"], 2)
+        self.assertEqual(sparse["original_state_support"], [1, 3])
+        self.assertTrue(sparse["unobserved_state_indices_compacted"])
+        self.assertFalse(dense["unobserved_state_indices_compacted"])
 
     def test_bool_label_rejected(self):
         with self.assertRaises(ValueError):
