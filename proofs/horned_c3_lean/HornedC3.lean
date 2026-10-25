@@ -1,2 +1,4 @@
 import HornedC3.ThreeArmVanKampen
 import HornedC3.ThreeArmCollarIntersections
+import HornedC3.ThreeArmCollarCoverAssembly
+import HornedC3.ThreeArmCentralPi1Reduction
