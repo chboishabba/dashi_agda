@@ -18,6 +18,8 @@ open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
+import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Mathematics.Topology.AlexanderHornedC3FiniteStageExact as Horn
 
 record AmbientMarkedAddress : Set where
@@ -64,3 +66,73 @@ markedClassifierDetectsUnlinked = refl
 markedClassifierDetectsLinked :
   markedClassifier linkedMarked ≡ true
 markedClassifierDetectsLinked = refl
+
+
+------------------------------------------------------------------------
+-- CROSS-POLLINATION FROM LATEST ANIMALEXIC PR #1259:
+-- Reuse EXISTING generic query-indexed projection adequacy and
+-- recharting-no-go, instead of a second factorisation calculus.
+--
+-- Blackwell (1953): information comparison conceptual precedent;
+-- Crenshaw (1991): situated-information non-factorability motivation;
+-- original mathematical query-indexed implementation: DASHI.
+-- NONE of these authors is credited with a theorem about a concrete
+-- Fox--Artin or Alexander embedded object.
+------------------------------------------------------------------------
+
+data AddressQuery : Set where
+  askSectorC0 : AddressQuery
+  askLinkedMarker : AddressQuery
+
+sectorIsC0 : Horn.HornAddress → Bool
+sectorIsC0 (Horn.address C3.c0 _) = true
+sectorIsC0 (Horn.address C3.c1 _) = false
+sectorIsC0 (Horn.address C3.c2 _) = false
+
+ambientAnswer : AddressQuery → AmbientMarkedAddress → Bool
+ambientAnswer askSectorC0 entry = sectorIsC0 (symbolic entry)
+ambientAnswer askLinkedMarker entry = linkedMarker entry
+
+ambientSemantics :
+  Adequacy.QuerySemantics AmbientMarkedAddress AddressQuery Bool
+ambientSemantics = Adequacy.querySemantics ambientAnswer
+
+-- The address IS sufficient for the question about its own sector.
+sectorQueryAdequate :
+  Adequacy.AdequateFor symbolic ambientSemantics askSectorC0
+sectorQueryAdequate = Adequacy.factorsForQuery
+  {project = symbolic}
+  {semantics = ambientSemantics}
+  {query = askSectorC0}
+  sectorIsC0
+  (λ entry → refl)
+
+-- The very same address loses the INDEPENDENT linked-marker query.
+linkQuestionWitness :
+  Adequacy.QueryAdequacyDefect symbolic ambientSemantics askLinkedMarker
+linkQuestionWitness = Adequacy.queryAdequacyDefect
+  {project = symbolic}
+  {semantics = ambientSemantics}
+  {query = askLinkedMarker}
+  unlinkedMarked linkedMarked refl falseNotTrue
+
+linkQuestionCannotFactor :
+  Adequacy.AdequateFor symbolic ambientSemantics askLinkedMarker → ⊥
+linkQuestionCannotFactor =
+  Adequacy.queryAdequacyDefectBlocksFactorisation
+    {project = symbolic}
+    {semantics = ambientSemantics}
+    {query = askLinkedMarker}
+    linkQuestionWitness
+
+-- Much STRONGER than testing a fixed address classifier: no possible
+-- downstream relabelling, encoding or weighting of the same coarse
+-- symbolic address can reconstruct independent marker information.
+linkCannotBeRecoveredByAnyAddressRechart :
+  ∀ {Recharted : Set} (rechart : Horn.HornAddress → Recharted) →
+  NonFactor.FactorsThrough
+    (λ entry → rechart (symbolic entry))
+    linkedMarker → ⊥
+linkCannotBeRecoveredByAnyAddressRechart rechart =
+  NonFactor.rechartingCannotRecoverErasedPhenomenon
+    rechart linkQuestionWitness
