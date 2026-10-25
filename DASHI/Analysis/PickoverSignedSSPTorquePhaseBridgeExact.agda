@@ -198,10 +198,10 @@ threeInstructionsEncodeTwoAndOne = refl
 ------------------------------------------------------------------------
 
 torsionProjector : Nat → Nat
-torsionProjector k = (4950 * k) Mod.% 9999
+torsionProjector k = Mod._%_ (4950 * k) 9999
 
 torsionImage101Coordinate : Nat → Nat
-torsionImage101Coordinate k = (50 * k) Mod.% 101
+torsionImage101Coordinate k = Mod._%_ (50 * k) 101
 
 projectorAtOne :
   torsionProjector 1 ≡ 4950
