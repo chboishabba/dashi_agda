@@ -26,6 +26,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_)
 open import Data.Product using (_×_; _,_)
 
+open import DASHI.Algebra.Trit using (neg; zer; pos)
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
 import DASHI.Moonshine.Griess1990Moufang81IbrahimProjective13Exact as Griess
@@ -170,18 +171,18 @@ actOnOriginalKernel5 z with Chart.kernel5ToM81 z
 
 -- The selected chart action fixes all three diagonal states.
 diagonalNegFixed :
-  actOnOriginalKernel5 (Chart.diagonalKernel5 SSP.sspNegOne) ≡
-    Chart.diagonalKernel5 SSP.sspNegOne
+  actOnOriginalKernel5 (Chart.diagonalKernel5 neg) ≡
+    Chart.diagonalKernel5 neg
 diagonalNegFixed = refl
 
 diagonalZeroFixed :
-  actOnOriginalKernel5 (Chart.diagonalKernel5 SSP.sspZero) ≡
-    Chart.diagonalKernel5 SSP.sspZero
+  actOnOriginalKernel5 (Chart.diagonalKernel5 zer) ≡
+    Chart.diagonalKernel5 zer
 diagonalZeroFixed = refl
 
 diagonalPosFixed :
-  actOnOriginalKernel5 (Chart.diagonalKernel5 SSP.sspPosOne) ≡
-    Chart.diagonalKernel5 SSP.sspPosOne
+  actOnOriginalKernel5 (Chart.diagonalKernel5 pos) ≡
+    Chart.diagonalKernel5 pos
 diagonalPosFixed = refl
 
 -- These are three concrete witnesses only; the full old240 dependent
