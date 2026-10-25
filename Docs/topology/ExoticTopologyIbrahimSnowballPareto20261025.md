@@ -366,3 +366,60 @@ P4: Warsaw, Wada, and geometric Seifert/braid construction.
 The newest whale, media-source and monster PRs supply no proven
 new same-object geometric data for these P0–P4 topology consumers.
 Do not add them merely to make the bibliography large.
+
+
+## Second restack: parent horned exact-cover result changes the true topology Pareto cut
+
+Rebased by NONDESTRUCTIVE MERGE (not a force push) onto inspected
+horned parent #1244 head `34c7ae2741c7849530c4cffba4daa0444f02d9c0`
+in merge commit `f1b1c097767bf085535e48795e49b5e515792c0e`.
+At that snapshot the child was 53 commits ahead, zero behind,
+and all 21 child paths were disjoint from the parent's 5 new
+geometry/collar paths. This source is a merge receipt, NOT a
+successful exact-head kernel or CI run. Future parent commits may
+again advance the base.
+
+NEW source-owned geometric donors now accessible on this branch:
+
+- `proofs/horned_c3_lean/HornedC3/ThreeArmCentralPi1Reduction.lean`.
+  Using already-existing `ThreeArmCollarCoverAssembly` and based
+  `OverlapGroup`, the source-written theorem reduces all off-diagonal
+  overlap fundamental groups to **ONE** trivial-central-`pi1` input.
+  It does not construct an actual wild solid nor discharge that input.
+- `scripts/alexander_horned_c3_explicit_open_cover.py` records
+  rational centres `9e_i`, cut radii `15/4<17/4` and exact
+  separation margins, yielding actual relatively open C,S_i,U_i
+  in a *supplied* chosen exterior E. Open-cover disjointness and
+  coverage follow mathematically from those inequalities.
+- `scripts/alexander_horned_c3_pierced_shell_product.py` already
+  implements the stereographic annular shell coordinate identities
+  for a source-selected straight pierced tube. It has an
+  **867-point** rational finite acceptance audit; it does NOT
+  certify the entire geometric wild exterior or a based `pi1`
+  isomorphism.
+- `Docs/topology/AlexanderHornedC3ExplicitExteriorOpenCover20261025.md`
+  gives the PAPER-LEVEL argument: the common central exterior
+  is the complement of a tame 3-ball *IF* the wild satellites are
+  contained in the original selected unit reference balls and
+  the outside spoke geometry satisfies those exact envelopes.
+  It explicitly does not claim C is contractible in R3:
+  its H2 can be nonzero while pi1(C) is trivial.
+
+The child now has two tests **importing these exact parent scripts**;
+it no longer duplicates the 867-point stereographic fixture or
+silently treats a radius inequality as a direct wild-embedding proof.
+
+**Revised P2 for Alexander:** the explicit three-arm OPEN COVER
+is no longer the blocker at the paper-geometric level. The
+surviving same-object obligations are an actual Lean realisation
+of the open-set/central `pi1` argument on E, the satellite
+homotopy equivalences to the selected Hatcher G_A,
+the induced based maps, and compatible infinite limit.
+
+**Revised P2 for Fox–Artin remains SEPARATE:** the selected arc
+in Figure 6 is Fox–Artin 1.1*, with its own nested arc-complement
+group. The parent Alexander horned solid is NOT that arc; matching
+one (S_5) presentation witness or the same source Hatcher
+commutator recursion does not make their ambient complements
+homeomorphic or identify their fundamental groups.
+Do not promote the parent geometric cover as closing Fox–Artin.
