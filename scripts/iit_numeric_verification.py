@@ -44,6 +44,7 @@ from iit_jfine_d4_symplectic_obstruction_audit import audit as d4_symplectic_aud
 from iit_jfine_d4_heisenberg_h6_model_weld import audit as d4_h6_weld_audit
 from iit_jfine_d4_single_line_orientation_bypass import audit as d4_line_bypass_audit
 from iit_jfine_d4_oriented_c4_monster_necessary_bridge import audit as d4_c4_steelman_audit
+from iit_jfine_h4_central_phase_fourier_intertwiner import audit as h4_fourier_weld_audit
 
 
 def _xor2(a: int, b: int) -> int:
@@ -344,6 +345,16 @@ def verify_numeric_results() -> dict:
     assert not d4_c4_steelman["actual_Monster_3B_D4_embedding_identified"]
     assert not d4_c4_steelman["character_match_is_sufficient_for_subgroup"]
 
+    h4_fourier_weld = h4_fourier_weld_audit()
+    assert h4_fourier_weld["source_phase_dimension"] == 65610
+    assert h4_fourier_weld["target_phase_dimension"] == 65610
+    assert h4_fourier_weld["source_regular_H4_zeta_copy_count"] == 810
+    assert h4_fourier_weld["target_H6_Schrodinger_restricted_H4_copy_count"] == 810
+    assert h4_fourier_weld["exact_fourier_gram_pairs"] == 6561
+    assert h4_fourier_weld["source_to_Schrodinger_intertwiner_generator_checks"] == 59049
+    assert not h4_fourier_weld["D4_normalizer_intertwiner"]
+    assert not h4_fourier_weld["same_object_Monster_Wzeta_linear_recognition"]
+
     return {
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
@@ -363,6 +374,7 @@ def verify_numeric_results() -> dict:
         "jfine_d4_h6_model_weld": d4_h6_weld,
         "jfine_d4_single_line_orientation_bypass": d4_line_bypass,
         "jfine_d4_oriented_c4_monster_necessary_bridge": d4_c4_steelman,
+        "jfine_h4_central_phase_fourier_intertwiner": h4_fourier_weld,
         "projective_f9_pointed80": projective,
         "projective_group_f9_720": pgl,
         "f81_norm_inversion": f81_norm,
