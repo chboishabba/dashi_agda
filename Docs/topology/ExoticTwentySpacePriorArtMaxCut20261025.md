@@ -513,3 +513,44 @@ realization Richards (1963). The paper route is a
 mathematical conditional argument, not a new Lean/Agda
 kernel receipt. The new tests have **NOT** been freshly
 run on the exact updated SHA.
+
+
+## Latest 2026-10-25 PR re-audit and source-scoped discriminator
+
+Latest relevant donors inspected at their actual heads:
+- Horned #1244: `ThreeArmCollarCoverAssembly.lean` already supplies
+  conditional central-region / three-satellite van Kampen cover
+  assembly; `AlexanderHornedBinaryTernaryExistingCodecWeldExact`
+  already imports canonical 2/3 refinement and older ternary codecs.
+  Do not duplicate or call it a geometric Fox--Artin embedding.
+- Braid/modular #1239: genuine Artin (B_3) modular `SL₂ℤ`
+  matrix shadow and separately typed C3 framing-loss and finite T9
+  actions. Source first: Artin (1925, DOI 10.1007/BF02950718);
+  Artin (1947, DOI 10.2307/1969218), not the repository PR.
+- Newest biology #1259: `QueryIndexedProjectionAdequacyExact`
+  already uses `IntersectionalNonFactorability`; the original
+  `ExoticAmbientLinkingNoGoExact` has been WELDED to that exact
+  generic witness, to show sector-query adequacy versus linking-query
+  inadequacy and all-rechart nonrecoverability.
+
+New finite regressions:
+`scripts/exotic_topology_braid_crosspr_discriminator.py`,
+`scripts/exotic_topology_cantor_measure_obstruction.py`.
+The first proves, at the exact group-matrix level, that endpoint
+permutation and modular images have different nontrivial kernels.
+The second isolates a STRONGER topological obstruction than a biased
+chosen code: **no measure-preserving homeomorphism** between
+the fair binary Cantor product and uniform three-letter Cantor
+product because clopen measures on the former are dyadic and
+the latter has a clopen set of measure 1/3.
+Mathematical compactness/cylinder lemma is documented, all-depth
+prime-divisibility source-written in Lean #86, kernel pending.
+Two extra unit regressions were added to the existing focused suite.
+
+`.github/workflows/exotic-topology-focused.yml` follows the
+parent #1244 dedicated-workflow pattern and can execute the
+finite Python audit at a specific GitHub SHA. Merely committing
+this workflow is NOT a passing run; independent local algebra
+checks passed, but no executed exact-head workflow receipt
+is represented as present here. All prior major geometric
+acceptance conditions remain open.
