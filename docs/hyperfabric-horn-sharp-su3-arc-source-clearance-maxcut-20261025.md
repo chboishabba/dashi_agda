@@ -167,3 +167,115 @@ All original/derivative publication and PR source identities are
 kept separate. Claim existence, original testimony, independent
 mathematical derivation, exact script receipt, kernel certification
 and physical measurement are distinct evidential types.
+
+
+## FINAL PARETO IMPROVEMENT: direct commutator and one-stage selected-W curvature cut
+
+**Important correction to interpretation of the n=22/n=398 certificates above:**
+those are EXACT **product-only infinite-branch** thresholds if all
+sibling gaps are bounded by epsilon and only the multiplicative
+step is used. They are NOT the earliest source rejection when the
+very first sibling already satisfies that gap: the sharper DIRECT
+one-step inequality can reject W immediately. In particular
+epsilon=31/60 gives direct c_arc(epsilon)<1, contradicting selected
+d(W)>1 already at level one. Never present the n=398 product test as
+an optimal finite source depth.
+
+### Direct theorem and sharpness (no chosen-child factor)
+
+For the same lambda=1-delta²/2 and delta<=sqrt(2), conjugation is
+an operator-norm isometry. Thus for every unitary A,B,
+
+    d([A,B]) = ||A B A^-1 - B||op
+             <= ||A(B-lambda I)A^-1||op + ||B-lambda I||op
+             <= 2 delta sqrt(1-delta²/4).
+
+This is sharp **exactly** within SU3 at each fixed delta:
+B=diag(e^(i alpha),e^(-i alpha),1), delta=2 sin(alpha/2),
+and A the 90-degree exchange of the two eigenvectors with det A=1.
+Then [A,B]=B^-2 and d([A,B])=2 sin(alpha) equals this cap.
+It applies symmetrically to BOTH original Hatcher children under
+the actual flat source commutator equality.
+
+### Exact selected-W first-child floor
+
+The earlier source-independent trace Frobenius certificate for W
+was r=854996726408/648677790003, with d(W)^2>=r.
+For delta=3/5, the sharp direct squared cap is
+
+    c_arc(3/5)^2 = 819/625
+    r - 819/625 = 3105843992543/405423618751875 > 0.
+
+Therefore for the actual selected W= [A,B], **BOTH** child gaps
+MUST satisfy d(A)>3/5 and d(B)>3/5. An exact rational
+stronger bound from the same certificate is >6019/10000;
+the boundary where the lower r meets the direct squared cap is
+approximately 0.60194456. This is a necessary numerical property
+of any abstract source-marked selected-W representation, NOT
+a measured meridian length or new theoretical neutrino observable.
+
+A source-compatible locally bounded connection M and TRUE child
+meridian length L_child would obey d(child)<=M L_child.
+Consequently any actual source loop with M L_child<=3/5
+**rules out selected W immediately** (flat case). Two-sided
+first-generation depth is unnecessary for *rejection*, though both
+child lower bounds hold for any possible realization.
+
+New Git-blob-byte-executed exact program:
+`scripts/check_horn_su3_direct_child_gap_floor.py`
+blob `7421fd621cd264ccb984442c8abc3bec74aeae92`, local PASS
+exact Q calculations and SU3 spectral-swap matrix family;
+the toy metric L=1/4,1/8 test is NOT source geometry.
+
+### ONE-STAGE nonflat Stokes margin: exact rationals, no radicals needed
+
+For a CURVED connection, the actual based root differs from the
+commutator of transported child Wilson loops by eta, so
+
+    d(Wroot) <= eta + c_arc(delta_child).
+
+The root and child have strict rational enclosures:
+
+    r > (287/250)^2,
+    c_arc(3/5)^2=819/625 < (229/200)^2,
+    229/200 + 3/1000 = 287/250.
+
+Hence a genuine source step satisfying BOTH
+
+    d(child)<=3/5   and   eta<=3/1000
+
+contradicts the selected W, with NO recursive length rate,
+no 2^n budget, and no all-level source Stokes data. The eta
+must come from an actual source-based homotopy and the chosen
+connection (possibly a transported curvature-area cap K*Area);
+it CANNOT be set by abstract pi1 relations alone. For the
+flat case eta=0 automatically.
+
+New byte-executed committed program
+`scripts/check_horn_selected_w_one_stage_curved_cut.py`
+blob `c42ddbc62cf15e97d3f44542bda2dd0a018c8f02`,
+local PASS exact bound, synthetic metric+area budget and larger
+eta fail-closed countercontrol. Lean #84
+`HornSharpSiblingArcCut.lean` now source-writes conditional exact
+selected-W child floor and curved one-step scalar contradiction;
+the true SU3 matrix norm, metric meridian, based Stokes and Lean kernel
+remain separately unverified.
+
+### Final source-specific blocker under Pareto/Ibrahim
+
+P0: identify **ONE** actual Hatcher first-generation child meridian
+with correct generator/conjugacy, whole-stage X_1 avoidance and
+physical Euclidean arclength. Using the selected W norm r,
+the immediate FLAT acceptance boundary is simply M*L<=3/5.
+
+P1: for the curved consumer, supply the SAME source-based parent to
+child-commutator homotopy with eta<=3/1000. The nested X_n clearance
+and rigid C3 transport are reusable from the existing Hatcher and
+#1244 geometry once ONE source-marked local loop has been constructed.
+Do not promote any synthetic curvature K, area, radius, or M to
+the source actual gauge configuration.
+
+The previous asymptotic sibling-tail theorem is still a valid more
+general result for **arbitrary nontrivial roots** and variable
+sibling gaps, but it is no longer the highest-Pareto acceptance
+test for this particular selected W.
