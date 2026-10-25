@@ -131,12 +131,13 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- Original-published source instances are counted individually, including
 -- different dated reprints. Common author roots do not become experiments.
--- 48 primary source atlas instances preceded this user-supplied cloudbusting
--- literature cut, which adds twelve different original/publication carriers.
--- Multiple Reddit witnesses and the same 1953 event are NOT independent trials.
-sourceAtlasCountIsSixty :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 60
-sourceAtlasCountIsSixty = refl
+-- Earlier 60-source Reddit/Guardian historical cut now has five further
+-- source carriers including real NOAA Bangor records, same-station metadata,
+-- an earlier local press item and a Kansas location false-match control.
+-- More source objects are NOT more independent weather experiments.
+sourceAtlasCountIsSixtyFive :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 65
+sourceAtlasCountIsSixtyFive = refl
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -501,6 +502,41 @@ originalWindingGuideSiteNotAnAtmosphericDevice :
   Atlas.relationClass Atlas.windingGuideDomainNotRainMachineProof ≡
   Atlas.documentaryDistinction
 originalWindingGuideSiteNotAnAtmosphericDevice = refl
+
+------------------------------------------------------------------------
+-- Original Bangor weather receipt: arithmetic over quoted GHCN-Daily
+-- tenths-mm values; the weather cause and source-endpoint remain external.
+------------------------------------------------------------------------
+
+independentBangorJuly6To8Precipitation : 
+  Atlas.tenthsMillimetre Atlas.bangorJuly6 +
+  Atlas.tenthsMillimetre Atlas.bangorJuly7 +
+  Atlas.tenthsMillimetre Atlas.bangorJuly8 ≡ 305
+independentBangorJuly6To8Precipitation =
+  Atlas.bangorJuly6Through8TotalTenthsMm
+
+noaaMeasuredRainDoesNotProveReichCause :
+  Atlas.historicalTransmissionProved Atlas.bangorOriginalObservedRainNotRainmakingProof ≡ false
+noaaMeasuredRainDoesNotProveReichCause = refl
+
+noaaTwoPagesOneWeatherStation :
+  Atlas.root Atlas.noaaBangorRainSourceClaim ≡
+  Atlas.root Atlas.noaaBangorStationIdentityClaim
+noaaTwoPagesOneWeatherStation = refl
+
+noaaStationMetadataNotIndependentSecondRainTrial :
+  Atlas.relationClass Atlas.noaaStationIdentityNotTwoWeatherExperiments ≡
+  Atlas.documentaryDistinction
+noaaStationMetadataNotIndependentSecondRainTrial = refl
+
+july8NewspaperNotSecondRainstorm :
+  Atlas.historicalTransmissionProved Atlas.ellsworthAmericanEarlierButNotIndependentWeatherTrial ≡ false
+july8NewspaperNotSecondRainstorm = refl
+
+ellsworthKansasNotOriginalMaineLocale :
+  Atlas.relationClass Atlas.kansasWeatherIsNotMaineReichEvent ≡
+  Atlas.documentaryDistinction
+ellsworthKansasNotOriginalMaineLocale = refl
 
 ------------------------------------------------------------------------
 -- HOE_MATH / 5D SPIRITUALITY: NO NUMBER-ID OR ONTOLOGY TRANSFER
