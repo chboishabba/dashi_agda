@@ -52,10 +52,10 @@ sameCurrentObservationForDifferentFuture =
   Temporal.equalReceivedPrefixesGiveEqualObservedOutputs
     _+_ suc zero chosenPrefix laterSequenceA laterSequenceB
 
-arrivingEPrecedesArrivingC : (Temporal.receivedE Temporal.earlier? Temporal.receivedC) ≡
+arrivingEPrecedesArrivingC : (Temporal._earlier?_ Temporal.receivedE Temporal.receivedC) ≡
   true
 arrivingEPrecedesArrivingC = Temporal.receptionEC
 
-sourceCPrecedesSourceE : (Temporal.sourceC Temporal.earlier? Temporal.sourceE) ≡
+sourceCPrecedesSourceE : (Temporal._earlier?_ Temporal.sourceC Temporal.sourceE) ≡
   true
 sourceCPrecedesSourceE = Temporal.sourceCE
