@@ -83,3 +83,4 @@ import DASHI.Cognition.PNF.SensibLawCullenResidualAdmissionBidiExact
 
 -- Finite order-information and uptake/retrieval separation (Rodgers 2026).
 import DASHI.Cognition.PNF.EnactedTemporalOrderExact
+import DASHI.Cognition.PNF.EnactedTemporalOrderRegression
