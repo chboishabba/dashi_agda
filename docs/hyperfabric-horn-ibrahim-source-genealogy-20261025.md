@@ -59,3 +59,14 @@ theorems or proof of a three-sector physical model. At the
 geometry frontier, first-link acquisition prioritises identifying
 the SAME Hatcher meridians in #1244's source-supported atlas
 with lengths merely tending to zero (not necessarily q^n).
+
+
+## 2026-10-25 first-link extension: sharp SU3 arc versus original Gotô/Hatcher
+
+**Important attribution discriminator:** Gotô's 1949 original theorem says every element of a compact connected semisimple group is a commutator. It does NOT give the quantitative sibling-arc estimate below; the source proof here uses elementary *unitary norm geometry*, independently derived from B+B* and a scalar-centred additive commutator. We do not imply Gotô discovered the coefficient, and do not claim originality over all unsearched matrix-analysis literature.
+
+**This cut's exact calculated producer:** `scripts/check_horn_su3_sharp_sibling_arc_cut.py`, byte-executed and Git-blob matched, proves exact rational coefficient-square and SU3 matrix sharpness controls, with threshold delta_star=sqrt(2-sqrt(3)). This enhances prior Agda #1249 / Lean #84 universal coefficient result; it is not a new Alexander embedding, a new selected neutrino W (belongs #1247), or an experimental source. The analytic argument is fully stated in `docs/hyperfabric-horn-sharp-su3-arc-source-clearance-maxcut-20261025.md`; the native Lean source merely formalises rational consequences pending kernel compilation and the true matrix norm bridge.
+
+**Ibrahim high-fanout source-object resolution:** Hatcher's original nesting X_(n+1) subset X_n is already a complete abstract finite-to-future *avoidance* donor: stage-wide avoidance at X_n implies avoidance of all later stages and B. Existing Agda #1244 C3 isometric satellite rotation similarly copies real arclength/clearance across three sectors, once marking is supplied. New source-written Agda `HornStageClearanceC3SourceCutExact.agda` and byte-executed geometry negative controls preserve these implications without inventing the still-absent source-specific marked meridian or surface. Only the latter same-object geometry is P0; round toy tube circles, arbitrary-link examples and Cantor addresses remain NEGATIVE controls, not alternate sources.
+
+**Provenance QID/Dewey:** No new QID or Dewey mapping was verified during this cut. Keep null; use stable original DOI and repo paths only. Real physical action, connection, finite-energy claim and empirically measured holonomy remain unpromoted.
