@@ -389,3 +389,12 @@ deaChainReactionDistinctCaseLocator =
 chainReaction2023ReportedClosingDateOnly : String
 chainReaction2023ReportedClosingDateOnly =
   "2023-06-16, as attributed to Bloomberg March 2026 by subsequent secondary sources; original signed DEA closing instrument uninspected. The date may be a discovery lead, not closed outcome evidence."
+
+
+hsiChainReaction2011ContemporaneousSenateCarrier : String
+hsiChainReaction2011ContemporaneousSenateCarrier =
+  "2011-06-22 Senate Judiciary original hearing S.HRG.112-922, testimony by ICE Assistant Deputy Director Erik Barnett: ICE-led operation Chain Reaction was announced the prior week against counterfeit sales to federal government / military, govinfo CHRG-112shrg92565 hearing PDF page index 17. Original government published hearing text located; screenshot of page 17 timed out, so native page-image receipt is not certified. This is early HSI programme testimony, NOT 2010-opened DEA operation NY-NYS-0829."
+
+hsiChainReaction2011FirstPersonAttribution : String
+hsiChainReaction2011FirstPersonAttribution =
+  "Erik Barnett, ICE Assistant Deputy Director, testifying 2011-06-22; contemporaneous witness speaking for HSI/ICE programme, distinct dated witness product from later HSI 2019 factsheet but overlapping same institution; count as a chronology corroboration, NOT independent DEA oversight or DEA closure receipt."
