@@ -188,3 +188,26 @@ diagonalPosFixed = refl
 -- These are three concrete witnesses only; the full old240 dependent
 -- action restriction, cycle enumeration and the numerical E8 no-go
 -- retain their independent Python and Lean proof-status ledgers.
+
+-- Exact finite Weyl-order residue. This is a literal arithmetic
+-- certificate, NOT a constructed Agda W(E8) action or proof that any
+-- proposed representation must preserve the selected root system.
+-- E8 root-system W order is classical; modern source discussion:
+-- R. Winter & R. van Luijk (2021),
+-- DOI 10.1007/s00373-021-02315-8.
+weylE8Order : Nat
+weylE8Order = 696729600
+
+wE8OrderDivisionWitness : weylE8Order ≡ 13 * 53594584 + 8
+wE8OrderDivisionWitness = refl
+
+thirteenTimesSixPlusThree : 81 ≡ 6 * 13 + 3
+thirteenTimesSixPlusThree = refl
+
+thirteenTimesEighteenPlusSix : 240 ≡ 18 * 13 + 6
+thirteenTimesEighteenPlusSix = refl
+
+-- The original finite source action and full E8 root-system action
+-- must be separately represented as SAME objects before equivariance
+-- can be claimed. Classical Lagrange's theorem blocks that specific
+-- action matching since W(E8) cannot have an order-13 automorphism.
