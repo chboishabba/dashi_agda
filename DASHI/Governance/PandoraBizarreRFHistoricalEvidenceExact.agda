@@ -421,6 +421,66 @@ reviewIsNotNewCohort :
   interpretationOfExistingCohort ≡ genuinelyNewHumanCohort → ⊥
 reviewIsNotNewCohort ()
 
+-- Three separate publication objects do NOT imply three independently
+-- recruited populations. This is a finite Ibrahim source-root regression.
+data HistoricalCohortPublication : Set where
+  lilienfeld1978InvestigatorReport : HistoricalCohortPublication
+  senate1979Retelling : HistoricalCohortPublication
+  elwood2012IndependentReview : HistoricalCohortPublication
+
+data CohortSourceRoot : Set where
+  lilienfeldOriginalPopulation : CohortSourceRoot
+
+cohortSourceRoot : HistoricalCohortPublication → CohortSourceRoot
+cohortSourceRoot lilienfeld1978InvestigatorReport = lilienfeldOriginalPopulation
+cohortSourceRoot senate1979Retelling = lilienfeldOriginalPopulation
+cohortSourceRoot elwood2012IndependentReview = lilienfeldOriginalPopulation
+
+senateReportIsNotNewPopulation :
+  cohortSourceRoot lilienfeld1978InvestigatorReport ≡
+  cohortSourceRoot senate1979Retelling
+senateReportIsNotNewPopulation = refl
+
+elwoodReviewIsNotNewPopulation :
+  cohortSourceRoot lilienfeld1978InvestigatorReport ≡
+  cohortSourceRoot elwood2012IndependentReview
+elwoodReviewIsNotNewPopulation = refl
+
+-- Field reconstruction and an observed prospective source run have different
+-- empirical authority. The actual 1967 probe measurements are NOT replaced
+-- by a 1980 retrospective fitted spatiotemporal physical map.
+data RFFieldEvidenceObject : Set where
+  original1967SensorReading : RFFieldEvidenceObject
+  mallalieu1980RetrospectiveModel : RFFieldEvidenceObject
+  ntia1981SameModelReprint : RFFieldEvidenceObject
+
+data FieldEvidenceStanding : Set where
+  firsthandInstrumentTrace : FieldEvidenceStanding
+  reconstructedModel : FieldEvidenceStanding
+  reproducedModel : FieldEvidenceStanding
+
+fieldStanding : RFFieldEvidenceObject → FieldEvidenceStanding
+fieldStanding original1967SensorReading = firsthandInstrumentTrace
+fieldStanding mallalieu1980RetrospectiveModel = reconstructedModel
+fieldStanding ntia1981SameModelReprint = reproducedModel
+
+modelIsNotOriginalSensorRecord :
+  fieldStanding mallalieu1980RetrospectiveModel ≡
+  fieldStanding original1967SensorReading → ⊥
+modelIsNotOriginalSensorRecord ()
+
+-- Different signal / shielding eras are NOT automatically comparable:
+-- 1980 Mallalieu reports separately TUMS, later MUTS-1/2, and 1976
+-- screen installation. These constructors are documentary categories only.
+data MoscowRFExposureEra : Set where
+  tums1966ToMay1975 : MoscowRFExposureEra
+  mutsMay1975ToFeb1976 : MoscowRFExposureEra
+  mutsScreenedAfterFeb1976 : MoscowRFExposureEra
+
+eraIsNotInterchangeable :
+  tums1966ToMay1975 ≡ mutsScreenedAfterFeb1976 → ⊥
+eraIsNotInterchangeable ()
+
 pandoraKoslovObservedOriginalRecords : BoundedLineageEdge
 pandoraKoslovObservedOriginalRecords = boundedLineageEdge
   originalPrimateHighDoseExperiment pandoraMcIlwainExperimentalReassessment
@@ -477,6 +537,12 @@ pandoraRetrospectiveAccountTension = boundedLineageEdge
   arpaPandora darpa1977DisavowalStatement disputedRetrospectiveCharacterisation heilmeier1977
   "DARPA director in 1977 denied awareness of DoD work probing microwave mind-control possibilities; Cesaro 1967 recorded recommendation to study possible weapon applications to behavioural effects"
   "The difference between a 1967 recommendation and a 1977 claim about actual sponsored projects prevents inferring a strict factual contradiction, deliberate deception, or operational capability"
+
+-- 23 distinct dated publication/source objects in this consumer's current
+-- source atlas. Count is documentary, not independent scientific studies.
+sourceCarrierCountIsTwentyThree :
+  Source.sourceCount (Source.sources sourceAtlas) ≡ 23
+sourceCarrierCountIsTwentyThree = refl
 
 -- Documentary possession, programme hardware, and experiment performance are
 -- different kinds of object. Asset transfer does not prove transfer of data.
