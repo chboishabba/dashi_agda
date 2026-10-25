@@ -98,3 +98,39 @@ print('PASS M81 orbits 1+1+1+78; old240 transported six fixed + three 78-orbits'
 print('PASS original T5=243 and diagonal-removed 240 reciprocal chart; 6+234 split')
 print('PASS old E6 quadratic strata 243=81+90+72, relative 240=80+90+70')
 print('OPEN Lean/Agda kernel, SL3 splitting, E8/full-Weyl and physical intertwiners')
+
+
+# The cheap three-shear source-specific order-thirteen obstruction.
+# Unlike the full generated-group receipt, this gives an EXPLICIT
+# source automorphism incompatible with ANY fixed E8 Weyl-root action.
+def short_thirteen(m):
+ for i,j in ((0,1),(1,2),(2,0)):
+  m=lift(m,i,j)
+ return m
+
+def cycle_profile(points, action):
+ seen=set(); classes=Counter()
+ for z in points:
+  if z in seen:continue
+  v=z;n=0
+  while v not in seen:
+   seen.add(v); n+=1; v=action(v)
+  assert v==z,('not a permutation',z,v)
+  classes[n]+=1
+ assert sum(length*multiplicity for length,multiplicity in classes.items())==len(points)
+ return classes
+
+assert cycle_profile(M81,short_thirteen)=={1:3,13:6}
+assert short_thirteen(((1,0,0),0))==((1,0,1),2)
+def short_thirteen_on_old240(z):
+ m,t=chart(z)
+ return unchart(short_thirteen(m),t)
+assert cycle_profile(old240,short_thirteen_on_old240)=={1:6,13:18}
+# Classical E8 root automorphism group = W(E8).
+E8_WEYL_ORDER=696729600
+assert E8_WEYL_ORDER%13==8
+assert E8_WEYL_ORDER%78!=0
+print('PASS explicit 3 corrected source shears: M81 3 fixed + 6*13-cycles')
+print('PASS old diagonal-punctured 240: 6 fixed + 18*13-cycles')
+print('PASS prime13 Lagrange obstruction against actual Weyl E8 root-system action')
+print('BOUNDARY: only same-action E8 Weyl-root recognition is excluded, not other 240 bijections')
