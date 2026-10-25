@@ -86,3 +86,39 @@ conditions to base99 and terminate on sign(sin(99^(9999!))).
 
 Attribution: classical Machin (1706) arctangent identity and elementary
 sine half-period signs; DASHI-specific finite choice and exact script.
+
+## 2026-10-26: punctured-nine hexadecimal arithmetic and P-vs-NP resource audit
+
+Source carrier: OggSSPP2BalancedTernaryPuncturedPlaneExact has EIGHT
+concrete nonzero NineSheet points with native antipode in FOUR pairs.
+The DISJOINT UNION of two copies has 16 elements. A chosen indexing
+8*s+i transports ordinary Z/16Z addition with exact low-three-bit
+carry, as exhaustively checked in check_pickover_punctured_hex_cost_audit.py.
+This is a *transported ring operation*, not an intrinsic multiplication
+law already established for the punctured geometry.
+
+STRONG NEGATIVE CONTROL: native antipode on two copies has ZERO fixed
+points, whereas x -> -x mod16 has exactly TWO fixed points (0,8).
+No bijection can intertwine these involutions. In particular the
+previously-owned reflection commuting square cannot simply be
+rebranded as hexadecimal additive inverse. Separate phase-action
+intertwiner needed. This is stronger than a cardinality remark and
+avoids falsely promoting source geometry to BBP arithmetic.
+
+Resource prior art: Agda P-vs-NP PR #1129 exact candidate execution/
+static program-size account, and PR #1040 identity-observer
+losslessness, are negative-controls on purported information lower
+bounds. Source-written compact repeated-square paths are NOT cheap
+numeric squarings of N, and representational efficiency by itself says
+nothing about the producer cost of a signed real-phase certificate.
+Classical binary powering and 1995 BBP digit extraction retain source
+authorship. Standard BBP still needs order d terms for digit index d;
+power-of-two base does not produce an instant sign for sin(16^(1616!)).
+
+Pending acceptance: actual operation-preserving BBP adapter that
+preserves native geometry or documents changes of structure; check
+cost for constructing AND validating the digit/phase witness; find an
+effective sublinear terminal sign algorithm or an explicit lower bound
+only for a specified observer class. Original target unchanged and
+terminal sine sign OPEN. Agda exact-head typecheck and Actions receipt
+still absent.
