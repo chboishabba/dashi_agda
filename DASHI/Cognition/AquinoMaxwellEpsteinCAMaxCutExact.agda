@@ -2460,3 +2460,30 @@ ftcBannonCIDDoesNotPayWholeNetworkH3 :
   collectiveAquinoPROMISHierarchyPaid
     canonicalBannonFTCCIDAdversarialBoundary ≡ false
 ftcBannonCIDDoesNotPayWholeNetworkH3 = refl
+
+
+------------------------------------------------------------------------
+-- BANKING OWNER REUSE: ORIGINAL FEDERAL "CHAIN REACTION" NAME COLLISION
+-- Reuse the specific already-owned DEA/HSI attribution discriminator.
+-- No imported HSI counterfeit action may automatically pay a DEA
+-- narcotics outcome or 2015 Black/Epstein same-transaction identity.
+------------------------------------------------------------------------
+
+canonicalFederalChainReactionHomonymOwner : Banking.ChainReactionFederalNameCollisionCut
+canonicalFederalChainReactionHomonymOwner =
+  Banking.canonicalChainReactionFederalNameCollisionCut
+
+chainReactionOriginalNameCollisionNotOneOperation :
+  Banking.sameNameMeansSameInvestigation
+    canonicalFederalChainReactionHomonymOwner ≡ false
+chainReactionOriginalNameCollisionNotOneOperation = refl
+
+hsiCounterfeitProceedingsNotEpsteinDrugDisposition :
+  Banking.hsiCounterfeitCasesAreDEADrugOffenceDispositions
+    canonicalFederalChainReactionHomonymOwner ≡ false
+hsiCounterfeitProceedingsNotEpsteinDrugDisposition = refl
+
+reported2023DEAClosureStillNeedsOriginalInstrument :
+  Banking.reportedJune2023DEAClosureHasSignedNativeInstrumentHere
+    canonicalFederalChainReactionHomonymOwner ≡ false
+reported2023DEAClosureStillNeedsOriginalInstrument = refl
