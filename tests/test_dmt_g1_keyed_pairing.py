@@ -25,7 +25,9 @@ def fixture():
             rows.append({"participant_id": pid, "arm": arm, "g1": g1,
                          "sample_count": 12,
                          "condition_session_reference": "synthetic-session-"+pid+"-"+arm,
-                         "g1_label_stream_reference": "synthetic-G1-"+pid+"-"+arm})
+                         "g1_label_stream_reference": "synthetic-G1-"+pid+"-"+arm,
+                         "epoch_boundary_reference": "synthetic-single-epoch-"+pid+"-"+arm,
+                         "label_sequence_type": "samplewise"})
     return {"schema": SCHEMA, "mode": "synthetic", "dataset_id": "synthetic:3-person-crossover",
             "analysis_source_commit": AUTHOR_CODE_COMMIT,
             "source_g1_export_blob": AUTHOR_G1_EXPORT_SHA,
@@ -99,6 +101,26 @@ class G1KeyedPairingTests(unittest.TestCase):
     def test_nan_G1_rejected(self):
         f = fixture(); f["rows"][0]["g1"] = "NaN"
         self.assert_invalid(f)
+
+    def test_missing_sequence_type_rejected(self):
+        f = fixture(); f["rows"][0]["label_sequence_type"] = "unknown"
+        self.assert_invalid(f)
+
+    def test_mixed_jump_and_samplewise_rejected(self):
+        f = fixture(); f["rows"][0]["label_sequence_type"] = "jump_collapsed"
+        self.assert_invalid(f)
+
+    def test_sequence_boundary_required(self):
+        f = fixture(); f["rows"][0]["epoch_boundary_reference"] = ""
+        self.assert_invalid(f)
+
+    def test_source_aligned_jump_type_admissible_synthetically(self):
+        f = fixture()
+        for row in f["rows"]:
+            row["label_sequence_type"] = "jump_collapsed"
+        result = audit(f)
+        self.assertEqual(result["label_sequence_type"], "jump_collapsed")
+        self.assertTrue(result["mixed_sequence_types_rejected"])
 
     def test_absent_length_rejected(self):
         f = fixture(); f["rows"][0]["sample_count"] = None
