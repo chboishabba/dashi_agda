@@ -182,3 +182,75 @@ calibratedReadoutIfEstimatesCorrect :
   (estimatedC earlier? estimatedE) ≡ true
 calibratedReadoutIfEstimatesCorrect estimatedC estimatedE hC hE
   rewrite hC | hE = sourceCE
+
+
+------------------------------------------------------------------------
+-- Generalized statement of the order-erasure collision.
+--
+-- Any function into a type of conditional response distributions receives
+-- exactly the same input for CE and EC. This proves equality of *laws*
+-- without asserting equality of separately sampled outputs. It is the
+-- finite non-stochastic prerequisite, not a probability kernel formalization.
+------------------------------------------------------------------------
+
+sameKernelResponseUnderOrderErasure :
+  {Distribution : Set} (kernel : FeatureBag → Distribution) →
+  kernel (forgetOrder cThenE) ≡ kernel (forgetOrder eThenC)
+sameKernelResponseUnderOrderErasure kernel = refl
+
+------------------------------------------------------------------------
+-- Future masking inspired by the related source-written TimesFM-3
+-- noninterference work in dashi_lean4 PR #83 (2026-10-23). The latter
+-- was NOT merged or copied as a theorem dependency. This generic
+-- list-prefix theorem is a DASHI extension, motivated by Rodgers's
+-- shared-prefix Proposition 5 and the existing demand-local PNF owners.
+------------------------------------------------------------------------
+
+listLength : {A : Set} → List A → Nat
+listLength [] = zero
+listLength (_ ∷ rest) = suc (listLength rest)
+
+prefixOfLength : {A : Set} → Nat → List A → List A
+prefixOfLength zero xs = []
+prefixOfLength (suc n) [] = []
+prefixOfLength (suc n) (x ∷ xs) =
+  x ∷ prefixOfLength n xs
+
+prefixIgnoresFutureSuffix :
+  {A : Set} (prefix suffix : List A) →
+  prefixOfLength (listLength prefix) (prefix ++ suffix) ≡ prefix
+prefixIgnoresFutureSuffix [] suffix = refl
+prefixIgnoresFutureSuffix (x ∷ prefix) suffix
+  rewrite prefixIgnoresFutureSuffix prefix suffix = refl
+
+equalReceivedPrefixesGiveEqualOnlineStates :
+  {State Input : Set} →
+  (step : State → Input → State) →
+  (start : State) →
+  (prefix laterA laterB : List Input) →
+  runPrefix step start
+    (prefixOfLength (listLength prefix) (prefix ++ laterA))
+  ≡
+  runPrefix step start
+    (prefixOfLength (listLength prefix) (prefix ++ laterB))
+equalReceivedPrefixesGiveEqualOnlineStates step start prefix laterA laterB
+  rewrite prefixIgnoresFutureSuffix prefix laterA
+        | prefixIgnoresFutureSuffix prefix laterB = refl
+
+-- The consumer may be a reported state, a prediction or a conditional
+-- distribution: equality follows by applying the *same* observer to
+-- the two same-prefix states. It does not give a future oracle.
+equalReceivedPrefixesGiveEqualObservedOutputs :
+  {State Input Output : Set} →
+  (step : State → Input → State) →
+  (observe : State → Output) →
+  (start : State) →
+  (prefix laterA laterB : List Input) →
+  observe (runPrefix step start
+    (prefixOfLength (listLength prefix) (prefix ++ laterA)))
+  ≡
+  observe (runPrefix step start
+    (prefixOfLength (listLength prefix) (prefix ++ laterB)))
+equalReceivedPrefixesGiveEqualObservedOutputs step observe start prefix laterA laterB
+  rewrite prefixIgnoresFutureSuffix prefix laterA
+        | prefixIgnoresFutureSuffix prefix laterB = refl
