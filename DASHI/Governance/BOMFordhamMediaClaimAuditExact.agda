@@ -12,9 +12,11 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 import DASHI.Governance.TypedGenealogyEdgeExact as Typed
+import DASHI.Core.IntersectionalNonFactorability as INF
 
 data RootRole : Set where
   institutionalAccount : RootRole
@@ -286,3 +288,69 @@ ownershipDoesNotProveEditorialOrder ()
 bondiCoverageDoesNotProveInflammatorySpeech :
   BondiCoverageImpliesInflammatorySpeech → ⊥
 bondiCoverageDoesNotProveInflammatorySpeech ()
+
+
+------------------------------------------------------------------------
+-- ORIGINAL-CLAIM DISCRIMINATOR (25 October 2026)
+--
+-- Source attribution: Graham Readfearn, Guardian 25 Oct 2026, independently
+-- interrogates Berger/Sherrington's Palmerville 2004 17 x 31 C allegation.
+-- BOM says its historical Palmerville values were recorded to nearest degree.
+-- Neither source supplies a verified full audit input deck or original
+-- 17-day measurement instrument log in this module.
+------------------------------------------------------------------------
+
+readfearnPalmervillePrecisionCheck : SourceRoot
+readfearnPalmervillePrecisionCheck = source-root
+  "Graham Readfearn / The Guardian" "2026-10-25"
+  "The Australian reports 'widespread errors' in BoM temperature data. Where is the evidence for those big claims?"
+  "https://www.theguardian.com/environment/2026/oct/25/bom-temperature-record-keeping-under-attack-again"
+  journalistReport
+  "Readfearn reports BOM's response to a specific audit assertion: 17 successive Palmerville readings of 31 C in 2004 can be influenced by nearest-whole-degree recording precision. The newspaper's reporting and institutional explanation are not an independently reconstructed 2004 station record."
+
+-- Finite model of information erased by rounding. All 17 published days
+-- can read 31 C while two hypothetical histories disagree about the first
+-- underlying temperature (31.0 C versus 30.6 C in tenths of a degree).
+-- A second varied-history endpoint can be 31.4 C. This is not a station
+-- reconstruction, random model, probability estimate or proof that 2004
+-- measurements were in fact produced by either hypothetical history.
+
+data PalmervilleLatentHistory : Set where
+  allDaysExactly310Tenths : PalmervilleLatentHistory
+  firstDay306OtherDaysVary : PalmervilleLatentHistory
+
+data PalmervilleSeventeenDayObservedReport : Set where
+  seventeenWholeDegree31Reports : PalmervilleSeventeenDayObservedReport
+
+roundedSeventeenDayObservation :
+  PalmervilleLatentHistory → PalmervilleSeventeenDayObservedReport
+roundedSeventeenDayObservation _ = seventeenWholeDegree31Reports
+
+firstDayTenths : PalmervilleLatentHistory → Nat
+firstDayTenths allDaysExactly310Tenths = 310
+firstDayTenths firstDay306OtherDaysVary = 306
+
+lastDayTenths : PalmervilleLatentHistory → Nat
+lastDayTenths allDaysExactly310Tenths = 310
+lastDayTenths firstDay306OtherDaysVary = 314
+
+palmervilleSamePublishedValues :
+  roundedSeventeenDayObservation allDaysExactly310Tenths ≡
+  roundedSeventeenDayObservation firstDay306OtherDaysVary
+palmervilleSamePublishedValues = refl
+
+palmervilleDifferentUnderlyingValue :
+  firstDayTenths allDaysExactly310Tenths ≡
+  firstDayTenths firstDay306OtherDaysVary → ⊥
+palmervilleDifferentUnderlyingValue ()
+
+palmervillePrecisionLossWitness :
+  INF.NonFactorabilityWitness roundedSeventeenDayObservation firstDayTenths
+palmervillePrecisionLossWitness = INF.nonFactorabilityWitness
+  allDaysExactly310Tenths firstDay306OtherDaysVary
+  palmervilleSamePublishedValues palmervilleDifferentUnderlyingValue
+
+palmervilleRoundedValuesCannotDetermineUnroundedDayOne :
+  INF.FactorsThrough roundedSeventeenDayObservation firstDayTenths → ⊥
+palmervilleRoundedValuesCannotDetermineUnroundedDayOne =
+  INF.witnessRulesOutEveryFlatFactorisation palmervillePrecisionLossWitness
