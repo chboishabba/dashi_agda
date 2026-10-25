@@ -19,6 +19,9 @@ import exotic_topology_pl_surface_gluings as pl
 import exotic_topology_pl_frontier_lineage as lineage
 import exotic_topology_braid_crosspr_discriminator as braid
 import exotic_topology_cantor_measure_obstruction as measure
+# Native scripts are owned upstream by horned-sphere PR #1244.
+import alexander_horned_c3_explicit_open_cover as original_cover
+import alexander_horned_c3_pierced_shell_product as original_shell
 
 class ExoticMaxCutTests(unittest.TestCase):
     def test_whitney_real_parametric_image_caution(self):
@@ -129,5 +132,21 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertTrue(receipt['topological_homeomorphism_possible'])
         self.assertFalse(receipt['measure_preserving_homeomorphism_possible'])
         self.assertFalse(receipt['kernel_verified'])
+
+
+    def test_reuse_current_horned_parent_explicit_cover_without_pi1_promotion(self):
+        receipt = original_cover.exact_certificate()
+        self.assertTrue(receipt['inner_strictly_inside_outer'])
+        self.assertTrue(receipt['tube_meets_both_spherical_cuts_in_single_disk'])
+        self.assertEqual(receipt['pair_intersections'],
+                         'U_i intersect U_j = C for i != j')
+        self.assertFalse(receipt['central_pi1_verified'])
+        self.assertFalse(receipt['wild_embedding_verified'])
+
+    def test_reuse_current_horned_parent_shell_stereographic_chart(self):
+        receipt = original_shell.audit()
+        self.assertEqual(receipt['exact_rational_samples'], 867)
+        self.assertEqual(receipt['domain'], '(15/4,17/4) x open unit disk')
+        self.assertFalse(receipt['global_topology_machine_proof'])
 
 if __name__ == '__main__': unittest.main()
