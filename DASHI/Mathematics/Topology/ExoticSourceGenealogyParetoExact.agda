@@ -9,7 +9,9 @@ module DASHI.Mathematics.Topology.ExoticSourceGenealogyParetoExact where
 -- geometric and Lean/Agda kernel obligations.
 --
 -- Primary source objects inspected 2026-10-25:
---   Richards 1963, DOI 10.2307/1993768\n--   Brahana 1921, DOI 10.2307/1968030 (prior compact surface source)\n--   Kerekjarto 1923, DOI from later digital edition 2013
+--   Richards 1963, DOI 10.2307/1993768
+--   Brahana 1921, DOI 10.2307/1968030 (prior compact surface source)
+--   Kerekjarto 1923, DOI from later digital edition 2013
 --   Fox--Artin 1948, DOI 10.2307/1969408
 --   Yoneyama 1917, original Tohoku Math J publication (no DOI
 --     verified by this atlas)
@@ -142,19 +144,49 @@ kerekjartoOriginal = A.mkDOISource
   "older ideal-boundary/noncompact-surface classification ancestor according to Richards; DOI belongs to the 2013 electronic reissue, NOT the 1923 printed object; Richards notes earlier proof gaps"
   A.publicAttribution
 
+
+-- Source archaeology: Artin's 1925 origin predates his 1947 rigorous
+-- coordinate reconstruction; the local PR #1239 is a COMPUTATIONAL
+-- CONSUMER, not the original braid-group theorem or proof of isotopy.
+artin1925Original : A.AttributedSource
+artin1925Original = A.mkDOISource
+  "Emil Artin"
+  "Theorie der Zoepfe"
+  "Abhandlungen aus dem Mathematischen Seminar der Universitaet Hamburg 4, 47-72"
+  "1925"
+  "10.1007/BF02950718"
+  "https://doi.org/10.1007/BF02950718"
+  A.academicArticleSource
+  "original braid-group construction; existing PR #1239 has selected B3-to-SL2Z and finite strand-action models, not a new origin or an ambient-isotopy theorem"
+  A.publicAttribution
+
+artin1947Original : A.AttributedSource
+artin1947Original = A.mkDOISource
+  "Emil Artin"
+  "Theory of Braids"
+  "Annals of Mathematics 48(1), 101-126"
+  "1947"
+  "10.2307/1969218"
+  "https://doi.org/10.2307/1969218"
+  A.academicArticleSource
+  "original coordinate-theory proof update distinguishing braid isotopy from diagram projection; page 101 explicitly points back to the 1925 original and difficulties in its original proof"
+  A.publicAttribution
+
 originalsAndImplementation : List A.AttributedSource
 originalsAndImplementation =
   richardsOriginal ∷
   brahanaOriginal ∷
   kerekjartoOriginal ∷
   foxArtinOriginal ∷
+  artin1925Original ∷
+  artin1947Original ∷
   yoneyamaOriginal ∷
   bombieriDeGiorgiGiustiOriginal ∷
   mardesicShapeSurvey ∷
   hatcherBook ∷
   mccarthyLeanSphere ∷ []
 
-originalCount : A.sourceCount originalsAndImplementation ≡ 9
+originalCount : A.sourceCount originalsAndImplementation ≡ 11
 originalCount = refl
 
 exoticTopologyAtlas : A.AttributedSourceAtlas
@@ -258,8 +290,21 @@ simonsMinimalityLeaf = topologyParetoLeaf
   "minimal cones, singular GMT and geometric variation"
   geometricSameObjectOpen true false
 
+
+-- This seventh leaf is a cross-PR CONSUMER of the older Artin group
+-- and of PR #1239 finite modular/framing results. Neither group
+-- quotient determines isotopy of a selected embedded knot.
+braidFramingLeaf : TopologyParetoLeaf
+braidFramingLeaf = topologyParetoLeaf
+  7 artin1925Original
+  "PR #1239 JInvariant369PuncturedSheetModularBraidActionExact, C3BraidFramingInformationLossExact, and source B3-to-SL2Z matrix probe"
+  "exotic_topology_braid_crosspr_discriminator.py and geometric Seifert/wild-knot acceptance"
+  "full Artin braid/continuous configuration path plus actual closure knot and Seifert surface; endpoint S3 and modular SL2Z kernels are nonfaithful; arbitrary ribbon framing is additional"
+  "Seifert, wild knot, Nielsen-Thurston mapping-class contexts"
+  geometricSameObjectOpen true false
+
 paretoLeafCount : Nat
-paretoLeafCount = 6
+paretoLeafCount = 7
 
 -- Routing metadata never imports mathematical proofs.
 allLeavesRemainConsumerSpecific : Bool
