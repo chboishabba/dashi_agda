@@ -98,7 +98,7 @@ def postselection_fixture():
     selected=(True,)*8+(False,)*2
     assert Q(sum(full),len(full))==Q(1,2)
     assert Q(sum(selected),len(selected))==Q(4,5)
-    assert set(selected).issubset(set(full))
+    assert Counter(selected) <= Counter(full)
     return {'synthetic_complete_trials':20,'complete_hit_fraction':'1/2',
             'synthetic_reported_trials':10,'reported_hit_fraction':'4/5',
             'outcome_or_receiver_modified_by_selection':False,
@@ -122,6 +122,10 @@ def admit_experiment(rows):
     ids=[(r['participant_id'],r['session_id']) for r in rows]
     if any(not all(x) for x in ids) or len(set(ids))!=len(ids):
         raise ValueError('duplicate or missing independent participant/session')
+    # Repeated sessions from one participant are clustered, NOT additional
+    # independently assigned people in this deliberately strict toy gate.
+    if len({participant for participant,_ in ids}) != len(ids):
+        raise ValueError('repeated participant sessions are not independent people')
     if any(r['record_type']!='one-independent-unit' for r in rows):
         raise ValueError('dyadic pairs or EEG epochs cannot be independent units')
     if any(r.get('blinding')!='sealed' for r in rows):
@@ -154,6 +158,11 @@ class TestSocialDeltaCut(unittest.TestCase):
     def test_cross_protocol_fail_closed(self):
         rows=example_rows();rows[0]['protocol_id']='another-study'
         with self.assertRaisesRegex(ValueError,'same-source'):
+            admit_experiment(rows)
+    def test_repeated_participant_new_session_rejected(self):
+        rows=example_rows();rows[1]['participant_id']=rows[0]['participant_id']
+        rows[1]['session_id']='session-2'
+        with self.assertRaisesRegex(ValueError,'independent people'):
             admit_experiment(rows)
     def test_epoch_and_dyad_rejected(self):
         rows=example_rows();rows[0]['record_type']='dyad-pair'
