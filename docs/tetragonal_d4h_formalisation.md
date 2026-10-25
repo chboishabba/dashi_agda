@@ -76,3 +76,27 @@ by exhaustive dependent pattern matching (no postulates or holes).
 current local container; these submitted proofs have not been typechecked
 here. The module does not prove the abstract 16-element group or the
 faithfulness of its action. These remain kernel-level follow-up obligations.
+
+## Full finite group action proof-term cut (2026-10-25)
+
+New file: `DASHI.Mathematics.Symmetry.TetragonalD4hFullActionExact`
+(commit `f046a359b2153dec97dbbd3cf813566bb804568e`).
+
+Explicit pattern matching covers 16³ = 4096 associativity triples
+and 16²×8 = 2048 group-action cases. The native
+`KleinGroupActionInvariantExact.GroupAction` interface is instantiated
+with the eight-site `D4h` action. Eight identity action clauses
+are present. No postulates or holes are introduced.
+
+Independent local Python checks confirm associativity, action
+composition, and the 16 distinct induced permutations. These are
+computational checks, not Agda acceptance receipts. The Agda compiler
+was not installed in the executing environment at this step.
+
+Do not equate the point-group action with a fully constructed spatial
+lattice/Seitz group or the exact atomic symmetry of the specimen.
+The invariant-ring result remains a classical paper proof with
+finite numerical/monomial checks, rather than a kernel-polynomial theorem.
+The exhaustive module is deliberately large; a future condensation
+using reusable algebraic lemmas is a performance optimisation, not
+a prerequisite for its logical finite case coverage.
