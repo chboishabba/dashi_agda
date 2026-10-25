@@ -130,3 +130,56 @@ supported horn discussions, and a trustworthy tame-neighbourhood
 theorem. Preserve the distinction between original mathematical
 authorship, repo adaptation, source-written code, compiler receipt,
 simulation and experimental measurements.
+
+## Full pierced-shell collar: explicit product homeomorphism
+
+This strengthens the previous radius-four **single-sphere** chart.
+Choose local coordinates `(t,v)∈R×R²` around `c_i=9e_i` with
+`t` along `e_i` and let `r=sqrt((t-9)²+|v|²)`.
+For `r∈(15/4,17/4)`, the sole solid intersecting the spherical shell
+is the straight spoke cylinder `|v|≤a=1/4`, `t∈[1/2,17/2]`.
+The excluded cylindrical disk lies on the inward branch
+`t=9-sqrt(r²-a²)`; the outward branch has `t>9` and is never
+in the spoke.
+
+Project from the **removed inward pole** `(t,v)=(9-r,0)`:
+
+```text
+z = v/(t-9+r)
+R(r) = (r + sqrt(r²-a²))/a
+y = z/R(r)
+```
+
+This maps the entire *actual* pierced shell bijectively onto
+`(15/4,17/4) × { y∈R² : |y|<1 }`. Its inverse takes
+`z=R(r)y`, `s=|z|²` and sets
+
+```text
+t = 9 + r(1-s)/(1+s),
+v = 2r z/(1+s).
+```
+
+The identity `(t-9)²+|v|²=r²` and the inverse projection formula
+are algebraic. The boundary condition follows from
+`R(r)+1/R(r)=2r/a`; the inward removed cylinder cap corresponds
+exactly to `|z|≥R(r)`. Since the radii remain in the indicated
+interval, this cap lies within the existing tube endpoints.
+Both maps are continuous; `R(r)>0` for all permitted r.
+Thus the overlap is explicitly an open 3-cell, hence contractible,
+for the chosen geometric scaffold.
+
+The contraction in the product chart to `(r,y)=(4,0)` is
+`H_s(r,y)=((1-s)r+4s,(1-s)y)` for `0≤s≤1`.
+The point `(4,0)` corresponds to the outward pole at `t=13`,
+well outside the tube. The chart is **source-specific** and not
+derived from an unseen infinite horn: its global application uses
+the actual assumption that all three wild satellites are wholly
+inside their inner cut balls.
+
+Executable finite regression:
+`scripts/alexander_horned_c3_pierced_shell_product.py`
+(867 exact rational inverse/sphere/projection checks, plus boundary
+floating checks locally executed). The algebraic formula supplies
+the universal paper argument; finite checks are NOT a Lean topology
+kernel certificate. The remaining Lean obligation is to formalize
+this homeomorphism and its induced trivial fundamental group.
