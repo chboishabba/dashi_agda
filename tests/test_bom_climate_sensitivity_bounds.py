@@ -71,3 +71,31 @@ def test_bound_requires_weights_and_correction_magnitudes():
     # Cannot promote this example to a bound on the actual gridded ACORN
     # dataset without per-observation station weights and true deltas.
     assert equally_weighted_mean_error_bound(200, 7_000_000, 50) < Fraction(1, 100)
+
+
+def round_whole_degree_from_tenths(observed_tenths: int) -> int:
+    """Positive Celsius temperatures rounded to nearest whole degree.
+
+    This is a constructed instrument-resolution illustration, NOT the actual
+    Palmerville 2004 recording transformation or climate series.
+    """
+    assert observed_tenths >= 0
+    return (observed_tenths + 5) // 10
+
+
+def test_seventeen_identical_rounded_days_do_not_identify_latent_tenths():
+    """A single reported 31 C block can arise from varied exact histories."""
+    exact_constant = [310] * 17
+    exact_varied = [306, 314] + [310] * 15
+    assert len(exact_constant) == len(exact_varied) == 17
+    assert exact_constant != exact_varied
+    assert tuple(map(round_whole_degree_from_tenths, exact_constant)) == (31,) * 17
+    assert tuple(map(round_whole_degree_from_tenths, exact_varied)) == (31,) * 17
+    # This disproves unique inverse recovery; it supplies NO probability
+    # estimate for 17 actual Palmerville daily maxima.
+
+
+def test_integer_precision_preserves_a_nontrivial_degree_bin():
+    assert [round_whole_degree_from_tenths(x) for x in range(305, 315)] == [31] * 10
+    assert round_whole_degree_from_tenths(304) == 30
+    assert round_whole_degree_from_tenths(315) == 32
