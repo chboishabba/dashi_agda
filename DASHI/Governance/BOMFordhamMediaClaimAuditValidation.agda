@@ -83,3 +83,25 @@ noMediaOwnerIntentPromotion = A.ownershipDoesNotProveEditorialOrder
 noBondiInflammatoryPromotion :
   A.BondiCoverageImpliesInflammatorySpeech → ⊥
 noBondiInflammatoryPromotion = A.bondiCoverageDoesNotProveInflammatorySpeech
+
+
+-- From the reused, already-canonical nonfactorability theorem: reporting
+-- every day as a whole degree is not an injective map back to latent
+-- tenths-of-a-degree samples. Does NOT give a probability for real Palmerville
+-- 2004 weather or verify the disputed 17 original readings.
+
+palmervilleDistinctHistoriesSameSeventeenRoundedObservations :
+  A.roundedSeventeenDayObservation A.allDaysExactly310Tenths ≡
+  A.roundedSeventeenDayObservation A.firstDay306OtherDaysVary
+palmervilleDistinctHistoriesSameSeventeenRoundedObservations = refl
+
+palmervilleDifferentLatentDayOneIsNotRecoverable :
+  A.firstDayTenths A.allDaysExactly310Tenths ≡
+  A.firstDayTenths A.firstDay306OtherDaysVary → ⊥
+palmervilleDifferentLatentDayOneIsNotRecoverable =
+  A.palmervilleDifferentUnderlyingValue
+
+palmervilleMeasurementPrecisionNotAProbability :
+  A.INF.FactorsThrough A.roundedSeventeenDayObservation A.firstDayTenths → ⊥
+palmervilleMeasurementPrecisionNotAProbability =
+  A.palmervilleRoundedValuesCannotDetermineUnroundedDayOne
