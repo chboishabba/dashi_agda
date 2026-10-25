@@ -51,3 +51,40 @@ Stop a snowball branch when another reprint or derivative adds no new primary th
 - Intended kernel checks (not claimed executed without a compiler): `agda -i . -l standard-library DASHI/Cognition/PNF/EnactedTemporalOrderExact.agda`, analogous checks for the other three Agda files, and `lake build NSPaperBridges` in the Lean repo.
 - **Safe-mode compatibility**: the two Agda modules that reuse legacy `IntersectionalNonFactorability` and `AttributedSourceCore` omit the `--safe` pragma because those imported owners do not declare themselves safe. This avoids falsely claiming transitive Safe Agda certification. They introduce no postulates, holes, or unsafe options. The Miller A3 and Yan pressure modules retain `--safe` where their dependencies permit it.
 - **Fail closed**: Agda typechecks and Lean kernel checks have not been observed in the GitHub connector; the static tests are not substitutes. Neither paper supplies an unconditional global-unforced 3D regularity result or an empirical consciousness proof.
+
+
+## 25 October follow-on: exact cube seed, shared-prefix masking and fresh PR inspiration
+
+### Yan/Rădulescu primary-source correction and stronger structural reuse
+
+Reinspection of the *original printed page 998*, not a paraphrase, shows:
+- Let `a(y)=y(y-T)`, `h(y)=a(y)^q`, and `rho(y)=a(y)^(2(p+1))`.
+- Source `g(y)=a(y)^(q-1)(2y-T)[q - 2(p+1) a(y)^(2(p+1))]`.
+- By formal product and chain rules, `g=h'-h rho'`. Consequently `F=h exp(-rho)` has derivative `D=g exp(-rho)`.
+- The three nonzero coordinates of the paper's `U^(0)` are `eps*(F1 D2 D3, D1 F2 D3, -2 D1 D2 F3)`, where the notation `F1=F(x1)` etc. The common exponential has not been omitted or counted twice.
+- For `p>1, q>2`, both `F` and `D` vanish at `0,T`, so each coordinate vanishes on all six cube faces. The three coordinate partial derivatives have coefficients `1+1-2`, cancelling divergence.
+
+The new **Lean source-written** `RequestProject/NavierStokes/YanRadulescuCubeSeed.lean` implements the separable model with three `HasDerivAt` hypotheses, zero-divergence and six-face boundary lemmas, plus a universal derivative-factor algebra lemma. It **does not yet** instantiate `F,D` with the exact exponential-polynomial expressions in the Lean kernel; that is the next concrete analytic bridge, followed by norms and the actual small-force steady PDE.
+
+A source-replay `scripts/check_yan_radulescu_polynomial_seed.py` uses only integer polynomial arithmetic, not floats or OCR. A local execution of equivalent code checked `p=2..6`, `q=3..9`, `T in {1,2,3}`: **105/105 parameter triples passed** for exact `g=h'-h rho'` and endpoint zeros. This is finite reproducibility, **not a universal proof, and not a run of a GitHub Actions workflow**.
+
+The source's equation (1.3) still omits `div(f)` although source equation (1.1) allows general `f`; the new canonical pressure owners retain `div(f)` until explicitly discharged. Neither the successful cube-seed calculation nor stationary existence establishes 3D unforced global regularity.
+
+### Rodgers prefix noninterference / other current PR donors
+
+- Already-existing **master** owner `DASHI.Core.IntersectionalNonFactorability` still proves the order-erasure obstruction. The appended `sameKernelResponseUnderOrderErasure` proves that **any** fixed map from the unordered observation to response-law codes gives equal codes for CE and EC; it does not prove equality of independently sampled random results.
+- A genuinely new finite theorem states that truncation to the length of a received prefix commutes with appending **any** future suffix, and hence current deterministic state and readout are unchanged if the unseen future is changed. `EnactedTemporalOrderRegression` provides a source-written model with future sequences `[42]` versus `[99]`. It is not a biological prediction or future-data decoder.
+- **Lean PR #83**, TimesFM-3 masked-future/noninterference, is a conceptual donor, **not an imported source theorem**. No unmerged Lean change was copied into Agda or treated as kernel-verified.
+- **Agda PR #1243** source-world empirical nonidentifiability and separate real-world access constraints are a governance pattern, not an assertion that Rodgers's constitutive theory is true. **Agda PR #1259** sperm-whale phonology shows a relevant original-authorship, semantic-conflation and candidate-observation gate pattern. Neither unmerged branch was made a dependency of this PR.
+- **Lean PR #78** OpenAI math corpus provenance separates manuscript claims, source declarations and kernel/cross-prover authority. It is a research genealogy donor only. The 2026 Weinan Wang arXiv:2609.33033 source concerns 2D Galerkin/Leray–Hopf solutions; it cannot inhabit a 3D scale-critical Miller hypothesis.
+
+### Updated Pareto and current live max-cut
+
+1. **P0 source/kernel validation**: `lake build NSPaperBridges` and Agda focused module/rollup typechecks. No package was falsely labelled kernel-green in the connector.
+2. **P1 exact Yan seed expression**: Lean proof `HasDerivAt F (g exp(-rho))` using the exact source polynomials, `p>1,q>2,T>0`; combine with already-source-written six-face and divergence lemmas. Reject if source derivative factor fails.
+3. **P1 Miller physical producer**: actual same-solution `v`, unit-length proof, spatial gradient bound through the same time interval, and `L^4_tL^2_x` projected-vorticity bound for the *same* unforced R³ solution. The new Agda gradient predicate now explicitly depends on both source and direction. Transfer to canonical A3 is **still conditional**.
+4. **P2 Rodgers testable intervention**: specify source/arrival delay calibration, retained trace, fusion/uncertainty, current uptake and matched differential readouts. Compare competing predictions on held-out observations; do not promote a finite code or subjective report to universal phenomenal ontology.
+5. **P3 Yan full steady existence**: smoothing operators, uniform inverse estimates, Nash–Moser derivative losses, convergence, source pressure consistency, boundary problem, and fixed `n>=3` assumptions. Formalising the cube seed does not bypass these.
+6. **P4 publishable cross-domain synthesis**: source-by-source theorem/import manifest, first Git commit versus kernel-success provenance, and a claim lattice that keeps original credit even after Lean-to-Agda porting.
+
+Remaining claims stay gated. A new citation, preprint version, code commit, nonindependent descendant source, PR discussion, or static passing test is not proof or new experimental replication. Consumer-triggered source snowball stops at independent original roots and verified new physical/mathematical objects.
