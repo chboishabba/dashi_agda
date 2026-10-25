@@ -23,6 +23,7 @@ open import Relation.Binary.PropositionalEquality using (sym)
 
 import Real as BishopReal
 import RealProperties as BishopP
+import DASHI.Analysis.BishopPositiveCrossReciprocalUpperExact as Reciprocal
 
 import DASHI.Physics.Closure.NSCanonicalEuclideanPeriodicSemanticCarriersExact as Canonical
 import DASHI.Physics.Closure.NSTriadKNEuclideanSignedFrequencyCarrierRealizationExact as Euclidean
@@ -139,6 +140,65 @@ physicalShellHeatAdmitsPositiveRationalFloor
         (BishopP.0<x⇒posx radiusSquaredPositive)))
 ... | rational , floorPositive , floorBelowShellHeat =
   rational , floorPositive , floorBelowShellHeat
+
+------------------------------------------------------------------------
+-- REAL-INVERSE ANALYTIC A1 SEAM ON THE ACTUAL BISHOP CARRIER
+--
+-- For a physical heat rate a and a *genuine unnormalised rational*
+-- q supplied by the pinned Bishop density theorem, 0<q<a proves
+-- 1/a <= 1/q. The pre-existing PositiveCrossReciprocalUpper
+-- owns the nontrivial constructive inverse law. No fictitious
+-- exact identification of a with an embedded rational is made.
+-- This is a scalar bound, not the unresolved full physical
+-- resolvent curvature/kernel/Gram same-object identification.
+------------------------------------------------------------------------
+
+positiveRationalFloorBoundsPhysicalInverse :
+  (a : BishopReal.ℝ) →
+  (q : ℚᵘ) →
+  (aPositive : BishopReal._<_ BishopReal.0ℝ a) →
+  (qPositive : BishopReal._<_ BishopReal.0ℝ
+    (BishopReal._⋆ q)) →
+  BishopReal._<_ (BishopReal._⋆ q) a →
+  BishopReal._≤_
+    (Reciprocal.positiveInverse aPositive)
+    (Reciprocal.positiveInverse qPositive)
+positiveRationalFloorBoundsPhysicalInverse
+    a q aPositive qPositive qBelowA =
+  BishopP.≤-respʳ-≃
+    (BishopP.*-identityˡ (Reciprocal.positiveInverse qPositive))
+    (Reciprocal.positiveCrossReciprocalUpper
+      qPositive
+      aPositive
+      (BishopP.≤-respʳ-≃
+        (BishopP.≃-symm (BishopP.*-identityˡ a))
+        (BishopP.<⇒≤ qBelowA)))
+
+-- Producer specialized to each physical ν|xi|²: returns both the
+-- EXACT rational witness and its proven reciprocal inequality.
+-- A single shell floor uses the same lemma with the shell lower rate.
+physicalHeatInverseAdmitsRationalUpper :
+  (fluid : Heat.PositiveViscosity) →
+  (point : Heat.PuncturedEuclideanFrequency) →
+  Σ ℚᵘ
+    (λ q →
+      Σ (BishopReal._<_ BishopReal.0ℝ
+            (BishopReal._⋆ q))
+        (λ qPositive →
+          BishopReal._≤_
+            (Reciprocal.positiveInverse
+              (Heat.viscousHeatRatePositive fluid point))
+            (Reciprocal.positiveInverse qPositive)))
+physicalHeatInverseAdmitsRationalUpper fluid point
+  with physicalViscousHeatAdmitsPositiveRationalFloor fluid point
+... | q , qPositive , qBelowA =
+  q , (qPositive ,
+    positiveRationalFloorBoundsPhysicalInverse
+      (Heat.viscousHeatRate fluid (Heat.frequency point))
+      q
+      (Heat.viscousHeatRatePositive fluid point)
+      qPositive
+      qBelowA)
 
 ------------------------------------------------------------------------
 -- High-frequency physical identification.
