@@ -55,3 +55,34 @@ and costs of BOTH producing and checking W(k).
 Do not promote modular CRT observations or symbolic jump cost
 to full real sign computation. Then instantiate b=99,
 k=9999!. Original terminal sign remains open.
+
+
+## 2026-10-25: decisive perfect-ninth-power nilpotence non-descent
+An attractive proposed shortcut says 9|9999! and 99^3=0 in
+Z[omega]/(1-omega)^9, so the real sine phase must be locked.
+The first two premises are true, the proposed real consequence is false.
+The exact Machin rational certificates in
+scripts/check_pickover_ninth_power_non_descent.py establish
+
+  99^9=(99)^9, floor(99^9/pi)=290781571073447469, sin(99^9)<0;
+  99^18=(99^2)^9, floor(99^18/pi)=265633980425984427859213880941867086,
+  sin(99^18)>0.
+
+Both exponent k>=3 images of 99^k are 0 in the same Eisenstein quotient
+and both are perfect ninth powers. No sine-sign map can therefore descend
+to that finite quotient on the whole ninth-power 99-orbit.
+This does NOT refute an analytic source-specific witness at k=9999!, and
+does NOT prove that all finite computations are useless. It rejects an
+invalid same-object transport. No exact-head Agda kernel receipt asserted.
+
+Roadmap: (1) retain exact finite certificates as tests, (2) certify the
+same-phase reflection and integer-power commuting square using existing
+JInvariant369ReflectionEquivarianceExact but DO NOT infer a powering
+intertwiner from reflection equivariance, (3) benchmark base10-only
+factorial Chebyshev U9 jumps with explicit rational error, (4) find a
+source-specific terminal real-phase witness whose producing and checking
+cost is sublinear in factorial position, (5) transfer only proved
+conditions to base99 and terminate on sign(sin(99^(9999!))).
+
+Attribution: classical Machin (1706) arctangent identity and elementary
+sine half-period signs; DASHI-specific finite choice and exact script.
