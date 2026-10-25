@@ -16,6 +16,30 @@ permissions:
   contents: read
 
 jobs:
+
+  agda-source-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install original repo Agda and stdlib version
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: "2.7.0.1"
+          agda-stdlib-version: "recommended"
+      - name: Exact SHA and seven self-owned topology module checks
+        run: |
+          echo "Agda exact HEAD: $GITHUB_SHA"
+          for module in \
+            ExoticAmbientLinkingNoGoExact \
+            ExoticBinaryTernaryPantsCodecExact \
+            ExoticCWExistingDonorWeldExact \
+            ExoticEndProfilesViaCantorExact \
+            ExoticSourceGenealogyParetoExact \
+            ExoticWadaC3BoundaryNoGoExact; do
+            agda -i . "DASHI/Mathematics/Topology/${module}.agda"
+          done
+
   exact-python:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -35,6 +59,7 @@ jobs:
       - name: Direct source-specific braid/endpoint discriminator
         run: python scripts/exotic_topology_braid_crosspr_discriminator.py
 
-# This workflow deliberately does not claim Agda/Lean kernel proofs:
-# its success is finite Python acceptance only. For kernel receipts run
-# pinned environment-specific agda/lake commands separately.
+# The Python job is finite mathematical regression only. The separate
+# Agda job attempts KERNEL typechecks; no success is claimed until the
+# actual GitHub job reports successful execution on the exact commit.
+# This workflow does not check the separate dashi_lean4 PR #86.
