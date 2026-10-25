@@ -6,6 +6,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Governance.BOMFordhamMediaClaimAuditExact as A
 import DASHI.Governance.TypedGenealogyEdgeExact as Typed
+import DASHI.Core.IntersectionalNonFactorability as INF
 
 historicalErrorCannotProveFraud :
   A.rawDigitisationErrorImpliesDeliberateFraud A.canonicalNonPromotionBoundary ≡ false
@@ -102,6 +103,6 @@ palmervilleDifferentLatentDayOneIsNotRecoverable =
   A.palmervilleDifferentUnderlyingValue
 
 palmervilleMeasurementPrecisionNotAProbability :
-  A.INF.FactorsThrough A.roundedSeventeenDayObservation A.firstDayTenths → ⊥
+  INF.FactorsThrough A.roundedSeventeenDayObservation A.firstDayTenths → ⊥
 palmervilleMeasurementPrecisionNotAProbability =
   A.palmervilleRoundedValuesCannotDetermineUnroundedDayOne
