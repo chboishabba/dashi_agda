@@ -7,6 +7,9 @@ module DASHI.Physics.Closure.NSMillerAnisotropicA3BridgeExact where
 -- unforced 3D whole-space mild Navier-Stokes with viscosity normalized to 1,
 -- a SAME-SOLUTION unit direction field v with suitable spatial Lipschitz
 -- regularity, and finite L^4_t L^2_x expenditure of v cross vorticity.
+-- Both gradient and projection predicates are pinned to the same selected
+-- trajectory/time horizon; a gradient estimate from a different solution
+-- cannot inhabit the selected source's direction hypothesis.
 -- These are externally fixed physical predicates, NOT convenient placeholders
 -- that the bridge is entitled to inhabit. A canonical A3 handoff requires
 -- an additional explicit physical/semantic implication.
@@ -21,7 +24,7 @@ record MillerPhysicalPremises
     (MildUnforcedR3 : PhysicalSource → Set)
     (UnitSpatialDirection : Direction → Set)
     (SameSolutionDirection : PhysicalSource → Direction → Set)
-    (SpatialGradientBoundedUntilTime : Direction → Set)
+    (SpatialGradientBoundedUntilTime : PhysicalSource → Direction → Set)
     (CriticalProjectedVorticityFinite :
       PhysicalSource → Direction → Set) : Set where
   field
@@ -29,7 +32,7 @@ record MillerPhysicalPremises
     unitDirection : UnitSpatialDirection selectedDirection
     directionBelongsToSolution :
       SameSolutionDirection selectedSource selectedDirection
-    gradientBound : SpatialGradientBoundedUntilTime selectedDirection
+    gradientBound : SpatialGradientBoundedUntilTime selectedSource selectedDirection
     projectedVorticityBound :
       CriticalProjectedVorticityFinite selectedSource selectedDirection
 
@@ -43,7 +46,7 @@ millerPremisesToCanonicalA3 :
   (MildUnforcedR3 : PhysicalSource → Set) →
   (UnitSpatialDirection : Direction → Set) →
   (SameSolutionDirection : PhysicalSource → Direction → Set) →
-  (SpatialGradientBoundedUntilTime : Direction → Set) →
+  (SpatialGradientBoundedUntilTime : PhysicalSource → Direction → Set) →
   (CriticalProjectedVorticityFinite :
     PhysicalSource → Direction → Set) →
   (MillerConclusion : PhysicalSource → Set) →
