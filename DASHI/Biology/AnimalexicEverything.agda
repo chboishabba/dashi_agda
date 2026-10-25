@@ -45,6 +45,8 @@ open import DASHI.Biology.AnimalCommunicationSceneObservationExact
 open import DASHI.Biology.AnimalCommunicationInteractionExact
 open import DASHI.Biology.AnimalCommunicationLatentExact
 open import DASHI.Biology.AnimalCommunicationSemanticEvidenceExact
+open import DASHI.Biology.SpermWhaleCodaPhonologyExact
+open import DASHI.Biology.SpermWhaleCodaPhonologyRegression
 open import DASHI.Biology.MagpieAnimalCommunicationAdapterExact
 open import DASHI.Biology.AnimalCommunicationMultiObserverVisualBridgeExact
 open import DASHI.Biology.AnimalCommunicationPassiveAcousticLocalizationExact
