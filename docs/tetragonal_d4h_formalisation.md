@@ -63,3 +63,16 @@ python3 scripts/tetragonal_d4h_exact_certificate.py
 
 No claim of Agda typechecking, Lean kernel checking, verified
 space-group identification, or specimen identification is made here.
+
+## Agda proof-term extension (commit 8a89767)
+
+`DASHI.Mathematics.Symmetry.TetragonalD4hGeneratorActionExact`
+provides an eight-site finite carrier with four compass directions and
+upper/lower height; constructs R, S and H as permutations and proves
+R⁴, S², H², SRS=R³, HR=RH, HS=SH, inversion² and rotoinversion⁴
+by exhaustive dependent pattern matching (no postulates or holes).
+
+**Verification boundary:** The Agda executable is unavailable in the
+current local container; these submitted proofs have not been typechecked
+here. The module does not prove the abstract 16-element group or the
+faithfulness of its action. These remain kernel-level follow-up obligations.
