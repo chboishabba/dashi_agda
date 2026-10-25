@@ -37,16 +37,17 @@ def g1_counts(labels):
     if not isinstance(labels, list) or len(labels) < 3 or any(
             type(x) is not int or x < 1 for x in labels):
         raise ValueError("Need >=3 ordered positive integer microstate labels")
-    active = set(labels)
-    if active != set(range(1, max(active) + 1)):
-        # Original MATLAB compresses absent labels. Do not silently conflate
-        # an unlabelled state with a valid state in this adapter.
-        raise ValueError("Nonconsecutive microstate labels require source-aligned remapping")
+    active = sorted(set(labels))
+    # Source MATLAB stats_markov.m removes unobserved state indices before
+    # computing f_ijk. Preserve that behavior for gapped 1-based labels;
+    # report the original support to avoid pretending a source state existed.
+    dense_map = {label: i + 1 for i, label in enumerate(active)}
+    dense = [dense_map[label] for label in labels]
     k = len(active)
-    triple = Counter(zip(labels[:-2], labels[1:-1], labels[2:]))
-    center = Counter(labels[1:-1])
-    forward = Counter(zip(labels[1:-1], labels[2:]))
-    backward = Counter(zip(labels[:-2], labels[1:-1]))
+    triple = Counter(zip(dense[:-2], dense[1:-1], dense[2:]))
+    center = Counter(dense[1:-1])
+    forward = Counter(zip(dense[1:-1], dense[2:]))
+    backward = Counter(zip(dense[:-2], dense[1:-1]))
     terms = []
     for (prev, mid, following), n in triple.items():
         numerator = n * center[mid]
@@ -59,7 +60,9 @@ def g1_counts(labels):
     # nonnegative conditional-information statistic.
     if -1e-10 < g1 < 0:
         g1 = 0.0
-    return {"g1": g1, "k_observed": k, "triples": len(labels) - 2,
+    return {"g1": g1, "k_observed": k, "original_state_support": active,
+            "unobserved_state_indices_compacted": active != list(range(1, max(active) + 1)),
+            "triples": len(labels) - 2,
             "df_original_chi_square": k * (k - 1) ** 2,
             "nonzero_triple_cells": len(triple),
             "no_boundary_transition_inferred": True,
