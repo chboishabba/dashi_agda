@@ -254,3 +254,115 @@ Fresh execution at the exact pushed SHA: NOT YET AVAILABLE.
 The tests and construction are source-written and committed;
 the earlier 8/8 + mesh receipts predate the lineage repair and
 must not be cited as having executed these new tests.
+
+
+## 2026-10-25 newest-PR snowball and stronger clopen discriminator
+
+### Relevant latest branch owners, not a bibliography popularity poll
+
+| Donor PR / original root | Reuse paid | What is *not* promoted |
+| --- | --- | --- |
+| [#1244](https://github.com/chboishabba/dashi_agda/pull/1244), Alexander (1924), Hatcher Example 2B.2 | Existing `ThreeArmCollarCoverAssembly.lean` derives path-connected cover and van Kampen free-product consumer from source-specific **central region / satellite** hypotheses; `AlexanderHornedBinaryTernaryExistingCodecWeldExact` already uses two older DASHI digit codecs and mixed 2/3 resolution | Horn symbolic addresses or one typed conditional collar contract do NOT identify the actual Fox--Artin arc complement; no geometric wildness or unproven smooth equivariant embedding |
+| [#1239](https://github.com/chboishabba/dashi_agda/pull/1239), Artin (1925, 1947) | Actual existing finite modular `B3→SL2(Z)` calculations and punctured T9 shadow, plus separate `C3BraidFramingInformationLossExact` | (S_3) endpoints, (SL_2(ℤ)) monodromy, (B_3) isotopy and ribbon framing are *four different objects*; their kernels are not interchangeable |
+| [#1259](https://github.com/chboishabba/dashi_agda/pull/1259), canonical `QueryIndexedProjectionAdequacyExact` | Existing `IntersectionalNonFactorability` and query-dependent adequacy let the horn-address no-go reuse the *general proof* of nonfactorability and survival under all downstream recharts | Blackwell (1953) and Crenshaw (1991) are conceptual precedents; they did not prove any mathematical Fox--Artin embedding/wildness fact. PR #1259 is an application, not source root |
+| [Lean #86](https://github.com/chboishabba/dashi_lean4/pull/86) | Actual `CantorStage = Integration.Address.Addr n Bool`, coherent tower–stream equivalence source-written; new `ExoticTopologyCantorClopenMeasureNoGo.lean` isolates the universal all-depth divisibility obstruction | Neither finite state equivalence nor the divisibility theorem is the actual Freudenthal end-space homeomorphism or a kernel-certified measure-space classification |
+
+### The braid counterexample with three successive forgetful quotients
+
+The exact original (B_3) generators (sigma_1,sigma_2) have endpoint
+projection to the adjacent transpositions in (S_3). PR #1239 already
+records the modular representation
+(ho(sigma_1)=\begin{pmatrix}1&1\\0&1\end{pmatrix}),
+(ho(sigma_2)=\begin{pmatrix}1&0\\-1&1\end{pmatrix}).
+For (z=(sigma_1sigma_2)^3), its *endpoint permutation* is the
+identity, but (ho(z)=-I), and its braid exponent sum is (6).
+For (z^2), both endpoint and modular images are identities while
+the exponent sum is (12\ne0). This exhibits nonfaithfulness of
+both projections, with no unproved knot isotopy assertion.
+The PR #1239 sample word ((sigma_1^{-1}sigma_2)^3) has exponent
+sum zero but modular image
+(egin{pmatrix}13&-8\\-8&5\end{pmatrix}) of trace 18,
+so the exponent-sum invariant alone is not complete either.
+
+A new source-scoped Python consumer
+`scripts/exotic_topology_braid_crosspr_discriminator.py`
+was committed with a regression test. An independent local SymPy
+replication passed the braid relation, central image, strand
+projection and sample matrix/trace; exact pushed-SHA Python workflow
+execution is NOT claimed.
+
+**Historical attribution:** the original braid source is Artin,
+*Theorie der Zöpfe* (1925), DOI
+[10.1007/BF02950718](https://doi.org/10.1007/BF02950718).
+Artin's *Theory of Braids* (1947), DOI
+[10.2307/1969218](https://doi.org/10.2307/1969218), explicitly
+acknowledges his 1925 work and strengthens the rigorous
+braid-coordinate approach. PR #1239 is a later repository
+*implementation/selected computational donor*, not original
+authorship. `ExoticSourceGenealogyParetoExact.agda` now
+records BOTH sources and a seventh braid/Seifert consumer leaf;
+the source atlas holds eleven independent cited items, without
+fabricated QIDs or library classification numbers.
+
+### New stronger topological measure theorem (mathematical, not kernel claim)
+
+The pre-existing variable-length prefix code `3→0,6→10,9→11`
+already gave one binary/ternary Cantor homeomorphism with nonmatching
+Bernoulli weights. The new source `scripts/exotic_topology_cantor_measure_obstruction.py`
+upgrades the mathematical result: **NO** measure-preserving
+homeomorphism exists between the *fair binary* and *uniform ternary*
+Cantor product measures.
+
+The first ternary-digit cylinder is clopen of measure (1/3).
+The pullback of this cylinder by a homeomorphism must be clopen
+in binary Cantor space. A clopen subset of the compact product
+space is a finite union of prefix cylinders, refinable to a
+single depth (n), and therefore has fair-bit measure (k/2^n).
+If the homeomorphism were measure-preserving,
+(3k=2^n). But (3\nmid 2^n) for every (nge0).
+Contradiction. This does **not** preclude a non-measure-preserving
+homeomorphism, as our codec provides.
+
+Independent local exact rational regression over all binary levels
+0–12 passed; Lean #86 now source-writes the universal
+prime-divisibility theorem `noDyadicClopenMassEqualsOneThird`
+using Mathlib's existing `Nat.Prime.dvd_of_dvd_pow`.
+Neither Lean source has a fresh kernel receipt. This claim is
+about these **specified measures** and these **product topologies**,
+not about arbitrary full-support measures on homeomorphic Cantor spaces.
+
+### Claim-relative projection adequacy, not intrinsic adequacy
+
+`ExoticAmbientLinkingNoGoExact.agda` now imports the EXISTING
+`QueryIndexedProjectionAdequacyExact` and
+`IntersectionalNonFactorability` owners. It supplies:
+- a question about the C3 sector, which *does* factor through the
+  symbolic horn address;
+- a question about a separately marked linking bit, whose two
+  states have the *same* symbolic horn address and different answers;
+- a canonical query defect and general factorisation prohibition;
+- the **all-postrechart obstruction**: any function of only the
+  old symbolic address remains inadequate for the linked-bit query.
+
+This is a reusable exact non-descent proof about marked information,
+NOT a pair of realised tame/wild embeddings and NOT proof of linking
+in Euclidean three-space.
+
+### Updated operational frontier
+
+P0: exact-head Python workflow results and Agda/Lean typecheck
+receipts. The new focused workflow
+`.github/workflows/exotic-topology-focused.yml` follows the
+parent's narrow-test pattern; installation and collection of actual
+run output are separate from adding a YAML file.
+
+P1: locally finite PL surface colimit and actual Freudenthal/Richards
+end homeomorphism (including the corrected parent-child lineage).
+P2: actual Fox--Artin embedded arc, local fundamental group tower,
+and same-object van Kampen certificate using #1244's existing
+three-arm assembly.
+P3: compatible external sphere (H_2) from Hatcher/McCarthy.
+P4: Warsaw, Wada, and geometric Seifert/braid construction.
+The newest whale, media-source and monster PRs supply no proven
+new same-object geometric data for these P0–P4 topology consumers.
+Do not add them merely to make the bibliography large.
