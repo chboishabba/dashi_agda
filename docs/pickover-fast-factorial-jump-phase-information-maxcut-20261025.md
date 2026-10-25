@@ -122,3 +122,23 @@ effective sublinear terminal sign algorithm or an explicit lower bound
 only for a specified observer class. Original target unchanged and
 terminal sine sign OPEN. Agda exact-head typecheck and Actions receipt
 still absent.
+
+## 2026-10-26 BBP punctured-hex small-position constructive adapter
+Added scripts/check_pickover_punctured_hex_bbp_exact.py. The eight
+actual punctured-nine named points on each of TWO sheets become 16
+hexadecimal digit states. Addition/carry and multiplication modulo 16
+are transported through this coding, not inferred intrinsic operations.
+Exact rational BBP sums use pow(16,k-j,8j+r) on j<=k and exact
+rational negative powers on j>k; truncation after j=k+t has
+absolute error <= (8/15)*16^(-t). Certifies hexadecimal digits of π
+243F6A88 at offsets 0..7. Independent local rational check PASS.
+Source root Bailey--Borwein--Plouffe (1995); original source authors
+retain mathematical attribution. DASHI contribution is codec/testing.
+
+The literal extraction uses >=4*(k+1) modular fraction terms for
+position k. Short index description and prior-digit-free extraction do
+not yield poly(log k) work, nor any direct extraction for 1/(2π).
+The native antipodal involution remains incompatible with modular-16
+negation. Compact symbolic jumping and certified small BBP digits are
+complete as separate objects; original Pickover sine sign remains OPEN.
+No Agda kernel or exact-head GitHub Actions execution receipt.
