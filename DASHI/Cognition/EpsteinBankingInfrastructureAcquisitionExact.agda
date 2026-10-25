@@ -304,3 +304,88 @@ ocdetfOutcomeNotProvenBySenateComplaint :
   originalOperationFinalDispositionVerified
     canonicalChainReactionOversightAttributionCut ≡ false
 ocdetfOutcomeNotProvenBySenateComplaint = refl
+
+
+------------------------------------------------------------------------
+-- 2026-10-25 PARETO/Ibrahim ORIGINAL-NAME HOMONYM DISCRIMINATOR
+--
+-- The original HSI/IPR Center Operation Chain Reaction is a 2011-onward
+-- counterfeit DOD/government microelectronics supply-chain initiative.
+-- It is NOT the DEA/OCDETF 2010-opened NY-NYS-0829 investigation with
+-- 2015 Epstein Target 4 memo EFTA00173953. Shared title, Federal
+-- participation, and generic interagency language cannot join cases.
+--
+-- The original 2019 HSI factsheet was parsed AND visually inspected;
+-- the 2022 House hearing is an official attributed HSI description.
+-- Neither is the DEA operational disposition or an Epstein payment.
+------------------------------------------------------------------------
+
+record ChainReactionFederalNameCollisionCut : Set where
+  constructor chain-reaction-federal-name-collision-cut
+  field
+    hsiIPR2019FactSheetOriginalInspected : Bool
+    hsiIPR2019FactSheetSaysStartedJune2011 : Bool
+    hsiTargetIsCounterfeitGovernmentSupplyChain : Bool
+    hsiMicroelectronicsFocus : Bool
+    hsiListedSixteenFederalAndOtherAgencyPartners : Bool
+    house2022IndependentPublicHearingCarrier : Bool
+    house2022IsSecondIndependentHSIInvestigator : Bool
+    dea2015MemoCaseNYNYS0829Located : Bool
+    deaOperationStart2010IndexedIn2015Memo : Bool
+    sameNameMeansSameInvestigation : Bool
+    agencyOverlapMeansSharedCaseIdentity : Bool
+    hsiCounterfeitCasesAreDEADrugOffenceDispositions : Bool
+    reportedJune2023DEAClosureHasSignedNativeInstrumentHere : Bool
+    sourceProvesEitherCoverupOrSameEpsteinBankTransfer : Bool
+open ChainReactionFederalNameCollisionCut public
+
+canonicalChainReactionFederalNameCollisionCut : ChainReactionFederalNameCollisionCut
+canonicalChainReactionFederalNameCollisionCut =
+  chain-reaction-federal-name-collision-cut
+  true true true true true true false true true false false false false false
+
+hsiOperationOriginalFactSheetLocated :
+  hsiIPR2019FactSheetOriginalInspected canonicalChainReactionFederalNameCollisionCut ≡ true
+hsiOperationOriginalFactSheetLocated = refl
+
+hsi2022HearingNotSecondIndependentInvestigation :
+  house2022IsSecondIndependentHSIInvestigator canonicalChainReactionFederalNameCollisionCut ≡ false
+hsi2022HearingNotSecondIndependentInvestigation = refl
+
+sameOperationNameDoesNotPayCaseIdentity :
+  sameNameMeansSameInvestigation canonicalChainReactionFederalNameCollisionCut ≡ false
+sameOperationNameDoesNotPayCaseIdentity = refl
+
+participatingFederalAgenciesDoNotPayCommonTasking :
+  agencyOverlapMeansSharedCaseIdentity canonicalChainReactionFederalNameCollisionCut ≡ false
+participatingFederalAgenciesDoNotPayCommonTasking = refl
+
+hsiCounterfeitCasesDoNotDisposeDEAInquiry :
+  hsiCounterfeitCasesAreDEADrugOffenceDispositions canonicalChainReactionFederalNameCollisionCut ≡ false
+hsiCounterfeitCasesDoNotDisposeDEAInquiry = refl
+
+secondaryClosureDateNotNativeSignedDEADisposition :
+  reportedJune2023DEAClosureHasSignedNativeInstrumentHere
+    canonicalChainReactionFederalNameCollisionCut ≡ false
+secondaryClosureDateNotNativeSignedDEADisposition = refl
+
+sameNameCollisionDoesNotPayBankWireOrCoverup :
+  sourceProvesEitherCoverupOrSameEpsteinBankTransfer
+    canonicalChainReactionFederalNameCollisionCut ≡ false
+sameNameCollisionDoesNotPayBankWireOrCoverup = refl
+
+hsiChainReaction2019NativeLocator : String
+hsiChainReaction2019NativeLocator =
+  "https://www.iprcenter.gov/file-repository/ipu-operation-chain-reaction.pdf ; original HSI/IPR Center factsheet updated January 2019, page 1; operation began June 2011."
+
+hsiChainReactionCongressionalCarrier : String
+hsiChainReactionCongressionalCarrier =
+  "https://www.govinfo.gov/content/pkg/CHRG-117hhrg50981/html/CHRG-117hhrg50981.htm ; November 15 2022 House Homeland Security hearing describing HSI counterfeit goods, not DEA C1-11-0049."
+
+deaChainReactionDistinctCaseLocator : String
+deaChainReactionDistinctCaseLocator =
+  "EFTA00173953 ; 2015-05-18 ; DEA / OCDETF NY-NYS-0829 / C1-11-0049; original native scan not independently page authenticated in this case."
+
+chainReaction2023ReportedClosingDateOnly : String
+chainReaction2023ReportedClosingDateOnly =
+  "2023-06-16, as attributed to Bloomberg March 2026 by subsequent secondary sources; original signed DEA closing instrument uninspected. The date may be a discovery lead, not closed outcome evidence."
