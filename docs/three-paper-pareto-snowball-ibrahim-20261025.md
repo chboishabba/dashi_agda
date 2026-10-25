@@ -88,3 +88,34 @@ The source's equation (1.3) still omits `div(f)` although source equation (1.1) 
 6. **P4 publishable cross-domain synthesis**: source-by-source theorem/import manifest, first Git commit versus kernel-success provenance, and a claim lattice that keeps original credit even after Lean-to-Agda porting.
 
 Remaining claims stay gated. A new citation, preprint version, code commit, nonindependent descendant source, PR discussion, or static passing test is not proof or new experimental replication. Consumer-triggered source snowball stops at independent original roots and verified new physical/mathematical objects.
+
+
+## First source-implementation receipts (not validation dates)
+
+The following **GitHub commit object timestamps** establish the first observed
+source-written implementation in these two branches. They do not establish
+first successful typecheck, exact-head kernel check, independent mathematical
+priority, or final publication. Brisbane = Australia/Brisbane (UTC+10).
+
+| Source-written object | First Git commit | Git timestamp UTC | Brisbane date/time | Evidence grade |
+|---|---|---|---|---|
+| Rodgers finite Agda owner | `85a4e6121914396e9d106b0d3c0535892f1034ae` | 2026-10-24 18:00:21Z | 2026-10-25 04:00:21 | source file first committed; kernel unverified |
+| Miller Agda canonical A3 adapter | `c77c27569603a8ca35eb76e8b61c79575221d2f2` | 2026-10-24 18:01:18Z | 2026-10-25 04:01:18 | same-source contract first committed; kernel unverified |
+| Yan Agda pressure audit | `32c74ca3df59bdacc9909a4555d6033ea5b622e5` | 2026-10-24 18:01:38Z | 2026-10-25 04:01:38 | source-consistency contract first committed; kernel unverified |
+| Miller Lean algebra | `4245a2e0d96a1095391f3d886062074083de2fce` | 2026-10-24 18:02:12Z | 2026-10-25 04:02:12 | elementary algebra first committed; kernel unverified |
+| Yan Lean separable cube seed | `176679d666f8c8c2c20ad82c4c91d9fc9e5f4f02` | 2026-10-25 08:16:07Z | 2026-10-25 18:16:07 | divergence/boundary source code first committed; kernel unverified |
+| Temporal mask Agda regression | `d5194d76b9493832913a4de3bd7800517d0f6c77` | 2026-10-25 08:20:42Z | 2026-10-25 18:20:42 | regression first committed; kernel unverified |
+
+Original paper precedence is older and separately attributed (Miller 2021;
+Yan–Rădulescu 2021 / online 2020; Rodgers 2026-10-23).
+Existing generic DASHI proof owners have their own earlier source history;
+these new commit receipts do not overwrite their priority.
+
+### Executed *outside* GitHub source proof-checking environment
+
+- Local standard-library integer-polynomial replay:
+  `python /mnt/data/yan_polynomial_audit.py` -> **PASS 105/105**.
+- Three selected SymPy checks `(p,q,T)=(2,3,1),(3,4,2),(4,5,3)`:
+  `simplify(diff(F,y)-g*exp(-rho))==0` for each -> **PASS**.
+- No `lake build`, Agda typecheck, pytest on a branch checkout, external
+  empirical experiment, or deployed model run executed in this turn.
