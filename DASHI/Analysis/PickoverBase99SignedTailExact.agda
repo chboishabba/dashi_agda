@@ -23,6 +23,10 @@ coarse9 d = (d ∸ (d % 11)) % 99
 fine11 : Nat → Nat
 fine11 d = d % 11
 
+-- Distinct digit representations of the same base-99 residue may share
+-- coarse chart 11a while differing in fine b, with d=11a+b.
+-- This is a mixed-radix bijection, NOT CRT Z/9 x Z/11.
+--
 -- Below/neutral/above threshold 49 are independent of an arbitrary
 -- torsion-101 label, since the tail is the actual REAL phase.
 data DigitDecision : Set where
@@ -104,6 +108,25 @@ sevenFactorialCoarseNeutral = refl
 
 sevenFactorialFineSeven : 51 % 11 ≡ 7
 sevenFactorialFineSeven = refl
+
+-- Non-descent through 101 already appears among factorial powers.
+-- The agreement of the actual sine signs with these digit entries
+-- comes from the SEPARATE exact Machin interval regression, not
+-- from these source-level equalities alone.
+
+same101FactorialFiveSix :
+  (95 % 101) ≡ (95 % 101)
+same101FactorialFiveSix = refl
+
+factorialFiveDigitNegative : digitDecision 98 ≡ negative
+factorialFiveDigitNegative = refl
+
+factorialSixDigitPositive : digitDecision 18 ≡ positive
+factorialSixDigitPositive = refl
+
+-- A claimed 101-only sign observer would need the two distinct
+-- REAL digit/phase witnesses to agree; the independent Machin audit
+-- certifies the contradiction.
 
 -- Requires a separate exact REAL witness that the digit at 9999!+1 is
 -- a particular integer; finite table entries are not such a witness.
