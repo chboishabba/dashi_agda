@@ -10,7 +10,6 @@ open import Data.Fin.Base using (Fin)
 open import DASHI.Physics.QFT.NonAbelianFusionFromSpin
   using (SpinIrrep; spin-one; spinIrrepDimension)
 import DASHI.Algebra.Quantum.DASHIQuantumBridge as Bridge
-import DASHI.Algebra.Quantum.DASHIQuantumComputationProgram as Programme
 
 -- The pre-existing SU(2) spin-one representation has dimension three.
 nvElectronCarrierDimension : Nat
@@ -42,10 +41,7 @@ data LocalGate : Set where
   single : (a : Address) -> LocalGate
   pairWithinCore : (c : Core) -> (s t : Site) -> LocalGate
 
--- A well-formed local pair carries its shared core in its constructor;
--- no proof-irrelevant assertion of remote quantum connectivity is smuggled in.
-pairEndpoints : (c : Core) -> (s t : Site) -> Address -> Address
-pairEndpoints c s t = address c s
+-- The pairWithinCore constructor enforces same-core addressing by construction.
 
 -- Device execution is a refinement of the EXISTING certified bridge,
 -- not a replacement quantum formalism.
