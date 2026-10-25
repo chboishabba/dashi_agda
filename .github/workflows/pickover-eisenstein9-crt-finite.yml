@@ -9,6 +9,7 @@ on:
       - 'scripts/check_pickover_eisenstein9_crt.py'
       - 'scripts/check_pickover_machin_factorial_phase.py'
       - 'scripts/check_pickover_ssp_torque_101.py'
+      - 'scripts/check_pickover_chebyshev_101_local.py'
       - '.github/workflows/pickover-eisenstein9-crt-finite.yml'
   workflow_dispatch:
 
@@ -31,6 +32,8 @@ jobs:
         run: python3 scripts/check_pickover_machin_factorial_phase.py
       - name: Run SSP/FRACTRAN, torque and 101-torsion audit
         run: python3 scripts/check_pickover_ssp_torque_101.py
+      - name: Certify Chebyshev signed steps and 101 non-descent
+        run: python3 scripts/check_pickover_chebyshev_101_local.py
   finite-agda-source:
     runs-on: ubuntu-latest
     timeout-minutes: 30
