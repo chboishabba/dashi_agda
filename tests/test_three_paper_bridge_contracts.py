@@ -65,7 +65,8 @@ def test_miller_requires_published_rule_and_same_source_a3_transfer():
     assert "NSCanonicalA3ContinuationResidualExact" in text
     assert "MillerPhysicalPremises" in text
     assert "CriticalProjectedVorticityFinite" in text
-    assert "SpatialGradientBoundedUntilTime" in text
+    assert "SpatialGradientBoundedUntilTime : PhysicalSource → Direction → Set" in text
+    assert "SpatialGradientBoundedUntilTime selectedSource selectedDirection" in text
     assert "SameSolutionDirection" in text
     assert "publishedMillerImplication" in text
     assert "sameSourceA3Transfer" in text
