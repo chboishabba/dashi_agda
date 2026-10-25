@@ -17,6 +17,8 @@ import exotic_topology_cw_donor_reuse as cw
 import exotic_topology_binary_ternary_pants as codec
 import exotic_topology_pl_surface_gluings as pl
 import exotic_topology_pl_frontier_lineage as lineage
+import exotic_topology_braid_crosspr_discriminator as braid
+import exotic_topology_cantor_measure_obstruction as measure
 
 class ExoticMaxCutTests(unittest.TestCase):
     def test_whitney_real_parametric_image_caution(self):
@@ -111,5 +113,21 @@ class ExoticMaxCutTests(unittest.TestCase):
             set(wrong.frontier),
             {(0, 0), (0, 1), (1, 0), (1, 1)})
         self.assertIn((1,), wrong.frontier)
+
+
+    def test_reuse_1239_real_b3_vs_endpoints_and_modular_sign(self):
+        receipt = braid.audit()
+        self.assertTrue(receipt['B3_braid_relation'])
+        self.assertTrue(receipt['endpoint_projection_full_twist_identity'])
+        self.assertEqual(receipt['SL2Z_full_twist'], '-I')
+        self.assertEqual(receipt['SL2Z_double_full_twist'], 'I')
+        self.assertEqual(receipt['B3_double_full_twist_exponent_sum'], 12)
+        self.assertFalse(receipt['ambient_link_or_isotopy_claim'])
+
+    def test_no_measure_preserving_binary_uniform_ternary_cantor_homeomorphism(self):
+        receipt = measure.audit()
+        self.assertTrue(receipt['topological_homeomorphism_possible'])
+        self.assertFalse(receipt['measure_preserving_homeomorphism_possible'])
+        self.assertFalse(receipt['kernel_verified'])
 
 if __name__ == '__main__': unittest.main()
