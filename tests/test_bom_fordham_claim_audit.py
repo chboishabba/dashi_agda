@@ -338,10 +338,10 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
 
-    assert len(rows) == 52
+    assert len(rows) == 54
     assert len({row["edge_id"] for row in rows}) == len(rows)
     assert Counter(row["case_id"] for row in rows) == {
-        "BOM2026": 22, "REEF2021": 10, "GAS2026": 20
+        "BOM2026": 24, "REEF2021": 10, "GAS2026": 20
     }
     fields = (
         "edge_id", "case_id", "upstream", "downstream", "relation",
@@ -395,7 +395,7 @@ def test_original_claim_edges_are_source_qualified_and_do_not_invent_transfers()
 def test_claim_root_ledger_documentation_uses_only_case_bounded_counts():
     docs = RESEARCH.read_text()
     assert "australian_climate_claim_origin_edges_20261025.csv" in docs
-    assert "52 bounded relationship rows" in docs
+    assert "54 bounded relationship rows" in docs
     assert "NOT a representative crawl" in docs
     assert "originator" in docs.lower()
     assert "actual transfer not established" in docs.lower()
@@ -484,7 +484,7 @@ def test_international_republication_is_not_fresh_climate_evidence():
 def test_canonical_origin_keys_do_not_miscount_common_republication():
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
-    assert len(rows) == 52
+    assert len(rows) == 54
     assert all(row["root_key"] and row["root_resolution"] for row in rows)
     by_id = {row["edge_id"]: row for row in rows}
     assert by_id["G05"]["root_key"] == by_id["G06"]["root_key"] == "G_CREIGHTON_OPINION"
@@ -494,10 +494,10 @@ def test_canonical_origin_keys_do_not_miscount_common_republication():
     assert by_id["G09"]["root_key"] == "MULTI"
     assert by_id["G10"]["root_key"] == "MULTI"
     assert by_id["G13"]["root_key"] == "MULTI"
-    # The 30 source/template family labels are manually assigned within this purposive case
+    # The 31 source/template family labels are manually assigned within this purposive case
     # graph, not a statistic of Australian media or distinct truth sources.
     labeled = {r["root_key"] for r in rows if r["root_key"] != "MULTI"}
-    assert len(labeled) == 30
+    assert len(labeled) == 31
     assert sum(r["root_key"] == "MULTI" for r in rows) == 9
 
 
@@ -526,7 +526,7 @@ def test_senex_hancock_ipa_information_path_has_explicit_public_countercase():
     assert "No new Agda ontology" in doc
     assert "Stephen Johnson" in doc and "Adam Creighton" in doc
     assert "230+ submissions" in doc
-    assert "30 selected source/template family labels" in doc
+    assert "31 selected source/template family labels" in doc
 
 
 def test_one_nation_gas_policy_is_not_dated_before_public_inquiry():
@@ -554,7 +554,7 @@ def test_two_independent_political_frames_inside_single_sky_interview():
                  "riddClaimDoesNotProveGasLitigationCausality", "deanClaimDoesNotProvePoliticalCoordination"):
         assert name in validation
     assert "unspecified Western Australian gas project" in documentation
-    assert "30 selected source/template family labels" in documentation
+    assert "31 selected source/template family labels" in documentation
 
 
 def test_browse_epbc_primary_request_cannot_promote_expert_claim_to_decision():
@@ -595,7 +595,7 @@ def test_fordham_publication_time_and_browse_original_root_split():
 
     with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
         items = {row["edge_id"]: row for row in csv.DictReader(stream)}
-    assert len(items) == 52
+    assert len(items) == 54
     assert items["B16"]["root_key"] == "MULTI"
     assert items["B21"]["root_key"] == "MULTI"
     assert items["G14"]["root_key"] == "MULTI"
@@ -610,7 +610,7 @@ def test_fordham_publication_time_and_browse_original_root_split():
     assert (brisbane.year, brisbane.month, brisbane.day, brisbane.hour, brisbane.minute) == (2026, 10, 19, 7, 55)
 
     docs = RESEARCH.read_text()
-    assert "52 evidence edges" in docs  # current sample after acquisition
+    assert "54 evidence edges" in docs  # current sample after acquisition
     assert "not a court lawsuit" in docs
     assert "not a court lawsuit" in docs and "not a substantive merits decision" in docs.lower()
 
@@ -701,3 +701,43 @@ def test_finite_agda_template_and_browse_arithmetic_witnesses_declared():
     assert "browseConditionalModelScaleExact" in proofs
     assert "5867127189 * 500000000000" in proofs
     assert "does not make them" in proofs
+
+
+def test_readfearn_precision_countercheck_and_annex_index_are_distinct_sources():
+    """An independent news analysis is not an instrument log; an index is not a PDF."""
+    with ORIGIN_EDGE_LEDGER.open(newline="", encoding="utf-8") as stream:
+        entries = {r["edge_id"]: r for r in csv.DictReader(stream)}
+    assert entries["B23"]["root_key"] == "B_READFEARN_METHOD_CHECK"
+    assert entries["B23"]["relation"] == "journalistic_adversarial_primary_method_query"
+    assert entries["B23"]["evidence_grade"] == "named_journalist_original_report"
+    assert "not independent 2004 temperature measurement" in entries["B23"]["boundary"]
+    assert entries["B24"]["root_key"] == "B_PERKINS_BROWSE_EXPERT"
+    assert entries["B24"]["root_resolution"] == "original_pdf_listed_retrieval_unpaid"
+    assert "uninspected" in entries["B24"]["boundary"]
+
+    original = (ROOT / "DASHI/Governance/BOMFordhamMediaClaimAuditExact.agda").read_text()
+    validation = (ROOT / "DASHI/Governance/BOMFordhamMediaClaimAuditValidation.agda").read_text()
+    sensitivity = (ROOT / "tests/test_bom_climate_sensitivity_bounds.py").read_text()
+    for token in (
+        "readfearnPalmervillePrecisionCheck",
+        "palmervillePrecisionLossWitness",
+        "INF.NonFactorabilityWitness",
+        "palmervilleRoundedValuesCannotDetermineUnroundedDayOne",
+        "palmervilleDifferentUnderlyingValue",
+    ):
+        assert token in original
+    for token in (
+        "palmervilleDistinctHistoriesSameSeventeenRoundedObservations",
+        "palmervilleDifferentLatentDayOneIsNotRecoverable",
+        "palmervilleMeasurementPrecisionNotAProbability",
+        "INF.FactorsThrough",
+    ):
+        assert token in validation
+    assert "test_seventeen_identical_rounded_days_do_not_identify_latent_tenths" in sensitivity
+    assert "test_integer_precision_preserves_a_nontrivial_degree_bin" in sensitivity
+
+    docs = RESEARCH.read_text()
+    assert "not a station" in docs
+    assert "source-content gap" in docs
+    assert "706 KB" in docs
+    assert "31 manually curated root-or-template labels" in docs
