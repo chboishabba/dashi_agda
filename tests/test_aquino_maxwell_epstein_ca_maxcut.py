@@ -1358,6 +1358,9 @@ def test_two_original_federal_operations_share_name_not_case_identity():
         "secondaryClosureDateNotNativeSignedDEADisposition = refl",
         "hsiChainReaction2019NativeLocator : String",
         "hsiChainReactionCongressionalCarrier : String",
+        "hsiChainReaction2011ContemporaneousSenateCarrier : String",
+        "hsiChainReaction2011FirstPersonAttribution : String",
+        "native page-image receipt is not certified",
         "deaChainReactionDistinctCaseLocator : String",
     ):
         assert fragment in bank
@@ -1374,6 +1377,9 @@ def test_two_original_federal_operations_share_name_not_case_identity():
         "counterfeit microelectronics",
         "16 participating agencies",
         "CHRG-117hhrg50981",
+        "Erik Barnett",
+        "S.HRG.112-922",
+        "screenshot request **timed out**",
         "NY-NYS-0829 / C1-11-0049",
         "16 June 2023",
         "not an independent second HSI investigation",
