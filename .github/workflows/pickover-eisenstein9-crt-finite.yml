@@ -12,6 +12,7 @@ on:
       - 'scripts/check_pickover_ssp_torque_101.py'
       - 'scripts/check_pickover_chebyshev_101_local.py'
       - 'scripts/check_pickover_phase_reopening_exact.py'
+      - 'scripts/check_pickover_exact_interval_certificate.py'
       - '.github/workflows/pickover-eisenstein9-crt-finite.yml'
   workflow_dispatch:
 
@@ -38,6 +39,8 @@ jobs:
         run: python3 scripts/check_pickover_chebyshev_101_local.py
       - name: Certify actual base99 phase-tail reopening
         run: python3 scripts/check_pickover_phase_reopening_exact.py
+      - name: Verify terminal rational interval sign certificates
+        run: python3 scripts/check_pickover_exact_interval_certificate.py
   finite-agda-source:
     runs-on: ubuntu-latest
     timeout-minutes: 30
