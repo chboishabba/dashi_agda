@@ -1,3 +1,76 @@
+# 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
+
+**Current source:** `Docs/research/ns_ab_a1_real_inverse_r735_w1_snowball_20261025.md`.
+This amendment supersedes any older wording that the A1 reciprocal comparison
+itself is unpaid. It does NOT claim the remaining A1 physical kernel/Gram
+identification, A2/A3, B W1/W2 or Clay result is closed.
+
+- **A1 source-written** in ORIGINAL
+  `NSClayFacingAPhysicalSameObjectCutExact.agda`:
+  `positiveRationalFloorBoundsPhysicalInverse`,
+  `physicalHeatInverseAdmitsRationalUpper`,
+  `physicalShellFloorBoundsEveryOutputInverse`.
+  Combines actual `ℚᵘ` witness of Bishop rational density,
+  `BishopPositiveCrossReciprocalUpperExact` and the explicit
+  SAME-physical-shell rate inequality to prove
+  `1/(nu|xi|²) ≤ 1/q` for one shell-wide positive rational q.
+  Preserves original physical `nu,xi`; no generic irrational
+  heat-rate = rational fiction or unjustified near-zero floor.
+  Four exact local SymPy acceptance checks passed on a matching
+  file; Agda source not independently kernel typed.
+- **B / W1 physically meaningful partial payment:** the actual
+  R691 nonlinear mixed-field commutator of
+  `M=H+P_N u × H-P_N u`, with
+  `N=-P_N P((u·grad)u)`, satisfies
+  `|Comm_N| ≤ C||u_N||_(H^(3/4))³||N_N||_(H^(3/4))
+              ≤ C||u_N||_(H²)^5`,
+  using classical uniform L4 multipliers, H^(3/4)->L4,
+  Sobolev product and exact helical product differentiation.
+  Combined with the already-proved H^(3/4) initial mixed
+  ceiling and R691 endpoint,
+  `W_N(T)+E_M,N(T)
+      ≤ C||u0||_(H^(3/4))^4
+        + C int_0^T||u_N||_(H²)^5`.
+  Constants in the ANALYTIC inequality are independent of
+  rectangular cutoff N. But the RHS is **not uniform in N or T
+  from energy alone**; this is a conditional smooth-trajectory
+  theorem, NOT the R735 universal W1 analytic payment or W2
+  positive margin. The last remaining hard task is still signed
+  compensation/noncircular regularity, not just a generic
+  Cauchy estimate. Two locally passing NUMERICAL finite-helical
+  checks of this actual commutator in
+  `tests/test_ns_r735_physical_w1_commutator_calibration.py`
+  do NOT constitute an exact proof.
+- **Literature snowball / attribution:** Palasek
+  arXiv:2610.29012v1 (21 October 2026), a NEW ORIGINAL
+  axisymmetric circulation criterion with logarithmic exponent
+  5/4, improving original Lei--Zhang exponent 2 and Wei 3/2;
+  conditional axisymmetric H², Gamma maximum principle, not
+  general 3D proof. Its sqrt(number-of-scales) stretching loss
+  is a *technique donor only*, not a transplanted W2 estimate.
+  Gancedo--Hidalgo-Torne arXiv:2609.05193v1
+  (4 Sept 2026) is a distinct HELICALLY SYMMETRIC
+  R²xT special-class L¹-vorticity theorem, typically
+  infinite energy; same-author backward root is
+  Adv. Math. 471 (2025) 110268, DOI
+  10.1016/j.aim.2025.110268. Spatial helical symmetry
+  is NOT the same as `H+`/pure positive Fourier helicity.
+  Source roots and publication versions preserved.
+- **Run receipt:** 4 matching exact symbolic A1 tests passed,
+  2 physically projected finite-Galerkin NUMERICAL W1 tests
+  passed with specified tolerances. An initial all-symbolic W1
+  attempt TIMED OUT and was not passed as exact verification.
+  No exact-GitHub-head pytest, Agda/Lean kernel proof or
+  unrestricted A/B continuation receipt.
+
+**Next actual max-cut**: A1 physical real inverse-cubic/Gram
+attachment using Bishop positive reciprocal donors, A2 signed
+low/high same-solution domination; B original R735 W1/W2 signed
+nonlinear cancellation that eliminates uncontrolled H² integrals,
+then B7/continuation. Source-written != kernel verified != Clay.
+
+---
+
 ## 2026-10-25 physical T3 signed-work follow-through (post-Ibrahim cut)
 
 The paper's `J=curl(omega×u)`, `T3=||J||²_2` is
