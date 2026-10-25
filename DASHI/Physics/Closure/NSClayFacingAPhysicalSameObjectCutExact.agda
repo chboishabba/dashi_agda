@@ -201,6 +201,50 @@ physicalHeatInverseAdmitsRationalUpper fluid point
       qBelowA)
 
 ------------------------------------------------------------------------
+-- ONE SAME-SHELL RATIONAL FLOOR UNIFORMLY CONTROLS EACH PHYSICAL RATE.
+--
+-- The extra hypothesis is exactly the high-frequency SHELL membership
+-- inequality (viscosity * radiusSquared <= viscosity * |xi|²).
+-- It must be discharged from the existing Bishop-real squared-norm
+-- and viscosity monotonicity owners, rather than pretending that
+-- generic continuum frequencies have rational norm squares.
+--
+-- This reuses the *same* rational q chosen for the shell. The output
+-- frequency is still the actual punctured Euclidean frequency.
+------------------------------------------------------------------------
+
+physicalShellFloorBoundsEveryOutputInverse :
+  (fluid : Heat.PositiveViscosity) →
+  (radiusSquared : BishopReal.ℝ) →
+  (radiusPositive :
+    BishopReal._<_ BishopReal.0ℝ radiusSquared) →
+  (point : Heat.PuncturedEuclideanFrequency) →
+  BishopReal._≤_
+    (BishopReal._*_ (Heat.viscosity fluid) radiusSquared)
+    (Heat.viscousHeatRate fluid (Heat.frequency point)) →
+  Σ ℚᵘ
+    (λ q →
+      Σ (BishopReal._<_ BishopReal.0ℝ
+            (BishopReal._⋆ q))
+        (λ qPositive →
+          BishopReal._≤_
+            (Reciprocal.positiveInverse
+              (Heat.viscousHeatRatePositive fluid point))
+            (Reciprocal.positiveInverse qPositive)))
+physicalShellFloorBoundsEveryOutputInverse
+    fluid radiusSquared radiusPositive point shellBelowHeat
+  with physicalShellHeatAdmitsPositiveRationalFloor
+    fluid radiusSquared radiusPositive
+... | q , qPositive , qBelowShell =
+  q , (qPositive ,
+    positiveRationalFloorBoundsPhysicalInverse
+      (Heat.viscousHeatRate fluid (Heat.frequency point))
+      q
+      (Heat.viscousHeatRatePositive fluid point)
+      qPositive
+      (BishopP.<-≤-trans qBelowShell shellBelowHeat))
+
+------------------------------------------------------------------------
 -- High-frequency physical identification.
 ------------------------------------------------------------------------
 
