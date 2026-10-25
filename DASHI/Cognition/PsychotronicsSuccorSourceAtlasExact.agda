@@ -1,7 +1,6 @@
 module DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact where
 
 open import DASHI.Core.Prelude
-open import Data.Nat using (ℕ; _+_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
