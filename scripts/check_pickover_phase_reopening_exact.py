@@ -20,13 +20,18 @@ def pi_window(scale):
 def first_tail(base,k,scale,lower,upper,count=6):
     lo=Fraction(base**k*scale,2*upper)
     hi=Fraction(base**k*scale,2*lower)
+    qlo=lo.numerator//lo.denominator
+    qhi=hi.numerator//hi.denominator
+    if qlo!=qhi:raise AssertionError('insufficient precision at shift')
+    lo-=qlo;hi-=qhi
     digits=[]
     for _ in range(count):
+        lo*=base;hi*=base
         qlo=lo.numerator//lo.denominator
         qhi=hi.numerator//hi.denominator
-        if qlo!=qhi:raise AssertionError('insufficient precision')
-        lo=(lo-qlo)*base;hi=(hi-qhi)*base
-        digits.append(qlo%base)
+        if qlo!=qhi:raise AssertionError('insufficient precision at digit')
+        digits.append(qlo)
+        lo-=qlo;hi-=qhi
     return digits
 
 def main():
