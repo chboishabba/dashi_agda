@@ -109,10 +109,10 @@ WriteRowArray := function(indices)
     for j in [1..Length(classOrders)] do
       x := irr[idx][j];
       ab := FullCyclotomicRecord(x);
-      AppendTo(out,"{\\\"conductor\\\":",String(ab.conductor),
-        ",\\\"coefficients\\\":[");
+      AppendTo(out,"{\"conductor\":",String(ab.conductor),
+        ",\"coefficients\":[");
       for t in [1..Length(ab.coefficients)] do
-        AppendTo(out,"\\\"",ab.coefficients[t],"\\\"");
+        AppendTo(out,"\"",ab.coefficients[t],"\"");
         if t < Length(ab.coefficients) then AppendTo(out,","); fi;
       od;
       AppendTo(out,"]}");
