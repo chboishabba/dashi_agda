@@ -32,9 +32,11 @@ rotateAsCoordinates b = refl
 rotateThree :
   (b : T18.CompatibleThreeCellTrialecticBoundary) →
   rotate (rotate (rotate b)) ≡ b
-rotateThree b =
-  trans
-    (cong rotate
-      (cong rotate
-        (T18.boundaryCoordinatesRoundTrip b)))
-    (T18.boundaryCoordinatesRoundTrip b)
+rotateThree b
+  rewrite T18.coordinatesBoundaryRoundTrip
+            (C3.rotateCoordinates (T18.compatibleBoundaryToCoordinates b))
+        | T18.coordinatesBoundaryRoundTrip
+            (C3.rotateCoordinates
+              (C3.rotateCoordinates (T18.compatibleBoundaryToCoordinates b)))
+        | C3.rotateCoordinatesThree (T18.compatibleBoundaryToCoordinates b)
+  = T18.boundaryCoordinatesRoundTrip b
