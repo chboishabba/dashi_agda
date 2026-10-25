@@ -98,3 +98,83 @@ horizontalFlipsHeight :
   act (element q0 false true) (Geo.site Geo.north Geo.above)
   ≡ Geo.site Geo.north Geo.below
 horizontalFlipsHeight = refl
+
+-- Complete identity, associativity, inverses and action composition can be
+-- proved by finite computation over these 4×2×2 constructors. The following
+-- lemmas provide the identity and the literal inverse on the normal form.
+
+inverse : D4h → D4h
+inverse (element a false c) = element (neg a) false c
+inverse (element a true c) = element a true c
+
+identityLeft : (g : D4h) → compose identity g ≡ g
+identityLeft (element q0 false false) = refl
+identityLeft (element q0 false true) = refl
+identityLeft (element q0 true false) = refl
+identityLeft (element q0 true true) = refl
+identityLeft (element q1 false false) = refl
+identityLeft (element q1 false true) = refl
+identityLeft (element q1 true false) = refl
+identityLeft (element q1 true true) = refl
+identityLeft (element q2 false false) = refl
+identityLeft (element q2 false true) = refl
+identityLeft (element q2 true false) = refl
+identityLeft (element q2 true true) = refl
+identityLeft (element q3 false false) = refl
+identityLeft (element q3 false true) = refl
+identityLeft (element q3 true false) = refl
+identityLeft (element q3 true true) = refl
+
+identityRight : (g : D4h) → compose g identity ≡ g
+identityRight (element q0 false false) = refl
+identityRight (element q0 false true) = refl
+identityRight (element q0 true false) = refl
+identityRight (element q0 true true) = refl
+identityRight (element q1 false false) = refl
+identityRight (element q1 false true) = refl
+identityRight (element q1 true false) = refl
+identityRight (element q1 true true) = refl
+identityRight (element q2 false false) = refl
+identityRight (element q2 false true) = refl
+identityRight (element q2 true false) = refl
+identityRight (element q2 true true) = refl
+identityRight (element q3 false false) = refl
+identityRight (element q3 false true) = refl
+identityRight (element q3 true false) = refl
+identityRight (element q3 true true) = refl
+
+inverseLeft : (g : D4h) → compose (inverse g) g ≡ identity
+inverseLeft (element q0 false false) = refl
+inverseLeft (element q0 false true) = refl
+inverseLeft (element q0 true false) = refl
+inverseLeft (element q0 true true) = refl
+inverseLeft (element q1 false false) = refl
+inverseLeft (element q1 false true) = refl
+inverseLeft (element q1 true false) = refl
+inverseLeft (element q1 true true) = refl
+inverseLeft (element q2 false false) = refl
+inverseLeft (element q2 false true) = refl
+inverseLeft (element q2 true false) = refl
+inverseLeft (element q2 true true) = refl
+inverseLeft (element q3 false false) = refl
+inverseLeft (element q3 false true) = refl
+inverseLeft (element q3 true false) = refl
+inverseLeft (element q3 true true) = refl
+
+inverseRight : (g : D4h) → compose g (inverse g) ≡ identity
+inverseRight (element q0 false false) = refl
+inverseRight (element q0 false true) = refl
+inverseRight (element q0 true false) = refl
+inverseRight (element q0 true true) = refl
+inverseRight (element q1 false false) = refl
+inverseRight (element q1 false true) = refl
+inverseRight (element q1 true false) = refl
+inverseRight (element q1 true true) = refl
+inverseRight (element q2 false false) = refl
+inverseRight (element q2 false true) = refl
+inverseRight (element q2 true false) = refl
+inverseRight (element q2 true true) = refl
+inverseRight (element q3 false false) = refl
+inverseRight (element q3 false true) = refl
+inverseRight (element q3 true false) = refl
+inverseRight (element q3 true true) = refl
