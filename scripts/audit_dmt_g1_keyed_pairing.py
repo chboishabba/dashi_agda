@@ -7,9 +7,11 @@ Inspired by the existing DASHI order-erasure and source-conditioned evidence
 machinery (including ongoing PRs #1255/#1259/#1240); no code imported from
 unmerged PRs. This program does NOT reproduce the authors' ARTool ANOVA.
 
-CRITICAL: source MATLAB Rprep removes NaN rows without source participant IDs;
-source R statistics uses equal length and positional Subject = 1..n. Those are
-insufficient for an independently verified participant join. We *require*
+CRITICAL: source MATLAB Rprep first removes NaN rows JOINTLY across a
+condition-column matrix, conditionally preserving positional alignment;
+the later R reader removes missing entries per numeric file and reconstructs
+Subject = 1..n. Source order and residual missingness still require a
+participant-identity receipt before an independent pairing claim. We *require*
 per-condition identity and effective sequence length at the individual row.
 An external reviewer receipt is documentary, not independently checked rights.
 """
