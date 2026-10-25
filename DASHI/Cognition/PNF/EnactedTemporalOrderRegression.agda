@@ -6,6 +6,7 @@ module DASHI.Cognition.PNF.EnactedTemporalOrderRegression where
 -- These are DASHI finite-model regressions, not proof of the paper's
 -- constitutive identity or an actually experiencing human/circuit.
 
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -27,12 +28,12 @@ sameCurrentStateForDifferentFuture :
   Temporal.runPrefix _+_ zero
     (Temporal.prefixOfLength
       (Temporal.listLength chosenPrefix)
-      (chosenPrefix Temporal.++ laterSequenceA))
+      (Temporal._++_ chosenPrefix laterSequenceA))
   ≡
   Temporal.runPrefix _+_ zero
     (Temporal.prefixOfLength
       (Temporal.listLength chosenPrefix)
-      (chosenPrefix Temporal.++ laterSequenceB))
+      (Temporal._++_ chosenPrefix laterSequenceB))
 sameCurrentStateForDifferentFuture =
   Temporal.equalReceivedPrefixesGiveEqualOnlineStates
     _+_ zero chosenPrefix laterSequenceA laterSequenceB
@@ -41,20 +42,20 @@ sameCurrentObservationForDifferentFuture :
   suc (Temporal.runPrefix _+_ zero
     (Temporal.prefixOfLength
       (Temporal.listLength chosenPrefix)
-      (chosenPrefix Temporal.++ laterSequenceA)))
+      (Temporal._++_ chosenPrefix laterSequenceA)))
   ≡
   suc (Temporal.runPrefix _+_ zero
     (Temporal.prefixOfLength
       (Temporal.listLength chosenPrefix)
-      (chosenPrefix Temporal.++ laterSequenceB)))
+      (Temporal._++_ chosenPrefix laterSequenceB)))
 sameCurrentObservationForDifferentFuture =
   Temporal.equalReceivedPrefixesGiveEqualObservedOutputs
     _+_ suc zero chosenPrefix laterSequenceA laterSequenceB
 
 arrivingEPrecedesArrivingC : (Temporal.receivedE Temporal.earlier? Temporal.receivedC) ≡
-  Agda.Builtin.Bool.true
+  true
 arrivingEPrecedesArrivingC = Temporal.receptionEC
 
 sourceCPrecedesSourceE : (Temporal.sourceC Temporal.earlier? Temporal.sourceE) ≡
-  Agda.Builtin.Bool.true
+  true
 sourceCPrecedesSourceE = Temporal.sourceCE
