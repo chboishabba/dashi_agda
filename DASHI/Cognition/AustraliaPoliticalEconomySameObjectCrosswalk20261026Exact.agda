@@ -91,6 +91,10 @@ data AustraliaSourceRole : Set where
   originalElectoralRegulatorRule : AustraliaSourceRole
   firstPersonPolicyInterviewReported : AustraliaSourceRole
   originalPartyPolicyPublication : AustraliaSourceRole
+  originalFirstPersonPolicyAdvocacy : AustraliaSourceRole
+  governmentIndexedAdvocacySubmission : AustraliaSourceRole
+  originalLimitedGovernmentLegislation : AustraliaSourceRole
+  proposedCommercialPartyTenancyReported : AustraliaSourceRole
   publisherConfirmedInKindSupport : AustraliaSourceRole
   namedAssociateDonationReported : AustraliaSourceRole
   judiciallyReportedDocumentSchedule : AustraliaSourceRole
@@ -280,3 +284,54 @@ aecSecondHalf2026TransitionOriginal = australia-source-role-receipt
   "Australian Electoral Commission, Transitional Rules for funding and disclosure, checked 2026-10-27"
   "https://www.aec.gov.au/FADTransitionalRules/"
   "AEC distinguishes (A) July 2025-June 2026 old-regime returns published by 2027-02-01; (B) July 2026-Dec 2026 OLD-regime transitional returns due 2027-03-11 and published by 2027-04-22; and (C) Jan-Dec 2027 NEW-regime returns, lower $5000 threshold/expedited donor disclosures. Do not misassign late-2026 events to first old FY return or new 2027 threshold."
+
+
+------------------------------------------------------------------------
+-- PRE-2025 POLICY GENEALOGY AND AN INDEPENDENT PARTIAL ENACTMENT
+-- Original authorship stays distinct: Rinehart 2021 self-publication,
+-- HPPL/IPA 2022 submissions (indexed via Parliamentary Library), 2022
+-- Albanese Government *limited* Work Bonus, One Nation 2025 *unlimited*
+-- pledge, Hanson 2026 retrospective acknowledgement. Recurrence or
+-- earlier public advocacy does NOT authenticate a private handoff.
+------------------------------------------------------------------------
+
+rinehart2021PublishedOriginalAdvocacy : AustraliaSourceRoleReceipt
+rinehart2021PublishedOriginalAdvocacy = australia-source-role-receipt
+  originalFirstPersonPolicyAdvocacy
+  "Gina Rinehart, Speech, National Mining and Related Industries Day, 22 November 2021, page 2"
+  "https://www.ginarinehart.com.au/wp-content/uploads/2021/11/FINALV2-Speech-by-Mrs-Gina-Rinehart-to-2021-National-Mining-Related-Industries-Day.pdf"
+  "Publisher-held ORIGINAL first-person speech, PDF page 2 screenshot visually inspected; author publicly proposed easing pension income penalties for pensioners choosing to work in Nov 2021. She does not thereby prove a 2021/2024 private briefing to Hanson or exclusive intellectual origin; policy motif had other advocates."
+
+hancockIPA2022IndexedParliamentaryPolicy : AustraliaSourceRoleReceipt
+hancockIPA2022IndexedParliamentaryPolicy = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Parliamentary Library, 2022 Workforce Incentive Bill Digest, quotes HPPL Submission 3, 16 Aug 2022, and IPA Submission 6, Aug 2022"
+  "https://www.aph.gov.au/Parliamentary_Business/Bills_Legislation/bd/bd2223a/23bd024"
+  "Government Parliamentary Library document INDEXES/QUOTES separate 2022 Hancock and IPA Senate submissions advocating an unlimited Work Bonus, including IPA adjunct fellow Cian Hussey. Parliamentary analysis is not the original submission page-byte receipt (APH original submissions returned 403); shared policy does not prove HPPL bought a specific IPA paper or that either uniquely originated the idea."
+
+albanese2022LimitedWorkBonusAct : AustraliaSourceRoleReceipt
+albanese2022LimitedWorkBonusAct = australia-source-role-receipt
+  originalLimitedGovernmentLegislation
+  "Minister Amanda Rishworth, federal government, 22 Nov 2022 passage statement for Social Services and Other Legislation Amendment (Workforce Incentive) Act 2022"
+  "https://formerministers.dss.gov.au/20779/giving-older-australians-the-choice-and-flexibility-to-work/"
+  "Original GOVERNMENT report of enacted LIMITED additional AUD4000 Work Bonus income bank (temporary through Dec 2023); NOT removal of all means tests as the independent 2025 One Nation party proposal advocates. Existing partial legislation is a disconfirming alternative causal channel, not proof Rinehart/IPA/One Nation directed the government."
+
+oneNationBrisbaneHQReportedLease : AustraliaSourceRoleReceipt
+oneNationBrisbaneHQReportedLease = australia-source-role-receipt
+  proposedCommercialPartyTenancyReported
+  "One Nation and Hancock Prospecting spokespeople, Barnaby Joyce; ABC/AAP/Guardian original reporting, 5 Oct 2026"
+  "https://www.abc.net.au/news/2026-10-05/federal-politics-live-blog-albanese-pre-cop/107228246"
+  "Party reportedly intends to lease offices at 160 Wharf St Spring Hill in Rinehart/Hanrine-connected building purchased for reportedly AUD8m. Joyce and Hancock say COMMERCIAL MARKET RENT / no discount. Original executed lease, comparative valuation, fit-out payer and registered land title not authenticated; ownership and prospective tenancy do not pay an unlawful in-kind subsidy."
+
+-- Explicit precise source-scope distinctions.
+data PensionerWorkPolicyScope : Set where
+  temporaryExtraWorkBonus4000 : PensionerWorkPolicyScope
+  unlimitedPensionWorkWithoutPaymentReduction : PensionerWorkPolicyScope
+
+-- Distinct declared policy specifications; not empirical proof of legal
+-- effect or uniquely transmitted political authorship.
+government2022PolicyScope : PensionerWorkPolicyScope
+government2022PolicyScope = temporaryExtraWorkBonus4000
+
+oneNation2025PolicyScope : PensionerWorkPolicyScope
+oneNation2025PolicyScope = unlimitedPensionWorkWithoutPaymentReduction
