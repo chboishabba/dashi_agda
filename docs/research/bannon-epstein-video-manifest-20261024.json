@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "id": "bannon_epstein_2019_interview_public_rendition",
+  "note": "Research accepts the linked, timecoded third-party ASR transcript as source material. No video or verbatim transcript vendored, and video SHA-256 is not an acceptance gate.",
+  "prior_art_owner": "DASHI/Cognition/TrumpMarALagoBannonBridgeExact.agda",
+  "canonical_original_reel": {
+    "status": "doj_native_reel_locator_identified_but_bytes_not_fetched",
+    "doj_data_set": "10",
+    "doj_video_object_id": "EFTA01600824",
+    "filename": "EFTA01600824.mov",
+    "source_url": "https://www.justice.gov/epstein/files/DataSet%2010/EFTA01600824.mov",
+    "source_technical_path_reported_by_independent_index": "datasets/dataset10/VOL00010/NATIVES/0001/EFTA01600824.mov",
+    "sha256": null,
+    "size_bytes": null,
+    "content_hash_verified": false,
+    "source_access_note": "DOJ website redirected this lookup to its age-verification page; media bytes and digest were not acquired."
+  },
+  "candidate_public_renditions": [
+    {
+      "label": "djvlad February 1 2026 YouTube upload",
+      "url": "https://www.youtube.com/watch?v=oIEYmflX090",
+      "producer_type": "third_party_upload",
+      "sha256": null,
+      "byte_count": null,
+      "hash_status": "not_computed",
+      "same_bytes_as_doj_original": "not_proven"
+    },
+    {
+      "label": "John Ward February 1 2026 YouTube upload",
+      "url": "https://www.youtube.com/watch?v=7sDK2Cyq-Ck",
+      "producer_type": "third_party_upload",
+      "sha256": null,
+      "byte_count": null,
+      "hash_status": "not_computed",
+      "same_bytes_as_doj_original": "not_proven"
+    }
+  ],
+  "transcript": {
+    "kind": "third_party_machine_generated_timecoded_transcript",
+    "source_url": "https://www.tommycarstensen.com/epstein/data/transcripts/EFTA01600824.html",
+    "secondary_source_url": "https://epstein-data.com/transcripts/transcripts?efta_number=EFTA01600824",
+    "sha256": null,
+    "byte_count": null,
+    "language": "en (third-party classifier)",
+    "reported_duration_seconds": 7066.3893125,
+    "reported_segment_count": 1753,
+    "source_video_rendition_id": "EFTA01600824",
+    "verified_against_reel": false,
+    "text_vendored": false,
+    "summary": "Identified and publicly linked; third-party ASR variants are derivative of the same media original, and their text has not been hash-verified or manually aligned here.",
+    "analysis_status": "seven source-bounded thematic/timecoded passages indexed in existing TrumpMarALagoBannonBridgeExact, not speaker/audio certified",
+    "machine_speaker_label_caution": "At approximately 00:24:57 the ASR assigns a first-person jail answer to the apparent interviewer label; around 01:54:50 a question and answer can share the same machine speaker label. Do not treat SPEAKER_00-04 as human-verified diarization.",
+    "passage_index": [
+      {
+        "start": "00:00:14",
+        "end": "00:00:34",
+        "topic": "interview format and intended off-camera question staging",
+        "claim_role": "production-direction"
+      },
+      {
+        "start": "00:00:53",
+        "end": "00:05:30",
+        "topic": "Rockefeller institutional and elite access self-narrative",
+        "claim_role": "participant-allegation"
+      },
+      {
+        "start": "00:10:07",
+        "end": "00:10:22",
+        "topic": "Mercer surname in banking comparison; no contract established",
+        "claim_role": "name-only-reference"
+      },
+      {
+        "start": "00:22:52",
+        "end": "00:24:31",
+        "topic": "neural network and complexity discussion, not funding/software receipt",
+        "claim_role": "participant-account"
+      },
+      {
+        "start": "00:27:28",
+        "end": "00:37:43",
+        "topic": "2008 Bear/Lehman jail collect-call story; compare March vs September official chronology",
+        "claim_role": "event-time-reconciliation"
+      },
+      {
+        "start": "01:08:44",
+        "end": "01:13:38",
+        "topic": "Santa Fe and Los Alamos funding and science account, subject self-narrative",
+        "claim_role": "participant-allegation"
+      },
+      {
+        "start": "01:53:34",
+        "end": "01:55:40",
+        "topic": "philanthropy and legality-of-funds questioning, not legal audit",
+        "claim_role": "narrative-and-question"
+      }
+    ],
+    "negative_literal_query_scope": {
+      "queries": [
+        "Leon Black",
+        "Apollo",
+        "Rothschild",
+        "Palantir"
+      ],
+      "method": "literal find in single third-party HTML ASR rendition",
+      "matched": false,
+      "interpretation": "No exact-string match in this edition; not an assertion no underlying relationship or conversation, or that the audio was manually audited.",
+      "generic_black_word_present": true
+    }
+  },
+  "chapter_index": {
+    "kind": "third_party_description_not_transcript",
+    "source_url": "https://www.youtube.com/watch?v=oIEYmflX090",
+    "verified_against_audio": false,
+    "anchors": [
+      {
+        "at": "00:25:24",
+        "topic": "2008 financial crisis discussion"
+      },
+      {
+        "at": "00:34:39",
+        "topic": "Bear Stearns discussion"
+      },
+      {
+        "at": "01:09:00",
+        "topic": "Manhattan Project analogy"
+      },
+      {
+        "at": "01:54:40",
+        "topic": "Source's chapter label concerning origin of money"
+      }
+    ]
+  },
+  "controls": {
+    "do_not_vendor_video": true,
+    "do_not_vendor_verbatim_transcript_without_rights_and_accuracy_review": true,
+    "hash_exact_bytes_not_abstract_video": true,
+    "reencoded_renditions_need_distinct_hashes": true,
+    "source_url_not_sha256": true,
+    "chapter_index_not_transcript": true,
+    "source_owner_not_apollo_or_leon_black": true,
+    "any_cross_object_join_requires_explicit_identifiers": true,
+    "hash_optional_not_a_research_gate": true,
+    "canonical_transcript_is_external_source": true,
+    "speaker_labels_not_verified": true
+  },
+  "open_identifiers": [
+    "Historical question: identify transcript narration about 2008 Bear and Lehman against dated official crisis records and jail-call archives",
+    "Independent source validation of Rockefeller/Santa Fe donor claims, separately from Epstein's interview self-description",
+    "Specific released-reel↔Indyke contractual execution and 2019 filmed-shoot correspondence if claiming legal rights, payment, or ownership"
+  ],
+  "discovery_source": "https://www.tommycarstensen.com/epstein/data/transcripts/EFTA01600824.html",
+  "research_acceptance": {
+    "accept_external_timecoded_transcript": true,
+    "require_raw_video": false,
+    "require_video_sha256": false,
+    "require_full_verbatim_transcript_in_repo": false,
+    "require_original_video_to_validate_positive_first_person_testimony": false,
+    "attribution_requires_original_documentary_confirmation_for_historical_claims": true,
+    "speaker_diarization_certified": false,
+    "transcript_source_and_timecode_index_complete": true,
+    "interview_proves_historical_funding_legality": false
+  },
+  "optional_integrity_tasks": [
+    "If useful later, SHA-256 of exactly the disclosed DOJ EFTA01600824.mov bytes",
+    "Human review of disputed ASR speaker turns only for claims needing personal attribution"
+  ]
+}

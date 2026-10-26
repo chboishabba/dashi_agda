@@ -230,3 +230,255 @@ canonicalBlackApolloAcquisition =
   ∷ black-apollo-acquisition black2026TranscriptReconciliation 95 true
     "Reconcile Black's June 2026 House Oversight testimony against Dechert, Senate Finance/Treasury and USVI settlement records claim by claim."
   ∷ []
+
+------------------------------------------------------------------------
+-- 2026 WYDEN FOLLOW-UP: ATTRIBUTED CONGRESSIONAL INVESTIGATIVE QUESTIONS,
+-- NOT ADJUDICATED CRIMINAL OR TAX LIABILITY.
+-- This supplements (does not replace) the original Dechert, Senate/Treasury
+-- and DOJ-EFTA payment/work-product owners already in the Black atlas.
+------------------------------------------------------------------------
+
+data Wyden2026Question : Set where
+  comparativeProfessionalCompensation : Wyden2026Question
+  allegedIntermediatedPaymentsToWomen : Wyden2026Question
+  allegedSurveillanceOfWomen : Wyden2026Question
+  giftTaxAndCharityQuestions : Wyden2026Question
+
+record Wyden2026ClaimReceipt : Set where
+  constructor wyden-2026-claim-receipt
+  field
+    questionedIssue : Wyden2026Question
+    originalCongressionalLocator : String
+    documentaryReference : String
+    narrowAttribution : String
+    congressionalQuestionLocated : Bool
+    sourceUnderlyingItemInspectedForThisClaim : Bool
+    independentLiabilityOrCriminalVerdictPaid : Bool
+    linksToBannonFilmProgrammePaid : Bool
+open Wyden2026ClaimReceipt public
+
+wydenWomenPaymentsQuestion : Wyden2026ClaimReceipt
+wydenWomenPaymentsQuestion = wyden-2026-claim-receipt
+  allegedIntermediatedPaymentsToWomen
+  "Senator Ron Wyden letter dated 2026-03-20, released 2026-03-23, US Senate Finance Committee"
+  "https://www.finance.senate.gov/imo/media/doc/senator_wyden_letter_to_leon_black_redacted.pdf ; references EFTA00977823"
+  "Wyden characterizes selected emails as raising serious questions about payments through Epstein. The cited redacted email and complete accounts have not been independently reviewed here for this issue; allegation is not a conviction."
+  true false false false
+
+wydenSurveillanceQuestion : Wyden2026ClaimReceipt
+wydenSurveillanceQuestion = wyden-2026-claim-receipt
+  allegedSurveillanceOfWomen
+  "US Senate Finance Committee press release 2026-03-23 reporting Wyden letter"
+  "https://www.finance.senate.gov/ranking-members-news/continuing-epstein-investigation-wyden-questions-leon-black-over-new-revelations-in-epstein-files-appearance-of-hush-money-payments-and-surveillance-of-women"
+  "Wyden's office reports evidence suggesting Epstein and associates surveilled women on Black's behalf. This is a politician's public investigative allegation, requiring source-specific email and conduct checks."
+  true false false false
+
+wydenCompensationComparator : Wyden2026ClaimReceipt
+wydenCompensationComparator = wyden-2026-claim-receipt
+  comparativeProfessionalCompensation
+  "Wyden letter dated 2026-03-20, published by Finance Committee 2026-03-23"
+  "Letter cites EFTA00621341 Paul Weiss billing and EFTA01915809 wire receipt"
+  "Wyden says the stated Epstein fees were far higher than comparable professional advice and questions their rationale. The original amount and comparator scope, not motive, are bounded question objects."
+  true false false false
+
+wydenGiftTaxQuestion : Wyden2026ClaimReceipt
+wydenGiftTaxQuestion = wyden-2026-claim-receipt
+  giftTaxAndCharityQuestions
+  "Senate Finance letter 2026-03-20 and public summary 2026-03-23"
+  "Letter cites Black-related gift, charitable and trust materials in released DOJ corpus"
+  "Senator raises potential mischaracterisation of payments and tax issues, but does not furnish a tax-court ruling or audit conclusion in these public statements."
+  true false false false
+
+wydenClaimIsNotAdjudication :
+  independentLiabilityOrCriminalVerdictPaid wydenWomenPaymentsQuestion ≡ false
+wydenClaimIsNotAdjudication = refl
+
+wydenSurveillanceClaimNotBannonFilmEvidence :
+  linksToBannonFilmProgrammePaid wydenSurveillanceQuestion ≡ false
+wydenSurveillanceClaimNotBannonFilmEvidence = refl
+
+wydenOriginalMessageStillUninspectedHere :
+  sourceUnderlyingItemInspectedForThisClaim wydenWomenPaymentsQuestion ≡ false
+wydenOriginalMessageStillUninspectedHere = refl
+
+
+------------------------------------------------------------------------
+-- 2026 HOUSE OVERSIGHT ORIGINAL-OBJECT UPDATE (REPORT 119-831)
+--
+-- Separate original record of a witness's words, committee's assertions,
+-- corporate disclosure, and House procedural disposition.  Neither the
+-- record's authenticity nor a vote certifies underlying NDAs or crimes.
+-- Formal receipts prove only the explicitly encoded source-state fields.
+------------------------------------------------------------------------
+
+data Black2026EvidenceRole : Set where
+  witnessInterviewOnRecord : Black2026EvidenceRole
+  committeeReportOfItsDispute : Black2026EvidenceRole
+  houseProcedureRecorded : Black2026EvidenceRole
+  corporateDisclosureOfReview : Black2026EvidenceRole
+  independentJudicialDocketEvent : Black2026EvidenceRole
+
+record Black2026SourceReceipt : Set where
+  constructor black-2026-source-receipt
+  field
+    black2026Role : Black2026EvidenceRole
+    black2026OriginalLocator : String
+    black2026EventDate : String
+    black2026PublishedDate : String
+    black2026LimitedProposition : String
+    black2026OriginalSourceLocated : Bool
+    black2026SourceInspected : Bool
+    black2026ProvesUnderlyingOffence : Bool
+open Black2026SourceReceipt public
+
+blackJuneInterview2026 : Black2026SourceReceipt
+blackJuneInterview2026 = black-2026-source-receipt
+  witnessInterviewOnRecord
+  "House Oversight Leon Black Final Transcript 7.16.26, interview pp 14-15, 28, 41-42; https://oversight.house.gov/wp-content/uploads/2026/07/Leon-Black-Final-Transcript-7.16.26.pdf"
+  "2026-06-26" "2026-07-17"
+  "Witness confirmed reported terms of a 2015 NDA; described Epstein as informed but not the negotiator; stated separate Dechert conclusions as his account. Neither the agreement nor independent transfer records are enclosed."
+  true true false
+
+blackCommitteeReport119831 : Black2026SourceReceipt
+blackCommitteeReport119831 = black-2026-source-receipt
+  committeeReportOfItsDispute
+  "H. Rept. 119-831, 2026-09-15, printed pp 2, 12, 17, 23; https://www.govinfo.gov/content/pkg/CRPT-119hrpt831/pdf/CRPT-119hrpt831.pdf"
+  "2026-09-15" "2026-09-15"
+  "Committee says one NDA was produced, describes 2015 terms through Black's June witness testimony and advocates referral. The report is not a second independent witness to the 2015 terms."
+  true true false
+
+blackHouseResolution1543 : Black2026SourceReceipt
+blackHouseResolution1543 = black-2026-source-receipt
+  houseProcedureRecorded
+  "Congressional Record 2026-09-16 H5931, H. Res. 1543; https://www.govinfo.gov/content/pkg/CREC-2026-09-16/html/CREC-2026-09-16-pt1-PgH5931.htm"
+  "2026-09-16" "2026-09-16"
+  "House adopted H. Res. 1543 without objection to recommend contempt referral for subpoena compliance; not a DOJ charge, criminal conviction or finding on the contents of any NDA."
+  true true false
+
+blackDechertSECOriginal2021 : Black2026SourceReceipt
+blackDechertSECOriginal2021 = black-2026-source-receipt
+  corporateDisclosureOfReview
+  "SEC 2021-01-25 Apollo Form 8-K Exhibit 99.1, Dechert LLP dated 2021-01-22; https://www.sec.gov/Archives/edgar/data/1411494/000119312521016405/d118102dex991.htm"
+  "2021-01-22" "2021-01-25"
+  "Independent counsel hired by Apollo Conflicts Committee reviewed Black-Epstein personal work; corporate investigative report and witness restatement derive from the same underlying inquiry, not independent forensic examinations."
+  true true false
+
+blackApolloProxyConflicts2021 : Black2026SourceReceipt
+blackApolloProxyConflicts2021 = black-2026-source-receipt
+  corporateDisclosureOfReview
+  "Apollo 2021 DEF 14A SEC filing, Conflicts Committee and board disclosures; https://www.sec.gov/Archives/edgar/data/1411494/000119312521247884/d218583ddef14a.htm"
+  "2020-2021" "2021-08-18"
+  "Apollo identifies Ducey, Krongard and Richards as Conflicts Committee; publicly states Krongard's former senior CIA office. Corporate disclosure establishes historical director-role overlap only, not agency tasking or operational influence in the Dechert review."
+  true true false
+
+record Black2026HouseBoundary : Set where
+  constructor black-2026-house-boundary
+  field
+    publicInterviewLocated : Bool
+    interview2015TermsWitnessConfirmed : Bool
+    interviewEpsteinAwarenessAsserted : Bool
+    interviewEpsteinNegotiationProved : Bool
+    executed2015NDABytesInspected : Bool
+    houseCommitteeReportInspected : Bool
+    houseResolutionRecorded : Bool
+    missingNDAContentsIndependentlyVerified : Bool
+    exactNDAtoBlackPaymentLedgerJoinPaid : Bool
+    committeeContemptIsCriminalConviction : Bool
+    corporateDirectorPastCIARoleIsCurrentTasking : Bool
+    blackCommitteeInquiryJoinsBannonFilm : Bool
+    caseWideCovertCommandEstablished : Bool
+open Black2026HouseBoundary public
+
+canonicalBlack2026HouseBoundary : Black2026HouseBoundary
+canonicalBlack2026HouseBoundary = black-2026-house-boundary
+  true true true false false true true false false false false false false
+
+originalHouseTranscriptPaid :
+  publicInterviewLocated canonicalBlack2026HouseBoundary ≡ true
+originalHouseTranscriptPaid = refl
+
+witnessAwarenessDoesNotEstablishNegotiation :
+  interviewEpsteinNegotiationProved canonicalBlack2026HouseBoundary ≡ false
+witnessAwarenessDoesNotEstablishNegotiation = refl
+
+signedNDAObjectStillMissing :
+  executed2015NDABytesInspected canonicalBlack2026HouseBoundary ≡ false
+signedNDAObjectStillMissing = refl
+
+contemptReferralNotConviction :
+  committeeContemptIsCriminalConviction canonicalBlack2026HouseBoundary ≡ false
+contemptReferralNotConviction = refl
+
+directorPastEmploymentNotTasking :
+  corporateDirectorPastCIARoleIsCurrentTasking canonicalBlack2026HouseBoundary ≡ false
+directorPastEmploymentNotTasking = refl
+
+black2026HouseDoesNotPayBannonFunding :
+  blackCommitteeInquiryJoinsBannonFilm canonicalBlack2026HouseBoundary ≡ false
+black2026HouseDoesNotPayBannonFunding = refl
+
+black2026HouseDoesNotPayWholeNetworkH3 :
+  caseWideCovertCommandEstablished canonicalBlack2026HouseBoundary ≡ false
+black2026HouseDoesNotPayWholeNetworkH3 = refl
+
+------------------------------------------------------------------------
+-- OCTOBER 2026 COURT DISPOSITION / SEPTEMBER SUBPOENA CHALLENGE
+-- Two distinct federal dockets must never be joined by party surname.
+------------------------------------------------------------------------
+
+data Black2026CourtProceeding : Set where
+  blackHouseSubpoenaChallengeDDC : Black2026CourtProceeding
+  separateDoeBlackCivilActionSDNY : Black2026CourtProceeding
+
+blackDoeNotHouseChallenge :
+  separateDoeBlackCivilActionSDNY ≡ blackHouseSubpoenaChallengeDDC → ⊥
+blackDoeNotHouseChallenge ()
+
+blackHouseSubpoenaChallengeDocket : Black2026SourceReceipt
+blackHouseSubpoenaChallengeDocket = black-2026-source-receipt
+  independentJudicialDocketEvent
+  "Black v House Committee on Oversight et al, DDC 1:26-cv-03084, docket and complaint filed 2026-09-03; https://dockets.justia.com/docket/district-of-columbia/dcdce/1:2026cv03084/296175"
+  "2026-09-03" "2026-09-03"
+  "The docket listing authenticates existence of the civil subpoena challenge and complaint. The publicly retrieved docket listing was last refreshed 2026-09-03; later judgment or dismissal is not confirmed here."
+  true true false
+
+blackDoeOctoberDismissalOriginalOrder : Black2026SourceReceipt
+blackDoeOctoberDismissalOriginalOrder = black-2026-source-receipt
+  independentJudicialDocketEvent
+  "Doe v Black, SDNY 23-cv-6418 (JGLC), 2026-10-15 ECF 485; https://cases.justia.com/federal/district-courts/new-york/nysdce/1:2023cv06418/602764/485/0.pdf"
+  "2026-10-15" "2026-10-15"
+  "Judge Clarke granted plaintiff-requested voluntary dismissal with prejudice under Fed. R. Civ. P. 41(a)(2), with defendant not opposing; court reserved ECF 440 fees motion. This is NOT a merits adjudication of the underlying allegations and does not dispose the separate DDC House subpoena action."
+  true true false
+
+record Black2026DistinctCourtCaseBoundary : Set where
+  constructor black-2026-distinct-court-case-boundary
+  field
+    sdnyDismissalOrderInspected : Bool
+    plaintiffRequestedDismissal : Bool
+    defendantDidNotOpposeDismissal : Bool
+    sdnyDismissalIsTrialFactFinding : Bool
+    sdnyCourtResolvedFeesMotion : Bool
+    ddcComplaintDocketIdentified : Bool
+    ddcFinalDispositionIndependentlyVerified : Bool
+    sdnyOrderAdjudicatesHouseSubpoenaCase : Bool
+open Black2026DistinctCourtCaseBoundary public
+
+canonicalBlack2026DistinctCourtCaseBoundary : Black2026DistinctCourtCaseBoundary
+canonicalBlack2026DistinctCourtCaseBoundary = black-2026-distinct-court-case-boundary
+  true true true false false true false false
+
+voluntaryDismissalNotTrialFinding :
+  sdnyDismissalIsTrialFactFinding canonicalBlack2026DistinctCourtCaseBoundary ≡ false
+voluntaryDismissalNotTrialFinding = refl
+
+feesMotionNotResolvedByDismissal :
+  sdnyCourtResolvedFeesMotion canonicalBlack2026DistinctCourtCaseBoundary ≡ false
+feesMotionNotResolvedByDismissal = refl
+
+separateDocketNotResolvedByDoeDismissal :
+  sdnyOrderAdjudicatesHouseSubpoenaCase canonicalBlack2026DistinctCourtCaseBoundary ≡ false
+separateDocketNotResolvedByDoeDismissal = refl
+
+ddcFinalDispositionStillUnverified :
+  ddcFinalDispositionIndependentlyVerified canonicalBlack2026DistinctCourtCaseBoundary ≡ false
+ddcFinalDispositionStillUnverified = refl
