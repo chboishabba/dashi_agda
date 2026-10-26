@@ -20,6 +20,7 @@ independent Monster characters/Mathieu ordered-two-point stabilizers.
 """
 from collections import Counter, defaultdict
 from itertools import product
+from math import comb
 import json
 
 F=range(3)
@@ -63,6 +64,57 @@ def build():
     targets={k:classes[k][0][1] for k in (AXIS,DIAG)}
     all_targets=tuple(sorted((k,p) for k,T in targets.items() for p in T))
     assert len(all_targets)==8
+
+    # ALL balanced D4-equivariant quotient maps, not merely one witness.
+    # An equivariant map of a transitive orbit G/H is determined by a
+    # target point FIXED by H. Exact stabilizer counts give:
+    # axis4 -> axis4:2, diag4 -> diag4:2,
+    # free8 -> either target four-orbit:4 choices each.
+    # Every target site must have 10 preimages. The four fixed-kind
+    # 4-orbits contribute 4 per site; each free8 orbit assigned to that
+    # kind contributes 2 more. Hence precisely 3 free8 to each kind.
+    hom_options=Counter()
+    for kind in (AXIS,DIAG,FREE):
+        by_target=Counter()
+        for rep,orb,stab in classes[kind]:
+            choices={target:sum(all(act(g,y)==y for g in stab)
+                                for y in targets[target])
+                     for target in (AXIS,DIAG)}
+            assert choices==(
+                {AXIS:2,DIAG:0} if kind==AXIS else
+                {AXIS:0,DIAG:2} if kind==DIAG else
+                {AXIS:4,DIAG:4})
+            by_target[tuple(sorted(choices.items()))]+=1
+        assert sum(by_target.values())==len(classes[kind])
+        hom_options[kind]=dict(by_target)
+    # Independent dynamic polynomial enumeration: for every source
+    # orbit multiply by the exact number of maps into each target type.
+    # The two indices count FREE8 source orbits assigned to axis/diag.
+    count={(0,0):1}
+    for kind in (AXIS,DIAG,FREE):
+        for rep,orb,stab in classes[kind]:
+            options={t:sum(all(act(g,y)==y for g in stab)
+                           for y in targets[t])
+                     for t in (AXIS,DIAG)}
+            nxt=defaultdict(int)
+            for (a,b),v in count.items():
+                for t,choices in options.items():
+                    if choices:
+                        nxt[(a+(kind==FREE and t==AXIS),
+                             b+(kind==FREE and t==DIAG))]+=v*choices
+            count=dict(nxt)
+    all_equivariant_maps=sum(count.values())
+    balanced_maps=count[(3,3)]
+    independent_formula=comb(6,3)*(2**8)*(4**6)
+    assert balanced_maps==independent_formula==20971520
+    assert all_equivariant_maps==(2**8)*(8**6)==67108864
+    # Equivariant automorphisms of the target are two per reflection
+    # orbit, hence four overall. Their action on SURJECTIONS is free.
+    target_auts=2*2
+    assert balanced_maps%target_auts==0
+    balanced_mod_target_relabelling=balanced_maps//target_auts
+    assert balanced_mod_target_relabelling==5242880
+
     source_orbits=([(row,AXIS) for row in classes[AXIS]]+
                    [(row,DIAG) for row in classes[DIAG]]+
                    [(row,AXIS if i<3 else DIAG)
@@ -107,8 +159,12 @@ def build():
         for g in G:
             b=transported(g,a)
             assert b in encoded and b[0]==a[0]
-    # A trivial ten-sheet factor would have all orbits of length4.
-    # Actual outer 720 contains length8 orbits: twisting is mandatory.
+    # Twisting is forced in the SOURCE QUOTIENT80: it has six free
+    # size8 D4 orbits, while Mixed8 x Fin10 with trivial sheet action
+    # would have only size4 quotient orbits. It is NOT enough merely
+    # to cite size8 orbits after tensoring with INNER9: even a trivial
+    # sheet can acquire size8 product orbits through distinct stabilizers
+    # in Mixed8 and the nontrivial INNER9 D4 action.
     outer_orbits=Counter()
     visited=set()
     for a in encoded:
@@ -165,6 +221,12 @@ def build():
         quotient80_source_orbits={"axis_four":4,"diagonal_four":4,"free_eight":6},
         mixed_eight_target_orbits={"axis_four":1,"diagonal_four":1},
         per_target_fibre_cardinalities=sorted(Counter(quotient.values()).values()),
+        exact_balanced_equivariant_quotient_count=balanced_maps,
+        all_equivariant_quotient_count=all_equivariant_maps,
+        balanced_count_independent_stabilizer_formula=independent_formula,
+        equivariant_target_automorphism_count=target_auts,
+        balanced_mod_target_automorphisms=balanced_mod_target_relabelling,
+        not_canonical_from_D4_and_uniform_fibres_alone=True,
         lifted_outer_cardinality=720,central_cardinality=9,total=729,
         source_axis_reflection_fixed_nonzero80=8,
         mixed_target_axis_reflection_fixed8=2,
