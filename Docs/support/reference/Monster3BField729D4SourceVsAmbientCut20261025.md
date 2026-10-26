@@ -91,3 +91,35 @@ Consequently the stored faithful matrix pair respects the named ATLAS quotient *
 **Regression and authority:** extend existing `scripts/monster3b_atlas_source_word_order_d4_gate.py` (do not duplicate checker) to require the above projective order28 and order7; independent V8 GF3 matrix replay passed. ATLAS is the single primary source root; its copy and mirror are NOT independent corroborations. Existing manifest hash and #1098 original proof owners preserved. Distinct source `2.Suz:2` versus `Suz:2` lift status must survive the Ibrahim/consumer chain; no actual Monster 3B word, 6.Suz selected-78 family, C3/H6 phase action or kernel theorem follows.
 
 **Related latest-PR Pareto inspiration:** #1260 constructs a ring with additive group `C81×C243`, which has cardinality `3^9` but **is not** the exponent-three additive `F3^9` or extraspecial `H4` source group. The new higher-power (nilpotent) λ-adic transfer is therefore a *different object*, useful for consumer-specific torsion diagnostics but not an alternate Monster 3B action. #1261's integer D4h sample source is also a *different* crystallographic representation, not an ATLAS group word. Original source roles and all coefficient-characteristic boundaries preserved.
+
+
+## 26 October: exact ACTUAL ATLAS 2.Suz:2 D4 source subgroup witness
+
+**Substantive supersession:** The previous statement that the ambient GF(729) D4 had no known source-group membership was true **for that PARTICULAR ambient pair**, but should not be misread as a universal absence of D4 inside the 2.Suz:2 source group. There now exists a separate, concrete **ACTUAL source-word D4 subgroup** of the previously vendored ATLAS (2.Suz:2) GF(3) matrix representation.
+
+### Source names, exact straight-line words and group presentation
+
+Let (C,D) be the ORIGINAL ATLAS 12×12 GF3 matrices at `data/atlas/2Suzd2G1-f3r12aB0.m1` and `.m2`. Use lower-case `c=C^-1`, `d=D^-1` (this is local word notation, not a different ATLAS group).
+
+```
+W = CDCDCDCDCDCdCd   (14 letters, linear order 10)
+g = CdCdCDCd         (8 letters, invertible)
+m = W^5             (outer/anti-symplectic linear order 2)
+m' = g m g^-1        (another outer involution)
+r = m m'            (strictly symplectic linear order 4)
+```
+
+Exact arithmetic over F3 gives:
+`m²=I12`, `(m')²=I12`, `r²=-I12`, `r⁴=I12`, `m r m=r^-1`. The eight elements therefore form an injective representation of **D4**: (r) genuinely has order4, (m) has order2 and conjugates (r) to its inverse. Unlike the earlier ambient Frobenius model, **each matrix is an explicit word in the original ATLAS source generators**.
+
+The source group's invariant alternating form is a unique one-dimensional line: independently solving the 288 linear equations on 66 alternating coefficients for `CᵀJC=-J` and `DᵀJD=J` over GF3 yielded constraint rank65, nullity1, and a form of matrix rank12. A complete 12×12 witness is now pinned in the executable source file. Consequently `mᵀ J m=-J` (centre-inverting similitude) and `rᵀ J r=J` (strict symplectic), by exact matrix equations, without character inference. `m` and `mr` each have a six-dimensional +1-eigenspace.
+
+**Unexpected representation-theoretic negative:** since `r²=-I12`, the source 12-dimensional D4 quotient module has NO nonzero fixed vectors for the half-turn and contains **zero one-dimensional D4 irreducibles**. In characteristic 3 (Maschke applies because 3 does not divide 8), it is precisely `6 E`, six copies of the standard two-dimensional D4 representation. The earlier #1148 nongeometric eight-trit `A1+A2+2B1+2B2+E` action has **six** r²-fixed dimensions. A D4-equivariant linear injection of THAT eight-dimensional module into THIS actual source 12-dimensional D4 module is impossible: every one of its six r²-fixed vectors would map into the zero fixed space of `-I12`. This is a **same-action non-embedding theorem** for these specific two finite objects, not a no-go for all possible Suzuki D4 subgroups or Monster Heisenberg embeddings.
+
+### Provenance and executable acceptance
+
+`scripts/monster3b_atlas_actual_d4_word_witness.py` is committed on #1098 and imported into the existing backend-free `scripts/check_monster3b_gf729_d4_source_ambient_cut.sh` regression. It FAILS CLOSED unless both original ATLAS source-file SHA-256 hashes match the pre-existing #1098 manifest (m1 `ddd4919a...`, m2 `433ba0f...`). Independently reproduced original source bytes in local Python and checked their COMPLETE 64-character SHA256 digests, plus all source words, D4 relations, GSp multipliers and fixed-space ranks. Exact *committed branch* script re-execution, Agda kernel, authentic GAP/CTblLib actual Monster diagonal quotient and 6.Suz 78-family selection are NOT claimed.
+
+**Original source authors retain credit:** ATLAS/AtlasRep contributors provide the faithful 2.Suz:2 matrices and quotient Suz:2 standard-generator test `o(c)=2,o(d)=3,o(cd)=28,o(cdcdcddcdd)=7`. Barraclough--Wilson (2007) and Breuer--Magaard--Wilson (2026, published original) provide actual Monster N(3B) quotient and character construction. Reused #1098 source bytes/proofs, #1148 8D finite model, and #1250 Monster fusion owner are separate. This current exact matrix-word witness is **DASHI derived arithmetic**, not an externally sourced claim of a particular Monster group embedding.
+
+**Next maximal Pareto:** identify this explicit D4's selected class fusion and lift through the **correct diagonal H/D_i** (not just auxiliary H/X); test `r²=-I12` source class in the Monster normalizer and the actual selected `6.Suz` multiplicity character via existing #1250 all-conductor GAP exporter/main-to-N3B matcher. The existing #1098 true `Hom_E(Hζ,Wζ)` and its projective cocycle is the downstream consumer. Avoid reopening source H4 cardinality, generic Fourier, repeated OEIS/λ9 count coincidences or physical toroidal interpretations.
