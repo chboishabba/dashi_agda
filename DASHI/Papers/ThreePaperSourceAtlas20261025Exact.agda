@@ -192,3 +192,42 @@ yanLeanCubeFirstImplementation =
     "Australia/Brisbane"
     Chronology.exactRepresentationImplemented
     Chronology.sourceCommittedOnly
+
+
+-- The following are new, distinct implementation objects on 26 October.
+-- Refactor dates are not substituted for these first-source-commit receipts.
+yanExactLeanSeedFirstImplementation :
+  Chronology.FirstImplementationReceipt
+yanExactLeanSeedFirstImplementation =
+  Chronology.first-implementation-receipt
+    "RequestProject.NavierStokes.YanRadulescuExactSeed"
+    "15f19895bf7432c8de631ecf6224738127f28c86"
+    "2026-10-26T11:17:39Z"
+    "2026-10-26T21:17:39+10:00"
+    "Australia/Brisbane"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
+
+yanAdversePressureFirstImplementation :
+  Chronology.FirstImplementationReceipt
+yanAdversePressureFirstImplementation =
+  Chronology.first-implementation-receipt
+    "RequestProject.NavierStokes.YanRadulescuPressureCountermodel"
+    "0f55d6666943fe016ee15abda1eaea0d8d52822d"
+    "2026-10-26T11:20:23Z"
+    "2026-10-26T21:20:23+10:00"
+    "Australia/Brisbane"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
+
+rodgersArrivalCollisionFirstImplementation :
+  Chronology.FirstImplementationReceipt
+rodgersArrivalCollisionFirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Cognition.PNF.EnactedTemporalOrderExact / labelled arrival collision"
+    "0a2787dfd657e35a672046a3370c0ceacff75f2b"
+    "2026-10-26T11:26:32Z"
+    "2026-10-26T21:26:32+10:00"
+    "Australia/Brisbane"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
