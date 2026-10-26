@@ -95,6 +95,17 @@ wangGalerkin2026 = Attribution.mkNoDOISource
   "Independent 2D Lean formalisation reference; source of potential general Hilbert-space transport tools, NOT a solution to 3D A3 or proof imported into this repository"
   Attribution.publicAttribution
 
+semanticFidelityCritique2026 : Attribution.AttributedSource
+semanticFidelityCritique2026 = Attribution.mkNoDOISource
+  "Alexander Bastounis; Fabian Circelli; Anders C. Hansen"
+  "Navier-Stokes lost in translation: Why Lean verification of AI autoformalisation does not guarantee correct natural language proofs"
+  "arXiv:2610.08144, first posted 2026-10-06; methodological critique, not independently adjudicated as a theorem by DASHI"
+  "2026"
+  "https://arxiv.org/abs/2610.08144"
+  Attribution.academicArticleSource
+  "Author-claimed semantic noncorrespondence and autoformalisation limits in the 2026 OpenAI Navier-Stokes example; does not challenge soundness of the Lean kernel. DASHI proves distinct finite source-hypothesis erasure no-gos; does not adopt allegations as mathematical facts."
+  Attribution.publicAttribution
+
 openaiForced2026 : Attribution.AttributedSource
 openaiForced2026 = Attribution.mkNoDOISource
   "OpenAI"
@@ -117,6 +128,7 @@ threePaperAtlas = Attribution.mkSourceAtlas
     ∷ constantinFefferman1993
     ∷ beiraoBerselli2002
     ∷ wangGalerkin2026
+    ∷ semanticFidelityCritique2026
     ∷ openaiForced2026
     ∷ [])
   "Each row is a source role with distinct assumptions and original authorship. Reprints, bibliography edges and typed reconstruction are not independent corroboration, kernel proofs, or physical admission."
