@@ -65,3 +65,6 @@ import DASHI.Economics.WealthInheritanceVacancyTaxMaxCut20261027Exact
 
 -- Reuse of philosophy/sociology for fiscal receipts, voting power and care.
 import DASHI.Economics.WealthTaxPowerCareSociologyBidi20261027Exact
+
+-- Distinguish assessed, collected, appropriated tax and time-indexed control.
+import DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact
