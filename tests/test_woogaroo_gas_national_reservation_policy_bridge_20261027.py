@@ -118,3 +118,41 @@ def test_15_field_positional_source_ceiling_never_promotes_woogaroo_profit():
               "noHancockSenexPartyTaskPaid = refl",
               "noPriceOutcomeProven = refl"):
         assert k in s
+
+
+def test_senate_opd_and_11_nov_report_not_automatically_pii_wrongdoing():
+    s = BRIDGE.read_text()
+    for k in (
+        "gasSenateInquiryReferral15October = scoped-gas-receipt",
+        "2026-10-15",
+        "Report No 13/2026",
+        "report due 11 Nov 2026",
+        "gasSenateOrders384385OriginalIndexed = scoped-gas-receipt",
+        "384/385",
+        "21 Apr 2026",
+        "6 May 2026",
+        "PDF face and currency NOT independently verified",
+        "PII ≠ misconduct",
+        "noPIIToInfluencePromotion = refl",
+        "noFutureReportPromotedToPublished = refl",
+    ):
+        assert k in s
+    start = s.index("record GasTransparencyGate : Set where")
+    stop = s.index("open GasTransparencyGate public", start)
+    names = re.findall(r"^\s+(\w+) : Bool$", s[start:stop], re.M)
+    assert len(names) == 7
+    a = s.index("canonicalGasTransparencyGate = gas-transparency-gate")
+    b = s.index("\n\n", a)
+    vals = re.findall(r"\b(?:true|false)\b", s[a:b])
+    assert len(vals) == 7
+    flags = dict(zip(names, vals))
+    assert flags["originalSenateReferralReported"] == "true"
+    assert flags["originalTwoStakeholderDocumentOrdersIndexed"] == "true"
+    for key in (
+        "inquiryReport11NovPublishedAndRead",
+        "actualPDFPageOfOrdersAuthenticated",
+        "laterOrderComplianceOrCourtRulingVerified",
+        "confidentialStakeholderIdentityKnown",
+        "publicInterestImmunityClaimIsIllicitGasLobbyingProof",
+    ):
+        assert flags[key] == "false"
