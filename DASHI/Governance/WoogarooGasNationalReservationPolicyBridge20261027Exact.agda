@@ -21,6 +21,7 @@ import DASHI.Governance.TypedGenealogyEdgeExact as Typed
 import DASHI.Law.SensibLawSpringfieldGasLobbyingOwnershipSnowballExact as Woogaroo
 import DASHI.Law.SensibLawAzureSpringfieldInducedGasDemandExact as Azure
 import DASHI.Law.SensibLawSpringfieldResidentialGasEndpointLockInExact as Endpoint
+import DASHI.Law.SensibLawSpringfieldFirstNineApprovalGasEndpointBridgeExact as Approval
 
 ------------------------------------------------------------------------
 -- REUSE ACTUAL SOURCE OWNERS -- not duplicate facts or higher authority.
@@ -44,6 +45,11 @@ deidentifiedEndpointEvidence = Azure.azureDwellingIdentityObservation
 
 unpaidNetworkRevenueAmount : Azure.DemandHypothesis
 unpaidNetworkRevenueAmount = Azure.networkUtilisationResidual
+
+-- The original 2018 First Nine EPBC approval is project/holder evidence ONLY.
+-- Its operative terms do not establish a developer gas scheme or lobbying.
+originalFirstNineNoGasPromotion : Approval.ApprovalIdentityBridge
+originalFirstNineNoGasPromotion = Approval.firstNineSpringfieldIdentityBridge
 
 ------------------------------------------------------------------------
 -- ORIGINAL PUBLISED OR MINISTER-REPORTED SOURCE OBJECTS.
