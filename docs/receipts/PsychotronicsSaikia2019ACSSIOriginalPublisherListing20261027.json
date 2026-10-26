@@ -1,0 +1,65 @@
+{
+  "receipt_type": "publisher_supplementary_information_listing_not_pdf",
+  "audit_date": "2026-10-27",
+  "attribution": {
+    "original_article_authors": "Jahnu Saikia; Gaurav Pandey; Sajitha Sasidharan; Ferrin Antony; Harshal B. Nemade; Sachin Kumar; Nitin Chaudhary; Vibin Ramakrishnan",
+    "original_publisher": "American Chemical Society",
+    "original_article": "Electric Field Disruption of Amyloid Aggregation: Potential Noninvasive Therapy for Alzheimer's Disease",
+    "doi": "10.1021/acschemneuro.8b00490",
+    "source_id": "P1-40",
+    "source_family": "one ACS 2019 Saikia publication; full article and advertised SI are carriers of same underlying original author study",
+    "critical_source_comparison": "Johl Brown investigative programme with OpenAI ChatGPT source-writing assistance"
+  },
+  "source": {
+    "original_article_publisher_page": "https://pubs.acs.org/doi/10.1021/acschemneuro.8b00490",
+    "type": "ACS-author/publisher-hosted metadata describing additional PDF",
+    "publisher_says_supporting_information_free": true,
+    "relevant_original_metadata_description": "Additional experimental details; figures showing the kinetics of aggregation, semi-quantitative analysis, FTIR analysis, monomer percentage estimation, stability of the non-aggregation pathway, the effect of MF on secondary aggregations, fluorescence microscopy analysis, the update of field-treated and untreated samples, and the effect of the electric field on the enzymatic activity of trypsin; and a scheme showing EF modulation (PDF)",
+    "subject_list": {
+      "aggregation_kinetics": true,
+      "semiquantitative_analysis": true,
+      "FTIR": true,
+      "monomer_percentage_estimation": true,
+      "nonaggregation_pathway_stability": true,
+      "MF_effect_on_secondary_aggregations": true,
+      "fluorescence_microscopy": true,
+      "field_exposed_and_unexposed_samples": true,
+      "electric_field_effect_on_trypsin_activity": true,
+      "EF_modulation_scheme": true
+    },
+    "actual_si_pdf_download_url": null,
+    "actual_si_pdf_bytes_acquired": false,
+    "actual_si_pdf_sha256": null,
+    "actual_si_pdf_page_count": null,
+    "full_acs_2019_main_article_acquired": false,
+    "direct_si_body_figures_inspected": false,
+    "publisher_metadata_only": true
+  },
+  "citation_consumer": {
+    "original_consumer": "Ramirez-Galindo et al., Revista Mexicana de Fisica 70 030901 (2024)",
+    "original_consumer_url": "https://www.scielo.org.mx/scielo.php?pid=S0035-001X2024000300006&script=sci_arttext",
+    "original_consumer_reference_number": 24,
+    "original_consumer_cites_doi": "10.1021/acschemneuro.8b00490",
+    "original_claim": "Rodin magnetic coil yields up to 60 percent stronger biological effect than Helmholtz homogeneous-field coil",
+    "original_2024_dedicated_magnetic_field_table_type": "Rodin-coil current and modeled/simulated/measured B, not a separately displayed matched biological Rodin/Helmholtz comparator table",
+    "effect_60_percent_attributed_to_2019_original": true,
+    "matched_Rodin_Helmholtz_apparatus_in_original_SI_body": "UNRESOLVED_NOT_READ",
+    "effect_60_percent_figure_and_denominator_in_original_SI_body": "UNRESOLVED_NOT_READ",
+    "SI_metadata_mentions_magnetic_field_topic": true,
+    "SI_metadata_explicitly_names_Rodin_Helmholtz_comparison": false,
+    "SI_metadata_explicitly_reports_60_percent": false,
+    "unsupported_inference_that_full_SI_lacks_matching_coils": false,
+    "inferred_safety_or_clinical_effect": false,
+    "inferred_author_intent_or_misconduct": false
+  },
+  "evidence_grade": "ORIGINAL_PUBLISHER_LISTING_CONFIRMED; SI_ACTUAL_CONTENT_NOT_ACQUIRED; ORIGINAL_CITATION_SUPPORT_UNRESOLVED",
+  "acquisition_gates": [
+    "obtain direct publisher SI PDF URL or original author manuscript supplement from traceable source",
+    "retain publisher DOI/source root plus original bytes and SHA-256; distinguish copy from full original publication",
+    "inspect every SI figure caption and apparatus detail for Rodin and Helmholtz same-object measurements",
+    "identify compared outcome, experimental units, field strength, frequency, gradient, biological target, denominator and uncertainty if present",
+    "if absent from inspected full SI, inspect corresponding full original main article before concluding whether source supports the 2024 number"
+  ],
+  "no_invented_pdf_filename": true,
+  "no_second_independent_experiment_from_SI": true
+}
