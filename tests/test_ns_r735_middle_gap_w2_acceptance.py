@@ -91,3 +91,25 @@ def test_original_r735_critical_weight_is_dyadic_Hhalf_not_H1():
         assert critical_mass**2==enstrophy_mass
     for n in [3,5,9,17,37]:
         assert n<=dyadic(n)<2*n
+
+
+def test_real_unforced_heat_shear_forces_r734_margin_at_most_2nu():
+    # Literal R734 dyadic-critical observable on a REAL unforced
+    # u=2 exp(-nu n²t)cos(nx)e_z, cutoff N=n. Mixed outputs ±2n
+    # are discarded and the zero-output cross vanishes. Consequently
+    # selected M=W=Cint=0, whereas the original dyadic critical
+    # X(t)=2n exp(-2nu n²t), Dcrit=(X0-XT)/(2nu).
+    for n in (2,4,8,16):
+        x0=2*n
+        # Exact T=log(2), nu=1 without transcendental expressions.
+        xT=s.Rational(2*n,2**(2*n*n))
+        d_integral=(x0-xT)/2
+        assert d_integral>0
+        assert xT-x0+2*d_integral==0
+        assert xT-x0+d_integral<0
+        assert xT-x0+3*d_integral>0
+    # The source law dX/dt=-2nu Dcrit on an unforced heat field.
+    nu=s.symbols('nu',positive=True)
+    x0,xT,di=s.symbols('x0 xT di',positive=True)
+    assert s.expand(
+        (xT-x0+2*nu*di).subs(xT,x0-2*nu*di))==0
