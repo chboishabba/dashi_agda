@@ -34,3 +34,18 @@ domainErasureCannotProduceMillerSource :
     Fidelity.erasePhysicalDomain Fidelity.actualPhysicalDomain → ⊥
 domainErasureCannotProduceMillerSource =
   Fidelity.domainBlindEstimateCannotDetermineMillerSource
+
+
+-- A vanishing projected-vorticity observation cannot itself certify
+-- the independently required spatial direction regularity.
+bothDirectionWorldsProjectToZero :
+  Fidelity.forgetDirectionVariation Fidelity.lowVariationUnitDirection ≡
+  Fidelity.forgetDirectionVariation Fidelity.arbitrarilySteepUnitDirection
+bothDirectionWorldsProjectToZero = refl
+
+gradientObligationCannotBeEliminated :
+  NF.FactorsThrough
+    Fidelity.forgetDirectionVariation
+    Fidelity.requiredDirectionVariation → ⊥
+gradientObligationCannotBeEliminated =
+  Fidelity.zeroProjectedVorticityCannotInferDirectionRegularity
