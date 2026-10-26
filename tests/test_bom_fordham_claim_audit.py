@@ -790,7 +790,7 @@ def test_climate_origins_same_api_plan_and_actual_people_not_url_multiplicity():
     assert "900m amount includes all activities" in docs.lower() or (
         "900m amount includes all activities" in climate.lower()
     ) or "900m amount includes all activities" in docs.lower()
-    assert "40 rows" in docs
+    assert "41 rows" in docs
     assert "same-NAMED-PERSON continuity" in docs
 
 
@@ -842,7 +842,7 @@ def test_original_ice_and_singer_budget_states_do_not_invent_payment():
                  "southern1991PledgeCannotEstablishMethodTransfer"):
         assert item in validation
     doc = RESEARCH.read_text()
-    assert "40 rows total" in doc
+    assert "41 evidence edges" in doc
     assert "Singer → tobacco funders" in doc
     assert "this audit has **not acquired a specific dated BP internal technical memo" in doc
 
@@ -897,7 +897,7 @@ def test_gcc_acsh_commission_editorial_rights_and_published_file_are_distinct():
     assert "subsequently disputed" in cases["E8-02"]["notes"]
     assert re.search(r"apiNamedContributorCandaceCrandall : Typed.TypedGenealogyEdge", climate)
     docs = RESEARCH.read_text()
-    assert "40 source-qualified rows" in docs
+    assert "41 evidence edges" in docs
     assert "DocumentCloud page retrieval failed" in docs
     assert "no evidence the USD73,000 was ever paid" in docs
 
