@@ -125,3 +125,36 @@ X_N(T) + nu int_(t_enter)^T D_N(t)dt <= X_N(t_enter)
 The **late budget is independent of E0 and N**; E0 affects only the logarithmic waiting time. This is a separate, valid physical-source critical-energy analogue of the earlier R735 eventual `H1` entry, and no claim of independent discovery of classical eventual regularisation is made. New exact squared-threshold/absorption checks added to the existing test file: **seven locally passed** in total.
 
 **Important boundaries:** The proof is for the unforced mean-zero 3D periodic full Galerkin flows at the original sharp cube cutoff. It gives neither a cutoff-independent estimate on `[0,t_enter]` for arbitrary data nor an all-data R734 positive-margin **signed W2** inequality. Identifying the same physical limiting solution, and any compactness/uniqueness claim, requires independent legitimate PDE arguments. In particular a late-time estimate cannot simply be glued to the initial local estimate across the known arbitrary-large-data gap.
+
+
+## Pareto optimisation: sharpest entry time from this single-window energy-averaging certificate
+
+The prior choice `L=1/nu` is convenient but not optimal. Let
+```
+A = sqrt(2)*Ccrit²*E0/nu² > 0,       z=nu*L>0.
+```
+Using the **same** energy/interpolation chain, a window `[t0,t0+L]` certifies the entry threshold `X(s_N)<=nu²/Ccrit²` whenever
+```
+t0(z)=max(0, log(A/sqrt(z))/(2nu)).
+t_enter(z)=z/nu+t0(z).
+```
+For `z<A²`, differentiate `nu*t_enter=z+log(A/sqrt(z))/2`:
+```
+d/dz (nu*t_enter) = 1-1/(4z),
+d²/dz²(nu*t_enter)=1/(4z²)>0.
+```
+For `z>=A²`, the decay-waiting term vanishes and `t_enter=z/nu` increases. Hence the *exact global minimum among these single-window averaging bounds* occurs at
+```
+z_* = min(A²,1/4),              L_*=z_*/nu,
+
+if 0<A<=1/2:
+  T_* = A²/nu.
+if A>=1/2:
+  T_* = [1/4 + log(2A)/2]/nu.
+```
+Both formulas agree at `A=1/2`. For `E0=0`, the zero flow is trivial and one can set `T_*=0`. For `E0>0`, this `T_*` is **no larger than** the previous `1/nu+max(0,log(A)/(2nu))` receipt and normally substantially smaller. Despite different `s_N in [t0,t0+L_*]`, every Galerkin cutoff has
+```
+X_N(T_*) <= nu²/Ccrit²,
+X_N(T)+nu int_(T_*)^T D_N <=nu²/Ccrit² for all T>=T_*.
+```
+This is an optimisation **only of the displayed one-window energy-decay certificate**, not a claimed universally earliest actual smoothing time. Two additional exact SymPy calculus/branch-continuity tests passed locally; total in `tests/test_ns_r734_critical_small_data.py`: **nine**. The difficult arbitrary-data initial/middle finite interval remains open.
