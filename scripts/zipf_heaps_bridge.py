@@ -144,3 +144,43 @@ def finite_shifted_moment_binomial(n: int, exponent: int, shift: int, order: int
     numerator = sum((comb(order,j) * (-shift)**(order-j) * finite_hurwitz_sum(n,exponent-j,shift)
                     for j in range(order+1)), Fraction())
     return numerator/z
+
+
+def conditioned_head(masses: Sequence[Fraction], keep: int) -> tuple[Fraction, ...]:
+    """Finite Zipf law conditioned on ranks <= keep, zeros elsewhere."""
+    p = _validated_pmf(masses)
+    if not isinstance(keep,int) or not 1 <= keep <= len(p):
+        raise ValueError('head cutoff in [1,support length]')
+    headmass = sum(p[:keep],Fraction())
+    if headmass == 0:
+        raise ValueError('cannot condition on a zero probability event')
+    return tuple(m/headmass for m in p[:keep]) + (Fraction(),)*(len(p)-keep)
+
+
+def l1_probability_distance(a:Sequence[Fraction],b:Sequence[Fraction])->Fraction:
+    """L1 of two finite PMFs; mathlib's variation norm, not sup_A TV."""
+    p=_validated_pmf(a); q=_validated_pmf(b)
+    if len(p)!=len(q):
+        raise ValueError('same common support required')
+    return sum((abs(x-y) for x,y in zip(p,q)),Fraction())
+
+
+def novelty_flags(tokens:Sequence[str])->tuple[bool,...]:
+    """Indicates whether each token is a new type, retaining chronological order."""
+    seen=set();out=[]
+    for token in tokens:
+        new=token not in seen
+        out.append(new)
+        seen.add(token)
+    return tuple(out)
+
+
+def equal_flag_runs(flags:Sequence[bool])->tuple[tuple[bool,int],...]:
+    """Run lengths preserve information lost by rank counts and final Heaps."""
+    result=[]
+    for b in flags:
+        if result and result[-1][0]==b:
+            result[-1]=(b,result[-1][1]+1)
+        else:
+            result.append((b,1))
+    return tuple(result)
