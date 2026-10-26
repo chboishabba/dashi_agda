@@ -87,3 +87,37 @@ def test_ternary_sign_fibre_does_not_contain_frequency_norm_or_amplitude():
     assert sign((1,0,0))==sign((100,0,0))
     assert n2((1,0,0))!=n2((100,0,0))
     assert dyadic_weight((1,0,0))!=dyadic_weight((100,0,0))
+
+def test_all_six_axis_permutations_include_opposite_helicity_same_369_sign_class():
+    # All SIX physical orthogonal axis permutations preserve the Galerkin
+    # NS equation and the max-coordinate dyadic critical weight.
+    # Improper transformations det=-1 exchange true curl helicity
+    # polarity. The coordinate-SIGN quotient records only THREE
+    # signatures: each is shared by one proper and one improper orbit
+    # member. Thus it cannot encode Waleffe polarization by itself.
+    from itertools import permutations
+    orbit=[]
+    for permutation in permutations(range(3)):
+        inversion_count=sum(permutation[i]>permutation[j]
+                            for i in range(3) for j in range(i+1,3))
+        parity=1 if inversion_count%2==0 else -1
+        rotate_axes=lambda m:tuple(m[j] for j in permutation)
+        u={rotate_axes(m):S.Matrix(rotate_axes(v))
+           for m,v in field(0).items()}
+        forcing=projected_NS(u)
+        norm=lambda v:S.simplify((S.conjugate(v).T*v)[0])
+        E=S.simplify(sum((dyadic_weight(m)*norm(v) for m,v in u.items()),S.Integer(0)))
+        D=S.simplify(sum((dyadic_weight(m)*n2(m)*norm(v) for m,v in u.items()),S.Integer(0)))
+        production=S.simplify(S.expand_complex(sum((
+            2*dyadic_weight(m)*S.re((S.conjugate(v).T*
+                forcing.get(m,S.zeros(3,1)))[0])
+            for m,v in u.items()),S.Integer(0))))
+        assert E==8 and D==36 and S.simplify(production-observables(0)[2])==0
+        for m,v in u.items():
+            assert S.simplify(hel(m,v,-parity))==S.zeros(3,1)
+        signature=tuple(sign(rotate_axes(m)) for m in (P,Q,K))
+        orbit.append((signature,parity))
+    assert len(orbit)==6
+    assert len({sig for sig,_ in orbit})==3
+    assert all({p for sig,p in orbit if sig==key}=={-1,+1}
+               for key in {sig for sig,_ in orbit})
