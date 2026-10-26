@@ -563,3 +563,39 @@ same21Point9BNumberDoesNotEstablishActualityStatus :
   INF.FactorsThrough Climate.same21BPrinted Climate.reportedStatusFor21B → ⊥
 same21Point9BNumberDoesNotEstablishActualityStatus =
   Climate.sameTaxNumberCannotDetermineSourceStatus
+
+
+------------------------------------------------------------------------
+-- 27 October source-acquired Arthur D. Little report, one model and
+-- multiple policy bases. Two existing Ibrahim factorisation obstructions
+-- are consumed here without introducing duplicate evidence machinery.
+------------------------------------------------------------------------
+
+adlFirstPartyConsultantReportCommissioned :
+  Typed.relationKind Climate.adlReportCommissionedAndPublic ≡ Typed.commissionedResearch
+adlFirstPartyConsultantReportCommissioned = refl
+
+adlFirstYearUpperBoundNotTenYearGuarantee :
+  Typed.relationKind Climate.adlSeventeenBFirstYearUpperBoundNotTenYearCash ≡
+    Typed.reportedStatisticRestatement
+adlFirstYearUpperBoundNotTenYearGuarantee = refl
+
+adlReturnsUnitSummaryNotAnotherEconomicModel :
+  Typed.relationKind Climate.adlIRRPointsVersusFutureGroupReturnsPercent ≡
+    Typed.reportedStatisticRestatement
+adlReturnsUnitSummaryNotAnotherEconomicModel = refl
+
+same25NominalRateCannotDetermineADLTenYearRevenue :
+  INF.FactorsThrough Climate.adlHeadlineRate Climate.adlTenYearBand → ⊥
+same25NominalRateCannotDetermineADLTenYearRevenue =
+  Climate.adlSame25RateCannotDetermineDecadeRevenue
+
+bareTwoPercentCannotDetermineIRRChangeUnits :
+  INF.FactorsThrough Climate.returnHeadlineWithoutUnits Climate.returnChangeUnit → ⊥
+bareTwoPercentCannotDetermineIRRChangeUnits =
+  Climate.bareTwoPercentCannotIdentifyReturnUnit
+
+futureGroupRestatementNotDirectMethodTransfer :
+  Typed.StrongHistoricalTransfer Climate.adlIRRPointsVersusFutureGroupReturnsPercent → ⊥
+futureGroupRestatementNotDirectMethodTransfer =
+  Climate.adlFirstPartyScenarioIsNotProofOfEditorialTransfer
