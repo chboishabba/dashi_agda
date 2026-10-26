@@ -42,9 +42,13 @@ def validate(world):
 def report(world):
     e = validate(world)
     claims = {}
+    root_by_evidence = {item["id"]: item["root"] for item in world["evidence"]}
     for c in world["claims"]:
         missing = sorted(k for k in c["requires"] if e[k]["status"] != "present")
-        claims[c["id"]] = {"level":c["level"],"supported_by":c.get("supports", []),
+        supports = c.get("supports", [])
+        roots = sorted({root_by_evidence[k] for k in supports})
+        claims[c["id"]] = {"level":c["level"],"supported_by":supports,
+                           "source_roots":roots, "independent_root_count":len(roots),
                            "unpaid":missing, "prerequisites_located":not missing,
                            "severe_test":c["severe_test"],
                            "note":"Located prerequisites do not establish causal identification, source authenticity, or reproduced evidence"}
