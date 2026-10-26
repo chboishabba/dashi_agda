@@ -517,7 +517,7 @@ but not a Fox–Artin geometric embedding or Richards
 surface quotient. No unrelated PR is promoted by analogy.
 
 REVISED geometric Pareto:
-P0 run exact-head seven Agda kernel checks and now 22
+P0 run exact-head seven Agda kernel checks and now 24
 Python regression tests (including component/word-order
 negative controls), collect source-specific receipts.
 P1 proper locally finite infinite collared union and
@@ -531,3 +531,39 @@ topology as independently scoped residuals.
 
 No kernel theorem, source attribution, homotopy status
 or geometric reality is auto-promoted by these scripts.
+
+
+### 26 October second parent refresh and final finite receipts
+
+The latest #1244 head `ae805ee8ec4ca23e7eadec28aa5f90855af75844`
+adds source-owned `alexander_horned_c3_equivariant_basing_paths.py`
+and `alexander_horned_c3_same_cover_discriminator.py`.
+The first gives three explicit C₃-permuted straight central paths
+from `x₀=(20,20,20)` to `13e_i`; each distinguished coordinate
+stays at least 13, proving clearance from all radius-15/4 cuts.
+Independent local Fraction replay **PASS 303/303** sampled
+source-equivalent path identities; this is not yet a Lean
+`FundamentalGroup` basepoint-change theorem.
+
+The second shares finite cover observables for tame and
+wild satellite replacements and supplies wrong-radius/no-overlap
+negative controls. This remains a conditional/synthetic
+information-loss discriminator; no tame–wild embedding pair
+or global `pi1` equivalence is thereby kernel-certified.
+The child **imports both parent scripts in focused tests**,
+preserving original implementation custody. The new merge
+`8299b0bd3389c1e2950c87d2e58ea1d4aca2dbdb`
+contains the inspected parent plus the original child,
+without force push or overlapping path mutations.
+
+An independently reimplemented standalone finite audit
+`independent_complement_audit.py` was locally executed:
+nine PL component transitions PASS, with component counts
+(1,2,4)/(1,1,1)/(2,2,2), and two deliberately invalid
+inclusion/lineage cases rejected. The chronological
+prefix/reverse-stack exhaustive local replay PASSed all 2046
+bit-child pairs across depths 0--9. These are independent
+mathematically equivalent reproductions; **neither is an
+exact-GitHub-blob execution receipt**. At last check PR #1254
+contained 24 focused Python test methods and had no
+associated successful kernel/Actions execution.
