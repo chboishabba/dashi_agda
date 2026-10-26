@@ -15,6 +15,7 @@ import argparse
 import copy
 import csv
 import json
+from itertools import product
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -140,6 +141,36 @@ def self_test(receipt: dict, sources: list[dict[str, str]], edges: list[dict[str
     return {"adversarial_cases_rejected": rejected,
             "publisher_metadata_cannot_prove_unread_full_SI_contents": True}
 
+def synthetic_listing_collision() -> dict:
+    """Exact 2-world nonfactorisation of a publisher-only SI topic listing.
+
+    THESE ARE HYPOTHETICAL SI BODIES; NEITHER IS CLAIMED TO BE THE
+    ACTUAL 2019 SAiKIA PDF. The observed MF listing is true in both
+    possible bodies; the presence of the disputed matched comparison
+    differs. Therefore no deterministic metadata-only Boolean consumer
+    can decide the specific result, irrespective of its mapping.
+    """
+    worlds = (
+        {"MF_topic_listed": True, "named_Rodin_Helmholtz_60pct_comparison": False},
+        {"MF_topic_listed": True, "named_Rodin_Helmholtz_60pct_comparison": True},
+    )
+    mappings = 0
+    for outputs in product((False, True), repeat=2):
+        decoder = dict(zip((False, True), outputs))
+        if all(decoder[w["MF_topic_listed"]] == w["named_Rodin_Helmholtz_60pct_comparison"]
+               for w in worlds):
+            raise AssertionError("SI listing incorrectly determined specific unread pages")
+        mappings += 1
+    assert mappings == 4
+    return {
+        "synthetic_worlds": 2,
+        "possible_boolean_decoders_refuted": mappings,
+        "same_publisher_MF_topic_both_worlds": True,
+        "actual_ACS_SI_body_observed_in_this_model": False,
+        "empirical_60percent_support_inferred": False,
+        "legitimate_result": "MF index alone cannot decide named Rodin/Helmholtz 60-percent content",
+    }
+
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--self-test", action="store_true")
@@ -147,6 +178,7 @@ def main() -> None:
     receipt = json.loads(RECEIPT.read_text(encoding="utf-8"))
     sources, edges = read_rows(SOURCES), read_rows(EDGES)
     result = audit(receipt, sources, edges)
+    result["synthetic_SI_nonidentifiability"] = synthetic_listing_collision()
     if args.self_test:
         result["self_test"] = self_test(receipt, sources, edges)
     print(json.dumps(result, indent=2, sort_keys=True))
