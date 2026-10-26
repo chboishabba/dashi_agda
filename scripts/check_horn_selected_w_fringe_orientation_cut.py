@@ -68,6 +68,23 @@ try:
     assert abs(np.linalg.norm(W-np.eye(3),2)-
                np.linalg.norm(Wrev-np.eye(3),2))<1e-12
     print("PASS original same W/W^-1 fringe, four phases, conjugation and norm")
+
+    # Curved selected-source eta is the operator norm difference
+    # between the ACTUAL based parent Wilson matrix U and ACTUAL
+    # transported child commutator V. Common whisker/orientation
+    # changes of BOTH do not affect eta; changing only one can.
+    V = G@W@G.conj().T
+    eta = np.linalg.norm(W-V,ord=2)
+    eta_inv = np.linalg.norm(W.conj().T-V.conj().T,ord=2)
+    eta_conj = np.linalg.norm(
+        G@W@G.conj().T-G@V@G.conj().T,ord=2)
+    assert eta>1e-5
+    assert abs(eta_inv-eta)<1e-12
+    assert abs(eta_conj-eta)<1e-12
+    # FAIL-CLOSED if ONLY root is rebased: for V=G W G*, the
+    # one-sided apparent defect becomes zero although eta>0.
+    assert np.linalg.norm(G@W@G.conj().T-V,ord=2)<1e-12
+    print("PASS paired SU3 eta inversion/common conjugation; one-sided gauge-basing false positive caught")
 except ImportError:
     print("SKIP optional numpy exact-original-matrix controls")
 
