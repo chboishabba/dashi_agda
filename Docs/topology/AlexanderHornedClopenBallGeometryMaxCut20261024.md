@@ -392,3 +392,117 @@ remaining max-cut is no longer 'find separating spheres',
 but instantiate its *supported infinite attachment*
 and the complement-piece homeomorphisms as concrete
 same-object maps. No Agda/CI work per user request.
+
+## 2026-10-26 maximal clopen spatial-realisation cut and newest-PR cross-check
+
+### New positive result: actual embedded Cantor end-control (NOT wild ends)
+
+The existing `scripts/alexander_horned_tame_cantor_ball_cylinders.py`
+already gives closed Euclidean balls at each *chronological* word
+`w=(b_0,...,b_(n-1))`:
+`L_n=3^(-n-1)`,
+`a(w)=1/6+sum_{j<n} 2b_j/3^(j+2)`,
+`center(w)=(a(w)+L_n/2,1/2,0)`, and radius `3L_n/5`.
+All balls are strictly nested inside their parents, with child
+containment margin `L_n/15` and sibling gap `4L_n/15`.
+This is source-existing geometry, not invented for the current cut.
+
+Taking the inverse limit **on these actual balls** gives the explicit
+map (after applying the sector affine rotation/translation)
+```text
+F(c,b) = 9 e_c + R^c ( 1/6 + Σ[j>=0] 2 b_j / 3^(j+2), 1/2, 0 )
+R(x,y,z) = (z,x,y).
+```
+Indeed the infinite tail after the first n bits lies in
+`[0,L_n]`, so the resulting point lies in every corresponding
+ball; diameters `6L_n/5` tend to 0. Distinct words first
+disagreeing at bit n land in strictly separated sibling balls.
+The map is continuous in the cylinder/product topology, injective,
+and therefore a homeomorphism to its image by compactness of
+`C3 × {0,1}^N` and Hausdorffness of R³. Its image is literally
+three rotated/transplanted **affine middle-thirds Cantor sets on
+straight lines**, an explicit **tame comparator**. The inverse
+images of level-n balls restrict to clopen subsets of that
+Cantor image, NOT ambient-clopen subsets of connected R³/E.
+`R F(c,b)=F(c+1 mod3,b)` exactly.
+
+This is an actual embedded endpoint realisation, not merely the
+symbolic `ClopenWitness` status constructor in SSP369, and it
+still does NOT identify the Cantor **wild-point image** of
+Hatcher's embedded sphere or compute its complement π₁.
+
+The new exact-head standalone executable
+`scripts/alexander_horned_c3_clopen_spatial_realization.py`
+has been independently executed, with Python `py_compile` PASS,
+511 checked binary prefixes at depths 0..8 and 1533
+sector-prefix ball checks. The exact local Git blob SHA
+`066938fabf3f0f43d2e06d645f46c1c324b94a06`
+MATCHES the repository's fetched file blob, not just a
+locally equivalent prototype. The new consumer DIRECTLY IMPORTS
+and runs the pre-existing `ball` and `interval` constructors;
+the existing donor Git blob SHA `10a2a696a89c2b419bd30435f02afd90bbfb10aa`
+was also verified against the exact local source before execution. The mathematical all-depth statements
+are supported by the displayed formulas and standard topology
+theorems; finite runs do not prove the latter in Lean/Agda.
+
+### The newest PR #1254 paid a genuine *address-orientation* defect
+
+Latest stacked [#1254](https://github.com/chboishabba/dashi_agda/pull/1254)
+adds `ExoticCantorCylinderOrientationExact.agda`, using
+the **existing** `CantorProjectiveCylinderMeasureExact` and
+explicitly proving the difference between *PREPEND* storage
+and *APPEND* chronological stream-cylinder events.
+It gives a real counterexample: chronological parent `[true]`
+is NOT an event containing the old prepended child
+`[false,true]`. Although both child words have the
+expected dyadic mass, event inclusion is false without
+the orientation reversal. The new parent Python bridge
+uses `chronologyOfStack(b :: reverse(w)) = w ++ [b]`;
+it does not duplicate or silently import #1254's source-written
+Agda theorem. This parent-to-child dependency direction matters
+because #1254 is STACKED on this PR, currently unmerged.
+
+[PR #1266](https://github.com/chboishabba/dashi_agda/pull/1266)
+offers a consumer-relative collision criterion; [#1267](https://github.com/chboishabba/dashi_agda/pull/1267)
+sets severe-test/provenance discipline. Neither is a
+kernel receipt for the present geometry. The existing
+`alexander_horned_clopen_linking_impasse_probe.py`
+already supplies a linked versus unlinked comparison with
+the SAME abstract cylinder events/masses; do not duplicate
+that finite linking witness or claim it alone realises Hatcher's
+punctured-torus attachments.
+
+### Source genealogy and remaining high-payoff supplier
+
+**Original roots:** J. W. Alexander (1924), wild sphere;
+A. Hatcher, *Algebraic Topology*, Ex. 2B.2, supported
+horn/handlebody stages and van Kampen commutator tower;
+F. Lippert, *The Alexander Horned Sphere and Bing's Hooked
+Rug*, a separate support and wild-point exposition;
+standard middle-thirds Cantor construction and the classical
+compact-to-Hausdorff embedding theorem. **Existing code owners:**
+DASHI `CantorProjectiveCylinderMeasureExact`, binary horn-address
+and `SSP369ClopenBallBridge`, the already-created Euclidean tame
+ball script, plus the #1254 orientation correction.
+**New contribution this cut:** the explicit endpoint limit map,
+same-object C3 affine transport and regression verifying the
+chronological/stack/ball commuting square.
+
+**P0 remaining:** an actual *wild* pillbox/linked-handle
+realisation of Hatcher `X_n` for every n, with a
+source-defined collared cap, ambient inclusion
+`X_(n+1) ⊂ X_n`, and inclusion-induced meridian map
+`x_w ↦ [x_w0,x_w1]` proved by the corresponding
+punctured-torus geometry. The group injection then uses
+the ALREADY EXISTING algebraic proof; do not treat the
+tame embedded `F` above as the wild one. **P1:** actual
+satellite-relative collar map and based `C3` naturality
+into the existing Lean `ThreeArmCentralPi1Reduction`.
+**P2:** physical gauge/Dirac observables remain independent.
+
+The epistemic stop rule is exact: positive clopen/cylinder
+results establish a tame end image and cylinder-event topology;
+an abstract homeomorphism between Cantor end spaces does not
+transport ambient linking, a handlebody complement, local
+wildness, exterior group or physical nonabelian holonomy.
+No Agda or Lean kernel check or hardware measurement is claimed.
