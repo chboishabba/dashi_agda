@@ -986,3 +986,64 @@ reservationAndExportTaxAreNotHistoricalMethodTransfer :
 reservationAndExportTaxAreNotHistoricalMethodTransfer witness =
   Typed.economicArgumentSimilarityIsNotHistoricalMethodTransfer
     (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- 2025 to 2026 same 21.9b industry-tax statistic: forecast vs paid status.
+-- Two original AEP surfaces agree numerically but do not preserve the
+-- original qualification. Later survey finalisation is possible yet its
+-- audited cash receipt was NOT acquired by this source comparison.
+------------------------------------------------------------------------
+
+aep2025OriginalFinancialForecast : Typed.SourceReceipt
+aep2025OriginalFinancialForecast = Typed.sourceReceipt
+  "Australian Energy Producers, 2025 Financial Survey release"
+  "Oil and gas industry delivers record 22 billion in taxes and royalties to government revenues"
+  "2025-07-27"
+  "https://energyproducers.au/news/all_news/media-release-australian-oil-gas-industry-delivers-record-22-billion-in-taxes-and-royalties-to-government-revenues-in-2024-25"
+  "Original industry association first-party table estimates 2024-25 total AUD21943m (13484 company tax + 1347 PRRT + 6620 royalties/excise/fees + 492 other), explicitly presented as forecast. Oil and gas together; not audited actual paid receipts."
+
+aep2026TaxSenateSubmission : Typed.SourceReceipt
+aep2026TaxSenateSubmission = Typed.sourceReceipt
+  "Australian Energy Producers"
+  "Senate Select Committee on Taxation of Gas Resources, 13 April 2026 original"
+  "2026-04-13"
+  "https://energyproducers.au/hubfs/260413%20AEP%20submission%20to%20Senate%20Select%20Committee%20on%20the%20Taxation%20of%20Gas%20Resources-3.pdf?hsLang=en-au"
+  "First page original public submission says 21.9 billion taxes and royalties paid in 2024-25 while citing its 2025 survey. Original 2025 press text said expected/forecast; no revised audited final cash-payment reconciliation inspected. PDF first-page screenshot verified."
+
+aepForecastToPaidStatusRestatement : Typed.TypedGenealogyEdge
+aepForecastToPaidStatusRestatement = Typed.typedGenealogyEdge
+  "RC-09" "AEP 2025 21.943b forecast gas-and-oil combined taxes" "AEP 2026 21.9b paid headline"
+  Typed.reportedStatisticRestatement Typed.primary
+  (aep2025OriginalFinancialForecast ∷ aep2026TaxSenateSubmission ∷ [])
+  "Same original association cites its 2025 forecast when recasting rounded total as paid in 2026. Later auditing might exist, but is not established by cited original 2025 press summary alone. Numeric reappearance does not independently confirm actual remitted amounts."
+
+-- For a fixed rounded number the evidence status forecast or actual-report
+-- is not identifiable from the number itself, even when both documents are
+-- genuinely first-party. This toy witness says NOTHING about whether the
+-- 2026 paid assertion happens to be true in the actual economy.
+data Same21BReportedWorld : Set where
+  initialForecastStatus reportedAsPaidStatus : Same21BReportedWorld
+
+data Same21BHeadline : Set where rounded21Point9B : Same21BHeadline
+
+data SourceStatusFor21B : Set where projectedTaxTotal claimedActualTaxTotal : SourceStatusFor21B
+
+same21BPrinted : Same21BReportedWorld → Same21BHeadline
+same21BPrinted _ = rounded21Point9B
+
+reportedStatusFor21B : Same21BReportedWorld → SourceStatusFor21B
+reportedStatusFor21B initialForecastStatus = projectedTaxTotal
+reportedStatusFor21B reportedAsPaidStatus = claimedActualTaxTotal
+
+sameRoundedTaxTotalDifferentSourceStatus :
+  INF.NonFactorabilityWitness same21BPrinted reportedStatusFor21B
+sameRoundedTaxTotalDifferentSourceStatus =
+  INF.nonFactorabilityWitness
+    initialForecastStatus reportedAsPaidStatus refl (λ ())
+
+sameTaxNumberCannotDetermineSourceStatus :
+  INF.FactorsThrough same21BPrinted reportedStatusFor21B → ⊥
+sameTaxNumberCannotDetermineSourceStatus =
+  INF.witnessRulesOutEveryFlatFactorisation
+    sameRoundedTaxTotalDifferentSourceStatus
