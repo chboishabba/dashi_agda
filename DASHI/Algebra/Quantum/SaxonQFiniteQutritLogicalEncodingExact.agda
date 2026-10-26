@@ -53,3 +53,44 @@ logicalBasisOrthogonal = refl
 -- This file proves only finite basis-level encoding/decoding.
 -- Full unitary isometry, density matrices, pulse leakage bounds and
 -- manufacturer-specific basis identification are still open.
+
+
+-- Additional finite proof cut: explicit accepted/leaked partition and
+-- Dirac-orthogonal logical computational basis. Neither is a claim
+-- about a measured nitrogen isotope or a calibrated apparatus.
+
+data BasisClass : Set where
+  computational : LogicalLevel → BasisClass
+  nonComputational : BasisClass
+
+classify : Q.QutritBasis → BasisClass
+classify Q.ket0 = computational l0
+classify Q.ket1 = computational l1
+classify Q.ket2 = nonComputational
+
+classifyEncoded : (x : LogicalLevel) →
+  classify (encode x) ≡ computational x
+classifyEncoded l0 = refl
+classifyEncoded l1 = refl
+
+classifyExcluded : classify Q.ket2 ≡ nonComputational
+classifyExcluded = refl
+
+selectedZeroNormalized :
+  Q.basisPair (Dirac.bra (encode l0))
+              (Dirac.ket (encode l0)) ≡ Q.amp1
+selectedZeroNormalized = Q.ket0Normalized
+
+selectedOneNormalized :
+  Q.basisPair (Dirac.bra (encode l1))
+              (Dirac.ket (encode l1)) ≡ Q.amp1
+selectedOneNormalized = Q.ket1Normalized
+
+selectedOneOrthogonalZero :
+  Q.basisPair (Dirac.bra (encode l1))
+              (Dirac.ket (encode l0)) ≡ Q.amp0
+selectedOneOrthogonalZero = refl
+
+-- Basis-preserving retraction; the excluded ket does not masquerade as
+-- a computational bit. A superposition-level projector needs the
+-- already existing complex/Hilbert representation and remains separate.
