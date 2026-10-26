@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections import Counter, defaultdict
+from collections import Counter
 from fractions import Fraction
 from pathlib import Path
 
@@ -107,7 +107,7 @@ def audit(doc):
         'M2_external_agent_fitted': False,
         'original_human_data_analysed': False,
         'future_information_leakage_allowed': False,
-        'source_code_author': 'DAmelio et al. 2026 (in preparation)',
+        "source_code_author": "D'Amelio et al. 2026 (in preparation)",
     }
 
 
