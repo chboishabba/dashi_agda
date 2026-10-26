@@ -79,3 +79,20 @@ except ImportError:
 assert 3*4**5==3072 and 3*4**10==3145728
 print("PASS exact three-sector word evaluation gate budgets depths 5,10")
 print("FAIL-CLOSED: no source wild embedding, infinite-depth regularity or physical measurement")
+
+
+# EXTENDABILITY discriminator (existing horn #1244's original
+# AlexanderHornedAbelianHolonomyBIDIExact owner is cited, not
+# reimplemented): at every depth>=1, any ancestor meridian is
+# a nested commutator word; every generator exponent sum is 0.
+# Therefore a nontrivial stage U1 character CANNOT be extended
+# even one genuine Hatcher refinement step. The positive
+# nonabelian all-stage existence uses original Goto 1949.
+# Neither result makes a finite Wilson experiment wild-specific.
+for n in range(1,7):
+    for s in range(3):
+        w=expand(s,(),n)
+        assert all(sum((1 if x>0 else -1) for x in w
+                       if abs(x)==j)==0
+                   for j in range(1,3*2**n+1))
+print("PASS abelian characters fail Hatcher one-step extension, depth1..6")
