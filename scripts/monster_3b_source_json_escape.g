@@ -23,3 +23,32 @@ Monster3BSourceJSONQuotedLabel := function(s)
   escaped := ReplacedString(escaped, "\"", "\\\"");
   return Concatenation("\"", escaped, "\"");
 end;
+
+# Exact serialisation of one original GAP cyclotomic source value.
+# The mathematical value and CoeffsCyc are owned by GAP/CTblLib, and
+# its conductor is retained without approximating to Q(zeta_3).
+Monster3BSourceJSONCyclotomic := function(x)
+  local n, coeff, rebuilt, out, j;
+  n := Conductor(x);
+  if not IsInt(n) or n < 1 or n > 4096 then
+    Error("cyclotomic source conductor exceeds exact checker limit");
+  fi;
+  coeff := CoeffsCyc(x,n);
+  if coeff = fail or Length(coeff) <> n then
+    Error("incomplete exact GAP cyclotomic coordinates");
+  fi;
+  rebuilt := Sum([1..n], j -> coeff[j] * E(n)^(j-1));
+  if rebuilt <> x then
+    Error("GAP cyclotomic record did not reconstruct exact source value");
+  fi;
+  out := Concatenation("{\"conductor\":",String(n),",\"coefficients\":[");
+  for j in [1..n] do
+    if j > 1 then Append(out,","); fi;
+    if not IsRat(coeff[j]) then
+      Error("non-rational GAP coefficient in cyclotomic expansion");
+    fi;
+    Append(out,Monster3BSourceJSONQuotedLabel(String(coeff[j])));
+  od;
+  Append(out,"]}");
+  return out;
+end;
