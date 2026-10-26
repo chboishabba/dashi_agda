@@ -263,3 +263,97 @@ an actual many-one reduction, effective index map, proof
 that the prefix is source-alternating, polynomial existence,
 or `Sigma^0_l` completeness. The remaining proof wall is
 explicit and independent of successful toy-example testing.
+
+
+## 27 October continued implementation: the actual source-index reduction and guarding admission
+
+**Original paper re-read:** source §4 introduces the least-number
+construction in **Example 4.1**, not Example 4.3. Appendix A.3
+[arXiv HTML, original lines 549–583](https://arxiv.org/html/2610.08144v1)
+starts from the effective enumeration of integer-coefficient
+polynomials, obtains a *fixed* nine-unknown Diophantine representation
+of program evaluation via the original nine-unknown DPRM predecessor,
+specialises it to each program index, and then chooses
+`t(e)=μj[W(e,j)]` where the enumerated polynomial has exactly matching
+coefficients. The actual proof needs a **computable index** and not
+merely any code with equivalent roots.
+
+**Lean PR #88 additions to the existing proof owners:**
+
+- `LostInTranslationNineVariables.sourceIndex` uses a supplied
+  *surjectivity proof* and `Nat.find` to select the least matching
+  source code; `sourceIndex_identifies_source_code` proves actual
+  identity of that code, not name similarity or a related theorem.
+- `sourceIndex_preserves_nontermination_membership` composes
+  the externally supplied halting-root equivalence with the
+  source-specific enumeration index, proving the **exact logical**
+  NTOT-to-no-root membership equivalence. The implementation is
+  intentionally **noncomputable** until a separate computable
+  enumeration, decidable coefficient equality and effective search
+  theorem are supplied.
+- `IntegerPolynomialRoot` instantiates the source code type
+  with genuine `MvPolynomial (Fin 1 ⊕ Fin 9) ℤ`,
+  preserving the distinguished natural-number parameter and nine
+  natural-number root variables. The corresponding index-reduction
+  theorem is *conditional on* an actual nine-unknown polynomial
+  representation. An arbitrary Nat-indexed function `Q` alone
+  did not establish polynomiality, so the new type is a substantive
+  narrowing.
+- `LostInTranslationAlternation.sourceAlternationPrefix` is the
+  original A.4 convention `Q₂=∀, Q₃=∃` and alternating.
+  `sourceA4Predicate` uses the paper's distinct final blocks:
+  **even l:** `∀x, p≠0`; **odd l:** `∃x, p=0`.
+  Separate theorem statements show the source's `l=2` base
+  reduces to A.3, and correctly spell out `l=3`, `l=4`.
+  No assertion of Σ-level completeness follows.
+- `ConditionalTranslation.lean` models a **different output
+  contract**: a theorem template requiring an actual
+  proof-carrying least natural number. It proves conditional
+  square expansion while separately proving the source's
+  elementary no-root counterexample has **no admissible**
+  witness. This does not supply the original closed unguarded
+  statement or a successful total translate-or-refuse algorithm.
+  Accordingly it is **not** a refutation of BCH Theorem A.3/A.4
+  or Corollary A.5.
+
+**Independent arithmetic replay**, executed in the model's local
+working runtime for this tranche: **3540/3540** sampled exact
+integer/rational identities across the original finite examples,
+toy nine-variable roots, toy enumeration index membership, and
+the conditional fixed-level SCI height consequence; plus
+**15/15** selected finite source A.4 parity/base-case
+regressions. These calculations are samples of exact finite models,
+**NOT** full branch-local pytest or formal Lean kernel builds.
+The repository's new Python test functions contain closely related
+checks, but those test files have not themselves been executed on
+a checkout of the exact PR head.
+
+### Acceptance wall reached
+
+The remaining substantive unproved input is the **effective,
+source-coefficient-level nine-unknown DPRM** representation and
+search, together with formal Σ⁰_l completeness/arithmetical
+hierarchy and an actual SCI tower interpretation. Cameron Freer's
+independent `Hilbert10` library already provides the general
+semantic DPRM and computable H10 endpoints in a differently pinned
+Lean/mathlib environment. Its universal polynomial theorem has
+some witness arity `k` with **no proved numerical bound `k≤9`**,
+so that donor cannot pay this exact Appendix claim by citation
+or bare import. No bundled matching kernel executable is
+available in this runtime.
+
+A separate live Navier–Stokes track, [Agda #1271](https://github.com/chboishabba/dashi_agda/pull/1271),
+continues to produce a same-physical-source R734/R735 signed-critical
+obstruction and an uncovered large-data temporal interval.
+That is an *inspiration for source semantics and anti-promotion*,
+not a donor of a proof of BCH's computability-theoretic hierarchy
+nor a completion of Miller's conditional R³ criterion.
+
+**Strict provenance:** original BCH source authors own the
+paper's mathematical claims; OpenAI owns the cited historical
+Lean/NL materials; Cameron Freer owns his DPRM/H10 formalisation;
+the exact generic no-factorisation theorem predates these new
+consumer witnesses in the DASHI repository. Johl Brown-directed
+DASHI formalisation with ChatGPT-assisted source code is separate
+from each of those roots. Source-written ≠ typechecked ≠
+kernel-certified ≠ proved NL correspondence.
