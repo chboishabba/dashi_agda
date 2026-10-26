@@ -27,6 +27,7 @@ import alexander_horned_c3_explicit_open_cover as original_cover
 import alexander_horned_c3_pierced_shell_product as original_shell
 import alexander_horned_c3_equivariant_basing_paths as original_basing
 import alexander_horned_c3_same_cover_discriminator as original_cover_bidi
+import alexander_horned_c3_clopen_spatial_realization as original_clopen
 
 class ExoticMaxCutTests(unittest.TestCase):
     def test_whitney_real_parametric_image_caution(self):
@@ -281,5 +282,15 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertNotIn((0,), one.frontier)
         self.assertNotIn((1,), one.frontier)
         self.assertNotEqual(set(one.frontier), {(-1,), (0,), (1,)})
+
+    def test_parent_latest_tame_cantor_endpoint_clopen_not_ambient_open(self):
+        receipt = original_clopen.audit(max_depth=4)
+        self.assertEqual(receipt['status'], 'PASS')
+        self.assertEqual(receipt['checked_binary_prefixes'], 31)
+        self.assertEqual(receipt['sector_prefix_combinations'], 93)
+        self.assertTrue(receipt['clopen_on_endpoint_image'])
+        self.assertFalse(receipt['clopen_in_ambient_R3'])
+        self.assertFalse(receipt['Hatcher_wild_exterior_pi1_proved'])
+        self.assertFalse(receipt['linked_horn_ambient_embedding_proved'])
 
 if __name__ == '__main__': unittest.main()
