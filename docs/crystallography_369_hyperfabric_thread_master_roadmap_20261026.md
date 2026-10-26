@@ -255,7 +255,49 @@ same-carrier 26 ↔ 13×Bool chart, antipodal graph and holonomy.
   Agda-kernel proof and measured external-world evidence
   are distinct statuses. No CI dependency is imposed.
 
-Next maximal-value proof sequence: kernel-grade crystal
-lattice/structure-factor source audit → full 192 Agda Seitz
-action/Wyckoff provenance → ideal Bloch tight-binding
-operator and NV hyperfine/spin + SI photon calibration.
+
+
+## 2026-10-26 latest: same FCC lattice → first finite Bloch matrix
+
+The previously open ideal spinless two-sublattice nearest-neighbour
+Bloch consumer is now source-implemented in
+`DiamondNearestNeighbourBlochExact.agda`,
+`DiamondBlochCubicCovarianceExact.agda` and
+`DiamondBlochSpectralEvidenceBoundaryExact.agda`.
+
+- Four actual tetrahedral nearest B neighbours of an FCC A
+  site, not a replacement site set or 27-space analogy.
+- Hermitian 2×2 `H(k)`, Gaussian phase Γ(k), `H²=|Γ|²I`,
+  64 finite fourth-root momentum phase samples.
+- All 48 signed-cubic maps preserve squared energies and
+  have stronger matrix covariance: odd sign parity conjugates Γ,
+  represented by exchanging A/B basis entries.
+- Nontrivial exact samples: `|Γ|²=0` on 48 of 64 residues;
+  `|Γ|²=16` on 16. Toy hopping sample values, NOT the actual
+  diamond or NV electronic/spin bandgap.
+- Scalar-spectral non-entailment: a mass-squared spectral curve
+  can retain cubic symmetry while A/B atomic scattering contrast
+  breaks the nonsymmorphic glide. Bare scalar gap² also loses
+  complex Bloch phase. Thus a scalar spectrum does not
+  certify the actual material's full space-group action.
+- PR #1272 Fourier-pixel bidirectional work supplies a distinct
+  phase/intensity observer methodology; it is NOT a diamond
+  hardware experiment and does not measure this Bloch Γ(k).
+
+Updated Pareto proof sequence:
+1. Agda kernel typecheck/fix (CI not required).
+2. Full 192-operation Fd-3m Seitz/Bloch phase action, lattice
+   origin and Wyckoff settings, true reciprocal units.
+3. Source-specified multi-orbital/spin-orbit/strain/Zeeman
+   material Hamiltonian, ordered NV-bond C3v representations,
+   and preservation of the PR #1262 spin-one label no-go.
+4. Same-device SI-calibrated NV control, optical readout,
+   electron/nuclear register maps (#1269), original nuclear
+   Grover experiment and vendor claims distinguished (#1270).
+5. Complete 7/14/32/230 operation catalogues with original
+   source authority and operational experimental diagnostics.
+
+Attribution and acceptance apply at every arrow: established
+Fu–Kane–Mele/IUCr science, original DASHI owners, new PR #1261
+formalisation, uncompiled Agda source, independent exact finite
+arithmetic, and experimental observations are NOT one status.
