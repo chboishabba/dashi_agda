@@ -125,3 +125,22 @@ def dyadic_block_entropy(probs: Sequence[Fraction]) -> Fraction:
             raise ValueError('this certificate needs dyadic atom masses 2^-k')
         entropy += mass * (mass.denominator.bit_length() - 1)
     return entropy
+
+
+def finite_hurwitz_sum(n: int, exponent: int, shift: int = 0) -> Fraction:
+    """Exact *finite* H_N(shift,exponent), including nonpositive exponents."""
+    if not isinstance(n,int) or n<0 or not isinstance(exponent,int) or not isinstance(shift,int) or shift<0:
+        raise ValueError('n,shift nonnegative integers; exponent integer')
+    return sum((Fraction(r + shift, 1) ** (-exponent) for r in range(1, n+1)), Fraction())
+
+
+def finite_shifted_moment_binomial(n: int, exponent: int, shift: int, order: int) -> Fraction:
+    """Exact E[R^m] via H_N(shift,s-j) and the binomial theorem."""
+    if not isinstance(order,int) or order<0:
+        raise ValueError('nonnegative moment order')
+    z = finite_hurwitz_sum(n,exponent,shift)
+    if z<=0:
+        raise ValueError('positive finite support required')
+    numerator = sum((comb(order,j) * (-shift)**(order-j) * finite_hurwitz_sum(n,exponent-j,shift)
+                    for j in range(order+1)), Fraction())
+    return numerator/z
