@@ -61,3 +61,31 @@ def scalar_ode_supersolution(D0, nu, K, t):
 if __name__ == '__main__':
     e,d,n,k,cw,cm,t = sp.symbols('E0 D0 nu K CW CM T',positive=True)
     print(local_w1_certificate(e,d,n,k,cw,cm,t))
+
+
+@dataclass(frozen=True)
+class SmallDataCertificate:
+    gradient_smallness_threshold: sp.Expr
+    h2_infinite_time_integral: sp.Expr
+    commutator_infinite_time_integral: sp.Expr
+    initial_mixed_ceiling: sp.Expr
+    weighted_plus_terminal_ceiling: sp.Expr
+
+
+def small_data_global_w1_certificate(E0, D0, nu, K, CW, CM):
+    """Uniform-for-all-T/N *restricted small-H1 data* physical W1 ceiling.
+
+    Requires periodic mean-zero, D0<=nu²/sqrt(2K), actual physical
+    Galerkin NS, normalized helical projections. From Y>=X and
+    X'+nu Y<=K nu^-3 X³ infer X'+(nu/2)Y<=0, hence
+    X(t)<=D0 exp(-nu*t/2). Standard kinetic energy decay gives
+    E(t)<=E0 exp(-2nu*t), and int H2² <= (3E0/2+2D0)/nu.
+    Holder with the H1 exponential weight closes the infinite-time
+    integral of the physical quintic commutator. This is CLASSICAL
+    SMALL DATA, not unrestricted B or a closure of R735 W2.
+    """
+    threshold = nu**2/sp.sqrt(2*K)
+    H2total = (sp.Rational(3,2)*E0+2*D0)/nu
+    Ctotal = CW*(E0+D0)**sp.Rational(7,4)*(sp.Rational(2,7)/nu)**sp.Rational(1,4)*H2total**sp.Rational(3,4)
+    initial = CM*(E0+D0)**2
+    return SmallDataCertificate(threshold,H2total,Ctotal,initial,initial+Ctotal)
