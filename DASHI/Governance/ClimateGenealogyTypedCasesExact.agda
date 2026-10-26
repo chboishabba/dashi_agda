@@ -1248,3 +1248,60 @@ same25RateCannotDetermineModelSpotAssumption :
   INF.FactorsThrough sameNominalRateAcrossModels originalModelContractingAssumption → ⊥
 same25RateCannotDetermineModelSpotAssumption =
   INF.witnessRulesOutEveryFlatFactorisation equal25RateOpposedContractingModels
+
+
+------------------------------------------------------------------------
+-- Government reservation-version SOURCE CHANGE, not a fossil-fuel tax.
+-- Original Dec 2025 declaration (already above) 15-25% of production;
+-- 7 May 2026 20% measured against LNG exports, planned July 2027 start;
+-- 10 Sep 2026 20% exports, licences Jan 2027, DSO Jan 2028;
+-- 29 Sep DCCEEW page confirms 20% of annual export volumes (calibratable
+-- down) and separates framework July 2027 from duty Jan 2028.
+-- These are chronologically distinct official proposals; NO enactment or
+-- delivered supply/price effect inferred. Not to be confused with 25%
+-- EXPORT REVENUE LEVY assessed by ADL and Wood Mackenzie.
+------------------------------------------------------------------------
+
+governmentReservationMay2026 : Typed.SourceReceipt
+governmentReservationMay2026 = Typed.sourceReceipt
+  "Chris Bowen; Madeleine King; Tim Ayres, joint Australian Government original"
+  "Albanese Government to secure Australian gas for Australian users"
+  "2026-05-07"
+  "https://minister.dcceew.gov.au/bowen/media-releases/joint-media-release-albanese-government-secure-australian-gas-australian-users"
+  "First-party announcement changes intended reservation to volume equivalent to 20% of LNG exports and then plans commencement from 1 July 2027; older export contracts respected. Not a law-in-force certificate."
+
+governmentReservationSeptember2026 : Typed.SourceReceipt
+governmentReservationSeptember2026 = Typed.sourceReceipt
+  "Chris Bowen; Madeleine King; Tim Ayres, joint Australian Government original"
+  "Securing more affordable gas for Australians: reservation exposure draft"
+  "2026-09-10"
+  "https://minister.dcceew.gov.au/bowen/media-releases/joint-media-release-securing-more-affordable-gas-australians"
+  "Exposure-draft release: up to 20% of gas exports, licence applications from 1 Jan 2027, domestic supply obligation from 1 Jan 2028. Consultation status; later intended duty commencement than May 2026 release."
+
+governmentReservationDepartmentStatus2026 : Typed.SourceReceipt
+governmentReservationDepartmentStatus2026 = Typed.sourceReceipt
+  "Australian Government Department of Climate Change, Energy, the Environment and Water"
+  "Gas Market Review and reforms"
+  "Updated 2026-09-29"
+  "https://www.dcceew.gov.au/energy/markets/gas-markets/gas-market-review-reforms"
+  "First-party 29 Sep status: 20% of annual LNG export volumes DSO, with possible downward calibration; scheme/framework anticipated 1 July 2027, supply duties expected 1 Jan 2028; exposure legislation not finalised or independently verified enacted."
+
+reservation2025ProductionToMay2026Exports : Typed.TypedGenealogyEdge
+reservation2025ProductionToMay2026Exports = Typed.typedGenealogyEdge
+  "RC-16" "December 2025 proposed 15-25 percent production reservation" "May 2026 proposed domestic obligation equal to 20 percent LNG exports"
+  Typed.reportedStatisticRestatement Typed.primary
+  (australianGovernmentGasReservation2025 ∷ governmentReservationMay2026 ∷ [])
+  "The same named government proposed successive policy versions with different described volume bases. It is not a copied model calculation or evidence policy was implemented."
+
+reservationMayToSeptemberDutyDate : Typed.TypedGenealogyEdge
+reservationMayToSeptemberDutyDate = Typed.typedGenealogyEdge
+  "RC-17" "May 2026 government announced July 2027 intended start" "September 2026 exposure-draft January 2028 duty start"
+  Typed.reportedStatisticRestatement Typed.primary
+  (governmentReservationMay2026 ∷ governmentReservationSeptember2026 ∷ governmentReservationDepartmentStatus2026 ∷ [])
+  "Same institutional planned scheme: different stages and start dates, with DCCEEW separating framework July 2027 from exporter DSO Jan 2028. This is proposed policy evolution, not an assertion enacted law, actual compliance, price effects or lobbying causation."
+
+reservationDraftChronologyIsNotMethodTransmission :
+  Typed.StrongHistoricalTransfer reservationMayToSeptemberDutyDate → ⊥
+reservationDraftChronologyIsNotMethodTransmission witness =
+  Typed.headlineNumberRestatementIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
