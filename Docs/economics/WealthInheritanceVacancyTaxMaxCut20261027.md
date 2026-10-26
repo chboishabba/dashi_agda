@@ -167,3 +167,66 @@ hard-cap threshold 3 -> tax due 2 in all three worlds
 
 This extension does not run a new tax study, infer a modern legal duty, prove anti-capitalist or pro-capitalist philosophy, or claim exact-read philosophical evidence automatically provides a political theorem. The new named proof terms and query witnesses are *source-written* unless and until the exact PR head is typechecked with Agda; the standalone Python tests are *executed computational checks* only. Earlier core proofs and historical source owners retain their distinct attribution.
 
+## 8. Fiscal transmission, ownership power and assessment timing — max-cut round three (2026-10-27)
+
+**New source-written owner:** \`DASHI/Economics/WealthTaxFiscalTransmissionControlBidi20261027Exact.agda\`.
+**New runnable negative controls:** \`scripts/check_wealth_tax_maxcut.py\`.
+**CI validation route:** existing \`.github/workflows/philosophy.yml\`, augmented with the source-file path filter and three Agda leaf checks plus the Python regression. No CI pass or typecheck asserted until an actual workflow run is examined.
+
+### 8.1 Fiscal inference chain requires separate receipts
+
+Formal state carries \`netWealthAssessed\`, \`taxPaidCash\`, \`collectionCostCash\`, \`appropriatedCareCash\`.
+
+| Synthetic world | Assessed wealth | Tax due | Tax paid | Admin cost | Care appropriation |
+|---|---:|---:|---:|---:|---:|
+| Due/unpaid | 5 | 2 | 0 | 1 | 0 |
+| Due/paid | 5 | 2 | 2 | 1 | 0 |
+| Due/paid/allocated | 5 | 2 | 2 | 1 | 2 |
+| Due/paid/high-cost | 5 | 2 | 2 | 3 | 0 |
+
+*Same assessment -> different actual collection*: no function of liability **alone** can recover payment across these two worlds. Reuses \`INF.NonFactorabilityWitness\`, not a new information ontology. *Same collection -> different appropriation* and *same collection -> different collection cost* are independently witnessed. No artificial negative-net-revenue field is silently rounded to zero.
+
+Crucially, this is a **non-determination**, not a prohibition of effective tax administration or a finding that taxes harm care. In the real world, payment probabilities, collection costs, budgeting institutions and service delivery must be measured.
+
+### 8.2 Concrete dual-class share control discriminator
+
+**Original primary regulator/standard-setting roots:**
+
+- **Australian Securities and Investments Commission**, *Shareholder rights and responsibilities* (retrieved 27 October 2026), https://www.asic.gov.au/for-business-and-companies/companies/company-share-and-shareholder-rules-and-changes/shareholder-rights-and-responsibilities : different classes may have different voting rights; polling and resolution votes depend on company constitution and applicable law.
+- **Australian Accounting Standards Board**, *AASB 10 Consolidated Financial Statements*, compiled 31 December 2024, https://www.legislation.gov.au/F2015L01617/2024-12-31/2024-12-31/text/original/epub/OEBPS/document_1/document_1.html : B6 describes the straightforward majority-votes case but B38–B39 clarify control from contracts and potentially less than majority votes. Accounting control is not identical to all legal ownership/beneficiary tests.
+- **Singapore Exchange**, *Equity Securities Listing Rules*, Chapter 2, https://rulebook.qasgx.com/rulebook/chapter-2-equity-securities : dual-class listed shares may carry up to ten votes each, with specific conversion and governance constraints. This is an **example of a source-defined 10:1 mechanism**, not a rule automatically applicable to Australian companies.
+
+**DASHI synthetic register (no named company):**
+
+\`\`\`text
+ordinary class total 20 (1 vote each)
+super class total 3 (10 votes each)
+total 50 voting units
+founder initially 6 ordinary + all 3 super -> 6 + 30 = 36 / 50 = 72%
+founder transfers all 6 ordinary units -> 0 + 30 = 30 / 50 = 60%
+\`\`\`
+
+The transferable block is deliberately ordinary and the hypothetical super-class untouched. This produces an **exact counterexample** to a rule 'transfer of a monetary/share block must mean loss of corporate voting majority'. However it proves **neither** that a specific proposed wealth tax would collect a fixed number of shares nor that a real founder must retain control. Transfer limitations, company constitution, proxies, share-class sunset/conversion, debt/control agreements and other law are case-specific consumer obligations. No claim of actual named-billonaires' ownership is made.
+
+### 8.3 A 100% annual wealth tax above a threshold is not a *continuous* wealth cap
+
+For hypothetical threshold 3 and assessed wealth 5, levy 2, post-assessment stock 3. Subsequent intra-year growth of 2 yields stock 5 **until the next assessment**, where the illustrative policy collects 2 again. Two equalities are checked independently: the assessment can set the stock to 3 on the date; the stock can exceed 3 between dates.
+
+This is neither a constitutional impossibility nor a claim that annual taxation is ineffectual. It separates the **stock cap on assessment date** from a **continuous legal ceiling** and highlights asset valuation frequency, mark-to-market accounting and response timing as explicit design axes.
+
+### 8.4 Additional philosophy/sociology consequences
+
+- Fraser's *Contradictions of Capital and Care* (2016) explicitly analyses the gendered, classed and geographically displaced reproduction crisis and exclusionary postwar arrangements. A high tax **plus care earmarking** is one possible policy mechanism to investigate, not sufficient proof of universal care justice. Cite original https://newleftreview.org/issues/ii100/articles/nancy-fraser-contradictions-of-capital-and-care .
+- Arnstein's citizen-participation distinction asks who makes allocation decisions, rather than treating the nominal appropriation amount as a certificate of democratic participation. Existing primary owner remains \`CohnInstitutionalIbrahimDeweyAcquisitionExtensionThreeExact\`.
+- \`PowerAndGrammar\` asks who sets the tax base, liability exceptions, spending priorities, audit burden and appellate evidentiary grammar. The new numbers do not automatically answer this second-order political question; the answer requires institutional data.
+- \`HistoricalSocialTotalityBidiExact\` prohibits class position -> uniquely recovered ideology. Proposed tax design is not a classification of all members of any economic or political class.
+- The shared Ibrahim Wikipedia social-science funnel is **navigation only**, not a factual proof of any of these authors' doctrines or economic outcomes.
+
+### 8.5 Latest PR method transfer and stopping wall
+
+Observed GitHub current relevant PRs: #1275 source-typed Zipf family and strict law-vs-observation distinction, #1276 Woogaroo same-object source/authority and beneficiary nonpromotion, #1267 severe paired hypothesis tests, #1245 original-root evidence chain. None is an empirical sponsor or proof owner for this tax problem; no edits were made to their branches.
+
+**P0 newly paid as SOURCE-WRITTEN:** exact finite payment/appropriation/cost/dual-vote/inter-assessment models; test code and CI coverage route. **P1 NOT paid:** real collection rates, audited administration cost, multi-jurisdictional beneficial-ownership time series, firm voting-control rights after actual tax-motivated transfers, appropriation/disbursement/service access and matched counterfactuals. **P2 NOT paid:** a causal macro comparison of the proposed 100% ceiling, which is not enacted policy; tax incidence and realistic response equilibria require assumptions and data. **Agda kernel status:** unverified in this session. **Sociology status:** original historical theory appropriately source-bounded.
+
+**Expected highest-value next consumer:** one linked identity- and time-indexed graph containing (a) original legal tax instrument, base/jurisdiction/rate, (b) assessed asset and owner, (c) realised payment/appeal, (d) voting instrument and control agreements, (e) appropriation, expenditure and effective care outcome, (f) the contrasted population/time/control. Absence of that empirical graph is an actual wall: constructing more synthetic snapshots does not resolve causation.
+
