@@ -44,7 +44,8 @@ def wire(n,k):
 
 def case(positive):
     sign=1 if positive else -1
-    source={"table_id":"6.Suz","central_c2_zero_based":1,
+    source={"table_id":"6.Suz","gap_runtime_version":"4.synthetic",
+       "ctbllib_runtime_version":"1.3.synthetic","central_c2_zero_based":1,
        "central_c3_zero_based":2,
        "group_order":6,"class_orders":[1,2,3,6,3,2],
        "class_sizes":[1,1,1,1,1,1],
@@ -56,6 +57,8 @@ def case(positive):
                     "values":[wire(78,0),wire(78*sign,0),wire(78,k)]+[wire(0,0) for _ in range(3)]}
                    for i,(label,k) in enumerate((("78a",1),("78b",2)),1)]}
     selected={"six_suz_table":"6.Suz",
+        "gap_runtime_version":"4.synthetic",
+        "ctbllib_runtime_version":"1.3.synthetic",
         "six_suz_group_order":6,"six_suz_class_count":6,
         "six_suz_class_orders":list(source["class_orders"]),
         "six_suz_class_sizes":list(source["class_sizes"]),
@@ -92,6 +95,8 @@ def fake_validate(x):
         full_nebe=x["selected_78_is_nebe_sym2_family_full_character_equal"],
         selected_faithful=x["source_selected_degree_78_faithful_to_6Suz"],
         source_order=x["six_suz_group_order"],
+        gap_version=x["gap_runtime_version"],
+        ctbllib_version=x["ctbllib_runtime_version"],
         source_classes=x["six_suz_class_count"],
         class_orders=x["six_suz_class_orders"],
         class_sizes=x["six_suz_class_sizes"],
@@ -171,7 +176,15 @@ def run():
           lambda a,b:b.pop("six_suz_selected_12_all_class_values"))
     fails("truncated_selected_78_full_row",
           lambda a,b:b["six_suz_selected_78_all_class_values"][0].pop())
-    assert len(negatives)==32
+    fails("stale_exported_GAP_version",
+          lambda a,b:a.update(gap_runtime_version="4.stale"))
+    fails("stale_selected_GAP_version",
+          lambda a,b:b.update(gap_runtime_version="4.stale"))
+    fails("stale_exported_CTBLlib_version",
+          lambda a,b:a.update(ctbllib_runtime_version="1.2.stale"))
+    fails("stale_selected_CTBLlib_version",
+          lambda a,b:b.update(ctbllib_runtime_version="1.2.stale"))
+    assert len(negatives)==36
     return {"status":"PASS_SYNTHETIC_JOIN_INTERFACE",
        "coherent_synthetic_branches":2,"rejected_false_joins":negatives,
        "original_6Suz_data_used":False,"full_class_auditor_executed":False,
