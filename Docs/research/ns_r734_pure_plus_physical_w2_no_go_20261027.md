@@ -93,7 +93,7 @@ universal signed-payment route to a general B theorem is **invalid**.
 ## Execution and proof levels
 
 New `tests/test_ns_r734_pure_plus_physical_w2_no_go.py`:
-**nine locally executed exact SymPy tests passed**. They check real
+**ten locally executed exact SymPy tests passed**. They check real
 Fourier conjugation, transversality, genuine normalized H±
 polarization at positive and negative modes, actual projected
 Galerkin nonlinearity, exact dyadic critical energy/dissipation/
@@ -131,7 +131,7 @@ Thus with scaling factor a=512, ν=1 and Dcrit=36,
               > 512*(3/20)-72 = 24/5 >0.
 The obstruction is not an uncertain floating-point result.
 All three further checks run in the exact SymPy test file,
-bringing the total to **9 passing tests**.
+bringing the total to **10 passing tests**.
 
 **Source-state update:** the existing original
 `NSTriadKNR650AugmentedCriticalWeightedNormalFormRound734Exact.agda`
@@ -140,3 +140,53 @@ now contain source-local audit comments identifying this
 counterexample. Their conditional algebraic record types and
 false promotion flags remain unchanged. No new numbered
 positive compiler was created or asserted.
+
+## Essential existing R92/R102 cross-pollination: true helicity versus dyadic defect
+
+The repo ALREADY has the correct original Waleffe-energy/helicity
+invariant algebra in
+`NSTriadKNWaleffeCommonAmplitudeInvariantsRound92Exact.agda`
+and its helical signed/unsigned critical exchange reduction in
+`NSTriadKNHelicalCriticalExchangeReductionRound102Exact.agda`
+plus `NSTriadKNHelicalCriticalExchangeFieldRound102Exact.agda`.
+Their true helicity invariant carries a signed **physical curl
+eigenvalue** `s_m |m|`, NOT the approximate dyadic
+`2^ceil(log2(||m||infty))` weight of R734 S0.
+
+On the SAME six-mode physical datum the exact nonlinear
+*true positive-helicity* production is ZERO:
+  `2 Re sum_m |m|<u_m,F_m>=0`,
+and the positive helicity mass is exactly
+  `2+sqrt(5)+2sqrt(6)`.
+The original S0 dyadic critical production is nevertheless
+  `2 Re sum_m w(m)<u_m,F_m>
+     =(5+sqrt5-sqrt30)/10>0`.
+Since the true helicity production is zero, the entire difference
+is EXACTLY the weight residual
+  `P_dyadic =
+    2 Re sum_m [w(m)-|m|]<u_m,F_m>`.
+
+This explains the apparent tension with R102's sound statement that
+homochiral production vanishes under the exact signed-helicity
+invariant: R102 is about **exact curl eigenvalue weights**, whereas
+the original R734 continuation currency uses **rounded-up dyadic
+weights**, equivalent as positive norms but *not invariant under
+nonlinear transfer*. Uniform norm equivalence never implies
+equivalence of the corresponding derivatives or signed work.
+
+**Highest-value positive follow-on:** retain the exact physical
+helicity cancellation from R92/R102 and isolate a *signed dyadic
+weight-defect commutator*, with all same-helicity and mixed-helicity
+channels, on the original projected velocity. This route must
+produce a genuine cutoff-uniform bound with the original critical
+dissipation and an initial-data dependence that survives the
+realizability tests; algebraic weight rewriting alone cannot
+supply it. No new R-numbered conditional compiler was added here.
+
+The tenth independently passing exact SymPy test in
+`tests/test_ns_r734_pure_plus_physical_w2_no_go.py`
+verifies the original physical true-helicity production cancellation,
+true weighted mass and *exact* dyadic residual decomposition.
+The original R92/R102 theorem authors and their cited Waleffe
+mathematics retain attribution; DASHI supplies the particular
+counterexample and exact comparison.
