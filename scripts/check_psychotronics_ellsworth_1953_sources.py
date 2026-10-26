@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 from pathlib import Path
 
@@ -138,7 +139,7 @@ def self_test() -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--dly", type=Path, help="locally obtained official NOAA USW00014606.dly")
+    parser.add_argument("--dly", type=Path, help="local NOAA .dly file OR a separately transcribed official single-row excerpt; origin not authenticated")
     parser.add_argument("--self-test", action="store_true")
     parser.add_argument("--ledger-only", action="store_true")
     args = parser.parse_args()
@@ -149,9 +150,15 @@ def main() -> None:
     if args.self_test:
         report["self_test"] = self_test()
     if args.dly is not None:
-        data = args.dly.read_text(encoding="ascii").splitlines()
+        local_bytes = args.dly.read_bytes()
+        data = local_bytes.decode("ascii").splitlines()
         report["observation"] = check_noaa_month(data)
-        report["data_original_bytes_checked"] = True
+        report["local_input_byte_count"] = len(local_bytes)
+        report["local_input_sha256"] = hashlib.sha256(local_bytes).hexdigest()
+        report["local_input_parsed"] = True
+        report["data_original_bytes_checked"] = False
+        report["source_authenticity"] = "unverified local source custody; matching published values is not authenticated remote bytes"
+        report["source_scope"] = "one matched month only; content could be web-transcribed excerpt or a full station file"
     elif not args.ledger_only:
         report["excerpt_status"] = "web-inspected exact values; full NCEI file not downloaded here"
         report["observation"] = {
