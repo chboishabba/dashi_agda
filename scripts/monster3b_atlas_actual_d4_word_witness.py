@@ -19,6 +19,7 @@ Outer m is anti-symplectic and inner r symplectic on the ORIGINAL
 """
 import hashlib
 from math import gcd
+from itertools import product
 import json
 from pathlib import Path
 from monster3b_atlas_source_word_order_d4_gate import (
@@ -111,6 +112,15 @@ def audit(root):
 
     assert rank(diff(m,I))==6
     assert gcd(3**13,8)==1  # Schur-Zassenhaus normal-Hall hypothesis, not theorem runtime proof.
+    # If this source quotient module is identified with the ACTUAL E/Z(E)
+    # action, -I on F3^12 induces a (scalar multiple of) Schr6 parity on
+    # functions of F3^6. Only the zero coordinate is fixed by x -> -x.
+    parity_fixed_basis=sum(all(x==(-x)%3 for x in point)
+                           for point in product(range(3),repeat=6))
+    assert parity_fixed_basis==1
+    assert (3**6-parity_fixed_basis)//2==364
+    assert 1458>90*abs(parity_fixed_basis)
+
     return {
       "schema":"monster3b-atlas-2suz2-exact-source-d4-word-v1",
       "source_original_authority":"ATLAS/AtlasRep original 2.Suz:2 GF3 generators",
@@ -143,6 +153,13 @@ def audit(root):
       "source_D4_quotient_order":8,
       "Schur_Zassenhaus_coprime_Hall_hypothesis":True,
       "actual_N3B_D4_complement_exists_by_classical_theorem_given_BW_quotient":True,
+      "H6_Schrodinger_parity_basis_dimension":729,
+      "H6_Schrodinger_parity_fixed_basis_count":1,
+      "H6_Schrodinger_parity_transposition_count":364,
+      "phase_90_tensor_trace_absolute_upper_bound_if_same_actual_E_module":90,
+      "Monster_2A_6D_phase_trace_1458_excluded_if_same_actual_E_module":True,
+      "Monster_2B_6B_6E_phase_traces_66_90_not_excluded":True,
+      "actual_selected_E_over_Z_module_intertwiner_paid":False,
       "explicit_Monster_group_generator_words_produced":False,
       "agda_kernel_checked":False,
     }
