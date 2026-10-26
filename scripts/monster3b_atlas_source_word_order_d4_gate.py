@@ -57,6 +57,21 @@ def audit(root):
     I=ident()
     assert mm(g1,g1)==neg(I) and power(g1,4)==I
     assert power(g2,3)==I and g2!=I
+    # Original ATLAS Suz:2 standard-generator semi-presentation, not
+    # inferred from our selected field or Heisenberg cocycle:
+    # o(c)=2, o(d)=3, o(cd)=28, o(cdcdcddcdd)=7.
+    # The 2.Suz:2 faithful GF(3) lifts C,D have C^2=-I and
+    # (CD)^28=-I, so their linear versus projective orders differ.
+    CD=mm(g1,g2)
+    assert power(CD,28)==neg(I) and power(CD,56)==I
+    assert all(power(CD,k)!=I and power(CD,k)!=neg(I)
+               for k in (1,2,4,7,14))
+    source_relation_word='cdcdcddcdd'
+    relation=I
+    for letter in source_relation_word:
+        relation=mm(relation,g1 if letter=='c' else g2)
+    assert power(relation,7)==I
+    assert relation!=I
     source=json.loads((root/'outputs'/'monster3b_selected_heisenberg_lift_20261012.json').read_text())
     if source.get('selected_word')!='g2 g1 g2^-1 g1 g2^-1':
         raise ValueError('selected word receipt identity changed')
@@ -78,6 +93,12 @@ def audit(root):
        'original_ATLAS_outer_g1_square_central_negative_identity':True,
        'original_ATLAS_outer_g1_is_D4_order2_mirror':False,
        'original_ATLAS_outer_g2_order':3,
+       'original_ATLAS_projective_CD_order':28,
+       'original_ATLAS_linear_CD_order':56,
+       'original_ATLAS_CD_28th_power_negative_identity':True,
+       'original_ATLAS_Suz_outer_semipresentation_relation_word':'cdcdcddcdd',
+       'original_ATLAS_relation_word_order':7,
+       'source_generator_alignment_with_ATLAS_semipresentation':True,
        'previously_selected_word_order':6,
        'previously_selected_word_cube_central_negative_identity':True,
        'previously_selected_word_is_D4_order4_rotation':False,
