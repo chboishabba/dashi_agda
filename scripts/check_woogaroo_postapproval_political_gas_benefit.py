@@ -25,15 +25,15 @@ def verify() -> None:
     assert "import DASHI.Law.SensibLawWoogarooEPBC8575CumulativeImpactSufficiencyExact as Cumulative" in agda
     assert "import DASHI.Law.SensibLawWoogarooPostApprovalPoliticalGasBenefit20261027Exact" in roll
 
-    assert agda.count("Source.mkNoDOISource") == 8
-    assert agda.count("Source.publicAttribution") == 8
-    assert agda.count("= scoped-receipt") == 7
-    assert agda.count("false refl") >= 7
-    assert agda.count("→ ⊥") == 7
+    assert agda.count("Source.mkNoDOISource") == 10
+    assert agda.count("Source.publicAttribution") == 10
+    assert agda.count("= scoped-receipt") == 8
+    assert agda.count("false refl") >= 8
+    assert agda.count("→ ⊥") == 8
     assert all(s in agda for s in (
         "15 October 2026", "1786", "21 August 2026",
         "30 April 2004", "4 February 2025", "14 October 2026",
-        "thirdPartyIndexOnly", "historicConnectionNotCurrentEstate",
+        "thirdPartyIndexOnly", "historicConnectionNotCurrentEstate", "regionalCoverageNotSameConnection",
         "stateMeetingNotCommonwealthCausation", "housingNarrativeNotImproperInfluence",
         "portalNoticeNotJudicialValidity", "websiteNotLandTitle",
         "thirdPartyIndexNotDispositive", "proposedBillNotLocalSubsidy",
@@ -49,13 +49,13 @@ def verify() -> None:
 
     assert all(s in note for s in (
         "1,786 comments", "more than 850 submissions", "2020/8651",
-        "2004", "third-party index", "all-electric counterfactual",
+        "2004", "third-party index", "all-electric counterfactual", "AGN Queensland Gas Distribution Network",
         "section 135A", "15 October 2026", "original",
         "not a legal opinion", "historical infrastructure",
     ))
     assert re.search(r"\bP0\b", note) and re.search(r"\bP4\b", note)
     assert "NOT the actual final preliminary documentation" in note
-    print("PASS: source-text evidence, time, jurisdictions, seven promotion firewalls, seven scoped receipts")
+    print("PASS: source-text evidence, time, jurisdictions, eight promotion firewalls, eight scoped receipts")
 
 
 if __name__ == "__main__":
