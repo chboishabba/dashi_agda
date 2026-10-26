@@ -206,6 +206,50 @@ elwood2012Review = Source.mkDOISource
   "Original independently authored 2012 scholarly critical re-analysis of the 1978 investigator report; supports authors' no consistent demonstrated adverse exposure-effect association within cohort limitations. NOT a fresh or blinded independent human cohort replication"
   Source.publicAttribution
 
+kubisDecember1969 : Source.AttributedSource
+kubisDecember1969 = Source.mkNoDOISource
+  "Joseph F. Kubis, PANDORA Scientific Advisory Committee"
+  "On Evaluation of Data Associated with Pandora (Preliminary Report)"
+  "Original 1969-12-04 committee methodological evaluation, indexed as pages 283–299 of DoD FOIA Pandora records bundle; full page images not examined here"
+  "1969"
+  "https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Other/Operational_Procedure_For_Project_Pandora.pdf"
+  Source.archivalSource
+  "Same animal programme retrospective methodological assessment: treatment of baseline, experimental/control contamination and cumulative-effect assumptions disputed; original text index not an independent new primate experiment"
+  Source.publicAttribution
+
+pandoraCommitteeJanuary1970 : Source.AttributedSource
+pandoraCommitteeJanuary1970 = Source.mkNoDOISource
+  "Lysle H. Peterson, PANDORA Scientific Advisory Committee, Institute for Defense Analyses"
+  "Minutes of the Pandora Meeting of January 12, 1970"
+  "1970-01-12 meeting; summary typed 1970-03-23, original indexed DoD FOIA Pandora bundle, page-label 1–6; full official scan access denied"
+  "1970"
+  "https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Other/Operational_Procedure_For_Project_Pandora.pdf"
+  Source.archivalSource
+  "Committee judged WRAIR special-signal primate performance studies negative for a clear and strong effect and said further human controlled tests likely similarly inconclusive; explicitly warned that lab signal reproduced only components of original Moscow signal. No general RF no-effect claim"
+  Source.publicAttribution
+
+pandoraErratumMarch1970 : Source.AttributedSource
+pandoraErratumMarch1970 = Source.mkNoDOISource
+  "Chanda, secretary to Herbert Pollack, Institute for Defense Analyses"
+  "Letter correcting a double negative in the January 12 Pandora Committee summary"
+  "Original dated 1970-03-31 correction letter to Richard S. Cesaro, indexed with original DoD FOIA PANDORA bundle; image not independently inspected"
+  "1970"
+  "https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Other/Operational_Procedure_For_Project_Pandora.pdf"
+  Source.archivalSource
+  "Editorial correction changes committee's double-negative wording about absence of expected permanent deleterious effects; restores original intended safety sentence, but not proof of safe exposure. The erratum edits the existing January source root, not a new experiment"
+  Source.publicAttribution
+
+koslovNavyZaret1971 : Source.AttributedSource
+koslovNavyZaret1971 = Source.mkNoDOISource
+  "Samuel Koslov et al., RAND technical review panel for US Navy"
+  "Review of Contract N00014-69-C-0358 Radio Frequency Hazards, investigator Milton M. Zaret"
+  "1971-08-16 RAND panel report, original US National Archives RG46, National Security Archive item 28797; government original report, distinct contract from WRAIR main trial"
+  "1971"
+  "https://nsarchive.gwu.edu/document/28797-document-13-rand-corporation-samuel-koslov-et-al-report-assistant-secretary-navy-rd"
+  Source.archivalSource
+  "Panel judged Navy-funded long-term low-level monkey/rabbit studies scientifically unreliable, citing inadequate RF hardware, technical controls and animal welfare; of five deaths, three reported due to restraint strangulation. Those deaths must not be asserted caused by microwave irradiation or merged into original 1966 WRAIR primate cohorts"
+  Source.publicAttribution
+
 heilmeier1977 : Source.AttributedSource
 heilmeier1977 = Source.mkNoDOISource
   "George H. Heilmeier, Director, Defense Advanced Research Projects Agency"
@@ -280,7 +324,8 @@ sourceAtlas = Source.mkSourceAtlas
    byronOperational1966 ∷ byronFinal1966 ∷ arpaInitial1966 ∷
    cesaroSeptember1967 ∷ johnstonBizarre ∷ stateViralStudy1965 ∷
    georgeWashington1966 ∷ pandoraApril1969 ∷ pandoraHumanMinutes ∷
-   koslovRand ∷ heilmeier1977 ∷ lilienfeld1978Original ∷
+   koslovRand ∷ kubisDecember1969 ∷ pandoraCommitteeJanuary1970 ∷
+   pandoraErratumMarch1970 ∷ koslovNavyZaret1971 ∷ heilmeier1977 ∷ lilienfeld1978Original ∷
    mallalieu1980PhysicalModel ∷ ntia1981Assessment ∷
    senateMoscow1979 ∷ hopkins1976To1978Study ∷ elwood2012Review ∷
    odniExperts ∷ odni2025 ∷ recall2026 ∷ [])
@@ -317,6 +362,8 @@ data ProgrammeObject : Set where
   wrairPlannedExpandedFacility1969 : ProgrammeObject
   darpa1977DisavowalStatement : ProgrammeObject
   pandoraMcIlwainExperimentalReassessment : ProgrammeObject
+  pandora1970CommitteeFinalReassessment : ProgrammeObject
+  navyZaretSeparateExposureContract : ProgrammeObject
   mallalieuRetrospectivePhysicalFieldModel : ProgrammeObject
   ntia1981CompiledAssessment : ProgrammeObject
   lilienfeldCompleted1978HumanReport : ProgrammeObject
@@ -365,6 +412,9 @@ data LinkKind : Set where
   originalHumanInvestigatorReport : LinkKind
   expertReassessmentOfReusedFieldAndCohort : LinkKind
   independentReviewerSameCohort : LinkKind
+  committeeOriginalStudyReassessment : LinkKind
+  signedCorrectiveErratum : LinkKind
+  separateContractCriticalReview : LinkKind
 
 record BoundedLineageEdge : Set where
   constructor boundedLineageEdge
@@ -481,6 +531,53 @@ eraIsNotInterchangeable :
   tums1966ToMay1975 ≡ mutsScreenedAfterFeb1976 → ⊥
 eraIsNotInterchangeable ()
 
+pandoraFinalCommitteeAssessment : BoundedLineageEdge
+pandoraFinalCommitteeAssessment = boundedLineageEdge
+  pandoraMcIlwainExperimentalReassessment pandora1970CommitteeFinalReassessment
+  committeeOriginalStudyReassessment pandoraCommitteeJanuary1970
+  "January 1970 committee, typed March 23, synthesised Kubis and McIlwain reanalysis and judged performed WRAIR laboratory animal effects negative for clear, strong behavioural change"
+  "WRAIR reproduced selected Moscow wave components only; cannot extend result to every original complex waveform, human body or other observed outcome"
+
+pandoraErratumCorrectsOneDocument : BoundedLineageEdge
+pandoraErratumCorrectsOneDocument = boundedLineageEdge
+  pandora1970CommitteeFinalReassessment pandora1970CommitteeFinalReassessment
+  signedCorrectiveErratum pandoraErratumMarch1970
+  "31 March 1970 IDA secretary correction of double negative in committee safety sentence; same scientific committee source/document"
+  "Corrected committee risk language is not calibrated long-term no-harm proof and its separate carrier is not a new empirical observation"
+
+navyZaretCriticalSeparateContract : BoundedLineageEdge
+navyZaretCriticalSeparateContract = boundedLineageEdge
+  arpaBizarre navyZaretSeparateExposureContract separateContractCriticalReview koslovNavyZaret1971
+  "1971 Koslov Navy contract N00014-69-C-0358 Zaret technical review criticised experiments and recorded animal deaths due in part to faulty restraint"
+  "Related historical RF research is not automatically the same animals, laboratory, grant or direct RF-caused mortality"
+
+data ScientificEvidenceRole : Set where
+  retrospectiveCommitteeReassessment : ScientificEvidenceRole
+  originalIndividualExperimentalRuns : ScientificEvidenceRole
+  separateNavyContractReview : ScientificEvidenceRole
+
+committeeSynthesisIsNotRawTrial :
+  retrospectiveCommitteeReassessment ≡ originalIndividualExperimentalRuns → ⊥
+committeeSynthesisIsNotRawTrial ()
+
+navyContractIsNotWrairRawTrial :
+  separateNavyContractReview ≡ originalIndividualExperimentalRuns → ⊥
+navyContractIsNotWrairRawTrial ()
+
+data CommitteeSourceCarrier : Set where
+  originalJanuaryMinutes : CommitteeSourceCarrier
+  correctionMarchLetter : CommitteeSourceCarrier
+
+data OriginalCommitteeRoot : Set where
+  committeeJanuary1970StudyRoot : OriginalCommitteeRoot
+
+committeeRoot : CommitteeSourceCarrier → OriginalCommitteeRoot
+committeeRoot _ = committeeJanuary1970StudyRoot
+
+erratumDoesNotCreateIndependentStudy :
+  committeeRoot originalJanuaryMinutes ≡ committeeRoot correctionMarchLetter
+erratumDoesNotCreateIndependentStudy = refl
+
 pandoraKoslovObservedOriginalRecords : BoundedLineageEdge
 pandoraKoslovObservedOriginalRecords = boundedLineageEdge
   originalPrimateHighDoseExperiment pandoraMcIlwainExperimentalReassessment
@@ -540,9 +637,9 @@ pandoraRetrospectiveAccountTension = boundedLineageEdge
 
 -- 23 distinct dated publication/source objects in this consumer's current
 -- source atlas. Count is documentary, not independent scientific studies.
-sourceCarrierCountIsTwentyThree :
-  Source.sourceCount (Source.sources sourceAtlas) ≡ 23
-sourceCarrierCountIsTwentyThree = refl
+sourceCarrierCountIsTwentySeven :
+  Source.sourceCount (Source.sources sourceAtlas) ≡ 27
+sourceCarrierCountIsTwentySeven = refl
 
 -- Documentary possession, programme hardware, and experiment performance are
 -- different kinds of object. Asset transfer does not prove transfer of data.
