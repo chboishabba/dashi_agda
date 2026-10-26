@@ -110,7 +110,13 @@
       ],
       "supports": [
         "apmEpisode"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "The original 1977 model/domain weighting does not exhibit the APM-reported aggregate DI lead",
+        "would_strengthen": "An independently sourced matched-original specification reproduces the reported aggregate ranking",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
     },
     {
       "id": "rankRobust",
@@ -126,7 +132,13 @@
         "reportOriginalAbt",
         "housePublished",
         "reliabilityPaper"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "A matched original House/St Pierre specification reverses DI's rank or makes it statistically indistinguishable under defined interval",
+        "would_strengthen": "Original comparable model-domain estimates preserve DI's advantage across the explicitly enumerated adjustment set",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
     },
     {
       "id": "affectiveMediation",
@@ -136,7 +148,13 @@
       "requires": [
         "abtExactCells"
       ],
-      "supports": []
+      "supports": [],
+      "severe_test": {
+        "would_narrow": "Measured confidence precedes competence gains or common factors explain both",
+        "would_strengthen": "Prospective temporally ordered measured mediation survives confounder and measurement sensitivity",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
     },
     {
       "id": "durability",
@@ -149,7 +167,13 @@
       ],
       "supports": [
         "followupPaper"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "Follow-up attrition or comparator reconstruction explains the apparent retained skills",
+        "would_strengthen": "Within-cohort exposed-versus-comparator outcomes remain favourable after attrition and later-school corrections",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
     },
     {
       "id": "suppression",
@@ -161,7 +185,13 @@
       ],
       "supports": [
         "apmEpisode"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "A dated original decision releases/reports the allegedly withheld item and directly contradicts its precise suppression claim",
+        "would_strengthen": "A contemporaneous original memo establishes the specified deliberate withholding and decision authority",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
     },
     {
       "id": "nationalDecline",
@@ -172,7 +202,13 @@
         "policyOriginal",
         "abtExactCells"
       ],
-      "supports": []
+      "supports": [],
+      "severe_test": {
+        "would_narrow": "No identifiable policy counterfactual links dissemination to aggregate nationwide trajectory",
+        "would_strengthen": "Credible policy exposure, downstream outcome and rival-policy identification establish attributable national effect",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
     }
   ],
   "actions": [
