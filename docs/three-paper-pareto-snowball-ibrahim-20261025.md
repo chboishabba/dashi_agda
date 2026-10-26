@@ -448,3 +448,30 @@ Lean lemma first appeared in commit
 `2026-10-26T22:19:22+10:00`.
 The typed chronology stores `sourceCommittedOnly` rather than
 conflating those events with a successful kernel check.
+
+
+### Last-minute PR #1271 source snowball: Nakashima quartic kernel (16 Oct 2026)
+
+A current fresh addition to [Agda #1271](https://github.com/chboishabba/dashi_agda/pull/1271)
+is `tests/test_ns_nakashima_kernel_scalar_audit.py`. The **original
+source root**, not authored by DASHI, is **Ken Nakashima**,
+*Toward Global Regularity of the Three-Dimensional Incompressible
+Navier–Stokes Equations through Signed Nonlinear Transfer, Dynamical
+Quartic Regeneration, and Viscosity-Conditioned Fourier Correlations*
+(author-hosted research release, **2026-10-16**),
+[original release](https://ken-theory.org/?page_id=25343).
+The author **reports** 48 nonzero ordered quartic paths, grouped
+coefficients `2688/5, 0, -4704/5` and a residual
+viscosity-conditioned temporal kernel
+`336/(5 nu)*(exp(-14 nu t)-exp(-8 nu t))`.
+The source itself says independent *pathway-level* verification and
+uniform high-order closure remain open, and the coefficient-level
+kernel does not determine the sign of complete evolving complex
+Fourier transfer. It **does not claim global regularity is proved**.
+
+This is a potential signed-transfer/B-front test source, not an
+independent witness for Miller's R³ projected-vorticity A3
+hypotheses, Yan's stationary pressure equation, or Rodgers's
+enacted temporal order. Keep #1271 its original owner; do not
+copy 48-path arithmetic into #1255 or count reports of the same
+Nakashima experiment as independent confirmations.
