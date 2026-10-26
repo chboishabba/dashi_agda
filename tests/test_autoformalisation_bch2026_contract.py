@@ -91,3 +91,25 @@ def test_finite_information_collisions_do_not_require_source_identity():
     for left, right, label in cases:
         assert left != right
         assert label
+
+
+def test_original_jones_sun_domain_and_appendix_corollary_parity_audit():
+    atlas = SOURCES.read_text()
+    for evidence in (
+        "James P. Jones", "10.2307/2273588",
+        "Zhi-Wei Sun", "2609.01594", "INTEGER",
+        "cameronFreerHilbert10",
+    ):
+        assert evidence in atlas
+    doc = DOC.read_text()
+    for distinction in (
+        "Corollary A.5", "Remark A.6",
+        "Theorem A.3", "Theorem A.4",
+        "LostInTranslationNineVariables",
+        "LostInTranslationAlternation",
+        "integer", "natural",
+        "nine-variable",
+        "SCI_A(chi_d_l)=l",
+    ):
+        # Mathematical object names are written in source-style ASCII.
+        assert distinction.lower() in doc.lower(), distinction
