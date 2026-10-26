@@ -729,6 +729,30 @@ noaaBangorGHCN1953 = Source.mkNoDOISource
   "Original station counts in tenths mm: 5 July 0, 6 July 66, 7 July 193, 8 July 46, 9 July 74. Independently establishes recorded regional Bangor rain, not Ellsworth onset or causal device effect."
   Source.publicAttribution
 
+-- Two station streams under the same NOAA GHCN custodial family are NOT
+-- two independent publishers or two rainmaking experiments.
+noaaBarHarborGHCN1953 : Source.AttributedSource
+noaaBarHarborGHCN1953 = Source.mkNoDOISource
+  "NOAA NCEI GHCN-Daily; historical Bar Harbor 3 NW Maine station observers"
+  "Bar Harbor 3 NW Maine USC00170371 original daily PRCP July 1953"
+  "official NOAA browser-read 269-column July row USC00170371195307PRCP on 26 October 2026; complete original publisher file bytes not downloaded"
+  "1953"
+  "https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USC00170371.dly"
+  Source.archivalSource
+  "July 5=0, 6=0, 7=130, 8=0, 9=10 tenths-mm; 6–8 = 13.0 mm; original hourly gauge cutoff and Reich local onset not established"
+  Source.publicAttribution
+
+noaaBarHarborStationMetadata : Source.AttributedSource
+noaaBarHarborStationMetadata = Source.mkNoDOISource
+  "NOAA NCEI Climate Data Online (same GHCN custodian as station rows)"
+  "BAR HARBOR 3 NW Maine USC00170371 original station identity"
+  "official original metadata: 44.41667 north, 68.25 west, 34.1m, 1893-01-01 through 1982-08-31; inspected 26 October 2026"
+  "1953"
+  "https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND%3AUSC00170371/detail"
+  Source.archivalSource
+  "Identifies historical Maine observation station, not Bar Harbor airport beginning 2005 or the Ellsworth experiment gauge"
+  Source.publicAttribution
+
 noaaBangorStationMetadata : Source.AttributedSource
 noaaBangorStationMetadata = Source.mkNoDOISource
   "NOAA NCEI Climate Data Online (same institutional root as raw station)"
@@ -773,6 +797,32 @@ ellsworthKansasFalseWeatherJoin = Source.mkNoDOISource
   "same city spelling but Kansas location; July 1953 weather on that page cannot be assigned to Ellsworth Maine"
   Source.publicAttribution
 
+-- 2003 primary EVENT organiser and later SAME-ORGANISER video page are
+-- separate source carriers, not two independent historical witnesses.
+-- Croft and RVML remain different root speakers/custodians. Neither RVML
+-- carrier independently attests a 1999 Flanagan-to-Gentry-to-Croft plan.
+rvmlGentry2003Programme : Source.AttributedSource
+rvmlGentry2003Programme = Source.mkNoDOISource
+  "Rogue Valley Metaphysical Library and Event Center (organiser)"
+  "Secrets of Electronic Medicine by Gentry Smith: 4 November 2003 RVML event"
+  "original RVML 2003 November dated calendar; directly opening archive now 403 but indexed original host programme independently inspected"
+  "2003"
+  "https://rvml.org/calendar/wc112003s.htm"
+  Source.communitySource
+  "organiser lists Gentry Smith as 4 November 2003 lecture speaker; no published coil directions, independently identified Croft handoff, verified employment or medical results"
+  Source.publicAttribution
+
+rvmlGentryVideoMetadata : Source.AttributedSource
+rvmlGentryVideoMetadata = Source.mkNoDOISource
+  "RVML Community Resource Center (uploader; claimed speaker Gentry Smith)"
+  "Gentry Smith - Secrets of Electronic Medicine, Vimeo 92437258"
+  "original organiser-uploader page indexed; playback/film date/transcript not inspected; same title/speaker/institution as 2003 event"
+  "upload date unknown; linked 2003 event unconfirmed footage identity"
+  "https://vimeo.com/92437258"
+  Source.communitySource
+  "promotional metadata lists Pat Flanagan electronic device and says Gentry constructed Reich Cloudbusters; both are uploader biographical/topic statements, not authenticated first-person speech, blueprints, military personnel records, shared coil transmission or medical/meteorological performance"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -802,8 +852,10 @@ sourceAtlas = Source.mkSourceAtlas
    croftMoonbustingEarly2002 ∷ adachiEditedChembusterIndex ∷
    wmoWeatherModification2025 ∷ peterReichDreams1973 ∷
    bushCloudbusting1985 ∷ noaaBangorGHCN1953 ∷
-   noaaBangorStationMetadata ∷ ellsworthAmericanJuly1953 ∷
-   bangorLibraryNewspaperArchives ∷ ellsworthKansasFalseWeatherJoin ∷ [])
+   noaaBangorStationMetadata ∷ noaaBarHarborGHCN1953 ∷
+   noaaBarHarborStationMetadata ∷ ellsworthAmericanJuly1953 ∷
+   bangorLibraryNewspaperArchives ∷ ellsworthKansasFalseWeatherJoin ∷
+   rvmlGentry2003Programme ∷ rvmlGentryVideoMetadata ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -830,6 +882,7 @@ data LineageRoot : Set where
   wmoInstitutionRoot peterReichMemoirRoot kateBushArtistRoot : LineageRoot
   noaaBangorWeatherRoot ellsworthAmericanPressRoot bangorLibraryRoot : LineageRoot
   kansasWeatherPortalRoot : LineageRoot
+  rvmlOrganizerPublicationRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -862,6 +915,38 @@ mkBound :
 mkBound proposition carrier locator root role ceiling residual =
   claim-bound proposition carrier locator root role ceiling residual
     false refl false refl
+
+-- Two publisher/document carriers; same RVML provenance root. The Gentry
+-- speaker/topic is NOT the 1999 person-to-person instruction transfer.
+rvmlGentryNamedEvent : ClaimBound
+rvmlGentryNamedEvent = mkBound
+  "RVML original November 2003 calendar publicly names Gentry Smith as speaker on electronic-medicine topics"
+  rvmlGentry2003Programme
+  "RVML November 2003 archived calendar, Tuesday 4 November"
+  rvmlOrganizerPublicationRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "named contemporary speaker and scheduled event only; identity with Croft's Gentry and 1999 instruction handoff unverified"
+
+rvmlGentryFlanaganAdvertisedTopic : ClaimBound
+rvmlGentryFlanaganAdvertisedTopic = mkBound
+  "RVML uploader's description advertises a Pat Flanagan electronic device among purported Gentry Smith lecture topics"
+  rvmlGentryVideoMetadata
+  "Vimeo 92437258 original RVML uploader description; audio not inspected"
+  rvmlOrganizerPublicationRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "independent of Croft publisher but only same-organiser topic adjacency; speech, professional assistant relationship and handwritten winding provenance unpaid"
+
+rvmlGentryReichCloudbusterPublicity : ClaimBound
+rvmlGentryReichCloudbusterPublicity = mkBound
+  "RVML original Vimeo publisher-description says Gentry Smith had designed and constructed Reich Cloudbusters and advertises Pat Flanagan's electronic device"
+  rvmlGentryVideoMetadata
+  "Vimeo 92437258 RVML Community Resource Center promotional description paragraphs"
+  rvmlOrganizerPublicationRoot
+  Diligence.contextualEvidence
+  attributedAuthorReport
+  "no original Gentry coil drawings or contemporaneous build receipt, independent Navy/personnel documentation, spoken recording verification, meteorological measurement or 1999 Flanagan-to-Croft instruction handoff"
 
 croftCoLocatedDevice : ClaimBound
 croftCoLocatedDevice = mkBound
@@ -1572,6 +1657,29 @@ bangorJuly8 = station-precipitation noaaBangorGHCN1953 "USW00014606" 1953 7 8 46
 bangorJuly9 : HistoricStationPrecipitation
 bangorJuly9 = station-precipitation noaaBangorGHCN1953 "USW00014606" 1953 7 9 74
 
+-- Exact 1953 published station-month arithmetic, not a statement about
+-- 1953 gauge observation-day cutoff or rainfall at Reich's apparatus.
+barHarborJuly5 : HistoricStationPrecipitation
+barHarborJuly5 = station-precipitation noaaBarHarborGHCN1953 "USC00170371" 1953 7 5 0
+
+barHarborJuly6 : HistoricStationPrecipitation
+barHarborJuly6 = station-precipitation noaaBarHarborGHCN1953 "USC00170371" 1953 7 6 0
+
+barHarborJuly7 : HistoricStationPrecipitation
+barHarborJuly7 = station-precipitation noaaBarHarborGHCN1953 "USC00170371" 1953 7 7 130
+
+barHarborJuly8 : HistoricStationPrecipitation
+barHarborJuly8 = station-precipitation noaaBarHarborGHCN1953 "USC00170371" 1953 7 8 0
+
+barHarborJuly9 : HistoricStationPrecipitation
+barHarborJuly9 = station-precipitation noaaBarHarborGHCN1953 "USC00170371" 1953 7 9 10
+
+barHarborJuly6Through8TotalTenthsMm :
+  tenthsMillimetre barHarborJuly6 +
+  tenthsMillimetre barHarborJuly7 +
+  tenthsMillimetre barHarborJuly8 ≡ 130
+barHarborJuly6Through8TotalTenthsMm = refl
+
 bangorJuly6Through8TotalTenthsMm :
   tenthsMillimetre bangorJuly6 +
   tenthsMillimetre bangorJuly7 +
@@ -1597,6 +1705,28 @@ noaaBangorStationIdentityClaim = mkBound
   Diligence.primaryProposition
   institutionalHistoricalInterpretation
   "same-agency metadata does not count as second original independent gauge"
+
+-- The root below tracks original GHCN custodial provenance; the
+-- stations are distinct measurement units, as their exact IDs show.
+noaaBarHarborRainSourceClaim : ClaimBound
+noaaBarHarborRainSourceClaim = mkBound
+  "Original NOAA Bar Harbor 3 NW Maine station says 6 July 0, 7 July 130, 8 July 0 tenths-mm"
+  noaaBarHarborGHCN1953
+  "USC00170371195307PRCP 269-column web-readable original record; 26 October 2026 transcript"
+  noaaBangorWeatherRoot
+  Diligence.primaryProposition
+  originalRegionalWeatherMeasurement
+  "different station, no exact Ellsworth 22h reading, historical daily gauge cutoff or rainfall-causation evidence"
+
+noaaBarHarborStationIdentityClaim : ClaimBound
+noaaBarHarborStationIdentityClaim = mkBound
+  "USC00170371 is Bar Harbor 3 NW Maine with 1893–1982 observation period"
+  noaaBarHarborStationMetadata
+  "NCEI station identity 44.41667 north, 68.25 west, 34.1m, 1953 covered"
+  noaaBangorWeatherRoot
+  Diligence.primaryProposition
+  institutionalHistoricalInterpretation
+  "shared NOAA origin and station location metadata do not prove historical local 22:00 rain or non-Maxwell effects"
 
 ellsworthJuly8PressClaim : ClaimBound
 ellsworthJuly8PressClaim = mkBound
@@ -1766,6 +1896,18 @@ wmoStatementCannotProveReichMechanism = bounded-relation
   "WMO 2025 source-specific real weather-modification methods"
   "Reich 1953 original orgone-rain causality claim"
   documentaryDistinction wmoCausalLimitsClaim false refl false refl
+
+rvmlPromotionalReichBuildNotVerifiedMechanism : BoundedRelation
+rvmlPromotionalReichBuildNotVerifiedMechanism = bounded-relation
+  "RVML publicity naming Gentry Smith as a Reich Cloudbuster builder"
+  "Reich 1953 original water-connected apparatus and claimed rainmaking"
+  documentaryDistinction rvmlGentryReichCloudbusterPublicity false refl false refl
+
+rvmlFlanaganNamedTopicNotOriginalCoilHandoff : BoundedRelation
+rvmlFlanaganNamedTopicNotOriginalCoilHandoff = bounded-relation
+  "RVML advertised Pat Flanagan's Electronic Bliss Device talk topic"
+  "Croft first-person 1999 Gentry/Flanagan Mobius instructions claim"
+  documentaryDistinction rvmlGentryFlanaganAdvertisedTopic false refl false refl
 
 windingGuideDomainNotRainMachineProof : BoundedRelation
 windingGuideDomainNotRainMachineProof = bounded-relation
