@@ -186,3 +186,22 @@ The existing \(\Chi_{33}\)-reduced connected group \(K\) has a new selected-sour
 ### 2026-10-27 verified acceptance ledger for the new B_K subphase
 
 GitHub-committed and **exact Git-blob SHA-matched / executed** Python tests: `check_kk_e6_h_pi1_charge_deck.py` (including K reduction), `check_kk_e6_chi33_full_cartan_anomaly_factor.py`, `check_kk_e6_higgs_reduction_anomaly_same_source.py`, source chiral donor `check_kk_e6_orbifold_gs_anomaly_factor.py`, and `check_kk_e6_higgs_k_su2_witten_parity.py`. The two key conclusions—connected K with retained all-Z3 deck sectors and vanishing rational free anomaly on BK, plus ordinary SU2L/R (pi_4) mod-two checks—are now computationally checked on exact repository bytes under explicitly cited classical topology/index inputs. Phase 2 **does not** have an actual full-K bordism/eta classification, full-H UV anomaly cancellation, physically derived nonzero Higgs vacuum or globally patched WZ term. Those remain fail-closed and **must not** be silently promoted by downstream LARES orbital fits.
+
+
+## 2026-10-27 high-alpha original-object upgrade: H → K → SM/Z6 → U3 and imported published bordism
+
+Original first-Tits 27 #1106 and physical boundary parity/VEVs #1241 admit the following **conditional** global group chain, now implemented with original 27 weight indices in `scripts/check_kk_e6_k_global_z6_selection.py`, `scripts/check_kk_e6_post_e32_sm_global_z6.py`, `scripts/check_kk_e6_post_e21_u3_photon.py` and the exact BIDI identity join `scripts/check_kk_e6_global_higgs_chain_owner_join.py`:
+
+`H=(SU3c x U2L x U2R)/Z3diag`
+ --nonzero Chi33→
+`K=(SU3c x SU2L x SU2R x U1_z)/Z6`
+ --nonzero E32→
+`S=(SU3c x SU2L x U1Y)/Z6`
+ --nonzero E21→
+`G_color+EM=(SU3c x U1em)/Z3 ≅ U3`.
+
+The 27 original chirality-indexed weights transport coherently through all stages: 16 LH SM weights and 11 RH vectorlike/exotic weights appear at S, which separately pass standard 4D perturbative anomaly sums. Its final residual EM integer `3Q=-q_z/2` satisfies `3Q≡-t_color mod3`, and no extra independent B photon is included in this source-selected stabilizer chain. The original two-VEV potential **does not** yet derive E21; the entire group chain is conditional on its new physical scalar source and joint stable interval solution.
+
+**Significant original-theorem-paid Phase-2 subgates:** Davighi, Gripaios & Lohitsiri, JHEP 07 (2020) 232 eq **(6.15)** explicitly prove `Omega5Spin(B[SU3³/Z3diag])=0`; eq **(4.45)** prove `Omega5Spin(B[S])=0`. These are literal matches to our full bulk G and post-E32 SM S global forms, so **the ordinary 4D closed-spin global torsion classifier for these groups is externally PAID**. This is not an eta-inflow theorem for the actual 5D interval with H fixed planes, nor a physical source/vacuum completion. The correct residual boundary/UV wall is `H` and `K` spin/relative anomaly + nonzero H local polynomial, 5D regulated eta/CS/WZ across Chi33 zeros. Prior pages stating all BG bordism is unknown are superseded by this exact source-root attribution; do not extrapolate the same Ω=0 to the H/K inclusions.
+
+**Scientific priority:** (i) selected full-H relative 5D quantum consistency and genuine E21 Higgs potential; (ii) anomaly-consistent full coupled even/odd KK/ghost spectrum and renormalized radion/stress, (iii) Earth-compatible material source and physical photon/matter coupling, (iv) source-derived LARES-2 observable, uncertainties, and held-out comparison. The classical original LARES-2 observable and experiment remain independently anchored; no KK deviation, mass or new fifth-force signal is inferred.
