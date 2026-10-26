@@ -87,7 +87,8 @@
       "members": [
         "P1-79",
         "P1-81",
-        "P1-82"
+        "P1-82",
+        "P1-85"
       ],
       "kind": "NOAA/NCEI ISD original Bangor 1953 station-year archive object, independently indexed dataset format but not necessarily independent original observations from GHCN Bangor historical weather records",
       "independent_of": [
@@ -338,9 +339,12 @@
     },
     {
       "id": "1953_bangor_isd_precip_versus_ghcnd_join",
-      "status": "unpaid",
-      "requires": [],
-      "effect": "Without actual ISD observation and precipitation codes, no assertion about time-alignment, daily reported 6.6/19.3 mm or original instrument independence."
+      "status": "bounded_converted_hourly_vs_daily_agreement",
+      "requires": [
+        "P1-85",
+        "P1-63"
+      ],
+      "effect": "Actual user-uploaded converted NOAA Bangor 1953 CSV records 24h AA1 July6/7/8 7.0/19.0/5.0mm close within 0.5mm to NOAA original GHCNd 6.6/19.3/4.6mm same station family; original raw ISD gzip and original gauge provenance remain unverified, not two independent measurements of device effect."
     },
     {
       "id": "original_noaa_isd_format_105_plus_variable_length",
@@ -377,6 +381,31 @@
       "status": "unpaid",
       "requires": [],
       "effect": "1953 converted CSV directory is exposed, but exact Bangor station-year 72607114606.csv presence, hash and original July5–9 time/AA1 values have not been retrieved. One NOAA source family with original ISD."
+    },
+    {
+      "id": "bangor_1953_actual_july5to9_hourly_uploaded",
+      "status": "actual_user_supplied_1953_hourly_source_content",
+      "requires": [
+        "P1-85"
+      ],
+      "effect": "Actual NOAA converted CSV upload SHA256 2a3b048d620b320fb8d1cf548d4eb06fb2c49821faa54c4cc7f708649cdca9bd has 8760 unique hourly 1953 Bangor station records, 120 hourly records July5-9, with source USAF4; remote NOAA SHA not authenticated."
+    },
+    {
+      "id": "bangor_1953_22h_6july_manual_rain_showers",
+      "status": "original_observed_regional_station_at_claim_clock_no_causality",
+      "requires": [
+        "P1-85",
+        "P1-64"
+      ],
+      "effect": "Actual Bangor July7 02UTC manual MW1=80,1 quality-passed slight rain showers; IANA/Eastern Maine DST converts to July6 22:00 EDT, same clock as original Ellsworth newspaper claim but different site and hourly observation does not identify onset or cloudbuster effect."
+    },
+    {
+      "id": "bangor_1953_subsequent_showers_and_24h_total",
+      "status": "original_observed_converted_hourly_report",
+      "requires": [
+        "P1-85"
+      ],
+      "effect": "Bangor manual July7 UTC04/05 quality-passed moderate/heavy showers; AA1 July7 12UTC=24h 19mm, condition9 unspecified, quality1 passed; not per-hour precipitation or independent frontal/causal proof."
     }
   ],
   "source_snapshot": {
@@ -443,7 +472,8 @@
       "exact_noaa_1953_cloud_key_verified": false,
       "ghcnh_original_dataset_doi": "10.25921/jp3d-3v19",
       "actual_1953_ghcnh_bangor_csv_psv_retrieved": false,
-      "standard_library_offline_listing_locator_synthetic_verified": true
+      "standard_library_offline_listing_locator_synthetic_verified": true,
+      "converted_1953_Bangor_user_upload_source_content_now_recovered": true
     },
     "isd_cloud_2026_custody_acquisition_adapter": {
       "script_path": "scripts/locate_psychotronics_noaa_isd_1953_s3.py",
@@ -479,6 +509,45 @@
       "synthetic_unit_tests_committed": 13,
       "synthetic_unit_tests_actual_repo_layout_passed": true,
       "original_attribution": "NOAA/NCEI original 1953 weather reporters and historical NOAA data custodians; not assistant-created observations"
+    },
+    "uploaded_bangor_real_1953_hourly": {
+      "source": "docs/research/psychotronics-20261027-real-bangor-hourly-1953-ellsworth-event-clock.md",
+      "receipt_provenance": "user upload NOAA converted station-year file",
+      "filename": "72607114606.csv",
+      "bytes": 2724610,
+      "sha256": "2a3b048d620b320fb8d1cf548d4eb06fb2c49821faa54c4cc7f708649cdca9bd",
+      "station": "72607114606",
+      "records": 8760,
+      "full_july5to9_hourly_window_records": 120,
+      "source_flag": "4",
+      "source_flag_meaning": "USAF surface hourly observation",
+      "rain_record_utc": "1953-07-07T02:00:00Z",
+      "bangor_rain_local_EDT": "1953-07-06T22:00:00-04:00",
+      "original_rain_code": "MW1=80,1",
+      "code_meaning": "slight rain showers at observation, quality passed",
+      "later_showers_utc": [
+        "1953-07-07T04:00:00Z",
+        "1953-07-07T05:00:00Z"
+      ],
+      "rain_24hr_AA1_mm_july6_7_8": [
+        7,
+        19,
+        5
+      ],
+      "prior_GHCNd_daily_PRCP_mm_july6_7_8": [
+        6.6,
+        19.3,
+        4.6
+      ],
+      "compare_source_family_not_independent_weather_event": true,
+      "publisher_original_remote_checksum_verified": false,
+      "legacy_original_ISD_fixed_width_gzip_acquired": false,
+      "ellsworth_same_site_verified": false,
+      "observed_hour_equals_precise_onset": false,
+      "causal_no_intervention_comparator": false,
+      "physical_orgone_mechanism_verified": false,
+      "exact_committed_replay_script_blob": "586b5dc3a13d320b508d21aa0b4e3d16c1ded58c",
+      "exact_script_was_locally_run_on_uploaded_actual_source": true
     }
   },
   "algorithm": {
@@ -486,6 +555,7 @@
     "prohibition": "No edge automatically promotes author assertions or observed precipitation into device causality; model statuses are bibliographic, not ontology truth. An uploader's third-person promotional biography cannot certify Navy employment, historical device construction, or Flanagan-Gentry-Croft technical handoff.",
     "clock_bucket_sensitivity": "If station local July 6 22h is stipulated and cutoffs are assumed to end local right-closed 24h windows, cutoff before 22h labels hypothetical rain as July 7 and cutoff at/after 22h labels July 6; without observed station clock and at-site hour neither bucket identifies Reich event.",
     "isd_time_nonpromotion": "Original ISD 1953 station-year file existence does not imply 1953-07-06 data coverage, AA1 rainfall report, UTC-to-Maine-local converter, independent observer root, or any intervention effect. Invalid or absent payload remains unpaid, not false.",
-    "replay_correction": "Earlier parser incorrectly equated first-four ISD variable characters with complete record length, self-tests then used equally defective synthetic fixture; all prior claimed source format playback requires corrected 105+variable invariant. Executed corrected fixtures do not pay original 1953 bytes or event-hour chronology."
+    "replay_correction": "Earlier parser incorrectly equated first-four ISD variable characters with complete record length, self-tests then used equally defective synthetic fixture; all prior claimed source format playback requires corrected 105+variable invariant. Executed corrected fixtures do not pay original 1953 bytes or event-hour chronology.",
+    "original_hour_crosslink": "Source content moved from unpaid to observed for converted 1953 Bangor CSV, but publisher-signed original S3 custody, original fixed-width ISD gzip, original Ellsworth site and no-cloudbuster counterfactual stay unpaid. First 22h observed rain code at Bangor is clock correspondence, not minute onset or cause."
   }
 }
