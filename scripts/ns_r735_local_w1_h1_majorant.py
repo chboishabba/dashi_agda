@@ -1,0 +1,63 @@
+"""Cutoff-uniform *local-time* R735/W1 analytical certificate.
+
+Provenance: classical Leray/Galerkin H1 energy calculus, periodic GN/Sobolev,
+M. Riesz rectangle partial-sum and Leray/Riesz L4 multipliers, Holder.
+DASHI contribution: same-helical-carrier composition into existing R691/R735 W1.
+
+For real divergence-free mean-zero periodic Galerkin u_N on T3 with the
+NORMALIZED physical H+ and H- projectors and actual Leray forcing F_N,
+
+  X_N = ||grad u_N||_2^2, Y_N = ||Delta u_N||_2^2,
+  X_N' + nu Y_N <= K nu^(-3) X_N^3.
+
+This yields an explicit cut-off UNIFORM local time for X_N and int(Y_N).
+The helical quintic commutator satisfies the standard conditional bound
+  |C_N| <= C_W ||u_N||_(H1)^(7/2) ||u_N||_(H2)^(3/2).
+
+This code checks the EXACT symbolic scalar assembly; the functional
+inequalities themselves are classical mathematical assumptions, not
+proved by numeric examples or a runnable symbolic program.
+
+No arbitrary-time W1, W2, B7, A3 or Clay B claim is made.
+"""
+from dataclasses import dataclass
+import sympy as sp
+
+
+@dataclass(frozen=True)
+class Certificate:
+    max_time: sp.Expr
+    gradient_ceiling: sp.Expr
+    h2_time_integral: sp.Expr
+    commutator_time_integral: sp.Expr
+    initial_mixed_ceiling: sp.Expr
+    weighted_plus_terminal_ceiling: sp.Expr
+
+
+def local_w1_certificate(E0, D0, nu, K, CW, CM, T):
+    """Return exact formulas for E0>=0, D0>0, nu,K,CW,CM>0,
+    0 <= T <= nu^3/(4 K D0^2). Uses E0=||u0||² and D0=||grad u0||².
+    CW: helical/product/Calderon-Zygmund multiplier constant;
+    CM: helical initial product H1 mass ceiling constant.
+    No numerical values for analytic constants are fabricated.
+    """
+    sqrt2 = sp.sqrt(2)
+    lifetime = nu**3/(4*K*D0**2)
+    Xmax = sqrt2*D0
+    # H2(inhomogeneous)^2 = E + 2X + Y on the normalized torus.
+    Yint = (D0 + K*nu**(-3)*Xmax**3*T)/nu
+    H2int = T*(E0 + 2*Xmax) + Yint
+    # H1^2=E+X; Holder integral H2^(3/2) <= T^(1/4)(int H2²)^(3/4).
+    Cint = CW*(E0+Xmax)**sp.Rational(7,4)*T**sp.Rational(1,4)*H2int**sp.Rational(3,4)
+    M0 = CM*(E0+D0)**2
+    return Certificate(lifetime,Xmax,H2int,Cint,M0,M0+Cint)
+
+
+def scalar_ode_supersolution(D0, nu, K, t):
+    """Exact comparison solution for X' <= K nu^-3 X³."""
+    return D0/sp.sqrt(1-2*K*D0**2*t/nu**3)
+
+
+if __name__ == '__main__':
+    e,d,n,k,cw,cm,t = sp.symbols('E0 D0 nu K CW CM T',positive=True)
+    print(local_w1_certificate(e,d,n,k,cw,cm,t))
