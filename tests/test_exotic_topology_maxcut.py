@@ -359,4 +359,22 @@ class ExoticMaxCutTests(unittest.TestCase):
             "full_graph_maxwell_eq_6_does_not_prove_sparse_subgraphs"])
         self.assertFalse(result["actual_selected_triangs_36_tight_verified"])
 
+
+    def test_euler_maxwell_all_genus_selected_pl_stage_identity(self):
+        result = power.audit()
+        self.assertTrue(result["euler_maxwell_identity_verified_on_source_meshes"])
+        for name, stages in result["families"].items():
+            for stage in stages:
+                self.assertTrue(stage["all_boundary_loops_triangular"])
+                self.assertTrue(stage["euler_maxwell_genus_identity"])
+                self.assertEqual(
+                    stage["maxwell_3V_minus_E"],
+                    6 - 6*stage["genus"])
+                self.assertEqual(
+                    stage["boundary_total_edge_length"],
+                    3*(1 if name == "loch" else
+                       2 if name == "jacob" else
+                       (2**stage["depth"] if name == "cantor"
+                        else 3**stage["depth"])))
+
 if __name__ == '__main__': unittest.main()
