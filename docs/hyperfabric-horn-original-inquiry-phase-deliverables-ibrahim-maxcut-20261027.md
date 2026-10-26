@@ -218,3 +218,45 @@ finite holonomy-word observations cannot detect
 wildness; the selected W is POST-HOC and not dynamically
 selected. The research is currently in **P2/P3
 source-geometric bridge**, not final P4/P5 predictive physics.
+
+
+## 7. Finite horizon versus ONE-STEP EXTENDABILITY (important source firewall)
+
+Each **individual** finite Hatcher stage has a free group
+and permits nontrivial homomorphisms F_r→U(1).
+Yet the original Hatcher inclusion takes EACH old
+generator to a commutator of two next-stage
+generators. Any target abelian character of the
+next stage sends that commutator to identity.
+Therefore a nontrivial abelian representation of
+the current stage **cannot extend even a single
+level** compatibly with the true Hatcher stage map.
+
+This is a direct consequence of the ORIGINAL
+Hatcher commutator inclusion, and the existing
+Agda horn owner #1244
+`AlexanderHornedAbelianHolonomyBIDIExact.agda`
+already formalises the all-depth abelian
+triviality. The hyperfabric finite-word script
+now checks source exponent-sum zero at depths
+1..6 in all three C3 sectors; this is a new
+regression consumer, **not a new theorem owner**.
+
+By contrast, a nontrivial SU3 root can be
+abstractly recursively split into commutators
+by the ORIGINAL Gotô 1949 theorem, with choices
+at every node and depth. This establishes
+group-theoretic extendability, not bounded
+flat gauge potentials on the actual metric
+wild exterior. The two results sharpen the
+experimental roadmap: checking ONE finite
+horizon or its entire Wilson table cannot
+detect wildness; checking compatible extension
+and geometric/regularity constraints is
+materially more demanding.
+
+The original physical proposed SU3 W and
+finite 2I simulator are NOT implied by
+the abelian extension theorem, and an
+artificial finite rose graph assignment
+is NOT a wild-specific hardware effect.
