@@ -32,6 +32,7 @@ Brahana (1921); infinite-surface classification Kerékjártó (1923),
 Ian Richards (1963); coding theory is classical.
 """
 from itertools import product, combinations
+from fractions import Fraction
 import json
 
 from exotic_topology_pl_frontier_lineage import (
@@ -88,7 +89,7 @@ def attach_one_ternary(stage, piece, parent):
     return second, old_to_second
 
 
-def transition(stage, piece):
+def transition(stage, piece, with_transport=False):
     old_stage = stage
     parents = tuple(sorted(old_stage.frontier))
     # The old stage embeds through the COMPLETE sequence of two-pants
@@ -109,7 +110,8 @@ def transition(stage, piece):
     )
     assert receipt["components"] == len(parents)
     assert receipt["new_boundaries"] == 3 * len(parents)
-    return stage, receipt
+    return ((stage, receipt, full_embedding) if with_transport
+            else (stage, receipt))
 
 
 
@@ -186,7 +188,7 @@ def audit(depth=3):
     assert all(SIGN_INVERSION[SIGN_INVERSION[t]] == t for t in BRANCHES)
     assert SIGN_INVERSION[0] == 0 and CYCLIC_C3[0] != 0
     assert SIGN_INVERSION != CYCLIC_C3
-    assert sum(2**(-len(bits)) for bits in CODE.values()) == 1
+    assert sum((Fraction(1, 2**len(bits)) for bits in CODE.values()), Fraction()) == 1
     return {
         "family": "balanced_ternary_three_end_branching",
         "depth": depth,
