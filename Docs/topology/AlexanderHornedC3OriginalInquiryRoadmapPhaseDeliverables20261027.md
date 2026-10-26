@@ -198,3 +198,75 @@ This shrinks G3 in the phase ledger to the two real
 geometric tasks `IsPathConnected(S_i)` and actual
 `p_i` membership; **G1/G4** (the supported wild
 relative collar and its meridian maps) remains P0.
+
+
+## 2026-10-27 Hatcher compact-stage absorption max-cut
+
+**Original source verified directly from the author's PDF**, Example 2B.2,
+printed pp. 171-172, https://pi.math.cornell.edu/~hatcher/AT/AT.pdf.
+Hatcher writes `B=intersection X_n` (decreasing linked
+handlebodies), `E=R³\\B=union Y_n` with `Y_n=R³\\X_n`
+increasing. He specifically invokes **compactness of loop images
+AND loop-homotopy images** to factor them into finite Y_n.
+He separately proves finite-stage `π₁(Y_n)=F_(2^n)` and the
+injectivity/commutator replacement of stage meridians.
+Neither theorem is attributed to this new repository adaptation.
+
+**New concrete theorem source**, imported by `HornedC3.lean`:
+`HatcherOpenExhaustionCompactAbsorption.lean`.
+It reuses exact current Mathlib
+`IsCompact.elim_directed_cover`
+(no new compactness axiom) to prove:
+
+```text
+  increasing OPEN sets Y_n, K compact, K subset union_n Y_n
+           ⇒ exists N, K subset Y_N
+
+  T compact, f : C(T,X), X = union_n Y_n
+           ⇒ exists N, g : C(T,Y_N), forall t, g(t) = f(t) in X
+```
+
+This closes the continuous-factorization **compactness component**
+of Hatcher's argument at the SOURCE level, including the
+`I` loop and `I×I` homotopy domains once their ordinary
+compactness and boundary conditions are supplied. It does **not**
+construct `X_n`, certify `Y_n` from the actual selected wild
+B, prove finite-stage meridian injectivity or formally establish
+`π₁(E)=colim π₁(Y_n)`.
+
+**Severe assumptions controls:** standalone
+`scripts/alexander_horned_c3_open_exhaustion_severe_controls.py`
+was committed and added to the focused Python job.
+A compact `K={0}∪{1/k:k>=1}` with closed, increasing
+`F_n={0}∪{1/k:1<=k<=n}` satisfies union K but has
+no stage covering K (explicit witness `1/(n+1)`).
+Each F_n is non-open in real topology. In the discrete
+compact set `{0,1}`, the open sets `{0}` and `{1}`
+cover K but neither alone suffices when no directedness
+hypothesis is imposed. An independent local Python
+replay checked 256 levels and these exact counterexamples
+and PASSED. Finite checks are not Lean kernel receipts;
+the mathematical counterexamples are given by
+universal formulas.
+
+**Donor/claim ceiling:** Mathlib owns the directed-compact
+cover theorem; Hatcher owns its use for the wild exterior;
+Alexander (1924) owns the original wild-sphere example.
+The DASHI contribution is a narrowly shaped, reusable
+Lean-source adapter and assumption falsifiers. The local
+container lacks Lean/Lake and GitHub was inaccessible for
+local cloning; no exact-head Lean build can be asserted.
+The missing **geometric P0** is still the actual linked
+handlebody tower and the supported relative-satellite
+homotopy map; the stagewise maps and subgroup injections
+must be wired to prove the full direct limit.
+
+**Latest adjacent source audit:** #1254 has merged prior
+#1244 parent source into its stacked branch and supplies
+surface-PL, Richards-end and original-source finiteness
+comparators. Its genus-zero reverse triangle caps and
+Power (3,6)-tightness controls are NOT 3D Hatcher linked
+`X_n`. #1273's BCH source-fidelity audit reinforces
+separating an original text claim, source proof object and
+kernel receipt; it supplies no direct wild-ball geometry.
+Do not copy newer unrelated PRs for coincident terms.

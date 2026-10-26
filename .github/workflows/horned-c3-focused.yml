@@ -46,6 +46,7 @@ jobs:
           python3 scripts/check_alexander_horned_abelian_bidi.py
           python3 scripts/alexander_horned_c3_pickover_scalar_phase_boundary.py
           python3 scripts/alexander_horned_c3_radius_overlap_witness.py
+          python3 scripts/alexander_horned_c3_open_exhaustion_severe_controls.py
 
   agda:
     runs-on: ubuntu-latest
