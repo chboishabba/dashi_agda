@@ -235,9 +235,11 @@ def test_auspol_crosspollination_does_not_manufacture_evidence_roots():
     assert w["original_root_count"] == 9
     assert w["unattributed_future_source_placeholders"] == 1
     paths = {item["id"]: item for item in aus["positive_paths"]}
-    assert len(paths) == 8
+    assert len(paths) == 9
     assert paths["AUS_HANSON_2025_HOSPITALITY"]["status"] == "original_indexed_not_pdf_face_inspected"
     assert paths["AUS_HANSON_RINEHART_POLICY"]["status"] == "first_person_attributed"
+    assert paths["AUS_ONE_NATION_PENSION_POLICY_JAN2025"]["status"] == "original_party_document_published"
+    assert "2025-01-15" in paths["AUS_ONE_NATION_PENSION_POLICY_JAN2025"]["original"]
     assert paths["AUS_GINA_EPSTEIN_DIRECT"]["status"] == "not_located_not_universally_absent"
     assert "initially denied all contact" in paths["AUS_BANNON_PALMER"]["evidence"]
     assert "one unsolicited call" in paths["AUS_BANNON_PALMER"]["evidence"]
@@ -251,6 +253,8 @@ def test_auspol_aec_future_time_and_sibling_governance_remain_distinct():
     targets = {o["id"]: o for o in aus["decisive_remaining_same_object"]}
     assert len(targets) == 5
     assert "2027-02-01" in targets["AUS_FY2025_26_AEC"]["availability"]
+    assert "2027-04-22" in targets["AUS_FY2025_26_AEC"]["availability"]
+    assert "2027-03-11" in targets["AUS_FY2025_26_AEC"]["availability"]
     assert "Nov17" in targets["AUS_FY2025_26_AEC"]["availability"]
     assert all(t["kind"] and t["claim_reopened"] and t["not_pays"] for t in targets.values())
     assert len(aus["sibling_reviews"]) == 2
@@ -270,3 +274,21 @@ def test_auspol_transfer_not_grafted_onto_existing_us_gsr_or_unified_h3():
     assert "Canadian" not in aus["causal_boundary"]  # Different legal/country claim sets
     assert "counterfactual evidence" in aus["causal_boundary"]
     assert "Universal" not in aus["causal_boundary"]
+
+
+def test_australian_policy_original_published_before_attributed_source_and_transition_split():
+    world_data = world()
+    au = world_data["australian_crosspollination"]
+    assert au["original_party_policy_first_party"].startswith("https://www.onenation.org.au/")
+    assert au["aec_transitional_original"].endswith("/FADTransitionalRules/")
+    assert "2025" in au["original_policy_transmission_ceiling"]
+    assert "not a dated original Rinehart instruction" in au["original_policy_transmission_ceiling"]
+    assert "2027-02-01" in au["electoral_period_boundary"]
+    assert "2027-04-22" in au["electoral_period_boundary"]
+    assert "NEW 2027" in au["electoral_period_boundary"]
+    assert "AUS_POLICY_ADVICE_TIMESTAMP_AND_ENACTMENT" in {
+        t["id"] for t in au["decisive_remaining_same_object"]
+    }
+    assert "AUS_POLICY_ADOPTION" not in {
+        t["id"] for t in au["decisive_remaining_same_object"]
+    }
