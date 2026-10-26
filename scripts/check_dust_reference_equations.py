@@ -49,11 +49,6 @@ def check_attention():
         assert score + grad*disp == 0
     print("PASS attention surrogate sign and inner-product equation")
 
-if __name__=="__main__":
-    check_centering()
-    check_attention()
-    check_complete_orthogonal_population()
-    check_nonlinear_obstruction()
 
 def check_complete_orthogonal_population():
     """Whole factorial +/-1 probes: exact linear credit, causal nonlocal reward."""
@@ -84,3 +79,9 @@ def check_nonlinear_obstruction():
         assert smooth_estimate==3*y*y+scale*scale
         assert smooth_estimate!=3*y*y
     print("PASS cubic nonzero finite-smoothing bias counterexample")
+
+if __name__=="__main__":
+    check_centering()
+    check_attention()
+    check_complete_orthogonal_population()
+    check_nonlinear_obstruction()
