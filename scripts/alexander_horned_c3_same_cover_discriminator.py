@@ -26,7 +26,8 @@ def outside_reference_solid(x):
     tubes = any(F(1,2)<=x[i]<=F(17,2) and
                 sum(x[j]**2 for j in range(3) if i!=j) <= TUBE*TUBE
                 for i in range(3))
-    return not (central or tubes)
+    satellite_envelopes = any(squared_distance(x,c) <= 1 for c in C)
+    return not (central or tubes or satellite_envelopes)
 
 def cover_membership(x,inner=INNER,outer=OUTER):
     ds=[squared_distance(x,c) for c in C]
