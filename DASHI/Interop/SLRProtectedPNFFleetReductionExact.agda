@@ -5,6 +5,7 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Data.Product using (_×_; _,_)
 open import Relation.Nullary using (¬_)
+open import Data.Empty using (⊥)
 
 -- Classification is on raw PNF1 *slot records*, not grouped frames.
 -- A repair demand is the only permissible destination for an invalidated
@@ -64,3 +65,45 @@ admittedIsNotCertified : admittedCore ≡ kernelCertified → ⊥
 admittedIsNotCertified ()
 
 open import Data.Empty using (⊥)
+
+// A conflict witness contains both polarities for the *same typed fibre*.
+// Counts are observational inputs; this module does not infer a typed meet
+// from lexical resemblance.
+record OppositePolarity (A : Set) : Set where
+  constructor oppositePolarity
+  field
+    fibre : A
+    positiveWitness : Nat
+    negativeWitness : Nat
+
+data Severity : Set where
+  exact partial noTypedMeet contradiction : Severity
+
+severityValue : Severity → Nat
+severityValue exact = 0
+severityValue partial = 1
+severityValue noTypedMeet = 3
+severityValue contradiction = 9
+
+record ProtectedConflict (A : Set) : Set where
+  constructor protectedConflict
+  field
+    opposite : OppositePolarity A
+    grade : Severity
+    gradeIsContradiction : grade ≡ contradiction
+    protected : Protection A
+    protectionIsFormal : protected ≡ formallyRequired (OppositePolarity.fibre opposite)
+
+conflictProtection : ∀ {A} → OppositePolarity A → ProtectedConflict A
+conflictProtection conflict =
+  protectedConflict conflict contradiction refl
+    (formallyRequired (OppositePolarity.fibre conflict)) refl
+
+conflictSeverityNine : ∀ {A} (conflict : OppositePolarity A) →
+  severityValue (ProtectedConflict.grade (conflictProtection conflict)) ≡ 9
+conflictSeverityNine conflict = refl
+
+conflictRetainedAtZeroBudget : ∀ {A} (conflict : OppositePolarity A) →
+  retain (ProtectedConflict.protected (conflictProtection conflict)) ≡
+    retainedFormal (OppositePolarity.fibre conflict)
+conflictRetainedAtZeroBudget conflict = refl
