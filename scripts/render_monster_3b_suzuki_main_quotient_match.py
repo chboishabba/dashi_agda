@@ -92,6 +92,7 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
     )
     if req_int(p, "base_1458_central_trace", positive=False) != -729:
         raise ValueError("base 1458 central trace must be -729")
+    req_true(p, "base_1458_outer_centre_inverting_trace_zero")
     q_kernel_pos = req_int(p, "qg_to_n3b_kernel_order_three_class_position")
     q_kernel_outer_pos = req_int(p, "qg_to_n3b_kernel_outer_class_position")
     if q_kernel_pos == extraspecial_central_pos:
