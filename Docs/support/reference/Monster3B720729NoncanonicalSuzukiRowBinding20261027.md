@@ -58,3 +58,14 @@ The synthetic join regression `scripts/test_monster_3b_suzuki_selected_character
 5. **Source trust and physical claims:** a source page proves what its authors computed and published, not an observed run in this container. Similar dimensions, ζ notation, analytic zeta, quantum observer claims, or phase analogies are not Monster representation equalities.
 
 **Local independent receipt:** `/mnt/data/monster3b_720729_balanced_map_count_receipt.json`. **Local independent executable source:** `/mnt/data/monster3b_720729_equivariant_map_count.py`. No GAP, Agda, literal actual Atlas generator run, or Monster intertwiner receipt in this turn.
+
+## Stronger full-720 negative control: why size-eight orbits alone do not suffice
+
+An independent finite computation constructs **the same mixed-eight target** and the same inner (\mathbb F_3^2) action, but an actually trivial D4 action on ten sheet labels. Its (720=8\cdot10\cdot9) points have:
+```text
+untwisted 720: 60 four-orbits + 60 eight-orbits = 240 + 480
+source twisted: 24 four-orbits + 78 eight-orbits =  96 + 624
+```
+Both contain free size-eight D4 orbits, so the earlier implication "any outer720 free-eight orbit forces twisted sheets" is invalid. The **complete orbit character/census** distinguishes the actions, and the even cheaper quotient80 argument already proves the nontrivial-sheet requirement because source80 has six eight-orbits but target Mixed8 times ten *trivial* sheets has only four-orbits. The new census assertion is embedded in the EXISTING source owner `scripts/monster_3b_pointed720729_mixed_d4_eight_ten_quotient.py` and in its focused regression `scripts/test_monster_3b_mixed_eight_noncanonicity.py`; the negative model was also computed independently with local Python.
+
+This is a clarification of the exact finite D4 representation, **not** a claim about true Heisenberg invariance, an actual Monster subgroup word, or the sourced degree78 selection.
