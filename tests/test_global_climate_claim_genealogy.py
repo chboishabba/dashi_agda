@@ -22,7 +22,7 @@ ORIGINAL = ROOT / "Docs/support/reference/global_climate_denial_claim_genealogy_
 def test_global_cooling_plant_claims_source_schema_and_scoped_origins():
     rows = read_ledger()
     by = {r["record_id"]: r for r in rows}
-    assert len(rows) == len(by) == 18
+    assert len(rows) == len(by) == 20
     assert len({r["source_object_id"] for r in rows}) == 18
     assert {r["claim_family"] for r in rows} == CLAIM_FAMILIES
     assert by["GC01"]["source_date"] == "1975-04-28"
@@ -63,8 +63,8 @@ def test_co2_plant_original_producer_and_nas_not_pnas():
 
 def test_global_source_audit_does_not_generate_fake_world_denominator():
     report = audit(read_ledger())
-    assert report["selected_appearances"] == 18
-    assert len(report["selected_claim_families"]) == 8
+    assert report["selected_appearances"] == 20
+    assert len(report["selected_claim_families"]) == 10
     assert report["source_objects"] == 18
     assert report["global_population_estimate"] is None
     assert len(report["documented_scoped_relations"]) == len(EDGES) == 4
@@ -142,3 +142,45 @@ def test_global_agda_reuses_canonical_relations_and_finite_barriers():
     assert "Australia/BOM/gas-tax cases are a **separate local comparison**" in docs
     assert "global" in docs.lower()
     assert "not a global" in docs.lower()
+
+
+
+def test_three_distinct_climate_narratives_one_original_film():
+    """The 1998 Greening Earth Society film is one authored object with 3 claims."""
+    by = {r["record_id"]: r for r in read_ledger()}
+    assert by["GP02"]["source_object_id"] == by["GM01"]["source_object_id"]
+    assert by["GP02"]["source_object_id"] == by["GE01"]["source_object_id"]
+    assert len({by[x]["source_object_id"] for x in ("GP02", "GM01", "GE01")}) == 1
+    assert len({by[x]["claim_family"] for x in ("GP02", "GM01", "GE01")}) == 3
+    assert "Patrick J Michaels" in by["GM01"]["original_author_or_institution"]
+    assert "Robert C Balling" in by["GE01"]["original_author_or_institution"]
+    assert "not_full_film" in by["GM01"]["source_role"]
+    assert "not_full_film" in by["GE01"]["source_role"]
+    r = audit(read_ledger())
+    assert r["co_packaged_three_claims_one_film"]["independent_original_film_documents"] == 1
+    assert r["co_packaged_three_claims_one_film"]["appearances"] == ["GP02", "GM01", "GE01"]
+    assert r["co_packaged_three_claims_one_film"]["first_party_full_audio_checked"] is False
+
+    owner = OWNER.read_text()
+    reg = REG.read_text()
+    typed = TYPED.read_text()
+    assert "coPackagedClaims : RelationKind" in typed
+    assert "coPackagedClaimsDoNotProveHistoricalTransfer" in typed
+    for token in ("globalWFA1998GreeningAndModelClaimsSameFilm",
+                  "globalWFA1998GreeningAndExtremeWeatherSameFilm",
+                  "threeObservedClaimsDifferentOriginalRootCounts",
+                  "threeClaimHeadlinesDoNotIdentifyIndependentOriginals"):
+        assert token in owner
+    assert "globalOneFilmThreeClaimsNotThreeIndependentModels" in reg
+
+
+def test_same_film_claims_cannot_be_promoted_to_three_independent_origins():
+    changed = [dict(r) for r in read_ledger()]
+    film = next(r for r in changed if r["record_id"] == "GM01")
+    film["source_object_id"] = "INVENTED_NEW_MODEL_AUTHOR"
+    try:
+        audit(changed)
+    except ValueError as exc:
+        assert "Multi-claim 1998 WFA original film source split" in str(exc)
+    else:
+        raise AssertionError("False independent original source for one film accepted")
