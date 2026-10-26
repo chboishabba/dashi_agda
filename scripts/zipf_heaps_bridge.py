@@ -1,0 +1,127 @@
+"""Exact finite Zipf/Heaps occupancy bridges with explicit sampling assumptions.
+
+The Heaps expectation is *conditional* on IID draws, not a deterministic
+consequence of a histogram; uniform permutations of a fixed multiset are a
+separate model. Historical/provenance references belong to the research note.
+"""
+from __future__ import annotations
+from fractions import Fraction
+from math import comb
+from typing import Sequence
+
+
+def finite_rank_probabilities(n: int, exponent: int, shift: int = 0) -> tuple[Fraction, ...]:
+    """Exact shifted Zipf PMF for nonnegative *integer* shape parameters."""
+    if not isinstance(n, int) or isinstance(n, bool) or n < 1:
+        raise ValueError('positive finite support')
+    if any(not isinstance(v, int) or isinstance(v, bool) or v < 0
+           for v in (exponent, shift)):
+        raise ValueError('nonnegative integer exponent and shift')
+    terms = tuple(Fraction(1, (r + shift) ** exponent) for r in range(1, n + 1))
+    z = sum(terms, Fraction())
+    return tuple(t / z for t in terms)
+
+
+def finite_cdf(masses: Sequence[Fraction]) -> tuple[Fraction, ...]:
+    p = _validated_pmf(masses)
+    cumulative = Fraction()
+    out = []
+    for value in p:
+        cumulative += value
+        out.append(cumulative)
+    return tuple(out)
+
+
+def finite_quantile(masses: Sequence[Fraction], threshold: Fraction) -> int:
+    """Least 1-based rank with cumulative mass >= threshold, threshold (0,1]."""
+    if not isinstance(threshold, Fraction) or not Fraction() < threshold <= 1:
+        raise ValueError('threshold must be Fraction in (0,1]')
+    for rank, mass in enumerate(finite_cdf(masses), 1):
+        if mass >= threshold:
+            return rank
+    raise AssertionError('normalized finite mass must cross threshold')
+
+
+def finite_rank_moment(masses: Sequence[Fraction], order: int) -> Fraction:
+    p = _validated_pmf(masses)
+    if not isinstance(order, int) or order < 0:
+        raise ValueError('nonnegative moment order')
+    return sum((mass * rank ** order for rank, mass in enumerate(p, 1)), Fraction())
+
+
+def _validated_pmf(masses: Sequence[Fraction]) -> tuple[Fraction, ...]:
+    p = tuple(masses)
+    if not p or any(not isinstance(x, Fraction) or x < 0 for x in p) or sum(p) != 1:
+        raise ValueError('nonempty normalized rational PMF')
+    return p
+
+
+def expected_iid_vocabulary(masses: Sequence[Fraction], draws: int) -> Fraction:
+    """E[V_draws] = sum_i(1-(1-p_i)^draws), given IID sampling."""
+    p = _validated_pmf(masses)
+    if not isinstance(draws, int) or draws < 0:
+        raise ValueError('draws must be nonnegative integer')
+    return sum((1 - (1 - mass) ** draws for mass in p), Fraction())
+
+
+def expected_iid_new_type(masses: Sequence[Fraction], prior_draws: int) -> Fraction:
+    """Exact discrete derivative E[V_(n+1)]-E[V_n]."""
+    p = _validated_pmf(masses)
+    if not isinstance(prior_draws, int) or prior_draws < 0:
+        raise ValueError('prior_draws must be nonnegative integer')
+    return sum((mass * (1 - mass) ** prior_draws for mass in p), Fraction())
+
+
+def expected_permutation_vocabulary(counts: Sequence[int], draws: int) -> Fraction:
+    """E[V_draws] when uniformly permuting an actual finite multiset.
+
+    Distinct from replacement-IID even with identical limiting proportions.
+    """
+    c = _validated_counts(counts)
+    total = sum(c)
+    if not isinstance(draws, int) or not 0 <= draws <= total:
+        raise ValueError('draws must be in [0,total tokens]')
+    denominator = comb(total, draws)
+    return sum((1 - Fraction(comb(total - f, draws), denominator)
+                for f in c), Fraction())
+
+
+def distinct_envelope(counts: Sequence[int], draws: int) -> tuple[int, int]:
+    """Tight minimum/maximum type counts over ALL permutations of multiset."""
+    c = _validated_counts(counts)
+    total = sum(c)
+    if not isinstance(draws, int) or not 0 <= draws <= total:
+        raise ValueError('draws must be in [0,total tokens]')
+    if draws == 0:
+        return (0, 0)
+    filled = 0
+    lower = 0
+    for f in sorted(c, reverse=True):
+        filled += f
+        lower += 1
+        if filled >= draws:
+            break
+    return lower, min(draws, len(c))
+
+
+def _validated_counts(counts: Sequence[int]) -> tuple[int, ...]:
+    c = tuple(counts)
+    if not c or any(not isinstance(f, int) or isinstance(f, bool) or f < 1 for f in c):
+        raise ValueError('nonempty strictly positive token-type counts')
+    return c
+
+
+def dyadic_block_entropy(probs: Sequence[Fraction]) -> Fraction:
+    """Exact Shannon bits on a finite distribution whose atoms are 2^-k.
+
+    Only this dyadic subclass; not a general entropy solver and not Hilberg.
+    """
+    p = _validated_pmf(probs)
+    entropy = Fraction()
+    for mass in p:
+        if mass == 0:
+            continue
+        if mass.numerator != 1 or mass.denominator & (mass.denominator - 1):
+            raise ValueError('this certificate needs dyadic atom masses 2^-k')
+        entropy += mass * (mass.denominator.bit_length() - 1)
+    return entropy
