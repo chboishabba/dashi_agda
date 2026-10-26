@@ -135,9 +135,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 -- source carriers including real NOAA Bangor records, same-station metadata,
 -- an earlier local press item and a Kansas location false-match control.
 -- More source objects are NOT more independent weather experiments.
-sourceAtlasCountIsSeventyFour :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 74
-sourceAtlasCountIsSeventyFour = refl
+sourceAtlasCountIsSeventyFive :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 75
+sourceAtlasCountIsSeventyFive = refl
 
 
 -- Original NOAA OBS-TIME documentation is a *method*, not a 1953 sensor time;
@@ -494,6 +494,15 @@ croftAugustAndJanuaryPublicationClaimsDistinct :
   Atlas.relationClass Atlas.croftInstructionPublicationDatesDistinct ≡
   Atlas.documentaryDistinction
 croftAugustAndJanuaryPublicationClaimsDistinct = refl
+
+pandey2017OriginalFieldStudyDoesNotProve2024GeometryClaim :
+  Attribution.citationImportsProof Atlas.pandeyFFField2017 ≡ false
+pandey2017OriginalFieldStudyDoesNotProve2024GeometryClaim =
+  Atlas.allSourcesRemainNonPromoting Atlas.pandeyFFField2017
+
+pandey2017ClaimStaysSourceBound :
+  Atlas.citationCreatesTruth Atlas.pandey2017FieldExperimentScope ≡ false
+pandey2017ClaimStaysSourceBound = refl
 
 saikiaOriginalResearchCannotCreateIndependentRodinComparison :
   Attribution.citationCreatesAuthority Atlas.saikiaAmyloid2019 ≡ false
