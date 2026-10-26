@@ -20,6 +20,9 @@ def main():
     assert r["equivariant_target_automorphism_count"]==4
     assert r["balanced_mod_target_automorphisms"]==5242880
     assert r["per_target_fibre_cardinalities"]==[10]*8
+    assert r["outer_orbit_sizes"]=={8:78,4:24}
+    assert r["untwisted_mixed8_sheet10_inner9_orbits"]=={4:60,8:60}
+    assert r["trivial_sheet_outer720_orbit_census_contradicts_source"] is True
     assert r["classwise_characters"]["identity"]["all729"]==729
     assert r["nontrivial_ten_sheet_D4_twisting_required"] is True
     assert r["full_Heisenberg_equivariance_proved"] is False
