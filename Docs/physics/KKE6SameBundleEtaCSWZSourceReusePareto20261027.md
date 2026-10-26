@@ -161,3 +161,22 @@ Classical topology gives \(\pi_4(K)\cong\mathbb Z_2\oplus\mathbb Z_2\): a finite
 **Original-root attribution:** Edward Witten, *An SU(2) Anomaly*, Phys. Lett. B **117** (1982) 324–328, DOI 10.1016/0370-2693(82)90728-6. Juven Wang, Xiao-Gang Wen and Edward Witten, *A New SU(2) Anomaly*, J. Math. Phys. **60** (2019), DOI 10.1063/1.5082852, is a **different** spin/spin-charge-sensitive anomaly formulation and does not produce a new obstacle in this selected ordinary spin fundamental-doublet test. Do not count the 2019 result as independent experimental verification. The present doublet enumeration is a repo-specific test, not a new theorem by those original authors.
 
 **P0 residual after this test:** compute the *actual full-\(K\) spin-bordism/invertible eta anomaly*, and full-\(H\) eta/CS/WZ completion if claiming the original UV orbifold. The calculated ordinary \(\pi_4\) generators and free anomaly cannot decide general quotient/global/torsion sectors.
+
+
+### Exact-blob verification receipt (2026-10-27)
+
+**Upgraded from source-written-only to executed exact bytes** for the new Python reductions. On the checked PR #1241 head, the following Git blob SHA-1 digests were retrieved through the GitHub connector, independently reproduced as `SHA1("blob "+byte_length+"\\0"+source_bytes)` for local files, and their Python assertions executed successfully:
+
+- `scripts/check_kk_e6_h_pi1_charge_deck.py`: `edfd145bf77763eefdc3c35c3413e178aecaef50` (actual source + K kernel tests)
+- `scripts/check_kk_e6_chi33_full_cartan_anomaly_factor.py`: `c2b9cc108894cbf3a9decdd559147925b78b7762` (actual selected full-H anomaly polynomial)
+- `scripts/check_kk_e6_higgs_reduction_anomaly_same_source.py`: `67a740c115a2cdf6f3c244ddf0376598fbfc4fde` (actual two-owner join)
+- `scripts/check_kk_e6_orbifold_gs_anomaly_factor.py`: `45b44caa358a3241706631f2cf67d5cc3889d335` (original selected 27 chiral parity donor)
+- `scripts/check_kk_e6_higgs_k_su2_witten_parity.py`: `7b1cc9041859cc82f09feb95fe3949b66c5b36bb` (actual-original-source SU2L/R ordinary Witten check)
+
+Executed commands from the copied original Git blobs:
+`python scripts/check_kk_e6_h_pi1_charge_deck.py`,
+`python scripts/check_kk_e6_chi33_full_cartan_anomaly_factor.py`,
+`python scripts/check_kk_e6_higgs_reduction_anomaly_same_source.py`,
+`python scripts/check_kk_e6_orbifold_gs_anomaly_factor.py`,
+`python scripts/check_kk_e6_higgs_k_su2_witten_parity.py`.
+All returned PASS; no runtime assertion failed. Prior documentation statements that the combined scripts were not byte-identically executed are **historical** and are superseded by this receipt. Git SHA checks and passing Python are **not** Agda/Lean kernel proofs, global smooth bundle constructions in a proof assistant, physical eta/CS/WZ QFT, spectral-stability certificates or Earth data analysis.
