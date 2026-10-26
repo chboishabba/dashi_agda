@@ -21,24 +21,10 @@ S (F.mode x y z) = F.mode x (- y) z
 H : F.FourierMode → F.FourierMode
 H (F.mode x y z) = F.mode x y (- z)
 
-R4 : (p : F.FourierMode) → R (R (R (R p))) ≡ p
-R4 (F.mode x y z) = refl
-
-S2 : (p : F.FourierMode) → S (S p) ≡ p
-S2 (F.mode x y z) = refl
-
-H2 : (p : F.FourierMode) → H (H p) ≡ p
-H2 (F.mode x y z) = refl
-
-SRS : (p : F.FourierMode) → S (R (S p)) ≡ R (R (R p))
-SRS (F.mode x y z) = refl
-
-HR : (p : F.FourierMode) → H (R p) ≡ R (H p)
-HR (F.mode x y z) = refl
-
-HS : (p : F.FourierMode) → H (S p) ≡ S (H p)
-HS (F.mode x y z) = refl
-
--- Direct sum representation supplies the faithful integer action
--- on coordinate triples; embedding into a concrete crystallographic
--- lattice still requires metric and basis preservation witnesses.
+-- Group relations over arbitrary integer variables require integer
+-- arithmetic lemmas (especially negation involution), not reflexivity.
+-- They are deliberately left out until linked to the existing
+-- Data.Integer.Properties library and checked by the Agda kernel.
+--
+-- The source-level coordinate transformations remain useful, typed
+-- executable definitions for the reciprocal-mode lattice carrier.
