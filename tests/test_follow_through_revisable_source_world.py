@@ -59,5 +59,18 @@ class RevisableSourceWorldTests(unittest.TestCase):
         w=deepcopy(WORLD);w["actions"][0]["targets"].append("fictional")
         with self.assertRaisesRegex(ValueError,"bad target"):mod.report(w)
 
+    def test_every_claim_has_two_sided_discriminator(self):
+        q=mod.report(WORLD)
+        for claim in q["claims"].values():
+            self.assertTrue(claim["severe_test"]["would_narrow"])
+            self.assertTrue(claim["severe_test"]["would_strengthen"])
+            self.assertEqual(claim["severe_test"]["test_status"],"notRun")
+
+    def test_missing_severe_discriminator_rejected(self):
+        w=deepcopy(WORLD)
+        w["claims"][0].pop("severe_test")
+        with self.assertRaisesRegex(ValueError,"bidirectional severe test"):
+            mod.validate(w)
+
 if __name__=="__main__":
     unittest.main()
