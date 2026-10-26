@@ -56,3 +56,30 @@ oneDarkFactorisation :
   likelihoodByCounts p (Two.dark ∷ [])
 oneDarkFactorisation p =
   solve (Photon.photon p ∷ Photon.noPhoton p ∷ [])
+
+-- Full finite-history sufficient statistic: the same number of clicks
+-- and dark outcomes determines the full conditional product likelihood.
+generalCountFactorisation :
+  (p : Photon.BinaryPhotonLikelihood) (xs : Hist.History) →
+  Hist.historyLikelihood p xs ≡ likelihoodByCounts p xs
+generalCountFactorisation p [] = refl
+generalCountFactorisation p (Two.click ∷ xs)
+  rewrite generalCountFactorisation p xs =
+  solve (Photon.photon p ∷
+         power (Photon.photon p) (clicks xs) ∷
+         power (Photon.noPhoton p) (darks xs) ∷ [])
+generalCountFactorisation p (Two.dark ∷ xs)
+  rewrite generalCountFactorisation p xs =
+  solve (Photon.noPhoton p ∷
+         power (Photon.photon p) (clicks xs) ∷
+         power (Photon.noPhoton p) (darks xs) ∷ [])
+
+sameCountsSameLikelihood :
+  (p : Photon.BinaryPhotonLikelihood) (xs ys : Hist.History) →
+  clicks xs ≡ clicks ys →
+  darks xs ≡ darks ys →
+  Hist.historyLikelihood p xs ≡ Hist.historyLikelihood p ys
+sameCountsSameLikelihood p xs ys sameClicks sameDarks
+  rewrite generalCountFactorisation p xs
+        | generalCountFactorisation p ys
+        | sameClicks | sameDarks = refl
