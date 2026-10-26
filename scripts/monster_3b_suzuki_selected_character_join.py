@@ -82,6 +82,23 @@ def check(source, selected, *, audit_fn, selected_validate_fn):
            for v in all_positions) or len(set(all_positions))!=len(all_positions):
         raise ValueError("exported source Irr positions missing/invalid/duplicated")
     from monster_3b_suzuki_all_conductors_character_audit import Cyc
+    # Metadata, source row positions, and ATLAS labels alone cannot
+    # disambiguate all noncentral class permutations. Check *every*
+    # source-selected class value against the independently exported
+    # all-conductor characters, with exact algebraic Cyc equality.
+    for labels,selected_rows,table in (
+        (pair12,sel["selected12rows"],table12),
+        (pair78,sel["selected78rows"],table78),
+    ):
+        for label,chosen in zip(labels,selected_rows):
+            exported=table[label]["values"]
+            if len(chosen)!=len(exported):
+                raise ValueError("selected full row has wrong class count: "+label)
+            for i,(left,right) in enumerate(zip(chosen,exported)):
+                if Cyc.wire(left)!=Cyc.wire(right):
+                    raise ValueError(
+                        f"source-selected/exported complete class row differs: {label} class {i+1}"
+                    )
     c2=source["central_c2_zero_based"];c3=source["central_c3_zero_based"]
     p12vals=[Cyc.wire(table12[x]["values"][c3]) for x in pair12]
     p78vals=[Cyc.wire(table78[x]["values"][c3]) for x in pair78]
@@ -138,6 +155,7 @@ def check(source, selected, *, audit_fn, selected_validate_fn):
         selected_Nebe_family_full_class_equal=(direct==2 and dual==2),
         source_orthogonality_recomputed=True,
         complete_source_class_signature_matched=True,
+        selected_source_characters_all_classes_matched=True,
         source_class_signature_sha256=signature_hash,
         original_source_authenticated=False,
         GAP_executed_by_this_check=False,
