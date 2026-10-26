@@ -409,6 +409,21 @@ SourceBoolText := function(b)
   if b then return "true"; else return "false"; fi;
 end;
 
+# The independent ordinary-character exporter already emits these exact
+# per-class coordinates. Emit them here TOO, from this literal table,
+# so the downstream selected-character join can reject class permutations
+# which preserve the table name, order, centre and Irr positions.
+SixSuzJSONIntArray := function(xs)
+  local result, k;
+  result := "[";
+  for k in [1..Length(xs)] do
+    if k > 1 then Append(result, ","); fi;
+    Append(result, String(xs[k]));
+  od;
+  Append(result, "]");
+  return result;
+end;
+
 # ----------------------------------------------------------------------
 
 # Same-object Monster restriction check.
@@ -445,6 +460,10 @@ PrintTo(output,
   "  \"six_suz_table\": \"", Identifier(six), "\",\n",
   "  \"six_suz_group_order\": ", Size(six), ",\n",
   "  \"six_suz_class_count\": ", NrConjugacyClasses(six), ",\n",
+  "  \"six_suz_class_orders\": ", SixSuzJSONIntArray(OrdersClassRepresentatives(six)), ",\n",
+  "  \"six_suz_class_sizes\": ", SixSuzJSONIntArray(SizesConjugacyClasses(six)), ",\n",
+  "  \"six_suz_power_map_2_zero_based\": ",
+      SixSuzJSONIntArray(List(powerMap2Six, k -> k-1)), ",\n",
   "  \"six_suz_degree12_positions\": [", p12[1], ", ", p12[2], "],\n",
   "  \"six_suz_degree78_positions\": [", p78[1], ", ", p78[2], "],\n",
   "  \"six_suz_outer_table\": \"", Identifier(outer), "\",\n",
