@@ -55,18 +55,36 @@ def analyze(rows):
         for r,e,w in vals:
             by_model[r["model"]][(r["site"],r["cohort"])] = (e,w)
         common = set.intersection(*(set(x) for x in by_model.values()))
+        union = set.union(*(set(x) for x in by_model.values()))
         if not common or len(by_model) < 2:
             output.append(dict(domain=domain,instrument=instrument,
                 specification=spec,status="incomparable",reason="no common sites/cohorts or models"))
             continue
-        # Enforce one common target weighting; otherwise apparent rank can be\n        # entirely induced by model-specific site weights.\n        for k in common:\n            observed_weights = {by_model[m][k][1] for m in by_model}\n            if len(observed_weights) != 1:\n                raise ValueError(f"unequal model weights at site/cohort {k}; common estimand not identified")\n        means = {}\n        for model, cells in by_model.items():
+        if common != union:
+            output.append(dict(domain=domain, instrument=instrument,
+                specification=spec, status="incomplete-coverage",
+                matched_sites=len(common), all_sites=len(union),
+                omitted_sites=sorted([list(k) for k in (union - common)]),
+                reason="Model-by-site/cohort cells missing: do not silently intersect"))
+            continue
+        # Enforce one common target weighting; otherwise apparent rank can be
+        # entirely induced by model-specific site weights.
+        for k in common:
+            observed_weights = {by_model[m][k][1] for m in by_model}
+            if len(observed_weights) != 1:
+                raise ValueError(f"unequal model weights at site/cohort {k}; common estimand not identified")
+        means = {}
+        for model, cells in by_model.items():
             # Model-specific weights imply different estimands if not matched.
             denom = sum((cells[k][1] for k in common),Decimal(0))
             means[model] = sum((cells[k][0]*cells[k][1] for k in common),Decimal(0))/denom
-        ordered = sorted(means, key=lambda m:(-means[m],m))\n        # Equal point estimates are ties, not uniquely ordered winners.\n        leaders = sorted(m for m in means if means[m] == max(means.values()))
+        ordered = sorted(means, key=lambda m:(-means[m],m))
+        # Equal point estimates are ties, not uniquely ordered winners.
+        leaders = sorted(m for m in means if means[m] == max(means.values()))
         output.append(dict(domain=domain,instrument=instrument,
             specification=spec,status="descriptive-only",
-            matched_sites=len(common),matched_models=len(by_model),\n            tied_leaders=leaders,
+            matched_sites=len(common),matched_models=len(by_model),
+            tied_leaders=leaders,
             ranking=[dict(model=m,mean=str(means[m])) for m in ordered],
             warning="Identical weights and site/cohort labels do not establish exchangeability or randomisation. No confidence intervals, covariate adjustment or attrition corrections supplied"))
     return output
