@@ -163,6 +163,47 @@ allgasNetworkRegistry = Source.mkNoDOISource
   "Original AEMC registry says Allgas Energy now owned by Stonepeak, AGIG operator; March 2026 sale from GDI; southern Brisbane and other service areas. A regional footprint is NOT evidence that EPBC 2019/8575 is connected to Allgas rather than AGN."
   Source.publicAttribution
 
+priorSep2DecisionExtension : Source.AttributedSource
+priorSep2DecisionExtension = Source.mkNoDOISource
+  "National Environmental Protection Agency — Declan O'Connor-Cox"
+  "EPBC 2019/8575 notification of decision-period extension"
+  "Original signed section 130(1A) statutory specification"
+  "2 September 2026"
+  "https://epbcpublicportal.environment.gov.au/_entity/sharepointdocumentlocation/e04e17b3-a2a6-f111-b8dd-7c1e5263208b/2ab10dab-d681-4911-b881-cc99413f07b6?file=2019-8575-Extension-of-Timeframe.pdf"
+  Source.governmentSource
+  "Original signed extension by Branch Head Declan O'Connor-Cox, extends decision period to 1 October 2026. Superseded by 25 September specification. This does not identify who ultimately signed approval."
+  Source.publicAttribution
+
+latestSep25DecisionExtension : Source.AttributedSource
+latestSep25DecisionExtension = Source.mkNoDOISource
+  "National Environmental Protection Agency — Mark Hall"
+  "EPBC 2019/8575 subsequent notification of decision-period extension"
+  "Original signed section 130(1A) statutory specification"
+  "25 September 2026"
+  "https://epbcpublicportal.environment.gov.au/_entity/sharepointdocumentlocation/d7e6d9ac-0ebb-f111-aaad-7c1e522b52b7/2ab10dab-d681-4911-b881-cc99413f07b6?file=2019-8575-Extension-of-Timeframe.pdf"
+  Source.governmentSource
+  "Original signed extension by Acting Branch Head Mark Hall: 11 business days, new decision deadline 16 October 2026; approval public notice dated 15 October. Extension signer is not proven final approval signer."
+  Source.publicAttribution
+
+record TimeScopedExtension : Set where
+  constructor time-scoped-extension
+  field
+    originalExtension : Source.AttributedSource
+    signedDate : String
+    decisionDeadline : String
+    signedExtensionNotFinalApproval : Bool
+    independenceBoundary : signedExtensionNotFinalApproval ≡ true
+
+open TimeScopedExtension public
+
+september2Extension : TimeScopedExtension
+september2Extension = time-scoped-extension
+  priorSep2DecisionExtension "2 September 2026" "1 October 2026" true refl
+
+september25Extension : TimeScopedExtension
+september25Extension = time-scoped-extension
+  latestSep25DecisionExtension "25 September 2026" "16 October 2026" true refl
+
 record ScopedReceipt : Set where
   constructor scoped-receipt
   field
@@ -252,6 +293,7 @@ data ReservationBillPaysAnEnactedLocalGasSubsidy : Set where
 data RegionalGasNetworkCoveragePaysSpringviewConnection : Set where
 data ApprovalNoticePaysSignedReasonsAndJudicialValidity : Set where
 data InterestsIndexPaysPersonalEnrichmentOrExoneration : Set where
+data ExtensionSignerPaysFinalApprovalSigner : Set where
 
 stateMeetingNotCommonwealthCausation :
   StateLobbyingMeetingPaysCommonwealthApprovalCause → ⊥
@@ -283,3 +325,7 @@ regionalCoverageNotSameConnection ()
 thirdPartyIndexNotDispositive :
   InterestsIndexPaysPersonalEnrichmentOrExoneration → ⊥
 thirdPartyIndexNotDispositive ()
+
+extensionSignerNotFinalApprovalSigner :
+  ExtensionSignerPaysFinalApprovalSigner → ⊥
+extensionSignerNotFinalApprovalSigner ()
