@@ -159,7 +159,7 @@ koslovRand = Source.mkNoDOISource
   "1969"
   "https://nsarchive.gwu.edu/sites/default/files/documents/rhwvuj-tzy4b/12.pdf"
   Source.archivalSource
-  "Experiment-based negative/methodological review: primate results not convincing, EEG probe antenna artifact possible; separates possible weapon/interrogation inquiry from actual demonstrated response"
+  "Original RAND review letter, 4 Nov 1969 (5 original pages), examined 2026-10-27: Koslov reviewed McIlwain's already-existing data in ~8 hours on 22 Oct 1969, not new experimental runs. His recall gives four operant-conditioned monkeys, seven special-signal exposures, two square-wave, one triangular, one continuous-wave comparison; typical 4.6 mW/cm2. Pellet-feed/room/time confounds, animal 673 outlier and a lone much earlier continuous-wave comparison weaken conclusions. Offline Adey EEG modulation-locked spectral peak may be direct electrode pickup: shielding/anesthesia/post-mortem/perfused brain variants had not decisively excluded an antenna artifact. The reviewer found no controlled convincing behavioural cause, not a proven universal no-effect theorem. Not 14 independent monkeys or a new laboratory replication."
   Source.publicAttribution
 
 lilienfeld1978Original : Source.AttributedSource
@@ -1096,3 +1096,26 @@ calibrationNotIndependentAnimalRecord :
   visuallyInspectedLaboratoryCalibrationTable ≡
     recoveredIndependentAnimalExperimentLog → ⊥
 calibrationNotIndependentAnimalRecord ()
+
+-- Original RAND letter (Samuel Koslov -> Stephen Lukasik, 4 Nov 1969,
+-- https://nsarchive.gwu.edu/sites/default/files/documents/rhwvuj-tzy4b/12.pdf,
+-- pp.2-4 visually inspected 2026-10-27). Its source author reviewed
+-- McIlwain's EXISTING trials: 4 conditioned monkeys; 7 special-signal
+-- exposure sessions; 2 square, 1 triangular, 1 continuous-wave session.
+-- Sessions or task scores do not count as independent animal replicates.
+-- The reported modulation-frequency EEG spectral peak on implanted leads
+-- is an observation; probes acting as antennas were not excluded by then.
+data Koslov1969ReadoutStanding : Set where
+  offlineImplantedElectrodePeakReported : Koslov1969ReadoutStanding
+  calibratedEndogenousEEGSignalEstablished : Koslov1969ReadoutStanding
+  directElectrodePickupAlternativeExcluded : Koslov1969ReadoutStanding
+
+observedPeakNotCausalBrainProof :
+  offlineImplantedElectrodePeakReported ≡
+    calibratedEndogenousEEGSignalEstablished → ⊥
+observedPeakNotCausalBrainProof ()
+
+observedPeakNotArtifactExclusion :
+  offlineImplantedElectrodePeakReported ≡
+    directElectrodePickupAlternativeExcluded → ⊥
+observedPeakNotArtifactExclusion ()
