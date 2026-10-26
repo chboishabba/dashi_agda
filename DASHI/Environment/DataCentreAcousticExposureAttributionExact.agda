@@ -84,6 +84,70 @@ environmentEvidenceMap = sourceBoundClaim
   "36 included studies and 112 quantitative estimates; none reaches directly observed health outcome"
   "Absence in this eligible evidence map is not proof of zero risk"
 
+-- Attribution-first original *human* infrasound experimental roots.
+-- The 2021, 2023 and 2026 experiments target different signals, exposures,
+-- durations and outcomes. They are three original-study roots, not three
+-- replications of Benn Jordan or a particular data-centre community.
+scattertyControlled2026 : SourceBoundClaim
+scattertyControlled2026 = sourceBoundClaim
+  "Scatterty, VonStein, Prichard, Franczak, Hamilton, Schmaltz (2026): infrasound, affect and cortisol"
+  "https://doi.org/10.3389/fnbeh.2026.1729876"
+  peerReviewedExperimental observedOutcome
+  "Randomized 2x2 laboratory experiment July-August 2023, published 2026: 36 initially randomized, 35 retained cortisol/PANAS records; ~18 Hz 75-78 dB for 4m40s; multiple self-report effects and pre/post cortisol measured. Original supplemental participant CSV DOI 10.3389/fnbeh.2026.1729876.s002."
+  "The reported W=192, p=0.022 is recovered from n=35 whole sample, not the n=18 infrasound-on subgroup; original study and independent segyges reproduction distinct roots. This does NOT establish a facility receptor health effect or chronic disease. Covariate-adjusted models and numerous post-exposure item tests require bounded sensitivity analysis."
+
+maijala2021WindExperiment : SourceBoundClaim
+maijala2021WindExperiment = sourceBoundClaim
+  "Maijala, Kurki, Vainio, Pakarinen, Kuuramo et al. (2021): original wind-turbine infrasound experiment"
+  "https://doi.org/10.1121/10.0003509"
+  peerReviewedExperimental observedOutcome
+  "Original field-selected wind turbine sound samples and controlled lab provocation; participants did not identify infrasonic content and the specific tested exposure showed no independent annoyance/heart-rate/skin-conductance effect"
+  "A null result for its specific wind-turbine spectrum, dose and endpoints is not a universal null for other frequencies, levels or source locations."
+
+marshall2023WindCrossover : SourceBoundClaim
+marshall2023WindCrossover = sourceBoundClaim
+  "Marshall, Cho, Toelle, Tonin et al. (2023): 72h double-blind wind turbine infrasound crossover"
+  "https://doi.org/10.1289/EHP10757"
+  peerReviewedExperimental observedOutcome
+  "Original randomized sham/traffic-active-control laboratory experiment, 37 randomized noise-sensitive adults, 1.6-20 Hz ~90 dB peak across 72h; primary wake-after-sleep-onset mean contrast -1.36 min 95 percent CI -6.60 to 3.88; traffic active-control contrast +6.07 min"
+  "Within-study null at tested dose and sleep/physiological endpoints does not refute all human infrasound effects and is not a real data-centre community exposure trial."
+
+-- A recognized original physiological measurement in a controlled lab
+-- never becomes the *same object* as an in-situ industrial source-receptor
+-- human-outcome join. The whole-sample before/after test is also not an
+-- infrasound-group randomized contrast. Distinct nonidentities are source
+-- audit gates rather than a medical or causal theorem.
+data HumanAcousticEvidenceRoot : Set where
+  originalShortLabRandomizedAffectCortisol : HumanAcousticEvidenceRoot
+  originalWindTurbineAnnoyanceLab : HumanAcousticEvidenceRoot
+  originalLongShamCrossoverSleepLab : HumanAcousticEvidenceRoot
+  actualDataCentreMatchedReceptorOutcome : HumanAcousticEvidenceRoot
+
+shortLabIsNotDataCentreReceptor :
+  originalShortLabRandomizedAffectCortisol ≡
+    actualDataCentreMatchedReceptorOutcome → ⊥
+shortLabIsNotDataCentreReceptor ()
+
+windStudyIsNotDataCentreReceptor :
+  originalLongShamCrossoverSleepLab ≡
+    actualDataCentreMatchedReceptorOutcome → ⊥
+windStudyIsNotDataCentreReceptor ()
+
+data CortisolContrastRole : Set where
+  allParticipantPrePostSignedRanks : CortisolContrastRole
+  onConditionOnlyPrePostSignedRanks : CortisolContrastRole
+  betweenRandomizedOnOffChangeContrast : CortisolContrastRole
+
+allSamplePrePostNotOnOnly :
+  allParticipantPrePostSignedRanks ≡
+    onConditionOnlyPrePostSignedRanks → ⊥
+allSamplePrePostNotOnOnly ()
+
+allSampleBeforeAfterNotRandomizedExposureContrast :
+  allParticipantPrePostSignedRanks ≡
+    betweenRandomizedOnOffChangeContrast → ⊥
+allSampleBeforeAfterNotRandomizedExposureContrast ()
+
 queenslandNoisePolicy : SourceBoundClaim
 queenslandNoisePolicy = sourceBoundClaim
   "Queensland Environmental Protection (Noise) Policy 2019"
