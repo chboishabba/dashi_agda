@@ -592,6 +592,38 @@
         "status": "original_party_document_published",
         "evidence": "Party-origin publication publicly committed proposed unlimited pensioner/veteran employment earnings without payment reduction for 2025 election; distinct from Hanson's June 2026 public retrospective attribution of idea to Rinehart.",
         "not_pays": "Actual Rinehart pre-Jan2025 instruction, enacted statute, causal effects, party capture, or a signed commissioning deal."
+      },
+      {
+        "id": "AUS_RINEHART_2021_POLICY_FIRST_PERSON",
+        "original": "Gina Rinehart 2021-11-22 original Mining and Related Industries Day signed/speaker-authored five-page PDF, page 2",
+        "carrier": "https://www.ginarinehart.com.au/wp-content/uploads/2021/11/FINALV2-Speech-by-Mrs-Gina-Rinehart-to-2021-National-Mining-Related-Industries-Day.pdf",
+        "status": "first_person_original_pdf_page_visually_inspected",
+        "evidence": "Rinehart publicly proposes reforming pension work penalties; dated prior to 2025 One Nation party proposal and her 2026 attribution by Hanson.",
+        "not_pays": "Exclusive origination of a policy already circulating publicly, direct private communication to Hanson, particular legislative effect or 2026 funding use."
+      },
+      {
+        "id": "AUS_HANCOCK_IPA_2022_POLICY_ADVOCACY",
+        "original": "Hancock Prospecting 2022-08-16 Senate Submission 3 and Institute of Public Affairs 2022 Senate Submission 6, separate original source producers",
+        "carrier": "https://www.aph.gov.au/Parliamentary_Business/Bills_Legislation/bd/bd2223a/23bd024",
+        "status": "parliamentary_library_quotes_original_submissions_native_submissions_not_inspected",
+        "evidence": "Australian Parliamentary Library describes both HPPL and IPA separately supporting an unlimited Work Bonus; common policy argument does not alone document commissioned IPA transfer.",
+        "not_pays": "Original submissions' visually authenticated pages; a money-to-specified-brief join, unique Rinehart authorship or direct 2025 One Nation instructions."
+      },
+      {
+        "id": "AUS_WORK_BONUS_2022_CAPPED_LAW",
+        "original": "Australian Government, Minister for Social Services 2022-11-22 statement of enacted 2022 Workforce Incentive Act",
+        "carrier": "https://formerministers.dss.gov.au/20779/giving-older-australians-the-choice-and-flexibility-to-work/",
+        "status": "original_government_limited_enactment",
+        "evidence": "Labor government enacted temporary $4000 additional Work Bonus pensioner-income bank, which is distinct from proposed removal of all working income penalties in One Nation's 2025 pledge.",
+        "not_pays": "One Nation policy was enacted as law or exclusive direct causation by Rinehart/IPA; government enacted same unlimited proposal."
+      },
+      {
+        "id": "AUS_ONE_NATION_HQ_PROSPECTIVE_RENT",
+        "original": "One Nation and Hancock statements to journalists, Barnaby Joyce 2026-10-05 first-person lease-rate claim",
+        "carrier": "https://www.abc.net.au/news/2026-10-05/federal-politics-live-blog-albanese-pre-cop/107228246",
+        "status": "primary_party_and_landlord_statements_reported_by_press_no_executed_lease",
+        "evidence": "Proposed HQ relocation to 160 Wharf Street under Rinehart/Hanrine ownership; party and owner both say tenancy at commercial market rent, not free or discounted.",
+        "not_pays": "Authenticated signed lease, actual market-rate comparators, payer of renovations, company title or any unlawful gift/hidden subsidy."
       }
     ],
     "sibling_reviews": [
@@ -645,6 +677,13 @@
         "availability": "court-reported HPPL aggregate funding, no named policy-communication instructions",
         "claim_reopened": "named commissioned Australian document and delivered content",
         "not_pays": "1988-1998 API historical transfer by analogy"
+      },
+      {
+        "id": "AUS_HQ_EXECUTED_LEASE",
+        "kind": "executed_original_commercial_lease_and_comparator",
+        "availability": "Political party and landlord statements reported Oct 5 2026; exact signed lease, dates, rents, discounts, actual fitout payment and title original uninspected.",
+        "claim_reopened": "Whether 2026 One Nation HQ arrangement is prospective arm's-length rent or confers a quantifiable in-kind electoral benefit.",
+        "not_pays": "A claim of wrongdoing or Rinehart campaign command merely because she owns or may lease building."
       }
     ],
     "causal_boundary": "One original business donor, travel supporter and policy adviser can be real at the same time; none proves a universal hidden chain. A campaign-effect claim additionally needs delivered-message, exposed-audience, outcome and counterfactual evidence.",
@@ -653,6 +692,75 @@
     "original_party_policy_first_party": "https://www.onenation.org.au/one-nation-to-remove-limits-on-pensioners-veterans-earnings",
     "aec_transitional_original": "https://www.aec.gov.au/FADTransitionalRules/",
     "original_policy_transmission_ceiling": "One Nation's 2025 official publication is a policy producer original; Hanson's 2026 first-person attribution is a different later statement. Neither is a dated original Rinehart instruction or independent proof of downstream legislative adoption.",
-    "electoral_period_boundary": "OLD FY 2025-07-01 to 2026-06-30 releases 2027-02-01; OLD TRANSITION 2026-07-01 to 2026-12-31 releases 2027-04-22; NEW 2027 calendar-year reporting/expedited donor notifications follows its own law."
+    "electoral_period_boundary": "OLD FY 2025-07-01 to 2026-06-30 releases 2027-02-01; OLD TRANSITION 2026-07-01 to 2026-12-31 releases 2027-04-22; NEW 2027 calendar-year reporting/expedited donor notifications follows its own law.",
+    "policy_genealogy_same_object_chain": [
+      {
+        "date": "2021-11-22",
+        "producer": "Gina Rinehart",
+        "object": "original 5-page public speech page 2",
+        "source_role": "first_person_original_pdf_visually_inspected",
+        "policy_scope": "easing pensioner income work penalties",
+        "same_object_transfer_to_next": "NOT authenticated",
+        "same_source_family_with_other": false
+      },
+      {
+        "date": "2022-08-16",
+        "producer": "Hancock Prospecting Pty Ltd",
+        "object": "Senate submission 3 indexed in Parliamentary Library bill digest",
+        "source_role": "government_index_quote_native_original_403",
+        "policy_scope": "unlimited Work Bonus",
+        "same_object_transfer_to_next": "NOT authenticated",
+        "same_source_family_with_other": false
+      },
+      {
+        "date": "2022-08",
+        "producer": "Institute of Public Affairs",
+        "object": "Senate submission 6 indexed in same bill digest",
+        "source_role": "different_advocacy_producer_same_government_analyst_carrier",
+        "policy_scope": "unlimited Work Bonus",
+        "same_object_transfer_to_next": "NOT authenticated",
+        "same_source_family_with_other": false
+      },
+      {
+        "date": "2022-11-22",
+        "producer": "Albanese Government / Minister Amanda Rishworth",
+        "object": "original government report of enacted Work Bonus Act",
+        "source_role": "government_enactment_claim",
+        "policy_scope": "limited additional $4000 income bank",
+        "same_object_transfer_to_next": "NOT identical policy specification",
+        "same_source_family_with_other": false
+      },
+      {
+        "date": "2025-01-15",
+        "producer": "Pauline Hanson's One Nation",
+        "object": "party policy release, original publisher",
+        "source_role": "first_party_policy_publication",
+        "policy_scope": "unlimited earnings without reducing pension",
+        "same_object_transfer_to_next": "dated party original"
+      },
+      {
+        "date": "2026-06-11",
+        "producer": "Pauline Hanson, ABC radio as published",
+        "object": "first-person retrospectively attributes pensioner work policy idea to Rinehart",
+        "source_role": "first_person_statement_in_journalistic_carrier",
+        "policy_scope": "unlimited earnings without payment or health-card loss",
+        "same_object_transfer_to_next": "not an original dated instruction"
+      }
+    ],
+    "policy_bidi_severe_test": {
+      "would_strengthen": "A dated original pre-2025 Rinehart-Hanson communication containing this particular proposed policy text, optionally alongside original party drafting decisions, would establish a *specific advice transmission*, not necessarily exclusive authorship or election effect.",
+      "would_narrow": "Contemporaneous original party drafts showing independent origination, other named source, or an earlier adoption before any communication would narrow Hanson's retrospective attribution as an account of the party's actual drafting, without denying Rinehart's public 2021 advocacy.",
+      "alternative_mechanism": "Government's enacted 2022 limited Work Bonus and the separately originating IPA/National Seniors/ACCI policy advocacy show the issue circulated publicly; similar wording is not by itself same-document transfer.",
+      "status": "sourceChecked_chronology_transfer_unresolved",
+      "private_message_found": false
+    },
+    "commercial_lease_bidi_severe_test": {
+      "would_strengthen": "An original executed lease, payer/fit-out provisions, comparable independently evaluated rental, landlord beneficial ownership and actual payment records would classify material concessions if any.",
+      "would_narrow": "A properly executed commercial lease with actual independently comparable rent and tenant-funded fit-out would narrow allegations of discounted in-kind subsidy, without erasing landlord-to-party economic dependence.",
+      "actor_denial": "One Nation and Hancock Prospecting separately asserted commercial rents and no discounts in original press interviews; two represented parties, not independent appraisals.",
+      "status": "public_planned_tenancy_landlord_original_lease_not_inspected",
+      "material_subsidy_established": false
+    },
+    "independence_nontransfer": "Rinehart 2021 speech and HPPL 2022 submission may be same corporate advocacy channel; IPA 2022 submission is separately authored but shares one Parliamentary Library summary carrier. Party release 2025 and Hanson retrospective 2026 are separate dated party-side products; article copies of their quotes are NOT independent attestations. Labor 2022 capped law is an independently originating policy alternative, not identical to One Nation unlimited pledge."
   }
 }
