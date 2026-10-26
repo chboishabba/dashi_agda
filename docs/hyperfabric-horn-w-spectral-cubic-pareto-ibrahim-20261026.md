@@ -212,3 +212,34 @@ the remaining physical/geometric discriminant.
 
 No fake QIDs, Dewey entries, measured physical data, CI green
 status or absent geometric witness are to be promoted.
+
+
+## Scale-covariant same-source negative control (2026-10-26)
+
+For any fixed actual smooth unitary connection source, applying a
+spatial homothety by factor s>0 and transporting that SAME connection
+as a differential one-form changes a Euclidean local loop
+L -> L'=sL and its operator coefficient bound M -> M'=M/s.
+For the corresponding homotopy area and curvature norm,
+Area -> Area'=s² Area, K -> K'=K/s². Consequently
+
+    M' L' = M L,             K' Area' = K Area.
+
+Therefore arbitrary resizing of the horn's stage coordinates is NOT
+by itself evidence that the selected W can or cannot be produced.
+The physical energy/field regularity assumptions must be paid
+independently. Holding numerical M constant under s->0 would change
+the physical connection, NOT passively transport the original source.
+
+Exact rational negative-control source:
+`scripts/check_horn_homothety_source_scale_no_go.py`,
+locally equivalent Fraction checks PASS at six scales (1/10^6,
+1/100, 1/2, 1, 2, 100). No metric, source connection or experimental
+data for the true Hatcher stage is created by the calculation.
+
+This modifies the **interpretation**, not the mathematical correctness,
+of the flat ML<=781/1000 and curved
+ML<=3/4, eta<=23/500 acceptance tests. Both are dimensionless,
+same-source tests; their premise cannot be manufactured solely by
+coordinate scaling. The local UNBASED meridian conjugacy distinction
+and true relative cap/collar topology remain the P0 obligations.
