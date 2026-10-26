@@ -12,7 +12,10 @@ from math import factorial
 def round_fixed(q,S):
     return (q.numerator*S*2//q.denominator+1)//2
 
-def ceil_fraction(f):\n    return -(-f.numerator//f.denominator)\n\ndef seed(S,terms):
+def ceil_fraction(f):
+    return -(-f.numerator//f.denominator)
+
+def seed(S,terms):
     c=sum(((-1)**k*Fraction(1,factorial(2*k)) for k in range(terms)),Fraction())
     s=sum(((-1)**k*Fraction(1,factorial(2*k+1)) for k in range(terms)),Fraction())
     a,b=round_fixed(c,S),round_fixed(s,S)
