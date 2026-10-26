@@ -51,8 +51,12 @@ def mark_initial(mesh, labels):
     return stage
 
 
-def attach(stage, piece, target, children):
-    """Attach a piece to ONE named old boundary and name all fresh outputs."""
+def attach(stage, piece, target, children, with_transport=False):
+    """Attach to ONE named old boundary; optionally retain vertex inclusion.
+
+    The optional map is the exact old-stage simplicial injection into
+    the newly triangulated stage; original callers remain unchanged.
+    """
     assert target in stage.frontier
     assert len(children) == len(set(children))
     assert all(child not in (set(stage.frontier) - {target}) for child in children)
@@ -76,7 +80,7 @@ def attach(stage, piece, target, children):
     assert not set(other).intersection(fresh)
     result = MarkedSurface(new_mesh, {**other, **fresh})
     result.verify()
-    return result
+    return (result, old_map) if with_transport else result
 
 
 def staged(family, max_depth=4):
