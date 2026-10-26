@@ -6,7 +6,7 @@
 
 `DASHI/Statistics/ZipfFamilyFiniteExact.agda` supplies the 27-constructor typed taxonomy, distinct authority classes, original-root observation receipt, finite rational shifted-index sum, q=0 Zipf specialization, corpus-count additivity, corpus-relative hapax predicate and a rank/fingerprint nonfactorability theorem. The finite denominator/power carrier uses integer exponent/shift, **not all-real Hurwitz analytic continuation**. **Agda source-written; no kernel/typecheck receipt.**
 
-`scripts/zipf_family_formal.py` implements 27 mathematical/observational APIs. `tests/test_zipf_family_formal.py` contains **27 targeted tests**, including negative examples. A materially equivalent local package passed 27/27 with pytest; exact GitHub blob has not been independently executed by a Python runtime and should be retested at the branch head.
+`scripts/zipf_family_formal.py` implements 27 mathematical/observational APIs. `tests/test_zipf_family_formal.py` contains **27 targeted tests**, including negative examples. A materially equivalent local package passed 39/39 with pytest (27 named-law + 12 cross-law regression cases); exact GitHub blob has not been independently executed by a Python runtime and should be retested at the branch head.
 
 ## Complete semantic matrix
 
@@ -40,6 +40,10 @@
 | 26 | Zipf–Mandelbrot | `p(r)=(r+q)^-s/H(N,q,s)` | shifted model, Mandelbrot 1950s |
 | 27 | Hurwitz zeta | `zeta(s,a)=sum_(n>=0)(n+a)^-s` | mathematical series for real s>1,a>0; continuation separate |
 
+## Twelve additional cross-law falsification controls
+
+The separately committed `tests/test_zipf_family_crosslaw.py` adds 12 checks. In particular, the same token histogram and exact Zipf rank distribution can yield different Heaps prefix trajectories when the token ordering changes: `a,a,b,b,c,c` versus `a,b,c,a,b,c` have the same counts, but cumulative vocabularies `(1,1,2,2,3,3)` versus `(1,2,3,3,3,3)`. No deterministic Zipf-to-Heaps *finite trajectory* map exists without an additional temporal/probabilistic hypothesis. Other checks cover shifted finite Hurwitz head/tail additivity, monotonic shifted Zipf PMF, Lorenz/Gini permutation and scaling invariance, Pareto survival conditional scaling, Benford base-dependence, King-baseline dependence, Gibrat size non-identifiability, tie-breaking and Price-uniform counterexamples.
+
 ## Exact algebraic bridges and invalid deductions
 
 For **N>=1, q>=0, s>=0** the finite normalization `H(N,q,s)=sum_(r=1)^N (r+q)^-s` is positive. `q=0` is the finite unshifted Zipf model. For **s>1**, `H(N,q,s)=zeta(s,q+1)-zeta(s,q+N+1)`, derived from convergence of the two positive Hurwitz tails. At s=1 do NOT subtract divergent defining sums: finite H remains valid, while pole cancellation via separate meromorphic continuation is a different theorem.
@@ -70,3 +74,6 @@ These URLs are source identifiers only. No original scan/page hashes of all 27 e
 - Next proof-obligation Pareto cut: (P0) exact-head Agda/pytest; (P1) finite positive normalized PMF, CDF, moments and zero-shift Agda theorems; (P2) primary-source root acquisition and corpus-dependent estimators; (P3) goodness-of-fit/alternative models and dependent-sample rejection controls; (P4) separately typed optional applications to other programmes.
 
 **Stop rule:** implemented definitions ≠ empirical confirmation; synthetic test ≠ corpus replication; Agda declaration ≠ kernel receipt; historical association ≠ priority proof.
+## Primary source follow-through (27 October)
+
+A direct 1926 root for Lotka's productivity distribution is Alfred J. Lotka, *The Frequency Distribution of Scientific Productivity*, *Journal of the Washington Academy of Sciences* 16(12), pp. 317–323, original 19 June 1926 journal object: https://www.jstor.org/stable/24529203 . Heaps's 1978 monograph is bibliographically identified as H. Stanley Heaps, *Information Retrieval: Computational and Theoretical Aspects* (Academic Press 1978), ISBN 0123357500, https://ndlsearch.ndl.go.jp/books/R100000002-I000006212405 . Robert Gibrat's original 1931 book/thesis is catalogued under *Les inégalités économiques ... d'une loi nouvelle, la loi de l'effet proportionnel*, https://search.worldcat.org/title/1024555751 . Bibliographic identification is not a full-page content audit or independent empirical replication.
