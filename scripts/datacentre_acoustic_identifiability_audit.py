@@ -171,6 +171,38 @@ def woolworth_2026_fig2_power_plant_receipt():
         'human_health_outcome_study': False,
     }
 
+
+
+# Jurado & Marquardt, Scientific Reports 16 19097 (2026),
+# https://doi.org/10.1038/s41598-026-50179-w
+# Original author-result Figure 2 c/d non-invasive human audiometry:
+# reported average masked threshold changes in dB for 4,8,16,32,64 Hz.
+# Model interpretation electrical OHC->IHC drive distinct from direct
+# measured volunteer neuronal membrane potential. Individual raw source
+# participant data and LTSpice outputs are not stored in this repo.
+JURADO_MARQUARDT_2026_THRESHOLD_SHIFTS = (
+    ('4', '5.5'), ('8', '5.8'), ('16', '3.2'),
+    ('32', '1.4'), ('64', '1.1'),
+)
+
+
+def jurado_marquardt_2026_human_threshold_figure_receipt():
+    values = tuple((_Fraction(hz), _Fraction(db))
+                   for hz, db in JURADO_MARQUARDT_2026_THRESHOLD_SHIFTS)
+    return {
+        'original_authors': 'Carlos Jurado and Torsten Marquardt',
+        'original_doi': '10.1038/s41598-026-50179-w',
+        'original_first_published': '2026-04-24',
+        'frequency_and_source_mean_masked_threshold_delta':
+            [{'hz': str(hz), 'threshold_shift_db': str(db)} for hz, db in values],
+        'original_reported_significant_4_8_16Hz': True,
+        'threshold_change_not_absolute_unmasked_detection_threshold': True,
+        'cochlear_electrical_mechanism_model_interpretation_not_in_vivo_direct_recording': True,
+        'raw_participant_sensor_values_authenticated_here': False,
+        'environmental_data_centre_source_and_receptor_measured_here': False,
+        'human_disease_caused_by_ambient_DC_infrasound_established': False,
+    }
+
 # Operational source→receptor→outcome acceptance contracts for the ORIGINAL
 # @itsgingertheory inquiry. A receipt is an original artifact's metadata, not
 # independent authentication of its bytes, calibration, or conclusions.
@@ -717,6 +749,20 @@ class TestOriginalInquiryAcceptance(_unittest.TestCase):
         self.assertFalse(evidence['human_health_outcome_study'])
         self.assertFalse(evidence['raw_waveforms_or_site_load_released_in_article'])
 
+
+    def test_original_2026_cochlear_thresholds_are_human_perceptual_not_DC_disease(self):
+        z = jurado_marquardt_2026_human_threshold_figure_receipt()
+        self.assertEqual([x['hz'] for x in z[
+            'frequency_and_source_mean_masked_threshold_delta']],
+            ['4', '8', '16', '32', '64'])
+        self.assertEqual([x['threshold_shift_db'] for x in z[
+            'frequency_and_source_mean_masked_threshold_delta']],
+            ['11/2', '29/5', '16/5', '7/5', '11/10'])
+        self.assertTrue(z['threshold_change_not_absolute_unmasked_detection_threshold'])
+        self.assertFalse(z['raw_participant_sensor_values_authenticated_here'])
+        self.assertFalse(z['environmental_data_centre_source_and_receptor_measured_here'])
+        self.assertFalse(z['human_disease_caused_by_ambient_DC_infrasound_established'])
+
     def test_scatterty_signed_rank_fixture(self):
         r = _signed_ranks([_Decimal('-2'),_Decimal('3'),
                            _Decimal('4'),_Decimal('-1')])
@@ -897,6 +943,8 @@ if __name__ == "__main__":
             woolworth_2026_fig2_power_plant_receipt())
         status['two_weight_toy_proxy_nonidentifiability'] = (
             two_weight_three_band_negative_control())
+        status['original_human_infrasound_cochlear_sensation_lab'] = (
+            jurado_marquardt_2026_human_threshold_figure_receipt())
         status['verified_public_2026_site_sensor_or_participant_data'] = False
         status['paper_status_from_video_description'] = 'WIP, publication not verified'
         print(_json.dumps(status, indent=2))
