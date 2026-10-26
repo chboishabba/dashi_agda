@@ -469,3 +469,50 @@ cfactContinuationNotPlanTransfer witness =
   Typed.organisationalContinuityIsNotTransferRelation
     (Typed.relationIsTransfer witness)
 
+
+
+------------------------------------------------------------------------
+-- Independent quantitative audits: these are scholarly estimators, not
+-- permission to label every dollar in an organisation's accounts as
+-- climate-denial spend or every downstream message donor-commissioned.
+------------------------------------------------------------------------
+
+brulleFoundationStudy : Typed.SourceReceipt
+brulleFoundationStudy = Typed.sourceReceipt
+  "Robert J. Brulle"
+  "Institutionalizing delay: foundation funding and the creation of U.S. climate change counter-movement organizations"
+  "2014"
+  "Climatic Change 122:681-694; https://researchdiscovery.drexel.edu/esploro/outputs/journalArticle/Institutionalizing-delay-foundation-funding-and-the/991019167769804721"
+  "IRS/Foundation Center analysis of 91 organisations and 140 foundations in 2003-2010; approximately USD900m annual aggregate organisational revenue, USD64m annual identifiable foundation support. Revenue is NOT climate-specific spending."
+
+farrellNetworkStudy : Typed.SourceReceipt
+farrellNetworkStudy = Typed.sourceReceipt
+  "Justin Farrell"
+  "Corporate funding and ideological polarization about climate change"
+  "2016"
+  "PNAS 113:92-97; DOI 10.1073/pnas.1509433112"
+  "Independent empirical network/text analysis of corporate funding and climate-policy polarisation; statistical association and network effect are not a donor-to-every-specific-sentence contract."
+
+supranRahmstorfOreskesExxonAudit : Typed.SourceReceipt
+supranRahmstorfOreskesExxonAudit = Typed.sourceReceipt
+  "Geoffrey Supran; Stefan Rahmstorf; Naomi Oreskes"
+  "Assessing ExxonMobil's global warming projections"
+  "2023"
+  "Science 379:eabk0063; DOI 10.1126/science.abk0063"
+  "Independent quantitative assessment of company models documented 1977-2003 found a majority of Exxon/ExxonMobil original warming predictions accurately forecast subsequent warming. Public statements could differ from internal model conclusions."
+
+record ConcentratedSourceAuditBoundary : Set where
+  constructor concentratedSourceAuditBoundary
+  field
+    aDraftPlanIsNotImplementedCommunications : Bool
+    foundingRoleIsNotUnauditedGreenpeaceFact : Bool
+    historicOrganisationalFinanceEqualsExactMediaPayment : Bool
+    900mOrganisationRevenueIsClimateSpecificSpending : Bool
+    samePersonAcrossPlatformsEqualsCentralCommand : Bool
+    shellBPDefectionsPreservedAsCounterExamples : Bool
+    independentScientificPredictionAuditIsNotAnAllegation : Bool
+
+canonicalConcentratedSourceAuditBoundary : ConcentratedSourceAuditBoundary
+canonicalConcentratedSourceAuditBoundary =
+  concentratedSourceAuditBoundary
+    true true false false false true true
