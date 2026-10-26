@@ -135,9 +135,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 -- source carriers including real NOAA Bangor records, same-station metadata,
 -- an earlier local press item and a Kansas location false-match control.
 -- More source objects are NOT more independent weather experiments.
-sourceAtlasCountIsSeventySeven :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 77
-sourceAtlasCountIsSeventySeven = refl
+sourceAtlasCountIsEighty :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 80
+sourceAtlasCountIsEighty = refl
 
 
 -- Original NOAA OBS-TIME documentation is a *method*, not a 1953 sensor time;
@@ -188,6 +188,27 @@ noaaHourArchiveAndDailyMethodHaveOneCustodialAttribution :
   Atlas.root Atlas.noaaISD1953YearArchivePresent ≡
   Atlas.root Atlas.noaaGHCNObservationClockAvailability
 noaaHourArchiveAndDailyMethodHaveOneCustodialAttribution = refl
+
+
+noaaOriginalISDFormatCannotImportRainHour :
+  Attribution.citationImportsProof Atlas.noaaISD2018OriginalFormat ≡ false
+noaaOriginalISDFormatCannotImportRainHour =
+  Atlas.allSourcesRemainNonPromoting Atlas.noaaISD2018OriginalFormat
+
+noaaNODDDistributionNoticeCannotImportRainHour :
+  Attribution.citationImportsProof Atlas.noaaNESDIS2026ISDMigration ≡ false
+noaaNODDDistributionNoticeCannotImportRainHour =
+  Atlas.allSourcesRemainNonPromoting Atlas.noaaNESDIS2026ISDMigration
+
+noaaSuccessorDataCatalogueCannotImportRainHour :
+  Attribution.citationImportsProof Atlas.noaaGHCNh2023OriginalDataset ≡ false
+noaaSuccessorDataCatalogueCannotImportRainHour =
+  Atlas.allSourcesRemainNonPromoting Atlas.noaaGHCNh2023OriginalDataset
+
+allNOAAMethodCarriersShareOneCustodialRoot :
+  Atlas.root Atlas.noaaISDRecordLengthSourceCorrection ≡
+  Atlas.root Atlas.noaaGHCNhSuccessorNotIndependentGauge
+allNOAAMethodCarriersShareOneCustodialRoot = refl
 
 -- Additional original 1953 NOAA station does not change the publisher
 -- denominator; observations must retain their actual distinct site keys.
