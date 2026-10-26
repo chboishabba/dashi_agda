@@ -131,13 +131,30 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- Original-published source instances are counted individually, including
 -- different dated reprints. Common author roots do not become experiments.
--- Earlier 60-source Reddit/Guardian historical cut now has five further
+-- Earlier 60-source Reddit/Guardian historical cut now has seven further
 -- source carriers including real NOAA Bangor records, same-station metadata,
 -- an earlier local press item and a Kansas location false-match control.
 -- More source objects are NOT more independent weather experiments.
-sourceAtlasCountIsSixtyFive :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 65
-sourceAtlasCountIsSixtyFive = refl
+sourceAtlasCountIsSixtySeven :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 67
+sourceAtlasCountIsSixtySeven = refl
+
+-- RVML organiser archives and its uploader account represent one historical
+-- programme origin; neither is Croft's narrator root or a verified transfer.
+gentryRvmlMetadataIsSameOrganiserRoot :
+  Atlas.root Atlas.rvmlGentryNamedEvent ≡
+  Atlas.root Atlas.rvmlGentryFlanaganAdvertisedTopic
+gentryRvmlMetadataIsSameOrganiserRoot = refl
+
+rvmlCarrierCannotCreateProof :
+  Attribution.citationImportsProof Atlas.rvmlGentryVideoMetadata ≡ false
+rvmlCarrierCannotCreateProof =
+  Atlas.allSourcesRemainNonPromoting Atlas.rvmlGentryVideoMetadata
+
+rvmlProgrammeCannotCreateInstitutionalAuthority :
+  Attribution.citationCreatesAuthority Atlas.rvmlGentry2003Programme ≡ false
+rvmlProgrammeCannotCreateInstitutionalAuthority =
+  Atlas.allSourcesRemainNonAuthoritative Atlas.rvmlGentry2003Programme
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
