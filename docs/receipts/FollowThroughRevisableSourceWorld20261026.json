@@ -69,6 +69,18 @@
       "author": "National Mathematics Advisory Panel Task Group on Instructional Practices",
       "role": "later mathematics-only evidence inclusion review",
       "url": "https://www.ed.gov/media/document/instructional-practicespdf-89277.pdf"
+    },
+    {
+      "id": "tucker1977",
+      "author": "Eugene Tucker",
+      "role": "original 1977 AERA presentation; author viewpoints not official USOE decisions",
+      "url": "https://files.eric.ed.gov/fulltext/ED141449.pdf"
+    },
+    {
+      "id": "evans1981",
+      "author": "John W. Evans",
+      "role": "original 1981 retrospective programme R&D and social-service governance",
+      "url": "https://files.eric.ed.gov/fulltext/ED244737.pdf"
     }
   ],
   "evidence": [
@@ -169,6 +181,20 @@
       "status": "present",
       "locator": "2008 Task Group Instructional Practices report, Follow Through mathematics section",
       "kind": "later restricted three-model review, not original 1977 full ranking"
+    },
+    {
+      "id": "tuckerFirstParty",
+      "root": "tucker1977",
+      "status": "present",
+      "locator": "ERIC ED141449 scanned PDF; page index 5 visually checked; printed p4 initial appropriations",
+      "kind": "attributed author original historical account, not appropriations audit"
+    },
+    {
+      "id": "evansFirstParty",
+      "root": "evans1981",
+      "status": "present",
+      "locator": "ERIC ED244737 scanned PDF; page index 4 visually checked; printed p4 programme conversion",
+      "kind": "original author retrospective account, not policy order"
     }
   ],
   "claims": [
@@ -280,6 +306,26 @@
       "severe_test": {
         "would_narrow": "No identifiable policy counterfactual links dissemination to aggregate nationwide trajectory",
         "would_strengthen": "Credible policy exposure, downstream outcome and rival-policy identification establish attributable national effect",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
+    },
+    {
+      "id": "rdServiceGovernance",
+      "statement": "Original resource shortfall preceded programme conversion to R&D and subsequent service/research governance conflict",
+      "scope": "programme planning 1967–81, Tucker and Evans author accounts, no causal downstream test",
+      "level": "sourceReported",
+      "requires": [
+        "tuckerFirstParty",
+        "evansFirstParty"
+      ],
+      "supports": [
+        "tuckerFirstParty",
+        "evansFirstParty"
+      ],
+      "severe_test": {
+        "would_narrow": "Contemporaneous appropriation and charter documents contradict the specific amounts or chronology",
+        "would_strengthen": "Original FY1968 appropriations, charter and implementation memos reproduce the chronology and declared aims",
         "test_status": "notRun",
         "requires_original_object": true
       }
