@@ -228,3 +228,55 @@ def test_official_stages_have_distinct_declared_constructors_and_institutional_p
     assert ("act55OfficialStatute = australia-source-role-receipt\n"
             "  originalLimitedGovernmentLegislation") in s
     assert "a submission does not by itself establish bill drafting influence" in s.lower()
+
+
+def test_three_inquiries_not_one_submitter_register():
+    """Three official registers, seven specifically typed source appearances."""
+    s = ADAPTER.read_text()
+    for key in (
+        "februaryCoalitionSenateRegisterOriginal",
+        "augustDeanSmithBillOriginal",
+        "septemberAlbaneseBillOriginal",
+        "octoberGovernmentSenateRegisterOriginal",
+        "hancockOct2022OwnSubmissionIndexReceipt",
+        "df5522d8-50d8-4ebb-ad5d-6d7cfd367158",
+        "dfaa59de-73b8-4409-ab06-4527c2c6cfd3",
+        "8f9cfa11-5287-40b3-8287-4fbff1f88b80",
+        "7596775e-a631-40bd-be57-abe6b5efd5a1",
+        "85a023f4-e99a-45b0-8cf7-785af6302d45",
+        "146b77ac-abc8-42c9-a937-8f5a45b40c3f",
+        "febAndAugCommitteesAreDifferent ()",
+        "augAndOctCommitteesAreDifferent ()",
+        "sameNsaCannotYieldUniqueCommittee choose feb aug =",
+        "noListedHancockFebSubmission ()",
+    ):
+        assert key in s
+    block = s[s.index("data Pension2022IndexedSubmission :"):
+              s.index("febAndAugCommitteesAreDifferent :")]
+    registered = re.findall(r"^\s+(nsaFeb03|hancockAug03|ipaAug06|nsaAug07|nsaOct03|hancockOct09|ipaOct10) :", block, re.M)
+    assert len(registered) == 7 and len(set(registered)) == 7
+    assert "NO HPPL or IPA among SIX listed submissions" in s
+    assert "this is only bounded absence" in s
+    assert "Original PDF faces not inspected" in s
+
+
+def test_nsa_ipa_original_survey_citation_is_not_hancock_editorial_order():
+    s = ADAPTER.read_text()
+    for marker in (
+        "senateOct22IPACitesNSASurvey = australia-source-role-receipt",
+        "senate2022MultipleDistinctPolicyAmounts = australia-source-role-receipt",
+        "paragraphs 2.15-2.16",
+        "National Seniors survey",
+        "20% pensioner participation",
+        "ACCI 15600",
+        "VCCI extra 10000",
+        "NSA 6000 biannual",
+        "documentedNSAtoIPACitation = publicThirdPartySurveyCitation",
+        "documentedNSAtoDeloitteModelling = namedClientConsultantCommission",
+        "noCitationEqualsPrivateSponsorEditorialOrder ()",
+        "No HPPL commissioning",
+    ):
+        assert marker in s
+    assert s.index("senateOct22IPACitesNSASurvey") < s.index(
+        "noCitationEqualsPrivateSponsorEditorialOrder")
+    assert "Original public committee ANALYSIS" in s
