@@ -129,3 +129,29 @@ def test_original_R92_R102_helicity_conservation_vs_literal_dyadic_defect():
         S.sqrt(n2(m))*(S.conjugate(v).T*v)[0]
         for m,v in u.items()),S.Integer(0)))
     assert true_helicity_mass==2+S.sqrt(5)+2*S.sqrt(6)
+
+def test_general_helicity_negative_sector_and_dyadic_defect_split():
+    # Existing R92/R102 signed helicity and R734 dyadic weights:
+    # Xw=Hsigned+2*negative_helicity_mass+R_weight.
+    w,r,eplus,eminus=S.symbols('w r eplus eminus',real=True)
+    assert S.expand(w*(eplus+eminus)-r*(eplus-eminus)
+                    -2*r*eminus-(w-r)*(eplus+eminus))==0
+    pp,mm=S.symbols('pp mm',real=True)
+    assert S.expand(w*(pp+mm)-r*(pp-mm)
+                    -2*r*mm-(w-r)*(pp+mm))==0
+
+def test_actual_physical_source_defect_is_all_pure_plus_initial_growth():
+    u=physical_u();force=projected_NS_nonlinearity(u)
+    signed=negative_tangent=defect_tangent=S.Integer(0)
+    for mode,vel in u.items():
+        f=force.get(mode,S.zeros(3,1))
+        plus=h(mode,vel,+1);minusv=h(mode,vel,-1)
+        dp=2*S.re((S.conjugate(plus).T*h(mode,f,+1))[0])
+        dm=2*S.re((S.conjugate(minusv).T*h(mode,f,-1))[0])
+        radial=S.sqrt(n2(mode));w=weight(mode)
+        signed+=radial*(dp-dm)
+        negative_tangent+=radial*dm
+        defect_tangent+=(w-radial)*(dp+dm)
+    assert S.simplify(S.expand_complex(signed))==0
+    assert S.simplify(S.expand_complex(negative_tangent))==0
+    assert S.simplify(S.expand_complex(defect_tangent-critical_data()[2]))==0
