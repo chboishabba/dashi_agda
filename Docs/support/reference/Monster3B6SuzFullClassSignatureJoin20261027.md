@@ -28,6 +28,16 @@ Those constraints **do not detect a stale permutation of other class coordinates
 
 The class signature is a necessary *alignment discriminator*, **not a proof of unique class labels**: automorphisms or swaps of indistinguishable class-metadata rows can preserve order/size/power maps. Character values, exact source table identity, and the original quotient and Monster restriction computations must still be connected. The independent full-character export and selected-source receipt are **not authenticated by a self-reported field or a hash**.
 
+## Follow-on P0: JSON labels and reproducible source driver
+
+A fresh review confirmed an existing source-format blocker: GAP's ATLAS `AtlasLabelsOfIrreducibles` can contain backslashes; a raw label such as `\\chi_{1,0}` is invalid in a hand-written JSON string (`\\c` is not a JSON escape). This was already identified in a prior PR review; do not claim to have discovered the ATLAS phenomenon.
+
+- Added `scripts/monster_3b_source_json_escape.g`, a shared printable-ASCII, fail-closed JSON-string quoting helper using existing GAP string replacement, with **no extra GAP package dependency**. It refuses unsupported control/non-ASCII bytes instead of corrupting labels.
+- Reused it in the **three existing original source producers**: the original main quotient matcher, arbitrary-conductor exporter, and older Q(zeta3) portable exporter. Character labels remain the original ATLAS strings after decoding JSON.
+- Added **thin orchestration only** in `scripts/check_monster_3b_suzuki_actual_source_join.sh`. It invokes the pre-existing original quotient shell checker, source all-conductor exporter and auditor, and strict selected-source join, preserving the raw files under `build/`.
+- An independent local Python synthetic reconstruction verified all eight additional class-signature negative controls plus five JSON quote/backslash round trips. This does **NOT** mean the committed GAP script, the committed updated Python integration, or real CTblLib exports ran locally.
+- The distinguishing branch is decisive: if the source-restricted selected 78 is **not** the Nebe Sym² family, a passing join should be reported as a rigorous *negative* against that selected-constituent hypothesis, not promoted to the conjectured 12+78 intertwiner.
+
 ## Source-versus-execution boundary
 
 - **Committed code:** yes, to PR #1250, source-written at a new head.
