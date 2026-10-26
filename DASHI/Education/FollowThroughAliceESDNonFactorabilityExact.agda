@@ -3,6 +3,7 @@ module DASHI.Education.FollowThroughAliceESDNonFactorabilityExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -58,7 +59,7 @@ aliceCorpus = Alice.canonicalAliceBrownCorpusLoom
 esdEvidenceBraid : Braid.EvidenceBraidBoundary
 esdEvidenceBraid = Braid.canonicalEvidenceBraidBoundary
 
-transferCandidateCount : Agda.Builtin.Nat.Nat
+transferCandidateCount : Nat
 transferCandidateCount = Principles.transferablePrincipleCount
 
 claimBoundary : String
