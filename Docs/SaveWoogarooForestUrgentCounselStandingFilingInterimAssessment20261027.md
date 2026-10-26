@@ -1,0 +1,109 @@
+# Urgent counsel triage — Woogaroo EPBC 2019/8575
+**Prepared 27 October 2026 (Brisbane). Privileged only if properly commissioned/held for legal advice; this source-written note is NOT itself legal advice, solicitor retainer, affidavit, filing, court order, undertaking, or communication sent to any agency.**
+
+## Provisional issue and outcome
+
+The Commonwealth's [original 15 October 2026 notice](https://eap-cp.powerappsportals.com/all-notices/) lists Springfield Residential Development **EPBC 2019/8575** as **approved with conditions**. Portal copies fail to reveal the final **signed** instrument, current condition text, decision-maker, reasons, actual Secretary **s95C** report and any commencement/clearing authorisation. Two original signed **s130(1A)** extensions (2 and 25 September) show a final decision period ending **16 October**, but **neither extension signer is proven the 15 October approving officer**.
+
+**Preliminary provisional assessment:** Federal judicial review and immediate protective orders are legally **available pathways** if a proper applicant and arguable jurisdictional/legal error can be identified. Neither standing for an unspecified applicant, an actual EPBC contravention, review prospects nor imminent clearing is proved on present evidence. An approved action may lawfully proceed within its operative conditions unless stayed/restrained. Counsel must avoid conflating a challenge to the **validity of the approval** with a separate **breach of approval or action outside scope**.
+
+This is an *issue analysis*, not a merits prediction. It preserves primary-law authorship, statutory instrument and dated project file identities; no local coal/gas lobbying network, shareholding or historical state infrastructure concession can substitute for a legal element.
+
+## Original controlling sources — correct effective dates
+
+1. [EPBC Act latest **Compilation 70/C2026C00369, 24 August 2026**](https://www.legislation.gov.au/C2004A00485/latest) is still the in-force compilation at 15 October. Sections **67A** (controlled action), **95B**, **95C**, **135A**, **136**, **139**, **475**, **487** are separate legal consumers.
+2. [ADJR Act latest **Compilation 134/C2026C00448, effective 29 September 2026**](https://www.legislation.gov.au/C2004A01697/latest) is the operative review law at 15 October. **IMPORTANT REVISION:** earlier repository and draft notes referenced superseded **Compilation 133 (27 August)**; for exact commencement-of-law analysis use C134. The new intervening 29 Sept amendment arises from Act 93 of 2026; no particular change to the cited sections 5/11/13/15 has been asserted without comparing their text.
+3. [Federal Court Rules 2011, compilation dated 11 June 2026](https://www.legislation.gov.au/F2011L01551/2026-06-11/2026-06-11/text/original/epub/OEBPS/document_1/document_1.html), rules **7.01, 17.01, 31.01–31.03**; [Federal Court urgent applications instructions](https://www.fedcourt.gov.au/contact/urgent-duty-matters), [GPN-DUTY](https://www.fedcourt.gov.au/law-and-practice/practice-documents/practice-notes), and [GPN-UNDR undertaking practice note](https://www.fedcourt.gov.au/law-and-practice/practice-documents/practice-notes/gpn-undr).
+4. [EDO free legal assistance intake](https://www.edo.org.au/free-legal-advice/) (practitioner service; not a court and response/retainer not guaranteed). Mark the deadline and urgent risk. [Federal Court Queensland registry](https://www.fedcourt.gov.au/contact/registries/qld) general **1300 720 980**, after-hours urgent duty **1300 352 000**: procedural only, no legal advice.
+5. [EPBC original 15 Oct decision notice](https://eap-cp.powerappsportals.com/all-notices/); [original s95C report request draft](SaveWoogarooForestEPBC95C135ARequest20261027.md). Neither actual s95C report nor signed approval is presently authenticated.
+
+## Standing: no inferred litigant identity
+
+| Pathway / statute | Exactly available standing rule | Applicant-specific evidence not yet acquired |
+|---|---|---|
+| **Individual EPBC s487(2) → ADJR** | Individual Australian citizen or ordinarily resident, with a **series of** Australian conservation/protection/environmental-research activities within **two years before the challenged decision**, i.e. **15 October 2024–15 October 2026** for this decision | Statutory personal eligibility and specific named person; dated field work, submissions, ecological reports, correspondence, event chronology, original artifacts and declarations |
+| **Organisation EPBC s487(3) → ADJR** | Incorporated or otherwise established Australia/territory; series of environmental activities during prior two years; environmental objects/purposes **at time of decision** | Incorporation/constitution as at **15 October 2026**, organisational resolutions, dated activity/event exhibits, identification of actual plaintiff/representative, any representation rules (corporation ordinarily requires lawyer) |
+| **General ADJR s3(4) adversely affected interest** | Interest adversely affected by decision may independently qualify as "person aggrieved"; EPBC s487 **extends rather than limits** standing | Particular impact on property, residence, land/corridor use, environment-related interests, expert practice or other concrete legal interest; not a general protest-only presumption |
+| **EPBC s475(6),(7) separate enforcement** | For individuals/organisations, qualifying **affected interest OR** applicable preceding two-year activity/environmental-purpose routes; for proposed conduct look to timing before filing | Person/organisation, proposed or actual prohibited conduct; specific threatened contravention **even if** standing is satisfied |
+| **Judiciary Act s39B** | Potential Federal Court original-jurisdiction ground independent of ADJR, subject to legal requirements and appropriate parties | Specific legal error, jurisdiction, eligible applicant and evidence; counsel to consider pleading with rule **31.01(3)** |
+
+**Working candidate** (NOT automatic plaintiff): *Save Woogaroo Forest* or a person whose documented work relates to conserving this habitat. It would be wrong to claim that the group definitely has organisational standing based on campaign publicity alone; obtain governing constitution, named decision-day objects and contemporaneous activity records. Do NOT presume Johl Brown/other individual meets citizenship/activities or has authority to sue on the organisation's behalf.
+
+## Filing-time analysis: exact applicant receipt matters
+
+**Section 11(1)(c),(3) of ADJR**, C134, conditionally prescribes a 28-day limit in the relevant decision-terms/reasons furnishing circumstances. Eligibility and actual **furnishing** are factual; **section 3(6)** may deem appropriately posted documents furnished at posting, not physical opening. Section 11(4)-(5) also allows court dismissal for unreasonable time where no period prescribed. Sections 13(1),(5) govern **qualified s13 reasons requests**, including request timing; section **135A(2) EPBC recommendation request** is independent and does **not** suspend the review clock.
+
+| Scenario — hypothetical, not actual verified receipt | Provisional calendar consequence | Legal caveat |
+|---|---|---|
+| Written decision terms containing findings/evidence/reasons furnished **15 Oct 2026** to **particular applicant**, no alternative qualifying later trigger | **12 November 2026** is 28 days after 15 Oct (calculated as calendar days) | Only if statutory ADJR s11(3)(a) conditions and applicable filing computation hold; **not a claimed universal deadline** |
+| Written decision terms furnished 15 Oct **without** adequate reasons, qualifying s13 request served in time | ADJR s11(3)(b)(ii) has contingent later terminal event when reasons provided/refused or court declaration occurs | Exact s13 eligibility, s11(3)(b) conditions and receipt dates govern; don't use this as an excuse to delay a protective filing |
+| Written terms furnished **another date**, or applicant not furnished despite web posting | Calculate from actual eligible applicant's documents and relevant s11 branch; possible s11(4) reasonable-time consequences | Portal public notice, personal knowledge, postal deemed service and official dispatch history **not interchangeable** |
+| Prescribed period expired | [Federal Court Rules r31.02](https://www.legislation.gov.au/F2011L01551/2026-06-11/2026-06-11/text/original/epub/OEBPS/document_1/document_1.html): **Form 67** extension application + sworn facts for delay + draft **Form 66** review pleading | Extension is discretionary; urgency may worsen with ongoing clearing |
+
+**Exact timestamp/source acquisition for each applicant:** original signed terms; covering email, recipient, delivery headers; physical mail envelope/posting service history; any reasons enclosed; any subsequent original s13 request and acknowledgement/response; register posting time; court case already filed if any; public access date. Counsel should calculate an applicant-specific date, not announce an automatic 12 November deadline. Filing a report/FOI request does not initiate or stay court review.
+
+## Relief: THREE procedural/causal alternatives that must not be fused
+
+**A. ADJR review s5, s15 stay** — [ADJR s15](https://www.legislation.gov.au/C2004A01697/latest) expressly says applying for review does **not** itself affect operation of decision. Court can suspend operation or stay proceedings under it. Counsel consider **Federal Court rule 31.01 / Form 66**, respondent government decision-maker and interested proponent/approval holder, and urgently seek tailored orders to prevent irretrievable habitat impact while claim is heard.
+
+**B. EPBC s475 interim injunction against proposed contravention** — [EPBC s475(1),(2),(5)–(7)](https://www.legislation.gov.au/C2004A00485/latest) requires actual/proposed **offence/other contravention of EPBC Act/regulations** and qualifying interested applicant. An approval-with-conditions is not a blank prohibition on clearing. Candidate breach must be **exact conditions not met, work outside approved action, unapproved person/action, prestart conditions violated**, or another genuine s67A/Part 3 contravention. Before original conditions, site map, works dates and evidence, **this lane is UNPAID**. No legal claim of s475 available on habitat status alone.
+
+**C. Emergency interlocutory relief under Federal Court procedural rules** — [r7.01(2)](https://www.legislation.gov.au/F2011L01551/2026-06-11/2026-06-11/text/original/epub/OEBPS/document_1/document_1.html) allows prospective applicant **Form 12 and affidavit** in sufficiently urgent conditions before originating process; existing case can proceed through **Form 35 r17.01**. Court [GPN-DUTY](https://www.fedcourt.gov.au/contact/urgent-duty-matters) requires **Certificate of Urgency**. Applicant must prove **actual urgency**, not merely valuable old habitat. Counsel to address service/notice or justified limited without-notice approach, the narrow conduct and parcels, legal merits, impact/irreversibility, actual delay losses, parties and undertaking.
+
+**Cost exposure:** [GPN-UNDR](https://www.fedcourt.gov.au/law-and-practice/practice-documents/practice-notes/gpn-undr) says applicant will almost always be expected to give usual undertaking as to damages for interlocutory restraint. Need solicitor advice on capacity, scope, compensation exposure, security if sought, general adverse costs and any possible exception. There is **NO automatically available public-interest waiver**.
+
+### Relief / sworn evidence structure for counsel (NOT court forms)
+
+**Proposed narrow protective subject:** *the specific approved/proposed vegetation clearing and earthworks envelopes in 9281/2024/OW, 9293/2024/OW and exact EPBC 2019/8575 approved impact polygon, to extent relevant to disputed legal obligations*. No coordinates of vulnerable individuals or protected species nests to be publicly disclosed without governance review.
+
+**Witness-specific affidavit exhibit types:** (1) first-person dated observation or independently authenticated source of threatened commencement; (2) exact photographs/video and EXIF/provenance, before/after/time, original filenames/hashes, non-leading description; (3) relevant Council signed conditions, especially 9281 Condition 6(a), and current s95B/95C/proponent/EPBC final requirements; (4) expert ecology on mature koala habitat, locally connected populations, threatened species and irreversible harm; (5) developer claims/actual costs from document, not invented; (6) genuine applicant standing exhibits; (7) record of proponent notice and any without-notice necessity.
+
+**Protective order test for solicitor:** should order target **clearing/earthworks specifically**, necessary entities, measurable geographical boundary, duration to return date and restraint of contractors/agents lawfully reached by order, with express existing-work/safety exceptions only if justified. Avoid unreviewed free-form prayer that retrospectively declares all Springfield development illegal.
+
+## Legal grounds — bounded screening, not pleaded allegations
+
+| Candidate legal issue | Current source-positive evidence | Missing proof / severe falsifier |
+|---|---|---|
+| **s95B/95C procedural consideration** | One published final-PD notice records 1,786 comments and statutory duty to forward 95B comments/response; s95C Secretary recommendation mandatory | Real proponent final PD and copies actually transmitted; report, date, signatory; absence from public portal ≠ nonexistence; valid consideration may be fully recorded |
+| **s136/s139 affected protected species/cumulative harm** | Earlier Department Item **4.6(c)** specifically required local/regional cumulative impact assessment; project ecologist and Council material suggest koala habitat/corridor effects | Full final functional analysis, advice/conditions, true statutory relevance and materiality; ecological loss alone ≠ failure of legal consideration |
+| **Approval/delegation/conditions** | 15 Oct public conditional approval; original two signed extension notices, last to 16 Oct | Original 15 Oct signer, actual lawful delegated authority, signed operative conditions, notifications; later extension signer ≠ final signer |
+| **State works prestart compliance** | Original 9281/2024/OW 20 Mar negotiated operational-works status with vegetation-clearing component and prestart Condition 6(a) in repo | Exact 6(a) discharge, work stages/polygons and commencement timeline, Council's legal decision; stage approved ≠ work occurred or breached condition |
+| **Historical habitat protection / offsets** | Multiple ecology/koala/offset original sources and previous Ibrahim snowball modules | Same-parcel original geometry, condition binding, offset sufficiency in legal standard, actual local population loss; no automatic merits appeal |
+| **Alternative housing sites / 10,000 apartment proposal** | Campaign identifies other approved supply as counterfactual; local Village 2/3 ADPs 2024/25 exist | Same owner/parcel/time, legally available substitutes and appropriate s136 relevance; 'other apartments exist' alone not a federal approval error |
+| **Lobbying, donor and second/third-order economic benefit** | State 2025 meetings with Springfield figures and Santoro, historic Energex/Allgas, 1994 CPI loan, 2026 Orion valuations and related exposure are individually source-located | Dated direct federal decision communication, relevant legal duty breached, original financial contracts and causal transfer. Generic political accusation, nominal overlap and gas demand analogy are wrong-type grounds |
+| **Minister/National EPA transitional law** | National EPA 1 July under delegation; four August standards not yet applicable to 15 Oct individual approvals | Actual approval signer/authority, exact commencement and transition; do not apply standards retroactively |
+
+**Judicial review is legality, not a free-standing reweighing of ecological and housing policy.** Even a proven legal error can lead to remittal, not a guaranteed refusal.
+
+## Requested topics — exact coverage audit across original repo and this continuation
+
+| Inquiry dimension | In-repo source owner / treatment | Paid vs not paid |
+|---|---|---|
+| EPBC identity **2019/8575** and 15 Oct approval | PostApprovalPoliticalGasBenefit; EPBC95C135A; this triage | **Public notice PAID**; signed full instrument OPEN |
+| 1997 Springfield DCP, 2018 **QCA** (Qld Court of Appeal) Cherish case, 2024–25 **ADP** | AttachmentSameObjectAudit and LegalPriorityRoadmap | Judgments and ADP *approval status* PAID; full signed conditions/parcel chain OPEN |
+| 9281/9293 QLD OW and Condition 6(a) | 9281 Condition6a, Preclearance, QueenslandCommencement owners | Source receipt partial; actual discharge or clearing OPEN |
+| Local/regional functional cumulative effect Item 4.6(c) | EPBC8575CumulativeImpactSufficiency, Ibrahim koala/population owners | legal request PAID; actual final-PD/95C answer and merits OPEN |
+| Habitat/koala, genetic reserve, public/ecological burdens and offsets | Ibrahim population extensions, offset/canopy/liDAR, gain/loss | hypothesis/source-specific partial; same-object impact/realised offsets OPEN |
+| Commonwealth approval vs statutory agency signatory | PostApproval + EPBC95C135A + this memo | Delegated institutional architecture PAID, original actual signer OPEN |
+| State lobbying/party donations/Santoro gas history | SpringfieldGasLobbyingOwnershipSnowball merged #893 + Attachment | Dated diary/source roots PAID; federal instruction/causation OPEN |
+| Land, Cherish/Stockland/Maha-Springfield title/consents | Attachment; 2023 council consent index; Cognition PR #1131 separate | Indexed files PAID, current title, beneficial interests, contracts OPEN |
+| Housing policy/HAFF programme/affordability and delivered lots | PostApproval; Attachment; ANAO/ADPs | Policy, programme audit, proposed maximum lots PAID; project HAFF payments or built housing OPEN |
+| First/second/third-order public/private benefit | GainLoss, SecondThirdOrderIncidenceBridge; Cognition #1131 donor | Mechanisms and historic 1994 QCA record PAID in limited sense; current project net transfer, all-loan ledger OPEN |
+| Utility infrastructure/charges, gas/embedded network | second-third owner, Council ICN indexes, Mirvac and 2005 Allgas | Notices and network history PAID; actual amount paid, site gas connection or return OPEN |
+| Springfield Orion/BlackRock asset capital exposure | PR #1131 and SecondThirdOrderIncidenceBridge | First-party ownership/portfolio exposure PAID; attribution to Woogaroo decision OPEN |
+| Polaris historical state data-centre tenant; Dalby Anthropic WDDP | Attachment separate case IDs including WDDP 2026/10667 | Historic tenancy/new proposal PAID by source; same-object federal causal tie or gas contract OPEN |
+| Statutory review **standing/time/interim** | **This new case owner and counsel triage** | Statute/court process PAID; applicant proof, furnishing, threatened clearing, filed relief OPEN |
+| Court proceeding already filed, protective order granted | Federal Court case search remains acquisition task | **Not verified**, never claim none exists |
+| Authorship/publication/original vs synthesis | all owners, research note; sibling PR #1131 only one-way inspiration | author/case-source roles distinguished; **no Agda kernel verification asserted** |
+
+## Actually actionable immediate P0 package
+
+1. Appoint a named **potential applicant** and secure their authority and s487 or ordinary-standing proof, *not merely a group brand*. Confirm corporation representation by practising lawyer.
+2. Ask EDO (or an available private environmental barrister/solicitor) to assess **jurisdiction, applicant-specific deadline, the original Part 9 signed decision, section 95C report, and interim relief**, supplying this issue note **as source-first, non-privileged research**; do not falsely label it existing legal advice.
+3. Obtain signed approval/conditions **directly** and confirm any **date of threatened works**. Make s135A(2) and eligible s13 request in parallel if counsel recommends; **don't wait for either before assessing protective application**.
+4. Preserve the relevant dated standing, filing, ecological and legal records; assess ADJR/Form 66 + s15 stay, potentially s39B and/or genuine s475 breach as separately supported; Court urgent Certificate and Form 12/35 as procedure requires. Determine notice and respondents.
+5. Independently pursue original cost-incidence, title, social/housing, gas and lobbying contracts, but they **do not suspend** legal triage. No claim of unlawful lobbying/person enrichment without same-object documents.
+
+**Case wall at this turn:** there is no confirmed original signed final decision, comment-transmission bundle, section 95C recommendation, applicant identity/activity/received decision, current works start proof, actual 475 breach, or filed case/undertaking. The legal pathway is drafted, not exercised.
+
+**Attribution:** EPBC/ADJR statutory law — Commonwealth Parliament/Federal Register; Court procedure/undertaking — Federal Court; EDO intake — EDO; original koala/habitat ecology and original QLD Council/Departmental acts — named original producers; inherited Agda modules and #1131 retain prior PR authorship; this sourced counsel analysis directed by Johl Brown, code and evidence audit assisted by OpenAI ChatGPT. No signed instrument or model assumption silently becomes a court finding.
