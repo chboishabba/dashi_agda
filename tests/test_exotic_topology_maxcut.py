@@ -20,6 +20,7 @@ import exotic_topology_pl_frontier_lineage as lineage
 import exotic_topology_pl_complement_components as complement
 import exotic_topology_pl_stable_stars as stable
 import exotic_topology_power_36_tight_nonpromotion as power
+import exotic_topology_power_boundary_surgery_counterexample as surgery
 import exotic_topology_genus_zero_sphere_caps as cap
 import exotic_topology_balanced_ternary_pl as balanced
 import exotic_topology_cantor_cylinder_orientation as orientation
@@ -406,5 +407,37 @@ class ExoticMaxCutTests(unittest.TestCase):
         handled, _ = complement.transition(handle, piece, "loch")
         with self.assertRaises(AssertionError):
             cap.cap_boundary_triangles(handled.mesh)
+
+
+    def test_power_necessary_boundary_edge_budget_by_genus(self):
+        result=power.audit()
+        self.assertTrue(result["exact_handle_boundary_surplus_budget_tested"])
+        self.assertTrue(result["necessary_budget_not_subgraph_sparsity_proof"])
+        self.assertEqual(
+          [s["necessary_tight_boundary_length"]
+           for s in result["families"]["loch"]], [3,9,15])
+        self.assertEqual(
+          [s["necessary_tight_boundary_length"]
+           for s in result["families"]["jacob"]], [6,18,30])
+        self.assertEqual(
+          [s["missing_boundary_edges_for_whole_graph_tight"]
+           for s in result["families"]["loch"]], [0,6,12])
+        self.assertEqual(
+          [s["missing_boundary_edges_for_whole_graph_tight"]
+           for s in result["families"]["jacob"]], [0,12,24])
+
+    def test_boundary_refinement_global_count_six_but_old_core_non_sparse(self):
+        result=surgery.audit()
+        self.assertTrue(result["necessary_budget_does_not_ensure_subgraph_sparsity"])
+        self.assertTrue(result["original_existence_theorem_not_contradicted"])
+        self.assertEqual(
+          [(x["revised_whole_graph_maxwell"],
+            x["old_vertex_induced_subgraph_maxwell"])
+           for x in result["cases"]], [(6,1),(6,-5)])
+        self.assertEqual(
+          [x["subdivision_count"] for x in result["cases"]], [6,12])
+        self.assertTrue(all(x["true_36_sparsity_rejected_by_explicit_old_core"]
+                            for x in result["cases"]))
+        self.assertFalse(result["agda_or_lean_kernel_verified"])
 
 if __name__ == '__main__': unittest.main()
