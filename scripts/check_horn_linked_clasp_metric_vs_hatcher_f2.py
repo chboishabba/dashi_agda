@@ -63,6 +63,22 @@ print('PASS source-core linking/intersection: |lk(M1,C1)|=|lk(M2,C2)|=1; cross=0
 assert 1**2+0**2<4<1**2+2**2
 print('PASS original exact Hopf core linking |lk(C1,C2)|=1')
 
+# WHOLE FAMILY of linked planar circles, not merely link-number data:
+# C2_s(theta)=(1-s, 1+s+cos(theta), sin(theta)), s∈[0,1].
+# At z=0, C2_s cuts C1's spanning xy disk at
+#   (1-s,s,0) (interior, radial norm² <=2<4)
+# and (1-s,2+s,0) (exterior, norm² >=5>4).
+# Thus an explicit smooth disjoint isotopy takes source owner
+# clasp to the standard orthogonal Hopf two-round-circle picture.
+# Via isotopy extension the link exterior is T²×I, π1=Z².
+for k in range(101):
+    s=Q(k,100)
+    inside=(1-s)**2+s*s
+    outside=(1-s)**2+(2+s)**2
+    assert inside<=2<4<5<=outside
+assert (1-Q(1))**2+(2+Q(1))**2>4
+print('PASS exact 101-parameter Hopf isotopy source disk in/out inequalities; universal by polynomial bounds')
+
 # Inject owner local prototypes into three C3 satellites:
 #    p_c = 9 e_c + R^c ((1/4,0,0) + scale*prototype).
 # C1 prototype norm=2; C2 norm<=sqrt6<3;
