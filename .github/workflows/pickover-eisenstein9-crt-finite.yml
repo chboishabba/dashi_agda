@@ -23,6 +23,7 @@ on:
       - 'scripts/check_pickover_factor_fibre_query_adequacy.py'
       - 'scripts/check_pickover_jcoarse_jfine_mdl_pareto.py'
       - 'scripts/check_pickover_actual_certificate_precision_pareto.py'
+      - 'scripts/check_pickover_bt_tree_refinement.py'
       - '.github/workflows/pickover-eisenstein9-crt-finite.yml'
   workflow_dispatch:
 
@@ -69,6 +70,8 @@ jobs:
         run: python3 scripts/check_pickover_jcoarse_jfine_mdl_pareto.py
       - name: Measure certified factorial sine precision and actual producer work
         run: python3 scripts/check_pickover_actual_certificate_precision_pareto.py
+      - name: Audit p3 Bruhat Tits cylinders and phase non-descent
+        run: python3 scripts/check_pickover_bt_tree_refinement.py
   finite-agda-source:
     runs-on: ubuntu-latest
     timeout-minutes: 30
