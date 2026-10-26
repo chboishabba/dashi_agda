@@ -57,4 +57,4 @@ if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
     test_same_amount_different_base()
-    print("PASS: 12,288 finite cap observations + two typed counterexamples")
+    print("PASS: 8,192 finite cap observations + two typed counterexamples")
