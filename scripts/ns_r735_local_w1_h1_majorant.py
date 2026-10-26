@@ -89,3 +89,42 @@ def small_data_global_w1_certificate(E0, D0, nu, K, CW, CM):
     Ctotal = CW*(E0+D0)**sp.Rational(7,4)*(sp.Rational(2,7)/nu)**sp.Rational(1,4)*H2total**sp.Rational(3,4)
     initial = CM*(E0+D0)**2
     return SmallDataCertificate(threshold,H2total,Ctotal,initial,initial+Ctotal)
+
+
+@dataclass(frozen=True)
+class EventualTailCertificate:
+    enstrophy_threshold: sp.Expr
+    averaging_start: sp.Expr
+    common_entry_time: sp.Expr
+    universal_tail_energy_ceiling: sp.Expr
+    universal_tail_W1_ceiling: sp.Expr
+
+
+def eventual_all_data_tail_w1_certificate(E0, nu, K, CW, CM):
+    """Cutoff-uniform W1 from a common LATE TIME for ALL periodic data.
+
+    Assumes unforced mean-zero 2π periodic Galerkin NSE, E0>0 and nu,K>0.
+    This follows the CLASSICAL eventual regularity/absorbing-ball
+    argument, not a new global regularity theorem.
+
+    Energy E_N(t)<=E0*exp(-2nu*t) (Poincare). Choose averaging
+    window [t0,t0+1/nu] with E_N(t0)<=2d, d=nu²/sqrt(2K).
+    Energy identity gives int X <= E_N(t0)/(2nu)<=d/nu.
+    Hence for each cutoff N a time s_N in that COMMON window
+    satisfies X_N(s_N)<=d. Invariance of the small-H1 region
+    proves X_N(Tentry)<=d simultaneously for all N, where
+    Tentry=t0+1/nu. E_N(Tentry)<=2d*exp(-2) uniformly.
+
+    Applying the already-available small_data_global_w1_certificate
+    to the SHIFTED physical trajectory yields
+      [W_N(T)-W_N(Tentry)] + E_M,N(T) <= universalTailBound
+    for all N, T>=Tentry. This is a bound on the physical selected
+    output W1 TAIL, NOT on W_N(T) from time 0 or on W2.
+    """
+    threshold=nu**2/sp.sqrt(2*K)
+    t0=sp.Max(sp.Integer(0),sp.log(E0/(2*threshold))/(2*nu))
+    common_entry=t0+1/nu
+    energy_tail=2*threshold*sp.exp(-2)
+    small=small_data_global_w1_certificate(energy_tail,threshold,nu,K,CW,CM)
+    return EventualTailCertificate(threshold,t0,common_entry,
+                                   energy_tail,small.weighted_plus_terminal_ceiling)
