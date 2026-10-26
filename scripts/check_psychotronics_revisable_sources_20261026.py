@@ -59,6 +59,7 @@ def self_test(world):
         "P1-52": ("reddit_visualisation_claims", "bangor_daily_rain_6to8"),
         "P1-37": ("rodin_two_papers_same_printed_numbers", "bangor_daily_rain_6to8"),
         "P1-66": ("wrong_ellsworth_kansas", "reich_1953_reported_operation"),
+        "P1-70": ("rvml_gentry_reich_device_claim", "bangor_daily_rain_6to8"),
     }
     for withdrawn, (reopen, preserve) in cases.items():
         newer = assess(world, {withdrawn})
