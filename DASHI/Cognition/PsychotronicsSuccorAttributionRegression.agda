@@ -135,9 +135,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 -- source carriers including real NOAA Bangor records, same-station metadata,
 -- an earlier local press item and a Kansas location false-match control.
 -- More source objects are NOT more independent weather experiments.
-sourceAtlasCountIsEighty :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 80
-sourceAtlasCountIsEighty = refl
+sourceAtlasCountIsEightyOne :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 81
+sourceAtlasCountIsEightyOne = refl
 
 
 -- Original NOAA OBS-TIME documentation is a *method*, not a 1953 sensor time;
@@ -526,6 +526,17 @@ croftAugustAndJanuaryPublicationClaimsDistinct :
   Atlas.relationClass Atlas.croftInstructionPublicationDatesDistinct ≡
   Atlas.documentaryDistinction
 croftAugustAndJanuaryPublicationClaimsDistinct = refl
+
+-- Tau electric-field cell-line measurements are attributed to RSC's
+-- original study, never a 2024 Rodin/Helmholtz or clinical trial receipt.
+pandeyTauOriginalPublicationDoesNotImportMagneticCoilProof :
+  Attribution.citationImportsProof Atlas.pandeyTauEF2019 ≡ false
+pandeyTauOriginalPublicationDoesNotImportMagneticCoilProof =
+  Atlas.allSourcesRemainNonPromoting Atlas.pandeyTauEF2019
+
+pandeyTauResearchProposalNotClinicalProof :
+  Atlas.citationCreatesTruth Atlas.pandeyTau2019OriginalExperimentScope ≡ false
+pandeyTauResearchProposalNotClinicalProof = refl
 
 pandey2017OriginalFieldStudyDoesNotProve2024GeometryClaim :
   Attribution.citationImportsProof Atlas.pandeyFFField2017 ≡ false

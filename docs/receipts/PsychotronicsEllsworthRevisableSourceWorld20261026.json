@@ -85,13 +85,24 @@
     },
     "noaa-isd-hourly": {
       "members": [
-        "P1-79"
+        "P1-79",
+        "P1-81",
+        "P1-82"
       ],
       "kind": "NOAA/NCEI ISD original Bangor 1953 station-year archive object, independently indexed dataset format but not necessarily independent original observations from GHCN Bangor historical weather records",
       "independent_of": [
         "reich-original"
       ],
       "potentially_shared_observer_family_with": "noaa-ghcnd"
+    },
+    "noaa-ghcnh-successor": {
+      "members": [
+        "P1-83"
+      ],
+      "kind": "NOAA/NCEI GHCNh original dataset and credited 2023 scientific curators; derived or harmonized period-of-record historical weather observations, may co-originate with old ISD/GHCNd station source reports",
+      "independent_original_weather_observation_witness": false,
+      "potentially_shared_observer_family_with": "noaa-isd-hourly",
+      "independently_causal_weather_modification_test": false
     }
   },
   "claims": [
@@ -330,6 +341,36 @@
       "status": "unpaid",
       "requires": [],
       "effect": "Without actual ISD observation and precipitation codes, no assertion about time-alignment, daily reported 6.6/19.3 mm or original instrument independence."
+    },
+    {
+      "id": "original_noaa_isd_format_105_plus_variable_length",
+      "status": "original_specification_inspected",
+      "requires": [
+        "P1-81"
+      ],
+      "effect": "Original Jan 2018 ISD control spec proves first 4 bytes count variable section only and complete record has 105 fixed + variable characters. Correct parser source-verified and synthetically tested, not original hourly observations."
+    },
+    {
+      "id": "noaa_original_isd_2026_legacy_to_nodd_migration",
+      "status": "publisher_notice",
+      "requires": [
+        "P1-82"
+      ],
+      "effect": "NOAA NESDIS 23 Jun 2026 bulletin gives planned 31 Jul legacy retirement and original ISD format data relocated to noaa-isd-pds S3; exact 1953 Bangor cloud key unverified."
+    },
+    {
+      "id": "noaa_ghcnh_alternate_original_hourly_acquisition_route",
+      "status": "catalogue_only",
+      "requires": [
+        "P1-83"
+      ],
+      "effect": "NOAA original GHCNh successor and 2023 credited author source documents named station/by-year PSV scheme; actual Bangor 1953 raw rows and nonshared underlying observer status not obtained."
+    },
+    {
+      "id": "original_1953_bangor_noaa_cloud_bucket_key_and_hash",
+      "status": "unpaid",
+      "requires": [],
+      "effect": "Do not treat legacy NOAA path, cloud bucket name, GHCNh naming pattern or local synthetic source hash as authenticated remote 1953 source bytes."
     }
   ],
   "source_snapshot": {
@@ -372,12 +413,52 @@
       "utc_july_1953_observation_times_recovered": false,
       "precipitation_group_decoded": false,
       "actual_same_site_weather_inference": false
+    },
+    "isd_primary_2018_format_original": {
+      "original_source": "https://www.ncei.noaa.gov/pub/data/noaa/isd-format-document.pdf",
+      "visually_checked_pages": [
+        4,
+        12,
+        13
+      ],
+      "record_total_chars_expression": "105 + int(first_four_characters_as_variable_section_length)",
+      "previous_legacy_total_length_parser_bug_detected_and_corrected": true,
+      "exact_source_git_blob": "a28d2e0da6ff231f2be6624fe0ad9a9a6efb095f",
+      "exact_test_git_blob": "2e5b27c6d1586fb8c03fd81bc04053186ed4a83d",
+      "exact_executed_python_unittests_passed": 11,
+      "synthetic_original_dataset_rows_only": true,
+      "real_1953_gzip_bytes_downloaded": false
+    },
+    "isd_cloud_2026_custody": {
+      "original_notice": "https://www.nesdis.noaa.gov/news/service-location-change-integrated-surface-data-global-hourly",
+      "original_format_s3_bucket": "s3://noaa-isd-pds/",
+      "transformed_csv_s3_bucket": "s3://noaa-global-hourly-pds/",
+      "github_original_witness_file_hash_is_not_original_dataset_sha": true,
+      "exact_noaa_1953_cloud_key_verified": false,
+      "ghcnh_original_dataset_doi": "10.25921/jp3d-3v19",
+      "actual_1953_ghcnh_bangor_csv_psv_retrieved": false,
+      "standard_library_offline_listing_locator_synthetic_verified": true
+    },
+    "isd_cloud_2026_custody_acquisition_adapter": {
+      "script_path": "scripts/locate_psychotronics_noaa_isd_1953_s3.py",
+      "source_git_blob": "3f66053e54c0debfedbe536776f152e467347cd1",
+      "source_blob_verified_against_locally_executed_python": true,
+      "separate_test_path": "tests/test_locate_psychotronics_noaa_isd_1953_s3.py",
+      "test_blob": "51dd24942f24f58f1811148e764b2b4e5335e207",
+      "local_python_self_test_synthetic_cases": 5,
+      "local_python_unittests_synthetic_mock_cases_passed": 9,
+      "genuine_public_S3_http_response_acquired": false,
+      "exact_1953_bangor_S3_object_key_verified": false,
+      "actual_1953_bangor_station_year_original_bytes_acquired": false,
+      "actual_hourly_data_or_rainfall_decoded": false,
+      "agency_signed_checksum_verified": false
     }
   },
   "algorithm": {
     "retraction": "Any claim depending on a withdrawn source is marked reopened (not false). A claim with status unpaid remains unpaid. Unrelated independently grounded claims retain their status.",
     "prohibition": "No edge automatically promotes author assertions or observed precipitation into device causality; model statuses are bibliographic, not ontology truth. An uploader's third-person promotional biography cannot certify Navy employment, historical device construction, or Flanagan-Gentry-Croft technical handoff.",
     "clock_bucket_sensitivity": "If station local July 6 22h is stipulated and cutoffs are assumed to end local right-closed 24h windows, cutoff before 22h labels hypothetical rain as July 7 and cutoff at/after 22h labels July 6; without observed station clock and at-site hour neither bucket identifies Reich event.",
-    "isd_time_nonpromotion": "Original ISD 1953 station-year file existence does not imply 1953-07-06 data coverage, AA1 rainfall report, UTC-to-Maine-local converter, independent observer root, or any intervention effect. Invalid or absent payload remains unpaid, not false."
+    "isd_time_nonpromotion": "Original ISD 1953 station-year file existence does not imply 1953-07-06 data coverage, AA1 rainfall report, UTC-to-Maine-local converter, independent observer root, or any intervention effect. Invalid or absent payload remains unpaid, not false.",
+    "replay_correction": "Earlier parser incorrectly equated first-four ISD variable characters with complete record length, self-tests then used equally defective synthetic fixture; all prior claimed source format playback requires corrected 105+variable invariant. Executed corrected fixtures do not pay original 1953 bytes or event-hour chronology."
   }
 }
