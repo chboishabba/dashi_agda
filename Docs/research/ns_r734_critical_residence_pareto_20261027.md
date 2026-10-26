@@ -1,6 +1,6 @@
 # R734 exact critical-energy residence: all-data \(L^2_t X_N\), sharpness and late-entry improvement
 
-**Date:** 27 October 2026. **Existing original owner:** R734/R735 sharp-cube dyadic critical fold and full projected periodic Galerkin source. **Status:** analytical consequence of *classical* Fourier Cauchy interpolation and the *classical* unforced Navier–Stokes kinetic energy identity; source-specific dyadic weight sharpness on an exact heat shear. **Verification:** \`tests/test_ns_r734_critical_residence.py\` 10 local symbolic/exact arithmetic cases passed with the pre-existing 9 small-data tests (19 passed total on the local matching copy). No complete repo-head suite, no Agda/Lean kernel run, no all-data strong-solution continuation.
+**Date:** 27 October 2026. **Existing original owner:** R734/R735 sharp-cube dyadic critical fold and full projected periodic Galerkin source. **Status:** analytical consequence of *classical* Fourier Cauchy interpolation and the *classical* unforced Navier–Stokes kinetic energy identity; source-specific dyadic weight sharpness on an exact heat shear. **Verification:** \`tests/test_ns_r734_critical_residence.py\` 13 local symbolic/exact arithmetic cases passed with the pre-existing 9 small-data tests (22 passed total on the local matching copy). No complete repo-head suite, no Agda/Lean kernel run, no all-data strong-solution continuation.
 
 ## Exact original-source definitions and hypothesis contract
 
@@ -129,8 +129,37 @@ This improves the simpler \(\exp(-\nu\tau)\) critical-energy tail to an asymptot
 
 ## Tests, source roots, and exact claim ceiling
 
-\`tests/test_ns_r734_critical_residence.py\` includes 10 locally executed exact-symbolic/arithmetic tests: all nonzero lattice cube modes \([-8,8]^3\), multi-mode Fourier interpolation, interval energy-identity algebra, physical shear integration, dyadic sharpness sequence, residence scalar threshold, improved averaging threshold, optimised recovery monotonicity, Riccati envelope, and explicit nonphysical spike countermodel. Executed with the existing nine \`tests/test_ns_r734_critical_small_data.py\` cases: **19 passed** on locally matched code. These finite checks are **not** a proof of physical Sobolev embedding, a complete exact-GitHub-head regression suite or an Agda/Lean kernel certificate.
+\`tests/test_ns_r734_critical_residence.py\` includes 13 locally executed exact-symbolic/arithmetic tests: all nonzero lattice cube modes \([-8,8]^3\), multi-mode Fourier interpolation, interval energy-identity algebra, physical shear integration, dyadic sharpness sequence, residence scalar threshold, improved averaging threshold, optimised recovery monotonicity, Riccati envelope, and explicit nonphysical spike countermodel. Executed with the existing nine \`tests/test_ns_r734_critical_small_data.py\` cases: **22 passed** on locally matched code. These finite checks are **not** a proof of physical Sobolev embedding, a complete exact-GitHub-head regression suite or an Agda/Lean kernel certificate.
 
 Original mathematical authorship: Leray's viscous-energy framework, Fourier/Parseval interpolation and Cauchy–Schwarz, Fujita–Kato (1964) critical small-data theory (DOI 10.1007/BF00276188). Original helical-transfer source: Fabian Waleffe (1992), DOI 10.1063/1.858309, not invoked for the kinetic-energy identity. The **repository-specific** exact cube-dyadic sharpness/entry refinement belongs to this source-focused regression, while the original R734 fold and conditional compiler remain their prior DASHI owners. Palasek, arXiv:2610.29012 (2026-10-21), remains **conditional axisymmetric** research and supplies no unrestricted estimate here. BCH autoformalisation-fidelity PRs Agda #1273 and Lean #88 are independently credited for source-vs-kernel-discrepancy methodology, not counted as PDE producer proofs.
 
 **Open original front:** phase-resolved all-large-data critical production/continuation before \(T_{\rm residence}\); no universal R734 signed W2 payment (counterexample already proved); R369 *actual same-operator* Gram Rayleigh, R406 source/continuum bridge and A1–A3/B7 noncircular continuation are separately unpaid. The all-data \(\int X_N^2\) bound does not by itself prevent singularity because it does not pay \(\int\sqrt{X_N}D_N\) or \(\sup X_N\).
+
+
+## Exact *physical* no-go for absolute-majorant payment from residence alone
+
+The same real, divergence-free heat shear supplies a stronger discriminator than the synthetic spikes. For fixed kinetic energy \(E_0>0\), choose the exact full unforced velocity \(u(x,t)=(0,A\cos(nx)e^{-\nu n^2t},0)\) on the torus, with \(A\) chosen so that \(E_0\) is constant as \(n\) varies. The nonlinear term \((u\cdot\nabla)u\) vanishes identically, so **actual** nonlinear signed critical production is identically **zero**. But writing \(w_n=2^{\lceil\log_2 n\rceil}\), the same solution gives
+\[
+X_n(t)=w_n E_0e^{-2\nu n^2t},\qquad
+D_n(t)=w_n n^2 E_0e^{-2\nu n^2t}.
+\]
+The **absolute upper-majorant** used in the small-data proof has integral
+\[
+\boxed{
+\int_0^\infty\sqrt{X_n(t)}D_n(t)\,dt
+=\frac{w_n^{3/2}E_0^{3/2}}{3\nu}\xrightarrow[n\to\infty]{}\infty
+}
+\]
+despite the valid sharp residence estimate \(\int X_n^2\le E_0^2/\nu\). Similarly \(\int_0^\infty D_n(t)dt=w_nE_0/(2\nu)\) diverges at fixed \(E_0,\nu\).
+
+Thus the **attempted inference** "all-data \(\int X^2\) bound \(\Rightarrow\) all-data cutoff-uniform absolute \(\int\sqrt X D\) payment" is mathematically FALSE, even on physical same-equation solutions. It does **not** refute a more delicate *signed* cancellation: the true nonlinear production of this shear is exactly zero. This specific asymmetry is why the next proposed W2 argument must preserve signed full-Galerkin mode transfers rather than bounding them by this absolute majorant. The original R734 signed mixed-helicity W2 remains a different, already falsified universal hypothesis.
+
+### Critical regularity scaling firewall
+
+The new bound means \(u_N\in L_t^4\dot H_x^{1/2}\) with a uniform norm bound derived from finite energy. The standard Sobolev embedding gives an \(L_t^4L_x^3\) control, but its Serrin index is
+\[
+\frac2p+\frac3q=\frac24+\frac33=\frac32>1.
+\]
+It is **not** a Serrin regularity criterion (where the usual subcritical/critical index is at most one). On \(\mathbb R^3\), the Navier–Stokes scaling gives \(L_t^4\dot H_x^{1/2}\) scaling exponent \(-1/2\), reflecting precisely why concentration is not excluded. The \(\mathbb R^3\) dilation is a scaling discriminator, **not** a claimed literal dilation symmetry on a fixed periodic torus.
+
+Three additional dedicated exact tests validate the physical shear's full NSE equation, the divergent upper-majorant formula, and the Serrin-index arithmetic. The total focused local receipt is now **22 passed** (13 new critical-residence tests plus the earlier nine small-data tests); no exact-head whole-repo pytest, Agda kernel or global-regularity promotion.
