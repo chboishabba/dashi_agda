@@ -335,6 +335,52 @@ def byron_1966_table_iii_audit():
     }
 
 
+
+# Directly checked against E. V. Byron, JHU/APL Project PANDORA Final
+# Report MRT-4-046 / QM-66-072 (Nov 1966), printed p.14, Table II.
+# These are AUTHOR-REPORTED *worst-case spatial field variations* of
+# different conditions, not independently measured uncertainty bars,
+# measurement noise, absorbed doses, or 1977 embassy calibrations.
+BYRON_1966_TABLE_II = (
+    ('absorber_lined_3_8_in_plexiglas_back', '3.63'),
+    ('absorber_lined_no_back', '4.88'),
+    ('absorber_lined_1_16_in_plexiglas_back', '2.63'),
+    ('sample_in_absorber_lined_1_16_in_container', '2.88'),
+    ('sample_movement_alone', '0.88'),
+)
+
+
+def byron_1966_table_ii_spatial_variations():
+    """Exact transcription of five Table II worst-case *spatial* dB spans."""
+    if len(BYRON_1966_TABLE_II) != 5:
+        raise ValueError('original Table II requires five test conditions')
+    names = [name for name, _ in BYRON_1966_TABLE_II]
+    if len(set(names)) != len(names):
+        raise ValueError('duplicate Table II original test condition')
+    rows = [(name, Fraction(magnitude))
+            for name, magnitude in BYRON_1966_TABLE_II]
+    if any(v <= 0 for _, v in rows):
+        raise ValueError('positive observed dB variation required')
+    return rows
+
+
+def byron_1966_spatial_variation_witness():
+    """In-report descriptive span ranking, never statistical error bars."""
+    rows = byron_1966_table_ii_spatial_variations()
+    largest = max(rows, key=lambda item: item[1])
+    smallest = min(rows, key=lambda item: item[1])
+    return {
+        'original': 'Byron JHU/APL 1966 Final Report Table II, printed p.14',
+        'conditions': len(rows),
+        'largest_worst_case_spatial_half_span_db': str(largest[1]),
+        'largest_condition': largest[0],
+        'smallest_worst_case_spatial_half_span_db': str(smallest[1]),
+        'smallest_condition': smallest[0],
+        'not_estimated_statistical_measurement_error': True,
+        'not_calibrated_Moscow_signal_or_personal_SAR': True,
+    }
+
+
 class TestFiniteConfound(unittest.TestCase):
     def test_original_baseline_confounded(self):
         self.assertEqual(rank(design([(0, 0), (0, 0), (1, 1)])), 2)
@@ -528,6 +574,38 @@ class TestFiniteConfound(unittest.TestCase):
             'same_report_model_and_measured_input_not_independent_replication'])
         self.assertFalse(audit['is_animal_outcome_or_moscow_1977_measurement'])
 
+    def test_byron_table_ii_exact_original_five_conditions(self):
+        values = dict(byron_1966_table_ii_spatial_variations())
+        self.assertEqual(len(values), 5)
+        self.assertEqual(values['absorber_lined_3_8_in_plexiglas_back'],
+                         Fraction('3.63'))
+        self.assertEqual(values['absorber_lined_no_back'], Fraction('4.88'))
+        self.assertEqual(values['absorber_lined_1_16_in_plexiglas_back'],
+                         Fraction('2.63'))
+        self.assertEqual(values['sample_in_absorber_lined_1_16_in_container'],
+                         Fraction('2.88'))
+        self.assertEqual(values['sample_movement_alone'], Fraction('0.88'))
+
+    def test_byron_table_ii_spatial_span_is_not_error_bar(self):
+        evidence = byron_1966_spatial_variation_witness()
+        self.assertTrue(evidence['not_estimated_statistical_measurement_error'])
+        self.assertTrue(evidence['not_calibrated_Moscow_signal_or_personal_SAR'])
+        self.assertEqual(evidence['largest_worst_case_spatial_half_span_db'],
+                         '122/25')
+        self.assertEqual(evidence['smallest_worst_case_spatial_half_span_db'],
+                         '22/25')
+
+    def test_byron_table_ii_reject_duplicate_conditions(self):
+        global BYRON_1966_TABLE_II
+        original = BYRON_1966_TABLE_II
+        try:
+            BYRON_1966_TABLE_II = original + (original[0],)
+            with self.assertRaises(ValueError):
+                byron_1966_table_ii_spatial_variations()
+        finally:
+            BYRON_1966_TABLE_II = original
+
+
 if __name__ == '__main__':
     import sys
     if sys.argv[1:] == ['--selftest']:
@@ -539,6 +617,7 @@ if __name__ == '__main__':
                           'factorial': factorial_witness(),
                           'muts_1977': historical_muts_conditional_witness(),
                           'animal_fixed_effect': within_animal_witness(),
-                          'byron_1966_original': byron_1966_table_iii_audit()}, indent=2))
+                          'byron_1966_original': byron_1966_table_iii_audit(),
+                          'byron_1966_spatial': byron_1966_spatial_variation_witness()}, indent=2))
     else:
         raise SystemExit('Use --selftest or --synthetic. No human/animal exposure input.')
