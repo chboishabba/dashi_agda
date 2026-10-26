@@ -29,7 +29,7 @@ def test_reuses_merged_math_owners_without_unsupported_claims():
         assert name in text
     assert "DASHI.Core.IntersectionalNonFactorability" in text
     assert "DASHI.Core.InterpretiveFormalisationCoreExact" in text
-    assert "SCI=infinity is proved here" in text
+    assert "-- Neither full semantic faithfulness nor SCI=infinity is proved here." in text\n    assert re.search(r"(?m)^-- Neither full semantic faithfulness nor SCI=infinity is proved here\\.$", text)
     assert not re.search(r"(?m)^\s*(postulate|axiom)\b", text)
     assert "{!!}" not in text
 
