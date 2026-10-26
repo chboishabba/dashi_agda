@@ -53,7 +53,7 @@ def verify() -> None:
         "section 135A", "15 October 2026", "original",
         "not a legal opinion", "historical infrastructure",
     ))
-    assert re.search(r"\\bP0\\b", note) and re.search(r"\\bP4\\b", note)
+    assert re.search(r"\bP0\b", note) and re.search(r"\bP4\b", note)
     assert "NOT the actual final preliminary documentation" in note
     print("PASS: source-text evidence, time, jurisdictions, seven promotion firewalls, seven scoped receipts")
 
