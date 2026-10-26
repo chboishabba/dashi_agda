@@ -878,3 +878,118 @@ the Machin-checked rational approximation surrogate at n=2.
 This audit promotes no new source author to the author of other
 sources' group identities, and attributes the periodic seed control
 to classical congruence reduction + repository-specific regression.
+
+
+## 2026-10-27 certified e^i complex powering x horned-C3 scalar no-go
+
+### Original and implementation source genealogy
+
+- **Original mathematics:** Euler/de Moivre for `e^(iθ)=cosθ+i sinθ`;
+  John Machin (1706) for the arctangent identity bounding π;
+  Hermite/Lindemann/Weierstrass for exponential transcendence
+  (Lindemann 1882: exp(nonzero algebraic) is transcendental).
+  The original exact author/published source of the *specific*
+  `sin(99^(9999!))` challenge still requires independent
+  original-artifact identification: the nickname "Pickover" is a
+  project attribution, not fabricated archival provenance.
+- **Actual finite implementation owners:** this branch's
+  `check_pickover_fast_sine_complex_power.py`,
+  `check_pickover_machin_factorial_phase.py`,
+  `check_pickover_eisenstein9_crt.py`, signed-SSP/torque and C3
+  phase owner modules. Horned PR #1244 owns
+  `AlexanderHornedAbelianHolonomyBIDIExact.agda` and the ACTUAL
+  binary-icosahedral `2I` quaternion/gauge simulator.
+  These are CROSS-PR donors, not proof imports across unmerged branches.
+- **Formal external donor:** Isabelle/HOL Archive of Formal Proofs
+  `Hermite_Lindemann` proves the transcendence theorem in Isabelle.
+  This is not imported into or kernel checked in the current
+  DASHI Lean/Agda toolchains.
+
+### A repaired, actually executed analytic phase route
+
+The pre-existing
+`scripts/check_pickover_fast_sine_complex_power.py`
+contained literal escaped `\\n` sequences inside two function
+definitions, preventing Python parsing. Commit `037a2d1`
+replaces these with real newlines. A **local source transcription**
+passed `py_compile` and the complete original finite checkpoint
+table (bases 10 and 99; exponents 1, 2, 6, 24, 120).
+The committed GitHub file has been source-inspected, but this
+is **not** an exact-blob execution receipt.
+
+New `scripts/check_pickover_horned_c3_phase_non_descent.py`
+reuses BOTH independent producers:
+(1) integer-rational Machin π brackets and
+(2) certified Taylor-seeded `e^i` followed by fixed-point
+complex exponentiation. Exact finite local transcription
+PASS for `99^k`, `k∈{1,6,9,18,24,120}`:
+```text
+k:                1  6  9 18 24 120
+sign(sin(99^k)): -  +  -  +  +   -
+```
+Machin scale `10^325` is deliberately chosen to certify
+the selected `99^120` case; it does not remotely certify
+the target with `k=9999!`. Fixed-point source precision
+for the six cases: 20, 20, 20, 50, 50, 350 decimal digits.
+The focused workflow now includes the new regression.
+
+### Stronger exact non-descent and perfect-group separation
+
+1. For `k=9,18`, the Eisenstein `λ^9` quotient maps
+   both `99^k` to zero, but actual sine signs are opposite.
+   For `k=1,6`, both coarse 3-/11-lane valuations have
+   the same positive polarity while signs differ.
+   Therefore the full real orientation does not factor
+   through either named coarse observer on these
+   explicit same-input-family controls.
+2. `E=9999!` gives
+   `99^E mod 9999 = 4950` (idempotent),
+   with residues `(0,0,1) mod (9,11,101)`.
+   This defines a group endomorphism/idempotent on the
+   **specified finite torsion group** `μ9999`, not on
+   the *unknown* complex analytic value `exp(i99^E)`.
+   Its `μ3` projection is identity; this is unrelated
+   to the original real sine sign.
+3. For every positive integer `N`, `exp(iN)` is
+   transcendental by Lindemann, since `iN` is a nonzero
+   algebraic number. Thus `exp(iN)` is **not a root of
+   unity**, in particular not `μ9999`, `μ3`, nor
+   `{+1,-1}`. Alternatively its non-torsion status
+   follows already from π's irrationality and
+   `exp(iNm)=1 => Nm=2πj`.
+   Importantly `exp(iπ)=-1` DOES hold: `iπ` is
+   transcendental, so it does not contradict Lindemann.
+   Neither transcendence nor irrationality gives an
+   effective signed half-circle separation at the
+   astronomical target.
+4. On the chosen Hatcher meridian tower,
+   `AlexanderHornedAbelianHolonomyBIDIExact` already
+   proves the conditional perfect-group / all-abelian-
+   character blindness statement. PR #1244's actual
+   `2I` simulator supplies the *nonabelian* compatible
+   commutator image with `q³=-I₂`, so its normalized
+   SU2 trace is `-1=cos π`. This trace equality does
+   NOT identify `exp(iπ)` with `exp(i99^E)`, and
+   does not supply a nontrivial `U1` flat character
+   of the perfect exterior group.
+   When the **external** C3 orbifold actor is adjoined,
+   order-3 scalar characters can occur via the C3
+   quotient, but are not characters of the source
+   perfect group; in the selected U(6) block-permutation
+   representation the cycle permutation determinant
+   is +1.
+
+The exact source-shaped cross-PR negative control is added to
+the horned branch as `scripts/alexander_horned_c3_pickover_scalar_phase_boundary.py`.
+Its local source-equivalent execution checked all 120 `2I`
+commutator sections, the q³ value, CRT residue and U(6) cycle parity.
+No geometry, experiment, or infinite ambient π1 is inferred.
+
+**Residual P0:** build an effective actual-real-angle interval
+or phase state whose signed separation for `N=99^(9999!)`
+can be checked AND produced within stated cost. The
+fast fixed-point powering implementation is correct for
+certified moderate N; its working precision still grows
+with `log N`, so the compact exponent description is
+not a computational shortcut at 9999!.
+Exact-head Agda/Lean/Actions receipts remain outstanding.
