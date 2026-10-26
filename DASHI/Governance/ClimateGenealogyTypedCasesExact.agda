@@ -1173,3 +1173,78 @@ adlFirstPartyScenarioIsNotProofOfEditorialTransfer :
 adlFirstPartyScenarioIsNotProofOfEditorialTransfer witness =
   Typed.headlineNumberRestatementIsNotHistoricalMethodTransfer
     (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- 27 October original WOOD MACKENZIE 16-page commission acquired.
+-- Source owner: Wood Mackenzie, for Australian Energy Producers.
+-- Original PDF pp. 2, 4 and 14 screenshot inspected. This is NOT another
+-- independent model just because the same industry lobby reproduced it.
+-- It assumes a 4-tcf analogue field, 27 years, 85% LNG exports, tax
+-- additional to PRRT and CIT, permanent, with standalone ring-fencing.
+-- Page 14 price formula assumes all exports contracted, no spot sales.
+-- Contrasting ADL p. 8's spot-market marginal-diversion schematic is a
+-- SAME-PERCENTAGE collision, not evidence either model matches Australia.
+------------------------------------------------------------------------
+
+woodMackenzieOriginalReport2026 : Typed.SourceReceipt
+woodMackenzieOriginalReport2026 = Typed.sourceReceipt
+  "Wood Mackenzie, for Australian Energy Producers"
+  "Analysis of proposed LNG export windfall levy: potential impact on energy project economics and fiscal competitiveness"
+  "2026-04"
+  "https://energyproducers.au/wp-content/uploads/2026/04/Wood-Mackenzie-Analysis-of-Proposed-Windfall-Levy.pdf"
+  "Original full 16-page commissioned consultant report, PDF printed pages 2-4 and appendix page 14 visually inspected; additional 25 percent tax on export sales preserving CIT/PRRT; 83 percent government share and 94 percent NPV10 reduction belong to US$120/bbl single illustrative project. Appendix assumes all exports contracted/no spot sales, 4 tcf analogue, and no full statutory RPM implementation."
+
+woodMackenzieOriginalIsAEPCommission : Typed.TypedGenealogyEdge
+woodMackenzieOriginalIsAEPCommission = Typed.typedGenealogyEdge
+  "RC-13" "Wood Mackenzie original assumed 4-tcf 27-year gas field" "AEP 83 percent and 94 percent 2026 press headlines"
+  Typed.reportedStatisticRestatement Typed.primary
+  (woodMackenzieOriginalReport2026 ∷ aepWoodMackenzie2026 ∷ [])
+  "Original consultant confirms client high-price numbers under ring-fenced 4-tcf project, 85 percent exports, permanent ADDITIONAL levy and all-contracted netback pricing. Neither headline is an observed Australian average or independent AEP model."
+
+woodMackenzieAppendixNotACTUReplacement : Typed.TypedGenealogyEdge
+woodMackenzieAppendixNotACTUReplacement = Typed.typedGenealogyEdge
+  "RC-14" "Wood Mackenzie retains PRRT/CIT and adds 25 percent levy" "ACTU original March 2026 replaces PRRT"
+  Typed.parallelEconomicArgument Typed.primary
+  (woodMackenzieOriginalReport2026 ∷ actu2026OriginalReplacementProposal ∷ [])
+  "The full Wood Mackenzie report, not merely AEP's announcement, expressly retains PRRT and company income tax and assumes non-deductibility of levy. ACTU proposes PRRT replacement: no equivalent modelled counterfactual has been acquired. Subtracting PRRT from the reported 83 percent is not a valid rerun because income tax and cash-flow bases interact."
+
+woodMackenzieNoSpotVersusADLMarginalSpot : Typed.TypedGenealogyEdge
+woodMackenzieNoSpotVersusADLMarginalSpot = Typed.typedGenealogyEdge
+  "RC-15" "Wood Mackenzie all-contracted no-spot price assumption" "Arthur D. Little spot/uncontracted 2026 scenario"
+  Typed.parallelEconomicArgument Typed.primary
+  (woodMackenzieOriginalReport2026 ∷ adlSourceReportPublicRelease2026 ∷ [])
+  "Original WM Appendix 1 says no spot sales in LNG DES price formula. Original ADL p. 8 schematic explicitly includes a 27 percent illustrated spot-export slice for potential domestic diversion. Cannot compare price/supply results without aligned contractual volumes and market-response assumptions."
+
+woodMacModelSimilarityIsNotDocumentaryScriptTransfer :
+  Typed.StrongHistoricalTransfer woodMackenzieNoSpotVersusADLMarginalSpot → ⊥
+woodMacModelSimilarityIsNotDocumentaryScriptTransfer witness =
+  Typed.economicArgumentSimilarityIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+data SameRateGasSourceModel : Set where
+  woodMacContractedMarket adlMarginalSpotMarket : SameRateGasSourceModel
+
+data SharedDisplayedGasRate : Set where
+  shared25ExportLevy : SharedDisplayedGasRate
+
+data MarketContractingAssumption : Set where
+  allExportsContracted someSpotExports : MarketContractingAssumption
+
+sameNominalRateAcrossModels : SameRateGasSourceModel → SharedDisplayedGasRate
+sameNominalRateAcrossModels _ = shared25ExportLevy
+
+originalModelContractingAssumption :
+  SameRateGasSourceModel → MarketContractingAssumption
+originalModelContractingAssumption woodMacContractedMarket = allExportsContracted
+originalModelContractingAssumption adlMarginalSpotMarket = someSpotExports
+
+equal25RateOpposedContractingModels :
+  INF.NonFactorabilityWitness sameNominalRateAcrossModels originalModelContractingAssumption
+equal25RateOpposedContractingModels =
+  INF.nonFactorabilityWitness woodMacContractedMarket adlMarginalSpotMarket refl (λ ())
+
+same25RateCannotDetermineModelSpotAssumption :
+  INF.FactorsThrough sameNominalRateAcrossModels originalModelContractingAssumption → ⊥
+same25RateCannotDetermineModelSpotAssumption =
+  INF.witnessRulesOutEveryFlatFactorisation equal25RateOpposedContractingModels
