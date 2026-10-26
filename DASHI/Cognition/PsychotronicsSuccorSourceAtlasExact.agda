@@ -823,6 +823,58 @@ rvmlGentryVideoMetadata = Source.mkNoDOISource
   "promotional metadata lists Pat Flanagan electronic device and says Gentry constructed Reich Cloudbusters; both are uploader biographical/topic statements, not authenticated first-person speech, blueprints, military personnel records, shared coil transmission or medical/meteorological performance"
   Source.publicAttribution
 
+
+------------------------------------------------------------------------
+-- Original NOAA observational-clock *method* is not a recovered 1953
+-- station clock, and original paper-form access is not a read observer sheet.
+-- Bahrami et al. are independent Helmholtz authors, not Rodin efficacy data.
+------------------------------------------------------------------------
+
+noaaGHCNObsTimeSchema : Source.AttributedSource
+noaaGHCNObsTimeSchema = Source.mkNoDOISource
+  "NOAA NCEI GHCN-Daily data and Historical Observing Metadata Repository custodians"
+  "Official station/year GHCN eight-field CSV OBS-TIME readme"
+  "Original NOAA source format inspected 26 October 2026; historic station July 1953 values not retrieved"
+  "2026"
+  "https://www.ncei.noaa.gov/pub/data/ghcn/daily/readme-by_station.txt"
+  Source.archivalSource
+  "The eighth field gives HHMM observation time if known and otherwise is blank; originates in HOMR history. Format documentation is not 1953 time or new rainfall."
+  Source.publicAttribution
+
+noaaHOMRStationHistory : Source.AttributedSource
+noaaHOMRStationHistory = Source.mkNoDOISource
+  "NOAA National Centers for Environmental Information"
+  "HOMR original historical station metadata and date-scoped API"
+  "NOAA original service description inspected 26 October 2026; exact 1953 Bangor and Bar Harbor records not downloaded"
+  "2026"
+  "https://www.ncei.noaa.gov/access/homr/api"
+  Source.archivalSource
+  "Original lookup route for station times and station-history chronology, not an observed July 1953 cutoff or Ellsworth site measurement."
+  Source.publicAttribution
+
+noaaCOOPOriginalFormsGateway : Source.AttributedSource
+noaaCOOPOriginalFormsGateway = Source.mkNoDOISource
+  "NOAA NCEI original Cooperative Observer Program source custodians"
+  "Original monthly COOP handwritten weather-observation forms access guide"
+  "Current first-party collection description; the July 1953 original individual observer sheets are not inspected"
+  "2026"
+  "https://www.ncei.noaa.gov/products/land-based-station/cooperative-observer-network"
+  Source.archivalSource
+  "Some original monthly forms retain notes absent from GHCNd and some stations have subdaily data; exact 1953 station sheet and at-site hours are unpaid."
+  Source.publicAttribution
+
+bahramiHelmholtz2025 : Source.AttributedSource
+bahramiHelmholtz2025 = Source.mkDOISource
+  "Abasalt Bahrami; Leonardo Y. Tanaka; Ricardo C. Massucatto; Francisco R. M. Laurindo; Clarice D. Aiello"
+  "Automated 1D Helmholtz coil design for cell biology: Weak magnetic fields alter cytoskeleton dynamics"
+  "PLOS ONE 20(8), e0321133, original 5 August 2025 peer-reviewed article read; no same-device Rodin comparison"
+  "2025"
+  "10.1371/journal.pone.0321133"
+  "https://doi.org/10.1371/journal.pone.0321133"
+  Source.academicArticleSource
+  "Original authors' independently controlled Helmholtz apparatus uses water cooling and automated field orientation; methodological nuisance-control precedent, not an original 60 percent Rodin superiority claim."
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -855,7 +907,9 @@ sourceAtlas = Source.mkSourceAtlas
    noaaBangorStationMetadata ∷ noaaBarHarborGHCN1953 ∷
    noaaBarHarborStationMetadata ∷ ellsworthAmericanJuly1953 ∷
    bangorLibraryNewspaperArchives ∷ ellsworthKansasFalseWeatherJoin ∷
-   rvmlGentry2003Programme ∷ rvmlGentryVideoMetadata ∷ [])
+   rvmlGentry2003Programme ∷ rvmlGentryVideoMetadata ∷
+    noaaGHCNObsTimeSchema ∷ noaaHOMRStationHistory ∷
+    noaaCOOPOriginalFormsGateway ∷ bahramiHelmholtz2025 ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -882,7 +936,7 @@ data LineageRoot : Set where
   wmoInstitutionRoot peterReichMemoirRoot kateBushArtistRoot : LineageRoot
   noaaBangorWeatherRoot ellsworthAmericanPressRoot bangorLibraryRoot : LineageRoot
   kansasWeatherPortalRoot : LineageRoot
-  rvmlOrganizerPublicationRoot : LineageRoot
+  rvmlOrganizerPublicationRoot bahramiHelmholtzOriginalRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -915,6 +969,39 @@ mkBound :
 mkBound proposition carrier locator root role ceiling residual =
   claim-bound proposition carrier locator root role ceiling residual
     false refl false refl
+
+
+-- These are strictly bibliographic/observational-format claims.
+-- New NOAA source carriers have one custodial root and no station-hour data.
+noaaGHCNObservationClockAvailability : ClaimBound
+noaaGHCNObservationClockAvailability = mkBound
+  "The original NOAA GHCNd by_station and by_year CSV formats offer an optional four-digit station observation time sourced from HOMR"
+  noaaGHCNObsTimeSchema
+  "Original NOAA by_station readme, eighth CSV field OBS-TIME"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "actual Bangor/Bar Harbor July 1953 observation clock is unacquired; schema is not weather at hour 22"
+
+noaaOriginalFormCustodyIsNotObservation : ClaimBound
+noaaOriginalFormCustodyIsNotObservation = mkBound
+  "NOAA's original monthly COOP observation forms can contain observers' remarks, not carried by daily summary"
+  noaaCOOPOriginalFormsGateway
+  "NOAA original COOP access guide, Original COOP Observation Forms"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "no original dated July 1953 Bar Harbor or Bangor station form was inspected; no local Ellsworth hour is identified"
+
+bahramiWaterCooledHelmholtzPrecedent : ClaimBound
+bahramiWaterCooledHelmholtzPrecedent = mkBound
+  "Bahrami et al. independently report water-cooled automated Helmholtz magnetic-field control and preliminary cell-line observations"
+  bahramiHelmholtz2025
+  "PLOS ONE 2025 DOI 10.1371/journal.pone.0321133"
+  bahramiHelmholtzOriginalRoot
+  Diligence.contextualEvidence
+  experimentalMechanismElsewhere
+  "distinct apparatus/authors/time; no source-native 60-percent Rodin-versus-Helmholtz matched biological trial"
 
 -- Two publisher/document carriers; same RVML provenance root. The Gentry
 -- speaker/topic is NOT the 1999 person-to-person instruction transfer.
