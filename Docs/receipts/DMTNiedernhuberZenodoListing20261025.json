@@ -23,7 +23,9 @@
     "license_status": "unresolved_display_blank",
     "code_url_advertised": "https://github.com/marianiedernhuber/DMT_microstates",
     "code_commit_status": "pinned_primary_author_commit",
-    "note": "2026-10-25 record page renders a blank license field. Open download status does not establish permitted reuse/redistribution. Original analysis code explicitly declares 25 file-prefix participant IDs and loops three conditions with unavailable getconds/session metadata; raw dataset mapping, split and executed state not verified. 18850896 listed in paper, 18850897 on version page; concept/version relation inferred, API confirmation outstanding."
+    "note": "2026-10-25 record page renders a blank license field. Open download status does not establish permitted reuse/redistribution. Original analysis code explicitly declares 25 file-prefix participant IDs and loops three conditions with unavailable getconds/session metadata; raw dataset mapping, split and executed state not verified. 18850896 listed in paper, 18850897 on version page; concept/version relation inferred, API confirmation outstanding.",
+    "checksum_transcription_status": "unverified_manual_transcription_not_source_authentication",
+    "checksum_nonpromotion_note": "Some originally copied hash fields were manually repaired to syntactically valid 32 hex without authoritative Zenodo checksum byte comparison. Do NOT use these values as an admissible source-integrity oracle until 50/50 individually matched against original Zenodo API metadata and exact Zenodo version is pinned."
   },
   "file_pairs": [
     {
@@ -364,7 +366,8 @@
     "source_code_declares_three_condition_loop": true,
     "source_code_g1_export_identified": true,
     "participant_identity_and_arms_verified_from_recording_contents": false,
-    "original_pipeline_dependencies_verified": false
+    "original_pipeline_dependencies_verified": false,
+    "authoritative_zenodo_md5_listing_verified": false
   },
   "original_analysis_code": {
     "repository": "marianiedernhuber/DMT_microstates",
