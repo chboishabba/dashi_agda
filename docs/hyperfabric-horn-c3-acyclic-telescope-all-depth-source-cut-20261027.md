@@ -313,3 +313,35 @@ relative geometry, true peripheral
 meridian group and Euclidean systole
 remain unconstructed and uncompiled
 in the checked owner head.
+
+
+## 8. Independent local replayable exact audit receipt
+
+In addition to the committed source, a separately
+authored EXACT Python independent verifier was
+created and EXECUTED locally at
+
+    /mnt/data/horn_c3_acyclic_telescope_independent_audit.py
+    SHA256 e0340f7a7627bfe2271a276d2319e0ed43dcbac3a95426f61aa579cf28687241
+
+The local executable output was PASS for all
+symbolic commutator expansion/rotation
+identities, zero exponent-sum H1 maps,
+finite presentation 2-cell column
+independence, finite rank formulas and
+root nontriviality through depth n=8.
+This is an INDEPENDENT AUDIT, not a
+byte-identical run of the pushed GitHub
+script. The classical infinite CW telescope
+and Hatcher 3D wild source theorem remain
+mathematical source analysis, not Python
+numerical certifications or kernel proofs.
+
+Clarification: the finite 1-cell/2-cell
+counts are for the COLLAPSED based
+presentation 2-complex of the finite
+mapping telescope, after eliminating
+contractible cylinder vertical edges;
+they are not literal raw CW cell counts
+of an uncollapsed mapping-cylinder
+triangulation.
