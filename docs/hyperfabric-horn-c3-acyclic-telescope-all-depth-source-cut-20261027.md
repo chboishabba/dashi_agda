@@ -271,3 +271,45 @@ telescopes, perfect groups or acyclic K(G,1).
 One source quoted repeatedly is ONE source root;
 models sharing π1 are not the same spatial 3D object;
 a source-written theorem is not a kernel receipt.
+
+
+## 7. Late concurrent original-owner compact-exhaustion proof
+
+The live PR #1244 head advanced to
+`a5fb69cc24299e96b91145083cefaf09cdf8e32f`,
+adding
+`proofs/horned_c3_lean/HornedC3/HatcherOpenExhaustionCompactAbsorption.lean`.
+That source-written module **reuses Mathlib**
+`IsCompact.elim_directed_cover`, rather than
+reproving compactness, to factor every
+compact image of a loop/homotopy into one
+member Y_n of a supplied increasing
+OPEN exhaustion of the wild exterior.
+It has deliberate no-openness/no-directedness
+negative controls in
+`scripts/alexander_horned_c3_open_exhaustion_severe_controls.py`.
+The topological compact absorption theorem
+belongs to Mathlib/classical compactness,
+and its application to the horned source
+is Hatcher's original Example 2B.2.
+The new owner code is NOT a certified
+stage-group-colimit theorem and is not
+a source geometric X_n construction.
+Do not duplicate it as a local telescope
+CW or group source proof.
+
+This #1249 countermodel uses an independent
+HEIGHT-compactness fact for the 2D mapping
+telescope: compact images have bounded
+height in [0,∞), so lie in finite
+mapping-cylinder truncations.
+Do not conflate that 2D telescope
+height with the 3D exterior's Y_n
+Euclidean nested-handle geometry.
+Both compact-absorption arguments are
+classical and distinct applications.
+The needed same-object P2/G1-G4 Hatcher
+relative geometry, true peripheral
+meridian group and Euclidean systole
+remain unconstructed and uncompiled
+in the checked owner head.
