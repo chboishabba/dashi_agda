@@ -358,3 +358,51 @@ already have a separate pinned Mathlib
 supplier, but **genuine Richards end
 neighbourhoods still require their own
 same-object homeomorphism proof**.
+
+
+## Source-first correction: REAL pinned Mathlib compact exhaustion already exists
+
+Late 27 October exact `Mathlib v4.28.0`
+audit revealed `Mathlib/Topology/Compactness/SigmaCompact.lean`
+was overlooked. It already supplies an ORIGINAL
+`CompactExhaustion X` with compact stages,
+`K_n ⊆ interior(K_(n+1))`, full space
+coverage, and its OWN
+`exists_superset_of_isCompact` and
+`exists_mem_nhds` theorems.
+Original implementation authors:
+**Johannes Hölzl, Mario Carneiro, Yury Kudryashov**
+(copyright Hölzl 2017). The original topological
+result remains theirs/the classical prior art,
+NOT a novel DASHI compactness theorem.
+
+Lean #86 therefore REPLACED the earlier
+source-written duplicate compact-open-cover
+argument in
+`ExoticTopologyCollaredCompactCofinality.lean`
+with the exact source-specific adapter
+`sourceCollaredCompactExhaustion`.
+It requires proof of the actual three fields
+on our true infinite PL carrier X:
+`IsCompact(K_n)` for every n,
+`K_n⊆interior(K_(n+1))`, and
+`⋃_n K_n = X`. This creates original
+Mathlib `CompactExhaustion X`; original
+Mathlib theorems now directly discharge
+compact cofinality and neighbourhood stages.
+The early source-written generic proof is
+superseded, not treated as independent
+discovery or separately attributed mathematics.
+
+**Precise P2 critical path** is hence:
+original oriented finite triangles →
+compatible source simplicial-set S_n data →
+filtered colimit S∞ →
+pinned `SSet.toTop.obj S∞` actual TopCat X →
+original Mathlib `CompactExhaustion X` →
+genuine Richards ideal boundary and genus
+subset identifications. Existing finite
+Python fixtures and abstract StarChain
+have not yet built this X or its topology.
+No Agda or Lean kernel proof receipt has
+been retrieved for these adapter modules.
