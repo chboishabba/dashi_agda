@@ -1,5 +1,9 @@
 # R734 full-Galerkin: valid small critical-data dyadic dissipation cut
 
+
+> **27 October follow-up and supersession (strict source boundary):** The last section below optimises the *older separate-energy/enstrophy averaging certificate*, not the strongest known source-specific entry receipt. The stronger **correlated-energy** \(\int X_N^2\le E_0^2/\nu\) identity and improved waiting time, with \(A_{\rm new}=C_{\rm crit}^2E_0/\nu^2=A_{\rm old}/\sqrt2\), are proved in [ns_r734_critical_residence_pareto_20261027.md](ns_r734_critical_residence_pareto_20261027.md). That new result also gives the sharp heat-shear constant and post-entry Riccati decay. The older optimised time in this document remains valid, but it is **superseded**. No false all-data R734 signed W2 payment or early-time continuation has been inferred.
+
+
 **Date:** 27 October 2026. **Repository owner:** original `NSTriadKNR650AugmentedCriticalWeightedNormalFormRound734Exact.agda` and `NSTriadKNLiteralFiniteCriticalObservableFoldExact.agda`, not a parallel global proof compiler. **Status:** analytic deduction from classical 3D periodic Sobolev embeddings and the exact full Fourier Galerkin identity, with five new locally passing exact arithmetic regressions. No new Agda/Lean kernel proof. NOT the original unrestricted positive-margin R734/W2 hypothesis, which has a physical counterexample on large data.
 
 ## One exact physical Galerkin source
