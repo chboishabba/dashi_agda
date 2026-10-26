@@ -542,8 +542,8 @@
         "original": "Hanson first-person ABC Perth policy discussion replayed in Four Corners 2026-09-28 transcript",
         "carrier": "ABC original published transcript",
         "status": "first_person_attributed",
-        "evidence": "Hanson attributes specific pensioner work-hours policy idea to Rinehart",
-        "not_pays": "legislative enactment, whole platform control or causally measured electoral effect"
+        "evidence": "Hanson in 2026 attributes her already-published specific pensioner-hours proposal to Rinehart; party itself published 2025-01-15 original election policy. Chronology gives a policy-publication date, not an original Rinehart-to-Hanson advice timestamp or legislation.",
+        "not_pays": "Documented first-party publication does not authenticate Rinehart's actual pre-2025 authored instruction or enactment of proposed law."
       },
       {
         "id": "AUS_2016_2017_HPPL_IPA",
@@ -584,6 +584,14 @@
         "status": "not_located_not_universally_absent",
         "evidence": "no original Rinehart–Epstein direct receipt identified in inspected case corpus",
         "not_pays": "universal never-met/noncontact theorem"
+      },
+      {
+        "id": "AUS_ONE_NATION_PENSION_POLICY_JAN2025",
+        "original": "Pauline Hanson's One Nation, original 2025-01-15 federal-election policy release",
+        "carrier": "https://www.onenation.org.au/one-nation-to-remove-limits-on-pensioners-veterans-earnings",
+        "status": "original_party_document_published",
+        "evidence": "Party-origin publication publicly committed proposed unlimited pensioner/veteran employment earnings without payment reduction for 2025 election; distinct from Hanson's June 2026 public retrospective attribution of idea to Rinehart.",
+        "not_pays": "Actual Rinehart pre-Jan2025 instruction, enacted statute, causal effects, party capture, or a signed commissioning deal."
       }
     ],
     "sibling_reviews": [
@@ -606,16 +614,16 @@
       {
         "id": "AUS_FY2025_26_AEC",
         "kind": "official_public_election_finance",
-        "availability": "AEC original rule as at 2026-10-26: party annual due Oct20, donor annual due Nov17; public 2025-26 party return 2027-02-01",
-        "claim_reopened": "precise gifts-in-kind/donor names, payers, values and federal purpose",
+        "availability": "AEC old FY2025-26 annual party/donor returns due Oct20/Nov17 2026, published 2027-02-01; separately old-regime TRANSITION July-Dec 2026 returns due 2027-03-11 and published 2027-04-22; distinct from new 2027 scheme.",
+        "claim_reopened": "Official finance origin/payer and in-kind treatment split into two non-overlapping disclosure periods, never treat the February FY release as containing Jul-Dec2026 gifts.",
         "not_pays": "policy control or hidden sponsor without same original"
       },
       {
-        "id": "AUS_POLICY_ADOPTION",
-        "kind": "policy_text_and_institutional_vote",
-        "availability": "source currently has Hanson attribution, not exact enacted parliament outcome",
-        "claim_reopened": "pensioner-work-hours idea to specific party adopted text/action",
-        "not_pays": "whole-party capture simply from one example"
+        "id": "AUS_POLICY_ADVICE_TIMESTAMP_AND_ENACTMENT",
+        "kind": "original_private_policy_advice_and_authoritative_enactment",
+        "availability": "PARTY PUBLICATION CLOSED at 2025-01-15 original One Nation release. Original communication establishing Rinehart proposal date and parliamentary bill/vote/enactment status still not located.",
+        "claim_reopened": "Date and content of Rinehart's attributed advice before official party release, and a distinct bill/Parliament/enacted-law question.",
+        "not_pays": "Retrospective policy-origin assertion plus 2025 publication alone does not demonstrate passage in Commonwealth legislation or control of the party."
       },
       {
         "id": "AUS_BANNON_VENDOR",
@@ -641,6 +649,10 @@
     ],
     "causal_boundary": "One original business donor, travel supporter and policy adviser can be real at the same time; none proves a universal hidden chain. A campaign-effect claim additionally needs delivered-message, exposed-audience, outcome and counterfactual evidence.",
     "provenance_boundary": "A source origin (e.g. senator's disclosure) is distinct from ABC's copy, a related owner's source-written Bool, a court judgment reprint, an AEC future disclosure and actual external-world correctness.",
-    "statutory_time_boundary": "Federal July 2025-June 2026 financial-year donation scheme and Jan 2027 calendar-year reform are separate regimes; February 2027 future publication cannot be retroactively claimed inspected October 2026."
+    "statutory_time_boundary": "Federal July 2025-June 2026 financial-year donation scheme and Jan 2027 calendar-year reform are separate regimes; February 2027 future publication cannot be retroactively claimed inspected October 2026.",
+    "original_party_policy_first_party": "https://www.onenation.org.au/one-nation-to-remove-limits-on-pensioners-veterans-earnings",
+    "aec_transitional_original": "https://www.aec.gov.au/FADTransitionalRules/",
+    "original_policy_transmission_ceiling": "One Nation's 2025 official publication is a policy producer original; Hanson's 2026 first-person attribution is a different later statement. Neither is a dated original Rinehart instruction or independent proof of downstream legislative adoption.",
+    "electoral_period_boundary": "OLD FY 2025-07-01 to 2026-06-30 releases 2027-02-01; OLD TRANSITION 2026-07-01 to 2026-12-31 releases 2027-04-22; NEW 2027 calendar-year reporting/expedited donor notifications follows its own law."
   }
 }
