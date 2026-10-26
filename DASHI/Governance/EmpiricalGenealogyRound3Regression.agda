@@ -599,3 +599,29 @@ futureGroupRestatementNotDirectMethodTransfer :
   Typed.StrongHistoricalTransfer Climate.adlIRRPointsVersusFutureGroupReturnsPercent → ⊥
 futureGroupRestatementNotDirectMethodTransfer =
   Climate.adlFirstPartyScenarioIsNotProofOfEditorialTransfer
+
+
+------------------------------------------------------------------------
+-- Original Wood Mackenzie 16-page study; no promotion of commissioned
+-- hypothesis to national tax paid or equivalence with replacement PRRT.
+------------------------------------------------------------------------
+
+woodMackenzieOriginalConfirmsAEPClientRestatement :
+  Typed.relationKind Climate.woodMackenzieOriginalIsAEPCommission ≡
+    Typed.reportedStatisticRestatement
+woodMackenzieOriginalConfirmsAEPClientRestatement = refl
+
+woodMackenzieAndACTUAreNotSameTaxDesign :
+  Typed.relationKind Climate.woodMackenzieAppendixNotACTUReplacement ≡
+    Typed.parallelEconomicArgument
+woodMackenzieAndACTUAreNotSameTaxDesign = refl
+
+woodMackenzieContractedVsADLSpotSourceModel :
+  Typed.relationKind Climate.woodMackenzieNoSpotVersusADLMarginalSpot ≡
+    Typed.parallelEconomicArgument
+woodMackenzieContractedVsADLSpotSourceModel = refl
+
+woodMackenzieSameRateCannotConcealSpotAssumption :
+  INF.FactorsThrough Climate.sameNominalRateAcrossModels Climate.originalModelContractingAssumption → ⊥
+woodMackenzieSameRateCannotConcealSpotAssumption =
+  Climate.same25RateCannotDetermineModelSpotAssumption
