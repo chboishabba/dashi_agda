@@ -35,6 +35,7 @@ data EvidenceStage : Set where
 
 data AuthorityClass : Set where
   primaryInstrumentData : AuthorityClass
+  practitionerPublishedFieldFigure : AuthorityClass
   peerReviewedExperimental : AuthorityClass
   peerReviewedReview : AuthorityClass
   creatorInvestigation : AuthorityClass
@@ -83,6 +84,53 @@ environmentEvidenceMap = sourceBoundClaim
   peerReviewedReview methodologicalReview
   "36 included studies and 112 quantitative estimates; none reaches directly observed health outcome"
   "Absence in this eligible evidence map is not proof of zero risk"
+
+-- ORIGINAL PRACTITIONER FIELD SOURCE, newer than Aug 2026 reviews:
+-- David Woolworth, Roland Woolworth & Associates, Noise/News
+-- International, 9 Sep 2026, original Figures 1-3 visually inspected.
+-- This is original published on-site spectral graphics, not a
+-- peer-reviewed health study or publicly archived raw WAV/binary series.
+woolworth2026OriginalFieldFigures : SourceBoundClaim
+woolworth2026OriginalFieldFigures = sourceBoundClaim
+  "David Woolworth (Roland, Woolworth & Associates) 2026: Data centers and measurement of low frequency and infrasound, original Figures 1-3"
+  "https://noisenewsinternational.net/data-centers-and-measurement-of-low-frequency-and-infrasound/"
+  practitionerPublishedFieldFigure ambientMeasurement
+  "Original Sep 9 2026 practitioner-reported field spectral graphics of cooling tower cases including Scaife Rd and anonymized Data Center X (Fig 1), power-plant/turbine receiving levels (Fig 2), and site wind-contaminated low-frequency spectrogram (Fig 3). Fig 1 dBA/dBC pairs: Scaife 64/74; Center X 70/78, 70/78, 70/80; chart axes 6.3 to 10000 Hz. Author explicitly says no significant infrasound in Fig 1 cooling tower samples but does find low-frequency tones and envelope pulsing."
+  "No numeric waveform bins or unprocessed native recordings, full receiver calibration, exact industrial activity/time joins, independently replicated site exposure, person outcome or human disease result in the published article. Anonymized Data Center X traces are not three independent source locations. Wind-polluted spectrogram (Fig 3) is at natural-gas plant, not an identified data-center sensor. Do not treat 2026 earlier review saying no published DC ILFN study as evergreen after later original evidence."
+
+-- A real published plot is a documentary primary measurement summary.
+-- It pays ORIGINAL FIELD FIGURE availability but cannot stand in for
+-- authentic raw site-time samples or an identified health effect.
+data DataCentreFieldEvidenceStanding : Set where
+  authorPublishedIndustrialSpectrumFigure : DataCentreFieldEvidenceStanding
+  originalCalibratedWaveformAndResponse : DataCentreFieldEvidenceStanding
+  loadMatchedAmbientReceiverAttribution : DataCentreFieldEvidenceStanding
+  siteMatchedObservedClinicalOutcome : DataCentreFieldEvidenceStanding
+
+figureIsNotRawWaveform :
+  authorPublishedIndustrialSpectrumFigure ≡
+    originalCalibratedWaveformAndResponse → ⊥
+figureIsNotRawWaveform ()
+
+figureDoesNotVerifySourceCausality :
+  authorPublishedIndustrialSpectrumFigure ≡
+    loadMatchedAmbientReceiverAttribution → ⊥
+figureDoesNotVerifySourceCausality ()
+
+figureDoesNotVerifyHumanOutcome :
+  authorPublishedIndustrialSpectrumFigure ≡
+    siteMatchedObservedClinicalOutcome → ⊥
+figureDoesNotVerifyHumanOutcome ()
+
+data PublishedSoundMetric : Set where
+  nominalFrequencyWeightedLevelA : PublishedSoundMetric
+  nominalFrequencyWeightedLevelC : PublishedSoundMetric
+  calibratedNativeSub20HzSpectrum : PublishedSoundMetric
+
+weightedCNotInfrasoundAmplitude :
+  nominalFrequencyWeightedLevelC ≡
+    calibratedNativeSub20HzSpectrum → ⊥
+weightedCNotInfrasoundAmplitude ()
 
 -- Attribution-first original *human* infrasound experimental roots.
 -- The 2021, 2023 and 2026 experiments target different signals, exposures,
