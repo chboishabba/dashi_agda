@@ -76,3 +76,20 @@ fromToCube (upperSheet x y) = refl
 
 originExcluded : fromCube Cube.origin ≡ nothing
 originExcluded = refl
+
+-- Right inverse, conditional on a successfully decoded punctured point.
+-- Unlike a total 27-point inverse, this preserves the global missing site.
+toFromCube :
+  (p : Cube.Ternary27Point) (c : Punctured27Chart) →
+  fromCube p ≡ just c → toCube c ≡ p
+toFromCube (Cube.ternary27Point x y SSP.sspNegOne) c refl = refl
+toFromCube (Cube.ternary27Point x y SSP.sspPosOne) c refl = refl
+toFromCube (Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspZero) c refl = refl
+toFromCube (Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspZero) c refl = refl
+toFromCube (Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspZero) c refl = refl
+toFromCube (Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspZero) c refl = refl
+toFromCube (Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspZero) c ()
+toFromCube (Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspZero) c refl = refl
+toFromCube (Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspZero) c refl = refl
+toFromCube (Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero) c refl = refl
+toFromCube (Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspZero) c refl = refl
