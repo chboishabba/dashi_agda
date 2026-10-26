@@ -621,3 +621,79 @@ fundingPledgeIsNotTransfer :
 fundingPledgeIsNotTransfer witness =
   Typed.fundingCommitmentIsNotTransferRelation
     (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- Stronger same-object think-tank content procurement, GCC 1996-97.
+-- Sources: independently curated Climate Investigations Center original
+-- archival document index linking DocumentCloud original proposals, STAC
+-- grant, editorial-rights memo and the separately published ACSH report.
+-- DocumentCloud original PDF bodies were not retrievable via web in this
+-- pass; these are corroborated document-ID and index observations, not
+-- visually checked contract/payment/definitive final-version equivalence.
+------------------------------------------------------------------------
+
+gccACSHOriginalInvestigation : Typed.SourceReceipt
+gccACSHOriginalInvestigation = Typed.sourceReceipt
+  "Climate Investigations Center archival research, attributing GCC STAC, Mobil, Exxon and ACSH original records"
+  "GCC Denial of Climate Impacts on Human Health"
+  "investigation page undated, examined 2026-10-26"
+  "https://climateinvestigations.org/global-climate-coalition-human-health/"
+  "Indexed original 1996 STAC proposal and editorial-rights documents, identified co-chair Mobil Lenny Bernstein and Exxon scientists Barry Friedlander/Dennis Devlin, reported commissioned ACSH research. DocumentCloud scans not separately inspected this turn."
+
+gccACSHPublished1997 : Typed.SourceReceipt
+gccACSHPublished1997 = Typed.sourceReceipt
+  "American Council on Science and Health (ACSH), original publisher"
+  "Global climate change and human health"
+  "1997"
+  "https://www.documentcloud.org/documents/3869610-American-Council-on-Science-and-Health-Acsh.html"
+  "CIC identifies 1997 ACSH public report about the same topic without disclosed GCC support; report text itself is a distinct source object and exact identification with grant product is not independently paid."
+
+gccACSHCommissionedClimateHealth : Typed.TypedGenealogyEdge
+gccACSHCommissionedClimateHealth = Typed.typedGenealogyEdge
+  "E9-16" "Global Climate Coalition / STAC" "ACSH commissioned climate and human health study 1996-97"
+  Typed.commissionedResearch Typed.corroborated
+  (gccACSHOriginalInvestigation ∷ [])
+  "CIC archive documents STAC choosing ACSH and describes funded research on climate-health links. Primary grant scan is indexed but unread by this pass; not a wholly independent publication or a definite downstream media outcome."
+
+gccACSHDocumentedEditorialReviewRights : Typed.TypedGenealogyEdge
+gccACSHDocumentedEditorialReviewRights = Typed.typedGenealogyEdge
+  "E9-17" "GCC/STAC client" "ACSH commissioned climate-health study final editorial review discretion"
+  Typed.editorialReviewRights Typed.corroborated
+  (gccACSHOriginalInvestigation ∷ [])
+  "CIC links archival agreement stating client had editorial discretion over final copy. This is contractual authority, NOT proof any particular scientifically false line was inserted or that rights were exercised."
+
+gccACSH1997PublicPaperMatch : Typed.TypedGenealogyEdge
+gccACSH1997PublicPaperMatch = Typed.typedGenealogyEdge
+  "E9-18" "GCC-funded ACSH commissioned health study" "1997 ACSH Global climate change and human health public paper"
+  Typed.topicalPublicationMatch Typed.corroborated
+  (gccACSHOriginalInvestigation ∷ gccACSHPublished1997 ∷ [])
+  "CIC notes same subject and matching description, and no funding disclosure; it says final commissioned product distribution is not explicitly established in its acquired records. Do not assert identity of final edited commissioned file and released paper."
+
+gccCHCReportedLaterExxonGrants : Typed.SourceReceipt
+gccCHCReportedLaterExxonGrants = Typed.sourceReceipt
+  "Climate Investigations Center analysis of documented Cooler Heads Coalition grants"
+  "Cooler Heads Coalition"
+  "post-1998 funds, original report later"
+  "https://climateinvestigations.org/climate-deniers/cooler-heads-coalition/"
+  "CIC reports Exxon gave a cumulative USD2774000 to Cooler Heads Coalition-member groups named on the 1998 API team in years after the plan. Individual payees and timestamps were not reconstructed here; no earmark for the proposed API plan or 2021 reef messaging is established."
+
+exxonToCHCReportedPostAPIGrants : Typed.TypedGenealogyEdge
+exxonToCHCReportedPostAPIGrants = Typed.typedGenealogyEdge
+  "E9-19" "Exxon Corporation later disclosed funding" "Cooler Heads Coalition groups overlapping the 1998 API team"
+  Typed.funding Typed.corroborated
+  (gccCHCReportedLaterExxonGrants ∷ [])
+  "CIC archival investigation reports cumulative USD2.774m later Exxon funding to CHC groups named in 1998 API team, not original receipts verified in this pass and not proof of an earmarked 1998 communications-plan payment."
+
+gccACSHSharedSubjectNotIdenticalFinalFile :
+  Typed.StrongHistoricalTransfer gccACSH1997PublicPaperMatch → ⊥
+gccACSHSharedSubjectNotIdenticalFinalFile witness =
+  Typed.publicationTopicMatchIsNotMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+gccACSHContractualRightsNotProofOfSpecificScientificEdit :
+  Typed.StrongHistoricalTransfer gccACSHDocumentedEditorialReviewRights → ⊥
+gccACSHContractualRightsNotProofOfSpecificScientificEdit witness =
+  Typed.editorialReviewRightsAreNotMethodTransfer
+    (Typed.relationIsTransfer witness)
+
