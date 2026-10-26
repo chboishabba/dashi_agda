@@ -23,7 +23,7 @@ BUCKET = "https://noaa-isd-pds.s3.amazonaws.com"
 TARGET = "726071-14606-1953.gz"
 LEGACY = "https://www.ncei.noaa.gov/pub/data/noaa/1953/" + TARGET
 MIGRATION = "https://www.nesdis.noaa.gov/news/service-location-change-integrated-surface-data-global-hourly"
-PREFIXES = ("1953/", "data/1953/", "isd/1953/", "pub/data/noaa/1953/")
+PREFIXES = ("data/1953/726071-14606", "data/1953/726071", "data/1953/")
 MAX_PAGES = 24
 TIMEOUT = 15
 

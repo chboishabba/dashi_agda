@@ -13,7 +13,7 @@ import urllib.error
 from pathlib import Path
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from locate_psychotronics_noaa_isd_1953_s3 import (
     BUCKET, TARGET, parse_listing, listing_url, locate, download_exact_key, self_test,
 )

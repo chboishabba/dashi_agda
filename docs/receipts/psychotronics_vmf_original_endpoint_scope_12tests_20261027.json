@@ -1,0 +1,73 @@
+{
+  "schema": "dashi.psychotronics.original_vmf_biology_source_scope.v1",
+  "as_of": "2026-10-27",
+  "parent_pr": 1242,
+  "child_hardt_pr": 1252,
+  "source_roots": [
+    {
+      "original_authors": "Saikia, Pandey, Sasidharan, Antony, Nemade, Kumar, Chaudhary, Ramakrishnan",
+      "doi": "10.1021/acschemneuro.8b00490",
+      "first_online": "2019-02-15",
+      "original_type": "EF/MF peptide and cell study",
+      "reported_effect": "15-38 percent less cell toxicity for EF-treated samples",
+      "same_rodin_helmholtz_60_percent_proven": false
+    },
+    {
+      "original_authors": "Maldonado-Moreles, Cordova-Fraga, Bonilla-Jaime, Lopez-Camacho, Basurto-Islas",
+      "doi": "10.1080/15368378.2020.1830288",
+      "first_online": "2020-10-12",
+      "journal_issue_year": 2021,
+      "original_type": "VMF A-beta fibril formation and A-beta cell viability",
+      "reported_effect": "approx 86 percent lower fibril formation versus original control after 24h",
+      "human_treatment_study": false
+    },
+    {
+      "original_authors": "Aparicio-Bautista et al.",
+      "doi": "10.1002/bem.22400",
+      "first_online": "2022-04-19",
+      "original_type": "separate VMF-modified Rodin exposed SH-SY5Y cell proteome/survival",
+      "reported_effect": "decreased cell survival associated with apoptosis, 106 altered spots (40 down, 66 up)",
+      "universal_vmfs_toxicity_proven": false
+    },
+    {
+      "original_authors": "Ramirez-Galindo, Perez-Olivas, Basurto-Islas, Hernandez-Rayas, Gonzalez Lopez, Cordova-Fraga",
+      "doi": "10.31349/RevMexFis.70.030901",
+      "printed_issue": "May-June 2024",
+      "scielo_carrier": "2025-09-22",
+      "original_type": "magnetic field device characterisation, cited biological comparison",
+      "asserted_60_percent_rodin_helmholtz": "reference 24 points to Saikia 2019",
+      "same_causal_effect_from_original_samples_proven": false
+    }
+  ],
+  "distinct_original_studies": 4,
+  "shared_authors_2021_2022": [
+    "Teodoro Cordova-Fraga",
+    "Gustavo Basurto-Islas"
+  ],
+  "original_2019_full_methods_or_supplement_authenticated": false,
+  "independent_exact_2021_2022_replication": false,
+  "experimental_raw_cells_or_fields_ingested": false,
+  "human_clinical_efficacy_established": false,
+  "source_written_checker": {
+    "path": "scripts/check_psychotronics_vmf_endpoint_scope.py",
+    "github_git_blob": "b2d59fabc1b2dd78fdbccea225829cf4f080ea79",
+    "unit_wrapper": "tests/test_psychotronics_vmf_endpoint_scope.py",
+    "wrapper_blob": "03529515a26eeea561cc119e875ca77f8879b263",
+    "local_equivalent_synthetic_and_source_constants_test_count": 12,
+    "local_equivalent_passed": 12,
+    "local_equivalent_failed": 0,
+    "github_exact_source_byte_replay": false,
+    "committed_checker_contains_named_tests": 12,
+    "agda_kernel_checked": false,
+    "ci_run": false,
+    "nature": "source-root and endpoint nonpromotion; not published raw data replay"
+  },
+  "open_claims": [
+    "original ACS 2019 methods and supplementary page/byte inspection for Rodin vs Helmholtz 60 percent",
+    "2021/2022 actual field calibration, assay sample lots and raw replicate denominators",
+    "2024 magnetic sensor original raw measurement, biological comparison participant/specimen join",
+    "no sensor/field/biological same-object validation of the original pictured consumer devices"
+  ],
+  "roadmap": "docs/research/psychotronics-vmf-biological-conditional-endpoints-20261027.md",
+  "attribution": "Original outside authors own original experiments and statements; Johl Brown directs research, OpenAI ChatGPT assists analysis; all inferred joins remain unverified."
+}
