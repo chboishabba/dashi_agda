@@ -55,11 +55,34 @@ cameronFreerHilbert10 = Source.mkNoDOISource
   "Repository reports proved semantic DPRM dioph_iff_rePred, RE-complete NatSolvable and an existential universal polynomial with unspecified witness count k. This is a DONOR; does not itself claim k<=9, Sigma_l completeness or BCH2026 SCI infinity. Different Lean/mathlib pins mean no direct import was executed."
   Source.publicAttribution
 
+jones1982 : Source.AttributedSource
+jones1982 = Source.mkDOISource
+  "James P. Jones"
+  "Universal diophantine equation"
+  "Journal of Symbolic Logic 47(3), 549-571 (September 1982), original research"
+  "1982"
+  "10.2307/2273588"
+  "https://doi.org/10.2307/2273588"
+  Source.academicArticleSource
+  "Original universal Diophantine equation development: historical mathematics separately attributed from Freer's Lean formalisation and BCH2026 Appendix A. A general universal polynomial statement must not silently establish an exact nine-variable count."
+  Source.publicAttribution
+
+sunInteger2026 : Source.AttributedSource
+sunInteger2026 = Source.mkNoDOISource
+  "Zhi-Wei Sun"
+  "Ten unknowns for Hilbert's tenth problem over the integers"
+  "arXiv:2609.01594, first submitted 2026-09-01; author-claimed improvement from eleven to ten unknowns over INTEGER variables"
+  "2026"
+  "https://arxiv.org/abs/2609.01594"
+  Source.academicArticleSource
+  "Reported integer-solution undecidability for ten unknowns; distinct arithmetic domain from BCH2026 Appendix A's nine NATURAL witness variables. Independent verification/criticism unresolved; paper availability is not an adjudicated proof."
+  Source.publicAttribution
+
 originalSourceAtlas : Source.AttributedSourceAtlas
 originalSourceAtlas = Source.mkSourceAtlas
   "BCH2026 autoformalisation audit with NL manuscript and fixed Lean history"
   "DASHI.Foundations.AutoformalisationBCH2026Sources"
-  (bchOriginal2026 ∷ openaiHistoricalCode2026 ∷ openaiNaturalProof2026 ∷ cameronFreerHilbert10 ∷ [])
+  (bchOriginal2026 ∷ openaiHistoricalCode2026 ∷ openaiNaturalProof2026 ∷ cameronFreerHilbert10 ∷ jones1982 ∷ sunInteger2026 ∷ [])
   "One original BCH2026 paper root (arXiv and mirrors are not independent); separate OpenAI paper/code evidence objects. Author-claimed discrepancies, formalised finite reconstructions, and kernel receipts have distinct provenance."
 
 bchSnowball : Snowball.SourceRoleSnowballReceipt bchOriginal2026
