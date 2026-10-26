@@ -71,7 +71,7 @@ def test_documented_lemma_scope_and_sci_limits():
     for target in (
         "Example 2.1", "Example 2.2",
         "Example 3.1", "Example 3.3",
-        "Example 4.3", "Theorem A.3", "Theorem A.4",
+        "Example 4.1", "Theorem A.3", "Theorem A.4",
         "Nat.sInf", "nine-unknown DPRM",
         "source-first", "historical",
         "exact-head", "correspondence",
