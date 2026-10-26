@@ -761,6 +761,34 @@
       "status": "public_planned_tenancy_landlord_original_lease_not_inspected",
       "material_subsidy_established": false
     },
-    "independence_nontransfer": "Rinehart 2021 speech and HPPL 2022 submission may be same corporate advocacy channel; IPA 2022 submission is separately authored but shares one Parliamentary Library summary carrier. Party release 2025 and Hanson retrospective 2026 are separate dated party-side products; article copies of their quotes are NOT independent attestations. Labor 2022 capped law is an independently originating policy alternative, not identical to One Nation unlimited pledge."
+    "independence_nontransfer": "Rinehart 2021 speech and HPPL 2022 submission may be same corporate advocacy channel; IPA 2022 submission is separately authored but shares one Parliamentary Library summary carrier. Party release 2025 and Hanson retrospective 2026 are separate dated party-side products; article copies of their quotes are NOT independent attestations. Labor 2022 capped law is an independently originating policy alternative, not identical to One Nation unlimited pledge.",
+    "sibling_climate_claim_family_crosswalk": {
+      "owner_pr": 1251,
+      "owner_head_reviewed": "68415b469b4cff67f452fb8c8c1d69476cc5a2ce",
+      "original_source_ledger": "Docs/support/reference/climate_repeated_claim_families_20261026.csv",
+      "shared_rinehart2021_original": "Rinehart's original 22 Nov 2021 five-page speech page 2 combines public pension-work proposal and criticisms of net-zero/mining regulation in ONE first-party document; original page screenshot checked. Same writer/medium pays authored co-occurrence, not evidence of empirical truth, paid climate denial or instructions to IPA/One Nation.",
+      "sibling_related_claims": [
+        {
+          "receipt": "G15",
+          "authored_by": "Stephen Johnson, The Nightly",
+          "hosted_by": "Hancock Energy",
+          "date": "2026-04-22",
+          "originality": "explicit credited republication",
+          "claim": "reported investment-supply-price gas tax narrative",
+          "not_pays": "a separate original model or editorial order by Rinehart"
+        },
+        {
+          "receipt": "G16",
+          "authored_by": "Senator Pauline Hanson",
+          "hosted_by": "OpenAustralia Hansard transcript mirror",
+          "date": "2026-08-12",
+          "originality": "named senator parliamentary speech in archival mirror, not native Senate audio or document",
+          "claim": "less investment -> less supply -> higher prices under 25% gas export tax",
+          "not_pays": "a copied script from Rinehart/IPA/Hancock, or model independence/economic accuracy"
+        }
+      ],
+      "stopping_rule": "Syntactically similar policy arguments across Hancock, industry spokespeople and Hanson do not prove common commissioning. Demand a dated original briefing, script, contract, draft with direct provenance, or actual named end-use for a same-object transfer. No extra grant/donor attribution to Epstein or CA from this motif.",
+      "sibling_code_imported": false
+    }
   }
 }
