@@ -85,6 +85,7 @@ def test_historical_recurrence_needs_coded_source_roots_and_dates():
     assert G.coded_historical_recurrence([(1940,'event','src2'),(1901,'event','src1')])==()
     with pytest.raises(ValueError):G.coded_historical_recurrence([(1901,'event','')])
 
+
 def test_bradford_dynamic_program_matches_exhaustive_small_inputs():
     from itertools import combinations,product
     for counts in product((0,1,3),repeat=4):
