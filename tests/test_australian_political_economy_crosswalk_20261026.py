@@ -280,3 +280,23 @@ def test_nsa_ipa_original_survey_citation_is_not_hancock_editorial_order():
     assert s.index("senateOct22IPACitesNSASurvey") < s.index(
         "noCitationEqualsPrivateSponsorEditorialOrder")
     assert "Original public committee ANALYSIS" in s
+
+
+def test_september_smith_style_amendment_attempt_is_not_assented_act():
+    s = ADAPTER.read_text()
+    for k in (
+        "hancockAug2022OwnSubmissionIndexReceipt = australia-source-role-receipt",
+        "16 August 2022",
+        "hancockOct2022OwnSubmissionIndexReceipt = australia-source-role-receipt",
+        "13 Oct 2022",
+        "september2022RejectedSeniorsHealthCardAmendments = australia-source-role-receipt",
+        "House REJECTED",
+        "Senate did not insist",
+        "seniorsHealthCardAmendmentAttempted : Pension2022LegislativeStage",
+        "seniorsHealthCardAmendmentRejected : Pension2022LegislativeStage",
+        "albaneseWorkforceActAssented : Pension2022LegislativeStage",
+        "actualRelatedBillAttemptNotEnactedAct ()",
+        "originalProposalIsNotAcceptedAmendment ()",
+        "NOT law",
+    ):
+        assert k in s
