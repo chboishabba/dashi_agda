@@ -59,6 +59,43 @@ def evaluate(w,c,d):
 def inverse_word(w):
     invert={'C':'c','c':'C','D':'d','d':'D'}
     return ''.join(invert[x] for x in reversed(w))
+def rectangular_rank_mod3(matrix):
+    a=[[x%3 for x in row] for row in matrix]
+    if not a:return 0
+    height,width=len(a),len(a[0])
+    k=0
+    for col in range(width):
+        pivot=next((i for i in range(k,height) if a[i][col]),None)
+        if pivot is None:continue
+        a[k],a[pivot]=a[pivot],a[k]
+        inverse=1 if a[k][col]==1 else 2
+        a[k]=[(inverse*x)%3 for x in a[k]]
+        for i in range(height):
+            if i!=k and a[i][col]:
+                t=a[i][col]
+                a[i]=[(x-t*y)%3 for x,y in zip(a[i],a[k])]
+        k+=1
+        if k==height:break
+    return k
+
+def invariant_form_line_rank(C,D):
+    # Alternating 12x12 forms are 66-dimensional.
+    # The source imposes C^TJC=-J and D^TJD=J (288 constraints).
+    cols=[]
+    for i in range(N):
+        for j in range(i+1,N):
+            e=[[0]*N for _ in range(N)]
+            e[i][j]=1;e[j][i]=2
+            c=mm(mm(trans(C),e),C)
+            d=mm(mm(trans(D),e),D)
+            # (C^TEC+E) and (D^TED-E) must vanish.
+            cols.append([(c[a][b]+e[a][b])%3
+                for a in range(N) for b in range(N)]+
+              [(d[a][b]-e[a][b])%3
+                for a in range(N) for b in range(N)])
+    assert len(cols)==66
+    return rectangular_rank_mod3([list(row) for row in zip(*cols)])
+
 def form():
     j=[[int(ch) for ch in line] for line in FORM_ROWS.splitlines()]
     assert len(j)==N and all(len(row)==N for row in j)
@@ -78,6 +115,7 @@ def audit(root):
     assert mm(trans(J),I)==neg(J) and rank(J)==12
     assert mm(mm(trans(C),J),C)==neg(J)
     assert mm(mm(trans(D),J),D)==J
+    assert invariant_form_line_rank(C,D)==65  # 66 unknowns => unique nonzero line
     # Original Suzuki quotient semipresentation, not new source labels.
     CD=mm(C,D)
     assert power(CD,28)==NI and power(CD,56)==I
@@ -135,6 +173,8 @@ def audit(root):
       "source_rotation_square_is_negative_identity":True,
       "D4_presentation_verified":True,
       "invariant_alternating_form_rank":12,
+      "invariant_form_constraints_rank_66_unknowns":65,
+      "invariant_alternating_form_space_dimension":1,
       "source_mirror_similitude_multiplier":2,
       "source_rotation_similitude_multiplier":1,
       "source_mirror_fixed_dimension":6,
