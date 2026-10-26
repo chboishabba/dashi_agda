@@ -119,3 +119,42 @@ models alone do not establish this same-object interpretation.
 `tests/test_monster3b_pointed729_two_phase_similitude.py`;
 this ledger. These are finite-model reusable sources, not a
 new primary Monster character-table or IIT proof.
+
+## Source-P0 implementation continuation: actual fused1458 outer-coset trace gate
+
+The EXISTING `scripts/monster_3b_suzuki_main_quotient_match.g`
+now selects the nontrivial outer quotient sign by the full
+`6.Suz -> 6.Suz.2` restriction, avoiding a guessed ATLAS label
+or class coordinate. Every original main-table class whose
+`6.Suz.2` image has sign `-1` must have
+`base1458[c]=0`. Failure aborts GAP **before** the actual
+selected78 character match and receipt generation. This is
+exactly the abstract two-phase eigenspace-swap trace-zero lemma,
+applied to original SOURCE class positions. It gives a
+nontrivial necessary source validation gate, but does not pay
+any actual source class when GAP is unavailable.
+
+New receipt key:
+`base_1458_outer_centre_inverting_trace_zero: true`.
+The EXISTING `render_monster_3b_suzuki_main_quotient_match.py`
+requires the key to be literally `True` (not numeric 1
+or a string); the original shell acceptance checker enforces it.
+New `scripts/test_monster_3b_suzuki_outer_centre_gate.py`
+tests missing/false/forged synthetic receipt gates and an
+incomplete `True` receipt that still fails later source stages.
+The synthetic fixture never claims original GAP execution.
+Pre-gate JSON receipts will intentionally fail until
+regenerated from the genuine updated producer.
+
+**Verification status:** the independent local 1458 finite
+model executed 104,976 exact generator assertions and three
+focused local pytest checks PASS; local executed source
+SHA256 is tracked in the downloadable JSON. This is an
+independent model implementation, not the same GitHub Python
+blob. The committed GAP producer, shell and renderer remain
+SOURCE-WRITTEN / unexecuted in authentic CTblLib. The
+class-20 diagonal choice stays externally supported by BW07
+and BMW's recorded 2024 calculation, NOT paid by the new
+trace gate. The true source rotation class/degree78 family,
+source 729x90 Hom, Agda theorem and #1148 IIT/phi
+observable same-object interpretation remain open.
