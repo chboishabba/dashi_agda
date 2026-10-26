@@ -147,6 +147,58 @@ def audit(root):
     assert corner_fixed['m']==0 and corner_fixed['mr']==4
     assert fixed80['m']==8 and fixed80['mr']==8
     assert sorted(corner_fixed.values())==[0,0,0,0,0,4,4,8]
+    # NEW POSITIVE CONTRAST: the natural cube corners are IMPOSSIBLE, but
+    # a DIFFERENT eight-label D4 quotient DOES exist. Reuse literal source
+    # ATLAS D4 words and E+E coordinate chart above; no new generators.
+    # Its target is an axis-reflection 4-orbit DISJOINT union a diagonal
+    # reflection 4-orbit. Assign 3 free 8-orbits to each half, so all
+    # eight target fibres have exactly ten nonzero quotient vectors.
+    from collections import Counter, defaultdict
+    types=defaultdict(list)
+    for orb in orbits:
+        rep=min(orb)
+        stabilizer=[w for w in words if applyword(w,rep)==rep]
+        if len(orb)==4:
+            assert len(stabilizer)==2
+            invol=[w for w in stabilizer if w][0]
+            assert invol in ('m','mr','mrr','mrrr')
+            typ='axis' if len(invol)-1 in (0,2) else 'diagonal'
+        else:
+            assert len(orb)==8 and stabilizer==['']
+            typ='free'
+        types[typ].append((rep,orb,stabilizer))
+    assert {name:len(rows) for name,rows in types.items()}=={
+        'axis':4,'diagonal':4,'free':6}
+    target={'axis':set(types['axis'][0][1]),
+            'diagonal':set(types['diagonal'][0][1])}
+    quotient_map={}
+    bundles=([(row,'axis') for row in types['axis']]
+          + [(row,'diagonal') for row in types['diagonal']]
+          + [(row,'axis' if i<3 else 'diagonal')
+             for i,row in enumerate(types['free'])])
+    for (rep,orb,stab),kind in bundles:
+        cand=[v for v in target[kind]
+              if all(applyword(w,v)==v for w in stab)]
+        assert cand
+        y=min(cand)
+        for w in words:
+            x=applyword(w,rep)
+            value=(kind,applyword(w,y))
+            if x in quotient_map:assert quotient_map[x]==value
+            quotient_map[x]=value
+    assert len(quotient_map)==80
+    assert set(Counter(quotient_map.values()).values())=={10}
+    for x in nonzero:
+        for w in words:
+            kind,y=quotient_map[x]
+            assert quotient_map[applyword(w,x)]==(kind,applyword(w,y))
+    # The ten-sheet action is NONTRIVIAL: this quotient80 has 6 free
+    # 8-orbits, while 10 copies of the target mixed8 contain ONLY
+    # 4-orbits. This is a positive twisted-sheet construction,
+    # NOT a resurrection of the natural cube-corner quotient.
+    mixed_fixed={w:sum(applyword(w,t)==t for kind,orb in target.items()
+                       for t in orb) for w in words}
+    assert mixed_fixed['m']==2 and mixed_fixed['mr']==2
     return dict(status='PASS_original_ATLAS_D4_invariant_polarization_and_corner10_nogo',
         original_ATLAS_sha256_verified=True,
         source_D4_word_relations_verified=True,
@@ -164,6 +216,13 @@ def audit(root):
         D4_equivariant_10_copies_of_one_corner8_set_possible=False,
         natural_cube_corner8_fixed_counts=corner_fixed,
         D4_equivariant_projection_to_natural_cube_corner8_possible=False,
+        mixed_D4_eight_target_exists=True,
+        mixed_D4_target_orbit_types={'axis4':1,'diagonal4':1},
+        mixed_D4_quotient80_each_target_fibre_size=10,
+        mixed_D4_quotient80_equivariant=True,
+        mixed_D4_target_fixed_counts=mixed_fixed,
+        ten_sheet_D4_action_necessarily_twisted=True,
+        natural_cube_corner_no_go_still_valid=True,
         nontrivial_D4_mixing_of_ten_sheets_excluded=False,
         actual_Monster_N3B_D4_class_fusion_proved=False,
         literal_Monster_source_character_78_selected=False,
