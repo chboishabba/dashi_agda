@@ -26,7 +26,8 @@ plusResponse t = Observer.response (model t) C3.c0
 minusResponse t = Observer.response (model t) C3.c2
 
 -- With equal prior weights, these are TWICE the corresponding
--- success/error probabilities, with complementary Bernoulli fractions\n-- calculated as 1-p from the existing normalized source likelihood.
+-- success/error probabilities, with complementary Bernoulli fractions
+-- calculated as 1-p from the existing normalized source likelihood.
 twiceSuccess : OneShotBinaryTest → ℚ
 twiceSuccess t =
   Photon.photon (plusResponse t) +
