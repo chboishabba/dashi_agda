@@ -154,17 +154,58 @@ def audit_phase_receipts(receipts):
     for phase, required in REQUIRED_ORIGINALS.items():
         listed = [k for k in required if k in receipts]
         missing = [k for k in required if k not in receipts]
-        # A consistent site and window only proves metadata consistency.
-        site_ids = {receipts[k].site_id for k in listed}
-        windows = {receipts[k].window_id for k in listed}
+        # These are common *study/comparison block* IDs, not identical
+        # exposure instants. A site-independent replication and a historical
+        # source may by design refer to DIFFERENT places, times and roots.
+        # They must never be forced into the original receptor window.
+        comparison_kinds = {
+            'P2_calibrated_acoustic': (
+                'facility_operating_log', 'source_pressure_spectrum',
+                'receptor_pressure_spectrum', 'weather_background_controls'),
+            'P3_facility_attribution': (
+                'matched_on_off_windows', 'receptor_spatial_gradient',
+                'nonfacility_source_controls', 'uncertainty_budget'),
+            'P4_health_outcome': (
+                'prespecified_health_protocol', 'matched_person_or_site_outcomes',
+                'outcome_confounder_and_attrition_audit'),
+            'P5_mitigation_policy': (
+                'matched_before_after_mitigation', 'matched_facility_load',
+                'receptor_metric_with_uncertainty'),
+            'P6_modern_rf_claim': (
+                'calibrated_rf_field_source', 'receptor_rf_dosimetry',
+                'authenticated_specific_device_record',
+                'independently_observed_device_outcome'),
+        }[phase]
+        joined = [k for k in comparison_kinds if k in receipts]
+        site_ids = {receipts[k].site_id for k in joined}
+        windows = {receipts[k].window_id for k in joined}
         parent = PARENT_PHASE.get(phase)
         parent_ready = True if parent is None else result[parent]['metadata_join_ready']
         same_site_window = len(site_ids) <= 1 and len(windows) <= 1
-        ready = not missing and same_site_window and parent_ready
+        # Parent and child stages of the main acoustic investigation need
+        # the SAME site and study-block identity: do not join an unrelated
+        # 'healthy control' site to another site's noise measurement.
+        root_site = receipts.get('source_pressure_spectrum')
+        if parent is not None and root_site is not None and joined:
+            first = receipts[joined[0]]
+            same_site_window = same_site_window and (
+                first.site_id == root_site.site_id and
+                first.window_id == root_site.window_id)
+        # A genuine replication must have an independent provenance root
+        # and may be at another site/time. This only checks CLAIMED roots.
+        distinct_replica = True
+        if (phase == 'P4_health_outcome' and
+            'independent_outcome_reproduction' in receipts and
+            'matched_person_or_site_outcomes' in receipts):
+            distinct_replica = (
+                receipts['independent_outcome_reproduction'].root_id !=
+                receipts['matched_person_or_site_outcomes'].root_id)
+        ready = not missing and same_site_window and parent_ready and distinct_replica
         result[phase] = {
             'expected_original_artifacts': list(required),
             'missing_original_artifacts': missing,
             'metadata_site_window_consistent': same_site_window,
+            'claimed_replication_root_distinct': distinct_replica,
             'parent_phase': parent,
             'metadata_join_ready': ready,
             'independent_source_roots_claimed': len({
@@ -271,6 +312,46 @@ class TestOriginalInquiryAcceptance(_unittest.TestCase):
                  a.content_sha256)}):
             with self.assertRaises(ValueError):
                 audit_phase_receipts(bad)
+
+
+    def test_cross_phase_different_site_cannot_claim_acoustic_attribution(self):
+        r = {k: self._receipt(k)
+             for k in REQUIRED_ORIGINALS['P2_calibrated_acoustic']}
+        r.update({k: self._receipt(k, site='another-site')
+                  for k in REQUIRED_ORIGINALS['P3_facility_attribution']})
+        z = audit_phase_receipts(r)
+        self.assertTrue(z['P2_calibrated_acoustic']['metadata_join_ready'])
+        self.assertFalse(z['P3_facility_attribution']['metadata_join_ready'])
+
+    def test_outcome_replication_may_be_independent_site_but_not_same_root(self):
+        r = {k: self._receipt(k) for phase in (
+             'P2_calibrated_acoustic', 'P3_facility_attribution',
+             'P4_health_outcome') for k in REQUIRED_ORIGINALS[phase]}
+        replica = 'independent_outcome_reproduction'
+        r[replica] = self._receipt(
+            replica, site='independent-site', window='later-independent-study')
+        z = audit_phase_receipts(r)
+        self.assertTrue(z['P4_health_outcome']['metadata_join_ready'])
+        orig = r[replica]
+        earlier = r['matched_person_or_site_outcomes']
+        r[replica] = OriginalReceipt(
+            orig.kind, orig.site_id, orig.window_id,
+            earlier.root_id, orig.original_author, orig.original_date,
+            orig.source_locator, orig.content_sha256)
+        self.assertFalse(audit_phase_receipts(r)[
+            'P4_health_outcome']['claimed_replication_root_distinct'])
+
+    def test_historical_transfer_receipt_not_same_1977_sensor_site(self):
+        r = {k: self._receipt(k)
+             for k in REQUIRED_ORIGINALS['P6_modern_rf_claim']}
+        old = r['documented_historical_to_modern_transfer']
+        r[old.kind] = OriginalReceipt(
+            old.kind, 'archival-office', '1966-record',
+            old.root_id, old.original_author, old.original_date,
+            old.source_locator, old.content_sha256)
+        z = audit_phase_receipts(r)
+        self.assertTrue(z['P6_modern_rf_claim']['metadata_join_ready'])
+        self.assertFalse(z['P6_modern_rf_claim']['intentional_rf_deployment_established'])
 
     def test_review_levels_and_estimate_denominators_separate(self):
         w = original_inquiry_phase_status()
