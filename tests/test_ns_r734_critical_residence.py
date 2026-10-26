@@ -134,3 +134,43 @@ def test_residence_alone_cannot_bound_pointwise_critical_peak():
     budget=S.symbols('budget',positive=True)
     assert S.simplify(height**2*(budget/height**2)-budget)==0
     assert S.limit(height,height,S.oo)==S.oo
+
+
+def test_physical_heat_shear_is_unforced_full_navier_stokes_solution():
+    # u=(0,a cos(nx) exp(-nu n²t),0): real, transverse, and (u·grad)u=0.
+    x,y,z,t,n,nu,a=S.symbols('x y z t n nu a',real=True)
+    velocity=S.Matrix([0,a*S.cos(n*x)*S.exp(-nu*n*n*t),0])
+    coordinates=(x,y,z)
+    divergence=sum(S.diff(velocity[i],coordinates[i]) for i in range(3))
+    convection=S.Matrix([
+        sum(velocity[j]*S.diff(velocity[i],coordinates[j]) for j in range(3))
+        for i in range(3)
+    ])
+    laplacian=S.Matrix([
+        sum(S.diff(velocity[i],c,2) for c in coordinates) for i in range(3)
+    ])
+    assert S.simplify(divergence)==0
+    assert S.simplify(convection)==S.zeros(3,1)
+    assert S.simplify(S.diff(velocity,t)-nu*laplacian)==S.zeros(3,1)
+
+
+def test_fixed_energy_heat_shear_defeats_absolute_critical_majorant_payment():
+    # Full physical shears have zero nonlinear production, while
+    # integral sqrt(X)*D diverges as w->infinity for fixed E0,nu.
+    n,w,nu,E0,t=S.symbols('n w nu E0 t',positive=True)
+    X=w*E0*S.exp(-2*nu*n*n*t)
+    D=w*n*n*E0*S.exp(-2*nu*n*n*t)
+    majorant=S.integrate(S.sqrt(X)*D,(t,0,S.oo))
+    actual_D=S.integrate(D,(t,0,S.oo))
+    assert S.simplify(majorant-E0**S.Rational(3,2)*w**S.Rational(3,2)/(3*nu))==0
+    assert S.simplify(actual_D-E0*w/(2*nu))==0
+    assert S.limit(E0**S.Rational(3,2)*w**S.Rational(3,2)/(3*nu),w,S.oo)==S.oo
+
+
+def test_l4_time_hhalf_implies_non_serrin_L4_L3_not_a_continuation():
+    # X=||u||_dotH1/2²: int X² gives L4_t dotH1/2.
+    # H1/2 embeds L3, but 2/p+3/q=3/2 rather than Serrin's 1.
+    assert S.Rational(2,4)+S.Rational(3,3)==S.Rational(3,2)
+    assert S.Rational(2,4)+S.Rational(3,3)>1
+    # R3 scaling exponent for L4_t dotH1/2 is -1/2;
+    # do not identify this with exact periodic-torus dilation.
