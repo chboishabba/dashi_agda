@@ -70,6 +70,59 @@ def synthetic_witness():
     }
 
 
+def factorial_design(assignments):
+    """Synthetic rows: (higher_dose, rf_modulated, later_period).
+
+    Columns: intercept, dose, modulation, period, dose*modulation.
+    This is NOT a PANDORA trial dataset, calibrated RF model or estimate.
+    """
+    if not assignments or any(
+        len(row) != 3 or any(type(x) is not int or x not in (0, 1) for x in row)
+        for row in assignments
+    ):
+        raise ValueError('binary dose/modulation/period triples required')
+    return [[1, d, m, p, d * m] for d, m, p in assignments]
+
+
+def contrast_estimable(matrix, contrast):
+    """Exact row-space test for one linear coefficient contrast.
+
+    A contrast is identifiable only when it lies in the row space of X.
+    In particular, repeating the same animal/trial configuration cannot
+    rescue structural rank deficiency; nor does full rank prove causation.
+    """
+    if not matrix or not matrix[0] or len(contrast) != len(matrix[0]):
+        raise ValueError('contrast dimension must match nonempty design')
+    if any(len(row) != len(contrast) for row in matrix):
+        raise ValueError('nonrectangular design')
+    return rank(matrix) == rank(matrix + [list(contrast)])
+
+
+def factorial_witness():
+    """Named synthetic contrasts, deliberately detached from historical data."""
+    aliased = [(0, 0, 0)] * 4 + [(1, 1, 1)] * 4
+    full = [(d, m, p) for d in (0, 1) for m in (0, 1)
+            for p in (0, 1)]
+    interaction = (0, 0, 0, 0, 1)
+    period = (0, 0, 0, 1, 0)
+    return {
+        'model': 'intercept + dose + modulation + period + dose:modulation',
+        'aliased_rank': rank(factorial_design(aliased)),
+        'full_rank': rank(factorial_design(full)),
+        'aliased_interaction_estimable': contrast_estimable(
+            factorial_design(aliased), interaction),
+        'full_interaction_estimable': contrast_estimable(
+            factorial_design(full), interaction),
+        'full_period_estimable': contrast_estimable(
+            factorial_design(full), period),
+        'historical_effect_established': False,
+        'historical_null_effect_established': False,
+        'historical_animal_level_data_used': False,
+        'note': 'Exact synthetic design algebra, not a biological null, '
+                'replication, or evidence of human behavioural control.'
+    }
+
+
 class TestFiniteConfound(unittest.TestCase):
     def test_original_baseline_confounded(self):
         self.assertEqual(rank(design([(0, 0), (0, 0), (1, 1)])), 2)
@@ -102,6 +155,52 @@ class TestFiniteConfound(unittest.TestCase):
         self.assertFalse(synthetic_witness()['historical_primate_effect_established'])
 
 
+    def test_factorial_fully_crossed_identifiable(self):
+        sample = [(d, m, p) for d in (0, 1) for m in (0, 1)
+                  for p in (0, 1)]
+        matrix = factorial_design(sample)
+        self.assertEqual(rank(matrix), 5)
+        for col in range(5):
+            contrast = [int(i == col) for i in range(5)]
+            self.assertTrue(contrast_estimable(matrix, contrast))
+
+    def test_factorial_dose_modulation_period_alias(self):
+        sample = [(0, 0, 0)] * 8 + [(1, 1, 1)] * 8
+        matrix = factorial_design(sample)
+        self.assertEqual(rank(matrix), 2)
+        self.assertFalse(contrast_estimable(matrix, (0, 0, 0, 0, 1)))
+        self.assertFalse(contrast_estimable(matrix, (0, 0, 0, 1, 0)))
+
+    def test_more_trials_do_not_make_more_independent_conditions(self):
+        minimal = factorial_design([(0, 0, 0), (1, 1, 1)])
+        repeated = factorial_design([(0, 0, 0)] * 100 + [(1, 1, 1)] * 100)
+        self.assertEqual(rank(minimal), rank(repeated))
+        self.assertFalse(contrast_estimable(repeated, (0, 0, 0, 0, 1)))
+
+    def test_specific_contrast_may_be_estimable_without_all_coefficients(self):
+        same_period = factorial_design([(d, m, 0) for d in (0, 1)
+                                         for m in (0, 1)])
+        self.assertEqual(rank(same_period), 4)
+        self.assertTrue(contrast_estimable(same_period, (0, 0, 0, 0, 1)))
+        self.assertFalse(contrast_estimable(same_period, (0, 0, 0, 1, 0)))
+
+    def test_factorial_rejects_unverified_input_shapes(self):
+        for bad in ([], [(0, 0)], [(0, 0, 0, 0)],
+                    [(0, True, 1)], [(1, 2, 0)]):
+            with self.assertRaises(ValueError):
+                factorial_design(bad)
+        with self.assertRaises(ValueError):
+            contrast_estimable([[1, 0]], (1, 0, 0))
+
+    def test_factorial_never_claims_historical_null(self):
+        witness = factorial_witness()
+        self.assertEqual(witness['aliased_rank'], 2)
+        self.assertEqual(witness['full_rank'], 5)
+        self.assertFalse(witness['historical_effect_established'])
+        self.assertFalse(witness['historical_null_effect_established'])
+        self.assertFalse(witness['historical_animal_level_data_used'])
+
+
 if __name__ == '__main__':
     import sys
     if sys.argv[1:] == ['--selftest']:
@@ -109,6 +208,7 @@ if __name__ == '__main__':
         result = unittest.TextTestRunner(verbosity=2).run(suite)
         raise SystemExit(0 if result.wasSuccessful() else 1)
     if sys.argv[1:] == ['--synthetic']:
-        print(json.dumps(synthetic_witness(), indent=2))
+        print(json.dumps({'two_factor': synthetic_witness(),
+                          'factorial': factorial_witness()}, indent=2))
     else:
         raise SystemExit('Use --selftest or --synthetic. No human/animal exposure input.')
