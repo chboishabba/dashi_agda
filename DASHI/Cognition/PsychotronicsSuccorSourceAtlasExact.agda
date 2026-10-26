@@ -1520,7 +1520,7 @@ rodinRoundedTableDoesNotProveRawIdentity : ClaimBound
 rodinRoundedTableDoesNotProveRawIdentity = mkBound
   "2024 Ramirez-Galindo original Table II publishes 4.13, 3.05, 1.16 mT experimental fields at 1.60, 1.25, 0.60 A; these coincide numerically with 2013 Perez original Table I entries at the printed precision"
   ramirezRodinRMF2024
-  "2024 printed Table II three experimental current-field rows; 2013 original Table I; exact rational synthetic collision under stipulated rounding in existing check_rodin_citation_independence_cut.py"
+  "2024 published original Table II three experimental current-field rows; separate 2013 original Table I comparison by DASHI; synthetic rounding no-go is DASHI-authored, NOT an assertion contained in either paper"
   guanajuatoRodinResearchRoot
   Diligence.primaryProposition
   attributedAuthorReport
