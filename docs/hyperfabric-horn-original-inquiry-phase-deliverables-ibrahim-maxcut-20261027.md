@@ -260,3 +260,51 @@ finite 2I simulator are NOT implied by
 the abelian extension theorem, and an
 artificial finite rose graph assignment
 is NOT a wild-specific hardware effect.
+
+
+## 8. Late LIVE source-owner refinement: member connectivity reduced, not invented
+
+The final cross-PR check found the original horn geometry
+owner #1244 had advanced to
+`e2f63fd512c76ce4bf3a174b118c475398c27f79`,
+adding
+`proofs/horned_c3_lean/HornedC3/ThreeArmRadiusConnectedAssembly.lean`.
+That ORIGINAL-OWNER source now uses Mathlib
+`IsPathConnected.union` to derive each radius
+cover member's path connectivity from:
+(1) true path-connected central region C in
+the ACTUAL exterior E; (2) true path-connected
+satellite intersection S_i in E; (3) a real
+exterior point p_i in the actual C∩S_i.
+The intended rational p_i=13e_i and
+sphere placement are in the paper-level
+owner construction, but the lemma does not
+pretend ambient R³ points are automatically
+elements of the exterior E.
+
+This pays a NONDUPLICATE formal assembly
+step and reduces (does not eliminate)
+the source topological P2 witness count.
+Open are the actual central connectedness,
+central fundamental-group triviality,
+each satellite region's connectedness,
+overlap point membership in the true
+wild exterior, supported Hatcher relative
+wild satellite equivalence, and native
+Lean kernel check. Nothing here changes
+the finite all-Wilson-WORD tame replica
+no-go, or supplies a short source meridian.
+
+The stacked exotic topology #1254 additionally
+made PL simplicial star stability improvements;
+its proper infinite-surface realization and
+ambient wild linking remain independent,
+unpaid source claims. Do not merge sources
+by adjacency in the PR list.
+
+Under Ibrahim first-link accounting, #1244 owns
+this new union theorem consumer; Mathlib owns
+the original theorem, and this #1249 note
+only records dependency reuse. No independent
+mathematical discovery or completed kernel
+proof is claimed on behalf of the owner.
