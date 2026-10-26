@@ -796,7 +796,7 @@ rvmlGentryVideoMetadata = Source.mkNoDOISource
   "upload date unknown; linked 2003 event unconfirmed footage identity"
   "https://vimeo.com/92437258"
   Source.communitySource
-  "metadata lists Pat Flanagan electronic device as an advertised subject; cannot attribute the description as a spoken quote or establish prior assistant status, shared coil plan or medical performance"
+  "promotional metadata lists Pat Flanagan electronic device and says Gentry constructed Reich Cloudbusters; both are uploader biographical/topic statements, not authenticated first-person speech, blueprints, military personnel records, shared coil transmission or medical/meteorological performance"
   Source.publicAttribution
 
 sourceAtlas : Source.AttributedSourceAtlas
@@ -912,6 +912,16 @@ rvmlGentryFlanaganAdvertisedTopic = mkBound
   Diligence.contextualEvidence
   institutionalHistoricalInterpretation
   "independent of Croft publisher but only same-organiser topic adjacency; speech, professional assistant relationship and handwritten winding provenance unpaid"
+
+rvmlGentryReichCloudbusterPublicity : ClaimBound
+rvmlGentryReichCloudbusterPublicity = mkBound
+  "RVML original Vimeo publisher-description says Gentry Smith had designed and constructed Reich Cloudbusters and advertises Pat Flanagan's electronic device"
+  rvmlGentryVideoMetadata
+  "Vimeo 92437258 RVML Community Resource Center promotional description paragraphs"
+  rvmlOrganizerPublicationRoot
+  Diligence.contextualEvidence
+  attributedAuthorReport
+  "no original Gentry coil drawings or contemporaneous build receipt, independent Navy/personnel documentation, spoken recording verification, meteorological measurement or 1999 Flanagan-to-Croft instruction handoff"
 
 croftCoLocatedDevice : ClaimBound
 croftCoLocatedDevice = mkBound
@@ -1816,6 +1826,18 @@ wmoStatementCannotProveReichMechanism = bounded-relation
   "WMO 2025 source-specific real weather-modification methods"
   "Reich 1953 original orgone-rain causality claim"
   documentaryDistinction wmoCausalLimitsClaim false refl false refl
+
+rvmlPromotionalReichBuildNotVerifiedMechanism : BoundedRelation
+rvmlPromotionalReichBuildNotVerifiedMechanism = bounded-relation
+  "RVML publicity naming Gentry Smith as a Reich Cloudbuster builder"
+  "Reich 1953 original water-connected apparatus and claimed rainmaking"
+  documentaryDistinction rvmlGentryReichCloudbusterPublicity false refl false refl
+
+rvmlFlanaganNamedTopicNotOriginalCoilHandoff : BoundedRelation
+rvmlFlanaganNamedTopicNotOriginalCoilHandoff = bounded-relation
+  "RVML advertised Pat Flanagan's Electronic Bliss Device talk topic"
+  "Croft first-person 1999 Gentry/Flanagan Mobius instructions claim"
+  documentaryDistinction rvmlGentryFlanaganAdvertisedTopic false refl false refl
 
 windingGuideDomainNotRainMachineProof : BoundedRelation
 windingGuideDomainNotRainMachineProof = bounded-relation
