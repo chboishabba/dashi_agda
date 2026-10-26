@@ -1305,3 +1305,119 @@ reservationDraftChronologyIsNotMethodTransmission :
 reservationDraftChronologyIsNotMethodTransmission witness =
   Typed.headlineNumberRestatementIsNotHistoricalMethodTransfer
     (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- 2026-10-14 new FIRST-PARTY legislative INTRODUCTION objects.
+-- Government's 14 Oct media release is publisher-original. Three 14 Oct
+-- second-reading speeches are first-person minister testimony accessible
+-- through attributed OpenAustralia Hansard mirrors; official APH originals
+-- are indexed but not independently fetched here. The bill *texts* were
+-- NOT verified for assent. An introduced Bill is NOT an enacted Act.
+--
+-- Crucial homonym: LNG export-revenue levy in ADL original is a proposed
+-- ad valorem 25% of sales, while 'Domestic Gas Reservation Levy Bill 2026'
+-- proposes cost recovery against LNG EXPORT LICENCES, rate by regulation.
+-- Shared string 'levy' cannot transfer a tax base or cash revenue.
+--
+-- Consequential-amendments second reading describes 'additionality'
+-- and at least 90% of DSO genuinely delivered, with bounded 10%
+-- flexibility/offset. Source records the MINISTER'S explanation, not
+-- independently audited delivery or enacted statutory text.
+------------------------------------------------------------------------
+
+octoberGasBillMinisterialRelease2026 : Typed.SourceReceipt
+octoberGasBillMinisterialRelease2026 = Typed.sourceReceipt
+  "Chris Bowen; Madeleine King; Tim Ayres, original Australian ministers"
+  "Landmark legislation to secure Australian gas for industry and households"
+  "2026-10-14"
+  "https://minister.dcceew.gov.au/bowen/media-releases/joint-media-release-landmark-legislation-secure-australian-gas-industry-and-households"
+  "Original government notice announcing gas reservation package introduced into parliament on 14 October. Demand-calibrated 20% LNG export volume. Introduction established; final assent, implementation, prices and named lobbying causal effect not established."
+
+octoberGasPrincipalMinisterSpeech2026 : Typed.SourceReceipt
+octoberGasPrincipalMinisterSpeech2026 = Typed.sourceReceipt
+  "Madeleine King, Minister for Resources; House of Representatives"
+  "Domestic Gas Reservation Bill 2026, second-reading original spoken statement"
+  "2026-10-14, 09:02"
+  "https://www.openaustralia.org.au/debate/?id=2026-10-14.4.2"
+  "Minister's dated first-person parliamentary statement as transcribed in attributed third-party Hansard mirror; official APH original inaccessible for direct check. Principal bill proposed framework backstop 1 July 2027, licence and DSO from 1 Jan 2028; speech is NOT an enacted statute."
+
+octoberGasLevyMinisterSpeech2026 : Typed.SourceReceipt
+octoberGasLevyMinisterSpeech2026 = Typed.sourceReceipt
+  "Madeleine King, Minister for Resources; House of Representatives"
+  "Domestic Gas Reservation Levy Bill 2026, second-reading speech"
+  "2026-10-14, 09:21"
+  "https://www.openaustralia.org.au/debate/?id=2026-10-14.6.1"
+  "Minister's own words as preserved by attributed Hansard mirror: licence-holder cost-recovery levy, rate/method by future regulations, due following regulated period, proposed commencement 1 Jan 2028. NOT the 25% LNG export ad valorem revenue levy modelled by ADL."
+
+octoberGasConsequentialMinisterSpeech2026 : Typed.SourceReceipt
+octoberGasConsequentialMinisterSpeech2026 = Typed.sourceReceipt
+  "Madeleine King, Minister for Resources; House of Representatives"
+  "Domestic Gas Reservation (Consequential Amendments) Bill 2026, second-reading speech"
+  "2026-10-14, 09:13"
+  "https://www.openaustralia.org.au/debate/?id=2026-10-14.5.2"
+  "Minister first-person speech in attributed transcript mirror. Describes additionality baseline to stop existing-domestic-gas recycling, minimum 90% of DSO actual supply with conditional 10% flexibility and offset, and July 2027/Jan 2028 stage split. Not enacted bill verification or observed delivery."
+
+octoberGasBillsIntroduced2026 : Typed.TypedGenealogyEdge
+octoberGasBillsIntroduced2026 = Typed.typedGenealogyEdge
+  "RC-18" "September 2026 exposure draft gas reservation" "14 October 2026 gas reservation bills introduced in parliament"
+  Typed.legislativeIntroduction Typed.primary
+  (governmentReservationSeptember2026 ∷ octoberGasBillMinisterialRelease2026 ∷ [])
+  "Dated government original confirms legislation introduced. This advances the observable status from proposal to introduced bill, NOT to law, commenced exporter obligation, or demonstrated ministerial words directly copied from industry."
+
+octoberCostRecoveryLevyNotRevenueTax : Typed.TypedGenealogyEdge
+octoberCostRecoveryLevyNotRevenueTax = Typed.typedGenealogyEdge
+  "RC-19" "14 Oct House minister describes licence regulatory cost recovery levy" "Arthur D. Little 25% LNG export sales levy alternative"
+  Typed.parallelEconomicArgument Typed.corroborated
+  (octoberGasLevyMinisterSpeech2026 ∷ adlSourceReportPublicRelease2026 ∷ [])
+  "The legal-policy word levy collides while bases differ: regulated licence-holder administrative charges set by future regulations versus 25% of LNG export sales value. 17bn export-revenue projections are not regulatory licence-levy receipts. The Hansard text was mirror-read, not original APH download."
+
+octoberAdditionalityNotObservedDeliveredSupply : Typed.TypedGenealogyEdge
+octoberAdditionalityNotObservedDeliveredSupply = Typed.typedGenealogyEdge
+  "RC-20" "Government's Sept 2026 gas supply proposal" "Minister's 14 Oct extra-gas baseline and 90%-delivery design"
+  Typed.legislativeIntroduction Typed.corroborated
+  (governmentReservationSeptember2026 ∷ octoberGasConsequentialMinisterSpeech2026 ∷ [])
+  "The introduced consequential-amendments proposal adds source-attributed additionality tests and conditional delivery/flexibility terms. A recorded draft ministerial explanation cannot establish that the bill passed, that gas physically moved, or that users paid less."
+
+octoberBillIntroCannotEstablishHistoricalTransfer :
+  Typed.StrongHistoricalTransfer octoberGasBillsIntroduced2026 → ⊥
+octoberBillIntroCannotEstablishHistoricalTransfer w =
+  Typed.legislativeIntroductionDoesNotEstablishHistoricalTransfer
+    (Typed.relationIsTransfer w)
+
+octoberCostRecoverySimilarityIsNotSharedTaxInstrument :
+  Typed.StrongHistoricalTransfer octoberCostRecoveryLevyNotRevenueTax → ⊥
+octoberCostRecoverySimilarityIsNotSharedTaxInstrument w =
+  Typed.economicArgumentSimilarityIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer w)
+
+-- A bare 'levy' label is insufficient to recover the underlying legal
+-- instrument (administration/cost recovery versus percentage of sales).
+-- Exact finite model only: NOT a proof the introduced Bill has become law.
+data OneLevyWordTwoBases : Set where
+  administrativeLicenceRecovery exportValueQuarterTax : OneLevyWordTwoBases
+
+data UnqualifiedLevyLabel : Set where
+  printedLevy : UnqualifiedLevyLabel
+
+data LevyLegalBase : Set where
+  exportLicenceRegulatoryCosts lngExportSalesRevenue : LevyLegalBase
+
+displayedLevyWord : OneLevyWordTwoBases → UnqualifiedLevyLabel
+displayedLevyWord _ = printedLevy
+
+legalBaseOfLevy : OneLevyWordTwoBases → LevyLegalBase
+legalBaseOfLevy administrativeLicenceRecovery = exportLicenceRegulatoryCosts
+legalBaseOfLevy exportValueQuarterTax = lngExportSalesRevenue
+
+sameLevyWordDifferentLegalBases :
+  INF.NonFactorabilityWitness displayedLevyWord legalBaseOfLevy
+sameLevyWordDifferentLegalBases =
+  INF.nonFactorabilityWitness
+    administrativeLicenceRecovery exportValueQuarterTax refl (λ ())
+
+bareLevyLabelCannotRecoverTaxBase :
+  INF.FactorsThrough displayedLevyWord legalBaseOfLevy → ⊥
+bareLevyLabelCannotRecoverTaxBase =
+  INF.witnessRulesOutEveryFlatFactorisation
+    sameLevyWordDifferentLegalBases
