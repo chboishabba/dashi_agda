@@ -382,3 +382,45 @@ def test_2022_national_seniors_original_model_has_named_commissioner_not_empiric
     assert "nationalSeniorsDeloitte2022CommissionedModel = australia-source-role-receipt" in b
     assert "nationalSeniorsMemberCampaign2022Original = australia-source-role-receipt" in b
     assert "originalNamedCommissionedPolicyModel : AustraliaSourceRole" in b
+
+
+def test_australia_three_senate_inquiries_are_distinct_original_dockets():
+    a = world()["australian_crosspollination"]["policy_2022_three_inquiry_docket_cut"]
+    dockets = a["original_docket_roots"]
+    assert [d["id"] for d in dockets] == [
+        "feb_2022_coalition", "aug_2022_smith", "oct_2022_albanese"
+    ]
+    assert [d["register_count"] for d in dockets] == [6, 14, 11]
+    assert [d["introduced"] for d in dockets] == [
+        "2022-02-10", "2022-08-03", "2022-09-28"
+    ]
+    assert len({d["inquiry_register"] for d in dockets}) == 3
+    assert [len(d["selected_original_document_index"]) for d in dockets] == [1, 3, 3]
+    ids = [r["document_id"] for d in dockets
+           for r in d["selected_original_document_index"]]
+    assert len(ids) == a["distinct_selected_docket_document_ids"] == 7
+    assert len(set(ids)) == len(ids)
+    assert [r["submission_no"] for r in dockets[1]["selected_original_document_index"]] == [3, 6, 7]
+    assert [r["submission_no"] for r in dockets[2]["selected_original_document_index"]] == [3, 9, 10]
+    assert dockets[0]["selected_original_document_index"][0]["producer"] == "National Seniors Australia"
+    assert "only bounded absence" in a["source_interpretation_ceiling"] or (
+        "only" in a["source_interpretation_ceiling"].lower()
+        and "not proof of no off-register advocacy" in a["source_interpretation_ceiling"])
+    assert "Original individual native PDFs were not visually inspected" in a["source_interpretation_ceiling"]
+    assert "cannot have caused" in a["temporal_noncausation"]
+    assert world()["original_root_count"] == 9
+
+
+def test_australia_observed_nsa_ipa_citation_is_not_paid_hancock_commission():
+    a = world()["australian_crosspollination"]["policy_2022_public_research_citation_cut"]
+    assert "National Seniors" in a["first_research_producer"]
+    assert "Institute of Public Affairs" in a["attributed_downstream_user"]
+    assert "paragraphs 2.15-2.16" in a["source_report_location"]
+    assert "20%" in a["reported_use"]
+    assert "510000" in a["reported_use"]
+    assert "same_object_status" in a
+    assert a["financial_commissioning_established"] is False
+    assert a["same_campaign_causal_influence_established"] is False
+    assert a["quote_is_not_independent_reproduction"] is True
+    assert "HPPL editorial instruction" in a["reopens_on"]
+    assert world()["claims"][-1]["level"] != "independentlyReproduced"
