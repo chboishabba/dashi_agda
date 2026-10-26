@@ -558,3 +558,40 @@ noCitationEqualsPrivateSponsorEditorialOrder :
   publicThirdPartySurveyCitation ≡ specificPrivateSponsorEditorialOrder →
   DistinctObject
 noCitationEqualsPrivateSponsorEditorialOrder ()
+
+
+------------------------------------------------------------------------
+-- 2022 LEGISLATIVE ATTEMPT VERSUS ADOPTION: other policy path.
+-- Senate Committee report on the September government bill, chapter 1
+-- §§1.41-1.46, traces an actual attempted amendment to a different bill.
+------------------------------------------------------------------------
+
+hancockAug2022OwnSubmissionIndexReceipt : AustraliaSourceRoleReceipt
+hancockAug2022OwnSubmissionIndexReceipt = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Hancock Prospecting Pty Ltd, official original source index of 16 August 2022 letter, submission 3 to Senator Dean Smith bill inquiry"
+  "https://www.aph.gov.au/DocumentStore.ashx?id=dfaa59de-73b8-4409-ab06-4527c2c6cfd3&subId=721185"
+  "Parliament original indexed text shows dated 16 August 2022 HPPL letter addressing the Smith bill; actual PDF page image not authenticated (403). SAME corporate advocacy author also filed distinct Oct 13 2022 submission 9 to government bill, so two letters are not two independent institutional witnesses. Original texts/hashes not compared."
+
+september2022RejectedSeniorsHealthCardAmendments : AustraliaSourceRoleReceipt
+september2022RejectedSeniorsHealthCardAmendments = australia-source-role-receipt
+  originalLimitedGovernmentLegislation
+  "Commonwealth Parliament Senate Community Affairs Committee, November 2022 government Workforce Incentive Bill report, chapter 1 paras 1.41-1.46"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentive2022/Report/section?id=committees%2Freportsen%2F024985%2F80108"
+  "Original parliamentary analysis: Smith bill introduced Aug 3, committee Sept 30 recommended NOT passing; Senate Sept 28 added key Smith-style provisions as amendments to separately titled Seniors Health Card bill; House REJECTED those amendments and Senate did not insist. Attempted parliamentary transfer is documented; it is NOT law, an adopted Smith bill, an HPPL/IPA instruction, or evidence of legislative effect."
+
+data Pension2022LegislativeStage : Set where
+  deanSmithPrivateBillProposed : Pension2022LegislativeStage
+  seniorsHealthCardAmendmentAttempted : Pension2022LegislativeStage
+  seniorsHealthCardAmendmentRejected : Pension2022LegislativeStage
+  albaneseWorkforceActAssented : Pension2022LegislativeStage
+
+actualRelatedBillAttemptNotEnactedAct :
+  seniorsHealthCardAmendmentRejected ≡ albaneseWorkforceActAssented →
+  DistinctObject
+actualRelatedBillAttemptNotEnactedAct ()
+
+originalProposalIsNotAcceptedAmendment :
+  deanSmithPrivateBillProposed ≡ seniorsHealthCardAmendmentAttempted →
+  DistinctObject
+originalProposalIsNotAcceptedAmendment ()
