@@ -119,6 +119,58 @@ def woolworth_2026_fig1_original_field_receipt():
     }
 
 
+
+
+def two_weight_three_band_negative_control():
+    """Exact finite NO-unique-inverse case, not actual A/C frequency response.
+
+    Profiles (5,5,5) and (4,4,8) are different *toy* nonnegative
+    frequency-band energies; 2 distinct linear weighting operators map
+    them to the identical summaries. Real IEC A/C dB are logarithmic
+    response models; don't interpret 20 below as a physical dB level.
+    """
+    a_weights = (1, 2, 1)
+    c_weights = (2, 1, 1)
+    spectra = ((5, 5, 5), (4, 4, 8))
+    def project(x, weights):
+        return sum(v * w for v, w in zip(x, weights))
+    projections = tuple(
+        (project(x, a_weights), project(x, c_weights))
+        for x in spectra)
+    if projections != ((20, 20), (20, 20)):
+        raise AssertionError('finite collision proof fixture changed')
+    return {
+        'toy_weighted_band_vectors': [list(x) for x in spectra],
+        'toy_operators': [list(a_weights), list(c_weights)],
+        'toy_two_weight_summaries': [list(x) for x in projections],
+        'distinct_spectra': spectra[0] != spectra[1],
+        'weighted_summaries_identical': projections[0] == projections[1],
+        'not_real_IEC_A_C_calibration': True,
+        'not_quantitative_20Hz_energy': True,
+    }
+
+
+def woolworth_2026_fig2_power_plant_receipt():
+    """Original Fig 2 label: temporary gas turbines @200m 70dBA/81dBC.
+
+    Fig 2's turbine and plant spectral figure is its own industrial
+    power-source root. It is not Fig 1 cooling-tower measurement nor
+    a deconvolved 6.3 Hz calibrated waveform, clinical study or cross-site
+    matched environmental case.
+    """
+    return {
+        'original_author': 'David Woolworth',
+        'figure': 2,
+        'source_type': 'temporary_natural_gas_turbines',
+        'receiver_distance_m_label': 200,
+        'figure_label_dBA': 70,
+        'figure_label_dBC': 81,
+        'dBC_minus_dBA': 11,
+        'same_signal_as_fig1_cooling_tower': False,
+        'raw_waveforms_or_site_load_released_in_article': False,
+        'human_health_outcome_study': False,
+    }
+
 # Operational source→receptor→outcome acceptance contracts for the ORIGINAL
 # @itsgingertheory inquiry. A receipt is an original artifact's metadata, not
 # independent authentication of its bytes, calibration, or conclusions.
@@ -648,6 +700,23 @@ class TestOriginalInquiryAcceptance(_unittest.TestCase):
         self.assertIn('original_sensor_waveforms', audit_phase_receipts({})[
             'P2_calibrated_acoustic']['missing_original_artifacts'])
 
+
+    def test_two_level_summaries_cannot_invert_three_band_spectrum(self):
+        evidence = two_weight_three_band_negative_control()
+        self.assertTrue(evidence['distinct_spectra'])
+        self.assertTrue(evidence['weighted_summaries_identical'])
+        self.assertEqual(evidence['toy_two_weight_summaries'],
+                         [[20, 20], [20, 20]])
+        self.assertTrue(evidence['not_real_IEC_A_C_calibration'])
+
+    def test_woolworth_original_fig2_is_separate_gas_power_signal(self):
+        evidence = woolworth_2026_fig2_power_plant_receipt()
+        self.assertEqual(evidence['receiver_distance_m_label'], 200)
+        self.assertEqual(evidence['dBC_minus_dBA'], 11)
+        self.assertFalse(evidence['same_signal_as_fig1_cooling_tower'])
+        self.assertFalse(evidence['human_health_outcome_study'])
+        self.assertFalse(evidence['raw_waveforms_or_site_load_released_in_article'])
+
     def test_scatterty_signed_rank_fixture(self):
         r = _signed_ranks([_Decimal('-2'),_Decimal('3'),
                            _Decimal('4'),_Decimal('-1')])
@@ -824,6 +893,10 @@ if __name__ == "__main__":
         status['FDSN_original_channel_is_not_a_data_centre_field_study'] = True
         status['industrial_original_2026_published_field_figures'] = (
             woolworth_2026_fig1_original_field_receipt())
+        status['original_natural_gas_fig2_separate_signal'] = (
+            woolworth_2026_fig2_power_plant_receipt())
+        status['two_weight_toy_proxy_nonidentifiability'] = (
+            two_weight_three_band_negative_control())
         status['verified_public_2026_site_sensor_or_participant_data'] = False
         status['paper_status_from_video_description'] = 'WIP, publication not verified'
         print(_json.dumps(status, indent=2))
