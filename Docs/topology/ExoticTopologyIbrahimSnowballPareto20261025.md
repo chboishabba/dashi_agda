@@ -931,3 +931,95 @@ weak-realisation theory is cited for future exact
 donor lookup; no `abstract StarChain` proof is
 misattributed to Richards. Focused kernel workflow
 now names eleven Agda topology modules.
+
+
+## 27 October 2026 — Stephen C. Power's 2025 constructive triangulation donor
+
+**Original publication:** Stephen C. Power, *Noncompact surfaces,
+triangulations and rigidity*, *Bulletin of the London Mathematical
+Society* **57** (2025), pp. 2097–2115,
+DOI https://doi.org/10.1112/blms.70083.
+Original preprint: https://arxiv.org/abs/2403.11986 (2024).
+These are **versions of one intellectual source**, not independent
+corroboration or independent proofs.
+Power gives a more explicit Kerékjártó/Richards classification
+argument, proves every noncompact surface ADMITs a countable
+`(3,6)`-tight triangulation (Theorem 4.5), and can choose one
+with minimally 3-rigid graph (Theorem 6.4). This is a
+constructive EXISTENCE claim about carefully selected
+triangulations, not a certificate on arbitrary DASHI
+pants meshes, and it does not transfer original priority
+away from Brahana, Kerékjártó or Richards.
+
+**Direct source-mesh discriminator implemented:**
+`scripts/exotic_topology_power_36_tight_nonpromotion.py`
+computes V, E, F, b and the sum L of boundary-edge lengths
+on EXACT finite binary Cantor, balanced ternary, Loch Ness
+and Jacob's ladder meshes from the original PL constructors.
+It verifies per selected stage:
+
+```text
+3F = 2E - L                  oriented triangular-face incidence
+V - E + F = 2 - 2g - b       finite surface Euler equation
+L = 3b                       every outgoing loop is triangular
+3V - E = 3(2 - 2g - b) + L = 6 - 6g.
+```
+
+**NEW all-genus formal arithmetic:**
+companion Lean #86 has
+`Synthesis/ExoticTopologyPLMaxwellGenusNoGo.lean`,
+with `eulerMaxwellWithBoundaryLength`,
+`triangularBoundaryMaxwellGenus`,
+`positiveGenusViolates36WholeGraph`, and
+`zeroGenusHasWholeGraphMaxwellSix`.
+The source uses Mathlib `omega` on integer-valued
+Euler/face-incidence facts, NOT a fake full
+geometric planar embedding or generalised combinatorial
+graph-rigidity theorem. It is not kernel-executed.
+
+**Independent actual local checks:**
+the same source-equivalent PL objects yield
+whole-graph Maxwell values:
+- binary Cantor stages 0–2: `6,6,6`;
+- Loch Ness: `6,0,-6`;
+- Jacob's ladder: `6,-6,-18`;
+- balanced ternary stages 0–2: `6,6,6`.
+All genuses, boundary lengths and the incidence formula
+agreed. NetworkX's independent graph planarity checker
+confirmed the genus-zero selected graphs planar and
+the handled selected graphs nonplanar at positive-genus stages.
+**Positive genus** means `3V-E<6`, so these PARTICULAR
+handled finite graphs fail even the necessary whole-graph
+condition for `(3,6)` sparsity. This does NOT contradict
+Power's existence theorem: he uses appropriate other
+triangulations of the same infinite surfaces.
+
+For the selected genus-zero graphs, an additional
+CLASSICAL graph theorem does strengthen the positive
+mathematical result: they are planar graphs (they embed
+in a genus-zero surface) and so *every* simple
+`n≥3` vertex subgraph has `E'≤3n-6`. Combined
+with `3V-E=6`, each selected genus-zero finite stage
+is mathematically `(3,6)`-tight. It is important not
+to claim this from `3V-E=6` **alone**, or that
+therefore an entire selected noncompact infinite
+triangulation automatically satisfies Power's special
+exhaustion-by-finite-tight-subgraphs property without
+checking the actual relevant inclusions.
+
+The Python source keeps `36_tight_certified = false`
+to distinguish the script's directly checked global
+numbers from the PLANAR GRAPH THEOREM. A full
+formal owner should connect the finite native
+surface genus-zero planar-embedding theorem to
+the `(3,6)` subgraph inequality in the same
+graph carrier, and separately establish a
+Power-style locally finite direct-limit exhaustion.
+
+This newer constructive result is a **stronger donor
+for a future locally finite infinite triangulation**,
+NOT an importable Agda/Lean proof at present.
+The source atlas now records 13 distinct
+original/implementation records, including Power
+once. The regression suite adds three source-specific
+tests, with exact-head execution still pending.
