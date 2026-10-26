@@ -962,3 +962,27 @@ same25PcCannotDetermineInstrument :
   INF.FactorsThrough taxRateLabel taxPolicyMeaning → ⊥
 same25PcCannotDetermineInstrument =
   INF.witnessRulesOutEveryFlatFactorisation sameRateDifferentTaxInstrument
+
+
+-- Same displayed percentage can describe unlike policy denominators:
+-- production reserved for a market vs sale value taxed on LNG exports.
+australianGovernmentGasReservation2025 : Typed.SourceReceipt
+australianGovernmentGasReservation2025 = Typed.sourceReceipt
+  "Chris Bowen; Madeline King; Tim Ayres, joint Australian Government original"
+  "Affordable gas for Australian homes and businesses"
+  "2025-12-22"
+  "https://minister.dcceew.gov.au/bowen/media-releases/joint-media-release-affordable-gas-australian-homes-and-businesses"
+  "15-25 percent of gas production to be reserved for domestic consumers pending consultation, rather than a 25 percent export sales value tax. A proposal at that date, not independently confirmed implementation."
+
+gasReservationIsNot25PcExportLevy : Typed.TypedGenealogyEdge
+gasReservationIsNot25PcExportLevy = Typed.typedGenealogyEdge
+  "RC-08" "Australian Government 2025 reservation of domestic production" "ACTU 2026 export revenue levy replacing PRRT"
+  Typed.parallelEconomicArgument Typed.primary
+  (australianGovernmentGasReservation2025 ∷ actu2026OriginalReplacementProposal ∷ [])
+  "Both use percentage terms, but one denominator is production volume reserved, while the other is exported LNG revenue taxed. No shared policy object is established by equal numerical percentages."
+
+reservationAndExportTaxAreNotHistoricalMethodTransfer :
+  Typed.StrongHistoricalTransfer gasReservationIsNot25PcExportLevy → ⊥
+reservationAndExportTaxAreNotHistoricalMethodTransfer witness =
+  Typed.economicArgumentSimilarityIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
