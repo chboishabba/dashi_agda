@@ -177,3 +177,70 @@ noncommuting controls and independent flatness audit.
 NEXT FORMAL GEOMETRIC DEPENDENCY: encode the supported
 infinite horn maps and relative collar/sliding
 homeomorphisms in the native topology development.
+
+
+## 2026-10-27 Pickover 9999! / e^i and perfect holonomy cross-cut
+
+**Existing proof-owner first:** the real source group with the selected
+horn relations is already treated by
+`DASHI/Mathematics/Topology/AlexanderHornedAbelianHolonomyBIDIExact.agda`.
+It proves that all compatible homomorphisms to abelian groups kill
+meridians, and are trivial provided the meridians generate.
+No new abelianisation/group theory is introduced here.
+The geometric same-object identification `π₁(E)≅G_A*G_A*G_A`
+remains conditional on the originally documented relative collars.
+
+**Cross-PR analytic source:** [DASHI Pickover #1260](https://github.com/chboishabba/dashi_agda/pull/1260)
+already uses Machin's rational π windows and Taylor-certified
+complex powers of the unit circle base `z=exp(i)`.
+Its `sin(99^(9999!))` signed-phase consumer remains UNSOLVED.
+The separate finite image `99^(9999!)≡4950 (mod 9999)`
+is an idempotent endomorphism of the selected `μ9999` roots
+of unity. It does NOT determine `exp(i99^(9999!))`,
+nor its sine sign.
+
+**New exact nonabelian finite test:**
+`scripts/alexander_horned_c3_pickover_scalar_phase_boundary.py`
+DIRECTLY imports the EXISTING
+`alexander_horned_c3_finite_SU2_gauge_simulator.build`.
+Its 120 commutator sections exhibit `[2I,2I]=2I`,
+so no nontrivial abelian character of `2I` exists.
+The selected q still satisfies `q³=-I₂`, with halftrace -1.
+Euler gives `exp(iπ)=-1`, but this equality of scalar
+trace values does **not** equate the scalar Pickover analytic
+phase with nonabelian SU2 holonomy.
+
+Further separation: the EXTERNAL order-three orbifold sector
+can carry one-dimensional `μ3` characters even though
+the source perfect horned group cannot. For the selected
+three-2D-channel cyclic permutation, there are exactly TWO
+3-cycles of basis elements and hence determinant +1.
+This is not a physical phase calibration or source
+meridian winding count.
+
+**Rigorous real-angle non-torsion:** for every positive integer N,
+Lindemann (1882) implies `exp(iN)` transcendental because
+`iN` is nonzero algebraic; consequently it is not in
+`μ9999`, `μ3`, `{±1}` or any root-of-unity group.
+The weaker no-torsion claim also follows from π irrationality
+using the classical `exp(i mN)=1` periodicity condition.
+Contrast `exp(iπ)=-1`: the exponent iπ is
+transcendental, so there is no contradiction.
+
+**Verification and attribution:** the new finite script was
+executed locally using a source-equivalent transcription
+of the original 2I builder and passed exact commutator,
+q³, CRT and determinant assertions. Its committed source
+and workflow target are checked separately; no hardware,
+infinite embedding or Agda/Lean kernel receipt claimed.
+Mathematical roots Alexander/Hatcher, Hamilton/Klein,
+Euler/de Moivre, Machin, Lindemann/Weierstrass, and
+original upstream library implementers remain distinct
+from DASHI's selected coordinates, proof consumers and tests.
+The exact earliest primary-artifact origin of the particular
+Pickover problem is not independently verified by this cut.
+
+**No spurious bridge:** a finite torsion projector, a
+nonabelian Wilson trace, a scalar U1 character and the
+analytic Pickover `exp(iN)` cannot be interchanged just
+because they share terms `π`, `i`, `C3`, or `-1`.
