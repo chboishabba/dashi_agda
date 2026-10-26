@@ -1,0 +1,36 @@
+name: DA51
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/DA51/**'
+      - 'DASHI/HME/Trace.agda'
+      - 'fixtures/da51_v1.json'
+      - '.github/workflows/da51.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify shared fixture bytes
+        run: echo '3a2f191afd465b52ba1db7774c0cf3d02d1ee4f099ea62cd33802ab52293cd75  fixtures/da51_v1.json' | sha256sum --check -
+      - name: Install Agda and standard library
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y agda agda-stdlib
+      - name: Check DA51 core
+        run: agda -i . -i /usr/share/agda-stdlib DASHI/DA51/Core.agda
+      - name: Check DA51 provenance
+        run: agda -i . -i /usr/share/agda-stdlib DASHI/DA51/Provenance.agda
+      - name: Check DA51 atlas codec and fixtures
+        run: agda -i . -i /usr/share/agda-stdlib DASHI/DA51/Fixtures.agda
+      - name: Check typed HME boundary
+        run: agda -i . -i /usr/share/agda-stdlib DASHI/HME/Trace.agda
