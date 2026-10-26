@@ -168,6 +168,9 @@ def test_declared_origin_counts_do_not_multiply_ftc_pleadings():
     assert roots("C_NAME_COLLISION") == {"dea_ocdetf_2015", "hsi_ipr_2011"}
     assert roots("C_UNIFIED_H3") == set()
     assert "NOT independent datasets" in w["source_root_independence_ceiling"]
+    assert w["original_root_count"] == 9
+    assert w["unattributed_future_source_placeholders"] == 1
+    assert w["original_root_count"] + w["unattributed_future_source_placeholders"] == len(w["sources"])
 
 
 def test_new_original_object_selectively_reopens_only_affected_consumers():
@@ -207,3 +210,19 @@ def test_exact_original_evidence_targets_and_claims_have_distinct_pareto_dimensi
                         consumers[a["id"]] >= consumers[b["id"]])
             assert not (set(b["targets"]) >= set(a["targets"]) and
                         consumers[b["id"]] >= consumers[a["id"]])
+
+
+def test_root_relations_preserve_adversarial_sources_and_different_government_cases():
+    w = world()
+    sources = {s["id"] for s in w["sources"]}
+    relations = w["root_relations"]
+    assert len(relations) == 5
+    for edge in relations:
+        assert edge["left"] in sources and edge["right"] in sources
+        assert edge["relation"] and edge["independence"] and edge["case_ref"]
+    by_pair = {(r["left"], r["right"]): r for r in relations}
+    assert "same_2020_cid_docket" in by_pair[("ftc_2019_2020", "bannon_defence_2020")]["relation"]
+    assert "show-cause procedure not FTC allegations" in by_pair[("ftc_2019_2020", "ddc_judge_2020")]["independence"]
+    assert "no common case identity" in by_pair[("hsi_ipr_2011", "dea_ocdetf_2015")]["independence"]
+    assert "not independent raw-file audits" in by_pair[("canada_joint_2019", "ftc_2019_2020")]["independence"]
+    assert "not be substituted as bank-origin" in by_pair[("black_dechert_2021", "future_undetermined_source")]["independence"]
