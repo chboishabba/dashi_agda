@@ -45,6 +45,44 @@ conclusionDoesNotDetermineProofRoute :
 conclusionDoesNotDetermineProofRoute =
   NF.witnessRulesOutEveryFlatFactorisation proofRouteCollision
 
+-- Example 2.2 also distinguishes the diagonalisation route from a
+-- direct entrywise sum-of-squares route for symmetric matrix traces.
+-- The actual general entrywise algebra appears in companion Lean.
+data MatrixArgument : Set where
+  NLorthogonalDiagonalisation : MatrixArgument
+  LeanDirectEntries : MatrixArgument
+
+data MatrixConclusion : Set where
+  symmetricTraceSquareNonnegative : MatrixConclusion
+
+recordMatrixConclusion : MatrixArgument → MatrixConclusion
+recordMatrixConclusion NLorthogonalDiagonalisation =
+  symmetricTraceSquareNonnegative
+recordMatrixConclusion LeanDirectEntries =
+  symmetricTraceSquareNonnegative
+
+matrixArgumentIdentity : MatrixArgument → MatrixArgument
+matrixArgumentIdentity argument = argument
+
+distinctMatrixArguments :
+  NLorthogonalDiagonalisation ≡ LeanDirectEntries → ⊥
+distinctMatrixArguments ()
+
+matrixArgumentCollision :
+  NF.NonFactorabilityWitness
+    recordMatrixConclusion matrixArgumentIdentity
+matrixArgumentCollision =
+  NF.nonFactorabilityWitness
+    NLorthogonalDiagonalisation LeanDirectEntries
+    refl distinctMatrixArguments
+
+correctTraceStatementDoesNotDetermineMethod :
+  NF.FactorsThrough
+    recordMatrixConclusion matrixArgumentIdentity → ⊥
+correctTraceStatementDoesNotDetermineMethod =
+  NF.witnessRulesOutEveryFlatFactorisation
+    matrixArgumentCollision
+
 -- Example 3.1: NL Lemma 8.6 has m+4 torus derivatives;
 -- cited Lean at f9e8bc5 requires m+5 coordinate jets.
 data InverseCase : Set where
