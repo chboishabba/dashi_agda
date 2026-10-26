@@ -193,6 +193,71 @@ def historical_muts_conditional_witness():
     }
 
 
+def within_animal_fixed_effects(assignments):
+    """Synthetic animal-fixed-effect design, not historic trial observations.
+
+    Each row (animal_id, RF_field_indicator, session_period_indicator).
+    Animal baseline means are unrestricted nuisance coefficients.
+    Columns are one indicator per individual animal plus field and period.
+    Full structural rank or target contrast estimability is not proof of
+    randomisation, period washout, blinding, adequate sample size or biology.
+    """
+    if not assignments:
+        raise ValueError('nonempty animal/trial list required')
+    animals = []
+    for row in assignments:
+        if not isinstance(row, (tuple, list)) or len(row) != 3:
+            raise ValueError('expected (animal_id, field, period)')
+        animal, field, period = row
+        if type(animal) is not str or not animal or not animal.strip():
+            raise ValueError('nonempty string synthetic animal identity required')
+        if type(field) is not int or type(period) is not int:
+            raise ValueError('binary int field and period required')
+        if field not in (0, 1) or period not in (0, 1):
+            raise ValueError('binary field and period required')
+        if animal not in animals:
+            animals.append(animal)
+    matrix = [
+        [int(animal == label) for label in animals] + [field, period]
+        for animal, field, period in assignments
+    ]
+    return animals, matrix
+
+
+def within_animal_witness():
+    """Repeated between-animal groups vs crossed vs period-aliased crossover.
+
+    In a subject fixed-effect model, 100 repeated trials on same condition
+    per subject cannot identify RF effect independently of subject baseline.
+    """
+    between = [(a, int(a in ('C', 'D')), 0)
+               for a in ('A', 'B', 'C', 'D') for _ in range(20)]
+    crossed = [(a, f, p) for a in ('A', 'B', 'C', 'D')
+               for f in (0, 1) for p in (0, 1)]
+    aligned = [(a, p, p) for a in ('A', 'B', 'C', 'D')
+               for p in (0, 1)]
+    def outcome(rows):
+        animals, matrix = within_animal_fixed_effects(rows)
+        effect = [0] * len(animals) + [1, 0]
+        period = [0] * len(animals) + [0, 1]
+        return {
+            'animals': len(animals),
+            'rows': len(rows),
+            'rank': rank(matrix),
+            'field_contrast_estimable': contrast_estimable(matrix, effect),
+            'period_contrast_estimable': contrast_estimable(matrix, period),
+        }
+    return {
+        'between_animal_only': outcome(between),
+        'within_animal_crossed': outcome(crossed),
+        'within_animal_period_aliased': outcome(aligned),
+        'assumptions': 'linear animal-specific baselines and additive '
+                       'time period; no inference about historical exposure',
+        'historical_animal_data_used': False,
+        'causal_rf_effect_established': False,
+    }
+
+
 class TestFiniteConfound(unittest.TestCase):
     def test_original_baseline_confounded(self):
         self.assertEqual(rank(design([(0, 0), (0, 0), (1, 1)])), 2)
@@ -318,6 +383,37 @@ class TestFiniteConfound(unittest.TestCase):
                 muts_mode_episode_window(14, 5, 30, power)
 
 
+    def test_animal_fixed_effect_between_group_repeats_not_identifiable(self):
+        w = within_animal_witness()['between_animal_only']
+        self.assertEqual((w['animals'], w['rows'], w['rank']), (4, 80, 4))
+        self.assertFalse(w['field_contrast_estimable'])
+        self.assertFalse(w['period_contrast_estimable'])
+
+    def test_animal_fixed_effect_fully_crossed_identifiable_in_model(self):
+        w = within_animal_witness()['within_animal_crossed']
+        self.assertEqual((w['animals'], w['rows'], w['rank']), (4, 16, 6))
+        self.assertTrue(w['field_contrast_estimable'])
+        self.assertTrue(w['period_contrast_estimable'])
+
+    def test_animal_fixed_effect_period_treatment_alias(self):
+        w = within_animal_witness()['within_animal_period_aliased']
+        self.assertEqual((w['animals'], w['rows'], w['rank']), (4, 8, 5))
+        self.assertFalse(w['field_contrast_estimable'])
+        self.assertFalse(w['period_contrast_estimable'])
+
+    def test_animal_fixed_effect_invalid_identity_assignment(self):
+        for bad in ([], [('A', 0)], [('', 0, 0)],
+                    [(1, 0, 1)], [('A', True, 0)],
+                    [('A', 0, 2)], [('A', 0, 0, 2)]):
+            with self.assertRaises(ValueError):
+                within_animal_fixed_effects(bad)
+
+    def test_animal_fixed_effect_does_not_establish_causation(self):
+        w = within_animal_witness()
+        self.assertFalse(w['causal_rf_effect_established'])
+        self.assertFalse(w['historical_animal_data_used'])
+
+
 if __name__ == '__main__':
     import sys
     if sys.argv[1:] == ['--selftest']:
@@ -327,6 +423,7 @@ if __name__ == '__main__':
     if sys.argv[1:] == ['--synthetic']:
         print(json.dumps({'two_factor': synthetic_witness(),
                           'factorial': factorial_witness(),
-                          'muts_1977': historical_muts_conditional_witness()}, indent=2))
+                          'muts_1977': historical_muts_conditional_witness(),
+                          'animal_fixed_effect': within_animal_witness()}, indent=2))
     else:
         raise SystemExit('Use --selftest or --synthetic. No human/animal exposure input.')
