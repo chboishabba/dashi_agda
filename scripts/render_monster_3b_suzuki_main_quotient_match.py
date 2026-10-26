@@ -74,6 +74,17 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
     if p.get("mn3b_table") not in {"MN3B", "3^1+12.2.Suz.2"}:
         raise ValueError("unexpected MN3B table identity")
 
+    source_order = req_int(p, "six_suz_group_order")
+    source_classes = req_int(p, "six_suz_class_count")
+    if source_order != 2690072985600 or source_classes != 210:
+        raise ValueError("source-selected 6.Suz table head does not match CTblLib/ATLAS")
+    positions12 = req_pair_int(p, "six_suz_degree12_positions")
+    positions78 = req_pair_int(p, "six_suz_degree78_positions")
+    if set(positions12) & set(positions78):
+        raise ValueError("selected 12/78 source Irr positions overlap")
+    if any(i > source_classes for i in positions12+positions78):
+        raise ValueError("selected Irr position exceeds source class count")
+
     base_pos = req_int(p, "base_1458_main_position")
     extraspecial_central_pos = req_int(
         p, "base_1458_extraspecial_central_class_position"
@@ -154,6 +165,10 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         "q_kernel_outer_pos": q_kernel_outer_pos,
         "labels12": labels12,
         "labels78": labels78,
+        "source_order": source_order,
+        "source_classes": source_classes,
+        "positions12": positions12,
+        "positions78": positions78,
         "outer12": outer12,
         "outer78": outer78,
         "split12": split12,
@@ -223,6 +238,14 @@ sixSuzDegree12AtlasLabels : List String
 sixSuzDegree12AtlasLabels = {agda_pair_string(v['labels12'])}
 sixSuzDegree78AtlasLabels : List String
 sixSuzDegree78AtlasLabels = {agda_pair_string(v['labels78'])}
+source6SuzGroupOrder : Nat
+source6SuzGroupOrder = {v['source_order']}
+source6SuzClassCount : Nat
+source6SuzClassCount = {v['source_classes']}
+source6SuzDegree12IrrPositions : List Nat
+source6SuzDegree12IrrPositions = {agda_pair_nat(v['positions12'])}
+source6SuzDegree78IrrPositions : List Nat
+source6SuzDegree78IrrPositions = {agda_pair_nat(v['positions78'])}
 
 -- Chosen source 78 family is selected by full class-function restriction,
 -- main quotient descent and actual Monster occurrence, NOT by a
