@@ -191,8 +191,35 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
             or square_map[square_map[c3]] != c3):
         raise ValueError("source centre positions inconsistent with class signature")
 
+    # Preserve the exact selected character rows, indexed by this GAP
+    # table's literal classes. Metadata signatures alone can coincide under
+    # noncentral class swaps. Actual cyclotomic equality is tested downstream
+    # by the pre-existing exact all-conductor Cyc implementation.
+    def source_rows(key: str) -> list[list[dict[str, Any]]]:
+        xs = p.get(key)
+        if not isinstance(xs, list) or len(xs) != 2:
+            raise ValueError(f"{key}: exactly two selected character rows required")
+        for row in xs:
+            if not isinstance(row, list) or len(row) != source_classes:
+                raise ValueError(f"{key}: incomplete 6.Suz full-class row")
+            for cell in row:
+                if not isinstance(cell, dict):
+                    raise ValueError(f"{key}: malformed cyclotomic cell")
+                n = cell.get("conductor")
+                coeff = cell.get("coefficients")
+                if (type(n) is not int or not 1 <= n <= 4096
+                        or not isinstance(coeff, list) or len(coeff) != n
+                        or any(type(v) is not str for v in coeff)):
+                    raise ValueError(f"{key}: invalid exact cyclotomic source record")
+        return xs
+
+    selected12rows = source_rows("six_suz_selected_12_all_class_values")
+    selected78rows = source_rows("six_suz_selected_78_all_class_values")
+
     return {
         "class_orders": class_orders,
+        "selected12rows": selected12rows,
+        "selected78rows": selected78rows,
         "class_sizes": class_sizes,
         "power_map_2_zero_based": square_map,
         "base_pos": base_pos,
