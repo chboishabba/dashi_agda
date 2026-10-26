@@ -40,6 +40,7 @@ open import DASHI.Algebra.Trit using (zer; pos)
 import DASHI.Foundations.Base369PointedAppraisalFibreExact as Pointed
 import DASHI.Moonshine.Base369Pointed729NestedNinetyBidiExact as Nested
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as G
+import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
 import DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorExact as Projector
 import DASHI.Moonshine.Monster3BWilsonPublishedRestrictionReconciliationExact as Wilson
 
@@ -74,6 +75,20 @@ chosenNinePlaneIsNotTranslationInvariant :
 chosenNinePlaneIsNotTranslationInvariant invariant =
   axis2TranslationLeavesChosenNinePlane
     (invariant origin originInChosenNinePlane)
+
+-- A nontrivial Weyl commutator is present WITHIN the subgroup that
+-- fixes the rank-nine support projector: the axis0 translation leaves
+-- the chosen affine plane invariant, as do all diagonal modulations.
+-- The original central-extension owner computes these products.
+-- Thus the order-3^9 projector stabilizer cannot be identified with
+-- the ABELIAN additive group of the Eisenstein lambda^9 quotient.
+rankNineSupportStabilizerNoncommutative :
+  H.compose (H.translationGenerator G.axis0)
+            (H.modulationGenerator G.axis0)
+  ≡
+  H.compose (H.modulationGenerator G.axis0)
+            (H.translationGenerator G.axis0) → ⊥
+rankNineSupportStabilizerNoncommutative ()
 
 -- Exact cardinal-arithmetic crosswalk; only same-number, not same-action.
 pointed720Count : Pointed.noncentralAddressCount ≡ 720
