@@ -35,6 +35,32 @@ def check(source, selected, *, audit_fn, selected_validate_fn):
     pair12=sel["labels12"];pair78=sel["labels78"]
     if set(pair12)!=set(table12) or not set(pair78).issubset(table78):
         raise ValueError("source-selected pair absent from exported full-class rows")
+    # Atlas labels are descriptive, not a sufficient same-table binding.
+    # Bind each selected character to its literal source Irr position.
+    # The original CTblLib head and class numbering are source data, not
+    # independently inferred from a filename or a successful mock receipt.
+    if source.get("group_order") != sel["source_order"]:
+        raise ValueError("source group order differs between selected/exported tables")
+    if len(source.get("class_orders",[])) != sel["source_classes"]:
+        raise ValueError("source conjugacy-class count differs between the two receipts")
+    if set(sel["positions12"]) & set(sel["positions78"]):
+        raise ValueError("selected source irreducible 12/78 positions overlap")
+    for labels,positions,table in (
+        (pair12,sel["positions12"],table12),
+        (pair78,sel["positions78"],table78)):
+        if len(labels)!=len(positions):
+            raise ValueError("selected source label and Irr position length mismatch")
+        for label,position in zip(labels,positions):
+            recorded=table[label].get("source_irreducible_position_1_based")
+            if type(recorded) is not int or recorded!=position:
+                raise ValueError("selected source Irr position mismatches ATLAS label "+label)
+    all_positions=[
+       v.get("source_irreducible_position_1_based")
+       for v in (source["degree12"]+source["degree78"])
+    ]
+    if any(type(v) is not int or v<1 or v>sel["source_classes"]
+           for v in all_positions) or len(set(all_positions))!=len(all_positions):
+        raise ValueError("exported source Irr positions missing/invalid/duplicated")
     from monster_3b_suzuki_all_conductors_character_audit import Cyc
     c2=source["central_c2_zero_based"];c3=source["central_c3_zero_based"]
     p12vals=[Cyc.wire(table12[x]["values"][c3]) for x in pair12]
@@ -81,6 +107,10 @@ def check(source, selected, *, audit_fn, selected_validate_fn):
         raise ValueError("actual full Sym2 cannot have selected faithful78 centre")
     return dict(status="SOURCE_RELATIVE_CHARACTER_JOIN_PASS",
         selected_atlas_12=list(pair12),selected_atlas_78=list(pair78),
+        selected_irr_positions12=list(sel["positions12"]),
+        selected_irr_positions78=list(sel["positions78"]),
+        bound_suzuki_table_group_order=sel["source_order"],
+        bound_suzuki_table_class_count=sel["source_classes"],
         selected_78_c3_exponents=list(p78),central_C2_trace=trace,
         matching_C3_phase_pairs=matching,
         selected_full_class_direct_sym2_count=direct,
