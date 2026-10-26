@@ -30,21 +30,22 @@ record LeastNumberWitness (B : Nat → Set) : Set where
 
 -- Separate external proof owners, each independently demanded.
 record AppendixA4ProofDebt
-    (l : Nat)
+    (l k : Nat)
     (SigmaComplete : Nat → Set)
     (DPRMReduction : Nat → Set)
     (PostHierarchy : Nat → Set) : Set where
   field
+    atLeastTwoAlternations : 2 ≤ l
+    atLeastNineUnknowns : 9 ≤ k
     actualSigmaCompleteness : SigmaComplete l
     actualNineUnknownPolynomialReduction : DPRMReduction l
     actualHierarchySeparation : PostHierarchy l
 
--- The only eliminator gives what an actual owner supplied; none of
--- the above conditions is fabricated by this file.
+-- Extracts only a real supplied proof: no hard result is invented.
 extractAppendixA4Debt :
-  {l : Nat} →
+  {l k : Nat} →
   {SigmaComplete DPRMReduction PostHierarchy : Nat → Set} →
-  AppendixA4ProofDebt l SigmaComplete DPRMReduction PostHierarchy →
+  AppendixA4ProofDebt l k SigmaComplete DPRMReduction PostHierarchy →
   SigmaComplete l
 extractAppendixA4Debt witness =
   AppendixA4ProofDebt.actualSigmaCompleteness witness
