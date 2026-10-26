@@ -35,3 +35,45 @@ mass p (x ∷ xs) = Hist.historyLikelihood p x + mass p xs
 -- verified binary tree by separately proving generic finite-list
 -- distributivity and prefix recursion. No claim is made that this
 -- final commuting-square lemma is discharged yet.
+
+-- Generic finite-list sum decomposition.
+massAppend :
+  (p : Photon.BinaryPhotonLikelihood)
+  (xs ys : List Hist.History) →
+  mass p (xs ++ ys) ≡ mass p xs + mass p ys
+massAppend p [] ys = refl
+massAppend p (x ∷ xs) ys
+  rewrite massAppend p xs ys =
+  solve (Hist.historyLikelihood p x ∷ mass p xs ∷ mass p ys ∷ [])
+
+-- Common scalar factor distributes through finite enumeration.
+massPrepend :
+  (p : Photon.BinaryPhotonLikelihood)
+  (bit : Two.PhotonBit)
+  (xs : List Hist.History) →
+  mass p (prepend bit xs) ≡ Two.weight p bit * mass p xs
+massPrepend p bit [] = refl
+massPrepend p bit (x ∷ xs)
+  rewrite massPrepend p bit xs =
+  solve (Two.weight p bit ∷ Hist.historyLikelihood p x ∷ mass p xs ∷ [])
+
+-- A commuting square between actual listed histories and binary-tree
+-- recursion: both are exactly the same conditional product law.
+listedMassEqualsTree :
+  (p : Photon.BinaryPhotonLikelihood) (n : Nat) →
+  mass p (words n) ≡ Tree.treeMass p n
+listedMassEqualsTree p zero = refl
+listedMassEqualsTree p (suc n)
+  rewrite massAppend p (prepend Two.click (words n))
+                       (prepend Two.dark (words n))
+        | massPrepend p Two.click (words n)
+        | massPrepend p Two.dark (words n)
+        | listedMassEqualsTree p n = refl
+
+-- The finite sum over all 2^n histories now inherits the one-shot
+-- Bernoulli normalization of the source-owned MCG model.
+listedMassNormalized :
+  (p : Photon.BinaryPhotonLikelihood) (n : Nat) →
+  mass p (words n) ≡ 1ℚ
+listedMassNormalized p n =
+  trans (listedMassEqualsTree p n) (Tree.treeMassNormalized p n)
