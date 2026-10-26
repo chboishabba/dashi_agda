@@ -24,11 +24,11 @@ def main() -> None:
         p.read_text(encoding="utf-8")
         for p in (LAW, PREVIOUS, ROLLUP, COUNSEL, REQUEST, RESEARCH)
     ]
-    assert law.count("Source.mkNoDOISource") == 6
-    assert law.count("Source.publicAttribution") == 6
-    assert law.count("= litigation-gate") == 9
-    assert law.count("→ ⊥") == 10
-    assert law.count("false refl") == 9
+    assert law.count("Source.mkNoDOISource") == 8
+    assert law.count("Source.publicAttribution") == 8
+    assert law.count("= litigation-gate") == 11
+    assert law.count("→ ⊥") == 12
+    assert law.count("false refl") == 11
     assert rollup.count("import DASHI.Law.SensibLawWoogarooStandingTimeInterimCounselTriage20261027Exact") == 1
 
     assert "import DASHI.Law.SensibLawWoogarooEPBC95C135ADecisionFileMaxCut20261027Exact as File" in law
@@ -52,14 +52,15 @@ def main() -> None:
 
     for name in ("individualStanding", "organisationStanding", "independentAffectedInterest",
                  "section39BAlternative", "furnishingClock", "stayAfterFiling",
-                 "epbcContravention", "beforeOriginating", "undertakingRisk"):
+                 "epbcContravention", "beforeOriginating", "undertakingRisk", "qutLetterEvidenceLead", "campaignActivityLead"):
         assert name in law, name
 
     for noPromotion in ("identityNotStanding", "onlineNoticeNotFurnishing",
                         "requestNotToll", "conditionalApprovalNotAutomaticallyContravention",
                         "habitatNotBreach", "filingDoesNotAutomaticallyStay",
                         "publicInterestNotCostsExemption", "politicsNotGround",
-                        "registryNotLegalCounsel", "sourceCodeNotCourtFinding"):
+                        "registryNotLegalCounsel", "sourceCodeNotCourtFinding",
+                        "addressedLetterNotProvenReceipt", "campaignAppealNotLitigation"):
         assert noPromotion in law, noPromotion
 
     # Actual deadlines, eligibility, completed acts and direct payments stay unpaid.
@@ -70,12 +71,16 @@ def main() -> None:
     assert "draft, not sent" in request and "does NOT apply for judicial review" in request
     assert "judicial review and" in memo.lower() or "federal judicial review" in memo.lower()
     assert "no confirmed original signed" in memo.lower()
+    assert "12 March 2026" in memo
+    assert "Monica Taylor" in memo and "Rowena Maguire" in memo and "Bridget Lewis" in memo
+    assert "2020/8651" in memo and "2019/8575" in memo
+    assert "addressedLetterNotProvenReceipt" in law and "campaignAppealNotLitigation" in law
     assert "Source.mkNoDOISource" not in memo
 
     for topic in TOPICS:
         assert topic in memo, "missing coverage: " + topic
 
-    print("PASS: six original-source roots, nine unpaid counsel gates, ten anti-promotion guards and sixteen topic coverage cells")
+    print("PASS: eight original-source roots, eleven unpaid counsel gates, twelve anti-promotion guards and sixteen topic coverage cells")
 
 
 if __name__ == "__main__":
