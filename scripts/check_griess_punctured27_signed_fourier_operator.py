@@ -54,6 +54,21 @@ proj=s.Matrix(13,13,lambda i,j:int(R[i]==C(word(R[j]))))
 assert proj**13==s.eye(13)
 assert s.trace(P*(proj.T*P*proj))==10
 assert sum(q*q for q in (proj.T*P*proj-P))==76
+# Source Griess order13 action COMMUTES with antipodal negation, so
+# BOTH 13D parity submodules are rational regular C13 representations;
+# nevertheless neither spatial adjacency block commutes with the action.
+C=H.T*perm*H/2
+assert C[:13,13:]==s.zeros(13) and C[13:,:13]==s.zeros(13)
+Cp=C[:13,:13];Cm=C[13:,13:]
+assert Cp**13==Cm**13==s.eye(13)
+assert all(s.trace(Cp**k)==s.trace(Cm**k)==0 for k in range(1,13))
+assert set(Cp)=={0,1} and set(Cm)=={0,1,-1}
+norm2=lambda M:sum(v*v for v in M)
+assert norm2(Cp.T*P*Cp-P)==76
+assert norm2(Cm.T*M*Cm-M)==116
+assert norm2(perm.T*A*perm-A)==192==76+116
+print('PASS source C13: both parity 13D blocks are regular Q[C13] representations')
+print('PASS noncommuting spatial adjacency, Frobenius² by parity 76+116=192')
 print('PASS actual 26x26 spatial adjacency A H=H diag(even13,odd13), H.T H=2I')
 print('PASS actual 7x6 blocks Bplus.T Bplus=2I+2J; signed Gram square=8 Gram, trace=24')
 print('PASS charpolys:',cp,';',cm,';',ca)
