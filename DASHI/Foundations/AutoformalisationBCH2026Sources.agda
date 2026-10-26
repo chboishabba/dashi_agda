@@ -8,6 +8,7 @@ module DASHI.Foundations.AutoformalisationBCH2026Sources where
 open import Agda.Builtin.List using ([]; _∷_)
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
+import DASHI.Core.FirstImplementationTimestampExact as Chronology
 
 bchOriginal2026 : Source.AttributedSource
 bchOriginal2026 = Source.mkDOISource
@@ -57,3 +58,42 @@ historicalCodeSnowball :
   Snowball.SourceRoleSnowballReceipt openaiHistoricalCode2026
 historicalCodeSnowball =
   Snowball.canonicalSourceRoleSnowballReceipt openaiHistoricalCode2026
+
+
+-- Original BCH article precedence is 2026-10-06. These code receipts
+-- record GitHub's first source commits for the DASHI reconstruction.
+-- They are NOT first paper priority, not Lean/Agda kernel success,
+-- and not evidence of source-to-NL equivalence.
+
+leanExamplesFirstSourceCommit : Chronology.FirstImplementationReceipt
+leanExamplesFirstSourceCommit =
+  Chronology.first-implementation-receipt
+    "RequestProject.Autoformalisation.LostInTranslationExamples"
+    "ced014584754c53883f7650fda2c00ce6cb06f65"
+    "2026-10-26T15:01:57Z"
+    "2026-10-27T01:01:57+10:00"
+    "Australia/Brisbane"
+    Chronology.theoremStatementImplemented
+    Chronology.sourceCommittedOnly
+
+leanSCIInterfaceFirstSourceCommit : Chronology.FirstImplementationReceipt
+leanSCIInterfaceFirstSourceCommit =
+  Chronology.first-implementation-receipt
+    "RequestProject.Autoformalisation.LostInTranslationSCI"
+    "00f57929ab3790ecad02496ccfe87d44b823cfb2"
+    "2026-10-26T15:03:06Z"
+    "2026-10-27T01:03:06+10:00"
+    "Australia/Brisbane"
+    Chronology.openConsumerImplemented
+    Chronology.sourceCommittedOnly
+
+agdaFiniteOwnersFirstSourceCommit : Chronology.FirstImplementationReceipt
+agdaFiniteOwnersFirstSourceCommit =
+  Chronology.first-implementation-receipt
+    "DASHI.Foundations.AutoformalisationBCH2026Exact"
+    "4a278506c7805a73e34cae1029a283d1f01f1b91"
+    "2026-10-26T15:05:55Z"
+    "2026-10-27T01:05:55+10:00"
+    "Australia/Brisbane"
+    Chronology.theoremStatementImplemented
+    Chronology.sourceCommittedOnly
