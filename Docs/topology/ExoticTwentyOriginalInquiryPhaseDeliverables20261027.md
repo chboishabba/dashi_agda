@@ -406,3 +406,60 @@ Python fixtures and abstract StarChain
 have not yet built this X or its topology.
 No Agda or Lean kernel proof receipt has
 been retrieved for these adapter modules.
+
+
+## 27 October latest Hatcher RELATIVE exterior compactness refinement
+
+The actual Alexander parent #1244 advanced again to
+`490ef60e9c0ab355f45a2a71e6a32e8e13f165c3`.
+After confirming disjoint changed paths,
+#1254 was restacked by a NONDESTRUCTIVE
+two-parent merge
+`9d39fe2be58714484dee55623adccf998244455b`.
+
+This newest original parent contains
+`HatcherOpenExhaustionCompactAbsorption.lean`
+with `compactMapAbsorbedByOpenStagesRelative`
+and `compactMapFactorsThroughNestedClosedExteriors`:
+for actual nested closed Hatcher handlebodies
+`H_n`, a compact-image map avoiding
+`⋂_n H_n` factors via some ONE open
+complement `(H_N)ᶜ`, **even though**
+`⋃_n (H_n)ᶜ` covers only the Hatcher
+EXTERIOR and emphatically NOT the
+whole ambient 3-space. This uses ORIGINAL
+Mathlib `IsCompact.elim_directed_cover`,
+with no fabricated full-ambient-space
+surjectivity assumption. Original Hatcher
+group identification and selected wild
+linked embeddings remain separate.
+
+The child now imports the owner's
+`alexander_horned_c3_relative_exterior_absorption.py`
+in its focused regression. The source
+uses rational `H_n=[-1/(n+1),1/(n+1)]`
+and compact image `[1/3,1/2]`, whose
+least witnessed escaping stage is N=3;
+it checks that the ambient origin remains
+in every H_n, and negative cases for
+noncompact domains and maps meeting
+the limiting intersection. This is a
+1D SOURCE-BOUNDED topological control,
+not a 3D Alexander embedded wild horn
+or a kernel proof of its `π₁`.
+
+**Do not conflate the two applications:**
+- Hatcher: decreasing CLOSED H_n in ambient Y,
+  increasing OPEN relative exteriors Y\H_n,
+  compact maps avoiding the source limit;
+- Richards: increasing actual COMPACT surface
+  K_n in actual X, with nested COLLAR interiors,
+  whose original pinned Mathlib
+  `CompactExhaustion X` gives cofinality.
+
+Both use original Mathlib compactness,
+but neither constructs the other actual
+geometric carrier or its fundamental group/end
+topology. Source attribution and the
+source-/carrier-specific acceptance gates
+remain distinct.
