@@ -195,3 +195,34 @@ alpha=1/(2*pi), or an efficient residual update through 99^(n*n!).
 The multiplication commuting square is exact; neither cheap signed
 computation nor original 9999! sign is claimed. Local Python fixture
 requires execution and the new Agda adapter is not kernel checked.
+
+## 2026-10-26 correction: actual recursive residual/refinement owners
+
+The PRIMARY owner is DASHI/Core/ConsumerIndexedResidualRefinementExact.agda:
+declare consumer F, test coarse O for sufficiency, exhibit an F-relevant
+collision, attach typed residual R, and show joint (O,R) adequacy.
+Its necessity theorem requires every adequate observer to distinguish
+each consumer-relevant collision. Source precedents: Blackwell 1953,
+Cousot--Cousot abstract interpretation 1977; mathematical formulation
+is DASHI's and not attributed to those sources.
+
+DASHI/Core/BidiResidualApproximationExact.agda additionally owns
+monotone hidden-state fibre refinement and constraint propagation.
+DASHI/Codec/TriadicPAdicCodec and
+Docs/TriadicPAdicCodecFormalisation.md own ternary sheets,
+support/sign masks, zero as fixed point, and prefix refinement.
+DASHI/Biology/SelfIndexingHyperfabricTetrationExact.agda owns
+retained residualAt across tower morphisms.
+DASHI/Core/IntersectionalNonFactorability.agda is a SECONDARY
+nonfactorability/no-postprocessing donor, not the original residual
+construction. Preserve Kimberle Crenshaw's conceptual source credit
+without attributing the residual mathematics to her.
+
+Pickover specialization: F = terminal orientation query on exact
+analytic e^(iN). O = C3 coarse sector. R = within-sector phase
+coordinate or a smaller separately certified sufficient witness.
+An exact (O,R) reconstruction is algebraically adequate, but still
+requires proof that R's producer is efficient for N=99^(9999!).
+The source's consumer-relative necessity theorem is stronger and
+better targeted than a generic assertion that all coarse encodings
+must lose information.
