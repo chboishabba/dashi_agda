@@ -30,6 +30,27 @@
       "author": "Emily Hanford and APM journalists",
       "role": "modern historical reporting",
       "url": "https://www.apmreports.org/episode/2026/10/22/sold-a-story-s2-e3-the-forgotten-experiment"
+    },
+    {
+      "id": "mediationDesign",
+      "author": "Not yet identified",
+      "role": "prospective mediation measurement/design source",
+      "status": "unresolved origin",
+      "note": "Placeholder source role, not a claimed publication"
+    },
+    {
+      "id": "nationalOutcomes",
+      "author": "Not yet identified",
+      "role": "policy exposure and nationwide comparable outcome source",
+      "status": "unresolved origin",
+      "note": "Placeholder source role, not a claimed dataset"
+    },
+    {
+      "id": "federalPolicy",
+      "author": "US education agencies (specific archival author TBD)",
+      "role": "original government administration",
+      "status": "unresolved origin",
+      "note": "Not attributed to the Abt evaluation team"
     }
   ],
   "evidence": [
@@ -88,7 +109,7 @@
     },
     {
       "id": "policyOriginal",
-      "root": "abt1977",
+      "root": "federalPolicy",
       "status": "notLocated",
       "kind": "contemporaneous programme decision/funding memos"
     },
@@ -97,6 +118,18 @@
       "root": "becker1982",
       "status": "notLocated",
       "kind": "five-site followup attrition comparison"
+    },
+    {
+      "id": "mediationDesignEvidence",
+      "root": "mediationDesign",
+      "status": "notLocated",
+      "kind": "temporal mediator and competence outcome identifying design"
+    },
+    {
+      "id": "nationalExposureAndOutcome",
+      "root": "nationalOutcomes",
+      "status": "notLocated",
+      "kind": "causally usable policy variation and downstream educational outcome"
     }
   ],
   "claims": [
@@ -146,7 +179,8 @@
       "scope": "potential mediation of specific measured affective outcome",
       "level": "unresolved",
       "requires": [
-        "abtExactCells"
+        "abtExactCells",
+        "mediationDesignEvidence"
       ],
       "supports": [],
       "severe_test": {
@@ -200,7 +234,8 @@
       "level": "unresolved",
       "requires": [
         "policyOriginal",
-        "abtExactCells"
+        "abtExactCells",
+        "nationalExposureAndOutcome"
       ],
       "supports": [],
       "severe_test": {
@@ -271,6 +306,30 @@
         2
       ],
       "description": "Acquire five-site cohort and attrition record"
+    },
+    {
+      "id": "acquireMediationDesign",
+      "targets": [
+        "mediationDesignEvidence"
+      ],
+      "cost": [
+        3,
+        3,
+        2
+      ],
+      "description": "Find outcome-specific causal mediation design and measures"
+    },
+    {
+      "id": "acquireNationalPolicyComparison",
+      "targets": [
+        "nationalExposureAndOutcome"
+      ],
+      "cost": [
+        3,
+        3,
+        3
+      ],
+      "description": "Find independent policy-exposure/outcome comparison and confounder records"
     }
   ]
 }
