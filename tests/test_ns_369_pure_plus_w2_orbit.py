@@ -121,3 +121,26 @@ def test_all_six_axis_permutations_include_opposite_helicity_same_369_sign_class
     assert len({sig for sig,_ in orbit})==3
     assert all({p for sig,p in orbit if sig==key}=={-1,+1}
                for key in {sig for sig,_ in orbit})
+
+def test_actual_waleffe_R92_common_amplitude_for_369_high_high_triads():
+    # The physical Galerkin state is a real, fully projected Waleffe +++
+    # triad. In this particular phase, middle leg q gains energy,
+    # both outer legs p,k lose energy. This is a concrete finite
+    # 369 sign/profile candidate; it is NOT the separate K_N(A) Gram.
+    u=field(0);F=projected_NS(u)
+    def modal_pair_transfer(m):
+        return S.simplify(S.expand_complex(
+            4*S.re((S.conjugate(u[m]).T*F[m])[0])))
+    amplitude=(5-S.sqrt(5)+S.sqrt(30))/10
+    actual=[modal_pair_transfer(m) for m in (P,Q,K)]
+    predicted=[(S.sqrt(5)-S.sqrt(6))*amplitude,
+               (S.sqrt(6)-1)*amplitude,
+               (1-S.sqrt(5))*amplitude]
+    assert all(S.simplify(x-y)==0 for x,y in zip(actual,predicted))
+    assert S.simplify(sum(actual))==0
+    assert S.simplify(actual[0]+S.sqrt(5)*actual[1]+S.sqrt(6)*actual[2])==0
+    assert S.N(actual[0])<0 and S.N(actual[1])>0 and S.N(actual[2])<0
+    # Source dyadic weights (1,2,2): Pcrit=Tp+2Tq+2Tk=-Tp>0.
+    critical=S.simplify(actual[0]+2*actual[1]+2*actual[2])
+    assert S.simplify(critical+actual[0])==0
+    assert S.simplify(critical-observables(0)[2])==0
