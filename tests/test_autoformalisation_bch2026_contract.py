@@ -72,7 +72,7 @@ def test_documented_lemma_scope_and_sci_limits():
         "Example 4.3", "Theorem A.3", "Theorem A.4",
         "Nat.sInf", "nine-unknown DPRM",
         "source-first", "historical",
-        "exact-head", "source equivalence",
+        "exact-head", "correspondence",
     ):
         assert target.lower() in s.lower(), target
 
