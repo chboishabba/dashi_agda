@@ -29,7 +29,9 @@ open ScalarOps
 record ForwardOnlyTrace (A : ScalarOps) (Token Layer Draw : Set) : Set₁ where
   open ScalarOps A
   field
-    baselineTokenLoss : Token → S
+    -- Published Dust uses the MEAN PERTURBED loss at this token,
+    -- not the clean/baseline loss.
+    populationMeanPerturbedLoss : Token → S
     perturbedTokenLoss : Draw → Token → S
     populationCenteredTokenLoss : Draw → Token → S
     noise : Layer → Draw → Token → S
@@ -51,7 +53,7 @@ record ForwardOnlyTrace (A : ScalarOps) (Token Layer Draw : Set) : Set₁ where
     centeredRewardDefinition :
       (k : Draw) (t : Token) →
       populationCenteredTokenLoss k t ≡
-        add (baselineTokenLoss t) (neg (perturbedTokenLoss k t))
+        add (populationMeanPerturbedLoss t) (neg (perturbedTokenLoss k t))
     provenance : String
 open ForwardOnlyTrace
 
@@ -120,6 +122,8 @@ record AttentionCredit (A : ScalarOps) (Token Layer Draw : Set) : Set₁ where
     provenance : String
 open AttentionCredit
 
+-- Population mean is a separately supplied finite-sum contract; zero-sum
+-- centering cannot be inferred merely from the name of a function.
 -- The source permits different estimation paths for the head and for
 -- 2L residual mixing scalars; these must not be called activation Dust.
 data EstimatorPath : Set where
