@@ -360,3 +360,71 @@ bannonContinuityDoesNotCreateTechniqueReuse ()
 
 cambridgeAnalyticaDoesNotCreateEpsteinCoordination : CambridgeAnalyticaImpliesEpsteinCoordination → ⊥
 cambridgeAnalyticaDoesNotCreateEpsteinCoordination ()
+
+
+------------------------------------------------------------------------
+-- 2026-10-27: MUR 7351 / FTC CID source-identity, disposition and
+-- corroboration ceilings. See original FEC legal record, separate FTC
+-- original docket and Jose Pagliery's 2021 firsthand reporting.
+-- Source attribution: original FEC commissioners, FTC agency/counsel,
+-- district judge and reporter separately; Johl Brown directs analytic
+-- boundary, OpenAI ChatGPT assists reconstruction.
+------------------------------------------------------------------------
+
+data BannonCAMatter : Set where
+  fecMUR7351ForeignNationalContributions : BannonCAMatter
+  ftcCID20mc00111CooperProcedure : BannonCAMatter
+  ftcCAMatter9389CompanyMerits : BannonCAMatter
+
+data UnavailableMatterIdentity : Set where
+
+fecClosureCannotCloseFTCBannonCID :
+  fecMUR7351ForeignNationalContributions ≡ ftcCID20mc00111CooperProcedure →
+  UnavailableMatterIdentity
+fecClosureCannotCloseFTCBannonCID ()
+
+ftcCACorporateOrderIsNotBannonCIDDisposition :
+  ftcCAMatter9389CompanyMerits ≡ ftcCID20mc00111CooperProcedure →
+  UnavailableMatterIdentity
+ftcCACorporateOrderIsNotBannonCIDDisposition ()
+
+data OriginalProceedingSourceRole : Set where
+  federalElectionCommissionCaseRecord : OriginalProceedingSourceRole
+  federalTradeCommissionCaseRecord : OriginalProceedingSourceRole
+  contemporaneousOriginalReporter : OriginalProceedingSourceRole
+
+record BannonCASeparateLegalReceipt : Set where
+  constructor bannon-ca-legal-receipt
+  field
+    producerRole : OriginalProceedingSourceRole
+    sourceName : String
+    originalLocator : String
+    evidentialCeiling : String
+    sourceShowsFileClosed : Bool
+    signedFTCCIDFinalOrderInspected : Bool
+    provesBannonPersonalPrivacyWrongdoing : Bool
+open BannonCASeparateLegalReceipt public
+
+fecMUR7351OriginalClosureReceipt : BannonCASeparateLegalReceipt
+fecMUR7351OriginalClosureReceipt = bannon-ca-legal-receipt
+  federalElectionCommissionCaseRecord
+  "US Federal Election Commission MUR #7351 original disposition, Cambridge Analytica LLC and separately listed respondents including Stephen K. Bannon"
+  "https://www.fec.gov/data/legal/matter-under-review/7351/"
+  "Official FEC HTML reports 5-0 vote to CLOSE FEC file; Bannon listed Dismissed-Other. Earlier reason-to-believe votes regarding some named respondents are preliminary and NOT an adjudication. 7350/7351 shared FEC acts are not independent investigations; closure is NOT the distinct FTC CID judicial disposition."
+  true false false
+
+ftcBannonDocketOriginalPublicIndexReceipt : BannonCASeparateLegalReceipt
+ftcBannonDocketOriginalPublicIndexReceipt = bannon-ca-legal-receipt
+  federalTradeCommissionCaseRecord
+  "Federal Trade Commission v Stephen K Bannon, District of Columbia 1:20-mc-00111-CRC; FTC publisher original case chronology"
+  "https://www.ftc.gov/legal-library/browse/cases-proceedings/bannon-stephen-k"
+  "FTC public index lists original petition, respondent defence, judge's show-cause order, agency reply to 18 Dec 2020. Original signed Jan 2021 petition-grant/order and compliance/closure NOT inspected here."
+  false false false
+
+paglieryJan2021CourtRulingReporting : BannonCASeparateLegalReceipt
+paglieryJan2021CourtRulingReporting = bannon-ca-legal-receipt
+  contemporaneousOriginalReporter
+  "Jose Pagliery, The Daily Beast, October 2021 originally reported judicial grant of the FTC CID petition"
+  "https://www.thedailybeast.com/jan-6-committee-plans-to-hold-steve-bannon-in-criminal-contempt"
+  "Contemporaneous reporter asserts Judge Christopher Cooper granted petition in January 2021; this is NOT signed court-order authentication or verification that compelled testimony occurred. Distinct from Jan 6 congressional subpoena and federal border-wall pardon."
+  false false false
