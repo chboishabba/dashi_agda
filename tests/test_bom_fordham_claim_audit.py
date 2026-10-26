@@ -1127,7 +1127,7 @@ def test_adl_client_return_unit_and_resource_rent_denominators():
     assert rows["G28"]["evidence_objects"] == rows["G29"]["evidence_objects"] == "ADL_2026_ORIGINAL"
     assert "percentage points of IRR" in rows["G28"]["numerical_or_rhetorical_payload"]
     assert "percent on average" in rows["G29"]["numerical_or_rhetorical_payload"]
-    assert "different quantities" in rows["G28"]["nonpromotion_boundary"]
+    assert "not the same as" in rows["G28"]["nonpromotion_boundary"]
     assert "not to increase domestic supply overall" in rows["G30"]["numerical_or_rhetorical_payload"]
     assert "not an observed increase" in rows["G30"]["nonpromotion_boundary"]
     assert "6.9 percent resource rent only" in rows["G31"]["numerical_or_rhetorical_payload"]
