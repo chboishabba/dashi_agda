@@ -25,6 +25,7 @@ on:
       - 'scripts/check_pickover_actual_certificate_precision_pareto.py'
       - 'scripts/check_pickover_bt_tree_refinement.py'
       - 'scripts/check_pickover_fast_sine_complex_power.py'
+      - 'scripts/check_pickover_bit_shift_cocycle_ladder.py'
       - '.github/workflows/pickover-eisenstein9-crt-finite.yml'
   workflow_dispatch:
 
@@ -75,6 +76,8 @@ jobs:
         run: python3 scripts/check_pickover_bt_tree_refinement.py
       - name: Verify fixed point fast sine complex-power certificate
         run: python3 scripts/check_pickover_fast_sine_complex_power.py
+      - name: Audit exact bit-shift cocycle and exponent bit cost
+        run: python3 scripts/check_pickover_bit_shift_cocycle_ladder.py
   finite-agda-source:
     runs-on: ubuntu-latest
     timeout-minutes: 30
