@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+from math import gcd
 from pathlib import Path
 from typing import Any
 
@@ -158,7 +159,41 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
     if selected_faithful and source_trace != -90:
         raise ValueError("faithful degree78 cannot have positive C2 involution")
 
+    # SAME-TABLE coordinates are not certified by a name, order, class
+    # count, two centre positions and two Irr positions alone. Retain the
+    # entire source-ordered conjugacy-class signature for the independent
+    # all-conductor exporter to compare bytewise as integer arrays.
+    def class_vector(key: str, *, zero_ok: bool = False) -> list[int]:
+        xs = p.get(key)
+        if (not isinstance(xs, list) or len(xs) != source_classes
+                or any(type(x) is not int or x < (0 if zero_ok else 1) for x in xs)):
+            raise ValueError(f"{key}: complete typed {source_classes}-class vector required")
+        return xs
+
+    class_orders = class_vector("six_suz_class_orders")
+    class_sizes = class_vector("six_suz_class_sizes")
+    square_map = class_vector("six_suz_power_map_2_zero_based", zero_ok=True)
+    if (class_orders[0] != 1 or class_sizes[0] != 1
+            or sum(class_sizes) != source_order or square_map[0] != 0):
+        raise ValueError("source 6.Suz class identity/order/size/square-map inconsistency")
+    if any(k >= source_classes for k in square_map):
+        raise ValueError("source 6.Suz square map index outside table")
+    for i, j in enumerate(square_map):
+        if class_orders[j] != class_orders[i] // gcd(class_orders[i], 2):
+            raise ValueError(f"source 6.Suz second-power map inconsistent at class {i+1}")
+    c2 = central2_pos - 1
+    c3 = central3_pos - 1
+    if (c2 >= source_classes or c3 >= source_classes
+            or class_orders[c2] != 2 or class_sizes[c2] != 1
+            or square_map[c2] != 0 or class_orders[c3] != 3
+            or class_sizes[c3] != 1 or square_map[c3] == c3
+            or square_map[square_map[c3]] != c3):
+        raise ValueError("source centre positions inconsistent with class signature")
+
     return {
+        "class_orders": class_orders,
+        "class_sizes": class_sizes,
+        "power_map_2_zero_based": square_map,
         "base_pos": base_pos,
         "extraspecial_central_pos": extraspecial_central_pos,
         "q_kernel_pos": q_kernel_pos,
