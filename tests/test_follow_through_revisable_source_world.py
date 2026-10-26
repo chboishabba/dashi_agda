@@ -18,7 +18,7 @@ class RevisableSourceWorldTests(unittest.TestCase):
 
     def test_missing_does_not_mean_false(self):
         q=mod.report(WORLD)
-        self.assertFalse(q["claims"]["rankRobust"]["reproducible_now"])
+        self.assertFalse(q["claims"]["rankRobust"]["prerequisites_located"])
         self.assertEqual(set(q["claims"]["rankRobust"]["unpaid"]),
                          {"abtExactCells","houseMatchedChanges","stpierreTwoSpecs"})
 
@@ -29,7 +29,7 @@ class RevisableSourceWorldTests(unittest.TestCase):
                 e.update(status="present",locator="TEST SYNTHETIC")
         q=mod.report(w)
         self.assertEqual(q["claims"]["rankRobust"]["level"],"unresolved")
-        self.assertTrue(q["claims"]["rankRobust"]["reproducible_now"])
+        self.assertTrue(q["claims"]["rankRobust"]["prerequisites_located"])
 
     def test_known_absence_scoped(self):
         w=deepcopy(WORLD)
@@ -54,6 +54,19 @@ class RevisableSourceWorldTests(unittest.TestCase):
         before=json.dumps(WORLD,sort_keys=True)
         mod.report(WORLD)
         self.assertEqual(json.dumps(WORLD,sort_keys=True),before)
+
+    def test_causal_evidence_not_paid_by_abt_tables_only(self):
+        w=deepcopy(WORLD)
+        for e in w["evidence"]:
+            if e["id"] in {"abtExactCells","policyOriginal"}:
+                e.update(status="present",locator="SYNTHETIC TEST ONLY")
+        q=mod.report(w)
+        self.assertIn("mediationDesignEvidence",q["claims"]["affectiveMediation"]["unpaid"])
+        self.assertIn("nationalExposureAndOutcome",q["claims"]["nationalDecline"]["unpaid"])
+        self.assertNotIn("reproducible_now",q["claims"]["reportedDIRank"])
+
+    def test_original_policy_root_not_abt(self):
+        self.assertEqual(next(x for x in WORLD["evidence"] if x["id"]=="policyOriginal")["root"],"federalPolicy")
 
     def test_invalid_action_refused(self):
         w=deepcopy(WORLD);w["actions"][0]["targets"].append("fictional")
