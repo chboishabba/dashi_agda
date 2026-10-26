@@ -107,11 +107,46 @@ def check_global_finite_quotient(depth=9):
     # represent all real-circle phases through depth d.
     print('PASS',2**depth,'distinct reachable signed itineraries; all-phase finite quotient no-go')
 
+
+def first_noncentral_certificate(x,maxdepth=80):
+    """First trit not equal to the central 1 decides the half-circle sign.
+    Zero phase must be checked separately; 1/2 is 0.111... base 3.
+    """
+    r=circle(x)
+    if r==0:return 0,0
+    for depth in range(1,maxdepth+1):
+        y=3*r
+        digit=y.numerator//y.denominator
+        assert 0<=digit<=2
+        r=y-digit
+        if digit!=1:
+            return (1 if digit==0 else -1),depth
+    return None,maxdepth
+
+def check_first_noncentral():
+    for denominator in range(2,250):
+        for numerator in range(1,denominator):
+            x=Fraction(numerator,denominator)
+            s,depth=first_noncentral_certificate(x)
+            if x==Fraction(1,2):
+                assert s is None
+            else:
+                assert s==sine_sign(x)
+    for depth in range(1,13):
+        centre=(3**depth-1)//2
+        for r in (Fraction(1,7),Fraction(6,7)):
+            x=assemble(centre,r,depth)
+            s,k=first_noncentral_certificate(x)
+            assert s==sine_sign(x)
+            assert k>depth
+    print('PASS first noncentral ternary digit gives exact signed-phase certificate')
+
 def main():
     check_grid_cube()
     check_central_branch()
     check_germs()
     check_global_finite_quotient()
+    check_first_noncentral()
     print('OPEN source-specific alpha=1/(2*pi) signed cocycle, cheap factorial jump, final sine sign')
 
 if __name__=='__main__':main()
