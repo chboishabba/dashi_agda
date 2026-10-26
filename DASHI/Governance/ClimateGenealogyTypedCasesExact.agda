@@ -1754,3 +1754,60 @@ oneCoolingMagazineArticleCannotDetermineScientificConsensus :
 oneCoolingMagazineArticleCannotDetermineScientificConsensus =
   INF.witnessRulesOutEveryFlatFactorisation
     sameNewsweekArticleDifferentScientificField
+
+
+------------------------------------------------------------------------
+-- PERSON-SPECIFIC historical continuity, WITHOUT funding or script leap:
+-- Seitz's first-person PBS testimony links RJR tobacco and the Marshall
+-- Institute (pre-existing source seitzPBS); OISM's publisher first-party
+-- 1998 cover identifies Seitz as petition covering-letter author.
+-- Same person, DISTINCT roles and decades. Cannot infer RJR tobacco
+-- payment FINANCED OISM petition or its content.
+--
+-- Archive credits Sallie Baliunas among WFA 1998 film-family contributors;
+-- 1998 OISM original manuscript lists her as author. This is a positive
+-- person overlap in two original-document families, NOT paid WFA→OISM
+-- publication or script transfer.
+------------------------------------------------------------------------
+
+globalOISMOriginalManuscript1998 : Typed.SourceReceipt
+globalOISMOriginalManuscript1998 = Typed.sourceReceipt
+  "Arthur B Robinson; Sallie L Baliunas; Willie Soon; Zachary W Robinson"
+  "Environmental Effects of Increased Atmospheric Carbon Dioxide, circulated manuscript"
+  "1998-01"
+  "https://ossfoundation.org/wp-content/uploads/2023/01/Oregon_Petition-reduced.pdf"
+  "Scanned January 1998 original manuscript carries named authors. Third-party archive copy, not National Academy publication and not evidence later 1999 journal version is byte-identical."
+
+globalWFA1998NamedFilmContributorsIndex : Typed.SourceReceipt
+globalWFA1998NamedFilmContributorsIndex = Typed.sourceReceipt
+  "Greening Earth Society; Western Fuels Association; Climate Files archive"
+  "The Greening of Planet Earth Continues and affiliated promotional media"
+  "1998"
+  "https://www.climatefiles.com/trade-group/1998-greening-earth-society/"
+  "Archive's 1998 promotional package identifies Sallie Baliunas as a named featured speaker in the films. Film credit original not independently rewatched; source grading corroborated."
+
+globalSeitzPBSRoleToOISMPetition : Typed.TypedGenealogyEdge
+globalSeitzPBSRoleToOISMPetition = Typed.typedGenealogyEdge
+  "GC-05" "Frederick Seitz RJR and Marshall first-person roles" "Frederick Seitz signed OISM Kyoto petition covering letter"
+  Typed.personnelContinuity Typed.primary
+  (seitzPBS ∷ globalOISM1998PetitionPrimary ∷ [])
+  "Positive identity of historical actor in tobacco-funded research committee and later named original petition letter. Does NOT establish RJR transmitted money, methods or orders to OISM nor that NAS endorsed petition."
+
+globalBaliunasTwoDocumentFamilies : Typed.TypedGenealogyEdge
+globalBaliunasTwoDocumentFamilies = Typed.typedGenealogyEdge
+  "GC-06" "Sallie Baliunas named in WFA-linked 1998 greening film campaign" "Sallie L Baliunas named original OISM 1998 CO2 manuscript author"
+  Typed.personnelContinuity Typed.corroborated
+  (globalWFA1998NamedFilmContributorsIndex ∷ globalOISMOriginalManuscript1998 ∷ [])
+  "Archived film-family personnel and original manuscript authorship document shared person, not identical science, paid WFA-OISM commission or editorial direction."
+
+globalSeitzContinuityNotPaidOISMScript :
+  Typed.StrongHistoricalTransfer globalSeitzPBSRoleToOISMPetition → ⊥
+globalSeitzContinuityNotPaidOISMScript witness =
+  Typed.personnelContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+globalBaliunasContinuityNotWFAtoOISMCommission :
+  Typed.StrongHistoricalTransfer globalBaliunasTwoDocumentFamilies → ⊥
+globalBaliunasContinuityNotWFAtoOISMCommission witness =
+  Typed.personnelContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
