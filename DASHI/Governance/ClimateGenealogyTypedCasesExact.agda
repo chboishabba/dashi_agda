@@ -908,3 +908,57 @@ annual17BHeadlineCannotRevealModelAncestry :
 annual17BHeadlineCannotRevealModelAncestry =
   INF.witnessRulesOutEveryFlatFactorisation
     sameHeadlineDistinctGenealogies
+
+
+------------------------------------------------------------------------
+-- 2026 gas-tax proposal falsifier: a headline '25 percent' cannot determine
+-- whether PRRT is REPLACED or a levy is ADDED to existing fiscal taxes.
+-- These are actually distinct specifications in dated ACTU / AEP sources.
+------------------------------------------------------------------------
+
+actu2026OriginalReplacementProposal : Typed.SourceReceipt
+actu2026OriginalReplacementProposal = Typed.sourceReceipt
+  "ACTU / Michele O'Neil, original trade-union 17 March 2026 release"
+  "Windfall profits to oil and gas multinationals should benefit working Australians"
+  "2026-03-17"
+  "https://www.actu.org.au/wp-content/uploads/2026/03/Windfall-profits-to-oil-and-gas-multinationals-should-benefit-working-Australians-1-1.pdf"
+  "ACTU explicitly proposes replacing PRRT with an LNG export-value levy of 25 percent; it says $17.1b is 2023-24 retrospective what-if revenue, not 2026-27 guaranteed annual forecast. Original PDF text parsed but visual screenshot service cache-missed."
+
+actuReplacementVsAEPAddOnSpecification : Typed.TypedGenealogyEdge
+actuReplacementVsAEPAddOnSpecification = Typed.typedGenealogyEdge
+  "RC-07" "ACTU 17 March 2026 25 percent levy REPLACES PRRT" "AEP Wood Mackenzie 12 April 2026 ADDITIONAL 25 percent tax model"
+  Typed.parallelEconomicArgument Typed.primary
+  (actu2026OriginalReplacementProposal ∷ aepWoodMackenzie2026 ∷ [])
+  "Both promote discussion of 25 percent export tax, but ACTU's original proposal replaces PRRT while AEP's original announcement describes an additional levy. Therefore WoodMac 83 percent model cannot be treated as matching ACTU replacement specification without an explicit counterfactual model bridge."
+
+taxSchemeSimilarityNotScriptCopy :
+  Typed.StrongHistoricalTransfer actuReplacementVsAEPAddOnSpecification → ⊥
+taxSchemeSimilarityNotScriptCopy witness =
+  Typed.economicArgumentSimilarityIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+data Same25PcTaxHeadlineWorld : Set where
+  replacesExistingPRRT stacksOnExistingPRRT : Same25PcTaxHeadlineWorld
+
+data Displayed25PcRate : Set where
+  same25PcLabel : Displayed25PcRate
+
+data EffectivePolicyInstrument : Set where
+  replacementInstrument additionalInstrument : EffectivePolicyInstrument
+
+taxRateLabel : Same25PcTaxHeadlineWorld → Displayed25PcRate
+taxRateLabel _ = same25PcLabel
+
+taxPolicyMeaning : Same25PcTaxHeadlineWorld → EffectivePolicyInstrument
+taxPolicyMeaning replacesExistingPRRT = replacementInstrument
+taxPolicyMeaning stacksOnExistingPRRT = additionalInstrument
+
+sameRateDifferentTaxInstrument : INF.NonFactorabilityWitness taxRateLabel taxPolicyMeaning
+sameRateDifferentTaxInstrument =
+  INF.nonFactorabilityWitness
+    replacesExistingPRRT stacksOnExistingPRRT refl (λ ())
+
+same25PcCannotDetermineInstrument :
+  INF.FactorsThrough taxRateLabel taxPolicyMeaning → ⊥
+same25PcCannotDetermineInstrument =
+  INF.witnessRulesOutEveryFlatFactorisation sameRateDifferentTaxInstrument
