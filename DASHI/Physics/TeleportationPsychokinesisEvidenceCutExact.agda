@@ -53,19 +53,15 @@ afrlDavis2004 = attributedClaim
 
 -- These inequalities are type-checkable non-promotion firewalls;
 -- they are NOT propositions about whether a physical effect exists.
-data _≢_ {A : Set} (a b : A) : Set where
-  -- Deliberately no constructors: use Agda equality negation below instead.
+data ⊥ : Set where
 
-False : Set
-False = Bool ≡ (Bool → Bool)
-
-notEqRole : archiveCopy ≡ independentReplication → False
+notEqRole : archiveCopy ≡ independentReplication → ⊥
 notEqRole ()
 
-notEqMechanism : quantumStateTransfer ≡ macroscopicPK → False
+notEqMechanism : quantumStateTransfer ≡ macroscopicPK → ⊥
 notEqMechanism ()
 
-notEqStatus : authorClaims ≡ independentlyReplicated → False
+notEqStatus : authorClaims ≡ independentlyReplicated → ⊥
 notEqStatus ()
 
 -- A physically discriminating experiment must declare independent
@@ -101,7 +97,7 @@ record DiscriminationWitness
       ≡
       InterventionReceipt.outcome r
         (InterventionReceipt.assign r controlLow world)
-      → False
+      → ⊥
 
 -- A conditional geometric bypass witness is not a mechanism of matter
 -- translocation: its physical implementation remains an independent input.
