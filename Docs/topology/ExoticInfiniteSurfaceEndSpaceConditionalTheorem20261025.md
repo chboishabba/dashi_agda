@@ -468,3 +468,39 @@ Trit/SSP369, Hatcher and Cantor module owners are
 unchanged. Only the independent star-stability
 consumer, its tests, and the backward-compatible
 optional map exposure are new project implementations.
+
+
+### 27 October abstract all-depth source theorem (conditional input, not colimit)
+
+`DASHI.Mathematics.Topology.ExoticSimplicialStarTransportExact.agda`
+is a new **small abstract lemma**, deliberately not another
+PL mesh/collar implementation. It records in `StarChain`
+a family of vertex/face carriers, actual transition maps,
+interior predicates and triangle incidence, with
+single-step **input obligations**:
+`oldVertexInteriorAfterCollar`, `interiorPersists`,
+`transportIncident`, and
+`noNewTriangleAtInterior`.
+
+It source-writes the genuinely **all finite future
+depths** Nat-induction theorems
+`interiorPersistsAllDepths`,
+`incidentTransportAllDepths`,
+`noNewTrianglesAllLaterDepths` and the direct
+`oldStageStarHasNoLaterNewFaces`: once an old vertex
+becomes interior in K_(n+1), ANY later triangle that
+touches its image comes from a triangle already in
+that first interior K_(n+1) stage. The proof is
+a transitive witness construction, not a Boolean
+`star_stable=true` summary.
+
+**Exact authority boundary:** every input field of
+`StarChain` is a mathematical obligation, NOT
+a hidden axiom claimed discharged on the user's
+surface. The current actual-source PL scripts give
+finite witness examples; the uniform n-family geometry
+must still instantiate this Agda record, and the
+actual geometric-realisation/direct-colimit
+topological theorem must still be proved or imported
+in a compatible kernel environment. At writing,
+no exact-head Agda compiler receipt exists.
