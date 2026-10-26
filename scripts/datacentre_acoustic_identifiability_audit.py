@@ -540,11 +540,11 @@ class TestOriginalInquiryAcceptance(_unittest.TestCase):
         self.assertEqual(r['wilcoxon_W_min_rank_sum'], '3/2')
 
     def test_scatterty_synthetic_csv_with_all_four_cells(self):
-        raw = ('Participant,Song,Infra_Present,Cortisol_Before,Cortisol_After\\n'
-               'a,Calming,On,2,5\\n'
-               'b,Unsettling,On,3,4\\n'
-               'c,Calming,Off,2,1\\n'
-               'd,Unsettling,Off,2,4\\n').encode()
+        raw = ('Participant,Song,Infra_Present,Cortisol_Before,Cortisol_After\n'
+               'a,Calming,On,2,5\n'
+               'b,Unsettling,On,3,4\n'
+               'c,Calming,Off,2,1\n'
+               'd,Unsettling,Off,2,4\n').encode()
         result = audit_scatterty_original_csv(raw)
         self.assertEqual(result['anonymized_participant_records_loaded'], 4)
         self.assertEqual(result['infrasound_on']['n'], 2)
@@ -554,11 +554,11 @@ class TestOriginalInquiryAcceptance(_unittest.TestCase):
         self.assertFalse(result['published_W192_if_whole_sample'])
 
     def test_scatterty_rejects_fabricated_input_and_duplicate_units(self):
-        raw = b'Participant,Song,Infra_Present,Cortisol_Before,Cortisol_After\\n'
-        for bad in (None, b'', raw, raw+b'a,Calming,On,0,NaN\\n',
-                    raw+b'a,Calming,On,0,-1\\n',
-                    raw+b'a,Wrong,Off,1,2\\n',
-                    raw+b'a,Calming,On,1,2\\na,Calming,On,2,3\\n'):
+        raw = b'Participant,Song,Infra_Present,Cortisol_Before,Cortisol_After\n'
+        for bad in (None, b'', raw, raw+b'a,Calming,On,0,NaN\n',
+                    raw+b'a,Calming,On,0,-1\n',
+                    raw+b'a,Wrong,Off,1,2\n',
+                    raw+b'a,Calming,On,1,2\na,Calming,On,2,3\n'):
             with self.assertRaises(ValueError):
                 audit_scatterty_original_csv(bad)
 
