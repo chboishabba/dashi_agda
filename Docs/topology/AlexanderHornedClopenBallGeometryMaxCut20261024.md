@@ -436,9 +436,12 @@ The new exact-head standalone executable
 has been independently executed, with Python `py_compile` PASS,
 511 checked binary prefixes at depths 0..8 and 1533
 sector-prefix ball checks. The exact local Git blob SHA
-`32cad631dbf679c90a8af717a618c0dd14d41363`
+`066938fabf3f0f43d2e06d645f46c1c324b94a06`
 MATCHES the repository's fetched file blob, not just a
-locally equivalent prototype. The mathematical all-depth statements
+locally equivalent prototype. The new consumer DIRECTLY IMPORTS
+and runs the pre-existing `ball` and `interval` constructors;
+the existing donor Git blob SHA `10a2a696a89c2b419bd30435f02afd90bbfb10aa`
+was also verified against the exact local source before execution. The mathematical all-depth statements
 are supported by the displayed formulas and standard topology
 theorems; finite runs do not prove the latter in Lean/Agda.
 
