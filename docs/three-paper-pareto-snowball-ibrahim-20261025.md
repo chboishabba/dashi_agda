@@ -282,3 +282,131 @@ This is the concrete Pareto decision: **reuse #1271's already
 source-audited local enstrophy owner only if a future consumer pays
 the same-source domain/limit transfer**. Until then #1255 remains
 an exact conditional A3 interface, not a global Clay completion.
+
+
+## 26 October follow-on: projected-vorticity algebra and source-translation fidelity
+
+### New mathematical owner (Lean #87)
+
+`RequestProject/NavierStokes/MillerProjectionGeometry.lean` is the
+source-written exact finite 3-vector proof carrier. Its Lagrange identity
+reads `|v×omega|²=|v|²|omega|²-(v·omega)²`.
+For a *pointwise* unit `v`,
+`|v×omega|²=|omega|²-(v·omega)²<=|omega|²`.
+The constant z-normal gives `|v×omega|²=omega_x²+omega_y²`,
+and a direction parallel to omega gives zero projection.
+These are **classical vector identities** reproduced as DASHI
+Lean statements, **not** a newly discovered 2026 physical theorem.
+
+The new finite-sample fourth-power budget says
+`0<=P_t<=E_t<=D` for every index in a finite sample set implies
+`sum_t P_t² <= (#samples) D²`. Its mathematical role is to check
+the exact exponent bookkeeping a same-source H¹/enstrophy bound
+would use on a **finite horizon**, not to identify finite sums
+with the physical `L⁴_tL²_x` quantity by fiat.
+Locally executed exact integer/rational arithmetic passed
+**15,625/15,625** six-coordinate Lagrange identities and
+**225/225** finite expenditure tests. This is **NOT** a Lean
+kernel receipt.
+
+**Why not yet A3?** Miller's published criterion requires an
+actual `v(x,t)` on a single unforced `R³` mild solution,
+bounded `∇v` through the claimed maximal-time interval and
+finite `∫ ||v×omega||_{L²_x}⁴ dt`. Pointwise domination by
+`|omega|` does **not** prove that integral finite for arbitrary
+large-data solutions, and setting `v=omega/|omega|` makes the
+cross product identically zero without proving direction
+regularity, particularly at zeros. The current R735 PR #1271
+is a separate **periodic** local/small-data source:
+any transfer to Miller's exact theorem must discharge the domain,
+time, norm and limit interfaces instead of reusing its label.
+
+### Recent source-faithfulness literature and native governance
+
+Independent published source roots, distinct authority levels:
+
+- **Evan Miller**, *A Locally Anisotropic Regularity Criterion for
+  the Navier–Stokes Equation in Terms of Vorticity*,
+  *Proc. AMS B* 8 (2021), 60–74, DOI
+  [10.1090/bproc/74](https://doi.org/10.1090/bproc/74).
+  Preprint arXiv:2002.02152 (2020) is the **same work lineage**,
+  not an additional corroborating independent theorem.
+- **Weiping Yan and Vicenţiu D. Rădulescu**, *Sobolev regular
+  solutions for the incompressible Navier–Stokes equations in higher
+  dimensions: asymptotics and representation formulae*,
+  DOI [10.1007/s12215-020-00540-3](https://doi.org/10.1007/s12215-020-00540-3),
+  online publication **2020-07-25**, print volume 2021.
+  Its steady-forced case, full equation (1.1), displayed pressure
+  equation (1.3), and Corollary 1.1 seed stay distinct objects.
+- **Jeremy Rodgers**, *Experienced Temporal Passage: Enacted
+  Scaffolding and the Organization of Succession*,
+  manuscript dated 2026-10-23, DOI
+  [10.5281/zenodo.23591626](https://doi.org/10.5281/zenodo.23591626)
+  **as printed in supplied PDF**. Its constitutive theory is a
+  proposal; exact observer collisions do not establish qualia.
+- **Alexander Bastounis, Fabian Circelli, Anders C. Hansen**,
+  *Navier-Stokes lost in translation: Why Lean verification of AI
+  autoformalisation does not guarantee correct natural language proofs*,
+  [arXiv:2610.08144](https://arxiv.org/abs/2610.08144), posted
+  **2026-10-06**. Their authors **argue** that natural-language/formal
+  correspondence fails in selected autoformalisation examples,
+  including the 2026 OpenAI Navier–Stokes example. This is an
+  independently identified *methodological challenge*, not a
+  mathematical refutation adjudicated by DASHI, and not an
+  allegation that Lean's kernel accepts false formal proofs.
+- **OpenAI**, [NavierStokesAndEuler/formalization.yaml](https://github.com/openai/NavierStokesAndEuler/blob/main/formalization.yaml)
+  distinguishes smooth **forced** Navier–Stokes and unforced Euler
+  formal targets. Repository metadata, natural-language manuscript,
+  theorem source, kernel checking and same-PDE semantics are separate.
+- **Weinan Wang**, [arXiv:2609.33033](https://arxiv.org/abs/2609.33033),
+  published as preprint **2026-09-27**: independent Lean Galerkin
+  formalisation for **2D** unforced NS weak solutions and a forcing
+  rectangle variant. Compactness/energy/theorem composition is a
+  plausible donor, but no automatic 3D continuation authority.
+
+**Repo-native reuse:** `DASHI.Core.InterpretiveFormalisationCoreExact`
+already states that a source-to-formal translation need not imply
+equivalence or empirical confirmation;
+`DASHI.Foundations.ClaimScopeCertificateExact` already proves
+that `notEstablishedHere` is not `Refutation Claim`;
+`DASHI.Core.IntersectionalNonFactorability` already proves a
+general consumer-collision obstruction. New
+`DASHI.Papers.ThreePaperConsumerFidelity20261026Exact` simply
+instantiates the *existing* generic theorem twice:
+
+1. `eraseForceDivergence` identifies divergence-free and
+   nonzero-divergence forced pressure worlds even though their
+   required corrections differ. Therefore a consumer of only
+   the displayed pressure equation cannot recover the missing
+   source condition. The physical pressure discrepancy is separately
+   demonstrated by Lean #87's polynomial derivative witness.
+2. `erasePhysicalDomain` identifies whole-space `R³` and
+   periodic `T³` estimate labels, even though physical source
+   types differ. A proof attached to the erased label alone
+   cannot establish which theorem's assumptions it satisfies.
+
+These are **finite no-go proofs against specific lossy
+projections**, not a general uncomputability result, nor an
+empirical verdict on the published papers. Original source
+authors retain credit; the finite witnesses and their application
+are DASHI extensions. The specific source-status stage
+must be tracked as `sourceCommittedOnly` until an exact-head
+Agda/Lean build succeeds.
+
+### Current Pareto/Ibrahim frontier after checking latest branches
+
+| Priority | Actual remaining payment | Acceptance/anti-vacuity guard |
+|---|---|---|
+| P0 | Exact-head `lake build NSPaperBridges` and focused Agda modules, including the new fidelity regression | kernel exit status + identical commit SHA; Python arithmetic or CodeRabbit not sufficient |
+| P0 | Semantic translation audit for each source-to-theorem edge | recorded DOI/page/theorem, hypotheses, domain, forcing, solution type, quantifiers, units, norms, endpoint/time interval and same-object correspondence |
+| P1 | Miller genuine R³ (L⁴_tL²_x) projected-vorticity estimate | field *and* direction-derivative from same physical unforced source; no BKM circularity or periodic-to-R³ substitution |
+| P1 | Yan p/q/T exponential seed to full stationary forcing/pressure PDE | exact derivative/face obligations already source-written, but remaining Sobolev, domain, `div f` compatibility, source pressure and Nash–Moser proof not silently paid |
+| P1 | Rodgers held-out delay calibration and counterfactual receiver decoding | independent delay source, no source-order oracle, uncertainty/clock synchronization, adverse uncalibrated comparison; phenomenology not claimed |
+| P2 | Independent external-source review | one root per original work, source publication chronology distinct from code-first SHA and kernel receipt, no derivative reprint vote counting |
+
+**Stop rules:** Do not add another generic fidelity ontology,
+bulk-copy #1271 or #1266, or repeat citation adjacency unless
+a live consumer demonstrates a new unrepresented source condition.
+Do not conflate **kernel trust** with **correct theorem statement**,
+and do not promote a partial finite projection identity into the
+unrestricted Millennium Prize conclusion.
