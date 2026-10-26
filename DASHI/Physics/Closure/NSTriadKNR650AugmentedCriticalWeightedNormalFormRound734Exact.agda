@@ -27,6 +27,22 @@ module DASHI.Physics.Closure.NSTriadKNR650AugmentedCriticalWeightedNormalFormRou
 -- scalar W with viscosity times one input-Laplacian coherent work, so theorem
 -- search may stay on that signed quartic carrier.
 --
+-- 2026-10-27 SOURCE-SPECIFIC PHYSICAL NEGATIVE CONTROL (NO CLAY CLAIM):
+-- On a real smooth six-mode, pure-positive-helicity velocity (all H- modes
+-- zero initially), M(0)=0 and integrated weighted W'(0)=0, yet the
+-- same literal dyadic critical production is
+-- Pcrit=(5+sqrt(5)-sqrt(30))/10>0; Xcrit=8, Dcrit=36.
+-- Scaling the *actual* physical Fourier velocity by 512 with nu=1 gives
+-- Xcrit'(0)=512^2(512 Pcrit -72)>0. Consequently the sought R734
+-- inequality with ANY retained margin delta>0 is false on a sufficiently
+-- short initial interval of the actual projected finite Galerkin ODE.
+-- The record below is a CONDITIONAL compiler, not an unproved universal
+-- theorem awaiting only routine constants. Preserve original conditional
+-- algebra and the historical positive-proof status flags as false.
+-- Exact symbolic/real-helical acceptance: tests/test_ns_r734_pure_plus_physical_w2_no_go.py
+-- Details/credit: Docs/research/ns_r734_pure_plus_physical_w2_no_go_20261027.md
+-- The full real-analytic Galerkin witness is NOT kernel formalised here.
+--
 -- No estimate is introduced here.
 ------------------------------------------------------------------------
 
