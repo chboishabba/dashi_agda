@@ -1,0 +1,21 @@
+# Follow Through: original-copy acquisition and constrained model-set reconciliation (2026-10-26)
+
+Independent source-first research. Original author credit: Abt Associates / Bock, Stebbins and Proper for the 1977 reports; Cathy L. Watkins for her 1997 historical monograph; the authors of the National Mathematics Advisory Panel's 2008 Task Group Report for their independent later evidence-screening decisions. Johl Brown directs this independent follow-up; OpenAI ChatGPT assisted with source audit. No collaborative Digital ESD team adoption.
+
+## NEW physical original-report holding, higher priority than secondary reprints
+
+Bank Street College Archives RG11 Follow Through holdings: original *Education as Experimentation: A Planned Variation Model, Vol IV-B: Effects of Follow Through Models*, Abt Associates, 15 April 1977. Archival record https://bankstreetarchives.libraryhost.com/repositories/2/archival_objects/9969 ; item identifier **bsc.11.01.D.163**, **Box 12**, creator collection Richard Feldman. This is an **identified physical holding** with possible access restrictions, NOT a report copy inspected page-by-page or numerical score extraction. Archive collection also names Stanford Research Institute, Huron Institute, Nero and Associates and Abt participation; do not merge their original collection and analysis roles.
+
+A second *later* authored historical synthesis is Cathy L. Watkins (1997), *Project Follow Through: A Case Study of Contingencies Influencing Instructional Practices of the Educational Establishment*, Cambridge Center for Behavioral Studies, 106-page PDF at https://www.behavior.org/resources/901.pdf . It explicitly covers original evaluation, House critique, alternative analyses, dissemination/funding and institutional barriers. Its preface says initial draft 1986, revised excerpt 1988, full monograph 1997; these manifestations belong to one **Watkins** authorship lineage, not three independent studies. Watkins describes past consultancy with a Follow Through model, which is relevant perspective metadata, not a reason to discard the document. This PDF was opened and page 35 (printed p27) visually inspected; its 1977-model descriptions remain a later author's synthesis.
+
+## Independent later systematic evidentiary subset
+The U.S. Department of Education National Mathematics Advisory Panel Task Group on Instructional Practices (2008), https://www.ed.gov/media/document/instructional-practicespdf-89277.pdf , states that **three** Follow Through models met the inclusion criteria of its own mathematics-achievement evidence review with baseline-equivalent groups: Direct Instruction, Cognitively Oriented Curriculum and EDC Open Education. Outcome instruments: Metropolitan Achievement Test computations, concepts, problem solving. This `3` is a later review inclusion subset, **not** programme selection (22), an original evaluation model count (13 or 17 under other definitions), or number of independent follow-up trials.
+
+## Evidence implications
+P0 acquisition: exact physical Abt IV-B report original site/model/outcome numerical tables from Bank Street RG11 box 12, or a separately authenticated digitisation of the same manifestation. Record source edition, page/figure, hash, instrument, cohort, model and missingness; do not fabricate chart-traced numeric values.
+P1 original 1977 IV-A/C analytic specification and House/St. Pierre adjustment data, matched only for defined estimands.
+P1 original federal dissemination/appropriation decision documents distinct from both the Abt research and Watkins's later interpretation.
+P2 use Watkins to snowball to first-dated documentary footnotes and identify precise policy actors. Check each footnote against its original rather than counting Watkins as independent corroboration.
+P2 compare the NMAP 2008 baseline-equivalent mathematics-only estimand against the broader historical ranking without implying the panel reproduced the full 1977 evaluation.
+
+No historical model effects reconstructed, no original physical volume acquired, no causal national decline established. The source-world JSON marks these bibliographic/archival **metadata findings** separately from not-located original numeric cells. Optional Alice/LOOM/ESD one-way prior-art reuse is allowed; no team module edits or team evidence admission.
