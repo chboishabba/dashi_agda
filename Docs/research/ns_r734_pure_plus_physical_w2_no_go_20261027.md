@@ -93,7 +93,7 @@ universal signed-payment route to a general B theorem is **invalid**.
 ## Execution and proof levels
 
 New `tests/test_ns_r734_pure_plus_physical_w2_no_go.py`:
-**ten locally executed exact SymPy tests passed**. They check real
+**twelve locally executed exact SymPy tests passed**. They check real
 Fourier conjugation, transversality, genuine normalized H±
 polarization at positive and negative modes, actual projected
 Galerkin nonlinearity, exact dyadic critical energy/dissipation/
@@ -131,7 +131,7 @@ Thus with scaling factor a=512, ν=1 and Dcrit=36,
               > 512*(3/20)-72 = 24/5 >0.
 The obstruction is not an uncertain floating-point result.
 All three further checks run in the exact SymPy test file,
-bringing the total to **10 passing tests**.
+bringing the total to **12 passing tests**.
 
 **Source-state update:** the existing original
 `NSTriadKNR650AugmentedCriticalWeightedNormalFormRound734Exact.agda`
@@ -190,3 +190,47 @@ true weighted mass and *exact* dyadic residual decomposition.
 The original R92/R102 theorem authors and their cited Waleffe
 mathematics retain attribution; DASHI supplies the particular
 counterexample and exact comparison.
+
+## Exact GENERAL polarization-resolved critical-energy reconstruction
+
+Let `u_m=u_m^+ + u_m^-` be the TRUE orthogonal normalized
+H+ and H- Fourier projection of an arbitrary real divergence-free
+velocity, with `e_m^±=|u_m^±|²`, `r_m=|m|` and
+`w_m=2^ceil(log2||m||infty)` (the exact source dyadic weight).
+Then an EXACT finite algebraic identity, with no unproved PDE
+inequality, is
+
+  `X_dyadic = H_signed + 2 M_negative + R_defect`,
+  `H_signed=Σ_m r_m(e_m^+ - e_m^-)`,
+  `M_negative=Σ_m r_m e_m^-`,
+  `R_defect=Σ_m (w_m-r_m)(e_m^+ + e_m^-)`.
+
+For the nonlinear projected NSE tangent, the classical Euler
+signed helicity cancellation and R92/R102 prior art give
+  `P_dyadic^NL = 2 dM_negative^NL/dt + dR_defect^NL/dt`.
+No W2 sign conclusion follows: both components can carry signed
+source production, and the defect multiplier `w_m-r_m` can itself
+have either sign. This avoids confusing *equivalent positive
+critical norms* with *equal nonlinear tangents*.
+
+At the explicit six-mode, initially pure-plus witness,
+`dM_negative^NL/dt(0)=0` but
+`dR_defect^NL/dt(0)=Pcrit>0`, which is now separately tested
+through the FULL physical projected nonlinear force, not only
+from substitution into scalar variables.
+
+This is the highest-leverage **constructive REPLACEMENT program**:
+retain exact-helicity cancellation, account for negative-helicity
+production and the dyadic defect together, with the original
+cutoff, physical mode projection and actual trajectory. Existing
+R92/R102 already provide the invariant algebra; add only the
+necessary physical estimate/attachment, never an uninhabited
+positive record renamed as 'closed'. No all-data bound has been
+proved for either surviving signed component.
+
+**Receipt:** `tests/test_ns_r734_pure_plus_physical_w2_no_go.py`
+now has **12 locally passing exact SymPy tests**, including the
+general abstract polarization identity and the source-realizable
+tangent decomposition. The original R734 and R735 conditional
+Agda modules remain untypechecked with the new audit comments;
+no new complete Clay A/B theorem.
