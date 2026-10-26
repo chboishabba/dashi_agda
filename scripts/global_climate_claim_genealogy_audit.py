@@ -36,6 +36,7 @@ CLAIM_FAMILIES = {
     "COOLING_1998_WINDOW", "COOLING_OBSERVED_GLOBAL",
     "CO2_PLANT_BENEFITS_PROMOTION", "CO2_FERTILIZATION_PHYSICAL",
     "CO2_FERTILIZATION_CONSTRAINTS", "GLOBAL_CLAIM_TAXONOMY",
+    "MODELS_UNRELIABLE", "EXTREME_WEATHER_UNLINKED",
 }
 # Positive same-original/response/campaign findings with documented scope.
 # These directed pairs are not all source copies. Keep the asserted relation.
@@ -99,6 +100,18 @@ def audit(rows: list[dict[str, str]]) -> dict:
         raise ValueError("1975 cooling media and 1998-window climate claim conflated")
     if "undated" not in byid["GP07"]["source_date"]:
         raise ValueError("Undated CO2 Coalition webpage assigned false publication year")
+    # One archived film (and one credited commissioning campaign) carries
+    # three separate claims: plant nutrient, inaccurate models and
+    # greenhouse/extreme-weather dismissal. DO NOT count as three original
+    # published films or three independent observational studies.
+    original_film = byid["GP02"]
+    for k, family in (("GM01", "MODELS_UNRELIABLE"),
+                      ("GE01", "EXTREME_WEATHER_UNLINKED")):
+        if (byid[k]["claim_family"] != family or
+                byid[k]["source_object_id"] != original_film["source_object_id"] or
+                byid[k]["argument_root_family"] != original_film["argument_root_family"] or
+                byid[k]["independent_empirical_origin"].startswith("yes")):
+            raise ValueError("Multi-claim 1998 WFA original film source split/overpromotion")
     if byid["GP01"]["source_date"] >= byid["GP02"]["source_date"]:
         raise ValueError("Sequel source chronology inverted")
     if "31,000" not in byid["GP03"]["attribution_and_nonpromotion_boundary"] and "31000" not in byid["GP03"]["attribution_and_nonpromotion_boundary"]:
@@ -131,6 +144,15 @@ def audit(rows: list[dict[str, str]]) -> dict:
             {"from": a, "to": b, "boundary": why}
             for a, b, why in UNPAID_TRANSMISSIONS
         ],
+        "co_packaged_three_claims_one_film": {
+            "original_film_source_object_id": byid["GP02"]["source_object_id"],
+            "appearances": ["GP02", "GM01", "GE01"],
+            "separate_claim_families": [
+                byid[k]["claim_family"] for k in ("GP02", "GM01", "GE01")
+            ],
+            "independent_original_film_documents": 1,
+            "first_party_full_audio_checked": False,
+        },
         "global_population_estimate": None,
         "warning": (
             "Deliberately selected world-spanning originals, not a global "
