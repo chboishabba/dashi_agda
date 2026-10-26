@@ -56,3 +56,6 @@ import DASHI.Economics.AICurrentRegimeSourceAttributionCrossPollinationExact
 import DASHI.Economics.AICurrentRegimePromotionSchedulerExact
 \nimport DASHI.Economics.AIChinaTSMCGeoEconomicCalibration2026Exact\nimport DASHI.Economics.ChinaOfficialEconomicSelfPosition2026Exact\n
 import DASHI.Economics.ChinaEconomicLeadershipCrossSourceJoinExact
+
+-- Source-typed wealth/inheritance/vacancy-tax separation max-cut.
+import DASHI.Economics.WealthInheritanceVacancyTaxMaxCut20261027Exact
