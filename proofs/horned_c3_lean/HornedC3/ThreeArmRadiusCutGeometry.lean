@@ -26,6 +26,8 @@ this glue are DASHI #1244. Exact-head typecheck is pending.
 
 noncomputable section
 
+open scoped ContinuousMap
+
 open Set
 
 namespace DASHI.AlexanderHornedC3
