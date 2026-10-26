@@ -167,3 +167,12 @@ The dominant current proof dependency is **2 → 3 → 4 → 5 → 6** for the f
 - Source-written code is not a formal Agda/Lean proof, the classical index theorem applied to the selected 27 is not a new Atiyah–Singer theorem, bounded spectral numerics are not continuum stability, and Nature/ILRS are one measured LARES study plus its institutional report—not independent replications of a new KK effect.
 
 **Verification:** exact Git-blob checks for the two new Python source files; local executed Python outputs PASS. No present-head Agda kernel check, full 5D theory solution, quantum path integral, source-matched satellite fit or quantum-gravity phenomenology established.
+
+
+### 2026-10-27 Phase-2 subphase upgrade: conditional Higgs-reduced \(K\) constructive route
+
+See canonical \`Docs/physics/KKE6SameBundleEtaCSWZSourceReusePareto20261027.md\` and new \`scripts/check_kk_e6_higgs_reduction_anomaly_same_source.py\`. **New exact same-source statement:** \(H=(SU3_c\times U2_L\times U2_R)/Z3_{\rm diag}\) has \(\pi_1(H)\cong\mathbb Z^2\). The original Chi33 character \(h\mapsto\det(U_R)/\det(U_L)\) is globally primitive. The reduced group \(K=\ker\chi_{33}\) is therefore **connected**, with \(\pi_1(K)\cong\mathbb Z\), *still surjecting onto the nonliftable diagonal-\(\mathbb Z_3\) deck classes*. On \(BK\) the selected signed degree-two/six Chern character and hence the free index vanish because they have an explicit \(c_1(L_{\chi_{33}})\) factor.
+
+This pays a **conditional free-anomaly/Higgs-phase model-selection** step, not global quantum consistency. For **B_H** the original full-H UV theory, regulator plus globally patched WZ across Chi33 zeros is still the first hard wall. For a **B_K** reduced Higgs EFT, restrict to globally nowhere-zero Chi33 only after deriving the source physical phase and specifying the reduced gauge action; run the genuine **K** eta/spin-bordism/global anomaly and full two-VEV/E21 spectrum before any Earth observable. Source \`#1165\` metric/quantum stress and \`#1241\` original LARES geodesic consumer remain downstream; PR #1260 finite Pickover torsion and #1164 spatial torque are not phase-2 payments.
+
+**Completion accounting:** Stage-2 topology/unbroken rational anomaly *conditionally advanced*, spin torsion determinant/CS/WZ still **OPEN**; Stage-0 Nature 2026 original measurement anchor already paid, but no independent ranging-data fit, same-action Earth solution, or LARES-derived constraint for this E6 theory is claimed.
