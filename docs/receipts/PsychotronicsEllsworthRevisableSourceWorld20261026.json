@@ -286,7 +286,18 @@
       46,
       74
     ],
-    "note": "values read from NOAA published text; whole original station file not downloaded and SHA unavailable, so no official-byte-custody claim"
+    "note": "both NOAA 269-column original month rows browser-read and preserved, full publisher-file bytes and official original hash not downloaded; no hourly/site/causal confirmation",
+    "original_bar_harbor_noaa_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USC00170371.dly",
+    "bar_harbor_values_july_5_9_tenths_mm": [
+      0,
+      0,
+      130,
+      0,
+      10
+    ],
+    "bar_harbor_station_id": "USC00170371",
+    "station_distinction": "Bangor and Bar Harbor are distinct historical instruments/station rows but share NOAA GHCN archive/custodian; not independent proof of any extraordinary weather mechanism",
+    "observation_time_status": "historical station precipitation accumulation cutoff unverified, so a July 6 zero cannot settle rain onset near 22:00 on July 6"
   },
   "algorithm": {
     "retraction": "Any claim depending on a withdrawn source is marked reopened (not false). A claim with status unpaid remains unpaid. Unrelated independently grounded claims retain their status.",
