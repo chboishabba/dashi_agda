@@ -1,0 +1,178 @@
+module DASHI.Cognition.AustraliaPoliticalEconomySameObjectCrosswalk20261026Exact where
+
+-- Australian political economy: exact source-type crosswalk, 2026-10-26.
+-- Original sources/authors keep authorship: Hanson parliamentary declaration;
+-- Hanson first-person radio interview as reported by ABC; published NSWSC
+-- Rinehart v Rinehart [2018] NSWSC 1102; DOJ original Bannon statement and
+-- Palmer's contradiction; Mandelson forwarded strategy in Epstein corpus.
+-- Johl Brown directs the independent case framing; OpenAI ChatGPT assisted
+-- this bounded adapter. Do NOT infer coordination, bribery, criminality,
+-- policy control or causation from overlap of recipient/person/sector names.
+-- Later PR #1251 climate/radio ledgers are sibling code: reviewed, not imported.
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
+
+import DASHI.Cognition.AustraliaRinehartTrumpOneNationAccessBridgeExact as Access
+import DASHI.Cognition.QueenslandRinehartCrisafulliTrumpResourceAccessExact as QLD
+import DASHI.Cognition.AustraliaMandelsonMiningTaxPoliticalEconomyBridgeExact as Tax
+import DASHI.Cognition.EpsteinAustraliaEliteNetworkAcquisitionExact as Australia
+import DASHI.Cognition.BannonFaragePalmerAutomatedInfluenceReceiptsExact as Palmer
+
+-- Retain canonical owners rather than reasserting their case events as
+-- independently established by this consumer.
+oneNationAccessOwner : Access.AustraliaTrumpPoliticalFinanceBoundary
+oneNationAccessOwner = Access.canonicalAustraliaTrumpPoliticalFinanceBoundary
+
+queenslandResourceOwner : QLD.QueenslandResourceAccessBoundary
+queenslandResourceOwner = QLD.canonicalQueenslandResourceAccessBoundary
+
+australianMiningTaxOwner : Tax.MiningTaxPoliticalEconomyBoundary
+australianMiningTaxOwner = Tax.canonicalMiningTaxPoliticalEconomyBoundary
+
+australianEpsteinOwner : Australia.AustraliaAcquisitionBoundary
+australianEpsteinOwner = Australia.canonicalAustraliaAcquisitionBoundary
+
+-- Local reported/source-qualified edges that *are* present.
+materialSupportAtSourceScope :
+  QLD.rinehartMaterialSupportToOneNationPaid queenslandResourceOwner ≡ true
+materialSupportAtSourceScope = refl
+
+firstPersonPolicyInputAtSourceScope :
+  QLD.rinehartPolicyInputToHansonPaid queenslandResourceOwner ≡ true
+firstPersonPolicyInputAtSourceScope = refl
+
+oneNationTrumpAccessReported :
+  Access.rinehartTrumpAccessBrokeragePaid oneNationAccessOwner ≡ true
+oneNationTrumpAccessReported = refl
+
+mandelsonEpsteinMiningTaxAdviceAtSourceScope :
+  Tax.epsteinRecipientOfStrategyPaid australianMiningTaxOwner ≡ true
+mandelsonEpsteinMiningTaxAdviceAtSourceScope = refl
+
+-- Negative/counterfactual claims remain UNPAID in the existing owners.
+rinaDirectEpsteinConnectionNotEstablished :
+  Australia.ginaRinehartDirectRelationshipPaid australianEpsteinOwner ≡ false
+rinaDirectEpsteinConnectionNotEstablished = refl
+
+mandelsonAdviceDoesNotPayRuddOutcome :
+  Tax.correspondenceCausedRuddRemovalPaid australianMiningTaxOwner ≡ false
+mandelsonAdviceDoesNotPayRuddOutcome = refl
+
+policyConsultationNotPartyControl :
+  QLD.policyAdviceProvesPartyControl queenslandResourceOwner ≡ false
+policyConsultationNotPartyControl = refl
+
+parallelTrumpAccessNotCommonTasking :
+  QLD.parallelTrumpAccessProvesCoordination queenslandResourceOwner ≡ false
+parallelTrumpAccessNotCommonTasking = refl
+
+bannonStatementNotIndependentPalmerDirection :
+  Access.palmerBannonOperationalInfluenceEstablished oneNationAccessOwner ≡ false
+bannonStatementNotIndependentPalmerDirection = refl
+
+-- Source-status labels: do not silently promote indexed document to
+-- first-hand byte inspection, or a litigant/report to a judicial finding.
+data AustraliaSourceRole : Set where
+  originalParliamentaryDeclaredInterest : AustraliaSourceRole
+  firstPersonPolicyInterviewReported : AustraliaSourceRole
+  publisherConfirmedInKindSupport : AustraliaSourceRole
+  namedAssociateDonationReported : AustraliaSourceRole
+  judiciallyReportedDocumentSchedule : AustraliaSourceRole
+  sourceClaimAndContemporaneousDenial : AustraliaSourceRole
+  releasedCorrespondenceReported : AustraliaSourceRole
+  separateSiblingReconstruction : AustraliaSourceRole
+
+record AustraliaSourceRoleReceipt : Set where
+  constructor australia-source-role-receipt
+  field
+    role : AustraliaSourceRole
+    producer : String
+    datedLocator : String
+    acquisitionCeiling : String
+open AustraliaSourceRoleReceipt public
+
+hansonFloridaFlightsSenateDeclaration : AustraliaSourceRoleReceipt
+hansonFloridaFlightsSenateDeclaration = australia-source-role-receipt
+  originalParliamentaryDeclaredInterest
+  "Pauline Hanson, signed Form A alteration, Registry of Senators Interests, 2025-12-16"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Senators_Interests/-/media/FB79802AD0754CB3AC0564B082B5C10A.ashx"
+  "Indexed ORIGINAL Senate PDF text: flights Brisbane-Florida 26 Oct-11 Nov 2025; Hancock Prospecting and Rinehart hospitality; PDF original face 403, no image authentication and no proof of undelivered gift/legal violation."
+
+hansonPolicyConsultationABC : AustraliaSourceRoleReceipt
+hansonPolicyConsultationABC = australia-source-role-receipt
+  firstPersonPolicyInterviewReported
+  "Pauline Hanson; ABC Radio Perth interview, reporters Nicolas Perpitch and Oliver Peterson"
+  "https://www.abc.net.au/news/2026-06-11/one-nation-pauline-hanson-gina-rinehart/106787540"
+  "First-person quoted/recorded policy consultation within ABC 2026-06-11 reporting; the reprint on Rinehart's website is SAME ABC source, not another independent corroboration."
+
+hansonAircraftCorporateStatement : AustraliaSourceRoleReceipt
+hansonAircraftCorporateStatement = australia-source-role-receipt
+  publisherConfirmedInKindSupport
+  "Hancock Prospecting spokesperson, quoted by ABC political reporters Borys and Greber, 2026-04-29"
+  "https://www.abc.net.au/news/2026-04-29/gina-rinehart-gifts-plane-to-pauline-hanson-one-nation/106620808"
+  "ABC reports the spokesperson confirmed a Rinehart COMPANY gave a Cirrus G7 aircraft; listed price / broadcast estimate is not an inspected invoice or independent political finance filing."
+
+namedAssociatesOneNationCashSupport : AustraliaSourceRoleReceipt
+namedAssociatesOneNationCashSupport = australia-source-role-receipt
+  namedAssociateDonationReported
+  "Angus and Sarah Aitken; Adam Giles; Ian Plimer, independently named by ABC 2026-04-29"
+  "https://www.abc.net.au/news/2026-04-29/gina-rinehart-gifts-plane-to-pauline-hanson-one-nation/106620808"
+  "ABC reports AUD 1m Aitkens, AUD 500k Giles, AUD 500k Plimer; DIFFERENT individuals from the Rinehart company aircraft and from the proposed AUD 300k access event; original AEC bank-donor settlement objects not acquired here."
+
+hancockIPA2016And2017JudicialDocument : AustraliaSourceRoleReceipt
+hancockIPA2016And2017JudicialDocument = australia-source-role-receipt
+  judiciallyReportedDocumentSchedule
+  "NSW Supreme Court, Rinehart v Rinehart [2018] NSWSC 1102, para 25"
+  "https://www.casechat.au/cases/au/rinehart-v-rinehart-9"
+  "Published JUDGMENT reproduces the evidence schedule of HPPL amounts paid or provided to IPA: AUD 2.3m 2016 + AUD 2.2m 2017; the judgment is a judicial source but this link is a REPRINT, not native court site; paid finance NOT earmarked to an API 1998 plan, particular article or One Nation campaign."
+
+bannonPalmerContrarySourceReceipt : AustraliaSourceRoleReceipt
+bannonPalmerContrarySourceReceipt = australia-source-role-receipt
+  sourceClaimAndContemporaneousDenial
+  "Steve Bannon DOJ-released 2019 message to Epstein, followed by Clive Palmer's spokesperson denial as reported by ABC 2026-02-01"
+  "https://www.abc.net.au/news/2026-02-01/palmer-denies-bannon-claim-of-election-campaign-influence/106293074"
+  "Original DOJ message contains Bannon's ASSERTION about AUD 60m ads, Palmer denies speaking with Bannon; reporting is a joined carrier of conflicting attributions, not verified operational direction."
+
+-- Case-specific nonpromotion gates, not new general proof machinery.
+record AustralianPowerPipelineFrontier : Set where
+  constructor australian-power-pipeline-frontier
+  field
+    materialSupportAndFirstPersonPolicyAdvicePresent : Bool
+    originalParliamentaryFlightDisclosureIdentified : Bool
+    courtReportedHancockIPAPaymentsPresent : Bool
+    namedAssociateDonationsDistinctFromAircraft : Bool
+    bannonPalmerStatementAndDenialPreserved : Bool
+    mandelsonStrategyReachedEpsteinAtSourceScope : Bool
+    oneNationInternalPolicyAdoptionCausallyProven : Bool
+    specificIPAContentBoughtByCourtReportedPayments : Bool
+    directRinehartEpsteinRelationProven : Bool
+    AustralianCampaignUsedKoganRiponScoresProven : Bool
+    QueenslandFastTrackCausedByRinehartConsultationProven : Bool
+    wholeAustraliaUSCovertCommandProven : Bool
+open AustralianPowerPipelineFrontier public
+
+canonicalAustralianPowerPipelineFrontier : AustralianPowerPipelineFrontier
+canonicalAustralianPowerPipelineFrontier = australian-power-pipeline-frontier
+  true true true true true true false false false false false false
+
+australianMaterialSupportDoesNotProvePolicyCapture :
+  oneNationInternalPolicyAdoptionCausallyProven
+    canonicalAustralianPowerPipelineFrontier ≡ false
+australianMaterialSupportDoesNotProvePolicyCapture = refl
+
+hancockIPADonationsDoNotProveSpecificEditorialOrder :
+  specificIPAContentBoughtByCourtReportedPayments
+    canonicalAustralianPowerPipelineFrontier ≡ false
+hancockIPADonationsDoNotProveSpecificEditorialOrder = refl
+
+australianCampaignToKoganScoresUnpaid :
+  AustralianCampaignUsedKoganRiponScoresProven
+    canonicalAustralianPowerPipelineFrontier ≡ false
+australianCampaignToKoganScoresUnpaid = refl
+
+australiaGlobalCommonProgrammeNotEstablished :
+  wholeAustraliaUSCovertCommandProven
+    canonicalAustralianPowerPipelineFrontier ≡ false
+australiaGlobalCommonProgrammeNotEstablished = refl
