@@ -25,22 +25,24 @@ def verify() -> None:
     assert "import DASHI.Law.SensibLawWoogarooEPBC8575CumulativeImpactSufficiencyExact as Cumulative" in agda
     assert "import DASHI.Law.SensibLawWoogarooPostApprovalPoliticalGasBenefit20261027Exact" in roll
 
-    assert agda.count("Source.mkNoDOISource") == 10
-    assert agda.count("Source.publicAttribution") == 10
+    assert agda.count("Source.mkNoDOISource") == 12
+    assert agda.count("Source.publicAttribution") == 12
     assert agda.count("= scoped-receipt") == 8
     assert agda.count("false refl") >= 8
-    assert agda.count("→ ⊥") == 8
+    assert agda.count("→ ⊥") == 9
     assert all(s in agda for s in (
-        "15 October 2026", "1786", "21 August 2026",
+        "15 October 2026", "16 October 2026", "25 September 2026", "1786", "21 August 2026",
         "30 April 2004", "4 February 2025", "14 October 2026",
         "thirdPartyIndexOnly", "historicConnectionNotCurrentEstate", "regionalCoverageNotSameConnection",
-        "stateMeetingNotCommonwealthCausation", "housingNarrativeNotImproperInfluence",
+        "stateMeetingNotCommonwealthCausation", "housingNarrativeNotImproperInfluence", "extensionSignerNotFinalApprovalSigner",
         "portalNoticeNotJudicialValidity", "websiteNotLandTitle",
         "thirdPartyIndexNotDispositive", "proposedBillNotLocalSubsidy",
     ))
 
     federal = road.split("federal8575Priority :", 1)[1].split("federalClockReceipt :", 1)[0]
     assert "15 October 2026" in federal
+    assert "16 October" in federal
+    assert "Mark Hall" in federal
     assert "APPROVED WITH CONDITIONS" in federal
     assert "1 October 2026 deadline" not in federal
     assert "urgent counsel" in federal
@@ -50,12 +52,12 @@ def verify() -> None:
     assert all(s in note for s in (
         "1,786 comments", "more than 850 submissions", "2020/8651",
         "2004", "third-party index", "all-electric counterfactual", "AGN Queensland Gas Distribution Network",
-        "section 135A", "15 October 2026", "original",
+        "section 135A", "15 October 2026", "16 October 2026", "original",
         "not a legal opinion", "historical infrastructure",
     ))
     assert re.search(r"\bP0\b", note) and re.search(r"\bP4\b", note)
     assert "NOT the actual final preliminary documentation" in note
-    print("PASS: source-text evidence, time, jurisdictions, eight promotion firewalls, eight scoped receipts")
+    print("PASS: source-text evidence, time, jurisdictions, nine promotion firewalls, eight scoped receipts")
 
 
 if __name__ == "__main__":
