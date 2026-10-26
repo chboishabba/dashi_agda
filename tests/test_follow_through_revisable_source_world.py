@@ -85,5 +85,16 @@ class RevisableSourceWorldTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"bidirectional severe test"):
             mod.validate(w)
 
+    def test_source_roots_not_counted_as_carriers(self):
+        w=deepcopy(WORLD)
+        w["claims"][0]["supports"]=["apmEpisode","apmEpisode"]
+        q=mod.report(w)
+        self.assertEqual(q["claims"]["reportedDIRank"]["independent_root_count"],1)
+        self.assertEqual(q["claims"]["reportedDIRank"]["source_roots"],["apm2026"])
+
+    def test_policy_and_outcome_different_roots(self):
+        by_id={e["id"]:e["root"] for e in WORLD["evidence"]}
+        self.assertNotEqual(by_id["policyOriginal"],by_id["abtExactCells"])
+
 if __name__=="__main__":
     unittest.main()
