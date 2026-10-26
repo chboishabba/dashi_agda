@@ -49,7 +49,7 @@ theorem radiusCore_open (f : C(X, Y))
     (centres : Fin 3 → Y) (inner : ℝ) :
     IsOpen (radiusCore f centres inner) := by
   unfold radiusCore
-  exact ((isClosed_iUnion fun i => Metric.isClosed_closedBall).isOpen_compl).preimage
+  exact ((isClosed_iUnion_of_finite fun i => Metric.isClosed_closedBall).isOpen_compl).preimage
     f.continuous
 
 theorem radiusArm_open (f : C(X, Y))
