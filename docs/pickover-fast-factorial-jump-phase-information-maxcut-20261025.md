@@ -313,3 +313,29 @@ a measured/proved *producer and checker* complexity bound; a concrete
 verified Agda kernel execution receipt for the final instance.
 None is witnessed by the inspected source merely through general
 typechecked parameterized records. Negative controls remain active.
+
+## 2026-10-26 measured certificate-cost Pareto, not just illustrative costs
+scripts/check_pickover_actual_certificate_precision_pareto.py performs
+independent *integer-only* Machin π enclosure and tests the first decimal
+precision (searched from 10 digits) whose floor bounds agree for
+N=base^(n!), bases 10 and 99, n=1..5. Local execution passed.
+Actual receipts: base10: n=1,2,3 at 10 decimal digits; n=4 at 26
+digits; n=5 at 123 digits. Base99: n=1,2 at 10 digits;
+n=3 at 15; n=4 at 51; n=5 at 245. Corresponding arctan term
+counts are 8,8,8,22,111 and 8,8,13,45,224 respectively.
+This is a directly measured small-family producer-work baseline.
+The floor parity is computed from certified bounds, not hardcoded.
+The precision is first success *under this specific scaled Machin
+implementation and search range*, not an information-theoretic minimum.
+This witness works for these instances; still no evidence of a
+sublinear general factorial remote-sign producer.
+
+RSA C3-orbit/fine-incidence and jFine semantics motivate searching
+candidate features but MUST be measured against the above certified
+real signs, rejecting collisions. Reuse
+SelfIndexingHyperfabricTetrationExact.WeaveComplexity and
+AdmissibleConsumerMDLHyperfabricExact as resource and eligibility
+owners rather than equating short program length with short runtime.
+The prior analytic jCoarse/jFine Fricke and modular-point machinery
+is genuine typed prior art; it does not by itself supply an exact
+real-circle sine sign at 99^(9999!).
