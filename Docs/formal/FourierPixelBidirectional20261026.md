@@ -76,3 +76,181 @@ Neither exact finite DFT inverses nor calibrated single-pixel experiments establ
 - Python exact finite tests: locally executed PASS on 26 October 2026.
 - Agda code: **source-written proof candidates**, not kernel-checked in this environment (Agda compiler unavailable). No CI claim.
 - No measurement/raw dataset, actual topography, numerical Maxwell simulation or independent replication retrieved. The Nature paper states underlying data available from corresponding author on request.
+
+
+## 26 October continuation: native commuting squares and exact Fourier–Poisson / Jones/Stokes cuts
+
+### The repository's commuting-square owners are **not** a visual metaphor
+
+The generic models pre-exist this branch:
+- `DASHI/Physics/Limits/PhysicsLimitCommutingSquare.agda` (path independence, residual-controlled and scale-indexed/asymptotic cases).
+- `DASHI/Core/GovernedDiagramCore.agda` (typed witnessed square and nonpromotion).
+- `DASHI/Core/ReopenableConsumerInterventionKernelExact.agda` (intertwiner and explicit consumer descent defect).
+- `DASHI/Physics/Common/CoarseDynamicsCommutatorExact.agda` (additive defect interpretation).
+- `DASHI/Core/ApproximateIntertwinerCompositionExact.agda` (only compose quantitative stage defects under the required metric/nonexpansiveness).
+- `DASHI/Physics/CFD/BoundedDefectSparseTwistOperator.agda` (finite-iteration error propagation is not exact closure).
+
+`DASHI/Physics/Optics/FourierPixelCommutingSquaresExact.agda` imports **actual** owners, not a duplicate declaration, and provides four classes of formal claims:
+
+1. **Same-device forward/readout square**:
+   `Input --physicalOutput(surface)--> Output --digitize∘intensity--> Recorded`
+   equals `Input --measured(surface)--> Recorded` **only because**
+   `SameDeviceFourierPixel.measuredWeld` is supplied. It produces both
+   `PhysicsLimitCommutingSquare.ExactCommutation` and the existing
+   `ReopenableConsumerInterventionKernelExact.Intertwiner`.
+   This is a model-level theorem **conditioned on the physical weld**, not
+   an independent experimental verification.
+
+2. **Inverse design/execution square**:
+   `Goal --makeSurface--> Surface --physicalOutput(excitation)--> Output`
+   equals `Goal --targetField--> Output` only when a
+   `SameDeviceDesignContract.designCorrect` witness exists. This
+   correctly keeps the ideal inverse operator, fabricated profile and measured
+   physical response distinct.
+
+3. **Constructively inhabited four-state sensing square**:
+   `Phase4 --quadratures--> QuadratureReadout --decodeFourPhase--> Phase4`
+   equals `Phase4 --id--> Phase4`. The code supplies four explicit
+   decoding cases and a restricted round-trip proof. This is **not**
+   continuous Jones-field injectivity, nor a theorem about a particular
+   fabricated sensor's measurements.
+
+4. **Two quantified no-go results using the generic consumer/commutation
+   theorem**:
+   (i) bare intensity cannot factor the phase-sensitive quadrature
+   observer; an input-output coarse sensor map would force `4 = 0`;
+   (ii) clipping each quadrature at one merges the phase-0 and phase-90
+   codewords, so universal decoding is impossible. Device-specific dynamic
+   range calibration is therefore an independent prerequisite.
+
+This matches the source/authority discipline seen in recent PR #1269
+(SI-typed same-device NV calibration), #1266 (consumer-observer no-go), and
+#1249 (operator intertwining; same cardinality is not the same physics).
+The quantitative inverse/noise programme remains owned by optics PR #1111.
+
+### Paper Methods (23)–(29): exact coherent Jones/Stokes witness
+
+`scripts/check_fourier_pixel_stokes_exact.py` reuses the earlier file's
+Gaussian-rational operations to verify the paper's particular calibrated
+quarter-wave interference convention:
+
+```text
+Ix = |Ax|²/2, Iy = |Ay|²/2
+I(phi) = |Ax + exp(i phi) Ay|² / 2
+S0 = 2(Ix + Iy), S1 = 2(Ix - Iy)
+S2 = I(0) - I(pi)
+S3 = I(3pi/2) - I(pi/2)
+```
+
+Seven independent exact rational synthetic Jones fixtures all match the
+direct `S0,S1,S2,S3` formulas, satisfy the pure-state identity
+`S0² = S1² + S2² + S3²`, and remain unchanged under a common
+quarter-wave global phase. A 50:50 incoherent horizontal/vertical mixture
+has `S0=1`, `S1=S2=S3=0`; it is **not** a pure Jones field.
+This prevents transferring a pure-coherent theorem to uncharacterised
+partially coherent/incoherent illumination.
+
+For the four-codeword phase readout `(4,2),(2,4),(0,2),(2,0)`,
+the minimum pairwise **L-infinity distance is 2**, giving a
+mathematical uniqueness margin under independent per-channel error
+strictly less than `1` (in **synthetic intensity units**, not photons).
+After clipping at one, only three distinct codewords remain.
+Neither number is a measured optical SNR or sensor specification.
+
+### Paper Methods (30)–(31): genuinely gauge-quotiented square
+
+The paper reconstructs phase from gradient maps using a discrete
+Fourier Poisson solve with the DC/constant mode fixed. We now distinguish:
+
+```text
+Phase --gradient--> MeasuredEdges --divergence/Poisson--> Phase
+  |                                                |
+  +------------------- gaugeFix --------------------+
+```
+
+The upper path equals `gaugeFix(phase)` only for a **compatible exact
+gradient** in the same discrete operator and selected boundary geometry.
+An absolute phase can never be determined from gradients alone: global
+phase shifts are a fibre of `gradient`.
+
+`DASHI/Physics/Optics/FourierPixelGradientPoissonSquareExact.agda`
+specialises the repo's `ExactCommutation` to an explicit
+`PhasePoissonModel` proof-obligation record and uses the pre-existing
+`ConsumerDescentDefect` to express the no-universal-absolute-decoder
+claim. For data supplied with an `ExactEdgeField` witness, reconstructed
+gradients equal the measured edges. For an `IncompatibleEdges` receipt
+(e.g. a proved nonzero loop circulation), **exact recovery is impossible**.
+
+`scripts/check_fourier_pixel_phase_poisson_exact.py` numerically models
+a **synthetic exact 4x4 periodic torus**, using only exact rational
+Gaussian arithmetic and the DFT symbol
+`2 cos(kx) + 2 cos(ky) - 4` with integer eigenvalues. Executed:
+- exact 2D DFT/inverse round trip;
+- a synthetic real phase map reconstructed exactly after zero-mean gauge fixing;
+- global shift `7/3` gives identical gradients and identical reconstruction;
+- exact gradient has zero plaquette curl;
+- perturb one horizontal edge by `+1`: loop curl at origin becomes `+1`, exact edge recovery fails, and the divergence-free gradient-projection residual has exact squared norm **17/32**.
+
+The positive residual and circulation obstruct the **unqualified** commuting
+square on arbitrary measured edge data. They do not refute the paper's
+regularised Poisson estimator. This toy uses a periodic grid and unwrapped
+rational phase; the real apparatus may require other boundary conditions,
+wrapped phase, weighting, heterogeneous noise and calibration.
+Mathematical projection is not photon-noise calibration.
+
+### Physical interpretation and severe-test gate
+
+There are **three distinct senses of “bidirectional”**:
+1. a device generates a prescribed outgoing optical field from guided input;
+2. a device encodes incident-field information into multiple coherent
+   readouts, whose inverse is identifiable only on a declared class;
+3. under suitable reciprocal, linear materials, a **port-normalised**
+   scattering matrix may obey an optical reciprocity relation.
+
+(1) + (2) do **not** logically prove (3), and reciprocal scattering is
+**not** an algebraic inverse of lossy intensity detection. Do not name
+Lorentz reciprocity as a theorem of this source-written finite model.
+Classical coherent interference is not entanglement/observer-induced
+collapse, and no new quantum mechanism is demonstrated by these tests.
+
+**Remaining max-cut boundary:**
+- SAME fabricated structure: complex vector optical transfer matrix with
+  wavelength/incidence/gauge, SEM/topography, and corresponding phase-intensity
+  readings; proof-carrying calibration is separate from the paper's plots.
+- Controlled `ResidualControlledCommutation`: choose meaningful
+  detector-output metric, confidence/noise model, physical tolerances and
+  measured same-device residuals before claiming a small defect.
+- Restricted stable inverse / margin for the calibrated sensing matrix,
+  with photon counts, detector clipping, crosstalk, nonuniform response,
+  partial coherence, and phase wrapping; target includes relative phase,
+  never a chosen-but-unobserved global gauge.
+- Addressable dynamic operation: active material/electro-optic actuator,
+  refresh rate, drive power, array routing, simultaneous optical throughput,
+  thermal/crosstalk limits, and independently operated pixel number.
+- Multiscale/rate-scaling requires the earlier native
+  `AsymptoticCommutation` **with a genuinely vanishing residual**;
+  a sequence of larger static devices does not automatically provide it.
+
+### Repeatable local checks
+
+```bash
+python3 scripts/check_fourier_pixel_exact.py
+python3 scripts/check_fourier_pixel_stokes_exact.py
+python3 scripts/check_fourier_pixel_phase_poisson_exact.py
+# Agda kernel status remains open:
+# repo-pinned Agda checker on the three FourierPixel*.agda files
+```
+
+All three Python local counterparts executed successfully on 26 October.
+All source files have been separately read back from the GitHub PR branch.
+No claim of independent execution of the retrieved GitHub blob, CI success,
+Agda kernel verification, measured-device validation, or physical display
+product is made.
+
+**Attribution:** physical experiment and Methods equations © original
+Glauser/Vonk/Seda et al. research team (the Nature paper is the original
+source root; arXiv is an earlier version). Standard mathematical Fourier,
+Poisson, Jones/Stokes and Hodge ideas retain their historical owners.
+Repository formalisation is derivative/independent mathematical analysis,
+prepared with OpenAI ChatGPT assistance; it is not attributed to the
+experimental authors and is not an experimental replication.
