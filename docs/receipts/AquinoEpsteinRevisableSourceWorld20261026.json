@@ -833,6 +833,98 @@
       "relevant_quantitative_claim": "Model estimates net fiscal cost neutral at ~8.3% uptake IN THEIR MODELLING SCENARIO, not measured real-world uptake.",
       "positive_control": "Actual original names a commissioning client, independent named research producer, defined commissioned output and methods. Contrast: HPPL→IPA FY2016/17 court-reported aggregate finances have no inspected directed commission of a SPECIFIC 2022 IPA pension policy product.",
       "what_not_proved": "Invoice settlement/payment, independence of DSS inputs, actual influence on 2022 Labor limited Act, exclusive authorship of idea, or Australian covert network."
+    },
+    "policy_2022_three_inquiry_docket_cut": {
+      "as_of": "2026-10-27",
+      "source_owner": "DASHI/Cognition/AustraliaPoliticalEconomySameObjectCrosswalk20261026Exact.agda",
+      "original_docket_roots": [
+        {
+          "id": "feb_2022_coalition",
+          "bill": "Social Services Legislation Amendment (Workforce Incentive) Bill 2022",
+          "sponsor": "Coalition Government",
+          "introduced": "2022-02-10",
+          "inquiry_register": "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentiveBill/Submissions",
+          "register_count": 6,
+          "dated_scope": "referred 2022-02-10; due 2022-03-04",
+          "selected_original_document_index": [
+            {
+              "producer": "National Seniors Australia",
+              "submission_no": 3,
+              "document_id": "df5522d8-50d8-4ebb-ad5d-6d7cfd367158"
+            }
+          ]
+        },
+        {
+          "id": "aug_2022_smith",
+          "bill": "Social Services Legislation Amendment (Enhancing Pensioner and Veteran Workforce Participation) Bill 2022",
+          "sponsor": "Senator Dean Smith, private senator's bill",
+          "introduced": "2022-08-03",
+          "inquiry_register": "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceParticipation/Submissions",
+          "register_count": 14,
+          "dated_scope": "referred 2022-08-04; due 2022-08-17",
+          "selected_original_document_index": [
+            {
+              "producer": "Hancock Prospecting",
+              "submission_no": 3,
+              "document_id": "dfaa59de-73b8-4409-ab06-4527c2c6cfd3"
+            },
+            {
+              "producer": "Institute of Public Affairs",
+              "submission_no": 6,
+              "document_id": "8f9cfa11-5287-40b3-8287-4fbff1f88b80",
+              "additional_attachment_id": "450b4df8-2d79-47d4-823e-e40593e7cba5"
+            },
+            {
+              "producer": "National Seniors Australia",
+              "submission_no": 7,
+              "document_id": "b202b377-58e6-4c7f-97b8-73ef42e74882"
+            }
+          ]
+        },
+        {
+          "id": "oct_2022_albanese",
+          "bill": "Social Services and Other Legislation Amendment (Workforce Incentive) Bill 2022",
+          "sponsor": "Albanese Government",
+          "introduced": "2022-09-28",
+          "inquiry_register": "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentive2022/Submissions",
+          "register_count": 11,
+          "dated_scope": "referred 2022-09-28; due 2022-10-13",
+          "selected_original_document_index": [
+            {
+              "producer": "National Seniors Australia",
+              "submission_no": 3,
+              "document_id": "146b77ac-abc8-42c9-a937-8f5a45b40c3f"
+            },
+            {
+              "producer": "Hancock Prospecting",
+              "submission_no": 9,
+              "document_id": "7596775e-a631-40bd-be57-abe6b5efd5a1"
+            },
+            {
+              "producer": "Institute of Public Affairs",
+              "submission_no": 10,
+              "document_id": "85a023f4-e99a-45b0-8cf7-785af6302d45"
+            }
+          ]
+        }
+      ],
+      "distinct_selected_docket_document_ids": 7,
+      "source_interpretation_ceiling": "One Parliament indexed three separate inquiry registers, not three independent verifications of private sponsor instruction; named producer repeats across inquiry filings. Published register excludes HPPL and IPA in February list ONLY; not proof of no off-register advocacy. Original individual native PDFs were not visually inspected during this continuation (403/timeout); HPPL October 13 letter text was available via official web search index but full page was not authenticated. No file content hash or text reuse across filings asserted.",
+      "temporal_noncausation": "October 13 Hancock submission postdates government September 28 introduction; August 2022 submissions postdate February 10 government bill introduction. These chronological exclusions do not rule out earlier advocacy, later amendments, committee influence, or a separate original communication.",
+      "typed_fact": "Pension2022IndexedSubmission is a finite model of seven indexed selected entries, not a complete census of private consultation; no factorisation of the inquiry ID through National Seniors producer ID alone."
+    },
+    "policy_2022_public_research_citation_cut": {
+      "original_analyst_carrier": "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentive2022/Report/section?id=committees%2Freportsen%2F024985%2F80109",
+      "source_report_location": "November 2022 Senate Committee report chapter 2 paragraphs 2.15-2.16; 2.27-2.31; 2.45-2.51",
+      "first_research_producer": "National Seniors Australia (2022 survey), own published data and report; methodology not independently repeated",
+      "attributed_downstream_user": "Institute of Public Affairs October 2022 submission, as reported by Senate Committee",
+      "reported_use": "IPA specifically cited National Seniors 20% pensioner return-to-work survey/estimated 510000 figure, via one parliamentary analytic carrier; attribution to reported IPA text, PDF full page not independently authenticated",
+      "alternative_submissions": "ACCI annual Work Bonus 15600; Victorian Chamber additional 10000; National Seniors 6000 biannual; HPPL October 2022 indexed original letter seeks unlimited permanent; distinct scoped recommendations. Senate committee recommended government's narrower proposal.",
+      "same_object_status": "original_author_cited_in_distinct_submitter_per_committee_report",
+      "financial_commissioning_established": false,
+      "same_campaign_causal_influence_established": false,
+      "quote_is_not_independent_reproduction": true,
+      "reopens_on": "Exact IPA submission PDF paragraph, original NSA survey version and same-object financing/contract receipt if any; reject inferred HPPL editorial instruction absent commissioned deliverable."
     }
   }
 }
