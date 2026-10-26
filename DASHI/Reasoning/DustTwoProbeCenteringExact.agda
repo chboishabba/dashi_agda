@@ -51,3 +51,26 @@ antitheticPairUnitCredit = ℚRing.solve-∀
 
 -- This is the distinction between dependent designed probes and
 -- independent samples; never apply the iid (K-1)/K result here.
+
+
+-- Apply the exact two-probe covariance factor to an arbitrary affine
+-- loss slope g. This is still a deterministic two-draw result, not a
+-- probability or convergence statement.
+twoProbeAffineCredit : ℚ → ℚ → ℚ → ℚ
+twoProbeAffineCredit g a b = g * centeredTwoCredit a b
+
+twoProbeAffineSquare :
+  (g a b : ℚ) →
+  twoProbeAffineCredit g a b
+    ≡ g * quarter * ((a + - b) * (a + - b))
+twoProbeAffineSquare g a b = ℚRing.solve-∀ g a b
+
+twoProbeAffineIdentical :
+  (g a : ℚ) →
+  twoProbeAffineCredit g a a ≡ 0ℚ
+twoProbeAffineIdentical g a = ℚRing.solve-∀ g a
+
+twoProbeAffineAntithetic :
+  (g : ℚ) →
+  twoProbeAffineCredit g 1ℚ (- 1ℚ) ≡ g
+twoProbeAffineAntithetic g = ℚRing.solve-∀ g
