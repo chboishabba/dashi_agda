@@ -70,3 +70,67 @@ with lengths merely tending to zero (not necessarily q^n).
 **Ibrahim high-fanout source-object resolution:** Hatcher's original nesting X_(n+1) subset X_n is already a complete abstract finite-to-future *avoidance* donor: stage-wide avoidance at X_n implies avoidance of all later stages and B. Existing Agda #1244 C3 isometric satellite rotation similarly copies real arclength/clearance across three sectors, once marking is supplied. New source-written Agda `HornStageClearanceC3SourceCutExact.agda` and byte-executed geometry negative controls preserve these implications without inventing the still-absent source-specific marked meridian or surface. Only the latter same-object geometry is P0; round toy tube circles, arbitrary-link examples and Cantor addresses remain NEGATIVE controls, not alternate sources.
 
 **Provenance QID/Dewey:** No new QID or Dewey mapping was verified during this cut. Keep null; use stable original DOI and repo paths only. Real physical action, connection, finite-energy claim and empirically measured holonomy remain unpromoted.
+
+
+## 2026-10-27 first-link source correction: Hopf metric witness != Hatcher F₂ witness
+
+Original Hatcher AT Ex 2B.2 pp171–172 explicitly has
+**π₁(Z)=F₂** for a punctured-torus/annulus
+attachment in the exterior, with NONTRIVIAL parent
+annulus image [α₁,α₂]. The existing horn owner
+#1244 has explicit geometrically linked round
+circles and original C3 affine placement. This
+latest cut constructs real short round meridians
+of that same finite link in three C3 sectors:
+length π/32<11/112 and explicit positive
+clearance from exact radius-1/32 tubular cores.
+
+But the actual finite closed round pair is
+smoothly isotopic to the Hopf link (the new
+explicit disjoint isotopy family is provided)
+whose complement has π₁=ℤ², not F₂.
+Friedl *Topology/Knot Theory* (2024) Lemma 3.13
+is an appropriate later EXPLANATORY source
+for this classical group computation, not
+original historical authorship.
+Therefore a Hopf-source flat representation
+forces commuting meridian images and
+[ρ(a),ρ(b)]=I. An exact free-group/sympy
+SU3 source positive control (iσ_x,iσ_y)
+gives nontrivial commutator for F₂, whereas
+the Hopf source cannot. This is a
+***SOURCE-TYPE FAILURE, EVEN WHEN METRIC PASSES***.
+It also proves that a linking-number or
+abelianized witness alone cannot inhabit
+the Hatcher annulus-meridian group contract.
+
+User-directed implementation attributed to
+Johl Brown with OpenAI ChatGPT assistance;
+original geometry and group mathematics
+remain credited to Alexander, Hatcher,
+classical Hopf and knot theory authors,
+with current source formulas owned by #1244.
+
+Canonical exact report:
+`docs/hyperfabric-horn-hopf-metric-vs-hatcher-f2-ibrahim-maxcut-20261027.md`.
+Executable Agda branch source:
+`scripts/check_horn_linked_clasp_metric_vs_hatcher_f2.py`.
+The script exists on GitHub, with independent
+local rational/SymPy controls PASS, but no
+exact-byte GitHub Python replay is claimed.
+Lean #84 source-written
+`Integration/DASHITOE/HornHopfClaspVsHatcherF2NoGoCut.lean`;
+no Lean kernel. No source wild satellite group
+homeotopy or real gauge/physical observation.
+
+Latest horn owner #1244 additionally implemented
+`ThreeArmHatcherHomotopyTransport.lean` and
+`ThreeArmHatcherPathTransport.lean` that consume
+actual source homotopy equivalence and source
+basepoint paths via Hatcher-at and Mathlib,
+rather than demanding literal basepoint equality.
+They do NOT supply the actual relative wild source
+equivalence. This remains P0; metric marked
+meridian source follows as P1, curved Stokes
+surface as P2, exact-head kernel as P3.
+No fake QIDs or invented Dewey classifications.
