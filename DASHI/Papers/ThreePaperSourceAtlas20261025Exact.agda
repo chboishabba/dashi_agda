@@ -272,3 +272,32 @@ semanticFidelityWitnessFirstImplementation =
     "Australia/Brisbane"
     Chronology.exactRepresentationImplemented
     Chronology.sourceCommittedOnly
+
+
+-- Separate new declaration in a pre-existing source file. First appearance
+-- of this lemma is not the first appearance of the containing file.
+millerFiniteSampleBudgetFirstImplementation :
+  Chronology.FirstImplementationReceipt
+millerFiniteSampleBudgetFirstImplementation =
+  Chronology.first-implementation-receipt
+    "RequestProject.NavierStokes.MillerProjectionGeometry.finite_sample_fourth_power_budget"
+    "10681b456753e354e10d77eec065270d7a1c3612"
+    "2026-10-26T12:19:22Z"
+    "2026-10-26T22:19:22+10:00"
+    "Australia/Brisbane"
+    Chronology.completedProofImplemented
+    Chronology.sourceCommittedOnly
+
+-- This is a separately executed finite symbolic source consistency check,
+-- not the full vector PDE formalization nor a kernel-exact theorem.
+yanThreeDimensionalSymbolicAuditFirstImplementation :
+  Chronology.FirstImplementationReceipt
+yanThreeDimensionalSymbolicAuditFirstImplementation =
+  Chronology.first-implementation-receipt
+    "scripts/check_ns_pressure_divergence_exact.py"
+    "620e35069f050018918ca8d6e38933cad5cda840"
+    "2026-10-26T12:25:30Z"
+    "2026-10-26T22:25:30+10:00"
+    "Australia/Brisbane"
+    Chronology.candidateReceiptImplemented
+    Chronology.sourceCommittedOnly
