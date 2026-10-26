@@ -44,6 +44,7 @@ jobs:
           python3 scripts/alexander_horned_c3_free_factor_probe.py
           python3 scripts/alexander_horned_c3_collars_audit.py
           python3 scripts/check_alexander_horned_abelian_bidi.py
+          python3 scripts/alexander_horned_c3_pickover_scalar_phase_boundary.py
 
   agda:
     runs-on: ubuntu-latest
