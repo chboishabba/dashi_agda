@@ -771,3 +771,31 @@ globalAcademyNegativeProvenanceOriginal :
   Typed.StrongHistoricalTransfer Climate.globalNASDisavowsOISMPetition → ⊥
 globalAcademyNegativeProvenanceOriginal =
   Climate.globalNASInstitutionalDisavowalNotClimateMethodTransfer
+
+
+------------------------------------------------------------------------
+-- A single archived original 1998 WFA audiovisual publication co-packages
+-- plant benefits, climate model dismissal, and extreme-weather dismissal.
+-- Same source object, multiple claim families. No 1998→2026 script leap.
+------------------------------------------------------------------------
+
+globalWFA1998ModelsCoPackagedWithPlantClaim :
+  Typed.relationKind Climate.globalWFA1998GreeningAndModelClaimsSameFilm ≡
+    Typed.coPackagedClaims
+globalWFA1998ModelsCoPackagedWithPlantClaim = refl
+
+globalWFA1998WeatherCoPackagedWithPlantClaim :
+  Typed.relationKind Climate.globalWFA1998GreeningAndExtremeWeatherSameFilm ≡
+    Typed.coPackagedClaims
+globalWFA1998WeatherCoPackagedWithPlantClaim = refl
+
+globalOneFilmThreeClaimsNotThreeIndependentModels :
+  INF.FactorsThrough
+    Climate.threeTalkingPointsObserved Climate.originalObjectsForTalkingPoints → ⊥
+globalOneFilmThreeClaimsNotThreeIndependentModels =
+  Climate.threeClaimHeadlinesDoNotIdentifyIndependentOriginals
+
+globalCoPackagedOriginalNotPaidLaterScript :
+  Typed.StrongHistoricalTransfer Climate.globalWFA1998GreeningAndModelClaimsSameFilm → ⊥
+globalCoPackagedOriginalNotPaidLaterScript =
+  Climate.globalCoPackagedClaimsCannotProveLaterScriptTransmission
