@@ -2,6 +2,12 @@
 
 **27 October 2026 — PR #1252 (stacked on #1242).** This is a first-party source-genealogy and exact *synthetic* mathematical witness, not a real EEG reproduction, proof of an anomalous receiver, original historical victim evidence or Agda kernel certificate.
 
+## Place in the initiating, broader investigation
+
+This EEG branch is **not the initiating question of the whole psychotronics inquiry**. That inquiry began with **18 device/screenshot stills** and asked for identification of particular devices and original makers; defensible everyday mechanisms and any genuinely measured anomalies; and source-attributed genealogy of claims involving copper/toroidal coils, the Succor Punch/zapper, corona/plasma apparatus, electrostatic motors, structured water, Reich weather claims, 2013/2024 coil measurements and scalar/orgone/psi narratives. The parent owner **#1242** now contains its own [original inquiry → P0–P5 phase-gates and deliverables](psychotronics-original-inquiry-phase-gates-deliverables-20261027.md). The Hardt delta narrative is a **later, separately evidentiated subquestion**, not proof of a lineage between those original devices, victims, research projects or experimental technologies.
+
+Original empirical authors, original named makers, independent reviewers and historical witnesses retain their respective source attribution. The research question and integration programme are directed by the repository's human contributor, with the new bounded synthetic source-checking/code and text developed with ChatGPT assistance. Neither this implementation nor a textual resemblance transfers credit for outside inventions or experiments.
+
 ## Original source owners and separation
 
 - **Rai, Lee, Becke, Trenado, Abad-Hernando, Sperling, Vidaurre, Wald-Fuhrmann, Richardson, Ward and Orgs**, *iScience* **28:112922** (2025), DOI **10.1016/j.isci.2025.112922**, own the human audience EEG experiment: https://pmc.ncbi.nlm.nih.gov/articles/PMC12432844/ . Retained live groups reported **20,18,21=59**.
