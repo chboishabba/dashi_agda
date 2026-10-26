@@ -23,6 +23,26 @@ def check(source, selected, *, audit_fn, selected_validate_fn):
     # RECOMPUTE, rather than trusting flags from a separately supplied audit.
     report=audit_fn(source)
     sel=selected_validate_fn(selected)
+    # Bind ALL 6.Suz conjugacy-class coordinates, not merely the order,
+    # class count, two central positions and source Irr row indices.
+    # A noncentral class permutation can preserve those weaker fingerprints.
+    signature_fields=(
+        ("class_orders","six_suz_class_orders"),
+        ("class_sizes","six_suz_class_sizes"),
+        ("power_map_2_zero_based","six_suz_power_map_2_zero_based"),
+    )
+    for exported,selected_field in signature_fields:
+        raw=source.get(exported)
+        validated=sel[exported]
+        if (not isinstance(raw,list) or not isinstance(validated,list)
+                or len(raw)!=len(validated)
+                or any(type(x) is not int for x in raw+validated)
+                or raw!=validated or selected.get(selected_field)!=validated):
+            raise ValueError("source class-coordinate signature mismatch: "+exported)
+    signature={k:source[k] for k,_ in signature_fields}
+    signature_hash=hashlib.sha256(
+        json.dumps(signature,sort_keys=True,separators=(",",":")).encode("utf-8")
+    ).hexdigest()
     if not report.get("orthogonality_executed"):
         raise ValueError("full class-weighted source character orthogonality required")
     for key,value in [
@@ -117,6 +137,8 @@ def check(source, selected, *, audit_fn, selected_validate_fn):
         selected_full_class_dual_sym2_count=dual,
         selected_Nebe_family_full_class_equal=(direct==2 and dual==2),
         source_orthogonality_recomputed=True,
+        complete_source_class_signature_matched=True,
+        source_class_signature_sha256=signature_hash,
         original_source_authenticated=False,
         GAP_executed_by_this_check=False,
         same_object_Monster_intertwiner_proved=False)
