@@ -875,6 +875,20 @@ bahramiHelmholtz2025 = Source.mkDOISource
   "Original authors' independently controlled Helmholtz apparatus uses water cooling and automated field orientation; methodological nuisance-control precedent, not an original 60 percent Rodin superiority claim."
   Source.publicAttribution
 
+
+-- Researcher-owned dataset/code carrier is ONE original 2025 study root.
+-- Do not count PLOS publisher and author GitHub as two replications.
+bioCoilOriginalAuthorRepository : Source.AttributedSource
+bioCoilOriginalAuthorRepository = Source.mkNoDOISource
+  "QuBiTUCLA researcher-owned BioCoil original-data and device project"
+  "BioCoil water-cooled Helmholtz construction and original experiment folders"
+  "original public project README blob 0b7779ccdfc23c19b93197a42ac331e64acbf22d read 26 October 2026; exact 2025 paper-locked commit not established"
+  "2025"
+  "https://github.com/QuBiTUCLA/biocoil"
+  Source.archivalSource
+  "Original paper-associated design inventory and F71 multi-axis magnetometer method route; raw folder analyses not reproduced; not a fresh experiment or a Rodin matched-device effect."
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -909,7 +923,8 @@ sourceAtlas = Source.mkSourceAtlas
    bangorLibraryNewspaperArchives ∷ ellsworthKansasFalseWeatherJoin ∷
    rvmlGentry2003Programme ∷ rvmlGentryVideoMetadata ∷
     noaaGHCNObsTimeSchema ∷ noaaHOMRStationHistory ∷
-    noaaCOOPOriginalFormsGateway ∷ bahramiHelmholtz2025 ∷ [])
+    noaaCOOPOriginalFormsGateway ∷ bahramiHelmholtz2025 ∷
+    bioCoilOriginalAuthorRepository ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -1002,6 +1017,17 @@ bahramiWaterCooledHelmholtzPrecedent = mkBound
   Diligence.contextualEvidence
   experimentalMechanismElsewhere
   "distinct apparatus/authors/time; no source-native 60-percent Rodin-versus-Helmholtz matched biological trial"
+
+
+bahramiPaperAndDataSameStudy : ClaimBound
+bahramiPaperAndDataSameStudy = mkBound
+  "Bahrami 2025 original water-cooled Helmholtz paper links its own BioCoil design and experimental repository carrier"
+  bioCoilOriginalAuthorRepository
+  "original QuBiTUCLA/biocoil README and repository folder inventory"
+  bahramiHelmholtzOriginalRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "published paper and author repository share one underlying study; historical exact experiment source version and Rodin 60 percent comparison unpaid"
 
 -- Two publisher/document carriers; same RVML provenance root. The Gentry
 -- speaker/topic is NOT the 1999 person-to-person instruction transfer.
