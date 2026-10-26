@@ -376,7 +376,7 @@ cfactNova2026 = Typed.sourceReceipt
 reefPatrickMoore2021 : Typed.SourceReceipt
 reefPatrickMoore2021 = Typed.sourceReceipt
   "Carly Lubicz-Zaorski; Maxine Newlands; Theresa Petray"
-  "Fuelling the climate and science denial machine on social media: Great Barrier Reef 2021 in danger recommendation"
+  "Fuelling the climate and science ‘denial machine’ on social media: A case study of the Great Barrier Reef’s 2021 ‘in danger’ recommendation on Twitter, YouTube and Facebook"
   "online 2023; 2024 journal issue"
   "DOI 10.1177/09636625231202117"
   "Peer-reviewed 2021 network study attributes sharing of Peter Ridd's reef claim to Patrick Moore; it does not prove funding, command, or a copied scientific measurement."
@@ -521,7 +521,7 @@ canonicalConcentratedSourceAuditBoundary =
 reefSteveMilloy2021 : Typed.SourceReceipt
 reefSteveMilloy2021 = Typed.sourceReceipt
   "Carly Lubicz-Zaorski; Maxine Newlands; Theresa Petray"
-  "Fuelling the climate and science denial machine on social media: Great Barrier Reef 2021 in danger recommendation"
+  "Fuelling the climate and science ‘denial machine’ on social media: A case study of the Great Barrier Reef’s 2021 ‘in danger’ recommendation on Twitter, YouTube and Facebook"
   "first online 2023-10-26; journal issue 2024"
   "Public Understanding of Science 33(3):270-289; DOI 10.1177/09636625231202117"
   "Original multi-platform 2021 case study explicitly names Fox News contributors including Steve Milloy among later amplifiers; does not claim he used an API draft to produce the post."
