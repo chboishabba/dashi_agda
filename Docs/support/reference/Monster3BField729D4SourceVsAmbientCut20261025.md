@@ -167,3 +167,64 @@ Subgroup.exists_right_complement'_of_coprime
 For the PREIMAGE `P=π⁻¹(S)` of our SOURCE D4 `S`, use `N=E ≤ P` with `Nat.card E=3^13`, `E.index=8`. The one specific arithmetic premise is `(3^13).Coprime 8`. The resulting complement has group-isomorphism `K≃* S ≃* D4` by quotient restriction, conditional on actual subgroup/quotient receipts. This gives a high-alpha proof route with **no duplicate Schur–Zassenhaus formalisation**. Mathlib4's authors and previous subgroup/quotient and group-iso producers retain theorem ownership.
 
 **Still missing in the currently connected Agda/Lean repository HEAD:** a *source-typed actual* `MonsterN3BGroup`, `E.normal`, `E.card=3^13`, an actual quotient isomorphism to `2.Suz:2`, and a certified embedding of the source 8-element D4 into that exact quotient carrier. A finite matrix witness in the ATLAS GF3 model plus a paper theorem **does not create a Lean inhabitant** of those object-specific assumptions. The abstract mathematical inference is valid with published sources, but a repository kernel receipt has not yet been assembled. Keep this distinction in any future cross-prover snowball.
+
+
+## 26 October SOURCE-WORD 720+9 polarization max-cut
+
+New consumer `scripts/monster3b_atlas_d4_pointed720729_polarization_weld.py`
+**reuses** the same SHA256-verified original ATLAS/AtlasRep MeatAxe
+`2Suzd2G1-f3r12aB0.m1/.m2`, the existing actual-source D4 generator words
+`m=(CDCDCDCDCDCdCd)^5, g=CdCdCDCd, r=m(gmg^-1)`, and the original
+`FORM_ROWS` nondegenerate anti/symplectic pairing. It does not vendor or
+replace these original source bytes.
+
+In original characteristic-three **12D symplectic quotient coordinates**,
+`Fix(m,+1)` has rank six and is a Lagrangian because the mirror multiplier
+is -1. On this 6D plus-eigenspace, the symmetric form
+`Q(u,v)=<u,r v>` is nondegenerate and has determinant **2 in F3**, hence
+**split Witt index three**. A concrete totally singular 3-space can be
+chosen with coordinate vectors (relative to the deterministic
+nullspace basis)
+`(0,0,0,1,0,0)`, `(0,1,2,0,0,1)`, `(1,0,0,0,0,1)`.
+The six original 12D vectors `v_i, r v_i` form a verified
+`D4`-stable **rank-six Lagrangian**; its first pair `v_1,r v_1`
+is a source `D4`-stable **rank-two isotropic plane**. The resulting
+six-trit Schrödinger **basis LABEL model** has an invariant nine-point
+plane. This is stronger than the earlier ambient-field-only D4.
+
+On the quotient `F3^6 / F3^2 ≅ F3^4`, the actual source-word
+D4 representation is `E⊕E`. Its 80 nonzero vectors have
+**8 D4 orbits of length 4 and 6 orbits of length 8** (14 orbits).
+Each of the four D4 reflections fixes **8** nonzero quotient points;
+the half-turn and quarter-turns fix none outside the origin.
+A direct `Corner8×Fin10` action with trivial fine sheet would force
+all fixed counts to be multiples of 10; **8 is not**, providing an
+exact D4-set obstruction to *that* product action. Nontrivial action
+that mixes ten fine sectors remains possible and must be tested, not
+dismissed. This refines and is consistent with #1250's pointed
+720+9 full-Heisenberg-invariance no-go: source D4 *can* stabilize a
+chosen nine-plane while translations outside F3² cannot.
+
+Independent local Python replay on the **actual original source matrices**
+verified exact SHA256:
+`ddd4919ab560f78b065aa08e309bd047942cdb7bb52a1474da84d54d35a031c2`
+and
+`433ba0f0373995b159859df00dd5a5005355fdbf8b59a31d651aeaf43ffcd15f`,
+full rank/isotropy/action/orbit counts and mirror signatures PASS.
+**Exact new GitHub Python file itself, Agda kernel and GAP NOT executed**.
+Local independent source:
+`/mnt/data/monster3b_maxcut_720729/check_atlas_d4_pointed_source_weld.py`;
+receipt:
+`/mnt/data/monster3b_maxcut_720729/atlas_d4_source_weld_receipt.json`;
+hash:
+`2c74c56774b9ffe3e40f3a809d8b0029aec8f36a99762b7cdd033a377e11c0f2`.
+
+**Proof frontier:** The source `2.Suz:2` matrix words are actual;
+their proper `N(3B)` quotient lift, Monster conjugacy classes, and
+selected 6.Suz 78/729 normalizer action/intertwiner remain separately
+unpaid. A centre-inverting mirror maps ζ to ζ²; a D4 basis permutation
+is not a linear D4 action in one fixed ζ-eigenspace. Original ATLAS/AtlasRep,
+Wilson 1988, Barraclough–Wilson 2007, Serre/Terras authorship retained.
+Pointed 720+9 original repository owner and caveats:
+[#1250](https://github.com/chboishabba/dashi_agda/pull/1250).
+
