@@ -166,6 +166,17 @@ barHarborPublisherMetadataDoesNotGrantCausality :
 barHarborPublisherMetadataDoesNotGrantCausality =
   Atlas.allSourcesRemainNonPromoting Atlas.noaaBarHarborStationMetadata
 
+-- Published numerical agreement is a property of printed papers, not
+-- a source-native byte witness for two independently acquired 2013/2024 runs.
+rodinRoundedMatchingPaperDoesNotTransferProof :
+  Attribution.citationImportsProof Atlas.ramirezRodinRMF2024 ≡ false
+rodinRoundedMatchingPaperDoesNotTransferProof =
+  Atlas.allSourcesRemainNonPromoting Atlas.ramirezRodinRMF2024
+
+rodinRawMeasurementIdentityNotFromCitation :
+  Atlas.citationCreatesTruth Atlas.rodinRoundedTableDoesNotProveRawIdentity ≡ false
+rodinRawMeasurementIdentityNotFromCitation = refl
+
 -- RVML organiser archives and its uploader account represent one historical
 -- programme origin; neither is Croft's narrator root or a verified transfer.
 gentryRvmlMetadataIsSameOrganiserRoot :
