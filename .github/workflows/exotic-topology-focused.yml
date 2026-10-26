@@ -1,0 +1,85 @@
+name: Exotic topology finite acceptance (source-bounded)
+on:
+  push:
+    branches:
+      - topology-exotic-spaces-prior-art-maxcut-20261025
+  pull_request:
+    paths:
+      - "DASHI/Mathematics/Topology/Exotic*.agda"
+      - "DASHI/EverythingTOESymmetryResolved369.agda"
+      - "scripts/exotic_topology_*.py"
+      - "tests/test_exotic_topology_maxcut.py"
+      - "Docs/topology/Exotic*.md"
+      - ".github/workflows/exotic-topology-focused.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  toe-import-graph:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+      - name: Kernel-check exact TOE import graph
+        run: |
+          echo "TOE exact SHA: $GITHUB_SHA"
+          agda -i . DASHI/EverythingTOESymmetryResolved369.agda
+
+
+  agda-source-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install original repo Agda and stdlib version
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: "2.7.0.1"
+          agda-stdlib-version: "recommended"
+      - name: Exact SHA and eleven self-owned topology module checks
+        run: |
+          echo "Agda exact HEAD: $GITHUB_SHA"
+          for module in \
+            ExoticAmbientLinkingNoGoExact \
+            ExoticBinaryTernaryPantsCodecExact \
+            ExoticBalancedTernaryPantsWeldExact \
+            ExoticBalancedDepthThreeCubeSetBridgeExact \
+            ExoticSimplicialStarTransportExact \
+            ExoticCantorCylinderOrientationExact \
+            ExoticHornChronologicalCantorConsumerExact \
+            ExoticCWExistingDonorWeldExact \
+            ExoticEndProfilesViaCantorExact \
+            ExoticSourceGenealogyParetoExact \
+            ExoticWadaC3BoundaryNoGoExact; do
+            agda -i . "DASHI/Mathematics/Topology/${module}.agda"
+          done
+
+  exact-python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install exact algebra dependency
+        run: python -m pip install --disable-pip-version-check "sympy==1.14.0"
+      - name: Identify exact SHA; bytecode syntax pass
+        run: |
+          echo "exact HEAD: $GITHUB_SHA"
+          python -m compileall -q scripts/exotic_topology_*.py tests/test_exotic_topology_maxcut.py
+      - name: Max-cut negative and positive geometry tests
+        run: python -m unittest discover -s tests -p 'test_exotic_topology_maxcut.py' -v
+      - name: Direct source-specific braid/endpoint discriminator
+        run: python scripts/exotic_topology_braid_crosspr_discriminator.py
+
+# The Python job is finite mathematical regression only. The separate
+# Agda job attempts KERNEL typechecks; no success is claimed until the
+# actual GitHub job reports successful execution on the exact commit.
+# This workflow does not check the separate dashi_lean4 PR #86.
