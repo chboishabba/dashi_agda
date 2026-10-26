@@ -235,3 +235,44 @@ conditional on the operator-norm invariance premise.
 Neither the actual Hatcher curved based homotopy nor
 its curvature area is supplied. Kernel verification
 remains NOT RUN.
+
+
+## Final concurrent source-owner update: actual specialized chronological weld
+
+In the FINAL live PR recheck, original horn geometry owner #1244
+advanced from ae805ee... to
+bf77f7c6cda943610a7e6d645178ede34b569044.
+It NOW owns the dedicated source-written
+`DASHI/Mathematics/Topology/AlexanderHornedC3ChronologicalClopenBridgeExact.agda`,
+which literally imports the old `Bin.chronological`,
+`EndMass.prefixBitsToBools` and original `Cantor.Cylinder`,
+and source-proves that Horn left/right *prepend* corresponds
+to chronological Cantor *append*, and that C3 rotation leaves
+the chronological cylinder untouched. The specific source
+reversal weld is THEREFORE ALREADY OWNED by #1244,
+not a novel new result of our #1249 Python 254-history audit.
+The latter is only an independently executed negative-control
+regression; our genuine new bridge is the GROUP-LEVEL common
+whisker / whole-word orientation and the already-owned
+selected-W phase-sensitive consumer consequence.
+
+Same owner #1244 additionally committed
+`scripts/alexander_horned_c3_clopen_spatial_realization.py`,
+a concrete tame C3×binary Cantor subset of R3, with shrinking
+disjoint balls and positive sibling gaps. Crucial negative
+control: its Euclidean shrinking diameters are REAL but
+the embedded set is **tame**, with NO actual Hatcher linked
+handlebody group transport. It cannot inhabit the new
+selected-W flat norm geometry threshold simply by having
+small cylinder diameters. Do not infer a true Hatcher
+short meridian from the tame control.
+
+The remaining first-link P0 is unchanged but more precisely
+situated: actual source-linked horn satellite pi1 map and
+marked generator, plus a Euclidean short loop avoiding the
+entire stage. #1244's literal endian/chronological bridge
+and C3 spatial tame control may be REUSED but are not the
+missing geometric source representation. #1254 remains
+the owner of the generic chronological-event proof and
+severe Cantor-versus-geometric-link discriminators.
+No kernel receipt.
