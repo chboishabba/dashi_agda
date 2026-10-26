@@ -542,6 +542,20 @@ pandeyFFField2017 = Source.mkDOISource
   "Diphenylalanine FF cooling for five hours with 150 and 300 V/cm AC/DC electric fields and distinct 0.6 T magnetic-field condition; under study conditions authors report strong electric-field modulation and magnetic group aggregation; NOT a Rodin-Helmholtz comparison or clinical outcome"
   Source.publicAttribution
 
+-- Published WIPO PCT origin of the exact application number declared in
+-- Saikia et al. 2019 ACS original paper, NOT a second completed clinical
+-- trial, not a Rodin coil and not independently validated patent claims.
+saikiaFieldPatent2019 : Source.AttributedSource
+saikiaFieldPatent2019 = Source.mkNoDOISource
+  "Vibin Ramakrishnan; Gaurav Pandey; Harshal Nemade; Jahnu Saikia; Sajitha Sasidharan; Nitin Chaudhary (inventors); Indian Institute of Technology Guwahati (original assignee)"
+  "WO2019012556A1: A device for non-invasive treatment of neurodegenerative diseases"
+  "WIPO PCT/IN2018/050452 priority 13 July 2017, filed 10 July 2018, published 17 January 2019; first-party public text transcribed on Google Patents; original source inventor claims, not clinical efficacy"
+  "2019"
+  "https://patents.google.com/patent/WO2019012556A1/en"
+  Source.namedSourceKind "published patent specification"
+  "Published patent claim 1 describes 17 cm separated parallel aluminium electrodes in a proposed helmet-like AC/DC electric-field apparatus powered by charging, oscillator and booster units; patent claims and in-vitro examples do not prove human treatment or Rodin-versus-Helmholtz coil benefit"
+  Source.publicAttribution
+
 saikiaAmyloid2019 : Source.AttributedSource
 saikiaAmyloid2019 = Source.mkDOISource
   "Jahnu Saikia; Gaurav Pandey; Sajitha Sasidharan; Ferrin Antony; Harshal B. Nemade; Sachin Kumar; Nitin Chaudhary; Vibin Ramakrishnan"
@@ -918,6 +932,47 @@ noaaBangorISD1953Original = Source.mkNoDOISource
   "First-party source-object existence and historical station identity only; 6–7 July hourly data, UTC-to-Maine-local hour, precipitation codes and any rainmaking efficacy unverified."
   Source.publicAttribution
 
+
+------------------------------------------------------------------------
+-- 27 October source correction: original ISD 2018 data-format geometry,
+-- original NOAA 2026 cloud-migration notice and GHCNh successor.
+-- Neither new original agency publication adds an hourly observation.
+------------------------------------------------------------------------
+
+noaaISD2018OriginalFormat : Source.AttributedSource
+noaaISD2018OriginalFormat = Source.mkNoDOISource
+  "NOAA NCEI and US Federal Climate Complex with USAF 14th Weather Squadron"
+  "Integrated Surface Data (ISD) Format Document, control and additional data sections"
+  "12 January 2018; original publisher PDF visually inspected pp5 and 13-14 on 27 October 2026"
+  "2018"
+  "https://www.ncei.noaa.gov/pub/data/noaa/isd-format-document.pdf"
+  Source.archivalSource
+  "Positions 1-4 give count of variable characters only; total ISD physical record has 105 fixed plus that many variable characters. AA1-AA4 fields have duration, amount, condition and quality; not a 1953 observed rain episode."
+  Source.publicAttribution
+
+noaaNESDIS2026ISDMigration : Source.AttributedSource
+noaaNESDIS2026ISDMigration = Source.mkNoDOISource
+  "NOAA National Environmental Satellite Data and Information Service and NCEI Data Access Branch"
+  "Service Location Change for Integrated Surface Data (Global Hourly)"
+  "original NOAA 23 June 2026 notice, planned July 31 legacy access retirement; read 27 October 2026"
+  "2026"
+  "https://www.nesdis.noaa.gov/news/service-location-change-integrated-surface-data-global-hourly"
+  Source.institutionalSource
+  "Original format ISD publicly rehosted through noaa-isd-pds; separate CSV through noaa-global-hourly-pds; exact historic 1953 named object key and source-byte equivalence not retrieved."
+  Source.publicAttribution
+
+noaaGHCNh2023OriginalDataset : Source.AttributedSource
+noaaGHCNh2023OriginalDataset = Source.mkDOISource
+  "Matthew J Menne; Simon Noone; Nancy W Casey; Robert H Dunn; Shelley McNeill; Diana Kantor; Peter W Thorne; Karen Orcutt; Sam Cunningham"
+  "Global Historical Climatology Network-Hourly (GHCNh), version 1"
+  "original NOAA/NCEI historical hourly harmonised source publication, 2023 and 2026 updated access"
+  "2023"
+  "10.25921/jp3d-3v19"
+  "https://doi.org/10.25921/jp3d-3v19"
+  Source.archivalSource
+  "ISD replacement official by-year/by-station PSV access; no actual 1953 Bangor PSV parsed and harmonised station data cannot independently replicate their original reports."
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -939,7 +994,7 @@ sourceAtlas = Source.mkSourceAtlas
    kervadecFiveDASC2026 ∷ stockerASCRevision2026 ∷
    heartmathEnergeticCommunication ∷
    shupakShamClinical2006 ∷ duAssessorBlindedProtocol2026 ∷
-   croftBigSecret2002 ∷ croftPowerWand2003 ∷ pandeyFFField2017 ∷ saikiaAmyloid2019 ∷
+   croftBigSecret2002 ∷ croftPowerWand2003 ∷ pandeyFFField2017 ∷ saikiaFieldPatent2019 ∷ saikiaAmyloid2019 ∷
    perezRodinRSI2013 ∷ ramirezRodinRMF2024 ∷ perezHeatShock2008 ∷
    reichCoreEllsworth1954 ∷ reichCloudArchiveIndex ∷
    hamblingWeatherwatch2011 ∷ kiddexRedditMind2023 ∷
@@ -953,7 +1008,9 @@ sourceAtlas = Source.mkSourceAtlas
    rvmlGentry2003Programme ∷ rvmlGentryVideoMetadata ∷
     noaaGHCNObsTimeSchema ∷ noaaHOMRStationHistory ∷
     noaaCOOPOriginalFormsGateway ∷ bahramiHelmholtz2025 ∷
-    bioCoilOriginalAuthorRepository ∷ noaaBangorISD1953Original ∷ [])
+    bioCoilOriginalAuthorRepository ∷ noaaBangorISD1953Original ∷
+    noaaISD2018OriginalFormat ∷ noaaNESDIS2026ISDMigration ∷
+    noaaGHCNh2023OriginalDataset ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -974,7 +1031,7 @@ data LineageRoot : Set where
   kervadecAscValidationRoot stockerAscRevisionRoot : LineageRoot
   heartmathInstituteRoot : LineageRoot
   shupakClinicalAuthorRoot duProtocolAuthorRoot : LineageRoot
-  pandey2017PeptidePublicationRoot saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
+  pandey2017PeptidePublicationRoot saikiaFieldPatentOriginalRoot saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
   reichOriginalAuthorRoot guardianHamblingRoot redditKiddexForumRoot : LineageRoot
   bachFictionRoot constableBookRoot sladePractitionerRoot adachiPublisherRoot : LineageRoot
   wmoInstitutionRoot peterReichMemoirRoot kateBushArtistRoot : LineageRoot
@@ -1068,6 +1125,37 @@ noaaISD1953YearArchivePresent = mkBound
   Diligence.contextualEvidence
   institutionalHistoricalInterpretation
   "actual station-year gzip bytes not acquired; date-specific hours, rain onset and any device-caused weather remain unpaid"
+
+
+noaaISDRecordLengthSourceCorrection : ClaimBound
+noaaISDRecordLengthSourceCorrection = mkBound
+  "NOAA ISD original 2018 format says total record length is 105 plus first-four-character variable count"
+  noaaISD2018OriginalFormat
+  "NOAA ISD document printed page 5, PDF page index 4, control positions 1-4"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "correctly parsed synthetics do not establish exact July 1953 hourly or precipitation data"
+
+noaaNODDArchiveTransferNotObservation : ClaimBound
+noaaNODDArchiveTransferNotObservation = mkBound
+  "NOAA announced ISD original-format access moved to public S3 bucket noaa-isd-pds with old endpoint retirement planned for July 2026"
+  noaaNESDIS2026ISDMigration
+  "NOAA NESDIS original 23 June 2026 service-location announcement"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "bucket identity does not verify a particular 1953 S3 object key or weather record or mechanism"
+
+noaaGHCNhSuccessorNotIndependentGauge : ClaimBound
+noaaGHCNhSuccessorNotIndependentGauge = mkBound
+  "NOAA GHCNh successor offers a harmonised historical hourly station dataset that may incorporate overlapping sources from ISD"
+  noaaGHCNh2023OriginalDataset
+  "NOAA original GHCNh 2023 record DOI 10.25921/jp3d-3v19"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "no actual 1953 Bangor PSV or independent observer lineages resolved by a successor product announcement"
 
 -- Two publisher/document carriers; same RVML provenance root. The Gentry
 -- speaker/topic is NOT the 1999 person-to-person instruction transfer.
@@ -1645,6 +1733,29 @@ ramirez2024ReusedNumbersQuestion = mkBound
   Diligence.primaryProposition
   attributedAuthorReport
   "shared data or independently reacquired unknown; repeated rounded numbers do not establish improper publication conduct"
+
+-- Documentary same-application admission: "exact PCT identity" is
+-- grounded by both original publisher carriers. It is NOT evidence that
+-- all undisclosed 2019 supplemental experiments used only this apparatus.
+saikiaPCTExactPatentIdentityClaim : ClaimBound
+saikiaPCTExactPatentIdentityClaim = mkBound
+  "WO2019012556A1 is PCT/IN2018/050452, the exact application independently identified in the 2019 Saikia ACS original conflict-of-interest declaration"
+  saikiaFieldPatent2019
+  "WIPO patent publication metadata, filing and inventor declarations; 2019 original ACS author COI statement"
+  saikiaFieldPatentOriginalRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "actual clinical treatment, independently reproduced underlying patent experiments and any Rodin-or-Helmholtz biological comparator not established"
+
+saikiaElectrodePatentDoesNotLicenseRodinBenefit : ClaimBound
+saikiaElectrodePatentDoesNotLicenseRodinBenefit = mkBound
+  "Published WIPO source patent claim 1 specifies parallel 17 cm aluminium electrodes for proposed AC/DC electric-field stimulation, not the 2024 Rodin-coil magnetic field mapping apparatus"
+  saikiaFieldPatent2019
+  "WO2019012556A1 Claim 1 paragraphs on head-worn two-electrode assembly and original device"
+  saikiaFieldPatentOriginalRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "the unseen full ACS article or supplemental information might describe additional apparatus; patent text alone cannot establish their absence, a 60-percent comparison, or efficacy"
 
 pandey2017FieldExperimentScope : ClaimBound
 pandey2017FieldExperimentScope = mkBound

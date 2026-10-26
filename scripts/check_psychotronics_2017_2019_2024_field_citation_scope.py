@@ -23,6 +23,73 @@ PAPERS = {
     "P1-37": ("2024", "10.31349/RevMexFis.70.030901"),
 }
 SHARED_AUTHOR_COUNT = 6
+PATENT_PCT = "PCT/IN2018/050452"
+PATENT_WIPO = "WO2019012556A1"
+PATENT_SOURCE = "P1-80"
+
+def inventor_name_core(name: str) -> str:
+    """First and family name only to handle credited optional middle initial."""
+    pieces = name.strip().casefold().replace(".", "").split()
+    if len(pieces) < 2:
+        raise ValueError("unparseable inventor or author name")
+    return pieces[0] + " " + pieces[-1]
+
+def exact_patent_identity(lookup: dict[str, dict[str, str]], direct: dict[str, dict[str, str]]) -> dict:
+    """Original PCT exact identifier across WIPO and ACS author disclosure.
+
+    This documents published device claims, NOT experimental or medical proof.
+    Do not conflate inventor overlap with independent research cohort counts.
+    """
+    if PATENT_SOURCE not in lookup:
+        raise ValueError("original WIPO patent source missing")
+    patent = lookup[PATENT_SOURCE]
+    paper = lookup["P1-40"]
+    if PATENT_PCT not in (patent["original_work"] + " " + patent["carrier_and_inspection"]):
+        raise ValueError("patent application mismatch")
+    if PATENT_WIPO not in patent["original_work"] or PATENT_WIPO not in patent["locator"]:
+        raise ValueError("WIPO patent publication identity mismatch")
+    if PATENT_PCT not in (paper["carrier_and_inspection"] + " " + paper["claim_scope"]):
+        raise ValueError("2019 original ACS COI failed exact patent ID join")
+    if "17 cm" not in patent["claim_scope"] or "electrode" not in patent["claim_scope"].casefold():
+        raise ValueError("original patent electrode geometry lost")
+    if "Rodin" not in patent["not_established"] or "Helmholtz" not in patent["not_established"]:
+        raise ValueError("patent-to-Rodin nonpromotion gate missing")
+    # Exact first/family name matching only among *explicitly credited* humans.
+    # The P1-80 semicolon-separated last member is the institutional assignee,
+    # which must not accidentally be counted as a seventh human inventor.
+    names = patent["authorial_root"].split(";")
+    human = [n for n in names if "Indian Institute of Technology" not in n]
+    if len(human) != 6:
+        raise ValueError("unexpected inventor count")
+    patent_people = {inventor_name_core(n) for n in human}
+    if len(patent_people) != 6:
+        raise ValueError("duplicate inventor identity")
+    for original in ("P1-78", "P1-40"):
+        authors = {inventor_name_core(n) for n in lookup[original]["authorial_root"].split(";")}
+        if not patent_people <= authors:
+            raise ValueError(f"original named research team mismatch {original}")
+    for edge_id, source_id, target_id in (
+        ("E125", "P1-80", "P1-40"),
+        ("E126", "P1-80", "P1-37"),
+        ("E127", "P1-80", "P1-78"),
+    ):
+        if edge_id not in direct:
+            raise ValueError("missing exact original patent lineage edge")
+        edge = direct[edge_id]
+        if (edge["source_id"], edge["target_id"]) != (source_id, target_id):
+            raise ValueError("mismatched original patent graph join")
+    return {
+        "original_patent_publication": PATENT_WIPO,
+        "original_application": PATENT_PCT,
+        "exact_original_article_COI_join": True,
+        "six_original_inventor_names_match_2017_and_2019_papers": True,
+        "patent_proposed_device": "17 cm aluminium electrode electric field",
+        "patent_is_2024_Rodin_or_Helmholtz_coil": False,
+        "medical_treatment_effect_proved": False,
+        "2019_full_article_or_SI_inspected": False,
+        "2024_claimed_60percent_match_coil_effect_proved": False,
+    }
+
 
 def rows(path: Path) -> list[dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as f:
@@ -66,8 +133,10 @@ def audit(sources: list[dict[str, str]], edges: list[dict[str, str]]) -> dict:
         raise ValueError("lost original 2017 magnetic exposure")
     if "15" not in lookup["P1-40"]["claim_scope"]:
         raise ValueError("lost original 2019 EF endpoint")
+    patent = exact_patent_identity(lookup, direct)
     return {
-        "original_source_roles": sorted(PAPERS),
+        "WIPO_original_patent_and_2019_ACS_disclosure": patent,
+        "original_source_roles": sorted(PAPERS) + [PATENT_SOURCE],
         "shared_2017_2019_named_authors": sorted(same),
         "shared_author_count": len(same),
         "distinct_original_articles": 3,
@@ -86,7 +155,9 @@ def self_test() -> dict:
     s, e = rows(LANDSCAPE), rows(EDGES)
     audit(s, e)
     cases = 0
-    for kind in ("source_id", "year", "author_overlap", "edge_target", "missing"):
+    for kind in ("source_id", "year", "author_overlap", "edge_target", "missing",
+                 "patent_number", "patent_disclosure", "patent_inventor",
+                 "patent_hardware", "patent_edge", "missing_patent"):
         ss, ee = deepcopy(s), deepcopy(e)
         if kind == "source_id":
             next(r for r in ss if r["id"] == "P1-78")["id"] = "P1-40"
@@ -96,16 +167,29 @@ def self_test() -> dict:
             next(r for r in ss if r["id"] == "P1-78")["authorial_root"] = "Other research team"
         elif kind == "edge_target":
             next(r for r in ee if r["edge"] == "E122")["target_id"] = "P1-40"
-        else:
+        elif kind == "missing":
             ss = [r for r in ss if r["id"] != "P1-78"]
+        elif kind == "patent_number":
+            next(r for r in ss if r["id"] == "P1-80")["original_work"] = "Unrelated patent"
+        elif kind == "patent_disclosure":
+            next(r for r in ss if r["id"] == "P1-40")["carrier_and_inspection"] = "abstract only; no original COI"
+        elif kind == "patent_inventor":
+            next(r for r in ss if r["id"] == "P1-80")["authorial_root"] = "Unrelated inventor"
+        elif kind == "patent_hardware":
+            next(r for r in ss if r["id"] == "P1-80")["claim_scope"] = "unrelated apparatus"
+        elif kind == "patent_edge":
+            next(r for r in ee if r["edge"] == "E125")["target_id"] = "P1-37"
+        else:
+            ss = [r for r in ss if r["id"] != "P1-80"]
         try:
             audit(ss, ee)
         except ValueError:
             cases += 1
         else:
             raise AssertionError(f"source provenance mutation not rejected: {kind}")
-    assert cases == 5
+    assert cases == 11
     return {"source_adversarial_regressions_passed": cases,
+            "patent_COI_and_original_claims_bounded": True,
             "no_Rodin_60percent_promotion": True,
             "original_2019_main_text_still_unpaid": True}
 
