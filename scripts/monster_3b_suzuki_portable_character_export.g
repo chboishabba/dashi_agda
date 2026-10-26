@@ -22,6 +22,7 @@
 #     build/monster_3b_suzuki_portable_source_characters.json
 
 if LoadPackage("ctbllib") <> true then Error("CTblLib required"); fi;
+Read("scripts/monster_3b_source_json_escape.g");
 six := CharacterTable("6.Suz");
 if six = fail then Error("6.Suz source ordinary table unavailable"); fi;
 irr := Irr(six);
@@ -102,7 +103,7 @@ WriteRowArray := function(indices)
   AppendTo(out,"[\n");
   for k in [1..Length(indices)] do
     idx := indices[k];
-    AppendTo(out,"    {\"label\":\"",labels[idx],"\"",
+    AppendTo(out,"    {\"label\":",Monster3BSourceJSONQuotedLabel(labels[idx]),
       ",\"source_irreducible_position_1_based\":",String(idx),
       ",\"values\":[");
     for j in [1..Length(classOrders)] do
