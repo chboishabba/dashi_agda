@@ -32,6 +32,7 @@ import alexander_horned_c3_explicit_open_cover as original_cover
 import alexander_horned_c3_pierced_shell_product as original_shell
 import alexander_horned_c3_equivariant_basing_paths as original_basing
 import alexander_horned_c3_radius_overlap_witness as latest_parent_overlap
+import alexander_horned_c3_open_exhaustion_severe_controls as latest_hatcher_compact
 import alexander_horned_c3_same_cover_discriminator as original_cover_bidi
 import alexander_horned_c3_clopen_spatial_realization as original_clopen
 
@@ -472,5 +473,19 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertFalse(certificate["source_satellite_connected"])
         self.assertFalse(certificate["central_pi1_kernel_proved"])
         self.assertFalse(certificate["wild_same_object_embedding_kernel_proved"])
+
+
+    def test_parent_hatcher_open_directed_compact_absorption_strict(self):
+        # Consume the ORIGINAL newer #1244 source, NOT a restated
+        # 'compactness' placeholder. Closed increasing stages or open
+        # NONDIRECTED covers fail even in mathematically elementary
+        # compact examples; exact Mathlib lemma needs both premises.
+        receipt=latest_hatcher_compact.audit(depth=128)
+        self.assertEqual(receipt["status"],"PASS")
+        self.assertEqual(receipt["finite_witness_levels"],128)
+        self.assertIn("closed F_n",receipt["negative_no_openness"])
+        self.assertIn("two opens",receipt["negative_no_directedness"])
+        self.assertFalse(receipt["hatcher_group_colimit_machine_checked"])
+        self.assertFalse(receipt["wild_linked_handlebody_machine_checked"])
 
 if __name__ == '__main__': unittest.main()
