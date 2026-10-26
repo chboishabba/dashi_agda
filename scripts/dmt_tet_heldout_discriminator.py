@@ -2,7 +2,7 @@
 """Subject-held-out, source-typed DMT TET *synthetic* severe-test adapter.
 
 Reuses scripts.audit_dmt_tet_presence_synthetic: D'Amelio et al. 2026
-(in preparation), tomdamelio/dmt-emotions original code at
+(bioRxiv preprint doi:10.64898/2026.04.30.721872), original code at
 16067a5ff31b7f390381fc5b25b587b1769d9dd1 (15 TET channels, 4s).
 Mago et al. (2026, doi:10.1093/nc/niaf069) motivates the M1a rival,
 NOT this finite estimator or an empirical result. M0/M1a model labels are
@@ -107,7 +107,7 @@ def audit(doc):
         'M2_external_agent_fitted': False,
         'original_human_data_analysed': False,
         'future_information_leakage_allowed': False,
-        "source_code_author": "D'Amelio et al. 2026 (in preparation)",
+        "source_code_author": "D'Amelio et al. 2026 (bioRxiv preprint)",
     }
 
 
