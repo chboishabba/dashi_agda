@@ -39,6 +39,16 @@
 
 **Acquisition and preservation protocol:** record source URL, physical copy and its SHA-256 hash where the user has the PDF, issuance date vs access date, sender/recipient, part of Act, version, affected exact parcels and who authored each assertion. Do not manufacture a signed decision, submission, payment or execution receipt when a third-party website displays only a name or URL.
 
+## C0. Urgent counsel-only ADJR section 11 / 13 split
+
+The [ADJR Act original 27 August 2026 compilation](https://www.legislation.gov.au/C2004A01697/2026-08-27/2026-08-27/text/original/epub/OEBPS/document_1/document_1.html) distinguishes:
+
+- **Section 11(1)(c), (3)**: the court review application-period rules depend on when the written decision and, in some cases, a reasons statement were **furnished to the particular applicant**. The Act refers to a **28-day prescribed period** with multiple conditional starting events, applications for more time and other statutory alternatives. **15 October online publication is not universally the start date**. Counsel must also assess whether this particular EPBC decision is reviewable under ADJR, standing, any exclusions, court rules and alternative Federal Court original-jurisdiction routes.
+- **Section 13(1), (5), (11)**: a reasons request is for a person entitled to a section 5 review, subject to document/reasons availability and timing/refusal restrictions. Not identical to section 135A(2), under which **a person** can request the Secretary's s95C recommendation report post-decision.
+- **No implied extension:** this unsent request for the report, an ordinary FOI request or a separate s13 reasons request does **not by itself** make a court application, preserve a deadline or grant interim protection.
+
+**Counsel factual inputs to demand now:** exact decision service/furnishing proof to each proposed applicant; who received the signed notice and when; whether it contained material findings/evidence/reasons; any later reasons received and s13 correspondence; applicant's interests/standing, any commenced case, date of threatened clearing and need for a stay. Do not invent a uniform 12 November 2026 legal filing deadline merely by adding 28 days to 15 October.
+
 ## C. Structured three-file legal cross-examination once records arrive
 
 | Exact same-action comparison | Required joined original | Questions counsel can test |
