@@ -1,0 +1,33 @@
+module DASHI.Analysis.RiemannG21LeanHyperbolicMonotonicityReceiptRegression where
+
+import DASHI.Analysis.RiemannG21LeanHyperbolicMonotonicityReceiptBoundary as Receipt
+
+open import DASHI.Core.Prelude
+
+regressionLeanTanhSourceWritten :
+  Receipt.LeanHyperbolicMonotonicityReceiptBoundary.scaledTanhMonotonicitySourceWritten
+    Receipt.canonicalLeanHyperbolicMonotonicityReceiptBoundary ≡ true
+regressionLeanTanhSourceWritten =
+  Receipt.LeanHyperbolicMonotonicityReceiptBoundary.scaledTanhMonotonicitySourceWrittenIsTrue
+    Receipt.canonicalLeanHyperbolicMonotonicityReceiptBoundary
+
+regressionLeanCothSourceWritten :
+  Receipt.LeanHyperbolicMonotonicityReceiptBoundary.scaledCothMonotonicitySourceWritten
+    Receipt.canonicalLeanHyperbolicMonotonicityReceiptBoundary ≡ true
+regressionLeanCothSourceWritten =
+  Receipt.LeanHyperbolicMonotonicityReceiptBoundary.scaledCothMonotonicitySourceWrittenIsTrue
+    Receipt.canonicalLeanHyperbolicMonotonicityReceiptBoundary
+
+regressionNoAgdaPromotion :
+  Receipt.LeanHyperbolicMonotonicityReceiptBoundary.hyperbolicMonotonicityImportedIntoAgda
+    Receipt.canonicalLeanHyperbolicMonotonicityReceiptBoundary ≡ false
+regressionNoAgdaPromotion =
+  Receipt.LeanHyperbolicMonotonicityReceiptBoundary.hyperbolicMonotonicityImportedIntoAgdaIsFalse
+    Receipt.canonicalLeanHyperbolicMonotonicityReceiptBoundary
+
+regressionMomentLayerStillOpen :
+  Receipt.LeanHyperbolicMonotonicityReceiptBoundary.continuumMomentLayerPaid
+    Receipt.canonicalLeanHyperbolicMonotonicityReceiptBoundary ≡ false
+regressionMomentLayerStillOpen =
+  Receipt.LeanHyperbolicMonotonicityReceiptBoundary.continuumMomentLayerPaidIsFalse
+    Receipt.canonicalLeanHyperbolicMonotonicityReceiptBoundary
