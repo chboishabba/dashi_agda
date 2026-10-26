@@ -1,0 +1,36 @@
+# Original Rai 2025 EEG: event/dyad dependence, attribution and Hardt Pareto phase gates
+
+**27 October 2026 — PR #1252 (stacked on #1242).** This is a first-party source-genealogy and exact *synthetic* mathematical witness, not a real EEG reproduction, proof of an anomalous receiver, original historical victim evidence or Agda kernel certificate.
+
+## Original source owners and separation
+
+- **Rai, Lee, Becke, Trenado, Abad-Hernando, Sperling, Vidaurre, Wald-Fuhrmann, Richardson, Ward and Orgs**, *iScience* **28:112922** (2025), DOI **10.1016/j.isci.2025.112922**, own the human audience EEG experiment: https://pmc.ncbi.nlm.nih.gov/articles/PMC12432844/ . Retained live groups reported **20,18,21=59**.
+- **Laura Rai and Guido Orgs** own the separate UCL dataset **10.5522/04/28508744.v1**, catalogued as **N=57** and CC0: https://rdr.ucl.ac.uk/articles/dataset/28508744/1 . Actual file inventory, ID join, file bytes and source differences versus N=59 remain **unverified**. Another live N=57 questionnaire cohort and a separate N=57 cinema cohort have different measurement identities.
+- **Four Rai-paper software citation roles** are OSF **uz573** (availability), **ursmc** (key resources), **69gfe** (correlated components analysis) and **b62d7** (performance-feature Granger). These are *four citation locations*, not four verified independent software packages, original downloaded blobs or replications. No OSF file inventory was acquired.
+- Independently authored methodological context: **Jiang, Zou & Yu** (2026), DOI **10.1016/j.biopsycho.2026.109367**, synthesize **54 unique EEG studies**: core interaction condition **k=14 Hedges g=0.887, CI 0.533–1.241**; core association **k=6 Fisher z=0.456**. Different estimands, overlapping model study sets and no new 54-study cohort. **Novembre, Koul & Bigand** (2026), DOI **10.1016/j.tins.2026.09.006**, separately discuss heterogeneity of mechanisms in a Forum article, not a new experimental trial. Neither verifies Hardt's extraordinary history.
+
+## New exact synthetic discriminator
+
+The 20+18+21 people afford **190+153+210=553** possible within-performance unordered dyads; **9858 pairs of dyads share a person**. Even disjoint dyads can be dependent through a common performance, visual scene, music, movement, recording hardware or other common input. The statistic's independent unit must be grounded in its assignment, measurement and noise model; it is **not automatically 553**, and no single effective sample size is asserted for every study analysis.
+
+New source `scripts/check_hardt_rai_event_dependence_cut.py` creates `X[e,i,t]=S[e,t]+i`, where `S` is one invented event-wide time series. **All 553 dyads have exact Pearson R²=1 while zero direct interpersonal causal edges exist.** This is not Rai CCA and no original EEG was loaded.
+
+Under a **different, explicitly hypothetical** intervention independently assigned at the **three performance events**, with prespecified sharp-null sign flips and invented event effects `(2,3,5)`, two of `2^3=8` event assignments are at least as extreme in absolute sum: **two-sided p=1/4**. An intentionally invalid comparator treating all 553 dyads as independent assignment units produces **p=2^-552**. This isolates *pseudoreplication*, not an error in the original authors' circular shift / maximum-cluster null. **We do not know that Rai's experiment had such event-level randomized assignment, and do not attribute the synthetic randomization or its p-values to them.**
+
+**Execution/provenance:** locally ran **12/12 Python unittests** of these arithmetic and synthetic statements; new checker Git blob **b4560557d81d024bf1acb46f57c42664acb2e9bb**, discovery wrapper Git blob **84a7e673304b9d51b2f886bb4d61c65755124174**, independently matched GitHub after commits. Previous **51/51** source/method tests are retained as a *prior separate receipt*, not falsely advertised as a current integrated 63/63 run. The separate prior receipt was corrected after detecting a script SHA mistakenly pointing to its test wrapper.
+
+## Research question and next Pareto payments
+
+**Original inquiry, D0:** Hardt's source-attributed *delta-group influence* and later alleged extraordinary intervention narrative. Test which claims are *made* and by whom separately from historically documented events and independently verified causation. Highest information gain: acquire Hardt's cited unpublished reference-10 *How High Delta people can influence other people and the world around them*, if extant, and original authenticated event/witness records and denominator. A BioCybernaut clip, later same-speaker interview, claim of 80%, or institutional association is **not independent corroboration of harm**. Do not name purported victims without evidence.
+
+**E0 original datasets/code:** Acquire actual UCL **28508744.v1** original file inventory and checksums, event/subject/timebase crosswalk and every OSF location's files, versions, hashes and identity joins. Reuse existing `check_hardt_rai_observational_archive.py` and source-count gate; neither a DOI description nor a guessed 59→57 subset is sufficient. Access to those raw assets is the present external-source wall.
+
+**E1 ordinary neuroscience reproduction:** Run author-owned 1–4 Hz **correlated components analysis**, documented five-second windows with 80% overlap, circular-shift and cluster-correction procedures *on source-authenticated recordings*, without silently replacing CCA with canonical correlation. Condition on shared performance stimuli, movement, respiration, lighting and common reference; inspect lost recording IDs, null exchangeability, independent participants/events, covariate leakage and sensitivity to leave-one-performance-out variation. Distinguish participant, dyad, time window and performance assignment units.
+
+**E2 measured physical path:** Independently measure source current/field, source-to-target transfer, receiver-band calibration, environmental coupling and noise; require a *same-device* forward/readout/measurement commuting-square acceptance. The experimental identifiability lesson from #1253 (PANDORA controls) is relevant here; #1269 calibrated NV sensing and #1272 optics are separately authored method analogues, not measurements of Hardt's subjects.
+
+**E3 causal intervention:** Design only a benign, properly blinded and preregistered concealed-target experiment with leakage, sham, source/receiver and replication controls, contingent on an ethically feasible measured pathway. Existing neural synchrony and externally mediated EEG→computer→stimulator communication are not a nonlocal signal.
+
+**F0 proof/status:** Reuse #1266 observational-consumer nonidentifiability, #1263 PK original source attribution, #1258 postselection cautions, #1242 historical corpus and original Agda owners with explicit imports and same-object checks. Do not duplicate unmerged owners or promote a source-written theorem to a kernel-verified proof. No Agda typecheck, CI, human original EEG replay or anomalous physical demonstration is claimed.
+
+**Stop rule:** More toy-model significance does not pay missing original-file, identity, historical witness or physical-receiver evidence. Maintain documentary status, empirical status, synthetic arithmetic and formal kernel status separately.
