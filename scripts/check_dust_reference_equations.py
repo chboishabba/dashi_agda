@@ -52,3 +52,35 @@ def check_attention():
 if __name__=="__main__":
     check_centering()
     check_attention()
+    check_complete_orthogonal_population()
+    check_nonlinear_obstruction()
+
+def check_complete_orthogonal_population():
+    """Whole factorial +/-1 probes: exact linear credit, causal nonlocal reward."""
+    x=[F(2),F(-3)]
+    sigma=F(1,7)
+    noise=[[F(a),F(b)] for a,b in product((-1,1),repeat=2)]
+    # loss0=2*h0; loss1=5*h0+3*h1
+    noisy=[[2*(x[0]+sigma*a[0]), 5*(x[0]+sigma*a[0])+3*(x[1]+sigma*a[1])]
+           for a in noise]
+    for gamma,expected in [(F(0),[F(2),F(3)]),
+                           (F(1),[F(7),F(3)]),
+                           (F(1,2),[F(9,2),F(3)])]:
+        weights=[[F(1),gamma],[F(0),F(1)]]
+        centered,rewards,credit,update=dust_step(x,noise,[],noisy,weights,sigma)
+        assert credit==expected,(gamma,credit,expected)
+        assert update==sum(expected[t]*x[t] for t in range(2))
+        for token in range(2):
+            assert sum(centered[k][token] for k in range(4))==0
+    print("PASS complete 2-token Rademacher population: exact affine credit 2,7,9/2")
+
+def check_nonlinear_obstruction():
+    """Quadratic cross-terms and higher-order bias distinguish exactness scopes."""
+    for scale in (F(1,10),F(1,4),F(1)):
+        # A cubic, symmetric two-probe finite difference cannot recover
+        # the unsmoothed gradient exactly at any nonzero scale.
+        y=F(3,2)
+        smooth_estimate=((y+scale)**3-(y-scale)**3)/(2*scale)
+        assert smooth_estimate==3*y*y+scale*scale
+        assert smooth_estimate!=3*y*y
+    print("PASS cubic nonzero finite-smoothing bias counterexample")
