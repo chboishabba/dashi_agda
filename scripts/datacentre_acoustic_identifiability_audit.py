@@ -215,6 +215,37 @@ def _signed_ranks(changes):
     }
 
 
+
+# Raspberry Shake original public FDSN network/channel naming
+# https://manual.raspberryshake.org/stationNamingConvention.html
+# https://manual.raspberryshake.org/metadata.html
+# https://raspberryshake.org/legacy-data/
+# SHZ vertical seismic samples, HDF infrasound microbarometer pressure;
+# a FDSN archival 'data center' is NOT an industrial compute data centre.
+def raspberry_shake_channel_evidence(channel):
+    channel_meaning = {
+        'HDF': ('airborne_infrasound_pressure', 'Pa'),
+        'EHZ': ('vertical_seismic_motion', 'requires_StationXML'),
+        'SHZ': ('vertical_seismic_motion', 'requires_StationXML'),
+        'ENZ': ('vertical_accelerometer', 'requires_StationXML'),
+        'ENE': ('east_west_accelerometer', 'requires_StationXML'),
+        'ENN': ('north_south_accelerometer', 'requires_StationXML'),
+    }
+    if type(channel) is not str or channel not in channel_meaning:
+        raise ValueError('recognized Raspberry Shake FDSN channel required')
+    domain, unit = channel_meaning[channel]
+    return {
+        'channel': channel, 'record_type': domain,
+        'expected_physical_output_unit_after_response': unit,
+        'atmospheric_sound_pressure_channel': channel == 'HDF',
+        'raw_counts_are_pascals_without_instrument_response': False,
+        'requires_exact_stationxml_epoch_response': True,
+        'instrument_only_proves_industrial_facility_causation': False,
+        'proof_of_same_site_human_health_outcome': False,
+        'network_archive_root': 'Raspberry Shake AM 10.7914/SN/AM',
+    }
+
+
 def audit_scatterty_original_csv(source_bytes):
     """Read published deidentified human laboratory CSV, do NOT synthesize it.
 
@@ -524,6 +555,22 @@ class TestOriginalInquiryAcceptance(_unittest.TestCase):
                 nominal_mseed_wav_playback_ratio(old, new)
 
 
+
+    def test_fdsn_channel_pressure_and_ground_motion_nonidentity(self):
+        a = raspberry_shake_channel_evidence('HDF')
+        z = raspberry_shake_channel_evidence('SHZ')
+        self.assertTrue(a['atmospheric_sound_pressure_channel'])
+        self.assertEqual(a['expected_physical_output_unit_after_response'], 'Pa')
+        self.assertFalse(z['atmospheric_sound_pressure_channel'])
+        self.assertEqual(z['record_type'], 'vertical_seismic_motion')
+        self.assertFalse(a['raw_counts_are_pascals_without_instrument_response'])
+        self.assertFalse(a['instrument_only_proves_industrial_facility_causation'])
+
+    def test_fdsn_rejects_unknown_infrasound_pseudonyms(self):
+        for wrong in (None, 'FHD', 'Pa', 'HDF ', 'hdf', 'RAW', 'SPL'):
+            with self.assertRaises(ValueError):
+                raspberry_shake_channel_evidence(wrong)
+
     def test_scatterty_signed_rank_fixture(self):
         r = _signed_ranks([_Decimal('-2'),_Decimal('3'),
                            _Decimal('4'),_Decimal('-1')])
@@ -695,6 +742,9 @@ if __name__ == "__main__":
             original_repo_attribution(r) for r in BENN_JORDAN_GITHUB_ROOTS]
         status['public_fork_converter_timebase_example'] = (
             mseed_converter_metadata_witness())
+        status['public_FDSN_original_pressure_channel_donor'] = (
+            raspberry_shake_channel_evidence('HDF'))
+        status['FDSN_original_channel_is_not_a_data_centre_field_study'] = True
         status['verified_public_2026_site_sensor_or_participant_data'] = False
         status['paper_status_from_video_description'] = 'WIP, publication not verified'
         print(_json.dumps(status, indent=2))
