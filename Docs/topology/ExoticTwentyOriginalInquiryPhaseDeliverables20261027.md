@@ -186,3 +186,53 @@ transport are important but orthogonal consumers;
 neither can substitute for the original
 three-surface classification or close all twenty
 source-specific hallmark problems.
+
+
+## 27 October Lean v4.28.0 symbolic Cantor topology donor (not Richards actual ends)
+
+Companion `dashi_lean4` #86 now source-writes
+`Synthesis/ExoticTopologyCantorInverseLimitHomeomorph.lean`,
+using the **original native** `Integration.Address.Addr n Bool`,
+`CompatibleCantorTower` and its two previously implemented
+inverse functions. It installs the genuine stagewise
+product-induced topology on those compatible finite towers
+and attempts an actual `Homeomorph` to `ℕ→Bool`
+via stage evaluation, then to the literal Mathlib real
+middle-thirds `cantorSet` via the preexisting source
+`cantorSetHomeomorphNatToBool`. The original theorem
+and continuous-product API were inspected in the
+**pinned** `Mathlib v4.28.0`, not inferred from newer
+unlocked documentation.
+
+Original Mathlib source is
+`Mathlib/Topology/Instances/CantorSet.lean`, header authors
+Artur Szafarczyk, Suraj Krishna M S, Jean-Baptiste
+Stiegler, Isabelle Dubois, Tomáš Jakl, Lorenzo Zanichelli,
+Alina Yan, Emilie Uthaiwat, Jana Göken and
+Filippo A. E. Nuccio, copyright (c) Jana Göken 2024.
+The user-directed DASHI equivalence is a NEW
+source-specific consumer, not another origin attribution.
+
+A P0 **toolchain mismatch** was identified and addressed
+*only in the focused Lean CI*: project root
+`lean-toolchain=v4.35.0-rc3`, but locked
+Mathlib `v4.28.0` has
+`lean-toolchain=v4.28.0`. The job-local
+`LEAN_TOOLCHAIN=leanprover/lean4:v4.28.0`
+override and post-download assertion make
+the intended source-compatible experiment
+reproducible without rewriting any global
+pin, manifest or unrelated theorem source.
+
+Crucial status separation: this is a
+**source-written proof of a topological homeomorphism
+of symbolic coherent frontiers**, with no
+successful Lean kernel receipt yet. It
+is NOT a homeomorphism from the ACTUAL
+topological Richards end space of a
+noncompact infinite PL manifold. Thus the
+original question's surface families
+#5/6/7 retain the geometry/end-space
+OPEN flag. This result is a same-object
+stage-prefix inverse-limit advance rather
+than all-surface classification.
