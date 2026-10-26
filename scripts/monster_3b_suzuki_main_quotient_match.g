@@ -444,6 +444,27 @@ end;
 # per-class coordinates. Emit them here TOO, from this literal table,
 # so the downstream selected-character join can reject class permutations
 # which preserve the table name, order, centre and Irr positions.
+# Exact full-class values of source-selected irreducibles, independent
+# of class-order/size/PowerMap metadata. This prevents a noncentral
+# character-bearing permutation that preserves the class signature
+# from silently passing the source-relative two-producer join.
+SuzSelectedFullRowsJSON := function(indices)
+  local out, i, k, pos;
+  out := "[";
+  for i in [1..Length(indices)] do
+    if i > 1 then Append(out,","); fi;
+    pos := indices[i];
+    Append(out,"[");
+    for k in [1..NrConjugacyClasses(six)] do
+      if k > 1 then Append(out,","); fi;
+      Append(out,Monster3BSourceJSONCyclotomic(sixIrr[pos][k]));
+    od;
+    Append(out,"]");
+  od;
+  Append(out,"]");
+  return out;
+end;
+
 SixSuzJSONIntArray := function(xs)
   local result, k;
   result := "[";
@@ -497,6 +518,8 @@ PrintTo(output,
       SixSuzJSONIntArray(List(powerMap2Six, k -> k-1)), ",\n",
   "  \"six_suz_degree12_positions\": [", p12[1], ", ", p12[2], "],\n",
   "  \"six_suz_degree78_positions\": [", p78[1], ", ", p78[2], "],\n",
+  "  \"six_suz_selected_12_all_class_values\": ", SuzSelectedFullRowsJSON(p12), ",\n",
+  "  \"six_suz_selected_78_all_class_values\": ", SuzSelectedFullRowsJSON(p78), ",\n",
   "  \"six_suz_outer_table\": \"", Identifier(outer), "\",\n",
   "  \"base_1458_main_position\": ", base1458Pos, ",\n",
   "  \"base_1458_extraspecial_central_class_position\": ", mainCentral3, ",\n",
