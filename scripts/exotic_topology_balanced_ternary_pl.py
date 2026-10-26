@@ -47,6 +47,8 @@ from exotic_topology_pl_complement_components import (
 BRANCHES = (-1, 0, 1)
 CODE = {-1: (0,), 0: (1, 0), 1: (1, 1)}
 DIGIT369 = {-1: 3, 0: 6, 1: 9}
+SIGN_INVERSION = {-1: 1, 0: 0, 1: -1}
+CYCLIC_C3 = {-1: 0, 0: 1, 1: -1}
 
 
 def encode_balanced_word(word):
@@ -138,6 +140,9 @@ def audit(depth=3):
             fixtures[-1]["new_attached_components"] = receipt["components"]
             fixtures[-1]["old_subcomplex_embedding"] = receipt["same_object_old_inclusion"]
     assert decode_complete_binary_word((1,)) is None
+    assert all(SIGN_INVERSION[SIGN_INVERSION[t]] == t for t in BRANCHES)
+    assert SIGN_INVERSION[0] == 0 and CYCLIC_C3[0] != 0
+    assert SIGN_INVERSION != CYCLIC_C3
     assert sum(2**(-len(bits)) for bits in CODE.values()) == 1
     return {
         "family": "balanced_ternary_three_end_branching",
@@ -146,6 +151,8 @@ def audit(depth=3):
         "physical_pants_per_old_frontier": 2,
         "new_outgoing_boundaries_per_frontier": 3,
         "one_to_three_cobordism_euler": -2,
+        "balanced_zero_fixed_by_sign_inversion": True,
+        "sign_reflection_is_not_c3_rotation": True,
         "binary_to_ternary_measure_preservation_claim": False,
         "topological_infinite_end_space_homeomorphism_proved": False,
         "agda_or_lean_kernel_verified": False,
