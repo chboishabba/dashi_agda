@@ -38,6 +38,25 @@ A fresh review confirmed an existing source-format blocker: GAP's ATLAS `AtlasLa
 - An independent local Python synthetic reconstruction verified all eight additional class-signature negative controls plus five JSON quote/backslash round trips. This does **NOT** mean the committed GAP script, the committed updated Python integration, or real CTblLib exports ran locally.
 - The distinguishing branch is decisive: if the source-restricted selected 78 is **not** the Nebe Sym² family, a passing join should be reported as a rigorous *negative* against that selected-constituent hypothesis, not promoted to the conjectured 12+78 intertwiner.
 
+## 27 October second-order strengthening: bind the **full selected characters**, not just the table head
+
+The previous improvement still left a genuine source-coordinate hole: different conjugacy classes can have identical element order, class size and square-map behaviour. Therefore even equality of *all* 210 metadata triples between two table exports cannot mathematically prove equality of their character-column orders.
+
+An **independently executed exact finite counterexample** uses the actual abelian group `C2 × C2 × C3`. Fix the identity, a chosen involution `(1,0,0)`, and a chosen central order-three element `(0,0,1)`. Swapping `(0,1,0)` and `(1,1,0)` preserves the *entire* group class-order, class-size and square-power-map arrays, plus these central class positions. A genuine 1-dimensional character
+`χ(a,b,c)=(-1)^(a+b) ζ^c` nevertheless changes its character values on the swapped classes. Thus the metadata-only join is not a complete class-coordinate integrity gate.
+
+The existing source consumer path now adds a strictly stronger obligation without inventing a new character algorithm:
+
+1. `scripts/monster_3b_source_json_escape.g` exports individual original GAP cyclotomic values **exactly** using `Conductor`, `CoeffsCyc` and algebraic reconstruction; no approximation to `Q(ζ₃)`.
+2. The original GAP `monster_3b_suzuki_main_quotient_match.g` emits **the full 210-class values** of both actual selected degree-12 and both actual selected degree-78 `Irr(six)` rows alongside the earlier group metadata, ATLAS labels and original main→MN3B→Monster receipt.
+3. `render_monster_3b_suzuki_main_quotient_match.py` validates two complete selected rows of each degree and their exact value-record structure.
+4. `monster_3b_suzuki_selected_character_join.py` compares **all 4 × 210 values exactly**, via its already-owning `Cyc.wire`, against the independent all-conductor export *after* matching source `Irr` indices and central C2/C3.
+5. The original synthetic regression gains six additional fail-closed cases covering source/exported noncentral character drift, omitted degree12 rows, and a truncated selected degree78 row; total **32** specified negatives. The thin execution driver asserts `selected_source_characters_all_classes_matched=true`.
+
+The **independent** small-group model was executed locally and produced `/mnt/data/monster3b_exact_class_metadata_collision_receipt_20261027.json`. The newly committed exact `6.Suz` GAP source and 32-case GitHub test were **not executed here**: do not relabel a local equivalent mathematics test as an actual CTblLib/Monster receipt. A future successful source join still needs original author/source-provenance attestation and the #1098 actual normalizer Hom action, not merely successful arithmetic.
+
+**Mathematical limit:** four selected rows need not distinguish every conjugacy class of `6.Suz`. The new check establishes equality of those selected rows *as exported by the two producers* on a common class ordering. A globally simultaneous reindexing of the original source tables is still outside this local join's detection without independently fixed source coordinates. Actual GAP table version and source input identities must be retained.
+
 ## Source-versus-execution boundary
 
 - **Committed code:** yes, to PR #1250, source-written at a new head.
