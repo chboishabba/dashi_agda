@@ -625,3 +625,24 @@ woodMackenzieSameRateCannotConcealSpotAssumption :
   INF.FactorsThrough Climate.sameNominalRateAcrossModels Climate.originalModelContractingAssumption → ⊥
 woodMackenzieSameRateCannotConcealSpotAssumption =
   Climate.same25RateCannotDetermineModelSpotAssumption
+
+
+------------------------------------------------------------------------
+-- Named government originals, reservation percentage denominators, and
+-- future-tense commencement claims are source-versioned rather than enacted.
+------------------------------------------------------------------------
+
+governmentReservation2025VersusMay2026Base :
+  Typed.relationKind Climate.reservation2025ProductionToMay2026Exports ≡
+    Typed.reportedStatisticRestatement
+governmentReservation2025VersusMay2026Base = refl
+
+governmentReservationDutyDateIsDraftSourceSequence :
+  Typed.relationKind Climate.reservationMayToSeptemberDutyDate ≡
+    Typed.reportedStatisticRestatement
+governmentReservationDutyDateIsDraftSourceSequence = refl
+
+governmentReservationDateDriftDoesNotProveTransfer :
+  Typed.StrongHistoricalTransfer Climate.reservationMayToSeptemberDutyDate → ⊥
+governmentReservationDateDriftDoesNotProveTransfer =
+  Climate.reservationDraftChronologyIsNotMethodTransmission
