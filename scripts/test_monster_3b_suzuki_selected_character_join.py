@@ -46,11 +46,17 @@ def case(positive):
     sign=1 if positive else -1
     source={"table_id":"6.Suz","central_c2_zero_based":1,
        "central_c3_zero_based":2,
-       "degree12":[{"label":label,"values":[wire(12,0),wire(-12,0),wire(12,k)]}
-                   for label,k in (("12a",1),("12b",2))],
-       "degree78":[{"label":label,"values":[wire(78,0),wire(78*sign,0),wire(78,k)]}
-                   for label,k in (("78a",1),("78b",2))]}
+       "group_order":6,"class_orders":[1,2,3,6,3,2],
+       "degree12":[{"label":label,"source_irreducible_position_1_based":i,
+                    "values":[wire(12,0),wire(-12,0),wire(12,k)]}
+                   for i,(label,k) in enumerate((("12a",1),("12b",2)),1)],
+       "degree78":[{"label":label,"source_irreducible_position_1_based":i+2,
+                    "values":[wire(78,0),wire(78*sign,0),wire(78,k)]}
+                   for i,(label,k) in enumerate((("78a",1),("78b",2)),1)]}
     selected={"six_suz_table":"6.Suz",
+        "six_suz_group_order":6,"six_suz_class_count":6,
+        "six_suz_degree12_positions":[1,2],
+        "six_suz_degree78_positions":[3,4],
         "suzuki_central_involution_class_position":2,
         "suzuki_central_order_three_class_position":3,
         "common_729_necessary_equal_C3_phase_pair_count":2,
@@ -77,7 +83,11 @@ def fake_validate(x):
         full_direct=x["selected_78_direct_sym2_full_character_pair_count"],
         full_dual=x["selected_78_dual_sym2_full_character_pair_count"],
         full_nebe=x["selected_78_is_nebe_sym2_family_full_character_equal"],
-        selected_faithful=x["source_selected_degree_78_faithful_to_6Suz"])
+        selected_faithful=x["source_selected_degree_78_faithful_to_6Suz"],
+        source_order=x["six_suz_group_order"],
+        source_classes=x["six_suz_class_count"],
+        positions12=x["six_suz_degree12_positions"],
+        positions78=x["six_suz_degree78_positions"])
 
 def run():
     for positive in (True,False):
@@ -105,7 +115,13 @@ def run():
     fails("false_nebe_claim",lambda a,b:b.update(selected_78_is_nebe_sym2_family_full_character_equal=False))
     fails("non_scalar_c2",lambda a,b:a["degree78"][1]["values"].__setitem__(1,wire(3,0)))
     fails("different_c2_signs",lambda a,b:a["degree78"][1]["values"].__setitem__(1,wire(-78,0)))
-    assert len(negatives)==12
+    fails("stale_12_Irr_position",lambda a,b:b.update(six_suz_degree12_positions=[2,1]))
+    fails("stale_78_Irr_position",lambda a,b:b.update(six_suz_degree78_positions=[4,3]))
+    fails("source_group_order_drift",lambda a,b:b.update(six_suz_group_order=7))
+    fails("source_class_count_drift",lambda a,b:b.update(six_suz_class_count=7))
+    fails("duplicate_exported_Irr_position",lambda a,b:a["degree78"][0].update(source_irreducible_position_1_based=2))
+    fails("missing_exported_Irr_position",lambda a,b:a["degree78"][1].pop("source_irreducible_position_1_based"))
+    assert len(negatives)==18
     return {"status":"PASS_SYNTHETIC_JOIN_INTERFACE",
        "coherent_synthetic_branches":2,"rejected_false_joins":negatives,
        "original_6Suz_data_used":False,"full_class_auditor_executed":False,
