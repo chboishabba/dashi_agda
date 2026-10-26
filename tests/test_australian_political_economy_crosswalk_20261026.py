@@ -189,3 +189,42 @@ def test_government_roles_are_not_collapsed_and_palmer_counterclaims_are_version
     assert "aecDisclosure2026PublicationOriginal = australia-source-role-receipt\n  originalElectoralRegulatorRule" in src
     assert "palmerRevisedContactAttribution = australia-source-role-receipt\n  sourceClaimAndDatedCounterStatement" in src
     assert "bannonPalmerContrarySourceReceipt = australia-source-role-receipt\n  sourceClaimAndDatedCounterStatement" in src
+
+
+def test_february_2022_bill_is_not_august_2022_lobbying():
+    """Official docket identity is not proof of a financial or causal handoff."""
+    s = ADAPTER.read_text()
+    assert "coalitionFeb2022BillDocket = australia-source-role-receipt" in s
+    assert "2022-02-10" in s
+    assert "senateSeptember2022MultipleSubmitterDocket = australia-source-role-receipt" in s
+    assert "HPPL #3" in s and "IPA #6" in s and "National Seniors #7" in s
+    assert "accciDecember2021IndependentAlternative = australia-source-role-receipt" in s
+    assert "act55OfficialStatute = australia-source-role-receipt" in s
+    assert "2022-11-23" in s
+    assert "februaryBillIsNotAugustSubmission :" in s
+    assert "februaryBillIsNotAugustSubmission ()" in s
+    assert "enactedLimitedActIsNotUnlimitedPartyPledge ()" in s
+    assert "Underlying PDF page bytes not inspected" in s
+    assert "not an observed employment increase" in s
+
+
+def test_official_stages_have_distinct_declared_constructors_and_institutional_producers():
+    s = ADAPTER.read_text()
+    a = s.index("data PensionLegislativeObject : Set where")
+    b = s.index("data DistinctObject : Set where", a)
+    constructors = re.findall(r"^  ([A-Za-z][A-Za-z0-9]*) : PensionLegislativeObject$", s[a:b], re.M)
+    assert constructors == [
+        "feb2022CoalitionBill",
+        "august2022SenateSubmissions",
+        "nov2022Act55",
+        "jan2025OneNationPledge",
+    ]
+    for receipt in (
+        "coalitionFeb2022BillDocket",
+        "senateSeptember2022MultipleSubmitterDocket",
+        "accciDecember2021IndependentAlternative",
+    ):
+        assert receipt + " = australia-source-role-receipt\n  governmentIndexedAdvocacySubmission" in s
+    assert ("act55OfficialStatute = australia-source-role-receipt\n"
+            "  originalLimitedGovernmentLegislation") in s
+    assert "a submission does not by itself establish bill drafting influence" in s.lower()
