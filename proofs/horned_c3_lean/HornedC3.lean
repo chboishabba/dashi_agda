@@ -2,3 +2,8 @@ import HornedC3.ThreeArmVanKampen
 import HornedC3.ThreeArmCollarIntersections
 import HornedC3.ThreeArmCollarCoverAssembly
 import HornedC3.ThreeArmCentralPi1Reduction
+import HornedC3.ThreeArmHatcherGroupTransport
+import HornedC3.ThreeArmRadiusCutGeometry
+import HornedC3.ThreeArmRadiusCutHatcherTransport
+import HornedC3.ThreeArmHatcherHomotopyTransport
+import HornedC3.ThreeArmHatcherPathTransport
