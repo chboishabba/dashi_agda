@@ -88,11 +88,12 @@ palmerCampaignDirectionNotIndependentlyVerified = refl
 -- first-hand byte inspection, or a litigant/report to a judicial finding.
 data AustraliaSourceRole : Set where
   originalParliamentaryDeclaredInterest : AustraliaSourceRole
+  originalElectoralRegulatorRule : AustraliaSourceRole
   firstPersonPolicyInterviewReported : AustraliaSourceRole
   publisherConfirmedInKindSupport : AustraliaSourceRole
   namedAssociateDonationReported : AustraliaSourceRole
   judiciallyReportedDocumentSchedule : AustraliaSourceRole
-  sourceClaimAndContemporaneousDenial : AustraliaSourceRole
+  sourceClaimAndDatedCounterStatement : AustraliaSourceRole
   releasedCorrespondenceReported : AustraliaSourceRole
   separateSiblingReconstruction : AustraliaSourceRole
 
@@ -142,7 +143,7 @@ hancockIPA2016And2017JudicialDocument = australia-source-role-receipt
 
 bannonPalmerContrarySourceReceipt : AustraliaSourceRoleReceipt
 bannonPalmerContrarySourceReceipt = australia-source-role-receipt
-  sourceClaimAndContemporaneousDenial
+  sourceClaimAndDatedCounterStatement
   "Steve Bannon DOJ-released 2019 message to Epstein, followed by Clive Palmer's spokesperson denial as reported by ABC 2026-02-01"
   "https://www.abc.net.au/news/2026-02-01/palmer-denies-bannon-claim-of-election-campaign-influence/106293074"
   "DOJ EFTA01615861 message contains Bannon's assertion about AUD 60m ads; an ABC 2026-02-01 spokesperson initially denied ANY conversation. In early Feb 2026 Palmer later acknowledged a brief unsolicited call while saying ads were already running, but Palmer denies that Bannon directed the campaign. Neither contact nor boast proves a delivery contract."
@@ -211,7 +212,7 @@ australiaGlobalCommonProgrammeNotEstablished = refl
 
 palmerRevisedContactAttribution : AustraliaSourceRoleReceipt
 palmerRevisedContactAttribution = australia-source-role-receipt
-  sourceClaimAndContemporaneousDenial
+  sourceClaimAndDatedCounterStatement
   "Clive Palmer first-person public account 2026-02-04 reported by The New Daily, following 2026-02-01 initial ABC spokesperson denial"
   "https://www.thenewdaily.com.au/news/politics/australian-politics/2026/02/04/clive-palmer-steve-bannon-ads"
   "Palmer later says one unsolicited late-night Bannon phone call happened AFTER his 2019 ads were running; contradicts the earlier no-contact claim while denying operational direction. Secondary interview rendering, not original call recording, telco log, or signed campaign creative order."
@@ -225,14 +226,14 @@ hansonSpecificPensionerPolicyOriginalTranscript = australia-source-role-receipt
 
 aecOldRegimeAnnualDisclosureGate : AustraliaSourceRoleReceipt
 aecOldRegimeAnnualDisclosureGate = australia-source-role-receipt
-  originalParliamentaryDeclaredInterest
+  originalElectoralRegulatorRule
   "Australian Electoral Commission, financial year 2025-26 Annual returns and 2026/27 transition"
   "https://www.aec.gov.au/Parties_and_Representatives/annual-returns.htm"
   "AEC says FY2025-26 donor annual returns are due 2026-11-17, party returns 2026-10-20, but official publication comes February 2027. Its new calendar-year/threshold regime commences 2027-01-01: do not backdate 2027 $5000 threshold to 2026 $17300 rules."
 
 aecDisclosure2026PublicationOriginal : AustraliaSourceRoleReceipt
 aecDisclosure2026PublicationOriginal = australia-source-role-receipt
-  originalParliamentaryDeclaredInterest
+  originalElectoralRegulatorRule
   "Australian Electoral Commission, 2026-10-26 Farrer by-election financial disclosure release"
   "https://aec.gov.au/media/2026/10-26.htm"
   "AEC expressly dates political-party 2025-26 annual return public inspection to 2027-02-01. A contemporary ABC donor report is not yet the future official annual disclosure and does not conclusively prove beneficiary of funds."
