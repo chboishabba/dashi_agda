@@ -64,3 +64,22 @@ Added `DASHI/Reasoning/DustHeadBatchCenteringExact.agda` for upstream `DUST.head
 Another worker's `Docs/formal/SovereignLilaDustActualLearnerIntegration20261026.md` is now present in #1265. It source-audits real `E8GPT` and points out native stochastic layer noise and mutating resonator memory. Our integration consumes its eventual source-pinned trainable-parameter interface only; no changes to its content, no duplicated optimiser and no claim of real E8GPT Dust training execution.
 
 Still unresolved: genuine 256-column cached logit partition refinement (tanh clipping, masked targets, softmax partition), attention future-lag routing, finite probability Agda theorem, real Noise record-specific training-step source, and held-out actual E8GPT training comparisons.
+
+
+## 26 October independent Noise-record source audit — no LILA duplicate
+
+**Ownership check:** `Docs/formal/SovereignLilaDustActualLearnerIntegration20261026.md` in #1265 already owns the *planned* concrete `E8GPT` instrumentation, RNG/memory controls, layer parameter update, AdamW comparison and held-out geometry assays. #1094/#1095 own semantic/geometric reasoning and teleodynamics. No separate LILA implementation, RNG adapter, or new experimental ontology should be built here; consume those outputs when they are committed and actually executable.
+
+**Original Noise source**, https://github.com/qlabs-eng/noise, inspected at exact Git file blob:
+- `train/val/run.py`: blob `000fe5a79252f0a4caf691cb558bf1a362b93930` (2026-10-26); source records **Boost → Cut**, independent input-key/gate and future-token probes, with Adam betas (0.5,0.98), warmdown, a trajectory EMA, and a loss-scored end merge. The run's header specifies that separate finite-difference measurements are scored against measured hubs, never fed in a chain as a second probe target. Source/credit description is **author code**, not an independent verified benchmark.
+- `train/speedrun/run.py`: blob `ea8e0945e6bf032ef2faeab8cd938ee0898c0e46` (2026-10-26); source describes an **identity-path warm start**, then Cut-lite with `future_draws = key_path_draws = 0`, 8-row updates, chain-rerun accelerations, then a held-out end merge. Source identifies fused query/activation/move kernels, head-moments approximation, and compiled graph warmup. Its `cosine >= 0.9999` equivalence statement is a **source-authored claim**, not a newly reproduced numeric receipt.
+- The source README separates **30M-token** tracks, including fixed-model CE and speedrun-to-3.5, from archived **10M-token** tracks. The 8-minute-20-second record does not supersede the older 1.6-second **10M** result on the same metric; the task differs. No new performance reproduction is claimed.
+
+**Immediate nonoverlapping proof obligations, Dust/Noise owner only:**
+1. A source-level typed distinction between probe pathways: measured hubs; own-query/key/value conditional one-step credit; independent future-token probes versus Cut-lite with those pathways disabled.
+2. Optimiser-state semantics for record-specific Adam and ANVIL paths, staged identity warm start, EMA and end-merge selection; not equivalent to original Dust's momentum SGD.
+3. Exact timing/accounting boundary: warmup excluded, forward-scored end merge included, validation excluded; retain the fixed dataset/model/epoch and output head constraints.
+4. For any proposed mathematical guarantee, link the literal block update and loss measurement to the proof's assumptions; finite Walsh reconstruction cannot establish an independent input-K, chain-rerun or full Noise update without a separate source refinement.
+5. Wait for the **actual other-worker LILA patch** and code-level receipts before importing those types. Avoid parallel edits to the LILA owner's planned learner patch.
+
+**Evidence grade:** direct upstream source-code inspection and Git blob identifiers; algorithmic decomposition is DASHI audit. Not an Agda kernel theorem, a GPU re-execution, a current leaderboard verification beyond the README, or an actual Sovereign-LILA training run. Attribution for the Noise main paper remains with Gülbahar/Mandal/Vegesna/Dahal; individual record scripts and contributions retain the contributors identified upstream.
