@@ -69,6 +69,35 @@ class HeldoutDiscriminatorTests(unittest.TestCase):
             self.assertEqual(len(result['predictions_exact']), 8)
             self.assertTrue(result['unseen_cell_fallback_training_only'])
 
+    def test_heldout_label_tamper_does_not_change_own_predictions(self):
+        before = build_rows(fixture())
+        edited = copy.deepcopy(before)
+        for row in edited:
+            if row['person'] == 'toy-person-A':
+                row['target'] = 1 - row['target']
+        original = next(f for f in heldout(before) if f['held_out_person'] == 'toy-person-A')
+        changed = next(f for f in heldout(edited) if f['held_out_person'] == 'toy-person-A')
+        for model in FEATURES:
+            self.assertEqual(original['models'][model]['predictions_exact'],
+                             changed['models'][model]['predictions_exact'])
+
+    def test_partial_outcome_samples_do_not_become_independent_people(self):
+        data = fixture()
+        result = audit(data)
+        self.assertEqual(sum(f['n_test_transitions'] for f in result['folds']), 24)
+        self.assertEqual(len(result['folds']), 3)
+        self.assertTrue(result['within_subject_targets_not_independent_samples'])
+
+    def test_non_target_dimension_future_not_used(self):
+        data = fixture()
+        initial = audit(data)['folds']
+        for sample in data['samples']:
+            if sample['stage'] == 'DMT' and sample['time_index'] == 4:
+                sample['values']['selfhood'] = '9'
+                sample['values']['pleasantness'] = '9'
+                sample['values']['anxiety'] = '9'
+        self.assertEqual(initial, audit(data)['folds'])
+
     def test_reject_real_mode(self):
         d = fixture(); d['mode'] = 'authorized_research'
         with self.assertRaises(ValueError):
