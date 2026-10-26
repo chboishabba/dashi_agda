@@ -167,3 +167,305 @@ record ClimateTypedCaseBoundary : Set where
 canonicalClimateTypedCaseBoundary : ClimateTypedCaseBoundary
 canonicalClimateTypedCaseBoundary =
   climateTypedCaseBoundary true true false false false false
+
+
+------------------------------------------------------------------------
+-- 1998 documented COMMON PRODUCTION TEAM, exact contributors rather than
+-- an inferred celebrity/ideological network. Joe Walker's cover letter and
+-- the 3 Apr action plan are printed in the 27 Apr Congressional Record.
+-- A participant credit is NOT proof of a personally authored sentence,
+-- funding payment, implementation or a downstream 2026 broadcast direction.
+------------------------------------------------------------------------
+
+apiCongressional1998 : Typed.SourceReceipt
+apiCongressional1998 = Typed.sourceReceipt
+  "American Petroleum Institute / Joseph Walker / Global Climate Science Communications Team; US Congressional Record"
+  "Global Climate Science Communications Action Plan and covering letter"
+  "1998-04-03; entered Congressional Record 1998-04-27"
+  "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm"
+  "Original publicly filed proposed communications strategy with 13 named workshop contributors, possible funders, public and media uncertainty objectives. A draft and funding prospectus are not an implementation/payment receipt."
+
+api1998TeamContributorNames : List String
+api1998TeamContributorNames =
+  "A. John Adams (John Adams Associates)" ∷
+  "Candace Crandall (Science and Environmental Policy Project)" ∷
+  "David Rothbard (Committee for a Constructive Tomorrow (CFACT))" ∷
+  "Jeffrey Salmon (George C. Marshall Institute)" ∷
+  "Lee Garrigan (Environmental Issues Council)" ∷
+  "Lynn Bouchey (Frontiers of Freedom)" ∷
+  "Myron Ebell (Frontiers of Freedom)" ∷
+  "Peter Cleary (Americans for Tax Reform)" ∷
+  "Randy Randol (Exxon Corp.)" ∷
+  "Robert Gehri (Southern Company)" ∷
+  "Sharon Kneiss (Chevron Corp.)" ∷
+  "Steve Milloy (The Advancement of Sound Science Coalition (TASSC))" ∷
+  "Joseph Walker (American Petroleum Institute (API))" ∷ []
+
+apiNamedContributorAJohnAdams : Typed.TypedGenealogyEdge
+apiNamedContributorAJohnAdams = Typed.typedGenealogyEdge
+  "E8-01" "A. John Adams (John Adams Associates)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorCandaceCrandall : Typed.TypedGenealogyEdge
+apiNamedContributorCandaceCrandall = Typed.typedGenealogyEdge
+  "E8-02" "Candace Crandall (Science and Environmental Policy Project)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorDavidRothbard : Typed.TypedGenealogyEdge
+apiNamedContributorDavidRothbard = Typed.typedGenealogyEdge
+  "E8-03" "David Rothbard (Committee for a Constructive Tomorrow (CFACT))" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorJeffreySalmon : Typed.TypedGenealogyEdge
+apiNamedContributorJeffreySalmon = Typed.typedGenealogyEdge
+  "E8-04" "Jeffrey Salmon (George C. Marshall Institute)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorLeeGarrigan : Typed.TypedGenealogyEdge
+apiNamedContributorLeeGarrigan = Typed.typedGenealogyEdge
+  "E8-05" "Lee Garrigan (Environmental Issues Council)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorLynnBouchey : Typed.TypedGenealogyEdge
+apiNamedContributorLynnBouchey = Typed.typedGenealogyEdge
+  "E8-06" "Lynn Bouchey (Frontiers of Freedom)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorMyronEbell : Typed.TypedGenealogyEdge
+apiNamedContributorMyronEbell = Typed.typedGenealogyEdge
+  "E8-07" "Myron Ebell (Frontiers of Freedom)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorPeterCleary : Typed.TypedGenealogyEdge
+apiNamedContributorPeterCleary = Typed.typedGenealogyEdge
+  "E8-08" "Peter Cleary (Americans for Tax Reform)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorRandyRandol : Typed.TypedGenealogyEdge
+apiNamedContributorRandyRandol = Typed.typedGenealogyEdge
+  "E8-09" "Randy Randol (Exxon Corp.)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorRobertGehri : Typed.TypedGenealogyEdge
+apiNamedContributorRobertGehri = Typed.typedGenealogyEdge
+  "E8-10" "Robert Gehri (Southern Company)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorSharonKneiss : Typed.TypedGenealogyEdge
+apiNamedContributorSharonKneiss = Typed.typedGenealogyEdge
+  "E8-11" "Sharon Kneiss (Chevron Corp.)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorSteveMilloy : Typed.TypedGenealogyEdge
+apiNamedContributorSteveMilloy = Typed.typedGenealogyEdge
+  "E8-12" "Steve Milloy (The Advancement of Sound Science Coalition (TASSC))" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorJosephWalker : Typed.TypedGenealogyEdge
+apiNamedContributorJosephWalker = Typed.typedGenealogyEdge
+  "E8-13" "Joseph Walker (American Petroleum Institute (API))" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+
+gccLennyBernstein1995 : Typed.SourceReceipt
+gccLennyBernstein1995 = Typed.sourceReceipt
+  "Lenny Bernstein / Mobil Corporation / Global Climate Coalition"
+  "Predicting Future Climate Change: A Primer (1995 draft)"
+  "1995-12"
+  "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/global-climate-coalition-draft-primer/"
+  "Original internal industry-coalition draft acknowledges anthropogenic greenhouse science and criticises specific contrarian theories; archive's document history says these were omitted from a later public version. Separate method-content and redaction receipts."
+
+exxonInternal1982 : Typed.SourceReceipt
+exxonInternal1982 = Typed.sourceReceipt
+  "M.B. Glaser / Exxon Research and Engineering Company"
+  "CO2 Greenhouse Effect memorandum to management"
+  "1982-11-12"
+  "https://www.climatefiles.com/exxonmobil/1982-memo-to-exxon-management-about-co2-greenhouse-effect/"
+  "Original internal company science projected warming and discussed emissions reduction, with real scientific uncertainty also acknowledged. Private acknowledgement is not every employee's belief or proof of subsequent intent."
+
+shellInternal1988 : Typed.SourceReceipt
+shellInternal1988 = Typed.sourceReceipt
+  "Royal Dutch/Shell Greenhouse Effect Working Group"
+  "The Greenhouse Effect, confidential HSE 88-001"
+  "1988"
+  "https://climateinvestigations.org/shell-oil-climate-documents/"
+  "Archived internal 1988 report rooted in Shell's research programme since 1981; publicly rediscovered by Jelmer Mommers and published through Climate Investigations Center."
+
+shellFirstParty1998 : Typed.SourceReceipt
+shellFirstParty1998 = Typed.sourceReceipt
+  "Royal Dutch/Shell Group"
+  "The Shell Report 1998: lobbying and industry associations, p. 38 (PDF index 40)"
+  "1998"
+  "https://www.shell.com/sustainability/transparency-and-sustainability-reporting/sustainability-reports/_jcr_content/root/main/section/list/list_item.multi.stream/1657185136417/8c7cf7e17abcd9772af39994b88ed37a5a86e216/shell-sustainability-report-1998-1997.pdf"
+  "Shell itself states Shell Oil withdrew from the Global Climate Coalition in April 1998 over Kyoto targets and contrasts the coalition's opposition with Shell's precautionary approach. Report also proposes expanding natural gas."
+
+bpLeadership1997 : Typed.SourceReceipt
+bpLeadership1997 = Typed.sourceReceipt
+  "John Browne / British Petroleum, retrospective interview at Stanford GSB"
+  "Former BP head reflects on his 1997 call for climate action"
+  "1997 speech, revisited 2022"
+  "https://www.gsb.stanford.edu/insights/former-bp-head-reflects-his-call-climate-action-25-years-ago"
+  "First-person retrospective account says BP leadership supported taking climate risk seriously and trade-group peers often favoured delay; not the uninspected signed GCC resignation paperwork."
+
+mooreCO2Coalition : Typed.SourceReceipt
+mooreCO2Coalition = Typed.sourceReceipt
+  "CO2 Coalition (institution's own leadership biography)"
+  "Director Patrick Moore: served as chair 2019 and 2020"
+  "2019-2020 role, current biography"
+  "https://co2coalition.org/teammember/director-patrick-moore/"
+  "Coalition acknowledges Moore's chairmanship, presents him as a Greenpeace cofounder. Greenpeace itself disputes the founder label; early Greenpeace activist/1971 voyage participation is not disputed."
+
+mooreHeartland : Typed.SourceReceipt
+mooreHeartland = Typed.sourceReceipt
+  "Heartland Institute"
+  "Patrick Moore, listed senior fellow"
+  "undated current institutional biography"
+  "https://heartland.org/about-us/who-we-are/patrick-moore/"
+  "Think-tank self-listing establishes public affiliation; role description alone does not establish payments or exact work commissioned."
+
+greenpeaceHistory : Typed.SourceReceipt
+greenpeaceHistory = Typed.sourceReceipt
+  "Greenpeace International"
+  "Founders and early Amchitka voyage"
+  "historical institutional account"
+  "https://www.greenpeace.org/international/about/founders/"
+  "Organisation names its 1970 initiating committee and includes Patrick Moore as 1971 voyage participant while disputing his founder designation. Founder status remains institutionally contested."
+
+hancockIPAJudgment : Typed.SourceReceipt
+hancockIPAJudgment = Typed.sourceReceipt
+  "NSW Supreme Court, Rinehart v Rinehart [2018] NSWSC 1102"
+  "Paragraph 25, schedule of Hancock Prospecting donations to IPA"
+  "2018"
+  "https://www.casechat.au/cases/au/rinehart-v-rinehart-9"
+  "Judgment text reproduced by CaseChat: schedule shows AUD2.3m to IPA in 2016 and AUD2.2m in 2017; current funding/particular editorial instructions not thereby proven."
+
+cfactNova2026 : Typed.SourceReceipt
+cfactNova2026 = Typed.sourceReceipt
+  "CFACT hosting credited Joanne Nova source"
+  "BOM's scientific scandal: The raw data is not raw"
+  "2026-10-18"
+  "https://www.cfact.org/2026/10/18/boms-scientific-scandal-the-raw-data-is-not-raw/"
+  "Original 2026 article names Jo Nova; CFACT is host/republication site, not an independent archival temperature analysis or a source identified as commissioning it."
+
+reefPatrickMoore2021 : Typed.SourceReceipt
+reefPatrickMoore2021 = Typed.sourceReceipt
+  "Carly Lubicz-Zaorski; Maxine Newlands; Theresa Petray"
+  "Climate change denialism and the Great Barrier Reef information network"
+  "online 2023; 2024 journal issue"
+  "DOI 10.1177/09636625231202117"
+  "Peer-reviewed 2021 network study attributes sharing of Peter Ridd's reef claim to Patrick Moore; it does not prove funding, command, or a copied scientific measurement."
+
+exxonScienceInternalOwner : Typed.TypedGenealogyEdge
+exxonScienceInternalOwner = Typed.typedGenealogyEdge
+  "E9-01" "Exxon research and management" "1982 Glaser internal greenhouse-science memo"
+  Typed.organisationalContinuity Typed.primary
+  (exxonInternal1982 ∷ [])
+  "Original Exxon management receipt establishes internal climate-science knowledge and discussion of uncertainties; not a payment or censorship order."
+
+shellScienceInternalOwner : Typed.TypedGenealogyEdge
+shellScienceInternalOwner = Typed.typedGenealogyEdge
+  "E9-02" "Shell Greenhouse Effect Working Group" "1988 internal Shell greenhouse-science report"
+  Typed.organisationalContinuity Typed.primary
+  (shellInternal1988 ∷ [])
+  "Internal research ownership and findings are distinct from later Shell Oil trade-group decisions."
+
+gccBernsteinPrivatePrimer : Typed.TypedGenealogyEdge
+gccBernsteinPrivatePrimer = Typed.typedGenealogyEdge
+  "E9-03" "Lenny Bernstein (Mobil)" "1995 GCC private climate science primer"
+  Typed.personnelContinuity Typed.primary
+  (gccLennyBernstein1995 ∷ [])
+  "Named original corporate author of GCC internal science primer, which acknowledged greenhouse mechanisms; the archived public redaction is a separate derivative document, not a named downstream author."
+
+shellGCCDefection1998 : Typed.TypedGenealogyEdge
+shellGCCDefection1998 = Typed.typedGenealogyEdge
+  "E9-04" "Shell Oil former GCC membership" "Shell Oil April 1998 withdrawal"
+  Typed.organisationalContinuity Typed.primary
+  (shellFirstParty1998 ∷ [])
+  "Shell original 1998 annual/sustainability report explicitly states it exited GCC; therefore do not project historical member funding or communications to 2026."
+
+bpLeadershipBreak1997 : Typed.TypedGenealogyEdge
+bpLeadershipBreak1997 = Typed.typedGenealogyEdge
+  "E9-05" "John Browne / BP leadership" "1997 publicly climate-risk affirmative policy"
+  Typed.personnelContinuity Typed.corroborated
+  (bpLeadership1997 ∷ [])
+  "Browne's retrospective first-person explanation of BP leadership and public break; not proof all BP policies or investments were precautionary."
+
+mooreCO2Chair : Typed.TypedGenealogyEdge
+mooreCO2Chair = Typed.typedGenealogyEdge
+  "E9-06" "Patrick Moore" "CO2 Coalition, 2019-20 chairman"
+  Typed.personnelContinuity Typed.primary
+  (mooreCO2Coalition ∷ [])
+  "Coalition original biography supplies exact role; no inferred funding from oil company donors."
+
+mooreHeartlandAffiliation : Typed.TypedGenealogyEdge
+mooreHeartlandAffiliation = Typed.typedGenealogyEdge
+  "E9-07" "Patrick Moore" "Heartland Institute senior fellow"
+  Typed.personnelContinuity Typed.primary
+  (mooreHeartland ∷ [])
+  "Heartland direct institutional affiliation; not a retainer invoice or proof the institute commissioned every statement."
+
+hancockIPAHistoricalDonations : Typed.TypedGenealogyEdge
+hancockIPAHistoricalDonations = Typed.typedGenealogyEdge
+  "E9-08" "Hancock Prospecting" "Institute of Public Affairs 2016-17"
+  Typed.funding Typed.primary
+  (hancockIPAJudgment ∷ [])
+  "Court-quoted payment schedule identifies AUD4.5m historical IPA support; does not identify which IPA articles or think-tank conclusions it paid for."
+
+cfactAPITo2026Continuity : Typed.TypedGenealogyEdge
+cfactAPITo2026Continuity = Typed.typedGenealogyEdge
+  "E9-09" "CFACT named in 1998 API communications team" "CFACT as Joanne Nova 2026 BOM article host"
+  Typed.organisationalContinuity Typed.corroborated
+  (apiCongressional1998 ∷ cfactNova2026 ∷ [])
+  "Same named CFACT institution participates in historical plan and publishes Nova in 2026; 28-year timespan is NOT a demonstrated continuous communications order or funded carry-through."
+
+moore2000sToReefDistribution : Typed.TypedGenealogyEdge
+moore2000sToReefDistribution = Typed.typedGenealogyEdge
+  "E9-10" "Patrick Moore, CO2 Coalition/Heartland affiliation" "Patrick Moore sharing Peter Ridd reef claims in 2021"
+  Typed.personnelContinuity Typed.corroborated
+  (mooreCO2Coalition ∷ mooreHeartland ∷ reefPatrickMoore2021 ∷ [])
+  "Documented repeated PERSON across institutional affiliation and later reef dissemination; not an independent coral observation or proof either think tank commissioned his sharing."
+
+apiContributorNotMethodTransfer :
+  Typed.StrongHistoricalTransfer apiNamedContributorRandyRandol → ⊥
+apiContributorNotMethodTransfer witness =
+  Typed.personnelContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+ipaFundingNotEditorialMethod :
+  Typed.StrongHistoricalTransfer hancockIPAHistoricalDonations → ⊥
+ipaFundingNotEditorialMethod witness =
+  Typed.fundingIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+cfactContinuationNotPlanTransfer :
+  Typed.StrongHistoricalTransfer cfactAPITo2026Continuity → ⊥
+cfactContinuationNotPlanTransfer witness =
+  Typed.organisationalContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
