@@ -27,3 +27,10 @@ Once shape and layer correspondence is demonstrated, extend to attention output/
 
 ## Current boundary
 This is an inspected source-specific *integration route* to real `E8GPT`, not an executed Sovereign-LILA training trial. The existing toy finite optimizer in this PR does not satisfy the whole-model implementation gate. CI remains out of scope.
+
+
+## Parallel-worker handoff: exact probe isolation producer, 26 October
+
+Added `DASHI/Reasoning/LILADustProbeIsolationExact.agda` on the Dust/Noise branch, without changing the original LILA implementation or its future PR. Its `ForwardProbeExperiment` requires both clean and perturbed forward evaluations to be related to the **same parameter value, input, random-state and pre-measurement memory state**. This is an eligibility contract, not proof that E8GPT actually restores RNG or its resonator state. The two-state finite counterfixture shows that differing RNG states can alter readout even without any intended intervention.
+
+Next step when the parallel LILA worker lands: use exact branch/commit of their actual E8GPT patch; connect the true runtime RNG/memory capture-and-restore operations to this contract, then record measured forward deltas, trainable layer weight updates and held-out paired accuracy. Do not conflate the current `training/train.py` AdamW/backprop baseline with a newly proven forward-only learner. This module is source-written, kernel-unverified; CI intentionally skipped.
