@@ -1811,3 +1811,70 @@ globalBaliunasContinuityNotWFAtoOISMCommission :
 globalBaliunasContinuityNotWFAtoOISMCommission witness =
   Typed.personnelContinuityIsNotTransferRelation
     (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- SAME ORIGINAL 1998 VIDEO, THREE DISTINCT WORLDWIDE TALKING POINTS.
+-- Archival named-speaker transcript excerpts of GES/WFA "The Greening of
+-- Planet Earth Continues" put CO2 is beneficial, climate models unreliable
+-- (Patrick Michaels), and hurricanes/tornadoes not linked to greenhouse gas
+-- accumulation (Robert Balling) inside ONE PRODUCED film/campaign package.
+-- This is observable SOURCE CO-PACKAGING, not three independent pieces of
+-- empirical research, nor a proof every later similar speaker watched it.
+-- Original archived full PDF/video not successfully re-fetched (403).
+------------------------------------------------------------------------
+
+globalWFA1998GreeningAndModelClaimsSameFilm : Typed.TypedGenealogyEdge
+globalWFA1998GreeningAndModelClaimsSameFilm = Typed.typedGenealogyEdge
+  "GC-07" "WFA 1998 CO2 greening/nutrient message" "WFA 1998 Patrick Michaels climate model dismissal"
+  Typed.coPackagedClaims Typed.corroborated
+  (globalGreeningWFASequelIndex1998 ∷ [])
+  "One archive-indexed original named film/transcript carries BOTH CO2 plant-benefit claims and Michaels' criticism of projected warming/climate models. Distinct rhetorical propositions but ONE source object. Attribution is archival named-speaker transcript excerpt; full film not rechecked."
+
+globalWFA1998GreeningAndExtremeWeatherSameFilm : Typed.TypedGenealogyEdge
+globalWFA1998GreeningAndExtremeWeatherSameFilm = Typed.typedGenealogyEdge
+  "GC-08" "WFA 1998 CO2 greening/nutrient message" "WFA 1998 Robert Balling greenhouse-extreme-weather dismissal"
+  Typed.coPackagedClaims Typed.corroborated
+  (globalGreeningWFASequelIndex1998 ∷ [])
+  "Same film also quotes Balling regarding hurricanes/tornadoes and alleged absent greenhouse link. Not a separate original empirical study or proof a later broadcaster copied this particular sentence."
+
+globalCoPackagedClaimsCannotProveLaterScriptTransmission :
+  Typed.StrongHistoricalTransfer globalWFA1998GreeningAndModelClaimsSameFilm → ⊥
+globalCoPackagedClaimsCannotProveLaterScriptTransmission w =
+  Typed.coPackagedClaimsDoNotProveHistoricalTransfer
+    (Typed.relationIsTransfer w)
+
+-- One original film can publish THREE claim families. Without original
+-- artifact identity, seeing three talking-point cards cannot tell whether
+-- one campaign or three genuinely independent original documents exist.
+-- Actual archived 1998 source has one-film identity; this hypothetical
+-- two-source-world demonstration is NOT an estimate of global source counts.
+
+data ThreeTalkingPointsProvenanceWorld : Set where
+  oneOriginalCampaignFilm threeIndependentOriginalFilms : ThreeTalkingPointsProvenanceWorld
+
+data VisibleThreeTalkingPoints : Set where
+  sameThreeClaimLabels : VisibleThreeTalkingPoints
+
+data OriginalPublicationObjectMultiplicity : Set where
+  singleDocument threeDistinctDocuments : OriginalPublicationObjectMultiplicity
+
+threeTalkingPointsObserved : ThreeTalkingPointsProvenanceWorld → VisibleThreeTalkingPoints
+threeTalkingPointsObserved _ = sameThreeClaimLabels
+
+originalObjectsForTalkingPoints :
+  ThreeTalkingPointsProvenanceWorld → OriginalPublicationObjectMultiplicity
+originalObjectsForTalkingPoints oneOriginalCampaignFilm = singleDocument
+originalObjectsForTalkingPoints threeIndependentOriginalFilms = threeDistinctDocuments
+
+threeObservedClaimsDifferentOriginalRootCounts :
+  INF.NonFactorabilityWitness threeTalkingPointsObserved originalObjectsForTalkingPoints
+threeObservedClaimsDifferentOriginalRootCounts =
+  INF.nonFactorabilityWitness
+    oneOriginalCampaignFilm threeIndependentOriginalFilms refl (λ ())
+
+threeClaimHeadlinesDoNotIdentifyIndependentOriginals :
+  INF.FactorsThrough threeTalkingPointsObserved originalObjectsForTalkingPoints → ⊥
+threeClaimHeadlinesDoNotIdentifyIndependentOriginals =
+  INF.witnessRulesOutEveryFlatFactorisation
+    threeObservedClaimsDifferentOriginalRootCounts
