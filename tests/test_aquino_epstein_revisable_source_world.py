@@ -134,3 +134,76 @@ def test_finite_name_collision_proof_reuses_master_nonfactorability_owner():
         "bankingAgencyCaseKeyRestoresFiniteConsumer = Banking.originalCaseKeyConsumerFactors",
     ):
         assert token in c
+
+
+def test_latest_follow_through_severe_bidirectional_contract_is_complete():
+    """Case data is compatible with #1268 head's *data* validator, no sibling import."""
+    w = world()
+    assert w["schema_version"] == "aquino-epstein-source-world-2"
+    assert "12f0ba7005572d60152f304863afbf1c7ffa5b8b" in w["latest_sibling_contract"]
+    for c in w["claims"]:
+        severe = c["severe_test"]
+        assert all(severe.get(k) for k in ("would_narrow", "would_strengthen", "test_status"))
+        assert severe["test_status"] in ("notRun", "sourceChecked", "executed")
+        if c["level"] == "unresolved":
+            assert severe["test_status"] == "notRun"
+    assert sum(c["severe_test"]["test_status"] == "sourceChecked"
+               for c in w["claims"]) == 4
+    assert sum(c["severe_test"]["test_status"] == "notRun"
+               for c in w["claims"]) == 7
+
+
+def test_declared_origin_counts_do_not_multiply_ftc_pleadings():
+    """Producer diversity is NOT independent corroboration of the allegations."""
+    w = world()
+    evidence = {e["id"]: e for e in w["evidence"]}
+    claims = {c["id"]: c for c in w["claims"]}
+    roots = lambda c: {evidence[x]["root"] for x in claims[c]["supports"]}
+    assert roots("C_FTC_BANNON_PROCEDURE") == {
+        "ftc_2019_2020", "bannon_defence_2020", "ddc_judge_2020"
+    }
+    assert len(claims["C_FTC_BANNON_PROCEDURE"]["supports"]) == 4
+    assert len(roots("C_FTC_BANNON_PROCEDURE")) == 3
+    assert roots("C_CA_AGGREGATE") == {"canada_joint_2019"}
+    assert roots("C_NAME_COLLISION") == {"dea_ocdetf_2015", "hsi_ipr_2011"}
+    assert roots("C_UNIFIED_H3") == set()
+    assert "NOT independent datasets" in w["source_root_independence_ceiling"]
+
+
+def test_new_original_object_selectively_reopens_only_affected_consumers():
+    w = world()
+    claims = {c["id"]: c for c in w["claims"]}
+    evidence = {e["id"]: e for e in w["evidence"]}
+    def unpaid(c):
+        return {id_ for id_ in c["requires"] if evidence[id_]["status"] != "present"}
+    before = {id_: unpaid(c) for id_, c in claims.items()}
+    assert before["C_FTC_BANNON_FINAL"] == {"bannon_ftc_final_judgment"}
+    assert before["C_FTC_BANNON_PROCEDURE"] == set()
+    # Hypothetical lawful source acquisition, not an actual historical result.
+    evidence["bannon_ftc_final_judgment"]["status"] = "present"
+    evidence["bannon_ftc_final_judgment"]["locator"] = "https://example.org/synthetic"
+    after = {id_: unpaid(c) for id_, c in claims.items()}
+    assert {k for k in claims if before[k] != after[k]} == {"C_FTC_BANNON_FINAL"}
+    assert claims["C_FTC_BANNON_FINAL"]["level"] == "unresolved"
+    assert claims["C_UNIFIED_H3"]["level"] == "unresolved"
+
+
+def test_exact_original_evidence_targets_and_claims_have_distinct_pareto_dimensions():
+    """Same action cannot become globally dominant by relabelling its target."""
+    w = world()
+    evidence = {e["id"]: e for e in w["evidence"]}
+    actions = w["actions"]
+    consumers = {a["id"]: {c["id"] for c in w["claims"]
+                 if set(a["targets"]) & set(c["requires"])}
+                 for a in actions}
+    for a in actions:
+        assert all(evidence[t]["status"] == "notLocated" for t in a["targets"])
+        assert consumers[a["id"]]
+    assert consumers["F_AQUINO_PROMIS"] == {"C_AQUINO_SCL_TRANSFER", "C_UNIFIED_H3"}
+    assert consumers["G_SHARED_PROGRAMME"] == {"C_UNIFIED_H3"}
+    for i, a in enumerate(actions):
+        for b in actions[i+1:]:
+            assert not (set(a["targets"]) >= set(b["targets"]) and
+                        consumers[a["id"]] >= consumers[b["id"]])
+            assert not (set(b["targets"]) >= set(a["targets"]) and
+                        consumers[b["id"]] >= consumers[a["id"]])
