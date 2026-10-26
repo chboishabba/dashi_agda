@@ -1,0 +1,79 @@
+{
+  "schema": "dashi.hardt.rai2025.full_integrated_local_validation.v1",
+  "as_of": "2026-10-27",
+  "pr": 1252,
+  "original_source": {
+    "study": "Rai et al. 2025 iScience original EEG",
+    "doi": "10.1016/j.isci.2025.112922",
+    "data_owners": "Laura Rai and Guido Orgs",
+    "data_doi": "10.5522/04/28508744.v1",
+    "original_2025_subject_eeg_bytes_acquired": false,
+    "original_osf_analysis_code_acquired": false,
+    "original_CCA_and_Granger_reproduced": false
+  },
+  "current_remote_source_blobs": [
+    {
+      "path": "scripts/check_hardt_rai_2025_source_denominators.py",
+      "git_blob_sha1": "5640d5bef6022d57055de518a17a274ddd2425ac"
+    },
+    {
+      "path": "tests/test_hardt_rai_2025_source_denominators.py",
+      "git_blob_sha1": "6ce8435994c29581eb8c8b4041e5be72da31433e"
+    },
+    {
+      "path": "scripts/check_hardt_rai_observational_archive.py",
+      "git_blob_sha1": "71d32e69517f1bb438bd1137c07c2d6057a166f8"
+    },
+    {
+      "path": "tests/test_hardt_rai_observational_archive.py",
+      "git_blob_sha1": "5eb0c1ebcbcd4efe716799d22b000d0713242855"
+    },
+    {
+      "path": "scripts/check_hardt_rai_lagged_common_source.py",
+      "git_blob_sha1": "0451fba0d2b9cea2a9d2af5142e375120a823abd"
+    },
+    {
+      "path": "tests/test_hardt_rai_lagged_common_source.py",
+      "git_blob_sha1": "fe15784e71a16e6af950c8a373a16a34df1f5387"
+    },
+    {
+      "path": "scripts/hardt_neural_source_bytes_gate.py",
+      "git_blob_sha1": "f38c28c580fb01d260a89d224220f411a336a84c"
+    }
+  ],
+  "test_families": [
+    {
+      "name": "paper/deposit typed source counts",
+      "tests": 16,
+      "passed": 16
+    },
+    {
+      "name": "observational file-ID/hash admission using synthetic files",
+      "tests": 8,
+      "passed": 8
+    },
+    {
+      "name": "held-out lagged common cause and 1000-shift Pearson surrogate",
+      "tests": 15,
+      "passed": 15
+    }
+  ],
+  "combined": {
+    "unittest_total": 39,
+    "passed": 39,
+    "failed": 0,
+    "command": "python -m unittest discover -s /mnt/data/hardt_maxcut_20261027/full_tests -p 'test_hardt_rai*.py' -v",
+    "actual_local_execution": true,
+    "all_seven_git_source_blobs_previously_hash_checked": true,
+    "agda_kernel_certified": false,
+    "github_ci_checked": false
+  },
+  "causal_limit": "39 Python tests are finite metadata/hash/synthetic maths. Statistical significance of shared rhythm vs time shifts does not identify a direct brain-brain cause, nor does predictive lead/lag establish physical transmission.",
+  "first_unpaid": [
+    "Original UCL v1 institutional archive API/file metadata from authenticated source",
+    "Original audience per-participant time series and performance/timebase IDs",
+    "Original OSF analysis code project contents and source versions",
+    "Original Hardt unpublished reference-10 manuscript and any independent documented events",
+    "Agda kernel typecheck and matched physiological receiver evidence"
+  ]
+}
