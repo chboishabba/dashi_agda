@@ -184,3 +184,61 @@ DASHI theorem**, a Lean owner still must supply:
 No assertion is made that these conditional hypotheses have already
 been discharged, that Richards' classification is currently in
 Mathlib, or that kernel typechecks were run.
+
+
+## 26 October: actual finite complementary-component weld
+
+A stronger geometry-specific prerequisite is now implemented, not just
+suggested. Original existing triangulation and labelled collar owners
+are IMPORTED by
+`scripts/exotic_topology_pl_complement_components.py`:
+
+1. Use `attach(..., with_transport=True)` to track the simplexwise
+   injection of EVERY old-stage vertex across the sequence of finite
+   collar attachments. The exact map is composed across all old
+   frontier components, not reconstructed by matching labels later.
+2. Verify that all old **triangles** occur as distinct, embedded
+   triangles in the next finite PL manifold.
+3. Form the set of added triangles by literal difference of simplex
+   sets. Partition it into full-edge-connected dual components.
+4. Compare the set of edges where a new triangle meets an old
+   triangle to the **entire actual old boundary**, including every
+   edge of every boundary circle. Each such interface edge must
+   have exactly one newly attached triangle.
+5. Verify a bijection between old boundary components and new
+   complementary dual components. No two old outgoing boundaries
+   can share one component, and no old boundary may remain
+   unattached.
+6. Check that **every** fresh outgoing boundary edge belongs to
+   the expected component: `p -> p0,p1` for Cantor,
+   one continuing tail for Loch Ness, and separate L/R continuations
+   for Jacob's ladder.
+
+These are genuine finite same-**triangulation** incidence tests;
+they supersede relying on abstract finite boundary-word counts.
+Existing `MarkedSurface.verify` and `inspect` still independently
+test the triangle-level orientable-manifold property. Three
+new complement-focused tests cover depths 1--3, a collapsed
+old-vertex inclusion, and an otherwise legal two-boundary
+surface with false lineage labels.
+
+**Proof-status discipline:** these new tests are committed but
+still require actual execution on the exact pushed source.
+Even all their passing conditions would only establish the
+finite-stage *combinatorial* analogue of hypothesis H5.
+A locally finite collared infinite PL colimit is NOT constructed
+by this script; properness/compact cofinality, openness and
+connectedness of the actual infinite tail regions, and topology
+of Richards' ideal boundary remain independent hypotheses.
+A purely finite simplex-component count does not prove their
+infinite analogue or classify actual 2-manifolds.
+
+**Latest PR reuse, 26 October:** independent observer #1266
+has a separate consumer-factorisation treatment. This
+document does not import it across an unmerged branch;
+#1254 already imports canonical
+`QueryIndexedProjectionAdequacyExact` and
+`IntersectionalNonFactorability` for the relevant information
+loss. Independent source-evidence revisions in #1268
+suggest a better provenance ledger, but are not evidence
+about the geometry of any exotic surface.
