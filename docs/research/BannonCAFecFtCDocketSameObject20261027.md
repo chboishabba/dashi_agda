@@ -1,0 +1,28 @@
+# FEC–FTC Cambridge Analytica/Bannon legal proceedings: source-identity max-cut (27 October 2026)
+
+**Owner:** [Agda PR #1245](https://github.com/chboishabba/dashi_agda/pull/1245). Research direction Johl Brown; OpenAI ChatGPT assisted source triage, legal-object typing, tests. Original regulators, courts, respondents and reporters retain authorship. This is not legal advice and does not claim criminal wrongdoing, covert command or an electoral outcome.
+
+## Original producer, case, procedure and status
+
+1. **Federal Election Commission** (FEC), original [Matter Under Review #7351](https://www.fec.gov/data/legal/matter-under-review/7351/), names Cambridge Analytica LLC and Bannon among many respondents. The FEC records a **5–0 vote to close its file** after a different **3–2 failed dismissal/closing vote**. Its disposition table labels Bannon **Dismissed-Other**. Separate earlier **reason-to-believe** findings concern foreign-national campaign-finance restrictions and named entities, not a completed personal adjudication against Bannon. Related MUR #7350 references decisions made within the same FEC commission proceedings, not a second independent agency producer. A procedural closed file is not a judicial verdict of innocence or a finding of FTC compliance.
+2. **Federal Trade Commission** (FTC), original [Bannon case index](https://www.ftc.gov/legal-library/browse/cases-proceedings/bannon-stephen-k), District of Columbia civil-demand enforcement **1:20-mc-00111-CRC**, shows original petition 9 Nov 2020, judicial show-cause order 18 Nov, Bannon opposition 9 Dec, FTC reply 18 Dec. The FTC sought compelled **testimony** under its Cambridge Analytica investigation; its indexed 2020 docket page does not contain the final judicial order.
+3. **José Pagliery, The Daily Beast**, [original contemporaneous article](https://www.thedailybeast.com/jan-6-committee-plans-to-hold-steve-bannon-in-criminal-contempt), October 2021, **reported** Judge Christopher Cooper had granted the FTC petition **in January 2021**. A second original article at [The Daily Beast](https://www.thedailybeast.com/jan-6-committee-moves-forward-with-holding-steve-bannon-in-contempt-of-congress/) relays the same reporter's core account and reports the FTC would not disclose whether Bannon was interviewed. These are derivative/repeated claims about the *same judicial event*, not two independently observed signed orders. The exact signed order, complete clerk docket and deposition/compliance records have **NOT been inspected**, so source level is *reported*, not authenticated case disposition.
+4. **Separate FTC Cambridge Analytica company merits proceeding**, original FTC company Docket 9389, concerns a separate corporate defendant and the underlying deceptive-data practices. Corporate liability/order does not by itself establish Bannon's individual liability. The FEC foreign-national-contributions proceedings also cannot decide this separate FTC question.
+5. The *January 6 congressional subpoena/contempt criminal case* and *Bannon's federal border-wall pardon* are **different proceedings** from both the FTC CID and FEC MUR #7351. Do not join their legal outcomes.
+
+## Decision-changing severe test
+
+**Claim:** FTC court compelled Bannon's testimony, or case closed in a specified procedural way.
+
+- **Strengthener:** locate judge's original signed January 2021 order in DDC 1:20-mc-00111-CRC; if granted, obtain clerk service notice, deposition transcript or compliance/withdrawal/closure order. Establish **precisely** whether the original demand was enforced, negotiated, appealed, abandoned or obeyed. Protect third-party private data and privilege.
+- **Narrower:** original signed order states petition denied, stayed, withdrawn, narrower relief, or stayed by appeal; signed order establishes enforcement but absence/independent testimony evidence limits claims of actual cooperation.
+- **Insufficient:** the FEC MUR disposition, the FTC 2019 company order, a secondary reporter's assertion, court docket for the different January 6 crime, repeated media summaries or lack of a public entry after 2020.
+
+**Current status:** FEC #7351 closed **original agency HTML verified**. FTC's **2020 pleadings/show-cause originally indexed**. January 2021 FTC grant **contemporaneously reported but original signed order not authenticated**; personal FTC outcome/interview remains **not located**, not absent or false. The case ledger's nine original root counts remain scoped as previously; this distinct FEC original producer is a separate *comparative legal source*, not counted as independent corroboration of its FTC claim. Existing original case fixture untouched.
+
+## Implementation and audit
+
+- Added a finite **three-case identity discriminator** in the already-imported `DASHI/Cognition/BannonCambridgeAnalyticaInfluenceInfrastructureExact.agda`. Non-equality of *declared constructors* cannot serve as a proof of external case content.
+- Three independently source-role-typed receipts encode FEC original / FTC original / contemporaneous reporter. FEC closure=true is not transferable to FTC signed-order-inspected=false. No personal-liability promotion.
+- Appended a targeted static regression to `tests/test_aquino_maxwell_epstein_ca_maxcut.py`. Files committed on PR #1245; **pytest and Agda kernel not executed**. PR #1268 bidirectional/severe method and #1273 original-vs-code fidelity used as methodological controls, unmerged code not copied.
+- Revisit the case-wide original question only if an authentic same-object tasking/budget/technical or political work product joins distinct programs; FEC and FTC cases are legally meaningful independent proceedings, **not** evidence of a single cross-border covert command.
