@@ -475,3 +475,147 @@ hypotheses, Yan's stationary pressure equation, or Rodgers's
 enacted temporal order. Keep #1271 its original owner; do not
 copy 48-path arithmetic into #1255 or count reports of the same
 Nakashima experiment as independent confirmations.
+
+
+## 27 October max-cut: direction steepness, weighted quadrature, build fidelity and current literature
+
+### Executed geometric obstruction (Lean companion #87)
+
+The two-point **DASHI finite** geometry now attached to the existing
+`MillerProjectionGeometry.lean` chooses positions `0,1/n`, with
+`n>0`, and unit directions `v0=(0,1,0)`,
+`v1=(0,0,1)`. At both samples set `omega_i=v_i`, giving exactly
+`v_i cross omega_i=0`. Yet their difference-quotient squared norm
+is **`2n²`**, so it can exceed an arbitrary prescribed bound
+even though both vorticity projections vanish. This **does not**
+define a continuous direction field or a single mild R³
+Navier–Stokes solution. It does establish the *logical independence*
+of Miller's direction-gradient hypothesis from these finite
+pointwise constraints.
+
+`DASHI.Papers.ThreePaperConsumerFidelity20261026Exact` reuses
+the original `DASHI.Core.IntersectionalNonFactorability` to
+record the corresponding **specific** source-hypothesis collision.
+It now covers three distinct information losses:
+(1) Yan's omitted `div f`,
+(2) physical source domain `R³` versus periodic `T³`,
+(3) projected vorticity alone versus direction regularity.
+The finite no-gos are not blanket refutations of the source theorems.
+
+New Lean `weighted_sample_fourth_power_budget` and
+`weighted_sample_budget_with_total_duration` add the positive
+quadrature weight version:
+`0<=P_t<=E_t<=D, w_t>=0 => sum(w_t P_t²)<=D² sum(w_t)`.
+For a separately justified weight mass T, the bound is `T D²`.
+Here `P_t` is *intended* to represent squared projected spatial
+L² vorticity norm and `E_t` squared total spatial enstrophy;
+the weighted Finset samples have NOT been identified with the
+continuum time integral, Riemann limit, or even a selected physical
+solution. This is an exact mathematical preparatory cut, not
+Miller's continuation theorem.
+
+**Actually executed in this work session**, independently of Lean:
+- 401/401 exact rational sample separations and steep direction
+  difference-quotient witnesses;
+- 6075/6075 exact weighted three-time-point quadrature fixtures.
+Earlier local unweighted 225 cases and 15,625 Lagrange checks remain
+distinct receipt populations; none count as Lean kernel typechecks.
+The new source-written code and regression tests are committed to
+[#87](https://github.com/chboishabba/dashi_lean4/pull/87).
+
+### Verified exact-toolchain blocker, targeted remedy
+
+**GitHub-read source metadata:** root `dashi_lean4/lean-toolchain`
+sets `leanprover/lean4:v4.35.0-rc3`; both
+`lakefile.toml` and `lake-manifest.json` lock Mathlib `v4.28.0`.
+The original Mathlib tag
+[mathlib4/v4.28.0/lean-toolchain](https://github.com/leanprover-community/mathlib4/blob/v4.28.0/lean-toolchain)
+specifies **`leanprover/lean4:v4.28.0`**.
+This is a real version mismatch in the checked-in build
+configuration. It is not evidence that any theorem is false
+or that a build has failed.
+
+To preserve the unrelated default targets, #87 now adds
+`scripts/check_ns_paper_build_preflight.py`. Its nonzero status
+when versions differ is a *configuration failure*, not a proof
+failure. The **proposed scoped build**, requiring the matching
+toolchain to be installed, is:
+
+```bash
+python scripts/check_ns_paper_build_preflight.py  # reports mismatch with exit 2
+LEAN_TOOLCHAIN=leanprover/lean4:v4.28.0 lake build NSPaperBridges
+```
+
+The first command checks toolchain/manifest/opt-in target, not kernel
+acceptance. The second has **not been run** here. We did not alter
+the root repository toolchain to avoid breaking its unrelated targets.
+Only an exact-commit successful Lean kernel build can promote
+source-written theorem declarations to verified Lean theorems.
+
+### October 2026 highest-yield external sources (original and versioned)
+
+- **Stan Palasek** (2026-10-21), [arXiv:2610.29012v1](https://arxiv.org/abs/2610.29012),
+  *A logarithmic regularity criterion for the axisymmetric
+  Navier-Stokes equations*. The author reports improvement of a
+  logarithmic circulation condition to exponent **5/4** for
+  **axisymmetric R³** solutions. The criterion is conditional,
+  and the source explicitly keeps unrestricted global regularity open.
+  Potential cross-polination: control of direction/strain in
+  **axisymmetric** cases; no automatic Miller gradient bound.
+- **Zoran Grujić**, [arXiv:2607.08866](https://arxiv.org/abs/2607.08866),
+  *Logarithmic Depletion of Vortex Stretching and Singularity Evasion
+  in the 3D Navier-Stokes Equations*, submitted **2026-07-09**,
+  revised **2026-10-11 v4**. The geometric argument is conditional
+  on a critical concentration profile and a logarithmically
+  weighted-BMO direction hypothesis. A separate
+  [proof-map of v2](https://github.com/Bingham-Research-Center/brc-navier-stokes/blob/main/dossier/papers/2607.08866-proof-map.md)
+  reports repairs and a complete proof *under repaired hypotheses*;
+  it is **not an independent proof of the assumptions**, and its
+  v2 SHA does not automatically certify the latest v4.
+  Potential transfer: source-specific vorticity-direction dynamics
+  and strained-direction discrimination, not a global regularity proof.
+- **Current Agda PR #1271** has since strengthened its independent
+  R735 analysis: finite local-time W1 and a restricted late-time
+  absorbing estimate can leave an uncontrolled **intermediate**
+  interval for arbitrary initial enstrophy. It also audits the
+  original W2 dyadic-critical weight and records a **necessary**
+  viscosity margin in one exact physical shear test. This is
+  directly relevant to stopping unjustified
+  local+late => all-time proof composition. Its authorship and
+  branch remain distinct; no cross-PR proof is copied here.
+
+### Refined Ibrahim/Pareto order
+
+1. **P0 source/kernel fidelity:** resolve or explicitly override
+   toolchain mismatch *for the opt-in leaf*, run exact-head Lean and
+   Agda builds, log exit statuses and SHA. A source-file theorem
+   plus Python regression is insufficient.
+2. **P0 source-consumer discrimination:** independently verify
+   physical domain, source, terminal interval, forcing, direction
+   gradient, and exact norm/quantifier correspondence *before*
+   admissible A3 theorem promotion.
+3. **P1 actual R³ analytic producer:** replace finite quadrature
+   and sampled unit direction with a same-solution measurable
+   `v(x,t)`, uniform spatial `∇v` and a controlled
+   `L⁴_t L²_x` projected-vorticity integral at the maximal time.
+   This is the genuinely open non-circular Miller bridge.
+4. **P1 original Yan full PDE semantics:** test pressure forcing,
+   Sobolev domain/boundaries and Nash–Moser iteration without
+   conflating a source-exact initial seed with a stationary
+   solution, or a symbolic counterexample with a blanket
+   refutation.
+5. **P1 empirical Rodgers tests:** delay profiles must be
+   separately calibrated, with held-out source-order probes;
+   no finite nonfactorability proof can certify qualia.
+6. **Stop derivative snowballs:** Palasek axisymmetric and
+   Grujić profile-conditioned theorems have independent sources
+   and different hypotheses. Do not reclassify the same preprint
+   versions as independent confirmations, and do not recite
+   adjacent refs without new proof-bearing discriminator data.
+
+Johl Brown directs the DASHI finite constructions; OpenAI
+ChatGPT assists in authoring code. Miller, Yan–Rădulescu, Rodgers,
+Palasek, Grujić, and the classical mathematical predecessors
+retain their original result/source authorship. All source-commit
+receipts remain `sourceCommittedOnly` until exact-head
+kernel acceptance is observed.
