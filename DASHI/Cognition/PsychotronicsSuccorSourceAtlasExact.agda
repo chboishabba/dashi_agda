@@ -556,6 +556,21 @@ saikiaFieldPatent2019 = Source.mkNoDOISource
   "Published patent claim 1 describes 17 cm separated parallel aluminium electrodes in a proposed helmet-like AC/DC electric-field apparatus powered by charging, oscillator and booster units; patent claims and in-vitro examples do not prove human treatment or Rodin-versus-Helmholtz coil benefit"
   Source.publicAttribution
 
+-- Original 2019 open RSC article (the NIH PMC copy is the same work).
+-- This is a separate tau-peptide experiment within a related Guwahati
+-- authorial programme, not a magnetic Rodin coil or clinical evidence.
+pandeyTauEF2019 : Source.AttributedSource
+pandeyTauEF2019 = Source.mkDOISource
+  "Gaurav Pandey; Sudhir Morla; Harshal B. Nemade; Sachin Kumar; Vibin Ramakrishnan"
+  "Modulation of aggregation with an electric field; scientific roadmap for a potential non-invasive therapy against tauopathies"
+  "RSC Advances 9, 4744–4750; first published 6 February 2019; original publisher article and full same-work PMC9060620 consulted October 2026"
+  "2019"
+  "10.1039/C8RA09993F"
+  "https://doi.org/10.1039/C8RA09993F"
+  Source.academicArticleSource
+  "Authors' controlled in-vitro 0,150,300 V/cm AC/DC parallel-electrode exposures to tau VQIVYK/VQIINK model peptides, sixfold reported ThT fluorescence change and cell-line viability assays; prospective device explicitly future, not tested human therapy, magnetic Rodin coil or 2024 60-percent comparison"
+  Source.publicAttribution
+
 saikiaAmyloid2019 : Source.AttributedSource
 saikiaAmyloid2019 = Source.mkDOISource
   "Jahnu Saikia; Gaurav Pandey; Sajitha Sasidharan; Ferrin Antony; Harshal B. Nemade; Sachin Kumar; Nitin Chaudhary; Vibin Ramakrishnan"
@@ -994,7 +1009,7 @@ sourceAtlas = Source.mkSourceAtlas
    kervadecFiveDASC2026 ∷ stockerASCRevision2026 ∷
    heartmathEnergeticCommunication ∷
    shupakShamClinical2006 ∷ duAssessorBlindedProtocol2026 ∷
-   croftBigSecret2002 ∷ croftPowerWand2003 ∷ pandeyFFField2017 ∷ saikiaFieldPatent2019 ∷ saikiaAmyloid2019 ∷
+   croftBigSecret2002 ∷ croftPowerWand2003 ∷ pandeyFFField2017 ∷ pandeyTauEF2019 ∷ saikiaFieldPatent2019 ∷ saikiaAmyloid2019 ∷
    perezRodinRSI2013 ∷ ramirezRodinRMF2024 ∷ perezHeatShock2008 ∷
    reichCoreEllsworth1954 ∷ reichCloudArchiveIndex ∷
    hamblingWeatherwatch2011 ∷ kiddexRedditMind2023 ∷
@@ -1031,7 +1046,7 @@ data LineageRoot : Set where
   kervadecAscValidationRoot stockerAscRevisionRoot : LineageRoot
   heartmathInstituteRoot : LineageRoot
   shupakClinicalAuthorRoot duProtocolAuthorRoot : LineageRoot
-  pandey2017PeptidePublicationRoot saikiaFieldPatentOriginalRoot saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
+  pandey2017PeptidePublicationRoot pandeyTau2019OriginalRoot saikiaFieldPatentOriginalRoot saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
   reichOriginalAuthorRoot guardianHamblingRoot redditKiddexForumRoot : LineageRoot
   bachFictionRoot constableBookRoot sladePractitionerRoot adachiPublisherRoot : LineageRoot
   wmoInstitutionRoot peterReichMemoirRoot kateBushArtistRoot : LineageRoot
@@ -1756,6 +1771,16 @@ saikiaElectrodePatentDoesNotLicenseRodinBenefit = mkBound
   Diligence.primaryProposition
   attributedAuthorReport
   "the unseen full ACS article or supplemental information might describe additional apparatus; patent text alone cannot establish their absence, a 60-percent comparison, or efficacy"
+
+pandeyTau2019OriginalExperimentScope : ClaimBound
+pandeyTau2019OriginalExperimentScope = mkBound
+  "Pandey et al 2019 RSC report in-vitro AC/DC electric fields on model tau hexapeptide self-assembly and cell-line assays as a proposed future therapeutic research direction"
+  pandeyTauEF2019
+  "Original RSC Advances 2019 9:4744-4750 full Methods Results Future work, DOI 10.1039/C8RA09993F"
+  pandeyTau2019OriginalRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "2019 Saikia ACS A-beta raw-method identity, separate 2024 magnetic coil 60-percent comparator, human clinical benefit, and claimed anomalous scalar energy are not determined"
 
 pandey2017FieldExperimentScope : ClaimBound
 pandey2017FieldExperimentScope = mkBound
