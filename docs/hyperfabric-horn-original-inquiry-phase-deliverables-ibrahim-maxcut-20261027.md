@@ -357,3 +357,42 @@ cannot overcome the no-go by increasing
 precision or invoking a C3 permuted label.
 Original owner credit #1266 and Blackwell/
 Cousot as background remains intact.
+
+
+## 10. Final owner-head update: actual ambient overlap-point certificate
+
+Horn owner #1244 advanced again to
+`11a1ea0ba81755b726f430d117a0c4f36eeeb170`.
+Its NEW `scripts/alexander_horned_c3_radius_overlap_witness.py`
+reuses the original explicit cover and basing-path
+scripts, computing exact rational p_i=13e_i in
+the central/arm overlaps with own squared
+centre distance 16 and all foreign squared
+distances 250, strict cut radii 15/4 and 17/4.
+It also checks these p_i avoid prescribed
+radius-one satellite envelopes, the central
+unit ball and the three straight spoke-tube
+boxes; wrong inner/outer point controls fail.
+This is more specific than just an abstract
+conditional point and should be reused as an
+owner geometry donor.
+
+However its own source states clearly that
+this is an AMBIENT coordinate/envelope witness.
+It is not an exact-head Lean proof of a
+full wild satellite E, path-connected arms,
+central pi1, source relative Hatcher
+peripheral equivalence, or short actual
+Hatcher meridian. The independent
+`ThreeArmRadiusConnectedAssembly` can
+then consume true X-valued points and
+source connectedness once supplied.
+No source status is upgraded by its
+new focused workflow registration.
+
+This pays part of P2's explicit overlap
+coordinate check but does NOT move the
+original inquiry to P4 physical selection.
+The present finite word-observation no-go
+remains valid in its explicitly marked
+source/receiver scope.
