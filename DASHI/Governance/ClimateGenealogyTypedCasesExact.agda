@@ -1421,3 +1421,49 @@ bareLevyLabelCannotRecoverTaxBase :
 bareLevyLabelCannotRecoverTaxBase =
   INF.witnessRulesOutEveryFlatFactorisation
     sameLevyWordDifferentLegalBases
+
+
+------------------------------------------------------------------------
+-- Original-source GENEALOGY QUESTION (rather than merely percent errors):
+-- purposive selected source-count does not identify national prevalence.
+-- Reuses the repository's canonical IntersectionalNonFactorability owner.
+--
+-- We build two explicitly HYPOTHETICAL national corpora with the SAME
+-- observed 53-appearance, 22-family selection yet DIFFERENT unobserved
+-- original-source populations. This is an observation adequacy no-go,
+-- NOT a statistic about Australian national climate denial.
+-- Root identity in the selected ledger remains an empirical annotation;
+-- the model's two worlds are logic fixtures only.
+------------------------------------------------------------------------
+
+data NationalSourcePopulationCompletion : Set where
+  fewAdditionalOriginals manyAdditionalOriginals : NationalSourcePopulationCompletion
+
+data Selected53AppearanceView : Set where
+  samePurposive53AppearanceLedger : Selected53AppearanceView
+
+data NationalOriginalProductionPattern : Set where
+  concentratedOutsideSample dispersedOutsideSample : NationalOriginalProductionPattern
+
+whatOurSelectedLedgerSees :
+  NationalSourcePopulationCompletion → Selected53AppearanceView
+whatOurSelectedLedgerSees _ = samePurposive53AppearanceLedger
+
+whatUnobservedOriginalPopulationContains :
+  NationalSourcePopulationCompletion → NationalOriginalProductionPattern
+whatUnobservedOriginalPopulationContains fewAdditionalOriginals = concentratedOutsideSample
+whatUnobservedOriginalPopulationContains manyAdditionalOriginals = dispersedOutsideSample
+
+sameSelectedLedgerDifferentNationalPopulations :
+  INF.NonFactorabilityWitness
+    whatOurSelectedLedgerSees whatUnobservedOriginalPopulationContains
+sameSelectedLedgerDifferentNationalPopulations =
+  INF.nonFactorabilityWitness
+    fewAdditionalOriginals manyAdditionalOriginals refl (λ ())
+
+selectedCorpusCannotDetermineNationalOriginConcentration :
+  INF.FactorsThrough
+    whatOurSelectedLedgerSees whatUnobservedOriginalPopulationContains → ⊥
+selectedCorpusCannotDetermineNationalOriginConcentration =
+  INF.witnessRulesOutEveryFlatFactorisation
+    sameSelectedLedgerDifferentNationalPopulations
