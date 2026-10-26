@@ -27,6 +27,19 @@ import DASHI.Law.SensibLawWoogarooAttachmentSameObjectAudit20261027Exact as Atta
 -- An historic public concession is not a newly accrued 2026 project subsidy.
 ------------------------------------------------------------------------
 
+-- Explicitly consumed prior owners; no new general distribution framework.
+priorLocalPlanningOption : GainLoss.DistributionCoordinate
+priorLocalPlanningOption = GainLoss.developerPrecinctOption
+
+priorEconomicIncidenceDebt : GainLoss.DistributionResidual
+priorEconomicIncidenceDebt = GainLoss.whoCapturesDevelopmentValue
+
+currentFederalGate : Post.ScopedReceipt
+currentFederalGate = Post.developmentRegulatoryGate
+
+priorIndexedOwnerConsent : Attachment.ScopedClaim
+priorIndexedOwnerConsent = Attachment.separateConsentDocumentsOnlyIndexed
+
 data Order : Set where
   firstOrderDirect : Order
   secondOrderIndirect : Order
