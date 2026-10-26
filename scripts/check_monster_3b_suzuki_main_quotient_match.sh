@@ -54,6 +54,18 @@ assert p["outer_pair_restriction_full_character_match"] is True
 assert p["main_product_split_full_character_decomposition"] is True
 assert p["quotient_descent_full_character_match"] is True
 assert p["restricted_monster_same_object_match"] is True
+assert p["six_suz_group_order"] == 2690072985600
+assert p["six_suz_class_count"] == 210
+for key in ("six_suz_degree12_positions","six_suz_degree78_positions"):
+    rows=p[key]
+    assert isinstance(rows,list) and len(rows)==2
+    assert all(type(x) is int and 1<=x<=210 for x in rows)
+    assert len(set(rows))==2
+assert not (
+    set(p["six_suz_degree12_positions"]) &
+    set(p["six_suz_degree78_positions"])
+)
+
 # Source-selected 78 is now chosen by full 6.Suz -> main -> MN3B -> Monster
 # character matching, NOT by requiring a faithful degree78 in advance.
 assert type(p["source_selected_degree_78_faithful_to_6Suz"]) is bool
