@@ -103,7 +103,21 @@ module DASHI.Physics.Closure.NSTriadKNR650AugmentedCriticalWeightedNormalFormRou
 -- Fujita--Kato small-critical comparison; exact dyadic heat-shear
 -- sharpness is this source-specific calculation, NOT a Clay proof.
 -- See Docs/research/ns_r734_critical_residence_pareto_20261027.md
--- and tests/test_ns_r734_critical_residence.py (10 local checks).
+-- and tests/test_ns_r734_critical_residence.py (13 local checks).
+-- 2026-10-27 EXACT SAME-EQUATION NONPROMOTION:
+-- At fixed kinetic E0, an unforced real Fourier heat shear +/-n has
+-- X_n(t)=w(n) E0 exp(-2 nu n²t) and
+-- D_n(t)=w(n) n² E0 exp(-2 nu n²t), but P_n(t)=0 identically.
+-- Nevertheless int_0^infinity sqrt(X_n) D_n dt
+--   =w(n)^(3/2) E0^(3/2)/(3 nu) -> infinity as n -> infinity.
+-- Thus the valid cutoff-uniform int X_N² bound can NEVER pay this
+-- cutoff-uniform ABSOLUTE nonlinear upper majorant from E0 alone.
+-- Cancellation must be proved on the ACTUAL signed mode transfer.
+-- The derived L4_t H^(1/2)_x -> L4_t L3_x Serrin sum is 3/2>1,
+-- so it is not a continuation criterion. This refutes only the
+-- attempted deduction, not the validity of the classical energy
+-- identity, same-operator helicity accounting, or global regularity.
+--
 -- These are documented ANALYTIC derivations, not Agda formalised
 -- PDE results or an independent kernel-checked theorem receipt.
 --
