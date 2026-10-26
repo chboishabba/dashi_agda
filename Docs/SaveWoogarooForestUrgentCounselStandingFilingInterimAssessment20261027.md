@@ -29,6 +29,16 @@ This is an *issue analysis*, not a merits prediction. It preserves primary-law a
 
 **Working candidate** (NOT automatic plaintiff): *Save Woogaroo Forest* or a person whose documented work relates to conserving this habitat. It would be wrong to claim that the group definitely has organisational standing based on campaign publicity alone; obtain governing constitution, named decision-day objects and contemporaneous activity records. Do NOT presume Johl Brown/other individual meets citizenship/activities or has authority to sue on the organisation's behalf.
 
+## Newly recovered dated first-party advocacy evidence — 12 March 2026
+
+[Original four-page QUT School of Law legal-academics letter](https://img1.wsimg.com/blobby/go/c204ebbc-02bb-46d9-ad71-ed7d494e752a/QUT%20LTR%20EPBC%20referral%20Woogaroo%20-%2012032026.pdf), dated **12 March 2026**, signed on page four by **Dr Monica Taylor, Professor Rowena Maguire and Professor Bridget Lewis**. The original signed first and fourth PDF pages were visually checked. The authors addressed the letter to Minister Watt with other CC recipients, requested refusal of **2019/8575**, and articulated concerns about local/regional cumulative koala population effects, mature habitat/thermal refugia, threatened species and offset limitations.
+
+**What it pays:** a dated, attributable conservation-law representation by these three academic authors, with concrete stated scientific/legal concerns, within the s487 preceding-two-year temporal window. **What it does not pay:** (i) a *series* of activities by any one signatory without other dated records; (ii) personal citizenship/residence; (iii) the formal objects of Save Woogaroo Forest or a QUT institutional plaintiff; (iv) actual emailing/transmission/receipt by the Minister/Secretary or inclusion in the s95B report; (v) merits of the contested ecological figures or proof of judicial-review error. The authors' advocacy should be credited as theirs, not assigned to another researcher.
+
+**Competing footprint labels:** The letter asserts **136 ha direct clearing and 26 ha indirect effects**. Other preliminary-documentation and campaign source populations separately mention **up to 128 ha** in a different project/assessment description. No arithmetic subtraction or substitution is licensed until original polygon, direct/indirect, historic exclusions and instrument definitions are aligned. These are different attributed quantities.
+
+The campaign's [own current action page](https://savewoogarooforest.com.au/action) acknowledges **Stockland/Cherish's 2019/8575** approval and a **separate pending Scenic Precinct EPBC 2020/8651** campaign. The page's funding appeal is NOT proof that a Federal Court proceeding has actually been filed. Any current case requires [Federal Law Search](https://www.fedcourt.gov.au/services/check-progress-of-a-case) or original stamped filing/order. The page is a potential locator for dated two-year conservation activities, not a substitute for incorporation/objects and evidence of each activity.
+
 ## Filing-time analysis: exact applicant receipt matters
 
 **Section 11(1)(c),(3) of ADJR**, C134, conditionally prescribes a 28-day limit in the relevant decision-terms/reasons furnishing circumstances. Eligibility and actual **furnishing** are factual; **section 3(6)** may deem appropriately posted documents furnished at posting, not physical opening. Section 11(4)-(5) also allows court dismissal for unreasonable time where no period prescribed. Sections 13(1),(5) govern **qualified s13 reasons requests**, including request timing; section **135A(2) EPBC recommendation request** is independent and does **not** suspend the review clock.
@@ -103,6 +113,8 @@ This is an *issue analysis*, not a merits prediction. It preserves primary-law a
 3. Obtain signed approval/conditions **directly** and confirm any **date of threatened works**. Make s135A(2) and eligible s13 request in parallel if counsel recommends; **don't wait for either before assessing protective application**.
 4. Preserve the relevant dated standing, filing, ecological and legal records; assess ADJR/Form 66 + s15 stay, potentially s39B and/or genuine s475 breach as separately supported; Court urgent Certificate and Form 12/35 as procedure requires. Determine notice and respondents.
 5. Independently pursue original cost-incidence, title, social/housing, gas and lobbying contracts, but they **do not suspend** legal triage. No claim of unlawful lobbying/person enrichment without same-object documents.
+
+**Additional standing/documentary leaf acquired:** signed original QUT letter dated 12 March 2026 plus current campaign's original statement; factual sending/receipt, authors' full activity histories, association constitutional standing and any actual filing remain OPEN.
 
 **Case wall at this turn:** there is no confirmed original signed final decision, comment-transmission bundle, section 95C recommendation, applicant identity/activity/received decision, current works start proof, actual 475 breach, or filed case/undertaking. The legal pathway is drafted, not exercised.
 
