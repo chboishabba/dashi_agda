@@ -42,6 +42,19 @@ class TestRaiCausalAcceptance(unittest.TestCase):
     def test_source_OLS_has_no_regression_error(self):
         xx=m.causal_common_source_witness()
         self.assertEqual(xx['heldout_Ypast_plus_original_source_MSE'],'0')
+    def test_1000_shift_null_significant_despite_only_common_cue(self):
+        x=m.circular_shift_shared_cue_null()
+        self.assertEqual(x['null_permutations'],1000)
+        self.assertEqual(x['synthetic_permutation_tail_probability'],'1/1001')
+        self.assertFalse(x['direct_brain_to_brain_edge_in_model'])
+
+    def test_surrogate_metric_is_not_Rai_CCA(self):
+        self.assertFalse(m.circular_shift_shared_cue_null()['original_Rai_CCA_or_clusters_reproduced'])
+
+    def test_correlation_zero_variance_rejected(self):
+        with self.assertRaisesRegex(ValueError,'zero-variance'):
+            m.squared_pearson_int([1,1,1],[1,-1,1])
+
     def test_provenance_lock_rejected(self):
         x=copy.deepcopy(m.METHOD);x['paper_doi']='another-paper'
         with self.assertRaisesRegex(ValueError,'method metadata'):m.audit_method(x)
