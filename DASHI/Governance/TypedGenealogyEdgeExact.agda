@@ -27,6 +27,8 @@ data RelationKind : Set where
   directMethodTransfer : RelationKind
   historicalTransfer : RelationKind
   funding : RelationKind
+  fundingProposal : RelationKind
+  fundingCommitment : RelationKind
   personnelContinuity : RelationKind
   organisationalContinuity : RelationKind
   methodRecurrence : RelationKind
@@ -102,6 +104,15 @@ methodRecurrenceIsNotTransferRelation ()
 
 fundingIsNotTransferRelation : TransferRelation funding → ⊥
 fundingIsNotTransferRelation ()
+
+-- A solicited or committed budget is not a receipt of disbursed funds and
+-- neither type can prove a historical method/script transmission.
+fundingProposalIsNotTransferRelation : TransferRelation fundingProposal → ⊥
+fundingProposalIsNotTransferRelation ()
+
+fundingCommitmentIsNotTransferRelation : TransferRelation fundingCommitment → ⊥
+fundingCommitmentIsNotTransferRelation ()
+
 
 personnelContinuityIsNotTransferRelation : TransferRelation personnelContinuity → ⊥
 personnelContinuityIsNotTransferRelation ()
