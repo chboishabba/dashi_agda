@@ -27,6 +27,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Product using (_×_; _,_)
+open import Data.Empty using (⊥)
 
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
@@ -233,3 +234,66 @@ puncturedThreeSheetCount = refl
 -- Companion exact Python proves quotient graph 13v/24e and a
 -- nontrivial four-cycle Z2 holonomy; no global all-edge oriented
 -- quotient section is licensed by a 26↔13×2 set bijection.
+
+-- Concrete actual-source four-cycle in the quotient spatial graph:
+--  axisX -- faceXYpp -- axisY -- faceXYpm -- axisX.
+-- Along the third edge only, the destination must be NEGATED.
+-- These are native P3^3 graph adjacency witnesses from ORIGINAL Cube;
+-- no synthetic edge relation has been invented.
+edgeAxisXFacePP : Cube.HypervoxelAdjacent
+  (representative axisX) (representative faceXYpp)
+edgeAxisXFacePP = Cube.adjacentY Cube.zeroToPos
+
+edgeFacePPAxisY : Cube.HypervoxelAdjacent
+  (representative faceXYpp) (representative axisY)
+edgeFacePPAxisY = Cube.adjacentX Cube.posToZero
+
+edgeAxisYNegFacePM : Cube.HypervoxelAdjacent
+  (representative axisY) (Native.antipode (representative faceXYpm))
+edgeAxisYNegFacePM = Cube.adjacentX Cube.zeroToNeg
+
+edgeFacePMAxisX : Cube.HypervoxelAdjacent
+  (representative faceXYpm) (representative axisX)
+edgeFacePMAxisX = Cube.adjacentY Cube.negToZero
+
+-- This is the BINARY orientation/residual XOR, not an alternative
+-- F3 addition, complex phases or a physical gauge field.
+infixl 7 _xor_
+_xor_ : Bool → Bool → Bool
+false xor false = false
+false xor true = true
+true xor false = true
+true xor true = false
+
+-- All 16 possible global sign assignments to the four distinct
+-- projective axes fail at least one SOURCE-SELECTED adjacency lift:
+-- bits along the four quotient edges must be 0,0,1,0.
+-- Their total holonomy is odd, so the signed 26-site covering
+-- graph does NOT admit a globally edge-compatible orientation
+-- section (despite a two-sided 26↔13×Bool POINT-SET bijection).
+noEdgeCompatibleOrientation : (sX sPP sY sPM : Bool) →
+  (sX xor sPP) ≡ false →
+  (sPP xor sY) ≡ false →
+  (sY xor sPM) ≡ true →
+  (sPM xor sX) ≡ false → ⊥
+noEdgeCompatibleOrientation false false false false h₀ h₁ () h₃
+noEdgeCompatibleOrientation false false false true h₀ h₁ h₂ ()
+noEdgeCompatibleOrientation false false true false h₀ () h₂ h₃
+noEdgeCompatibleOrientation false false true true h₀ () h₂ h₃
+noEdgeCompatibleOrientation false true false false () h₁ h₂ h₃
+noEdgeCompatibleOrientation false true false true () h₁ h₂ h₃
+noEdgeCompatibleOrientation false true true false () h₁ h₂ h₃
+noEdgeCompatibleOrientation false true true true () h₁ h₂ h₃
+noEdgeCompatibleOrientation true false false false () h₁ h₂ h₃
+noEdgeCompatibleOrientation true false false true () h₁ h₂ h₃
+noEdgeCompatibleOrientation true false true false () h₁ h₂ h₃
+noEdgeCompatibleOrientation true false true true () h₁ h₂ h₃
+noEdgeCompatibleOrientation true true false false h₀ () h₂ h₃
+noEdgeCompatibleOrientation true true false true h₀ () h₂ h₃
+noEdgeCompatibleOrientation true true true false h₀ h₁ h₂ ()
+noEdgeCompatibleOrientation true true true true h₀ h₁ () h₃
+
+-- The obstruction applies to the original P3^3 adjacency/gluing.
+-- It is not a claim about actual physical diamond NV defects,
+-- experimental vortices, a two-form gauge flux, full sheaf theory,
+-- or the Griess rational Albert algebra/Monster VOA product.
