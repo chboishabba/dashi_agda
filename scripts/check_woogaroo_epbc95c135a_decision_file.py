@@ -21,11 +21,11 @@ def check() -> None:
         p.read_text(encoding="utf-8") for p in (OWNER, ROLLUP, ROADMAP, REQUEST, STUDY)
     )
 
-    assert owner.count("Source.mkNoDOISource") == 4
-    assert owner.count("Source.publicAttribution") == 4
-    assert owner.count("= decision-file-receipt") == 11
-    assert owner.count("→ ⊥") == 8
-    assert owner.count("false refl") == 11
+    assert owner.count("Source.mkNoDOISource") == 5
+    assert owner.count("Source.publicAttribution") == 5
+    assert owner.count("= decision-file-receipt") == 13
+    assert owner.count("→ ⊥") == 11
+    assert owner.count("false refl") == 13
     assert roll.count("import DASHI.Law.SensibLawWoogarooEPBC95C135ADecisionFileMaxCut20261027Exact") == 1
 
     for label in ("95B(1)", "95C(1)", "135A(2)", "136(1)", "139",
@@ -40,6 +40,8 @@ def check() -> None:
     assert "section136Housing" in owner
     assert "section139SpeciesAdvice" in owner
     assert "signedConditions" in owner
+    assert "adjrApplicantSpecificClock" in owner
+    assert "adjrStandingLinkedReasons" in owner
 
     for guard in (
         "listingDoesNotPaySignedNotice",
@@ -50,6 +52,9 @@ def check() -> None:
         "socialFactorNotCorruption",
         "existenceNotReviewGround",
         "futureRuleNotPastRule",
+        "portalNoticeNotApplicantFurnishing",
+        "reportRequestDoesNotStayFilingLimit",
+        "section13DifferentRequesterClass",
     ):
         assert guard in owner, guard
 
@@ -59,11 +64,13 @@ def check() -> None:
     assert "draft, not sent" in request
     assert "Sending this request does NOT apply for judicial review" in request
     assert "s135A(2)" in request
+    assert "Section 11(1)(c), (3)" in request
+    assert "Section 13(1), (5), (11)" in request
     assert "s95B" in request
     assert "1,786" in request
     assert "operative" in study and "15 October" in study
 
-    print("PASS: 4 original statute/agency roots; 11 open atoms; 8 no-promotion guards; unsent statutory request")
+    print("PASS: 5 original statute/agency roots; 13 documentary atoms; 11 no-promotion guards; unsent statutory request")
 
 
 if __name__ == "__main__":
