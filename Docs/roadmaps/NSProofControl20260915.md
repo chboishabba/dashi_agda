@@ -1,3 +1,57 @@
+# 2026-10-27 NS369 × R734/W2 PHYSICAL ORBIT: FINITE SYMMETRY REUSED, FALSE POSITIVE LEAF STILL EXCLUDED
+
+**Source-first:** `Docs/research/ns_369_pure_plus_w2_orbit_audit_20261027.md`.
+Original Waleffe 1992 helical triad attribution retained; the NS369
+finite/cyclic construction and existing R92/R102/R529/R530/R531/R369
+and high-high Gram owners retain their own original source authors.
+
+**Exact new same-physical calculation:** On the genuine REAL six-mode
+positive-helicity datum p=(1,0,0), q=(0,1,2), k=(1,1,2), projected
+full unforced NS Galerkin force at sharp cutoff N=2 gives
+`Xdyadic=8`, `Ddyadic=36`,
+`Pcritical=(5+sqrt(5)-sqrt(30))/10>0`,
+`M_H+×H-(0)=0`. The exact physical W2 universal positive margin
+fails at sufficiently large amplitude. That failure persists under
+all three proper cyclic coordinate orientations, with *identical*
+X, D and P and three distinct R529/R531 ternary sign-profile
+triples. Under all SIX axis permutations the Fourier sign quotient
+has only THREE distinct profiles, each accommodating opposite true
+helical chirality (proper vs improper parity); the original
+orientation data must therefore accompany the sign observations.
+Amplitude multiplication does not alter a finite sign profile
+but makes the cubic nonlinear growth defeat quadratic dissipation.
+
+**Source-written formal reuse:** Existing `NSCross369OrientationBridgeExact`
+now carries `cyclic369CrossEquivariant` and
+`cyclic369ThirdPowerIdentity` on the existing polymorphic
+Complex3 cross product, not on an invented cyclic group C3.
+`NSTriadKN369HighHighGramBridgeReceipt` explicitly retains its
+separate unsolved `lambda_min(K_N(A))>=c/N` Rayleigh owner:
+NO same-object identity to this physical triad's Gram operator
+has been established; neither a Gram proof nor its refutation is
+inferred. `NSTriadKNPackageAToSameSolutionSerrinRound369Exact`
+is a DIFFERENT conditional same-limiting-solution compiler that
+does NOT produce Package A/W2. R528/R532 Euclidean counting-vs-
+continuum measure transport remains open.
+
+**Execution:** six locally passed exact SymPy tests for the full
+proper/improper orientation orbit and finite sign-fibre collapse,
+source-matching regression
+`tests/test_ns_369_pure_plus_w2_orbit.py`.
+No exact PR-head suite or Agda/Lean kernel typechecking;
+no unrestricted Clay A/B result.
+
+**Pareto after reuse:** prove a genuinely cutoff-uniform signed
+estimate for actual negative-helicity exchange and exact-versus-
+dyadic weight-defect transfer (R92/R102/R734), keeping all four
+helical channels and same physical projection; or find a different
+valid critical-continuation route. Only THEN attach any eligible
+finite 369 sign/profile reduction, high-high Gram operator or
+Round369 same-solution Serrin consumer. Do not re-assert the FALSE
+universal positive-margin R734 W2 estimate or old padding-based B4.
+
+---
+
 # 2026-10-27 CRITICAL PR #1271: UNIVERSAL R734/R735 W2 IS REFUTED ON THE ORIGINAL PHYSICAL GALERKIN SYSTEM
 
 **Read this amendment first; it supersedes all earlier entries calling
