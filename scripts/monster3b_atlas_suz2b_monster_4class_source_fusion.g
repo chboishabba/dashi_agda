@@ -183,7 +183,7 @@ SourceLabel := function(b)
        else return "AMBIGUOUS_SOURCE_FUSION"; fi;
 end;
 SeparatorAfter := function(i,n)
-  if i<n then return ",\\n"; else return "\\n"; fi;
+  if i<n then return ",\n"; else return "\n"; fi;
 end;
 CommaAfter := function(i,n)
   if i<n then return ","; else return ""; fi;
@@ -208,7 +208,7 @@ for i in [1..Length(liftRows)] do
     ",\"mn3b_class_position\":",row.mnPos,
     ",\"monster_class_position\":",row.monsterPos,
     ",\"monster_four_label\":\"",row.monsterLabel,"\"}",
-    (if i<Length(liftRows) then ",\n" else "\n" fi));
+    SeparatorAfter(i,Length(liftRows)));
 od;
 AppendTo(outPath,
   "  ],\n",
