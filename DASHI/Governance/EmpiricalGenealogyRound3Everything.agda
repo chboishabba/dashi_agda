@@ -18,6 +18,7 @@ import DASHI.Governance.EvidenceGradedGenealogyCore
 import DASHI.Governance.EvidenceGradedGenealogyCasesExact
 import DASHI.Governance.TypedGenealogyEdgeExact
 import DASHI.Governance.ClimateGenealogyTypedCasesExact
+import DASHI.Governance.WoogarooGasNationalReservationPolicyBridge20261027Exact
 import DASHI.Governance.JohnPaperClaimPromotionAuditExact
 import DASHI.Governance.JohnPaperClaimManifestV2Exact
 import DASHI.Governance.PalantirProcurementLegibilityAdapterExact
