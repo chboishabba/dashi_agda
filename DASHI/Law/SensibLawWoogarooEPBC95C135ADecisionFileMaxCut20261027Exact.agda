@@ -74,12 +74,12 @@ nationalStandardsTiming = Source.mkNoDOISource
 adjrActAsAtDecision : Source.AttributedSource
 adjrActAsAtDecision = Source.mkNoDOISource
   "Parliament of Australia"
-  "Administrative Decisions (Judicial Review) Act 1977 — compilation 133"
-  "Federal Register of Legislation: law in force 27 August 2026"
-  "27 August 2026"
-  "https://www.legislation.gov.au/C2004A01697/2026-08-27/2026-08-27/text/original/epub/OEBPS/document_1/document_1.html"
+  "Administrative Decisions (Judicial Review) Act 1977 — compilation 134, C2026C00448"
+  "Federal Register of Legislation: law in force 29 September 2026"
+  "29 September 2026"
+  "https://www.legislation.gov.au/C2004A01697/latest"
   Source.governmentSource
-  "ADJR s11(1)(c),(3) prescribed 28-day application period uses a particular applicant's document-furnishing/reasons events and court extensions; s11(4) deals with situations where no period prescribed. s13(1) reason-request eligibility requires entitlement to review under s5, and s13(5) has its own timing/refusal conditions. There is no proven single deadline from 15 October portal publication; court rules, standing, exclusions and alternate jurisdiction require counsel."
+  "ADJR C134 s11(1)(c),(3) prescribed 28-day application period uses a particular applicant's document-furnishing/reasons events and court extensions; s11(4) deals with situations where no period prescribed. s13(1) reason-request eligibility requires entitlement to review under s5, and s13(5) has its own timing/refusal conditions. There is no proven single deadline from 15 October portal publication; court rules, standing, exclusions and alternate jurisdiction require counsel."
   Source.publicAttribution
 
 data FileAtom : Set where
