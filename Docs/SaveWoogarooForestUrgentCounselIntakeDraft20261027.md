@@ -1,0 +1,33 @@
+# Unsent EDO / environmental barrister intake draft — EPBC 2019/8575
+**Prepared 27 October 2026. DO NOT AUTO-SEND.** Submit using the [Environmental Defenders Office legal-intake form](https://www.edo.org.au/free-legal-advice/) or directly to retained counsel; do not presume retainer, response time or privilege. Only a suitably authorised person can speak on a community organisation's behalf.
+
+**Subject: URGENT legal assessment requested — Woogaroo Forest / Springfield Residential Development EPBC 2019/8575 — standing, judicial-review filing date and interim habitat protection**
+
+> Dear Environmental Defenders Office legal intake team,
+>
+> We seek urgent environmental administrative-law advice about the Australian Government's 15 October 2026 **approval with conditions** of the Springfield Residential Development (EPBC **2019/8575**) affecting Woogaroo Forest, Queensland. The public register establishes the decision status; we have not yet obtained the complete signed instrument, reasons or operative conditions. We understand urgency must be assessed against actual clearing and litigation timetables, not public concern alone.
+>
+> We request a solicitor's initial assessment of:
+>
+> 1. Which specific person or organisation can establish standing under **EPBC section 487** and/or ordinary ADJR standing, and whether a distinct **section 475** enforcement route has any current evidentiary basis.
+> 2. Whether an **ADJR section 5** or **Judiciary Act section 39B** challenge is available; the applicant-specific filing clock under the **ADJR Act compilation effective 29 September 2026**, including receipt/furnishing of written approval and reasons, and whether a protective filing or extension application requires immediate action. For an applicant furnished full decision terms/reasons on 15 October, **12 November** may be a conditional 28-day end date, but we **do not claim** this is universally applicable.
+> 3. Whether urgent **ADJR section 15 stay**, appropriately supported interlocutory injunction or an independently established **EPBC section 475** contravention application is possible, including Federal Court urgent duty procedure, proposed parties, exact clearing area, service/notice, costs and undertaking as to damages.
+> 4. Examination of the complete **section 95B preliminary documentation/public comment set**, the Secretary's **section 95C recommendation report** obtainable via **section 135A(2)**, and the actual final conditions under **sections 136/139**. A particular concern is the Department's requested **Item 4.6(c) local/regional cumulative-impact** analysis for endangered koala habitat, connectivity, offsets and microclimatic refugia.
+> 5. Whether the separate Queensland **9281/2024/OW Condition 6(a)** and existing Village 2/3 planning approvals create an independently actionable prestart gate on the **exact same works footprint**, rather than assuming Council approval or anticipated clearing alone is unlawful.
+>
+> The available record also contains a **12 March 2026 original letter by three QUT legal academics** raising population-scale koala, cumulative-impact and offset concerns, and several subsequent official planning decisions. These are attributed sources, not yet findings of legal error or proof that each was considered by the decision-maker. Political lobbying, third-order financial exposure and unrelated data-centre/gas projects are treated as separate investigation leads, not allegations against any current decision-maker.
+>
+> We can provide the dated, source-linked evidence inventory and draft counsel issue assessment promptly. We have **not** filed court proceedings, obtained an injunction or established the nominated applicant's standing, actual decision-furnishing date or the date of any planned clearing. Those are urgent acquisition tasks.
+>
+> Please advise whether you can accept an urgent enquiry or refer it to available Queensland Commonwealth environmental judicial-review counsel. We recognise that submitting this enquiry does not suspend any legal time limit.
+>
+> Sincerely,
+>
+> [Authorised applicant or community representative — to be completed]
+> [Contact details — to be completed]
+
+**Attachments / first-supply materials**: [Counsel assessment](SaveWoogarooForestUrgentCounselStandingFilingInterimAssessment20261027.md); [s135A draft and 95B preservation](SaveWoogarooForestEPBC95C135ARequest20261027.md); [original public EPBC 15 Oct decision notice](https://eap-cp.powerappsportals.com/all-notices/); [12 March academic submission original](https://img1.wsimg.com/blobby/go/c204ebbc-02bb-46d9-ad71-ed7d494e752a/QUT%20LTR%20EPBC%20referral%20Woogaroo%20-%2012032026.pdf); actual signed 15 October approval and signed Council notices **if obtained**; applicant-specific standing/service/works evidence. Do not describe the report request, email or injunction as sent, filed or granted.
+
+**Public-source originals**: Federal Register EPBC C70 (24 August 2026); ADJR C134 (29 September 2026); Federal Court Rules C2026 11 June; Federal Court duty practice; EDO original intake. Court Forms 66/67/12/35 are procedural alternatives requiring counsel selection, not completed pleadings.
+
+**Attribution**: Legal opinions and proceedings reserved for duly instructed counsel; dated QUT ecological letter to its signatories; agency and council notices to their issuing bodies; prior repository sources to original owners; synthesis directed by Johl Brown with OpenAI ChatGPT assistance. This draft has not been sent and contains no implied lawyer-client retainer.
