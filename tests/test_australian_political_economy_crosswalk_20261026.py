@@ -46,6 +46,11 @@ def test_first_person_policy_and_document_origins_separate():
         "AUD 2.3m 2016 + AUD 2.2m 2017",
         "JUDGMENT reproduces",
         "bannonPalmerContrarySourceReceipt = australia-source-role-receipt",
+        "palmerRevisedContactAttribution = australia-source-role-receipt",
+        "palmerLaterSingleCallSourceAttributed = refl",
+        "palmerCampaignDirectionNotIndependentlyVerified = refl",
+        "EFTA01615861",
+        "brief unsolicited call",
         "Palmer denies",
     ):
         assert token in s
@@ -145,3 +150,17 @@ def test_sibling_climate_funding_not_promoted_to_epstein_rinehart_or_ipa_editori
         "H3 remains",
     ):
         assert term.lower() in d.lower()
+
+
+def test_palmer_versioned_attribution_and_same_message_original_not_duplicated():
+    s = ADAPTER.read_text()
+    d = DOC.read_text()
+    parent = (ROOT / "DASHI/Cognition/BannonFaragePalmerAutomatedInfluenceReceiptsExact.agda").read_text()
+    assert "Palmer.directContactPaid Palmer.bannonPalmerReceipt ≡ true" in s
+    assert "Palmer.independentlyVerifiedInfluencePaid Palmer.bannonPalmerReceipt ≡ false" in s
+    assert "EFTA01615861" in parent
+    assert "one brief phone conversation" in parent
+    assert "one brief unsolicited Bannon call" in d
+    assert "initially denied all contact" in d
+    assert "a call's exact time" in d.lower()
+    assert "not" in d.lower()
