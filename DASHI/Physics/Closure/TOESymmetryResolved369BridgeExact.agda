@@ -12,6 +12,8 @@ import DASHI.Physics.Closure.SSP369PolarResidualQuotient as Polar
 import DASHI.Physics.Closure.SSPPrimeLane369DepthAddressWheel as Address
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 import DASHI.Physics.Closure.NSTriadKNStage3Ternary369Ledger as NS369
+import DASHI.Physics.Closure.NSCross369OrientationBridgeExact as NSCross
+import DASHI.Physics.Closure.NSTriadKN369HighHighGramBridgeReceipt as NSGram
 import DASHI.Foundations.Base369MobiusTransport as Mobius
 
 ------------------------------------------------------------------------
@@ -261,3 +263,44 @@ canonicalTOESymmetryResolved369Bridge = bridge
   sspNativeCompositionPreserved
   axisPlusPolarityRecoversLift
   sspPolarProjectionIsLosslessWithResidual
+
+------------------------------------------------------------------------
+-- 5. Reuse original NS 369 proof boundaries.
+--
+-- The complex three-axis cross product is an oriented-coordinate
+-- observation. It is not the cyclic C3 group or a Clay proof.
+-- The high-high Gram receipt records the still-open Rayleigh margin.
+-- This bridge preserves BOTH facts without changing either owner.
+------------------------------------------------------------------------
+
+toeNS369CrossRetainsBeltramiSuppression :
+  NSCross.nsBeltramiCrossSuppressionReused ≡ true
+toeNS369CrossRetainsBeltramiSuppression =
+  NSCross.nsBeltramiCrossSuppressionReusedIsTrue
+
+toeNS369CrossRetainsLerayCancellation :
+  NSCross.nsOutputTransverseLerayCancellationReused ≡ true
+toeNS369CrossRetainsLerayCancellation =
+  NSCross.nsOutputTransverseLerayCancellationReusedIsTrue
+
+toeNS369GramReceiptIsFailClosed :
+  NSGram.failClosed NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+  ≡ true
+toeNS369GramReceiptIsFailClosed =
+  NSGram.failClosedIsTrue NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+
+toeNS369GramTheoremNotPromoted :
+  NSGram.theoremPromoted NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+  ≡ false
+toeNS369GramTheoremNotPromoted =
+  NSGram.theoremPromotedIsFalse NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+
+toeNS369ClayNotPromoted :
+  NSGram.clayPromoted NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+  ≡ false
+toeNS369ClayNotPromoted =
+  NSGram.clayPromotedIsFalse NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+
+toeNS369ComplexThreeNotCyclicC3 :
+  NSCross.nsComplex3CarrierPromotedToCyclicC3 ≡ false
+toeNS369ComplexThreeNotCyclicC3 = refl
