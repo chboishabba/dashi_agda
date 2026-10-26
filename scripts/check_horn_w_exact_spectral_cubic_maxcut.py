@@ -88,3 +88,19 @@ except ImportError:
     print("SKIP optional numpy original-fixture spectrum")
 
 print("OPEN actual Hatcher marked meridians, arclength, based Stokes curvature")
+
+
+# EXACT isolating intervals for ALL THREE squared SU3 eigenvalue gaps.
+# Each polynomial endpoint pair has opposite strict rational signs.
+# Intervals are pairwise disjoint, so IVT and degree=3 show precisely
+# one real eigenvalue in each interval. This closes the finite scalar
+# spectrum certificate; it is NOT a new geometric or physical spectrum.
+intervals=[
+    (Q(919,100000),Q(920,100000)),
+    (Q(187659,100000),Q(187660,100000)),
+    (Q(206838,100000),Q(206839,100000))
+]
+assert all(p(lo)*p(hi)<0 for lo,hi in intervals)
+assert all(intervals[i][1]<intervals[i+1][0]
+           for i in range(len(intervals)-1))
+print("PASS exact rational complete 3-eigenvalue squared-gap root isolation")
