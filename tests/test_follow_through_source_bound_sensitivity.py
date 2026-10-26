@@ -44,5 +44,14 @@ class SensitivityTests(unittest.TestCase):
         data=HEADER+row("DI","s1","uncorrected",4)*2
         with self.assertRaises(ValueError): self.check(data)
 
+    def test_model_specific_weighting_rejected(self):
+        data=HEADER+row("DI","s1","uncorrected",4,2)+row("B","s1","uncorrected",2,1)
+        with self.assertRaisesRegex(ValueError,"unequal model weights"):
+            self.check(data)
+
+    def test_equal_point_estimate_is_tie(self):
+        data=HEADER+row("DI","s1","uncorrected",2)+row("B","s1","uncorrected",2)
+        self.assertEqual(self.check(data)[0]["tied_leaders"],["B","DI"])
+
 if __name__ == "__main__":
     unittest.main()
