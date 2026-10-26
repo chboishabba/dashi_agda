@@ -205,6 +205,36 @@ fi;
 base1458Pos := base1458Candidates[1];
 base1458 := mainIrr[base1458Pos];
 
+# **Exact source negative control from the central-phase pair**.
+# The fused 1458 character contains both nontrivial E-centre eigenspaces
+# of dimension729. A 6.Suz.2 OUTER element inverting that centre must
+# exchange these eigenspaces, hence have trace ZERO. Identify the
+# quotient C2 character by its full restriction to the 6.Suz subgroup,
+# rather than guessing its Atlas label or class positions. This is a
+# necessary SOURCE character-table screen; it does not select the
+# Monster 78 family, the source r word, or the normalizer Hom.
+outerSignCandidates := Filtered([1..Length(outerIrr)], j ->
+  outerIrr[j][1]=1 and
+  ForAll(sixToOuter, c -> outerIrr[j][c]=1) and
+  ForAny([1..NrConjugacyClasses(outer)], c -> outerIrr[j][c]<>1));
+if Length(outerSignCandidates)<>1 then
+  Error("cannot identify unique source 6.Suz.2/6.Suz outer sign");
+fi;
+outerSign := outerIrr[outerSignCandidates[1]];
+if ForAny([1..NrConjugacyClasses(outer)], c ->
+    not (outerSign[c]=1 or outerSign[c]=-1)) then
+  Error("source outer sign must be C2-valued");
+fi;
+outerInvertingMainPositions := Filtered([1..Length(mainOrders)], c ->
+  outerSign[mainToOuter[c]]=-1);
+if Length(outerInvertingMainPositions)=0 then
+  Error("no original main-table centre-inverting outer-coset classes");
+fi;
+if ForAny(outerInvertingMainPositions, c -> base1458[c]<>0) then
+  Error("source fused 1458 character nonzero on centre-inverting coset");
+fi;
+
+
 # ----------------------------------------------------------------------
 # Inflate the outer-paired Suzuki characters through main -> 6.Suz.2,
 # multiply by the fused 1458 character, and decompose in Irr(main).
