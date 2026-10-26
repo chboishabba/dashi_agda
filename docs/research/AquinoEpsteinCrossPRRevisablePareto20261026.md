@@ -1,0 +1,64 @@
+# Aquino / Maxwell / Epstein / CA — revised source-world and exact-object Pareto (26 October 2026)
+
+**Owner:** child draft [PR #1245](https://github.com/chboishabba/dashi_agda/pull/1245), stacked on [#1131](https://github.com/chboishabba/dashi_agda/pull/1131). This is a **bounded evidence-model refinement**, not a newly established conspiracy, historical event or new general framework.
+
+**Canonical disposition:** [25 October attribution and research-freeze ledger](aquino-epstein-canonical-disposition-20261025.md) remains the case owner. New **machine-readable case fixture** is [`docs/receipts/AquinoEpsteinRevisableSourceWorld20261026.json`](../receipts/AquinoEpsteinRevisableSourceWorld20261026.json). No new source collection or unapproved team-corpus integration was needed.
+
+## Exact latest-PR reuse / no duplication
+
+| Live sibling PR actually reviewed | Applicable donor | This PR's decision |
+|---|---|---|
+| [#1266 consumer-factorization no-go](https://github.com/chboishabba/dashi_agda/pull/1266) | Two histories with one coarse observation can disagree on a consumer answer | Do **not import unmerged sibling**. Existing canonical `DASHI.Core.IntersectionalNonFactorability` already proves the identical general theorem; instantiate that owner in `EpsteinBankingInfrastructureAcquisitionExact` with the source-attributed HSI/DEA name collision |
+| [#1268 Follow Through revisable source-world](https://github.com/chboishabba/dashi_agda/pull/1268) | Evidence `present/notLocated/knownAbsent` must be separate from claim `sourceReported/unresolved`; action Pareto must preserve **both exact evidence targets and reopened consumers** | Author **data only**, shaped to match the sibling's `validate/report` consumer; do not copy its generic Python algorithm, mutate the sibling, or claim it is merged/connected |
+| [#1267 severe bidirectional inquiry](https://github.com/chboishabba/dashi_agda/pull/1267) | Strongest steelman + strongest counter-source; non-location is not falsification unless a bounded independent search could have observed the record | Keep FTC original petition, Bannon's own denial, signed procedural court order and later missing disposition **distinct**. Full investigator and respondent provenance, not one positive/negative composite |
+| [#1200 repository intelligence router](https://github.com/chboishabba/dashi_agda/pull/1200) | Distinguish source reconstruction, mathematical debt, certification debt, empirical evidence debt; original identity and content are separate from proof authority | Do **not** import its unmerged 73-file DB product. Record this case's consumer debt as original-source empirical/disposition debt; mathematical name-collision no-go is **source-written, not kernel-certified** |
+| [#1251 BOM source collision; #1253 PANDORA source custody](https://github.com/chboishabba/dashi_agda/pull/1251) | Same-sounding object/same-name is not identical underlying measurement or agency programme; preserve original measurement/source identity | Direct analogous method applies to `Chain Reaction`, not those unrelated empirical facts or actors. No imported evidence from BOM/data centres |
+
+All current-source module owners are canonical on the parent branch unless explicitly designated as **unmerged sibling donor**. The earlier source audits and genuine original authors remain credited; we do not count repeat reports as independent witnesses.
+
+## Actual finite proof payment and its empirical boundary
+
+`DASHI/Cognition/EpsteinBankingInfrastructureAcquisitionExact.agda` contains a source-informed *two-case* carrier:
+
+- `deaOCDETFNYNYS0829`: original indexed DEA/OCDETF narcotics-finance case, 2015 target memo EFTA00173953;
+- `hsiIPRCounterfeit2011`: original HSI/IPR Center counterfeit supply-chain initiative begun June 2011.
+
+`casePublicHeadline` maps **both** to the single label `operationChainReactionTitle`. `caseIsDEA` distinguishes them. Reuse `NonFactor.NonFactorabilityWitness` and its existing `witnessRulesOutEveryFlatFactorisation` gives the exact **conditional finite theorem**:
+
+> No decoder seeing only the common title can always recover which of these two case identities a record concerns. Reformatting the title cannot repair the lost distinction.
+
+Conversely, `originalFederalCaseKey` retains distinct agency/case identifiers and `originalCaseKeyConsumerFactors` gives a positive `FactorsThrough` witness in this finite model. The existing Aquino consumer imports the banking-owner result instead of repackaging the theorem. **Formal status:** code written, reused theorem names verified by source readback; **Agda kernel not run**. **Historical status:** the distinct programmes are supported by original HSI 2019 factsheet / contemporaneous 2011 ICE Senate testimony and 2015 DEA case index (native DEA memo page-image not independently authenticated); the finite mathematical theorem does not authenticate those historical documents or resolve DEA's final disposition.
+
+**Attribution:** Kimberlé Crenshaw's 1991 structural intersectionality is the acknowledged conceptual background cited by the canonical `IntersectionalNonFactorability` owner; the generic finite no-go is DASHI mathematics, not a theorem originally proved by Crenshaw. PR #1266 independently develops an analogous consumer factorisation fixture and acknowledges Blackwell (1953), Cousot & Cousot (1977). The user directed the particular case framing; OpenAI ChatGPT assisted code/ledger implementation. No original HSI/DEA/FTC author is credited for a theorem or vice versa.
+
+## Data-first revisable evidence world: who produced what?
+
+A source-world **root** is the producing institution or author, not a file URL, one of its mirrors, or a merged group of competing litigants. The case fixture records:
+
+- Canadian federal/BC **joint** commissioner inquiry = one investigative root; its 2019 aggregate Kogan-derived-score finding = `present`, `sourceReported`, not individually reproduced raw-voter data.
+- FTC petition and FTC reply = one **FTC agency producer**, two separate dated pleadings. Bannon's 9 December 2020 **adversarial defence** is a *separate litigant root*, and Judge Cooper's 18 November show-cause order is a *separate judicial procedural root*. Neither FTC allegation nor defence is an adjudicated finding.
+- UK Electoral Commission original published AIQ service-payment findings are `present`; exact score-file-to-Ripon identity is still `notLocated`.
+- HSI original operation/fact sheet and DEA 2015 OCR/index refer to **different agency cases with the same title**. A third-party transcription is a derivative carrier of the DEA memo, not a separate original investigation. The reported 2023 DEA closing date has **no signed original disposition inspected**.
+- The 2016 Black bank transaction origin, signed 2019 Bannon producer rights, and actual historical Aquino/PROMIS↔SCL transfer remain `notLocated` with **unknown future original producer**, not falsely assigned to Dechert, FTC or DEA by topical association.
+
+`knownAbsent` is supported by the schema only when an expressly stated **bounded absence scope** exists; we record **no universal absence**. The public URLs are identity/acquisition locators, never a hash, verification certificate, source-independent finding, historical guilt status or legal authorization to retrieve sensitive persons' records.
+
+## Conditional Pareto frontier — what remains
+
+| Original object / action ID | Consumer reopened **only if a real matching source is acquired** | Present confidence | Priority |
+|---|---|---|---|
+| `A_FTC_DISPOSITION` | Final Bannon/FTC–DDC procedural outcome | Original 2020 petition/opposition/order located, no authenticated later dispositive source | **P1 conditional** |
+| `B_DEA_OUTCOME` | DEA `NY-NYS-0829/C1-11-0049` closure, declination or charges | Lead memo derivative located; final original unverified | **P1 conditional** |
+| `C_BLACK_BANK` | Source-identical 2016 USD Black bank transaction classification | Existing aggregate scopes nonidentical; exact class unpaid | **P1 conditional** |
+| `D_FILM_EXECUTED` | Actual 2019 media producer execution/work product | Filmed interview and contemporary lawyer correspondence already documented | P2 |
+| `E_GSR_RIPON_VERSION` | Non-personal exact versioned score model-file → named Ripon consumer | Canadian regulator already settles **aggregate** Kogan-derived score route | P3 |
+| `F_AQUINO_PROMIS` | Single source-identical dated technical/historical handoff | Generic thematic resemblance only | Low, unless source emerges |
+| `G_SHARED_PROGRAMME` | **Independent** original tasking **and** sponsor/budget **and** work-product, plus a verified historic transfer | All material components `notLocated`; no whole-network finding | Gate only, not a broad search allocation |
+
+The declared three-axis effort/access/interpretation costs are **ordinal planning illustrations, not measured probabilities**. Actions with distinct original target identities are intentionally **incomparable** even if one is cheaper: one easy unrelated newspaper cannot dominate an indispensable DEA case-status file. Synthetic revisions never automatically upgrade a historical claim. The sibling PR #1268 consumer can interpret this compatible fixture **after the appropriate branch integration**, but neither sibling compilation nor execution is claimed here.
+
+**Stop rule:** Research stays frozen unless a lawful, original, dated and independently attributable same-object item closes a named consumer or substantially discriminates a competing hypothesis. A new mirror, another person with the same surname, a procedural filing, a journalist's conjecture or a new Boolean `refl` field does not justify unbounded expansion. Future updates invalidate only claims dependent on the newly observed source. **No raw voter personal data, credentials or victim identifiers are required or sought.**
+
+## Acceptance state
+
+The existing source-focused regression suite stays the branch's test owner; `tests/test_aquino_epstein_revisable_source_world.py` adds case-data validation, cross-litigant source separation, fail-closed unresolved claims, exact-object target independence and finite proof owner checks. This is intentionally **not** a duplicate generic source-world planner or a copy of #1268's script. Static source checks can be performed against GitHub; source-written Agda still needs a kernel proof receipt and original-world outcomes remain subject to their external evidence gates. CI is not a research priority in this user-directed cut.
