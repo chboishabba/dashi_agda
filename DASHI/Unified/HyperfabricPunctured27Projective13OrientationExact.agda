@@ -142,33 +142,33 @@ decodeEncode .cornerPMM true = refl
 encodeSound : (p : Cube.Ternary27Point)
   (a : Axis13) (bit : Bool) →
   encode p ≡ just (a , bit) → decode (a , bit) ≡ p
-encodeSound Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspZero a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspNegOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspZero a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspPosOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspZero a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspNegOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspZero a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspPosOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspNegOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspZero a b ()
-encodeSound Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspPosOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspNegOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspZero a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspPosOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspZero a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspNegOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspPosOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspZero a b refl = refl
-encodeSound Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspZero) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspNegOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspZero) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspPosOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspZero) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspNegOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspZero) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspPosOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspNegOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspZero) a b ()
+encodeSound (Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspPosOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspNegOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspZero) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspPosOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspZero) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspNegOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspPosOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspZero) a b refl = refl
+encodeSound (Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne) a b refl = refl
 
 -- The true source antipode fixes the PROJECTIVE point and flips
 -- the recoverable sign residual; contrast a false scalar quotient.
@@ -176,33 +176,33 @@ encodeAntipode : (p : Cube.Ternary27Point)
   (a : Axis13) (bit : Bool) →
   encode p ≡ just (a , bit) →
   encode (Native.antipode p) ≡ just (a , flipBit bit)
-encodeAntipode Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspZero a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspNegOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspZero a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspPosOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspZero a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspNegOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspZero a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspPosOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspNegOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspPosOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspNegOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspZero a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspPosOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspZero a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspNegOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspPosOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspZero a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne a b refl = refl
-encodeAntipode Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspZero a b ()
+encodeAntipode (Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspZero) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspNegOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspZero) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspPosOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspZero) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspNegOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspZero) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspPosOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspNegOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspPosOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspNegOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspZero) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspPosOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspZero) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspNegOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspPosOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspZero) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne) a b refl = refl
+encodeAntipode (Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspZero) a b ()
 
 supportSize : Axis13 → Nat
 supportSize .axisX = 1
