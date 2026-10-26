@@ -43,37 +43,37 @@ data Axis13 : Set where
   cornerPPP cornerPPM cornerPMP cornerPMM : Axis13
 
 representative : Axis13 → Cube.Ternary27Point
-representative .axisX = Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero
-representative .axisY = Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspZero
-representative .axisZ = Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspPosOne
-representative .faceXYpp = Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspZero
-representative .faceXYpm = Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspZero
-representative .faceXZpp = Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspPosOne
-representative .faceXZpm = Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspNegOne
-representative .faceYZpp = Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspPosOne
-representative .faceYZpm = Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspNegOne
-representative .cornerPPP = Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne
-representative .cornerPPM = Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne
-representative .cornerPMP = Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne
-representative .cornerPMM = Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne
+representative axisX = Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero
+representative axisY = Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspZero
+representative axisZ = Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspPosOne
+representative faceXYpp = Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspZero
+representative faceXYpm = Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspZero
+representative faceXZpp = Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspPosOne
+representative faceXZpm = Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspNegOne
+representative faceYZpp = Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspPosOne
+representative faceYZpm = Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspNegOne
+representative cornerPPP = Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne
+representative cornerPPM = Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne
+representative cornerPMP = Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne
+representative cornerPMM = Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne
 
 -- Nine + three + one is the explicit canonical projective chart,
 -- while 3+6+4 is the cubic support stratification (different partition).
 axisFirst : SSP.SSPTrit → SSP.SSPTrit → Axis13
-axisFirst SSP.sspNegOne SSP.sspNegOne = .cornerPMM
-axisFirst SSP.sspNegOne SSP.sspZero = .faceXYpm
-axisFirst SSP.sspNegOne SSP.sspPosOne = .cornerPMP
-axisFirst SSP.sspZero SSP.sspNegOne = .faceXZpm
-axisFirst SSP.sspZero SSP.sspZero = .axisX
-axisFirst SSP.sspZero SSP.sspPosOne = .faceXZpp
-axisFirst SSP.sspPosOne SSP.sspNegOne = .cornerPPM
-axisFirst SSP.sspPosOne SSP.sspZero = .faceXYpp
-axisFirst SSP.sspPosOne SSP.sspPosOne = .cornerPPP
+axisFirst SSP.sspNegOne SSP.sspNegOne = cornerPMM
+axisFirst SSP.sspNegOne SSP.sspZero = faceXYpm
+axisFirst SSP.sspNegOne SSP.sspPosOne = cornerPMP
+axisFirst SSP.sspZero SSP.sspNegOne = faceXZpm
+axisFirst SSP.sspZero SSP.sspZero = axisX
+axisFirst SSP.sspZero SSP.sspPosOne = faceXZpp
+axisFirst SSP.sspPosOne SSP.sspNegOne = cornerPPM
+axisFirst SSP.sspPosOne SSP.sspZero = faceXYpp
+axisFirst SSP.sspPosOne SSP.sspPosOne = cornerPPP
 
 axisSecond : SSP.SSPTrit → Axis13
-axisSecond SSP.sspNegOne = .faceYZpm
-axisSecond SSP.sspZero = .axisY
-axisSecond SSP.sspPosOne = .faceYZpp
+axisSecond SSP.sspNegOne = faceYZpm
+axisSecond SSP.sspZero = axisY
+axisSecond SSP.sspPosOne = faceYZpp
 
 -- Uses THE original native #1249 antipode rather than duplicating it.
 flipBit : Bool → Bool
@@ -109,32 +109,32 @@ originExcluded = refl
 -- The 26 reflexive computations establish one direction constructively.
 decodeEncode : (a : Axis13) (bit : Bool) →
   encode (decode (a , bit)) ≡ just (a , bit)
-decodeEncode .axisX false = refl
-decodeEncode .axisX true = refl
-decodeEncode .axisY false = refl
-decodeEncode .axisY true = refl
-decodeEncode .axisZ false = refl
-decodeEncode .axisZ true = refl
-decodeEncode .faceXYpp false = refl
-decodeEncode .faceXYpp true = refl
-decodeEncode .faceXYpm false = refl
-decodeEncode .faceXYpm true = refl
-decodeEncode .faceXZpp false = refl
-decodeEncode .faceXZpp true = refl
-decodeEncode .faceXZpm false = refl
-decodeEncode .faceXZpm true = refl
-decodeEncode .faceYZpp false = refl
-decodeEncode .faceYZpp true = refl
-decodeEncode .faceYZpm false = refl
-decodeEncode .faceYZpm true = refl
-decodeEncode .cornerPPP false = refl
-decodeEncode .cornerPPP true = refl
-decodeEncode .cornerPPM false = refl
-decodeEncode .cornerPPM true = refl
-decodeEncode .cornerPMP false = refl
-decodeEncode .cornerPMP true = refl
-decodeEncode .cornerPMM false = refl
-decodeEncode .cornerPMM true = refl
+decodeEncode axisX false = refl
+decodeEncode axisX true = refl
+decodeEncode axisY false = refl
+decodeEncode axisY true = refl
+decodeEncode axisZ false = refl
+decodeEncode axisZ true = refl
+decodeEncode faceXYpp false = refl
+decodeEncode faceXYpp true = refl
+decodeEncode faceXYpm false = refl
+decodeEncode faceXYpm true = refl
+decodeEncode faceXZpp false = refl
+decodeEncode faceXZpp true = refl
+decodeEncode faceXZpm false = refl
+decodeEncode faceXZpm true = refl
+decodeEncode faceYZpp false = refl
+decodeEncode faceYZpp true = refl
+decodeEncode faceYZpm false = refl
+decodeEncode faceYZpm true = refl
+decodeEncode cornerPPP false = refl
+decodeEncode cornerPPP true = refl
+decodeEncode cornerPPM false = refl
+decodeEncode cornerPPM true = refl
+decodeEncode cornerPMP false = refl
+decodeEncode cornerPMP true = refl
+decodeEncode cornerPMM false = refl
+decodeEncode cornerPMM true = refl
 
 -- The converse is a proof over the actual 27 native cube constructors.
 -- It explicitly rejects the one absent site; neither 9-plane is
@@ -205,19 +205,19 @@ encodeAntipode (Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne) a
 encodeAntipode (Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspZero) a b ()
 
 supportSize : Axis13 → Nat
-supportSize .axisX = 1
-supportSize .axisY = 1
-supportSize .axisZ = 1
-supportSize .faceXYpp = 2
-supportSize .faceXYpm = 2
-supportSize .faceXZpp = 2
-supportSize .faceXZpm = 2
-supportSize .faceYZpp = 2
-supportSize .faceYZpm = 2
-supportSize .cornerPPP = 3
-supportSize .cornerPPM = 3
-supportSize .cornerPMP = 3
-supportSize .cornerPMM = 3
+supportSize axisX = 1
+supportSize axisY = 1
+supportSize axisZ = 1
+supportSize faceXYpp = 2
+supportSize faceXYpm = 2
+supportSize faceXZpp = 2
+supportSize faceXZpm = 2
+supportSize faceYZpp = 2
+supportSize faceYZpm = 2
+supportSize cornerPPP = 3
+supportSize cornerPPM = 3
+supportSize cornerPMP = 3
+supportSize cornerPMM = 3
 
 exactThirteenBySupport : 13 ≡ 3 + 6 + 4
 exactThirteenBySupport = refl
