@@ -40,6 +40,12 @@ def test_first_person_policy_and_document_origins_separate():
         "hansonPolicyConsultationABC = australia-source-role-receipt",
         "hansonSpecificPensionerPolicyOriginalTranscript = australia-source-role-receipt",
         "hansonAttributedSpecificPensionerPolicyOrigin = refl",
+        "oneNationJan15_2025PrimaryPolicyPublication = australia-source-role-receipt",
+        "oneNationOriginalPartyPensionerPolicyPublished = refl",
+        "noDatedPrePublicationRinehartInstructionInspected = refl",
+        "partyElectionPledgeNotAutomaticallyEnactedCommonwealthLaw = refl",
+        "aecSecondHalf2026TransitionOriginal = australia-source-role-receipt",
+        "aecSecond2026TransitionPublicationNotFirstFYRelease = refl",
         "hansonAircraftCorporateStatement = australia-source-role-receipt",
         "namedAssociatesOneNationCashSupport = australia-source-role-receipt",
         "hancockIPA2016And2017JudicialDocument = australia-source-role-receipt",
@@ -65,6 +71,9 @@ def test_2026_aec_publication_ceiling_and_no_retroactive_2027_reform():
         "2026-11-17",
         "2027-02-01",
         "2027-01-01",
+        "2027-03-11",
+        "2027-04-22",
+        "2025-01-15",
         "futureReformMustNotRetrospectivelyRewrite2026 = refl",
         "noCurrentAECAnnualReturnWithoutPublication = refl",
     ):
@@ -100,7 +109,7 @@ def test_record_positional_values_are_fail_closed():
     a = s.index("record AustralianPowerPipelineFrontier : Set where")
     b = s.index("open AustralianPowerPipelineFrontier public", a)
     names = re.findall(r"^    (\w+) : Bool$", s[a:b], re.M)
-    assert len(names) == 16
+    assert len(names) == 20
     p = s.index("canonicalAustralianPowerPipelineFrontier = australian-power-pipeline-frontier", b)
     q = s.index("\n\n", p)
     vals = re.findall(r"\b(?:true|false)\b", s[p:q])
@@ -115,10 +124,14 @@ def test_record_positional_values_are_fail_closed():
         "mandelsonStrategyReachedEpsteinAtSourceScope",
         "hansonAttributesSpecificPensionerWorkProposalToRinehart",
         "oldFY2025_26AECAnnualDisclosurePublicationPending",
+        "oneNationJan2025PensionerPolicyOfficiallyPublished",
+        "aecJulDec2026OldRegimeReturnPublicationPending",
     ):
         assert mapping[k] == "true"
     for k in (
         "publishedDonorAnnualReturnSameAsReportedAprilDonation",
+        "originalRinehartPolicyInstructionBeforeJan2025Authenticated",
+        "pensionerPolicyEnactedInCommonwealthLawVerified",
         "aecFutureReformThresholdApplicableRetroactively",
         "oneNationInternalPolicyAdoptionCausallyProven",
         "specificIPAContentBoughtByCourtReportedPayments",
