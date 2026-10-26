@@ -111,6 +111,10 @@ fullAdd (D.element a b c) p q =
         (T.vertical Metric.integerSignedCarrier b
           (T.horizontal Metric.integerSignedCarrier c q))))
 
+toModeAdd : (p q : T.Triple ℤ) →
+  toMode (add3 p q) ≡ NS.addMode (toMode p) (toMode q)
+toModeAdd (T.xyz x y z) (T.xyz u v w) = refl
+
 actMode : D.D4h → NS.FourierMode → NS.FourierMode
 actMode g p =
   toMode (T.act Metric.integerSignedCarrier g (fromMode p))
@@ -120,8 +124,12 @@ actModeAdd : (g : D.D4h) (p q : NS.FourierMode) →
   actMode g (NS.addMode p q) ≡
   NS.addMode (actMode g p) (actMode g q)
 actModeAdd g (NS.mode x y z) (NS.mode u v w) =
-  cong toMode
-    (fullAdd g (T.xyz x y z) (T.xyz u v w))
+  trans
+    (cong toMode
+      (fullAdd g (T.xyz x y z) (T.xyz u v w)))
+    (toModeAdd
+      (T.act Metric.integerSignedCarrier g (T.xyz x y z))
+      (T.act Metric.integerSignedCarrier g (T.xyz u v w)))
 
 modeWeightedPairing :
   ℤ → ℤ → NS.FourierMode → NS.FourierMode → ℤ
