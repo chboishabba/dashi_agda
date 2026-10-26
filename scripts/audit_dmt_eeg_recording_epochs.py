@@ -50,6 +50,7 @@ def metadata_audit(set_file, fdt_file=None):
     if len(epochs) != trials:
         raise ValueError("Epoch table does not span declared trials")
     counts = Counter()
+    arm_only_boundary_markers = Counter()
     visit_label = {}
     for epoch in epochs:
         events = _epoch_event_types(epoch)
@@ -69,6 +70,9 @@ def metadata_audit(set_file, fdt_file=None):
                 if len(parts) == 2 and parts[0] == prefix and parts[1].isdigit():
                     visits.add(int(parts[1]))
         if len(visits) != 1:
+            if not visits and all(name == "X_" + arm for name in events):
+                arm_only_boundary_markers[arm] += 1
+                continue
             raise ValueError("Original visit marker is not unique")
         visit = visits.pop()
         if arm in visit_label and visit_label[arm] != visit:
@@ -94,6 +98,9 @@ def metadata_audit(set_file, fdt_file=None):
         "trials": trials, "sample_rate_hz": rate,
         "original_arm_epoch_counts": {arm: counts[arm] for arm in ARMS},
         "original_arm_visit_indices": {arm: visit_label[arm] for arm in ARMS},
+        "source_X_arm_only_boundary_marker_epochs": {
+            arm: arm_only_boundary_markers[arm] for arm in ARMS},
+        "individual_X_epoch_visit_identity_verified": False,
         "required_fdt_bytes": required_fdt_bytes,
         "fdt_extent_matched": verified_fdt_extent,
         "original_three_arm_metadata_located": True,
