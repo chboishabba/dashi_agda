@@ -142,3 +142,24 @@ The native antipodal involution remains incompatible with modular-16
 negation. Compact symbolic jumping and certified small BBP digits are
 complete as separate objects; original Pickover sine sign remains OPEN.
 No Agda kernel or exact-head GitHub Actions execution receipt.
+
+## 2026-10-26 C3 geometric pi route
+Existing source owners JMDArchimedesDelta369FixedLocusBridgeExact,
+JInvariant369ReflectionEquivarianceExact, and
+BishopMachinPiRationalWindowExact provide typed polygon/phase reflection
+and real-arctangent donors. Classical equilateral 60-degree angle proves
+pi=6*atan(1/sqrt(3))=2*sqrt(3)*sum_{k>=0}(-1)^k/((2k+1)*3^k).
+New scripts/check_pickover_c3_angle_pi_windows.py constructs integer-
+sqrt rational brackets for sqrt3, monotone rational arctan alternating
+bounds and exact base10 small-instance floor parity. Workflow requested,
+but no CI receipt, Agda kernel or original terminal sine-sign proof.
+
+For normalized analytic phase x=N/(2pi) mod1, represent C3 sector
+x=j/3+r (j in {0,1,2}, 0<=r<1/3). Under m-fold rotation,
+m*x=(m*j)/3+m*r mod1. The missing theorem is an efficient residual
+update; the C3 label alone is not a sign oracle and conventional
+interval width still multiplies by m. Ordinary Machin arctan(1/5)
+series converges more rapidly per term than arctan(1/sqrt3).
+Do not conflate pi-from-geometry with sublinear remote digit access.
+This C3/pi mathematical identity is classical, DASHI contributes
+concrete source reuse and rational checks.
