@@ -33,6 +33,8 @@ def char(block,i,j,d):
 
 full=s.S.Zero
 signed=s.S.Zero
+positive=s.S.Zero
+negative=s.S.Zero
 linear_full=s.S.Zero
 for block in "ABC":
     for i,j in product(range(3),repeat=2):
@@ -40,9 +42,17 @@ for block in "ABC":
         term=s.prod(char(block,i,j,d) for d in range(3))
         full+=term
         signed+=h*term
+        if h==1:
+            positive+=term
+        else:
+            negative+=term
         linear_full+=char(block,i,j,0)
 full=s.expand(full)
 signed=s.expand(signed)
+positive=s.expand(positive)
+negative=s.expand(negative)
+assert s.expand(full-positive-negative)==0
+assert s.expand(signed-2*positive)==0
 assert full==0 and s.expand(linear_full)==0
 poly=s.Poly(signed,z)
 assert poly.total_degree()==3 and len(poly.terms())>0
@@ -82,5 +92,6 @@ fixture=[[(1,1,0),(1,0,0),(1,0,0)],
 assert selected_indexes(fixture)==-12
 print("PASS 27 source H-torus characters: ch1 and ch3 full traces vanish")
 print("PASS",len(poly.terms()),"signed cubic terms, all even coefficients")
+print("PASS signed anomaly cubic polynomial / 2 equals actual H-equivariant positive subrepresentation")
 print("PASS nonliftable spin (S2)^3 signed index -12; half-index -6")
 print("OPEN actual APS/eta, torsion, quantized 5D CS, patched WZ action")
