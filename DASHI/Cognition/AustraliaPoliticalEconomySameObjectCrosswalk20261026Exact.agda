@@ -362,3 +362,61 @@ nationalSeniorsMemberCampaign2022Original = australia-source-role-receipt
 -- *of expert modelling* (client named) unlike unrelated 2016/17 HPPL/IPA
 -- aggregate funding. Do not transport Deloitte's client/forecast to IPA
 -- or attribute separate One Nation 2025 draft text to either institution.
+
+
+------------------------------------------------------------------------
+-- 27 OCT 2026: PRIMARY PARLIAMENTARY DOCKET AND TEMPORAL NON-COLLAPSE
+-- The government's FEBRUARY 2022 bill was introduced BEFORE AUGUST 2022
+-- HPPL/IPA submissions. It lapsed. The SEPTEMBER/NOVEMBER 2022 government
+-- bill/Act 55 is a DIFFERENT subsequent legislative object. The 2025 One
+-- Nation pledge is a different specification again.
+-- Parliamentary submission INDEX records are not authenticated PDF faces,
+-- and a submission does not by itself establish bill drafting influence.
+------------------------------------------------------------------------
+
+coalitionFeb2022BillDocket : AustraliaSourceRoleReceipt
+coalitionFeb2022BillDocket = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Commonwealth Parliament, original March 28 2022 Bills Digest, Carol Ey: Social Services Legislation Amendment (Workforce Incentive) Bill 2022"
+  "https://www.aph.gov.au/Parliamentary_Business/Bills_Legislation/bd/bd2122a/22bd056"
+  "Parliamentary original INDEX/analysis: Coalition bill introduced 2022-02-10, lapsed at 2022 election; its Schedules 1 and 2 were later largely reused in a DIFFERENT government bill. Indexed original page, not separately inspected bill PDF. Cannot attribute February drafting to August submissions."
+
+senateSeptember2022MultipleSubmitterDocket : AustraliaSourceRoleReceipt
+senateSeptember2022MultipleSubmitterDocket = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Senate Community Affairs Legislation Committee, Enhancing Pensioner and Veteran Workforce Participation 2022 official original submissions register"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceParticipation/Submissions"
+  "Official REGISTER uniquely identifies HPPL #3 (DocStore dfaa59de-73b8-4409-ab06-4527c2c6cfd3), IPA #6 (8f9cfa11-5287-40b3-8287-4fbff1f88b80) with separate attachment, and National Seniors #7 (b202b377-58e6-4c7f-97b8-73ef42e74882). Underlying PDF page bytes not inspected here (APH 403/timeout). Distinct producers; register does not establish instructions, a joint commission or enacted adoption."
+
+accciDecember2021IndependentAlternative : AustraliaSourceRoleReceipt
+accciDecember2021IndependentAlternative = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Australian Chamber of Commerce and Industry, Dec 2021 pre-budget recommendation as quoted by Carol Ey in 2022 Parliamentary Library bill digest"
+  "https://www.aph.gov.au/Parliamentary_Business/Bills_Legislation/bd/bd2223a/23bd024"
+  "PARLIAMENTARY ANALYST QUOTE of independently attributed ACCI recommendation to raise work incentives; not original ACCI statement bytes or an independently proven drafting influence. Distinct institutional policy advocacy undermines an EXCLUSIVE later-origin inference."
+
+act55OfficialStatute : AustraliaSourceRoleReceipt
+act55OfficialStatute = australia-source-role-receipt
+  originalLimitedGovernmentLegislation
+  "Commonwealth of Australia, Social Services and Other Legislation Amendment (Workforce Incentive) Act 2022, No 55, assented 2022-11-23"
+  "https://www.legislation.gov.au/C2022A00055"
+  "Original official REGISTER: Schedule 1 benefit suspension, Schedule 2 concession cards, Schedule 3 temporary Work Bonus increase. Enactment is not an observed employment increase, permanent unlimited earnings exemption or attribution of the Act to a private lobbyist."
+
+-- These are exact distinctions INSIDE a source-typed finite calendar model.
+-- A source-written Agda non-identity witness is NOT an empirical proof of
+-- draft causation, legislation effectiveness or missing secret contacts.
+data PensionLegislativeObject : Set where
+  feb2022CoalitionBill : PensionLegislativeObject
+  august2022SenateSubmissions : PensionLegislativeObject
+  nov2022Act55 : PensionLegislativeObject
+  jan2025OneNationPledge : PensionLegislativeObject
+
+data DistinctObject : Set where
+
+februaryBillIsNotAugustSubmission :
+  feb2022CoalitionBill ≡ august2022SenateSubmissions → DistinctObject
+februaryBillIsNotAugustSubmission ()
+
+enactedLimitedActIsNotUnlimitedPartyPledge :
+  nov2022Act55 ≡ jan2025OneNationPledge → DistinctObject
+enactedLimitedActIsNotUnlimitedPartyPledge ()
