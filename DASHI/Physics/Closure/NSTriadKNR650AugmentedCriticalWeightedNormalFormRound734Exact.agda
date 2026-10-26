@@ -53,6 +53,29 @@ module DASHI.Physics.Closure.NSTriadKNR650AugmentedCriticalWeightedNormalFormRou
 -- together with physical same-helicity and mixed-helicity channels.
 -- The full real-analytic Galerkin witness is NOT kernel formalised here.
 --
+-- 2026-10-27 PHYSICAL CRITICAL SMALL-DATA COMPANION (NOT THE W2 LEAF):
+-- For the SAME sharp cube weight w(k)=2^ceil(log2 ||k||infty), the full
+-- unforced mean-zero Fourier Galerkin trajectory satisfies
+--   X'_N + 2 nu D_N = P_N,
+--   |P_N| <= Ccrit sqrt(X_N) D_N,
+--   Ccrit=4*3^(3/4)*C6*C3.
+-- Here C6,C3 are the FIXED periodic H1->L6 and H3/2->W1,3
+-- Sobolev constants; r/sqrt(3)<=w(k)<2r for r=|k|2.
+-- This classical Fujita--Kato critical-small-data consequence yields
+--   X_N(T) + (2nu-Ccrit sqrt(X_N(0))) int_0^T D_N <= X_N(0)
+-- ONLY WHEN  Ccrit sqrt(X_N(0))<2nu.
+-- Furthermore arbitrary E0>0 eventually enters X<=nu²/Ccrit²
+-- at common t_enter=1/nu+max(0,log(sqrt(2)*Ccrit²*E0/nu²)/(2nu)).
+-- Then X_N(T)+nu int_t_enter^T D_N <= nu²/Ccrit².
+-- These are analytical physical-source derivations recorded at:
+--   Docs/research/ns_r734_critical_small_data_dyadic_20261027.md
+-- with seven local arithmetic tests in test_ns_r734_critical_small_data.py.
+-- They do NOT establish the ORIGINAL signed W2 bound involving 12 C_N,
+-- do NOT pay the arbitrary-large-data [0,t_enter] middle interval,
+-- and are NOT Agda kernel-proved by this rational polynomial module.
+-- Original Fujita--Kato ownership, classical embeddings and exact
+-- original source-vs-code distinctions must be preserved.
+--
 -- No estimate is introduced here.
 ------------------------------------------------------------------------
 
