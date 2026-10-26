@@ -38,7 +38,8 @@ class TestNiedernhuberZenodo(unittest.TestCase):
         self.assertEqual(len(files), 50)
         self.assertEqual(len(self.source["file_pairs"]), 25)
         self.assertIn("1028_equalised.fdt", files)
-        self.assertEqual(files["1028_equalised.fdt"], "c2fc999d0139aacc89d5102b4a1b3bba")
+        self.assertRegex(files["1028_equalised.fdt"], r"^[0-9a-f]{32}$")
+        self.assertFalse(self.source["consumer_ceiling"]["authoritative_zenodo_md5_listing_verified"])
 
     def test_listing_is_not_participant_or_condition_replay(self):
         result = audit(self.source)
@@ -108,7 +109,12 @@ class TestNiedernhuberZenodo(unittest.TestCase):
                     data = ("synthetic:" + entry["name"]).encode()
                     (Path(d) / entry["name"]).write_bytes(data)
                     entry["md5"] = hashlib.md5(data).hexdigest()
-            self.assertEqual(audit(mock, d, review())["hash_matched_local_files"], 50)
+            with self.assertRaisesRegex(ValueError, "not authenticated"):
+                audit(mock, d, review())
+            self.assertEqual(verify_local_file_hashes(d, validate_source(mock)), 50)
+
+    def test_unverified_digest_promotion_rejected(self):
+        self.assert_bad(lambda s: s["consumer_ceiling"].update(authoritative_zenodo_md5_listing_verified=True))
 
     def test_synthetic_hash_mismatch(self):
         with tempfile.TemporaryDirectory() as d:
