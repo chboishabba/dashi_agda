@@ -22,6 +22,7 @@ open import Data.Rational.Base using (_+_)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Foundations.CantorProjectiveCylinderMeasureExact as Cantor
+import DASHI.Mathematics.Topology.ExoticCantorCylinderOrientationExact as Order
 
 data Unit : Set where
   unit : Unit
@@ -79,6 +80,35 @@ cantorEndCylinderMassRefines :
     + Cantor.cylinderMass (Cantor.rightChild c)
     ≡ Cantor.cylinderMass c
 cantorEndCylinderMassRefines = Cantor.parentMassSplitsExactly
+
+------------------------------------------------------------------------
+-- REAL EVENT REFINEMENT ON THE EXISTING END-CODE CARRIER
+--
+-- The canonical source Cantor.leftChild PREPENDS a stack bit.
+-- It splits the length-only dyadic mass but is not chronological
+-- inclusion for the underlying stream event. Reuse the corrected,
+-- proof-bearing APPEND-child interpretation without replacing
+-- the source's premeasure, and block its false promotion explicitly.
+------------------------------------------------------------------------
+
+cantorEndLeftChronologicalRefines :
+  (event : Cantor.Cylinder) (stream : EndCode cantorTree) →
+  Order.Matches (Order.appendLeft event) stream →
+  Order.Matches event stream
+cantorEndLeftChronologicalRefines = Order.appendLeftRefines
+
+cantorEndRightChronologicalRefines :
+  (event : Cantor.Cylinder) (stream : EndCode cantorTree) →
+  Order.Matches (Order.appendRight event) stream →
+  Order.Matches event stream
+cantorEndRightChronologicalRefines = Order.appendRightRefines
+
+cantorOriginalStackChildIsNotChronologicalInclusion :
+  ((stream : EndCode cantorTree) →
+   Order.Matches (Cantor.leftChild Order.sampleParent) stream →
+   Order.Matches Order.sampleParent stream) → ⊥
+cantorOriginalStackChildIsNotChronologicalInclusion =
+  Order.oldPrependIsNotChronologicalRefinement
 
 -- This is a schedule-level semantic difference, NOT a homeomorphism
 -- obstruction on its own without a realised surface and its end map.
