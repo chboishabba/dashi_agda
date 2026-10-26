@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "Docs/receipts/DMTNiedernhuberZenodoListing20261025.json"
-EXPECTED_MANIFEST_GIT_BLOB = "0d9ecaf1e5623ec8a02e76594bba5e068114e4fb"
+EXPECTED_MANIFEST_GIT_BLOB = "50857090dcc1362f6398c88eed44259c6fd9b4ef"
 PAPER = "10.1177/02698811261481062"
 VERSION = "10.5281/zenodo.18850897"
 HEX_MD5 = re.compile(r"[0-9a-f]{32}\Z")
@@ -57,6 +57,9 @@ def validate_source(source):
             or d["listed_file_pair_count"] != 25 or d["listed_file_count"] != 50
             or d["license_status"] != "unresolved_display_blank"):
         raise ValueError("Zenodo version, file cardinality or rights status changed")
+    if (d.get("checksum_transcription_status") != "unverified_manual_transcription_not_source_authentication" or
+        source.get("consumer_ceiling", {}).get("authoritative_zenodo_md5_listing_verified") is not False):
+        raise ValueError("Require explicit non-authentication of unverified copied checksums")
     pairs = source["file_pairs"]
     if not isinstance(pairs, list) or len(pairs) != 25:
         raise ValueError("Expected 25 file *pairs*, not 25 verified participants")
@@ -143,13 +146,15 @@ def audit(source, materialized_dir=None, rights_receipt=None):
     matched = 0
     if materialized_dir is not None:
         validate_rights_review(rights_receipt, source)
-        matched = verify_local_file_hashes(materialized_dir, files)
+        raise ValueError("Authoritative original Zenodo MD5 listing not authenticated; refuse comparison against transcribed checksum strings")
     return {
         "schema": "dashi-dmt-niedernhuber-zenodo-audit-v1",
         "original_attribution": "Niedernhuber et al., Journal of Psychopharmacology 2026",
         "original_study_doi": PAPER, "original_zenodo_version_doi": VERSION,
         "original_listing_file_pairs": 25, "listed_recording_files": len(files),
         "hash_matched_local_files": matched,
+        "authoritative_zenodo_md5_listing_verified": False,
+        "listing_checksums_are_unverified_transcription": True,
         "rights_and_ethics_externally_verified_by_script": False,
         "original_author_code_declares_prefixes_as_participant_ids": True,
         "participant_and_condition_mapping_independently_replayed": False,
