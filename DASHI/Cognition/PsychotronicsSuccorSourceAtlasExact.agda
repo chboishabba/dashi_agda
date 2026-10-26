@@ -542,6 +542,20 @@ pandeyFFField2017 = Source.mkDOISource
   "Diphenylalanine FF cooling for five hours with 150 and 300 V/cm AC/DC electric fields and distinct 0.6 T magnetic-field condition; under study conditions authors report strong electric-field modulation and magnetic group aggregation; NOT a Rodin-Helmholtz comparison or clinical outcome"
   Source.publicAttribution
 
+-- Published WIPO PCT origin of the exact application number declared in
+-- Saikia et al. 2019 ACS original paper, NOT a second completed clinical
+-- trial, not a Rodin coil and not independently validated patent claims.
+saikiaFieldPatent2019 : Source.AttributedSource
+saikiaFieldPatent2019 = Source.mkNoDOISource
+  "Vibin Ramakrishnan; Gaurav Pandey; Harshal Nemade; Jahnu Saikia; Sajitha Sasidharan; Nitin Chaudhary (inventors); Indian Institute of Technology Guwahati (original assignee)"
+  "WO2019012556A1: A device for non-invasive treatment of neurodegenerative diseases"
+  "WIPO PCT/IN2018/050452 priority 13 July 2017, filed 10 July 2018, published 17 January 2019; first-party public text transcribed on Google Patents; original source inventor claims, not clinical efficacy"
+  "2019"
+  "https://patents.google.com/patent/WO2019012556A1/en"
+  Source.patentSource
+  "Published patent claim 1 describes 17 cm separated parallel aluminium electrodes in a proposed helmet-like AC/DC electric-field apparatus powered by charging, oscillator and booster units; patent claims and in-vitro examples do not prove human treatment or Rodin-versus-Helmholtz coil benefit"
+  Source.publicAttribution
+
 saikiaAmyloid2019 : Source.AttributedSource
 saikiaAmyloid2019 = Source.mkDOISource
   "Jahnu Saikia; Gaurav Pandey; Sajitha Sasidharan; Ferrin Antony; Harshal B. Nemade; Sachin Kumar; Nitin Chaudhary; Vibin Ramakrishnan"
@@ -939,7 +953,7 @@ sourceAtlas = Source.mkSourceAtlas
    kervadecFiveDASC2026 ∷ stockerASCRevision2026 ∷
    heartmathEnergeticCommunication ∷
    shupakShamClinical2006 ∷ duAssessorBlindedProtocol2026 ∷
-   croftBigSecret2002 ∷ croftPowerWand2003 ∷ pandeyFFField2017 ∷ saikiaAmyloid2019 ∷
+   croftBigSecret2002 ∷ croftPowerWand2003 ∷ pandeyFFField2017 ∷ saikiaFieldPatent2019 ∷ saikiaAmyloid2019 ∷
    perezRodinRSI2013 ∷ ramirezRodinRMF2024 ∷ perezHeatShock2008 ∷
    reichCoreEllsworth1954 ∷ reichCloudArchiveIndex ∷
    hamblingWeatherwatch2011 ∷ kiddexRedditMind2023 ∷
@@ -974,7 +988,7 @@ data LineageRoot : Set where
   kervadecAscValidationRoot stockerAscRevisionRoot : LineageRoot
   heartmathInstituteRoot : LineageRoot
   shupakClinicalAuthorRoot duProtocolAuthorRoot : LineageRoot
-  pandey2017PeptidePublicationRoot saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
+  pandey2017PeptidePublicationRoot saikiaFieldPatentOriginalRoot saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
   reichOriginalAuthorRoot guardianHamblingRoot redditKiddexForumRoot : LineageRoot
   bachFictionRoot constableBookRoot sladePractitionerRoot adachiPublisherRoot : LineageRoot
   wmoInstitutionRoot peterReichMemoirRoot kateBushArtistRoot : LineageRoot
@@ -1645,6 +1659,29 @@ ramirez2024ReusedNumbersQuestion = mkBound
   Diligence.primaryProposition
   attributedAuthorReport
   "shared data or independently reacquired unknown; repeated rounded numbers do not establish improper publication conduct"
+
+-- Documentary same-application admission: "exact PCT identity" is
+-- grounded by both original publisher carriers. It is NOT evidence that
+-- all undisclosed 2019 supplemental experiments used only this apparatus.
+saikiaPCTExactPatentIdentityClaim : ClaimBound
+saikiaPCTExactPatentIdentityClaim = mkBound
+  "WO2019012556A1 is PCT/IN2018/050452, the exact application independently identified in the 2019 Saikia ACS original conflict-of-interest declaration"
+  saikiaFieldPatent2019
+  "WIPO patent publication metadata, filing and inventor declarations; 2019 original ACS author COI statement"
+  saikiaFieldPatentOriginalRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "actual clinical treatment, independently reproduced underlying patent experiments and any Rodin-or-Helmholtz biological comparator not established"
+
+saikiaElectrodePatentDoesNotLicenseRodinBenefit : ClaimBound
+saikiaElectrodePatentDoesNotLicenseRodinBenefit = mkBound
+  "Published WIPO source patent claim 1 specifies parallel 17 cm aluminium electrodes for proposed AC/DC electric-field stimulation, not the 2024 Rodin-coil magnetic field mapping apparatus"
+  saikiaFieldPatent2019
+  "WO2019012556A1 Claim 1 paragraphs on head-worn two-electrode assembly and original device"
+  saikiaFieldPatentOriginalRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "the unseen full ACS article or supplemental information might describe additional apparatus; patent text alone cannot establish their absence, a 60-percent comparison, or efficacy"
 
 pandey2017FieldExperimentScope : ClaimBound
 pandey2017FieldExperimentScope = mkBound
