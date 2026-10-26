@@ -234,3 +234,28 @@ general abstract polarization identity and the source-realizable
 tangent decomposition. The original R734 and R735 conditional
 Agda modules remain untypechecked with the new audit comments;
 no new complete Clay A/B theorem.
+
+
+## Formal source-side exact identity added to the ORIGINAL R734 owner
+
+`NSTriadKNR650AugmentedCriticalWeightedNormalFormRound734Exact.agda`
+now has the new source-written `dyadicCriticalEnergyAsSignedHelicityPlusNegativeAndDefect`.
+It proves, for four arbitrary **rational** scalar arguments
+`(w,radius,plusMass,minusMass)`,
+the full identity
+  `w(eplus+eminus) =
+     radius(eplus-eminus)
+     +2 radius eminus
+     +(w-radius)(eplus+eminus)`
+by the existing `Data.Rational.Tactic.RingSolver.solve`
+(no new mathematical axiom, conditional record or R-number).
+It is a reusable FINITE POLYNOMIAL theorem, whose content also
+passes the 12-test local SymPy regression.
+
+**Formal limitation:** the real physical `radius=|k|` is
+generally irrational and cannot simply be imported into a
+rational `ℚ` theorem owner as though a kernel-checked real
+embedding or modal decomposition had been proved. This source
+term is not kernel-checked in the current environment. It must
+not be promoted as the missing all-data helicity/critical
+continuum estimate or a valid substitute for the falsified W2.
