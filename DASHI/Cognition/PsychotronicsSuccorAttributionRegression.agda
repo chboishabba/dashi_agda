@@ -135,9 +135,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 -- source carriers including real NOAA Bangor records, same-station metadata,
 -- an earlier local press item and a Kansas location false-match control.
 -- More source objects are NOT more independent weather experiments.
-sourceAtlasCountIsSeventyThree :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 73
-sourceAtlasCountIsSeventyThree = refl
+sourceAtlasCountIsSeventyFour :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 74
+sourceAtlasCountIsSeventyFour = refl
 
 
 -- Original NOAA OBS-TIME documentation is a *method*, not a 1953 sensor time;
@@ -166,6 +166,17 @@ bahramiOriginalAuthorsDoNotProveRodinComparison :
   Attribution.citationImportsProof Atlas.bahramiHelmholtz2025 ≡ false
 bahramiOriginalAuthorsDoNotProveRodinComparison =
   Atlas.allSourcesRemainNonPromoting Atlas.bahramiHelmholtz2025
+
+
+paperAndOriginalRepoAreOneOriginalStudyRoot :
+  Atlas.root Atlas.bahramiPaperAndDataSameStudy ≡
+  Atlas.root Atlas.bahramiWaterCooledHelmholtzPrecedent
+paperAndOriginalRepoAreOneOriginalStudyRoot = refl
+
+originalAuthorRepoCannotImportRodinSuperiority :
+  Attribution.citationImportsProof Atlas.bioCoilOriginalAuthorRepository ≡ false
+originalAuthorRepoCannotImportRodinSuperiority =
+  Atlas.allSourcesRemainNonPromoting Atlas.bioCoilOriginalAuthorRepository
 
 -- Additional original 1953 NOAA station does not change the publisher
 -- denominator; observations must retain their actual distinct site keys.
