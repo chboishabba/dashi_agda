@@ -123,6 +123,17 @@ def audit(root):
     s=evaluate('cdcdcddcdd',C,D)
     assert power(s,7)==I and s!=I
 
+    # Barraclough--Wilson (2005), DOI 10.1112/S1461157000000966,
+    # original Table 2: Monster 4D representative "BCCCBB".
+    # Here BW's B is the order-three D6, and C is outer C6, mapped
+    # to original ATLAS 2.Suz:2 D2 and C2 by BW07 Section 3.1.
+    # Published 4D calibrator has square -I12 in the original source.
+    # It does NOT prove our separately constructed r is Monster 4D.
+    published_bw2005_fourD_control = mm(D,mm(power(C,3),power(D,2)))
+    assert power(published_bw2005_fourD_control,2)==NI
+    assert power(published_bw2005_fourD_control,4)==I
+    assert published_bw2005_fourD_control!=I
+
     W=evaluate(W_ORDER10,C,D)
     assert power(W,10)==I and power(W,5)!=I and power(W,2)!=I
     m=power(W,5)
@@ -186,6 +197,12 @@ def audit(root):
       "old_A2_eight_shell_equivariant_injective_into_this_D4":False,
       "actual_ATLAS_2Suz2_source_word_membership":True,
       "actual_Monster_3B_selected_diagonal_quotient_weld":False,
+      "bw2005_published_4D_word":"BCCCBB",
+      "bw2005_D6_to_ATLAS_D2_source_map":True,
+      "bw2005_published_4D_word_square_minus_identity":True,
+      "bw2005_published_4D_word_identifies_this_r":False,
+      "nw2002_published_central_2Suz_involution_Monster_2B":True,
+      "source_r_cannot_be_Monster_4B_under_published_power_map":True,
       "actual_Monster_involution_class_fusion":False,
       "actual_Monster_source_selected_78_character":False,
       "full_Monster_Schrodinger_Hom_action":False,
