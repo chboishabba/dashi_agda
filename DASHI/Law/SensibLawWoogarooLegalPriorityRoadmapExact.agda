@@ -57,14 +57,14 @@ federal8575Priority = legal-priority-coordinate
   immediateFederalDecision
   consumerPaymentOpen
   "EPBC 2019/8575 Part 9 decision: 15 October 2026 public Commonwealth notice says APPROVED WITH CONDITIONS; operative signed approval, authorisation and full conditions still to acquire"
-  "official public notice is a dated decision-status receipt; section 95B(2) 23 July 2026 notice recorded 1786 comments; January preliminary documentation and surrounding project map remain separate source objects"
+  "official 15 October approval notice plus original 2 September extension signed Declan OConnor-Cox to 1 October and superseding 25 September extension signed Mark Hall to 16 October; section 95B(2) 23 July notice records 1786 comments; extension officials are not proven signatories on final approval"
   "signed approval and delegate identity; statement of reasons and section 135A recommendation report; final PD and complete comment-response; current legal framework/transitional provisions; pre-clearance conditions, offsets and review standing/deadline"
   "approval status is not the signed decision; dated public comment count is not the decision-maker's complete evidentiary consideration; Minister's portfolio responsibility does not by itself prove Minister personally signed"
   "housing delivery rhetoric, indexed political interests, a 2025 Queensland ministerial lobbying meeting or a 2004 gas alliance do not factor to EPBC decision legality or a conflict finding"
   "urgent counsel filing/standing/possible interim orders assessment; obtain original signed notice and section 135A recommendation report; freeze public decision and ecological evidence with dates and hashes; calculate exact ADJR or other Federal Court deadlines without assuming public notice starts one universal 28-day clock"
 
 -- The pre-decision s130 clock witnesses remain historically valid source receipts,
--- but their 1 October extension must NOT be interpreted as a live future deadline.
+-- but the original 1 October extension was superseded by Mark Hall's signed 25 September section 130(1A) extension to 16 October 2026; neither extension itself pays the approval signatory.
 -- The separate post-approval source owner supplies current approval evidence.
 
 federalClockReceipt : Clock.ClockReceipt
