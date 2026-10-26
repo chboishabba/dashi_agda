@@ -65,6 +65,60 @@ def same_la_example(la_target=35.0):
 
 
 
+
+# Original practitioner-authored NEW industrial field-figure source,
+# published after the August 2026 narrative review:
+# David Woolworth (Roland, Woolworth & Associates), Noise/News
+# International, 2026-09-09, Figure 1 original image:
+# https://noisenewsinternational.net/wp-content/uploads/2026/08/Woolworth-Fig-1.png
+# https://noisenewsinternational.net/data-centers-and-measurement-of-low-frequency-and-infrasound/
+# Human-viewed chart labels are original author-reported dB(A)/dB(C)
+# *summary figures*, not author-released raw numeric spectral bins,
+# raw sensor WAV, calibrator certificate or source/receptor health join.
+# Three same-name 'Data Ctr X' traces are NOT three independent sites.
+WOOLWORTH_2026_FIG1_LABELS = (
+    ('Scaife Rd dead end', 64, 74),
+    ('Data Ctr X trace 1', 70, 78),
+    ('Data Ctr X trace 2', 70, 78),
+    ('Data Ctr X trace 3', 70, 80),
+)
+
+
+def woolworth_2026_fig1_original_field_receipt():
+    """Source-transcribed original figure labels; no invented spectra.
+
+    C minus A is a relative frequency-weighting indicator ONLY. It is
+    not a calibrated sub-20 Hz tone, dosimetry or an absolute infrasound
+    difference. Original author reports no *significant* infrasound
+    in the cooling-tower samples; low-frequency tones are illustrated.
+    """
+    labels = [
+        {'original_figure_label': name,
+         'reported_dBA': a,
+         'reported_dBC': c,
+         'dBC_minus_dBA': c - a}
+        for name, a, c in WOOLWORTH_2026_FIG1_LABELS
+    ]
+    return {
+        'original_author': 'David Woolworth, Roland Woolworth & Associates',
+        'original_publication_date': '2026-09-09',
+        'published_source':
+            'https://noisenewsinternational.net/data-centers-and-measurement-of-low-frequency-and-infrasound/',
+        'original_figure_number': 1,
+        'frequency_axis_hz': ('6.3', '10000'),
+        'summary_traces': labels,
+        'nominal_distinct_named_case_labels': 2,
+        'source_reports_low_frequency_tones': True,
+        'source_reports_no_significant_infrasound_in_fig1_samples': True,
+        'source_supplies_original_plot_not_raw_sensor_waveforms': True,
+        'source_supplies_instrument_calibration_or_certified_receptor_timebase': False,
+        'identified_plant_operating_state_control': False,
+        'established_human_disease_outcome': False,
+        'independent_replication_count_from_multiple_X_traces': 0,
+        'evidence_level': 'original_practitioner_published_site_figures',
+    }
+
+
 # Operational source→receptor→outcome acceptance contracts for the ORIGINAL
 # @itsgingertheory inquiry. A receipt is an original artifact's metadata, not
 # independent authentication of its bytes, calibration, or conclusions.
@@ -571,6 +625,29 @@ class TestOriginalInquiryAcceptance(_unittest.TestCase):
             with self.assertRaises(ValueError):
                 raspberry_shake_channel_evidence(wrong)
 
+
+    def test_original_september_woolworth_field_figure_labels(self):
+        z = woolworth_2026_fig1_original_field_receipt()
+        self.assertEqual(z['original_publication_date'], '2026-09-09')
+        self.assertEqual(len(z['summary_traces']), 4)
+        self.assertEqual(z['summary_traces'][0]['reported_dBA'], 64)
+        self.assertEqual(z['summary_traces'][0]['reported_dBC'], 74)
+        self.assertEqual([t['dBC_minus_dBA']
+                          for t in z['summary_traces']], [10, 8, 8, 10])
+        self.assertEqual(z['nominal_distinct_named_case_labels'], 2)
+
+    def test_published_original_figure_cannot_substitute_raw_P2_producer(self):
+        z = woolworth_2026_fig1_original_field_receipt()
+        self.assertTrue(z['source_reports_low_frequency_tones'])
+        self.assertTrue(z['source_reports_no_significant_infrasound_in_fig1_samples'])
+        self.assertTrue(z['source_supplies_original_plot_not_raw_sensor_waveforms'])
+        self.assertFalse(z['source_supplies_instrument_calibration_or_certified_receptor_timebase'])
+        self.assertFalse(z['identified_plant_operating_state_control'])
+        self.assertFalse(z['established_human_disease_outcome'])
+        self.assertEqual(z['independent_replication_count_from_multiple_X_traces'], 0)
+        self.assertIn('original_sensor_waveforms', audit_phase_receipts({})[
+            'P2_calibrated_acoustic']['missing_original_artifacts'])
+
     def test_scatterty_signed_rank_fixture(self):
         r = _signed_ranks([_Decimal('-2'),_Decimal('3'),
                            _Decimal('4'),_Decimal('-1')])
@@ -745,6 +822,8 @@ if __name__ == "__main__":
         status['public_FDSN_original_pressure_channel_donor'] = (
             raspberry_shake_channel_evidence('HDF'))
         status['FDSN_original_channel_is_not_a_data_centre_field_study'] = True
+        status['industrial_original_2026_published_field_figures'] = (
+            woolworth_2026_fig1_original_field_receipt())
         status['verified_public_2026_site_sensor_or_participant_data'] = False
         status['paper_status_from_video_description'] = 'WIP, publication not verified'
         print(_json.dumps(status, indent=2))
