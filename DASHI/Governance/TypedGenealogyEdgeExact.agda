@@ -33,6 +33,7 @@ data RelationKind : Set where
   editorialReviewRights : RelationKind
   topicalPublicationMatch : RelationKind
   explicitAttributedRepublication : RelationKind
+  coPackagedClaims : RelationKind
   authorRetrospectiveCorrection : RelationKind
   institutionalDisavowal : RelationKind
   extrapolationBeyondEvidence : RelationKind
@@ -138,6 +139,10 @@ publicationTopicMatchIsNotMethodTransfer ()
 articleRepublicationIsNotHistoricalMethodTransfer :
   TransferRelation explicitAttributedRepublication → ⊥
 articleRepublicationIsNotHistoricalMethodTransfer ()
+
+coPackagedClaimsDoNotProveHistoricalTransfer :
+  TransferRelation coPackagedClaims → ⊥
+coPackagedClaimsDoNotProveHistoricalTransfer ()
 
 authorRetrospectiveCorrectionIsNotMethodTransfer :
   TransferRelation authorRetrospectiveCorrection → ⊥
