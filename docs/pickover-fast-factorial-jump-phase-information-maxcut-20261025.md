@@ -480,3 +480,107 @@ e^(i*99^(n!)) orbit, and demonstrate an efficient direct jump on
 the compressed quotient using bit/FFT or Shor/RSA inspired period
 reduction with exact runtime and certificate cost. Do not identify
 finite C3 identities with the real exponential without a weld.
+
+
+## 2026-10-26 signed-zero + genuine 3x3 torque grid + 27-cube MAX-CUT
+
+FIRST PRIOR ART, not a newly invented 369 language:
+* DASHI/Foundations/Base369CirclePhase and Base369TriadicPhaseTower:
+  cyclic circle address refinement C3 -> C9 -> C27;
+* DASHI/Foundations/PhaseQuotientNonaryGroupSeparationExact:
+  Q9=(C3)^2 != C9 as a group, though both have nine coordinates;
+* MERGED torque PR #1164, Physics/Foundations/TorqueTrialectic369Exact:
+  physical 3x3 ordered (lever,force) operator sheet, 27 (output,lever,
+  force) bracket voxels, Levi-Civita signed orientation, reversal
+  conjugates C3 Fourier phase; ContinuousSO3Torque369BridgeExact
+  distinguishes finite classifier from genuine continuous SO3;
+* Foundations/SignedZeroTernaryOrientationExact, Biology/
+  OrientedZeroWaveTransitionExact and OrientedZeroJetTransitionExact:
+  +/-0 directed arrival, undirected neutral, crossing/reflecting jets;
+* Analysis/PickoverBase99SignedTailExact and
+  scripts/check_pickover_phase_reopening_exact.py ALREADY supply a
+  base99 first-nonneutral (49) digit signed continuation with exact
+  seven factorial witnesses. Do not reattribute that result as new.
+
+NEW EXACT RATIONAL SIGNED-CIRCLE SPECIALISATION:
+Let x in [0,1), p=floor(9x), r={9x}. This p is two *ordered*
+base3 trits (3x3 grid), not a claim Q9 and C9 have equal group law.
+Then
+  {99x}={11r},   x=(p+r)/9.
+For c=floor(27x)=3p+b, t={27x}, b in {0,1,2},
+  {99x}={11(b+t)/3},  x=(c+t)/27.
+These are SAME-OBJECT exact arithmetic equalities. The first two
+ternary address digits are shifted out by 99=9*11. The retained
+fractional tail and integer carry through factor 11 determine the
+new phase. Finite grid/cube address alone does NOT descend to a
+well-defined 99-action. The full residual is an adequate carrier;
+finding an efficiently producible shorter signed residual is OPEN.
+
+CENTRAL SIGNED-ZERO REFINEMENT:
+At every depth d, the central all-ones ternary address is
+  h_d=(3^d-1)/2,   digits3(h_d)=(1,1,...,1).
+Real coordinate h_d/3^d =1/2-1/(2*3^d) tends to +1/2 from below;
+the same integer h_d satisfies 2*h_d+1=3^d and converges to -1/2
+in Z3 with v3(h_d+1/2)=d. Numeric rational -1/2 also occurs as
+Re(zeta3), but a rational shared across places is NOT an equivalence
+between real/3-adic/complex phase dynamics.
+For 0<r<1, let x=(h_d+r)/3^d. Then
+  x-1/2=(r-1/2)/3^d
+and sign(sin(2*pi*x))=sign(sin(2*pi*r)); at r=1/2 both vanish.
+The central 3x3 grid cell (11) and central 27 cube address (111)
+are therefore the exact self-similar half-turn decision fibre.
+The first non-central ternary digit (0 or 2) decides the real
+circle sine sign on x in (0,1)\{1/2}; all-ones is undecided
+until a noncentral digit appears. x=0 is a separately checked zero.
+
+SIGNED-ZERO GERMS AND TORQUE CROSS-POLLINATION:
+Zero sites at x=0,1/2 have four one-sided germs.
+At x=0, incoming from negative carries negative sine orientation,
+outgoing positive is positive. At x=1/2 the signs reverse. Since
+99 is odd and the real circle map x->{99x} has positive local
+slope 99, BOTH zero sites and their local one-sided germs are
+fixed by this map (for sufficiently small local perturbations).
+The determinant/oriented-area analogy matches torque's sign
+reversal and C3 conjugation, but the finite torque bracket
+orientation is NOT the analytic sine until a proof of semantic
+identification is provided.
+
+TOPOLOGICAL NO-GO WITH AN EXPLICIT SHARP GROWTH WITNESS:
+For any sign word w of length d, choose terminal y=1/4 and
+compose inverse branches
+   I_+(y)=(1+y)/99,   I_-(y)=(60+y)/99
+in reverse word order. Both are exact branches of T99:x->{99x};
+I_+ maps into the positive semicircle, I_- into the negative.
+Thus all 2^d binary sign itineraries of length d occur on the
+real circle. A deterministic GLOBAL finite quotient with a
+decodable sign at EVERY future iterate would need >=2^d states
+for every d, impossible for fixed finite size.
+This NO-GO applies to universal fixed-state quotients only.
+It DOES NOT exclude a special-source orbit reduction for the
+single transcendental seed alpha=1/(2*pi), nonuniform certificates,
+infinite retained fibres, or a target-specific fast arithmetic jump.
+
+LOCAL CHECKS: scripts/check_pickover_369_torque_signedzero_cocycle.py
+has exact rational regression of grid->cube, both 99 cocycles,
+all-ones/dual-metric centre, signed-zero germs, >=512 distinct
+length-nine itineraries, and first-noncentral-digit decisions.
+A structurally typed Agda adapter
+DASHI/Analysis/PickoverSignedZeroTorque369GridExact.agda
+reuses EXISTING merged torque and signed-zero proofs and
+specialises ordered 9/27 projections and orientation reversal;
+it does not claim analytic sine correctness. Agda kernel
+exact-head check is pending. The existing base99 first-digit
+program remains the independent older result.
+
+FACTORIAL-SCALE CRITICAL PATH:
+  alpha={1/(2*pi)}; E=9999!
+  T99^E(alpha)= {11^E * {9^E * alpha}}.
+An exact shift representation reduces no arithmetic by itself:
+two E-indexed ternary digits of alpha are still potentially needed
+to locate the shifted tail, and factor 11^E adds carries.
+Find and PROVE either (A) an efficient query-specific tail-digit
+oracle, (B) a special-orbit compressed phase cocycle, or (C) a
+different exact terminal sign certificate. Then discharge
+producer/checker bit-complexity using repo-native MDL/Pareto BIDI,
+not a bare representation-size argument. The target
+sign(sin(99^(9999!))) remains OPEN.
