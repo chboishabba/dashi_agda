@@ -70,6 +70,13 @@
         "P1-37"
       ],
       "kind": "2013 & 2024 different authored papers with overlapping investigators and exact current/field matching rows"
+    },
+    "rvml-gentry": {
+      "members": [
+        "P1-69",
+        "P1-70"
+      ],
+      "kind": "Rogue Valley Metaphysical Library organiser event calendar and Vimeo uploader biography same RVML publication network; not two independent speakers"
     }
   },
   "claims": [
@@ -211,6 +218,30 @@
       "status": "unpaid",
       "requires": [],
       "effect": "table-number overlap cannot settle whether 2024 data were freshly acquired"
+    },
+    {
+      "id": "rvml_gentry_2003_named_talk",
+      "status": "organiser_schedule",
+      "requires": [
+        "P1-69"
+      ],
+      "effect": "dated RVML 4 November 2003 programme names Gentry Smith speaker; event content uninspected"
+    },
+    {
+      "id": "rvml_gentry_reich_device_claim",
+      "status": "promotional_biography",
+      "requires": [
+        "P1-70"
+      ],
+      "effect": "Vimeo description says Gentry designed and constructed Reich Cloudbusters; not first-person original engineering drawing or independent device witness"
+    },
+    {
+      "id": "rvml_gentry_flanagan_advertised_topic",
+      "status": "event_description_only",
+      "requires": [
+        "P1-70"
+      ],
+      "effect": "Pat Flanagan electronic bliss device is billed as a topic; no proof Gentry worked for Flanagan or transmitted 1999 winding plans"
     }
   ],
   "source_snapshot": {
@@ -227,6 +258,6 @@
   },
   "algorithm": {
     "retraction": "Any claim depending on a withdrawn source is marked reopened (not false). A claim with status unpaid remains unpaid. Unrelated independently grounded claims retain their status.",
-    "prohibition": "No edge automatically promotes author assertions or observed precipitation into device causality; model statuses are bibliographic, not ontology truth."
+    "prohibition": "No edge automatically promotes author assertions or observed precipitation into device causality; model statuses are bibliographic, not ontology truth. An uploader's third-person promotional biography cannot certify Navy employment, historical device construction, or Flanagan-Gentry-Croft technical handoff."
   }
 }
