@@ -99,3 +99,71 @@ Marx and Engels' 1848 proposals are **primary authored claims**. Claims like "al
 ## 6. Verification command / result categories
 
 \`python3 scripts/check_wealth_tax_maxcut.py\` exercises a finite arithmetic domain and constructive non-factorisation witness. It is a **local computational check only**. The Agda module supplies source-written theorem candidates and definitional proof terms; a compiler invocation and complete dependency closure remain unverified here. Legislative and historical facts are primary-source/peer-reviewed-source receipts, not theorems proved by Agda.
+
+## 7. October 27 sociology/philosophy source-owned max-cut continuation
+
+**Implementation:** \`DASHI/Economics/WealthTaxPowerCareSociologyBidi20261027Exact.agda\`.
+This new *application/consumer* imports pre-existing DASHI philosophy, sociology, governance, economics and query adequacy owners instead of creating a new universal philosophy/sociology ontology. The Economics \`Everything.agda\` aggregator registers it after the tax-base module, and a pre-existing escaped-literal \`\\nimport\` text splice in that aggregator was normalised to actual newlines. No changes are made to any of these upstream owners.
+
+### 7.1 Reused formal and intellectual parents
+
+- **Crenshaw/intersectional mathematical precedent:** \`DASHI/Core/IntersectionalNonFactorability.agda\` retains Kimberlé Crenshaw, *Mapping the Margins* (1991), DOI **10.2307/1229039**, as conceptual precedent. The loss-of-information theorem belongs to DASHI, *not* to Crenshaw.
+- **Blackwell/query-indexed information:** \`DASHI/Core/QueryIndexedProjectionAdequacyExact.agda\`, David Blackwell's *Equivalent Comparisons of Experiments* (1953), DOI **10.1214/aoms/1177729032**, as information-comparison precedent, not a tax-effect theorem. The same assessed-tax observation is adequate for the tax-due query and inadequate for voting-rights/care-capacity queries.
+- **Nancy Fraser's three axes:** \`DASHI/Governance/RecognitionDistributionRepresentationAxesExact.agda\` retains *Redistribution or Recognition?* (2003) and *Scales of Justice* (2009) as source context: redistribution, recognition and representation do not collapse. No one-axis verdict on 'justice' follows.
+- **Nancy Fraser, \`Contradictions of Capital and Care\` (2016):** *New Left Review* 100, original HTML article, DOI **10.64590/nt2**, https://newleftreview.org/issues/ii100/articles/nancy-fraser-contradictions-of-capital-and-care. It argues social reproduction (care, households, maintenance of social relations) is a background condition of formal production, and financialised capitalist accumulation tends to erode that support. **The article does not say a specific billionaire tax rate solves the problem.** In fact, the original explicitly demands deeper structural transformation than tinkering with social policy; do not collapse it to 'tax to fund childcare'.
+- **Silvia Federici, \`Wages Against Housework\` (1975):** first edition April 1975, original political pamphlet by Federici, published Power of Women Collective/Falling Wall Press (ISBN 0950270296). Bibliographic root https://books.google.com/books?id=6hzVAAAAIAAJ . Preserves an argument concerning unwaged housework and the political meaning of recognition/payment for domestic labour, not a statistical finding about effective top tax rates.
+- **Sherry R. Arnstein, \`A Ladder of Citizen Participation\` (1969):** *Journal of the American Institute of Planners* 35(4), DOI **10.1080/01944366908977225**, publisher abstract https://doi.org/10.1080/01944366908977225. Distinguishes mere apparent participation from actual power to set/decide the programme. Already source-owned by \`DASHI/Culture/CohnInstitutionalIbrahimDeweyAcquisitionExtensionThreeExact.agda\`; new work does not claim she authored a corporate-vote theorem.
+- **Patricia Hill Collins, \`Learning from the Outsider Within\` (1986):** *Social Problems* 33(6), DOI **10.2307/800672**, original publisher abstract https://doi.org/10.2307/800672. Primary sociological standpoint and interlocking oppression theory; does not assert marginality automatically makes empirical claims correct. Already included in the same Cohn/Ibrahim acquisition owner.
+- **Historical sociology / Gramsci:** \`DASHI/Culture/HistoricalSocialTotalityBidiExact.agda\` already separates material, legal, cultural, institutional and historically situated subject positions; the finite theorem **same economic position does not recover unique ideology** remains owned upstream. The new tax consumer imports it verbatim.
+- **Philosophy second-order power and intervention:** \`DASHI/Philosophy/PowerAndGrammar.agda\`, \`PhilosophicalPromotionBoundary.agda\`, \`MaterialFeedbackIntervention.agda\`, \`InhumanRelationalFork.agda\` distinguish rule-setting and epistemic admissibility, material feedback, and non-equivalent ethical consequences of a shared metaphoric premise. The 100% cap changes a tax rule but does not, *from that fact alone*, identify who controls the policy grammar or material redistribution.
+- **Causal comparisons:** \`DASHI/Reasoning/ComparativeInstitutionalMeaningExact.agda\` already insists a regime label is not a matched counterfactual. Similarly, \`DASHI/Education/DigitalESDPoliticalEconomyProvisioningExact.agda\` owns differentiated ownership, revenue, provisioning, labour, externality allocation and participant decision power. Do not replace those precise coordinates with the blanket noun 'capitalism'.
+- **Ibrahim social-science parent:** \`DASHI/Wikimedia/IbrahimEnglishSocialScienceFunnelBridgeExact.agda\` gives Sociology **Q21201**, Social science **Q34749** as *external navigation/coverage* coordinates. It explicitly treats sociology as *fragmented indirect coverage already present*, and adds only a parent seam; Wikipedia identity is not philosophical truth or source ownership. This local consumer does not promote historical First Link Network edges without the exact 2014 dump/producer/result chain.
+
+### 7.2 Two exact finite information obstructions
+
+Synthetic fiscal/social snapshots are:
+
+\`\`\`text
+World A: assessed wealth 5, controlling votes 1, accessible care 0
+World B: assessed wealth 5, controlling votes 7, accessible care 0
+World C: assessed wealth 5, controlling votes 1, accessible care 9
+hard-cap threshold 3 -> tax due 2 in all three worlds
+\`\`\`
+
+- **A/B:** same assessed tax and same wealth, *different voting control*. INF non-factorability proves no function of *only that tax receipt* can recover both voting answers; any post-hoc recharting of the receipt also fails.
+- **A/C:** same assessed tax and same wealth, *different care provisioning*. The receipt is likewise insufficient to determine realised care capacity.
+- **Query-indexed adequacy:** the receipt **does** factor the 'what is the assessed tax?' query through the identity map, while simultaneously failing the power/care queries. This is a stronger constructive consumer than labelling a policy 'progressive'.
+- **Interpretation limit:** these artificial worlds prove *information insufficiency relative to defined coordinates*, not that taxes cannot change votes, welfare or class power. Successful policy interventions might alter the hidden coordinates; their actual transition dynamics require measured source receipts.
+
+### 7.3 Correct the philosophical claims in the supplied AI conversation
+
+| Prior AI shortcut | Source-bounded correction |
+|---|---|
+| 'Anarchists all agree zero taxes and identical institutional policies' | SEP distinguishes socialist, communist, individualist and anarcho-capitalist traditions; shared critiques of state authority do NOT make property/ownership, free markets and solidarity compatible. https://plato.stanford.edu/entries/anarchism/ |
+| 'Marx's tax plank is the endpoint' | *Manifesto* 1848 explicitly presents a group of transitional measures in a proposed programme; ownership changes and state power are part of the original context. Original https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm |
+| 'Fraser/Federici prove a wealth ceiling funds and thereby repairs care' | Distinguish authorial theory about reproductive labour/social contradictions from a new policy-model counterfactual. Neither author proves that a specified marginal rate solves reproduction crises. |
+| 'Top statutory rates explain the Great Compression' | WWII mobilisation, labour institutions, income definition, enforcement and asset response require matched causal decomposition. Do not infer treatment effect from joint history. |
+| 'Techno-feudalism, postmodernism and accelerationism imply one unitary view of taxes' | Without author-specific original text and exact proposition, keep these as **candidate schools/interpretations**; do not canonise claims about what every adherent thinks. |
+| 'Observed fall in Vancouver vacancies identifies policy-only effect' | Original city *2025 Annual Report* reports 2017–2024 drop and explicitly warns that isolation of the tax effect from population and housing-market causes is challenging. Source https://vancouver.ca/files/cov/2025-empty-homes-tax-annual-report.pdf |
+| 'Most net wealth taxes were repealed, so no rational tax design could work' | Original OECD 2018 report argues taxation of wealth must be assessed in the context of the complete tax system; recommends treatment of trust structures, hard-to-value assets, debt deductions, instalments, foreign holdings and reporting. Source https://www.oecd.org/en/publications/the-role-and-design-of-net-wealth-taxes-in-the-oecd_9789264290303-en.html |
+
+### 7.4 Max-cut / Pareto / Snowball acceptance ledger
+
+| Priority | Paid or open | Completion condition |
+|---|---|---|
+| **P0** existing conceptual parents | PAID/reused | keep original author/year/DOI and upstream original module identities; avoid synonyms masquerading as new ontology |
+| **P0** finite votes/care tax-receipt BIDI | SOURCE-WRITTEN | typecheck exact module; independent Python regression checks the sample worlds |
+| **P0** syntax/reachability | SOURCE-WRITTEN | \`Everything.agda\` now imports both economic modules and its literal escaped import separators are repaired |
+| **P1** social reproduction causal consumer | OPEN | care-hours/care-access outcome panel, differentiated by class, gender and labour type, plus a policy contrast and uncertainty |
+| **P1** wealth ownership to vote power | OPEN | repeated person/company/entity beneficial ownership registry, share/voting rights, transfers, instruments, tax base and receipts |
+| **P1** state institutional capacity | OPEN | legislation, collection/enforcement capacity, appeal/fairness and administrative cost (AI is a *tool*, not a constitutional authority) |
+| **P2** Marx/Fraser/Federici BIDI against competing economic school models | PARTIAL | retain original text as authored position, expose falsifiers and different institutional proposals; do not assume one verdict |
+| **P2** tax outcomes by population intersection | OPEN | measure distribution, representation, care and externalities separately; avoid using identity/standpoint as observed causal effect |
+| **P3** historical period counterfactual | OPEN | 1946–1963 peacetime design with matched confounders and statutory-versus-effective definitions |
+| **P3** cross-policy comparison | OPEN | modern city vacancy, estate, capital-income, net-wealth and proposed 100% stock cap have distinct units and evidentiary standing |
+| **P4** full 2014 Ibrahim Wikipedia producer reproduction | OPEN but NOT this domain's blocker | retain existing \`IbrahimSnowballParetoFrontierExact\` rank-1 input/chunk/output provenance residual. Do not duplicate or assert its payment here |
+
+### Status and provenance
+
+This extension does not run a new tax study, infer a modern legal duty, prove anti-capitalist or pro-capitalist philosophy, or claim exact-read philosophical evidence automatically provides a political theorem. The new named proof terms and query witnesses are *source-written* unless and until the exact PR head is typechecked with Agda; the standalone Python tests are *executed computational checks* only. Earlier core proofs and historical source owners retain their distinct attribution.
+
