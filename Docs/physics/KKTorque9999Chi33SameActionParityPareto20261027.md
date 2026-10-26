@@ -47,3 +47,10 @@ This connects precisely to #1241's stronger **faithful boundary H quotient** cal
 
 ### Verification state
 The finite CRT/idempotent/charge-two/Chi-clutch arithmetic was independently reproduced with exact Python integers/Fractions. The committed script was not executed from its GitHub blob, Agda was not kernel-checked, and no actual measured EM/gravity signal or 5D quantum anomaly certificate was obtained. The github source files are **source-written** and subject to exact-head verification. This document is a restricted no-transport/acceptance-gate result, NOT a claim of physically established KK torque unification or of a real sign for sin(99^(9999!)).
+
+
+## Independent 2026 torque/modified-KK experimental NEGATIVE control
+
+Original experimental root: Martin Tajmar, Mateusz Olek and Oliver Neunzig, *Search for anomalous forces from toroidal solenoids at high ambient matter density from modified Kaluza-Klein theories*, International Journal of Modern Physics A **41** (2026), article 2650147, published 25 July 2026, DOI **10.1142/S0217751X26501472**. Their laboratory balance test reports **no measurable anomalous mass/force signal** from its selected toroidal-solenoid apparatus within an approximately 0.1 mg resolution at up to 3 A DC. The authors report tighter constraints on the particular modified KK coupling tested (Mbelek-family model). This is an original independently performed *null measurement*, not a verification of our E6/KK action or a universal exclusion of all KK theories. The preprint, university record and secondary summary are one experimental root, not multiple replications.
+
+A follow-on torque/gravity fifth-dimensional experiment requires the same-source predicted observable, field strengths, environmental boundary conditions, noise/null controls and an explicit distinguishability threshold. Do not assign the modified-Mbelek bound as a numeric bound on the source-selected E6 model without a mathematical parameter/action transport.
