@@ -50,10 +50,10 @@ def case(positive):
        "class_sizes":[1,1,1,1,1,1],
        "power_map_2_zero_based":[0,0,4,2,2,0],
        "degree12":[{"label":label,"source_irreducible_position_1_based":i,
-                    "values":[wire(12,0),wire(-12,0),wire(12,k)]}
+                    "values":[wire(12,0),wire(-12,0),wire(12,k)]+[wire(0,0) for _ in range(3)]}
                    for i,(label,k) in enumerate((("12a",1),("12b",2)),1)],
        "degree78":[{"label":label,"source_irreducible_position_1_based":i+2,
-                    "values":[wire(78,0),wire(78*sign,0),wire(78,k)]}
+                    "values":[wire(78,0),wire(78*sign,0),wire(78,k)]+[wire(0,0) for _ in range(3)]}
                    for i,(label,k) in enumerate((("78a",1),("78b",2)),1)]}
     selected={"six_suz_table":"6.Suz",
         "six_suz_group_order":6,"six_suz_class_count":6,
@@ -62,6 +62,8 @@ def case(positive):
         "six_suz_power_map_2_zero_based":list(source["power_map_2_zero_based"]),
         "six_suz_degree12_positions":[1,2],
         "six_suz_degree78_positions":[3,4],
+        "six_suz_selected_12_all_class_values":[copy.deepcopy(x["values"]) for x in source["degree12"]],
+        "six_suz_selected_78_all_class_values":[copy.deepcopy(x["values"]) for x in source["degree78"]],
         "suzuki_central_involution_class_position":2,
         "suzuki_central_order_three_class_position":3,
         "common_729_necessary_equal_C3_phase_pair_count":2,
@@ -95,7 +97,9 @@ def fake_validate(x):
         class_sizes=x["six_suz_class_sizes"],
         power_map_2_zero_based=x["six_suz_power_map_2_zero_based"],
         positions12=x["six_suz_degree12_positions"],
-        positions78=x["six_suz_degree78_positions"])
+        positions78=x["six_suz_degree78_positions"],
+        selected12rows=x["six_suz_selected_12_all_class_values"],
+        selected78rows=x["six_suz_selected_78_all_class_values"])
 
 def run():
     for positive in (True,False):
@@ -104,6 +108,7 @@ def run():
         assert res["central_C2_trace"]==(66 if positive else -90)
         assert res["selected_Nebe_family_full_class_equal"]==positive
         assert res["complete_source_class_signature_matched"] is True
+        assert res["selected_source_characters_all_classes_matched"] is True
         assert len(res["source_class_signature_sha256"])==64
     a,b=case(True)
     negatives=[]
@@ -150,7 +155,23 @@ def run():
           lambda a,b:b.pop("six_suz_class_sizes"))
     fails("bool_poisoned_selected_class_signature",
           lambda a,b:b["six_suz_class_orders"].__setitem__(5,True))
-    assert len(negatives)==26
+    # These drift cases have IDENTICAL order/size/power metadata and
+    # exactly matching selected labels and Irr indices. The previous
+    # complete-class *metadata* join would accept them. Exact classwise
+    # character equality MUST reject both.
+    fails("selected_noncentral_12_character_drift",
+          lambda a,b:b["six_suz_selected_12_all_class_values"][0].__setitem__(3,wire(7,0)))
+    fails("selected_noncentral_78_character_drift",
+          lambda a,b:b["six_suz_selected_78_all_class_values"][1].__setitem__(4,wire(8,0)))
+    fails("exported_noncentral_12_character_drift",
+          lambda a,b:a["degree12"][0]["values"].__setitem__(3,wire(7,0)))
+    fails("exported_noncentral_78_character_drift",
+          lambda a,b:a["degree78"][1]["values"].__setitem__(4,wire(8,0)))
+    fails("missing_selected_12_full_rows",
+          lambda a,b:b.pop("six_suz_selected_12_all_class_values"))
+    fails("truncated_selected_78_full_row",
+          lambda a,b:b["six_suz_selected_78_all_class_values"][0].pop())
+    assert len(negatives)==32
     return {"status":"PASS_SYNTHETIC_JOIN_INTERFACE",
        "coherent_synthetic_branches":2,"rejected_false_joins":negatives,
        "original_6Suz_data_used":False,"full_class_auditor_executed":False,
