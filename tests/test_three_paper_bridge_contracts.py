@@ -217,3 +217,23 @@ def test_two_source_hypothesis_collisions_have_identical_flat_views():
     for pair in (force_worlds, domain_worlds):
         assert pair[0][1] == pair[1][1]
         assert pair[0][2] != pair[1][2]
+
+
+def test_miller_projected_zero_cannot_discharge_gradient_hypothesis():
+    exact = (
+        ROOT / "DASHI/Papers/ThreePaperConsumerFidelity20261026Exact.agda"
+    ).read_text()
+    regression = (
+        ROOT / "DASHI/Papers/ThreePaperConsumerFidelity20261026Regression.agda"
+    ).read_text()
+    assert "projectedVorticityGradientLossWitness" in exact
+    assert "zeroProjectedVorticityCannotInferDirectionRegularity" in exact
+    assert "gradientObligationCannotBeEliminated" in regression
+    assert "a two-point" in exact.lower() or "two-point" in exact.lower()
+    assert "a smooth" in exact.lower() or "any R³ vorticity" in exact
+    atlas = source("atlas")
+    for entry in ("millerSteepDirectionFirstImplementation",
+                  "millerWeightedQuadratureFirstImplementation",
+                  "millerDirectionFidelityFirstImplementation"):
+        assert entry in atlas
+    assert "Chronology.sourceCommittedOnly" in atlas
