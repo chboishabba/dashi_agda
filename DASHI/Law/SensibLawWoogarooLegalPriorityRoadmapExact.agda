@@ -56,12 +56,16 @@ federal8575Priority : LegalPriorityCoordinate
 federal8575Priority = legal-priority-coordinate
   immediateFederalDecision
   consumerPaymentOpen
-  "EPBC 2019/8575 Part 9 approval/refusal decision; project-specific written extension presently carries the practical 1 October 2026 deadline"
-  "controlled-action identity; controlling species/community; authorised delegate; final-PD-publication status; statutory s 95B -> s 130 clock rule; source-paid project-specific s 130 extension/deadline"
-  "literal final PD/comment-response material if not already acquired; exact Minister s 95B receipt date if independently reconstructing the ordinary clock; eventual literal Part 9 decision instrument; merits matrix for habitat loss/retention, significance, avoidance, residual impact, offsets and conservation-advice/recovery-plan treatment"
-  "portal Decision Status is a mutable manifestation, not operative legal state; final-PD publication does not by itself start the statutory clock; controlled-action status does not imply refusal"
-  "portal status, species list and publication date do not factor to the approval/refusal answer or the Minister-receipt date"
-  "treat the written 1 October extension as the practical decision clock while independently acquiring the s 95B receipt date/final material; compile the refusal/conditions matrix against the actual Part 9 consumer"
+  "EPBC 2019/8575 Part 9 decision: 15 October 2026 public Commonwealth notice says APPROVED WITH CONDITIONS; operative signed approval, authorisation and full conditions still to acquire"
+  "official public notice is a dated decision-status receipt; section 95B(2) 23 July 2026 notice recorded 1786 comments; January preliminary documentation and surrounding project map remain separate source objects"
+  "signed approval and delegate identity; statement of reasons and section 135A recommendation report; final PD and complete comment-response; current legal framework/transitional provisions; pre-clearance conditions, offsets and review standing/deadline"
+  "approval status is not the signed decision; dated public comment count is not the decision-maker's complete evidentiary consideration; Minister's portfolio responsibility does not by itself prove Minister personally signed"
+  "housing delivery rhetoric, indexed political interests, a 2025 Queensland ministerial lobbying meeting or a 2004 gas alliance do not factor to EPBC decision legality or a conflict finding"
+  "urgent counsel filing/standing/possible interim orders assessment; obtain original signed notice and section 135A recommendation report; freeze public decision and ecological evidence with dates and hashes; calculate exact ADJR or other Federal Court deadlines without assuming public notice starts one universal 28-day clock"
+
+-- The pre-decision s130 clock witnesses remain historically valid source receipts,
+-- but their 1 October extension must NOT be interpreted as a live future deadline.
+-- The separate post-approval source owner supplies current approval evidence.
 
 federalClockReceipt : Clock.ClockReceipt
 federalClockReceipt = Clock.section130FortyBusinessDayClock
@@ -78,7 +82,7 @@ cumulative8575Priority = legal-priority-coordinate
   "same-object local/regional integration of surrounding development patterns, habitat loss/retention, corridor function and the action's marginal cumulative contribution; Final PD/comment-response and Department sufficiency record"
   "a surrounding-project map is not the requested cumulative analysis; an apparent January response gap is not legal invalidity"
   "project identifiers, generic fragmentation statements, or secondary commentary do not factor to payment of Item 4.6(c)"
-  "acquire/read the Final PD/comment-response first; then snowball primary Scenic/Peninsula/adjacent project geometry and build the time-indexed cumulative habitat/connectivity ledger only where the final material leaves the residual open"
+  "post-approval: urgently compare final-PD/comment-response, recommendation report, signed 15 October decision and conditions; reconcile Item 4.6(c) with actual local/regional functional connectivity analysis, then commission same-parcel specialist review for counsel"
 
 qldS13Priority : LegalPriorityCoordinate
 qldS13Priority = legal-priority-coordinate
