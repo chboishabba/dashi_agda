@@ -97,3 +97,46 @@ D_2 C_2^3 D_2^2\ne I_{12}.
 This is a **positive, direct published-word/source-matrix compatibility** calibration for the central half-turn class and is independently locally reproduced in exact GF3. Its original historical class **4D** comes from BW05 and must be credited there. It **does not prove** our different \(r=m(gmg^{-1})\) has Monster class 4D; two source elements can have equal order/square/eigenvalues without being conjugate in \(2.Suz\) or Monster. The remaining source class lookup is an exact conjugacy/fusion question, not a dimension or eigenvalue test.
 
 Source roots and receipts remain distinct: Norton–Wilson (2002) supplies central \(2.Suz\) involution→2B, BW05 supplies both 4B²→2A and concrete 4D word, BW07 supplies standard generator quotient, ATLAS owns matrix bytes, and #1098 owns the repo regression. No GAP/Monster element-class action has been executed here.
+
+
+## 27 October: actual source rotation class in Suzuki quotient is 2B
+
+### The primary-source discriminator, not another cardinatity or 12D trace match
+
+The ATLAS group page [Suz](https://brauer.maths.qmul.ac.uk/Atlas/v3/spor/Suz/) explicitly gives TWO involution classes in Suz:
+\[
+|C_{\mathrm{Suz}}(2A)|=3\,317\,760=7\cdot473\,965+5,\quad
+|C_{\mathrm{Suz}}(2B)|=161\,280=7\cdot23\,040.
+\]
+The 12D GF3 source matrices are original ATLAS \`2.Suz:2\` standard preimages, not an independently acquired permutation table. The already-proven #1098 source D4 rotation \(r=m(g_0mg_0^{-1})\) has exact \(r^2=-I_{12}\). Its image \(\overline r\in Suz\) is a nontrivial involution; parity of the original outer \`C/c\` symbols certifies source-inner \(2.Suz\) membership.
+
+**NEW concrete short source word** (eight original generators, lowercase inverse conventions):
+\[
+h=\texttt{DcDCDcdC},\quad
+u=r(h^{-1}rh),\quad t=hu^6.
+\]
+An exact original-source GF3 matrix calculation verifies
+\[
+u^{13}=-I_{12},\qquad t^7=-I_{12},\qquad tr=rt.
+\]
+Therefore \(s=-t\) satisfies \(s^7=I,\ s\ne I,\ sr=rs\); furthermore \(s\) preserves the ORIGINAL 12D alternating form and lies in the inner 2.Suz source group. The image \(\overline s\) has exact order seven in Suz, because the covering kernel is of order two. It centralizes \(\overline r\). The Suzuki 2A centralizer order is not divisible by seven, hence \(\overline r\) is **Suzuki involution 2B** by Lagrange's theorem. This is a genuine *same-generator source quotient class selection*, stronger than either projective generator orders or order-four polynomial fingerprints.
+
+**Implementation/proof status:** source-owning
+\`scripts/monster3b_atlas_source_d4_rotation_suz_2b_seven_centralizer.py\`
+reuses the existing #1098 SHA256-matched source matrices, actual r, invariant alternating form and original \`evaluate\` routine. \`DASHI/Moonshine/Monster3BAtlasSuzukiTwoBPrimeSevenCentralizerExact.agda\` is a source-typed, NOT Agda-kernel-checked, interface with precise remainder arithmetic. The **independent local NumPy execution on reconstructed SHA256-exact ATLAS bytes** passed the short-word identities, and the earlier original matrix rank65/rank12 source receipt re-ran successfully. The repository script has been committed and wired into the existing local ATLAS check shell; no exact-head checkout run or CI result is asserted.
+
+### What this does and does not identify
+
+The above says \(\overline r\) is **Suz 2B**, not Monster 2B: \(r\) has Monster order four, while its central square \(-I\) has Monster involution class **2B** by the DIFFERENT original Norton–Wilson (2002) fusion theorem. The accepted Monster possibilities remain **4A, 4C, 4D** under original ATLAS power maps; the selected \(4\to12\to6\) class/phase sieve in #1250 is not yet narrowed by a rigorously sourced fusion of **this Suzuki 2B lift** to M.
+
+All three Monster class centralizer orders are divisible by seven, so merely transporting the order-seven commuting witness to M **cannot** select among 4A/4C/4D:
+\[
+|C_M(4A)|=8\,317\,584\,273\,309\,696\,000,\ 
+|C_M(4C)|=48\,704\,929\,136\,640,\ 
+|C_M(4D)|=8\,244\,323\,942\,400.
+\]
+These are original Monster ATLAS values, https://brauer.maths.qmul.ac.uk/Atlas/v3/spor/M/, not independently discovered class computations.
+
+The published BW05 4D word \`BCCCBB\` reduces to a source ATLAS element with square \(-I\), but that word contains ODD outer \`C\` parity, while **this** r lies in inner 2.Suz. Equality of square and characteristic polynomial \((x^2+1)^6\) is automatic for order-four elements with square \(-I\); it cannot identify their Monster class. We explicitly computed equal polynomials and rejected that insufficient test.
+
+**Next unique maximal Pareto payment**: pay the exact AtlasRep/CTblLib fusion for the conjugacy class of this Suzuki 2B *order-four lift*, using the ORIGINAL 2.Suz:2→N(3B)→M quotient, or acquire full selected 6.Suz 78 via the existing #1250 matcher. Source group-word inference is now complete up to that different external same-object map. Original source ancestry retained: ATLAS/AtlasRep first, Norton–Wilson and Barraclough–Wilson later; existing #1098 / #1250 / Ibrahim consumer ownership distinct. Never promote this group class to geometry/quantum/VOA physical observables.
