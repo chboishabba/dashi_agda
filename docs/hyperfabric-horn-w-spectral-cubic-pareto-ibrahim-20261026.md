@@ -316,3 +316,63 @@ Attribution: #1244 owns the basing paths and same-cover collision,
 #1254/#1266/#1267 are source of the already-recorded severe-test
 methodology, Hatcher original topology and Lippert source exposition,
 this #1249 cut owns only the new W trace-to-spectral consequence.
+
+
+## 2026-10-26 orientation and original two-arm phase consumer (nonduplicate)
+
+The newest exotic-topology PR #1254 / Lean #86 explicitly warns
+of chronological APPEND versus old HornAddress.suffix newest-first
+PREPEND indexing; the original
+AlexanderHornedBinaryPadicCylinderExact.chronological and
+leftChildAddsHighOrderDigit/rightChildAddsHighOrderDigit already
+provide the source-level reversal bridge. Do not reimplement
+the entire codec here.
+
+Using primary Hatcher Ex.2B.2 pp171–172, the source parent group
+generator becomes a commutator of two child meridians, subject to
+choice of common basepoint paths and orientation. Exact free-group
+identities [b,a]=[a,b]^-1 and
+[gag^-1,gbg^-1]=g[a,b]g^-1 show that the flat
+selected-W norm/spectral child >781/1000 obstruction survives
+coherent whole-loop conjugation and inversion.
+An independent whisker on ONE child is NOT the same relationship.
+This lowers the P0 accepted marking contract from a literal fixed
+word equality to correct SAME-OBJECT free-homotopy/conjugacy class
+UP TO WHOLE COMMUTATOR INVERSION; it does not prove the missing
+satellite-side Hatcher generator map.
+
+The original neutrino #1247 selected unpolarized two-arm model has
+P_W(phi)=1/2+Re(e^(i phi)tr(W))/6. Source tr(W)=A-B*zeta3,
+B=19836986431118/181846007130841>0.
+Full source basing conjugation leaves all P unchanged.
+Loop orientation inversion sends tr(W)->conj(tr(W)) and
+P_W^-1(phi)=P_W(-phi); the zero-phase original rational
+434928608401/648677790003 is invariant, but signed
+D=P(+pi/2)-P(-pi/2)=B sqrt3/6 reverses. D² is EXACT rational
+98376507667089911639682481 /
+99203910928289627462680101843, D≈0.0314906267.
+The entire X=(W-I)^*(W-I) is *literally unchanged* under W^-1,
+so this is a genuine orientation-even spectral no-go versus
+orientation-odd phase-sensitive synthetic consumer distinction.
+No actual measured fringe, independent phase calibration,
+physical gauge field or source meridian is available.
+
+Files with independent equivalent local Python PASS:
+scripts/check_horn_marked_orientation_whisker_cut.py
+(27 exact group-word families x4 identities, all 254 finite bit
+histories, fail-closed independent child-whisker control);
+scripts/check_horn_selected_w_fringe_orientation_cut.py
+(exact Fraction probability and odd-square, original same W
+matrix cross-check four phases, C3 conjugation, W inverse).
+New Lean #84 source-written HornMarkedMeridianOrientationCut.lean
+and HornWilsonFringeOrientationCut.lean; no Lean/Agda kernel
+check. Full source detail and attribution:
+docs/hyperfabric-horn-orientation-basing-fringe-ibrahim-maxcut-20261026.md.
+
+PARIETO/Ibrahim final obligation ordering:
+(1) #1244 relative satellite group/collar equivalence with
+correct Hatcher generator class (allow common conjugation/inverse);
+(2) one actual local loop length and whole finite-stage avoidance;
+(3) for curved source one actual BASED Stokes area/eta;
+(4) only then independently calibrated W/W^-1 interferometer,
+keeping C3-conjugation control and original #1247 authorship.
