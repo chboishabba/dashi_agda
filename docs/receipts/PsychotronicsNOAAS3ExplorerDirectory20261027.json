@@ -1,0 +1,50 @@
+{
+  "title": "Source-bounded first-party NOAA NODD directory evidence from user supplied S3 Explorer view",
+  "observed_at": "2026-10-27",
+  "provided_by": "user pasted public AWS S3 Explorer index listings; original data custodian NOAA/NCEI, AWS is delivery",
+  "attribution": "NOAA/NCEI original meteorological observations and product publication; user supplied first-party index transcription; Johl Brown directed cross-source inquiry with OpenAI ChatGPT case-specific analysis; no NOAA endorsement implied",
+  "first_party_aws_open_registry": "https://registry.opendata.aws/noaa-isd/",
+  "listed_directories": [
+    {
+      "bucket": "noaa-isd-pds",
+      "explorer": "https://noaa-isd-pds.s3.amazonaws.com/index.html",
+      "user_supplied_bucket_top_level_directory": "data/",
+      "root_entries_user_supplied": 39,
+      "historical_year_directory_1953_visibly_opened": false,
+      "verified_specific_1953_726071_14606_object_key": false,
+      "role": "source-original gzip fixed width ISD archive",
+      "NOAA_original_legacy_station_year_basename": "726071-14606-1953.gz",
+      "original_basename_previous_verified_listing": "https://www.ncei.noaa.gov/pub/data/noaa/1953/726071-14606-1953.gz"
+    },
+    {
+      "bucket": "noaa-global-hourly-pds",
+      "explorer": "https://noaa-global-hourly-pds.s3.amazonaws.com/index.html",
+      "user_supplied_directory": "1953/",
+      "station_year_entries_user_supplied": 2973,
+      "visible_first_page_entries": 50,
+      "verified_specific_bangor_csv_file_in_pasted_first_page": false,
+      "candidate_filename_derived_not_verified": "72607114606.csv",
+      "derived_or_converted_NOAA_CSV_not_independent_original_gauge": true,
+      "role": "NOAA ISD-converted Global Hourly station-year CSV"
+    }
+  ],
+  "publisher_original_claim_limits": {
+    "NOAA_1953_Bangor_legacy_station_year_exists": true,
+    "first_party_bucket_and_user_supplied_directories_only": true,
+    "exact_cloud_station_object_key_observed": false,
+    "remote_station_year_object_bytes_acquired": false,
+    "original_file_sha256_acquired_or_authenticated": false,
+    "1953_07_05_to_09_hour_rows_read": false,
+    "AA1_present_weather_precipitation_decoded_and_qc_approved": false,
+    "1953_Ellsworth_rain_onset_verified": false,
+    "experimental_weather_modification_causality_verified": false
+  },
+  "producer_root_deduplication": "NOAA/NCEI original observing reports, NOAA ISD original fixed-width product, NOAA ISD-derived CSV and NOAA GHCNh may share historic observers; archive bucket/year index is not an independent meteorological witness",
+  "source_processing": {
+    "original_locator": "scripts/locate_psychotronics_noaa_isd_1953_s3.py",
+    "original_format_hour_reader": "scripts/check_psychotronics_bangor_1953_isd_original.py",
+    "converted_year_CSV_locator_reader": "scripts/check_psychotronics_bangor_1953_cloud_csv.py",
+    "converted_CSV_UTC_fields": "raw STATION and DATE, opaque AA1, MW1 and QUALITY_CONTROL, not inferred precip onset"
+  },
+  "source_verification": "NOAA official registry and service migration also publicly verified; S3 object listings inaccessible to web tool and container DNS on this turn. Pasted first-party explorer directory listing is user-supplied evidence, not independently retrieved exact source-object bytes."
+}
