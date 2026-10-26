@@ -115,3 +115,94 @@ oppositeBoundaryGerm : (side : Approach) →
   ≡ BT.negate (signedGermConsumer zeroTurn side)
 oppositeBoundaryGerm fromNegative = refl
 oppositeBoundaryGerm fromPositive = refl
+
+
+------------------------------------------------------------------------
+-- ABC SIX-FOLD POSITION SYMMETRY (S3 = C3 semidirect C2)
+--
+-- The actual 3x3 ordered sheet -> 27 bracket cube already exists.
+-- Our ABC action permutes the THREE POSITIONS of a cube, not the
+-- low/mid/high alphabet symbols. The separately established
+-- TernaryPermutationS3LawsExact gives the abstract six-element group,
+-- and HexTruthS3CarrierBridgeExact proves its composition is NOT
+-- cyclic C6 hexXor. Do not conflate these separate actions.
+------------------------------------------------------------------------
+
+rotateABC : Cube27 → Cube27
+rotateABC (a , (b , c)) = b , (c , a)
+
+reflectABC : Cube27 → Cube27
+reflectABC = Torque.swapTorqueInputs
+
+rotateABCThree : (cube : Cube27) →
+  rotateABC (rotateABC (rotateABC cube)) ≡ cube
+rotateABCThree (a , (b , c)) = refl
+
+reflectABCTwo : (cube : Cube27) →
+  reflectABC (reflectABC cube) ≡ cube
+reflectABCTwo = Torque.swapTorqueInputsInvolutive
+
+-- This is the dihedral S3 relation, not commutativity:
+-- s r s = r^-1 = r^2.
+reflectRotateReflect : (cube : Cube27) →
+  reflectABC (rotateABC (reflectABC cube))
+  ≡ rotateABC (rotateABC cube)
+reflectRotateReflect (a , (b , c)) = refl
+
+-- Reuse the previously paid Levi-Civita table. A 3-cycle preserves
+-- signed torque orientation even on degenerate/zero voxels.
+rotatePreservesTorqueOrientation : (cube : Cube27) →
+  Torque.torqueOrientation (rotateABC cube)
+  ≡ Torque.torqueOrientation cube
+rotatePreservesTorqueOrientation (Hyper.axis-low , (Hyper.axis-low , Hyper.axis-low)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-low , (Hyper.axis-low , Hyper.axis-mid)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-low , (Hyper.axis-low , Hyper.axis-high)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-low , (Hyper.axis-mid , Hyper.axis-low)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-low , (Hyper.axis-mid , Hyper.axis-mid)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-low , (Hyper.axis-mid , Hyper.axis-high)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-low , (Hyper.axis-high , Hyper.axis-low)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-low , (Hyper.axis-high , Hyper.axis-mid)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-low , (Hyper.axis-high , Hyper.axis-high)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-mid , (Hyper.axis-low , Hyper.axis-low)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-mid , (Hyper.axis-low , Hyper.axis-mid)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-mid , (Hyper.axis-low , Hyper.axis-high)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-mid , (Hyper.axis-mid , Hyper.axis-low)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-mid , (Hyper.axis-mid , Hyper.axis-mid)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-mid , (Hyper.axis-mid , Hyper.axis-high)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-mid , (Hyper.axis-high , Hyper.axis-low)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-mid , (Hyper.axis-high , Hyper.axis-mid)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-mid , (Hyper.axis-high , Hyper.axis-high)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-high , (Hyper.axis-low , Hyper.axis-low)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-high , (Hyper.axis-low , Hyper.axis-mid)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-high , (Hyper.axis-low , Hyper.axis-high)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-high , (Hyper.axis-mid , Hyper.axis-low)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-high , (Hyper.axis-mid , Hyper.axis-mid)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-high , (Hyper.axis-mid , Hyper.axis-high)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-high , (Hyper.axis-high , Hyper.axis-low)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-high , (Hyper.axis-high , Hyper.axis-mid)) = refl
+rotatePreservesTorqueOrientation (Hyper.axis-high , (Hyper.axis-high , Hyper.axis-high)) = refl
+
+-- The parity-odd generator negates torque orientation. The existing
+-- source proof handles the 21 degenerate voxels as actual zeros.
+reflectNegatesTorqueOrientation : (cube : Cube27) →
+  Torque.torqueOrientation (reflectABC cube)
+  ≡ BT.negate (Torque.torqueOrientation cube)
+reflectNegatesTorqueOrientation = Torque.swapTorqueInputsNegatesOrientation
+
+-- Explicitly instantiate opposite sine-consumer orientations from
+-- two cyclic/even arrangements that have SAME positive torque sign:
+-- ABC = (low,mid,high) and (mid,high,low).
+-- This is a negative control for treating torque parity as sine sign.
+positiveABCVoxel : Cube27
+positiveABCVoxel = Hyper.axis-low , (Hyper.axis-mid , Hyper.axis-high)
+
+rotatedPositiveABCVoxel : Cube27
+rotatedPositiveABCVoxel = rotateABC positiveABCVoxel
+
+positiveTorqueOnOriginal :
+  Torque.torqueOrientation positiveABCVoxel ≡ BT.pos
+positiveTorqueOnOriginal = refl
+
+positiveTorqueAfterEvenRotation :
+  Torque.torqueOrientation rotatedPositiveABCVoxel ≡ BT.pos
+positiveTorqueAfterEvenRotation = refl
