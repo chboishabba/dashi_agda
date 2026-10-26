@@ -23,6 +23,17 @@ def check(source, selected, *, audit_fn, selected_validate_fn):
     # RECOMPUTE, rather than trusting flags from a separately supplied audit.
     report=audit_fn(source)
     sel=selected_validate_fn(selected)
+    # Fail closed on cross-run version drift, even when table identifiers
+    # and observed class signatures happen to agree. Versions are
+    # self-reported source metadata, NOT authentication of the runtime.
+    for source_key,selected_key in (
+        ("gap_runtime_version","gap_version"),
+        ("ctbllib_runtime_version","ctbllib_version"),
+    ):
+        value=source.get(source_key)
+        if (not isinstance(value,str) or not value
+                or value!=sel[selected_key]):
+            raise ValueError("source runtime version mismatch: "+source_key)
     # Bind ALL 6.Suz conjugacy-class coordinates, not merely the order,
     # class count, two central positions and source Irr row indices.
     # A noncentral class permutation can preserve those weaker fingerprints.
@@ -146,6 +157,8 @@ def check(source, selected, *, audit_fn, selected_validate_fn):
         selected_atlas_12=list(pair12),selected_atlas_78=list(pair78),
         selected_irr_positions12=list(sel["positions12"]),
         selected_irr_positions78=list(sel["positions78"]),
+        matched_GAP_version=sel["gap_version"],
+        matched_CTBLlib_version=sel["ctbllib_version"],
         bound_suzuki_table_group_order=sel["source_order"],
         bound_suzuki_table_class_count=sel["source_classes"],
         selected_78_c3_exponents=list(p78),central_C2_trace=trace,
