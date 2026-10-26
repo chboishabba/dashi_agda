@@ -149,3 +149,34 @@ def test_novelty_run_structure_separates_equal_histograms():
     assert ib==(True,True,True,False,False,False)
     assert H.equal_flag_runs(ga)!=H.equal_flag_runs(ib)
     assert sum(ga)==sum(ib)==3
+
+
+def test_iid_expectation_independent_enumeration_of_all_draw_sequences():
+    from itertools import product
+    for p in ((F(1,2),F(1,2)),(F(1,2),F(1,3),F(1,6))):
+        for n in range(5):
+            enumerated=sum((len(set(word))*__import__('math').prod(p[i] for i in word)
+                            for word in product(range(len(p)),repeat=n)),F())
+            assert enumerated==H.expected_iid_vocabulary(p,n)
+
+
+def test_permutation_expectation_independent_multiset_enumeration():
+    for counts in ((1,1,2),(2,2,2),(3,2,1)):
+        word=tuple(i for i,f in enumerate(counts) for _ in range(f))
+        all_perms=set(permutations(word))
+        assert all_perms
+        for n in range(len(word)+1):
+            mean=F(sum(len(set(s[:n])) for s in all_perms),len(all_perms))
+            assert mean==H.expected_permutation_vocabulary(counts,n)
+
+
+def test_head_conditioning_matches_half_l1_subset_supremum():
+    from itertools import combinations
+    p=H.finite_rank_probabilities(5,2,1)
+    for keep in (1,3,5):
+        q=H.conditioned_head(p,keep)
+        sup=max((abs(sum((p[i]-q[i] for i in subset),F()))
+                 for r in range(len(p)+1)
+                 for subset in combinations(range(len(p)),r)))
+        assert 2*sup==H.l1_probability_distance(p,q)
+        assert sup==sum(p[keep:],F())
