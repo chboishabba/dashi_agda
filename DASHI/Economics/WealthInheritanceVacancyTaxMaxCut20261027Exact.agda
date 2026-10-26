@@ -117,6 +117,30 @@ wealthLiabilitiesDiffer :
 wealthLiabilitiesDiffer ()
 
 ------------------------------------------------------------------------
+-- SAME LIABILITY DOES NOT DETERMINE CORPORATE CONTROL / VOTING RIGHTS.
+------------------------------------------------------------------------
+
+record OwnershipSnapshot : Set where
+  constructor ownership-snapshot
+  field
+    totalNetWealthUnits : Nat
+    votingRightsUnits : Nat
+open OwnershipSnapshot public
+
+wealthLevyFromSnapshot : Nat → OwnershipSnapshot → Nat
+wealthLevyFromSnapshot threshold s = totalNetWealthUnits s ∸ threshold
+
+sameTaxDifferentVotingPower :
+  wealthLevyFromSnapshot 3 (ownership-snapshot 5 1) ≡
+  wealthLevyFromSnapshot 3 (ownership-snapshot 5 7)
+sameTaxDifferentVotingPower = refl
+
+votingPowerCannotBeRecoveredFromSameLiability :
+  votingRightsUnits (ownership-snapshot 5 1) ≡
+  votingRightsUnits (ownership-snapshot 5 7) → ⊥
+votingPowerCannotBeRecoveredFromSameLiability ()
+
+------------------------------------------------------------------------
 -- PRIMARY-SOURCE ROLES AND CLOSED/OPEN ASSERTION BOUNDARIES.
 ------------------------------------------------------------------------
 
