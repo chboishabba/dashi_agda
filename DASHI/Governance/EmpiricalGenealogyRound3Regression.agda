@@ -352,3 +352,55 @@ braidedProvenanceDoesNotClaimIndigenousKnowledge :
     Braid.canonicalBraidedEnemyRoleBoundary
   ≡ false
 braidedProvenanceDoesNotClaimIndigenousKnowledge = refl
+
+
+------------------------------------------------------------------------
+-- 2026-10-26: climate-source-producer bridge and selective non-promotion.
+-- Named team contributors / historic funders / later speakers have typed
+-- receipts, but are not thereby joined into an unbroken control hierarchy.
+------------------------------------------------------------------------
+
+exxonAPIPlanParticipantIsExplicitlyNamed :
+  Typed.evidenceStrength Climate.apiNamedContributorRandyRandol ≡ Typed.primary
+exxonAPIPlanParticipantIsExplicitlyNamed = refl
+
+cfactAPIPlanParticipantIsExplicitlyNamed :
+  Typed.evidenceStrength Climate.apiNamedContributorDavidRothbard ≡ Typed.primary
+cfactAPIPlanParticipantIsExplicitlyNamed = refl
+
+historicHancockIPAMoneyIsFundingNotAnEditorialOrder :
+  Typed.relationKind Climate.hancockIPAHistoricalDonations ≡ Typed.funding
+historicHancockIPAMoneyIsFundingNotAnEditorialOrder = refl
+
+shellDepartureIsRecordedHistoricalOrganisationChange :
+  Typed.relationKind Climate.shellGCCDefection1998 ≡ Typed.organisationalContinuity
+shellDepartureIsRecordedHistoricalOrganisationChange = refl
+
+mooreCO2ChairIsAffiliationNotProofOfCommission :
+  Typed.relationKind Climate.mooreCO2Chair ≡ Typed.personnelContinuity
+mooreCO2ChairIsAffiliationNotProofOfCommission = refl
+
+apiPlanParticipationCannotBecomeMethodTransmission :
+  Typed.StrongHistoricalTransfer Climate.apiNamedContributorRandyRandol → ⊥
+apiPlanParticipationCannotBecomeMethodTransmission =
+  Climate.apiContributorNotMethodTransfer
+
+hancockIPAFundingCannotBecomeAutomaticMessageControl :
+  Typed.StrongHistoricalTransfer Climate.hancockIPAHistoricalDonations → ⊥
+hancockIPAFundingCannotBecomeAutomaticMessageControl =
+  Climate.ipaFundingNotEditorialMethod
+
+cfact1998And2026DoNotAutomaticallyProveContinuousPlan :
+  Typed.StrongHistoricalTransfer Climate.cfactAPITo2026Continuity → ⊥
+cfact1998And2026DoNotAutomaticallyProveContinuousPlan =
+  Climate.cfactContinuationNotPlanTransfer
+
+foundationIncomeNotSameAsClimateDenialExpenditure :
+  Climate.ConcentratedSourceAuditBoundary.900mOrganisationRevenueIsClimateSpecificSpending
+    Climate.canonicalConcentratedSourceAuditBoundary ≡ false
+foundationIncomeNotSameAsClimateDenialExpenditure = refl
+
+industryDefectionsNotErased :
+  Climate.ConcentratedSourceAuditBoundary.shellBPDefectionsPreservedAsCounterExamples
+    Climate.canonicalConcentratedSourceAuditBoundary ≡ true
+industryDefectionsNotErased = refl
