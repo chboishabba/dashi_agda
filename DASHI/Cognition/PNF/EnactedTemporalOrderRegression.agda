@@ -59,3 +59,32 @@ arrivingEPrecedesArrivingC = Temporal.receptionEC
 sourceCPrecedesSourceE : (Temporal._earlier?_ Temporal.sourceC Temporal.sourceE) ≡
   true
 sourceCPrecedesSourceE = Temporal.sourceCE
+
+
+-- Consumer-relative refinement:
+-- receiver C@80/E@60 alone cannot distinguish the two source orders,
+-- while independently known exact delay profiles separate THIS finite pair.
+sourceOrdersCollideAtReceiver :
+  Temporal.observedArrivals Temporal.cSourceFirstWithCrossingDelay ≡
+  Temporal.observedArrivals Temporal.eSourceFirstWithOtherDelay
+sourceOrdersCollideAtReceiver =
+  Temporal.twoSourcesSameLabelledArrival
+
+sourceOrderWithFirstCalibration :
+  Temporal.readSourceOrderWithCalibration
+    (Temporal.calibratedObserver
+      Temporal.cSourceFirstWithCrossingDelay)
+    ≡ Temporal.sourceCFirst
+sourceOrderWithFirstCalibration = refl
+
+sourceOrderWithSecondCalibration :
+  Temporal.readSourceOrderWithCalibration
+    (Temporal.calibratedObserver
+      Temporal.eSourceFirstWithOtherDelay)
+    ≡ Temporal.sourceEFirst
+sourceOrderWithSecondCalibration = refl
+
+-- The synthetic delays really compose to the identical receiver readings.
+secondWorldCArrives80 :
+  50 + 30 ≡ 80
+secondWorldCArrives80 = Temporal.secondWorldCArrival
