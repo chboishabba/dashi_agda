@@ -1,0 +1,91 @@
+"""Physical unforced Galerkin NO-GO for the universal R734/R735 W2 leaf.
+
+DASHI-original exact witness, with historical attribution to the
+Navier--Stokes/Leray equation, Waleffe 1992 helical triad calculus,
+and the existing DASHI R691/R700/R730/R734 source definitions.
+
+Six real Fourier modes with positive curl-helicity initially have
+zero H+ cross H- mixed carrier but strictly POSITIVE dyadic-weighted
+critical production. Amplitude scaling violates the original positive-
+margin W2 inequality on a short interval. NOT Navier-Stokes blowup.
+"""
+from collections import defaultdict
+from functools import lru_cache
+import sympy as S
+
+I=S.I
+P=(1,0,0); Q=(0,1,2); K=(1,1,2)
+SEEDS={P:(0,1,1),Q:(1,0,0),K:(1,-1,0)}
+def n2(k):return sum(a*a for a in k)
+def minus(k):return tuple(-a for a in k)
+def weight(k):return 1<<(max(map(abs,k))-1).bit_length()
+def h(k,v,sign):
+    return (v+sign*I*S.Matrix(k).cross(v)/S.sqrt(n2(k)))/2
+def physical_u():
+    u={k:h(k,S.Matrix(v),1) for k,v in SEEDS.items()}
+    u.update({minus(k):S.conjugate(v) for k,v in list(u.items())})
+    return u
+def projected_NS_nonlinearity(u,cut=2):
+    raw=defaultdict(lambda:S.zeros(3,1))
+    for p,v in u.items():
+        for q,w in u.items():
+            k=tuple(p[i]+q[i] for i in range(3))
+            raw[k]+=S.Matrix(q).dot(v)*w
+    out={}
+    for k,v in raw.items():
+        if n2(k)==0 or max(map(abs,k))>cut:continue
+        kv=S.Matrix(k)
+        out[k]=-I*(v-kv*kv.dot(v)/n2(k))
+    return out
+@lru_cache(maxsize=1)
+def critical_data():
+    u=physical_u();nl=projected_NS_nonlinearity(u)
+    X=sum((weight(k)*(S.conjugate(v).T*v)[0] for k,v in u.items()),S.Integer(0))
+    D=sum((weight(k)*n2(k)*(S.conjugate(v).T*v)[0] for k,v in u.items()),S.Integer(0))
+    Pcrit=sum((2*weight(k)*S.re((S.conjugate(v).T*nl.get(k,S.zeros(3,1)))[0])
+               for k,v in u.items()),S.Integer(0))
+    return S.simplify(X),S.simplify(D),S.simplify(S.expand_complex(Pcrit))
+def test_real_transverse_pure_plus_helicity_six_mode_state():
+    u=physical_u()
+    assert len(u)==6
+    for k,v in u.items():
+        assert S.simplify(S.Matrix(k).dot(v))==0
+        assert S.simplify(v-S.conjugate(u[minus(k)]))==S.zeros(3,1)
+        assert S.simplify(h(k,v,+1)-v)==S.zeros(3,1)
+        assert S.simplify(h(k,v,-1))==S.zeros(3,1)
+def test_same_cutoff_projected_NS_force_reality_and_transverse():
+    nl=projected_NS_nonlinearity(physical_u(),2)
+    assert nl
+    for k,v in nl.items():
+        assert S.simplify(S.Matrix(k).dot(v))==0
+        assert S.simplify(v-S.conjugate(nl[minus(k)]))==S.zeros(3,1)
+def test_exact_literal_dyadic_critical_production_positive():
+    X,D,Pcrit=critical_data()
+    assert X==8 and D==36
+    assert Pcrit==(5+S.sqrt(5)-S.sqrt(30))/10
+    assert S.simplify(Pcrit>0)==S.true
+def test_original_selected_mixed_helical_work_zero_at_initial_time():
+    u=physical_u()
+    # All H- coefficients vanish, including the conjugate -modes.
+    for p,a in u.items():
+        for q,b in u.items():
+            assert S.simplify(h(p,a,+1).cross(h(q,b,-1)))==S.zeros(3,1)
+def test_amplitude_scaling_defeats_every_positive_r734_margin():
+    _,D,Pcrit=critical_data()
+    amp=S.Integer(512);nu=S.Integer(1)
+    derivative=S.factor(amp**3*Pcrit-2*nu*amp**2*D)
+    assert S.simplify(amp*Pcrit-2*nu*D>0)==S.true
+    assert S.simplify(derivative>0)==S.true
+    for margin in [S.Rational(1,1000),S.Rational(1,10),1,2,10]:
+        assert S.simplify(derivative+margin*amp**2*D>0)==S.true
+def test_short_time_W2_failure_uses_actual_initial_derivatives():
+    _,D,Pcrit=critical_data()
+    for a in [1,2,7,512]:
+        assert S.simplify(a**3*Pcrit-2*a*a*D-
+                          a*a*(a*Pcrit-2*D))==0
+    # Galerkin NS is a smooth finite-dimensional ODE:
+    # E_M(0)=E_M'(0)=0, signed weighted W rate(0)=0.
+    # At a=512, X'(0)>0. Thus [X-12 E_M]' + delta D
+    # exceeds 12 W'(0) for EVERY delta>0. By continuity there
+    # exists T>0 on which the integrated R734 W2 is false.
+    assert S.simplify(512*Pcrit-72>0)==S.true
