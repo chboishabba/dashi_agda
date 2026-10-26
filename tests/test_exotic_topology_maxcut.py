@@ -17,6 +17,7 @@ import exotic_topology_cw_donor_reuse as cw
 import exotic_topology_binary_ternary_pants as codec
 import exotic_topology_pl_surface_gluings as pl
 import exotic_topology_pl_frontier_lineage as lineage
+import exotic_topology_pl_complement_components as complement
 import exotic_topology_braid_crosspr_discriminator as braid
 import exotic_topology_cantor_measure_obstruction as measure
 # Native scripts are owned upstream by horned-sphere PR #1244.
@@ -148,5 +149,52 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertEqual(receipt['exact_rational_samples'], 867)
         self.assertEqual(receipt['domain'], '(15/4,17/4) x open unit disk')
         self.assertFalse(receipt['global_topology_machine_proof'])
+
+
+    def test_real_complement_components_follow_old_boundary_at_every_stage(self):
+        result = complement.audit(max_depth=3)
+        self.assertTrue(result['finite_pl_inclusion_and_complement_components'])
+        self.assertFalse(result['richards_infinite_end_space_proved'])
+        self.assertFalse(result['kernel_verified'])
+        self.assertEqual(
+            [r['components'] for r in result['families']['cantor']],
+            [1, 2, 4])
+        self.assertEqual(
+            [r['new_boundaries'] for r in result['families']['cantor']],
+            [2, 4, 8])
+        self.assertEqual(
+            [r['components'] for r in result['families']['loch']],
+            [1, 1, 1])
+        self.assertEqual(
+            [r['components'] for r in result['families']['jacob']],
+            [2, 2, 2])
+        self.assertTrue(all(r['geometric_child_incidence_verified']
+                            and r['same_object_old_inclusion']
+                            for rs in result['families'].values() for r in rs))
+
+    def test_complement_bridge_rejects_wrong_old_vertex_inclusion(self):
+        old, piece = complement.initial('cantor')
+        new, actual_map = lineage.attach(old, piece, (), ((0,), (1,)),
+                                         with_transport=True)
+        # An actual connected pants attachment exists, but claiming a
+        # constant vertex map erases the embedded old simplices.
+        bogus_map = {v: 0 for v in actual_map}
+        with self.assertRaises(AssertionError):
+            complement.verify_complement_components(
+                old, new, bogus_map, 'cantor')
+
+    def test_complement_bridge_rejects_wrong_geometric_lineage(self):
+        old, piece = complement.initial('cantor')
+        new, actual_map = lineage.attach(old, piece, (), ((0,), (1,)),
+                                         with_transport=True)
+        # Swapping or falsifying a child's literal boundary label
+        # changes the consumer's expected parent/child incidence even
+        # if the surface and all Euler data stay unchanged.
+        original = new.frontier.pop((0,))
+        new.frontier[(7,)] = original
+        new.verify((0, 2))
+        with self.assertRaises(AssertionError):
+            complement.verify_complement_components(
+                old, new, actual_map, 'cantor')
 
 if __name__ == '__main__': unittest.main()
