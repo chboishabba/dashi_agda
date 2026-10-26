@@ -136,3 +136,53 @@ freerDonorSnowball :
   Snowball.SourceRoleSnowballReceipt cameronFreerHilbert10
 freerDonorSnowball =
   Snowball.canonicalSourceRoleSnowballReceipt cameronFreerHilbert10
+
+
+-- 27 October new mathematical declarations receive their OWN first SHA,
+-- not the older source-file creation date. Original Jones 1982 nine-
+-- variable priority and BCH2026 interpretation remain separately credited.
+-- No source commit is a Lean kernel typecheck or full SCI theorem.
+
+leanLeastIndexProofFirstSourceCommit : Chronology.FirstImplementationReceipt
+leanLeastIndexProofFirstSourceCommit =
+  Chronology.first-implementation-receipt
+    "RequestProject.Autoformalisation.LostInTranslationNineVariables.sourceIndex_is_least_matching_code"
+    "6b13cffa870f01093e4cda5435b6345ef06e68f7"
+    "2026-10-26T16:20:22Z"
+    "2026-10-27T02:20:22+10:00"
+    "Australia/Brisbane"
+    Chronology.theoremStatementImplemented
+    Chronology.sourceCommittedOnly
+
+leanA4ArbitraryOracleNoGoFirstSourceCommit : Chronology.FirstImplementationReceipt
+leanA4ArbitraryOracleNoGoFirstSourceCommit =
+  Chronology.first-implementation-receipt
+    "RequestProject.Autoformalisation.LostInTranslationAlternation.arbitrary_zero_one_function_can_encode_any_predicate"
+    "fefb51353b148851e6c587bf25fb0aaf47654e48"
+    "2026-10-26T16:28:32Z"
+    "2026-10-27T02:28:32+10:00"
+    "Australia/Brisbane"
+    Chronology.theoremStatementImplemented
+    Chronology.sourceCommittedOnly
+
+leanNineToKPaddingFirstSourceCommit : Chronology.FirstImplementationReceipt
+leanNineToKPaddingFirstSourceCommit =
+  Chronology.first-implementation-receipt
+    "RequestProject.Autoformalisation.LostInTranslationPadding"
+    "fd107651eff6827d72a02b2bb0a201d58a87c2fa"
+    "2026-10-26T16:31:43Z"
+    "2026-10-27T02:31:43+10:00"
+    "Australia/Brisbane"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
+
+leanPolynomialArityKFirstSourceCommit : Chronology.FirstImplementationReceipt
+leanPolynomialArityKFirstSourceCommit =
+  Chronology.first-implementation-receipt
+    "RequestProject.Autoformalisation.LostInTranslationPadding.source_polynomial_root_iff_arity_k"
+    "8048184bd6f6002b6c120f397a0cd09d055b30f3"
+    "2026-10-26T16:33:58Z"
+    "2026-10-27T02:33:58+10:00"
+    "Australia/Brisbane"
+    Chronology.theoremStatementImplemented
+    Chronology.sourceCommittedOnly
