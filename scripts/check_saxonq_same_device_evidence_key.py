@@ -20,17 +20,21 @@ class DeviceRun:
     raw_observation_id: str
 
     def complete(self):
-        return all(getattr(self, x) for x in self.__dataclass_fields__)
+        return all(getattr(self, x).strip() not in {"", "unknown", "not_reported", "no_raw_data"}\n                   for x in self.__dataclass_fields__)
 
 def same_device_run(a: DeviceRun, b: DeviceRun):
     """Full exact match *required* for auto-join; incomplete keys fail closed."""
     return a.complete() and b.complete() and a == b
 
 def test():
-    base=DeviceRun("arxiv:2609.13022","three_nuclear_spin_Grover",
-                   "unknown", "unknown", "three_qubit_Grover", "unknown",
-                   "unknown","unknown")
-    assert same_device_run(base,base)  # synthetic complete example, not evidence
+    base=DeviceRun("synthetic:reference","synthetic_three_qubit_Grover",
+                   "synthetic_chip", "synthetic_config", "synthetic_protocol", "2026-10-26",
+                   "synthetic_calibration","synthetic_raw_id")
+    assert same_device_run(base,base)  # fabricated fixture, NOT hardware evidence
+    paper=DeviceRun("arxiv:2609.13022","three_nuclear_spin_Grover",
+                    "unknown", "unknown", "three_qubit_Grover", "unknown",
+                    "unknown", "unknown")
+    assert not same_device_run(paper,paper)
     partial=DeviceRun(*([""]*8))
     assert not same_device_run(partial,partial)
     vendor=DeviceRun("saxonq:2026-08","SXQ128","aggregate_16_cores",
