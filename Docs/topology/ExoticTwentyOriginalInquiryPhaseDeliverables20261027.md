@@ -236,3 +236,79 @@ original question's surface families
 OPEN flag. This result is a same-object
 stage-prefix inverse-limit advance rather
 than all-surface classification.
+
+
+## 27 October late: a two-link topology proof cut instead of another finite fixture
+
+**First link — actual symbolic topology:** companion
+Lean #86 source-writes
+`Synthesis/ExoticTopologyCantorInverseLimitHomeomorph.lean`.
+The EXISTING source `CompatibleCantorTower` (binary
+coherent Fin-n-addresses from `Integration.Address`)
+is equipped with the actual induced topology from
+the product of all finite stage spaces.
+The file uses **pinned Mathlib v4.28.0**
+`continuous_pi`, `continuous_apply`,
+`continuous_induced_rng`, and the original
+`cantorSetHomeomorphNatToBool`, giving
+a source-written homeomorphism from coherent
+symbolic frontiers to both binary streams and
+the literal real middle-thirds Cantor set.
+Actual individual stage cylinders are
+source-written **clopen** using pinned
+`isClopen_discrete` and `IsClopen.preimage`,
+and their child-event nesting uses the
+original tower compatibility proof.
+These source-written Lean results are not
+yet kernel-compiled. They do not establish
+anything about open/closed subsets of
+the connected infinite PL surface itself.
+
+**Second link — topology compact-cofinality:**
+latest parent #1244 has a genuine consumer of
+`Mathlib.IsCompact.elim_directed_cover`
+in `HatcherOpenExhaustionCompactAbsorption.lean`.
+After non-destructive parent merge
+`0a9f434589bf494624835ed86d0c1b2af0efa51b`,
+the child directly tests the original script
+`alexander_horned_c3_open_exhaustion_severe_controls.py`:
+increasing-but-closed and open-but-nondirected
+negative examples, and a positive directed-open
+cover. The source-specific Hatcher group/direct
+limit inputs remain open.
+
+The companion new native Lean #86 module
+`Synthesis/ExoticTopologyCollaredCompactCofinality.lean`
+proves *conditionally on actual topological stages*
+that monotonic exhaustive `K_n` with
+`K_n⊆interior(K_(n+1))` absorb EVERY compact
+subset of X into some K_N, as well as images
+of compact parametrised loops/homotopies.
+It uses the SAME original Mathlib directed-open
+compact absorption theorem rather than
+duplicating the formal donor from #1244.
+
+**Revised P2/P3 critical path:** construct one
+actual countable locally finite oriented PL
+surface X, with genuine compact stages `K_n`,
+all-n collar inclusions, and source-owner
+triangulation/gluing; then instantiate this
+compact cofinality bridge automatically.
+Next prove the actual unbounded connected
+complement regions represent the unique
+ends and have the compatible symbolic
+cylinder basis. The genuine end homeomorphism
+then factors through the already source-written
+topological compatible-tower ↔ real Cantor
+homeomorphism. Decorated genus still requires
+the selected nonplanar-end proof at Jacob/Loch
+tails.
+
+**Clear work/status split:** actual upstream
+Mathlib theorem source inspected at v4.28;
+new Lean source code committed; no passing
+exact-head Lean kernel or Agda module receipt;
+underlying infinite PL geometric X still
+unbuilt in Lean/Agda. No classical theorem
+or user-authored mathematical claim is
+rewritten as an AI discovery.
