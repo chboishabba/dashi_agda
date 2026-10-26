@@ -66,3 +66,66 @@ Independently owned **unmerged** source donors: Agda #1255 and Lean #87 (source-
 | P2 | Source-first severe falsification of attempted automatic translation, including withholding unsafe admission on missing witness | Reducing all fidelity to a single AI-score badge |
 
 **Stop rules:** one original source per BCH paper/preprint/html mirror; do not re-attribute OpenAI code or historical Lean declarations to critics; do not treat a paper's *claim* of mismatch as a kernel result; do not treat a formal finite countermodel as a physical NS solution; maintain author/source/claim/implementation/validation as separate coordinates.
+
+
+## 27 October donor discovery: Cameron Freer's actual Hilbert10 Lean spine
+
+A focused 2026 literature and repository search found **Cameron Freer**,
+[**Hilbert's tenth problem in Lean**](https://github.com/cameronfreer/hilbert10)
+(original software, Apache-2.0, `CITATION.cff` version **2.4.0**).
+This was **not** retrieved as an independent preprint affirming BCH2026,
+and was not written by BCH, OpenAI or DASHI.
+
+The **actual source files were fetched**, not simply a search-result snippet:
+
+- [`Hilbert10/DPRM.lean`](https://github.com/cameronfreer/hilbert10/blob/main/Hilbert10/DPRM.lean)
+  attributes the code to Cameron Freer. It contains
+  `Hilbert10.REPred.dioph` and
+  `Hilbert10.dioph_iff_rePred`, the semantic equivalence of
+  Diophantine and recursively enumerable predicates on finite
+  natural-number tuples. Freer's README reports the public spine
+  typechecks and is axiom-audited; **we have not independently run
+  its kernel build at a pinned SHA**.
+- [`Hilbert10/Endpoints.lean`](https://github.com/cameronfreer/hilbert10/blob/main/Hilbert10/Endpoints.lean)
+  contains `natSolvable_re_complete` and
+  `not_computablePred_natSolvable`, as well as the integer-form
+  endpoints. **Those are actual original donor declarations**,
+  not BCH's `Sigma^0_2` minimum-presupposition theorem.
+- [`Hilbert10/Universal.lean`](https://github.com/cameronfreer/hilbert10/blob/main/Hilbert10/Universal.lean)
+  contains `exists_universal_mvPolynomial`:
+  **`∃ k U, ∀ e x y, ... ↔ ∃ z : Fin k → Nat, U(e,x,y,z)=0`**.
+  The universal `k` is fixed *before* inputs, which is stronger
+  than merely choosing a different polynomial for every program.
+  **There is nevertheless no source claim or theorem conclusion
+  that `k≤9`**. The nine-unknown refinement BCH Theorems
+  A.3/A.4 use thus remains a separate mathematical proof dependency.
+- `Hilbert10/lean-toolchain` is **v4.35.0-rc4**, and its
+  `lakefile.toml` pins Mathlib commit
+  `d3739f06187591e81887886ca767b6a2dc1416ea`.
+  **dashi_lean4** pins root Lean **v4.35.0-rc3** but Mathlib
+  **v4.28.0**. We did **not** modify either original lockfile,
+  pull external files into DASHI, or assert binary/library
+  compatibility.
+
+The companion Lean `LostInTranslationSCI.lean` adds an **exact
+finite logical gate**:
+`HasAtMostNineWitnesses R -> HasSomeWitnessCount R`, whereas
+the reverse does **not** hold for arbitrary witness-count properties
+(e.g. `R k := k=10`). This is *not* a claim that Freer's
+polynomial requires ten variables: it proves that a source theorem
+with an existential witness count cannot alone pay a uniform
+nine-variable bound. It is a proof-obligation discriminator for
+auditing a proposed DPRM reuse, and independently retains Freer's
+source authorship.
+
+**Updated Pareto/Snowball decision:** the *general semantic DPRM*
+foundation no longer needs to be written from scratch if the
+independent Freer library is accepted and ported carefully.
+The remaining true frontier is (i) a compatible exact-head
+mathlib/Lean import, (ii) either a faithful nine-unknown refinement
+or a replacement construction proving BCH's `k≥9`
+claim, (iii) the NTOT-to-`d` reduction and `Sigma^0_l`
+alternating-quantifier hierarchy/Post theorem, and (iv) the
+source's explicit SCI tower conclusion. A general H10
+undecidability theorem alone does **not** imply A.3/A.4, nor
+do different Mathlib versions magically identify theorem types.
