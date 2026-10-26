@@ -82,3 +82,25 @@ print('PASS imported original source states: 16 LH SM weights plus 11 RH exotic 
 print('PASS conventional hypercharge 6Y=-q_z and every 27 weight descends')
 print('PASS E21 is a weak doublet with 6Y=+3; nonzero E32 reduces SU2R')
 print('OPEN E21 source vacuum, full H eta/CS/WZ, interval spectrum and Earth source')
+
+
+# The source IR Standard-Model subgroup is perturbatively anomaly-free
+# SEPARATELY in its 16 LH sector and 11 RH exotic sector (which pairs
+# into vectorlike charge conjugates). Use one SU3/SU2 fundamental Dynkin
+# normalization consistently; SU3^2 U1 counts m/3 color multiplets,
+# SU2^2 U1 counts m/2 weak doublets.
+intermediate=[
+ ('LH',1,1,1,6),('LH',2,0,-4,3),('LH',2,0,2,3),
+ ('LH',0,1,-3,2),('LH',0,0,6,1),('LH',0,0,0,1),
+ ('RH',1,0,-2,3),('RH',2,0,2,3),
+ ('RH',0,1,3,2),('RH',0,1,-3,2),('RH',0,0,0,1)]
+for hand in ('LH','RH'):
+    grp=[(t,s,q,m) for h,t,s,q,m in intermediate if h==hand]
+    assert sum(m for t,s,q,m in grp)==(16 if hand=='LH' else 11)
+    assert sum(m*q for t,s,q,m in grp)==0
+    assert sum(m*q**3 for t,s,q,m in grp)==0
+    assert sum((m//3)*q for t,s,q,m in grp if t)==0 # SU3²U1
+    assert sum((m//2)*q for t,s,q,m in grp if s)==0 # SU2²U1
+    assert sum(m*(1 if t==1 else -1) for t,s,q,m in grp if t)==0 # SU3³
+    assert sum(m//2 for t,s,q,m in grp if s)%2==0
+print('PASS IR SM chiral 16 and RH exotic 11: separate local anomaly sums vanish')
