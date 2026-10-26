@@ -114,6 +114,50 @@ dyadicCriticalEnergyAsSignedHelicityPlusNegativeAndDefect
     w radius plusMass minusMass =
   solve (w ∷ radius ∷ plusMass ∷ minusMass ∷ [])
 
+------------------------------------------------------------------------
+-- R734 / R92 EXACT WALEFFE-TRIAD WEIGHT CURVATURE (2026-10-27)
+--
+-- Original triad conservation roots: Waleffe (1992); inherited R92/R102.
+-- Source-specific witness: tests/test_ns_r734_phase_curvature.py.
+-- For an ordered positive-helicity triad with radial frequencies a<b<c,
+-- modal paired transfers are A*(b-c,c-a,a-b). The following RATIONAL
+-- polynomial identities do not claim that the original physical |k|
+-- square roots, Galerkin nonlinear force, or A are inhabited by this
+-- rational carrier. They DO preserve exact algebra and avoid importing
+-- false universal R734 W2 positivity.
+--
+-- Weighted production is A times a spectral secant-slope difference:
+-- ((b-c)wp+(c-a)wq+(a-b)wk)
+--    = (c-b)(wq-wp) - (b-a)(wk-wq).
+-- There is no division by an unproved spectral gap in this certificate.
+------------------------------------------------------------------------
+
+waleffeTriadEnergyTransferCyclicZero :
+  (small middle large : ℚ) →
+  ((middle - large) + (large - small)) + (small - middle) ≡ 0ℚ
+waleffeTriadEnergyTransferCyclicZero small middle large =
+  solve (small ∷ middle ∷ large ∷ [])
+
+waleffeTriadExactRadiusTransferCyclicZero :
+  (small middle large : ℚ) →
+  ((small * (middle - large)) + (middle * (large - small)))
+     + (large * (small - middle)) ≡ 0ℚ
+waleffeTriadExactRadiusTransferCyclicZero small middle large =
+  solve (small ∷ middle ∷ large ∷ [])
+
+weightedTriadProductionAsSecantNumerator :
+  (amplitude small middle large lowWeight middleWeight highWeight : ℚ) →
+  amplitude *
+    (((middle - large) * lowWeight +
+       (large - small) * middleWeight) +
+       (small - middle) * highWeight)
+  ≡ amplitude *
+    ((large - middle) * (middleWeight - lowWeight) -
+     (middle - small) * (highWeight - middleWeight))
+weightedTriadProductionAsSecantNumerator
+    amplitude small middle large lowWeight middleWeight highWeight =
+  solve (amplitude ∷ small ∷ middle ∷ large ∷ lowWeight ∷ middleWeight ∷ highWeight ∷ [])
+
 module AugmentedWeighted
     (Time : Set)
     (initialTime : Time)
