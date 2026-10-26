@@ -371,3 +371,33 @@ five-coordinate WeaveComplexity/consumer-MDL Pareto costs.
 Do not count p=7 Yang Mills KP/spectral-gap receipts as analytical
 sign proofs, and do not read p-adic closeness as Euclidean closeness.
 The original sign sin(99^(9999!)) remains OPEN.
+
+## 2026-10-26: actual fast sine / RSA tractability cut
+Added scripts/check_pickover_fast_sine_complex_power.py. It computes
+sign(sin(N)) for accessible huge integers N *without evaluating pi*:
+start with exact Taylor rational brackets for cos(1)+i*sin(1);
+evaluate (e^i)^N by binary complex powering, fixed-point rounding to
+S=10^digits, and integer error ticks that upper-bound exact complex
+distance. Every multiplication rounds at <=2/S complex norm error;
+the transported error bound is e_new=e1+e2+ceil(e1*e2/S)+2 ticks.
+Abort a precision trial as soon as the bound becomes vacuous.
+Certify sign if |imaginary fixed-point integer|>error ticks.
+Independent local Python replay passed for k=1,2,6,24,120, bases 10,99:
+base10 precision 20,20,20,50,200 and signs -,-,-,-,-;
+base99 precision 20,20,20,50,350 and signs -,-,+,+,-.
+For 99^120, 1195 finite complex multiplications and 350 decimal
+fixed-point digits sufficed. This beats *repeated sine evaluation*
+and avoids computing pi entirely, but not the asymptotic precision
+barrier: N=99^(9999!) requires ~1.9956*9999! decimal digits
+for generic error-propagation precision. The symbolic operation count
+does not bound the bit-width of each intermediate.
+
+This exact-power method is classical de Moivre/exponentiation by
+squaring, with DASHI-specific rigorous error ticks and source-level
+consumer-MDL benchmarking. The local replay reconstructed the same
+algorithm but no direct exact-head Actions or Agda kernel receipt.
+RSA parallel: seek a blockwise arithmetic phase certificate or orbit
+structure that avoids all-N bit precision, measuring end-to-end
+producer/checker complexity; don't mistake C3 orbit candidates for
+verified real-sine invariant. A 3-adic internal state is permissible:
+only the terminal *correctness theorem* must connect to ordinary sin.
