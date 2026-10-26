@@ -19,6 +19,7 @@ on:
       - 'scripts/check_pickover_punctured_hex_cost_audit.py'
       - 'scripts/check_pickover_punctured_hex_bbp_exact.py'
       - 'scripts/check_pickover_c3_angle_pi_windows.py'
+      - 'scripts/check_pickover_factor_fibre_query_adequacy.py'
       - '.github/workflows/pickover-eisenstein9-crt-finite.yml'
   workflow_dispatch:
 
@@ -59,6 +60,8 @@ jobs:
         run: python3 scripts/check_pickover_punctured_hex_bbp_exact.py
       - name: Certify pi and phase via C3 equilateral-angle rational windows
         run: python3 scripts/check_pickover_c3_angle_pi_windows.py
+      - name: Verify factor-fibre residual and query nonfactorability
+        run: python3 scripts/check_pickover_factor_fibre_query_adequacy.py
   finite-agda-source:
     runs-on: ubuntu-latest
     timeout-minutes: 30
