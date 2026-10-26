@@ -1513,6 +1513,19 @@ ramirez2024Ref12Claim = mkBound
   attributedAuthorReport
   "true author intent and original 2008 full method details not verified; do not infer deliberate omission"
 
+-- Published rounded field values are a lossy observation of raw values.
+-- Identical tables cannot select same versus different measurement sessions.
+-- This is a source-specific carrier-boundary, not a new experimental result.
+rodinRoundedTableDoesNotProveRawIdentity : ClaimBound
+rodinRoundedTableDoesNotProveRawIdentity = mkBound
+  "2013 Perez Table I and 2024 Ramirez-Galindo Table II agree on three printed two-decimal B values; distinct latent measurement histories can round to those same fields"
+  ramirezRodinRMF2024
+  "2024 printed Table II three experimental current-field rows; 2013 original Table I; exact rational synthetic collision under stipulated rounding in existing check_rodin_citation_independence_cut.py"
+  guanajuatoRodinResearchRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "original unrounded data, coil and sensor serials, instrument calibration, session timestamps, raw files and acquisition frequency of 2024 Table II are not source-joined"
+
 ------------------------------------------------------------------------
 -- Cloudbusting source-specific propositions. These are original authors'
 -- declarations or custody/critical-source observations, never causal proofs.
