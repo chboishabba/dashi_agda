@@ -153,6 +153,13 @@ def build():
     assert irrep_729==dict(A1=105,A2=78,B1=91,B2=91,E=182)
     assert sum(act((1,0),site[1])==site[1] for site in all_targets)==2
     assert sum(act((1,1),site[1])==site[1] for site in all_targets)==2
+    reflection_fibre_fixed={}
+    for name,g in (("axis",(1,0)),("diagonal",(1,1))):
+        sites=[site for site in all_targets if act(g,site[1])==site[1]]
+        values=[sum(act(g,x)==x for x in fibres[site]) for site in sites]
+        assert len(sites)==2 and values==[4,4]
+        reflection_fibre_fixed[name]=values
+
     # Existing natural cube-corner8 axis reflection has ZERO fixed points.
     return dict(status="PASS_exact_noncanonical_mixed_D4_eight_by_ten_by_nine",
         quotient80_source_orbits={"axis_four":4,"diagonal_four":4,"free_eight":6},
@@ -165,6 +172,7 @@ def build():
         classwise_characters=fixchar,
         outer_orbit_sizes=dict(outer_orbits),
         irrep_720=irrep_720,irrep_9=irrep_9,irrep_729=irrep_729,
+        mirror_fixed_points_inside_two_fixed_target_fibres=reflection_fibre_fixed,
         nontrivial_ten_sheet_D4_twisting_required=True,
         old_natural_cube_corner_quotient_resurrected=False,
         full_Heisenberg_equivariance_proved=False,
