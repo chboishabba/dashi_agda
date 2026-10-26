@@ -135,9 +135,37 @@ thermalScreenDoesNotVerifyCalibration = refl
 -- source carriers including real NOAA Bangor records, same-station metadata,
 -- an earlier local press item and a Kansas location false-match control.
 -- More source objects are NOT more independent weather experiments.
-sourceAtlasCountIsSixtyNine :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 69
-sourceAtlasCountIsSixtyNine = refl
+sourceAtlasCountIsSeventyThree :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 73
+sourceAtlasCountIsSeventyThree = refl
+
+
+-- Original NOAA OBS-TIME documentation is a *method*, not a 1953 sensor time;
+-- publisher/custodian multiplicity does not add an independent weather trial.
+noaaObservationClockSchemaDoesNotProveOnset :
+  Attribution.citationImportsProof Atlas.noaaGHCNObsTimeSchema ≡ false
+noaaObservationClockSchemaDoesNotProveOnset =
+  Atlas.allSourcesRemainNonPromoting Atlas.noaaGHCNObsTimeSchema
+
+noaaHOMRCustodyDoesNotProvideGaugeHour :
+  Attribution.citationCreatesAuthority Atlas.noaaHOMRStationHistory ≡ false
+noaaHOMRCustodyDoesNotProvideGaugeHour =
+  Atlas.allSourcesRemainNonAuthoritative Atlas.noaaHOMRStationHistory
+
+noaaOriginalCOOPFormAccessDoesNotRecoverOriginalForm :
+  Attribution.citationImportsProof Atlas.noaaCOOPOriginalFormsGateway ≡ false
+noaaOriginalCOOPFormAccessDoesNotRecoverOriginalForm =
+  Atlas.allSourcesRemainNonPromoting Atlas.noaaCOOPOriginalFormsGateway
+
+noaaClockAndCOOPAccessShareCustodialRoot :
+  Atlas.root Atlas.noaaGHCNObservationClockAvailability ≡
+  Atlas.root Atlas.noaaOriginalFormCustodyIsNotObservation
+noaaClockAndCOOPAccessShareCustodialRoot = refl
+
+bahramiOriginalAuthorsDoNotProveRodinComparison :
+  Attribution.citationImportsProof Atlas.bahramiHelmholtz2025 ≡ false
+bahramiOriginalAuthorsDoNotProveRodinComparison =
+  Atlas.allSourcesRemainNonPromoting Atlas.bahramiHelmholtz2025
 
 -- Additional original 1953 NOAA station does not change the publisher
 -- denominator; observations must retain their actual distinct site keys.
