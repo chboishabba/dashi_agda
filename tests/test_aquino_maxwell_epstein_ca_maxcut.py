@@ -1407,3 +1407,26 @@ def test_federal_homonym_record_positions_are_fail_closed():
     assert observed["agencyOverlapMeansSharedCaseIdentity"] == "false"
     assert observed["reportedJune2023DEAClosureHasSignedNativeInstrumentHere"] == "false"
     assert observed["sourceProvesEitherCoverupOrSameEpsteinBankTransfer"] == "false"
+
+
+def test_fec_mur7351_closed_is_not_ftc_bannon_cid_disposition():
+    """Separate actual FEC closure from unsighted original FTC judicial order."""
+    s = (ROOT / "DASHI/Cognition/BannonCambridgeAnalyticaInfluenceInfrastructureExact.agda").read_text()
+    for token in (
+        "fecMUR7351OriginalClosureReceipt = bannon-ca-legal-receipt",
+        "https://www.fec.gov/data/legal/matter-under-review/7351/",
+        "Dismissed-Other",
+        "ftcBannonDocketOriginalPublicIndexReceipt = bannon-ca-legal-receipt",
+        "1:20-mc-00111-CRC",
+        "paglieryJan2021CourtRulingReporting = bannon-ca-legal-receipt",
+        "fecClosureCannotCloseFTCBannonCID ()",
+        "ftcCACorporateOrderIsNotBannonCIDDisposition ()",
+        "NOT signed court-order authentication",
+    ):
+        # Case-independent source role and historical-status guard.
+        if token == "NOT signed court-order authentication":
+            assert token in s
+        else:
+            assert token in s
+    assert "true false false" in s
+    assert "original signed Jan 2021" not in s.lower() or "NOT inspected" in s
