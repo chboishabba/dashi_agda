@@ -33,6 +33,31 @@ class TestRaiProvenance(unittest.TestCase):
         self.assertEqual(one['paper_ids'],two['paper_ids'])
         self.assertEqual(one['archive_ids'],two['archive_ids'])
         self.assertNotEqual(one['matched_ids'],two['matched_ids'])
+    def test_three_distinct_n57_source_roles(self):
+        z=m.audit_cohort_roles()
+        self.assertEqual(z['distinct_57_roles'],3)
+        self.assertEqual(len(z['equal_number_nonidentity_pairs']),3)
+        self.assertIsNone(z['deposited_subjects_match_questionnaire_respondents'])
+        self.assertFalse(z['role_count_joins_are_authenticated'])
+
+    def test_duplicate_source_role_rejected(self):
+        with self.assertRaisesRegex(ValueError,'duplicate'):
+            m.audit_cohort_roles(m.COHORT_ROLES+(m.COHORT_ROLES[0],))
+
+    def test_cinema_not_live_same_object(self):
+        from copy import deepcopy
+        x=deepcopy(list(m.COHORT_ROLES))
+        x[2]['condition']='live-P1-P2-P3'
+        with self.assertRaisesRegex(ValueError,'conflated'):
+            m.audit_cohort_roles(x)
+
+    def test_equal_57_deposit_not_questionnaire(self):
+        from copy import deepcopy
+        x=deepcopy(list(m.COHORT_ROLES))
+        x[3]['measure']='questionnaire_responses'
+        with self.assertRaisesRegex(ValueError,'conflated'):
+            m.audit_cohort_roles(x)
+
     def test_duplicate_rejected(self):
         with self.assertRaisesRegex(ValueError,'duplicate'):m.subject_join(('A','A'),('A',))
     def test_unattributed_file_not_reanalysis(self):
