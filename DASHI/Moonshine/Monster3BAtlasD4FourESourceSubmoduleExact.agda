@@ -19,7 +19,7 @@ module DASHI.Moonshine.Monster3BAtlasD4FourESourceSubmoduleExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Integer using (ℤ; +_; -[1+_])
+open import Data.Integer using (ℤ; +_; -[1+_]) renaming (_+_ to _+ℤ_)
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Irrep
 import DASHI.Foundations.D4SO3NineIrrepRestrictionExact as D4
 
@@ -77,7 +77,15 @@ sourceAxisMirrorTrace = refl
 -- Earlier IIT model A1+A2+2B1+2B2+E has half-turn trace
 -- 1+1+2+2-2=4, versus this source 4E's -8.
 -- Hence their D4 representations cannot be identified by relabelling.
-oldOrientedEightHalfTurnTrace : 1 + 1 + 2 + 2 ≡ 6
+oldOrientedEightHalfTurnCharacter : ℤ
+oldOrientedEightHalfTurnCharacter =
+  D4.d4Character Irrep.A1 D4.centralHalfTurnClass
+  +ℤ D4.d4Character Irrep.A2 D4.centralHalfTurnClass
+  +ℤ D4.scaleInt 2 (D4.d4Character Irrep.B1 D4.centralHalfTurnClass)
+  +ℤ D4.scaleInt 2 (D4.d4Character Irrep.B2 D4.centralHalfTurnClass)
+  +ℤ D4.d4Character Irrep.E2 D4.centralHalfTurnClass
+
+oldOrientedEightHalfTurnTrace : oldOrientedEightHalfTurnCharacter ≡ + 4
 oldOrientedEightHalfTurnTrace = refl
 
 record SourceFourEAdmission : Set where
