@@ -30,6 +30,7 @@ if LoadPackage("ctbllib") <> true then
   Error("CTblLib is required");
 fi;
 
+Read("scripts/monster_3b_source_json_escape.g");
 six := CharacterTable("6.Suz");
 outer := CharacterTable("6.Suz.2");
 main := CharacterTable("3^1+12:6.Suz.2");
@@ -472,8 +473,8 @@ PrintTo(output,
   "  \"base_1458_central_trace\": -729,\n",
   "  \"qg_to_n3b_kernel_order_three_class_position\": ", qKernel3, ",\n",
   "  \"qg_to_n3b_kernel_outer_class_position\": ", qKernelOuterClass, ",\n",
-  "  \"degree_12_atlas_labels\": [\"", sixLabels[p12[1]], "\", \"", sixLabels[p12[2]], "\"],\n",
-  "  \"degree_78_atlas_labels\": [\"", sixLabels[p78[1]], "\", \"", sixLabels[p78[2]], "\"],\n",
+  "  \"degree_12_atlas_labels\": [", Monster3BSourceJSONQuotedLabel(sixLabels[p12[1]]), ", ", Monster3BSourceJSONQuotedLabel(sixLabels[p12[2]]), "],\n",
+  "  \"degree_78_atlas_labels\": [", Monster3BSourceJSONQuotedLabel(sixLabels[p78[1]]), ", ", Monster3BSourceJSONQuotedLabel(sixLabels[p78[2]]), "],\n",
   "  \"source_selected_degree_78_faithful_to_6Suz\": ", SourceBoolText(selected78Faithful), ",\n",
   "  \"suzuki_central_involution_class_position\": ", central2Class, ",\n",
   "  \"suzuki_central_order_three_class_position\": ", central3Class, ",\n",
