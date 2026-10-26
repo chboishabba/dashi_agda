@@ -554,3 +554,86 @@ this workflow is NOT a passing run; independent local algebra
 checks passed, but no executed exact-head workflow receipt
 is represented as present here. All prior major geometric
 acceptance conditions remain open.
+
+
+## 2026-10-26 balanced-ternary/SSP369 exact geometric cross-owner max-cut
+
+The user's already-in-repository balanced/ternary conjectural carrier
+is now directly used, rather than restated from first principles:
+
+- `DASHI.Algebra.Trit`, `Codec.BalancedTritBitFibre`:
+  **three distinct signed/zero trit states**, zero support fibre;
+- `Geometry.SSP369Ultrametric`,
+  `Foundations.BalancedTernaryUltrametricExact`:
+  **already-proved** finite ternary-prefix and agreement types;
+- `Topology.TernaryCylinderPantsGeometryExact` and
+  `Topology.TernaryPantsFrontierExact`:
+  the exact already-composed **TWO-pants 1→3**
+  branch-slot/finite-prefix append laws;
+- `ExoticBalancedTernaryPantsWeldExact.agda` (new):
+  two-sided address/path translation and reuse of exact
+  ternary-prefix agreement and pants append naturality,
+  explicitly **choosing** digit3↔negative, digit6↔zero,
+  digit9↔positive. Sign inversion is order two with
+  fixed zero, not the order-three C3 rotation;
+- `scripts/exotic_topology_balanced_ternary_pl.py` (new):
+  **ACTUAL FINITE ORIENTED PL** 1→3 branch as TWO
+  copies of the existing three-holed genus-zero pants.
+  It does not confuse a four-boundary branching
+  cobordism with one ordinary three-boundary pants.
+  It imports original `MarkedSurface`, `attach`,
+  vertex-link manifold and complementary dual-component
+  checkers. Bounded source regression through depth
+  three gives boundary counts 1/3/9/27, genus zero,
+  external attached-component counts 1/3/9, and zero
+  retained as a real final outgoing boundary.
+- Existing variable-length `3→0,6→10,9→11` binary
+  prefix codec is reused EXACTLY. The geometric
+  two-pants tree realises this branching decision tree
+  at finite stages; natural binary codeword weights
+  1/2,1/4,1/4 are not uniform ternary 1/3 each.
+
+**Executed receipt:** Independent local implementation of
+the same finite PL triangulation and dual-edge/complement
+conditions actually PASSED at depth three; the final
+mesh has 7,723 triangles and 27 live outgoing boundary
+circles. New source-specific test methods on #1254
+are committed but NOT verified by an exact-GitHub-head
+Actions or Agda kernel receipt.
+
+**Original author separation:** compact-surface topology
+Brahana (1921); noncompact end classification
+Kerékjártó (1923), Richards (1963); TQFT/cobordism
+vocabulary Atiyah (1988); mathematical finite-prefix
+and coding notions belong to their classical sources.
+The explicit balanced↔369 sign-chart selection and
+this particular finite PL audit are user-directed,
+AI-assisted implementation choices in DASHI,
+not discoveries attributed to those historical authors.
+Source module authorship and paper source provenance
+remain distinct.
+
+**Same-type frontier:** a properly collared infinite
+3-child genus-zero surface has Cantor-space planar
+ends, hence the SAME homeomorphism type as the binary
+Cantor-tree surface under Richards' theorem.
+That infinite geometric hypothesis is still OPEN
+in the repo. Binary/ternary topology equivalence
+does NOT imply measure-preservation, group
+isomorphism, an isometric ultrametric identification,
+or a homotopy equivalence of a totally disconnected
+address tree and its connected 2D pair-of-pants pieces.
+
+**Wrong-object controls from newest PRs:** #1261's
+26-point punctured balanced T³ / thirteen antipodal
+directions and #1260's 81×243 additive Eisenstein
+quotient remain categorically different carriers;
+no equality follows from having ternary symbols or
+27/3⁹-related counts. #1239's Artin braid and #1244's
+Alexander horn C3 remain separate from balanced
+sign reflection and this 2D surface exhaustor.
+
+Full original twenty-space proof completion remains
+bounded by actual infinite 2-manifold, Richards ends,
+Fox-Artin/Wada/Warsaw/Hatcher/Simons and all other
+source-specific unproved geometric theorems.
