@@ -953,3 +953,96 @@ def test_climate_historical_object_identity_and_access_are_not_speaker_counts():
         assert token in val
     assert "import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity" in val
     assert "recommendationExposureIsNotDirectMethodTransfer" in typed
+
+
+def test_recycled_claim_family_receipts_preserve_original_root_and_relation():
+    """Selected proposition surfaces are not a population study of deniers."""
+    from collections import Counter
+    path = ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv"
+    with path.open(newline="", encoding="utf-8") as stream:
+        rows = list(csv.DictReader(stream))
+    assert len(rows) == 27
+    assert len({r["receipt_id"] for r in rows}) == 27
+    assert all(r["claim_family"] and r["evidence_objects"] and
+               r["relation_to_claim"] and r["nonpromotion_boundary"] for r in rows)
+    totals = Counter(r["claim_family"] for r in rows)
+    assert len(totals) == 10
+    assert totals["US_UNCERTAINTY_STRATEGY"] == 2
+    assert totals["API_PROMPTED_58PC"] == 1
+    assert totals["GAS_TAX_17B_ANNUAL"] == 7
+    assert totals["GAS_INVESTMENT_TAX_83PC"] == 3
+    assert totals["GAS_INVESTMENT_SUPPLY_PRICE"] == 4
+    assert totals["GAS_TAX_POLICY_SPECIFICATION"] == 2
+
+    by_id = {r["receipt_id"]:r for r in rows}
+    assert by_id["H01"]["evidence_objects"] == "ICE_PLAN_1991"
+    assert by_id["H02"]["evidence_objects"] == "API_PLAN_1998"
+    assert by_id["H02"]["relation_to_claim"] == "similar_strategy_not_copied_text"
+    assert "1100" in by_id["H03"]["surface_or_document"]
+    assert "58 percent" in by_id["H03"]["numerical_or_rhetorical_payload"]
+    assert "unprompted" in by_id["H03"]["nonpromotion_boundary"]
+
+    assert by_id["G01"]["evidence_objects"] == by_id["G03"]["evidence_objects"]
+    assert by_id["G03"]["relation_to_claim"] == "credited_reuse_of_named_estimator"
+    assert "no company tax" in by_id["G01"]["nonpromotion_boundary"].lower()
+    assert by_id["G08"]["evidence_objects"] == by_id["G15"]["evidence_objects"] == "NIGHTLY_JOHNSON_2026"
+    assert by_id["G08"]["relation_to_claim"] == "explicit_credited_article_reprint"
+    assert by_id["G15"]["relation_to_claim"] == "explicit_original_journalist_credit"
+
+
+def test_same_gas_headline_two_named_models_not_seven_estimates():
+    with (ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv").open(
+        newline="", encoding="utf-8"
+    ) as stream:
+        rows = {r["receipt_id"]:r for r in csv.DictReader(stream)}
+    # The same rounded 17b headline appears in policy and news products;
+    # institute research (2025) and Arthur D. Little (2026) are two separately
+    # NAMED estimators, not certified statistically independent modelling.
+    assert rows["G04"]["evidence_objects"] == "TAI_TAX_17B_2025"
+    assert rows["G05"]["evidence_objects"] == "FUTURE_ADL_17B_2026"
+    assert rows["G09"]["evidence_objects"] == "TAI_TAX_17B_2025|FUTURE_ADL_17B_2026"
+    assert rows["G06"]["date"] < rows["G05"]["date"]
+    assert "Do not infer" in rows["G06"]["nonpromotion_boundary"]
+    assert "not measured revenue" in rows["G04"]["nonpromotion_boundary"]
+
+    assert rows["G17"]["evidence_objects"] == "ACTU_2026_PRIMARY"
+    assert "2023-24" in rows["G17"]["numerical_or_rhetorical_payload"]
+    assert "not a 2026-27 forecast" in rows["G17"]["nonpromotion_boundary"]
+    assert rows["G18"]["numerical_or_rhetorical_payload"].startswith("replace PRRT")
+    assert rows["G19"]["numerical_or_rhetorical_payload"].startswith("additional 25%")
+    assert rows["G18"]["evidence_objects"] != rows["G19"]["evidence_objects"]
+    assert rows["G10"]["evidence_objects"] == rows["G11"]["evidence_objects"] == "WOODMAC_AEP_2026"
+    assert "not observed national" in rows["G10"]["nonpromotion_boundary"]
+    assert rows["G12"]["relation_to_claim"] == "named_adversarial_model_reanalysis"
+    assert rows["G14"]["relation_to_claim"] == "attributed_separate_witness_parallel_argument"
+    assert rows["G16"]["relation_to_claim"] == "same_argument_no_copied_text_receipt"
+
+
+def test_recycled_claims_consume_canonical_agda_nonfactorability():
+    owner = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    proofs = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    typed = (ROOT / "DASHI/Governance/TypedGenealogyEdgeExact.agda").read_text()
+    for relation in ("explicitAttributedRepublication", "reportedStatisticRestatement",
+                     "parallelEconomicArgument"):
+        assert relation + " : RelationKind" in typed
+    for receipt in (
+        "apiCharltonPromotedPoll1998", "australiaInstitute17B2025",
+        "futureGroupArthurDLittle2026", "pocockGas2026",
+        "taiGasRoyalty2024", "aepWoodMackenzie2026",
+        "nightlyJohnsonGas2026", "hancockJohnsonReprint2026",
+        "actu2026OriginalReplacementProposal",
+    ):
+        assert receipt + " : Typed.SourceReceipt" in owner
+    for relation in (
+        "iceToAPIUncertaintyStrategicRecurrence", "tai17BRestatedByPocock2026",
+        "futureGroup17BRestatedByPocock2026", "tai56PcRoyaltyRestatedByPocock2026",
+        "nightlyToHancockExplicitReprint2026", "aepWoodMacStatisticsNotNationalTaxRate",
+        "actuReplacementVsAEPAddOnSpecification",
+    ):
+        assert relation + " : Typed.TypedGenealogyEdge" in owner
+    assert "import DASHI.Core.IntersectionalNonFactorability as INF" in owner
+    assert "sameHeadlineDistinctGenealogies =\n  INF.nonFactorabilityWitness" in owner
+    assert "sameRateDifferentTaxInstrument =\n  INF.nonFactorabilityWitness" in owner
+    assert "same17BHeadlineDoesNotIdentifyNamedModelCount" in proofs
+    assert "same25PcHeadlineDoesNotIdentifyTaxDesign" in proofs
+    assert "donorActorInstitutionProximityDoesNotEstablishDecisionControl" in proofs
