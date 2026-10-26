@@ -44,3 +44,14 @@ toeFourDRequiresSixBSixtySix :
 toeFourDRequiresSixBSixtySix =
   MonsterSieve.sourceFourDForcesSixBSixtySix
 
+
+
+-- Reuse PR #1278's governance source. Do not copy its proof.
+import DASHI.Governance.FormalisationGovernanceCapstoneExact as Governance
+import DASHI.Core.KernelSemanticClosureBoundaryExact as SemanticBoundary
+
+toeKernelProofDoesNotEstablishSourceSemantics :
+  SemanticBoundary.semanticallyExhaustive
+    SemanticBoundary.criticalCapstoneStatus ≡ false
+toeKernelProofDoesNotEstablishSourceSemantics =
+  Governance.kernelClosureIsNotSemanticExhaustiveness
