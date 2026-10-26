@@ -8,3 +8,6 @@ import DASHI.Papers.NavierStokes.Everything
 
 -- Original source identities and non-promoting cross-paper source roles.
 import DASHI.Papers.ThreePaperSourceAtlas20261025Exact
+
+-- Consumer-relative semantic-fidelity obstructions reuse existing generic owners.
+import DASHI.Papers.ThreePaperConsumerFidelity20261026Exact
