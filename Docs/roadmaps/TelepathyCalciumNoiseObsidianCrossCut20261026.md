@@ -44,3 +44,12 @@ Candidate integration: export a *read-only generated* claim-source-experiment gr
 3. Run zero new medical interventions; request existing safe data and original methodological documents first.
 4. Assess zeroth-order methods on full *quality-conditioned* experiment/Pareto frontier, not reported wall-clock alone.
 5. Establish original GitHub repo identity for remaining tool suggestions before installation.
+
+
+## 2026-10-26 original Noise repository correction and bounded calculation
+
+Primary repository: https://github.com/qlabs-eng/noise, *Noise: Speedrun for Pretraining Without Backpropagation*, credited to Serdar Gülbahar, Bishwas Mandal, Akshay Vegesna and Samip Dahal (2026). Original README specifies a **37.7M-parameter transformer**, **10M FineWeb tokens**, and **validation cross-entropy**. Its two tracks (minimum validation loss versus speedrun to loss 4.2) must not be conflated. The social claim compares a 1.76-hour initial run and a 1.6-second threshold run: `1.76*3600/1.6 = 3960`. The screenshot's 4000x is rounded. This is not a claim of uniform full-training scaling or improved held-out loss for the faster run. Source-derived fixed arithmetic fixture: `scripts/audit_noise_quality_conditioned_20261026.py`. It deliberately does **not** grant Pareto dominance without independent workload, compute, and full-search receipts. The source repository, not the screenshot author alone, owns benchmark authorship.
+
+Obsidian primary owner: https://github.com/kepano/obsidian-skills, with Markdown, Bases, JSON Canvas, CLI and other skills. No direct vault modification or automatic installation is part of this PR.
+
+Calcium hypothesis: author's screenshots remain hypothesis-only. No pharmacological or electromagnetic self-experiment is warranted; channel-identity and brain-to-brain signal-decoding are independently typed obligations.
