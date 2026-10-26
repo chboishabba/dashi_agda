@@ -357,3 +357,18 @@ consumer witnesses in the DASHI repository. Johl Brown-directed
 DASHI formalisation with ChatGPT-assisted source code is separate
 from each of those roots. Source-written ≠ typechecked ≠
 kernel-certified ≠ proved NL correspondence.
+
+
+## 27 October source-fidelity review repair: typed polynomial, leastness and zero-fallback isolation
+
+**Independent CodeRabbit inline review on Lean [#88](https://github.com/chboishabba/dashi_lean4/pull/88) exposed real gaps** in the *DASHI implementation*, not a new theorem of Bastounis/Circelli/Hansen:
+
+1. `Nat.find` and `Nat.find_spec` require an actual decidability instance even when the definition is marked `noncomputable`. The two `leastPresupposition` and two `sourceIndex` declarations now explicitly use `classical`. This solves an **elaboration prerequisite**, not the computational-effectiveness premise of Appendix A.
+2. The old `LostInTranslationAlternation` accepted **arbitrary Q(xs,z) functions**, which could simply return zero iff any desired predicate held. That is an inadmissible shortcut to a source **Diophantine** claim. The source-specific A.4 predicate, final-block representation lemmas and l=2/3/4 specialisations now require a genuine **fixed integer-coefficient `MvPolynomial (Fin 1 ⊕ (Fin (l-2) ⊕ Fin 9)) ℤ`**. Its coefficients cannot adapt to n, the prefix tuple, or final witnesses. This corrects *statement fidelity* while leaving the hard polynomial-representation construction open.
+3. The new source polynomial evaluator uses a list to accumulate quantified prefix values; `getD` would default to zero for an out-of-range index. Two added math-level checks, `quantifyPrefix_congr_at_valid_length` and `sourceA4_prefix_getD_agrees_with_actual`, document a typed **full-length-prefix invariant**: `l-2` quantified values are supplied, and source coordinate access is within range. This ensures the auxiliary code does not repeat BCH's Example 4.1 default-denotation mistake.
+4. The finite example checker now **refuses `python -O`**, rather than printing a misleading PASS after the interpreter removes asserts. The separate fixed-integer-polynomial parity script similarly fails closed and rejects malformed prefix lengths. The PR includes explicit executable regressions for both guards and for the actual `MvPolynomial` type (a static contract, not a compiler receipt).
+5. `sourceIndex_is_least_matching_code` now uses Mathlib's published `Nat.find_min'` to prove the selected polynomial-enumeration index is genuinely the **least** matching code. Mathematical minimality alone does not imply computable code search.
+
+**Executed locally in this continuation:** 120/120 independent integer-polynomial source A.4 finite parity fixtures on levels 2–6, input values 0–3 and six fixed coefficient tuples; additionally 5/5 source alternating-prefix shapes passed. This was an equivalent exact Python replay, **not** the GitHub branch's pytest suite, and no Agda or Lean kernel binary is available. Do not count finite two-valued witnesses as arithmetical-hierarchy completeness.
+
+**Donor boundary:** original BCH paper (6 October 2026) owns the source SCI claim; original DPRM/arithmetical hierarchy authors and Cameron Freer's later Lean H10 formalisation retain their separate results. DASHI/Johl Brown-directed code with ChatGPT assistance now discharges stronger **typed syntax and source-prefix** checks. The remaining source A.3/A.4 mathematical producer is the **effective** fixed-nine-universal-polynomial representation, code enumeration/computability, Sigma-level reductions/Post strictness and final SCI interpretation. Neither the current finite A.4 syntax lemmas nor Freer's existential unbounded-k theorem close these.
