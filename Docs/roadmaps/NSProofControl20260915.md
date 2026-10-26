@@ -1,3 +1,79 @@
+# 2026-10-27 CRITICAL PR #1271: UNIVERSAL R734/R735 W2 IS REFUTED ON THE ORIGINAL PHYSICAL GALERKIN SYSTEM
+
+**Read this amendment first; it supersedes all earlier entries calling
+R734 W2 a plausible universally provable input.** The source-written
+R734/R735 conditional compilers remain mathematically valid; their
+unrestricted physical positive-margin hypothesis is FALSE.
+
+**Exact physical evidence:** `tests/test_ns_r734_pure_plus_physical_w2_no_go.py`,
+10 independent locally passing exact SymPy checks. Three positive
+frequencies p=(1,0,0), q=(0,1,2), k=(1,1,2), with conjugate
+negative modes, receive the normalized PHYSICAL positive curl
+projectors of real transverse seed vectors (0,1,1), (1,0,0),
+(1,-1,0). The field is real, divergence free and initially H+
+polarized at every frequency, within literal sharp Galerkin cube
+N=2. Consequently all H+×H- source incidences vanish at t=0:
+  E_M(0)=E_M'(0)=0, and original weighted W'(0)=0.
+But source-defined dyadic critical mass X=8, dissipation D=36,
+and exact projected NSE nonlinear production
+  Pcrit=(5+sqrt5-sqrt30)/10>3/20>0.
+At viscosity 1, multiplying the SAME actual smooth Fourier datum
+by a=512 yields
+  X'(0)=a²(a Pcrit -72) > a²*(24/5)>0.
+The R734 augmented critical W2 residual with ANY delta>0
+therefore has positive derivative at T=0. Galerkin ODE
+continuity gives a sufficiently small fixed T>0 where
+`AugmentedCriticalWeightedPayment` fails for ALL delta>0,
+even if delta may depend on N,T. This is an AUXILIARY GLOBAL
+INEQUALITY COUNTEREXAMPLE, not an NSE blowup. The exact
+unweighted nonlinear kinetic-energy work is 0, so there is
+no energy-creation artifact, and full NSE nonlinear forcing
+immediately produces H- modes, so there is no illicit
+helical-decimation substitution.
+
+**Critical existing repo donor:** R92
+`NSTriadKNWaleffeCommonAmplitudeInvariantsRound92Exact`
+and R102 `NSTriadKNHelicalCriticalExchangeReductionRound102Exact`
+already capture the original Waleffe exact signed-helicity
+invariant. On the same pure-plus physical datum, nonlinear
+`|k|`-weighted true-helicity production is EXACTLY ZERO,
+while rounded-up source `2^ceil(log2||k||infty)` weighted
+production is positive. The exact equality is
+  `P_dyadic =
+    2 Re Σ_m [w_dyadic(m)-|m|]<u_m,F_m>`.
+This is a **signed time-derivative weight defect**, NOT
+a violation of the standard positive norm equivalence.
+Previously R102 conditionally removed homochiral production
+for the TRUE helicity carrier; it does not pay the R734
+DYADIC residual. Attribution remains Waleffe 1992,
+Lei--Lin--Zhou 2015 and prior DASHI theorem-owner authors.
+This test/counterexample/critical-operator join is new
+source-specific DASHI analysis.
+
+**Pareto replacement, not another placeholder theorem:** retire
+UNRESTRICTED old R734/R735 W2 positive-margin leaf. Search a
+genuine physical critical cancellation estimate across all
+(++), (--), (+-), (-+) classes using exact signed helicity
+and a controlled dyadic weight-defect commutator, or produce
+a different noncircular critical continuation proof with
+independent evidence. Keep exact source-selected outputs,
+the same Galerkin velocity, no cutoff-dependent constants,
+actual viscous margin and physical initial data. A new
+positive leaf must be checked against THIS six-mode witness
+before any conditional record is claimed inhabited.
+R735 W1 local/small-data/late-time upper bounds remain
+valid; the general large-H1 middle interval remains open.
+A1 Bishop real continuation/A2/A3 remain separate.
+The Clay A/B theorem is NOT proved.
+
+**Evidence/provenance:** `Docs/research/ns_r734_pure_plus_physical_w2_no_go_20261027.md`.
+Original R734/R735 modules have been annotated without altering
+their conditional proof types or falsely flipping Boolean closure.
+10 locally passed exact SymPy tests; no Agda/Lean kernel check,
+no exact-PR-head suite, no unrestricted theorem.
+
+---
+
 # Navier–Stokes proof-control record — live A/B/C/D coordinator
 
 Status: authoritative live routing/control document; non-promoting.
