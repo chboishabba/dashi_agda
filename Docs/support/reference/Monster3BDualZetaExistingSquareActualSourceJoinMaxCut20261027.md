@@ -129,3 +129,26 @@ by itself establish a consciousness, quantum or physical claim.
 Monster normalizer and paired ζ-sector recognition, not a second
 729/appraisal square, a new 54/53 counting argument, or more synthetic
 character receipts.
+
+## 2026-10-27 extra #1098 source-lift check: quadratic cocycle is mandatory
+
+The original #1098 `DASHI/Moonshine/Monster3BAtlasSymplecticSimilitudeHeisenbergLiftExact.agda`
+already specifies the centre-scaling Heisenberg lift
+`(x,z) ↦ (A x, λ z + q(x))`, with `λ=-1` for the centre-inverting
+similitude. For the repository's asymmetric cocycle `c`, an actual
+source-word certificate must satisfy
+
+    q(x+y) + λ c(x,y) = q(x)+q(y)+c(Ax,Ay).
+
+The existing #1098 source checker derives its `q` from the symmetric
+bilinear defect `B(x,y)=c(Ax,Ay)-λ c(x,y)` as
+`q(x)=2 B(x,x)` over F3. The abstract central-inverter theorem of the
+older Moonshine branch handles **which phase is reached**; it does NOT
+construct this actual quadratic-corrected generator action or its
+relation to `ActualZetaSectorRecognition` on the literal VOA carrier.
+
+Therefore the new consumer's `actualModelMirrorSquare` field MUST be
+instantiated by the original #1098 source-word/cocycle computation,
+not by the simple phase-swap finite model. This obligation is
+strictly upstream of #1148 IIT/JFine. No duplicate source-lift
+formalisation is opened here.
