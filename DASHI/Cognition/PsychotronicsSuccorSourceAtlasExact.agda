@@ -1199,6 +1199,39 @@ noaaBangorJul1953HourlyRealWeatherBound = mkBound
   originalRegionalWeatherMeasurement
   "Measured manual rain-shower weather at Bangor is not verified onset at Ellsworth, not an original NOAA remote publisher attestation, and not any causal effect of Reich's equipment"
 
+
+-- Same ORIGINAL 1953 NOAA observer and upload, new decoded pressure/wind
+-- proposition. Not an independent source root or causal meteorology proof.
+noaaBangor1953SynopticPressureBeforeRain : ClaimBound
+noaaBangor1953SynopticPressureBeforeRain = mkBound
+  "Quality-passing Bangor airport sea-level pressure fell 67 tenths hPa between 1953-07-06 14 UTC and 1953-07-07 02 UTC before reported rain showers"
+  noaaBangor1953RealUploadedHourlyCSV
+  "Original user-supplied SHA256 2a3b048d620b320fb8d1cf548d4eb06fb2c49821faa54c4cc7f708649cdca9bd; SLP 10155,1 at 14 UTC and 10088,1 at 02 UTC"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  originalRegionalWeatherMeasurement
+  "Observed one-station weather development is a conventional-physics rival candidate only; no proved front or causal null for Reich's geographically separate operation"
+
+noaaBangor1953WindsNotEllsworthOperation : ClaimBound
+noaaBangor1953WindsNotEllsworthOperation = mkBound
+  "Bangor airport reports wind direction 200 degrees from true north at 14, 15 and 16 UTC 6 July, near reported Ellsworth operation UTC14:45-15:52"
+  noaaBangor1953RealUploadedHourlyCSV
+  "NOAA original WND 200,1,N,0067,1; 200,1,N,0077,1; 200,1,N,0062,1 from actual source file; local hour DST conversion"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  originalRegionalWeatherMeasurement
+  "Airfield hourly winds do not establish whether Graham Lake wind shifted SW to SE, as Reich reported; no causal inference permitted"
+
+noaaBangor1953OverlappingJulyPressureReference : ClaimBound
+noaaBangor1953OverlappingJulyPressureReference = mkBound
+  "Forty-six of 744 valid July-ending 12h pressure pairs decline at least 67 tenths hPa, in overlapping observational pairs"
+  noaaBangor1953RealUploadedHourlyCSV
+  "scripts/check_psychotronics_bangor_1953_synoptic_null.py exact file-hash-pinned local source replay; 15 locally executed tests"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  originalRegionalWeatherMeasurement
+  "46 over 744 describes serially dependent overlapping 1953 Bangor readings, not independent interventions, a randomization p value, or evidence for or against weather-control efficacy"
+
 -- Two publisher/document carriers; same RVML provenance root. The Gentry
 -- speaker/topic is NOT the 1999 person-to-person instruction transfer.
 rvmlGentryNamedEvent : ClaimBound
