@@ -426,3 +426,17 @@ def test_australia_observed_nsa_ipa_citation_is_not_paid_hancock_commission():
     assert a["quote_is_not_independent_reproduction"] is True
     assert "HPPL editorial instruction" in a["reopens_on"]
     assert world()["claims"][-1]["level"] != "independentlyReproduced"
+
+
+def test_smith_style_failed_health_card_amendment_is_distinct_from_assented_act():
+    a = world()["australian_crosspollination"]["policy_2022_related_smith_amendment_attempt"]
+    assert "30 Sep" in a["smith_bill_committee_recommendation"]
+    assert "28 Sep" in a["senior_health_card_bill_amendment"]
+    assert "did not accept" in a["house_response"]
+    assert a["adoption_status"] == "unsuccessful_related_bill_amendment_attempt"
+    assert "Act No 55" in a["not_to_conflate_with"]
+    assert a["hancock_repeat_producer_dates"]["smith_submission_3"] == "2022-08-16"
+    assert a["hancock_repeat_producer_dates"]["government_submission_9"] == "2022-10-13"
+    assert "not inspected" in a["hancock_repeat_producer_dates"]["original_pdf_status"]
+    assert a["private_direction_causation_established"] is False
+    assert world()["original_root_count"] == 9
