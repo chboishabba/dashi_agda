@@ -5,7 +5,8 @@ module DASHI.Physics.QuantumSensors.NVMCGQuantumEnergyObserverCollisionExact whe
 -- Cross-pollination: observer-collision / factorisation methodology used
 -- in Agda #1266, while keeping this an independent physical-model result.
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 0ℚ)
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
@@ -35,14 +36,11 @@ noExactLabelDecoderFromZeroFieldEnergy :
   ((x : C3.C3) →
     decode (Weld.levelEnergy (zeroField d gamma) x) ≡ x) →
   ⊥
-noExactLabelDecoderFromZeroFieldEnergy d gamma decode roundtrip
-  with zeroFieldEnergyCollision d gamma
-... | refl =
+noExactLabelDecoderFromZeroFieldEnergy d gamma decode roundtrip =
   plusDifferentFromMinus
-    (trans (sym (roundtrip C3.c0)) (roundtrip C3.c2))
-  where
-    open import Agda.Builtin.Equality using (_≡_; refl)
-    open import Relation.Binary.PropositionalEquality using (sym; trans)
+    (trans (sym (roundtrip C3.c0))
+      (trans (cong decode (zeroFieldEnergyCollision d gamma))
+             (roundtrip C3.c2)))
 
 -- Evidence boundary: this rules out *energy-only* decoding at B=0.
 -- Optical spin contrast, microwave-frequency discrimination, magnetic
