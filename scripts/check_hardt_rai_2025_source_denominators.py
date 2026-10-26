@@ -19,6 +19,67 @@ DEPOSIT = dict(declared_recordings=57, accession='28508744',
 CODE_LOCATORS = ('https://osf.io/uz573/', 'https://osf.io/ursmc/')
 
 
+
+# These counts come from different observational roles, including three
+# appearances of N=57. Standard source-root/consumer identity matters more
+# than equality of a scalar statistic. Do not assert participant-ID matches.
+COHORT_ROLES = (
+    dict(id='live_eeg_retained', source='paper:10.1016/j.isci.2025.112922',
+         condition='live-P1-P2-P3', measure='retained_EEG_datasets', n=59),
+    dict(id='live_questionnaires', source='paper:10.1016/j.isci.2025.112922',
+         condition='live-P1-P2-P3', measure='questionnaire_responses', n=57),
+    dict(id='cinema_participants', source='paper:10.1016/j.isci.2025.112922',
+         condition='cinema-S1-S2-S3', measure='screening_participants', n=57),
+    dict(id='ucl_eeg_deposit', source='dataset:10.5522/04/28508744.v1',
+         condition='deposited_live_dataset', measure='described_EEG_recordings', n=57),
+)
+
+
+def audit_cohort_roles(roles=COHORT_ROLES):
+    """Fail closed on count-only joins of distinct source/arm/measurement roles."""
+    roles = tuple(roles)
+    ids = [r['id'] for r in roles]
+    typed = [(r['source'], r['condition'], r['measure']) for r in roles]
+    if len(set(ids)) != len(ids) or len(set(typed)) != len(typed):
+        raise ValueError('duplicate source-root or typed cohort identity')
+    if any(not all(isinstance(r[k], str) and r[k].strip()
+                   for k in ('id', 'source', 'condition', 'measure'))
+           or isinstance(r['n'], bool) or not isinstance(r['n'], int)
+           or r['n'] < 0 for r in roles):
+        raise ValueError('unattributed or invalid cohort count')
+    known = {r['id']: r for r in roles}
+    expected = {
+        'live_eeg_retained': ('paper:10.1016/j.isci.2025.112922', 59),
+        'live_questionnaires': ('paper:10.1016/j.isci.2025.112922', 57),
+        'cinema_participants': ('paper:10.1016/j.isci.2025.112922', 57),
+        'ucl_eeg_deposit': ('dataset:10.5522/04/28508744.v1', 57),
+    }
+    if set(known) != set(expected) or any(
+        (known[k]['source'], known[k]['n']) != v for k, v in expected.items()
+    ):
+        raise ValueError('original source-locked denominator role changed')
+    if known['live_questionnaires']['measure'] != 'questionnaire_responses' \
+       or known['live_eeg_retained']['measure'] != 'retained_EEG_datasets' \
+       or known['ucl_eeg_deposit']['measure'] != 'described_EEG_recordings' \
+       or known['cinema_participants']['condition'] != 'cinema-S1-S2-S3':
+        raise ValueError('questionnaire, live EEG, cinema and deposit identities conflated')
+    same_number_different_roles = [
+        [a['id'], b['id']] for a, b in combinations(roles, 2)
+        if a['n'] == b['n'] and
+        (a['source'], a['condition'], a['measure']) !=
+        (b['source'], b['condition'], b['measure'])
+    ]
+    assert len(same_number_different_roles) == 3
+    return dict(typed_source_roles=len(roles),
+                distinct_57_roles=3,
+                equal_number_nonidentity_pairs=same_number_different_roles,
+                role_count_joins_are_authenticated=False,
+                paper_live_questionnaires_missing=59-57,
+                deposited_subjects_match_questionnaire_respondents=None,
+                deposited_subjects_match_paper_eeg=None,
+                cinema_subjects_are_same_as_live=None)
+
+
 def audit_metadata(paper=PAPER, deposit=DEPOSIT):
     if paper['recruited']-paper['lost_technical']-paper['lost_markers'] != paper['retained']:
         raise ValueError('publication recruitment/exclusion arithmetic')
@@ -42,7 +103,8 @@ def audit_metadata(paper=PAPER, deposit=DEPOSIT):
                 original_file_inventory_verified=False,
                 participant_membership_join_verified=False,
                 real_eeg_reanalysis_verified=False,
-                transmitter_to_receiver_effect_verified=False)
+                transmitter_to_receiver_effect_verified=False,
+                typed_cohort_roles=audit_cohort_roles())
 
 
 def subject_join(paper_ids, archive_ids):
