@@ -8,3 +8,4 @@ import HornedC3.ThreeArmRadiusCutHatcherTransport
 import HornedC3.ThreeArmHatcherHomotopyTransport
 import HornedC3.ThreeArmHatcherPathTransport
 import HornedC3.ThreeArmRadiusConnectedAssembly
+import HornedC3.ThreeArmRadiusConnectedHatcherTransport
