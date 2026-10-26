@@ -38,3 +38,20 @@ The finite-K `(K-1)/K` attenuation applies under iid draws **within the sample-m
 **Current Noise source rule set** at https://github.com/qlabs-eng/noise (read 26 Oct): historical 10M-token tracks archived `archive/10M`; present 30M tokens, 37.7M-param fixed-model tracks and separate open-architecture track. Main track score is 1,114,112 validation predictions; fixed-model speedrun threshold validation CE 3.5; wall time measures first-to-last update, **excludes validation and permits untimed fresh-state compile warmup**. Learning may query forwards and follow at most one nonlinear step; no chained backprop. Current README attributes different records to distinct contributors and scripts; none of them should be collapsed into the earlier 10M 1.6-second claim or represented as a reproduced speed measurement.
 
 **Priority now:** source-hash-pin `dust.py` and each Noise record script, then prove source-step refinements branch-by-branch (nrep=1 / nrep>1; head; local attention; residual scalars; optimizer and execution cost). Leave GPU timings empirical and per-track. New branch theorem candidate and source observations are committed; no CI/Agda kernel claim.
+
+
+## 26 October 2026 max-cut: source-pinned Dust step routing and LILA handoff
+
+**Dust upstream source:** `qlabs-eng/dust/dust.py`, Git blob `c7d08ee9edc3a51dfbd9e73bbf787b9ca819c5c2` (GitHub connector exact file fetch, 26 October 2026). The source explicitly separates:
+- `direct_errors` on writer, MLP-hidden, embedding, and attention-hub sites, with chunkwise centering **only if `nrep > 1`**;
+- `head_error` on cached logits in **256-column slabs** with a batchwise reward centering branch `if b > 1` (NOT the `nrep > 1` condition of direct errors);
+- `local_errors` for q/k/v/gate/value embeddings; q is local to the same token whereas other kinds propagate score to future tokens using gamma;
+- `scalar_gradients` using symmetric **two-sided weight-space ES** for residual and initial-stream scalars;
+- `reassemble` using linear outer-product or embedding scatter-add;
+- `step` assembling parameter estimates and calling **SGD with momentum**, with per-group rates from `make_optimizer` (embedding 1000, value embeddings 0.3, lambda params 0.03, default recipe lr), rank-average and valid-token normalization.
+
+`DASHI/Reasoning/DustReferenceStepContractExact.agda` now pins this routing with `DustParameterKind`, `DustEstimatorRoute`, `referenceRoute`, `SourceStep`, and deliberately opaque `LILAHandoff`. **This is not yet a literal operational refinement:** the output of `referenceRouteIsLiteral` is reflexivity and `referenceTransitionByContract` consumes a supplied update law, not a proof that upstream PyTorch code implements it. The consumer awaits actual LILA model parameter, task and held-out-pair types from the parallel worker; this PR does not change LILA sources.
+
+**Noise competition context:** https://github.com/qlabs-eng/noise/ README fetched on 26 October 2026 (source-level current track definitions; archived 10M challenge distinct from 30M challenge). Fixed-model 30M validation loss and timing, plus 30M open-architecture track, have distinct comparator criteria. No single historical speedup can serve as all-track evidence.
+
+**Remaining exact-maxcut gates (not generic ontology):** (1) per-route runnable Python/reference fixtures against original Dust `dust.py` and `model.py`, including chunk-centering, head slabs, attention gamma and two-sided ES; (2) true Agda finite-sum estimator probability theorem and kernel receipts; (3) specific Noise record-script source equivalences and optimiser state transitions; (4) LILA trainable parameter and held-out-pair handoff after parallel worker's actual definitions become available; (5) resource and semantic correctness Pareto BIDI. Preserve distinct attribution for Dust founders and Noise community record authors.
