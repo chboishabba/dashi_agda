@@ -90,6 +90,7 @@ data AustraliaSourceRole : Set where
   originalParliamentaryDeclaredInterest : AustraliaSourceRole
   originalElectoralRegulatorRule : AustraliaSourceRole
   firstPersonPolicyInterviewReported : AustraliaSourceRole
+  originalPartyPolicyPublication : AustraliaSourceRole
   publisherConfirmedInKindSupport : AustraliaSourceRole
   namedAssociateDonationReported : AustraliaSourceRole
   judiciallyReportedDocumentSchedule : AustraliaSourceRole
@@ -159,6 +160,10 @@ record AustralianPowerPipelineFrontier : Set where
     bannonPalmerStatementAndDenialPreserved : Bool
     mandelsonStrategyReachedEpsteinAtSourceScope : Bool
     hansonAttributesSpecificPensionerWorkProposalToRinehart : Bool
+    oneNationJan2025PensionerPolicyOfficiallyPublished : Bool
+    originalRinehartPolicyInstructionBeforeJan2025Authenticated : Bool
+    pensionerPolicyEnactedInCommonwealthLawVerified : Bool
+    aecJulDec2026OldRegimeReturnPublicationPending : Bool
     oldFY2025_26AECAnnualDisclosurePublicationPending : Bool
     publishedDonorAnnualReturnSameAsReportedAprilDonation : Bool
     aecFutureReformThresholdApplicableRetroactively : Bool
@@ -172,12 +177,31 @@ open AustralianPowerPipelineFrontier public
 
 canonicalAustralianPowerPipelineFrontier : AustralianPowerPipelineFrontier
 canonicalAustralianPowerPipelineFrontier = australian-power-pipeline-frontier
-  true true true true true true true true false false false false false false false false
+  true true true true true true true true false false true true false false false false false false false false
 
 australianMaterialSupportDoesNotProvePolicyCapture :
   oneNationInternalPolicyAdoptionCausallyProven
     canonicalAustralianPowerPipelineFrontier ≡ false
 australianMaterialSupportDoesNotProvePolicyCapture = refl
+
+-- Actual producer's publicly dated January 2025 PARTY statement upgrades
+-- this to a published election-policy proposal. It is NOT an enacted Act or
+-- an authenticated private Rinehart instruction before publication.
+oneNationOriginalPartyPensionerPolicyPublished :
+  oneNationJan2025PensionerPolicyOfficiallyPublished canonicalAustralianPowerPipelineFrontier ≡ true
+oneNationOriginalPartyPensionerPolicyPublished = refl
+
+noDatedPrePublicationRinehartInstructionInspected :
+  originalRinehartPolicyInstructionBeforeJan2025Authenticated canonicalAustralianPowerPipelineFrontier ≡ false
+noDatedPrePublicationRinehartInstructionInspected = refl
+
+partyElectionPledgeNotAutomaticallyEnactedCommonwealthLaw :
+  pensionerPolicyEnactedInCommonwealthLawVerified canonicalAustralianPowerPipelineFrontier ≡ false
+partyElectionPledgeNotAutomaticallyEnactedCommonwealthLaw = refl
+
+aecSecond2026TransitionPublicationNotFirstFYRelease :
+  aecJulDec2026OldRegimeReturnPublicationPending canonicalAustralianPowerPipelineFrontier ≡ true
+aecSecond2026TransitionPublicationNotFirstFYRelease = refl
 
 hansonAttributedSpecificPensionerPolicyOrigin :
   hansonAttributesSpecificPensionerWorkProposalToRinehart
@@ -241,3 +265,18 @@ aecDisclosure2026PublicationOriginal = australia-source-role-receipt
 siblingClimateFinanceOwnershipNote : String
 siblingClimateFinanceOwnershipNote =
   "PR #1251 original climate genealogy carries HPPL/IPA court receipt plus 1998 API/GCC communications plan (US) and media production/funding; unmerged master sibling, source lineage only, not direct contract or editorial instruction joining Gina, IPA and Palmer, Bannon, Epstein or CA."
+
+
+oneNationJan15_2025PrimaryPolicyPublication : AustraliaSourceRoleReceipt
+oneNationJan15_2025PrimaryPolicyPublication = australia-source-role-receipt
+  originalPartyPolicyPublication
+  "Pauline Hanson's One Nation, party-authored election policy release, 2025-01-15"
+  "https://www.onenation.org.au/one-nation-to-remove-limits-on-pensioners-veterans-earnings"
+  "Original PARTY publisher pledges that age and veteran pensioners may work with no means-test payment reduction; directly pays a dated, specific 2025 election policy proposal. Hanson's June 2026 first-person Rinehart attribution is a SEPARATE later original utterance, not evidence of when Rinehart advised her, actual legislative passage, private authorship or a causal experiment."
+
+aecSecondHalf2026TransitionOriginal : AustraliaSourceRoleReceipt
+aecSecondHalf2026TransitionOriginal = australia-source-role-receipt
+  originalElectoralRegulatorRule
+  "Australian Electoral Commission, Transitional Rules for funding and disclosure, checked 2026-10-27"
+  "https://www.aec.gov.au/FADTransitionalRules/"
+  "AEC distinguishes (A) July 2025-June 2026 old-regime returns published by 2027-02-01; (B) July 2026-Dec 2026 OLD-regime transitional returns due 2027-03-11 and published by 2027-04-22; and (C) Jan-Dec 2027 NEW-regime returns, lower $5000 threshold/expedited donor disclosures. Do not misassign late-2026 events to first old FY return or new 2027 threshold."
