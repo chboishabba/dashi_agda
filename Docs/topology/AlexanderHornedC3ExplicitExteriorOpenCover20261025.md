@@ -183,3 +183,109 @@ floating checks locally executed). The algebraic formula supplies
 the universal paper argument; finite checks are NOT a Lean topology
 kernel certificate. The remaining Lean obligation is to formalize
 this homeomorphism and its induced trivial fundamental group.
+
+
+## 2026-10-26 Pareto continuation: C3-equivariant basing and a severe collision
+
+**Original sources / roles:** Alexander's 1924 wild-sphere example;
+Hatcher's *Algebraic Topology*, Example 2B.2, printed pp. 170–172
+(source for supported stage homeomorphisms and punctured-torus
+commutator injections), https://pi.math.cornell.edu/~hatcher/AT/AT.pdf;
+Franca Lippert, *The Alexander Horned Sphere and Bing's Hooked Rug*
+(a separate exposition of the supported pillbox construction).
+The user-directed specific C3 placement and these computed coordinates
+are repository-derived; the underlying wild topology, van Kampen,
+Schoenflies and fundamental-group basepoint transport are **not** newly
+invented here. Jack McCarthy and Deicyde/hatcher-at own the upstream
+Lean van Kampen implementations. #1254's source genealogy and spatial
+nonpromotion, and #1266/#1267's finite-collision/severe-test guidance,
+are related **unmerged research donors**, not silently imported proofs.
+
+### Construct actual C3-covariant basing paths
+
+Use the existing fixed basepoint `x0=(20,20,20)`. Let
+`p_i=13e_i` and `gamma_i(t)=(1-t)x0+t*p_i` for `0<=t<=1`.
+The distinguished i-th component is `20-7t>=13`.
+For the i-th centre `9e_i`, the Euclidean distance is >=4.
+For any other centre `9e_j`, the Euclidean distance is >=13,
+because the i-th coordinate of that centre is zero.
+Thus **every** gamma_i lies in `C` and clears the radius-15/4
+inner closed balls with a universal positive margin.
+The same distinguished-coordinate bound puts it outside the
+central radius-1 ball, every spoke (axial extent <=17/2),
+and each satellite radius-1 envelope; hence it lies in the
+actual E whenever B is contained in those designated envelopes.
+
+Each terminal `p_i` lies in the overlap `C∩S_i`:
+`|p_i-9e_i|=4`, strictly between 15/4 and 17/4.
+With `R(x,y,z)=(z,x,y)`, the exact identities
+`Rx0=x0`, `Rp_i=p_(i+1)`, and
+`R gamma_i(t)=gamma_(i+1)(t)` hold pointwise.
+Consequently the future inclusion/basepoint-transport maps
+may be chosen strictly C3-compatible. This pays the previously
+implicit **basing path geometry**; it does NOT prove that
+`pi1(S_i,p_i)=G_A` or that a chosen group presentation has
+been transported equivariantly.
+
+Executed exact-rational source: `scripts/alexander_horned_c3_equivariant_basing_paths.py`;
+303 stage-parameter evaluations pass. The universal inequalities
+are paper-level and do not follow from the sample count.
+
+### Severe negative discriminator: identical covers, different topology
+
+Replace each wild satellite (lying inside its own unit reference ball)
+by a tame round 3-ball with the same *preserved cap*, leaving the central
+ball and each straight tube untouched. This constructs two ambient
+solids with exactly the same exterior membership **outside** the three
+radius-15/4 inner balls. Therefore their actual central regions C
+coincide, as do all annular shell overlaps `C∩S_i`, cut spheres,
+global basepoint paths and C3 placement checks.
+
+The tame replacement is a tame thickened three-edge tree with a tame
+3-ball boundary and simply connected exterior by classical Schoenflies.
+For the supported **wild** replacement, the Hatcher one-sector exterior
+group is nontrivial; a three-copy exterior free-product conclusion
+requires the remaining relative-collar/satellite-side gluing theorem
+for the chosen same object. Thus all the finite cut/cover certificates
+may agree even though the intended final fundamental groups differ.
+
+**Acceptance lesson:** the cover's local contractibility and C3
+equivariance are not an observationally sufficient encoding of
+the satellite's wild exterior group. Do NOT infer wildness from the
+cut certificate alone. The first next nonredundant payment is a
+relative cap/collar equivalence from each `S_i` to its **actual**
+Hatcher satellite exterior, recording induced generator/meridian
+maps and basepoint transport. If the paper theorem's relative
+collar hypotheses are not instantiated, keep the global result
+conditional. This is an instance of the consumer-specific collision
+principle, not a claim that #1266 provided an already imported
+formal proof about this geometry.
+
+New independent analytic and negative-control script:
+`scripts/alexander_horned_c3_same_cover_discriminator.py`.
+Locally executed Python 3/SymPy 1.14: five exact symbolic
+shell identities, 5786 guaranteed-exterior rational-lattice cases, and two deliberately
+failing cut configurations PASS. Symbolic algebra is not an
+infinite-topology or Lean/Agda kernel certificate.
+
+### Updated constrained Pareto order
+
+P0: relative collar homotopy equivalence of each actual satellite
+exterior with Hatcher `G_A`, and named meridian map.
+P0: instantiate the existing `ThreeArmCentralPi1Reduction` after
+exact-head typechecking and proving the tame central-region maps.
+P1: use these exact gamma_i paths to weld group isomorphisms and
+rotation naturality (which then yields outer C3 via the existing
+factor-retraction proof, with no duplicate symmetry theory).
+P1: implement an independent finite-stage **tame** comparison that
+deliberately passes all cut checks but fails the targeted satellite
+group test; avoid validating one model by its own source assumptions.
+P2: gauge/readout experiment as a physically separate programme.
+
+Status in this cut: two standalone scripts run locally; exact
+GitHub source committed; no Lean/Agda kernel run and no physical
+measurement. No proof claim is promoted by these source or test
+receipts. Ibrahim first-link/snowball here means tracing precisely
+Hatcher's original construction and already available implementations
+to the remaining consumer, not counting repeated secondary citations
+or over-claiming novelty.
