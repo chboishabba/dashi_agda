@@ -297,3 +297,73 @@ noEdgeCompatibleOrientation true true true true h₀ h₁ () h₃
 -- It is not a claim about actual physical diamond NV defects,
 -- experimental vortices, a two-form gauge flux, full sheaf theory,
 -- or the Griess rational Albert algebra/Monster VOA product.
+
+
+-- 2026-10-26 P0: the XOR voltage constraints are DERIVED from
+-- *actual native Cube.HypervoxelAdjacent* at each of the four
+-- projective edges. Earlier noEdgeCompatibleOrientation was a
+-- correct Boolean impossibility but did not itself discharge this
+-- real-graph-to-Boolean acceptance join.
+--
+-- For a fixed canonical axis pair, TWO signs produce an actual native
+-- path edge. The other TWO signs are definitionally impossible from
+-- the source edge constructors; () eliminates those cases.  This is
+-- the precise local-graph-cover voltage interpretation (Gross 1974,
+-- Gross--Tucker 1977), no physical electromagnetic gauge claimed.
+
+spatialEdgeBitXFacePP : (s t : Bool) →
+  Cube.HypervoxelAdjacent (decode (axisX , s)) (decode (faceXYpp , t)) →
+  (s xor t) ≡ false
+spatialEdgeBitXFacePP false false _ = refl
+spatialEdgeBitXFacePP false true ()
+spatialEdgeBitXFacePP true false ()
+spatialEdgeBitXFacePP true true _ = refl
+
+spatialEdgeBitFacePPAxisY : (s t : Bool) →
+  Cube.HypervoxelAdjacent (decode (faceXYpp , s)) (decode (axisY , t)) →
+  (s xor t) ≡ false
+spatialEdgeBitFacePPAxisY false false _ = refl
+spatialEdgeBitFacePPAxisY false true ()
+spatialEdgeBitFacePPAxisY true false ()
+spatialEdgeBitFacePPAxisY true true _ = refl
+
+spatialEdgeBitAxisYFacePM : (s t : Bool) →
+  Cube.HypervoxelAdjacent (decode (axisY , s)) (decode (faceXYpm , t)) →
+  (s xor t) ≡ true
+spatialEdgeBitAxisYFacePM false false ()
+spatialEdgeBitAxisYFacePM false true _ = refl
+spatialEdgeBitAxisYFacePM true false _ = refl
+spatialEdgeBitAxisYFacePM true true ()
+
+spatialEdgeBitFacePMAxisX : (s t : Bool) →
+  Cube.HypervoxelAdjacent (decode (faceXYpm , s)) (decode (axisX , t)) →
+  (s xor t) ≡ false
+spatialEdgeBitFacePMAxisX false false _ = refl
+spatialEdgeBitFacePMAxisX false true ()
+spatialEdgeBitFacePMAxisX true false ()
+spatialEdgeBitFacePMAxisX true true _ = refl
+
+-- This theorem now rejects an actual global sign SECTION that
+-- preserves all four source-selected native adjacency edges.
+-- No assumptions of an artificial P3^3 graph relation are supplied.
+noSpatialSectionOnNativeFourCycle :
+  (sX sPP sY sPM : Bool) →
+  Cube.HypervoxelAdjacent
+    (decode (axisX , sX)) (decode (faceXYpp , sPP)) →
+  Cube.HypervoxelAdjacent
+    (decode (faceXYpp , sPP)) (decode (axisY , sY)) →
+  Cube.HypervoxelAdjacent
+    (decode (axisY , sY)) (decode (faceXYpm , sPM)) →
+  Cube.HypervoxelAdjacent
+    (decode (faceXYpm , sPM)) (decode (axisX , sX)) →
+  ⊥
+noSpatialSectionOnNativeFourCycle sX sPP sY sPM e1 e2 e3 e4 =
+  noEdgeCompatibleOrientation sX sPP sY sPM
+    (spatialEdgeBitXFacePP sX sPP e1)
+    (spatialEdgeBitFacePPAxisY sPP sY e2)
+    (spatialEdgeBitAxisYFacePM sY sPM e3)
+    (spatialEdgeBitFacePMAxisX sPM sX e4)
+
+-- Agda source written only; kernel compilation pending. The four
+-- native adjacency predicates and the explicit sign transitions
+-- were independently enumerated in exact local Python.
