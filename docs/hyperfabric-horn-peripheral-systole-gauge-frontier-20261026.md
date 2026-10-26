@@ -312,3 +312,54 @@ map in original #1244, then instantiate this precise
 Lean/Python consumer. Do not broaden to arbitrary
 Cantor embeddings, new matrix actors or another
 nominal collar-equivalence assumption.
+
+
+## Late concurrent source-owner payment: actual metric radius-cut van Kampen interface
+
+At FINAL live-head recheck horn owner #1244 advanced to
+`9f447f2cd9bd482c76cc0aadd995b520a15e8e8d`
+with NEW SOURCE-WRITTEN Lean modules:
+`proofs/horned_c3_lean/HornedC3/ThreeArmRadiusCutGeometry.lean`,
+`ThreeArmHatcherGroupTransport.lean` and
+`ThreeArmRadiusCutHatcherTransport.lean`. A detailed owner
+cutset lives at
+`Docs/topology/AlexanderHornedC3MetricVanKampenCutset20261026.md`.
+These files are original #1244 work and must NOT be cloned.
+
+Key precise type correction: the three centre points c_i=9e_i
+are in the removed wild solid, not in the metric space
+E=R3\B itself. The owner's new radius-cut constructor works
+with a continuous inclusion f:E→R3 into the AMBIENT
+pseudometric/Euclidean space and pulls centre-ball cuts back
+to the exterior. This is exactly the right point-set
+interface and supplies formal SOURCE-WRITTEN openness,
+coverage, satellite disjointness and basepoint membership
+from inequalities. It does not supply path connectivity,
+central based π1(C)=1, any Hatcher satellite
+`G_A ≃* CoverGroup U_i`, or geometric metric
+marked-meridian lengths. No exact-head Lean kernel result.
+
+The new `ThreeArmSourceGroupCertificates.member_group`
+is now the CANONICAL missing same-object group-geometric
+witness for the source-owner implementation. Once inhabited
+for a true Hatcher linked satellite, it can be fed to
+Hatcher-at's `coprodIEquiv`, already reused by the
+owner. Our new SOURCE-METRIC meridian acceptance is a
+SEPARATE needed witness: the resulting source group's
+named meridian must be realised by an actually rectifiable
+loop and a local Euclidean length / Lipschitz constant.
+A proof of radius-cover data or of an abstract group
+equivalence alone does not pay its metric distortion.
+
+The two remaining geometric obligations are therefore
+orthogonal and maximally narrow:
+(1) relative wild satellite/cap exterior
+homeotopy with the actual meridian map into
+`member_group`, and
+(2) a source-linked local meridian with its
+Euclidean length or metric chart Lipschitz
+`Lambda_w`. Only after (1)+(2) can
+`selectedWActualTubeChartReject` consume
+the real source and global bounded gauge.
+No cross-PR source ownership is reassigned
+and no kernel proof is claimed.
