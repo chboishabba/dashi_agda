@@ -275,41 +275,41 @@ Do not copy newer unrelated PRs for coincident terms.
 ## 2026-10-27 relative-ambient Hatcher compactness correction
 
 **Issue diagnosed in the source (not an inferred theorem):** the original
-\`compactMapFactorsThroughOpenStage\` API asked for
-\`Set.univ ⊆ ⋃ n, Y n\`. With Hatcher's actual spatial ambient
-\`X = ℝ³\`, this is FALSE: the union is \`E = ℝ³ \ B\`,
-not all of \`ℝ³\`. It could be made true by changing the ambient
-type to \`E\`, but that makes the spatial embedding/collar interface
+`compactMapFactorsThroughOpenStage` API asked for
+`Set.univ ⊆ ⋃ n, Y n`. With Hatcher's actual spatial ambient
+`X = ℝ³`, this is FALSE: the union is `E = ℝ³ \ B`,
+not all of `ℝ³`. It could be made true by changing the ambient
+type to `E`, but that makes the spatial embedding/collar interface
 harder and is not necessary.
 
 **New source-written, conditional Lean proof adapter**
-\`HatcherOpenExhaustionCompactAbsorption.lean\` now includes:
+`HatcherOpenExhaustionCompactAbsorption.lean` now includes:
 
-- \`compactMapAbsorbedByOpenStagesRelative\`: only
-  \`range(f) ⊆ ⋃ n, Y n\` is required.
-- \`compactMapFactorsThroughOpenStageRelative\`: constructs a
+- `compactMapAbsorbedByOpenStagesRelative`: only
+  `range(f) ⊆ ⋃ n, Y n` is required.
+- `compactMapFactorsThroughOpenStageRelative`: constructs a
   continuous map into a particular stage, still based in the
   actual spatial ambient.
-- \`compactMapFactorsThroughNestedClosedExteriors\`: accepts
-  actual decreasing CLOSED sets \`H_n\` and a continuous map
-  \`f : C(T,X)\` from compact \`T\` avoiding \`⋂ n, H_n\`,
-  and produces \`g : C(T,(H_N)ᶜ)\` with ambient equality.
+- `compactMapFactorsThroughNestedClosedExteriors`: accepts
+  actual decreasing CLOSED sets `H_n` and a continuous map
+  `f : C(T,X)` from compact `T` avoiding `⋂ n, H_n`,
+  and produces `g : C(T,(H_N)ᶜ)` with ambient equality.
 
-\`Set.compl_iInter\` provides the precise complement-of-intersection
-identity; \`IsCompact.elim_directed_cover\` remains Mathlib's compactness
+`Set.compl_iInter` provides the precise complement-of-intersection
+identity; `IsCompact.elim_directed_cover` remains Mathlib's compactness
 engine. Original wild-group and stage claims remain Hatcher's, not
 new discoveries. New declarations are **SOURCE-WRITTEN ONLY**:
 exact-head Lean typecheck has not been performed in this environment.
 The original stronger library interfaces remain intact for consumers.
 
 **New severe rational regression**
-\`scripts/alexander_horned_c3_relative_exterior_absorption.py\`.
-The MODEL \`H_n=[-1/(n+1),1/(n+1)] ⊂ ℝ\`
-decreases to \`B={0}\`, so its exteriors never cover the ambient R.
-Nevertheless the compact affine image \`[1/3,1/2]\` is contained
-in \`H_3ᶜ\`, but not \`H_2ᶜ\`. It also exhibits two counterexamples:
-a noncompact discrete source \`f(k)=1/(k+1)\` escaping every single
-stage, and an image meeting the limit at \`0\` that never lies in
+`scripts/alexander_horned_c3_relative_exterior_absorption.py`.
+The MODEL `H_n=[-1/(n+1),1/(n+1)] ⊂ ℝ`
+decreases to `B={0}`, so its exteriors never cover the ambient R.
+Nevertheless the compact affine image `[1/3,1/2]` is contained
+in `H_3ᶜ`, but not `H_2ᶜ`. It also exhibits two counterexamples:
+a noncompact discrete source `f(k)=1/(k+1)` escaping every single
+stage, and an image meeting the limit at `0` that never lies in
 any exterior stage. This is an EXACT MODEL control in one dimension,
 NOT an Alexander three-dimensional linked-handlebody instantiation.
 Independent local rational replay PASS (1, 10, 256 and 1024 levels);
@@ -318,7 +318,7 @@ The focused workflow now calls it.
 
 **Remaining max-cut after this correction:**
 G1 geometry instantiate ACTUAL nested closed Hatcher handlebodies
-\`X_n ⊂ ℝ³\` with meridian/annular collar controls;
+`X_n ⊂ ℝ³` with meridian/annular collar controls;
 G2 central π1/triviality and connectedness in actual selected E;
 G3 star/satellite connectedness and valid actual overlap points;
 G4 actual satellite relative homotopy equivalence and meridian
@@ -326,7 +326,7 @@ naturality;
 G5 exact-head Lean/Agda kernel build; for group colimit also establish
 finite-stage π1 identification and injection. The new lemma pays
 only loop/homotopy compactness, NOT these other obligations.
-Do not import #1254's finite genus-zero surface cap as \`X_n\`.
+Do not import #1254's finite genus-zero surface cap as `X_n`.
 
 **Adjacent PR checks:** #1254 owns exotic topology and has merged
 this parent compactness work; #1273 studies formalization source
