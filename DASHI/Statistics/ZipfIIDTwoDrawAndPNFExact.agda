@@ -16,13 +16,16 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; 2ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 open import Data.Rational.Properties as ℚP using (+-identityʳ; *-identityʳ)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Cognition.PNF.GenericExpectedFibreRateExact as Expected
 import DASHI.Statistics.ZipfFamilyFiniteExact as Zipf
+
+twoℚ : ℚ
+twoℚ = 1ℚ + 1ℚ
 
 ------------------------------------------------------------------------
 -- Consumer of the OWNED normalized finite probability carrier.
@@ -92,23 +95,23 @@ iidTwoDrawCollision law = p law * p law + q law * q law
 iidTwoDrawMeanDistinct : TwoRankIIDLaw → ℚ
 iidTwoDrawMeanDistinct law =
     (p law * p law) * 1ℚ
-  + (p law * q law) * 2ℚ
-  + (q law * p law) * 2ℚ
+  + (p law * q law) * twoℚ
+  + (q law * p law) * twoℚ
   + (q law * q law) * 1ℚ
 
 -- Exactly four ordered outcomes: 00, 01, 10, 11.
 -- Their probabilities factor because IID is part of the model.
 iidTwoDrawMeanPlusCollisionIsTwo :
   (law : TwoRankIIDLaw) →
-  iidTwoDrawMeanDistinct law + iidTwoDrawCollision law ≡ 2ℚ
+  iidTwoDrawMeanDistinct law + iidTwoDrawCollision law ≡ twoℚ
 iidTwoDrawMeanPlusCollisionIsTwo law =
   trans
     (solve (p law ∷ q law ∷ []))
     (trans
-      (cong (λ total → 2ℚ * (total * total)) (normalizedPQ law))
+      (cong (λ total → twoℚ * (total * total)) (normalizedPQ law))
       (trans
-        (cong (2ℚ *_) (ℚP.*-identityʳ 1ℚ))
-        (ℚP.*-identityʳ 2ℚ)))
+        (cong (twoℚ *_) (ℚP.*-identityʳ 1ℚ))
+        (ℚP.*-identityʳ twoℚ)))
 
 ------------------------------------------------------------------------
 -- No false promotion of an explicitly supplied mass law to a universal
