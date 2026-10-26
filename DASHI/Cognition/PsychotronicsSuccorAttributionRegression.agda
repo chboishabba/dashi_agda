@@ -135,9 +135,36 @@ thermalScreenDoesNotVerifyCalibration = refl
 -- source carriers including real NOAA Bangor records, same-station metadata,
 -- an earlier local press item and a Kansas location false-match control.
 -- More source objects are NOT more independent weather experiments.
-sourceAtlasCountIsSixtySeven :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 67
-sourceAtlasCountIsSixtySeven = refl
+sourceAtlasCountIsSixtyNine :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 69
+sourceAtlasCountIsSixtyNine = refl
+
+-- Additional original 1953 NOAA station does not change the publisher
+-- denominator; observations must retain their actual distinct site keys.
+barHarborJuly6Through8Equals130TenthsMm :
+  Atlas.tenthsMillimetre Atlas.barHarborJuly6 +
+  Atlas.tenthsMillimetre Atlas.barHarborJuly7 +
+  Atlas.tenthsMillimetre Atlas.barHarborJuly8 ≡ 130
+barHarborJuly6Through8Equals130TenthsMm = refl
+
+twoMaineStationTotalsDifferBy175TenthsMm :
+  (Atlas.tenthsMillimetre Atlas.bangorJuly6 +
+   Atlas.tenthsMillimetre Atlas.bangorJuly7 +
+   Atlas.tenthsMillimetre Atlas.bangorJuly8) ≡
+  (Atlas.tenthsMillimetre Atlas.barHarborJuly6 +
+   Atlas.tenthsMillimetre Atlas.barHarborJuly7 +
+   Atlas.tenthsMillimetre Atlas.barHarborJuly8) + 175
+twoMaineStationTotalsDifferBy175TenthsMm = refl
+
+noaaTwoStationSourcesShareCustodialAttributionRoot :
+  Atlas.root Atlas.noaaBarHarborRainSourceClaim ≡
+  Atlas.root Atlas.noaaBangorRainSourceClaim
+noaaTwoStationSourcesShareCustodialAttributionRoot = refl
+
+barHarborPublisherMetadataDoesNotGrantCausality :
+  Attribution.citationImportsProof Atlas.noaaBarHarborStationMetadata ≡ false
+barHarborPublisherMetadataDoesNotGrantCausality =
+  Atlas.allSourcesRemainNonPromoting Atlas.noaaBarHarborStationMetadata
 
 -- RVML organiser archives and its uploader account represent one historical
 -- programme origin; neither is Croft's narrator root or a verified transfer.
