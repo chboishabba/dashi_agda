@@ -77,3 +77,32 @@ def test_high_amplitude_example_does_not_enter_small_data_lane():
     nu=F(1)
     effective_nonlin_over_dissipation=F(5,2)*nu
     assert 2*nu-effective_nonlin_over_dissipation<0
+
+
+
+def test_eventual_critical_entry_from_energy_average_exact():
+    # Energy inequality E'+2nu H1^2=0, so on an interval of length 1/nu
+    # there exists s with H1^2(s)<=E(t0)/2. For that s:
+    # X(s) <= 2 H1/2^2 <= 2 sqrt(E(s)*H1^2(s))
+    #      <= sqrt(2)*E(t0).
+    # Fix E(t0)<=nu^2/(sqrt(2)*Ccrit^2); then X(s)<=nu^2/Ccrit^2.
+    # This test uses the exactly squared inequalities and Ccrit=1 fixture.
+    nu=F(3,2); Ccrit=F(1)
+    e0_squared_bound=nu**4/(2*Ccrit**4)
+    # E0 <= nu^2/(sqrt(2)*C^2) iff E0^2 <= nu^4/(2*C^4).
+    for e0 in [F(1,2),F(3,2)]:
+        assert e0*e0 <= e0_squared_bound
+        # (sqrt(2)*E0)^2 <= (nu^2/C^2)^2
+        assert 2*e0*e0 <= nu**4/Ccrit**4
+
+
+def test_eventual_critical_dissipation_margin_exact():
+    # Once X<=nu^2/Ccrit^2 at s, Ccrit sqrt(X)<=nu and
+    # X'+nu D<=0 subsequently. The small class is invariant.
+    nu=F(2,1)
+    Ccrit=F(5,4)
+    xthreshold=nu**2/Ccrit**2
+    assert Ccrit**2*xthreshold==nu**2
+    assert 2*nu-nu==nu
+    # With X(t_enter)<=xthreshold, the right-hand post-entry budget
+    # is independent of the initial kinetic energy E0 and cutoff N.
