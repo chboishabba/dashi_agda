@@ -88,7 +88,7 @@ for kc in range(-2,3):
                 assert torus_weights(k)[0]-Fr(1,3)==k
                 assert torus_weights(k)[2]+Fr(2,3)==-2*k
             deg=chi33_clutch_degree(kl,kr)
-            assert deg==2*(kr-kl) and isinstance(deg,int)
+            assert deg==2*(kr-kl) and deg.denominator==1
             assert deg%2==0
 assert chi33_clutch_degree(0,0)==0
 assert chi33_clutch_degree(1,0)==-2
