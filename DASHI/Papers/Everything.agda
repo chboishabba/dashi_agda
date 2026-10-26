@@ -11,3 +11,5 @@ import DASHI.Papers.ThreePaperSourceAtlas20261025Exact
 
 -- Consumer-relative semantic-fidelity obstructions reuse existing generic owners.
 import DASHI.Papers.ThreePaperConsumerFidelity20261026Exact
+
+import DASHI.Papers.ThreePaperConsumerFidelity20261026Regression
