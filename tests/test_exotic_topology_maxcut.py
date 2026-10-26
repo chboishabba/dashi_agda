@@ -18,6 +18,7 @@ import exotic_topology_binary_ternary_pants as codec
 import exotic_topology_pl_surface_gluings as pl
 import exotic_topology_pl_frontier_lineage as lineage
 import exotic_topology_pl_complement_components as complement
+import exotic_topology_cantor_cylinder_orientation as orientation
 import exotic_topology_braid_crosspr_discriminator as braid
 import exotic_topology_cantor_measure_obstruction as measure
 # Native scripts are owned upstream by horned-sphere PR #1244.
@@ -196,5 +197,20 @@ class ExoticMaxCutTests(unittest.TestCase):
         with self.assertRaises(AssertionError):
             complement.verify_complement_components(
                 old, new, actual_map, 'cantor')
+
+
+    def test_cantor_chronological_child_refines_actual_prefix_event(self):
+        receipt = orientation.audit(max_depth=9)
+        self.assertEqual(receipt['exact_prefix_child_cases'], 2046)
+        self.assertTrue(receipt['append_children_are_chronological_refinements'])
+        self.assertTrue(receipt['reverse_word_conjugates_append_to_prepend'])
+        self.assertFalse(receipt['richards_end_space_homeomorphism_proved'])
+
+    def test_original_prepended_mass_child_not_chronological_refinement(self):
+        receipt = orientation.audit(max_depth=3)
+        self.assertTrue(receipt['source_original_prepend_is_mass_consistent'])
+        self.assertFalse(receipt['old_prepend_is_chronological_refinement'])
+        self.assertTrue(receipt['original_source_unchanged'])
+        self.assertFalse(receipt['agda_kernel_verified'])
 
 if __name__ == '__main__': unittest.main()
