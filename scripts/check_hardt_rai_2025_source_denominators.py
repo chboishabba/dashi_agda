@@ -83,5 +83,4 @@ def main():
     output=audit_manifest_file(a.manifest) if a.manifest else audit_metadata()
     print(json.dumps(output,sort_keys=True,indent=2))
 
-
 if __name__=='__main__':main()
