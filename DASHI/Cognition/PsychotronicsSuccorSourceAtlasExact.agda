@@ -552,7 +552,7 @@ saikiaFieldPatent2019 = Source.mkNoDOISource
   "WIPO PCT/IN2018/050452 priority 13 July 2017, filed 10 July 2018, published 17 January 2019; first-party public text transcribed on Google Patents; original source inventor claims, not clinical efficacy"
   "2019"
   "https://patents.google.com/patent/WO2019012556A1/en"
-  Source.patentSource
+  Source.namedSourceKind "published patent specification"
   "Published patent claim 1 describes 17 cm separated parallel aluminium electrodes in a proposed helmet-like AC/DC electric-field apparatus powered by charging, oscillator and booster units; patent claims and in-vitro examples do not prove human treatment or Rodin-versus-Helmholtz coil benefit"
   Source.publicAttribution
 
