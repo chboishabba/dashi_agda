@@ -404,3 +404,9 @@ industryDefectionsNotErased :
   Climate.ConcentratedSourceAuditBoundary.shellBPDefectionsPreservedAsCounterExamples
     Climate.canonicalConcentratedSourceAuditBoundary ≡ true
 industryDefectionsNotErased = refl
+
+
+allAPIContributorsInExampleShareOneOriginalDocument :
+  Typed.receipts Climate.apiNamedContributorAJohnAdams ≡
+  Typed.receipts Climate.apiNamedContributorJosephWalker
+allAPIContributorsInExampleShareOneOriginalDocument = refl
