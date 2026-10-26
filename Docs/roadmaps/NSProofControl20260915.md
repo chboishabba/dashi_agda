@@ -21,6 +21,23 @@ orientation data must therefore accompany the sign observations.
 Amplitude multiplication does not alter a finite sign profile
 but makes the cubic nonlinear growth defeat quadratic dissipation.
 
+**Existing R92 mathematical join NOW EXPLICIT:** the actual projected
+Galerkin modal transfer on this physical source has genuine Waleffe
+common amplitude
+`A=(5-sqrt5+sqrt30)/10>0`, physical lengths
+`|p|=1,|q|=sqrt5,|k|=sqrt6`, and modal contributions
+`T_p=(sqrt5-sqrt6)A<0`,
+`T_q=(sqrt6-1)A>0`,
+`T_k=(1-sqrt5)A<0`.
+Original R92 energy and helicity invariant sums vanish EXACTLY.
+At original dyadic weights (1,2,2),
+`Pcrit=T_p+2T_q+2T_k=-T_p>0`.
+This provides an ACTUAL finite high-high middle-leg-gain
+candidate for the 369 sign/profile classifier, not an identified
+Gram K_N(A) Rayleigh eigenvalue or cutoff-uniform coercive estimate.
+The seventh exact regression checks this full common-amplitude
+source join. Original author Waleffe (1992) retained.
+
 **Source-written formal reuse:** Existing `NSCross369OrientationBridgeExact`
 now carries `cyclic369CrossEquivariant` and
 `cyclic369ThirdPowerIdentity` on the existing polymorphic
@@ -34,7 +51,7 @@ is a DIFFERENT conditional same-limiting-solution compiler that
 does NOT produce Package A/W2. R528/R532 Euclidean counting-vs-
 continuum measure transport remains open.
 
-**Execution:** six locally passed exact SymPy tests for the full
+**Execution:** seven locally passed exact SymPy tests for the full
 proper/improper orientation orbit and finite sign-fibre collapse,
 source-matching regression
 `tests/test_ns_369_pure_plus_w2_orbit.py`.
