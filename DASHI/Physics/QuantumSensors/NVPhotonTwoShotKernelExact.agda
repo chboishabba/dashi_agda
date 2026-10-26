@@ -5,7 +5,8 @@ module DASHI.Physics.QuantumSensors.NVPhotonTwoShotKernelExact where
 -- single-shot photon response or experimental independence.
 -- The underlying one-shot normalized likelihood is imported from MCG.
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Relation.Binary.PropositionalEquality using (trans)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -27,13 +28,23 @@ joint : IndependentTwoShot → PhotonBit → PhotonBit → ℚ
 joint t x y = weight (single t) x * weight (single t) y
 
 -- Product mass normalisation follows from existing one-shot normalisation.
+-- The first equality is a finite polynomial identity; the second uses
+-- the source likelihood's normalization witness.
+jointSquare : (t : IndependentTwoShot) →
+  joint t click click + joint t click dark +
+  joint t dark click + joint t dark dark ≡
+  (Photon.photon (single t) + Photon.noPhoton (single t)) *
+  (Photon.photon (single t) + Photon.noPhoton (single t))
+jointSquare t =
+  solve (Photon.photon (single t) ∷
+         Photon.noPhoton (single t) ∷ [])
+
 jointNormalized : (t : IndependentTwoShot) →
   joint t click click + joint t click dark +
   joint t dark click + joint t dark dark ≡ 1ℚ
-jointNormalized t
-  rewrite Photon.normalized (single t) =
-  solve (Photon.photon (single t) ∷
-         Photon.noPhoton (single t) ∷ [])
+jointNormalized t =
+  trans (jointSquare t)
+    (trans (cong (λ z → z * z) (Photon.normalized (single t))) refl)
 
 -- A threshold rule retains the ambiguous 1-click outcomes as ties.
 data TwoShotOutcome : Set where
@@ -56,10 +67,7 @@ tieWeight t = joint t click dark + joint t dark click
 
 partition : (t : IndependentTwoShot) →
   bothClickWeight t + tieWeight t + bothDarkWeight t ≡ 1ℚ
-partition t
-  rewrite Photon.normalized (single t) =
-  solve (Photon.photon (single t) ∷
-         Photon.noPhoton (single t) ∷ [])
+partition t = jointNormalized t
 
 -- The model is useful to an experimental consumer only if the joint
 -- probabilities have a separately justified physical independence receipt.
