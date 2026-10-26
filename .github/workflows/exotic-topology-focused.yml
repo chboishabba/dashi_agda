@@ -6,6 +6,7 @@ on:
   pull_request:
     paths:
       - "DASHI/Mathematics/Topology/Exotic*.agda"
+      - "DASHI/EverythingTOESymmetryResolved369.agda"
       - "scripts/exotic_topology_*.py"
       - "tests/test_exotic_topology_maxcut.py"
       - "Docs/topology/Exotic*.md"
@@ -16,6 +17,20 @@ permissions:
   contents: read
 
 jobs:
+  toe-import-graph:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+      - name: Kernel-check exact TOE import graph
+        run: |
+          echo "TOE exact SHA: $GITHUB_SHA"
+          agda -i . DASHI/EverythingTOESymmetryResolved369.agda
+
 
   agda-source-kernel:
     runs-on: ubuntu-latest
