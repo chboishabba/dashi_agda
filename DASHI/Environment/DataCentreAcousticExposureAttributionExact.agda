@@ -239,6 +239,41 @@ sameWeightedProxy = refl
 spectraRemainDifferent : lowOnly ≡ highOnly → ⊥
 spectraRemainDifferent ()
 
+-- Woolworth Fig 1 reports both dBA and dBC for source plots.
+-- TWO scalar summaries still do not determine a frequency-resolved
+-- 3-or-more-band physical spectrum. This is a fully exact *toy power*
+-- witness, not calibrated ANSI/IEC dB(A) or dB(C) and never a 20-Hz
+-- measurement. It refutes the general inverse-map uniqueness shortcut.
+data ThreeBandSpectrum : Set where
+  firstThreeBandProfile : ThreeBandSpectrum
+  secondThreeBandProfile : ThreeBandSpectrum
+
+firstToyWeightedProxy : ThreeBandSpectrum → Nat
+firstToyWeightedProxy firstThreeBandProfile =
+  1 * 5 + 2 * 5 + 1 * 5
+firstToyWeightedProxy secondThreeBandProfile =
+  1 * 4 + 2 * 4 + 1 * 8
+
+secondToyWeightedProxy : ThreeBandSpectrum → Nat
+secondToyWeightedProxy firstThreeBandProfile =
+  2 * 5 + 1 * 5 + 1 * 5
+secondToyWeightedProxy secondThreeBandProfile =
+  2 * 4 + 1 * 4 + 1 * 8
+
+sameTwoWeightedBandProxies :
+  firstToyWeightedProxy firstThreeBandProfile ≡
+    firstToyWeightedProxy secondThreeBandProfile
+sameTwoWeightedBandProxies = refl
+
+sameSecondWeightedBandProxy :
+  secondToyWeightedProxy firstThreeBandProfile ≡
+    secondToyWeightedProxy secondThreeBandProfile
+sameSecondWeightedBandProxy = refl
+
+differentThreeBandProfiles :
+  firstThreeBandProfile ≡ secondThreeBandProfile → ⊥
+differentThreeBandProfiles ()
+
 record EvidenceGate : Set where
   constructor evidenceGate
   field
