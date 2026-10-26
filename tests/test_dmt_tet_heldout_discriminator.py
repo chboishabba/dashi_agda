@@ -125,6 +125,52 @@ class HeldoutDiscriminatorTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             audit(d)
 
+    def test_training_stratum_coverage_denominators(self):
+        report = audit(fixture())
+        for fold in report['folds']:
+            for model in fold['models'].values():
+                n = fold['n_test_transitions']
+                self.assertEqual(model['heldout_seen_strata_count'] +
+                                 model['heldout_unseen_strata_count'], n)
+                from fractions import Fraction
+                self.assertEqual(Fraction(model['heldout_exact_stratum_coverage']),
+                                 Fraction(model['heldout_seen_strata_count'], n))
+
+    def test_unseen_heldout_strata_fall_back_without_lookahead(self):
+        rows = build_rows(fixture())
+        for row in rows:
+            if row['person'] == 'toy-person-A':
+                for f in ('pleasantness', 'unpleasantness', 'anxiety', 'selfhood'):
+                    row[f] = 1
+        held = next(x for x in heldout(rows) if x['held_out_person'] == 'toy-person-A')
+        for model in held['models'].values():
+            self.assertEqual(model['heldout_seen_strata_count'], 0)
+            self.assertEqual(model['heldout_exact_stratum_coverage'], '0')
+            self.assertEqual(len(set(model['predictions_exact'])), 1)
+
+    def test_predeclared_clock_does_not_use_test_episode_length(self):
+        rows = build_rows(fixture())
+        self.assertTrue(all(r['time'] == 0 for r in rows))
+        self.assertIn('600 seconds', audit(fixture())['time_threshold_source_defined_not_heldout_length'])
+
+    def test_positive_signal_can_distinguish_proxy_predictions(self):
+        rows = []
+        for i in range(4):
+            for dose in (20, 40):
+                for image in (0, 1):
+                    row = {'person': 'toy-person-'+str(i), 'dose': dose,
+                           'target': image, 'time': 0}
+                    for f in set(FEATURES['M0_nuisance_proxy'] +
+                                 FEATURES['M1a_endogenous_proxy']) - {'dose', 'time'}:
+                        row[f] = 0
+                    row['complex_imagery'] = image
+                    rows.append(row)
+        folds = heldout(rows)
+        self.assertEqual(len(folds), 4)
+        self.assertTrue(all(f['distinct_proxy_predictions'] > 0 for f in folds))
+        from fractions import Fraction
+        self.assertTrue(all(Fraction(f['exact_brier_M0_minus_M1a']) > 0 for f in folds))
+
     def test_synthetic_only_claim_ceilings(self):
         r = audit(fixture())
         self.assertFalse(r['M1a_full_mechanistic_implementation'])
