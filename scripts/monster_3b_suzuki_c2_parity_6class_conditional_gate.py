@@ -124,6 +124,6 @@ if __name__=='__main__':
     p.add_argument("--rotation-class",choices=("4A","4C","4D"))
     p.add_argument("--out",type=__import__('pathlib').Path)
     a=p.parse_args()
-    result=json.dumps(check(a.rotation_class),indent=2)+"\\n"
+    result=json.dumps(check(a.rotation_class),indent=2)+"\n"
     if a.out:a.out.write_text(result)
     print(result,end="")
