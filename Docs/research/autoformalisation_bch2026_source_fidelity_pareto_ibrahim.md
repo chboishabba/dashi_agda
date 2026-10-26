@@ -242,3 +242,24 @@ must be linked to the same quantity and physical source. The
 simple numerical independent-coordinate counterexample in Lean #88
 does not model actual Navier–Stokes pressures and must never be
 promoted as a counterexample to either field inequality.
+
+
+### Additional source-written A.4 final-block theorem
+
+The opt-in Lean #88 `RequestProject/Autoformalisation/LostInTranslationAlternation.lean`
+now defines a genuinely quantified Boolean prefix, using false
+for universal and true for existential. Its source-written
+`quantifyPrefix_congr` transports a pointwise proposition
+equivalence through arbitrarily many such **existing** prefix
+quantifiers. The two new specific consumers,
+`final_exists_of_nine_variable_representation` and
+`final_forall_of_nine_variable_representation`, preserve the
+leading prefix while changing the *last* relation to either
+`∃z:Fin9 Nat, Q=0` or `∀z:Fin9 Nat, Q≠0`, conditional
+on the actual DPRM representation `C ↔ ∃z,Q=0`.
+
+This is the exact logical parity step underlying A.4, not
+an actual many-one reduction, effective index map, proof
+that the prefix is source-alternating, polynomial existence,
+or `Sigma^0_l` completeness. The remaining proof wall is
+explicit and independent of successful toy-example testing.
