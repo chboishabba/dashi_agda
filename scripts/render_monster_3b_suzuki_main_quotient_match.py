@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+from math import gcd
 from pathlib import Path
 from typing import Any
 
@@ -74,12 +75,31 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
     if p.get("mn3b_table") not in {"MN3B", "3^1+12.2.Suz.2"}:
         raise ValueError("unexpected MN3B table identity")
 
+    versions = []
+    for name in ("gap_runtime_version","ctbllib_runtime_version"):
+        value = p.get(name)
+        if not isinstance(value,str) or not value or any(ord(c)<32 for c in value):
+            raise ValueError(name+" must be a nonempty source runtime version")
+        versions.append(value)
+
+    source_order = req_int(p, "six_suz_group_order")
+    source_classes = req_int(p, "six_suz_class_count")
+    if source_order != 2690072985600 or source_classes != 210:
+        raise ValueError("source-selected 6.Suz table head does not match CTblLib/ATLAS")
+    positions12 = req_pair_int(p, "six_suz_degree12_positions")
+    positions78 = req_pair_int(p, "six_suz_degree78_positions")
+    if set(positions12) & set(positions78):
+        raise ValueError("selected 12/78 source Irr positions overlap")
+    if any(i > source_classes for i in positions12+positions78):
+        raise ValueError("selected Irr position exceeds source class count")
+
     base_pos = req_int(p, "base_1458_main_position")
     extraspecial_central_pos = req_int(
         p, "base_1458_extraspecial_central_class_position"
     )
     if req_int(p, "base_1458_central_trace", positive=False) != -729:
         raise ValueError("base 1458 central trace must be -729")
+    req_true(p, "base_1458_outer_centre_inverting_trace_zero")
     q_kernel_pos = req_int(p, "qg_to_n3b_kernel_order_three_class_position")
     q_kernel_outer_pos = req_int(p, "qg_to_n3b_kernel_outer_class_position")
     if q_kernel_pos == extraspecial_central_pos:
@@ -114,14 +134,113 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         req_true(p, key)
     req_false(p, "diagonal_kernel_orientation_paid")
     req_false(p, "individual_zeta_label_orientation_paid")
+    selected_faithful = p.get("source_selected_degree_78_faithful_to_6Suz")
+    if type(selected_faithful) is not bool:
+        raise ValueError("selected 78 faithfulness must be a bool from the matched source")
+    c2_sym2_compatible = p.get("source_selected_c2_compatible_with_sym2_faithful12")
+    if type(c2_sym2_compatible) is not bool:
+        raise ValueError("source-selected Sym² C2 compatibility must be a bool")
+    central3_pos = req_int(p, "suzuki_central_order_three_class_position")
+    common729_pairs = req_int(
+        p, "common_729_necessary_equal_C3_phase_pair_count", positive=False
+    )
+    if common729_pairs not in (0, 1, 2):
+        raise ValueError("invalid equal-centre C3 pair count")
+    full_direct = req_int(p, "selected_78_direct_sym2_full_character_pair_count", positive=False)
+    full_dual = req_int(p, "selected_78_dual_sym2_full_character_pair_count", positive=False)
+    full_nebe = p.get("selected_78_is_nebe_sym2_family_full_character_equal")
+    if type(full_nebe) is not bool:
+        raise ValueError("full 6.Suz Sym²12 selected-family equality must be bool")
+    if full_direct not in (0,2) or full_dual not in (0,2):
+        raise ValueError("selected conjugate78 Sym² family must match both or neither")
+    if full_nebe != (full_direct == 2 and full_dual == 2):
+        raise ValueError("full Sym² equality boolean disagrees with exact class functions")
+    central2_pos = req_int(p, "suzuki_central_involution_class_position")
+    source_trace = req_int(p, "source_selected_S90_central_C2_trace", positive=False)
+    sym2_trace = req_int(p, "sym2_candidate_S90_central_C2_trace", positive=False)
+    if source_trace not in (-90, 66) or sym2_trace != 66:
+        raise ValueError("selected degree78 has invalid central C2 scalar")
+    if c2_sym2_compatible != (source_trace == 66):
+        raise ValueError("C2 Sym² compatibility must follow the selected C2 trace")
+    if full_nebe and (not c2_sym2_compatible or selected_faithful):
+        raise ValueError("selected Sym² is nonfaithful and must have central +66")
+    if selected_faithful and source_trace != -90:
+        raise ValueError("faithful degree78 cannot have positive C2 involution")
+
+    # SAME-TABLE coordinates are not certified by a name, order, class
+    # count, two centre positions and two Irr positions alone. Retain the
+    # entire source-ordered conjugacy-class signature for the independent
+    # all-conductor exporter to compare bytewise as integer arrays.
+    def class_vector(key: str, *, zero_ok: bool = False) -> list[int]:
+        xs = p.get(key)
+        if (not isinstance(xs, list) or len(xs) != source_classes
+                or any(type(x) is not int or x < (0 if zero_ok else 1) for x in xs)):
+            raise ValueError(f"{key}: complete typed {source_classes}-class vector required")
+        return xs
+
+    class_orders = class_vector("six_suz_class_orders")
+    class_sizes = class_vector("six_suz_class_sizes")
+    square_map = class_vector("six_suz_power_map_2_zero_based", zero_ok=True)
+    if (class_orders[0] != 1 or class_sizes[0] != 1
+            or sum(class_sizes) != source_order or square_map[0] != 0):
+        raise ValueError("source 6.Suz class identity/order/size/square-map inconsistency")
+    if any(k >= source_classes for k in square_map):
+        raise ValueError("source 6.Suz square map index outside table")
+    for i, j in enumerate(square_map):
+        if class_orders[j] != class_orders[i] // gcd(class_orders[i], 2):
+            raise ValueError(f"source 6.Suz second-power map inconsistent at class {i+1}")
+    c2 = central2_pos - 1
+    c3 = central3_pos - 1
+    if (c2 >= source_classes or c3 >= source_classes
+            or class_orders[c2] != 2 or class_sizes[c2] != 1
+            or square_map[c2] != 0 or class_orders[c3] != 3
+            or class_sizes[c3] != 1 or square_map[c3] == c3
+            or square_map[square_map[c3]] != c3):
+        raise ValueError("source centre positions inconsistent with class signature")
+
+    # Preserve the exact selected character rows, indexed by this GAP
+    # table's literal classes. Metadata signatures alone can coincide under
+    # noncentral class swaps. Actual cyclotomic equality is tested downstream
+    # by the pre-existing exact all-conductor Cyc implementation.
+    def source_rows(key: str) -> list[list[dict[str, Any]]]:
+        xs = p.get(key)
+        if not isinstance(xs, list) or len(xs) != 2:
+            raise ValueError(f"{key}: exactly two selected character rows required")
+        for row in xs:
+            if not isinstance(row, list) or len(row) != source_classes:
+                raise ValueError(f"{key}: incomplete 6.Suz full-class row")
+            for cell in row:
+                if not isinstance(cell, dict):
+                    raise ValueError(f"{key}: malformed cyclotomic cell")
+                n = cell.get("conductor")
+                coeff = cell.get("coefficients")
+                if (type(n) is not int or not 1 <= n <= 4096
+                        or not isinstance(coeff, list) or len(coeff) != n
+                        or any(type(v) is not str for v in coeff)):
+                    raise ValueError(f"{key}: invalid exact cyclotomic source record")
+        return xs
+
+    selected12rows = source_rows("six_suz_selected_12_all_class_values")
+    selected78rows = source_rows("six_suz_selected_78_all_class_values")
 
     return {
+        "class_orders": class_orders,
+        "selected12rows": selected12rows,
+        "selected78rows": selected78rows,
+        "class_sizes": class_sizes,
+        "power_map_2_zero_based": square_map,
         "base_pos": base_pos,
         "extraspecial_central_pos": extraspecial_central_pos,
         "q_kernel_pos": q_kernel_pos,
         "q_kernel_outer_pos": q_kernel_outer_pos,
         "labels12": labels12,
         "labels78": labels78,
+        "gap_version": versions[0],
+        "ctbllib_version": versions[1],
+        "source_order": source_order,
+        "source_classes": source_classes,
+        "positions12": positions12,
+        "positions78": positions78,
         "outer12": outer12,
         "outer78": outer78,
         "split12": split12,
@@ -132,6 +251,16 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         "mn78": mn78,
         "mult12": mult12,
         "mult78": mult78,
+        "central2_pos": central2_pos,
+        "central3_pos": central3_pos,
+        "common729_pairs": common729_pairs,
+        "full_direct": full_direct,
+        "full_dual": full_dual,
+        "full_nebe": full_nebe,
+        "source_trace": source_trace,
+        "sym2_trace": sym2_trace,
+        "selected_faithful": selected_faithful,
+        "c2_sym2_compatible": c2_sym2_compatible,
     }
 
 
@@ -181,6 +310,40 @@ sixSuzDegree12AtlasLabels : List String
 sixSuzDegree12AtlasLabels = {agda_pair_string(v['labels12'])}
 sixSuzDegree78AtlasLabels : List String
 sixSuzDegree78AtlasLabels = {agda_pair_string(v['labels78'])}
+source6SuzGroupOrder : Nat
+source6SuzGroupOrder = {v['source_order']}
+source6SuzClassCount : Nat
+source6SuzClassCount = {v['source_classes']}
+source6SuzDegree12IrrPositions : List Nat
+source6SuzDegree12IrrPositions = {agda_pair_nat(v['positions12'])}
+source6SuzDegree78IrrPositions : List Nat
+source6SuzDegree78IrrPositions = {agda_pair_nat(v['positions78'])}
+
+-- Chosen source 78 family is selected by full class-function restriction,
+-- main quotient descent and actual Monster occurrence, NOT by a
+-- presupposed faithful 6.Suz character filter.
+sixSuzCentralInvolutionClassPosition : Nat
+sixSuzCentralInvolutionClassPosition = {v['central2_pos']}
+sixSuzCentralOrderThreeClassPosition : Nat
+sixSuzCentralOrderThreeClassPosition = {v['central3_pos']}
+common729NecessaryEqualC3PhasePairCount : Nat
+common729NecessaryEqualC3PhasePairCount = {v['common729_pairs']}
+selected78DirectSym2FullClassCharacterMatchCount : Nat
+selected78DirectSym2FullClassCharacterMatchCount = {v['full_direct']}
+selected78DualSym2FullClassCharacterMatchCount : Nat
+selected78DualSym2FullClassCharacterMatchCount = {v['full_dual']}
+selected78NebeSym2FullClassCharacterEqual : Bool
+selected78NebeSym2FullClassCharacterEqual = {str(v['full_nebe']).lower()}
+selectedDegree78FaithfulToSixSuz : Bool
+selectedDegree78FaithfulToSixSuz = {str(v['selected_faithful']).lower()}
+selectedC2SymSquareNecessaryCompatibility : Bool
+selectedC2SymSquareNecessaryCompatibility = {str(v['c2_sym2_compatible']).lower()}
+selectedMultiplicityCentralC2TraceMagnitude : Nat
+selectedMultiplicityCentralC2TraceMagnitude = {abs(v['source_trace'])}
+selectedMultiplicityCentralC2TraceNegative : Bool
+selectedMultiplicityCentralC2TraceNegative = {str(v['source_trace'] < 0).lower()}
+candidateSymSquareCentralC2PositiveMagnitude : Nat
+candidateSymSquareCentralC2PositiveMagnitude = {v['sym2_trace']}
 
 outer12PairPosition : Nat
 outer12PairPosition = {v['outer12']}

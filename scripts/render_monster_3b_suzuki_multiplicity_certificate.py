@@ -16,27 +16,27 @@ from pathlib import Path
 from typing import Any
 
 
-def _positions(payload: dict[str, Any], key: str) -> list[int]:
+def _positions(payload: dict[str, Any], key: str, min_count: int = 2) -> list[int]:
     xs = payload.get(key)
     if (
         not isinstance(xs, list)
-        or len(xs) != 2
+        or len(xs) < min_count
         or any(not isinstance(x, int) or isinstance(x, bool) or x <= 0 for x in xs)
         or len(set(xs)) != len(xs)
     ):
-        raise ValueError(f"{key} must be exactly two distinct positive integer positions")
+        raise ValueError(f"{key} must be >= {min_count} distinct positive integer positions")
     return xs
 
 
-def _labels(payload: dict[str, Any], key: str) -> list[str]:
+def _labels(payload: dict[str, Any], key: str, min_count: int = 2) -> list[str]:
     xs = payload.get(key)
     if (
         not isinstance(xs, list)
-        or len(xs) != 2
+        or len(xs) < min_count
         or any(not isinstance(x, str) or not x.strip() for x in xs)
         or len(set(xs)) != len(xs)
     ):
-        raise ValueError(f"{key} must be exactly two distinct nonempty ATLAS labels")
+        raise ValueError(f"{key} must be >= {min_count} distinct nonempty ATLAS labels")
     return xs
 
 
@@ -48,8 +48,8 @@ def _rows(
     labels: list[str],
 ) -> list[dict[str, Any]]:
     rows = payload.get(key)
-    if not isinstance(rows, list) or len(rows) != 2:
-        raise ValueError(f"{key} must have exactly two candidate rows")
+    if not isinstance(rows, list) or len(rows) != len(positions):
+        raise ValueError(f"{key} must have one candidate row per source position")
     seen_positions: list[int] = []
     seen_labels: list[str] = []
     for row in rows:
@@ -61,8 +61,15 @@ def _rows(
             raise ValueError(f"{key} row has unexpected position/label/degree")
         p1 = row.get("first_central_phase")
         p2 = row.get("second_central_phase")
-        if {p1, p2} != {"zeta", "zetaSquared"}:
-            raise ValueError(f"{key} central phases must be inverse nontrivial C3 phases")
+        if {p1, p2} != {"zeta", "zetaSquared"} and not (p1 == p2 == "trivial"):
+            raise ValueError(f"{key} C3 phases must be inverse nontrivial or both trivial")
+        if degree == 12 and (p1 == "trivial" or p2 == "trivial"):
+            raise ValueError("faithful degree12 cannot have trivial C3 phase")
+        faithful = row.get("faithful_to_6Suz")
+        if type(faithful) is not bool:
+            raise ValueError(f"{key} must report a boolean faithfulness-to-6.Suz status")
+        if degree == 12 and faithful is not True:
+            raise ValueError("degree-12 candidate must be faithful to 6.Suz")
         seen_positions.append(pos)
         seen_labels.append(label)
     if sorted(seen_positions) != sorted(positions):
@@ -94,11 +101,26 @@ def validate(payload: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("expected two distinct positive central order-three class positions")
 
     p12 = _positions(payload, "faithful_degree_12_positions")
-    p78 = _positions(payload, "faithful_degree_78_positions")
+    if payload.get("degree_78_family_filter") != "all_character_degrees_no_faithfulness_filter":
+        raise ValueError("degree78 inventory must contain ALL candidates, not an assumed source family")
+    p78 = _positions(payload, "degree_78_positions")
+    all78 = payload.get("all_degree_78_positions")
+    faithful78 = payload.get("faithful_degree_78_positions")
+    more78 = payload.get("nonfaithful_degree_78_positions")
+    if any(not isinstance(xs, list) or any(type(i) is not int or i <= 0 for i in xs)
+           or len(set(xs)) != len(xs)
+           for xs in (all78, faithful78, more78)):
+        raise ValueError("invalid faithful/nonfaithful inventory types or duplicates")
+    if set(all78) != set(p78) or set(p78) != (set(faithful78) | set(more78)):
+        raise ValueError("all degree78 positions must partition into faithful/nonfaithful")
+    if set(faithful78) & set(more78):
+        raise ValueError("faithful/nonfaithful 78 overlap")
     l12 = _labels(payload, "faithful_degree_12_atlas_labels")
-    l78 = _labels(payload, "faithful_degree_78_atlas_labels")
+    l78 = _labels(payload, "degree_78_atlas_labels")
     r12 = _rows(payload, "degree_12_rows", 12, p12, l12)
     r78 = _rows(payload, "degree_78_rows", 78, p78, l78)
+    if {row["position"] for row in r78 if row["faithful_to_6Suz"]} != set(faithful78):
+        raise ValueError("faithful degree78 row flags inconsistent with partition")
 
     fusion_length = payload.get("fusion_length")
     if not isinstance(fusion_length, int) or isinstance(fusion_length, bool) or fusion_length <= 0:
@@ -112,6 +134,9 @@ def validate(payload: dict[str, Any]) -> dict[str, Any]:
         "l78": l78,
         "r12": r12,
         "r78": r78,
+        "nonfaithful78": more78,
+        "faithful78": faithful78,
+        "all78": all78,
         "fusion_length": fusion_length,
     }
 
@@ -152,13 +177,26 @@ secondCentralOrderThreeClass = {v['central'][1]}
 
 faithfulDegree12Positions : List Nat
 faithfulDegree12Positions = {nat_list(v['p12'])}
-faithfulDegree78Positions : List Nat
-faithfulDegree78Positions = {nat_list(v['p78'])}
+degree78Positions : List Nat
+degree78Positions = {nat_list(v['p78'])}
 
 faithfulDegree12AtlasLabels : List String
 faithfulDegree12AtlasLabels = {string_list(v['l12'])}
-faithfulDegree78AtlasLabels : List String
-faithfulDegree78AtlasLabels = {string_list(v['l78'])}
+degree78AtlasLabels : List String
+degree78AtlasLabels = {string_list(v['l78'])}
+
+-- All source candidate degrees78; actual Monster selection is deferred
+-- to the independent main -> MN3B -> Monster FULL character matcher.
+selectedMonsterDegree78CharacterIdentifiedHere : Bool
+selectedMonsterDegree78CharacterIdentifiedHere = false
+faithfulDegree78Positions : List Nat
+faithfulDegree78Positions = {nat_list(v['faithful78']) if v['faithful78'] else '[]'}
+nonfaithfulDegree78Positions : List Nat
+nonfaithfulDegree78Positions = {nat_list(v['nonfaithful78'])}
+completeDegree78Inventory : List Nat
+completeDegree78Inventory = {nat_list(v['all78'])}
+actualMonsterDegree78FamilySelectedByThisInventory : Bool
+actualMonsterDegree78FamilySelectedByThisInventory = false
 
 sixSuzToOuterFusionLength : Nat
 sixSuzToOuterFusionLength = {v['fusion_length']}
