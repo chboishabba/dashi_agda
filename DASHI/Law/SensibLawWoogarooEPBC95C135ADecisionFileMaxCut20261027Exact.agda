@@ -166,6 +166,20 @@ delegateReceipt = decision-file-receipt statutoryDelegateAndReasons nationalEPAA
   "Signed final notice, delegation instrument as effective 15 October, personal authorisation and reasons."
   false refl
 
+section139SpeciesAdvice : DecisionFileReceipt
+section139SpeciesAdvice = decision-file-receipt section139SpeciesAdviceTreatment epbcActAsAtDecision
+  statutoryDemandIdentified
+  "The EPBC Act's section 139 addresses approval requirements for threatened species and ecological communities, including relevant conservation advice/recovery-plan consideration according to the controlling provision."
+  "Specific threatened-fauna statutory advice, critical habitat/ecological information and any decision-specific treatment of conservation and recovery requirements."
+  false refl
+
+signedConditions : DecisionFileReceipt
+signedConditions = decision-file-receipt operativeApprovalConditions epbcApproval15Oct
+  decisionFileOriginalMissing
+  "The dated notices listing only says approved with conditions, without the full condition text or discharge obligations."
+  "Actual operative preclearance, staged ecological management, offset schedule, monitoring requirements and any variations."
+  false refl
+
 operativeStandardsDistinction : Source.AttributedSource
 operativeStandardsDistinction = nationalStandardsTiming
 
@@ -179,7 +193,9 @@ postApprovalFileCut =
   section135AStatutoryRequest ∷
   section136Factors ∷
   section136Housing ∷
-  delegateReceipt ∷ []
+  delegateReceipt ∷
+  section139SpeciesAdvice ∷
+  signedConditions ∷ []
 
 data ApprovalListingPaysSignedConditions : Set where
 data AugustStandardsApplyToOctoberApprovalByRegistrationAlone : Set where
