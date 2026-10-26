@@ -9,3 +9,9 @@ import DASHI.Foundations.Wette.Everything
 import DASHI.Foundations.CoarseFineRefinementEverything
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact
 import DASHI.Foundations.BishopConcreteTrigSeriesConvergenceExact
+
+-- BCH 2026 source-faithfulness case study: finite exact no-gos, typed roots,
+-- and an explicitly unpaid SCI/DPRM proof-debt interface.
+import DASHI.Foundations.AutoformalisationBCH2026Exact
+import DASHI.Foundations.AutoformalisationBCH2026SCIInterface
+import DASHI.Foundations.AutoformalisationBCH2026Sources
