@@ -55,8 +55,57 @@ This identifies the surviving analytical task: a same-solution estimate simultan
 
 ## Reproducibility and source state
 
-`tests/test_ns_369_pure_plus_w2_orbit.py`: six locally executed exact SymPy tests passed in a matching standalone implementation (three proper cyclic rotations; three distinct ternary profiles; amplitude/rational W2 sign; improper helicity flip; lost metric information; all six permutations collapsing to three sign classes with opposite helicity). Full-source PR-head tests and Agda kernel compilation have **not** been run.
+`tests/test_ns_369_pure_plus_w2_orbit.py`: seven locally executed exact SymPy tests passed in a matching standalone implementation (three proper cyclic rotations; three distinct ternary profiles; amplitude/rational W2 sign; improper helicity flip; lost metric information; all six permutations collapsing to three sign classes with opposite helicity). Full-source PR-head tests and Agda kernel compilation have **not** been run.
 
 `NSCross369OrientationBridgeExact.agda` has two new source-written polymorphic definitional proofs but no independent checked-head typecheck receipt. The existing R369 Gram/continuation owners and historical authors are unchanged. Original mathematical roots cited above remain credited; these physical counterexample orbit/regression joins are DASHI's independent calculations.
 
 **Pareto next:** (1) verify physical real/complex projectors and high-high Gram actual operator same-object on the exact 369 finite cell; (2) prove a **valid** signed critical energy estimate with both negative helicity exchange and dyadic defect, or produce a separate true critical continuation mechanism; (3) use Round369 only after the uniform physical budget is paid, then finish B7/R406/A1–A3 as applicable. No boolean closure or Clay promotion from coordinate symmetry alone.
+
+
+## Concrete 369 high-high **triad sign/profile** from actual R92 Waleffe transfers
+
+The helical interaction is not just an abstract positive scalar. The
+exact physical positive-helicity triad at
+`p=(1,0,0),q=(0,1,2),k=(1,1,2)` with wavevector LENGTHS
+`a=|p|=1,b=|q|=sqrt(5),c=|k|=sqrt(6)` has actual paired
+modal nonlinear energy transfers
+```
+Tp = (sqrt(5)-sqrt(6))*A    < 0
+Tq = (sqrt(6)-1)*A          > 0
+Tk = (1-sqrt(5))*A          < 0
+A  = (5-sqrt(5)+sqrt(30))/10 > 0
+```
+where the pairs at ±p, ±q, ±k are BOTH included in these
+`T` values. These are EXACTLY the original Waleffe R92
+common-amplitude identities, using the actual physical
+Leray-projected Navier–Stokes nonlinear force, not arbitrary
+algebraic transfers:
+```
+Tp+Tq+Tk=0
+|p|Tp+|q|Tq+|k|Tk=0.
+```
+The **middle** wave number q gains energy; the smallest and
+largest legs lose energy. The original rounded dyadic weights
+are `w=(1,2,2)`, hence
+```
+Pcrit = 1*Tp + 2*Tq + 2*Tk = -Tp
+      = (5+sqrt(5)-sqrt(30))/10 > 0.
+```
+This is a physical finite **same-helicity high-high transfer
+candidate** for the NS369 sign/profile classifier. The
+positive critical growth comes from transferring energy away
+from the smallest leg into the two-mode high group as a whole.
+It is consistent with the exact Waleffe energy and helicity
+invariants and with the earlier dyadic-weight-defect account.
+It makes the false universal W2 input's *specific nonlinear
+mechanism* explicit. The 369 Gram owner still requires an
+independent, exact physical `K_N(A)` identification followed by
+the uniform Rayleigh lower bound `lambda_min>=c/N`; there is
+NO assertion that this one physical profile pays or defeats that
+different theorem.
+
+The seventh independently executed exact SymPy test performs the
+complete modal nonlinear calculation, tests each Waleffe common-
+amplitude term, the two invariant sums, phase signs, and exact
+dyadic production `-Tp`. This reuses R92's existing original
+Waleffe attribution rather than declaring a new triad theorem.
