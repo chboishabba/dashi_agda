@@ -552,3 +552,14 @@ actuWoodMacPolicyComparisonDoesNotProveSharedScript :
   Typed.StrongHistoricalTransfer Climate.actuReplacementVsAEPAddOnSpecification → ⊥
 actuWoodMacPolicyComparisonDoesNotProveSharedScript =
   Climate.taxSchemeSimilarityNotScriptCopy
+
+
+aep2025ForecastTo2026PaidHeadlineHasSameInstitution :
+  Typed.relationKind Climate.aepForecastToPaidStatusRestatement ≡
+    Typed.reportedStatisticRestatement
+aep2025ForecastTo2026PaidHeadlineHasSameInstitution = refl
+
+same21Point9BNumberDoesNotEstablishActualityStatus :
+  INF.FactorsThrough Climate.same21BPrinted Climate.reportedStatusFor21B → ⊥
+same21Point9BNumberDoesNotEstablishActualityStatus =
+  Climate.sameTaxNumberCannotDetermineSourceStatus
