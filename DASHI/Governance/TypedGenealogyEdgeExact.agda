@@ -33,6 +33,9 @@ data RelationKind : Set where
   editorialReviewRights : RelationKind
   topicalPublicationMatch : RelationKind
   explicitAttributedRepublication : RelationKind
+  authorRetrospectiveCorrection : RelationKind
+  institutionalDisavowal : RelationKind
+  extrapolationBeyondEvidence : RelationKind
   legislativeIntroduction : RelationKind
   reportedStatisticRestatement : RelationKind
   parallelEconomicArgument : RelationKind
@@ -135,6 +138,18 @@ publicationTopicMatchIsNotMethodTransfer ()
 articleRepublicationIsNotHistoricalMethodTransfer :
   TransferRelation explicitAttributedRepublication → ⊥
 articleRepublicationIsNotHistoricalMethodTransfer ()
+
+authorRetrospectiveCorrectionIsNotMethodTransfer :
+  TransferRelation authorRetrospectiveCorrection → ⊥
+authorRetrospectiveCorrectionIsNotMethodTransfer ()
+
+institutionalDisavowalIsNotMethodTransfer :
+  TransferRelation institutionalDisavowal → ⊥
+institutionalDisavowalIsNotMethodTransfer ()
+
+scientificPremiseExtrapolationIsNotMethodTransfer :
+  TransferRelation extrapolationBeyondEvidence → ⊥
+scientificPremiseExtrapolationIsNotMethodTransfer ()
 
 legislativeIntroductionDoesNotEstablishHistoricalTransfer :
   TransferRelation legislativeIntroduction → ⊥
