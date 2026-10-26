@@ -264,13 +264,13 @@ heilmeier1977 = Source.mkNoDOISource
 
 senateMoscow1979 : Source.AttributedSource
 senateMoscow1979 = Source.mkNoDOISource
-  "United States Senate Committee on Commerce, Science, and Transportation"
+  "US Senate Commerce, Science, and Transportation Committee staff; published with 1979-05-01 transmittal letter by Chairman Howard W. Cannon"
   "Microwave Irradiation of the U.S. Embassy in Moscow: Review of Its History and Health Studies 1953–1977"
-  "Committee print, April 1979; original scanned report mirrored by GWU National Security Archive document 15"
+  "Staff report printed April 1979 as Senate committee print; chairman Cannon's 1979-05-01 letter expressly says NOT officially approved by the committee; original scan National Security Archive document 15"
   "1979"
   "https://nsarchive.gwu.edu/sites/default/files/documents/rhwvuj-tzy4b/15.pdf"
   Source.governmentSource
-  "Compiles State/GWU 1966–69 coded blood study and methodological negative reviews, PANDORA primate and Big Boy studies, lymphocyte cohort, and Johns Hopkins 1976–78 controlled-post observational epidemiology; no convincing detected causal effect at tested exposure levels, but cannot rule out later latent effects"
+  "Senate staff authored retrospective synthesis of State/GWU 1966–69 blood, PANDORA and Big Boy, lymphocyte, and Johns Hopkins 1976–78 studies; committee chair released it but explicitly states full committee DID NOT approve it; reported no convincing established microwave causal health effect at studied levels/date, with later latency unresolved. This is NOT a new primate/human experiment, nor an officially adopted committee vote."
   Source.publicAttribution
 
 hopkins1976To1978Study : Source.AttributedSource
@@ -917,7 +917,7 @@ senate1979PrimateStudyInconclusive : BoundedLineageEdge
 senate1979PrimateStudyInconclusive = boundedLineageEdge
   originalPrimateHighDoseExperiment pandora1970CommitteeFinalReassessment
   committeeOriginalStudyReassessment senateMoscow1979
-  "US Senate 1979 original committee print pp. 10-11, after recounting McIlwain's failed-to-confirm trials at 4.6 and 20 mW/cm2, summarizes Kubis and SAC: the earlier primate design did not give an acceptable answer because baseline controls and experimental conditions were contaminated"
+  "US Senate 1979 staff report (not full-committee approved), original print pp. 10-11, after recounting McIlwain's failed-to-confirm trials at 4.6 and 20 mW/cm2, summarizes Kubis and SAC: the earlier primate design did not give an acceptable answer because baseline controls and experimental conditions were contaminated"
   "The Senate compilation is NOT another primate trial; failure of causal identification cannot be treated as a reliable positive effect or as a demonstrated universal negative. Prospective deliberate human irradiation was not carried out according to the same report"
 
 
