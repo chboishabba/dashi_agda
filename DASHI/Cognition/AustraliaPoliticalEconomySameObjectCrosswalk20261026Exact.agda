@@ -166,7 +166,7 @@ record AustralianPowerPipelineFrontier : Set where
     hansonAttributesSpecificPensionerWorkProposalToRinehart : Bool
     oneNationJan2025PensionerPolicyOfficiallyPublished : Bool
     originalRinehartPolicyInstructionBeforeJan2025Authenticated : Bool
-    pensionerPolicyEnactedInCommonwealthLawVerified : Bool
+    oneNationUnlimitedPensionerPolicyEnactedInLawVerified : Bool
     aecJulDec2026OldRegimeReturnPublicationPending : Bool
     oldFY2025_26AECAnnualDisclosurePublicationPending : Bool
     publishedDonorAnnualReturnSameAsReportedAprilDonation : Bool
@@ -200,7 +200,7 @@ noDatedPrePublicationRinehartInstructionInspected :
 noDatedPrePublicationRinehartInstructionInspected = refl
 
 partyElectionPledgeNotAutomaticallyEnactedCommonwealthLaw :
-  pensionerPolicyEnactedInCommonwealthLawVerified canonicalAustralianPowerPipelineFrontier ≡ false
+  oneNationUnlimitedPensionerPolicyEnactedInLawVerified canonicalAustralianPowerPipelineFrontier ≡ false
 partyElectionPledgeNotAutomaticallyEnactedCommonwealthLaw = refl
 
 aecSecond2026TransitionPublicationNotFirstFYRelease :
