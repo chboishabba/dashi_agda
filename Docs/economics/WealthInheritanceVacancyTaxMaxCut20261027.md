@@ -19,6 +19,8 @@
 
 The user's proposed 100% *wealth* ceiling is a policy design to analyse, **not enacted law**. In the finite nonnegative no-exemption illustration: tax due = max(wealth − ceiling, 0); post-tax wealth = min(wealth, ceiling). The analogous income-bracket formula is numerically similar **but differently typed**. Same flow, different wealth is a constructive negative control against conflation.
 
+**New finite ownership/control witness:** two positions may have the same total net wealth (5 units) and identical hard-cap liability (2 units above a 3-unit threshold), yet carry 1 versus 7 voting-right units. Therefore even perfect tax-assessment arithmetic does not determine corporate control. This is a synthetic logical counterexample, not a claim about any living billionaire or tax system.
+
 **Vocabulary correction:** the vacancy-tax analogy is useful only at the level of a *non-sale-triggered periodic assessment*. Vancouver imposes the tax because a dwelling is vacant; a global wealth cap imposes tax because assessed value exceeds a limit. A share that finances factories is not 'vacant housing' merely because the founder does not sell it. Productivity/exploitation/ownership are separate consumer-defined questions.
 
 **Political-economy causal graph (hypothesis, not theorem):**
