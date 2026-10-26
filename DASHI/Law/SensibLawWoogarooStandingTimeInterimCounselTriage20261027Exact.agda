@@ -44,7 +44,7 @@ adjrLatestSeptember = Source.mkNoDOISource
   "29 September 2026"
   "https://www.legislation.gov.au/C2004A01697/latest"
   Source.governmentSource
-  "s3(4) interest affected, s3(6) deemed furnishing by paid post; ss5,11(1)(c),(3)-(5),13(1),(5),15(1)-(2),16 review reasons, applicant-specific furnishing/time, no automatic stay, available discretionary relief. s13 eligibility and notice are distinct from an any-person s135A report request; counsel must check excluded decisions, proper Court route and potential extensions."
+  "s3(4) interest affected, s3(6) deemed furnishing by paid post; s5, s11(1)(c),(3)-(5), s13(1),(5), s15(1)-(2), s16 review reasons, applicant-specific furnishing/time, no automatic stay, available discretionary relief. s13 eligibility and notice are distinct from an any-person s135A report request; counsel must check excluded decisions, proper Court route and potential extensions."
   Source.publicAttribution
 
 courtRulesJune2026 : Source.AttributedSource
