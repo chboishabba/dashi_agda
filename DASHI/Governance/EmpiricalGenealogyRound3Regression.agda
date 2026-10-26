@@ -713,3 +713,61 @@ oiaVersionMismatchIsNotProofOfHistoricalTransfer :
   Typed.StrongHistoricalTransfer Climate.oiaJanuaryVsKingJulyDGRSStart → ⊥
 oiaVersionMismatchIsNotProofOfHistoricalTransfer =
   Climate.oiaTimingConflictDoesNotEstablishCausalScriptTransfer
+
+
+------------------------------------------------------------------------
+-- Worldwide (not Australian) cooling/plant-food claim production:
+-- named original persons, later author correction, independent Academy
+-- disavowal, archival personnel overlap and scientific no-factorisations.
+------------------------------------------------------------------------
+
+globalGwynne1975AuthorCorrectionRelation :
+  Typed.relationKind Climate.globalGwynne1975To2014AuthorCorrection ≡
+    Typed.authorRetrospectiveCorrection
+globalGwynne1975AuthorCorrectionRelation = refl
+
+globalWFA1992To1998FilmFamilyContinuity :
+  Typed.relationKind Climate.globalWFAToGreeningEarthSequel ≡
+    Typed.organisationalContinuity
+globalWFA1992To1998FilmFamilyContinuity = refl
+
+globalNAS1998OriginalInstitutionDisavowal :
+  Typed.relationKind Climate.globalNASDisavowsOISMPetition ≡
+    Typed.institutionalDisavowal
+globalNAS1998OriginalInstitutionDisavowal = refl
+
+globalPartialPlantResponseNotWholeEarthConclusion :
+  Typed.relationKind Climate.globalPlantGrowthIsNotNetClimateBenefit ≡
+    Typed.extrapolationBeyondEvidence
+globalPartialPlantResponseNotWholeEarthConclusion = refl
+
+globalSeitzSamePersonNoPaymentBridge :
+  Typed.relationKind Climate.globalSeitzPBSRoleToOISMPetition ≡
+    Typed.personnelContinuity
+globalSeitzSamePersonNoPaymentBridge = refl
+
+globalBaliunasNamedOverlapNoScriptProof :
+  Typed.relationKind Climate.globalBaliunasTwoDocumentFamilies ≡
+    Typed.personnelContinuity
+globalBaliunasNamedOverlapNoScriptProof = refl
+
+globalPositiveFertilisationIsNotNetClimateHarmEvaluation :
+  INF.FactorsThrough Climate.observedPlantFertilisation Climate.wholeClimateOutcome → ⊥
+globalPositiveFertilisationIsNotNetClimateHarmEvaluation =
+  Climate.positivePlantResponseDoesNotIdentifyGlobalNetImpact
+
+global1975MediaArticleIsNotContemporaryScienceCensus :
+  INF.FactorsThrough
+    Climate.sampledHistoricalMediaPresence Climate.hypotheticalScientificMajority → ⊥
+global1975MediaArticleIsNotContemporaryScienceCensus =
+  Climate.oneCoolingMagazineArticleCannotDetermineScientificConsensus
+
+globalAcademicRepudiationNotSecretFundingTransfer :
+  Typed.StrongHistoricalTransfer Climate.globalGwynne1975To2014AuthorCorrection → ⊥
+globalAcademicRepudiationNotSecretFundingTransfer =
+  Climate.globalGwynneCorrectionIsNotScriptTransmission
+
+globalAcademyNegativeProvenanceOriginal :
+  Typed.StrongHistoricalTransfer Climate.globalNASDisavowsOISMPetition → ⊥
+globalAcademyNegativeProvenanceOriginal =
+  Climate.globalNASInstitutionalDisavowalNotClimateMethodTransfer
