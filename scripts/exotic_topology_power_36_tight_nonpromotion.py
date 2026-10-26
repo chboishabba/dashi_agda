@@ -74,6 +74,18 @@ def audit():
             signature["boundary_total_edge_length"] = boundary_length
             signature["all_boundary_loops_triangular"] = True
             signature["euler_maxwell_genus_identity"] = True
+            # Power (3,6)-tight requires whole-graph Maxwell count 6.
+            # The exact necessary (NOT sufficient) boundary budget is
+            # L_target = 3*b + 6*g. The current template keeps L=3*b.
+            # Hence each existing handle requires six additional
+            # boundary edges somewhere, *and* the whole subgraph girth
+            # inequalities must still be separately verified.
+            target = 3*boundaries + 6*genus
+            signature["necessary_tight_boundary_length"] = target
+            signature["missing_boundary_edges_for_whole_graph_tight"] = target - boundary_length
+            assert target - boundary_length == 6*genus
+            assert signature["maxwell_3V_minus_E"] == (
+                6 - signature["missing_boundary_edges_for_whole_graph_tight"])
             # A mathematical planarity + planar-graph bound theorem
             # would turn the genus-zero equality into full sparsity.
             # Python checked genus zero and manifold links, NOT every
@@ -89,6 +101,10 @@ def audit():
     assert [s["maxwell_3V_minus_E"] for s in results["loch"]] == [6,0,-6]
     assert [s["maxwell_3V_minus_E"] for s in results["jacob"]] == [6,-6,-18]
     assert [s["maxwell_3V_minus_E"] for s in results["balanced_ternary"]] == [6,6,6]
+    assert [s["necessary_tight_boundary_length"] for s in results["loch"]] == [3,9,15]
+    assert [s["necessary_tight_boundary_length"] for s in results["jacob"]] == [6,18,30]
+    assert [s["missing_boundary_edges_for_whole_graph_tight"] for s in results["loch"]] == [0,6,12]
+    assert [s["missing_boundary_edges_for_whole_graph_tight"] for s in results["jacob"]] == [0,12,24]
     assert all(s["violates_full_graph_36_sparsity_if_below_6"]
                for name in ("loch","jacob")
                for s in results[name][1:])
@@ -99,6 +115,8 @@ def audit():
         "full_graph_maxwell_eq_6_does_not_prove_sparse_subgraphs":True,
         "actual_selected_triangs_36_tight_verified":False,
         "euler_maxwell_identity_verified_on_source_meshes":True,
+        "exact_handle_boundary_surplus_budget_tested":True,
+        "necessary_budget_not_subgraph_sparsity_proof":True,
         "universal_arithmetic_proof_source":"dashi_lean4/Synthesis/ExoticTopologyPLMaxwellGenusNoGo.lean",
         "source_kernel_verified":False,
     }
