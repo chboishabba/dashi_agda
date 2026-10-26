@@ -904,6 +904,20 @@ bioCoilOriginalAuthorRepository = Source.mkNoDOISource
   "Original paper-associated design inventory and F71 multi-axis magnetometer method route; raw folder analyses not reproduced; not a fresh experiment or a Rodin matched-device effect."
   Source.publicAttribution
 
+
+-- ISD is an ORIGINAL NOAA hourly station-year archive object, not a decoded
+-- observed July-6 rain hour; a data filename alone imports no weather effect.
+noaaBangorISD1953Original : Source.AttributedSource
+noaaBangorISD1953Original = Source.mkNoDOISource
+  "NOAA NCEI Integrated Surface Database and 1953 Bangor Airport station reporters"
+  "ISD original USAF 726071 WBAN 14606 1953 hourly/synoptic station-year archive"
+  "Original NOAA 1953 listing 726071-14606-1953.gz, 160944 compressed bytes, posted 31 August 2018; data payload unread"
+  "1953"
+  "https://www.ncei.noaa.gov/pub/data/noaa/1953/726071-14606-1953.gz"
+  Source.archivalSource
+  "First-party source-object existence and historical station identity only; 6–7 July hourly data, UTC-to-Maine-local hour, precipitation codes and any rainmaking efficacy unverified."
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -939,7 +953,7 @@ sourceAtlas = Source.mkSourceAtlas
    rvmlGentry2003Programme ∷ rvmlGentryVideoMetadata ∷
     noaaGHCNObsTimeSchema ∷ noaaHOMRStationHistory ∷
     noaaCOOPOriginalFormsGateway ∷ bahramiHelmholtz2025 ∷
-    bioCoilOriginalAuthorRepository ∷ [])
+    bioCoilOriginalAuthorRepository ∷ noaaBangorISD1953Original ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -1043,6 +1057,17 @@ bahramiPaperAndDataSameStudy = mkBound
   Diligence.contextualEvidence
   institutionalHistoricalInterpretation
   "published paper and author repository share one underlying study; historical exact experiment source version and Rodin 60 percent comparison unpaid"
+
+
+noaaISD1953YearArchivePresent : ClaimBound
+noaaISD1953YearArchivePresent = mkBound
+  "NOAA first-party 1953 catalogue lists a Bangor WBAN14606 hourly/synoptic gzip original station-year data object"
+  noaaBangorISD1953Original
+  "NOAA /pub/data/noaa/1953 directory, 726071-14606-1953.gz"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "actual station-year gzip bytes not acquired; date-specific hours, rain onset and any device-caused weather remain unpaid"
 
 -- Two publisher/document carriers; same RVML provenance root. The Gentry
 -- speaker/topic is NOT the 1999 person-to-person instruction transfer.
