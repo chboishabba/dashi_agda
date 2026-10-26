@@ -228,3 +228,9 @@ Wilson 1988, Barraclough–Wilson 2007, Serre/Terras authorship retained.
 Pointed 720+9 original repository owner and caveats:
 [#1250](https://github.com/chboishabba/dashi_agda/pull/1250).
 
+
+### 26 October stronger geometric-corner quotient obstruction (supersedes trivial-ten-only frontier)
+
+The pre-existing `Base369Ternary27CornerEightExact` **literal eight cube corners** carry a chosen *natural planar square* D4 action `r(x,y,z)=(-y,x,z)`, `m(x,y,z)=(x,-y,z)`. The latter axis reflection fixes **zero** corners (the diagonal mirror class fixes four). On the actual ATLAS-source `E⊕E` action on 80 nonzero affine quotient labels, **every** D4 reflection fixes **eight** points. Any purported **D4-equivariant map** `quotient80→naturalCubeCorners8` would send each source reflection-fixed label to a target reflection-fixed corner. For the axis mirror, source has eight witnesses and target has none: **no such equivariant map exists**.
+
+This is strictly stronger than the earlier obstruction to ten **trivial** fine sheets: it also excludes *any* ten-sheet action, even twisted, **whose projection to natural geometric corners remains D4-equivariant**. More general 8×10 bijections with D4 mixing corner and fine coordinates and thus **no equivariant corner projection** remain mathematically possible; numerical 80=8×10 cannot choose one. The chosen D4-stable rank-nine Schrödinger plane and the full Heisenberg 720-moving-translation no-go both remain valid. Original ATLAS matrix source SHA256 verified; local exact Python addendum passed, not an actual Monster class-fusion or source-selected-78 receipt.
