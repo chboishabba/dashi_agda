@@ -51,6 +51,12 @@ def test_one_canadian_root_and_producer_correct_counterfilings():
     assert roots["bannon_defence_2020"]["role"] == "adversarial_respondent_pleading"
     assert roots["ddc_judge_2020"]["role"] == "procedural_judicial_order"
     assert roots["hsi_ipr_2011"]["id"] != roots["dea_ocdetf_2015"]["id"]
+    evidence = {e["id"]: e for e in w["evidence"]}
+    assert evidence["ftc_bannon_petition_2020"]["root"] == "ftc_2019_2020"
+    assert evidence["ftc_bannon_reply_2020"]["root"] == "ftc_2019_2020"
+    assert evidence["bannon_opposition_2020"]["root"] == "bannon_defence_2020"
+    assert evidence["ddc_show_cause_2020"]["root"] == "ddc_judge_2020"
+    assert evidence["black_2016_bank_identity"]["root"] == "future_undetermined_source"
     assert roots["future_undetermined_source"]["role"] == "acquisition_placeholder_not_a_real_source"
 
 
@@ -64,6 +70,9 @@ def test_present_original_finding_not_same_as_independently_reproduced():
         assert "reproduction_receipt" not in claims[c]
     assert claims["C_UNIFIED_H3"]["level"] == "unresolved"
     assert not claims["C_UNIFIED_H3"]["supports"]
+    assert len(claims["C_UNIFIED_H3"]["requires"]) == 4
+    assert "aquino_promis_scl_transfer_native" in claims["C_UNIFIED_H3"]["requires"]
+    assert "cross_network_sponsor_budget_original" in claims["C_UNIFIED_H3"]["requires"]
 
 
 def test_missing_originals_are_unknown_not_negative_facts():
@@ -82,8 +91,8 @@ def test_costed_actions_do_not_dominate_distinct_original_objects():
     w = world()
     unknown = {e["id"] for e in w["evidence"] if e["status"] == "notLocated"}
     acts = {a["id"]: a for a in w["actions"]}
-    assert len(acts) == 6
-    assert set(a["targets"][0] for a in acts.values()) == unknown
+    assert len(acts) == 7
+    assert set(t for a in acts.values() for t in a["targets"]) == unknown
     # None of these *distinct original-object targets* subsumes another.
     for id_, a in acts.items():
         for other_id, b in acts.items():
