@@ -26,7 +26,7 @@ from exotic_topology_pl_complement_components import (
     initial as initial_standard, transition as transition_standard
 )
 from exotic_topology_pl_frontier_lineage import mark_initial
-from exotic_topology_pl_surface_gluings import disk, sphere_with_holes, edge
+from exotic_topology_pl_surface_gluings import disk, sphere_with_holes, edge, inspect, boundary_loops
 from exotic_topology_balanced_ternary_pl import transition as transition_balanced
 
 
@@ -60,6 +60,25 @@ def audit():
         states = []
         for n in range(3):
             signature = graph_signature(stage.mesh)
+            geom = inspect(stage.mesh)
+            genus, boundaries = geom["genus"], geom["boundaries"]
+            boundary_length = sum(len(loop) for loop in boundary_loops(stage.mesh)[0])
+            chi = (signature["vertices"] - signature["edges"] +
+                   signature["triangles"])
+            assert chi == 2 - 2*genus - boundaries
+            assert 3*signature["triangles"] == 2*signature["edges"] - boundary_length
+            assert boundary_length == 3*boundaries
+            assert signature["maxwell_3V_minus_E"] == 3*chi + boundary_length
+            assert signature["maxwell_3V_minus_E"] == 6 - 6*genus
+            signature["genus"] = genus
+            signature["boundary_total_edge_length"] = boundary_length
+            signature["all_boundary_loops_triangular"] = True
+            signature["euler_maxwell_genus_identity"] = True
+            # A mathematical planarity + planar-graph bound theorem
+            # would turn the genus-zero equality into full sparsity.
+            # Python checked genus zero and manifold links, NOT every
+            # subgraph inequality or a Lean kernel planar theorem.
+            signature["classical_planar_graph_theorem_supplier_needed"] = genus == 0
             signature["depth"] = n
             states.append(signature)
             if n != 2:
@@ -79,6 +98,8 @@ def audit():
         "source_theorem_is_existence_not_all_triangulations":True,
         "full_graph_maxwell_eq_6_does_not_prove_sparse_subgraphs":True,
         "actual_selected_triangs_36_tight_verified":False,
+        "euler_maxwell_identity_verified_on_source_meshes":True,
+        "universal_arithmetic_proof_source":"dashi_lean4/Synthesis/ExoticTopologyPLMaxwellGenusNoGo.lean",
         "source_kernel_verified":False,
     }
 
