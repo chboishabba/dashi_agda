@@ -20,6 +20,7 @@ import exotic_topology_pl_frontier_lineage as lineage
 import exotic_topology_pl_complement_components as complement
 import exotic_topology_pl_stable_stars as stable
 import exotic_topology_power_36_tight_nonpromotion as power
+import exotic_topology_genus_zero_sphere_caps as cap
 import exotic_topology_balanced_ternary_pl as balanced
 import exotic_topology_cantor_cylinder_orientation as orientation
 import exotic_topology_braid_crosspr_discriminator as braid
@@ -376,5 +377,34 @@ class ExoticMaxCutTests(unittest.TestCase):
                        2 if name == "jacob" else
                        (2**stage["depth"] if name == "cantor"
                         else 3**stage["depth"])))
+
+
+    def test_positive_depth_cantor_and_trit_have_same_graph_spherical_caps(self):
+        result = cap.audit(depth=2)
+        self.assertTrue(result["same_graph_spherical_caps_verified"])
+        self.assertTrue(result["classical_planar_edge_bound_required_for_36_tight"])
+        self.assertFalse(result["lean_agda_kernel_verified"])
+        for family, expected in (("cantor", [1,2,4]),
+                                 ("balanced_ternary", [1,3,9])):
+            stages = result["families"][family]
+            self.assertEqual([x["boundary_count"] for x in stages], expected)
+            self.assertEqual([x["maxwell"] for x in stages], [6,6,6])
+            self.assertTrue(all(
+                x["planarity_witness"] == "same-graph explicit simplicial 2-sphere cap"
+                for x in stages[1:]))
+
+    def test_single_triangle_disk_cannot_be_capped_as_duplicate_simplex(self):
+        with self.assertRaises(AssertionError):
+            cap.cap_boundary_triangles(pl.disk())
+        self.assertEqual(cap.audit(depth=1)["families"]["cantor"][0][
+            "planarity_witness"], "K3 planar by direct three-vertex embedding")
+
+    def test_positive_genus_handle_cannot_be_spherical_capped(self):
+        # The same cap operation must reject positive-genus source stages:
+        # filling the triangular boundary does not remove handles.
+        handle, piece = complement.initial("loch")
+        handled, _ = complement.transition(handle, piece, "loch")
+        with self.assertRaises(AssertionError):
+            cap.cap_boundary_triangles(handled.mesh)
 
 if __name__ == '__main__': unittest.main()
