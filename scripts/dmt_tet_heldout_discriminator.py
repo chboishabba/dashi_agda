@@ -44,7 +44,7 @@ def build_rows(doc):
             # determine the t+1 target, without prospective lookahead.
             obs = {'person': person, 'dose': dose,
                    'target': int(_number(after['values']['entity']) >= threshold),
-                   'time': int(before['time_index'] >= len(ordered)//2)}
+                   'time': int(before['time_index'] >= 150)}
             for feature in set(M0 + M1A) - {'dose', 'time'}:
                 obs[feature] = int(_number(before['values'][feature]) >= threshold)
             rows.append(obs)
@@ -76,16 +76,29 @@ def heldout(rows):
             fallback = Fraction(1 + sum(r['target'] for r in train), 2 + len(train))
             error = Fraction()
             probabilities = []
+            seen_count = 0
             for r in test:
                 k = key(r, columns)
+                if counts[k]:
+                    seen_count += 1
                 p = (Fraction(positives[k]+1, counts[k]+2) if counts[k]
                      else fallback)
                 probabilities.append(str(p))
                 error += (p - r['target'])**2
             results[label] = {'brier_exact': str(error / len(test)),
                               'predictions_exact': probabilities,
+                              'training_nonempty_strata': len(counts),
+                              'heldout_seen_strata_count': seen_count,
+                              'heldout_unseen_strata_count': len(test) - seen_count,
+                              'heldout_exact_stratum_coverage': str(Fraction(seen_count, len(test))),
                               'unseen_cell_fallback_training_only': True}
+        p0, p1 = (results[label]['predictions_exact'] for label in FEATURES)
+        distinct = sum(a != b for a, b in zip(p0, p1))
         folds.append({'held_out_person': held, 'n_test_transitions': len(test),
+                      'distinct_proxy_predictions': distinct,
+                      'exact_brier_M0_minus_M1a': str(
+                          Fraction(results['M0_nuisance_proxy']['brier_exact']) -
+                          Fraction(results['M1a_endogenous_proxy']['brier_exact'])),
                       'models': results})
     return folds
 
@@ -93,11 +106,18 @@ def heldout(rows):
 def audit(doc):
     rows = build_rows(doc)
     folds = heldout(rows)
+    n_distinct = sum(fold['distinct_proxy_predictions'] for fold in folds)
+    delta = sum((Fraction(fold['exact_brier_M0_minus_M1a']) for fold in folds), Fraction()) / len(folds)
     return {
         'schema': 'dashi-dmt-tet-heldout-synthetic-v1',
         'models': {k: list(v) for k, v in FEATURES.items()},
         'model_capacity_equal_in_all_respects': False,
         'nominal_binary_feature_count_each': 7,
+        'time_threshold_source_defined_not_heldout_length': '600 seconds / 150 four-second bins',
+        'heldout_predictive_difference_present': n_distinct > 0,
+        'distinct_heldout_predictions': n_distinct,
+        'subject_equal_weight_mean_brier_M0_minus_M1a': str(delta),
+        'cross_validation_scores_are_exploratory_not_independent_p_values': True,
         'split': 'leave-one-person-out; both doses and all stages held out',
         'target': 'next 4s retrospectively reported entity >= predeclared threshold',
         'within_subject_targets_not_independent_samples': True,
