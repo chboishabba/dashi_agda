@@ -106,3 +106,31 @@ def test_eventual_critical_dissipation_margin_exact():
     assert 2*nu-nu==nu
     # With X(t_enter)<=xthreshold, the right-hand post-entry budget
     # is independent of the initial kinetic energy E0 and cutoff N.
+
+
+
+def test_optimal_averaging_interval_calculus_exact():
+    # Set z=nu*L, A=sqrt(2)*Ccrit^2*E0/nu^2.
+    # When 0<z<A^2, t_enter*nu=z+0.5*log(A/sqrt(z)).
+    # The derivative is 1-1/(4z), minimized at z=1/4.
+    import sympy as S
+    z,A=S.symbols('z A', positive=True)
+    f=z+S.Rational(1,2)*S.log(A/S.sqrt(z))
+    assert S.simplify(S.diff(f,z)-(1-1/(4*z)))==0
+    assert S.simplify(S.diff(f,z,2)-1/(4*z*z))==0
+    assert S.simplify(S.diff(f,z).subs(z,S.Rational(1,4)))==0
+
+
+def test_optimal_averaging_interval_piecewise_and_continuous():
+    import sympy as S
+    A=S.symbols('A', positive=True)
+    small=A*A
+    large=S.Rational(1,4)+S.log(2*A)/2
+    assert S.simplify((small-large).subs(A,S.Rational(1,2)))==0
+    # At A<1/2, choosing z=A^2 removes the waiting-for-decay term.
+    assert S.simplify(S.log(A/S.sqrt(A*A)))==0
+    for a in [S.Rational(1,10), S.Rational(1,3)]:
+        assert 0<a<S.Rational(1,2)
+        assert 0<small.subs(A,a)<S.Rational(1,4)
+    # At A>1/2, choosing z=1/4 yields t0=log(2A)/(2nu).
+    assert S.simplify(S.log(A/S.sqrt(S.Rational(1,4)))-S.log(2*A))==0
