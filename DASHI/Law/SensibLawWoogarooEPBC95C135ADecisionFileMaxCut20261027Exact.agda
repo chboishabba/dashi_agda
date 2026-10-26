@@ -71,6 +71,17 @@ nationalStandardsTiming = Source.mkNoDOISource
   "Four new standards made 19 August 2026 apply to individual assessments/approvals only after new approval tests begin on or before 1 December 2026; they do not automatically govern the 15 October 2026 decision. Confirm any relevant other transitional instrument separately."
   Source.publicAttribution
 
+adjrActAsAtDecision : Source.AttributedSource
+adjrActAsAtDecision = Source.mkNoDOISource
+  "Parliament of Australia"
+  "Administrative Decisions (Judicial Review) Act 1977 — compilation 133"
+  "Federal Register of Legislation: law in force 27 August 2026"
+  "27 August 2026"
+  "https://www.legislation.gov.au/C2004A01697/2026-08-27/2026-08-27/text/original/epub/OEBPS/document_1/document_1.html"
+  Source.governmentSource
+  "ADJR s11(1)(c),(3) prescribed 28-day application period uses a particular applicant's document-furnishing/reasons events and court extensions; s11(4) deals with situations where no period prescribed. s13(1) reason-request eligibility requires entitlement to review under s5, and s13(5) has its own timing/refusal conditions. There is no proven single deadline from 15 October portal publication; court rules, standing, exclusions and alternate jurisdiction require counsel."
+  Source.publicAttribution
+
 data FileAtom : Set where
   publicApprovalListing : FileAtom
   signedFinalDecision : FileAtom
@@ -83,6 +94,8 @@ data FileAtom : Set where
   section136SocialEconomicMatrix : FileAtom
   section139SpeciesAdviceTreatment : FileAtom
   operativeApprovalConditions : FileAtom
+  adjrSection11ApplicantFurnishingClock : FileAtom
+  adjrSection13QualifiedReasonsRequest : FileAtom
 
 data VerificationState : Set where
   primarySourceIdentified : VerificationState
@@ -180,6 +193,20 @@ signedConditions = decision-file-receipt operativeApprovalConditions epbcApprova
   "Actual operative preclearance, staged ecological management, offset schedule, monitoring requirements and any variations."
   false refl
 
+adjrApplicantSpecificClock : DecisionFileReceipt
+adjrApplicantSpecificClock = decision-file-receipt adjrSection11ApplicantFurnishingClock adjrActAsAtDecision
+  statutoryDemandIdentified
+  "ADJR s11(3) specifies a prescribed 28-day period keyed to the furnishing of a written decision/reasons to the applicant according to the statutory branches. Whether ADJR applies to this decision/applicant requires separate review."
+  "Confirm standing, statutory exclusions, applicant-specific furnishing/reasons correspondence and date, Court Rules, alternative s39B route, possible extensions and interim injunction. Do not date an application from a public notice alone."
+  false refl
+
+adjrStandingLinkedReasons : DecisionFileReceipt
+adjrStandingLinkedReasons = decision-file-receipt adjrSection13QualifiedReasonsRequest adjrActAsAtDecision
+  statutoryDemandIdentified
+  "ADJR s13(1) reason requests can be made by a person entitled under s5, subject to s13(5),(11) and other exceptions; section 135A(2) separately permits any requester to seek the s95C Secretary report."
+  "Counsel must identify eligible applicant and exact receipt date before a s13 request; filing a 135A report request does not itself stop the judicial-review clock."
+  false refl
+
 operativeStandardsDistinction : Source.AttributedSource
 operativeStandardsDistinction = nationalStandardsTiming
 
@@ -195,7 +222,9 @@ postApprovalFileCut =
   section136Housing ∷
   delegateReceipt ∷
   section139SpeciesAdvice ∷
-  signedConditions ∷ []
+  signedConditions ∷
+  adjrApplicantSpecificClock ∷
+  adjrStandingLinkedReasons ∷ []
 
 data ApprovalListingPaysSignedConditions : Set where
 data AugustStandardsApplyToOctoberApprovalByRegistrationAlone : Set where
@@ -205,6 +234,9 @@ data MinisterPortfolioEqualsPersonalApprovalSignature : Set where
 data HousingAsSocialFactorEqualsImproperInfluence : Set where
 data SourceExistenceProvesProceduralReviewGround : Set where
 data LaterGuidanceWithoutCommencementAppliesRetrospectively : Set where
+data PortalPublicationMeansFurnishedDecisionToAnyApplicant : Set where
+data Section135ARequestAutomaticallyStaysReviewTime : Set where
+data Section13ReasonsAvailableToAnyRequester : Set where
 
 listingDoesNotPaySignedNotice : ApprovalListingPaysSignedConditions → ⊥
 listingDoesNotPaySignedNotice ()
@@ -234,3 +266,15 @@ existenceNotReviewGround ()
 futureRuleNotPastRule :
   LaterGuidanceWithoutCommencementAppliesRetrospectively → ⊥
 futureRuleNotPastRule ()
+
+portalNoticeNotApplicantFurnishing :
+  PortalPublicationMeansFurnishedDecisionToAnyApplicant → ⊥
+portalNoticeNotApplicantFurnishing ()
+
+reportRequestDoesNotStayFilingLimit :
+  Section135ARequestAutomaticallyStaysReviewTime → ⊥
+reportRequestDoesNotStayFilingLimit ()
+
+section13DifferentRequesterClass :
+  Section13ReasonsAvailableToAnyRequester → ⊥
+section13DifferentRequesterClass ()
