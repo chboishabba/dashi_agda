@@ -6,7 +6,7 @@ from itertools import product
 import json
 
 TOKENS = [(F(s), F(n), F(s)) for s in (-1, 1) for n in (-1, 1)]
-HOLDOUT = [(F(s), F(n), F(s)) for s in (-1, 1) for n in (1, -1)]
+HOLDOUT = [(F(s), F(n), F(s)) for s in (-1, 1) for n in (-2, 2)]
 SIGMA = F(1, 8)
 ETA = F(1, 8)
 
