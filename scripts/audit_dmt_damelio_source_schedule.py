@@ -21,6 +21,7 @@ LOADER_SHA = "903ad492f6f6e8e155fb9ab115f111796c0452b6"
 PREPROCESS_SHA = "eaa07bb4bc349904fc57c6a6c853681494bce57e"
 CODE_COMMIT = "16067a5ff31b7f390381fc5b25b587b1769d9dd1"
 DOSING = ("Alta", "Baja")
+ORIGINAL_HIGH_FIRST = frozenset(("S01", "S04", "S05", "S09", "S10", "S15", "S17", "S18"))
 EXPECTED = tuple("S{:02d}".format(i) for i in range(1,21) if i != 14)
 PATTERN = re.compile(r"^(S[0-9]{2})_(DMT|RS)_Session([12])_([A-Za-z0-9]+)\.mat$", re.I)
 
@@ -65,8 +66,8 @@ def validate_source(data):
         roster[pid] = arms
     if set(roster) != set(EXPECTED):
         raise ValueError("Source roster differs from original")
-    if sum(arms[0] == "Alta" for arms in roster.values()) != 8:
-        raise ValueError("Source first-visit dose counts inconsistent")
+    if {p for p, arms in roster.items() if arms[0] == "Alta"} != ORIGINAL_HIGH_FIRST:
+        raise ValueError("Original 19-person dose assignments have been modified")
     expected_not_proven = (
         "raw_mat_files_accessed", "observed_participant_dose_crosswalk_replayed",
         "which_18_TET_subjects_verified", "which_7_phys_complete_verified",
