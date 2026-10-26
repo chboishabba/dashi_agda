@@ -12,6 +12,12 @@ module DASHI.Mathematics.Symmetry.TetragonalPrimitiveSeitzExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ)
+import Data.Integer.Properties as IntP
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+import DASHI.Mathematics.Symmetry.TetragonalSignedCoordinateGroupActionExact as CoordGroup
+import DASHI.Mathematics.Symmetry.TetragonalIntegralLatticeActionExact as Coord
+import DASHI.Mathematics.Symmetry.TetragonalIntegerMetricPairingExact as Metric
+import DASHI.Mathematics.Symmetry.TetragonalD4hFullActionExact as Full
 import DASHI.Physics.Closure.NSIntegerFourierLattice as NS
 import DASHI.Mathematics.Symmetry.TetragonalD4hNormalFormExact as D
 import DASHI.Mathematics.Symmetry.TetragonalFourierLatticeBridgeExact as F
@@ -60,3 +66,94 @@ reciprocalTranslationIsIdentity t (NS.mode kx ky kz) = refl
 -- specific experimentally identified solid. Atomic 369 decoration,
 -- tI centring, Bloch phases, magnetic groups, and fractional
 -- nonsymmorphic translations remain independently typed consumers.
+
+-- Record equality is introduced only after each component is proved.
+modeExt :
+  ∀ {p q : NS.FourierMode} →
+  NS.kx p ≡ NS.kx q →
+  NS.ky p ≡ NS.ky q →
+  NS.kz p ≡ NS.kz q →
+  p ≡ q
+modeExt {NS.mode x y z} {NS.mode .x .y .z} refl refl refl = refl
+
+addModeAssociative :
+  (p q r : NS.FourierMode) →
+  NS.addMode (NS.addMode p q) r ≡
+  NS.addMode p (NS.addMode q r)
+addModeAssociative (NS.mode x y z) (NS.mode u v w) (NS.mode a b c) =
+  modeExt (IntP.+-assoc x u a)
+          (IntP.+-assoc y v b)
+          (IntP.+-assoc z w c)
+
+zeroLeft :
+  (p : NS.FourierMode) → NS.addMode NS.zeroMode p ≡ p
+zeroLeft (NS.mode x y z) =
+  modeExt (IntP.+-identityˡ x)
+          (IntP.+-identityˡ y)
+          (IntP.+-identityˡ z)
+
+actModeIdentity :
+  (p : NS.FourierMode) → F.actMode D.identity p ≡ p
+actModeIdentity p =
+  trans (cong F.toMode
+            (CoordGroup.actIdentity Metric.integerSignedCarrier (F.fromMode p)))
+        (F.modeRoundTrip p)
+
+actModeCompose :
+  (g h : D.D4h) (p : NS.FourierMode) →
+  F.actMode (D.compose g h) p ≡
+  F.actMode g (F.actMode h p)
+actModeCompose g h p =
+  trans
+    (cong F.toMode
+      (CoordGroup.actCompose Metric.integerSignedCarrier
+         g h (F.fromMode p)))
+    (cong (λ v → F.toMode (Coord.act Metric.integerSignedCarrier g v))
+      (sym (F.tripleRoundTrip
+        (Coord.act Metric.integerSignedCarrier h (F.fromMode p)))))
+
+seitzIdentityActs :
+  (p : NS.FourierMode) → seitzApply seitzIdentity p ≡ p
+seitzIdentityActs p =
+  trans (cong (NS.addMode NS.zeroMode) (actModeIdentity p))
+        (zeroLeft p)
+
+seitzApplyComposes :
+  (s t : PrimitiveSeitz) (p : NS.FourierMode) →
+  seitzApply (seitzMultiply s t) p ≡
+  seitzApply s (seitzApply t p)
+seitzApplyComposes (seitz g u) (seitz h v) p =
+  trans
+    (cong (NS.addMode (NS.addMode u (F.actMode g v)))
+          (actModeCompose g h p))
+    (trans
+      (addModeAssociative u (F.actMode g v) (F.actMode g (F.actMode h p)))
+      (cong (NS.addMode u)
+        (sym (F.actModeAdd g v (F.actMode h p)))))
+
+seitzCong :
+  ∀ {g h : D.D4h} {u v : NS.FourierMode} →
+  g ≡ h → u ≡ v → seitz g u ≡ seitz h v
+seitzCong refl refl = refl
+
+-- Affine semidirect-product multiplication is associative on the
+-- actual (infinite) Z³ carrier, using the existing finite D4h theorem.
+seitzAssociative :
+  (s t u : PrimitiveSeitz) →
+  seitzMultiply (seitzMultiply s t) u ≡
+  seitzMultiply s (seitzMultiply t u)
+seitzAssociative (seitz g a) (seitz h b) (seitz k c) =
+  seitzCong
+    (Full.associative g h k)
+    (trans
+      (cong (NS.addMode (NS.addMode a (F.actMode g b)))
+        (actModeCompose g h c))
+      (trans
+        (addModeAssociative a (F.actMode g b)
+                              (F.actMode g (F.actMode h c)))
+        (cong (NS.addMode a)
+          (sym (F.actModeAdd g b (F.actMode h c))))))
+
+-- Group inverse / two-sided identity as elements and nonlinear
+-- Bloch translation phases are separate receipts. Action identity
+-- and multiplication, and operation associativity, are above.
