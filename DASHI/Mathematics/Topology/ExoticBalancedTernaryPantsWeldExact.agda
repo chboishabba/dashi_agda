@@ -24,9 +24,12 @@ module DASHI.Mathematics.Topology.ExoticBalancedTernaryPantsWeldExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 
 import DASHI.Algebra.Trit as Trit
+import DASHI.Foundations.BalancedTernaryStageSymmetryExact as Stage
+import DASHI.Foundations.BalancedTernaryUltrametricExact as Ultra
 import DASHI.Codec.BalancedTritBitFibre as Fibre
 import DASHI.Geometry.SSP369Ultrametric as U369
 import DASHI.Topology.TernaryCylinderPantsGeometryExact as Junction
@@ -152,3 +155,40 @@ balancedPantsAppendNaturality prefix digit
 -- This is a branch-slot *bijection* on arbitrary finite-depth words.
 -- The main geometric payment is done in the separately tested finite
 -- PL two-pants surface construction, not assumed by this theorem.
+
+------------------------------------------------------------------------
+-- EXACT PREFIX-ULTRAMETRIC DONOR FROM BALANCED TERNARY
+--
+-- This is deliberately a bridge into the ORIGINAL prefix-agreement
+-- type, rather than a second standalone "ternary metric".
+------------------------------------------------------------------------
+
+stageBalancedDigitOf369 :
+  U369.Digit369 → Stage.BalancedDigit
+stageBalancedDigitOf369 U369.digit3 = Stage.neg
+stageBalancedDigitOf369 U369.digit6 = Stage.zeroDigit
+stageBalancedDigitOf369 U369.digit9 = Stage.pos
+
+stageAddressList :
+  ∀ {n : Nat} → U369.Address n → List Stage.BalancedDigit
+stageAddressList vnil = []
+stageAddressList (head vcons tail) =
+  stageBalancedDigitOf369 head ∷ stageAddressList tail
+
+sspPrefixPreservesBalancedUltrametric :
+  ∀ {d k : Nat} {a b : U369.Address d} →
+  U369.PrefixMatch k a b →
+  Ultra.PrefixAgreement k (stageAddressList a) (stageAddressList b)
+sspPrefixPreservesBalancedUltrametric U369.prefix-zero =
+  Ultra.agreeZero
+sspPrefixPreservesBalancedUltrametric (U369.prefix-cons U369.digit3 p) =
+  Ultra.agreeNeg (sspPrefixPreservesBalancedUltrametric p)
+sspPrefixPreservesBalancedUltrametric (U369.prefix-cons U369.digit6 p) =
+  Ultra.agreeOpen (sspPrefixPreservesBalancedUltrametric p)
+sspPrefixPreservesBalancedUltrametric (U369.prefix-cons U369.digit9 p) =
+  Ultra.agreePos (sspPrefixPreservesBalancedUltrametric p)
+
+-- The standard prefix radix 3 is source-owned by Ultra:
+-- `Ultra.prefixScaleDenominator n = 3 ^ n`, no new metric.
+-- This does NOT identify the resulting 3-adic group structure
+-- with binary 2-adic group structure under the variable-length code.
