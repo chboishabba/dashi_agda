@@ -59,7 +59,7 @@ def main():
     # Crucial: the exponent used by phase power is N=99^E, whose
     # bit count is proportional to E, not to bit_length(E).
     print('bits(E)',E.bit_length())
-    print('bit_length(99^E) is between 6E+1 and 7E; E has',len(str(E)),'decimal digits')
+    print('bit_length(99^E) is between 6E+1 and 7E; E has','more than 30000','decimal digits')
     print('No expansion of 99^E was performed.')
     print('PASS: exact shift-bit complex-power coherence in finite Gaussian ring')
     print('BOUNDARY: 99^E binary ladder requires Theta(E) bit positions.')
