@@ -396,7 +396,7 @@ cfact1998And2026DoNotAutomaticallyProveContinuousPlan =
   Climate.cfactContinuationNotPlanTransfer
 
 foundationIncomeNotSameAsClimateDenialExpenditure :
-  Climate.ConcentratedSourceAuditBoundary.900mOrganisationRevenueIsClimateSpecificSpending
+  Climate.ConcentratedSourceAuditBoundary.total900mOrganisationRevenueIsClimateSpecificSpending
     Climate.canonicalConcentratedSourceAuditBoundary ≡ false
 foundationIncomeNotSameAsClimateDenialExpenditure = refl
 
