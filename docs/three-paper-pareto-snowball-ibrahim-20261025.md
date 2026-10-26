@@ -410,3 +410,41 @@ a live consumer demonstrates a new unrepresented source condition.
 Do not conflate **kernel trust** with **correct theorem statement**,
 and do not promote a partial finite projection identity into the
 unrestricted Millennium Prize conclusion.
+
+
+### Executed complete 3D stationary pressure diagnostic (26 October)
+
+Lean companion [#87](https://github.com/chboishabba/dashi_lean4/pull/87)
+now owns an independently executable
+`scripts/check_ns_pressure_divergence_exact.py`, original 3D
+**DASHI source-consistency example** attributed to the Yan–Rădulescu
+(2021) equation audit. With `U=0`,
+`P=epsilon*x1²/2`, `f=(epsilon*x1,0,0)`,
+and arbitrary `nu`, the script constructs the full 3-vector
+steady momentum residual
+`-nu*Delta(U)+(U·grad)U+grad(P)-f`
+and verifies it vanishes identically. It also verifies
+`div U=0`, `Delta P=div f=epsilon` and the failure of
+the source's omitted-force term for `epsilon!=0`.
+The original authors' general stationary theorem is not declared
+invalid: the example identifies a **missing or unstated
+divergence-of-forcing compatibility condition** in the displayed
+equation. Check original theorem qualifiers rather than assuming
+none exist.
+
+**Executed locally using SymPy:** all symbolic 3D residual identities
+passed, including `epsilon=1/1000,-1/10000,1/1000000`.
+This supplements the previous **60** exact rational finite
+difference tests; it is **not** a Lean kernel proof nor a
+formal H^s/Nash–Moser existence result.
+
+For exact chronology, the script's first Git source commit is
+`620e35069f050018918ca8d6e38933cad5cda840`,
+`2026-10-26T12:25:30Z`, Brisbane
+`2026-10-26T22:25:30+10:00`; the finite sampled fourth-power
+Lean lemma first appeared in commit
+`10681b456753e354e10d77eec065270d7a1c3612`,
+`2026-10-26T12:19:22Z`, Brisbane
+`2026-10-26T22:19:22+10:00`.
+The typed chronology stores `sourceCommittedOnly` rather than
+conflating those events with a successful kernel check.
