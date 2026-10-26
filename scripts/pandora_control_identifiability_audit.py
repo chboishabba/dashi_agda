@@ -141,6 +141,8 @@ def muts_mode_episode_window(
     """
     if type(count) is not int or count < 1:
         raise ValueError('positive integer event count required')
+    if type(min_minutes) not in (int, str, Fraction) or type(max_minutes) not in (int, str, Fraction):
+        raise ValueError('exact int/str/Fraction durations required; no floats or booleans')
     try:
         dmin, dmax = Fraction(min_minutes), Fraction(max_minutes)
     except (TypeError, ValueError, ZeroDivisionError, OverflowError) as exc:
@@ -160,6 +162,8 @@ def muts_mode_episode_window(
     if conditional_spot_power is not None:
         if not isinstance(conditional_spot_power, (list, tuple)) or len(conditional_spot_power) != 2:
             raise ValueError('explicit spot power interval required')
+        if any(type(x) not in (int, str, Fraction) for x in conditional_spot_power):
+            raise ValueError('exact int/str/Fraction power required; no floats or booleans')
         try:
             pmin, pmax = [Fraction(x) for x in conditional_spot_power]
         except (TypeError, ValueError, ZeroDivisionError, OverflowError) as exc:
@@ -302,12 +306,14 @@ class TestFiniteConfound(unittest.TestCase):
         for n in (0, -1, True, 1.5):
             with self.assertRaises(ValueError):
                 muts_mode_episode_window(n, 5, 30)
-        for lower, upper in ((0, 30), (40, 30), (-1, 2), ('bad', 30)):
+        for lower, upper in ((0, 30), (40, 30), (-1, 2), ('bad', 30),
+                             (True, 30), (0.1, 30)):
             with self.assertRaises(ValueError):
                 muts_mode_episode_window(14, lower, upper)
 
     def test_muts_invalid_spot_transfer_power_rejected(self):
-        for power in ((-1, 2), (3, 2), (1,), '3.15', ('NaN', 4)):
+        for power in ((-1, 2), (3, 2), (1,), '3.15', ('NaN', 4),
+                      (True, 2), (0.1, 2)):
             with self.assertRaises(ValueError):
                 muts_mode_episode_window(14, 5, 30, power)
 
