@@ -607,6 +607,17 @@ rodin2024Eq7PaperClaimsDoNotTransferProof :
 rodin2024Eq7PaperClaimsDoNotTransferProof =
   Atlas.allSourcesRemainNonPromoting Atlas.ramirezRodinRMF2024
 
+-- The ACS publisher's Supporting Information listing is a bibliographic
+-- receipt, not a native SI PDF page or independent original experiment.
+saikiaPublisherSITopicListingNotMeasuredCoilResult :
+  Attribution.citationImportsProof Atlas.saikiaAmyloid2019 ≡ false
+saikiaPublisherSITopicListingNotMeasuredCoilResult =
+  Atlas.allSourcesRemainNonPromoting Atlas.saikiaAmyloid2019
+
+saikiaSITopicListingDoesNotProveSixtyPercent :
+  Atlas.citationCreatesTruth Atlas.saikia2019ACSOriginalSITopicListing ≡ false
+saikiaSITopicListingDoesNotProveSixtyPercent = refl
+
 ramirezRef24ComparisonNotProvenByCitation :
   Atlas.historicalTransmissionProved Atlas.ramirezRef24NotValidatedCoilComparison ≡ false
 ramirezRef24ComparisonNotProvenByCitation = refl
