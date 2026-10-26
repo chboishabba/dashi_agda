@@ -57,7 +57,7 @@ def subject_join(paper_ids, archive_ids):
                 published_not_in_archive=sorted(set(p)-set(a)),
                 archive_not_in_published=sorted(set(a)-set(p)),
                 ids_authenticated_by_original_data=False,
-                paper_archive_subset_verified=set(a).issubset(set(p)),
+                syntactic_archive_subset_of_supplied_ids=set(a).issubset(set(p)),
                 cross_source_join_is_a_measurement_receipt=False)
 
 
