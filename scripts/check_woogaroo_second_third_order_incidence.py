@@ -24,6 +24,16 @@ def main() -> None:
     assert bridge.count("= incidence-path") == 9
     assert bridge.count("→ ⊥") == 9
     assert bridge.count("false refl") >= 9
+    assert bridge.count("  incidence-cut ") == 7
+    assert "record IncidenceCut : Set where" in bridge
+    assert "sourceLevelValueOrOptionIdentified" in bridge
+    assert "grossGainIdentified" not in bridge
+    assert "sourceAcquisitionPriority" in bridge and "presentPayment : Bool" in bridge
+    assert "signedFederalDecisionAndCounsel" in bridge
+    assert "exactCouncilVillage2And3ChargeNotices" in bridge
+    assert "signedCherishStocklandTitleDeed" in bridge
+    assert "sameParcelEcologicalOffsetAndPublicSpend" in bridge
+
 
     # Canonical LAW owner and unmerged Cognition method donor remain distinct.
     assert "GainLossSnowballAdapterExact as GainLoss" in bridge
@@ -71,7 +81,7 @@ def main() -> None:
     assert "A$518m" in doc
     assert "2025 adopted rate resolution cannot be retro-applied" in note
     assert "Source" in note and "net public subsidy" in note
-    print("PASS: 7 source entries, 9 typed incidence paths, 9 barriers; historical and current legal states distinct")
+    print("PASS: 7 source entries, 9 typed incidence paths, 9 barriers, 7 open Pareto cuts; historical and current legal states distinct")
 
 
 if __name__ == "__main__":
