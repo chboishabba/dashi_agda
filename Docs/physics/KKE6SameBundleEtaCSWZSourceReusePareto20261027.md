@@ -102,3 +102,21 @@ Canonical cross-PR result: `Docs/physics/KKTorque9999Chi33SameActionParityPareto
 The real original owners are merged torque/EM #1164, KK fibre shift #1239, Hopf U1 #1235, **Pickover 9999! #1260** (sibling, not necessarily present as an Agda import in this branch), source E6 #1106, physical KK #1241. The sample Pickover power `k↦4950k mod9999` **annihilates the order-three torsion subgroup**, so cannot faithfully read diagonal quotient deck information under the selected μ3→μ9999 comparison. Its odd-order finite charge-two invertibility also cannot promote a globally single-valued half-phase on U1. In the actual parity-even E6 boundary group Chi33 has primitive Chern winding ±1 at fixed nonliftable Z3 deck; torsion samples and WZ functional remain distinct.
 
 The conventional S1/Z2 orbifold projects **metric g_{mu5}** to odd modes (no geometric graviphoton zero mode), but can retain **independent B_mu** even and **E6 EW** photon; retaining both latter without a mixing/Higgs consumer creates **two** massless U1s. Spatial torque/right-hand orientation from #1164 has no authority to identify either with a fifth coordinate. None of these limited checks constructs APS eta or globally patched WZ; earlier original-source ownership and explicit quantum-wall criteria remain intact.
+
+
+## 2026-10-27 exact π1(H) topological upgrade and η/defect original-root link
+
+The full faithful parity-even H from the **actual source** is
+\[
+H=[SU(3)_c\times U(2)_L\times U(2)_R]/\mathbb Z_{3,\mathrm{diag}},
+\]
+where \(S(U(2)\times U(1))\cong U(2)\). The original p=1 full-torus clutch path goes from identity to the common central \(\omega I\). Let \(A\), \(B\) denote the two COVER \(U(2)\) determinant-one-winding generators; let \(C\) denote that common central-endpoint quotient loop. Since the simply connected colour factor has no \(\pi_1\) and three copies of \(C\) wind the two \(U(2)\) determinants twice,
+\[
+\pi_1(H)=\langle A,B,C\mid 3C=2A+2B\rangle
+\cong \mathbb Z^2.
+\]
+Explicit basis \(A,R=C-A-B\) has \(B=-A-3R,C=-2R\). Its \(\Chi_{33}\) line character evaluates to \(c_1=-A\), and central cover-lift deck to \(R\bmod3\). The Smith invariant of the relation row \((-2,-2,3)\) is \(1\), **not** \(3\). Thus \(\pi_1(H)\) is TORSION-FREE: **the nontrivial \(\mathbb Z_3\) is an obstruction-quotient of \(\pi_1\), not a torsion summand of \(\pi_1(H)\)**. The two independent observables allow *every* line Chern degree at *every* deck label. This is an exact strengthening of the earlier bounded winding examples.
+
+New exact program \`scripts/check_kk_e6_h_pi1_charge_deck.py\` constructs the unimodular inverse and checks 841 integer-pair cases and 867 quotient path triples, retaining the existing source parity and \(\Chi_{33}\) representation ownership. Locally executed file has a byte-identical Git blob at the owning PR head. No extra 5D field content. The degree/obstruction information now has a canonical integral presentation for the **P0 boundary topology** portion; it still supplies neither full \(H^*(BH;\mathbb Z)\) nor spin six-bordism, eta determinant phase, quantised CS5 or a patched WZ action.
+
+**Original literature snowball:** Xianzhe Dai and Daniel Freed, *Eta-Invariants and Determinant Lines* (J. Math. Phys. 35, 1994, 5155–5194; DOI **10.1063/1.530747**) give gluing/variation and the determinant-line global-anomaly method. Arun Debray, Weicheng Ye and Matthew Yu, *Global Structure in the Presence of a Topological Defect* (Commun. Math. Phys. 407 (2026) 159, DOI **10.1007/s00220-026-05629-x**, original arXiv 2501.18399 submitted 2025) provide more recent defect/characteristic-bordism methods. **Their worked dimensions/defect and symmetry cases are not identical to this 5D E6 quotient**, and their publication/preprint are one root; no selected H spin-bordism theorem imported. A genuinely faithful same-group differential-cocycle action is still required. Do not confuse the Pickover \(\mu_{9999}\) power and its chosen \(\mu_3\) subgroup with the torsion-free \(\pi_1(H)\); only a separately specified observer map can relate them, and the power map loses the selected deck observation.
