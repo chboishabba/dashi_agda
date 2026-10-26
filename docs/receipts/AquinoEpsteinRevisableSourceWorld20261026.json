@@ -514,5 +514,133 @@
       "independence": "Dechert service fee aggregate must not be substituted as bank-origin individual USD wire",
       "case_ref": "2016 Black transaction class not authenticated"
     }
-  ]
+  ],
+  "australian_crosspollination": {
+    "as_of": "2026-10-26",
+    "thin_owner": "DASHI/Cognition/AustraliaPoliticalEconomySameObjectCrosswalk20261026Exact.agda",
+    "source_audit": "docs/research/AustralianPoliticalEconomyCrossNetworkMaxCut20261026.md",
+    "original_sources_not_added_to_existing_9_root_ca_counter": "Australian source producers are separately accounted for in a reviewed crosswalk; not newly counted as independent CA/Epstein proof witnesses.",
+    "positive_paths": [
+      {
+        "id": "AUS_HANSON_2025_HOSPITALITY",
+        "original": "Senator Pauline Hanson Senate interests declaration 2025-12-16",
+        "carrier": "official indexed Senate Form A",
+        "status": "original_indexed_not_pdf_face_inspected",
+        "evidence": "Hancock-sponsored US flights and Rinehart hospitality as personally declared",
+        "not_pays": "private donor settlement or unlawful gift"
+      },
+      {
+        "id": "AUS_RINEHART_COMPANY_AIRCRAFT",
+        "original": "Hancock Prospecting company spokesperson to ABC 2026-04-29",
+        "carrier": "ABC interview/news article",
+        "status": "source_attributed_original_spokesperson_report",
+        "evidence": "Rinehart company aircraft gifted to One Nation",
+        "not_pays": "the identity of individual Aitken/Giles/Plimer donors or an independently inspected final invoice"
+      },
+      {
+        "id": "AUS_HANSON_RINEHART_POLICY",
+        "original": "Hanson first-person ABC Perth policy discussion replayed in Four Corners 2026-09-28 transcript",
+        "carrier": "ABC original published transcript",
+        "status": "first_person_attributed",
+        "evidence": "Hanson attributes specific pensioner work-hours policy idea to Rinehart",
+        "not_pays": "legislative enactment, whole platform control or causally measured electoral effect"
+      },
+      {
+        "id": "AUS_2016_2017_HPPL_IPA",
+        "original": "Rinehart v Rinehart [2018] NSWSC 1102 para 25 re court-evidenced HPPL schedule",
+        "carrier": "published judgment reprint, not native judicial site",
+        "status": "judicially_reported_original_schedule_reprint",
+        "evidence": "A$2.3m 2016 plus A$2.2m 2017 paid or provided by HPPL to IPA",
+        "not_pays": "same-object IPA article or 2026 One Nation campaigning"
+      },
+      {
+        "id": "AUS_BANNON_PALMER",
+        "original": "DOJ released Bannon to Epstein message EFTA01615861, Palmer early and revised statements",
+        "carrier": "DOJ original text indexed and 2026 ABC/New Daily quoting separate actor statements",
+        "status": "statement_and_later_denial_revision",
+        "evidence": "Bannon claimed advertising direction; Palmer initially denied all contact but later acknowledged one unsolicited call while denying operational direction",
+        "not_pays": "creative brief, vendor contract, payment, control or UK/US CA analytics deployment"
+      },
+      {
+        "id": "AUS_MANDELSON_XSTRATA_EPSTEIN",
+        "original": "2010 Mandelson/Xstrata strategy forwarded to Epstein in released email as reported",
+        "carrier": "2026 Guardian report of released correspondence, exact Bates bytes not reauthenticated",
+        "status": "source_reported_released_email",
+        "evidence": "Epstein was an attributed recipient of anti-mining-tax strategy",
+        "not_pays": "Rudd removal caused by Epstein or tactical orders to Australian campaign"
+      },
+      {
+        "id": "AUS_CRISAFULLI_RESOURCE",
+        "original": "Queensland parliament resource-project act as reported August 2026",
+        "carrier": "ABC source to existing Queensland owner",
+        "status": "reported_enacted_legislation",
+        "evidence": "resource fast-tracking enacted under Queensland government",
+        "not_pays": "Rinehart privately commissioned a named clause or brokered premier Trump access"
+      },
+      {
+        "id": "AUS_GINA_EPSTEIN_DIRECT",
+        "original": "Existing EpsteinAustraliaEliteNetworkAcquisitionExact source census",
+        "carrier": "case-specific bounded missing direct receipt",
+        "status": "not_located_not_universally_absent",
+        "evidence": "no original Rinehart–Epstein direct receipt identified in inspected case corpus",
+        "not_pays": "universal never-met/noncontact theorem"
+      }
+    ],
+    "sibling_reviews": [
+      {
+        "pr": 1251,
+        "owner": "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda",
+        "integration": "review_only_unmerged_sibling",
+        "use": "court-based HPPL IPA finance; historical API/GCC climate-communications and original commissioning/evidence scope",
+        "no_join": "historical funding != later specific editorial instructions or Australian CA work"
+      },
+      {
+        "pr": 1251,
+        "owner": "DASHI/Governance/AustralianPoliticalRadioInfluence2026Exact.agda",
+        "integration": "review_only_unmerged_sibling",
+        "use": "media ownership and redistribution provenance",
+        "no_join": "radio ownership/contact != unproved Gina/Bannon editorial command"
+      }
+    ],
+    "decisive_remaining_same_object": [
+      {
+        "id": "AUS_FY2025_26_AEC",
+        "kind": "official_public_election_finance",
+        "availability": "AEC original rule as at 2026-10-26: party annual due Oct20, donor annual due Nov17; public 2025-26 party return 2027-02-01",
+        "claim_reopened": "precise gifts-in-kind/donor names, payers, values and federal purpose",
+        "not_pays": "policy control or hidden sponsor without same original"
+      },
+      {
+        "id": "AUS_POLICY_ADOPTION",
+        "kind": "policy_text_and_institutional_vote",
+        "availability": "source currently has Hanson attribution, not exact enacted parliament outcome",
+        "claim_reopened": "pensioner-work-hours idea to specific party adopted text/action",
+        "not_pays": "whole-party capture simply from one example"
+      },
+      {
+        "id": "AUS_BANNON_VENDOR",
+        "kind": "dated_original_campaign_approval",
+        "availability": "no original signed 2019 Bannon–Palmer creative order inspected",
+        "claim_reopened": "who originated or approved particular Palmer anti-China/climate ad",
+        "not_pays": "Epstein command unless separate original transfer"
+      },
+      {
+        "id": "AUS_MANDELSON_DOWNSTREAM",
+        "kind": "same_object_communication_to_campaign_execution",
+        "availability": "released email reported, specific campaign deployment unverified",
+        "claim_reopened": "what material was actually adopted by Australian mining-tax campaign",
+        "not_pays": "Rudd leadership causation without independent counterfactual evidence"
+      },
+      {
+        "id": "AUS_GINA_IPA_SPECIFIC_COMMISSION",
+        "kind": "original_contract_workproduct_join",
+        "availability": "court-reported HPPL aggregate funding, no named policy-communication instructions",
+        "claim_reopened": "named commissioned Australian document and delivered content",
+        "not_pays": "1988-1998 API historical transfer by analogy"
+      }
+    ],
+    "causal_boundary": "One original business donor, travel supporter and policy adviser can be real at the same time; none proves a universal hidden chain. A campaign-effect claim additionally needs delivered-message, exposed-audience, outcome and counterfactual evidence.",
+    "provenance_boundary": "A source origin (e.g. senator's disclosure) is distinct from ABC's copy, a related owner's source-written Bool, a court judgment reprint, an AEC future disclosure and actual external-world correctness.",
+    "statutory_time_boundary": "Federal July 2025-June 2026 financial-year donation scheme and Jan 2027 calendar-year reform are separate regimes; February 2027 future publication cannot be retroactively claimed inspected October 2026."
+  }
 }
