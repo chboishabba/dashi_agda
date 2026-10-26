@@ -711,3 +711,34 @@ acsh1997OriginalPublicArgument = Typed.sourceReceipt
   "1997-10-01"
   "https://www.acsh.org/news/1997/10/01/global-climate-change-and-human-health"
   "First-party public text says anthropogenic warming may cause health harm, but argues to prioritise adaptation, public health and economic continuity over compulsory GHG emissions mitigation. This verifies a public position, not a specific GCC-mandated edit nor scientific validity of economic/medical claims."
+
+
+------------------------------------------------------------------------
+-- POLICY ACCESS receipt. The original 2019 CIC archival report describes a
+-- 2001 US State Department briefing advising an Undersecretary to tell GCC
+-- the administration rejected Kyoto partly based on its input. This is a
+-- drafted statement of credited influence, NOT an inspected primary
+-- government briefing, delivered remark, independent causal assessment,
+-- or proof GCC was the necessary or sufficient reason for the decision.
+------------------------------------------------------------------------
+
+gccUSGovernmentBriefing2001 : Typed.SourceReceipt
+gccUSGovernmentBriefing2001 = Typed.sourceReceipt
+  "Climate Investigations Center, archival investigator (2019)"
+  "The Global Climate Coalition: Big Business Funds Climate Change Denial and Regulatory Delay"
+  "2019-03-25"
+  "https://climateinvestigations.org/wp-content/uploads/2019/04/The-Global-Climate-Coalition-Denial-and-Delay.pdf"
+  "CIC describes archived 2001 US State Department briefing instructing an Undersecretary to credit GCC policy input in rejecting Kyoto. CIC report parsed; original 2001 government document not separately acquired, report screenshot service cache-missed."
+
+gcc2001DraftPolicyInputAcknowledgment : Typed.TypedGenealogyEdge
+gcc2001DraftPolicyInputAcknowledgment = Typed.typedGenealogyEdge
+  "E9-20" "Global Climate Coalition policy submissions" "2001 State Department prewritten administration acknowledgement"
+  Typed.recommendationExposure Typed.corroborated
+  (gccUSGovernmentBriefing2001 ∷ [])
+  "Historical investigator reproduces an official briefing description instructing the recipient to tell GCC it influenced the administration's Kyoto rejection in part. This is evidence of a prepared acknowledgement and access, not independent confirmation remarks delivered or scientific causation of the Kyoto choice."
+
+policyAccessIsNotCompletedMethodTransfer :
+  Typed.StrongHistoricalTransfer gcc2001DraftPolicyInputAcknowledgment → ⊥
+policyAccessIsNotCompletedMethodTransfer witness =
+  Typed.recommendationExposureIsNotDirectMethodTransfer
+    (Typed.relationIsTransfer witness)
