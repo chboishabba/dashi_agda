@@ -844,7 +844,7 @@ def test_original_ice_and_singer_budget_states_do_not_invent_payment():
     doc = RESEARCH.read_text()
     assert "40 rows total" in doc
     assert "Singer → tobacco funders" in doc
-    assert "this audit has **not acquired** a specific dated BP internal technical memo" in doc
+    assert "this audit has **not acquired a specific dated BP internal technical memo" in doc
 
 
 def test_gcc_acsh_commission_editorial_rights_and_published_file_are_distinct():
