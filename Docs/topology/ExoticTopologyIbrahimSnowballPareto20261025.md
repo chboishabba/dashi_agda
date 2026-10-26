@@ -567,3 +567,104 @@ mathematically equivalent reproductions; **neither is an
 exact-GitHub-blob execution receipt**. At last check PR #1254
 contained 24 focused Python test methods and had no
 associated successful kernel/Actions execution.
+
+
+## 26 October evening — native balanced ternary pays a FINITE 1→3 cobordism
+
+**Direct discovery from already-owned repo, not a new topology library.**
+Native source owners, inspected at actual heads:
+
+- `DASHI.Algebra.Trit` (negative, distinguished zero, positive; sign involution);
+  `DASHI.Codec.BalancedTritBitFibre` (zero-fibre vs nonzero support/sign).
+- `DASHI.Geometry.SSP369Ultrametric` (finite 3/6/9 prefix carriers);
+  `DASHI.Foundations.BalancedTernaryUltrametricExact` (prefix
+  agreement and base-3 depth; retains open zero).
+- `DASHI.Topology.TernaryCylinderPantsGeometryExact` and
+  `DASHI.Topology.TernaryPantsFrontierExact` (canonical compositional
+  1→3 output from TWO 1→2 pants, exact arbitrary-depth ternary
+  address/path/append naturality; source cites Atiyah 1988 for
+  cobordism vocabulary, DOI 10.1007/BF02698547).
+- Existing Agda #1254 `ExoticBinaryTernaryPantsCodecExact`,
+  `ExoticCantorCylinderOrientationExact`, finite geometric PL
+  `pl_surface_gluings`, marked frontier `pl_frontier_lineage`,
+  and literal same-triangulation `pl_complement_components`.
+
+**New source-written Agda cross-weld:**
+`ExoticBalancedTernaryPantsWeldExact.agda`.
+It explicitly chooses the slot chart
+`digit3 ↔ neg`, `digit6 ↔ zero`, `digit9 ↔ pos`.
+These are THREE distinct endpoints, with zero preserved as an
+actual fibre. It defines both finite-word maps and both
+inverse-direction round trips; then imports the ORIGINAL
+`TernaryPantsFrontierExact.addressToPantsPathAppend` theorem
+to show that signed-path append maps to 369/pants append
+**at every finite depth**, without another proof system.
+It additionally consumes native
+`BalancedTernaryUltrametricExact.PrefixAgreement` by mapping
+an SSP369 `PrefixMatch` proof into the actual balanced-digit
+prefix-agreement proof. Sign inversion `neg↔pos`, `zero↦zero`
+is an order-two REFLECTION of the 369 labels (3↔9,6 fixed),
+NOT the three-cycle C3 (3→6→9→3).
+It does not turn the selected name map into a theorem
+about numeric 3/6/9 arithmetic or physical crystal symmetry.
+
+**New literal finite PL realisation:**
+`scripts/exotic_topology_balanced_ternary_pl.py`.
+One 1→3 *cobordism* has FOUR boundary circles (1 input,
+3 outputs), Euler characteristic -2, genus 0. We actually
+glue **two** copies of the source-owned 3-holed sphere:
+first parent → (neg, temporary continuation), then temporary
+→ (zero, pos). The temporary circle is internal and does NOT
+become a permanent zero branch. The full attachment has
+three genuine outgoing geometric circles including zero.
+Every old boundary from the PREVIOUS STAGE is processed
+once; the old stage embeds vertexwise/trianglewise, and the
+same authoritative complementary-component verifier checks
+**one connected new exterior component per old boundary**,
+each meeting the entire old boundary and producing exactly
+its three expected signed descendants.
+
+Independent local reproduction, using the earlier
+finite PL triangulation and dual graph (not a code-name
+assertion), **PASS** at depths 0–3:
+`b_n=1,3,9,27`, genus zero throughout,
+attached complementary components `1,3,9`,
+final mesh has 7,723 oriented triangles, all manifold
+vertex-link conditions and old-stage incidence verified.
+This is an independent source-equivalent executed check,
+NOT exact-head execution of the new GitHub script and
+NOT an Agda kernel proof.
+
+The source code `3→0, 6→10, 9→11` is exactly the
+two-pants binary-decision tree flattened into signed
+outputs `neg→0, zero→10, pos→11`; finite roundtrips
+and Kraft sum one have the same original owner.
+Under a fair binary product coin these branches have
+weights (1/2,1/4,1/4), not (1/3,1/3,1/3) as uniform
+ternary product measure; the topological Cantor-space
+homeomorphism does not preserve the specified measures.
+
+**New genuine rejection controls in the 28-method test suite:**
+one ordinary pair of pants gives only TWO outgoing circles
+and is insufficient for the three balanced branches;
+zero must not be erased; both sources must share the exact
+variable-length prefix code; cyclic order-three C3 action
+cannot be confused with order-two balanced reflection.
+Do NOT conflate this 3-ary branching end space with the
+UNRELATED 26-point punctured T³ carrier in #1261,
+the 3⁴×3⁵ Eisenstein quotient's nonsemisimple ADDITIVE
+group in #1260, or a 3D punctured hyperfabric manifold:
+none of those carriers is the 2D PL surface constructed here.
+
+**Pareto update:** source-root literature is unchanged:
+Brahana 1921 owns compact orientable surface classification,
+Kerékjártó 1923 ideal-boundary precursor, Richards 1963
+noncompact classification and realisation. Atiyah (1988)
+owns TQFT/cobordism vocabulary, not this computed mesh.
+Repository-local implementation is a precise new FINITE
+geometric consumer of pre-existing combinatorial owners;
+it has not kernel-proven the infinite collared union,
+topological end homeomorphism, nonplanar-end decoration,
+or Richards classification. #1261/#1260 are useful
+nonidentity/wrong-carrier negative controls, not claims
+of physical or topological equivalence.
