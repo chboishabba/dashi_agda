@@ -174,6 +174,26 @@ def build():
         outer_orbits[len(ob)]+=1
     assert outer_orbits==Counter({8:78,4:24})
     assert sum(k*v for k,v in outer_orbits.items())==720
+    # NEGATIVE CONTROL WITH THE SAME EIGHT-SITE TARGET AND INNER9:
+    # an UNTWiSTED Fin10 sheet action CAN produce free8 product orbits
+    # because an axis-stabilizer four-orbit times a diagonal-stabilizer
+    # four-orbit may have trivial common stabilizer. So merely finding
+    # an eight-orbit on outer720 is NOT a valid twist proof. The exact
+    # orbit census is stronger and differs from the chosen source80 map.
+    untwisted=set((kind,y,sheet,t)
+                  for kind,y in all_targets
+                  for sheet in range(10) for t in INNER)
+    visited_untwisted=set()
+    untwisted_orbits=Counter()
+    for a in untwisted:
+        if a in visited_untwisted:continue
+        kind,y,sheet,t=a
+        orb={(kind,act(g,y),sheet,act(g,t)) for g in G}
+        visited_untwisted.update(orb)
+        untwisted_orbits[len(orb)]+=1
+    assert len(visited_untwisted)==len(untwisted)==720
+    assert untwisted_orbits==Counter({4:60,8:60})
+    assert untwisted_orbits!=outer_orbits
     fixchar={}
     for name,g in (("identity",(0,0)),("half_turn",(0,2)),
                    ("quarter_turn",(0,1)),("axis_mirror",(1,0)),
@@ -233,6 +253,8 @@ def build():
         natural_cube_corners_axis_reflection_fixed8=0,
         classwise_characters=fixchar,
         outer_orbit_sizes=dict(outer_orbits),
+        untwisted_mixed8_sheet10_inner9_orbits=dict(untwisted_orbits),
+        trivial_sheet_outer720_orbit_census_contradicts_source=True,
         irrep_720=irrep_720,irrep_9=irrep_9,irrep_729=irrep_729,
         mirror_fixed_points_inside_two_fixed_target_fibres=reflection_fibre_fixed,
         nontrivial_ten_sheet_D4_twisting_required=True,
