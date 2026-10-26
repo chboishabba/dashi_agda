@@ -1,5 +1,6 @@
 import HornedC3.ThreeArmHatcherGroupTransport
 import Mathlib.Topology.MetricSpace.Basic
+import Mathlib.Tactic.Linarith
 
 /-!
 # Actual radius-cut open cover: elementary metric geometry, not a postulate
