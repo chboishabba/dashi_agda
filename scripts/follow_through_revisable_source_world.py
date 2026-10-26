@@ -46,8 +46,8 @@ def report(world):
         missing = sorted(k for k in c["requires"] if e[k]["status"] != "present")
         claims[c["id"]] = {"level":c["level"],"supported_by":c.get("supports", []),
                            "unpaid":missing, "prerequisites_located":not missing,
-                           "severe_test":c["severe_test"], "reproducible_now":not missing,
-                           "note":"prerequisite presence never by itself promotes evidentiary level"}
+                           "severe_test":c["severe_test"],
+                           "note":"Located prerequisites do not establish causal identification, source authenticity, or reproduced evidence"}
     candidates = []
     for a in world["actions"]:
         live = sorted(k for k in a["targets"] if e[k]["status"] == "notLocated")
