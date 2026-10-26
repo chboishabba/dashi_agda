@@ -406,6 +406,32 @@
         "P1-85"
       ],
       "effect": "Bangor manual July7 UTC04/05 quality-passed moderate/heavy showers; AA1 July7 12UTC=24h 19mm, condition9 unspecified, quality1 passed; not per-hour precipitation or independent frontal/causal proof."
+    },
+    {
+      "id": "bangor_1953_precipitation_preceded_by_12h_pressure_fall",
+      "status": "original_bangor_observational_meteorological_context",
+      "requires": [
+        "P1-85",
+        "P1-81"
+      ],
+      "effect": "Real Bangor hourly quality1 SLP drops 1015.5hPa 1953-07-06T14UTC -> 1008.8hPa 1953-07-07T02UTC (6.7hPa over 12h), during and after reported Ellsworth operation; this supplies an ordinary-weather causal alternative candidate, not verified synoptic system or proof of device effect/ineffectiveness."
+    },
+    {
+      "id": "bangor_1953_wind_during_ellsworth_operation_distinct_site",
+      "status": "quality_passing_bangor_airport_measurement_different_location",
+      "requires": [
+        "P1-85",
+        "P1-48"
+      ],
+      "effect": "NOAA Bangor WIND 200 degrees from true north at UTC14/15/16 July6 quality1, bracketing reported separate Graham Lake device operation UTC14:45–15:52; no wind directional shift detected at Bangor during this hourly interval, which does not test wind shift at Ellsworth."
+    },
+    {
+      "id": "bangor_1953_july_overlapping_pressure_rise_fall_controls",
+      "status": "source_replayed_descriptive_reference_not_causal_p_value",
+      "requires": [
+        "P1-85"
+      ],
+      "effect": "Within 744 eligible quality1 12h pressure pairs ending in July1953, 46 have a drop at least as great as observed -6.7hPa; overlapping serial-dependence and mixed wet/dry means neither 46/744 nor a percentile is an intervention probability or independent empirical study."
     }
   ],
   "source_snapshot": {
@@ -548,6 +574,37 @@
       "physical_orgone_mechanism_verified": false,
       "exact_committed_replay_script_blob": "586b5dc3a13d320b508d21aa0b4e3d16c1ded58c",
       "exact_script_was_locally_run_on_uploaded_actual_source": true
+    },
+    "bangor_1953_actual_synoptic_context": {
+      "date": "2026-10-27",
+      "receipt": "docs/receipts/PsychotronicsBangor1953SynopticNuisanceRealData20261027.json",
+      "source": "P1-85",
+      "original_schema": "P1-81",
+      "reused_original_observer_root": "noaa-isd-hourly",
+      "script": "scripts/check_psychotronics_bangor_1953_synoptic_null.py",
+      "script_blob": "c976b9c33db99f5fe696ddd01a9f8c5d0b710fcb",
+      "test": "tests/test_psychotronics_bangor_1953_synoptic_null.py",
+      "test_blob": "319162a0b429be9dae85cf3b4534b8e6d771123a",
+      "real_uploaded_csv_sha256": "2a3b048d620b320fb8d1cf548d4eb06fb2c49821faa54c4cc7f708649cdca9bd",
+      "original_1953_sky_pressure_wind_data_replayed": true,
+      "quality1_slp_hpa_at_14utc_jul6": 1015.5,
+      "quality1_slp_hpa_at_02utc_jul7": 1008.8,
+      "pressure_change_minus6point7hpa": true,
+      "reported_operation_utc": [
+        "1953-07-06T14:45:00Z",
+        "1953-07-06T15:52:00Z"
+      ],
+      "bangor_wind_directions_UTC14_15_16": [
+        200,
+        200,
+        200
+      ],
+      "quality1_12h_comparisons_in_july": 744,
+      "at_least_6point7hpa_drops": 46,
+      "descriptive_not_independent_trials": true,
+      "actual_1953_US_weather_bureau_synoptic_chart_opened": false,
+      "independent_ellsworth_same_site_weather_observation": false,
+      "causal_effect_and_counterfactual_identified": false
     }
   },
   "algorithm": {
