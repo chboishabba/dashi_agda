@@ -171,6 +171,35 @@ class HeldoutDiscriminatorTests(unittest.TestCase):
         from fractions import Fraction
         self.assertTrue(all(Fraction(f['exact_brier_M0_minus_M1a']) > 0 for f in folds))
 
+    def test_reverse_control_retrospective_not_forecasting(self):
+        report = audit(fixture())
+        rev = report['reverse_time_negative_control']
+        self.assertTrue(rev['not_valid_for_prospective_forecasting'])
+        self.assertTrue(rev['paired_subject_ids_match'])
+        self.assertEqual(len(rev['folds']), 3)
+        self.assertEqual(sum(x['n_test_transitions'] for x in rev['folds']), 24)
+        self.assertTrue(report['retrospective_curve_time_not_prospective_prediction'])
+
+    def test_reverse_control_timing_direction(self):
+        from scripts.dmt_tet_heldout_discriminator import build_rows
+        reverse = build_rows(fixture(), direction='reverse_control')
+        subset = [r for r in reverse if r['person'] == 'toy-person-A'
+                  and r['dose'] == 20]
+        self.assertEqual([r['target'] for r in subset], [1, 1, 0, 0])
+
+    def test_invalid_direction_rejected(self):
+        with self.assertRaises(ValueError):
+            build_rows(fixture(), direction='forecast_real_world')
+
+    def test_reverse_proxy_comparison_is_exact_fraction(self):
+        from fractions import Fraction
+        report = audit(fixture())
+        rev = report['reverse_time_negative_control']
+        forward = Fraction(report['subject_equal_weight_mean_brier_M0_minus_M1a'])
+        backward = Fraction(rev['subject_equal_weight_mean_brier_M0_minus_M1a'])
+        self.assertEqual(Fraction(rev['forward_minus_reverse_proxy_gain_exact']),
+                         forward - backward)
+
     def test_synthetic_only_claim_ceilings(self):
         r = audit(fixture())
         self.assertFalse(r['M1a_full_mechanistic_implementation'])
