@@ -646,3 +646,35 @@ governmentReservationDateDriftDoesNotProveTransfer :
   Typed.StrongHistoricalTransfer Climate.reservationMayToSeptemberDutyDate → ⊥
 governmentReservationDateDriftDoesNotProveTransfer =
   Climate.reservationDraftChronologyIsNotMethodTransmission
+
+
+------------------------------------------------------------------------
+-- Introduced gas reservation package: primary original release versus
+-- recorded attributed first-person Hansard; proposed administrative levy
+-- must never absorb ADL's 25%-of-export-sales fiscal counterfactual.
+------------------------------------------------------------------------
+
+octoberBillIsIntroducedNotCertifiedEnacted :
+  Typed.relationKind Climate.octoberGasBillsIntroduced2026 ≡
+    Typed.legislativeIntroduction
+octoberBillIsIntroducedNotCertifiedEnacted = refl
+
+octoberBillIntroductionNotHistoricalDirection :
+  Typed.StrongHistoricalTransfer Climate.octoberGasBillsIntroduced2026 → ⊥
+octoberBillIntroductionNotHistoricalDirection =
+  Climate.octoberBillIntroCannotEstablishHistoricalTransfer
+
+octoberCostRecoveryNotAdValoremTax :
+  Typed.relationKind Climate.octoberCostRecoveryLevyNotRevenueTax ≡
+    Typed.parallelEconomicArgument
+octoberCostRecoveryNotAdValoremTax = refl
+
+octoberAdditionalityDesignOnly :
+  Typed.relationKind Climate.octoberAdditionalityNotObservedDeliveredSupply ≡
+    Typed.legislativeIntroduction
+octoberAdditionalityDesignOnly = refl
+
+octoberBareLevyStringNotInstrumentIdentifier :
+  INF.FactorsThrough Climate.displayedLevyWord Climate.legalBaseOfLevy → ⊥
+octoberBareLevyStringNotInstrumentIdentifier =
+  Climate.bareLevyLabelCannotRecoverTaxBase
