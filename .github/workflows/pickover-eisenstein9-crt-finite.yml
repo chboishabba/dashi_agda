@@ -6,6 +6,7 @@ on:
       - 'DASHI/Mathematics/NumberTheory/EisensteinNineCRTPhaseMaxCutExact.agda'
       - 'DASHI/Analysis/PickoverSignedSSPTorquePhaseBridgeExact.agda'
       - 'DASHI/Analysis/PickoverRHSSPTorqueRoleBridgeExact.agda'
+      - 'DASHI/Analysis/PickoverConsumerResidualFibreBridgeExact.agda'
       - 'DASHI/Analysis/PickoverBase99SignedTailExact.agda'
       - 'scripts/check_pickover_eisenstein9_crt.py'
       - 'scripts/check_pickover_machin_factorial_phase.py'
