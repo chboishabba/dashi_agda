@@ -464,3 +464,31 @@ a wildness identifier by group data alone.
 P4 source matter/quantum-action selection,
 P5 calibrated physical discrimination
 and P6 kernel/publication remain separate.
+
+
+## 12. Latest #1244 compact exhaustion owner result
+
+Original horn owner #1244 at head
+`a5fb69cc24299e96b91145083cefaf09cdf8e32f`
+now adds `HatcherOpenExhaustionCompactAbsorption.lean`
+using Mathlib `IsCompact.elim_directed_cover`.
+It proves, conditionally on an ACTUAL monotone
+OPEN exhaustively covering sequence Y_n,
+that a compact loop/homotopy image factors
+through some one stage. Its exact locally
+source finite controls show closed-only
+or non-directed covers do NOT suffice.
+The source geometry Y_n and stage
+nonabelian π1 injections remain
+separate and OPEN. This code is
+original #1244/Mathlib donor work,
+not an original theorem of #1249.
+
+The new 2D telescope comparator likewise
+has compact finite-height absorption,
+but is **NOT THE SAME TOPOLOGICAL SPACE**
+as the genuine exterior and cannot
+instantiate #1244's 3D marked handlebody
+geometry. This sharper dual-example
+makes the actual wild source proof
+even more important, not less.
