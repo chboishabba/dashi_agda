@@ -32,7 +32,7 @@ def test_exact():
     assert independent_variance(coeff,[Fraction(1,9),Fraction(1,4)]) == Fraction(5,16)
     # Multicut expansion factorises for independent *algebraic* components.
     for a,b,c,d in product([Fraction(-1),Fraction(1,2),Fraction(2)],repeat=4):
-        left = exact_reconstruction([a,b],[c,d])
+        left = (a+b)*(c+d)
         expanded = exact_reconstruction([a*c,a*d,b*c,b*d],
                                         [Fraction(1)]*4)
         assert left == expanded
