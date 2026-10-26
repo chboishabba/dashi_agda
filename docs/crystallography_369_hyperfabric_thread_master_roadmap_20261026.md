@@ -74,7 +74,7 @@ case splits, exact B4 donor-to-D4h representation morphism.
 ### P2. Twenty-seven puncture and thirteen projective axes
 Deliverables: native X* cube ↔ 8+9+9 sheet chart;
 origin exclusion; antipodal 13 quotient; strata 3+6+4;
-B3 equivariance and faithful action; diamond four-axis
+B3 equivariance with ±I projective kernel and faithful oriented action; diamond four-axis
 restriction and kernel ±I.
 Now: chart forward map, partial inverse and chart
 round-trip submitted, reusing PuncturedNineSheet; PR #1249
