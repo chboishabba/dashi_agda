@@ -258,6 +258,83 @@ def within_animal_witness():
     }
 
 
+# Transcribed directly from Eugene V. Byron (JHU/APL), November 1966,
+# PROJECT PANDORA (U) Final Report MRT-4-046/QM-66-072, printed p. 15,
+# original facsimile PDF page index 20, Table III, 18 tabulated rows.
+# Columns: GHz, horn section, antenna gain, transmit watts, calculated
+# mW/cm2, measured mW/cm2, printed Delta=(calculated - measured) mW/cm2.
+# This is laboratory instrument comparison, not primate/civilian exposure.
+# The model reuses measured transmitter power & horn gain; it is NOT an
+# independent replication of a biological response or absolute SAR.
+BYRON_1966_TABLE_III = """
+2.6 D6 99.6 228 3.40 3.70 -0.30
+2.7 D6 105.0 226 3.55 3.90 -0.35
+2.7 D5 91.2 220 3.0 3.0 0.00
+2.8 D5 95.6 216 3.09 3.2 -0.11
+2.9 D5 102.0 210 3.20 2.9 +0.30
+2.9 D4 89.0 236 3.14 2.85 +0.29
+3.0 D4 93.5 234 3.27 3.1 +0.17
+3.1 D4 100.0 232 3.47 3.35 +0.12
+3.2 D3 93.5 226 3.16 3.0 +0.16
+3.3 D3 100.0 232 3.47 3.45 +0.02
+3.4 D2 91.2 232 3.17 3.0 +0.17
+3.6 D2 102.0 236 3.61 3.6 +0.01
+3.6 D1 89.0 245 3.27 3.6 -0.33
+3.7 D1 95.6 260 3.71 3.6 +0.11
+3.8 D1 100.0 278 4.16 4.15 +0.01
+3.9 D1 105.0 250 3.93 4.0 -0.07
+3.95 D1 110.0 250 4.12 4.35 -0.23
+4.0 D1 112.0 250 4.19 4.25 -0.06
+""".strip()
+
+
+def byron_1966_table_iii_rows():
+    """Original printed Table III transcribed values; not animal observations."""
+    rows = []
+    for line in BYRON_1966_TABLE_III.splitlines():
+        values = line.split()
+        if len(values) != 7:
+            raise ValueError('expected seven original-table columns')
+        ghz, horn, gain, watts, calculated, measured, difference = values
+        if not (horn.startswith('D') and horn[1:].isdigit()):
+            raise ValueError('malformed horn section')
+        if type(horn) is not str:
+            raise ValueError('malformed source horn')
+        watts_int = int(watts)
+        if watts_int <= 0:
+            raise ValueError('nonpositive transmission')
+        numeric = tuple(Fraction(x) for x in
+                        (ghz, gain, calculated, measured, difference))
+        if any(x <= 0 for x in numeric[:4]):
+            raise ValueError('nonpositive source quantity')
+        if numeric[2] - numeric[3] != numeric[4]:
+            raise ValueError('original table delta transcription mismatch')
+        rows.append((numeric[0], horn, numeric[1], watts_int,
+                     numeric[2], numeric[3], numeric[4]))
+    if len(rows) != 18:
+        raise ValueError('original Table III must have eighteen rows')
+    return rows
+
+
+def byron_1966_table_iii_audit():
+    rows = byron_1966_table_iii_rows()
+    residuals = [row[6] for row in rows]
+    return {
+        'report': 'E.V. Byron JHU/APL MRT-4-046 QM-66-072 1966-11',
+        'original_table': 'Table III, printed p.15, PDF index 20',
+        'independent_documentary_object': True,
+        'original_instrument_comparisons': len(rows),
+        'frequency_ghz': [str(rows[0][0]), str(rows[-1][0])],
+        'max_abs_calc_minus_meas_mW_per_cm2': str(max(map(abs, residuals))),
+        'mean_calc_minus_meas_mW_per_cm2':
+            str(sum(residuals) / len(residuals)),
+        'mean_absolute_difference_mW_per_cm2':
+            str(sum(map(abs, residuals)) / len(residuals)),
+        'same_report_model_and_measured_input_not_independent_replication': True,
+        'is_animal_outcome_or_moscow_1977_measurement': False,
+    }
+
+
 class TestFiniteConfound(unittest.TestCase):
     def test_original_baseline_confounded(self):
         self.assertEqual(rank(design([(0, 0), (0, 0), (1, 1)])), 2)
@@ -414,6 +491,43 @@ class TestFiniteConfound(unittest.TestCase):
         self.assertFalse(w['historical_animal_data_used'])
 
 
+    def test_byron_table_iii_all_18_original_delta_rows(self):
+        rows = byron_1966_table_iii_rows()
+        self.assertEqual(len(rows), 18)
+        self.assertTrue(all(r[4] - r[5] == r[6] for r in rows))
+
+    def test_byron_table_iii_exact_residual_summary(self):
+        audit = byron_1966_table_iii_audit()
+        self.assertEqual(audit['max_abs_calc_minus_meas_mW_per_cm2'], '7/20')
+        self.assertEqual(audit['mean_calc_minus_meas_mW_per_cm2'], '-1/200')
+        self.assertEqual(audit['mean_absolute_difference_mW_per_cm2'],
+                         '281/1800')
+
+    def test_byron_table_iii_frequency_and_horn_range(self):
+        rows = byron_1966_table_iii_rows()
+        self.assertEqual(rows[0][0], Fraction('2.6'))
+        self.assertEqual(rows[-1][0], Fraction('4.0'))
+        self.assertEqual({r[1] for r in rows}, set('D' + str(n)
+                                                  for n in range(1, 7)))
+
+    def test_byron_table_iii_transcription_negative_control(self):
+        global BYRON_1966_TABLE_III
+        original = BYRON_1966_TABLE_III
+        try:
+            BYRON_1966_TABLE_III = original.replace(
+                '3.40 3.70 -0.30', '3.40 3.70 +0.30', 1)
+            with self.assertRaises(ValueError):
+                byron_1966_table_iii_rows()
+        finally:
+            BYRON_1966_TABLE_III = original
+
+    def test_byron_table_iii_original_not_health_causation(self):
+        audit = byron_1966_table_iii_audit()
+        self.assertEqual(audit['original_instrument_comparisons'], 18)
+        self.assertTrue(audit[
+            'same_report_model_and_measured_input_not_independent_replication'])
+        self.assertFalse(audit['is_animal_outcome_or_moscow_1977_measurement'])
+
 if __name__ == '__main__':
     import sys
     if sys.argv[1:] == ['--selftest']:
@@ -424,6 +538,7 @@ if __name__ == '__main__':
         print(json.dumps({'two_factor': synthetic_witness(),
                           'factorial': factorial_witness(),
                           'muts_1977': historical_muts_conditional_witness(),
-                          'animal_fixed_effect': within_animal_witness()}, indent=2))
+                          'animal_fixed_effect': within_animal_witness(),
+                          'byron_1966_original': byron_1966_table_iii_audit()}, indent=2))
     else:
         raise SystemExit('Use --selftest or --synthetic. No human/animal exposure input.')
