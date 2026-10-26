@@ -150,3 +150,14 @@ Upon restricting the **same** H representation to \(K\), the genuine character \
 - **A/C separate gravity controls:** can pursue physically sourced Earth/LARES null predictions independently but cannot certify B_H.
 
 **Attribution roots**: long exact homotopy sequence / reduction of principal G-bundles by sections of \(G/K\) are standard algebraic topology and bundle theory (Hatcher *Vector Bundles & K-Theory*). The Atiyah–Singer index and Chern–Weil polynomial are original classical mathematical tools, with the source-specific first-Tits representation in #1106 and selected parity/χ33 in #1241. Dai–Freed (1994) and Witten–Yonekura (2020) still own the actual global eta/determinant methodology, not this selected completion.
+
+
+### 2026-10-27 ordinary Witten SU(2) gate on the same source K
+
+The selected original orbifold zero-mode chiral \(27\) content, from \`scripts/check_kk_e6_orbifold_gs_anomaly_factor.py\`, has *exactly six isospin-half Weyl doublets* for each \(SU2_L\) and \(SU2_R\): four LH plus two RH; each chirality-weighted count is \(4-2=2\). For SU2, conjugate fundamentals are pseudoreal and right-handed doublets contribute to the same mod-two obstruction. The conventional Witten \(\mathbb Z_2\) sign for an odd doublet count therefore vanishes on both specified subgroups. Source-executing regression: \`scripts/check_kk_e6_higgs_k_su2_witten_parity.py\`, which imports the existing 27 owner and the source K lattice.
+
+Classical topology gives \(\pi_4(K)\cong\mathbb Z_2\oplus\mathbb Z_2\): a finite central quotient leaves higher homotopy groups unchanged; the connected determinant-equal \(U2_L\times U2_R\) fibre has \(\pi_4(SU2_L)\oplus\pi_4(SU2_R)\), while \(\pi_4(SU3_c)=\pi_4(U1)=0\). Hence these parity checks test both **ordinary \(\pi_4(K)\) generator** Witten anomalies for the selected ordinary spin, fundamental-doublet zero-mode representation. This remains strictly weaker than a complete \(\Omega_5^{\mathrm{Spin}}(BK)\) calculation, APS/Dai–Freed eta holonomy or the correlated \(Z3\) nonliftable-bundle sectors.
+
+**Original-root attribution:** Edward Witten, *An SU(2) Anomaly*, Phys. Lett. B **117** (1982) 324–328, DOI 10.1016/0370-2693(82)90728-6. Juven Wang, Xiao-Gang Wen and Edward Witten, *A New SU(2) Anomaly*, J. Math. Phys. **60** (2019), DOI 10.1063/1.5082852, is a **different** spin/spin-charge-sensitive anomaly formulation and does not produce a new obstacle in this selected ordinary spin fundamental-doublet test. Do not count the 2019 result as independent experimental verification. The present doublet enumeration is a repo-specific test, not a new theorem by those original authors.
+
+**P0 residual after this test:** compute the *actual full-\(K\) spin-bordism/invertible eta anomaly*, and full-\(H\) eta/CS/WZ completion if claiming the original UV orbifold. The calculated ordinary \(\pi_4\) generators and free anomaly cannot decide general quotient/global/torsion sectors.
