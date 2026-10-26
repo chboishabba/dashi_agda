@@ -122,3 +122,46 @@ checker; one focused regression; this provenance/acceptance ledger.
 Do not duplicate the original Monster class matcher or start a new group
 formalisation. Source-written versus externally proven versus
 computationally observed versus kernel-checked statuses stay distinct.
+
+## Follow-on naturalness discriminator: full D4-set relabelling
+
+The number 218,496 is **specific to linear source automorphisms**. A
+different, larger equivalence relation has a sharply different answer.
+The full D4-set automorphism group of X, ignoring the F3-linear
+structure, is
+
+    Aut_D4(X) = (C2 wr S4) x (C2 wr S4) x (D4 wr S6)
+
+because X contains four copies each of the inequivalent axis-
+and diagonal-reflection four-orbits, plus six copies of the free
+eight-orbit. Each 4-orbit has internal equivariant automorphism
+group N_D4(C2)/C2 = C2, and a free orbit has internal group D4.
+Its order is (2^4*4!)^2*(8^6*6!) = 27,831,388,078,080.
+
+**Exact theorem:** this full *nonlinear set* automorphism group acts
+transitively on the 20,971,520 balanced equivariant maps. Proof:
+permuting six free orbits moves any choice of three axis-assigned
+free orbits to any other such choice; independent internal D4
+automorphisms move each of their eight allowed orbit-map choices
+transitively. The independent internal C2 automorphisms move the two
+allowed choices of each of the eight reflection-stabilizer
+four-orbits transitively. Thus any balanced map can be carried to any
+other one by a source D4-set automorphism. There is **one**
+equivalence class under full source-set reindexing and its stabilizer
+has order 27,831,388,078,080 / 20,971,520 = 1,327,104.
+
+This result does **not** supply a canonical map: transitive action on
+choices means *every* possible choice can be renamed into every
+other, not that one is distinguished. In fact no equivariant map
+X->Y is fixed under every source automorphism while the target labels
+are held fixed: the source-linear central map -I = r^2 acts as
+x->-x; equivariance forces f(-x)=-f(x), and every y in Y is nonzero
+so -f(x) != f(x). A *paired* source/target antipode instead fixes
+every equivariant map. The correct distinction is **uniqueness
+up to an allowed equivalence** versus **canonical natural
+selection**; neither implies the Monster/IIT same-object join.
+
+This is an exact group-set argument using classical wreath-product
+automorphism theory and the original source-chart orbit census.
+It is not a novel Monster conjugacy-class computation and does not
+identify the correct Heisenberg/Monster-equivariant coordinate map.
