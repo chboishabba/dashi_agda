@@ -853,3 +853,33 @@ ADL's note describes the frequently recycled **up to A$17bn** as based on curren
 The existing claim ledger now has **39 selected appearance rows** from **16 proposition families** (eight added in this cut). The original PDF has a single new authored source identity. Existing Agda typed owners contain RC-10 (commission), RC-11 (first-year claim relation) and RC-12 (IRR-unit ambiguity). The existing nonfactorability owner supplies finite two-world collisions for the common 25% rate versus levy base/decade band and for the bare 2% return headline versus its units. The existing round-three regression consumes these proofs. The historical 41-edge and contemporary 54-edge genealogy ledgers remain distinct; none of these purposive counts are national source-concentration estimates.
 
 The remaining blockers are the ADL model spreadsheets/price assumptions, same-object Wood Mackenzie runs on both additive and **PRRT-replacement** proposals, provenance of the Australia Institute's underlying revenue inputs, ADL project baseline IRRs, reconciled gas-industry tax cash receipts, and dated lobbying-to-particular-policy/media text correspondence. Retain original authors and archival dates, and link to the report rather than vendor its PDF. Kernel checking and full branch pytest are still separate validation obligations; formal toy models prove only the stated logical distinctions, not real-world tax or price outcomes.
+
+
+### Original Wood Mackenzie 16-page report — source wall closed (27 October 2026)
+
+The former Wood Mackenzie **original document acquisition blocker is now closed**, but its unshared model workbook and missing PRRT-replacement rerun remain open. The commissioned, consultant-authored original was recovered from **Australian Energy Producers' own original-publication archive**:
+
+[Wood Mackenzie, *Analysis of proposed LNG export windfall levy*, April 2026 (16-page primary PDF)](https://energyproducers.au/wp-content/uploads/2026/04/Wood-Mackenzie-Analysis-of-Proposed-Windfall-Levy.pdf).
+
+Original PDF printed pages **2, 4 and 14 were visually inspected**, including the model mechanics table and Appendix 1. The original author is **Wood Mackenzie**, not AEP's communications staff, a newspaper reprinting the press release, or the Australia Institute critiquing the model. Client release and the Senate submission are downstream surfaces of the same commissioned model.
+
+| Parameter or output | Original Wood Mackenzie specification | Attribution and limitation |
+| --- | --- | --- |
+| Project | Hypothetical **4 tcf**, 450 mmcf/day peak, **27 years** | Standardised offshore analogue; not a named real project |
+| Price scenario | **US$120/bbl Brent** in high-price scenario (US$70/bbl base), long-term assumptions | Counterfactual model, not observed future prices |
+| Sales allocation | **85% exports**, 15% domestic | Assumed composition of hypothetical project |
+| Pricing exposure | LNG DES = 12.5% × Brent + 0.5, **all volumes contracted, no spot sales** | Appendix 1 page 14; different from ADL marginal spot-diversion schematic |
+| Fiscal treatment | Permanent **additional** 25% export revenue levy, PRRT and CIT retained | Not ACTU's PRRT replacement policy |
+| Fiscal interactions | Levy assumed not deductible against CIT/PRRT; stand-alone ring fencing, no fiscal synergies, no windfall investment allowances | Project assumptions must be rerun, not subtracted mechanically |
+| PRRT receipt basis | Downstream netback used as a simplified proxy instead of the Residual Pricing Method | Original page 4 warns calculation sensitive to assessable receipts and uplift assumptions |
+| High-price outcome | Government share **57% before**, **83% after** additional levy; **−94% NPV10** | Page 4 table, illustrative high-price project. NPV10 discounting is 10%, not national gas-company value or tax payments |
+
+The comparison with the original **Arthur D. Little** report is now an exact source-to-source comparison, not lobby headline against adversarial commentary. ADL page 8 illustrates a **27% spot-export slice** and hypothesises marginal redirection to domestic buyers. Wood Mackenzie Appendix 1 assumes **no spot sales in the LNG pricing model**. Additionally, ADL's broad-base ten-year revenue scenarios and Wood Mackenzie's project NPV use different units, populations and endpoints: national levy receipts over ten years versus discounted *single hypothetical field* returns. The same nominal 25% headline cannot transfer either outcome across models.
+
+The **ACTU replacement design** cannot be evaluated by simply subtracting Wood Mackenzie's modelled 38% PRRT component from its 83% scenario rate; removing PRRT affects taxable receipts, its deduction interaction with corporate income tax, cash-flow timing and perhaps other assumptions. Such a subtraction is **not** a valid counterfactual. A matched recalculation requires the actual cash-flow model and full alternative schedule.
+
+A further evidence boundary: the original Wood Mackenzie source in Appendix 1 specifies **all-contracted sales**, whereas ADL's report cites the Australia Institute in the context of marginal export supply. Neither one named consultant nor two opposing think-tank clients constitutes an objective experiment on observed Australian prices. Keep attribution at original writer/source-object level.
+
+**Formal integration:** the same existing climate genealogy owner now adds RC-13 through RC-15, connecting the actual authored report, AEP client statistic, ACTU replacement mismatch, and ADL differing market-contract assumptions. A third canonical nonfactorability witness prevents bare rate → assumed spot-volume inference, with a matching existing regression consumer. The ledger now contains **45 purposively selected dated appearances across 18 proposition families**, distinct from the historical 41-edge actor ledger and contemporary 54-edge graph. No claims about nationwide concentration follow from these selected counts.
+
+**Remaining actual Pareto wall:** authenticated cash-flow spreadsheets for the Wood Mackenzie representative project and ADL revenue time-path; controlled additive-vs-replacement PRRT runs on a same-object project with aligned export fraction, pricing, tax deductibility and spot assumptions; independently established realised fiscal/royalty records and levy responses; dated evidence that an identifiable political speaker received or followed a specific commissioned message. There is no proof of a coordinated single actor merely because these original documents feature similar 25% numbers.
