@@ -91,3 +91,15 @@ Since the signed parity split is H-equivariant and indices are additive,
 Original mathematical sources: Atiyah and Singer (spin Dirac index theorem); Hatcher, *Vector Bundles & K-Theory*, §1.2 (clutching construction and line-bundle classification), https://pi.math.cornell.edu/~Hatcher/VBKT/VBpage.html. Separate physics root: Kazuya Yonekura, *General anomaly matching by Goldstone bosons*, JHEP 03 (2021) 057, DOI **10.1007/JHEP03(2021)057**, globally formulates WZW terms through invertible theories. A further independent root: Hsieh, Tachikawa & Yonekura, *Anomaly inflow and p-form gauge theories*, Commun. Math. Phys. 391 (2022), DOI **10.1007/s00220-022-04333-w**, treats APS/eta/global anomaly issues. Neither is a proof of this particular quotient-model CS/WZ completion.
 
 **Next Pareto cut / physical stop condition**: the *index/free-period component* is now paid at theorem level with explicitly stated classical inputs. The decisive wall is the global **five-dimensional exponentiated determinant/CS/WZ differential-cocycle and its extension across the forced C33-zero sectors** on actual H quotient bundles. Do NOT keep collecting equivalent positive spin-index samples or repackage this as a completed global-anomaly cancellation. If the source lacks a globally defined compensator, either construct a genuinely patched/defect-complete functional or change the source field content. Subsequent full KK spectral/vacuum/Einstein stress work is downstream of that physical model-selection gate.
+
+
+## 27 October 2026 canonical handoff — existing eta/CS/WZ owner reuse
+
+The stronger **single H-bundle** join and original-source audit are now in
+`Docs/physics/KKE6SameBundleEtaCSWZSourceReusePareto20261027.md`,
+`scripts/check_kk_e6_same_bundle_eta_cs_wz_join.py` and
+`DASHI/Physics/Gravity/KKE6EtaCSWZSameBundleConsumerExact.agda`.
+
+**Important correction:** earlier language suggesting there was no eta/CS/WZ machinery in the repository was too broad. The QFT 2+1D Chern-Simons level/fermion shift, bulk-boundary SU3, KTheory global eta *target*, and physical KK 5D classical CS/local one-boundary WZ polynomial are existing source owners. They are reused explicitly. What is not yet constructed is the spectral eta/determinant line plus quantized spin CS plus defect-complete WZ **on the selected same H quotient action and all its permitted configurations**.
+
+The nonliftable spin `(S2)^3` index family already in the source repo contains a SAME-bundle witness with signed index -12, parity-positive index -6, parity-negative +6 and Chi33 Chern numbers (0,0,-1). Thus the free-period index result does not evade Higgs-phase zeros by changing example; these constraints coexist. The sixfold is an index period test, NOT a claim to have constructed a 5D spacetime global eta invariant. Source files are GitHub-committed, kernel and full-regulator status remain pending. Same-object and authority firewalls apply; the 2+1D CS donor is not silently transported to 5D.
