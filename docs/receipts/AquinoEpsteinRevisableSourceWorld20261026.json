@@ -1,0 +1,340 @@
+{
+  "schema_version": "aquino-epstein-source-world-1",
+  "as_of": "2026-10-26",
+  "method_donor": "PR #1268 data shape and claim-relative target discipline only; sibling code is NOT vendored or imported; generic attribution and Pareto owners remain on canonical DASHI master/parent",
+  "attribution_policy": "Original agency and individual authors retain original statements; Johl Brown directs independent hypothesis/consumer framing, AI-assisted source-world encoding. Source-reported != reproduced/established independently; missing != false; no cross-cluster command inferred.",
+  "sources": [
+    {
+      "id": "canada_joint_2019",
+      "producer": "Office of the Privacy Commissioner of Canada and BC OIPC (ONE joint investigative producer)",
+      "role": "privacy_regulatory_finding",
+      "original": "https://www.priv.gc.ca/en/opc-actions-and-decisions/investigations/investigations-into-businesses/2019/pipeda-2019-004/"
+    },
+    {
+      "id": "ftc_2019_2020",
+      "producer": "Federal Trade Commission, separate respondent-specific corporate, individual and CID legal products, ONE agency producer",
+      "role": "federal_agency_investigator",
+      "original": "https://www.ftc.gov/legal-library/browse/cases-proceedings/bannon-stephen-k"
+    },
+    {
+      "id": "bannon_defence_2020",
+      "producer": "Steve Bannon through his legal counsel",
+      "role": "adversarial_respondent_pleading",
+      "original": "https://www.ftc.gov/system/files/documents/cases/12_bannon_opposition_to_petition_to_enforce_cid.pdf"
+    },
+    {
+      "id": "ddc_judge_2020",
+      "producer": "Judge Christopher R. Cooper, US District Court for the District of Columbia",
+      "role": "procedural_judicial_order",
+      "original": "https://www.ftc.gov/system/files/documents/cases/05_order_to_show_cause_0.pdf"
+    },
+    {
+      "id": "uk_electoral",
+      "producer": "UK Electoral Commission",
+      "role": "original_campaign_finance_regulator",
+      "original": "https://www.electoralcommission.org.uk/cy/node/619"
+    },
+    {
+      "id": "dea_ocdetf_2015",
+      "producer": "DEA/OCDETF original investigating programme",
+      "role": "indexed_native_intelligence_lead_not_page_authenticated",
+      "original": "https://www.justice.gov/epstein/files/DataSet%209/EFTA00173953.pdf"
+    },
+    {
+      "id": "hsi_ipr_2011",
+      "producer": "HSI/ICE IPR Center anti-counterfeit programme",
+      "role": "distinct_original_institutional_operation",
+      "original": "https://www.iprcenter.gov/file-repository/ipu-operation-chain-reaction.pdf"
+    },
+    {
+      "id": "wyden_senate_2026",
+      "producer": "Senator Ron Wyden/Senate Finance oversight team (Feb and Mar ONE inquiry root)",
+      "role": "subsequent_senate_allegation",
+      "original": "https://www.finance.senate.gov/ranking-members-news/wyden-questions-dea-over-mystery-epstein-investigation"
+    },
+    {
+      "id": "black_dechert_2021",
+      "producer": "Dechert LLP, Apollo corporate investigation, financial scope",
+      "role": "reported_corporate_service_fee_scope",
+      "original": "https://www.sec.gov/Archives/edgar/data/1411494/000119312521016405/d118102dex991.htm"
+    },
+    {
+      "id": "future_undetermined_source",
+      "producer": "Unidentified original future source (not yet attributed to any person/institution)",
+      "role": "acquisition_placeholder_not_a_real_source",
+      "original": ""
+    }
+  ],
+  "evidence": [
+    {
+      "id": "canada_aiq_kogan_finding",
+      "root": "canada_joint_2019",
+      "status": "present",
+      "locator": "https://www.priv.gc.ca/en/opc-actions-and-decisions/investigations/investigations-into-businesses/2019/pipeda-2019-004/",
+      "scope": "Regulators' AGGREGATE scores-derived-from-Kogan data finding; not original score-file bytes"
+    },
+    {
+      "id": "ftc_personal_consents",
+      "root": "ftc_2019_2020",
+      "status": "present",
+      "locator": "https://www.ftc.gov/legal-library/browse/cases-proceedings/182-3106-182-3107-aleksandr-kogan-alexander-nix-matter",
+      "scope": "FTC personal consent orders vs company default distinguish personal non-admission"
+    },
+    {
+      "id": "uk_aiq_payments",
+      "root": "uk_electoral",
+      "status": "present",
+      "locator": "https://www.electoralcommission.org.uk/cy/node/619",
+      "scope": "Campaign service payments, appeal corrections, not exact voter model file"
+    },
+    {
+      "id": "bannon_ftc_cid_four_documents",
+      "root": "ftc_2019_2020",
+      "status": "present",
+      "locator": "https://www.ftc.gov/legal-library/browse/cases-proceedings/bannon-stephen-k",
+      "scope": "FTC petition/reply, DDC preliminary procedural order, separately authored Bannon response; different producers for same docket"
+    },
+    {
+      "id": "hsi_dea_name_distinction",
+      "root": "hsi_ipr_2011",
+      "status": "present",
+      "locator": "https://www.iprcenter.gov/file-repository/ipu-operation-chain-reaction.pdf",
+      "scope": "HSI counterfeit microelectronics 2011 vs DEA narcotics-finance 2010 named Chain Reaction; HSI not DEA investigation"
+    },
+    {
+      "id": "ocdetf_derivative_lead_index",
+      "root": "dea_ocdetf_2015",
+      "status": "present",
+      "locator": "https://tommycarstensen.com/epstein/data/documents/set9/00173/EFTA00173953.html",
+      "scope": "OCR/index carrier of same DEA source, NOT independently verified native page image"
+    },
+    {
+      "id": "bannon_ftc_final_judgment",
+      "root": "ddc_judge_2020",
+      "status": "notLocated",
+      "scope": "No original post-Dec2020 court disposition or FTC personal-liability conclusion inspected; not knownAbsent"
+    },
+    {
+      "id": "ocdetf_final_disposition",
+      "root": "dea_ocdetf_2015",
+      "status": "notLocated",
+      "scope": "Final DEA case status/closure/recommendation native original; second-hand June 2023 date not authenticated"
+    },
+    {
+      "id": "black_2016_bank_identity",
+      "root": "black_dechert_2021",
+      "status": "notLocated",
+      "scope": "Bank-origin individual transaction characterization and same-object identity for 2016 Black ledger; not difference of totals"
+    },
+    {
+      "id": "signed_bannon_film_agreement",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Separate 2019 documentary producer-rights document; FTC is NOT source of film. Source root used here only as nonmatching existing lead and must not be promoted."
+    },
+    {
+      "id": "gsr_to_ripon_exact_nonpii_version",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Non-personal versioned source/provenance file mapping; raw voter dataset prohibited"
+    },
+    {
+      "id": "aquino_promis_scl_transfer_native",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "No original source-identical transfer across named objects. DEA is NOT attributed as author of Aquino/PROMIS work."
+    }
+  ],
+  "claims": [
+    {
+      "id": "C_CA_AGGREGATE",
+      "statement": "Canadian joint regulator concluded aggregate Kogan-derived scores reached AIQ",
+      "scope": "original regulator finding, US SCL campaigning",
+      "level": "sourceReported",
+      "supports": [
+        "canada_aiq_kogan_finding"
+      ],
+      "requires": [
+        "canada_aiq_kogan_finding"
+      ]
+    },
+    {
+      "id": "C_UK_PAYMENTS",
+      "statement": "UK regulator reports actual AIQ campaign payments and distinct appeal outcomes",
+      "scope": "Vote Leave/BeLeave/Veterans 2016 service payments",
+      "level": "sourceReported",
+      "supports": [
+        "uk_aiq_payments"
+      ],
+      "requires": [
+        "uk_aiq_payments"
+      ]
+    },
+    {
+      "id": "C_FTC_BANNON_PROCEDURE",
+      "statement": "Original FTC v Bannon CID pleadings and DDC show-cause proceeding exist; no resolved personal wrongdoing inferred",
+      "scope": "DDC 1:20-mc-00111-CRC procedure only",
+      "level": "sourceReported",
+      "supports": [
+        "bannon_ftc_cid_four_documents"
+      ],
+      "requires": [
+        "bannon_ftc_cid_four_documents"
+      ]
+    },
+    {
+      "id": "C_FTC_BANNON_FINAL",
+      "statement": "Final Bannon FTC/CID disposition and personal liability classification",
+      "scope": "only original court or FTC final object",
+      "level": "unresolved",
+      "supports": [
+        "bannon_ftc_cid_four_documents"
+      ],
+      "requires": [
+        "bannon_ftc_final_judgment"
+      ]
+    },
+    {
+      "id": "C_OCDETF_FINAL",
+      "statement": "Final historical outcome of DEA OCDETF NY-NYS-0829",
+      "scope": "original signed or agency-authenticated final record",
+      "level": "unresolved",
+      "supports": [
+        "ocdetf_derivative_lead_index"
+      ],
+      "requires": [
+        "ocdetf_final_disposition"
+      ]
+    },
+    {
+      "id": "C_BLACK_2016",
+      "statement": "Exact original bank transaction classification in Black-to-Epstein 2016 ledger",
+      "scope": "lawfully redacted origin bank record",
+      "level": "unresolved",
+      "supports": [],
+      "requires": [
+        "black_2016_bank_identity"
+      ]
+    },
+    {
+      "id": "C_NAME_COLLISION",
+      "statement": "Two different federal operations share Chain Reaction name",
+      "scope": "HSI anti-counterfeit vs DEA OCDETF narcotics",
+      "level": "sourceReported",
+      "supports": [
+        "hsi_dea_name_distinction",
+        "ocdetf_derivative_lead_index"
+      ],
+      "requires": [
+        "hsi_dea_name_distinction",
+        "ocdetf_derivative_lead_index"
+      ]
+    },
+    {
+      "id": "C_BANNON_MEDIA_TRANSFER",
+      "statement": "Signed 2019 producer agreement connects distinct original media work to a specific transfer",
+      "scope": "legal work/rights, not FTC cause or hidden programme",
+      "level": "unresolved",
+      "supports": [],
+      "requires": [
+        "signed_bannon_film_agreement"
+      ]
+    },
+    {
+      "id": "C_GSR_ROW",
+      "statement": "A specific GSR output version maps to named Ripon input/build",
+      "scope": "non-personal provenance metadata only",
+      "level": "unresolved",
+      "supports": [
+        "canada_aiq_kogan_finding"
+      ],
+      "requires": [
+        "gsr_to_ripon_exact_nonpii_version"
+      ]
+    },
+    {
+      "id": "C_UNIFIED_H3",
+      "statement": "One original tasking/payment/technical common operation joins Aquino, Maxwell/PROMIS, Epstein, and CA",
+      "scope": "no original common source now; must not infer from overlapping people, words or institutional interests",
+      "level": "unresolved",
+      "supports": [],
+      "requires": [
+        "aquino_promis_scl_transfer_native"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "A_FTC_DISPOSITION",
+      "targets": [
+        "bannon_ftc_final_judgment"
+      ],
+      "cost": [
+        2,
+        2,
+        1
+      ],
+      "description": "Locate original post-2020 judicial/FTC disposition, public-redacted only"
+    },
+    {
+      "id": "B_DEA_OUTCOME",
+      "targets": [
+        "ocdetf_final_disposition"
+      ],
+      "cost": [
+        3,
+        4,
+        2
+      ],
+      "description": "Request/find precise NY-NYS-0829/C1-11-0049 original closing disposition, never another HSI counterfeit report"
+    },
+    {
+      "id": "C_BLACK_BANK",
+      "targets": [
+        "black_2016_bank_identity"
+      ],
+      "cost": [
+        4,
+        4,
+        3
+      ],
+      "description": "Original lawful bank-origin transaction ref, distinct from Dechert service denominator"
+    },
+    {
+      "id": "D_FILM_EXECUTED",
+      "targets": [
+        "signed_bannon_film_agreement"
+      ],
+      "cost": [
+        3,
+        3,
+        2
+      ],
+      "description": "Executed 2019 film legal source, not transcript paraphrases"
+    },
+    {
+      "id": "E_GSR_RIPON_VERSION",
+      "targets": [
+        "gsr_to_ripon_exact_nonpii_version"
+      ],
+      "cost": [
+        4,
+        4,
+        4
+      ],
+      "description": "Non-PII version/custody digest only; do not seek leaks"
+    },
+    {
+      "id": "F_AQUINO_PROMIS",
+      "targets": [
+        "aquino_promis_scl_transfer_native"
+      ],
+      "cost": [
+        5,
+        5,
+        5
+      ],
+      "description": "Original same-object dated methodological/software transfer, not analogical MindWar vocabulary"
+    }
+  ]
+}
