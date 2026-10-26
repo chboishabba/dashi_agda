@@ -254,3 +254,114 @@ equalReceivedPrefixesGiveEqualObservedOutputs :
 equalReceivedPrefixesGiveEqualObservedOutputs step observe start prefix laterA laterB
   rewrite prefixIgnoresFutureSuffix prefix laterA
         | prefixIgnoresFutureSuffix prefix laterB = refl
+
+------------------------------------------------------------------------
+-- ARRIVAL COLLISION AND THE MINIMAL EXTRA OBSERVATION (DASHI EXTENSION).
+--
+-- Rodgers (2026-10-23), Sect. 5.2, gives the first delay/arrival pattern.
+-- We add a synthetic reversed-source world with different channel delays.
+-- This is a countermodel, NOT another empirical observation in Rodgers.
+--
+-- World A: C@0 + delay80 = C-arrival80;
+--          E@50 + delay10 = E-arrival60. Source order C,E.
+-- World B: E@0 + delay60 = E-arrival60;
+--          C@50 + delay30 = C-arrival80. Source order E,C.
+--
+-- Thus even the FULLY LABELLED receiver timestamps C80, E60 collide.
+-- This is stronger than erasing source order to an unordered note bag.
+-- The physical experimental discriminator is independent *calibration*
+-- of delay profiles, with errors/confounders controlled.
+------------------------------------------------------------------------
+
+data ArrivalWorld : Set where
+  cSourceFirstWithCrossingDelay : ArrivalWorld
+  eSourceFirstWithOtherDelay : ArrivalWorld
+
+record LabelledArrivals : Set where
+  constructor labelledArrivals
+  field
+    receiverTimeC : Nat
+    receiverTimeE : Nat
+open LabelledArrivals public
+
+data PhysicalSourceOrder : Set where
+  sourceCFirst : PhysicalSourceOrder
+  sourceEFirst : PhysicalSourceOrder
+
+observedArrivals : ArrivalWorld → LabelledArrivals
+observedArrivals cSourceFirstWithCrossingDelay =
+  labelledArrivals 80 60
+observedArrivals eSourceFirstWithOtherDelay =
+  labelledArrivals 80 60
+
+actualSourceOrder : ArrivalWorld → PhysicalSourceOrder
+actualSourceOrder cSourceFirstWithCrossingDelay = sourceCFirst
+actualSourceOrder eSourceFirstWithOtherDelay = sourceEFirst
+
+twoSourcesSameLabelledArrival :
+  observedArrivals cSourceFirstWithCrossingDelay ≡
+  observedArrivals eSourceFirstWithOtherDelay
+twoSourcesSameLabelledArrival = refl
+
+sourceOrdersDiffer : sourceCFirst ≡ sourceEFirst → ⊥
+sourceOrdersDiffer ()
+
+arrivalCollisionWitness :
+  NF.NonFactorabilityWitness observedArrivals actualSourceOrder
+arrivalCollisionWitness =
+  NF.nonFactorabilityWitness
+    cSourceFirstWithCrossingDelay
+    eSourceFirstWithOtherDelay
+    twoSourcesSameLabelledArrival
+    sourceOrdersDiffer
+
+labelledArrivalCannotRecoverSourceOrder :
+  NF.FactorsThrough observedArrivals actualSourceOrder → ⊥
+labelledArrivalCannotRecoverSourceOrder =
+  NF.witnessRulesOutEveryFlatFactorisation arrivalCollisionWitness
+
+-- The proposed additional information is exactly the independently
+-- determined delay profile, not an oracle revealing source event order.
+data CalibratedDelayProfile : Set where
+  delayC80E10 : CalibratedDelayProfile
+  delayC30E60 : CalibratedDelayProfile
+
+record CalibratedReceiverObservation : Set where
+  constructor calibratedReceiverObservation
+  field
+    arrivalReadout : LabelledArrivals
+    delayReadout : CalibratedDelayProfile
+
+calibratedObserver : ArrivalWorld → CalibratedReceiverObservation
+calibratedObserver cSourceFirstWithCrossingDelay =
+  calibratedReceiverObservation (labelledArrivals 80 60) delayC80E10
+calibratedObserver eSourceFirstWithOtherDelay =
+  calibratedReceiverObservation (labelledArrivals 80 60) delayC30E60
+
+readSourceOrderWithCalibration :
+  CalibratedReceiverObservation → PhysicalSourceOrder
+readSourceOrderWithCalibration
+  (calibratedReceiverObservation _ delayC80E10) = sourceCFirst
+readSourceOrderWithCalibration
+  (calibratedReceiverObservation _ delayC30E60) = sourceEFirst
+
+exactCalibrationRecoversOrderForTheseWorlds :
+  (w : ArrivalWorld) →
+  readSourceOrderWithCalibration (calibratedObserver w)
+    ≡ actualSourceOrder w
+exactCalibrationRecoversOrderForTheseWorlds
+  cSourceFirstWithCrossingDelay = refl
+exactCalibrationRecoversOrderForTheseWorlds
+  eSourceFirstWithOtherDelay = refl
+
+-- Explicitly records the arithmetic in the *synthetic* second world.
+secondWorldCArrival : 50 + 30 ≡ 80
+secondWorldCArrival = refl
+
+secondWorldEArrival : 0 + 60 ≡ 60
+secondWorldEArrival = refl
+
+-- Source-first underidentified observer and calibrated observer are
+-- different information carriers. Do not promote the latter to a
+-- physically accessible measurement unless the delay data are actually
+-- calibrated in a same-source experiment.
