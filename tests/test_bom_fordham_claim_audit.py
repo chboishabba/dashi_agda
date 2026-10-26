@@ -751,7 +751,7 @@ def test_climate_origins_same_api_plan_and_actual_people_not_url_multiplicity():
     manifest = ROOT / "Docs/support/reference/climate_genealogy_typed_edges.csv"
     with manifest.open(newline="", encoding="utf-8") as src:
         records = list(csv.DictReader(src))
-    assert len(records) == 40
+    assert len(records) == 41
     ids = [r["edge_id"] for r in records]
     assert len(ids) == len(set(ids))
     contributed = [r for r in records if re.fullmatch(r"E8-\d\d", r["edge_id"])]
@@ -819,7 +819,7 @@ def test_original_ice_and_singer_budget_states_do_not_invent_payment():
         newline="", encoding="utf-8"
     ) as fd:
         cases = {r["edge_id"]: r for r in csv.DictReader(fd)}
-    assert len(cases) == 40
+    assert len(cases) == 41
     assert cases["E9-12"]["relation_kind"] == "organizational_continuity"
     assert cases["E9-13"]["relation_kind"] == "funding_commitment"
     assert cases["E9-14"]["relation_kind"] == "organizational_continuity"
@@ -857,7 +857,7 @@ def test_gcc_acsh_commission_editorial_rights_and_published_file_are_distinct():
         newline="", encoding="utf-8"
     ) as handle:
         cases = {row["edge_id"]: row for row in csv.DictReader(handle)}
-    assert len(cases) == 40
+    assert len(cases) == 41
 
     expected = {
         "E9-16": "commissioned_research",
@@ -900,3 +900,56 @@ def test_gcc_acsh_commission_editorial_rights_and_published_file_are_distinct():
     assert "40 source-qualified rows" in docs
     assert "DocumentCloud page retrieval failed" in docs
     assert "no evidence the USD73,000 was ever paid" in docs
+
+
+def test_climate_historical_object_identity_and_access_are_not_speaker_counts():
+    """13 listed API people share one primary planning object, not 13 studies."""
+    import re
+    path = ROOT / "Docs/support/reference/climate_genealogy_typed_edges.csv"
+    with path.open(newline="", encoding="utf-8") as fd:
+        rows = list(csv.DictReader(fd))
+    assert len(rows) == 41
+    assert all(row["evidence_object_ids"] and row["acquisition_scope"] for row in rows)
+    by_id = {row["edge_id"]: row for row in rows}
+    participants = [r for r in rows if re.fullmatch(r"E8-\d\d", r["edge_id"])]
+    assert len(participants) == 13
+    assert {r["evidence_object_ids"] for r in participants} == {"API_PLAN_1998"}
+    assert {r["acquisition_scope"] for r in participants} == {"primary_draft_listed_contributor"}
+    assert by_id["E3"]["evidence_object_ids"] == "API_PLAN_1998"
+    # A quoted report can support a relation without providing a private file
+    # or even one identifiable primary object for an unresolved transfer.
+    assert by_id["E6"]["evidence_object_ids"] == "UNRESOLVED"
+    assert by_id["E7"]["evidence_object_ids"] == "UNRESOLVED"
+    assert by_id["E4"]["evidence_object_ids"] == "BW_1969|API_PLAN_1998"
+    assert by_id["E4b"]["evidence_object_ids"] == "BW_1969|API_PLAN_1998"
+    assert by_id["E9-08"]["acquisition_scope"] == "court_judgment_reproduced_excerpt"
+    assert by_id["E9-15"]["acquisition_scope"] == "proposal_original_unread"
+    assert by_id["E9-16"]["acquisition_scope"] == "archive_index_contract_unread"
+    assert by_id["E9-17"]["acquisition_scope"] == "archive_index_rights_unread"
+
+    # The ACSH publisher's ORIGINAL 1997 text is now inspectable. The
+    # original GCC client contract and final edited manuscript still are not.
+    acsh = by_id["E9-18"]
+    assert "ACSH_OFFICIAL_ARTICLE_1997" in acsh["evidence_object_ids"]
+    assert "GCC_ACSH_GRANT_1996_INDEX" in acsh["evidence_object_ids"]
+    assert "original_text_inspected" in acsh["acquisition_scope"]
+    assert "final_equivalence_unresolved" in acsh["acquisition_scope"]
+    assert "acsh.org/news/1997/10/01/global-climate-change-and-human-health" in acsh["source_citation"]
+
+    brief = by_id["E9-20"]
+    assert brief["relation_kind"] == "recommendation_exposure"
+    assert brief["evidence_strength"] == "B_corroborated"
+    assert "STATE_2001_BRIEFING_UNACQUIRED" in brief["evidence_object_ids"]
+    assert "neither delivered statement nor actual marginal decision effect" in brief["notes"].lower()
+
+    val = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    typed = (ROOT / "DASHI/Governance/TypedGenealogyEdgeExact.agda").read_text()
+    for token in (
+        "acshPublicArgumentHasFirstPartySource",
+        "gcc2001KyotoScriptIsExposureNotVerdict",
+        "gccStateDepartmentReportedAccessDoesNotProveMethodTransfer",
+        "donorActorInstitutionProximityDoesNotEstablishDecisionControl",
+    ):
+        assert token in val
+    assert "import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity" in val
+    assert "recommendationExposureIsNotDirectMethodTransfer" in typed
