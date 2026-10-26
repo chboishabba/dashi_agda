@@ -33,6 +33,7 @@ import alexander_horned_c3_pierced_shell_product as original_shell
 import alexander_horned_c3_equivariant_basing_paths as original_basing
 import alexander_horned_c3_radius_overlap_witness as latest_parent_overlap
 import alexander_horned_c3_open_exhaustion_severe_controls as latest_hatcher_compact
+import alexander_horned_c3_relative_exterior_absorption as source_relative_hatcher
 import alexander_horned_c3_same_cover_discriminator as original_cover_bidi
 import alexander_horned_c3_clopen_spatial_realization as original_clopen
 
@@ -487,5 +488,21 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertIn("two opens",receipt["negative_no_directedness"])
         self.assertFalse(receipt["hatcher_group_colimit_machine_checked"])
         self.assertFalse(receipt["wild_linked_handlebody_machine_checked"])
+
+
+    def test_parent_relative_compact_exterior_not_ambient_univ(self):
+        # Consume exact #1244 ORIGINAL relative exterior source and
+        # its key counterexamples. A loop image need only avoid the
+        # LIMIT handlebody, not cover ambient R3.
+        receipt=source_relative_hatcher.audit(depth=128)
+        self.assertEqual(receipt["status"],"PASS")
+        self.assertEqual(receipt["relative_compact_image_stage"],3)
+        self.assertFalse(receipt["ambient_univ_cover"])
+        self.assertIn("remains in H_n",
+                      receipt["noncompact_domain_counterexample"])
+        self.assertIn("intersection H_n",
+                      receipt["limit_avoidance_counterexample"])
+        self.assertFalse(receipt["3d_hatcher_handlebody_constructed"])
+        self.assertFalse(receipt["lean_kernel_verified"])
 
 if __name__ == '__main__': unittest.main()
