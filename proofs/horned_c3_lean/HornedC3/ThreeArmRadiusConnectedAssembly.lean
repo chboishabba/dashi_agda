@@ -22,6 +22,8 @@ This glue is DASHI PR #1244; exact-head Lean compile pending.
 
 noncomputable section
 
+open scoped ContinuousMap
+
 open Set
 
 namespace DASHI.AlexanderHornedC3
