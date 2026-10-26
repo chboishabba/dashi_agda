@@ -1,0 +1,6 @@
+# Web-transcribed original NOAA NCEI .dly single record, NOT a file-byte-original custody receipt.
+# Original source: https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USW00014606.dly
+# Original line for 1953-07 PRCP; first 21 chars are station-year-month-element.
+# Read from official publisher text 2026-10-26. Trace flags retained verbatim.
+# Exact 269-column row follows. This is one excerpt only, not an independently downloaded original .dly.
+USW00014606195307PRCP    0T 0    0T 0   13  0    0  0    0  0   66  0  193  0   46  0   74  0    0  0    0  0    0  0  259  0    0T 0    0  0    0  0    0  0    0  0    0  0    5  0  714  0    0  0   30  0   25  0    0  0    0T 0   89  0    0  0    0  0    0  0    3  0
