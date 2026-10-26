@@ -527,6 +527,21 @@ croftPowerWand2003 = Source.mkNoDOISource
   "first-person author referral to www.cloud-busters.com for Mobius-wrapping directions; explicitly thanks Ben Morton, Suze Hooten and Bruce Stenulson, mentions Mark Hooten; this is Croft testimony not their original statements or verified claims"
   Source.publicAttribution
 
+-- Independent *publication*, overlapping original author group with Saikia 2019.
+-- A separate publication != independent replication of a particular
+-- biological experiment or evidence for the 2024 Rodin coil.
+pandeyFFField2017 : Source.AttributedSource
+pandeyFFField2017 = Source.mkDOISource
+  "Gaurav Pandey; Jahnu Saikia; Sajitha Sasidharan; Deep C. Joshi; Subhash Thota; Harshal B. Nemade; Nitin Chaudhary; Vibin Ramakrishnan"
+  "Modulation of Peptide Based Nano-Assemblies with Electric and Magnetic Fields"
+  "Scientific Reports 7, article 2726, published 2 June 2017; full original publisher open-access HTML consulted 27 October 2026"
+  "2017"
+  "10.1038/s41598-017-02609-z"
+  "https://www.nature.com/articles/s41598-017-02609-z"
+  Source.academicArticleSource
+  "Diphenylalanine FF cooling for five hours with 150 and 300 V/cm AC/DC electric fields and distinct 0.6 T magnetic-field condition; under study conditions authors report strong electric-field modulation and magnetic group aggregation; NOT a Rodin-Helmholtz comparison or clinical outcome"
+  Source.publicAttribution
+
 saikiaAmyloid2019 : Source.AttributedSource
 saikiaAmyloid2019 = Source.mkDOISource
   "Jahnu Saikia; Gaurav Pandey; Sajitha Sasidharan; Ferrin Antony; Harshal B. Nemade; Sachin Kumar; Nitin Chaudhary; Vibin Ramakrishnan"
@@ -823,6 +838,86 @@ rvmlGentryVideoMetadata = Source.mkNoDOISource
   "promotional metadata lists Pat Flanagan electronic device and says Gentry constructed Reich Cloudbusters; both are uploader biographical/topic statements, not authenticated first-person speech, blueprints, military personnel records, shared coil transmission or medical/meteorological performance"
   Source.publicAttribution
 
+
+------------------------------------------------------------------------
+-- Original NOAA observational-clock *method* is not a recovered 1953
+-- station clock, and original paper-form access is not a read observer sheet.
+-- Bahrami et al. are independent Helmholtz authors, not Rodin efficacy data.
+------------------------------------------------------------------------
+
+noaaGHCNObsTimeSchema : Source.AttributedSource
+noaaGHCNObsTimeSchema = Source.mkNoDOISource
+  "NOAA NCEI GHCN-Daily data and Historical Observing Metadata Repository custodians"
+  "Official station/year GHCN eight-field CSV OBS-TIME readme"
+  "Original NOAA source format inspected 26 October 2026; historic station July 1953 values not retrieved"
+  "2026"
+  "https://www.ncei.noaa.gov/pub/data/ghcn/daily/readme-by_station.txt"
+  Source.archivalSource
+  "The eighth field gives HHMM observation time if known and otherwise is blank; originates in HOMR history. Format documentation is not 1953 time or new rainfall."
+  Source.publicAttribution
+
+noaaHOMRStationHistory : Source.AttributedSource
+noaaHOMRStationHistory = Source.mkNoDOISource
+  "NOAA National Centers for Environmental Information"
+  "HOMR original historical station metadata and date-scoped API"
+  "NOAA original service description inspected 26 October 2026; exact 1953 Bangor and Bar Harbor records not downloaded"
+  "2026"
+  "https://www.ncei.noaa.gov/access/homr/api"
+  Source.archivalSource
+  "Original lookup route for station times and station-history chronology, not an observed July 1953 cutoff or Ellsworth site measurement."
+  Source.publicAttribution
+
+noaaCOOPOriginalFormsGateway : Source.AttributedSource
+noaaCOOPOriginalFormsGateway = Source.mkNoDOISource
+  "NOAA NCEI original Cooperative Observer Program source custodians"
+  "Original monthly COOP handwritten weather-observation forms access guide"
+  "Current first-party collection description; the July 1953 original individual observer sheets are not inspected"
+  "2026"
+  "https://www.ncei.noaa.gov/products/land-based-station/cooperative-observer-network"
+  Source.archivalSource
+  "Some original monthly forms retain notes absent from GHCNd and some stations have subdaily data; exact 1953 station sheet and at-site hours are unpaid."
+  Source.publicAttribution
+
+bahramiHelmholtz2025 : Source.AttributedSource
+bahramiHelmholtz2025 = Source.mkDOISource
+  "Abasalt Bahrami; Leonardo Y. Tanaka; Ricardo C. Massucatto; Francisco R. M. Laurindo; Clarice D. Aiello"
+  "Automated 1D Helmholtz coil design for cell biology: Weak magnetic fields alter cytoskeleton dynamics"
+  "PLOS ONE 20(8), e0321133, original 5 August 2025 peer-reviewed article read; no same-device Rodin comparison"
+  "2025"
+  "10.1371/journal.pone.0321133"
+  "https://doi.org/10.1371/journal.pone.0321133"
+  Source.academicArticleSource
+  "Original authors' independently controlled Helmholtz apparatus uses water cooling and automated field orientation; methodological nuisance-control precedent, not an original 60 percent Rodin superiority claim."
+  Source.publicAttribution
+
+
+-- Researcher-owned dataset/code carrier is ONE original 2025 study root.
+-- Do not count PLOS publisher and author GitHub as two replications.
+bioCoilOriginalAuthorRepository : Source.AttributedSource
+bioCoilOriginalAuthorRepository = Source.mkNoDOISource
+  "QuBiTUCLA researcher-owned BioCoil original-data and device project"
+  "BioCoil water-cooled Helmholtz construction and original experiment folders"
+  "original public project README blob 0b7779ccdfc23c19b93197a42ac331e64acbf22d read 26 October 2026; exact 2025 paper-locked commit not established"
+  "2025"
+  "https://github.com/QuBiTUCLA/biocoil"
+  Source.archivalSource
+  "Original paper-associated design inventory and F71 multi-axis magnetometer method route; raw folder analyses not reproduced; not a fresh experiment or a Rodin matched-device effect."
+  Source.publicAttribution
+
+
+-- ISD is an ORIGINAL NOAA hourly station-year archive object, not a decoded
+-- observed July-6 rain hour; a data filename alone imports no weather effect.
+noaaBangorISD1953Original : Source.AttributedSource
+noaaBangorISD1953Original = Source.mkNoDOISource
+  "NOAA NCEI Integrated Surface Database and 1953 Bangor Airport station reporters"
+  "ISD original USAF 726071 WBAN 14606 1953 hourly/synoptic station-year archive"
+  "Original NOAA 1953 listing 726071-14606-1953.gz, 160944 compressed bytes, posted 31 August 2018; data payload unread"
+  "1953"
+  "https://www.ncei.noaa.gov/pub/data/noaa/1953/726071-14606-1953.gz"
+  Source.archivalSource
+  "First-party source-object existence and historical station identity only; 6–7 July hourly data, UTC-to-Maine-local hour, precipitation codes and any rainmaking efficacy unverified."
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -844,7 +939,7 @@ sourceAtlas = Source.mkSourceAtlas
    kervadecFiveDASC2026 ∷ stockerASCRevision2026 ∷
    heartmathEnergeticCommunication ∷
    shupakShamClinical2006 ∷ duAssessorBlindedProtocol2026 ∷
-   croftBigSecret2002 ∷ croftPowerWand2003 ∷ saikiaAmyloid2019 ∷
+   croftBigSecret2002 ∷ croftPowerWand2003 ∷ pandeyFFField2017 ∷ saikiaAmyloid2019 ∷
    perezRodinRSI2013 ∷ ramirezRodinRMF2024 ∷ perezHeatShock2008 ∷
    reichCoreEllsworth1954 ∷ reichCloudArchiveIndex ∷
    hamblingWeatherwatch2011 ∷ kiddexRedditMind2023 ∷
@@ -855,7 +950,10 @@ sourceAtlas = Source.mkSourceAtlas
    noaaBangorStationMetadata ∷ noaaBarHarborGHCN1953 ∷
    noaaBarHarborStationMetadata ∷ ellsworthAmericanJuly1953 ∷
    bangorLibraryNewspaperArchives ∷ ellsworthKansasFalseWeatherJoin ∷
-   rvmlGentry2003Programme ∷ rvmlGentryVideoMetadata ∷ [])
+   rvmlGentry2003Programme ∷ rvmlGentryVideoMetadata ∷
+    noaaGHCNObsTimeSchema ∷ noaaHOMRStationHistory ∷
+    noaaCOOPOriginalFormsGateway ∷ bahramiHelmholtz2025 ∷
+    bioCoilOriginalAuthorRepository ∷ noaaBangorISD1953Original ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -876,13 +974,13 @@ data LineageRoot : Set where
   kervadecAscValidationRoot stockerAscRevisionRoot : LineageRoot
   heartmathInstituteRoot : LineageRoot
   shupakClinicalAuthorRoot duProtocolAuthorRoot : LineageRoot
-  saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
+  pandey2017PeptidePublicationRoot saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
   reichOriginalAuthorRoot guardianHamblingRoot redditKiddexForumRoot : LineageRoot
   bachFictionRoot constableBookRoot sladePractitionerRoot adachiPublisherRoot : LineageRoot
   wmoInstitutionRoot peterReichMemoirRoot kateBushArtistRoot : LineageRoot
   noaaBangorWeatherRoot ellsworthAmericanPressRoot bangorLibraryRoot : LineageRoot
   kansasWeatherPortalRoot : LineageRoot
-  rvmlOrganizerPublicationRoot : LineageRoot
+  rvmlOrganizerPublicationRoot bahramiHelmholtzOriginalRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -915,6 +1013,61 @@ mkBound :
 mkBound proposition carrier locator root role ceiling residual =
   claim-bound proposition carrier locator root role ceiling residual
     false refl false refl
+
+
+-- These are strictly bibliographic/observational-format claims.
+-- New NOAA source carriers have one custodial root and no station-hour data.
+noaaGHCNObservationClockAvailability : ClaimBound
+noaaGHCNObservationClockAvailability = mkBound
+  "The original NOAA GHCNd by_station and by_year CSV formats offer an optional four-digit station observation time sourced from HOMR"
+  noaaGHCNObsTimeSchema
+  "Original NOAA by_station readme, eighth CSV field OBS-TIME"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "actual Bangor/Bar Harbor July 1953 observation clock is unacquired; schema is not weather at hour 22"
+
+noaaOriginalFormCustodyIsNotObservation : ClaimBound
+noaaOriginalFormCustodyIsNotObservation = mkBound
+  "NOAA's original monthly COOP observation forms can contain observers' remarks, not carried by daily summary"
+  noaaCOOPOriginalFormsGateway
+  "NOAA original COOP access guide, Original COOP Observation Forms"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "no original dated July 1953 Bar Harbor or Bangor station form was inspected; no local Ellsworth hour is identified"
+
+bahramiWaterCooledHelmholtzPrecedent : ClaimBound
+bahramiWaterCooledHelmholtzPrecedent = mkBound
+  "Bahrami et al. independently report water-cooled automated Helmholtz magnetic-field control and preliminary cell-line observations"
+  bahramiHelmholtz2025
+  "PLOS ONE 2025 DOI 10.1371/journal.pone.0321133"
+  bahramiHelmholtzOriginalRoot
+  Diligence.contextualEvidence
+  experimentalMechanismElsewhere
+  "distinct apparatus/authors/time; no source-native 60-percent Rodin-versus-Helmholtz matched biological trial"
+
+
+bahramiPaperAndDataSameStudy : ClaimBound
+bahramiPaperAndDataSameStudy = mkBound
+  "Bahrami 2025 original water-cooled Helmholtz paper links its own BioCoil design and experimental repository carrier"
+  bioCoilOriginalAuthorRepository
+  "original QuBiTUCLA/biocoil README and repository folder inventory"
+  bahramiHelmholtzOriginalRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "published paper and author repository share one underlying study; historical exact experiment source version and Rodin 60 percent comparison unpaid"
+
+
+noaaISD1953YearArchivePresent : ClaimBound
+noaaISD1953YearArchivePresent = mkBound
+  "NOAA first-party 1953 catalogue lists a Bangor WBAN14606 hourly/synoptic gzip original station-year data object"
+  noaaBangorISD1953Original
+  "NOAA /pub/data/noaa/1953 directory, 726071-14606-1953.gz"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "actual station-year gzip bytes not acquired; date-specific hours, rain onset and any device-caused weather remain unpaid"
 
 -- Two publisher/document carriers; same RVML provenance root. The Gentry
 -- speaker/topic is NOT the 1999 person-to-person instruction transfer.
@@ -1493,6 +1646,16 @@ ramirez2024ReusedNumbersQuestion = mkBound
   attributedAuthorReport
   "shared data or independently reacquired unknown; repeated rounded numbers do not establish improper publication conduct"
 
+pandey2017FieldExperimentScope : ClaimBound
+pandey2017FieldExperimentScope = mkBound
+  "Pandey and collaborators report EF-modulated diphenylalanine FF nanoassembly with a distinct 0.6T magnetic exposure and no Rodin/Helmholtz matched comparison"
+  pandeyFFField2017
+  "Scientific Reports 7:2726 original full Methods and Results, 2 June 2017, DOI 10.1038/s41598-017-02609-z"
+  pandey2017PeptidePublicationRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "2019 amyloid original full text and 2024 asserted matched Rodin-versus-Helmholtz 60-percent comparison not established by this study"
+
 ramirez2024Ref24Claim : ClaimBound
 ramirez2024Ref24Claim = mkBound
   "2024 Rodin paper Discussion attributes a claimed up-to-60-percent Rodin/Helmholtz advantage to numbered reference 24, actually Saikia et al 2019 ACS electric-field amyloid study"
@@ -1512,6 +1675,19 @@ ramirez2024Ref12Claim = mkBound
   Diligence.primaryProposition
   attributedAuthorReport
   "true author intent and original 2008 full method details not verified; do not infer deliberate omission"
+
+-- Published rounded field values are a lossy observation of raw values.
+-- Identical tables cannot select same versus different measurement sessions.
+-- This is a source-specific carrier-boundary, not a new experimental result.
+rodinRoundedTableDoesNotProveRawIdentity : ClaimBound
+rodinRoundedTableDoesNotProveRawIdentity = mkBound
+  "2024 Ramirez-Galindo original Table II publishes 4.13, 3.05, 1.16 mT experimental fields at 1.60, 1.25, 0.60 A; these coincide numerically with 2013 Perez original Table I entries at the printed precision"
+  ramirezRodinRMF2024
+  "2024 published original Table II three experimental current-field rows; separate 2013 original Table I comparison by DASHI; synthetic rounding no-go is DASHI-authored, NOT an assertion contained in either paper"
+  guanajuatoRodinResearchRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "original unrounded data, coil and sensor serials, instrument calibration, session timestamps, raw files and acquisition frequency of 2024 Table II are not source-joined"
 
 ------------------------------------------------------------------------
 -- Cloudbusting source-specific propositions. These are original authors'

@@ -135,9 +135,59 @@ thermalScreenDoesNotVerifyCalibration = refl
 -- source carriers including real NOAA Bangor records, same-station metadata,
 -- an earlier local press item and a Kansas location false-match control.
 -- More source objects are NOT more independent weather experiments.
-sourceAtlasCountIsSixtyNine :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 69
-sourceAtlasCountIsSixtyNine = refl
+sourceAtlasCountIsSeventySix :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 76
+sourceAtlasCountIsSeventySix = refl
+
+
+-- Original NOAA OBS-TIME documentation is a *method*, not a 1953 sensor time;
+-- publisher/custodian multiplicity does not add an independent weather trial.
+noaaObservationClockSchemaDoesNotProveOnset :
+  Attribution.citationImportsProof Atlas.noaaGHCNObsTimeSchema ≡ false
+noaaObservationClockSchemaDoesNotProveOnset =
+  Atlas.allSourcesRemainNonPromoting Atlas.noaaGHCNObsTimeSchema
+
+noaaHOMRCustodyDoesNotProvideGaugeHour :
+  Attribution.citationCreatesAuthority Atlas.noaaHOMRStationHistory ≡ false
+noaaHOMRCustodyDoesNotProvideGaugeHour =
+  Atlas.allSourcesRemainNonAuthoritative Atlas.noaaHOMRStationHistory
+
+noaaOriginalCOOPFormAccessDoesNotRecoverOriginalForm :
+  Attribution.citationImportsProof Atlas.noaaCOOPOriginalFormsGateway ≡ false
+noaaOriginalCOOPFormAccessDoesNotRecoverOriginalForm =
+  Atlas.allSourcesRemainNonPromoting Atlas.noaaCOOPOriginalFormsGateway
+
+noaaClockAndCOOPAccessShareCustodialRoot :
+  Atlas.root Atlas.noaaGHCNObservationClockAvailability ≡
+  Atlas.root Atlas.noaaOriginalFormCustodyIsNotObservation
+noaaClockAndCOOPAccessShareCustodialRoot = refl
+
+bahramiOriginalAuthorsDoNotProveRodinComparison :
+  Attribution.citationImportsProof Atlas.bahramiHelmholtz2025 ≡ false
+bahramiOriginalAuthorsDoNotProveRodinComparison =
+  Atlas.allSourcesRemainNonPromoting Atlas.bahramiHelmholtz2025
+
+
+paperAndOriginalRepoAreOneOriginalStudyRoot :
+  Atlas.root Atlas.bahramiPaperAndDataSameStudy ≡
+  Atlas.root Atlas.bahramiWaterCooledHelmholtzPrecedent
+paperAndOriginalRepoAreOneOriginalStudyRoot = refl
+
+originalAuthorRepoCannotImportRodinSuperiority :
+  Attribution.citationImportsProof Atlas.bioCoilOriginalAuthorRepository ≡ false
+originalAuthorRepoCannotImportRodinSuperiority =
+  Atlas.allSourcesRemainNonPromoting Atlas.bioCoilOriginalAuthorRepository
+
+
+noaaArchiveFilenameDoesNotProveRainOnset :
+  Attribution.citationImportsProof Atlas.noaaBangorISD1953Original ≡ false
+noaaArchiveFilenameDoesNotProveRainOnset =
+  Atlas.allSourcesRemainNonPromoting Atlas.noaaBangorISD1953Original
+
+noaaHourArchiveAndDailyMethodHaveOneCustodialAttribution :
+  Atlas.root Atlas.noaaISD1953YearArchivePresent ≡
+  Atlas.root Atlas.noaaGHCNObservationClockAvailability
+noaaHourArchiveAndDailyMethodHaveOneCustodialAttribution = refl
 
 -- Additional original 1953 NOAA station does not change the publisher
 -- denominator; observations must retain their actual distinct site keys.
@@ -165,6 +215,17 @@ barHarborPublisherMetadataDoesNotGrantCausality :
   Attribution.citationImportsProof Atlas.noaaBarHarborStationMetadata ≡ false
 barHarborPublisherMetadataDoesNotGrantCausality =
   Atlas.allSourcesRemainNonPromoting Atlas.noaaBarHarborStationMetadata
+
+-- Published numerical agreement is a property of printed papers, not
+-- a source-native byte witness for two independently acquired 2013/2024 runs.
+rodinRoundedMatchingPaperDoesNotTransferProof :
+  Attribution.citationImportsProof Atlas.ramirezRodinRMF2024 ≡ false
+rodinRoundedMatchingPaperDoesNotTransferProof =
+  Atlas.allSourcesRemainNonPromoting Atlas.ramirezRodinRMF2024
+
+rodinRawMeasurementIdentityNotFromCitation :
+  Atlas.citationCreatesTruth Atlas.rodinRoundedTableDoesNotProveRawIdentity ≡ false
+rodinRawMeasurementIdentityNotFromCitation = refl
 
 -- RVML organiser archives and its uploader account represent one historical
 -- programme origin; neither is Croft's narrator root or a verified transfer.
@@ -444,6 +505,15 @@ croftAugustAndJanuaryPublicationClaimsDistinct :
   Atlas.relationClass Atlas.croftInstructionPublicationDatesDistinct ≡
   Atlas.documentaryDistinction
 croftAugustAndJanuaryPublicationClaimsDistinct = refl
+
+pandey2017OriginalFieldStudyDoesNotProve2024GeometryClaim :
+  Attribution.citationImportsProof Atlas.pandeyFFField2017 ≡ false
+pandey2017OriginalFieldStudyDoesNotProve2024GeometryClaim =
+  Atlas.allSourcesRemainNonPromoting Atlas.pandeyFFField2017
+
+pandey2017ClaimStaysSourceBound :
+  Atlas.citationCreatesTruth Atlas.pandey2017FieldExperimentScope ≡ false
+pandey2017ClaimStaysSourceBound = refl
 
 saikiaOriginalResearchCannotCreateIndependentRodinComparison :
   Attribution.citationCreatesAuthority Atlas.saikiaAmyloid2019 ≡ false

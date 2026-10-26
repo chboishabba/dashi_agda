@@ -11,9 +11,12 @@
         "P1-67",
         "P1-68",
         "P1-71",
-        "P1-72"
+        "P1-72",
+        "P1-73",
+        "P1-74",
+        "P1-75"
       ],
-      "kind": "same NOAA GHCN custodial dataset/schema and two distinct Maine station observation streams; custodial root count one, station units two",
+      "kind": "NOAA GHCNd precipitation at two distinct historical station gauges, plus NOAA schema, HOMR observation-time metadata API and original COOP form-access documentation; one institutional custodian but two observation sites, no fetched 1953 OBS-TIME or original monthly forms",
       "independent_of": [
         "reich-original"
       ]
@@ -79,6 +82,16 @@
         "P1-70"
       ],
       "kind": "Rogue Valley Metaphysical Library organiser event calendar and Vimeo uploader biography same RVML publication network; not two independent speakers"
+    },
+    "noaa-isd-hourly": {
+      "members": [
+        "P1-79"
+      ],
+      "kind": "NOAA/NCEI ISD original Bangor 1953 station-year archive object, independently indexed dataset format but not necessarily independent original observations from GHCN Bangor historical weather records",
+      "independent_of": [
+        "reich-original"
+      ],
+      "potentially_shared_observer_family_with": "noaa-ghcnd"
     }
   },
   "claims": [
@@ -274,6 +287,49 @@
         "P1-72"
       ],
       "effect": "Bangor 305 and Bar Harbor 130 tenths-mm; same NOAA custodian but two station streams; cannot infer event-hour or rainmaking"
+    },
+    {
+      "id": "noaa_original_obs_time_fields_available",
+      "status": "format_documented_only",
+      "requires": [
+        "P1-73",
+        "P1-74"
+      ],
+      "effect": "NOAA by_station/by_year CSV defines optional HHMM OBS-TIME populated from HOMR; this is schema/lookup availability and not an actual July 1953 clock for either gauge."
+    },
+    {
+      "id": "original_coop_weather_forms_access_route",
+      "status": "custody_route_only",
+      "requires": [
+        "P1-75"
+      ],
+      "effect": "NOAA describes monthly original observer forms, possible remarks and some subdaily records; exact July 1953 Bar Harbor/Bangor sheets not yet examined."
+    },
+    {
+      "id": "historical_bangor_barharbor_july_1953_obs_time",
+      "status": "unpaid",
+      "requires": [],
+      "effect": "Exact local observing time for the original July 6–8 1953 Bangor and Bar Harbor daily slots remains unknown; generic OBS-TIME field does not identify it."
+    },
+    {
+      "id": "1953_bangor_isd_hourly_archive_object_exists",
+      "status": "publisher_directory_original_locator",
+      "requires": [
+        "P1-79"
+      ],
+      "effect": "Original NOAA/ISD 1953 catalogue includes USAF 726071/WBAN14606 gzip station-year, listed 160944 bytes, but raw payload not read."
+    },
+    {
+      "id": "1953_bangor_isd_july6_hourly_records",
+      "status": "unpaid",
+      "requires": [],
+      "effect": "No original 1953 station-year gzip payload decoded; no 6–7 July UTC hour or independent precipitation episode asserted."
+    },
+    {
+      "id": "1953_bangor_isd_precip_versus_ghcnd_join",
+      "status": "unpaid",
+      "requires": [],
+      "effect": "Without actual ISD observation and precipitation codes, no assertion about time-alignment, daily reported 6.6/19.3 mm or original instrument independence."
     }
   ],
   "source_snapshot": {
@@ -297,10 +353,31 @@
     ],
     "bar_harbor_station_id": "USC00170371",
     "station_distinction": "Bangor and Bar Harbor are distinct historical instruments/station rows but share NOAA GHCN archive/custodian; not independent proof of any extraordinary weather mechanism",
-    "observation_time_status": "historical station precipitation accumulation cutoff unverified, so a July 6 zero cannot settle rain onset near 22:00 on July 6"
+    "observation_time_status": "historical station precipitation accumulation cutoff unverified, so a July 6 zero cannot settle rain onset near 22:00 on July 6",
+    "obs_time_original_metadata": {
+      "by_station_readme": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/readme-by_station.txt",
+      "HOMR_API": "https://www.ncei.noaa.gov/access/homr/api",
+      "COOP_original_forms": "https://www.ncei.noaa.gov/products/land-based-station/cooperative-observer-network",
+      "historical_station_time_found": false,
+      "by_station_1953_compressed_csv_byte_acquired": false,
+      "observed_hour_recovered": false
+    },
+    "isd_hourly_bangor_1953": {
+      "original_publisher_file": "https://www.ncei.noaa.gov/pub/data/noaa/1953/726071-14606-1953.gz",
+      "usaf": "726071",
+      "wban": "14606",
+      "listed_gzip_bytes": 160944,
+      "original_web_directory_listing_seen": true,
+      "original_file_downloaded_or_authenticated": false,
+      "utc_july_1953_observation_times_recovered": false,
+      "precipitation_group_decoded": false,
+      "actual_same_site_weather_inference": false
+    }
   },
   "algorithm": {
     "retraction": "Any claim depending on a withdrawn source is marked reopened (not false). A claim with status unpaid remains unpaid. Unrelated independently grounded claims retain their status.",
-    "prohibition": "No edge automatically promotes author assertions or observed precipitation into device causality; model statuses are bibliographic, not ontology truth. An uploader's third-person promotional biography cannot certify Navy employment, historical device construction, or Flanagan-Gentry-Croft technical handoff."
+    "prohibition": "No edge automatically promotes author assertions or observed precipitation into device causality; model statuses are bibliographic, not ontology truth. An uploader's third-person promotional biography cannot certify Navy employment, historical device construction, or Flanagan-Gentry-Croft technical handoff.",
+    "clock_bucket_sensitivity": "If station local July 6 22h is stipulated and cutoffs are assumed to end local right-closed 24h windows, cutoff before 22h labels hypothetical rain as July 7 and cutoff at/after 22h labels July 6; without observed station clock and at-site hour neither bucket identifies Reich event.",
+    "isd_time_nonpromotion": "Original ISD 1953 station-year file existence does not imply 1953-07-06 data coverage, AA1 rainfall report, UTC-to-Maine-local converter, independent observer root, or any intervention effect. Invalid or absent payload remains unpaid, not false."
   }
 }
