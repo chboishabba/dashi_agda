@@ -128,6 +128,11 @@ publicationTopicMatchIsNotMethodTransfer :
   TransferRelation topicalPublicationMatch → ⊥
 publicationTopicMatchIsNotMethodTransfer ()
 
+recommendationExposureIsNotDirectMethodTransfer :
+  TransferRelation recommendationExposure → ⊥
+recommendationExposureIsNotDirectMethodTransfer ()
+
+
 
 
 personnelContinuityIsNotTransferRelation : TransferRelation personnelContinuity → ⊥
