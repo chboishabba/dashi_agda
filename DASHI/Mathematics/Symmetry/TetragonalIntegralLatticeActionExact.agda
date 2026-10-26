@@ -64,3 +64,30 @@ H2 S (xyz x y z) rewrite negateTwice S z = refl
 -- preserve M when the scalar square laws hold. Reciprocal indices
 -- transform contragrediently; for these orthogonal integer matrices
 -- U^{-T}=U, but not for arbitrary primitive Bravais basis changes.
+
+-- Group-generator relations on *arbitrary* signed coordinate carriers.
+-- The scalar involution assumption is the only algebra required.
+quarterFour : ∀ {A} (S : SignedCarrier A) (p : Triple A) →
+  quarter S D.q1 (quarter S D.q1
+    (quarter S D.q1 (quarter S D.q1 p))) ≡ p
+quarterFour = R4
+
+verticalReflectConjugatesQuarter :
+  ∀ {A} (S : SignedCarrier A) (p : Triple A) →
+  V S (R S (V S p)) ≡ R S (R S (R S p))
+verticalReflectConjugatesQuarter S (xyz x y z)
+  rewrite negateTwice S x | negateTwice S y = refl
+
+horizontalCentralWithR :
+  ∀ {A} (S : SignedCarrier A) (p : Triple A) →
+  H S (R S p) ≡ R S (H S p)
+horizontalCentralWithR S (xyz x y z) = refl
+
+horizontalCentralWithV :
+  ∀ {A} (S : SignedCarrier A) (p : Triple A) →
+  H S (V S p) ≡ V S (H S p)
+horizontalCentralWithV S (xyz x y z) = refl
+
+-- A nontrivial point-wise separation of a quarter-turn and the
+-- identity requires a point whose x/y coordinates are distinguishable,
+-- and cannot follow for arbitrary A (for example, a one-point A).
