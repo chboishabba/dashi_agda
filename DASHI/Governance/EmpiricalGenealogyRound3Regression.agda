@@ -6,6 +6,7 @@ import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
 import DASHI.Governance.EvidenceGradedGenealogyCasesExact as Cases
 import DASHI.Governance.TypedGenealogyEdgeExact as Typed
 import DASHI.Governance.ClimateGenealogyTypedCasesExact as Climate
+import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity
 import DASHI.Governance.JohnPaperClaimPromotionAuditExact as Paper
 import DASHI.Governance.JohnPaperClaimManifestV2Exact as Manifest
 import DASHI.Governance.PalantirProcurementLegibilityAdapterExact as Palantir
@@ -470,3 +471,30 @@ acshEditorialDiscretionDoesNotProveSpecificScientificEdit =
 singerGCCProposalUnacquiredDocumentIsCorroborated :
   Typed.evidenceStrength Climate.singerGCCSolicitationNotMoneyPaid ≡ Typed.corroborated
 singerGCCProposalUnacquiredDocumentIsCorroborated = refl
+
+
+------------------------------------------------------------------------
+-- Historical climate commissioning consumer: exact source identity,
+-- separately typed exposure, and ALREADY-PROVED proximity inadequacy.
+-- Reuse, not a second independent-influence no-go construction.
+------------------------------------------------------------------------
+
+acshPublicArgumentHasFirstPartySource :
+  Typed.identifier Climate.acsh1997OriginalPublicArgument ≡
+    "https://www.acsh.org/news/1997/10/01/global-climate-change-and-human-health"
+acshPublicArgumentHasFirstPartySource = refl
+
+gcc2001KyotoScriptIsExposureNotVerdict :
+  Typed.relationKind Climate.gcc2001DraftPolicyInputAcknowledgment ≡
+    Typed.recommendationExposure
+gcc2001KyotoScriptIsExposureNotVerdict = refl
+
+gccStateDepartmentReportedAccessDoesNotProveMethodTransfer :
+  Typed.StrongHistoricalTransfer Climate.gcc2001DraftPolicyInputAcknowledgment → ⊥
+gccStateDepartmentReportedAccessDoesNotProveMethodTransfer =
+  Climate.policyAccessIsNotCompletedMethodTransfer
+
+donorActorInstitutionProximityDoesNotEstablishDecisionControl :
+  Proximity.InfluenceThroughProximity → ⊥
+donorActorInstitutionProximityDoesNotEstablishDecisionControl =
+  Proximity.influenceDoesNotFactorThroughProximity
