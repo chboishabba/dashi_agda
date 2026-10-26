@@ -64,9 +64,48 @@ def test_same_amount_different_base() -> None:
     assert income_excess(Income(5), 3) == wealth_excess(NetWealth(5), 3) == 2
     assert Income(5) != NetWealth(5)
 
+
+@dataclass(frozen=True)
+class FiscalSocialWorld:
+    assessed_wealth: int
+    controlling_votes: int
+    accessible_care_capacity: int
+
+def tax_receipt(world: FiscalSocialWorld) -> int:
+    return wealth_excess(NetWealth(world.assessed_wealth), 3)
+
+def test_tax_receipt_cannot_recover_power_or_care() -> None:
+    # The SAME receipt answers tax-due, but NOT voting or care.
+    a = FiscalSocialWorld(5, 1, 0)
+    b = FiscalSocialWorld(5, 7, 0)
+    c = FiscalSocialWorld(5, 1, 9)
+    assert tax_receipt(a) == tax_receipt(b) == tax_receipt(c) == 2
+    assert a.controlling_votes != b.controlling_votes
+    assert a.accessible_care_capacity != c.accessible_care_capacity
+    # Negative control for arbitrary tax-only rechartings.
+    for transform in (lambda tax: tax, lambda tax: tax * 2,
+                      lambda tax: tax % 2, lambda tax: "paid"):
+        assert transform(tax_receipt(a)) == transform(tax_receipt(b))
+        assert transform(tax_receipt(a)) == transform(tax_receipt(c))
+
+def test_distinct_political_outcome_queries() -> None:
+    a = FiscalSocialWorld(5, 1, 0)
+    b = FiscalSocialWorld(5, 7, 0)
+    c = FiscalSocialWorld(5, 1, 9)
+    queries = {
+        "tax_due": tax_receipt,
+        "voting_control": lambda w: w.controlling_votes,
+        "care_provision": lambda w: w.accessible_care_capacity,
+    }
+    assert queries["tax_due"](a) == queries["tax_due"](b) == queries["tax_due"](c)
+    assert queries["voting_control"](a) != queries["voting_control"](b)
+    assert queries["care_provision"](a) != queries["care_provision"](c)
+
 if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
     test_same_amount_different_base()
     test_identical_wealth_liability_different_control()
-    print("PASS: 8,192 finite cap observations + three typed counterexamples")
+    test_tax_receipt_cannot_recover_power_or_care()
+    test_distinct_political_outcome_queries()
+    print("PASS: 8,192 finite cap observations + five synthetic logical checks")
