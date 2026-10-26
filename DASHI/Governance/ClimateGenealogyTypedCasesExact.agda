@@ -1047,3 +1047,129 @@ sameTaxNumberCannotDetermineSourceStatus :
 sameTaxNumberCannotDetermineSourceStatus =
   INF.witnessRulesOutEveryFlatFactorisation
     sameRoundedTaxTotalDifferentSourceStatus
+
+
+------------------------------------------------------------------------
+-- 2026 ORIGINAL ARTHUR D. LITTLE REPORT: TWO DISTINCT QUESTIONS
+-- 1. Is a 25 percent rate applied to the SAME levy base?
+-- 2. Is a quoted 2-percent-sized change a relative return change or a
+--    percentage-point change in the internal rate of return?
+--
+-- Original consultant-authored report, not a third estimate: Future Group,
+-- the commissioning body, released the original PDF.  A commissioned model
+-- is original authorship but not funding-independent evidence.
+--
+-- Page 5: 25% broad-based 95-100 A$bn/decade;
+--         prospective 28-32 A$bn/decade;
+--         price-triggered windfall 9-11 A$bn/decade (A$8.5/GJ threshold).
+-- First-year 'up to A$17bn' is an upper bound based on current volumes:
+-- 10 x 17 is NOT this report's decade forecast.
+-- Page 7: legacy-project IRR down 1-2 *percentage points*, not necessarily
+--         a 1-2 percent relative reduction in any project's returns.
+-- Page 8: marginal export diversion does not assume more total supply.
+-- Page 4: 6.9% resource-rent-only vs 25.8% total tax are distinct bases.
+-- Original pages 4, 5, 7, and 8 visually inspected 27 October 2026.
+------------------------------------------------------------------------
+
+adlSourceReportPublicRelease2026 : Typed.SourceReceipt
+adlSourceReportPublicRelease2026 = Typed.sourceReceipt
+  "Arthur D. Little Australia; commissioned by Future Group"
+  "Australian Domestic Gas Export Reform: Scenario Analysis and Policy Options Assessment"
+  "2026-04, public release"
+  "https://www.datocms-assets.com/115668/1777429022-final-ad-little-modelling-gas-exports-15.pdf"
+  "Consultant-authored primary report, pages 4-9; page 5 gives nine ten-year levy-base/rate scenarios; upper-bound first-year revenue cannot be multiplied into decade receipts. PDF charts visually inspected. Non-reliance and unverified data/model caveats retained."
+
+futureGroup21AprOriginalRelease : Typed.SourceReceipt
+futureGroup21AprOriginalRelease = Typed.sourceReceipt
+  "Future Group (commissioner)"
+  "New modelling shows gas export levy will significantly reduce energy costs"
+  "2026-04-21"
+  "https://www.datocms-assets.com/115668/1777429032-260421-export-levy-modelling.pdf"
+  "Original commissioner press release labels A$17bn as an upper bound in the first year. Same ADL report as the 23 April corporate website story, not an additional independent modelling team."
+
+adlReportCommissionedAndPublic : Typed.TypedGenealogyEdge
+adlReportCommissionedAndPublic = Typed.typedGenealogyEdge
+  "RC-10" "Future Group commissioner" "Arthur D. Little authored public report April 2026"
+  Typed.commissionedResearch Typed.primary
+  (adlSourceReportPublicRelease2026 ∷ futureGroup21AprOriginalRelease ∷ [])
+  "The report identifies its commissioner and primary author, and the commissioner publicly supplies the original text. This establishes authorship and commissioning but does not certify independent verification of every price, supply or revenue projection."
+
+adlSeventeenBFirstYearUpperBoundNotTenYearCash : Typed.TypedGenealogyEdge
+adlSeventeenBFirstYearUpperBoundNotTenYearCash = Typed.typedGenealogyEdge
+  "RC-11" "Arthur D. Little ten-year broad-based 25 percent scenario" "Future Group up-to-A$17bn first-year statement"
+  Typed.reportedStatisticRestatement Typed.primary
+  (adlSourceReportPublicRelease2026 ∷ futureGroup21AprOriginalRelease ∷ [])
+  "The original page 5 has A$95-100bn per decade for broad-based 25 percent and expressly marks A$17bn as up-to based on current export volumes. First-year upper bound is not recurring ten-year average or guaranteed revenue."
+
+adlIRRPointsVersusFutureGroupReturnsPercent : Typed.TypedGenealogyEdge
+adlIRRPointsVersusFutureGroupReturnsPercent = Typed.typedGenealogyEdge
+  "RC-12" "ADL report page 7 IRR down 1-2 percentage points" "Future Group 23 April summary about 2 percent average reduction in returns"
+  Typed.reportedStatisticRestatement Typed.primary
+  (adlSourceReportPublicRelease2026 ∷ futureGroupArthurDLittle2026 ∷ [])
+  "The unit and project set are less explicit in the client's summary; percentage-point IRR and relative percentage return are different quantities. Do not assert bad faith or even numerically inconsistent results absent original baseline IRR."
+
+-- There is a concrete collision: all three original consultant scenarios
+-- display the same 25% nominal rate, but their levy bases and ten-year
+-- modelled revenue ranges differ. This witnesses non-factorability without
+-- assigning empirical certainty to the modelled revenue.
+data ADLLevyScenario : Set where
+  broadBase25 prospective25 windfall25 : ADLLevyScenario
+
+data ADLDisplayed25Rate : Set where
+  displayed25Rate : ADLDisplayed25Rate
+
+data ADLTenYearRevenueBand : Set where
+  broad95To100 prospective28To32 windfall9To11 : ADLTenYearRevenueBand
+
+adlHeadlineRate : ADLLevyScenario → ADLDisplayed25Rate
+adlHeadlineRate _ = displayed25Rate
+
+adlTenYearBand : ADLLevyScenario → ADLTenYearRevenueBand
+adlTenYearBand broadBase25 = broad95To100
+adlTenYearBand prospective25 = prospective28To32
+adlTenYearBand windfall25 = windfall9To11
+
+adlSameRateDifferentRevenueBases :
+  INF.NonFactorabilityWitness adlHeadlineRate adlTenYearBand
+adlSameRateDifferentRevenueBases =
+  INF.nonFactorabilityWitness broadBase25 prospective25 refl (λ ())
+
+adlSame25RateCannotDetermineDecadeRevenue :
+  INF.FactorsThrough adlHeadlineRate adlTenYearBand → ⊥
+adlSame25RateCannotDetermineDecadeRevenue =
+  INF.witnessRulesOutEveryFlatFactorisation adlSameRateDifferentRevenueBases
+
+-- A bare value 2 with a percent symbol does not determine whether the
+-- statement means two IRR percentage points or a 2% relative return change.
+-- This is a loss-of-units obstruction, not proof of either empirical case.
+data TwoSizedReturnClaim : Set where
+  twoIRRPercentagePoints twoPercentRelativeReturn : TwoSizedReturnClaim
+
+data BareTwoPercentDisplay : Set where
+  bareTwoPercent : BareTwoPercentDisplay
+
+data ReturnChangeUnit : Set where
+  irrPercentagePoints relativePercent : ReturnChangeUnit
+
+returnHeadlineWithoutUnits : TwoSizedReturnClaim → BareTwoPercentDisplay
+returnHeadlineWithoutUnits _ = bareTwoPercent
+
+returnChangeUnit : TwoSizedReturnClaim → ReturnChangeUnit
+returnChangeUnit twoIRRPercentagePoints = irrPercentagePoints
+returnChangeUnit twoPercentRelativeReturn = relativePercent
+
+samePrintedTwoDifferentReturnUnits :
+  INF.NonFactorabilityWitness returnHeadlineWithoutUnits returnChangeUnit
+samePrintedTwoDifferentReturnUnits =
+  INF.nonFactorabilityWitness twoIRRPercentagePoints twoPercentRelativeReturn refl (λ ())
+
+bareTwoPercentCannotIdentifyReturnUnit :
+  INF.FactorsThrough returnHeadlineWithoutUnits returnChangeUnit → ⊥
+bareTwoPercentCannotIdentifyReturnUnit =
+  INF.witnessRulesOutEveryFlatFactorisation samePrintedTwoDifferentReturnUnits
+
+adlFirstPartyScenarioIsNotProofOfEditorialTransfer :
+  Typed.StrongHistoricalTransfer adlIRRPointsVersusFutureGroupReturnsPercent → ⊥
+adlFirstPartyScenarioIsNotProofOfEditorialTransfer witness =
+  Typed.headlineNumberRestatementIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
