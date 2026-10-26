@@ -111,3 +111,21 @@ def test_rational_interval_certificate_for_margin_failure():
     # Strict RATIONAL lower bound on the δ=0 derivative.
     lower=512*S.Rational(3,20)-2*D
     assert lower==S.Rational(24,5)>0
+
+def test_original_R92_R102_helicity_conservation_vs_literal_dyadic_defect():
+    # Waleffe |m| signed curl eigenvalue is NOT the R734 dyadic
+    # weight 2^ceil(log2 ||m||infty). Reuse existing R92/R102 owners.
+    u=physical_u();nl=projected_NS_nonlinearity(u)
+    true_helicity_nonlinear=S.simplify(S.expand_complex(sum((
+        2*S.sqrt(n2(m))*S.re((S.conjugate(v).T*nl.get(m,S.zeros(3,1)))[0])
+        for m,v in u.items()),S.Integer(0))))
+    assert true_helicity_nonlinear==0
+    exact_defect=S.simplify(S.expand_complex(sum((
+        2*(weight(m)-S.sqrt(n2(m)))*
+        S.re((S.conjugate(v).T*nl.get(m,S.zeros(3,1)))[0])
+        for m,v in u.items()),S.Integer(0))))
+    assert S.simplify(exact_defect-critical_data()[2])==0
+    true_helicity_mass=S.simplify(sum((
+        S.sqrt(n2(m))*(S.conjugate(v).T*v)[0]
+        for m,v in u.items()),S.Integer(0)))
+    assert true_helicity_mass==2+S.sqrt(5)+2*S.sqrt(6)
