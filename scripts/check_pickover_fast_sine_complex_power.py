@@ -39,11 +39,13 @@ def power_certified(N,digits):
             result=product(result,base,S)
             err=err+base_err+(err*base_err+S-1)//S+2
             ops+=1
+            if err >= S: return None,ops,err
         e>>=1
         if e:
             base=product(base,base,S)
             base_err=2*base_err+(base_err*base_err+S-1)//S+2
             ops+=1
+            if base_err >= S: return None,ops,base_err
     if abs(result[1])<=err:return None,ops,err
     return (1 if result[1]>0 else -1),ops,err
 
