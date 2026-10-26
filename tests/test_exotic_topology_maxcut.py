@@ -19,6 +19,7 @@ import exotic_topology_pl_surface_gluings as pl
 import exotic_topology_pl_frontier_lineage as lineage
 import exotic_topology_pl_complement_components as complement
 import exotic_topology_pl_stable_stars as stable
+import exotic_topology_power_36_tight_nonpromotion as power
 import exotic_topology_balanced_ternary_pl as balanced
 import exotic_topology_cantor_cylinder_orientation as orientation
 import exotic_topology_braid_crosspr_discriminator as braid
@@ -330,5 +331,32 @@ class ExoticMaxCutTests(unittest.TestCase):
         with self.assertRaises(AssertionError):
             stable.verify_stable_old_stars(
                 old, mid, later, wrong, mid_to_later)
+
+
+    def test_power_2025_existence_not_this_handled_pl_triangulation(self):
+        result = power.audit()
+        self.assertEqual(
+            [s["maxwell_3V_minus_E"] for s in result["families"]["loch"]],
+            [6, 0, -6])
+        self.assertEqual(
+            [s["maxwell_3V_minus_E"] for s in result["families"]["jacob"]],
+            [6, -6, -18])
+        self.assertTrue(
+            result["source_theorem_is_existence_not_all_triangulations"])
+        self.assertFalse(result["actual_selected_triangs_36_tight_verified"])
+        for name in ("loch", "jacob"):
+            self.assertTrue(all(
+                s["violates_full_graph_36_sparsity_if_below_6"]
+                for s in result["families"][name][1:]))
+
+    def test_global_maxwell_six_does_not_certify_subgraph_sparsity(self):
+        result = power.audit()
+        for name in ("cantor","balanced_ternary"):
+            self.assertTrue(all(
+                s["maxwell_3V_minus_E"] == 6
+                for s in result["families"][name]))
+        self.assertTrue(result[
+            "full_graph_maxwell_eq_6_does_not_prove_sparse_subgraphs"])
+        self.assertFalse(result["actual_selected_triangs_36_tight_verified"])
 
 if __name__ == '__main__': unittest.main()
