@@ -248,9 +248,9 @@ sphereHomologyLeaf = topologyParetoLeaf
 richardsRealisationLeaf : TopologyParetoLeaf
 richardsRealisationLeaf = topologyParetoLeaf
   2 richardsOriginal
-  "actual marked PL pants/handle triangulations and vertex transport; source-written Lean CompatibleCantorTower inverse limit reusing Integration.Address"
+  "actual marked PL pants/handle triangulations; source-owned ternary 1-to-3 composed-two-pants geometry + Trit zero/sign + SSP369 prefix ultrametric; Lean CompatibleCantorTower"
   "Cantor tree / Jacob's ladder / Loch Ness monster"
-  "finite manifold and every-old-frontier ancestry now source-written; NEXT actual collared direct-limit 2-manifold, Richards same-object end homeomorphism, decorated genus/nonplanar end proof, kernel-recognised classification"
+  "finite binary and balanced-ternary manifold/frontier and dual complementary components constructed; NEXT collared direct-limit 2-manifold, true Richards same-object end homeomorphism, decorated genus/nonplanar ends and kernel-recognised classification"
   "three noncompact surfaces and their decorated end types; conditional end-space argument in Docs/topology/ExoticInfiniteSurfaceEndSpaceConditionalTheorem20261025.md"
   geometricSameObjectOpen true false
 
