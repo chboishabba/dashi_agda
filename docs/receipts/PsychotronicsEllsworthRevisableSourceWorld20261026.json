@@ -371,6 +371,12 @@
       "status": "unpaid",
       "requires": [],
       "effect": "Do not treat legacy NOAA path, cloud bucket name, GHCNh naming pattern or local synthetic source hash as authenticated remote 1953 source bytes."
+    },
+    {
+      "id": "converted_1953_bangor_s3_exact_key",
+      "status": "unpaid",
+      "requires": [],
+      "effect": "1953 converted CSV directory is exposed, but exact Bangor station-year 72607114606.csv presence, hash and original July5–9 time/AA1 values have not been retrieved. One NOAA source family with original ISD."
     }
   ],
   "source_snapshot": {
@@ -452,6 +458,27 @@
       "actual_1953_bangor_station_year_original_bytes_acquired": false,
       "actual_hourly_data_or_rainfall_decoded": false,
       "agency_signed_checksum_verified": false
+    },
+    "noaa_original_vs_converted_1953_bucket_directories": {
+      "date": "2026-10-27",
+      "receipt": "docs/receipts/PsychotronicsNOAAS3ExplorerDirectory20261027.json",
+      "evidence_type": "user-transcribed AWS public first-party S3 Explorer bucket/year directory entries, not specific NOAA Bangor station-year contents",
+      "original_bucket": "noaa-isd-pds",
+      "original_top_level_prefix_seen": "data/",
+      "converted_bucket": "noaa-global-hourly-pds",
+      "converted_year_prefix_seen": "1953/",
+      "converted_user_observed_year_listing_count": 2973,
+      "converted_specific_Bangor_ID": "72607114606",
+      "converted_filename_candidate_not_verified": "72607114606.csv",
+      "original_1953_station_object_key_in_S3_retrieved": false,
+      "converted_1953_station_file_key_retrieved": false,
+      "original_or_converted_1953_station_bytes_fetched": false,
+      "utc_station_observation_content_parsed": false,
+      "producer_root_note": "NOAA original measurement streams and converted CSV possibly exact same recorded observations; no second independent experiment from two buckets",
+      "reader_script": "scripts/check_psychotronics_bangor_1953_cloud_csv.py",
+      "synthetic_unit_tests_committed": 13,
+      "synthetic_unit_tests_actual_repo_layout_passed": true,
+      "original_attribution": "NOAA/NCEI original 1953 weather reporters and historical NOAA data custodians; not assistant-created observations"
     }
   },
   "algorithm": {
