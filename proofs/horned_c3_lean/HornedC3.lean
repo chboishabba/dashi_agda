@@ -5,3 +5,4 @@ import HornedC3.ThreeArmCentralPi1Reduction
 import HornedC3.ThreeArmHatcherGroupTransport
 import HornedC3.ThreeArmRadiusCutGeometry
 import HornedC3.ThreeArmRadiusCutHatcherTransport
+import HornedC3.ThreeArmHatcherHomotopyTransport
