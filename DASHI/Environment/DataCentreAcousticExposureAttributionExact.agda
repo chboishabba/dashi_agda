@@ -136,6 +136,18 @@ weightedCNotInfrasoundAmplitude ()
 -- The 2021, 2023 and 2026 experiments target different signals, exposures,
 -- durations and outcomes. They are three original-study roots, not three
 -- replications of Benn Jordan or a particular data-centre community.
+-- A distinct SOURCE-ORIGINAL actual human infrasound perceptual lab,
+-- not human environmental disease or a DC site-measured source signal:
+-- Jurado, Marquardt Sci Rep 16 19097, original Apr 24 2026,
+-- article version-of-record Jun 19 2026, original DOI preserved.
+juradoMarquardt2026Cochlea : SourceBoundClaim
+juradoMarquardt2026Cochlea = sourceBoundClaim
+  "Carlos Jurado and Torsten Marquardt (2026): Infrasound sensation is mediated by intracochlear electrical potentials"
+  "https://doi.org/10.1038/s41598-026-50179-w"
+  peerReviewedExperimental observedOutcome
+  "Original non-invasive human audiology/psychophysics: threshold shifts for 4 8 and 16 Hz under added high-frequency masking, plus OAE/sensation results; authors report masker threshold shifts 5.5, 5.8, 3.2 dB at 4 8 16 Hz with tests T(6). A cochlear lumped-circuit model proposes OHC-driven electrical potentials can contribute to auditory nerve sensation without conventional IHC velocity-driven excitation at very low Hz."
+  "Perception at sufficient tested ear-canal stimulus is NOT absence of audibility, but NOT proof of chronic disease, subclinical hormonal injury, environmental data-centre source-receptor pressure or specific intentional RF programme. Model excitation mechanism is a supported interpretation, not directly recorded voltage in these volunteers; original study reports raw data/scripts available on reasonable request, not direct in-repo assets."
+
 scattertyControlled2026 : SourceBoundClaim
 scattertyControlled2026 = sourceBoundClaim
   "Scatterty, VonStein, Prichard, Franczak, Hamilton, Schmaltz (2026): infrasound, affect and cortisol"
@@ -166,10 +178,16 @@ marshall2023WindCrossover = sourceBoundClaim
 -- infrasound-group randomized contrast. Distinct nonidentities are source
 -- audit gates rather than a medical or causal theorem.
 data HumanAcousticEvidenceRoot : Set where
+  originalHumanInfrasoundCochlearSensationLab : HumanAcousticEvidenceRoot
   originalShortLabRandomizedAffectCortisol : HumanAcousticEvidenceRoot
   originalWindTurbineAnnoyanceLab : HumanAcousticEvidenceRoot
   originalLongShamCrossoverSleepLab : HumanAcousticEvidenceRoot
   actualDataCentreMatchedReceptorOutcome : HumanAcousticEvidenceRoot
+
+cochlearPerceptionNotClinicalDataCentreCase :
+  originalHumanInfrasoundCochlearSensationLab ≡
+    actualDataCentreMatchedReceptorOutcome → ⊥
+cochlearPerceptionNotClinicalDataCentreCase ()
 
 shortLabIsNotDataCentreReceptor :
   originalShortLabRandomizedAffectCortisol ≡
