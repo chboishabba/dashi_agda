@@ -883,3 +883,21 @@ A further evidence boundary: the original Wood Mackenzie source in Appendix 1 sp
 **Formal integration:** the same existing climate genealogy owner now adds RC-13 through RC-15, connecting the actual authored report, AEP client statistic, ACTU replacement mismatch, and ADL differing market-contract assumptions. A third canonical nonfactorability witness prevents bare rate → assumed spot-volume inference, with a matching existing regression consumer. The ledger now contains **45 purposively selected dated appearances across 18 proposition families**, distinct from the historical 41-edge actor ledger and contemporary 54-edge graph. No claims about nationwide concentration follow from these selected counts.
 
 **Remaining actual Pareto wall:** authenticated cash-flow spreadsheets for the Wood Mackenzie representative project and ADL revenue time-path; controlled additive-vs-replacement PRRT runs on a same-object project with aligned export fraction, pricing, tax deductibility and spot assumptions; independently established realised fiscal/royalty records and levy responses; dated evidence that an identifiable political speaker received or followed a specific commissioned message. There is no proof of a coordinated single actor merely because these original documents feature similar 25% numbers.
+
+
+### 27 October source check: Government reservation proposal moved from a production share to an export-volume denominator
+
+The direct public-policy originals establish another **version and denominator change**, separate from any consultant tax model:
+
+| Date and original author | Text and intended timing | Evidence status |
+| --- | --- | --- |
+| **22 Dec 2025**, Bowen/King/Ayres joint release (G20) | Consultation proposal reserved **15–25% of production** | Originally announced design, not final law |
+| **7 May 2026**, same three ministers ([original](https://minister.dcceew.gov.au/bowen/media-releases/joint-media-release-albanese-government-secure-australian-gas-australian-users)) (G38) | Announced supply equivalent to **20% of LNG export volumes**, “from 1 July 2027”; prior contracts protected | Future tense policy announcement |
+| **10 Sep 2026**, same ministers ([exposure-draft original](https://minister.dcceew.gov.au/bowen/media-releases/joint-media-release-securing-more-affordable-gas-australians)) (G39) | “Up to 20% of gas exports”, licence process **1 Jan 2027**, **DSO 1 Jan 2028** | Exposure draft for consultation, not certified enacted |
+| **29 Sep 2026**, official DCCEEW page ([current primary status](https://www.dcceew.gov.au/energy/markets/gas-markets/gas-market-review-reforms)) (G40) | DSO equalling **20% of annual LNG export volumes**, regulator may calibrate it downward; framework **1 July 2027**, obligations expected **1 Jan 2028** | Government status as last updated 29 Sep; legislation to be introduced, not established passed |
+
+This helps explain an apparent contradiction: a scheme/framework may commence **July 2027**, while actual company supply obligations are planned for **January 2028**. The May statement had described an earlier intended start; no claim is made about why it changed or who induced the change. A percentage of *production* is not necessarily the same volume as a percentage of *exports*. A volume reservation is not the 25% ad valorem export **revenue levy** examined by ADL/Wood Mackenzie, even if later debate uses words like “gas levy” for a compliance charge.
+
+RC-16/RC-17 and three official SourceReceipts were added within the same Agda climate-genealogy owner, and checked via the existing regression owner; no additional generic ontology. The existing claim CSV now has **48 dated appearance records / 19 proposition families**. As before, these are purposively selected documents, not a representative sample of rhetoric, and future announced commencement is **not** verified enactment or delivery.
+
+**Remaining discriminator:** actual final enacted legislation and commencement instruments, if any; per-exporter designated export-volume measurement, exemptions and compliance; direct records about drafts/consultations if claiming influence on the change. Announced lower prices and quantities do not prove realised market outcomes.
