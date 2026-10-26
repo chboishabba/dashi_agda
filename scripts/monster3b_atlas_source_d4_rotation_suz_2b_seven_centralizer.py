@@ -24,7 +24,8 @@ from monster3b_atlas_source_word_order_d4_gate import (
     ident,neg,mm,power,parse_meataxe,
 )
 
-G_WORD="DcDCDcdC"\nALT_G_WORD="CDCdCdCd" # = C*D*(C*d)^3, also exact length-eight
+G_WORD="DcDCDcdC"
+ALT_G_WORD="CDCdCdCd" # = C*D*(C*d)^3, also exact length-eight
 ATLAS_SUZ_CENTRALIZERS={"2A":3317760,"2B":161280}
 
 def audit(root):
@@ -84,7 +85,11 @@ def audit(root):
       "source_matrix_SHA256_manifest_verified":src["source_SHA256_manifest_matched"],
       "source_rotation_word":src["actual_source_rotation_word_SLP"],
       "source_rotation_square_is_negative_identity":True,
-      "inner_Suzuki_source_word_g":G_WORD,\n      "alternate_length8_source_word_g":ALT_G_WORD,\n      "alternate_order7_centralizer_witness_verified":True,\n      "shorter_4372_reduced_words_independently_searched_this_turn":True,\n      "minimality_claim_scope":"Bray-order7 source word recipe only; independent local audit, not kernel",
+      "inner_Suzuki_source_word_g":G_WORD,
+      "alternate_length8_source_word_g":ALT_G_WORD,
+      "alternate_order7_centralizer_witness_verified":True,
+      "shorter_4372_reduced_words_independently_searched_this_turn":True,
+      "minimality_claim_scope":"Bray-order7 source word recipe only; independent local audit, not kernel",
       "g_outer_coset_parity":0,
       "conjugate_product_u_definition":"r*(g^-1*r*g)",
       "u_thirteenth_power_is_negative_identity":True,
