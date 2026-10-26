@@ -91,6 +91,28 @@ edoIntake = Source.mkNoDOISource
   "Environmental law advice application requires urgency stated; assesses intake/conflicts and availability, does not promise to represent applicant or file. Separate from court registry procedural access."
   Source.publicAttribution
 
+qutLegalAcademicsMarch2026 : Source.AttributedSource
+qutLegalAcademicsMarch2026 = Source.mkNoDOISource
+  "Monica Taylor; Rowena Maguire; Bridget Lewis (QUT School of Law legal academics)"
+  "Letter to Environment Minister re EPBC 2019/8575 — 12 March 2026"
+  "Four-page signed original submission publicly hosted by Save Woogaroo Forest"
+  "12 March 2026"
+  "https://img1.wsimg.com/blobby/go/c204ebbc-02bb-46d9-ad71-ed7d494e752a/QUT%20LTR%20EPBC%20referral%20Woogaroo%20-%2012032026.pdf"
+  Source.practitionerSource
+  "Original signed author letter inspected PDF pages 1 and 4 (zero indices 0 and 3): specifically argues koala habitat, cumulative local population effects, mature canopy and offset irreversibility, and requests refusal of 2019/8575. Named academic authors retain claims; a copy addressed/CCd to named recipients does NOT establish proof of email receipt, s95B inclusion, Secretary reading, QUT institutional adoption beyond signatories, or any other individual's s487 activity series."
+  Source.publicAttribution
+
+woogarooCampaignCurrent : Source.AttributedSource
+woogarooCampaignCurrent = Source.mkNoDOISource
+  "Save Woogaroo Forest campaign"
+  "One development approved, another approval looming — take action"
+  "Original public campaign advocacy page (undated webpage, accessed October 2026)"
+  "October 2026 access, publication date open"
+  "https://savewoogarooforest.com.au/action"
+  Source.practitionerSource
+  "Campaign identifies Stockland/Cherish EPBC 2019/8575 approved and separate Springfield City Group Scenic Precinct EPBC 2020/8651 pending, and invites public funding/contact. Proves claims published by the campaign, not its incorporation/constitution, dated s487 activity series, particular 2019/8575 decision legality, an already filed lawsuit or public funding distribution."
+  Source.publicAttribution
+
 data StandingApplicant : Set where
   conservationIndividual : StandingApplicant
   conservationOrganisation : StandingApplicant
@@ -183,11 +205,26 @@ undertakingRisk = litigation-gate courtRule701ProspectiveEmergency courtUndertak
   "Counsel advice on delay-cost evidence, undertaking ability, adverse costs and any possible exception; no universal public-interest waiver."
   false refl
 
+qutLetterEvidenceLead : LitigationGate
+qutLetterEvidenceLead = litigation-gate adjrSection5Review qutLegalAcademicsMarch2026
+  caseSpecificProofOpen
+  "Three specifically named QUT legal academics signed a 12 March 2026 objection about EPBC 2019/8575; dated original environmental advocacy expression and specific ecology assertions."
+  "Obtain any relevant authors' own further 2024-2026 environmental activities and consent to potential witness role; locate original sending/receipt/transmission before alleging Minister considered or omitted the letter."
+  false refl
+
+campaignActivityLead : LitigationGate
+campaignActivityLead = litigation-gate adjrSection5Review woogarooCampaignCurrent
+  caseSpecificProofOpen
+  "Save Woogaroo Forest first-party webpage states live advocacy and a funding appeal relating to two DISTINCT EPBC actions 2019/8575 and 2020/8651."
+  "Original dated two-year campaign organisational activity, 15 Oct constitution/purposes, actual committee resolution and applicant representation; a website heading does not prove s487 standing or that a Federal Court case was commenced."
+  false refl
+
 triageGates : List LitigationGate
 triageGates =
   individualStanding ∷ organisationStanding ∷ independentAffectedInterest ∷
   section39BAlternative ∷ furnishingClock ∷ stayAfterFiling ∷
-  epbcContravention ∷ beforeOriginating ∷ undertakingRisk ∷ []
+  epbcContravention ∷ beforeOriginating ∷ undertakingRisk ∷
+  qutLetterEvidenceLead ∷ campaignActivityLead ∷ []
 
 -- Existing source and case consumers are genuinely reused. Nothing in their
 -- existence turns a candidate applicant into a qualified litigant.
@@ -214,6 +251,8 @@ data InterlocutoryReliefGuaranteesCostIndemnityWaiver : Set where
 data PoliticalLobbyingAloneEstablishesReviewGround : Set where
 data CourtRegistryCanGiveIndividualLegalAdvice : Set where
 data ThisSourceWrittenOwnerIsCourtFinding : Set where
+data OriginalSubmissionAddressedToMinisterProvesSection95BReceipt : Set where
+data CampaignFundingAppealEqualsFiledCourtProceeding : Set where
 
 identityNotStanding : ConservationIdentityAloneProvesSection487 → ⊥
 identityNotStanding ()
@@ -246,3 +285,11 @@ registryNotLegalCounsel ()
 
 sourceCodeNotCourtFinding : ThisSourceWrittenOwnerIsCourtFinding → ⊥
 sourceCodeNotCourtFinding ()
+
+addressedLetterNotProvenReceipt :
+  OriginalSubmissionAddressedToMinisterProvesSection95BReceipt → ⊥
+addressedLetterNotProvenReceipt ()
+
+campaignAppealNotLitigation :
+  CampaignFundingAppealEqualsFiledCourtProceeding → ⊥
+campaignAppealNotLitigation ()
