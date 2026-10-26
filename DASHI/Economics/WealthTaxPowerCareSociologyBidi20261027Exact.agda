@@ -7,6 +7,7 @@ module DASHI.Economics.WealthTaxPowerCareSociologyBidi20261027Exact where
 -- Synthetic worlds below are not observations of firms, citizens, governments
 -- or taxation.  No economic causal identification is inferred.
 
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
