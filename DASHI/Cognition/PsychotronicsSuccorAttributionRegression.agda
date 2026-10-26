@@ -629,6 +629,47 @@ saikiaSITopicListingDoesNotProveSixtyPercent :
   Atlas.citationCreatesTruth Atlas.saikia2019ACSOriginalSITopicListing ≡ false
 saikiaSITopicListingDoesNotProveSixtyPercent = refl
 
+------------------------------------------------------------------------
+-- ACS SAiKIA ORIGINAL 2019 SI LISTING: AN IDENTIFIABILITY COUNTERMODEL
+--
+-- The publisher's original SI catalogue mentions a magnetic-field topic.
+-- This finite *hypothetical* pair demonstrates nonidentification of a
+-- **specific** matched Rodin/Helmholtz ~60%-comparator *from that listing*.
+-- Neither model alleges what the actual unread PDF contains. Original
+-- experimental credit remains Saikia et al. and Ramirez-Galindo et al.
+------------------------------------------------------------------------
+
+data PossibleSaikiaSIBody : Set where
+  magneticSecondaryAggregationOnly : PossibleSaikiaSIBody
+  magneticSecondaryAggregationWithMatchedCoils : PossibleSaikiaSIBody
+
+siPublisherMFListing : PossibleSaikiaSIBody → Bool
+siPublisherMFListing magneticSecondaryAggregationOnly = true
+siPublisherMFListing magneticSecondaryAggregationWithMatchedCoils = true
+
+siBodyHasNamedMatchedCoil60Percent : PossibleSaikiaSIBody → Bool
+siBodyHasNamedMatchedCoil60Percent magneticSecondaryAggregationOnly = false
+siBodyHasNamedMatchedCoil60Percent magneticSecondaryAggregationWithMatchedCoils = true
+
+siSameListing : siPublisherMFListing magneticSecondaryAggregationOnly ≡
+                siPublisherMFListing magneticSecondaryAggregationWithMatchedCoils
+siSameListing = refl
+
+siDifferentPotentialComparatorResult :
+  siBodyHasNamedMatchedCoil60Percent magneticSecondaryAggregationOnly ≡
+  siBodyHasNamedMatchedCoil60Percent magneticSecondaryAggregationWithMatchedCoils → ⊥
+siDifferentPotentialComparatorResult ()
+
+siListingDoesNotFactorSpecificComparator :
+  (decoder : Bool → Bool) →
+  (∀ w → decoder (siPublisherMFListing w) ≡
+          siBodyHasNamedMatchedCoil60Percent w) →
+  ⊥
+siListingDoesNotFactorSpecificComparator decoder claimed
+  with trans (sym (claimed magneticSecondaryAggregationOnly))
+             (claimed magneticSecondaryAggregationWithMatchedCoils)
+... | ()
+
 ramirezRef24ComparisonNotProvenByCitation :
   Atlas.historicalTransmissionProved Atlas.ramirezRef24NotValidatedCoilComparison ≡ false
 ramirezRef24ComparisonNotProvenByCitation = refl
