@@ -60,3 +60,22 @@ print('PASS projective 13-axis spatial graph: 24 edges, only 5 preserved; degree
 print('PASS one projective 13-cycle cannot preserve mixed degrees or 24 edges')
 print('PASS connected Z2 antipodal cover: cycle ranks 12 -> 23 = 2*12-1')
 print('NOT an Albert/Jordan/Monster/physical operator equality')
+
+
+# Actual four-edge spatial projective quotient voltage acceptance.
+# Existing native Agda #1249 source theorem now proves each XOR parity
+# is entailed by the TRUE typed P3^3 edge, not an abstract Bool flag.
+# General covering attribution: Gross 1974; Gross--Tucker 1977.
+representatives={'X':(1,0,0),'PP':(1,1,0),'Y':(0,1,0),'PM':(1,2,0)}
+cycle4=[('X','PP',0),('PP','Y',0),('Y','PM',1),('PM','X',0)]
+def oriented(v,bit):return neg(v) if bit else v
+for start,end,required in cycle4:
+ for sa in (0,1):
+  for sb in (0,1):
+   assert edge(oriented(representatives[start],sa),
+               oriented(representatives[end],sb)) == ((sa^sb)==required)
+assert not any(all(edge(oriented(representatives[x],bits[i]),
+                            oriented(representatives[y],bits[(i+1)%4]))
+                   for i,(x,y,_) in enumerate(cycle4))
+               for bits in product((0,1),repeat=4))
+print('PASS all 16 ACTUAL native adjacency→XOR equations, no graph-compatible sign section')
