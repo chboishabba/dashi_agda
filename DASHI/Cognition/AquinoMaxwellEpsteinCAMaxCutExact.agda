@@ -28,6 +28,7 @@ import DASHI.Cognition.EpsteinBlackAgreementInvoiceWorkJoin20261015Exact as Blac
 import DASHI.Cognition.EpsteinBlackInvoiceWireSettlement20261015Exact as BlackWire
 import DASHI.Cognition.EpsteinBlackApolloSameObjectReceiptRound20261014Exact as BlackApollo
 import DASHI.Cognition.EpsteinBankingInfrastructureAcquisitionExact as Banking
+import DASHI.Cognition.AustraliaPoliticalEconomySameObjectCrosswalk20261026Exact as Auspol
 import DASHI.Cognition.EpsteinBlackPaymentScopeReconciliation20261014Exact as BlackScope
 
 ------------------------------------------------------------------------
@@ -2509,3 +2510,38 @@ bankingNameOnlyCaseDecoderNoGo = Banking.nameOnlyFederalCaseIdentityImpossible
 bankingAgencyCaseKeyRestoresFiniteConsumer :
   NonFactor.FactorsThrough Banking.originalFederalCaseKey Banking.caseIsDEA
 bankingAgencyCaseKeyRestoresFiniteConsumer = Banking.originalCaseKeyConsumerFactors
+
+
+------------------------------------------------------------------------
+-- AUSPOL EXPANSION: THIN CASE CONSUMER, NO IMPORT OF #1251 SIBLING.
+-- Source: existing Rinehart/Hanson/QLD/Palmer/Mandelson/Australia owners,
+-- official indexed Senate disclosure and published NSWSC document.
+------------------------------------------------------------------------
+
+canonicalAuspolSameObjectOwner : Auspol.AustralianPowerPipelineFrontier
+canonicalAuspolSameObjectOwner = Auspol.canonicalAustralianPowerPipelineFrontier
+
+auspolMaterialSupportActuallyPaidAtReportedScope :
+  Auspol.materialSupportAndFirstPersonPolicyAdvicePresent
+    canonicalAuspolSameObjectOwner ≡ true
+auspolMaterialSupportActuallyPaidAtReportedScope = refl
+
+auspolSpecificIPAEditorialOrderNotPaid :
+  Auspol.specificIPAContentBoughtByCourtReportedPayments
+    canonicalAuspolSameObjectOwner ≡ false
+auspolSpecificIPAEditorialOrderNotPaid = refl
+
+auspolRinehartEpsteinDirectEdgeNotPaid :
+  Auspol.directRinehartEpsteinRelationProven
+    canonicalAuspolSameObjectOwner ≡ false
+auspolRinehartEpsteinDirectEdgeNotPaid = refl
+
+auspolKoganUKUSScoresNotAssumedAustralianDeployment :
+  Auspol.AustralianCampaignUsedKoganRiponScoresProven
+    canonicalAuspolSameObjectOwner ≡ false
+auspolKoganUKUSScoresNotAssumedAustralianDeployment = refl
+
+auspolNoCommonGlobalCommand :
+  Auspol.wholeAustraliaUSCovertCommandProven
+    canonicalAuspolSameObjectOwner ≡ false
+auspolNoCommonGlobalCommand = refl
