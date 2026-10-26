@@ -123,10 +123,10 @@ exemptionAuditPriority = legal-priority-coordinate
   consumerPaymentOpen
   "exact Queensland planning/koala exemption and Springfield Structure Plan area development plan prerequisites applicable to Springview and related components; 2018 QCA 266 Cherish 2016 application is a source-specific prior judgment"
   "Council material records mapped koala habitat with approved/exempted development outcome; [2018] QCA 266 judgment reprint says a Council-approved area development plan was necessary before assessment/approval of Cherish March 2016 Springview application"
-  "current signed operative area development plan, amendment history, parcel mapping and approved 2016 application continuity into current 2019/8575 footprint; exact habitat exemption instrument/time/variation coverage"
+  "Council indexed approvals already located: 6243/2023/LAP precinct 21 March 2024, 4272/2020/ADP Village 2 28 June 2024, 5547/2020/ADP Village 3 14 May 2025; obtain actual signed notices/reasons/SARA conditions/plans and parcel mapping; relate 2016 litigated application without asserting identity; original habitat exemption authority remains open"
   "2018 appeal upheld an area development plan precondition for the specific 2016 application; it neither abolished all Springfield control nor proves a missing condition in current approvals or federal EPBC invalidity"
   "a 2018 Queensland planning judgment, historic mapped habitat or a campaign land-banking allegation cannot by itself decide the legality of the 2026 Commonwealth approval"
-  "acquire QCA 266 official judgment face and actual 2016 area development plan/2017-2026 subsequent approvals and lot identifiers; join each legal instrument to the present Springview footprint and separately recover koala-exemption authority"
+  "do not look for absent ADPs: read Council 2024 Village 2 and 2025 Village 3 existing signed approval documents, conditions, SARA and plan drawings from indexed records; reconcile 2018 QCA 266 with updated plans/lot identifiers, tree clearance works 9281/2024/OW and EPBC 2019/8575 scope"
 
 enforcementPriority : LegalPriorityCoordinate
 enforcementPriority = legal-priority-coordinate
