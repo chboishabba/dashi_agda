@@ -91,6 +91,50 @@ def exact_patent_identity(lookup: dict[str, dict[str, str]], direct: dict[str, d
     }
 
 
+
+TAU_SOURCE = "P1-84"
+TAU_DOI = "10.1039/C8RA09993F"
+
+def tau_2019_source_distinction(lookup: dict[str, dict[str, str]],
+                                direct: dict[str, dict[str, str]]) -> dict:
+    """Exact original tau paper DOI/author/endpoint and directional links.
+
+    RSC article and PMC9060620 are two carriers of ONE published study.
+    No experiment in this consumer can be transmuted into a Rodin magnetic
+    comparison, an Alzheimer's treatment result, or a second Saikia assay.
+    """
+    if TAU_SOURCE not in lookup:
+        raise ValueError("missing original tau publication P1-84")
+    article = lookup[TAU_SOURCE]
+    if "2019" not in article["date_or_period"] or TAU_DOI.casefold() not in (
+        article["original_work"] + " " + article["locator"]).casefold():
+        raise ValueError("wrong original RSC tau DOI/date")
+    if "VQIVYK" not in article["claim_scope"] or "VQIINK" not in article["claim_scope"]:
+        raise ValueError("original tau peptide endpoints lost")
+    if not all(z in article["claim_scope"] for z in ("150", "300", "ThT")):
+        raise ValueError("original tau EF exposure/readout missing")
+    if not all(z in article["not_established"] for z in ("Rodin", "Helmholtz")):
+        raise ValueError("tau paper promoted to other instrument")
+    authors = {inventor_name_core(n) for n in article["authorial_root"].split(";")}
+    original_2017 = {inventor_name_core(n) for n in lookup["P1-78"]["authorial_root"].split(";")}
+    original_acs = {inventor_name_core(n) for n in lookup["P1-40"]["authorial_root"].split(";")}
+    if len(authors) != 5 or len(authors & original_2017) != 3 or len(authors & original_acs) != 4:
+        raise ValueError("original RSC/2017/ACS named authors misjoined")
+    for edge_id, target_id in (("E131", "P1-78"), ("E132", "P1-40"), ("E133", "P1-37")):
+        edge = direct.get(edge_id)
+        if edge is None or (edge["source_id"], edge["target_id"]) != (TAU_SOURCE, target_id):
+            raise ValueError("original tau directed lineage edge misjoined")
+    return {
+        "original_tau_DOI": TAU_DOI,
+        "separate_original_experiment": True,
+        "same_original_2019_article_RSC_and_PMC_carrier": True,
+        "credited_researchers_overlapping_2017": 3,
+        "credited_researchers_overlapping_2019_ACS": 4,
+        "human_clinical_efficacy_established": False,
+        "Rodin_Helmholtz_60percent_comparison_established": False,
+        "ACS_full_main_text_inspected": False,
+    }
+
 def rows(path: Path) -> list[dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as f:
         return list(csv.DictReader(f))
@@ -134,12 +178,14 @@ def audit(sources: list[dict[str, str]], edges: list[dict[str, str]]) -> dict:
     if "15" not in lookup["P1-40"]["claim_scope"]:
         raise ValueError("lost original 2019 EF endpoint")
     patent = exact_patent_identity(lookup, direct)
+    tau = tau_2019_source_distinction(lookup, direct)
     return {
+        "separate_original_2019_RSC_tau_study": tau,
         "WIPO_original_patent_and_2019_ACS_disclosure": patent,
-        "original_source_roles": sorted(PAPERS) + [PATENT_SOURCE],
+        "original_source_roles": sorted(PAPERS) + [PATENT_SOURCE, TAU_SOURCE],
         "shared_2017_2019_named_authors": sorted(same),
         "shared_author_count": len(same),
-        "distinct_original_articles": 3,
+        "distinct_original_articles": 4,
         "2017_2019_independent_research_groups_proven": False,
         "2017_FF_experiment_is_2024_Rodin_coil": False,
         "2017_0_6T_is_2024_1_2mT": False,
@@ -157,7 +203,8 @@ def self_test() -> dict:
     cases = 0
     for kind in ("source_id", "year", "author_overlap", "edge_target", "missing",
                  "patent_number", "patent_disclosure", "patent_inventor",
-                 "patent_hardware", "patent_edge", "missing_patent"):
+                 "patent_hardware", "patent_edge", "missing_patent",
+                 "tau_DOI", "tau_authors", "tau_coil_promotion", "tau_edge"):
         ss, ee = deepcopy(s), deepcopy(e)
         if kind == "source_id":
             next(r for r in ss if r["id"] == "P1-78")["id"] = "P1-40"
@@ -179,17 +226,27 @@ def self_test() -> dict:
             next(r for r in ss if r["id"] == "P1-80")["claim_scope"] = "unrelated apparatus"
         elif kind == "patent_edge":
             next(r for r in ee if r["edge"] == "E125")["target_id"] = "P1-37"
-        else:
+        elif kind == "missing_patent":
             ss = [r for r in ss if r["id"] != "P1-80"]
+        elif kind == "tau_DOI":
+            next(r for r in ss if r["id"] == "P1-84")["original_work"] = "unrelated 2019 study"
+            next(r for r in ss if r["id"] == "P1-84")["locator"] = "https://doi.org/10.0000/wrong"
+        elif kind == "tau_authors":
+            next(r for r in ss if r["id"] == "P1-84")["authorial_root"] = "Unrelated author"
+        elif kind == "tau_coil_promotion":
+            next(r for r in ss if r["id"] == "P1-84")["not_established"] = "Clinical Rodin benefit proven"
+        else:
+            next(r for r in ee if r["edge"] == "E133")["target_id"] = "P1-40"
         try:
             audit(ss, ee)
         except ValueError:
             cases += 1
         else:
             raise AssertionError(f"source provenance mutation not rejected: {kind}")
-    assert cases == 11
+    assert cases == 15
     return {"source_adversarial_regressions_passed": cases,
             "patent_COI_and_original_claims_bounded": True,
+            "2019_RSC_tau_remains_distinct_from_ACS_Amyloid_and_2024_Rodin": True,
             "no_Rodin_60percent_promotion": True,
             "original_2019_main_text_still_unpaid": True}
 
