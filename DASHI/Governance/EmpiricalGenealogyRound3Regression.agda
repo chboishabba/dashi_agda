@@ -762,9 +762,9 @@ global1975MediaArticleIsNotContemporaryScienceCensus :
 global1975MediaArticleIsNotContemporaryScienceCensus =
   Climate.oneCoolingMagazineArticleCannotDetermineScientificConsensus
 
-globalAcademicRepudiationNotSecretFundingTransfer :
+globalGwynneAuthorCorrectionNotSecretFundingTransfer :
   Typed.StrongHistoricalTransfer Climate.globalGwynne1975To2014AuthorCorrection → ⊥
-globalAcademicRepudiationNotSecretFundingTransfer =
+globalGwynneAuthorCorrectionNotSecretFundingTransfer =
   Climate.globalGwynneCorrectionIsNotScriptTransmission
 
 globalAcademyNegativeProvenanceOriginal :
