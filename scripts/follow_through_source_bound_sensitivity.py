@@ -55,15 +55,18 @@ def analyze(rows):
         for r,e,w in vals:
             by_model[r["model"]][(r["site"],r["cohort"])] = (e,w)
         common = set.intersection(*(set(x) for x in by_model.values()))
+        cells_by_model = {m: len(cells) for m, cells in by_model.items()}
         union = set.union(*(set(x) for x in by_model.values()))
         if not common or len(by_model) < 2:
             output.append(dict(domain=domain,instrument=instrument,
-                specification=spec,status="incomparable",reason="no common sites/cohorts or models"))
+                specification=spec,status="incomparable",cell_counts=cells_by_model,
+                reason="no common sites/cohorts or models"))
             continue
         if common != union:
             output.append(dict(domain=domain, instrument=instrument,
                 specification=spec, status="incomplete-coverage",
                 matched_sites=len(common), all_sites=len(union),
+                cell_counts=cells_by_model,
                 omitted_sites=sorted([list(k) for k in (union - common)]),
                 reason="Model-by-site/cohort cells missing: do not silently intersect"))
             continue
@@ -84,6 +87,7 @@ def analyze(rows):
         output.append(dict(domain=domain,instrument=instrument,
             specification=spec,status="descriptive-only",
             matched_sites=len(common),matched_models=len(by_model),
+            cell_counts=cells_by_model,
             tied_leaders=leaders,
             ranking=[dict(model=m,mean=str(means[m])) for m in ordered],
             warning="Identical weights and site/cohort labels do not establish exchangeability or randomisation. No confidence intervals, covariate adjustment or attrition corrections supplied"))
