@@ -1,5 +1,8 @@
 # DMT original-source TET presence-onset / Ibrahim–Pareto reset (26 October 2026)
 
+> **2026-10-26 original-source revision:** D'Amelio et al. **posted the bioRxiv preprint on 4 May 2026**, DOI `10.64898/2026.04.30.721872`. The repo README's “in preparation” label is stale relative to this primary preprint; do not describe this work as publication-absent or peer-reviewed. The preprint explicitly identifies EEG acquisition as simultaneously recorded in the study whose EEG analysis was reported by **Lewis-Healey et al. (2026)**; that is a **shared acquisition lineage**, not an independent replication. Exact participant ID mapping remains open, but independence is **not** a neutral unknown any more. Original reported sample denominators: **19 participants** in study, **18 with TET**, and **7 with complete ECG/EDA/respiration for multimodal analysis**. Keep modality/subsample selection in downstream inference; the source's 4-second TET ratings are reconstructed retrospectively. The associated TET heldout synthetic consumer and precise 16/16 validation receipt are in `DMT2026TETHeldoutM1aProxyIbrahim20261026.md`.
+
+
 ## Source-owned objects, authorship and authority
 
 **Original authors:** Tomás Ariel D'Amelio, Tomás Gil Garbagnoli, Jerónimo Rodríguez Cuello, Evan Lewis-Healey, Carla Pallavicini, Federico Cavanna, Nicolás Marcelo Bruno, Laura Alethia De La Fuente, Stephanie Müller, Débora Copa, Tristan Bekinschtein, Diego Vidaurre and Enzo Tagliazucchi. Original manuscript *Multimodal autonomic arousal tracks dose-dependent affective dynamics during the acute effects of DMT* is described by its authors as **in preparation (2026)**, not independently treated as a peer-reviewed publication.
