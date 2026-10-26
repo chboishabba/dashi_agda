@@ -169,18 +169,93 @@ local checks, kernel proofs and external-world physical
 identification are separate promotion stages. Do not
 infer material proof merely from imported theorem names.
 
-## Next Pareto proof-search order
-1. Compiler-check current finite proof terms and repair any
-   source API / integer equality errors without treating CI
-   as gate.
-2. Close X* ↔ punctured sheet sum as a dependent equivalence.
-3. Reuse native antipode to build all 13 quotient classes with
-   residual and formal B3 action, then restrict to four NV axes.
-4. Instantiate real pants seams + XOR cycle compatibility on
-   the *same* 27-site incidence graph.
-5. Lift concrete Seitz and Bloch actions to 369-decorated
-   diamond/tetragonal crystals; only then add empirical tests.
+## Updated Pareto cut (2026-10-26, web and latest PR refresh)
 
-This plan intentionally avoids changing donor PRs without
-their owners' review. Cross-repo/PR integrations are
-conditional where those branches are unmerged.
+The earlier list in this roadmap has been superseded by substantial
+new PR #1261 construction and native donor PR #1249. Do not
+rebuild the 13-axis orientation quotient: #1249 owns its actual
+same-carrier 26 ↔ 13×Bool chart, antipodal graph and holonomy.
+
+### P1: Concrete primitive tetragonal (4/mmm; P4/mmm No.123)
+- 16 D4h normal forms, integer direct/reciprocal Z³ Fourier modes,
+  weighted tetragonal pairing, Seitz integer translations and
+  atomic 369 species-labelled consumer are source-implemented.
+- Independent exact group/metric/Seitz finite diagnostics passed.
+- Source-level Agda proofs need genuine compiler elaboration.
+  CI is not a gate; kernel proof status is one.
+
+### P2: Diamond-cubic Fd-3m (No.227)
+- New #1261 native modules construct FCC primitive lattice,
+  its two displaced diamond sublattices, nontrivial glide square,
+  native 369 species-labelled nitrogen-vacancy bond and local C3v.
+- Independent exact computations validate 48 signed cubic matrices,
+  all 192 affine representatives, their 36,864 products, eight
+  occupied conventional-cell sites, 24-versus-6 stabilisers.
+- New fcc/bcc forward integer winding proof, plus an exact
+  64-residue **bidirectional** fcc reciprocal/parity criterion;
+  the unrestricted Z-integer converse is not yet an Agda theorem.
+- New Gaussian-integer eight-atom structure-factor model:
+  exact factorisation and 64 intensity proof cases: 52 zero,
+  8 relative intensity 32, 4 intensity 64. All are reciprocal
+  index residue classes, not measured peak intensities.
+- Explicit distinction: 222 is permitted by F centring but
+  cancels for the ideal equal-atom diamond motif; uniform A/B
+  scattering contrast restores its intensity and breaks the
+  sublattice-exchanging glide. An isolated NV centre cannot be
+  modelled by uniform removal of the B sublattice.
+- Next: full Agda 48/192 group-operation quotient and Wyckoff
+  multiplicity, independent IUCr table settings/origin crosswalk,
+  reciprocal lattice units and actual nuclear/spin Hamiltonians.
+
+### P3: Physical NV and multicore spectroscopy
+- Agda PR #1262 establishes non-invariance of cyclic spin-one
+  Sz² label permutation: spatial [111] C3v is not a basis-level
+  spin/qutrit C3 identity.
+- PR #1269 now owns SI-dimensional calibration, same-device
+  electron/nuclear register bridges, readout and finite photon
+  inference. Reuse; do not duplicate or invent calibration.
+- PR #1270 and primary original paper arXiv:2609.13022v2
+  (Gemsheim et al., revised 2026-09-18) provide the separate
+  paper-specific nuclear-spin register and ambient Grover
+  experimental evidence. Manufacturer core-count claims are not
+  evidence of one coherent full-width quantum register.
+- Next same-object obligation: explicit defect-site → calibrated
+  spin/orbital Hamiltonian → pulse/channel → optical response →
+  SI quantities → photon statistics; include source-native
+  actual device IDs, parameter uncertainties and negative tests.
+- Diffraction source here is a geometric observable; it does
+  not measure room-temperature qubit gate fidelity.
+
+### P4: General crystalline classification and experiments
+- Catalogue labels for seven systems / 14 Bravais / 32 point
+  groups exist; actual 230 space-group operation tables,
+  settings, origin choices and Wyckoff actions are not proved.
+- Discriminators: correct diffraction absences, reciprocal
+  phase, site/bond little-group, magnetic/strain splitting,
+  ODMR frequencies, photons and SI-calibrated errors.
+- T4/T9/T18, signed-zero, punctured-nine/punctured-27,
+  hyperfabric pants and XOR remain optional finite
+  cross-validation carriers, NOT the research centre.
+
+### Provenance and acceptance
+- Classical external roots: IUCr International Tables Vol A,
+  Fd-3m (227) and P4/mmm (123), IUCr Online Dictionary
+  *Reflection conditions* (general versus special/Wyckoff),
+  standard diamond two-site structure factors.
+  https://onlinelibrary.wiley.com/iucr/itc/A1b/ch2o3v0001/sgtable2o3o227/
+  https://dictionary.iucr.org/Reflection_conditions
+- Recent experimental authority: Gemsheim et al.,
+  *Grover Search with Semiconductor Spin Qubits at Ambient
+  Conditions*, arXiv:2609.13022v2.
+  https://arxiv.org/abs/2609.13022
+- Actual added work: native bridge/source Agda, Python exact
+  regression and roadmap. Never credit these formalisation
+  products to original experimental authors.
+- Verified finite Python arithmetic, source-written Agda,
+  Agda-kernel proof and measured external-world evidence
+  are distinct statuses. No CI dependency is imposed.
+
+Next maximal-value proof sequence: kernel-grade crystal
+lattice/structure-factor source audit → full 192 Agda Seitz
+action/Wyckoff provenance → ideal Bloch tight-binding
+operator and NV hyperfine/spin + SI photon calibration.
