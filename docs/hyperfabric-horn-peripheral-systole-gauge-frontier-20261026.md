@@ -363,3 +363,57 @@ Euclidean length or metric chart Lipschitz
 the real source and global bounded gauge.
 No cross-PR source ownership is reassigned
 and no kernel proof is claimed.
+
+
+## 2026-10-27: the Hopf-clasp counterexample invalidates a premature metric acceptance
+
+Reusing ORIGINAL horn owner #1244's two exact linked circle core
+formulae (not inventing a new clasp), we constructed explicit
+round transverse LOCAL MERIDIANS of radius 1/8 in the prototype.
+After the existing 1/8 affine source scaling they have
+Euclidean length pi/32<11/112, exact positive clearance from
+radius-1/32 thickened cores, and full C3 equivariance.
+An explicit 101-rational-parameter disjoint isotopy (with
+universal disk in/out inequalities) verifies the linked
+pair is a genuine Hopf link.
+
+**Decisive source mismatch:** Hopf link complement group is
+ℤ² (Friedl 2024 Lemma 3.13 as exposition), whereas original
+Hatcher Z local group is F2 with NONZERO annulus commutator.
+Thus even this excellent geometric metric comparator CANNOT
+pay the Hatcher marked child source. Its meridian
+commutator is trivial in ANY group representation.
+Our local exact SU3 positive control demonstrates that
+F2 DOES admit a nontrivial commutator, highlighting the
+missing nonabelian topological attachment.
+
+New exact geometric source:
+`scripts/check_horn_linked_clasp_metric_vs_hatcher_f2.py`
+and full original-source/author ledger
+`docs/hyperfabric-horn-hopf-metric-vs-hatcher-f2-ibrahim-maxcut-20261027.md`.
+Lean #84 source-written
+`HornHopfClaspVsHatcherF2NoGoCut.lean` rejects every
+abelian-source homomorphism for selected nontrivial W.
+Independent local Fraction/101 rational isotopy/SymPy
+checks PASS; exact pushed-byte script replay and
+Lean kernel remain unverified.
+
+**Correct Pareto order is source type BEFORE source metric.**
+The owner #1244 has now advanced further at live head
+`dbf91f813eff29a2f4a05b8fae447f2ff3f0a4ba`:
+`ThreeArmHatcherHomotopyTransport.lean` and
+`ThreeArmHatcherPathTransport.lean` use existing
+Hatcher-at and Mathlib homotopy equivalence plus
+real based path transports, without assuming the
+source basepoint equals the exterior global x0.
+These owner improvements still REQUIRE an actual
+relative wild satellite homotopy equivalence
+to its radius cover member. Neither group map
+nor the metric-Lipschitz source is present yet.
+Keep original #1244 ownership.
+
+User-directed implementation attribution: Johl Brown,
+OpenAI ChatGPT assistance. The original mathematical
+claims belong to Alexander, Hatcher, classical Hopf
+link source tradition; Friedl is the cited later
+expository theorem, not its originator.
