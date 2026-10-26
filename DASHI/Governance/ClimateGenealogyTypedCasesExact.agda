@@ -1513,3 +1513,244 @@ oiaTimingConflictDoesNotEstablishCausalScriptTransfer :
 oiaTimingConflictDoesNotEstablishCausalScriptTransfer w =
   Typed.headlineNumberRestatementIsNotHistoricalMethodTransfer
     (Typed.relationIsTransfer w)
+
+
+------------------------------------------------------------------------
+-- GLOBAL climate-contrarian CLAIM GENEALOGY (not Australian gas policy).
+-- Research question: ORIGINAL claim-producing people/commissioners, exact
+-- claim versions, demonstrated republishers and independently tested science.
+-- SOURCE-FIRST: "earliest original in this selected set" is NOT the
+-- first-ever historical origin of a proposition. Document roots differ
+-- from independent climate measurements; the source graph is not a
+-- worldwide random sample.
+--
+-- Original owners:
+-- Peter Gwynne, Newsweek 28 April 1975, "The Cooling World";
+-- Gwynne's own 22 May 2014 retrospective explicitly rejects modern usage.
+-- Peterson, Connolley & Fleck 2008, DOI 10.1175/2008BAMS2370.1:
+-- 1965-79 sample 7 cooling, 20 neutral, 44 warming papers (NOT all papers).
+-- WFA / Institute of Biospheric Research 1992 film original indexed by
+-- Climate Files; Sherwood Idso is a named original featured researcher.
+-- Same campaign's Greening Earth Society original sequel 1998 indexed;
+-- film/transcript publisher-original carrier remains to inspect directly.
+-- OISM Seitz covering letter/petition 1998: original issuer; the later
+-- 31,000+ signature website count is not a 1998 observation.
+-- NAS Council 20 Apr 1998: first-party explicit NON-AFFILIATION and
+-- 1998 enclosed manuscript NOT peer-reviewed journal/PNAS publication.
+-- 1999 Soon/Baliunas/Robinson et al. Energy & Environment paper is a
+-- DISTINCT later published journal version, not the 1998 Academy paper.
+-- CO2 Coalition first-party contemporary undated "plant food" page;
+-- thematic recurrence ≠ proven WFA→CO2 Coalition finance or script copy.
+-- Zhu et al 2016 greening, Terrer et al 2016/2019 nutrient limitations:
+-- original science supports CONTEXT-DEPENDENT photosynthesis response,
+-- NOT net globally beneficial effects of greenhouse-gas emissions.
+--
+-- Historical citations and roles:
+-- https://sealevel.info/newsweek_old.htm (archival original article)
+-- https://www.realclearscience.com/articles/2014/05/22/stop_citing_my_1975_global_cooling_article_108668.html
+-- https://doi.org/10.1175/2008BAMS2370.1
+-- https://www.climatefiles.com/trade-group/1992-western-fuels-greening-planet-earth/
+-- https://www.climatefiles.com/trade-group/1998-western-fuels-greening-planet-earth-continues/
+-- https://www.oism.org/pproject/pproject.htm
+-- https://www.nationalacademies.org/news/statement-of-the-council-of-the-nas-regarding-global-change-petition
+-- https://co2coalition.org/facts/co2-is-plant-food/
+-- https://doi.org/10.1038/nclimate3004
+-- https://doi.org/10.1126/science.aaf4610
+------------------------------------------------------------------------
+
+globalCoolingGwynneOriginal1975 : Typed.SourceReceipt
+globalCoolingGwynneOriginal1975 = Typed.sourceReceipt
+  "Peter Gwynne, Newsweek"
+  "The Cooling World"
+  "1975-04-28"
+  "https://sealevel.info/newsweek_old.htm"
+  "1975 Newsweek first-person authored story accessible as full attributed archival reproduction. Contemporaneous discussion of a cooling hypothesis is not a survey of consensus or a finding that today's long-term global trend is cooling."
+
+globalCoolingGwynneRetrospective2014 : Typed.SourceReceipt
+globalCoolingGwynneRetrospective2014 = Typed.sourceReceipt
+  "Peter Gwynne, Inside Science; RealClearScience attributed republication"
+  "Stop Citing My 1975 Global Cooling Article"
+  "2014-05-22"
+  "https://www.realclearscience.com/articles/2014/05/22/stop_citing_my_1975_global_cooling_article_108668.html"
+  "Author of 1975 original explicitly rejects its use to deny today's observed global warming. Retrospective written testimony by ORIGINAL author, reprinted on third-party site; not independent scientific review."
+
+globalCoolingPetersonReview2008 : Typed.SourceReceipt
+globalCoolingPetersonReview2008 = Typed.sourceReceipt
+  "Thomas C. Peterson; William M. Connolley; John Fleck"
+  "The Myth of the 1970s Global Cooling Scientific Consensus"
+  "2008-09-01"
+  "https://doi.org/10.1175/2008BAMS2370.1"
+  "Peer-reviewed period-literature sample: 7 cooling, 20 neutral, 44 warming papers among 71 1965-79 sampled papers. This challenges a supposed 1970s consensus; not a census of every historical climatologist or claim originator."
+
+globalGreeningWFAFilmIndex1992 : Typed.SourceReceipt
+globalGreeningWFAFilmIndex1992 = Typed.sourceReceipt
+  "Institute of Biospheric Research; Sherwood Idso; Western Fuels Association (reported funder)"
+  "The Greening of Planet Earth (1992 video original archived/indexed)"
+  "1992"
+  "https://www.climatefiles.com/trade-group/1992-western-fuels-greening-planet-earth/"
+  "Archival investigation identifies producer and industry funder of dated film, prominently featuring Sherwood Idso. Film full original audiovisual and actual disbursement accounting NOT rechecked; archive account is separate from financial transfer primary receipts."
+
+globalGreeningWFASequelIndex1998 : Typed.SourceReceipt
+globalGreeningWFASequelIndex1998 = Typed.sourceReceipt
+  "Western Fuels Association; Greening Earth Society"
+  "The Greening of Planet Earth Continues (1998 sequel film/transcript)"
+  "1998"
+  "https://www.climatefiles.com/trade-group/1998-western-fuels-greening-planet-earth-continues/"
+  "Archivist identifies explicit sequel and same institutional producer family. Not a new independent botanical trial and not evidence every narrated statement was scientifically correct."
+
+globalOISM1998PetitionPrimary : Typed.SourceReceipt
+globalOISM1998PetitionPrimary = Typed.sourceReceipt
+  "Arthur B. Robinson; Oregon Institute of Science and Medicine; Frederick Seitz"
+  "Global Warming Petition Project, original Seitz covering letter and enclosed review"
+  "1998; website updated subsequently"
+  "https://www.oism.org/pproject/pproject.htm"
+  "First-party petition issuer presents Kyoto opposition, claim of CO2 environmental benefits and Seitz letter. Current claim more than 31,000 signatories is website's later count, not demonstrably the 1998 total, not population probability sample or NAS endorsement."
+
+globalNAS1998PetitionDisavowal : Typed.SourceReceipt
+globalNAS1998PetitionDisavowal = Typed.sourceReceipt
+  "Council of the National Academy of Sciences, original institutional response"
+  "Statement of the Council of the NAS Regarding Global Change Petition"
+  "1998-04-20"
+  "https://www.nationalacademies.org/news/statement-of-the-council-of-the-nas-regarding-global-change-petition"
+  "NAS states petition unrelated to institution and mailed manuscript NOT then published in PNAS or any peer-reviewed journal; distinguishes former president Seitz's identity from endorsement. Does not refute existence of mailed petition or possible later journal publication."
+
+globalCO2CoalitionPlantFoodFirstParty : Typed.SourceReceipt
+globalCO2CoalitionPlantFoodFirstParty = Typed.sourceReceipt
+  "CO2 Coalition, institutional author"
+  "Fact 1: First and foremost CO2 is plant food"
+  "Undated live web page, accessed 2026-10-27"
+  "https://co2coalition.org/facts/co2-is-plant-food/"
+  "Present-day institution self-publishes plant-food slogan and benefit list. Carbon dioxide's role in photosynthesis is real; comprehensive net environmental harm/benefit is not established by plant response alone. Undated text is NOT dated original from founding in 2015."
+
+globalZhuOriginalGreening2016 : Typed.SourceReceipt
+globalZhuOriginalGreening2016 = Typed.sourceReceipt
+  "Zaichun Zhu; Shilong Piao; Ranga Myneni; et al."
+  "Greening of the Earth and its drivers"
+  "2016-04-25"
+  "https://www.globalcarbonproject.org/global/pdf/Zhu_2016_Greening%20of%20the%20Earth%20and%20its%20drivers.NatureCC.pdf"
+  "Original peer-reviewed satellite/model paper attributes approximately 70 percent of observed 1982-2009 greening trend to CO2 fertilization under models; not a global net-welfare experiment or greenhouse-gas no-harm proof."
+
+globalTerrerFertilisationLimit2016 : Typed.SourceReceipt
+globalTerrerFertilisationLimit2016 = Typed.sourceReceipt
+  "Cesar Terrer and coauthors"
+  "Mycorrhizal association as a primary control of the CO2 fertilization effect"
+  "2016"
+  "https://doi.org/10.1126/science.aaf4610"
+  "Original meta-analysis of plant experimental response reveals nutrient and mycorrhizal association conditioning, not zero fertilisation everywhere and not evidence emissions have no climatic effect."
+
+globalGwynne1975To2014AuthorCorrection : Typed.TypedGenealogyEdge
+globalGwynne1975To2014AuthorCorrection = Typed.typedGenealogyEdge
+  "GC-01" "Peter Gwynne 1975 Newsweek cooling story" "Peter Gwynne 2014 self-attributed correction"
+  Typed.authorRetrospectiveCorrection Typed.primary
+  (globalCoolingGwynneOriginal1975 ∷ globalCoolingGwynneRetrospective2014 ∷ [])
+  "Exact same identified author explicitly links his 2014 statement to his 1975 original and warns against treating it as modern temperature evidence. This is stronger than stylistic resemblance but not source-to-source climate physics or proof of 1970s consensus."
+
+globalWFAToGreeningEarthSequel : Typed.TypedGenealogyEdge
+globalWFAToGreeningEarthSequel = Typed.typedGenealogyEdge
+  "GC-02" "1992 Western Fuels-funded IBR film" "1998 Greening Earth Society explicitly named sequel"
+  Typed.organisationalContinuity Typed.corroborated
+  (globalGreeningWFAFilmIndex1992 ∷ globalGreeningWFASequelIndex1998 ∷ [])
+  "Archivist identifies an original dated film and a named 1998 sequel tied to Western Fuels; institutionally continuous production and narrative campaign, NOT six extra independent CO2-growth experiments or proof of specific film budget payment."
+
+globalNASDisavowsOISMPetition : Typed.TypedGenealogyEdge
+globalNASDisavowsOISMPetition = Typed.typedGenealogyEdge
+  "GC-03" "OISM and Seitz 1998 petition and enclosed paper" "NAS Council 20 April 1998 institutional disavowal"
+  Typed.institutionalDisavowal Typed.primary
+  (globalOISM1998PetitionPrimary ∷ globalNAS1998PetitionDisavowal ∷ [])
+  "Positive first-party original NAS institutional response: PNAS/American Academy endorsement not implied by an ex-president cover letter and a PNAS-style document; no claim petition signatures are fabricated solely because Academy disavowed its relation."
+
+globalPlantGrowthIsNotNetClimateBenefit : Typed.TypedGenealogyEdge
+globalPlantGrowthIsNotNetClimateBenefit = Typed.typedGenealogyEdge
+  "GC-04" "Peer-reviewed observed greening and conditional CO2 fertilisation" "CO2 Coalition plant-food rhetoric presented as overall harmlessness"
+  Typed.extrapolationBeyondEvidence Typed.primary
+  (globalZhuOriginalGreening2016 ∷ globalTerrerFertilisationLimit2016 ∷ globalCO2CoalitionPlantFoodFirstParty ∷ [])
+  "Plant response is a physically supported partial positive effect. The blanket inference from growth or greening to net harmless or beneficial emissions discards heat, drought, crop nutrition, ocean and biodiversity impacts. This relation labels an inference boundary, NOT a proven temporal direct citation or source copy from Zhu/Terrer to CO2 Coalition."
+
+globalGwynneCorrectionIsNotScriptTransmission :
+  Typed.StrongHistoricalTransfer globalGwynne1975To2014AuthorCorrection → ⊥
+globalGwynneCorrectionIsNotScriptTransmission witness =
+  Typed.authorRetrospectiveCorrectionIsNotMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+globalNASInstitutionalDisavowalNotClimateMethodTransfer :
+  Typed.StrongHistoricalTransfer globalNASDisavowsOISMPetition → ⊥
+globalNASInstitutionalDisavowalNotClimateMethodTransfer witness =
+  Typed.institutionalDisavowalIsNotMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+globalPlantPremiseOvergeneralisationNotDocumentaryTransfer :
+  Typed.StrongHistoricalTransfer globalPlantGrowthIsNotNetClimateBenefit → ⊥
+globalPlantPremiseOvergeneralisationNotDocumentaryTransfer witness =
+  Typed.scientificPremiseExtrapolationIsNotMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+-- Finite no-go #1: two counterfactual worlds can have the identical
+-- REAL local positive fertilisation response, but diverge in NET global
+-- impact once other Earth-system components are included.
+-- The two worlds here are hypothetical mathematical carriers, not
+-- empirically fitted cases or a claim both global outcomes are equally
+-- probable in the actual climate.
+
+data PlantAndClimateWorld : Set where
+  enrichedPlantGlobalNetGain enrichedPlantGlobalNetLoss : PlantAndClimateWorld
+
+data PlantOnlyObservation : Set where positivePlantGrowth : PlantOnlyObservation
+
+data GlobalNetClimateAssessment : Set where
+  globalNetBenefit globalNetHarm : GlobalNetClimateAssessment
+
+observedPlantFertilisation : PlantAndClimateWorld → PlantOnlyObservation
+observedPlantFertilisation _ = positivePlantGrowth
+
+wholeClimateOutcome : PlantAndClimateWorld → GlobalNetClimateAssessment
+wholeClimateOutcome enrichedPlantGlobalNetGain = globalNetBenefit
+wholeClimateOutcome enrichedPlantGlobalNetLoss = globalNetHarm
+
+samePlantGrowthDifferentGlobalNetAssessment :
+  INF.NonFactorabilityWitness observedPlantFertilisation wholeClimateOutcome
+samePlantGrowthDifferentGlobalNetAssessment =
+  INF.nonFactorabilityWitness
+    enrichedPlantGlobalNetGain enrichedPlantGlobalNetLoss refl (λ ())
+
+positivePlantResponseDoesNotIdentifyGlobalNetImpact :
+  INF.FactorsThrough observedPlantFertilisation wholeClimateOutcome → ⊥
+positivePlantResponseDoesNotIdentifyGlobalNetImpact =
+  INF.witnessRulesOutEveryFlatFactorisation
+    samePlantGrowthDifferentGlobalNetAssessment
+
+-- Finite no-go #2: one 1975 Newsweek article exists in more than one
+-- possible historical field configuration. A single article is neither
+-- a peer-reviewed survey nor enough evidence to identify all scientists'
+-- prevailing conclusion for that period.
+
+data HistoricalLiteraturePopulationWorld : Set where
+  coolingHypothesisDominant warmingHypothesisDominant : HistoricalLiteraturePopulationWorld
+
+data SingleMediaArticleObservation : Set where
+  sameNewsweek1975Article : SingleMediaArticleObservation
+
+data HistoricalScientificConsensusType : Set where
+  coolingConsensus warmingConsensus : HistoricalScientificConsensusType
+
+sampledHistoricalMediaPresence :
+  HistoricalLiteraturePopulationWorld → SingleMediaArticleObservation
+sampledHistoricalMediaPresence _ = sameNewsweek1975Article
+
+hypotheticalScientificMajority :
+  HistoricalLiteraturePopulationWorld → HistoricalScientificConsensusType
+hypotheticalScientificMajority coolingHypothesisDominant = coolingConsensus
+hypotheticalScientificMajority warmingHypothesisDominant = warmingConsensus
+
+sameNewsweekArticleDifferentScientificField :
+  INF.NonFactorabilityWitness
+    sampledHistoricalMediaPresence hypotheticalScientificMajority
+sameNewsweekArticleDifferentScientificField =
+  INF.nonFactorabilityWitness
+    coolingHypothesisDominant warmingHypothesisDominant refl (λ ())
+
+oneCoolingMagazineArticleCannotDetermineScientificConsensus :
+  INF.FactorsThrough
+    sampledHistoricalMediaPresence hypotheticalScientificMajority → ⊥
+oneCoolingMagazineArticleCannotDetermineScientificConsensus =
+  INF.witnessRulesOutEveryFlatFactorisation
+    sameNewsweekArticleDifferentScientificField
