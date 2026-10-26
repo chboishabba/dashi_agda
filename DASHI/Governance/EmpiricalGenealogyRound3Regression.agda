@@ -439,3 +439,34 @@ southern1991PledgeCannotEstablishMethodTransfer :
   Typed.StrongHistoricalTransfer Climate.southernICEPledgeNotDisbursement → ⊥
 southern1991PledgeCannotEstablishMethodTransfer =
   Climate.fundingPledgeIsNotTransfer
+
+
+gccACSHResearchWasCommissionedAccordingToArchive :
+  Typed.relationKind Climate.gccACSHCommissionedClimateHealth ≡ Typed.commissionedResearch
+gccACSHResearchWasCommissionedAccordingToArchive = refl
+
+gccACSHClientReviewRightsNotProofOfActualEditing :
+  Typed.relationKind Climate.gccACSHDocumentedEditorialReviewRights ≡ Typed.editorialReviewRights
+gccACSHClientReviewRightsNotProofOfActualEditing = refl
+
+gccACSHPublishedSubjectOverlapNotSameFile :
+  Typed.relationKind Climate.gccACSH1997PublicPaperMatch ≡ Typed.topicalPublicationMatch
+gccACSHPublishedSubjectOverlapNotSameFile = refl
+
+exxonLaterCHCFundingIsBoundedHistoricalReporting :
+  Typed.evidenceStrength Climate.exxonToCHCReportedPostAPIGrants ≡ Typed.corroborated
+exxonLaterCHCFundingIsBoundedHistoricalReporting = refl
+
+acshTopicalMatchCannotProveTransfer :
+  Typed.StrongHistoricalTransfer Climate.gccACSH1997PublicPaperMatch → ⊥
+acshTopicalMatchCannotProveTransfer =
+  Climate.gccACSHSharedSubjectNotIdenticalFinalFile
+
+acshEditorialDiscretionDoesNotProveSpecificScientificEdit :
+  Typed.StrongHistoricalTransfer Climate.gccACSHDocumentedEditorialReviewRights → ⊥
+acshEditorialDiscretionDoesNotProveSpecificScientificEdit =
+  Climate.gccACSHContractualRightsNotProofOfSpecificScientificEdit
+
+singerGCCProposalUnacquiredDocumentIsCorroborated :
+  Typed.evidenceStrength Climate.singerGCCSolicitationNotMoneyPaid ≡ Typed.corroborated
+singerGCCProposalUnacquiredDocumentIsCorroborated = refl
