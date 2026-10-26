@@ -25,3 +25,16 @@ Original reported method: FineWeb, BPE-4096, base 8-layer width-512 transformer,
 5. Only then attach LILA/Sophontic objectives as downstream consumers. No scientific claims or original credit transferred to DASHI.
 
 CI intentionally omitted per user preference.
+
+
+## 26 October source-code refinement audit: DIRECT reward branch and moving Noise benchmark
+
+**Exact upstream observed implementation:** `qlabs-eng/dust/dust.py`, class `DUST`, method `direct_errors`, fetched from the original public source on 26 October 2026. Implementation first sets `reward = self.clean_loss.unsqueeze(0) - perturbed_loss`; it **subtracts per-chunk mean only for `nrep > 1`**. Accordingly the previous abstract `populationMeanPerturbedLoss - perturbedTokenLoss` law applies ONLY to multi-draw chunks. It is not the literal `nrep=1` code path. `DUST.step` also distinguishes attention recomputation, 256-column cached-logit head slabs, two-sided scalar ES, and final SGD, so the existing generic estimator path enum is incomplete as a source refinement.
+
+Added `DASHI/Reasoning/DustDirectRewardBranchExact.agda` with a source-specific one-draw clean-reference reward and two-draw within-chunk centering, plus rational ring-theorem candidates: clean-baseline invariance for nrep=2, anti-symmetric reward pair and source singleton clean-shift law. No fresh kernel receipt is claimed.
+
+The finite-K `(K-1)/K` attenuation applies under iid draws **within the sample-mean-centred group**, and relevant *group size is `nrep`, not necessarily total draws over repeated chunks or GPUs*. With nrep=1, no chunk centering happens. This correction materially changes interpretation and any putative unbiasedness theorem.
+
+**Current Noise source rule set** at https://github.com/qlabs-eng/noise (read 26 Oct): historical 10M-token tracks archived `archive/10M`; present 30M tokens, 37.7M-param fixed-model tracks and separate open-architecture track. Main track score is 1,114,112 validation predictions; fixed-model speedrun threshold validation CE 3.5; wall time measures first-to-last update, **excludes validation and permits untimed fresh-state compile warmup**. Learning may query forwards and follow at most one nonlinear step; no chained backprop. Current README attributes different records to distinct contributors and scripts; none of them should be collapsed into the earlier 10M 1.6-second claim or represented as a reproduced speed measurement.
+
+**Priority now:** source-hash-pin `dust.py` and each Noise record script, then prove source-step refinements branch-by-branch (nrep=1 / nrep>1; head; local attention; residual scalars; optimizer and execution cost). Leave GPU timings empirical and per-track. New branch theorem candidate and source observations are committed; no CI/Agda kernel claim.
