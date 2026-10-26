@@ -93,3 +93,31 @@ There are exactly three possible 12-dimensional D4 characters yielding this 90 v
 **Critical faithful-central sign barrier:** Sym² of a faithful complex 6.Suz 12 kills the central involution and cannot be a faithful 6.Suz 78. The source 78 may instead factor through 3.Suz, but selected full class identity and Barraclough–Wilson quotient descent remain to be checked. The new CTblLib `monster_3b_suzuki_sym2_character_screen.g` does that full character comparison on ALL degree78 characters, and the earlier `monster_3b_suzuki_multiplicity_characters.g` + renderer/checker have been corrected to refrain from demanding degree78 faithfulness.
 
 **Terminology:** Monster class 12G has character -3 inferred from the 12G q-series coefficient -2 and powers to Monster 4B and 3B. GF31,GF103,GF223 refer instead to Barraclough's historical finite-field program; crossfield tests of our D4 model are not reproductions of those matrices. No actual Suzuki or Monster same-object proof is claimed.
+
+
+
+### 26 October 2026: full ATLAS 4→12→6 class incidence and phase/Suzuki-family sieve
+
+**Original ATLAS full-table evidence, rather than a constructed finite geometry:** https://brauer.maths.qmul.ac.uk/Atlas/v3/spor/M/, table of class power-ups, accessed 26 Oct 2026. Rows give 2B power-ups 4A,4C,4D; 3B power-ups **12B,12F,12G,12H,12I**; order-four rows 4A→12B, 4B→12G, 4C→12H/12I, 4D→12F; order-six rows 6B→12F, 6D→12G, 6E→12B/12H/12I. This is ONE ATLAS original source root, not independent confirmation from OEIS q-series transcriptions.
+
+The actual source-word D4 in #1098 has \(r^2=-I_{12}\), and Norton–Wilson (2002) establishes Monster class **2B** for this central 2.Suz involution. In the full normalizer the source reflection \(m\) inverts \(z\in3B\) and \(r\), so \(m(zr^2)m^{-1}=z^{-1}r^2=z^2r^2\). Hence \(zr^2\) is Monster-conjugate to \((zr)^2=z^2r^2\) WITHOUT the extra assumption that 6B/6E are rational classes. Also \((zr)^3=r^{-1}\), which is Monster-conjugate to \(r\) by \(m\), and \((zr)^4=z\). Thus, from source class power-up intersections and source D4 group relations, we get exactly:
+
+| Actual-source rotation *conditional class* | \(zr\) candidate | \(zr^2\) Monster class | \( \operatorname{tr}(W_\zeta,r^2) \) | Necessary 90-sector C2 trace / Schr parity |
+|---|---|---|---:|---|
+| 4A | 12B | 6E | 90 | faithful78/−90, Schr parity −1 |
+| 4C | 12H | 6E | 90 | faithful78/−90, Schr parity −1 |
+| 4C | 12I | 6E | 90 | faithful78/−90, Schr parity −1 |
+| 4D | 12F | 6B | 66 | nonfaithful78/C2+ giving +66, Schr parity +1 |
+
+No 4B row: **4B squares to 2A**, not the source half-turn's class 2B. Traces derive from ORIGINAL Monster ordinary class values \(\chi(2B)=275,\chi(6B)=77,\chi(6E)=5\) through the already-owned #1250 formula
+\[
+\operatorname{Tr}(W_\zeta,r^2)
+ =(\chi_M(r^2)-\chi_M(zr^2))/3.
+\]
+Thus \(3\cdot66+77=275\), \(3\cdot90+5=275\). These are necessary source-class and existing 90-sector scalar/parity correspondences, NOT source-selected \(6.Suz\) irreducible occurrence or a constructed \(\operatorname{Hom}_E(H_\zeta,W_\zeta)\).
+
+**Code, tests and proof typing, without duplicate implementations:** the existing #1250 conditional \`scripts/monster_3b_suzuki_c2_parity_6class_conditional_gate.py\` now composes the exact class triples into the **already-owned** two-branch parity gate, exposes an optional \`--rotation-class 4A|4C|4D\` discriminator, and fails closed for 4B/invalid values. Its accompanying regression \`tests/test_monster_3b_atlas_d4_4class_12class_6class_sieve.py\` checks all four source triples, selected branch and negative/non-promotion controls. \`DASHI/Moonshine/Monster3BAtlasSourceD4OrderTwelvePhaseSieveExact.agda\` adds a minimal finite dependent-type SOURCE CLASS chart and exact 66/90 arithmetic, imported by \`Monster3BActualKernelCharacterRound4Validation.agda\`. **Source-written, not Agda kernel-checked**.
+
+**Caveat that now matters operationally:** the BW05 published 4D calibrator \`BCCCBB\`, independently evaluated in the source \(2.Suz{:}2\) GF3 representation as \`D C³ D²\) (order4, square \(-I\)), does NOT tell us our separate \`r=m(gmg^{-1})\` is 4D. If one obtains a genuine group conjugator or same-object Monster class word showing **r=4D**, the ATLAS sieve then immediately selects **12F/6B/66/nonfaithful78+parity+1**, eliminating three remaining class rows. If r=4A or 4C, the conditional **6E/90/faithful78+parity−1** route survives. All such promotions require original quotient \(H/D_i\) and source root verification, not equality of squares.
+
+**Revised priority:** P0 original selected \`6.Suz\` degree78 character/main→MN3B→Monster GAP executable receipt and/or an authenticated actual class of r within Monster; P1 source \`zr\` order12 class distinction (12H vs12I only if 4C), P2 phase orientation and \(\operatorname{Hom}\) matching. Latest #1272 Fourier-pixel and #1239 C27 cyclic projectors provide optical/VOA *separate* operator-type inspiration only; neither supplies original N3B selected quotient fusion. #1260 additive Eisenstein C81×C243 is not the Heisenberg group \(H_4\). Keep original ATLAS, Norton–Wilson, Barraclough–Wilson, Nebe, Serre, Conway–Norton/Ford–McKay–Norton and existing DASHI source-code attribution intact. No new physical/quantum claims.
