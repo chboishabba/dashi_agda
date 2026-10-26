@@ -11,6 +11,7 @@ module DASHI.Papers.ThreePaperSourceAtlas20261025Exact where
 open import Agda.Builtin.List using (List; []; _∷_)
 open import DASHI.Core.AttributedSourceCore as Attribution using ()
 open import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball using ()
+import DASHI.Core.FirstImplementationTimestampExact as Chronology
 
 miller2021 : Attribution.AttributedSource
 miller2021 = Attribution.mkDOISource
@@ -131,3 +132,63 @@ rodgersSnowball = Snowball.canonicalSourceRoleSnowballReceipt rodgers2026
 
 openaiForcedSnowball : Snowball.SourceRoleSnowballReceipt openaiForced2026
 openaiForcedSnowball = Snowball.canonicalSourceRoleSnowballReceipt openaiForced2026
+
+
+------------------------------------------------------------------------
+-- FIRST SOURCE-COMMIT RECEIPTS. These are author+date source provenance,
+-- NOT kernel/typecheck/publication dates. Existing generic owner reused.
+--
+-- UTC commit timestamps were recovered from GitHub commit objects, not
+-- inferred from PR creation or later review. Australia/Brisbane is UTC+10.
+-- Original external authors retain their much earlier publication priority.
+-- Formal construction here: Johl Brown-directed DASHI research, with
+-- OpenAI ChatGPT-assisted implementations on the attributed commit objects.
+------------------------------------------------------------------------
+
+rodgersFiniteOwnerFirstImplementation :
+  Chronology.FirstImplementationReceipt
+rodgersFiniteOwnerFirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Cognition.PNF.EnactedTemporalOrderExact"
+    "85a4e6121914396e9d106b0d3c0535892f1034ae"
+    "2026-10-24T18:00:21Z"
+    "2026-10-25T04:00:21+10:00"
+    "Australia/Brisbane"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
+
+millerA3FirstImplementation :
+  Chronology.FirstImplementationReceipt
+millerA3FirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Physics.Closure.NSMillerAnisotropicA3BridgeExact"
+    "c77c27569603a8ca35eb76e8b61c79575221d2f2"
+    "2026-10-24T18:01:18Z"
+    "2026-10-25T04:01:18+10:00"
+    "Australia/Brisbane"
+    Chronology.openConsumerImplemented
+    Chronology.sourceCommittedOnly
+
+yanPressureFirstImplementation :
+  Chronology.FirstImplementationReceipt
+yanPressureFirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Physics.Closure.NSYanRadulescuStationaryPressureExact"
+    "32c74ca3df59bdacc9909a4555d6033ea5b622e5"
+    "2026-10-24T18:01:38Z"
+    "2026-10-25T04:01:38+10:00"
+    "Australia/Brisbane"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
+
+yanLeanCubeFirstImplementation :
+  Chronology.FirstImplementationReceipt
+yanLeanCubeFirstImplementation =
+  Chronology.first-implementation-receipt
+    "RequestProject.NavierStokes.YanRadulescuCubeSeed"
+    "176679d666f8c8c2c20ad82c4c91d9fc9e5f4f02"
+    "2026-10-25T08:16:07Z"
+    "2026-10-25T18:16:07+10:00"
+    "Australia/Brisbane"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
