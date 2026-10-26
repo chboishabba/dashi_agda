@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Exact factor-fibred circle-phase transport and query-indexed nonfactorability.
-DASHI reuse: IntersectionalNonFactorability, QueryIndexedProjectionAdequacyExact,
+DASHI primary owner: ConsumerIndexedResidualRefinementExact,\nBidiResidualApproximationExact; supporting nonfactorability via\nIntersectionalNonFactorability, QueryIndexedProjectionAdequacyExact,
 BalancedTernaryC2C3DihedralCodecBridgeExact, WaveAlgorithmLift.
 All phases are rational test fixtures; no claim about alpha=1/(2*pi).
 """
