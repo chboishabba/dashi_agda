@@ -1,6 +1,7 @@
 module DASHI.Cognition.PsychotronicsSuccorAttributionRegression where
 
 open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact as Atlas
@@ -566,6 +567,45 @@ saikiaOriginalResearchCannotCreateIndependentRodinComparison :
   Attribution.citationCreatesAuthority Atlas.saikiaAmyloid2019 ≡ false
 saikiaOriginalResearchCannotCreateIndependentRodinComparison =
   Atlas.allSourcesRemainNonAuthoritative Atlas.saikiaAmyloid2019
+
+-- 2024 Eq(7) operator scope: a genuine finite polynomial witness.
+-- These definitions encode d(a+b*x)/dx=b. For the 3D potential
+-- A=(0,x,0), B=curl A=(0,0,1) is constant and grad B = zero.
+-- This is a toy exact algebraic witness, NOT an Agda continuum theorem
+-- about the paper's actual geometry or measured Hall probe data.
+record AffinePolynomialOneD : Set where
+  constructor affinePolynomial
+  field
+    intercept slope : Nat
+open AffinePolynomialOneD
+
+differentiateAffine : AffinePolynomialOneD → Nat
+differentiateAffine p = slope p
+
+rodinToyPotentialAy : AffinePolynomialOneD
+rodinToyPotentialAy = affinePolynomial 0 1
+
+rodinToyMagneticFieldBz : AffinePolynomialOneD
+rodinToyMagneticFieldBz =
+  affinePolynomial (differentiateAffine rodinToyPotentialAy) 0
+
+rodinEq7CurlValueNotFieldSpatialGradient :
+  differentiateAffine rodinToyPotentialAy ≡ 1
+rodinEq7CurlValueNotFieldSpatialGradient = refl
+
+rodinToyFieldDerivativeIsZero :
+  differentiateAffine rodinToyMagneticFieldBz ≡ 0
+rodinToyFieldDerivativeIsZero = refl
+
+rodinToyCurlAndFieldGradientCannotBeEqual :
+  differentiateAffine rodinToyPotentialAy ≡
+  differentiateAffine rodinToyMagneticFieldBz → ⊥
+rodinToyCurlAndFieldGradientCannotBeEqual ()
+
+rodin2024Eq7PaperClaimsDoNotTransferProof :
+  Attribution.citationImportsProof Atlas.ramirezRodinRMF2024 ≡ false
+rodin2024Eq7PaperClaimsDoNotTransferProof =
+  Atlas.allSourcesRemainNonPromoting Atlas.ramirezRodinRMF2024
 
 ramirezRef24ComparisonNotProvenByCitation :
   Atlas.historicalTransmissionProved Atlas.ramirezRef24NotValidatedCoilComparison ≡ false
