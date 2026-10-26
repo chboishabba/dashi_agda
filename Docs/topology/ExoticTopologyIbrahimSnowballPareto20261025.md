@@ -517,7 +517,7 @@ but not a Fox–Artin geometric embedding or Richards
 surface quotient. No unrelated PR is promoted by analogy.
 
 REVISED geometric Pareto:
-P0 run exact-head seven Agda kernel checks and now 24
+P0 run exact-head seven Agda kernel checks and now 29
 Python regression tests (including component/word-order
 negative controls), collect source-specific receipts.
 P1 proper locally finite infinite collared union and
@@ -668,3 +668,58 @@ topological end homeomorphism, nonplanar-end decoration,
 or Richards classification. #1261/#1260 are useful
 nonidentity/wrong-carrier negative controls, not claims
 of physical or topological equivalence.
+
+
+### Late-26 October exact latest horn and provenance update
+
+Parent #1244 source head `bf77f7c6cda943610a7e6d645178ede34b569044`
+was inspected and merged NONDESTRUCTIVELY in child merge
+`201410e21e58dc5b9698cf7156fa4d065a3c4bf5`
+(no overlapping source paths). It introduces
+`AlexanderHornedC3ChronologicalClopenBridgeExact.agda`:
+the original Horn **newest-first** children are
+converted to true chronological APPENDED Cantor cylinder
+words; C3 rotates external sectors without touching
+the binary end suffix.
+
+NEW child Agda
+`ExoticHornChronologicalCantorConsumerExact.agda`
+then ACTUALLY USES parent proofs
+`leftChildAppendsChronologicalBit` and
+`rightChildAppendsChronologicalBit`, together with
+the child-side arbitrarily-long cylinder event
+`appendChildRefinesAt`, to prove left/right Horn
+chronological event inclusions and C3 endpoint
+event invariance. It does NOT assert a continuous
+partition of the connected wild exterior E: clopen
+endpoint cylinders and clopen ambient R³ subsets
+are different types of geometric statement.
+
+Parent #1244 also adds real tame Euclidean Cantor-ball
+embedding formulas and separated rotated satellites
+in `scripts/alexander_horned_c3_clopen_spatial_realization.py`.
+The child now tests that source-owned tame case over
+31 binary prefixes × three sectors, retaining
+`clopen_in_ambient_R3=False` and
+`Hatcher_wild_exterior_pi1_proved=False`.
+This is a TAME endpoint image, not an Alexander wild
+sphere, Fox–Artin arc or a certification of linking.
+
+The typed source atlas was extended **without cloning
+any attribution framework** to explicitly credit
+Atiyah (1988), DOI 10.1007/BF02698547, for the
+cobordism/TQFT vocabulary already cited by original
+ternary-pants source. Atlas now has 12 records;
+Atiyah is not credited with our PL implementation,
+a physically realised TQFT or any new topological
+classification. The 29-method focused regression
+suite and nine Agda modules now have a bounded workflow
+specification, not a successful exact-head kernel receipt.
+
+The primary new geometry receipt remains independent
+local finite PL (through trit depth 3) on the actual
+composed-two-pants construction. Its mathematical
+restriction is clear: the 3-ary exhaustion has planar
+Cantor ends only *conditionally on actual infinite
+collared realisation*, and is then the SAME Richards
+Cantor-tree type as the binary exhaustion.
