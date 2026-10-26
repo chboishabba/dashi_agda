@@ -30,6 +30,7 @@ assert p["main_table"] == "3^1+12:6.Suz.2"
 assert p["six_suz_table"] == "6.Suz"
 assert p["six_suz_outer_table"] == "6.Suz.2"
 assert p["base_1458_central_trace"] == -729
+assert p["base_1458_outer_centre_inverting_trace_zero"] is True
 assert isinstance(p["base_1458_extraspecial_central_class_position"], int)
 assert p["base_1458_extraspecial_central_class_position"] > 0
 assert isinstance(p["qg_to_n3b_kernel_order_three_class_position"], int)
