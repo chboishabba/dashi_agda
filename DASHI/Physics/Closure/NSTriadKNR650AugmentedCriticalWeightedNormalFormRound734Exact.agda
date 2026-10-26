@@ -59,7 +59,8 @@ module DASHI.Physics.Closure.NSTriadKNR650AugmentedCriticalWeightedNormalFormRou
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -87,6 +88,31 @@ import DASHI.Physics.Closure.NSTriadKNR650RateKernelInputLaplacianCollapseRound6
 
 F : C3.RealField _
 F = Rational.rationalRealField
+
+------------------------------------------------------------------------
+-- SOURCE-WRITTEN R734 POLARIZATION / WEIGHT-DEFECT IDENTITY
+--
+-- Original roots: Waleffe helical signed conservation, already compiled
+-- by DASHI R92/R102. The original R734 weight is DYADIC, not |k|.
+-- For ANY real weight w, exact curl radius r, plus energy ep and
+-- minus energy em:
+--   w(ep+em) = r(ep-em) + 2*r*em + (w-r)(ep+em).
+-- As a polynomial identity this is generic ℚ ring algebra.
+-- Applied physically it says dyadic critical energy = exact signed
+-- helicity + twice the negative-helicity mass + weight defect.
+-- The physical square root, helical projectors, PDE derivative and
+-- nonlinear bound are NOT supplied by this rational polynomial lemma.
+------------------------------------------------------------------------
+
+dyadicCriticalEnergyAsSignedHelicityPlusNegativeAndDefect :
+  (w radius plusMass minusMass : ℚ) →
+  w * (plusMass + minusMass)
+  ≡ radius * (plusMass - minusMass)
+    + ((1ℚ + 1ℚ) * radius) * minusMass
+    + (w - radius) * (plusMass + minusMass)
+dyadicCriticalEnergyAsSignedHelicityPlusNegativeAndDefect
+    w radius plusMass minusMass =
+  solve (w ∷ radius ∷ plusMass ∷ minusMass ∷ [])
 
 module AugmentedWeighted
     (Time : Set)
