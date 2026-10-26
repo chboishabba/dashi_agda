@@ -31,6 +31,7 @@ import exotic_topology_cantor_measure_obstruction as measure
 import alexander_horned_c3_explicit_open_cover as original_cover
 import alexander_horned_c3_pierced_shell_product as original_shell
 import alexander_horned_c3_equivariant_basing_paths as original_basing
+import alexander_horned_c3_radius_overlap_witness as latest_parent_overlap
 import alexander_horned_c3_same_cover_discriminator as original_cover_bidi
 import alexander_horned_c3_clopen_spatial_realization as original_clopen
 
@@ -457,5 +458,19 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertNotEqual(changed,original)
         with self.assertRaises(AssertionError):
             original_inquiry.audit(changed)
+
+
+    def test_latest_parent_real_radius_overlap_points_not_full_pi1(self):
+        # NEW donor from parent #1244, retained at its original source.
+        # Actual ambient rational points P_i=13e_i lie in core and
+        # their own arm, but this is NOT a path-connectedness proof.
+        certificate=latest_parent_overlap.audit()
+        self.assertEqual(certificate["status"],"PASS")
+        self.assertEqual(certificate["dist2_own"],16)
+        self.assertEqual(certificate["dist2_foreign"],250)
+        self.assertEqual(certificate["central_basepoint_clearance"],921)
+        self.assertFalse(certificate["source_satellite_connected"])
+        self.assertFalse(certificate["central_pi1_kernel_proved"])
+        self.assertFalse(certificate["wild_same_object_embedding_kernel_proved"])
 
 if __name__ == '__main__': unittest.main()
