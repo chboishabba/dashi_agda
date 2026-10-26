@@ -1,0 +1,58 @@
+{
+  "schema": "dashi.j369.monster3b.selected_gf729_weld.v3",
+  "source_producer": {
+    "pr": 1098,
+    "branch": "agent/e6-f3-exterior-square-maxcut-20261006",
+    "receipt_path": "outputs/monster3b_atlas_compression_field_selector_20261012.json"
+  },
+  "selected_modulus_low_to_high": [1,0,0,0,1,1,1],
+  "earlier_beta_weld": {
+    "source_word": "g2 g1 g2^-1 g1 g2^-1",
+    "similitude_multiplier": 1,
+    "multiplicative_order": 364,
+    "intertwining_verified": true
+  },
+  "primitive_inverter_comparator": {
+    "source_word": "g2^-1 g1 g2^-1 g1 g2 g1 g2^-1",
+    "similitude_multiplier": 2,
+    "compression_modulus_low_to_high": [2,0,1,2,2,2,1],
+    "primitive_root_coordinates": [0,2,0,1,2,0],
+    "primitive_root_multiplicative_order": 728,
+    "punctured_orbit_size": 728,
+    "punctured_stabilizer_size": 1
+  },
+  "preferred_center_preserving_primitive_weld": {
+    "source_word": "g1 g2^-1 g1 g2 g1 g2^-1 g1 g2^-1",
+    "similitude_multiplier": 1,
+    "compression_modulus_low_to_high": [2,2,1,0,2,0,1],
+    "primitive_root_coordinates": [0,1,0,1,1,0],
+    "primitive_root_is_root_of_compression_polynomial": true,
+    "primitive_root_multiplicative_order": 728,
+    "compression_matrix": [
+      [2,2,0,1,1,2], [0,0,0,1,1,2], [2,1,0,0,0,0],
+      [1,2,0,2,2,2], [0,0,1,1,1,2], [0,0,1,2,1,1]
+    ],
+    "multiplication_matrix": [
+      [0,0,2,0,1,1], [1,0,0,2,0,1], [0,1,0,0,2,0],
+      [1,0,1,0,0,2], [1,1,2,1,1,1], [0,1,0,2,2,2]
+    ],
+    "cyclic_rank_e0": 6,
+    "field_cyclic_rank_e0": 6,
+    "intertwiner_Q": [
+      [1,1,0,1,0,0], [0,2,0,1,2,2], [0,0,1,1,0,1],
+      [0,1,1,2,0,2], [0,2,2,0,2,2], [0,2,2,2,2,2]
+    ],
+    "intertwiner_determinant_mod3": 2,
+    "intertwining_equation": "Q*T = M_gamma*Q",
+    "intertwining_verified": true,
+    "breaks_swap01_at_e0": true,
+    "punctured_orbit_size": 728,
+    "punctured_stabilizer_size": 1,
+    "center_preserving": true
+  },
+  "selected_field_presentation_weld_paid": true,
+  "selected_field_multiplicative_action_weld_paid": true,
+  "center_preserving_primitive_action_weld_paid": true,
+  "full_monster_semantic_action_recognition_paid": false,
+  "boundary": "A strict-symplectic source word is explicitly conjugate to multiplication by a primitive element of the already-selected GF(729), paying the full 728-element punctured cyclic action while preserving the Heisenberg center. Actual phase-resolved Monster-state and Fin-90 multiplicity same-object recognition remain open."
+}
