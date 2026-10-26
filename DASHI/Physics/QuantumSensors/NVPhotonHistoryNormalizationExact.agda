@@ -22,10 +22,15 @@ treeMass p (suc n) =
   Two.weight p Two.click * treeMass p n +
   Two.weight p Two.dark * treeMass p n
 
+treeStepIdentity : (a b : ℚ) →
+  a * 1ℚ + b * 1ℚ ≡ a + b
+treeStepIdentity a b = solve (a ∷ b ∷ [])
+
 treeMassOne :
   (p : Photon.BinaryPhotonLikelihood) → treeMass p (suc zero) ≡ 1ℚ
 treeMassOne p =
-  Photon.normalized p
+  trans (treeStepIdentity (Photon.photon p) (Photon.noPhoton p))
+        (Photon.normalized p)
 
 -- The inductive step is exactly the Bernoulli normalization contract.
 treeMassNormalized :
@@ -34,7 +39,8 @@ treeMassNormalized :
 treeMassNormalized p zero = refl
 treeMassNormalized p (suc n)
   rewrite treeMassNormalized p n =
-  Photon.normalized p
+  trans (treeStepIdentity (Photon.photon p) (Photon.noPhoton p))
+        (Photon.normalized p)
 
 -- Actual finite histories remain available as the physical observation
 -- carrier, including the empty history; the tree recursion enumerates
