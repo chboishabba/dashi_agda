@@ -584,3 +584,143 @@ different exact terminal sign certificate. Then discharge
 producer/checker bit-complexity using repo-native MDL/Pareto BIDI,
 not a bare representation-size argument. The target
 sign(sin(99^(9999!))) remains OPEN.
+
+
+## 2026-10-26 ABC six-permutation / twisted C3 signed-cocycle max-cut
+
+### Repo ownership, including recent PR review
+* Original established mathematical S3: Dixon & Mortimer (1996),
+  Permutation Groups. DASHI/Foundations/TernaryPermutationS3LawsExact.agda
+  proves the *six symbol-permutation* group; the six-position action
+  below uses the same abstract S3 but permutes POSITION indices in ABC.
+  Preserve the distinction between position and symbol actions.
+* TernaryHypervoxelPermutationTransportExact supplies depth-stable
+  diagonal S3 alphabet transport, with Nekrashevych (2005) precedent.
+* HexTruthS3CarrierBridgeExact proves that the nonabelian S3 group
+  cannot inherit cyclic HexTruth C6 multiplication, despite a
+  lossless six-label carrier chart.
+* Reasoning/TrialecticGrothendieckTransitionCocycleExact supplies
+  proof-relevant AB->BC->CA->AB C3 transition 2-cell.
+* MERGED torque PR #1164 supplies the existing ordered ABC 3x3->27
+  Levi-Civita/C3 phase and reflection law.
+* Recent NS NSTriadKNTriadS3RealityActionRound35Exact supplies a
+  six-permutations x two-reality action, but orbit cardinalities can
+  shrink at stabilisers. Do not equate physical NS Fourier reality
+  with Pickover sine. Source precedents Leray and Constantin/Foias
+  remain native to the donor lane.
+* Recent PR #1249 is useful for the exact signed-zero/wave owner and
+  for distinguishing P3^3 (54 edges) from cyclic C3^3 (81).
+* Recent PR #1250's action-first criterion is reused: a candidate
+  orbit or finite chart is not a proved signed-phase action.
+* Recent PR #1261 supplies stronger D4h point/lattice symmetry as a
+  candidate geometry but is not promoted to a sine invariant.
+* Recent PR #1266's revisable observer/signed-consumer no-go informs
+  the collision/counterexample and attribution plan; no forced ESD
+  import or new universal ontology is implied.
+* PR #1244 has independent equivariant C3 quotient/character
+  obstructions on abstract horned group boundaries, not a source
+  for the ordinary sine phase itself.
+
+### New exact mathematics on signed ternary phases
+Represent a real circle coordinate with all three leading trits:
+  x=(9A+3B+C+r)/27, A,B,C in {0,1,2}, 0<r<1.
+For a positional S3 permutation sigma and v(A,B,C)=9A+3B+C:
+  delta_sigma(u) = v(sigma u)-v(u).
+This is an additive 1-COBOUNDARY, not an assertion of a nontrivial
+group cohomology class:
+  delta_{sigma tau}(u)=delta_tau(u)+delta_sigma(tau u).
+It preserves the real phase after restoring the rational correction
+delta/27. Under T99:x->{99x}:
+  kappa_sigma(u) = (11 delta_sigma(u)/3) mod 1
+                 = (2(C_sigma-C) mod3)/3.
+The target correction takes values in C3 and satisfies the corresponding
+S3-action cocycle law. The 99-map consumes two leading ternary trits,
+retaining the last digit C and fractional tail r:
+  T99(x)={11(C+r)/3}.
+This directly binds the 3x3 grid to the 27-cube. However the *full*
+real x -> phase relationship still contains r; kappa alone is NOT a
+sign-sufficient quotient.
+
+If A,B,C are all distinct, the SIX positional permutations map
+bijectively to pairs (permutation parity in C2,
+post99 correction in C3). This is a SIX-LABEL CHART, NOT
+an isomorphism of groups: S3 is nonabelian C3 rtimes C2, whereas
+C2 x C3 is abelian. On degenerate voxels there are stabilisers:
+under ABC-position S3, 27 states form 3 size-one, 6 size-three and
+1 size-six orbits. The Levi-Civita torque labels are
+3 positive, 3 negative and 21 zero. The independent value
+complement C2 (A,B,C)->(2-A,2-B,2-C) commutes with position
+permutations, and makes SIX orbits on 27 (4 of size6,
+one size2, one size1), not uniform twelve-site orbits.
+At real fractional tail r in (0,1), the complementary map
+also sends r->1-r and x->1-x. It conjugates sine orientation
+and negates the C3 carry cocycle; this agrees with
+the independently proved signed-zero germ/reflection owner.
+
+EXPLICIT NEGATIVE CONTROL:
+ABC=012 and ABC=120 are related by an EVEN 3-cycle; both have
+positive torque orientation, but with r=1/2 their ordinary
+real circle sine signs are OPPOSITE. Therefore torque/S3
+orientation parity alone cannot descend the real-sine consumer.
+The weighted delta cocycle is essential.
+
+Rational and carry checks are in
+scripts/check_pickover_abc_s3_signed_cocycle.py;
+the local exact run passed all six permutations, all 27 cubes,
+S3 composition/cocycle law, four fractional tails, 27/12
+orbit-stabiliser counts, and depths 1..7 of the bounded
+p=3 multiplicative x11 carry transducer. This transducer performs
+v_{j+1}=floor((11*d_j+carry_j)/3) with <=11 possible carry
+states, and reconstructs 11n exactly on finite trit words;
+it is a 3-ADIC finite-word algorithm, not automatically a cheap
+real fractional tail oracle.
+
+The Agda source bridge
+DASHI/Analysis/PickoverSignedZeroTorque369GridExact.agda now
+imports merged torque, proves the cyclic ABC rotate^3,
+reflect^2, reflect-rotate-reflect=rotate^2 relations,
+and proves cyclic-rotation torque orientation invariance by 27
+explicit exhaustive constructor reductions. Existing torque
+source proves odd reflection negates orientation and conjugates zeta.
+New source remains kernel-pending; user requested no CI focus.
+
+### Analytic REAL seed, no synthetic-substitute promotion
+NEW scripts/check_pickover_abc_real_seed.py reuses the existing
+Machin 1706 exact rational pi enclosure and verifies REAL
+x_n={99^(n!)/(2*pi)} for n=1..6:
+  (n,E,ABC,sign) = (1,1,202,-), (2,2,212,-),
+  (3,6,001,+), (4,24,022,+), (5,120,222,-),
+  (6,720,012,+).
+Each has exact C3 carry-cocycle endpoint verification; these six
+have first noncentral digit already at depth1 and are therefore
+NOT adequate as examples that REQUIRE a deep jFine.
+
+The more discriminating actual-power probe in
+scripts/check_pickover_abc_central_real_collision.py
+certifies x_k={99^k/(2*pi)} using exact Machin bounds:
+  k=7: 110 => positive, depth3
+  k=13: 112 => negative, depth3
+  k=32: 1112 => negative, depth4
+  k=108: 1110 => positive, depth4
+  k=151: 1111112 => negative, depth7
+  k=153: 1111112 => negative, depth7.
+In particular x_108 and x_151 BOTH have central 27-cube prefix
+111 but DIFFERENT real sine signs. This is a genuine
+source-specific counterexample to coarse 27-centre sufficiency
+on the actual orbit family. The consumer-indexed jFine refinement
+must reopen the next digit (and sometimes several more digits).
+These regressions passed in local integer/rational Python; neither
+sign is assumed by comparing arbitrary rationals.
+
+### Critical path to the target
+Use the existing S3 ABC group, its C2 orientation parity, the
+C3-valued *address-dependent* 99-action correction, and the
+consumer-indexed signed-zero BIDI refinement as one source-native
+search engine, not a new physical torque interpretation.
+But finite S3/C3 and p-adic carry machinery, while efficient,
+cannot itself provide the needed real tail r at the astronomic
+location alpha=1/(2*pi) shifted by 99^(9999!).
+The only unclosed decisive advancement is a source-specific
+analytic digit/tail certificate or a different exact
+sign oracle with affordable producer+checker bit cost. No
+terminal sine sign or RSA/Shor-type hidden period is claimed.
