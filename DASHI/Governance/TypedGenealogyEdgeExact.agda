@@ -29,6 +29,9 @@ data RelationKind : Set where
   funding : RelationKind
   fundingProposal : RelationKind
   fundingCommitment : RelationKind
+  commissionedResearch : RelationKind
+  editorialReviewRights : RelationKind
+  topicalPublicationMatch : RelationKind
   personnelContinuity : RelationKind
   organisationalContinuity : RelationKind
   methodRecurrence : RelationKind
@@ -112,6 +115,19 @@ fundingProposalIsNotTransferRelation ()
 
 fundingCommitmentIsNotTransferRelation : TransferRelation fundingCommitment → ⊥
 fundingCommitmentIsNotTransferRelation ()
+
+commissionedResearchIsNotHistoricalMethodTransfer :
+  TransferRelation commissionedResearch → ⊥
+commissionedResearchIsNotHistoricalMethodTransfer ()
+
+editorialReviewRightsAreNotMethodTransfer :
+  TransferRelation editorialReviewRights → ⊥
+editorialReviewRightsAreNotMethodTransfer ()
+
+publicationTopicMatchIsNotMethodTransfer :
+  TransferRelation topicalPublicationMatch → ⊥
+publicationTopicMatchIsNotMethodTransfer ()
+
 
 
 personnelContinuityIsNotTransferRelation : TransferRelation personnelContinuity → ⊥
