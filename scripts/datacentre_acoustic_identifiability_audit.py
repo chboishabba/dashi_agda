@@ -157,6 +157,141 @@ def mseed_converter_metadata_witness():
     }
 
 
+
+
+# Scatterty et al. 2026 actual original-author supplemental participant-level
+# publication: Frontiers in Behavioral Neuroscience 20:1729876,
+# DOI 10.3389/fnbeh.2026.1729876, original Figshare dataset .s002.
+# Read original study DATA, not a generic randomized synthetic fixture.
+# The 35x66 source CSV was separately redistributed by the independent
+# segyges/scatterty-2026-reproduction project (source GitHub blob
+# 3fd3f7f2d9cd16faed5af6bab0828532594b976a). Original scientists and
+# third-party reproduction author MUST be credited separately.
+# This audit neither authenticates source bytes against Figshare nor
+# establishes a data-centre field exposure, diagnosed harm or intended RF use.
+import csv as _csv
+from decimal import Decimal as _Decimal, InvalidOperation as _InvalidOperation
+from io import StringIO as _StringIO
+
+
+def _signed_ranks(changes):
+    """Exact Wilcoxon rank sums with midranks for ties; zero deltas excluded.
+
+    No p-values are fitted, and no absolute laboratory biomarker units are
+    inferred from this arithmetic. Subject is statistical unit, not assay well.
+    """
+    used = sorted((abs(v), 1 if v > 0 else -1)
+                  for v in changes if v != 0)
+    positive = _Fraction(0)
+    negative = _Fraction(0)
+    pos_count = 0
+    neg_count = 0
+    i = 0
+    while i < len(used):
+        j = i + 1
+        while j < len(used) and used[j][0] == used[i][0]:
+            j += 1
+        midrank = _Fraction((i + 1) + j, 2)
+        for _, sign in used[i:j]:
+            if sign > 0:
+                positive += midrank
+                pos_count += 1
+            else:
+                negative += midrank
+                neg_count += 1
+        i = j
+    if positive + negative != _Fraction(len(used) * (len(used) + 1), 2):
+        raise AssertionError('rank accounting inconsistent')
+    total = positive + negative
+    return {
+        'nonzero_participants': len(used),
+        'positive_change_participants': pos_count,
+        'negative_change_participants': neg_count,
+        'positive_rank_sum': str(positive),
+        'negative_rank_sum': str(negative),
+        'wilcoxon_W_min_rank_sum': str(min(positive, negative)),
+        'rank_biserial': str((positive - negative) / total)
+                            if total else None,
+    }
+
+
+def audit_scatterty_original_csv(source_bytes):
+    """Read published deidentified human laboratory CSV, do NOT synthesize it.
+
+    SHA256 is of supplied bytes ONLY. No match to the independent Figshare
+    original established by a derivative GitHub file name or DOI alone.
+    """
+    if not isinstance(source_bytes, bytes) or not source_bytes:
+        raise ValueError('original study CSV bytes required')
+    try:
+        parsed = source_bytes.decode('utf-8-sig')
+    except UnicodeDecodeError as exc:
+        raise ValueError('UTF-8 source CSV required') from exc
+    reader = _csv.DictReader(_StringIO(parsed))
+    fields = ('Participant', 'Song', 'Infra_Present',
+              'Cortisol_Before', 'Cortisol_After')
+    if not reader.fieldnames or any(f not in reader.fieldnames for f in fields):
+        raise ValueError('missing original CSV columns')
+    participants = set()
+    groups = {'all': [], 'On': [], 'Off': []}
+    by_music = {('On','Calming'): [], ('On','Unsettling'): [],
+                ('Off','Calming'): [], ('Off','Unsettling'): []}
+    for r in reader:
+        if None in r or None in r.values():
+            raise ValueError('malformed/extra CSV cells')
+        participant = r['Participant']
+        if not participant or participant in participants:
+            raise ValueError('duplicate/missing independent participant ID')
+        participants.add(participant)
+        condition = r['Infra_Present']
+        music = r['Song']
+        if condition not in ('On', 'Off') or (condition, music) not in by_music:
+            raise ValueError('invalid infrasound or music assignment')
+        try:
+            before = _Decimal(r['Cortisol_Before'])
+            after = _Decimal(r['Cortisol_After'])
+        except (_InvalidOperation, TypeError) as exc:
+            raise ValueError('invalid cortisol source value') from exc
+        if not before.is_finite() or not after.is_finite() or before < 0 or after < 0:
+            raise ValueError('nonfinite or negative original cortisol concentration')
+        difference = after - before
+        groups['all'].append(difference)
+        groups[condition].append(difference)
+        by_music[(condition,music)].append(difference)
+    if not participants:
+        raise ValueError('no independent study participants')
+    def one(deltas):
+        values = _signed_ranks(deltas)
+        values['n'] = len(deltas)
+        values['mean_post_minus_pre_in_csv_units'] = (
+            str(sum(deltas, _Decimal(0)) / len(deltas)) if deltas else None)
+        return values
+    return {
+        'original_study': 'Scatterty, VonStein, Prichard, Franczak, Hamilton, Schmaltz 2026',
+        'original_publication_doi': '10.3389/fnbeh.2026.1729876',
+        'original_supplement_doi': '10.3389/fnbeh.2026.1729876.s002',
+        'source_bytes_sha256': _sha256(source_bytes).hexdigest(),
+        'input_bytes_authenticated_as_original_Figshare_asset': False,
+        'anonymized_participant_records_loaded': len(participants),
+        'all': one(groups['all']),
+        'infrasound_on': one(groups['On']),
+        'infrasound_off': one(groups['Off']),
+        'by_music': {condition + '_' + music: one(changes)
+                    for (condition, music), changes in by_music.items()},
+        'observed_group_contrast_mean_on_minus_off_csv_units': (
+            str(sum(groups['On'], _Decimal(0)) / len(groups['On']) -
+                sum(groups['Off'], _Decimal(0)) / len(groups['Off']))
+            if groups['On'] and groups['Off'] else None),
+        'published_W192_if_whole_sample': (
+            len(groups['all']) == 35 and
+            _signed_ranks(groups['all'])['wilcoxon_W_min_rank_sum'] == '192'),
+        'within_person_before_after_not_between_randomized_condition': True,
+        'not_benn_jordan_data_centre_or_RF': True,
+        'not_an_authenticated_residential_receptor_exposure': True,
+        'causal_chronic_illness_established': False,
+    }
+
+
 def original_repo_attribution(record):
     """GitHub fork cannot be promoted to independent original authorship."""
     if not isinstance(record, PublicRepositoryRoot):
@@ -388,6 +523,45 @@ class TestOriginalInquiryAcceptance(_unittest.TestCase):
             with self.assertRaises(ValueError):
                 nominal_mseed_wav_playback_ratio(old, new)
 
+
+    def test_scatterty_signed_rank_fixture(self):
+        r = _signed_ranks([_Decimal('-2'),_Decimal('3'),
+                           _Decimal('4'),_Decimal('-1')])
+        self.assertEqual((r['positive_rank_sum'], r['negative_rank_sum']),
+                         ('7', '3'))
+        self.assertEqual(r['rank_biserial'], '2/5')
+
+    def test_scatterty_signed_rank_zero_and_ties(self):
+        r = _signed_ranks([_Decimal('0'), _Decimal('-2'),
+                           _Decimal('2'), _Decimal('5')])
+        self.assertEqual(r['nonzero_participants'], 3)
+        self.assertEqual((r['positive_rank_sum'], r['negative_rank_sum']),
+                         ('9/2', '3/2'))
+        self.assertEqual(r['wilcoxon_W_min_rank_sum'], '3/2')
+
+    def test_scatterty_synthetic_csv_with_all_four_cells(self):
+        raw = ('Participant,Song,Infra_Present,Cortisol_Before,Cortisol_After\\n'
+               'a,Calming,On,2,5\\n'
+               'b,Unsettling,On,3,4\\n'
+               'c,Calming,Off,2,1\\n'
+               'd,Unsettling,Off,2,4\\n').encode()
+        result = audit_scatterty_original_csv(raw)
+        self.assertEqual(result['anonymized_participant_records_loaded'], 4)
+        self.assertEqual(result['infrasound_on']['n'], 2)
+        self.assertEqual(result['infrasound_off']['n'], 2)
+        self.assertFalse(result['input_bytes_authenticated_as_original_Figshare_asset'])
+        self.assertFalse(result['causal_chronic_illness_established'])
+        self.assertFalse(result['published_W192_if_whole_sample'])
+
+    def test_scatterty_rejects_fabricated_input_and_duplicate_units(self):
+        raw = b'Participant,Song,Infra_Present,Cortisol_Before,Cortisol_After\\n'
+        for bad in (None, b'', raw, raw+b'a,Calming,On,0,NaN\\n',
+                    raw+b'a,Calming,On,0,-1\\n',
+                    raw+b'a,Wrong,Off,1,2\\n',
+                    raw+b'a,Calming,On,1,2\\na,Calming,On,2,3\\n'):
+            with self.assertRaises(ValueError):
+                audit_scatterty_original_csv(bad)
+
     def test_root_originals_are_required_before_downstream_join(self):
         r = {k: self._receipt(k)
              for k in REQUIRED_ORIGINALS['P3_facility_attribution']}
@@ -510,6 +684,11 @@ if __name__ == "__main__":
             TestOriginalInquiryAcceptance)
         run = _unittest.TextTestRunner(verbosity=2).run(suite)
         raise SystemExit(0 if run.wasSuccessful() else 1)
+    if len(_sys.argv) == 3 and _sys.argv[1] == '--scatterty-csv':
+        with open(_sys.argv[2], 'rb') as handle:
+            print(_json.dumps(audit_scatterty_original_csv(handle.read()),
+                              indent=2))
+        raise SystemExit(0)
     if _sys.argv[1:] == ['--phase-status']:
         status = original_inquiry_phase_status()
         status['related_public_github_fork_roots'] = [
@@ -521,7 +700,7 @@ if __name__ == "__main__":
         print(_json.dumps(status, indent=2))
         raise SystemExit(0)
     if _sys.argv[1:]:
-        raise SystemExit('Use --selftest, --phase-status or no arguments.')
+        raise SystemExit('Use --selftest, --phase-status, --scatterty-csv FILE or no arguments.')
     low, high = same_la_example()
     print("Two idealised pure tones at identical 35 dB(A), NOT measured sites:")
     for tone in [low, high]:
