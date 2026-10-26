@@ -156,3 +156,64 @@ def test_labelled_arrival_collision_requires_independent_delay_calibration():
     ).read_text()
     assert "sourceOrderWithFirstCalibration" in regression
     assert "sourceOrderWithSecondCalibration" in regression
+
+
+def test_semantic_fidelity_reuses_generic_no_go_and_has_two_real_collisions():
+    exact = (
+        ROOT / "DASHI/Papers/ThreePaperConsumerFidelity20261026Exact.agda"
+    ).read_text()
+    regression = (
+        ROOT / "DASHI/Papers/ThreePaperConsumerFidelity20261026Regression.agda"
+    ).read_text()
+    for theorem in (
+        "pressureSourceLossWitness",
+        "erasedForcingCannotRecoverSourcePressureCorrection",
+        "sourceDomainLossWitness",
+        "domainBlindEstimateCannotDetermineMillerSource",
+    ):
+        assert theorem in exact
+    assert "DASHI.Core.IntersectionalNonFactorability" in exact
+    assert "DASHI.Core.InterpretiveFormalisationCoreExact" in exact
+    assert "DASHI.Foundations.ClaimScopeCertificateExact" in exact
+    assert "arXiv:2610.08144" in exact
+    assert "DASHI extension" in exact
+    assert "forcingStatusIsLost" in regression
+    assert "domainErasureCannotProduceMillerSource" in regression
+    assert "ThreePaperConsumerFidelity20261026Exact" in (
+        ROOT / "DASHI/Papers/Everything.agda"
+    ).read_text()
+    assert "ThreePaperConsumerFidelity20261026Regression" in (
+        ROOT / "DASHI/Papers/Everything.agda"
+    ).read_text()
+    assert not re.search(r"(?m)^\s*postulate\b", exact)
+    assert "{!!}" not in exact
+
+
+def test_original_source_atlas_records_semantic_critique_as_contested():
+    atlas = source("atlas")
+    for phrase in (
+        "semanticFidelityCritique2026",
+        "Alexander Bastounis; Fabian Circelli; Anders C. Hansen",
+        "2610.08144",
+        "millerProjectionFirstImplementation",
+        "semanticFidelityWitnessFirstImplementation",
+        "Chronology.sourceCommittedOnly",
+    ):
+        assert phrase in atlas
+    assert "does not challenge soundness of the Lean kernel" in atlas
+
+
+def test_two_source_hypothesis_collisions_have_identical_flat_views():
+    force_worlds = (
+        ("divergenceFreeForcing", "pressureWithoutForceDivergence",
+         "noForcingCorrection"),
+        ("forcingWithNonzeroDivergence", "pressureWithoutForceDivergence",
+         "nonzeroForcingCorrection"),
+    )
+    domain_worlds = (
+        ("unforcedWholeSpaceR3", "navierStokesEstimateLabel", "physicalR3"),
+        ("periodicGalerkinT3", "navierStokesEstimateLabel", "physicalT3"),
+    )
+    for pair in (force_worlds, domain_worlds):
+        assert pair[0][1] == pair[1][1]
+        assert pair[0][2] != pair[1][2]
