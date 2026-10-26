@@ -155,3 +155,45 @@ individualFractionalChargeCanRemainNonzero = refl
 
 allQuotientMixedAbelianSpinCSPeriodsCertified : Bool
 allQuotientMixedAbelianSpinCSPeriodsCertified = false
+
+
+------------------------------------------------------------------------
+-- 2026-10-26 ORBIFOLD-EVEN S2 CLUTCH / HIGGS-LINE BIDI
+-- Physical owner #1241: check_kk_e6_orbifold_even_quotient_s2_clutch.py
+-- first-Tits 27 original action owner #1106, not duplicated.
+--
+-- The selected parity-even boundary group H=H0/Z3_diag admits a
+-- clutch loop lifted to H0 from 1 to diagonal omega. Varying a
+-- further closed SU3_L torus turn does NOT alter its Z3 obstruction,
+-- but changes the C33 associated line degree from zero to -2.
+-- Finite consumer witness only: the topology and Chern degree are
+-- external premises justified in the accompanying source derivation,
+-- NOT kernel-constructed principal bundles or cohomology here.
+------------------------------------------------------------------------
+
+data OrbifoldEvenClutchRepresentative : Set where
+  baseDiagonalCentralLoop
+  extraLeftTorusTurn : OrbifoldEvenClutchRepresentative
+
+sameZThreeLiftingClass :
+  OrbifoldEvenClutchRepresentative → ZThree
+sameZThreeLiftingClass _ = z1
+
+-- Triviality of C33 line as a separate consumer is a mathematical
+-- clutch-derived *input*; do not treat this Bool as a constructed
+-- nowhere-vanishing field or an all-configurations WZ extension.
+chi33LineDegreeZero :
+  OrbifoldEvenClutchRepresentative → Bool
+chi33LineDegreeZero baseDiagonalCentralLoop = true
+chi33LineDegreeZero extraLeftTorusTurn = false
+
+sameQuotientObstructionDoesNotDetermineChi33Line :
+  Transport.ClaimNonTransportWitness
+    sameZThreeLiftingClass chi33LineDegreeZero
+sameQuotientObstructionDoesNotDetermineChi33Line =
+  Descent.consumerNonDescentWitness
+    extraLeftTorusTurn baseDiagonalCentralLoop
+    refl falseNotTrue
+
+physicalPhaseOnlyWZGloballyDefined : Bool
+physicalPhaseOnlyWZGloballyDefined = false
