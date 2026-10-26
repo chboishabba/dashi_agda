@@ -961,12 +961,12 @@ def test_recycled_claim_family_receipts_preserve_original_root_and_relation():
     path = ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv"
     with path.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
-    assert len(rows) == 48
-    assert len({r["receipt_id"] for r in rows}) == 48
+    assert len(rows) == 53
+    assert len({r["receipt_id"] for r in rows}) == 53
     assert all(r["claim_family"] and r["evidence_objects"] and
                r["relation_to_claim"] and r["nonpromotion_boundary"] for r in rows)
     totals = Counter(r["claim_family"] for r in rows)
-    assert len(totals) == 19
+    assert len(totals) == 22
     assert totals["US_UNCERTAINTY_STRATEGY"] == 2
     assert totals["API_PROMPTED_58PC"] == 1
     assert totals["GAS_TAX_17B_ANNUAL"] == 8
@@ -1223,8 +1223,9 @@ def test_government_reservation_2025_to_2026_policy_design_versions():
     assert "annual LNG export volumes" in rows["G40"]["numerical_or_rhetorical_payload"]
     assert "calibratable down" in rows["G40"]["numerical_or_rhetorical_payload"]
     assert "not enacted" in rows["G40"]["nonpromotion_boundary"]
-    assert all(rows[x]["evidence_objects"] == "AUS_GOV_RESERVATION_SEP2026"
-               for x in ("G39", "G40"))
+    assert rows["G39"]["evidence_objects"] == "GOV_GAS_EXPOSURE_RELEASE_10SEP2026"
+    assert rows["G40"]["evidence_objects"] == "DCCEEW_GAS_REFORM_STATUS_29SEP2026"
+    assert rows["G39"]["evidence_objects"] != rows["G40"]["evidence_objects"]
     owner = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
     regress = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
     for declaration in ("governmentReservationMay2026",
@@ -1235,3 +1236,57 @@ def test_government_reservation_2025_to_2026_policy_design_versions():
                         "reservationDraftChronologyIsNotMethodTransmission"):
         assert declaration in owner
     assert "governmentReservationDutyDateIsDraftSourceSequence" in regress
+
+
+
+def test_october_gas_bills_and_levy_homonym_not_tax():
+    """An introduced licence-levy bill cannot become a passed 25% export-revenue tax."""
+    with (ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = {r["receipt_id"]: r for r in csv.DictReader(handle)}
+    assert rows["G41"]["date"] == rows["G42"]["date"] == rows["G43"]["date"] == "2026-10-14"
+    assert rows["G41"]["claim_family"] == rows["G42"]["claim_family"] == "GAS_RESERVATION_BILL_STAGE"
+    assert rows["G43"]["claim_family"] == rows["G44"]["claim_family"] == "GAS_LEVY_WORD_COLLISION"
+    assert rows["G41"]["evidence_objects"] == "GOV_GAS_BILL_14OCT2026"
+    assert rows["G42"]["evidence_objects"] == "HANSARD_GAS_PRINCIPAL_14OCT2026"
+    assert rows["G43"]["evidence_objects"] == "HANSARD_GAS_LEVY_14OCT2026"
+    assert rows["G44"]["evidence_objects"] == "ADL_2026_ORIGINAL"
+    assert rows["G45"]["evidence_objects"] == "HANSARD_GAS_CONSEQUENT_14OCT2026"
+    assert "regulatory costs" in rows["G43"]["numerical_or_rhetorical_payload"]
+    assert "future regulations" in rows["G43"]["numerical_or_rhetorical_payload"]
+    assert "25 percent ad valorem" in rows["G44"]["numerical_or_rhetorical_payload"]
+    assert "NOT a 25%" in rows["G43"]["nonpromotion_boundary"]
+    assert "at least 90%" in rows["G45"]["numerical_or_rhetorical_payload"]
+    assert "up to 10%" in rows["G45"]["numerical_or_rhetorical_payload"]
+    assert "not final statute" in rows["G42"]["nonpromotion_boundary"]
+    assert rows["G43"]["locator"].startswith("https://www.openaustralia.org.au/debate/")
+    assert "mirror" in rows["G43"]["provenance_scope"]
+
+    owner = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    typed = (ROOT / "DASHI/Governance/TypedGenealogyEdgeExact.agda").read_text()
+    regress = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    for entry in ("octoberGasBillMinisterialRelease2026", "octoberGasPrincipalMinisterSpeech2026",
+                  "octoberGasLevyMinisterSpeech2026", "octoberGasConsequentialMinisterSpeech2026"):
+        assert entry + " : Typed.SourceReceipt" in owner
+    for entry in ("octoberGasBillsIntroduced2026", "octoberCostRecoveryLevyNotRevenueTax",
+                  "octoberAdditionalityNotObservedDeliveredSupply"):
+        assert entry + " : Typed.TypedGenealogyEdge" in owner
+    assert "legislativeIntroduction : RelationKind" in typed
+    assert "legislativeIntroductionDoesNotEstablishHistoricalTransfer" in typed
+    assert owner.count("INF.nonFactorabilityWitness\n    administrativeLicenceRecovery exportValueQuarterTax refl (λ ())") == 1
+    assert "octoberBareLevyStringNotInstrumentIdentifier" in regress
+    assert "octoberBillIsIntroducedNotCertifiedEnacted" in regress
+
+
+def test_september_distinct_original_document_not_same_object_id():
+    """Joint ministerial Sept press and departmental update are different authored files."""
+    with (ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = {r["receipt_id"]: r for r in csv.DictReader(handle)}
+    assert rows["G39"]["evidence_objects"] == "GOV_GAS_EXPOSURE_RELEASE_10SEP2026"
+    assert rows["G40"]["evidence_objects"] == "DCCEEW_GAS_REFORM_STATUS_29SEP2026"
+    assert rows["G39"]["evidence_objects"] != rows["G40"]["evidence_objects"]
+    assert rows["G39"]["locator"] != rows["G40"]["locator"]
+    assert rows["G39"]["date"] < rows["G40"]["date"]
