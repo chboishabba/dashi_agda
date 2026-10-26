@@ -164,3 +164,15 @@ def test_palmer_versioned_attribution_and_same_message_original_not_duplicated()
     assert "initially denied all contact" in d
     assert "a call's exact time" in d.lower()
     assert "not" in d.lower()
+
+
+def test_government_roles_are_not_collapsed_and_palmer_counterclaims_are_versioned():
+    src = ADAPTER.read_text()
+    assert "originalParliamentaryDeclaredInterest : AustraliaSourceRole" in src
+    assert "originalElectoralRegulatorRule : AustraliaSourceRole" in src
+    assert "sourceClaimAndDatedCounterStatement : AustraliaSourceRole" in src
+    assert "hansonFloridaFlightsSenateDeclaration = australia-source-role-receipt\n  originalParliamentaryDeclaredInterest" in src
+    assert "aecOldRegimeAnnualDisclosureGate = australia-source-role-receipt\n  originalElectoralRegulatorRule" in src
+    assert "aecDisclosure2026PublicationOriginal = australia-source-role-receipt\n  originalElectoralRegulatorRule" in src
+    assert "palmerRevisedContactAttribution = australia-source-role-receipt\n  sourceClaimAndDatedCounterStatement" in src
+    assert "bannonPalmerContrarySourceReceipt = australia-source-role-receipt\n  sourceClaimAndDatedCounterStatement" in src
