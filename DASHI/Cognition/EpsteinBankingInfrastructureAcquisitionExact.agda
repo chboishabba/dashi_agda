@@ -5,6 +5,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
+
 ------------------------------------------------------------------------
 -- BANKING / TRANSACTION INFRASTRUCTURE ACQUISITION OWNER
 --
@@ -398,3 +400,84 @@ hsiChainReaction2011ContemporaneousSenateCarrier =
 hsiChainReaction2011FirstPersonAttribution : String
 hsiChainReaction2011FirstPersonAttribution =
   "Erik Barnett, ICE Assistant Deputy Director, testifying 2011-06-22; contemporaneous witness speaking for HSI/ICE programme, distinct dated witness product from later HSI 2019 factsheet but overlapping same institution; count as a chronology corroboration, NOT independent DEA oversight or DEA closure receipt."
+
+
+------------------------------------------------------------------------
+-- 2026-10-26 EXACT CONSUMER NO-GO: A FEDERAL OPERATION'S PUBLIC TITLE
+-- CANNOT SERVE AS ITS UNIQUE CASE IDENTIFIER.
+--
+-- Reuse existing IntersectionalNonFactorability witness/theorem on this
+-- branch, NOT sibling #1266's unmerged ConsumerFactorization owner.
+-- The two source-attributed agencies and subjects are factual input from
+-- the original HSI/DEA records above. The following *finite mathematics*
+-- proves an implication of this deliberately scoped representation only.
+-- Original nonfactorability owner retains its cited historical provenance.
+-- User-directed specific model: Johl Brown; AI-assisted formal adapter.
+------------------------------------------------------------------------
+
+data ChainReactionCaseIdentity : Set where
+  deaOCDETFNYNYS0829 : ChainReactionCaseIdentity
+  hsiIPRCounterfeit2011 : ChainReactionCaseIdentity
+
+data ChainReactionTitleOnly : Set where
+  operationChainReactionTitle : ChainReactionTitleOnly
+
+casePublicHeadline : ChainReactionCaseIdentity → ChainReactionTitleOnly
+casePublicHeadline _ = operationChainReactionTitle
+
+caseIsDEA : ChainReactionCaseIdentity → Bool
+caseIsDEA deaOCDETFNYNYS0829 = true
+caseIsDEA hsiIPRCounterfeit2011 = false
+
+noEqualityBetweenDEAAndHSITarget : true ≡ false → ⊥
+noEqualityBetweenDEAAndHSITarget ()
+
+originalFederalNameCollisionWitness :
+  NonFactor.NonFactorabilityWitness casePublicHeadline caseIsDEA
+originalFederalNameCollisionWitness =
+  NonFactor.nonFactorabilityWitness
+    deaOCDETFNYNYS0829 hsiIPRCounterfeit2011 refl
+    noEqualityBetweenDEAAndHSITarget
+
+nameOnlyFederalCaseIdentityImpossible :
+  NonFactor.FactorsThrough casePublicHeadline caseIsDEA → ⊥
+nameOnlyFederalCaseIdentityImpossible =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    originalFederalNameCollisionWitness
+
+-- Any downstream sorting/reformatting of the *name alone* inherits
+-- the collision; no amount of extra articles quoting that same title
+-- can recover an agency/case-specific identity from the title projection.
+nameReformattingDoesNotResolveFederalCases :
+  ∀ {NewLabel : Set} →
+  (reformat : ChainReactionTitleOnly → NewLabel) →
+  NonFactor.FactorsThrough
+    (λ caseId → reformat (casePublicHeadline caseId)) caseIsDEA → ⊥
+nameReformattingDoesNotResolveFederalCases reformat =
+  NonFactor.rechartingCannotRecoverErasedPhenomenon
+    reformat originalFederalNameCollisionWitness
+
+-- A richer original agency+case-ID carrier is sufficient *in this
+-- two-case fixture*, but its labels must still be authenticated as
+-- originals in the empirical source-acquisition stage.
+data OriginalFederalCaseKey : Set where
+  deaCaseNYNYS0829 : OriginalFederalCaseKey
+  hsiCounterfeitSupplyChain : OriginalFederalCaseKey
+
+originalFederalCaseKey : ChainReactionCaseIdentity → OriginalFederalCaseKey
+originalFederalCaseKey deaOCDETFNYNYS0829 = deaCaseNYNYS0829
+originalFederalCaseKey hsiIPRCounterfeit2011 = hsiCounterfeitSupplyChain
+
+keyIdentifiesDEA : OriginalFederalCaseKey → Bool
+keyIdentifiesDEA deaCaseNYNYS0829 = true
+keyIdentifiesDEA hsiCounterfeitSupplyChain = false
+
+originalCaseKeyConsumerFactors :
+  NonFactor.FactorsThrough originalFederalCaseKey caseIsDEA
+originalCaseKeyConsumerFactors =
+  NonFactor.factorsThrough keyIdentifiesDEA (λ caseId → caseIdEq caseId)
+  where
+    caseIdEq : (caseId : ChainReactionCaseIdentity) →
+      caseIsDEA caseId ≡ keyIdentifiesDEA (originalFederalCaseKey caseId)
+    caseIdEq deaOCDETFNYNYS0829 = refl
+    caseIdEq hsiIPRCounterfeit2011 = refl
