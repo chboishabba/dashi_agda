@@ -87,6 +87,39 @@ assert {(power*j)%N for j in (0,N//3,2*N//3)}=={0}
 # In particular, projection of the Z3 *DECK QUOTIENT* onto the
 # mu3 subgroup then through the source Pickover power forgets deck p.
 assert len({(power*(p*(N//3)))%N for p in range(3)})==1
+
+# 2026-10-27 same-H Higgs reduction: actual global character
+# chi33(h)=det(U_R)/det(U_L) on the H gauge group.
+# On pi1(H)=Z<A>+Z<R>, chi33_*(x,y)=-x is SURJECTIVE.
+# Standard Lie-group long exact sequence of
+# K=ker(chi33) -> H -> U1 yields pi0(K)=0 and pi1(K)=Z<R>.
+# This is a theorem using external homotopy exactness,
+# not a Python-constructed principal K bundle.
+def higgs_kernel_loop(y):
+    """Concrete parity-even path with zero Chi33 winding."""
+    p=y%3
+    d=(-y-2*p)//3
+    assert -y-2*p==3*d
+    loop=coordinates(p,d,d)
+    assert loop==(0,y) and chi_degree(loop)==0
+    return p,d,d
+
+assert chi_degree(A)==-1 and chi_degree(R)==0
+assert gcd(abs(chi_degree(A)),abs(chi_degree(R)))==1
+assert higgs_kernel_loop(1)==(1,-1,-1)  # primitive R generator
+for y in range(-120,121):
+    assert coordinates(*higgs_kernel_loop(y))==(0,y)
+assert {deck(coordinates(*higgs_kernel_loop(y))) for y in (0,1,2)}=={0,1,2}
+# Even the nonliftable Z3 deck p=1 has a bundle with a
+# globally nonzero Chi33 section: choose its zero-degree clutch.
+# But nonzero degree obstructs a global nowhere-zero section.
+for p in range(3):
+    assert chi_degree(coordinates(p,-p,-p))==0
+    assert deck(coordinates(p,-p,-p))==p
+print('PASS kernel K of primitive Chi33 character: connected, pi1(K)=Z (classical exact sequence)')
+print('PASS all three Z3 lifting classes survive K Higgs reduction; 241 integer loop witnesses')
+print('OPEN full H gauge path integral, scalar zeros/defects, and global eta/CS/WZ')
+
 print('PASS pi1(H) lattice generators: 3C=2A+2B, A,R free basis (rank 2; no torsion)')
 print('PASS exact loop↔Z² inverse 841 integer pairs and 867 selected triple loops')
 print('PASS character Chi33=-A, deck=R mod 3; both independent and realizable')
