@@ -243,3 +243,33 @@ ML<=3/4, eta<=23/500 acceptance tests. Both are dimensionless,
 same-source tests; their premise cannot be manufactured solely by
 coordinate scaling. The local UNBASED meridian conjugacy distinction
 and true relative cap/collar topology remain the P0 obligations.
+
+
+## Complete real squared-eigenvalue root isolation (exact rational follow-up)
+
+The scalar cubic p_X derived from the original SU3 trace has three
+DISJOINT rational intervals with strict endpoint sign changes:
+
+    x_min ∈ (919/100000, 920/100000)
+    x_mid ∈ (187659/100000, 187660/100000)
+    x_max ∈ (206838/100000, 206839/100000).
+
+Each endpoint comparison was executed using exact Python Fraction,
+without numerical eigenvalue estimation. The intervals are ordered,
+the polynomial has degree 3, and strict sign changes give at least
+one real root in each by the intermediate value theorem, hence
+exactly one in each. The source-specific positive Hermitian spectrum
+has THESE roots by the classical SU3 matrix-to-polynomial identity.
+
+Consequently the actual selected W operator gap square lies in the
+narrow interval (2.06838,2.06839). The convenient downstream exact
+bound >517/250=2.068 is deliberately looser to keep the one-stage
+rational acceptance theorem simple. The existing physical neutrino
+and abstract horn selection remain unvalidated; spectrum here is of
+a CHOSEN illustrative SU3 matrix, not a spectral prediction.
+
+The exact GitHub Python regression was updated with the three
+brackets; the source-written Lean #84 rational surface now has
+three polynomial endpoint-sign lemmas and disjoint-order lemma.
+Lean kernel and the underlying complex-matrix spectral theorem
+weld are still unverified in this cut.
