@@ -436,7 +436,22 @@
       "github_original_witness_file_hash_is_not_original_dataset_sha": true,
       "exact_noaa_1953_cloud_key_verified": false,
       "ghcnh_original_dataset_doi": "10.25921/jp3d-3v19",
-      "actual_1953_ghcnh_bangor_csv_psv_retrieved": false
+      "actual_1953_ghcnh_bangor_csv_psv_retrieved": false,
+      "standard_library_offline_listing_locator_synthetic_verified": true
+    },
+    "isd_cloud_2026_custody_acquisition_adapter": {
+      "script_path": "scripts/locate_psychotronics_noaa_isd_1953_s3.py",
+      "source_git_blob": "3f66053e54c0debfedbe536776f152e467347cd1",
+      "source_blob_verified_against_locally_executed_python": true,
+      "separate_test_path": "tests/test_locate_psychotronics_noaa_isd_1953_s3.py",
+      "test_blob": "51dd24942f24f58f1811148e764b2b4e5335e207",
+      "local_python_self_test_synthetic_cases": 5,
+      "local_python_unittests_synthetic_mock_cases_passed": 9,
+      "genuine_public_S3_http_response_acquired": false,
+      "exact_1953_bangor_S3_object_key_verified": false,
+      "actual_1953_bangor_station_year_original_bytes_acquired": false,
+      "actual_hourly_data_or_rainfall_decoded": false,
+      "agency_signed_checksum_verified": false
     }
   },
   "algorithm": {
