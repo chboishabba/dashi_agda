@@ -901,3 +901,33 @@ P4 Hatcher S² homology pin bridge, Warsaw, Wada,
 Fox–Artin separately, and remaining deep geometry.
 Do not improve source counts without adding original
 independent theorem ancestry or a real consumer.
+
+
+### 27 October all-depth incidence lemma: a new kernel-shaped consumer
+
+The standalone abstract Agda
+`ExoticSimplicialStarTransportExact.agda` now
+explicitly proves the formal **inductive step across
+ARBITRARY later finite stages**, conditional on a
+one-step geometric `StarChain` contract. In
+particular `oldStageStarHasNoLaterNewFaces` has
+a constructive earlier-triangle witness, transporting
+actual incidences, not merely an existential status bit.
+
+Prioritized next SAME-OBJECT step:
+instantiate its `Vertex n`, `Triangle n`,
+`nextVertex`, `nextTriangle`,
+`incident` and `interior` from the EXISTING
+source-owned finite PL gluing family. Use the
+general theorem to propagate a one-stage genuine
+collar property through all n. Only then port
+weak geometric-realisation results to identify
+the Richards end space of the direct union.
+
+Source count is UNCHANGED (twelve) because this
+is a new project proof consumer, not a new original
+source root. The relevant modern simplicial
+weak-realisation theory is cited for future exact
+donor lookup; no `abstract StarChain` proof is
+misattributed to Richards. Focused kernel workflow
+now names eleven Agda topology modules.
