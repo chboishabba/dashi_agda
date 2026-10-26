@@ -308,3 +308,52 @@ the original theorem, and this #1249 note
 only records dependency reuse. No independent
 mathematical discovery or completed kernel
 proof is claimed on behalf of the owner.
+
+
+## 9. Independent general observer-owner reuse (#1266), without false merge
+
+A final source-proximal snowball inspected
+Agda PR #1266 `agent/revisable-observer-proofsearch-maxcut-20261026`,
+which owns
+`DASHI/Core/RevisableObserverConsumerFactorizationExact.agda`.
+Its source-written generic
+`collisionObstructsConsumerFactorization` proves
+the correct decoder principle:
+if two histories/models yield the SAME observed
+output but DIFFERENT intended consumer answers,
+the answer cannot factor through that observation.
+
+Our finite-Hatcher-vs-tame-rose all-Wilson-word
+construction supplies a concrete source-specialized
+COLLISION of this kind, for the
+answer "is the actual embedding wild?"
+and observation "all finite-stage Wilson
+group-word receiver values." This is a
+derived WILD TOPOLOGY consumer of #1266's
+general factorization framework and original
+Hatcher free-group theorem, not new attribution
+of the original generic no-decoder principle.
+
+**Important branch boundary:** #1266 is a
+different OPEN branch, so no direct Agda import,
+implicit merge, or kernel proof of the new
+collision is claimed on #1249. The Lean
+finite-stage word equality on #84 is
+source-written separately and concrete, and
+the same-object wildness label relies on
+original geometric Hatcher/topology rather
+than a finite free presentation alone.
+
+The proof-search interpretation:
+the false decoder is a precise *failed
+identifiability* result; target experiments
+must add an observable coordinate not
+factorable through a single finite-stage
+free-group representation—e.g. a source
+metric shrinking-loop / gauge regularity
+constraint or physically calibrated curvature.
+A different finite list of Wilson traces
+cannot overcome the no-go by increasing
+precision or invoking a C3 permuted label.
+Original owner credit #1266 and Blackwell/
+Cousot as background remains intact.
