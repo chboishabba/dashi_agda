@@ -47,6 +47,8 @@ def case(positive):
     source={"table_id":"6.Suz","central_c2_zero_based":1,
        "central_c3_zero_based":2,
        "group_order":6,"class_orders":[1,2,3,6,3,2],
+       "class_sizes":[1,1,1,1,1,1],
+       "power_map_2_zero_based":[0,0,4,2,2,0],
        "degree12":[{"label":label,"source_irreducible_position_1_based":i,
                     "values":[wire(12,0),wire(-12,0),wire(12,k)]}
                    for i,(label,k) in enumerate((("12a",1),("12b",2)),1)],
@@ -55,6 +57,9 @@ def case(positive):
                    for i,(label,k) in enumerate((("78a",1),("78b",2)),1)]}
     selected={"six_suz_table":"6.Suz",
         "six_suz_group_order":6,"six_suz_class_count":6,
+        "six_suz_class_orders":list(source["class_orders"]),
+        "six_suz_class_sizes":list(source["class_sizes"]),
+        "six_suz_power_map_2_zero_based":list(source["power_map_2_zero_based"]),
         "six_suz_degree12_positions":[1,2],
         "six_suz_degree78_positions":[3,4],
         "suzuki_central_involution_class_position":2,
@@ -86,6 +91,9 @@ def fake_validate(x):
         selected_faithful=x["source_selected_degree_78_faithful_to_6Suz"],
         source_order=x["six_suz_group_order"],
         source_classes=x["six_suz_class_count"],
+        class_orders=x["six_suz_class_orders"],
+        class_sizes=x["six_suz_class_sizes"],
+        power_map_2_zero_based=x["six_suz_power_map_2_zero_based"],
         positions12=x["six_suz_degree12_positions"],
         positions78=x["six_suz_degree78_positions"])
 
@@ -95,6 +103,8 @@ def run():
         res=join.check(a,b,audit_fn=fake_audit,selected_validate_fn=fake_validate)
         assert res["central_C2_trace"]==(66 if positive else -90)
         assert res["selected_Nebe_family_full_class_equal"]==positive
+        assert res["complete_source_class_signature_matched"] is True
+        assert len(res["source_class_signature_sha256"])==64
     a,b=case(True)
     negatives=[]
     def fails(name,change):
@@ -121,7 +131,26 @@ def run():
     fails("source_class_count_drift",lambda a,b:b.update(six_suz_class_count=7))
     fails("duplicate_exported_Irr_position",lambda a,b:a["degree78"][0].update(source_irreducible_position_1_based=2))
     fails("missing_exported_Irr_position",lambda a,b:a["degree78"][1].pop("source_irreducible_position_1_based"))
-    assert len(negatives)==18
+    # Stronger adversarial controls: every coordinate not previously bound
+    # may drift while table identifier, group order, central classes, source
+    # Irr positions and selected character labels remain unchanged.
+    fails("stale_exported_noncentral_order",
+          lambda a,b:a["class_orders"].__setitem__(5,3))
+    fails("stale_selected_noncentral_order",
+          lambda a,b:b["six_suz_class_orders"].__setitem__(5,3))
+    fails("stale_exported_noncentral_size",
+          lambda a,b:a["class_sizes"].__setitem__(3,2))
+    fails("stale_selected_noncentral_size",
+          lambda a,b:b["six_suz_class_sizes"].__setitem__(3,2))
+    fails("stale_exported_second_power_map",
+          lambda a,b:a["power_map_2_zero_based"].__setitem__(3,4))
+    fails("stale_selected_second_power_map",
+          lambda a,b:b["six_suz_power_map_2_zero_based"].__setitem__(3,4))
+    fails("missing_selected_class_signature",
+          lambda a,b:b.pop("six_suz_class_sizes"))
+    fails("bool_poisoned_selected_class_signature",
+          lambda a,b:b["six_suz_class_orders"].__setitem__(5,True))
+    assert len(negatives)==26
     return {"status":"PASS_SYNTHETIC_JOIN_INTERFACE",
        "coherent_synthetic_branches":2,"rejected_false_joins":negatives,
        "original_6Suz_data_used":False,"full_class_auditor_executed":False,
