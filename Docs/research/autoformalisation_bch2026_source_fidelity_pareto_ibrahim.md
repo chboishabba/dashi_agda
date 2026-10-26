@@ -216,3 +216,29 @@ replacement), effective enumerations and `NTOT` many-one
 completeness, the `Sigma_l` quantifier hierarchy/Post theorem,
 and the SCI tower/restriction semantics themselves. Stop
 promoting source-written lemmas beyond those visible result types.
+
+
+### Source §3.3 and §3.4: separate Euler prediction versus witnessed NS mismatch
+
+The BCH authors explicitly **do not** conduct the same detailed
+proof-by-proof Euler autoformalisation audit. In §3.3 they predict
+a high likelihood of substantial Euler mistranslations based on
+preliminary examinations. That is a **prediction/hypothesis**, not
+a verified instance comparable to the paper's fixed Navier–Stokes
+(8.19)/(10.19) discrepancies. No DASHI module treats the Euler
+prediction as an already observed source-code counterexample.
+The paper's §3.4 observes that proof search which accepts *any*
+kernel-proof of the target statement may intentionally repair or
+replace the reasoning from a bad original proof. A backward natural
+language paraphrase of the Lean result also needs its own independent
+translation-fidelity receipt, rather than automatically repairing
+the proof-method discrepancy.
+
+The pressure example's original notes also separate two legitimate
+claim types: a bound true for **almost every** t versus one true for
+**all** t once source-proven continuity upgrades the assertion.
+They are not identical raw statements; a valid continuity upgrade
+must be linked to the same quantity and physical source. The
+simple numerical independent-coordinate counterexample in Lean #88
+does not model actual Navier–Stokes pressures and must never be
+promoted as a counterexample to either field inequality.
