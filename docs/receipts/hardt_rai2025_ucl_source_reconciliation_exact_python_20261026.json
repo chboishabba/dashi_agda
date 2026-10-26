@@ -1,0 +1,77 @@
+{
+  "schema": "hardt.rai2025.source_denominator_original_accession.v1",
+  "as_of": "2026-10-26",
+  "role": "primary-document and exact-source Python admission evidence, not empirical EEG replication",
+  "source_roots": [
+    {
+      "root": "Rai et al. iScience 2025 original empirical publication",
+      "doi": "10.1016/j.isci.2025.112922",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12432844/",
+      "authority": "author publication",
+      "numbers": {
+        "recruited": 69,
+        "lost_technical": 9,
+        "lost_photoresistor_or_LSL": 1,
+        "retained": 59,
+        "performance_counts": [
+          20,
+          18,
+          21
+        ]
+      }
+    },
+    {
+      "root": "Rai and Orgs public UCL research dataset v1",
+      "doi": "10.5522/04/28508744.v1",
+      "url": "https://rdr.ucl.ac.uk/articles/dataset/Dataset_of_mobile_EEG_recordings_from_audiences_watching_a_live_dance_performance_Detective_Work_/28508744/1",
+      "authority": "independent university institutional dataset accession; paper's data authorship overlaps",
+      "deposit_date": "2025-04-29",
+      "dataset_description_n": 57,
+      "license": "CC0",
+      "original_file_inventory_acquired": false
+    },
+    {
+      "root": "Original paper OSF code locators",
+      "urls": [
+        "https://osf.io/uz573/",
+        "https://osf.io/ursmc/"
+      ],
+      "source": "journal data availability and journal Key Resources respectively",
+      "identical_files_verified": false
+    }
+  ],
+  "logical_checks": {
+    "retained_from_recruitment": 59,
+    "retained_from_performance": 59,
+    "nominal_deposit_gap": 2,
+    "hypothetical_dyads_per_performance": [
+      190,
+      153,
+      210
+    ],
+    "hypothetical_dyads_total": 553,
+    "original_subject_identity_join_performed": false,
+    "real_EEG_data_reanalysis_performed": false
+  },
+  "local_execution": {
+    "source_path": "scripts/check_hardt_rai_2025_source_denominators.py",
+    "source_git_blob_sha1": "b1ba757496d763a940c49304f80bf763a8124756",
+    "test_path": "tests/test_hardt_rai_2025_source_denominators.py",
+    "test_git_blob_sha1": "5092dbe62dc7acb439125cbc19c679677526618c",
+    "both_exact_git_blobs_locally_reproduced": true,
+    "tests_executed": 10,
+    "tests_passed": 10,
+    "original_data_science_reproduced": false,
+    "agda_kernel_certified": false
+  },
+  "strict_nonjoins": [
+    "Paper final N59 versus UCL public deposit N57 does not identify missing participants or research irregularities.",
+    "553 theoretical within-event pairs are dependent transformations of 59 paper-retained people, not 553 experimental units.",
+    "Two OSF code locators do not prove two independent original analyses.",
+    "Published delta EEG synchrony does not demonstrate an unaided magnetic brain-to-brain channel or independent concealed target communication.",
+    "An original UCL deposit and its paper are two source carriers from connected researchers, not independently replicated results.",
+    "Diamond NV photon and cardiac magnetometry, Egely VSM specimens, SAXON quantum gates and historical psychokinesis reviews are different source/observable types.",
+    "No original Hardt unpublished manuscript, actual alleged victim/event attempt, clinical evidence or remote receiver field is authenticated by these checks."
+  ],
+  "priority": "Access original UCL file inventory + raw samples where lawful; reconcile participant/event IDs and original OSF code versions, then replay original published 1–4 Hz synchrony and controls. Keep direct Hardt source manuscript search separate."
+}
