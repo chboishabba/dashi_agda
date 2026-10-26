@@ -401,3 +401,50 @@ structure that avoids all-N bit precision, measuring end-to-end
 producer/checker complexity; don't mistake C3 orbit candidates for
 verified real-sine invariant. A 3-adic internal state is permissible:
 only the terminal *correctness theorem* must connect to ordinary sin.
+
+## 2026-10-26: shift-ladder / FFT-SOTA / topology / Shor BIDI correction
+
+Implemented scripts/check_pickover_bit_shift_cocycle_ladder.py:
+exact finite Gaussian-ring binary shift (MSB-to-LSB) and modular-power
+ladder, factor 9/11 commute; comparison with nonadjacent signed digits
+(NAF) as a possible selected-multiply reduction. The 9999! exponent
+is stored as a ~118445-bit compact *E*, but the true phase exponent
+N=99^E has >6E bits. A binary expansion of N therefore requires
+Theta(E) shifts, even with no expansion of N. This distinguishes
+fast 99^E description from fast (e^i)^(99^E) execution. NAF helps
+popcount/selected multiplication but cannot evade the length of
+the binary ladder. Bitshift is an exact algorithmic technique, not
+an independent real sine certificate or p-adic shortcut.
+
+State of the art baseline: classical exp by squaring / Chebyshev-angle
+doubling plus fast integer multiplication with FFT/NTT and efficient
+Payne--Hanek argument reduction. Our Python fixed-point complex
+powering is *not* shown better than SOTA; its advantage over naive
+sin repeated evaluation is real but not a claim against FFT, GMP,
+MPFR, or fast bit-complexity transcendental methods. See Brent and
+Zimmermann, Modern Computer Arithmetic, especially §§3.4, 4.3.
+A large argument still needs deep bits of 1/pi or equivalent phase
+information unless a proved special-property shortcut is identified.
+
+TOPLOGICAL target: universal cover R -> R/2pi Z, deck group Z,
+and terminal sign as two open semicircles with zero boundary.
+For z=e^(iN), sign(Im z) does not require full lift winding,
+but an arbitrary C3 root-of-unity label is insufficient.
+Construct a *consumer-relative signed phase cocycle* over rooted
+BT/Z3 cylinder tree with a real-angle semantics or direct theorem
+identifying its signed consumer. A noncontinuous interpretation or
+additional analytic residual is permissible, but exactly what
+must be proved, not inferred from the 3-adic tree topology.
+Use existing jCoarse/jFine, ConsumerIndexedResidualRefinementExact,
+RiemannG2PhaseResidualRealizationExact and BidiResidualApproximationExact.
+
+RSA/Shor actual owners inspected: Crypto/ShorReversiblePowModOracleWeldExact
+proves the same RSA powMod observable coincides definitionally with the
+order-finding hidden-period oracle; ComputerScience/
+RSA260BidiConsumerHypergraphRoadmapExact demands exact replay and
+consumer-sufficient action coordinates; Core/
+ActiveBidiDiscriminatorLoopExact contains explicit two-way refinement
+stages. For Pickover a Shor-type speedup requires a specified modular
+or other periodic oracle *plus* a proof that its hidden structure
+determines ordinary sine orientation. The ordinary finite C3 action
+does NOT furnish that. No quantum advantage or sign theorem claimed.
