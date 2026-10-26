@@ -109,6 +109,38 @@ roadEarthworksExposure = distribution-coordinate
   "9293/2024/OW Development.i summary"
   false false
 
+------------------------------------------------------------------------
+-- 27 October 2026 temporal reconciliation.
+-- Historical September snapshot remains addressable as federalDecisionStillOpen
+-- for pre-decision audits; it MUST NOT be used as the October operative state.
+-- The actual 15 October public notice reports approval with conditions,
+-- within the final signed 16 October section 130(1A) decision period.
+-- Signed approval and discharge of prestart conditions remain open.
+------------------------------------------------------------------------
+
+currentFederalApprovalWithConditions : DistributionCoordinate
+currentFederalApprovalWithConditions = distribution-coordinate
+  "Commonwealth EPBC 2019/8575 and project interests"
+  optionValue
+  "Part 9 approval with conditions publicly noticed 15 October 2026"
+  "The second 25 September extension to 16 October superseded the 1 October extension; 15 October public register records approval with conditions, not executed signed permission or realised profits"
+  executableSubjectToOtherLaw
+  Provenance.repositoryReconstruction
+  "Commonwealth EPBC all-notices original; two signed 2 and 25 September extensions, full notice and delegate still to acquire"
+  false false
+
+currentFederalLegalReviewExposure : DistributionCoordinate
+currentFederalLegalReviewExposure = distribution-coordinate
+  "applicants, interested conservation groups and protected habitat"
+  exposure
+  "statutory-review timing and possible prestart environmental loss"
+  "Review grounds, standing, court proceeding, interim relief and conditions must be established from operative signed record and counsel; approval alone proves no breach or review success"
+  contingentFutureBurden
+  Provenance.repositoryReconstruction
+  "15 October 2026 public decision plus 2019/8575 federal law records"
+  false false
+
+-- Retained exactly as a historical PRE-APPROVAL state, NOT today's federal state.
 federalDecisionStillOpen : DistributionCoordinate
 federalDecisionStillOpen = distribution-coordinate
   "Commonwealth EPBC 2019/8575 merits consumer"
@@ -160,6 +192,9 @@ data SnowballEvidenceAtom : Set where
   vegetationClearingOWAtom : SnowballEvidenceAtom
   roadEarthworksOWAtom : SnowballEvidenceAtom
   federalDeadlineAtom : SnowballEvidenceAtom
+  federalApprovalNoticeAtom : SnowballEvidenceAtom
+  federalSignedInstrumentAtom : SnowballEvidenceAtom
+  currentInfrastructurePaymentsAtom : SnowballEvidenceAtom
   exactWorksPolygonAtom : SnowballEvidenceAtom
   actualCommencementAtom : SnowballEvidenceAtom
   s13EssentialityAtom : SnowballEvidenceAtom
@@ -181,6 +216,9 @@ currentAcquisition = snowball-acquisition-state λ where
   vegetationClearingOWAtom → true
   roadEarthworksOWAtom → true
   federalDeadlineAtom → true
+  federalApprovalNoticeAtom → true
+  federalSignedInstrumentAtom → false
+  currentInfrastructurePaymentsAtom → false
   exactWorksPolygonAtom → false
   actualCommencementAtom → false
   s13EssentialityAtom → false
