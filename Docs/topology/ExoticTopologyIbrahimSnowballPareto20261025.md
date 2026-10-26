@@ -1108,3 +1108,103 @@ the earlier 32-test count (38 total).
 The local reconstruction is independent;
 the pushed GitHub test suite and new Lean
 source still lack successful kernel/Actions receipts.
+
+
+## 27 October continuation — original twenty-object acceptance and structural Power cut
+
+The **original inquiry** now has its own authoritative phase-and-deliverable
+matrix rather than being summarized by seven higher-fanout subproblems:
+
+- `Docs/topology/ExoticTwentyOriginalInquiryPhaseDeliverables20261027.md`:
+  **exactly 20 named source-selected objects**, each with its
+  strongest honest current evidence and the SAME-OBJECT source-specific
+  missing theorem. Six acceptance phases specify real mathematical
+  and verified kernel gates, from reproducible SHA receipts through
+  locally finite geometry, genuine Richards decorated end classification,
+  to all remaining wild/homotopy/GMT example obligations.
+- `scripts/exotic_topology_twenty_acceptance_ledger.py`:
+  fail-closed original-inquiry inventory validator requiring
+  20 unique names in the original order, six stages and a no-promotion
+  status. A deliberate missing-row regression must fail. A passing
+  bibliography checklist is explicitly NOT a theorem.
+- The original 13-root historical provenance atlas and seven
+  Pareto proof-dependency leaves are NOT replaced by 20 fabricated
+  independent scientific sources or by an invented uniform
+  mathematical proof. They have different jobs.
+
+**NEW mathematical owner: the Power boundary SURPLUS NECESSITY.**
+Power, 2025, `10.1112/blms.70083`, Theorem 4.5 and 6.4 are
+CONSTRUCTIVE EXISTENCE theorems for selected noncompact-surface
+triangulations; 2024 preprint `arXiv:2403.11986` is the same
+intellectual root. Existing `3F=2E-L` and
+`V-E+F=2-2g-b` give:
+
+```text
+3V-E = 6 - 6g - 3b + L
+whole graph Maxwell equality 6  <=>  L = 3b + 6g
+whole graph necessary sparsity >=6  =>  L >= 3b+6g
+```
+
+New Lean #86 source-written exact linear arithmetic theorems:
+`tightWholeGraphIffBoundaryBudget`,
+`sparseWholeGraphRequiresBoundaryBudget`,
+`lochNessNecessaryBoundaryLength`,
+`jacobLadderNecessaryBoundaryLength`.
+These are NOT Agda/Lean kernel receipts. The current source
+finite bordered Loch genus-n, b=1 stage needs L=3+6n;
+Jacob genus-2n, b=2 stage needs L=6+12n to satisfy the global
+Maxwell equality. Source triangles currently enforce L=3b,
+which explains a 6-edge budget per handle.
+
+**A MATERIAL NEGATIVE CONTROL PREVENTS FALSE COMPLETION.**
+`scripts/exotic_topology_power_boundary_surgery_counterexample.py`
+subdivides exactly 6g boundary edges in the original *source*
+PL triangulation, preserving orientability/genus and attaining
+whole-graph Maxwell =6. It then selects the **literal old
+vertex set** and counts only the edges in its induced subgraph.
+This produces a fully finite explicit witness to continued
+(3,6)-sparsity failure:
+
+| Selected stage, at one handle transition | Geometric repair | Whole-graph f | Induced old-core vertex count | Induced old-core edge count | **Core f** |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Loch Ness g=1,b=1 | Six boundary edge subdivisions, L=9 | 6 | 36 | 107 | **1** |
+| Jacob g=2,b=2 | Twelve subdivisions, L=18 | 6 | 218 | 659 | **-5** |
+
+Both selected core subgraphs have at least three vertices, and
+Power's definition requires f>=6 on **EVERY** such subgraph.
+Thus a mere global boundary-length repair cannot imply
+the target theorem. Source-equivalent *independent local
+Python* triangulations actually passed both counts and
+orientable-surface checks. They are NOT execution receipts of
+the exact newly committed GitHub blob.
+
+**Constructive next alternative:** use original Power §4
+vertex-splitting, Henneberg 0-extension, and rigid-subgraph
+substitution with the actual all-subgraph sparsity and
+boundary girth constraints. Extending the present selected
+mesh *only at the boundary* is ruled out by the explicit
+core counterexample; it does NOT contradict the source
+existence theorem or close the finite stage in the desired
+sparse/rigid structure.
+
+**Pareto revised order:** P0 fix/execute exact-head
+kernels; P1 instantiate a genuine uniform gluing
+`StarChain` on the real all-n PL carrier; P2 prove
+countable simplicial realisation/compact cofinality and
+true Richards decorated ends (three of twenty original
+objects); P3 use Power's **selected special**
+triangulation construction only if rigidity is an
+additional deliverable; P4 wild source-geometric
+Alex/Fox/Artin, Hatcher sphere, Wada, Warsaw, and
+remaining source-specific hard theorems. Do not
+let the elegant (3,6)-tightness *subgoal* displace
+the original Richards/topological classification
+goal, which does NOT require rigid frameworks.
+
+Historical rights and source-claim separation remain:
+Richards (1963) classifies noncompact surfaces;
+Power (2025) adds special graph triangulation/rigidity
+constructions and a streamlined argument; these are
+different theorems. No DDC/QID guess, reused paper
+as "independent corroboration", or finite run as
+kernel check is allowed.
