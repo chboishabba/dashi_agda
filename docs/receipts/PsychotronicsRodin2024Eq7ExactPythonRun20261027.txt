@@ -1,0 +1,50 @@
+2026-10-27 ORIGINAL RODIN-2024 EQ7 FINITE PYTHON EXECUTION RECEIPT
+------------------------------------------------------------------------
+Source-author original: Ramírez-Galindo et al., Revista Mexicana de Física
+70 (2024) e030901, DOI 10.31349/RevMexFis.70.030901.
+The below mathematical discriminator is research code, NOT their data.
+
+Repository file:
+scripts/check_psychotronics_rodin_2024_vector_potential_gradient.py
+
+FETCHED GITHUB BLOB SHA:
+14062ab66872d3d032e6da4d5fc4638c6d6258af
+
+LOCAL EXACT SOURCE FILE:
+git hash-object /mnt/data/check_psychotronics_rodin_2024_vector_potential_gradient.py
+=> 14062ab66872d3d032e6da4d5fc4638c6d6258af
+
+Local SHA256 (separate hash of executed 4961-byte script):
+26ed30784efe65ec6d66c1f3e2ec18774774413df787b989255c7bded9d7ecb9
+
+Python 3.13.5
+Executed:
+python3 -m py_compile /mnt/data/check_psychotronics_rodin_2024_vector_potential_gradient.py
+=> exit 0
+python3 /mnt/data/check_psychotronics_rodin_2024_vector_potential_gradient.py --self-test
+=> exit 0
+
+Exact emitted self_test (extracted from JSON):
+"exact_affine_cases_passed": 729
+"invalid_structures_rejected": 4
+"total_cases": 733
+"identity_B_is_gradient_refuted_by_counterexample": true
+"no_source_raw_field_or_experiment_claim": true
+"gauge_invariance_checked": true
+
+Entire self-test JSON's SHA256:
+51ee32d6c572dceed8c3eb21ab0d51c7551a91d0ceede80b66493b138da840e1
+
+Interpretation limits:
+- This is an EXACT-COMMITTED-SOURCE executed finite rational polynomial
+  discriminator: an affine potential with nonzero constant curl and
+  zero spatial gradient. It demonstrates why B=curl A does not itself
+  compute grad B or grad |B|.
+- It is NOT an original measured 2024 Hall data file, a raw 2013/2024
+  session identity, a test of the reported 60% biomedical result, nor
+  an Agda kernel proof. No CI or Agda execution asserted.
+- Git SHA matches only the authored script, not external scientific
+  publisher PDFs/measurement files.
+- Original 2024 authors retain authorship of Eq(7) and published
+  observations; Johl Brown directs comparison, with OpenAI ChatGPT
+  assisted mathematical code and source-critical commentary.
