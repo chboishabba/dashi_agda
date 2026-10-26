@@ -41,7 +41,7 @@ data Edge : Set where
   village2AreaDevelopmentApproval : Edge
   village3AreaDevelopmentApproval : Edge
   village23PrecinctApproval : Edge
-  2023OwnerConsentIndex : Edge
+  ownerConsent2023Index : Edge
 
 data CaseScope : Set where
   springviewPlanning2016 : CaseScope
@@ -333,7 +333,7 @@ village3ADPRecord = bounded-claim
 
 separateConsentDocumentsOnlyIndexed : ScopedClaim
 separateConsentDocumentsOnlyIndexed = bounded-claim
-  2023OwnerConsentIndex springviewConsentListing2023 councilPrecinctConsentList governmentFirstParty originalSameObjectOpen
+  ownerConsent2023Index springviewConsentListing2023 councilPrecinctConsentList governmentFirstParty originalSameObjectOpen
   "Council original document index names 2023 Cherish Land Owner Consent and separate Stockland Submission Consent documents."
   "Acquire and inspect both actual signed consent faces plus 2026 title and beneficial-control history; document title itself cannot prove owner-of-record in 2026."
   false refl
