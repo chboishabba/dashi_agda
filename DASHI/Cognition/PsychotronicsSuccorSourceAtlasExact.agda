@@ -1792,6 +1792,20 @@ pandey2017FieldExperimentScope = mkBound
   attributedAuthorReport
   "2019 amyloid original full text and 2024 asserted matched Rodin-versus-Helmholtz 60-percent comparison not established by this study"
 
+-- The published 2024 paper writes B = curl A as Eq (7), then calls
+-- that expression a calculation of the magnetic field gradient. The
+-- paper owns its original wording; the mathematical operator distinction
+-- is a DASHI critical reading, not a claim of new author experiments.
+ramirez2024Eq7SourceWording : ClaimBound
+ramirez2024Eq7SourceWording = mkBound
+  "2024 Ramirez-Galindo Eq 7 prints B = nabla cross A, followed by prose describing this expression as calculating the magnetic field gradient"
+  ramirezRodinRMF2024
+  "Original SciELO full paper 2024 Eq (7) and immediately following explanatory sentence; same-paper 2025 web carrier"
+  guanajuatoRodinResearchRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "curl of vector potential gives B, while spatial derivative of B or magnitude is a distinct operator and physical dimension; no inference that the entire FEM, measured fields, or clinical hypotheses are false"
+
 ramirez2024Ref24Claim : ClaimBound
 ramirez2024Ref24Claim = mkBound
   "2024 Rodin paper Discussion attributes a claimed up-to-60-percent Rodin/Helmholtz advantage to numbered reference 24, actually Saikia et al 2019 ACS electric-field amyloid study"
