@@ -200,6 +200,19 @@ class HeldoutDiscriminatorTests(unittest.TestCase):
         self.assertEqual(Fraction(rev['forward_minus_reverse_proxy_gain_exact']),
                          forward - backward)
 
+    def test_fixed_synthetic_forward_reverse_math(self):
+        report = audit(fixture())
+        forward = {f['held_out_person']: f['exact_brier_M0_minus_M1a']
+                   for f in report['folds']}
+        reverse = {f['held_out_person']: f['exact_brier_M0_minus_M1a']
+                   for f in report['reverse_time_negative_control']['folds']}
+        self.assertEqual(forward, {'toy-person-A': '155/3136',
+                                   'toy-person-B': '155/3136',
+                                   'toy-person-C': '31/2592'})
+        self.assertEqual(reverse, {'toy-person-A': '-9/1600',
+                                   'toy-person-B': '-9/1600',
+                                   'toy-person-C': '-3/64'})
+
     def test_synthetic_only_claim_ceilings(self):
         r = audit(fixture())
         self.assertFalse(r['M1a_full_mechanistic_implementation'])
