@@ -579,7 +579,7 @@ southernCompany1991To1998 = Typed.typedGenealogyEdge
 southernICEPledgeNotDisbursement : Typed.TypedGenealogyEdge
 southernICEPledgeNotDisbursement = Typed.typedGenealogyEdge
   "E9-13" "Southern Company 1991 commitment report" "ICE proposed communications campaign funding"
-  Typed.funding Typed.corroborated
+  Typed.fundingCommitment Typed.corroborated
   (southernICEHistoricalAccount ∷ ice1991TestCampaign ∷ [])
   "Reported company commitment USD125000 is a financing pledge reported from archived records, not a produced bank-transfer or independently audited completed payment."
 
@@ -593,7 +593,7 @@ singer1994ToSEPP1998 = Typed.typedGenealogyEdge
 singerGCCSolicitationNotMoneyPaid : Typed.TypedGenealogyEdge
 singerGCCSolicitationNotMoneyPaid = Typed.typedGenealogyEdge
   "E9-15" "S. Fred Singer/SEPP 1994 proposal" "Requested GCC USD73000 education-programme funding"
-  Typed.recommendationExposure Typed.primary
+  Typed.fundingProposal Typed.primary
   (singerGCC1994Proposal ∷ [])
   "Proposal for funding has direct source existence. Solicitation/expected allocation is not a financial disbursement, and does not resolve the independent E7 tobacco finance hypothesis."
 
@@ -607,4 +607,17 @@ southernRepeatNotIdenticalScript :
   Typed.StrongHistoricalTransfer southernCompany1991To1998 → ⊥
 southernRepeatNotIdenticalScript witness =
   Typed.organisationalContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+
+fundingRequestIsNotTransfer :
+  Typed.StrongHistoricalTransfer singerGCCSolicitationNotMoneyPaid → ⊥
+fundingRequestIsNotTransfer witness =
+  Typed.fundingProposalIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+fundingPledgeIsNotTransfer :
+  Typed.StrongHistoricalTransfer southernICEPledgeNotDisbursement → ⊥
+fundingPledgeIsNotTransfer witness =
+  Typed.fundingCommitmentIsNotTransferRelation
     (Typed.relationIsTransfer witness)
