@@ -78,3 +78,14 @@ Reuse native group/character owners and prove a general finite tight-frame recon
 ## Provenance of this work
 
 Original scientific claims belong to named original authors and institutions. DASHI owns only this integration and finite certificate. Evidence levels: source statement ≠ code description ≠ independent benchmark reproduction ≠ Agda/Lean kernel theorem.
+
+
+## 26 October algorithm implementation tranche
+
+New source: `DASHI/Reasoning/DustNoiseAlgorithmExact.agda`. It explicitly models Dust equations (1)-(4): population-centred loss differences, future-token reward weighting, negative reward/noise activation credit, tokenwise outer-product coordinates, attention-output surrogate credit, and distinct direct/attention/head/residual-scalar paths. `NoiseProbeSchedule` records orthogonality as a **required supplied proof**; it does not claim an instantiated Hadamard construction. The `dustOuterProductEquation` proof composes the explicitly provided aggregation and sum-congruence laws; it does **not** prove those laws from arbitrary opaque sum operators. Any mathematically stronger theorem requires genuine finite-sum algebra.
+
+A second executable source `scripts/check_dust_reference_equations.py` gives rational two-token causal fixtures for the actual Dust population-centering/reward/update equations and attention surrogate. No hardware benchmark or publication result is reproduced. Those Python examples do not establish global gradient unbiasedness, convergence or neural scaling.
+
+**Important branch reality:** `master` does not currently contain `DASHI/Reasoning/SemanticInterventionEquivarianceExact.agda`; this code lives in the #1094/#1095 stack. Therefore there is no honest direct Agda import of the Sophontic code on this master-based branch yet. The semantic intervention crosswalk remains a downstream stacked-branch obligation.
+
+**Verified vs unverified:** files are committed and GitHub-read; a fresh local Agda kernel run and execution of the newly committed second Python script have not been reported. This is algorithm specification plus conditional structural mathematics, NOT completed formal proof of the paper's forward-estimator statistics.
