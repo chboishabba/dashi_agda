@@ -1,0 +1,17 @@
+{
+  "schema": "dashi.monster3b.selected_heisenberg_lift.v1",
+  "date": "2026-10-12",
+  "selected_word": "g2 g1 g2^-1 g1 g2^-1",
+  "selected_word_matrix": [[0,2,1,0,2,1,0,0,2,0,1,2],[2,0,2,1,2,2,0,0,1,2,0,0],[0,0,0,0,1,2,2,1,2,0,2,0],[2,0,1,2,1,2,0,2,2,1,1,2],[2,0,2,2,0,2,1,0,1,1,2,0],[1,0,1,0,2,2,2,0,1,2,0,1],[1,0,2,1,0,2,1,1,1,0,0,0],[0,2,2,2,1,0,1,1,2,1,1,2],[2,2,0,0,1,0,2,1,2,1,0,0],[2,1,1,2,1,2,0,2,0,0,2,2],[2,2,0,0,1,1,1,1,0,0,2,0],[1,1,2,0,2,0,2,1,0,1,1,2]],
+  "selected_word_symplectic_multiplier": 1,
+  "compression_matrix": [[0,2,1,0,2,1],[2,0,2,1,2,2],[0,0,0,0,1,2],[2,0,1,2,1,2],[2,0,2,2,0,2],[1,0,1,0,2,2]],
+  "compression_matches_selected_receipt": true,
+  "cocycle_defect_matrix": [[0,2,2,2,2,0,2,0,1,0,2,1],[2,0,1,2,0,1,2,1,2,0,0,0],[2,1,0,1,1,0,1,2,1,0,0,2],[2,2,1,0,2,0,0,1,2,0,0,0],[2,0,1,2,2,0,1,0,2,2,2,1],[0,1,0,0,0,2,1,1,0,0,0,2],[2,2,1,0,1,1,0,2,1,1,1,1],[0,1,2,1,0,1,2,2,2,1,1,1],[1,2,1,2,2,0,1,2,2,1,2,2],[0,0,0,0,2,0,1,1,1,1,2,1],[2,0,0,0,2,0,1,1,2,2,0,2],[1,0,2,0,1,2,1,1,2,1,2,0]],
+  "cocycle_defect_symmetric": true,
+  "cocycle_defect_rank": 12,
+  "quadratic_polarization_identity": true,
+  "central_correction_formula": "q(x)=2*x^T*D*x over GF(3)",
+  "heisenberg_coboundary_identity": true,
+  "bruteforce_pair_enumeration_used": false,
+  "authority_boundary": "Exact finite matrix certificate for the selected source word. It does not identify the full 2.Suz:2 normalizer action with a physical Monster action or pay downstream orbit/stabilizer semantics."
+}

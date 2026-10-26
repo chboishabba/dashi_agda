@@ -15,16 +15,21 @@ import DASHI.Wikimedia.IbrahimMonsterCharacterDeterminationMathlibProducerSnowba
 ------------------------------------------------------------------------
 -- ACTUAL W_zeta CONSTITUENT ATTACHMENT CUT
 --
--- The actual-kernel character owner can prove the WHOLE selected-sector
--- character is 90 copies of the Heisenberg character once its execution
--- certificate is supplied.  The multiplicity owner, however, starts from a
--- literal list of irreducible constituents already certified as selected-phase
--- Stone--von Neumann objects.
+-- The actual-kernel character owner pays the WHOLE selected-sector character
+-- shape as ninety copies of the nonlinear Heisenberg signature once an actual
+-- promotion object is supplied.  The multiplicity theorem, however, starts
+-- from a literal list of irreducible selected-phase constituents.
 --
--- The generic equal-irreducible-character Lean wrapper is now source-written
--- and merged in dashi_lean4, but there is still no observed kernel receipt for
--- that exact merged source in this audit.  Source integration therefore moves
--- the execution frontier without creating the SAME-object constituent split.
+-- The generic equal-character/simple-representation theorem is now also
+-- source-written on the companion Lean branch.  Neither fact constructs the
+-- SAME-object direct-sum decomposition of the literal W_zeta sector.
+--
+-- Historical note: the five fields below are values of type `Set`.  They NAME
+-- the exact proposition types that must be paid, but do not themselves contain
+-- inhabitants of those propositions.  The separate proof-relevance hardening
+-- owner wraps this legacy record and requires explicit witnesses.  This file is
+-- retained as the source/coordinate/frontier owner so existing consumers are
+-- not silently broken.
 ------------------------------------------------------------------------
 
 record ActualZetaConstituentAttachment
@@ -32,9 +37,7 @@ record ActualZetaConstituentAttachment
   field
     decomposition : Multiplicity.ActualZetaSectorStoneVonNeumannDecomposition
 
-    -- These fields are deliberately proof-relevant rather than Bool metadata.
-    -- They express that the constituent list is a decomposition of the SAME
-    -- actual restricted sector, not a numerically matching abstract list.
+    -- Exact obligation TYPES for the SAME actual restricted sector.
     SameActualRestrictedSector : Set
     DirectSumRealisation : Set
     EveryConstituentSelectedCentralPhase : Set
@@ -44,8 +47,9 @@ record ActualZetaConstituentAttachment
 open ActualZetaConstituentAttachment public
 
 ------------------------------------------------------------------------
--- Once attachment exists, the already-owned multiplicity compiler immediately
--- pays the numerical multiplicity 90; no new 729*90 arithmetic is needed.
+-- The numerical count theorem consumes only the decomposition object.  It
+-- proves that any such certified constituent list has length ninety; it does
+-- not turn the Set-valued same-object obligations above into witnesses.
 ------------------------------------------------------------------------
 
 attachedMultiplicityIsNinety :
@@ -163,4 +167,4 @@ currentConstituentAttachmentFrontier : ConstituentAttachmentFrontier
 currentConstituentAttachmentFrontier = constituent-attachment-frontier
   true true true true
   false false false false
-  "obtain a Lean kernel execution receipt for merged theorem source ff0b3a02fb4e3581b3518fb2abfe381a5b36e1cd and pay the actual MN3B kernel replay; then construct the SAME W_zeta|E constituent decomposition with selected central phase, irreducibility and per-constituent character match. Finite Stone-von Neumann uniqueness can then identify each irreducible constituent with H_zeta and the existing multiplicity compiler forces exactly 90. Do not replace this attachment with 65610=729*90, A005052, QIDs, Dewey, Wikipedia or source citation."
+  "The dominant payment is no longer a theorem-name or CI leaf. Construct the proof-relevant SAME W_zeta|E direct-sum attachment: a literal decomposition of the selected sector, plus inhabited witnesses that it is the same restricted sector and that every constituent has the selected central phase, is irreducible and has the canonical nonlinear Heisenberg character. The existing multiplicity compiler then forces exactly ninety constituents; the generic equal-character/simple-representation theorem can identify a concretely packaged constituent with the explicit Schrodinger H_zeta after common representation/character transport. Whole-sector character equality, 65610=729*90, A005052, QIDs, Dewey coordinates and citations remain insufficient substitutes."
