@@ -80,3 +80,18 @@ The real reusable prior art is a **relative residual and consumer-indexed exactn
 **Recent cross-pollination**: #1269's `NVReadoutRegisterBoundaryExact` and #1238's axial electron Hamiltonian ensure any consumer is register-specific. Neither the jFine evaluation section nor mathematical fibre-surjectivity supplies hyperfine pulse evidence, and an electronic spin spectral collision must not be transferred to nuclear qubit states by label coincidence.
 
 Attribution: Katz–Mazur (1985) and Duncan–Ono (2016) source roots remain with existing jFine modules; their modular mathematics is not claimed as a mechanism behind SAXON Q. Earlier DASHI consumer-reduction kernel remains the theorem owner. The SAXON Q paper belongs to Gemsheim et al.; the product architectures belong to the manufacturer. This conditional adapter and audit are a 26 October 2026 Johl Brown/OpenAI research adaptation. CI intentionally ignored; Agda kernel status remains unchecked.
+
+
+## Scope correction: jFine was a terminology clarification, not a proposed hardware carrier
+
+On 2026-10-26 the requester clarified that mentioning `jFine` was a response to the assistant's use of “superfine,” rather than a request to incorporate modular-j fine fibres into diamond physics. The assistant's addition of `SaxonQConsumerRelativeFineBoundaryExact.agda` in commit `046fb952` was therefore an unjustified scope expansion. **That adapter was deleted** at commit `9b2bd43f`; it is not a current requirement or an outstanding proof obligation. Prior notes proposing a physical `FineState` instantiation are retired, not promoted.
+
+The original jCoarse/jFine proofs remain valid within their original formal domain and retain their authors' attribution. This correction does not invalidate those results. Do not equate “superfine,” fine control resolution, shot-level data, and `jFine`; they are different descriptions unless a concrete typed and empirically warranted mapping is supplied.
+
+Web primary-source check 2026-10-26:
+- SAXON Q's April 2026 QC2026 release explicitly says **two cores, five qubits per core**, independently controlled; https://www.saxonq.com/news/saxonq-stellt-dual-core-quantencomputer-vor/ .
+- SAXON Q's technology page reports a **16/32-core 128/512-qubit offering**; https://www.saxonq.com/technology/ . This is a manufacturer description, not a cross-core entanglement receipt.
+- The company's April whitepaper states current classical intercore links and circuit-cutting overhead; https://www.saxonq.com/wp-content/uploads/2026/04/SaxonQ-Whitpaper-QC2026-web.pdf .
+- Gemsheim et al., `arXiv:2609.13022` (submitted 11 September 2026), reports three **nuclear spin** qubits, measured one-/two-marked Grover success 77.3±3.4% / 87.0±4.2%. These are paper-author measurements on their studied machine, not independently replicated SXQ128 benchmarks: https://arxiv.org/abs/2609.13022 .
+
+Now-prioritized max-cut is **paper-specific Hamiltonian + nuclear register mapping + driven pulse compilation + source-authenticated photon readout and per-core evidence**, reusing #1238/#1262/#1269. CI remains optional. This note corrects source framing and requirements; it does not certify the experiment or discharge the physical compiler theorem.
