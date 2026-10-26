@@ -93,6 +93,7 @@ data AustraliaSourceRole : Set where
   originalPartyPolicyPublication : AustraliaSourceRole
   originalFirstPersonPolicyAdvocacy : AustraliaSourceRole
   governmentIndexedAdvocacySubmission : AustraliaSourceRole
+  originalNamedCommissionedPolicyModel : AustraliaSourceRole
   originalLimitedGovernmentLegislation : AustraliaSourceRole
   proposedCommercialPartyTenancyReported : AustraliaSourceRole
   publisherConfirmedInKindSupport : AustraliaSourceRole
@@ -335,3 +336,29 @@ government2022PolicyScope = temporaryExtraWorkBonus4000
 
 oneNation2025PolicyScope : PensionerWorkPolicyScope
 oneNation2025PolicyScope = unlimitedPensionWorkWithoutPaymentReduction
+
+
+-- POSITIVE CONTROL FOR A REAL COMMISSIONED RESEARCH WORK-PRODUCT:
+-- Original signed Deloitte letter, National Seniors named commissioning
+-- organisation, explicitly scoped pension policy, model and assumptions.
+-- Authenticated PDF source pages 1 and 5 (indexes 0 and 4) visually checked.
+-- The paid aggregate HPPL->IPA 2016/17 has no equivalent named 2022
+-- project-commission/document-use receipt in current case evidence.
+nationalSeniorsDeloitte2022CommissionedModel : AustraliaSourceRoleReceipt
+nationalSeniorsDeloitte2022CommissionedModel = australia-source-role-receipt
+  originalNamedCommissionedPolicyModel
+  "Deloitte Touche Tohmatsu, original letter 2 September 2022 to Ian Henschke (National Seniors Australia Chief Advocate), Let Pensioners Work Age Pension Modelling"
+  "https://nationalseniors.com.au/uploads/NSA-Let-Pensioners-Work-Age-Pension-Modelling-FINAL-14112022.pdf"
+  "Original National Seniors-hosted Deloitte research PDF, pages 1 and 5 visually inspected: client explicitly engaged Deloitte to model opt-in income-test exemption; 8.3% cost-neutral participation threshold is conditional on DSS/ABS data and authors' assumptions and is NOT reproduced here. Original letter/deliverable status establishes commissioned-policy research, NOT proof invoice payment, exclusive intellectual priority, actual uptake or that Labor/One Nation adopted the Deloitte model."
+
+nationalSeniorsMemberCampaign2022Original : AustraliaSourceRoleReceipt
+nationalSeniorsMemberCampaign2022Original = australia-source-role-receipt
+  originalFirstPersonPolicyAdvocacy
+  "National Seniors Australia, its 2022 original Let Pensioners Work campaign survey/flyer"
+  "https://nationalseniors.com.au/uploads/LetPensionersWork-A4FlyerApril13.pdf"
+  "First-party original senior-membership policy campaign advocated exemption of employment income from Age Pension income test; survey reports 1249 pension-receiving respondents in 2022. In-house advocacy versus external Deloitte economic modelling are two related National Seniors commissioned/institutional source products, NOT two independent demonstrations of government causal adoption."
+
+-- This named original commissioned research is a genuine purchase/procurement
+-- *of expert modelling* (client named) unlike unrelated 2016/17 HPPL/IPA
+-- aggregate funding. Do not transport Deloitte's client/forecast to IPA
+-- or attribute separate One Nation 2025 draft text to either institution.
