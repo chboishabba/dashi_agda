@@ -101,6 +101,61 @@ def test_distinct_political_outcome_queries() -> None:
     assert queries["voting_control"](a) != queries["voting_control"](b)
     assert queries["care_provision"](a) != queries["care_provision"](c)
 
+
+
+@dataclass(frozen=True)
+class FiscalExecution:
+    net_wealth_assessed: int
+    tax_paid: int
+    collection_cost: int
+    appropriated_care: int
+
+def assessed_liability(world: FiscalExecution) -> int:
+    return wealth_excess(NetWealth(world.net_wealth_assessed), 3)
+
+def test_assessment_collection_appropriation_are_distinct() -> None:
+    a = FiscalExecution(5, 0, 1, 0)
+    b = FiscalExecution(5, 2, 1, 0)
+    c = FiscalExecution(5, 2, 1, 2)
+    d = FiscalExecution(5, 2, 3, 0)
+    assert {assessed_liability(w) for w in (a, b, c, d)} == {2}
+    assert a.tax_paid != b.tax_paid
+    assert b.tax_paid == c.tax_paid and b.appropriated_care != c.appropriated_care
+    assert b.tax_paid == d.tax_paid and b.collection_cost != d.collection_cost
+    for f in (lambda due: due, lambda due: due * 7, lambda due: due % 3):
+        assert f(assessed_liability(a)) == f(assessed_liability(b))
+
+@dataclass(frozen=True)
+class ShareVoteState:
+    owner_ordinary: int
+    owner_super: int
+    all_ordinary: int
+    all_super: int
+
+def owner_weighted_votes(state: ShareVoteState) -> int:
+    return state.owner_ordinary + 10 * state.owner_super
+
+def total_weighted_votes(state: ShareVoteState) -> int:
+    return state.all_ordinary + 10 * state.all_super
+
+def test_dual_class_voting_post_transfer() -> None:
+    before = ShareVoteState(6, 3, 20, 3)
+    after = ShareVoteState(0, 3, 20, 3)
+    assert owner_weighted_votes(before) == 36
+    assert owner_weighted_votes(after) == 30
+    assert total_weighted_votes(before) == total_weighted_votes(after) == 50
+    assert 2 * owner_weighted_votes(after) > total_weighted_votes(after)
+    assert before.owner_ordinary - after.owner_ordinary == 6
+    # Illustrates retention of majority, not actual ownership transfer.
+    # Note the original 20-vote ordinary registry total is unchanged.
+
+def test_assessment_vs_interim_growth() -> None:
+    end_of_assessment = wealth_after_tax(NetWealth(5), 3)
+    interim = end_of_assessment + 2
+    assert end_of_assessment == 3
+    assert interim == 5 and excess(interim, 3) == 2
+    assert wealth_after_tax(NetWealth(interim), 3) == 3
+
 if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
@@ -108,4 +163,7 @@ if __name__ == "__main__":
     test_identical_wealth_liability_different_control()
     test_tax_receipt_cannot_recover_power_or_care()
     test_distinct_political_outcome_queries()
-    print("PASS: 8,192 finite cap observations + five synthetic logical checks")
+    test_assessment_collection_appropriation_are_distinct()
+    test_dual_class_voting_post_transfer()
+    test_assessment_vs_interim_growth()
+    print("PASS: 8,192 bounded arithmetic pairs + 8 synthetic counterexample suites")
