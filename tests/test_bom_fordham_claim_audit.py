@@ -741,3 +741,71 @@ def test_readfearn_precision_countercheck_and_annex_index_are_distinct_sources()
     assert "source-content gap" in docs
     assert "706 KB" in docs
     assert "31 manually curated root-or-template labels" in docs
+
+
+def test_climate_origins_same_api_plan_and_actual_people_not_url_multiplicity():
+    """Independent plan authorship and named people are not 13 independent scientific papers."""
+    import re
+    climate = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    validation = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    manifest = ROOT / "Docs/support/reference/climate_genealogy_typed_edges.csv"
+    with manifest.open(newline="", encoding="utf-8") as src:
+        records = list(csv.DictReader(src))
+    assert len(records) == 32
+    ids = [r["edge_id"] for r in records]
+    assert len(ids) == len(set(ids))
+    contributed = [r for r in records if re.fullmatch(r"E8-\d\d", r["edge_id"])]
+    assert len(contributed) == 13
+    assert all(r["evidence_strength"] == "A_primary" for r in contributed)
+    assert all("US Congressional Record 27 Apr 1998" in r["source_citation"] for r in contributed)
+    assert all("not" in r["notes"].lower() for r in contributed)
+    assert len(re.findall(r"^apiNamedContributor\w+ : Typed.TypedGenealogyEdge$", climate, re.MULTILINE)) == 13
+    assert "allAPIContributorsInExampleShareOneOriginalDocument" in validation
+
+    by_id = {r["edge_id"]: r for r in records}
+    assert by_id["E9-08"]["relation_kind"] == "funding"
+    assert by_id["E9-08"]["evidence_strength"] == "A_primary"
+    assert by_id["E9-09"]["relation_kind"] == "organizational_continuity"
+    assert by_id["E9-10"]["relation_kind"] == "personnel_continuity"
+    assert by_id["E9-11"]["relation_kind"] == "personnel_continuity"
+    assert "Steve Milloy" in by_id["E9-11"]["from_node"]
+
+    for item in (
+        "exxonInternal1982", "shellInternal1988", "gccLennyBernstein1995",
+        "shellFirstParty1998", "bpLeadership1997",
+        "mooreCO2Coalition", "mooreHeartland", "greenpeaceHistory",
+        "hancockIPAJudgment", "brulleFoundationStudy",
+        "farrellNetworkStudy", "supranRahmstorfOreskesExxonAudit",
+        "milloy1998ToReefMedia",
+    ):
+        assert item in climate
+    for caution in (
+        "apiContributorNotMethodTransfer", "ipaFundingNotEditorialMethod",
+        "cfactContinuationNotPlanTransfer", "milloyRepeatNotProofOfTwentyThreeYearPlan",
+    ):
+        assert caution in climate
+
+    docs = RESEARCH.read_text()
+    assert "26 October 2026 — funded climate countermovement originators" in docs
+    assert "900m amount includes all activities" in docs.lower() or (
+        "900m amount includes all activities" in climate.lower()
+    ) or "900m amount includes all activities" in docs.lower()
+    assert "32 rows" in docs
+    assert "same-NAMED-PERSON continuity" in docs
+
+
+def test_climate_original_claim_proofs_do_not_promote_funding_to_edits():
+    climate = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    val = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    for item in (
+        "apiPlanParticipationCannotBecomeMethodTransmission",
+        "hancockIPAFundingCannotBecomeAutomaticMessageControl",
+        "cfact1998And2026DoNotAutomaticallyProveContinuousPlan",
+        "milloy1998To2021IsPersonnelNotScriptTransmission",
+        "repeatPersonDoesNotProveOriginalAPIPlanStillActive",
+        "foundationIncomeNotSameAsClimateDenialExpenditure",
+        "industryDefectionsNotErased",
+    ):
+        assert item in val
+    assert "typedGenealogyEdge" in climate
+    assert "false false false" not in climate  # not a new political-radio triple system
