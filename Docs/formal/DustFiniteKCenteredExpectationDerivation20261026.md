@@ -39,3 +39,14 @@ the cancellation for identical probes, and unit sample covariance for the *antit
 **Experimental distinction:** the iid `(K-1)/K` expectation correction applies to iid, zero-mean, unit-variance samples. An exactly paired antithetic design is dependent and has a different variance structure. This is not a licence to claim uniformly better neural optimisation: compare credit bias/variance, number of distinct forward calls, time, and held-out loss under matched budgets.
 
 Local stdlib Python exact rational test checked 36 input pairs and the antithetic/identical special cases, PASS. The Agda proofs are **source-written but not kernel-run**, CI intentionally skipped. The user-facing deliverable remains a partial Dust theorem cut; the actual nonlinear temporal, attention, head, and complete Noise optimizer proof obligations remain.
+
+
+## 26 October: actual loss-to-credit Agda theorem candidate
+
+Added `DASHI/Reasoning/DustFinitePopulationCovarianceExact.agda`, extending (not duplicating) `DustTwoProbeCenteringExact`. Defines the measured affine loss `ell(a)=g*(h+sigma*a)+offset`, its **perturbed population mean**, the signed Dust two-draw credit calculation, and the pure polynomial factorisation:
+`DustCredit(g,h,sigmaInv,sigma,offset,a,b) = (sigmaInv*sigma)*g*CenteredCov(a,b)`.
+With the explicit amplitude-inverse premise, derives `g*CenteredCov(a,b) = g*(a-b)^2/4` using the previous owner's exact rational square theorem. This is a mathematical measurement-to-credit bridge in the *affine, two-probe, single-coordinate* case, not a postulated coefficient-identification field.
+
+Independently checked 147 exact rational input triples (a,b,g) at fixed rational activation, baseline and nonzero perturbation amplitude, all PASS; local Python check is separate from Agda proof authority.
+
+**Kernel receipt:** none. The new Agda source uses the rational ring solver and is *not* claimed typechecked. CI intentionally bypassed. Finite-K stochastic law for all K, nonlinear/token-coupled effects, full Noise source-code refinement, Sophontic experiment and held-out performance are still open.
