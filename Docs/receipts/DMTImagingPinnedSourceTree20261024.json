@@ -1,0 +1,332 @@
+{
+  "title": "Public source-tree receipt for Timmermann et al. 2023 DMT EEG-fMRI",
+  "source_doi": "10.1073/pnas.2218949120",
+  "source_repository": "timmer500/DMT_Imaging",
+  "source_commit": "b35701d88d904e2f602164ff2eae0fc879772078",
+  "source_tree_sha1": "38bdb12d180303f1738b7c5b6d99f34f157c26f9",
+  "inventory_method": "GitHub API git-tree recursive enumeration at locked commit, inspected through connected GitHub; participant arrays never downloaded",
+  "inventory": {
+    "file_count": 56,
+    "fmri_file_count": 40,
+    "fmri_subjects_with_two_conditions": 20,
+    "fmri_subject_ids": [
+      "S01",
+      "S02",
+      "S03",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S19",
+      "S22",
+      "S23",
+      "S25"
+    ],
+    "eeg_regional_file_count": 5,
+    "condition_pairs_complete": true,
+    "readme_reported_motion_corrected_fmri_eligible": 15,
+    "eligible_subjects_identified_by_filenames": false,
+    "conventional_license_paths": [],
+    "total_repository_file_bytes": 35878006
+  },
+  "files": [
+    {
+      "path": "EEG/RegressorsInterpscrubbedIRASA_Central.mat",
+      "size_bytes": 1356079,
+      "git_blob_sha1": "61ca09e15f67438f460479b9ed1903d14fe1ed4d"
+    },
+    {
+      "path": "EEG/RegressorsInterpscrubbedIRASA_Frontal.mat",
+      "size_bytes": 1356400,
+      "git_blob_sha1": "5e4f78f009b5c661654a02729e240a8f2de6a545"
+    },
+    {
+      "path": "EEG/RegressorsInterpscrubbedIRASA_Occipital.mat",
+      "size_bytes": 1358734,
+      "git_blob_sha1": "8df27813832d3b6d53cc93c5c38093e0ad65fd10"
+    },
+    {
+      "path": "EEG/RegressorsInterpscrubbedIRASA_Parietal.mat",
+      "size_bytes": 1356807,
+      "git_blob_sha1": "63f09187c848c677b374d5a2da45e96fe8bf13a6"
+    },
+    {
+      "path": "EEG/RegressorsInterpscrubbedIRASA_Temporal.mat",
+      "size_bytes": 1355813,
+      "git_blob_sha1": "bd5fe57ed4f67acfa42f44e88ecf350946f70c09"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 282,
+      "git_blob_sha1": "664bbac521ac7d87b6d1509a225268be1cf20ec4"
+    },
+    {
+      "path": "Scripts/BetweenNetworkRSFC.m",
+      "size_bytes": 4975,
+      "git_blob_sha1": "bc87afc2441e0cf67c0882824f27627e0c61c3ba"
+    },
+    {
+      "path": "Scripts/LZ_analysis.m",
+      "size_bytes": 16376,
+      "git_blob_sha1": "e180bb520e3b4c6c9cbb64841f6ce247ac80ce47"
+    },
+    {
+      "path": "Scripts/RSFC_network.sh",
+      "size_bytes": 1574,
+      "git_blob_sha1": "6e5f2a1253468271c37693300ffb004085f2c06e"
+    },
+    {
+      "path": "Scripts/StaticGFC.m",
+      "size_bytes": 7183,
+      "git_blob_sha1": "f87d99f448848c3b0531fea0780ee241ebd77549"
+    },
+    {
+      "path": "Scripts/StaticSpectraAnalysis.m",
+      "size_bytes": 18837,
+      "git_blob_sha1": "1f0090b14fc1904436b4871c7a4e934e1e0193c9"
+    },
+    {
+      "path": "Scripts/TaperedDynamicFCDAnalysisEEGcorrs.m",
+      "size_bytes": 17408,
+      "git_blob_sha1": "38ad02071b9524d550f861bf6995207a9c032d64"
+    },
+    {
+      "path": "Scripts/computeGradients.m",
+      "size_bytes": 3005,
+      "git_blob_sha1": "c92e22f0f8357e719e2299c2b2619c3bd279e098"
+    },
+    {
+      "path": "Scripts/dRSFC.m",
+      "size_bytes": 18021,
+      "git_blob_sha1": "579c41884304dc12a78b26487bc02c3b1951a753"
+    },
+    {
+      "path": "Scripts/dRSFCpairwise.m",
+      "size_bytes": 14457,
+      "git_blob_sha1": "c7d83f4e19eff66ee4a65d59180e4c3006055dd0"
+    },
+    {
+      "path": "fMRI/LongS01DMT.mat",
+      "size_bytes": 724594,
+      "git_blob_sha1": "bd9e3e9edb8bb495e83d37bf1ce0466a513486f7"
+    },
+    {
+      "path": "fMRI/LongS01PCB.mat",
+      "size_bytes": 724777,
+      "git_blob_sha1": "3ab9eaf3db48750589769eca9664872f1b7e314d"
+    },
+    {
+      "path": "fMRI/LongS02DMT.mat",
+      "size_bytes": 724707,
+      "git_blob_sha1": "9302feb279a2df1dac33124f9593a647de14b0bd"
+    },
+    {
+      "path": "fMRI/LongS02PCB.mat",
+      "size_bytes": 724877,
+      "git_blob_sha1": "cbba44219cc137e1044a8a5b8c7ba531cefae69a"
+    },
+    {
+      "path": "fMRI/LongS03DMT.mat",
+      "size_bytes": 724946,
+      "git_blob_sha1": "eaa954c22be818816da4a0fe805fd50c284821ea"
+    },
+    {
+      "path": "fMRI/LongS03PCB.mat",
+      "size_bytes": 724913,
+      "git_blob_sha1": "31d11304bbe535cadd7cf090e8874c46c974726c"
+    },
+    {
+      "path": "fMRI/LongS06DMT.mat",
+      "size_bytes": 724929,
+      "git_blob_sha1": "61f73a5046679ffd4c12e5b7f3f09ad01e650be2"
+    },
+    {
+      "path": "fMRI/LongS06PCB.mat",
+      "size_bytes": 724070,
+      "git_blob_sha1": "1aee5c669beb296362db54d417a1bff6ef6f785d"
+    },
+    {
+      "path": "fMRI/LongS07DMT.mat",
+      "size_bytes": 725011,
+      "git_blob_sha1": "1f200f3e517db7bb1158393690f8448bd5cfd5b9"
+    },
+    {
+      "path": "fMRI/LongS07PCB.mat",
+      "size_bytes": 724917,
+      "git_blob_sha1": "133acb70e833c260cdd047f010023dbaf4ff0dc6"
+    },
+    {
+      "path": "fMRI/LongS08DMT.mat",
+      "size_bytes": 723690,
+      "git_blob_sha1": "a9a6e61dbec640304c63076b035f3819da6ccbe9"
+    },
+    {
+      "path": "fMRI/LongS08PCB.mat",
+      "size_bytes": 724966,
+      "git_blob_sha1": "c0dd9b8196732577e6322e5f34c65572b39e6ca3"
+    },
+    {
+      "path": "fMRI/LongS09DMT.mat",
+      "size_bytes": 724500,
+      "git_blob_sha1": "47e5ce69ae22f9ae9d65a42363061e3840bebc1e"
+    },
+    {
+      "path": "fMRI/LongS09PCB.mat",
+      "size_bytes": 724832,
+      "git_blob_sha1": "616ab423578a6a2a6f9a9f9832096c6ddea20ced"
+    },
+    {
+      "path": "fMRI/LongS10DMT.mat",
+      "size_bytes": 725019,
+      "git_blob_sha1": "ef0634949a9ace8144d6543e7eb0d60388774524"
+    },
+    {
+      "path": "fMRI/LongS10PCB.mat",
+      "size_bytes": 725015,
+      "git_blob_sha1": "978e147a3e2b14372f46e6f8586b54f4e52d2e5d"
+    },
+    {
+      "path": "fMRI/LongS11DMT.mat",
+      "size_bytes": 724999,
+      "git_blob_sha1": "83a082d0adf8276fde182ed158aee66534d2a249"
+    },
+    {
+      "path": "fMRI/LongS11PCB.mat",
+      "size_bytes": 724921,
+      "git_blob_sha1": "37d9e776ac1b212533842c23b2f0f47ebdace121"
+    },
+    {
+      "path": "fMRI/LongS12DMT.mat",
+      "size_bytes": 724749,
+      "git_blob_sha1": "8c482071e10f9185c59dd8d7f00e81d90fb4da66"
+    },
+    {
+      "path": "fMRI/LongS12PCB.mat",
+      "size_bytes": 725015,
+      "git_blob_sha1": "3ae5c9a8ade55b8eb3d4c9fa762201a133f06ea8"
+    },
+    {
+      "path": "fMRI/LongS13DMT.mat",
+      "size_bytes": 724867,
+      "git_blob_sha1": "523c3f3dc59c89b26edfb3df8cb5906c0d4897e5"
+    },
+    {
+      "path": "fMRI/LongS13PCB.mat",
+      "size_bytes": 724857,
+      "git_blob_sha1": "70a46ef11b9e6132900e9ac94a2a522ee36c3232"
+    },
+    {
+      "path": "fMRI/LongS14DMT.mat",
+      "size_bytes": 724905,
+      "git_blob_sha1": "3e2de6f9fed9058a20d2642144233fee133ddaab"
+    },
+    {
+      "path": "fMRI/LongS14PCB.mat",
+      "size_bytes": 724903,
+      "git_blob_sha1": "b6713a9764fc7ff70ed3d45a31a2e1e22626ca69"
+    },
+    {
+      "path": "fMRI/LongS15DMT.mat",
+      "size_bytes": 724469,
+      "git_blob_sha1": "987f05017339923a5c6b359b43cf556934e71b81"
+    },
+    {
+      "path": "fMRI/LongS15PCB.mat",
+      "size_bytes": 724922,
+      "git_blob_sha1": "d2b0dc7d85c69484ab99c6fb9a018a94e1f49af9"
+    },
+    {
+      "path": "fMRI/LongS16DMT.mat",
+      "size_bytes": 724941,
+      "git_blob_sha1": "fd3664c16b84a8b260894dad213038372dfc599c"
+    },
+    {
+      "path": "fMRI/LongS16PCB.mat",
+      "size_bytes": 724187,
+      "git_blob_sha1": "6ab4354f1040994bef5df6492ca1c8201ebfd890"
+    },
+    {
+      "path": "fMRI/LongS17DMT.mat",
+      "size_bytes": 724937,
+      "git_blob_sha1": "2ba49d7d802234f5e1fcc925e857b3ab6d36c746"
+    },
+    {
+      "path": "fMRI/LongS17PCB.mat",
+      "size_bytes": 724892,
+      "git_blob_sha1": "d53cc77d70eb7b97f46d2b143b0b4ce66fdcaa4a"
+    },
+    {
+      "path": "fMRI/LongS18DMT.mat",
+      "size_bytes": 725119,
+      "git_blob_sha1": "5fecdc382d4e853480ea80431b3efedcda3c135f"
+    },
+    {
+      "path": "fMRI/LongS18PCB.mat",
+      "size_bytes": 725080,
+      "git_blob_sha1": "6ef34eeb5468ea361be0112a6f63ce528a325f65"
+    },
+    {
+      "path": "fMRI/LongS19DMT.mat",
+      "size_bytes": 724388,
+      "git_blob_sha1": "db5d9d300ec4c67e3b568fb2fb83e88e81535a86"
+    },
+    {
+      "path": "fMRI/LongS19PCB.mat",
+      "size_bytes": 724745,
+      "git_blob_sha1": "f89fc82ef92383621633b8117f6b2757609b49aa"
+    },
+    {
+      "path": "fMRI/LongS22DMT.mat",
+      "size_bytes": 724986,
+      "git_blob_sha1": "e898955279aad374185ed7d05ce1a099b3084c6a"
+    },
+    {
+      "path": "fMRI/LongS22PCB.mat",
+      "size_bytes": 724947,
+      "git_blob_sha1": "846f5121c6244dde2906e10383ce1a0358b38224"
+    },
+    {
+      "path": "fMRI/LongS23DMT.mat",
+      "size_bytes": 724691,
+      "git_blob_sha1": "d44a5d4f2b3ca599dc71340979b0dfa4aa08870a"
+    },
+    {
+      "path": "fMRI/LongS23PCB.mat",
+      "size_bytes": 724821,
+      "git_blob_sha1": "5645aefc894b4058286fef31040ef71bad69ff01"
+    },
+    {
+      "path": "fMRI/LongS25DMT.mat",
+      "size_bytes": 724983,
+      "git_blob_sha1": "5bf6791c9931394f729ddfe6b5730be3597ffd39"
+    },
+    {
+      "path": "fMRI/LongS25PCB.mat",
+      "size_bytes": 724967,
+      "git_blob_sha1": "00bcd9f3c6469ed6fd5c2fce4a652e7281d442c9"
+    },
+    {
+      "path": "fMRI/temp",
+      "size_bytes": 1,
+      "git_blob_sha1": "8b137891791fe96927ad78e64b0aad7bded08bdc"
+    }
+  ],
+  "claim_limits": [
+    "20 subjects with paired files is a file inventory, not an analysis-ready sample.",
+    "The README states 15 fMRI scans passed motion correction; eligibility per subject is NOT recovered from file names.",
+    "5 regional EEG regression files do not imply 20 individually accessible raw EEG recordings.",
+    "Git SHA1 identifies repository blobs but is not a locally recomputed SHA256 of participant files.",
+    "No standard license/notice file in this commit's tree; permission and consent must be checked independently.",
+    "No published statistics or behavioural/subjective reports have been independently recomputed."
+  ],
+  "source_tree_verified_by": "GitHub git/commits/{commit}.tree.sha + recursive git/trees/{sha}, 2026-10-24; 56 exact blob paths/sizes verified, tree.truncated=false"
+}

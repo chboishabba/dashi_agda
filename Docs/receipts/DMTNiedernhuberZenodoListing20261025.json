@@ -1,0 +1,417 @@
+{
+  "schema": "dashi-dmt-niedernhuber-zenodo-source-listing-v1",
+  "source_root": {
+    "paper_doi": "10.1177/02698811261481062",
+    "original_authors": "Maria Niedernhuber; Dila Suay; Bigna Lenggenhager; Michael Müller; Milan Scheidegger; Dario Dornbierer; Helena Aicher",
+    "study_design": "randomised double-blind placebo-controlled separate treatment days; DMT/harmine, harmine, placebo; reported n=25",
+    "origin_claim": "EEG microstate duration/occurrence/complexity and sequence transition statistics; not DMT narrative motifs"
+  },
+  "deposition": {
+    "dataset_title": "DMT microstates",
+    "depositor": "Maria Niedernhuber",
+    "version_record_id": "18850897",
+    "version_doi": "10.5281/zenodo.18850897",
+    "paper_data_statement_doi": "10.5281/zenodo.18850896",
+    "published": "2026-03-03",
+    "version": "v1",
+    "record_url": "https://zenodo.org/records/18850897",
+    "listed_display_size": "450.7 MB",
+    "listing_provenance": "Zenodo version record page, accessed 2026-10-25",
+    "listed_file_pair_count": 25,
+    "listed_file_count": 50,
+    "access_label": "Open",
+    "license_status": "cc-by-4.0_in_user_supplied_zenodo_api_metadata_not_live_origin_reconfirmed",
+    "code_url_advertised": "https://github.com/marianiedernhuber/DMT_microstates",
+    "code_commit_status": "pinned_primary_author_commit",
+    "note": "2026-10-25 record page renders a blank license field. Open download status does not establish permitted reuse/redistribution. Original analysis code explicitly declares 25 file-prefix participant IDs and loops three conditions with unavailable getconds/session metadata; raw dataset mapping, split and executed state not verified. 18850896 listed in paper, 18850897 on version page; concept/version relation inferred, API confirmation outstanding.",
+    "checksum_transcription_status": "all_50_values_match_user_supplied_zenodo_api_json_unverified_live_origin",
+    "checksum_nonpromotion_note": "All 50 name→MD5 transcriptions were independently joined to the user's uploaded Zenodo API-shaped 18850897.json (SHA-256 9fc6a2f48ac0ca501aafe09733968e3b25223ad547f816da440c9cf90a137de0). Four files initially and all eleven available Drive EEG bytes were verified by local MD5 and exact size. The JSON itself has not been fetched live via authenticated Zenodo API: metadata consistency ≠ independent server-origin authentication, and 11≠50 verified EEG source bytes.",
+    "metadata_api_shape_record_sha256": "9fc6a2f48ac0ca501aafe09733968e3b25223ad547f816da440c9cf90a137de0",
+    "record_checksum_crosscheck": "50_of_50_name_md5_values_match_user_supplied_zenodo_api_json",
+    "local_uploaded_byte_receipt": "11_of_11_accessible_eeg_file_bytes_md5_and_size_match_user_supplied_zenodo_api_json"
+  },
+  "file_pairs": [
+    {
+      "file_prefix": "1001",
+      "files": [
+        {
+          "name": "1001_equalised.fdt",
+          "md5": "4f60a2a12ca22c56436349f24bd943e7"
+        },
+        {
+          "name": "1001_equalised.set",
+          "md5": "323cc19ffc860ff8d20c384368b64571"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1002",
+      "files": [
+        {
+          "name": "1002_equalised.fdt",
+          "md5": "f58f778b6d66355afe8b37e7ed6bf4dc"
+        },
+        {
+          "name": "1002_equalised.set",
+          "md5": "b022f18339c2a394b681a84385307d3a"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1003",
+      "files": [
+        {
+          "name": "1003_equalised.fdt",
+          "md5": "a4938db4e1b8acec9716b063afb24ec6"
+        },
+        {
+          "name": "1003_equalised.set",
+          "md5": "c6d5d9d69a5c5b63d658f2626565757e"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1004",
+      "files": [
+        {
+          "name": "1004_equalised.fdt",
+          "md5": "1ee702906484ad63807fdc80004fcc80"
+        },
+        {
+          "name": "1004_equalised.set",
+          "md5": "420186bac036c762ae5389926f0e9029"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1006",
+      "files": [
+        {
+          "name": "1006_equalised.fdt",
+          "md5": "66fccf908f56c98d727251f96e0660e3"
+        },
+        {
+          "name": "1006_equalised.set",
+          "md5": "4c182ae66c98a2b93fe70ebaea14d45e"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1009",
+      "files": [
+        {
+          "name": "1009_equalised.fdt",
+          "md5": "2a7117e5f793f96361e20616eaad4087"
+        },
+        {
+          "name": "1009_equalised.set",
+          "md5": "5097648bf375332a991348397f4105a5"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1010",
+      "files": [
+        {
+          "name": "1010_equalised.fdt",
+          "md5": "bfe5f7abd1e1779a8a9dfcc7f02513bf"
+        },
+        {
+          "name": "1010_equalised.set",
+          "md5": "439b2622f507e6350f60945044fd6b3f"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1011",
+      "files": [
+        {
+          "name": "1011_equalised.fdt",
+          "md5": "f3cc85137ab0c3f44478872b17ee59bc"
+        },
+        {
+          "name": "1011_equalised.set",
+          "md5": "6a8bacbf609c7ce49f3ec5f756ad71c0"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1013",
+      "files": [
+        {
+          "name": "1013_equalised.fdt",
+          "md5": "d43e31a4185a2d8e75ab9024bd485828"
+        },
+        {
+          "name": "1013_equalised.set",
+          "md5": "1156fa31626dd02052444fff39ca7515"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1014",
+      "files": [
+        {
+          "name": "1014_equalised.fdt",
+          "md5": "ddde17dfc762ccfcdcb591416962835e"
+        },
+        {
+          "name": "1014_equalised.set",
+          "md5": "5054c69ae00c306db299a196fab6d38d"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1016",
+      "files": [
+        {
+          "name": "1016_equalised.fdt",
+          "md5": "bd94c8abbbf80665c9eb0d7d614a9f13"
+        },
+        {
+          "name": "1016_equalised.set",
+          "md5": "a84165674f4dcd4e93087d38de3797bb"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1019",
+      "files": [
+        {
+          "name": "1019_equalised.fdt",
+          "md5": "1cd20310fad374c236e9c35e35d0bb70"
+        },
+        {
+          "name": "1019_equalised.set",
+          "md5": "e54eb3ec4ec5960d140ed2f525d34f62"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1021",
+      "files": [
+        {
+          "name": "1021_equalised.fdt",
+          "md5": "20058318f7c3c33d500f79920b055a22"
+        },
+        {
+          "name": "1021_equalised.set",
+          "md5": "7bd697ce512fc34d6289e89ce9418053"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1022",
+      "files": [
+        {
+          "name": "1022_equalised.fdt",
+          "md5": "ed642380467948eaca1a4d1a249a450a"
+        },
+        {
+          "name": "1022_equalised.set",
+          "md5": "09f42a5d90e0219af3a788f7512e4a6e"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1023",
+      "files": [
+        {
+          "name": "1023_equalised.fdt",
+          "md5": "c7c16fedb7e705c843520c1da6c1003b"
+        },
+        {
+          "name": "1023_equalised.set",
+          "md5": "830376f9fe1bfabddc83fddfdaba36df"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1024",
+      "files": [
+        {
+          "name": "1024_equalised.fdt",
+          "md5": "30d8eac1bd29693b5aedb15d68a15c58"
+        },
+        {
+          "name": "1024_equalised.set",
+          "md5": "23d23284f463527ce4803ddb72456770"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1025",
+      "files": [
+        {
+          "name": "1025_equalised.fdt",
+          "md5": "7311f08148cf92c7443d589a9c8e41a1"
+        },
+        {
+          "name": "1025_equalised.set",
+          "md5": "b5f4b4d38f52478830c77bde558b38f9"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1026",
+      "files": [
+        {
+          "name": "1026_equalised.fdt",
+          "md5": "2c4bb83c42a3cd3da8a91c170cac04bb"
+        },
+        {
+          "name": "1026_equalised.set",
+          "md5": "4427578b3f439f4b810551974b0e7f1c"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1027",
+      "files": [
+        {
+          "name": "1027_equalised.fdt",
+          "md5": "47395fd0bc20d0fa5d5580f013963cf9"
+        },
+        {
+          "name": "1027_equalised.set",
+          "md5": "0dfc489a9bee8e2e82bc3bb0a3d66589"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1028",
+      "files": [
+        {
+          "name": "1028_equalised.fdt",
+          "md5": "c2fc999d0139aacc89d5102b4a1b3bba"
+        },
+        {
+          "name": "1028_equalised.set",
+          "md5": "916a1fa77790d96b8ed63f639b70daf2"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1029",
+      "files": [
+        {
+          "name": "1029_equalised.fdt",
+          "md5": "fd0c70c7653a3dca10866716cd0c4dd3"
+        },
+        {
+          "name": "1029_equalised.set",
+          "md5": "664e6033b3618d6ae23cc20a7f5d94fd"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1031",
+      "files": [
+        {
+          "name": "1031_equalised.fdt",
+          "md5": "bc96ae0cabb481ce5f1ffd27cfbdabda"
+        },
+        {
+          "name": "1031_equalised.set",
+          "md5": "4c0be0e75b79aa4874d3c18c3c33f46a"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1038",
+      "files": [
+        {
+          "name": "1038_equalised.fdt",
+          "md5": "812081fb8105adcea14d9cb4f5bc2a3f"
+        },
+        {
+          "name": "1038_equalised.set",
+          "md5": "a9a4ec6c47ccd47b1d86619b5b1c2478"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1040",
+      "files": [
+        {
+          "name": "1040_equalised.fdt",
+          "md5": "1ae07f62e14e59a47b6a2ef78c1aaa72"
+        },
+        {
+          "name": "1040_equalised.set",
+          "md5": "3d59f62469d973bc8aee572b1cdd61af"
+        }
+      ]
+    },
+    {
+      "file_prefix": "1041",
+      "files": [
+        {
+          "name": "1041_equalised.fdt",
+          "md5": "afaf64a4da00a1b93968c2ac6f19f739"
+        },
+        {
+          "name": "1041_equalised.set",
+          "md5": "20c9d8403fcb71f7003a8228f293a45a"
+        }
+      ]
+    }
+  ],
+  "consumer_ceiling": {
+    "published_listing_verified": true,
+    "local_bytes_verified": false,
+    "clinical_condition_crosswalk_verified": false,
+    "microstate_label_arrays_verified": false,
+    "original_transition_reproduced": false,
+    "measured_entity_experience": false,
+    "independent_conscious_agent_inferred": false,
+    "source_code_declares_25_participants": true,
+    "source_code_declares_three_condition_loop": true,
+    "source_code_g1_export_identified": true,
+    "participant_identity_and_arms_verified_from_recording_contents": false,
+    "original_pipeline_dependencies_verified": false,
+    "authoritative_zenodo_md5_listing_verified": false,
+    "user_supplied_zenodo_api_json_50_of_50_checksum_match": true,
+    "available_subset_11_uploaded_bytes_md5_matched": true
+  },
+  "original_analysis_code": {
+    "repository": "marianiedernhuber/DMT_microstates",
+    "branch": "main",
+    "commit": "c5c064d109563e97127403a8fbb340009ba1e88b",
+    "committed": "2026-03-02T16:58:11Z",
+    "source_files": [
+      {
+        "path": "check_counterbalance.r",
+        "git_blob_sha1": "9716ab46f15782294e53ccf8e3588593653dbdfc",
+        "role": "author lists 25 participant IDs and obtains session order from unavailable acute_change_bl.csv"
+      },
+      {
+        "path": "disemb_mc_mkcoh.m",
+        "git_blob_sha1": "f1855919b8a8ef315413ecbf103dcad24fc81519",
+        "role": "loops DMT,harmine,placebo and uses getconds project helper on each .set prefix"
+      },
+      {
+        "path": "disemb_mc_backfit.m",
+        "git_blob_sha1": "74f23cad7fc968e3a8b537bfa013ae62fb3b885e",
+        "role": "microstate class backfit against globally estimated maps, two label rounds"
+      },
+      {
+        "path": "disemb_mc_Rprep.m",
+        "git_blob_sha1": "3f58dde834189972410165cdd06392dea9220b33",
+        "role": "exports coh.stats(idx).markov.G1 for author-side Markov result"
+      },
+      {
+        "path": "disemb_microstate.m",
+        "git_blob_sha1": "83683cfadb5a6ca76f63a0a9ec7a227a45e61e85",
+        "role": "author's thin pipeline orchestrator"
+      }
+    ],
+    "dependency_obligations": [
+      "Author getconds, allproj_dir, disemb_loadpaths and external microstate MATLAB class implementation and versions",
+      "Author session drug order input acute_change_bl.csv and source data preprocessing/segmentation",
+      "Pin G1 definition from original microstate dependency; not interchangeable with entropy/MI",
+      "Recover effective maps, inclusion/exclusion/order and reproducible execution state"
+    ],
+    "claim": "Original authors supply source-written analysis plan and explicit 25 participant IDs; this is not an executed or kernel-proved participant replay"
+  }
+}

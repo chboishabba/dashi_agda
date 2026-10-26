@@ -1,0 +1,280 @@
+{
+  "schema": "dashi-dmt-restricted-model-cards-v1",
+  "revision": "2026-10-24",
+  "phase": "2B design frozen at schema/model-family level; parameters, event sets and split seed await admissible measured variables",
+  "status": "pre_empirical_design_only",
+  "measurement_root": "pnas2023",
+  "primary_study_doi": "10.1073/pnas.2218949120",
+  "source_world": "Docs/receipts/DMT2023SourceWorld.json",
+  "acquisition_dossier": "Docs/receipts/DMT2023DeweyIbrahimAcquisitionDecision20261024.json",
+  "shared_contract": {
+    "observables": [
+      "subject_pseudonym",
+      "session_id",
+      "condition_DMT_or_PCB",
+      "relative_bolus_time_seconds",
+      "observed_fMRI_or_EEG_feature_vector",
+      "observation_mask",
+      "source_preprocessing_version"
+    ],
+    "conditional_observables": [
+      {
+        "field": "measured_subjective_intensity",
+        "state": "only if time-aligned and subject-specific source objects admitted",
+        "not_substitute": "published group map or Sanders interview categories"
+      },
+      {
+        "field": "DMT_exposure_concentration",
+        "state": "unobserved in original 20mg-bolus cohort unless PK source maps person/time same object",
+        "not_substitute": "fixed administered dose"
+      }
+    ],
+    "same_outcome_dictionary_for": [
+      "M0",
+      "M1",
+      "M2"
+    ],
+    "same_preprocessing_and_missingness": true,
+    "same_split": {
+      "unit": "whole_subject",
+      "pairing": "keep DMT/PCB visits together",
+      "stratification": "condition and available site/session metadata",
+      "rule": "no subject or session's derived features across train/test; masks decided from source QC before fitting; no leakage through temporal smoothing or population transforms",
+      "seed_status": "to_predeclare_before_receipt",
+      "test_fraction_status": "to_predeclare_before_receipt",
+      "outcome_visibility": "held-out outcomes are locked before model selection"
+    },
+    "score": {
+      "primary_metric": "held_out_mean_negative_log_predictive_density_per_subject_time_or_subject",
+      "secondary_metrics": [
+        "proper_brier_or_log_score_for_predeclared_binary events",
+        "expected_calibration_error_with_bootstrap_by_subject",
+        "predictive_coverage_at_fixed nominal intervals",
+        "concentration_of_effect_across_participants"
+      ],
+      "statistical_unit": "participant (NOT 112x112 network edges, EEG channels, or temporal windows)",
+      "contrasts": [
+        "M1_vs_M0",
+        "M2_vs_M0",
+        "M2_vs_M1"
+      ],
+      "uncertainty": "participant-cluster bootstrap with seed preregistered",
+      "tuning_budget": "equal/complexity-matched and independently predeclared",
+      "failure": "Any absent modality, unmeasured variable, or unidentifiable dose coefficient is masked explicitly, never imputed as a new observed outcome",
+      "model_specificity": "M2 prediction supports distinctive theory only if restricted M1 cannot match same held-out observations under comparably justified priors and capacity",
+      "inference_rule": "A restricted M2 held-out score advantage against a limited M1 is NOT unique evidence for external conscious agency; include a comparably expressive source-independent endogenous HMM ceiling and a mechanistic active-inference comparator. Before any ontology promotion require non-observational or intervention-based discriminators.",
+      "multiple_comparisons": "Predeclare primary comparator and control familywise/multiple comparisons; do not select the most flattering M2 contrast post hoc."
+    },
+    "known_design_boundaries": [
+      "Original 2023 uses bolus 20mg DMT vs placebo; nonzero dose-response curve cannot be inferred solely from one active dose",
+      "Public AAL MAT and original voxel NIfTI observations are not identical sources",
+      "Participant count 20 deposited pairs does not identify n16 static eligible or n13 dynamic",
+      "Unmeasured expectancy, participant belief and pharmacokinetic state are not assumed to be observed",
+      "Do not use source-defined sample-specific statistics for held-out tuning",
+      "No retrospective model family tightening after seeing test results",
+      "Existing psychedelic motif Agda operators are finite stipulated transitions (lattice→tunnel→face), not transition kernels estimated from Erowid experience reports",
+      "Noah et al 2024 Erowid corpus includes a named Entities category and 1,121 DMT reports; authors' published category proportions are not person-level onsets, no proof of participant recurrence, and no evidence of independent external entities",
+      "Hyperfabric sites remain typed by sampling unit, time resolution, archival lineage, measurement status and access rights. Published Erowid category prevalences can support an aggregate report consumer but cannot transport directly to individual temporal recurrence, voxel-neural replay or M2 ontology."
+    ]
+  },
+  "models": [
+    {
+      "id": "M0",
+      "role": "measurement_and_temporal_null",
+      "latent_state": "none beyond subject/session baseline and prespecified temporal smooth dependence",
+      "transition": "condition/time/subject effects and a fixed limited-lag autoregressive baseline with missingness; no hidden conscious-agent semantics",
+      "observation_dictionary": "shared_contract.observables",
+      "fixed_independently": [
+        "subject-exclusive split",
+        "event coding",
+        "lag count and smoothing regularisation frozen before fitting"
+      ],
+      "fitted_only_in_training": [
+        "regression coefficient estimates",
+        "subject random-effect distribution",
+        "noise scale"
+      ],
+      "predictions": [
+        "proper distribution over held-out measured features/time bins",
+        "calibration and change from baseline"
+      ],
+      "falsification": "Held-out systematic residual beyond predeclared error bound that M1/M2 reduce with the same observables",
+      "nonpromotion": "A null rejection is not evidence for conscious-agent ontology",
+      "data_ready": false
+    },
+    {
+      "id": "M1",
+      "role": "serious_endogenous_state_space",
+      "latent_state": "finite state-space/HMM or constrained dynamical latent state modelling neurobiological temporal history, salience, self/world reconstruction",
+      "transition": "condition- and measured-history-conditioned transition with bounded, prespecified complexity; no concealed target availability",
+      "observation_dictionary": "shared_contract.observables",
+      "fixed_independently": [
+        "number of latent states / allowed complexity set before sealed test evaluation",
+        "network feature vocabulary",
+        "condition mask"
+      ],
+      "fitted_only_in_training": [
+        "latent transitions",
+        "emission distributions",
+        "history-memory coefficients"
+      ],
+      "predictions": [
+        "held-out neural and optional subjective time-course",
+        "posterior latent trajectories with calibration and uncertainty"
+      ],
+      "falsification": "Fails prespecified held-out improvement and calibration thresholds against M0, or can match M2 and removes claimed distinctive prediction",
+      "nonpromotion": "Endogenous dynamics need not explain philosophical ontology; flexible M1 can observationally simulate M2",
+      "data_ready": false,
+      "serious_endogenous_donors": [
+        {
+          "doi": "10.1093/nc/niaf069",
+          "authors": "Jonas Mago, George Deane and coauthors (2026)",
+          "title": "Computational spirits: a neuroscientific account of psychedelic entity encounters",
+          "role": "conceptual active-inference agency attribution, sensory attenuation, counterfactual depth and cultural priors",
+          "evidence": "theory without mathematical implementation or new empirical dataset",
+          "not_an_empirical_reproduction": true
+        },
+        {
+          "doi": "10.1093/nc/niag015",
+          "authors": "James W Sanders and coauthors (2026)",
+          "title": "Micro-phenomenology of immersion and perceived presences under DMT",
+          "role": "temporal observation target (presence after sensory/spatial integration), not direct corroboration of active-inference mechanism",
+          "cohort_independence_unknown": true
+        }
+      ],
+      "required_mechanistic_steelman": [
+        "M1a: implement an explicitly bounded active-inference candidate with two distinct prior dimensions: counterfactual richness / depth, and sensory precision / self-other agency attribution, following Mago et al's conceptual account; do not claim authors provided an executable model",
+        "M1b: include a generic matched-capacity HMM/state-space observational equivalence ceiling: any finite M2 latent Q/emission-only observation model can be relabelled as an endogenous stochastic latent model with the same observed law",
+        "Prespecify culturally conditioned priors, familiarity and expectancy as potential explanatory covariates only if actually collected; unknowns stay unobserved",
+        "Account for retrospective temporal ordering uncertainty, interviews/coder reliability, subject overlap and independent cohort provenance",
+        "Condition a future report-level theme comparator on substance, dose, preparation, expectations and cultural narrative/selection bias only where permitted and actually observed; do not transform sentence counts into independent people"
+      ],
+      "conditional_predictions": [
+        "If operational sensory precision/counterfactual depth are measurable and modulated under controlled conditions, a restricted M1a predicts agency-attribution shifts attributable to those variables, with parameter bounds predeclared",
+        "Multisensory/3D perceptual development can precede presence onset even in wholly endogenous generative models; temporal ordering alone is not a model discriminator",
+        "M1b can exactly emulate a finite fixed-Q hidden-state emission distribution; a generic M2 trace identity thus cannot uniquely identify latent ontology"
+      ]
+    },
+    {
+      "id": "M2",
+      "role": "restricted_conscious_agent_trace_hypothesis",
+      "latent_state": "finite latent agent-state proposal with fixed-Q nested subset traces and independently grounded observation maps",
+      "transition": "fixed Q across explicitly comparable trace windows under a declared model; dose/condition may change observation/emission maps only unless separate Q(c) model preregistered",
+      "observation_dictionary": "shared_contract.observables",
+      "fixed_independently": [
+        "nested observable event sets and their operational measurement map",
+        "latent state capacity bound and fixed-Q assumption",
+        "return/first-entry conditioning and event-window definitions",
+        "which predictions would fail restricted M1"
+      ],
+      "fitted_only_in_training": [
+        "constrained observation-map parameters",
+        "allowed initial distribution/noise parameters"
+      ],
+      "predictions": [
+        "predeclared first-return/trace consistency on held-out measurable nested event sets",
+        "proper predictive distribution on exactly M0/M1 observables"
+      ],
+      "falsification": "Measured violations of frozen trace law/assumptions within accuracy limits, or no matched held-out predictive advantage against M1",
+      "nonpromotion": "Generic Markov trace identities also hold for ordinary stochastic models; without distinct exclusion of M1 the outcome is nonidentifiability, not agent evidence",
+      "data_ready": false,
+      "extra_adversarial_requirements": [
+        "Supply a prediction impossible under the predeclared serious endogenous mechanistic M1a, rather than merely outperforming M0",
+        "Report a generic matched-capacity M1b HMM observational-equivalence ceiling, with a rational exact counterexample when appropriate",
+        "If the distinguishing prediction is concealed-target information, move it into prospective M3 with leakage and blinding controls; no retrospective fMRI or presence report can stand in",
+        "Formal fixed-Q nesting constraints must be separately measured and operationally identified across conditions; condition-specific Q(c) changes cannot be hidden under the fixed-Q proof",
+        "Any recurring motif Markov attractor or ternary three-cycle is already reproducible by ordinary endogenous stochastic dynamics; a distinct M2 claim needs source-defined transition distributions or independent intervention, not recurring labels alone"
+      ],
+      "ontology_not_identified_by_finite_HMM_trace": true
+    }
+  ],
+  "independent_consumers": [
+    {
+      "id": "M3",
+      "role": "prospective_anomalous_target_information_channel",
+      "not_same_outcome_as_M0_M2": true,
+      "requires": [
+        "ethically approved protocol",
+        "preregistered concealed target",
+        "cryptographic commitment and timing",
+        "participant/staff/analyst blinding",
+        "ordinary signal and leakage audit",
+        "negative control/denominator/missingness",
+        "independent replication"
+      ],
+      "status": "design_not_approved_not_in_2023_imaging",
+      "claim_ceiling": "unexplained information-channel effect if replicated; not identity of entity"
+    },
+    {
+      "id": "M4",
+      "role": "external_conscious_ontology",
+      "not_same_outcome_as_M0_M2": true,
+      "requires": [
+        "unique alternative-excluding causal prediction",
+        "independently justified access to hidden information if claimed",
+        "repeated blinded replication",
+        "explicit alternative agency/mechanism identifiability"
+      ],
+      "status": "no_current_discriminator",
+      "claim_ceiling": "no promotion from M0-M3 success by analogy alone"
+    }
+  ],
+  "registration_requirements": {
+    "before_fitting": [
+      "verify source-rights",
+      "recover real 16-person static or a separately declared available observational cohort",
+      "freeze exact observable roles and preprocessing",
+      "freeze split seed/fraction, model complexity, prediction event sets, uncertainty rule and numerical pass threshold",
+      "document confirmatory vs exploratory endpoints",
+      "Declare mechanism-specific, observable counterfactual that distinguishes M2 from bounded active-inference M1a, or preregister a null/observational equivalence result",
+      "Include a generic endogenous HMM M1b equivalence control and report whether the M2 family is a constrained subset of that control"
+    ],
+    "model_lock": "design candidates; NOT preregistered because measurements and exact choices remain unresolved",
+    "publication_outcomes": [
+      "held-out discrimination with uncertainty",
+      "credible lack of discrimination",
+      "source-data unavailable",
+      "method not source-equivalent"
+    ],
+    "unknowns": [
+      "effect-size threshold",
+      "test sample size after QC",
+      "event sets for M2",
+      "synchronized experience observations",
+      "individual PK trajectories"
+    ]
+  },
+  "attribution": {
+    "DMT_data": "Timmermann et al 2023 and original producer roles",
+    "phenomenology": "Sanders et al 2026 distinct publication; participant overlap unverified",
+    "formal_model": "DASHI hypothesis-design and model-comparison work, not claimed original Timmermann/Sanders mathematics",
+    "generic_Markov_trace": "standard stochastic identities, not unique evidence for conscious-agent metaphysics",
+    "active_inference_2026": "Mago et al., Neuroscience of Consciousness (2026), DOI 10.1093/nc/niaf069, conceptual active-inference paper; not a new neuroimaging dataset or executable validated competitor."
+  },
+  "empirical_predictions_tested": false,
+  "synthetic_contract_tests": "code-validated separately; not evidence of model fit",
+  "steelman_adversarial_dossier": "Docs/receipts/DMTSteelmanDiscriminatorValue20261024.json",
+  "adversarial_rational_witness": "scripts/audit_dmt_steelman_identifiability.py",
+  "recurring_motif_prior_art": "Docs/receipts/DMTRecurringMotifErowidPriorArtBridge20261025.json",
+  "retrospective_report_modality": {
+    "original_study_doi": "10.3389/fpsyg.2024.1397064",
+    "source": "Noah, Shen, Earth Erowid, Fire Erowid, Silver 2024",
+    "observables_available_from_published_study": [
+      "substance-indexed visual-sentence prevalence",
+      "relative similarity to author-defined visual seed phrases",
+      "categories Pattern, Movement, Color, Entities, Global visual alterations, Distortion, Affect, Other"
+    ],
+    "unavailable_without_rights_or_new_coding": [
+      "individual raw Erowid report corpus",
+      "person-level temporal motif transition kernel",
+      "report-level multi-label recurrence with reliably annotated chronology",
+      "neural-to-Erowid paired observations"
+    ],
+    "experimental_independence": "Erowid narrative cohort not a replication of original 2023 EEG-fMRI cohort. Do not infer cross-paper same-person matching or independence without evidence.",
+    "rights": "Erowid requires prior permission for mining/distilled aggregate experience-report data; published author summary can be analysed with citation",
+    "source_claim_ceiling": "substance-specific narrative feature proportions are source-supported; recurrent attractor processes remain untested toys",
+    "cannot_identify_external_agents": true,
+    "fibre_admission": "Only e_published_motif_summary and the separate synthetic non-identification/cross-paper descriptive edges are source-admissible from currently located information. Sequenced Erowid reports require lawful access and chronological annotations."
+  },
+  "motif_observation_hyperfabric": "Docs/receipts/DMTMotifObservationHyperfabric20261025.json"
+}

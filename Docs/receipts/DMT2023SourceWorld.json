@@ -1,0 +1,874 @@
+{
+  "world_id": "DMT-2023-empirical-source-world",
+  "revision": "2026-10-24",
+  "schema": "dashi-source-world-v1",
+  "authority_note": "Source objects are not proof, observational truth or permission. Source-root dependence must not be counted as replication. Only locally verified source receipts can change notLocated status; none fabricated.",
+  "policy_modules": [
+    "DASHI.Core.EvidenceAcquisitionSelectiveReopeningExact",
+    "DASHI.Core.SourceConditionedObservationExact",
+    "DASHI.Core.CostedResidualInformationChoiceExact",
+    "DASHI.Core.SnowballAttributionProvenanceInvariantExact",
+    "DASHI.Wikimedia.IbrahimSnowballDependencyNDimLocalGlobalProofSearchBidiExact",
+    "DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact"
+  ],
+  "sources": [
+    {
+      "id": "pnas2023",
+      "kind": "primary_study",
+      "author": "Christopher Timmermann; Leor Roseman; Sharad Haridas; Fernando E. Rosas; collaborators",
+      "title": "Human brain effects of DMT assessed via EEG-fMRI",
+      "doi": "10.1073/pnas.2218949120",
+      "url": "https://doi.org/10.1073/pnas.2218949120",
+      "lineage_root": "pnas2023",
+      "authority": "original published report only"
+    },
+    {
+      "id": "pnas_gitrepo",
+      "kind": "primary_data_deposit",
+      "author": "Christopher Timmermann and original study group",
+      "title": "DMT_Imaging data and scripts",
+      "url": "https://github.com/timmer500/DMT_Imaging/tree/b35701d88d904e2f602164ff2eae0fc879772078",
+      "git_commit": "b35701d88d904e2f602164ff2eae0fc879772078",
+      "lineage_root": "pnas2023",
+      "authority": "file identities and author scripts, not per-person QC or licence"
+    },
+    {
+      "id": "pnas_reanalysis2025",
+      "kind": "reanalysis",
+      "author": "Original and subsequent authors of whole-brain dynamics work",
+      "title": "Transient destabilization of whole brain dynamics induced by N,N-Dimethyltryptamine (DMT)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11897362/",
+      "lineage_root": "pnas2023",
+      "authority": "different exclusions/preprocessing; NOT independent participant replication"
+    },
+    {
+      "id": "source_eeg_repro",
+      "kind": "secondary_software",
+      "author": "Kiret Dhindsa",
+      "title": "DMT EEG analysis and reproduction software",
+      "url": "https://github.com/kiretd/dmt_eeg",
+      "lineage_root": "pnas2023",
+      "authority": "self-reported software reproduction, not new participant cohort"
+    },
+    {
+      "id": "sanders2026",
+      "kind": "primary_phenomenology",
+      "author": "James W. Sanders; Raphaël Millière; Ema Demšar; Zachary G. Daily; David Erritzoe; Robin Carhart-Harris; Christopher Timmermann",
+      "title": "Micro-phenomenology of immersion and perceived presences under DMT",
+      "doi": "10.1093/nc/niag015",
+      "url": "https://doi.org/10.1093/nc/niag015",
+      "lineage_root": "sanders2026",
+      "authority": "published retrospective presence-precursor observation; overlap with 2023 subjects unverified"
+    },
+    {
+      "id": "brainit2026",
+      "kind": "methodological_donor",
+      "author": "Roman Beliy; Amit Zalcher; Jonathan Kogman; Navve Wasserman; Michal Irani",
+      "title": "Brain-IT: Image Reconstruction from fMRI via Brain-Interaction Transformer",
+      "url": "https://arxiv.org/abs/2510.25976",
+      "lineage_root": "brainit2026",
+      "authority": "viewed-stimulus decoding, not DMT subjective experiences"
+    },
+    {
+      "id": "pnas_static_script",
+      "kind": "primary_analysis_code",
+      "author": "Christopher Timmermann (script header, 2022)",
+      "title": "StaticGFC.m: ROI/global functional connectivity analysis script",
+      "url": "https://github.com/timmer500/DMT_Imaging/blob/b35701d88d904e2f602164ff2eae0fc879772078/Scripts/StaticGFC.m",
+      "git_blob_sha1": "f87d99f448848c3b0531fea0780ee241ebd77549",
+      "lineage_root": "pnas2023",
+      "authority": "Original source code lists all 20 pseudonymous source IDs and author-side preprocessing paths; NOT the four excluded IDs or a verified manuscript-matched execution"
+    }
+  ],
+  "source_dependencies": [
+    {
+      "from": "pnas_gitrepo",
+      "to": "pnas2023",
+      "type": "author_deposit"
+    },
+    {
+      "from": "pnas_reanalysis2025",
+      "to": "pnas2023",
+      "type": "reuses_cohort"
+    },
+    {
+      "from": "source_eeg_repro",
+      "to": "pnas2023",
+      "type": "software_reanalysis"
+    },
+    {
+      "from": "sanders2026",
+      "to": "pnas2023",
+      "type": "possible_shared_investigators_subject_overlap_unverified"
+    },
+    {
+      "from": "pnas_static_script",
+      "to": "pnas2023",
+      "type": "original_analysis_code_same_study"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "primary_paper",
+      "status": "present",
+      "kind": "document",
+      "source": "pnas2023",
+      "locator": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10068756/",
+      "scope": "published claims only"
+    },
+    {
+      "id": "git_tree",
+      "status": "present",
+      "kind": "source_metadata",
+      "source": "pnas_gitrepo",
+      "locator": "Docs/receipts/DMTImagingPinnedSourceTree20261024.json",
+      "scope": "Git hashes for 56 source files, not local byte inspection"
+    },
+    {
+      "id": "original_static_fd",
+      "status": "notLocated",
+      "kind": "measurement",
+      "source": "pnas2023",
+      "scope": "DMT condition, original 8-min post bolus FD, all 20 pseudonyms"
+    },
+    {
+      "id": "original_full_fd",
+      "status": "notLocated",
+      "kind": "measurement",
+      "source": "pnas2023",
+      "scope": "full 28-min original FD/censoring, source-reconciled"
+    },
+    {
+      "id": "original_eeg_qc",
+      "status": "notLocated",
+      "kind": "measurement",
+      "source": "pnas2023",
+      "scope": "EEG artefact mask and original joint eligibility"
+    },
+    {
+      "id": "original_preproc",
+      "status": "notLocated",
+      "kind": "protocol",
+      "source": "pnas2023",
+      "scope": "Original n16 static-NIfTI image preprocessing, FD censoring, ROI mask, bolus alignment, nuisance and FCD statistics, not an automatically equivalent BOLD_AAL MAT pipeline"
+    },
+    {
+      "id": "source_local_bytes",
+      "status": "notLocated",
+      "kind": "local_copy",
+      "source": "pnas_gitrepo",
+      "scope": "Locally hashed 40 public parcelled BOLD_AAL MAT source files, suitable for independently identified exploratory/dynamic consumers; NOT an original static NIfTI requirement"
+    },
+    {
+      "id": "data_use_review",
+      "status": "notLocated",
+      "kind": "governance",
+      "source": "pnas_gitrepo",
+      "scope": "re-use permissions, research ethics, retention and redistribution distinct"
+    },
+    {
+      "id": "static_fmri_replay",
+      "status": "notLocated",
+      "kind": "measurement_derived",
+      "source": "pnas2023",
+      "scope": "same-object recomputation of original t(15)"
+    },
+    {
+      "id": "sanders_article",
+      "status": "present",
+      "kind": "document",
+      "source": "sanders2026",
+      "locator": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13366535/",
+      "scope": "published temporal sequence claims only"
+    },
+    {
+      "id": "sanders_phase_data",
+      "status": "notLocated",
+      "kind": "controlled_data",
+      "source": "sanders2026",
+      "scope": "21 deidentified phase matrices/phase timings; available by reasonable request"
+    },
+    {
+      "id": "sanders_codebook",
+      "status": "notLocated",
+      "kind": "controlled_data",
+      "source": "sanders2026",
+      "scope": "125 categories and coding/adjudication manual with source trace"
+    },
+    {
+      "id": "participant_lineage",
+      "status": "notLocated",
+      "kind": "metadata",
+      "source": "sanders2026",
+      "scope": "source-reviewed overlap crosswalk between 2023 and 2026 DMT participants, non-identifying"
+    },
+    {
+      "id": "concealed_target_protocol",
+      "status": "notLocated",
+      "kind": "protocol",
+      "source": "pnas2023",
+      "scope": "new ethics-approved protocol required, not part of 2023 imaging study"
+    },
+    {
+      "id": "source_subject_namespace",
+      "status": "present",
+      "kind": "analysis_code_coordinate",
+      "source": "pnas_static_script",
+      "locator": "https://github.com/timmer500/DMT_Imaging/blob/b35701d88d904e2f602164ff2eae0fc879772078/Scripts/StaticGFC.m#L6-L8",
+      "scope": "20 hard-coded pseudonymous subjects in upstream StaticGFC source, not eligibility or QC thresholds",
+      "subject_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S22",
+        "S23",
+        "S25"
+      ],
+      "git_blob_sha1": "f87d99f448848c3b0531fea0780ee241ebd77549"
+    },
+    {
+      "id": "source_static_analysis_code",
+      "status": "present",
+      "kind": "analysis_code",
+      "source": "pnas_static_script",
+      "locator": "https://github.com/timmer500/DMT_Imaging/blob/b35701d88d904e2f602164ff2eae0fc879772078/Scripts/StaticGFC.m",
+      "scope": "Archived MATLAB analysis source explicitly references author-local NIfTI/atlas directories; no exact same-object replay or 16-person exclusion execution"
+    },
+    {
+      "id": "dynamic_tapered_window_in_pinned_tree",
+      "status": "knownAbsent",
+      "kind": "source_code_dependency",
+      "source": "pnas_gitrepo",
+      "scope": "A standalone implementation of tapered_sliding_window used by Scripts/dRSFC.m is NOT in the recursively inspected b35701d source Git tree. May exist outside this repository; do not infer global nonexistence.",
+      "negative_search_receipt": "Pinned DMTImagingPinnedSourceTree20261024.json enumerates 56 files; no path/base name tapered_sliding_window; Scripts/dRSFC.m calls this function"
+    },
+    {
+      "id": "original_preprocessed_voxel_nifti",
+      "status": "notLocated",
+      "kind": "source_input",
+      "source": "pnas_static_script",
+      "scope": "Source-listed preprocessed per-condition per-subject post1 MNI152 scrubbed_FD_040/clean_with_intact/*.nii.gz images; different materialisation than released BOLD_AAL parcelled .mat files."
+    },
+    {
+      "id": "original_schaefer_extended_mask",
+      "status": "notLocated",
+      "kind": "source_input",
+      "source": "pnas_static_script",
+      "scope": "Author-side Schaeff1007NExt.nii.gz ROI mask (Schaefer with extended subcortical labels), absent as a file from pinned 56-file Git tree; coordinate-specific source exactness."
+    },
+    {
+      "id": "effective_static_gfc_workspace",
+      "status": "notLocated",
+      "kind": "source_execution_state",
+      "source": "pnas_static_script",
+      "scope": "Original executable MATLAB variables and source/version: xdata,ydata,fdrcorrection and nets used before their in-file definitions; runtime toolbox load_nii, newFDR, export_fig etc. Exact effect generation cannot be inferred from script text alone."
+    },
+    {
+      "id": "original_static_nifti_and_mask_in_pinned_tree",
+      "status": "knownAbsent",
+      "kind": "source_tree_scope",
+      "source": "pnas_gitrepo",
+      "scope": "No /post1/MNI152/scrubbed_FD_040/clean_with_intact/*.nii.gz source images nor Schaeff1007NExt.nii.gz atlas in EXACT 56-file b35701d tree. Does not assert these files never existed elsewhere.",
+      "negative_search_receipt": "DMTImagingPinnedSourceTree20261024.json recursively inventories all 56 files: 40 parcelled fMRI MAT, five EEG regional MAT and scripts; no .nii or .nii.gz entry. StaticGFC.m line 9 and 21 require NIfTI and atlas."
+    }
+  ],
+  "claims": [
+    {
+      "id": "c_public_2023",
+      "consumer": "original study exists",
+      "grade": "source_claim",
+      "requires": [
+        "primary_paper"
+      ]
+    },
+    {
+      "id": "c_public_files",
+      "consumer": "20 fMRI DMT/placebo pairs have identified upstream Git objects",
+      "grade": "source_metadata",
+      "requires": [
+        "git_tree"
+      ]
+    },
+    {
+      "id": "c_original_static_inclusion",
+      "consumer": "identify original n16 static fMRI participant list",
+      "grade": "subject_specific",
+      "requires": [
+        "original_static_fd",
+        "original_preproc"
+      ]
+    },
+    {
+      "id": "c_original_dynamic_inclusion",
+      "consumer": "identify original n13 dynamic fMRI participant list",
+      "grade": "subject_specific",
+      "requires": [
+        "original_static_fd",
+        "original_full_fd"
+      ]
+    },
+    {
+      "id": "c_original_joint_inclusion",
+      "consumer": "identify n12 joint EEG/fMRI participant list",
+      "grade": "subject_specific",
+      "requires": [
+        "original_static_fd",
+        "original_eeg_qc"
+      ]
+    },
+    {
+      "id": "c_data_acquisition",
+      "consumer": "source-locked local research copy admitted",
+      "grade": "research_access",
+      "requires": [
+        "data_use_review",
+        "source_local_bytes"
+      ]
+    },
+    {
+      "id": "c_static_reproduction",
+      "consumer": "Reproduce original PNAS static NIfTI+Schaefer GFC n16 effect from original processed voxel inputs, QC, code/workspace and authorized data use",
+      "grade": "empirical",
+      "requires": [
+        "original_static_fd",
+        "original_preproc",
+        "data_use_review",
+        "static_fmri_replay",
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask",
+        "effective_static_gfc_workspace"
+      ]
+    },
+    {
+      "id": "c_published_precursor",
+      "consumer": "original authors report presence precursor in interviews",
+      "grade": "source_claim",
+      "requires": [
+        "sanders_article"
+      ]
+    },
+    {
+      "id": "c_temporal_replication",
+      "consumer": "independently validate original phenomenological sequence on source data",
+      "grade": "empirical",
+      "requires": [
+        "sanders_phase_data",
+        "sanders_codebook",
+        "participant_lineage"
+      ]
+    },
+    {
+      "id": "c_external_entity",
+      "consumer": "independently conscious entities established",
+      "grade": "ontology",
+      "requires": [
+        "concealed_target_protocol"
+      ]
+    },
+    {
+      "id": "c_verified_source_namespace",
+      "consumer": "Source-code-listed 20 pseudonymous IDs coincide exactly with 20 paired DMT/placebo Git MAT prefixes",
+      "grade": "source_metadata",
+      "requires": [
+        "source_subject_namespace",
+        "git_tree"
+      ]
+    },
+    {
+      "id": "c_original_static_code_located",
+      "consumer": "Original author-side static GFC source program is publicly versioned, not execution-equivalent to reported main result",
+      "grade": "source_metadata",
+      "requires": [
+        "source_static_analysis_code"
+      ]
+    },
+    {
+      "id": "c_dynamic_replay_from_tree_alone",
+      "consumer": "Self-contained dynamic source replay from pinned repository alone",
+      "grade": "empirical",
+      "requires": [
+        "source_local_bytes",
+        "original_preproc",
+        "dynamic_tapered_window_in_pinned_tree"
+      ]
+    },
+    {
+      "id": "c_public_mat_reproduces_original_static",
+      "consumer": "Published n=16 static-GFC result can be reproduced solely from the 56 files in the pinned source tree, without external voxel NIfTI/atlas or executed workspace",
+      "grade": "empirical",
+      "requires": [
+        "original_static_nifti_and_mask_in_pinned_tree",
+        "effective_static_gfc_workspace",
+        "original_static_fd",
+        "source_local_bytes",
+        "static_fmri_replay"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "a_original_motion_primary",
+      "kind": "institutional_source_recovery",
+      "needs": [
+        "primary_paper",
+        "git_tree",
+        "source_subject_namespace",
+        "source_static_analysis_code"
+      ],
+      "targets": [
+        "original_static_fd",
+        "original_full_fd",
+        "original_eeg_qc",
+        "original_preproc"
+      ],
+      "work": "Search publisher SI, original deposited scripts and QC metadata first; record unavailable exact artifacts; no automated messaging; respect custodian-controlled access",
+      "cost_band": 3,
+      "access_risk": 1
+    },
+    {
+      "id": "b_rights_review",
+      "kind": "context_provenance_audit",
+      "needs": [
+        "git_tree"
+      ],
+      "targets": [
+        "data_use_review"
+      ],
+      "work": "Review article data statement, exact Git licence absence, applicable consent/data-use/re-use rules; do not infer approval",
+      "cost_band": 2,
+      "access_risk": 1
+    },
+    {
+      "id": "c_source_bytes",
+      "kind": "data_acquisition",
+      "needs": [
+        "git_tree",
+        "data_use_review"
+      ],
+      "targets": [
+        "source_local_bytes"
+      ],
+      "work": "Only rights-reviewed parcelled BOLD_AAL MAT acquisition and Git/SHA256 verification for exploratory/dynamic consumers; NOT an input prerequisite for voxelwise 2023 StaticGFC",
+      "cost_band": 2,
+      "access_risk": 3
+    },
+    {
+      "id": "d_replay_static",
+      "kind": "empirical_replication",
+      "needs": [
+        "original_static_fd",
+        "original_preproc",
+        "data_use_review",
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask",
+        "effective_static_gfc_workspace"
+      ],
+      "targets": [
+        "static_fmri_replay"
+      ],
+      "work": "Run original n16 post-bolus static GFC with matched source preprocessing, compare source t/p/CI, publish discrepancy",
+      "cost_band": 4,
+      "access_risk": 3
+    },
+    {
+      "id": "e_phase_matrices",
+      "kind": "controlled_source_recovery",
+      "needs": [
+        "sanders_article"
+      ],
+      "targets": [
+        "sanders_phase_data",
+        "sanders_codebook",
+        "participant_lineage"
+      ],
+      "work": "Locate archived data and supplementary codebooks; external reasonable-request process only after independent access approval",
+      "cost_band": 3,
+      "access_risk": 3
+    },
+    {
+      "id": "f_entity_story",
+      "kind": "deferred_experiment",
+      "needs": [
+        "concealed_target_protocol"
+      ],
+      "targets": [],
+      "work": "Not currently admitted: no preregistered leakage-controlled experiment or distinct prediction",
+      "cost_band": 4,
+      "access_risk": 4
+    },
+    {
+      "id": "g_voxel_and_atlas_source",
+      "kind": "primary_source_recovery",
+      "needs": [
+        "source_static_analysis_code",
+        "data_use_review"
+      ],
+      "targets": [
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask"
+      ],
+      "work": "Locate same-object NIfTI preprocessed inputs and 112-region Schaefer/subcortical atlas identified by author StaticGFC.m. Treat published BOLD_AAL as separate representation, not a replacement; no unapproved redistribution",
+      "cost_band": 4,
+      "access_risk": 3
+    },
+    {
+      "id": "h_effective_static_code",
+      "kind": "source_preprocessing_recovery",
+      "needs": [
+        "source_static_analysis_code"
+      ],
+      "targets": [
+        "effective_static_gfc_workspace"
+      ],
+      "work": "Recover actual executed static-GFC code revision/workspace and specific upstream xdata/ydata/network/FDR assignments, MATLAB/NIfTI dependencies and exclusions. Current script is not self-contained.",
+      "cost_band": 3,
+      "access_risk": 1
+    }
+  ],
+  "observed_git_tree": {
+    "source_commit": "b35701d88d904e2f602164ff2eae0fc879772078",
+    "source_tree_sha1": "38bdb12d180303f1738b7c5b6d99f34f157c26f9",
+    "files": [
+      {
+        "path": "EEG/RegressorsInterpscrubbedIRASA_Central.mat",
+        "size_bytes": 1356079,
+        "git_blob_sha1": "61ca09e15f67438f460479b9ed1903d14fe1ed4d"
+      },
+      {
+        "path": "EEG/RegressorsInterpscrubbedIRASA_Frontal.mat",
+        "size_bytes": 1356400,
+        "git_blob_sha1": "5e4f78f009b5c661654a02729e240a8f2de6a545"
+      },
+      {
+        "path": "EEG/RegressorsInterpscrubbedIRASA_Occipital.mat",
+        "size_bytes": 1358734,
+        "git_blob_sha1": "8df27813832d3b6d53cc93c5c38093e0ad65fd10"
+      },
+      {
+        "path": "EEG/RegressorsInterpscrubbedIRASA_Parietal.mat",
+        "size_bytes": 1356807,
+        "git_blob_sha1": "63f09187c848c677b374d5a2da45e96fe8bf13a6"
+      },
+      {
+        "path": "EEG/RegressorsInterpscrubbedIRASA_Temporal.mat",
+        "size_bytes": 1355813,
+        "git_blob_sha1": "bd5fe57ed4f67acfa42f44e88ecf350946f70c09"
+      },
+      {
+        "path": "README.md",
+        "size_bytes": 282,
+        "git_blob_sha1": "664bbac521ac7d87b6d1509a225268be1cf20ec4"
+      },
+      {
+        "path": "Scripts/BetweenNetworkRSFC.m",
+        "size_bytes": 4975,
+        "git_blob_sha1": "bc87afc2441e0cf67c0882824f27627e0c61c3ba"
+      },
+      {
+        "path": "Scripts/LZ_analysis.m",
+        "size_bytes": 16376,
+        "git_blob_sha1": "e180bb520e3b4c6c9cbb64841f6ce247ac80ce47"
+      },
+      {
+        "path": "Scripts/RSFC_network.sh",
+        "size_bytes": 1574,
+        "git_blob_sha1": "6e5f2a1253468271c37693300ffb004085f2c06e"
+      },
+      {
+        "path": "Scripts/StaticGFC.m",
+        "size_bytes": 7183,
+        "git_blob_sha1": "f87d99f448848c3b0531fea0780ee241ebd77549"
+      },
+      {
+        "path": "Scripts/StaticSpectraAnalysis.m",
+        "size_bytes": 18837,
+        "git_blob_sha1": "1f0090b14fc1904436b4871c7a4e934e1e0193c9"
+      },
+      {
+        "path": "Scripts/TaperedDynamicFCDAnalysisEEGcorrs.m",
+        "size_bytes": 17408,
+        "git_blob_sha1": "38ad02071b9524d550f861bf6995207a9c032d64"
+      },
+      {
+        "path": "Scripts/computeGradients.m",
+        "size_bytes": 3005,
+        "git_blob_sha1": "c92e22f0f8357e719e2299c2b2619c3bd279e098"
+      },
+      {
+        "path": "Scripts/dRSFC.m",
+        "size_bytes": 18021,
+        "git_blob_sha1": "579c41884304dc12a78b26487bc02c3b1951a753"
+      },
+      {
+        "path": "Scripts/dRSFCpairwise.m",
+        "size_bytes": 14457,
+        "git_blob_sha1": "c7d83f4e19eff66ee4a65d59180e4c3006055dd0"
+      },
+      {
+        "path": "fMRI/LongS01DMT.mat",
+        "size_bytes": 724594,
+        "git_blob_sha1": "bd9e3e9edb8bb495e83d37bf1ce0466a513486f7"
+      },
+      {
+        "path": "fMRI/LongS01PCB.mat",
+        "size_bytes": 724777,
+        "git_blob_sha1": "3ab9eaf3db48750589769eca9664872f1b7e314d"
+      },
+      {
+        "path": "fMRI/LongS02DMT.mat",
+        "size_bytes": 724707,
+        "git_blob_sha1": "9302feb279a2df1dac33124f9593a647de14b0bd"
+      },
+      {
+        "path": "fMRI/LongS02PCB.mat",
+        "size_bytes": 724877,
+        "git_blob_sha1": "cbba44219cc137e1044a8a5b8c7ba531cefae69a"
+      },
+      {
+        "path": "fMRI/LongS03DMT.mat",
+        "size_bytes": 724946,
+        "git_blob_sha1": "eaa954c22be818816da4a0fe805fd50c284821ea"
+      },
+      {
+        "path": "fMRI/LongS03PCB.mat",
+        "size_bytes": 724913,
+        "git_blob_sha1": "31d11304bbe535cadd7cf090e8874c46c974726c"
+      },
+      {
+        "path": "fMRI/LongS06DMT.mat",
+        "size_bytes": 724929,
+        "git_blob_sha1": "61f73a5046679ffd4c12e5b7f3f09ad01e650be2"
+      },
+      {
+        "path": "fMRI/LongS06PCB.mat",
+        "size_bytes": 724070,
+        "git_blob_sha1": "1aee5c669beb296362db54d417a1bff6ef6f785d"
+      },
+      {
+        "path": "fMRI/LongS07DMT.mat",
+        "size_bytes": 725011,
+        "git_blob_sha1": "1f200f3e517db7bb1158393690f8448bd5cfd5b9"
+      },
+      {
+        "path": "fMRI/LongS07PCB.mat",
+        "size_bytes": 724917,
+        "git_blob_sha1": "133acb70e833c260cdd047f010023dbaf4ff0dc6"
+      },
+      {
+        "path": "fMRI/LongS08DMT.mat",
+        "size_bytes": 723690,
+        "git_blob_sha1": "a9a6e61dbec640304c63076b035f3819da6ccbe9"
+      },
+      {
+        "path": "fMRI/LongS08PCB.mat",
+        "size_bytes": 724966,
+        "git_blob_sha1": "c0dd9b8196732577e6322e5f34c65572b39e6ca3"
+      },
+      {
+        "path": "fMRI/LongS09DMT.mat",
+        "size_bytes": 724500,
+        "git_blob_sha1": "47e5ce69ae22f9ae9d65a42363061e3840bebc1e"
+      },
+      {
+        "path": "fMRI/LongS09PCB.mat",
+        "size_bytes": 724832,
+        "git_blob_sha1": "616ab423578a6a2a6f9a9f9832096c6ddea20ced"
+      },
+      {
+        "path": "fMRI/LongS10DMT.mat",
+        "size_bytes": 725019,
+        "git_blob_sha1": "ef0634949a9ace8144d6543e7eb0d60388774524"
+      },
+      {
+        "path": "fMRI/LongS10PCB.mat",
+        "size_bytes": 725015,
+        "git_blob_sha1": "978e147a3e2b14372f46e6f8586b54f4e52d2e5d"
+      },
+      {
+        "path": "fMRI/LongS11DMT.mat",
+        "size_bytes": 724999,
+        "git_blob_sha1": "83a082d0adf8276fde182ed158aee66534d2a249"
+      },
+      {
+        "path": "fMRI/LongS11PCB.mat",
+        "size_bytes": 724921,
+        "git_blob_sha1": "37d9e776ac1b212533842c23b2f0f47ebdace121"
+      },
+      {
+        "path": "fMRI/LongS12DMT.mat",
+        "size_bytes": 724749,
+        "git_blob_sha1": "8c482071e10f9185c59dd8d7f00e81d90fb4da66"
+      },
+      {
+        "path": "fMRI/LongS12PCB.mat",
+        "size_bytes": 725015,
+        "git_blob_sha1": "3ae5c9a8ade55b8eb3d4c9fa762201a133f06ea8"
+      },
+      {
+        "path": "fMRI/LongS13DMT.mat",
+        "size_bytes": 724867,
+        "git_blob_sha1": "523c3f3dc59c89b26edfb3df8cb5906c0d4897e5"
+      },
+      {
+        "path": "fMRI/LongS13PCB.mat",
+        "size_bytes": 724857,
+        "git_blob_sha1": "70a46ef11b9e6132900e9ac94a2a522ee36c3232"
+      },
+      {
+        "path": "fMRI/LongS14DMT.mat",
+        "size_bytes": 724905,
+        "git_blob_sha1": "3e2de6f9fed9058a20d2642144233fee133ddaab"
+      },
+      {
+        "path": "fMRI/LongS14PCB.mat",
+        "size_bytes": 724903,
+        "git_blob_sha1": "b6713a9764fc7ff70ed3d45a31a2e1e22626ca69"
+      },
+      {
+        "path": "fMRI/LongS15DMT.mat",
+        "size_bytes": 724469,
+        "git_blob_sha1": "987f05017339923a5c6b359b43cf556934e71b81"
+      },
+      {
+        "path": "fMRI/LongS15PCB.mat",
+        "size_bytes": 724922,
+        "git_blob_sha1": "d2b0dc7d85c69484ab99c6fb9a018a94e1f49af9"
+      },
+      {
+        "path": "fMRI/LongS16DMT.mat",
+        "size_bytes": 724941,
+        "git_blob_sha1": "fd3664c16b84a8b260894dad213038372dfc599c"
+      },
+      {
+        "path": "fMRI/LongS16PCB.mat",
+        "size_bytes": 724187,
+        "git_blob_sha1": "6ab4354f1040994bef5df6492ca1c8201ebfd890"
+      },
+      {
+        "path": "fMRI/LongS17DMT.mat",
+        "size_bytes": 724937,
+        "git_blob_sha1": "2ba49d7d802234f5e1fcc925e857b3ab6d36c746"
+      },
+      {
+        "path": "fMRI/LongS17PCB.mat",
+        "size_bytes": 724892,
+        "git_blob_sha1": "d53cc77d70eb7b97f46d2b143b0b4ce66fdcaa4a"
+      },
+      {
+        "path": "fMRI/LongS18DMT.mat",
+        "size_bytes": 725119,
+        "git_blob_sha1": "5fecdc382d4e853480ea80431b3efedcda3c135f"
+      },
+      {
+        "path": "fMRI/LongS18PCB.mat",
+        "size_bytes": 725080,
+        "git_blob_sha1": "6ef34eeb5468ea361be0112a6f63ce528a325f65"
+      },
+      {
+        "path": "fMRI/LongS19DMT.mat",
+        "size_bytes": 724388,
+        "git_blob_sha1": "db5d9d300ec4c67e3b568fb2fb83e88e81535a86"
+      },
+      {
+        "path": "fMRI/LongS19PCB.mat",
+        "size_bytes": 724745,
+        "git_blob_sha1": "f89fc82ef92383621633b8117f6b2757609b49aa"
+      },
+      {
+        "path": "fMRI/LongS22DMT.mat",
+        "size_bytes": 724986,
+        "git_blob_sha1": "e898955279aad374185ed7d05ce1a099b3084c6a"
+      },
+      {
+        "path": "fMRI/LongS22PCB.mat",
+        "size_bytes": 724947,
+        "git_blob_sha1": "846f5121c6244dde2906e10383ce1a0358b38224"
+      },
+      {
+        "path": "fMRI/LongS23DMT.mat",
+        "size_bytes": 724691,
+        "git_blob_sha1": "d44a5d4f2b3ca599dc71340979b0dfa4aa08870a"
+      },
+      {
+        "path": "fMRI/LongS23PCB.mat",
+        "size_bytes": 724821,
+        "git_blob_sha1": "5645aefc894b4058286fef31040ef71bad69ff01"
+      },
+      {
+        "path": "fMRI/LongS25DMT.mat",
+        "size_bytes": 724983,
+        "git_blob_sha1": "5bf6791c9931394f729ddfe6b5730be3597ffd39"
+      },
+      {
+        "path": "fMRI/LongS25PCB.mat",
+        "size_bytes": 724967,
+        "git_blob_sha1": "00bcd9f3c6469ed6fd5c2fce4a652e7281d442c9"
+      },
+      {
+        "path": "fMRI/temp",
+        "size_bytes": 1,
+        "git_blob_sha1": "8b137891791fe96927ad78e64b0aad7bded08bdc"
+      }
+    ],
+    "source_tree_verified_by": "Original GitHub commit tree.sha and full recursively enumerated 56-file blob inventory checked 2026-10-24"
+  },
+  "counts": {
+    "repository_paired_subjects": 20,
+    "original_pnas_static_n": 16,
+    "original_dynamic_n_reported": 13,
+    "original_joint_n": 12,
+    "readme_unspecified_n": 15,
+    "sanders_interviews": 23,
+    "sanders_phase_matrices": 21,
+    "original_source_script_pseudonyms": [
+      "S01",
+      "S02",
+      "S03",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S19",
+      "S22",
+      "S23",
+      "S25"
+    ],
+    "distinct_lineage_roots": 3,
+    "static_author_script_blob_sha1": "f87d99f448848c3b0531fea0780ee241ebd77549"
+  },
+  "safety": {
+    "send_email": false,
+    "publish_participant_files": false,
+    "assume_licence": false,
+    "autopromote_ontology": false,
+    "source_metadata_not_measured_replay": true,
+    "no_source_absence_globalisation": true,
+    "public_mat_is_not_original_static_nifti": true,
+    "parcelled_mat_not_required_for_original_static_nifti_replay": true,
+    "published_aggregate_statistic_not_replayed": true,
+    "independent_recruitment_not_inferred_from_source_lineage": true
+  }
+}

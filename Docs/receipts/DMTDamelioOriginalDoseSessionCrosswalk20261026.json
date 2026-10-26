@@ -1,0 +1,154 @@
+{
+  "schema": "dashi-dmt-damelio-source-schedule-v1",
+  "original_source": {
+    "source_owners": "Tomas Ariel D'Amelio et al., bioRxiv 2026-05-04 preprint DOI 10.64898/2026.04.30.721872",
+    "github_repository": "tomdamelio/dmt-emotions",
+    "commit": "16067a5ff31b7f390381fc5b25b587b1769d9dd1",
+    "config_path": "config.py",
+    "config_git_blob_sha1": "620c77b4053b7001f3c0e2ce8a84ff94ba4d423a",
+    "loader_path": "tet/data_loader.py",
+    "loader_git_blob_sha1": "903ad492f6f6e8e155fb9ab115f111796c0452b6",
+    "preprocessor_path": "tet/preprocessor.py",
+    "preprocessor_git_blob_sha1": "eaa07bb4bc349904fc57c6a6c853681494bce57e",
+    "raw_data_author_locator": "https://doi.org/10.5281/zenodo.19893951",
+    "derived_from": "Original author source DOSIS_RAW and SUJETOS_INDICES; not downloaded participant rows"
+  },
+  "design": {
+    "total_protocol_subjects": 19,
+    "source_TET_available_subjects_reported": 18,
+    "physiology_joint_complete_reported": 7,
+    "subject_id_exception": "S14 absent from planned 19-subject protocol",
+    "arms_source_labels": [
+      "Alta",
+      "Baja"
+    ],
+    "dose_mg_map": {
+      "Alta": 40,
+      "Baja": 20
+    },
+    "stages": [
+      "RS",
+      "DMT"
+    ],
+    "expected_original_tet_mat_fields": [
+      "dimensions"
+    ],
+    "original_matrix_dimension_count": 15,
+    "original_sample_interval_seconds": 4,
+    "original_RS_max_seconds_exclusive": 600,
+    "original_DMT_max_seconds_exclusive": 1200,
+    "filename_parser_rule": "Source TETDataLoader splits subject prefix, checks DMT in name, parses Session[0-9]+, and resolves dose using config.get_dosis_sujeto"
+  },
+  "scheduled_participant_sessions": [
+    {
+      "id": "S01",
+      "session_1_dose_label": "Alta",
+      "session_2_dose_label": "Baja"
+    },
+    {
+      "id": "S02",
+      "session_1_dose_label": "Baja",
+      "session_2_dose_label": "Alta"
+    },
+    {
+      "id": "S03",
+      "session_1_dose_label": "Baja",
+      "session_2_dose_label": "Alta"
+    },
+    {
+      "id": "S04",
+      "session_1_dose_label": "Alta",
+      "session_2_dose_label": "Baja"
+    },
+    {
+      "id": "S05",
+      "session_1_dose_label": "Alta",
+      "session_2_dose_label": "Baja"
+    },
+    {
+      "id": "S06",
+      "session_1_dose_label": "Baja",
+      "session_2_dose_label": "Alta"
+    },
+    {
+      "id": "S07",
+      "session_1_dose_label": "Baja",
+      "session_2_dose_label": "Alta"
+    },
+    {
+      "id": "S08",
+      "session_1_dose_label": "Baja",
+      "session_2_dose_label": "Alta"
+    },
+    {
+      "id": "S09",
+      "session_1_dose_label": "Alta",
+      "session_2_dose_label": "Baja"
+    },
+    {
+      "id": "S10",
+      "session_1_dose_label": "Alta",
+      "session_2_dose_label": "Baja"
+    },
+    {
+      "id": "S11",
+      "session_1_dose_label": "Baja",
+      "session_2_dose_label": "Alta"
+    },
+    {
+      "id": "S12",
+      "session_1_dose_label": "Baja",
+      "session_2_dose_label": "Alta"
+    },
+    {
+      "id": "S13",
+      "session_1_dose_label": "Baja",
+      "session_2_dose_label": "Alta"
+    },
+    {
+      "id": "S15",
+      "session_1_dose_label": "Alta",
+      "session_2_dose_label": "Baja"
+    },
+    {
+      "id": "S16",
+      "session_1_dose_label": "Baja",
+      "session_2_dose_label": "Alta"
+    },
+    {
+      "id": "S17",
+      "session_1_dose_label": "Alta",
+      "session_2_dose_label": "Baja"
+    },
+    {
+      "id": "S18",
+      "session_1_dose_label": "Alta",
+      "session_2_dose_label": "Baja"
+    },
+    {
+      "id": "S19",
+      "session_1_dose_label": "Baja",
+      "session_2_dose_label": "Alta"
+    },
+    {
+      "id": "S20",
+      "session_1_dose_label": "Baja",
+      "session_2_dose_label": "Alta"
+    }
+  ],
+  "evidence_ceiling": {
+    "designated_session_doses_from_original_code": true,
+    "raw_mat_files_accessed": false,
+    "observed_participant_dose_crosswalk_replayed": false,
+    "which_18_TET_subjects_verified": false,
+    "which_7_phys_complete_verified": false,
+    "participant_overlap_with_Lewis_Healey_crosswalk_verified": false,
+    "subject_mat_original_rating_replayed": false,
+    "zenodo_version_checksum_verified": false,
+    "independent_agent_evidence": false
+  },
+  "attribution": {
+    "original_experimental_protocol": "D'Amelio et al. and Lewis-Healey et al.; originally published code and methods retain author attribution",
+    "DASHI_adapter": "Johl Brown (research direction), OpenAI ChatGPT (AI-assisted provenance audit)"
+  }
+}

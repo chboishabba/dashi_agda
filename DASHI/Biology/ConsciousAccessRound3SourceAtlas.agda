@@ -100,7 +100,7 @@ taQuasiconformalSource =
 shenVisualReportsSource : SourceRecord
 shenVisualReportsSource =
   sourceRecord
-    "Sean Noah Miranda Shen; Earth Erowid; Fire Erowid; Michael Silver"
+    "Sean Noah; Miranda Shen; Earth Erowid; Fire Erowid; Michael Silver"
     "A novel method for quantitative analysis of subjective experience reports: application to psychedelic visual experiences"
     "Frontiers in Psychology"
     2024
