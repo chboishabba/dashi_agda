@@ -75,6 +75,13 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
     if p.get("mn3b_table") not in {"MN3B", "3^1+12.2.Suz.2"}:
         raise ValueError("unexpected MN3B table identity")
 
+    versions = []
+    for name in ("gap_runtime_version","ctbllib_runtime_version"):
+        value = p.get(name)
+        if not isinstance(value,str) or not value or any(ord(c)<32 for c in value):
+            raise ValueError(name+" must be a nonempty source runtime version")
+        versions.append(value)
+
     source_order = req_int(p, "six_suz_group_order")
     source_classes = req_int(p, "six_suz_class_count")
     if source_order != 2690072985600 or source_classes != 210:
@@ -228,6 +235,8 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         "q_kernel_outer_pos": q_kernel_outer_pos,
         "labels12": labels12,
         "labels78": labels78,
+        "gap_version": versions[0],
+        "ctbllib_version": versions[1],
         "source_order": source_order,
         "source_classes": source_classes,
         "positions12": positions12,
