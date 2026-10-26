@@ -312,3 +312,49 @@ underlying infinite PL geometric X still
 unbuilt in Lean/Agda. No classical theorem
 or user-authored mathematical claim is
 rewritten as an AI discovery.
+
+
+## Pinned geometric-realisation library selection (27 October)
+
+The missing ALL-n actual surface carrier is no longer
+to be delegated to unspecified "some Mathlib complex".
+
+The **exact locked** Mathlib v4.28.0 contains original
+`Mathlib/AlgebraicTopology/SingularSet.lean`
+with `SSet.toTop : SSet ⥤ TopCat` and adjunction
+`sSetTopAdj`, author header
+**Johan Commelin, Kim Morrison and Adam Topaz**.
+It provides REAL geometric realisation of a simplicial
+set. The current-docs
+`Mathlib/AlgebraicTopology/SimplicialComplex/Basic`
+abstract-complex API was NOT present in that
+v4.28.0 repository tree. An ITP 2026 paper
+(doi:10.4230/LIPIcs.ITP.2026.21) describes
+newer abstract-complex formalisation but is
+not a pinned import or proof receipt.
+
+**Preferred exact version-compatible deliverable:**
+construct an actual simplicial-set carrier
+`S_n` from source-owned oriented PL triangles,
+all faces/degeneracies and strictly compatible
+inclusion maps; take their filtered colimit
+`S∞`, use ORIGINAL Mathlib `SSet.toTop.obj S∞`
+and PROVE the source vertex-link circles,
+local finiteness and genus/end properties
+on that carrier. No existing finite Python
+mesh function alone proves the simplicial
+identities or the topology of its realisation.
+This is the actual P2 wall: a same-object
+PL→simplicial-set bridge plus a kernel
+realisation theorem, not more ternary
+address tests.
+
+The Hatcher #1244 latest directed-open compact
+absorption and Lean #86 collared compact
+cofinality source can then be consumed on
+that actual `TopCat` space. Real Cantor
+source end cylinders and clopen proofs
+already have a separate pinned Mathlib
+supplier, but **genuine Richards end
+neighbourhoods still require their own
+same-object homeomorphism proof**.
