@@ -67,7 +67,7 @@ def nonnegative(x, name):
 def zipf_mandelbrot(n:int,exponent:float,shift:float=0)->tuple[float,...]:
     if not isinstance(n,int) or n<1:raise ValueError('n>=1')
     nonnegative(exponent,'exponent');nonnegative(shift,'shift')
-    w=[(r+shift)**(-exponent) for r in range(1,n+1)]
+    w=[exp(-exponent*log((r+shift)/(1+shift))) for r in range(1,n+1)]
     z=sum(w)
     return tuple(v/z for v in w)
 
