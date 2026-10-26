@@ -58,10 +58,10 @@ federal8575Priority = legal-priority-coordinate
   consumerPaymentOpen
   "EPBC 2019/8575 Part 9 decision: 15 October 2026 public Commonwealth notice says APPROVED WITH CONDITIONS; operative signed approval, authorisation and full conditions still to acquire"
   "official 15 October approval notice plus original 2 September extension signed Declan OConnor-Cox to 1 October and superseding 25 September extension signed Mark Hall to 16 October; section 95B(2) 23 July notice records 1786 comments; extension officials are not proven signatories on final approval"
-  "signed approval and delegate identity; statement of reasons and section 135A recommendation report; final PD and complete comment-response; current legal framework/transitional provisions; pre-clearance conditions, offsets and review standing/deadline"
+  "signed approval and delegate identity; statement of reasons and section 95C recommendation report requested under section 135A(2); final s95B(1) PD/summary of comment response AND transmitted copies of public comments; current legal framework/transitional provisions; pre-clearance conditions, offsets and review standing/deadline"
   "approval status is not the signed decision; dated public comment count is not the decision-maker's complete evidentiary consideration; Minister's portfolio responsibility does not by itself prove Minister personally signed"
-  "housing delivery rhetoric, indexed political interests, a 2025 Queensland ministerial lobbying meeting or a 2004 gas alliance do not factor to EPBC decision legality or a conflict finding"
-  "urgent counsel filing/standing/possible interim orders assessment; obtain original signed notice and section 135A recommendation report; freeze public decision and ecological evidence with dates and hashes; calculate exact ADJR or other Federal Court deadlines without assuming public notice starts one universal 28-day clock"
+  "mere consideration of economic/social housing factors under section 136(1)(b), housing delivery rhetoric, indexed political interests, a 2025 Queensland ministerial lobbying meeting or a 2004 gas alliance do not factor to EPBC decision legality or a conflict finding"
+  "urgent counsel filing/standing/possible interim orders assessment; obtain original signed notice, targeted section 95C report via post-decision section 135A(2) request, and section 95B document/comment-transmission receipts; freeze public decision and ecological evidence with dates and hashes; calculate exact ADJR or other Federal Court deadlines without assuming public notice starts one universal 28-day clock"
 
 -- The pre-decision s130 clock witnesses remain historically valid source receipts,
 -- but the original 1 October extension was superseded by Mark Hall's signed 25 September section 130(1A) extension to 16 October 2026; neither extension itself pays the approval signatory.
@@ -82,7 +82,7 @@ cumulative8575Priority = legal-priority-coordinate
   "same-object local/regional integration of surrounding development patterns, habitat loss/retention, corridor function and the action's marginal cumulative contribution; Final PD/comment-response and Department sufficiency record"
   "a surrounding-project map is not the requested cumulative analysis; an apparent January response gap is not legal invalidity"
   "project identifiers, generic fragmentation statements, or secondary commentary do not factor to payment of Item 4.6(c)"
-  "post-approval: urgently compare final-PD/comment-response, recommendation report, signed 15 October decision and conditions; reconcile Item 4.6(c) with actual local/regional functional connectivity analysis, then commission same-parcel specialist review for counsel"
+  "post-approval: compare actual section 95B(1) proponent response and comment copies, Secretary section 95C report requestable under 135A(2), final signed 15 October decision and conditions; reconcile Item 4.6(c) functional connectivity analysis and avoid retroactive August National Environmental Standards until individual approval tests commence"
 
 qldS13Priority : LegalPriorityCoordinate
 qldS13Priority = legal-priority-coordinate
