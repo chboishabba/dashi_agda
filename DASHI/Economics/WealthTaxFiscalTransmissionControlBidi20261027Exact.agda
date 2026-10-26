@@ -17,6 +17,47 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 
 ------------------------------------------------------------------------
+-- ORIGINAL REGULATORY SOURCE ROLES (NON-PROMOTING)
+-- ASIC and AASB texts own their own legal/accounting propositions. These
+-- texts motivate the votes/control distinction, not the synthetic 10:1
+-- construction or any claim about an actual corporation.
+------------------------------------------------------------------------
+
+record ControlSourceReceipt : Set where
+  constructor control-source-receipt
+  field
+    originalAuthor : String
+    datedSource : String
+    canonicalURL : String
+    boundedProposition : String
+    nonClaim : String
+open ControlSourceReceipt public
+
+asicShareholderRights : ControlSourceReceipt
+asicShareholderRights = control-source-receipt
+  "Australian Securities and Investments Commission"
+  "Shareholder rights and responsibilities; consulted 2026-10-27"
+  "https://www.asic.gov.au/for-business-and-companies/companies/company-share-and-shareholder-rules-and-changes/shareholder-rights-and-responsibilities"
+  "different share classes may have different voting rights; member votes and majority resolution rules depend on company arrangements"
+  "not a claim that majority votes alone settle every kind of company control"
+
+aasb10ControlConditions : ControlSourceReceipt
+aasb10ControlConditions = control-source-receipt
+  "Australian Accounting Standards Board; AASB 10"
+  "Compiled AASB 10; version 2024-12-31"
+  "https://www.legislation.gov.au/F2015L01617/2024-12-31/2024-12-31/text/original/epub/OEBPS/document_1/document_1.html"
+  "control can depend on contractual rights and relevant activities; majority voting is straightforward only absent other arrangements"
+  "not an assertion of the specific financial control of a named real company"
+
+sgxDualClass : ControlSourceReceipt
+sgxDualClass = control-source-receipt
+  "Singapore Exchange"
+  "Equity securities listing rules, Chapter 2; accessed 2026-10-27"
+  "https://rulebook.qasgx.com/rulebook/chapter-2-equity-securities"
+  "the dual-class listing structure specifies multiple voting class and maximum 10 votes per such share"
+  "SGX listing constraints do not automatically govern Australian companies"
+
+------------------------------------------------------------------------
 -- A formal tax liability is NOT a cash receipt, and a cash receipt is not
 -- administrative expenditure nor a realised social investment.
 ------------------------------------------------------------------------
