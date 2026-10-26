@@ -173,8 +173,8 @@ flipPrimitiveShift1 (primitive p q r) =
   primitiveExt
     (RingZ.solve 3
       (λ p q r →
-        ((((p ⊕ Κ (+ 1)) ⊕ q) ⊕ r ,
-          (((p ⊕ q) ⊕ r) ⊕ Κ (+ 1))))
+        ( (((p ⊕ Κ (+ 1)) ⊕ q) ⊕ r)
+        , (((p ⊕ q) ⊕ r) ⊕ Κ (+ 1)) ))
       refl p q r)
     refl refl
 
@@ -196,3 +196,40 @@ swapXYSitePosition (B p) = cong quarterDelta (fccSwapXY p)
 -- On a chosen diamond N-vacancy bond, only those permutations
 -- that fix BOTH site locations survive. This is not the same as
 -- a C3 permutation of spin-one energy levels.
+
+swapYZSitePosition :
+  (s : DiamondSite) →
+  sitePosition (swapYZSite s) ≡ swapYZPoint (sitePosition s)
+swapYZSitePosition (A p) = fccSwapYZ p
+swapYZSitePosition (B p) = cong quarterDelta (fccSwapYZ p)
+
+glideDeltaCompatibility : (p : L.Triple ℤ) →
+  shiftFcc1 (flipXPoint p) ≡ glideXPoint (quarterDelta p)
+glideDeltaCompatibility (L.xyz x y z) =
+  tripleExt
+    (RingZ.solve 1
+      (λ x → (⊝ x , Κ (+ 1) ⊕ ⊝ (Κ (+ 1) ⊕ x)))
+      refl x)
+    (RingZ.solve 1
+      (λ y → (y ⊕ Κ (+ 2) , Κ (+ 1) ⊕ (Κ (+ 1) ⊕ y)))
+      refl y)
+    (RingZ.solve 1
+      (λ z → (z ⊕ Κ (+ 2) , Κ (+ 1) ⊕ (Κ (+ 1) ⊕ z)))
+      refl z)
+
+glideXSitePosition : (s : DiamondSite) →
+  sitePosition (glideXSite s) ≡ glideXPoint (sitePosition s)
+glideXSitePosition (A p) =
+  cong quarterDelta (fccFlipX p)
+glideXSitePosition (B p) =
+  trans (fccShiftPrimitive1 (flipXPrimitive p))
+    (trans
+      (cong shiftFcc1 (fccFlipX p))
+      (glideDeltaCompatibility (fccPoint p)))
+
+translation1Position :
+  (s : DiamondSite) →
+  sitePosition (translation1 s) ≡ shiftFcc1 (sitePosition s)
+translation1Position (A p) = fccShiftPrimitive1 p
+translation1Position (B p) =
+  cong quarterDelta (fccShiftPrimitive1 p)
