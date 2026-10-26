@@ -13,6 +13,8 @@ targets=(
   DASHI/Mathematics/Topology/AlexanderHornedC3JordanActionExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedTorsionFreeStageTransportExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedBinaryPadicCylinderExact.agda
+  DASHI/Mathematics/Topology/AlexanderHornedC3ClopenCylinderMassExact.agda
+  DASHI/Mathematics/Topology/AlexanderHornedC3ChronologicalClopenBridgeExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedQuaternionC3SpinExact.agda
   DASHI/Mathematics/Topology/AlexanderHornedSpin360720Exact.agda
   DASHI/Mathematics/Topology/AlexanderHornedC3SpinLiftSplitExact.agda
