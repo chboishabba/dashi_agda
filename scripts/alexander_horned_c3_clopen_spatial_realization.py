@@ -14,15 +14,11 @@ linked-horn topology is a DIFFERENT spatial datum.
 from fractions import Fraction as F
 from itertools import product
 import json
+from alexander_horned_tame_cantor_ball_cylinders import ball as local_ball, interval
 
 CENTRES=((F(9),F(0),F(0)),(F(0),F(9),F(0)),(F(0),F(0),F(9)))
 
 def rotate(v):return (v[2],v[0],v[1])
-def local_ball(chronological):
-    n=len(chronological)
-    length=F(1,3**(n+1))
-    low=F(1,6)+sum((F(2*b,3**(j+2)) for j,b in enumerate(chronological)),F(0))
-    return (low+length/2,F(1,2),F(0)),F(3,5)*length
 
 def embedded_ball(sector,chronological):
     centre,radius=local_ball(chronological)
@@ -48,8 +44,9 @@ def chronology_of_stack(stack):return stack[::-1]
 def endpoint_interval(chronological):
     """Exact bounds on x(infinite stream) over all possible tail bits."""
     n=len(chronological)
-    low=F(1,6)+sum((F(2*b,3**(j+2)) for j,b in enumerate(chronological)),F(0))
-    return low,low+F(1,3**(n+1))
+    low,length=interval(chronological)
+    assert length==F(1,3**(n+1))
+    return low,low+length
 
 def tame_endpoint_finite_tail(chronological):
     """An exact point from the infinite stream with zero tail."""
