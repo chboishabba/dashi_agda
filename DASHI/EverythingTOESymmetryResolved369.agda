@@ -21,3 +21,11 @@ import DASHI.Unified.Physics
 -- the separate exotic-topology PR; they are not copied here.
 import DASHI.Unified.HornStageClearanceC3SourceCutExact
 import DASHI.Mathematics.Topology.HatcherRibbonPeripheralBoundaryExact
+
+-- Reuse the original native cube and source-specific non-promotion proofs.
+-- These imports do not identify finite sites, Albert J0, Monster VOA,
+-- or measured spacetime. All original authors and source owners remain.
+import DASHI.Unified.Hyperfabric27MinusOneAntipodalSameCarrierCutExact
+import DASHI.Unified.Hyperfabric27MinusOneOriginalPathInvariantNoGoExact
+import DASHI.Unified.HyperfabricPunctured27Projective13OrientationExact
+import DASHI.Unified.HyperfabricMonsterBosonicWorldsheetExistingOwnerCutExact
