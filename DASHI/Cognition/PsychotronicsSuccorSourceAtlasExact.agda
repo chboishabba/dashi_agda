@@ -575,7 +575,7 @@ saikiaAmyloid2019 : Source.AttributedSource
 saikiaAmyloid2019 = Source.mkDOISource
   "Jahnu Saikia; Gaurav Pandey; Sajitha Sasidharan; Ferrin Antony; Harshal B. Nemade; Sachin Kumar; Nitin Chaudhary; Vibin Ramakrishnan"
   "Electric Field Disruption of Amyloid Aggregation: Potential Noninvasive Therapy for Alzheimer's Disease"
-  "ACS Chemical Neuroscience 10(5):2250-2262; online 15 February 2019; original ACS publisher metadata and abstract read, full article uninspected"
+  "ACS Chemical Neuroscience 10(5):2250-2262; online 15 February 2019; original ACS publisher abstract and SI *topic listing* read, main article and actual SI PDF not inspected"
   "2019"
   "10.1021/acschemneuro.8b00490"
   "https://doi.org/10.1021/acschemneuro.8b00490"
@@ -988,6 +988,21 @@ noaaGHCNh2023OriginalDataset = Source.mkDOISource
   "ISD replacement official by-year/by-station PSV access; no actual 1953 Bangor PSV parsed and harmonised station data cannot independently replicate their original reports."
   Source.publicAttribution
 
+
+-- 2026-10-27 actually acquired user-supplied NOAA converted 1953 hourly CSV.
+-- Original observers and NCEI own meteorology; a local file digest is NOT
+-- publisher-verified raw NOAA fixed-width bytes or cloudbuster evidence.
+noaaBangor1953RealUploadedHourlyCSV : Source.AttributedSource
+noaaBangor1953RealUploadedHourlyCSV = Source.mkNoDOISource
+  "NOAA NCEI Integrated Surface Database / USAF historic Bangor Airport 1953 surface observers"
+  "Actual supplied converted Global Hourly year CSV station 72607114606; 8760 original meteorological observations"
+  "1953 hourly UTC observations in user-uploaded 2724610-byte 2026-10-27 attachment, locally SHA256 2a3b048d620b320fb8d1cf548d4eb06fb2c49821faa54c4cc7f708649cdca9bd; NOAA remote source checksum unpaid"
+  "1953"
+  "https://noaa-global-hourly-pds.s3.amazonaws.com/index.html"
+  Source.archivalSource
+  "Actual UTC 1953-07-07 02h MW1=80,1 slight rain showers at Bangor (1953-07-06 22h EDT); 04/05UTC MW1=81 heavier rain showers; 12UTC AA1=24,0190,9,1 is a 24h accumulation; not precise onset at Ellsworth, independent gauge replication or causal device efficacy"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -1025,7 +1040,8 @@ sourceAtlas = Source.mkSourceAtlas
     noaaCOOPOriginalFormsGateway ∷ bahramiHelmholtz2025 ∷
     bioCoilOriginalAuthorRepository ∷ noaaBangorISD1953Original ∷
     noaaISD2018OriginalFormat ∷ noaaNESDIS2026ISDMigration ∷
-    noaaGHCNh2023OriginalDataset ∷ [])
+    noaaGHCNh2023OriginalDataset ∷
+    noaaBangor1953RealUploadedHourlyCSV ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -1171,6 +1187,17 @@ noaaGHCNhSuccessorNotIndependentGauge = mkBound
   Diligence.contextualEvidence
   institutionalHistoricalInterpretation
   "no actual 1953 Bangor PSV or independent observer lineages resolved by a successor product announcement"
+
+
+noaaBangorJul1953HourlyRealWeatherBound : ClaimBound
+noaaBangorJul1953HourlyRealWeatherBound = mkBound
+  "User-provided actual NOAA converted Bangor year CSV has 8760 1953 UTC hourly rows and code MW1=80 quality1 on 7 July 02UTC, corresponding to 6 July 22h Maine EDT"
+  noaaBangor1953RealUploadedHourlyCSV
+  "Uploaded source SHA256 2a3b048d620b320fb8d1cf548d4eb06fb2c49821faa54c4cc7f708649cdca9bd and NOAA source code 80, quality1"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  originalRegionalWeatherMeasurement
+  "Measured manual rain-shower weather at Bangor is not verified onset at Ellsworth, not an original NOAA remote publisher attestation, and not any causal effect of Reich's equipment"
 
 -- Two publisher/document carriers; same RVML provenance root. The Gentry
 -- speaker/topic is NOT the 1999 person-to-person instruction transfer.
@@ -1805,6 +1832,20 @@ ramirez2024Eq7SourceWording = mkBound
   Diligence.primaryProposition
   attributedAuthorReport
   "curl of vector potential gives B, while spatial derivative of B or magnitude is a distinct operator and physical dimension; no inference that the entire FEM, measured fields, or clinical hypotheses are false"
+
+-- This is a receipt for the ACS publisher's SI LISTING, NOT a claim that
+-- an SI page/figure or original laboratory recording has been inspected.
+-- The same 2019 authors/publisher root is used; no new study or source
+-- identity is invented merely for another paper-associated carrier.
+saikia2019ACSOriginalSITopicListing : ClaimBound
+saikia2019ACSOriginalSITopicListing = mkBound
+  "ACS 2019 publisher lists free supporting-information PDF including a topic 'effect of MF on secondary aggregations', plus kinetics, FTIR, monomer percentages and fluorescence microscopy; original SI content itself is NOT read"
+  saikiaAmyloid2019
+  "Original ACS Chemical Neuroscience 2019 DOI 10.1021/acschemneuro.8b00490 Supporting Information listing, not the independently authenticated SI PDF"
+  saikia2019ResearchRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "SI topic listing does not certify a named Rodin or Helmholtz apparatus, a 60-percent endpoint/denominator, efficacy or clinical proof; no inference that unseen SI definitely lacks those details"
 
 ramirez2024Ref24Claim : ClaimBound
 ramirez2024Ref24Claim = mkBound

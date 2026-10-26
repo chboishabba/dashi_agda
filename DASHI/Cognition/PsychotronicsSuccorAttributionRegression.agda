@@ -136,9 +136,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 -- source carriers including real NOAA Bangor records, same-station metadata,
 -- an earlier local press item and a Kansas location false-match control.
 -- More source objects are NOT more independent weather experiments.
-sourceAtlasCountIsEightyOne :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 81
-sourceAtlasCountIsEightyOne = refl
+sourceAtlasCountIsEightyTwo :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 82
+sourceAtlasCountIsEightyTwo = refl
 
 
 -- Original NOAA OBS-TIME documentation is a *method*, not a 1953 sensor time;
@@ -210,6 +210,17 @@ allNOAAMethodCarriersShareOneCustodialRoot :
   Atlas.root Atlas.noaaISDRecordLengthSourceCorrection ≡
   Atlas.root Atlas.noaaGHCNhSuccessorNotIndependentGauge
 allNOAAMethodCarriersShareOneCustodialRoot = refl
+
+
+noaaActual1953BangorHourlyReportNotCausalProof :
+  Attribution.citationImportsProof Atlas.noaaBangor1953RealUploadedHourlyCSV ≡ false
+noaaActual1953BangorHourlyReportNotCausalProof =
+  Atlas.allSourcesRemainNonPromoting Atlas.noaaBangor1953RealUploadedHourlyCSV
+
+noaaOriginalISDAndConverted1953HaveSameCustody :
+  Atlas.root Atlas.noaaBangorJul1953HourlyRealWeatherBound ≡
+  Atlas.root Atlas.noaaISD1953YearArchivePresent
+noaaOriginalISDAndConverted1953HaveSameCustody = refl
 
 -- Additional original 1953 NOAA station does not change the publisher
 -- denominator; observations must retain their actual distinct site keys.
@@ -606,6 +617,17 @@ rodin2024Eq7PaperClaimsDoNotTransferProof :
   Attribution.citationImportsProof Atlas.ramirezRodinRMF2024 ≡ false
 rodin2024Eq7PaperClaimsDoNotTransferProof =
   Atlas.allSourcesRemainNonPromoting Atlas.ramirezRodinRMF2024
+
+-- The ACS publisher's Supporting Information listing is a bibliographic
+-- receipt, not a native SI PDF page or independent original experiment.
+saikiaPublisherSITopicListingNotMeasuredCoilResult :
+  Attribution.citationImportsProof Atlas.saikiaAmyloid2019 ≡ false
+saikiaPublisherSITopicListingNotMeasuredCoilResult =
+  Atlas.allSourcesRemainNonPromoting Atlas.saikiaAmyloid2019
+
+saikiaSITopicListingDoesNotProveSixtyPercent :
+  Atlas.citationCreatesTruth Atlas.saikia2019ACSOriginalSITopicListing ≡ false
+saikiaSITopicListingDoesNotProveSixtyPercent = refl
 
 ramirezRef24ComparisonNotProvenByCitation :
   Atlas.historicalTransmissionProved Atlas.ramirezRef24NotValidatedCoilComparison ≡ false
