@@ -74,6 +74,39 @@ module DASHI.Physics.Closure.NSTriadKNR650AugmentedCriticalWeightedNormalFormRou
 -- The original t_enter formula above remains a VALID but nonoptimal
 -- instance. The new T* is a reduced upper bound on late entry, not
 -- an estimate on the missing pre-entry large-data critical interval.
+-- 2026-10-27 STRONGER ALL-DATA CRITICAL RESIDENCE MAX-CUT:
+-- For the SAME real unforced mean-zero full finite Galerkin trajectory,
+-- E_N=sum |u_k|² and H_N=sum |k|² |u_k|² obey E_N'=-2nu H_N.
+-- Since this source dyadic w(k)<2|k|, exact Fourier Cauchy implies
+--    X_N² <= 4 E_N H_N = -(2/nu) E_N E_N'.
+-- Therefore (with NO small-critical initial-data assumption)
+--    int_t0^T X_N(t)² dt <= (E_N(t0)²-E_N(T)²)/nu
+--    int_0^infinity X_N(t)² dt <= E0²/nu, uniformly in N.
+-- The dimensionless coefficient 1 is SHARP for this dyadic source:
+-- actual real unforced heat shears +/-n, n=2^(j-1)+1 have
+-- int X² / (E0²/nu)=(2^(j-1)/(2^(j-1)+1))² ->1.
+-- From the same bound: meas{t>=t0 : X_N(t)>B} <= E_N(t0)²/(nu B²).
+-- This bounds only TOTAL CRITICAL RESIDENCE, never sup X or signed W2.
+--
+-- Improved correlated L²-time averaging: let Anew=Ccrit² E0/nu².
+-- At the common all-cutoff late-entry time
+--    Tres=Anew²/nu                    if 0<Anew<=1/2,
+--    Tres=(1/4+log(2 Anew)/2)/nu     if Anew>=1/2,
+-- one has X_N(Tres)<=nu²/Ccrit² and the source's proven
+-- restricted critical absorption applies from Tres onward.
+-- For tau>=0, Poincare D_N>=X_N and Riccati comparison further give
+--    X_N(Tres+tau)<=4 nu²/(Ccrit² (1+exp(nu tau))²).
+-- This improves the older constant Aold=sqrt(2)*Anew and the
+-- eventual decay rate, but DOES NOT pay arbitrary-large-data
+-- early/middle critical production or the FALSE original W2 leaf.
+-- Mathematical roots: Leray kinetic-energy identity, Fourier Cauchy,
+-- Fujita--Kato small-critical comparison; exact dyadic heat-shear
+-- sharpness is this source-specific calculation, NOT a Clay proof.
+-- See Docs/research/ns_r734_critical_residence_pareto_20261027.md
+-- and tests/test_ns_r734_critical_residence.py (10 local checks).
+-- These are documented ANALYTIC derivations, not Agda formalised
+-- PDE results or an independent kernel-checked theorem receipt.
+--
 -- These are analytical physical-source derivations recorded at:
 --   Docs/research/ns_r734_critical_small_data_dyadic_20261027.md
 -- with seven local arithmetic tests in test_ns_r734_critical_small_data.py.
