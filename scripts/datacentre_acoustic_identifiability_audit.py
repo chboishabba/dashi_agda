@@ -115,6 +115,48 @@ BENN_JORDAN_GITHUB_ROOTS = (
 )
 
 
+
+from fractions import Fraction as _Fraction
+
+
+def nominal_mseed_wav_playback_ratio(original_samples_per_second,
+                                    output_wav_samples_per_second=96000):
+    """A hypothetical sample-clock mismatch, NOT a sampled real waveform.
+
+    dhilowitz/MSEED2Wav upstream Source/Main.cpp writes samples unchanged
+    into WAV tagged at fixed 96000 sample/s; to interpret physical time
+    one must retain the original MiniSEED sample rate and instrument
+    response. Benn Jordan's fork is NOT evidence that he used this process.
+    """
+    for val in (original_samples_per_second, output_wav_samples_per_second):
+        if type(val) not in (int, str, _Fraction):
+            raise ValueError('exact positive sample rate required')
+    try:
+        old = _Fraction(original_samples_per_second)
+        new = _Fraction(output_wav_samples_per_second)
+    except (TypeError, ZeroDivisionError, ValueError, OverflowError) as exc:
+        raise ValueError('valid rational sample rates required') from exc
+    if old <= 0 or new <= 0:
+        raise ValueError('sample rate must be positive')
+    return new / old
+
+
+def mseed_converter_metadata_witness():
+    nominal = nominal_mseed_wav_playback_ratio(100)
+    return {
+        'upstream_original_author_root': 'dhilowitz/MSEED2Wav',
+        'apparent_fork_distribution': 'bennjordan/MSEED2Wav_Android',
+        'original_source_code_date': '2024-04',
+        'example_original_samples_per_second': 100,
+        'fixed_wav_output_samples_per_second': 96000,
+        'nominal_acceleration_for_example': str(nominal),
+        'example_3hz_physical_tone_would_play_at_hz': str(
+            _Fraction(3) * nominal),
+        'video_data_processing_use_proven': False,
+        'raw_site_sound_pressure_calibration_proven': False,
+    }
+
+
 def original_repo_attribution(record):
     """GitHub fork cannot be promoted to independent original authorship."""
     if not isinstance(record, PublicRepositoryRoot):
@@ -330,6 +372,22 @@ class TestOriginalInquiryAcceptance(_unittest.TestCase):
             'fork_presence_does_not_verify_use_in_2026_video'])
         self.assertNotEqual(fork.source_owner, fork.apparent_owner)
 
+
+    def test_forked_converter_100sps_96000wav_cannot_preserve_physical_hz(self):
+        z = mseed_converter_metadata_witness()
+        self.assertEqual(z['nominal_acceleration_for_example'], '960')
+        self.assertEqual(z['example_3hz_physical_tone_would_play_at_hz'],
+                         '2880')
+        self.assertFalse(z['video_data_processing_use_proven'])
+        self.assertFalse(z['raw_site_sound_pressure_calibration_proven'])
+
+    def test_converter_rejects_nonphysical_ambiguous_rates(self):
+        for old, new in ((0, 96000), (-1, 96000),
+                         (100, 0), (True, 96000),
+                         (100.0, 96000), ('nan', 96000)):
+            with self.assertRaises(ValueError):
+                nominal_mseed_wav_playback_ratio(old, new)
+
     def test_root_originals_are_required_before_downstream_join(self):
         r = {k: self._receipt(k)
              for k in REQUIRED_ORIGINALS['P3_facility_attribution']}
@@ -456,6 +514,8 @@ if __name__ == "__main__":
         status = original_inquiry_phase_status()
         status['related_public_github_fork_roots'] = [
             original_repo_attribution(r) for r in BENN_JORDAN_GITHUB_ROOTS]
+        status['public_fork_converter_timebase_example'] = (
+            mseed_converter_metadata_witness())
         status['verified_public_2026_site_sensor_or_participant_data'] = False
         status['paper_status_from_video_description'] = 'WIP, publication not verified'
         print(_json.dumps(status, indent=2))
