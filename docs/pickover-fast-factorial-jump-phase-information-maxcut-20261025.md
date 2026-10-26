@@ -448,3 +448,35 @@ stages. For Pickover a Shor-type speedup requires a specified modular
 or other periodic oracle *plus* a proof that its hidden structure
 determines ordinary sine orientation. The ordinary finite C3 action
 does NOT furnish that. No quantum advantage or sign theorem claimed.
+
+## 2026-10-26 369 signed-circle versus actual ternary Q9
+
+The user's 3->9->27 observation has an EXACT existing source owner:
+DASHI/Foundations/TernaryEndomorphismPhaseQuotientExact.agda proves
+27 ternary endomorphism tables divided into nine free C3 output-phase
+orbits (27=3*9, with 2 reversible and 7 collapsing normalized codes).
+DASHI/Foundations/PhaseQuotientNonaryGroupSeparationExact.agda proves
+Q9=T*T as C3*C3 is not group-isomorphic to cyclic C9, despite a
+lossless nine-address chart. Preserve this non-identification when
+embedding cyclic nine *circle intervals* into the 369 presentation.
+The circle also has two zero boundaries (0,pi) and two open sign
+chambers; an up/middle/down classifier must be explicitly defined.
+
+In scripts/check_pickover_369_signed_circle_observer.py, exact rational
+tests show nested circle 3/9/27 sectors reconstruct exactly by base-three
+address truncation. But x=17/36 and y=19/36 lie in the same middle ninth
+while sign(sin 2*pi*x)=+1 and sign(sin 2*pi*y)=-1, and after 99th powering
+their signs are opposite again. Thus nine-circle-sector label alone
+cannot supply the signed answer or a well-defined 99-power transport.
+Need retain fine within-sector coordinate (or a consumer-sufficient
+smaller symbolic certificate). Import repo's consumer-indexed residual,
+JCoarseFineConsumerReduction, nine-phase quotient group separation,
+BIDI and proof-carrying analytic phase semantics. This is a local
+signed-circle model, not an assumption that Q9 and C9 are one group.
+
+Search target: construct a *consumer congruence for the full 99-power
+semigroup*, prove its signed-decoding soundness for the concrete
+e^(i*99^(n!)) orbit, and demonstrate an efficient direct jump on
+the compressed quotient using bit/FFT or Shor/RSA inspired period
+reduction with exact runtime and certificate cost. Do not identify
+finite C3 identities with the real exponential without a weld.
