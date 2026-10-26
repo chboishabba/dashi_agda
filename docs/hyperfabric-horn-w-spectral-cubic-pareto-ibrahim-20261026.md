@@ -273,3 +273,46 @@ brackets; the source-written Lean #84 rational surface now has
 three polynomial endpoint-sign lemmas and disjoint-order lemma.
 Lean kernel and the underlying complex-matrix spectral theorem
 weld are still unverified in this cut.
+
+
+## Latest-head concurrent #1244 source acquisition (2026-10-26, AFTER first cut)
+
+A fresh PR-head comparison showed horn owner #1244 advanced to
+`ae805ee8ec4ca23e7eadec28aa5f90855af75844` while our #1249
+branch was being edited. The new material is ALREADY #1244-owned:
+`scripts/alexander_horned_c3_equivariant_basing_paths.py` and
+`scripts/alexander_horned_c3_same_cover_discriminator.py`, plus an
+updated original `AlexanderHornedC3ExplicitExteriorOpenCover20261025.md`.
+DO NOT duplicate the new owner's source work.
+
+The owner now supplies explicit **central-to-overlap basing paths**,
+from x0=(20,20,20) to pi=13 ei,
+gamma_i(t)=(1-t)x0+t pi. Their distinguished coordinate
+20-7t>=13 proves clearance from the finite central/tube envelopes,
+and spatial R maps gamma_i to gamma_(i+1). These pay the former
+*central-to-collar path* and C3 basing-equivariance geometrical gate.
+They do NOT yet provide a path inside the actual wild satellite to a
+named Hatcher marked meridian, or the relative satellite
+pi1(S_i)=G_A equivalence.
+
+The second new owner script gives a SEVERE COUNTEREXAMPLE:
+replace wild satellites by tame round ones within the same radius-1
+envelopes. All central cut sets, pierced-shell collar geometry,
+C3 basing paths and local open-cover checks remain identical,
+while the intended wild versus tame exterior fundamental-group
+information differs. Thus our new spectral acceptance cannot be
+used to infer wild geometry from collar/C3 agreement alone.
+
+The updated true P0 acceptance contract is narrowed still further:
+the SOURCE-SPECIFIC SATELLITE relative cap/collar homotopy
+equivalence with named π1 generator map, then the actual
+finite-stage whole-handlebody-avoiding local loop's metric
+arclength. The previously paid C3 basing and pierced-shell
+topology should be IMPORTED/REUSED from #1244, not reproved.
+The quantitative operator result and its exact spectrum remain
+independent and already complete in their stated scalar sense.
+
+Attribution: #1244 owns the basing paths and same-cover collision,
+#1254/#1266/#1267 are source of the already-recorded severe-test
+methodology, Hatcher original topology and Lippert source exposition,
+this #1249 cut owns only the new W trace-to-spectral consequence.
