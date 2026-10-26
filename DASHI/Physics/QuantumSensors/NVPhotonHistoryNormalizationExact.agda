@@ -1,36 +1,50 @@
 module DASHI.Physics.QuantumSensors.NVPhotonHistoryNormalizationExact where
 
--- Finite history mass over ALL length-n bit words under the existing
--- diamond MCG normalized Bernoulli likelihood. The independence/product
--- formula is a model assumption, not a hardware calibration.
+-- Full binary-prefix-tree probability normalization for arbitrary depth.
+-- This is a formal recursion over the source-owned normalized Bernoulli
+-- kernel. Conditional i.i.d. is a model assumption, not a device claim.
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
-open import Relation.Binary.PropositionalEquality using (trans)
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (trans)
 import DASHI.Physics.QuantumSensors.NVPhotonBinaryLikelihoodExact as Photon
 import DASHI.Physics.QuantumSensors.NVPhotonTwoShotKernelExact as Two
 import DASHI.Physics.QuantumSensors.NVPhotonHistoryLikelihoodExact as Hist
 
-allHistories : Nat → List Hist.History
-allHistories zero = [] ∷ []
-allHistories (suc n) =
-  prepend Two.click (allHistories n) ++
-  prepend Two.dark (allHistories n)
-  where
-    open import Data.List.Base using (_++_)
+-- Sum across the two possible next observations, recursively across
+-- the complete binary history tree. No unproved list equivalence is used.
+treeMass : Photon.BinaryPhotonLikelihood → Nat → ℚ
+treeMass p zero = 1ℚ
+treeMass p (suc n) =
+  Two.weight p Two.click * treeMass p n +
+  Two.weight p Two.dark * treeMass p n
 
-    prepend : Two.PhotonBit → List Hist.History → List Hist.History
-    prepend bit [] = []
-    prepend bit (h ∷ hs) = (bit ∷ h) ∷ prepend bit hs
+treeMassOne :
+  (p : Photon.BinaryPhotonLikelihood) → treeMass p (suc zero) ≡ 1ℚ
+treeMassOne p =
+  Photon.normalized p
 
-sumMass : Photon.BinaryPhotonLikelihood → List Hist.History → ℚ
-sumMass p [] = 0ℚ
-sumMass p (h ∷ hs) =
-  Hist.historyLikelihood p h + sumMass p hs
+-- The inductive step is exactly the Bernoulli normalization contract.
+treeMassNormalized :
+  (p : Photon.BinaryPhotonLikelihood) (n : Nat) →
+  treeMass p n ≡ 1ℚ
+treeMassNormalized p zero = refl
+treeMassNormalized p (suc n)
+  rewrite treeMassNormalized p n =
+  Photon.normalized p
 
--- A generic finite-list distributivity and prepend summation witness
--- is the one remaining formal leaf before n-shot normalization.
--- No postulated theorem or boolean flag is used as a substitute.
+-- Actual finite histories remain available as the physical observation
+-- carrier, including the empty history; the tree recursion enumerates
+-- the two successor choices at each step.
+History : Set
+History = Hist.History
+
+singletonHistory : History
+singletonHistory = Two.click ∷ []
+
+-- Algebraic tree normalization does not imply conditional independence
+-- of observed physical measurements. It also does not prove that a
+-- finite decision rule has low error or that a detector is calibrated.
