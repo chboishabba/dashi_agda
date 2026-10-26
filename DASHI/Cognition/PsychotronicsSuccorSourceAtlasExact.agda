@@ -773,6 +773,32 @@ ellsworthKansasFalseWeatherJoin = Source.mkNoDOISource
   "same city spelling but Kansas location; July 1953 weather on that page cannot be assigned to Ellsworth Maine"
   Source.publicAttribution
 
+-- 2003 primary EVENT organiser and later SAME-ORGANISER video page are
+-- separate source carriers, not two independent historical witnesses.
+-- Croft and RVML remain different root speakers/custodians. Neither RVML
+-- carrier independently attests a 1999 Flanagan-to-Gentry-to-Croft plan.
+rvmlGentry2003Programme : Source.AttributedSource
+rvmlGentry2003Programme = Source.mkNoDOISource
+  "Rogue Valley Metaphysical Library and Event Center (organiser)"
+  "Secrets of Electronic Medicine by Gentry Smith: 4 November 2003 RVML event"
+  "original RVML 2003 November dated calendar; directly opening archive now 403 but indexed original host programme independently inspected"
+  "2003"
+  "https://rvml.org/calendar/wc112003s.htm"
+  Source.communitySource
+  "organiser lists Gentry Smith as 4 November 2003 lecture speaker; no published coil directions, independently identified Croft handoff, verified employment or medical results"
+  Source.publicAttribution
+
+rvmlGentryVideoMetadata : Source.AttributedSource
+rvmlGentryVideoMetadata = Source.mkNoDOISource
+  "RVML Community Resource Center (uploader; claimed speaker Gentry Smith)"
+  "Gentry Smith - Secrets of Electronic Medicine, Vimeo 92437258"
+  "original organiser-uploader page indexed; playback/film date/transcript not inspected; same title/speaker/institution as 2003 event"
+  "upload date unknown; linked 2003 event unconfirmed footage identity"
+  "https://vimeo.com/92437258"
+  Source.communitySource
+  "metadata lists Pat Flanagan electronic device as an advertised subject; cannot attribute the description as a spoken quote or establish prior assistant status, shared coil plan or medical performance"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -803,7 +829,8 @@ sourceAtlas = Source.mkSourceAtlas
    wmoWeatherModification2025 ∷ peterReichDreams1973 ∷
    bushCloudbusting1985 ∷ noaaBangorGHCN1953 ∷
    noaaBangorStationMetadata ∷ ellsworthAmericanJuly1953 ∷
-   bangorLibraryNewspaperArchives ∷ ellsworthKansasFalseWeatherJoin ∷ [])
+   bangorLibraryNewspaperArchives ∷ ellsworthKansasFalseWeatherJoin ∷
+   rvmlGentry2003Programme ∷ rvmlGentryVideoMetadata ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -830,6 +857,7 @@ data LineageRoot : Set where
   wmoInstitutionRoot peterReichMemoirRoot kateBushArtistRoot : LineageRoot
   noaaBangorWeatherRoot ellsworthAmericanPressRoot bangorLibraryRoot : LineageRoot
   kansasWeatherPortalRoot : LineageRoot
+  rvmlOrganizerPublicationRoot : LineageRoot
 
 data EvidenceCeiling : Set where
   attributedAuthorReport : EvidenceCeiling
@@ -862,6 +890,28 @@ mkBound :
 mkBound proposition carrier locator root role ceiling residual =
   claim-bound proposition carrier locator root role ceiling residual
     false refl false refl
+
+-- Two publisher/document carriers; same RVML provenance root. The Gentry
+-- speaker/topic is NOT the 1999 person-to-person instruction transfer.
+rvmlGentryNamedEvent : ClaimBound
+rvmlGentryNamedEvent = mkBound
+  "RVML original November 2003 calendar publicly names Gentry Smith as speaker on electronic-medicine topics"
+  rvmlGentry2003Programme
+  "RVML November 2003 archived calendar, Tuesday 4 November"
+  rvmlOrganizerPublicationRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "named contemporary speaker and scheduled event only; identity with Croft's Gentry and 1999 instruction handoff unverified"
+
+rvmlGentryFlanaganAdvertisedTopic : ClaimBound
+rvmlGentryFlanaganAdvertisedTopic = mkBound
+  "RVML uploader's description advertises a Pat Flanagan electronic device among purported Gentry Smith lecture topics"
+  rvmlGentryVideoMetadata
+  "Vimeo 92437258 original RVML uploader description; audio not inspected"
+  rvmlOrganizerPublicationRoot
+  Diligence.contextualEvidence
+  institutionalHistoricalInterpretation
+  "independent of Croft publisher but only same-organiser topic adjacency; speech, professional assistant relationship and handwritten winding provenance unpaid"
 
 croftCoLocatedDevice : ClaimBound
 croftCoLocatedDevice = mkBound
