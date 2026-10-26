@@ -7,6 +7,7 @@ on:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'scripts/toe_369_import_graph_guard.py'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -26,6 +27,9 @@ jobs:
         with:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
+
+      - name: Deterministic TOE import graph and ESD scope check
+        run: python3 scripts/toe_369_import_graph_guard.py
 
       - name: Reject trust escapes
         run: |
