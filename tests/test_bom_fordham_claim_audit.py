@@ -961,18 +961,19 @@ def test_recycled_claim_family_receipts_preserve_original_root_and_relation():
     path = ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv"
     with path.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
-    assert len(rows) == 27
-    assert len({r["receipt_id"] for r in rows}) == 27
+    assert len(rows) == 29
+    assert len({r["receipt_id"] for r in rows}) == 29
     assert all(r["claim_family"] and r["evidence_objects"] and
                r["relation_to_claim"] and r["nonpromotion_boundary"] for r in rows)
     totals = Counter(r["claim_family"] for r in rows)
-    assert len(totals) == 10
+    assert len(totals) == 11
     assert totals["US_UNCERTAINTY_STRATEGY"] == 2
     assert totals["API_PROMPTED_58PC"] == 1
     assert totals["GAS_TAX_17B_ANNUAL"] == 7
     assert totals["GAS_INVESTMENT_TAX_83PC"] == 3
     assert totals["GAS_INVESTMENT_SUPPLY_PRICE"] == 4
     assert totals["GAS_TAX_POLICY_SPECIFICATION"] == 2
+    assert totals["GAS_TAX_VS_RESERVATION_DENOMINATOR"] == 2
 
     by_id = {r["receipt_id"]:r for r in rows}
     assert by_id["H01"]["evidence_objects"] == "ICE_PLAN_1991"
@@ -1011,6 +1012,11 @@ def test_same_gas_headline_two_named_models_not_seven_estimates():
     assert rows["G18"]["numerical_or_rhetorical_payload"].startswith("replace PRRT")
     assert rows["G19"]["numerical_or_rhetorical_payload"].startswith("additional 25%")
     assert rows["G18"]["evidence_objects"] != rows["G19"]["evidence_objects"]
+    assert rows["G20"]["evidence_objects"] == "AUS_GOV_RESERVATION_2025"
+    assert rows["G21"]["evidence_objects"] == "ACTU_2026_PRIMARY"
+    assert "gas production reserved" in rows["G20"]["numerical_or_rhetorical_payload"]
+    assert "exported sales revenue" in rows["G21"]["numerical_or_rhetorical_payload"]
+    assert "NOT an export revenue tax rate" in rows["G20"]["nonpromotion_boundary"]
     assert rows["G10"]["evidence_objects"] == rows["G11"]["evidence_objects"] == "WOODMAC_AEP_2026"
     assert "not observed national" in rows["G10"]["nonpromotion_boundary"]
     assert rows["G12"]["relation_to_claim"] == "named_adversarial_model_reanalysis"
@@ -1030,14 +1036,14 @@ def test_recycled_claims_consume_canonical_agda_nonfactorability():
         "futureGroupArthurDLittle2026", "pocockGas2026",
         "taiGasRoyalty2024", "aepWoodMackenzie2026",
         "nightlyJohnsonGas2026", "hancockJohnsonReprint2026",
-        "actu2026OriginalReplacementProposal",
+        "actu2026OriginalReplacementProposal", "australianGovernmentGasReservation2025",
     ):
         assert receipt + " : Typed.SourceReceipt" in owner
     for relation in (
         "iceToAPIUncertaintyStrategicRecurrence", "tai17BRestatedByPocock2026",
         "futureGroup17BRestatedByPocock2026", "tai56PcRoyaltyRestatedByPocock2026",
         "nightlyToHancockExplicitReprint2026", "aepWoodMacStatisticsNotNationalTaxRate",
-        "actuReplacementVsAEPAddOnSpecification",
+        "actuReplacementVsAEPAddOnSpecification", "gasReservationIsNot25PcExportLevy",
     ):
         assert relation + " : Typed.TypedGenealogyEdge" in owner
     assert "import DASHI.Core.IntersectionalNonFactorability as INF" in owner
