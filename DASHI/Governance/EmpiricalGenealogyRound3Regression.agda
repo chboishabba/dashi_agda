@@ -682,7 +682,7 @@ octoberBareLevyStringNotInstrumentIdentifier =
 
 ------------------------------------------------------------------------
 -- Ibrahim/source-dependence original inquiry: one purposively selected
--- 53-appearance evidence sample can fit differently concentrated national
+-- 57-appearance evidence sample can fit differently concentrated national
 -- universes. Population claim needs a representative sampling design.
 ------------------------------------------------------------------------
 
@@ -692,3 +692,24 @@ selectedClimateCorpusIsNotNationalSourceCensus :
     Climate.whatUnobservedOriginalPopulationContains → ⊥
 selectedClimateCorpusIsNotNationalSourceCensus =
   Climate.selectedCorpusCannotDetermineNationalOriginConcentration
+
+
+------------------------------------------------------------------------
+-- 15 Oct OIA publisher-original regulatory burden and explicit contradiction
+-- with 14 Oct parliamentary minister's stated intended framework start.
+------------------------------------------------------------------------
+
+officialOIARegulatoryBurdenNotADLRevenueTax :
+  Typed.relationKind Climate.oiaRegulatoryBurdenNotExportTaxModel ≡
+    Typed.parallelEconomicArgument
+officialOIARegulatoryBurdenNotADLRevenueTax = refl
+
+oiaAndKingsCommencementStatementsConflictButAreSourceAttributed :
+  Typed.relationKind Climate.oiaJanuaryVsKingJulyDGRSStart ≡
+    Typed.reportedStatisticRestatement
+oiaAndKingsCommencementStatementsConflictButAreSourceAttributed = refl
+
+oiaVersionMismatchIsNotProofOfHistoricalTransfer :
+  Typed.StrongHistoricalTransfer Climate.oiaJanuaryVsKingJulyDGRSStart → ⊥
+oiaVersionMismatchIsNotProofOfHistoricalTransfer =
+  Climate.oiaTimingConflictDoesNotEstablishCausalScriptTransfer
