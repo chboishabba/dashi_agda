@@ -98,6 +98,11 @@ all78 := Filtered([1..Length(sixIrr)], i -> sixIrr[i][1] = 78);
 if Length(p12) <> 2 or Length(all78) < 2 then
   Error("faithful 12 pair or source degree78 candidate inventory unavailable");
 fi;
+# CTblLib ATLAS-published 6.Suz table identity, independently recorded.
+# Fail before claiming the current source class positions are canonical.
+if Size(six) <> 2690072985600 or NrConjugacyClasses(six) <> 210 then
+  Error("6.Suz source order/class count mismatch published CTblLib head");
+fi;
 sum12 := sixIrr[p12[1]] + sixIrr[p12[2]];
 
 # ----------------------------------------------------------------------
@@ -438,6 +443,10 @@ PrintTo(output,
   "  \"main_table\": \"", Identifier(main), "\",\n",
   "  \"mn3b_table\": \"", Identifier(mn3b), "\",\n",
   "  \"six_suz_table\": \"", Identifier(six), "\",\n",
+  "  \"six_suz_group_order\": ", Size(six), ",\n",
+  "  \"six_suz_class_count\": ", NrConjugacyClasses(six), ",\n",
+  "  \"six_suz_degree12_positions\": [", p12[1], ", ", p12[2], "],\n",
+  "  \"six_suz_degree78_positions\": [", p78[1], ", ", p78[2], "],\n",
   "  \"six_suz_outer_table\": \"", Identifier(outer), "\",\n",
   "  \"base_1458_main_position\": ", base1458Pos, ",\n",
   "  \"base_1458_extraspecial_central_class_position\": ", mainCentral3, ",\n",
