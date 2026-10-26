@@ -504,3 +504,52 @@ actual geometric-realisation/direct-colimit
 topological theorem must still be proved or imported
 in a compatible kernel environment. At writing,
 no exact-head Agda compiler receipt exists.
+
+
+## 27 October 2026 — Stephen C. Power's 2025 constructive triangulation donor
+
+**Original publication:** Stephen C. Power, *Noncompact surfaces,
+triangulations and rigidity*, *Bulletin of the London Mathematical
+Society* **57** (2025), pp. 2097–2115,
+DOI https://doi.org/10.1112/blms.70083.
+Original preprint: https://arxiv.org/abs/2403.11986 (2024).
+These are **versions of one intellectual source**, not independent
+corroboration or independent proofs.
+Power gives a more explicit Kerékjártó/Richards classification
+argument, proves every noncompact surface ADMITs a countable
+`(3,6)`-tight triangulation (Theorem 4.5), and can choose one
+with minimally 3-rigid graph (Theorem 6.4). This is a
+constructive EXISTENCE claim about carefully selected
+triangulations, not a certificate on arbitrary DASHI
+pants meshes, and it does not transfer original priority
+away from Brahana, Kerékjártó or Richards.
+
+**Direct source-mesh discriminator implemented:**
+`scripts/exotic_topology_power_36_tight_nonpromotion.py`
+computes V, E, F, b and the sum L of boundary-edge lengths
+on EXACT finite binary Cantor, balanced ternary, Loch Ness
+and Jacob's ladder meshes from the original PL constructors.
+It verifies per selected stage:
+
+```text
+3F = 2E - L                  oriented triangular-face incidence
+V - E + F = 2 - 2g - b       finite surface Euler equation
+L = 3b                       every outgoing loop is triangular
+3V - E = 3(2 - 2g - b) + L = 6 - 6g.
+```
+
+**NEW all-genus formal arithmetic:**
+companion Lean #86 has
+`Synthesis/ExoticTopologyPLMaxwellGenusNoGo.lean`,
+with `eulerMaxwellWithBoundaryLength`,
+`triangularBoundaryMaxwellGenus`,
+`positiveGenusViolates36WholeGraph`, and
+`zeroGenusHasWholeGraphMaxwellSix`.
+The source uses Mathlib `omega` on integer-valued
+Euler/face-incidence facts, NOT a fake full
+geometric planar embedding or generalised combinatorial
+graph-rigidity theorem. It is not kernel-executed.
+
+
+The remaining actual infinite-surface geometric/ideal-boundary
+supplier still requires all-depth identification and kernel realisation.
