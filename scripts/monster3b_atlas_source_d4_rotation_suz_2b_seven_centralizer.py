@@ -24,7 +24,7 @@ from monster3b_atlas_source_word_order_d4_gate import (
     ident,neg,mm,power,parse_meataxe,
 )
 
-G_WORD="DcDCDcdC"
+G_WORD="DcDCDcdC"\nALT_G_WORD="CDCdCdCd" # = C*D*(C*d)^3, also exact length-eight
 ATLAS_SUZ_CENTRALIZERS={"2A":3317760,"2B":161280}
 
 def audit(root):
@@ -57,6 +57,21 @@ def audit(root):
     assert power(seven,7)==I and seven!=I
     assert mm(seven,r)==mm(r,seven)
     assert mm(mm(trans(seven),J),seven)==J
+    # Independent SECOND length-eight source word certificate; same
+    # primary ATLAS matrices, different finite group words.
+    # The current-turn local exhaustive search of all 4372 freely
+    # reduced words of lengths 1..7 found no witness for THIS
+    # specific Bray conjugator recipe. That search was not reproduced
+    # by a checked-in exhaustive runner, so do NOT mark it kernel-paid.
+    assert sum(ch in "Cc" for ch in ALT_G_WORD)%2==0
+    ga=evaluate(ALT_G_WORD,C,D)
+    gai=evaluate(inverse_word(ALT_G_WORD),C,D)
+    ua=mm(r,mm(mm(gai,r),ga))
+    assert power(ua,13)==NI
+    ta=mm(ga,power(ua,6))
+    assert power(ta,7)==NI
+    assert mm(ta,r)==mm(r,ta)
+    assert power(neg(ta),7)==I and neg(ta)!=I
     assert ATLAS_SUZ_CENTRALIZERS["2A"]%7 != 0
     assert ATLAS_SUZ_CENTRALIZERS["2B"]%7 == 0
     # Projective Suzuki class rather than literal Monster conjugacy class.
@@ -69,7 +84,7 @@ def audit(root):
       "source_matrix_SHA256_manifest_verified":src["source_SHA256_manifest_matched"],
       "source_rotation_word":src["actual_source_rotation_word_SLP"],
       "source_rotation_square_is_negative_identity":True,
-      "inner_Suzuki_source_word_g":G_WORD,
+      "inner_Suzuki_source_word_g":G_WORD,\n      "alternate_length8_source_word_g":ALT_G_WORD,\n      "alternate_order7_centralizer_witness_verified":True,\n      "shorter_4372_reduced_words_independently_searched_this_turn":True,\n      "minimality_claim_scope":"Bray-order7 source word recipe only; independent local audit, not kernel",
       "g_outer_coset_parity":0,
       "conjugate_product_u_definition":"r*(g^-1*r*g)",
       "u_thirteenth_power_is_negative_identity":True,
