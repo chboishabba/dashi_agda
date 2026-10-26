@@ -71,7 +71,8 @@
       "root": "canada_joint_2019",
       "status": "present",
       "locator": "https://www.priv.gc.ca/en/opc-actions-and-decisions/investigations/investigations-into-businesses/2019/pipeda-2019-004/",
-      "scope": "Regulators' AGGREGATE scores-derived-from-Kogan data finding; not original score-file bytes"
+      "scope": "Regulators' AGGREGATE scores-derived-from-Kogan data finding; not original score-file bytes",
+      "carrier": "Original ONE joint regulator report"
     },
     {
       "id": "ftc_personal_consents",
@@ -85,14 +86,40 @@
       "root": "uk_electoral",
       "status": "present",
       "locator": "https://www.electoralcommission.org.uk/cy/node/619",
-      "scope": "Campaign service payments, appeal corrections, not exact voter model file"
+      "scope": "Campaign service payments, appeal corrections, not exact voter model file",
+      "carrier": "Original UK Electoral Commission reporting and subsequent appeal chronology"
     },
     {
-      "id": "bannon_ftc_cid_four_documents",
+      "id": "ftc_bannon_petition_2020",
       "root": "ftc_2019_2020",
       "status": "present",
-      "locator": "https://www.ftc.gov/legal-library/browse/cases-proceedings/bannon-stephen-k",
-      "scope": "FTC petition/reply, DDC preliminary procedural order, separately authored Bannon response; different producers for same docket"
+      "locator": "https://www.ftc.gov/system/files/documents/cases/01_redacted_petition_memo_iso_exhibits_proposed_order.pdf",
+      "carrier": "Original 2020-11-09 FTC petition with Sept-2019 CID exhibit",
+      "scope": "FTC legal request, not merits finding, agency litigant root"
+    },
+    {
+      "id": "ftc_bannon_reply_2020",
+      "root": "ftc_2019_2020",
+      "status": "present",
+      "locator": "https://www.ftc.gov/system/files/documents/cases/13_ftcs_reply_iso_petition.pdf",
+      "carrier": "Original 2020-12-18 FTC reply",
+      "scope": "Same FTC producer as petition, not independent investigation"
+    },
+    {
+      "id": "bannon_opposition_2020",
+      "root": "bannon_defence_2020",
+      "status": "present",
+      "locator": "https://www.ftc.gov/system/files/documents/cases/12_bannon_opposition_to_petition_to_enforce_cid.pdf",
+      "carrier": "Original 2020-12-09 respondent pleading",
+      "scope": "Adversarial participant argument and denial, not judicial exoneration"
+    },
+    {
+      "id": "ddc_show_cause_2020",
+      "root": "ddc_judge_2020",
+      "status": "present",
+      "locator": "https://www.ftc.gov/system/files/documents/cases/05_order_to_show_cause_0.pdf",
+      "carrier": "Original signed 2020-11-18 judicial order",
+      "scope": "Procedural hearing order, not merits finding"
     },
     {
       "id": "hsi_dea_name_distinction",
@@ -106,11 +133,12 @@
       "root": "dea_ocdetf_2015",
       "status": "present",
       "locator": "https://tommycarstensen.com/epstein/data/documents/set9/00173/EFTA00173953.html",
-      "scope": "OCR/index carrier of same DEA source, NOT independently verified native page image"
+      "scope": "OCR/index carrier of same DEA source, NOT independently verified native page image",
+      "carrier": "Derivative third-party OCR rendition of DEA-origin document; not a separate DEA witness"
     },
     {
       "id": "bannon_ftc_final_judgment",
-      "root": "ddc_judge_2020",
+      "root": "future_undetermined_source",
       "status": "notLocated",
       "scope": "No original post-Dec2020 court disposition or FTC personal-liability conclusion inspected; not knownAbsent"
     },
@@ -122,7 +150,7 @@
     },
     {
       "id": "black_2016_bank_identity",
-      "root": "black_dechert_2021",
+      "root": "future_undetermined_source",
       "status": "notLocated",
       "scope": "Bank-origin individual transaction characterization and same-object identity for 2016 Black ledger; not difference of totals"
     },
@@ -176,10 +204,16 @@
       "scope": "DDC 1:20-mc-00111-CRC procedure only",
       "level": "sourceReported",
       "supports": [
-        "bannon_ftc_cid_four_documents"
+        "ftc_bannon_petition_2020",
+        "ftc_bannon_reply_2020",
+        "bannon_opposition_2020",
+        "ddc_show_cause_2020"
       ],
       "requires": [
-        "bannon_ftc_cid_four_documents"
+        "ftc_bannon_petition_2020",
+        "ftc_bannon_reply_2020",
+        "bannon_opposition_2020",
+        "ddc_show_cause_2020"
       ]
     },
     {
@@ -188,7 +222,10 @@
       "scope": "only original court or FTC final object",
       "level": "unresolved",
       "supports": [
-        "bannon_ftc_cid_four_documents"
+        "ftc_bannon_petition_2020",
+        "ftc_bannon_reply_2020",
+        "bannon_opposition_2020",
+        "ddc_show_cause_2020"
       ],
       "requires": [
         "bannon_ftc_final_judgment"
