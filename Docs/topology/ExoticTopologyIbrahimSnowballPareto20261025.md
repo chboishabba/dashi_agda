@@ -423,3 +423,111 @@ one (S_5) presentation witness or the same source Hatcher
 commutator recursion does not make their ambient complements
 homeomorphic or identify their fundamental groups.
 Do not promote the parent geometric cover as closing Fox–Artin.
+
+
+## 26 October — actually paid old/new complement incidence + cylinder orientation
+
+This is a second step beyond the 25 October fixed frontier-label counts.
+
+### Exact finite complementary geometry
+
+NEW: `scripts/exotic_topology_pl_complement_components.py` imports
+the **canonical existing** PL geometry and marked-frontier
+implementations. It composes the literal injective vertex maps
+of each old stage through every pair-of-pants or handle attachment.
+It verifies that **each old oriented simplex persists**,
+computes added triangles as a set difference, and computes
+their actual shared-edge dual connected components. Then it
+checks that the interface includes every old boundary edge
+and identifies **precisely one** complementary component for
+each old boundary, with all new outgoing boundary edges in
+the correct component. Cantor: p→p0,p1; Loch: one persistent
+tail; Jacob: two persistent tails.
+
+Independent local reimplementation of the underlying algorithms
+executed and PASSED depths 1–3:
+- Cantor: 1,2,4 new components; surfaces have 2,4,8 outgoing
+  boundary circles, genus zero;
+- Loch: 1,1,1; new genus 1,2,3;
+- Jacob: 2,2,2; new genus 2,4,6;
+- adversarial collapsed old-vertex map and false lineage both
+  rejected, although the false-lineage mesh itself is legal.
+
+This establishes the *finite combinatorial analogue* of
+component-by-boundary compatibility. It does NOT construct
+a proper infinite locally finite PL exhaustion or prove
+homeomorphism of the actual Freudenthal/Richards end spaces.
+The exact pushed GitHub code has newly written tests; no
+executed exact-head check receipt is yet claimed.
+
+### Chronological Cantor cylinder interpretation: nontrivial correction
+
+The PRE-EXISTING
+`DASHI.Foundations.CantorProjectiveCylinderMeasureExact` defines
+`leftChild (cylinder prefix) = cylinder (false :: prefix)`.
+This is an honest reverse-stack word convention: the child
+mass splits exactly because `cylinderMass` depends only on
+word LENGTH. But it is NOT a refinement of the ordinary
+chronological stream-prefix event where list head means
+stream index zero. Example: parent prefix `[true]`, old
+prepended left child `[false,true]`, and stream
+`[false,true,false,...]`: the child matches and its
+supposed parent does not. Thus mass equality is not an
+event-inclusion proof; we must not silently identify those
+two word-order conventions.
+
+NEW: `ExoticCantorCylinderOrientationExact.agda` reuses
+**the actual existing Cantor.BitStream and Cantor.Cylinder**,
+defines stream-prefix event semantics, supplies correctly
+APPENDED children, and proves `appendChildRefines`
+by induction on arbitrary finite prefixes for every stream.
+It also produces an explicit counterexample that blocks
+claiming the original prepended child refines a conventional
+prefix event.
+
+NEW `scripts/exotic_topology_cantor_cylinder_orientation.py`
+independently audits all 2046 prefix-child pairs at depths
+0–9, tests `reverse(p ++ [b]) = b :: reverse(p)` and checks
+the explicit failed old-prepend inclusion. Independent local
+Python mathematical replication PASSED the corresponding
+finite identities; the actual new GitHub script remains
+unexecuted at its pushed SHA. The two finite tree systems
+are related by **finite-word reversal**, but there is no
+claim of a literal terminal-bit reversal operator on
+an infinite sequence.
+
+The original source code and attribution owner are
+preserved unchanged. The new orientation bridge and its
+negative control are implementation-specific DASHI results;
+they are not historical theorems assigned to Richards or Cantor.
+
+### Latest-PR Pareto and same-object boundary
+
+26 October #1266 adds a standalone revisable-observer
+consumer-factorisation file on a separate branch. This
+is useful inspiration, but #1254 already uses the
+canonical `QueryIndexedProjectionAdequacyExact` and
+`IntersectionalNonFactorability`. We therefore do NOT
+import an unmerged branch or duplicate its mathematical
+framework. #1268 models source revision and independence
+for another investigation; it is an attribution workflow
+reference, NOT a topology theorem or primary surface source.
+#1261 provides genuine crystallographic group actions,
+but not a Fox–Artin geometric embedding or Richards
+surface quotient. No unrelated PR is promoted by analogy.
+
+REVISED geometric Pareto:
+P0 run exact-head seven Agda kernel checks and now 22
+Python regression tests (including component/word-order
+negative controls), collect source-specific receipts.
+P1 proper locally finite infinite collared union and
+actual compact-cofinality/connected unbounded complementary
+region theorem for the PL construction.
+P2 identify the genuine Richards end-space topology via
+the now explicit *chronological* prefix cylinder system.
+P3 named Fox–Artin/Whitehead/van Kampen same-object wild
+embedding, Hatcher sphere H₂ supplier, Wada/Warsaw deep
+topology as independently scoped residuals.
+
+No kernel theorem, source attribution, homotopy status
+or geometric reality is auto-promoted by these scripts.
