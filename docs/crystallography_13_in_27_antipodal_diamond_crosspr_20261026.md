@@ -18,8 +18,7 @@ For X = {-1,0,1}³, coordinate negation has one fixed point 0 and
 The total is 3+6+4=13. Thus the diamond <111> quotient is an
 equivariant subcarrier of four elements inside the 13-class quotient,
 not the entirety of it. The full cubic signed-permutation group B3
-preserves all three support-size strata. The full action on the 13
-projective axes is faithful (unlike the action on only four body
+preserves all three support-size strata. The full action on the 13 projective axes has kernel {±I}, while the action on the 26 oriented nonzero sites is faithful (unlike the action on only four body
 diagonals, whose kernel is {±I}).
 
 ## Three distinct uses of 13/111 (avoid a false equivalence)
@@ -46,7 +45,7 @@ corner under another. Preserve the codec tag and the residual.
   once merged, rather than creating a second arbitrary antipode.
 - Define a typed quotient orbit and support-count classifier with
   reconstructible orientation residual; certify 3+6+4 orbit strata.
-- Prove B3 equivariance on all 13 axes and restrict to the diamond
+- Prove B3 equivariance with the central ±I kernel on all 13 axes and restrict to the diamond
   four-axis subcarrier. For four body-diagonal axes the effective
   permutation group is S4 with central ±I kernel; for all thirteen
   axes the action is faithful because coordinate sign flips and
