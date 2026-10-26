@@ -199,6 +199,15 @@ def audit(root):
     mixed_fixed={w:sum(applyword(w,t)==t for kind,orb in target.items()
                        for t in orb) for w in words}
     assert mixed_fixed['m']==2 and mixed_fixed['mr']==2
+    mirror_fibre_fixed={}
+    for w in ('m','mr'):
+        sites=[(kind,y) for kind,T in target.items() for y in T
+               if applyword(w,y)==y]
+        assert len(sites)==2
+        counts=[sum(applyword(w,x)==x for x in nonzero
+                    if quotient_map[x]==site) for site in sites]
+        assert counts==[4,4]
+        mirror_fibre_fixed[w]=counts
     return dict(status='PASS_original_ATLAS_D4_invariant_polarization_and_corner10_nogo',
         original_ATLAS_sha256_verified=True,
         source_D4_word_relations_verified=True,
@@ -221,6 +230,7 @@ def audit(root):
         mixed_D4_quotient80_each_target_fibre_size=10,
         mixed_D4_quotient80_equivariant=True,
         mixed_D4_target_fixed_counts=mixed_fixed,
+        mixed_D4_reflection_fixed_source_points_per_target_fibre=mirror_fibre_fixed,
         ten_sheet_D4_action_necessarily_twisted=True,
         natural_cube_corner_no_go_still_valid=True,
         nontrivial_D4_mixing_of_ten_sheets_excluded=False,
