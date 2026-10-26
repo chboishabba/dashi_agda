@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "Docs/receipts/DMTNiedernhuberZenodoListing20261025.json"
-EXPECTED_MANIFEST_GIT_BLOB = "50857090dcc1362f6398c88eed44259c6fd9b4ef"
+EXPECTED_MANIFEST_GIT_BLOB = "6acb9554ed197cbbcfb63af7ee38fbc2667dfc3e"
 PAPER = "10.1177/02698811261481062"
 VERSION = "10.5281/zenodo.18850897"
 HEX_MD5 = re.compile(r"[0-9a-f]{32}\Z")
@@ -55,11 +55,15 @@ def validate_source(source):
     d = source["deposition"]
     if (d["version_doi"] != VERSION or d["version_record_id"] != "18850897"
             or d["listed_file_pair_count"] != 25 or d["listed_file_count"] != 50
-            or d["license_status"] != "unresolved_display_blank"):
+            or d["license_status"] != "cc-by-4.0_in_user_supplied_zenodo_api_metadata_not_live_origin_reconfirmed"):
         raise ValueError("Zenodo version, file cardinality or rights status changed")
-    if (d.get("checksum_transcription_status") != "unverified_manual_transcription_not_source_authentication" or
+    if (d.get("checksum_transcription_status") != "all_50_values_match_user_supplied_zenodo_api_json_unverified_live_origin" or
         source.get("consumer_ceiling", {}).get("authoritative_zenodo_md5_listing_verified") is not False):
         raise ValueError("Require explicit non-authentication of unverified copied checksums")
+    if (d.get("record_checksum_crosscheck") != "50_of_50_name_md5_values_match_user_supplied_zenodo_api_json"
+            or d.get("metadata_api_shape_record_sha256") != "9fc6a2f48ac0ca501aafe09733968e3b25223ad547f816da440c9cf90a137de0"
+            or source.get("consumer_ceiling", {}).get("user_supplied_zenodo_api_json_50_of_50_checksum_match") is not True):
+        raise ValueError("Source checksum metadata provenance changed without new input receipt")
     pairs = source["file_pairs"]
     if not isinstance(pairs, list) or len(pairs) != 25:
         raise ValueError("Expected 25 file *pairs*, not 25 verified participants")
