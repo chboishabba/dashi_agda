@@ -93,3 +93,20 @@ C_W(E_0+D_0)^{7/4}
 `scripts/ns_r735_local_w1_h1_majorant.py` and `tests/test_ns_r735_local_w1_h1_majorant.py`: **10 local SymPy tests passed**, checking exact comparison ODE, cutoff-independent lifetime, inhomogeneous H² budget, Sobolev and Holder exponents, small-data absorption, all-time weighted Hölder and a numerical-rational sample. Tests verify only the **scalar assembly**, not the cited functional-analysis lemmas or their Agda representation. No Agda/Lean kernel, exact-GitHub-head CI or Clay proof is claimed.
 
 **Next Pareto max-cut:** for *general* data, source-specific signed cancellation between R735 W1 and W2 is essential; neither local nor small-data boundedness controls \(\sup_{T,N}\int C_N\) on arbitrary large data. Other frontier: A1 Bishop-real same-kernel/Gram identification, A2 low/high same-trajectory majorants, and A3 critical continuation; avoid duplicate conditional Miller/Lean #87 work. Preserve separate prior-art roots, proof status, and primary author attribution.
+
+
+## Additional physical same-object contact
+
+`tests/test_ns_r735_local_w1_physical_carrier.py` uses the ACTUAL
+finite Fourier Galerkin projected nonlinear forcing on a real
+transverse six-mode field, source-normalized helical projectors, and
+both ordered cross-product derivatives. The exact finite polynomial
+structure `M(u+eps F)=M(u)+eps Q(u,F)+eps²M(F)` passes at three
+signed perturbations. A central finite difference also agrees with
+the mixed energy nonlinear derivative `2 Re<M,Q>`, including the
+physical Leray projection and conjugate reality constraints.
+
+This is a NUMERICAL same-object contact regression, not a proof
+of the Sobolev multiplier inequalities or Agda R691 type equality.
+Combined with the ten exact scalar SymPy checks, **12 local tests
+passed**: ten exact algebra, two numerical source contact.
