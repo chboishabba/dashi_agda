@@ -28,3 +28,14 @@ Executed with local Python stdlib and exact Fraction arithmetic under a 10-secon
 5. Integrate the *actual* LILA task's semantic loss and trainable parameters, then conduct matched held-out benchmarks and full-compute accounting.
 
 Agda kernel checks and CI intentionally not run. Exact Python enumeration is evidence for the specific finite instances, not a universally checked formal proof.
+
+
+## Follow-on exact two-probe Agda source (26 October)
+
+New `DASHI/Reasoning/DustTwoProbeCenteringExact.agda` states and source-writes the concrete identity
+`(1/2)Σ_{i=1,2}(a_i - a_bar)a_i = (a_1-a_2)^2/4`,
+the cancellation for identical probes, and unit sample covariance for the *antithetic* pair `(+1,-1)`. The proof uses the same rational ring-solver pattern present in the existing repository's Walsh owner. No new Walsh or probability ontology is introduced.
+
+**Experimental distinction:** the iid `(K-1)/K` expectation correction applies to iid, zero-mean, unit-variance samples. An exactly paired antithetic design is dependent and has a different variance structure. This is not a licence to claim uniformly better neural optimisation: compare credit bias/variance, number of distinct forward calls, time, and held-out loss under matched budgets.
+
+Local stdlib Python exact rational test checked 36 input pairs and the antithetic/identical special cases, PASS. The Agda proofs are **source-written but not kernel-run**, CI intentionally skipped. The user-facing deliverable remains a partial Dust theorem cut; the actual nonlinear temporal, attention, head, and complete Noise optimizer proof obligations remain.
