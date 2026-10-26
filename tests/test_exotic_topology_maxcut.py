@@ -21,6 +21,7 @@ import exotic_topology_pl_complement_components as complement
 import exotic_topology_pl_stable_stars as stable
 import exotic_topology_power_36_tight_nonpromotion as power
 import exotic_topology_power_boundary_surgery_counterexample as surgery
+import exotic_topology_twenty_acceptance_ledger as original_inquiry
 import exotic_topology_genus_zero_sphere_caps as cap
 import exotic_topology_balanced_ternary_pl as balanced
 import exotic_topology_cantor_cylinder_orientation as orientation
@@ -439,5 +440,22 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertTrue(all(x["true_36_sparsity_rejected_by_explicit_old_core"]
                             for x in result["cases"]))
         self.assertFalse(result["agda_or_lean_kernel_verified"])
+
+
+    def test_original_twenty_space_ledger_is_exact_and_nonpromoting(self):
+        receipt=original_inquiry.audit()
+        self.assertEqual(receipt["requested_object_count"],20)
+        self.assertEqual(receipt["phase_count"],6)
+        self.assertTrue(receipt["original_question_completeness_of_inventory"])
+        self.assertFalse(receipt["kernel_proof_completion_claim"])
+        self.assertTrue(receipt["source_root_and_version_disciplines_present"])
+
+    def test_original_ledger_rejects_missing_space(self):
+        original=original_inquiry.LEDGER.read_text(encoding="utf-8")
+        changed=original.replace(
+          "| 20 | Whitney umbrella |", "| 21 | Whitney umbrella |", 1)
+        self.assertNotEqual(changed,original)
+        with self.assertRaises(AssertionError):
+            original_inquiry.audit(changed)
 
 if __name__ == '__main__': unittest.main()
