@@ -41,6 +41,16 @@ module DASHI.Physics.Closure.NSTriadKNR650AugmentedCriticalWeightedNormalFormRou
 -- algebra and the historical positive-proof status flags as false.
 -- Exact symbolic/real-helical acceptance: tests/test_ns_r734_pure_plus_physical_w2_no_go.py
 -- Details/credit: Docs/research/ns_r734_pure_plus_physical_w2_no_go_20261027.md
+-- Crucial PRIOR-ART REUSE: Waleffe's true signed-helicity invariant
+-- (R92/R102) uses the exact curl eigenvalue +/-|k|, NOT R734's
+-- rounded-up dyadic weight 2^ceil(log2 ||k||infty). On the SAME
+-- pure-plus counterexample, exact-helicity nonlinear production is
+-- zero, while dyadic-weighted production is >0: the difference
+-- is the exact signed weight-defect sum
+--    2 Re Σ_k [dyadicWeight(k)-|k|] <u_k, PNSnonlin(u)_k>.
+-- Norm equivalence does not imply derivative/sign equivalence.
+-- A viable replacement analytical target must control this defect
+-- together with physical same-helicity and mixed-helicity channels.
 -- The full real-analytic Galerkin witness is NOT kernel formalised here.
 --
 -- No estimate is introduced here.
