@@ -961,12 +961,12 @@ def test_recycled_claim_family_receipts_preserve_original_root_and_relation():
     path = ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv"
     with path.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
-    assert len(rows) == 29
-    assert len({r["receipt_id"] for r in rows}) == 29
+    assert len(rows) == 31
+    assert len({r["receipt_id"] for r in rows}) == 31
     assert all(r["claim_family"] and r["evidence_objects"] and
                r["relation_to_claim"] and r["nonpromotion_boundary"] for r in rows)
     totals = Counter(r["claim_family"] for r in rows)
-    assert len(totals) == 11
+    assert len(totals) == 12
     assert totals["US_UNCERTAINTY_STRATEGY"] == 2
     assert totals["API_PROMPTED_58PC"] == 1
     assert totals["GAS_TAX_17B_ANNUAL"] == 7
@@ -974,6 +974,7 @@ def test_recycled_claim_family_receipts_preserve_original_root_and_relation():
     assert totals["GAS_INVESTMENT_SUPPLY_PRICE"] == 4
     assert totals["GAS_TAX_POLICY_SPECIFICATION"] == 2
     assert totals["GAS_TAX_VS_RESERVATION_DENOMINATOR"] == 2
+    assert totals["GAS_TAX_TOTAL_21_9B_AEP"] == 2
 
     by_id = {r["receipt_id"]:r for r in rows}
     assert by_id["H01"]["evidence_objects"] == "ICE_PLAN_1991"
@@ -1018,6 +1019,9 @@ def test_same_gas_headline_two_named_models_not_seven_estimates():
     assert "exported sales revenue" in rows["G21"]["numerical_or_rhetorical_payload"]
     assert "NOT an export revenue tax rate" in rows["G20"]["nonpromotion_boundary"]
     assert rows["G10"]["evidence_objects"] == rows["G11"]["evidence_objects"] == "WOODMAC_AEP_2026"
+    assert rows["G22"]["evidence_objects"] == rows["G23"]["evidence_objects"] == "AEP_SURVEY_2025"
+    assert "forecast" in rows["G22"]["nonpromotion_boundary"]
+    assert "requires revised original actuals" in rows["G23"]["nonpromotion_boundary"]
     assert "not observed national" in rows["G10"]["nonpromotion_boundary"]
     assert rows["G12"]["relation_to_claim"] == "named_adversarial_model_reanalysis"
     assert rows["G14"]["relation_to_claim"] == "attributed_separate_witness_parallel_argument"
@@ -1037,6 +1041,7 @@ def test_recycled_claims_consume_canonical_agda_nonfactorability():
         "taiGasRoyalty2024", "aepWoodMackenzie2026",
         "nightlyJohnsonGas2026", "hancockJohnsonReprint2026",
         "actu2026OriginalReplacementProposal", "australianGovernmentGasReservation2025",
+        "aep2025OriginalFinancialForecast", "aep2026TaxSenateSubmission",
     ):
         assert receipt + " : Typed.SourceReceipt" in owner
     for relation in (
@@ -1044,6 +1049,7 @@ def test_recycled_claims_consume_canonical_agda_nonfactorability():
         "futureGroup17BRestatedByPocock2026", "tai56PcRoyaltyRestatedByPocock2026",
         "nightlyToHancockExplicitReprint2026", "aepWoodMacStatisticsNotNationalTaxRate",
         "actuReplacementVsAEPAddOnSpecification", "gasReservationIsNot25PcExportLevy",
+        "aepForecastToPaidStatusRestatement",
     ):
         assert relation + " : Typed.TypedGenealogyEdge" in owner
     assert "import DASHI.Core.IntersectionalNonFactorability as INF" in owner
@@ -1052,3 +1058,30 @@ def test_recycled_claims_consume_canonical_agda_nonfactorability():
     assert "same17BHeadlineDoesNotIdentifyNamedModelCount" in proofs
     assert "same25PcHeadlineDoesNotIdentifyTaxDesign" in proofs
     assert "donorActorInstitutionProximityDoesNotEstablishDecisionControl" in proofs
+
+
+def test_aep_21_9b_original_forecast_to_later_paid_public_claim():
+    with (ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv").open(
+        newline="", encoding="utf-8"
+    ) as stream:
+        rows = {r["receipt_id"]:r for r in csv.DictReader(stream)}
+    assert rows["G22"]["date"] == "2025-07-27"
+    assert rows["G23"]["date"] == "2026-04-13"
+    assert rows["G22"]["relation_to_claim"] == "first_party_survey_forecast"
+    assert rows["G23"]["relation_to_claim"] == "same_association_rounding_and_actuality_promotion"
+    assert rows["G22"]["evidence_objects"] == rows["G23"]["evidence_objects"]
+    # Original association's published *forecast*, million AUD. Addition
+    # verifies the released internal table, NOT actual remitted taxes.
+    component_million_aud = (13_484, 1_347, 6_620, 492)
+    assert sum(component_million_aud) == 21_943
+    assert "13484m company tax + 1347m PRRT + 6620m royalties/excise/fees + 492m other" in rows["G22"]["numerical_or_rhetorical_payload"]
+    assert "2024-25" in rows["G22"]["numerical_or_rhetorical_payload"]
+    assert "final cash payments" in rows["G22"]["nonpromotion_boundary"]
+
+    owner = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    val = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    assert "aepForecastToPaidStatusRestatement : Typed.TypedGenealogyEdge" in owner
+    assert "sameRoundedTaxTotalDifferentSourceStatus =\n  INF.nonFactorabilityWitness" in owner
+    assert "sameTaxNumberCannotDetermineSourceStatus" in owner
+    assert "same21Point9BNumberDoesNotEstablishActualityStatus" in val
+    assert "aep2025ForecastTo2026PaidHeadlineHasSameInstitution" in val
