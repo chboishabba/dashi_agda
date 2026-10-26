@@ -23,6 +23,8 @@ No exact-head kernel receipt in this session.
 
 noncomputable section
 
+open scoped ContinuousMap
+
 open Hatcher.VanKampen
 
 namespace DASHI.AlexanderHornedC3
