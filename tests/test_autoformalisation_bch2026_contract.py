@@ -53,6 +53,8 @@ def test_fixed_source_attribution_and_rollup():
         "10.48550/arXiv.2610.08144",
         "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
         "Snowball.canonicalSourceRoleSnowballReceipt",
+        "cameronFreerHilbert10",
+        "Cameron Freer",
     ):
         assert phrase in s
     rollup = (ROOT / "DASHI/Foundations/Everything.agda").read_text()
