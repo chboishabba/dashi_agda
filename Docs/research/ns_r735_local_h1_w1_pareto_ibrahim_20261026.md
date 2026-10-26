@@ -214,3 +214,89 @@ Total 18 test cases across the independent cuts.
 No Agda/Lean kernel typecheck, exact-GitHub-head whole-suite
 run or unrestricted A/B theorem.
 
+
+## 26 October PARETO POSITIVE RESULT: COMMON EVENTUAL W1 TAIL FOR ARBITRARY INITIAL DATA
+
+**Attribution:** This is a concrete application of the classical
+Leray/Galerkin energy inequality, periodic Poincaré spectral gap,
+eventual small-H1 regularisation and the previously derived physical
+helical W1 upper bound. The general eventual-regularisation mechanism
+is not original to DASHI. The **explicit same-cutoff/source-selected
+W1 tail certificate** is this integration cut, not a proof of
+unrestricted 3D Navier--Stokes regularity.
+
+Assume an unforced real, mean-zero, divergence-free Galerkin solution
+on the normalised 2π torus and viscosity ν>0. Let
+  E_N(t)=||u_N(t)||²_2, X_N(t)=||grad u_N(t)||²_2,
+  Y_N(t)=||Delta u_N(t)||²_2.
+The energy identity and Poincaré give for EVERY cutoff
+  E_N(t)<=E0 exp(-2νt),
+  E_N(t)+2ν∫_0^t X_N(s)ds=E_N(0)<=E0.
+The H1 differential inequality already used in this owner is
+  X_N'+νY_N<=Kν^-3 X_N³,   Y_N>=X_N,
+with universal cutoff-independent K>0.
+
+Define
+  d_* = ν²/sqrt(2K),
+  t0 = max{0, [log(E0/(2d_*))]/(2ν)},
+  t_enter = t0+1/ν.
+If E0=0, every Galerkin field is identically zero and the
+tail estimate is trivial; otherwise all quantities are defined.
+By Poincaré E_N(t0)<=2d_* and hence
+  ∫_(t0)^(t_enter) X_N(s)ds
+    <=E_N(t0)/(2ν)<=d_*/ν.
+By continuity there is s_N∈[t0,t_enter] with X_N(s_N)<=d_*.
+On X<=d_*,
+  Kν^-3 X³<=(ν/2)X<=(ν/2)Y;
+hence X'+(ν/2)Y<=0, and the set X<=d_* is forward
+invariant for the finite-dimensional Galerkin ODE.
+Therefore for EVERY cutoff at the SAME deterministic time
+  X_N(t_enter)<=d_*,
+  E_N(t_enter)<=2d_*exp(-2).
+The witness times s_N may differ by cutoff, but the
+CONCLUSION time t_enter does not. This distinction is essential.
+
+Use the SOURCE-R691 identity with initial time shifted to
+t_enter (the underlying unforced NS Galerkin system is
+time-translation invariant; differences of the original integrated
+W_N give the shifted weighted work). Let
+  W_N^{tail}(T)=W_N(T)-W_N(t_enter), T>=t_enter.
+The actual selected-output mixed-mass endpoint then satisfies
+  W_N^{tail}(T)+E_(M,N)(T)
+   =E_(M,N)(t_enter)+∫_(t_enter)^T C_N(t)dt.
+Insert the existing *small-H1 global* physical W1 bound with
+  E_tail=2d_* e^-2, D_tail=d_*.
+Its explicit universal cap is
+  B_tail =
+    C_M(E_tail+d_*)²
+   +C_W(E_tail+d_*)^(7/4) (2/(7ν))^(1/4)
+      ((3 E_tail/2+2d_*)/ν)^(3/4).
+Then for all cutoff N and T>=t_enter,
+  **W_N(T)-W_N(t_enter)+E_(M,N)(T)<=B_tail.**
+B_tail depends on ν,K and the classical operator constants,
+NOT on E0,N,T. Only t_enter depends on E0, logarithmically.
+
+This is a genuine arbitrary-E0 *late-time* W1 payment and the
+first positive large-data W1 contribution of this cut. It
+DOES NOT BOUND W_N(t_enter), i.e. the early/middle segment.
+Combine with our cutoff-uniform local H1 estimate on
+[0,T_local]. The unresolved time obstruction is confined to
+the finite interval [T_local,t_enter] if t_enter>T_local;
+if the intervals overlap, classical local/late estimates cover
+the full timeline. Arbitrary large-data continuation, R735 W2
+and B7 remain OPEN. No one may claim that eventual regularity
+rules out blowup in the finite uncontrolled time window.
+
+**Executable receipt:** five additional locally executed exact
+SymPy checks of common entry, log waiting time, enstrophy average,
+threshold invariance and data-independent late ceiling. The matching
+source tests are added to
+`tests/test_ns_r735_local_w1_h1_majorant.py`, with the producer in
+`scripts/ns_r735_local_w1_h1_majorant.py`.
+Previously this PR had 10 exact scalar and 5 numerical Galerkin
+cases plus 3 exact Nakashima scalar/source cases; this adds five
+exact scalar cases (23 total across local independently executed
+cuts). There is no full exact-head pytest or Agda/Lean kernel
+receipt. The R735 generic Agda mathematical record remains
+uninhabited for arbitrary trajectories/time horizons.
+
