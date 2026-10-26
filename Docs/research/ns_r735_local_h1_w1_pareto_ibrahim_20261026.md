@@ -300,3 +300,97 @@ cuts). There is no full exact-head pytest or Agda/Lean kernel
 receipt. The R735 generic Agda mathematical record remains
 uninhabited for arbitrary trajectories/time horizons.
 
+
+## 26 October decisive middle-gap / R734 W2 acceptance audit
+
+**Highest Pareto result: the local and late W1 certificates DO NOT
+overlap for data outside the small-H1 class.** Write
+d_*=nu²/sqrt(2K) and D0=r d_* with r>1. The previously
+source-proved classical local time is
+  T_local=nu³/(4K D0²)=1/(2nu r²)<1/(2nu).
+The common eventual-entry time is
+  T_enter=1/nu + max{0, log(E0/(2d_*))/(2nu)}>=1/nu.
+Hence
+  T_enter-T_local > 1/(2nu)
+on EVERY such datum, no matter how well we optimize the
+scalar comparison on either side WITHOUT replacing those
+estimates. This is an **algebraic obstruction to gluing these
+two existing certificates into a global all-data W1 payment**,
+not an NS singularity or a lower bound on a true regularity time.
+
+**Physically realized middle obstruction:** the earlier exact real
+unforced periodic heat shear (DASHI original explicit family)
+u_N(0)=2/sqrt(2N)*sum_(j=1)^N cos(jx)e_z has
+  E0=1, D0=(N+1)(2N+1)/6.
+At nu=K=1, T_enter=1 and
+  T_local=1/(4D0²) < log(2) <1
+for N>=4. Its same-N physical helical mixed-mass identity gives
+  W_N(log2) >= ((N-1)(2N-1))/(48N)-2/(3N²),
+which is positive for N>=4 and divergent as N->infinity,
+at FIXED physical time strictly inside the uncovered middle.
+Thus the two correct bound intervals cannot be naively
+combined to supply an initial-energy-only W1 bound across
+distinct arbitrary smooth initial data. For each FIXED u_N,
+the source-specific H^(3/4) data bound remains valid;
+the family changes u0 as N grows. This observation is exactly
+compatible with classical eventual periodic regularisation.
+
+**R734 W2 algebraic frontier, ALREADY present in original Agda:**
+R734 defines the dyadic-critical endpoint X and mixed endpoint E_M
+and requires, for positive retained margin delta,
+  (X_T-12E_M,T)-(X_0-12E_M,0)+delta Dcrit <=12 W.
+Using R691's SAME-source identity
+  W=Cint-(E_M,T-E_M,0),
+the inequality is *exactly equivalent* to
+  X_T-X_0+delta Dcrit <=12 Cint,
+where Cint is the same signed quintic nonlinear global commutator.
+This restates the R730 original direct production payment; it
+does NOT make the quintic analytical difficulty disappear.
+R734 already has the exact source-written equivalence terms:
+we DO NOT duplicate them with another R-numbered compiler.
+A scalar countermodel to W1=>W2 is useful as a type-level
+consumer independence check, but is NOT claimed to be a
+realizable NS trajectory.
+
+**Critical observable firewall:** in
+`NSTriadKNLiteralFiniteCriticalObservableFoldExact.agda`,
+the EXACT weight is
+  dyadicCriticalWeight(k)
+    =2^(ceil(log2(||k||_infty))),
+and X is weighted by this factor. The original dyadic shell
+index is pinned in
+`NSTriadKNLiteralDyadicShellConstants.agda`.
+On a single pair ±(2^j,0,0) of transverse Fourier modes,
+normalized kinetic E=1, the R734 critical mass is
+  Xcritical=2^j,
+while the H1 enstrophy mass is
+  X_H1=2^(2j).
+Their ratio is unbounded as j grows: the carriers correspond
+to dot-H^(1/2) vs dot-H^1 rather than equal observables.
+One must NOT import the W1 H1 differential inequality into
+R734 W2 by substituting names. On every fixed Galerkin field,
+H1 controls the smaller critical mass with an inequality, but
+there is no cutoff-independent reverse equivalence; correct
+critical-dissipation and margin comparison is still essential.
+
+The NEW six-test exact regression
+`tests/test_ns_r735_middle_gap_w2_acceptance.py`
+passed independently with SymPy/Fraction; includes the
+real smooth time-gap family, bounded-energy middle W1 no-go,
+the original R691/R734 polynomial identity, abstract W1/W2
+consumer independence and exact shell-weight checks.
+The original mathematicians retain full priority for classical
+eventual-regularisation and Sobolev/Galerkin results; these
+source-specific algebraic tests and carrier comparison are
+DASHI audit work, not novel 3D global regularity.
+
+**Updated Pareto order:** (1) noncircular same-trajectory R734
+critical-production payment (the signed commutator is merely
+rewritten), in concert with genuine general R735 W1 payment
+on the full finite *middle* interval; (2) A1 Bishop-real
+physical-resolvent/Gram attachment; (3) A2 low/high majorants,
+A3/B7 unrestricted continuation. Current derivative and
+FTC/integration module parameters in original Agda compilers
+also need actual real-time inhabitants for claims of physical
+kernel verification. No universal W1/W2 estimate and no
+unrestricted Clay A/B proof follows from the present cut.
