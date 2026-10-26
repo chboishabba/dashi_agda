@@ -985,6 +985,48 @@ mutsSeparateRecordRoots :
     mutsRoot octoberMeasurementSummary → ⊥
 mutsSeparateRecordRoots ()
 
+
+-- 2026-10-27 unit-of-analysis and original-custody metadata cut:
+-- Experimental repetitions performed on an animal are not a new independent
+-- animal; laboratory room probe readings and original archive publications
+-- are distinct from per-person RF dosimetry.
+data AnimalUnitOfAnalysis : Set where
+  distinctExperimentalAnimal : AnimalUnitOfAnalysis
+  withinAnimalRepeatedTaskTrial : AnimalUnitOfAnalysis
+  reviewerSynthesisOfExistingAnimal : AnimalUnitOfAnalysis
+
+repeatedTaskIsNotNewAnimal :
+  withinAnimalRepeatedTaskTrial ≡ distinctExperimentalAnimal → ⊥
+repeatedTaskIsNotNewAnimal ()
+
+committeeRetellingIsNotNewAnimal :
+  reviewerSynthesisOfExistingAnimal ≡ distinctExperimentalAnimal → ⊥
+committeeRetellingIsNotNewAnimal ()
+
+-- A 1977 STATE 005110 archive catalogue records exact microfilm
+-- D770009-0856, SAS ID 3630808, drafter M. H. Musser, approver
+-- D. G. Fischer, origin SY. The telegram ends with KISSINGER as a
+-- communications signoff; the indexed drafter/approver are DIFFERENT
+-- attribution roles, not interchangeable original authors.
+-- 1977 MOSCOW 14515: microfilm P840081-2238, SAS ID 1046862,
+-- underlying uninspected SY-channel reference MOSCOW 14513.
+-- Neither is an identifier for the original sensor waveform or calibration.
+data TelegraphProvenanceRole : Set where
+  originalDraftingOfficial : TelegraphProvenanceRole
+  originalApprovingOfficial : TelegraphProvenanceRole
+  officialCableSignoff : TelegraphProvenanceRole
+  contemporaneousSummaryOfAnotherCable : TelegraphProvenanceRole
+  sensorOriginalParentRecord : TelegraphProvenanceRole
+
+signoffIsNotOriginalDrafter :
+  officialCableSignoff ≡ originalDraftingOfficial → ⊥
+signoffIsNotOriginalDrafter ()
+
+referencingSourceDoesNotContainParent :
+  contemporaneousSummaryOfAnotherCable ≡
+    sensorOriginalParentRecord → ⊥
+referencingSourceDoesNotContainParent ()
+
 -- The experimental and observational numbers below are *report metadata*.
 -- They are not a numeric reconstruction of 14 historical field strengths.
 mutsEarlierHighModeCount : Agda.Builtin.Nat.Nat
