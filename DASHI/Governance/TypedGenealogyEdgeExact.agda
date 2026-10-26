@@ -27,6 +27,19 @@ data RelationKind : Set where
   directMethodTransfer : RelationKind
   historicalTransfer : RelationKind
   funding : RelationKind
+  fundingProposal : RelationKind
+  fundingCommitment : RelationKind
+  commissionedResearch : RelationKind
+  editorialReviewRights : RelationKind
+  topicalPublicationMatch : RelationKind
+  explicitAttributedRepublication : RelationKind
+  coPackagedClaims : RelationKind
+  authorRetrospectiveCorrection : RelationKind
+  institutionalDisavowal : RelationKind
+  extrapolationBeyondEvidence : RelationKind
+  legislativeIntroduction : RelationKind
+  reportedStatisticRestatement : RelationKind
+  parallelEconomicArgument : RelationKind
   personnelContinuity : RelationKind
   organisationalContinuity : RelationKind
   methodRecurrence : RelationKind
@@ -102,6 +115,66 @@ methodRecurrenceIsNotTransferRelation ()
 
 fundingIsNotTransferRelation : TransferRelation funding → ⊥
 fundingIsNotTransferRelation ()
+
+-- A solicited or committed budget is not a receipt of disbursed funds and
+-- neither type can prove a historical method/script transmission.
+fundingProposalIsNotTransferRelation : TransferRelation fundingProposal → ⊥
+fundingProposalIsNotTransferRelation ()
+
+fundingCommitmentIsNotTransferRelation : TransferRelation fundingCommitment → ⊥
+fundingCommitmentIsNotTransferRelation ()
+
+commissionedResearchIsNotHistoricalMethodTransfer :
+  TransferRelation commissionedResearch → ⊥
+commissionedResearchIsNotHistoricalMethodTransfer ()
+
+editorialReviewRightsAreNotMethodTransfer :
+  TransferRelation editorialReviewRights → ⊥
+editorialReviewRightsAreNotMethodTransfer ()
+
+publicationTopicMatchIsNotMethodTransfer :
+  TransferRelation topicalPublicationMatch → ⊥
+publicationTopicMatchIsNotMethodTransfer ()
+
+articleRepublicationIsNotHistoricalMethodTransfer :
+  TransferRelation explicitAttributedRepublication → ⊥
+articleRepublicationIsNotHistoricalMethodTransfer ()
+
+coPackagedClaimsDoNotProveHistoricalTransfer :
+  TransferRelation coPackagedClaims → ⊥
+coPackagedClaimsDoNotProveHistoricalTransfer ()
+
+authorRetrospectiveCorrectionIsNotMethodTransfer :
+  TransferRelation authorRetrospectiveCorrection → ⊥
+authorRetrospectiveCorrectionIsNotMethodTransfer ()
+
+institutionalDisavowalIsNotMethodTransfer :
+  TransferRelation institutionalDisavowal → ⊥
+institutionalDisavowalIsNotMethodTransfer ()
+
+scientificPremiseExtrapolationIsNotMethodTransfer :
+  TransferRelation extrapolationBeyondEvidence → ⊥
+scientificPremiseExtrapolationIsNotMethodTransfer ()
+
+legislativeIntroductionDoesNotEstablishHistoricalTransfer :
+  TransferRelation legislativeIntroduction → ⊥
+legislativeIntroductionDoesNotEstablishHistoricalTransfer ()
+
+headlineNumberRestatementIsNotHistoricalMethodTransfer :
+  TransferRelation reportedStatisticRestatement → ⊥
+headlineNumberRestatementIsNotHistoricalMethodTransfer ()
+
+economicArgumentSimilarityIsNotHistoricalMethodTransfer :
+  TransferRelation parallelEconomicArgument → ⊥
+economicArgumentSimilarityIsNotHistoricalMethodTransfer ()
+
+
+recommendationExposureIsNotDirectMethodTransfer :
+  TransferRelation recommendationExposure → ⊥
+recommendationExposureIsNotDirectMethodTransfer ()
+
+
+
 
 personnelContinuityIsNotTransferRelation : TransferRelation personnelContinuity → ⊥
 personnelContinuityIsNotTransferRelation ()

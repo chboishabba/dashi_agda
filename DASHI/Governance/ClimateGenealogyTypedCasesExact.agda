@@ -32,6 +32,8 @@ module DASHI.Governance.ClimateGenealogyTypedCasesExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Governance.TypedGenealogyEdgeExact as Typed
+import DASHI.Core.IntersectionalNonFactorability as INF
+open import Agda.Builtin.Equality using (refl)
 
 seitzPBS : Typed.SourceReceipt
 seitzPBS = Typed.sourceReceipt
@@ -167,3 +169,1712 @@ record ClimateTypedCaseBoundary : Set where
 canonicalClimateTypedCaseBoundary : ClimateTypedCaseBoundary
 canonicalClimateTypedCaseBoundary =
   climateTypedCaseBoundary true true false false false false
+
+
+------------------------------------------------------------------------
+-- 1998 documented COMMON PRODUCTION TEAM, exact contributors rather than
+-- an inferred celebrity/ideological network. Joe Walker's cover letter and
+-- the 3 Apr action plan are printed in the 27 Apr Congressional Record.
+-- A participant credit is NOT proof of a personally authored sentence,
+-- funding payment, implementation or a downstream 2026 broadcast direction.
+------------------------------------------------------------------------
+
+apiCongressional1998 : Typed.SourceReceipt
+apiCongressional1998 = Typed.sourceReceipt
+  "American Petroleum Institute / Joseph Walker / Global Climate Science Communications Team; US Congressional Record"
+  "Global Climate Science Communications Action Plan and covering letter"
+  "1998-04-03; entered Congressional Record 1998-04-27"
+  "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm"
+  "Original publicly filed proposed communications strategy with 13 named workshop contributors, possible funders, public and media uncertainty objectives. A draft and funding prospectus are not an implementation/payment receipt."
+
+api1998TeamContributorNames : List String
+api1998TeamContributorNames =
+  "A. John Adams (John Adams Associates)" ∷
+  "Candace Crandall (Science and Environmental Policy Project)" ∷
+  "David Rothbard (Committee for a Constructive Tomorrow (CFACT))" ∷
+  "Jeffrey Salmon (George C. Marshall Institute)" ∷
+  "Lee Garrigan (Environmental Issues Council)" ∷
+  "Lynn Bouchey (Frontiers of Freedom)" ∷
+  "Myron Ebell (Frontiers of Freedom)" ∷
+  "Peter Cleary (Americans for Tax Reform)" ∷
+  "Randy Randol (Exxon Corp.)" ∷
+  "Robert Gehri (Southern Company)" ∷
+  "Sharon Kneiss (Chevron Corp.)" ∷
+  "Steve Milloy (The Advancement of Sound Science Coalition (TASSC))" ∷
+  "Joseph Walker (American Petroleum Institute (API))" ∷ []
+
+apiNamedContributorAJohnAdams : Typed.TypedGenealogyEdge
+apiNamedContributorAJohnAdams = Typed.typedGenealogyEdge
+  "E8-01" "A. John Adams (John Adams Associates)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorCandaceCrandall : Typed.TypedGenealogyEdge
+apiNamedContributorCandaceCrandall = Typed.typedGenealogyEdge
+  "E8-02" "Candace Crandall (Science and Environmental Policy Project)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named by API's original draft as contributor; not personally attributed any sentence, payment or later order. Crandall's claimed involvement is reported as subsequently disputed in SourceWatch; no first-person rebuttal acquired here."
+
+apiNamedContributorDavidRothbard : Typed.TypedGenealogyEdge
+apiNamedContributorDavidRothbard = Typed.typedGenealogyEdge
+  "E8-03" "David Rothbard (Committee for a Constructive Tomorrow (CFACT))" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorJeffreySalmon : Typed.TypedGenealogyEdge
+apiNamedContributorJeffreySalmon = Typed.typedGenealogyEdge
+  "E8-04" "Jeffrey Salmon (George C. Marshall Institute)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorLeeGarrigan : Typed.TypedGenealogyEdge
+apiNamedContributorLeeGarrigan = Typed.typedGenealogyEdge
+  "E8-05" "Lee Garrigan (Environmental Issues Council)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorLynnBouchey : Typed.TypedGenealogyEdge
+apiNamedContributorLynnBouchey = Typed.typedGenealogyEdge
+  "E8-06" "Lynn Bouchey (Frontiers of Freedom)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorMyronEbell : Typed.TypedGenealogyEdge
+apiNamedContributorMyronEbell = Typed.typedGenealogyEdge
+  "E8-07" "Myron Ebell (Frontiers of Freedom)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorPeterCleary : Typed.TypedGenealogyEdge
+apiNamedContributorPeterCleary = Typed.typedGenealogyEdge
+  "E8-08" "Peter Cleary (Americans for Tax Reform)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorRandyRandol : Typed.TypedGenealogyEdge
+apiNamedContributorRandyRandol = Typed.typedGenealogyEdge
+  "E8-09" "Randy Randol (Exxon Corp.)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorRobertGehri : Typed.TypedGenealogyEdge
+apiNamedContributorRobertGehri = Typed.typedGenealogyEdge
+  "E8-10" "Robert Gehri (Southern Company)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorSharonKneiss : Typed.TypedGenealogyEdge
+apiNamedContributorSharonKneiss = Typed.typedGenealogyEdge
+  "E8-11" "Sharon Kneiss (Chevron Corp.)" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorSteveMilloy : Typed.TypedGenealogyEdge
+apiNamedContributorSteveMilloy = Typed.typedGenealogyEdge
+  "E8-12" "Steve Milloy (The Advancement of Sound Science Coalition (TASSC))" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+apiNamedContributorJosephWalker : Typed.TypedGenealogyEdge
+apiNamedContributorJosephWalker = Typed.typedGenealogyEdge
+  "E8-13" "Joseph Walker (American Petroleum Institute (API))" "1998 API communications team"
+  Typed.personnelContinuity Typed.primary
+  (apiCongressional1998 ∷ [])
+  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+
+
+gccLennyBernstein1995 : Typed.SourceReceipt
+gccLennyBernstein1995 = Typed.sourceReceipt
+  "Lenny Bernstein / Mobil Corporation / Global Climate Coalition"
+  "Predicting Future Climate Change: A Primer (1995 draft)"
+  "1995-12"
+  "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/global-climate-coalition-draft-primer/"
+  "Original internal industry-coalition draft acknowledges anthropogenic greenhouse science and criticises specific contrarian theories; archive's document history says these were omitted from a later public version. Separate method-content and redaction receipts."
+
+exxonInternal1982 : Typed.SourceReceipt
+exxonInternal1982 = Typed.sourceReceipt
+  "M.B. Glaser / Exxon Research and Engineering Company"
+  "CO2 Greenhouse Effect memorandum to management"
+  "1982-11-12"
+  "https://www.climatefiles.com/exxonmobil/1982-memo-to-exxon-management-about-co2-greenhouse-effect/"
+  "Original internal company science projected warming and discussed emissions reduction, with real scientific uncertainty also acknowledged. Private acknowledgement is not every employee's belief or proof of subsequent intent."
+
+shellInternal1988 : Typed.SourceReceipt
+shellInternal1988 = Typed.sourceReceipt
+  "Royal Dutch/Shell Greenhouse Effect Working Group"
+  "The Greenhouse Effect, confidential HSE 88-001"
+  "1988"
+  "https://climateinvestigations.org/shell-oil-climate-documents/"
+  "Archived internal 1988 report rooted in Shell's research programme since 1981; publicly rediscovered by Jelmer Mommers and published through Climate Investigations Center."
+
+shellFirstParty1998 : Typed.SourceReceipt
+shellFirstParty1998 = Typed.sourceReceipt
+  "Royal Dutch/Shell Group"
+  "The Shell Report 1998: lobbying and industry associations, p. 38 (PDF index 40)"
+  "1998"
+  "https://www.shell.com/sustainability/transparency-and-sustainability-reporting/sustainability-reports/_jcr_content/root/main/section/list/list_item.multi.stream/1657185136417/8c7cf7e17abcd9772af39994b88ed37a5a86e216/shell-sustainability-report-1998-1997.pdf"
+  "Shell itself states Shell Oil withdrew from the Global Climate Coalition in April 1998 over Kyoto targets and contrasts the coalition's opposition with Shell's precautionary approach. Report also proposes expanding natural gas."
+
+bpLeadership1997 : Typed.SourceReceipt
+bpLeadership1997 = Typed.sourceReceipt
+  "John Browne / British Petroleum, retrospective interview at Stanford GSB"
+  "Former BP head reflects on his 1997 call for climate action"
+  "1997 speech, revisited 2022"
+  "https://www.gsb.stanford.edu/insights/former-bp-head-reflects-his-call-climate-action-25-years-ago"
+  "First-person retrospective account says BP leadership supported taking climate risk seriously and trade-group peers often favoured delay; not the uninspected signed GCC resignation paperwork."
+
+mooreCO2Coalition : Typed.SourceReceipt
+mooreCO2Coalition = Typed.sourceReceipt
+  "CO2 Coalition (institution's own leadership biography)"
+  "Director Patrick Moore: served as chair 2019 and 2020"
+  "2019-2020 role, current biography"
+  "https://co2coalition.org/teammember/director-patrick-moore/"
+  "Coalition acknowledges Moore's chairmanship, presents him as a Greenpeace cofounder. Greenpeace itself disputes the founder label; early Greenpeace activist/1971 voyage participation is not disputed."
+
+mooreHeartland : Typed.SourceReceipt
+mooreHeartland = Typed.sourceReceipt
+  "Heartland Institute"
+  "Patrick Moore, listed senior fellow"
+  "undated current institutional biography"
+  "https://heartland.org/about-us/who-we-are/patrick-moore/"
+  "Think-tank self-listing establishes public affiliation; role description alone does not establish payments or exact work commissioned."
+
+greenpeaceHistory : Typed.SourceReceipt
+greenpeaceHistory = Typed.sourceReceipt
+  "Greenpeace International"
+  "Founders and early Amchitka voyage"
+  "historical institutional account"
+  "https://www.greenpeace.org/international/about/founders/"
+  "Organisation names its 1970 initiating committee and includes Patrick Moore as 1971 voyage participant while disputing his founder designation. Founder status remains institutionally contested."
+
+hancockIPAJudgment : Typed.SourceReceipt
+hancockIPAJudgment = Typed.sourceReceipt
+  "NSW Supreme Court, Rinehart v Rinehart [2018] NSWSC 1102"
+  "Paragraph 25, schedule of Hancock Prospecting donations to IPA"
+  "2018"
+  "https://www.casechat.au/cases/au/rinehart-v-rinehart-9"
+  "Judgment text reproduced by CaseChat: schedule shows AUD2.3m to IPA in 2016 and AUD2.2m in 2017; current funding/particular editorial instructions not thereby proven."
+
+cfactNova2026 : Typed.SourceReceipt
+cfactNova2026 = Typed.sourceReceipt
+  "CFACT hosting credited Joanne Nova source"
+  "BOM's scientific scandal: The raw data is not raw"
+  "2026-10-18"
+  "https://www.cfact.org/2026/10/18/boms-scientific-scandal-the-raw-data-is-not-raw/"
+  "Original 2026 article names Jo Nova; CFACT is host/republication site, not an independent archival temperature analysis or a source identified as commissioning it."
+
+reefPatrickMoore2021 : Typed.SourceReceipt
+reefPatrickMoore2021 = Typed.sourceReceipt
+  "Carly Lubicz-Zaorski; Maxine Newlands; Theresa Petray"
+  "Fuelling the climate and science ‘denial machine’ on social media: A case study of the Great Barrier Reef’s 2021 ‘in danger’ recommendation on Twitter, YouTube and Facebook"
+  "online 2023; 2024 journal issue"
+  "DOI 10.1177/09636625231202117"
+  "Peer-reviewed 2021 network study attributes sharing of Peter Ridd's reef claim to Patrick Moore; it does not prove funding, command, or a copied scientific measurement."
+
+exxonScienceInternalOwner : Typed.TypedGenealogyEdge
+exxonScienceInternalOwner = Typed.typedGenealogyEdge
+  "E9-01" "Exxon research and management" "1982 Glaser internal greenhouse-science memo"
+  Typed.organisationalContinuity Typed.primary
+  (exxonInternal1982 ∷ [])
+  "Original Exxon management receipt establishes internal climate-science knowledge and discussion of uncertainties; not a payment or censorship order."
+
+shellScienceInternalOwner : Typed.TypedGenealogyEdge
+shellScienceInternalOwner = Typed.typedGenealogyEdge
+  "E9-02" "Shell Greenhouse Effect Working Group" "1988 internal Shell greenhouse-science report"
+  Typed.organisationalContinuity Typed.primary
+  (shellInternal1988 ∷ [])
+  "Internal research ownership and findings are distinct from later Shell Oil trade-group decisions."
+
+gccBernsteinPrivatePrimer : Typed.TypedGenealogyEdge
+gccBernsteinPrivatePrimer = Typed.typedGenealogyEdge
+  "E9-03" "Lenny Bernstein (Mobil)" "1995 GCC private climate science primer"
+  Typed.personnelContinuity Typed.primary
+  (gccLennyBernstein1995 ∷ [])
+  "Named original corporate author of GCC internal science primer, which acknowledged greenhouse mechanisms; the archived public redaction is a separate derivative document, not a named downstream author."
+
+shellGCCDefection1998 : Typed.TypedGenealogyEdge
+shellGCCDefection1998 = Typed.typedGenealogyEdge
+  "E9-04" "Shell Oil former GCC membership" "Shell Oil April 1998 withdrawal"
+  Typed.organisationalContinuity Typed.primary
+  (shellFirstParty1998 ∷ [])
+  "Shell original 1998 annual/sustainability report explicitly states it exited GCC; therefore do not project historical member funding or communications to 2026."
+
+bpLeadershipBreak1997 : Typed.TypedGenealogyEdge
+bpLeadershipBreak1997 = Typed.typedGenealogyEdge
+  "E9-05" "John Browne / BP leadership" "1997 publicly climate-risk affirmative policy"
+  Typed.personnelContinuity Typed.corroborated
+  (bpLeadership1997 ∷ [])
+  "Browne's retrospective first-person explanation of BP leadership and public break; not proof all BP policies or investments were precautionary."
+
+mooreCO2Chair : Typed.TypedGenealogyEdge
+mooreCO2Chair = Typed.typedGenealogyEdge
+  "E9-06" "Patrick Moore" "CO2 Coalition, 2019-20 chairman"
+  Typed.personnelContinuity Typed.primary
+  (mooreCO2Coalition ∷ [])
+  "Coalition original biography supplies exact role; no inferred funding from oil company donors."
+
+mooreHeartlandAffiliation : Typed.TypedGenealogyEdge
+mooreHeartlandAffiliation = Typed.typedGenealogyEdge
+  "E9-07" "Patrick Moore" "Heartland Institute senior fellow"
+  Typed.personnelContinuity Typed.primary
+  (mooreHeartland ∷ [])
+  "Heartland direct institutional affiliation; not a retainer invoice or proof the institute commissioned every statement."
+
+hancockIPAHistoricalDonations : Typed.TypedGenealogyEdge
+hancockIPAHistoricalDonations = Typed.typedGenealogyEdge
+  "E9-08" "Hancock Prospecting" "Institute of Public Affairs 2016-17"
+  Typed.funding Typed.primary
+  (hancockIPAJudgment ∷ [])
+  "Court-quoted payment schedule identifies AUD4.5m historical IPA support; does not identify which IPA articles or think-tank conclusions it paid for."
+
+cfactAPITo2026Continuity : Typed.TypedGenealogyEdge
+cfactAPITo2026Continuity = Typed.typedGenealogyEdge
+  "E9-09" "CFACT named in 1998 API communications team" "CFACT as Joanne Nova 2026 BOM article host"
+  Typed.organisationalContinuity Typed.corroborated
+  (apiCongressional1998 ∷ cfactNova2026 ∷ [])
+  "Same named CFACT institution participates in historical plan and publishes Nova in 2026; 28-year timespan is NOT a demonstrated continuous communications order or funded carry-through."
+
+moore2000sToReefDistribution : Typed.TypedGenealogyEdge
+moore2000sToReefDistribution = Typed.typedGenealogyEdge
+  "E9-10" "Patrick Moore, CO2 Coalition/Heartland affiliation" "Patrick Moore sharing Peter Ridd reef claims in 2021"
+  Typed.personnelContinuity Typed.corroborated
+  (mooreCO2Coalition ∷ mooreHeartland ∷ reefPatrickMoore2021 ∷ [])
+  "Documented repeated PERSON across institutional affiliation and later reef dissemination; not an independent coral observation or proof either think tank commissioned his sharing."
+
+apiContributorNotMethodTransfer :
+  Typed.StrongHistoricalTransfer apiNamedContributorRandyRandol → ⊥
+apiContributorNotMethodTransfer witness =
+  Typed.personnelContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+ipaFundingNotEditorialMethod :
+  Typed.StrongHistoricalTransfer hancockIPAHistoricalDonations → ⊥
+ipaFundingNotEditorialMethod witness =
+  Typed.fundingIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+cfactContinuationNotPlanTransfer :
+  Typed.StrongHistoricalTransfer cfactAPITo2026Continuity → ⊥
+cfactContinuationNotPlanTransfer witness =
+  Typed.organisationalContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+
+
+------------------------------------------------------------------------
+-- Independent quantitative audits: these are scholarly estimators, not
+-- permission to label every dollar in an organisation's accounts as
+-- climate-denial spend or every downstream message donor-commissioned.
+------------------------------------------------------------------------
+
+brulleFoundationStudy : Typed.SourceReceipt
+brulleFoundationStudy = Typed.sourceReceipt
+  "Robert J. Brulle"
+  "Institutionalizing delay: foundation funding and the creation of U.S. climate change counter-movement organizations"
+  "2014"
+  "Climatic Change 122:681-694; https://researchdiscovery.drexel.edu/esploro/outputs/journalArticle/Institutionalizing-delay-foundation-funding-and-the/991019167769804721"
+  "IRS/Foundation Center analysis of 91 organisations and 140 foundations in 2003-2010; approximately USD900m annual aggregate organisational revenue, USD64m annual identifiable foundation support. Revenue is NOT climate-specific spending."
+
+farrellNetworkStudy : Typed.SourceReceipt
+farrellNetworkStudy = Typed.sourceReceipt
+  "Justin Farrell"
+  "Corporate funding and ideological polarization about climate change"
+  "2016"
+  "PNAS 113:92-97; DOI 10.1073/pnas.1509433112"
+  "Independent empirical network/text analysis of corporate funding and climate-policy polarisation; statistical association and network effect are not a donor-to-every-specific-sentence contract."
+
+supranRahmstorfOreskesExxonAudit : Typed.SourceReceipt
+supranRahmstorfOreskesExxonAudit = Typed.sourceReceipt
+  "Geoffrey Supran; Stefan Rahmstorf; Naomi Oreskes"
+  "Assessing ExxonMobil's global warming projections"
+  "2023"
+  "Science 379:eabk0063; DOI 10.1126/science.abk0063"
+  "Independent quantitative assessment of company models documented 1977-2003 found a majority of Exxon/ExxonMobil original warming predictions accurately forecast subsequent warming. Public statements could differ from internal model conclusions."
+
+record ConcentratedSourceAuditBoundary : Set where
+  constructor concentratedSourceAuditBoundary
+  field
+    aDraftPlanIsNotImplementedCommunications : Bool
+    foundingRoleIsNotUnauditedGreenpeaceFact : Bool
+    historicOrganisationalFinanceEqualsExactMediaPayment : Bool
+    total900mOrganisationRevenueIsClimateSpecificSpending : Bool
+    samePersonAcrossPlatformsEqualsCentralCommand : Bool
+    shellBPDefectionsPreservedAsCounterExamples : Bool
+    independentScientificPredictionAuditIsNotAnAllegation : Bool
+
+canonicalConcentratedSourceAuditBoundary : ConcentratedSourceAuditBoundary
+canonicalConcentratedSourceAuditBoundary =
+  concentratedSourceAuditBoundary
+    true true false false false true true
+
+
+reefSteveMilloy2021 : Typed.SourceReceipt
+reefSteveMilloy2021 = Typed.sourceReceipt
+  "Carly Lubicz-Zaorski; Maxine Newlands; Theresa Petray"
+  "Fuelling the climate and science ‘denial machine’ on social media: A case study of the Great Barrier Reef’s 2021 ‘in danger’ recommendation on Twitter, YouTube and Facebook"
+  "first online 2023-10-26; journal issue 2024"
+  "Public Understanding of Science 33(3):270-289; DOI 10.1177/09636625231202117"
+  "Original multi-platform 2021 case study explicitly names Fox News contributors including Steve Milloy among later amplifiers; does not claim he used an API draft to produce the post."
+
+milloy1998ToReefMedia : Typed.TypedGenealogyEdge
+milloy1998ToReefMedia = Typed.typedGenealogyEdge
+  "E9-11" "Steve Milloy, original 1998 API plan participant" "Steve Milloy, 2021 reef-related Fox contributor"
+  Typed.personnelContinuity Typed.corroborated
+  (apiCongressional1998 ∷ reefSteveMilloy2021 ∷ [])
+  "Same named person explicitly occurs in 1998 API communications plan and 2021 reef study: longitudinal identity/role overlap, NOT documentary evidence of continuously coordinated scripts, funding or factual corroboration."
+
+milloyRepeatNotProofOfTwentyThreeYearPlan :
+  Typed.StrongHistoricalTransfer milloy1998ToReefMedia → ⊥
+milloyRepeatNotProofOfTwentyThreeYearPlan witness =
+  Typed.personnelContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- Earlier campaign roots (1991 / 1994), found by original-source snowball.
+-- A pledged amount or unsolicited proposal is NEVER recorded as payment.
+------------------------------------------------------------------------
+
+ice1991TestCampaign : Typed.SourceReceipt
+ice1991TestCampaign = Typed.sourceReceipt
+  "Information Council for the Environment (ICE); utility-industry sponsors"
+  "1991 Test Market Proposal and Benchmark Survey"
+  "1991-02-04"
+  "https://www.climatefiles.com/denial-groups/ice-campaign-plan/"
+  "Archived original ICE proposal proposes approx USD500k test market strategy for disputing greenhouse-science certainty, sponsored through Edison Electric Institute / electric utility interests. A campaign plan and its budget are not an audited completed expense."
+
+southernICEHistoricalAccount : Typed.SourceReceipt
+southernICEHistoricalAccount = Typed.sourceReceipt
+  "Energy and Policy Institute original archival investigation of Southern Company records"
+  "Southern Company knew about climate change before it funded denial"
+  "2022"
+  "https://energyandpolicy.org/southern-company-knew-climate-change/"
+  "Archival reporting identifies Southern Company PR executive Gale Klappa as 1991 ICE president and reports USD125k Southern commitment. Identity and pledge are reported from leaked records, not a new source-author invoice receipt."
+
+singerGCC1994Proposal : Typed.SourceReceipt
+singerGCC1994Proposal = Typed.sourceReceipt
+  "S. Fred Singer / Science and Environmental Policy Project (SEPP)"
+  "A Public Education Program on Global Warming: proposal to Global Climate Coalition"
+  "1994"
+  "https://climateinvestigations.org/bbc-radio-series-tracks-history-of-climate-denial/"
+  "Archival original proposal seeks approx USD73000 funding for educational/public advocacy programme. Climate Investigations Center explicitly states it lacks evidence the requested payment was received; should not be treated as a grant."
+
+southernCompany1991To1998 : Typed.TypedGenealogyEdge
+southernCompany1991To1998 = Typed.typedGenealogyEdge
+  "E9-12" "Southern Company, 1991 ICE involvement" "Robert Gehri of Southern Company, 1998 API team"
+  Typed.organisationalContinuity Typed.corroborated
+  (ice1991TestCampaign ∷ southernICEHistoricalAccount ∷ apiCongressional1998 ∷ [])
+  "Same corporate institution is documented at 1991 ICE campaign and in 1998 API named-team list. Different representatives are named; no proof same staff drafted both scripts or planned a seven-year programme."
+
+southernICEPledgeNotDisbursement : Typed.TypedGenealogyEdge
+southernICEPledgeNotDisbursement = Typed.typedGenealogyEdge
+  "E9-13" "Southern Company 1991 commitment report" "ICE proposed communications campaign funding"
+  Typed.fundingCommitment Typed.corroborated
+  (southernICEHistoricalAccount ∷ ice1991TestCampaign ∷ [])
+  "Reported company commitment USD125000 is a financing pledge reported from archived records, not a produced bank-transfer or independently audited completed payment."
+
+singer1994ToSEPP1998 : Typed.TypedGenealogyEdge
+singer1994ToSEPP1998 = Typed.typedGenealogyEdge
+  "E9-14" "S. Fred Singer/SEPP 1994 GCC proposal" "Candace Crandall/SEPP in 1998 API team"
+  Typed.organisationalContinuity Typed.corroborated
+  (singerGCC1994Proposal ∷ apiCongressional1998 ∷ [])
+  "Same explicitly named SEPP organisation appears across original 1994 GCC proposal and 1998 API planning team with different named people; not evidence of completed Singer payment, tobacco financing or identical script authorship."
+
+singerGCCSolicitationNotMoneyPaid : Typed.TypedGenealogyEdge
+singerGCCSolicitationNotMoneyPaid = Typed.typedGenealogyEdge
+  "E9-15" "S. Fred Singer/SEPP 1994 proposal" "Requested GCC USD73000 education-programme funding"
+  Typed.fundingProposal Typed.corroborated
+  (singerGCC1994Proposal ∷ [])
+  "Proposal for funding has direct source existence. Solicitation/expected allocation is not a financial disbursement, and does not resolve the independent E7 tobacco finance hypothesis."
+
+singerSEPPRepeatNotTobaccoPayment :
+  Typed.StrongHistoricalTransfer singer1994ToSEPP1998 → ⊥
+singerSEPPRepeatNotTobaccoPayment witness =
+  Typed.organisationalContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+southernRepeatNotIdenticalScript :
+  Typed.StrongHistoricalTransfer southernCompany1991To1998 → ⊥
+southernRepeatNotIdenticalScript witness =
+  Typed.organisationalContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+
+fundingRequestIsNotTransfer :
+  Typed.StrongHistoricalTransfer singerGCCSolicitationNotMoneyPaid → ⊥
+fundingRequestIsNotTransfer witness =
+  Typed.fundingProposalIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+fundingPledgeIsNotTransfer :
+  Typed.StrongHistoricalTransfer southernICEPledgeNotDisbursement → ⊥
+fundingPledgeIsNotTransfer witness =
+  Typed.fundingCommitmentIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- Stronger same-object think-tank content procurement, GCC 1996-97.
+-- Sources: independently curated Climate Investigations Center original
+-- archival document index linking DocumentCloud original proposals, STAC
+-- grant, editorial-rights memo and the separately published ACSH report.
+-- DocumentCloud original PDF bodies were not retrievable via web in this
+-- pass; these are corroborated document-ID and index observations, not
+-- visually checked contract/payment/definitive final-version equivalence.
+------------------------------------------------------------------------
+
+gccACSHOriginalInvestigation : Typed.SourceReceipt
+gccACSHOriginalInvestigation = Typed.sourceReceipt
+  "Climate Investigations Center archival research, attributing GCC STAC, Mobil, Exxon and ACSH original records"
+  "GCC Denial of Climate Impacts on Human Health"
+  "investigation page undated, examined 2026-10-26"
+  "https://climateinvestigations.org/global-climate-coalition-human-health/"
+  "Indexed original 1996 STAC proposal and editorial-rights documents, identified co-chair Mobil Lenny Bernstein and Exxon scientists Barry Friedlander/Dennis Devlin, reported commissioned ACSH research. DocumentCloud scans not separately inspected this turn."
+
+gccACSHPublished1997 : Typed.SourceReceipt
+gccACSHPublished1997 = Typed.sourceReceipt
+  "American Council on Science and Health (ACSH), original publisher"
+  "Global climate change and human health"
+  "1997"
+  "https://www.acsh.org/news/1997/10/01/global-climate-change-and-human-health"
+  "First-party ACSH Staff article dated 1 October 1997, publicly readable; it recommends adaptation/public-health capacity and opposes compulsory GHG mitigation on economic grounds. The inspected publisher summary does not identify GCC as sponsor. Whether this actual public text is the 1996-97 commissioned final product remains unresolved."
+
+gccACSHCommissionedClimateHealth : Typed.TypedGenealogyEdge
+gccACSHCommissionedClimateHealth = Typed.typedGenealogyEdge
+  "E9-16" "Global Climate Coalition / STAC" "ACSH commissioned climate and human health study 1996-97"
+  Typed.commissionedResearch Typed.corroborated
+  (gccACSHOriginalInvestigation ∷ [])
+  "CIC archive documents STAC choosing ACSH and describes funded research on climate-health links. Primary grant scan is indexed but unread by this pass; not a wholly independent publication or a definite downstream media outcome."
+
+gccACSHDocumentedEditorialReviewRights : Typed.TypedGenealogyEdge
+gccACSHDocumentedEditorialReviewRights = Typed.typedGenealogyEdge
+  "E9-17" "GCC/STAC client" "ACSH commissioned climate-health study final editorial review discretion"
+  Typed.editorialReviewRights Typed.corroborated
+  (gccACSHOriginalInvestigation ∷ [])
+  "CIC links archival agreement stating client had editorial discretion over final copy. This is contractual authority, NOT proof any particular scientifically false line was inserted or that rights were exercised."
+
+gccACSH1997PublicPaperMatch : Typed.TypedGenealogyEdge
+gccACSH1997PublicPaperMatch = Typed.typedGenealogyEdge
+  "E9-18" "GCC-funded ACSH commissioned health study" "1997 ACSH Global climate change and human health public paper"
+  Typed.topicalPublicationMatch Typed.corroborated
+  (gccACSHOriginalInvestigation ∷ gccACSHPublished1997 ∷ [])
+  "CIC documents an ACSH commission and title match. The ACSH first-party 1 October 1997 article is now inspected and explicitly recommends adaptation while opposing compulsory mitigation as harmful to the economy. It does not disclose GCC sponsorship. CIC did not acquire a final distribution receipt, so paid commissioning, public argument and final-text identity stay separate."
+
+gccCHCReportedLaterExxonGrants : Typed.SourceReceipt
+gccCHCReportedLaterExxonGrants = Typed.sourceReceipt
+  "Climate Investigations Center analysis of documented Cooler Heads Coalition grants"
+  "Cooler Heads Coalition"
+  "post-1998 funds, original report later"
+  "https://climateinvestigations.org/climate-deniers/cooler-heads-coalition/"
+  "CIC reports Exxon gave a cumulative USD2774000 to Cooler Heads Coalition-member groups named on the 1998 API team in years after the plan. Individual payees and timestamps were not reconstructed here; no earmark for the proposed API plan or 2021 reef messaging is established."
+
+exxonToCHCReportedPostAPIGrants : Typed.TypedGenealogyEdge
+exxonToCHCReportedPostAPIGrants = Typed.typedGenealogyEdge
+  "E9-19" "Exxon Corporation later disclosed funding" "Cooler Heads Coalition groups overlapping the 1998 API team"
+  Typed.funding Typed.corroborated
+  (gccCHCReportedLaterExxonGrants ∷ [])
+  "CIC archival investigation reports cumulative USD2.774m later Exxon funding to CHC groups named in 1998 API team, not original receipts verified in this pass and not proof of an earmarked 1998 communications-plan payment."
+
+gccACSHSharedSubjectNotIdenticalFinalFile :
+  Typed.StrongHistoricalTransfer gccACSH1997PublicPaperMatch → ⊥
+gccACSHSharedSubjectNotIdenticalFinalFile witness =
+  Typed.publicationTopicMatchIsNotMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+gccACSHContractualRightsNotProofOfSpecificScientificEdit :
+  Typed.StrongHistoricalTransfer gccACSHDocumentedEditorialReviewRights → ⊥
+gccACSHContractualRightsNotProofOfSpecificScientificEdit witness =
+  Typed.editorialReviewRightsAreNotMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+
+
+-- 2026-10-26 actual PUBLIC OUTPUT, first-party ACSH Staff. The report's
+-- main recommendation is adaptation rather than compulsory emissions cuts.
+-- It is not the original GCC/STAC editing contract or proof the STAC
+-- client exercised its editorial-review entitlement. Publisher summary
+-- acquired; separately referenced 1997 PDF's original pages not verified.
+acsh1997OriginalPublicArgument : Typed.SourceReceipt
+acsh1997OriginalPublicArgument = Typed.sourceReceipt
+  "American Council on Science and Health (ACSH Staff), original publisher"
+  "Global Climate Change and Human Health"
+  "1997-10-01"
+  "https://www.acsh.org/news/1997/10/01/global-climate-change-and-human-health"
+  "First-party public text says anthropogenic warming may cause health harm, but argues to prioritise adaptation, public health and economic continuity over compulsory GHG emissions mitigation. This verifies a public position, not a specific GCC-mandated edit nor scientific validity of economic/medical claims."
+
+
+------------------------------------------------------------------------
+-- POLICY ACCESS receipt. The original 2019 CIC archival report describes a
+-- 2001 US State Department briefing advising an Undersecretary to tell GCC
+-- the administration rejected Kyoto partly based on its input. This is a
+-- drafted statement of credited influence, NOT an inspected primary
+-- government briefing, delivered remark, independent causal assessment,
+-- or proof GCC was the necessary or sufficient reason for the decision.
+------------------------------------------------------------------------
+
+gccUSGovernmentBriefing2001 : Typed.SourceReceipt
+gccUSGovernmentBriefing2001 = Typed.sourceReceipt
+  "Climate Investigations Center, archival investigator (2019)"
+  "The Global Climate Coalition: Big Business Funds Climate Change Denial and Regulatory Delay"
+  "2019-03-25"
+  "https://climateinvestigations.org/wp-content/uploads/2019/04/The-Global-Climate-Coalition-Denial-and-Delay.pdf"
+  "CIC describes archived 2001 US State Department briefing instructing an Undersecretary to credit GCC policy input in rejecting Kyoto. CIC report parsed; original 2001 government document not separately acquired, report screenshot service cache-missed."
+
+gcc2001DraftPolicyInputAcknowledgment : Typed.TypedGenealogyEdge
+gcc2001DraftPolicyInputAcknowledgment = Typed.typedGenealogyEdge
+  "E9-20" "Global Climate Coalition policy submissions" "2001 State Department prewritten administration acknowledgement"
+  Typed.recommendationExposure Typed.corroborated
+  (gccUSGovernmentBriefing2001 ∷ [])
+  "Historical investigator reproduces an official briefing description instructing the recipient to tell GCC it influenced the administration's Kyoto rejection in part. This is evidence of a prepared acknowledgement and access, not independent confirmation remarks delivered or scientific causation of the Kyoto choice."
+
+policyAccessIsNotCompletedMethodTransfer :
+  Typed.StrongHistoricalTransfer gcc2001DraftPolicyInputAcknowledgment → ⊥
+policyAccessIsNotCompletedMethodTransfer witness =
+  Typed.recommendationExposureIsNotDirectMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- Cross-period rhetoric and 2026 AUS gas-policy recycled-statistic consumer.
+-- Distinct first-party author/producer objects are still separate even when
+-- the exact same rounded headline appears. This is not a national census.
+------------------------------------------------------------------------
+
+apiCharltonPromotedPoll1998 : Typed.SourceReceipt
+apiCharltonPromotedPoll1998 = Typed.sourceReceipt
+  "American Petroleum Institute team citing Charlton Research survey"
+  "1998 climate communications plan: 1100 informed respondents and 58 percent"
+  "1998-04-03"
+  "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm"
+  "The API plan says 58 percent were more likely to oppose Kyoto after an uncertainty-framed prompt; neither unprompted national opposition nor the underlying survey questionnaire and responses are acquired."
+
+australiaInstitute17B2025 : Typed.SourceReceipt
+australiaInstitute17B2025 = Typed.sourceReceipt
+  "The Australia Institute / Mark Ogge"
+  "There's a simple way to solve Australia's gas crisis and cut energy bills"
+  "2025-12-09"
+  "https://australiainstitute.org.au/post/theres-a-simple-way-to-solve-australias-gas-crisis-and-cut-energy-bills/"
+  "First-party institute projection that a 25 percent export levy could raise around AUD17b annually. Model scenario/behavioural assumptions not independently recomputed."
+
+futureGroupArthurDLittle2026 : Typed.SourceReceipt
+futureGroupArthurDLittle2026 = Typed.sourceReceipt
+  "Future Group / commissioned Arthur D. Little modelling"
+  "Why Australia should act now on a gas export levy"
+  "2026-04-23"
+  "https://www.futuregroup.com.au/stories/why-australia-should-act-now-on-a-gas-export-levy"
+  "First-party commissioning body reports up to AUD17b first year revenues and up to 15 percent wholesale electricity price reduction. Separately named consultant not proof of independent modelling premises."
+
+pocockGas2026 : Typed.SourceReceipt
+pocockGas2026 = Typed.sourceReceipt
+  "Senator David Pocock, separate Senate inquiry comments"
+  "A fair return: The case for a 25 per cent gas export tax"
+  "2026-05-07"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Taxation_of_Gas_Resources/TaxationofGasResources/Report/Additional_Comments_from_Senator_David_Pocock"
+  "Paragraph 1.28 credits Future Group Arthur D. Little and separately Australia Institute 17b estimates; same rounded conclusion is not evidence methods, base prices or forecasts were statistically independent."
+
+taiGasRoyalty2024 : Typed.SourceReceipt
+taiGasRoyalty2024 = Typed.sourceReceipt
+  "The Australia Institute"
+  "Gas exports: 56 percent given to corporations royalty-free"
+  "2024-05-30"
+  "https://australiainstitute.org.au/post/gas-exports-56-given-to-corporations-royalty-free/"
+  "Original research organisation estimates 56 percent of gas exported paid no royalties, not that every project paid no company tax or that share applied to all extracted gas."
+
+aepWoodMackenzie2026 : Typed.SourceReceipt
+aepWoodMackenzie2026 = Typed.sourceReceipt
+  "Australian Energy Producers commissioning Wood Mackenzie"
+  "Gas tax proposal would make Australia uninvestable"
+  "2026-04-12"
+  "https://energyproducers.au/news/gas-tax-proposal-would-make-australia-uninvestable-and-threaten-future-energy-supply-report-finds"
+  "First-party client release reports effective hypothetical project burden over 80 percent, project-value reduction up to 94 percent. Neither is an observed Australian national average tax burden."
+
+nightlyJohnsonGas2026 : Typed.SourceReceipt
+nightlyJohnsonGas2026 = Typed.sourceReceipt
+  "Stephen Johnson, The Nightly original journalist"
+  "Why a 25 per cent tax on gas exports would hurt everyday Australians"
+  "2026-04-22"
+  "https://thenightly.com.au/politics/australia/why-a-25-per-cent-tax-on-gas-exports-would-hurt-everyday-australians-c-22175435"
+  "Named original 2026 news story reports Janette Hewson QRC warning about diminished investment and includes $17b advocacy estimate; it does not generate either competing econometric model."
+
+hancockJohnsonReprint2026 : Typed.SourceReceipt
+hancockJohnsonReprint2026 = Typed.sourceReceipt
+  "Hancock Energy, article host crediting Stephen Johnson and The Nightly"
+  "Gas tax would burn everyday Australians"
+  "2026-04-22"
+  "https://www.hancockenergy.com.au/gas-tax-would-burn-everyday-australians/"
+  "First-party corporate republishing credits The Nightly and its author. This is an explicit source reprint not another empirical study, not proof a funder supplied journalist script."
+
+iceToAPIUncertaintyStrategicRecurrence : Typed.TypedGenealogyEdge
+iceToAPIUncertaintyStrategicRecurrence = Typed.typedGenealogyEdge
+  "RC-01" "ICE 1991 warming as theory-not-fact campaign plan" "API 1998 uncertainty-in-public-discourse campaign plan"
+  Typed.methodRecurrence Typed.primary
+  (ice1991TestCampaign ∷ apiCongressional1998 ∷ [])
+  "Original archived ICE plan and Congressional original API plan exhibit recurring uncertainty-oriented strategies. Exact historical ICE to API drafting transfer is not established."
+
+tai17BRestatedByPocock2026 : Typed.TypedGenealogyEdge
+tai17BRestatedByPocock2026 = Typed.typedGenealogyEdge
+  "RC-02" "Australia Institute original AUD17b annual levy estimate" "David Pocock 2026 Senate comments"
+  Typed.reportedStatisticRestatement Typed.primary
+  (australiaInstitute17B2025 ∷ pocockGas2026 ∷ [])
+  "Senator explicitly names original institute when repeating the numeric conclusion. His speech is not an additional independent model."
+
+futureGroup17BRestatedByPocock2026 : Typed.TypedGenealogyEdge
+futureGroup17BRestatedByPocock2026 = Typed.typedGenealogyEdge
+  "RC-03" "Arthur D. Little commissioned by Future Group" "David Pocock 2026 Senate comments"
+  Typed.reportedStatisticRestatement Typed.primary
+  (futureGroupArthurDLittle2026 ∷ pocockGas2026 ∷ [])
+  "Parliament separately credits named consultant with a matching rounded number; separate authorship does not imply statistically independent scenario assumptions."
+
+tai56PcRoyaltyRestatedByPocock2026 : Typed.TypedGenealogyEdge
+tai56PcRoyaltyRestatedByPocock2026 = Typed.typedGenealogyEdge
+  "RC-04" "Australia Institute 56 percent no-royalty research" "David Pocock Senate comments"
+  Typed.reportedStatisticRestatement Typed.primary
+  (taiGasRoyalty2024 ∷ pocockGas2026 ∷ [])
+  "Pocock cites Australia Institute analysis. Relative share of LNG exports attracting no royalties is not a claim that all LNG receives no Australian company tax."
+
+nightlyToHancockExplicitReprint2026 : Typed.TypedGenealogyEdge
+nightlyToHancockExplicitReprint2026 = Typed.typedGenealogyEdge
+  "RC-05" "Stephen Johnson The Nightly article" "Hancock Energy host with byline credit"
+  Typed.explicitAttributedRepublication Typed.primary
+  (nightlyJohnsonGas2026 ∷ hancockJohnsonReprint2026 ∷ [])
+  "Identifiable journalism text and author are promoted on a corporate site: positive republication, not a fresh independent reporter or evidence of purchased editorial control."
+
+aepWoodMacStatisticsNotNationalTaxRate : Typed.TypedGenealogyEdge
+aepWoodMacStatisticsNotNationalTaxRate = Typed.typedGenealogyEdge
+  "RC-06" "Wood Mackenzie model commissioned by Australian Energy Producers" "AEP reported high-end 80-plus-percent tax and 94-percent value loss"
+  Typed.reportedStatisticRestatement Typed.primary
+  (aepWoodMackenzie2026 ∷ [])
+  "Numeric statements are client-reported outputs for a model project and price assumptions, not already-realised national tax payments."
+
+historicalUncertaintyStrategyIsNotDirectTransfer :
+  Typed.StrongHistoricalTransfer iceToAPIUncertaintyStrategicRecurrence → ⊥
+historicalUncertaintyStrategyIsNotDirectTransfer witness =
+  Typed.methodRecurrenceIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+hancockReprintIsNotIndependentMethodTransmission :
+  Typed.StrongHistoricalTransfer nightlyToHancockExplicitReprint2026 → ⊥
+hancockReprintIsNotIndependentMethodTransmission witness =
+  Typed.articleRepublicationIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+sameHeadlineIsNotMethodTransmission :
+  Typed.StrongHistoricalTransfer tai17BRestatedByPocock2026 → ⊥
+sameHeadlineIsNotMethodTransmission witness =
+  Typed.headlineNumberRestatementIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+-- TWO different possible source ancestral worlds have the same visible
+-- '$17b/year' policy headline. Inferring the number of independently
+-- computed models from the public headline alone is therefore impossible.
+-- The constructor 'twoNamedAnalyses' certifies two named authors, NOT
+-- statistical independence of their underlying data and assumptions.
+data Same17BPublicationCase : Set where
+  oneNamedAnalysis twoNamedAnalyses : Same17BPublicationCase
+
+data VisibleAnnual17BClaim : Set where
+  annual17BHeadline : VisibleAnnual17BClaim
+
+data NumberOfNamedModelSources : Set where
+  oneNamedEstimator twoNamedEstimators : NumberOfNamedModelSources
+
+same17BPrinted : Same17BPublicationCase → VisibleAnnual17BClaim
+same17BPrinted _ = annual17BHeadline
+
+namedModelSourceCount : Same17BPublicationCase → NumberOfNamedModelSources
+namedModelSourceCount oneNamedAnalysis = oneNamedEstimator
+namedModelSourceCount twoNamedAnalyses = twoNamedEstimators
+
+sameHeadlineDistinctGenealogies :
+  INF.NonFactorabilityWitness same17BPrinted namedModelSourceCount
+sameHeadlineDistinctGenealogies =
+  INF.nonFactorabilityWitness
+    oneNamedAnalysis twoNamedAnalyses refl (λ ())
+
+annual17BHeadlineCannotRevealModelAncestry :
+  INF.FactorsThrough same17BPrinted namedModelSourceCount → ⊥
+annual17BHeadlineCannotRevealModelAncestry =
+  INF.witnessRulesOutEveryFlatFactorisation
+    sameHeadlineDistinctGenealogies
+
+
+------------------------------------------------------------------------
+-- 2026 gas-tax proposal falsifier: a headline '25 percent' cannot determine
+-- whether PRRT is REPLACED or a levy is ADDED to existing fiscal taxes.
+-- These are actually distinct specifications in dated ACTU / AEP sources.
+------------------------------------------------------------------------
+
+actu2026OriginalReplacementProposal : Typed.SourceReceipt
+actu2026OriginalReplacementProposal = Typed.sourceReceipt
+  "ACTU / Michele O'Neil, original trade-union 17 March 2026 release"
+  "Windfall profits to oil and gas multinationals should benefit working Australians"
+  "2026-03-17"
+  "https://www.actu.org.au/wp-content/uploads/2026/03/Windfall-profits-to-oil-and-gas-multinationals-should-benefit-working-Australians-1-1.pdf"
+  "ACTU explicitly proposes replacing PRRT with an LNG export-value levy of 25 percent; it says $17.1b is 2023-24 retrospective what-if revenue, not 2026-27 guaranteed annual forecast. Original PDF text parsed but visual screenshot service cache-missed."
+
+actuReplacementVsAEPAddOnSpecification : Typed.TypedGenealogyEdge
+actuReplacementVsAEPAddOnSpecification = Typed.typedGenealogyEdge
+  "RC-07" "ACTU 17 March 2026 25 percent levy REPLACES PRRT" "AEP Wood Mackenzie 12 April 2026 ADDITIONAL 25 percent tax model"
+  Typed.parallelEconomicArgument Typed.primary
+  (actu2026OriginalReplacementProposal ∷ aepWoodMackenzie2026 ∷ [])
+  "Both promote discussion of 25 percent export tax, but ACTU's original proposal replaces PRRT while AEP's original announcement describes an additional levy. Therefore WoodMac 83 percent model cannot be treated as matching ACTU replacement specification without an explicit counterfactual model bridge."
+
+taxSchemeSimilarityNotScriptCopy :
+  Typed.StrongHistoricalTransfer actuReplacementVsAEPAddOnSpecification → ⊥
+taxSchemeSimilarityNotScriptCopy witness =
+  Typed.economicArgumentSimilarityIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+data Same25PcTaxHeadlineWorld : Set where
+  replacesExistingPRRT stacksOnExistingPRRT : Same25PcTaxHeadlineWorld
+
+data Displayed25PcRate : Set where
+  same25PcLabel : Displayed25PcRate
+
+data EffectivePolicyInstrument : Set where
+  replacementInstrument additionalInstrument : EffectivePolicyInstrument
+
+taxRateLabel : Same25PcTaxHeadlineWorld → Displayed25PcRate
+taxRateLabel _ = same25PcLabel
+
+taxPolicyMeaning : Same25PcTaxHeadlineWorld → EffectivePolicyInstrument
+taxPolicyMeaning replacesExistingPRRT = replacementInstrument
+taxPolicyMeaning stacksOnExistingPRRT = additionalInstrument
+
+sameRateDifferentTaxInstrument : INF.NonFactorabilityWitness taxRateLabel taxPolicyMeaning
+sameRateDifferentTaxInstrument =
+  INF.nonFactorabilityWitness
+    replacesExistingPRRT stacksOnExistingPRRT refl (λ ())
+
+same25PcCannotDetermineInstrument :
+  INF.FactorsThrough taxRateLabel taxPolicyMeaning → ⊥
+same25PcCannotDetermineInstrument =
+  INF.witnessRulesOutEveryFlatFactorisation sameRateDifferentTaxInstrument
+
+
+-- Same displayed percentage can describe unlike policy denominators:
+-- production reserved for a market vs sale value taxed on LNG exports.
+australianGovernmentGasReservation2025 : Typed.SourceReceipt
+australianGovernmentGasReservation2025 = Typed.sourceReceipt
+  "Chris Bowen; Madeline King; Tim Ayres, joint Australian Government original"
+  "Affordable gas for Australian homes and businesses"
+  "2025-12-22"
+  "https://minister.dcceew.gov.au/bowen/media-releases/joint-media-release-affordable-gas-australian-homes-and-businesses"
+  "15-25 percent of gas production to be reserved for domestic consumers pending consultation, rather than a 25 percent export sales value tax. A proposal at that date, not independently confirmed implementation."
+
+gasReservationIsNot25PcExportLevy : Typed.TypedGenealogyEdge
+gasReservationIsNot25PcExportLevy = Typed.typedGenealogyEdge
+  "RC-08" "Australian Government 2025 reservation of domestic production" "ACTU 2026 export revenue levy replacing PRRT"
+  Typed.parallelEconomicArgument Typed.primary
+  (australianGovernmentGasReservation2025 ∷ actu2026OriginalReplacementProposal ∷ [])
+  "Both use percentage terms, but one denominator is production volume reserved, while the other is exported LNG revenue taxed. No shared policy object is established by equal numerical percentages."
+
+reservationAndExportTaxAreNotHistoricalMethodTransfer :
+  Typed.StrongHistoricalTransfer gasReservationIsNot25PcExportLevy → ⊥
+reservationAndExportTaxAreNotHistoricalMethodTransfer witness =
+  Typed.economicArgumentSimilarityIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- 2025 to 2026 same 21.9b industry-tax statistic: forecast vs paid status.
+-- Two original AEP surfaces agree numerically but do not preserve the
+-- original qualification. Later survey finalisation is possible yet its
+-- audited cash receipt was NOT acquired by this source comparison.
+------------------------------------------------------------------------
+
+aep2025OriginalFinancialForecast : Typed.SourceReceipt
+aep2025OriginalFinancialForecast = Typed.sourceReceipt
+  "Australian Energy Producers, 2025 Financial Survey release"
+  "Oil and gas industry delivers record 22 billion in taxes and royalties to government revenues"
+  "2025-07-27"
+  "https://energyproducers.au/news/all_news/media-release-australian-oil-gas-industry-delivers-record-22-billion-in-taxes-and-royalties-to-government-revenues-in-2024-25"
+  "Original industry association first-party table estimates 2024-25 total AUD21943m (13484 company tax + 1347 PRRT + 6620 royalties/excise/fees + 492 other), explicitly presented as forecast. Oil and gas together; not audited actual paid receipts."
+
+aep2026TaxSenateSubmission : Typed.SourceReceipt
+aep2026TaxSenateSubmission = Typed.sourceReceipt
+  "Australian Energy Producers"
+  "Senate Select Committee on Taxation of Gas Resources, 13 April 2026 original"
+  "2026-04-13"
+  "https://energyproducers.au/hubfs/260413%20AEP%20submission%20to%20Senate%20Select%20Committee%20on%20the%20Taxation%20of%20Gas%20Resources-3.pdf?hsLang=en-au"
+  "First page original public submission says 21.9 billion taxes and royalties paid in 2024-25 while citing its 2025 survey. Original 2025 press text said expected/forecast; no revised audited final cash-payment reconciliation inspected. PDF first-page screenshot verified."
+
+aepForecastToPaidStatusRestatement : Typed.TypedGenealogyEdge
+aepForecastToPaidStatusRestatement = Typed.typedGenealogyEdge
+  "RC-09" "AEP 2025 21.943b forecast gas-and-oil combined taxes" "AEP 2026 21.9b paid headline"
+  Typed.reportedStatisticRestatement Typed.primary
+  (aep2025OriginalFinancialForecast ∷ aep2026TaxSenateSubmission ∷ [])
+  "Same original association cites its 2025 forecast when recasting rounded total as paid in 2026. Later auditing might exist, but is not established by cited original 2025 press summary alone. Numeric reappearance does not independently confirm actual remitted amounts."
+
+-- For a fixed rounded number the evidence status forecast or actual-report
+-- is not identifiable from the number itself, even when both documents are
+-- genuinely first-party. This toy witness says NOTHING about whether the
+-- 2026 paid assertion happens to be true in the actual economy.
+data Same21BReportedWorld : Set where
+  initialForecastStatus reportedAsPaidStatus : Same21BReportedWorld
+
+data Same21BHeadline : Set where rounded21Point9B : Same21BHeadline
+
+data SourceStatusFor21B : Set where projectedTaxTotal claimedActualTaxTotal : SourceStatusFor21B
+
+same21BPrinted : Same21BReportedWorld → Same21BHeadline
+same21BPrinted _ = rounded21Point9B
+
+reportedStatusFor21B : Same21BReportedWorld → SourceStatusFor21B
+reportedStatusFor21B initialForecastStatus = projectedTaxTotal
+reportedStatusFor21B reportedAsPaidStatus = claimedActualTaxTotal
+
+sameRoundedTaxTotalDifferentSourceStatus :
+  INF.NonFactorabilityWitness same21BPrinted reportedStatusFor21B
+sameRoundedTaxTotalDifferentSourceStatus =
+  INF.nonFactorabilityWitness
+    initialForecastStatus reportedAsPaidStatus refl (λ ())
+
+sameTaxNumberCannotDetermineSourceStatus :
+  INF.FactorsThrough same21BPrinted reportedStatusFor21B → ⊥
+sameTaxNumberCannotDetermineSourceStatus =
+  INF.witnessRulesOutEveryFlatFactorisation
+    sameRoundedTaxTotalDifferentSourceStatus
+
+
+------------------------------------------------------------------------
+-- 2026 ORIGINAL ARTHUR D. LITTLE REPORT: TWO DISTINCT QUESTIONS
+-- 1. Is a 25 percent rate applied to the SAME levy base?
+-- 2. Is a quoted 2-percent-sized change a relative return change or a
+--    percentage-point change in the internal rate of return?
+--
+-- Original consultant-authored report, not a third estimate: Future Group,
+-- the commissioning body, released the original PDF.  A commissioned model
+-- is original authorship but not funding-independent evidence.
+--
+-- Page 5: 25% broad-based 95-100 A$bn/decade;
+--         prospective 28-32 A$bn/decade;
+--         price-triggered windfall 9-11 A$bn/decade (A$8.5/GJ threshold).
+-- First-year 'up to A$17bn' is an upper bound based on current volumes:
+-- 10 x 17 is NOT this report's decade forecast.
+-- Page 7: legacy-project IRR down 1-2 *percentage points*, not necessarily
+--         a 1-2 percent relative reduction in any project's returns.
+-- Page 8: marginal export diversion does not assume more total supply.
+-- Page 4: 6.9% resource-rent-only vs 25.8% total tax are distinct bases.
+-- Original pages 4, 5, 7, and 8 visually inspected 27 October 2026.
+------------------------------------------------------------------------
+
+adlSourceReportPublicRelease2026 : Typed.SourceReceipt
+adlSourceReportPublicRelease2026 = Typed.sourceReceipt
+  "Arthur D. Little Australia; commissioned by Future Group"
+  "Australian Domestic Gas Export Reform: Scenario Analysis and Policy Options Assessment"
+  "2026-04, public release"
+  "https://www.datocms-assets.com/115668/1777429022-final-ad-little-modelling-gas-exports-15.pdf"
+  "Consultant-authored primary report, pages 4-9; page 5 gives nine ten-year levy-base/rate scenarios; upper-bound first-year revenue cannot be multiplied into decade receipts. PDF charts visually inspected. Non-reliance and unverified data/model caveats retained."
+
+futureGroup21AprOriginalRelease : Typed.SourceReceipt
+futureGroup21AprOriginalRelease = Typed.sourceReceipt
+  "Future Group (commissioner)"
+  "New modelling shows gas export levy will significantly reduce energy costs"
+  "2026-04-21"
+  "https://www.datocms-assets.com/115668/1777429032-260421-export-levy-modelling.pdf"
+  "Original commissioner press release labels A$17bn as an upper bound in the first year. Same ADL report as the 23 April corporate website story, not an additional independent modelling team."
+
+adlReportCommissionedAndPublic : Typed.TypedGenealogyEdge
+adlReportCommissionedAndPublic = Typed.typedGenealogyEdge
+  "RC-10" "Future Group commissioner" "Arthur D. Little authored public report April 2026"
+  Typed.commissionedResearch Typed.primary
+  (adlSourceReportPublicRelease2026 ∷ futureGroup21AprOriginalRelease ∷ [])
+  "The report identifies its commissioner and primary author, and the commissioner publicly supplies the original text. This establishes authorship and commissioning but does not certify independent verification of every price, supply or revenue projection."
+
+adlSeventeenBFirstYearUpperBoundNotTenYearCash : Typed.TypedGenealogyEdge
+adlSeventeenBFirstYearUpperBoundNotTenYearCash = Typed.typedGenealogyEdge
+  "RC-11" "Arthur D. Little ten-year broad-based 25 percent scenario" "Future Group up-to-A$17bn first-year statement"
+  Typed.reportedStatisticRestatement Typed.primary
+  (adlSourceReportPublicRelease2026 ∷ futureGroup21AprOriginalRelease ∷ [])
+  "The original page 5 has A$95-100bn per decade for broad-based 25 percent and expressly marks A$17bn as up-to based on current export volumes. First-year upper bound is not recurring ten-year average or guaranteed revenue."
+
+adlIRRPointsVersusFutureGroupReturnsPercent : Typed.TypedGenealogyEdge
+adlIRRPointsVersusFutureGroupReturnsPercent = Typed.typedGenealogyEdge
+  "RC-12" "ADL report page 7 IRR down 1-2 percentage points" "Future Group 23 April summary about 2 percent average reduction in returns"
+  Typed.reportedStatisticRestatement Typed.primary
+  (adlSourceReportPublicRelease2026 ∷ futureGroupArthurDLittle2026 ∷ [])
+  "The unit and project set are less explicit in the client's summary; percentage-point IRR and relative percentage return are different quantities. Do not assert bad faith or even numerically inconsistent results absent original baseline IRR."
+
+-- There is a concrete collision: all three original consultant scenarios
+-- display the same 25% nominal rate, but their levy bases and ten-year
+-- modelled revenue ranges differ. This witnesses non-factorability without
+-- assigning empirical certainty to the modelled revenue.
+data ADLLevyScenario : Set where
+  broadBase25 prospective25 windfall25 : ADLLevyScenario
+
+data ADLDisplayed25Rate : Set where
+  displayed25Rate : ADLDisplayed25Rate
+
+data ADLTenYearRevenueBand : Set where
+  broad95To100 prospective28To32 windfall9To11 : ADLTenYearRevenueBand
+
+adlHeadlineRate : ADLLevyScenario → ADLDisplayed25Rate
+adlHeadlineRate _ = displayed25Rate
+
+adlTenYearBand : ADLLevyScenario → ADLTenYearRevenueBand
+adlTenYearBand broadBase25 = broad95To100
+adlTenYearBand prospective25 = prospective28To32
+adlTenYearBand windfall25 = windfall9To11
+
+adlSameRateDifferentRevenueBases :
+  INF.NonFactorabilityWitness adlHeadlineRate adlTenYearBand
+adlSameRateDifferentRevenueBases =
+  INF.nonFactorabilityWitness broadBase25 prospective25 refl (λ ())
+
+adlSame25RateCannotDetermineDecadeRevenue :
+  INF.FactorsThrough adlHeadlineRate adlTenYearBand → ⊥
+adlSame25RateCannotDetermineDecadeRevenue =
+  INF.witnessRulesOutEveryFlatFactorisation adlSameRateDifferentRevenueBases
+
+-- A bare value 2 with a percent symbol does not determine whether the
+-- statement means two IRR percentage points or a 2% relative return change.
+-- This is a loss-of-units obstruction, not proof of either empirical case.
+data TwoSizedReturnClaim : Set where
+  twoIRRPercentagePoints twoPercentRelativeReturn : TwoSizedReturnClaim
+
+data BareTwoPercentDisplay : Set where
+  bareTwoPercent : BareTwoPercentDisplay
+
+data ReturnChangeUnit : Set where
+  irrPercentagePoints relativePercent : ReturnChangeUnit
+
+returnHeadlineWithoutUnits : TwoSizedReturnClaim → BareTwoPercentDisplay
+returnHeadlineWithoutUnits _ = bareTwoPercent
+
+returnChangeUnit : TwoSizedReturnClaim → ReturnChangeUnit
+returnChangeUnit twoIRRPercentagePoints = irrPercentagePoints
+returnChangeUnit twoPercentRelativeReturn = relativePercent
+
+samePrintedTwoDifferentReturnUnits :
+  INF.NonFactorabilityWitness returnHeadlineWithoutUnits returnChangeUnit
+samePrintedTwoDifferentReturnUnits =
+  INF.nonFactorabilityWitness twoIRRPercentagePoints twoPercentRelativeReturn refl (λ ())
+
+bareTwoPercentCannotIdentifyReturnUnit :
+  INF.FactorsThrough returnHeadlineWithoutUnits returnChangeUnit → ⊥
+bareTwoPercentCannotIdentifyReturnUnit =
+  INF.witnessRulesOutEveryFlatFactorisation samePrintedTwoDifferentReturnUnits
+
+adlFirstPartyScenarioIsNotProofOfEditorialTransfer :
+  Typed.StrongHistoricalTransfer adlIRRPointsVersusFutureGroupReturnsPercent → ⊥
+adlFirstPartyScenarioIsNotProofOfEditorialTransfer witness =
+  Typed.headlineNumberRestatementIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- 27 October original WOOD MACKENZIE 16-page commission acquired.
+-- Source owner: Wood Mackenzie, for Australian Energy Producers.
+-- Original PDF pp. 2, 4 and 14 screenshot inspected. This is NOT another
+-- independent model just because the same industry lobby reproduced it.
+-- It assumes a 4-tcf analogue field, 27 years, 85% LNG exports, tax
+-- additional to PRRT and CIT, permanent, with standalone ring-fencing.
+-- Page 14 price formula assumes all exports contracted, no spot sales.
+-- Contrasting ADL p. 8's spot-market marginal-diversion schematic is a
+-- SAME-PERCENTAGE collision, not evidence either model matches Australia.
+------------------------------------------------------------------------
+
+woodMackenzieOriginalReport2026 : Typed.SourceReceipt
+woodMackenzieOriginalReport2026 = Typed.sourceReceipt
+  "Wood Mackenzie, for Australian Energy Producers"
+  "Analysis of proposed LNG export windfall levy: potential impact on energy project economics and fiscal competitiveness"
+  "2026-04"
+  "https://energyproducers.au/wp-content/uploads/2026/04/Wood-Mackenzie-Analysis-of-Proposed-Windfall-Levy.pdf"
+  "Original full 16-page commissioned consultant report, PDF printed pages 2-4 and appendix page 14 visually inspected; additional 25 percent tax on export sales preserving CIT/PRRT; 83 percent government share and 94 percent NPV10 reduction belong to US$120/bbl single illustrative project. Appendix assumes all exports contracted/no spot sales, 4 tcf analogue, and no full statutory RPM implementation."
+
+woodMackenzieOriginalIsAEPCommission : Typed.TypedGenealogyEdge
+woodMackenzieOriginalIsAEPCommission = Typed.typedGenealogyEdge
+  "RC-13" "Wood Mackenzie original assumed 4-tcf 27-year gas field" "AEP 83 percent and 94 percent 2026 press headlines"
+  Typed.reportedStatisticRestatement Typed.primary
+  (woodMackenzieOriginalReport2026 ∷ aepWoodMackenzie2026 ∷ [])
+  "Original consultant confirms client high-price numbers under ring-fenced 4-tcf project, 85 percent exports, permanent ADDITIONAL levy and all-contracted netback pricing. Neither headline is an observed Australian average or independent AEP model."
+
+woodMackenzieAppendixNotACTUReplacement : Typed.TypedGenealogyEdge
+woodMackenzieAppendixNotACTUReplacement = Typed.typedGenealogyEdge
+  "RC-14" "Wood Mackenzie retains PRRT/CIT and adds 25 percent levy" "ACTU original March 2026 replaces PRRT"
+  Typed.parallelEconomicArgument Typed.primary
+  (woodMackenzieOriginalReport2026 ∷ actu2026OriginalReplacementProposal ∷ [])
+  "The full Wood Mackenzie report, not merely AEP's announcement, expressly retains PRRT and company income tax and assumes non-deductibility of levy. ACTU proposes PRRT replacement: no equivalent modelled counterfactual has been acquired. Subtracting PRRT from the reported 83 percent is not a valid rerun because income tax and cash-flow bases interact."
+
+woodMackenzieNoSpotVersusADLMarginalSpot : Typed.TypedGenealogyEdge
+woodMackenzieNoSpotVersusADLMarginalSpot = Typed.typedGenealogyEdge
+  "RC-15" "Wood Mackenzie all-contracted no-spot price assumption" "Arthur D. Little spot/uncontracted 2026 scenario"
+  Typed.parallelEconomicArgument Typed.primary
+  (woodMackenzieOriginalReport2026 ∷ adlSourceReportPublicRelease2026 ∷ [])
+  "Original WM Appendix 1 says no spot sales in LNG DES price formula. Original ADL p. 8 schematic explicitly includes a 27 percent illustrated spot-export slice for potential domestic diversion. Cannot compare price/supply results without aligned contractual volumes and market-response assumptions."
+
+woodMacModelSimilarityIsNotDocumentaryScriptTransfer :
+  Typed.StrongHistoricalTransfer woodMackenzieNoSpotVersusADLMarginalSpot → ⊥
+woodMacModelSimilarityIsNotDocumentaryScriptTransfer witness =
+  Typed.economicArgumentSimilarityIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+data SameRateGasSourceModel : Set where
+  woodMacContractedMarket adlMarginalSpotMarket : SameRateGasSourceModel
+
+data SharedDisplayedGasRate : Set where
+  shared25ExportLevy : SharedDisplayedGasRate
+
+data MarketContractingAssumption : Set where
+  allExportsContracted someSpotExports : MarketContractingAssumption
+
+sameNominalRateAcrossModels : SameRateGasSourceModel → SharedDisplayedGasRate
+sameNominalRateAcrossModels _ = shared25ExportLevy
+
+originalModelContractingAssumption :
+  SameRateGasSourceModel → MarketContractingAssumption
+originalModelContractingAssumption woodMacContractedMarket = allExportsContracted
+originalModelContractingAssumption adlMarginalSpotMarket = someSpotExports
+
+equal25RateOpposedContractingModels :
+  INF.NonFactorabilityWitness sameNominalRateAcrossModels originalModelContractingAssumption
+equal25RateOpposedContractingModels =
+  INF.nonFactorabilityWitness woodMacContractedMarket adlMarginalSpotMarket refl (λ ())
+
+same25RateCannotDetermineModelSpotAssumption :
+  INF.FactorsThrough sameNominalRateAcrossModels originalModelContractingAssumption → ⊥
+same25RateCannotDetermineModelSpotAssumption =
+  INF.witnessRulesOutEveryFlatFactorisation equal25RateOpposedContractingModels
+
+
+------------------------------------------------------------------------
+-- Government reservation-version SOURCE CHANGE, not a fossil-fuel tax.
+-- Original Dec 2025 declaration (already above) 15-25% of production;
+-- 7 May 2026 20% measured against LNG exports, planned July 2027 start;
+-- 10 Sep 2026 20% exports, licences Jan 2027, DSO Jan 2028;
+-- 29 Sep DCCEEW page confirms 20% of annual export volumes (calibratable
+-- down) and separates framework July 2027 from duty Jan 2028.
+-- These are chronologically distinct official proposals; NO enactment or
+-- delivered supply/price effect inferred. Not to be confused with 25%
+-- EXPORT REVENUE LEVY assessed by ADL and Wood Mackenzie.
+------------------------------------------------------------------------
+
+governmentReservationMay2026 : Typed.SourceReceipt
+governmentReservationMay2026 = Typed.sourceReceipt
+  "Chris Bowen; Madeleine King; Tim Ayres, joint Australian Government original"
+  "Albanese Government to secure Australian gas for Australian users"
+  "2026-05-07"
+  "https://minister.dcceew.gov.au/bowen/media-releases/joint-media-release-albanese-government-secure-australian-gas-australian-users"
+  "First-party announcement changes intended reservation to volume equivalent to 20% of LNG exports and then plans commencement from 1 July 2027; older export contracts respected. Not a law-in-force certificate."
+
+governmentReservationSeptember2026 : Typed.SourceReceipt
+governmentReservationSeptember2026 = Typed.sourceReceipt
+  "Chris Bowen; Madeleine King; Tim Ayres, joint Australian Government original"
+  "Securing more affordable gas for Australians: reservation exposure draft"
+  "2026-09-10"
+  "https://minister.dcceew.gov.au/bowen/media-releases/joint-media-release-securing-more-affordable-gas-australians"
+  "Exposure-draft release: up to 20% of gas exports, licence applications from 1 Jan 2027, domestic supply obligation from 1 Jan 2028. Consultation status; later intended duty commencement than May 2026 release."
+
+governmentReservationDepartmentStatus2026 : Typed.SourceReceipt
+governmentReservationDepartmentStatus2026 = Typed.sourceReceipt
+  "Australian Government Department of Climate Change, Energy, the Environment and Water"
+  "Gas Market Review and reforms"
+  "Updated 2026-09-29"
+  "https://www.dcceew.gov.au/energy/markets/gas-markets/gas-market-review-reforms"
+  "First-party 29 Sep status: 20% of annual LNG export volumes DSO, with possible downward calibration; scheme/framework anticipated 1 July 2027, supply duties expected 1 Jan 2028; exposure legislation not finalised or independently verified enacted."
+
+reservation2025ProductionToMay2026Exports : Typed.TypedGenealogyEdge
+reservation2025ProductionToMay2026Exports = Typed.typedGenealogyEdge
+  "RC-16" "December 2025 proposed 15-25 percent production reservation" "May 2026 proposed domestic obligation equal to 20 percent LNG exports"
+  Typed.reportedStatisticRestatement Typed.primary
+  (australianGovernmentGasReservation2025 ∷ governmentReservationMay2026 ∷ [])
+  "The same named government proposed successive policy versions with different described volume bases. It is not a copied model calculation or evidence policy was implemented."
+
+reservationMayToSeptemberDutyDate : Typed.TypedGenealogyEdge
+reservationMayToSeptemberDutyDate = Typed.typedGenealogyEdge
+  "RC-17" "May 2026 government announced July 2027 intended start" "September 2026 exposure-draft January 2028 duty start"
+  Typed.reportedStatisticRestatement Typed.primary
+  (governmentReservationMay2026 ∷ governmentReservationSeptember2026 ∷ governmentReservationDepartmentStatus2026 ∷ [])
+  "Same institutional planned scheme: different stages and start dates, with DCCEEW separating framework July 2027 from exporter DSO Jan 2028. This is proposed policy evolution, not an assertion enacted law, actual compliance, price effects or lobbying causation."
+
+reservationDraftChronologyIsNotMethodTransmission :
+  Typed.StrongHistoricalTransfer reservationMayToSeptemberDutyDate → ⊥
+reservationDraftChronologyIsNotMethodTransmission witness =
+  Typed.headlineNumberRestatementIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- 2026-10-14 new FIRST-PARTY legislative INTRODUCTION objects.
+-- Government's 14 Oct media release is publisher-original. Three 14 Oct
+-- second-reading speeches are first-person minister testimony accessible
+-- through attributed OpenAustralia Hansard mirrors; official APH originals
+-- are indexed but not independently fetched here. The bill *texts* were
+-- NOT verified for assent. An introduced Bill is NOT an enacted Act.
+--
+-- Crucial homonym: LNG export-revenue levy in ADL original is a proposed
+-- ad valorem 25% of sales, while 'Domestic Gas Reservation Levy Bill 2026'
+-- proposes cost recovery against LNG EXPORT LICENCES, rate by regulation.
+-- Shared string 'levy' cannot transfer a tax base or cash revenue.
+--
+-- Consequential-amendments second reading describes 'additionality'
+-- and at least 90% of DSO genuinely delivered, with bounded 10%
+-- flexibility/offset. Source records the MINISTER'S explanation, not
+-- independently audited delivery or enacted statutory text.
+------------------------------------------------------------------------
+
+octoberGasBillMinisterialRelease2026 : Typed.SourceReceipt
+octoberGasBillMinisterialRelease2026 = Typed.sourceReceipt
+  "Chris Bowen; Madeleine King; Tim Ayres, original Australian ministers"
+  "Landmark legislation to secure Australian gas for industry and households"
+  "2026-10-14"
+  "https://minister.dcceew.gov.au/bowen/media-releases/joint-media-release-landmark-legislation-secure-australian-gas-industry-and-households"
+  "Original government notice announcing gas reservation package introduced into parliament on 14 October. Demand-calibrated 20% LNG export volume. Introduction established; final assent, implementation, prices and named lobbying causal effect not established."
+
+octoberGasPrincipalMinisterSpeech2026 : Typed.SourceReceipt
+octoberGasPrincipalMinisterSpeech2026 = Typed.sourceReceipt
+  "Madeleine King, Minister for Resources; House of Representatives"
+  "Domestic Gas Reservation Bill 2026, second-reading original spoken statement"
+  "2026-10-14, 09:02"
+  "https://www.openaustralia.org.au/debate/?id=2026-10-14.4.2"
+  "Minister's dated first-person parliamentary statement as transcribed in attributed third-party Hansard mirror; official APH original inaccessible for direct check. Principal bill proposed framework backstop 1 July 2027, licence and DSO from 1 Jan 2028; speech is NOT an enacted statute."
+
+octoberGasLevyMinisterSpeech2026 : Typed.SourceReceipt
+octoberGasLevyMinisterSpeech2026 = Typed.sourceReceipt
+  "Madeleine King, Minister for Resources; House of Representatives"
+  "Domestic Gas Reservation Levy Bill 2026, second-reading speech"
+  "2026-10-14, 09:21"
+  "https://www.openaustralia.org.au/debate/?id=2026-10-14.6.1"
+  "Minister's own words as preserved by attributed Hansard mirror: licence-holder cost-recovery levy, rate/method by future regulations, due following regulated period, proposed commencement 1 Jan 2028. NOT the 25% LNG export ad valorem revenue levy modelled by ADL."
+
+octoberGasConsequentialMinisterSpeech2026 : Typed.SourceReceipt
+octoberGasConsequentialMinisterSpeech2026 = Typed.sourceReceipt
+  "Madeleine King, Minister for Resources; House of Representatives"
+  "Domestic Gas Reservation (Consequential Amendments) Bill 2026, second-reading speech"
+  "2026-10-14, 09:13"
+  "https://www.openaustralia.org.au/debate/?id=2026-10-14.5.2"
+  "Minister first-person speech in attributed transcript mirror. Describes additionality baseline to stop existing-domestic-gas recycling, minimum 90% of DSO actual supply with conditional 10% flexibility and offset, and July 2027/Jan 2028 stage split. Not enacted bill verification or observed delivery."
+
+octoberGasBillsIntroduced2026 : Typed.TypedGenealogyEdge
+octoberGasBillsIntroduced2026 = Typed.typedGenealogyEdge
+  "RC-18" "September 2026 exposure draft gas reservation" "14 October 2026 gas reservation bills introduced in parliament"
+  Typed.legislativeIntroduction Typed.primary
+  (governmentReservationSeptember2026 ∷ octoberGasBillMinisterialRelease2026 ∷ [])
+  "Dated government original confirms legislation introduced. This advances the observable status from proposal to introduced bill, NOT to law, commenced exporter obligation, or demonstrated ministerial words directly copied from industry."
+
+octoberCostRecoveryLevyNotRevenueTax : Typed.TypedGenealogyEdge
+octoberCostRecoveryLevyNotRevenueTax = Typed.typedGenealogyEdge
+  "RC-19" "14 Oct House minister describes licence regulatory cost recovery levy" "Arthur D. Little 25% LNG export sales levy alternative"
+  Typed.parallelEconomicArgument Typed.corroborated
+  (octoberGasLevyMinisterSpeech2026 ∷ adlSourceReportPublicRelease2026 ∷ [])
+  "The legal-policy word levy collides while bases differ: regulated licence-holder administrative charges set by future regulations versus 25% of LNG export sales value. 17bn export-revenue projections are not regulatory licence-levy receipts. The Hansard text was mirror-read, not original APH download."
+
+octoberAdditionalityNotObservedDeliveredSupply : Typed.TypedGenealogyEdge
+octoberAdditionalityNotObservedDeliveredSupply = Typed.typedGenealogyEdge
+  "RC-20" "Government's Sept 2026 gas supply proposal" "Minister's 14 Oct extra-gas baseline and 90%-delivery design"
+  Typed.legislativeIntroduction Typed.corroborated
+  (governmentReservationSeptember2026 ∷ octoberGasConsequentialMinisterSpeech2026 ∷ [])
+  "The introduced consequential-amendments proposal adds source-attributed additionality tests and conditional delivery/flexibility terms. A recorded draft ministerial explanation cannot establish that the bill passed, that gas physically moved, or that users paid less."
+
+octoberBillIntroCannotEstablishHistoricalTransfer :
+  Typed.StrongHistoricalTransfer octoberGasBillsIntroduced2026 → ⊥
+octoberBillIntroCannotEstablishHistoricalTransfer w =
+  Typed.legislativeIntroductionDoesNotEstablishHistoricalTransfer
+    (Typed.relationIsTransfer w)
+
+octoberCostRecoverySimilarityIsNotSharedTaxInstrument :
+  Typed.StrongHistoricalTransfer octoberCostRecoveryLevyNotRevenueTax → ⊥
+octoberCostRecoverySimilarityIsNotSharedTaxInstrument w =
+  Typed.economicArgumentSimilarityIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer w)
+
+-- A bare 'levy' label is insufficient to recover the underlying legal
+-- instrument (administration/cost recovery versus percentage of sales).
+-- Exact finite model only: NOT a proof the introduced Bill has become law.
+data OneLevyWordTwoBases : Set where
+  administrativeLicenceRecovery exportValueQuarterTax : OneLevyWordTwoBases
+
+data UnqualifiedLevyLabel : Set where
+  printedLevy : UnqualifiedLevyLabel
+
+data LevyLegalBase : Set where
+  exportLicenceRegulatoryCosts lngExportSalesRevenue : LevyLegalBase
+
+displayedLevyWord : OneLevyWordTwoBases → UnqualifiedLevyLabel
+displayedLevyWord _ = printedLevy
+
+legalBaseOfLevy : OneLevyWordTwoBases → LevyLegalBase
+legalBaseOfLevy administrativeLicenceRecovery = exportLicenceRegulatoryCosts
+legalBaseOfLevy exportValueQuarterTax = lngExportSalesRevenue
+
+sameLevyWordDifferentLegalBases :
+  INF.NonFactorabilityWitness displayedLevyWord legalBaseOfLevy
+sameLevyWordDifferentLegalBases =
+  INF.nonFactorabilityWitness
+    administrativeLicenceRecovery exportValueQuarterTax refl (λ ())
+
+bareLevyLabelCannotRecoverTaxBase :
+  INF.FactorsThrough displayedLevyWord legalBaseOfLevy → ⊥
+bareLevyLabelCannotRecoverTaxBase =
+  INF.witnessRulesOutEveryFlatFactorisation
+    sameLevyWordDifferentLegalBases
+
+
+------------------------------------------------------------------------
+-- Original-source GENEALOGY QUESTION (rather than merely percent errors):
+-- purposive selected source-count does not identify national prevalence.
+-- Reuses the repository's canonical IntersectionalNonFactorability owner.
+--
+-- We build two explicitly HYPOTHETICAL national corpora with the SAME
+-- observed 57-appearance, 25-family selection yet DIFFERENT unobserved
+-- original-source populations. This is an observation adequacy no-go,
+-- NOT a statistic about Australian national climate denial.
+-- Root identity in the selected ledger remains an empirical annotation;
+-- the model's two worlds are logic fixtures only.
+------------------------------------------------------------------------
+
+data NationalSourcePopulationCompletion : Set where
+  fewAdditionalOriginals manyAdditionalOriginals : NationalSourcePopulationCompletion
+
+data Selected57AppearanceView : Set where
+  samePurposive57AppearanceLedger : Selected57AppearanceView
+
+data NationalOriginalProductionPattern : Set where
+  concentratedOutsideSample dispersedOutsideSample : NationalOriginalProductionPattern
+
+whatOurSelectedLedgerSees :
+  NationalSourcePopulationCompletion → Selected57AppearanceView
+whatOurSelectedLedgerSees _ = samePurposive57AppearanceLedger
+
+whatUnobservedOriginalPopulationContains :
+  NationalSourcePopulationCompletion → NationalOriginalProductionPattern
+whatUnobservedOriginalPopulationContains fewAdditionalOriginals = concentratedOutsideSample
+whatUnobservedOriginalPopulationContains manyAdditionalOriginals = dispersedOutsideSample
+
+sameSelectedLedgerDifferentNationalPopulations :
+  INF.NonFactorabilityWitness
+    whatOurSelectedLedgerSees whatUnobservedOriginalPopulationContains
+sameSelectedLedgerDifferentNationalPopulations =
+  INF.nonFactorabilityWitness
+    fewAdditionalOriginals manyAdditionalOriginals refl (λ ())
+
+selectedCorpusCannotDetermineNationalOriginConcentration :
+  INF.FactorsThrough
+    whatOurSelectedLedgerSees whatUnobservedOriginalPopulationContains → ⊥
+selectedCorpusCannotDetermineNationalOriginConcentration =
+  INF.witnessRulesOutEveryFlatFactorisation
+    sameSelectedLedgerDifferentNationalPopulations
+
+
+------------------------------------------------------------------------
+-- Original GOVERNMENT IMPACT ANALYSIS from OIA, 15 October 2026:
+-- DISR authored 7-page dashboard, visually inspected PDF page 3 and page 6.
+-- Ten-year regulatory burden: A$134m under reform vs A$59m status quo.
+-- These are compliance/regulatory burdens, not observed recovered LICENCE
+-- levy receipts and not $17bn export-revenue tax estimates.
+-- Page 3 forecasts a transfer of value *from gas producers to domestic
+-- gas users* via lower gas prices, itself a conditional GOVERNMENT appraisal,
+-- NOT a measured beneficiary distribution or denialist claim.
+--
+-- Substantive primary-document contradiction: the OIA page 6 says
+-- DGRS enacting legislation INTENDED to commence 1 Jan 2027 whereas
+-- Minister King's original 14 October principal-bill House speech states
+-- a proclamation/backstop 1 JULY 2027. Both place DSO 1 Jan 2028.
+-- Preserve both versioned originals. An APH bill/enactment check is owed.
+------------------------------------------------------------------------
+
+governmentOIAImpactDashboardOct2026 : Typed.SourceReceipt
+governmentOIAImpactDashboardOct2026 = Typed.sourceReceipt
+  "Australian Department of Industry, Science and Resources; Office of Impact Analysis"
+  "Dashboard Impact Analysis: Gas Market Review Domestic Gas Reservation Scheme"
+  "2026-10-15"
+  "https://oia.pmc.gov.au/sites/default/files/posts/2026/10/Dashboard%20IA%20%26%20Statement%20of%20Sufficiency.pdf"
+  "Publisher-original seven-page government PDF (page indices 2 and 5 visually checked). Reports A$134m versus A$59m ten-year estimated regulatory burden, anticipates transfer from producer to domestic user, and page 6 says framework 1 Jan 2027 versus dated minister's 14 Oct 1 July 2027 speech. None of these is a confirmed legal commencement, paid levy, observable price effect, or measured actual beneficiary."
+
+oiaRegulatoryBurdenNotExportTaxModel : Typed.TypedGenealogyEdge
+oiaRegulatoryBurdenNotExportTaxModel = Typed.typedGenealogyEdge
+  "RC-21" "Australian 2026 government regulatory-burden appraisal" "Arthur D. Little separate 25% LNG export revenue scenario"
+  Typed.parallelEconomicArgument Typed.primary
+  (governmentOIAImpactDashboardOct2026 ∷ adlSourceReportPublicRelease2026 ∷ [])
+  "Official ten-year A$134m regulatory burden under DGRS versus A$59m status quo, not actual federal licence-levy collections, and not ad valorem 25 percent LNG export revenue model worth hypothetical billions."
+
+oiaJanuaryVsKingJulyDGRSStart : Typed.TypedGenealogyEdge
+oiaJanuaryVsKingJulyDGRSStart = Typed.typedGenealogyEdge
+  "RC-22" "Government OIA 15 Oct 2026: intended DGRS framework 1 Jan 2027" "Minister King 14 Oct 2026: framework backstop 1 July 2027"
+  Typed.reportedStatisticRestatement Typed.corroborated
+  (governmentOIAImpactDashboardOct2026 ∷ octoberGasPrincipalMinisterSpeech2026 ∷ [])
+  "Conflicting date statements by official government-origin sources preserved without silent correction. 1 Jan 2028 is shared expected DSO start. Neither OIA dashboard nor attributed Hansard mirror settles text of enacted Act or commencement instruments."
+
+oiaTimingConflictDoesNotEstablishCausalScriptTransfer :
+  Typed.StrongHistoricalTransfer oiaJanuaryVsKingJulyDGRSStart → ⊥
+oiaTimingConflictDoesNotEstablishCausalScriptTransfer w =
+  Typed.headlineNumberRestatementIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer w)
+
+
+------------------------------------------------------------------------
+-- GLOBAL climate-contrarian CLAIM GENEALOGY (not Australian gas policy).
+-- Research question: ORIGINAL claim-producing people/commissioners, exact
+-- claim versions, demonstrated republishers and independently tested science.
+-- SOURCE-FIRST: "earliest original in this selected set" is NOT the
+-- first-ever historical origin of a proposition. Document roots differ
+-- from independent climate measurements; the source graph is not a
+-- worldwide random sample.
+--
+-- Original owners:
+-- Peter Gwynne, Newsweek 28 April 1975, "The Cooling World";
+-- Gwynne's own 22 May 2014 retrospective explicitly rejects modern usage.
+-- Peterson, Connolley & Fleck 2008, DOI 10.1175/2008BAMS2370.1:
+-- 1965-79 sample 7 cooling, 20 neutral, 44 warming papers (NOT all papers).
+-- WFA / Institute of Biospheric Research 1992 film original indexed by
+-- Climate Files; Sherwood Idso is a named original featured researcher.
+-- Same campaign's Greening Earth Society original sequel 1998 indexed;
+-- film/transcript publisher-original carrier remains to inspect directly.
+-- OISM Seitz covering letter/petition 1998: original issuer; the later
+-- 31,000+ signature website count is not a 1998 observation.
+-- NAS Council 20 Apr 1998: first-party explicit NON-AFFILIATION and
+-- 1998 enclosed manuscript NOT peer-reviewed journal/PNAS publication.
+-- 1999 Soon/Baliunas/Robinson et al. Energy & Environment paper is a
+-- DISTINCT later published journal version, not the 1998 Academy paper.
+-- CO2 Coalition first-party contemporary undated "plant food" page;
+-- thematic recurrence ≠ proven WFA→CO2 Coalition finance or script copy.
+-- Zhu et al 2016 greening, Terrer et al 2016/2019 nutrient limitations:
+-- original science supports CONTEXT-DEPENDENT photosynthesis response,
+-- NOT net globally beneficial effects of greenhouse-gas emissions.
+--
+-- Historical citations and roles:
+-- https://sealevel.info/newsweek_old.htm (archival original article)
+-- https://www.realclearscience.com/articles/2014/05/22/stop_citing_my_1975_global_cooling_article_108668.html
+-- https://doi.org/10.1175/2008BAMS2370.1
+-- https://www.climatefiles.com/trade-group/1992-western-fuels-greening-planet-earth/
+-- https://www.climatefiles.com/trade-group/1998-western-fuels-greening-planet-earth-continues/
+-- https://www.oism.org/pproject/pproject.htm
+-- https://www.nationalacademies.org/news/statement-of-the-council-of-the-nas-regarding-global-change-petition
+-- https://co2coalition.org/facts/co2-is-plant-food/
+-- https://doi.org/10.1038/nclimate3004
+-- https://doi.org/10.1126/science.aaf4610
+------------------------------------------------------------------------
+
+globalCoolingGwynneOriginal1975 : Typed.SourceReceipt
+globalCoolingGwynneOriginal1975 = Typed.sourceReceipt
+  "Peter Gwynne, Newsweek"
+  "The Cooling World"
+  "1975-04-28"
+  "https://sealevel.info/newsweek_old.htm"
+  "1975 Newsweek first-person authored story accessible as full attributed archival reproduction. Contemporaneous discussion of a cooling hypothesis is not a survey of consensus or a finding that today's long-term global trend is cooling."
+
+globalCoolingGwynneRetrospective2014 : Typed.SourceReceipt
+globalCoolingGwynneRetrospective2014 = Typed.sourceReceipt
+  "Peter Gwynne, Inside Science; RealClearScience attributed republication"
+  "Stop Citing My 1975 Global Cooling Article"
+  "2014-05-22"
+  "https://www.realclearscience.com/articles/2014/05/22/stop_citing_my_1975_global_cooling_article_108668.html"
+  "Author of 1975 original explicitly rejects its use to deny today's observed global warming. Retrospective written testimony by ORIGINAL author, reprinted on third-party site; not independent scientific review."
+
+globalCoolingPetersonReview2008 : Typed.SourceReceipt
+globalCoolingPetersonReview2008 = Typed.sourceReceipt
+  "Thomas C. Peterson; William M. Connolley; John Fleck"
+  "The Myth of the 1970s Global Cooling Scientific Consensus"
+  "2008-09-01"
+  "https://doi.org/10.1175/2008BAMS2370.1"
+  "Peer-reviewed period-literature sample: 7 cooling, 20 neutral, 44 warming papers among 71 1965-79 sampled papers. This challenges a supposed 1970s consensus; not a census of every historical climatologist or claim originator."
+
+globalGreeningWFAFilmIndex1992 : Typed.SourceReceipt
+globalGreeningWFAFilmIndex1992 = Typed.sourceReceipt
+  "Institute of Biospheric Research; Sherwood Idso; Western Fuels Association (reported funder)"
+  "The Greening of Planet Earth (1992 video original archived/indexed)"
+  "1992"
+  "https://www.climatefiles.com/trade-group/1992-western-fuels-greening-planet-earth/"
+  "Archival investigation identifies producer and industry funder of dated film, prominently featuring Sherwood Idso. Film full original audiovisual and actual disbursement accounting NOT rechecked; archive account is separate from financial transfer primary receipts."
+
+globalGreeningWFASequelIndex1998 : Typed.SourceReceipt
+globalGreeningWFASequelIndex1998 = Typed.sourceReceipt
+  "Western Fuels Association; Greening Earth Society"
+  "The Greening of Planet Earth Continues (1998 sequel film/transcript)"
+  "1998"
+  "https://www.climatefiles.com/trade-group/1998-western-fuels-greening-planet-earth-continues/"
+  "Archivist identifies explicit sequel and same institutional producer family. Not a new independent botanical trial and not evidence every narrated statement was scientifically correct."
+
+globalOISM1998PetitionPrimary : Typed.SourceReceipt
+globalOISM1998PetitionPrimary = Typed.sourceReceipt
+  "Arthur B. Robinson; Oregon Institute of Science and Medicine; Frederick Seitz"
+  "Global Warming Petition Project, original Seitz covering letter and enclosed review"
+  "1998; website updated subsequently"
+  "https://www.oism.org/pproject/pproject.htm"
+  "First-party petition issuer presents Kyoto opposition, claim of CO2 environmental benefits and Seitz letter. Current claim more than 31,000 signatories is website's later count, not demonstrably the 1998 total, not population probability sample or NAS endorsement."
+
+globalNAS1998PetitionDisavowal : Typed.SourceReceipt
+globalNAS1998PetitionDisavowal = Typed.sourceReceipt
+  "Council of the National Academy of Sciences, original institutional response"
+  "Statement of the Council of the NAS Regarding Global Change Petition"
+  "1998-04-20"
+  "https://www.nationalacademies.org/news/statement-of-the-council-of-the-nas-regarding-global-change-petition"
+  "NAS states petition unrelated to institution and mailed manuscript NOT then published in PNAS or any peer-reviewed journal; distinguishes former president Seitz's identity from endorsement. Does not refute existence of mailed petition or possible later journal publication."
+
+globalCO2CoalitionPlantFoodFirstParty : Typed.SourceReceipt
+globalCO2CoalitionPlantFoodFirstParty = Typed.sourceReceipt
+  "CO2 Coalition, institutional author"
+  "Fact 1: First and foremost CO2 is plant food"
+  "Undated live web page, accessed 2026-10-27"
+  "https://co2coalition.org/facts/co2-is-plant-food/"
+  "Present-day institution self-publishes plant-food slogan and benefit list. Carbon dioxide's role in photosynthesis is real; comprehensive net environmental harm/benefit is not established by plant response alone. Undated text is NOT dated original from founding in 2015."
+
+globalZhuOriginalGreening2016 : Typed.SourceReceipt
+globalZhuOriginalGreening2016 = Typed.sourceReceipt
+  "Zaichun Zhu; Shilong Piao; Ranga Myneni; et al."
+  "Greening of the Earth and its drivers"
+  "2016-04-25"
+  "https://www.globalcarbonproject.org/global/pdf/Zhu_2016_Greening%20of%20the%20Earth%20and%20its%20drivers.NatureCC.pdf"
+  "Original peer-reviewed satellite/model paper attributes approximately 70 percent of observed 1982-2009 greening trend to CO2 fertilization under models; not a global net-welfare experiment or greenhouse-gas no-harm proof."
+
+globalTerrerFertilisationLimit2016 : Typed.SourceReceipt
+globalTerrerFertilisationLimit2016 = Typed.sourceReceipt
+  "Cesar Terrer and coauthors"
+  "Mycorrhizal association as a primary control of the CO2 fertilization effect"
+  "2016"
+  "https://doi.org/10.1126/science.aaf4610"
+  "Original meta-analysis of plant experimental response reveals nutrient and mycorrhizal association conditioning, not zero fertilisation everywhere and not evidence emissions have no climatic effect."
+
+globalGwynne1975To2014AuthorCorrection : Typed.TypedGenealogyEdge
+globalGwynne1975To2014AuthorCorrection = Typed.typedGenealogyEdge
+  "GC-01" "Peter Gwynne 1975 Newsweek cooling story" "Peter Gwynne 2014 self-attributed correction"
+  Typed.authorRetrospectiveCorrection Typed.primary
+  (globalCoolingGwynneOriginal1975 ∷ globalCoolingGwynneRetrospective2014 ∷ [])
+  "Exact same identified author explicitly links his 2014 statement to his 1975 original and warns against treating it as modern temperature evidence. This is stronger than stylistic resemblance but not source-to-source climate physics or proof of 1970s consensus."
+
+globalWFAToGreeningEarthSequel : Typed.TypedGenealogyEdge
+globalWFAToGreeningEarthSequel = Typed.typedGenealogyEdge
+  "GC-02" "1992 Western Fuels-funded IBR film" "1998 Greening Earth Society explicitly named sequel"
+  Typed.organisationalContinuity Typed.corroborated
+  (globalGreeningWFAFilmIndex1992 ∷ globalGreeningWFASequelIndex1998 ∷ [])
+  "Archivist identifies an original dated film and a named 1998 sequel tied to Western Fuels; institutionally continuous production and narrative campaign, NOT six extra independent CO2-growth experiments or proof of specific film budget payment."
+
+globalNASDisavowsOISMPetition : Typed.TypedGenealogyEdge
+globalNASDisavowsOISMPetition = Typed.typedGenealogyEdge
+  "GC-03" "OISM and Seitz 1998 petition and enclosed paper" "NAS Council 20 April 1998 institutional disavowal"
+  Typed.institutionalDisavowal Typed.primary
+  (globalOISM1998PetitionPrimary ∷ globalNAS1998PetitionDisavowal ∷ [])
+  "Positive first-party original NAS institutional response: PNAS/American Academy endorsement not implied by an ex-president cover letter and a PNAS-style document; no claim petition signatures are fabricated solely because Academy disavowed its relation."
+
+globalPlantGrowthIsNotNetClimateBenefit : Typed.TypedGenealogyEdge
+globalPlantGrowthIsNotNetClimateBenefit = Typed.typedGenealogyEdge
+  "GC-04" "Peer-reviewed observed greening and conditional CO2 fertilisation" "CO2 Coalition plant-food rhetoric presented as overall harmlessness"
+  Typed.extrapolationBeyondEvidence Typed.primary
+  (globalZhuOriginalGreening2016 ∷ globalTerrerFertilisationLimit2016 ∷ globalCO2CoalitionPlantFoodFirstParty ∷ [])
+  "Plant response is a physically supported partial positive effect. The blanket inference from growth or greening to net harmless or beneficial emissions discards heat, drought, crop nutrition, ocean and biodiversity impacts. This relation labels an inference boundary, NOT a proven temporal direct citation or source copy from Zhu/Terrer to CO2 Coalition."
+
+globalGwynneCorrectionIsNotScriptTransmission :
+  Typed.StrongHistoricalTransfer globalGwynne1975To2014AuthorCorrection → ⊥
+globalGwynneCorrectionIsNotScriptTransmission witness =
+  Typed.authorRetrospectiveCorrectionIsNotMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+globalNASInstitutionalDisavowalNotClimateMethodTransfer :
+  Typed.StrongHistoricalTransfer globalNASDisavowsOISMPetition → ⊥
+globalNASInstitutionalDisavowalNotClimateMethodTransfer witness =
+  Typed.institutionalDisavowalIsNotMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+globalPlantPremiseOvergeneralisationNotDocumentaryTransfer :
+  Typed.StrongHistoricalTransfer globalPlantGrowthIsNotNetClimateBenefit → ⊥
+globalPlantPremiseOvergeneralisationNotDocumentaryTransfer witness =
+  Typed.scientificPremiseExtrapolationIsNotMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+-- Finite no-go #1: two counterfactual worlds can have the identical
+-- REAL local positive fertilisation response, but diverge in NET global
+-- impact once other Earth-system components are included.
+-- The two worlds here are hypothetical mathematical carriers, not
+-- empirically fitted cases or a claim both global outcomes are equally
+-- probable in the actual climate.
+
+data PlantAndClimateWorld : Set where
+  enrichedPlantGlobalNetGain enrichedPlantGlobalNetLoss : PlantAndClimateWorld
+
+data PlantOnlyObservation : Set where positivePlantGrowth : PlantOnlyObservation
+
+data GlobalNetClimateAssessment : Set where
+  globalNetBenefit globalNetHarm : GlobalNetClimateAssessment
+
+observedPlantFertilisation : PlantAndClimateWorld → PlantOnlyObservation
+observedPlantFertilisation _ = positivePlantGrowth
+
+wholeClimateOutcome : PlantAndClimateWorld → GlobalNetClimateAssessment
+wholeClimateOutcome enrichedPlantGlobalNetGain = globalNetBenefit
+wholeClimateOutcome enrichedPlantGlobalNetLoss = globalNetHarm
+
+samePlantGrowthDifferentGlobalNetAssessment :
+  INF.NonFactorabilityWitness observedPlantFertilisation wholeClimateOutcome
+samePlantGrowthDifferentGlobalNetAssessment =
+  INF.nonFactorabilityWitness
+    enrichedPlantGlobalNetGain enrichedPlantGlobalNetLoss refl (λ ())
+
+positivePlantResponseDoesNotIdentifyGlobalNetImpact :
+  INF.FactorsThrough observedPlantFertilisation wholeClimateOutcome → ⊥
+positivePlantResponseDoesNotIdentifyGlobalNetImpact =
+  INF.witnessRulesOutEveryFlatFactorisation
+    samePlantGrowthDifferentGlobalNetAssessment
+
+-- Finite no-go #2: one 1975 Newsweek article exists in more than one
+-- possible historical field configuration. A single article is neither
+-- a peer-reviewed survey nor enough evidence to identify all scientists'
+-- prevailing conclusion for that period.
+
+data HistoricalLiteraturePopulationWorld : Set where
+  coolingHypothesisDominant warmingHypothesisDominant : HistoricalLiteraturePopulationWorld
+
+data SingleMediaArticleObservation : Set where
+  sameNewsweek1975Article : SingleMediaArticleObservation
+
+data HistoricalScientificConsensusType : Set where
+  coolingConsensus warmingConsensus : HistoricalScientificConsensusType
+
+sampledHistoricalMediaPresence :
+  HistoricalLiteraturePopulationWorld → SingleMediaArticleObservation
+sampledHistoricalMediaPresence _ = sameNewsweek1975Article
+
+hypotheticalScientificMajority :
+  HistoricalLiteraturePopulationWorld → HistoricalScientificConsensusType
+hypotheticalScientificMajority coolingHypothesisDominant = coolingConsensus
+hypotheticalScientificMajority warmingHypothesisDominant = warmingConsensus
+
+sameNewsweekArticleDifferentScientificField :
+  INF.NonFactorabilityWitness
+    sampledHistoricalMediaPresence hypotheticalScientificMajority
+sameNewsweekArticleDifferentScientificField =
+  INF.nonFactorabilityWitness
+    coolingHypothesisDominant warmingHypothesisDominant refl (λ ())
+
+oneCoolingMagazineArticleCannotDetermineScientificConsensus :
+  INF.FactorsThrough
+    sampledHistoricalMediaPresence hypotheticalScientificMajority → ⊥
+oneCoolingMagazineArticleCannotDetermineScientificConsensus =
+  INF.witnessRulesOutEveryFlatFactorisation
+    sameNewsweekArticleDifferentScientificField
+
+
+------------------------------------------------------------------------
+-- PERSON-SPECIFIC historical continuity, WITHOUT funding or script leap:
+-- Seitz's first-person PBS testimony links RJR tobacco and the Marshall
+-- Institute (pre-existing source seitzPBS); OISM's publisher first-party
+-- 1998 cover identifies Seitz as petition covering-letter author.
+-- Same person, DISTINCT roles and decades. Cannot infer RJR tobacco
+-- payment FINANCED OISM petition or its content.
+--
+-- Archive credits Sallie Baliunas among WFA 1998 film-family contributors;
+-- 1998 OISM original manuscript lists her as author. This is a positive
+-- person overlap in two original-document families, NOT paid WFA→OISM
+-- publication or script transfer.
+------------------------------------------------------------------------
+
+globalOISMOriginalManuscript1998 : Typed.SourceReceipt
+globalOISMOriginalManuscript1998 = Typed.sourceReceipt
+  "Arthur B Robinson; Sallie L Baliunas; Willie Soon; Zachary W Robinson"
+  "Environmental Effects of Increased Atmospheric Carbon Dioxide, circulated manuscript"
+  "1998-01"
+  "https://ossfoundation.org/wp-content/uploads/2023/01/Oregon_Petition-reduced.pdf"
+  "Scanned January 1998 original manuscript carries named authors. Third-party archive copy, not National Academy publication and not evidence later 1999 journal version is byte-identical."
+
+globalWFA1998NamedFilmContributorsIndex : Typed.SourceReceipt
+globalWFA1998NamedFilmContributorsIndex = Typed.sourceReceipt
+  "Greening Earth Society; Western Fuels Association; Climate Files archive"
+  "The Greening of Planet Earth Continues and affiliated promotional media"
+  "1998"
+  "https://www.climatefiles.com/trade-group/1998-greening-earth-society/"
+  "Archive's 1998 promotional package identifies Sallie Baliunas as a named featured speaker in the films. Film credit original not independently rewatched; source grading corroborated."
+
+globalSeitzPBSRoleToOISMPetition : Typed.TypedGenealogyEdge
+globalSeitzPBSRoleToOISMPetition = Typed.typedGenealogyEdge
+  "GC-05" "Frederick Seitz RJR and Marshall first-person roles" "Frederick Seitz signed OISM Kyoto petition covering letter"
+  Typed.personnelContinuity Typed.primary
+  (seitzPBS ∷ globalOISM1998PetitionPrimary ∷ [])
+  "Positive identity of historical actor in tobacco-funded research committee and later named original petition letter. Does NOT establish RJR transmitted money, methods or orders to OISM nor that NAS endorsed petition."
+
+globalBaliunasTwoDocumentFamilies : Typed.TypedGenealogyEdge
+globalBaliunasTwoDocumentFamilies = Typed.typedGenealogyEdge
+  "GC-06" "Sallie Baliunas named in WFA-linked 1998 greening film campaign" "Sallie L Baliunas named original OISM 1998 CO2 manuscript author"
+  Typed.personnelContinuity Typed.corroborated
+  (globalWFA1998NamedFilmContributorsIndex ∷ globalOISMOriginalManuscript1998 ∷ [])
+  "Archived film-family personnel and original manuscript authorship document shared person, not identical science, paid WFA-OISM commission or editorial direction."
+
+globalSeitzContinuityNotPaidOISMScript :
+  Typed.StrongHistoricalTransfer globalSeitzPBSRoleToOISMPetition → ⊥
+globalSeitzContinuityNotPaidOISMScript witness =
+  Typed.personnelContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+globalBaliunasContinuityNotWFAtoOISMCommission :
+  Typed.StrongHistoricalTransfer globalBaliunasTwoDocumentFamilies → ⊥
+globalBaliunasContinuityNotWFAtoOISMCommission witness =
+  Typed.personnelContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- SAME ORIGINAL 1998 VIDEO, THREE DISTINCT WORLDWIDE TALKING POINTS.
+-- Archival named-speaker transcript excerpts of GES/WFA "The Greening of
+-- Planet Earth Continues" put CO2 is beneficial, climate models unreliable
+-- (Patrick Michaels), and hurricanes/tornadoes not linked to greenhouse gas
+-- accumulation (Robert Balling) inside ONE PRODUCED film/campaign package.
+-- This is observable SOURCE CO-PACKAGING, not three independent pieces of
+-- empirical research, nor a proof every later similar speaker watched it.
+-- Original archived full PDF/video not successfully re-fetched (403).
+------------------------------------------------------------------------
+
+globalWFA1998GreeningAndModelClaimsSameFilm : Typed.TypedGenealogyEdge
+globalWFA1998GreeningAndModelClaimsSameFilm = Typed.typedGenealogyEdge
+  "GC-07" "WFA 1998 CO2 greening/nutrient message" "WFA 1998 Patrick Michaels climate model dismissal"
+  Typed.coPackagedClaims Typed.corroborated
+  (globalGreeningWFASequelIndex1998 ∷ [])
+  "One archive-indexed original named film/transcript carries BOTH CO2 plant-benefit claims and Michaels' criticism of projected warming/climate models. Distinct rhetorical propositions but ONE source object. Attribution is archival named-speaker transcript excerpt; full film not rechecked."
+
+globalWFA1998GreeningAndExtremeWeatherSameFilm : Typed.TypedGenealogyEdge
+globalWFA1998GreeningAndExtremeWeatherSameFilm = Typed.typedGenealogyEdge
+  "GC-08" "WFA 1998 CO2 greening/nutrient message" "WFA 1998 Robert Balling greenhouse-extreme-weather dismissal"
+  Typed.coPackagedClaims Typed.corroborated
+  (globalGreeningWFASequelIndex1998 ∷ [])
+  "Same film also quotes Balling regarding hurricanes/tornadoes and alleged absent greenhouse link. Not a separate original empirical study or proof a later broadcaster copied this particular sentence."
+
+globalCoPackagedClaimsCannotProveLaterScriptTransmission :
+  Typed.StrongHistoricalTransfer globalWFA1998GreeningAndModelClaimsSameFilm → ⊥
+globalCoPackagedClaimsCannotProveLaterScriptTransmission w =
+  Typed.coPackagedClaimsDoNotProveHistoricalTransfer
+    (Typed.relationIsTransfer w)
+
+-- One original film can publish THREE claim families. Without original
+-- artifact identity, seeing three talking-point cards cannot tell whether
+-- one campaign or three genuinely independent original documents exist.
+-- Actual archived 1998 source has one-film identity; this hypothetical
+-- two-source-world demonstration is NOT an estimate of global source counts.
+
+data ThreeTalkingPointsProvenanceWorld : Set where
+  oneOriginalCampaignFilm threeIndependentOriginalFilms : ThreeTalkingPointsProvenanceWorld
+
+data VisibleThreeTalkingPoints : Set where
+  sameThreeClaimLabels : VisibleThreeTalkingPoints
+
+data OriginalPublicationObjectMultiplicity : Set where
+  singleDocument threeDistinctDocuments : OriginalPublicationObjectMultiplicity
+
+threeTalkingPointsObserved : ThreeTalkingPointsProvenanceWorld → VisibleThreeTalkingPoints
+threeTalkingPointsObserved _ = sameThreeClaimLabels
+
+originalObjectsForTalkingPoints :
+  ThreeTalkingPointsProvenanceWorld → OriginalPublicationObjectMultiplicity
+originalObjectsForTalkingPoints oneOriginalCampaignFilm = singleDocument
+originalObjectsForTalkingPoints threeIndependentOriginalFilms = threeDistinctDocuments
+
+threeObservedClaimsDifferentOriginalRootCounts :
+  INF.NonFactorabilityWitness threeTalkingPointsObserved originalObjectsForTalkingPoints
+threeObservedClaimsDifferentOriginalRootCounts =
+  INF.nonFactorabilityWitness
+    oneOriginalCampaignFilm threeIndependentOriginalFilms refl (λ ())
+
+threeClaimHeadlinesDoNotIdentifyIndependentOriginals :
+  INF.FactorsThrough threeTalkingPointsObserved originalObjectsForTalkingPoints → ⊥
+threeClaimHeadlinesDoNotIdentifyIndependentOriginals =
+  INF.witnessRulesOutEveryFlatFactorisation
+    threeObservedClaimsDifferentOriginalRootCounts
