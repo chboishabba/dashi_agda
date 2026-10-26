@@ -831,3 +831,27 @@ D. Retain Machin and fixed-point exp(i) powering as independently
 E. Do not materialise I_9: 9^^9 is a CAPACITY/TYPE theorem.
    Construct a costed on-demand evaluator for the selected fibre,
    and require a paid correctness and depth-independent cost theorem.
+
+## Additional exact source-specific aperiodicity boundary
+
+For the REAL seed alpha=1/(2*pi), the literal 99-power circle
+orbit is neither periodic nor eventually periodic. Indeed if for
+integers n>=0,t>=1 one had
+   {99^(n+t) alpha} = {99^n alpha},
+then
+   (99^(n+t)-99^n)/(2*pi) is an integer m.
+The numerator is a nonzero integer, so m cannot be zero, and this
+equality implies pi=(99^(n+t)-99^n)/(2m), a rational number,
+contradicting the classical irrationality of pi (Lambert, 1761).
+This applies ONLY to the literal full-phase orbit. It does not
+exclude an eventually periodic selected signed observation, a
+compressed infinite nonperiodic cocycle, or a target-only analytic
+identity. Therefore rational-period RSA/Shor reduction is a fully
+successful *finite-seed control* but cannot be pasted onto the
+actual phase with the same period witness.
+
+The same caveat prevents treating self-indexed function-carrier
+capacity (9^^9) as source-validated random-access digit precision.
+An explicit analytic producer, correctness proof and cost account
+remain required. The BIDI backward stage is actively falsified by
+the Machin-checked rational approximation surrogate at n=2.
