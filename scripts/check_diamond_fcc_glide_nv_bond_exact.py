@@ -124,3 +124,30 @@ bond_stab=sum(
 assert site_stab==24 and bond_stab==6
 print("PASS: 192 conventional-cell affine operations and all 36864 products")
 print("PASS: 8 diamond motif sites, site stabilizer 24, oriented bond C3v 6")
+
+# Three independently published IUCr Fd-3m origin-choice-1 operations:
+# (2)  (-x,-y+1/2,z+1/2)
+# (13) (y+3/4,x+1/4,-z+3/4)
+# (25) (-x+1/4,-y+1/4,-z+1/4)
+assert (((0,1,2),(-1,-1,1)),(0,2,2)) in operators
+assert (((1,0,2),(1,1,-1)),(3,1,3)) in operators
+assert (((0,1,2),(-1,-1,-1)),(1,1,1)) in operators
+print("PASS: three literal IUCr Fd-3m origin-choice-1 operations")
+
+# Reciprocal FCC vectors are conventional cubic integer wavevectors
+# (kx,ky,kz) whose components have equal parity (a bcc index lattice).
+# The genuine reciprocal test is pairing divisible by four in the
+# quarter-cell coordinate convention; checks include both directions.
+primitive_generators=[fcc((1,0,0)),fcc((0,1,0)),fcc((0,0,1))]
+def dot(p,k):return sum(a*b for a,b in zip(p,k))
+for k in product(range(-3,4),repeat=3):
+    valid=all(dot(t,k)%4==0 for t in primitive_generators)
+    same_parity=(k[0]-k[1])%2==0 and (k[1]-k[2])%2==0
+    assert valid==same_parity
+for u,v,w,a,b,c,s in product((-1,0,1),repeat=7):
+    t=fcc((u,v,w))
+    k=(2*a+s,2*b+s,2*c+s)
+    n=a*(v+w)+b*(u+w)+c*(u+v)+s*(u+v+w)
+    assert dot(t,k)==4*n
+print("PASS: FCC↔BCC reciprocal criterion on 343 wavevectors;")
+print("PASS: universal quartic-index pairing identity on 2187 integer fixtures")
