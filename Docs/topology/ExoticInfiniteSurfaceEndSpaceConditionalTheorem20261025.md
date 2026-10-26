@@ -343,3 +343,128 @@ neighbourhood basis, same-object homeomorphism to
 the balanced prefix streams and the formal Richards
 classification. The finite 27-frontier fixture does
 not discharge these infinite theorems.
+
+
+## 27 October: finite vertex-star stability supplies the local-finiteness cut
+
+**New direct implementation:** `scripts/exotic_topology_pl_stable_stars.py`
+(reusing the existing geometry/transition and genuinely transported
+simplicial maps). Each old finite stage K_n is included in K_(n+1)
+by the actual sequence of oriented PL boundary gluings. The new
+checker tests the precise three-stage condition
+
+1. every old vertex v in K_n has a DISTINCT image v' in K_(n+1);
+2. v' belongs to no K_(n+1) boundary loop and its link is a circle
+   by the existing manifold vertex-link inspection;
+3. for every K_(n+2) inclusion, the FULL set of triangles incident
+   with image(v') is exactly the image of its star in K_(n+1).
+   No new face may meet that original vertex later.
+
+It tests two sliding three-stage windows for each of **four**
+families: binary Cantor, Loch Ness, Jacob, and the new balanced
+three-way Cantor. A separate deliberate non-injective old-vertex
+map is rejected. Both old source `transition` implementations
+have acquired a backwards-compatible `with_transport=True`
+argument; the original `(stage,receipt)` return contract
+is unchanged for all existing callers. The ternary codeword
+Kraft-sum check is now exact `fractions.Fraction`, not a
+floating-point sum.
+
+**Independent local Python execution receipt (27 October): PASS**
+of two windows in each family, including the actual mid/later
+triangle-star equality, not merely boundary counts:
+- binary Cantor: old vertices 3 and 152; mid/later
+  triangle counts 298/892 and 892/2080;
+- Loch Ness: 3 and 36; counts 71/141 and 141/211;
+- Jacob: 152 and 218; counts 438/578 and 578/718;
+- balanced ternary: 3 and 301; counts 595/2377 and 2377/7723.
+The exact pushed GitHub source is not claimed executed
+until a matching job/log or source snapshot is available.
+
+### A stronger mathematical conditional theorem than H1–H5
+
+**Source theorem (paper-level; not Agda/Lean checked).** Let
+`K_0 → K_1 → …` be a sequence of *finite abstract
+simplicial complexes* with injective simplicial transition
+maps, each K_n a connected compact orientable PL surface
+with boundary. Assume each `K_n → K_(n+1)` attaches disjoint
+finite oriented PL collars only along EVERY old boundary circle,
+never identifies distinct vertices/triangles within the old
+complex, and all old boundary vertices become interior.
+Then in the abstract simplicial direct union K∞:
+
+- An old vertex v first appears in some finite K_n. By
+  the next stage all old boundary circles are sewn along
+  correctly oriented compact 2-manifold pieces. Hence the
+  link of the image of v in K_(n+1) is a finite cycle.
+  Subsequent gluings attach only at *current boundary*
+  vertices, so cannot add new simplices incident to v:
+  **the star stabilises permanently** (by induction
+  on later stages).
+- Every vertex has finitely many incident simplices;
+  K∞ is a locally finite, countable, pure 2-dimensional
+  abstract simplicial complex, all vertex links circles.
+  Its standard weak geometric realisation |K∞| is thus
+  a connected orientable PL 2-manifold **without boundary**,
+  and is Hausdorff, second countable and locally compact.
+- Every compact subset of |K∞| is contained in a finite
+  subcomplex and hence in some K_N (compact cofinality).
+  This is an ACTUAL consequence of weak geometric
+  realisation and the finite-stage locally finite structure,
+  rather than a freestanding assumed topology H4.
+
+The (source-written finite executable) gluing/vertex-link
+and complement-component tests establish concrete *instances*
+of those hypotheses. A uniform mathematical induction
+over the same **two finite pants or handle attachment
+templates** is the remaining step before asserting the
+theorem for ALL n. The actual abstract simplicial
+direct union / weak geometric realisation and its
+topological claims are not yet built in Lean/Agda.
+Avoid confusing the finite Python checks with a proof
+of this countably infinite constructor.
+
+The end-space identification also needs one **different**
+uniform argument: the complementary tail at each old
+boundary must remain connected and never join a
+different tail at a later stage. The exact complementary
+component tests witness this at each finite tested
+transition. Under the uniform no-cross-gluing rule
+implemented in the recursive scheduler, inductively
+each initial component carries precisely its infinite
+descendant subtree. Those tail components are unbounded;
+compact cofinality implies that every genuine Richards
+end is represented by a unique nested tail selection;
+and the compact-frontier end basic opens become exactly
+the binary or balanced-ternary chronological prefix
+cylinders. Only after this topological identification
+may Richards' actual decorated ideal-boundary theorem
+classify the surface. The binary and balanced ternary
+genus-zero surfaces have the SAME Cantor planar-end
+homeomorphism type, not distinct exotic types.
+
+**Original-source / modern mathematical donor boundary:**
+- Ian Richards, *On the Classification of Noncompact
+  Surfaces*, Trans. AMS 106 (1963) 259–269,
+  https://people.dm.unipi.it/benedett/Richards.pdf ,
+  printed p.261 Definitions 1–3 (nested unbounded
+  connected regions, properness and end topology),
+  pp.262–263 Proposition 3 and Theorem 1.
+- Brahana (1921), compact bordered surface
+  classification, as directly credited by Richards.
+- Kerékjártó (1923), earlier classification claim,
+  with Richards documenting proof gaps and adding
+  ideal-boundary realisation.
+- Standard geometric-realisation and locally finite
+  simplicial-complex results (e.g.
+  https://ncatlab.org/nlab/show/simplicial%20complex )
+  underlie the conventional paper lemma above.
+  This is no citation of a current Lean/Agda theorem
+  with the same statement, and is not an independent
+  source for Richards' own classification.
+
+**Source custody:** the original triangulation,
+Trit/SSP369, Hatcher and Cantor module owners are
+unchanged. Only the independent star-stability
+consumer, its tests, and the backward-compatible
+optional map exposure are new project implementations.
