@@ -227,9 +227,23 @@ glideXSitePosition (B p) =
       (cong shiftFcc1 (fccFlipX p))
       (glideDeltaCompatibility (fccPoint p)))
 
+quarterDeltaCommutesShiftFcc1 : (p : L.Triple ℤ) →
+  quarterDelta (shiftFcc1 p) ≡ shiftFcc1 (quarterDelta p)
+quarterDeltaCommutesShiftFcc1 (L.xyz x y z) =
+  tripleExt refl
+    (RingZ.solve 1
+      (λ y → (Κ (+ 1) ⊕ (y ⊕ Κ (+ 2)) ,
+                (Κ (+ 1) ⊕ y) ⊕ Κ (+ 2)))
+      refl y)
+    (RingZ.solve 1
+      (λ z → (Κ (+ 1) ⊕ (z ⊕ Κ (+ 2)) ,
+                (Κ (+ 1) ⊕ z) ⊕ Κ (+ 2)))
+      refl z)
+
 translation1Position :
   (s : DiamondSite) →
   sitePosition (translation1 s) ≡ shiftFcc1 (sitePosition s)
 translation1Position (A p) = fccShiftPrimitive1 p
 translation1Position (B p) =
-  cong quarterDelta (fccShiftPrimitive1 p)
+  trans (cong quarterDelta (fccShiftPrimitive1 p))
+        (quarterDeltaCommutesShiftFcc1 (fccPoint p))
