@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from check_psychotronics_bangor_1953_cloud_csv import (
     STATION, BASENAME, BUCKET, list_station_key, inspect_csv_text,
     acquire_from_actual_listing, inspect_file,
