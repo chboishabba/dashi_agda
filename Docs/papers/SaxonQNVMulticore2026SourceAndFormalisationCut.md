@@ -83,3 +83,22 @@ Attribution: ideal Grover and circuit invariants are standard prior mathematical
 Local reproduction of the 81 distributivity cases, variance and covariance identities passed under Python 3; the full committed source has not been executed as a file in this environment. The first version of the tensor-product test erroneously compared an inner product to a four-term product expansion; corrected in commit `50e0b56d` before this receipt. This correction is recorded as part of the revisable knowledge trail, not erased.
 
 Provenance: mathematical identities are standard linear algebra and probability; experiment by Gemsheim et al. (arXiv:2609.13022); manufacturer core topology claims by SAXON Q; exact regression adaptation and correction by Johl Brown and OpenAI assistant, 2026-10-26. The path from these identities to an SXQ128 instrument is **not proven**.
+
+
+## 2026-10-26 no-duplication cross-PR gate (additional cut)
+
+A redundant `SaxonQFiniteCoreAddressExact.agda` was briefly introduced at commit `8b1d3923`, then **deleted** at `fe9a2ef9` in the same branch because PR #1262 already owns `Core=Fin 16`, `Site=Fin 8`, `Address`, and `LocalGate.pairWithinCore`. No duplicate local-gate definitions should persist in this PR. The correction is retained for accountability.
+
+Exact dependency ownership, confirmed from the changing file lists at the PR heads:
+- **#1262**: NVSpinOneMulticoreAdapter, C3 chart/Hamiltonian obstruction, finite SUSY factorisation.
+- **#1269**: NVMCGQuantumComputingSameObjectWeldExact, NV photon two-shot/history, Bayesian and readout identifiability surfaces.
+- **#1261**: DiamondNVFourAxisPermutationExact and DiamondTernary111AxisBridgeExact.
+- **#1270**: limited candidate spin-one→logical basis retraction, ideal Grover and exact circuit-cutting regressions, and attributed source/evidence ledger.
+
+For a **stacked merge**, import #1262's actual `NVSpinOneMulticoreAdapter.Address` and `LocalGate` as canonical; do not declare replacements. Consume #1269's `labelToKet`/`ketToLabel` bijection and `axialSwapFieldReversal` (source-specific real spectral results) only after dependency commit alignment. The #1269 branch explicitly warns that the other PR is not merged; therefore imports in #1270 currently remain **unresolved cross-branch obligations** and a documentation pointer is *not* an implementation of their composition.
+
+**Readout seam has advanced in #1269**: `NVPhotonHistoryCountSufficiencyExact.agda`, `NVPhotonPascalCountClassesExact.agda`, and `scripts/check_nv_photon_count_class_bounds_exact.py` were present at this audit, in addition to previously listed two-shot kernels. Do not implement a duplicate generic photon likelihood. The genuinely source-specific tasks are calibrating its parameters, mapping the measured detector protocol to the paper's count/histogram, and obtaining source-authenticated raw count data.
+
+**Formal theorem boundary**: a finite ket-label retraction is weaker than a Hilbert-space isometry; a 16×8 namespace is weaker than a connected register; an ideal Grover success identity is weaker than a device pulse compilation theorem; and a signed classical cutting sum is weaker than a calibrated multicore speedup. No experimental data, proof authority, authorship or peer-review status is promoted by these correspondences.
+
+Attribution: underlying spin representation, quantum bridge, C3, qutrit, diamond crystal and photon readout developments retain their original module/PR origin and their original cited mathematical authors. Grover reference: L. K. Grover (1996), DOI 10.1145/237814.237866. Gemsheim et al. (2026) receive attribution for their experiment; SAXON Q for vendor architectural/product assertions; identification of reuse obligations and correction here is an adaptation by Johl Brown with OpenAI assistance, 26 October 2026.
