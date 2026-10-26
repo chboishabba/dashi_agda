@@ -309,7 +309,7 @@ millerFiniteSampleBudgetFirstImplementation =
     "2026-10-26T12:19:22Z"
     "2026-10-26T22:19:22+10:00"
     "Australia/Brisbane"
-    Chronology.completedProofImplemented
+    Chronology.theoremStatementImplemented
     Chronology.sourceCommittedOnly
 
 -- This is a separately executed finite symbolic source consistency check,
@@ -339,7 +339,7 @@ millerSteepDirectionFirstImplementation =
     "2026-10-26T14:27:10Z"
     "2026-10-27T00:27:10+10:00"
     "Australia/Brisbane"
-    Chronology.completedProofImplemented
+    Chronology.theoremStatementImplemented
     Chronology.sourceCommittedOnly
 
 -- Weighted quadrature is a finite Lemma, not L4_t L2_x convergence.
@@ -352,7 +352,7 @@ millerWeightedQuadratureFirstImplementation =
     "2026-10-26T14:30:44Z"
     "2026-10-27T00:30:44+10:00"
     "Australia/Brisbane"
-    Chronology.completedProofImplemented
+    Chronology.theoremStatementImplemented
     Chronology.sourceCommittedOnly
 
 -- The source-blind direction-gradient collision explicitly REUSES the
