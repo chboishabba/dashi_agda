@@ -751,7 +751,7 @@ def test_climate_origins_same_api_plan_and_actual_people_not_url_multiplicity():
     manifest = ROOT / "Docs/support/reference/climate_genealogy_typed_edges.csv"
     with manifest.open(newline="", encoding="utf-8") as src:
         records = list(csv.DictReader(src))
-    assert len(records) == 36
+    assert len(records) == 40
     ids = [r["edge_id"] for r in records]
     assert len(ids) == len(set(ids))
     contributed = [r for r in records if re.fullmatch(r"E8-\d\d", r["edge_id"])]
@@ -790,7 +790,7 @@ def test_climate_origins_same_api_plan_and_actual_people_not_url_multiplicity():
     assert "900m amount includes all activities" in docs.lower() or (
         "900m amount includes all activities" in climate.lower()
     ) or "900m amount includes all activities" in docs.lower()
-    assert "36 rows" in docs
+    assert "40 rows" in docs
     assert "same-NAMED-PERSON continuity" in docs
 
 
@@ -819,13 +819,13 @@ def test_original_ice_and_singer_budget_states_do_not_invent_payment():
         newline="", encoding="utf-8"
     ) as fd:
         cases = {r["edge_id"]: r for r in csv.DictReader(fd)}
-    assert len(cases) == 36
+    assert len(cases) == 40
     assert cases["E9-12"]["relation_kind"] == "organizational_continuity"
     assert cases["E9-13"]["relation_kind"] == "funding_commitment"
     assert cases["E9-14"]["relation_kind"] == "organizational_continuity"
     assert cases["E9-15"]["relation_kind"] == "funding_proposal"
     assert cases["E9-13"]["evidence_strength"] == "B_corroborated"
-    assert cases["E9-15"]["evidence_strength"] == "A_primary"
+    assert cases["E9-15"]["evidence_strength"] == "B_corroborated"
     assert "payment transaction not independently inspected" in cases["E9-13"]["notes"]
     assert "not evidence it was disbursed" in cases["E9-15"]["notes"]
 
@@ -842,6 +842,61 @@ def test_original_ice_and_singer_budget_states_do_not_invent_payment():
                  "southern1991PledgeCannotEstablishMethodTransfer"):
         assert item in validation
     doc = RESEARCH.read_text()
-    assert "36 rows total" in doc
+    assert "40 rows total" in doc
     assert "Singer → tobacco funders" in doc
     assert "this audit has **not acquired** a specific dated BP internal technical memo" in doc
+
+
+def test_gcc_acsh_commission_editorial_rights_and_published_file_are_distinct():
+    """CIC documented contract/editorial authority is not proof of exact 1997 text identity."""
+    import re
+    typed = (ROOT / "DASHI/Governance/TypedGenealogyEdgeExact.agda").read_text()
+    climate = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    validation = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    with (ROOT / "Docs/support/reference/climate_genealogy_typed_edges.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        cases = {row["edge_id"]: row for row in csv.DictReader(handle)}
+    assert len(cases) == 40
+
+    expected = {
+        "E9-16": "commissioned_research",
+        "E9-17": "editorial_review_rights",
+        "E9-18": "topical_publication_match",
+        "E9-19": "funding",
+    }
+    for id_, rel in expected.items():
+        assert cases[id_]["relation_kind"] == rel
+        assert cases[id_]["evidence_strength"] == "B_corroborated"
+    assert "not proof" in cases["E9-18"]["notes"].lower() or "unproven" in cases["E9-18"]["notes"].lower()
+    assert "not" in cases["E9-17"]["notes"].lower()
+    assert "USD2774000" in cases["E9-19"]["notes"]
+
+    for relation in ("commissionedResearch", "editorialReviewRights", "topicalPublicationMatch"):
+        assert relation + " : RelationKind" in typed
+    for named in (
+        "gccACSHCommissionedClimateHealth", "gccACSHDocumentedEditorialReviewRights",
+        "gccACSH1997PublicPaperMatch", "exxonToCHCReportedPostAPIGrants",
+        "gccACSHSharedSubjectNotIdenticalFinalFile",
+        "gccACSHContractualRightsNotProofOfSpecificScientificEdit",
+    ):
+        assert named in climate
+    for named in (
+        "gccACSHResearchWasCommissionedAccordingToArchive",
+        "gccACSHClientReviewRightsNotProofOfActualEditing",
+        "gccACSHPublishedSubjectOverlapNotSameFile",
+        "exxonLaterCHCFundingIsBoundedHistoricalReporting",
+        "acshTopicalMatchCannotProveTransfer",
+        "acshEditorialDiscretionDoesNotProveSpecificScientificEdit",
+        "singerGCCProposalUnacquiredDocumentIsCorroborated",
+    ):
+        assert named in validation
+
+    assert "Typed.fundingProposal Typed.corroborated" in climate
+    assert cases["E9-15"]["evidence_strength"] == "B_corroborated"
+    assert "subsequently disputed" in cases["E8-02"]["notes"]
+    assert re.search(r"apiNamedContributorCandaceCrandall : Typed.TypedGenealogyEdge", climate)
+    docs = RESEARCH.read_text()
+    assert "40 source-qualified rows" in docs
+    assert "DocumentCloud page retrieval failed" in docs
+    assert "no evidence the USD73,000 was ever paid" in docs
