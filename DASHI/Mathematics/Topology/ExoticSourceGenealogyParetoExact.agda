@@ -187,6 +187,22 @@ atiyahCobordismVocabulary = A.mkDOISource
   "source owner for TQFT/cobordism formal vocabulary only; actual signed ternary 1-to-3 finite PL triangulation and 369 address-to-pants mapping are separate DASHI implementations"
   A.publicAttribution
 
+-- Power's 2024 preprint -> 2025 peer-reviewed publication: ONE
+-- intellectual source root with versions, not two corroborating studies.
+-- Its constructive (3,6)-tight existence theorem is NOT a certificate
+-- that DASHI's independently produced PL triangulations are tight.
+powerNoncompactRigidityOriginal : A.AttributedSource
+powerNoncompactRigidityOriginal = A.mkDOISource
+  "Stephen C. Power"
+  "Noncompact surfaces, triangulations and rigidity"
+  "Bulletin of the London Mathematical Society 57 (2025), 2097-2115; preprint arXiv:2403.11986 (2024)"
+  "2025"
+  "10.1112/blms.70083"
+  "https://doi.org/10.1112/blms.70083"
+  A.academicArticleSource
+  "modern constructive existence of (3,6)-tight and minimally 3-rigid triangulations for noncompact surfaces, plus a proof of the classical classification; it does not prove these properties for the particular DASHI meshes, and does not supersede Richards or Kerekjarto original source credit"
+  A.publicAttribution
+
 originalsAndImplementation : List A.AttributedSource
 originalsAndImplementation =
   richardsOriginal ∷
@@ -200,9 +216,10 @@ originalsAndImplementation =
   mardesicShapeSurvey ∷
   hatcherBook ∷
   atiyahCobordismVocabulary ∷
+  powerNoncompactRigidityOriginal ∷
   mccarthyLeanSphere ∷ []
 
-originalCount : A.sourceCount originalsAndImplementation ≡ 12
+originalCount : A.sourceCount originalsAndImplementation ≡ 13
 originalCount = refl
 
 exoticTopologyAtlas : A.AttributedSourceAtlas
