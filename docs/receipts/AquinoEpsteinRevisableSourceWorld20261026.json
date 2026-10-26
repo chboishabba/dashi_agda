@@ -925,6 +925,22 @@
       "same_campaign_causal_influence_established": false,
       "quote_is_not_independent_reproduction": true,
       "reopens_on": "Exact IPA submission PDF paragraph, original NSA survey version and same-object financing/contract receipt if any; reject inferred HPPL editorial instruction absent commissioned deliverable."
+    },
+    "policy_2022_related_smith_amendment_attempt": {
+      "original_parliamentary_analyst": "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentive2022/Report/section?id=committees%2Freportsen%2F024985%2F80108",
+      "original_scope": "Senate Community Affairs 2022 Nov report Chapter 1 paragraphs 1.41-1.46",
+      "smith_bill_committee_recommendation": "Smith 3 Aug private bill; 30 Sep committee recommended against passage, not approved",
+      "senior_health_card_bill_amendment": "28 Sep 2022 Senate passed amendments to different Seniors Health Card bill incorporating key Smith-style provisions (committee-reported)",
+      "house_response": "House did not accept the Senate-added provisions; Senate did not insist",
+      "adoption_status": "unsuccessful_related_bill_amendment_attempt",
+      "not_to_conflate_with": "later Albanese-government Workforce Incentive Act No 55 assented 23 Nov 2022, which is a distinct statute",
+      "hancock_repeat_producer_dates": {
+        "smith_submission_3": "2022-08-16",
+        "government_submission_9": "2022-10-13",
+        "original_pdf_status": "official search-index text visible; native PDF page images 403/not inspected"
+      },
+      "private_direction_causation_established": false,
+      "evidence_note": "Observed Parliament procedure supports stage-specific policy transmission but no HPPL/IPA instruction-to-legislator identity or measured effectiveness. Identical sponsor names in two docket files do not make independent producer roots."
     }
   }
 }
