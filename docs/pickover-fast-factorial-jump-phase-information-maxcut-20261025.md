@@ -855,3 +855,26 @@ capacity (9^^9) as source-validated random-access digit precision.
 An explicit analytic producer, correctness proof and cost account
 remain required. The BIDI backward stage is actively falsified by
 the Machin-checked rational approximation surrogate at n=2.
+
+## Contemporary PR cross-pollination / promotion control (2026-10-26)
+* #1164 MERGED: torque/right-hand rule S3 orientation on 3x3/27,
+  orientation inversion and C3 conjugation, valid finite donor.
+* #1249 signed-zero/wave: 27-site NONPERIODIC P3^3 has 54 edges
+  versus periodic C3^3 with 81; do not identify the cube's grid
+  Laplacian with the cyclic Fourier diagonalization. Source adapters
+  retain sided zero and wave continuity data.
+* #1250 jFine/Monster 3B: action-first and character-discriminator
+  methodology, preserving operator action, stabilizers, held-out
+  source identities and proof statuses; no Monster-to-real-sine
+  promotion without same-object analytic intertwiner.
+* #1266 revisable observer no-go: source-first collision and
+  consumer-relative sufficiency with selective reopening. Its
+  explicit lesson is that collision evidence prunes observers
+  rather than forbidding all richer or source-specific residuals.
+* NS S3 reality-action: six leg permutations x independent
+  two-way reality gives 12 action witnesses, but the number of
+  DISTINCT orbit points depends on stabilizers. This is not
+  a 12-element free orbit theorem for all states.
+This audit promotes no new source author to the author of other
+sources' group identities, and attributes the periodic seed control
+to classical congruence reduction + repository-specific regression.
