@@ -41,3 +41,23 @@ c3CycleNotSzSquaredInvariant preserves =
 -- The obstruction holds for this nondegenerate symbolic Sz^2 profile.
 -- It does not assert it for D = 0, a driven effective Floquet operator,
 -- a differently chosen three-level subspace, or other Hamiltonians.
+
+-- By contrast, the reflection exchanging the degenerate +1/-1 levels
+-- preserves the symbolic Sz² spectrum.  It has order two, not three.
+swapPlusMinus : C3.C3 → C3.C3
+swapPlusMinus C3.c0 = C3.c2
+swapPlusMinus C3.c1 = C3.c1
+swapPlusMinus C3.c2 = C3.c0
+
+swapPlusMinusInvolutive :
+  ∀ x → swapPlusMinus (swapPlusMinus x) ≡ x
+swapPlusMinusInvolutive C3.c0 = refl
+swapPlusMinusInvolutive C3.c1 = refl
+swapPlusMinusInvolutive C3.c2 = refl
+
+swapPlusMinusPreservesSzSquared :
+  ∀ x → szSquaredEigenvalue (swapPlusMinus x)
+        ≡ szSquaredEigenvalue x
+swapPlusMinusPreservesSzSquared C3.c0 = refl
+swapPlusMinusPreservesSzSquared C3.c1 = refl
+swapPlusMinusPreservesSzSquared C3.c2 = refl
