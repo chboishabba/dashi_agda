@@ -93,7 +93,7 @@ universal signed-payment route to a general B theorem is **invalid**.
 ## Execution and proof levels
 
 New `tests/test_ns_r734_pure_plus_physical_w2_no_go.py`:
-**six locally executed exact SymPy tests passed**. They check real
+**nine locally executed exact SymPy tests passed**. They check real
 Fourier conjugation, transversality, genuine normalized H±
 polarization at positive and negative modes, actual projected
 Galerkin nonlinearity, exact dyadic critical energy/dissipation/
@@ -107,3 +107,36 @@ kernel inhabitant of the full physical trajectory. The original
 rational-carrier Agda implementation does not automatically inherit
 the irrational helical eigenprojectors in this concrete physical
 witness. No exact GitHub Actions/Agda/Lean kernel run is claimed.
+
+## Two extra independent source controls and rational barrier
+
+(1) The SAME nonlinear Galerkin forcing satisfies the exact
+unweighted physical kinetic energy cancellation
+  2 Re Σ_m <uhat(m),F_m> = 0.
+Thus the positive dyadic critical-energy production is a
+frequency-weighted *redistribution*, not energy creation.
+
+(2) The full unforced projected Navier–Stokes nonlinearity from
+pure-plus initial data has a **nonzero H-minus component**:
+`||H-_q F_q||²>0` at `q=(0,1,2)`. Do not confuse this
+trajectory with the independently globally regular
+Biferale–Titi *helical-decimated* dynamical system.
+
+(3) There is a strictly rational, radical-free quantitative
+certificate for the crucial sign. Since sqrt(5)>2 and
+sqrt(30)<11/2,
+  Pcrit=(5+sqrt(5)-sqrt(30))/10 > 3/20.
+Thus with scaling factor a=512, ν=1 and Dcrit=36,
+  Xcrit'(0)/a² = a Pcrit - 72
+              > 512*(3/20)-72 = 24/5 >0.
+The obstruction is not an uncertain floating-point result.
+All three further checks run in the exact SymPy test file,
+bringing the total to **9 passing tests**.
+
+**Source-state update:** the existing original
+`NSTriadKNR650AugmentedCriticalWeightedNormalFormRound734Exact.agda`
+and `NSTriadKNR650SharedWeightedQuarticCutRound735Exact.agda`
+now contain source-local audit comments identifying this
+counterexample. Their conditional algebraic record types and
+false promotion flags remain unchanged. No new numbered
+positive compiler was created or asserted.
