@@ -102,3 +102,63 @@ print("PASS 125 orbifold-even quotient clutch representatives: common diagonal Z
 print("PASS C33 line winding c1=2*(kR-kL), including forced-zero +/-2 sectors")
 print("PASS quotient Z3 label alone does not determine C33 line triviality")
 print("OPEN global section status of other Higgs fields, non-torus backgrounds, full CS/eta and field-space completion")
+
+
+# Stronger, full parity-even maximal-torus family (2026-10-26).
+# The earlier symmetric-doublet h_k(u) only gave EVEN Chi33 degrees.
+# That restriction is NOT imposed by the actual boundary group U(2).
+# In H0 = SU3c x U2L x U2R, allow each doublet eigenline a
+# separate integer winding:
+#   h_(p,m,n)(u) = diag(exp(2pi i(p/3+m)u),
+#                       exp(2pi i(p/3+n)u),
+#                       exp(-2pi i(2p/3+m+n)u)).
+# Every such path has determinant 1, preserves P=diag(-,-,+),
+# starts at I and ends at omega^p I. For a COMMON p in the
+# three factors, it closes in H=H0/Z3_diag. Its cover-lift deck
+# is p mod 3. The source C33 character is
+# det(U_R)/det(U_L), so its clutch winding is
+#   (mR+nR)-(mL+nL).
+# This reaches EVERY integer, including odd +/-1, even when
+# the nonliftable class p=1 stays fixed. No individual det(U)
+# need descend on the nonliftable quotient bundle; the R/L RATIO
+# does. It is INCORRECT to promote the symmetric even-degree
+# subfamily to a universal charge-two topological constraint.
+from itertools import product
+from fractions import Fraction as F
+
+def parity_even_lift_weights(p,m,n):
+    assert p in (0,1,2) and isinstance(m,int) and isinstance(n,int)
+    return (F(p,3)+m,F(p,3)+n,-F(2*p,3)-m-n)
+
+def chi33_line_winding(p,mL,nL,mR,nR):
+    return (parity_even_lift_weights(p,mL,nL)[2]-
+            parity_even_lift_weights(p,mR,nR)[2])
+
+number_tested=0
+for p in range(3):
+    for mc,nc,mL,nL,mR,nR in product(range(-1,2),repeat=6):
+        # Includes the colour lift: a valid G-quotient loop must
+        # have ONE COMMON p across all three SU3 factors.
+        for m,n in ((mc,nc),(mL,nL),(mR,nR)):
+            exponents=parity_even_lift_weights(p,m,n)
+            assert sum(exponents)==0 # SU3 determinant
+            assert all((q-F(p,3)).denominator==1 for q in exponents)
+        d=chi33_line_winding(p,mL,nL,mR,nR)
+        assert d.denominator==1
+        assert d==mR+nR-mL-nL
+        number_tested+=1
+assert number_tested==2187
+# Constructive universal integral degree within the SAME nonliftable
+# p=1 deck class, not just finite sampling.
+for target in range(-7,8):
+    assert chi33_line_winding(1,0,0,target,0)==target
+assert chi33_line_winding(1,0,0,0,0)==0
+assert chi33_line_winding(1,1,0,0,0)==-1
+assert chi33_line_winding(1,0,0,1,0)==1
+# Previous h_k is a SUBFAMILY m=n=k; retain its correct degree.
+for kL,kR in product(range(-2,3),repeat=2):
+    assert chi33_line_winding(1,kL,kL,kR,kR)==2*(kR-kL)
+print("PASS exact 2187 common-deck parity-even full-torus clutch representatives")
+print("PASS all integral Chi33 degrees are realizable in fixed p=1 quotient class")
+print("PASS old even-only family is restricted symmetric-doublet torus, not a universal constraint")
+print("OPEN physically normalized WZ, globally patched Higgs/defect action, quotient eta/CS5")
