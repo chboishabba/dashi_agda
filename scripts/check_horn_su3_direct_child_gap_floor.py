@@ -55,7 +55,7 @@ except ImportError:
 for length in (F(1,4),F(1,8)):
     necessary=F(3,5)/length
     assert necessary in (F(12,5),F(24,5))
-print('PASS illustrative short-child lengths 1/4,1/8 require M>24/5; no real horn source geometry')
+print('PASS source CONDITIONAL: L=1/4 requires M>12/5; L=1/8 requires M>24/5 (illustrative only)')
 
 # Negative controls: disconnected ring/W from a group generator not
 # Hatcher-marked does not inherit this pair-of-children condition.
