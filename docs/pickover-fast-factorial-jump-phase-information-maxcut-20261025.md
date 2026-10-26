@@ -226,3 +226,42 @@ requires proof that R's producer is efficient for N=99^(9999!).
 The source's consumer-relative necessity theorem is stronger and
 better targeted than a generic assertion that all coarse encodings
 must lose information.
+
+## 2026-10-26 jCoarse/jFine and consumer-admissible MDL/Pareto extension
+
+EXISTING PRIMARY OWNER: DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
+imports CoarseFineRelativeFibreExact and ConsumerRelativeReductionKernelExact,
+proving that jFine is a relative factor over jCoarse, that absolute depth
+splits into coarse+fine depth, and that fine-sensitive consumers defeat
+coarse-only reduction. The analytic observer counterpart is
+DASHI/Moonshine/JInvariantAnalyticJCoarseFineObserverExact.agda:
+finite structured j observation plus a Fricke equivariance interface,
+without an unjustified inverse to analytic modular points.
+This is the precise prior art, NOT a fresh coarse/fine analogy.
+Avoid identifying the finite J model with the real circle phase.
+
+COST/OPTIMISATION OWNERS: Core/AdmissibleConsumerMDLHyperfabricExact.agda
+requires hard admissibility and consumer sufficiency BEFORE minimising MDL;
+Core/RecursiveParetoFrontierLiftingExact.agda keeps separate cost axes and
+lifts only residual-relevant coordinates. P-vs-NP PR #1129 distinguishes
+representation description, materialisation and actual runtime; PR #1040
+demonstrates that identity observers can be efficient/lossless. This is a
+cost model and model-search heuristic, NOT a P≠NP theorem or a bound on
+Kolmogorov complexity of pi or the original target.
+
+Acceptance coordinates for an eligible signed-phase certificate:
+(1) description bits under a fixed stated coding convention,
+(2) producer time/bit complexity, (3) verifier cost,
+(4) retained residual size, (5) refinement/sensitivity coverage.
+A candidate with insufficient signed-query information is INELIGIBLE even
+if arbitrarily concise. A candidate dominated on every cost coordinate
+is Pareto-pruned. New runnable fixture
+scripts/check_pickover_jcoarse_jfine_mdl_pareto.py demonstrates collision
+in the middle C3 sector and the eligible frontier on ILLUSTRATIVE
+cost values. These costs are not measured physical timings.
+
+The actual target is to synthesize a rigorously analytic adequate
+jCoarse/jFine-compatible retained residual that survives factor-fibred
+99^E jumps with a sublinear producer+checker. Neither a short description
+of E nor high-dimensional carrier cardinality automatically implies this.
+No new real-phase sign or kernel verification receipt is claimed.
