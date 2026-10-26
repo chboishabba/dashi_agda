@@ -7,6 +7,7 @@ import DASHI.Governance.EvidenceGradedGenealogyCasesExact as Cases
 import DASHI.Governance.TypedGenealogyEdgeExact as Typed
 import DASHI.Governance.ClimateGenealogyTypedCasesExact as Climate
 import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.JohnPaperClaimPromotionAuditExact as Paper
 import DASHI.Governance.JohnPaperClaimManifestV2Exact as Manifest
 import DASHI.Governance.PalantirProcurementLegibilityAdapterExact as Palantir
@@ -498,3 +499,56 @@ donorActorInstitutionProximityDoesNotEstablishDecisionControl :
   Proximity.InfluenceThroughProximity → ⊥
 donorActorInstitutionProximityDoesNotEstablishDecisionControl =
   Proximity.influenceDoesNotFactorThroughProximity
+
+
+------------------------------------------------------------------------
+-- Repeated exact 2026 Australian financial headline is not the number of
+-- underlying independent estimation paths; a 25 percent tax rate does not
+-- disclose whether PRRT is replaced or retained. Ibrahim dependence
+-- barrier reused, not reimplemented.
+------------------------------------------------------------------------
+
+australiaInstitute17BSourceRestatedInSenate :
+  Typed.relationKind Climate.tai17BRestatedByPocock2026 ≡
+    Typed.reportedStatisticRestatement
+australiaInstitute17BSourceRestatedInSenate = refl
+
+arthurDLittle17BSourceRestatedInSenate :
+  Typed.relationKind Climate.futureGroup17BRestatedByPocock2026 ≡
+    Typed.reportedStatisticRestatement
+arthurDLittle17BSourceRestatedInSenate = refl
+
+hancockCreditedOriginalJournalismReuse :
+  Typed.relationKind Climate.nightlyToHancockExplicitReprint2026 ≡
+    Typed.explicitAttributedRepublication
+hancockCreditedOriginalJournalismReuse = refl
+
+aepWoodMacResultNotAScientificReplicate :
+  Typed.relationKind Climate.aepWoodMacStatisticsNotNationalTaxRate ≡
+    Typed.reportedStatisticRestatement
+aepWoodMacResultNotAScientificReplicate = refl
+
+actuReplacementDistinctFromAdditionalLevy :
+  Typed.relationKind Climate.actuReplacementVsAEPAddOnSpecification ≡
+    Typed.parallelEconomicArgument
+actuReplacementDistinctFromAdditionalLevy = refl
+
+same17BHeadlineDoesNotIdentifyNamedModelCount :
+  INF.FactorsThrough Climate.same17BPrinted Climate.namedModelSourceCount → ⊥
+same17BHeadlineDoesNotIdentifyNamedModelCount =
+  Climate.annual17BHeadlineCannotRevealModelAncestry
+
+same25PcHeadlineDoesNotIdentifyTaxDesign :
+  INF.FactorsThrough Climate.taxRateLabel Climate.taxPolicyMeaning → ⊥
+same25PcHeadlineDoesNotIdentifyTaxDesign =
+  Climate.same25PcCannotDetermineInstrument
+
+creditedReprintIsNotDirectHistoricalMethodTransfer :
+  Typed.StrongHistoricalTransfer Climate.nightlyToHancockExplicitReprint2026 → ⊥
+creditedReprintIsNotDirectHistoricalMethodTransfer =
+  Climate.hancockReprintIsNotIndependentMethodTransmission
+
+actuWoodMacPolicyComparisonDoesNotProveSharedScript :
+  Typed.StrongHistoricalTransfer Climate.actuReplacementVsAEPAddOnSpecification → ⊥
+actuWoodMacPolicyComparisonDoesNotProveSharedScript =
+  Climate.taxSchemeSimilarityNotScriptCopy
