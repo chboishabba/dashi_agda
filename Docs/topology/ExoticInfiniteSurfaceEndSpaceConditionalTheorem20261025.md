@@ -242,3 +242,33 @@ document does not import it across an unmerged branch;
 loss. Independent source-evidence revisions in #1268
 suggest a better provenance ledger, but are not evidence
 about the geometry of any exotic surface.
+
+
+## 26 October orientation-sensitive event-basis correction
+
+The mathematical proof above uses *chronological* depth-n prefixes
+`p=(s_0,...,s_(n-1))` and cylinder refinement
+`p -> p0,p1`. We now know explicitly that this convention
+is NOT the unqualified `Cantor.leftChild` implementation
+of the earlier DASHI premeasure: its `leftChild` **prepends**
+a bit instead. Because its mass is only a function of word
+length, the parent-mass-splitting lemma is still correct,
+but is insufficient to prove the underlying EVENT inclusion.
+
+The new `ExoticCantorCylinderOrientationExact.agda`
+provides chronological `MatchesAt`, correctly appended
+children and exact *all-prefix* event-refinement theorems,
+with an explicit two-digit counterexample to the old
+non-refining interpretation. Combined with the new
+finite PL complementary-component verifier, this
+ensures the FINITE part of steps 4--5 in the conditional
+argument uses one consistent old-to-new frontier
+order and one literal cylinder event basis.
+
+Step 5 is still conditional on actual compact cofinality
+and the open end-neighbourhood basis in the constructed
+infinite surface. In particular, finite word reversal
+conjugates the two finite address-tree conventions,
+but one must not casually assert an **infinite sequence**
+has a terminal-bit reverse or that dyadic finite mass
+is a Borel probability measure before its extension.
