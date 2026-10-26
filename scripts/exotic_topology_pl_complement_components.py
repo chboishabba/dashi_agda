@@ -143,8 +143,12 @@ def verify_complement_components(old, new, embedding, family):
         for key in child_keys:
             assert all(new_edge_owners[e] <= component
                        for e in output_boundaries[key])
-        expected = ({parent + (0,), parent + (1,)}
-                    if family == "cantor" else {parent})
+        expected = (
+            {parent + (0,), parent + (1,)} if family == "cantor"
+            else {parent + (-1,), parent + (0,), parent + (1,)}
+                 if family == "balanced_ternary"
+            else {parent}
+        )
         assert child_keys == expected, (
             "outgoing geometric boundaries differ from original old branch",
             family, parent, child_keys, expected,
