@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+"""Exact source-bounded diamond fcc / glide / NV bond stabilizer audit.
+
+Classical crystallographic sources: IUCr ITC Vol A Fd-3m (227),
+AFLOW A_cF8_227_a-001. Coordinates are quarter conventional-cell units.
+The site set is FCC ∪ ((1,1,1)+FCC), not the 27-point ternary cube.
+No Hamiltonian, device calibration, quantum advantage, or measured material
+property is inferred. PR #1249 retains ownership of PG(2,3) cube axes.
+"""
+from itertools import product, permutations
+
+D=(1,1,1)
+O=(0,0,0)
+def add(x,y): return tuple(a+b for a,b in zip(x,y))
+def sub(x,y): return tuple(a-b for a,b in zip(x,y))
+def fcc(t):
+    u,v,w=t
+    return (2*(v+w),2*(u+w),2*(u+v))
+def fromfcc(v):
+    x,y,z=v
+    ns=(y+z-x,x+z-y,x+y-z)
+    return tuple(n//4 for n in ns) if all(n%4==0 for n in ns) else None
+def flipx_primitive(t):
+    u,v,w=t
+    return (u+v+w,-w,-v)
+def swap_xy(t):
+    u,v,w=t
+    return (v,u,w)
+def swap_yz(t):
+    u,v,w=t
+    return (u,w,v)
+def at(s):
+    label,t=s
+    return add(fcc(t),D if label=='B' else O)
+def glide(s):
+    label,t=s
+    f=flipx_primitive(t)
+    return ('B',f) if label=='A' else ('A',add(f,(1,0,0)))
+def glide_geometry(x):
+    return add(D,(-x[0],x[1],x[2]))
+def site_swap(s,m):
+    return s[0],m(s[1])
+
+for t in product(range(-3,4),repeat=3):
+    assert fromfcc(fcc(t))==t
+    assert fcc(flipx_primitive(t))==(-fcc(t)[0],fcc(t)[1],fcc(t)[2])
+    assert fcc(swap_xy(t))==(fcc(t)[1],fcc(t)[0],fcc(t)[2])
+    assert fcc(swap_yz(t))==(fcc(t)[0],fcc(t)[2],fcc(t)[1])
+    for label in ('A','B'):
+        s=(label,t)
+        assert at(glide(s))==glide_geometry(at(s))
+        assert glide(glide(s))==(label,add(t,(1,0,0)))
+        assert at(site_swap(s,swap_xy))==(at(s)[1],at(s)[0],at(s)[2])
+        assert at(site_swap(s,swap_yz))==(at(s)[0],at(s)[2],at(s)[1])
+
+G=[(p,s) for p in permutations(range(3))
+         for s in product((-1,1),repeat=3)]
+assert len(G)==48
+def linear(g,x):
+    p,s=g
+    return tuple(s[i]*x[p[i]] for i in range(3))
+def glide_coset(g):
+    return D if sum(s<0 for s in g[1])%2 else O
+def operate(g,x): return add(linear(g,x),glide_coset(g))
+def multiply(g,h):
+    p,s=g; q,t=h
+    return tuple(q[p[i]] for i in range(3)),tuple(s[i]*t[p[i]] for i in range(3))
+
+# Affine representatives are closed modulo actual FCC translations:
+# c(g,h)=t(g)+g*t(h)-t(gh) ∈ FCC.
+for g,h in product(G,repeat=2):
+    cocycle=sub(add(glide_coset(g),linear(g,glide_coset(h))),
+                glide_coset(multiply(g,h)))
+    assert fromfcc(cocycle) is not None,(g,h,cocycle)
+
+# Each of 48 representative operations maps every tested A/B site
+# into exactly one occupied FCC coset, with an exact primitive inverse.
+for g in G:
+    for label in ('A','B'):
+        for t in product(range(-1,2),repeat=3):
+            target=operate(g,at((label,t)))
+            a=fromfcc(target)
+            b=fromfcc(sub(target,D))
+            assert (a is None) != (b is None),(g,label,t)
+            assert at(('A',a) if a is not None else ('B',b))==target
+
+# Site-symmetry vs bond-symmetry are distinct: A(0) is fixed by
+# 24 operations; ordered bond (A(0),B(delta)) is fixed by 6.
+origin_fix=[g for g in G if operate(g,O)==O]
+bond_fix=[g for g in origin_fix if operate(g,D)==D]
+assert len(origin_fix)==24 and len(bond_fix)==6
+assert all(g[1]==(1,1,1) for g in bond_fix)
+assert {g[0] for g in bond_fix}==set(permutations(range(3)))
+
+print("PASS FCC primitive lattice, diamond A/B motif, exact inverse & glide squared")
+print("PASS 48 cubic operation representatives close modulo FCC translations")
+print("PASS atomic-site stabilizer 24; ordered [111] bond stabilizer 6 = S3/C3v")
