@@ -26,6 +26,7 @@ on:
       - 'scripts/check_pickover_bt_tree_refinement.py'
       - 'scripts/check_pickover_fast_sine_complex_power.py'
       - 'scripts/check_pickover_bit_shift_cocycle_ladder.py'
+      - 'scripts/check_pickover_369_signed_circle_observer.py'
       - '.github/workflows/pickover-eisenstein9-crt-finite.yml'
   workflow_dispatch:
 
@@ -78,6 +79,8 @@ jobs:
         run: python3 scripts/check_pickover_fast_sine_complex_power.py
       - name: Audit exact bit-shift cocycle and exponent bit cost
         run: python3 scripts/check_pickover_bit_shift_cocycle_ladder.py
+      - name: Audit nested 369 signed circle and Q9 group separation
+        run: python3 scripts/check_pickover_369_signed_circle_observer.py
   finite-agda-source:
     runs-on: ubuntu-latest
     timeout-minutes: 30
