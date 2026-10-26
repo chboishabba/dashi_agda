@@ -247,7 +247,7 @@ koslovNavyZaret1971 = Source.mkNoDOISource
   "1971"
   "https://nsarchive.gwu.edu/document/28797-document-13-rand-corporation-samuel-koslov-et-al-report-assistant-secretary-navy-rd"
   Source.archivalSource
-  "Panel judged Navy-funded long-term low-level monkey/rabbit studies scientifically unreliable, citing inadequate RF hardware, technical controls and animal welfare; of five deaths, three reported due to restraint strangulation. Those deaths must not be asserted caused by microwave irradiation or merged into original 1966 WRAIR primate cohorts"
+  "Original 1971 RAND panel separately evaluated (1) Hawaii Zaret Foundation primate RF/cataract study, judged scientifically invalid with missing exposure logging, untested metallic restraint perturbations and three of five deaths attributed to strangulation, and (2) Polytechnic Institute of Brooklyn 2450 MHz rabbit heat/respiration/temperature investigation judged adequately conducted. Same Navy contract, distinct sites/protocols; no RF-caused deaths demonstrated"
   Source.publicAttribution
 
 heilmeier1977 : Source.AttributedSource
@@ -548,8 +548,28 @@ pandoraErratumCorrectsOneDocument = boundedLineageEdge
 navyZaretCriticalSeparateContract : BoundedLineageEdge
 navyZaretCriticalSeparateContract = boundedLineageEdge
   arpaBizarre navyZaretSeparateExposureContract separateContractCriticalReview koslovNavyZaret1971
-  "1971 Koslov Navy contract N00014-69-C-0358 Zaret technical review criticised experiments and recorded animal deaths due in part to faulty restraint"
+  "1971 Koslov et al. Navy N00014-69-C-0358 review rejected the Lualualei/Pearl Harbor primate exposure experiment for field/animal failures but explicitly assessed Brooklyn's separate rabbit 2450 MHz laboratory work as adequately controlled"
   "Related historical RF research is not automatically the same animals, laboratory, grant or direct RF-caused mortality"
+
+data NavyZaretContractSite : Set where
+  hawaiiPrimateStudy : NavyZaretContractSite
+  brooklynRabbitStudy : NavyZaretContractSite
+
+data Navy1971MethodologicalVerdict : Set where
+  invalidPrimateMeasurements : Navy1971MethodologicalVerdict
+  adequateRabbitMeasurements : Navy1971MethodologicalVerdict
+
+reviewVerdict : NavyZaretContractSite → Navy1971MethodologicalVerdict
+reviewVerdict hawaiiPrimateStudy = invalidPrimateMeasurements
+reviewVerdict brooklynRabbitStudy = adequateRabbitMeasurements
+
+separateNavySubstudiesNotEqual :
+  hawaiiPrimateStudy ≡ brooklynRabbitStudy → ⊥
+separateNavySubstudiesNotEqual ()
+
+differentSubstudyMethodologyVerdicts :
+  reviewVerdict hawaiiPrimateStudy ≡ reviewVerdict brooklynRabbitStudy → ⊥
+differentSubstudyMethodologyVerdicts ()
 
 data ScientificEvidenceRole : Set where
   retrospectiveCommitteeReassessment : ScientificEvidenceRole
