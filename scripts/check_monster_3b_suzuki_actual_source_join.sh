@@ -4,7 +4,7 @@
 # A passing source-relative join is not source authentication, a normalizer
 # intertwiner, or an Agda/Lean kernel theorem.
 set -euo pipefail
-ROOT="$(cd "$(dirname "\${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 command -v gap >/dev/null || { echo "GAP + CTblLib required" >&2; exit 1; }
 mkdir -p build
