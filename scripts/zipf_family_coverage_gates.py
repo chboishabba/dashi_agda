@@ -8,7 +8,6 @@ from __future__ import annotations
 from collections import Counter
 from dataclasses import dataclass
 from fractions import Fraction
-from itertools import combinations
 from math import log2
 from typing import Mapping, Sequence
 
@@ -21,18 +20,19 @@ def _nonnegative_int_counts(values: Sequence[int], *, require_positive=False) ->
 
 
 def participation_roles(readers: Sequence[int], commenters: Sequence[int], creators: Sequence[int]) -> tuple[Fraction, Fraction, Fraction]:
-    """Per-identified-account mutually exclusive creator/commenter/lurker tiers.
+    """Per-identified-account mutually exclusive creator/commenter/noncontributor tiers.
 
     Readers = recorded views; an account with no recorded views or actions is
-    still in the denominator (a declared enrolled user, not proven lurker).
+    still in the denominator. The final tier includes inactive people and must
+    not be interpreted automatically as observed readership/lurking.
     """
     if not (len(readers) == len(commenters) == len(creators)):
         raise ValueError('three vectors must refer to identical enrolled accounts')
     r = _nonnegative_int_counts(readers); c = _nonnegative_int_counts(commenters); k = _nonnegative_int_counts(creators)
     creator = sum(v > 0 for v in k)
     commenter = sum(v > 0 and k[i] == 0 for i,v in enumerate(c))
-    lurker = len(k)-creator-commenter
-    return tuple(Fraction(x,len(k)) for x in (creator,commenter,lurker))
+    noncontributor = len(k)-creator-commenter
+    return tuple(Fraction(x,len(k)) for x in (creator,commenter,noncontributor))
 
 
 def benford_observed_digits(values:Sequence[float], base:int=10)->tuple[Fraction,...]:
@@ -55,14 +55,23 @@ def bradford_optimal_equal_zones(journal_counts:Sequence[int],zones:int)->tuple[
     c = tuple(sorted(c,reverse=True)); total=sum(c)
     prefix=(0,)
     for x in c:prefix+=(prefix[-1]+x,)
-    best=None
-    for cuts in combinations(range(1,len(c)),zones-1):
-        endpoints=(0,)+cuts+(len(c),)
-        output=tuple((endpoints[i+1]-endpoints[i],prefix[endpoints[i+1]]-prefix[endpoints[i]]) for i in range(zones))
-        loss=sum((zones*articles-total)**2 for count,articles in output)
-        candidate=(loss,cuts,output)
-        if best is None or candidate[:2]<best[:2]:best=candidate
-    return best[2]
+    # Dynamic program: each transition chooses one nonempty contiguous zone.
+    # This replaces O(binomial(n,z)) cut enumeration with O(z*n^2).
+    states = {(0,0):(0,())}
+    for groups in range(1,zones+1):
+        for end in range(groups,len(c)+1):
+            best = None
+            for start in range(groups-1,end):
+                previous = states.get((groups-1,start))
+                if previous is None:continue
+                cost,cuts = previous
+                zone_cost = (zones*(prefix[end]-prefix[start])-total)**2
+                candidate = (cost+zone_cost,cuts+((start,) if groups>1 else ()))
+                if best is None or candidate < best:best=candidate
+            if best is not None:states[groups,end]=best
+    cuts=states[zones,len(c)][1]
+    endpoints=(0,)+cuts+(len(c),)
+    return tuple((endpoints[i+1]-endpoints[i],prefix[endpoints[i+1]]-prefix[endpoints[i]]) for i in range(zones))
 
 
 def type_level_brevity_covariance(frequencies:Mapping[str,int],lengths:Mapping[str,int])->Fraction:
