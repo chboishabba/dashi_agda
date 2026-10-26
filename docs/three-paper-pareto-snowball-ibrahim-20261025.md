@@ -250,3 +250,35 @@ under Johl Brown's directed research with OpenAI ChatGPT assistance;
 published results, older generic machinery and empirical data retain
 their respective original creators. Bibliographic proximity and a
 relevant PR are not evidence that a scientific hypothesis is true.
+
+
+### Late latest-PR crosscheck: Agda #1271 is a separate **periodic B/R735** donor
+
+The latest Agda PR [#1271](https://github.com/chboishabba/dashi_agda/pull/1271)
+is an independently owned `T³` **periodic unforced Galerkin** local-H¹/
+R735 W1 programme, with a classical **small-H¹-data** all-time
+subclass. It explicitly points to Agda #1255 / Lean #87 as the existing
+Miller A3 owners. Its source scope credits Leray/Temam and
+Lei–Lin–Zhou, DOI 10.1007/s00205-015-0884-8, together with the
+original DASHI helical mixed-output theorem owners.
+
+Cross-pollination opportunity, **not automatic theorem import**:
+a *same-periodic-source* local enstrophy ceiling X(t) bounds a
+unit-direction cross-product projection by
+`||v×omega||_2 <= ||omega||_2` and hence (where actual
+`||omega||²_2 = X` is separately established)
+`int_0^T ||v×omega||_2⁴ dt <= T sup_t X(t)²`.
+This is a **finite-time** periodized input, not the R³ global
+continuation result. A constant unit direction has vanishing
+spatial gradient, but its finiteness through a bounded local
+interval does not prove a solution extends past its maximal time.
+Bridging periodic cutoffs to Miller's exact whole-space assumptions
+requires explicit domain/scaling/source/limit transfers; deriving
+the bound from a pre-established BKM/global-regularity theorem
+would be circular. Do not import or duplicate #1271's still-open
+sibling branch or imply its numerical tests kernel-certify R735.
+
+This is the concrete Pareto decision: **reuse #1271's already
+source-audited local enstrophy owner only if a future consumer pays
+the same-source domain/limit transfer**. Until then #1255 remains
+an exact conditional A3 interface, not a global Clay completion.
