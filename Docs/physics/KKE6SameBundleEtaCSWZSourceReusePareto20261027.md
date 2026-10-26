@@ -180,3 +180,10 @@ Executed commands from the copied original Git blobs:
 `python scripts/check_kk_e6_orbifold_gs_anomaly_factor.py`,
 `python scripts/check_kk_e6_higgs_k_su2_witten_parity.py`.
 All returned PASS; no runtime assertion failed. Prior documentation statements that the combined scripts were not byte-identically executed are **historical** and are superseded by this receipt. Git SHA checks and passing Python are **not** Agda/Lean kernel proofs, global smooth bundle constructions in a proof assistant, physical eta/CS/WZ QFT, spectral-stability certificates or Earth data analysis.
+
+
+## 2026-10-27 source fidelity correction: full quotient G and SM S ordinary spin bordism already in literature
+
+The original Davighi–Gripaios–Lohitsiri 2020 paper (JHEP07(2020)232, DOI 10.1007/JHEP07(2020)232) **explicitly computes** the fifth ordinary-spin bordism groups for BOTH the faithful trinification `G=SU3³/Z3diag` and the faithful SM `S=(SU3c x SU2L x U1)/Z6`, finding **ZERO**: their eqs. **(6.15)** and **(4.45)** respectively. This is original theorem ownership, not work authored in DASHI. See the full derivation, same-source group-identification limits and post-VEV charge audit in `Docs/physics/KKE6GlobalHiggsChainZ6U3Original27Pareto20261027.md`.
+
+Therefore *do not list all global 4D anomaly/bordism of G and S as unpaid.* What remains unpaid is the physical boundary **H** and reduced **K** (and their global spin bordism/eta or relative version), the **nonzero local H anomaly**, the actual **5D orbifold regulated determinant/CS/WZ** and scalar zero/defect extension. A trivial `Omega5Spin(BG)` is NOT a proof for its closed-subgroup `H`, nor for its relative orbifold boundary action. The external 2020 result is a *full theorems-based positive normal-form gate for 4D ordinary spin models of G and S*, not a claim of full H UV cancellation. Preserve original author/date and do not promote a model-specific mathematical theorem to an experimental KK Earth result.
