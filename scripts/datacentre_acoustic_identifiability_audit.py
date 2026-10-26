@@ -93,14 +93,57 @@ class OriginalReceipt:
     content_sha256: str
 
 
+
+@_dataclass(frozen=True)
+class PublicRepositoryRoot:
+    """Original GitHub repository ancestry, not an observation of acoustic data."""
+    apparent_owner: str
+    apparent_repo: str
+    source_owner: str
+    source_repo: str
+    is_fork: bool
+    contents_domain: str
+
+
+BENN_JORDAN_GITHUB_ROOTS = (
+    PublicRepositoryRoot('bennjordan', 'MSEED2Wav_Android',
+                         'dhilowitz', 'MSEED2Wav', True,
+                         'seismology MiniSEED-to-WAV conversion code'),
+    PublicRepositoryRoot('bennjordan', 'Datasets',
+                         'MusicMoveArr', 'Datasets', True,
+                         'MusicBrainz/Spotify/Tidal/Deezer metadata'),
+)
+
+
+def original_repo_attribution(record):
+    """GitHub fork cannot be promoted to independent original authorship."""
+    if not isinstance(record, PublicRepositoryRoot):
+        raise ValueError('expected typed repository root')
+    if not all((record.apparent_owner, record.apparent_repo,
+                record.source_owner, record.source_repo,
+                record.contents_domain)):
+        raise ValueError('all repository provenance roots are required')
+    return {
+        'apparent_repository': record.apparent_owner + '/' + record.apparent_repo,
+        'upstream_original_repository':
+            record.source_owner + '/' + record.source_repo,
+        'original_repository_author_is_benn_jordan':
+            not record.is_fork and record.source_owner == 'bennjordan',
+        'is_independent_empirical_receptor_dataset': False,
+        'content_description': record.contents_domain,
+        'fork_presence_does_not_verify_use_in_2026_video': True,
+    }
+
+
 # Phase keys reference new *producer objects*, not ways to restate a review.
 # Sound/vibration, RF, historical continuity and environmental mitigation
 # have separate consumers and may NOT be inferred from one another.
 REQUIRED_ORIGINALS = {
     'P2_calibrated_acoustic': (
-        'facility_operating_log', 'source_pressure_spectrum',
-        'receptor_pressure_spectrum', 'traceable_calibration',
-        'weather_background_controls'),
+        'facility_operating_log', 'original_sensor_waveforms',
+        'source_pressure_spectrum', 'receptor_pressure_spectrum',
+        'traceable_calibration', 'sensor_response_and_timebase',
+        'processing_transform_manifest', 'weather_background_controls'),
     'P3_facility_attribution': (
         'matched_on_off_windows', 'receptor_spatial_gradient',
         'nonfacility_source_controls', 'uncertainty_budget'),
@@ -160,8 +203,11 @@ def audit_phase_receipts(receipts):
         # They must never be forced into the original receptor window.
         comparison_kinds = {
             'P2_calibrated_acoustic': (
-                'facility_operating_log', 'source_pressure_spectrum',
-                'receptor_pressure_spectrum', 'weather_background_controls'),
+                'facility_operating_log', 'original_sensor_waveforms',
+                'source_pressure_spectrum', 'receptor_pressure_spectrum',
+                'sensor_response_and_timebase',
+                'processing_transform_manifest',
+                'weather_background_controls'),
             'P3_facility_attribution': (
                 'matched_on_off_windows', 'receptor_spatial_gradient',
                 'nonfacility_source_controls', 'uncertainty_budget'),
@@ -250,6 +296,39 @@ class TestOriginalInquiryAcceptance(_unittest.TestCase):
         self.assertEqual(len(state), 5)
         self.assertTrue(all(not p['metadata_join_ready'] for p in state.values()))
         self.assertTrue(all(p['missing_original_artifacts'] for p in state.values()))
+
+
+    def test_benn_jordan_repositories_are_forks_not_original_authorship(self):
+        records = [original_repo_attribution(r)
+                   for r in BENN_JORDAN_GITHUB_ROOTS]
+        self.assertEqual([r['upstream_original_repository'] for r in records],
+                         ['dhilowitz/MSEED2Wav', 'MusicMoveArr/Datasets'])
+        self.assertTrue(all(not r['original_repository_author_is_benn_jordan']
+                            for r in records))
+        self.assertTrue(all(not r['is_independent_empirical_receptor_dataset']
+                            for r in records))
+
+    def test_converter_and_playback_do_not_fill_original_site_waveform_gate(self):
+        available = audit_phase_receipts({})
+        self.assertIn('original_sensor_waveforms', available[
+            'P2_calibrated_acoustic']['missing_original_artifacts'])
+        self.assertIn('sensor_response_and_timebase', available[
+            'P2_calibrated_acoustic']['missing_original_artifacts'])
+        self.assertIn('processing_transform_manifest', available[
+            'P2_calibrated_acoustic']['missing_original_artifacts'])
+        for false_kind in ('edited_video_audio', 'playback_wav',
+                           'miniSEED_converter_fork', 'patreon_audio_preview'):
+            with self.assertRaises(ValueError):
+                audit_phase_receipts({false_kind:
+                                     self._receipt(false_kind)})
+
+    def test_identical_source_and_receptor_study_block_not_required_for_fork(self):
+        # GitHub original author is repository-specific, not site/window
+        # metadata and not proof anybody used the code to process recording.
+        fork = BENN_JORDAN_GITHUB_ROOTS[0]
+        self.assertTrue(original_repo_attribution(fork)[
+            'fork_presence_does_not_verify_use_in_2026_video'])
+        self.assertNotEqual(fork.source_owner, fork.apparent_owner)
 
     def test_root_originals_are_required_before_downstream_join(self):
         r = {k: self._receipt(k)
@@ -374,7 +453,12 @@ if __name__ == "__main__":
         run = _unittest.TextTestRunner(verbosity=2).run(suite)
         raise SystemExit(0 if run.wasSuccessful() else 1)
     if _sys.argv[1:] == ['--phase-status']:
-        print(_json.dumps(original_inquiry_phase_status(), indent=2))
+        status = original_inquiry_phase_status()
+        status['related_public_github_fork_roots'] = [
+            original_repo_attribution(r) for r in BENN_JORDAN_GITHUB_ROOTS]
+        status['verified_public_2026_site_sensor_or_participant_data'] = False
+        status['paper_status_from_video_description'] = 'WIP, publication not verified'
+        print(_json.dumps(status, indent=2))
         raise SystemExit(0)
     if _sys.argv[1:]:
         raise SystemExit('Use --selftest, --phase-status or no arguments.')
