@@ -80,3 +80,20 @@ from \`Monster3BActualKernelCharacterRound4Validation.agda\`. Its type-level \(4
 **Consequences for earlier frontiers:** The conditional JFine C4 source screen using \((r:4B,\ r^2:2A)\) is a valid screen of its *own hypothetical class pattern*, but it **cannot describe the actual ATLAS subgroup constructed here**. Likewise the old full pointed-D4 residual character \([53,-3,-3,-49,-49]\) assumes this 4B/2A class pattern and remains a legitimate conditional obstruction, not a result for the newly sourced \(r\). The old bound \(|\operatorname{tr}_{W_\zeta}(r^2)|\le90\) is consistent with the 2B family, and the source-compatible \(4E\) eight-trit half-turn itself has no fixed nonzero quotient vectors. Do not reissue those traces with invalid source substitutions.
 
 **Formal/source interface:** \`DASHI/Moonshine/Monster3BAtlasD4PublishedTwoBClassGateExact.agda\` imports existing claim-attribution/Snowball owners, separately credits Norton–Wilson (2002), Barraclough–Wilson (2005, 2007), and builds a typed \`twoA ≠ twoB\` contradiction for a putative \`source-r-is-4B\` assignment *under explicitly source-attributed class facts*. An Agda source equality is not a kernel proof of the original external fusion; a direct GAP/Monster element-word replay of the selected diagonal quotient is not claimed. This is a **P1 partial paid by primary scholarship, with P0 exact-generator quotient and actual selected-78 still unexecuted**.
+
+
+## BW05 published 4D word as exact source-generator calibration
+
+The original Barraclough–Wilson (2005) **Table 2** (PDF page 6 in the original journal scan, journal p. 211) has a Monster **4D** representative using only N(3B) standard generators, word \`BCCCBB\`. In their conventions \(B\) is the order-three source generator and \(C\) is the outer Suzuki source generator. The exact BW07 §3.1 quotient sends these source \(6.Suz{:}2\) standard generators to the already-vendored ATLAS \((D_2,C_2)\). Thus the original published word becomes
+\[
+\texttt{BCCCBB} \mapsto D_2\,C_2^3\,D_2^2 .
+\]
+The **existing source-witness script** now checks in actual manifest-pinned ATLAS GF(3) matrices
+\[
+(D_2 C_2^3 D_2^2)^2=-I_{12},\qquad
+(D_2 C_2^3 D_2^2)^4=I_{12},\qquad
+D_2 C_2^3 D_2^2\ne I_{12}.
+\]
+This is a **positive, direct published-word/source-matrix compatibility** calibration for the central half-turn class and is independently locally reproduced in exact GF3. Its original historical class **4D** comes from BW05 and must be credited there. It **does not prove** our different \(r=m(gmg^{-1})\) has Monster class 4D; two source elements can have equal order/square/eigenvalues without being conjugate in \(2.Suz\) or Monster. The remaining source class lookup is an exact conjugacy/fusion question, not a dimension or eigenvalue test.
+
+Source roots and receipts remain distinct: Norton–Wilson (2002) supplies central \(2.Suz\) involution→2B, BW05 supplies both 4B²→2A and concrete 4D word, BW07 supplies standard generator quotient, ATLAS owns matrix bytes, and #1098 owns the repo regression. No GAP/Monster element-class action has been executed here.
