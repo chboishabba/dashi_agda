@@ -163,3 +163,35 @@ series converges more rapidly per term than arctan(1/sqrt3).
 Do not conflate pi-from-geometry with sublinear remote digit access.
 This C3/pi mathematical identity is classical, DASHI contributes
 concrete source reuse and rational checks.
+
+## 2026-10-26: factor fibration via existing intersectional query adequacy
+The relevant original donor is DASHI/Core/IntersectionalNonFactorability.agda
+(conceptual precedent Kimberle Crenshaw 1991; DASHI's mathematical
+fibre-collision abstraction is not a theorem of Crenshaw). Also reuse
+DASHI/Core/QueryIndexedProjectionAdequacyExact.agda
+(conceptual precedent David Blackwell 1953),
+BalancedTernaryC2C3DihedralCodecBridgeExact.agda and
+Physics/WaveAlgorithmLift.agda. The correct diagnosis is not that
+binary encoding inherently forgets zero: the support/sign fibre is
+lossless, but the support-only projection forgets orientation. In the
+wave lane zero is zero amplitude, not an automatically interchangeable
+third root of unity.
+
+Exact factor-fibration rational test:
+  x=j/3+r mod 1, j=floor(3x), 0<=r<1/3.
+  T_m(j,r)=split(m*(j/3+r) mod1).
+  T_9∘T_11=T_99=T_11∘T_9.
+The splitter/assembler round trip is exact on rational phases. Coarse
+C3 sector alone fails signed-query adequacy: x=5/12 and y=7/12
+occupy the same middle sector but have opposite sine orientations.
+This is an instance of repo-owned NonFactorabilityWitness:
+postcomposition/recharting the coarse sector cannot repair the
+collision. Retaining r makes the state adequate for the exact phase
+query, *provided it can be computed*. This last cost remains the
+central unresolved algorithmic requirement.
+
+This is explicitly separate from a source-specific analytic proof for
+alpha=1/(2*pi), or an efficient residual update through 99^(n*n!).
+The multiplication commuting square is exact; neither cheap signed
+computation nor original 9999! sign is claimed. Local Python fixture
+requires execution and the new Agda adapter is not kernel checked.
