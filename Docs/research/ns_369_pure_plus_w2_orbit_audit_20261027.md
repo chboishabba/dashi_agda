@@ -109,3 +109,14 @@ complete modal nonlinear calculation, tests each Waleffe common-
 amplitude term, the two invariant sums, phase signs, and exact
 dyadic production `-Tp`. This reuses R92's existing original
 Waleffe attribution rather than declaring a new triad theorem.
+
+
+## 27 October follow-through — actual sampled finite-to-tail operator is NOT this local source transfer
+
+**New exact no-promotion regression:** `tests/test_ns_369_r734_operator_boundary.py` (three locally passing matching-source arithmetic/SymPy tests). The original 369 Gram lane's *actual canonical sampled operator* is the **exact scripted pair-incidence finite-to-tail cross block**, not the signed R734 core-modal production:
+- `scripts/ns_triad_kn_pair_incidence_operator_proof.py` defines `L_FT,script^+(i,j)` through retained triad incidence weights `sqrt(pi_i*pi_j*pi_l)/3 * max(cos(phi_i+phi_j-phi_l),0)`, with a negative sum sign. The original target is the separate `||L_FT,script^N||_op <= C/N`, and the related Gram Rayleigh target requires its own same-operator identification. The archived sampled examples use `(N,K)=(6,5),(8,7),(10,9),(12,11)`.
+- The exact R734 witness has only `±p,±q,±k`, each with `||m||_infty<=2`. Its **complete quadratic convolution output** lies in `||m||_infty<=4`. Therefore at **every one** of those sampled `K=N-1>=5` finite-to-tail splits, the original datum **and its entire first nonlinear image remain in the finite/core side**, with no tail vertex. The restricted initial support has a zero cross-block, even though its signed **core-core dyadic critical-production** remains strictly positive.
+- The canonical scripted kernel's `max(cos θ,0)` discards negative phase contributions, whereas the exact Galerkin paired-modal transfer flips sign on reversing only the ±k phase while preserving all energy/helicity/sign-profile data. Absent a proved source map from actual complex Fourier coefficients to the scripted `pi_i,phi_i` and exact normalization, these must **not** be identified.
+- Neither the phase-flip nor the cutoff-support test disproves the full sampled Gram eigenvalue floor, which concerns a distinct operator with much wider amplitude support and potentially later generated modes. Nor does the sampled Gram floor prove R734 W2. The earlier “dangerous-cell candidate” classification is **solely a finite local sign/profile candidate**, not a demonstrated dangerous eigenvector of `K_N(A)`.
+
+This is the **same-object wall** for this cut: extending the local R734 witness into the R369 sampled Gram operator requires an actual matching physical velocity/profile, the finite-to-tail support under the identical `N,K` partition, signed-vs-positive-part handling, and quantitative control of the resulting phase-resolved Rayleigh form. Do not replace any of these obligations with the 369 ternary quotient.
