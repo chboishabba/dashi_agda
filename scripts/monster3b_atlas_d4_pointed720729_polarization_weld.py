@@ -129,6 +129,24 @@ def audit(root):
     # If E+E nonzero 80-set = (a D4 eight-corner set) x (TRIVIAL Fin10),
     # every D4 fixed count is divisible by ten; actual reflections fix 8.
     assert fixed80['m']==8 and fixed80['m']%10!=0
+    # Stronger test against the PRE-EXISTING literal cube-corner chart:
+    # Natural planar square D4 on OuterSign^3 has
+    #     r(x,y,z)=(-y,x,z), m(x,y,z)=(x,-y,z).
+    # Its axis-mirror has ZERO fixed corners, while the ACTUAL SOURCE
+    # quotient has EIGHT fixed labels for EVERY reflection. Any D4-map
+    # quotient80 -> corners8 would send each source mirror-fixed label
+    # to a target mirror-fixed corner: impossible. This excludes ALL
+    # ten-sheet systems retaining an equivariant geometric-corner
+    # projection, including twisted fibre actions, not just trivial10.
+    corners=list(product((-1,1),repeat=3))
+    def corner_action(w,p):
+        for ch in w:
+            p=(-p[1],p[0],p[2]) if ch=='r' else (p[0],-p[1],p[2])
+        return p
+    corner_fixed={w:sum(corner_action(w,x)==x for x in corners) for w in words}
+    assert corner_fixed['m']==0 and corner_fixed['mr']==4
+    assert fixed80['m']==8 and fixed80['mr']==8
+    assert sorted(corner_fixed.values())==[0,0,0,0,0,4,4,8]
     return dict(status='PASS_original_ATLAS_D4_invariant_polarization_and_corner10_nogo',
         original_ATLAS_sha256_verified=True,
         source_D4_word_relations_verified=True,
@@ -144,6 +162,8 @@ def audit(root):
         source_D4_nonzero_orbit_sizes=histogram,
         source_D4_orbit_count=len(orbits),
         D4_equivariant_10_copies_of_one_corner8_set_possible=False,
+        natural_cube_corner8_fixed_counts=corner_fixed,
+        D4_equivariant_projection_to_natural_cube_corner8_possible=False,
         nontrivial_D4_mixing_of_ten_sheets_excluded=False,
         actual_Monster_N3B_D4_class_fusion_proved=False,
         literal_Monster_source_character_78_selected=False,
