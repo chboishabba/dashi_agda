@@ -1,5 +1,5 @@
 {
-  "schema_version": "aquino-epstein-source-world-1",
+  "schema_version": "aquino-epstein-source-world-2",
   "as_of": "2026-10-26",
   "method_donor": "PR #1268 data shape and claim-relative target discipline only; sibling code is NOT vendored or imported; generic attribution and Pareto owners remain on canonical DASHI master/parent",
   "attribution_policy": "Original agency and individual authors retain original statements; Johl Brown directs independent hypothesis/consumer framing, AI-assisted source-world encoding. Source-reported != reproduced/established independently; missing != false; no cross-cluster command inferred.",
@@ -202,7 +202,12 @@
       ],
       "requires": [
         "canada_aiq_kogan_finding"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "Original data-producer or privacy-regulator correction showing AIQ did not receive ANY Kogan-derived score material in the scoped US work would narrow the claimed lineage; denial of raw Facebook app access alone does not.",
+        "would_strengthen": "Regulator-authenticated non-personal derivation or distribution records tying specified GSR outputs to AIQ would strengthen specific lineage; no raw voters or outcome claim.",
+        "test_status": "sourceChecked"
+      }
     },
     {
       "id": "C_UK_PAYMENTS",
@@ -214,7 +219,12 @@
       ],
       "requires": [
         "uk_aiq_payments"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "Original amended UK Electoral Commission dispositions removing or correcting specific AIQ service payments, recipient classification or campaign return would narrow the asserted accounting; Grimes' successful appeal already limits the earlier sanction.",
+        "would_strengthen": "Original matching payment invoices, bank-origin refs and judicial appeal dispositions would strengthen transaction-level identification, not GSR/score-file content.",
+        "test_status": "sourceChecked"
+      }
     },
     {
       "id": "C_FTC_BANNON_PROCEDURE",
@@ -232,7 +242,12 @@
         "ftc_bannon_reply_2020",
         "bannon_opposition_2020",
         "ddc_show_cause_2020"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "An original court record correcting docket identity or rescinding the described procedural hearing would narrow the procedural claim; Bannon's defence is already retained separately.",
+        "would_strengthen": "The signed court show-cause order, FTC petition/reply and independently authored Bannon response jointly establish adversarial procedure only; original final docket would resolve procedural outcome.",
+        "test_status": "sourceChecked"
+      }
     },
     {
       "id": "C_FTC_BANNON_FINAL",
@@ -247,7 +262,12 @@
       ],
       "requires": [
         "bannon_ftc_final_judgment"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "An original case closing/withdrawal order would narrow hypotheses of later compelled CID hearing; neither hypothetical route decides personal privacy liability.",
+        "would_strengthen": "Original final signed court order, authenticated dismissal/withdrawal or FTC docket disposition would settle what happened to the demand, without converting a hearing decision into personal guilt.",
+        "test_status": "notRun"
+      }
     },
     {
       "id": "C_OCDETF_FINAL",
@@ -259,7 +279,12 @@
       ],
       "requires": [
         "ocdetf_final_disposition"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "Signed agency closure/declination or case-status record showing no charges or a different disposition would narrow hypotheses of prosecution or intervention; no original is inspected.",
+        "would_strengthen": "Authenticated original DEA/OCDETF NY-NYS-0829 final outcome naming the actual status would resolve the administrative outcome, not independently establish every allegation in the 2015 lead.",
+        "test_status": "notRun"
+      }
     },
     {
       "id": "C_BLACK_2016",
@@ -269,7 +294,12 @@
       "supports": [],
       "requires": [
         "black_2016_bank_identity"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "Bank-origin evidence that the 2016 USD difference reflects an asset, internal movement, unrelated recipient or another explicitly classified scope would narrow hidden-fee claims; total arithmetic alone does not discriminate.",
+        "would_strengthen": "Lawfully redacted originating bank wire and same-object accounting/invoice/legal classification would strengthen a particular transaction interpretation.",
+        "test_status": "notRun"
+      }
     },
     {
       "id": "C_NAME_COLLISION",
@@ -283,7 +313,12 @@
       "requires": [
         "hsi_dea_name_distinction",
         "ocdetf_derivative_lead_index"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "An original joint case-ID/source record showing these are the exact same legal investigative operation would narrow the present distinct-case model; generic agency overlap or title cannot.",
+        "would_strengthen": "Original HSI contemporaneous anti-counterfeit agency records and DEA NY-NYS-0829 narcotics lead independently identifying agency/case purpose strengthen separation; DEA native scan still pending.",
+        "test_status": "sourceChecked"
+      }
     },
     {
       "id": "C_BANNON_MEDIA_TRANSFER",
@@ -293,7 +328,12 @@
       "supports": [],
       "requires": [
         "signed_bannon_film_agreement"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "Executed rights/producer agreements explicitly excluding a proposed service or identifying different legal production partners would narrow that contractual transfer; no missing contract implies absence.",
+        "would_strengthen": "Original dated signed 2019 media production/work-product/counterparty record, with actual work and payer identity, would support a narrow transaction only.",
+        "test_status": "notRun"
+      }
     },
     {
       "id": "C_GSR_ROW",
@@ -305,7 +345,12 @@
       ],
       "requires": [
         "gsr_to_ripon_exact_nonpii_version"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "Versioned original parser/build evidence showing disjoint model provenance or different campaign build would narrow a SPECIFIC claimed GSR score-to-Ripon row; no change to aggregate regulator finding.",
+        "would_strengthen": "Non-personal hashes, schema version, distribution and named build import proof from two original software custodians would strengthen exact lineage.",
+        "test_status": "notRun"
+      }
     },
     {
       "id": "C_AQUINO_SCL_TRANSFER",
@@ -315,7 +360,12 @@
       "supports": [],
       "requires": [
         "aquino_promis_scl_transfer_native"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "Contemporaneous original provenance showing a proposed method came from other authors or entered SCL independently would narrow one particular transfer claim; literary similarity cannot pay it.",
+        "would_strengthen": "A dated same-object technical document with original source code/license or instruction and receiving SCL build would establish a narrow historical transfer.",
+        "test_status": "notRun"
+      }
     },
     {
       "id": "C_UNIFIED_H3",
@@ -328,7 +378,12 @@
         "cross_network_tasking_original",
         "cross_network_sponsor_budget_original",
         "cross_network_shared_workproduct_original"
-      ]
+      ],
+      "severe_test": {
+        "would_narrow": "Independent original project budget/tasking and technical provenance demonstrating separate scopes or incompatible dates would narrow particular unified-command models, not rule out all undiscovered operations.",
+        "would_strengthen": "Genuinely independent dated cross-organisation common tasking AND matching sponsor/budget AND actual source-identical workproduct AND authenticated technical transfer would strengthen a specified global command claim.",
+        "test_status": "notRun"
+      }
     }
   ],
   "actions": [
@@ -418,5 +473,7 @@
       ],
       "description": "Only if independent original dated instruction, budget AND same-workproduct exist; cost is planning ordinal, not probability."
     }
-  ]
+  ],
+  "latest_sibling_contract": "PR #1268 head 12f0ba7005572d60152f304863afbf1c7ffa5b8b: validates severe_test on each claim and computes declared source_roots/independent_root_count; integration is data shape only, sibling not merged",
+  "source_root_independence_ceiling": "independent_root_count measures distinct declared original producers supporting a claim, NOT independent datasets, independent findings, reliability, or a proof of the external claim. FTC petition/reply same root; Bannon opposition and court procedure separate author roles but not independent truth confirmations."
 }
