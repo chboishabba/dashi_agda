@@ -1,3 +1,44 @@
+# 2026-10-27 R734 CRITICAL RESIDENCE MAX-CUT — SHARP ALL-DATA INTEGRAL, NOT GLOBAL REGULARITY
+
+**Original proof owners preserved:** classical Leray energy, Fourier interpolation,
+Fujita–Kato small critical data; the existing R734/R735 exact cube-dyadic
+source and R369/R92 helical formalisation remain their existing DASHI owners.
+Full derivation: `Docs/research/ns_r734_critical_residence_pareto_20261027.md`.
+Dedicated exact local suite: `tests/test_ns_r734_critical_residence.py`.
+
+**Paid without data-smallness, for every full unforced finite periodic
+Galerkin cutoff:** `integral_0^infinity X_N(t)^2 dt <= E0^2/nu` with the
+actual R734 dyadic critical energy `X_N(t)=sum w(k)|u_k|^2`.
+The coefficient 1 is **sharp** on same-equation real divergence-free
+heat shears at `n=2^(j-1)+1`, where the quotient tends to one.
+This pays a global-time critical **integrability/residence** leaf, not
+a uniform-in-time supremum or a signed nonlinear production estimate.
+The supercritical-threshold residence set obeys
+`meas{t:X_N(t)>B}<=E0^2/(nu*B^2)`; spikes remain possible.
+
+**Improved late entry:** set `A=Ccrit^2*E0/nu^2`. The older optimal
+single-window certificate from separate energy/enstrophy averages used
+`sqrt(2)*A` and is **superseded**. The sharper correlated-energy
+certificate gives one common entry time
+`T_res=A^2/nu` if `A<=1/2`, and
+`T_res=(1/4+log(2A)/2)/nu` otherwise.
+For `t>=T_res`, `X_N(t)<=4nu^2/(Ccrit^2(1+exp(nu(t-T_res)))^2)`,
+with original source `Ccrit=4*3^(3/4)*C6*C3`.
+All quantities refer to the **same** cutoff Galerkin solution.
+
+**Still unpaid at the real mathematical wall:** arbitrary-large-data
+pre-entry/middle-time **pointwise** critical bound; full source signed
+R734/W2 universal margin is **refuted** by the earlier positive-helicity
+physical witness; replacement signed same-solution dyadic transfer
+with phase plus generated H-minus; R369 *actual* Gram same-operator
+bridge; R406 continuum source, A1/A2/A3/B7 unrestricted continuation.
+Do not infer a Clay proof from global-time L2 integrability or
+the source-written Agda commentary. Latest focused local arithmetic/
+symbolic suite passed 19 cases (10 new + 9 earlier) but there is
+no Agda/Lean kernel receipt or exact-head whole-repository suite.
+
+---
+
 # 2026-10-27 NS369 × R734/W2 PHYSICAL ORBIT: FINITE SYMMETRY REUSED, FALSE POSITIVE LEAF STILL EXCLUDED
 
 **Source-first:** `Docs/research/ns_369_pure_plus_w2_orbit_audit_20261027.md`.
