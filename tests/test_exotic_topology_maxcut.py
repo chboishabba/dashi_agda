@@ -293,4 +293,16 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertFalse(receipt['Hatcher_wild_exterior_pi1_proved'])
         self.assertFalse(receipt['linked_horn_ambient_embedding_proved'])
 
+
+    def test_native_balanced_27_cube_same_set_not_same_graph(self):
+        result = balanced.depth_three_cube_sibling_nonpromotion()
+        self.assertEqual(result["same_underlying_label_count"], 27)
+        self.assertEqual(result["native_cube_grid_edges"], 54)
+        self.assertEqual(result["optional_parent_sibling_pairs"], 27)
+        self.assertEqual(result["shared_pairs"], 18)
+        self.assertEqual(result["sibling_non_grid_pairs"], 9)
+        self.assertEqual(result["grid_non_sibling_pairs"], 36)
+        self.assertFalse(result["cube_graph_equivalence_claim"])
+        self.assertFalse(result["surface_homeomorphism_claim"])
+
 if __name__ == '__main__': unittest.main()
