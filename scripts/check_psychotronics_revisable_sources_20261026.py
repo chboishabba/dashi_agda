@@ -60,6 +60,8 @@ def self_test(world):
         "P1-37": ("rodin_two_papers_same_printed_numbers", "bangor_daily_rain_6to8"),
         "P1-66": ("wrong_ellsworth_kansas", "reich_1953_reported_operation"),
         "P1-70": ("rvml_gentry_reich_device_claim", "bangor_daily_rain_6to8"),
+        "P1-71": ("bar_harbor_daily_rain_6to8", "bangor_daily_rain_6to8"),
+        "P1-72": ("bar_harbor_station_identity_1953", "reich_1953_reported_operation"),
     }
     for withdrawn, (reopen, preserve) in cases.items():
         newer = assess(world, {withdrawn})
@@ -69,6 +71,10 @@ def self_test(world):
         assert newer["1953_ellsworth_hourly_gauge"] == "unpaid"
     assert assess(world, {"P1-63", "P1-67"})["bangor_daily_rain_6to8"] == "reopen"
     assert baseline["bangor_daily_rain_6to8"] == "observed_at_regional_station"
+    assert baseline["bar_harbor_daily_rain_6to8"] == "observed_at_regional_station"
+    assert assess(world, {"P1-63"})["maine_two_station_6to8_spatial_difference"] == "reopen"
+    assert assess(world, {"P1-71"})["maine_two_station_6to8_spatial_difference"] == "reopen"
+    assert assess(world, {"P1-71"})["reich_1953_reported_operation"] == baseline["reich_1953_reported_operation"]
     try:
         assess(world, {"P1-99999"})
     except ValueError:
