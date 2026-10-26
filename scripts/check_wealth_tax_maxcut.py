@@ -49,6 +49,17 @@ def test_same_flow_different_wealth() -> None:
     assert wealth_excess(wealth_b, 2) == 5
     assert wealth_excess(wealth_a, 2) != wealth_excess(wealth_b, 2)
 
+@dataclass(frozen=True)
+class OwnershipSnapshot:
+    net_wealth: int
+    voting_rights: int
+
+def test_identical_wealth_liability_different_control() -> None:
+    a = OwnershipSnapshot(5, 1)
+    b = OwnershipSnapshot(5, 7)
+    assert wealth_excess(NetWealth(a.net_wealth), 3) == wealth_excess(NetWealth(b.net_wealth), 3)
+    assert a.voting_rights != b.voting_rights
+
 def test_same_amount_different_base() -> None:
     assert income_excess(Income(5), 3) == wealth_excess(NetWealth(5), 3) == 2
     assert Income(5) != NetWealth(5)
@@ -57,4 +68,5 @@ if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
     test_same_amount_different_base()
-    print("PASS: 8,192 finite cap observations + two typed counterexamples")
+    test_identical_wealth_liability_different_control()
+    print("PASS: 8,192 finite cap observations + three typed counterexamples")
