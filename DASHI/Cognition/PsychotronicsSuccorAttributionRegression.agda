@@ -222,6 +222,22 @@ noaaOriginalISDAndConverted1953HaveSameCustody :
   Atlas.root Atlas.noaaISD1953YearArchivePresent
 noaaOriginalISDAndConverted1953HaveSameCustody = refl
 
+
+noaaSynopticPressureAndRainHaveSameObserverRoot :
+  Atlas.root Atlas.noaaBangor1953SynopticPressureBeforeRain ≡
+  Atlas.root Atlas.noaaBangorJul1953HourlyRealWeatherBound
+noaaSynopticPressureAndRainHaveSameObserverRoot = refl
+
+noaaBangorWindAndClaimClockHaveSameObserverRoot :
+  Atlas.root Atlas.noaaBangor1953WindsNotEllsworthOperation ≡
+  Atlas.root Atlas.noaaBangorJul1953HourlyRealWeatherBound
+noaaBangorWindAndClaimClockHaveSameObserverRoot = refl
+
+noaaPressureJulyReferenceIsNotNewReplication :
+  Atlas.root Atlas.noaaBangor1953OverlappingJulyPressureReference ≡
+  Atlas.root Atlas.noaaBangor1953SynopticPressureBeforeRain
+noaaPressureJulyReferenceIsNotNewReplication = refl
+
 -- Additional original 1953 NOAA station does not change the publisher
 -- denominator; observations must retain their actual distinct site keys.
 barHarborJuly6Through8Equals130TenthsMm :
