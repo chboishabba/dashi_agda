@@ -1,0 +1,39 @@
+# 27 October 2026 — original NOAA ISD length correction, byte-verified adversarial tests and live archive migration
+
+**Scope:** Correction to [earlier historical ISD acquisition cut](psychotronics-20261027-bangor-original-hourly-isd-maxcut.md), on existing draft [PR #1242](https://github.com/chboishabba/dashi_agda/pull/1242). Original source authorship remains with the US Federal Climate Complex, NOAA/NCEI and USAF weather data documentation; 1953 historic weather observations with original meteorological reporting personnel; NOAA/NESDIS publishes the 2026 distribution notice; original GHCNh catalogue credited to Menne, Noone, Casey, Dunn, McNeill, Kantor, Thorne, Orcutt, Cunningham (2023). The case-specific parser correction and synthetic regressions were developed under Johl Brown's investigative direction with OpenAI ChatGPT assistance. No atmospheric or paranormal causal effect is inferred.
+
+## Material correction — earlier purported original-format parser *would reject real NOAA ISD data*
+
+The authentic [Federal Climate Complex/NOAA 2018 ISD Format Document](https://www.ncei.noaa.gov/pub/data/noaa/isd-format-document.pdf), **printed p.5; PDF page index 4; positions 1–4**, states:
+
+> The total record length = 105 + the value stored in this field.
+
+These four characters count only the **variable data section**, *not* all characters in the record; fixed 60-character control and 45-character mandatory sections contribute 105. PDF page 4 was visually inspected, alongside original pp.13–14 (PDF indices 12–13) documenting additional `ADD`, `AA1`–`AA4` period/depth/condition/quality codes. Exact old Python `parse_header` mistakenly compared `len(record) == int(record[:4])`; its synthetic builder further wrote `0105` for a 105-character synthetic record. This means the previous five-test PASS **did not validate the true NOAA source format**. It tested a self-consistent erroneous fixture. Old claimed operational original-parser readiness is therefore **superseded** (not silently erased). The earlier file listing and historical station ID still stand.
+
+The repaired [original-format record reader](../../scripts/check_psychotronics_bangor_1953_isd_original.py) compares `len(record) == 105 + int(record[:4])`, rejects actual calendar-invalid UTC dates, preserves NOAA source flags as *labels* (not independent instruments), and explicitly refuses to decode rainfall amounts from a timestamp. The original AA1–AA4 group has an ID (3), duration hours (2), amount tenths millimetres (4), condition (1), quality (1), including suspect/erroneous flags, trace, incomplete, estimate and aggregation codes. It would be wrong to read an hour-labelled record or an unvetted `AA1` lexical match as a true rainfall onset. **This pass does not claim to have decoded an original 1953 AA group.**
+
+### Actual executable correction receipt
+
+The **exact GitHub committed parser source** Git blob was independently calculated by local `git hash-object` and read from GitHub `fetch_file`:
+
+`a28d2e0da6ff231f2be6624fe0ad9a9a6efb095f` (commit `056e411ef9dbfd3641aebb0bed401e0a2498799c`).
+
+The **exact committed [11-case regression suite](../../tests/test_psychotronics_bangor_1953_isd_original.py)** Git blob was also verified against the **locally executed test file**:
+
+`2e5b27c6d1586fb8c03fd81bc04053186ed4a83d` (commit `8d313b28167b86ca54e877fac71fdf805e3fb16c`).
+
+Locally executed `python3 -m py_compile` PASSED for parser; `python3 scripts/check_psychotronics_bangor_1953_isd_original.py --self-test` PASSED **8** synthetic negative cases and gzip stream with real `0000`/ `0003` variable counts. Independently locally executed `python3 -m unittest -v tests/test_psychotronics_bangor_1953_isd_original.py` **11/11 PASSED**, including original fixed 105+variable total, rejecting legacy `0105` bug, mismatched bytes, invalid calendar and clock, station mismatches, date-scoped gzip scan, and not attributing rain, local time or causality. These are **synthetic fixture tests only**; no real NOAA hourly or monthly archive file bytes were received. CI and Agda kernel were not run in this environment.
+
+## Source-original 2026 distribution pivot
+
+[NOAA NESDIS original 23 June 2026 notice](https://www.nesdis.noaa.gov/news/service-location-change-integrated-surface-data-global-hourly) says old NCEI ISD, ISD-Lite and CSV direct download services would end with a **planned 31 July 2026 retirement**, and first-party public access moves to NOAA Open Data Dissemination (NODD) S3. Its **original-format ISD destination is `noaa-isd-pds`**, and the CSV conversion uses **a different bucket `noaa-global-hourly-pds`**. [AWS public dataset register for NOAA ISD](https://registry.opendata.aws/noaa-isd/) verifies the original ISD bucket name, public access via `aws s3 ls --no-sign-request s3://noaa-isd-pds/`, but an exact S3 object key or byte-for-byte identity for the legacy 1953 Bangor gzip has **not** been verified. This 2026 update explains why a 2018-dated original archive *listing* need not guarantee a working direct download today. The actual [NCEI legacy index](https://www.ncei.noaa.gov/pub/data/noaa/1953/) continues to display `726071-14606-1953.gz` of 160,944 bytes, but the gzip could not be fetched by browser (unsupported application/gzip), container downloader or command-line network (DNS/network inaccessible).
+
+**Secondary source-native acquisition path, not an independent 1953 experiment:** [NOAA's original GHCNh successor](https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly) replaces ISD and publishes by-station/b year PSV. [NOAA GHCNh official documentation](https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/doc/ghcnh_DOCUMENTATION.pdf) describes per-station `GHCNh_USW00023183_por.psv` naming and year/station archive layouts; Bangor exact July 1953 per-station PSV has **not been accessed or individually confirmed**. Original [GHCNh v1 citation](https://doi.org/10.25921/jp3d-3v19) credits Menne et al. GHCNh may harmonise many overlapping original sources with ISD and GHCNd, so is **not automatically a second independent observer**.
+
+The actual current acquisition frontier, ordered:
+1. `aws s3 ls --no-sign-request s3://noaa-isd-pds/`, locate exact `726071-14606-1953.gz` key by listing; do not guess the path. Hash local original-byte file after retrieval and compare to publisher object version/metadata where available.
+2. If original ISD cannot be retrieved, find station `USW00014606` in actual NOAA GHCNh station/year inventory and confirm its 1953 hourly dates/measurements directly. Record any co-origin with ISD and any missing hours.
+3. Examine original July 6–7 UTC entries, **source flags and document-quality codes**; separately decode genuine AA precipitation periods and reporting conventions. Convert to 1953 Maine civil time only with a source-specific timezone/seasonal legal record. Both Bangor and Bar Harbor are not at Reich's reported Ellsworth setup.
+4. Retrieve original July 1953 Weather Bureau weather-map/forecast **actual pages** and timestamp/area legends before attributing synoptic conditions or any event-hour causal claim. A rainstorm, even if found, is not a counterfactual no-cloudbuster comparison.
+
+**Ibrahim/snowball nonpromotion:** a 2018 document, 2026 retirement notice, AWS bucket listing and eventual GHCNh derivative may be **four publication artefacts but one NOAA custodian with overlapping source-station reports**. Parser syntax validated on synthetic inputs ≠ original 1953 data observed ≠ rainfall began locally at 22:00 ≠ device altered weather ≠ an experimentally established orgone/quantum mechanism.
