@@ -256,7 +256,7 @@ def test_auspol_aec_future_time_and_sibling_governance_remain_distinct():
     assert len(aus["sibling_reviews"]) == 2
     assert all(s["pr"] == 1251 for s in aus["sibling_reviews"])
     assert all(s["integration"] == "review_only_unmerged_sibling" for s in aus["sibling_reviews"])
-    assert "not" in aus["provenance_boundary"].lower()
+    assert "is distinct from" in aus["provenance_boundary"]
     assert "cannot be retroactively claimed inspected" in aus["statutory_time_boundary"]
 
 
@@ -268,5 +268,5 @@ def test_auspol_transfer_not_grafted_onto_existing_us_gsr_or_unified_h3():
     assert claims["C_UNIFIED_H3"]["supports"] == []
     aus = w["australian_crosspollination"]
     assert "Canadian" not in aus["causal_boundary"]  # Different legal/country claim sets
-    assert "independent" in aus["causal_boundary"]
+    assert "counterfactual evidence" in aus["causal_boundary"]
     assert "Universal" not in aus["causal_boundary"]
