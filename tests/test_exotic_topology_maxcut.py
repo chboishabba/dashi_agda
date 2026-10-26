@@ -24,6 +24,8 @@ import exotic_topology_cantor_measure_obstruction as measure
 # Native scripts are owned upstream by horned-sphere PR #1244.
 import alexander_horned_c3_explicit_open_cover as original_cover
 import alexander_horned_c3_pierced_shell_product as original_shell
+import alexander_horned_c3_equivariant_basing_paths as original_basing
+import alexander_horned_c3_same_cover_discriminator as original_cover_bidi
 
 class ExoticMaxCutTests(unittest.TestCase):
     def test_whitney_real_parametric_image_caution(self):
@@ -212,5 +214,23 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertFalse(receipt['old_prepend_is_chronological_refinement'])
         self.assertTrue(receipt['original_source_unchanged'])
         self.assertFalse(receipt['agda_kernel_verified'])
+
+
+    def test_parent_1244_equivariant_central_basing_paths_source(self):
+        result = original_basing.certify()
+        self.assertEqual(result['status'], 'PASS')
+        self.assertEqual(result['rational_checks'], 303)
+        self.assertFalse(result['source_satellite_pi1_equivalence'])
+        self.assertFalse(result['lean_kernel_checked'])
+
+    def test_parent_1244_same_cover_tame_wild_collision(self):
+        result = original_cover_bidi.audit()
+        self.assertEqual(result['status'], 'PASS')
+        self.assertTrue(result['good_open_cover'])
+        self.assertEqual(result['same_cut_tame_wild_collision'],
+                         'indistinguishable to this checker')
+        self.assertEqual(result['symbolic_shell_identities'], 5)
+        self.assertFalse(result['geometric_satellite_pi1_verified'])
+        self.assertFalse(result['infinite_wild_embedding_machine_certified'])
 
 if __name__ == '__main__': unittest.main()
