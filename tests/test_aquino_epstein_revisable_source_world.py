@@ -226,3 +226,47 @@ def test_root_relations_preserve_adversarial_sources_and_different_government_ca
     assert "no common case identity" in by_pair[("hsi_ipr_2011", "dea_ocdetf_2015")]["independence"]
     assert "not independent raw-file audits" in by_pair[("canada_joint_2019", "ftc_2019_2020")]["independence"]
     assert "not be substituted as bank-origin" in by_pair[("black_dechert_2021", "future_undetermined_source")]["independence"]
+
+
+def test_auspol_crosspollination_does_not_manufacture_evidence_roots():
+    w = world()
+    aus = w["australian_crosspollination"]
+    assert aus["thin_owner"].endswith("AustraliaPoliticalEconomySameObjectCrosswalk20261026Exact.agda")
+    assert w["original_root_count"] == 9
+    assert w["unattributed_future_source_placeholders"] == 1
+    paths = {item["id"]: item for item in aus["positive_paths"]}
+    assert len(paths) == 8
+    assert paths["AUS_HANSON_2025_HOSPITALITY"]["status"] == "original_indexed_not_pdf_face_inspected"
+    assert paths["AUS_HANSON_RINEHART_POLICY"]["status"] == "first_person_attributed"
+    assert paths["AUS_GINA_EPSTEIN_DIRECT"]["status"] == "not_located_not_universally_absent"
+    assert "initially denied all contact" in paths["AUS_BANNON_PALMER"]["evidence"]
+    assert "one unsolicited call" in paths["AUS_BANNON_PALMER"]["evidence"]
+    assert all(p["not_pays"] for p in paths.values())
+    assert all(p["original"] and p["carrier"] for p in paths.values())
+
+
+def test_auspol_aec_future_time_and_sibling_governance_remain_distinct():
+    w = world()
+    aus = w["australian_crosspollination"]
+    targets = {o["id"]: o for o in aus["decisive_remaining_same_object"]}
+    assert len(targets) == 5
+    assert "2027-02-01" in targets["AUS_FY2025_26_AEC"]["availability"]
+    assert "Nov17" in targets["AUS_FY2025_26_AEC"]["availability"]
+    assert all(t["kind"] and t["claim_reopened"] and t["not_pays"] for t in targets.values())
+    assert len(aus["sibling_reviews"]) == 2
+    assert all(s["pr"] == 1251 for s in aus["sibling_reviews"])
+    assert all(s["integration"] == "review_only_unmerged_sibling" for s in aus["sibling_reviews"])
+    assert "not" in aus["provenance_boundary"].lower()
+    assert "cannot be retroactively claimed inspected" in aus["statutory_time_boundary"]
+
+
+def test_auspol_transfer_not_grafted_onto_existing_us_gsr_or_unified_h3():
+    w = world()
+    claims = {c["id"]: c for c in w["claims"]}
+    assert claims["C_GSR_ROW"]["level"] == "unresolved"
+    assert claims["C_UNIFIED_H3"]["level"] == "unresolved"
+    assert claims["C_UNIFIED_H3"]["supports"] == []
+    aus = w["australian_crosspollination"]
+    assert "Canadian" not in aus["causal_boundary"]  # Different legal/country claim sets
+    assert "independent" in aus["causal_boundary"]
+    assert "Universal" not in aus["causal_boundary"]
