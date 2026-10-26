@@ -75,3 +75,38 @@ Local executed source `/mnt/data/monster3b_maxcut_720729/check_720_729_heisenber
 **Highest-value source-specific open obligation:** choose the **actual ATLAS/MONSTER lift of source D4** (already explicit at 2.Suz:2 level in #1098); derive its action on the **same chosen** Heisenberg Lagrangian / nine-plane and classify `L -> D(L)`. If the source action fails to preserve L, the original pointed 720+9 cannot be a D4-invariant submodule under that action, though its coordinate chart remains valid. Separately, acquire/execute the original Barraclough–Wilson source-selected degree78 family and full character-table **same-object JOIN** already owned by #1250. A suitable basis change may alter which plane is stabilized and must be declared, not silently presumed.
 
 No attribution laundering of Barraclough/Wilson, original ATLAS/AtlasRep, Serre/Terras, or other DASHI PR authors into a new Monster theorem. Equal numerals, phase analogies and existing source-written Agda code cannot substitute for actual Monster group words, linear intertwiners and kernel-verified proof.
+
+## 26 October: **actual source D4-compatible polarization found in PR #1098**
+
+New original-source donor **[scripts/monster3b_atlas_d4_pointed720729_polarization_weld.py](https://github.com/chboishabba/dashi_agda/blob/agent/e6-f3-exterior-square-maxcut-20261006/scripts/monster3b_atlas_d4_pointed720729_polarization_weld.py)** is in the **correct original ATLAS/2.Suz:2 owner #1098**, not re-vendored in this PR. An independent exact local GF3 replay used both literally identical original source generators, **verified their manifest SHA256**, and the true D4 generator words and rank12 alternating form from #1098.
+
+The anti-symplectic D4 mirror's +1 eigenspace is a rank6 Lagrangian. The induced *symmetric* form `Q(u,v)=<u,r v>` on this rank6 space has rank6, determinant **2 modulo 3**, and **split Witt index 3**. Its concrete orthogonal isotropic generators in the deterministic m-positive basis are
+
+```
+(0,0,0,1,0,0), (0,1,2,0,0,1), (1,0,0,0,0,1).
+```
+
+The six source 12D vectors `v_i,r v_i` span a **true D4-invariant 6D Lagrangian**, and the first pair spans a **D4-invariant isotropic rank2 plane**. Thus there EXISTS a source-D4-compatible **nine-point coordinate plane** for one chosen Schrödinger polarization. This is a positive quotient-level source result. It does **NOT** say the full Heisenberg translation group preserves the plane: as proved earlier, 720 translations move it.
+
+For the chosen 6D position Lagrangian, the D4 quotient by that rank2 plane is **two copies of the standard D4 2D module**, giving the following exact finite permutation action on 80 nonzero `F3^4` quotient points:
+
+```text
+identity fixes 80;
+r,r²,r³ fix 0;
+each of 4 reflection elements fixes 8;
+eight 4-orbits + six 8-orbits = 14 orbits total.
+```
+
+Therefore the **specific** earlier `Corner8×Fin10` model with D4 acting on corners while acting trivially on the ten-sheet factor is **ruled out**: all reflection fixed counts of such a product must be divisible by ten, unlike the true 8 fixed nonzero points. A **nontrivial D4 action that mixes/permutes fine sheets** is not thereby obstructed, and constructing it would require a new equivariant coordinate/character comparison rather than a trivial-product assumption.
+
+Local independent original matrix script:
+`/mnt/data/monster3b_maxcut_720729/check_atlas_d4_pointed_source_weld.py`
+and receipt:
+`/mnt/data/monster3b_maxcut_720729/atlas_d4_source_weld_receipt.json`.
+Source bytes have the exact original pinned SHA256:
+`ddd4919ab560f78b065aa08e309bd047942cdb7bb52a1474da84d54d35a031c2`
+and
+`433ba0f0373995b159859df00dd5a5005355fdbf8b59a31d651aeaf43ffcd15f`.
+The source-written GitHub consumer on #1098 has not been executed from its exact bytes here; **no GAP, Agda typecheck, actual Monster selected word, 6.Suz 78 selection or VOA intertwiner is claimed**.
+
+**Pareto frontier revised:** replace the broad question “does source D4 preserve any nine-plane?” (now constructive YES at quotient/basis level) with the stricter question “can an equivariant 8×10 indexing be built using a **nontrivial ten-sheet D4 action**, or is there a character-theoretic obstruction to any product action?” Keep the original Suzuki character/Monster quotient JOIN in #1250 and the actual Hom/cocycle in #1098 as independent, more important same-object payments.
