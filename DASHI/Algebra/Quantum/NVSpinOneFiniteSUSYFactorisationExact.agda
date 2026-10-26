@@ -112,3 +112,27 @@ finiteIndexWitness = refl
 -- The existing QFT SUSY boundary is intentionally NOT instantiated:
 -- its postulated background/spin structures and field-theoretic targets
 -- cannot be discharged by a 3-level quantum-mechanical factorisation.
+
+-- Exact *Zeeman term* obstruction (dimensionless spin eigenvalues 1,0,-1
+-- encoded with a shifted nonnegative profile 2,1,0).
+-- An additive constant does not affect commutation with Q, and the
+-- following explicit pair is enough to refute a universal commutator law.
+zeemanShifted : Matrix
+zeemanShifted C3.c0 C3.c0 = 2
+zeemanShifted C3.c1 C3.c1 = 1
+zeemanShifted _ _ = 0
+
+zeemanTimesQAtMinusPlus :
+  product zeemanShifted q C3.c2 C3.c0 ≡ 0
+zeemanTimesQAtMinusPlus = refl
+
+qTimesZeemanAtMinusPlus :
+  product q zeemanShifted C3.c2 C3.c0 ≡ 2
+qTimesZeemanAtMinusPlus = refl
+
+-- A nonzero axial Zeeman splitting spoils conservation of this Q.
+notEveryAxialZeemanCommutesWithQ :
+  (∀ i j → product zeemanShifted q i j ≡ product q zeemanShifted i j)
+  → (0 ≡ 2)
+notEveryAxialZeemanCommutesWithQ commute =
+  commute C3.c2 C3.c0
