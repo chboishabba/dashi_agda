@@ -147,3 +147,106 @@ same-time-horizon direction field with uniform spatial derivative control
 and finite projected critical expenditure, with a separate PDE theorem
 identifying the limit/continuation. Earlier finite vortex trits and BMO
 receipts are useful falsification and geometry candidates only.
+
+
+## 26 October 2026: source-exact producer, adverse pressure case and observability cut
+
+**Cross-PR source scan (newest):** #1266 already owns the generic revisable
+consumer-collision/no-factorisation apparatus; #1268 owns its scoped
+Follow-Through original-source-world/Pareto experiment; #1267 is a
+source-first severe-inquiry *roadmap*, not experimental authority; #1265
+explores finite Dust/LILA learner operators under source-written and empirical
+limits. These PRs are **independent/unmerged** donor designs. This work
+continues to import the master generic
+`DASHI.Core.IntersectionalNonFactorability` and
+`DASHI.Core.FirstImplementationTimestampExact`; no duplicate universal
+framework was created and no collaborative Alice Brown/LOOM/ESD work was
+changed or presumed authorized.
+
+### Yan–Rădulescu: fully source-specific algebra and an adversarial equation
+
+The primary published PDF (2021, printed pp. 996–998) specifies
+`p>1, q>2, T>0` and
+`g=a^(q-1)(2y-T)(q-2(p+1)a^(2(p+1)))`, with
+`a=y(y-T)`, `h=a^q`, `rho=a^(2(p+1))`,
+`F=h*exp(-rho)`, `D=g*exp(-rho)`.
+
+The **new** `RequestProject/NavierStokes/YanRadulescuExactSeed.lean`
+now defines these exact source expressions, encoding `p=pExtra+2`,
+`q=qExtra+3`, so all required integer inequalities hold by type. It adds
+the ordinary real polynomial and exponential `HasDerivAt` chain, an
+identification `F'=D`, source-specific divergence cancellation and all
+six Dirichlet cube-face equalities. This is real theorem **source code**,
+not merely a symbolic finite example; kernel checks are **not observed**.
+Higher-dimensional coordinates `4..n` are identically zero as in the
+paper, but the general `Fin n` divergence/boundary integration is still
+unimplemented. The paper's viscosity, forcing, linearization and
+Nash–Moser existence theorem also remain unimplemented.
+
+The additional `YanRadulescuPressureCountermodel.lean` carries a
+concrete *one-coordinate analytic slice*:
+`U=0`, `P(x)=eps*x1²/2`, `f=(eps*x1,0,0)`. Thus
+`grad P=f` and `Delta P=div f=eps≠0`, while the unqualified
+pressure formula (1.3) would demand `Delta P=0` because `U=0`.
+This shows why the printed generic-forcing and pressure assertions
+must be reconciled or supplied with an extra solenoidal-forcing
+assumption. The full vector calculus and regularity assumptions are
+not themselves kernel-checked in this tranche; the Lean code proves
+the one-coordinate polynomial derivative formulas and the
+nonzero discrepancy. Do **not** promote this adverse test into a
+claim that the authors' iteration proof is false under any possible
+additional assumptions.
+
+Local execution (SymPy exact symbolic algebra, not Lean) reproduced the
+source polynomial derivative/endpoint identities for **105/105** p,q,T
+choices and pressure/forcing symbolic derivatives. A separate exact
+`Fraction` finite-difference test passed **60/60** fixtures, with
+central differences exact on the selected degree-two and degree-one
+polynomials. Neither is a kernel receipt.
+
+### Rodgers: fully labelled arrival timestamps can still underidentify source order
+
+The initial source-world from Rodgers Section 5.2 is
+`C@0ms + 80ms = C-arrival80ms`,
+`E@50ms + 10ms = E-arrival60ms`, despite source `C<E`.
+**DASHI extension**, not an event reported by Rodgers: a second world
+takes `E@0ms +60ms=E-arrival60ms`,
+`C@50ms +30ms=C-arrival80ms`, despite source `E<C`.
+Both worlds yield the **same exact labelled arrival pair (C80,E60)**.
+The additional typed Agda `arrivalCollisionWitness` reuses the original
+nonfactorability proof owner, while
+`exactCalibrationRecoversOrderForTheseWorlds` shows that externally
+obtained *correct delay profiles* separate this specific pair.
+This is a **consumer-relative refinement**: a decoder factoring only
+through measured arrivals cannot succeed on both histories, whereas an
+observer supplied with calibrated delays can. An uncalibrated receiver
+has no legal access to the hidden source timestamps.
+
+**Severe, held-out discriminator:** independently stamp source events,
+precalibrate/randomize channel delays with calibration data kept separate
+from source-order labels, synchronize receiver clocks, include a
+nuisance-delay/noise model, mask held-out source-order labels and compare
+paired receiver-only versus receiver-plus-calibration decoders on the
+identical held-out events. Success must be an independently replicated
+improvement on source-order recovery, not merely fitting the
+recorded arrival timestamps. The test establishes order reconstruction,
+**not** phenomenal passage or a neural account of conscious uptake.
+
+### Reprioritised Ibrahim/Pareto frontier
+
+| Rank | Next genuine producer | Acceptance / stop condition |
+|---|---|---|
+| P0 | Check the existing #1255/#87 declarations with actual Agda/Lean kernels | Record exact HEAD, toolchain, exit status; do not infer from static tests or CodeRabbit |
+| P1 | Physically instantiate Miller's selected unforced R³ solution and direction gradients | Non-circular same-source interval, `L⁴_t L²_x` bound, exact analytic continuation proof |
+| P1 | Resolve Yan source's forced divergence/pressure compatibility | Either prove `div(f)=0` from actual source assumptions, supply a corrected pressure constraint, or retain the discrepancy with its original locator; no hidden source rewrite |
+| P1 | Execute independent arrival-delay calibration experiment in appropriate empirical setting | Distinguish history orders on held-out data; no consciousness promotion |
+| P2 | Yan higher-dimensional/Sobolev/Nash–Moser analysis | Derivative-loss and smoothing estimates, linearized inverse, iteration/convergence, exact forcing and pressure |
+| P3 | Merge and reusable theorem admission | First-commit author/date, exact-head kernel receipts, and consumer-source matching all present before proof promotion |
+
+Source roots do not multiply when a single paper is copied into a
+review/preprint/mirror or appears in sibling PRs. The new analytic
+counterexample and finite two-world ambiguity are DASHI constructions
+under Johl Brown's directed research with OpenAI ChatGPT assistance;
+published results, older generic machinery and empirical data retain
+their respective original creators. Bibliographic proximity and a
+relevant PR are not evidence that a scientific hypothesis is true.
