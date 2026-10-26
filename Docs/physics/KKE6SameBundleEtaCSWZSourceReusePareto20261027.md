@@ -93,3 +93,12 @@ This implication is independent of the earlier specific signed-index=-12 witness
 The local source cochain `I6=(FL-FR)X4` is a restriction of this stronger invariant-polynomial factorisation to a selected central U1 basis. The new calculation identifies the *actual global line-character candidate*, without claiming a physical normalized differential cocycle. The original first-Tits action #1106 remains the representation owner; physical parity #1241 remains the anomaly source owner.
 
 **New terminal max-cut:** construct the Dai-Freed/Witten-Yonekura determinant-line functional and quantised spin CS level on the selected H quotient, and a global patched/defect-aware WZ functional compatible with the Chi33 line class. Do not waste another cut checking only torus sample parity or a non-source 2+1D CS level. No Agda kernel or full quantum anomaly cancellation asserted.
+
+
+## 27 October torque / fifth-dimension / 9999! cross-owner acceptance note
+
+Canonical cross-PR result: `Docs/physics/KKTorque9999Chi33SameActionParityPareto20261027.md` and `scripts/check_kk_torque_pickover9999_chi33_fifth_parity.py`, plus source-written `KKTorquePickover9999Chi33FifthConsumerExact.agda`.
+
+The real original owners are merged torque/EM #1164, KK fibre shift #1239, Hopf U1 #1235, **Pickover 9999! #1260** (sibling, not necessarily present as an Agda import in this branch), source E6 #1106, physical KK #1241. The sample Pickover power `k↦4950k mod9999` **annihilates the order-three torsion subgroup**, so cannot faithfully read diagonal quotient deck information under the selected μ3→μ9999 comparison. Its odd-order finite charge-two invertibility also cannot promote a globally single-valued half-phase on U1. In the actual parity-even E6 boundary group Chi33 has primitive Chern winding ±1 at fixed nonliftable Z3 deck; torsion samples and WZ functional remain distinct.
+
+The conventional S1/Z2 orbifold projects **metric g_{mu5}** to odd modes (no geometric graviphoton zero mode), but can retain **independent B_mu** even and **E6 EW** photon; retaining both latter without a mixing/Higgs consumer creates **two** massless U1s. Spatial torque/right-hand orientation from #1164 has no authority to identify either with a fifth coordinate. None of these limited checks constructs APS eta or globally patched WZ; earlier original-source ownership and explicit quantum-wall criteria remain intact.
