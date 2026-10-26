@@ -35,9 +35,10 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceLiveE
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (length)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -105,6 +106,67 @@ module Live
   exactCentering output =
     Pair.fixedOutputCovariancePairDifference
       rho S velocity cutoff output
+
+  ------------------------------------------------------------------------
+  -- SAME PHYSICAL FIXED-OUTPUT CARRIER: R236 COVARIANCE ↔ R685 RATE.
+  --
+  -- C_k = n_k W(M_k,D_k) + R_k W(M_k,M_k)
+  --     = R_k W(M_k,M_k) - n_k K_k
+  --     = R_k W(M_k,M_k)
+  --        - n_k ( W(M_k,commutator_k) - W(M_k,tangent_k) ).
+  --
+  -- No sign payment or cutoff-uniform bound is asserted. In particular
+  -- the original n_k and R_k centering cannot be discarded; they are
+  -- the source of the previously falsified zero-padding B4 route.
+  -- The vorticity enstrophy functional is cubic and is NOT C_k.
+  ------------------------------------------------------------------------
+
+  covarianceIsPhysicalRateWork :
+    (output : Z3.FourierMode) →
+    coherentCovarianceNumerator output
+    ≡
+      Pair.rateSum rate (fibre output)
+        * Work.coherentWork (mixed output) (mixed output)
+      - Pair.natAsRational (length (fibre output))
+        * Pair.weightedWorkSum rate (work output) (fibre output)
+  covarianceIsPhysicalRateWork output
+    rewrite Pair.variableDecayWorkSum
+      (mixed output) rho S velocity (fibre output) =
+    solve
+      ( Pair.natAsRational (length (fibre output))
+      ∷ Pair.rateSum rate (fibre output)
+      ∷ Pair.weightedWorkSum rate (work output) (fibre output)
+      ∷ Work.coherentWork (mixed output) (mixed output)
+      ∷ [])
+
+  covarianceIsCommutatorMinusTangent :
+    (output : Z3.FourierMode) →
+    coherentCovarianceNumerator output
+    ≡
+      Pair.rateSum rate (fibre output)
+        * Work.coherentWork (mixed output) (mixed output)
+      - Pair.natAsRational (length (fibre output))
+        * ( Work.coherentWork (mixed output)
+              (Work.fixedOutputCommutator
+                S velocity (Audit.projectedNonlinearity system)
+                cutoff output)
+          - Work.coherentWork (mixed output)
+              (Work.fixedOutputDampedTangent
+                rho S velocity (Audit.projectedNonlinearity system)
+                cutoff output) )
+  covarianceIsCommutatorMinusTangent output
+    rewrite Work.fixedOutputCommutatorWorkIsTangentMinusDecay
+      rho S velocity (Audit.projectedNonlinearity system) cutoff output =
+    solve
+      ( Pair.natAsRational (length (fibre output))
+      ∷ Pair.rateSum rate (fibre output)
+      ∷ Work.coherentWork (mixed output) (decay output)
+      ∷ Work.coherentWork (mixed output) (mixed output)
+      ∷ Work.coherentWork (mixed output)
+          (Work.fixedOutputDampedTangent
+            rho S velocity (Audit.projectedNonlinearity system)
+            cutoff output)
+      ∷ [])
 
   livePhysicalCoherentCovarianceBound :
     (output : Z3.FourierMode) →
