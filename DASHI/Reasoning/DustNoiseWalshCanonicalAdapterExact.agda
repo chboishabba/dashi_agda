@@ -12,6 +12,8 @@ open import Data.Rational using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact as Cube
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+open import Data.Rational using (_*_)
 import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshCharacterExact as Walsh
 import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshInversionExact as Inversion
 
@@ -27,7 +29,11 @@ record CompleteProbeValues : Set where
 -- This is a finite basis reconstruction, not a stochastic expectation claim.
 decodeProbeValues :
   (Cube.Subset4 → ℚ) → Cube.Subset4 → ℚ
-decodeProbeValues = Inversion.walshReconstruct
+decodeProbeValues measurements coordinate =
+  Inversion.oneSixteenth *
+    Sums.sumRational Cube.allSubsets4
+      (λ direction → Walsh.walshCharacter direction coordinate *
+        measurements direction)
 
 -- One can recover ANY source vector exactly from all its Walsh
 -- coefficients, using the original 16-point rational proof.
@@ -70,12 +76,18 @@ recoverCreditFromMeasuredResponses :
   ≡ DirectionalMeasurementBridge.latentCredit bridge coordinate
 recoverCreditFromMeasuredResponses bridge coordinate =
   trans
-    (Inversion.walshReconstructCong
-      (DirectionalMeasurementBridge.measuredDirectionalResponse bridge)
-      (λ direction →
-        Walsh.walshCoefficient
-          (DirectionalMeasurementBridge.latentCredit bridge) direction)
-      (DirectionalMeasurementBridge.measurementIsWalshCoefficient bridge)
-      coordinate)
+    (cong (λ x → Inversion.oneSixteenth * x)
+      (Sums.sumRationalCong
+        Cube.allSubsets4
+        (λ direction →
+          Walsh.walshCharacter direction coordinate *
+          DirectionalMeasurementBridge.measuredDirectionalResponse bridge direction)
+        (λ direction →
+          Walsh.walshCharacter direction coordinate *
+          Walsh.walshCoefficient
+            (DirectionalMeasurementBridge.latentCredit bridge) direction)
+        (λ direction →
+          cong (λ v → Walsh.walshCharacter direction coordinate * v)
+            (DirectionalMeasurementBridge.measurementIsWalshCoefficient bridge direction))))
     (Inversion.walshReconstructionExact
       (DirectionalMeasurementBridge.latentCredit bridge) coordinate)
