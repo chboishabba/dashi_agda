@@ -99,3 +99,56 @@ def test_small_data_explicit_uniform_global_sample():
     assert s.Rational(1,4) < c.gradient_smallness_threshold
     assert c.h2_infinite_time_integral==s.Rational(5,4)
     assert s.N(c.weighted_plus_terminal_ceiling)>0
+
+
+def test_arbitrary_data_eventual_low_energy_entry_before_one_viscous_time():
+    c=mod.eventual_all_data_tail_w1_certificate(s.Integer(1),1,1,1,1)
+    assert c.averaging_start==0
+    assert c.common_entry_time==1
+    assert s.simplify(c.universal_tail_energy_ceiling-
+                      2*c.enstrophy_threshold*s.exp(-2))==0
+    assert s.simplify(s.exp(-2*c.common_entry_time)
+                      <= c.universal_tail_energy_ceiling) is s.true
+
+
+def test_arbitrary_high_energy_has_only_logarithmic_waiting_time():
+    nu=s.Integer(2);K=s.Integer(3);E=s.Integer(1000)
+    c=mod.eventual_all_data_tail_w1_certificate(E,nu,K,1,1)
+    t0=s.log(E/(2*c.enstrophy_threshold))/(2*nu)
+    assert s.simplify(c.averaging_start-t0)==0
+    assert s.simplify(E*s.exp(-2*nu*t0)
+                      -2*c.enstrophy_threshold)==0
+    assert s.simplify(E*s.exp(-2*nu*c.common_entry_time)
+                      -c.universal_tail_energy_ceiling)==0
+
+
+def test_arbitrary_data_average_yields_small_h1_entry_for_each_cutoff():
+    e,d,nu,K,cw,cm,T,t=_symbols()
+    c=mod.eventual_all_data_tail_w1_certificate(e,nu,K,cw,cm)
+    window=1/nu
+    # Integral_X <= E(t0)/(2nu) <= d/nu.
+    average_bound=(2*c.enstrophy_threshold)/(2*nu*window)
+    assert s.simplify(average_bound-c.enstrophy_threshold)==0
+
+
+def test_small_h1_absorbing_region_at_common_entry():
+    e,d,nu,K,cw,cm,T,t=_symbols()
+    c=mod.eventual_all_data_tail_w1_certificate(e,nu,K,cw,cm)
+    assert s.simplify(K*nu**(-3)*c.enstrophy_threshold**2-nu/2)==0
+    # At X<=d, the enstrophy inequality and Y>=X ensure
+    # X'+nu/2*Y<=0; no Galerkin cutoff can leave the region.
+
+
+def test_eventual_tail_bound_is_uniform_in_initial_energy_after_wait():
+    e,d,nu,K,cw,cm,T,t=_symbols()
+    c=mod.eventual_all_data_tail_w1_certificate(e,nu,K,cw,cm)
+    reference=mod.small_data_global_w1_certificate(
+        c.universal_tail_energy_ceiling,c.enstrophy_threshold,
+        nu,K,cw,cm)
+    assert s.simplify(c.universal_tail_W1_ceiling-
+                      reference.weighted_plus_terminal_ceiling)==0
+    assert s.simplify(c.universal_tail_energy_ceiling/
+                      c.enstrophy_threshold-2*s.exp(-2))==0
+    # The initial-data dependence is in the waiting time, NOT the
+    # universal T>=Tentry W1 tail allowance. This says NOTHING about
+    # the still-uncontrolled early/middle interval.
