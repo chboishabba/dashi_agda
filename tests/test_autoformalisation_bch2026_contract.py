@@ -75,6 +75,7 @@ def test_documented_lemma_scope_and_sci_limits():
         "Nat.sInf", "nine-unknown DPRM",
         "source-first", "historical",
         "exact-head", "correspondence",
+        "Hilbert10/DPRM.lean", "k≤9",
     ):
         assert target.lower() in s.lower(), target
 
