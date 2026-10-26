@@ -120,3 +120,33 @@ Explicit basis \(A,R=C-A-B\) has \(B=-A-3R,C=-2R\). Its \(\Chi_{33}\) line chara
 New exact program \`scripts/check_kk_e6_h_pi1_charge_deck.py\` constructs the unimodular inverse and checks 841 integer-pair cases and 867 quotient path triples, retaining the existing source parity and \(\Chi_{33}\) representation ownership. Locally executed file has a byte-identical Git blob at the owning PR head. No extra 5D field content. The degree/obstruction information now has a canonical integral presentation for the **P0 boundary topology** portion; it still supplies neither full \(H^*(BH;\mathbb Z)\) nor spin six-bordism, eta determinant phase, quantised CS5 or a patched WZ action.
 
 **Original literature snowball:** Xianzhe Dai and Daniel Freed, *Eta-Invariants and Determinant Lines* (J. Math. Phys. 35, 1994, 5155–5194; DOI **10.1063/1.530747**) give gluing/variation and the determinant-line global-anomaly method. Arun Debray, Weicheng Ye and Matthew Yu, *Global Structure in the Presence of a Topological Defect* (Commun. Math. Phys. 407 (2026) 159, DOI **10.1007/s00220-026-05629-x**, original arXiv 2501.18399 submitted 2025) provide more recent defect/characteristic-bordism methods. **Their worked dimensions/defect and symmetry cases are not identical to this 5D E6 quotient**, and their publication/preprint are one root; no selected H spin-bordism theorem imported. A genuinely faithful same-group differential-cocycle action is still required. Do not confuse the Pickover \(\mu_{9999}\) power and its chosen \(\mu_3\) subgroup with the torsion-free \(\pi_1(H)\); only a separately specified observer map can relate them, and the power map loses the selected deck observation.
+
+
+## 2026-10-27 next max-cut: connected \(\Chi_{33}\)-reduced gauge group \(K\) and its surviving fluxes
+
+A productive constructive fork follows from the **existing source** \(\pi_1(H)=\mathbb Z\langle A\rangle\oplus\mathbb Z\langle R\rangle\) (see \`scripts/check_kk_e6_h_pi1_charge_deck.py\`). The genuine original first-Tits one-dimensional boundary singlet character is
+\[
+\chi_{33}: H\to U(1),\quad [U_c,U_L,U_R]\mapsto
+\frac{\det U_R}{\det U_L},\qquad
+(\chi_{33})_*: \pi_1(H)\to\pi_1(U1)=\mathbb Z,\quad (a,r)\mapsto -a.
+\]
+It is a genuine **global** H character (the common central Z3 cancels), **surjective and primitive**, not just a local Lie-algebra half-angle. Let \(K=\ker\chi_{33}\). The classical long exact sequence for the fibration \(K\to H\to U(1)\), together with connected H and surjective \((\chi_{33})_*\), gives
+\[
+\pi_0(K)=0,\qquad \pi_1(K)=\ker(\chi_{33})_*
+=\mathbb Z\langle R\rangle.
+\]
+Thus K is connected and still carries **every** central lifting class, because \(\operatorname{deck}(R)=1\bmod3\). A representative of the primitive generator R has common central endpoint p=1 and **equal** determinant turns \(d_L=d_R=-1\); its \(\chi_{33}\) clutch winding is zero identically while it remains nonliftable to the product covering group. Consequently a nonliftable H bundle on \(S^2\) need not obstruct a nonzero Higgs section. **This corrects any reading of the preceding no-go as 'all nonliftable gauge bundles force a Chi33 zero'.** Only the nonzero associated line Chern class forces zeros.
+
+The selected signed source characteristic polynomial already factors through \(D=c_1(L_{\Chi_{33}})\):
+\(\mathrm{ch}^{\rm signed}_1=8D\),
+\(\mathrm{Tr}_{\rm signed}F^3=4DQ\).
+Upon restricting the **same** H representation to \(K\), the genuine character \(\chi_{33}|_K=1\) makes \(D=0\); therefore the signed **rational/free perturbative six-index density vanishes identically** on \(BK\). This is a genuine *model-specific* free-index statement, not a new general anomaly theorem. It does **not** show the original full H anomalous gauge transformations are consistently completed; K only captures unbroken gauge transformations in a nonzero-Higgs section. Nor does it compute K torsion/global spin-bordism anomaly, define an eta determinant line, construct a global UV H path integral, or establish a complete first-Tits two-VEV vacuum. A K-only microscopic gauge theory is a **different explicit source model**, not a retroactive cure for a proposed full H UV action.
+
+**Executable paid joint receipt:** \`scripts/check_kk_e6_higgs_reduction_anomaly_same_source.py\` imports and executes the *prior-owner* \`check_kk_e6_h_pi1_charge_deck.py\` and \`check_kk_e6_chi33_full_cartan_anomaly_factor.py\`, checks 241 actual K-loop representatives, all deck classes, source polynomial restriction and nontrivial surviving quadratic Q. The prior pi1 checker now itself constructs the K loops. Independent exact integer test passed locally; GitHub source is committed, but combined exact GitHub script and Agda/Lean kernel are not executed in this round.
+
+**Pareto fork made precise**:
+- **B_H full UV chiral E6 orbifold:** must construct full H eta/quantized CS/defect-complete WZ for all admitted \(\Chi_{33}\) zeros before claiming physical quantum consistency. Neither K-reduced free anomaly nor positive index parity pays this.
+- **B_K conditional Higgs-phase EFT:** choose a justified global nowhere-zero Higgs section / K reduction, then compute **K** global torsion/eta, true E32/E21 VEVs and full interval spectrum. This is a narrower sector or explicitly changed gauge action. Its nonliftable sectors survive and must be retained; forbidding all nonliftable flux is unnecessary.
+- **A/C separate gravity controls:** can pursue physically sourced Earth/LARES null predictions independently but cannot certify B_H.
+
+**Attribution roots**: long exact homotopy sequence / reduction of principal G-bundles by sections of \(G/K\) are standard algebraic topology and bundle theory (Hatcher *Vector Bundles & K-Theory*). The Atiyah–Singer index and Chern–Weil polynomial are original classical mathematical tools, with the source-specific first-Tits representation in #1106 and selected parity/χ33 in #1241. Dai–Freed (1994) and Witten–Yonekura (2020) still own the actual global eta/determinant methodology, not this selected completion.
