@@ -637,3 +637,88 @@ Full original twenty-space proof completion remains
 bounded by actual infinite 2-manifold, Richards ends,
 Fox-Artin/Wada/Warsaw/Hatcher/Simons and all other
 source-specific unproved geometric theorems.
+
+
+## 27 October — actual same-graph spherical caps pay genus-zero finite planarity
+
+NEW `scripts/exotic_topology_genus_zero_sphere_caps.py`
+consumes the ORIGINAL oriented triangle meshes and labelled
+frontiers, with no new triangulation engine. For every
+positive-depth binary Cantor or balanced-ternary source
+stage tested, each outgoing boundary circle has EXACTLY
+three edges. The script adds its REVERSE-ORIENTED
+missing triangle. This does not add a vertex or edge.
+It checks no 2-simplex is duplicated, and runs the
+original full oriented manifold vertex-link checker
+on the resulting CLOSED (g,b)=(0,0) surface.
+
+The result is a genuine same-graph **finite simplicial
+sphere capping witness** at depths one and two:
+- binary original stage counts b=2,4; capped is
+  a closed orientable genus-zero triangulation;
+- balanced original stage counts b=3,9; same result.
+A source-independent locally run reconstruction
+verified all four caps plus unchanged 1-skeleton.
+These are mathematical FINITE receipts, not a Lean/Agda
+kernel result or proof of any infinite realisation.
+
+**Critical negative controls:**
+- The initial disk is ONE 2-simplex. Simply adjoining
+  the opposite-oriented face on the SAME three vertices
+  duplicates a simplex, violating an abstract simplicial
+  complex (though a Δ-complex might allow two face maps).
+  The original 1-skeleton is directly the planar K3;
+  this is treated separately, not called a two-simplex
+  triangulation of S².
+- Performing this operation on a positive-genus handled
+  stage produces a CLOSED genus-g surface, NOT a sphere.
+  The source checker correctly rejects its false
+  genus-zero acceptance.
+
+**Mathematical `(3,6)` conclusion with clearly typed sources:**
+A graph of a finite triangulated genus-zero surface
+with three-edge boundary circles is planar, and its
+same-graph cap supplies an explicit planar embedding
+for positive depths. Every subgraph on v≥3 vertices
+therefore satisfies e≤3v−6 by the classical
+simple planar-graph edge bound. Together with the
+**general** proven-on-paper Euler–Maxwell identity
+3V−E=6−6g and g=0, these selected finite genus-zero
+graphs meet the (3,6)-tight DEFINITION.
+This uses a standard topological planar-subgraph
+inequality beyond the directly checked executable
+numerical formula. No Graph theory kernel theorem
+or Power-style minimal 3D rigidity statement is
+claimed, nor is the all-depth closure established
+by four bounded caps.
+
+**Modern source first:** Stephen C. Power (2025),
+DOI 10.1112/blms.70083, Theorems 4.5/6.4,
+proves existence of specially chosen (3,6)-tight
+and 3-rigid noncompact surface triangulations.
+Our finite same-graph sphere caps are
+user-directed repository-local implementation,
+not authored by Power or a new proof of his
+infinite rigidity theorem. Earlier compact
+surface classification remains Brahana;
+Kerékjártó/Richards own the noncompact genus/end
+classification, and no classification priority
+is revised by citing a newer proof.
+
+The remaining highest-value formal cut is:
+(1) instantiate `ExoticSimplicialStarTransportExact`
+with the ORIGINAL uniform all-n surface gluing;
+(2) construct the countable locally finite
+geometric realisation as a single topological space;
+(3) prove compact exhaustion and Richards actual
+end-cylinders on that same object;
+(4) optionally use Power's more specialised
+vertex-split/0-extension construction to obtain
+its (3,6)-tight/minimally-rigid infinite graph.
+
+The exact-head focused suite has now gained six
+Power/Maxwell/cap regression methods since
+the earlier 32-test count (38 total).
+The local reconstruction is independent;
+the pushed GitHub test suite and new Lean
+source still lack successful kernel/Actions receipts.
