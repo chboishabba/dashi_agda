@@ -616,3 +616,65 @@ meridian with same-source metric;
 P3 Euclidean length; P4 real
 curvature/matter, P5 physical
 calibration; P6 native kernels.
+
+
+## 2026-10-27 TOE normalized import convergence — O/R/C/S/L/P/G/F
+
+**O — Objective:** Attach existing horn finite source gates to canonical
+`DASHI.EverythingTOESymmetryResolved369`. The terminal TOE is not proved.
+
+**R — Roots:** Alexander/Hatcher original wild topology; existing #1244
+C3 geometric source and #1249 horn source-conditional Agda modules.
+Existing `DASHI.Unifier`, `DASHI.Unified.PNFHyperfabric`, and
+`DASHI.Unified.Physics` are the actual TOE carriers. Original
+Deicyde/hatcher-at, meta-introspector, and source-repo authors retain
+independent attribution; no code was copied from external repos.
+
+**C — Preconditions:** existing file/module pairs at the chosen PR
+branch; stage avoidance needs a true source stage and marked loop;
+ribbon perimeter is finite dart algebra only. Original Hatcher
+relative wild satellite map and Euclidean gauge connection absent.
+
+**S — Invariants:** No ESD edits, no new generic theorem, no constructor
+or default proof to imply a wild meridian, no imported experimental
+evidence. Never call a source-written file kernel-verified.
+
+**L — Lane:** One nonblocking import-edge lane on hyperfabric #1249.
+The three TOE parent imports and the two existing horn exact modules
+are imported by the existing top-level TOE aggregate. No other
+module or cross-repo branch was edited.
+
+**P — Postconditions:** The 369 aggregate now reaches the original
+Unifier and Unified physics/PNF parents and already-existing
+stage-clearance and ribbon boundary exact modules. It does NOT
+turn conditional geometric source claims into a complete TOE.
+
+**G — Gates:** Deterministic GitHub HEAD fetch confirmed all six
+module names match their paths and all five imported target modules
+exist at the same branch. The target import count is eight including
+its original three imports. Local Python exact source tests pass.
+The environment has no Agda executable or available local
+dashi-agda-preflight index. Thus a kernel typecheck and local
+related_symbols/discover/round_lineage receipt remain UNVERIFIED.
+GitHub code search identified existing owner declarations and the
+preflight API, but does not replace the local referee.
+
+**F — Fail-closed:** If any import is absent from another PR head,
+do not promote or merge. The original `DASHI.Unifier` contains
+explicit abstract/axiomatized proof interfaces, and
+`DASHI.Unified.Everything` contains an existing malformed tail
+on this branch. Neither defect is fixed by a pure aggregate import.
+Next work requires a reproducible local Agda build, branch-wide
+preflight, then a separately scoped repair of the FIRST proven
+import or syntax failure. No work was done on
+`dashi_digital_esd`, `*digital_esd*`, or `*ESD*`.
+
+**Management crosswalk:** ITIL change record = this one-path
+import change. ISO 9000 = module existence and deterministic
+acceptance. ISO 42001/NIST AI RMF = evidence and proof-state control.
+ISO 27001/27701 = read-only external/IP-sensitive repositories and
+ESD scope. ISO 23894 = failed-source promotion risk.
+ISO 9241 = concise explicit proof status. Six Sigma = zero missing
+target imports in the inspected head. C4/PlantUML conceptual flow:
+TOE369 -> Unifier / Unified Physics / Unified PNF /
+HornStageClearance / HatcherRibbon. No new architecture.
