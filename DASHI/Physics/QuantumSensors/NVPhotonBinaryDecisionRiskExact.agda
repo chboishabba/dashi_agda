@@ -26,30 +26,24 @@ plusResponse t = Observer.response (model t) C3.c0
 minusResponse t = Observer.response (model t) C3.c2
 
 -- With equal prior weights, these are TWICE the corresponding
--- success/error probabilities, avoiding an unjustified division witness.
+-- success/error probabilities, with complementary Bernoulli fractions\n-- calculated as 1-p from the existing normalized source likelihood.
 twiceSuccess : OneShotBinaryTest → ℚ
 twiceSuccess t =
   Photon.photon (plusResponse t) +
-  Photon.noPhoton (minusResponse t)
+  (1ℚ - Photon.photon (minusResponse t))
 
 twiceError : OneShotBinaryTest → ℚ
 twiceError t =
-  Photon.noPhoton (plusResponse t) +
+  (1ℚ - Photon.photon (plusResponse t)) +
   Photon.photon (minusResponse t)
 
 -- Exact normalization of the two conditional probability kernels.
 totalTwice :
   (t : OneShotBinaryTest) →
   twiceSuccess t + twiceError t ≡ 1ℚ + 1ℚ
-totalTwice t
-  rewrite Photon.normalized (plusResponse t)
-        | Photon.normalized (minusResponse t) =
-  solve
-    (Photon.photon (plusResponse t)
-     ∷ Photon.noPhoton (plusResponse t)
-     ∷ Photon.photon (minusResponse t)
-     ∷ Photon.noPhoton (minusResponse t)
-     ∷ [])
+totalTwice t =
+  solve (Photon.photon (plusResponse t) ∷
+         Photon.photon (minusResponse t) ∷ [])
 
 -- Signed contrast is the excess of twiceSuccess over one.
 -- Positive contrast favours photon->plus; reversed contrast demands
@@ -62,22 +56,16 @@ signedContrast t =
 successContrastIdentity :
   (t : OneShotBinaryTest) →
   twiceSuccess t ≡ 1ℚ + signedContrast t
-successContrastIdentity t
-  rewrite Photon.normalized (minusResponse t) =
-  solve (Photon.photon (plusResponse t)
-         ∷ Photon.photon (minusResponse t)
-         ∷ Photon.noPhoton (minusResponse t)
-         ∷ [])
+successContrastIdentity t =
+  solve (Photon.photon (plusResponse t) ∷
+         Photon.photon (minusResponse t) ∷ [])
 
 errorContrastIdentity :
   (t : OneShotBinaryTest) →
   twiceError t ≡ 1ℚ - signedContrast t
-errorContrastIdentity t
-  rewrite Photon.normalized (plusResponse t) =
-  solve (Photon.photon (plusResponse t)
-         ∷ Photon.noPhoton (plusResponse t)
-         ∷ Photon.photon (minusResponse t)
-         ∷ [])
+errorContrastIdentity t =
+  solve (Photon.photon (plusResponse t) ∷
+         Photon.photon (minusResponse t) ∷ [])
 
 -- The empirical test direction and hypothesis are distinct:
 -- a statistical reject/fail-to-reject decision does not certify
