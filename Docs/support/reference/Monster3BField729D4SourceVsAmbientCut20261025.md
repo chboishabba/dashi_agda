@@ -74,3 +74,20 @@ This is significant because faithful 6.Suz character values were **not originall
 Cross-reference latest #1239 source-authorized `C27` rational conductor projectors only for projector-reduction *prior art*; that 27A/B VOA object is **not** automatically the selected 3B normalizer or the current H4 Fourier basis.
 
 The source-weld max-cut thus has two independent positive calculations (H4ζ Fourier 810-copy equivalence, ambient GF729 D4/GSp group equations), two source-word stop signs (Atlas g1 order4, selected word order6), and a distinct still-open high-value **actual selected Suzuki 78 quotient/Hom-space** object.
+
+
+## 26 October: ATLAS standard-generator semi-presentation alignment
+
+**Original source (not repository authorship):** ATLAS [sporadic Suz standard generators and semipresentation](https://brauer.maths.qmul.ac.uk/Atlas/v3/spor/Suz/), as provided by the ATLAS of Finite Group Representations contributors, states that the quotient `Suz:2` standard generators `c,d` have orders `2,3`, `cd` order `28`, and `cdcdcddcdd` order `7`. Its `2.Suz:2` generators `C,D` are **preimages**, not required to preserve orders.
+
+**Current source-word exact matrix result:** using the PREEXISTING manifest-pinned 12D GF(3) ATLAS files `data/atlas/2Suzd2G1-f3r12aB0.m1` and `.m2` on #1098, independently computed in exact GF3:
+
+- `C²=-I12`, `o(C)=4`, `o(D)=3`;
+- `(CD)^28=-I12`, `(CD)^56=I12`, and no smaller proper projective order (divisors 1,2,4,7,14), hence **linear order 56 and projective order 28**;
+- `W=CDCDC D D C D D` (unambiguously source literal `cdcdcddcdd`) has **linear order 7**.
+
+Consequently the stored faithful matrix pair respects the named ATLAS quotient *semi-presentation* exactly at the projective level. This pays a concrete **generator-alignment and double-cover identity** which the previous source-order 4/3 and selected-word 6 evidence did not. It still does **not** prove the generated matrix group has all of `2.Suz:2` without relying on the original ATLAS source files, and it certainly does **not** supply a Monster selected diagonal quotient class word.
+
+**Regression and authority:** extend existing `scripts/monster3b_atlas_source_word_order_d4_gate.py` (do not duplicate checker) to require the above projective order28 and order7; independent V8 GF3 matrix replay passed. ATLAS is the single primary source root; its copy and mirror are NOT independent corroborations. Existing manifest hash and #1098 original proof owners preserved. Distinct source `2.Suz:2` versus `Suz:2` lift status must survive the Ibrahim/consumer chain; no actual Monster 3B word, 6.Suz selected-78 family, C3/H6 phase action or kernel theorem follows.
+
+**Related latest-PR Pareto inspiration:** #1260 constructs a ring with additive group `C81×C243`, which has cardinality `3^9` but **is not** the exponent-three additive `F3^9` or extraspecial `H4` source group. The new higher-power (nilpotent) λ-adic transfer is therefore a *different object*, useful for consumer-specific torsion diagnostics but not an alternate Monster 3B action. #1261's integer D4h sample source is also a *different* crystallographic representation, not an ATLAS group word. Original source roles and all coefficient-characteristic boundaries preserved.
