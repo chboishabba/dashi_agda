@@ -36,7 +36,9 @@ for g in G:
 kernel13=[g for g in G if all(canonical(act(g,a))==a for a in axes)]
 kernel4=[g for g in G if all(canonical(act(g,a))==a for a in corner_axes)]
 assert len(kernel13)==2 and len(kernel4)==2
-assert {g[0] for g in kernel13}=={(0,1,2)}\nassert {g[1] for g in kernel13}=={(1,1,1),(-1,-1,-1)}\nassert {g[0] for g in kernel4}=={(0,1,2)}
+assert {g[0] for g in kernel13}=={(0,1,2)}
+assert {g[1] for g in kernel13}=={(1,1,1),(-1,-1,-1)}
+assert {g[0] for g in kernel4}=={(0,1,2)}
 assert {g[1] for g in kernel4}=={(1,1,1),(-1,-1,-1)}
 
 # Quotient/residual is bijective: every nonzero p is a unique
