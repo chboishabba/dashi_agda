@@ -6,6 +6,8 @@ module DASHI.Mathematics.Symmetry.DiamondSublatticeContrastStructureFactorExact 
 -- not the same as ONE localized NV defect or its dilute scattering.
 -- Classical structure-factor and kinematic diffraction prior art.
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+import DASHI.Mathematics.Symmetry.DiamondFccPrimitiveGlideExact as FCC
 open import Data.Integer using (ℤ; +_; -_)
 import DASHI.Mathematics.Symmetry.TetragonalD4hNormalFormExact as D
 import DASHI.Mathematics.Symmetry.DiamondEightSiteStructureFactorExact as Diff
@@ -52,3 +54,20 @@ equalAtom111 = refl
 -- A measured scattering pattern further requires species-specific,
 -- momentum/energy-dependent form factors, finite-coherence effects,
 -- disorder, sample geometry, instrument and error calibration.
+
+-- A direct group-action discriminator: a uniform A/B scattering
+-- contrast breaks the glide that exchanges the diamond sublattices.
+-- It therefore must NOT be presented as a full Fd-3m symmetric
+-- material with identical occupied atomic sites.
+contrastWeight : FCC.DiamondSite → Diff.Gaussian
+contrastWeight (FCC.A p) = Diff.gone
+contrastWeight (FCC.B p) = Diff.gzero
+
+zeroNotOne : Diff.gzero ≡ Diff.gone → ⊥
+zeroNotOne ()
+
+uniformContrastBreaksDiamondGlide :
+  (∀ s → contrastWeight (FCC.glideXSite s) ≡ contrastWeight s)
+  → ⊥
+uniformContrastBreaksDiamondGlide preserves =
+  zeroNotOne (preserves (FCC.A (FCC.primitive (+ 0) (+ 0) (+ 0))))
