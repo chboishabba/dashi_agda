@@ -235,7 +235,7 @@ def test_auspol_crosspollination_does_not_manufacture_evidence_roots():
     assert w["original_root_count"] == 9
     assert w["unattributed_future_source_placeholders"] == 1
     paths = {item["id"]: item for item in aus["positive_paths"]}
-    assert len(paths) == 13
+    assert len(paths) == 15
     assert paths["AUS_HANSON_2025_HOSPITALITY"]["status"] == "original_indexed_not_pdf_face_inspected"
     assert paths["AUS_HANSON_RINEHART_POLICY"]["status"] == "first_person_attributed"
     assert paths["AUS_ONE_NATION_PENSION_POLICY_JAN2025"]["status"] == "original_party_document_published"
@@ -301,16 +301,16 @@ def test_australian_policy_original_published_before_attributed_source_and_trans
 def test_auspol_pre2025_original_speech_2022_independent_partial_legislation_and_proposed_lease():
     w = world()["australian_crosspollination"]
     policy = w["policy_genealogy_same_object_chain"]
-    assert len(policy) == 6
+    assert len(policy) == 8
     assert [p["date"] for p in policy] == [
-        "2021-11-22", "2022-08-16", "2022-08",
-        "2022-11-22", "2025-01-15", "2026-06-11"
+        "2021-11-22", "2022-02", "2022-08", "2022-08-16",
+        "2022-09-02", "2022-11-22", "2025-01-15", "2026-06-11"
     ]
     assert policy[0]["source_role"] == "first_person_original_pdf_visually_inspected"
-    assert "403" in policy[1]["source_role"]
+    assert "403" in policy[3]["source_role"]
     assert "same government" in policy[2]["source_role"].replace("_", " ")
-    assert "limited" in policy[3]["policy_scope"]
-    assert "unlimited" in policy[4]["policy_scope"]
+    assert "limited" in policy[5]["policy_scope"]
+    assert "unlimited" in policy[6]["policy_scope"]
     assert "NOT authenticated" in policy[0]["same_object_transfer_to_next"]
     assert w["policy_bidi_severe_test"]["private_message_found"] is False
     assert "National Seniors" in w["policy_bidi_severe_test"]["alternative_mechanism"]
@@ -356,3 +356,29 @@ def test_auspol_recent_climate_claim_family_is_cross_referenced_not_new_independ
     assert "same-object transfer" in family["stopping_rule"]
     assert w["original_root_count"] == 9
     assert w["claims"][0]["level"] == "sourceReported"
+
+
+def test_2022_national_seniors_original_model_has_named_commissioner_not_empirical_policy_causation():
+    w = world()["australian_crosspollination"]
+    origins = {p["id"]: p for p in w["positive_paths"]}
+    assert origins["AUS_NATIONAL_SENIORS_2022_ORIGINAL_MEMBER_SURVEY"]["status"] == (
+        "original_first_party_survey_flyer_pdf_face_visually_inspected"
+    )
+    assert origins["AUS_NATIONAL_SENIORS_DELOITTE_2022_ORIGINAL_COMMISSION"]["status"] == (
+        "original_client_named_commission_pdf_pages_1_and_5_visually_inspected"
+    )
+    m = w["policy_original_commission_positive_control"]
+    assert m["producer"] == "Deloitte Touche Tohmatsu"
+    assert "National Seniors Australia" in m["client"]
+    assert m["date"] == "2022-09-02"
+    assert "page index 0 and page index 4" in m["image_checks"]
+    assert "8.3% uptake" in m["relevant_quantitative_claim"]
+    assert "not measured real-world uptake" in m["relevant_quantitative_claim"]
+    assert "no inspected directed commission" in m["positive_control"]
+    assert "Invoice settlement/payment" in m["what_not_proved"]
+    assert "Deloitte" in w["policy_bidi_severe_test"]["alternative_mechanism"]
+    assert "share NSA commissioning input" in w["independence_nontransfer"]
+    b = (ROOT / "DASHI/Cognition/AustraliaPoliticalEconomySameObjectCrosswalk20261026Exact.agda").read_text()
+    assert "nationalSeniorsDeloitte2022CommissionedModel = australia-source-role-receipt" in b
+    assert "nationalSeniorsMemberCampaign2022Original = australia-source-role-receipt" in b
+    assert "originalNamedCommissionedPolicyModel : AustraliaSourceRole" in b
