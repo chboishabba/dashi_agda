@@ -140,3 +140,63 @@ nonclaimIsNotARefutation :
   ClaimScope.BoundarySemanticsClaimScope
 nonclaimIsNotARefutation =
   ClaimScope.canonicalBoundarySemanticsClaimScope
+
+
+------------------------------------------------------------------------
+-- Miller projected-vorticity observation cannot determine spatial
+-- direction regularity. The geometric producer is the explicit finite
+-- two-point Lean witness in dashi_lean4 PR #87:
+--
+--    x0=0, x1=1/n, v0=(0,1,0), v1=(0,0,1), omega_i=v_i.
+--
+-- Both projections vanish, while the squared direction difference
+-- quotient is 2n² and can exceed any prescribed finite bound.
+--
+-- The two finite labels below are a *consumer collision*, not a proof
+-- of any R³ vorticity field or mild Navier–Stokes solution. The
+-- original gradient hypothesis of Miller (2021) remains independent.
+------------------------------------------------------------------------
+
+data DirectionSamplingWorld : Set where
+  lowVariationUnitDirection : DirectionSamplingWorld
+  arbitrarilySteepUnitDirection : DirectionSamplingWorld
+
+data ProjectedVorticityObservation : Set where
+  projectedVorticityZero : ProjectedVorticityObservation
+
+data DirectionRegularityInformation : Set where
+  lowSampleVariation : DirectionRegularityInformation
+  steepSampleVariation : DirectionRegularityInformation
+
+forgetDirectionVariation :
+  DirectionSamplingWorld → ProjectedVorticityObservation
+forgetDirectionVariation lowVariationUnitDirection =
+  projectedVorticityZero
+forgetDirectionVariation arbitrarilySteepUnitDirection =
+  projectedVorticityZero
+
+requiredDirectionVariation :
+  DirectionSamplingWorld → DirectionRegularityInformation
+requiredDirectionVariation lowVariationUnitDirection =
+  lowSampleVariation
+requiredDirectionVariation arbitrarilySteepUnitDirection =
+  steepSampleVariation
+
+distinctDirectionVariation :
+  lowSampleVariation ≡ steepSampleVariation → ⊥
+distinctDirectionVariation ()
+
+projectedVorticityGradientLossWitness :
+  NF.NonFactorabilityWitness
+    forgetDirectionVariation requiredDirectionVariation
+projectedVorticityGradientLossWitness =
+  NF.nonFactorabilityWitness
+    lowVariationUnitDirection arbitrarilySteepUnitDirection
+    refl distinctDirectionVariation
+
+zeroProjectedVorticityCannotInferDirectionRegularity :
+  NF.FactorsThrough
+    forgetDirectionVariation requiredDirectionVariation → ⊥
+zeroProjectedVorticityCannotInferDirectionRegularity =
+  NF.witnessRulesOutEveryFlatFactorisation
+    projectedVorticityGradientLossWitness
