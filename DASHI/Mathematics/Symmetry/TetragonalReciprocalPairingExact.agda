@@ -43,7 +43,7 @@ fullPairingInvariant :
     (g : D.D4h)
     (x k : T.Triple A) →
   dot P (T.act (signed P) g x) (T.act (signed P) g k) ≡ dot P x k
-fullPairingInvariant P
+fullPairingInvariant {A} P
   (D.element q b c) x k =
   trans (quarterInvariant P q
            (T.vertical (signed P) b (T.horizontal (signed P) c x))
