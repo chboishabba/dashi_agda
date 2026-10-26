@@ -90,3 +90,38 @@ The existing large-amplitude six-mode R734 physical counterexample belongs outsi
 2. For unrestricted B, prove a different **true** time-integrated physical signed compensation or critical continuation estimate, including dyadic same-helicity flux and generated H- sector across the arbitrary-large-data middle interval.
 3. The original R369 Gram proof still needs an actual same-operator phase-resolved Rayleigh bound; positive-part finite-to-tail scripted incidence cannot be conflated with signed R734 core transfer.
 4. Agda/Lean checked compilation and exact-natural-language-to-formal-source interpretation still open for these new lemmas; the finite tests are acceptance checks, not their substitute.
+
+
+## Stronger 27 October result: universal late critical absorption from kinetic energy alone
+
+This branch's critical-small-data estimate can also be activated **eventually for arbitrary initial finite energy** without imposing an initial H1 bound or invoking the separate R735 `H1` cubic differential inequality. This is the classical eventual dissipative smoothing mechanism expressed directly in the original R734 `X_N,D_N` variables.
+
+Write `E_N(t)=||u_N(t)||_2²`, and `E0=||u0||_2²>0` common to all Fourier cutoffs. The standard unforced finite Galerkin energy identity and mean-zero Poincaré inequality yield, uniformly in the cutoff,
+```
+E_N(t) <= E0 exp(-2 nu t),
+int_t^(t+L) ||u_N(s)||_dotH1² ds <= E_N(t)/(2 nu).
+```
+For `L=1/nu`, the averaging principle gives some `s_N in [t0,t0+1/nu]` (possibly different for each N) with
+```
+||u_N(s_N)||_dotH1² <= E_N(t0)/2.
+```
+The *same velocity's* exact H0-H1 Fourier interpolation and `w(k)<2|k|` give
+```
+X_N(s_N) <= 2 ||u_N(s_N)||_dotH1/2²
+         <= 2 ||u_N(s_N)||_2 ||u_N(s_N)||_dotH1
+         <= sqrt(2) E_N(t0).
+```
+Set `Ccrit=4*3^(3/4)*C6*C3` from the previous section, and for `E0>0` define
+```
+t0 = max(0, log( sqrt(2)*Ccrit²*E0 / nu² )/(2*nu)),
+t_enter = t0 + 1/nu.
+```
+Then `sqrt(2) E_N(t0) <= nu²/Ccrit²`; hence `X_N(s_N)<=nu²/Ccrit²`. The small-critical absorption argument is forward invariant, so **at one common time**, despite the individual intermediate `s_N`,
+```
+X_N(t_enter) <= nu²/Ccrit²,
+X_N(T) + nu int_(t_enter)^T D_N(t)dt <= X_N(t_enter)
+     <= nu²/Ccrit²,    T>=t_enter, uniformly in N.
+```
+The **late budget is independent of E0 and N**; E0 affects only the logarithmic waiting time. This is a separate, valid physical-source critical-energy analogue of the earlier R735 eventual `H1` entry, and no claim of independent discovery of classical eventual regularisation is made. New exact squared-threshold/absorption checks added to the existing test file: **seven locally passed** in total.
+
+**Important boundaries:** The proof is for the unforced mean-zero 3D periodic full Galerkin flows at the original sharp cube cutoff. It gives neither a cutoff-independent estimate on `[0,t_enter]` for arbitrary data nor an all-data R734 positive-margin **signed W2** inequality. Identifying the same physical limiting solution, and any compactness/uniqueness claim, requires independent legitimate PDE arguments. In particular a late-time estimate cannot simply be glued to the initial local estimate across the known arbitrary-large-data gap.
