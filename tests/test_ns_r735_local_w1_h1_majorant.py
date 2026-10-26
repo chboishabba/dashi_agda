@@ -67,3 +67,35 @@ def test_rational_sample_certificate_is_finite_and_positive():
     assert s.N(c.h2_time_integral)>0
     assert s.N(c.commutator_time_integral)>0
     assert s.N(c.weighted_plus_terminal_ceiling)>s.N(c.initial_mixed_ceiling)
+
+
+def test_small_data_gradient_absorption_is_exact():
+    e,d,nu,K,cw,cm,T,t=_symbols()
+    c=mod.small_data_global_w1_certificate(e,d,nu,K,cw,cm)
+    assert s.simplify(K*nu**(-3)*c.gradient_smallness_threshold**2-nu/2)==0
+    # Poincare mean-zero Y >= X; hence at every X<=D0<=threshold,
+    # K nu^-3 X^3 <= (nu/2) X <= (nu/2) Y.
+
+
+def test_small_data_global_h2_budget_from_energy_and_enstrophy():
+    e,d,nu,K,cw,cm,T,t=_symbols()
+    c=mod.small_data_global_w1_certificate(e,d,nu,K,cw,cm)
+    # ∫E<=E0/(2nu), 2∫X<=E0/nu, ∫Y<=2D0/nu.
+    assert s.simplify(c.h2_infinite_time_integral-((s.Rational(3,2)*e+2*d)/nu))==0
+    assert s.integrate(s.exp(-s.Rational(7,2)*nu*t),(t,0,s.oo))==s.Rational(2,7)/nu
+
+
+def test_small_data_weighted_holder_closes_time_infinity_without_h2_sup():
+    e,d,nu,K,cw,cm,T,t=_symbols()
+    c=mod.small_data_global_w1_certificate(e,d,nu,K,cw,cm)
+    expected=cw*(e+d)**s.Rational(7,4)*(s.Rational(2,7)/nu)**s.Rational(1,4)*c.h2_infinite_time_integral**s.Rational(3,4)
+    assert s.simplify(c.commutator_infinite_time_integral-expected)==0
+    assert s.simplify(c.weighted_plus_terminal_ceiling-c.initial_mixed_ceiling-expected)==0
+
+
+def test_small_data_explicit_uniform_global_sample():
+    c=mod.small_data_global_w1_certificate(s.Rational(1,2),s.Rational(1,4),1,1,2,3)
+    assert c.gradient_smallness_threshold==1/s.sqrt(2)
+    assert s.Rational(1,4) < c.gradient_smallness_threshold
+    assert c.h2_infinite_time_integral==s.Rational(5,4)
+    assert s.N(c.weighted_plus_terminal_ceiling)>0
