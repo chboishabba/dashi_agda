@@ -7,6 +7,8 @@ module DASHI.Mathematics.Symmetry.TetragonalD4hFullActionExact where
 -- No postulates, holes, or physical specimen claims.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (true; false)
+open import DASHI.Mathematics.Symmetry.TetragonalD4hNormalFormExact using (q0; q1; q2; q3)
 import DASHI.Mathematics.Symmetry.TetragonalD4hNormalFormExact as NF
 import DASHI.Mathematics.Symmetry.TetragonalD4hGeneratorActionExact as Geo
 import DASHI.Mathematics.Symmetry.KleinGroupActionInvariantExact as Native
