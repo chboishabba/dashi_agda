@@ -518,3 +518,43 @@ noListedHancockFebSubmission :
   Pension2022IndexedSubmission febMorrisonCommittee pensionHancock →
   DistinctObject
 noListedHancockFebSubmission ()
+
+
+------------------------------------------------------------------------
+-- PUBLICLY DOCUMENTED INFORMATION REUSE, NOT FINANCIAL COMMISSIONING.
+-- Nov 2022 Senate committee original chapter 2, paragraph 2.16:
+-- IPA, a separate submitter, referenced National Seniors Australia's
+-- 20% older-pensioner survey, estimating 510,000 potential participants.
+-- This is an attributed source-to-citation flow; the original survey
+-- is NOT independently replicated and the IPA use proves no HPPL tasking.
+------------------------------------------------------------------------
+
+senateOct22IPACitesNSASurvey : AustraliaSourceRoleReceipt
+senateOct22IPACitesNSASurvey = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Senate Community Affairs Legislation Committee, November 2022 Report on Albanese Workforce Incentive Bill, chapter 2 paragraphs 2.15-2.16"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentive2022/Report/section?id=committees%2Freportsen%2F024985%2F80109"
+  "Original public committee ANALYSIS reports IPA's own October submission cited the National Seniors survey claiming 20% pensioner participation if work barriers lowered (~510,000). A documented attributed citation, not source-independent experimental replication; IPA PDF and individual original survey methodology not both re-audited here. No HPPL commissioning, coordinated direction or causal impact follows."
+
+senate2022MultipleDistinctPolicyAmounts : AustraliaSourceRoleReceipt
+senate2022MultipleDistinctPolicyAmounts = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Same Senate Committee November 2022 Report chapter 2 paragraphs 2.27-2.31, 2.45-2.51"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentive2022/Report/section?id=committees%2Freportsen%2F024985%2F80109"
+  "Committee attributes ALTERNATIVE scopes: ACCI 15600 annual Work Bonus, VCCI extra 10000, NSA 6000 biannual, IPA says government 4000 small, HPPL Oct original indexed letter calls for unlimited Work Bonus. These are separate scoped proposals; the committee recommended the narrower government bill and suggested monitoring, not actual employment outcome verification."
+
+data PensionResearchUse : Set where
+  publicThirdPartySurveyCitation : PensionResearchUse
+  namedClientConsultantCommission : PensionResearchUse
+  specificPrivateSponsorEditorialOrder : PensionResearchUse
+
+documentedNSAtoIPACitation : PensionResearchUse
+documentedNSAtoIPACitation = publicThirdPartySurveyCitation
+
+documentedNSAtoDeloitteModelling : PensionResearchUse
+documentedNSAtoDeloitteModelling = namedClientConsultantCommission
+
+noCitationEqualsPrivateSponsorEditorialOrder :
+  publicThirdPartySurveyCitation ≡ specificPrivateSponsorEditorialOrder →
+  DistinctObject
+noCitationEqualsPrivateSponsorEditorialOrder ()
