@@ -492,3 +492,21 @@ instantiate #1244's 3D marked handlebody
 geometry. This sharper dual-example
 makes the actual wild source proof
 even more important, not less.
+
+
+## 13. Independent acyclic telescope local exact audit
+
+Local independently implemented audit
+`/mnt/data/horn_c3_acyclic_telescope_independent_audit.py`
+SHA256 `e0340f7a7627bfe2271a276d2319e0ed43dcbac3a95426f61aa579cf28687241`
+was ACTUALLY executed and PASS through n8.
+It independently certifies exact symbolic C3
+commutator words, zero H1 abelianization maps,
+presentation-chain column ranks and finite
+rose stage ranks. The separate GitHub committed
+source `check_horn_c3_acyclic_rose_telescope.py`
+was fetched but not byte-replayed from
+the pushed blob. Full infinite 2D CW
+telescope topology and Hatcher 3D wild
+embedding are NOT Python-tested or
+Lean/Agda kernel verified.
