@@ -141,6 +141,28 @@ gasReservationRelease = Source.mkNoDOISource
   "Original contemporaneous policy release announces introduction of domestic gas reservation legislation; an introduced Bill is not an Act, a local gas connection or realised income. Distinct from proposals for an LNG export-value levy."
   Source.publicAttribution
 
+agnIpswichRegistry : Source.AttributedSource
+agnIpswichRegistry = Source.mkNoDOISource
+  "Australian Energy Market Commission"
+  "Queensland: AGN Queensland gas distribution network"
+  "AEMC Gas Pipeline Register"
+  "October 2026 access"
+  "https://www.aemc.gov.au/energy-system/gas/gas-pipeline-register/qld-agn-queensland-gas-distribution-network"
+  Source.governmentSource
+  "Original regulator register describes Australian Gas Networks ownership and Ipswich service-region coverage; not a specific Springview street-main, meter or contract."
+  Source.publicAttribution
+
+allgasNetworkRegistry : Source.AttributedSource
+allgasNetworkRegistry = Source.mkNoDOISource
+  "Australian Energy Market Commission"
+  "Queensland: Allgas gas distribution network"
+  "AEMC Gas Pipeline Register"
+  "October 2026 access"
+  "https://www.aemc.gov.au/energy-system/gas/gas-pipeline-register/qld-allgas-gas-distribution-network"
+  Source.governmentSource
+  "Original AEMC registry says Allgas Energy now owned by Stonepeak, AGIG operator; March 2026 sale from GDI; southern Brisbane and other service areas. A regional footprint is NOT evidence that EPBC 2019/8575 is connected to Allgas rather than AGN."
+  Source.publicAttribution
+
 record ScopedReceipt : Set where
   constructor scoped-receipt
   field
@@ -176,6 +198,13 @@ utilityDemandCandidate = scoped-receipt
   "EPBC 2019/8575 estate lot servicing plan, meters, current connections, distributor, contracted offtake and economic beneficiary."
   false refl
 
+regionalDistributorIdentityFork : ScopedReceipt
+regionalDistributorIdentityFork = scoped-receipt
+  secondOrderPotentialUtilities agnIpswichRegistry governmentOriginal boundedAnalyticalHypothesis
+  "AEMC identifies Ipswich as an AGN Queensland gas network area; a separate Allgas/Stonepeak system covers other southern Brisbane and regional places. Same operator or wider-region marketing does not pay same current site distributor."
+  "2019/8575 site-specific asset/mains map, distributor NMI/GPR-like connection identifier or dated distribution quotation, current licence, tariffs and supplier records."
+  false refl
+
 landNetworkOptionCandidate : ScopedReceipt
 landNetworkOptionCandidate = scoped-receipt
   thirdOrderLandAndNetworkOption stocklandSpringview originalPublisherClaim boundedAnalyticalHypothesis
@@ -209,6 +238,7 @@ postApprovalReceipts =
   developmentRegulatoryGate ∷
   housingNarrativeAlignment ∷
   utilityDemandCandidate ∷
+  regionalDistributorIdentityFork ∷
   landNetworkOptionCandidate ∷
   lobbyingHistory ∷
   ministerHoldingsAuditOpen ∷
@@ -219,6 +249,7 @@ data Historic8000GasConnectionsPayCurrentEstateConnection : Set where
 data HousingPolicyAlignmentPaysImproperInfluence : Set where
 data PublisherLandDescriptionPaysCurrentTitle : Set where
 data ReservationBillPaysAnEnactedLocalGasSubsidy : Set where
+data RegionalGasNetworkCoveragePaysSpringviewConnection : Set where
 data ApprovalNoticePaysSignedReasonsAndJudicialValidity : Set where
 data InterestsIndexPaysPersonalEnrichmentOrExoneration : Set where
 
@@ -244,6 +275,10 @@ proposedBillNotLocalSubsidy ()
 portalNoticeNotJudicialValidity :
   ApprovalNoticePaysSignedReasonsAndJudicialValidity → ⊥
 portalNoticeNotJudicialValidity ()
+
+regionalCoverageNotSameConnection :
+  RegionalGasNetworkCoveragePaysSpringviewConnection → ⊥
+regionalCoverageNotSameConnection ()
 
 thirdPartyIndexNotDispositive :
   InterestsIndexPaysPersonalEnrichmentOrExoneration → ⊥
