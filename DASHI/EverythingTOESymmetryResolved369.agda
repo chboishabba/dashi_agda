@@ -22,12 +22,17 @@ import DASHI.Mathematics.Topology.AlexanderHornedC3FiniteStageExact as Horn
 import DASHI.Mathematics.Topology.AlexanderHornedC3VOAKernelBidiExact as VOA
 import DASHI.Mathematics.Topology.AlexanderHornedC3SUNLieGroupReuseExact as SUNHorn
 import DASHI.Physics.YangMills.CompactLieInnerC3Exact as InnerC3
+import DASHI.Physics.YangMills.CompactLieGroupCore as GroupCore
+import DASHI.Physics.YangMills.CompactLieGroupDerived as GroupDerived
+import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
+import DASHI.Mathematics.Topology.AlexanderHornedC3CompactCommutatorRepresentationExact as HornRep
 import DASHI.Governance.FormalisationGovernanceCapstoneExact as Governance
 import DASHI.Core.KernelSemanticClosureBoundaryExact as Closure
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Primitive using (Level)
 import DASHI.Core.FormalClaimTransportGeometryExact as Transport
 
 -- Preconditions: one canonical finite horn word and a natural depth.
@@ -51,9 +56,32 @@ toeVOAActorCannotRecoverExteriorSource :
 toeVOAActorCannotRecoverExteriorSource =
   VOA.cannotRecoverExteriorGroupFromSelectedVOAActor
 
--- The compact Lie C3 theorem and SU3 commutator section retain
--- their original owner modules. Do not assert an SU3 section exists
--- without Gotô's theorem instantiated on the certified matrix group.
+-- Preconditions: one original compact group and a chosen element t.
+-- The caller must supply the actual equation t*t*t = identity.
+-- Postcondition: the EXISTING inner action has period dividing three.
+toeCompactLieInnerC3 :
+  ∀ {g : Level} {G : Set g} →
+  (H : GroupCore.Group G) (t : G) →
+  GroupCore.multiply H (GroupCore.multiply H t t) t
+    ≡ GroupCore.identity H →
+  (x : G) →
+  GroupDerived.conjugate H t
+    (GroupDerived.conjugate H t
+      (GroupDerived.conjugate H t x)) ≡ x
+toeCompactLieInnerC3 =
+  InnerC3.innerC3FromElementCube
+
+-- Preconditions: the original certified SU3 group, a Gotô section,
+-- and a chosen cube-one rotation on that SAME group.
+-- The caller must provide the section. The TOE does not assume it.
+-- Postcondition: the original horn commutator-section group is reused.
+toeSU3HornAction :
+  (Matrix Complex : Set) →
+  (theory : SUN.CertifiedSUNMatrixTheory 3 Matrix Complex) →
+  SUNHorn.SU3GotoInput Matrix Complex theory →
+  HornRep.CommutatorSectionGroup
+toeSU3HornAction = SUNHorn.sun3HornAction
+
 -- No theorem here identifies a finite VOA quotient with an actual
 -- Alexander or Fox-Artin wild complement fundamental group.
 
