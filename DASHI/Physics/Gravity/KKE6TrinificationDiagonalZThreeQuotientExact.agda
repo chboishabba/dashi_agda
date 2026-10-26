@@ -195,5 +195,5 @@ sameQuotientObstructionDoesNotDetermineChi33Line =
     extraLeftTorusTurn baseDiagonalCentralLoop
     refl falseNotTrue
 
-physicalPhaseOnlyWZGloballyDefined : Bool
-physicalPhaseOnlyWZGloballyDefined = false
+unpatchedChi33PhaseOnlyWZDefinedOnEveryBundle : Bool
+unpatchedChi33PhaseOnlyWZDefinedOnEveryBundle = false
