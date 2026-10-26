@@ -670,6 +670,53 @@ siListingDoesNotFactorSpecificComparator decoder claimed
              (claimed magneticSecondaryAggregationWithMatchedCoils)
 ... | ()
 
+------------------------------------------------------------------------
+-- 2024 RODIN TABLE II: SAME CENTRE B, DIFFERENT LOCAL FIELD SLOPE.
+--
+-- These are exact *synthetic local linear field* families, not original
+-- Hall-probe recordings or measured real-coil gradients.
+-- The general field form is B=(g*z, 0, b+g*x) with b>0. Its spatial
+-- divergence is zero and its curl is zero because dBx/dz=dBz/dx=g;
+-- the centre has B=(0,0,b), even when g changes. At z=0 the Bz
+-- slope is g; for b>0 the magnitude gradient at the centre is g.
+-- The finite Nat representation below only certifies equality of
+-- polynomial COEFFICIENTS and the centre-value collision, not full
+-- 3D continuum Maxwell identities or actual SI metrology.
+------------------------------------------------------------------------
+
+record RodinLocalLinearMagneticField : Set where
+  constructor local-linear-B
+  field
+    centreBz : Nat
+    BxSlopeInZ : Nat
+    BzSlopeInX : Nat
+open RodinLocalLinearMagneticField
+
+uniformSameCentreField : RodinLocalLinearMagneticField
+uniformSameCentreField = local-linear-B 4 0 0
+
+gradientSameCentreField : RodinLocalLinearMagneticField
+gradientSameCentreField = local-linear-B 4 1 1
+
+rodinCentreFieldsIdentical :
+  centreBz uniformSameCentreField ≡ centreBz gradientSameCentreField
+rodinCentreFieldsIdentical = refl
+
+rodinSyntheticGradientCurlFreeCoefficients :
+  BxSlopeInZ gradientSameCentreField ≡
+  BzSlopeInX gradientSameCentreField
+rodinSyntheticGradientCurlFreeCoefficients = refl
+
+rodinSyntheticUniformCurlFreeCoefficients :
+  BxSlopeInZ uniformSameCentreField ≡
+  BzSlopeInX uniformSameCentreField
+rodinSyntheticUniformCurlFreeCoefficients = refl
+
+rodinCenterOnlyDoesNotDetermineSpatialSlope :
+  BzSlopeInX uniformSameCentreField ≡
+  BzSlopeInX gradientSameCentreField → ⊥
+rodinCenterOnlyDoesNotDetermineSpatialSlope ()
+
 ramirezRef24ComparisonNotProvenByCitation :
   Atlas.historicalTransmissionProved Atlas.ramirezRef24NotValidatedCoilComparison ≡ false
 ramirezRef24ComparisonNotProvenByCitation = refl
