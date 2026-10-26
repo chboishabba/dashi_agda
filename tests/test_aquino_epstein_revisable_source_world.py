@@ -235,11 +235,15 @@ def test_auspol_crosspollination_does_not_manufacture_evidence_roots():
     assert w["original_root_count"] == 9
     assert w["unattributed_future_source_placeholders"] == 1
     paths = {item["id"]: item for item in aus["positive_paths"]}
-    assert len(paths) == 9
+    assert len(paths) == 13
     assert paths["AUS_HANSON_2025_HOSPITALITY"]["status"] == "original_indexed_not_pdf_face_inspected"
     assert paths["AUS_HANSON_RINEHART_POLICY"]["status"] == "first_person_attributed"
     assert paths["AUS_ONE_NATION_PENSION_POLICY_JAN2025"]["status"] == "original_party_document_published"
     assert "2025-01-15" in paths["AUS_ONE_NATION_PENSION_POLICY_JAN2025"]["original"]
+    assert paths["AUS_RINEHART_2021_POLICY_FIRST_PERSON"]["status"] == "first_person_original_pdf_page_visually_inspected"
+    assert paths["AUS_HANCOCK_IPA_2022_POLICY_ADVOCACY"]["status"] == "parliamentary_library_quotes_original_submissions_native_submissions_not_inspected"
+    assert paths["AUS_WORK_BONUS_2022_CAPPED_LAW"]["status"] == "original_government_limited_enactment"
+    assert paths["AUS_ONE_NATION_HQ_PROSPECTIVE_RENT"]["status"] == "primary_party_and_landlord_statements_reported_by_press_no_executed_lease"
     assert paths["AUS_GINA_EPSTEIN_DIRECT"]["status"] == "not_located_not_universally_absent"
     assert "initially denied all contact" in paths["AUS_BANNON_PALMER"]["evidence"]
     assert "one unsolicited call" in paths["AUS_BANNON_PALMER"]["evidence"]
@@ -251,7 +255,7 @@ def test_auspol_aec_future_time_and_sibling_governance_remain_distinct():
     w = world()
     aus = w["australian_crosspollination"]
     targets = {o["id"]: o for o in aus["decisive_remaining_same_object"]}
-    assert len(targets) == 5
+    assert len(targets) == 6
     assert "2027-02-01" in targets["AUS_FY2025_26_AEC"]["availability"]
     assert "2027-04-22" in targets["AUS_FY2025_26_AEC"]["availability"]
     assert "2027-03-11" in targets["AUS_FY2025_26_AEC"]["availability"]
@@ -292,3 +296,44 @@ def test_australian_policy_original_published_before_attributed_source_and_trans
     assert "AUS_POLICY_ADOPTION" not in {
         t["id"] for t in au["decisive_remaining_same_object"]
     }
+
+
+def test_auspol_pre2025_original_speech_2022_independent_partial_legislation_and_proposed_lease():
+    w = world()["australian_crosspollination"]
+    policy = w["policy_genealogy_same_object_chain"]
+    assert len(policy) == 6
+    assert [p["date"] for p in policy] == [
+        "2021-11-22", "2022-08-16", "2022-08",
+        "2022-11-22", "2025-01-15", "2026-06-11"
+    ]
+    assert policy[0]["source_role"] == "first_person_original_pdf_visually_inspected"
+    assert "403" in policy[1]["source_role"]
+    assert "same government" in policy[2]["source_role"].replace("_", " ")
+    assert "limited" in policy[3]["policy_scope"]
+    assert "unlimited" in policy[4]["policy_scope"]
+    assert "NOT authenticated" in policy[0]["same_object_transfer_to_next"]
+    assert w["policy_bidi_severe_test"]["private_message_found"] is False
+    assert "National Seniors" in w["policy_bidi_severe_test"]["alternative_mechanism"]
+    assert w["commercial_lease_bidi_severe_test"]["material_subsidy_established"] is False
+    assert "independently comparable" in w["commercial_lease_bidi_severe_test"]["would_narrow"]
+    assert "AUS_HQ_EXECUTED_LEASE" in {t["id"] for t in w["decisive_remaining_same_object"]}
+    assert "rather than" not in w["independence_nontransfer"]  # avoid invented editorial instruction
+
+
+def test_auspol_rinehart_2021_source_and_labour_2022_act_differ_in_policy_scope():
+    b = (ROOT / "DASHI/Cognition/AustraliaPoliticalEconomySameObjectCrosswalk20261026Exact.agda").read_text()
+    for marker in (
+        "rinehart2021PublishedOriginalAdvocacy = australia-source-role-receipt",
+        "hancockIPA2022IndexedParliamentaryPolicy = australia-source-role-receipt",
+        "albanese2022LimitedWorkBonusAct = australia-source-role-receipt",
+        "oneNationBrisbaneHQReportedLease = australia-source-role-receipt",
+        "originalFirstPersonPolicyAdvocacy : AustraliaSourceRole",
+        "governmentIndexedAdvocacySubmission : AustraliaSourceRole",
+        "originalLimitedGovernmentLegislation : AustraliaSourceRole",
+        "proposedCommercialPartyTenancyReported : AustraliaSourceRole",
+        "temporaryExtraWorkBonus4000 : PensionerWorkPolicyScope",
+        "unlimitedPensionWorkWithoutPaymentReduction : PensionerWorkPolicyScope",
+        "government2022PolicyScope = temporaryExtraWorkBonus4000",
+        "oneNation2025PolicyScope = unlimitedPensionWorkWithoutPaymentReduction",
+    ):
+        assert marker in b
