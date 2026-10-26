@@ -26,6 +26,21 @@ For `t>=T_res`, `X_N(t)<=4nu^2/(Ccrit^2(1+exp(nu(t-T_res)))^2)`,
 with original source `Ccrit=4*3^(3/4)*C6*C3`.
 All quantities refer to the **same** cutoff Galerkin solution.
 
+
+**New same-equation discriminator:** The real, transverse heat shear has
+identically **zero actual nonlinear production**, but for fixed \(E_0,\nu\)
+the absolute-majorant expenditure diverges as frequency grows:
+\(\int_0^\infty\sqrt{X_N}D_N\,dt
+=w(n)^{3/2}E_0^{3/2}/(3\nu)\to\infty\).
+Therefore the paid \(\int X_N^2\) estimate does NOT pay the absolute
+nonlinear majorant. The bound yields \(L_t^4\dot H_x^{1/2}\) /
+\(L_t^4 L_x^3\), with Serrin index \(3/2\), **not** a continuation
+criterion. These are original-equation sharp nonpromotion checks,
+not evidence of singularity. Existing R92/Waleffe signed-helicity
+cancellations remain separate. Focused local suite: **22 passed**
+(13 critical residence + nine earlier small-critical); not a full
+exact-GitHub-head or Agda kernel run.
+
 **Still unpaid at the real mathematical wall:** arbitrary-large-data
 pre-entry/middle-time **pointwise** critical bound; full source signed
 R734/W2 universal margin is **refuted** by the earlier positive-helicity
@@ -34,7 +49,7 @@ with phase plus generated H-minus; R369 *actual* Gram same-operator
 bridge; R406 continuum source, A1/A2/A3/B7 unrestricted continuation.
 Do not infer a Clay proof from global-time L2 integrability or
 the source-written Agda commentary. Latest focused local arithmetic/
-symbolic suite passed 19 cases (10 new + 9 earlier) but there is
+symbolic suite passed 22 cases (13 new + 9 earlier) but there is
 no Agda/Lean kernel receipt or exact-head whole-repository suite.
 
 ---
