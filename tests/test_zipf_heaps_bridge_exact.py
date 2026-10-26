@@ -104,3 +104,27 @@ def test_derived_finite_urn_limit_as_draws_increase():
         e=H.expected_iid_vocabulary(p,draws)
         assert 0 <= e <= len(p)
     assert H.expected_iid_vocabulary(p,1000) > F(59,10)
+
+
+def test_all_integer_shifted_moments_via_binomial_hurwitz_decomposition():
+    for n in (1,2,5):
+        for s in (-2,0,1,3):
+            for shift in (0,1,5):
+                if s<0: continue  # PMF carrier intentionally only nonnegative s
+                p=H.finite_rank_probabilities(n,s,shift)
+                for moment in range(5):
+                    assert H.finite_rank_moment(p,moment)==H.finite_shifted_moment_binomial(n,s,shift,moment)
+
+
+def test_finite_hurwitz_sum_additivity_without_infinite_pole_subtraction():
+    for s in (-2,0,1,2,5):
+        for q in (0,2):
+            for n in (0,1,3):
+                assert (H.finite_hurwitz_sum(n+4,s,q)==
+                    H.finite_hurwitz_sum(n,s,q)+H.finite_hurwitz_sum(4,s,q+n))
+
+
+def test_dyadic_entropy_same_unigram_different_block_growth_n4():
+    assert H.dyadic_block_entropy((F(1,16),)*16)==4  # IID fair bits, 4-block
+    assert H.dyadic_block_entropy((F(1,2),)+(F(0),)*14+(F(1,2),))==1  # persistent fair bit
+    assert H.dyadic_block_entropy((F(1,2),F(1,2)))==1  # same singleton law
