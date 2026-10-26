@@ -66,11 +66,11 @@ byronFinal1966 : Source.AttributedSource
 byronFinal1966 = Source.mkNoDOISource
   "Eugene V. Byron, Johns Hopkins University Applied Physics Laboratory"
   "Project Pandora (U), Final Report (MRT-4-046/QM-66-072)"
-  "Original instrument and chamber evaluation dated November 1966; contained in same DoD FOIA assembly as Operational Procedure"
+  "Original JHU/APL report MRT-4-046 QM-66-072 dated November 1966; 73-page original facsimile in an independent document mirror, original Tables II and III and conclusion visually inspected 2026-10-27; retains DoD FOIA 89-FOI-2208 provenance"
   "1966"
-  "https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Other/Operational_Procedure_For_Project_Pandora.pdf"
+  "https://doxit.weebly.com/uploads/2/4/7/4/24749526/project_pandora_final_report.pdf"
   Source.archivalSource
-  "Indexed original report discusses field nonuniformity, probe geometry and sample container reflections. Third-party indexed snippets, not full-page independently inspected; neither an in-vivo effect nor effective weapon result"
+  "Original laboratory apparatus data: 18 measured/calculated 2.6 to 4.0 GHz horn power-density comparisons in Table III, original sample/container reflection perturbations in Table II, +/-2 dB gross dipole monitoring limitation and conclusion about the constructed Walter Reed facility. Exact rational Table III reconstruction lives in scripts/pandora_control_identifiability_audit.py. A technical instrument/calibration comparison is not a primate outcome or Moscow embassy exposure."
   Source.publicAttribution
 
 arpaInitial1966 : Source.AttributedSource
@@ -1032,3 +1032,42 @@ referencingSourceDoesNotContainParent ()
 mutsEarlierHighModeCount : Agda.Builtin.Nat.Nat
 mutsEarlierHighModeCount = 14
 
+
+
+-- Original JHU/APL Byron November 1966 FINAL report MRT-4-046:
+-- report pp. 14-16 = 73-page facsimile PDF indexes 19-21, visually
+-- inspected 2026-10-27 at original mirror URL in byronFinal1966.
+-- Table III contains 18 independent *instrument setup row comparisons*
+-- of modeled from source-measured input power and horn gain versus measured
+-- chamber power density. 18 rows do NOT mean 18 independent instruments,
+-- independent observers, treatment groups, animals or trials.
+-- Table II's ±2.63/±2.88 dB with sample/container and p. 6
+-- 2.0 dB gross relative dipole monitor error are distinct error sources.
+-- They cannot be silently transferred to 1977 Embassy MUTS sensors.
+data Byron1966InstrumentEvidenceStanding : Set where
+  originalHornMeasuredPowerDensity : Byron1966InstrumentEvidenceStanding
+  calculatedDensityFromMeasuredSourcePower : Byron1966InstrumentEvidenceStanding
+  movableDipoleGrossFieldComparison : Byron1966InstrumentEvidenceStanding
+  testContainerPerturbation : Byron1966InstrumentEvidenceStanding
+  experimentallyObservedAnimalResponse : Byron1966InstrumentEvidenceStanding
+  moscowEmbassy1977RoomObservation : Byron1966InstrumentEvidenceStanding
+
+calculatedHornPowerNotIndependentMeasurement :
+  calculatedDensityFromMeasuredSourcePower ≡
+    originalHornMeasuredPowerDensity → ⊥
+calculatedHornPowerNotIndependentMeasurement ()
+
+laboratoryInstrumentIsNotAnimalResponse :
+  originalHornMeasuredPowerDensity ≡
+    experimentallyObservedAnimalResponse → ⊥
+laboratoryInstrumentIsNotAnimalResponse ()
+
+laboratoryInstrumentIsNotEmbassyRoom :
+  originalHornMeasuredPowerDensity ≡
+    moscowEmbassy1977RoomObservation → ⊥
+laboratoryInstrumentIsNotEmbassyRoom ()
+
+grossDipoleIsNotStandardHorn :
+  movableDipoleGrossFieldComparison ≡
+    originalHornMeasuredPowerDensity → ⊥
+grossDipoleIsNotStandardHorn ()
