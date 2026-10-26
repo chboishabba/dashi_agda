@@ -1,0 +1,186 @@
+# Crystallography × 369 Hyperfabric: consolidated max-cut roadmap
+Date: 2026-10-26
+Owner: PR #1261, consuming pre-existing repository artefacts and PR donor branches.
+
+## Original question and the genuine mathematical expansion
+The initiating visual demonstrated tetragonal 4/mmm (D4h), of order 16:
+r^4=s^2=h^2=1, srs=r^-1, and h central. The ensuing work
+identified an exact signed-coordinate Weyl embedding,
+D4h ≅ W(B2)×W(A1) ↪ W(B3) ↪ W(B4),
+and a need for shared crystallographic definitions. This is
+classical crystallography, not an original experimental claim.
+
+Adjacent, *distinct* pre-existing lanes include:
+- T4/T9/T18 trialectic local descent and C3 cyclic transport;
+- a 9-site D4 grid with centre/edge/corner orbit data;
+- a native balanced 3³ path-graph cube and signed antipode;
+- the punctured-nine plane and colour-wheel/pants adapters;
+- 369 atomic index, electronic shells, fermionic antisymmetry,
+  molecular/industrial hyperfibre and physical-validation receipts;
+- Z³ Fourier mode lattice, 4D Balaban finite periodic blocking,
+  B4 Weyl action and hyperfabric restrictions;
+- diamond NV four-axis/spin/MCG/ODMR/optical/TSFV models and
+  magnetic Seitz/Bloch donors from distinct PRs.
+
+## What the finite core actually says
+
+X=T³ has 27 *spatial sites*, not the cyclic additive group C27.
+In the native nonperiodic path-graph lattice, remove only 0.
+There are 26 nonzero sites and 13 antipodal pairs.
+The projective strata by nonzero coordinate count are
+3 coordinate axes, 6 face diagonals, 4 body diagonals.
+B3 signed permutations preserve strata and act faithfully on
+all 13 unoriented axes, while its 4-body-diagonal action has
+kernel ±I and quotient S4.
+
+Slice X* by z: 9 lower, 8 central, 9 upper = 26.
+Only the central plane is punctured. Antipodal gluing pairs
+outer sheet points across the two outer sheets, and the
+central slice within itself. Replacing this with three
+punctured nines would yield 24 and erase essential residuals.
+
+The base-three string 111 has ordinary value 13. If ordinary
+digits 111 index a centred ternary cube via digit -> digit-1,
+the addressed cube site is (0,0,0). As a balanced signed
+coordinate string +++, its weighted amplitude is 13 and its
+spatial site is the [111] corner. The 13 projective axes
+are a third object. Keep codec/observer tags.
+
+The nonperiodic path cube, periodic additive C3³ torus,
+modular nine-sheet map, exceptional Jordan 27-space and
+physical diamond lattice are different objects despite
+shared finite cardinalities. In particular PR #1239
+documents a modular bijection that is not a graph
+automorphism of the native nearest-neighbour cube.
+
+## Phase and deliverable gates
+
+### P0. Provenance and executable receipts (partially complete)
+Deliverables: source-root ledger, code owner inventory, exact PR
+donor imports vs copied adapters, local check records.
+Completed: multiple source-scoped audits; no physical
+specimen identification was attempted.
+Gate: explicit Agda typecheck and mathematical regression
+checks for current #1261 branch. CI is not required.
+
+### P1. Finite crystallographic group actions (implemented, kernel open)
+Deliverables: D4h normal form; exact 3x3 matrices; eight-site
+actions; D4 nine-cell transport; signed B4 inclusion and
+four cubic NV axes. Completed: source-level implementation
+and finite Python diagnostic receipts.
+Open: Agda kernel receipts, abstraction of large exhaustive
+case splits, exact B4 donor-to-D4h representation morphism.
+
+### P2. Twenty-seven puncture and thirteen projective axes
+Deliverables: native X* cube ↔ 8+9+9 sheet chart;
+origin exclusion; antipodal 13 quotient; strata 3+6+4;
+B3 equivariance and faithful action; diamond four-axis
+restriction and kernel ±I.
+Now: chart forward map, partial inverse and chart
+round-trip submitted, reusing PuncturedNineSheet; PR #1249
+owns native antipodal involution and adjacency proof.
+Open: import PR #1249 when available, typed dependent
+nonorigin inverse, quotient normal forms, Agda faithfulness.
+
+### P3. Hyperfabric pants seam and XOR residual
+Deliverables: real z-sheet incidence/restriction maps;
+GlobalSection and InterfaceMatch with phase/capacity
+proofs; binary orientation residual, XOR 1-cochain,
+cycle holonomy obstruction theorem and gluing BIDI.
+Prior art: TypedHyperfabricCore,
+TypedHyperfabricPantsGluingBridgeExact,
+JInvariantColourWheelNineSheetPantsGluingExact and
+NSTriadSignedXORGaugeabilityBoundary.
+Open: same-object instantiation and proof of seam
+compatibility, not just descriptive analogy.
+
+### P4. Crystallographic lattice and 3D classifications
+Deliverables: 7 systems / 14 Bravais / 32 point-group
+catalogue; actual lattice basis/metric, 32 matrix
+representations and lattice preservation; Seitz affine
+multiplication; 230 space-group type data crosscheck.
+Current: metadata catalogues and D4h signed-coordinate
+definitions; existing B4 and Fourier lattice donors.
+Open: matrix, metric and Seitz proofs, authoritative
+versioned IUCr/spglib comparison. Numerical catalogue is
+not a 230-classification proof.
+
+### P5. Species-decorated crystals, diamond and Bloch
+Deliverables: native atomic 369 AtomicIndex decorations
+and species/occupancy-preserving action, diamond fcc
+two-sublattice basis and Fd-3m (#227), NV ordered-defect
+site stabilisers, separate quantum spin-one action,
+Bloch Hamiltonian covariance and spectroscopy bridges.
+Current: typed atomic metadata and preservation contract,
+NV four-axis adapter; donor PRs #1238/#1262, CoTaSe2
+magnetic Seitz/Bloch PRs #1076/#1115.
+Open: concrete Seitz operations, physical site orbits,
+faithful magnetic/quantum representations and calibrated
+experiment receipts.
+
+### P6. Experiments and independent discrimination
+Deliverables: operational tests distinguishing actual
+crystal symmetry, antiferromagnetic/magnetic groups,
+defect-orientation fractions, band degeneracies, NV
+zero-field/Zeeman response and scattering selection rules.
+No structural cardinality or ternary codec is an empirical
+observation or quantum advantage theorem.
+
+## Steelman and falsifiers
+
+Strongest steelman: the same *functorial finite action/gluing
+machinery* may organise ternary finite hyperfabric data,
+crystallographic projections and symmetry-resolved atom/quantum
+observables while preserving residuals. This is useful even
+if it discovers no novel force, element rule or sensor effect.
+
+Distinguish this from stronger speculative claims:
+- Signed ternary structural similarity does NOT entail
+  a physical diamond lattice or C3 Hamiltonian symmetry.
+- A spatial C3 stabiliser of the [111] defect axis is
+  distinct from cyclic permutation of m_s={+1,0,-1};
+  PR #1262 already gives an Sz² obstruction.
+- XOR orientation gluing is Z2 and cannot silently be
+  identified with ternary C3 addition.
+- Same cardinality of 27 geometry, Jordan or modular
+  algebra does not supply an isomorphism preserving their
+  respective products or adjacency.
+
+Falsification / proof-search criteria:
+(i) explicit failure of equivariance on a site/action pair;
+(ii) nonmatching reflection fixed-point counts for
+alternative eight-site D4 carriers;
+(iii) failure of source hyperfabric InterfaceMatch;
+(iv) nonzero XOR holonomy along a cycle;
+(v) absence of a lattice-preserving integral Seitz action;
+(vi) spectra/selection rules diverging from measured
+physical data under stated instrument conventions.
+Negative findings remain durable structural results.
+
+## Attribution
+Established Weyl/Coxeter groups, IUCr classes, Bloch/Seitz,
+quantum spin and crystallography remain external prior art.
+Existing DASHI native module/PR authors retain dated code
+and claim provenance. The contributions in #1261 are new
+typed adapters, separation theorems/obligations, explicit
+finite proof terms and independent computational audits.
+Source existence, attributed statements, model definitions,
+local checks, kernel proofs and external-world physical
+identification are separate promotion stages. Do not
+infer material proof merely from imported theorem names.
+
+## Next Pareto proof-search order
+1. Compiler-check current finite proof terms and repair any
+   source API / integer equality errors without treating CI
+   as gate.
+2. Close X* ↔ punctured sheet sum as a dependent equivalence.
+3. Reuse native antipode to build all 13 quotient classes with
+   residual and formal B3 action, then restrict to four NV axes.
+4. Instantiate real pants seams + XOR cycle compatibility on
+   the *same* 27-site incidence graph.
+5. Lift concrete Seitz and Bloch actions to 369-decorated
+   diamond/tetragonal crystals; only then add empirical tests.
+
+This plan intentionally avoids changing donor PRs without
+their owners' review. Cross-repo/PR integrations are
+conditional where those branches are unmerged.
