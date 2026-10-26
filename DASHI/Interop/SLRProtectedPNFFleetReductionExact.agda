@@ -66,9 +66,9 @@ admittedIsNotCertified ()
 
 open import Data.Empty using (⊥)
 
-// A conflict witness contains both polarities for the *same typed fibre*.
-// Counts are observational inputs; this module does not infer a typed meet
-// from lexical resemblance.
+-- A conflict witness contains both polarities for the *same typed fibre*.
+-- Counts are observational inputs; this module does not infer a typed meet
+-- from lexical resemblance.
 record OppositePolarity (A : Set) : Set where
   constructor oppositePolarity
   field
