@@ -106,6 +106,28 @@ semanticFidelityCritique2026 = Attribution.mkNoDOISource
   "Author-claimed semantic noncorrespondence and autoformalisation limits in the 2026 OpenAI Navier-Stokes example; does not challenge soundness of the Lean kernel. DASHI proves distinct finite source-hypothesis erasure no-gos; does not adopt allegations as mathematical facts."
   Attribution.publicAttribution
 
+palasekAxisymmetric2026 : Attribution.AttributedSource
+palasekAxisymmetric2026 = Attribution.mkNoDOISource
+  "Stan Palasek"
+  "A logarithmic regularity criterion for the axisymmetric Navier-Stokes equations"
+  "arXiv:2610.29012v1, posted 2026-10-21"
+  "2026"
+  "https://arxiv.org/abs/2610.29012"
+  Attribution.academicArticleSource
+  "Author-reported logarithmic circulation regularity criterion k=5/4 for AXISYMMETRIC R3 solutions; conditional theorem, not arbitrary-data Miller A3 and not global Clay"
+  Attribution.publicAttribution
+
+grujicGeometric2026 : Attribution.AttributedSource
+grujicGeometric2026 = Attribution.mkNoDOISource
+  "Zoran Grujic"
+  "Logarithmic Depletion of Vortex Stretching and Singularity Evasion in the 3D Navier-Stokes Equations"
+  "arXiv:2607.08866, submitted 2026-07-09; latest found v4 revised 2026-10-11 (earlier v2 cited in independent proof audit)"
+  "2026"
+  "https://arxiv.org/abs/2607.08866"
+  Attribution.academicArticleSource
+  "Conditional unforced R3 geometric mechanism for critical vorticity concentration and logarithmically weighted BMO vorticity direction; independent assumptions are not obtained from general Clay-admissible data. v2 audits do not automatically verify v4."
+  Attribution.publicAttribution
+
 openaiForced2026 : Attribution.AttributedSource
 openaiForced2026 = Attribution.mkNoDOISource
   "OpenAI"
@@ -129,6 +151,8 @@ threePaperAtlas = Attribution.mkSourceAtlas
     ∷ beiraoBerselli2002
     ∷ wangGalerkin2026
     ∷ semanticFidelityCritique2026
+    ∷ palasekAxisymmetric2026
+    ∷ grujicGeometric2026
     ∷ openaiForced2026
     ∷ [])
   "Each row is a source role with distinct assumptions and original authorship. Reprints, bibliography edges and typed reconstruction are not independent corroboration, kernel proofs, or physical admission."
