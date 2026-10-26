@@ -993,3 +993,42 @@ certified moderate N; its working precision still grows
 with `log N`, so the compact exponent description is
 not a computational shortcut at 9999!.
 Exact-head Agda/Lean/Actions receipts remain outstanding.
+
+
+## 2026-10-27 exact symbolic factorial pi-interval resource cut
+
+A NEW literal `scripts/check_pickover_factorial_pi_interval_width_budget.py`
+uses **only** Python integer arithmetic and the existing problem's
+exact E=9999!, no approximation to pi and NO construction of 99^E.
+It is registered in the PR's existing focused workflow.
+
+Exact local reproduction PASS:
+- `E=9999!` has 35,656 decimal digits and 118,445 bits.
+- `99^10 > 10^19`, so `N=99^E>10^(19E/10)`.
+- For ANY actual enclosing pi bracket `3<L<=pi<=U<4`
+  of full width `U-L=10^(-P)`, the induced winding quotient
+  interval has length
+  `N/L-N/U=N*10^(-P)/(L*U)>N*10^(-P)/16`.
+- If `P<=19E/10-2` (integer since 10 divides E), that width is
+  **strictly greater than 100/16 > 1**.
+  Consequently this *ordinary unrefined pi-interval/floor
+  certification method* cannot enclose the full quotient range
+  inside a single integer winding bin with any such P.
+  The threshold P itself is an integer with 35,656 digits.
+  It is an exact cost frontier for a particular algorithm class,
+  **NOT** a universal complexity lower bound for evaluating the
+  special phase or a proof of unpredictability.
+
+The source-specific next P0 is an analytic method whose produced and
+verified signed witness avoids this naive full-width propagation
+(or a proof that no such shortcut exists in a precisely specified
+model). Neither finite 9999 CRT projections, Lindemann transcendence,
+nor the #1244 nonabelian Wilson trace supplies that witness.
+The original `sin(99^(9999!))` sign is still UNSOLVED.
+
+Cross-PR effect: #1244's revised
+`AlexanderHornedC3OriginalInquiryRoadmapPhaseDeliverables20261027.md`
+explicitly isolates this analytic problem from the horned threefold
+geometric proof and from any eventual physical nonabelian-gauge emulator.
+Classical source owners Machin/Euler/Lindemann and existing DASHI
+constructive-pi/complex-power modules retain separate attribution.
