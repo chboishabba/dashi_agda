@@ -396,3 +396,71 @@ original inquiry to P4 physical selection.
 The present finite word-observation no-go
 remains valid in its explicitly marked
 source/receiver scope.
+
+
+## 11. NEW all-depth acyclic CW telescope comparator — stronger identifiability MAX-CUT
+
+The previous result that any FINITE Hatcher stage is
+matched by a tame rose has an all-depth classical
+topological strengthening. Original Hatcher Example
+2B.2 gives the injective free-stage child-commutator
+tower; ORIGINAL Hatcher Section 3.F (printed p312)
+gives the mapping telescope as countable CW mapping
+cylinders, finite truncation retractions and homology
+direct limits. Build R_n as a 3*2^n-circle bouquet;
+f_n sends each old circle to its new sector-preserving
+child commutator, strictly C3-equivariantly.
+The ordinary mapping telescope T has
+
+    pi1(T)=colim F_(3*2^n)=G_A*G_A*G_A,
+    H_k(T;Z)=0 (k>=1), H0(T;Z)=Z.
+
+Each finite truncation retracts to the last rose.
+The induced map on H1 is ZERO, because each
+old circle becomes a commutator; the directed
+limit of these homology groups is zero. Injectivity
+of Hatcher's original π1 maps leaves π1(T)
+NONTRIVIAL. Height-compactness ensures any
+sphere map lies in some finite truncation, so
+π_k(T)=0 for k>=2. T is an aspherical acyclic
+NONCONTRACTIBLE 2D CW K(G,1) with a cellular
+C3 action, NOT a smooth/embedded 3D wild ball.
+
+Thus **even ALL-DEPTH abstract SU3 group-holonomy
+characters** can be transported from the true
+source's group to this explicitly NON-3D
+group-equivalent CW model. The group alone
+does NOT select the ambient wild embedding.
+The actual three-arm π1(E) equivalence remains
+conditional on #1244's still-uninhabited
+relative geometry. This derived consequence
+does not claim novelty over the classical
+mapping-telescope/acyclic-group literature.
+
+New deliverables: Agda #1249
+`scripts/check_horn_c3_acyclic_rose_telescope.py`
+(verified pushed source), full exact/Pareto ledger
+`docs/hyperfabric-horn-c3-acyclic-telescope-all-depth-source-cut-20261027.md`,
+and Lean #84 source-written
+`HornC3AcyclicMappingTelescopeCut.lean`
+with finite scalar rank and explicitly
+CONDITIONAL all-depth group/receiver equivalence.
+Independent locally implemented finite audit
+through n8 PASS; committed Python script
+NOT byte-identically replayed and actual
+2D CW geometry NOT Lean-kernel formalized.
+
+Research decision update: the actual
+wild-three-dimensional P2 G1/G4 source
+geometry, plus P3 true Euclidean local
+meridian lengths/regularity, are
+MATHEMATICALLY NECESSARY to turn abstract
+all-depth group representations into a
+spatially distinctive result.
+Any more finite (or abstract all-depth)
+Wilson-only emulator is relevant to
+non-Abelian engineering but cannot be
+a wildness identifier by group data alone.
+P4 source matter/quantum-action selection,
+P5 calibrated physical discrimination
+and P6 kernel/publication remain separate.
