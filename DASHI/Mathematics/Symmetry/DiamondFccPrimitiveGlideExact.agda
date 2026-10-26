@@ -17,6 +17,7 @@ module DASHI.Mathematics.Symmetry.DiamondFccPrimitiveGlideExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; +_; _+_; _*_; -_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
+import Data.Integer.Properties as IntP
 import Data.Integer.Tactic.RingSolver as IntRS
 import Tactic.RingSolver.NonReflective as NR
 import DASHI.Mathematics.Symmetry.TetragonalIntegralLatticeActionExact as L
@@ -80,7 +81,9 @@ primitiveExt {primitive p q r} {primitive .p .q .r} refl refl refl = refl
 
 fccSwapXY : (p : PrimitiveFcc) →
   fccPoint (swapXY p) ≡ swapXYPoint (fccPoint p)
-fccSwapXY (primitive p q r) = refl
+fccSwapXY (primitive p q r) =
+  tripleExt refl refl
+    (cong ((+ 2) *_) (IntP.+-comm q p))
 
 fccSwapYZ : (p : PrimitiveFcc) →
   fccPoint (swapYZ p) ≡ swapYZPoint (fccPoint p)
