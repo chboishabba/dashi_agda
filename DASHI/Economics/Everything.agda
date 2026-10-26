@@ -54,8 +54,14 @@ import DASHI.Economics.ChinaUSAITrainingServingComputeSeparation2026Exact
 import DASHI.Economics.AICurrentRegimeCalibration2026Exact
 import DASHI.Economics.AICurrentRegimeSourceAttributionCrossPollinationExact
 import DASHI.Economics.AICurrentRegimePromotionSchedulerExact
-\nimport DASHI.Economics.AIChinaTSMCGeoEconomicCalibration2026Exact\nimport DASHI.Economics.ChinaOfficialEconomicSelfPosition2026Exact\n
+
+import DASHI.Economics.AIChinaTSMCGeoEconomicCalibration2026Exact
+import DASHI.Economics.ChinaOfficialEconomicSelfPosition2026Exact
+
 import DASHI.Economics.ChinaEconomicLeadershipCrossSourceJoinExact
 
 -- Source-typed wealth/inheritance/vacancy-tax separation max-cut.
 import DASHI.Economics.WealthInheritanceVacancyTaxMaxCut20261027Exact
+
+-- Reuse of philosophy/sociology for fiscal receipts, voting power and care.
+import DASHI.Economics.WealthTaxPowerCareSociologyBidi20261027Exact
