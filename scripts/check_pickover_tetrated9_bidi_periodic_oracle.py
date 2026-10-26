@@ -9,7 +9,10 @@ Nonarchimedean/finite producer uses a certified multiplicative period of
 99 modulo q. It never expands 9999! or 99**(9999!).
 """
 from dataclasses import dataclass
+from fractions import Fraction
 from math import factorial, gcd
+
+from check_pickover_machin_factorial_phase import interval_pi, certified_sin_sign
 
 BASE = 99
 N = 9999
@@ -112,6 +115,33 @@ def main():
         a, b, cell, signs = pair
         print(f"BIDI depth={depth}: a={a}, b={b}, "
               f"shared cell={cell}, terminal signs={signs}")
+
+
+    # BACKWARD source gate: a nearby rational approximation to 1/(2*pi)
+    # is *not* a same-object analytic phase oracle. Machin proves this
+    # directly on early powers. Every comparison is exact rational.
+    q = 20123
+    a = 3203
+    scale = 99**60
+    lower, upper = interval_pi(scale)
+    assert 0 < lower < upper
+    # q/(2*pi) is strictly closer to a than either neighboring integer.
+    assert Fraction(2*a-1, 2*q) < Fraction(scale, 2*upper)
+    assert Fraction(scale, 2*lower) < Fraction(2*a+1, 2*q)
+    rational_signs = []
+    actual_signs = []
+    for n in range(1, 5):
+        k = factorial(n)
+        residue = a * pow(BASE, k, q) % q
+        rational_signs.append(sine_sign_residue(residue, q))
+        actual_signs.append(certified_sin_sign(BASE, k, scale, lower, upper))
+    assert rational_signs == [-1, +1, -1, +1], rational_signs
+    assert actual_signs == [-1, -1, +1, +1], actual_signs
+    assert rational_signs[1] != actual_signs[1]
+    print("BIDI REJECTION nearest rational seed a/q=3203/20123")
+    print("  rational surrogate signs:", rational_signs)
+    print("  exact actual-sine signs:", actual_signs)
+    print("  initial closeness does not certify distant signed consumer")
 
     assert NineSelfIndexingAddress(9).width_expression() == "9^^9"
     print("PASS exact 9999! rational-period sign without expanding exponent")
