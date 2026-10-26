@@ -25,6 +25,7 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
 import DASHI.Moonshine.Griess1990Moufang81IbrahimProjective13Exact as Griess
+import DASHI.Moonshine.Griess1990Moufang81ExplicitThirteenCycleExact as PriorC13
 
 data Shear : Set where
   e01 e02 e10 e12 e20 e21 : Shear
@@ -193,3 +194,109 @@ sameRowCommutes SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne = refl
 -- have exact local independent Python receipts, not a postulated
 -- Agda group isomorphism. 26-site spatial adjacency and Monster VOA
 -- remain separately owned and source-typed.
+
+
+-- The corrected coherent e01 -> e12 -> e20 word is NOT literally
+-- the earlier arbitrary-lift word, but it is the SAME source C13 up
+-- to a central character and a kernel conjugation. This retains the
+-- earlier positive Albert J0 cyclic module equivalence without
+-- inventing any new F3³/octonion/Monster carrier.
+--
+-- Actual source difference is mu=(2,1,0), so the central phase
+-- changes by (-x+y) after the OLD word. A separate rational
+-- certificate gives the conjugator nu=(1,1,2) and an explicitly
+-- nonzero 26x26 determinant -729/4096.
+coherentWord : Griess.M81 → Griess.M81
+coherentWord m = coherentLift e20 (coherentLift e12 (coherentLift e01 m))
+
+sourceWordShift : Griess.M81 → Griess.M81
+sourceWordShift (p , c) =
+  (p , Griess.add3 c (Griess.sub3 (Cube.y p) (Cube.x p)))
+
+sourceWordDifference : (x y z c : Griess.F3) →
+  coherentWord (Cube.ternary27Point x y z , c) ≡
+    sourceWordShift (PriorC13.shortOrder13
+      (Cube.ternary27Point x y z , c))
+sourceWordDifference SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne SSP.sspZero = refl
+sourceWordDifference SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspNegOne SSP.sspZero SSP.sspNegOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspNegOne SSP.sspZero SSP.sspZero = refl
+sourceWordDifference SSP.sspNegOne SSP.sspNegOne SSP.sspZero SSP.sspPosOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne SSP.sspZero = refl
+sourceWordDifference SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspZero SSP.sspNegOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspZero SSP.sspNegOne SSP.sspZero = refl
+sourceWordDifference SSP.sspNegOne SSP.sspZero SSP.sspNegOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspZero SSP.sspZero SSP.sspNegOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspZero SSP.sspZero SSP.sspZero = refl
+sourceWordDifference SSP.sspNegOne SSP.sspZero SSP.sspZero SSP.sspPosOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspZero SSP.sspPosOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspZero SSP.sspPosOne SSP.sspZero = refl
+sourceWordDifference SSP.sspNegOne SSP.sspZero SSP.sspPosOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne SSP.sspZero = refl
+sourceWordDifference SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspPosOne SSP.sspZero SSP.sspNegOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspPosOne SSP.sspZero SSP.sspZero = refl
+sourceWordDifference SSP.sspNegOne SSP.sspPosOne SSP.sspZero SSP.sspPosOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne SSP.sspZero = refl
+sourceWordDifference SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspZero SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspZero SSP.sspNegOne SSP.sspNegOne SSP.sspZero = refl
+sourceWordDifference SSP.sspZero SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspZero SSP.sspNegOne SSP.sspZero SSP.sspNegOne = refl
+sourceWordDifference SSP.sspZero SSP.sspNegOne SSP.sspZero SSP.sspZero = refl
+sourceWordDifference SSP.sspZero SSP.sspNegOne SSP.sspZero SSP.sspPosOne = refl
+sourceWordDifference SSP.sspZero SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspZero SSP.sspNegOne SSP.sspPosOne SSP.sspZero = refl
+sourceWordDifference SSP.sspZero SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspZero SSP.sspZero SSP.sspNegOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspZero SSP.sspZero SSP.sspNegOne SSP.sspZero = refl
+sourceWordDifference SSP.sspZero SSP.sspZero SSP.sspNegOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspZero SSP.sspZero SSP.sspZero SSP.sspNegOne = refl
+sourceWordDifference SSP.sspZero SSP.sspZero SSP.sspZero SSP.sspZero = refl
+sourceWordDifference SSP.sspZero SSP.sspZero SSP.sspZero SSP.sspPosOne = refl
+sourceWordDifference SSP.sspZero SSP.sspZero SSP.sspPosOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspZero SSP.sspZero SSP.sspPosOne SSP.sspZero = refl
+sourceWordDifference SSP.sspZero SSP.sspZero SSP.sspPosOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspZero SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspZero SSP.sspPosOne SSP.sspNegOne SSP.sspZero = refl
+sourceWordDifference SSP.sspZero SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspZero SSP.sspPosOne SSP.sspZero SSP.sspNegOne = refl
+sourceWordDifference SSP.sspZero SSP.sspPosOne SSP.sspZero SSP.sspZero = refl
+sourceWordDifference SSP.sspZero SSP.sspPosOne SSP.sspZero SSP.sspPosOne = refl
+sourceWordDifference SSP.sspZero SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspZero SSP.sspPosOne SSP.sspPosOne SSP.sspZero = refl
+sourceWordDifference SSP.sspZero SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne SSP.sspZero = refl
+sourceWordDifference SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspNegOne SSP.sspZero SSP.sspNegOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspNegOne SSP.sspZero SSP.sspZero = refl
+sourceWordDifference SSP.sspPosOne SSP.sspNegOne SSP.sspZero SSP.sspPosOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne SSP.sspZero = refl
+sourceWordDifference SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspZero SSP.sspNegOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspZero SSP.sspNegOne SSP.sspZero = refl
+sourceWordDifference SSP.sspPosOne SSP.sspZero SSP.sspNegOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspZero SSP.sspZero SSP.sspNegOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspZero SSP.sspZero SSP.sspZero = refl
+sourceWordDifference SSP.sspPosOne SSP.sspZero SSP.sspZero SSP.sspPosOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspZero SSP.sspPosOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspZero SSP.sspPosOne SSP.sspZero = refl
+sourceWordDifference SSP.sspPosOne SSP.sspZero SSP.sspPosOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne SSP.sspZero = refl
+sourceWordDifference SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspPosOne SSP.sspZero SSP.sspNegOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspPosOne SSP.sspZero SSP.sspZero = refl
+sourceWordDifference SSP.sspPosOne SSP.sspPosOne SSP.sspZero SSP.sspPosOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne = refl
+sourceWordDifference SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne SSP.sspZero = refl
+sourceWordDifference SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne = refl
+
+-- Source-written reduction proofs only; Agda kernel not invoked.
