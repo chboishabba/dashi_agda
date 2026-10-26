@@ -135,9 +135,9 @@ thermalScreenDoesNotVerifyCalibration = refl
 -- source carriers including real NOAA Bangor records, same-station metadata,
 -- an earlier local press item and a Kansas location false-match control.
 -- More source objects are NOT more independent weather experiments.
-sourceAtlasCountIsSeventySix :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 76
-sourceAtlasCountIsSeventySix = refl
+sourceAtlasCountIsSeventySeven :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 77
+sourceAtlasCountIsSeventySeven = refl
 
 
 -- Original NOAA OBS-TIME documentation is a *method*, not a 1953 sensor time;
@@ -514,6 +514,21 @@ pandey2017OriginalFieldStudyDoesNotProve2024GeometryClaim =
 pandey2017ClaimStaysSourceBound :
   Atlas.citationCreatesTruth Atlas.pandey2017FieldExperimentScope ≡ false
 pandey2017ClaimStaysSourceBound = refl
+
+-- Source-original patent and DOI-linked author declaration agree on
+-- an application ID, not a clinical efficacy, grant or magnetic-coil effect.
+saikiaPatentOriginalDoesNotTransferClinicalAuthority :
+  Attribution.citationCreatesAuthority Atlas.saikiaFieldPatent2019 ≡ false
+saikiaPatentOriginalDoesNotTransferClinicalAuthority =
+  Atlas.allSourcesRemainNonAuthoritative Atlas.saikiaFieldPatent2019
+
+saikiaPCTExactJoinDoesNotConstituteTherapeuticProof :
+  Atlas.citationCreatesTruth Atlas.saikiaPCTExactPatentIdentityClaim ≡ false
+saikiaPCTExactJoinDoesNotConstituteTherapeuticProof = refl
+
+saikiaElectrodePatentDoesNotProveRodinComparison :
+  Atlas.citationCreatesTruth Atlas.saikiaElectrodePatentDoesNotLicenseRodinBenefit ≡ false
+saikiaElectrodePatentDoesNotProveRodinComparison = refl
 
 saikiaOriginalResearchCannotCreateIndependentRodinComparison :
   Attribution.citationCreatesAuthority Atlas.saikiaAmyloid2019 ≡ false
