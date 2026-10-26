@@ -129,3 +129,90 @@ alternating-quantifier hierarchy/Post theorem, and (iv) the
 source's explicit SCI tower conclusion. A general H10
 undecidability theorem alone does **not** imply A.3/A.4, nor
 do different Mathlib versions magically identify theorem types.
+
+
+## Primary-source Appendix completion audit (A.3/A.4/A.5/A.6, Oct 27)
+
+Re-read [original arXiv HTML v1, Appendix A.2](https://arxiv.org/html/2610.08144v1).
+Three *different* statements must remain typed separately:
+
+1. **Theorem A.3** asserts the fixed `k>=9` natural-variable
+   **`Sigma^0_2` completeness** of `d={e | ∃ n∀x p_e(n,x)!=0}`.
+   The new Lean `LostInTranslationNineVariables.lean` has now proved
+   the exact **logical reduction**
+   `(∃n, ¬Halts(e,n)) <-> (∃n,∀x:Fin9 Nat,Q(e,n,x) != 0)`
+   *conditional on* `∀ e n, Halts(e,n) <-> ∃x,Q(e,n,x)=0`.
+   This cannot be upgraded to an **effective many-one reduction**
+   until a true nine-unknown integer polynomial family, effective
+   coefficient enumeration and computable index transformation are
+   supplied. Universal polynomial existence with unspecified arity
+   is insufficient.
+2. **Theorem A.4** claims `Sigma^0_l` completeness at each
+   `l>=2, k>=9`. Its proof alternates quantifiers and, at the last
+   block, replaces the final computably enumerable relation by
+   an **existential or universal nine-variable polynomial block
+   depending on parity**, without increasing the alternation depth.
+   Coefficient-level equality and the partial-recursive index
+   selector are independently required. Source author credit belongs
+   to BCH; classical DPRM and hierarchy/recursion authors retain
+   their original theorems. Our typed debt interfaces are not an
+   effective-presentation proof.
+3. **Corollary A.5** states a *different* exact fixed-level fact:
+   `SCI_A(chi_d_l)=l` **for each** `l>=2`. Only then does §A.2.1
+   conclude that the **uniform problem across all finite levels**
+   has SCI `+infinity`. It is incorrect to say *each individual*
+   fixed-level problem has infinite SCI. Companion Lean
+   `fixed_level_sci_unbounded_of_corollary_A5` formalises the
+   elementary deduction `∀h∃l>=2, h<SCI_l` from explicit
+   hypotheses `SCI_l=l`. The theorem
+   `no_uniform_finite_height_if_all_fixed_levels_restrict`
+   additionally requires that an alleged uniform method of height
+   h would bound every fixed-level restriction by h. We have
+   **not formalised the actual SCI towers** or proved those
+   hypotheses, hence have **not kernel-proved SCI=infinity**.
+4. **Remark A.6** distinguishes **NATURAL-number** witnesses
+   (source use `k>=9`) from **INTEGER** unknowns. It references
+   an integer ten-unknown result; that is a different coefficient/
+   witness domain, *not* a nine-variable Nat DPRM theorem.
+
+### Original roots behind the nine-vs-ten count
+
+- **James P. Jones (1982)**, [*Universal diophantine equation*,
+  Journal of Symbolic Logic 47(3), 549-571,
+  DOI 10.2307/2273588](https://doi.org/10.2307/2273588).
+  Original universal representation precursor, separate from
+  BCH2026's argument and Freer's software implementation.
+- **Yuri Matiyasevich** and the
+  Davis–Putnam–Robinson–Matiyasevich tradition: classical original
+  representation theorems, not 2026 DASHI contributions.
+  The exact nine-Nat-witness bound is a *specific theorem* with
+  a separate arity account; generic semantic DPRM does not show it.
+- **Zhi-Wei Sun (submitted 2026-09-01)**,
+  [*Ten unknowns for Hilbert's tenth problem over the integers*,
+  arXiv:2609.01594](https://arxiv.org/abs/2609.01594).
+  The author **claims** integer-solvability undecidability with
+  ten unknowns, improving an eleven-unknown record. An unrelated
+  low-tier AI-referee note questions a lemma, and no independent
+  original-proof verification was performed here. This is a
+  **contested source root**, NOT a repaired/more restrictive
+  theorem that can be silently applied to the nine-Nat-variable
+  BCH claim.
+
+These new bibliography rows and their distinct *source roles* are
+typed in `DASHI.Foundations.AutoformalisationBCH2026Sources`.
+The original source's publication, derivative reprints, reviewer
+claims, Lean source commits and successful kernel builds remain
+different evidence coordinates.
+
+### Exact boundary at end of this cut
+
+Actual GitHub source declarations were written for selected
+Examples 2.1, 2.2, 3.1, 3.3, 4.3, the finite `∃n∀x` shape and
+the A.3 nine-variable logical equivalence, the additional witness-
+arity acceptance obstruction, and the A.5 unbounded-level deduction.
+The final **unpaid** proof roots are the numerical-nine-variable
+polynomial construction (or an independently source-equivalent
+replacement), effective enumerations and `NTOT` many-one
+completeness, the `Sigma_l` quantifier hierarchy/Post theorem,
+and the SCI tower/restriction semantics themselves. Stop
+promoting source-written lemmas beyond those visible result types.
