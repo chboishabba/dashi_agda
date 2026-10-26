@@ -410,3 +410,13 @@ allAPIContributorsInExampleShareOneOriginalDocument :
   Typed.receipts Climate.apiNamedContributorAJohnAdams ≡
   Typed.receipts Climate.apiNamedContributorJosephWalker
 allAPIContributorsInExampleShareOneOriginalDocument = refl
+
+
+milloy1998To2021IsPersonnelNotScriptTransmission :
+  Typed.relationKind Climate.milloy1998ToReefMedia ≡ Typed.personnelContinuity
+milloy1998To2021IsPersonnelNotScriptTransmission = refl
+
+repeatPersonDoesNotProveOriginalAPIPlanStillActive :
+  Typed.StrongHistoricalTransfer Climate.milloy1998ToReefMedia → ⊥
+repeatPersonDoesNotProveOriginalAPIPlanStillActive =
+  Climate.milloyRepeatNotProofOfTwentyThreeYearPlan
