@@ -35,8 +35,8 @@ for g in G:
     assert all(adjacency(x,y)==adjacency(act(g,x),act(g,y)) for x in X for y in X)
 kernel13=[g for g in G if all(canonical(act(g,a))==a for a in axes)]
 kernel4=[g for g in G if all(canonical(act(g,a))==a for a in corner_axes)]
-assert len(kernel13)==1 and len(kernel4)==2
-assert {g[0] for g in kernel4}=={(0,1,2)}
+assert len(kernel13)==2 and len(kernel4)==2
+assert {g[0] for g in kernel13}=={(0,1,2)}\nassert {g[1] for g in kernel13}=={(1,1,1),(-1,-1,-1)}\nassert {g[0] for g in kernel4}=={(0,1,2)}
 assert {g[1] for g in kernel4}=={(1,1,1),(-1,-1,-1)}
 
 # Quotient/residual is bijective: every nonzero p is a unique
@@ -57,5 +57,5 @@ for g in G:
         for bit in (0,1):
             assert encode(act(g,decode(a,bit)))==(dest,bit^epsilon)
 print("PASS: 27 native sites; punctured 8+9+9; 13=3+6+4 axes;")
-print("PASS: B3=48 graph automorphisms; faithful 13-axis action; four-axis kernel ±I;")
+print("PASS: B3=48 graph automorphisms; both 13-axis and four-axis kernels ±I; faithful oriented action;")
 print("PASS: exact 26 ↔ 13×2 sign residual and equivariant XOR cocycle (48×13×2).")
