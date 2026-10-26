@@ -538,3 +538,73 @@ milloyRepeatNotProofOfTwentyThreeYearPlan :
 milloyRepeatNotProofOfTwentyThreeYearPlan witness =
   Typed.personnelContinuityIsNotTransferRelation
     (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- Earlier campaign roots (1991 / 1994), found by original-source snowball.
+-- A pledged amount or unsolicited proposal is NEVER recorded as payment.
+------------------------------------------------------------------------
+
+ice1991TestCampaign : Typed.SourceReceipt
+ice1991TestCampaign = Typed.sourceReceipt
+  "Information Council for the Environment (ICE); utility-industry sponsors"
+  "1991 Test Market Proposal and Benchmark Survey"
+  "1991-02-04"
+  "https://www.climatefiles.com/denial-groups/ice-campaign-plan/"
+  "Archived original ICE proposal proposes approx USD500k test market strategy for disputing greenhouse-science certainty, sponsored through Edison Electric Institute / electric utility interests. A campaign plan and its budget are not an audited completed expense."
+
+southernICEHistoricalAccount : Typed.SourceReceipt
+southernICEHistoricalAccount = Typed.sourceReceipt
+  "Energy and Policy Institute original archival investigation of Southern Company records"
+  "Southern Company knew about climate change before it funded denial"
+  "2022"
+  "https://energyandpolicy.org/southern-company-knew-climate-change/"
+  "Archival reporting identifies Southern Company PR executive Gale Klappa as 1991 ICE president and reports USD125k Southern commitment. Identity and pledge are reported from leaked records, not a new source-author invoice receipt."
+
+singerGCC1994Proposal : Typed.SourceReceipt
+singerGCC1994Proposal = Typed.sourceReceipt
+  "S. Fred Singer / Science and Environmental Policy Project (SEPP)"
+  "A Public Education Program on Global Warming: proposal to Global Climate Coalition"
+  "1994"
+  "https://climateinvestigations.org/bbc-radio-series-tracks-history-of-climate-denial/"
+  "Archival original proposal seeks approx USD73000 funding for educational/public advocacy programme. Climate Investigations Center explicitly states it lacks evidence the requested payment was received; should not be treated as a grant."
+
+southernCompany1991To1998 : Typed.TypedGenealogyEdge
+southernCompany1991To1998 = Typed.typedGenealogyEdge
+  "E9-12" "Southern Company, 1991 ICE involvement" "Robert Gehri of Southern Company, 1998 API team"
+  Typed.organisationalContinuity Typed.corroborated
+  (ice1991TestCampaign ∷ southernICEHistoricalAccount ∷ apiCongressional1998 ∷ [])
+  "Same corporate institution is documented at 1991 ICE campaign and in 1998 API named-team list. Different representatives are named; no proof same staff drafted both scripts or planned a seven-year programme."
+
+southernICEPledgeNotDisbursement : Typed.TypedGenealogyEdge
+southernICEPledgeNotDisbursement = Typed.typedGenealogyEdge
+  "E9-13" "Southern Company 1991 commitment report" "ICE proposed communications campaign funding"
+  Typed.funding Typed.corroborated
+  (southernICEHistoricalAccount ∷ ice1991TestCampaign ∷ [])
+  "Reported company commitment USD125000 is a financing pledge reported from archived records, not a produced bank-transfer or independently audited completed payment."
+
+singer1994ToSEPP1998 : Typed.TypedGenealogyEdge
+singer1994ToSEPP1998 = Typed.typedGenealogyEdge
+  "E9-14" "S. Fred Singer/SEPP 1994 GCC proposal" "Candace Crandall/SEPP in 1998 API team"
+  Typed.organisationalContinuity Typed.corroborated
+  (singerGCC1994Proposal ∷ apiCongressional1998 ∷ [])
+  "Same explicitly named SEPP organisation appears across original 1994 GCC proposal and 1998 API planning team with different named people; not evidence of completed Singer payment, tobacco financing or identical script authorship."
+
+singerGCCSolicitationNotMoneyPaid : Typed.TypedGenealogyEdge
+singerGCCSolicitationNotMoneyPaid = Typed.typedGenealogyEdge
+  "E9-15" "S. Fred Singer/SEPP 1994 proposal" "Requested GCC USD73000 education-programme funding"
+  Typed.recommendationExposure Typed.primary
+  (singerGCC1994Proposal ∷ [])
+  "Proposal for funding has direct source existence. Solicitation/expected allocation is not a financial disbursement, and does not resolve the independent E7 tobacco finance hypothesis."
+
+singerSEPPRepeatNotTobaccoPayment :
+  Typed.StrongHistoricalTransfer singer1994ToSEPP1998 → ⊥
+singerSEPPRepeatNotTobaccoPayment witness =
+  Typed.organisationalContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+southernRepeatNotIdenticalScript :
+  Typed.StrongHistoricalTransfer southernCompany1991To1998 → ⊥
+southernRepeatNotIdenticalScript witness =
+  Typed.organisationalContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
