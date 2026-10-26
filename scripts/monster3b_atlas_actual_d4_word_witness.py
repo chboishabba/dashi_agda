@@ -100,6 +100,14 @@ def audit(root):
     # This specific D4 does not contain the earlier A2 steelman's
     # six-dimensional r^2 fixed submodule: here r^2=-I12.
     assert rank(diff(mm(r,r),I))==12
+    # m*r is the other reflection type and has +1-eigenspace dimension 6.
+    # All 12 source vectors lie in the E-isotypic D4 component:
+    # r^2=-I rules out ANY one-dimensional D4 irreducible constituent
+    # (on every 1D D4 character r^2 acts as +I).
+    mr=mm(m,r)
+    assert mm(mr,mr)==I and rank(diff(mr,I))==6
+    assert sum(r[i][i] for i in range(N))%3==0
+
     assert rank(diff(m,I))==6
     return {
       "schema":"monster3b-atlas-2suz2-exact-source-d4-word-v1",
@@ -119,6 +127,9 @@ def audit(root):
       "source_rotation_similitude_multiplier":1,
       "source_mirror_fixed_dimension":6,
       "source_half_turn_fixed_dimension":0,
+      "source_other_reflection_fixed_dimension":6,
+      "source_D4_module_irrep_decomposition":"6 E (12D, characteristic 3)",
+      "source_D4_no_one_dimensional_irrep_summands":True,
       "old_A2_eight_shell_half_turn_fixed_dimension":6,
       "old_A2_eight_shell_equivariant_injective_into_this_D4":False,
       "actual_ATLAS_2Suz2_source_word_membership":True,
