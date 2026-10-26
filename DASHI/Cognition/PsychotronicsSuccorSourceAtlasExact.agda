@@ -575,7 +575,7 @@ saikiaAmyloid2019 : Source.AttributedSource
 saikiaAmyloid2019 = Source.mkDOISource
   "Jahnu Saikia; Gaurav Pandey; Sajitha Sasidharan; Ferrin Antony; Harshal B. Nemade; Sachin Kumar; Nitin Chaudhary; Vibin Ramakrishnan"
   "Electric Field Disruption of Amyloid Aggregation: Potential Noninvasive Therapy for Alzheimer's Disease"
-  "ACS Chemical Neuroscience 10(5):2250-2262; online 15 February 2019; original ACS publisher metadata and abstract read, full article uninspected"
+  "ACS Chemical Neuroscience 10(5):2250-2262; online 15 February 2019; original ACS publisher abstract and SI *topic listing* read, main article and actual SI PDF not inspected"
   "2019"
   "10.1021/acschemneuro.8b00490"
   "https://doi.org/10.1021/acschemneuro.8b00490"
@@ -1805,6 +1805,20 @@ ramirez2024Eq7SourceWording = mkBound
   Diligence.primaryProposition
   attributedAuthorReport
   "curl of vector potential gives B, while spatial derivative of B or magnitude is a distinct operator and physical dimension; no inference that the entire FEM, measured fields, or clinical hypotheses are false"
+
+-- This is a receipt for the ACS publisher's SI LISTING, NOT a claim that
+-- an SI page/figure or original laboratory recording has been inspected.
+-- The same 2019 authors/publisher root is used; no new study or source
+-- identity is invented merely for another paper-associated carrier.
+saikia2019ACSOriginalSITopicListing : ClaimBound
+saikia2019ACSOriginalSITopicListing = mkBound
+  "ACS 2019 publisher lists free supporting-information PDF including a topic 'effect of MF on secondary aggregations', plus kinetics, FTIR, monomer percentages and fluorescence microscopy; original SI content itself is NOT read"
+  saikiaAmyloid2019
+  "Original ACS Chemical Neuroscience 2019 DOI 10.1021/acschemneuro.8b00490 Supporting Information listing, not the independently authenticated SI PDF"
+  saikia2019ResearchRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "SI topic listing does not certify a named Rodin or Helmholtz apparatus, a 60-percent endpoint/denominator, efficacy or clinical proof; no inference that unseen SI definitely lacks those details"
 
 ramirez2024Ref24Claim : ClaimBound
 ramirez2024Ref24Claim = mkBound
