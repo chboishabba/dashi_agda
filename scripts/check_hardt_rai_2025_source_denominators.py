@@ -85,8 +85,13 @@ def audit_metadata(paper=PAPER, deposit=DEPOSIT):
         raise ValueError('publication recruitment/exclusion arithmetic')
     if sum(paper['performances']) != paper['retained']:
         raise ValueError('publication retained event counts')
-    if deposit['declared_recordings'] > paper['retained'] or deposit['declared_recordings'] < 0:
-        raise ValueError('deposit numerical coverage outside publication cohort')
+    # The original deposit is a version-locked *description* of N=57.
+    # We have NOT established that its actual participants form a subset of
+    # the N=59 paper EEG analysis, so never infer inclusion by comparing N.
+    if (deposit.get('doi') != DEPOSIT['doi']
+        or type(deposit.get('declared_recordings')) is not int
+        or deposit['declared_recordings'] != 57):
+        raise ValueError('deposit DOI/version/count differs from original UCL v1')
     n=paper['performances']
     pair_counts=tuple(k*(k-1)//2 for k in n)
     return dict(paper_recruited=paper['recruited'],
@@ -97,6 +102,7 @@ def audit_metadata(paper=PAPER, deposit=DEPOSIT):
                 synthetic_max_all_event_pairs=sum(pair_counts),
                 dataset_catalog_declared_recordings=deposit['declared_recordings'],
                 nominal_record_gap=paper['retained']-deposit['declared_recordings'],
+                deposit_membership_is_subset_of_paper_unverified=True,
                 deposit_doi=deposit['doi'], deposit_license=deposit['license'],
                 osf_code_locators=list(CODE_LOCATORS),
                 osf_code_identical_or_different_verified=False,
