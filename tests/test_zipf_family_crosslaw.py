@@ -76,3 +76,9 @@ def test_powerlaw_models_do_not_force_half_by_sqrt_authors():
     assert Z.price_sqrt_top_count(len(equal))==4
     assert Z.price_share(equal)==.25
     assert Z.top_share(equal,4)==.25
+
+def test_zipf_large_exponent_no_all_weight_underflow():
+    p=Z.zipf_mandelbrot(3,2000,100)
+    assert math.isclose(sum(p),1)
+    assert p[0]>p[1]>p[2]>=0
+    assert Z.zipf_mandelbrot(3,0,100)==(1/3,)*3
