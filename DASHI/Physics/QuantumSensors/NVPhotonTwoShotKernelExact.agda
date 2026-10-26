@@ -31,8 +31,8 @@ joint t x y = weight (single t) x * weight (single t) y
 -- The first equality is a finite polynomial identity; the second uses
 -- the source likelihood's normalization witness.
 jointSquare : (t : IndependentTwoShot) →
-  joint t click click + joint t click dark +
-  joint t dark click + joint t dark dark ≡
+  joint t click click +
+  (joint t click dark + joint t dark click) + joint t dark dark ≡
   (Photon.photon (single t) + Photon.noPhoton (single t)) *
   (Photon.photon (single t) + Photon.noPhoton (single t))
 jointSquare t =
@@ -40,8 +40,8 @@ jointSquare t =
          Photon.noPhoton (single t) ∷ [])
 
 jointNormalized : (t : IndependentTwoShot) →
-  joint t click click + joint t click dark +
-  joint t dark click + joint t dark dark ≡ 1ℚ
+  joint t click click +
+  (joint t click dark + joint t dark click) + joint t dark dark ≡ 1ℚ
 jointNormalized t =
   trans (jointSquare t)
     (trans (cong (λ z → z * z) (Photon.normalized (single t))) refl)
