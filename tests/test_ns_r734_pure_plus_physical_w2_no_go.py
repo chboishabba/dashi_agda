@@ -89,3 +89,16 @@ def test_short_time_W2_failure_uses_actual_initial_derivatives():
     # exceeds 12 W'(0) for EVERY delta>0. By continuity there
     # exists T>0 on which the integrated R734 W2 is false.
     assert S.simplify(512*Pcrit-72>0)==S.true
+
+def test_unweighted_nonlinear_kinetic_energy_conserved():
+    u=physical_u();nl=projected_NS_nonlinearity(u)
+    energy_work=sum((2*S.re((S.conjugate(v).T*nl.get(k,S.zeros(3,1)))[0])
+                     for k,v in u.items()),S.Integer(0))
+    assert S.simplify(S.expand_complex(energy_work))==0
+def test_real_full_NS_forcing_generates_negative_helicity():
+    # Pure-plus INITIAL DATA do not turn the full NSE into the
+    # separately regular helical-DECIMATED model of Biferale--Titi.
+    u=physical_u();nl=projected_NS_nonlinearity(u)
+    hm=h(Q,nl[Q],-1)
+    hmnorm=S.simplify(S.expand_complex((S.conjugate(hm).T*hm)[0]))
+    assert S.simplify(hmnorm>0)==S.true
