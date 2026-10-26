@@ -27,10 +27,10 @@ cycleThree bba = refl
 -- A cubic quarter-turn (x,y,z)->(-y,x,z) acts on unoriented
 -- axes by canonicalising to the even-negative representative.
 quarterZ : Axis → Axis
-quarterZ aaa = bab
-quarterZ abb = aaa
-quarterZ bab = bba
-quarterZ bba = abb
+quarterZ aaa = abb
+quarterZ abb = bba
+quarterZ bba = bab
+quarterZ bab = aaa
 
 quarterZFour : (a : Axis) →
   quarterZ (quarterZ (quarterZ (quarterZ a))) ≡ a
