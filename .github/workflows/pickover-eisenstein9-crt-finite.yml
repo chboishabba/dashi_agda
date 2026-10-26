@@ -27,6 +27,7 @@ on:
       - 'scripts/check_pickover_bt_tree_refinement.py'
       - 'scripts/check_pickover_fast_sine_complex_power.py'
       - 'scripts/check_pickover_horned_c3_phase_non_descent.py'
+      - 'scripts/check_pickover_factorial_pi_interval_width_budget.py'
       - 'scripts/check_pickover_bit_shift_cocycle_ladder.py'
       - 'scripts/check_pickover_369_signed_circle_observer.py'
       - 'scripts/check_pickover_369_torque_signedzero_cocycle.py'
@@ -82,6 +83,8 @@ jobs:
         run: python3 scripts/check_pickover_fast_sine_complex_power.py
       - name: Cross-validate actual e-to-i complex powers against Machin and C3 finite non-descent
         run: python3 scripts/check_pickover_horned_c3_phase_non_descent.py
+      - name: Check exact 9999-factorial naive pi-interval precision budget
+        run: python3 scripts/check_pickover_factorial_pi_interval_width_budget.py
       - name: Audit exact bit-shift cocycle and exponent bit cost
         run: python3 scripts/check_pickover_bit_shift_cocycle_ladder.py
       - name: Audit nested 369 signed circle and Q9 group separation
