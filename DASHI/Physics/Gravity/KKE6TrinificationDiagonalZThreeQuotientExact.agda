@@ -173,19 +173,42 @@ allQuotientMixedAbelianSpinCSPeriodsCertified = false
 
 data OrbifoldEvenClutchRepresentative : Set where
   baseDiagonalCentralLoop
-  extraLeftTorusTurn : OrbifoldEvenClutchRepresentative
+  extraLeftTorusTurn
+  extraOneEntryLeftTurn
+  extraOneEntryRightTurn : OrbifoldEvenClutchRepresentative
 
 sameZThreeLiftingClass :
   OrbifoldEvenClutchRepresentative → ZThree
 sameZThreeLiftingClass _ = z1
 
--- Triviality of C33 line as a separate consumer is a mathematical
--- clutch-derived *input*; do not treat this Bool as a constructed
--- nowhere-vanishing field or an all-configurations WZ extension.
+-- All four loops have the SAME nontrivial central lift obstruction.
+-- The actual boundary U2 torus lets the two doublet entries wind
+-- INDEPENDENTLY. Thus Chi33 determinant-ratio clutch degrees are
+-- 0, -2, -1, +1 (chosen orientation); the old even-degree statement
+-- applies ONLY to the restricted equal-doublet-torus winding.
+-- Labels here are externally computed clutch-degree facts, not
+-- kernel-constructed line bundles or a differential-character WZ.
 chi33LineDegreeZero :
   OrbifoldEvenClutchRepresentative → Bool
 chi33LineDegreeZero baseDiagonalCentralLoop = true
 chi33LineDegreeZero extraLeftTorusTurn = false
+chi33LineDegreeZero extraOneEntryLeftTurn = false
+chi33LineDegreeZero extraOneEntryRightTurn = false
+
+chi33LineDegreeOdd :
+  OrbifoldEvenClutchRepresentative → Bool
+chi33LineDegreeOdd baseDiagonalCentralLoop = false
+chi33LineDegreeOdd extraLeftTorusTurn = false
+chi33LineDegreeOdd extraOneEntryLeftTurn = true
+chi33LineDegreeOdd extraOneEntryRightTurn = true
+
+sameDeckDoesNotDetermineChi33WindingParity :
+  Transport.ClaimNonTransportWitness
+    sameZThreeLiftingClass chi33LineDegreeOdd
+sameDeckDoesNotDetermineChi33WindingParity =
+  Descent.consumerNonDescentWitness
+    baseDiagonalCentralLoop extraOneEntryLeftTurn
+    refl falseNotTrue
 
 sameQuotientObstructionDoesNotDetermineChi33Line :
   Transport.ClaimNonTransportWitness
