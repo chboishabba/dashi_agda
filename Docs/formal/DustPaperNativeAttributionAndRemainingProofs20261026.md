@@ -55,3 +55,12 @@ The finite-K `(K-1)/K` attenuation applies under iid draws **within the sample-m
 **Noise competition context:** https://github.com/qlabs-eng/noise/ README fetched on 26 October 2026 (source-level current track definitions; archived 10M challenge distinct from 30M challenge). Fixed-model 30M validation loss and timing, plus 30M open-architecture track, have distinct comparator criteria. No single historical speedup can serve as all-track evidence.
 
 **Remaining exact-maxcut gates (not generic ontology):** (1) per-route runnable Python/reference fixtures against original Dust `dust.py` and `model.py`, including chunk-centering, head slabs, attention gamma and two-sided ES; (2) true Agda finite-sum estimator probability theorem and kernel receipts; (3) specific Noise record-script source equivalences and optimiser state transitions; (4) LILA trainable parameter and held-out-pair handoff after parallel worker's actual definitions become available; (5) resource and semantic correctness Pareto BIDI. Preserve distinct attribution for Dust founders and Noise community record authors.
+
+
+## 26 October source-specific head-centering cut and LILA coordination
+
+Added `DASHI/Reasoning/DustHeadBatchCenteringExact.agda` for upstream `DUST.head_error` (dust.py blob c7d08ee9edc3a51dfbd9e73bbf787b9ca819c5c2): **two batch examples** within one noise draw, with reward centering along *batch*, independent of the number of probe draws. Source-written rational identities establish zero-sum rewards and the nontrivial baseline-shift coupling: changing the clean loss on batch item A by `shift` changes centered A reward by `shift/2` and B reward by `-shift/2`. The direct-loss `nrep>1` centering theorem therefore MUST NOT be substituted for the cached head route. Checked 243 exact-rational tuples with local Python (not Agda typechecking); no CI or kernel receipt.
+
+Another worker's `Docs/formal/SovereignLilaDustActualLearnerIntegration20261026.md` is now present in #1265. It source-audits real `E8GPT` and points out native stochastic layer noise and mutating resonator memory. Our integration consumes its eventual source-pinned trainable-parameter interface only; no changes to its content, no duplicated optimiser and no claim of real E8GPT Dust training execution.
+
+Still unresolved: genuine 256-column cached logit partition refinement (tanh clipping, masked targets, softmax partition), attention future-lag routing, finite probability Agda theorem, real Noise record-specific training-step source, and held-out actual E8GPT training comparisons.
