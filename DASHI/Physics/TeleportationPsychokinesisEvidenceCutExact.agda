@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.TeleportationPsychokinesisEvidenceCutExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
