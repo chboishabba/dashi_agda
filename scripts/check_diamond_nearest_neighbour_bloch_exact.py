@@ -24,6 +24,11 @@ def gamma(k):
     for d in D:
         out=add(out,ROOT[sum(x*y for x,y in zip(k,d))%4])
     return out
+def bloch2(k):
+    v=gamma(k)
+    return (((0,0),v),(conj(v),(0,0)))
+def swap_basis(H):
+    return ((H[1][1],H[1][0]),(H[0][1],H[0][0]))
 def b3_action(p,s,k):
     return tuple((s[i]*k[p[i]])%4 for i in range(3))
 def fcc(u,v,w):
@@ -57,6 +62,8 @@ for k in allk:
         expected=conj(gk) if s.count(-1)%2 else gk
         assert transformed==expected, (k,p,s,transformed,expected)
         assert norm(transformed)==norm(gk)
+        target=swap_basis(bloch2(k)) if s.count(-1)%2 else bloch2(k)
+        assert bloch2(b3_action(p,s,k))==target
 assert values==Counter({0:48,16:16}),values
 
 assert gamma((0,0,0))==(4,0)
@@ -78,6 +85,7 @@ assert diffraction((0,0,0))==(8,0)
 assert gamma((0,0,0))==(4,0)
 print("PASS: four real A→B FCC neighbours recovered without invented bonds")
 print("PASS: all 3072 sampled B3 maps; odd sign parity conjugates Gamma")
+print("PASS: matrix-level H(gk)=sigma_x H(k) sigma_x for odd sign parity")
 print("PASS: exact Hermitian H²=norm² I on all 64 momentum residues")
 print("PASS: sampled |Gamma|² distribution: 0=48; 16=16")
 print("PASS: tight-binding vs diffraction phases/operators kept distinct")
