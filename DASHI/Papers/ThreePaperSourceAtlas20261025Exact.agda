@@ -243,3 +243,32 @@ rodgersArrivalCollisionFirstImplementation =
     "Australia/Brisbane"
     Chronology.exactRepresentationImplemented
     Chronology.sourceCommittedOnly
+
+
+-- First implementation: source-written finite vector projection, not a
+-- completed L4_t L2_x same-solution NS bound or Lean kernel receipt.
+millerProjectionFirstImplementation :
+  Chronology.FirstImplementationReceipt
+millerProjectionFirstImplementation =
+  Chronology.first-implementation-receipt
+    "RequestProject.NavierStokes.MillerProjectionGeometry"
+    "ea36d97a74f9be9b2d71b6015b926216ffc01ec4"
+    "2026-10-26T12:14:54Z"
+    "2026-10-26T22:14:54+10:00"
+    "Australia/Brisbane"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
+
+-- First implementation: source-hypothesis-erasure witnesses, not an
+-- external finding or a complete proof correspondence checker.
+semanticFidelityWitnessFirstImplementation :
+  Chronology.FirstImplementationReceipt
+semanticFidelityWitnessFirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Papers.ThreePaperConsumerFidelity20261026Exact"
+    "0b8ae8b07ee575c6ed964d3dd634292d45a0a973"
+    "2026-10-26T12:17:53Z"
+    "2026-10-26T22:17:53+10:00"
+    "Australia/Brisbane"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
