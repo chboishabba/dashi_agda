@@ -243,3 +243,59 @@ NTIA ITS 2025/26 has published real engineering measurements of contemporary 5G 
 - **Parallel modern hypotheses:** exact ambient acoustic/structural receptor exposure and Jordan trial data, original rat RF-BBB, correctly updated ANA biomarkers, modern AHI primary device/testing/incident documents, thermal/cooling technology as a *different engineering consumer*. None is closed by obtaining the historical 1978 study.
 
 **Hard source hierarchy:** original custodian/government report identity > author-authenticated physical instrument and raw tables > same-study independent critical review > contemporary newspaper reproducing original expert statement > modern editorial/anecdotal comparison > hypothetical program continuity. But an original report's *authority to document its authors' claims* is NOT authority for each claimed physical effect. Original author, publication date, official stable report ID, instrument scope, claim ceiling, status corrections and downstream dependency are compulsory under `Docs/SourceAttributionPolicy.md`.
+
+
+## 26 October 2026: terminal committee reassessment, written erratum and Navy-contract split
+
+This is a **new high-fanout source-payment** over the original 1966–69 high-dose narrative, not a statistical or general physiological no-effect theorem. The source indexing and original-document roles are recorded in `DASHI.Governance.PandoraBizarreRFHistoricalEvidenceExact`; generic programme migration and selective revisability remain owned by existing repo work.
+
+### A. PANDORA's original January 1970 Scientific Advisory Committee report (new primary root)
+
+- Original body **PANDORA Scientific Advisory Committee**, chair **Lysle H. Peterson**, Institute for Defense Analyses; **meeting 12 January 1970**, final summary **typed 23 March 1970**. DoD declassified PANDORA archive, original indexed page labels 1–6: https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Other/Operational_Procedure_For_Project_Pandora.pdf .
+- This government-hosted multi-report PDF returned **403** on direct full-page retrieval in this run. Search-indexed original document text plus a derivative PDF copy give *text-index grade*, **not all-pages visually verified custody**. Under our evidence rule, the source is government-attributed, its quoted proposition is indexed, but full native-scan wording remains an acquisition item.
+- **Original author's findings:** early 1967 Joseph Sharp analysis supported a tentative behavioural effect, but McIlwain's more critical reanalysis and subsequent failure of early cytogenetic observations to replicate led the committee to regard tested **WRAIR special-signal primate performance results as negative for a clear/strong effect**. This did not test every human health endpoint.
+- **Crucial signal non-identity:** WRAIR's laboratory 'special signal' reproduced **selected components of a more complex original Moscow signal**. The committee explicitly warned that null results could partly reflect inappropriate waveform selection. The **real Moscow waveform/field** and the **partial laboratory surrogate** remain different original physical objects until the exact transfer function is documented.
+- **Competing analysis assumptions:** Joseph Kubis's separate **4 December 1969** *On Evaluation of Data Associated with Pandora (Preliminary Report)* is indexed in the DoD original bundle, reportedly at its pages 283–299. The January minutes discuss the different baseline and cumulative-effect conventions used in Sharp's versus McIlwain's reanalyses. Neither retrospective treatment is a released raw animal-day-by-day input dataset.
+- **Human studies:** the January 1970 committee considered *prospective* deliberate human exposure trials but warned that results might remain inconclusive. This does not erase the earlier completed Moscow Viral Study and Big Boy human *observational* studies, already separately documented.
+
+### B. The written 31 March 1970 correction is original-source authority over the ambiguous safety sentence
+
+- **Chanda**, secretary to **Herbert Pollack**, Institute for Defense Analyses, to **Richard Cesaro**, **31 March 1970**. The corrected sentence replaces a **double negative** in the January committee report's safety wording: the intended reading was that no evidence of *expected permanent deleterious effects* had been established by the available information.
+- This **corrective letter and January minutes belong to ONE committee original-source root**, with the correction supplied by a distinct dated document. Preserve the uncorrected literal text as an archival state and the later correction as an authoritative editorial revision; **do not quote the earlier double negative as the committee's unqualified final conclusion**.
+- Nor does the corrected wording mean that any exposure is *proved* harmless or that long-term human risks were ruled out. Committee confidence about prospective trials and lack of a clear observed risk are limited by absence of calibrated human long-term endpoints, appropriate waveform fidelity and clinical follow-up.
+- The specific correction letter is indexed in the same DoD bundle and a derivative study scan; full original page-image inspection is still a gate.
+
+### C. The separate 16 August 1971 Navy/RAND review has TWO distinct sub-studies
+
+This is a different contract **N00014-69-C-0358**. Original RAND review to the US Navy, **Samuel Koslov, William A. Mills, Sol M. Michaelson, William C. Rosenthal and colleagues**, archived at https://nsarchive.gwu.edu/document/28797-document-13-rand-corporation-samuel-koslov-et-al-report-assistant-secretary-navy-rd and public archival OCR https://nsarchive.gwu.edu/media/28797/ocr .
+
+**Panel-reported result split:**
+
+| Contract object | Place, instruments and endpoints | Original-panel methodological conclusion |
+| --- | --- | --- |
+| **Hawaii, Zaret Foundation chronic primate exposure** | Pearl Harbor/Lualualei Island; planned RF long-term cataract tests; human-equivalence problematic; inadequate monitored delivered field and instruments; restraint collars/pipes potential RF scattering | **Scientifically inadequate**. The original reviewers reported five monkey deaths, **three due to restraint strangulation**; this is an animal-care/design failure, NOT a microwave-induced death count. No adequate exposure logs, missing animal-level physical/necropsy controls. Study performed at intensities below original target. |
+| **Brooklyn, Polytechnic Institute / Zaret Foundation rabbit experiments** | Approximately **2450 MHz** RF; measured rabbit heat rate, respiration and subcutaneous temperature; different investigator/site/budget portion | The **same panel regarded this component as technically adequate and potentially useful**, distinct from the failed Hawaii primate trial. No claim that this rabbit study proved human behavioural influence. |
+
+This corrects any prior sentence that accidentally classified the **entire Navy contract** as experimentally defective. The reviewer report is a new authoritative methodological *audit*, but it does not create a new positive or negative original WRAIR primate replication. **Do not aggregate dead animals or assay denominators across the Hawaii, Brooklyn and Walter Reed sites.**
+
+### D. Exact finite design and source-role regressions: what is and is not proved
+
+- `DASHI/Governance/PandoraBizarreRFHistoricalEvidenceExact.agda` now has **27** attributed document/source carrier instances (previously 23), new original-source edges for the January committee, March correction, Kubis preliminary review and 1971 Zaret Navy contract. The typology separates primary experiment runs from committee retrospectives; correction and original report share one committee source root; one Navy contract contains two physically different sub-studies and different panel verdicts. This is **repository-authored classification**, not original scientists' mathematical theorem and not an Agda kernel check.
+- `scripts/pandora_control_identifiability_audit.py` is a **locally executed, exact-rational synthetic rank witness**, 8/8 tests PASS, GitHub source confirmed byte-identical via 4307-character length / FNV1a32 `b74eafb3`. It models `observed = intercept + exposure_effect * on + period_effect * period`: when exposure and period always co-occur, design rank=2 for three parameters and distinct source interpretations generate the **same** observations [10,10,12,12]. Four crossed conditions restore rank=3 and separate the toy interpretations. This is a *possible mechanism for confounding*, **not a proof that period drift caused any actual 1966–69 monkey result**. Original paper authors are credited for methodological concerns; the code and selected numbers are a new DASHI illustrative calculation.
+- Together with pre-existing `scripts/frequency_joint_interaction_audit.py`, the current question becomes **actual measured signal/sham/period**, biological tissue endpoint and sensor artifact discrimination, with **never** an automatic intentional-deployment inference.
+
+### E. Revised Ibrahim/Pareto acquisition frontier
+
+**P1 original method-data object:** Joseph Kubis **4 December 1969** full preliminary evaluation (DoD bundle) + January 1970 committee **all six original pages** and **31 March erratum original face**; obtain exact controls and full methodological recommendations. This is a smaller, more directly decision-changing acquisition than repeating the sensational 1967 memo.
+
+**P1 raw actual experiment:** Major James McIlwain original WRAIR animal-number/session exposures, interleaved sham, device failures, day/night/room effects, recorded EEG probe coupling and dose. This decides how far the final committee's negative judgement can be quantified and whether a better waveform could be tested. No missing raw data are invented.
+
+**P1 field fidelity:** 1966 JHU APL chamber original `MRT-4-045`/`046` and 1967 CIA/AF TUMS original meter logs, then 1980 Mallalieu model uncertainty; explicitly map **Moscow original signal** vs **WRAIR partial reconstructed signal**, matching thermal power, RF carrier, modulation and time-response separately.
+
+**P2 human health:** original 1978 Lilienfeld `PB288163` endpoint and exposure tables plus 1980 `FS-80-166` room/occupancy reconstruction, case-level dose estimability, competing interpretations and Elwood independent *reanalysis of the same cohort*.
+
+**P2 programme lineage:** exact CIA MKULTRA #119 survey/contract bibliography; ARPA plan 562, Order 757 and documented WRAIR March 1970 hardware disposition. A 1967 weapons-research recommendation is an attributed proposal, not the authenticated programme-transfer receipt or a modern apparatus.
+
+**Parallel modern physical consumer:** original @itsgingertheory sound/health/RF screenshots and Benn Jordan audio/receptor calibration and independent outcomes, recent RF BBB studies and an actual joint-field dose/clinical design. Historical weapon context and modern industry heat-reuse technology remain separately source-typed.
+
+**Stop rule:** count each original experiment, corrected document edition, report synopsis and later scholarly review under its actual root. Do not count their number as independent biological trials; do not turn an animal welfare death into RF casualty statistics, or human medical surveillance into deliberate exposure.
