@@ -151,3 +151,19 @@ The already-owned #1250 original Monster power/fusion data give for a phase-pres
 `2A/6D → Tr(Wζ)=1458`, `2B/6B →66`, `2B/6E →90` (from `(χ196883(t)-χ196883(zt))/3`). Consequently **IF** source `-I12` is indeed the same actual E/Z action, the source half-turn **cannot** fuse by the `2A/6D` route; the two `2B` possibilities are not excluded by this bound. This is a consumer-relative negative claim conditional on the missing module-intertwiner, not a new asserted Monster conjugacy class. The prior *geometric JFine* `r²` phase trace1458 likewise fails for this **particular** source D4. A different source D4 may satisfy a different bound.
 
 `scripts/monster3b_atlas_actual_d4_word_witness.py` now exactly enumerates all 729 finite Schr6 parity basis vectors and verifies trace1/364 transpositions, as a mathematical fixture. Both source ATLAS matrices are SHA256 verified; source same-object E/Z recognition, actual GAP/CTblLib Monster fusion, and Agda kernel remain unverified. **Pareto:** a single selected quotient-module intertwiner and existing #1250 class-fusion data can turn this strict conditional exclusion into a source-specific Monster result; more H4 cardinality, abstract Fourier or λ-adic coincidence work cannot.
+
+
+## 26 October: existing kernel-verified mathlib4 Schur–Zassenhaus donor
+
+The classical normal-Hall complement theorem is **already formalized in the ORIGINAL mathlib4 community library** at [Mathlib.GroupTheory.SchurZassenhaus](https://leanprover-community.github.io/mathlib4_docs/Mathlib/GroupTheory/SchurZassenhaus.html). The exact documented API is:
+
+```lean
+Subgroup.exists_right_complement'_of_coprime
+  {G : Type u} [Group G] {N : Subgroup G} [N.Normal]
+  (hN : (Nat.card ↥N).Coprime N.index) :
+  ∃ (H : Subgroup G), N.IsComplement' H
+```
+
+For the PREIMAGE `P=π⁻¹(S)` of our SOURCE D4 `S`, use `N=E ≤ P` with `Nat.card E=3^13`, `E.index=8`. The one specific arithmetic premise is `(3^13).Coprime 8`. The resulting complement has group-isomorphism `K≃* S ≃* D4` by quotient restriction, conditional on actual subgroup/quotient receipts. This gives a high-alpha proof route with **no duplicate Schur–Zassenhaus formalisation**. Mathlib4's authors and previous subgroup/quotient and group-iso producers retain theorem ownership.
+
+**Still missing in the currently connected Agda/Lean repository HEAD:** a *source-typed actual* `MonsterN3BGroup`, `E.normal`, `E.card=3^13`, an actual quotient isomorphism to `2.Suz:2`, and a certified embedding of the source 8-element D4 into that exact quotient carrier. A finite matrix witness in the ATLAS GF3 model plus a paper theorem **does not create a Lean inhabitant** of those object-specific assumptions. The abstract mathematical inference is valid with published sources, but a repository kernel receipt has not yet been assembled. Keep this distinction in any future cross-prover snowball.
