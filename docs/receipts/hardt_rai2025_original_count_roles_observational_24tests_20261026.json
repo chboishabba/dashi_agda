@@ -1,0 +1,113 @@
+{
+  "schema": "dashi.hardt.rai2025.typed_original_source_roles.v2",
+  "as_of": "2026-10-26",
+  "owner_pr": 1252,
+  "historical_owner": "original researchers own EEG data, original analysis, and corresponding publication; DASHI owns this source-role software audit",
+  "source_records": [
+    {
+      "role_id": "live_eeg_retained",
+      "original_root": "Rai et al. iScience original journal article",
+      "doi": "10.1016/j.isci.2025.112922",
+      "condition": "three live dance performances",
+      "measurement": "retained EEG datasets",
+      "n": 59,
+      "event_counts": [
+        20,
+        18,
+        21
+      ]
+    },
+    {
+      "role_id": "live_questionnaires",
+      "original_root": "Rai et al. iScience original journal article",
+      "doi": "10.1016/j.isci.2025.112922",
+      "condition": "three live dance performances",
+      "measurement": "post-performance questionnaire responses",
+      "n": 57,
+      "notes": "article states two responses missing; this is not a recording inventory"
+    },
+    {
+      "role_id": "cinema_participants",
+      "original_root": "Rai et al. iScience original journal article",
+      "doi": "10.1016/j.isci.2025.112922",
+      "condition": "cinema screenings",
+      "measurement": "screening group participants",
+      "n": 57,
+      "notes": "different study arm; cinema EEG retained N28; must not equate with live 57"
+    },
+    {
+      "role_id": "ucl_eeg_deposit",
+      "original_root": "Rai and Orgs original UCL institutional dataset v1",
+      "doi": "10.5522/04/28508744.v1",
+      "condition": "public deposited live EEG described in institutional metadata",
+      "measurement": "EEG recordings described in deposit",
+      "n": 57,
+      "license": "CC0",
+      "notes": "actual per-recording IDs/file manifests not acquired or authenticated"
+    }
+  ],
+  "identity_state": {
+    "equal_n57_counts_have_three_distinct_source_roles": true,
+    "equal_number_nonidentity_pairs": 3,
+    "live_questionnaire_missing_from_paper_reported_retained": 2,
+    "deposited_recordings_missing_from_paper_retained_identity": "UNKNOWN",
+    "deposited_recordings_equal_to_live_questionnaire_respondents": "UNKNOWN",
+    "cinema_participants_equal_live_subjects": "NOT_ESTABLISHED",
+    "paper_dataset_subset_from_counts": "NOT_ESTABLISHED",
+    "osf_code_locators": [
+      "https://osf.io/uz573/",
+      "https://osf.io/ursmc/"
+    ],
+    "osf_code_versions_reconciled": false
+  },
+  "software": {
+    "reused_original_helper": {
+      "path": "scripts/hardt_neural_source_bytes_gate.py",
+      "blob": "f38c28c580fb01d260a89d224220f411a336a84c",
+      "functions": [
+        "digest",
+        "_bounded_file",
+        "SHA"
+      ],
+      "scope": "streamed file SHA256 and path bounding only; OPM/sham requirements not imported"
+    },
+    "typed_count_checker": {
+      "path": "scripts/check_hardt_rai_2025_source_denominators.py",
+      "git_blob": "5640d5bef6022d57055de518a17a274ddd2425ac",
+      "tests": "tests/test_hardt_rai_2025_source_denominators.py",
+      "test_git_blob": "6ce8435994c29581eb8c8b4041e5be72da31433e",
+      "local_tests_run": 16,
+      "local_tests_passed": 16
+    },
+    "observational_archive_adapter": {
+      "path": "scripts/check_hardt_rai_observational_archive.py",
+      "git_blob": "71d32e69517f1bb438bd1137c07c2d6057a166f8",
+      "tests": "tests/test_hardt_rai_observational_archive.py",
+      "test_git_blob": "5eb0c1ebcbcd4efe716799d22b000d0713242855",
+      "local_tests_run": 8,
+      "local_tests_passed": 8,
+      "figshare_metadata_input": "locally supplied asserted API snapshot plus SHA256; NOT an actual downloaded original publisher response",
+      "file_validation": "original listed unique file IDs/names/sizes, local SHA256 and if supplied source computed_md5, partial allowed",
+      "verified_live_ucl_files": 0
+    },
+    "python_invocation": "python -m unittest discover -s /mnt/data/hardt_maxcut_20261026 -p 'test_hardt_rai*.py' -q",
+    "aggregated_test_result": "24/24 PASS",
+    "all_original_code_and_test_git_blobs_exactly_matched_locally": true,
+    "agda_kernel_executed": false,
+    "ci_executed": false
+  },
+  "next_pareto": [
+    "Acquire original UCL RDR v1 per-file inventory and original authoritative API record (actual network-origin/bytes); do not infer participant count from ZIP/file count",
+    "Check original P1 P2 P3 per-participant IDs and paper exclusions against actual deposited EEG recordings, resolve 59/57 only from joined source original objects",
+    "Independently inspect OSF uz573 and ursmc file/version metadata; no inferred common code root",
+    "Original authors' licensed 1–4 Hz analysis plus timebase/performer-audio-lighting-motion and respiration comparisons, hierarchical participant/event units",
+    "Historical Hardt 2017 Opinion reference-10 unpublished manuscript and genuinely independent original claimed-event records remain a distinct source search"
+  ],
+  "scientific_ceilings": [
+    "No original EEG or OSF code run",
+    "No confirmed source-to-receiver physiological field",
+    "No nonlocal/psi historical claim established",
+    "No observer theorem or Agda proof kernel-checked",
+    "No inference about misconduct or omission based on equal N alone"
+  ]
+}
