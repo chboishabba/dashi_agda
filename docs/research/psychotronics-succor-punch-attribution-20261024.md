@@ -1,4 +1,7 @@
 # Succor Punch / psychotronics source genealogy — bounded max-cut
+**26 October original RVML / Gentry witness correction:** [RVML event source audit](psychotronics-phase1-gentry-rvml-original-speaker-provenance-20261026.md) locates an independent organiser's original 4 November **2003 Gentry Smith lecture listing** and same uploader's [recording metadata](https://vimeo.com/92437258) advertising a **Pat Flanagan electronic device**. This is *independent from Croft as a publisher* of Gentry-related contemporary public subject matter; **not** direct Gentry speech or an independent witness of the alleged 1999 Flanagan→Gentry→Croft Möbius plan. Both RVML carriers share one organiser root, no connection to alleged Navy, suppression or medical outcomes validated. The existing original 2002 Croft account remains a single Croft witness. Source-typed graph **70 documentary roles / 108 edges**, Agda **67 source instances**; no independent-new-physics or handoff promotion.
+
+
 
 ## New 25 October original 1953 cloudbuster / modern chembuster / mental-cloud distinct lineages
 

@@ -1,0 +1,306 @@
+{
+  "title": "Ellsworth 1953 cloudbuster: revisable documentary evidence, not a causal weather claim",
+  "date": "2026-10-26",
+  "attribution": "Original historical work credited to Wilhelm Reich, contemporaneous press authors and named institutions; new case-specific compilation by Johl Brown with OpenAI ChatGPT assistance; not new physical measurements.",
+  "base_pr": 1242,
+  "phase": "Phase 1 documentary literature only",
+  "source_roots": {
+    "noaa-ghcnd": {
+      "members": [
+        "P1-63",
+        "P1-67",
+        "P1-68",
+        "P1-71",
+        "P1-72"
+      ],
+      "kind": "same NOAA GHCN custodial dataset/schema and two distinct Maine station observation streams; custodial root count one, station units two",
+      "independent_of": [
+        "reich-original"
+      ]
+    },
+    "reich-original": {
+      "members": [
+        "P1-48"
+      ],
+      "kind": "Wilhelm Reich 1954 publication concerning July 1953 event"
+    },
+    "reich-custodian": {
+      "members": [
+        "P1-49"
+      ],
+      "kind": "Reich Museum original archival finding aid, distinct custodial role but not new weather sensor"
+    },
+    "ellsworth-american": {
+      "members": [
+        "P1-64"
+      ],
+      "kind": "8 July 1953 newspaper original as reproduced, original issue unread"
+    },
+    "bangor-news": {
+      "members": [
+        "P1-50"
+      ],
+      "kind": "24 July 1953 Anthony R. Shannon article in later carrier"
+    },
+    "guardian-hambling": {
+      "members": [
+        "P1-51"
+      ],
+      "kind": "David Hambling 2011 retelling, not independent event"
+    },
+    "kansas-portal": {
+      "members": [
+        "P1-66"
+      ],
+      "kind": "Ellsworth Kansas wrong-region negative control"
+    },
+    "reddit-forum": {
+      "members": [
+        "P1-52"
+      ],
+      "kind": "2023 original OP and multiple separately attributed comments; not one speaker root"
+    },
+    "croft-source": {
+      "members": [
+        "P1-39"
+      ],
+      "kind": "Don Croft original 26 Jan 2003 statement"
+    },
+    "guanajuato": {
+      "members": [
+        "P1-33",
+        "P1-37"
+      ],
+      "kind": "2013 & 2024 different authored papers with overlapping investigators and exact current/field matching rows"
+    },
+    "rvml-gentry": {
+      "members": [
+        "P1-69",
+        "P1-70"
+      ],
+      "kind": "Rogue Valley Metaphysical Library organiser event calendar and Vimeo uploader biography same RVML publication network; not two independent speakers"
+    }
+  },
+  "claims": [
+    {
+      "id": "bangor_daily_rain_6to8",
+      "status": "observed_at_regional_station",
+      "requires": [
+        "P1-63",
+        "P1-67",
+        "P1-68"
+      ],
+      "effect": "6–8 July 1953 sum 305 tenths-mm at Bangor station; not Ellsworth exact time"
+    },
+    {
+      "id": "bangor_station_at_bangor_maine",
+      "status": "source_metadata",
+      "requires": [
+        "P1-67"
+      ],
+      "effect": "NOAA identifies location and station USW00014606"
+    },
+    {
+      "id": "reich_1953_reported_operation",
+      "status": "author_report",
+      "requires": [
+        "P1-48"
+      ],
+      "effect": "Reich writes ten-tube water-connected operation 6 July, not independent proof of weather control"
+    },
+    {
+      "id": "reich_mentions_western_front",
+      "status": "author_report",
+      "requires": [
+        "P1-48"
+      ],
+      "effect": "Reich's own report mentions western front; forecast and actual meteorological maps not independently examined"
+    },
+    {
+      "id": "rain_start_ellsworth_22h",
+      "status": "author_report_only",
+      "requires": [
+        "P1-48"
+      ],
+      "effect": "22:00 is Reich's claimed local chronology, not Bangor gauge time"
+    },
+    {
+      "id": "museum_boxes_24_25",
+      "status": "custody_only",
+      "requires": [
+        "P1-49"
+      ],
+      "effect": "Museum index locates relevant files, not full item contents or causal result"
+    },
+    {
+      "id": "ellsworth_american_8jul",
+      "status": "reprint_documented_only",
+      "requires": [
+        "P1-64"
+      ],
+      "effect": "8 July newspaper item documented through reproduction; native newsprint not read"
+    },
+    {
+      "id": "bangor_daily_news_24jul",
+      "status": "reprint_documented_only",
+      "requires": [
+        "P1-50"
+      ],
+      "effect": "Shannon 24 July article is a distinct text but not separate rainfall intervention"
+    },
+    {
+      "id": "guardian_not_independent_1953_trial",
+      "status": "publication_lineage",
+      "requires": [
+        "P1-51",
+        "P1-48"
+      ],
+      "effect": "David Hambling retells the 1953 event, no independent experiment"
+    },
+    {
+      "id": "wrong_ellsworth_kansas",
+      "status": "negative_place_guard",
+      "requires": [
+        "P1-66",
+        "P1-67"
+      ],
+      "effect": "Kansas station cannot be joined to Ellsworth Maine"
+    },
+    {
+      "id": "reddit_visualisation_claims",
+      "status": "multiple_testimonies",
+      "requires": [
+        "P1-52"
+      ],
+      "effect": "named first-person practitioner reports but not controlled cloud causal data"
+    },
+    {
+      "id": "croft_2003_winding_guide",
+      "status": "author_report",
+      "requires": [
+        "P1-39"
+      ],
+      "effect": "the cloud-busters.com link is attributed as coil instructions, not Reich atmospheric device maker"
+    },
+    {
+      "id": "rodin_two_papers_same_printed_numbers",
+      "status": "original_publication_table_join",
+      "requires": [
+        "P1-33",
+        "P1-37"
+      ],
+      "effect": "three two-decimal (current, measured B) pairs match, raw acquired data identity unknown"
+    },
+    {
+      "id": "1953_ellsworth_hourly_gauge",
+      "status": "unpaid",
+      "requires": [],
+      "effect": "no original hour-resolution Ellsworth/Graham Lake observation in current dossier"
+    },
+    {
+      "id": "1953_frontal_synoptic_chart",
+      "status": "unpaid",
+      "requires": [],
+      "effect": "original independent Weather Bureau frontal chart not obtained"
+    },
+    {
+      "id": "reich_device_caused_rain",
+      "status": "unpaid",
+      "requires": [],
+      "effect": "temporally associated weather does not identify counterfactual causal effect"
+    },
+    {
+      "id": "croft_flannagan_gentry_original_instruction",
+      "status": "unpaid",
+      "requires": [],
+      "effect": "Croft's testimony exists but Gentry/Flanagan source-authored technical instructions not obtained"
+    },
+    {
+      "id": "rodin_2024_new_independent_magnetometry",
+      "status": "unpaid",
+      "requires": [],
+      "effect": "table-number overlap cannot settle whether 2024 data were freshly acquired"
+    },
+    {
+      "id": "rvml_gentry_2003_named_talk",
+      "status": "organiser_schedule",
+      "requires": [
+        "P1-69"
+      ],
+      "effect": "dated RVML 4 November 2003 programme names Gentry Smith speaker; event content uninspected"
+    },
+    {
+      "id": "rvml_gentry_reich_device_claim",
+      "status": "promotional_biography",
+      "requires": [
+        "P1-70"
+      ],
+      "effect": "Vimeo description says Gentry designed and constructed Reich Cloudbusters; not first-person original engineering drawing or independent device witness"
+    },
+    {
+      "id": "rvml_gentry_flanagan_advertised_topic",
+      "status": "event_description_only",
+      "requires": [
+        "P1-70"
+      ],
+      "effect": "Pat Flanagan electronic bliss device is billed as a topic; no proof Gentry worked for Flanagan or transmitted 1999 winding plans"
+    },
+    {
+      "id": "bar_harbor_daily_rain_6to8",
+      "status": "observed_at_regional_station",
+      "requires": [
+        "P1-71",
+        "P1-72",
+        "P1-68"
+      ],
+      "effect": "Bar Harbor 3 NW station July 6–8 raw 0+130+0 = 130 tenths-mm, not a July6-evening/hourly Ellsworth observation"
+    },
+    {
+      "id": "bar_harbor_station_identity_1953",
+      "status": "source_metadata",
+      "requires": [
+        "P1-72"
+      ],
+      "effect": "NOAA official USC00170371 period 1893-1982, 44.41667 N -68.25 W; not newer Bar Harbor airport"
+    },
+    {
+      "id": "maine_two_station_6to8_spatial_difference",
+      "status": "station_comparison_only",
+      "requires": [
+        "P1-63",
+        "P1-67",
+        "P1-68",
+        "P1-71",
+        "P1-72"
+      ],
+      "effect": "Bangor 305 and Bar Harbor 130 tenths-mm; same NOAA custodian but two station streams; cannot infer event-hour or rainmaking"
+    }
+  ],
+  "source_snapshot": {
+    "web_read": "2026-10-26",
+    "original_noaa_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USW00014606.dly",
+    "noaa_values_july_5_9_tenths_mm": [
+      0,
+      66,
+      193,
+      46,
+      74
+    ],
+    "note": "both NOAA 269-column original month rows browser-read and preserved, full publisher-file bytes and official original hash not downloaded; no hourly/site/causal confirmation",
+    "original_bar_harbor_noaa_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USC00170371.dly",
+    "bar_harbor_values_july_5_9_tenths_mm": [
+      0,
+      0,
+      130,
+      0,
+      10
+    ],
+    "bar_harbor_station_id": "USC00170371",
+    "station_distinction": "Bangor and Bar Harbor are distinct historical instruments/station rows but share NOAA GHCN archive/custodian; not independent proof of any extraordinary weather mechanism",
+    "observation_time_status": "historical station precipitation accumulation cutoff unverified, so a July 6 zero cannot settle rain onset near 22:00 on July 6"
+  },
+  "algorithm": {
+    "retraction": "Any claim depending on a withdrawn source is marked reopened (not false). A claim with status unpaid remains unpaid. Unrelated independently grounded claims retain their status.",
+    "prohibition": "No edge automatically promotes author assertions or observed precipitation into device causality; model statuses are bibliographic, not ontology truth. An uploader's third-person promotional biography cannot certify Navy employment, historical device construction, or Flanagan-Gentry-Croft technical handoff."
+  }
+}

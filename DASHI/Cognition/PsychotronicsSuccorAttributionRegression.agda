@@ -131,13 +131,57 @@ thermalScreenDoesNotVerifyCalibration = refl
 
 -- Original-published source instances are counted individually, including
 -- different dated reprints. Common author roots do not become experiments.
--- Earlier 60-source Reddit/Guardian historical cut now has five further
+-- Earlier 60-source Reddit/Guardian historical cut now has seven further
 -- source carriers including real NOAA Bangor records, same-station metadata,
 -- an earlier local press item and a Kansas location false-match control.
 -- More source objects are NOT more independent weather experiments.
-sourceAtlasCountIsSixtyFive :
-  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 65
-sourceAtlasCountIsSixtyFive = refl
+sourceAtlasCountIsSixtyNine :
+  Attribution.sourceCount (Attribution.sources Atlas.sourceAtlas) ≡ 69
+sourceAtlasCountIsSixtyNine = refl
+
+-- Additional original 1953 NOAA station does not change the publisher
+-- denominator; observations must retain their actual distinct site keys.
+barHarborJuly6Through8Equals130TenthsMm :
+  Atlas.tenthsMillimetre Atlas.barHarborJuly6 +
+  Atlas.tenthsMillimetre Atlas.barHarborJuly7 +
+  Atlas.tenthsMillimetre Atlas.barHarborJuly8 ≡ 130
+barHarborJuly6Through8Equals130TenthsMm = refl
+
+twoMaineStationTotalsDifferBy175TenthsMm :
+  (Atlas.tenthsMillimetre Atlas.bangorJuly6 +
+   Atlas.tenthsMillimetre Atlas.bangorJuly7 +
+   Atlas.tenthsMillimetre Atlas.bangorJuly8) ≡
+  (Atlas.tenthsMillimetre Atlas.barHarborJuly6 +
+   Atlas.tenthsMillimetre Atlas.barHarborJuly7 +
+   Atlas.tenthsMillimetre Atlas.barHarborJuly8) + 175
+twoMaineStationTotalsDifferBy175TenthsMm = refl
+
+noaaTwoStationSourcesShareCustodialAttributionRoot :
+  Atlas.root Atlas.noaaBarHarborRainSourceClaim ≡
+  Atlas.root Atlas.noaaBangorRainSourceClaim
+noaaTwoStationSourcesShareCustodialAttributionRoot = refl
+
+barHarborPublisherMetadataDoesNotGrantCausality :
+  Attribution.citationImportsProof Atlas.noaaBarHarborStationMetadata ≡ false
+barHarborPublisherMetadataDoesNotGrantCausality =
+  Atlas.allSourcesRemainNonPromoting Atlas.noaaBarHarborStationMetadata
+
+-- RVML organiser archives and its uploader account represent one historical
+-- programme origin; neither is Croft's narrator root or a verified transfer.
+gentryRvmlMetadataIsSameOrganiserRoot :
+  Atlas.root Atlas.rvmlGentryNamedEvent ≡
+  Atlas.root Atlas.rvmlGentryFlanaganAdvertisedTopic
+gentryRvmlMetadataIsSameOrganiserRoot = refl
+
+rvmlCarrierCannotCreateProof :
+  Attribution.citationImportsProof Atlas.rvmlGentryVideoMetadata ≡ false
+rvmlCarrierCannotCreateProof =
+  Atlas.allSourcesRemainNonPromoting Atlas.rvmlGentryVideoMetadata
+
+rvmlProgrammeCannotCreateInstitutionalAuthority :
+  Attribution.citationCreatesAuthority Atlas.rvmlGentry2003Programme ≡ false
+rvmlProgrammeCannotCreateInstitutionalAuthority =
+  Atlas.allSourcesRemainNonAuthoritative Atlas.rvmlGentry2003Programme
 
 ------------------------------------------------------------------------
 -- Max-cut 3: product-author identity and eight additional screenshot hashes
@@ -537,6 +581,20 @@ ellsworthKansasNotOriginalMaineLocale :
   Atlas.relationClass Atlas.kansasWeatherIsNotMaineReichEvent ≡
   Atlas.documentaryDistinction
 ellsworthKansasNotOriginalMaineLocale = refl
+
+------------------------------------------------------------------------
+-- RVML attributed 2003 publicity is one organiser root, not original
+-- Gentry source plans, Navy employment records or Reich weather proof.
+------------------------------------------------------------------------
+
+rvmlPromoReichClassNotConstructedDeviceReceipt :
+  Atlas.historicalTransmissionProved Atlas.rvmlPromotionalReichBuildNotVerifiedMechanism ≡ false
+rvmlPromoReichClassNotConstructedDeviceReceipt = refl
+
+rvmlFlanaganNamedTopicNotOriginalHandoff :
+  Atlas.relationClass Atlas.rvmlFlanaganNamedTopicNotOriginalCoilHandoff ≡
+  Atlas.documentaryDistinction
+rvmlFlanaganNamedTopicNotOriginalHandoff = refl
 
 ------------------------------------------------------------------------
 -- HOE_MATH / 5D SPIRITUALITY: NO NUMBER-ID OR ONTOLOGY TRANSFER
