@@ -117,10 +117,24 @@ def read_1953_rows(path: Path) -> dict:
                 "obs_time": clock,
                 "clock_status": "publisher_CSV_field_present" if clock else "not_recorded_in_CSV",
             }
-    for sid in SITE_VALUES:
-        if set(results[sid]) != {6, 7, 8}:
-            raise ValueError(f"missing requested July 1953 station-day: {sid}")
-    return results
+    present = {sid: days for sid, days in results.items() if days}
+    if not present:
+        raise ValueError("no requested July 1953 PRCP observations in CSV")
+    for sid, days in present.items():
+        if set(days) != {6, 7, 8}:
+            raise ValueError(f"incomplete requested July 1953 station: {sid}")
+    return present
+
+
+def merge_1953_rows(paths: list[Path]) -> dict:
+    """Permit one original by_year file or separate original by_station files."""
+    merged = {}
+    for path in paths:
+        for sid, days in read_1953_rows(path).items():
+            if sid in merged:
+                raise ValueError(f"duplicate station across inputs: {sid}")
+            merged[sid] = days
+    return merged
 
 
 def sha256_local(path: Path) -> str:
@@ -131,7 +145,7 @@ def sha256_local(path: Path) -> str:
     return h.hexdigest()
 
 
-def report(path: Path | None = None) -> dict:
+def report(paths: list[Path] | None = None) -> dict:
     result = {
         "purpose": "historical observation-clock acquisition discriminator",
         "original_agency": "NOAA/NCEI GHCN-Daily and HOMR",
@@ -142,12 +156,13 @@ def report(path: Path | None = None) -> dict:
         "historical_same_site_hourly_Ellsworth_verified": False,
         "reich_device_weather_causality_verified": False,
     }
-    if path is None:
+    if not paths:
         result["clock_acquisition_status"] = "not_acquired"
     else:
         result["clock_acquisition_status"] = "provided_local_CSV_parsed_not_publisher_authenticated"
-        result["local_input_sha256"] = sha256_local(path)
-        result["station_day_rows"] = read_1953_rows(path)
+        result["local_input_sha256"] = {str(path): sha256_local(path) for path in paths}
+        result["station_day_rows"] = merge_1953_rows(paths)
+        result["missing_station_clock_sources"] = sorted(set(SITE_VALUES) - set(result["station_day_rows"]))
         result["time_claim_limit"] = "OBS-TIME from NOAA/HOMR if present; not independent weather hour or site."
     return result
 
@@ -182,7 +197,7 @@ def self_test() -> dict:
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--ghcnd-csv", type=Path, help="local by_station or by_year .csv[.gz]")
+    p.add_argument("--ghcnd-csv", action="append", type=Path, help="repeat for local by_station or by_year .csv[.gz]")
     p.add_argument("--self-test", action="store_true")
     a = p.parse_args()
     output = report(a.ghcnd_csv)
