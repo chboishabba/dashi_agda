@@ -50,6 +50,7 @@ def metadata_audit(set_file, fdt_file=None):
     if len(epochs) != trials:
         raise ValueError("Epoch table does not span declared trials")
     counts = Counter()
+    visit_identified_epochs = Counter()
     arm_only_boundary_markers = Counter()
     visit_label = {}
     for epoch in epochs:
@@ -62,6 +63,7 @@ def metadata_audit(set_file, fdt_file=None):
         if len(tagged) != 1:
             raise ValueError("Ambiguous or missing original epoch treatment identity")
         arm = tagged.pop()
+        counts[arm] += 1   # Include original X_arm boundary epochs in arm total.
         visits = set()
         for name in events:
             if name.endswith("_" + arm):
@@ -78,8 +80,12 @@ def metadata_audit(set_file, fdt_file=None):
         if arm in visit_label and visit_label[arm] != visit:
             raise ValueError("One arm labels multiple session indices")
         visit_label[arm] = visit
-        counts[arm] += 1
-    if any(counts[arm] == 0 for arm in ARMS) or len(set(visit_label.values())) != 3:
+        visit_identified_epochs[arm] += 1
+    if (sum(counts.values()) != trials
+            or any(counts[arm] == 0 for arm in ARMS)
+            or len(set(visit_label.values())) != 3
+            or any(counts[arm] != visit_identified_epochs[arm] + arm_only_boundary_markers[arm]
+                   for arm in ARMS)):
         raise ValueError("Source 3-arm visit construction absent")
     required_fdt_bytes = channels * points * trials * 4
     verified_fdt_extent = False
@@ -97,6 +103,9 @@ def metadata_audit(set_file, fdt_file=None):
         "nbchan": channels, "pnts_per_epoch": points,
         "trials": trials, "sample_rate_hz": rate,
         "original_arm_epoch_counts": {arm: counts[arm] for arm in ARMS},
+        "arm_epochs_with_explicit_visit_indices": {
+            arm: visit_identified_epochs[arm] for arm in ARMS},
+        "all_original_epochs_accounted_for": True,
         "original_arm_visit_indices": {arm: visit_label[arm] for arm in ARMS},
         "source_X_arm_only_boundary_marker_epochs": {
             arm: arm_only_boundary_markers[arm] for arm in ARMS},
