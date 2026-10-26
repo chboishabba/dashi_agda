@@ -128,3 +128,24 @@ def test_dyadic_entropy_same_unigram_different_block_growth_n4():
     assert H.dyadic_block_entropy((F(1,16),)*16)==4  # IID fair bits, 4-block
     assert H.dyadic_block_entropy((F(1,2),)+(F(0),)*14+(F(1,2),))==1  # persistent fair bit
     assert H.dyadic_block_entropy((F(1,2),F(1,2)))==1  # same singleton law
+
+
+def test_finite_zipf_conditioning_l1_is_twice_discarded_tail():
+    p=H.finite_rank_probabilities(7,2,1)
+    for keep in range(1,len(p)+1):
+        conditioned=H.conditioned_head(p,keep)
+        tail=sum(p[keep:],F())
+        assert H.l1_probability_distance(p,conditioned)==2*tail
+        assert sum(conditioned)==1
+        assert all(x==0 for x in conditioned[keep:])
+    assert H.conditioned_head(p,len(p))==p
+
+
+def test_novelty_run_structure_separates_equal_histograms():
+    grouped=list('aabbcc');interleaved=list('abcabc')
+    assert sorted(grouped)==sorted(interleaved)
+    ga=H.novelty_flags(grouped);ib=H.novelty_flags(interleaved)
+    assert ga==(True,False,True,False,True,False)
+    assert ib==(True,True,True,False,False,False)
+    assert H.equal_flag_runs(ga)!=H.equal_flag_runs(ib)
+    assert sum(ga)==sum(ib)==3
