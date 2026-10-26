@@ -89,3 +89,18 @@ A second executable source `scripts/check_dust_reference_equations.py` gives rat
 **Important branch reality:** `master` does not currently contain `DASHI/Reasoning/SemanticInterventionEquivarianceExact.agda`; this code lives in the #1094/#1095 stack. Therefore there is no honest direct Agda import of the Sophontic code on this master-based branch yet. The semantic intervention crosswalk remains a downstream stacked-branch obligation.
 
 **Verified vs unverified:** files are committed and GitHub-read; a fresh local Agda kernel run and execution of the newly committed second Python script have not been reported. This is algorithm specification plus conditional structural mathematics, NOT completed formal proof of the paper's forward-estimator statistics.
+
+## 26 October further source-equality audit: exact centering correction
+
+The original Dust text explicitly defines `c_s = mean_population(perturbed_loss_s) - perturbed_loss_s`. Earlier DASHI code mistakenly described `baselineTokenLoss - perturbedTokenLoss`; fixed in `DustNoiseAlgorithmExact.agda` as `populationMeanPerturbedLoss`. This is a substantive correction, not a cosmetic rename. The baseline loss need not equal the perturbed population mean. The Python rational reference always used the population mean already.
+
+Under a complete four-draw Rademacher population on two token activations `h0,h1` with perturbed losses `ell0=2*h0`, `ell1=5*h0+3*h1`, and `r0=c0+gamma*c1`, `r1=c1`, exact symbolic rational evaluation yields activation-credit coordinates:
+- gamma=0: `(2,3)`
+- gamma=1/2: `(9/2,3)`
+- gamma=1: `(7,3)`.
+
+This is an **exact finite affine fixture**, checking causally correct reward assignment and population centering for this example; it does not establish the estimator unbiased for all nonlinear or jointly perturbed networks. The same source file exhibits the cubic symmetric-difference discrepancy `sigma²`, so any proposed blanket exact-gradient theorem is false.
+
+Original source for the corrected loss definition and equations: https://qlabs.sh/research/dust/ , section 2.2. Original code: https://github.com/qlabs-eng/dust . Upstream methodology owns the equations, DASHI the independent toy instance and corrective crosswalk.
+
+**Remaining genuine maximal cut:** instantiate orthogonality over an imported finite-character carrier with a real kernel proof; replace supplied abstract sum-congruence with proved finite-sum functoriality; construct actual discrete probability law / Gaussian smoothing and variance bound on declared perturbation model; validate numerical coupling to real reference implementation; and graft into the Sophontic stacked branch before calling the integration complete. No CI requested.
