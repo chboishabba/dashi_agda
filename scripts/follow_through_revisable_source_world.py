@@ -25,6 +25,11 @@ def validate(world):
             if k not in evidence: raise ValueError("unknown prerequisite")
         for k in c.get("supports", []):
             if k not in evidence: raise ValueError("unknown support")
+        severe=c.get("severe_test")
+        if severe is None or not all(severe.get(k) for k in ("would_narrow","would_strengthen","test_status")):
+            raise ValueError("claim lacks bidirectional severe test")
+        if severe["test_status"] not in {"notRun","sourceChecked","executed"}:
+            raise ValueError("invalid severe test status")
         if c["level"] == "independentlyReproduced":
             if not c.get("reproduction_receipt"): raise ValueError("unsupported reproduction promotion")
     actions = {a["id"]: a for a in world["actions"]}
@@ -40,7 +45,8 @@ def report(world):
     for c in world["claims"]:
         missing = sorted(k for k in c["requires"] if e[k]["status"] != "present")
         claims[c["id"]] = {"level":c["level"],"supported_by":c.get("supports", []),
-                           "unpaid":missing, "reproducible_now":not missing,
+                           "unpaid":missing, "prerequisites_located":not missing,
+                           "severe_test":c["severe_test"], "reproducible_now":not missing,
                            "note":"prerequisite presence never by itself promotes evidentiary level"}
     candidates = []
     for a in world["actions"]:
