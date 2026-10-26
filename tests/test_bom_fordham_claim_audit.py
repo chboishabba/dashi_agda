@@ -961,18 +961,18 @@ def test_recycled_claim_family_receipts_preserve_original_root_and_relation():
     path = ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv"
     with path.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
-    assert len(rows) == 39
-    assert len({r["receipt_id"] for r in rows}) == 39
+    assert len(rows) == 45
+    assert len({r["receipt_id"] for r in rows}) == 45
     assert all(r["claim_family"] and r["evidence_objects"] and
                r["relation_to_claim"] and r["nonpromotion_boundary"] for r in rows)
     totals = Counter(r["claim_family"] for r in rows)
-    assert len(totals) == 16
+    assert len(totals) == 18
     assert totals["US_UNCERTAINTY_STRATEGY"] == 2
     assert totals["API_PROMPTED_58PC"] == 1
     assert totals["GAS_TAX_17B_ANNUAL"] == 8
-    assert totals["GAS_INVESTMENT_TAX_83PC"] == 3
+    assert totals["GAS_INVESTMENT_TAX_83PC"] == 4
     assert totals["GAS_INVESTMENT_SUPPLY_PRICE"] == 4
-    assert totals["GAS_TAX_POLICY_SPECIFICATION"] == 2
+    assert totals["GAS_TAX_POLICY_SPECIFICATION"] == 3
     assert totals["GAS_TAX_VS_RESERVATION_DENOMINATOR"] == 2
     assert totals["GAS_TAX_TOTAL_21_9B_AEP"] == 2
 
@@ -1156,3 +1156,48 @@ def test_adl_reuses_existing_typed_genealogy_nonfactorability_and_regression():
                      "adlReturnsUnitSummaryNotAnotherEconomicModel"):
         assert consumer in regression
     assert "headlineNumberRestatementIsNotHistoricalMethodTransfer" in typed
+
+
+
+def test_woodmac_original_appendix_overrules_press_only_source_gap():
+    """The consultant authored one hypothetical model; client restatements are not copies of nature."""
+    with (ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = {r["receipt_id"]: r for r in csv.DictReader(handle)}
+    for key in ("G32", "G33", "G34", "G35", "G36"):
+        assert rows[key]["evidence_objects"] == "WOODMAC_ORIGINAL_2026"
+        assert rows[key]["locator"].endswith("Wood-Mackenzie-Analysis-of-Proposed-Windfall-Levy.pdf")
+    assert rows["G10"]["evidence_objects"] == "WOODMAC_AEP_2026"
+    assert "hypothetical 4-tcf" in rows["G32"]["nonpromotion_boundary"].lower()
+    assert "US$120/bbl" in rows["G32"]["numerical_or_rhetorical_payload"]
+    assert "additional to retained PRRT and CIT" in rows["G33"]["numerical_or_rhetorical_payload"]
+    assert "deleting PRRT arithmetically" in rows["G33"]["nonpromotion_boundary"]
+    for needed in ("4 tcf", "450 mmcf/d", "27-year", "85% export", "15% domestic"):
+        assert needed in rows["G34"]["numerical_or_rhetorical_payload"]
+    assert "simplified proxy" in rows["G35"]["numerical_or_rhetorical_payload"]
+    assert "not an audit" in rows["G35"]["nonpromotion_boundary"]
+
+
+def test_woodmac_adl_spot_assumptions_are_model_specific_and_formalised():
+    """Equal levy % does not identify which consultant assumes spot export."""
+    with (ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = {r["receipt_id"]: r for r in csv.DictReader(handle)}
+    assert rows["G36"]["evidence_objects"] == "WOODMAC_ORIGINAL_2026"
+    assert rows["G37"]["evidence_objects"] == "ADL_2026_ORIGINAL"
+    assert "no spot sales" in rows["G36"]["numerical_or_rhetorical_payload"]
+    assert "27% spot-market" in rows["G37"]["numerical_or_rhetorical_payload"]
+    assert rows["G36"]["claim_family"] == rows["G37"]["claim_family"]
+    owner = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    regress = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    for proof in ("woodMackenzieOriginalReport2026 : Typed.SourceReceipt",
+                  "woodMackenzieOriginalIsAEPCommission : Typed.TypedGenealogyEdge",
+                  "woodMackenzieAppendixNotACTUReplacement : Typed.TypedGenealogyEdge",
+                  "woodMackenzieNoSpotVersusADLMarginalSpot : Typed.TypedGenealogyEdge",
+                  "equal25RateOpposedContractingModels",
+                  "same25RateCannotDetermineModelSpotAssumption"):
+        assert proof in owner
+    assert "woodMackenzieSameRateCannotConcealSpotAssumption" in regress
+    assert owner.count("INF.nonFactorabilityWitness woodMacContractedMarket adlMarginalSpotMarket refl (λ ())") == 1
