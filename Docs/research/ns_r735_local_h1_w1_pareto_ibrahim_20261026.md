@@ -394,3 +394,47 @@ FTC/integration module parameters in original Agda compilers
 also need actual real-time inhabitants for claims of physical
 kernel verification. No universal W1/W2 estimate and no
 unrestricted Clay A/B proof follows from the present cut.
+
+## Physical W2 retained-margin ceiling from an exact unforced heat mode
+
+The original pointwise S0 critical-energy source
+`NSTriadKNLiteralCriticalEnergyPointwiseExact.agda` proves
+  dXcrit/dt = Pcrit - (2 nu) Dcrit
+with exactly the dyadic weight owned by
+`NSTriadKNLiteralFiniteCriticalObservableFoldExact.agda`.
+Do NOT substitute ordinary H1 enstrophy for Xcrit.
+
+Take a REAL smooth, mean-zero, divergence-free and unforced
+single-frequency shear
+  u(t,x) = 2 exp(-nu n²t) cos(nx) e_z
+on the 2pi torus, for n=2^j and literal cutoff N=n.
+The two Fourier input modes k=±(n,0,0) are transverse.
+Their mixed H+×H- same-sign incidences lie only at output
+k=±(2n,0,0), outside the original selected output cutoff;
+opposite-sign incidences at k=0 vanish by exact helical
+geometry (and k=0 is excluded in any event).
+Therefore on the ORIGINAL R691/R735 selected output carrier
+  M_N(t)=0, W_N(t)=0 and C_N(t)=0.
+But the dyadic critical observable is positive:
+  Xcrit(t)=2n exp(-2nu n²t),
+  Dcrit(t)=2n³ exp(-2nu n²t),
+  int_0^T Dcrit dt=[Xcrit(0)-Xcrit(T)]/(2nu)>0
+for every T>0.
+
+Thus the original R734 W2 inequality on THIS ACTUAL SOLUTION
+reduces to
+  (delta-2nu)*int_0^T Dcrit dt <=0.
+**Any universal positive retained margin for the source-selected
+R734 W2 theorem therefore MUST satisfy 0<delta<=2nu.**
+This is a NECESSARY bound, not a general proof that any delta
+in that interval suffices on arbitrary physical NS trajectories.
+The proof is the classical heat-energy identity reused on the
+original dyadic mixed/critical carriers, not a new physics law.
+
+The seventh independent exact acceptance test in
+`tests/test_ns_r735_middle_gap_w2_acceptance.py`
+checks the physical Fourier-shell coefficients, time integral
+at nu=1,T=log 2 and both allowed/forbidden margins. All seven
+tests passed locally; full PR pytest and kernel checking are
+still outstanding.
+
