@@ -180,7 +180,7 @@ def initial(family):
     raise ValueError(family)
 
 
-def transition(stage, piece, family):
+def transition(stage, piece, family, with_transport=False):
     old = stage
     old_keys = tuple(sorted(old.frontier))
     # Track inclusion of EVERY old vertex through all successive
@@ -191,7 +191,9 @@ def transition(stage, piece, family):
         stage, carrier = attach(stage, piece, key, children, with_transport=True)
         vertex_map = {v: carrier[image] for v, image in vertex_map.items()}
     receipt = verify_complement_components(old, stage, vertex_map, family)
-    return stage, receipt
+    # Preserve existing (stage, receipt) API unless caller explicitly
+    # needs the true simplicial inclusion map for two-step star checks.
+    return (stage, receipt, vertex_map) if with_transport else (stage, receipt)
 
 
 def audit(max_depth=3):
