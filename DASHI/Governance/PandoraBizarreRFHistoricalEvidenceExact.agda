@@ -55,11 +55,11 @@ byronOperational1966 : Source.AttributedSource
 byronOperational1966 = Source.mkNoDOISource
   "Eugene V. Byron, Johns Hopkins University Applied Physics Laboratory"
   "Operational Procedure for Project Pandora Microwave Test Facility (MRT-4-045/QM-66-071)"
-  "Original institutional report dated October 1966; DoD FOIA release is indexed but direct PDF access blocked at retrieval"
+  "Original institutional report October 1966; DoD FOIA full compiled PDF still access-blocked; indexed original text also at gbppr.net/mil/cavity/Project_PANDORA.pdf and Scribd PANDORA-TESTS; full page images NOT verified this turn"
   "1966"
   "https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Other/Operational_Procedure_For_Project_Pandora.pdf"
   Source.archivalSource
-  "Original equipment/control/field-monitor report identity verified from indexed scan excerpts; full pages not independently obtained. Apparatus documentation is not animal physiology or a modern operational technology transfer"
+  "Source-indexed original 1966 operating manual MRT-4-045/QM-66-071, with power transmitter on/off procedure, horn section selection, measured transmitter power and power density, Monitor 1 and movable Monitor 2/alternate Monitor 1; indexes identify drawings, power transfer/meter curves, and 2 dB gross relative monitor caveat. Do not promote indexed text to independently inspected full scan, actual same-animal trial monitoring, or 1977 Moscow calibration."
   Source.publicAttribution
 
 byronFinal1966 : Source.AttributedSource
@@ -1044,6 +1044,11 @@ mutsEarlierHighModeCount = 14
 -- Table II's ±2.63/±2.88 dB with sample/container and p. 6
 -- 2.0 dB gross relative dipole monitor error are distinct error sources.
 -- They cannot be silently transferred to 1977 Embassy MUTS sensors.
+-- The original 1966 November final report Table II records *worst-case
+-- spatial quiet-zone field variation across test sample/container setups*,
+-- NOT a statistical sensor-error confidence interval or a human RF dose.
+-- This is separate from Table III paired calculated/measured horn-power
+-- readings and the movable monitor's gross 2 dB field comparison caveat.
 data Byron1966InstrumentEvidenceStanding : Set where
   originalHornMeasuredPowerDensity : Byron1966InstrumentEvidenceStanding
   calculatedDensityFromMeasuredSourcePower : Byron1966InstrumentEvidenceStanding
@@ -1071,3 +1076,23 @@ grossDipoleIsNotStandardHorn :
   movableDipoleGrossFieldComparison ≡
     originalHornMeasuredPowerDensity → ⊥
 grossDipoleIsNotStandardHorn ()
+
+-- Byron original documents within the SAME 1966 Walter Reed engineering
+-- effort remain two separately authored reports by the same engineer,
+-- not two independent experimental replications.
+-- The October operational manual is source-TEXT indexed (full scan pending);
+-- the November final report's 1966 Table II/III pages were inspected.
+data Byron1966TestDocumentationRole : Set where
+  indexedOperatingProcedure : Byron1966TestDocumentationRole
+  visuallyInspectedLaboratoryCalibrationTable : Byron1966TestDocumentationRole
+  recoveredIndependentAnimalExperimentLog : Byron1966TestDocumentationRole
+
+manualDoesNotCertifyCalibrationReceipt :
+  indexedOperatingProcedure ≡
+    visuallyInspectedLaboratoryCalibrationTable → ⊥
+manualDoesNotCertifyCalibrationReceipt ()
+
+calibrationNotIndependentAnimalRecord :
+  visuallyInspectedLaboratoryCalibrationTable ≡
+    recoveredIndependentAnimalExperimentLog → ⊥
+calibrationNotIndependentAnimalRecord ()
