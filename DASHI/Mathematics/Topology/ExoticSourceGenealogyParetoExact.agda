@@ -172,6 +172,21 @@ artin1947Original = A.mkDOISource
   "original coordinate-theory proof update distinguishing braid isotopy from diagram projection; page 101 explicitly points back to the 1925 original and difficulties in its original proof"
   A.publicAttribution
 
+
+-- Source of cobordism/gluing/TQFT terminology, NOT a proof that an
+-- arbitrary ternary address space IS a 2D surface or an actual TQFT.
+atiyahCobordismVocabulary : A.AttributedSource
+atiyahCobordismVocabulary = A.mkDOISource
+  "Michael F. Atiyah"
+  "Topological Quantum Field Theory"
+  "Publications Mathematiques de l'IHES 68, 175-186"
+  "1988"
+  "10.1007/BF02698547"
+  "https://doi.org/10.1007/BF02698547"
+  A.academicArticleSource
+  "source owner for TQFT/cobordism formal vocabulary only; actual signed ternary 1-to-3 finite PL triangulation and 369 address-to-pants mapping are separate DASHI implementations"
+  A.publicAttribution
+
 originalsAndImplementation : List A.AttributedSource
 originalsAndImplementation =
   richardsOriginal ∷
@@ -184,9 +199,10 @@ originalsAndImplementation =
   bombieriDeGiorgiGiustiOriginal ∷
   mardesicShapeSurvey ∷
   hatcherBook ∷
+  atiyahCobordismVocabulary ∷
   mccarthyLeanSphere ∷ []
 
-originalCount : A.sourceCount originalsAndImplementation ≡ 11
+originalCount : A.sourceCount originalsAndImplementation ≡ 12
 originalCount = refl
 
 exoticTopologyAtlas : A.AttributedSourceAtlas
