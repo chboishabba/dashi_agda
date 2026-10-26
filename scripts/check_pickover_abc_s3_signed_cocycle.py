@@ -115,8 +115,37 @@ def check_orbits():
     print("PASS 27 S3 orbits 3x1 + 6x3 + 1x6")
     print("PASS 27 S3 x C2 orbits 1x1 + 1x2 + 4x6; actions != orbit sizes")
 
+
+def trit_multiply_11(digits_least_first):
+    """Finite carry machine in Z3, NOT a Euclidean fractional-digit oracle."""
+    carry = 0
+    output = []
+    for digit in digits_least_first:
+        z = 11 * digit + carry
+        output.append(z % 3)
+        carry = z // 3
+        assert 0 <= carry <= 10
+    return output, carry
+
+def check_carry_transducer():
+    for depth in range(1, 8):
+        modulus = 3 ** depth
+        for n in range(modulus):
+            inp = tuple((n // 3 ** j) % 3 for j in range(depth))
+            out, carry = trit_multiply_11(inp)
+            lower = sum(d * 3 ** j for j, d in enumerate(out))
+            assert 11 * n == lower + carry * modulus
+            assert lower == (11 * n) % modulus
+            assert carry == (11 * n) // modulus
+    # C2 reflection conjugates C3 carry phase under address complement:
+    for abc, permutation in product(DIGITS, PERMS):
+        assert correction(permutation, complement(abc)) == circle(-correction(permutation, abc))
+    print("PASS p=3 carry transducer for x11, depths 1..7, <=11 carry states")
+    print("PASS C2 complement reverses address-dependent C3 cocycle")
+
 if __name__ == "__main__":
     check_s3()
     check_99_and_reflection()
     check_orbits()
+    check_carry_transducer()
     print("OPEN source-specific alpha=1/(2*pi) first noncentral digit at 9999!")
