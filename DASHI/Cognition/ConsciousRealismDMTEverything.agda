@@ -15,3 +15,8 @@ import DASHI.Cognition.ConsciousRealismDMTSourceWorldExact
 -- Reuse established typed/evidence hyperfabric for Erowid motif summaries,
 -- temporal report and Sanders/fMRI evidence with no implicit transport.
 import DASHI.Biology.DMTMotifObservationHyperfabricExact
+
+-- Exact finite pairing-identity loss: source unkeyed marginal values cannot
+-- recover the participant-paired G1 variance (synthetic, not human EEG).
+-- Reuses canonical IntersectionalNonFactorability; no sibling PR dependency.
+import DASHI.Biology.DMTG1PairingNonFactorabilityExact
