@@ -56,8 +56,12 @@ The statistical total-variation distance `sup_A|p(A)-q(A)|` is **half** that L1 
 
 ## Receipts and remaining Pareto/Ibrahim gates
 
-- Newly committed `scripts/zipf_heaps_bridge.py`, `tests/test_zipf_heaps_bridge_exact.py`: **17 exact local tests passed**. **Both local files' Git blob SHAs were confirmed to match the fetched GitHub blobs.**
-- Previous locally available 40 tests also passed, but their older local worktree versions are **not byte-identical** to current GitHub PR files. **Do not claim a complete exact-PR-head 57-test execution**.
+- Newly committed `scripts/zipf_heaps_bridge.py`, `tests/test_zipf_heaps_bridge_exact.py`: **20 exact local tests passed**. **Both local files' Git blob SHAs were confirmed to match the fetched GitHub blobs.**
+- Previous locally available 40 tests also passed, but their older local worktree versions are **not byte-identical** to current GitHub PR files. **Do not claim a complete exact-PR-head 60-test execution**.
 - Source-written `DASHI/Statistics/ZipfHeapsOrderNoGoExact.agda` blob matches its local source. **Kernel-pending**; Agda unavailable in this runtime.
 - P0: Agda typecheck/repair/import in canonical Everything; P1: more general finite real-exponent normalized distribution and proof-level moments; P2: original-source corpus/provenance and independent audits; P3: temporal-dependence and held-out Zipf/Heaps/avalanche discriminators; P4: genuinely established conditions before Hilberg/neural-scaling inference.
 - No Zipf/fractal/zeta/NS/RH/Monster same-object or physical regularity conclusion from matching a power law. No universal behavioural/statistical law is asserted from a definition, model or synthetic test.
+
+## Independent probability acceptance, not self-comparison
+
+The last three additions enumerate complete finite IID word spaces with exact rational product probabilities, distinct multiset permutations with independently computed mean vocabulary size, and all 2^5 subsets to calculate sup-event total variation directly. These independently reproduce the formula outputs and L1/TV factor-of-two relationship, instead of checking only two rearrangements of the same formula. Combined local suite **60 passed (40 earlier + 20 new)**; the new 20-test file is blob-identical to its executed local source, but the earlier 40-test copies differ bytewise from the GitHub-head originals. The Agda root remains kernel pending.
