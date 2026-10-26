@@ -156,3 +156,61 @@ physical Leray projection and conjugate reality constraints.
 This is a NUMERICAL same-object contact regression, not a proof
 of the Sobolev multiplier inequalities or Agda R691 type equality.
 Combined with the ten exact scalar SymPy checks, **15 local tests passed across the independent local runs**: ten exact scalar algebra, two full-output numerical Leibniz contacts, and three source-selected numerical contacts.
+
+## 26 October: NEW primary-source Pareto/snowball screen (claim-root firewall)
+
+**Stan Palasek**, *A logarithmic regularity criterion for the
+axisymmetric Navier--Stokes equations*, arXiv:2610.29012v1,
+original 21 October 2026:
+https://arxiv.org/html/2610.29012v1
+Original Theorem 1.1 requires axisymmetry, R³ H² divergence-free
+initial data, initial circulation Gamma_0 in L∞, and a time-uniform
+near-axis bound |Gamma(t,r,z)|<=c_*(log(1/r))^(-5/4).
+The improvement from the prior Lei--Zhang exponent 2 and Wei 3/2
+stems from a sharper square-root-of-log-scales stretching estimate.
+It is a conditionally published preprint theorem under axisymmetry;
+it cannot be imported as a generic 3D periodic R735 W2 payment.
+Original historical roots and source dates remain distinct.
+
+**Ken Nakashima**, *Toward Global Regularity ... Signed Nonlinear
+Transfer, Dynamical Quartic Regeneration, and Viscosity-Conditioned
+Fourier Correlations*, Part II, author-uploaded 16 October 2026,
+page dated/updated 21 October:
+https://ken-theory.org/?page_id=25343
+This is a more relevant signed-residual TECHNIQUE donor, because
+it explicitly retains Galerkin cutoff-uniform closure as an OPEN
+condition. The author reports 48 active ordered pathways and
+grouped quartic coefficients A_8=2688/5,A_12=0,A_14=-4704/5.
+The reported scalar exponential kernel is
+ C(t)=336/(5nu)*(exp(-14nu*t)-exp(-8nu*t)).
+Our independent EXACT scalar audit confirms its grouped-coefficient
+algebra, C(t)<0 for t>0 and
+  int_0^infinity C(t)dt=-18/(5nu²).
+Crucially **the signs of C times an evolving complex Hermitian
+correlation are NOT determined by the scalar kernel sign**; the
+full real source amplitude and forcing-path phase must be carried.
+The claimed **48-path enumeration is NOT independently reproduced**
+in this cut. Neither finite scalar cancellation nor a candidate
+conditional Gronwall coefficient is an unconditional source
+producer for original R735 W2 or A3.
+`tests/test_ns_nakashima_kernel_scalar_audit.py` had
+3 locally executed exact SymPy checks. Do not vendor or
+attribute the grouped coefficient calculation to DASHI.
+
+**Cross-PR donors, nonpromotion:** The original source selected
+Agda R691/R735 owners on master remain canonical. Agda #1255 and
+Lean #87 already own Evan Miller's 2021 **conditional** anisotropic
+A3 interface and finite algebra; do not re-prove/import it here.
+Agda #1240 has independent VERID B4 rate-reference-shift invariance,
+which cannot pay the invalid zero-padding-dependent original B4.
+Agda #1271 owns this physical restricted W1 certificate only.
+Avoid conflating downloaded copies, part I/II/III same-author papers,
+and verified original PDE continuation results.
+
+**Updated receipt:** previous 10 exact scalar + 2 physical numerical
+tests; three NEW independently run selected-output numerical
+checks; three NEW independently run source-scalar Nakashima checks.
+Total 18 test cases across the independent cuts.
+No Agda/Lean kernel typecheck, exact-GitHub-head whole-suite
+run or unrestricted A/B theorem.
+
