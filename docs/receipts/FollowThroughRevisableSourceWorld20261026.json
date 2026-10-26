@@ -51,6 +51,24 @@
       "role": "original government administration",
       "status": "unresolved origin",
       "note": "Not attributed to the Abt evaluation team"
+    },
+    {
+      "id": "bankstreet1977holding",
+      "author": "Bank Street College Archives (custodian); original report Bock, Stebbins and Proper",
+      "role": "physical 1977 IV-B custody description",
+      "url": "https://bankstreetarchives.libraryhost.com/repositories/2/archival_objects/9969"
+    },
+    {
+      "id": "watkins1997",
+      "author": "Cathy L. Watkins",
+      "role": "1997 authored retrospective historical synthesis",
+      "url": "https://www.behavior.org/resources/901.pdf"
+    },
+    {
+      "id": "nmap2008",
+      "author": "National Mathematics Advisory Panel Task Group on Instructional Practices",
+      "role": "later mathematics-only evidence inclusion review",
+      "url": "https://www.ed.gov/media/document/instructional-practicespdf-89277.pdf"
     }
   ],
   "evidence": [
@@ -130,6 +148,27 @@
       "root": "nationalOutcomes",
       "status": "notLocated",
       "kind": "causally usable policy variation and downstream educational outcome"
+    },
+    {
+      "id": "bankstreetHolding",
+      "root": "bankstreet1977holding",
+      "status": "present",
+      "locator": "RG11 Box 12, archival object bsc.11.01.D.163",
+      "kind": "custodian metadata; original report numerical pages not yet inspected"
+    },
+    {
+      "id": "watkinsMonograph",
+      "root": "watkins1997",
+      "status": "present",
+      "locator": "1997 106-page monograph (PDF), printed p27 image inspected",
+      "kind": "retrospective synthesis; not independent participant cohort"
+    },
+    {
+      "id": "nmapThreeModelSubset",
+      "root": "nmap2008",
+      "status": "present",
+      "locator": "2008 Task Group Instructional Practices report, Follow Through mathematics section",
+      "kind": "later restricted three-model review, not original 1977 full ranking"
     }
   ],
   "claims": [
@@ -257,7 +296,7 @@
         2,
         1
       ],
-      "description": "Acquire IV-A/B original model-site outcome tables with pages"
+      "description": "Acquire original Abt IV-B model-site tables; known Bank Street RG11 Box 12 bsc.11.01.D.163 holding or authentic digital copy; original numerical pages not inspected"
     },
     {
       "id": "acquireHouseCalculations",
