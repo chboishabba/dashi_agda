@@ -18,6 +18,7 @@ Outer m is anti-symplectic and inner r symplectic on the ORIGINAL
 1-dimensional invariant alternating-form line.
 """
 import hashlib
+from math import gcd
 import json
 from pathlib import Path
 from monster3b_atlas_source_word_order_d4_gate import (
@@ -109,6 +110,7 @@ def audit(root):
     assert sum(r[i][i] for i in range(N))%3==0
 
     assert rank(diff(m,I))==6
+    assert gcd(3**13,8)==1  # Schur-Zassenhaus normal-Hall hypothesis, not theorem runtime proof.
     return {
       "schema":"monster3b-atlas-2suz2-exact-source-d4-word-v1",
       "source_original_authority":"ATLAS/AtlasRep original 2.Suz:2 GF3 generators",
@@ -137,6 +139,11 @@ def audit(root):
       "actual_Monster_involution_class_fusion":False,
       "actual_Monster_source_selected_78_character":False,
       "full_Monster_Schrodinger_Hom_action":False,
+      "normal_3B_extraspecial_kernel_order_if_source_structure_admitted":3**13,
+      "source_D4_quotient_order":8,
+      "Schur_Zassenhaus_coprime_Hall_hypothesis":True,
+      "actual_N3B_D4_complement_exists_by_classical_theorem_given_BW_quotient":True,
+      "explicit_Monster_group_generator_words_produced":False,
       "agda_kernel_checked":False,
     }
 if __name__=="__main__":
