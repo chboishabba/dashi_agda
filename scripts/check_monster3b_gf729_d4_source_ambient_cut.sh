@@ -6,7 +6,11 @@ cd "$(dirname "$0")/.."
 python3 -m py_compile \
   scripts/monster3b_atlas_source_word_order_d4_gate.py \
   scripts/monster3b_atlas_actual_d4_word_witness.py \
-  scripts/monster3b_gf729_ambient_d4_similitude_source_boundary.py
+  scripts/monster3b_gf729_ambient_d4_similitude_source_boundary.py \
+  scripts/monster3b_atlas_d4_fourE_h4_source_submodule.py
 python3 scripts/monster3b_atlas_source_word_order_d4_gate.py
 python3 scripts/monster3b_atlas_actual_d4_word_witness.py
 python3 scripts/monster3b_gf729_ambient_d4_similitude_source_boundary.py
+
+# Positive source-compatible FOUR-E H4, not prior IIT A2 or actual Monster quotient.
+python3 scripts/monster3b_atlas_d4_fourE_h4_source_submodule.py
