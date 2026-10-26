@@ -1429,7 +1429,7 @@ bareLevyLabelCannotRecoverTaxBase =
 -- Reuses the repository's canonical IntersectionalNonFactorability owner.
 --
 -- We build two explicitly HYPOTHETICAL national corpora with the SAME
--- observed 53-appearance, 22-family selection yet DIFFERENT unobserved
+-- observed 57-appearance, 25-family selection yet DIFFERENT unobserved
 -- original-source populations. This is an observation adequacy no-go,
 -- NOT a statistic about Australian national climate denial.
 -- Root identity in the selected ledger remains an empirical annotation;
@@ -1439,15 +1439,15 @@ bareLevyLabelCannotRecoverTaxBase =
 data NationalSourcePopulationCompletion : Set where
   fewAdditionalOriginals manyAdditionalOriginals : NationalSourcePopulationCompletion
 
-data Selected53AppearanceView : Set where
-  samePurposive53AppearanceLedger : Selected53AppearanceView
+data Selected57AppearanceView : Set where
+  samePurposive57AppearanceLedger : Selected57AppearanceView
 
 data NationalOriginalProductionPattern : Set where
   concentratedOutsideSample dispersedOutsideSample : NationalOriginalProductionPattern
 
 whatOurSelectedLedgerSees :
-  NationalSourcePopulationCompletion → Selected53AppearanceView
-whatOurSelectedLedgerSees _ = samePurposive53AppearanceLedger
+  NationalSourcePopulationCompletion → Selected57AppearanceView
+whatOurSelectedLedgerSees _ = samePurposive57AppearanceLedger
 
 whatUnobservedOriginalPopulationContains :
   NationalSourcePopulationCompletion → NationalOriginalProductionPattern
@@ -1467,3 +1467,49 @@ selectedCorpusCannotDetermineNationalOriginConcentration :
 selectedCorpusCannotDetermineNationalOriginConcentration =
   INF.witnessRulesOutEveryFlatFactorisation
     sameSelectedLedgerDifferentNationalPopulations
+
+
+------------------------------------------------------------------------
+-- Original GOVERNMENT IMPACT ANALYSIS from OIA, 15 October 2026:
+-- DISR authored 7-page dashboard, visually inspected PDF page 3 and page 6.
+-- Ten-year regulatory burden: A$134m under reform vs A$59m status quo.
+-- These are compliance/regulatory burdens, not observed recovered LICENCE
+-- levy receipts and not $17bn export-revenue tax estimates.
+-- Page 3 forecasts a transfer of value *from gas producers to domestic
+-- gas users* via lower gas prices, itself a conditional GOVERNMENT appraisal,
+-- NOT a measured beneficiary distribution or denialist claim.
+--
+-- Substantive primary-document contradiction: the OIA page 6 says
+-- DGRS enacting legislation INTENDED to commence 1 Jan 2027 whereas
+-- Minister King's original 14 October principal-bill House speech states
+-- a proclamation/backstop 1 JULY 2027. Both place DSO 1 Jan 2028.
+-- Preserve both versioned originals. An APH bill/enactment check is owed.
+------------------------------------------------------------------------
+
+governmentOIAImpactDashboardOct2026 : Typed.SourceReceipt
+governmentOIAImpactDashboardOct2026 = Typed.sourceReceipt
+  "Australian Department of Industry, Science and Resources; Office of Impact Analysis"
+  "Dashboard Impact Analysis: Gas Market Review Domestic Gas Reservation Scheme"
+  "2026-10-15"
+  "https://oia.pmc.gov.au/sites/default/files/posts/2026/10/Dashboard%20IA%20%26%20Statement%20of%20Sufficiency.pdf"
+  "Publisher-original seven-page government PDF (page indices 2 and 5 visually checked). Reports A$134m versus A$59m ten-year estimated regulatory burden, anticipates transfer from producer to domestic user, and page 6 says framework 1 Jan 2027 versus dated minister's 14 Oct 1 July 2027 speech. None of these is a confirmed legal commencement, paid levy, observable price effect, or measured actual beneficiary."
+
+oiaRegulatoryBurdenNotExportTaxModel : Typed.TypedGenealogyEdge
+oiaRegulatoryBurdenNotExportTaxModel = Typed.typedGenealogyEdge
+  "RC-21" "Australian 2026 government regulatory-burden appraisal" "Arthur D. Little separate 25% LNG export revenue scenario"
+  Typed.parallelEconomicArgument Typed.primary
+  (governmentOIAImpactDashboardOct2026 ∷ adlSourceReportPublicRelease2026 ∷ [])
+  "Official ten-year A$134m regulatory burden under DGRS versus A$59m status quo, not actual federal licence-levy collections, and not ad valorem 25 percent LNG export revenue model worth hypothetical billions."
+
+oiaJanuaryVsKingJulyDGRSStart : Typed.TypedGenealogyEdge
+oiaJanuaryVsKingJulyDGRSStart = Typed.typedGenealogyEdge
+  "RC-22" "Government OIA 15 Oct 2026: intended DGRS framework 1 Jan 2027" "Minister King 14 Oct 2026: framework backstop 1 July 2027"
+  Typed.reportedStatisticRestatement Typed.corroborated
+  (governmentOIAImpactDashboardOct2026 ∷ octoberGasPrincipalMinisterSpeech2026 ∷ [])
+  "Conflicting date statements by official government-origin sources preserved without silent correction. 1 Jan 2028 is shared expected DSO start. Neither OIA dashboard nor attributed Hansard mirror settles text of enacted Act or commencement instruments."
+
+oiaTimingConflictDoesNotEstablishCausalScriptTransfer :
+  Typed.StrongHistoricalTransfer oiaJanuaryVsKingJulyDGRSStart → ⊥
+oiaTimingConflictDoesNotEstablishCausalScriptTransfer w =
+  Typed.headlineNumberRestatementIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer w)
