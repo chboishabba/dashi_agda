@@ -51,11 +51,17 @@ The existing source consumer path now adds a strictly stronger obligation withou
 2. The original GAP `monster_3b_suzuki_main_quotient_match.g` emits **the full 210-class values** of both actual selected degree-12 and both actual selected degree-78 `Irr(six)` rows alongside the earlier group metadata, ATLAS labels and original main→MN3B→Monster receipt.
 3. `render_monster_3b_suzuki_main_quotient_match.py` validates two complete selected rows of each degree and their exact value-record structure.
 4. `monster_3b_suzuki_selected_character_join.py` compares **all 4 × 210 values exactly**, via its already-owning `Cyc.wire`, against the independent all-conductor export *after* matching source `Irr` indices and central C2/C3.
-5. The original synthetic regression gains six additional fail-closed cases covering source/exported noncentral character drift, omitted degree12 rows, and a truncated selected degree78 row; total **32** specified negatives. The thin execution driver asserts `selected_source_characters_all_classes_matched=true`.
+5. The original synthetic regression gains six additional fail-closed cases covering source/exported noncentral character drift, omitted degree12 rows, and a truncated selected degree78 row; total **32** specified negatives before the version gate. The thin execution driver asserts `selected_source_characters_all_classes_matched=true`.
 
 The **independent** small-group model was executed locally and produced `/mnt/data/monster3b_exact_class_metadata_collision_receipt_20261027.json`. The newly committed exact `6.Suz` GAP source and 32-case GitHub test were **not executed here**: do not relabel a local equivalent mathematics test as an actual CTblLib/Monster receipt. A future successful source join still needs original author/source-provenance attestation and the #1098 actual normalizer Hom action, not merely successful arithmetic.
 
 **Mathematical limit:** four selected rows need not distinguish every conjugacy class of `6.Suz`. The new check establishes equality of those selected rows *as exported by the two producers* on a common class ordering. A globally simultaneous reindexing of the original source tables is still outside this local join's detection without independently fixed source coordinates. Actual GAP table version and source input identities must be retained.
+
+## Explicit GAP/CTblLib runtime-version binding
+
+The two original GAP producers now each record `GAPInfo.Version` and `GAPInfo.PackagesLoaded.ctbllib[2]` in their raw JSON receipts. The existing main-receipt validator accepts only nonempty string versions; the existing source-relative join rejects mismatched GAP or CTblLib revisions across the independently produced records, and includes the matched versions in its output. The synthetic adversarial suite adds **four** revision-drift controls, bringing the specified negative cases to **36**.
+
+This is version *consistency*, not software-binary authentication: locally altered tables or two different builds with the same version string are not ruled out, and the exact CTblLib/GAP computation was not executed in this environment. The version field location is documented by GAP's own `GAPInfo.PackagesLoaded.ctbllib[2]` usage. The external original source protocol and its dated computational lineage are retained.
 
 ## Source-versus-execution boundary
 
