@@ -152,7 +152,7 @@ fluxLabelCannotDiscardGradientTerm :
 fluxLabelCannotDiscardGradientTerm =
   NF.witnessRulesOutEveryFlatFactorisation fluxWitness
 
--- Example 4.3: a proved square identity cannot tell whether
+-- Example 4.1: a proved square identity cannot tell whether
 -- the source's intended least natural number exists.
 data MinimumCase : Set where
   minimumExists : MinimumCase
