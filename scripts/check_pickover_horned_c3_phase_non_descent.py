@@ -33,9 +33,9 @@ def powered_sign(N):
     raise AssertionError('precision schedule too short')
 
 def run():
-    # 90 digits suffices for the particular deliberately modest
-    # exponent probes below, NOT for the actual 9999! target.
-    scale=10**95
+    # 325-digit Machin enclosure: adequate for these selected finite
+    # exponents through 99^120; nowhere near the 9999! target.
+    scale=10**325
     lower,upper=interval_pi(scale)
     assert 3*scale<lower<upper<4*scale
     values={}
