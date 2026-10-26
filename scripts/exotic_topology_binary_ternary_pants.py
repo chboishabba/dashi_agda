@@ -5,7 +5,7 @@ Three-symbol code: 3->0, 6->10, 9->11. Finite prefix-code
 antichains at every depth are checked; Kraft dyadic masses sum to 1.
 This induces a Cantor-space homeomorphism by the standard infinite
 prefix decoding argument, but NOT a uniform-measure-preserving map.
-The actual 2D pair-of-pants realisation remains unproved.
+A literal FINITE orientable PL two-pants 1->3 cobordism is now built\nby exotic_topology_balanced_ternary_pl.py, with exact triangle/vertex-link\nand old-boundary dual-component audits. The INFINITE geometric end-space\nrealisation and kernel typechecks remain unproved.
 """
 from itertools import product
 from fractions import Fraction
