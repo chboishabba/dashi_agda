@@ -18,6 +18,7 @@ import exotic_topology_binary_ternary_pants as codec
 import exotic_topology_pl_surface_gluings as pl
 import exotic_topology_pl_frontier_lineage as lineage
 import exotic_topology_pl_complement_components as complement
+import exotic_topology_pl_stable_stars as stable
 import exotic_topology_balanced_ternary_pl as balanced
 import exotic_topology_cantor_cylinder_orientation as orientation
 import exotic_topology_braid_crosspr_discriminator as braid
@@ -304,5 +305,30 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertEqual(result["grid_non_sibling_pairs"], 36)
         self.assertFalse(result["cube_graph_equivalence_claim"])
         self.assertFalse(result["surface_homeomorphism_claim"])
+
+
+    def test_every_old_pl_vertex_becomes_interior_and_star_stabilises(self):
+        result = stable.audit(two_step_windows=2)
+        self.assertTrue(result["status"].startswith("PASS"))
+        self.assertTrue(result["same_object_triangle_transport"])
+        self.assertFalse(result["infinite_pl_colimit_proved"])
+        self.assertFalse(result["richards_end_space_homeomorphism_proved"])
+        self.assertFalse(result["kernel_verified"])
+        for family in ("cantor", "loch", "jacob", "balanced_ternary"):
+            self.assertEqual(len(result["families"][family]), 2)
+            self.assertTrue(all(
+                witness["all_old_vertices_interior_after_one_stage"] and
+                witness["all_old_vertex_stars_stable_after_two_stages"]
+                for witness in result["families"][family]
+            ))
+
+    def test_old_pl_star_validation_rejects_incorrect_embedding(self):
+        old, piece = stable.initial("cantor")
+        mid, _, old_to_mid = stable.transition(old, piece, "cantor")
+        later, _, mid_to_later = stable.transition(mid, piece, "cantor")
+        wrong = {v: 0 for v in old_to_mid}
+        with self.assertRaises(AssertionError):
+            stable.verify_stable_old_stars(
+                old, mid, later, wrong, mid_to_later)
 
 if __name__ == '__main__': unittest.main()
