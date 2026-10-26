@@ -376,7 +376,7 @@ cfactNova2026 = Typed.sourceReceipt
 reefPatrickMoore2021 : Typed.SourceReceipt
 reefPatrickMoore2021 = Typed.sourceReceipt
   "Carly Lubicz-Zaorski; Maxine Newlands; Theresa Petray"
-  "Climate change denialism and the Great Barrier Reef information network"
+  "Fuelling the climate and science denial machine on social media: Great Barrier Reef 2021 in danger recommendation"
   "online 2023; 2024 journal issue"
   "DOI 10.1177/09636625231202117"
   "Peer-reviewed 2021 network study attributes sharing of Peter Ridd's reef claim to Patrick Moore; it does not prove funding, command, or a copied scientific measurement."
@@ -516,3 +516,25 @@ canonicalConcentratedSourceAuditBoundary : ConcentratedSourceAuditBoundary
 canonicalConcentratedSourceAuditBoundary =
   concentratedSourceAuditBoundary
     true true false false false true true
+
+
+reefSteveMilloy2021 : Typed.SourceReceipt
+reefSteveMilloy2021 = Typed.sourceReceipt
+  "Carly Lubicz-Zaorski; Maxine Newlands; Theresa Petray"
+  "Fuelling the climate and science denial machine on social media: Great Barrier Reef 2021 in danger recommendation"
+  "first online 2023-10-26; journal issue 2024"
+  "Public Understanding of Science 33(3):270-289; DOI 10.1177/09636625231202117"
+  "Original multi-platform 2021 case study explicitly names Fox News contributors including Steve Milloy among later amplifiers; does not claim he used an API draft to produce the post."
+
+milloy1998ToReefMedia : Typed.TypedGenealogyEdge
+milloy1998ToReefMedia = Typed.typedGenealogyEdge
+  "E9-11" "Steve Milloy, original 1998 API plan participant" "Steve Milloy, 2021 reef-related Fox contributor"
+  Typed.personnelContinuity Typed.corroborated
+  (apiCongressional1998 ∷ reefSteveMilloy2021 ∷ [])
+  "Same named person explicitly occurs in 1998 API communications plan and 2021 reef study: longitudinal identity/role overlap, NOT documentary evidence of continuously coordinated scripts, funding or factual corroboration."
+
+milloyRepeatNotProofOfTwentyThreeYearPlan :
+  Typed.StrongHistoricalTransfer milloy1998ToReefMedia → ⊥
+milloyRepeatNotProofOfTwentyThreeYearPlan witness =
+  Typed.personnelContinuityIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
