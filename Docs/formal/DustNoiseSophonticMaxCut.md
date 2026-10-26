@@ -104,3 +104,12 @@ This is an **exact finite affine fixture**, checking causally correct reward ass
 Original source for the corrected loss definition and equations: https://qlabs.sh/research/dust/ , section 2.2. Original code: https://github.com/qlabs-eng/dust . Upstream methodology owns the equations, DASHI the independent toy instance and corrective crosswalk.
 
 **Remaining genuine maximal cut:** instantiate orthogonality over an imported finite-character carrier with a real kernel proof; replace supplied abstract sum-congruence with proved finite-sum functoriality; construct actual discrete probability law / Gaussian smoothing and variance bound on declared perturbation model; validate numerical coupling to real reference implementation; and graft into the Sophontic stacked branch before calling the integration complete. No CI requested.
+
+
+## 26 October finite proof core continuation
+
+`DASHI/Reasoning/DustNoiseFiniteProofCoreExact.agda` adds **source-written proofs** of bitwise XOR identity/associativity, a recursively defined bit-vector XOR/self-cancellation lemma, a two-probe cancellation algebraic theorem, and an explicit sign-flip involution. These are *prerequisite algebraic leaves*, **not** yet the general finite Walsh Gram identity, a nontrivial probability law or an estimator-validity theorem. A full Hadamard-frame construction remains open.
+
+An Agda executable was not available locally in this run, so the new source is **kernel-unverified**. No CI requested. A theorem's appearance in this source file is not a kernel proof receipt.
+
+Future required gates, in order: finite bit-vector enumeration; character orthogonality over actual ring scalars; concrete NoiseProbeSchedule witness; finite affine estimator reconstruction with proved finite-sum congruence; smoothing/expectation and variance theorem; actual source-code refinement for Dust and Noise; then Sophontic stacked-branch import and held-out empirical comparator. Avoid claim promotion.
