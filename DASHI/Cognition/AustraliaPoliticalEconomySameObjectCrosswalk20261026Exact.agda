@@ -72,6 +72,18 @@ bannonStatementNotIndependentPalmerDirection :
   Access.palmerBannonOperationalInfluenceEstablished oneNationAccessOwner ≡ false
 bannonStatementNotIndependentPalmerDirection = refl
 
+-- The parent Palmer owner includes an essential later correction:
+-- Palmer initially denied *any* contact through a spokesperson, but later
+-- described one unsolicited call, while denying campaign direction.
+-- Reported admission of contact != original phone record or creative brief.
+palmerLaterSingleCallSourceAttributed :
+  Palmer.directContactPaid Palmer.bannonPalmerReceipt ≡ true
+palmerLaterSingleCallSourceAttributed = refl
+
+palmerCampaignDirectionNotIndependentlyVerified :
+  Palmer.independentlyVerifiedInfluencePaid Palmer.bannonPalmerReceipt ≡ false
+palmerCampaignDirectionNotIndependentlyVerified = refl
+
 -- Source-status labels: do not silently promote indexed document to
 -- first-hand byte inspection, or a litigant/report to a judicial finding.
 data AustraliaSourceRole : Set where
@@ -133,7 +145,7 @@ bannonPalmerContrarySourceReceipt = australia-source-role-receipt
   sourceClaimAndContemporaneousDenial
   "Steve Bannon DOJ-released 2019 message to Epstein, followed by Clive Palmer's spokesperson denial as reported by ABC 2026-02-01"
   "https://www.abc.net.au/news/2026-02-01/palmer-denies-bannon-claim-of-election-campaign-influence/106293074"
-  "Original DOJ message contains Bannon's ASSERTION about AUD 60m ads, Palmer denies speaking with Bannon; reporting is a joined carrier of conflicting attributions, not verified operational direction."
+  "DOJ EFTA01615861 message contains Bannon's assertion about AUD 60m ads; an ABC 2026-02-01 spokesperson initially denied ANY conversation. In early Feb 2026 Palmer later acknowledged a brief unsolicited call while saying ads were already running, but Palmer denies that Bannon directed the campaign. Neither contact nor boast proves a delivery contract."
 
 -- Case-specific nonpromotion gates, not new general proof machinery.
 record AustralianPowerPipelineFrontier : Set where
@@ -196,6 +208,13 @@ australiaGlobalCommonProgrammeNotEstablished :
     canonicalAustralianPowerPipelineFrontier ≡ false
 australiaGlobalCommonProgrammeNotEstablished = refl
 
+
+palmerRevisedContactAttribution : AustraliaSourceRoleReceipt
+palmerRevisedContactAttribution = australia-source-role-receipt
+  sourceClaimAndContemporaneousDenial
+  "Clive Palmer first-person public account 2026-02-04 reported by The New Daily, following 2026-02-01 initial ABC spokesperson denial"
+  "https://www.thenewdaily.com.au/news/politics/australian-politics/2026/02/04/clive-palmer-steve-bannon-ads"
+  "Palmer later says one unsolicited late-night Bannon phone call happened AFTER his 2019 ads were running; contradicts the earlier no-contact claim while denying operational direction. Secondary interview rendering, not original call recording, telco log, or signed campaign creative order."
 
 hansonSpecificPensionerPolicyOriginalTranscript : AustraliaSourceRoleReceipt
 hansonSpecificPensionerPolicyOriginalTranscript = australia-source-role-receipt
