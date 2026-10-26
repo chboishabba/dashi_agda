@@ -141,3 +141,48 @@ For executable evidence, see the existing
 `scripts/exotic_topology_power_boundary_surgery_counterexample.py`,
 `scripts/exotic_topology_pl_stable_stars.py`
 and the two focused CI workflow files in Agda #1254 and Lean #86.
+
+
+## 27 October integration receipt and latest parent prior art
+
+At this cut, original twenty-space topology PR #1254 is stacked on
+horned-sphere #1244, not against an arbitrary older `master`.
+The inspected #1244 head
+`e4567d7f2402c0e392d2d74fa9da0581d8fa168f` was
+integrated by NONDESTRUCTIVE merge
+`302502a746bd85b3d806a6c90956d9255cdc9092`,
+with six disjoint parent source paths and no force push.
+The parent now owns
+`Docs/topology/AlexanderHornedC3OriginalInquiryRoadmapPhaseDeliverables20261027.md`,
+`ThreeArmRadiusConnectedAssembly.lean`,
+`ThreeArmRadiusConnectedHatcherTransport.lean`, and
+`alexander_horned_c3_radius_overlap_witness.py`.
+The child consumes that original rational-overlap script
+rather than vendoring its results: each P_i=13e_i
+is in the candidate C ∩ S_i, with squared
+own-centre distance 16, other-centre 250 and
+basepoint clearance 921. This supplies an
+explicit nonempty intersection input but
+NOT the required central fundamental-group
+certificate, satellite path-connectedness,
+source Hatcher exterior-group same-object map,
+or an actual wild embedding.
+
+**Proof/tooling receipt at this head:** 43 focused
+Python test methods, 11 Agda focused kernel module
+targets, and the companion Lean #86 native source
+build specification. No successful exact-head
+workflow execution exists in the inspected connector
+state and Agda/Lean binaries were absent from the
+available local container. The executed independent
+local triangulation receipts are mathematical
+finite checks, not source-blob/Agda/Lean kernel receipts.
+
+**Original research priority remains** the geometric
+realisation and Richards end-space comparison of the
+already-built binary/ternary PL exhaustions. Power's
+rigidity result and the radius-cut wild-geometry
+transport are important but orthogonal consumers;
+neither can substitute for the original
+three-surface classification or close all twenty
+source-specific hallmark problems.
