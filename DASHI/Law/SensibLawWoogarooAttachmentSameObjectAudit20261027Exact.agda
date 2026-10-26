@@ -10,6 +10,7 @@ open import Data.Empty using (⊥)
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Law.SensibLawWoogarooPostApprovalPoliticalGasBenefit20261027Exact as Post
 import DASHI.Law.SensibLawWoogarooEPBC8575CumulativeImpactSufficiencyExact as Cumulative
+import DASHI.Law.SensibLawWoogarooPreservationSourceAtlasExact as Atlas
 
 -- User's attached 2026 Google AI-mode transcript is a LEAD LOCATOR only.
 -- Named original publisher, dated original, signed government original,
@@ -37,6 +38,10 @@ data Edge : Set where
   dalbyProposedGasWaterByproduct : Edge
   anthropicFutureLease : Edge
   santosNameProvenance : Edge
+  village2AreaDevelopmentApproval : Edge
+  village3AreaDevelopmentApproval : Edge
+  village23PrecinctApproval : Edge
+  2023OwnerConsentIndex : Edge
 
 data CaseScope : Set where
   springviewPlanning2016 : CaseScope
@@ -47,6 +52,10 @@ data CaseScope : Set where
   dalbyTownNetwork : CaseScope
   westernDownsProposal2026 : CaseScope
   corporateHistory1954 : CaseScope
+  springviewPrecinct2024 : CaseScope
+  springviewVillage2ADP2024 : CaseScope
+  springviewVillage3ADP2025 : CaseScope
+  springviewConsentListing2023 : CaseScope
 
 data Payment : Set where
   historicalOriginalPaid : Payment
@@ -176,6 +185,39 @@ santosCorporateHistory = Source.mkNoDOISource
   "Santos acronym = South Australia Northern Territory Oil Search. Santo Santoro is a different person and not owner of Santos by nominal similarity; historical SAS Group Santos client claim is separately reported by Michael West Media and not established by name."
   Source.publicAttribution
 
+councilVillage2Approval : Source.AttributedSource
+councilVillage2Approval = Source.mkNoDOISource
+  "Ipswich City Council"
+  "4272/2020/ADP — Village 2 area development plan"
+  "Original Development.i application decision record"
+  "28 June 2024"
+  "https://developmenti.ipswich.qld.gov.au/Home/ApplicationDetailsView?appNo=4272%2F2020%2FADP&do=pdf&type=plan_development_apps"
+  Source.governmentSource
+  "Approved area development plan with maximum 856 proposed residential lots, other reserve/park lots; same three Springview locality addresses as 2024 precinct plan. This is an existing Queensland approval but not evidence that every condition or federal EPBC obligation is discharged."
+  Source.publicAttribution
+
+councilVillage3Approval : Source.AttributedSource
+councilVillage3Approval = Source.mkNoDOISource
+  "Ipswich City Council"
+  "5547/2020/ADP — Village 3 area development plan"
+  "Ipswich Development.i document-index and council delegated-decision record"
+  "14 May 2025"
+  "https://edoc.ipswich.qld.gov.au/objective/?env=iccecm&id=1029140&plat=pwy"
+  Source.governmentSource
+  "Village 3 ADP approved on 14 May 2025; maximum 982 proposed residential lots. The council index identifies original notice, statement of reasons, SARA conditions, final plans and infrastructure charges, but the PDFs have not been individually inspected. The number is 5547/2020/ADP, NOT the 547/2020/ADP typo in a campaign submission."
+  Source.publicAttribution
+
+councilPrecinctConsentList : Source.AttributedSource
+councilPrecinctConsentList = Source.mkNoDOISource
+  "Ipswich City Council"
+  "6243/2023/LAP document index: precinct decision and named consent files"
+  "Ipswich council electronic document register"
+  "21 March 2024"
+  "https://edoc.ipswich.qld.gov.au/objective/?env=iccecm&id=1596235&plat=pwy"
+  Source.governmentSource
+  "Original document index lists 21 March 2024 precinct-plan decision and June 2023 distinct files named land owner's consent Cherish Enterprises and submission consent Stockland Development. A file LABEL is not execution verification, registered title, beneficial control or a current ownership certificate; underlying signed documents remain uninspected."
+  Source.publicAttribution
+
 record ScopedClaim : Set where
   constructor bounded-claim
   field
@@ -268,6 +310,34 @@ anthropicConditional = bounded-claim
   "Executed operative lease conditions, FIRB status, construction, commissioning and power purchases"
   false refl
 
+village23PrecinctRecord : ScopedClaim
+village23PrecinctRecord = bounded-claim
+  village23PrecinctApproval springviewPrecinct2024 Atlas.springviewDevelopmentIRecord governmentFirstParty historicalOriginalPaid
+  "Ipswich Council approved 6243/2023/LAP Springview Villages 2/3 precinct plan in March 2024; this alone did not authorise site works or replace separate ADPs."
+  "Signed precinct-plan conditions, current boundaries and comparison with separate ADP/village decisions."
+  false refl
+
+village2ADPRecord : ScopedClaim
+village2ADPRecord = bounded-claim
+  village2AreaDevelopmentApproval springviewVillage2ADP2024 councilVillage2Approval governmentFirstParty historicalOriginalPaid
+  "4272/2020/ADP was approved 28 June 2024, Village 2 up to 856 proposed residential lots."
+  "Read original 2024 decision conditions, approved plan/same-parcel mapping and 2026 operative compliance."
+  false refl
+
+village3ADPRecord : ScopedClaim
+village3ADPRecord = bounded-claim
+  village3AreaDevelopmentApproval springviewVillage3ADP2025 councilVillage3Approval governmentFirstParty historicalOriginalPaid
+  "5547/2020/ADP was approved 14 May 2025, Village 3 up to 982 proposed residential lots."
+  "Read 2025 signed notice/reasons/SARA conditions/approved plan and match later variations and EPBC impact footprint."
+  false refl
+
+separateConsentDocumentsOnlyIndexed : ScopedClaim
+separateConsentDocumentsOnlyIndexed = bounded-claim
+  2023OwnerConsentIndex springviewConsentListing2023 councilPrecinctConsentList governmentFirstParty originalSameObjectOpen
+  "Council original document index names 2023 Cherish Land Owner Consent and separate Stockland Submission Consent documents."
+  "Acquire and inspect both actual signed consent faces plus 2026 title and beneficial-control history; document title itself cannot prove owner-of-record in 2026."
+  false refl
+
 santosNameSeparation : ScopedClaim
 santosNameSeparation = bounded-claim
   santosNameProvenance corporateHistory1954 santosCorporateHistory commercialFirstParty historicalOriginalPaid
@@ -278,6 +348,10 @@ santosNameSeparation = bounded-claim
 attachmentBoundedClaims : List ScopedClaim
 attachmentBoundedClaims =
   cherish2018Planning ∷
+  village23PrecinctRecord ∷
+  village2ADPRecord ∷
+  village3ADPRecord ∷
+  separateConsentDocumentsOnlyIndexed ∷
   aveoInterimOnly ∷
   qldHealthContact ∷
   qldTreasuryContact ∷
@@ -300,6 +374,10 @@ data DalbyMunicipalGasCustomersMeanDataCentreGasOfftake : Set where
 data DalbyEPBCReferralMeansApprovedOperationalDataCentre : Set where
 data ProposedProcessedGasWaterMeansPaidOrDeliveredSupply : Set where
 data SantosSantoroNameOverlapMeansCompanyOwnership : Set where
+data ApprovedVillage2And3ADPMeansNoRemainingConditions : Set where
+data PrecinctPlanEqualsAreaDevelopmentPlan : Set where
+data OwnerConsentFileLabelEqualsCurrentRegisteredTitle : Set where
+data Village3DA547EqualsVillage3DA5547 : Set where
 
 qcaVetoWrongType : QCA2018MeansBlanketDeveloperVetoDestroyed → ⊥
 qcaVetoWrongType ()
@@ -330,3 +408,16 @@ waterProposalNotPayment ()
 
 santosNameNotSantoroOwnership : SantosSantoroNameOverlapMeansCompanyOwnership → ⊥
 santosNameNotSantoroOwnership ()
+
+adpApprovalNotConditionDischarge :
+  ApprovedVillage2And3ADPMeansNoRemainingConditions → ⊥
+adpApprovalNotConditionDischarge ()
+
+precinctNotADP : PrecinctPlanEqualsAreaDevelopmentPlan → ⊥
+precinctNotADP ()
+
+consentLabelNotTitle : OwnerConsentFileLabelEqualsCurrentRegisteredTitle → ⊥
+consentLabelNotTitle ()
+
+village3NumberNotTypo : Village3DA547EqualsVillage3DA5547 → ⊥
+village3NumberNotTypo ()
