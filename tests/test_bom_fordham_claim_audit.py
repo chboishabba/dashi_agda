@@ -1290,3 +1290,64 @@ def test_september_distinct_original_document_not_same_object_id():
     assert rows["G39"]["evidence_objects"] != rows["G40"]["evidence_objects"]
     assert rows["G39"]["locator"] != rows["G40"]["locator"]
     assert rows["G39"]["date"] < rows["G40"]["date"]
+
+
+
+def test_model_alias_source_counter_not_independent_population():
+    """Original-model producer ≠ number of paraphrases, documents, or replications."""
+    from scripts.climate_claim_origin_audit import (
+        canonical_object, read_ledger, observed_objects, audit,
+    )
+    rows = read_ledger()
+    report = audit(rows)
+    assert report["sampled_appearances"] == 53
+    assert report["sampled_claim_families"] == 22
+    assert report["status"] == "selected-source-provenance-only"
+    assert "No national source-concentration estimate" in report["warning"]
+    assert canonical_object("FUTURE_ADL_17B_2026") == "ADL_2026_ORIGINAL"
+    assert canonical_object("WOODMAC_AEP_2026") == "WOODMAC_ORIGINAL_2026"
+    assert canonical_object("HANSARD_GAS_LEVY_14OCT2026") != "ADL_2026_ORIGINAL"
+    byid = {r["receipt_id"]: r for r in rows}
+    assert observed_objects(byid["G05"]) == observed_objects(byid["G24"])
+    assert observed_objects(byid["G10"]) == observed_objects(byid["G32"])
+    assert observed_objects(byid["G39"]) != observed_objects(byid["G40"])
+    assert observed_objects(byid["G43"]) != observed_objects(byid["G44"])
+    m = report["family_audit"]["GAS_TAX_17B_ANNUAL"]
+    assert m["sampled_appearances"] == 8
+    assert m["named_estimator_model_roots_not_statistical_independence"] == [
+        "TAI_TAX_17B_2025", "ADL_2026_ORIGINAL"
+    ]
+    assert "ADL_2026_ORIGINAL" in m["cited_object_ids"]
+    assert "FUTURE_ADL_17B_2026" not in m["cited_object_ids"]
+    other = report["family_audit"]["GAS_INVESTMENT_TAX_83PC"]
+    assert other["named_estimator_model_roots_not_statistical_independence"] == [
+        "WOODMAC_ORIGINAL_2026"
+    ]
+
+
+def test_original_53_row_sample_cannot_certify_national_concentration_agda():
+    """Finite two-world nonfactorability reuses the existing Ibrahim machinery."""
+    owner = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    regression = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    assert "samePurposive53AppearanceLedger" in owner
+    assert "selectedCorpusCannotDetermineNationalOriginConcentration" in owner
+    assert "sameSelectedLedgerDifferentNationalPopulations" in owner
+    assert "INF.nonFactorabilityWitness\n    fewAdditionalOriginals manyAdditionalOriginals refl (λ ())" in owner
+    assert "selectedClimateCorpusIsNotNationalSourceCensus" in regression
+    assert "NationalSourcePopulationCompletion" in owner
+    assert "NOT a statistic about Australian national climate denial" in owner
+
+
+def test_origin_counter_rejects_forced_postdated_model_attribution():
+    """An earlier Greens April statement cannot be hard-attributed to later release."""
+    from scripts.climate_claim_origin_audit import read_ledger, audit
+    rows = read_ledger()
+    clone = [dict(row) for row in rows]
+    row = next(row for row in clone if row["receipt_id"] == "G06")
+    row["relation_to_claim"] = "explicit_source_transfer"
+    try:
+        audit(clone)
+    except ValueError as error:
+        assert "April 14 Greens" in str(error)
+    else:
+        raise AssertionError("Unwitnessed cross-date model transfer promoted")
