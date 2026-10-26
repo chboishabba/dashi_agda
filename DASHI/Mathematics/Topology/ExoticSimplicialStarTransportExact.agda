@@ -157,3 +157,28 @@ noNewTrianglesAllLaterDepths chain n (suc k) v later hi incidence
 -- incident triangles. The remaining obligation is to build
 -- this StarChain from the concrete oriented PL gluing source,
 -- then construct the genuine topological infinite union.
+
+
+-- The exact old-stage K_n -> K_(n+1) collar case:
+-- from K_(n+1) onward, any future triangle touching an
+-- image of an OLD vertex already existed at that first
+-- interior stage. This is independent of the number of
+-- pants or trit slots, provided the same StarChain interface
+-- is concretely supplied.
+oldStageStarHasNoLaterNewFaces :
+  (chain : StarChain) (n k : Nat)
+  (v : Vertex chain n)
+  (later : Triangle chain (laterStage (suc n) k)) →
+  incident chain (laterStage (suc n) k)
+    (futureVertex chain (suc n) k (nextVertex chain n v))
+    later →
+  Σ (Triangle chain (suc n))
+    (λ firstInteriorFace →
+      (futureTriangle chain (suc n) k firstInteriorFace ≡ later)
+      × incident chain (suc n) (nextVertex chain n v)
+          firstInteriorFace)
+oldStageStarHasNoLaterNewFaces chain n k v later incidence =
+  noNewTrianglesAllLaterDepths
+    chain (suc n) k (nextVertex chain n v) later
+    (oldVertexInteriorAfterCollar chain n v)
+    incidence
