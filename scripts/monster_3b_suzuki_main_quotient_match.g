@@ -173,6 +173,19 @@ if Length(qKernelCandidates) <> 1 then
 fi;
 qKernel3 := qKernelCandidates[1];
 qKernelOuterClass := mainToOuter[qKernel3];
+# INDEPENDENT PUBLISHED SOURCE VERIFICATION, not a new convention:
+# Breuer--Magaard--Wilson, "Some steps in the verification of the
+# ordinary character table of the Monster group" (12 Dec 2024),
+# §6: H/[1,19] fails restricted-196883 character decomposition
+# (95 candidates, rank88, SolutionMat = fail). H/[1,20] has a
+# decomposition and is equivalent to the stored MN3B table.
+# https://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/htm/ctblm.htm
+# Original Barraclough--Wilson (2007) quotient source remains primary.
+# The current main-table identity fixes the ORIGINAL class positions;
+# do not apply these integers to arbitrarily permuted class tables.
+if qKernel3 <> 20 or qKernelOuterClass <> 6 then
+  Error("main->MN3B quotient disagrees with original BW and BMW24 class20 selection");
+fi;
 outerOrders := OrdersClassRepresentatives(outer);
 if outerOrders[qKernelOuterClass] <> 3 then
   Error("qGtoN3B kernel class does not project to an order-three 6.Suz.2 class");
