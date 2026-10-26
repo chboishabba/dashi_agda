@@ -41,3 +41,38 @@ toCube (upperSheet x y) =
 -- excluding exactly Cube.origin and case-splitting the middle sheet.
 -- The six outer-centre signs / antipodal seam relations must not
 -- be identified by a zero-stalk collapse.
+
+-- A partial inverse on all 27 native points. Failure occurs only
+-- at the global origin. This preserves the absent-site residual.
+open import Agda.Builtin.Maybe using (Maybe; just; nothing)
+
+fromCube : Cube.Ternary27Point → Maybe Punctured27Chart
+fromCube (Cube.ternary27Point x y SSP.sspNegOne) =
+  just (lowerSheet x y)
+fromCube (Cube.ternary27Point x y SSP.sspPosOne) =
+  just (upperSheet x y)
+fromCube (Cube.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspZero) = just (middleNonzero P9.negativeEqualDiagonal)
+fromCube (Cube.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspZero) = just (middleNonzero P9.negativeFirstAxis)
+fromCube (Cube.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspZero) = just (middleNonzero P9.negativeOppositeDiagonal)
+fromCube (Cube.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspZero) = just (middleNonzero P9.negativeSecondAxis)
+fromCube (Cube.ternary27Point SSP.sspZero SSP.sspZero SSP.sspZero) = nothing
+fromCube (Cube.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspZero) = just (middleNonzero P9.positiveSecondAxis)
+fromCube (Cube.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspZero) = just (middleNonzero P9.positiveOppositeDiagonal)
+fromCube (Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero) = just (middleNonzero P9.positiveFirstAxis)
+fromCube (Cube.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspZero) = just (middleNonzero P9.positiveEqualDiagonal)
+
+fromToCube : (p : Punctured27Chart) →
+  fromCube (toCube p) ≡ just p
+fromToCube (middleNonzero P9.negativeEqualDiagonal) = refl
+fromToCube (middleNonzero P9.negativeFirstAxis) = refl
+fromToCube (middleNonzero P9.negativeOppositeDiagonal) = refl
+fromToCube (middleNonzero P9.negativeSecondAxis) = refl
+fromToCube (middleNonzero P9.positiveSecondAxis) = refl
+fromToCube (middleNonzero P9.positiveOppositeDiagonal) = refl
+fromToCube (middleNonzero P9.positiveFirstAxis) = refl
+fromToCube (middleNonzero P9.positiveEqualDiagonal) = refl
+fromToCube (lowerSheet x y) = refl
+fromToCube (upperSheet x y) = refl
+
+originExcluded : fromCube Cube.origin ≡ nothing
+originExcluded = refl
