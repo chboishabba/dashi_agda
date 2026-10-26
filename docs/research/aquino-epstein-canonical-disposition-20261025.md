@@ -1,5 +1,8 @@
 # Canonical disposition — Aquino / Maxwell / Epstein / CA case
 
+> **26 OCTOBER 2026 CURRENT MAX-CUT (supersedes research-acquisition rankings below):** [Exact case-name no-go, revisable source-world, cross-PR donor assessment and seven-object Pareto frontier](AquinoEpsteinCrossPRRevisablePareto20261026.md). [Machine-readable attributed evidence world](../receipts/AquinoEpsteinRevisableSourceWorld20261026.json). Reuses original canonical nonfactorability rather than importing #1266; shares *data shape* but not runtime with unmerged #1268; does not import #1200's unmerged repository-intelligence router. No new case-wide command, no original Bannon/FTC personal-liability disposition, no 2015 OCDETF final disposition, no 2016 Black bank-origin classification. Sibling original authorship and institutional permissions preserved. CI and Agda kernel remain separately unclaimed; source acquisition stays frozen absent original decision-changing objects.
+
+
 **Date:** 25 October 2026 (Brisbane). **Status:** **STOP broad acquisition; CERTIFY and DISPOSE**. PR [#1245](https://github.com/chboishabba/dashi_agda/pull/1245), stacked on [#1131](https://github.com/chboishabba/dashi_agda/pull/1131). This is the **authoritative current state** for the case; the longer dated source and round notes remain a historical provenance archive, not independent current acceptance gates.
 
 ## What was actually established
