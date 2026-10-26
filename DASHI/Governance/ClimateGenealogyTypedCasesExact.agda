@@ -32,6 +32,8 @@ module DASHI.Governance.ClimateGenealogyTypedCasesExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Governance.TypedGenealogyEdgeExact as Typed
+import DASHI.Core.IntersectionalNonFactorability as INF
+open import Agda.Builtin.Equality using (refl)
 
 seitzPBS : Typed.SourceReceipt
 seitzPBS = Typed.sourceReceipt
@@ -742,3 +744,167 @@ policyAccessIsNotCompletedMethodTransfer :
 policyAccessIsNotCompletedMethodTransfer witness =
   Typed.recommendationExposureIsNotDirectMethodTransfer
     (Typed.relationIsTransfer witness)
+
+
+------------------------------------------------------------------------
+-- Cross-period rhetoric and 2026 AUS gas-policy recycled-statistic consumer.
+-- Distinct first-party author/producer objects are still separate even when
+-- the exact same rounded headline appears. This is not a national census.
+------------------------------------------------------------------------
+
+apiCharltonPromotedPoll1998 : Typed.SourceReceipt
+apiCharltonPromotedPoll1998 = Typed.sourceReceipt
+  "American Petroleum Institute team citing Charlton Research survey"
+  "1998 climate communications plan: 1100 informed respondents and 58 percent"
+  "1998-04-03"
+  "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm"
+  "The API plan says 58 percent were more likely to oppose Kyoto after an uncertainty-framed prompt; neither unprompted national opposition nor the underlying survey questionnaire and responses are acquired."
+
+australiaInstitute17B2025 : Typed.SourceReceipt
+australiaInstitute17B2025 = Typed.sourceReceipt
+  "The Australia Institute / Mark Ogge"
+  "There's a simple way to solve Australia's gas crisis and cut energy bills"
+  "2025-12-09"
+  "https://australiainstitute.org.au/post/theres-a-simple-way-to-solve-australias-gas-crisis-and-cut-energy-bills/"
+  "First-party institute projection that a 25 percent export levy could raise around AUD17b annually. Model scenario/behavioural assumptions not independently recomputed."
+
+futureGroupArthurDLittle2026 : Typed.SourceReceipt
+futureGroupArthurDLittle2026 = Typed.sourceReceipt
+  "Future Group / commissioned Arthur D. Little modelling"
+  "Why Australia should act now on a gas export levy"
+  "2026-04-23"
+  "https://www.futuregroup.com.au/stories/why-australia-should-act-now-on-a-gas-export-levy"
+  "First-party commissioning body reports up to AUD17b first year revenues and up to 15 percent wholesale electricity price reduction. Separately named consultant not proof of independent modelling premises."
+
+pocockGas2026 : Typed.SourceReceipt
+pocockGas2026 = Typed.sourceReceipt
+  "Senator David Pocock, separate Senate inquiry comments"
+  "A fair return: The case for a 25 per cent gas export tax"
+  "2026-05-07"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Taxation_of_Gas_Resources/TaxationofGasResources/Report/Additional_Comments_from_Senator_David_Pocock"
+  "Paragraph 1.28 credits Future Group Arthur D. Little and separately Australia Institute 17b estimates; same rounded conclusion is not evidence methods, base prices or forecasts were statistically independent."
+
+taiGasRoyalty2024 : Typed.SourceReceipt
+taiGasRoyalty2024 = Typed.sourceReceipt
+  "The Australia Institute"
+  "Gas exports: 56 percent given to corporations royalty-free"
+  "2024-05-30"
+  "https://australiainstitute.org.au/post/gas-exports-56-given-to-corporations-royalty-free/"
+  "Original research organisation estimates 56 percent of gas exported paid no royalties, not that every project paid no company tax or that share applied to all extracted gas."
+
+aepWoodMackenzie2026 : Typed.SourceReceipt
+aepWoodMackenzie2026 = Typed.sourceReceipt
+  "Australian Energy Producers commissioning Wood Mackenzie"
+  "Gas tax proposal would make Australia uninvestable"
+  "2026-04-12"
+  "https://energyproducers.au/news/gas-tax-proposal-would-make-australia-uninvestable-and-threaten-future-energy-supply-report-finds"
+  "First-party client release reports effective hypothetical project burden over 80 percent, project-value reduction up to 94 percent. Neither is an observed Australian national average tax burden."
+
+nightlyJohnsonGas2026 : Typed.SourceReceipt
+nightlyJohnsonGas2026 = Typed.sourceReceipt
+  "Stephen Johnson, The Nightly original journalist"
+  "Why a 25 per cent tax on gas exports would hurt everyday Australians"
+  "2026-04-22"
+  "https://thenightly.com.au/politics/australia/why-a-25-per-cent-tax-on-gas-exports-would-hurt-everyday-australians-c-22175435"
+  "Named original 2026 news story reports Janette Hewson QRC warning about diminished investment and includes $17b advocacy estimate; it does not generate either competing econometric model."
+
+hancockJohnsonReprint2026 : Typed.SourceReceipt
+hancockJohnsonReprint2026 = Typed.sourceReceipt
+  "Hancock Energy, article host crediting Stephen Johnson and The Nightly"
+  "Gas tax would burn everyday Australians"
+  "2026-04-22"
+  "https://www.hancockenergy.com.au/gas-tax-would-burn-everyday-australians/"
+  "First-party corporate republishing credits The Nightly and its author. This is an explicit source reprint not another empirical study, not proof a funder supplied journalist script."
+
+iceToAPIUncertaintyStrategicRecurrence : Typed.TypedGenealogyEdge
+iceToAPIUncertaintyStrategicRecurrence = Typed.typedGenealogyEdge
+  "RC-01" "ICE 1991 warming as theory-not-fact campaign plan" "API 1998 uncertainty-in-public-discourse campaign plan"
+  Typed.methodRecurrence Typed.primary
+  (ice1991TestCampaign ∷ apiCongressional1998 ∷ [])
+  "Original archived ICE plan and Congressional original API plan exhibit recurring uncertainty-oriented strategies. Exact historical ICE to API drafting transfer is not established."
+
+tai17BRestatedByPocock2026 : Typed.TypedGenealogyEdge
+tai17BRestatedByPocock2026 = Typed.typedGenealogyEdge
+  "RC-02" "Australia Institute original AUD17b annual levy estimate" "David Pocock 2026 Senate comments"
+  Typed.reportedStatisticRestatement Typed.primary
+  (australiaInstitute17B2025 ∷ pocockGas2026 ∷ [])
+  "Senator explicitly names original institute when repeating the numeric conclusion. His speech is not an additional independent model."
+
+futureGroup17BRestatedByPocock2026 : Typed.TypedGenealogyEdge
+futureGroup17BRestatedByPocock2026 = Typed.typedGenealogyEdge
+  "RC-03" "Arthur D. Little commissioned by Future Group" "David Pocock 2026 Senate comments"
+  Typed.reportedStatisticRestatement Typed.primary
+  (futureGroupArthurDLittle2026 ∷ pocockGas2026 ∷ [])
+  "Parliament separately credits named consultant with a matching rounded number; separate authorship does not imply statistically independent scenario assumptions."
+
+tai56PcRoyaltyRestatedByPocock2026 : Typed.TypedGenealogyEdge
+tai56PcRoyaltyRestatedByPocock2026 = Typed.typedGenealogyEdge
+  "RC-04" "Australia Institute 56 percent no-royalty research" "David Pocock Senate comments"
+  Typed.reportedStatisticRestatement Typed.primary
+  (taiGasRoyalty2024 ∷ pocockGas2026 ∷ [])
+  "Pocock cites Australia Institute analysis. Relative share of LNG exports attracting no royalties is not a claim that all LNG receives no Australian company tax."
+
+nightlyToHancockExplicitReprint2026 : Typed.TypedGenealogyEdge
+nightlyToHancockExplicitReprint2026 = Typed.typedGenealogyEdge
+  "RC-05" "Stephen Johnson The Nightly article" "Hancock Energy host with byline credit"
+  Typed.explicitAttributedRepublication Typed.primary
+  (nightlyJohnsonGas2026 ∷ hancockJohnsonReprint2026 ∷ [])
+  "Identifiable journalism text and author are promoted on a corporate site: positive republication, not a fresh independent reporter or evidence of purchased editorial control."
+
+aepWoodMacStatisticsNotNationalTaxRate : Typed.TypedGenealogyEdge
+aepWoodMacStatisticsNotNationalTaxRate = Typed.typedGenealogyEdge
+  "RC-06" "Wood Mackenzie model commissioned by Australian Energy Producers" "AEP reported high-end 80-plus-percent tax and 94-percent value loss"
+  Typed.reportedStatisticRestatement Typed.primary
+  (aepWoodMackenzie2026 ∷ [])
+  "Numeric statements are client-reported outputs for a model project and price assumptions, not already-realised national tax payments."
+
+historicalUncertaintyStrategyIsNotDirectTransfer :
+  Typed.StrongHistoricalTransfer iceToAPIUncertaintyStrategicRecurrence → ⊥
+historicalUncertaintyStrategyIsNotDirectTransfer witness =
+  Typed.methodRecurrenceIsNotTransferRelation
+    (Typed.relationIsTransfer witness)
+
+hancockReprintIsNotIndependentMethodTransmission :
+  Typed.StrongHistoricalTransfer nightlyToHancockExplicitReprint2026 → ⊥
+hancockReprintIsNotIndependentMethodTransmission witness =
+  Typed.articleRepublicationIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+sameHeadlineIsNotMethodTransmission :
+  Typed.StrongHistoricalTransfer tai17BRestatedByPocock2026 → ⊥
+sameHeadlineIsNotMethodTransmission witness =
+  Typed.headlineNumberRestatementIsNotHistoricalMethodTransfer
+    (Typed.relationIsTransfer witness)
+
+-- TWO different possible source ancestral worlds have the same visible
+-- '$17b/year' policy headline. Inferring the number of independently
+-- computed models from the public headline alone is therefore impossible.
+-- The constructor 'twoNamedAnalyses' certifies two named authors, NOT
+-- statistical independence of their underlying data and assumptions.
+data Same17BPublicationCase : Set where
+  oneNamedAnalysis twoNamedAnalyses : Same17BPublicationCase
+
+data VisibleAnnual17BClaim : Set where
+  annual17BHeadline : VisibleAnnual17BClaim
+
+data NumberOfNamedModelSources : Set where
+  oneNamedEstimator twoNamedEstimators : NumberOfNamedModelSources
+
+same17BPrinted : Same17BPublicationCase → VisibleAnnual17BClaim
+same17BPrinted _ = annual17BHeadline
+
+namedModelSourceCount : Same17BPublicationCase → NumberOfNamedModelSources
+namedModelSourceCount oneNamedAnalysis = oneNamedEstimator
+namedModelSourceCount twoNamedAnalyses = twoNamedEstimators
+
+sameHeadlineDistinctGenealogies :
+  INF.NonFactorabilityWitness same17BPrinted namedModelSourceCount
+sameHeadlineDistinctGenealogies =
+  INF.nonFactorabilityWitness
+    oneNamedAnalysis twoNamedAnalyses refl (λ ())
+
+annual17BHeadlineCannotRevealModelAncestry :
+  INF.FactorsThrough same17BPrinted namedModelSourceCount → ⊥
+annual17BHeadlineCannotRevealModelAncestry =
+  INF.witnessRulesOutEveryFlatFactorisation
+    sameHeadlineDistinctGenealogies
