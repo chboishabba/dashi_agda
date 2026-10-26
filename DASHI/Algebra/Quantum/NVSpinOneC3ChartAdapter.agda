@@ -12,6 +12,7 @@ import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
 import DASHI.Core.ThreeChannelC3EquivarianceGateExact as Gate
 import DASHI.Algebra.Quantum.NVSpinOneMulticoreAdapter as NV
 import DASHI.Moonshine.C3FourierConjugationExact as Fourier
+import DASHI.Algebra.TriadicDepthOneCharacters as Phases
 
 -- These are the *labels* of a chosen ordered spin-one basis, not the
 -- physical spin eigenstates themselves.
@@ -35,7 +36,7 @@ levelC3Action = record
 
 -- An exact bridge from finite C3 labels to the symbolic cyclotomic
 -- phases already formalised in the repository.
-labelPhase : SpinOneLevelLabel → Fourier.C3.C3Phase
+labelPhase : SpinOneLevelLabel → Phases.C3Phase
 labelPhase C3.c0 = Fourier.one
 labelPhase C3.c1 = Fourier.zeta
 labelPhase C3.c2 = Fourier.zetaSquared
