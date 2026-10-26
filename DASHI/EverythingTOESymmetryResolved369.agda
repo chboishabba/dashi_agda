@@ -2,6 +2,7 @@ module DASHI.EverythingTOESymmetryResolved369 where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (false)
+open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- TOE owner graph. All source proofs are imported, never copied.
@@ -19,6 +20,7 @@ import DASHI.Unified.GRQuantumProofTermRegression
 -- exactly as on prior independent TOE PR #1278.
 import DASHI.Governance.FormalisationGovernanceCapstoneExact as Governance
 import DASHI.Core.KernelSemanticClosureBoundaryExact as Closure
+import DASHI.Core.FormalClaimTransportGeometryExact as Transport
 
 toeKernelProofDoesNotEstablishSourceSemantics :
   Closure.semanticallyExhaustive
@@ -48,8 +50,8 @@ import DASHI.Physics.YangMills.CompactLieInnerC3Exact as CompactLie
 -- that the chosen quotient identifies.
 toeSelectedVOAActorCannotRecoverSource :
   (source : VOAKernel.NonfaithfulVOAGroupActor) →
-  DASHI.Core.FormalClaimTransportGeometryExact.ClaimTransport
-    (VOAKernel.actorOf source) (λ x → x) → DASHI.Core.Prelude.⊥
+  Transport.ClaimTransport
+    (VOAKernel.actorOf source) (λ x → x) → ⊥
 toeSelectedVOAActorCannotRecoverSource =
   VOAKernel.cannotRecoverExteriorGroupFromSelectedVOAActor
 
