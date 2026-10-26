@@ -655,7 +655,7 @@ pandoraRetrospectiveAccountTension = boundedLineageEdge
   "DARPA director in 1977 denied awareness of DoD work probing microwave mind-control possibilities; Cesaro 1967 recorded recommendation to study possible weapon applications to behavioural effects"
   "The difference between a 1967 recommendation and a 1977 claim about actual sponsored projects prevents inferring a strict factual contradiction, deliberate deception, or operational capability"
 
--- 23 distinct dated publication/source objects in this consumer's current
+-- 27 distinct dated publication/source objects in this consumer's current
 -- source atlas. Count is documentary, not independent scientific studies.
 sourceCarrierCountIsTwentySeven :
   Source.sourceCount (Source.sources sourceAtlas) ≡ 27
@@ -828,3 +828,64 @@ industrialLowFrequencySound = airbornePressure
 modulationDoesNotMakeAirSound :
   lowFrequencyModulatedRF ≡ industrialLowFrequencySound → ⊥
 modulationDoesNotMakeAirSound ()
+
+
+-- 2026-10-26 source-root cut: visually inspected US Senate 1979 committee
+-- print pp. 10-11 (PDF pp. 16-17), which summarizes Kubis's 4 Dec 1969
+-- review and the Jan 1970 SAC. This is a secondary *historical report*
+-- of the same WRAIR primate research, not a fresh blinded replication:
+-- https://nsarchive.gwu.edu/sites/default/files/documents/rhwvuj-tzy4b/15.pdf
+-- The Senate's stated conclusion is that the original primate study did NOT
+-- supply an acceptable answer to its causal question, due to contaminated
+-- controls, malfunctioning apparatus and variable procedure. This is NOT
+-- proof of a nonzero effect, a well-powered zero effect, or a modern device.
+-- It coexists with recorded later trials failing to confirm an early report.
+
+data PrimateInferenceStanding : Set where
+  earlyPerformanceChangeReported : PrimateInferenceStanding
+  laterTrialsDidNotConfirmEarlyChange : PrimateInferenceStanding
+  originalDesignCannotIdentifyCausalEffect : PrimateInferenceStanding
+  causalEffectIndependentlyEstablished : PrimateInferenceStanding
+  trueZeroEffectIndependentlyEstablished : PrimateInferenceStanding
+
+unidentifiedIsNotDemonstratedNull :
+  originalDesignCannotIdentifyCausalEffect ≡
+    trueZeroEffectIndependentlyEstablished → ⊥
+unidentifiedIsNotDemonstratedNull ()
+
+unidentifiedIsNotDemonstratedPositive :
+  originalDesignCannotIdentifyCausalEffect ≡
+    causalEffectIndependentlyEstablished → ⊥
+unidentifiedIsNotDemonstratedPositive ()
+
+failedConfirmationIsNotUniversalNull :
+  laterTrialsDidNotConfirmEarlyChange ≡
+    trueZeroEffectIndependentlyEstablished → ⊥
+failedConfirmationIsNotUniversalNull ()
+
+-- The *PANDORA primate review* section of the Senate committee report
+-- is a later publication carrier of the earlier SAC/Kubis review. This
+-- quotient is intentionally restricted to this review's original animal
+-- evidence; other independent studies compiled in the 1979 Senate volume
+-- retain their own provenance (Big Boy, GWU, Lilienfeld, lymphocytes).
+data WrairReviewCarrier : Set where
+  pandoraSACOriginal1970 : WrairReviewCarrier
+  senateCompilation1979PrimateSection : WrairReviewCarrier
+
+data WrairOriginalPrimateEvidenceRoot : Set where
+  wrair1960sExperimentalRecord : WrairOriginalPrimateEvidenceRoot
+
+wrairOriginalEvidence : WrairReviewCarrier → WrairOriginalPrimateEvidenceRoot
+wrairOriginalEvidence _ = wrair1960sExperimentalRecord
+
+senateDoesNotReplicateWrairPrimates :
+  wrairOriginalEvidence pandoraSACOriginal1970 ≡
+  wrairOriginalEvidence senateCompilation1979PrimateSection
+senateDoesNotReplicateWrairPrimates = refl
+
+senate1979PrimateStudyInconclusive : BoundedLineageEdge
+senate1979PrimateStudyInconclusive = boundedLineageEdge
+  originalPrimateHighDoseExperiment pandora1970CommitteeFinalReassessment
+  committeeOriginalStudyReassessment senateMoscow1979
+  "US Senate 1979 original committee print pp. 10-11, after recounting McIlwain's failed-to-confirm trials at 4.6 and 20 mW/cm2, summarizes Kubis and SAC: the earlier primate design did not give an acceptable answer because baseline controls and experimental conditions were contaminated"
+  "The Senate compilation is NOT another primate trial; failure of causal identification cannot be treated as a reliable positive effect or as a demonstrated universal negative. Prospective deliberate human irradiation was not carried out according to the same report"
