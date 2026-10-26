@@ -12,13 +12,13 @@ from math import factorial
 def round_fixed(q,S):
     return (q.numerator*S*2//q.denominator+1)//2
 
-def seed(S,terms):
+def ceil_fraction(f):\n    return -(-f.numerator//f.denominator)\n\ndef seed(S,terms):
     c=sum(((-1)**k*Fraction(1,factorial(2*k)) for k in range(terms)),Fraction())
     s=sum(((-1)**k*Fraction(1,factorial(2*k+1)) for k in range(terms)),Fraction())
     a,b=round_fixed(c,S),round_fixed(s,S)
     # alternating tails of each coordinate; plus fixed rounding <=1/S
     error=Fraction(1,factorial(2*terms))+Fraction(1,factorial(2*terms+1))+Fraction(2,S)
-    return (a,b),error
+    return (a,b),ceil_fraction(error*S)
 
 def product(x,y,S):
     a,b=x;c,d=y
@@ -30,21 +30,21 @@ def power_certified(N,digits):
     # Each complex multiply error <= sqrt(2)/S <2/S.
     # Use conservative norm bound |z_approx|<= 1+eps, and
     # sequential recurrences for exponent bit scan.
-    result=(S,0);err=Fraction(0)
+    result=(S,0);err=0
     base=z;base_err=eps
     e=N
     ops=0
     while e:
         if e&1:
             result=product(result,base,S)
-            err=err*(1+base_err)+base_err+Fraction(2,S)
+            err=err+base_err+(err*base_err+S-1)//S+2
             ops+=1
         e>>=1
         if e:
             base=product(base,base,S)
-            base_err=2*base_err+base_err*base_err+Fraction(2,S)
+            base_err=2*base_err+(base_err*base_err+S-1)//S+2
             ops+=1
-    if Fraction(abs(result[1]),S)<=err:return None,ops,err
+    if abs(result[1])<=err:return None,ops,err
     return (1 if result[1]>0 else -1),ops,err
 
 def main():
