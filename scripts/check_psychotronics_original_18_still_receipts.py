@@ -30,7 +30,7 @@ PATTERN = re.compile(
 EXPECTED = 18
 
 def inspect(text: str) -> dict:
-    names = re.findall(r"(?m)^([a-zA-Z]\w*) : ScreenshotEvidence$", text)
+    names = re.findall(r"(?m)^([a-zA-Z]\w*) : ScreenshotEvidence\n\1 = screenshot-evidence$", text)
     evidence = list(PATTERN.finditer(text))
     if len(names) != EXPECTED or len(evidence) != EXPECTED:
         raise ValueError("incomplete/altered screenshot record count or shape")
@@ -54,9 +54,23 @@ def inspect(text: str) -> dict:
         raise ValueError("duplicate or missing Agda screenshot binding")
     if len(set(files)) != EXPECTED or len(set(hashes)) != EXPECTED:
         raise ValueError("duplicate screenshot filename/hash declaration")
+
+    # The ordinal "fifthImage" is a reference to an existing observed PNG
+    # receipt, not a new independent screenshot/source observation.
+    aliases = re.findall(
+        r"(?m)^([a-zA-Z]\w*) : ScreenshotEvidence\n\1 = ([a-zA-Z]\w+)$",
+        text,
+    )
+    if aliases != [("fifthImage", "oudinCoil")]:
+        raise ValueError("missing/changed original fifthImage alias")
+    if aliases[0][1] not in set(refs) or aliases[0][0] in set(refs):
+        raise ValueError("alias cannot create an original observation")
+
     return {
         "screenshot_receipts": EXPECTED,
         "unique_declared_screenshot_hashes": EXPECTED,
+        "additional_original_stills_from_alias": 0,
+        "display_fifthImage_aliases_original_oudinCoil": True,
         "unique_declared_attachment_filenames": EXPECTED,
         "distinct_creator_tags": len(set(maker)),
         "creator_groups": dict(sorted(Counter(maker).items())),
@@ -83,6 +97,7 @@ def self_test(text: str) -> dict:
         "unknown_scene": text[:first.start(5)] + "unreportedPhenomenon" + text[first.end(5):],
         "fake_video_verified": text[:first.start(8)] + "true" + text[first.end(8):],
         "missing_record": text[:first.start()] + text[first.end():],
+        "false_nineteenth_still": text.replace("fifthImage = oudinCoil", "fifthImage = newFictionalStill"),
     }
     count = 0
     for key, altered in tests.items():
@@ -92,7 +107,7 @@ def self_test(text: str) -> dict:
             count += 1
         else:
             raise AssertionError("adverse screenshot mutation accepted: " + key)
-    assert count == len(tests) == 7
+    assert count == len(tests) == 8
     return {"adversarial_source_mutations_rejected": count}
 
 def main() -> None:
