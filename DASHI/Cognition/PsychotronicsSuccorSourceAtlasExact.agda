@@ -988,6 +988,21 @@ noaaGHCNh2023OriginalDataset = Source.mkDOISource
   "ISD replacement official by-year/by-station PSV access; no actual 1953 Bangor PSV parsed and harmonised station data cannot independently replicate their original reports."
   Source.publicAttribution
 
+
+-- 2026-10-27 actually acquired user-supplied NOAA converted 1953 hourly CSV.
+-- Original observers and NCEI own meteorology; a local file digest is NOT
+-- publisher-verified raw NOAA fixed-width bytes or cloudbuster evidence.
+noaaBangor1953RealUploadedHourlyCSV : Source.AttributedSource
+noaaBangor1953RealUploadedHourlyCSV = Source.mkNoDOISource
+  "NOAA NCEI Integrated Surface Database / USAF historic Bangor Airport 1953 surface observers"
+  "Actual supplied converted Global Hourly year CSV station 72607114606; 8760 original meteorological observations"
+  "1953 hourly UTC observations in user-uploaded 2724610-byte 2026-10-27 attachment, locally SHA256 2a3b048d620b320fb8d1cf548d4eb06fb2c49821faa54c4cc7f708649cdca9bd; NOAA remote source checksum unpaid"
+  "1953"
+  "https://noaa-global-hourly-pds.s3.amazonaws.com/index.html"
+  Source.archivalSource
+  "Actual UTC 1953-07-07 02h MW1=80,1 slight rain showers at Bangor (1953-07-06 22h EDT); 04/05UTC MW1=81 heavier rain showers; 12UTC AA1=24,0190,9,1 is a 24h accumulation; not precise onset at Ellsworth, independent gauge replication or causal device efficacy"
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Psychotronics Succor Punch historical and physical source atlas"
@@ -1025,7 +1040,8 @@ sourceAtlas = Source.mkSourceAtlas
     noaaCOOPOriginalFormsGateway ∷ bahramiHelmholtz2025 ∷
     bioCoilOriginalAuthorRepository ∷ noaaBangorISD1953Original ∷
     noaaISD2018OriginalFormat ∷ noaaNESDIS2026ISDMigration ∷
-    noaaGHCNh2023OriginalDataset ∷ [])
+    noaaGHCNh2023OriginalDataset ∷
+    noaaBangor1953RealUploadedHourlyCSV ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
 
 -- The Croft 2002 pair, retrospective anthology, and reprints are distinct
@@ -1171,6 +1187,17 @@ noaaGHCNhSuccessorNotIndependentGauge = mkBound
   Diligence.contextualEvidence
   institutionalHistoricalInterpretation
   "no actual 1953 Bangor PSV or independent observer lineages resolved by a successor product announcement"
+
+
+noaaBangorJul1953HourlyRealWeatherBound : ClaimBound
+noaaBangorJul1953HourlyRealWeatherBound = mkBound
+  "User-provided actual NOAA converted Bangor year CSV has 8760 1953 UTC hourly rows and code MW1=80 quality1 on 7 July 02UTC, corresponding to 6 July 22h Maine EDT"
+  noaaBangor1953RealUploadedHourlyCSV
+  "Uploaded source SHA256 2a3b048d620b320fb8d1cf548d4eb06fb2c49821faa54c4cc7f708649cdca9bd and NOAA source code 80, quality1"
+  noaaBangorWeatherRoot
+  Diligence.contextualEvidence
+  originalRegionalWeatherMeasurement
+  "Measured manual rain-shower weather at Bangor is not verified onset at Ellsworth, not an original NOAA remote publisher attestation, and not any causal effect of Reich's equipment"
 
 -- Two publisher/document carriers; same RVML provenance root. The Gentry
 -- speaker/topic is NOT the 1999 person-to-person instruction transfer.
