@@ -9,9 +9,11 @@
       "members": [
         "P1-63",
         "P1-67",
-        "P1-68"
+        "P1-68",
+        "P1-71",
+        "P1-72"
       ],
-      "kind": "same custodial dataset/schema/station metadata",
+      "kind": "same NOAA GHCN custodial dataset/schema and two distinct Maine station observation streams; custodial root count one, station units two",
       "independent_of": [
         "reich-original"
       ]
@@ -242,6 +244,36 @@
         "P1-70"
       ],
       "effect": "Pat Flanagan electronic bliss device is billed as a topic; no proof Gentry worked for Flanagan or transmitted 1999 winding plans"
+    },
+    {
+      "id": "bar_harbor_daily_rain_6to8",
+      "status": "observed_at_regional_station",
+      "requires": [
+        "P1-71",
+        "P1-72",
+        "P1-68"
+      ],
+      "effect": "Bar Harbor 3 NW station July 6–8 raw 0+130+0 = 130 tenths-mm, not a July6-evening/hourly Ellsworth observation"
+    },
+    {
+      "id": "bar_harbor_station_identity_1953",
+      "status": "source_metadata",
+      "requires": [
+        "P1-72"
+      ],
+      "effect": "NOAA official USC00170371 period 1893-1982, 44.41667 N -68.25 W; not newer Bar Harbor airport"
+    },
+    {
+      "id": "maine_two_station_6to8_spatial_difference",
+      "status": "station_comparison_only",
+      "requires": [
+        "P1-63",
+        "P1-67",
+        "P1-68",
+        "P1-71",
+        "P1-72"
+      ],
+      "effect": "Bangor 305 and Bar Harbor 130 tenths-mm; same NOAA custodian but two station streams; cannot infer event-hour or rainmaking"
     }
   ],
   "source_snapshot": {
