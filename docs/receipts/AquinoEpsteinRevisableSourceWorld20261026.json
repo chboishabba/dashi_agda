@@ -624,6 +624,22 @@
         "status": "primary_party_and_landlord_statements_reported_by_press_no_executed_lease",
         "evidence": "Proposed HQ relocation to 160 Wharf Street under Rinehart/Hanrine ownership; party and owner both say tenancy at commercial market rent, not free or discounted.",
         "not_pays": "Authenticated signed lease, actual market-rate comparators, payer of renovations, company title or any unlawful gift/hidden subsidy."
+      },
+      {
+        "id": "AUS_NATIONAL_SENIORS_2022_ORIGINAL_MEMBER_SURVEY",
+        "original": "National Seniors Australia, Feb 2022 10th Social Survey/Let Pensioners Work first-party flyer",
+        "carrier": "https://nationalseniors.com.au/uploads/LetPensionersWork-A4FlyerApril13.pdf",
+        "status": "original_first_party_survey_flyer_pdf_face_visually_inspected",
+        "evidence": "National Seniors recorded 3937 older people in its own survey, 1249 age pension cohort, and advocated exempting work income from Age Pension means test.",
+        "not_pays": "A representative national causal effect, Rinehart-exclusive policy intellectual ownership, a private One Nation handoff or proof legislation was caused by this survey."
+      },
+      {
+        "id": "AUS_NATIONAL_SENIORS_DELOITTE_2022_ORIGINAL_COMMISSION",
+        "original": "Deloitte Touche Tohmatsu, signed first-person professional letter 2022-09-02 to NSA chief advocate Ian Henschke",
+        "carrier": "https://nationalseniors.com.au/uploads/NSA-Let-Pensioners-Work-Age-Pension-Modelling-FINAL-14112022.pdf",
+        "status": "original_client_named_commission_pdf_pages_1_and_5_visually_inspected",
+        "evidence": "Deloitte states NSA engaged it to model a specific opt-in pension earnings exemption; page 5's ~8.3% modelled neutral break-even uses scenarios and assumptions, not observed uptake. This is a TRUE identified client+model work-product example.",
+        "not_pays": "Actual Deloitte invoice settlement, original 2022 Labor law solely caused by NSA, National Seniors model source code reproduced, or an HPPL-paid IPA study with same receipt."
       }
     ],
     "sibling_reviews": [
@@ -704,13 +720,12 @@
         "same_source_family_with_other": false
       },
       {
-        "date": "2022-08-16",
-        "producer": "Hancock Prospecting Pty Ltd",
-        "object": "Senate submission 3 indexed in Parliamentary Library bill digest",
-        "source_role": "government_index_quote_native_original_403",
-        "policy_scope": "unlimited Work Bonus",
-        "same_object_transfer_to_next": "NOT authenticated",
-        "same_source_family_with_other": false
+        "date": "2022-02",
+        "producer": "National Seniors Australia",
+        "object": "own-member survey and campaign original three-page flyer",
+        "source_role": "first_party_advocacy_survey_pdf_page_one_visually_checked",
+        "policy_scope": "exempt work income from Age Pension income test",
+        "same_object_transfer_to_next": "no independent direct Rinehart transfer evidenced"
       },
       {
         "date": "2022-08",
@@ -720,6 +735,23 @@
         "policy_scope": "unlimited Work Bonus",
         "same_object_transfer_to_next": "NOT authenticated",
         "same_source_family_with_other": false
+      },
+      {
+        "date": "2022-08-16",
+        "producer": "Hancock Prospecting Pty Ltd",
+        "object": "Senate submission 3 indexed in Parliamentary Library bill digest",
+        "source_role": "government_index_quote_native_original_403",
+        "policy_scope": "unlimited Work Bonus",
+        "same_object_transfer_to_next": "NOT authenticated",
+        "same_source_family_with_other": false
+      },
+      {
+        "date": "2022-09-02",
+        "producer": "Deloitte Touche Tohmatsu commissioned by National Seniors Australia",
+        "object": "original nine-page Deloitte signed commissioned modelling letter to Ian Henschke",
+        "source_role": "original_professional_workproduct_client_identified_two_pages_visually_checked",
+        "policy_scope": "opt-in work-income means-test exemption; conditional neutral 8.3% worker uptake scenario",
+        "same_object_transfer_to_next": "client-to-Deloitte task/model documented, but government/party implementation not proved"
       },
       {
         "date": "2022-11-22",
@@ -750,7 +782,7 @@
     "policy_bidi_severe_test": {
       "would_strengthen": "A dated original pre-2025 Rinehart-Hanson communication containing this particular proposed policy text, optionally alongside original party drafting decisions, would establish a *specific advice transmission*, not necessarily exclusive authorship or election effect.",
       "would_narrow": "Contemporaneous original party drafts showing independent origination, other named source, or an earlier adoption before any communication would narrow Hanson's retrospective attribution as an account of the party's actual drafting, without denying Rinehart's public 2021 advocacy.",
-      "alternative_mechanism": "Government's enacted 2022 limited Work Bonus and the separately originating IPA/National Seniors/ACCI policy advocacy show the issue circulated publicly; similar wording is not by itself same-document transfer.",
+      "alternative_mechanism": "Gina Rinehart's 2021 speech; independently named National Seniors 2022 member survey / Deloitte 2 September 2022 commissioned modelling; separate Hancock and IPA 2022 Senate submissions; and the limited 2022 Labor reform demonstrate multiple real producer/scope pathways. Rhetorical overlap cannot establish exclusive authorship or a private Hanson drafting instruction.",
       "status": "sourceChecked_chronology_transfer_unresolved",
       "private_message_found": false
     },
@@ -761,7 +793,7 @@
       "status": "public_planned_tenancy_landlord_original_lease_not_inspected",
       "material_subsidy_established": false
     },
-    "independence_nontransfer": "Rinehart 2021 speech and HPPL 2022 submission may be same corporate advocacy channel; IPA 2022 submission is separately authored but shares one Parliamentary Library summary carrier. Party release 2025 and Hanson retrospective 2026 are separate dated party-side products; article copies of their quotes are NOT independent attestations. Labor 2022 capped law is an independently originating policy alternative, not identical to One Nation unlimited pledge.",
+    "independence_nontransfer": "Rinehart 2021 speech and HPPL 2022 submission may be same corporate advocacy channel; IPA 2022 submission is separately authored but shares one Parliamentary Library summary carrier. Party release 2025 and Hanson retrospective 2026 are separate dated party-side products; article copies of their quotes are NOT independent attestations. Labor 2022 capped law is an independently originating policy alternative, not identical to One Nation unlimited pledge. National Seniors original survey/flyer and Deloitte commissioned model share NSA commissioning input; they are separate produced artifacts, NOT two independent proofs of law causality. The named original Deloitte client/model is a positive control for what a genuine commissioned expert report looks like, unlike unclassified aggregate HPPL/IPA cash.",
     "sibling_climate_claim_family_crosswalk": {
       "owner_pr": 1251,
       "owner_head_reviewed": "68415b469b4cff67f452fb8c8c1d69476cc5a2ce",
@@ -789,6 +821,18 @@
       ],
       "stopping_rule": "Syntactically similar policy arguments across Hancock, industry spokespeople and Hanson do not prove common commissioning. Demand a dated original briefing, script, contract, draft with direct provenance, or actual named end-use for a same-object transfer. No extra grant/donor attribution to Epstein or CA from this motif.",
       "sibling_code_imported": false
+    },
+    "policy_original_commission_positive_control": {
+      "original_document": "https://nationalseniors.com.au/uploads/NSA-Let-Pensioners-Work-Age-Pension-Modelling-FINAL-14112022.pdf",
+      "producer": "Deloitte Touche Tohmatsu",
+      "client": "National Seniors Australia (Ian Henschke, Chief Advocate)",
+      "date": "2022-09-02",
+      "object": "Let Pensioners Work Age Pension Modelling, original 9-page signed letter",
+      "image_checks": "PDF page index 0 and page index 4 visual screenshots checked",
+      "model_assumptions": "DSS 2021 cohort summaries; opt-in pension mechanism; excluded Veteran Service Pension population; no input spreadsheet recomputation; client-supplied assumptions.",
+      "relevant_quantitative_claim": "Model estimates net fiscal cost neutral at ~8.3% uptake IN THEIR MODELLING SCENARIO, not measured real-world uptake.",
+      "positive_control": "Actual original names a commissioning client, independent named research producer, defined commissioned output and methods. Contrast: HPPL→IPA FY2016/17 court-reported aggregate finances have no inspected directed commission of a SPECIFIC 2022 IPA pension policy product.",
+      "what_not_proved": "Invoice settlement/payment, independence of DSS inputs, actual influence on 2022 Labor limited Act, exclusive authorship of idea, or Australian covert network."
     }
   }
 }
