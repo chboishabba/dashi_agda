@@ -214,6 +214,18 @@ module SharedWeightedCut
       (weightedPlusTerminalBuildsCombinedPayment
         (weightedPlusTerminal I))
 
+-- 2026-10-27 UNIVERSAL W2 PHYSICAL FAILURE (PR #1271):
+-- The R734 AugmentedCriticalWeightedPayment field is NOT generally
+-- inhabitable even for smooth unforced periodic Galerkin trajectories:
+-- an explicitly normalized pure-plus real helical triad produces
+-- positive dyadic critical growth while ALL initial mixed (+,-)
+-- incidences and their weighted work vanish. Amplitude 512 (nu=1)
+-- violates the required inequality for every delta>0 at short time.
+-- See tests/test_ns_r734_pure_plus_physical_w2_no_go.py and the
+-- source-attributed 2026-10-27 research note. The conditional
+-- two-leaf compiler below remains logically correct; DO NOT interpret
+-- it as an unrestricted strong-solution proof.
+--
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
