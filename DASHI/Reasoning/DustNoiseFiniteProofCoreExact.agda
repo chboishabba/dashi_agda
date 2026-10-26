@@ -62,12 +62,12 @@ xorVec nil nil = nil
 xorVec (cons a as) (cons b bs) =
   cons (a xor b) (xorVec as bs)
 
+zeroVec : {n : Nat} → BitVec n
+zeroVec {zero} = nil
+zeroVec {suc n} = cons false zeroVec
+
 xorVecSelf : {n : Nat} → (v : BitVec n) →
   xorVec v v ≡ zeroVec
-  where
-    zeroVec : {n : Nat} → BitVec n
-    zeroVec {zero} = nil
-    zeroVec {suc n} = cons false zeroVec
 xorVecSelf nil = refl
 xorVecSelf (cons b bs)
   rewrite xorSelf b | xorVecSelf bs = refl
