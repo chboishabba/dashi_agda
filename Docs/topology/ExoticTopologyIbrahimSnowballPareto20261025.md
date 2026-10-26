@@ -723,3 +723,65 @@ restriction is clear: the 3-ary exhaustion has planar
 Cantor ends only *conditionally on actual infinite
 collared realisation*, and is then the SAME Richards
 Cantor-tree type as the binary exhaustion.
+
+
+### 26 October late: 27-frontier ↔ native 27-cube SET bijection, false adjacency rejected
+
+The latest crystallography #1261 and canonical cube original
+`DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact`
+were re-read. Instead of making a duplicate 27 cube,
+NEW `ExoticBalancedDepthThreeCubeSetBridgeExact.agda`
+uses `SSPTritCarrier.fromTrit/toTrit` and its ACTUAL
+two roundtrip proofs to establish a two-sided same-CARRIER
+finite SET bijection
+
+```
+Vec DASHI.Algebra.Trit.Trit 3
+    ↔ Base369Ternary27HypervoxelFabricGeometryExact.Ternary27Point
+```
+
+with an explicit all-zero ↔ native cube origin equation.
+The length-three signed word on the left indexes one of
+the 27 real output frontier CIRCLES of the finite
+two-pants construction, whereas the right is a point
+of a finite 3D GRID. This is a legitimate **set-valued
+coordinate transport**, no more.
+
+The new original-owner-consuming Python exact negative control
+`depth_three_cube_sibling_nonpromotion` establishes:
+- native cube-grid graph: 27 vertices, **54 edges**;
+- optional "share the first two trits" sibling-pair graph
+  on the 27 leaf labels: **27 pairs**;
+- overlap: **18** pairs;
+- **nine** sibling-only non-grid pairs (e.g. last
+  coordinate -1 to +1 is a two-step cube change);
+- **36** native cube edges connect NONsiblings in that
+  particular depth-three tree.
+
+An independent local exact Python enumeration PASSed
+all counts, and a new unit test is committed.
+Thus even this NATURAL coordinatewise 27-set bijection
+does **not** preserve the cube's grid adjacency
+versus the optional sibling-pair relation. No claim
+that every possible graph equivalence is impossible
+is made; the chosen relations have unequal edge counts
+so these particular graphs cannot be isomorphic.
+
+The 26-site punctured cube (#1261) means
+`Trit³\{(zero,zero,zero)}`, not a 26-boundary
+pants cobordism. Its 13 antipodal point directions
+belong to the cubical spatial graph geometry,
+not to the measured three-child end-space
+or its boundary-circle gluing. Nor does the
+exact `3^9` Eisenstein residue model in #1260
+become the infinite tree by sharing a radix.
+This distinction preserves the original native
+cube/SSP authorship and the newer finite 27-frontier
+consumer's user-directed, AI-assisted provenance.
+
+The focused acceptance set now has **30** Python
+test methods and **10** Agda topology module targets;
+still source-written/kernel pending. The 12 original
+and implementation source records remain distinct
+from the actual local PL algebra checks and pending
+infinite geometric proof obligations.
