@@ -1,0 +1,135 @@
+{
+  "title": "1953 Bangor actual hourly original-observer synoptic context for Reich Ellsworth report, explicitly noncausal",
+  "date": "2026-10-27",
+  "origination": {
+    "weather": "1953 USAF Bangor surface observers; NOAA/NCEI derived Global Hourly CSV",
+    "narrative": "Wilhelm Reich original 1954 CORE protocol and copied original July 8 1953 Ellsworth American report; different source roots",
+    "analysis": "Johl Brown investigation, OpenAI ChatGPT case-specific code and synthesis"
+  },
+  "original_uploaded_file": {
+    "name": "72607114606.csv",
+    "station": "72607114606",
+    "rows": 8760,
+    "sha256": "2a3b048d620b320fb8d1cf548d4eb06fb2c49821faa54c4cc7f708649cdca9bd",
+    "noaa_publisher_remote_file_hash_authenticated": false
+  },
+  "source_code": "https://www.ncei.noaa.gov/pub/data/noaa/isd-format-document.pdf",
+  "source_code_pages": {
+    "mandatory_wind": "printed p8, PDF page 7; direction degrees from north speed in tenths m/s, quality1 passed",
+    "ceiling": "printed p9, PDF page 8; 22000 unlimited not 22 km observed cloud base",
+    "sea_level_pressure": "printed p12-13, PDF page 11; pressure in tenths hPa, quality1 passed",
+    "manual_precip": "original manual MW1 code 80 slight rain showers, quality1 passed"
+  },
+  "reported_operation": {
+    "site": "Graham Lake Dam near Ellsworth not Bangor airport",
+    "source": "Reich 1954 CORE reported original July 6 1953 intervention",
+    "start_local_EDT": "1953-07-06T10:45:00-04:00",
+    "end_local_EDT": "1953-07-06T11:52:00-04:00",
+    "start_utc": "1953-07-06T14:45:00Z",
+    "end_utc": "1953-07-06T15:52:00Z",
+    "original_intervention_time_observed_by_noaa": false
+  },
+  "bangor_events": [
+    {
+      "UTC": "1953-07-06T14:00:00Z",
+      "EDT": "1953-07-06T10:00:00-04:00",
+      "pressure_hpa": 1015.5,
+      "wind_from_true_north_deg": 200,
+      "wind_speed_mps": 6.7,
+      "ceiling_agl_m": 5400
+    },
+    {
+      "UTC": "1953-07-06T15:00:00Z",
+      "EDT": "1953-07-06T11:00:00-04:00",
+      "pressure_hpa": 1015.5,
+      "wind_from_true_north_deg": 200,
+      "wind_speed_mps": 7.7,
+      "ceiling_agl_m": 6000
+    },
+    {
+      "UTC": "1953-07-06T16:00:00Z",
+      "EDT": "1953-07-06T12:00:00-04:00",
+      "pressure_hpa": 1015.2,
+      "wind_from_true_north_deg": 200,
+      "wind_speed_mps": 6.2,
+      "ceiling_agl_m": 7500
+    },
+    {
+      "UTC": "1953-07-06T20:00:00Z",
+      "EDT": "1953-07-06T16:00:00-04:00",
+      "pressure_hpa": 1011.9,
+      "wind_from_true_north_deg": 200,
+      "wind_speed_mps": 7.7,
+      "ceiling_agl_m": 7500
+    },
+    {
+      "UTC": "1953-07-07T00:00:00Z",
+      "EDT": "1953-07-06T20:00:00-04:00",
+      "pressure_hpa": 1010.2,
+      "wind_from_true_north_deg": 200,
+      "wind_speed_mps": 6.7,
+      "ceiling_agl_m": 2400
+    },
+    {
+      "UTC": "1953-07-07T02:00:00Z",
+      "EDT": "1953-07-06T22:00:00-04:00",
+      "pressure_hpa": 1008.8,
+      "wind_from_true_north_deg": 200,
+      "wind_speed_mps": 8.2,
+      "ceiling_agl_m": 1800,
+      "MW1": "80,1",
+      "manual_observation": "slight rain showers"
+    },
+    {
+      "UTC": "1953-07-07T04:00:00Z",
+      "EDT": "1953-07-07T00:00:00-04:00",
+      "pressure_hpa": 1006.8,
+      "wind_from_true_north_deg": 200,
+      "wind_speed_mps": 7.2,
+      "ceiling_agl_m": 1500,
+      "MW1": "81,1"
+    },
+    {
+      "UTC": "1953-07-07T08:00:00Z",
+      "EDT": "1953-07-07T04:00:00-04:00",
+      "pressure_hpa": 1004.4,
+      "wind_from_true_north_deg": 200,
+      "wind_speed_mps": 1.5,
+      "ceiling_agl_m": 600
+    }
+  ],
+  "decoded_original_units_and_qc": "NOAA original mandatory code, only quality1 retained, missing 99999 invalid, 22000 special unlimited ceiling, wind angle from north and speed in tenths m/s",
+  "pressure_changes_before_first_hourly_showers_hpa": {
+    "hours6": -3.1,
+    "hours12": -6.7,
+    "hours24": -9.5
+  },
+  "descriptive_july_pressure_benchmark": {
+    "definition": "All quality1 12h pressure pair differences with endpoint in July1953; starts may be prior June30 hours",
+    "overlapping_windows": 744,
+    "drops_at_least_as_large_as_6point7hpa": 46,
+    "fraction": 0.06182795698924731,
+    "p_value": false,
+    "statistically_independent_trials": false,
+    "empirical_randomized_control": false
+  },
+  "file_output": {
+    "script": "scripts/check_psychotronics_bangor_1953_synoptic_null.py",
+    "source_git_blob": "c976b9c33db99f5fe696ddd01a9f8c5d0b710fcb",
+    "tests": "tests/test_psychotronics_bangor_1953_synoptic_null.py",
+    "tests_git_blob": "319162a0b429be9dae85cf3b4534b8e6d771123a",
+    "local_test_summary": "15 tests, 15 pass, 4 real-upload replay assertions; exact source/test hashes matched"
+  },
+  "conclusion_and_limits": {
+    "real_bangor_pre_rain_meteorology_observed": true,
+    "atmospheric_change_preceded_first_recorded_bangor_rain_hour": true,
+    "no_bangor_wind_direction_shift_at_hourly_14_15_16UTC": true,
+    "wind_at_ellsworth_claimed_site_unobserved": true,
+    "original_noaa_1953_weather_bureau_daily_map_page_examined": false,
+    "claimed_weather_forecast_failed_verified": false,
+    "genuine_synoptic_cyclone_or_front_diagnosed_from_single_station": false,
+    "exact_ellsworth_rain_onset_observed": false,
+    "weather_modified_by_device_supported": false,
+    "real_1953_hourly_dataset_replayed": true
+  }
+}
