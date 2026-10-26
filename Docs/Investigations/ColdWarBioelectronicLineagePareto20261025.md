@@ -267,13 +267,13 @@ This is a **new high-fanout source-payment** over the original 1966–69 high-do
 
 ### C. The separate 16 August 1971 Navy/RAND review has TWO distinct sub-studies
 
-This is a different contract **N00014-69-C-0358**. Original RAND review to the US Navy, **Samuel Koslov, William A. Mills, Sol M. Michaelson, William C. Rosenthal and colleagues**, archived at https://nsarchive.gwu.edu/document/28797-document-13-rand-corporation-samuel-koslov-et-al-report-assistant-secretary-navy-rd and public archival OCR https://nsarchive.gwu.edu/media/28797/ocr .
+This is a different contract **N00014-69-C-0358**. Original RAND review to the US Navy, **Samuel Koslov and the US Navy/RAND review panel (including William A. Mills and Sol M. Michaelson)**, archived at https://nsarchive.gwu.edu/document/28797-document-13-rand-corporation-samuel-koslov-et-al-report-assistant-secretary-navy-rd and public archival OCR https://nsarchive.gwu.edu/media/28797/ocr .
 
 **Panel-reported result split:**
 
 | Contract object | Place, instruments and endpoints | Original-panel methodological conclusion |
 | --- | --- | --- |
-| **Hawaii, Zaret Foundation chronic primate exposure** | Pearl Harbor/Lualualei Island; planned RF long-term cataract tests; human-equivalence problematic; inadequate monitored delivered field and instruments; restraint collars/pipes potential RF scattering | **Scientifically inadequate**. The original reviewers reported five monkey deaths, **three due to restraint strangulation**; this is an animal-care/design failure, NOT a microwave-induced death count. No adequate exposure logs, missing animal-level physical/necropsy controls. Study performed at intensities below original target. |
+| **Hawaii, Zaret Foundation chronic primate exposure** | Hawaii/Pearl Harbor vicinity; planned RF long-term cataract tests; human-equivalence problematic; inadequate monitored delivered field and instruments; restraint collars/pipes potential RF scattering | **Scientifically inadequate**. The original reviewers reported five monkey deaths, **three due to restraint strangulation**; this is an animal-care/design failure, NOT a microwave-induced death count. No adequate exposure logs, missing animal-level physical/necropsy controls. Study performed at intensities below original target. |
 | **Brooklyn, Polytechnic Institute / Zaret Foundation rabbit experiments** | Approximately **2450 MHz** RF; measured rabbit heat rate, respiration and subcutaneous temperature; different investigator/site/budget portion | The **same panel regarded this component as technically adequate and potentially useful**, distinct from the failed Hawaii primate trial. No claim that this rabbit study proved human behavioural influence. |
 
 This corrects any prior sentence that accidentally classified the **entire Navy contract** as experimentally defective. The reviewer report is a new authoritative methodological *audit*, but it does not create a new positive or negative original WRAIR primate replication. **Do not aggregate dead animals or assay denominators across the Hawaii, Brooklyn and Walter Reed sites.**
