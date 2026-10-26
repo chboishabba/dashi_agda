@@ -301,3 +301,46 @@ yanThreeDimensionalSymbolicAuditFirstImplementation =
     "Australia/Brisbane"
     Chronology.candidateReceiptImplemented
     Chronology.sourceCommittedOnly
+
+
+-- The finite two-point steep-direction theorem extends a pre-existing
+-- Lean projection module. This SHA is the lemma's first implementation,
+-- not the module's initial SHA, and is NOT a Lean kernel verification.
+millerSteepDirectionFirstImplementation :
+  Chronology.FirstImplementationReceipt
+millerSteepDirectionFirstImplementation =
+  Chronology.first-implementation-receipt
+    "RequestProject.NavierStokes.MillerProjectionGeometry.finite_zero_projection_allows_arbitrarily_steep_slope"
+    "631b9833e5e5b1cff20ab975cf4ae4354d246fe2"
+    "2026-10-26T14:27:10Z"
+    "2026-10-27T00:27:10+10:00"
+    "Australia/Brisbane"
+    Chronology.completedProofImplemented
+    Chronology.sourceCommittedOnly
+
+-- Weighted quadrature is a finite Lemma, not L4_t L2_x convergence.
+millerWeightedQuadratureFirstImplementation :
+  Chronology.FirstImplementationReceipt
+millerWeightedQuadratureFirstImplementation =
+  Chronology.first-implementation-receipt
+    "RequestProject.NavierStokes.MillerProjectionGeometry.weighted_sample_fourth_power_budget"
+    "5445472af7c3af8e141e10859b92c653f3a43162"
+    "2026-10-26T14:30:44Z"
+    "2026-10-27T00:30:44+10:00"
+    "Australia/Brisbane"
+    Chronology.completedProofImplemented
+    Chronology.sourceCommittedOnly
+
+-- The source-blind direction-gradient collision explicitly REUSES the
+-- original generic DASHI core rather than changing its ownership.
+millerDirectionFidelityFirstImplementation :
+  Chronology.FirstImplementationReceipt
+millerDirectionFidelityFirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Papers.ThreePaperConsumerFidelity20261026Exact.projectedVorticityGradientLossWitness"
+    "72c2419069b95d25a6e7f076e0bb3d82b8c82d0a"
+    "2026-10-26T14:32:09Z"
+    "2026-10-27T00:32:09+10:00"
+    "Australia/Brisbane"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
