@@ -507,7 +507,7 @@ record ConcentratedSourceAuditBoundary : Set where
     aDraftPlanIsNotImplementedCommunications : Bool
     foundingRoleIsNotUnauditedGreenpeaceFact : Bool
     historicOrganisationalFinanceEqualsExactMediaPayment : Bool
-    900mOrganisationRevenueIsClimateSpecificSpending : Bool
+    total900mOrganisationRevenueIsClimateSpecificSpending : Bool
     samePersonAcrossPlatformsEqualsCentralCommand : Bool
     shellBPDefectionsPreservedAsCounterExamples : Bool
     independentScientificPredictionAuditIsNotAnAllegation : Bool
