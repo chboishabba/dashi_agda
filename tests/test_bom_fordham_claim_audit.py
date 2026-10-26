@@ -961,12 +961,12 @@ def test_recycled_claim_family_receipts_preserve_original_root_and_relation():
     path = ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv"
     with path.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
-    assert len(rows) == 53
-    assert len({r["receipt_id"] for r in rows}) == 53
+    assert len(rows) == 57
+    assert len({r["receipt_id"] for r in rows}) == 57
     assert all(r["claim_family"] and r["evidence_objects"] and
                r["relation_to_claim"] and r["nonpromotion_boundary"] for r in rows)
     totals = Counter(r["claim_family"] for r in rows)
-    assert len(totals) == 22
+    assert len(totals) == 25
     assert totals["US_UNCERTAINTY_STRATEGY"] == 2
     assert totals["API_PROMPTED_58PC"] == 1
     assert totals["GAS_TAX_17B_ANNUAL"] == 8
@@ -1300,8 +1300,8 @@ def test_model_alias_source_counter_not_independent_population():
     )
     rows = read_ledger()
     report = audit(rows)
-    assert report["sampled_appearances"] == 53
-    assert report["sampled_claim_families"] == 22
+    assert report["sampled_appearances"] == 57
+    assert report["sampled_claim_families"] == 25
     assert report["status"] == "selected-source-provenance-only"
     assert "No national source-concentration estimate" in report["warning"]
     assert canonical_object("FUTURE_ADL_17B_2026") == "ADL_2026_ORIGINAL"
@@ -1325,11 +1325,11 @@ def test_model_alias_source_counter_not_independent_population():
     ]
 
 
-def test_original_53_row_sample_cannot_certify_national_concentration_agda():
+def test_original_57_row_sample_cannot_certify_national_concentration_agda():
     """Finite two-world nonfactorability reuses the existing Ibrahim machinery."""
     owner = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
     regression = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
-    assert "samePurposive53AppearanceLedger" in owner
+    assert "samePurposive57AppearanceLedger" in owner
     assert "selectedCorpusCannotDetermineNationalOriginConcentration" in owner
     assert "sameSelectedLedgerDifferentNationalPopulations" in owner
     assert "INF.nonFactorabilityWitness\n    fewAdditionalOriginals manyAdditionalOriginals refl (λ ())" in owner
@@ -1351,3 +1351,41 @@ def test_origin_counter_rejects_forced_postdated_model_attribution():
         assert "April 14 Greens" in str(error)
     else:
         raise AssertionError("Unwitnessed cross-date model transfer promoted")
+
+
+
+def test_original_oia_burden_and_conflicting_2027_commencement():
+    """Original government PDF controls predicted compliance burden and dates."""
+    with (ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = {r["receipt_id"]: r for r in csv.DictReader(handle)}
+    assert {rows[k]["evidence_objects"] for k in ("G46", "G47", "G49")} == {
+        "GOV_OIA_DGRS_15OCT2026"
+    }
+    assert rows["G48"]["evidence_objects"] == "HANSARD_GAS_PRINCIPAL_14OCT2026"
+    assert rows["G46"]["claim_family"] == "GAS_REGULATORY_BURDEN_10YEAR"
+    assert rows["G47"]["claim_family"] == rows["G48"]["claim_family"] == "GAS_FRAMEWORK_COMMENCEMENT_CONFLICT"
+    assert rows["G49"]["claim_family"] == "GAS_RESERVATION_DISTRIBUTIONAL_TRANSFER"
+    assert "AUD134 million" in rows["G46"]["numerical_or_rhetorical_payload"]
+    assert "AUD59 million" in rows["G46"]["numerical_or_rhetorical_payload"]
+    assert 134 - 59 == 75  # million AUD of modelled DIFFERENCE, not collected levy
+    assert "not revenue raised" in rows["G46"]["nonpromotion_boundary"]
+    assert "1 January 2027" in rows["G47"]["numerical_or_rhetorical_payload"]
+    assert "1 July 2027" in rows["G48"]["numerical_or_rhetorical_payload"]
+    assert "1 January 2028" in rows["G47"]["numerical_or_rhetorical_payload"]
+    assert "1 January 2028" in rows["G48"]["numerical_or_rhetorical_payload"]
+    assert rows["G47"]["date"] > rows["G48"]["date"]
+    assert "source texts alone do not establish" in rows["G47"]["nonpromotion_boundary"]
+    assert "expected" in rows["G49"]["numerical_or_rhetorical_payload"]
+    assert "rather than observed" in rows["G49"]["nonpromotion_boundary"]
+
+    owner = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    regress = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    assert "governmentOIAImpactDashboardOct2026 : Typed.SourceReceipt" in owner
+    assert "oiaRegulatoryBurdenNotExportTaxModel : Typed.TypedGenealogyEdge" in owner
+    assert "oiaJanuaryVsKingJulyDGRSStart : Typed.TypedGenealogyEdge" in owner
+    assert "oiaTimingConflictDoesNotEstablishCausalScriptTransfer" in owner
+    assert "officialOIARegulatoryBurdenNotADLRevenueTax" in regress
+    assert "oiaAndKingsCommencementStatementsConflictButAreSourceAttributed" in regress
+    assert "oiaVersionMismatchIsNotProofOfHistoricalTransfer" in regress
