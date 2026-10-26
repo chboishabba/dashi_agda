@@ -196,3 +196,42 @@ commutator, finite collar, C3 orbit, or quantum analogy alone
 does not pay the relative source π1 map. Do not promote such
 collisions into same-source horn detection or a verified physical
 Wilson observable. QID/Dewey unresolved when not inspected.
+
+
+## Paired curved source error invariance (additional necessary discriminator)
+
+For unitary matrices U=Hol(parent) and V=Hol(actual based
+child-commutator word), eta=||U-V||op. This is **not**
+the same as the abstract group word identity when curvature is
+nonzero. However simultaneous coherent transformations satisfy
+
+    ||U^-1-V^-1||op = ||U-V||op,
+    ||GUG^-1-GVG^-1||op = ||U-V||op.
+
+The first follows by inserting unitary factors U^-1 and V^-1
+around V-U. The second is unitary conjugation invariance.
+Consequently a TRUE source-derived eta<=23/500 survives
+changing the orientation of BOTH loops or rebasing the
+ENTIRE parent-versus-word pair. It cannot survive an
+uncoordinated change to one loop alone.
+
+The original selected W same-matrix numerical test used
+V=G W G^-1 with G the source-defined diagonal C3 actor.
+The genuine nonzero eta=||W-V||op is exactly preserved
+when both U and V invert, and when both are conjugated
+by G. A deliberate one-sided rebase sends U->G W G^-1=V,
+falsely producing eta'=0 while true eta>0. This is a
+SEVERE negative control against promoting any mismatched
+basis/whisker comparison into a zero-curvature statement.
+
+The test was independently locally executed and PASS;
+`scripts/check_horn_selected_w_fringe_orientation_cut.py`
+now includes the same paired-eta controls on its GitHub
+source. Lean #84 extends
+`HornMarkedMeridianOrientationCut.lean` with
+`pairedDefectBasingAndOrientation` and
+`pairedCurvedSourceEtaCapTransport`, explicitly
+conditional on the operator-norm invariance premise.
+Neither the actual Hatcher curved based homotopy nor
+its curvature area is supplied. Kernel verification
+remains NOT RUN.
