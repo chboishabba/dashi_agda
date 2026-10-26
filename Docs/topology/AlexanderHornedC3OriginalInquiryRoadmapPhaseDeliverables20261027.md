@@ -158,3 +158,43 @@ kernel-verified formal theorem → independent experimental measurement.
 A result may remain valid at an earlier tier without inheriting later
 tiers. Do not overwrite earlier owners or present external results as
 new DASHI inventions.
+
+## Final 2026-10-27 union/homotopy connector update
+
+The parent library now imports BOTH
+`ThreeArmRadiusConnectedAssembly.lean` and
+`ThreeArmRadiusConnectedHatcherTransport.lean`.
+The latter calls the ALREADY EXISTING
+`radiusCutSourceGroupsEquivPi1` with
+`radiusCover_member_pathConnected`: it takes
+`IsPathConnected(C)`, `IsPathConnected(S_i)`,
+actual `p_i:X` in `C∩S_i`, `π₁(C)=1` and
+the source-member meridian group equivalences, and obtains
+`*_(i:Fin3)G_i ≃* π₁(X,x₀)`.
+It **does not** need a separately assumed
+`IsPathConnected(C∪S_i)`.
+
+The independent exact rational spot audit confirms
+`|13e_i-9e_i|²=16`,
+`|13e_i-9e_j|²=250` for `j≠i`,
+and `|(20,20,20)-9e_i|²=921`.
+The executable
+`scripts/alexander_horned_c3_radius_overlap_witness.py`
+imports the ORIGINAL cover/basing constructors and
+includes two deliberately failing cut-membership
+controls (12e_i and 14e_i); the PR workflow now targets it.
+Mathlib `IsPathConnected.union` and scoped `ContinuousMap`
+syntax were inspected against current Mathlib source; a
+missing scoped notation declaration was fixed before final
+head verification. This remains SOURCE-WRITTEN Lean, not
+an exact-head kernel receipt.
+
+The focused PR Actions lookup at the newly written
+head returned **zero PR-triggered workflow runs** on the
+queried first page. No CI success or build failure can
+be inferred from that empty result.
+
+This shrinks G3 in the phase ledger to the two real
+geometric tasks `IsPathConnected(S_i)` and actual
+`p_i` membership; **G1/G4** (the supported wild
+relative collar and its meridian maps) remains P0.
