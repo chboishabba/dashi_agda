@@ -1,0 +1,536 @@
+module DASHI.Mathematics.Symmetry.TetragonalSignedCoordinateGroupActionExact where
+
+-- D4h normal-form multiplication acts on arbitrary signed 3D
+-- coordinate carriers. The proof is exhaustive over the 16×16
+-- finite group elements but remains universal in the coordinates.
+-- Uses no postulates, external solvers, floating point or CI.
+-- Attribution: classical dihedral/Coxeter group relations;
+-- this module provides repository-specific Agda proof terms.
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; true; false)
+import DASHI.Mathematics.Symmetry.TetragonalD4hNormalFormExact as D
+import DASHI.Mathematics.Symmetry.TetragonalIntegralLatticeActionExact as T
+
+actIdentity :
+  ∀ {A} (S : T.SignedCarrier A) (p : T.Triple A) →
+  T.act S D.identity p ≡ p
+actIdentity S (T.xyz x y z) = refl
+
+actCompose :
+  ∀ {A} (S : T.SignedCarrier A)
+    (g h : D.D4h) (p : T.Triple A) →
+  T.act S (D.compose g h) p ≡
+  T.act S g (T.act S h p)
+actCompose S (D.element D.q0 false false) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false false) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 false true) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true false) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q0 true true) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false false) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 false true) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true false) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q1 true true) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false false) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 false true) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true false) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q2 true true) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false false) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 false true) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true false) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q0 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q0 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q0 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q0 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q1 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q1 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q1 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q1 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q2 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q2 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q2 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q2 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q3 false false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q3 false true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q3 true false) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
+actCompose S (D.element D.q3 true true) (D.element D.q3 true true) (T.xyz x y z)
+  rewrite T.negateTwice S x | T.negateTwice S y | T.negateTwice S z = refl
