@@ -961,15 +961,15 @@ def test_recycled_claim_family_receipts_preserve_original_root_and_relation():
     path = ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv"
     with path.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
-    assert len(rows) == 31
-    assert len({r["receipt_id"] for r in rows}) == 31
+    assert len(rows) == 39
+    assert len({r["receipt_id"] for r in rows}) == 39
     assert all(r["claim_family"] and r["evidence_objects"] and
                r["relation_to_claim"] and r["nonpromotion_boundary"] for r in rows)
     totals = Counter(r["claim_family"] for r in rows)
-    assert len(totals) == 12
+    assert len(totals) == 16
     assert totals["US_UNCERTAINTY_STRATEGY"] == 2
     assert totals["API_PROMPTED_58PC"] == 1
-    assert totals["GAS_TAX_17B_ANNUAL"] == 7
+    assert totals["GAS_TAX_17B_ANNUAL"] == 8
     assert totals["GAS_INVESTMENT_TAX_83PC"] == 3
     assert totals["GAS_INVESTMENT_SUPPLY_PRICE"] == 4
     assert totals["GAS_TAX_POLICY_SPECIFICATION"] == 2
@@ -1085,3 +1085,74 @@ def test_aep_21_9b_original_forecast_to_later_paid_public_claim():
     assert "sameTaxNumberCannotDetermineSourceStatus" in owner
     assert "same21Point9BNumberDoesNotEstablishActualityStatus" in val
     assert "aep2025ForecastTo2026PaidHeadlineHasSameInstitution" in val
+
+
+
+def test_adl_original_three_scenario_bases_and_one_producer():
+    """One authored model with three different 25% levy bases, not three replications."""
+    with (ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = {r["receipt_id"]: r for r in csv.DictReader(handle)}
+    originals = [rows[k] for k in ("G25", "G26", "G27")]
+    assert all(row["evidence_objects"] == "ADL_2026_ORIGINAL" for row in originals)
+    assert len({row["locator"] for row in originals}) == 1
+    assert all(row["locator"].endswith("final-ad-little-modelling-gas-exports-15.pdf")
+               for row in originals)
+    assert {row["claim_family"] for row in originals} == {"GAS_TAX_TEN_YEAR_SCENARIOS"}
+    assert "95-100bn" in rows["G25"]["numerical_or_rhetorical_payload"]
+    assert "28-32bn" in rows["G26"]["numerical_or_rhetorical_payload"]
+    assert "9-11bn" in rows["G27"]["numerical_or_rhetorical_payload"]
+    assert "AUD8.5/GJ" in rows["G27"]["numerical_or_rhetorical_payload"]
+    # Confirm decade model ranges are not ten repetitions of up-to 17bn.
+    decade_ranges = [(95, 100), (28, 32), (9, 11)]
+    first_year_upper_bound = 17
+    assert all(low <= high for low, high in decade_ranges)
+    assert all(not (low <= 10 * first_year_upper_bound <= high)
+               for low, high in decade_ranges)
+    assert rows["G24"]["claim_family"] == "GAS_TAX_17B_ANNUAL"
+    assert rows["G24"]["evidence_objects"] == "ADL_2026_ORIGINAL"
+    assert "first year" in rows["G24"]["numerical_or_rhetorical_payload"]
+    assert "not recurring" in rows["G24"]["nonpromotion_boundary"]
+    assert rows["G24"]["date"] < rows["G05"]["date"]
+    assert rows["G05"]["evidence_objects"] == "FUTURE_ADL_17B_2026"
+
+
+def test_adl_client_return_unit_and_resource_rent_denominators():
+    """No percentage-point, denominator, or modelled supply promotion."""
+    with (ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = {r["receipt_id"]: r for r in csv.DictReader(handle)}
+    assert rows["G28"]["evidence_objects"] == rows["G29"]["evidence_objects"] == "ADL_2026_ORIGINAL"
+    assert "percentage points of IRR" in rows["G28"]["numerical_or_rhetorical_payload"]
+    assert "percent on average" in rows["G29"]["numerical_or_rhetorical_payload"]
+    assert "different quantities" in rows["G28"]["nonpromotion_boundary"]
+    assert "not to increase domestic supply overall" in rows["G30"]["numerical_or_rhetorical_payload"]
+    assert "not an observed increase" in rows["G30"]["nonpromotion_boundary"]
+    assert "6.9 percent resource rent only" in rows["G31"]["numerical_or_rhetorical_payload"]
+    assert "25.8 percent total gas-company tax" in rows["G31"]["numerical_or_rhetorical_payload"]
+    assert "excludes regular company income tax" in rows["G31"]["nonpromotion_boundary"]
+
+
+def test_adl_reuses_existing_typed_genealogy_nonfactorability_and_regression():
+    """Author/source first; same headline cannot prove one tax design or return unit."""
+    owner = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    regression = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    typed = (ROOT / "DASHI/Governance/TypedGenealogyEdgeExact.agda").read_text()
+    assert owner.count("adlSourceReportPublicRelease2026 : Typed.SourceReceipt") == 1
+    assert "Typed.commissionedResearch Typed.primary" in owner
+    for receipt in ("adlReportCommissionedAndPublic", "adlSeventeenBFirstYearUpperBoundNotTenYearCash",
+                    "adlIRRPointsVersusFutureGroupReturnsPercent"):
+        assert receipt + " : Typed.TypedGenealogyEdge" in owner
+    for proof in ("adlSameRateDifferentRevenueBases",
+                  "adlSame25RateCannotDetermineDecadeRevenue",
+                  "samePrintedTwoDifferentReturnUnits", "bareTwoPercentCannotIdentifyReturnUnit"):
+        assert proof in owner
+    assert owner.count("INF.nonFactorabilityWitness broadBase25 prospective25 refl (λ ())") == 1
+    assert "INF.nonFactorabilityWitness twoIRRPercentagePoints twoPercentRelativeReturn refl (λ ())" in owner
+    for consumer in ("same25NominalRateCannotDetermineADLTenYearRevenue",
+                     "bareTwoPercentCannotDetermineIRRChangeUnits",
+                     "adlReturnsUnitSummaryNotAnotherEconomicModel"):
+        assert consumer in regression
+    assert "headlineNumberRestatementIsNotHistoricalMethodTransfer" in typed
