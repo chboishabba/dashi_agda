@@ -272,3 +272,74 @@ conjugates the two finite address-tree conventions,
 but one must not casually assert an **infinite sequence**
 has a terminal-bit reverse or that dyadic finite mass
 is a Borel probability measure before its extension.
+
+
+## 26 October — balanced ternary realisation is a new *presentation*, not a fourth surface type
+
+**Actual finite geometric payment:** In
+`scripts/exotic_topology_balanced_ternary_pl.py` an ordinary
+pair of pants has THREE total boundary circles and supports
+one incoming/two outgoing. A balanced 1→3 branch has FOUR
+total boundary circles and is realised by TWO sequential
+source-owned pants. The intermediate circle is sewn shut
+and is never a new end. The temporary first split's
+continuation is not a representation of the balanced
+`zero` branch: that branch is one of the THREE final
+outgoing circles. This preserves the signed-zero fibre.
+
+Through finite depth three, independent actually executed
+PL geometry gave genuine orientable genus-zero triangulations
+with 1,3,9,27 boundary circles and exact connected
+new complementary components 1,3,9. The *same*
+old-simplex/dual-component checks from binary case were reused,
+only its child-label alphabet was extended. No forked
+PL component theorem or new topological-space type.
+
+**Conditional end identification:** Assume analogues H1–H5
+for this all-n 3-ary collared tower. Then its nested proper
+tail components are indexed by infinite balanced streams
+`{-1,0,+1}^ℕ` with the product/cylinder topology.
+It is a Cantor space (perfect, nonempty, totally disconnected,
+compact metric); the genus is zero and each end planar.
+Richards' theorem therefore classifies this as **the same
+topological Cantor-tree surface type** as the binary pants
+exhaustion, not a fourth exotic-surface homeomorphism type.
+
+**Explicit end-space homeomorphism:** the EXISTING original
+prefix-free code `3→0, 6→10, 9→11`, with chosen balanced
+labels `neg→3, zero→6, pos→9`, concatenates each infinite
+balanced stream into an infinite binary stream. Every
+infinite binary stream is uniquely parsed by reading
+one bit if it is 0 and a second bit if it is 1.
+Continuity of the encoding: first n balanced symbols
+fix at least n binary output bits. Continuity of
+decoding: first 2n binary input bits determine at least
+n complete balanced symbols. Thus both maps are
+uniformly continuous for standard prefix metrics,
+hence homeomorphisms. This is a conventional mathematical
+argument, NOT an Agda/Lean kernel-verified infinite-stream
+equivalence in the current repo. The EXISTING finite
+Agda codec/roundtrip and balance-to-SSP369/pants
+naturality proofs are the producer inputs.
+
+**Non-equivalences:** this code is not level-preserving
+because digit words have variable binary length.
+Haar/fair binary measure gives signed weights
+`(1/2,1/4,1/4)`, not uniform ternary `(1/3,1/3,1/3)`;
+in fact no measure-preserving HOMEOMORPHISM of these
+specified product measures exists because dyadic clopen
+masses cannot equal 1/3. Nor does this homeomorphism
+conjugate the natural 2-adic and 3-adic compact
+TOPOLOGICAL-GROUP structures. And neither balanced
+sign inversion (`neg↔pos,zero↦zero`) nor the
+`C3` rotation of the 369 slots is the ordinary
+boundary-orientation reversing map used when gluing
+the finite PL pants.
+
+**Still missing for kernel promotion:** a point-set
+locally finite infinite PL colimit, its actual
+topological Freudenthal/Richards compact-end
+neighbourhood basis, same-object homeomorphism to
+the balanced prefix streams and the formal Richards
+classification. The finite 27-frontier fixture does
+not discharge these infinite theorems.
