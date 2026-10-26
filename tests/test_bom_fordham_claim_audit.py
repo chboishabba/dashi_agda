@@ -961,12 +961,12 @@ def test_recycled_claim_family_receipts_preserve_original_root_and_relation():
     path = ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv"
     with path.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
-    assert len(rows) == 45
-    assert len({r["receipt_id"] for r in rows}) == 45
+    assert len(rows) == 48
+    assert len({r["receipt_id"] for r in rows}) == 48
     assert all(r["claim_family"] and r["evidence_objects"] and
                r["relation_to_claim"] and r["nonpromotion_boundary"] for r in rows)
     totals = Counter(r["claim_family"] for r in rows)
-    assert len(totals) == 18
+    assert len(totals) == 19
     assert totals["US_UNCERTAINTY_STRATEGY"] == 2
     assert totals["API_PROMPTED_58PC"] == 1
     assert totals["GAS_TAX_17B_ANNUAL"] == 8
@@ -1201,3 +1201,37 @@ def test_woodmac_adl_spot_assumptions_are_model_specific_and_formalised():
         assert proof in owner
     assert "woodMackenzieSameRateCannotConcealSpotAssumption" in regress
     assert owner.count("INF.nonFactorabilityWitness woodMacContractedMarket adlMarginalSpotMarket refl (λ ())") == 1
+
+
+
+def test_government_reservation_2025_to_2026_policy_design_versions():
+    """First-party proposal version transitions, not enacted export-tax evidence."""
+    with (ROOT / "Docs/support/reference/climate_repeated_claim_families_20261026.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = {r["receipt_id"]: r for r in csv.DictReader(handle)}
+    assert "15-25 percent of gas production" in rows["G20"]["numerical_or_rhetorical_payload"]
+    assert rows["G38"]["date"] == "2026-05-07"
+    assert rows["G39"]["date"] == "2026-09-10"
+    assert rows["G40"]["date"] == "2026-09-29"
+    assert {rows[x]["claim_family"] for x in ("G38", "G39", "G40")} == {
+        "GAS_RESERVATION_DESIGN_VERSION"
+    }
+    assert "20% of LNG exports" in rows["G38"]["numerical_or_rhetorical_payload"]
+    assert "1 July 2027" in rows["G38"]["numerical_or_rhetorical_payload"]
+    assert "1 January 2028" in rows["G39"]["numerical_or_rhetorical_payload"]
+    assert "annual LNG export volumes" in rows["G40"]["numerical_or_rhetorical_payload"]
+    assert "calibratable down" in rows["G40"]["numerical_or_rhetorical_payload"]
+    assert "not enacted" in rows["G40"]["nonpromotion_boundary"]
+    assert all(rows[x]["evidence_objects"] == "AUS_GOV_RESERVATION_SEP2026"
+               for x in ("G39", "G40"))
+    owner = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    regress = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    for declaration in ("governmentReservationMay2026",
+                        "governmentReservationSeptember2026",
+                        "governmentReservationDepartmentStatus2026",
+                        "reservation2025ProductionToMay2026Exports",
+                        "reservationMayToSeptemberDutyDate",
+                        "reservationDraftChronologyIsNotMethodTransmission"):
+        assert declaration in owner
+    assert "governmentReservationDutyDateIsDraftSourceSequence" in regress
