@@ -265,3 +265,51 @@ jCoarse/jFine-compatible retained residual that survives factor-fibred
 99^E jumps with a sublinear producer+checker. Neither a short description
 of E nor high-dimensional carrier cardinality automatically implies this.
 No new real-phase sign or kernel verification receipt is claimed.
+
+## 2026-10-26 verified source ownership audit: analytic J, Kolmogorov, RSA
+
+Do NOT record the analytic jCoarse/jFine seam as unimplemented.
+JInvariantAnalyticJCoarseFineObserverExact already supplies the analytic
+ModularJFrickeSystem -> finite JTwoPlusNine observer, observer fibre,
+Fricke intertwiner (as a field of its record), and associated local27
+projection. JInvariantAnalyticObserverSeamCompilerBridgeExact compiles a
+supplied observer with scale recognizer into a seam. Validation source
+JInvariantAnalyticJCoarseFineObserverValidation.agda records explicit
+regression theorems for Fricke, observed fibre and local27. These are
+existing formal definitions with prior repository testcheck history,
+not a newly needed generic observer. Distinguish that from an actual
+constructed Pickover sine sign observer on the real circle, which is
+not evidenced in these source files. Also
+RiemannG2PhaseResidualRealizationExact.agda explicitly separates exact
+finite residual-localization from an analytic literal cosine equality
+requiring an inhabited LiteralPhaseModulationWeld.
+
+Native complexity accounting is already present in
+SelfIndexingHyperfabricTetrationExact.WeaveComplexity:
+programLength, executionLength, normalFormLength, typeWitnessLength,
+residualWitnessLength. It is a typed *precursor* to machine-relative
+MDL/Kolmogorov, not a computed Kolmogorov optimum or an unconditional
+running-time bound. Pair with AdmissibleConsumerMDLHyperfabricExact's
+eligibility gate and RecursiveParetoFrontierLiftingExact's multiaxis
+dominance before materializing fine fibres.
+
+RSA reuse: RSA260C3OrbitReducerHyperfabricExact explores structured
+C3 orbit candidates, but explicitly demands operator co-requirement
+closure and final MP=PM rather than promoting candidate symmetry.
+RSA260BidiFineIncidencePredictorExact supplies fixed-preparation
+family-level fine-incidence predictors and explicitly disclaims complete
+instance-level prediction. This is an excellent model for testing
+whether C3/jFine coordinates predict the *specific* phase residual:
+hold observer acquisition fixed, measure discriminators on controlled
+families, use independently certified sine witnesses, and report
+counterexamples and costs. RSA factorization, C3 candidate orbit
+reduction, and Pickover real angular reduction are separate domains;
+no RSA complexity-to-sine theorem follows merely by analogy.
+
+MAX-CUT acceptance requires: existing analytic observer instance
+for x={99^(9999!)/(2*pi)}; a signed consumer factorisation through
+its retained fine coordinate; exact phase-power transport;
+a measured/proved *producer and checker* complexity bound; a concrete
+verified Agda kernel execution receipt for the final instance.
+None is witnessed by the inspected source merely through general
+typechecked parameterized records. Negative controls remain active.
