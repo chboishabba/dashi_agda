@@ -264,7 +264,7 @@ formal proof about this geometry.
 New independent analytic and negative-control script:
 `scripts/alexander_horned_c3_same_cover_discriminator.py`.
 Locally executed Python 3/SymPy 1.14: five exact symbolic
-shell identities, 5804 rational-lattice cases, and two deliberately
+shell identities, 5786 guaranteed-exterior rational-lattice cases, and two deliberately
 failing cut configurations PASS. Symbolic algebra is not an
 infinite-topology or Lean/Agda kernel certificate.
 
