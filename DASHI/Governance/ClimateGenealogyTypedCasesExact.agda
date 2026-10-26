@@ -646,8 +646,8 @@ gccACSHPublished1997 = Typed.sourceReceipt
   "American Council on Science and Health (ACSH), original publisher"
   "Global climate change and human health"
   "1997"
-  "https://www.documentcloud.org/documents/3869610-American-Council-on-Science-and-Health-Acsh.html"
-  "CIC identifies 1997 ACSH public report about the same topic without disclosed GCC support; report text itself is a distinct source object and exact identification with grant product is not independently paid."
+  "https://www.acsh.org/news/1997/10/01/global-climate-change-and-human-health"
+  "First-party ACSH Staff article dated 1 October 1997, publicly readable; it recommends adaptation/public-health capacity and opposes compulsory GHG mitigation on economic grounds. The inspected publisher summary does not identify GCC as sponsor. Whether this actual public text is the 1996-97 commissioned final product remains unresolved."
 
 gccACSHCommissionedClimateHealth : Typed.TypedGenealogyEdge
 gccACSHCommissionedClimateHealth = Typed.typedGenealogyEdge
@@ -668,7 +668,7 @@ gccACSH1997PublicPaperMatch = Typed.typedGenealogyEdge
   "E9-18" "GCC-funded ACSH commissioned health study" "1997 ACSH Global climate change and human health public paper"
   Typed.topicalPublicationMatch Typed.corroborated
   (gccACSHOriginalInvestigation ∷ gccACSHPublished1997 ∷ [])
-  "CIC notes same subject and matching description, and no funding disclosure; it says final commissioned product distribution is not explicitly established in its acquired records. Do not assert identity of final edited commissioned file and released paper."
+  "CIC documents an ACSH commission and title match. The ACSH first-party 1 October 1997 article is now inspected and explicitly recommends adaptation while opposing compulsory mitigation as harmful to the economy. It does not disclose GCC sponsorship. CIC did not acquire a final distribution receipt, so paid commissioning, public argument and final-text identity stay separate."
 
 gccCHCReportedLaterExxonGrants : Typed.SourceReceipt
 gccCHCReportedLaterExxonGrants = Typed.sourceReceipt
@@ -697,3 +697,17 @@ gccACSHContractualRightsNotProofOfSpecificScientificEdit witness =
   Typed.editorialReviewRightsAreNotMethodTransfer
     (Typed.relationIsTransfer witness)
 
+
+
+-- 2026-10-26 actual PUBLIC OUTPUT, first-party ACSH Staff. The report's
+-- main recommendation is adaptation rather than compulsory emissions cuts.
+-- It is not the original GCC/STAC editing contract or proof the STAC
+-- client exercised its editorial-review entitlement. Publisher summary
+-- acquired; separately referenced 1997 PDF's original pages not verified.
+acsh1997OriginalPublicArgument : Typed.SourceReceipt
+acsh1997OriginalPublicArgument = Typed.sourceReceipt
+  "American Council on Science and Health (ACSH Staff), original publisher"
+  "Global Climate Change and Human Health"
+  "1997-10-01"
+  "https://www.acsh.org/news/1997/10/01/global-climate-change-and-human-health"
+  "First-party public text says anthropogenic warming may cause health harm, but argues to prioritise adaptation, public health and economic continuity over compulsory GHG emissions mitigation. This verifies a public position, not a specific GCC-mandated edit nor scientific validity of economic/medical claims."
