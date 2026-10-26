@@ -258,10 +258,12 @@ recognitionAloneCannotDetermineRedistribution :
 recognitionAloneCannotDetermineRedistribution =
   Fraser.recognitionCannotRecoverDistribution
 
-aRegimeLabelIsNotAnActualCounterfactual :
-  Institutional.politicalEconomyLabelIsCounterfactualWorld
-    Institutional.canonicalComparativeInstitutionalMeaningBoundary ≡ false
-aRegimeLabelIsNotAnActualCounterfactual = refl
+-- Reuse the entire canonical boundary record rather than re-exporting its
+-- fields. The source module does not globally open its record projections.
+comparativeInstitutionalBoundary :
+  Institutional.ComparativeInstitutionalMeaningBoundary
+comparativeInstitutionalBoundary =
+  Institutional.canonicalComparativeInstitutionalMeaningBoundary
 
 sociologyIsIndexedNotInvented :
   Funnel.SocialScienceChild
