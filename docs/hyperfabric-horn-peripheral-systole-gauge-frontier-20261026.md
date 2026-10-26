@@ -229,3 +229,86 @@ versus implementation versus executable local test versus
 Lean/Agda kernel proof versus measured physics separate.
 No QID/DDC invented. This is a geometry/source wall,
 not a request for user approval.
+
+
+## Final Hatcher original-local-source metric chart: the precise wall
+
+On printed page 171, Hatcher's original local Z-A is asserted
+**HOMEOMORPHIC** to an open ball with two straight tubes deleted;
+the two corresponding loops alpha_1,alpha_2 generate F2,
+and the attaching annulus generator alpha maps to
+[alpha_1,alpha_2]. This is a SOURCE-PAID topological word
+calculation, and it provides an ACTUAL original model for
+constructing two rectifiable transverse round meridians.
+
+In the straight-tube MODEL, choose each solid-tube
+cross-section radius a, a surrounding meridian radius b>a,
+and enough transverse centre separation that both circles
+avoid both tubes. Each meridian is a loop of Euclidean
+length exactly 2*pi*b and represents the appropriate
+straight-model free generator.
+
+But the original homeomorphism Z-A -> straight-tube
+model is NOT specified to have any Euclidean Lipschitz
+constant. To transport the round loops back into the
+actual Hatcher-linked embedded wild source with a
+**quantitative length**, one must pay a source
+metric distortion bound Lambda_w, alongside the
+proper same-object group marking and finite-stage
+avoidance. The precise sufficient inequality is
+
+    Length(actual marked meridian)
+      <= 2*pi*Lambda_w*b_w
+      < (44/7)*Lambda_w*b_w.
+
+Then the existing exact selected-W **flat** one-step
+acceptance is
+
+    M*(44/7)*Lambda_w*b_w <=781/1000  =>  IMPOSSIBLE,
+
+for a compatible uniformly bounded gauge M, assuming
+the transported image really is the source marked
+local meridian and M has the same Euclidean length units.
+No global x0 whisker enters the length budget. For
+the EVERY-BRANCH result, sufficient source-controlled
+Lambda_w*b_w->0 along one infinite branch.
+This is weaker than requiring global roundness or an
+explicit geometric q^n loop rate.
+
+New GIT-BLOB-BYTE-EXECUTED source:
+`scripts/check_horn_straight_tube_metric_gate.py`,
+local blob SHA and GitHub blob both
+`6f130618abc14760416e1860e06fd3d6f9e39475`.
+It tests the literal two-local-tube radii and separation,
+exact pi<22/7 rational upper, a synthetic Lambda_n=1
+shrinking radius b_n=1/(5*3^n), the selected source W
+M=1 example, AND a genuine linear homeomorphism family
+S_n(x,y,z)=(3^n*x,y,z) with unbounded Lipschitz
+constant Lambda_n=3^n so that Lambda_n*b_n stays
+constant. This FAIL-CLOSED negative control proves
+why Hatcher's *homeomorphic* local Z proof does not
+already supply the missing Euclidean length. The
+two straight tube model is a local source topological
+carrier, NOT a manufactured wild source embedding.
+Mathematical original ownership stays Hatcher's.
+
+Lean #84 consumer:
+`HornPeripheralLocalitySystoleCut.lean` now contains
+`selectedWActualTubeChartReject`, explicitly demanding
+the selected W norm source, the true SU3 direct arc
+bound, genuine source length, and separately the
+M/Lambda/b metric bridge. Unverified native Lean source.
+
+**Wall after full repo search**: no actual stagewise
+linked-Hatcher meridian chart with a controlled
+Euclidean Lambda_w (or a directly measured short
+marked local representative) has been located in
+the active PR sources. The original topological
+statement is not enough to manufacture that metric
+hypothesis. The genuine next task is to build that
+SAME-OBJECT linked pillbox/straight-tube bi-Lipschitz
+or bounded-turning local chart and induced generator
+map in original #1244, then instantiate this precise
+Lean/Python consumer. Do not broaden to arbitrary
+Cantor embeddings, new matrix actors or another
+nominal collar-equivalence assumption.
