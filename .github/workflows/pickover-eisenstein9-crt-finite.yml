@@ -8,6 +8,7 @@ on:
       - 'DASHI/Analysis/PickoverRHSSPTorqueRoleBridgeExact.agda'
       - 'DASHI/Analysis/PickoverConsumerResidualFibreBridgeExact.agda'
       - 'DASHI/Analysis/PickoverBase99SignedTailExact.agda'
+      - 'DASHI/Analysis/PickoverSignedZeroTorque369GridExact.agda'
       - 'scripts/check_pickover_eisenstein9_crt.py'
       - 'scripts/check_pickover_machin_factorial_phase.py'
       - 'scripts/check_pickover_ssp_torque_101.py'
@@ -27,6 +28,7 @@ on:
       - 'scripts/check_pickover_fast_sine_complex_power.py'
       - 'scripts/check_pickover_bit_shift_cocycle_ladder.py'
       - 'scripts/check_pickover_369_signed_circle_observer.py'
+      - 'scripts/check_pickover_369_torque_signedzero_cocycle.py'
       - '.github/workflows/pickover-eisenstein9-crt-finite.yml'
   workflow_dispatch:
 
@@ -81,6 +83,8 @@ jobs:
         run: python3 scripts/check_pickover_bit_shift_cocycle_ladder.py
       - name: Audit nested 369 signed circle and Q9 group separation
         run: python3 scripts/check_pickover_369_signed_circle_observer.py
+      - name: Verify signed-zero 369 grid-cube tail cocycle and all-horizon quotient obstruction
+        run: python3 scripts/check_pickover_369_torque_signedzero_cocycle.py
   finite-agda-source:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -97,3 +101,4 @@ jobs:
           agda -i . -l standard-library DASHI/Analysis/PickoverSignedSSPTorquePhaseBridgeExact.agda
           agda -i . -l standard-library DASHI/Analysis/PickoverRHSSPTorqueRoleBridgeExact.agda
           agda -i . -l standard-library DASHI/Analysis/PickoverBase99SignedTailExact.agda
+          agda -i . -l standard-library DASHI/Analysis/PickoverSignedZeroTorque369GridExact.agda
