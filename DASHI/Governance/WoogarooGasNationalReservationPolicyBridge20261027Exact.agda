@@ -264,3 +264,50 @@ noPriceOutcomeProven = refl
 -- (c) amendment provenance and identified lobbying submissions/instructions;
 -- (d) 2026 federal bill vote/assent and 2028 implementation; (e) time series
 -- of household/industrial domestic wholesale prices with matched controls.
+
+
+------------------------------------------------------------------------
+-- 15 OCT SENATE LEGISLATION REFERRAL + DOCUMENT-PRODUCTION ORDERS.
+-- A PII claim is a stated executive resistance to an order, NOT proof
+-- of illicit hidden instruction or a criminal judgement.
+------------------------------------------------------------------------
+
+gasSenateInquiryReferral15October : ScopedGasReceipt
+gasSenateInquiryReferral15October = scoped-gas-receipt
+  "Senate Selection of Bills Committee, Report No 13/2026, original incorporated Hansard via OpenAustralia attributed mirror"
+  "2026-10-15"
+  "https://www.openaustralia.org.au/senate/?id=2026-10-15.26.2"
+  parliamentarySpeechMirror
+  "Official committee report read into Hansard recommends reference of THREE 14 Oct gas bills to Senate Economics Legislation Committee, with report due 11 Nov 2026. Referral is procedural and NOT an assent or confirmation of stakeholder drafting. Separate 26 October public submission closing date reported by contemporary source, not independently verified as final regulator endpoint here."
+
+gasSenateOrders384385OriginalIndexed : ScopedGasReceipt
+gasSenateOrders384385OriginalIndexed = scoped-gas-receipt
+  "Australian Senate, current orders for production of documents register, item 384/385, proposed by Senator Fatima Payman"
+  "2026-03-04 through 2026-05-06 document response history; live compliance after those dates NOT confirmed"
+  "https://www.aph.gov.au/-/media/02_Parliamentary_Business/22_Chamber_Documents/221_Senate/Notice_Paper/Current_Notice_Paper/OPDs.pdf"
+  parliamentarySpeechMirror
+  "Official indexed primary Senate PDF TEXT, but file page acquisition returned 403, so PDF face and currency NOT independently verified: orders sought gas-reservation minister/department stakeholders' meetings, correspondence, agendas/attendees. Order 384 for Industry/Innovation: reply indexed 21 Apr 2026; order 385 Resources reply indexed 6 May 2026, both citing PII cabinet deliberations/privacy, and then shown uncomplied. No named private lobbyist identified and PII ≠ misconduct, denied merits, or permanent refusal."
+
+record GasTransparencyGate : Set where
+  constructor gas-transparency-gate
+  field
+    originalSenateReferralReported : Bool
+    inquiryReport11NovPublishedAndRead : Bool
+    originalTwoStakeholderDocumentOrdersIndexed : Bool
+    actualPDFPageOfOrdersAuthenticated : Bool
+    laterOrderComplianceOrCourtRulingVerified : Bool
+    confidentialStakeholderIdentityKnown : Bool
+    publicInterestImmunityClaimIsIllicitGasLobbyingProof : Bool
+open GasTransparencyGate public
+
+canonicalGasTransparencyGate : GasTransparencyGate
+canonicalGasTransparencyGate = gas-transparency-gate
+  true false true false false false false
+
+noPIIToInfluencePromotion :
+  publicInterestImmunityClaimIsIllicitGasLobbyingProof canonicalGasTransparencyGate ≡ false
+noPIIToInfluencePromotion = refl
+
+noFutureReportPromotedToPublished :
+  inquiryReport11NovPublishedAndRead canonicalGasTransparencyGate ≡ false
+noFutureReportPromotedToPublished = refl
