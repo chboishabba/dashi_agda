@@ -152,3 +152,40 @@ instantiated by the original #1098 source-word/cocycle computation,
 not by the simple phase-swap finite model. This obligation is
 strictly upstream of #1148 IIT/JFine. No duplicate source-lift
 formalisation is opened here.
+
+## 2026-10-27 crucial extra gate: polarisation preservation vs Weil/Fourier mixing
+
+NEW `scripts/monster3b_polarization_monomial_gate.py` accepts explicit
+GF(3) matrices: a 2h×2h operator, a 2h×h full-rank Lagrangian
+column basis, and the ORIGINAL nondegenerate alternating form.
+It checks skew/alternating/nondegenerate form, L isotropy,
+`Aᵀ J A = λ J` for λ=1 or 2, then `rank([L | A L])`.
+The finite ordinary-basis commuting square is *eligible* only if this
+rank equals h. This is a NECESSARY not sufficient condition:
+a quadratic central cocycle and actual linear operator equality are
+still required. Nonpreservation makes a bare basis-label permutation
+impossible for the original Schr modulation/polarization; a genuine
+Weil/Fourier mixing operator is needed instead.
+
+Locally executed negative controls in dimension12: identity
+preserves L (rank6, multiplier1); a symplectic quarter-turn
+exchanges L with dual L* (rank12, multiplier1); an anti-symplectic
+mirror diag(I6,-I6) preserves L (rank6, multiplier2).
+Bad alternating forms, non-similitudes and deficient L fail closed.
+These are SYNTHETIC algebraic witnesses only, not actual ATLAS matrices.
+
+This strengthens the interpretation of the typed Agda consumer.
+`DualZetaActualAppraisalSquareInput` explicitly assumes
+`modelAppraisalMirrorSquare`, hence a monomial coordinate action;
+its source-word constructor MUST satisfy the new polarization test.
+The full Monster normalizer might not preserve the chosen
+Lagrangian; a whole-normalizer basis-label square must NOT be inferred.
+If a source word fails, use #1098's actual Weil/Heisenberg linear
+intertwiner rather than silently forcing a point map.
+
+Local observed: 12 relevant pytest tests passed, the 90-slice finite
+consumer checked 1,837,080 conditional model equalities.
+Unobserved: exact GitHub blob runtime replay, true source ATLAS
+matrix input to this new gate, genuine CTblLib source 78 selection,
+selected actual Hom_E, and Agda kernel. Original mathematical
+and repository authorship remains as above.
