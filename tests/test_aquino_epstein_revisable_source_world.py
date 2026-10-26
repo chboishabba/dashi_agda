@@ -407,7 +407,9 @@ def test_australia_three_senate_inquiries_are_distinct_original_dockets():
         "only" in a["source_interpretation_ceiling"].lower()
         and "not proof of no off-register advocacy" in a["source_interpretation_ceiling"])
     assert "Original individual native PDFs were not visually inspected" in a["source_interpretation_ceiling"]
-    assert "cannot have caused" in a["temporal_noncausation"]
+    assert "postdates" in a["temporal_noncausation"]
+    assert dockets[2]["introduced"] < "2022-10-13"
+    assert dockets[0]["introduced"] < dockets[1]["introduced"]
     assert world()["original_root_count"] == 9
 
 
