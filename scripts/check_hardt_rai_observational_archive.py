@@ -95,6 +95,5 @@ def main():
     args = ap.parse_args()
     print(json.dumps(audit(args.manifest), indent=2, sort_keys=True))
 
-
 if __name__ == '__main__':
     main()
