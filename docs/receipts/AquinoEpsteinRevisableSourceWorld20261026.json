@@ -474,6 +474,45 @@
       "description": "Only if independent original dated instruction, budget AND same-workproduct exist; cost is planning ordinal, not probability."
     }
   ],
-  "latest_sibling_contract": "PR #1268 head 12f0ba7005572d60152f304863afbf1c7ffa5b8b: validates severe_test on each claim and computes declared source_roots/independent_root_count; integration is data shape only, sibling not merged",
-  "source_root_independence_ceiling": "independent_root_count measures distinct declared original producers supporting a claim, NOT independent datasets, independent findings, reliability, or a proof of the external claim. FTC petition/reply same root; Bannon opposition and court procedure separate author roles but not independent truth confirmations."
+  "latest_sibling_contract": "PR #1268 head 12f0ba7005572d60152f304863afbf1c7ffa5b8b: requires severe_test per claim, computes producer source_roots and declared independent_root_count. Zero runtime integration; do not treat differing producer labels as independent empirical samples.",
+  "source_root_independence_ceiling": "independent_root_count measures distinct declared original producers supporting a claim, NOT independent datasets, independent findings, reliability, or a proof of the external claim. FTC petition/reply same root; Bannon opposition and court procedure separate author roles but not independent truth confirmations.",
+  "original_root_count": 9,
+  "unattributed_future_source_placeholders": 1,
+  "root_relations": [
+    {
+      "left": "ftc_2019_2020",
+      "right": "bannon_defence_2020",
+      "relation": "opposing_litigants_same_2020_cid_docket",
+      "independence": "separate author roles, NOT independent empirical replications of Bannon conduct",
+      "case_ref": "DDC 1:20-mc-00111-CRC"
+    },
+    {
+      "left": "ftc_2019_2020",
+      "right": "ddc_judge_2020",
+      "relation": "agency_petition_versus_court_procedural_order_same_docket",
+      "independence": "separate original producers, judicial order establishes show-cause procedure not FTC allegations",
+      "case_ref": "DDC 1:20-mc-00111-CRC"
+    },
+    {
+      "left": "hsi_ipr_2011",
+      "right": "dea_ocdetf_2015",
+      "relation": "same_historical_operation_title_distinct_agency_case_purpose",
+      "independence": "different original government programmes, no common case identity",
+      "case_ref": "HSI IPR counterfeits since 2011 vs DEA OCDETF NY-NYS-0829"
+    },
+    {
+      "left": "canada_joint_2019",
+      "right": "ftc_2019_2020",
+      "relation": "independent_regulatory_institutions_potential_common_upstream_vendor_documents",
+      "independence": "separate legal regulators but may overlap source contracts/scores, not independent raw-file audits",
+      "case_ref": "Canada PIPEDA 2019-004 vs FTC CA Docket 9383"
+    },
+    {
+      "left": "black_dechert_2021",
+      "right": "future_undetermined_source",
+      "relation": "known_report_scope_versus_unknown_original_bank_creator",
+      "independence": "Dechert service fee aggregate must not be substituted as bank-origin individual USD wire",
+      "case_ref": "2016 Black transaction class not authenticated"
+    }
+  ]
 }
