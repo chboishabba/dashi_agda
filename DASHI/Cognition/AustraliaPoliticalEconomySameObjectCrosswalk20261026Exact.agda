@@ -145,6 +145,10 @@ record AustralianPowerPipelineFrontier : Set where
     namedAssociateDonationsDistinctFromAircraft : Bool
     bannonPalmerStatementAndDenialPreserved : Bool
     mandelsonStrategyReachedEpsteinAtSourceScope : Bool
+    hansonAttributesSpecificPensionerWorkProposalToRinehart : Bool
+    oldFY2025_26AECAnnualDisclosurePublicationPending : Bool
+    publishedDonorAnnualReturnSameAsReportedAprilDonation : Bool
+    aecFutureReformThresholdApplicableRetroactively : Bool
     oneNationInternalPolicyAdoptionCausallyProven : Bool
     specificIPAContentBoughtByCourtReportedPayments : Bool
     directRinehartEpsteinRelationProven : Bool
@@ -155,12 +159,27 @@ open AustralianPowerPipelineFrontier public
 
 canonicalAustralianPowerPipelineFrontier : AustralianPowerPipelineFrontier
 canonicalAustralianPowerPipelineFrontier = australian-power-pipeline-frontier
-  true true true true true true false false false false false false
+  true true true true true true true true false false false false false false false false
 
 australianMaterialSupportDoesNotProvePolicyCapture :
   oneNationInternalPolicyAdoptionCausallyProven
     canonicalAustralianPowerPipelineFrontier ≡ false
 australianMaterialSupportDoesNotProvePolicyCapture = refl
+
+hansonAttributedSpecificPensionerPolicyOrigin :
+  hansonAttributesSpecificPensionerWorkProposalToRinehart
+    canonicalAustralianPowerPipelineFrontier ≡ true
+hansonAttributedSpecificPensionerPolicyOrigin = refl
+
+noCurrentAECAnnualReturnWithoutPublication :
+  publishedDonorAnnualReturnSameAsReportedAprilDonation
+    canonicalAustralianPowerPipelineFrontier ≡ false
+noCurrentAECAnnualReturnWithoutPublication = refl
+
+futureReformMustNotRetrospectivelyRewrite2026 :
+  aecFutureReformThresholdApplicableRetroactively
+    canonicalAustralianPowerPipelineFrontier ≡ false
+futureReformMustNotRetrospectivelyRewrite2026 = refl
 
 hancockIPADonationsDoNotProveSpecificEditorialOrder :
   specificIPAContentBoughtByCourtReportedPayments
@@ -176,3 +195,29 @@ australiaGlobalCommonProgrammeNotEstablished :
   wholeAustraliaUSCovertCommandProven
     canonicalAustralianPowerPipelineFrontier ≡ false
 australiaGlobalCommonProgrammeNotEstablished = refl
+
+
+hansonSpecificPensionerPolicyOriginalTranscript : AustraliaSourceRoleReceipt
+hansonSpecificPensionerPolicyOriginalTranscript = australia-source-role-receipt
+  firstPersonPolicyInterviewReported
+  "Pauline Hanson, first-person 2026 ABC Perth interview replayed in ABC Four Corners 2026-09-28 original transcript"
+  "https://www.abc.net.au/news/2026-09-28/one-nation-behind-the-orange-wave/107205072"
+  "She expressly attributes her proposed pensioners-work-hours policy to Rinehart. This is first-person origination testimony, NOT an independent parliament-recorded party policy adoption or a demonstrated enactment outcome."
+
+aecOldRegimeAnnualDisclosureGate : AustraliaSourceRoleReceipt
+aecOldRegimeAnnualDisclosureGate = australia-source-role-receipt
+  originalParliamentaryDeclaredInterest
+  "Australian Electoral Commission, financial year 2025-26 Annual returns and 2026/27 transition"
+  "https://www.aec.gov.au/Parties_and_Representatives/annual-returns.htm"
+  "AEC says FY2025-26 donor annual returns are due 2026-11-17, party returns 2026-10-20, but official publication comes February 2027. Its new calendar-year/threshold regime commences 2027-01-01: do not backdate 2027 $5000 threshold to 2026 $17300 rules."
+
+aecDisclosure2026PublicationOriginal : AustraliaSourceRoleReceipt
+aecDisclosure2026PublicationOriginal = australia-source-role-receipt
+  originalParliamentaryDeclaredInterest
+  "Australian Electoral Commission, 2026-10-26 Farrer by-election financial disclosure release"
+  "https://aec.gov.au/media/2026/10-26.htm"
+  "AEC expressly dates political-party 2025-26 annual return public inspection to 2027-02-01. A contemporary ABC donor report is not yet the future official annual disclosure and does not conclusively prove beneficiary of funds."
+
+siblingClimateFinanceOwnershipNote : String
+siblingClimateFinanceOwnershipNote =
+  "PR #1251 original climate genealogy carries HPPL/IPA court receipt plus 1998 API/GCC communications plan (US) and media production/funding; unmerged master sibling, source lineage only, not direct contract or editorial instruction joining Gina, IPA and Palmer, Bannon, Epstein or CA."
