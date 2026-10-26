@@ -66,3 +66,30 @@ The original sources **do not** themselves prove the repository-specific Chi33 w
 - Current source-level GitHub commits and checks are not Agda/Lean kernel receipts.
 - Local *independent* exact-Fraction calculation of the same chosen 27 bundle reproduced signed indices A=-24, B=+13, C=-1, total -12, and Chi33 degrees (0,0,-1). The GitHub head regression imports the owner scripts but was not executed byte-for-byte in this environment.
 - Neither a globally quantised 5D eta-CS-WZ cancellation nor a physically stable quantum vacuum is established. The proof-level obstruction is a missing same-source spectral eta/differential-character functional with a defect-aware WZ extension, **not** an absent eta/CS/WZ vocabulary or a missing finite representation.
+
+
+## 27 October full-boundary-Cartan theorem (stronger than single-bundle witness)
+
+New owner: `scripts/check_kk_e6_chi33_full_cartan_anomaly_factor.py`, also consumed by `scripts/check_kk_e6_same_bundle_eta_cs_wz_join.py`.
+
+Let `c0,c1,c2=-c0-c1`, `l0,l1,l2=-l0-l1` and `r0,r1,r2=-r0-r1` denote formal Chern roots of the three SU3 maximal tori. The selected parity-even boundary group only requires the S3 colour and S2L×S2R doublet Weyl permutations. Define
+`D=l2-r2=r0+r1-l0-l1`, the *actual original C33 Higgs line character*.
+For the selected orbifold signed 27 virtual representation `Eplus-Eminus`, exhaustive sum of the **same 27 source weights** gives
+
+`ch1^signed = 8D`;
+`Tr_signed(F^3)=4 D Q`, with
+`Q=3(c0²+c0 c1+c1²)+2(l0²+l1²+r0²+r1²)+l0 l1+r0 r1+2(l0+l1)(r0+r1)`.
+
+The 4-form `Q` is invariant under S3c × S2L × S2R, so by the standard rational splitting principle the polynomial identity is meaningful as a rational characteristic-class identity for ALL principal H bundles, not only torus-split ones. Using the classical spin Dirac index theorem on any closed spin sixfold X,
+
+`ind(D_Eplus)-ind(D_Eminus) = integral_X D*(2 Q/3 - p1(TX)/3)`
+
+with the convention that the formal Chern roots represent integral first Chern classes and `ch3=Tr(F^3)/6`.
+
+**New consequence:** if `c1(L_Chi33)=0` in rational cohomology, the perturbative/free sixfold index vanishes. Conversely, a **nonzero free signed index** forces `c1(L_Chi33)≠0` rationally, hence the complex line bundle has no nowhere-zero continuous section; the phase-only Chi33 WZ is obstructed *on every such nonzero-index background* unless the action provides patches, defects, a restricted field domain or an alternative UV completion. This is a source-specific statement about an unpatched scalar-phase ansatz, not a general no-go against all WZW anomaly matching.
+
+This implication is independent of the earlier specific signed-index=-12 witness, which now serves as a concrete independent calibration. **Crucial negative control:** if D=0, only the *free* anomaly polynomial/index vanishes. Torsion global anomalies, eta-invariant holonomy, global CS levels and path-integral zero-mode issues do not follow and remain open.
+
+The local source cochain `I6=(FL-FR)X4` is a restriction of this stronger invariant-polynomial factorisation to a selected central U1 basis. The new calculation identifies the *actual global line-character candidate*, without claiming a physical normalized differential cocycle. The original first-Tits action #1106 remains the representation owner; physical parity #1241 remains the anomaly source owner.
+
+**New terminal max-cut:** construct the Dai-Freed/Witten-Yonekura determinant-line functional and quantised spin CS level on the selected H quotient, and a global patched/defect-aware WZ functional compatible with the Chi33 line class. Do not waste another cut checking only torus sample parity or a non-source 2+1D CS level. No Agda kernel or full quantum anomaly cancellation asserted.
