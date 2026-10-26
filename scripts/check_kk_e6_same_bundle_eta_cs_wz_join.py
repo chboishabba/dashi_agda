@@ -39,6 +39,8 @@ clutch=owner("scripts/check_kk_e6_orbifold_even_quotient_s2_clutch.py",
              "parity_even_lift_weights","chi33_line_winding")
 index=owner("scripts/check_kk_e6_orbifold_index_even_universal_trace.py",
             "selected_indexes","fixture")
+factor=owner("scripts/check_kk_e6_chi33_full_cartan_anomaly_factor.py",
+             "D","Q","six_index_density")
 local=owner("scripts/check_kk_e6_orbifold_cs_wz_anomaly_transfer.py",
             "I6","X4","remaining")
 fractions=owner("scripts/check_kk_e6_z3_fractional_instanton_mixed_wz.py",
@@ -65,6 +67,8 @@ assert sum([index["full"]])==0
 assert local["remaining"]==(local["I6"],0)
 assert local["X4"].expand().coeff(local["c2c"])==2
 assert fractions["Bsq"]==2
+assert factor["linear"]==8*factor["D"]
+assert factor["cubic"].expand()==(4*factor["D"]*factor["Q"]).expand()
 
 # Explicitly inspect the original QFT, 5D, and eta TARGET owners.
 # Merely existing with those names is NOT an actual 5D eta functional.
@@ -89,6 +93,7 @@ print("PASS exact owner imports and original 2+1D/5D/eta authority separation")
 print("PASS SAME parity-even nonliftable H-bundle on spin (S2)^3")
 print("PASS selected Chi33 line degrees",winding,"forcing zero")
 print("PASS same-bundle signed 27 index",signed,"half-index",signed/2)
+print("PASS full H anomaly polynomial factor through Chi33 Chern class")
 print("PASS local source endpoint polynomial cancellation only")
 print("OPEN 5D regulated eta/Pfaffian on H bundle and quantum CS descent")
 print("OPEN patched/defect-completed WZ on forced Chi33-zero sector")
