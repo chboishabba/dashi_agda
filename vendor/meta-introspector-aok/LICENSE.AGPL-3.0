@@ -1,0 +1,22 @@
+GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3, 19 November 2007
+
+License notice for the verbatim vendored source snapshots from:
+  repository: meta-introspector/aok
+  upstream author: Mike Dupont / meta-introspector
+  construction revision: c168223e96f7acc6179044f2a365a92db2e350c3
+
+The upstream repository declares these files under GNU Affero General Public
+License version 3 (AGPL-3.0). The canonical upstream LICENSE object at the
+pinned construction revision has Git blob identity:
+
+  0ad25db4bd1d86c452db3f9602ccdbe172438f52
+
+Canonical source path:
+  meta-introspector/aok:LICENSE
+
+This file is a license/provenance notice. It intentionally does not claim to
+be byte-identical to the upstream LICENSE object. The vendored Program.lean
+and semantic-source snapshots remain unmodified upstream source and retain
+their upstream license and attribution. See NOTICE.md for per-file provenance
+and exact Git blob identities.
