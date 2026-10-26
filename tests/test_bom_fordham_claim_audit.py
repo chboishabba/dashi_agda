@@ -751,7 +751,7 @@ def test_climate_origins_same_api_plan_and_actual_people_not_url_multiplicity():
     manifest = ROOT / "Docs/support/reference/climate_genealogy_typed_edges.csv"
     with manifest.open(newline="", encoding="utf-8") as src:
         records = list(csv.DictReader(src))
-    assert len(records) == 32
+    assert len(records) == 36
     ids = [r["edge_id"] for r in records]
     assert len(ids) == len(set(ids))
     contributed = [r for r in records if re.fullmatch(r"E8-\d\d", r["edge_id"])]
@@ -790,7 +790,7 @@ def test_climate_origins_same_api_plan_and_actual_people_not_url_multiplicity():
     assert "900m amount includes all activities" in docs.lower() or (
         "900m amount includes all activities" in climate.lower()
     ) or "900m amount includes all activities" in docs.lower()
-    assert "32 rows" in docs
+    assert "36 rows" in docs
     assert "same-NAMED-PERSON continuity" in docs
 
 
@@ -809,3 +809,39 @@ def test_climate_original_claim_proofs_do_not_promote_funding_to_edits():
         assert item in val
     assert "typedGenealogyEdge" in climate
     assert "false false false" not in climate  # not a new political-radio triple system
+
+
+def test_original_ice_and_singer_budget_states_do_not_invent_payment():
+    typed = (ROOT / "DASHI/Governance/TypedGenealogyEdgeExact.agda").read_text()
+    climate = (ROOT / "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda").read_text()
+    validation = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    with (ROOT / "Docs/support/reference/climate_genealogy_typed_edges.csv").open(
+        newline="", encoding="utf-8"
+    ) as fd:
+        cases = {r["edge_id"]: r for r in csv.DictReader(fd)}
+    assert len(cases) == 36
+    assert cases["E9-12"]["relation_kind"] == "organizational_continuity"
+    assert cases["E9-13"]["relation_kind"] == "funding_commitment"
+    assert cases["E9-14"]["relation_kind"] == "organizational_continuity"
+    assert cases["E9-15"]["relation_kind"] == "funding_proposal"
+    assert cases["E9-13"]["evidence_strength"] == "B_corroborated"
+    assert cases["E9-15"]["evidence_strength"] == "A_primary"
+    assert "payment transaction not independently inspected" in cases["E9-13"]["notes"]
+    assert "not evidence it was disbursed" in cases["E9-15"]["notes"]
+
+    for exact in ("fundingProposal : RelationKind", "fundingCommitment : RelationKind",
+                  "fundingProposalIsNotTransferRelation", "fundingCommitmentIsNotTransferRelation"):
+        assert exact in typed
+    for item in ("ice1991TestCampaign", "singerGCC1994Proposal",
+                 "southernCompany1991To1998", "southernICEPledgeNotDisbursement",
+                 "singer1994ToSEPP1998", "singerGCCSolicitationNotMoneyPaid"):
+        assert item in climate
+    for item in ("singerGCCBudgetIsRequestNotPaidGrant",
+                 "southernICEBudgetIsCommitmentNotBankTransfer",
+                 "singer1994ProposalCannotEstablishMethodTransfer",
+                 "southern1991PledgeCannotEstablishMethodTransfer"):
+        assert item in validation
+    doc = RESEARCH.read_text()
+    assert "36 rows total" in doc
+    assert "Singer → tobacco funders" in doc
+    assert "this audit has **not acquired** a specific dated BP internal technical memo" in doc
