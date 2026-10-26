@@ -556,6 +556,20 @@ ellsworthKansasNotOriginalMaineLocale :
 ellsworthKansasNotOriginalMaineLocale = refl
 
 ------------------------------------------------------------------------
+-- RVML attributed 2003 publicity is one organiser root, not original
+-- Gentry source plans, Navy employment records or Reich weather proof.
+------------------------------------------------------------------------
+
+rvmlPromoReichClassNotConstructedDeviceReceipt :
+  Atlas.historicalTransmissionProved Atlas.rvmlPromotionalReichBuildNotVerifiedMechanism ≡ false
+rvmlPromoReichClassNotConstructedDeviceReceipt = refl
+
+rvmlFlanaganNamedTopicNotOriginalHandoff :
+  Atlas.relationClass Atlas.rvmlFlanaganNamedTopicNotOriginalCoilHandoff ≡
+  Atlas.documentaryDistinction
+rvmlFlanaganNamedTopicNotOriginalHandoff = refl
+
+------------------------------------------------------------------------
 -- HOE_MATH / 5D SPIRITUALITY: NO NUMBER-ID OR ONTOLOGY TRANSFER
 --
 -- Original hoe_math Levels source and its Spiral Dynamics/AQAL lineage
