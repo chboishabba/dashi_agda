@@ -1,0 +1,81 @@
+{
+  "schema": "dashi.horn-c3-lepton-steelman-phase-gates/2026-10-24/v1",
+  "date": "2026-10-24",
+  "repository": "chboishabba/dashi_agda",
+  "branch": "chatgpt/neutrino-icecube-maxcut-20261024",
+  "source_blob_sha1": {
+    "DASHI/Physics/QFT/NeutrinoHornedC3RephasingNoGoExact.agda": "d8efca4e180b5cf83b958e56035be8b2de6bab1f",
+    "tests/test_neutrino_horned_c3_rephasing_steelman.py": "c75fbb54da1f9b7ac6bc3e1b3e0998913e0e1665",
+    "tests/test_neutrino_cyclotomic_vs_analytic_su3.py": "09700969a3ae1e5c02a8dcaa8f1a9cb62718c9d6",
+    "scripts/audit_neutrino_sun3_symbolic_matrix_laws.py": "f3c955970d6bfccf6b55c28d1d8909acd6d7b156",
+    "Docs/physics/HornedLeptonC3SteelmanPhaseGate20261024.md": "9b0eb4cdbce6f3211c770030877a8f74ed9cd268"
+  },
+  "source_roles": {
+    "alexander_1924": "original horned sphere",
+    "hatcher": "Algebraic Topology Example 2B.2 (abstract commutator colimit group)",
+    "goto_1949": "J Math Soc Japan 1:270-272, DOI 10.2969/jmsj/00130270 (ambient connected compact SU3 group commutator theorem)",
+    "jarlskog_1985": "Phys Rev Lett 55:1039 basis invariant CP",
+    "washington_1997": "Introduction to Cyclotomic Fields, degree and quadratic Q(zeta3) algebra",
+    "dashi": "previous canonical SU3 group, cyclotomic scalars, horned source, neutrino same-space target",
+    "new_work": "selected model row-rephasing and Wilson character discriminator, cyclotomic vs analytic field-of-definition guard, phase/deliverable steelman"
+  },
+  "executed_local": {
+    "python": "3.13.5",
+    "sympy": "1.14.0",
+    "tests": {
+      "count": 36,
+      "passed": 36,
+      "failures": 0,
+      "source_blob_matched": true,
+      "previous_committed": 26,
+      "new_rephasing_and_wilson_character": 7,
+      "new_field_of_definition": 3
+    },
+    "symbolic_matrix_laws": {
+      "identities": 10,
+      "passed": 10,
+      "source_blob_sha1": "f3c955970d6bfccf6b55c28d1d8909acd6d7b156"
+    },
+    "exact_CP_rephasing": {
+      "PMNS_threefold_row_rephase_nontrivial_matrix_orbit": true,
+      "all_9_born_probability_invariant": true,
+      "Jarlskog_CP_odd_nonzero_but_invariant": true,
+      "charged_lepton_operator_same": true,
+      "neutral_squared_mass_operator_basis_covariant": true,
+      "all_9_coherent_vacuum_channel_probabilities_invariant": true,
+      "pion_neutron_muon_phase_averaged_flux_invariant": true,
+      "conjugate_3_horn_root_Wilson_traces_equal": true,
+      "simultaneously_rotated_two_word_trace_equal": true
+    },
+    "field_of_definition": {
+      "K": "Q(zeta3) degree=2",
+      "ambient": "SU(3,C), connected compact semisimple Lie group",
+      "cyclic_diagonal_recipe_D0": "diag(1,zeta3^2,1)",
+      "det_D0": "zeta3^2",
+      "normalization_requires": "c^3=zeta3 (primitive 9th root)",
+      "irreducible_polynomial": "Phi_9(X)=X^6+X^3+1, degree=6",
+      "conclusion": "this cyclic/spectral recipe leaves Q(zeta3) in the determinant-one factor; no universal impossibility established for another rational factorization",
+      "sympy_irreducibility": true
+    }
+  },
+  "grades": {
+    "gotô_hatcher_abstract_existence": "VALID_CLASSICAL_MATHEMATICS_NOT_KERNEL_FORMALIZED",
+    "selected_CP_and_basis_no_go": "EXACT_PYTHON_VERIFIED_SOURCE_WRITTEN_AGDA",
+    "cyclotomic_vs_analytic": "EXACT_SYMPY_FIELD_DEGREE_VERIFIED",
+    "full_program_P2": "ABSTRACT_MATHEMATICAL_EXISTENCE",
+    "formal_P3": "INCOMPLETE_NO_AGDA_RECEIPT",
+    "geometric_P3b": "INCOMPLETE_PI1_THREE_COPY",
+    "physical_P4": "NO_PHYSICAL_REPRESENTATION_SELECTION",
+    "empirical_P5": "NO_LIKELIHOOD_OR_PREDICTION",
+    "CI": "NOT_USED"
+  },
+  "open": [
+    "Agda exact-head compile and typecheck for new source module",
+    "typed Q(zeta3) embedding into analytic complex SU3 (do not put Goto inside countable K subgroup)",
+    "closed certified 3x3 SUNMatrixTheory and matrix/record equality",
+    "formal Gotô group theorem and universal direct limit",
+    "three-copy wild exterior smooth geometric pi1 with fixed holonomy",
+    "interaction and physical basis-invariant observable beyond row rephasing/character equality",
+    "model-specified low-parameter physical CP/angle prediction then original NuFIT/T2K likelihood"
+  ]
+}

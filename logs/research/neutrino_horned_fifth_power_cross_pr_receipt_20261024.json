@@ -1,0 +1,94 @@
+{
+  "schema": "dashi.horn-neutrino-order-compatibility/maxcut-v1",
+  "date": "2026-10-24",
+  "scope": "Cross-PR abstract Alexander horned C3 finite A5 quotient versus CP-nonzero lepton TS residual",
+  "attribution": {
+    "original_horned_sphere": "J. W. Alexander (1924), distinct original wild embedding",
+    "classical_group_model": "Allen Hatcher, Algebraic Topology, Example 2B.2, pp. 170-172: injective binary free-group commutator tower, nontrivial perfect torsion-free exterior group",
+    "related_not_equivalent_model": "N. W. Riebe (1968), The Fundamental Groups of the Complements of Some Solid Horned Spheres; do not identify higher-order examples or their free-group results with Hatcher's perfect group",
+    "old_repo_owner": "PR #1244: three-sector horned group, A5^3 finite quotient and c=0 VOA actor",
+    "new_repo_consumer": "PR #1247: exact cyclotomic CP-nonzero lepton TS model, conditional fifth-power no-descent bridge",
+    "observed_data": "No experimental or astronomical data required or inferred"
+  },
+  "source_references": {
+    "horned_pr": "https://github.com/chboishabba/dashi_agda/pull/1244",
+    "horned_finite_root_script_sha": "4e30c491d47562797c23efa6b17667ff33118794",
+    "horned_voa_actor_script_sha": "3385de02da737ac463a73b23fa71c3de96a0cbf9",
+    "horned_root_test_sha": "1c1df6e10db4eb4ed0f314e4a6dc5eec0e004ce8",
+    "neutrino_pr": "https://github.com/chboishabba/dashi_agda/pull/1247",
+    "neutrino_complex_cp_model_sha": "8837b0a9394ea4b4ca531f4d85fbeb13e8537d70",
+    "neutrino_horn_agda_bridge_sha": "5e458c49165d83f0d3ae1851b9b02791c173d577",
+    "neutrino_horn_python_test_sha": "fc1001c0f661c35b6a5354a6d32fc4f9d21c1165"
+  },
+  "independent_tests": {
+    "original_unconstrained_root": {
+      "permutation": [
+        2,
+        1,
+        3,
+        0,
+        4
+      ],
+      "order": 3,
+      "status": "PASS reconstructed deterministic original selector; contradicted claimed root-order-five assertion"
+    },
+    "corrected_selected_root": {
+      "permutation": [
+        2,
+        0,
+        3,
+        4,
+        1
+      ],
+      "order": 5,
+      "commutator_pair": [
+        [
+          0,
+          1,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          3,
+          0,
+          1,
+          4
+        ]
+      ],
+      "generates_A5_cardinality": 60,
+      "status": "PASS independent finite permutation enumeration"
+    },
+    "TS_fifth_entry_zero_zero": {
+      "coordinate_form": "u+v*zeta",
+      "u": "64617593685528773022494665450634455935626525583170223342274209281039/236441034989226881781955824279450550827785137929884652463470640062961",
+      "v": "-37652869638564470030709578649147690575544358178427234909789542400/281142728881363711988056865968431094920077452948733237174162473321",
+      "approx_complex": [
+        0.3402566114304599,
+        -0.11598500790728489
+      ],
+      "fifth_power_not_identity": true,
+      "status": "PASS independent local Python Fraction polynomial/cyclotomic matrix calculation; source angles checked against Agda source"
+    }
+  },
+  "logical_consequences": [
+    "Abstract Hatcher meridian m has infinite order, so m^5 != 1; corrected finite selected A5 quotient maps m to g of order 5 and loses m^5.",
+    "The source threefold rotation is an order-3 automorphism/outer class, NOT an order-3 element in torsion-free G. The semidirect extension G ⋊ C3 has an order-3 element.",
+    "G is perfect; no nontrivial homomorphism G → C3 or U(1), but nonabelian quotient G → A5^3 exists.",
+    "Any homomorphism A5^3 → matrices sending selected order-five quotient meridian to TS is impossible because homomorphisms preserve fifth powers and TS^5 != I.",
+    "No general obstruction to a different infinite-image nonabelian representation G → SU3 is established; it would require coherent commutator-stage assignment and C3-equivariance.",
+    "No same-object identification of horn topology, the finite c=0 VOA, or physical neutrino Hamiltonians is supplied."
+  ],
+  "validation": {
+    "corrected_horn_branch_source_readback": "PASS",
+    "neutrino_branch_source_readback": "PASS",
+    "independent_A5_permutation_order_computation": "PASS",
+    "independent_TS_fifth_exact_Fraction_computation": "PASS",
+    "corrected_committed_horn_Python_test_execution": "NOT_RUN",
+    "committed_neutrino_test_execution": "NOT_RUN",
+    "Agda_kernel_both_PRs": "NOT_RUN",
+    "formal_geometric_pi1_bridge": "OPEN",
+    "physical_PMNS_identification": "OPEN"
+  }
+}
