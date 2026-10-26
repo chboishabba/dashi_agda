@@ -7,6 +7,8 @@ on:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
+      - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
