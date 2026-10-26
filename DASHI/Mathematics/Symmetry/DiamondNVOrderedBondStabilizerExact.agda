@@ -9,7 +9,8 @@ module DASHI.Mathematics.Symmetry.DiamondNVOrderedBondStabilizerExact where
 -- PR #1238 owns existing four NV axis labels; PR #1262 owns
 -- the separate spin-one Sz² cyclic-label obstruction.
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer using (ℤ; +_; _*_)\nopen import Data.Product using (_×_; _,_)
+open import Data.Integer using (ℤ; +_; _*_)\nopen import Data.Product using (_×_; _,_; proj₁; proj₂)
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as Atomic
 open import Relation.Binary.PropositionalEquality using (cong)
 import Data.Integer.Properties as IntP
 
@@ -108,3 +109,48 @@ bondOperationsFixBoth sc2 = refl , refl
 -- centre requires species (N/C/vacancy), electronic Hamiltonian,
 -- strain, magnetic field and orientation witnesses. This statement
 -- alone says nothing about the apparatus's spectrum.
+
+-- A missing atom is not encoded as atomic number Z=0. This typed
+-- site decoration reuses the native 369 atomic identity and keeps
+-- vacancy, host atom, and substituted nitrogen chemically distinct.
+data Occupant : Set where
+  vacancy : Occupant
+  atom : Atomic.AtomicIndex → Occupant
+
+carbon12 : Atomic.AtomicIndex
+carbon12 = Atomic.atomicIndex 6 6 6
+
+nitrogen14NeutralIndex : Atomic.AtomicIndex
+nitrogen14NeutralIndex = Atomic.atomicIndex 7 7 7
+
+data OrderedNVEndpoint : Set where
+  substitutionalNitrogen nearestVacancy : OrderedNVEndpoint
+
+endpointSite : OrderedNVEndpoint → FCC.DiamondSite
+endpointSite substitutionalNitrogen = aOrigin
+endpointSite nearestVacancy = bBond
+
+endpointOccupant : OrderedNVEndpoint → Occupant
+endpointOccupant substitutionalNitrogen = atom nitrogen14NeutralIndex
+endpointOccupant nearestVacancy = vacancy
+
+endpointAction : BondC3v → OrderedNVEndpoint → OrderedNVEndpoint
+endpointAction g e = e
+
+endpointGeometryEquivariant :
+  (g : BondC3v) (e : OrderedNVEndpoint) →
+  actBond g (endpointSite e) ≡ endpointSite (endpointAction g e)
+endpointGeometryEquivariant g substitutionalNitrogen =
+  proj₁ (bondOperationsFixBoth g)
+endpointGeometryEquivariant g nearestVacancy =
+  proj₂ (bondOperationsFixBoth g)
+
+endpointDecorationPreserved :
+  (g : BondC3v) (e : OrderedNVEndpoint) →
+  endpointOccupant (endpointAction g e) ≡ endpointOccupant e
+endpointDecorationPreserved g e = refl
+
+-- The atomic index above is a chosen neutral isotope label, not
+-- an assertion of the experimentally relevant NV charge state.
+-- The rest of the infinite carbon diamond lattice is not assigned
+-- a global defect Hamiltonian or optical-readout model here.
