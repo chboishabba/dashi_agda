@@ -58,6 +58,16 @@ class TestRaiProvenance(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'conflated'):
             m.audit_cohort_roles(x)
 
+    def test_deposit_version_locked_not_subsumed_by_paper(self):
+        x=copy.deepcopy(m.DEPOSIT); x['declared_recordings']=59
+        with self.assertRaisesRegex(ValueError,'deposit DOI/version/count'):
+            m.audit_metadata(deposit=x)
+
+    def test_deposit_foreign_version_rejected(self):
+        x=copy.deepcopy(m.DEPOSIT); x['doi']='10.5522/04/28508744.v2'
+        with self.assertRaisesRegex(ValueError,'deposit DOI/version/count'):
+            m.audit_metadata(deposit=x)
+
     def test_duplicate_rejected(self):
         with self.assertRaisesRegex(ValueError,'duplicate'):m.subject_join(('A','A'),('A',))
     def test_unattributed_file_not_reanalysis(self):
