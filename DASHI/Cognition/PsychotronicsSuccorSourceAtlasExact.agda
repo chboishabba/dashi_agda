@@ -729,6 +729,30 @@ noaaBangorGHCN1953 = Source.mkNoDOISource
   "Original station counts in tenths mm: 5 July 0, 6 July 66, 7 July 193, 8 July 46, 9 July 74. Independently establishes recorded regional Bangor rain, not Ellsworth onset or causal device effect."
   Source.publicAttribution
 
+-- Two station streams under the same NOAA GHCN custodial family are NOT
+-- two independent publishers or two rainmaking experiments.
+noaaBarHarborGHCN1953 : Source.AttributedSource
+noaaBarHarborGHCN1953 = Source.mkNoDOISource
+  "NOAA NCEI GHCN-Daily; historical Bar Harbor 3 NW Maine station observers"
+  "Bar Harbor 3 NW Maine USC00170371 original daily PRCP July 1953"
+  "official NOAA browser-read 269-column July row USC00170371195307PRCP on 26 October 2026; complete original publisher file bytes not downloaded"
+  "1953"
+  "https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USC00170371.dly"
+  Source.archivalSource
+  "July 5=0, 6=0, 7=130, 8=0, 9=10 tenths-mm; 6–8 = 13.0 mm; original hourly gauge cutoff and Reich local onset not established"
+  Source.publicAttribution
+
+noaaBarHarborStationMetadata : Source.AttributedSource
+noaaBarHarborStationMetadata = Source.mkNoDOISource
+  "NOAA NCEI Climate Data Online (same GHCN custodian as station rows)"
+  "BAR HARBOR 3 NW Maine USC00170371 original station identity"
+  "official original metadata: 44.41667 north, 68.25 west, 34.1m, 1893-01-01 through 1982-08-31; inspected 26 October 2026"
+  "1953"
+  "https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND%3AUSC00170371/detail"
+  Source.archivalSource
+  "Identifies historical Maine observation station, not Bar Harbor airport beginning 2005 or the Ellsworth experiment gauge"
+  Source.publicAttribution
+
 noaaBangorStationMetadata : Source.AttributedSource
 noaaBangorStationMetadata = Source.mkNoDOISource
   "NOAA NCEI Climate Data Online (same institutional root as raw station)"
@@ -828,7 +852,8 @@ sourceAtlas = Source.mkSourceAtlas
    croftMoonbustingEarly2002 ∷ adachiEditedChembusterIndex ∷
    wmoWeatherModification2025 ∷ peterReichDreams1973 ∷
    bushCloudbusting1985 ∷ noaaBangorGHCN1953 ∷
-   noaaBangorStationMetadata ∷ ellsworthAmericanJuly1953 ∷
+   noaaBangorStationMetadata ∷ noaaBarHarborGHCN1953 ∷
+   noaaBarHarborStationMetadata ∷ ellsworthAmericanJuly1953 ∷
    bangorLibraryNewspaperArchives ∷ ellsworthKansasFalseWeatherJoin ∷
    rvmlGentry2003Programme ∷ rvmlGentryVideoMetadata ∷ [])
   "claim-relative historical sources and technical analogues only; no causal transmission, psychic effect, clinical efficacy, video identification or source-independence promotion"
@@ -1632,6 +1657,29 @@ bangorJuly8 = station-precipitation noaaBangorGHCN1953 "USW00014606" 1953 7 8 46
 bangorJuly9 : HistoricStationPrecipitation
 bangorJuly9 = station-precipitation noaaBangorGHCN1953 "USW00014606" 1953 7 9 74
 
+-- Exact 1953 published station-month arithmetic, not a statement about
+-- 1953 gauge observation-day cutoff or rainfall at Reich's apparatus.
+barHarborJuly5 : HistoricStationPrecipitation
+barHarborJuly5 = station-precipitation noaaBarHarborGHCN1953 "USC00170371" 1953 7 5 0
+
+barHarborJuly6 : HistoricStationPrecipitation
+barHarborJuly6 = station-precipitation noaaBarHarborGHCN1953 "USC00170371" 1953 7 6 0
+
+barHarborJuly7 : HistoricStationPrecipitation
+barHarborJuly7 = station-precipitation noaaBarHarborGHCN1953 "USC00170371" 1953 7 7 130
+
+barHarborJuly8 : HistoricStationPrecipitation
+barHarborJuly8 = station-precipitation noaaBarHarborGHCN1953 "USC00170371" 1953 7 8 0
+
+barHarborJuly9 : HistoricStationPrecipitation
+barHarborJuly9 = station-precipitation noaaBarHarborGHCN1953 "USC00170371" 1953 7 9 10
+
+barHarborJuly6Through8TotalTenthsMm :
+  tenthsMillimetre barHarborJuly6 +
+  tenthsMillimetre barHarborJuly7 +
+  tenthsMillimetre barHarborJuly8 ≡ 130
+barHarborJuly6Through8TotalTenthsMm = refl
+
 bangorJuly6Through8TotalTenthsMm :
   tenthsMillimetre bangorJuly6 +
   tenthsMillimetre bangorJuly7 +
@@ -1657,6 +1705,28 @@ noaaBangorStationIdentityClaim = mkBound
   Diligence.primaryProposition
   institutionalHistoricalInterpretation
   "same-agency metadata does not count as second original independent gauge"
+
+-- The root below tracks original GHCN custodial provenance; the
+-- stations are distinct measurement units, as their exact IDs show.
+noaaBarHarborRainSourceClaim : ClaimBound
+noaaBarHarborRainSourceClaim = mkBound
+  "Original NOAA Bar Harbor 3 NW Maine station says 6 July 0, 7 July 130, 8 July 0 tenths-mm"
+  noaaBarHarborGHCN1953
+  "USC00170371195307PRCP 269-column web-readable original record; 26 October 2026 transcript"
+  noaaBangorWeatherRoot
+  Diligence.primaryProposition
+  originalRegionalWeatherMeasurement
+  "different station, no exact Ellsworth 22h reading, historical daily gauge cutoff or rainfall-causation evidence"
+
+noaaBarHarborStationIdentityClaim : ClaimBound
+noaaBarHarborStationIdentityClaim = mkBound
+  "USC00170371 is Bar Harbor 3 NW Maine with 1893–1982 observation period"
+  noaaBarHarborStationMetadata
+  "NCEI station identity 44.41667 north, 68.25 west, 34.1m, 1953 covered"
+  noaaBangorWeatherRoot
+  Diligence.primaryProposition
+  institutionalHistoricalInterpretation
+  "shared NOAA origin and station location metadata do not prove historical local 22:00 rain or non-Maxwell effects"
 
 ellsworthJuly8PressClaim : ClaimBound
 ellsworthJuly8PressClaim = mkBound
