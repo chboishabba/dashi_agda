@@ -71,3 +71,23 @@ print('PASS original full SL3(3): 26+26+624 ordered-grade pair orbits')
 print('PASS full SL3 projection (2/13)*(J-I-antipode), retain 2/13, loss 11/13')
 print('PASS full SL3 projection annihilates entire odd signed spatial 13D block')
 print('NOT an original physical/Jordan/Monster same-object action or Lean/Agda kernel receipt')
+
+
+# Actual full source-SL3 commutant is THREE-dimensional because six
+# generators have exactly 3 ordered-pair orbits. Its orthogonal
+# projectors use I, antipode T, all-ones J and the classical relations
+# T²=I, JT=TJ=J, J²=26J. Exact coefficient arithmetic over Q.
+def prod_kernel(U,V):
+ a,b,c=U;d,e,f=V
+ return (a*d+b*e, a*e+b*d, (a+b)*f+(d+e)*c+26*c*f)
+projections=[(Q(0),Q(0),Q(1,26)),
+             (Q(1,2),Q(1,2),-Q(1,26)),
+             (Q(1,2),-Q(1,2),Q(0))]
+assert tuple(sum(k[p] for k in projections) for p in range(3))==(Q(1),Q(0),Q(0))
+assert [26*(a+c) for a,b,c in projections]==[1,12,13]
+for i,p in enumerate(projections):
+ assert prod_kernel(p,p)==p
+ for j,q in enumerate(projections):
+  if i!=j:assert prod_kernel(p,q)==(0,0,0)
+print('PASS full source-grade commutant dimension3; rational orthogonal idempotents of ranks 1+12+13')
+print('PASS universal full SL3-invariant antisymmetric signed13 sector is scalar')
