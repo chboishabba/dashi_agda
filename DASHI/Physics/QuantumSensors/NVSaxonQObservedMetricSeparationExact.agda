@@ -28,7 +28,7 @@ open ReportedFraction public
 
 -- Only appropriate percentages share this type. Physical sensitivity has
 -- dimensions pT/sqrt(Hz); it is not a fraction or a Bernoulli probability.
-record ReportedSensitivity : Set where
+record ReportedSensitivity : Set₁ where
   field
     instrument : SIAdapter.NVSIReadoutCalibration
     sourceIdentity : Set
