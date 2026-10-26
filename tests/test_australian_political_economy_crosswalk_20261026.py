@@ -131,7 +131,7 @@ def test_record_positional_values_are_fail_closed():
     for k in (
         "publishedDonorAnnualReturnSameAsReportedAprilDonation",
         "originalRinehartPolicyInstructionBeforeJan2025Authenticated",
-        "pensionerPolicyEnactedInCommonwealthLawVerified",
+        "oneNationUnlimitedPensionerPolicyEnactedInLawVerified",
         "aecFutureReformThresholdApplicableRetroactively",
         "oneNationInternalPolicyAdoptionCausallyProven",
         "specificIPAContentBoughtByCourtReportedPayments",
