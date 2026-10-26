@@ -32,6 +32,9 @@ data RelationKind : Set where
   commissionedResearch : RelationKind
   editorialReviewRights : RelationKind
   topicalPublicationMatch : RelationKind
+  explicitAttributedRepublication : RelationKind
+  reportedStatisticRestatement : RelationKind
+  parallelEconomicArgument : RelationKind
   personnelContinuity : RelationKind
   organisationalContinuity : RelationKind
   methodRecurrence : RelationKind
@@ -127,6 +130,19 @@ editorialReviewRightsAreNotMethodTransfer ()
 publicationTopicMatchIsNotMethodTransfer :
   TransferRelation topicalPublicationMatch → ⊥
 publicationTopicMatchIsNotMethodTransfer ()
+
+articleRepublicationIsNotHistoricalMethodTransfer :
+  TransferRelation explicitAttributedRepublication → ⊥
+articleRepublicationIsNotHistoricalMethodTransfer ()
+
+headlineNumberRestatementIsNotHistoricalMethodTransfer :
+  TransferRelation reportedStatisticRestatement → ⊥
+headlineNumberRestatementIsNotHistoricalMethodTransfer ()
+
+economicArgumentSimilarityIsNotHistoricalMethodTransfer :
+  TransferRelation parallelEconomicArgument → ⊥
+economicArgumentSimilarityIsNotHistoricalMethodTransfer ()
+
 
 recommendationExposureIsNotDirectMethodTransfer :
   TransferRelation recommendationExposure → ⊥
