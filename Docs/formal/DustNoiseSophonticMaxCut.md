@@ -113,3 +113,18 @@ Original source for the corrected loss definition and equations: https://qlabs.s
 An Agda executable was not available locally in this run, so the new source is **kernel-unverified**. No CI requested. A theorem's appearance in this source file is not a kernel proof receipt.
 
 Future required gates, in order: finite bit-vector enumeration; character orthogonality over actual ring scalars; concrete NoiseProbeSchedule witness; finite affine estimator reconstruction with proved finite-sum congruence; smoothing/expectation and variance theorem; actual source-code refinement for Dust and Noise; then Sophontic stacked-branch import and held-out empirical comparator. Avoid claim promotion.
+
+
+## 26 October canonical Walsh owner correction (user-requested prior-art reuse)
+
+**Do not implement a new Walsh foundation.** Existing Agda #575 provides the actual rational 16-point owner, already present in PR #1265's current branch:
+- `DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshCharacterExact`: `walshCharacter`, `walshCoefficient`, nontrivial character cancellation.
+- `DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshInversionExact`: `walshReconstruct`, `walshReconstructionExact`, `walshTransformInjective`, `walshReconstructCong`.
+- `DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact`: `sumRational`, `sumRationalCong`.
+- `DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact`: literal sixteen-element `Subset4` and enumeration.
+
+Removed the duplicative `DustNoiseFiniteProofCoreExact.agda`. Added `DustNoiseWalshCanonicalAdapterExact.agda` importing the existing owner: direct complete-probe Walsh inversion, exact recovery and injectivity from the original Agda theorems, plus a *conditional* measured-response-to-credit theorem requiring an explicitly supplied measurement law. The exact 16-coordinate theorem is **not** a theorem for arbitrary activation widths; general width follows only with dimension-specific orthogonality and a compatible response law.
+
+IMPORTANT: the original mathematical Walsh theory is classical; Serre (1977), Matolcsi (2015) sources in #575 retain provenance. The Agda #575 implementation is the DASHI proof owner. The new Dust/Noise adapter is a downstream consumer and does not transfer mathematical authorship to Q Labs.
+
+Prior older text referring to a new Walsh theorem as missing is superseded for the **finite 16-point carrier only**. The new file has no fresh Agda kernel receipt, and no empirical forward-response identification is asserted. No CI run.
