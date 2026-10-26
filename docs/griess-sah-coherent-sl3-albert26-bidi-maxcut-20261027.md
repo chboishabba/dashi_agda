@@ -74,3 +74,27 @@ Consequently **NO FULL SL3-equivariant linear identification exists between the 
 ## Status invariant
 
 Published 1974/1976/1980/1990 original theorem ≠ later repository code ≠ exact locally run finite tests ≠ source-written Lean/Agda theorem ≠ proof assistant kernel certification ≠ observed physical phenomena. Give original authors direct, dated priority; group-theoretic character tests are classical; report local algorithmic contributions as subsequent DASHI/ChatGPT implementation; never promote structural resemblance into physical causation.
+
+
+## 2026-10-27 next PARETO/STEELMAN proof cut: full ZERO-Hom, cyclic FIFTY-TWO-Hom
+
+This is NEW evidence beyond the previous `χ²_J0=1` vs `χ²_grade=3` no-full-isomorphism argument. An exact rerun of the already original-source, original-M81 coherent **5616-element** finite complement shows the SAME literal group has the following **JOINT** character bins:
+```
+(χ_J0, χ_grade26, multiplicity):
+(26,26,1); (2,2,819); (0,0,3132); (-1,2,1560); (-1,8,104).
+```
+Consequently the MIXED inner-product numerator is
+```
+26*26 + 819*2*2 + 3132*0*0 -1560*2 -104*8
+ = 676+3276-3120-832 = 0.
+```
+Classical finite-group character orthogonality then gives the **strictly stronger exact obstruction**
+`dim_C Hom_SL3(J0_C, C[F3³\{0}])=0` and reverse Hom=0, not merely `J0≄grade26`. Complex zero implies rational Hom zero. This holds for all **27 conjugate source coherent complements**, as central-character conjugation does not change characters; check is about the SAME original selected actual Griess action, not any arbitrary 26D module. The **selected coherent order13** word is correctly composed as e01 then e12 then e20; Python SymPy permutation products use the **left-to-right** convention for this implementation. A first audit using reversed order produced order8 and was REJECTED, not promoted. Correct word has order13 and BOTH 26D characters are 26 at identity, 0 on all 12 nonidentity powers, so
+`dim_C Hom_C13(J0_C, grade26_C)=(26²)/13=52`.
+Thus **0 full SL3 intertwiners vs 52 cyclic intertwiners**, even though an earlier explicit invertible **Q[C13]** matrix X exists. This is stronger BIDI closure: full action ANY NONZERO map impossible, cyclic many maps.
+
+**Exact independent LOCAL rerun**: `/mnt/data/check_griess_full_SL3_vs_C13_intertwiner_space.py` reruns the prior exact generator/linear-system solver and enumerates the ACTUAL 5616 **81-point** permutations independently; PASS, with `/mnt/data/griess_full_SL3_vs_C13_Hom_zero_receipt.json` and SHA256. It consumed the previously verified local source solver and original M81 permutation action, not synthetic characters. **Committed reproducible scripts** on Lean #52 and Agda #1239: `scripts/check_griess_coherent_SL3_C13_zeroHom_joint_character.py`, whose source code was generated separately and has NOT been byte-identically replayed locally. The selected order13 product order regression is mandatory.
+
+**Formal source:** Lean #52 `Integration/Griess1990CoherentSL3VsC13ZeroHomCharacter.lean` adds fully explicit five-bin signed integer/norm certificate proof targets and conditional `FDRep.scalar_product_char_eq_finrank_equivariant` using **the EXISTING Mathlib representation-theory owner** (do not re-prove character orthogonality). Agda #1239 `DASHI/Moonshine/Griess1990CoherentSL3VsC13ZeroHomArithmeticExact.agda` adds exact natural-number cancellation of the positive and negative terms and 13×52 identity. Lean/Agda theorem sources remain **SOURCE-WRITTEN; neither kernel invoked**. The conditional Lean theorem takes the actual representation/character-sum payment as an explicit hypothesis; DO NOT claim the histogram-to-source group theorem has been kernel-proved.
+
+**Source roles:** Griess 1990 *original* 81 Moufang/Albert product and its original normalizer, Sah (1974)/Griess (1976) *original* abstract splitting, Maschke/Schur classical orthogonality, Antoine Labelle and Mathlib contributors *formal* original character API, DASHI PRs subsequent computations/source models, Ibrahim/OEIS 13/26 numeric lineage distinct, original native spatial graph Agda #1249 and crystal #1261 separate, Chen–Lam–Shimakura selected VOA sector still unpaid. Nothing here identifies P3³ nearest neighbour adjacency with Jordan multiplication or selected Monster 3B modes; no physical/experimental inference.
