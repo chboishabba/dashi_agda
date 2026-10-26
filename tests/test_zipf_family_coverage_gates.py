@@ -84,3 +84,27 @@ def test_historical_recurrence_needs_coded_source_roots_and_dates():
     assert G.coded_historical_recurrence([(1901,'event','src1'),(1940,'event','src2')])==(('event',1901,1940,'src1','src2'),)
     assert G.coded_historical_recurrence([(1940,'event','src2'),(1901,'event','src1')])==()
     with pytest.raises(ValueError):G.coded_historical_recurrence([(1901,'event','')])
+
+def test_bradford_dynamic_program_matches_exhaustive_small_inputs():
+    from itertools import combinations,product
+    for counts in product((0,1,3),repeat=4):
+        if not any(counts):continue
+        ranked=sorted(counts,reverse=True);N=sum(ranked)
+        for zones in (1,2,3,4):
+            candidates=[]
+            for cuts in combinations(range(1,4),zones-1):
+                ends=(0,)+cuts+(4,)
+                rows=tuple((ends[i+1]-ends[i],sum(ranked[ends[i]:ends[i+1]])) for i in range(zones))
+                loss=sum((zones*articles-N)**2 for _,articles in rows)
+                candidates.append((loss,cuts,rows))
+            assert G.bradford_optimal_equal_zones(counts,zones)==min(candidates)[2]
+
+def test_bradford_dynamic_program_large_journal_dataset():
+    rows=G.bradford_optimal_equal_zones([100]+[1]*99,4)
+    assert sum(a for a,b in rows)==100
+    assert sum(b for a,b in rows)==199
+    assert len(rows)==4
+
+def test_zero_gibrat_covariance_does_not_establish_independence():
+    # Ratios [1,3,1] depend on size [1,2,3] despite zero linear covariance.
+    assert G.gibrat_size_growth_covariance([(1,1),(2,6),(3,3)])==0
