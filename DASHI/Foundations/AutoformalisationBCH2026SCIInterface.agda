@@ -12,7 +12,7 @@ module DASHI.Foundations.AutoformalisationBCH2026SCIInterface where
 -- invent any of the essential mathematical witnesses.
 
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_)
+open import Data.Nat using (_≤_)
 
 -- A faithful "minimum n satisfying B n" cannot be admitted merely
 -- by proving a subsequent algebraic identity. At least existence
@@ -22,12 +22,11 @@ record LeastNumberWitness (B : Nat → Set) : Set where
   field
     value : Nat
     admissible : B value
-    minimal : (m : Nat) → B m → value ≡ m → value ≡ m
+    minimal : (m : Nat) → B m → value ≤ m
 
--- The last trivial equality is intentionally not a useful order proof.
--- We therefore do NOT use this record as a certificate of
--- well-ordering or of source-faithful leastness. The Lean companion
--- gives a genuine Nat.find existence-gated construction.
+-- No constructor is provided for a specific source predicate without
+-- proving admissibility and genuine minimum order; the Lean companion
+-- also uses an existence-gated Nat.find construction.
 
 -- Separate external proof owners, each independently demanded.
 record AppendixA4ProofDebt
