@@ -724,3 +724,110 @@ The only unclosed decisive advancement is a source-specific
 analytic digit/tail certificate or a different exact
 sign oracle with affordable producer+checker bit cost. No
 terminal sine sign or RSA/Shor-type hidden period is claimed.
+
+
+## 2026-10-26 BIDI max-cut: admissible 6-line glue, self-indexed 9^^n, exact fast rational-seed oracle
+
+SOURCE OWNERS (do not re-invent as new finite representation):
+* DASHI/Reasoning/RelationalBranchCobordismGeometry.agda and
+  TypedHyperfabricPantsGluingBridgeExact.agda: 3+3 six-line pairing/gluing
+  is admissible only with an inhabited matching interface (type,
+  capacity, phase, provenance); 6 is not automatically the cyclic C6
+  group or nonabelian S3 as a group. WavePantsBundleGluingAdapterExact
+  has a concrete matching channel and records general sheaf promotion
+  as unpaid.
+* DASHI/Physics/Foundations/TorqueTrialectic369Exact.agda and
+  TernaryPermutationS3LawsExact.agda: ordered 3x3 operator sheet,
+  S3 ABC permutation orientation, 27 bracket-cube carrier, retained
+  ordered comparison+synthesis; prior tests and latest ABC phase
+  cocycle independently check the phase carry under ×99.
+* DASHI/Biology/SelfIndexingHyperfabricTetrationExact.agda:
+  I_0=unit, I_(n+1)=(I_n -> Fin9), |I_(n+1)|=9^|I_n|;
+  selfIndexedSiteCount n = nineTetration n.
+  This is genuinely tetrational and NOT merely 27^n, 3^n or 9^n.
+  The resident Hyperfibre record has transport AND residualAt;
+  WeaveComplexity separates program, execution, normal form, type
+  and residual witness lengths. Source: repo-owned design.
+* SelfIndexedParetoHyperfabricTetrationExact.agda:
+  one ternary objective profile across nine axes has 3^9=19683
+  possible profiles, cardinally equal to the three-voxel hyperfabric,
+  without claiming identity of their semantics.
+* Core/ActiveBidiDiscriminatorLoopExact.agda:
+  live hypotheses -> collision -> discriminator -> independent
+  consumer check -> residual refinement -> selectively reopen.
+* Crypto/ShorReversiblePowModOracleWeldExact.agda:
+  SAME-OBJECT reversible modular-power hidden-period semantics,
+  not an automatic quantum oracle for sin of an integer.
+
+NEW PROOF-CARRYING POSITIVE CONTROL (EXACT, executable):
+scripts/check_pickover_tetrated9_bidi_periodic_oracle.py
+uses rational phase x=a/q, with gcd(99,q)=1 and a VERIFIED period t:
+99^t = 1 mod q. For E=9999!, n any Nat,
+  e = n! mod t,  r = a * (99^e mod q) mod q.
+Then, by modular congruence, r/q is exactly
+ {a*99^(n!)/q} and the sign of sin(2*pi*r/q) is
+  positive if 0 < 2r < q, negative if q < 2r < 2q,
+  zero at r=0 or (when q is even) 2r=q.
+The script verifies each period by pow(99,t,q)==1, and
+compares the compressed oracle to direct modular powering on
+factorials n=1..8. It computes E mod t through exactly n-1
+bounded-modulus multiplications, hence WITHOUT building E or 99^E.
+No universality/complexity-class claim.
+
+FULL TARGET-SIZED RATIONAL FINITE-SEED RECEIPTS:
+  q=101,  a=1,  t=100:   e=0,    r=1,     sign=+
+  q=20123,a=1,  t=20122: e=5752, r=18371, sign=-
+  q=20183,a=1,  t=20182: e=4834, r=2114,  sign=+
+  q=200,  a=100,t=80:    e=0,    r=100,   sign=0
+  q=200,  a=99, t=80:    e=0,    r=99,    sign=+
+  q=200,  a=101,t=80:    e=0,    r=101,   sign=-
+These are EXACT signs of sin(2*pi*a*99^(9999!)/q), NOT
+sign(sin(99^(9999!))). The last three certify a signed-zero
+half-turn with approaches from either side after an odd-period
+factorial jump. Run source tested locally in a materially equivalent
+copy; exact-head GitHub Actions / Agda receipts not claimed.
+
+BIDI REJECTIONS (positive controls + falsifiers):
+* For q=20123, the source-seed values a=1 and a=6 lie in
+  the same 3/9/27/81/243 cell at time zero but have opposite
+  signs after the factorial jump, as certified by modular
+  period arithmetic. This rejects all those fixed-depth
+  coarse-only signed consumers.
+* q=20123, nearest rational a=3203 to 1/(2*pi), certified
+  as such with existing Machin rational bounds. The rational
+  99^(n!) surrogate signs n=1..4 are [-,+,-,+], whereas
+  the actual exact Machin real-seed signs are [-,-,+,+].
+  Thus even an initially CLOSE finite-period surrogate is
+  NOT an analytic same-object oracle. It fails at n=2.
+* A general rational seed is not the actual irrational
+  alpha=1/(2*pi). A periodic finite-state modular reducer is
+  not promoted to the original sine-sign certificate by
+  representational similarity, an S3 cocycle, an ABC diagram,
+  or a cost saving measured on other seeds.
+
+CONDITIONAL POSITIVE COMPLETION THEOREM:
+Given an independently source-validated arithmetic phase state for
+alpha=1/(2*pi) with (i) certified same-object powering,
+(ii) an effectively computable exponent reduction or compressed
+orbit jump, (iii) signed-decoding soundness for the terminal
+consumer, and (iv) measured bit cost, the exact finite protocol
+here makes sin(99^(9999!)) a tractable query. In the rational
+periodic specialization all four obligations are discharged
+relative to *that rational source*, thereby proving tractability
+is possible with this architecture in the appropriate domain.
+The outstanding bottleneck is SOURCE ADEQUACY of a shortcut for
+the actual irrational alpha, NOT the existence of another tower
+representation or abstract residual record.
+
+RESEARCH PARETO/BIDI RANK:
+A. Search certified analytic/algebraic recurrence for far digits
+   of 1/(2*pi) at factorial power positions (high value, open).
+B. Search source-specific phase cocycle/action with inexpensive
+   verified signed consumer (high value, open).
+C. Explore RSA/Shor order-finding only when a genuinely periodic
+   actual phase observable is constructed, not by fiat.
+D. Retain Machin and fixed-point exp(i) powering as independently
+   certified small-case controls.
+E. Do not materialise I_9: 9^^9 is a CAPACITY/TYPE theorem.
+   Construct a costed on-demand evaluator for the selected fibre,
+   and require a paid correctness and depth-independent cost theorem.
