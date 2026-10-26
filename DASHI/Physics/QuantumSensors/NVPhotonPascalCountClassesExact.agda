@@ -1,7 +1,10 @@
 module DASHI.Physics.QuantumSensors.NVPhotonPascalCountClassesExact where
 
--- Binary-history multiplicities via a source-owned finite Pascal
--- recursion. The definition is a count of combinatorial words, not
+-- Standard Pascal/binomial recurrence (classical mathematical prior art).
+-- This DASHI source reconstruction does not claim priority for Pascal's
+-- triangle or the Bernoulli/binomial probability law. It is not yet a
+-- proof that a filtered literal word list has that cardinality.
+-- The definition is a count model for combinatorial words, not
 -- a measured photon distribution or an assumed physical detector.
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
@@ -32,3 +35,6 @@ zeroClicks n = refl
 -- owns the stdlib Data.Nat.Combinatorics (_C_) interface. A direct
 -- equality choose n k ≡ n C k is an additional bridge obligation.
 -- No extra probability ontology, quotient or opaque postulate.
+
+-- In particular, these definitions do not supply a measured NV sensor,
+-- an Agda kernel receipt, or authorisation to promote a hardware claim.
