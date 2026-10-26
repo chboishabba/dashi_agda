@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.TeleportationPKCausalIdentifiabilityBridgeExact where
 
 open import DASHI.Core.Prelude
