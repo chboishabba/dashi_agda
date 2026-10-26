@@ -33,6 +33,7 @@ data RelationKind : Set where
   editorialReviewRights : RelationKind
   topicalPublicationMatch : RelationKind
   explicitAttributedRepublication : RelationKind
+  legislativeIntroduction : RelationKind
   reportedStatisticRestatement : RelationKind
   parallelEconomicArgument : RelationKind
   personnelContinuity : RelationKind
@@ -134,6 +135,10 @@ publicationTopicMatchIsNotMethodTransfer ()
 articleRepublicationIsNotHistoricalMethodTransfer :
   TransferRelation explicitAttributedRepublication → ⊥
 articleRepublicationIsNotHistoricalMethodTransfer ()
+
+legislativeIntroductionDoesNotEstablishHistoricalTransfer :
+  TransferRelation legislativeIntroduction → ⊥
+legislativeIntroductionDoesNotEstablishHistoricalTransfer ()
 
 headlineNumberRestatementIsNotHistoricalMethodTransfer :
   TransferRelation reportedStatisticRestatement → ⊥
