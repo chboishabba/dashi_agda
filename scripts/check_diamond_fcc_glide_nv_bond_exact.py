@@ -95,3 +95,32 @@ assert {g[0] for g in bond_fix}==set(permutations(range(3)))
 print("PASS FCC primitive lattice, diamond A/B motif, exact inverse & glide squared")
 print("PASS 48 cubic operation representatives close modulo FCC translations")
 print("PASS atomic-site stabilizer 24; ordered [111] bond stabilizer 6 = S3/C3v")
+
+# Conventional cubic cell: four FCC centring translations modulo 4.
+# 48 inequivalent linear parts x 4 centring translations = 192
+# affine operations, and 8 diamond sites per conventional cell.
+centring={(0,0,0),(0,2,2),(2,0,2),(2,2,0)}
+def mod4(x): return tuple(n%4 for n in x)
+operators={(g,mod4(add(glide_coset(g),t)))
+           for g in G for t in centring}
+assert len(operators)==192
+motif={mod4(add(fcc(t),delta))
+       for t in product((0,1),repeat=3)
+       for delta in (O,D)}
+assert len(motif)==8
+for g,t in operators:
+    assert {mod4(add(linear(g,p),t)) for p in motif}==motif
+for (g,t),(h,u) in product(operators,repeat=2):
+    gh=multiply(g,h)
+    v=mod4(add(t,linear(g,u)))
+    assert (gh,v) in operators
+
+site_stab=sum(mod4(add(linear(g,O),t))==O
+              for g,t in operators)
+bond_stab=sum(
+    mod4(add(linear(g,O),t))==O and
+    mod4(add(linear(g,D),t))==D
+    for g,t in operators)
+assert site_stab==24 and bond_stab==6
+print("PASS: 192 conventional-cell affine operations and all 36864 products")
+print("PASS: 8 diamond motif sites, site stabilizer 24, oriented bond C3v 6")
