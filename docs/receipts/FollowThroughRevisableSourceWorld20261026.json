@@ -1,0 +1,240 @@
+{
+  "version": "2026-10-26",
+  "sources": [
+    {
+      "id": "abt1977",
+      "author": "Stebbins, Bock, Proper and Abt evaluation coauthors",
+      "role": "original evaluation",
+      "url": "https://eric.ed.gov/?id=ED148490"
+    },
+    {
+      "id": "house1978",
+      "author": "House, Glass, McLean, Walker",
+      "role": "original methodological critique",
+      "url": "https://files.ascd.org/staticfiles/ascd/pdf/journals/ed_lead/el_197803_house.pdf"
+    },
+    {
+      "id": "stpierre1978",
+      "author": "Robert G. St. Pierre",
+      "role": "original statistical sensitivity analysis",
+      "doi": "10.1177/0193841X7800200303"
+    },
+    {
+      "id": "becker1982",
+      "author": "Wesley C. Becker and Russell Gersten",
+      "role": "original five-site follow-up",
+      "doi": "10.3102/00028312019001075"
+    },
+    {
+      "id": "apm2026",
+      "author": "Emily Hanford and APM journalists",
+      "role": "modern historical reporting",
+      "url": "https://www.apmreports.org/episode/2026/10/22/sold-a-story-s2-e3-the-forgotten-experiment"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "reportOriginalAbt",
+      "root": "abt1977",
+      "status": "present",
+      "locator": "ERIC ED148490 catalogue; PDF numerical tables uninspected",
+      "kind": "catalogue"
+    },
+    {
+      "id": "housePublished",
+      "root": "house1978",
+      "status": "present",
+      "locator": "Educational Leadership March 1978 original author article",
+      "kind": "primary critique text"
+    },
+    {
+      "id": "reliabilityPaper",
+      "root": "stpierre1978",
+      "status": "present",
+      "locator": "DOI/abstract; numerical analysis uninspected",
+      "kind": "original article metadata"
+    },
+    {
+      "id": "followupPaper",
+      "root": "becker1982",
+      "status": "present",
+      "locator": "DOI/abstract; five-site cohort data uninspected",
+      "kind": "original followup metadata"
+    },
+    {
+      "id": "apmEpisode",
+      "root": "apm2026",
+      "status": "present",
+      "locator": "APM Sold a Story episode S2E3",
+      "kind": "journalistic report"
+    },
+    {
+      "id": "abtExactCells",
+      "root": "abt1977",
+      "status": "notLocated",
+      "kind": "original per-site outcome tables"
+    },
+    {
+      "id": "houseMatchedChanges",
+      "root": "house1978",
+      "status": "notLocated",
+      "kind": "quantitative reanalysis operations"
+    },
+    {
+      "id": "stpierreTwoSpecs",
+      "root": "stpierre1978",
+      "status": "notLocated",
+      "kind": "corrected/uncorrected cells"
+    },
+    {
+      "id": "policyOriginal",
+      "root": "abt1977",
+      "status": "notLocated",
+      "kind": "contemporaneous programme decision/funding memos"
+    },
+    {
+      "id": "followupCohort",
+      "root": "becker1982",
+      "status": "notLocated",
+      "kind": "five-site followup attrition comparison"
+    }
+  ],
+  "claims": [
+    {
+      "id": "reportedDIRank",
+      "statement": "APM reports DI strongest aggregate academic ranking",
+      "scope": "APM reconstruction of 1977 aggregate",
+      "level": "sourceReported",
+      "requires": [
+        "apmEpisode"
+      ],
+      "supports": [
+        "apmEpisode"
+      ]
+    },
+    {
+      "id": "rankRobust",
+      "statement": "DI advantage stable over matched disputed adjustments",
+      "scope": "same 1977 outcome domain, population and models",
+      "level": "unresolved",
+      "requires": [
+        "abtExactCells",
+        "houseMatchedChanges",
+        "stpierreTwoSpecs"
+      ],
+      "supports": [
+        "reportOriginalAbt",
+        "housePublished",
+        "reliabilityPaper"
+      ]
+    },
+    {
+      "id": "affectiveMediation",
+      "statement": "mastery causally increases learner self-confidence",
+      "scope": "potential mediation of specific measured affective outcome",
+      "level": "unresolved",
+      "requires": [
+        "abtExactCells"
+      ],
+      "supports": []
+    },
+    {
+      "id": "durability",
+      "statement": "DI skills persist under later instructional changes",
+      "scope": "five-site grade 5-6 continuation, no universal claim",
+      "level": "sourceReported",
+      "requires": [
+        "followupPaper",
+        "followupCohort"
+      ],
+      "supports": [
+        "followupPaper"
+      ]
+    },
+    {
+      "id": "suppression",
+      "statement": "specific evidence withheld or not disseminated by decision",
+      "scope": "date-specific original government decision",
+      "level": "unresolved",
+      "requires": [
+        "policyOriginal"
+      ],
+      "supports": [
+        "apmEpisode"
+      ]
+    },
+    {
+      "id": "nationalDecline",
+      "statement": "government response caused nationwide later educational decline",
+      "scope": "national counterfactual under specified policy",
+      "level": "unresolved",
+      "requires": [
+        "policyOriginal",
+        "abtExactCells"
+      ],
+      "supports": []
+    }
+  ],
+  "actions": [
+    {
+      "id": "acquireAbtTables",
+      "targets": [
+        "abtExactCells"
+      ],
+      "cost": [
+        2,
+        2,
+        1
+      ],
+      "description": "Acquire IV-A/B original model-site outcome tables with pages"
+    },
+    {
+      "id": "acquireHouseCalculations",
+      "targets": [
+        "houseMatchedChanges"
+      ],
+      "cost": [
+        2,
+        1,
+        1
+      ],
+      "description": "Recover explicit reanalysis input and transformations"
+    },
+    {
+      "id": "acquireStPierreTables",
+      "targets": [
+        "stpierreTwoSpecs"
+      ],
+      "cost": [
+        2,
+        1,
+        1
+      ],
+      "description": "Recover both pretest reliability specifications"
+    },
+    {
+      "id": "acquirePolicyArchives",
+      "targets": [
+        "policyOriginal"
+      ],
+      "cost": [
+        3,
+        2,
+        1
+      ],
+      "description": "Track dated federal allocations and internal reports"
+    },
+    {
+      "id": "acquireFollowupData",
+      "targets": [
+        "followupCohort"
+      ],
+      "cost": [
+        3,
+        2,
+        2
+      ],
+      "description": "Acquire five-site cohort and attrition record"
+    }
+  ]
+}
