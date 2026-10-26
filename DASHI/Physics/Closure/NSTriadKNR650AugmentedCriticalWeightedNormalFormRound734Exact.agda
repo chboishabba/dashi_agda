@@ -67,6 +67,13 @@ module DASHI.Physics.Closure.NSTriadKNR650AugmentedCriticalWeightedNormalFormRou
 -- Furthermore arbitrary E0>0 eventually enters X<=nu²/Ccrit²
 -- at common t_enter=1/nu+max(0,log(sqrt(2)*Ccrit²*E0/nu²)/(2nu)).
 -- Then X_N(T)+nu int_t_enter^T D_N <= nu²/Ccrit².
+-- An optimised single-window recovery certificate uses
+--   A=sqrt(2)*Ccrit²*E0/nu², z*=min(A²,1/4),
+--   T*= A²/nu                       if 0<A<=1/2,
+--   T*=(1/4+log(2A)/2)/nu           if A>=1/2.
+-- The original t_enter formula above remains a VALID but nonoptimal
+-- instance. The new T* is a reduced upper bound on late entry, not
+-- an estimate on the missing pre-entry large-data critical interval.
 -- These are analytical physical-source derivations recorded at:
 --   Docs/research/ns_r734_critical_small_data_dyadic_20261027.md
 -- with seven local arithmetic tests in test_ns_r734_critical_small_data.py.
