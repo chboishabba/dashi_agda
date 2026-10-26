@@ -102,3 +102,12 @@ def test_real_full_NS_forcing_generates_negative_helicity():
     hm=h(Q,nl[Q],-1)
     hmnorm=S.simplify(S.expand_complex((S.conjugate(hm).T*hm)[0]))
     assert S.simplify(hmnorm>0)==S.true
+
+def test_rational_interval_certificate_for_margin_failure():
+    _,D,Pcrit=critical_data()
+    # sqrt(5)>2 and sqrt(30)<11/2, both by integer squaring.
+    assert 5>4 and S.Rational(121,4)>30
+    assert S.simplify(Pcrit>S.Rational(3,20))==S.true
+    # Strict RATIONAL lower bound on the δ=0 derivative.
+    lower=512*S.Rational(3,20)-2*D
+    assert lower==S.Rational(24,5)>0
