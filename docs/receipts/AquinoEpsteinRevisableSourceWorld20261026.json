@@ -171,6 +171,24 @@
       "root": "future_undetermined_source",
       "status": "notLocated",
       "scope": "No original source-identical transfer across named objects. DEA is NOT attributed as author of Aquino/PROMIS work."
+    },
+    {
+      "id": "cross_network_tasking_original",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Original dated common instruction naming material actors and target across clusters; no known source"
+    },
+    {
+      "id": "cross_network_sponsor_budget_original",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Original matching budget/payment under shared sponsor, same transaction identity required"
+    },
+    {
+      "id": "cross_network_shared_workproduct_original",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Source-identical technical/method/data work product with documented transfer; similarity alone excluded"
     }
   ],
   "claims": [
@@ -290,13 +308,26 @@
       ]
     },
     {
+      "id": "C_AQUINO_SCL_TRANSFER",
+      "statement": "Dated same-object technical handoff from historical Aquino/PROMIS claim to deployed SCL work",
+      "scope": "one particular source-authenticated build/transfer, not vocabulary",
+      "level": "unresolved",
+      "supports": [],
+      "requires": [
+        "aquino_promis_scl_transfer_native"
+      ]
+    },
+    {
       "id": "C_UNIFIED_H3",
       "statement": "One original tasking/payment/technical common operation joins Aquino, Maxwell/PROMIS, Epstein, and CA",
       "scope": "no original common source now; must not infer from overlapping people, words or institutional interests",
       "level": "unresolved",
       "supports": [],
       "requires": [
-        "aquino_promis_scl_transfer_native"
+        "aquino_promis_scl_transfer_native",
+        "cross_network_tasking_original",
+        "cross_network_sponsor_budget_original",
+        "cross_network_shared_workproduct_original"
       ]
     }
   ],
@@ -372,6 +403,20 @@
         5
       ],
       "description": "Original same-object dated methodological/software transfer, not analogical MindWar vocabulary"
+    },
+    {
+      "id": "G_SHARED_PROGRAMME",
+      "targets": [
+        "cross_network_tasking_original",
+        "cross_network_sponsor_budget_original",
+        "cross_network_shared_workproduct_original"
+      ],
+      "cost": [
+        5,
+        5,
+        5
+      ],
+      "description": "Only if independent original dated instruction, budget AND same-workproduct exist; cost is planning ordinal, not probability."
     }
   ]
 }
