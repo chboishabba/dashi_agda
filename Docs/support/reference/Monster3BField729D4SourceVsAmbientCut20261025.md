@@ -234,3 +234,46 @@ Pointed 720+9 original repository owner and caveats:
 The pre-existing `Base369Ternary27CornerEightExact` **literal eight cube corners** carry a chosen *natural planar square* D4 action `r(x,y,z)=(-y,x,z)`, `m(x,y,z)=(x,-y,z)`. The latter axis reflection fixes **zero** corners (the diagonal mirror class fixes four). On the actual ATLAS-source `E⊕E` action on 80 nonzero affine quotient labels, **every** D4 reflection fixes **eight** points. Any purported **D4-equivariant map** `quotient80→naturalCubeCorners8` would send each source reflection-fixed label to a target reflection-fixed corner. For the axis mirror, source has eight witnesses and target has none: **no such equivariant map exists**.
 
 This is strictly stronger than the earlier obstruction to ten **trivial** fine sheets: it also excludes *any* ten-sheet action, even twisted, **whose projection to natural geometric corners remains D4-equivariant**. More general 8×10 bijections with D4 mixing corner and fine coordinates and thus **no equivariant corner projection** remain mathematically possible; numerical 80=8×10 cannot choose one. The chosen D4-stable rank-nine Schrödinger plane and the full Heisenberg 720-moving-translation no-go both remain valid. Original ATLAS matrix source SHA256 verified; local exact Python addendum passed, not an actual Monster class-fusion or source-selected-78 receipt.
+
+## 27 October — positive mixed-eight counterpart WITHOUT resurrecting natural corners
+
+The actual original AtlasRep D4 source 12D matrix projectors and six-trit
+Lagrangian were already owned here. The prior result says the natural
+geometric cube-corner eight set has no D4-equivariant quotient map from
+the nonzero affine quotient80 because the source reflection fixes eight
+nonzero vectors whereas that target mirror fixes zero corners.
+
+A new constructive quotient on this SAME source D4 E⊕E chart chooses a
+DIFFERENT target8: one size-four orbit with axis-reflection stabilizer and
+one size-four orbit with diagonal-reflection stabilizer. Source quotient80
+has four size-four orbits of each type plus six free size-eight orbits.
+Map four source axis4 orbits and three free8 orbits to the axis target4;
+map four diagonal4 and the other three free8 to the diagonal target4.
+The point-stabilizer inclusion criterion makes every map well-defined
+and D4-equivariant; target fibres have (4·4+3·8)/4=10 elements.
+
+The source-owning consumer
+`scripts/monster3b_atlas_d4_pointed720729_polarization_weld.py`
+now verifies this mixed eight-site map *inside its already SHA-pinned
+original ATLAS-generator workflow*. The parallel downstream #1250
+consumer `scripts/monster_3b_pointed720729_mixed_d4_eight_ten_quotient.py`
+constructs the 720=8·10·9 outer sheet plus central nine points.
+Independent local E⊕E finite computation passed: every one of the 80
+quotient vectors is assigned, all eight group words intertwine, eight
+fibres each have ten elements, 720 outer D4 orbit partition
+24·4+78·8=720, with class character (720,0,0,24,24).
+
+***Scope firewalls:*** this target is NOT the source's old
+`Base369Ternary27CornerEightExact` natural corner carrier. D4
+action on the ten-sheet index is necessarily twisted/position-dependent
+because the source contains free eight-point orbits. Original full
+Heisenberg invariance still fails: 720 Schr translations move the
+selected rank9 projector. No selected Monster 3B normalizer class
+fusion, 6.Suz degree78 character, ζ-phase action or actual VOA
+intertwiner is certified by this D4 SET-level construction.
+
+**Attribution:** finite orbit/stabilizer principle is standard group
+action theory. Source group/matrices are original ATLAS/AtlasRep;
+this construction is a new DASHI explicit chosen chart and its checks.
+See #1250 new source/proof ledger
+`Docs/support/reference/Monster3B720729MixedD4EightTenBMW24MaxCut20261027.md`.
