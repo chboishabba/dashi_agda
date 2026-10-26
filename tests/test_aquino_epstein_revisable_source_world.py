@@ -349,7 +349,7 @@ def test_auspol_recent_climate_claim_family_is_cross_referenced_not_new_independ
     rows = {r["receipt"]: r for r in family["sibling_related_claims"]}
     assert set(rows) == {"G15", "G16"}
     assert rows["G15"]["originality"] == "explicit credited republication"
-    assert "not an independently" in rows["G15"]["not_pays"]
+    assert "a separate original model" in rows["G15"]["not_pays"]
     assert "Hansard transcript mirror" in rows["G16"]["hosted_by"]
     assert "copied script" in rows["G16"]["not_pays"]
     assert "ONE first-party document" in family["shared_rinehart2021_original"]
