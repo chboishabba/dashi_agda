@@ -20,6 +20,7 @@ import DASHI.Culture.MissingDeceasedTwentyScientistRound48AntiEchoChamberMethodo
 import DASHI.Culture.MissingDeceasedTwentyScientistRound50ProfessionalEvidenceRoomExact as EvidenceRoom
 import DASHI.Culture.MissingDeceasedTwentyScientistRound43NarrativeEvidenceStrataExact as Narrative
 import DASHI.Core.EventTimeCapabilityAlignmentBidiExact as EventTime
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.CapabilityFragilityConfoundersBidiExact as Fragility
 import DASHI.Culture.MissingDeceasedCustodyEventTimeMatrixExact as Custody
 import DASHI.Cognition.TrumpMarALagoBannonBridgeExact as BannonBridge
@@ -2487,3 +2488,24 @@ reported2023DEAClosureStillNeedsOriginalInstrument :
   Banking.reportedJune2023DEAClosureHasSignedNativeInstrumentHere
     canonicalFederalChainReactionHomonymOwner ≡ false
 reported2023DEAClosureStillNeedsOriginalInstrument = refl
+
+
+------------------------------------------------------------------------
+-- 26 OCT: PROOF-RELEVANT NAME COLLISION CROSS-POLLINATION, REUSE-ONLY
+-- Existing nonfactorability module owns the theorem. The banking owner
+-- supplies this exact finite input carrier. Neither is a new historical
+-- source; agency-case identities still need independent source custody.
+------------------------------------------------------------------------
+
+caseTitleAloneCannotRecoverFederalCase :
+  Banking.casePublicHeadline Banking.deaOCDETFNYNYS0829 ≡
+  Banking.casePublicHeadline Banking.hsiIPRCounterfeit2011
+caseTitleAloneCannotRecoverFederalCase = refl
+
+bankingNameOnlyCaseDecoderNoGo :
+  NonFactor.FactorsThrough Banking.casePublicHeadline Banking.caseIsDEA → ⊥
+bankingNameOnlyCaseDecoderNoGo = Banking.nameOnlyFederalCaseIdentityImpossible
+
+bankingAgencyCaseKeyRestoresFiniteConsumer :
+  NonFactor.FactorsThrough Banking.originalFederalCaseKey Banking.caseIsDEA
+bankingAgencyCaseKeyRestoresFiniteConsumer = Banking.originalCaseKeyConsumerFactors
