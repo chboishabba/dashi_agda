@@ -27,13 +27,14 @@ jobs:
         with:
           agda-version: "2.7.0.1"
           agda-stdlib-version: "recommended"
-      - name: Exact SHA and nine self-owned topology module checks
+      - name: Exact SHA and ten self-owned topology module checks
         run: |
           echo "Agda exact HEAD: $GITHUB_SHA"
           for module in \
             ExoticAmbientLinkingNoGoExact \
             ExoticBinaryTernaryPantsCodecExact \
             ExoticBalancedTernaryPantsWeldExact \
+            ExoticBalancedDepthThreeCubeSetBridgeExact \
             ExoticCantorCylinderOrientationExact \
             ExoticHornChronologicalCantorConsumerExact \
             ExoticCWExistingDonorWeldExact \
