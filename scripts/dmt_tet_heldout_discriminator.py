@@ -27,17 +27,21 @@ M1A = ('dose', 'time', 'general_intensity', 'entity', 'complex_imagery', 'selfho
 FEATURES = {'M0_nuisance_proxy': M0, 'M1a_endogenous_proxy': M1A}
 
 
-def build_rows(doc):
+def build_rows(doc, *, direction='forward'):
+    if direction not in ('forward', 'reverse_control'):
+        raise ValueError('Only predeclared forward and reverse-control directions allowed')
     threshold, grouped = validate(doc)  # deliberately rejects all human-data modes
     rows = []
     for (person, dose, stage), items in sorted(grouped.items()):
         if stage != 'DMT':
             continue
-        ordered = sorted(items, key=lambda sample: sample['time_index'])
+        ordered = sorted(items, key=lambda sample: sample['time_index'],
+                         reverse=(direction == 'reverse_control'))
         if len(ordered) < 2:
             raise ValueError('Need at least two temporally consecutive DMT samples')
         for before, after in zip(ordered, ordered[1:]):
-            if after['time_index'] != before['time_index'] + 1:
+            step = 1 if direction == 'forward' else -1
+            if after['time_index'] != before['time_index'] + step:
                 raise ValueError('Missing 4s TET interval')
             # Next reported entity is the response. Past entity is an
             # autoregressive control in BOTH models; exclusively t features
@@ -106,6 +110,9 @@ def heldout(rows):
 def audit(doc):
     rows = build_rows(doc)
     folds = heldout(rows)
+    reverse_folds = heldout(build_rows(doc, direction='reverse_control'))
+    reverse_by_person = {f['held_out_person']: f for f in reverse_folds}
+    reverse_delta = sum((Fraction(f['exact_brier_M0_minus_M1a']) for f in reverse_folds), Fraction()) / len(reverse_folds)
     n_distinct = sum(fold['distinct_proxy_predictions'] for fold in folds)
     delta = sum((Fraction(fold['exact_brier_M0_minus_M1a']) for fold in folds), Fraction()) / len(folds)
     return {
@@ -118,6 +125,15 @@ def audit(doc):
         'distinct_heldout_predictions': n_distinct,
         'subject_equal_weight_mean_brier_M0_minus_M1a': str(delta),
         'cross_validation_scores_are_exploratory_not_independent_p_values': True,
+        'retrospective_curve_time_not_prospective_prediction': True,
+        'reverse_time_negative_control': {
+            'direction': 'predict previous retrospectively traced bin from next bin',
+            'not_valid_for_prospective_forecasting': True,
+            'subject_equal_weight_mean_brier_M0_minus_M1a': str(reverse_delta),
+            'forward_minus_reverse_proxy_gain_exact': str(delta - reverse_delta),
+            'folds': reverse_folds,
+            'paired_subject_ids_match': set(reverse_by_person) == {f['held_out_person'] for f in folds},
+        },
         'split': 'leave-one-person-out; both doses and all stages held out',
         'target': 'next 4s retrospectively reported entity >= predeclared threshold',
         'within_subject_targets_not_independent_samples': True,
