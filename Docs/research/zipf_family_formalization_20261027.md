@@ -6,7 +6,7 @@
 
 `DASHI/Statistics/ZipfFamilyFiniteExact.agda` supplies the 27-constructor typed taxonomy, distinct authority classes, original-root observation receipt, finite rational shifted-index sum, q=0 Zipf specialization, corpus-count additivity, corpus-relative hapax predicate and a rank/fingerprint nonfactorability theorem. The finite denominator/power carrier uses integer exponent/shift, **not all-real Hurwitz analytic continuation**. **Agda source-written; no kernel/typecheck receipt.**
 
-`scripts/zipf_family_formal.py` implements 27 mathematical/observational APIs. `tests/test_zipf_family_formal.py` contains **27 targeted tests**, including negative examples. A materially equivalent local package passed 39/39 with pytest (27 named-law + 12 cross-law regression cases); exact GitHub blob has not been independently executed by a Python runtime and should be retested at the branch head.
+`scripts/zipf_family_formal.py` implements 27 mathematical/observational APIs. `tests/test_zipf_family_formal.py` contains **27 targeted tests**, including negative examples. A materially equivalent local package passed 40/40 with pytest (27 named-law + 13 cross-law regression cases); exact GitHub blob has not been independently executed by a Python runtime and should be retested at the branch head.
 
 ## Complete semantic matrix
 
@@ -77,3 +77,7 @@ These URLs are source identifiers only. No original scan/page hashes of all 27 e
 ## Primary source follow-through (27 October)
 
 A direct 1926 root for Lotka's productivity distribution is Alfred J. Lotka, *The Frequency Distribution of Scientific Productivity*, *Journal of the Washington Academy of Sciences* 16(12), pp. 317–323, original 19 June 1926 journal object: https://www.jstor.org/stable/24529203 . Heaps's 1978 monograph is bibliographically identified as H. Stanley Heaps, *Information Retrieval: Computational and Theoretical Aspects* (Academic Press 1978), ISBN 0123357500, https://ndlsearch.ndl.go.jp/books/R100000002-I000006212405 . Robert Gibrat's original 1931 book/thesis is catalogued under *Les inégalités économiques ... d'une loi nouvelle, la loi de l'effet proportionnel*, https://search.worldcat.org/title/1024555751 . Bibliographic identification is not a full-page content audit or independent empirical replication.
+
+### Numerical stability hard gate
+
+The finite Zipf–Mandelbrot Python normalizer now computes rank weights as ratios to rank one before summation: `exp(-s log((r+q)/(1+q)))`. This avoids the artificial all-zero normaliser produced by directly computing `(r+q)^(-s)` for large s,q; the 13th cross-law regression checks s=2000,q=100. This is a finite floating-point implementation result, not a new analytic asymptotic theorem. **Local fixture total: 40 passed**, exact GitHub HEAD runtime and Agda kernel unverified.
