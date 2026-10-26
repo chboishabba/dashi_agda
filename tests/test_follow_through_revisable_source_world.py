@@ -96,5 +96,13 @@ class RevisableSourceWorldTests(unittest.TestCase):
         by_id={e["id"]:e["root"] for e in WORLD["evidence"]}
         self.assertNotEqual(by_id["policyOriginal"],by_id["abtExactCells"])
 
+    def test_governance_papers_are_not_federal_orders(self):
+        by_id={s["id"]:s for s in WORLD["sources"]}
+        self.assertIn("not official",by_id["tucker1977"]["role"])
+        q=mod.report(WORLD)
+        self.assertEqual(set(q["claims"]["rdServiceGovernance"]["source_roots"]),
+                         {"tucker1977","evans1981"})
+        self.assertIn("policyOriginal",q["claims"]["suppression"]["unpaid"])
+
 if __name__=="__main__":
     unittest.main()
