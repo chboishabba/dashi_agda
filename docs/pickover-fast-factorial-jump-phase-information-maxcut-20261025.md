@@ -339,3 +339,35 @@ owners rather than equating short program length with short runtime.
 The prior analytic jCoarse/jFine Fricke and modular-point machinery
 is genuine typed prior art; it does not by itself supply an exact
 real-circle sine sign at 99^(9999!).
+
+## 2026-10-26 BT-tree cross-pollination and geometric no-go
+
+BT means Bruhat--Tits, not a generic balanced-ternary tree.
+Source donors: Physics/Closure/BruhatTitsBraidKPReductionReceipt.agda,
+YMBTPathCountingKPThresholdReceipt.agda and
+scripts/ym_bt_tree_spectral_gap_harness.py. The PGL2(Q3) BT tree is
+4-regular; once an incoming oriented edge is chosen its forward
+branching is 3. The boundary is P1(Q3), with affine Z3 residue
+cylinders refining by mod 3^d and exactly three children per cylinder.
+This geometry is directly relevant to consumer-indexed jFine residual
+refinement, but there is NO natural identification of this totally
+disconnected p-adic boundary with the real circle R/2πZ.
+
+New executable scripts/check_pickover_bt_tree_refinement.py audits exact
+prefix/child coherence for depths <=5, and shows that every power 99^E
+vanishes mod 3^d when 2E>=d. Consequently the known opposite-real-sign
+witnesses 99^9,99^18 have the SAME 3-adic cylinder for all d<=18
+(and in the targeted tested 1..12 range). Tree refinement ALONE cannot
+recover a real sine orientation; any claimed breakthrough must supply
+an explicit mixed Archimedean/3-adic seam with an efficient residual.
+This is a valuable exact non-descent negative control, not a criticism
+of the BT geometry or the retained-fibre strategy.
+
+Concretely propose a mixed state
+  S=(BT affine end prefix, jCoarse, selected jFine, real residual witness).
+Demand: local fibre refinement, factor action T_a*T_b=T_ab,
+signed-query adequacy, proof-relevant real-circle bridge, and
+five-coordinate WeaveComplexity/consumer-MDL Pareto costs.
+Do not count p=7 Yang Mills KP/spectral-gap receipts as analytical
+sign proofs, and do not read p-adic closeness as Euclidean closeness.
+The original sign sin(99^(9999!)) remains OPEN.
