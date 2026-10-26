@@ -168,3 +168,95 @@ satellite relative homeomorphism is present; preserve
 the evidence graph and do not turn finite icosahedral
 quotients, clopen addresses or source citations into
 geometric identities or independent physical evidence.
+
+
+## 2026-10-27 original-source / exact-path cut
+
+### What the original PDF actually supports
+
+Hatcher *Algebraic Topology* Ex. 2B.2 **printed pp. 171–172**,
+author PDF zero-indexed pages **179–180**, was checked against
+the printed figures and text, rather than paraphrased from a reprint.
+Page 171 starts from `X_0` a SOLID TORUS (one attached handle),
+describes `X_n` as a ball `B_n` with `2^n` handles, and proves the
+uniform-limit map `f:B_0→R³` is an embedding using injectivity and
+compactness. Its exterior `Y_n=R³\X_n` is increasing with
+`π₁(Y_n)=F_(2^n)`. The circular annulus used at the one-sector
+stage is glued to a punctured torus to produce the child-meridian
+commutator. Page 172 states the induced maps are injective,
+and compactness transports stage loops AND homotopies into the
+limit `π₁(R³\B)`; every generator lies in a commutator subgroup,
+so the limit has trivial abelianisation.
+
+**Nonpromotions:** the geometrically tame `B_n` is NOT the
+stage handlebody `X_n`; a binary cylinder mass, a round nested
+ball, the presence of linked loops, or an algebraic commutator
+substitution does not alone establish the source's same-object
+3-dimensional punctured-torus attachment.
+
+### Newly implemented Lean transport: genuine source space, not a group label
+
+`ThreeArmHatcherHomotopyTransport.lean` takes a real
+source space `W_i` in each sector, a chosen basepoint `w_i`,
+and a genuine topological homotopy equivalence
+`e_i:W_i ≃ₕ U_i` **plus an equality** `e_i(w_i)=x₀`.
+It uses exactly the pinned Hatcher-at declaration
+`Hatcher.fundamentalGroupMulEquivOfHomotopyEquivOfEq`
+and existing `Hatcher.coprodIEquiv`. This is stricter
+than needed for naturally chosen satellite-side basepoints.
+
+`ThreeArmHatcherPathTransport.lean` is the preferred
+adapter: for every `i` take
+`e_i:W_i≃ₕU_i`, `w_i∈W_i`, and an actual based path
+`p_i:Path (e_i(w_i)) x₀` *within U_i*. The result is the
+composition
+
+```text
+   *_(i=0,1,2) π₁(W_i,w_i)
+      -- Hatcher.coprodIEquiv of:
+         (Hatcher.fundamentalGroupMulEquivOfHomotopyEquiv e_i w_i)
+            ≪trans≫ (FundamentalGroup.fundamentalGroupMulEquivOfPath p_i)
+      --> *_(i=0,1,2) π₁(U_i,x₀)
+      -- centralPi1CoverFreeProduct -->
+        π₁(E,x₀)
+```
+
+Both homotopy invariance and based-path transport are EXISTING
+upstream formal theorems. The actual equivariant straight paths
+`γ_i(t)=(1-t)(20,20,20)+t(13e_i)` from #1244 give
+a source-specific geometric route for the basing witnesses;
+the Lean `Path` values and satellite maps have not yet
+been constructed/typechecked. Crucially the new path adapter
+does not demand that the original source basepoint coincide with
+the common ambient one.
+
+Mathlib original API independently checked:
+`FundamentalGroup.fundamentalGroupMulEquivOfPath`,
+`Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean`.
+Pinned Hatcher-at original implementation independently fetched:
+`Hatcher/VanKampen/WedgeFundamentalGroup.lean`.
+These are imported *theorem donors*, not novel historical claims.
+Agda #1254 remains STACKED and unmerged; it already consumes
+the older clopen chronological bridge but does not contribute a
+wild-exterior homotopy equivalence.
+
+### Pareto/Ibrahim/snowball hard wall
+
+The **only new source-specific geometric input** needed by
+`threeArmHomotopyPathSourcesEquivPi1` is now plainly typed:
+`W_i` must be the genuine supported one-sector Hatcher exterior,
+`e_i` the actual satellite-relative collar homotopy equivalence
+onto the chosen *same* open member `U_i`, with `p_i`
+a path to the common basepoint. The existing radius-cut
+certificate still separately demands central `π₁`
+triviality, central connectivity, and member connectivity.
+Upstream Mathlib and Hatcher-at supply the remaining algebraic
+functoriality and group transport.
+
+Compiling these new Lean modules against the exact branch pin
+is still outstanding; source-written is NOT kernel-certified.
+Classical 3D collar/satellite equivalences are not conjured by
+their typed Lean signatures. Current independent local arithmetic:
+`r_-=15/4<17/4=r_+`, pair centres squared
+distance 162, cut diameter squared `289/4<162`,
+and fixed basepoint clearances all PASS using exact fractions.
