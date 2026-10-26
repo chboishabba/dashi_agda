@@ -116,12 +116,49 @@ def causal_common_source_witness():
        "original_EEG_or_study_Granger_reproduced":False}
 
 
+
+def squared_pearson_int(x, y):
+    """Exact Pearson squared by integer cross products; NOT Rai CCA."""
+    if len(x) != len(y) or len(x) < 3:
+        raise ValueError('short or mismatched binary traces')
+    n=len(x)
+    sx=sum(x); sy=sum(y)
+    cov=n*sum(a*b for a,b in zip(x,y))-sx*sy
+    vx=n*sum(a*a for a in x)-sx*sx
+    vy=n*sum(b*b for b in y)-sy*sy
+    if vx<=0 or vy<=0:
+        raise ValueError('zero-variance binary trace')
+    return F(cov*cov,vx*vy)
+
+
+def circular_shift_shared_cue_null():
+    """A 1000-shift permutation can reject temporal mismatch WITHOUT
+    identifying direct X->Y coupling if both are driven by the same Z.
+
+    Stand-in statistic is Pearson R squared, not CCA/cluster correction.
+    All 1000 shifts are distinct and nonzero on 1009 invented samples.
+    """
+    z=sequence(1009)
+    obs=squared_pearson_int(z,z)
+    null=[squared_pearson_int(z,z[i:]+z[:i]) for i in range(1,1001)]
+    assert obs==1 and max(null)<obs
+    p=F(1+sum(v>=obs for v in null),1+len(null))
+    return {'invented_samples':len(z),'null_permutations':len(null),
+            'shift_offsets_distinct_and_nonzero':True,
+            'unshifted_pearson_squared':str(obs),
+            'max_shifted_pearson_squared':str(max(null)),
+            'synthetic_permutation_tail_probability':str(p),
+            'direct_brain_to_brain_edge_in_model':False,
+            'common_sensory_cue_is_entire_explanation':True,
+            'original_Rai_CCA_or_clusters_reproduced':False}
+
 def main():
     p=argparse.ArgumentParser()
     p.add_argument('--method', type=str, help='Source-defined method JSON for audit')
     a=p.parse_args()
     md=METHOD if a.method is None else json.load(open(a.method,encoding='utf8'))
-    print(json.dumps({'method':audit_method(md),'lagged_common_source':causal_common_source_witness()},indent=2,sort_keys=True))
+    print(json.dumps({'method':audit_method(md),'lagged_common_source':causal_common_source_witness(),
+                      'shared_cue_circular_shift':circular_shift_shared_cue_null()},indent=2,sort_keys=True))
 
 
 if __name__=='__main__':main()
