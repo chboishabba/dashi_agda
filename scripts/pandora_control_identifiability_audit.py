@@ -123,6 +123,72 @@ def factorial_witness():
     }
 
 
+def muts_mode_episode_window(
+        count, min_minutes, max_minutes, conditional_spot_power=None):
+    """Exact, synthetic *conditional* 1977 exposure-bound algebra.
+
+    4 Oct 1977 Moscow 14515 reports 14 previous MUTS-2 high-mode occurrences
+    of 5-30 minutes with NO direct prior high-mode RF power measurements.
+    The document's 3.15-5.70 uW/cm2 belongs to a separate same-day spot
+    measurement reported by telegram, citing unavailable MOSCOW 14513.
+    Without a transfer assumption this routine MUST NOT give a finite
+    upper bound on prior fluence, biological dose, or actual human exposure.
+
+    If a caller *explicitly* applies the same-day spot-power interval to
+    all earlier mode-only episodes, output is a **counterfactual range**,
+    not a recovered observation. Pointwise time/power correlation ignored
+    only because all values are fixed to the caller's hypothetical bounds.
+    """
+    if type(count) is not int or count < 1:
+        raise ValueError('positive integer event count required')
+    try:
+        dmin, dmax = Fraction(min_minutes), Fraction(max_minutes)
+    except (TypeError, ValueError, ZeroDivisionError, OverflowError) as exc:
+        raise ValueError('positive finite duration bounds required') from exc
+    if not (0 < dmin <= dmax):
+        raise ValueError('duration interval must be positive and ordered')
+    duration = (count * dmin, count * dmax)
+    result = {
+        'event_count': count,
+        'duration_min': [str(x) for x in duration],
+        'earlier_power_directly_measured': False,
+        'unconditional_fluence_upper_bound': None,
+        'unconditional_individual_dose_established': False,
+        'conditional_spot_transfer': conditional_spot_power is not None,
+        'conditional_fluence_mJ_per_cm2': None,
+    }
+    if conditional_spot_power is not None:
+        if not isinstance(conditional_spot_power, (list, tuple)) or len(conditional_spot_power) != 2:
+            raise ValueError('explicit spot power interval required')
+        try:
+            pmin, pmax = [Fraction(x) for x in conditional_spot_power]
+        except (TypeError, ValueError, ZeroDivisionError, OverflowError) as exc:
+            raise ValueError('finite spot power interval required') from exc
+        if not (0 <= pmin <= pmax):
+            raise ValueError('spot power interval must be nonnegative and ordered')
+        # uW/cm2 x minutes x 60s/min / 1000 = mJ/cm2
+        lower = pmin * duration[0] * Fraction(60, 1000)
+        upper = pmax * duration[1] * Fraction(60, 1000)
+        result['conditional_fluence_mJ_per_cm2'] = [
+            str(lower), str(upper)]
+    return result
+
+
+def historical_muts_conditional_witness():
+    """Metadata from 1977 telegram + EXPLICIT nonhistorical transfer model."""
+    no_transfer = muts_mode_episode_window(14, 5, 30)
+    hypothetical = muts_mode_episode_window(
+        14, 5, 30, conditional_spot_power=('3.15', '5.70'))
+    return {
+        'source': 'US Embassy Moscow telegram 14515 dated 1977-10-04',
+        'spot_measurement_parent': 'MOSCOW 14513 not yet obtained',
+        'high_mode_indications': 14,
+        'mode_only_no_transfer': no_transfer,
+        'transferred_spot_range_hypothesis_only': hypothetical,
+        'not_an_observed_individual_dose_or_biological_outcome': True,
+    }
+
+
 class TestFiniteConfound(unittest.TestCase):
     def test_original_baseline_confounded(self):
         self.assertEqual(rank(design([(0, 0), (0, 0), (1, 1)])), 2)
@@ -201,6 +267,51 @@ class TestFiniteConfound(unittest.TestCase):
         self.assertFalse(witness['historical_animal_level_data_used'])
 
 
+    def test_muts_no_finite_fluence_without_prior_power(self):
+        result = muts_mode_episode_window(14, 5, 30)
+        self.assertEqual(result['duration_min'], ['70', '420'])
+        self.assertFalse(result['earlier_power_directly_measured'])
+        self.assertIsNone(result['unconditional_fluence_upper_bound'])
+        self.assertIsNone(result['conditional_fluence_mJ_per_cm2'])
+
+    def test_muts_explicit_spot_transfer_is_only_conditional(self):
+        result = muts_mode_episode_window(
+            14, 5, 30, conditional_spot_power=('3.15', '5.70'))
+        self.assertEqual(result['conditional_fluence_mJ_per_cm2'],
+                         ['1323/100', '3591/25'])
+        self.assertIsNone(result['unconditional_fluence_upper_bound'])
+        self.assertFalse(result['unconditional_individual_dose_established'])
+
+    def test_muts_duration_endpoint_cannot_be_relabelled_measured(self):
+        a = muts_mode_episode_window(14, 5, 30)
+        b = muts_mode_episode_window(28, 5, 30)
+        self.assertEqual(b['duration_min'], ['140', '840'])
+        self.assertIsNone(a['unconditional_fluence_upper_bound'])
+        self.assertIsNone(b['unconditional_fluence_upper_bound'])
+
+    def test_muts_individual_exposure_never_claimed(self):
+        witness = historical_muts_conditional_witness()
+        self.assertEqual(witness['spot_measurement_parent'],
+                         'MOSCOW 14513 not yet obtained')
+        self.assertTrue(witness['not_an_observed_individual_dose_or_biological_outcome'])
+        self.assertFalse(witness['mode_only_no_transfer']['conditional_spot_transfer'])
+        self.assertTrue(witness['transferred_spot_range_hypothesis_only']
+                        ['conditional_spot_transfer'])
+
+    def test_muts_invalid_count_and_durations_rejected(self):
+        for n in (0, -1, True, 1.5):
+            with self.assertRaises(ValueError):
+                muts_mode_episode_window(n, 5, 30)
+        for lower, upper in ((0, 30), (40, 30), (-1, 2), ('bad', 30)):
+            with self.assertRaises(ValueError):
+                muts_mode_episode_window(14, lower, upper)
+
+    def test_muts_invalid_spot_transfer_power_rejected(self):
+        for power in ((-1, 2), (3, 2), (1,), '3.15', ('NaN', 4)):
+            with self.assertRaises(ValueError):
+                muts_mode_episode_window(14, 5, 30, power)
+
+
 if __name__ == '__main__':
     import sys
     if sys.argv[1:] == ['--selftest']:
@@ -209,6 +320,7 @@ if __name__ == '__main__':
         raise SystemExit(0 if result.wasSuccessful() else 1)
     if sys.argv[1:] == ['--synthetic']:
         print(json.dumps({'two_factor': synthetic_witness(),
-                          'factorial': factorial_witness()}, indent=2))
+                          'factorial': factorial_witness(),
+                          'muts_1977': historical_muts_conditional_witness()}, indent=2))
     else:
         raise SystemExit('Use --selftest or --synthetic. No human/animal exposure input.')
