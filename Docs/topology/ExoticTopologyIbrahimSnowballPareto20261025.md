@@ -785,3 +785,119 @@ still source-written/kernel pending. The 12 original
 and implementation source records remain distinct
 from the actual local PL algebra checks and pending
 infinite geometric proof obligations.
+
+
+## 27 October — highest Pareto cut shifts from finite ends to stable PL stars
+
+### Actual new source-specific implementation payment
+
+* `scripts/exotic_topology_pl_stable_stars.py` imports the
+  **existing original** binary/trit transition functions, real
+  boundary-loop detector, oriented simplex data and old-complement
+  verifier. It tracks actual injected vertex IDs across three
+  consecutive finite stages and asserts that all K_n vertices
+  become interior in K_(n+1) and the full triangle-star of every
+  such vertex is exactly unchanged in K_(n+2).
+  This is much stronger than the earlier 1/2/3 child counts.
+* Original Python transitions gain **backwards-compatible** optional
+  `with_transport=True`: existing `(stage,receipt)` consumer
+  shape remains unchanged, while a new proof consumer obtains
+  the genuine old-stage vertex injection as a third return item.
+* In the balanced-ternary executable the Kraft check is now
+  `Fraction`-exact (no floating point premeasure surrogate).
+* Two new regressions on the same existing suite: eight positive
+  three-stage windows across Cantor, Loch Ness, Jacob and
+  balanced 1→3 surface exhaustions; one deliberately
+  non-injective old-vertex mapping is rejected.
+
+**Independent local executed mathematics (NOT exact GitHub blob):**
+`/mnt/data/exotic_audit/independent_star_audit.py` produced PASS:
+- Cantor old vertices (3, 152), mid/later triangles
+  (298/892, 892/2080);
+- Loch (3, 36), triangles (71/141, 141/211);
+- Jacob (152, 218), triangles (438/578, 578/718);
+- balanced ternary (3, 301), triangles
+  (595/2377, 2377/7723).
+
+All old-vertex links are finite interior circles under the source
+manifold validator, and two stages later every injected old
+star has precisely the same set of actual triangles. These
+are four FINITE PL families, not a compiled statement about
+the countably infinite union.
+
+### Stronger conditional topology theorem, source roots intact
+
+The updated
+`Docs/topology/ExoticInfiniteSurfaceEndSpaceConditionalTheorem20261025.md`
+states a non-tautological mathematical **direct union**
+lemma: for every n, injective oriented simplicial boundary
+gluing to all old frontier circles makes all K_n vertices
+interior at K_(n+1). Because subsequent pieces attach
+only along *current* boundary, no future simplex can
+meet an old now-interior vertex; its link permanently
+stabilises. The countable simplicial direct union is
+locally finite, and its geometric realisation is a
+connected orientable second-countable boundaryless
+PL surface. Compact subsets are cofinally contained in
+finite stages. Uniform no-cross-branch gluing then
+supports the nested proper complementary-region
+identification with the genuine Richards ideal
+boundary — at the conceptual mathematics level.
+
+**The formal/kernel gap is still substantial:** the
+all-n structural induction, abstract simplicial
+direct-union as a native Lean or Agda object,
+geometric realisation topology, compact cofinality,
+actual end-basis homeomorphism and full genus
+decoration are NOT kernel-verified. Finite tests alone
+cannot close them. No repeated assertion that
+`B(S)≅2^ℕ` comes solely from `b_n=2^n`.
+
+Original mathematical provenance:
+- Brahana (1921), finite compact bordered-surface classification;
+- Kerékjártó (1923), early classification principle (with
+  proof gaps discussed by Richards);
+- **Ian Richards (1963)**, Trans. AMS 106 pp.259–269,
+  original Definitions 1–3 on p.261 and Theorem 1
+  pp.262–263, https://people.dm.unipi.it/benedett/Richards.pdf;
+- usual abstract simplicial weak-realisation and
+  locally-finite link criteria are classical donor theorems,
+  e.g. https://ncatlab.org/nlab/show/simplicial%20complex.
+  These are NOT attributed as DASHI original research
+  or as current kernel receipts.
+
+### Latest PR #1244 and Hatcher's stronger geometric interface
+
+The stacked parent advanced again on 27 October and was
+non-destructively merged, bringing the new source-owned
+`ThreeArmRadiusCutGeometry`,
+`ThreeArmRadiusCutHatcherTransport`,
+`ThreeArmHatcherGroupTransport`,
+`ThreeArmHatcherHomotopyTransport` and
+`ThreeArmHatcherPathTransport` modules with the
+original `HornedC3.lean` hub changes.
+They reuse the pinned Deicyde/Hatcher Van Kampen
+wedge free-product theorem, and now supply metric
+OPEN COVER/INTERSECTION algebra via centres in the
+ambient Y rather than mistakenly assuming these
+centres lie in the wild exterior X.
+They still REQUIRE actual source-to-cover
+geometric group/homotopy transport, central pi1,
+connectedness, basepoint coherence and the infinite
+wild embedding. Source-written API inspection is
+not a successful kernel compile.
+
+**Pareto ranking:**
+P0 exact-head pinned Python/Agda/Lean receipts, fix
+concrete reported compile errors if available;
+P1 source-weld a *uniform* old-star stabilisation
+induction to a genuine native geometric-realisation
+direct union, then compact cofinality;
+P2 formal the actual decorated Richards end
+homeomorphism on that same union;
+P3 attack the now narrowed wild satellite/group
+transport inputs using latest parent #1244;
+P4 Hatcher S² homology pin bridge, Warsaw, Wada,
+Fox–Artin separately, and remaining deep geometry.
+Do not improve source counts without adding original
+independent theorem ancestry or a real consumer.
