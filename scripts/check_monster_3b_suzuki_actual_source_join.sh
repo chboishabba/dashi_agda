@@ -38,6 +38,7 @@ p = Path("build/monster_3b_suzuki_selected_join.json")
 j = json.loads(p.read_text())
 assert j["status"] == "SOURCE_RELATIVE_CHARACTER_JOIN_PASS"
 assert j["complete_source_class_signature_matched"] is True
+assert j["selected_source_characters_all_classes_matched"] is True
 assert j["source_orthogonality_recomputed"] is True
 assert j["original_source_authenticated"] is False
 assert j["GAP_executed_by_this_check"] is False
