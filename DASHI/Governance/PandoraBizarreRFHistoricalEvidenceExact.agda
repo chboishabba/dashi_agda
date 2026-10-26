@@ -7,6 +7,7 @@ module DASHI.Governance.PandoraBizarreRFHistoricalEvidenceExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+import Agda.Builtin.Nat
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -316,6 +317,29 @@ recall2026 = Source.mkNoDOISource
   "Political office states earlier ICAs were recalled; allegations of falsification are not independent findings and withdrawal is not a replacement specific-device scientific assessment"
   Source.publicAttribution
 
+
+mutsMonitorOrder1977 : Source.AttributedSource
+mutsMonitorOrder1977 = Source.mkNoDOISource
+  "US State Department Bureau of Security, for TSO Brandt in Moscow"
+  "MUTS MEASUREMENTS, State telegram 005110"
+  "Original US State Department telegram 1977-01-10; NARA/AAD document 1977STATE005110, declassified May 2009; National Security Archive access carrier document 28836"
+  "1977"
+  "https://nsarchive.gwu.edu/sites/default/files/documents/ri5s7v-p3i8x/28.pdf"
+  Source.archivalSource
+  "Original telegram page inspected: asks five-workday microwave power-density measurements in rooms 901 and 1001, additional checks when Rustrak indications unusually high; an instruction to monitor is not a filled observation or human dose"
+  Source.publicAttribution
+
+mutsMeasuredAndInferred1977 : Source.AttributedSource
+mutsMeasuredAndInferred1977 = Source.mkNoDOISource
+  "Jack Matlock, US Embassy Moscow, Department of State"
+  "Increased Levels of Microwave Signals, Embassy telegram MOSCOW 14515"
+  "Original Embassy Moscow message 1977-10-04; NARA/AAD document 1977MOSCOW14515, declassified May 2009; referenced same-day original SY-channel MOSCOW 14513 remains missing"
+  "1977"
+  "https://nsarchive.gwu.edu/sites/default/files/documents/ri5s7v-p3i8x/29.pdf"
+  Source.archivalSource
+  "Original message inspected: reports power density readings from referenced SY channel in range 3.15 to 5.70 microwatts/cm2 on ninth/tenth floors and roof; separately 14 earlier MUTS-2 high-power-mode indications during Sep 7 to Oct 2 without direct same-mode power readings, lasting about five to thirty minutes each. Similar prior power was assumed, not directly measured. No individual dosimetry or effect result."
+  Source.publicAttribution
+
 sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Source.mkSourceAtlas
   "Cold War bioelectronic research and contemporary AHI original-object lineage"
@@ -327,7 +351,7 @@ sourceAtlas = Source.mkSourceAtlas
    koslovRand ∷ kubisDecember1969 ∷ pandoraCommitteeJanuary1970 ∷
    pandoraErratumMarch1970 ∷ koslovNavyZaret1971 ∷ heilmeier1977 ∷ lilienfeld1978Original ∷
    mallalieu1980PhysicalModel ∷ ntia1981Assessment ∷
-   senateMoscow1979 ∷ hopkins1976To1978Study ∷ elwood2012Review ∷
+   senateMoscow1979 ∷ mutsMonitorOrder1977 ∷ mutsMeasuredAndInferred1977 ∷ hopkins1976To1978Study ∷ elwood2012Review ∷
    odniExperts ∷ odni2025 ∷ recall2026 ∷ [])
   "Bounded original-document roots, no fabricated modern source-to-device bridge"
 
@@ -368,6 +392,8 @@ data ProgrammeObject : Set where
   ntia1981CompiledAssessment : ProgrammeObject
   lilienfeldCompleted1978HumanReport : ProgrammeObject
   laterScientificReviewOfSameCohort : ProgrammeObject
+  mutsFieldMonitoringDirective1977 : ProgrammeObject
+  mutsHighModeFieldReport1977 : ProgrammeObject
 
 data ProgrammeTopic : Set where bioelectronicsAndEffects : ProgrammeTopic
 
@@ -415,6 +441,9 @@ data LinkKind : Set where
   committeeOriginalStudyReassessment : LinkKind
   signedCorrectiveErratum : LinkKind
   separateContractCriticalReview : LinkKind
+  orderedInstrumentMeasurement : LinkKind
+  documentedSpotPowerDensity : LinkKind
+  previousModeDetectedPowerUnmeasured : LinkKind
 
 record BoundedLineageEdge : Set where
   constructor boundedLineageEdge
@@ -655,11 +684,12 @@ pandoraRetrospectiveAccountTension = boundedLineageEdge
   "DARPA director in 1977 denied awareness of DoD work probing microwave mind-control possibilities; Cesaro 1967 recorded recommendation to study possible weapon applications to behavioural effects"
   "The difference between a 1967 recommendation and a 1977 claim about actual sponsored projects prevents inferring a strict factual contradiction, deliberate deception, or operational capability"
 
--- 27 distinct dated publication/source objects in this consumer's current
--- source atlas. Count is documentary, not independent scientific studies.
-sourceCarrierCountIsTwentySeven :
-  Source.sourceCount (Source.sources sourceAtlas) ≡ 27
-sourceCarrierCountIsTwentySeven = refl
+-- 29 dated source/publication carriers, not 29 independent experiments.
+-- The two original State telegrams are different source objects; they report
+-- the same broader Moscow exposure programme and not another human cohort.
+sourceCarrierCountIsTwentyNine :
+  Source.sourceCount (Source.sources sourceAtlas) ≡ 29
+sourceCarrierCountIsTwentyNine = refl
 
 -- Documentary possession, programme hardware, and experiment performance are
 -- different kinds of object. Asset transfer does not prove transfer of data.
@@ -889,3 +919,74 @@ senate1979PrimateStudyInconclusive = boundedLineageEdge
   committeeOriginalStudyReassessment senateMoscow1979
   "US Senate 1979 original committee print pp. 10-11, after recounting McIlwain's failed-to-confirm trials at 4.6 and 20 mW/cm2, summarizes Kubis and SAC: the earlier primate design did not give an acceptable answer because baseline controls and experimental conditions were contaminated"
   "The Senate compilation is NOT another primate trial; failure of causal identification cannot be treated as a reliable positive effect or as a demonstrated universal negative. Prospective deliberate human irradiation was not carried out according to the same report"
+
+
+-- Original-document observation-standing cut (1977 State/NARA telegrams).
+-- Document 1977MOSCOW14515 cites an SY-channel measurement message
+-- MOSCOW 14513. Until that parent message and instrument sheets are acquired,
+-- its published numerical range is a *reported* direct measurement, not a
+-- source-verified calibration or an individual-specific absorbed dose.
+data MutsObservationStanding : Set where
+  roomReadingReportedFromMeasurement : MutsObservationStanding
+  transmitterModeRecordedWithoutPower : MutsObservationStanding
+  earlierPowerInferredByMatchingMode : MutsObservationStanding
+  individualAbsorbedDoseMeasured : MutsObservationStanding
+
+inferredPreviousPowerIsNotMeasured :
+  earlierPowerInferredByMatchingMode ≡
+    roomReadingReportedFromMeasurement → ⊥
+inferredPreviousPowerIsNotMeasured ()
+
+transmitterModeDoesNotMeasurePower :
+  transmitterModeRecordedWithoutPower ≡
+    roomReadingReportedFromMeasurement → ⊥
+transmitterModeDoesNotMeasurePower ()
+
+reportedRoomPowerIsNotIndividualDose :
+  roomReadingReportedFromMeasurement ≡
+    individualAbsorbedDoseMeasured → ⊥
+reportedRoomPowerIsNotIndividualDose ()
+
+muts1977MeasurementOrder : BoundedLineageEdge
+muts1977MeasurementOrder = boundedLineageEdge
+  moscowEmbassyExposurePopulation mutsFieldMonitoringDirective1977
+  orderedInstrumentMeasurement mutsMonitorOrder1977
+  "State telegram 005110 (Jan 10 1977) instructs weekday power checks in rooms 901 and 1001 and event-triggered checks after Rustrak high indications"
+  "An order to monitor cannot stand in for a time-complete collection of calibrated readings or person-level health evidence"
+
+muts1977DirectPowerReport : BoundedLineageEdge
+muts1977DirectPowerReport = boundedLineageEdge
+  mutsFieldMonitoringDirective1977 mutsHighModeFieldReport1977
+  documentedSpotPowerDensity mutsMeasuredAndInferred1977
+  "Moscow telegram 14515 (Oct 4 1977) reports 3.15-5.70 microwatts/cm2 from SAME-DAY SY-message MOSCOW 14513 for ninth and tenth floors and roof"
+  "The original referenced SY-channel parent MOSCOW 14513, probe calibration and point-by-point readings remain necessary; the 1977 result is not a 1967 TUMS reading"
+
+muts1977EarlierModesNotPowerMeasured : BoundedLineageEdge
+muts1977EarlierModesNotPowerMeasured = boundedLineageEdge
+  mutsHighModeFieldReport1977 mutsHighModeFieldReport1977
+  previousModeDetectedPowerUnmeasured mutsMeasuredAndInferred1977
+  "Moscow telegram 14515 logs 14 earlier MUTS-2 high-mode indications (Sep 7 to Oct 2); the telegram explicitly says no direct power readings were obtained during those prior five-to-thirty-minute high-mode periods"
+  "Assuming October 4 measured power applies to all 14 prior events is a source-attributed model-transfer hypothesis, not 14 independent calibrated exposures"
+
+data Muts1977DocumentCarrier : Set where
+  januaryMonitoringInstruction : Muts1977DocumentCarrier
+  octoberMeasurementSummary : Muts1977DocumentCarrier
+
+data Muts1977OriginalRecordRoot : Set where
+  state1977MonitoringOrderRoot : Muts1977OriginalRecordRoot
+  moscow1977MeasurementSummaryRoot : Muts1977OriginalRecordRoot
+
+mutsRoot : Muts1977DocumentCarrier → Muts1977OriginalRecordRoot
+mutsRoot januaryMonitoringInstruction = state1977MonitoringOrderRoot
+mutsRoot octoberMeasurementSummary = moscow1977MeasurementSummaryRoot
+
+mutsSeparateRecordRoots :
+  mutsRoot januaryMonitoringInstruction ≡
+    mutsRoot octoberMeasurementSummary → ⊥
+mutsSeparateRecordRoots ()
+
+-- The experimental and observational numbers below are *report metadata*.
+-- They are not a numeric reconstruction of 14 historical field strengths.
+mutsEarlierHighModeCount : Agda.Builtin.Nat.Nat
+mutsEarlierHighModeCount = 14
+
