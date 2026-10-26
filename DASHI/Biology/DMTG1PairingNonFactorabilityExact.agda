@@ -32,12 +32,22 @@ data RowAssignment : Set where
   matchedOriginalOrder : RowAssignment
   sameMarginalsReversedOrder : RowAssignment
 
-data UnkeyedConditionMarginals : Set where
-  sameDMTAndPlaceboMarginals : UnkeyedConditionMarginals
+data ThreeValues (A : Set) : Set where
+  threeValues : A → A → A → ThreeValues A
 
+record UnkeyedConditionMarginals : Set where
+  constructor conditionMarginals
+  field
+    sortedDMT : ThreeValues Nat
+    sortedPlacebo : ThreeValues Nat
+
+-- A literal source-independent *value* observer, not a verbal assertion
+-- that the two assignments have the same marginals.
 unkeyedObserver : RowAssignment → UnkeyedConditionMarginals
-unkeyedObserver matchedOriginalOrder = sameDMTAndPlaceboMarginals
-unkeyedObserver sameMarginalsReversedOrder = sameDMTAndPlaceboMarginals
+unkeyedObserver matchedOriginalOrder =
+  conditionMarginals (threeValues 10 20 30) (threeValues 8 18 28)
+unkeyedObserver sameMarginalsReversedOrder =
+  conditionMarginals (threeValues 10 20 30) (threeValues 8 18 28)
 
 -- Unlike source G1, these are elementary synthetic product sums.
 pairedCrossMoment : RowAssignment → Nat
