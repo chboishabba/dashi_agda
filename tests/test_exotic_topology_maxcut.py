@@ -18,6 +18,7 @@ import exotic_topology_binary_ternary_pants as codec
 import exotic_topology_pl_surface_gluings as pl
 import exotic_topology_pl_frontier_lineage as lineage
 import exotic_topology_pl_complement_components as complement
+import exotic_topology_balanced_ternary_pl as balanced
 import exotic_topology_cantor_cylinder_orientation as orientation
 import exotic_topology_braid_crosspr_discriminator as braid
 import exotic_topology_cantor_measure_obstruction as measure
@@ -232,5 +233,53 @@ class ExoticMaxCutTests(unittest.TestCase):
         self.assertEqual(result['symbolic_shell_identities'], 5)
         self.assertFalse(result['geometric_satellite_pi1_verified'])
         self.assertFalse(result['infinite_wild_embedding_machine_certified'])
+
+
+    def test_real_two_pants_balanced_ternary_frontiers_and_complements(self):
+        proof = balanced.audit(depth=3)
+        self.assertEqual(
+            [item["boundary_count"] for item in proof["stages"]],
+            [1, 3, 9, 27])
+        self.assertEqual(
+            [item["new_attached_components"] for item in proof["stages"][:3]],
+            [1, 3, 9])
+        self.assertTrue(all(item["vertex_links_verified"] for item in proof["stages"]))
+        self.assertEqual(proof["physical_pants_per_old_frontier"], 2)
+        self.assertEqual(proof["one_to_three_cobordism_euler"], -2)
+        self.assertFalse(proof["topological_infinite_end_space_homeomorphism_proved"])
+        self.assertFalse(proof["agda_or_lean_kernel_verified"])
+
+    def test_balanced_zero_is_a_distinct_third_ending(self):
+        m = balanced.audit(depth=1)
+        self.assertEqual(m["stages"][-1]["boundary_count"], 3)
+        self.assertNotEqual(balanced.CODE[-1], balanced.CODE[0])
+        self.assertNotEqual(balanced.CODE[0], balanced.CODE[1])
+        self.assertEqual(balanced.DIGIT369, {-1:3, 0:6, 1:9})
+        self.assertIsNone(balanced.decode_complete_binary_word((1,)))
+
+    def test_reused_369_prefix_code_is_the_same_balanced_code(self):
+        for t, digit in ((-1, "3"), (0, "6"), (1, "9")):
+            self.assertEqual(
+                balanced.CODE[t],
+                tuple(int(x) for x in codec.CODE[digit]))
+        for n in range(5):
+            from itertools import product
+            for word in product(balanced.BRANCHES, repeat=n):
+                encoded = balanced.encode_balanced_word(word)
+                self.assertEqual(
+                    balanced.decode_complete_binary_word(encoded),
+                    word)
+                self.assertEqual("".join(map(str, encoded)),
+                                 codec.encode(tuple(str(balanced.DIGIT369[t])
+                                                    for t in word)))
+
+    def test_one_pants_does_not_suffice_for_three_outgoing_boundaries(self):
+        stage = lineage.mark_initial(pl.disk(), [()])
+        pants = pl.sphere_with_holes(3)
+        one = lineage.attach(stage, pants, (), ((-1,), ("aux",)))
+        self.assertEqual(one.verify((0, 2))["boundaries"], 2)
+        self.assertNotIn((0,), one.frontier)
+        self.assertNotIn((1,), one.frontier)
+        self.assertNotEqual(set(one.frontier), {(-1,), (0,), (1,)})
 
 if __name__ == '__main__': unittest.main()
