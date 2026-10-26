@@ -678,3 +678,17 @@ octoberBareLevyStringNotInstrumentIdentifier :
   INF.FactorsThrough Climate.displayedLevyWord Climate.legalBaseOfLevy → ⊥
 octoberBareLevyStringNotInstrumentIdentifier =
   Climate.bareLevyLabelCannotRecoverTaxBase
+
+
+------------------------------------------------------------------------
+-- Ibrahim/source-dependence original inquiry: one purposively selected
+-- 53-appearance evidence sample can fit differently concentrated national
+-- universes. Population claim needs a representative sampling design.
+------------------------------------------------------------------------
+
+selectedClimateCorpusIsNotNationalSourceCensus :
+  INF.FactorsThrough
+    Climate.whatOurSelectedLedgerSees
+    Climate.whatUnobservedOriginalPopulationContains → ⊥
+selectedClimateCorpusIsNotNationalSourceCensus =
+  Climate.selectedCorpusCannotDetermineNationalOriginConcentration
