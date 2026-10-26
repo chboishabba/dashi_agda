@@ -121,12 +121,12 @@ exemptionAuditPriority : LegalPriorityCoordinate
 exemptionAuditPriority = legal-priority-coordinate
   exemptionAudit
   consumerPaymentOpen
-  "exact Queensland planning/koala exemption or grandfathering applicable to Springview and related components"
-  "Council material records mapped koala habitat together with approved/exempted development outcome"
-  "exact instrument, temporal scope, parcel scope, approval history, and variation/component coverage"
-  "mapped koala habitat is not equivalent to a prohibition where an exemption applies"
-  "mapped habitat cannot determine the approval outcome without exemption/history coordinates"
-  "recover the exact exemption authority and test whether every current component/variation remains inside it"
+  "exact Queensland planning/koala exemption and Springfield Structure Plan area development plan prerequisites applicable to Springview and related components; 2018 QCA 266 Cherish 2016 application is a source-specific prior judgment"
+  "Council material records mapped koala habitat with approved/exempted development outcome; [2018] QCA 266 judgment reprint says a Council-approved area development plan was necessary before assessment/approval of Cherish March 2016 Springview application"
+  "current signed operative area development plan, amendment history, parcel mapping and approved 2016 application continuity into current 2019/8575 footprint; exact habitat exemption instrument/time/variation coverage"
+  "2018 appeal upheld an area development plan precondition for the specific 2016 application; it neither abolished all Springfield control nor proves a missing condition in current approvals or federal EPBC invalidity"
+  "a 2018 Queensland planning judgment, historic mapped habitat or a campaign land-banking allegation cannot by itself decide the legality of the 2026 Commonwealth approval"
+  "acquire QCA 266 official judgment face and actual 2016 area development plan/2017-2026 subsequent approvals and lot identifiers; join each legal instrument to the present Springview footprint and separately recover koala-exemption authority"
 
 enforcementPriority : LegalPriorityCoordinate
 enforcementPriority = legal-priority-coordinate
