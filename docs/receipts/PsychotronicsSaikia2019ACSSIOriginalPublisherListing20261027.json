@@ -14,7 +14,7 @@
     "original_article_publisher_page": "https://pubs.acs.org/doi/10.1021/acschemneuro.8b00490",
     "type": "ACS-author/publisher-hosted metadata describing additional PDF",
     "publisher_says_supporting_information_free": true,
-    "relevant_original_metadata_description": "Additional experimental details; figures showing the kinetics of aggregation, semi-quantitative analysis, FTIR analysis, monomer percentage estimation, stability of the non-aggregation pathway, the effect of MF on secondary aggregations, fluorescence microscopy analysis, the update of field-treated and untreated samples, and the effect of the electric field on the enzymatic activity of trypsin; and a scheme showing EF modulation (PDF)",
+    "relevant_original_metadata_description": "Publisher describes supplemental aggregation kinetics and assays including FTIR, monomer estimation, microscopy, exposure comparisons, trypsin activity and an EF modulation sketch; the exact printed topic phrase is 'effect of MF on secondary aggregations'.",
     "subject_list": {
       "aggregation_kinetics": true,
       "semiquantitative_analysis": true,
