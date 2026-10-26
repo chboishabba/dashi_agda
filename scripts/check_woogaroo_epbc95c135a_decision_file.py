@@ -53,7 +53,7 @@ def check() -> None:
     ):
         assert guard in owner, guard
 
-    assert "section 95C report requested under section 135A(2)" in road
+    assert "section 95C recommendation report requested under section 135A(2)" in road
     assert "section 95B" in road
     assert "Item 4.6(c)" in road
     assert "draft, not sent" in request
