@@ -61,4 +61,23 @@ theorem compactMapAbsorbedByOpenStages
       (Set.range f) hk (Set.Subset.trans (Set.subset_univ _) hcover)
   exact ⟨n, fun t => hn (Set.mem_range_self t)⟩
 
+
+/-- Stronger constructive factorization: every continuous map from
+any compact source T factors via a genuine continuous map into one
+specific Y_n. For T = I this applies to loops; for T=I×I it
+applies to their homotopies, subject to their existing endpoint
+conditions. No new homotopy or meridian generators are supplied. -/
+theorem compactMapFactorsThroughOpenStage
+    {T : Type v} [TopologicalSpace T] [CompactSpace T]
+    (f : C(T, X))
+    (Y : ℕ → Set X) (hopen : ∀ n, IsOpen (Y n))
+    (hmono : Monotone Y) (hcover : Set.univ ⊆ ⋃ n, Y n) :
+    ∃ n, ∃ (g : C(T, Y n)), ∀ t, (g t : X) = f t := by
+  obtain ⟨n, hn⟩ :=
+    compactMapAbsorbedByOpenStages f Y hopen hmono hcover
+  refine ⟨n, ⟨fun t => ⟨f t, hn t⟩,
+    f.continuous.subtype_mk _⟩, ?_⟩
+  intro t
+  rfl
+
 end DASHI.AlexanderHornedC3
