@@ -527,6 +527,21 @@ croftPowerWand2003 = Source.mkNoDOISource
   "first-person author referral to www.cloud-busters.com for Mobius-wrapping directions; explicitly thanks Ben Morton, Suze Hooten and Bruce Stenulson, mentions Mark Hooten; this is Croft testimony not their original statements or verified claims"
   Source.publicAttribution
 
+-- Independent *publication*, overlapping original author group with Saikia 2019.
+-- A separate publication != independent replication of a particular
+-- biological experiment or evidence for the 2024 Rodin coil.
+pandeyFFField2017 : Source.AttributedSource
+pandeyFFField2017 = Source.mkDOISource
+  "Gaurav Pandey; Jahnu Saikia; Sajitha Sasidharan; Deep C. Joshi; Subhash Thota; Harshal B. Nemade; Nitin Chaudhary; Vibin Ramakrishnan"
+  "Modulation of Peptide Based Nano-Assemblies with Electric and Magnetic Fields"
+  "Scientific Reports 7, article 2726, published 2 June 2017; full original publisher open-access HTML consulted 27 October 2026"
+  "2017"
+  "10.1038/s41598-017-02609-z"
+  "https://www.nature.com/articles/s41598-017-02609-z"
+  Source.academicArticleSource
+  "Diphenylalanine FF cooling for five hours with 150 and 300 V/cm AC/DC electric fields and distinct 0.6 T magnetic-field condition; under study conditions authors report strong electric-field modulation and magnetic group aggregation; NOT a Rodin-Helmholtz comparison or clinical outcome"
+  Source.publicAttribution
+
 saikiaAmyloid2019 : Source.AttributedSource
 saikiaAmyloid2019 = Source.mkDOISource
   "Jahnu Saikia; Gaurav Pandey; Sajitha Sasidharan; Ferrin Antony; Harshal B. Nemade; Sachin Kumar; Nitin Chaudhary; Vibin Ramakrishnan"
@@ -910,7 +925,7 @@ sourceAtlas = Source.mkSourceAtlas
    kervadecFiveDASC2026 ∷ stockerASCRevision2026 ∷
    heartmathEnergeticCommunication ∷
    shupakShamClinical2006 ∷ duAssessorBlindedProtocol2026 ∷
-   croftBigSecret2002 ∷ croftPowerWand2003 ∷ saikiaAmyloid2019 ∷
+   croftBigSecret2002 ∷ croftPowerWand2003 ∷ pandeyFFField2017 ∷ saikiaAmyloid2019 ∷
    perezRodinRSI2013 ∷ ramirezRodinRMF2024 ∷ perezHeatShock2008 ∷
    reichCoreEllsworth1954 ∷ reichCloudArchiveIndex ∷
    hamblingWeatherwatch2011 ∷ kiddexRedditMind2023 ∷
@@ -945,7 +960,7 @@ data LineageRoot : Set where
   kervadecAscValidationRoot stockerAscRevisionRoot : LineageRoot
   heartmathInstituteRoot : LineageRoot
   shupakClinicalAuthorRoot duProtocolAuthorRoot : LineageRoot
-  saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
+  pandey2017PeptidePublicationRoot saikia2019ResearchRoot guanajuatoRodinResearchRoot perez2008HeatShockRoot : LineageRoot
   reichOriginalAuthorRoot guardianHamblingRoot redditKiddexForumRoot : LineageRoot
   bachFictionRoot constableBookRoot sladePractitionerRoot adachiPublisherRoot : LineageRoot
   wmoInstitutionRoot peterReichMemoirRoot kateBushArtistRoot : LineageRoot
@@ -1605,6 +1620,16 @@ ramirez2024ReusedNumbersQuestion = mkBound
   Diligence.primaryProposition
   attributedAuthorReport
   "shared data or independently reacquired unknown; repeated rounded numbers do not establish improper publication conduct"
+
+pandey2017FieldExperimentScope : ClaimBound
+pandey2017FieldExperimentScope = mkBound
+  "Pandey and collaborators report EF-modulated diphenylalanine FF nanoassembly with a distinct 0.6T magnetic exposure and no Rodin/Helmholtz matched comparison"
+  pandeyFFField2017
+  "Scientific Reports 7:2726 original full Methods and Results, 2 June 2017, DOI 10.1038/s41598-017-02609-z"
+  pandey2017PeptidePublicationRoot
+  Diligence.primaryProposition
+  attributedAuthorReport
+  "2019 amyloid original full text and 2024 asserted matched Rodin-versus-Helmholtz 60-percent comparison not established by this study"
 
 ramirez2024Ref24Claim : ClaimBound
 ramirez2024Ref24Claim = mkBound
