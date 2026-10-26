@@ -225,3 +225,41 @@ source document existing ≠ source statement
 ≠ gauge action or experimental measurement.
 No invented QID/Dewey data or duplicate
 claims of original mathematical priority.
+
+
+## Same-object refinement of finite positive comparison
+
+The two short meridians are ACTUAL curves in the stated
+straight-tube complement U. The alternating cyclic
+order is an ACTUAL four-dart ribbon-graph thickening
+type with a single commutator boundary. The current
+certificate does NOT construct an EXPLICIT EMBEDDING
+of that precise orientable punctured-torus ribbon
+into the SAME Euclidean U, with the ribbon core
+curves identified pointwise with the two metric
+meridians and one peripheral attaching annulus.
+Thus even at the finite positive-model level,
+group + length + abstract ribbon data are
+individually proved but their JOINT AMBIENT
+geometric realization is a named unfulfilled
+same-object source obligation. Do NOT count it
+as an actual Hatcher local Z matching theorem.
+
+This is the next meaningful micro-Pareto problem
+inside P0: an embedded marked punctured-torus
+surface with explicit boundary loop, genuine
+U inclusion, and a based word computation,
+before source-relative extension to the wild
+satellite and all stages. It is still distinct
+from constructing the actual infinite wild
+Hatcher stage, and no physical source can
+consume the isolated model yet.
+
+New additional Agda exact finite half-edge
+source `DASHI/Mathematics/Topology/HatcherRibbonPeripheralBoundaryExact.agda`
+has by-reflexivity the positive one-cycle and
+negative three-cycle source successor tables,
+without duplicating #1254's real PL mesh.
+No Agda kernel run. All mathematical
+source/original and implementation
+attribution remains unchanged.
