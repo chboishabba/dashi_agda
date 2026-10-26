@@ -175,6 +175,19 @@ isUnique:=Length(possibleMonsterLabels)=1;
 # WITH THE ORIGINAL CLASS POSITIONS intact, for further matrix/group
 # word discrimination. In particular, do not confuse the image of r
 # (Suz class 2B involution) with its source Monster class (order4).
+BoolText := function(b)
+  if b then return "true"; else return "false"; fi;
+end;
+SourceLabel := function(b)
+  if b then return "UNIQUE_SOURCE_FUSION";
+       else return "AMBIGUOUS_SOURCE_FUSION"; fi;
+end;
+SeparatorAfter := function(i,n)
+  if i<n then return ",\\n"; else return "\\n"; fi;
+end;
+CommaAfter := function(i,n)
+  if i<n then return ","; else return ""; fi;
+end;
 outPath:="build/monster3b_atlas_suz2b_monster_4class_source_fusion.json";
 PrintTo(outPath,
   "{\n",
@@ -202,7 +215,7 @@ AppendTo(outPath,
   "  \"all_possible_monster_four_labels\": [");
 for i in [1..Length(possibleMonsterLabels)] do
   AppendTo(outPath,"\"",possibleMonsterLabels[i],"\"",
-    (if i<Length(possibleMonsterLabels) then "," else "" fi));
+    CommaAfter(i,Length(possibleMonsterLabels)));
 od;
 AppendTo(outPath,
   "],\n",
@@ -210,13 +223,13 @@ AppendTo(outPath,
   "  \"actual_6Suz_degree78_family_selected\": false,\n",
   "  \"full_actual_Monster_Hom_constructed\": false,\n",
   "  \"actual_monster_four_class_uniquely_forced_by_class_fusions\": ",
-  (if isUnique then "true" else "false" fi),",\n",
+  BoolText(isUnique),",\n",
   "  \"status\": \"",
-  (if isUnique then "UNIQUE_SOURCE_FUSION" else "AMBIGUOUS_SOURCE_FUSION" fi),
+  SourceLabel(isUnique),
   "\"\n}\n");
 
 Print("SOURCE MONSTER-4-CLASS FUSION: ",
-      (if isUnique then "UNIQUE " else "AMBIGUOUS " fi),
+      SourceLabel(isUnique),
       possibleMonsterLabels,
       "; candidate twoSuz classes=",sourceCandidates,
       "; receipt=",outPath,"\n");
