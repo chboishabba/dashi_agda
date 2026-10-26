@@ -160,7 +160,7 @@ record IncidencePath : Set where
     benefitedOrExposedActor : String
     sourcePaidStatement : String
     contingentNextEdge : String
-    grossGainIdentified : Bool
+    sourceLevelValueOrOptionIdentified : Bool
     actualNetTransferPaid : Bool
     actualNetTransferPaidIsFalse : actualNetTransferPaid ≡ false
 
@@ -264,6 +264,59 @@ record NetIncidenceRequirements : Set where
 currentNetIncidencePayment : NetIncidenceRequirements
 currentNetIncidencePayment = net-incidence-requirements
   false false false false false false
+
+------------------------------------------------------------------------
+-- Live minimal acquisition cut, prioritised by decision-changing ability.
+-- Scores route work; they are not probabilities, evidentiary grades or
+-- valuations. Source material can arrive out-of-order but never pays a
+-- missing dependency simply by proximity or chronology.
+------------------------------------------------------------------------
+
+data IncidenceDebt : Set where
+  signedFederalDecisionAndCounsel : IncidenceDebt
+  exactCouncilVillage2And3ChargeNotices : IncidenceDebt
+  signedCherishStocklandTitleDeed : IncidenceDebt
+  current1994LoanAccountAndTenKTrigger : IncidenceDebt
+  sameAsset2026GasMeterAndDistributor : IncidenceDebt
+  orionCounterfactualAndFundExposure : IncidenceDebt
+  sameParcelEcologicalOffsetAndPublicSpend : IncidenceDebt
+
+record IncidenceCut : Set where
+  constructor incidence-cut
+  field
+    debt : IncidenceDebt
+    sourceAcquisitionPriority : String
+    livePublicSource : Bool
+    presentPayment : Bool
+    exactlyMissing : String
+    noNameOnlyShortcut : Bool
+    noNameOnlyShortcutIsTrue : noNameOnlyShortcut ≡ true
+
+open IncidenceCut public
+
+canonicalIncidenceCuts : List IncidenceCut
+canonicalIncidenceCuts =
+  incidence-cut signedFederalDecisionAndCounsel "P0 LEGAL" true false
+    "Signed 15 Oct approval with operative conditions and reasons; statutory filing/standing/restraint counsel immediately."
+    true refl ∷
+  incidence-cut exactCouncilVillage2And3ChargeNotices "P1 AMOUNT" true false
+    "Original 2024 Village 2 and 2025 Village 3 ICN PDF faces, payment/offset record and distinct Urban Utilities ICNs. Indexed files exist but direct download failed."
+    true refl ∷
+  incidence-cut signedCherishStocklandTitleDeed "P1 RIGHTS" false false
+    "Current title, June 2023 indexed owner/developer consent faces, developer option/finance agreements and who has actual sale proceeds."
+    true refl ∷
+  incidence-cut current1994LoanAccountAndTenKTrigger "P2 HISTORY" false false
+    "Actual historic 1994 loan deed, later repayment balances and status of 10000 cumulative Greater Springfield allotment trigger; no ratio from proposed 1838 Springview lots."
+    true refl ∷
+  incidence-cut sameAsset2026GasMeterAndDistributor "P2 PHYSICAL" false false
+    "2026 site-specific gas asset and network provider, installation and tariff contract, plus all-electric comparison."
+    true refl ∷
+  incidence-cut orionCounterfactualAndFundExposure "P3 FINANCE" false false
+    "Causally attributable incremental Orion rent/land uplift with date-control group, actual BlackRock fund and cash-flow allocation; no percent-of-gross-value shortcut."
+    true refl ∷
+  incidence-cut sameParcelEcologicalOffsetAndPublicSpend "P1 BURDEN" true false
+    "Actual clearing envelope/sequence, conservation conditions, paid offsets, council and Urban Utilities infrastructure delivery, public burden and counterfactual."
+    true refl ∷ []
 
 data HistoricQCAWindowEqualsPostApprovalSubsidy : Set where
 data Citywide10000AllotmentsEqualsTwoADPs1838Lots : Set where
