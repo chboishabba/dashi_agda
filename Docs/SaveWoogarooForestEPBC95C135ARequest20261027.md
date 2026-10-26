@@ -41,7 +41,9 @@
 
 ## C0. Urgent counsel-only ADJR section 11 / 13 split
 
-The [ADJR Act original 27 August 2026 compilation](https://www.legislation.gov.au/C2004A01697/2026-08-27/2026-08-27/text/original/epub/OEBPS/document_1/document_1.html) distinguishes:
+**Source version check 27 October:** the Federal Register's operative Act is C134 **29 September 2026**. Earlier C133 27 August citations were historical and have been superseded for this decision.
+
+The [ADJR Act original 29 September 2026 Compilation 134 (supersedes the 27 August text)](https://www.legislation.gov.au/C2004A01697/latest) distinguishes:
 
 - **Section 11(1)(c), (3)**: the court review application-period rules depend on when the written decision and, in some cases, a reasons statement were **furnished to the particular applicant**. The Act refers to a **28-day prescribed period** with multiple conditional starting events, applications for more time and other statutory alternatives. **15 October online publication is not universally the start date**. Counsel must also assess whether this particular EPBC decision is reviewable under ADJR, standing, any exclusions, court rules and alternative Federal Court original-jurisdiction routes.
 - **Section 13(1), (5), (11)**: a reasons request is for a person entitled to a section 5 review, subject to document/reasons availability and timing/refusal restrictions. Not identical to section 135A(2), under which **a person** can request the Secretary's s95C recommendation report post-decision.
