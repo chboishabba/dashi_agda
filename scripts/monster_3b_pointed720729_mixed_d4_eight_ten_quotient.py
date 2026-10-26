@@ -116,7 +116,7 @@ def build():
         ob={transported(g,a) for g in G}
         visited|=ob
         outer_orbits[len(ob)]+=1
-    assert outer_orbits[8]>0
+    assert outer_orbits==Counter({8:78,4:24})
     assert sum(k*v for k,v in outer_orbits.items())==720
     fixchar={}
     for name,g in (("identity",(0,0)),("half_turn",(0,2)),
@@ -129,6 +129,28 @@ def build():
     assert [fixchar[k]["all729"] for k in fixchar]==[729,1,1,27,27]
     assert [fixchar[k]["outer720"] for k in fixchar]==[720,0,0,24,24]
     assert [fixchar[k]["centre9"] for k in fixchar]==[9,1,1,3,3]
+    # Integer D4 representation ring certificate, class sizes 1,1,2,2,2.
+    # This is the representation of the CHOSEN D4 geometric G-set,
+    # not a claim about the actual 6.Suz/Monster 90 multiplicity factor.
+    irr={"A1":(1,1,1,1,1),"A2":(1,1,1,-1,-1),
+         "B1":(1,1,-1,1,-1),"B2":(1,1,-1,-1,1),
+         "E":(2,-2,0,0,0)}
+    def decompose(key):
+        char=[fixchar[z][key] for z in fixchar]
+        terms={}
+        for name,values in irr.items():
+            dividend=sum(w*x*y for w,x,y in
+                         zip((1,1,2,2,2),char,values))
+            assert dividend%8==0
+            terms[name]=dividend//8
+            assert terms[name]>=0
+        return terms
+    irrep_720=decompose("outer720")
+    irrep_9=decompose("centre9")
+    irrep_729=decompose("all729")
+    assert irrep_720==dict(A1=102,A2=78,B1=90,B2=90,E=180)
+    assert irrep_9==dict(A1=3,A2=0,B1=1,B2=1,E=2)
+    assert irrep_729==dict(A1=105,A2=78,B1=91,B2=91,E=182)
     assert sum(act((1,0),site[1])==site[1] for site in all_targets)==2
     assert sum(act((1,1),site[1])==site[1] for site in all_targets)==2
     # Existing natural cube-corner8 axis reflection has ZERO fixed points.
@@ -142,6 +164,7 @@ def build():
         natural_cube_corners_axis_reflection_fixed8=0,
         classwise_characters=fixchar,
         outer_orbit_sizes=dict(outer_orbits),
+        irrep_720=irrep_720,irrep_9=irrep_9,irrep_729=irrep_729,
         nontrivial_ten_sheet_D4_twisting_required=True,
         old_natural_cube_corner_quotient_resurrected=False,
         full_Heisenberg_equivariance_proved=False,
