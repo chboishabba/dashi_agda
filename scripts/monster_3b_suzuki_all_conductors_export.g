@@ -78,6 +78,8 @@ out := OutputTextFile(
 SetPrintFormattingStatus(out,false);
 AppendTo(out,"{\n");
 AppendTo(out,"  \"table_id\":\"6.Suz\",\n");
+AppendTo(out,"  \"gap_runtime_version\":\"",GAPInfo.Version,"\",\n");
+AppendTo(out,"  \"ctbllib_runtime_version\":\"",GAPInfo.PackagesLoaded.ctbllib[2],"\",\n");
 AppendTo(out,"  \"group_order\":",String(groupOrder),",\n");
 AppendTo(out,"  \"class_sizes\":[");
 for k in [1..Length(classSizes)] do
