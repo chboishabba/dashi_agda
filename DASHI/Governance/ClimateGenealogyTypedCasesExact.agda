@@ -213,7 +213,7 @@ apiNamedContributorCandaceCrandall = Typed.typedGenealogyEdge
   "E8-02" "Candace Crandall (Science and Environmental Policy Project)" "1998 API communications team"
   Typed.personnelContinuity Typed.primary
   (apiCongressional1998 ∷ [])
-  "Named contributor to a shared draft plan according to API's original team list; not a personally authored claim, approved funding payment, executed grant, or later coordination proof."
+  "Named by API's original draft as contributor; not personally attributed any sentence, payment or later order. Crandall's claimed involvement is reported as subsequently disputed in SourceWatch; no first-person rebuttal acquired here."
 
 apiNamedContributorDavidRothbard : Typed.TypedGenealogyEdge
 apiNamedContributorDavidRothbard = Typed.typedGenealogyEdge
@@ -593,7 +593,7 @@ singer1994ToSEPP1998 = Typed.typedGenealogyEdge
 singerGCCSolicitationNotMoneyPaid : Typed.TypedGenealogyEdge
 singerGCCSolicitationNotMoneyPaid = Typed.typedGenealogyEdge
   "E9-15" "S. Fred Singer/SEPP 1994 proposal" "Requested GCC USD73000 education-programme funding"
-  Typed.fundingProposal Typed.primary
+  Typed.fundingProposal Typed.corroborated
   (singerGCC1994Proposal ∷ [])
   "Proposal for funding has direct source existence. Solicitation/expected allocation is not a financial disbursement, and does not resolve the independent E7 tobacco finance hypothesis."
 
