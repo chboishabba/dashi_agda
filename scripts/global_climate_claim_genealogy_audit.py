@@ -110,7 +110,7 @@ def audit(rows: list[dict[str, str]]) -> dict:
         raise ValueError("Advocacy fact sheet promoted to independent plant experiment")
     if byid["GC01"]["independent_empirical_origin"].startswith("yes"):
         raise ValueError("Magazine article promoted to global scientific consensus")
-    if "not a global net-welfare" not in byid["GP09"]["attribution_and_nonpromotion_boundary"]:
+    if "not a figure for global net welfare" not in byid["GP09"]["attribution_and_nonpromotion_boundary"]:
         raise ValueError("CO2 greening mistaken for total Earth-system benefit")
     root_groups: dict[str, list[str]] = defaultdict(list)
     for r in rows:
