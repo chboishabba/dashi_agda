@@ -11,7 +11,11 @@ module DASHI.Mathematics.Symmetry.TetragonalPrimitiveSeitzExact where
 -- This does not model diamond Fd-3m fractional translations.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer using (ℤ)
+open import Data.Integer using (ℤ; _+_; -_; +_)
+import Data.Integer.Tactic.RingSolver as IntRS
+import Tactic.RingSolver.NonReflective as NR
+module RingZ = NR IntRS.ring
+open RingZ using (Κ; _⊕_; ⊝_; solve)
 import Data.Integer.Properties as IntP
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Mathematics.Symmetry.TetragonalSignedCoordinateGroupActionExact as CoordGroup
@@ -157,3 +161,117 @@ seitzAssociative (seitz g a) (seitz h b) (seitz k c) =
 -- Group inverse / two-sided identity as elements and nonlinear
 -- Bloch translation phases are separate receipts. Action identity
 -- and multiplication, and operation associativity, are above.
+
+-- Group identity and inverse laws (not merely an affine action).
+zeroRight :
+  (p : NS.FourierMode) → NS.addMode p NS.zeroMode ≡ p
+zeroRight (NS.mode x y z) =
+  modeExt (IntP.+-identityʳ x)
+          (IntP.+-identityʳ y)
+          (IntP.+-identityʳ z)
+
+actModeZero :
+  (g : D.D4h) → F.actMode g NS.zeroMode ≡ NS.zeroMode
+actModeZero (D.element D.q0 false false) = refl
+actModeZero (D.element D.q0 false true) = refl
+actModeZero (D.element D.q0 true false) = refl
+actModeZero (D.element D.q0 true true) = refl
+actModeZero (D.element D.q1 false false) = refl
+actModeZero (D.element D.q1 false true) = refl
+actModeZero (D.element D.q1 true false) = refl
+actModeZero (D.element D.q1 true true) = refl
+actModeZero (D.element D.q2 false false) = refl
+actModeZero (D.element D.q2 false true) = refl
+actModeZero (D.element D.q2 true false) = refl
+actModeZero (D.element D.q2 true true) = refl
+actModeZero (D.element D.q3 false false) = refl
+actModeZero (D.element D.q3 false true) = refl
+actModeZero (D.element D.q3 true false) = refl
+actModeZero (D.element D.q3 true true) = refl
+
+leftSeitzIdentity :
+  (s : PrimitiveSeitz) → seitzMultiply seitzIdentity s ≡ s
+leftSeitzIdentity (seitz g t) =
+  seitzCong
+    (D.identityLeft g)
+    (trans
+      (cong (NS.addMode NS.zeroMode) (actModeIdentity t))
+      (zeroLeft t))
+
+rightSeitzIdentity :
+  (s : PrimitiveSeitz) → seitzMultiply s seitzIdentity ≡ s
+rightSeitzIdentity (seitz g t) =
+  seitzCong
+    (D.identityRight g)
+    (trans
+      (cong (NS.addMode t) (actModeZero g))
+      (zeroRight t))
+
+scalarNegativeCancellationLeft :
+  (x : ℤ) → (- x) + x ≡ + 0
+scalarNegativeCancellationLeft x =
+  RingZ.solve 1
+    (λ x → (⊝ x ⊕ x , Κ (+ 0)))
+    refl x
+
+scalarNegativeCancellationRight :
+  (x : ℤ) → x + (- x) ≡ + 0
+scalarNegativeCancellationRight x =
+  RingZ.solve 1
+    (λ x → (x ⊕ ⊝ x , Κ (+ 0)))
+    refl x
+
+negativeModeCancelsLeft :
+  (p : NS.FourierMode) →
+  NS.addMode (NS.negateMode p) p ≡ NS.zeroMode
+negativeModeCancelsLeft (NS.mode x y z) =
+  modeExt
+    (scalarNegativeCancellationLeft x)
+    (scalarNegativeCancellationLeft y)
+    (scalarNegativeCancellationLeft z)
+
+negativeModeCancelsRight :
+  (p : NS.FourierMode) →
+  NS.addMode p (NS.negateMode p) ≡ NS.zeroMode
+negativeModeCancelsRight (NS.mode x y z) =
+  modeExt
+    (scalarNegativeCancellationRight x)
+    (scalarNegativeCancellationRight y)
+    (scalarNegativeCancellationRight z)
+
+seitzInverse : PrimitiveSeitz → PrimitiveSeitz
+seitzInverse (seitz g t) =
+  seitz (D.inverse g)
+        (F.actMode (D.inverse g) (NS.negateMode t))
+
+leftSeitzInverse :
+  (s : PrimitiveSeitz) →
+  seitzMultiply (seitzInverse s) s ≡ seitzIdentity
+leftSeitzInverse (seitz g t) =
+  seitzCong
+    (D.inverseLeft g)
+    (trans
+      (sym (F.actModeAdd (D.inverse g) (NS.negateMode t) t))
+      (trans
+        (cong (F.actMode (D.inverse g)) (negativeModeCancelsLeft t))
+        (actModeZero (D.inverse g))))
+
+rightSeitzInverse :
+  (s : PrimitiveSeitz) →
+  seitzMultiply s (seitzInverse s) ≡ seitzIdentity
+rightSeitzInverse (seitz g t) =
+  seitzCong
+    (D.inverseRight g)
+    (trans
+      (cong (NS.addMode t)
+        (sym (actModeCompose g (D.inverse g) (NS.negateMode t))))
+      (trans
+        (cong (λ h → NS.addMode t
+          (F.actMode h (NS.negateMode t))) (D.inverseRight g))
+        (trans
+          (cong (NS.addMode t) (actModeIdentity (NS.negateMode t)))
+          (negativeModeCancelsRight t))))
+
+-- P4/mmm-type affine group closure is now expressed by proof terms:
+-- semidirect associativity, identity and inverse, plus the left
+-- affine action laws. Kernel typechecking remains a separate receipt.
