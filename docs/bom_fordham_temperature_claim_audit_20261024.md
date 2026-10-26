@@ -820,3 +820,36 @@ The AEP combined **oil+gas** company tax, PRRT, royalties, excise, fees and othe
 Our presently paid paths are: identifiable **one 1998 API original plan despite 13 listed contributors**; same original **Wood Mackenzie** model promoted via AEP release and submission; separate **Australia Institute** and **Arthur D. Little/Future Group** named modelling suppliers behind a similar rounded revenue estimate; a **2023–24 ACTU retrospective** that must not be relabelled a 2026 forecast; direct **Hancock's credited The Nightly repost**; and the newly confirmed **AEP forecast→paid wording change**. The 29 earlier rows and 11 families were an intermediate dated cut, superseded by 31/12.
 
 The **remaining high-alpha objects** are the actual full Wood Mackenzie model assumptions and comparable ACTU PRRT-replacement case, an independently audited AEP 2024–25 final taxes/royalties reconciliation, the original Charlton questionnaire and ICE/API historical document-transfer bridge, ACSH GCC draft/final revision history, and any direct gas lobby consultation notes to specific party policies. A similarity of argument or beneficiary is not a payment or command. The 31 source appearances **do not** establish how many independent climate-denialist scientists exist nationally, because the sample includes tax-policy positions, critiques and meteorological rebuttals as well as original delay campaigns.
+
+
+## 27 October 2026 — original Arthur D. Little report acquired (RC-10–RC-12)
+
+**New original object rather than further personality search.** Arthur D. Little Australia's 11-page original report, *Australian Domestic Gas Export Reform: Scenario Analysis, and Policy Options Assessment* (April 2026), is linked by commissioner Future Group's 23 April story. The original PDF was read, including **visual inspection of PDF page indices 3, 4, 6, 7 and 8** (printed pp. 4, 5, 7, 8 and 9). Author is **Arthur D. Little**; Future Group commissioned and publicly distributed the model. It is explicitly forward-looking, illustrative and supplied on a non-reliance basis. The report's claim of methodology review by more than twenty unnamed industry experts is an **author claim**, not independently verified identified reviews.
+
+- [Original ADL report (PDF)](https://www.datocms-assets.com/115668/1777429022-final-ad-little-modelling-gas-exports-15.pdf)
+- [Original Future Group release, 21 April 2026 (PDF)](https://www.datocms-assets.com/115668/1777429032-260421-export-levy-modelling.pdf)
+- [Future Group commissioner summary, 23 April 2026](https://www.futuregroup.com.au/stories/why-australia-should-act-now-on-a-gas-export-levy)
+
+### Page-5 direct scenario transcription: A$bn over 10 years
+
+| Levy base | 15% | 25% | 35% |
+| --- | ---: | ---: | ---: |
+| Broad-based, all LNG export revenue | 55–60 | **95–100** | 135–140 |
+| Prospective, spot or newly exposed exports | 17–19 | **28–32** | 40–45 |
+| Windfall, netback above assumed A$8.5/GJ | 5–7 | **9–11** | 13–15 |
+
+ADL's note describes the frequently recycled **up to A$17bn** as based on current export volumes, **not** a guaranteed annual receipt over ten years. Future Group explicitly describes it as a first-year upper bound. The simple multiplication 10 × 17 = 170 **is outside ADL's own A$95–100bn ten-year broad-based range**; that verifies a reading of the published scenario, not the empirical forecasting model. The three 25% outcomes arise from **one original ADL document**, not three independent reports.
+
+### Three further same-object discriminators
+
+1. **Return units:** ADL p. 7 reports an estimated *1–2 percentage-point reduction in legacy-project IRR*. Future Group's 23 April summary instead says approximately *2% lower returns on average*. A relative percent return change cannot be equated with IRR percentage points without knowing baseline, project cohort and metric. This is less precise client wording, not proof of bad faith or that the figures are truly inconsistent.
+2. **Marginal supply vs total extraction:** ADL p. 8 explicitly notes that the levy is *assumed not to increase domestic supply overall* and that marginal export diversion could change incentives and domestic prices. The claimed up-to-15% **wholesale electricity price** reduction on p. 9 is conditional, not 15% lower retail bills or an observed market intervention.
+3. **Different tax numerators:** ADL p. 4 displays **6.9% resource-rent-only capture** for Australia versus **25.8% estimated total taxation** (including 19% effective company tax) on a separate chart. Treating 6.9% as all corporate tax is a denominator error. Cross-country comparisons also require the included taxes, profits, production cohorts and equity returns to be aligned.
+
+**Non-independent inputs need a typed gate.** The ADL p. 8 supply figure identifies Australia Institute, IEEFA, AEMO and ACCC sources. This establishes that the newly obtained commissioned report uses at least some shared public input context; it **does not establish** that the ADL A$17bn revenue estimate copies the Australia Institute's 2025 revenue calculation. Shared public background and exact source-model derivation are different claims.
+
+### Integration, verification and remaining Pareto frontier
+
+The existing claim ledger now has **39 selected appearance rows** from **16 proposition families** (eight added in this cut). The original PDF has a single new authored source identity. Existing Agda typed owners contain RC-10 (commission), RC-11 (first-year claim relation) and RC-12 (IRR-unit ambiguity). The existing nonfactorability owner supplies finite two-world collisions for the common 25% rate versus levy base/decade band and for the bare 2% return headline versus its units. The existing round-three regression consumes these proofs. The historical 41-edge and contemporary 54-edge genealogy ledgers remain distinct; none of these purposive counts are national source-concentration estimates.
+
+The remaining blockers are the ADL model spreadsheets/price assumptions, same-object Wood Mackenzie runs on both additive and **PRRT-replacement** proposals, provenance of the Australia Institute's underlying revenue inputs, ADL project baseline IRRs, reconciled gas-industry tax cash receipts, and dated lobbying-to-particular-policy/media text correspondence. Retain original authors and archival dates, and link to the report rather than vendor its PDF. Kernel checking and full branch pytest are still separate validation obligations; formal toy models prove only the stated logical distinctions, not real-world tax or price outcomes.
