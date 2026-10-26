@@ -140,7 +140,7 @@
       "id": "bannon_ftc_final_judgment",
       "root": "future_undetermined_source",
       "status": "notLocated",
-      "scope": "No original post-Dec2020 court disposition or FTC personal-liability conclusion inspected; not knownAbsent"
+      "scope": "Final DDC civil-demand enforcement procedural disposition, not equivalent to an FTC finding of Bannon personal deceptive-data wrongdoing"
     },
     {
       "id": "ocdetf_final_disposition",
@@ -236,8 +236,8 @@
     },
     {
       "id": "C_FTC_BANNON_FINAL",
-      "statement": "Final Bannon FTC/CID disposition and personal liability classification",
-      "scope": "only original court or FTC final object",
+      "statement": "Final procedural disposition of the FTC civil investigative demand enforcement petition against Bannon",
+      "scope": "Original final court order or FTC withdrawal, not a merits adjudication of Bannon personal CA-data liability",
       "level": "unresolved",
       "supports": [
         "ftc_bannon_petition_2020",
@@ -342,7 +342,7 @@
         2,
         1
       ],
-      "description": "Locate original post-2020 judicial/FTC disposition, public-redacted only"
+      "description": "Locate original post-2020 procedural enforcement disposition or withdrawal; do not infer personal liability"
     },
     {
       "id": "B_DEA_OUTCOME",
