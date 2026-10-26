@@ -30,3 +30,16 @@ This says nothing about Hamiltonians other than the stated symbolic profile, or 
 6. Cross-prover correspondence with Lean #76 only after same-object carrier, basis convention and parameter match.
 
 No hardware performance or quantum advantage is established by these symbolic finite results.
+
+## SUSY max-cut addendum (2026-10-26)
+
+Existing canonical owner `DASHI/Physics/QFT/WittenIndexSUSYBoundarySurface.agda` explicitly treats spacetime/QFT SUSY, fermion parity, supercharge algebra, observed superpartners and the cosmological constant as **targets only**. It contains postulated boundary objects, not a constructed QFT representation. Related TOE PR #1217 / Lean #80 are conditional candidate realisation programmes and cannot be read as experimental supersymmetry.
+
+New finite quantum-mechanical result in `NVSpinOneFiniteSUSYFactorisationExact.agda`:
+- Use the existing (C_3) basis labels `c0 = +1`, `c1 = 0`, `c2 = -1`.
+- Define finite matrix units `Q = |c2><c0|`, `Qdag = |c0><c2|`.
+- By exact finite enumeration, `Q² = (Qdag)² = 0` and `QQdag + QdagQ = diag(1,0,1) = Sz²`.
+- Choose `c0,c1` even and `c2` odd. The two positive levels pair and the remaining even zero mode yields a **finite-model Witten index +1**.
+- This is an algebraic SUSY-QM factorisation of a deliberately simplified ideal (D Sz²) system. A measured NV defect does not thereby become a supersymmetric particle, spacetime theory or QFT. Transverse fields, strain, off-axis couplings, and perturbations can spoil these particular supercharge relations. The zero-field splitting sign/scale and physical supercharge availability are independent evidence gates.
+
+No change to the standing QFT SUSY promoter is warranted. A future bridge needs a typed finite-SUSY-vs-QFT distinction, a physical optical/strain/hyperfine Hamiltonian with justified coefficients, a parity-preserving implementation, and a derived measurable discriminator. The finite supercharge here is not asserted to be a realizable control pulse.
