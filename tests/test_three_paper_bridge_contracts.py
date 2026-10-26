@@ -46,6 +46,9 @@ def test_finite_order_proof_reuses_original_generic_owner():
         "prefixIgnoresFutureSuffix",
         "equalReceivedPrefixesGiveEqualOnlineStates",
         "equalReceivedPrefixesGiveEqualObservedOutputs",
+        "arrivalCollisionWitness",
+        "labelledArrivalCannotRecoverSourceOrder",
+        "exactCalibrationRecoversOrderForTheseWorlds",
         "calibratedReadoutIfEstimatesCorrect",
         "laterRetrievalDoesNotChangeAdmission",
         "absentUptakeFailsStipulatedAdmission",
@@ -114,3 +117,42 @@ def test_domain_rollups_are_linked_without_new_round_owners():
     assert "ThreePaperSourceAtlas20261025Exact" in (
         ROOT / "DASHI/Papers/Everything.agda"
     ).read_text()
+
+
+def test_labelled_arrival_collision_requires_independent_delay_calibration():
+    source = {
+        "A": {"C_time": 0, "E_time": 50, "C_delay": 80, "E_delay": 10},
+        "B": {"C_time": 50, "E_time": 0, "C_delay": 30, "E_delay": 60},
+    }
+    arrivals = {
+        key: (
+            data["C_time"] + data["C_delay"],
+            data["E_time"] + data["E_delay"],
+        )
+        for key, data in source.items()
+    }
+    assert arrivals["A"] == arrivals["B"] == (80, 60)
+    actual_source_order = {
+        key: "C-before-E" if data["C_time"] < data["E_time"]
+        else "E-before-C" for key, data in source.items()
+    }
+    assert actual_source_order["A"] != actual_source_order["B"]
+    assert source["A"]["C_delay"] != source["B"]["C_delay"]
+    assert source["A"]["E_delay"] != source["B"]["E_delay"]
+    for key, data in source.items():
+        recovered_c = arrivals[key][0] - data["C_delay"]
+        recovered_e = arrivals[key][1] - data["E_delay"]
+        assert (recovered_c, recovered_e) == (
+            data["C_time"], data["E_time"]
+        )
+        assert (
+            "C-before-E" if recovered_c < recovered_e else "E-before-C"
+        ) == actual_source_order[key]
+    text = (ROOT / FILES["temporal"]).read_text()
+    assert "not an oracle revealing source event order" in text
+    assert "labelledArrivalCannotRecoverSourceOrder" in text
+    regression = (
+        ROOT / "DASHI/Cognition/PNF/EnactedTemporalOrderRegression.agda"
+    ).read_text()
+    assert "sourceOrderWithFirstCalibration" in regression
+    assert "sourceOrderWithSecondCalibration" in regression
