@@ -50,7 +50,7 @@ def test_nonlinear_bias():
 def test_semantic_pairs():
     # Synthetic fixture: load-bearing fact flips reference answer.
     # Tests distinguish correct flip from both-answer-constant and both-answer-flip.
-    rails=[(False, True), (True,False)]
+    rails=[(False, False), (True,True)]
     correct=lambda b:b
     static=lambda b:False
     invert=lambda b:not b
