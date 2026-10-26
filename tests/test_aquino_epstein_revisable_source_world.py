@@ -337,3 +337,22 @@ def test_auspol_rinehart_2021_source_and_labour_2022_act_differ_in_policy_scope(
         "oneNation2025PolicyScope = unlimitedPensionWorkWithoutPaymentReduction",
     ):
         assert marker in b
+
+
+def test_auspol_recent_climate_claim_family_is_cross_referenced_not_new_independent_root():
+    w = world()
+    a = w["australian_crosspollination"]
+    family = a["sibling_climate_claim_family_crosswalk"]
+    assert family["owner_pr"] == 1251
+    assert family["owner_head_reviewed"] == "68415b469b4cff67f452fb8c8c1d69476cc5a2ce"
+    assert family["sibling_code_imported"] is False
+    rows = {r["receipt"]: r for r in family["sibling_related_claims"]}
+    assert set(rows) == {"G15", "G16"}
+    assert rows["G15"]["originality"] == "explicit credited republication"
+    assert "not an independently" in rows["G15"]["not_pays"]
+    assert "Hansard transcript mirror" in rows["G16"]["hosted_by"]
+    assert "copied script" in rows["G16"]["not_pays"]
+    assert "ONE first-party document" in family["shared_rinehart2021_original"]
+    assert "same-object transfer" in family["stopping_rule"]
+    assert w["original_root_count"] == 9
+    assert w["claims"][0]["level"] == "sourceReported"
