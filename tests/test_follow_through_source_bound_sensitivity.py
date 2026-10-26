@@ -59,5 +59,9 @@ class SensitivityTests(unittest.TestCase):
         self.assertEqual(out["status"],"incomplete-coverage")
         self.assertEqual(out["omitted_sites"],[["s2","c1"]])
 
+    def test_model_cell_counts_explicit(self):
+        data=HEADER+row("DI","s1","uncorrected",4)+row("DI","s2","uncorrected",1)+row("B","s1","uncorrected",2)
+        self.assertEqual(self.check(data)[0]["cell_counts"],{"DI":2,"B":1})
+
 if __name__ == "__main__":
     unittest.main()
