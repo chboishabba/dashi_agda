@@ -420,3 +420,101 @@ februaryBillIsNotAugustSubmission ()
 enactedLimitedActIsNotUnlimitedPartyPledge :
   nov2022Act55 ≡ jan2025OneNationPledge → DistinctObject
 enactedLimitedActIsNotUnlimitedPartyPledge ()
+
+
+------------------------------------------------------------------------
+-- 27 OCT 2026: THREE PARLIAMENTARY INQUIRIES; DEDUPE BY DOCUMENT + DOCKET.
+-- This resolves a previously conflated provenance edge: the Senate examined
+-- THREE bills in Feb/Mar, Aug/Sep and Sep/Nov 2022. Each inquiry has a
+-- DIFFERENT published submission register; repeat submitters are not
+-- independently corroborating the causal effects of their own policy.
+------------------------------------------------------------------------
+
+februaryCoalitionSenateRegisterOriginal : AustraliaSourceRoleReceipt
+februaryCoalitionSenateRegisterOriginal = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Senate Community Affairs inquiry into Morrison-government Workforce Incentive Bill, referred 10 Feb 2022; submissions due 4 Mar 2022"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentiveBill/Submissions"
+  "Official six-entry original committee REGISTER: National Seniors Australia #3, document df5522d8-50d8-4ebb-ad5d-6d7cfd367158. NO HPPL or IPA among SIX listed submissions; this is only bounded absence in this particular public list, not proof neither advised the government. Original PDF face not inspected."
+
+augustDeanSmithBillOriginal : AustraliaSourceRoleReceipt
+augustDeanSmithBillOriginal = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Australian Parliament, Senator Dean Smith, Social Services Legislation Amendment (Enhancing Pensioner and Veteran Workforce Participation) Bill 2022, introduced 3 Aug 2022"
+  "https://www.aph.gov.au/Parliamentary_Business/Bills_Legislation/Bills_Search_Results/Result?bId=s1347"
+  "Original parliamentary bill status: PRIVATE Senator's bill, NOT PROCEEDING; different from February Coalition government bill, September Albanese government bill, and enacted November Act 55. Dean Smith's bill proposed a $600 fortnightly Work Bonus threshold, not the unlimited model."
+
+septemberAlbaneseBillOriginal : AustraliaSourceRoleReceipt
+septemberAlbaneseBillOriginal = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Australian Parliament, Social Services and Other Legislation Amendment (Workforce Incentive) Bill 2022, government bill introduced 28 Sep 2022"
+  "https://www.aph.gov.au/Parliamentary_Business/Bills_Legislation/Bills_Lists/Details_page?blsId=legislation%2Fbillslst%2Fbillslst_4f8efdae-7e88-4301-a746-1bc52f0debb8"
+  "Official original legislative index: government Bill 28 Sep, House passage 8 Nov, Senate passage 22 Nov, assent 23 Nov as Act No 55. Its temporary $4000 Work Bonus and other schedules were NOT an unlimited pension work-exemption."
+
+octoberGovernmentSenateRegisterOriginal : AustraliaSourceRoleReceipt
+octoberGovernmentSenateRegisterOriginal = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Senate Community Affairs inquiry into 28 Sep 2022 Albanese-government Workforce Incentive Bill 2022, submissions due 13 Oct"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentive2022/Submissions"
+  "Official 11-entry original REGISTER names DIFFERENT numbered source objects: National Seniors #3 id 146b77ac-abc8-42c9-a937-8f5a45b40c3f, HPPL #9 id 7596775e-a631-40bd-be57-abe6b5efd5a1, IPA #10 id 85a023f4-e99a-45b0-8cf7-785af6302d45. The same organisations had Aug register entries under other IDs, but neither their texts nor independence of their claims is implied. Original PDF faces not inspected."
+
+hancockOct2022OwnSubmissionIndexReceipt : AustraliaSourceRoleReceipt
+hancockOct2022OwnSubmissionIndexReceipt = australia-source-role-receipt
+  governmentIndexedAdvocacySubmission
+  "Hancock Prospecting Pty Ltd, original letter signed/dated 13 Oct 2022, Senate submission 9 to government Workforce Incentive Bill inquiry"
+  "https://www.aph.gov.au/DocumentStore.ashx?id=7596775e-a631-40bd-be57-abe6b5efd5a1&subId=722612"
+  "Official search index exposes source-original text: HPPL supported an UNLIMITED permanent Work Bonus, opposed 30 Jun 2023 deadline and Centrelink paperwork; original native PDF page face NOT visually authenticated (HTTP 403). A 13 October response cannot have caused the government's 28 September introduction; it may have aimed at later amendment/debate. Repeats the producer's Nov 2021 advocacy, not a new independent witness."
+
+data Pension2022Committee : Set where
+  febMorrisonCommittee : Pension2022Committee
+  augSmithCommittee : Pension2022Committee
+  octAlbaneseCommittee : Pension2022Committee
+
+data Pension2022Producer : Set where
+  pensionNationalSeniors : Pension2022Producer
+  pensionHancock : Pension2022Producer
+  pensionIPA : Pension2022Producer
+
+-- Classification is scoped to the ACTUAL indexed entries, not invented
+-- letters, inferred private communications, or any bill-drafting outcome.
+data Pension2022IndexedSubmission :
+  Pension2022Committee → Pension2022Producer → Set where
+  nsaFeb03 : Pension2022IndexedSubmission febMorrisonCommittee pensionNationalSeniors
+  hancockAug03 : Pension2022IndexedSubmission augSmithCommittee pensionHancock
+  ipaAug06 : Pension2022IndexedSubmission augSmithCommittee pensionIPA
+  nsaAug07 : Pension2022IndexedSubmission augSmithCommittee pensionNationalSeniors
+  nsaOct03 : Pension2022IndexedSubmission octAlbaneseCommittee pensionNationalSeniors
+  hancockOct09 : Pension2022IndexedSubmission octAlbaneseCommittee pensionHancock
+  ipaOct10 : Pension2022IndexedSubmission octAlbaneseCommittee pensionIPA
+
+febAndAugCommitteesAreDifferent :
+  febMorrisonCommittee ≡ augSmithCommittee → DistinctObject
+febAndAugCommitteesAreDifferent ()
+
+augAndOctCommitteesAreDifferent :
+  augSmithCommittee ≡ octAlbaneseCommittee → DistinctObject
+augAndOctCommitteesAreDifferent ()
+
+-- Same named producer cannot functionally identify a UNIQUE committee:
+-- NSA appears on all three published registers. This is a finite
+-- no-factorisation statement about docket identity, not source honesty.
+pensionSym : {A : Set} {a b : A} → a ≡ b → b ≡ a
+pensionSym refl = refl
+
+pensionTrans : {A : Set} {a b c : A} → a ≡ b → b ≡ c → a ≡ c
+pensionTrans refl refl = refl
+
+sameNsaCannotYieldUniqueCommittee :
+  (choose : Pension2022Producer → Pension2022Committee) →
+  choose pensionNationalSeniors ≡ febMorrisonCommittee →
+  choose pensionNationalSeniors ≡ augSmithCommittee →
+  DistinctObject
+sameNsaCannotYieldUniqueCommittee choose feb aug =
+  febAndAugCommitteesAreDifferent (pensionTrans (pensionSym feb) aug)
+
+-- Within the finite *published* register, a presumed HPPL or IPA
+-- February filing has no constructor. Outside-list contact is UNRESOLVED.
+noListedHancockFebSubmission :
+  Pension2022IndexedSubmission febMorrisonCommittee pensionHancock →
+  DistinctObject
+noListedHancockFebSubmission ()
