@@ -8,11 +8,58 @@ The underlying 3D Navier–Stokes energy and enstrophy estimates are **classical
 
 **Most relevant latest PRs inspected**: Agda #1255 and Lean #87 already have a source-attributed Miller (2021, DOI 10.1090/bproc/74) anisotropic projected-vorticity continuation interface and finite algebra. Do not duplicate the workers' conditional criterion or call it an unconditional producer. Agda #1240 has an independent VERID physical B4 rate-shift invariance: changing the reference rate does **not** pay its original failing covariance/ED inequality. An earlier worker's A1 Bishop positive-rate-floor work is also separate; none of these is a W1 estimate. The 2015 Lei–Lin–Zhou preprint and later publication are one source root, not multiple independent validations. The Ibrahim first-link/Pareto framework is a *method*, not evidence for a PDE theorem.
 
+## 26 October: CRITICAL ORIGINAL-OUTPUT-SELECTOR RECONCILIATION
+
+The previous physical numerical test calculated the **full mixed
+convolution output**, which is NOT the exact source-selected R691/R735
+signed consumer when the original Galerkin cutoff retains only
+`|k|_infinity<=N`. The original W1 object must be
+
+  M_N := P_N[(H+u_N)×(H-u_N)],
+  Q_N := P_N[(H+F_N)×(H-u_N)+(H+u_N)×(H-F_N)],
+  C_N := 2 Re <M_N,Q_N>,
+
+where `F_N=-P_N Leray((u_N·grad)u_N)` and both output projections
+use the SAME cutoff and physical trajectory. All previous
+`H+u×H-u` notation must be understood as followed by this literal
+output projection when claiming R691/R735 source identity.
+
+Because P_N is an **orthogonal L² Fourier projection**, the
+analytic W1 estimate in this report survives unchanged:
+  ||P_N M||_2<=||M||_2,
+  ||P_N Q||_2<=||Q||_2,
+  |C_N|<=2||P_N M||_2||P_N Q||_2
+        <=C||u_N||_(H1)^(7/2)||u_N||_(H2)^(3/2).
+This preserves cutoff-independent constants WITHOUT promoting
+a selected-output signed identity into an all-output one.
+
+The physical six-mode regression provides an explicit source
+counterexample to equating the two signed quantities.
+With the SAME real/divergence-free velocity and cutoff N=2,
+  C_N(selected 12 nonzero modes) = -9.849528420767435,
+  C_N(full 18 nonzero generated modes) = +1.200843362231229.
+Their signs are opposite. Central finite-difference differentiation
+of the original **selected** mixed energy agrees with the selected
+C_N but NOT with the full C_N.
+At cutoff N=4, the same field has all 18 generated modes included
+and the two sums agree (2.5523607586812247), after independently
+recomputing Galerkin nonlinear forcing for N=4.
+
+New selected-output additions in
+`tests/test_ns_r735_local_w1_physical_carrier.py` passed
+**3 independent local numerical tests**; they use explicit double
+precision tolerances, not exact symbolic Fourier certificate.
+These are source-sensitive acceptance checks and do not refute
+the valid source-independent Hölder estimate or constitute kernel
+verification. Previous all-output numerical tests remain valid
+Leibniz algebra diagnostics, *not* exact R691 signed-consumer
+validation.
+
 ## Correct physical carrier and quintic estimate
 
 Take smooth real divergence-free mean-zero periodic Galerkin solutions on the **normalised** 3-torus. Let \(P_N\) be the same rectangular input Fourier cutoff as the original owner, \(\mathbb P\) the Leray projector, \(H_\pm\) the **actual norm-one curl/helical spectral projectors**, and \(\nu>0\). Define the physical velocity \(u_N=P_Nu_N\), projected nonlinear forcing \(F_N=-P_N\mathbb P((u_N\cdot\nabla)u_N)\), mixed field \(M_N=(H_+u_N)\times(H_-u_N)\) and its nonlinear derivative \(Q_N=(H_+F_N)\times(H_-u_N)+(H_+u_N)\times(H_-F_N)\).
 
-The original globally signed coherent commutator at physical Fourier outputs is \(C_N=2\operatorname{Re}\langle M_N,Q_N\rangle\), with source normalisation folded into a universal constant \(C_W\). The original R691 endpoint reads \(W_N(T)+E_{M,N}(T)=E_{M,N}(0)+\int_0^T C_N(t)\,dt\).
+The original globally signed coherent commutator at physical Fourier outputs is \(C_N=2\operatorname{Re}\langle M_N,Q_N\rangle\), with source normalisation folded into a universal constant \(C_W\), and with the original output selector applied to both fields. The original R691 endpoint reads \(W_N(T)+E_{M,N}(T)=E_{M,N}(0)+\int_0^T C_N(t)\,dt\).
 
 The cutoff-uniform operator bounds and \(H^{7/4}\hookrightarrow L^\infty\cap W^{1,4}\), with \(\|u\|_{H^{7/4}}\le\|u\|_{H^1}^{1/4}\|u\|_{H^2}^{3/4}\), imply
 
@@ -108,5 +155,4 @@ physical Leray projection and conjugate reality constraints.
 
 This is a NUMERICAL same-object contact regression, not a proof
 of the Sobolev multiplier inequalities or Agda R691 type equality.
-Combined with the ten exact scalar SymPy checks, **12 local tests
-passed**: ten exact algebra, two numerical source contact.
+Combined with the ten exact scalar SymPy checks, **15 local tests passed across the independent local runs**: ten exact scalar algebra, two full-output numerical Leibniz contacts, and three source-selected numerical contacts.
