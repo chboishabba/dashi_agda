@@ -420,3 +420,22 @@ repeatPersonDoesNotProveOriginalAPIPlanStillActive :
   Typed.StrongHistoricalTransfer Climate.milloy1998ToReefMedia → ⊥
 repeatPersonDoesNotProveOriginalAPIPlanStillActive =
   Climate.milloyRepeatNotProofOfTwentyThreeYearPlan
+
+
+singerGCCBudgetIsRequestNotPaidGrant :
+  Typed.relationKind Climate.singerGCCSolicitationNotMoneyPaid ≡ Typed.fundingProposal
+singerGCCBudgetIsRequestNotPaidGrant = refl
+
+southernICEBudgetIsCommitmentNotBankTransfer :
+  Typed.relationKind Climate.southernICEPledgeNotDisbursement ≡ Typed.fundingCommitment
+southernICEBudgetIsCommitmentNotBankTransfer = refl
+
+singer1994ProposalCannotEstablishMethodTransfer :
+  Typed.StrongHistoricalTransfer Climate.singerGCCSolicitationNotMoneyPaid → ⊥
+singer1994ProposalCannotEstablishMethodTransfer =
+  Climate.fundingRequestIsNotTransfer
+
+southern1991PledgeCannotEstablishMethodTransfer :
+  Typed.StrongHistoricalTransfer Climate.southernICEPledgeNotDisbursement → ⊥
+southern1991PledgeCannotEstablishMethodTransfer =
+  Climate.fundingPledgeIsNotTransfer
