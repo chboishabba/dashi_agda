@@ -44,11 +44,22 @@ openaiNaturalProof2026 = Source.mkNoDOISource
   "Distinct NL manuscript object; a proof of a related Lean theorem does not certify every theorem statement or proof route in this PDF."
   Source.publicAttribution
 
+cameronFreerHilbert10 : Source.AttributedSource
+cameronFreerHilbert10 = Source.mkNoDOISource
+  "Cameron Freer"
+  "Hilbert's tenth problem in Lean"
+  "Original Apache-2.0 Lean 4 software, CITATION.cff v2.4.0 (2026); public Hilbert10 DPRM and H10 endpoints"
+  "2026"
+  "https://github.com/cameronfreer/hilbert10"
+  (Source.namedSourceKind "independent open-source Lean formalisation software")
+  "Repository reports proved semantic DPRM dioph_iff_rePred, RE-complete NatSolvable and an existential universal polynomial with unspecified witness count k. This is a DONOR; does not itself claim k<=9, Sigma_l completeness or BCH2026 SCI infinity. Different Lean/mathlib pins mean no direct import was executed."
+  Source.publicAttribution
+
 originalSourceAtlas : Source.AttributedSourceAtlas
 originalSourceAtlas = Source.mkSourceAtlas
   "BCH2026 autoformalisation audit with NL manuscript and fixed Lean history"
   "DASHI.Foundations.AutoformalisationBCH2026Sources"
-  (bchOriginal2026 ∷ openaiHistoricalCode2026 ∷ openaiNaturalProof2026 ∷ [])
+  (bchOriginal2026 ∷ openaiHistoricalCode2026 ∷ openaiNaturalProof2026 ∷ cameronFreerHilbert10 ∷ [])
   "One original BCH2026 paper root (arXiv and mirrors are not independent); separate OpenAI paper/code evidence objects. Author-claimed discrepancies, formalised finite reconstructions, and kernel receipts have distinct provenance."
 
 bchSnowball : Snowball.SourceRoleSnowballReceipt bchOriginal2026
@@ -97,3 +108,8 @@ agdaFiniteOwnersFirstSourceCommit =
     "Australia/Brisbane"
     Chronology.theoremStatementImplemented
     Chronology.sourceCommittedOnly
+
+freerDonorSnowball :
+  Snowball.SourceRoleSnowballReceipt cameronFreerHilbert10
+freerDonorSnowball =
+  Snowball.canonicalSourceRoleSnowballReceipt cameronFreerHilbert10
