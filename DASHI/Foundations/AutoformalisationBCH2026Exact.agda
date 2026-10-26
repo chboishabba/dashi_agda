@@ -2,7 +2,7 @@ module DASHI.Foundations.AutoformalisationBCH2026Exact where
 
 -- Alexander Bastounis, Fabian Circelli, Anders C. Hansen (2026-10-06),
 -- "Navier-Stokes lost in translation", arXiv:2610.08144v1,
--- Examples 2.1, 2.2, 3.1, 3.3 and 4.3.
+-- Examples 2.1, 2.2, 3.1, 3.3 and 4.1.
 -- Original text/evidence are owned by those authors; these finite
 -- information-loss witnesses are DASHI reconstructions.
 -- Existing generic proof owner is IntersectionalNonFactorability.
