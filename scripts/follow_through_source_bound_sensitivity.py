@@ -59,17 +59,16 @@ def analyze(rows):
             output.append(dict(domain=domain,instrument=instrument,
                 specification=spec,status="incomparable",reason="no common sites/cohorts or models"))
             continue
-        means = {}
-        for model, cells in by_model.items():
+        # Enforce one common target weighting; otherwise apparent rank can be\n        # entirely induced by model-specific site weights.\n        for k in common:\n            observed_weights = {by_model[m][k][1] for m in by_model}\n            if len(observed_weights) != 1:\n                raise ValueError(f"unequal model weights at site/cohort {k}; common estimand not identified")\n        means = {}\n        for model, cells in by_model.items():
             # Model-specific weights imply different estimands if not matched.
             denom = sum((cells[k][1] for k in common),Decimal(0))
             means[model] = sum((cells[k][0]*cells[k][1] for k in common),Decimal(0))/denom
-        ordered = sorted(means, key=lambda m:(-means[m],m))
+        ordered = sorted(means, key=lambda m:(-means[m],m))\n        # Equal point estimates are ties, not uniquely ordered winners.\n        leaders = sorted(m for m in means if means[m] == max(means.values()))
         output.append(dict(domain=domain,instrument=instrument,
             specification=spec,status="descriptive-only",
-            matched_sites=len(common),matched_models=len(by_model),
+            matched_sites=len(common),matched_models=len(by_model),\n            tied_leaders=leaders,
             ranking=[dict(model=m,mean=str(means[m])) for m in ordered],
-            warning="Not randomised causal effect; no confidence intervals, covariate adjustment or attrition corrections supplied"))
+            warning="Identical weights and site/cohort labels do not establish exchangeability or randomisation. No confidence intervals, covariate adjustment or attrition corrections supplied"))
     return output
 
 def main():
