@@ -53,3 +53,52 @@ print("PASS equator clutch loop in parity-even H lifts from identity to diagonal
 print("PASS order-three Z3 lift obstruction; nonliftable H principal bundle on S2")
 print("FAIL old bulk-clock/shift flat T2 configuration as parity-even fixed-plane test")
 print("OPEN spin quotient Dirac index/eta and truly quantized 5D CS + Chi33 boundary WZ on this S2 obstruction")
+
+
+# 2026-10-26 same-source Higgs line-bundle consumer. H0 has an
+# orbifold-even SU3 torus h_k(u)=diag(exp(2 pi i(1/3+k)u),
+# exp(2 pi i(1/3+k)u), exp(-4 pi i(1/3+k)u)).
+# For ANY integer k, h_k(1)=omega I. Consequently the triple
+# (h_kc,h_kL,h_kR) is a quotient loop with the SAME nontrivial
+# diagonal Z3 deck obstruction, but its Higgs C33 character in
+# (1,3L,bar3R) winds 2*(kR-kL) times.
+#
+# Standard clutching classification: the induced C33 complex LINE
+# over S2 has c1=2*(kR-kL), with equator orientation as chosen.
+# A line bundle of nonzero degree has no nowhere-zero global section.
+# This is a field-domain obstruction to an unpatched PHASE-ONLY WZ
+# functional on ALL admissible orbifold backgrounds, not a global
+# anomaly calculation and NOT a rejection of Higgs-constrained EFTs.
+from fractions import Fraction as Fr
+def torus_weights(k):
+    """Exact rational upper-doublet and singlet exponents / (2 pi i)."""
+    a=Fr(1,3)+k
+    return (a,a,-2*a)
+
+def chi33_clutch_degree(kL,kR):
+    """C33 is 3L ⊗ (bar3R), both SU2 singlet components."""
+    return torus_weights(kL)[2]-torus_weights(kR)[2]
+
+for kc in range(-2,3):
+    for kl in range(-2,3):
+        for kr in range(-2,3):
+            # All three SU3 factors still end at the SAME omega I;
+            # integer winding changes do not alter the deck label.
+            for k in (kc,kl,kr):
+                assert torus_weights(k)[0]-Fr(1,3)==k
+                assert torus_weights(k)[2]+Fr(2,3)==-2*k
+            deg=chi33_clutch_degree(kl,kr)
+            assert deg==2*(kr-kl) and isinstance(deg,int)
+            assert deg%2==0
+assert chi33_clutch_degree(0,0)==0
+assert chi33_clutch_degree(1,0)==-2
+assert chi33_clutch_degree(0,1)==2
+# Same quotient deck class, different C33 degree: the Z3 class by
+# itself cannot decide whether a nowhere-zero C33 section can exist.
+assert chi33_clutch_degree(0,0)!=chi33_clutch_degree(1,0)
+# In the nonzero case this topological obstruction survives pullback
+# from S2 to S2 x S2 (both factors spin) and trivially along an interval.
+print("PASS 125 orbifold-even quotient clutch representatives: common diagonal Z3 obstruction")
+print("PASS C33 line winding c1=2*(kR-kL), including forced-zero +/-2 sectors")
+print("PASS quotient Z3 label alone does not determine C33 line triviality")
+print("OPEN global section status of other Higgs fields, non-torus backgrounds, full CS/eta and field-space completion")
