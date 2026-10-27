@@ -181,3 +181,34 @@ unifiedFleetGate4CountAgreement :
       BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 unifiedFleetGate4CountAgreement =
   FleetHyperTOE.fleetFormalGapCountEqualsGate4Count
+
+
+------------------------------------------------------------------------
+-- Typed Balaban continuum no-go and live Gate-4 frontier.
+------------------------------------------------------------------------
+
+unifiedBalabanContinuumPromotionImpossible :
+  FleetHyperTOE.BalabanContinuumPromotion → ⊥
+unifiedBalabanContinuumPromotionImpossible =
+  FleetHyperTOE.toeBalabanContinuumPromotionImpossible
+
+unifiedDepthContinuumPromotionImpossible :
+  FleetHyperTOE.DepthContinuumPromotion → ⊥
+unifiedDepthContinuumPromotionImpossible =
+  FleetHyperTOE.toeDepthContinuumPromotionImpossible
+
+unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
+unifiedCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifiedCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+unifiedFleetFormalGapTargetSelected : Bool
+unifiedFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifiedHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
