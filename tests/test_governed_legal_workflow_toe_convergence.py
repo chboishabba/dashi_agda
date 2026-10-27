@@ -315,3 +315,57 @@ def test_legal_source_authority_handoff_is_exact():
         "unifierSemanticAdmissionIsNotLegalAuthority",
     ):
         assert token in regression
+
+
+
+def test_complete_legal_source_authority_invariant_handoff():
+    bridge = read(BRIDGE)
+    regression = read(REGRESSION)
+    toe = read(TOE)
+    unifier = read(UNIFIER)
+    unified = read(UNIFIED_EVERYTHING)
+
+    for token in (
+        "GovernedLegalWorkflowAuthorityInvariantHandoff",
+        "canonicalGovernedLegalWorkflowAuthorityInvariantHandoff",
+        "workflowInvariantHandoffIsCanonical",
+        "legalSourceAuthorityBoundaryIsCanonical",
+        "candidateSourceAuthorityFirewall",
+        "sameSystemAuthorityFirewall",
+        "currentValidityApplicabilityFirewall",
+        "semanticAdmissionAuthorityFirewall",
+        "documentRoleAuthorityFirewall",
+        "SameLegalSystemAutomaticallyMeansAuthority",
+        "DocumentRoleSuppliesLegalSourceAuthority",
+    ):
+        assert token in bridge
+
+    for text, prefix in (
+        (toe, "toe369"),
+        (unifier, "unifier"),
+        (unified, "unified"),
+    ):
+        assert prefix + "GovernedLegalWorkflowAuthorityInvariantHandoff" in text
+        assert prefix + "CanonicalLegalSourceAuthorityBoundary" in text
+        assert prefix + "SameSystemIsNotLegalAuthority" in text
+        assert prefix + "DocumentRoleIsNotLegalAuthority" in text
+
+    for token in (
+        "unifierUsesCanonicalAuthorityInvariantHandoff",
+        "authorityHandoffUsesCanonicalWorkflowHandoff",
+        "authorityHandoffUsesCanonicalLegalSourceBoundary",
+        "authorityHandoffCandidateFirewallIsExact",
+        "authorityHandoffSameSystemFirewallIsExact",
+        "authorityHandoffValidityFirewallIsExact",
+        "authorityHandoffAdmissionFirewallIsExact",
+        "authorityHandoffDocumentRoleFirewallIsExact",
+    ):
+        assert token in regression
+
+
+def test_actionstep_style_workflow_stays_generic():
+    bridge = read(BRIDGE)
+    assert "It does not create an Actionstep-specific ontology." in bridge
+    assert "Actionstep-style task and matter workflow state is represented by the" in bridge
+    assert "A candidate source does not create legal-source authority." in bridge
+    assert "Current source validity does not prove case-specific applicability." in bridge
