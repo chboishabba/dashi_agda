@@ -38,6 +38,24 @@ def test_bridge_reuses_existing_owners():
         assert token in text
 
 
+def test_bridge_exposes_canonical_invariant_handoff():
+    text = read(BRIDGE)
+    for token in (
+        "GovernedLegalWorkflowTOEInvariantHandoff",
+        "canonicalGovernedLegalWorkflowTOEInvariantHandoff",
+        "governanceBoundaryIsCanonical",
+        "promotionBoundaryIsCanonical",
+        "zkpReceiptIsCanonical",
+        "taskCompletionNonPromotion",
+        "runtimeParityTruthFirewall",
+        "parserAdmissionFirewall",
+        "caseySelectionTruthFirewall",
+        "formalProofExternalTruthFirewall",
+        "knowledgeExecutionAuthorityFirewall",
+    ):
+        assert token in text
+
+
 def test_bridge_exposes_normalized_zkp_receipt():
     text = read(BRIDGE)
     for token in (
@@ -104,6 +122,7 @@ def test_bridge_is_attached_to_toe_root_and_unifier():
     toe = read(TOE)
     unifier = read(UNIFIER)
     assert "import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance" in toe
+    assert "toeGovernedLegalWorkflowInvariantHandoff" in toe
     assert "toeGovernedLegalWorkflowZKPReceipt" in toe
     assert "toeCaseySelectionDoesNotCreateWorldTruth" in toe
     assert "toeKnowledgeDoesNotCreateExecutionAuthority" in toe
@@ -128,6 +147,7 @@ def test_bridge_is_attached_to_toe_root_and_unifier():
     assert "toeSoftwareValidationDoesNotAuthorizePublication" in toe
     assert "toeLaterValidationDoesNotRewriteCertifiedBaseline" in toe
     assert "import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE" in unifier
+    assert "toeGovernedLegalWorkflowInvariantHandoff" in unifier
     assert "toeGovernedLegalWorkflowZKPReceipt" in unifier
     assert "toeGovernedLegalWorkflowPromotionBoundary" in unifier
     assert "toeReviewEligibilityDoesNotCreatePromotion" in unifier
@@ -138,6 +158,10 @@ def test_bridge_is_attached_to_toe_root_and_unifier():
 
 def test_regression_binds_unifier_to_canonical_receipt():
     text = read(REGRESSION)
+    assert "unifierUsesCanonicalInvariantHandoff" in text
+    assert "invariantHandoffUsesCanonicalGovernanceBoundary" in text
+    assert "invariantHandoffUsesCanonicalPromotionBoundary" in text
+    assert "invariantHandoffUsesCanonicalZKPReceipt" in text
     assert "unifierUsesCanonicalZKPReceipt" in text
     assert "zkpStandardsRemainDesignLenses" in text
     assert "zkpStandardsDoNotClaimCertification" in text
@@ -167,6 +191,7 @@ def test_focused_workflow_contains_repo_intelligence_and_esd_guard():
     text = read(WORKFLOW)
     for token in (
         "dashi-repo related",
+        "canonicalGovernedLegalWorkflowTOEInvariantHandoff",
         "dashi-repo discover",
         "dashi-repo lineage",
         "dashi-agda-preflight",
