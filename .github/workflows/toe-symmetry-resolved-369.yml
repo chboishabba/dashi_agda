@@ -20,6 +20,9 @@ on:
       - 'DASHI/Unified/**'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
+      - 'DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda'
+      - 'DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda'
+      - 'tests/test_pnf_distilled_nonpromotion_toe.py'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
       - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
       - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
@@ -53,6 +56,9 @@ on:
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
+      - 'DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda'
+      - 'DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda'
+      - 'tests/test_pnf_distilled_nonpromotion_toe.py'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
       - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
       - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
@@ -124,9 +130,17 @@ jobs:
           dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
 
       - name: Reject ESD surface changes
         shell: bash
