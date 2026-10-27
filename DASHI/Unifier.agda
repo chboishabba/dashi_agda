@@ -763,3 +763,45 @@ unifierBalabanScaleTransferNonPromotion :
 unifierBalabanScaleTransferNonPromotion =
   BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Implement-A-to-D reuse-only TOE facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
+
+unifierYMImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+unifierYMImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
+unifierYMImplementAToDZKPFrame =
+  YMAD.canonicalYMImplementAToDZKPFrame
+
+unifierYMImplementAToDPublishedContinuumStillBlocked :
+  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDPublishedContinuumStillBlocked =
+  YMAD.publishedContinuumPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDContinuumMassGapStillBlocked :
+  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDContinuumMassGapStillBlocked =
+  YMAD.continuumMassGapPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDClayStillBlocked :
+  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDClayStillBlocked =
+  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifierYMImplementAToDScaleTransferNonPromotion =
+  YMAD.scaleTransferPromotionEliminator
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
