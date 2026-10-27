@@ -1,7 +1,61 @@
 module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RiemannFrontier
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
+
+
+------------------------------------------------------------------------
+-- Current Lean RH max-cut status mirror.
+-- Keep the analytic theorem owner in dashi_lean4.
+------------------------------------------------------------------------
+
+unifiedRiemannThreeTapCurrentLeanFrontier :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier
+unifiedRiemannThreeTapCurrentLeanFrontier =
+  RiemannFrontier.currentThreeTapCurrentLeanFrontier
+
+unifiedRiemannA1CarrierSummationStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
+    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
+unifiedRiemannA1CarrierSummationStillOpen =
+  RiemannFrontier.a1CarrierIsStillOpen
+
+unifiedRiemannA1UniformCurvatureStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1UniformCurvaturePaid
+    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
+unifiedRiemannA1UniformCurvatureStillOpen =
+  RiemannFrontier.a1UniformCurvatureIsStillOpen
+
+unifiedRiemannA1CompensationStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CompensationPaid
+    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
+unifiedRiemannA1CompensationStillOpen =
+  RiemannFrontier.a1CompensationIsStillOpen
+
+unifiedRiemannA2ScalarStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
+    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
+unifiedRiemannA2ScalarStillOpen =
+  RiemannFrontier.a2ScalarIsStillOpen
+
+unifiedRiemannRouteBStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
+    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
+unifiedRiemannRouteBStillOpen =
+  RiemannFrontier.routeBIsStillOpen
+
+unifiedRiemannExactHeadLeanKernelReceiptStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.exactHeadLeanKernelReceipt
+    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
+unifiedRiemannExactHeadLeanKernelReceiptStillOpen =
+  RiemannFrontier.exactHeadLeanKernelReceiptIsStillOpen
+
+unifiedRiemannRHStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.rhDerivedHere
+    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
+unifiedRiemannRHStillOpen =
+  RiemannFrontier.rhNotClaimedByAgdaStatusMirror
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
