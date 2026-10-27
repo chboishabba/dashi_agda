@@ -1,0 +1,64 @@
+@startuml
+title R559 / Ibrahim / Fleet / Hyperfabric TOE convergence
+
+skinparam componentStyle rectangle
+
+package "Canonical owners" {
+  component "BalabanR559TOEMaxCutExact" as YM
+  component "BalabanRGTOERegression" as Balaban
+  component "BalabanClayGate4CurrentFrontierReceipt" as Gate4Current
+  component "EqualCardinalityStructureBoundaryExact" as EqualCardinality
+  component "BalabanIbrahimParetoSnowballTOEExact" as Ibrahim
+  component "FleetFormalGapTargetTOEExact" as Fleet
+  component "IndexedRelationalHyperfabricSpineExact" as Fabric
+  component "IndexedRelationalPadicWaveContinuousAdaptersExact" as PadicWave
+  component "SensibLawWrongTypeGenericHyperfabricAdapterExact" as WrongType
+}
+
+component "R559IbrahimFleetHyperfabricTOEExact" as Joint
+component "EverythingTOESymmetryResolved369" as TOE
+component "Unifier" as Unifier
+component "Unified.Everything" as Unified
+component "R559IbrahimFleetHyperfabricTOEValidation" as Validation
+
+YM --> Joint : exact receipt + RG non-promotion
+Balaban --> Joint : typed continuum no-promotion
+Gate4Current --> Joint : live frontier levels
+EqualCardinality --> Joint : equal count != canonical map
+Ibrahim --> Joint : Pareto / snowball boundaries
+Fleet --> Joint : 584 discharged / 44 contradiction / 58 target
+Fabric --> Joint : B^k + factorisation
+PadicWave --> Joint : prefix / stream projection loss
+WrongType --> Joint : legal adapter only
+
+Joint --> TOE
+Joint --> Unifier
+Joint --> Unified
+
+TOE --> Validation
+Unifier --> Validation
+Unified --> Validation
+Joint --> Validation
+
+note right of Fleet
+External fleet counts remain planning receipts.
+Counts do not create proof authority.
+Only the reported 58 formal gaps are targeted.
+Historical Gate-4 count 58 is not this target.
+end note
+
+note right of Fabric
+Address count does not create semantics.
+Projection sufficiency is consumer-relative.
+end note
+
+note bottom of Joint
+Finite RG != continuum Yang-Mills.
+Typed continuum promotion remains impossible here.
+Live Gate-4 frontier stays conditional.
+Search priority != proof.
+Arithmetic coincidence != Monster recognition.
+No ESD mutation.
+end note
+
+@enduml

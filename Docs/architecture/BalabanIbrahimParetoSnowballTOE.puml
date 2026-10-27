@@ -1,0 +1,125 @@
+@startuml
+title DASHI TOE — Balaban + Ibrahim Pareto/Snowball convergence
+
+skinparam componentStyle rectangle
+
+package "Canonical theorem owners" {
+  component "BalabanRGScaleTransferFrontierReceipt" as Balaban
+  component "Ibrahim 3B RecognitionRoutePareto" as Pareto
+  component "Ibrahim 3B CharacterExecutionCutsetSnowball" as Snowball
+  component "Ibrahim 3B InertiaPhaseResolutionProducer" as Phase
+  component "Trialectic369 Schrodinger H-zeta MaxCut" as HZeta
+  component "Ibrahim FirstLink HistoricalDiscriminatorPareto" as Historical
+  component "Base369 Ternary27 spectral/signed owners" as Ternary27
+  component "Selected3B full/projected MaxCut owners" as Selected3B
+  component "Monster3B kernel same-element BIDI owners" as KernelBidi
+}
+
+package "Fleet R4/R5 external planning context" {
+  component "ITIR-suite R4/R5 receipt\n584 discharged / 44 contradiction / 58 formal gaps" as FleetReceipt
+  component "PNFSpectralCoordinateRebuildability" as PNFRebuild
+  component "PNFSpectralNumericABICore" as PNFNumeric
+  component "PNFResidualFieldInvariants" as PNFResidual
+  component "Promotion.ObligationIndex" as Obligation
+}
+
+package "Existing discharged motif owners" {
+  component "BalabanRGTOERegression" as BalabanMotif
+  component "NS ABCD physical M2 frontier" as NSMotif
+  component "QuantumMereologyExact + SourceAtlas" as QMMotif
+}
+
+package "Normalized DASHI/Unified facade" {
+  component "BalabanIbrahimParetoSnowballTOEExact" as Facade
+  component "BalabanIbrahimParetoSnowballTOEValidation" as Validation
+  component "FleetFormalGapTargetTOEExact" as FleetGap
+  component "FleetFormalGapTargetTOEValidation" as FleetValidation
+  component "TOE369MaxCutKernelBidiTernaryExact" as MaxCutFacade
+  component "TOE369MaxCutKernelBidiTernaryValidation" as MaxCutValidation
+}
+
+package "TOE consumers" {
+  component "EverythingTOESymmetryResolved369" as TOE
+  component "Unifier" as Unifier
+  component "Unified.Everything" as Unified
+}
+
+Balaban --> Facade : exact non-promotion theorem
+Pareto --> Facade : recognition Pareto boundary
+Snowball --> Facade : execution frontier
+Phase --> Facade : phase-resolution frontier
+HZeta --> Facade : explicit H-zeta max-cut
+Historical --> Facade : historical discriminator
+Ternary27 --> MaxCutFacade : C3 action + phase intertwiner
+Selected3B --> MaxCutFacade : exact non-promotion cuts
+KernelBidi --> MaxCutFacade : same-element BIDI firewalls
+
+FleetReceipt --> FleetGap : external planning receipt only
+PNFRebuild --> FleetGap : canonical rebuildability owner
+PNFNumeric --> FleetGap : candidate numeric ABI
+PNFResidual --> FleetGap : residual invariants
+Obligation --> FleetGap : canonical obligation index
+BalabanMotif --> FleetGap : discharged owner reference
+NSMotif --> FleetGap : discharged M2 status reference
+QMMotif --> FleetGap : discharged boundary + attribution
+
+FleetGap --> TOE : target 58 only
+FleetGap --> Unifier : target 58 only
+FleetGap --> Unified
+FleetGap --> FleetValidation
+TOE --> FleetValidation
+Unifier --> FleetValidation
+
+Facade --> TOE
+Facade --> Unifier
+Facade --> Unified
+MaxCutFacade --> TOE
+MaxCutFacade --> Unifier
+MaxCutFacade --> Unified
+MaxCutFacade --> MaxCutValidation
+TOE --> MaxCutValidation
+Unifier --> MaxCutValidation
+TOE --> Validation
+Unifier --> Validation
+Facade --> Validation
+
+note bottom of Facade
+Preconditions:
+- canonical owners exist
+- attribution retained
+- ESD surfaces read-only
+
+Invariants:
+- finite/candidate/search/source facts do not promote truth
+- arithmetic does not identify same-object action
+- source presence does not create execution receipt
+- RG finite control does not create continuum transfer
+
+Postconditions:
+- TOE and Unifier expose same exact owners
+- direct Balaban scale-transfer non-promotion is reachable
+- Ibrahim Pareto/snowball/max-cut boundaries are reachable
+- ternary-27 and kernel-BIDI non-promotion cuts are reachable
+end note
+
+note bottom of FleetGap
+Preconditions:
+- R4/R5 values are external planning context
+- canonical PNF and motif owners already exist
+- ESD surfaces remain read-only
+
+Invariants:
+- 584 discharged fibres are not retargeted
+- 44 contradiction gaps remain a distinct class
+- only the reported 58 unformalised gaps enter this planning frontier
+- eigenvalue magnitude does not create proof authority
+- spectral labels do not identify theorem owners
+- meta-introspector donor repos keep attribution and provide no borrowed proof
+
+Postconditions:
+- TOE and Unifier reach the same fleet boundary
+- canonical discharged owners remain cited, not duplicated
+- external counts remain non-authoritative
+end note
+
+@enduml
