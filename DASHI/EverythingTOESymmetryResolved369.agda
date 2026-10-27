@@ -758,3 +758,41 @@ toeBalabanScaleTransferNonPromotion :
 toeBalabanScaleTransferNonPromotion =
   BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
+-- The theorem owners remain in DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact.
+------------------------------------------------------------------------
+
+import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
+
+toeR559IbrahimFleetHyperfabricReceipt :
+  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
+toeR559IbrahimFleetHyperfabricReceipt =
+  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
+
+toeFleetFormalGapsAre58 :
+  FleetHyperTOE.fleetFormalGaps ≡ 58
+toeFleetFormalGapsAre58 =
+  FleetHyperTOE.fleetFormalGapsAre58
+
+toeFleetDischargedFibresAre584 :
+  FleetHyperTOE.fleetDischargedFibres ≡ 584
+toeFleetDischargedFibresAre584 =
+  FleetHyperTOE.fleetDischargedFibresAre584
+
+toeFleetContradictionGapsAre44 :
+  FleetHyperTOE.fleetContradictionGaps ≡ 44
+toeFleetContradictionGapsAre44 =
+  FleetHyperTOE.fleetContradictionGapsAre44
+
+toePadicPrefixCannotRecoverDiscardedDigit :
+  FleetHyperTOE.PadicPrefixRecovery → ⊥
+toePadicPrefixCannotRecoverDiscardedDigit =
+  FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
+
+toeTwoDigitStreamCannotRecoverThird :
+  FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
+toeTwoDigitStreamCannotRecoverThird =
+  FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
+
