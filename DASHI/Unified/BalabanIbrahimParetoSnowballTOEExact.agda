@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as BalabanTransfer
+import DASHI.Unified.BalabanRGTOERegression as BalabanTOE
 import DASHI.Wikimedia.IbrahimMonster3BRecognitionRouteParetoExact as Recognition
 import DASHI.Wikimedia.IbrahimMonster3BCharacterExecutionCutsetSnowballExact as Execution
 import DASHI.Wikimedia.IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExact as Phase
@@ -34,6 +35,35 @@ balabanScaleTransferPromotionImpossible :
   BalabanTransfer.BalabanRGScaleTransferPromotion → ⊥
 balabanScaleTransferPromotionImpossible =
   BalabanTransfer.balabanRGScaleTransferPromotionImpossibleHere
+
+
+BalabanContinuumLimitPromotion : Set
+BalabanContinuumLimitPromotion =
+  BalabanTOE.BalabanContinuumLimitPromotion
+
+balabanContinuumLimitReceipt :
+  BalabanTOE.BalabanContinuumLimitReceipt
+balabanContinuumLimitReceipt =
+  BalabanTOE.balabanContinuumLimitReceipt
+
+balabanContinuumLimitPromotionImpossible :
+  BalabanContinuumLimitPromotion → ⊥
+balabanContinuumLimitPromotionImpossible =
+  BalabanTOE.balabanContinuumLimitPromotionImpossible
+
+DepthContinuumLimitPromotion : Set
+DepthContinuumLimitPromotion =
+  BalabanTOE.DepthContinuumLimitPromotion
+
+depthContinuumLimitReceipt :
+  BalabanTOE.DepthContinuumLimitReceipt
+depthContinuumLimitReceipt =
+  BalabanTOE.depthContinuumLimitReceipt
+
+depthContinuumLimitPromotionImpossible :
+  DepthContinuumLimitPromotion → ⊥
+depthContinuumLimitPromotionImpossible =
+  BalabanTOE.depthContinuumLimitPromotionImpossible
 
 RecognitionRouteParetoBoundary : Set
 RecognitionRouteParetoBoundary =
