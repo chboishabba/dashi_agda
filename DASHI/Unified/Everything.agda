@@ -1,4 +1,11 @@
 module DASHI.Unified.Everything where
+import DASHI.Arithmetic.TwinPrimeSixWheelExact as TwinPrimeSixWheel
+open TwinPrimeSixWheel public using
+  ( shiftTwoThreeTimes
+  ; r5PairSurvives
+  ; pairSurvivorMustBeR5
+  ; twinInfinitudeImpliesBoundedPairsTwo
+  )
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
