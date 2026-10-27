@@ -1147,3 +1147,44 @@ toeNSWholeSpaceNotDerivedFromPeriodic :
   NSCut.aDerivedFromB ≡ false
 toeNSWholeSpaceNotDerivedFromPeriodic =
   NSCut.aDerivedFromBIsFalse
+
+
+toeNSLiteralFixedOutputCovarianceM2PaymentClosed :
+  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosed ≡ true
+toeNSLiteralFixedOutputCovarianceM2PaymentClosed =
+  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosedIsTrue
+
+toeNSLiveResidualWeightedWorkIdentityClosed :
+  NSCut.bLiveResidualWeightedWorkIdentityClosed ≡ true
+toeNSLiveResidualWeightedWorkIdentityClosed =
+  NSCut.bLiveResidualWeightedWorkIdentityClosedIsTrue
+
+toeNSSelfRateNotIndependentAnalyticLeaf :
+  NSCut.bSelfRateIsIndependentAnalyticLeaf ≡ false
+toeNSSelfRateNotIndependentAnalyticLeaf =
+  NSCut.bSelfRateIsIndependentAnalyticLeafIsFalse
+
+toeNSCanonicalRouteDoesNotRequireM2Majorant :
+  NSCut.bCanonicalRouteRequiresM2Majorant ≡ false
+toeNSCanonicalRouteDoesNotRequireM2Majorant =
+  NSCut.bCanonicalRouteRequiresM2MajorantIsFalse
+
+toeNSLiveResidualCrossGradientNormalFormClosed :
+  NSCut.bLiveResidualCrossGradientNormalFormClosed ≡ true
+toeNSLiveResidualCrossGradientNormalFormClosed =
+  NSCut.bLiveResidualCrossGradientNormalFormClosedIsTrue
+
+toeNSRemainingCoordinateUsesLiteralPDotQ :
+  NSCut.bRemainingCoordinateUsesLiteralPDotQ ≡ true
+toeNSRemainingCoordinateUsesLiteralPDotQ =
+  NSCut.bRemainingCoordinateUsesLiteralPDotQIsTrue
+
+toeNSCrossGradientQuantitativePaymentStillOpen :
+  NSCut.bCrossGradientQuantitativePaymentClosed ≡ false
+toeNSCrossGradientQuantitativePaymentStillOpen =
+  NSCut.bCrossGradientQuantitativePaymentClosedIsFalse
+
+toeNSCrossGradientCutoffUniformAggregationStillOpen :
+  NSCut.bCrossGradientCutoffUniformAggregationClosed ≡ false
+toeNSCrossGradientCutoffUniformAggregationStillOpen =
+  NSCut.bCrossGradientCutoffUniformAggregationClosedIsFalse
