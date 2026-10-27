@@ -8,6 +8,8 @@ on:
       - "DASHI/Economics/Everything.agda"
       - "Docs/economics/WealthInheritanceVacancyTaxMaxCut20261027.md"
       - "scripts/check_wealth_tax_maxcut.py"
+      - "Docs/economics/WealthTaxOriginalConversationsFullCoverage20261027.md"
+      - "scripts/check_wealth_tax_requested_topics.py"
       - "DASHI/EverythingPhilosophy.agda"
       - "DASHI/EverythingPhilosophyClosure.agda"
       - "Docs/PhilosophyReflexiveRelationalFormalism.md"
@@ -34,6 +36,8 @@ jobs:
           agda --version
       - name: Run fiscal power and care bounded regression
         run: python3 scripts/check_wealth_tax_maxcut.py
+      - name: Audit all 42 requested wealth and philosophy subjects
+        run: python3 scripts/check_wealth_tax_requested_topics.py
       - name: Typecheck fiscal transmission tax max-cut
         run: |
           agda $AGDA_FLAGS DASHI/Economics/WealthInheritanceVacancyTaxMaxCut20261027Exact.agda
