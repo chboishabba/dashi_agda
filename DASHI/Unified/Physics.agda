@@ -77,13 +77,11 @@ yangMillsTOEClayPromotionBlocked :
 yangMillsTOEClayPromotionBlocked =
   YMTOE.toeClayYangMillsPromotedIsFalse
 
-yangMillsTOECriticalFamilyCountIsSeven :
-  YMTOE.toeCriticalFamilyCount ≡ 7
+
 yangMillsTOECriticalFamilyCountIsSeven =
   YMTOE.toeCriticalFamilyCountIsSeven
 
-yangMillsTOEIrreducibleFamilyCountIsFourteen :
-  YMTOE.toeIrreducibleSourceFamilyCount ≡ 14
+
 yangMillsTOEIrreducibleFamilyCountIsFourteen =
   YMTOE.toeIrreducibleSourceFamilyCountIsFourteen
 
