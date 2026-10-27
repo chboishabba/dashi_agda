@@ -56,6 +56,7 @@ import DASHI.Physics.Closure.NSAuthorityConsistencyGuard as Guard
 import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as Roadmap
 import DASHI.Physics.Closure.NSClaySubmissionEligibilityRoadmapReceipt as Eligibility
 import DASHI.Physics.Closure.NSTriadKNR650CurrentSharedWeightedWallRound736Exact as R736
+import DASHI.Physics.Closure.NSTriadKNR650Rational345SnapshotIdentificationRound850Exact as Snapshot345
 
 open Distance public using (NSClayDistanceFinalPromotion)
 
@@ -192,6 +193,59 @@ releasedHeadDoesNotRequireReopeningCoordinateAudit :
 releasedHeadDoesNotRequireReopeningCoordinateAudit =
   ABCD.cdCurrentHeadRequiresReopeningCoordinateAuditIsFalse
 
+
+------------------------------------------------------------------------
+-- R829-vector instantaneous repository snapshot.
+--
+-- Reuse the source-owned R850 closure.
+-- The historical round number is provenance only.
+-- The finite same-object snapshot is closed.
+-- The real-time transport remains open.
+-- The integrated R823 refutation remains open at this owner.
+-- Clay promotion remains false.
+------------------------------------------------------------------------
+
+instantaneousVectorSnapshotClosed : Bool
+instantaneousVectorSnapshotClosed =
+  Snapshot345.round850R829VectorClosed
+
+instantaneousVectorSnapshotClosedIsTrue :
+  instantaneousVectorSnapshotClosed ≡ true
+instantaneousVectorSnapshotClosedIsTrue =
+  Snapshot345.round850R829VectorClosedIsTrue
+
+instantaneousRepositoryRateStrictlyNegative : Bool
+instantaneousRepositoryRateStrictlyNegative =
+  Snapshot345.round850InstantaneousActualRepositoryRateStrictlyNegative
+
+instantaneousRepositoryRateStrictlyNegativeIsTrue :
+  instantaneousRepositoryRateStrictlyNegative ≡ true
+instantaneousRepositoryRateStrictlyNegativeIsTrue =
+  Snapshot345.round850InstantaneousActualRepositoryRateStrictlyNegativeIsTrue
+
+realFiniteODETransportClosed : Bool
+realFiniteODETransportClosed =
+  Snapshot345.round850RealFiniteODETransportClosed
+
+realFiniteODETransportStillOpen :
+  realFiniteODETransportClosed ≡ false
+realFiniteODETransportStillOpen = refl
+
+universalR823IntegratedReserveRefuted : Bool
+universalR823IntegratedReserveRefuted =
+  Snapshot345.round850UniversalR823IntegratedReserveRefuted
+
+universalR823IntegratedReserveStillUnrefuted :
+  universalR823IntegratedReserveRefuted ≡ false
+universalR823IntegratedReserveStillUnrefuted = refl
+
+instantaneousSnapshotClayPromotion : Bool
+instantaneousSnapshotClayPromotion =
+  Snapshot345.round850ClayPromotion
+
+instantaneousSnapshotClayPromotionStillFalse :
+  instantaneousSnapshotClayPromotion ≡ false
+instantaneousSnapshotClayPromotionStillFalse = refl
 
 ------------------------------------------------------------------------
 -- Current periodic-B shared weighted wall.
@@ -400,19 +454,19 @@ canonicalNavierStokesClayFrontierTOEZKPFrame =
     { objective =
         "Normalize the canonical Navier-Stokes Clay frontier and exact non-promotion theorems into the DASHI TOE graph."
     ; reuseRule =
-        "Reuse the A/B/C/D max-cut, R736 shared weighted wall, canonical residual scheduler, final Clay-distance receipt, and authority guard before adding any adapter."
+        "Reuse the A/B/C/D max-cut, the closed R829-vector instantaneous snapshot through its R850 owner, the R736 shared weighted wall, canonical residual scheduler, final Clay-distance receipt, and authority guard before adding any adapter."
     ; constructionRule =
         "Expose exact owner aliases and theorem-level non-promotion only."
     ; scopeRule =
-        "Treat R736 as the preferred periodic-B analytic max-cut. Keep its two weighted leaves open. Keep A/B internal theorem development separate from released C/D audit and from carrier-structured completion."
+        "Treat the R829-vector snapshot as closed finite same-object evidence only. Keep real-time transport and integrated reserve refutation separate. Treat R736 as the preferred periodic-B analytic max-cut. Keep its two weighted leaves open. Keep A/B internal theorem development separate from released C/D audit and from carrier-structured completion."
     ; laneRule =
         "Use one Navier-Stokes normalization lane and keep ESD surfaces unchanged."
     ; preconditionRule =
-        "Require the canonical R736 owner, A/B/C/D max-cut, residual scheduler, Clay-distance receipt, authority guard, roadmap, and submission-eligibility owners to exist before normalization."
+        "Require the source-owned R829-vector snapshot closure, canonical R736 owner, A/B/C/D max-cut, residual scheduler, Clay-distance receipt, authority guard, roadmap, and submission-eligibility owners to exist before normalization."
     ; invariantRule =
-        "Preserve theorem ownership. Preserve exactly two preferred R736 analytic leaves. Preserve the shared weighted/input-Laplacian carrier. Do not promote producer strategies, circular Q-plus-minus shortcuts, finite carriers, or released C/D audit facts into a Clay proof."
+        "Preserve theorem ownership. Preserve the R829-vector closure without promoting it to real-time transport, integrated reserve refutation, or Clay completion. Preserve exactly two preferred R736 analytic leaves. Preserve the shared weighted/input-Laplacian carrier. Do not promote producer strategies, circular Q-plus-minus shortcuts, finite carriers, or released C/D audit facts into a Clay proof."
     ; postconditionRule =
-        "Expose the R736 shared wall, both open leaves, barrier compiler, structural gap, and exact false promotion gates through TOE, Unifier, and Unified.Physics."
+        "Expose the closed R829-vector snapshot, its open real-time boundary, the R736 shared wall, both open leaves, barrier compiler, structural gap, and exact false promotion gates through TOE, Unifier, and Unified.Physics."
     ; governanceRule =
         "Preserve theorem ownership, source attribution, A/B/C/D lane separation, and failure-closed promotion."
     ; verificationRule =
