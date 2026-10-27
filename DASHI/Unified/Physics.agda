@@ -12,6 +12,7 @@ import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
@@ -96,3 +97,21 @@ yangMillsTOEContinuumMassGapBlocked :
   YMTOE.toeContinuumMassGapPromoted ≡ false
 yangMillsTOEContinuumMassGapBlocked =
   YMTOE.toeContinuumMassGapPromotedIsFalse
+
+
+yangMillsTOERegularEProjectionCompilerLevel : ProofLevel
+yangMillsTOERegularEProjectionCompilerLevel =
+  YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
+
+yangMillsTOERegularELocalizationSourceLevel : ProofLevel
+yangMillsTOERegularELocalizationSourceLevel =
+  YMTOE.toeCMP119RegularELocalizationSourceLevel
+
+yangMillsTOEHardAnalyticLemmaUpperCount : Nat
+yangMillsTOEHardAnalyticLemmaUpperCount =
+  YMTOE.toeHardAnalyticLemmaUpperCount
+
+yangMillsTOEHardAnalyticLemmaUpperCountIsSix :
+  yangMillsTOEHardAnalyticLemmaUpperCount ≡ 6
+yangMillsTOEHardAnalyticLemmaUpperCountIsSix =
+  YMTOE.toeHardAnalyticLemmaUpperCountIsSix
