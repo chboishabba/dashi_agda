@@ -384,3 +384,68 @@ toeKnowledgeDoesNotCreateExecutionAuthority :
   GovernanceTOE.KnowledgeIsAuthority → ⊥
 toeKnowledgeDoesNotCreateExecutionAuthority =
   GovernanceTOE.toeKnowledgeDoesNotCreateExecutionAuthority
+
+------------------------------------------------------------------------
+-- Promotion, runtime-validation, and semantic-admission governance aliases.
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowPromotionBoundary :
+  GovernanceTOE.GovernedLegalWorkflowPromotionBoundary
+toeGovernedLegalWorkflowPromotionBoundary =
+  GovernanceTOE.canonicalGovernedLegalWorkflowPromotionBoundary
+
+toeReviewEligibilityDoesNotCreatePromotion :
+  GovernanceTOE.ReviewEligibilityCreatesPromotionReceipt → ⊥
+toeReviewEligibilityDoesNotCreatePromotion =
+  GovernanceTOE.toeReviewEligibilityDoesNotCreatePromotion
+
+toeReviewEligibilityDoesNotCreateTruth :
+  GovernanceTOE.EligibilityMeansTruth → ⊥
+toeReviewEligibilityDoesNotCreateTruth =
+  GovernanceTOE.toeReviewEligibilityDoesNotCreateTruth
+
+toeRuntimeParityDoesNotCreateWorldTruth :
+  GovernanceTOE.ZeroParityFailuresMeansWorldTruth → ⊥
+toeRuntimeParityDoesNotCreateWorldTruth =
+  GovernanceTOE.toeRuntimeParityDoesNotCreateWorldTruth
+
+toeDiagnosticStreamDoesNotCreateLegalCertification :
+  GovernanceTOE.DiagnosticLegalStreamMeansLegalCertification → ⊥
+toeDiagnosticStreamDoesNotCreateLegalCertification =
+  GovernanceTOE.toeDiagnosticStreamDoesNotCreateLegalCertification
+
+toeProjectionDoesNotCreateClaimTruth :
+  GovernanceTOE.CanonicalClaimProjectionPaysClaimTruth → ⊥
+toeProjectionDoesNotCreateClaimTruth =
+  GovernanceTOE.toeProjectionDoesNotCreateClaimTruth
+
+toeReviewRouterDoesNotCreateConsumerAdequacy :
+  GovernanceTOE.ReviewRouterImplementationPaysConsumerAdequacy → ⊥
+toeReviewRouterDoesNotCreateConsumerAdequacy =
+  GovernanceTOE.toeReviewRouterDoesNotCreateConsumerAdequacy
+
+toeParserCandidateDoesNotAuthorizeAdmission :
+  GovernanceTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
+toeParserCandidateDoesNotAuthorizeAdmission =
+  GovernanceTOE.toeParserCandidateDoesNotAuthorizeAdmission
+
+toeResidualPriorityDoesNotCreateTruthConfidence :
+  GovernanceTOE.ResidualPriorityScoreIsTruthConfidence → ⊥
+toeResidualPriorityDoesNotCreateTruthConfidence =
+  GovernanceTOE.toeResidualPriorityDoesNotCreateTruthConfidence
+
+toeAdmissionReceiptDoesNotPublishGeneration :
+  GovernanceTOE.AdmissionReceiptPublishesGeneration → ⊥
+toeAdmissionReceiptDoesNotPublishGeneration =
+  GovernanceTOE.toeAdmissionReceiptDoesNotPublishGeneration
+
+toeSoftwareValidationDoesNotAuthorizePublication :
+  GovernanceTOE.SoftwareValidationAuthorizesPublication → ⊥
+toeSoftwareValidationDoesNotAuthorizePublication =
+  GovernanceTOE.toeSoftwareValidationDoesNotAuthorizePublication
+
+toeLaterValidationDoesNotRewriteCertifiedBaseline :
+  GovernanceTOE.LaterValidatedHeadRetroactivelyChangesCertifiedBaseline → ⊥
+toeLaterValidationDoesNotRewriteCertifiedBaseline =
+  GovernanceTOE.toeLaterValidationDoesNotRewriteCertifiedBaseline
+
