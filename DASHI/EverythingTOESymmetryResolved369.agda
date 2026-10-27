@@ -1,6 +1,7 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
 import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
+import DASHI.Unified.SensibLawGovernanceComplianceTOEExact as ComplianceTOE
 import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
@@ -828,3 +829,38 @@ toeSensibLawGovernanceZKPFrame :
   GovernanceTOE.SensibLawGovernanceTOEZKPFrame
 toeSensibLawGovernanceZKPFrame =
   GovernanceTOE.canonicalSensibLawGovernanceTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Direct SensibLaw legal-compliance firewalls.
+------------------------------------------------------------------------
+
+toeSensibLawGovernanceComplianceReceipt :
+  ComplianceTOE.SensibLawGovernanceComplianceTOEReceipt
+toeSensibLawGovernanceComplianceReceipt =
+  ComplianceTOE.canonicalSensibLawGovernanceComplianceReceipt
+
+toeSensibLawQualificationDoesNotCreateForensicCompliance :
+  ComplianceTOE.QualificationAutomaticallyForensicCompliance → ⊥
+toeSensibLawQualificationDoesNotCreateForensicCompliance =
+  ComplianceTOE.sensibLawQualificationDoesNotCreateForensicCompliance
+
+toeSensibLawReviewDoesNotCreateApplicability :
+  ComplianceTOE.LegalReviewDecisionCreatesApplicability → ⊥
+toeSensibLawReviewDoesNotCreateApplicability =
+  ComplianceTOE.sensibLawReviewDoesNotCreateApplicability
+
+toeSensibLawParserCandidateDoesNotAuthorizeAdmission :
+  ComplianceTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
+toeSensibLawParserCandidateDoesNotAuthorizeAdmission =
+  ComplianceTOE.sensibLawParserCandidateDoesNotAuthorizeAdmission
+
+toeSensibLawOfficialSurfaceDoesNotRecoverFineLegalState :
+  ComplianceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+toeSensibLawOfficialSurfaceDoesNotRecoverFineLegalState =
+  ComplianceTOE.sensibLawOfficialSurfaceDoesNotRecoverFineLegalState
+
+toeSensibLawLegalityAloneDoesNotCreateLegitimacy :
+  ComplianceTOE.LegalOnlyCreatesLegitimacy → ⊥
+toeSensibLawLegalityAloneDoesNotCreateLegitimacy =
+  ComplianceTOE.sensibLawLegalityAloneDoesNotCreateLegitimacy
